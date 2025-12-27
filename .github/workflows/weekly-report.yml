@@ -1,0 +1,41 @@
+name: Generate Weekly Report
+
+on:
+  schedule:
+    # Run every Friday at 5:00 PM UTC
+    - cron: '0 17 * * 5'
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  generate-report:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Generate Weekly Report
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_PROJECT_TOKEN }}
+          GITHUB_PROJECT_ID: ${{ secrets.GITHUB_PROJECT_ID }}
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+        run: node scripts/generate-weekly-report.mjs
+
+      - name: Report Status
+        if: always()
+        run: |
+          if [ $? -eq 0 ]; then
+            echo "✅ Weekly report generated successfully"
+            echo "📧 Email HTML saved to /tmp/weekly-report.html"
+          else
+            echo "❌ Weekly report generation failed"
+            exit 1
+          fi
