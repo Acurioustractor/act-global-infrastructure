@@ -1,0 +1,53 @@
+# TEMPLATE: Copy this file to each project repo's .github/workflows/
+# Rename to: log-deployment.yml
+# Update PROJECT_NAME to match your project
+
+name: Log Deployment to Notion
+
+on:
+  deployment_status:
+
+jobs:
+  log-deployment:
+    # Only run on successful deployments to production
+    if: github.event.deployment_status.state == 'success' && github.event.deployment_status.environment == 'Production'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout global infrastructure
+        uses: actions/checkout@v4
+        with:
+          repository: Acurioustractor/act-global-infrastructure
+          path: infrastructure
+          token: ${{ secrets.GH_PROJECT_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        working-directory: infrastructure
+        run: npm install
+
+      - name: Log Deployment
+        working-directory: infrastructure
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          PROJECT_NAME: "YOUR_PROJECT_NAME_HERE" # UPDATE THIS!
+          DEPLOYMENT_URL: ${{ github.event.deployment_status.target_url }}
+          VERSION: ${{ github.sha }}
+          GIT_SHA: ${{ github.sha }}
+          GIT_BRANCH: ${{ github.ref_name }}
+          GITHUB_COMMIT_URL: ${{ github.event.repository.html_url }}/commit/${{ github.sha }}
+          VERCEL_URL: ${{ github.event.deployment_status.target_url }}
+        run: node scripts/log-deployment.mjs
+
+      - name: Report Status
+        if: always()
+        run: |
+          if [ $? -eq 0 ]; then
+            echo "✅ Deployment logged to Notion"
+          else
+            echo "⚠️ Failed to log deployment (non-critical)"
+          fi
