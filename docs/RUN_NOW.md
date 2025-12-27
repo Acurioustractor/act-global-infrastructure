@@ -45,7 +45,7 @@ Copy the **32-character ID** after the page title.
 cd ~/act-global-infrastructure
 
 # Use your existing token from .env.local
-export NOTION_TOKEN="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"
+export NOTION_TOKEN="your_notion_token_here"
 
 # Set the parent page ID you just copied
 export NOTION_PARENT_PAGE_ID="YOUR_PAGE_ID_HERE"
