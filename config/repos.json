@@ -12,7 +12,7 @@
     },
     {
       "name": "Empathy Ledger",
-      "path": "/Users/benknight/Code/Empathy Ledger v.02",
+      "path": "/Users/benknight/Code/empathy-ledger-v2",
       "github": "Acurioustractor/empathy-ledger-v2",
       "description": "Ethical storytelling platform",
       "stack": "Next.js 14, Supabase, Tailwind",
@@ -55,6 +55,16 @@
       "path": "/Users/benknight/Code/ACT Farm/act-farm",
       "github": "Acurioustractor/act-farm",
       "description": "Black Cockatoo Valley regeneration estate",
+      "stack": "Next.js, Supabase, Tailwind",
+      "deployment": "Vercel",
+      "workflows": ["snapshot-sprint", "auto-tag"],
+      "skills": ["act-sprint-workflow", "act-brand-alignment", "ghl-crm-advisor"]
+    },
+    {
+      "name": "ACT Placemat",
+      "path": "/Users/benknight/Code/ACT Placemat",
+      "github": "Acurioustractor/act-placemat",
+      "description": "Backend services and shared infrastructure",
       "stack": "Next.js, Supabase, Tailwind",
       "deployment": "Vercel",
       "workflows": ["snapshot-sprint", "auto-tag"],

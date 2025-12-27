@@ -1,0 +1,121 @@
+{
+  "folders": [
+    {
+      "name": "🌐 ACT Global Infrastructure",
+      "path": "/Users/benknight/act-global-infrastructure"
+    },
+    {
+      "name": "🌾 ACT Farm (Hub)",
+      "path": "/Users/benknight/Code/ACT Farm and Regenerative Innovation Studio"
+    },
+    {
+      "name": "📖 Empathy Ledger",
+      "path": "/Users/benknight/Code/empathy-ledger-v2"
+    },
+    {
+      "name": "⚖️ JusticeHub",
+      "path": "/Users/benknight/Code/JusticeHub"
+    },
+    {
+      "name": "🌻 The Harvest",
+      "path": "/Users/benknight/Code/The Harvest Website"
+    },
+    {
+      "name": "♻️ Goods",
+      "path": "/Users/benknight/Code/Goods Asset Register"
+    },
+    {
+      "name": "🦅 BCV/ACT Farm",
+      "path": "/Users/benknight/Code/ACT Farm/act-farm"
+    },
+    {
+      "name": "🍽️ ACT Placemat",
+      "path": "/Users/benknight/Code/ACT Placemat"
+    }
+  ],
+  "settings": {
+    "files.exclude": {
+      "**/node_modules": true,
+      "**/.next": true,
+      "**/.git": false
+    },
+    "search.exclude": {
+      "**/node_modules": true,
+      "**/.next": true,
+      "**/dist": true,
+      "**/build": true
+    },
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": "explicit"
+    },
+    "typescript.preferences.importModuleSpecifier": "relative",
+    "javascript.preferences.importModuleSpecifier": "relative",
+    "git.enableSmartCommit": true,
+    "git.confirmSync": false,
+    "workbench.colorCustomizations": {
+      "[Default Dark Modern]": {
+        "activityBar.background": "#1a3a1a",
+        "titleBar.activeBackground": "#2a4a2a"
+      }
+    }
+  },
+  "extensions": {
+    "recommendations": [
+      "esbenp.prettier-vscode",
+      "dbaeumer.vscode-eslint",
+      "bradlc.vscode-tailwindcss",
+      "Prisma.prisma",
+      "GitHub.copilot",
+      "GitHub.vscode-pull-request-github",
+      "eamodio.gitlens"
+    ]
+  },
+  "launch": {
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "ACT Farm - Next.js Dev",
+        "type": "node",
+        "request": "launch",
+        "runtimeExecutable": "npm",
+        "runtimeArgs": ["run", "dev"],
+        "cwd": "${workspaceFolder:🌾 ACT Farm (Hub)}",
+        "console": "integratedTerminal"
+      },
+      {
+        "name": "Empathy Ledger - Next.js Dev",
+        "type": "node",
+        "request": "launch",
+        "runtimeExecutable": "npm",
+        "runtimeArgs": ["run", "dev"],
+        "cwd": "${workspaceFolder:📖 Empathy Ledger}",
+        "console": "integratedTerminal"
+      }
+    ]
+  },
+  "tasks": {
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "Run Sprint Snapshot (All Repos)",
+        "type": "shell",
+        "command": "~/act-global-infrastructure/scripts/run-snapshot.sh",
+        "group": "build",
+        "presentation": {
+          "echo": true,
+          "reveal": "always",
+          "panel": "shared"
+        }
+      },
+      {
+        "label": "Link Global Infrastructure to Current Folder",
+        "type": "shell",
+        "command": "~/act-global-infrastructure/scripts/link-to-repo.sh",
+        "args": ["${workspaceFolder}"],
+        "group": "build"
+      }
+    ]
+  }
+}
