@@ -85,9 +85,6 @@ Notion Workspace: ACT Curious Tractor
   // Projects involved
   "Projects": { "type": "multi_select", "options": ["ACT Farm Studio", "Empathy Ledger", ...] },
 
-  // Team
-  "Team Members": { "type": "multi_select" },
-
   // Notes
   "Retrospective": { "type": "rich_text" },
   "Wins": { "type": "rich_text" },
@@ -129,11 +126,7 @@ Notion Workspace: ACT Curious Tractor
 
   // Changelog
   "Changes": { "type": "rich_text" },
-  "Issues Closed": { "type": "relation", "database": "GitHub Issues" },
-
-  // Metrics
-  "Build Time (s)": { "type": "number" },
-  "Bundle Size (MB)": { "type": "number" }
+  "Issues Closed": { "type": "relation", "database": "GitHub Issues" }
 }
 ```
 
@@ -259,18 +252,21 @@ Notion Workspace: ACT Curious Tractor
 }
 ```
 
-**Example Pillars**:
-1. Ethical Storytelling (Empathy Ledger)
-2. Justice Reimagined (JusticeHub)
-3. Community Resilience (The Harvest)
-4. Circular Economy (Goods)
-5. Regeneration at Scale (BCV/ACT Farm)
+**The 6 Strategic Pillars**:
+1. **Ethical Storytelling** - Empathy Ledger (consent-first narratives)
+2. **Justice Reimagined** - JusticeHub (community-designed programs)
+3. **Community Resilience** - The Harvest (therapeutic horticulture, heritage preservation)
+4. **Circular Economy & Community-Designed Goods** - Goods (waste-to-wealth, community ownership)
+5. **Regeneration at Scale** - BCV/ACT Farm (150-acre conservation-first regeneration)
+6. **Art of Social Impact** - ACT Placemat (all ACT projects, contracted work, free programs, art support)
 
 ---
 
-## 7. Team Capacity Database (New)
+## 7. Team Capacity Database (SKIPPED - Build Later)
 
-**Purpose**: Track team availability and workload
+**Status**: Not needed for initial launch - can add later when team grows
+
+**Purpose**: Track team availability and workload (for future use)
 
 ```json
 {
@@ -480,7 +476,7 @@ Notion Workspace: ACT Curious Tractor
 ## Implementation Plan
 
 ### Phase 1: Database Setup (Week 1)
-- [ ] Create all 8 databases in Notion
+- [ ] Create 7 core databases in Notion (skip Team Capacity for now)
 - [ ] Set up relations between databases
 - [ ] Create formulas and rollups
 - [ ] Test with sample data
