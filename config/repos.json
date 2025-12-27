@@ -1,0 +1,70 @@
+{
+  "projects": [
+    {
+      "name": "ACT Farm",
+      "path": "/Users/benknight/Code/ACT Farm and Regenerative Innovation Studio",
+      "github": "Acurioustractor/act-regenerative-studio",
+      "description": "Multi-project orchestrator and operations hub",
+      "stack": "Next.js 15, Supabase, Tailwind",
+      "deployment": "Vercel",
+      "workflows": ["snapshot-sprint", "auto-tag"],
+      "skills": ["act-sprint-workflow", "act-brand-alignment", "ghl-crm-advisor"]
+    },
+    {
+      "name": "Empathy Ledger",
+      "path": "/Users/benknight/Code/Empathy Ledger v.02",
+      "github": "Acurioustractor/empathy-ledger-v2",
+      "description": "Ethical storytelling platform",
+      "stack": "Next.js 14, Supabase, Tailwind",
+      "deployment": "Vercel",
+      "workflows": ["snapshot-sprint", "auto-tag"],
+      "skills": ["act-sprint-workflow", "act-brand-alignment", "ghl-crm-advisor"]
+    },
+    {
+      "name": "JusticeHub",
+      "path": "/Users/benknight/Code/JusticeHub",
+      "github": "Acurioustractor/justicehub-platform",
+      "description": "Youth justice and community services",
+      "stack": "Next.js 14, Supabase, Tailwind",
+      "deployment": "Vercel",
+      "workflows": ["snapshot-sprint", "auto-tag"],
+      "skills": ["act-sprint-workflow", "act-brand-alignment", "ghl-crm-advisor"]
+    },
+    {
+      "name": "The Harvest",
+      "path": "/Users/benknight/Code/The Harvest Website",
+      "github": "Acurioustractor/harvest-community-hub",
+      "description": "Community hub and CSA programs",
+      "stack": "Next.js, Supabase, Tailwind",
+      "deployment": "Vercel",
+      "workflows": ["snapshot-sprint", "auto-tag"],
+      "skills": ["act-sprint-workflow", "act-brand-alignment", "ghl-crm-advisor"]
+    },
+    {
+      "name": "Goods",
+      "path": "/Users/benknight/Code/Goods Asset Register",
+      "github": "Acurioustractor/goods-asset-tracker",
+      "description": "Circular economy asset management",
+      "stack": "Next.js, Supabase, Tailwind",
+      "deployment": "Vercel",
+      "workflows": ["snapshot-sprint", "auto-tag"],
+      "skills": ["act-sprint-workflow", "act-brand-alignment", "ghl-crm-advisor"]
+    },
+    {
+      "name": "BCV/ACT Farm",
+      "path": "/Users/benknight/Code/ACT Farm/act-farm",
+      "github": "Acurioustractor/act-farm",
+      "description": "Black Cockatoo Valley regeneration estate",
+      "stack": "Next.js, Supabase, Tailwind",
+      "deployment": "Vercel",
+      "workflows": ["snapshot-sprint", "auto-tag"],
+      "skills": ["act-sprint-workflow", "act-brand-alignment", "ghl-crm-advisor"]
+    }
+  ],
+  "github_project": {
+    "id": "PVT_kwHOCOopjs4BLVik",
+    "name": "ACT Ecosystem Development",
+    "org": "Acurioustractor",
+    "url": "https://github.com/orgs/Acurioustractor/projects/1"
+  }
+}
