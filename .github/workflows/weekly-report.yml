@@ -25,7 +25,7 @@ jobs:
       - name: Generate Weekly Report
         env:
           GITHUB_TOKEN: ${{ secrets.GH_PROJECT_TOKEN }}
-          GITHUB_PROJECT_ID: ${{ secrets.GITHUB_PROJECT_ID }}
+          GITHUB_PROJECT_ID: ${{ secrets.PROJECT_ID }}
           NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
         run: node scripts/generate-weekly-report.mjs
 
