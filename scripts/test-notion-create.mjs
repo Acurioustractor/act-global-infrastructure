@@ -3,7 +3,7 @@
 import { Client } from '@notionhq/client';
 
 const notion = new Client({
-  auth: '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',
+  auth: process.env.NOTION_TOKEN,
   notionVersion: '2022-06-28'
 });
 

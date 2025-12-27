@@ -170,8 +170,8 @@ Notion Weekly Reports Database
 GITHUB_TOKEN=$(gh auth token) node scripts/sync-sprint-to-notion.mjs
 
 # Or export tokens
-export GITHUB_TOKEN=your_token_here
-export NOTION_TOKEN=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
+export GITHUB_TOKEN=your_github_token_here
+export NOTION_TOKEN=your_notion_token_here
 ```
 
 ---

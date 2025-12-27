@@ -8,7 +8,7 @@
 import { Client } from '@notionhq/client';
 import fs from 'fs';
 
-const NOTION_TOKEN = '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';
+const NOTION_TOKEN = process.env.NOTION_TOKEN;
 const notion = new Client({ auth: NOTION_TOKEN });
 
 const dbIds = JSON.parse(fs.readFileSync('./config/notion-database-ids.json', 'utf8'));

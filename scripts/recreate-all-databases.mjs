@@ -7,7 +7,7 @@
 
 import fs from 'fs';
 
-const NOTION_TOKEN = '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';
+const NOTION_TOKEN = process.env.NOTION_TOKEN;
 const PARENT_PAGE_ID = '2d6ebcf981cf806e8db2dc8ec5d0b414';
 const API_VERSION = '2022-06-28'; // This version supports properties in create!
 

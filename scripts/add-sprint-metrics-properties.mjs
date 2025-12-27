@@ -4,9 +4,17 @@
  * Add sprint metrics properties to existing Sprint Tracking database
  */
 
-const TOKEN = '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';
-const DB_ID = '2d6ebcf9-81cf-815f-a30f-c7ade0c0046d'; // Sprint Tracking
+import fs from 'fs';
+
+const TOKEN = process.env.NOTION_TOKEN;
+const dbIds = JSON.parse(fs.readFileSync('./config/notion-database-ids.json', 'utf8'));
+const DB_ID = dbIds.sprintTracking;
 const API_VERSION = '2022-06-28';
+
+if (!TOKEN) {
+  console.error('❌ Error: NOTION_TOKEN environment variable not set');
+  process.exit(1);
+}
 
 console.log('📊 Adding sprint metrics properties to Sprint Tracking database...\n');
 
