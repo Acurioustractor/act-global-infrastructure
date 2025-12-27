@@ -45,7 +45,10 @@ async function createSprintTracking() {
 
   try {
     const response = await notion.databases.create({
-      parent: { page_id: PARENT_PAGE_ID },
+      parent: {
+        type: 'page_id',
+        page_id: PARENT_PAGE_ID
+      },
       title: [{ text: { content: 'Sprint Tracking' } }],
       icon: { emoji: '🎯' },
       properties: {
@@ -141,7 +144,10 @@ async function createStrategicPillars() {
 
   try {
     const response = await notion.databases.create({
-      parent: { page_id: PARENT_PAGE_ID },
+      parent: {
+        type: 'page_id',
+        page_id: PARENT_PAGE_ID
+      },
       title: [{ text: { content: 'Strategic Pillars' } }],
       icon: { emoji: '🎨' },
       properties: {
@@ -264,7 +270,10 @@ async function createACTProjects() {
 
   try {
     const response = await notion.databases.create({
-      parent: { page_id: PARENT_PAGE_ID },
+      parent: {
+        type: 'page_id',
+        page_id: PARENT_PAGE_ID
+      },
       title: [{ text: { content: 'ACT Projects' } }],
       icon: { emoji: '🏗️' },
       properties: {
@@ -426,7 +435,10 @@ async function createDeployments() {
 
   try {
     const response = await notion.databases.create({
-      parent: { page_id: PARENT_PAGE_ID },
+      parent: {
+        type: 'page_id',
+        page_id: PARENT_PAGE_ID
+      },
       title: [{ text: { content: 'Deployments' } }],
       icon: { emoji: '🚀' },
       properties: {
@@ -493,7 +505,10 @@ async function createVelocityMetrics() {
 
   try {
     const response = await notion.databases.create({
-      parent: { page_id: PARENT_PAGE_ID },
+      parent: {
+        type: 'page_id',
+        page_id: PARENT_PAGE_ID
+      },
       title: [{ text: { content: 'Velocity Metrics' } }],
       icon: { emoji: '📈' },
       properties: {
@@ -565,7 +580,10 @@ async function createWeeklyReports() {
 
   try {
     const response = await notion.databases.create({
-      parent: { page_id: PARENT_PAGE_ID },
+      parent: {
+        type: 'page_id',
+        page_id: PARENT_PAGE_ID
+      },
       title: [{ text: { content: 'Weekly Reports' } }],
       icon: { emoji: '📝' },
       properties: {
