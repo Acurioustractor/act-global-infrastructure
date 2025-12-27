@@ -1,0 +1,20 @@
+{
+  "name": "act-global-infrastructure",
+  "version": "1.0.0",
+  "description": "Shared GitHub Actions, Claude Code skills, and scripts for all ACT ecosystem projects.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "@octokit/graphql": "^9.0.3",
+    "@supabase/supabase-js": "^2.89.0"
+  }
+}

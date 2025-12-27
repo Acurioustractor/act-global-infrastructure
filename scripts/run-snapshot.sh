@@ -1,7 +1,12 @@
 #!/bin/bash
 
-# Load environment variables from .env.local
-export $(grep -v '^#' .env.local | xargs)
+# Get the directory where this script lives (global infrastructure)
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# Run the snapshot script
-node scripts/snapshot-sprint-metrics.mjs
+# Load environment variables from .env.local in current directory (the repo)
+if [ -f .env.local ]; then
+  export $(grep -v '^#' .env.local | xargs)
+fi
+
+# Run the snapshot script from global infrastructure
+node "$SCRIPT_DIR/snapshot-sprint-metrics.mjs"
