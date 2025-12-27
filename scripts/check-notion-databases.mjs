@@ -7,7 +7,13 @@
 import { Client } from '@notionhq/client';
 import fs from 'fs';
 
-const NOTION_TOKEN = process.env.NOTION_TOKEN || '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';
+const NOTION_TOKEN = process.env.NOTION_TOKEN;
+
+if (!NOTION_TOKEN) {
+  console.error('❌ Error: NOTION_TOKEN environment variable not set');
+  process.exit(1);
+}
+
 const notion = new Client({ auth: NOTION_TOKEN });
 
 // Read the database IDs we just created

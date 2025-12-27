@@ -2,8 +2,13 @@
 
 import fs from 'fs';
 
-const TOKEN = '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';
+const TOKEN = process.env.NOTION_TOKEN;
 const dbIds = JSON.parse(fs.readFileSync('./config/notion-database-ids.json', 'utf8'));
+
+if (!TOKEN) {
+  console.error('❌ Error: NOTION_TOKEN environment variable not set');
+  process.exit(1);
+}
 
 console.log('🔍 Verifying all databases have properties...\n');
 

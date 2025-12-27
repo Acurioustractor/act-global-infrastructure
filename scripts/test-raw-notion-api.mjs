@@ -1,7 +1,12 @@
 #!/usr/bin/env node
 
-const NOTION_TOKEN = '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';
-const PARENT_PAGE_ID = '2d6ebcf981cf806e8db2dc8ec5d0b414';
+const NOTION_TOKEN = process.env.NOTION_TOKEN;
+const PARENT_PAGE_ID = process.env.NOTION_PARENT_PAGE_ID;
+
+if (!NOTION_TOKEN || !PARENT_PAGE_ID) {
+  console.error('❌ Error: NOTION_TOKEN and NOTION_PARENT_PAGE_ID environment variables must be set');
+  process.exit(1);
+}
 
 const payload = {
   parent: {

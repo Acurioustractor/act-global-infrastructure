@@ -12,7 +12,7 @@
 
 import fs from 'fs';
 
-const NOTION_TOKEN = process.env.NOTION_TOKEN || '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';
+const NOTION_TOKEN = process.env.NOTION_TOKEN;
 const API_VERSION = '2022-06-28';
 
 // Load database IDs

@@ -6,7 +6,7 @@
 
 import fs from 'fs';
 
-const TOKEN = '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';
+const TOKEN = process.env.NOTION_TOKEN;
 const API_VERSION = '2022-06-28';
 const dbIds = JSON.parse(fs.readFileSync('./config/notion-database-ids.json', 'utf8'));
 

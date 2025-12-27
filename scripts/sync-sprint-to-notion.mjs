@@ -22,7 +22,7 @@ const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 const GITHUB_PROJECT_ID = process.env.GITHUB_PROJECT_ID || 'PVT_kwHOCOopjs4BLVik';
 const GITHUB_ORG = 'Acurioustractor';
 
-const NOTION_TOKEN = process.env.NOTION_TOKEN || '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';
+const NOTION_TOKEN = process.env.NOTION_TOKEN;
 const API_VERSION = '2022-06-28';
 
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL;
