@@ -13,6 +13,7 @@
  * Run: Daily at 5 PM via GitHub Action or on-demand
  */
 
+import '../lib/load-env.mjs';
 import { graphql } from '@octokit/graphql';
 import { createClient } from '@supabase/supabase-js';
 import fs from 'fs';
@@ -156,6 +157,25 @@ function getFieldValue(item, fieldName) {
 }
 
 /**
+ * Convert effort string to hours (number)
+ * "1h" -> 1, "3h" -> 3, "1d" -> 8, "3d" -> 24, "1w" -> 40, "2w" -> 80
+ */
+function convertEffortToHours(effortStr) {
+  if (!effortStr || typeof effortStr === 'number') return effortStr || 0;
+
+  const effortMap = {
+    '1h': 1,
+    '3h': 3,
+    '1d': 8,
+    '3d': 24,
+    '1w': 40,
+    '2w': 80
+  };
+
+  return effortMap[effortStr] || 0;
+}
+
+/**
  * Group items by sprint and calculate metrics
  */
 function groupBySprint(items) {
@@ -182,7 +202,8 @@ function groupBySprint(items) {
     }
 
     const status = getFieldValue(item, 'Status');
-    const effort = getFieldValue(item, 'Effort') || 0;
+    const effortStr = getFieldValue(item, 'Effort');
+    const effort = convertEffortToHours(effortStr);
     const project = getFieldValue(item, 'ACT Project') || 'Unknown';
 
     sprints[sprint].total++;

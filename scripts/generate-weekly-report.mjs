@@ -13,6 +13,7 @@
  * Usage: node generate-weekly-report.mjs
  */
 
+import '../lib/load-env.mjs';
 import { graphql } from '@octokit/graphql';
 import fs from 'fs';
 
