@@ -1,0 +1,50 @@
+name: Weekly Knowledge Capture
+
+on:
+  schedule:
+    # Run every Friday at 5 PM UTC
+    - cron: '0 17 * * 5'
+  workflow_dispatch: # Manual trigger
+    inputs:
+      sprint:
+        description: 'Sprint name to analyze'
+        required: false
+        default: 'Sprint 2'
+
+jobs:
+  capture-knowledge:
+    name: Capture Sprint Learnings
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run knowledge capture
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_PROJECT_TOKEN }}
+          GITHUB_PROJECT_ID: ${{ secrets.GITHUB_PROJECT_ID }}
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+        run: |
+          echo "📚 Capturing knowledge from completed issues..."
+
+          SPRINT_NAME="${{ github.event.inputs.sprint || 'Sprint 2' }}"
+
+          node scripts/knowledge-capture.mjs --sprint="$SPRINT_NAME"
+
+      - name: Comment on completion
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            console.log('✅ Knowledge capture complete!');
+            console.log('📖 Check Notion for updated knowledge base');

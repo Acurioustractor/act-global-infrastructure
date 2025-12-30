@@ -33,7 +33,9 @@
     "knowledge:capture": "node scripts/knowledge-capture.mjs",
     "knowledge:sprint": "node scripts/knowledge-capture.mjs --sprint",
     "deploy:analyze": "node scripts/deployment-intelligence.mjs",
-    "deploy:days": "node scripts/deployment-intelligence.mjs --days"
+    "deploy:days": "node scripts/deployment-intelligence.mjs --days",
+    "sprint:plan": "node scripts/sprint-plan-mcp.mjs",
+    "setup:mcp": "./scripts/setup-mcp-env.sh"
   },
   "keywords": [],
   "author": "",
