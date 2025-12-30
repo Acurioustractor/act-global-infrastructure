@@ -17,7 +17,10 @@
     "verify:notion": "node scripts/verify-notion-databases.mjs",
     "cleanup:duplicates": "node scripts/cleanup-notion-duplicates.mjs",
     "setup:secrets": "node scripts/setup-github-secrets.mjs",
-    "archive:github-issues": "node scripts/archive-github-issues-notion.mjs"
+    "archive:github-issues": "node scripts/archive-github-issues-notion.mjs",
+    "metrics:calculate": "node scripts/calculate-flow-metrics.mjs",
+    "dashboard:update": "node scripts/generate-momentum-dashboard.mjs",
+    "dashboard:sprint": "node scripts/generate-momentum-dashboard.mjs --sprint"
   },
   "keywords": [],
   "author": "",

@@ -38,6 +38,13 @@ jobs:
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
         run: npm run sync:sprint
 
+      - name: Update Momentum Dashboard
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_PROJECT_TOKEN }}
+          GITHUB_PROJECT_ID: ${{ secrets.PROJECT_ID }}
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+        run: npm run dashboard:sprint="Sprint 2"
+
       - name: Report Status
         if: always()
         run: |
@@ -45,6 +52,7 @@ jobs:
             echo "✅ All syncs completed successfully"
             echo "   • GitHub Issues → Notion"
             echo "   • Sprint Metrics → Notion"
+            echo "   • Momentum Dashboard → Updated"
           else
             echo "❌ Sync failed"
             exit 1
