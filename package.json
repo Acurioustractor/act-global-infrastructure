@@ -9,13 +9,15 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "sync:sprint": "node scripts/sync-sprint-to-notion.mjs",
+    "sync:issues": "node scripts/sync-github-project-to-notion.mjs",
+    "sync:issues:sprint": "node scripts/sync-github-project-to-notion.mjs --sprint",
+    "sync:current": "npm run sync:issues:sprint=\"Sprint 2\" && npm run sync:sprint",
     "report:weekly": "node scripts/generate-weekly-report.mjs",
     "sprint:assign": "node scripts/assign-sprint.mjs",
     "verify:notion": "node scripts/verify-notion-databases.mjs",
     "cleanup:duplicates": "node scripts/cleanup-notion-duplicates.mjs",
     "setup:secrets": "node scripts/setup-github-secrets.mjs",
-    "archive:github-issues": "node scripts/archive-github-issues-notion.mjs",
-    "sync:issues": "node scripts/sync-github-project-to-notion.mjs"
+    "archive:github-issues": "node scripts/archive-github-issues-notion.mjs"
   },
   "keywords": [],
   "author": "",
