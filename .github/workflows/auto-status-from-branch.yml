@@ -1,0 +1,46 @@
+name: Auto-Status from Git Activity
+
+on:
+  push:
+    branches-ignore:
+      - main
+      - master
+  pull_request:
+    types: [opened, closed, ready_for_review, converted_to_draft]
+
+jobs:
+  auto-update-status:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Auto-update status from branch/PR
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_PROJECT_TOKEN }}
+          GITHUB_PROJECT_ID: ${{ secrets.PROJECT_ID }}
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          EVENT_NAME: ${{ github.event_name }}
+          BRANCH_NAME: ${{ github.ref_name }}
+          PR_STATE: ${{ github.event.pull_request.state }}
+          PR_DRAFT: ${{ github.event.pull_request.draft }}
+          PR_MERGED: ${{ github.event.pull_request.merged }}
+          PR_ACTION: ${{ github.event.action }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: node scripts/auto-status-update.mjs
+
+      - name: Report result
+        if: always()
+        run: |
+          echo "✅ Auto-status update triggered"
+          echo "   Event: ${{ github.event_name }}"
+          echo "   Branch: ${{ github.ref_name }}"
