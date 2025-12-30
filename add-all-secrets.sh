@@ -16,7 +16,11 @@ gh secret set GITHUB_PROJECT_ID -b "PVT_kwHOCOopjs4BLVik"
 
 # 3. Notion Token
 echo "✅ Setting NOTION_TOKEN..."
-gh secret set NOTION_TOKEN -b "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"
+if [ -z "$NOTION_TOKEN" ]; then
+  echo "❌ NOTION_TOKEN is not set. Export it before running this script."
+  exit 1
+fi
+gh secret set NOTION_TOKEN -b "$NOTION_TOKEN"
 
 # 4. Supabase URL
 echo "✅ Setting SUPABASE_URL..."

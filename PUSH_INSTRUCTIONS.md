@@ -40,7 +40,7 @@ If you want to remove the token from history entirely:
 brew install bfg
 
 # Create a passwords.txt file with the token
-echo "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" > passwords.txt
+echo "ntn_OLD_TOKEN_HERE" > passwords.txt
 
 # Remove the token from all commits
 bfg --replace-text passwords.txt
