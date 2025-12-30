@@ -1,0 +1,82 @@
+{
+  "actEcosystemRepos": [
+    {
+      "name": "act-global-infrastructure",
+      "path": "/Users/benknight/act-global-infrastructure",
+      "github": "https://github.com/Acurioustractor/act-global-infrastructure.git",
+      "description": "Central infrastructure, automation, and intelligence systems for ACT ecosystem",
+      "autoSync": true,
+      "branch": "main"
+    },
+    {
+      "name": "empathy-ledger-v2",
+      "path": "/Users/benknight/Code/empathy-ledger-v2",
+      "github": "https://github.com/Acurioustractor/empathy-ledger-v2.git",
+      "description": "Storyteller platform with cultural protocols and consent frameworks",
+      "autoSync": true,
+      "branch": "feature/partner-portal",
+      "notes": "Has worktrees (develop branch)"
+    },
+    {
+      "name": "ACT Farm and Regenerative Innovation Studio",
+      "path": "/Users/benknight/Code/ACT Farm and Regenerative Innovation Studio",
+      "github": "https://github.com/Acurioustractor/act-regenerative-studio.git",
+      "description": "Black Cockatoo Valley land practice, conservation, residencies, and research",
+      "autoSync": true,
+      "branch": "main"
+    },
+    {
+      "name": "The Harvest",
+      "path": "/Users/benknight/Code/The Harvest",
+      "github": "https://github.com/Acurioustractor/the-harvest-website.git",
+      "description": "Community hub, CSA subscription, events, and therapeutic programs",
+      "autoSync": true,
+      "branch": "main"
+    },
+    {
+      "name": "JusticeHub",
+      "path": "/Users/benknight/Code/JusticeHub",
+      "github": "https://github.com/Acurioustractor/justicehub-platform.git",
+      "description": "Service directory, family support, and CONTAINED campaign",
+      "autoSync": true,
+      "branch": "main"
+    },
+    {
+      "name": "ACT Placemat",
+      "path": "/Users/benknight/Code/ACT Placemat",
+      "github": "https://github.com/Acurioustractor/act-placemat.git",
+      "description": "Business agent platform with CRM, subscription tracking, and year-in-review",
+      "autoSync": true,
+      "branch": "main"
+    }
+  ],
+  "excludedRepos": [
+    {
+      "name": "Palm Island Repository",
+      "path": "/Users/benknight/Palm Island Reposistory/web-platform",
+      "github": "https://github.com/Acurioustractor/palm-island-repository.git",
+      "description": "Separate client project - Indigenous community knowledge platform",
+      "autoSync": false,
+      "reason": "Client project, not part of ACT ecosystem"
+    },
+    {
+      "name": "ACT Project Grid",
+      "path": "/Users/benknight/Code/ACT Project Grid",
+      "github": "https://github.com/Acurioustractor/act-project-grid.git",
+      "description": "Internal dashboard/tooling for project management",
+      "autoSync": false,
+      "reason": "Internal tool, not a public-facing ACT project"
+    }
+  ],
+  "syncRules": {
+    "autoSyncOnRequest": "Only sync repos where autoSync=true",
+    "requireExplicitApproval": "For repos where autoSync=false, always ask before committing/pushing",
+    "cursorFilesIgnored": "All repos have .cursor/, .cursorrules, *.cursor in .gitignore",
+    "branchStrategy": "Use specified branch per repo (not always main)"
+  },
+  "metadata": {
+    "lastUpdated": "2025-12-30",
+    "version": "1.0.0",
+    "maintainer": "ACT Development Team"
+  }
+}
