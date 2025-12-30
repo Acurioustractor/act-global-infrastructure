@@ -13,7 +13,9 @@
     "sprint:assign": "node scripts/assign-sprint.mjs",
     "verify:notion": "node scripts/verify-notion-databases.mjs",
     "cleanup:duplicates": "node scripts/cleanup-notion-duplicates.mjs",
-    "setup:secrets": "node scripts/setup-github-secrets.mjs"
+    "setup:secrets": "node scripts/setup-github-secrets.mjs",
+    "archive:github-issues": "node scripts/archive-github-issues-notion.mjs",
+    "sync:issues": "node scripts/sync-github-project-to-notion.mjs"
   },
   "keywords": [],
   "author": "",
