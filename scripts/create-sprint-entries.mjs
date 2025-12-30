@@ -5,6 +5,7 @@
  * This is a one-time setup to create the sprint pages that the automation will update
  */
 
+import '../lib/load-env.mjs';
 import fs from 'fs';
 
 const NOTION_TOKEN = process.env.NOTION_TOKEN;
@@ -28,9 +29,27 @@ const sprints = [
     goal: 'Issues not yet assigned to a sprint'
   },
   {
+    name: 'Sprint 1',
+    number: 1,
+    status: 'Completed',
+    startDate: '2025-11-25',
+    endDate: '2025-12-06',
+    goal: 'Initial setup and infrastructure',
+    projects: []
+  },
+  {
+    name: 'Sprint 2',
+    number: 2,
+    status: 'Active',
+    startDate: '2025-12-09',
+    endDate: '2025-12-20',
+    goal: 'Integration platform and real data connections',
+    projects: ['ACT Farm']
+  },
+  {
     name: 'Sprint 4',
     number: 4,
-    status: 'Active',
+    status: 'Completed',
     startDate: '2025-12-20',
     endDate: '2026-01-03',
     goal: 'Complete foundation features for Empathy Ledger, JusticeHub, and The Harvest',

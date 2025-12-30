@@ -16,11 +16,16 @@
 import '../lib/load-env.mjs';
 import { calculateSprintMetrics } from './calculate-flow-metrics.mjs';
 import { createClient } from '@supabase/supabase-js';
+import fs from 'fs';
 
 const NOTION_TOKEN = process.env.NOTION_TOKEN;
 const NOTION_VERSION = '2022-06-28';
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+// Load dashboard page ID from config (created by create-momentum-dashboard-page.mjs)
+const dbIds = JSON.parse(fs.readFileSync('./config/notion-database-ids.json', 'utf8'));
+const DASHBOARD_PAGE_ID = dbIds.momentumDashboard;
 
 const supabase = SUPABASE_URL && SUPABASE_KEY
   ? createClient(SUPABASE_URL, SUPABASE_KEY)
@@ -157,58 +162,37 @@ function generateSparkline(snapshots, key) {
 }
 
 /**
- * Get or create dashboard page in Notion
+ * Get dashboard page ID (must be created first with create-momentum-dashboard-page.mjs)
  */
-async function getOrCreateDashboard() {
-  const PARENT_PAGE_ID = '2d5ebcf9-81cf-8042-9f40-ef7b39b39ca1'; // GitHub Issues database parent
-
-  // Search for existing dashboard
-  const searchResponse = await fetch(
-    'https://api.notion.com/v1/search',
-    {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${NOTION_TOKEN}`,
-        'Content-Type': 'application/json',
-        'Notion-Version': NOTION_VERSION
-      },
-      body: JSON.stringify({
-        query: 'Developer Momentum Dashboard',
-        filter: { property: 'object', value: 'page' }
-      })
-    }
-  );
-
-  const searchData = await searchResponse.json();
-
-  if (searchData.results && searchData.results.length > 0) {
-    return searchData.results[0].id;
+async function getDashboardPageId() {
+  if (!DASHBOARD_PAGE_ID) {
+    throw new Error(
+      'Dashboard page not configured!\n' +
+      'Run: node scripts/create-momentum-dashboard-page.mjs\n' +
+      'This will create a dedicated page and save its ID to config.'
+    );
   }
 
-  // Create new dashboard page
-  const createResponse = await fetch(
-    'https://api.notion.com/v1/pages',
+  // Verify the page exists and is accessible
+  const response = await fetch(
+    `https://api.notion.com/v1/pages/${DASHBOARD_PAGE_ID}`,
     {
-      method: 'POST',
       headers: {
         'Authorization': `Bearer ${NOTION_TOKEN}`,
-        'Content-Type': 'application/json',
         'Notion-Version': NOTION_VERSION
-      },
-      body: JSON.stringify({
-        parent: { page_id: PARENT_PAGE_ID },
-        icon: { emoji: '🚀' },
-        properties: {
-          title: {
-            title: [{ text: { content: 'Developer Momentum Dashboard' } }]
-          }
-        }
-      })
+      }
     }
   );
 
-  const createData = await createResponse.json();
-  return createData.id;
+  if (!response.ok) {
+    throw new Error(
+      `Dashboard page ${DASHBOARD_PAGE_ID} not accessible!\n` +
+      'Run: node scripts/create-momentum-dashboard-page.mjs\n' +
+      'to create a new dedicated dashboard page.'
+    );
+  }
+
+  return DASHBOARD_PAGE_ID;
 }
 
 /**
@@ -697,9 +681,9 @@ async function main() {
     console.log('ℹ️  No historical data yet - trends will appear after a few days\n');
   }
 
-  // Get or create dashboard
+  // Get dashboard page ID
   console.log('📄 Finding dashboard page...\n');
-  const pageId = await getOrCreateDashboard();
+  const pageId = await getDashboardPageId();
 
   // Update dashboard
   await updateDashboard(pageId, metrics, trends, snapshots);

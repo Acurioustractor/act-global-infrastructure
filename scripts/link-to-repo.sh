@@ -8,7 +8,7 @@ GLOBAL_PATH=~/act-global-infrastructure
 
 if [ -z "$PROJECT_PATH" ]; then
     echo "Usage: $0 <project-path>"
-    echo "Example: $0 '/Users/benknight/Code/Empathy Ledger v.02'"
+    echo "Example: $0 '/Users/benknight/Code/empathy-ledger-v2'"
     exit 1
 fi
 
