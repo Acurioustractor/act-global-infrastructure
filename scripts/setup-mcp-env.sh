@@ -7,9 +7,11 @@ set -e
 
 echo "🔧 Setting up MCP environment variables..."
 
-# Load existing env
+# Load existing env (safely handle paths with spaces)
 if [ -f .env.local ]; then
-  source .env.local
+  # Only load the variables we need, skip problematic ones
+  export NEXT_PUBLIC_SUPABASE_URL=$(grep "^NEXT_PUBLIC_SUPABASE_URL=" .env.local | cut -d'=' -f2- | tr -d '"')
+  export SUPABASE_SERVICE_ROLE_KEY=$(grep "^SUPABASE_SERVICE_ROLE_KEY=" .env.local | cut -d'=' -f2- | tr -d '"')
 fi
 
 # Generate Supabase connection string
