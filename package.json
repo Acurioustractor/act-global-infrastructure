@@ -20,7 +20,9 @@
     "archive:github-issues": "node scripts/archive-github-issues-notion.mjs",
     "metrics:calculate": "node scripts/calculate-flow-metrics.mjs",
     "dashboard:update": "node scripts/generate-momentum-dashboard.mjs",
-    "dashboard:sprint": "node scripts/generate-momentum-dashboard.mjs --sprint"
+    "dashboard:sprint": "node scripts/generate-momentum-dashboard.mjs --sprint",
+    "alerts:check": "node scripts/smart-alerts.mjs",
+    "alerts:sprint": "node scripts/smart-alerts.mjs --sprint"
   },
   "keywords": [],
   "author": "",
