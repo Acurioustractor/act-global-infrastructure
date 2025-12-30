@@ -45,6 +45,14 @@ jobs:
           NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
         run: npm run dashboard:sprint="Sprint 2"
 
+      - name: Check for Smart Alerts
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_PROJECT_TOKEN }}
+          GITHUB_PROJECT_ID: ${{ secrets.PROJECT_ID }}
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          ALERT_EMAIL: ${{ secrets.ALERT_EMAIL }}
+        run: npm run alerts:sprint="Sprint 2" || true
+
       - name: Report Status
         if: always()
         run: |
