@@ -28,7 +28,12 @@
     "queue:sprint": "node scripts/smart-work-queue.mjs --sprint",
     "pr:generate": "node scripts/pr-intelligence.mjs",
     "forecast:sprint": "node scripts/velocity-forecast.mjs --sprint",
-    "forecast:current": "node scripts/velocity-forecast.mjs"
+    "forecast:current": "node scripts/velocity-forecast.mjs",
+    "setup:snapshots": "node scripts/setup-sprint-snapshots-table.mjs",
+    "knowledge:capture": "node scripts/knowledge-capture.mjs",
+    "knowledge:sprint": "node scripts/knowledge-capture.mjs --sprint",
+    "deploy:analyze": "node scripts/deployment-intelligence.mjs",
+    "deploy:days": "node scripts/deployment-intelligence.mjs --days"
   },
   "keywords": [],
   "author": "",

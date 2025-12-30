@@ -6,16 +6,155 @@
  * Creates a beautiful dashboard page showing:
  * - Real-time flow metrics
  * - Sprint progress
- * - Velocity trends
+ * - Velocity trends (historical comparison)
  * - Bottleneck alerts
  * - Actionable insights
+ * - Week-over-week velocity changes
+ * - Sprint-to-sprint comparisons
  */
 
 import '../lib/load-env.mjs';
 import { calculateSprintMetrics } from './calculate-flow-metrics.mjs';
+import { createClient } from '@supabase/supabase-js';
 
 const NOTION_TOKEN = process.env.NOTION_TOKEN;
 const NOTION_VERSION = '2022-06-28';
+const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+const supabase = SUPABASE_URL && SUPABASE_KEY
+  ? createClient(SUPABASE_URL, SUPABASE_KEY)
+  : null;
+
+/**
+ * Store snapshot in Supabase for historical tracking
+ */
+async function storeSnapshot(metrics) {
+  if (!supabase) {
+    console.log('⚠️  Supabase not configured, skipping snapshot storage');
+    return null;
+  }
+
+  try {
+    const { data, error } = await supabase
+      .from('sprint_snapshots')
+      .insert({
+        sprint_name: metrics.sprint,
+        snapshot_date: new Date().toISOString(),
+        total_issues: metrics.totalIssues,
+        completed: metrics.completed,
+        in_progress: metrics.inProgress,
+        todo: metrics.todo,
+        blocked: metrics.blocked,
+        completion_percentage: metrics.completionPercentage,
+        avg_cycle_time: metrics.avgCycleTime,
+        avg_lead_time: metrics.avgLeadTime,
+        throughput_per_week: metrics.throughputPerWeek,
+        flow_efficiency: metrics.flowEfficiency,
+        wip_count: metrics.inProgress
+      })
+      .select();
+
+    if (error) {
+      console.error('Failed to store snapshot:', error.message);
+      return null;
+    }
+
+    return data[0];
+  } catch (error) {
+    console.error('Failed to store snapshot:', error.message);
+    return null;
+  }
+}
+
+/**
+ * Get historical snapshots for trend analysis
+ */
+async function getHistoricalSnapshots(sprintName, days = 30) {
+  if (!supabase) {
+    return [];
+  }
+
+  try {
+    const cutoffDate = new Date();
+    cutoffDate.setDate(cutoffDate.getDate() - days);
+
+    const { data, error } = await supabase
+      .from('sprint_snapshots')
+      .select('*')
+      .eq('sprint_name', sprintName)
+      .gte('snapshot_date', cutoffDate.toISOString())
+      .order('snapshot_date', { ascending: true });
+
+    if (error) {
+      console.error('Failed to fetch snapshots:', error.message);
+      return [];
+    }
+
+    return data || [];
+  } catch (error) {
+    console.error('Failed to fetch snapshots:', error.message);
+    return [];
+  }
+}
+
+/**
+ * Calculate velocity trend from snapshots
+ */
+function calculateTrends(snapshots) {
+  if (snapshots.length < 2) {
+    return {
+      hasTrend: false,
+      completionTrend: 0,
+      cycleTimeTrend: 0,
+      throughputTrend: 0
+    };
+  }
+
+  const recent = snapshots[snapshots.length - 1];
+  const previous = snapshots[Math.max(0, snapshots.length - 7)]; // Compare to 7 days ago
+
+  const completionTrend = recent.completion_percentage - previous.completion_percentage;
+  const cycleTimeTrend = recent.avg_cycle_time && previous.avg_cycle_time
+    ? ((recent.avg_cycle_time - previous.avg_cycle_time) / previous.avg_cycle_time) * 100
+    : 0;
+  const throughputTrend = recent.throughput_per_week && previous.throughput_per_week
+    ? ((recent.throughput_per_week - previous.throughput_per_week) / previous.throughput_per_week) * 100
+    : 0;
+
+  return {
+    hasTrend: true,
+    completionTrend: Math.round(completionTrend),
+    cycleTimeTrend: Math.round(cycleTimeTrend),
+    throughputTrend: Math.round(throughputTrend),
+    daysTracked: snapshots.length
+  };
+}
+
+/**
+ * Generate trend sparkline (simple text visualization)
+ */
+function generateSparkline(snapshots, key) {
+  if (snapshots.length < 2) return '';
+
+  const values = snapshots.map(s => s[key]).filter(v => v !== null);
+  if (values.length === 0) return '';
+
+  const min = Math.min(...values);
+  const max = Math.max(...values);
+  const range = max - min;
+
+  if (range === 0) return '━'.repeat(Math.min(values.length, 10));
+
+  const chars = ['▁', '▂', '▃', '▄', '▅', '▆', '▇', '█'];
+  const recent = values.slice(-10); // Last 10 data points
+
+  return recent.map(v => {
+    const normalized = (v - min) / range;
+    const index = Math.min(Math.floor(normalized * chars.length), chars.length - 1);
+    return chars[index];
+  }).join('');
+}
 
 /**
  * Get or create dashboard page in Notion
@@ -75,7 +214,7 @@ async function getOrCreateDashboard() {
 /**
  * Generate dashboard content blocks from metrics
  */
-function generateDashboardBlocks(metrics) {
+function generateDashboardBlocks(metrics, trends = null, snapshots = []) {
   const blocks = [];
 
   // Header
@@ -145,6 +284,88 @@ function generateDashboardBlocks(metrics) {
   });
 
   blocks.push({ object: 'block', type: 'divider', divider: {} });
+
+  // Velocity Trends (if available)
+  if (trends && trends.hasTrend) {
+    blocks.push({
+      object: 'block',
+      type: 'heading_2',
+      heading_2: {
+        rich_text: [{ text: { content: '📈 Velocity Trends' } }]
+      }
+    });
+
+    blocks.push({
+      object: 'block',
+      type: 'callout',
+      callout: {
+        icon: { emoji: '📊' },
+        color: 'blue_background',
+        rich_text: [{
+          text: { content: `Tracking ${trends.daysTracked} day(s) of data` }
+        }]
+      }
+    });
+
+    const trendItems = [];
+
+    // Completion trend
+    const completionEmoji = trends.completionTrend > 0 ? '📈' : trends.completionTrend < 0 ? '📉' : '➡️';
+    const completionColor = trends.completionTrend > 0 ? 'green' : trends.completionTrend < 0 ? 'red' : 'default';
+    trendItems.push({
+      text: { content: `${completionEmoji} Completion: ` },
+      annotations: { bold: true }
+    });
+    trendItems.push({
+      text: { content: `${trends.completionTrend > 0 ? '+' : ''}${trends.completionTrend}% ` },
+      annotations: { color: completionColor }
+    });
+
+    // Add sparkline if we have data
+    if (snapshots.length >= 2) {
+      const sparkline = generateSparkline(snapshots, 'completion_percentage');
+      trendItems.push({ text: { content: sparkline + '\n' }, annotations: { code: true } });
+    } else {
+      trendItems.push({ text: { content: '\n' } });
+    }
+
+    // Cycle time trend
+    if (trends.cycleTimeTrend !== 0) {
+      const cycleEmoji = trends.cycleTimeTrend < 0 ? '🚀' : trends.cycleTimeTrend > 0 ? '🐌' : '➡️';
+      const cycleColor = trends.cycleTimeTrend < 0 ? 'green' : trends.cycleTimeTrend > 0 ? 'red' : 'default';
+      trendItems.push({
+        text: { content: `${cycleEmoji} Cycle Time: ` },
+        annotations: { bold: true }
+      });
+      trendItems.push({
+        text: { content: `${trends.cycleTimeTrend > 0 ? '+' : ''}${trends.cycleTimeTrend}% ` },
+        annotations: { color: cycleColor }
+      });
+      trendItems.push({ text: { content: `(${trends.cycleTimeTrend < 0 ? 'faster' : 'slower'})\n` } });
+    }
+
+    // Throughput trend
+    if (trends.throughputTrend !== 0) {
+      const throughputEmoji = trends.throughputTrend > 0 ? '📈' : trends.throughputTrend < 0 ? '📉' : '➡️';
+      const throughputColor = trends.throughputTrend > 0 ? 'green' : trends.throughputTrend < 0 ? 'red' : 'default';
+      trendItems.push({
+        text: { content: `${throughputEmoji} Throughput: ` },
+        annotations: { bold: true }
+      });
+      trendItems.push({
+        text: { content: `${trends.throughputTrend > 0 ? '+' : ''}${trends.throughputTrend}%` },
+        annotations: { color: throughputColor }
+      });
+    }
+
+    blocks.push({
+      object: 'block',
+      type: 'paragraph',
+      paragraph: { rich_text: trendItems }
+    });
+
+    blocks.push({ object: 'block', type: 'divider', divider: {} });
+  }
 
   // Velocity Metrics
   blocks.push({
@@ -384,7 +605,7 @@ function generateDashboardBlocks(metrics) {
 /**
  * Update dashboard page with new content
  */
-async function updateDashboard(pageId, metrics) {
+async function updateDashboard(pageId, metrics, trends = null, snapshots = []) {
   // First, delete existing content
   console.log('📝 Clearing old dashboard content...');
 
@@ -417,7 +638,7 @@ async function updateDashboard(pageId, metrics) {
 
   // Generate new content
   console.log('✨ Generating new dashboard content...');
-  const blocks = generateDashboardBlocks(metrics);
+  const blocks = generateDashboardBlocks(metrics, trends, snapshots);
 
   // Notion API limits blocks to 100 per request, send in batches
   const batchSize = 100;
@@ -461,15 +682,53 @@ async function main() {
   console.log(`📊 Calculating metrics for "${sprintName}"...\n`);
   const metrics = await calculateSprintMetrics(sprintName);
 
+  // Store snapshot for historical tracking
+  console.log('💾 Storing snapshot for trend analysis...\n');
+  await storeSnapshot(metrics);
+
+  // Get historical data
+  console.log('📈 Fetching historical data...\n');
+  const snapshots = await getHistoricalSnapshots(sprintName, 30);
+  const trends = calculateTrends(snapshots);
+
+  if (trends.hasTrend) {
+    console.log(`✅ Found ${trends.daysTracked} day(s) of historical data\n`);
+  } else {
+    console.log('ℹ️  No historical data yet - trends will appear after a few days\n');
+  }
+
   // Get or create dashboard
   console.log('📄 Finding dashboard page...\n');
   const pageId = await getOrCreateDashboard();
 
   // Update dashboard
-  await updateDashboard(pageId, metrics);
+  await updateDashboard(pageId, metrics, trends, snapshots);
 
   console.log('\n✅ Dashboard updated successfully!\n');
   console.log(`🔗 View: https://www.notion.so/${pageId.replace(/-/g, '')}\n`);
+
+  // Summary of trends
+  if (trends.hasTrend) {
+    console.log('📊 Trend Summary:\n');
+    if (trends.completionTrend > 0) {
+      console.log(`   📈 Completion up ${trends.completionTrend}%`);
+    } else if (trends.completionTrend < 0) {
+      console.log(`   📉 Completion down ${Math.abs(trends.completionTrend)}%`);
+    }
+
+    if (trends.cycleTimeTrend < 0) {
+      console.log(`   🚀 Cycle time improving (${Math.abs(trends.cycleTimeTrend)}% faster)`);
+    } else if (trends.cycleTimeTrend > 0) {
+      console.log(`   🐌 Cycle time slowing (${trends.cycleTimeTrend}% slower)`);
+    }
+
+    if (trends.throughputTrend > 0) {
+      console.log(`   📈 Throughput up ${trends.throughputTrend}%`);
+    } else if (trends.throughputTrend < 0) {
+      console.log(`   📉 Throughput down ${Math.abs(trends.throughputTrend)}%`);
+    }
+    console.log('');
+  }
 }
 
 main().catch(console.error);
