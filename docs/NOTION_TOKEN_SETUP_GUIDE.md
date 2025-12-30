@@ -86,7 +86,7 @@ The token is used in these projects:
 
 1. **ACT Global Infrastructure** - `/Users/benknight/act-global-infrastructure/.env.local`
 2. **ACT Farm Studio** - `/Users/benknight/Code/ACT Farm and Regenerative Innovation Studio/.env.local`
-3. **Empathy Ledger** - `/Users/benknight/Code/Empathy Ledger v.02/.env.local` (if exists)
+3. **Empathy Ledger** - `/Users/benknight/Code/empathy-ledger-v2/.env.local` (if exists)
 4. **JusticeHub** - `/Users/benknight/Code/JusticeHub/.env.local` (if exists)
 5. **The Harvest** - `/Users/benknight/Code/The Harvest Website/.env.local` (if exists)
 
@@ -101,7 +101,7 @@ NEW_TOKEN="secret_YOUR_NEW_TOKEN_HERE"
 PROJECTS=(
   "/Users/benknight/act-global-infrastructure"
   "/Users/benknight/Code/ACT Farm and Regenerative Innovation Studio"
-  "/Users/benknight/Code/Empathy Ledger v.02"
+  "/Users/benknight/Code/empathy-ledger-v2"
   "/Users/benknight/Code/JusticeHub"
   "/Users/benknight/Code/The Harvest Website"
   "/Users/benknight/Code/Goods Asset Register"
