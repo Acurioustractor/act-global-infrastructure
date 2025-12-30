@@ -25,7 +25,10 @@
     "alerts:sprint": "node scripts/smart-alerts.mjs --sprint",
     "queue:next": "node scripts/smart-work-queue.mjs --next",
     "queue:list": "node scripts/smart-work-queue.mjs --all",
-    "queue:sprint": "node scripts/smart-work-queue.mjs --sprint"
+    "queue:sprint": "node scripts/smart-work-queue.mjs --sprint",
+    "pr:generate": "node scripts/pr-intelligence.mjs",
+    "forecast:sprint": "node scripts/velocity-forecast.mjs --sprint",
+    "forecast:current": "node scripts/velocity-forecast.mjs"
   },
   "keywords": [],
   "author": "",
