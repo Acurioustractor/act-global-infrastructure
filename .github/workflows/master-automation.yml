@@ -1,0 +1,155 @@
+name: Master Automation - Full Sync
+
+on:
+  schedule:
+    # Run daily at 5:00 AM UTC (overnight automation - fresh data every morning)
+    - cron: '0 5 * * *'
+
+  workflow_dispatch: # Manual trigger
+    inputs:
+      sync_mode:
+        description: 'Sync mode'
+        required: false
+        default: 'full'
+        type: choice
+        options:
+          - full
+          - sprint-only
+
+jobs:
+  master-sync:
+    name: Master Automation Pipeline
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+      # STEP 1: Sync GitHub Issues → Notion
+      # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+      - name: 📥 Sync GitHub Issues to Notion
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_PROJECT_TOKEN }}
+          GITHUB_PROJECT_ID: ${{ secrets.GITHUB_PROJECT_ID }}
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+        run: |
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          echo "📥 STEP 1: Sync GitHub Issues → Notion"
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+
+          if [ "${{ github.event.inputs.sync_mode }}" = "sprint-only" ]; then
+            echo "⚡ Sprint mode - syncing current sprint only"
+            npm run sync:issues -- --sprint="Sprint 2"
+          else
+            echo "📦 Full mode - syncing ALL issues (may take 2-3 minutes)"
+            npm run sync:issues
+          fi
+
+      # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+      # STEP 2: Update Sprint Metrics
+      # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+      - name: 📊 Update Sprint Metrics
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_PROJECT_TOKEN }}
+          GITHUB_PROJECT_ID: ${{ secrets.GITHUB_PROJECT_ID }}
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: |
+          echo ""
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          echo "📊 STEP 2: Update Sprint Metrics"
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          npm run sync:sprint
+
+      # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+      # STEP 3: Calculate Flow Metrics
+      # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+      - name: 📈 Calculate Flow Metrics
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_PROJECT_TOKEN }}
+          GITHUB_PROJECT_ID: ${{ secrets.GITHUB_PROJECT_ID }}
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+        run: |
+          echo ""
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          echo "📈 STEP 3: Calculate Flow Metrics"
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          npm run metrics:calculate
+
+      # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+      # STEP 4: Update Momentum Dashboard
+      # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+      - name: 🎯 Update Momentum Dashboard
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_PROJECT_TOKEN }}
+          GITHUB_PROJECT_ID: ${{ secrets.GITHUB_PROJECT_ID }}
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+        run: |
+          echo ""
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          echo "🎯 STEP 4: Update Momentum Dashboard"
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          npm run dashboard:update
+
+      # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+      # STEP 5: Generate Smart Work Queue
+      # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+      - name: 🔄 Generate Smart Work Queue
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_PROJECT_TOKEN }}
+          GITHUB_PROJECT_ID: ${{ secrets.GITHUB_PROJECT_ID }}
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+        run: |
+          echo ""
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          echo "🔄 STEP 5: Generate Smart Work Queue"
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          npm run queue:list
+
+      # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+      # STEP 6: Run Smart Alerts
+      # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+      - name: ⚠️ Run Smart Alerts
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_PROJECT_TOKEN }}
+          GITHUB_PROJECT_ID: ${{ secrets.GITHUB_PROJECT_ID }}
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+        run: |
+          echo ""
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          echo "⚠️ STEP 6: Run Smart Alerts"
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          npm run alerts:check
+
+      # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+      # SUMMARY
+      # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+      - name: ✅ Summary
+        run: |
+          echo ""
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          echo "✅ MASTER AUTOMATION COMPLETE"
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          echo ""
+          echo "📊 Updated:"
+          echo "  • GitHub Issues → Notion"
+          echo "  • Sprint Metrics → Notion + Supabase"
+          echo "  • Flow Metrics → Notion"
+          echo "  • Momentum Dashboard → Notion"
+          echo "  • Smart Work Queue → Notion"
+          echo "  • Smart Alerts → Checked"
+          echo ""
+          echo "🎯 Your Notion workspace is now up to date!"
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
