@@ -22,21 +22,30 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Sync Sprint Metrics
+      - name: Sync GitHub Issues to Notion
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_PROJECT_TOKEN }}
+          GITHUB_PROJECT_ID: ${{ secrets.PROJECT_ID }}
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+        run: npm run sync:issues
+
+      - name: Sync Sprint Metrics to Notion
         env:
           GITHUB_TOKEN: ${{ secrets.GH_PROJECT_TOKEN }}
           GITHUB_PROJECT_ID: ${{ secrets.PROJECT_ID }}
           NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
           NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
-        run: node scripts/sync-sprint-to-notion.mjs
+        run: npm run sync:sprint
 
       - name: Report Status
         if: always()
         run: |
           if [ $? -eq 0 ]; then
-            echo "✅ Sprint metrics synced successfully"
+            echo "✅ All syncs completed successfully"
+            echo "   • GitHub Issues → Notion"
+            echo "   • Sprint Metrics → Notion"
           else
-            echo "❌ Sprint metrics sync failed"
+            echo "❌ Sync failed"
             exit 1
           fi
