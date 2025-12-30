@@ -12,9 +12,11 @@
  * 2. Creates/updates corresponding pages in Notion GitHub Issues database
  * 3. Archives Notion pages for issues removed from the project
  *
- * Best Practice: Run this daily alongside sprint sync for complete tracking
+ * Performance Modes:
+ * - Sprint mode: npm run sync:issues -- --sprint="Sprint 2" (FAST - only 5 issues)
+ * - Full mode: npm run sync:issues (SLOW - all 149 issues)
  *
- * Usage: npm run sync:issues
+ * Usage: npm run sync:issues [--sprint="Sprint Name"]
  */
 
 import '../lib/load-env.mjs';
@@ -25,6 +27,11 @@ const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 const GITHUB_PROJECT_ID = process.env.GITHUB_PROJECT_ID || 'PVT_kwHOCOopjs4BLVik';
 const NOTION_TOKEN = process.env.NOTION_TOKEN;
 const API_VERSION = '2022-06-28';
+
+// Parse command line arguments
+const args = process.argv.slice(2);
+const sprintArg = args.find(arg => arg.startsWith('--sprint='));
+const SPRINT_FILTER = sprintArg ? sprintArg.split('=')[1] : null;
 
 // Load database IDs
 const dbIds = JSON.parse(fs.readFileSync('./config/notion-database-ids.json', 'utf8'));
@@ -39,7 +46,12 @@ const graphqlWithAuth = graphql.defaults({
 console.log('🔄 Sync GitHub Project Issues → Notion');
 console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
 console.log(`📊 GitHub Project: ${GITHUB_PROJECT_ID}`);
-console.log(`📋 Notion Database: ${GITHUB_ISSUES_DB}\n`);
+console.log(`📋 Notion Database: ${GITHUB_ISSUES_DB}`);
+if (SPRINT_FILTER) {
+  console.log(`⚡ SPRINT MODE: Only syncing "${SPRINT_FILTER}" issues (FAST!)\n`);
+} else {
+  console.log(`📦 FULL MODE: Syncing all issues (may take 1-2 minutes)\n`);
+}
 
 /**
  * Fetch all issues from GitHub Project
@@ -298,9 +310,21 @@ async function syncIssueToNotion(item) {
 async function main() {
   try {
     // 1. Fetch all GitHub Project issues
-    const items = await fetchGitHubProjectIssues();
+    const allItems = await fetchGitHubProjectIssues();
 
-    // 2. Sync each issue to Notion
+    // 2. Filter by sprint if specified
+    let items = allItems;
+    if (SPRINT_FILTER) {
+      items = allItems.filter(item => {
+        if (!item.content) return false;
+        const sprint = getFieldValue(item, 'Sprint');
+        return sprint === SPRINT_FILTER;
+      });
+      console.log(`📊 Filtered to ${items.length} issues in "${SPRINT_FILTER}"`);
+      console.log(`   (Skipping ${allItems.length - items.length} issues from other sprints)\n`);
+    }
+
+    // 3. Sync each issue to Notion
     console.log('🔄 Syncing issues to Notion...\n');
 
     let created = 0;
