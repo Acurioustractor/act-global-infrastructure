@@ -22,7 +22,10 @@
     "dashboard:update": "node scripts/generate-momentum-dashboard.mjs",
     "dashboard:sprint": "node scripts/generate-momentum-dashboard.mjs --sprint",
     "alerts:check": "node scripts/smart-alerts.mjs",
-    "alerts:sprint": "node scripts/smart-alerts.mjs --sprint"
+    "alerts:sprint": "node scripts/smart-alerts.mjs --sprint",
+    "queue:next": "node scripts/smart-work-queue.mjs --next",
+    "queue:list": "node scripts/smart-work-queue.mjs --all",
+    "queue:sprint": "node scripts/smart-work-queue.mjs --sprint"
   },
   "keywords": [],
   "author": "",
