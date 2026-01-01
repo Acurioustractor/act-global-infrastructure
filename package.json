@@ -8,6 +8,10 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "ask": "node scripts/ask-act.mjs",
+    "sync:ghl": "node scripts/sync-ghl-to-notion.mjs",
+    "notifications:check": "node scripts/check-notifications.mjs",
+    "partner:portal": "node scripts/create-partner-portal.mjs",
     "sync:sprint": "node scripts/sync-sprint-to-notion.mjs",
     "sync:issues": "node scripts/sync-github-project-to-notion.mjs",
     "sync:issues:sprint": "node scripts/sync-github-project-to-notion.mjs --sprint",
@@ -35,7 +39,12 @@
     "deploy:analyze": "node scripts/deployment-intelligence.mjs",
     "deploy:days": "node scripts/deployment-intelligence.mjs --days",
     "sprint:plan": "node scripts/sprint-plan-mcp.mjs",
-    "setup:mcp": "./scripts/setup-mcp-env.sh"
+    "setup:mcp": "./scripts/setup-mcp-env.sh",
+    "knowledge:ingest": "node scripts/ingest-all-knowledge.mjs",
+    "knowledge:sync": "node scripts/ingest-knowledge-incremental.mjs",
+    "knowledge:train-dataset": "node scripts/build-training-dataset.mjs",
+    "knowledge:analyze-dataset": "node scripts/analyze-training-dataset.mjs",
+    "knowledge:deploy-model": "node scripts/deploy-fine-tuned-model.mjs"
   },
   "keywords": [],
   "author": "",
@@ -45,6 +54,7 @@
     "@notionhq/client": "^5.6.0",
     "@octokit/graphql": "^9.0.3",
     "@supabase/supabase-js": "^2.89.0",
-    "dotenv": "^17.2.3"
+    "dotenv": "^17.2.3",
+    "openai": "^6.15.0"
   }
 }

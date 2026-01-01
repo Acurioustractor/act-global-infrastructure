@@ -12,12 +12,20 @@
  * - Context: Matches recent work/expertise
  * - Sprint criticality: Must-have vs nice-to-have
  * - Freshness: New issues vs stale ones
+ * - GHL Priorities: Grant deadlines and partner check-ins (NEW)
  *
- * Output: Ranked list of "next best tasks"
+ * Output: Ranked list of "next best tasks" including GitHub issues + GHL items
  */
 
 import '../lib/load-env.mjs';
 import { graphql } from '@octokit/graphql';
+import { Client } from '@notionhq/client';
+import { readFileSync } from 'fs';
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 const PROJECT_ID = process.env.GITHUB_PROJECT_ID;
@@ -26,12 +34,127 @@ const graphqlWithAuth = graphql.defaults({
   headers: { authorization: `bearer ${GITHUB_TOKEN}` }
 });
 
+// Load Notion database IDs
+const configPath = join(__dirname, '../config/notion-database-ids.json');
+let databaseIds;
+try {
+  databaseIds = JSON.parse(readFileSync(configPath, 'utf8'));
+} catch (error) {
+  console.error('⚠️  Warning: Could not load Notion database config');
+  databaseIds = {};
+}
+
+const notion = new Client({ auth: process.env.NOTION_TOKEN });
+
 /**
  * Get field value from item
  */
 function getFieldValue(item, fieldName) {
   const field = item.fieldValues.nodes.find(f => f.field?.name === fieldName);
   return field?.name || field?.number || field?.text || null;
+}
+
+/**
+ * Calculate days until a date
+ */
+function getDaysUntil(dateString) {
+  if (!dateString) return Infinity;
+  const target = new Date(dateString);
+  const now = new Date();
+  const diffTime = target - now;
+  return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+}
+
+/**
+ * Fetch grant opportunities with upcoming deadlines from Notion
+ */
+async function fetchGrantOpportunities() {
+  if (!databaseIds.grantOpportunities || !process.env.NOTION_TOKEN) {
+    return [];
+  }
+
+  try {
+    const twoWeeks = new Date();
+    twoWeeks.setDate(twoWeeks.getDate() + 14);
+
+    const response = await notion.databases.query({
+      database_id: databaseIds.grantOpportunities,
+      filter: {
+        and: [
+          {
+            property: 'Deadline',
+            date: {
+              on_or_before: twoWeeks.toISOString().split('T')[0]
+            }
+          },
+          {
+            or: [
+              { property: 'Status', select: { equals: 'Prospective' } },
+              { property: 'Status', select: { equals: 'Applied' } }
+            ]
+          }
+        ]
+      },
+      sorts: [{ property: 'Deadline', direction: 'ascending' }]
+    });
+
+    return response.results.map(page => ({
+      type: 'grant',
+      name: page.properties['Grant Name']?.title[0]?.plain_text || 'Unnamed Grant',
+      funder: page.properties['Funder']?.rich_text[0]?.plain_text || 'Unknown',
+      deadline: page.properties['Deadline']?.date?.start,
+      amount: page.properties['Amount']?.number,
+      status: page.properties['Status']?.select?.name,
+      url: page.url
+    }));
+  } catch (error) {
+    console.error('⚠️  Could not fetch grant opportunities:', error.message);
+    return [];
+  }
+}
+
+/**
+ * Fetch partner check-ins due this week from Notion
+ */
+async function fetchPartnerCheckIns() {
+  if (!databaseIds.partners || !process.env.NOTION_TOKEN) {
+    return [];
+  }
+
+  try {
+    const now = new Date();
+    const twoWeeks = new Date();
+    twoWeeks.setDate(twoWeeks.getDate() + 14);
+
+    const response = await notion.databases.query({
+      database_id: databaseIds.partners,
+      filter: {
+        and: [
+          {
+            property: 'Next Check-in',
+            date: {
+              on_or_before: twoWeeks.toISOString().split('T')[0]
+            }
+          }
+        ]
+      },
+      sorts: [{ property: 'Next Check-in', direction: 'ascending' }]
+    });
+
+    return response.results.map(page => ({
+      type: 'partner',
+      name: page.properties['Name']?.title[0]?.plain_text || 'Unnamed Partner',
+      organization: page.properties['Organization']?.rich_text[0]?.plain_text || '',
+      checkInDate: page.properties['Next Check-in']?.date?.start,
+      lastContact: page.properties['Last Contact']?.date?.start,
+      email: page.properties['Contact Email']?.email,
+      phone: page.properties['Phone']?.phone_number,
+      url: page.url
+    }));
+  } catch (error) {
+    console.error('⚠️  Could not fetch partner check-ins:', error.message);
+    return [];
+  }
 }
 
 /**
@@ -294,23 +417,110 @@ function calculatePriorityScore(item, allItems) {
 }
 
 /**
+ * Calculate priority score for GHL items (grants and partners)
+ */
+function calculateGHLPriorityScore(item) {
+  let score = 0;
+  const reasons = [];
+
+  if (item.type === 'grant') {
+    // Grant scoring based on deadline urgency and amount
+    const daysUntil = getDaysUntil(item.deadline);
+
+    // Deadline urgency (0-50 points)
+    if (daysUntil < 0) {
+      score += 100; // Overdue!
+      reasons.push(`⚠️ OVERDUE by ${Math.abs(daysUntil)} days (+100)`);
+    } else if (daysUntil <= 3) {
+      score += 50;
+      reasons.push(`🚨 Due in ${daysUntil} days (+50)`);
+    } else if (daysUntil <= 7) {
+      score += 40;
+      reasons.push(`⚡ Due this week (+40)`);
+    } else if (daysUntil <= 14) {
+      score += 30;
+      reasons.push(`📅 Due in ${daysUntil} days (+30)`);
+    }
+
+    // Amount impact (0-30 points)
+    if (item.amount) {
+      if (item.amount >= 100000) {
+        score += 30;
+        reasons.push(`💰 Large grant ($${(item.amount / 1000).toFixed(0)}k) (+30)`);
+      } else if (item.amount >= 50000) {
+        score += 20;
+        reasons.push(`💰 Medium grant ($${(item.amount / 1000).toFixed(0)}k) (+20)`);
+      } else if (item.amount >= 10000) {
+        score += 10;
+        reasons.push(`💰 Grant ($${(item.amount / 1000).toFixed(0)}k) (+10)`);
+      }
+    }
+
+    // Status boost
+    if (item.status === 'Applied') {
+      score += 15;
+      reasons.push('Already applied - follow up (+15)');
+    } else {
+      score += 10;
+      reasons.push('Application needed (+10)');
+    }
+
+  } else if (item.type === 'partner') {
+    // Partner check-in scoring based on date
+    const daysUntil = getDaysUntil(item.checkInDate);
+
+    // Check-in urgency (0-40 points)
+    if (daysUntil < 0) {
+      score += 60;
+      reasons.push(`⚠️ Overdue by ${Math.abs(daysUntil)} days (+60)`);
+    } else if (daysUntil <= 2) {
+      score += 40;
+      reasons.push(`📞 Check-in in ${daysUntil} days (+40)`);
+    } else if (daysUntil <= 7) {
+      score += 30;
+      reasons.push(`📞 Check-in this week (+30)`);
+    } else if (daysUntil <= 14) {
+      score += 20;
+      reasons.push(`📞 Check-in soon (+20)`);
+    }
+
+    // Relationship maintenance boost
+    score += 15;
+    reasons.push('Partner relationship (+15)');
+  }
+
+  return { score: Math.min(score, 100), reasons };
+}
+
+/**
  * Generate work queue with priority rankings
+ * Combines GitHub issues + GHL items (grants + partners)
  */
 async function generateWorkQueue(sprintName) {
-  const items = await fetchIssuesWithContext(sprintName);
+  console.log('📊 Fetching work items...\n');
 
-  console.log(`📋 Found ${items.length} Todo items in "${sprintName}"\n`);
+  // Fetch all sources in parallel
+  const [githubItems, grants, partners] = await Promise.all([
+    fetchIssuesWithContext(sprintName),
+    fetchGrantOpportunities(),
+    fetchPartnerCheckIns()
+  ]);
 
-  if (items.length === 0) {
-    console.log('✅ No items in queue - sprint complete or all work in progress!\n');
+  console.log(`   GitHub Issues (Todo): ${githubItems.length}`);
+  console.log(`   Grant Deadlines: ${grants.length}`);
+  console.log(`   Partner Check-ins: ${partners.length}\n`);
+
+  if (githubItems.length === 0 && grants.length === 0 && partners.length === 0) {
+    console.log('✅ No items in queue - you\'re all caught up!\n');
     return [];
   }
 
-  // Calculate priority for each item
-  const rankedItems = items.map(item => {
-    const { score, reasons } = calculatePriorityScore(item, items);
+  // Score GitHub issues
+  const rankedGitHubItems = githubItems.map(item => {
+    const { score, reasons } = calculatePriorityScore(item, githubItems);
 
     return {
+      type: 'github',
       number: item.content.number,
       title: item.content.title,
       url: item.content.url,
@@ -322,10 +532,49 @@ async function generateWorkQueue(sprintName) {
     };
   });
 
-  // Sort by score (highest first)
-  rankedItems.sort((a, b) => b.score - a.score);
+  // Score GHL grants
+  const rankedGrants = grants.map(grant => {
+    const { score, reasons } = calculateGHLPriorityScore(grant);
 
-  return rankedItems;
+    return {
+      type: 'grant',
+      title: `Grant: ${grant.name} (${grant.funder})`,
+      url: grant.url,
+      effort: 'Varies',
+      deadline: grant.deadline,
+      amount: grant.amount,
+      status: grant.status,
+      score,
+      reasons,
+      labels: ['grant', grant.status]
+    };
+  });
+
+  // Score GHL partners
+  const rankedPartners = partners.map(partner => {
+    const { score, reasons } = calculateGHLPriorityScore(partner);
+
+    const org = partner.organization ? ` (${partner.organization})` : '';
+
+    return {
+      type: 'partner',
+      title: `Partner check-in: ${partner.name}${org}`,
+      url: partner.url,
+      effort: '30m',
+      checkInDate: partner.checkInDate,
+      email: partner.email,
+      phone: partner.phone,
+      score,
+      reasons,
+      labels: ['partner-check-in']
+    };
+  });
+
+  // Combine and sort by score
+  const allItems = [...rankedGitHubItems, ...rankedGrants, ...rankedPartners];
+  allItems.sort((a, b) => b.score - a.score);
+
+  return allItems;
 }
 
 /**
@@ -338,6 +587,7 @@ function displayWorkQueue(queue, showAll = false) {
   }
 
   console.log('🎯 Smart Work Queue - Priority Ranked\n');
+  console.log('   Combines: GitHub Issues + Grant Deadlines + Partner Check-ins\n');
   console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
 
   const itemsToShow = showAll ? queue : queue.slice(0, 5);
@@ -348,19 +598,36 @@ function displayWorkQueue(queue, showAll = false) {
                        item.score >= 50 ? '⚡' :
                        item.score >= 30 ? '📌' : '💤';
 
-    console.log(`${rank}. ${scoreColor} #${item.number}: ${item.title}`);
+    // Different display for different types
+    if (item.type === 'github') {
+      console.log(`${rank}. ${scoreColor} #${item.number}: ${item.title}`);
+    } else if (item.type === 'grant') {
+      const daysUntil = getDaysUntil(item.deadline);
+      console.log(`${rank}. ${scoreColor} ${item.title}`);
+      console.log(`   💰 Amount: $${item.amount?.toLocaleString() || 'Unknown'}`);
+      console.log(`   📅 Deadline: ${item.deadline} (${daysUntil} days)`);
+    } else if (item.type === 'partner') {
+      const daysUntil = getDaysUntil(item.checkInDate);
+      console.log(`${rank}. ${scoreColor} ${item.title}`);
+      console.log(`   📅 Check-in: ${item.checkInDate} (${daysUntil} days)`);
+      if (item.email || item.phone) {
+        const contact = [item.email, item.phone].filter(Boolean).join(' | ');
+        console.log(`   📧 Contact: ${contact}`);
+      }
+    }
+
     console.log(`   Priority Score: ${item.score}/100`);
     console.log(`   Effort: ${item.effort}`);
 
-    if (item.labels.length > 0) {
+    if (item.labels && item.labels.length > 0) {
       console.log(`   Labels: ${item.labels.join(', ')}`);
     }
 
-    if (item.deps.blocks.length > 0) {
+    if (item.deps?.blocks?.length > 0) {
       console.log(`   🔗 Blocks: #${item.deps.blocks.join(', #')}`);
     }
 
-    if (item.deps.blockedBy.length > 0) {
+    if (item.deps?.blockedBy?.length > 0) {
       console.log(`   ⛔ Blocked by: #${item.deps.blockedBy.join(', #')}`);
     }
 
@@ -445,9 +712,15 @@ async function main() {
   if (queue.length > 0) {
     const avgScore = Math.round(queue.reduce((sum, item) => sum + item.score, 0) / queue.length);
     const highPriority = queue.filter(item => item.score >= 70).length;
+    const githubCount = queue.filter(item => item.type === 'github').length;
+    const grantCount = queue.filter(item => item.type === 'grant').length;
+    const partnerCount = queue.filter(item => item.type === 'partner').length;
 
     console.log('📊 Queue Summary:\n');
     console.log(`   Total items: ${queue.length}`);
+    console.log(`     GitHub Issues: ${githubCount}`);
+    console.log(`     Grants: ${grantCount}`);
+    console.log(`     Partner Check-ins: ${partnerCount}`);
     console.log(`   High priority (≥70): ${highPriority}`);
     console.log(`   Average score: ${avgScore}/100\n`);
   }

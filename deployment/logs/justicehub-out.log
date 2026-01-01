@@ -1,0 +1,788 @@
+2025-12-31T09:22:35: 
+2025-12-31T09:22:35: > justicehub-platform@1.0.0 dev
+2025-12-31T09:22:35: > next dev
+2025-12-31T09:22:35: 
+2025-12-31T09:22:36:   ▲ Next.js 14.2.33
+2025-12-31T09:22:36:   - Local:        http://localhost:3003
+2025-12-31T09:22:36:   - Environments: .env.local, .env.development
+2025-12-31T09:22:36: 
+2025-12-31T09:22:36:  ✓ Starting...
+2025-12-31T09:22:36:    automatically enabled Fast Refresh for 1 custom loader
+2025-12-31T09:22:37:  ✓ Ready in 1309ms
+2025-12-31T09:22:45:  ○ Compiling /src/middleware ...
+2025-12-31T09:22:45:  ✓ Compiled /src/middleware in 711ms (122 modules)
+2025-12-31T09:22:46:  ○ Compiling / ...
+2025-12-31T09:22:53:  ✓ Compiled / in 8.2s (806 modules)
+2025-12-31T09:22:54:  GET / 200 in 8913ms
+2025-12-31T09:22:54:  ✓ Compiled in 786ms (407 modules)
+2025-12-31T09:22:54: 🍪 Middleware cookies: 
+2025-12-31T09:22:54: 🍪 Middleware cookies: 
+2025-12-31T09:22:54: 🍪 Middleware cookies: 
+2025-12-31T09:22:54: 🍪 Middleware cookies: 
+2025-12-31T09:22:54: 🔐 Middleware auth check: No user (Auth session missing!)
+2025-12-31T09:22:55:  ○ Compiling /api/featured-profiles ...
+2025-12-31T09:22:55:  ✓ Compiled /api/featured-profiles in 797ms (420 modules)
+2025-12-31T09:22:55:  ✓ Compiled (462 modules)
+2025-12-31T09:22:56:  GET /api/featured-profiles 500 in 1164ms
+2025-12-31T09:22:56:  GET /api/auth/me 200 in 1187ms
+2025-12-31T09:22:56:  GET /api/auth/me 200 in 13ms
+2025-12-31T09:22:56:  GET /api/auth/me 200 in 14ms
+2025-12-31T09:22:56:  GET /api/auth/me 200 in 13ms
+2025-12-31T09:22:56: 🍪 Middleware cookies: 
+2025-12-31T09:22:56: 🍪 Middleware cookies: 
+2025-12-31T09:22:56: 🍪 Middleware cookies: 
+2025-12-31T09:22:56: 🍪 Middleware cookies: 
+2025-12-31T09:22:56: 🔐 Middleware auth check: No user (Auth session missing!)
+2025-12-31T09:22:56:  GET /api/featured-profiles 500 in 14ms
+2025-12-31T17:10:54:  ✓ Compiled in 1188ms (407 modules)
+2025-12-31T17:32:14:    Reload env: .env.local
+2025-12-31T17:32:15:  ✓ Compiled in 471ms (905 modules)
+2025-12-31T18:17:34:  ✓ Compiled in 327ms (407 modules)
+2025-12-31T18:18:24:  ✓ Compiled in 253ms (407 modules)
+2025-12-31T18:24:38:  ✓ Compiled in 325ms (407 modules)
+2025-12-31T18:28:15:  ✓ Compiled in 364ms (407 modules)
+2025-12-31T18:50:48:  ✓ Compiled in 347ms (407 modules)
+2025-12-31T18:55:47:    Reload env: .env.local
+2025-12-31T18:55:47:  ✓ Compiled in 173ms (905 modules)
+2025-12-31T19:04:13:    Reload env: .env.local
+2026-01-01T05:41:37: [?25h
+2026-01-01T05:41:37: 
+2026-01-01T05:41:37: 
+2026-01-01T05:41:37: > justicehub-platform@1.0.0 dev
+2026-01-01T05:41:37: > next dev
+2026-01-01T05:41:37: 
+2026-01-01T05:41:39:   ▲ Next.js 14.2.35
+2026-01-01T05:41:39:   - Local:        http://localhost:3003
+2026-01-01T05:41:39:   - Environments: .env.local, .env.development
+2026-01-01T05:41:39: 
+2026-01-01T05:41:39:  ✓ Starting...
+2026-01-01T05:41:40:    automatically enabled Fast Refresh for 1 custom loader
+2026-01-01T05:41:40:  ✓ Ready in 738ms
+2026-01-01T06:16:36: [?25h
+2026-01-01T06:16:36: 
+2026-01-01T06:16:37: 
+2026-01-01T06:16:37: > justicehub-platform@1.0.0 dev
+2026-01-01T06:16:37: > next dev
+2026-01-01T06:16:37: 
+2026-01-01T06:16:40:   ▲ Next.js 14.2.35
+2026-01-01T06:16:40:   - Local:        http://localhost:3003
+2026-01-01T06:16:40:   - Environments: .env.local, .env.development
+2026-01-01T06:16:40: 
+2026-01-01T06:16:40:  ✓ Starting...
+2026-01-01T06:16:40:    automatically enabled Fast Refresh for 1 custom loader
+2026-01-01T06:16:40:  ✓ Ready in 848ms
+2026-01-01T06:16:47:  ○ Compiling /src/middleware ...
+2026-01-01T06:16:47:  ✓ Compiled /src/middleware in 641ms (140 modules)
+2026-01-01T06:16:48:  ○ Compiling / ...
+2026-01-01T06:16:54:  ✓ Compiled / in 6.8s (858 modules)
+2026-01-01T06:16:55:  GET / 200 in 7363ms
+2026-01-01T06:16:55:  ✓ Compiled in 601ms (426 modules)
+2026-01-01T06:16:55: 🍪 Middleware cookies: 
+2026-01-01T06:16:55: 🍪 Middleware cookies: 
+2026-01-01T06:16:55: 🍪 Middleware cookies: 
+2026-01-01T06:16:55: 🔐 Middleware auth check: No user (Auth session missing!)
+2026-01-01T06:16:56:  ○ Compiling /api/featured-profiles ...
+2026-01-01T06:16:56:  ✓ Compiled /api/featured-profiles in 675ms (453 modules)
+2026-01-01T06:16:57:  ✓ Compiled (521 modules)
+2026-01-01T06:16:57:  GET /api/featured-profiles 500 in 1746ms
+2026-01-01T06:16:57:  GET /api/auth/me 200 in 1765ms
+2026-01-01T06:16:57:  GET /api/auth/me 200 in 24ms
+2026-01-01T06:16:57:  GET /api/auth/me 200 in 23ms
+2026-01-01T06:16:57: 🍪 Middleware cookies: 
+2026-01-01T06:16:57: 🍪 Middleware cookies: 
+2026-01-01T06:16:57: 🍪 Middleware cookies: 
+2026-01-01T06:16:57: 🔐 Middleware auth check: No user (Auth session missing!)
+2026-01-01T06:16:57:  GET /api/auth/me 200 in 21ms
+2026-01-01T06:16:57:  GET /api/featured-profiles 500 in 23ms
+2026-01-01T06:19:42: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T06:19:42: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T06:19:42: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T06:19:42: 🔐 Middleware auth check: No user (Auth session missing!)
+2026-01-01T06:19:43:  ✓ Compiled /intelligence in 400ms (1003 modules)
+2026-01-01T06:19:48:  GET /intelligence 200 in 5599ms
+2026-01-01T06:19:48:  ✓ Compiled /api/auth/me in 57ms (618 modules)
+2026-01-01T06:19:48:  GET /api/auth/me 200 in 105ms
+2026-01-01T06:19:48:  GET /api/auth/me 200 in 6ms
+2026-01-01T06:19:48:  GET /api/auth/me 200 in 5ms
+2026-01-01T06:19:48:  GET /api/auth/me 200 in 5ms
+2026-01-01T06:20:04: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T06:20:04: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T06:20:04: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T06:20:04: 🔐 Middleware auth check: No user (Auth session missing!)
+2026-01-01T06:20:04:  ✓ Compiled /intelligence/portfolio in 110ms (1039 modules)
+2026-01-01T06:20:04: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T06:20:04: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T06:20:04: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T06:20:04: 🔐 Middleware auth check: No user (Auth session missing!)
+2026-01-01T06:20:05: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T06:20:05: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T06:20:05: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T06:20:05: 🔐 Middleware auth check: No user (Auth session missing!)
+2026-01-01T06:20:05:  ✓ Compiled /intelligence/interventions in 93ms (1041 modules)
+2026-01-01T06:20:05: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T06:20:05: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T06:20:05: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T06:20:05: 🔐 Middleware auth check: No user (Auth session missing!)
+2026-01-01T06:20:14: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T06:20:14: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T06:20:14: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T06:20:14: 🔐 Middleware auth check: No user (Auth session missing!)
+2026-01-01T06:20:16:  GET /intelligence/interventions 200 in 1415ms
+2026-01-01T06:20:16:  GET /api/auth/me 200 in 8ms
+2026-01-01T06:20:16:  GET /api/auth/me 200 in 5ms
+2026-01-01T06:20:16:  GET /api/auth/me 200 in 4ms
+2026-01-01T06:20:16:  GET /api/auth/me 200 in 6ms
+2026-01-01T06:20:20: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T06:20:20: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T06:20:20: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T06:20:20: 🔐 Middleware auth check: No user (Auth session missing!)
+2026-01-01T06:20:21:  GET /intelligence/portfolio 200 in 1566ms
+2026-01-01T06:20:21:  GET /api/auth/me 200 in 7ms
+2026-01-01T06:20:22:  GET /api/auth/me 200 in 6ms
+2026-01-01T06:20:22:  GET /api/auth/me 200 in 6ms
+2026-01-01T06:20:22:  GET /api/auth/me 200 in 5ms
+2026-01-01T06:25:03:  ✓ Compiled in 855ms (1018 modules)
+2026-01-01T06:25:03: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T06:25:03: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T06:25:03: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T06:25:03: 🔐 Middleware auth check: No user (Auth session missing!)
+2026-01-01T06:25:32:  ✓ Compiled in 564ms (1032 modules)
+2026-01-01T06:25:32: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T06:25:32: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T06:25:32: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T06:25:32: 🔐 Middleware auth check: No user (Auth session missing!)
+2026-01-01T06:27:59:  ✓ Compiled in 1235ms (429 modules)
+2026-01-01T06:27:59: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T06:27:59: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T06:27:59: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T06:27:59: 🔐 Middleware auth check: No user (Auth session missing!)
+2026-01-01T06:29:17:  ✓ Compiled in 793ms (1038 modules)
+2026-01-01T06:29:17: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T06:29:17: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T06:29:17: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T06:29:17: 🔐 Middleware auth check: No user (Auth session missing!)
+2026-01-01T06:30:09:  ✓ Compiled in 442ms (1038 modules)
+2026-01-01T06:30:09: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T06:30:09: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T06:30:09: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T06:30:09: 🔐 Middleware auth check: No user (Auth session missing!)
+2026-01-01T06:32:34:  ✓ Compiled in 858ms (1038 modules)
+2026-01-01T06:32:34: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T06:32:34: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T06:32:34: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T06:32:34: 🔐 Middleware auth check: No user (Auth session missing!)
+2026-01-01T06:34:05:  ✓ Compiled in 631ms (429 modules)
+2026-01-01T06:34:05: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T06:34:05: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T06:34:05: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T06:34:05: 🔐 Middleware auth check: No user (Auth session missing!)
+2026-01-01T06:36:30:  ✓ Compiled in 534ms (429 modules)
+2026-01-01T06:36:30: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T06:36:30: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T06:36:30: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T06:36:30: 🔐 Middleware auth check: No user (Auth session missing!)
+2026-01-01T06:37:27:  ✓ Compiled in 447ms (429 modules)
+2026-01-01T06:37:27: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T06:37:27: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T06:37:27: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T06:37:27: 🔐 Middleware auth check: No user (Auth session missing!)
+2026-01-01T06:39:09:  ✓ Compiled in 722ms (1038 modules)
+2026-01-01T06:39:09: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T06:39:09: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T06:39:09: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T06:39:09: 🔐 Middleware auth check: No user (Auth session missing!)
+2026-01-01T06:44:09: [?25h
+2026-01-01T06:44:09: 
+2026-01-01T06:44:12: 
+2026-01-01T06:44:12: > justicehub-platform@1.0.0 dev
+2026-01-01T06:44:12: > next dev
+2026-01-01T06:44:12: 
+2026-01-01T06:44:12:   ▲ Next.js 14.2.35
+2026-01-01T06:44:12:   - Local:        http://localhost:3003
+2026-01-01T06:44:12:   - Environments: .env.local, .env.development
+2026-01-01T06:44:12: 
+2026-01-01T06:44:12:  ✓ Starting...
+2026-01-01T06:44:13:    automatically enabled Fast Refresh for 1 custom loader
+2026-01-01T06:44:13:  ✓ Ready in 892ms
+2026-01-01T06:44:20:  ✓ Compiled /src/middleware in 158ms (140 modules)
+2026-01-01T06:44:21:  ○ Compiling / ...
+2026-01-01T06:44:27:  ✓ Compiled / in 6.8s (849 modules)
+2026-01-01T06:44:27:  GET / 200 in 7258ms
+2026-01-01T06:44:28:  ✓ Compiled in 425ms (426 modules)
+2026-01-01T06:44:28: 🍪 Middleware cookies: 
+2026-01-01T06:44:28: 🍪 Middleware cookies: 
+2026-01-01T06:44:28: 🍪 Middleware cookies: 
+2026-01-01T06:44:28: 🔐 Middleware auth check: No user (Auth session missing!)
+2026-01-01T06:44:28:  ○ Compiling /api/featured-profiles ...
+2026-01-01T06:44:28:  ✓ Compiled /api/featured-profiles in 509ms (453 modules)
+2026-01-01T06:44:29:  ✓ Compiled (521 modules)
+2026-01-01T06:44:29:  GET /api/auth/me 200 in 808ms
+2026-01-01T06:44:29:  GET /api/featured-profiles 500 in 810ms
+2026-01-01T06:44:29:  GET /api/auth/me 200 in 6ms
+2026-01-01T06:44:29:  GET /api/auth/me 200 in 6ms
+2026-01-01T06:44:29:  GET /api/auth/me 200 in 6ms
+2026-01-01T06:44:29: 🍪 Middleware cookies: 
+2026-01-01T06:44:29: 🍪 Middleware cookies: 
+2026-01-01T06:44:29: 🍪 Middleware cookies: 
+2026-01-01T06:44:29: 🔐 Middleware auth check: No user (Auth session missing!)
+2026-01-01T06:44:29:  GET /api/featured-profiles 500 in 5ms
+2026-01-01T06:45:24:  ✓ Compiled in 348ms (426 modules)
+2026-01-01T06:45:31:  GET / 200 in 75ms
+2026-01-01T06:45:31:  GET / 200 in 16ms
+2026-01-01T06:45:31:  GET /api/auth/me 200 in 10ms
+2026-01-01T06:45:31:  GET /api/auth/me 200 in 5ms
+2026-01-01T06:45:31:  GET /api/auth/me 200 in 5ms
+2026-01-01T06:45:31:  GET /api/auth/me 200 in 5ms
+2026-01-01T06:45:31: 🍪 Middleware cookies: 
+2026-01-01T06:45:31: 🍪 Middleware cookies: 
+2026-01-01T06:45:31: 🍪 Middleware cookies: 
+2026-01-01T06:45:31: 🔐 Middleware auth check: No user (Auth session missing!)
+2026-01-01T06:45:31:  GET /api/featured-profiles 500 in 6ms
+2026-01-01T06:45:31: 🍪 Middleware cookies: 
+2026-01-01T06:45:31: 🍪 Middleware cookies: 
+2026-01-01T06:45:31: 🍪 Middleware cookies: 
+2026-01-01T06:45:31: 🔐 Middleware auth check: No user (Auth session missing!)
+2026-01-01T06:45:31:  GET /api/featured-profiles 500 in 5ms
+2026-01-01T06:46:05: 🍪 Middleware cookies: 
+2026-01-01T06:46:05: 🍪 Middleware cookies: 
+2026-01-01T06:46:05: 🍪 Middleware cookies: 
+2026-01-01T06:46:05: 🔐 Middleware auth check: No user (Auth session missing!)
+2026-01-01T06:46:05:  ✓ Compiled /intelligence in 338ms (1045 modules)
+2026-01-01T06:46:05: 🍪 Middleware cookies: 
+2026-01-01T06:46:05: 🍪 Middleware cookies: 
+2026-01-01T06:46:05: 🍪 Middleware cookies: 
+2026-01-01T06:46:05: 🔐 Middleware auth check: No user (Auth session missing!)
+2026-01-01T06:46:25: 🍪 Middleware cookies: 
+2026-01-01T06:46:25: 🍪 Middleware cookies: 
+2026-01-01T06:46:25: 🍪 Middleware cookies: 
+2026-01-01T06:46:25: 🔐 Middleware auth check: No user (Auth session missing!)
+2026-01-01T06:46:26:  ✓ Compiled /intelligence/portfolio in 151ms (1053 modules)
+2026-01-01T06:46:26: 🍪 Middleware cookies: 
+2026-01-01T06:46:26: 🍪 Middleware cookies: 
+2026-01-01T06:46:26: 🍪 Middleware cookies: 
+2026-01-01T06:46:26: 🔐 Middleware auth check: No user (Auth session missing!)
+2026-01-01T06:47:16:  ✓ Compiled in 393ms (1035 modules)
+2026-01-01T06:47:16: 🍪 Middleware cookies: 
+2026-01-01T06:47:16: 🍪 Middleware cookies: 
+2026-01-01T06:47:16: 🍪 Middleware cookies: 
+2026-01-01T06:47:16: 🔐 Middleware auth check: No user (Auth session missing!)
+2026-01-01T06:47:30: 🍪 Middleware cookies: 
+2026-01-01T06:47:30: 🍪 Middleware cookies: 
+2026-01-01T06:47:30: 🍪 Middleware cookies: 
+2026-01-01T06:47:30: 🔐 Middleware auth check: No user (Auth session missing!)
+2026-01-01T06:47:32:  GET /intelligence/portfolio 200 in 1526ms
+2026-01-01T06:47:32:  ✓ Compiled /api/auth/me in 96ms (635 modules)
+2026-01-01T06:47:32:  GET /api/auth/me 200 in 144ms
+2026-01-01T06:47:32:  GET /api/auth/me 200 in 6ms
+2026-01-01T06:47:32:  GET /api/auth/me 200 in 6ms
+2026-01-01T06:47:32:  GET /api/auth/me 200 in 4ms
+2026-01-01T06:47:36: 🍪 Middleware cookies: 
+2026-01-01T06:47:36: 🍪 Middleware cookies: 
+2026-01-01T06:47:36: 🍪 Middleware cookies: 
+2026-01-01T06:47:36: 🔐 Middleware auth check: No user (Auth session missing!)
+2026-01-01T06:47:36: 🍪 Middleware cookies: 
+2026-01-01T06:47:36: 🍪 Middleware cookies: 
+2026-01-01T06:47:36: 🍪 Middleware cookies: 
+2026-01-01T06:47:36: 🔐 Middleware auth check: No user (Auth session missing!)
+2026-01-01T06:47:43: 🍪 Middleware cookies: 
+2026-01-01T06:47:43: 🍪 Middleware cookies: 
+2026-01-01T06:47:43: 🍪 Middleware cookies: 
+2026-01-01T06:47:43: 🔐 Middleware auth check: No user (Auth session missing!)
+2026-01-01T06:47:43:  ✓ Compiled /intelligence/interventions in 107ms (1051 modules)
+2026-01-01T06:47:43: 🍪 Middleware cookies: 
+2026-01-01T06:47:43: 🍪 Middleware cookies: 
+2026-01-01T06:47:43: 🍪 Middleware cookies: 
+2026-01-01T06:47:43: 🔐 Middleware auth check: No user (Auth session missing!)
+2026-01-01T09:59:17:    Reload env: .env.local
+2026-01-01T09:59:18:  ✓ Compiled in 789ms (1163 modules)
+2026-01-01T19:18:33:  ✓ Compiled in 861ms (428 modules)
+2026-01-01T19:18:44:  ✓ Compiled in 355ms (428 modules)
+2026-01-01T19:19:53:  ✓ Compiled in 602ms (1037 modules)
+2026-01-01T19:19:53:  ✓ Compiled in 304ms (1037 modules)
+2026-01-01T19:20:10:  ✓ Compiled in 341ms (428 modules)
+2026-01-01T20:31:13:  ✓ Compiled in 527ms (428 modules)
+2026-01-01T20:31:29:  ✓ Compiled in 1873ms (428 modules)
+2026-01-01T20:53:46:  ✓ Compiled in 531ms (428 modules)
+2026-01-01T20:55:24:  ✓ Compiled in 1002ms (1163 modules)
+2026-01-01T20:59:54:  ✓ Compiled in 593ms (428 modules)
+2026-01-01T21:00:38:  ✓ Compiled in 621ms (428 modules)
+2026-01-01T21:05:08:  ✓ Compiled in 807ms (1163 modules)
+2026-01-01T21:10:27: [?25h
+2026-01-01T21:10:27: 
+2026-01-01T21:10:30: 
+2026-01-01T21:10:30: > justicehub-platform@1.0.0 dev
+2026-01-01T21:10:30: > next dev
+2026-01-01T21:10:30: 
+2026-01-01T21:10:36:   ▲ Next.js 14.2.35
+2026-01-01T21:10:36:   - Local:        http://localhost:3003
+2026-01-01T21:10:36:   - Environments: .env.local
+2026-01-01T21:10:36: 
+2026-01-01T21:10:36:  ✓ Starting...
+2026-01-01T21:10:40:    automatically enabled Fast Refresh for 1 custom loader
+2026-01-01T21:10:41:  ✓ Ready in 5.9s
+2026-01-01T21:10:47:  ✓ Compiled /src/middleware in 354ms (140 modules)
+2026-01-01T21:10:48:  ○ Compiling / ...
+2026-01-01T21:10:57:  ✓ Compiled / in 9.2s (849 modules)
+2026-01-01T21:10:58:  GET / 200 in 10278ms
+2026-01-01T21:10:58:  ✓ Compiled in 1186ms (426 modules)
+2026-01-01T21:11:00: 🍪 Middleware cookies: 
+2026-01-01T21:11:00: 🍪 Middleware cookies: 
+2026-01-01T21:11:00: 🍪 Middleware cookies: 
+2026-01-01T21:11:00: 🔐 Middleware auth check: No user (Auth session missing!)
+2026-01-01T21:11:00:  ○ Compiling /api/featured-profiles ...
+2026-01-01T21:11:01:  ✓ Compiled /api/featured-profiles in 1547ms (453 modules)
+2026-01-01T21:11:01:  ✓ Compiled (521 modules)
+2026-01-01T21:11:02:  GET /api/featured-profiles 500 in 2012ms
+2026-01-01T21:11:02:  GET /api/auth/me 200 in 2056ms
+2026-01-01T21:11:02:  GET /api/auth/me 200 in 11ms
+2026-01-01T21:11:02:  GET /api/auth/me 200 in 9ms
+2026-01-01T21:11:02:  GET /api/auth/me 200 in 14ms
+2026-01-01T21:11:02: 🍪 Middleware cookies: 
+2026-01-01T21:11:02: 🍪 Middleware cookies: 
+2026-01-01T21:11:02: 🍪 Middleware cookies: 
+2026-01-01T21:11:02: 🔐 Middleware auth check: No user (Auth session missing!)
+2026-01-01T21:11:02:  GET /api/featured-profiles 500 in 13ms
+2026-01-01T21:11:26:  ○ Compiling /stories/the-pattern ...
+2026-01-01T21:11:33:  ✓ Compiled /stories/the-pattern in 7.9s (953 modules)
+2026-01-01T21:11:33:  GET /stories/the-pattern 500 in 8113ms
+2026-01-01T21:11:41:  ✓ Compiled /_not-found in 297ms (956 modules)
+2026-01-01T21:11:41:  GET /.well-known/appspecific/com.chrome.devtools.json 404 in 438ms
+2026-01-01T21:11:41:  GET /stories/the-pattern 500 in 91ms
+2026-01-01T21:11:41:  GET /.well-known/appspecific/com.chrome.devtools.json 404 in 18ms
+2026-01-01T21:11:55:  ○ Compiling /stories/intelligence ...
+2026-01-01T21:11:58:    automatically enabled Fast Refresh for 1 custom loader
+2026-01-01T21:12:03:  GET /stories/intelligence 500 in 7975ms
+2026-01-01T21:12:03:  GET / 500 in 118ms
+2026-01-01T21:12:03:  GET /stories/the-pattern 500 in 124ms
+2026-01-01T21:12:03:  GET /.well-known/appspecific/com.chrome.devtools.json 500 in 31ms
+2026-01-01T21:12:07:  GET /.well-known/appspecific/com.chrome.devtools.json 500 in 13ms
+2026-01-01T21:12:42:  GET /stories/intelligence 500 in 22ms
+2026-01-01T21:13:02:  ✓ Compiled /_error in 2s (2350 modules)
+2026-01-01T21:13:03:  GET /_next/static/webpack/3b5f39ba2b0fb583.webpack.hot-update.json 404 in 867ms
+2026-01-01T21:13:03:  GET /_next/static/webpack/3b5f39ba2b0fb583.webpack.hot-update.json 404 in 862ms
+2026-01-01T21:13:03:  GET /_next/static/webpack/3b5f39ba2b0fb583.webpack.hot-update.json 404 in 88ms
+2026-01-01T21:13:03:  GET / 200 in 483ms
+2026-01-01T21:13:03:  GET /stories/intelligence 200 in 476ms
+2026-01-01T21:13:03:  GET /stories/the-pattern 500 in 356ms
+2026-01-01T21:13:03:  GET /.well-known/appspecific/com.chrome.devtools.json 404 in 135ms
+2026-01-01T21:13:03:  GET /.well-known/appspecific/com.chrome.devtools.json 404 in 34ms
+2026-01-01T21:13:05: 🍪 Middleware cookies: 
+2026-01-01T21:13:05: 🍪 Middleware cookies: 
+2026-01-01T21:13:05: 🍪 Middleware cookies: 
+2026-01-01T21:13:05: 🔐 Middleware auth check: No user (Auth session missing!)
+2026-01-01T21:13:05:  ✓ Compiled /api/featured-profiles in 409ms (1186 modules)
+2026-01-01T21:13:05:  ✓ Compiled (1190 modules)
+2026-01-01T21:13:05:  GET /api/auth/me 200 in 644ms
+2026-01-01T21:13:05:  GET /api/auth/me 200 in 235ms
+2026-01-01T21:13:05:  GET /api/featured-profiles 500 in 615ms
+2026-01-01T21:13:05: 🍪 Middleware cookies: 
+2026-01-01T21:13:05: 🍪 Middleware cookies: 
+2026-01-01T21:13:05: 🍪 Middleware cookies: 
+2026-01-01T21:13:05: 🔐 Middleware auth check: No user (Auth session missing!)
+2026-01-01T21:13:05:  GET /api/auth/me 200 in 16ms
+2026-01-01T21:13:05:  GET /api/auth/me 200 in 24ms
+2026-01-01T21:13:05:  GET /api/featured-profiles 500 in 23ms
+2026-01-01T21:13:05:  GET /api/auth/me 200 in 18ms
+2026-01-01T21:13:05:  GET /api/auth/me 200 in 18ms
+2026-01-01T21:13:05:  GET /api/auth/me 200 in 15ms
+2026-01-01T21:13:05:  GET /api/auth/me 200 in 14ms
+2026-01-01T21:13:35:  GET /stories/intelligence 200 in 174ms
+2026-01-01T21:13:35:  GET /.well-known/appspecific/com.chrome.devtools.json 404 in 31ms
+2026-01-01T21:13:36:  GET /api/auth/me 200 in 17ms
+2026-01-01T21:13:36:  GET /api/auth/me 200 in 17ms
+2026-01-01T21:13:36:  GET /api/auth/me 200 in 16ms
+2026-01-01T21:13:36:  GET /api/auth/me 200 in 19ms
+2026-01-01T21:13:46:  GET /stories/intelligence 200 in 28ms
+2026-01-01T21:14:10:  GET /stories/intelligence 200 in 81ms
+2026-01-01T21:14:11:  GET /api/auth/me 200 in 42ms
+2026-01-01T21:14:11:  GET /api/auth/me 200 in 55ms
+2026-01-01T21:14:11:  GET /api/auth/me 200 in 65ms
+2026-01-01T21:14:11:  GET /api/auth/me 200 in 79ms
+2026-01-01T21:14:17:  GET /.well-known/appspecific/com.chrome.devtools.json 404 in 30ms
+2026-01-01T21:14:25:  GET /stories/intelligence 200 in 56ms
+2026-01-01T21:14:25:  GET /api/auth/me 200 in 25ms
+2026-01-01T21:14:25:  GET /api/auth/me 200 in 53ms
+2026-01-01T21:14:25:  GET /api/auth/me 200 in 93ms
+2026-01-01T21:14:25:  GET /api/auth/me 200 in 83ms
+2026-01-01T21:15:33:  ✓ Compiled in 2.4s (2256 modules)
+2026-01-01T21:15:33:  ✓ Compiled in 0ms (1052 modules)
+2026-01-01T21:15:33:  ✓ Compiled in 1ms (1052 modules)
+2026-01-01T21:15:33:  ✓ Compiled in 0ms (1052 modules)
+2026-01-01T21:15:34:  GET /stories/intelligence 200 in 1114ms
+2026-01-01T21:15:34:  GET /stories/the-pattern 500 in 912ms
+2026-01-01T21:15:35:  ○ Compiling /_not-found ...
+2026-01-01T21:15:35:  ✓ Compiled /_not-found in 771ms (2245 modules)
+2026-01-01T21:15:35:  GET /.well-known/appspecific/com.chrome.devtools.json 404 in 1072ms
+2026-01-01T21:15:35:  GET /stories/intelligence 200 in 1251ms
+2026-01-01T21:15:35:  GET /stories/the-pattern 500 in 743ms
+2026-01-01T21:15:35:  GET /.well-known/appspecific/com.chrome.devtools.json 404 in 65ms
+2026-01-01T21:15:35:  GET /stories/intelligence 200 in 168ms
+2026-01-01T21:15:36:  GET /.well-known/appspecific/com.chrome.devtools.json 404 in 182ms
+2026-01-01T21:15:36:  ○ Compiling /api/auth/me ...
+2026-01-01T21:15:36:  ✓ Compiled /api/auth/me in 610ms (2275 modules)
+2026-01-01T21:15:37:  GET /.well-known/appspecific/com.chrome.devtools.json 404 in 666ms
+2026-01-01T21:15:37:  GET /api/auth/me 200 in 1087ms
+2026-01-01T21:15:37:  GET /stories/the-pattern 500 in 733ms
+2026-01-01T21:15:37:  GET /api/auth/me 200 in 86ms
+2026-01-01T21:15:37:  GET /.well-known/appspecific/com.chrome.devtools.json 404 in 50ms
+2026-01-01T21:15:37:  GET /api/auth/me 200 in 81ms
+2026-01-01T21:15:37:  GET /api/auth/me 200 in 33ms
+2026-01-01T21:15:37:  GET /api/auth/me 200 in 36ms
+2026-01-01T21:15:37:  GET /api/auth/me 200 in 17ms
+2026-01-01T21:15:37:  GET /api/auth/me 200 in 21ms
+2026-01-01T21:15:37:  GET /api/auth/me 200 in 27ms
+2026-01-01T21:15:37:  GET /api/auth/me 200 in 15ms
+2026-01-01T21:16:01:  ✓ Compiled in 2.1s (2289 modules)
+2026-01-01T21:16:01:  ✓ Compiled in 0ms (1083 modules)
+2026-01-01T21:16:01:  ✓ Compiled in 0ms (1083 modules)
+2026-01-01T21:16:02:  ✓ Compiled in 0ms (1083 modules)
+2026-01-01T21:16:02:  GET /stories/intelligence 200 in 1282ms
+2026-01-01T21:16:02:  GET /stories/the-pattern 500 in 957ms
+2026-01-01T21:16:03:  ✓ Compiled in 490ms (2275 modules)
+2026-01-01T21:16:03:  GET /.well-known/appspecific/com.chrome.devtools.json 404 in 849ms
+2026-01-01T21:16:03:  GET /stories/intelligence 200 in 1083ms
+2026-01-01T21:16:03:  GET /stories/the-pattern 500 in 653ms
+2026-01-01T21:16:03:  GET /.well-known/appspecific/com.chrome.devtools.json 404 in 77ms
+2026-01-01T21:16:03:  GET /stories/intelligence 200 in 220ms
+2026-01-01T21:16:04:  GET /.well-known/appspecific/com.chrome.devtools.json 404 in 160ms
+2026-01-01T21:16:04:  GET /api/auth/me 200 in 56ms
+2026-01-01T21:16:04:  GET /.well-known/appspecific/com.chrome.devtools.json 404 in 29ms
+2026-01-01T21:16:04:  GET /api/auth/me 200 in 10ms
+2026-01-01T21:16:04:  GET /api/auth/me 200 in 51ms
+2026-01-01T21:16:04:  GET /api/auth/me 200 in 18ms
+2026-01-01T21:16:05:  GET /api/auth/me 200 in 17ms
+2026-01-01T21:16:05:  GET /api/auth/me 200 in 15ms
+2026-01-01T21:16:05:  GET /api/auth/me 200 in 19ms
+2026-01-01T21:16:05:  GET /api/auth/me 200 in 17ms
+2026-01-01T21:16:05:  GET /api/auth/me 200 in 19ms
+2026-01-01T21:16:05:  GET /api/auth/me 200 in 17ms
+2026-01-01T21:16:05:  GET /api/auth/me 200 in 17ms
+2026-01-01T21:16:05:  GET /api/auth/me 200 in 19ms
+2026-01-01T21:16:18:  ✓ Compiled in 2.2s (2289 modules)
+2026-01-01T21:16:18:  ✓ Compiled in 0ms (1083 modules)
+2026-01-01T21:16:18:  ✓ Compiled in 1ms (1083 modules)
+2026-01-01T21:16:18:  ✓ Compiled in 1ms (1083 modules)
+2026-01-01T21:16:18:  GET /stories/intelligence 200 in 676ms
+2026-01-01T21:16:18:  GET /stories/the-pattern 500 in 543ms
+2026-01-01T21:16:20:  ✓ Compiled in 955ms (2275 modules)
+2026-01-01T21:16:20:  GET /.well-known/appspecific/com.chrome.devtools.json 404 in 1358ms
+2026-01-01T21:16:20:  GET /stories/intelligence 200 in 1570ms
+2026-01-01T21:16:20:  GET /stories/the-pattern 500 in 678ms
+2026-01-01T21:16:20:  GET /.well-known/appspecific/com.chrome.devtools.json 404 in 91ms
+2026-01-01T21:16:20:  GET /stories/intelligence 200 in 190ms
+2026-01-01T21:16:20:  GET /.well-known/appspecific/com.chrome.devtools.json 404 in 83ms
+2026-01-01T21:16:21:  GET /.well-known/appspecific/com.chrome.devtools.json 404 in 50ms
+2026-01-01T21:16:21:  GET /api/auth/me 200 in 67ms
+2026-01-01T21:16:21:  GET /api/auth/me 200 in 25ms
+2026-01-01T21:16:21:  GET /api/auth/me 200 in 28ms
+2026-01-01T21:16:21:  GET /api/auth/me 200 in 28ms
+2026-01-01T21:16:22:  GET /api/auth/me 200 in 32ms
+2026-01-01T21:16:22:  GET /api/auth/me 200 in 29ms
+2026-01-01T21:16:22:  GET /api/auth/me 200 in 20ms
+2026-01-01T21:16:22:  GET /api/auth/me 200 in 20ms
+2026-01-01T21:16:22:  GET /api/auth/me 200 in 18ms
+2026-01-01T21:16:22:  GET /api/auth/me 200 in 22ms
+2026-01-01T21:16:22:  GET /api/auth/me 200 in 23ms
+2026-01-01T21:16:22:  GET /api/auth/me 200 in 23ms
+2026-01-01T21:17:36:  GET /stories/intelligence 200 in 321ms
+2026-01-01T21:17:37:  GET /api/auth/me 200 in 51ms
+2026-01-01T21:17:37:  GET /api/auth/me 200 in 57ms
+2026-01-01T21:17:37:  GET /api/auth/me 200 in 72ms
+2026-01-01T21:17:37:  GET /api/auth/me 200 in 31ms
+2026-01-01T21:17:46:  GET /.well-known/appspecific/com.chrome.devtools.json 404 in 18ms
+2026-01-01T21:19:08:  ✓ Compiled in 2s (2256 modules)
+2026-01-01T21:19:08:  GET /stories/intelligence 200 in 325ms
+2026-01-01T21:19:08:  GET /stories/the-pattern 500 in 340ms
+2026-01-01T21:19:08:  GET /stories/intelligence 200 in 82ms
+2026-01-01T21:19:09:  GET /stories/intelligence 200 in 262ms
+2026-01-01T21:19:09:  ○ Compiling /_not-found ...
+2026-01-01T21:19:09:  ✓ Compiled /_not-found in 630ms (2245 modules)
+2026-01-01T21:19:09:  GET /.well-known/appspecific/com.chrome.devtools.json 404 in 938ms
+2026-01-01T21:19:09:  GET /stories/intelligence 200 in 770ms
+2026-01-01T21:19:09:  GET /.well-known/appspecific/com.chrome.devtools.json 404 in 63ms
+2026-01-01T21:19:10:  GET /.well-known/appspecific/com.chrome.devtools.json 404 in 58ms
+2026-01-01T21:19:10:  GET /.well-known/appspecific/com.chrome.devtools.json 404 in 50ms
+2026-01-01T21:19:10:  ✓ Compiled /api/auth/me in 275ms (1083 modules)
+2026-01-01T21:19:10:  GET /api/auth/me 200 in 452ms
+2026-01-01T21:19:10:  GET /api/auth/me 200 in 30ms
+2026-01-01T21:19:10:  GET /api/auth/me 200 in 31ms
+2026-01-01T21:19:10:  GET /api/auth/me 200 in 42ms
+2026-01-01T21:19:10:  GET /api/auth/me 200 in 32ms
+2026-01-01T21:19:10:  GET /api/auth/me 200 in 21ms
+2026-01-01T21:19:10:  GET /api/auth/me 200 in 21ms
+2026-01-01T21:19:10:  GET /api/auth/me 200 in 17ms
+2026-01-01T21:19:10:  GET /api/auth/me 200 in 16ms
+2026-01-01T21:19:10:  GET /api/auth/me 200 in 15ms
+2026-01-01T21:19:10:  GET /api/auth/me 200 in 16ms
+2026-01-01T21:19:10:  GET /api/auth/me 200 in 15ms
+2026-01-01T21:19:11:  GET /api/auth/me 200 in 14ms
+2026-01-01T21:19:11:  GET /api/auth/me 200 in 14ms
+2026-01-01T21:19:11:  GET /api/auth/me 200 in 14ms
+2026-01-01T21:19:11:  GET /api/auth/me 200 in 15ms
+2026-01-01T21:19:20:  ✓ Compiled in 1621ms (2289 modules)
+2026-01-01T21:19:20:  ✓ Compiled in 0ms (1083 modules)
+2026-01-01T21:19:20:  ✓ Compiled in 0ms (1083 modules)
+2026-01-01T21:19:20:  ✓ Compiled in 0ms (1083 modules)
+2026-01-01T21:19:20:  GET /stories/intelligence 200 in 990ms
+2026-01-01T21:19:21:  GET /stories/the-pattern 500 in 768ms
+2026-01-01T21:19:21:  ✓ Compiled in 613ms (2275 modules)
+2026-01-01T21:19:22:  GET /.well-known/appspecific/com.chrome.devtools.json 404 in 979ms
+2026-01-01T21:19:22:  GET /stories/intelligence 200 in 1108ms
+2026-01-01T21:19:22:  GET /stories/the-pattern 500 in 522ms
+2026-01-01T21:19:22:  GET /.well-known/appspecific/com.chrome.devtools.json 404 in 44ms
+2026-01-01T21:19:22:  GET /stories/intelligence 200 in 105ms
+2026-01-01T21:19:22:  GET /.well-known/appspecific/com.chrome.devtools.json 404 in 46ms
+2026-01-01T21:19:22:  GET /stories/intelligence 200 in 179ms
+2026-01-01T21:19:22:  GET /.well-known/appspecific/com.chrome.devtools.json 404 in 88ms
+2026-01-01T21:19:22:  GET /api/auth/me 200 in 46ms
+2026-01-01T21:19:22:  GET /.well-known/appspecific/com.chrome.devtools.json 404 in 39ms
+2026-01-01T21:19:22:  GET /api/auth/me 200 in 34ms
+2026-01-01T21:19:22:  GET /api/auth/me 200 in 24ms
+2026-01-01T21:19:22:  GET /api/auth/me 200 in 20ms
+2026-01-01T21:19:23:  GET /api/auth/me 200 in 27ms
+2026-01-01T21:19:23:  GET /api/auth/me 200 in 20ms
+2026-01-01T21:19:23:  GET /api/auth/me 200 in 25ms
+2026-01-01T21:19:23:  GET /api/auth/me 200 in 23ms
+2026-01-01T21:19:23:  GET /api/auth/me 200 in 19ms
+2026-01-01T21:19:23:  GET /api/auth/me 200 in 19ms
+2026-01-01T21:19:23:  GET /api/auth/me 200 in 31ms
+2026-01-01T21:19:23:  GET /api/auth/me 200 in 27ms
+2026-01-01T21:19:23:  GET /api/auth/me 200 in 27ms
+2026-01-01T21:19:23:  GET /api/auth/me 200 in 24ms
+2026-01-01T21:19:23:  GET /api/auth/me 200 in 20ms
+2026-01-01T21:19:23:  GET /api/auth/me 200 in 24ms
+2026-01-01T21:20:41:  GET /stories/intelligence 200 in 150ms
+2026-01-01T21:20:55: [?25h
+2026-01-01T21:20:55: 
+2026-01-01T21:20:56: 
+2026-01-01T21:20:56: > justicehub-platform@1.0.0 dev
+2026-01-01T21:20:56: > next dev
+2026-01-01T21:20:56: 
+2026-01-01T21:20:57:   ▲ Next.js 14.2.35
+2026-01-01T21:20:57:   - Local:        http://localhost:3003
+2026-01-01T21:20:57:   - Environments: .env.local
+2026-01-01T21:20:57: 
+2026-01-01T21:20:57:  ✓ Starting...
+2026-01-01T21:21:01:    automatically enabled Fast Refresh for 1 custom loader
+2026-01-01T21:21:02:  ✓ Ready in 5.8s
+2026-01-01T21:21:14:  ✓ Compiled /src/middleware in 261ms (140 modules)
+2026-01-01T21:21:15:  ○ Compiling /stories/intelligence ...
+2026-01-01T21:21:37:  ✓ Compiled /stories/intelligence in 22.8s (1933 modules)
+2026-01-01T21:21:38:  GET /stories/intelligence 200 in 24172ms
+2026-01-01T21:21:39:  ✓ Compiled in 1423ms (964 modules)
+2026-01-01T21:21:40:  ○ Compiling /api/auth/me ...
+2026-01-01T21:21:43:  ✓ Compiled /api/auth/me in 4.1s (990 modules)
+2026-01-01T21:22:20:  ✓ Compiled /_not-found in 425ms (1943 modules)
+2026-01-01T21:22:20:  GET /.well-known/appspecific/com.chrome.devtools.json 404 in 577ms
+2026-01-01T21:22:20:  GET /stories/intelligence 200 in 173ms
+2026-01-01T21:22:21:  GET /.well-known/appspecific/com.chrome.devtools.json 404 in 25ms
+2026-01-01T21:22:21:  GET /api/auth/me 200 in 37ms
+2026-01-01T21:22:21:  GET /api/auth/me 200 in 20ms
+2026-01-01T21:22:21:  GET /api/auth/me 200 in 17ms
+2026-01-01T21:22:21:  GET /api/auth/me 200 in 28ms
+2026-01-01T21:26:15: [?25h
+2026-01-01T21:26:15: 
+2026-01-01T21:26:15: 
+2026-01-01T21:26:15: > justicehub-platform@1.0.0 dev
+2026-01-01T21:26:15: > next dev
+2026-01-01T21:26:15: 
+2026-01-01T21:26:17:   ▲ Next.js 14.2.35
+2026-01-01T21:26:17:   - Local:        http://localhost:3003
+2026-01-01T21:26:17:   - Environments: .env.local
+2026-01-01T21:26:17: 
+2026-01-01T21:26:17:  ✓ Starting...
+2026-01-01T21:26:21:    automatically enabled Fast Refresh for 1 custom loader
+2026-01-01T21:26:22:  ✓ Ready in 5.3s
+2026-01-01T21:26:27:  ✓ Compiled /src/middleware in 329ms (140 modules)
+2026-01-01T21:26:28:  ○ Compiling /stories/intelligence ...
+2026-01-01T21:26:42:  ✓ Compiled /stories/intelligence in 14.5s (1933 modules)
+2026-01-01T21:26:43:  GET /stories/intelligence 200 in 15170ms
+2026-01-01T21:26:43:  ✓ Compiled in 719ms (964 modules)
+2026-01-01T21:26:43:  ✓ Compiled /api/auth/me in 165ms (990 modules)
+2026-01-01T21:26:43:  GET /api/auth/me 200 in 258ms
+2026-01-01T21:26:43:  GET /api/auth/me 200 in 15ms
+2026-01-01T21:26:43:  GET /api/auth/me 200 in 8ms
+2026-01-01T21:26:43:  GET /api/auth/me 200 in 8ms
+2026-01-01T21:26:55:  ✓ Compiled /_not-found in 267ms (1943 modules)
+2026-01-01T21:26:55:  GET /.well-known/appspecific/com.chrome.devtools.json 404 in 365ms
+2026-01-01T21:26:55:  GET /stories/intelligence 200 in 80ms
+2026-01-01T21:26:55:  GET /.well-known/appspecific/com.chrome.devtools.json 404 in 12ms
+2026-01-01T21:26:56:  GET /api/auth/me 200 in 14ms
+2026-01-01T21:26:56:  GET /api/auth/me 200 in 11ms
+2026-01-01T21:26:56:  GET /api/auth/me 200 in 6ms
+2026-01-01T21:26:56:  GET /api/auth/me 200 in 7ms
+2026-01-01T21:27:18: [?25h
+2026-01-01T21:27:18: 
+2026-01-01T21:27:18: 
+2026-01-01T21:27:18: > justicehub-platform@1.0.0 dev
+2026-01-01T21:27:18: > next dev
+2026-01-01T21:27:18: 
+2026-01-01T21:27:19:   ▲ Next.js 14.2.35
+2026-01-01T21:27:19:   - Local:        http://localhost:3003
+2026-01-01T21:27:19:   - Environments: .env.local
+2026-01-01T21:27:19: 
+2026-01-01T21:27:19:  ✓ Starting...
+2026-01-01T21:27:23:    automatically enabled Fast Refresh for 1 custom loader
+2026-01-01T21:27:23:  ✓ Ready in 4.3s
+2026-01-01T21:28:16:  ✓ Compiled /src/middleware in 472ms (140 modules)
+2026-01-01T21:28:16:  ○ Compiling /stories/intelligence ...
+2026-01-01T21:28:24:  ✓ Compiled /stories/intelligence in 8s (1933 modules)
+2026-01-01T21:28:25:  GET /stories/intelligence 200 in 8611ms
+2026-01-01T21:28:25:  ✓ Compiled in 696ms (964 modules)
+2026-01-01T21:28:25:  ○ Compiling /api/auth/me ...
+2026-01-01T21:28:27:  ✓ Compiled /api/auth/me in 2.3s (990 modules)
+2026-01-01T21:28:27:  GET /api/auth/me 200 in 2445ms
+2026-01-01T21:28:27:  GET /api/auth/me 200 in 13ms
+2026-01-01T21:28:27:  GET /api/auth/me 200 in 10ms
+2026-01-01T21:28:27:  GET /api/auth/me 200 in 10ms
+2026-01-01T21:29:09:  ✓ Compiled /stories/the-pattern in 412ms (1960 modules)
+2026-01-01T21:29:14:  GET /stories/the-pattern 500 in 92ms
+2026-01-01T21:29:14:  GET /stories/the-pattern 500 in 23ms
+2026-01-01T21:29:14:  GET /stories/the-pattern 500 in 24ms
+2026-01-01T21:29:19:  ✓ Compiled /_not-found in 140ms (1963 modules)
+2026-01-01T21:29:19:  GET /.well-known/appspecific/com.chrome.devtools.json 404 in 218ms
+2026-01-01T21:29:19:  GET /stories/the-pattern 500 in 44ms
+2026-01-01T21:29:19:  GET /.well-known/appspecific/com.chrome.devtools.json 404 in 15ms
+2026-01-01T21:29:58:  GET /stories/intelligence 200 in 120ms
+2026-01-01T21:29:59:  GET /api/auth/me 200 in 21ms
+2026-01-01T21:29:59:  GET /api/auth/me 200 in 7ms
+2026-01-01T21:29:59:  GET /api/auth/me 200 in 7ms
+2026-01-01T21:29:59:  GET /api/auth/me 200 in 6ms
+2026-01-01T21:30:09:  GET /stories/the-pattern 500 in 27ms
+2026-01-01T21:30:09:  GET /stories/the-pattern 500 in 25ms
+2026-01-01T21:30:10:  GET /stories/the-pattern 500 in 22ms
+2026-01-01T21:30:10:  GET /stories/the-pattern 500 in 19ms
+2026-01-01T21:30:15:  GET /.well-known/appspecific/com.chrome.devtools.json 404 in 13ms
+2026-01-01T21:30:51:  GET /stories/intelligence 200 in 34ms
+2026-01-01T21:30:51:  GET /api/auth/me 200 in 18ms
+2026-01-01T21:30:51:  GET /api/auth/me 200 in 8ms
+2026-01-01T21:30:51:  GET /api/auth/me 200 in 7ms
+2026-01-01T21:30:51:  GET /api/auth/me 200 in 6ms
+2026-01-01T21:31:06:  GET /stories/the-pattern 500 in 30ms
+2026-01-01T21:31:06:  GET /stories/the-pattern 500 in 24ms
+2026-01-01T21:31:06:  GET /stories/the-pattern 500 in 19ms
+2026-01-01T21:31:07:  GET /stories/the-pattern 500 in 49ms
+2026-01-01T21:31:07:  GET /stories/the-pattern 500 in 22ms
+2026-01-01T21:33:23:  ✓ Compiled in 872ms (1944 modules)
+2026-01-01T21:33:24:  GET /stories/the-pattern 500 in 189ms
+2026-01-01T21:33:24:  GET /stories/the-pattern 500 in 25ms
+2026-01-01T21:33:24:  ✓ Compiled /_not-found in 190ms (1933 modules)
+2026-01-01T21:33:24:  GET /.well-known/appspecific/com.chrome.devtools.json 404 in 480ms
+2026-01-01T21:33:24:  GET /stories/the-pattern 500 in 374ms
+2026-01-01T21:33:32:  ✓ Compiled in 577ms (1947 modules)
+2026-01-01T21:33:32:  GET /stories/the-pattern 200 in 96ms
+2026-01-01T21:33:32:  GET /stories/the-pattern 200 in 103ms
+2026-01-01T21:33:32:  GET /images/patterns/topography.svg 404 in 24ms
+2026-01-01T21:33:32:  GET /.well-known/appspecific/com.chrome.devtools.json 404 in 17ms
+2026-01-01T21:33:32:  GET /images/patterns/topography.svg 404 in 14ms
+2026-01-01T21:33:54:  GET /stories/the-pattern 200 in 58ms
+2026-01-01T21:33:54:  GET /images/patterns/topography.svg 404 in 18ms
+2026-01-01T21:34:18:  GET /stories/the-pattern 200 in 27ms
+2026-01-01T21:34:18:  GET /.well-known/appspecific/com.chrome.devtools.json 404 in 14ms
+2026-01-01T21:34:18:  GET /images/patterns/topography.svg 404 in 15ms
+2026-01-01T21:34:18:  GET /stories/the-pattern 200 in 20ms
+2026-01-01T21:34:18:  GET /.well-known/appspecific/com.chrome.devtools.json 404 in 10ms
+2026-01-01T21:34:18:  GET /images/patterns/topography.svg 404 in 12ms
+2026-01-01T21:34:18:  GET /stories/the-pattern 200 in 21ms
+2026-01-01T21:34:18:  GET /.well-known/appspecific/com.chrome.devtools.json 404 in 13ms
+2026-01-01T21:34:18:  GET /images/patterns/topography.svg 404 in 11ms
+2026-01-01T21:34:18:  GET /stories/the-pattern 200 in 21ms
+2026-01-01T21:34:18:  GET /.well-known/appspecific/com.chrome.devtools.json 404 in 10ms
+2026-01-01T21:34:18:  GET /images/patterns/topography.svg 404 in 12ms
+2026-01-01T21:34:20:  GET /stories/the-pattern 200 in 18ms
+2026-01-01T21:34:20:  GET /.well-known/appspecific/com.chrome.devtools.json 404 in 14ms
+2026-01-01T21:34:20:  GET /images/patterns/topography.svg 404 in 13ms
+2026-01-01T21:34:20:  GET /stories/the-pattern 200 in 20ms
+2026-01-01T21:34:21:  ✓ Compiled /api/auth/me in 444ms (1963 modules)
+2026-01-01T21:34:21:  GET /.well-known/appspecific/com.chrome.devtools.json 404 in 469ms
+2026-01-01T21:34:21:  GET /images/patterns/topography.svg 404 in 452ms
+2026-01-01T21:34:21:  GET /stories/the-pattern 200 in 368ms
+2026-01-01T21:34:21:  GET /.well-known/appspecific/com.chrome.devtools.json 404 in 22ms
+2026-01-01T21:34:21:  GET /images/patterns/topography.svg 404 in 31ms
+2026-01-01T21:34:22:  GET /api/auth/me 200 in 12ms
+2026-01-01T21:34:22:  GET /api/auth/me 200 in 8ms
+2026-01-01T21:34:22:  GET /api/auth/me 200 in 8ms
+2026-01-01T21:34:22:  GET /api/auth/me 200 in 8ms
+2026-01-01T21:35:02:  GET /.well-known/appspecific/com.chrome.devtools.json 404 in 19ms
+2026-01-01T21:35:07:  GET /stories/the-pattern 200 in 29ms
+2026-01-01T21:35:07:  GET /.well-known/appspecific/com.chrome.devtools.json 404 in 18ms
+2026-01-01T21:35:07:  GET /images/patterns/topography.svg 404 in 16ms
+2026-01-01T21:35:07:  GET /api/auth/me 200 in 11ms
+2026-01-01T21:35:07:  GET /api/auth/me 200 in 9ms
+2026-01-01T21:35:07:  GET /api/auth/me 200 in 9ms
+2026-01-01T21:35:07:  GET /api/auth/me 200 in 7ms
+2026-01-01T21:36:18: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T21:36:18: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T21:36:18: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T21:36:18: 🔐 Middleware auth check: No user (Auth session missing!)
+2026-01-01T21:36:19:  ○ Compiling /intelligence ...
+2026-01-01T21:36:20:  ✓ Compiled /intelligence in 1273ms (2155 modules)
+2026-01-01T21:36:20: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T21:36:20: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T21:36:20: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T21:36:20: 🔐 Middleware auth check: No user (Auth session missing!)
+2026-01-01T21:36:20:  GET /stories/the-pattern 200 in 139ms
+2026-01-01T21:36:20:  ✓ Compiled /_not-found in 155ms (2158 modules)
+2026-01-01T21:36:20:  GET /images/patterns/topography.svg 404 in 238ms
+2026-01-01T21:36:39: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T21:36:39: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T21:36:39: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T21:36:39: 🔐 Middleware auth check: No user (Auth session missing!)
+2026-01-01T21:36:39:  ✓ Compiled /intelligence/interventions in 279ms (2166 modules)
+2026-01-01T21:36:39: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T21:36:39: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T21:36:39: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T21:36:39: 🔐 Middleware auth check: No user (Auth session missing!)
+2026-01-01T21:36:39:  GET /stories/the-pattern 200 in 104ms
+2026-01-01T21:36:39:  GET /images/patterns/topography.svg 404 in 17ms
+2026-01-01T21:36:53:  ✓ Compiled / in 286ms (2196 modules)
+2026-01-01T21:36:53:  GET /stories/the-pattern 200 in 57ms
+2026-01-01T21:36:53:  GET /images/patterns/topography.svg 404 in 26ms
+2026-01-01T21:36:53: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T21:36:53: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T21:36:53: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T21:36:53: 🔐 Middleware auth check: No user (Auth session missing!)
+2026-01-01T21:36:54:  ✓ Compiled /api/featured-profiles in 252ms (1226 modules)
+2026-01-01T21:36:54:  GET /api/featured-profiles 500 in 398ms
+2026-01-01T21:36:54: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T21:36:54: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T21:36:54: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T21:36:54: 🔐 Middleware auth check: No user (Auth session missing!)
+2026-01-01T21:36:54:  GET /api/featured-profiles 500 in 11ms
+2026-01-01T21:39:39:  GET / 200 in 168ms
+2026-01-01T21:39:39:  GET / 200 in 28ms
+2026-01-01T21:39:39:  GET / 200 in 27ms
+2026-01-01T21:39:39: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T21:39:39: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T21:39:39: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T21:39:39: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T21:39:39: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T21:39:39: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T21:39:39: 🔐 Middleware auth check: No user (Auth session missing!)
+2026-01-01T21:39:39: 🔐 Middleware auth check: No user (Auth session missing!)
+2026-01-01T21:39:40:  ✓ Compiled /api/featured-profiles in 280ms (1223 modules)
+2026-01-01T21:39:40:  ✓ Compiled (1227 modules)
+2026-01-01T21:39:40:  GET /api/auth/me 200 in 455ms
+2026-01-01T21:39:40:  GET /api/auth/me 200 in 455ms
+2026-01-01T21:39:40:  GET /api/auth/me 200 in 455ms
+2026-01-01T21:39:40:  GET /api/auth/me 200 in 456ms
+2026-01-01T21:39:40:  GET /api/featured-profiles 500 in 453ms
+2026-01-01T21:39:40:  GET /api/featured-profiles 500 in 453ms
+2026-01-01T21:39:41: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T21:39:41: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T21:39:41: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T21:39:41: 🔐 Middleware auth check: No user (Auth session missing!)
+2026-01-01T21:39:41: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T21:39:41: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T21:39:41: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T21:39:41: 🔐 Middleware auth check: No user (Auth session missing!)
+2026-01-01T21:39:55: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T21:39:55: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T21:39:56: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T21:39:56: 🔐 Middleware auth check: No user (Auth session missing!)
+2026-01-01T21:39:56:  ○ Compiling /intelligence/portfolio ...
+2026-01-01T21:39:56:  ✓ Compiled /intelligence/portfolio in 564ms (2227 modules)
+2026-01-01T21:39:56: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T21:39:56: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T21:39:56: 🍪 Middleware cookies: session_token, sb-xnifhejavwvbdkcakakn-auth-token-code-verifier, ajs_anonymous_id, ajs_user_id, sb-yvnuayzslukamizrlhwb-auth-token.0, sb-yvnuayzslukamizrlhwb-auth-token.1
+2026-01-01T21:39:56: 🔐 Middleware auth check: No user (Auth session missing!)

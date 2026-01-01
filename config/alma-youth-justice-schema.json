@@ -1,0 +1,647 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ALMA Youth Justice Ontology",
+  "version": "0.1",
+  "description": "Entity schema and governance rules for youth justice vertical in ALMA",
+  "created": "2025-12-31",
+  "vertical": "youth_justice",
+
+  "entities": {
+    "intervention": {
+      "description": "A program, practice, or approach addressing youth justice outcomes",
+      "airtableBase": "youth_justice_interventions",
+      "fields": {
+        "name": {
+          "type": "string",
+          "required": true,
+          "airtableType": "singleLineText",
+          "primaryField": true
+        },
+        "type": {
+          "type": "select",
+          "required": true,
+          "options": [
+            "Prevention",
+            "Early Intervention",
+            "Diversion",
+            "Therapeutic",
+            "Wraparound Support",
+            "Family Strengthening",
+            "Cultural Connection",
+            "Education/Employment",
+            "Justice Reinvestment",
+            "Community-Led"
+          ],
+          "airtableType": "singleSelect"
+        },
+        "description": {
+          "type": "richText",
+          "required": true,
+          "airtableType": "longText"
+        },
+        "targetCohort": {
+          "type": "multiSelect",
+          "options": [
+            "10-14 years",
+            "15-17 years",
+            "18-21 years",
+            "First Nations",
+            "CALD",
+            "LGBTQIA+",
+            "Disability",
+            "Care-experienced",
+            "Female",
+            "Male",
+            "Gender diverse"
+          ],
+          "airtableType": "multipleSelects"
+        },
+        "communityContext": {
+          "type": "relation",
+          "relatesTo": "community_context",
+          "multiple": true,
+          "airtableType": "linkedRecords"
+        },
+        "intendedOutcomes": {
+          "type": "relation",
+          "relatesTo": "outcome",
+          "multiple": true,
+          "required": true,
+          "airtableType": "linkedRecords"
+        },
+        "evidence": {
+          "type": "relation",
+          "relatesTo": "evidence",
+          "multiple": true,
+          "airtableType": "linkedRecords"
+        },
+        "evidenceLevel": {
+          "type": "select",
+          "options": [
+            "Promising (community-endorsed, emerging evidence)",
+            "Effective (strong evaluation, positive outcomes)",
+            "Proven (RCT/quasi-experimental, replicated)",
+            "Indigenous-led (culturally grounded, community authority)",
+            "Untested (theory/pilot stage)"
+          ],
+          "airtableType": "singleSelect"
+        },
+        "culturalAuthority": {
+          "type": "string",
+          "description": "Who holds authority over this intervention (Elder council, community org, etc.)",
+          "governance": "authority_gate",
+          "airtableType": "singleLineText"
+        },
+        "consentLevel": {
+          "type": "select",
+          "required": true,
+          "options": [
+            "Public Knowledge Commons",
+            "Community Controlled",
+            "Strictly Private"
+          ],
+          "governance": "consent_gate",
+          "airtableType": "singleSelect"
+        },
+        "permittedUses": {
+          "type": "multiSelect",
+          "options": [
+            "Query (internal)",
+            "Publish (JusticeHub)",
+            "Export (reports)",
+            "Training (AI)",
+            "Commercial"
+          ],
+          "governance": "consent_gate",
+          "airtableType": "multipleSelects"
+        },
+        "contributors": {
+          "type": "multiSelect",
+          "description": "Organizations/individuals who contributed this knowledge",
+          "governance": "provenance_tracking",
+          "airtableType": "multipleSelects"
+        },
+        "sourceDocuments": {
+          "type": "attachment",
+          "description": "Original evaluation reports, submissions, case studies",
+          "governance": "provenance_tracking",
+          "airtableType": "multipleAttachments"
+        },
+        "risks": {
+          "type": "richText",
+          "description": "Potential harms, unintended consequences, cultural safety concerns",
+          "airtableType": "longText"
+        },
+        "harmRiskLevel": {
+          "type": "select",
+          "options": ["Low", "Medium", "High", "Requires cultural review"],
+          "airtableType": "singleSelect"
+        },
+        "implementationCost": {
+          "type": "select",
+          "options": ["Low (<$50k/year)", "Medium ($50k-$250k)", "High (>$250k)", "Unknown"],
+          "airtableType": "singleSelect"
+        },
+        "costPerYoungPerson": {
+          "type": "number",
+          "description": "Estimated annual cost per participant (not reductive, for portfolio context)",
+          "airtableType": "number",
+          "format": "currency"
+        },
+        "scalability": {
+          "type": "select",
+          "options": ["Local only", "Regional", "State-wide", "National", "Context-dependent"],
+          "airtableType": "singleSelect"
+        },
+        "replicationReadiness": {
+          "type": "select",
+          "options": [
+            "Not ready (needs more development)",
+            "Ready with support (requires adaptation guidance)",
+            "Ready (playbook available)",
+            "Community authority required"
+          ],
+          "airtableType": "singleSelect"
+        },
+        "geography": {
+          "type": "multiSelect",
+          "options": ["VIC", "NSW", "QLD", "SA", "WA", "TAS", "NT", "ACT", "Remote", "Regional", "Metro"],
+          "airtableType": "multipleSelects"
+        },
+        "operatingOrganization": {
+          "type": "string",
+          "airtableType": "singleLineText"
+        },
+        "contactPerson": {
+          "type": "string",
+          "airtableType": "singleLineText"
+        },
+        "yearsOperating": {
+          "type": "number",
+          "airtableType": "number"
+        },
+        "currentFunding": {
+          "type": "select",
+          "options": ["Unfunded", "Pilot/seed", "Established", "Oversubscribed", "At-risk"],
+          "airtableType": "singleSelect"
+        },
+        "portfolioSignals": {
+          "type": "formula",
+          "description": "Calculated portfolio score (evidence × community authority × harm risk inverse × option value)",
+          "airtableType": "formula"
+        },
+        "lastUpdated": {
+          "type": "date",
+          "airtableType": "lastModifiedTime"
+        },
+        "reviewStatus": {
+          "type": "select",
+          "options": ["Draft", "Community Review", "Approved", "Published", "Archived"],
+          "governance": "human_review_gate",
+          "airtableType": "singleSelect"
+        }
+      }
+    },
+
+    "community_context": {
+      "description": "Place-based and cultural context where interventions operate",
+      "airtableBase": "youth_justice_contexts",
+      "fields": {
+        "name": {
+          "type": "string",
+          "required": true,
+          "airtableType": "singleLineText",
+          "primaryField": true
+        },
+        "contextType": {
+          "type": "select",
+          "options": [
+            "First Nations community",
+            "Remote community",
+            "Regional area",
+            "Metro suburb",
+            "Cultural community",
+            "Care system",
+            "Education setting"
+          ],
+          "airtableType": "singleSelect"
+        },
+        "location": {
+          "type": "string",
+          "description": "Geographic location (respectful of privacy)",
+          "airtableType": "singleLineText"
+        },
+        "populationSize": {
+          "type": "select",
+          "options": ["<1,000", "1,000-10,000", "10,000-50,000", "50,000+", "Unknown"],
+          "airtableType": "singleSelect"
+        },
+        "demographics": {
+          "type": "richText",
+          "description": "Relevant demographic context (culturally safe)",
+          "airtableType": "longText"
+        },
+        "systemFactors": {
+          "type": "richText",
+          "description": "Systemic context (e.g., over-policing, service gaps, historical trauma)",
+          "airtableType": "longText"
+        },
+        "protectiveFactors": {
+          "type": "richText",
+          "description": "Community strengths, assets, protective factors",
+          "airtableType": "longText"
+        },
+        "culturalAuthority": {
+          "type": "string",
+          "description": "Who has authority to speak about this context",
+          "governance": "authority_gate",
+          "required": true,
+          "airtableType": "singleLineText"
+        },
+        "consentLevel": {
+          "type": "select",
+          "required": true,
+          "options": [
+            "Public Knowledge Commons",
+            "Community Controlled",
+            "Strictly Private"
+          ],
+          "governance": "consent_gate",
+          "airtableType": "singleSelect"
+        },
+        "interventions": {
+          "type": "relation",
+          "relatesTo": "intervention",
+          "multiple": true,
+          "airtableType": "linkedRecords"
+        }
+      }
+    },
+
+    "evidence": {
+      "description": "Research, evaluations, and outcome data supporting interventions",
+      "airtableBase": "youth_justice_evidence",
+      "fields": {
+        "title": {
+          "type": "string",
+          "required": true,
+          "airtableType": "singleLineText",
+          "primaryField": true
+        },
+        "evidenceType": {
+          "type": "select",
+          "options": [
+            "RCT (Randomized Control Trial)",
+            "Quasi-experimental",
+            "Program evaluation",
+            "Longitudinal study",
+            "Case study",
+            "Community-led research",
+            "Lived experience",
+            "Cultural knowledge",
+            "Policy analysis"
+          ],
+          "airtableType": "singleSelect"
+        },
+        "methodology": {
+          "type": "richText",
+          "airtableType": "longText"
+        },
+        "sampleSize": {
+          "type": "number",
+          "airtableType": "number"
+        },
+        "timeframe": {
+          "type": "string",
+          "description": "Study period or observation window",
+          "airtableType": "singleLineText"
+        },
+        "outcomes": {
+          "type": "relation",
+          "relatesTo": "outcome",
+          "multiple": true,
+          "airtableType": "linkedRecords"
+        },
+        "findings": {
+          "type": "richText",
+          "required": true,
+          "airtableType": "longText"
+        },
+        "effectSize": {
+          "type": "select",
+          "options": ["Large positive", "Moderate positive", "Small positive", "Null", "Mixed", "Not measured"],
+          "airtableType": "singleSelect"
+        },
+        "culturalSafety": {
+          "type": "select",
+          "options": [
+            "Culturally grounded (led by community)",
+            "Culturally adapted (with community input)",
+            "Culturally neutral",
+            "Cultural safety concerns",
+            "Unknown"
+          ],
+          "airtableType": "singleSelect"
+        },
+        "limitations": {
+          "type": "richText",
+          "airtableType": "longText"
+        },
+        "author": {
+          "type": "string",
+          "airtableType": "singleLineText"
+        },
+        "organization": {
+          "type": "string",
+          "airtableType": "singleLineText"
+        },
+        "publicationDate": {
+          "type": "date",
+          "airtableType": "date"
+        },
+        "sourceDocument": {
+          "type": "attachment",
+          "governance": "provenance_tracking",
+          "airtableType": "multipleAttachments"
+        },
+        "doi": {
+          "type": "url",
+          "airtableType": "url"
+        },
+        "consentLevel": {
+          "type": "select",
+          "required": true,
+          "options": [
+            "Public Knowledge Commons",
+            "Community Controlled",
+            "Strictly Private"
+          ],
+          "governance": "consent_gate",
+          "airtableType": "singleSelect"
+        },
+        "contributors": {
+          "type": "multiSelect",
+          "governance": "provenance_tracking",
+          "airtableType": "multipleSelects"
+        },
+        "interventions": {
+          "type": "relation",
+          "relatesTo": "intervention",
+          "multiple": true,
+          "airtableType": "linkedRecords"
+        }
+      }
+    },
+
+    "outcome": {
+      "description": "Intended and measured outcomes for young people and communities",
+      "airtableBase": "youth_justice_outcomes",
+      "fields": {
+        "name": {
+          "type": "string",
+          "required": true,
+          "airtableType": "singleLineText",
+          "primaryField": true
+        },
+        "outcomeType": {
+          "type": "select",
+          "options": [
+            "Reduced detention/incarceration",
+            "Reduced recidivism",
+            "Diversion from justice system",
+            "Educational engagement",
+            "Employment/training",
+            "Family connection",
+            "Cultural connection",
+            "Mental health/wellbeing",
+            "Reduced substance use",
+            "Community safety",
+            "System cost reduction",
+            "Healing/restoration"
+          ],
+          "airtableType": "singleSelect"
+        },
+        "description": {
+          "type": "richText",
+          "airtableType": "longText"
+        },
+        "measurementMethod": {
+          "type": "richText",
+          "description": "How this outcome is measured",
+          "airtableType": "longText"
+        },
+        "indicators": {
+          "type": "richText",
+          "description": "Specific quantitative or qualitative indicators",
+          "airtableType": "longText"
+        },
+        "timeHorizon": {
+          "type": "select",
+          "options": ["Immediate (<6 months)", "Short-term (6-12 months)", "Medium-term (1-3 years)", "Long-term (3+ years)"],
+          "airtableType": "singleSelect"
+        },
+        "beneficiary": {
+          "type": "select",
+          "options": ["Young person", "Family", "Community", "System/Government"],
+          "airtableType": "singleSelect"
+        },
+        "interventions": {
+          "type": "relation",
+          "relatesTo": "intervention",
+          "multiple": true,
+          "airtableType": "linkedRecords"
+        },
+        "evidence": {
+          "type": "relation",
+          "relatesTo": "evidence",
+          "multiple": true,
+          "airtableType": "linkedRecords"
+        }
+      }
+    }
+  },
+
+  "relationships": {
+    "intervention_to_outcome": {
+      "type": "many_to_many",
+      "description": "Interventions target multiple outcomes; outcomes can be addressed by multiple interventions"
+    },
+    "intervention_to_evidence": {
+      "type": "many_to_many",
+      "description": "Interventions supported by multiple evidence sources; evidence may support multiple interventions"
+    },
+    "intervention_to_context": {
+      "type": "many_to_many",
+      "description": "Interventions operate in specific contexts; contexts may have multiple interventions"
+    },
+    "evidence_to_outcome": {
+      "type": "many_to_many",
+      "description": "Evidence demonstrates impact on outcomes; outcomes measured by multiple evidence sources"
+    }
+  },
+
+  "governanceRules": {
+    "authority_gate": {
+      "description": "Community-controlled interventions and contexts require cultural authority",
+      "enforcement": "database_constraint",
+      "rule": "IF entity.consentLevel IN ['Community Controlled', 'Strictly Private'] THEN entity.culturalAuthority IS REQUIRED",
+      "actions_blocked": ["publish", "export", "train"],
+      "actions_allowed": ["query_internal"]
+    },
+
+    "consent_gate": {
+      "description": "All entities must declare consent level and permitted uses",
+      "enforcement": "required_field",
+      "rule": "entity.consentLevel IS REQUIRED AND entity.permittedUses IS REQUIRED",
+      "defaultValue": "Strictly Private",
+      "escalation": "IF action NOT IN entity.permittedUses THEN BLOCK AND LOG"
+    },
+
+    "provenance_tracking": {
+      "description": "All knowledge contributions must be attributed",
+      "enforcement": "audit_log",
+      "rule": "entity.contributors IS REQUIRED AND entity.sourceDocuments IS RECOMMENDED",
+      "logging": {
+        "onCreate": "Log contributor + timestamp",
+        "onQuery": "Log access + query context",
+        "onPublish": "Log publication destination + usage",
+        "onRevenue": "Calculate attribution for revenue share"
+      }
+    },
+
+    "human_review_gate": {
+      "description": "ALMA drafts; people decide; communities approve",
+      "enforcement": "workflow_state",
+      "rule": "entity.reviewStatus MUST progress through: Draft → Community Review → Approved → Published",
+      "actions": {
+        "query": "Allowed at Draft stage (passive monitoring)",
+        "publish_justicehub": "Requires Approved status",
+        "export_report": "Requires Community Review status",
+        "ai_training": "Requires Approved status AND 'Training (AI)' in permittedUses"
+      }
+    },
+
+    "anti_extractive": {
+      "description": "No unauthorized scraping or use of restricted knowledge",
+      "enforcement": "namespace_separation",
+      "rule": "IF entity.consentLevel == 'Strictly Private' THEN namespace = 'alma:youth_justice:private' AND access = 'node_only'",
+      "restrictions": {
+        "strictlyPrivate": {
+          "vectorDB": "Separate namespace, no cross-contamination",
+          "export": "Blocked",
+          "training": "Blocked",
+          "aggregation": "Blocked"
+        },
+        "communityControlled": {
+          "vectorDB": "Protected namespace",
+          "export": "Requires community approval",
+          "training": "Blocked unless explicit consent",
+          "aggregation": "Allowed with attribution"
+        },
+        "publicCommons": {
+          "vectorDB": "Public namespace",
+          "export": "Allowed with attribution",
+          "training": "Allowed",
+          "aggregation": "Allowed"
+        }
+      }
+    }
+  },
+
+  "portfolioSignals": {
+    "description": "Calculated signals for portfolio intelligence (not reductive, context-aware)",
+    "signals": [
+      {
+        "name": "evidenceStrength",
+        "weight": 0.25,
+        "calculation": "Combination of evidenceLevel + number of supporting evidence records + effect sizes"
+      },
+      {
+        "name": "communityAuthority",
+        "weight": 0.30,
+        "calculation": "Higher weight for Indigenous-led, community-controlled, culturally grounded"
+      },
+      {
+        "name": "harmRisk",
+        "weight": 0.20,
+        "calculation": "Inverse of harmRiskLevel (high risk = lower score, heavy penalty)"
+      },
+      {
+        "name": "implementationCapability",
+        "weight": 0.15,
+        "calculation": "Based on replicationReadiness + years operating + current funding stability"
+      },
+      {
+        "name": "optionValue",
+        "weight": 0.10,
+        "calculation": "Learning potential for under-evidenced but community-endorsed approaches"
+      }
+    ],
+    "diversification": {
+      "dimensions": [
+        "intervention type (prevention vs diversion vs therapeutic)",
+        "geography (metro vs regional vs remote)",
+        "cohort (age, culture, experience)",
+        "evidence maturity (proven vs promising vs untested)",
+        "cost profile (low vs medium vs high)"
+      ]
+    },
+    "constraints": {
+      "maxUntestedAllocation": 0.15,
+      "minCommunityEndorsed": 0.80,
+      "culturalAuthorityRequired": "always for community-controlled",
+      "harmRiskCap": "no high-risk without mitigation plan"
+    }
+  },
+
+  "integrationPoints": {
+    "justiceHub": {
+      "description": "Community-led knowledge exchange platform",
+      "platform": "Airtable + Softr",
+      "dataFlow": "ALMA extracts interventions → JusticeHub publishes (with community approval)",
+      "features": [
+        "Replication playbooks",
+        "Success factors",
+        "Community contacts",
+        "Evidence summaries"
+      ]
+    },
+
+    "empathyLedger": {
+      "description": "Impact mapping + funding intelligence",
+      "dataFlow": "ALMA portfolio analytics → Empathy Ledger dashboards",
+      "features": [
+        "Portfolio recommendations",
+        "Funding gap analysis",
+        "Impact attribution",
+        "Diligence briefs"
+      ]
+    },
+
+    "intelligenceHub": {
+      "description": "Existing ACT knowledge + RAG system",
+      "dataFlow": "Parallel query paths, shared vector DB with namespace separation",
+      "features": [
+        "Cross-reference ACT partners to interventions",
+        "Link grant opportunities to portfolio gaps",
+        "Include intervention context in work queue"
+      ]
+    }
+  },
+
+  "namespaceStrategy": {
+    "vectorDB": {
+      "public": "alma:youth_justice:public",
+      "communityControlled": "alma:youth_justice:community",
+      "private": "alma:youth_justice:private"
+    },
+    "airtable": {
+      "base": "ALMA Youth Justice",
+      "tables": ["interventions", "contexts", "evidence", "outcomes"]
+    },
+    "consentLedger": {
+      "database": "governance_consent_ledger",
+      "schema": "Tracks all contributions, permissions, usage, attribution"
+    }
+  }
+}

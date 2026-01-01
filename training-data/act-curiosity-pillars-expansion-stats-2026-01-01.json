@@ -1,0 +1,38 @@
+{
+  "generatedAt": "2026-01-01T02:52:59.470Z",
+  "totalExamples": 27,
+  "breakdown": {
+    "curiosityPhase": 20,
+    "strategicPillars": 5
+  },
+  "focusAreas": [
+    "Curiosity phase (LCAA methodology)",
+    "Strategic pillar integration"
+  ],
+  "topics": [
+    "Core Curiosity definition and philosophy",
+    "Co-design workshops and facilitation",
+    "Prototyping and testing approaches",
+    "Questions that drive exploration",
+    "Design thinking with communities",
+    "Research and systems mapping",
+    "Project-specific Curiosity examples (Empathy Ledger, JusticeHub, Goods)",
+    "Failure as learning",
+    "Technology choices and architecture",
+    "Documentation and knowledge transfer",
+    "Curiosity + Art connection",
+    "Designing for obsolescence",
+    "Ethical Storytelling pillar + LCAA",
+    "Justice Reimagined pillar + LCAA",
+    "Circular Economy pillar + LCAA",
+    "Community Resilience pillar + LCAA",
+    "Regeneration at Scale pillar + LCAA"
+  ],
+  "fileSize": "35624 bytes",
+  "estimatedTokens": 8909,
+  "voiceEnhancements": {
+    "regenerativeMetaphors": "Added farming/nature metaphors throughout (soil, cultivation, growth, seasons)",
+    "communityVoice": "Included direct community quotes and perspectives",
+    "antiJargon": "Avoided technical jargon, used accessible language"
+  }
+}

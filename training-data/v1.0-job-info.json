@@ -1,0 +1,28 @@
+{
+  "job_id": "ftjob-TYiyc0UhliJXkPEbglpQXcK3",
+  "file_id": "file-5wQMk78AKeVW3N7tVw98X5",
+  "status": "validating_files",
+  "model": "gpt-4o-mini-2024-07-18",
+  "suffix": "act-voice-v1-0",
+  "fine_tuned_model": "Pending",
+  "created_at": "2026-01-01T03:51:37.325Z",
+  "dataset": {
+    "path": "./training-data/act-voice-training-dataset-v1.0-2026-01-01.jsonl",
+    "examples": 120,
+    "quality_score": 96,
+    "lcaa_coverage": {
+      "listen": "27.5%",
+      "curiosity": "20.8%",
+      "action": "59.2%",
+      "art": "33.3%"
+    },
+    "pillar_coverage": "100%",
+    "voice_metrics": {
+      "regenerative_metaphors": "45.8%",
+      "community_centered": "95.8%",
+      "lcaa_language": "88.3%"
+    }
+  },
+  "expected_completion": "10-30 minutes",
+  "monitor_url": "https://platform.openai.com/finetune"
+}

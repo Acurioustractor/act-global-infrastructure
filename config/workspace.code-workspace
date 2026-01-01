@@ -31,19 +31,30 @@
     {
       "name": "🍽️ ACT Placemat",
       "path": "/Users/benknight/Code/ACT Placemat"
+    },
+    {
+      "name": "🌾 ACT Farmhand",
+      "path": "/Users/benknight/act-global-infrastructure/act-personal-ai"
     }
   ],
   "settings": {
     "files.exclude": {
       "**/node_modules": true,
       "**/.next": true,
-      "**/.git": false
+      "**/.git": false,
+      "**/__pycache__": true,
+      "**/.pytest_cache": true,
+      "**/venv": true,
+      "**/*.pyc": true
     },
     "search.exclude": {
       "**/node_modules": true,
       "**/.next": true,
       "**/dist": true,
-      "**/build": true
+      "**/build": true,
+      "**/__pycache__": true,
+      "**/.pytest_cache": true,
+      "**/venv": true
     },
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "esbenp.prettier-vscode",
@@ -69,7 +80,10 @@
       "Prisma.prisma",
       "GitHub.copilot",
       "GitHub.vscode-pull-request-github",
-      "eamodio.gitlens"
+      "eamodio.gitlens",
+      "ms-python.python",
+      "ms-python.vscode-pylance",
+      "charliermarsh.ruff"
     ]
   },
   "launch": {
@@ -92,6 +106,26 @@
         "runtimeArgs": ["run", "dev"],
         "cwd": "${workspaceFolder:📖 Empathy Ledger}",
         "console": "integratedTerminal"
+      },
+      {
+        "name": "ACT Farmhand - Run Tests",
+        "type": "python",
+        "request": "launch",
+        "module": "pytest",
+        "args": ["-v", "--tb=short"],
+        "cwd": "${workspaceFolder:🌾 ACT Farmhand}",
+        "console": "integratedTerminal",
+        "justMyCode": false
+      },
+      {
+        "name": "ACT Farmhand - Run Single Test File",
+        "type": "python",
+        "request": "launch",
+        "module": "pytest",
+        "args": ["${file}", "-v", "--tb=short"],
+        "cwd": "${workspaceFolder:🌾 ACT Farmhand}",
+        "console": "integratedTerminal",
+        "justMyCode": false
       }
     ]
   },

@@ -1,0 +1,17 @@
+{
+  "v01": {
+    "jobId": "ftjob-NdLSB8DN6aRtm71xXvh1K6X0",
+    "status": "succeeded",
+    "fineTunedModel": "ft:gpt-4o-mini-2024-07-18:a-curious-tractor:act-voice-v0-1:Ct3vFGcn",
+    "createdAt": 1767238507,
+    "finishedAt": 1767239150
+  },
+  "v10": {
+    "jobId": "ftjob-TYiyc0UhliJXkPEbglpQXcK3",
+    "status": "succeeded",
+    "fineTunedModel": "ft:gpt-4o-mini-2024-07-18:a-curious-tractor:act-voice-v1-0:Ct4C4QW7",
+    "createdAt": 1767239497,
+    "finishedAt": 1767240193
+  },
+  "readyAt": "2026-01-01T04:17:03.153Z"
+}

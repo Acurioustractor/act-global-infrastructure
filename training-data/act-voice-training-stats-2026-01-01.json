@@ -1,0 +1,14 @@
+{
+  "generatedAt": "2026-01-01T02:03:44.526Z",
+  "totalExamples": 32,
+  "files": [
+    "ACT Complete Knowledge Base - Part 1",
+    "ACT Complete Knowledge Base - Part 2",
+    "ACT Complete Knowledge Base - Part 3"
+  ],
+  "estimatedTokens": 16000,
+  "estimatedCost": {
+    "training": "$0.13",
+    "inference": "+20% per query vs base model"
+  }
+}

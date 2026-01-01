@@ -1,0 +1,25 @@
+2025-12-31T09:22:35: 
+2025-12-31T09:22:35: > witta-swot-analysis@1.0.0 dev
+2025-12-31T09:22:35: > NODE_ENV=development tsx watch server/_core/index.ts
+2025-12-31T09:22:35: 
+2025-12-31T09:22:36: Server running on http://localhost:3004/
+2026-01-01T06:16:36: 7:16:36 AM [tsx] Previous process hasn't exited yet. Force killing...
+2026-01-01T06:16:37: 
+2026-01-01T06:16:37: > witta-swot-analysis@1.0.0 dev
+2026-01-01T06:16:37: > NODE_ENV=development tsx watch server/_core/index.ts
+2026-01-01T06:16:37: 
+2026-01-01T06:16:40: Server running on http://localhost:3004/
+2026-01-01T06:44:10: 7:44:10 AM [tsx] Previous process hasn't exited yet. Force killing...
+2026-01-01T06:44:12: 
+2026-01-01T06:44:12: > witta-swot-analysis@1.0.0 dev
+2026-01-01T06:44:12: > NODE_ENV=development tsx watch server/_core/index.ts
+2026-01-01T06:44:12: 
+2026-01-01T06:44:13: Server running on http://localhost:3004/
+2026-01-01T09:23:13: 10:23:13 AM [vite] .env changed, restarting server...
+2026-01-01T09:23:13: 10:23:13 AM [vite] server restarted.
+2026-01-01T21:10:28: 10:10:28 PM [tsx] Previous process hasn't exited yet. Force killing...
+2026-01-01T21:10:30: 
+2026-01-01T21:10:30: > witta-swot-analysis@1.0.0 dev
+2026-01-01T21:10:30: > NODE_ENV=development tsx watch server/_core/index.ts
+2026-01-01T21:10:30: 
+2026-01-01T21:10:37: Server running on http://localhost:3004/

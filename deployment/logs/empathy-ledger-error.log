@@ -1,0 +1,158 @@
+2025-12-31T09:22:53: Error fetching storytellers: {
+2025-12-31T09:22:53:   code: 'PGRST200',
+2025-12-31T09:22:53:   details: "Searched for a foreign key relationship between 'profiles' and 'profile_organizations' in the schema 'public', but no matches were found.",
+2025-12-31T09:22:53:   hint: "Perhaps you meant 'organizations' instead of 'profile_organizations'.",
+2025-12-31T09:22:53:   message: "Could not find a relationship between 'profiles' and 'profile_organizations' in the schema cache"
+2025-12-31T09:22:53: }
+2026-01-01T05:29:25: <w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename '/Users/benknight/Code/empathy-ledger-v2/.next/cache/webpack/client-development/0.pack.gz_' -> '/Users/benknight/Code/empathy-ledger-v2/.next/cache/webpack/client-development/0.pack.gz'
+2026-01-01T05:40:14: <w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, lstat '/Users/benknight/Code/empathy-ledger-v2/.next/server/app/api/admin'
+2026-01-01T05:40:14: <w> [webpack.cache.PackFileCacheStrategy/webpack.FileSystemInfo] Resolving '../../../../.next/server/app/api/admin/storytellers/route' in /Users/benknight/Code/empathy-ledger-v2/node_modules/next/dist/server for build dependencies doesn't lead to expected result '/Users/benknight/Code/empathy-ledger-v2/.next/server/app/api/admin/storytellers/route.js', but to 'Error: Can't resolve '../../../../.next/server/app/api/admin/storytellers/route' in '/Users/benknight/Code/empathy-ledger-v2/node_modules/next/dist/server'' instead. Resolving dependencies are ignored for this path.
+2026-01-01T05:40:14: <w>  at resolve commonjs file ../../../../.next/server/app/api/admin/storytellers/route (expected /Users/benknight/Code/empathy-ledger-v2/.next/server/app/api/admin/storytellers/route.js)
+2026-01-01T05:40:14: <w>  at file dependencies /Users/benknight/Code/empathy-ledger-v2/node_modules/next/dist/server/require.js
+2026-01-01T05:40:14: <w>  at file /Users/benknight/Code/empathy-ledger-v2/node_modules/next/dist/server/require.js
+2026-01-01T05:40:14: <w>  at file dependencies /Users/benknight/Code/empathy-ledger-v2/node_modules/next/dist/server/load-components.js
+2026-01-01T05:40:14: <w>  at file /Users/benknight/Code/empathy-ledger-v2/node_modules/next/dist/server/load-components.js
+2026-01-01T05:40:14: <w>  at file dependencies /Users/benknight/Code/empathy-ledger-v2/node_modules/next/dist/build/utils.js
+2026-01-01T05:40:14: <w>  at file /Users/benknight/Code/empathy-ledger-v2/node_modules/next/dist/build/utils.js
+2026-01-01T05:40:14: <w>  at file dependencies /Users/benknight/Code/empathy-ledger-v2/node_modules/next/dist/build/webpack/loaders/next-route-loader/index.js
+2026-01-01T05:40:14: <w>  at file /Users/benknight/Code/empathy-ledger-v2/node_modules/next/dist/build/webpack/loaders/next-route-loader/index.js
+2026-01-01T05:40:14: <w>  at file dependencies /Users/benknight/Code/empathy-ledger-v2/node_modules/next/dist/compiled/loader-runner/LoaderRunner.js
+2026-01-01T05:40:14: <w>  at file /Users/benknight/Code/empathy-ledger-v2/node_modules/next/dist/compiled/loader-runner/LoaderRunner.js
+2026-01-01T05:40:14: <w>  at file dependencies /Users/benknight/Code/empathy-ledger-v2/node_modules/next/dist/compiled/webpack/bundle5.js
+2026-01-01T05:40:14: <w>  at file /Users/benknight/Code/empathy-ledger-v2/node_modules/next/dist/compiled/webpack/bundle5.js
+2026-01-01T05:40:14: <w>  at file dependencies /Users/benknight/Code/empathy-ledger-v2/node_modules/next/dist/compiled/webpack/webpack.js
+2026-01-01T05:40:14: <w>  at file /Users/benknight/Code/empathy-ledger-v2/node_modules/next/dist/compiled/webpack/webpack.js
+2026-01-01T05:40:14: <w>  at file dependencies /Users/benknight/Code/empathy-ledger-v2/node_modules/next/dist/build/webpack/plugins/define-env-plugin.js
+2026-01-01T05:40:14: <w>  at file /Users/benknight/Code/empathy-ledger-v2/node_modules/next/dist/build/webpack/plugins/define-env-plugin.js
+2026-01-01T05:40:14: <w>  at file dependencies /Users/benknight/Code/empathy-ledger-v2/node_modules/next/dist/build/swc/index.js
+2026-01-01T05:40:14: <w>  at file /Users/benknight/Code/empathy-ledger-v2/node_modules/next/dist/build/swc/index.js
+2026-01-01T05:40:14: <w>  at file dependencies /Users/benknight/Code/empathy-ledger-v2/node_modules/next/dist/build/webpack/loaders/next-barrel-loader.js
+2026-01-01T05:40:14: <w>  at file /Users/benknight/Code/empathy-ledger-v2/node_modules/next/dist/build/webpack/loaders/next-barrel-loader.js
+2026-01-01T05:40:14: <w>  at resolve commonjs /Users/benknight/Code/empathy-ledger-v2/node_modules/next/dist/build/webpack/loaders/next-barrel-loader.js
+2026-01-01T06:16:57: Error fetching storytellers: {
+2026-01-01T06:16:57:   code: 'PGRST200',
+2026-01-01T06:16:57:   details: "Searched for a foreign key relationship between 'profiles' and 'profile_organizations' in the schema 'public', but no matches were found.",
+2026-01-01T06:16:57:   hint: "Perhaps you meant 'organizations' instead of 'profile_organizations'.",
+2026-01-01T06:16:57:   message: "Could not find a relationship between 'profiles' and 'profile_organizations' in the schema cache"
+2026-01-01T06:16:57: }
+2026-01-01T06:29:29: <w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, lstat '/Users/benknight/Code/empathy-ledger-v2/.next/server/app/api/admin'
+2026-01-01T06:29:29: <w> [webpack.cache.PackFileCacheStrategy/webpack.FileSystemInfo] Resolving '../../../../.next/server/app/api/admin/storytellers/route' in /Users/benknight/Code/empathy-ledger-v2/node_modules/next/dist/server for build dependencies doesn't lead to expected result '/Users/benknight/Code/empathy-ledger-v2/.next/server/app/api/admin/storytellers/route.js', but to 'Error: Can't resolve '../../../../.next/server/app/api/admin/storytellers/route' in '/Users/benknight/Code/empathy-ledger-v2/node_modules/next/dist/server'' instead. Resolving dependencies are ignored for this path.
+2026-01-01T06:29:29: <w>  at resolve commonjs file ../../../../.next/server/app/api/admin/storytellers/route (expected /Users/benknight/Code/empathy-ledger-v2/.next/server/app/api/admin/storytellers/route.js)
+2026-01-01T06:29:29: <w>  at file dependencies /Users/benknight/Code/empathy-ledger-v2/node_modules/next/dist/server/require.js
+2026-01-01T06:29:29: <w>  at file /Users/benknight/Code/empathy-ledger-v2/node_modules/next/dist/server/require.js
+2026-01-01T06:29:29: <w>  at file dependencies /Users/benknight/Code/empathy-ledger-v2/node_modules/next/dist/server/load-components.js
+2026-01-01T06:29:29: <w>  at file /Users/benknight/Code/empathy-ledger-v2/node_modules/next/dist/server/load-components.js
+2026-01-01T06:29:29: <w>  at file dependencies /Users/benknight/Code/empathy-ledger-v2/node_modules/next/dist/build/utils.js
+2026-01-01T06:29:29: <w>  at file /Users/benknight/Code/empathy-ledger-v2/node_modules/next/dist/build/utils.js
+2026-01-01T06:29:29: <w>  at file dependencies /Users/benknight/Code/empathy-ledger-v2/node_modules/next/dist/build/handle-externals.js
+2026-01-01T06:29:29: <w>  at file /Users/benknight/Code/empathy-ledger-v2/node_modules/next/dist/build/handle-externals.js
+2026-01-01T06:29:29: <w>  at file dependencies /Users/benknight/Code/empathy-ledger-v2/node_modules/next/dist/build/webpack/loaders/next-swc-loader.js
+2026-01-01T06:29:29: <w>  at file /Users/benknight/Code/empathy-ledger-v2/node_modules/next/dist/build/webpack/loaders/next-swc-loader.js
+2026-01-01T06:29:29: <w>  at file dependencies /Users/benknight/Code/empathy-ledger-v2/node_modules/next/dist/compiled/loader-runner/LoaderRunner.js
+2026-01-01T06:29:29: <w>  at file /Users/benknight/Code/empathy-ledger-v2/node_modules/next/dist/compiled/loader-runner/LoaderRunner.js
+2026-01-01T06:29:29: <w>  at file dependencies /Users/benknight/Code/empathy-ledger-v2/node_modules/next/dist/compiled/webpack/bundle5.js
+2026-01-01T06:29:29: <w>  at file /Users/benknight/Code/empathy-ledger-v2/node_modules/next/dist/compiled/webpack/bundle5.js
+2026-01-01T06:29:29: <w>  at file dependencies /Users/benknight/Code/empathy-ledger-v2/node_modules/next/dist/compiled/webpack/webpack.js
+2026-01-01T06:29:29: <w>  at file /Users/benknight/Code/empathy-ledger-v2/node_modules/next/dist/compiled/webpack/webpack.js
+2026-01-01T06:29:29: <w>  at file dependencies /Users/benknight/Code/empathy-ledger-v2/node_modules/next/dist/build/webpack/plugins/define-env-plugin.js
+2026-01-01T06:29:29: <w>  at file /Users/benknight/Code/empathy-ledger-v2/node_modules/next/dist/build/webpack/plugins/define-env-plugin.js
+2026-01-01T06:29:29: <w>  at file dependencies /Users/benknight/Code/empathy-ledger-v2/node_modules/next/dist/build/swc/index.js
+2026-01-01T06:29:29: <w>  at file /Users/benknight/Code/empathy-ledger-v2/node_modules/next/dist/build/swc/index.js
+2026-01-01T06:29:29: <w>  at file dependencies /Users/benknight/Code/empathy-ledger-v2/node_modules/next/dist/build/webpack/loaders/next-barrel-loader.js
+2026-01-01T06:29:29: <w>  at file /Users/benknight/Code/empathy-ledger-v2/node_modules/next/dist/build/webpack/loaders/next-barrel-loader.js
+2026-01-01T06:29:29: <w>  at resolve commonjs /Users/benknight/Code/empathy-ledger-v2/node_modules/next/dist/build/webpack/loaders/next-barrel-loader.js
+2026-01-01T06:44:30: Error fetching storytellers: {
+2026-01-01T06:44:30:   code: 'PGRST200',
+2026-01-01T06:44:30:   details: "Searched for a foreign key relationship between 'profiles' and 'profile_organizations' in the schema 'public', but no matches were found.",
+2026-01-01T06:44:30:   hint: "Perhaps you meant 'organizations' instead of 'profile_organizations'.",
+2026-01-01T06:44:30:   message: "Could not find a relationship between 'profiles' and 'profile_organizations' in the schema cache"
+2026-01-01T06:44:30: }
+2026-01-01T10:30:40: <w> [webpack.cache.PackFileCacheStrategy] Serializing big strings (130kiB) impacts deserialization performance (consider using Buffer instead and decode when needed)
+2026-01-01T13:26:13: <w> [webpack.cache.PackFileCacheStrategy] Restoring pack from /Users/benknight/Code/empathy-ledger-v2/.next/cache/webpack/client-development.pack.gz failed: TypeError: Cannot read properties of undefined (reading 'hasStartTime')
+2026-01-01T13:27:13: <w> [webpack.cache.PackFileCacheStrategy] Serializing big strings (130kiB) impacts deserialization performance (consider using Buffer instead and decode when needed)
+2026-01-01T13:27:14: <w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename '/Users/benknight/Code/empathy-ledger-v2/.next/cache/webpack/server-development/1.pack.gz_' -> '/Users/benknight/Code/empathy-ledger-v2/.next/cache/webpack/server-development/1.pack.gz'
+2026-01-01T17:02:45: 
+2026-01-01T17:02:45: warn - The `content` option in your Tailwind CSS configuration is missing or empty.
+2026-01-01T17:02:45: warn - Configure your content sources or your generated CSS will be missing styles.
+2026-01-01T17:02:45: warn - https://tailwindcss.com/docs/content-configuration
+2026-01-01T17:02:45:  ⨯ ./src/app/globals.css
+2026-01-01T17:02:45: Module not found: Can't resolve 'tailwindcss'
+2026-01-01T17:02:45: 
+2026-01-01T17:02:45: https://nextjs.org/docs/messages/module-not-found
+2026-01-01T17:02:45: 
+2026-01-01T17:02:45: Import trace for requested module:
+2026-01-01T17:02:45: ./src/app/globals.css
+2026-01-01T17:02:45: Error: ENOENT: no such file or directory, scandir '/Users/benknight/Code/empathy-ledger-v2/src/pages'
+2026-01-01T17:02:45:     at async Object.readdir (node:internal/fs/promises:952:18)
+2026-01-01T17:02:45:     at async /Users/benknight/Code/empathy-ledger-v2/node_modules/next/dist/lib/recursive-readdir.js:39:29
+2026-01-01T17:02:45:     at async Promise.all (index 0)
+2026-01-01T17:02:45:     at async recursiveReadDir (/Users/benknight/Code/empathy-ledger-v2/node_modules/next/dist/lib/recursive-readdir.js:32:25)
+2026-01-01T17:02:45:     at async /Users/benknight/Code/empathy-ledger-v2/node_modules/next/dist/server/future/route-matcher-providers/dev/helpers/file-reader/batched-file-reader.js:71:25
+2026-01-01T17:02:45:     at async Promise.all (index 0)
+2026-01-01T17:02:45:     at async BatchedFileReader.load (/Users/benknight/Code/empathy-ledger-v2/node_modules/next/dist/server/future/route-matcher-providers/dev/helpers/file-reader/batched-file-reader.js:67:25)
+2026-01-01T17:02:45:     at async /Users/benknight/Code/empathy-ledger-v2/node_modules/next/dist/server/future/route-matcher-providers/dev/helpers/file-reader/batched-file-reader.js:41:26 {
+2026-01-01T17:02:45:   errno: -2,
+2026-01-01T17:02:45:   code: 'ENOENT',
+2026-01-01T17:02:45:   syscall: 'scandir',
+2026-01-01T17:02:45:   path: '/Users/benknight/Code/empathy-ledger-v2/src/pages'
+2026-01-01T17:02:45: }
+2026-01-01T17:02:45:  ⨯ unhandledRejection: Error: ENOENT: no such file or directory, scandir '/Users/benknight/Code/empathy-ledger-v2/src/pages'
+2026-01-01T17:02:45:     at async Object.readdir (node:internal/fs/promises:952:18)
+2026-01-01T17:02:45:     at async /Users/benknight/Code/empathy-ledger-v2/node_modules/next/dist/lib/recursive-readdir.js:39:29
+2026-01-01T17:02:45:     at async Promise.all (index 0)
+2026-01-01T17:02:45:     at async recursiveReadDir (/Users/benknight/Code/empathy-ledger-v2/node_modules/next/dist/lib/recursive-readdir.js:32:25)
+2026-01-01T17:02:45:     at async /Users/benknight/Code/empathy-ledger-v2/node_modules/next/dist/server/future/route-matcher-providers/dev/helpers/file-reader/batched-file-reader.js:71:25
+2026-01-01T17:02:45:     at async Promise.all (index 0)
+2026-01-01T17:02:45:     at async BatchedFileReader.load (/Users/benknight/Code/empathy-ledger-v2/node_modules/next/dist/server/future/route-matcher-providers/dev/helpers/file-reader/batched-file-reader.js:67:25)
+2026-01-01T17:02:45:     at async /Users/benknight/Code/empathy-ledger-v2/node_modules/next/dist/server/future/route-matcher-providers/dev/helpers/file-reader/batched-file-reader.js:41:26 {
+2026-01-01T17:02:45:   errno: -2,
+2026-01-01T17:02:45:   code: 'ENOENT',
+2026-01-01T17:02:45:   syscall: 'scandir',
+2026-01-01T17:02:45:   path: '/Users/benknight/Code/empathy-ledger-v2/src/pages'
+2026-01-01T17:02:45: }
+2026-01-01T17:02:45:  ⨯ unhandledRejection: Error: ENOENT: no such file or directory, scandir '/Users/benknight/Code/empathy-ledger-v2/src/pages'
+2026-01-01T17:02:45:     at async Object.readdir (node:internal/fs/promises:952:18)
+2026-01-01T17:02:45:     at async /Users/benknight/Code/empathy-ledger-v2/node_modules/next/dist/lib/recursive-readdir.js:39:29
+2026-01-01T17:02:45:     at async Promise.all (index 0)
+2026-01-01T17:02:45:     at async recursiveReadDir (/Users/benknight/Code/empathy-ledger-v2/node_modules/next/dist/lib/recursive-readdir.js:32:25)
+2026-01-01T17:02:45:     at async /Users/benknight/Code/empathy-ledger-v2/node_modules/next/dist/server/future/route-matcher-providers/dev/helpers/file-reader/batched-file-reader.js:71:25
+2026-01-01T17:02:45:     at async Promise.all (index 0)
+2026-01-01T17:02:45:     at async BatchedFileReader.load (/Users/benknight/Code/empathy-ledger-v2/node_modules/next/dist/server/future/route-matcher-providers/dev/helpers/file-reader/batched-file-reader.js:67:25)
+2026-01-01T17:02:45:     at async /Users/benknight/Code/empathy-ledger-v2/node_modules/next/dist/server/future/route-matcher-providers/dev/helpers/file-reader/batched-file-reader.js:41:26 {
+2026-01-01T17:02:45:   errno: -2,
+2026-01-01T17:02:45:   code: 'ENOENT',
+2026-01-01T17:02:45:   syscall: 'scandir',
+2026-01-01T17:02:45:   path: '/Users/benknight/Code/empathy-ledger-v2/src/pages'
+2026-01-01T17:02:45: }
+2026-01-01T17:02:45:  ⨯ ./src/app/globals.css
+2026-01-01T17:02:45: Module not found: Can't resolve 'tailwindcss'
+2026-01-01T17:02:45: 
+2026-01-01T17:02:45: https://nextjs.org/docs/messages/module-not-found
+2026-01-01T17:02:45: 
+2026-01-01T17:02:45: Import trace for requested module:
+2026-01-01T17:02:45: ./src/app/globals.css
+2026-01-01T17:03:47: <w> [webpack.cache.PackFileCacheStrategy] Restoring pack from /Users/benknight/Code/empathy-ledger-v2/.next/cache/webpack/client-development.pack.gz failed: TypeError: Cannot read properties of undefined (reading 'hasStartTime')
+2026-01-01T17:03:47:  ⨯ ./src/app/globals.css
+2026-01-01T17:03:47: Module not found: Can't resolve 'tailwindcss'
+2026-01-01T17:03:47: 
+2026-01-01T17:03:47: https://nextjs.org/docs/messages/module-not-found
+2026-01-01T17:03:47: 
+2026-01-01T17:03:47: Import trace for requested module:
+2026-01-01T17:03:47: ./src/app/globals.css
+2026-01-01T17:03:47:  ⨯ ./src/app/globals.css
+2026-01-01T17:03:47: Module not found: Can't resolve 'tailwindcss'
+2026-01-01T17:03:47: 
+2026-01-01T17:03:47: https://nextjs.org/docs/messages/module-not-found
+2026-01-01T17:03:47: 
+2026-01-01T17:03:47: Import trace for requested module:
+2026-01-01T17:03:47: ./src/app/globals.css
+2026-01-01T21:10:31: error: unknown option '--turbopack'
+2026-01-01T21:10:35: error: unknown option '--turbopack'
+2026-01-01T21:10:36: error: unknown option '--turbopack'
+2026-01-01T21:10:37: error: unknown option '--turbopack'
+2026-01-01T21:10:38: error: unknown option '--turbopack'
+2026-01-01T21:10:38: error: unknown option '--turbopack'
+2026-01-01T21:10:38: error: unknown option '--turbopack'
+2026-01-01T21:10:39: error: unknown option '--turbopack'
+2026-01-01T21:10:39: error: unknown option '--turbopack'
+2026-01-01T21:10:39: error: unknown option '--turbopack'

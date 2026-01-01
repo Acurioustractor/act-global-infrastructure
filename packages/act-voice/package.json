@@ -1,0 +1,28 @@
+{
+  "name": "@act/voice",
+  "version": "1.0.0",
+  "description": "ACT's fine-tuned AI voice - consistent regenerative language across all projects",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "test": "node test/basic-test.mjs"
+  },
+  "keywords": [
+    "act",
+    "regenerative",
+    "ai",
+    "fine-tuned",
+    "lcaa",
+    "voice"
+  ],
+  "author": "A Curious Tractor",
+  "license": "MIT",
+  "dependencies": {
+    "openai": "^4.70.1"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/act/act-global-infrastructure"
+  }
+}

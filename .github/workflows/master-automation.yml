@@ -134,6 +134,21 @@ jobs:
           npm run alerts:check
 
       # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+      # STEP 7: Ingest New Knowledge
+      # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+      - name: 📚 Ingest New Knowledge
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: |
+          echo ""
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          echo "📚 STEP 7: Ingest New Knowledge"
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          npm run knowledge:sync
+
+      # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
       # SUMMARY
       # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
       - name: ✅ Summary
@@ -150,6 +165,7 @@ jobs:
           echo "  • Momentum Dashboard → Notion"
           echo "  • Smart Work Queue → Notion"
           echo "  • Smart Alerts → Checked"
+          echo "  • Knowledge Base → Synced (all ACT codebases)"
           echo ""
-          echo "🎯 Your Notion workspace is now up to date!"
+          echo "🎯 Your Notion workspace and knowledge base are now up to date!"
           echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"

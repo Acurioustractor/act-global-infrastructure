@@ -731,6 +731,620 @@ This skill should be updated when:
 - Team feedback identifies gaps (add training materials)
 - Cross-project synergies are discovered (add to workflow suggestions)
 
-Version: 1.0.0
-Last updated: 2025-12-24
+---
+
+## Advanced Integration Architecture
+
+### GoHighLevel API Deep Dive
+
+#### Official API Resources
+- **Main Documentation**: https://marketplace.gohighlevel.com/docs/
+- **Developer Portal**: https://developers.gohighlevel.com/
+- **OAuth Helper**: https://www.ghlapiv2.com/
+- **Webhook Integration**: https://marketplace.gohighlevel.com/docs/webhook/
+
+#### Authentication Methods
+
+**1. Private Integration Tokens (Recommended for ACT)**
+```javascript
+// Best for internal ACT tools - no token refresh needed
+const GHL_API_KEY = process.env.GHL_PRIVATE_TOKEN;
+
+const headers = {
+  'Authorization': `Bearer ${GHL_API_KEY}`,
+  'Content-Type': 'application/json',
+  'Version': '2021-07-28'
+};
+```
+
+**2. OAuth 2.0 (For Public Apps)**
+- Access tokens expire after ~24 hours
+- Refresh tokens valid for 1 year
+- Use for external partner integrations
+
+#### Rate Limits & Best Practices
+
+**Limits**:
+- **Burst**: 100 requests per 10 seconds per location
+- **Daily**: 200,000 requests per day per location
+
+**Response Headers to Monitor**:
+```javascript
+const rateLimitInfo = {
+  dailyLimit: response.headers['x-ratelimit-limit-daily'],
+  dailyRemaining: response.headers['x-ratelimit-daily-remaining'],
+  burstLimit: response.headers['x-ratelimit-max'],
+  burstRemaining: response.headers['x-ratelimit-remaining'],
+  intervalMs: response.headers['x-ratelimit-interval-milliseconds']
+};
+```
+
+**Implementation Pattern with Retry Logic**:
+```javascript
+import pRetry from 'p-retry';
+
+async function callGHLAPI(endpoint, options) {
+  return await pRetry(
+    async () => {
+      const response = await fetch(`https://services.leadconnectorhq.com${endpoint}`, {
+        ...options,
+        headers: {
+          'Authorization': `Bearer ${process.env.GHL_PRIVATE_TOKEN}`,
+          'Content-Type': 'application/json',
+          'Version': '2021-07-28'
+        }
+      });
+
+      // Check rate limits
+      const remaining = parseInt(response.headers.get('x-ratelimit-remaining') || '100');
+      if (remaining < 10) {
+        console.warn('⚠️ Approaching rate limit:', remaining, 'requests remaining');
+      }
+
+      if (response.status === 429) {
+        throw new Error('Rate limit exceeded');
+      }
+
+      if (response.status >= 500) {
+        throw new Error(`GHL API error: ${response.status}`);
+      }
+
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(`API error: ${error.message}`);
+      }
+
+      return await response.json();
+    },
+    {
+      retries: 3,
+      factor: 2,
+      minTimeout: 500,
+      maxTimeout: 2000,
+      onFailedAttempt: error => {
+        console.log(`Attempt ${error.attemptNumber} failed. ${error.retriesLeft} retries left.`);
+      }
+    }
+  );
+}
+```
+
+### Available MCP Servers for GoHighLevel
+
+Model Context Protocol (MCP) servers enable AI assistants like Claude to interact with GHL via natural language.
+
+#### 1. Official GoHighLevel MCP Server ⭐ Recommended
+
+**Documentation**: https://marketplace.gohighlevel.com/docs/other/mcp/
+
+**Features**:
+- Full CRUD operations on contacts, opportunities, calendars
+- Natural language queries ("Find all contacts from The Harvest")
+- Built-in rate limiting and error handling
+- Official support from GHL team
+
+**Installation**:
+```json
+{
+  "mcpServers": {
+    "gohighlevel": {
+      "command": "npx",
+      "args": ["-y", "@gohighlevel/mcp-server"],
+      "env": {
+        "GHL_API_KEY": "your-private-token",
+        "GHL_LOCATION_ID": "your-location-id"
+      }
+    }
+  }
+}
+```
+
+**Use Cases**:
+- AI-powered CRM queries: "Show me all ACT Farm residents who need follow-up"
+- Automated contact enrichment
+- Natural language pipeline management
+- AI-assisted email campaign creation
+
+#### 2. Community MCP Servers
+
+**mastanley13/GoHighLevel-MCP**
+- GitHub: https://github.com/mastanley13/GoHighLevel-MCP
+- Focus: Contact management and search
+- Status: Active development
+
+**drausal/gohighlevel-mcp**
+- GitHub: https://github.com/drausal/gohighlevel-mcp
+- Focus: Lightweight integration
+- Status: Community maintained
+
+**basicmachines-co/open-ghl-mcp**
+- GitHub: https://github.com/basicmachines-co/open-ghl-mcp
+- Focus: Open source alternative
+- Status: Experimental
+
+**Recommendation**: Use official GHL MCP server for production. Community servers for experimentation.
+
+### Notion Integration Strategy (Avoiding Duplication)
+
+#### The Problem
+How do we provide team visibility into GHL activities without duplicating CRM data in Notion?
+
+#### The Solution: Activity Log Pattern
+
+**Principle**: GHL is the single source of truth. Notion shows activity summaries with links back to GHL.
+
+**Architecture**:
+```
+GHL (Source of Truth)
+  |
+  |--- Scheduled Sync (6 hours) --> Notion Partners/Grants
+  |                                 (reconciliation, summaries only)
+  |
+  |--- Webhooks (real-time) -------> Notion Activity Log
+                                     (events, not data)
+```
+
+#### Notion Database Structure: Activity Log
+
+**Purpose**: Track GHL activities for team visibility without storing full contact data.
+
+**Schema**:
+```javascript
+{
+  "Event Type": { "select": ["Contact Created", "Deal Won", "Pipeline Updated", "Campaign Sent"] },
+  "Entity Name": { "title": "Jane Smith - The Harvest Volunteer" },
+  "Project": { "select": ["The Harvest", "ACT Farm", "Empathy Ledger", "JusticeHub"] },
+  "GHL Record ID": { "rich_text": "contact_abc123" },
+  "Action": { "rich_text": "Moved to Active Volunteer stage" },
+  "Amount": { "number": null }, // For deals only
+  "Timestamp": { "date": "2026-01-01T10:30:00Z" },
+  "GHL Link": { "url": "https://app.gohighlevel.com/location/xyz/contacts/contact_abc123" },
+  "Triggered By": { "select": ["Automation", "Manual", "Integration"] }
+}
+```
+
+**Benefits**:
+- No data duplication (just events)
+- Team sees recent activities at a glance
+- One-click to full GHL record
+- Immutable event log (audit trail)
+- No sync drift issues
+
+#### Implementation: Activity Logger Service
+
+```javascript
+// lib/activity-logger.js
+import { Client } from '@notionhq/client';
+
+export class ActivityLogger {
+  constructor() {
+    this.notion = new Client({ auth: process.env.NOTION_API_KEY });
+    this.activityDbId = process.env.NOTION_ACTIVITY_LOG_DB_ID;
+  }
+
+  async logEvent(event) {
+    const { type, entityName, project, ghlId, action, amount, triggeredBy } = event;
+
+    await this.notion.pages.create({
+      parent: { database_id: this.activityDbId },
+      properties: {
+        'Event Type': { select: { name: type } },
+        'Entity Name': { title: [{ text: { content: entityName } }] },
+        'Project': { select: { name: project } },
+        'GHL Record ID': { rich_text: [{ text: { content: ghlId } }] },
+        'Action': { rich_text: [{ text: { content: action } }] },
+        'Amount': amount ? { number: amount } : undefined,
+        'Timestamp': { date: { start: new Date().toISOString() } },
+        'GHL Link': { url: this.buildGHLLink(type, ghlId) },
+        'Triggered By': { select: { name: triggeredBy || 'Integration' } }
+      }
+    });
+  }
+
+  buildGHLLink(entityType, ghlId) {
+    const locationId = process.env.GHL_LOCATION_ID;
+    const baseUrl = `https://app.gohighlevel.com/location/${locationId}`;
+
+    const paths = {
+      'Contact Created': `/contacts/${ghlId}`,
+      'Deal Won': `/opportunities/${ghlId}`,
+      'Pipeline Updated': `/opportunities/${ghlId}`,
+      'Campaign Sent': `/marketing/emails`
+    };
+
+    return `${baseUrl}${paths[entityType] || '/contacts'}`;
+  }
+}
+
+// Usage in sync script
+const logger = new ActivityLogger();
+
+await logger.logEvent({
+  type: 'Contact Created',
+  entityName: 'Jane Smith - The Harvest Volunteer',
+  project: 'The Harvest',
+  ghlId: 'contact_abc123',
+  action: 'New volunteer signup from website form',
+  triggeredBy: 'Integration'
+});
+```
+
+#### Webhook Integration for Real-Time Logging
+
+**GHL Webhook Configuration**:
+1. GHL Settings → Integrations → Webhooks
+2. Create webhook: `https://your-domain.vercel.app/api/webhooks/ghl`
+3. Select events: Contact Created, Opportunity Won, Pipeline Stage Changed
+4. Add webhook signature verification
+
+**Webhook Handler** (Vercel Serverless):
+```javascript
+// app/api/webhooks/ghl/route.js
+import { ActivityLogger } from '@/lib/activity-logger';
+import crypto from 'crypto';
+
+export async function POST(req) {
+  // Verify webhook signature
+  const signature = req.headers.get('x-ghl-signature');
+  const body = await req.text();
+
+  const expectedSignature = crypto
+    .createHmac('sha256', process.env.GHL_WEBHOOK_SECRET)
+    .update(body)
+    .digest('hex');
+
+  if (signature !== expectedSignature) {
+    return Response.json({ error: 'Invalid signature' }, { status: 401 });
+  }
+
+  const event = JSON.parse(body);
+  const logger = new ActivityLogger();
+
+  // Route to appropriate handler
+  switch (event.type) {
+    case 'ContactCreate':
+      await logger.logEvent({
+        type: 'Contact Created',
+        entityName: `${event.contact.firstName} ${event.contact.lastName}`,
+        project: detectProject(event.contact.tags),
+        ghlId: event.contact.id,
+        action: `New contact from ${event.contact.source}`,
+        triggeredBy: 'Automation'
+      });
+      break;
+
+    case 'OpportunityStatusUpdate':
+      if (event.opportunity.status === 'won') {
+        await logger.logEvent({
+          type: 'Deal Won',
+          entityName: event.opportunity.name,
+          project: detectProject(event.opportunity.tags),
+          ghlId: event.opportunity.id,
+          action: `Deal closed: ${event.opportunity.pipelineStageName}`,
+          amount: event.opportunity.monetaryValue,
+          triggeredBy: 'Automation'
+        });
+      }
+      break;
+
+    case 'OpportunityStageUpdate':
+      await logger.logEvent({
+        type: 'Pipeline Updated',
+        entityName: event.opportunity.name,
+        project: detectProject(event.opportunity.tags),
+        ghlId: event.opportunity.id,
+        action: `Moved to ${event.opportunity.pipelineStageName}`,
+        triggeredBy: event.triggeredBy || 'Manual'
+      });
+      break;
+  }
+
+  return Response.json({ success: true });
+}
+
+function detectProject(tags = []) {
+  if (tags.includes('the-harvest')) return 'The Harvest';
+  if (tags.includes('act-farm')) return 'ACT Farm';
+  if (tags.includes('empathy-ledger')) return 'Empathy Ledger';
+  if (tags.includes('justicehub')) return 'JusticeHub';
+  return 'Unknown';
+}
+```
+
+### ACT Ecosystem Integration Strategy
+
+Based on comprehensive analysis across all ACT projects, here's the recommended integration architecture:
+
+#### Single Source of Truth by Entity
+
+| Entity Type | Source of Truth | Synced To | Sync Frequency |
+|-------------|----------------|-----------|----------------|
+| Storyteller Profiles | Empathy Ledger (Supabase) | GHL (read-only summary) | Daily |
+| Volunteer Profiles | GHL | Notion (activity log) | Real-time webhooks |
+| Donor Profiles | GHL | Notion (grants database) | 6 hours |
+| Partner Organizations | Notion | GHL (for campaigns) | Weekly |
+| Campaigns & Pipelines | GHL | Notion (activity log) | Real-time webhooks |
+| Team Documentation | Notion | N/A | Manual |
+| Elder Consent | Empathy Ledger (Supabase) | GHL (read-only flag) | Never (sovereignty) |
+
+#### Cross-Project Relationship Tracking
+
+**Challenge**: A person involved in multiple ACT projects (e.g., Empathy Ledger storyteller + ACT Farm resident + The Harvest volunteer)
+
+**Solution**: Single GHL profile with multi-project tags
+
+```javascript
+// Example: Elder involved in 3 projects
+{
+  id: 'contact_xyz789',
+  email: 'elder@example.com',
+  firstName: 'Mary',
+  lastName: 'Smith',
+  tags: [
+    'empathy-ledger',           // Base project tag
+    'act-farm',                 // Base project tag
+    'the-harvest',              // Base project tag
+    'role:elder',               // Cross-project role
+    'engagement:active',        // Status
+    'priority:high'             // VIP treatment
+  ],
+  customFields: {
+    empathy_ledger_user_id: 'uuid-from-supabase',
+    empathy_ledger_consent_status: 'full_consent',
+    act_farm_residency_dates: '2025-03-15 to 2025-03-22',
+    harvest_volunteer_hours: 24,
+    cultural_protocols: 'Kabi Kabi Elder - requires cultural review'
+  }
+}
+```
+
+**Communication Strategy**:
+- Consolidated monthly updates (not 3 separate emails)
+- Cross-project opportunities: "Your story might inspire our residents"
+- Respect cultural protocols across all touchpoints
+
+#### Integration Flow Examples
+
+**1. Empathy Ledger Storyteller → GHL**
+```javascript
+// Triggered when storyteller completes profile in Supabase
+async function syncStorytellerToGHL(storyteller) {
+  const ghlClient = createGHLClient();
+
+  // Create/update GHL contact (summary only)
+  await ghlClient.contacts.upsert({
+    email: storyteller.email,
+    firstName: storyteller.first_name,
+    lastName: storyteller.last_name,
+    tags: ['empathy-ledger', 'role:storyteller'],
+    customFields: {
+      supabase_user_id: storyteller.id,
+      storyteller_status: storyteller.profile_status,
+      stories_count: storyteller.stories_count,
+      // NOTE: Story content stays in Supabase (data sovereignty)
+      consent_status: storyteller.consent_status
+    }
+  });
+
+  // Log activity in Notion
+  await activityLogger.logEvent({
+    type: 'Contact Created',
+    entityName: `${storyteller.first_name} ${storyteller.last_name}`,
+    project: 'Empathy Ledger',
+    ghlId: contact.id,
+    action: 'New storyteller profile completed',
+    triggeredBy: 'Integration'
+  });
+}
+```
+
+**2. GHL Volunteer Signup → Notion Activity Log**
+```javascript
+// Webhook from GHL when volunteer form submitted
+async function handleVolunteerSignup(webhookData) {
+  const contact = webhookData.contact;
+
+  // Log in Notion for team visibility
+  await activityLogger.logEvent({
+    type: 'Contact Created',
+    entityName: `${contact.firstName} ${contact.lastName}`,
+    project: 'The Harvest',
+    ghlId: contact.id,
+    action: `New volunteer - interests: ${contact.customFields.volunteer_interests}`,
+    triggeredBy: 'Automation'
+  });
+
+  // Trigger welcome workflow in GHL (handled by GHL automation)
+  // Team sees activity in Notion, full details in GHL
+}
+```
+
+**3. Cross-Project Opportunity Detection**
+```javascript
+// Daily job that identifies cross-project opportunities
+async function detectCrossProjectOpportunities() {
+  const ghlClient = createGHLClient();
+
+  // Find ACT Farm residents interested in storytelling
+  const residents = await ghlClient.contacts.search({
+    tags: ['act-farm'],
+    customFieldFilters: {
+      residency_focus: { $contains: 'creative' }
+    }
+  });
+
+  for (const resident of residents) {
+    // Check if already tagged for Empathy Ledger
+    if (!resident.tags.includes('empathy-ledger-opportunity')) {
+
+      // Add tag
+      await ghlClient.contacts.addTag(resident.id, 'empathy-ledger-opportunity');
+
+      // Trigger workflow: Send personalized email about Empathy Ledger
+      await ghlClient.workflows.trigger(
+        process.env.GHL_CROSS_PROJECT_WORKFLOW_ID,
+        { contactId: resident.id }
+      );
+
+      // Log activity
+      await activityLogger.logEvent({
+        type: 'Pipeline Updated',
+        entityName: `${resident.firstName} ${resident.lastName}`,
+        project: 'ACT Farm',
+        ghlId: resident.id,
+        action: 'Identified for Empathy Ledger cross-project opportunity',
+        triggeredBy: 'Automation'
+      });
+    }
+  }
+}
+```
+
+### Recommended Implementation Phases
+
+#### Phase 1: Foundation (Week 1-2)
+**Goal**: Establish core infrastructure and governance
+
+**Deliverables**:
+1. ✅ Enhanced GHL API service with retry logic
+2. ✅ Rate limit monitoring and alerts
+3. ✅ Activity Log database in Notion
+4. ✅ Basic activity logging service
+5. ✅ Documentation of data ownership
+
+**Success Metrics**:
+- 100% API calls have retry logic
+- Rate limit warnings logged before hitting limits
+- Team can view GHL activities in Notion
+
+#### Phase 2: Real-Time Integration (Week 3-4)
+**Goal**: Enable real-time visibility without duplication
+
+**Deliverables**:
+1. ✅ GHL webhook endpoint deployed (Vercel serverless)
+2. ✅ Webhook signature verification
+3. ✅ Real-time activity logging for critical events
+4. ✅ Cross-project tag strategy implemented
+5. ✅ Team training on Activity Log usage
+
+**Success Metrics**:
+- 90% of critical events logged within 30 seconds
+- Zero webhook signature failures
+- Team adoption of Activity Log (80%+ checking weekly)
+
+#### Phase 3: Automation (Week 5-6)
+**Goal**: Automated workflows and cross-project opportunities
+
+**Deliverables**:
+1. ✅ Cross-project opportunity detection
+2. ✅ Automated welcome sequences per project
+3. ✅ Consent management for Empathy Ledger
+4. ✅ Elder/cultural protocol automation
+5. ✅ Monthly sync health reports
+
+**Success Metrics**:
+- 60% of workflows automated
+- 5+ cross-project opportunities identified per month
+- 100% cultural protocol compliance
+
+#### Phase 4: Optimization (Ongoing)
+**Goal**: Continuous improvement and community governance
+
+**Deliverables**:
+1. ✅ Monthly team retrospectives
+2. ✅ Quarterly data accuracy audits
+3. ✅ Community feedback integration
+4. ✅ MCP server integration (if AI features needed)
+5. ✅ Regenerative practice reviews
+
+**Success Metrics**:
+- 95% data accuracy in dashboards
+- 80% community satisfaction
+- Team members able to build 20% of new workflows
+
+### Environmental Configuration
+
+**Required Environment Variables**:
+```bash
+# GHL Authentication
+GHL_PRIVATE_TOKEN=your-private-integration-token
+GHL_LOCATION_ID=your-location-id
+GHL_WEBHOOK_SECRET=your-webhook-secret
+
+# Notion Integration
+NOTION_API_KEY=secret_xyz123
+NOTION_ACTIVITY_LOG_DB_ID=database-id-for-activity-log
+NOTION_PARTNERS_DB_ID=database-id-for-partners
+NOTION_GRANTS_DB_ID=database-id-for-grants
+
+# Supabase (for Empathy Ledger sync)
+SUPABASE_URL=https://your-project.supabase.co
+SUPABASE_SERVICE_KEY=service-role-key
+
+# Feature Flags
+GHL_ENABLE_WEBHOOKS=true
+GHL_ENABLE_CROSS_PROJECT_DETECTION=true
+GHL_ENABLE_ACTIVITY_LOGGING=true
+```
+
+### Monitoring & Observability
+
+**Key Metrics to Track**:
+1. GHL API rate limit usage (daily dashboard)
+2. Webhook delivery success rate (target: >99%)
+3. Activity log completeness (compare GHL events to Notion logs)
+4. Cross-project conversion rate (opportunities → engagement)
+5. Data sync accuracy (weekly audit)
+
+**Alerting Rules**:
+- Alert when daily API usage >80% of limit
+- Alert on webhook signature failures
+- Alert when sync job fails 3 times consecutively
+- Alert when cultural protocol violation detected
+
+### Security & Compliance
+
+**Cultural Data Sovereignty**:
+- Elder consent data NEVER leaves Supabase
+- Cultural protocols enforced at API level
+- OCAP principles applied to all Indigenous data
+- Read-only GHL access for sensitive content
+
+**Data Privacy**:
+- All API calls logged for audit trail
+- PII minimization in Notion (just summaries)
+- Webhook payloads encrypted in transit
+- Regular security audits
+
+**Consent Management**:
+- Explicit opt-in required for all communications
+- Granular consent per communication type
+- Easy opt-out mechanism
+- Consent status synced across systems
+
+---
+
+Version: 2.0.0
+Last updated: 2026-01-01
 Maintained by: ACT Development Team
+Enhanced with ACT Voice v1.0 ecosystem analysis

@@ -1,0 +1,236 @@
+2026-01-01T08:02:56: 
+2026-01-01T08:02:56: <--- Last few GCs --->
+2026-01-01T08:02:56: 
+2026-01-01T08:02:56: [13529:0x945400000]  4706909 ms: Scavenge 17946.8 (18457.0) -> 17938.7 (18460.5) MB, 44.58 / 0.00 ms  (average mu = 0.270, current mu = 0.236) allocation failure; 
+2026-01-01T08:02:56: [13529:0x945400000]  4707005 ms: Scavenge 17951.0 (18460.5) -> 17942.8 (18464.2) MB, 51.46 / 0.00 ms  (average mu = 0.270, current mu = 0.236) allocation failure; 
+2026-01-01T08:02:56: [13529:0x945400000]  4707093 ms: Scavenge 17952.0 (18464.2) -> 17945.7 (18466.7) MB, 55.71 / 0.00 ms  (average mu = 0.270, current mu = 0.236) task; 
+2026-01-01T08:02:56: 
+2026-01-01T08:02:56: 
+2026-01-01T08:02:56: <--- JS stacktrace --->
+2026-01-01T08:02:56: 
+2026-01-01T08:02:56: FATAL ERROR: Ineffective mark-compacts near heap limit Allocation failed - JavaScript heap out of memory
+2026-01-01T08:02:56: ----- Native stack trace -----
+2026-01-01T08:02:56: 
+2026-01-01T08:02:56:  1: 0x102fbd5b8 node::OOMErrorHandler(char const*, v8::OOMDetails const&) [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T08:02:56:  2: 0x10317b968 v8::internal::V8::FatalProcessOutOfMemory(v8::internal::Isolate*, char const*, v8::OOMDetails const&) [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T08:02:56:  3: 0x1033897bc v8::internal::Heap::GarbageCollectionReasonToString(v8::internal::GarbageCollectionReason) [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T08:02:56:  4: 0x10338d2b8 v8::internal::Heap::CollectGarbageShared(v8::internal::LocalHeap*, v8::internal::GarbageCollectionReason) [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T08:02:56:  5: 0x10338a134 v8::internal::Heap::PerformGarbageCollection(v8::internal::GarbageCollector, v8::internal::GarbageCollectionReason, char const*) [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T08:02:56:  6: 0x103387cb0 v8::internal::Heap::CollectGarbage(v8::internal::AllocationSpace, v8::internal::GarbageCollectionReason, v8::GCCallbackFlags) [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T08:02:56:  7: 0x10337dfc0 v8::internal::HeapAllocator::AllocateRawWithLightRetrySlowPath(int, v8::internal::AllocationType, v8::internal::AllocationOrigin, v8::internal::AllocationAlignment) [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T08:02:56:  8: 0x10337e818 v8::internal::HeapAllocator::AllocateRawWithRetryOrFailSlowPath(int, v8::internal::AllocationType, v8::internal::AllocationOrigin, v8::internal::AllocationAlignment) [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T08:02:56:  9: 0x1033625a8 v8::internal::Factory::AllocateRaw(int, v8::internal::AllocationType, v8::internal::AllocationAlignment) [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T08:02:56: 10: 0x103358490 v8::internal::MaybeHandle<v8::internal::SeqOneByteString> v8::internal::FactoryBase<v8::internal::Factory>::NewRawStringWithMap<v8::internal::SeqOneByteString>(int, v8::internal::Map, v8::internal::AllocationType) [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T08:02:56: 11: 0x1033649d4 v8::internal::Factory::NewStringFromUtf8(v8::base::Vector<unsigned char const> const&, unibrow::Utf8Variant, v8::internal::AllocationType) [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T08:02:56: 12: 0x103364b90 v8::internal::Factory::NewStringFromUtf8(v8::base::Vector<char const> const&, v8::internal::AllocationType) [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T08:02:56: 13: 0x10319e8dc v8::String::NewFromUtf8(v8::Isolate*, char const*, v8::NewStringType, int) [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T08:02:56: 14: 0x102f6a5ac napi_create_string_utf8 [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T08:02:56: 15: 0x1309d40d4 blake3_compress_in_place_portable [/Users/benknight/Code/act-farm/node_modules/@next/swc-darwin-arm64/next-swc.darwin-arm64.node]
+2026-01-01T08:02:56: 16: 0x1309d88b4 napi_register_module_v1 [/Users/benknight/Code/act-farm/node_modules/@next/swc-darwin-arm64/next-swc.darwin-arm64.node]
+2026-01-01T08:02:56: 17: 0x12d0e8ecc  [/Users/benknight/Code/act-farm/node_modules/@next/swc-darwin-arm64/next-swc.darwin-arm64.node]
+2026-01-01T08:02:56: 18: 0x12cc9848c  [/Users/benknight/Code/act-farm/node_modules/@next/swc-darwin-arm64/next-swc.darwin-arm64.node]
+2026-01-01T08:02:56: 19: 0x12ce052f8  [/Users/benknight/Code/act-farm/node_modules/@next/swc-darwin-arm64/next-swc.darwin-arm64.node]
+2026-01-01T08:02:56: 20: 0x12cc97c88  [/Users/benknight/Code/act-farm/node_modules/@next/swc-darwin-arm64/next-swc.darwin-arm64.node]
+2026-01-01T08:02:56: 21: 0x12ccd54e4  [/Users/benknight/Code/act-farm/node_modules/@next/swc-darwin-arm64/next-swc.darwin-arm64.node]
+2026-01-01T08:02:56: 22: 0x102f86c1c v8impl::(anonymous namespace)::ThreadSafeFunction::AsyncCb(uv_async_s*) [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T08:02:56: 23: 0x103a58f28 uv__async_io [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T08:02:56: 24: 0x103a6bbd0 uv__io_poll [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T08:02:56: 25: 0x103a59490 uv_run [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T08:02:56: 26: 0x102ed57e8 node::SpinEventLoopInternal(node::Environment*) [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T08:02:56: 27: 0x103001eec node::NodeMainInstance::Run() [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T08:02:56: 28: 0x102f7fcfc node::Start(int, char**) [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T08:02:56: 29: 0x1949a9d54 start [/usr/lib/dyld]
+2026-01-01T08:03:00: Error: Can't resolve 'tailwindcss' in '/Users/benknight/Code'
+2026-01-01T08:03:00:     [2m[at finishWithoutResolve (/Users/benknight/Code/act-farm/node_modules/enhanced-resolve/lib/Resolver.js:565:18)][0m
+2026-01-01T08:03:00:     [2m[at /Users/benknight/Code/act-farm/node_modules/enhanced-resolve/lib/Resolver.js:657:14][0m
+2026-01-01T08:03:00:     [2m[at /Users/benknight/Code/act-farm/node_modules/enhanced-resolve/lib/Resolver.js:718:5][0m
+2026-01-01T08:03:00:     [2m[at eval (eval at create (/Users/benknight/Code/act-farm/node_modules/tapable/lib/HookCodeFactory.js:31:10), <anonymous>:15:1)][0m
+2026-01-01T08:03:00:     [2m[at /Users/benknight/Code/act-farm/node_modules/enhanced-resolve/lib/Resolver.js:718:5][0m
+2026-01-01T08:03:00:     [2m[at eval (eval at create (/Users/benknight/Code/act-farm/node_modules/tapable/lib/HookCodeFactory.js:31:10), <anonymous>:16:1)][0m
+2026-01-01T08:03:00:     [2m[at /Users/benknight/Code/act-farm/node_modules/enhanced-resolve/lib/Resolver.js:718:5][0m
+2026-01-01T08:03:00:     [2m[at eval (eval at create (/Users/benknight/Code/act-farm/node_modules/tapable/lib/HookCodeFactory.js:31:10), <anonymous>:15:1)][0m
+2026-01-01T08:03:00:     [2m[at /Users/benknight/Code/act-farm/node_modules/enhanced-resolve/lib/Resolver.js:718:5][0m
+2026-01-01T08:03:00:     [2m[at eval (eval at create (/Users/benknight/Code/act-farm/node_modules/tapable/lib/HookCodeFactory.js:31:10), <anonymous>:15:1)][0m {
+2026-01-01T08:03:00:   details: "resolve 'tailwindcss' in '/Users/benknight/Code'\n" +
+2026-01-01T08:03:00:     '  Parsed request is a module\n' +
+2026-01-01T08:03:00:     '  No description file found in /Users/benknight/Code or above\n' +
+2026-01-01T08:03:00:     '  resolve as module\n' +
+2026-01-01T08:03:00:     "    /Users/benknight/Code/node_modules doesn't exist or is not a directory\n" +
+2026-01-01T08:03:00:     "    /Users/benknight/node_modules doesn't exist or is not a directory\n" +
+2026-01-01T08:03:00:     "    /Users/node_modules doesn't exist or is not a directory\n" +
+2026-01-01T08:03:00:     "    /node_modules doesn't exist or is not a directory"
+2026-01-01T08:03:00: }
+2026-01-01T09:55:17: 
+2026-01-01T09:55:17: <--- Last few GCs --->
+2026-01-01T09:55:17: 
+2026-01-01T09:55:17: [15691:0xba9400000]  6716547 ms: Scavenge 17924.6 (18446.3) -> 17916.5 (18446.3) MB, 32.42 / 0.00 ms  (average mu = 0.231, current mu = 0.170) allocation failure; 
+2026-01-01T09:55:17: [15691:0xba9400000]  6716632 ms: Scavenge 17943.0 (18460.3) -> 17934.8 (18463.6) MB, 46.71 / 0.00 ms  (average mu = 0.231, current mu = 0.170) allocation failure; 
+2026-01-01T09:55:17: [15691:0xba9400000]  6716707 ms: Scavenge 17946.9 (18463.6) -> 17938.8 (18466.8) MB, 45.21 / 0.00 ms  (average mu = 0.231, current mu = 0.170) allocation failure; 
+2026-01-01T09:55:17: 
+2026-01-01T09:55:17: 
+2026-01-01T09:55:17: <--- JS stacktrace --->
+2026-01-01T09:55:17: 
+2026-01-01T09:55:17: FATAL ERROR: Ineffective mark-compacts near heap limit Allocation failed - JavaScript heap out of memory
+2026-01-01T09:55:17: ----- Native stack trace -----
+2026-01-01T09:55:17: 
+2026-01-01T09:55:17:  1: 0x1009f95b8 node::OOMErrorHandler(char const*, v8::OOMDetails const&) [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T09:55:17:  2: 0x100bb7968 v8::internal::V8::FatalProcessOutOfMemory(v8::internal::Isolate*, char const*, v8::OOMDetails const&) [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T09:55:17:  3: 0x100dc57bc v8::internal::Heap::GarbageCollectionReasonToString(v8::internal::GarbageCollectionReason) [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T09:55:17:  4: 0x100dc92b8 v8::internal::Heap::CollectGarbageShared(v8::internal::LocalHeap*, v8::internal::GarbageCollectionReason) [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T09:55:17:  5: 0x100dc6134 v8::internal::Heap::PerformGarbageCollection(v8::internal::GarbageCollector, v8::internal::GarbageCollectionReason, char const*) [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T09:55:17:  6: 0x100dc3cb0 v8::internal::Heap::CollectGarbage(v8::internal::AllocationSpace, v8::internal::GarbageCollectionReason, v8::GCCallbackFlags) [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T09:55:17:  7: 0x100db9fc0 v8::internal::HeapAllocator::AllocateRawWithLightRetrySlowPath(int, v8::internal::AllocationType, v8::internal::AllocationOrigin, v8::internal::AllocationAlignment) [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T09:55:17:  8: 0x100dba818 v8::internal::HeapAllocator::AllocateRawWithRetryOrFailSlowPath(int, v8::internal::AllocationType, v8::internal::AllocationOrigin, v8::internal::AllocationAlignment) [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T09:55:17:  9: 0x100d9e5a8 v8::internal::Factory::AllocateRaw(int, v8::internal::AllocationType, v8::internal::AllocationAlignment) [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T09:55:17: 10: 0x100d94490 v8::internal::MaybeHandle<v8::internal::SeqOneByteString> v8::internal::FactoryBase<v8::internal::Factory>::NewRawStringWithMap<v8::internal::SeqOneByteString>(int, v8::internal::Map, v8::internal::AllocationType) [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T09:55:17: 11: 0x100da09d4 v8::internal::Factory::NewStringFromUtf8(v8::base::Vector<unsigned char const> const&, unibrow::Utf8Variant, v8::internal::AllocationType) [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T09:55:17: 12: 0x100da0b90 v8::internal::Factory::NewStringFromUtf8(v8::base::Vector<char const> const&, v8::internal::AllocationType) [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T09:55:17: 13: 0x100bda8dc v8::String::NewFromUtf8(v8::Isolate*, char const*, v8::NewStringType, int) [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T09:55:17: 14: 0x1009a65ac napi_create_string_utf8 [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T09:55:17: 15: 0x12e1d40d4 blake3_compress_in_place_portable [/Users/benknight/Code/act-farm/node_modules/@next/swc-darwin-arm64/next-swc.darwin-arm64.node]
+2026-01-01T09:55:17: 16: 0x12e1d88b4 napi_register_module_v1 [/Users/benknight/Code/act-farm/node_modules/@next/swc-darwin-arm64/next-swc.darwin-arm64.node]
+2026-01-01T09:55:17: 17: 0x12a8e8ecc  [/Users/benknight/Code/act-farm/node_modules/@next/swc-darwin-arm64/next-swc.darwin-arm64.node]
+2026-01-01T09:55:17: 18: 0x12a49848c  [/Users/benknight/Code/act-farm/node_modules/@next/swc-darwin-arm64/next-swc.darwin-arm64.node]
+2026-01-01T09:55:17: 19: 0x12a6052f8  [/Users/benknight/Code/act-farm/node_modules/@next/swc-darwin-arm64/next-swc.darwin-arm64.node]
+2026-01-01T09:55:17: 20: 0x12a497c88  [/Users/benknight/Code/act-farm/node_modules/@next/swc-darwin-arm64/next-swc.darwin-arm64.node]
+2026-01-01T09:55:17: 21: 0x12a4d54e4  [/Users/benknight/Code/act-farm/node_modules/@next/swc-darwin-arm64/next-swc.darwin-arm64.node]
+2026-01-01T09:55:17: 22: 0x1009c2c1c v8impl::(anonymous namespace)::ThreadSafeFunction::AsyncCb(uv_async_s*) [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T09:55:17: 23: 0x101494f28 uv__async_io [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T09:55:17: 24: 0x1014a7bd0 uv__io_poll [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T09:55:17: 25: 0x101495490 uv_run [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T09:55:17: 26: 0x1009117e8 node::SpinEventLoopInternal(node::Environment*) [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T09:55:17: 27: 0x100a3deec node::NodeMainInstance::Run() [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T09:55:17: 28: 0x1009bbcfc node::Start(int, char**) [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T09:55:17: 29: 0x1949a9d54 start [/usr/lib/dyld]
+2026-01-01T10:50:19: 
+2026-01-01T10:50:19: <--- Last few GCs --->
+2026-01-01T10:50:19: 
+2026-01-01T10:50:19: [41006:0xb59400000]  3282865 ms: Scavenge 17802.8 (18282.0) -> 17794.9 (18285.3) MB, 40.83 / 0.00 ms  (average mu = 0.319, current mu = 0.353) allocation failure; 
+2026-01-01T10:50:19: [41006:0xb59400000]  3282940 ms: Scavenge 17807.1 (18285.3) -> 17799.0 (18289.3) MB, 40.50 / 0.00 ms  (average mu = 0.319, current mu = 0.353) allocation failure; 
+2026-01-01T10:50:19: [41006:0xb59400000]  3283160 ms: Scavenge (reduce) 17811.3 (18289.3) -> 17803.0 (18269.0) MB, 46.04 / 0.00 ms  (average mu = 0.319, current mu = 0.353) allocation failure; 
+2026-01-01T10:50:19: 
+2026-01-01T10:50:19: 
+2026-01-01T10:50:19: <--- JS stacktrace --->
+2026-01-01T10:50:19: 
+2026-01-01T10:50:19: FATAL ERROR: Ineffective mark-compacts near heap limit Allocation failed - JavaScript heap out of memory
+2026-01-01T10:50:19: ----- Native stack trace -----
+2026-01-01T10:50:19: 
+2026-01-01T10:50:19:  1: 0x1008f95b8 node::OOMErrorHandler(char const*, v8::OOMDetails const&) [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T10:50:19:  2: 0x100ab7968 v8::internal::V8::FatalProcessOutOfMemory(v8::internal::Isolate*, char const*, v8::OOMDetails const&) [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T10:50:19:  3: 0x100cc57bc v8::internal::Heap::GarbageCollectionReasonToString(v8::internal::GarbageCollectionReason) [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T10:50:19:  4: 0x100cc92b8 v8::internal::Heap::CollectGarbageShared(v8::internal::LocalHeap*, v8::internal::GarbageCollectionReason) [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T10:50:19:  5: 0x100cc6134 v8::internal::Heap::PerformGarbageCollection(v8::internal::GarbageCollector, v8::internal::GarbageCollectionReason, char const*) [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T10:50:19:  6: 0x100cc3cb0 v8::internal::Heap::CollectGarbage(v8::internal::AllocationSpace, v8::internal::GarbageCollectionReason, v8::GCCallbackFlags) [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T10:50:19:  7: 0x100cc32dc v8::internal::Heap::HandleGCRequest() [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T10:50:19:  8: 0x100c5d46c v8::internal::StackGuard::HandleInterrupts() [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T10:50:19:  9: 0x1010aba14 v8::internal::Runtime_StackGuard(int, unsigned long*, v8::internal::Isolate*) [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T10:50:19: 10: 0x101440c44 Builtins_CEntry_Return1_ArgvOnStack_NoBuiltinExit [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T10:50:19: 11: 0x1014109e8 Builtins_MapPrototypeSet [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T10:50:19: 12: 0x10a9ac440 
+2026-01-01T10:50:19: 13: 0x10a9af214 
+2026-01-01T10:50:19: 14: 0x1013ef210 Builtins_AsyncFunctionAwaitResolveClosure [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T10:50:19: 15: 0x10149cfb8 Builtins_PromiseFulfillReactionJob [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T10:50:19: 16: 0x1013deb94 Builtins_RunMicrotasks [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T10:50:19: 17: 0x1013b63f4 Builtins_JSRunMicrotasksEntry [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T10:50:19: 18: 0x100c3022c v8::internal::(anonymous namespace)::Invoke(v8::internal::Isolate*, v8::internal::(anonymous namespace)::InvokeParams const&) [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T10:50:19: 19: 0x100c30b58 v8::internal::(anonymous namespace)::InvokeWithTryCatch(v8::internal::Isolate*, v8::internal::(anonymous namespace)::InvokeParams const&) [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T10:50:19: 20: 0x100c30d44 v8::internal::Execution::TryRunMicrotasks(v8::internal::Isolate*, v8::internal::MicrotaskQueue*) [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T10:50:19: 21: 0x100c5ba34 v8::internal::MicrotaskQueue::RunMicrotasks(v8::internal::Isolate*) [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T10:50:19: 22: 0x100c5c1c0 v8::internal::MicrotaskQueue::PerformCheckpoint(v8::Isolate*) [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T10:50:19: 23: 0x100810c84 node::InternalCallbackScope::Close() [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T10:50:19: 24: 0x100810824 node::CallbackScope::~CallbackScope() [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T10:50:19: 25: 0x1008c2cec v8impl::(anonymous namespace)::ThreadSafeFunction::AsyncCb(uv_async_s*) [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T10:50:19: 26: 0x101394f28 uv__async_io [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T10:50:19: 27: 0x1013a7bd0 uv__io_poll [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T10:50:19: 28: 0x101395490 uv_run [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T10:50:19: 29: 0x1008117e8 node::SpinEventLoopInternal(node::Environment*) [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T10:50:19: 30: 0x10093deec node::NodeMainInstance::Run() [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T10:50:20: 31: 0x1008bbcfc node::Start(int, char**) [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T10:50:20: 32: 0x1949a9d54 start [/usr/lib/dyld]
+2026-01-01T12:53:22: 
+2026-01-01T12:53:22: <--- Last few GCs --->
+2026-01-01T12:53:22: 
+2026-01-01T12:53:22: [20681:0xc05800000]  7369226 ms: Scavenge (reduce) 17805.5 (18333.8) -> 17805.0 (18333.8) MB, 27.79 / 0.00 ms  (average mu = 0.382, current mu = 0.370) allocation failure; 
+2026-01-01T12:53:22: [20681:0xc05800000]  7369299 ms: Scavenge (reduce) 17805.7 (18333.8) -> 17805.3 (18333.8) MB, 28.12 / 0.00 ms  (average mu = 0.382, current mu = 0.370) allocation failure; 
+2026-01-01T12:53:22: 
+2026-01-01T12:53:22: 
+2026-01-01T12:53:22: <--- JS stacktrace --->
+2026-01-01T12:53:22: 
+2026-01-01T12:53:22: FATAL ERROR: Ineffective mark-compacts near heap limit Allocation failed - JavaScript heap out of memory
+2026-01-01T12:53:22: ----- Native stack trace -----
+2026-01-01T12:53:22: 
+2026-01-01T12:53:22:  1: 0x1042b15b8 node::OOMErrorHandler(char const*, v8::OOMDetails const&) [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T12:53:22:  2: 0x10446f968 v8::internal::V8::FatalProcessOutOfMemory(v8::internal::Isolate*, char const*, v8::OOMDetails const&) [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T12:53:22:  3: 0x10467d7bc v8::internal::Heap::GarbageCollectionReasonToString(v8::internal::GarbageCollectionReason) [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T12:53:22:  4: 0x1046812b8 v8::internal::Heap::CollectGarbageShared(v8::internal::LocalHeap*, v8::internal::GarbageCollectionReason) [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T12:53:22:  5: 0x10467e134 v8::internal::Heap::PerformGarbageCollection(v8::internal::GarbageCollector, v8::internal::GarbageCollectionReason, char const*) [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T12:53:22:  6: 0x10467bcb0 v8::internal::Heap::CollectGarbage(v8::internal::AllocationSpace, v8::internal::GarbageCollectionReason, v8::GCCallbackFlags) [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T12:53:22:  7: 0x10467b2dc v8::internal::Heap::HandleGCRequest() [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T12:53:22:  8: 0x10461546c v8::internal::StackGuard::HandleInterrupts() [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T12:53:22:  9: 0x104a63bac v8::internal::Runtime_StackGuardWithGap(int, unsigned long*, v8::internal::Isolate*) [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T12:53:22: 10: 0x104df8c44 Builtins_CEntry_Return1_ArgvOnStack_NoBuiltinExit [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T12:53:22: 11: 0x10e1b7ae4 
+2026-01-01T12:53:22: 12: 0x104d6e50c Builtins_JSEntryTrampoline [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T12:53:22: 13: 0x104d6e1f4 Builtins_JSEntry [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T12:53:22: 14: 0x1045e8274 v8::internal::(anonymous namespace)::Invoke(v8::internal::Isolate*, v8::internal::(anonymous namespace)::InvokeParams const&) [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T12:53:22: 15: 0x1045e7b08 v8::internal::Execution::Call(v8::internal::Isolate*, v8::internal::Handle<v8::internal::Object>, v8::internal::Handle<v8::internal::Object>, int, v8::internal::Handle<v8::internal::Object>*) [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T12:53:22: 16: 0x10448b998 v8::Function::Call(v8::Local<v8::Context>, v8::Local<v8::Value>, int, v8::Local<v8::Value>*) [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T12:53:22: 17: 0x104260064 napi_call_function [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T12:53:22: 18: 0x12dcd5830  [/Users/benknight/Code/act-farm/node_modules/@next/swc-darwin-arm64/next-swc.darwin-arm64.node]
+2026-01-01T12:53:22: 19: 0x10427ac1c v8impl::(anonymous namespace)::ThreadSafeFunction::AsyncCb(uv_async_s*) [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T12:53:22: 20: 0x104d4cf28 uv__async_io [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T12:53:22: 21: 0x104d5fbd0 uv__io_poll [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T12:53:22: 22: 0x104d4d490 uv_run [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T12:53:22: 23: 0x1041c97e8 node::SpinEventLoopInternal(node::Environment*) [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T12:53:22: 24: 0x1042f5eec node::NodeMainInstance::Run() [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T12:53:22: 25: 0x104273cfc node::Start(int, char**) [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T12:53:22: 26: 0x1949a9d54 start [/usr/lib/dyld]
+2026-01-01T13:46:41: 
+2026-01-01T13:46:41: <--- Last few GCs --->
+2026-01-01T13:46:41: 
+2026-01-01T13:46:41: [52286:0xad3400000]  3176535 ms: Scavenge 17950.6 (18455.5) -> 17942.6 (18459.2) MB, 55.04 / 0.00 ms  (average mu = 0.392, current mu = 0.420) allocation failure; 
+2026-01-01T13:46:41: [52286:0xad3400000]  3176624 ms: Scavenge 17954.7 (18459.2) -> 17946.6 (18463.0) MB, 53.88 / 0.00 ms  (average mu = 0.392, current mu = 0.420) allocation failure; 
+2026-01-01T13:46:41: [52286:0xad3400000]  3176731 ms: Scavenge 17958.9 (18463.0) -> 17950.6 (18465.8) MB, 71.29 / 0.00 ms  (average mu = 0.392, current mu = 0.420) allocation failure; 
+2026-01-01T13:46:41: 
+2026-01-01T13:46:41: 
+2026-01-01T13:46:41: <--- JS stacktrace --->
+2026-01-01T13:46:41: 
+2026-01-01T13:46:41: FATAL ERROR: Ineffective mark-compacts near heap limit Allocation failed - JavaScript heap out of memory
+2026-01-01T13:46:41: ----- Native stack trace -----
+2026-01-01T13:46:41: 
+2026-01-01T13:46:41:  1: 0x1042095b8 node::OOMErrorHandler(char const*, v8::OOMDetails const&) [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T13:46:41:  2: 0x1043c7968 v8::internal::V8::FatalProcessOutOfMemory(v8::internal::Isolate*, char const*, v8::OOMDetails const&) [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T13:46:41:  3: 0x1045d57bc v8::internal::Heap::GarbageCollectionReasonToString(v8::internal::GarbageCollectionReason) [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T13:46:41:  4: 0x1045d92b8 v8::internal::Heap::CollectGarbageShared(v8::internal::LocalHeap*, v8::internal::GarbageCollectionReason) [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T13:46:41:  5: 0x1045d6134 v8::internal::Heap::PerformGarbageCollection(v8::internal::GarbageCollector, v8::internal::GarbageCollectionReason, char const*) [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T13:46:41:  6: 0x1045d3cb0 v8::internal::Heap::CollectGarbage(v8::internal::AllocationSpace, v8::internal::GarbageCollectionReason, v8::GCCallbackFlags) [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T13:46:41:  7: 0x10464106c v8::internal::MinorGCJob::Task::RunInternal() [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T13:46:41:  8: 0x104279308 node::PerIsolatePlatformData::RunForegroundTask(std::__1::unique_ptr<v8::Task, std::__1::default_delete<v8::Task>>) [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T13:46:41:  9: 0x10427835c node::PerIsolatePlatformData::FlushForegroundTasksInternal() [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T13:46:41: 10: 0x104ca4f28 uv__async_io [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T13:46:41: 11: 0x104cb7bd0 uv__io_poll [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T13:46:41: 12: 0x104ca5490 uv_run [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T13:46:41: 13: 0x1041217e8 node::SpinEventLoopInternal(node::Environment*) [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T13:46:41: 14: 0x10424deec node::NodeMainInstance::Run() [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T13:46:41: 15: 0x1041cbcfc node::Start(int, char**) [/Users/benknight/.nvm/versions/node/v20.19.3/bin/node]
+2026-01-01T13:46:41: 16: 0x1949a9d54 start [/usr/lib/dyld]
+2026-01-01T21:10:49: Error: Can't resolve 'tailwindcss' in '/Users/benknight/Code'
+2026-01-01T21:10:49:     [2m[at finishWithoutResolve (/Users/benknight/Code/act-farm/node_modules/enhanced-resolve/lib/Resolver.js:565:18)][0m
+2026-01-01T21:10:49:     [2m[at /Users/benknight/Code/act-farm/node_modules/enhanced-resolve/lib/Resolver.js:657:14][0m
+2026-01-01T21:10:49:     [2m[at /Users/benknight/Code/act-farm/node_modules/enhanced-resolve/lib/Resolver.js:718:5][0m
+2026-01-01T21:10:49:     [2m[at eval (eval at create (/Users/benknight/Code/act-farm/node_modules/tapable/lib/HookCodeFactory.js:31:10), <anonymous>:15:1)][0m
+2026-01-01T21:10:49:     [2m[at /Users/benknight/Code/act-farm/node_modules/enhanced-resolve/lib/Resolver.js:718:5][0m
+2026-01-01T21:10:49:     [2m[at eval (eval at create (/Users/benknight/Code/act-farm/node_modules/tapable/lib/HookCodeFactory.js:31:10), <anonymous>:16:1)][0m
+2026-01-01T21:10:49:     [2m[at /Users/benknight/Code/act-farm/node_modules/enhanced-resolve/lib/Resolver.js:718:5][0m
+2026-01-01T21:10:49:     [2m[at eval (eval at create (/Users/benknight/Code/act-farm/node_modules/tapable/lib/HookCodeFactory.js:31:10), <anonymous>:15:1)][0m
+2026-01-01T21:10:49:     [2m[at /Users/benknight/Code/act-farm/node_modules/enhanced-resolve/lib/Resolver.js:718:5][0m
+2026-01-01T21:10:49:     [2m[at eval (eval at create (/Users/benknight/Code/act-farm/node_modules/tapable/lib/HookCodeFactory.js:31:10), <anonymous>:15:1)][0m {
+2026-01-01T21:10:49:   details: "resolve 'tailwindcss' in '/Users/benknight/Code'\n" +
+2026-01-01T21:10:49:     '  Parsed request is a module\n' +
+2026-01-01T21:10:49:     '  No description file found in /Users/benknight/Code or above\n' +
+2026-01-01T21:10:49:     '  resolve as module\n' +
+2026-01-01T21:10:49:     "    /Users/benknight/Code/node_modules doesn't exist or is not a directory\n" +
+2026-01-01T21:10:49:     "    /Users/benknight/node_modules doesn't exist or is not a directory\n" +
+2026-01-01T21:10:49:     "    /Users/node_modules doesn't exist or is not a directory\n" +
+2026-01-01T21:10:49:     "    /node_modules doesn't exist or is not a directory"
+2026-01-01T21:10:49: }

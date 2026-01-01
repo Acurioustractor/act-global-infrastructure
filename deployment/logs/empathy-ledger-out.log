@@ -1,0 +1,352 @@
+2025-12-31T09:22:35: 
+2025-12-31T09:22:35: > empathy-ledger-v2@0.1.0 dev
+2025-12-31T09:22:35: > next dev
+2025-12-31T09:22:35: 
+2025-12-31T09:22:36:   ▲ Next.js 14.2.35
+2025-12-31T09:22:36:   - Local:        http://localhost:3001
+2025-12-31T09:22:36:   - Environments: .env.local
+2025-12-31T09:22:36: 
+2025-12-31T09:22:36:  ✓ Starting...
+2025-12-31T09:22:40:  ✓ Ready in 4.1s
+2025-12-31T09:22:45:  ○ Compiling /src/middleware ...
+2025-12-31T09:22:45:  ✓ Compiled /src/middleware in 729ms (167 modules)
+2025-12-31T09:22:46:  ○ Compiling / ...
+2025-12-31T09:22:48:  ✓ Compiled / in 2.5s (1001 modules)
+2025-12-31T09:22:48: 🔍 Header Auth Values: {
+2025-12-31T09:22:48:   hasUser: false,
+2025-12-31T09:22:48:   hasProfile: false,
+2025-12-31T09:22:48:   isAuthenticated: false,
+2025-12-31T09:22:48:   isAdmin: false,
+2025-12-31T09:22:48:   isSuperAdmin: false,
+2025-12-31T09:22:48:   profileDisplayName: undefined,
+2025-12-31T09:22:48:   userEmail: undefined
+2025-12-31T09:22:48: }
+2025-12-31T09:22:48:  GET / 200 in 2762ms
+2025-12-31T09:22:49:  ○ Compiling /_error ...
+2025-12-31T09:22:49:  ✓ Compiled /_error in 999ms (1233 modules)
+2025-12-31T09:22:49:  GET /favicon.ico 500 in 1175ms
+2025-12-31T09:22:49:  GET /favicon.ico 500 in 8ms
+2025-12-31T09:22:50:  GET /favicon.ico 500 in 6ms
+2025-12-31T09:22:50:  GET /favicon.ico 500 in 7ms
+2025-12-31T09:22:50:  ✓ Compiled /api/admin/storytellers in 325ms (664 modules)
+2025-12-31T09:22:51: 🚀 Admin storytellers route called - FIXED VERSION
+2025-12-31T09:22:51: 🔓 Bypassing auth check for admin storytellers
+2025-12-31T09:22:51: 📊 Admin storytellers request - page: 1, limit: 5 { page: '1', limit: '5' }
+2025-12-31T09:22:51: About to execute simple Supabase test...
+2025-12-31T09:22:52: Simple query worked. Total profiles: 3
+2025-12-31T09:22:53: Query executed. Data count: undefined Error: {
+2025-12-31T09:22:53:   code: 'PGRST200',
+2025-12-31T09:22:53:   details: "Searched for a foreign key relationship between 'profiles' and 'profile_organizations' in the schema 'public', but no matches were found.",
+2025-12-31T09:22:53:   hint: "Perhaps you meant 'organizations' instead of 'profile_organizations'.",
+2025-12-31T09:22:53:   message: "Could not find a relationship between 'profiles' and 'profile_organizations' in the schema cache"
+2025-12-31T09:22:53: }
+2025-12-31T09:22:53:  GET /api/admin/storytellers?page=1&limit=5 500 in 3349ms
+2025-12-31T18:46:25:  ✓ Compiled in 2.4s (669 modules)
+2025-12-31T18:47:23:  ✓ Compiled in 396ms (669 modules)
+2025-12-31T18:48:18:  ✓ Compiled in 671ms (1398 modules)
+2025-12-31T18:48:47:  ✓ Compiled in 447ms (1398 modules)
+2025-12-31T18:50:13:  ✓ Compiled in 343ms (669 modules)
+2025-12-31T18:54:47:  ✓ Compiled in 445ms (669 modules)
+2025-12-31T18:55:45:  ✓ Compiled in 386ms (669 modules)
+2025-12-31T18:59:39:  ✓ Compiled in 406ms (669 modules)
+2025-12-31T18:59:55:  ✓ Compiled in 327ms (669 modules)
+2025-12-31T19:00:39:  ✓ Compiled in 353ms (669 modules)
+2025-12-31T19:05:52:  ✓ Compiled in 703ms (669 modules)
+2025-12-31T19:06:06:  ✓ Compiled in 369ms (669 modules)
+2025-12-31T19:06:20:  ✓ Compiled in 334ms (669 modules)
+2025-12-31T19:06:33:  ✓ Compiled in 301ms (669 modules)
+2025-12-31T19:07:05:  ✓ Compiled in 346ms (669 modules)
+2025-12-31T19:12:56:  ✓ Compiled in 656ms (669 modules)
+2025-12-31T19:13:29:  ✓ Compiled in 358ms (669 modules)
+2026-01-01T05:04:56:  ✓ Compiled in 531ms (669 modules)
+2026-01-01T05:05:09:  ✓ Compiled in 322ms (669 modules)
+2026-01-01T05:05:27:  ✓ Compiled in 312ms (669 modules)
+2026-01-01T05:05:54:  ✓ Compiled in 841ms (669 modules)
+2026-01-01T05:06:09:  ✓ Compiled in 355ms (669 modules)
+2026-01-01T05:06:47:  ✓ Compiled in 345ms (669 modules)
+2026-01-01T05:06:58:  ✓ Compiled in 327ms (669 modules)
+2026-01-01T05:08:28:  ✓ Compiled in 468ms (669 modules)
+2026-01-01T05:16:57:  ✓ Compiled in 952ms (1398 modules)
+2026-01-01T05:17:11:  ✓ Compiled in 343ms (669 modules)
+2026-01-01T05:17:34:  ✓ Compiled in 457ms (669 modules)
+2026-01-01T05:17:47:  ✓ Compiled in 347ms (669 modules)
+2026-01-01T05:18:00:  ✓ Compiled in 363ms (669 modules)
+2026-01-01T05:18:15:  ✓ Compiled in 312ms (669 modules)
+2026-01-01T05:18:26:  ✓ Compiled in 343ms (669 modules)
+2026-01-01T05:18:46:  ✓ Compiled in 341ms (669 modules)
+2026-01-01T05:19:11:  ✓ Compiled in 347ms (669 modules)
+2026-01-01T05:19:35:  ✓ Compiled in 334ms (669 modules)
+2026-01-01T05:20:22:  ✓ Compiled in 388ms (669 modules)
+2026-01-01T05:21:58:  ✓ Compiled in 604ms (1398 modules)
+2026-01-01T05:27:09:  ✓ Compiled in 460ms (669 modules)
+2026-01-01T05:29:16:  ✓ Compiled in 354ms (669 modules)
+2026-01-01T05:29:24:  ✓ Compiled in 313ms (669 modules)
+2026-01-01T05:40:13:  ✓ Compiled in 399ms (669 modules)
+2026-01-01T05:41:37: [?25h
+2026-01-01T05:41:37: 
+2026-01-01T05:41:37: 
+2026-01-01T05:41:37: > empathy-ledger-v2@0.1.0 dev
+2026-01-01T05:41:37: > next dev
+2026-01-01T05:41:37: 
+2026-01-01T05:41:38:   ▲ Next.js 14.2.35
+2026-01-01T05:41:38:   - Local:        http://localhost:3001
+2026-01-01T05:41:38:   - Environments: .env.local
+2026-01-01T05:41:38: 
+2026-01-01T05:41:38:  ✓ Starting...
+2026-01-01T05:41:42:  ✓ Ready in 4s
+2026-01-01T06:16:36: [?25h
+2026-01-01T06:16:36: 
+2026-01-01T06:16:37: 
+2026-01-01T06:16:37: > empathy-ledger-v2@0.1.0 dev
+2026-01-01T06:16:37: > next dev
+2026-01-01T06:16:37: 
+2026-01-01T06:16:40:   ▲ Next.js 14.2.35
+2026-01-01T06:16:40:   - Local:        http://localhost:3001
+2026-01-01T06:16:40:   - Environments: .env.local
+2026-01-01T06:16:40: 
+2026-01-01T06:16:40:  ✓ Starting...
+2026-01-01T06:16:42:  ✓ Ready in 3s
+2026-01-01T06:16:47:  ✓ Compiled /src/middleware in 238ms (167 modules)
+2026-01-01T06:16:47:  ○ Compiling / ...
+2026-01-01T06:16:51:  ✓ Compiled / in 3.9s (1015 modules)
+2026-01-01T06:16:51: 🔍 Header Auth Values: {
+2026-01-01T06:16:51:   hasUser: false,
+2026-01-01T06:16:51:   hasProfile: false,
+2026-01-01T06:16:51:   isAuthenticated: false,
+2026-01-01T06:16:51:   isAdmin: false,
+2026-01-01T06:16:51:   isSuperAdmin: false,
+2026-01-01T06:16:51:   profileDisplayName: undefined,
+2026-01-01T06:16:51:   userEmail: undefined
+2026-01-01T06:16:51: }
+2026-01-01T06:16:51:  GET / 200 in 4104ms
+2026-01-01T06:16:52:  ○ Compiling /_error ...
+2026-01-01T06:16:53:  ✓ Compiled /_error in 1400ms (1247 modules)
+2026-01-01T06:16:53:  GET /favicon.ico 500 in 1530ms
+2026-01-01T06:16:53:  GET /favicon.ico 500 in 4ms
+2026-01-01T06:16:53:  ✓ Compiled /api/admin/storytellers in 455ms (664 modules)
+2026-01-01T06:16:54: 🚀 Admin storytellers route called - FIXED VERSION
+2026-01-01T06:16:54: 🔓 Bypassing auth check for admin storytellers
+2026-01-01T06:16:54: 📊 Admin storytellers request - page: 1, limit: 5 { page: '1', limit: '5' }
+2026-01-01T06:16:54: About to execute simple Supabase test...
+2026-01-01T06:16:54:  GET /favicon.ico 500 in 13ms
+2026-01-01T06:16:54:  GET /favicon.ico 500 in 5ms
+2026-01-01T06:16:55: Simple query worked. Total profiles: 3
+2026-01-01T06:16:57: Query executed. Data count: undefined Error: {
+2026-01-01T06:16:57:   code: 'PGRST200',
+2026-01-01T06:16:57:   details: "Searched for a foreign key relationship between 'profiles' and 'profile_organizations' in the schema 'public', but no matches were found.",
+2026-01-01T06:16:57:   hint: "Perhaps you meant 'organizations' instead of 'profile_organizations'.",
+2026-01-01T06:16:57:   message: "Could not find a relationship between 'profiles' and 'profile_organizations' in the schema cache"
+2026-01-01T06:16:57: }
+2026-01-01T06:16:57:  GET /api/admin/storytellers?page=1&limit=5 500 in 3794ms
+2026-01-01T06:24:00:  ✓ Compiled in 788ms (1398 modules)
+2026-01-01T06:28:28:  ✓ Compiled in 507ms (669 modules)
+2026-01-01T06:28:28:  ✓ Compiled /_not-found in 134ms (1234 modules)
+2026-01-01T06:28:28: 🔍 Header Auth Values: {
+2026-01-01T06:28:28:   hasUser: false,
+2026-01-01T06:28:28:   hasProfile: false,
+2026-01-01T06:28:28:   isAuthenticated: false,
+2026-01-01T06:28:28:   isAdmin: false,
+2026-01-01T06:28:28:   isSuperAdmin: false,
+2026-01-01T06:28:28:   profileDisplayName: undefined,
+2026-01-01T06:28:28:   userEmail: undefined
+2026-01-01T06:28:28: }
+2026-01-01T06:28:28:  GET / 200 in 121ms
+2026-01-01T06:28:28:  GET /_next/static/css/app/layout.css?v=1767212908669 404 in 23ms
+2026-01-01T06:28:28:  GET /_next/static/chunks/main-app.js?v=1767212908669 404 in 16ms
+2026-01-01T06:28:28:  GET /_next/static/chunks/app-pages-internals.js 404 in 17ms
+2026-01-01T06:28:28:  GET /_next/static/chunks/app/page.js 404 in 15ms
+2026-01-01T06:28:28:  GET /_next/static/chunks/app/error.js 404 in 15ms
+2026-01-01T06:28:28:  GET /_next/static/chunks/app/not-found.js 404 in 14ms
+2026-01-01T06:28:29:  ✓ Compiled /_error in 288ms (1236 modules)
+2026-01-01T06:29:04:  ✓ Compiled in 478ms (671 modules)
+2026-01-01T06:29:22:  ✓ Compiled in 370ms (671 modules)
+2026-01-01T06:44:09: [?25h
+2026-01-01T06:44:09: 
+2026-01-01T06:44:12: 
+2026-01-01T06:44:12: > empathy-ledger-v2@0.1.0 dev
+2026-01-01T06:44:12: > next dev
+2026-01-01T06:44:12: 
+2026-01-01T06:44:12:   ▲ Next.js 14.2.35
+2026-01-01T06:44:12:   - Local:        http://localhost:3001
+2026-01-01T06:44:12:   - Environments: .env.local
+2026-01-01T06:44:12: 
+2026-01-01T06:44:12:  ✓ Starting...
+2026-01-01T06:44:16:  ✓ Ready in 4.1s
+2026-01-01T06:44:20:  ✓ Compiled /src/middleware in 177ms (167 modules)
+2026-01-01T06:44:21:  ○ Compiling / ...
+2026-01-01T06:44:24:  ✓ Compiled / in 4.2s (1015 modules)
+2026-01-01T06:44:25: 🔍 Header Auth Values: {
+2026-01-01T06:44:25:   hasUser: false,
+2026-01-01T06:44:25:   hasProfile: false,
+2026-01-01T06:44:25:   isAuthenticated: false,
+2026-01-01T06:44:25:   isAdmin: false,
+2026-01-01T06:44:25:   isSuperAdmin: false,
+2026-01-01T06:44:25:   profileDisplayName: undefined,
+2026-01-01T06:44:25:   userEmail: undefined
+2026-01-01T06:44:25: }
+2026-01-01T06:44:25:  GET / 200 in 4433ms
+2026-01-01T06:44:26:  ○ Compiling /_error ...
+2026-01-01T06:44:26:  ✓ Compiled /_error in 1131ms (1247 modules)
+2026-01-01T06:44:26:  GET /favicon.ico 500 in 1257ms
+2026-01-01T06:44:26:  GET /favicon.ico 500 in 4ms
+2026-01-01T06:44:27:  ✓ Compiled /api/admin/storytellers in 220ms (664 modules)
+2026-01-01T06:44:27: 🚀 Admin storytellers route called - FIXED VERSION
+2026-01-01T06:44:27: 🔓 Bypassing auth check for admin storytellers
+2026-01-01T06:44:27: 📊 Admin storytellers request - page: 1, limit: 5 { page: '1', limit: '5' }
+2026-01-01T06:44:27: About to execute simple Supabase test...
+2026-01-01T06:44:27:  GET /favicon.ico 500 in 10ms
+2026-01-01T06:44:27:  GET /favicon.ico 500 in 6ms
+2026-01-01T06:44:29: Simple query worked. Total profiles: 3
+2026-01-01T06:44:30: Query executed. Data count: undefined Error: {
+2026-01-01T06:44:30:   code: 'PGRST200',
+2026-01-01T06:44:30:   details: "Searched for a foreign key relationship between 'profiles' and 'profile_organizations' in the schema 'public', but no matches were found.",
+2026-01-01T06:44:30:   hint: "Perhaps you meant 'organizations' instead of 'profile_organizations'.",
+2026-01-01T06:44:30:   message: "Could not find a relationship between 'profiles' and 'profile_organizations' in the schema cache"
+2026-01-01T06:44:30: }
+2026-01-01T06:44:30:  GET /api/admin/storytellers?page=1&limit=5 500 in 3811ms
+2026-01-01T07:34:14:  ✓ Compiled in 2.3s (669 modules)
+2026-01-01T07:35:29:  ✓ Compiled in 725ms (669 modules)
+2026-01-01T07:35:29:  ✓ Compiled in 440ms (669 modules)
+2026-01-01T07:36:29:  ✓ Compiled in 1232ms (669 modules)
+2026-01-01T07:36:37:  ✓ Compiled in 605ms (669 modules)
+2026-01-01T07:36:58:  ✓ Compiled in 869ms (669 modules)
+2026-01-01T07:37:17:  ✓ Compiled in 701ms (669 modules)
+2026-01-01T07:37:39:  ✓ Compiled in 541ms (669 modules)
+2026-01-01T07:37:50:  ✓ Compiled in 575ms (669 modules)
+2026-01-01T07:38:06:  ✓ Compiled in 514ms (669 modules)
+2026-01-01T07:38:24:  ✓ Compiled in 549ms (669 modules)
+2026-01-01T07:38:34:  ✓ Compiled in 403ms (669 modules)
+2026-01-01T07:40:37:  ✓ Compiled in 771ms (669 modules)
+2026-01-01T07:41:06:  ✓ Compiled in 719ms (669 modules)
+2026-01-01T07:41:15:  ✓ Compiled in 513ms (669 modules)
+2026-01-01T07:41:29:  ✓ Compiled in 565ms (669 modules)
+2026-01-01T07:41:30:  ✓ Compiled in 445ms (669 modules)
+2026-01-01T07:42:11:  ✓ Compiled in 827ms (669 modules)
+2026-01-01T07:42:12:  ✓ Compiled in 467ms (669 modules)
+2026-01-01T07:45:59:  ✓ Compiled in 3.2s (669 modules)
+2026-01-01T07:46:33:  ✓ Compiled in 748ms (669 modules)
+2026-01-01T07:46:45:  ✓ Compiled in 779ms (669 modules)
+2026-01-01T07:46:57:  ✓ Compiled in 956ms (669 modules)
+2026-01-01T07:49:22:  ✓ Compiled in 1005ms (669 modules)
+2026-01-01T07:49:29:  ✓ Compiled in 472ms (669 modules)
+2026-01-01T07:50:19:  ✓ Compiled in 580ms (669 modules)
+2026-01-01T07:50:29:  ✓ Compiled in 506ms (669 modules)
+2026-01-01T07:50:50:  ✓ Compiled in 1053ms (669 modules)
+2026-01-01T07:51:02:  ✓ Compiled in 983ms (669 modules)
+2026-01-01T07:51:11:  ✓ Compiled in 2.2s (669 modules)
+2026-01-01T07:51:23:  ✓ Compiled in 1179ms (669 modules)
+2026-01-01T07:51:34:  ✓ Compiled in 639ms (669 modules)
+2026-01-01T07:51:47:  ✓ Compiled in 829ms (669 modules)
+2026-01-01T07:52:12:  ✓ Compiled in 664ms (669 modules)
+2026-01-01T07:52:53:  ✓ Compiled in 643ms (669 modules)
+2026-01-01T07:53:02:  ✓ Compiled in 577ms (669 modules)
+2026-01-01T07:53:17:  ✓ Compiled in 759ms (669 modules)
+2026-01-01T07:53:30:  ✓ Compiled in 1250ms (669 modules)
+2026-01-01T08:18:25:  ✓ Compiled in 3.4s (669 modules)
+2026-01-01T08:19:05:  ✓ Compiled in 1890ms (669 modules)
+2026-01-01T08:19:24:  ✓ Compiled in 593ms (669 modules)
+2026-01-01T08:19:34:  ✓ Compiled in 497ms (669 modules)
+2026-01-01T08:19:57:  ✓ Compiled in 463ms (669 modules)
+2026-01-01T08:20:18:  ✓ Compiled in 579ms (669 modules)
+2026-01-01T08:20:48:  ✓ Compiled in 489ms (669 modules)
+2026-01-01T08:20:55:  ✓ Compiled in 455ms (669 modules)
+2026-01-01T08:21:05:  ✓ Compiled in 2.1s (669 modules)
+2026-01-01T08:21:14:  ✓ Compiled in 793ms (669 modules)
+2026-01-01T08:21:23:  ✓ Compiled in 558ms (669 modules)
+2026-01-01T08:23:28:  ✓ Compiled in 703ms (669 modules)
+2026-01-01T08:23:50:  ✓ Compiled in 490ms (669 modules)
+2026-01-01T08:24:00:  ✓ Compiled in 1067ms (669 modules)
+2026-01-01T08:24:07:  ✓ Compiled in 496ms (669 modules)
+2026-01-01T08:24:33:  ✓ Compiled in 663ms (669 modules)
+2026-01-01T08:24:46:  ✓ Compiled in 652ms (669 modules)
+2026-01-01T08:25:09:  ✓ Compiled in 543ms (669 modules)
+2026-01-01T08:27:09:  ✓ Compiled in 719ms (669 modules)
+2026-01-01T08:27:34:  ✓ Compiled in 832ms (669 modules)
+2026-01-01T08:28:16:  ✓ Compiled in 661ms (669 modules)
+2026-01-01T08:28:51:  ✓ Compiled in 600ms (669 modules)
+2026-01-01T08:39:42:  ✓ Compiled in 1268ms (669 modules)
+2026-01-01T08:39:53:  ✓ Compiled in 605ms (669 modules)
+2026-01-01T08:40:10:  ✓ Compiled in 364ms (669 modules)
+2026-01-01T08:53:56:  ✓ Compiled in 1243ms (1245 modules)
+2026-01-01T08:54:10:  ✓ Compiled in 395ms (669 modules)
+2026-01-01T09:07:45:  ✓ Compiled in 874ms (669 modules)
+2026-01-01T09:07:54:  ✓ Compiled in 372ms (669 modules)
+2026-01-01T09:08:45:  ✓ Compiled in 448ms (669 modules)
+2026-01-01T09:08:53:  ✓ Compiled in 405ms (669 modules)
+2026-01-01T09:09:31:  ✓ Compiled in 371ms (669 modules)
+2026-01-01T09:09:42:  ✓ Compiled in 820ms (669 modules)
+2026-01-01T09:10:25:  ✓ Compiled in 409ms (669 modules)
+2026-01-01T09:10:35:  ✓ Compiled in 342ms (669 modules)
+2026-01-01T09:11:13:  ✓ Compiled in 477ms (669 modules)
+2026-01-01T09:11:22:  ✓ Compiled in 486ms (669 modules)
+2026-01-01T09:34:28:  ✓ Compiled in 1358ms (1231 modules)
+2026-01-01T10:30:36:    Reload env: .env.local
+2026-01-01T10:30:39:  ✓ Compiled in 2.4s (1398 modules)
+2026-01-01T10:31:09:    Reload env: .env.local
+2026-01-01T10:31:10:  ✓ Compiled in 307ms (1398 modules)
+2026-01-01T13:25:43:    Reload env: .env.local
+2026-01-01T13:25:47:  ✓ Compiled in 4.6s (1412 modules)
+2026-01-01T13:26:13:    Reload env: .env.local
+2026-01-01T13:26:13:  ✓ Compiled in 524ms (1398 modules)
+2026-01-01T13:30:57:    Reload env: .env.local
+2026-01-01T13:30:58:  ✓ Compiled in 559ms (1398 modules)
+2026-01-01T13:31:08:    Reload env: .env.local
+2026-01-01T13:31:08:  ✓ Compiled in 305ms (1398 modules)
+2026-01-01T13:32:28:    Reload env: .env.local
+2026-01-01T13:32:28:  ✓ Compiled in 545ms (1398 modules)
+2026-01-01T13:34:51:    Reload env: .env.local
+2026-01-01T13:34:52:  ✓ Compiled in 1030ms (1398 modules)
+2026-01-01T13:43:41:  ✓ Compiled in 1427ms (1398 modules)
+2026-01-01T13:58:06:    Reload env: .env.local
+2026-01-01T13:58:07:  ✓ Compiled in 697ms (1398 modules)
+2026-01-01T14:03:53:    Reload env: .env.local
+2026-01-01T14:03:53:  ✓ Compiled in 440ms (1398 modules)
+2026-01-01T14:10:30:    Reload env: .env.local
+2026-01-01T14:10:30:  ✓ Compiled in 700ms (1398 modules)
+2026-01-01T15:06:23:  ✓ Compiled in 959ms (669 modules)
+2026-01-01T15:07:15:  ✓ Compiled in 315ms (669 modules)
+2026-01-01T15:07:53:  ✓ Compiled in 612ms (1398 modules)
+2026-01-01T16:56:36:    Reload env: .env.local
+2026-01-01T16:56:36:  ✓ Compiled in 131ms (1398 modules)
+2026-01-01T21:10:27: [?25h
+2026-01-01T21:10:27: 
+2026-01-01T21:10:30: 
+2026-01-01T21:10:30: > empathy-ledger-v2@0.1.0 dev
+2026-01-01T21:10:30: > next dev --turbopack
+2026-01-01T21:10:30: 
+2026-01-01T21:10:35: 
+2026-01-01T21:10:35: > empathy-ledger-v2@0.1.0 dev
+2026-01-01T21:10:35: > next dev --turbopack
+2026-01-01T21:10:35: 
+2026-01-01T21:10:35: 
+2026-01-01T21:10:35: > empathy-ledger-v2@0.1.0 dev
+2026-01-01T21:10:35: > next dev --turbopack
+2026-01-01T21:10:35: 
+2026-01-01T21:10:36: 
+2026-01-01T21:10:36: > empathy-ledger-v2@0.1.0 dev
+2026-01-01T21:10:36: > next dev --turbopack
+2026-01-01T21:10:36: 
+2026-01-01T21:10:37: 
+2026-01-01T21:10:37: > empathy-ledger-v2@0.1.0 dev
+2026-01-01T21:10:37: > next dev --turbopack
+2026-01-01T21:10:37: 
+2026-01-01T21:10:38: 
+2026-01-01T21:10:38: > empathy-ledger-v2@0.1.0 dev
+2026-01-01T21:10:38: > next dev --turbopack
+2026-01-01T21:10:38: 
+2026-01-01T21:10:38: 
+2026-01-01T21:10:38: > empathy-ledger-v2@0.1.0 dev
+2026-01-01T21:10:38: > next dev --turbopack
+2026-01-01T21:10:38: 
+2026-01-01T21:10:38: 
+2026-01-01T21:10:38: > empathy-ledger-v2@0.1.0 dev
+2026-01-01T21:10:38: > next dev --turbopack
+2026-01-01T21:10:38: 
+2026-01-01T21:10:39: 
+2026-01-01T21:10:39: > empathy-ledger-v2@0.1.0 dev
+2026-01-01T21:10:39: > next dev --turbopack
+2026-01-01T21:10:39: 
+2026-01-01T21:10:39: 
+2026-01-01T21:10:39: > empathy-ledger-v2@0.1.0 dev
+2026-01-01T21:10:39: > next dev --turbopack
+2026-01-01T21:10:39: 
