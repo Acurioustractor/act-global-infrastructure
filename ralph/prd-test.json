@@ -1,0 +1,20 @@
+{
+  "project": "Ralph Test",
+  "description": "Simple test to validate Ralph agent functionality",
+  "created": "2026-01-07",
+  "features": [
+    {
+      "id": "test-task",
+      "priority": 1,
+      "title": "Add test comment to README",
+      "description": "Add a simple HTML comment at the bottom of README.md to verify Ralph can complete a task. The comment should be: <!-- Ralph test: Task completed successfully -->",
+      "acceptance_criteria": [
+        "HTML comment added at the end of README.md",
+        "No syntax errors introduced",
+        "File still renders correctly"
+      ],
+      "project_path": "/Users/benknight/act-global-infrastructure",
+      "passes": true
+    }
+  ]
+}
