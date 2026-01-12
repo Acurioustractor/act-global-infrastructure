@@ -1,0 +1,155 @@
+name: Content Pipeline
+
+on:
+  schedule:
+    # Generate content Monday 8am AEST (Sunday 10pm UTC)
+    - cron: '0 22 * * 0'
+    # Sync approved content to GHL every 4 hours
+    - cron: '0 */4 * * *'
+
+  # Manual trigger with options
+  workflow_dispatch:
+    inputs:
+      action:
+        description: 'Action to perform'
+        required: true
+        default: 'sync'
+        type: choice
+        options:
+          - sync
+          - generate
+          - full-pipeline
+      content_type:
+        description: 'Content type (for generate)'
+        required: false
+        type: choice
+        options:
+          - all
+          - weekly-activity
+          - feature-shipped
+          - sprint-milestone
+          - technical-insight
+          - project-spotlight
+      dry_run:
+        description: 'Dry run (preview only)'
+        required: false
+        type: boolean
+        default: false
+
+jobs:
+  # Job 1: Generate content from ecosystem knowledge
+  generate:
+    if: github.event_name == 'workflow_dispatch' && (inputs.action == 'generate' || inputs.action == 'full-pipeline') || github.event.schedule == '0 22 * * 0'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 100  # Need git history for activity analysis
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install --production
+
+      - name: Generate content
+        id: generate
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+        run: |
+          TYPE_FLAG=""
+          if [ "${{ inputs.content_type }}" != "" ] && [ "${{ inputs.content_type }}" != "all" ]; then
+            TYPE_FLAG="--type ${{ inputs.content_type }}"
+          fi
+
+          DRY_RUN=""
+          if [ "${{ inputs.dry_run }}" == "true" ]; then
+            DRY_RUN="--dry-run"
+          fi
+
+          node scripts/generate-content-from-knowledge.mjs $TYPE_FLAG $DRY_RUN --max 3
+
+      - name: Summary
+        if: always()
+        run: |
+          echo "## Content Generation" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Time:** $(date -u '+%Y-%m-%d %H:%M UTC')" >> $GITHUB_STEP_SUMMARY
+          echo "**Status:** ${{ steps.generate.outcome == 'success' && 'Success' || 'Failed' }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Content drafts created in Notion Content Hub." >> $GITHUB_STEP_SUMMARY
+          echo "Review at: https://notion.so" >> $GITHUB_STEP_SUMMARY
+
+  # Job 2: Sync approved content to GHL
+  sync:
+    if: github.event_name == 'workflow_dispatch' && (inputs.action == 'sync' || inputs.action == 'full-pipeline') || github.event.schedule == '0 */4 * * *'
+    needs: [generate]
+    # Run sync even if generate was skipped
+    if: always() && (github.event_name == 'workflow_dispatch' && (inputs.action == 'sync' || inputs.action == 'full-pipeline') || github.event.schedule == '0 */4 * * *')
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install --production
+
+      - name: Sync to GHL
+        id: sync
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          GHL_API_KEY: ${{ secrets.GHL_API_KEY }}
+          GHL_LOCATION_ID: ${{ secrets.GHL_LOCATION_ID }}
+          GHL_LINKEDIN_ACCOUNT_ID: ${{ secrets.GHL_LINKEDIN_ACCOUNT_ID }}
+        run: |
+          DRY_RUN=""
+          if [ "${{ inputs.dry_run }}" == "true" ]; then
+            DRY_RUN="--dry-run"
+          fi
+
+          node scripts/sync-content-to-ghl.mjs $DRY_RUN
+
+      - name: Summary
+        if: always()
+        run: |
+          echo "## Content Sync to GHL" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Time:** $(date -u '+%Y-%m-%d %H:%M UTC')" >> $GITHUB_STEP_SUMMARY
+          echo "**Status:** ${{ steps.sync.outcome == 'success' && 'Success' || 'Failed' }}" >> $GITHUB_STEP_SUMMARY
+
+  # Job 3: Check pipeline status
+  status:
+    if: github.event_name == 'workflow_dispatch' && inputs.action == 'sync'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install --production
+
+      - name: Check status
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          GHL_API_KEY: ${{ secrets.GHL_API_KEY }}
+          GHL_LOCATION_ID: ${{ secrets.GHL_LOCATION_ID }}
+        run: node scripts/sync-content-to-ghl.mjs --status

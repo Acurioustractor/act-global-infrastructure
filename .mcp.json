@@ -34,9 +34,9 @@
     },
     "notion": {
       "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-notion"],
+      "args": ["-y", "@notionhq/notion-mcp-server"],
       "env": {
-        "NOTION_API_KEY": "${NOTION_TOKEN}"
+        "NOTION_TOKEN": "<NOTION_TOKEN>"
       },
       "comment": "Notion MCP - Access to all 6 ACT databases (Sprint Tracking, Deployments, Velocity, etc.)"
     }

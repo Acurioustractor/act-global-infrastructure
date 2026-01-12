@@ -21,7 +21,7 @@ export class GHLService {
 
     this.apiKey = apiKey;
     this.locationId = locationId;
-    this.baseURL = 'https://rest.gohighlevel.com/v1';
+    this.baseURL = 'https://services.leadconnectorhq.com';
 
     // Rate limiting
     this.lastRequestTime = 0;
@@ -78,15 +78,23 @@ export class GHLService {
    * @param {Object} params - Query parameters
    * @param {string[]} params.tags - Filter by tags (e.g., ['Partner', 'Grant Funder'])
    * @param {number} params.limit - Max results per page (default: 100)
-   * @param {string} params.cursor - Pagination cursor
-   * @returns {Promise<{contacts: Array, total: number, nextCursor: string}>}
+   * @param {string} params.startAfter - Pagination cursor timestamp
+   * @param {string} params.startAfterId - Pagination cursor ID
+   * @returns {Promise<{contacts: Array, total: number, startAfter: string, startAfterId: string, hasMore: boolean}>}
    */
   async getContacts(params = {}) {
     const queryParams = new URLSearchParams({
       locationId: this.locationId,
-      limit: params.limit || 100,
-      ...(params.cursor && { startAfter: params.cursor })
+      limit: params.limit || 100
     });
+
+    // v2 API requires both startAfter (timestamp) and startAfterId for pagination
+    if (params.startAfter) {
+      queryParams.set('startAfter', params.startAfter);
+    }
+    if (params.startAfterId) {
+      queryParams.set('startAfterId', params.startAfterId);
+    }
 
     // Add tag filters if provided
     if (params.tags && params.tags.length > 0) {
@@ -99,8 +107,11 @@ export class GHLService {
 
     return {
       contacts: data.contacts || [],
-      total: data.total || 0,
-      nextCursor: data.meta?.nextStartAfterId
+      total: data.meta?.total || 0,
+      // v2 API returns both startAfter (timestamp) and startAfterId for next page
+      startAfter: data.meta?.startAfter,
+      startAfterId: data.meta?.startAfterId,
+      hasMore: !!data.meta?.nextPage
     };
   }
 
@@ -123,19 +134,23 @@ export class GHLService {
    */
   async getAllContactsByTag(tag) {
     const allContacts = [];
-    let cursor = null;
+    let startAfter;
+    let startAfterId;
+    let hasMore = true;
 
     do {
       const result = await this.getContacts({
         tags: [tag],
-        cursor,
+        startAfter,
+        startAfterId,
         limit: 100
       });
 
       allContacts.push(...result.contacts);
-      cursor = result.nextCursor;
-
-    } while (cursor);
+      hasMore = result.hasMore;
+      startAfter = result.startAfter;
+      startAfterId = result.startAfterId;
+    } while (hasMore);
 
     return allContacts;
   }
@@ -170,7 +185,7 @@ export class GHLService {
   async getOpportunities(pipelineId, params = {}) {
     const queryParams = new URLSearchParams({
       location_id: this.locationId,
-      pipelineId: pipelineId,
+      pipeline_id: pipelineId,  // v2 API uses snake_case
       limit: params.limit || 100,
       ...(params.cursor && { startAfter: params.cursor })
     });
@@ -342,7 +357,8 @@ export class GHLService {
    */
   async healthCheck() {
     try {
-      await this.getContactTags();
+      // Use location endpoint for health check (v2 compatible)
+      await this.request(`/locations/${this.locationId}`);
       return { healthy: true };
     } catch (error) {
       return {
@@ -350,6 +366,63 @@ export class GHLService {
         error: error.message
       };
     }
+  }
+
+  // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  // SOCIAL MEDIA (convenience methods - full implementation in ghl-social-service.mjs)
+  // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  /**
+   * Get connected social media accounts
+   *
+   * @returns {Promise<Array>} Connected social accounts
+   */
+  async getSocialAccounts() {
+    const data = await this.request(
+      `/social-media-posting/${this.locationId}/accounts`
+    );
+    return data.accounts || [];
+  }
+
+  /**
+   * Create a social media post
+   *
+   * @param {Object} postData - Post data
+   * @param {string[]} postData.accountIds - Account IDs to post to
+   * @param {string} postData.summary - Post content
+   * @param {string[]} [postData.mediaUrls] - Media URLs
+   * @param {string} [postData.scheduledAt] - ISO8601 schedule time
+   * @returns {Promise<Object>} Created post
+   */
+  async createSocialPost(postData) {
+    const data = await this.request(
+      `/social-media-posting/${this.locationId}/posts`,
+      {
+        method: 'POST',
+        body: JSON.stringify(postData)
+      }
+    );
+    return data;
+  }
+
+  /**
+   * Get social posts with filters
+   *
+   * @param {Object} filters - Filter options
+   * @returns {Promise<Object>} Posts and total count
+   */
+  async getSocialPosts(filters = {}) {
+    const data = await this.request(
+      `/social-media-posting/${this.locationId}/posts/list`,
+      {
+        method: 'POST',
+        body: JSON.stringify(filters)
+      }
+    );
+    return {
+      posts: data.posts || [],
+      total: data.total || 0
+    };
   }
 }
 

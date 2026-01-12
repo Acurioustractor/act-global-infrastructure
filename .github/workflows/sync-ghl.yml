@@ -1,4 +1,4 @@
-name: Sync GoHighLevel to Notion
+name: Sync GoHighLevel
 
 on:
   schedule:
@@ -14,10 +14,10 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: 'npm'
@@ -25,23 +25,40 @@ jobs:
       - name: Install dependencies
         run: npm install --production
 
+      - name: Run GHL → Supabase sync
+        id: supabase_sync
+        env:
+          GHL_API_KEY: ${{ secrets.GHL_API_KEY }}
+          GHL_LOCATION_ID: ${{ secrets.GHL_LOCATION_ID }}
+          SUPABASE_SHARED_URL: ${{ secrets.SUPABASE_SHARED_URL }}
+          SUPABASE_SHARED_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SHARED_SERVICE_ROLE_KEY }}
+        run: npm run sync:ghl:supabase
+
       - name: Run GHL → Notion sync
+        id: notion_sync
         env:
           GHL_API_KEY: ${{ secrets.GHL_API_KEY }}
           GHL_LOCATION_ID: ${{ secrets.GHL_LOCATION_ID }}
           NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
         run: npm run sync:ghl
+        continue-on-error: true  # Don't fail if Notion sync has issues
 
       - name: Generate summary
         if: always()
         run: |
-          echo "## GHL → Notion Sync Results" >> $GITHUB_STEP_SUMMARY
+          echo "## 🔄 GHL Sync Results" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "**Time:** $(date)" >> $GITHUB_STEP_SUMMARY
+          echo "**Time:** $(date -u '+%Y-%m-%d %H:%M UTC')" >> $GITHUB_STEP_SUMMARY
           echo "**Trigger:** ${{ github.event_name }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Destination | Status |" >> $GITHUB_STEP_SUMMARY
+          echo "|-------------|--------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Supabase | ${{ steps.supabase_sync.outcome == 'success' && '✅' || '❌' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Notion | ${{ steps.notion_sync.outcome == 'success' && '✅' || '⚠️' }} |" >> $GITHUB_STEP_SUMMARY
 
       - name: Notify on failure
         if: failure()
         run: |
-          echo "❌ GHL sync failed!" >> $GITHUB_STEP_SUMMARY
-          echo "Check the logs above for details" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "---" >> $GITHUB_STEP_SUMMARY
+          echo "❌ **Critical sync failed!** Check logs above." >> $GITHUB_STEP_SUMMARY

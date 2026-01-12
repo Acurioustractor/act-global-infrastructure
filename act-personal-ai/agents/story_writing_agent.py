@@ -35,6 +35,7 @@ Usage:
 """
 import sys
 import os
+import re
 
 # Add parent directory to path
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
@@ -107,7 +108,7 @@ class StoryWritingAgent:
                     'At-risk populations',
                     'Marginalized groups',
                     'Vulnerable people',
-                    'Broken systems' (focus on what's being built instead)
+                    'Broken systems',  # Focus on what's being built instead
                 ]
             },
             'relational_language': {
@@ -158,6 +159,14 @@ class StoryWritingAgent:
                 ]
             }
         }
+
+    def _find_flag_patterns(self, text: str, patterns: List[str]) -> List[str]:
+        found = []
+        for pattern in patterns:
+            escaped = re.escape(pattern).replace(r'\ ', r'\s+')
+            if re.search(rf'\b{escaped}\b', text, flags=re.IGNORECASE):
+                found.append(pattern)
+        return found
 
     def _define_language_flags(self) -> Dict:
         """
@@ -346,16 +355,9 @@ Return as JSON:
 
         flags = []
 
-        text_lower = text.lower()
-
         # Check each language flag category
         for flag_name, flag_data in self.language_flags.items():
-            patterns_found = []
-
-            for pattern in flag_data['patterns']:
-                if pattern in text_lower:
-                    patterns_found.append(pattern)
-
+            patterns_found = self._find_flag_patterns(text, flag_data['patterns'])
             if patterns_found:
                 flags.append({
                     'category': flag_name,

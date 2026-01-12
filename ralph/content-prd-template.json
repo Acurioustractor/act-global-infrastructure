@@ -1,0 +1,187 @@
+{
+  "project": "ACT Content Publishing",
+  "type": "content",
+  "description": "Automated content generation from ecosystem knowledge",
+  "version": "1.0.0",
+  "config": {
+    "max_posts_per_run": 5,
+    "default_accounts": ["LinkedIn (Company)"],
+    "knowledge_period": "7 days ago",
+    "auto_approve": false
+  },
+  "sources": {
+    "ralph_completions": true,
+    "sprint_milestones": true,
+    "git_activity": true,
+    "deployments": true,
+    "documentation": false
+  },
+  "features": [
+    {
+      "id": "weekly-ecosystem-update",
+      "priority": 1,
+      "title": "Weekly Ecosystem Activity Update",
+      "description": "Generate a weekly summary post highlighting development activity across all ACT projects",
+      "content_type": "social",
+      "target_accounts": ["LinkedIn (Company)"],
+      "template": "weekly-activity",
+      "schedule": "monday 9:00",
+      "passes": false,
+      "acceptance_criteria": [
+        "Aggregates git commits from all 7 projects",
+        "Highlights top 3 most active projects",
+        "Uses ACT brand voice (farm metaphors)",
+        "Creates post in Notion with Story in Development status"
+      ]
+    },
+    {
+      "id": "ralph-shipping-announcement",
+      "priority": 2,
+      "title": "Ralph Feature Completion Announcement",
+      "description": "Auto-generate post when Ralph completes a PRD feature",
+      "content_type": "social",
+      "target_accounts": ["LinkedIn (Company)", "LinkedIn (Personal)"],
+      "template": "feature-shipped",
+      "trigger": "ralph_completion",
+      "passes": false,
+      "acceptance_criteria": [
+        "Reads latest entry from ralph/progress.txt",
+        "Generates engaging announcement with technical details",
+        "Applies act-brand-alignment voice check",
+        "Suggests relevant media (project hero image)",
+        "Creates in Notion for review"
+      ]
+    },
+    {
+      "id": "sprint-milestone-post",
+      "priority": 3,
+      "title": "Sprint Milestone Celebration",
+      "description": "Generate post when sprint milestones are completed",
+      "content_type": "social",
+      "target_accounts": ["LinkedIn (Company)"],
+      "template": "sprint-milestone",
+      "trigger": "sprint_complete",
+      "passes": false,
+      "acceptance_criteria": [
+        "Queries Notion Sprint Tracking for completed items",
+        "Summarizes key achievements",
+        "Includes velocity/metrics if impressive",
+        "Appropriate hashtags (#BuildingInPublic)",
+        "Creates in Notion Content Hub"
+      ]
+    },
+    {
+      "id": "technical-insight",
+      "priority": 4,
+      "title": "Technical Insight from Ecosystem",
+      "description": "Generate thought leadership content from technical decisions",
+      "content_type": "social",
+      "target_accounts": ["LinkedIn (Personal)"],
+      "template": "technical-insight",
+      "sources": ["git_commits", "documentation"],
+      "passes": false,
+      "acceptance_criteria": [
+        "Scans recent commits for architectural decisions",
+        "Extracts interesting technical patterns",
+        "Frames as learning/sharing (not bragging)",
+        "Uses personal voice for Ben's LinkedIn",
+        "Creates in Notion for editing"
+      ]
+    },
+    {
+      "id": "project-spotlight",
+      "priority": 5,
+      "title": "Project Spotlight Post",
+      "description": "Deep dive on one ACT ecosystem project",
+      "content_type": "social",
+      "target_accounts": ["LinkedIn (Company)", "LinkedIn (Personal)"],
+      "template": "project-spotlight",
+      "rotation": ["JusticeHub", "Empathy Ledger", "ACT Farm", "The Harvest", "Goods on Country"],
+      "passes": false,
+      "acceptance_criteria": [
+        "Selects project from rotation",
+        "Gathers recent activity and milestones",
+        "Explains project purpose and impact",
+        "Includes project hero image",
+        "Links to relevant resources"
+      ]
+    }
+  ],
+  "templates": {
+    "weekly-activity": {
+      "structure": [
+        "hook (what shipped this week)",
+        "highlights (3 bullet points)",
+        "team/community acknowledgment",
+        "forward look (coming soon)",
+        "hashtags"
+      ],
+      "max_length": 1500,
+      "hashtags": ["#BuildingInPublic", "#TechForGood", "#RegenerativeInnovation"]
+    },
+    "feature-shipped": {
+      "structure": [
+        "announcement (We just shipped...)",
+        "what it does (brief description)",
+        "why it matters (impact)",
+        "technical note (optional)",
+        "hashtags"
+      ],
+      "max_length": 1200,
+      "hashtags": ["#BuildingDifferently", "#TechForJustice"]
+    },
+    "sprint-milestone": {
+      "structure": [
+        "milestone announcement",
+        "key achievements",
+        "metrics (if impressive)",
+        "thanks/acknowledgment",
+        "hashtags"
+      ],
+      "max_length": 1000,
+      "hashtags": ["#AgileForGood", "#BuildingInPublic"]
+    },
+    "technical-insight": {
+      "structure": [
+        "hook (learned something interesting)",
+        "context (what we were doing)",
+        "insight (the learning)",
+        "takeaway (for others)",
+        "hashtags"
+      ],
+      "max_length": 1500,
+      "hashtags": ["#SoftwareArchitecture", "#LessonsLearned"]
+    },
+    "project-spotlight": {
+      "structure": [
+        "project introduction",
+        "problem it solves",
+        "recent progress",
+        "what's next",
+        "call to action",
+        "hashtags"
+      ],
+      "max_length": 2000,
+      "hashtags": ["#TechForJustice", "#CommunityTech"]
+    }
+  },
+  "brand_guidelines": {
+    "voice": "warm, authentic, technically competent but not showy",
+    "metaphors": ["seeds", "harvest", "cultivating", "soil", "growth"],
+    "avoid": ["revolutionary", "world-leading", "disruptive", "leverage"],
+    "acknowledge": ["Jinibara Country", "community partners", "co-design"],
+    "tone_check": "invoke act-brand-alignment skill before finalizing"
+  },
+  "output": {
+    "destination": "notion",
+    "database": "7005d0d1-41d3-436c-9f86-526d275c2f10",
+    "initial_status": "Story in Development",
+    "fields_mapping": {
+      "title": "Content/Communication Name",
+      "content": "Key Message/Story",
+      "type": "Communication Type",
+      "accounts": "Target Accounts",
+      "scheduled": "Sent date"
+    }
+  }
+}

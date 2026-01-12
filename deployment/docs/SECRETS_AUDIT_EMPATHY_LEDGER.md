@@ -41,8 +41,8 @@
 | `TAVILY_API_KEY` | API Key | ⚠️ CHECK | 🔄 Rotate quarterly |
 
 **Analysis**:
-- OpenAI: `sk-proj-N3Mv6k6S...` - Project key format
-- Anthropic: `sk-ant-api03-ti2D...` - API key format
+- OpenAI: `OPENAI_KEY_PLACEHOLDER...` - Project key format
+- Anthropic: `ANTHROPIC_KEY_PLACEHOLDER...` - API key format
 - Tavily: `tvly-dev-x04sL3C...` - Dev tier (1000 req/month)
 
 **Actions**:
@@ -83,7 +83,7 @@
 | `GITHUB_PROJECT_ID` | Project ID | ✅ Valid | Never (identifier) |
 
 **Analysis**:
-- Both tokens are identical: `GITHUB_TOKEN_REMOVED`
+- Both tokens are identical: `<GITHUB_TOKEN>`
 - `GH_PROJECT_TOKEN` is redundant - can remove one
 - Project ID: `PVT_kwHOCOopjs4BLVik` - static identifier
 
@@ -102,7 +102,7 @@
 | `NOTION_TOKEN` | Integration Token | ⚠️ CHECK | 🔄 Rotate quarterly |
 
 **Analysis**:
-- Token: `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`
+- Token: `NOTION_TOKEN_PLACEHOLDER`
 - Notion internal integration token
 
 **Actions**:
@@ -205,7 +205,7 @@ Expected: 200 OK
 ### Test 2: OpenAI API
 ```bash
 curl https://api.openai.com/v1/models \
-  -H "Authorization: Bearer sk-proj-N3Mv6k6S..."
+  -H "Authorization: Bearer OPENAI_KEY_PLACEHOLDER..."
 ```
 
 Expected: List of models
@@ -213,7 +213,7 @@ Expected: List of models
 ### Test 3: Anthropic API
 ```bash
 curl https://api.anthropic.com/v1/messages \
-  -H "x-api-key: sk-ant-api03-ti2D..." \
+  -H "x-api-key: ANTHROPIC_KEY_PLACEHOLDER..." \
   -H "Content-Type: application/json" \
   -d '{"model":"claude-3-5-sonnet-20241022","max_tokens":10,"messages":[{"role":"user","content":"test"}]}'
 ```
@@ -222,7 +222,7 @@ Expected: Response with message
 
 ### Test 4: GitHub API
 ```bash
-curl -H "Authorization: Bearer GITHUB_TOKEN_REMOVED" \
+curl -H "Authorization: Bearer <GITHUB_TOKEN>" \
   https://api.github.com/user
 ```
 
@@ -231,7 +231,7 @@ Expected: User data
 ### Test 5: Notion API
 ```bash
 curl -X GET "https://api.notion.com/v1/users/me" \
-  -H "Authorization: Bearer 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" \
+  -H "Authorization: Bearer NOTION_TOKEN_PLACEHOLDER" \
   -H "Notion-Version: 2022-06-28"
 ```
 

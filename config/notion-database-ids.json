@@ -1,6 +1,7 @@
 {
+  "commandCenter": "2deebcf9-81cf-814b-9a33-c344eb43cbae",
   "githubIssues": "2d5ebcf9-81cf-8042-9f40-ef7b39b39ca1",
-  "sprintTracking": "2d6ebcf9-81cf-815f-a30f-c7ade0c0046d",
+  "sprintTracking": "2d6ebcf9-81cf-8133-839b-000b727a55b5",
   "strategicPillars": "2d6ebcf9-81cf-81fe-a62f-e7dc9a42e5c1",
   "actProjects": "2d6ebcf9-81cf-8141-95a0-f8688dbb7c02",
   "deployments": "2d6ebcf9-81cf-81d1-a72e-c9180830a54e",
@@ -11,5 +12,7 @@
   "moonCycles": "2d8ebcf9-81cf-8176-ada6-c7f3a2f8dd2a",
   "dailyWorkLog": "2d8ebcf9-81cf-81ce-9cd4-cc20e30e18fa",
   "subscriptionTracking": "2d8ebcf9-81cf-811c-a325-f38a354d9750",
-  "momentumDashboard": "2d9ebcf9-81cf-815d-bceb-d12dddb92c66"
+  "momentumDashboard": "2d9ebcf9-81cf-815d-bceb-d12dddb92c66",
+  "contentHub": "e400e93e-fd9d-4a21-810c-58d67ed9fe97",
+  "contentHubView": "7005d0d1-41d3-436c-9f86-526d275c2f10"
 }

@@ -60,7 +60,7 @@ pip install openai
 ### Upload & Create Job
 ```bash
 # Set API key
-export OPENAI_API_KEY="sk-proj-N3Mv..."
+export OPENAI_API_KEY="OPENAI_KEY_PLACEHOLDER..."
 
 # Upload file
 openai api files.create \
@@ -92,7 +92,7 @@ import os
 import time
 
 # Set API key
-openai.api_key = "OPENAI_KEY_REMOVED"
+openai.api_key = "OPENAI_KEY_PLACEHOLDER"
 
 # Upload training file
 print("📤 Uploading training file...")

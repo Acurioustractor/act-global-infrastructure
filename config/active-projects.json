@@ -1,0 +1,340 @@
+{
+  "generated": "2026-01-12T11:41:05.170Z",
+  "count": 31,
+  "projects": [
+    {
+      "name": "ACT Farm",
+      "slug": "act-farm",
+      "source": "el",
+      "notionStatus": null,
+      "themes": [
+        "Regenerative Agriculture",
+        "Creative Practice",
+        "Therapeutic Landscapes"
+      ]
+    },
+    {
+      "name": "BG Fit",
+      "slug": "bg-fit",
+      "source": "el",
+      "notionStatus": null,
+      "themes": [
+        "Physical Wellbeing",
+        "Social Connection",
+        "Active Living"
+      ]
+    },
+    {
+      "name": "Caring for Those Who Care",
+      "slug": "caring-for-those-who-care",
+      "source": "el",
+      "notionStatus": null,
+      "themes": [
+        "Sector Sustainability",
+        "Leadership Support",
+        "Community Storytelling"
+      ]
+    },
+    {
+      "name": "CONTAINED",
+      "slug": "contained",
+      "source": "el",
+      "notionStatus": null,
+      "themes": [
+        "Youth Justice",
+        "Experiential Design",
+        "Community Advocacy"
+      ]
+    },
+    {
+      "name": "Dad.Lab.25",
+      "slug": "dad-lab-25",
+      "source": "el",
+      "notionStatus": null,
+      "themes": [
+        "Fatherhood",
+        "Community Support",
+        "Gender Equity"
+      ]
+    },
+    {
+      "name": "Designing for Obsolescence",
+      "slug": "designing-for-obsolescence",
+      "source": "el",
+      "notionStatus": null,
+      "themes": [
+        "Circular Economy",
+        "Sustainable Design",
+        "Product Lifecycle"
+      ]
+    },
+    {
+      "name": "Empathy Ledger",
+      "slug": "empathy-ledger",
+      "source": "both",
+      "notionStatus": "Active Development",
+      "themes": [
+        "Indigenous Data Sovereignty",
+        "Community Voice"
+      ]
+    },
+    {
+      "name": "Fishers Oysters",
+      "slug": "fishers-oysters",
+      "source": "el",
+      "notionStatus": null,
+      "themes": [
+        "Environmental Restoration",
+        "Community Enterprise"
+      ]
+    },
+    {
+      "name": "Global Laundry Alliance",
+      "slug": "global-laundry-alliance",
+      "source": "el",
+      "notionStatus": null,
+      "themes": [
+        "Dignity",
+        "Community Hubs",
+        "Policy Change"
+      ]
+    },
+    {
+      "name": "Gold.Phone",
+      "slug": "gold-phone",
+      "source": "el",
+      "notionStatus": null,
+      "themes": [
+        "Creative Technology",
+        "Community Connection",
+        "Storytelling"
+      ]
+    },
+    {
+      "name": "Goods on Country",
+      "slug": "goods-on-country",
+      "source": "el",
+      "notionStatus": null,
+      "themes": [
+        "Product Design",
+        "Cultural Design"
+      ]
+    },
+    {
+      "name": "Goods.",
+      "slug": "goods",
+      "source": "el",
+      "notionStatus": null,
+      "themes": [
+        "Sustainability",
+        "Resource Tracking",
+        "Community Assets"
+      ]
+    },
+    {
+      "name": "Green Harvest Witta",
+      "slug": "green-harvest-witta",
+      "source": "el",
+      "notionStatus": null,
+      "themes": [
+        "Community Innovation",
+        "Sustainability",
+        "Knowledge Sharing"
+      ]
+    },
+    {
+      "name": "Junes Patch",
+      "slug": "junes-patch",
+      "source": "el",
+      "notionStatus": null,
+      "themes": [
+        "Therapeutic Landscapes",
+        "Social Prescribing",
+        "Nature Connection"
+      ]
+    },
+    {
+      "name": "JusticeHub",
+      "slug": "justicehub",
+      "source": "both",
+      "notionStatus": "Active Development",
+      "themes": [
+        "Systems Change",
+        "Community Support"
+      ]
+    },
+    {
+      "name": "Mounty Yarns",
+      "slug": "mounty-yarns",
+      "source": "el",
+      "notionStatus": null,
+      "themes": [
+        "Community Stories",
+        "Local Knowledge"
+      ]
+    },
+    {
+      "name": "Oonchiumpa",
+      "slug": "oonchiumpa",
+      "source": "el",
+      "notionStatus": null,
+      "themes": [
+        "Indigenous Leadership",
+        "Youth Support",
+        "Cultural Practice"
+      ]
+    },
+    {
+      "name": "PICC Annual Report",
+      "slug": "picc-annual-report",
+      "source": "el",
+      "notionStatus": null,
+      "themes": [
+        "Indigenous Storytelling",
+        "Community Control",
+        "Transparency"
+      ]
+    },
+    {
+      "name": "PICC Centre Precinct",
+      "slug": "picc-centre-precinct",
+      "source": "el",
+      "notionStatus": null,
+      "themes": [
+        "Cultural Center",
+        "Community Hub"
+      ]
+    },
+    {
+      "name": "PICC Elders Hull River Trip",
+      "slug": "picc-elders-hull-river",
+      "source": "el",
+      "notionStatus": null,
+      "themes": [
+        "Cultural Practice",
+        "Connection to Country",
+        "Elder Leadership"
+      ]
+    },
+    {
+      "name": "PICC Photo Kiosk",
+      "slug": "picc-photo-kiosk",
+      "source": "el",
+      "notionStatus": null,
+      "themes": [
+        "Community Control",
+        "Digital Tools",
+        "Cultural Storytelling"
+      ]
+    },
+    {
+      "name": "Place-Based Policy Lab",
+      "slug": "place-based-policy-lab",
+      "source": "el",
+      "notionStatus": null,
+      "themes": [
+        "Evidence-Based Practice",
+        "Community-Led Policy",
+        "Participatory Research"
+      ]
+    },
+    {
+      "name": "Quandamooka Justice and Healing Strategy",
+      "slug": "quandamooka-justice-strategy",
+      "source": "el",
+      "notionStatus": null,
+      "themes": [
+        "Justice Reinvestment",
+        "Indigenous Leadership",
+        "Community Healing"
+      ]
+    },
+    {
+      "name": "Regional Arts Fellowship",
+      "slug": "regional-arts-fellowship",
+      "source": "el",
+      "notionStatus": null,
+      "themes": [
+        "Art & Technology",
+        "Agriculture",
+        "Regional Innovation"
+      ]
+    },
+    {
+      "name": "SMART Connect",
+      "slug": "smart-connect",
+      "source": "el",
+      "notionStatus": null,
+      "themes": [
+        "Peer Support",
+        "Digital Access",
+        "Community Connection"
+      ]
+    },
+    {
+      "name": "SMART HCP GP Uplift",
+      "slug": "smart-hcp-gp-uplift",
+      "source": "el",
+      "notionStatus": null,
+      "themes": [
+        "Healthcare Integration",
+        "Addiction Support",
+        "Provider Education"
+      ]
+    },
+    {
+      "name": "SMART Recovery GP Kits",
+      "slug": "smart-recovery-gp-kits",
+      "source": "el",
+      "notionStatus": null,
+      "themes": [
+        "Healthcare Integration",
+        "Addiction Support",
+        "Primary Care"
+      ]
+    },
+    {
+      "name": "The Confessional",
+      "slug": "the-confessional",
+      "source": "el",
+      "notionStatus": null,
+      "themes": [
+        "Safe Space",
+        "Vulnerability",
+        "Community Healing"
+      ]
+    },
+    {
+      "name": "The Harvest",
+      "slug": "the-harvest",
+      "source": "both",
+      "notionStatus": "Active Development",
+      "themes": [
+        "Cultural Preservation",
+        "Sustainable Farming",
+        "Intergenerational Learning"
+      ]
+    },
+    {
+      "name": "TOMNET",
+      "slug": "tomnet",
+      "source": "el",
+      "notionStatus": null,
+      "themes": [
+        "Community Network",
+        "Elder Support"
+      ]
+    },
+    {
+      "name": "Uncle Allan Palm Island Art",
+      "slug": "uncle-allan-palm-island-art",
+      "source": "el",
+      "notionStatus": null,
+      "themes": [
+        "Indigenous Art",
+        "Cultural Sovereignty",
+        "Digital Storytelling"
+      ]
+    }
+  ]
+}

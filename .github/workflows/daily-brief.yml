@@ -1,0 +1,71 @@
+name: Daily Morning Brief
+
+on:
+  schedule:
+    # Run at 8:00 AM AEST (22:00 UTC previous day)
+    - cron: '0 22 * * *'
+  workflow_dispatch:
+    inputs:
+      post_to_notion:
+        description: 'Post brief to Notion Command Center'
+        required: false
+        default: 'true'
+
+env:
+  NODE_VERSION: '20'
+
+jobs:
+  morning-brief:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Generate Morning Brief
+        id: brief
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          GHL_API_KEY: ${{ secrets.GHL_API_KEY }}
+          GHL_LOCATION_ID: ${{ secrets.GHL_LOCATION_ID }}
+        run: |
+          node scripts/generate-morning-brief.mjs > brief.md
+          echo "brief_generated=true" >> $GITHUB_OUTPUT
+
+      - name: Post to Notion
+        if: ${{ github.event.inputs.post_to_notion != 'false' }}
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+        run: |
+          node scripts/post-brief-to-notion.mjs
+
+      - name: Upload Brief Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: morning-brief-${{ github.run_number }}
+          path: brief.md
+          retention-days: 30
+
+  # Optional: Send notification on failure
+  notify-on-failure:
+    runs-on: ubuntu-latest
+    needs: morning-brief
+    if: failure()
+    steps:
+      - name: Log failure
+        run: |
+          echo "Morning brief generation failed at $(date)"
+          echo "Check workflow logs for details"

@@ -38,7 +38,7 @@ module.exports = {
       args: 'run dev',
       cwd: '/Users/benknight/Code/empathy-ledger-v2',
       env: {
-        PORT: 3001,
+        PORT: 3030,  // Changed from 3001 to match package.json dev script
         NODE_ENV: 'development',
         PATH: process.env.PATH,
       },

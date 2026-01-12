@@ -11,3 +11,6 @@ node_modules/
 *.cursor
 .vscode/settings.json
 .vscode/launch.json
+deployment/logs/*.log
+*.log
+act-personal-ai/.venv311/

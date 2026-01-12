@@ -27,6 +27,7 @@ Usage:
 """
 import sys
 import os
+import re
 
 # Add parent directory to path
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
@@ -128,11 +129,46 @@ class StoryAnalysisAgent:
                 'severity': 'medium'
             },
             'consent_required': {
-                'markers': ['names', 'locations', 'family', 'community'],
+                'markers': [
+                    'full name',
+                    'first name',
+                    'last name',
+                    'surname',
+                    'date of birth',
+                    'dob',
+                    'email',
+                    'email address',
+                    'phone',
+                    'phone number',
+                    'mobile',
+                    'home address',
+                    'street address',
+                    'postcode'
+                ],
+                'regex_markers': [
+                    {'label': 'email', 'pattern': r'[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}'},
+                    {'label': 'phone_number', 'pattern': r'\b(?:\+?\d{1,3}[\s.-]?)?(?:\(?\d{2,4}\)?[\s.-]?)\d{3,4}[\s.-]?\d{3,4}\b'},
+                    {'label': 'street_address', 'pattern': r'\b\d{1,5}\s+\w+(?:\s+\w+){0,3}\s+(street|st|road|rd|avenue|ave|lane|ln|drive|dr|court|ct|way|place|pl|terrace|tce|crescent|cres)\b'}
+                ],
                 'action': 'Verify consent for identifiable information',
                 'severity': 'high'
             }
         }
+
+    def _find_phrase_markers(self, text: str, markers: List[str]) -> List[str]:
+        found = []
+        for marker in markers:
+            escaped = re.escape(marker).replace(r'\ ', r'\s+')
+            if re.search(rf'\b{escaped}\b', text, flags=re.IGNORECASE):
+                found.append(marker)
+        return found
+
+    def _find_regex_markers(self, text: str, regex_markers: List[Dict[str, str]]) -> List[str]:
+        found = []
+        for regex_marker in regex_markers:
+            if re.search(regex_marker['pattern'], text, flags=re.IGNORECASE):
+                found.append(regex_marker['label'])
+        return found
 
     def _define_evidence_categories(self) -> Dict:
         """
@@ -460,19 +496,16 @@ Return as JSON:
         flags = []
         max_severity = 'low'
 
-        text_lower = transcript_text.lower()
-
         # Check each protocol
         for protocol_name, protocol in self.cultural_protocols.items():
-            markers_found = []
-            for marker in protocol['markers']:
-                if marker in text_lower:
-                    markers_found.append(marker)
+            markers_found = self._find_phrase_markers(transcript_text, protocol.get('markers', []))
+            regex_markers_found = self._find_regex_markers(transcript_text, protocol.get('regex_markers', []))
+            detected_markers = markers_found + regex_markers_found
 
-            if markers_found:
+            if detected_markers:
                 flags.append({
                     'protocol': protocol_name,
-                    'markers_detected': markers_found,
+                    'markers_detected': detected_markers,
                     'action': protocol['action'],
                     'severity': protocol['severity']
                 })

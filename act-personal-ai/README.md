@@ -6,9 +6,9 @@ ACT Farmhand is a specialized AI assistant that helps the ACT team manage their 
 
 ## What is ACT Farmhand?
 
-ACT Farmhand is a multi-agent AI system with 8 specialized agents:
+ACT Farmhand is a multi-agent AI system with 10 specialized agents:
 
-1. **ALMAAgent** - Signal tracking, pattern recognition, and ethical intelligence (NEW!)
+1. **ALMAAgent** - Signal tracking, pattern recognition, and ethical intelligence
 2. **SyncAgent** - Data reconciliation between GHL, Supabase, and Notion
 3. **GrantAgent** - Grant research, matching, and automated reporting
 4. **ImpactAgent** - SROI calculation and outcomes tracking
@@ -16,6 +16,8 @@ ACT Farmhand is a multi-agent AI system with 8 specialized agents:
 6. **ResearchAgent** - Contact enrichment and web research
 7. **ConnectorAgent** - Cross-project opportunity detection
 8. **SearchAgent** - Natural language CRM queries
+9. **StoryAnalysisAgent** - Narrative arc analysis, thematic evolution, impact evidence extraction (NEW!)
+10. **StoryWritingAgent** - Editorial support for culturally sensitive storytelling (NEW!)
 
 **Time Saved**: 850-1,250 hours/year
 **Value Unlocked**: $900k+ (insights, retention, grants)
@@ -509,6 +511,163 @@ result = await agent.run("suggest searches")
 
 ---
 
+### 9. StoryAnalysisAgent - Narrative Intelligence (NEW!)
+
+**Purpose**: Deep analysis of storytelling data from Empathy Ledger to surface narrative patterns, thematic evolution, and impact evidence.
+
+**Philosophy**:
+> **"Amplify stories, never homogenize them."**
+>
+> Indigenous storytelling follows diverse traditions. StoryAnalysisAgent respects multiple narrative structures (not just Western 3-act), honors cultural protocols, and extracts impact evidence without extractive framing.
+
+**Key Features**:
+- **Narrative Arc Analysis** - Detects 5 storytelling patterns (linear journey, circular return, braided stories, witnessing, teaching story)
+- **Thematic Evolution** - Tracks how storyteller themes change over time
+- **Cross-Narrative Connections** - Finds stories that resonate together
+- **Impact Evidence Extraction** - Pulls powerful quotes for funder reports
+- **Cultural Protocol Check** - Flags sacred knowledge, trauma content, consent issues
+
+**Sacred Boundaries** (NEVER):
+- ❌ Rank storytellers by "quality"
+- ❌ Extract sacred knowledge without consent
+- ❌ Homogenize diverse voices
+- ❌ Impose Western narrative structures
+- ❌ Compare storytellers competitively
+
+**Usage**:
+
+```python
+from agents.story_analysis_agent import StoryAnalysisAgent
+
+agent = StoryAnalysisAgent()
+
+# Analyze narrative structure
+arc = await agent.analyze_narrative_arc(transcript_text, metadata={
+    'storyteller_name': 'Linda Turner',
+    'cultural_background': 'Kabi Kabi'
+})
+
+# Track thematic evolution
+evolution = await agent.analyze_thematic_evolution([
+    {'id': 'abc', 'themes': ['healing', 'culture'], 'created_at': '2025-01-01'},
+    {'id': 'def', 'themes': ['resilience', 'family'], 'created_at': '2025-06-01'}
+])
+
+# Find story connections
+connections = await agent.find_story_connections([
+    {'id': 'story1', 'themes': ['justice', 'healing']},
+    {'id': 'story2', 'themes': ['justice', 'community']}
+])
+
+# Extract impact evidence for funders
+evidence = await agent.extract_impact_evidence(transcript_text, themes)
+
+# Check cultural protocols
+protocol_check = await agent.check_cultural_protocols(transcript_text)
+```
+
+**Narrative Arc Patterns Detected**:
+
+| Pattern | Description | Cultural Context |
+|---------|-------------|-----------------|
+| Linear Journey | Departure → trials → return | Migration/displacement stories |
+| Circular Return | Disruption → wandering → return → renewal | Indigenous storytelling traditions |
+| Braided Stories | Multiple intertwined narratives | Family/community stories |
+| Witnessing | Observational testimony without resolution | Trauma/justice stories |
+| Teaching Story | Knowledge transmission with wisdom | Elder teachings |
+
+**Impact Evidence Categories**:
+
+| Category | Value Proxy | Keywords |
+|----------|------------|----------|
+| Transformation | $12,000 | changed, healed, grew, transformed, overcame |
+| Cultural Preservation | $8,000 | language, tradition, ceremony, elders, ancestors |
+| Systems Change | $50,000 | policy, law, government, system, change |
+| Community Connection | $3,000 | connected, belonging, community, together, supported |
+| Resilience | $10,000 | strength, resilient, survived, persevered, endured |
+
+**Time Saved**: 4-6 hours/week (narrative analysis, evidence extraction)
+
+---
+
+### 10. StoryWritingAgent - Editorial Support (NEW!)
+
+**Purpose**: Assist storytellers, facilitators, and content creators with crafting stories that align with Empathy Ledger's culturally sensitive, trauma-informed tone.
+
+**Philosophy**:
+> **"We support storytellers' voices. We never speak for them."**
+>
+> This agent provides SUGGESTIONS, never rewrites. It checks tone alignment, flags problematic language, and offers editorial guidance while respecting storyteller autonomy.
+
+**Key Features**:
+- **Story Draft Refinement** - Suggest improvements (never full rewrites)
+- **Title Suggestions** - Generate culturally appropriate title options
+- **Tone Alignment Check** - Flag savior language, deficit framing, othering
+- **Discussion Questions** - Create reflection prompts for storytelling circles
+- **Summary Generation** - Craft compelling summaries (not extractive)
+- **Cultural Sensitivity Check** - Detect sacred knowledge, trauma content
+
+**Sacred Boundaries** (NEVER):
+- ❌ Write stories FOR storytellers (only assist/suggest)
+- ❌ Impose Western narrative structures
+- ❌ Extract without consent
+- ❌ Homogenize diverse voices
+- ❌ Use savior language ("we help them")
+- ❌ Focus on deficit/trauma without strength/resilience
+
+**Usage**:
+
+```python
+from agents.story_writing_agent import StoryWritingAgent
+
+agent = StoryWritingAgent()
+
+# Refine a story draft (get suggestions, not rewrites)
+refinement = await agent.refine_story_draft(draft_text, context={
+    'storyteller': 'Community Elder',
+    'purpose': 'Cultural preservation'
+})
+
+# Suggest title options
+titles = await agent.suggest_titles(story_text, count=5)
+
+# Check tone alignment with Empathy Ledger values
+tone_check = await agent.check_tone_alignment(story_text)
+
+# Generate discussion questions for storytelling circles
+questions = await agent.generate_discussion_questions(
+    story_text,
+    audience='community'  # or 'funder', 'research', 'education'
+)
+
+# Generate compelling summary
+summary = await agent.generate_summary(story_text, length='medium')
+```
+
+**Tone Guidelines** (Empathy Ledger Values):
+
+| Guideline | Good ✅ | Avoid ❌ |
+|-----------|---------|----------|
+| **Voice Centering** | "Storytellers own their narratives"<br>"Stories remain yours" | "We empower storytellers"<br>"We give voice to"<br>"Our storytellers" |
+| **Strength-Based** | "Community resilience"<br>"Cultural knowledge preservation" | "Disadvantaged communities"<br>"At-risk populations"<br>"Vulnerable people" |
+| **Relational** | "We/us/our (collective)"<br>"Together"<br>"Connection" | "Excessive I/me"<br>"Them/those"<br>"Recipients"<br>"Beneficiaries" |
+| **Cultural Grounding** | "Connection to Country"<br>"Elder wisdom"<br>"Cultural protocols" | "Exotic/mystical language"<br>"Romanticization"<br>"Pan-Indigenous generalizations" |
+| **Data Sovereignty** | "OCAP principles"<br>"Community consent"<br>"Indigenous-controlled" | "Data extraction"<br>"Passive subjects"<br>"Research on (vs. with)" |
+
+**Problematic Language Flags**:
+
+| Flag | Patterns Detected | Severity | Suggestion |
+|------|------------------|----------|------------|
+| Savior Complex | "we empower", "we give", "we help" | High | Use "we support" or center storyteller as actor |
+| Deficit Framing | "disadvantaged", "marginalized", "at-risk" | Medium | Use strength-based language (resilience, agency) |
+| Othering | "them", "those people", "recipients" | Medium | Use relational language (we/us) or role names |
+| Extraction | "collect data", "harvest knowledge" | High | Use "preserve", "honor", "steward", "safeguard" |
+| Romanticization | "ancient wisdom", "mystical", "exotic" | Medium | Be specific and grounded |
+
+**Time Saved**: 3-4 hours/week (editorial review, tone alignment)
+
+---
+
 ## Cultural Protocols
 
 ACT Farmhand enforces cultural protocols at the system level, not just as policy.
@@ -637,7 +796,9 @@ pytest tests/test_search_agent.py
 | ResearchAgent | Contact enrichment | 3-4 hrs |
 | ConnectorAgent | Opportunity detection | 2-3 hrs |
 | SearchAgent | Natural language queries | 1-2 hrs |
-| **Total** | | **23-33 hrs/week** |
+| **StoryAnalysisAgent** | **Narrative analysis + evidence extraction** | **4-6 hrs** |
+| **StoryWritingAgent** | **Editorial review + tone alignment** | **3-4 hrs** |
+| **Total** | | **30-43 hrs/week** |
 
 ---
 

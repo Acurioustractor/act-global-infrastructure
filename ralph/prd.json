@@ -1,0 +1,82 @@
+{
+  "project": "ACT Global Infrastructure",
+  "description": "Long-running agent tasks for ACT ecosystem projects",
+  "created": "2026-01-06",
+  "features": [
+    {
+      "id": "justicehub-map-fix",
+      "priority": 1,
+      "title": "Fix JusticeHub Australia Nodes Map",
+      "description": "The AustraliaNodesMap component needs to display nodes correctly positioned on an Australia map. Nodes should not fly around on hover. Use a simple static approach with hardcoded state positions.",
+      "acceptance_criteria": [
+        "Map displays with Australia background",
+        "Nodes appear at correct state/territory positions",
+        "Hover shows tooltip without moving the marker",
+        "Click selects the node",
+        "Build passes without errors"
+      ],
+      "project_path": "/Users/benknight/Code/JusticeHub",
+      "passes": false
+    },
+    {
+      "id": "justicehub-event-registration",
+      "priority": 2,
+      "title": "Review Journey 2: Event Registration Flow",
+      "description": "Review and ensure the event registration flow works correctly from discovery to confirmation.",
+      "acceptance_criteria": [
+        "Events page displays upcoming events",
+        "Event detail page shows full information",
+        "Registration form works and submits to database",
+        "Confirmation is shown after registration",
+        "Build passes without errors"
+      ],
+      "project_path": "/Users/benknight/Code/JusticeHub",
+      "passes": false
+    },
+    {
+      "id": "justicehub-steward-signup",
+      "priority": 3,
+      "title": "Review Journey 3: Steward Signup Flow",
+      "description": "Review and ensure the steward/volunteer signup process works correctly.",
+      "acceptance_criteria": [
+        "Steward signup page is accessible",
+        "Form validates required fields",
+        "Submission creates record in database",
+        "Confirmation email/message shown",
+        "Build passes without errors"
+      ],
+      "project_path": "/Users/benknight/Code/JusticeHub",
+      "passes": false
+    },
+    {
+      "id": "justicehub-intelligence-research",
+      "priority": 4,
+      "title": "Review Journey 4: Intelligence Research",
+      "description": "Review and ensure the intelligence/research discovery flow works correctly.",
+      "acceptance_criteria": [
+        "Intelligence page displays available research",
+        "Search and filtering works",
+        "Detail pages show full content",
+        "Citations and sources are properly formatted",
+        "Build passes without errors"
+      ],
+      "project_path": "/Users/benknight/Code/JusticeHub",
+      "passes": false
+    },
+    {
+      "id": "justicehub-network-exploration",
+      "priority": 5,
+      "title": "Review Journey 5: Network Exploration",
+      "description": "Review and ensure the network exploration flow works correctly.",
+      "acceptance_criteria": [
+        "Network page displays all nodes",
+        "Node detail pages work",
+        "Filtering by status works",
+        "Contact/connection functionality works",
+        "Build passes without errors"
+      ],
+      "project_path": "/Users/benknight/Code/JusticeHub",
+      "passes": false
+    }
+  ]
+}

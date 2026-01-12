@@ -79,7 +79,7 @@ show_status() {
     echo ""
     print_info "Individual site URLs:"
     echo "  🌐 ACT Regenerative Studio:  http://localhost:3002"
-    echo "  📖 Empathy Ledger:           http://localhost:3001"
+    echo "  📖 Empathy Ledger:           http://localhost:3030"
     echo "  ⚖️  JusticeHub:               http://localhost:3003"
     echo "  🌾 The Harvest Website:      http://localhost:3004"
     echo "  🚜 ACT Farm:                 http://localhost:3005"

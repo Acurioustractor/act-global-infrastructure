@@ -14,7 +14,7 @@ import { ACTVoice } from '../packages/act-voice/src/index.js';
 import fs from 'fs';
 import { execSync } from 'child_process';
 
-const apiKey = process.env.OPENAI_API_KEY || 'OPENAI_KEY_REMOVED';
+const apiKey = process.env.OPENAI_API_KEY || '<OPENAI_API_KEY>-N3Mv6k6SBktzCEzXCndzq6iJyPqZobD2EB8kxjV7XZ4jYLS3AMKmrRXea-j5eYfyalsj0RtnCnT3BlbkFJzS7p0OwEVoawZpURoYfnuJlO7Q68xq97mUPuwuYF0jyR11K5JZMV0dJ1_V1vJeewf4olAe_CMA';
 
 console.log('🔍 ACT Ecosystem GHL & CRM Strategy Analysis\n');
 console.log('Researching across all projects...\n');

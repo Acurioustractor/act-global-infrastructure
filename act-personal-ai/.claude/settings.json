@@ -1,0 +1,8 @@
+{
+  "skills": {
+    "act-code-reviewer": {
+      "path": "./skills/act-code-reviewer/SKILL.md",
+      "description": "Review specifications against ACT ecosystem values and cultural protocols"
+    }
+  }
+}

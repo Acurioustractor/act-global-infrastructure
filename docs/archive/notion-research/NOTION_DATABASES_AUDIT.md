@@ -227,7 +227,7 @@ Daily Work Log (NEW) ← Links to GitHub Issues (EXISTING)
 
 **Environment variables needed**:
 ```bash
-NOTION_TOKEN=ntn_OLD_TOKEN_HERE
+NOTION_TOKEN=NOTION_TOKEN_PLACEHOLDER
 NOTION_PARENT_PAGE_ID=2d6ebcf981cf806e8db2dc8ec5d0b414
 ```
 
