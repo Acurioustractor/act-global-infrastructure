@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  clawdbot:
+    build: .
+    container_name: clawdbot-farmhand
+    restart: unless-stopped
+    ports:
+      - "18789:18789"
+    volumes:
+      # Persistent config and data
+      - clawdbot-config:/root/.clawdbot
+      - clawdbot-workspace:/root/clawd
+      # Voice notes storage
+      - clawdbot-voice:/root/clawd/voice-notes
+    environment:
+      # Secrets - load from .env file
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - GOOGLE_SERVICE_ACCOUNT_KEY=${GOOGLE_SERVICE_ACCOUNT_KEY}
+      - GOOGLE_DELEGATED_USER=${GOOGLE_DELEGATED_USER}
+      - NOTION_TOKEN=${NOTION_TOKEN}
+      - SUPABASE_URL=${SUPABASE_URL}
+      - SUPABASE_SERVICE_ROLE_KEY=${SUPABASE_SERVICE_ROLE_KEY}
+      - EL_SUPABASE_URL=${EL_SUPABASE_URL}
+      - EL_SUPABASE_SERVICE_ROLE_KEY=${EL_SUPABASE_SERVICE_ROLE_KEY}
+      - GHL_API_KEY=${GHL_API_KEY}
+      - GHL_LOCATION_ID=${GHL_LOCATION_ID}
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:18789/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+volumes:
+  clawdbot-config:
+  clawdbot-workspace:
+  clawdbot-voice:
