@@ -156,6 +156,89 @@ export class GHLService {
   }
 
   /**
+   * Create a new contact
+   *
+   * @param {Object} contactData - Contact data
+   * @param {string} contactData.email - Email address (required)
+   * @param {string} [contactData.firstName] - First name
+   * @param {string} [contactData.lastName] - Last name
+   * @param {string} [contactData.phone] - Phone number
+   * @param {string} [contactData.companyName] - Company name
+   * @param {string[]} [contactData.tags] - Tags to apply
+   * @returns {Promise<Object>} Created contact
+   */
+  async createContact(contactData) {
+    const payload = {
+      locationId: this.locationId,
+      email: contactData.email,
+      ...(contactData.firstName && { firstName: contactData.firstName }),
+      ...(contactData.lastName && { lastName: contactData.lastName }),
+      ...(contactData.phone && { phone: contactData.phone }),
+      ...(contactData.companyName && { companyName: contactData.companyName }),
+      ...(contactData.tags && { tags: contactData.tags }),
+      source: 'ACT Agent'
+    };
+
+    const data = await this.request('/contacts/', {
+      method: 'POST',
+      body: JSON.stringify(payload)
+    });
+
+    return data.contact;
+  }
+
+  /**
+   * Update an existing contact
+   *
+   * @param {string} contactId - GHL contact ID
+   * @param {Object} updates - Fields to update
+   * @returns {Promise<Object>} Updated contact
+   */
+  async updateContact(contactId, updates) {
+    const data = await this.request(`/contacts/${contactId}`, {
+      method: 'PUT',
+      body: JSON.stringify(updates)
+    });
+
+    return data.contact;
+  }
+
+  /**
+   * Lookup contact by email
+   *
+   * @param {string} email - Email to lookup
+   * @returns {Promise<Object|null>} Contact if found
+   */
+  async lookupContactByEmail(email) {
+    try {
+      const data = await this.request(
+        `/contacts/lookup?locationId=${this.locationId}&email=${encodeURIComponent(email)}`
+      );
+      return data.contacts?.[0] || null;
+    } catch (err) {
+      return null;
+    }
+  }
+
+  /**
+   * Create or update contact (upsert)
+   *
+   * @param {Object} contactData - Contact data with email as key
+   * @returns {Promise<{contact: Object, created: boolean}>}
+   */
+  async upsertContact(contactData) {
+    const existing = await this.lookupContactByEmail(contactData.email);
+
+    if (existing) {
+      const updated = await this.updateContact(existing.id, contactData);
+      return { contact: updated, created: false };
+    } else {
+      const created = await this.createContact(contactData);
+      return { contact: created, created: true };
+    }
+  }
+
+  /**
    * Search contacts by name, email, or phone
    *
    * @param {string} query - Search query

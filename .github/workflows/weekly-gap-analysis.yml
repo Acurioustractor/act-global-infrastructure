@@ -1,0 +1,78 @@
+name: Weekly Gap Analysis
+
+on:
+  schedule:
+    # Run every Monday at 6 AM UTC (4 PM AEST)
+    - cron: '0 6 * * 1'
+  workflow_dispatch: # Manual trigger
+
+jobs:
+  gap-analysis:
+    name: Run Content Gap Analysis
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: act-personal-ai
+
+    steps:
+      - name: Checkout act-global-infrastructure
+        uses: actions/checkout@v4
+
+      - name: Checkout act-personal-ai
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ github.repository_owner }}/act-personal-ai
+          path: act-personal-ai
+          token: ${{ secrets.GH_PROJECT_TOKEN }}
+
+      - name: Checkout act-regenerative-studio
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ github.repository_owner }}/act-regenerative-studio
+          path: act-regenerative-studio
+          token: ${{ secrets.GH_PROJECT_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run gap analysis
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+        run: |
+          echo "🔍 Running weekly gap analysis..."
+          node services/gap-analysis.mjs --output=json > /tmp/gap-report.json
+
+          echo "📊 Gap Analysis Results:"
+          cat /tmp/gap-report.json | head -100
+
+      - name: Export knowledge for LLM
+        run: |
+          echo "📚 Exporting knowledge for LLM training..."
+          node scripts/export-knowledge.mjs --format qa --output weekly-qa-export.json
+
+          echo "✅ Exported QA pairs:"
+          grep -o '"count": [0-9]*' data/knowledge-exports/weekly-qa-export.json
+
+      - name: Upload gap report artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: gap-analysis-report
+          path: |
+            /tmp/gap-report.json
+            act-personal-ai/data/knowledge-exports/weekly-qa-export.json
+          retention-days: 30
+
+      - name: Summary
+        run: |
+          echo "## Weekly Gap Analysis Complete" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "- Gap report generated" >> $GITHUB_STEP_SUMMARY
+          echo "- QA pairs exported for LLM training" >> $GITHUB_STEP_SUMMARY
+          echo "- Artifacts available for 30 days" >> $GITHUB_STEP_SUMMARY

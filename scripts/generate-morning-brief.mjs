@@ -6,16 +6,24 @@
  * Creates a comprehensive morning brief combining:
  * - Current date and moon phase
  * - Top 3 work priorities
- * - Calendar context
- * - Project health
+ * - Calendar context (from communications_history)
+ * - Communications summary
+ * - Awaiting responses
+ * - Voice note highlights
  * - Relationship check
  * - Regenerative thought
+ *
+ * Now integrates with:
+ * - communications_history table (emails, calendar, calls)
+ * - voice_notes table (transcribed voice memos)
+ * - relationship_health table (contact temperature)
  *
  * Outputs markdown that can be posted to Notion or displayed in CLI.
  *
  * Usage:
  *   node scripts/generate-morning-brief.mjs
  *   node scripts/generate-morning-brief.mjs --json
+ *   node scripts/generate-morning-brief.mjs --send   # Also send to team channels
  */
 
 import './lib/load-env.mjs';
@@ -47,23 +55,57 @@ async function generateBrief() {
     day: 'numeric',
   });
 
+  // Fetch all data in parallel for efficiency
+  const [
+    priorities,
+    calendar,
+    projects,
+    relationships,
+    communications,
+    awaitingResponse,
+    needToRespond,
+    voiceNotes,
+    moonCycleTodos,
+  ] = await Promise.all([
+    getTopPriorities(),
+    getCalendarContext(),
+    getProjectHealth(),
+    getContactsNeedingAttention(),
+    getCommunicationsSummary(),
+    getAwaitingResponse(),
+    getNeedToRespond(),
+    getRecentVoiceNotes(),
+    getMoonCycleTodos(getMoonPhase(now)),
+  ]);
+
   const brief = {
     date: dateStr,
     moonPhase: getMoonPhase(now),
-    priorities: await getTopPriorities(),
-    calendar: await getCalendarContext(),
-    projects: await getProjectHealth(),
-    relationships: await getContactsNeedingAttention(),
+    priorities,
+    calendar,
+    projects,
+    relationships,
+    communications,
+    awaitingResponse,
+    needToRespond,
+    voiceNotes,
+    moonCycleTodos,
     thought: REGENERATIVE_THOUGHTS[Math.floor(Math.random() * REGENERATIVE_THOUGHTS.length)],
   };
 
   // Output format
   const isJson = process.argv.includes('--json');
+  const shouldSend = process.argv.includes('--send');
 
   if (isJson) {
     console.log(JSON.stringify(brief, null, 2));
   } else {
     console.log(formatBriefMarkdown(brief));
+  }
+
+  // Send to team channels if requested
+  if (shouldSend) {
+    await sendToTeamChannels(brief);
   }
 
   return brief;
@@ -247,7 +289,7 @@ async function getProjectHealth() {
 }
 
 async function getContactsNeedingAttention() {
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabaseUrl = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
   const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
   if (!supabaseUrl || !supabaseKey) return [];
@@ -255,11 +297,39 @@ async function getContactsNeedingAttention() {
   try {
     const supabase = createClient(supabaseUrl, supabaseKey);
 
-    const { data } = await supabase.rpc('get_contacts_needing_attention', {
+    // Use relationship_health table for better data
+    const { data } = await supabase
+      .from('relationship_health')
+      .select('ghl_contact_id, temperature, days_since_contact, risk_flags')
+      .or('temperature.lte.30,days_since_contact.gte.25')
+      .order('days_since_contact', { ascending: false })
+      .limit(5);
+
+    if (data?.length) {
+      // Get contact names
+      const contactIds = data.map(d => d.ghl_contact_id);
+      const { data: contacts } = await supabase
+        .from('ghl_contacts')
+        .select('ghl_id, full_name')
+        .in('ghl_id', contactIds);
+
+      const nameMap = new Map(contacts?.map(c => [c.ghl_id, c.full_name]) || []);
+
+      return data.map(c => ({
+        id: c.ghl_contact_id,
+        name: nameMap.get(c.ghl_contact_id) || c.ghl_contact_id,
+        daysSince: c.days_since_contact,
+        temperature: c.temperature,
+        riskFlags: c.risk_flags,
+      }));
+    }
+
+    // Fallback to old method
+    const { data: fallback } = await supabase.rpc('get_contacts_needing_attention', {
       days_threshold: 25,
     });
 
-    return (data || []).slice(0, 3).map((c) => ({
+    return (fallback || []).slice(0, 3).map((c) => ({
       id: c.ghl_contact_id,
       daysSince: c.days_since_contact,
     }));
@@ -268,47 +338,348 @@ async function getContactsNeedingAttention() {
   }
 }
 
+// ==========================================
+// NEW: Communications History Functions
+// ==========================================
+
+async function getCommunicationsSummary() {
+  const supabaseUrl = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+  if (!supabaseUrl || !supabaseKey) return null;
+
+  try {
+    const supabase = createClient(supabaseUrl, supabaseKey);
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const todayISO = today.toISOString();
+
+    const yesterday = new Date(today);
+    yesterday.setDate(yesterday.getDate() - 1);
+    const yesterdayISO = yesterday.toISOString();
+
+    // Get today's communications
+    const { data: todayComms } = await supabase
+      .from('communications_history')
+      .select('channel, direction')
+      .gte('occurred_at', todayISO);
+
+    // Get yesterday's for comparison
+    const { data: yesterdayComms } = await supabase
+      .from('communications_history')
+      .select('channel, direction')
+      .gte('occurred_at', yesterdayISO)
+      .lt('occurred_at', todayISO);
+
+    const channels = {};
+    (todayComms || []).forEach(c => {
+      channels[c.channel] = (channels[c.channel] || 0) + 1;
+    });
+
+    return {
+      today: todayComms?.length || 0,
+      yesterday: yesterdayComms?.length || 0,
+      inbound: (todayComms || []).filter(c => c.direction === 'inbound').length,
+      outbound: (todayComms || []).filter(c => c.direction === 'outbound').length,
+      byChannel: channels,
+    };
+  } catch {
+    return null;
+  }
+}
+
+async function getAwaitingResponse() {
+  const supabaseUrl = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+  if (!supabaseUrl || !supabaseKey) return [];
+
+  try {
+    const supabase = createClient(supabaseUrl, supabaseKey);
+
+    const { data } = await supabase
+      .from('communications_history')
+      .select(`
+        id, subject, occurred_at, ghl_contact_id,
+        ghl_contacts!inner(full_name)
+      `)
+      .eq('waiting_for_response', true)
+      .eq('response_needed_by', 'them')
+      .order('occurred_at', { ascending: true })
+      .limit(5);
+
+    return (data || []).map(d => ({
+      contact: d.ghl_contacts?.full_name || 'Unknown',
+      subject: d.subject || 'No subject',
+      daysWaiting: Math.floor((Date.now() - new Date(d.occurred_at).getTime()) / (1000 * 60 * 60 * 24)),
+    }));
+  } catch {
+    return [];
+  }
+}
+
+async function getNeedToRespond() {
+  const supabaseUrl = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+  if (!supabaseUrl || !supabaseKey) return [];
+
+  try {
+    const supabase = createClient(supabaseUrl, supabaseKey);
+
+    const { data } = await supabase
+      .from('communications_history')
+      .select(`
+        id, subject, occurred_at, ghl_contact_id,
+        ghl_contacts!inner(full_name)
+      `)
+      .eq('waiting_for_response', true)
+      .eq('response_needed_by', 'us')
+      .order('occurred_at', { ascending: true })
+      .limit(5);
+
+    return (data || []).map(d => ({
+      contact: d.ghl_contacts?.full_name || 'Unknown',
+      subject: d.subject || 'No subject',
+      daysSince: Math.floor((Date.now() - new Date(d.occurred_at).getTime()) / (1000 * 60 * 60 * 24)),
+    }));
+  } catch {
+    return [];
+  }
+}
+
+async function getRecentVoiceNotes() {
+  const supabaseUrl = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+  if (!supabaseUrl || !supabaseKey) return [];
+
+  try {
+    const supabase = createClient(supabaseUrl, supabaseKey);
+
+    const yesterday = new Date();
+    yesterday.setDate(yesterday.getDate() - 1);
+
+    const { data } = await supabase
+      .from('voice_notes')
+      .select('id, summary, topics, recorded_by_name, recorded_at, action_items')
+      .gte('recorded_at', yesterday.toISOString())
+      .order('recorded_at', { ascending: false })
+      .limit(5);
+
+    return (data || []).map(v => ({
+      summary: v.summary || 'No summary',
+      by: v.recorded_by_name || 'Unknown',
+      topics: v.topics || [],
+      hasActions: v.action_items?.length > 0,
+      when: v.recorded_at,
+    }));
+  } catch {
+    return [];
+  }
+}
+
+async function getMoonCycleTodos(moonPhase) {
+  // Load project codes for context
+  let projectCodes = {};
+  try {
+    const { readFile } = await import('fs/promises');
+    projectCodes = JSON.parse(await readFile('./config/project-codes.json', 'utf8'));
+  } catch {
+    // Continue without project codes
+  }
+
+  const todos = [];
+  const phase = moonPhase.phase;
+
+  // Get high priority projects
+  const highPriority = Object.entries(projectCodes.projects || {})
+    .filter(([_, p]) => p.priority === 'high')
+    .slice(0, 5);
+
+  if (phase === 'New Moon' || phase === 'Waxing Crescent') {
+    todos.push({
+      category: 'Plant Seeds',
+      items: [
+        'Set intentions for this lunar cycle',
+        'Identify 3 new people to connect with',
+        ...highPriority.slice(0, 2).map(([code, p]) => `Draft outreach for ${p.name}`),
+      ],
+    });
+  } else if (phase === 'First Quarter' || phase === 'Waxing Gibbous') {
+    todos.push({
+      category: 'Build Momentum',
+      items: [
+        'Follow up on pending conversations',
+        'Deepen key relationships',
+        ...highPriority.slice(0, 2).map(([code, p]) => `Take action on ${p.name}`),
+      ],
+    });
+  } else if (phase === 'Full Moon') {
+    todos.push({
+      category: 'Harvest & Share',
+      items: [
+        'Celebrate recent wins',
+        'Share a project story on social',
+        'Thank key contributors',
+        ...highPriority.slice(0, 1).map(([code, p]) => `Collect a story from ${p.name}`),
+      ],
+    });
+  } else {
+    todos.push({
+      category: 'Reflect & Release',
+      items: [
+        'Review progress on key projects',
+        'Archive inactive contacts',
+        'Clear email backlog',
+        'Rest and integrate learnings',
+      ],
+    });
+  }
+
+  return todos;
+}
+
+async function sendToTeamChannels(brief) {
+  // Dynamic import to avoid loading if not needed
+  try {
+    const { sendToTeam } = await import('../clawdbot-docker/services/whatsapp-team.mjs');
+
+    const shortBrief = formatShortBrief(brief);
+    await sendToTeam(shortBrief);
+    console.log('\n[Sent to team WhatsApp]');
+  } catch (err) {
+    console.error('Could not send to team channels:', err.message);
+  }
+}
+
+function formatShortBrief(brief) {
+  const lines = [];
+  lines.push(`*Morning Brief - ${brief.date}*`);
+  lines.push(`${brief.moonPhase.phase}`);
+  lines.push('');
+
+  if (brief.communications) {
+    lines.push(`Communications: ${brief.communications.today} today (${brief.communications.inbound} in, ${brief.communications.outbound} out)`);
+  }
+
+  if (brief.needToRespond?.length > 0) {
+    lines.push(`\nNeed to respond to ${brief.needToRespond.length}:`);
+    brief.needToRespond.slice(0, 3).forEach(r => {
+      lines.push(`- ${r.contact}`);
+    });
+  }
+
+  if (brief.priorities?.length > 0) {
+    lines.push(`\nTop priority: ${brief.priorities[0].title}`);
+  }
+
+  lines.push(`\n"${brief.thought}"`);
+
+  return lines.join('\n');
+}
+
 function formatBriefMarkdown(brief) {
   const lines = [];
 
   // Header
-  lines.push(`# ☀️ Morning Brief`);
+  lines.push(`# Morning Brief`);
   lines.push(`## ${brief.date}`);
   lines.push('');
 
   // Moon Phase
-  lines.push(`### 🌙 ${brief.moonPhase.phase}`);
+  lines.push(`### ${brief.moonPhase.phase}`);
   lines.push(brief.moonPhase.energy);
   lines.push('');
 
+  // Moon Cycle Todos
+  if (brief.moonCycleTodos?.length > 0) {
+    for (const todoGroup of brief.moonCycleTodos) {
+      lines.push(`**${todoGroup.category}:**`);
+      todoGroup.items.forEach((item) => {
+        lines.push(`- [ ] ${item}`);
+      });
+      lines.push('');
+    }
+  }
+
+  // Communications Summary (NEW)
+  if (brief.communications) {
+    lines.push('### Communications');
+    const trend = brief.communications.today > brief.communications.yesterday ? 'up' :
+                  brief.communications.today < brief.communications.yesterday ? 'down' : 'same';
+    const trendIcon = trend === 'up' ? '+' : trend === 'down' ? '-' : '=';
+    lines.push(`Today: ${brief.communications.today} (${trendIcon} vs yesterday: ${brief.communications.yesterday})`);
+    lines.push(`- Inbound: ${brief.communications.inbound}`);
+    lines.push(`- Outbound: ${brief.communications.outbound}`);
+    if (Object.keys(brief.communications.byChannel).length > 0) {
+      const channels = Object.entries(brief.communications.byChannel)
+        .map(([ch, count]) => `${ch}: ${count}`)
+        .join(', ');
+      lines.push(`- Channels: ${channels}`);
+    }
+    lines.push('');
+  }
+
+  // Need to Respond (NEW - URGENT)
+  if (brief.needToRespond?.length > 0) {
+    lines.push('### ACTION: Need to Respond');
+    brief.needToRespond.forEach((r) => {
+      const urgency = r.daysSince > 2 ? ' OVERDUE' : '';
+      lines.push(`- **${r.contact}**: ${r.subject} (${r.daysSince}d)${urgency}`);
+    });
+    lines.push('');
+  }
+
+  // Awaiting Response (NEW)
+  if (brief.awaitingResponse?.length > 0) {
+    lines.push('### Awaiting Their Response');
+    brief.awaitingResponse.forEach((a) => {
+      lines.push(`- ${a.contact}: ${a.subject} (${a.daysWaiting}d waiting)`);
+    });
+    lines.push('');
+  }
+
+  // Voice Notes (NEW)
+  if (brief.voiceNotes?.length > 0) {
+    lines.push('### Recent Voice Notes');
+    brief.voiceNotes.forEach((v) => {
+      const actions = v.hasActions ? ' [has actions]' : '';
+      lines.push(`- **${v.by}**: ${v.summary}${actions}`);
+      if (v.topics?.length > 0) {
+        lines.push(`  Topics: ${v.topics.join(', ')}`);
+      }
+    });
+    lines.push('');
+  }
+
   // Top Priorities
-  lines.push('### 🎯 Top Priorities');
+  lines.push('### Top Priorities');
   if (brief.priorities.length === 0) {
     lines.push('No in-progress issues. Check your backlog!');
   } else {
     brief.priorities.forEach((p, i) => {
-      const blocking = p.isBlocking ? ' ⚠️ BLOCKING' : '';
+      const blocking = p.isBlocking ? ' BLOCKING' : '';
       lines.push(`${i + 1}. **${p.title}**${blocking}`);
     });
   }
   lines.push('');
 
   // Calendar
-  lines.push("### 📅 Today's Schedule");
+  lines.push("### Today's Schedule");
   if (brief.calendar.events.length === 0) {
     lines.push('No events scheduled - great day for deep work!');
   } else {
     brief.calendar.events.forEach((e) => {
-      const icon =
-        e.type === 'meeting' ? '👥' : e.type === 'focus' ? '🎯' : e.type === 'travel' ? '✈️' : '📅';
-      lines.push(`- ${e.time} ${icon} ${e.title}`);
+      lines.push(`- ${e.time} ${e.title}`);
     });
   }
   lines.push('');
 
   // Project Health
   if (brief.projects.length > 0) {
-    lines.push('### 📊 Project Pulse');
+    lines.push('### Project Pulse');
     brief.projects.forEach((p) => {
       lines.push(`${p.emoji} ${p.name}: ${p.health}`);
     });
@@ -317,15 +688,17 @@ function formatBriefMarkdown(brief) {
 
   // Relationships
   if (brief.relationships.length > 0) {
-    lines.push('### 👥 Relationship Check');
+    lines.push('### Relationship Check');
     brief.relationships.forEach((r) => {
-      lines.push(`- ${r.id}: ${r.daysSince} days since contact`);
+      const name = r.name || r.id;
+      const temp = r.temperature ? ` (temp: ${r.temperature})` : '';
+      lines.push(`- ${name}: ${r.daysSince} days since contact${temp}`);
     });
     lines.push('');
   }
 
   // Regenerative Thought
-  lines.push('### 🌱 One Regenerative Thought');
+  lines.push('### One Regenerative Thought');
   lines.push(`> "${brief.thought}"`);
   lines.push('');
 

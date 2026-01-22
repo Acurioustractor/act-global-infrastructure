@@ -9,9 +9,9 @@ All have:
 - ✅ GitHub remotes
 - ✅ Vercel deployments
 
-### 1. ACT Farm (Hub/Studio)
+### 1. ACT Regenerative Studio (Hub)
 ```
-/Users/benknight/Code/ACT Farm and Regenerative Innovation Studio/
+/Users/benknight/Code/act-regenerative-studio
 ```
 - **GitHub**: `Acurioustractor/act-regenerative-studio`
 - **Role**: Multi-project orchestrator, operations hub, dashboard
@@ -41,29 +41,32 @@ All have:
 - **Role**: Community hub and CSA programs
 - **Stack**: Next.js, Supabase, Tailwind
 
-### 5. Goods Asset Register
+### 5. Goods (Goods on Country)
 ```
 /Users/benknight/Code/Goods Asset Register/
 ```
 - **GitHub**: `Acurioustractor/goods-asset-tracker`
-- **Role**: Circular economy asset management
-- **Stack**: Next.js, Supabase, Tailwind
+- **Role**: Circular economy venture - PUBLIC storefront + INTERNAL asset management
+- **Stack**: Static HTML (Netlify), Supabase, CLI tools
+- **Deployment**: Netlify (not Vercel)
+- **Public**: Product catalog, community orders
+- **Internal**: Asset tracking, inventory, delivery management
 
 ### 6. ACT Farm (BCV Estate)
 ```
-/Users/benknight/Code/ACT Farm/act-farm/
+/Users/benknight/Code/act-farm
 ```
 - **GitHub**: `Acurioustractor/act-farm`
 - **Role**: Black Cockatoo Valley regeneration estate
 - **Stack**: Next.js, Supabase, Tailwind
 
-### 7. ACT Placemat
+### 7. ACT Placemat (Intelligence Platform)
 ```
-/Users/benknight/Code/ACT Placemat
+/Users/benknight/Code/act-intelligence-platform
 ```
-- **GitHub**: `Acurioustractor/act-placemat` (assumed)
-- **Role**: Backend services / shared infrastructure
-- **Stack**: (To be documented)
+- **GitHub**: `Acurioustractor/act-intelligence-platform`
+- **Role**: Intelligence layer, ecosystem dashboard
+- **Stack**: Next.js, Supabase, Tailwind
 
 ---
 
@@ -72,9 +75,10 @@ All have:
 1. **DO NOT** use `/Users/benknight/Code/Empathy Ledger v.02/` - it doesn't exist
 2. **DO NOT** use `/Users/benknight/Code/EmpathyLedgerv.02` - wrong path
 3. **USE** `/Users/benknight/Code/empathy-ledger-v2` - this is the CORRECT path
+4. **DO NOT** use `/Users/benknight/Code/ACT Farm/` - ARCHIVED on 2026-01-17
+5. **USE** `/Users/benknight/Code/act-farm` - this is the CORRECT path
 
-4. All paths are **case-sensitive** and must include spaces where shown
-5. All paths end with `/` except where nested (like `act-farm/`)
+6. All paths are **case-sensitive** and must include spaces where shown
 
 ---
 
@@ -85,6 +89,6 @@ All have:
 
 ---
 
-**Last Updated**: 2025-12-27
+**Last Updated**: 2026-01-17
 **Authority**: Ben Knight (verified by user)
 **DO NOT MODIFY WITHOUT EXPLICIT USER PERMISSION**

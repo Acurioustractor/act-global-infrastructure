@@ -18,17 +18,33 @@
       "notes": "Has worktrees (develop branch)"
     },
     {
-      "name": "ACT Farm and Regenerative Innovation Studio",
-      "path": "/Users/benknight/Code/ACT Farm and Regenerative Innovation Studio",
+      "name": "ACT Regenerative Studio",
+      "path": "/Users/benknight/Code/act-regenerative-studio",
       "github": "https://github.com/Acurioustractor/act-regenerative-studio.git",
+      "description": "Multi-project orchestrator and operations hub",
+      "autoSync": true,
+      "branch": "main"
+    },
+    {
+      "name": "ACT Farm",
+      "path": "/Users/benknight/Code/act-farm",
+      "github": "https://github.com/Acurioustractor/act-farm.git",
       "description": "Black Cockatoo Valley land practice, conservation, residencies, and research",
       "autoSync": true,
       "branch": "main"
     },
     {
+      "name": "Goods",
+      "path": "/Users/benknight/Code/Goods Asset Register",
+      "github": "https://github.com/Acurioustractor/goods-asset-tracker.git",
+      "description": "Circular economy - PUBLIC storefront + INTERNAL asset management",
+      "autoSync": true,
+      "branch": "main"
+    },
+    {
       "name": "The Harvest",
-      "path": "/Users/benknight/Code/The Harvest",
-      "github": "https://github.com/Acurioustractor/the-harvest-website.git",
+      "path": "/Users/benknight/Code/The Harvest Website",
+      "github": "https://github.com/Acurioustractor/harvest-community-hub.git",
       "description": "Community hub, CSA subscription, events, and therapeutic programs",
       "autoSync": true,
       "branch": "main"
@@ -42,10 +58,10 @@
       "branch": "main"
     },
     {
-      "name": "ACT Placemat",
-      "path": "/Users/benknight/Code/ACT Placemat",
-      "github": "https://github.com/Acurioustractor/act-placemat.git",
-      "description": "Business agent platform with CRM, subscription tracking, and year-in-review",
+      "name": "ACT Intelligence Platform",
+      "path": "/Users/benknight/Code/act-intelligence-platform",
+      "github": "https://github.com/Acurioustractor/act-intelligence-platform.git",
+      "description": "Intelligence layer and ecosystem dashboard",
       "autoSync": true,
       "branch": "main"
     }

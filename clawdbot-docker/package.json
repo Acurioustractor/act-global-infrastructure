@@ -1,8 +1,13 @@
 {
   "name": "clawdbot-act",
-  "version": "1.0.0",
-  "description": "ACT Farmhand - Clawdbot skills and CLI tools",
+  "version": "1.1.0",
+  "description": "ACT Farmhand - Clawdbot skills and CLI tools with Intelligence Platform access",
   "type": "module",
+  "bin": {
+    "act-search": "./bin/act-search",
+    "act-grants": "./bin/act-grants",
+    "act-health": "./bin/act-health"
+  },
   "dependencies": {
     "@supabase/supabase-js": "^2.39.0",
     "googleapis": "^130.0.0"

@@ -1,0 +1,56 @@
+#!/usr/bin/env node
+
+/**
+ * act-grants - CLI tool for finding grant opportunities
+ *
+ * Usage:
+ *   act-grants "youth mental health"
+ *   act-grants "indigenous cultural programs" -n 10
+ */
+
+import intelligence from '../scripts/intelligence-api.mjs';
+
+const args = process.argv.slice(2);
+
+// Parse flags
+let maxResults = 5;
+let criteria = '';
+
+for (let i = 0; i < args.length; i++) {
+  if (args[i] === '-n' || args[i] === '--max') {
+    maxResults = parseInt(args[++i], 10);
+  } else if (args[i] === '-h' || args[i] === '--help') {
+    console.log(`
+act-grants - Find grant opportunities
+
+Usage:
+  act-grants [options] <criteria>
+
+Options:
+  -n, --max <number>    Max results (default: 5)
+  -h, --help            Show this help
+
+Examples:
+  act-grants "youth programs"
+  act-grants "indigenous cultural preservation" -n 10
+  act-grants "community development queensland"
+`);
+    process.exit(0);
+  } else {
+    criteria += (criteria ? ' ' : '') + args[i];
+  }
+}
+
+if (!criteria) {
+  console.error('Error: Criteria required. Use -h for help.');
+  process.exit(1);
+}
+
+try {
+  const results = await intelligence.findGrants({ query: criteria }, maxResults);
+  console.log(intelligence.formatGrants(results, maxResults));
+} catch (error) {
+  console.error('Grant search failed:', error.message);
+  console.log('\nNote: Grant agent may not be running. Check Farmhand API.');
+  process.exit(1);
+}

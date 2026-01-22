@@ -1,0 +1,45 @@
+#!/usr/bin/env node
+
+/**
+ * act-health - Check ACT ecosystem service health
+ *
+ * Usage:
+ *   act-health
+ */
+
+import intelligence from '../scripts/intelligence-api.mjs';
+
+console.log('🔍 Checking ACT ecosystem services...\n');
+
+try {
+  const health = await intelligence.healthCheck();
+
+  if (health.status === 'connected') {
+    console.log('✅ Intelligence Platform: Connected');
+    console.log(`   URL: ${health.url}\n`);
+
+    if (health.services.search) {
+      const search = health.services.search;
+      console.log(`   Search Service: ${search.status === 'healthy' ? '✅' : '⚠️'} ${search.status}`);
+      if (search.embeddingService) {
+        console.log(`   Embeddings: ${search.embeddingService.status}`);
+      }
+    }
+
+    if (health.services.agents) {
+      const agents = health.services.agents;
+      console.log(`   Farmhand Agents: ${agents.farmhand === 'connected' ? '✅' : '⚠️'} ${agents.farmhand}`);
+    }
+  } else {
+    console.log('❌ Intelligence Platform: Disconnected');
+    console.log(`   URL: ${health.url}`);
+    console.log(`   Error: ${health.error}`);
+    console.log('\n💡 Make sure the Intelligence Platform is running.');
+    process.exit(1);
+  }
+
+  console.log('\n✨ All systems operational!');
+} catch (error) {
+  console.error('❌ Health check failed:', error.message);
+  process.exit(1);
+}

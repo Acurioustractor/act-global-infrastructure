@@ -1,0 +1,68 @@
+name: Sync Gmail
+
+on:
+  schedule:
+    # Run every 6 hours (matches GHL sync schedule)
+    - cron: '0 */6 * * *'
+
+  # Allow manual trigger
+  workflow_dispatch:
+    inputs:
+      days:
+        description: 'Number of days to sync back'
+        required: false
+        default: '1'
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install --production
+
+      - name: Run Gmail sync
+        id: gmail_sync
+        env:
+          GOOGLE_SERVICE_ACCOUNT_KEY: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY }}
+          GOOGLE_DELEGATED_USER: ${{ secrets.GOOGLE_DELEGATED_USER }}
+          SUPABASE_SHARED_URL: ${{ secrets.SUPABASE_SHARED_URL }}
+          SUPABASE_SHARED_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SHARED_SERVICE_ROLE_KEY }}
+          DISCORD_WEBHOOK_GENERAL: ${{ secrets.DISCORD_WEBHOOK_GENERAL }}
+          DISCORD_WEBHOOK_ERRORS: ${{ secrets.DISCORD_WEBHOOK_ERRORS }}
+        run: |
+          DAYS="${{ github.event.inputs.days || '1' }}"
+          node scripts/sync-gmail-to-supabase.mjs --days "$DAYS"
+
+      - name: Generate summary
+        if: always()
+        run: |
+          echo "## Gmail Sync Results" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Time:** $(date -u '+%Y-%m-%d %H:%M UTC')" >> $GITHUB_STEP_SUMMARY
+          echo "**Trigger:** ${{ github.event_name }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Days synced:** ${{ github.event.inputs.days || '1' }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Component | Status |" >> $GITHUB_STEP_SUMMARY
+          echo "|-----------|--------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Gmail Sync | ${{ steps.gmail_sync.outcome == 'success' && 'Success' || 'Failed' }} |" >> $GITHUB_STEP_SUMMARY
+
+      - name: Notify Discord on failure
+        if: failure()
+        env:
+          DISCORD_WEBHOOK_ERRORS: ${{ secrets.DISCORD_WEBHOOK_ERRORS }}
+        run: |
+          if [ -n "$DISCORD_WEBHOOK_ERRORS" ]; then
+            curl -H "Content-Type: application/json" \
+              -d "{\"username\": \"ACT Error Monitor\", \"content\": \"Gmail sync workflow failed! Check logs: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\"}" \
+              "$DISCORD_WEBHOOK_ERRORS"
+          fi

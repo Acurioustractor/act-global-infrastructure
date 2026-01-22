@@ -1,0 +1,112 @@
+[
+  {
+    "contact_id": "xfMP4oIUBJe7gttsKatp",
+    "contact_name": "sal biggins",
+    "contact_email": "sbiggins@srau.org.au",
+    "suggested_project": "ACT-SM",
+    "project_name": "SMART",
+    "match_keywords": [
+      "smart",
+      "smart connect",
+      "smart"
+    ],
+    "suggested_tag": "smart"
+  },
+  {
+    "contact_id": "1WU8wTdyBIfbSpKI2qXe",
+    "contact_name": "erin jackson",
+    "contact_email": "ejackson@srau.org.au",
+    "suggested_project": "ACT-SM",
+    "project_name": "SMART",
+    "match_keywords": [
+      "smart",
+      "smart connect",
+      "smart"
+    ],
+    "suggested_tag": "smart"
+  },
+  {
+    "contact_id": "SYhvJjn05QVkvbFJPhGv",
+    "contact_name": "coordinator@ourshed.org ",
+    "contact_email": "coordinator@ourshed.org",
+    "suggested_project": "ACT-GP",
+    "project_name": "Gold Phone",
+    "match_keywords": [
+      "community",
+      "project"
+    ],
+    "suggested_tag": "gold-phone"
+  },
+  {
+    "contact_id": "SYhvJjn05QVkvbFJPhGv",
+    "contact_name": "coordinator@ourshed.org ",
+    "contact_email": "coordinator@ourshed.org",
+    "suggested_project": "ACT-JP",
+    "project_name": "June's Patch",
+    "match_keywords": [
+      "community",
+      "project"
+    ],
+    "suggested_tag": "junes-patch"
+  },
+  {
+    "contact_id": "njoAmMmD94nzpOjyzAus",
+    "contact_name": " ",
+    "contact_email": "treasurer@ourshed.org",
+    "suggested_project": "ACT-GP",
+    "project_name": "Gold Phone",
+    "match_keywords": [
+      "community",
+      "project"
+    ],
+    "suggested_tag": "gold-phone"
+  },
+  {
+    "contact_id": "njoAmMmD94nzpOjyzAus",
+    "contact_name": " ",
+    "contact_email": "treasurer@ourshed.org",
+    "suggested_project": "ACT-JP",
+    "project_name": "June's Patch",
+    "match_keywords": [
+      "community",
+      "project"
+    ],
+    "suggested_tag": "junes-patch"
+  },
+  {
+    "contact_id": "OHCxJA8daszAWVVVVPrf",
+    "contact_name": "our community shed",
+    "contact_email": "chair@ourshed.org",
+    "suggested_project": "ACT-GP",
+    "project_name": "Gold Phone",
+    "match_keywords": [
+      "community",
+      "project"
+    ],
+    "suggested_tag": "gold-phone"
+  },
+  {
+    "contact_id": "OHCxJA8daszAWVVVVPrf",
+    "contact_name": "our community shed",
+    "contact_email": "chair@ourshed.org",
+    "suggested_project": "ACT-JP",
+    "project_name": "June's Patch",
+    "match_keywords": [
+      "community",
+      "project"
+    ],
+    "suggested_tag": "junes-patch"
+  },
+  {
+    "contact_id": "3GxNySmg9LkFFkJ1MLD5",
+    "contact_name": "lucy mcgarry",
+    "contact_email": "lm@wilyajanta.org",
+    "suggested_project": "ACT-CF",
+    "project_name": "The Confessional",
+    "match_keywords": [
+      "story",
+      "storytelling"
+    ],
+    "suggested_tag": "confessional"
+  }
+]

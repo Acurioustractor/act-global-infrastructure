@@ -1,0 +1,60 @@
+#!/usr/bin/env node
+
+/**
+ * act-search - CLI tool for searching ACT ecosystem
+ *
+ * Usage:
+ *   act-search "youth justice programs"
+ *   act-search -s contacts "foundation"
+ *   act-search -m semantic "community impact"
+ */
+
+import intelligence from '../scripts/intelligence-api.mjs';
+
+const args = process.argv.slice(2);
+
+// Parse flags
+let sources = null;
+let mode = 'hybrid';
+let query = '';
+
+for (let i = 0; i < args.length; i++) {
+  if (args[i] === '-s' || args[i] === '--sources') {
+    sources = args[++i]?.split(',');
+  } else if (args[i] === '-m' || args[i] === '--mode') {
+    mode = args[++i];
+  } else if (args[i] === '-h' || args[i] === '--help') {
+    console.log(`
+act-search - Search across ACT ecosystem
+
+Usage:
+  act-search [options] <query>
+
+Options:
+  -s, --sources <list>   Comma-separated sources (contacts,projects,stories)
+  -m, --mode <mode>      Search mode: hybrid, semantic, keyword
+  -h, --help             Show this help
+
+Examples:
+  act-search "youth programs"
+  act-search -s contacts "foundation manager"
+  act-search -m semantic "community impact"
+`);
+    process.exit(0);
+  } else {
+    query += (query ? ' ' : '') + args[i];
+  }
+}
+
+if (!query) {
+  console.error('Error: Query required. Use -h for help.');
+  process.exit(1);
+}
+
+try {
+  const results = await intelligence.search(query, { sources, mode });
+  console.log(intelligence.formatSearchResults(results, 10));
+} catch (error) {
+  console.error('Search failed:', error.message);
+  process.exit(1);
+}

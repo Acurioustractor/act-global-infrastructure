@@ -19,23 +19,23 @@ echo ""
 
 # Read repos from config
 REPOS=(
-  "/Users/benknight/Code/ACT Farm and Regenerative Innovation Studio"
+  "/Users/benknight/Code/act-regenerative-studio"
   "/Users/benknight/Code/empathy-ledger-v2"
   "/Users/benknight/Code/JusticeHub"
   "/Users/benknight/Code/The Harvest Website"
   "/Users/benknight/Code/Goods Asset Register"
-  "/Users/benknight/Code/ACT Farm/act-farm"
-  "/Users/benknight/Code/ACT Placemat"
+  "/Users/benknight/Code/act-farm"
+  "/Users/benknight/Code/act-intelligence-platform"
 )
 
 REPO_NAMES=(
-  "ACT Farm Studio"
+  "ACT Studio"
   "Empathy Ledger"
   "JusticeHub"
   "The Harvest"
   "Goods"
-  "BCV/ACT Farm"
-  "ACT Placemat"
+  "ACT Farm"
+  "ACT Intelligence Platform"
 )
 
 for i in "${!REPOS[@]}"; do

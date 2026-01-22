@@ -1,0 +1,97 @@
+---
+session: act-intelligence-system
+date: 2026-01-19
+status: partial
+outcome: PARTIAL_PLUS
+---
+
+goal: Built email triage system with priority scoring and added calendar event creation to ACT daily update
+now: Connect email triage to 8000+ message contact_communications table and set up automated Gmail syncing
+
+test: |
+  cd clawdbot-docker && MEMORY_DIR=./memory node --env-file=.env scripts/act-unified.mjs email
+
+done_this_session:
+  - task: Added calendar event creation with natural language time parsing
+    files: [clawdbot-docker/scripts/modules/daily-update.mjs, clawdbot-docker/scripts/act-unified.mjs]
+    details: |
+      - createEvent() function at daily-update.mjs:192-253
+      - parseTimeString() at daily-update.mjs:258-284 handles "1pm today", "3:30pm tomorrow"
+      - CLI commands: daily create, daily add, daily meeting
+      - BLOCKER: OAuth token has readonly scope, needs regeneration for write access
+
+  - task: Built complete email triage system with smart prioritization
+    files: [clawdbot-docker/scripts/modules/email-triage.mjs]
+    details: |
+      - Priority scoring (0-100) based on age, importance, keywords, ACT projects
+      - Classification: financial, scheduling, opportunity, legal, conversation, request, government
+      - Processing strategies per email type
+      - Batch processing identification by sender
+      - Response templates (acknowledge, delay, meeting, decline, delegate)
+
+  - task: Added email CLI commands to act-unified.mjs
+    files: [clawdbot-docker/scripts/act-unified.mjs, clawdbot-docker/scripts/email]
+    details: |
+      - handleEmail() at act-unified.mjs:985-1099
+      - Commands: email triage, email overdue, email priority, email search, email thread, email templates
+      - Created wrapper script at scripts/email
+
+blockers:
+  - OAuth refresh token only has calendar.readonly scope - cannot create events until regenerated
+  - email-triage.mjs uses gmail_messages table (25 emails) not contact_communications (8000+ emails)
+
+questions:
+  - Where is the 8000+ email contact_communications data? Query returned 0 records
+  - Is there a different Supabase instance or has schema changed?
+  - What system syncs Gmail to Supabase currently?
+
+decisions:
+  - used_gmail_messages_table: Started with gmail_messages (had data) rather than empty contact_communications
+  - scoring_algorithm: Score 0-100 based on age (+20 if >7d), importance flag (+15), keywords (+5), ACT projects (+10), low-priority senders (-30)
+  - overdue_thresholds: high=2 days, normal=5 days, low=14 days
+
+findings:
+  - gmail_messages_schema: Has rich fields - thread_id, labels, importance, is_read, keywords, attachments
+  - contact_communications_empty: Returned 0 records but scout said 8289 - possibly different Supabase instance
+  - oauth_vs_service_account: OAuth2 works for calendar read, service account had domain delegation issues
+
+worked:
+  - OAuth2 with refresh token for Google Calendar read access
+  - Natural language time parsing with regex for "Xpm today/tomorrow"
+  - Priority scoring with multiple weighted factors
+  - Email classification by subject/body keyword matching
+
+failed:
+  - Service account with domain-wide delegation - permission errors
+  - Enabling Calendar API in Google Cloud - user had access issues
+  - contact_communications query - returned empty despite expected 8000+ records
+
+next:
+  - Investigate contact_communications table - check if different Supabase URL or schema
+  - Set up automated Gmail sync to Supabase (look for existing sync scripts)
+  - Regenerate OAuth token with https://www.googleapis.com/auth/calendar scope for event creation
+  - Add email triage summary to daily briefing (getDailyUpdate function)
+  - Set up daily notification via Discord/Telegram bot or cron
+
+files:
+  created:
+    - clawdbot-docker/scripts/modules/email-triage.mjs
+    - clawdbot-docker/scripts/email
+  modified:
+    - clawdbot-docker/scripts/modules/daily-update.mjs (added createEvent, parseTimeString, calendar write scope, exported createEvent)
+    - clawdbot-docker/scripts/act-unified.mjs (added emailTriage import, handleEmail function, email case in main switch)
+
+context_for_next_session: |
+  User wants:
+  1. Email triage synced with existing 8000+ message system (contact_communications or similar)
+  2. Automated Gmail syncing to keep emails up to date
+  3. Email summary in daily briefing
+  4. Daily notifications for overdue emails
+
+  The current email-triage.mjs reads from gmail_messages table which only has 25 records.
+  Need to find where the 8000+ emails are and connect to that system.
+
+  For calendar event creation, user needs to regenerate OAuth token with write scope:
+  1. Go to https://developers.google.com/oauthplayground
+  2. Use own credentials, select https://www.googleapis.com/auth/calendar
+  3. Get new refresh token and update GOOGLE_REFRESH_TOKEN in .env

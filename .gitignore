@@ -5,6 +5,9 @@ node_modules/
 .env.local
 .env*.local
 
+# MCP Configuration (contains credentials)
+.mcp.json
+
 # IDE and Editor Files
 .cursor/
 .cursorrules
@@ -14,3 +17,6 @@ node_modules/
 deployment/logs/*.log
 *.log
 act-personal-ai/.venv311/
+.vercel
+clawdbot-docker/clawdbot-farmhand.tar.gz
+config/ACT_MASTER_SECRETS.md

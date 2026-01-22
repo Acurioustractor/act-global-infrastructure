@@ -1,0 +1,108 @@
+name: Sync Xero Financial Data
+
+on:
+  schedule:
+    # Run daily at 6am AEST (8pm UTC previous day)
+    # AEST = UTC+10, so 6am AEST = 20:00 UTC (previous day)
+    - cron: '0 20 * * *'
+
+  # Allow manual trigger with optional parameters
+  workflow_dispatch:
+    inputs:
+      days:
+        description: 'Number of days to sync (default: 90)'
+        required: false
+        default: '90'
+        type: string
+      sync_type:
+        description: 'Type of sync to run'
+        required: false
+        default: 'full'
+        type: choice
+        options:
+          - full
+          - invoices
+          - transactions
+
+jobs:
+  sync-xero:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install --production
+
+      - name: Determine sync parameters
+        id: params
+        run: |
+          # Use inputs if manual trigger, otherwise defaults
+          DAYS="${{ github.event.inputs.days || '90' }}"
+          SYNC_TYPE="${{ github.event.inputs.sync_type || 'full' }}"
+          echo "days=$DAYS" >> $GITHUB_OUTPUT
+          echo "sync_type=$SYNC_TYPE" >> $GITHUB_OUTPUT
+          echo "Sync type: $SYNC_TYPE, Days: $DAYS"
+
+      - name: Run Xero sync
+        id: xero_sync
+        env:
+          # Xero OAuth credentials
+          XERO_CLIENT_ID: ${{ secrets.XERO_CLIENT_ID }}
+          XERO_CLIENT_SECRET: ${{ secrets.XERO_CLIENT_SECRET }}
+          XERO_TENANT_ID: ${{ secrets.XERO_TENANT_ID }}
+          XERO_REFRESH_TOKEN: ${{ secrets.XERO_REFRESH_TOKEN }}
+          # Supabase credentials
+          SUPABASE_SHARED_URL: ${{ secrets.SUPABASE_SHARED_URL }}
+          SUPABASE_SHARED_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SHARED_SERVICE_ROLE_KEY }}
+        run: |
+          node scripts/sync-xero-to-supabase.mjs ${{ steps.params.outputs.sync_type }} --days=${{ steps.params.outputs.days }}
+
+      - name: Generate summary
+        if: always()
+        run: |
+          echo "## Xero Financial Sync Results" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Time:** $(TZ='Australia/Brisbane' date '+%Y-%m-%d %H:%M AEST')" >> $GITHUB_STEP_SUMMARY
+          echo "**Trigger:** ${{ github.event_name }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Sync Type:** ${{ steps.params.outputs.sync_type }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Days:** ${{ steps.params.outputs.days }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Component | Status |" >> $GITHUB_STEP_SUMMARY
+          echo "|-----------|--------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Xero Sync | ${{ steps.xero_sync.outcome == 'success' && 'Success' || 'Failed' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          if [ "${{ steps.xero_sync.outcome }}" == "success" ]; then
+            echo "Data synced to Supabase tables:" >> $GITHUB_STEP_SUMMARY
+            echo "- \`xero_invoices\` - Receivables and payables" >> $GITHUB_STEP_SUMMARY
+            echo "- \`xero_transactions\` - Bank transactions" >> $GITHUB_STEP_SUMMARY
+            echo "- \`xero_sync_log\` - Sync audit trail" >> $GITHUB_STEP_SUMMARY
+          fi
+
+      - name: Notify on failure
+        if: failure()
+        run: |
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "---" >> $GITHUB_STEP_SUMMARY
+          echo "### Troubleshooting" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Common issues:**" >> $GITHUB_STEP_SUMMARY
+          echo "- Token expired: Refresh token may need regenerating" >> $GITHUB_STEP_SUMMARY
+          echo "- Missing secrets: Check XERO_* and SUPABASE_* secrets are set" >> $GITHUB_STEP_SUMMARY
+          echo "- Database tables: Ensure migration has been applied" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Required secrets:**" >> $GITHUB_STEP_SUMMARY
+          echo "- \`XERO_CLIENT_ID\`" >> $GITHUB_STEP_SUMMARY
+          echo "- \`XERO_CLIENT_SECRET\`" >> $GITHUB_STEP_SUMMARY
+          echo "- \`XERO_TENANT_ID\`" >> $GITHUB_STEP_SUMMARY
+          echo "- \`XERO_REFRESH_TOKEN\`" >> $GITHUB_STEP_SUMMARY
+          echo "- \`SUPABASE_SHARED_URL\`" >> $GITHUB_STEP_SUMMARY
+          echo "- \`SUPABASE_SHARED_SERVICE_ROLE_KEY\`" >> $GITHUB_STEP_SUMMARY

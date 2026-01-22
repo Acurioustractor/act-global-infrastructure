@@ -217,7 +217,7 @@ class GHLWebhookHandler {
   }
 
   // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  // COMMUNICATION HANDLERS (log only - no dedicated table yet)
+  // COMMUNICATION HANDLERS - stores in communications_history
   // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   async handleInboundMessage(data) {
@@ -225,11 +225,27 @@ class GHLWebhookHandler {
     const contactId = message.contactId || data.contactId;
     console.log(`📥 Inbound message from contact: ${contactId}`);
 
+    const now = new Date().toISOString();
+
     // Update contact's last_contact_date
     await this.supabase
       .from('ghl_contacts')
-      .update({ last_contact_date: new Date().toISOString() })
+      .update({ last_contact_date: now })
       .eq('ghl_id', contactId);
+
+    // Store in communications_history
+    await this.supabase.from('communications_history').upsert({
+      ghl_contact_id: contactId,
+      channel: message.type || 'sms',
+      direction: 'inbound',
+      subject: null,
+      content_preview: message.body?.slice(0, 500),
+      occurred_at: message.dateCreated || now,
+      source_system: 'ghl',
+      source_id: message.id,
+      waiting_for_response: true,
+      response_needed_by: 'us',
+    }, { onConflict: 'source_system,source_id' });
 
     return { handled: true, action: 'inbound_message', contactId, messageId: message.id };
   }
@@ -239,11 +255,27 @@ class GHLWebhookHandler {
     const contactId = message.contactId || data.contactId;
     console.log(`📤 Outbound message to contact: ${contactId}`);
 
+    const now = new Date().toISOString();
+
     // Update contact's last_contact_date
     await this.supabase
       .from('ghl_contacts')
-      .update({ last_contact_date: new Date().toISOString() })
+      .update({ last_contact_date: now })
       .eq('ghl_id', contactId);
+
+    // Store in communications_history
+    await this.supabase.from('communications_history').upsert({
+      ghl_contact_id: contactId,
+      channel: message.type || 'sms',
+      direction: 'outbound',
+      subject: null,
+      content_preview: message.body?.slice(0, 500),
+      occurred_at: message.dateCreated || now,
+      source_system: 'ghl',
+      source_id: message.id,
+      waiting_for_response: true,
+      response_needed_by: 'them',
+    }, { onConflict: 'source_system,source_id' });
 
     return { handled: true, action: 'outbound_message', contactId, messageId: message.id };
   }
@@ -253,17 +285,33 @@ class GHLWebhookHandler {
     const contactId = call.contactId || data.contactId;
     console.log(`📞 Call completed with contact: ${contactId}`);
 
+    const now = new Date().toISOString();
+
     // Update contact's last_contact_date
     await this.supabase
       .from('ghl_contacts')
-      .update({ last_contact_date: new Date().toISOString() })
+      .update({ last_contact_date: now })
       .eq('ghl_id', contactId);
+
+    // Store in communications_history
+    await this.supabase.from('communications_history').upsert({
+      ghl_contact_id: contactId,
+      channel: 'call',
+      direction: call.direction || 'outbound',
+      subject: `Call (${call.duration || 0}s)`,
+      content_preview: call.notes?.slice(0, 500),
+      occurred_at: call.dateCreated || now,
+      source_system: 'ghl',
+      source_id: call.id,
+      waiting_for_response: false,
+      response_needed_by: null,
+    }, { onConflict: 'source_system,source_id' });
 
     return { handled: true, action: 'call_completed', contactId, callId: call.id };
   }
 
   // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  // APPOINTMENT HANDLERS (log only)
+  // APPOINTMENT HANDLERS - stores in communications_history
   // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   async handleAppointmentCreate(data) {
@@ -271,12 +319,28 @@ class GHLWebhookHandler {
     const contactId = appointment.contactId || data.contactId;
     console.log(`📅 New appointment: ${appointment.title}`);
 
+    const now = new Date().toISOString();
+
     // Update contact's last_contact_date
     if (contactId) {
       await this.supabase
         .from('ghl_contacts')
-        .update({ last_contact_date: new Date().toISOString() })
+        .update({ last_contact_date: now })
         .eq('ghl_id', contactId);
+
+      // Store in communications_history
+      await this.supabase.from('communications_history').upsert({
+        ghl_contact_id: contactId,
+        channel: 'calendar',
+        direction: 'outbound',
+        subject: appointment.title,
+        content_preview: appointment.notes?.slice(0, 500),
+        occurred_at: appointment.startTime || now,
+        source_system: 'ghl',
+        source_id: appointment.id,
+        waiting_for_response: false,
+        response_needed_by: null,
+      }, { onConflict: 'source_system,source_id' });
     }
 
     return {
@@ -289,7 +353,24 @@ class GHLWebhookHandler {
 
   async handleAppointmentUpdate(data) {
     const appointment = data.appointment || data;
+    const contactId = appointment.contactId || data.contactId;
     console.log(`✏️  Appointment updated: ${appointment.title}`);
+
+    // Update in communications_history if contact exists
+    if (contactId && appointment.id) {
+      await this.supabase.from('communications_history').upsert({
+        ghl_contact_id: contactId,
+        channel: 'calendar',
+        direction: 'outbound',
+        subject: appointment.title,
+        content_preview: appointment.notes?.slice(0, 500),
+        occurred_at: appointment.startTime || new Date().toISOString(),
+        source_system: 'ghl',
+        source_id: appointment.id,
+        waiting_for_response: false,
+        response_needed_by: null,
+      }, { onConflict: 'source_system,source_id' });
+    }
 
     return { handled: true, action: 'appointment_updated', appointmentId: appointment.id };
   }

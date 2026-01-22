@@ -9,11 +9,17 @@
  */
 
 import { createClient } from '@supabase/supabase-js';
-import 'dotenv/config';
+import dotenv from 'dotenv';
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
+
+// Load .env.local for Main database credentials
+const __dirname = dirname(fileURLToPath(import.meta.url));
+dotenv.config({ path: join(__dirname, '..', '.env.local') });
 
 const supabase = createClient(
-  process.env.SUPABASE_URL,
-  process.env.SUPABASE_SERVICE_ROLE_KEY
+  process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL,
+  process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 );
 
 // Scoring weights
@@ -37,9 +43,9 @@ const DECAY_RATES = {
  * Calculate relationship health score for a contact
  */
 export async function calculateContactScore(contactId) {
-  // Get all communications with this contact
+  // Get all communications with this contact from Main database
   const { data: comms, error } = await supabase
-    .from('contact_communications')
+    .from('communications_history')
     .select('*')
     .eq('ghl_contact_id', contactId)
     .order('occurred_at', { ascending: false })
@@ -56,15 +62,22 @@ export async function calculateContactScore(contactId) {
     };
   }
 
-  // Get contact type from knowledge_chunks
+  // Get contact type from ghl_contacts (match on ghl_id, not internal id)
   const { data: contactInfo } = await supabase
-    .from('knowledge_chunks')
-    .select('metadata')
-    .eq('source_id', contactId)
-    .eq('source_type', 'ghl')
+    .from('ghl_contacts')
+    .select('tags, engagement_status')
+    .eq('ghl_id', contactId)
     .single();
 
-  const contactType = contactInfo?.metadata?.contact_type || 'default';
+  // Map engagement_status to contact type for decay rates
+  const statusToType = {
+    'partner': 'partner',
+    'client': 'client',
+    'collaborator': 'collaborator',
+    'lead': 'community',
+    'prospect': 'community'
+  };
+  const contactType = statusToType[contactInfo?.engagement_status] || 'default';
   const decayRate = DECAY_RATES[contactType] || DECAY_RATES.default;
 
   // Calculate components
@@ -138,14 +151,20 @@ function calculateEngagementScore(comms) {
 
   // Average sentiment of recent interactions
   const recentComms = comms.slice(0, 10);
-  const avgSentiment = recentComms.reduce((sum, c) => sum + (c.sentiment_score || 0.5), 0) / recentComms.length;
+  // Convert text sentiment to numeric (Main uses 'positive'/'neutral'/'negative')
+  const sentimentToScore = (s) => {
+    if (s === 'positive') return 0.8;
+    if (s === 'negative') return 0.2;
+    return 0.5; // neutral or unknown
+  };
+  const avgSentiment = recentComms.reduce((sum, c) => sum + sentimentToScore(c.sentiment), 0) / recentComms.length;
 
-  // Bonus for diverse communication types
-  const commTypes = new Set(recentComms.map(c => c.comm_type));
-  const diversityBonus = Math.min(commTypes.size / 3, 1) * 0.2;
+  // Bonus for diverse communication channels (email, call, meeting, etc.)
+  const channels = new Set(recentComms.map(c => c.channel));
+  const diversityBonus = Math.min(channels.size / 3, 1) * 0.2;
 
   // Bonus for meetings (high engagement)
-  const meetingRatio = recentComms.filter(c => c.comm_type === 'meeting').length / recentComms.length;
+  const meetingRatio = recentComms.filter(c => c.channel === 'meeting' || c.channel === 'calendar').length / recentComms.length;
   const meetingBonus = meetingRatio * 0.2;
 
   return Math.min(avgSentiment + diversityBonus + meetingBonus, 1);
@@ -219,10 +238,11 @@ function getStatusAndRecommendation(score, recency, reciprocity, lastComm, decay
  * Get all contacts needing attention
  */
 export async function getContactsNeedingAttention(limit = 10) {
-  // Get unique contact IDs from communications
+  // Get unique contact IDs from communications_history (Main database)
   const { data: contacts, error } = await supabase
-    .from('contact_communications')
+    .from('communications_history')
     .select('ghl_contact_id')
+    .not('ghl_contact_id', 'is', null)
     .order('occurred_at', { ascending: false });
 
   if (error) throw error;
@@ -254,7 +274,7 @@ export async function getContactsNeedingAttention(limit = 10) {
 export async function updateAllScores() {
   // Get all unique contacts
   const { data: contacts } = await supabase
-    .from('contact_communications')
+    .from('communications_history')
     .select('ghl_contact_id')
     .order('occurred_at', { ascending: false });
 
@@ -265,22 +285,23 @@ export async function updateAllScores() {
     try {
       const score = await calculateContactScore(contactId);
 
-      // Update in entity_relationships table
-      await supabase.from('entity_relationships').upsert({
-        entity_type: 'contact',
-        entity_id: contactId,
-        related_entity_type: 'user',
-        related_entity_id: 'ben',
-        relationship_type: score.contactType,
-        strength_score: score.score / 100,
-        last_interaction: score.lastContact,
-        metadata: {
-          components: score.components,
-          status: score.status,
-          recommendation: score.recommendation
-        }
+      // Update in relationship_health table
+      await supabase.from('relationship_health').upsert({
+        ghl_contact_id: contactId,
+        temperature: score.score,
+        lcaa_stage: score.status === 'healthy' ? 'commitment' :
+                    score.status === 'good' ? 'advocacy' :
+                    score.status === 'needs_attention' ? 'awareness' : 'curiosity',
+        days_since_contact: score.lastContact ?
+          Math.floor((Date.now() - new Date(score.lastContact).getTime()) / (1000 * 60 * 60 * 24)) : null,
+        last_contact_at: score.lastContact,
+        overall_sentiment: score.components.engagement > 70 ? 'positive' :
+                          score.components.engagement > 40 ? 'neutral' : 'negative',
+        temperature_trend: 'stable',
+        risk_flags: score.status === 'critical' ? ['needs_urgent_attention'] : [],
+        suggested_actions: [score.recommendation]
       }, {
-        onConflict: 'entity_type,entity_id,related_entity_type,related_entity_id'
+        onConflict: 'ghl_contact_id'
       });
 
       updated++;
@@ -293,17 +314,19 @@ export async function updateAllScores() {
 }
 
 /**
- * Get contact name from GHL or knowledge base
+ * Get contact name from ghl_contacts table (match on ghl_id)
  */
 async function getContactName(contactId) {
   const { data } = await supabase
-    .from('knowledge_chunks')
-    .select('metadata')
-    .eq('source_id', contactId)
-    .eq('source_type', 'ghl')
+    .from('ghl_contacts')
+    .select('first_name, last_name, full_name, email')
+    .eq('ghl_id', contactId)
     .single();
 
-  return data?.metadata?.name || contactId;
+  if (data) {
+    return data.full_name || [data.first_name, data.last_name].filter(Boolean).join(' ') || data.email || contactId;
+  }
+  return contactId;
 }
 
 // CLI Interface

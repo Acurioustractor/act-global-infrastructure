@@ -1,8 +1,8 @@
 {
   "projects": [
     {
-      "name": "ACT Farm",
-      "path": "/Users/benknight/Code/ACT Farm and Regenerative Innovation Studio",
+      "name": "ACT Studio",
+      "path": "/Users/benknight/Code/act-regenerative-studio",
       "github": "Acurioustractor/act-regenerative-studio",
       "description": "Multi-project orchestrator and operations hub",
       "stack": "Next.js 15, Supabase, Tailwind",
@@ -51,8 +51,8 @@
       "skills": ["act-sprint-workflow", "act-brand-alignment", "ghl-crm-advisor"]
     },
     {
-      "name": "BCV/ACT Farm",
-      "path": "/Users/benknight/Code/ACT Farm/act-farm",
+      "name": "ACT Farm",
+      "path": "/Users/benknight/Code/act-farm",
       "github": "Acurioustractor/act-farm",
       "description": "Black Cockatoo Valley regeneration estate",
       "stack": "Next.js, Supabase, Tailwind",
@@ -61,10 +61,10 @@
       "skills": ["act-sprint-workflow", "act-brand-alignment", "ghl-crm-advisor"]
     },
     {
-      "name": "ACT Placemat",
-      "path": "/Users/benknight/Code/ACT Placemat",
-      "github": "Acurioustractor/act-placemat",
-      "description": "Backend services and shared infrastructure",
+      "name": "ACT Intelligence Platform",
+      "path": "/Users/benknight/Code/act-intelligence-platform",
+      "github": "Acurioustractor/act-intelligence-platform",
+      "description": "Intelligence layer and ecosystem dashboard",
       "stack": "Next.js, Supabase, Tailwind",
       "deployment": "Vercel",
       "workflows": ["snapshot-sprint", "auto-tag"],

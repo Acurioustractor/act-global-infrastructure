@@ -9,15 +9,171 @@ status: active
 
 ## Ledger
 <!-- This section is extracted by SessionStart hook for quick resume -->
-**Updated:** 2026-01-12T10:30:00Z
-**Goal:** Build continuous intelligence systems that review stories, identify gaps, and reflect on art - connect all ACT systems into living, learning knowledge ecosystem
+**Updated:** 2026-01-21T22:00:00Z
+**Goal:** Empathy Ledger v2 integration COMPLETE - sync scripts + dashboard widget built
 **Branch:** main
-**Test:** `node services/gap-analysis.mjs` - produces report with art opportunities
+**Test:** `curl http://localhost:3456/api/health` - check Command Center API
+
+### ✅ COMPLETED: Empathy Ledger v2 Integration
+```
+Location: /Users/benknight/Code/empathy-ledger-v2
+
+STRATEGIC IMPORTANCE:
+- Core to ACT mission: storytellers OWN their data
+- Measures impact through community storytelling
+- NEW database replacing old EL - don't use old storyteller data
+
+COMPLETED:
+- [x] Explored EL v2 database schema (scout report: empathy-ledger-ghl-sync-schema.md)
+- [x] Created sync script: EL v2 storytellers → GHL (sync-storytellers-to-ghl.mjs)
+- [x] Created link script: EL v2 → ghl_contacts (link-storytellers-to-contacts.mjs)
+- [x] Added storyteller fields to ghl_contacts table (migration applied)
+- [x] Built StorytellerWidget component in Intelligence Platform
+
+KEY DISCOVERY: EL v2 already has ghl_contact_sync table built for bidirectional sync!
+```
+
+### System Architecture (CRITICAL)
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                    ACT AGENTIC SYSTEM                           │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│  PRODUCTION (NAS 24/7)              DEV (Mac localhost)         │
+│  ┌─────────────────────┐           ┌──────────────────────────┐ │
+│  │ ClawdBot Docker     │           │ Command Center (3456)    │ │
+│  │ └─ Telegram bot     │           │ └─ api-server.mjs        │ │
+│  │ └─ Signal API       │           │ └─ 32+ endpoints         │ │
+│  │ └─ Agent services   │           │                          │ │
+│  └─────────┬───────────┘           │ Intelligence (3999)      │ │
+│            │                       │ └─ React dashboard       │ │
+│            │                       │ └─ 7 tabs                │ │
+│            │                       └───────────┬──────────────┘ │
+│            │                                   │                │
+│            └───────────────┬───────────────────┘                │
+│                            ▼                                    │
+│              ┌─────────────────────────┐                        │
+│              │      SUPABASE           │                        │
+│              │  (Shared Data Layer)    │                        │
+│              │  └─ agent_task_queue    │                        │
+│              │  └─ agent_proposals     │                        │
+│              │  └─ agents (11)         │                        │
+│              │  └─ ghl_contacts (859)  │                        │
+│              └─────────────────────────┘                        │
+│                                                                 │
+├─────────────────────────────────────────────────────────────────┤
+│  AGENTS (11 registered):                                        │
+│  Domain: Ralph, Scout, Scribe, Ledger, Cultivator, Shepherd,   │
+│          Oracle, Herald                                         │
+│  Support: Dispatcher, Reviewer, Chronicler                      │
+├─────────────────────────────────────────────────────────────────┤
+│  SINGLE SOURCE OF TRUTH: act-global-infrastructure              │
+│  └─ 110+ scripts, 13 migrations, ClawdBot Docker (8 services)   │
+│  └─ Agentic workflow: proposals → approval → execution          │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+### Production Deployment
+- **NAS (24/7)**: ClawdBot Docker on Synology/QNAP
+  - Telegram: @ACTFarmhand_bot
+  - Signal: via signal-cli-rest-api
+  - Deployment: `clawdbot-docker/NAS-DEPLOYMENT.md`
+- **Scripts**: Run from act-global-infrastructure via cron or manual
+- **Data**: All flows through Supabase (shared between all components)
+
+### How to Launch
+```bash
+# 1. Start Command Center API (from act-global-infrastructure)
+cd packages/act-dashboard && node api-server.mjs
+
+# 2. Start Intelligence Platform (from act-intelligence-platform)
+cd apps/frontend && npm run dev
+
+# 3. Access dashboards
+open http://localhost:3999/?tab=intelligence  # Main dashboard
+open http://localhost:3456                     # Command Center
+```
 
 ### Now
-[->] Unified Knowledge Architecture complete - ready for content generation
+[->] EL v2 integration complete - ready to run sync scripts
 
-### This Session
+### This Session (2026-01-21 Late Evening)
+- [x] **Explored EL v2 schema** - full scout report with ALMA + GHL sync tables
+- [x] **Created sync-storytellers-to-ghl.mjs** - syncs EL v2 storytellers to GHL contacts
+- [x] **Created link-storytellers-to-contacts.mjs** - updates ghl_contacts with stories_count
+- [x] **Migration: add_storyteller_fields_to_ghl_contacts** - added stories_count, is_storyteller, is_elder, empathy_ledger_id
+- [x] **Built StorytellerWidget** - shows EL v2 storytellers in People tab sidebar
+
+### This Session (2026-01-21 Evening)
+- [x] **FIX: useCommandCenter hook** - API returns `relationships` not `contacts`
+- [x] **FIX: Health stats mapping** - API returns `hot`/`warm`/`cool` not `hot_count`/`warm_count`/`cool_count`
+- [x] **FIX: Storyteller inference** - Now checks tags for "storytelling", "empathy", "elder", "indigenous"
+- [x] **FIX: Contact limits** - Increased from 500 → 2000 in PeopleTab
+- [x] **FIX: Contacts page limit** - Increased from 500 → 1000
+- [x] Ran contact enrichment cycle (5/5 steps passed)
+- [x] Tagged 16 GHL contacts as "storytelling" (matched from old EL data)
+- [x] Reviewed Marge Simpson workflow repo - decided ACT's system is already more sophisticated
+- [x] **IDENTIFIED: Old EL data is stale** - need to use EL v2 at /Users/benknight/Code/empathy-ledger-v2
+
+### This Session (2026-01-21 Afternoon)
+- [x] **ARCHITECTURE ALIGNMENT** - documented two-dashboard system clearly
+- [x] Discovered Intelligence Platform connects to Command Center API at port 3456
+- [x] Started Command Center API server (verified health check working)
+- [x] Created comprehensive scout audit of entire agentic system
+- [x] Established single source of truth: act-global-infrastructure
+- [x] Updated handoff with architecture diagram and launch commands
+- [x] Verified Intelligence Platform ↔ Command Center connection (all APIs working)
+- [x] Created 3 sprint tasks in Supabase (integration, proposals, relationship health)
+- [x] Fixed /api/relationships/health endpoint (was using wrong column names)
+- [x] Verified data flow: 859 contacts (20 hot, 124 warm, 715 cool)
+- [x] 20 pending agent proposals ready for review
+
+### This Session (2026-01-21 Morning)
+- [x] Implemented 9 Layers of Agentic Infrastructure improvements (67% → 80%)
+- [x] Created agentic workflow database schema (agent_actions, agent_proposals, autonomous_executions)
+- [x] Built AgenticWorkflow class with tiered autonomy (Level 1/2/3)
+- [x] Created proposal/approval/execution workflow (`scripts/lib/agentic-workflow.mjs`)
+- [x] Built relationship-alert-agent as example agentic script
+- [x] Applied 13 database migrations to Supabase
+- [x] Entity resolution: 847 contacts → canonical entities, 1,704 identifiers
+- [x] Unified search working across contacts, communications, projects
+- [x] ACT Command Center dashboard prototype at packages/act-dashboard/
+- [x] Infrastructure health score: 80% (72/90)
+
+### Previous Session (2026-01-20)
+- [x] Built ACT Studio Project Bot (`scripts/act-studio-bot.mjs`) - 43 projects, 11 categories
+- [x] Created project notification system (`scripts/project-notifications.mjs`) - Discord alerts
+- [x] Created project updates tracker (`scripts/project-updates.mjs`) - milestone tracking
+- [x] Updated Discord notify to work as module (`scripts/discord-notify.mjs`)
+- [x] Created project_updates table in Supabase
+- [x] Reviewed all 78 Notion projects (`scripts/list-notion-projects.mjs`)
+- [x] Full contact-project mapping: JusticeHub (723), Goods (123), First Nations (9)
+- [x] Built unified project codes (`config/project-codes.json`) - 38 codes across all systems
+- [x] Built ACT Project Manager (`scripts/act-project-manager.mjs`) - comprehensive agent
+- [x] Ralph relationship-project matching: 407 confirmed, 9 suggested matches
+- [x] ALMA impact measurement integration per project
+- [x] Empathy Ledger stories linked via LCAA framework
+- [x] Moon cycle strategy with phase-appropriate todos
+- [x] LCAA art/storytelling integration (Listen, Connect, Act, Amplify)
+
+### Previous Session (2026-01-17)
+- [x] Fixed Intelligence Platform warnings (storytellers.project_id, HUGGINGFACE_API_KEY)
+- [x] Updated Notion token in Bitwarden and .env files
+- [x] Ran gap analysis successfully: 70 projects, 328 stories, 239 storytellers, 26 vignettes
+- [x] Generated 34 new project pages in compendium (3% → 84% coverage)
+- [x] Projects now documented: Empathy Ledger, JusticeHub, The Harvest, Goods, June's Patch, BG Fit, Contained, Diagrama, MMEIC Justice, ACT Monthly Dinners, Gold Phone, The Confessional, Custodian Economy, Designing for Obsolescence, Mounty Yarns, Fishers Oysters, Smart Connect, ANAT SPECTRA 2025, Mingaminga Rangers, Regional Arts Fellowship, 10x10 Retreat, DadLab25, Black Cockatoo Valley, Project Her-Self, Smart HCP Uplift, Travelling Women's Car, Cars and Microcontrollers, Fairfax PLACE Tech, NFP Leaders Interviews, ACT Bali Retreat, Uncle Allan Palm Island Art, and more
+- [x] Confirmed 26 vignettes already synced to compendium (across 5 categories)
+- [x] Expanded QA pairs from 98 → 232 pairs (exceeds 200+ target)
+- [x] Created weekly-gap-analysis.yml GitHub workflow (runs Mondays 4pm AEST)
+- [x] Exported knowledge to act-qa-232.json for LLM training
+- [x] Built RAG chat UI at /ask with glassmorphic design
+- [x] Added /api/v1/knowledge/qa endpoint to serve QA pairs
+- [x] Chat UI includes: suggested questions, recent history, source attribution
+- [x] Created story-collection-tracker.md for 60 projects needing stories
+- [x] Added 5 new Community Voice vignettes (27-31) from high-priority EL stories
+- [x] Updated vignettes index to 31 total stories across 6 categories
+
+### Previous Session (2026-01-12)
 - [x] Completed compendium vignettes sync infrastructure (6 stories synced)
 - [x] Identified the problem: 4-hour/$7.50 batch processes are not sustainable
 - [x] Captured vision: ongoing review processes, not one-time analysis
@@ -41,12 +197,21 @@ status: active
 - [x] Created ACT_UNIFIED_KNOWLEDGE_ARCHITECTURE.md - full system design
 
 ### Next
-- [ ] Generate pages for 35 undocumented projects using fill-gaps.mjs
-- [ ] Sync all 28 EL vignettes to compendium
-- [ ] Expand QA pairs to 200+ for better model training
-- [ ] Build RAG chat UI at act.place/ask
-- [ ] Create "Story Gaps" Notion database
-- [ ] Set up weekly cron for gap reports
+**PRIORITY: Empathy Ledger v2 Integration**
+- [ ] Explore EL v2 database schema (`/Users/benknight/Code/empathy-ledger-v2`)
+- [ ] Create sync script: EL v2 storytellers → GHL contacts (tag + stories_count)
+- [ ] Build storyteller dashboard widget showing real EL v2 data
+- [ ] Set up daily sync job for EL v2 ↔ Command Center
+
+**Data Quality Workflows**
+- [ ] Create `/enrich` skill - runs contact-enrichment-cycle.mjs daily
+- [ ] Create `/sync-storytellers` skill - matches EL v2 → GHL
+- [ ] Add stories_count field population from EL v2
+
+**Previous (Completed)**
+- [x] Generate pages for 35 undocumented projects ✓
+- [x] Build RAG chat UI at act.place/ask ✓
+- [x] Set up weekly cron for gap reports ✓
 
 ### Decisions
 - SHIFT: From batch analysis to continuous review rhythms
@@ -56,6 +221,9 @@ status: active
 - CADENCE: Weekly gap reports + on-change triggers
 - ART: Manual trigger initially, human reflection captured by agent prompts
 - VISION: ACT as philosophical movement, not organization
+- AGENTIC: Tiered autonomy (Level 1=manual, Level 2=supervised, Level 3=autonomous)
+- BOUNDED: Agents execute within defined limits, escalate when uncertain
+- HUMAN-IN-LOOP: All medium/high risk actions require explicit approval
 
 ### Open Questions
 - RESOLVED: Review cadence = weekly + on-change ✓
@@ -93,27 +261,38 @@ max_retries: 3
 - Phase 1 (Vision Capture): ✓ VALIDATED
 - Phase 2 (Architecture Design): ✓ VALIDATED
 - Phase 3 (Lightweight Agents): ✓ VALIDATED
-- Phase 4 (Review Rhythms): → IN_PROGRESS
+- Phase 4 (Review Rhythms): ✓ COMPLETE
 
 #### Validation State
 ```json
 {
-  "compendium_vignettes": "complete",
-  "el_integration": "working (328 stories, 239 storytellers)",
+  "compendium_vignettes": "complete (31 vignettes in 6 categories)",
+  "el_v2_integration": "PENDING - priority for next phase",
+  "el_v2_location": "/Users/benknight/Code/empathy-ledger-v2",
+  "old_el_data": "STALE - do not use old storyteller tables",
   "act_personal_ai": "integrated",
-  "living_intelligence": "phase 3 complete",
-  "architecture_doc": "complete",
-  "agent_specs": ["gap-analysis", "art-reflection"],
-  "services": ["page-review.mjs", "gap-analysis.mjs", "reflect-on-art.mjs"],
-  "art_opportunities": 6,
-  "vision_captured": "ACT_AS_MOVEMENT.md"
+  "living_intelligence": "ALL PHASES COMPLETE",
+  "dashboard_fixes": {
+    "useCommandCenter_hook": "FIXED (relationships vs contacts)",
+    "health_stats_mapping": "FIXED (hot/warm/cool field names)",
+    "storyteller_inference": "FIXED (now uses tags)",
+    "contact_limits": "FIXED (500 → 2000)"
+  },
+  "contact_enrichment": "ran successfully (5/5 steps)",
+  "storytellers_tagged": "16 GHL contacts (from old data - needs refresh from EL v2)",
+  "ghl_contacts": 859,
+  "relationship_health": { "hot": 7, "warm": 112, "cool": 740 },
+  "intelligence_platform": "working (all hooks fixed)",
+  "command_center_api": "working (port 3456)"
 }
 ```
 
 #### Resume Context
-- Current focus: Tools are ready - use with Nic to find impact and create art
-- Next action: Run gap-analysis or reflect-on-art CLI to start creating
-- Blockers: (none)
+- Current focus: Empathy Ledger v2 integration
+- Dashboard: All hooks fixed, data flowing correctly
+- Priority: Sync EL v2 storytellers → GHL contacts with stories_count
+- Strategic: Storyteller data ownership is core to ACT mission
+- Blockers: (none - EL v2 is ready at /Users/benknight/Code/empathy-ledger-v2)
 
 ---
 

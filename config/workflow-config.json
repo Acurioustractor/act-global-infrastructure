@@ -1,0 +1,263 @@
+{
+  "_meta": {
+    "description": "ACT Day-to-Day Workflow Configuration",
+    "version": "1.0.0",
+    "updated": "2026-01-20",
+    "vision": "One brain, many inputs. Capture everywhere, process centrally, act with intention."
+  },
+  "channels": {
+    "input": {
+      "discord": {
+        "enabled": true,
+        "voice_notes": true,
+        "bot_name": "ACT Brain",
+        "channels": {
+          "morning": "#act-morning-brief",
+          "alerts": "#act-alerts",
+          "tasks": "#act-tasks",
+          "voice": "#act-voice-notes"
+        }
+      },
+      "signal": {
+        "enabled": false,
+        "bridge": "signal-cli",
+        "voice_notes": true,
+        "notes": "Requires signal-cli setup"
+      },
+      "whatsapp": {
+        "enabled": false,
+        "api": "manual-upload",
+        "notes": "WhatsApp Business API is expensive - using manual upload for now"
+      },
+      "notion": {
+        "enabled": true,
+        "tasks": true,
+        "meetings": true,
+        "sprints": true
+      },
+      "email": {
+        "enabled": true,
+        "source": "ghl",
+        "sync_to_supabase": true
+      }
+    },
+    "output": {
+      "discord": {
+        "enabled": true,
+        "morning_brief": "#act-morning-brief",
+        "alerts": "#act-alerts",
+        "task_complete": "#act-tasks"
+      },
+      "ghl": {
+        "enabled": true,
+        "partner_updates": true,
+        "newsletters": true,
+        "social_posts": true
+      },
+      "notion": {
+        "enabled": true,
+        "task_creation": true,
+        "meeting_notes": true
+      }
+    }
+  },
+  "workflows": {
+    "morning_ritual": {
+      "time": "07:00",
+      "timezone": "Australia/Brisbane",
+      "channels": ["discord:#act-morning-brief"],
+      "includes": [
+        "calendar_today",
+        "awaiting_response",
+        "project_health",
+        "moon_cycle_todos",
+        "regenerative_thought"
+      ]
+    },
+    "voice_note_capture": {
+      "enabled": true,
+      "transcription": "whisper",
+      "extract": ["topics", "action_items", "people_mentioned", "cultural_content"],
+      "create_task": "if_action_item",
+      "link_to_project": "by_keyword"
+    },
+    "meeting_processing": {
+      "pre_meeting": {
+        "pull_context": true,
+        "sources": ["ghl_contact_history", "supabase_comms", "project_status"]
+      },
+      "post_meeting": {
+        "extract_decisions": true,
+        "extract_action_items": true,
+        "create_notion_tasks": true,
+        "update_ghl_activity": true,
+        "send_summary": "if_partner_meeting"
+      }
+    },
+    "partner_updates": {
+      "cadence": "moon_cycle",
+      "phases": {
+        "new_moon": {
+          "theme": "Intentions",
+          "content": ["upcoming_work", "goals", "invitations"]
+        },
+        "full_moon": {
+          "theme": "Celebration",
+          "content": ["progress", "stories", "impact", "thanks"]
+        }
+      },
+      "delivery": "ghl_email_or_whatsapp"
+    },
+    "weekly_review": {
+      "day": "friday",
+      "time": "16:00",
+      "includes": [
+        "relationship_health",
+        "project_progress",
+        "financial_snapshot",
+        "stories_collected",
+        "gaps_identified"
+      ]
+    }
+  },
+  "moon_cycle": {
+    "alignment": "natural_rhythms",
+    "phases": {
+      "new_moon": {
+        "energy": "Set intentions, plant seeds, begin new projects",
+        "actions": ["first_contacts", "new_initiatives", "goal_setting"]
+      },
+      "first_quarter": {
+        "energy": "Push through challenges, make decisions",
+        "actions": ["follow_ups", "deepen_relationships", "take_action"]
+      },
+      "full_moon": {
+        "energy": "Celebrate, connect with community, peak energy",
+        "actions": ["share_stories", "celebrate_wins", "community_events"]
+      },
+      "last_quarter": {
+        "energy": "Release what's not working, reflect",
+        "actions": ["review_progress", "archive_inactive", "clear_backlog"]
+      }
+    }
+  },
+  "integrations": {
+    "supabase": {
+      "role": "central_brain",
+      "tables": ["contacts", "communications", "voice_notes", "project_updates", "relationship_health"]
+    },
+    "notion": {
+      "role": "task_management",
+      "sync": ["sprints", "tasks", "meetings", "projects"]
+    },
+    "ghl": {
+      "role": "relationship_management",
+      "features": ["contacts", "newsletters", "social", "opportunities"]
+    },
+    "xero": {
+      "role": "financial_tracking",
+      "sync_invoices_to": "supabase",
+      "track_by": "project_code"
+    },
+    "dext": {
+      "role": "receipt_capture",
+      "sync_to": "xero",
+      "categorize_by": "project_code"
+    }
+  },
+  "team": {
+    "ben": {
+      "role": "founder",
+      "channels": ["discord", "signal", "notion"],
+      "notifications": ["morning_brief", "urgent_alerts"]
+    },
+    "nic": {
+      "role": "co-founder",
+      "channels": ["discord", "whatsapp", "notion"],
+      "notifications": ["morning_brief", "project_updates"]
+    }
+  },
+  "project_lifecycle": {
+    "dormant_threshold_days": 60,
+    "warning_threshold_days": 30,
+    "healthy_threshold_days": 14,
+    "review_rhythm": "new_moon",
+    "auto_archive": false,
+    "three_mention_rule": true,
+    "five_contact_rule": true,
+    "signals_for_new_project": [
+      "repeat_mentions",
+      "multiple_contacts",
+      "funding_attached",
+      "partner_request",
+      "strategic_alignment"
+    ],
+    "signals_to_keep_fluid": [
+      "one_off_conversation",
+      "exploration_phase",
+      "no_clear_next_step",
+      "no_person_attached"
+    ]
+  },
+  "partner_touchpoints": {
+    "digest_cadence": "moon_cycle",
+    "phases": {
+      "new_moon": {
+        "theme": "Intentions",
+        "content": ["upcoming_work", "goals", "invitations"]
+      },
+      "full_moon": {
+        "theme": "Celebration",
+        "content": ["progress", "stories", "impact", "thanks"]
+      }
+    },
+    "temp_alert_threshold": 40,
+    "auto_meeting_summary": false,
+    "milestone_celebration": true,
+    "story_share_back": true
+  },
+  "voice_notes": {
+    "auto_link_confidence": 0.7,
+    "explicit_prefix": "Project",
+    "create_tasks": true,
+    "max_tasks_per_note": 3,
+    "extract": ["topics", "action_items", "people_mentioned", "cultural_content"],
+    "cultural_keywords": ["elder", "aunty", "uncle", "traditional owner", "first nations", "aboriginal", "indigenous", "sacred", "ceremony", "dreaming", "country"],
+    "link_to_project": "by_keyword"
+  },
+  "project_health_indicators": {
+    "last_contact": {
+      "healthy": 14,
+      "warning": 30,
+      "action_needed": 60
+    },
+    "open_tasks": {
+      "healthy": "1-3",
+      "warning": "0 or 5+",
+      "note": "Projects need 1-3 active tasks"
+    },
+    "voice_notes": {
+      "healthy": "within 2 weeks",
+      "warning": "2+ weeks ago",
+      "action_needed": "never"
+    },
+    "partner_update": {
+      "healthy": "this cycle",
+      "warning": "last cycle",
+      "action_needed": "2+ cycles ago"
+    }
+  },
+  "context_pull": {
+    "sources": [
+      "ghl_contact_history",
+      "supabase_comms",
+      "voice_notes",
+      "project_status",
+      "relationship_health",
+      "opportunities"
+    ],
+    "before_meeting": true,
+    "recent_voice_notes_limit": 5,
+    "recent_comms_limit": 10
+  }
+}
