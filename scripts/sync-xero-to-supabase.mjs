@@ -92,7 +92,7 @@ function loadStoredTokens() {
 }
 
 /**
- * Save tokens to storage file
+ * Save tokens to storage file (local backup)
  */
 function saveTokens(accessToken, refreshToken, expiresIn) {
   try {
@@ -102,7 +102,74 @@ function saveTokens(accessToken, refreshToken, expiresIn) {
       expires_at: Date.now() + (expiresIn * 1000) - 60000 // 1 minute buffer
     }, null, 2));
   } catch (e) {
-    console.warn('Could not save tokens:', e.message);
+    console.warn('Could not save tokens locally:', e.message);
+  }
+}
+
+/**
+ * Save refresh token to Supabase (shared between local and CI)
+ */
+async function saveTokenToSupabase(refreshToken, accessToken, expiresIn) {
+  if (!supabase) return;
+
+  try {
+    const expiresAt = new Date(Date.now() + (expiresIn * 1000) - 60000);
+    const { error } = await supabase
+      .from('xero_tokens')
+      .upsert({
+        id: 'default',
+        refresh_token: refreshToken,
+        access_token: accessToken,
+        expires_at: expiresAt.toISOString(),
+        updated_at: new Date().toISOString(),
+        updated_by: process.env.GITHUB_ACTIONS ? 'github-actions' : 'local'
+      }, { onConflict: 'id' });
+
+    if (error) {
+      console.warn('Could not save token to Supabase:', error.message);
+    } else {
+      console.log('   Token saved to Supabase (shared storage)');
+    }
+  } catch (e) {
+    console.warn('Supabase token save error:', e.message);
+  }
+}
+
+/**
+ * Load refresh token from Supabase (shared between local and CI)
+ */
+async function loadTokenFromSupabase() {
+  if (!supabase) return null;
+
+  try {
+    const { data, error } = await supabase
+      .from('xero_tokens')
+      .select('refresh_token, access_token, expires_at')
+      .eq('id', 'default')
+      .single();
+
+    if (error || !data || data.refresh_token === 'placeholder') {
+      return null;
+    }
+
+    // Check if access token is still valid
+    if (data.access_token && data.expires_at) {
+      const expiresAt = new Date(data.expires_at).getTime();
+      if (expiresAt > Date.now()) {
+        console.log('   Loaded valid access token from Supabase');
+        return {
+          access_token: data.access_token,
+          refresh_token: data.refresh_token,
+          valid: true
+        };
+      }
+    }
+
+    console.log('   Loaded refresh token from Supabase');
+    return { refresh_token: data.refresh_token, valid: false };
+  } catch (e) {
+    console.warn('Supabase token load error:', e.message);
+    return null;
   }
 }
 
@@ -143,8 +210,9 @@ async function refreshAccessToken() {
     XERO_ACCESS_TOKEN = tokens.access_token;
     XERO_REFRESH_TOKEN = tokens.refresh_token;
 
-    // Save for future use
+    // Save for future use - both locally and to Supabase
     saveTokens(tokens.access_token, tokens.refresh_token, tokens.expires_in);
+    await saveTokenToSupabase(tokens.refresh_token, tokens.access_token, tokens.expires_in);
 
     console.log('   Access token refreshed successfully');
     return true;
@@ -158,12 +226,26 @@ async function refreshAccessToken() {
  * Ensure we have a valid access token
  */
 async function ensureValidToken() {
-  // Try stored tokens first
+  // 1. Try Supabase shared storage first (works for both local and CI)
+  const supabaseTokens = await loadTokenFromSupabase();
+  if (supabaseTokens) {
+    if (supabaseTokens.valid && supabaseTokens.access_token) {
+      XERO_ACCESS_TOKEN = supabaseTokens.access_token;
+      XERO_REFRESH_TOKEN = supabaseTokens.refresh_token;
+      return true;
+    }
+    // Use refresh token from Supabase if available
+    if (supabaseTokens.refresh_token) {
+      XERO_REFRESH_TOKEN = supabaseTokens.refresh_token;
+    }
+  }
+
+  // 2. Try local stored tokens
   if (loadStoredTokens()) {
     return true;
   }
 
-  // If we have an access token from env, test it
+  // 3. If we have an access token from env, test it
   if (XERO_ACCESS_TOKEN) {
     const testResponse = await fetch('https://api.xero.com/api.xro/2.0/Organisation', {
       headers: {
@@ -178,7 +260,7 @@ async function ensureValidToken() {
     }
   }
 
-  // Try refreshing
+  // 4. Try refreshing with whatever refresh token we have
   return await refreshAccessToken();
 }
 
