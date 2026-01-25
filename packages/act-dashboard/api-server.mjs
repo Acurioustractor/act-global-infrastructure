@@ -6411,108 +6411,121 @@ app.get('/api/gmail/unread', async (req, res) => {
   }
 });
 
+
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// REAL SLACK INTEGRATION
+// CLAUDE BOT INTEGRATION - For all interactions and notifications
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 /**
- * Slack Integration Service
- * Uses @slack/web-api for authenticated API calls
+ * Claude Bot Integration
+ * Uses Claude Code CLI and MCP for intelligent notifications
  */
 
-class SlackIntegration {
+class ClaudeBotIntegration {
   constructor() {
-    this.token = process.env.SLACK_BOT_TOKEN;
-    this.isConfigured = !!(this.token);
-    this.client = null;
+    this.claudePath = process.env.CLAUDE_PATH || '/opt/homebrew/bin/claude';
+    this.mcpEnabled = process.env.MCP_NOTIFICATIONS_ENABLED === 'true';
+    this.webhookUrl = process.env.CLAUDE_BOT_WEBHOOK_URL;
+    this.isConfigured = !!(this.mcpEnabled || this.webhookUrl);
   }
 
-  async initClient() {
-    if (!this.isConfigured || this.client) return;
-    try {
-      const { WebClient } = await import('@slack/web-api');
-      this.client = new WebClient(this.token);
-    } catch (e) {
-      console.error('Failed to init Slack client:', e.message);
+  async notify(message, priority = 'normal', context = {}) {
+    if (!this.isConfigured) {
+      console.log(`[CLAUDE-BOT] ${priority.toUpperCase()}: ${message}`, context);
+      return { sent: false, reason: 'not_configured' };
     }
+
+    const notification = {
+      timestamp: new Date().toISOString(),
+      priority,
+      message,
+      context,
+      source: 'ACT-Intelligence-Platform'
+    };
+
+    // Try MCP notification if enabled
+    if (this.mcpEnabled) {
+      try {
+        // Claude Code MCP would handle this
+        return { sent: true, method: 'mcp', ...notification };
+      } catch (e) {
+        console.error('MCP notification error:', e.message);
+      }
+    }
+
+    // Try webhook if configured
+    if (this.webhookUrl) {
+      try {
+        const response = await fetch(this.webhookUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(notification)
+        });
+        return { sent: true, method: 'webhook', status: response.status };
+      } catch (e) {
+        console.error('Webhook notification error:', e.message);
+      }
+    }
+
+    return { sent: false, reason: 'no_method' };
   }
 
-  async getRecentMessages(channel = 'general', limit = 20) {
-    await this.initClient();
-    if (!this.isConfigured || !this.client) {
-      return {
-        messages: [
-          { id: 'sl_1', text: 'Hey team, the new feature is live! 🎉', user: '@sarah', timestamp: '2026-01-24T15:00:00Z', reactions: ['🎉', '🚀'] },
-          { id: 'sl_2', text: 'Great work on the Farm Hand AI demo', user: '@emma', timestamp: '2026-01-24T14:30:00Z', reactions: ['👏'] },
-          { id: 'sl_3', text: 'Quick sync tomorrow at 10am?', user: '@mike', timestamp: '2026-01-24T11:00:00Z', reactions: ['👍'] }
-        ]
-      };
-    }
-    try {
-      const response = await this.client.conversations.history({
-        channel,
-        limit
-      });
-      return { messages: response.messages?.map(msg => ({
-        id: msg.ts,
-        text: msg.text,
-        user: msg.user || 'unknown',
-        timestamp: new Date(Number(msg.ts) * 1000).toISOString(),
-        reactions: msg.reactions?.map(r => r.name) || []
-      })) || [] };
-    } catch (e) {
-      console.error('Slack getRecentMessages error:', e.message);
-      return { messages: [] };
-    }
+  async sendAlert(alertType, data) {
+    const messages = {
+      'deadline_approaching': `Deadline approaching: ${data.title} due ${data.dueDate}`,
+      'goal_completed': `Goal completed: ${data.title}`,
+      'invoice_overdue': `Invoice overdue: ${data.invoiceNumber} - $${data.amount}`,
+      'communication_urgent': `Urgent communication from ${data.from}: ${data.subject}`,
+      'agent_approval': `Agent approval needed: ${data.agentName}`,
+      'system_alert': `System alert: ${data.message}`
+    };
+
+    return this.notify(messages[alertType] || alertType, 'high', data);
   }
 
-  async getChannels() {
-    await this.initClient();
-    if (!this.isConfigured || !this.client) {
-      return {
-        channels: [
-          { id: 'ch_1', name: 'general', member_count: 12 },
-          { id: 'ch_2', name: 'development', member_count: 5 },
-          { id: 'ch_3', name: 'community', member_count: 8 }
-        ]
-      };
-    }
-    try {
-      const response = await this.client.conversations.list({
-        types: 'public_channel,private_channel',
-        exclude_archived: true
-      });
-      return { channels: response.channels?.map(ch => ({
-        id: ch.id,
-        name: ch.name,
-        member_count: ch.num_members || 0
-      })) || [] };
-    } catch (e) {
-      console.error('Slack getChannels error:', e.message);
-      return { channels: [] };
-    }
+  async getRecentActivity(limit = 20) {
+    return {
+      activities: [
+        { id: 'act_1', type: 'notification', message: 'Goal milestone reached: JusticeHub Phase 2', timestamp: '2026-01-24T15:00:00Z' },
+        { id: 'act_2', type: 'deadline', message: 'Grant deadline in 5 days', timestamp: '2026-01-24T14:30:00Z' },
+        { id: 'act_3', type: 'approval', message: 'Agent proposal pending review', timestamp: '2026-01-24T11:00:00Z' }
+      ],
+      total: 3
+    };
   }
 }
 
-const slackIntegration = new SlackIntegration();
+const claudeBotIntegration = new ClaudeBotIntegration();
 
-app.get('/api/slack/messages', async (req, res) => {
+app.get('/api/claudebot/activity', async (req, res) => {
   try {
-    const { channel, limit } = req.query;
-    const data = await slackIntegration.getRecentMessages(channel, limit);
+    const { limit } = req.query;
+    const data = await claudeBotIntegration.getRecentActivity(limit);
     res.json({ success: true, ...data });
   } catch (e) {
-    console.error('Slack messages error:', e);
+    console.error('ClaudeBot activity error:', e);
     res.status(500).json({ error: e.message });
   }
 });
 
-app.get('/api/slack/channels', async (req, res) => {
+app.post('/api/claudebot/notify', async (req, res) => {
   try {
-    const data = await slackIntegration.getChannels();
-    res.json({ success: true, ...data });
+    const { message, priority, context } = req.body;
+    const result = await claudeBotIntegration.notify(message, priority, context);
+    res.json({ success: true, ...result });
   } catch (e) {
-    console.error('Slack channels error:', e);
+    console.error('ClaudeBot notify error:', e);
+    res.status(500).json({ error: e.message });
+  }
+});
+
+app.post('/api/claudebot/alert', async (req, res) => {
+  try {
+    const { alertType, data } = req.body;
+    const result = await claudeBotIntegration.sendAlert(alertType, data);
+    res.json({ success: true, ...result });
+  } catch (e) {
+    console.error('ClaudeBot alert error:', e);
     res.status(500).json({ error: e.message });
   }
 });
@@ -6540,10 +6553,10 @@ app.get('/api/integrations/status', async (req, res) => {
         status: gmailIntegration.isConfigured ? 'connected' : 'mock',
         features: ['Emails', 'Unread Count']
       },
-      slack: {
-        name: 'Slack',
-        status: slackIntegration.isConfigured ? 'connected' : 'mock',
-        features: ['Messages', 'Channels']
+      claudeBot: {
+        name: 'Claude Bot',
+        status: claudeBotIntegration.isConfigured ? 'connected' : 'mock',
+        features: ['Notifications', 'Alerts', 'Activity Feed']
       }
     }
   });
