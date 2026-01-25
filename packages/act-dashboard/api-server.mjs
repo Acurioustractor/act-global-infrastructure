@@ -6153,7 +6153,7 @@ app.get('/api/xero/transactions', async (req, res) => {
 
 class NotionIntegration {
   constructor() {
-    this.apiKey = process.env.NOTION_API_KEY;
+    this.apiKey = process.env.NOTION_API_KEY || process.env.NOTION_TOKEN;
     this.projectsDatabaseId = process.env.NOTION_PROJECTS_DATABASE_ID;
     this.isConfigured = !!(this.apiKey);
     this.client = null;
@@ -6299,8 +6299,8 @@ app.get('/api/notion/stats', async (req, res) => {
 
 class GmailIntegration {
   constructor() {
-    this.clientId = process.env.GMAIL_CLIENT_ID;
-    this.clientSecret = process.env.GMAIL_CLIENT_SECRET;
+    this.clientId = process.env.GMAIL_CLIENT_ID || process.env.GOOGLE_CLIENT_ID;
+    this.clientSecret = process.env.GMAIL_CLIENT_SECRET || process.env.GOOGLE_CLIENT_SECRET;
     this.isConfigured = !!(this.clientId && this.clientSecret);
     this.oauthClient = null;
   }
