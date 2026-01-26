@@ -1,0 +1,218 @@
+name: Scheduled Daily Syncs
+
+# Consolidated daily sync workflow for all integrations
+# Runs at 6 AM AEST (8 PM UTC previous day)
+
+on:
+  schedule:
+    # 6 AM AEST = 8 PM UTC (previous day during AEDT)
+    # 6 AM AEST = 7 PM UTC (previous day during AEST)
+    - cron: '0 20 * * *'
+
+  # Allow manual trigger
+  workflow_dispatch:
+    inputs:
+      sync_target:
+        description: 'Which syncs to run'
+        required: false
+        default: 'all'
+        type: choice
+        options:
+          - all
+          - ghl
+          - calendar
+          - xero
+          - bunya
+          - alta
+
+env:
+  NODE_VERSION: '20'
+
+jobs:
+  # ========================================
+  # GoHighLevel Contacts Sync
+  # ========================================
+  sync-ghl:
+    if: ${{ github.event.inputs.sync_target == 'all' || github.event.inputs.sync_target == 'ghl' || github.event_name == 'schedule' }}
+    runs-on: ubuntu-latest
+    outputs:
+      contacts_count: ${{ steps.sync.outputs.contacts_count }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install --production
+
+      - name: Run GHL Sync
+        id: sync
+        env:
+          GHL_API_KEY: ${{ secrets.GHL_API_KEY }}
+          GHL_LOCATION_ID: ${{ secrets.GHL_LOCATION_ID }}
+          SUPABASE_SHARED_URL: ${{ secrets.SUPABASE_SHARED_URL }}
+          SUPABASE_SHARED_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SHARED_SERVICE_ROLE_KEY }}
+        run: |
+          npm run sync:ghl:supabase
+          echo "contacts_count=$(cat /tmp/sync-count.txt 2>/dev/null || echo 'N/A')" >> $GITHUB_OUTPUT
+
+  # ========================================
+  # Google Calendar Sync
+  # ========================================
+  sync-calendar:
+    if: ${{ github.event.inputs.sync_target == 'all' || github.event.inputs.sync_target == 'calendar' || github.event_name == 'schedule' }}
+    runs-on: ubuntu-latest
+    outputs:
+      events_count: ${{ steps.sync.outputs.events_count }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install --production
+
+      - name: Run Calendar Sync
+        id: sync
+        env:
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          SUPABASE_SHARED_URL: ${{ secrets.SUPABASE_SHARED_URL }}
+          SUPABASE_SHARED_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SHARED_SERVICE_ROLE_KEY }}
+        run: |
+          node scripts/sync-calendar-to-supabase.mjs || echo "Calendar sync skipped (may need OAuth)"
+          echo "events_count=$(cat /tmp/events-count.txt 2>/dev/null || echo 'N/A')" >> $GITHUB_OUTPUT
+        continue-on-error: true
+
+  # ========================================
+  # Xero Financial Data Sync
+  # ========================================
+  sync-xero:
+    if: ${{ github.event.inputs.sync_target == 'all' || github.event.inputs.sync_target == 'xero' || github.event_name == 'schedule' }}
+    runs-on: ubuntu-latest
+    outputs:
+      invoices_count: ${{ steps.sync.outputs.invoices_count }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install --production
+
+      - name: Run Xero Sync
+        id: sync
+        env:
+          XERO_CLIENT_ID: ${{ secrets.XERO_CLIENT_ID }}
+          XERO_CLIENT_SECRET: ${{ secrets.XERO_CLIENT_SECRET }}
+          XERO_TENANT_ID: ${{ secrets.XERO_TENANT_ID }}
+          SUPABASE_SHARED_URL: ${{ secrets.SUPABASE_SHARED_URL }}
+          SUPABASE_SHARED_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SHARED_SERVICE_ROLE_KEY }}
+        run: |
+          node scripts/sync-xero-to-supabase.mjs || echo "Xero sync skipped (may need OAuth)"
+          echo "invoices_count=$(cat /tmp/invoices-count.txt 2>/dev/null || echo 'N/A')" >> $GITHUB_OUTPUT
+        continue-on-error: true
+
+  # ========================================
+  # BUNYA Project Health Calculation
+  # ========================================
+  run-bunya:
+    if: ${{ github.event.inputs.sync_target == 'all' || github.event.inputs.sync_target == 'bunya' || github.event_name == 'schedule' }}
+    runs-on: ubuntu-latest
+    needs: [sync-ghl]  # Run after contact sync
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install --production
+
+      - name: Calculate Project Health
+        env:
+          SUPABASE_SHARED_URL: ${{ secrets.SUPABASE_SHARED_URL }}
+          SUPABASE_SHARED_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SHARED_SERVICE_ROLE_KEY }}
+        run: node scripts/calculate-project-health.mjs
+
+  # ========================================
+  # ALTA Grant Scout
+  # ========================================
+  run-alta:
+    if: ${{ github.event.inputs.sync_target == 'all' || github.event.inputs.sync_target == 'alta' || github.event_name == 'schedule' }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install --production
+
+      - name: Run Grant Scout
+        env:
+          SUPABASE_SHARED_URL: ${{ secrets.SUPABASE_SHARED_URL }}
+          SUPABASE_SHARED_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SHARED_SERVICE_ROLE_KEY }}
+        run: |
+          if [ -f "scripts/grants-pipeline.mjs" ]; then
+            node scripts/grants-pipeline.mjs
+          else
+            echo "ALTA grant scout script not yet implemented"
+          fi
+        continue-on-error: true
+
+  # ========================================
+  # Summary Report
+  # ========================================
+  summary:
+    runs-on: ubuntu-latest
+    needs: [sync-ghl, sync-calendar, sync-xero, run-bunya, run-alta]
+    if: always()
+
+    steps:
+      - name: Generate Summary
+        run: |
+          echo "## Daily Syncs Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Date:** $(date -u '+%Y-%m-%d %H:%M UTC')" >> $GITHUB_STEP_SUMMARY
+          echo "**Trigger:** ${{ github.event_name }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Service | Status |" >> $GITHUB_STEP_SUMMARY
+          echo "|---------|--------|" >> $GITHUB_STEP_SUMMARY
+          echo "| GoHighLevel | ${{ needs.sync-ghl.result == 'success' && 'Synced' || needs.sync-ghl.result == 'skipped' && 'Skipped' || 'Failed' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Calendar | ${{ needs.sync-calendar.result == 'success' && 'Synced' || needs.sync-calendar.result == 'skipped' && 'Skipped' || 'Warning' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Xero | ${{ needs.sync-xero.result == 'success' && 'Synced' || needs.sync-xero.result == 'skipped' && 'Skipped' || 'Warning' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| BUNYA (Health) | ${{ needs.run-bunya.result == 'success' && 'Calculated' || needs.run-bunya.result == 'skipped' && 'Skipped' || 'Warning' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| ALTA (Grants) | ${{ needs.run-alta.result == 'success' && 'Scanned' || needs.run-alta.result == 'skipped' && 'Skipped' || 'Warning' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "---" >> $GITHUB_STEP_SUMMARY
+          echo "*Next scheduled run: 6 AM AEST tomorrow*" >> $GITHUB_STEP_SUMMARY

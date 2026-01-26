@@ -1,0 +1,67 @@
+name: Ecosystem Health Check
+
+on:
+  schedule:
+    - cron: '*/15 * * * *'  # Every 15 minutes
+  workflow_dispatch:
+    inputs:
+      site:
+        description: 'Specific site slug to check (optional)'
+        required: false
+        type: string
+
+jobs:
+  health-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Health Checks
+        env:
+          SUPABASE_SHARED_URL: ${{ secrets.SUPABASE_SHARED_URL }}
+          SUPABASE_SHARED_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SHARED_SERVICE_ROLE_KEY }}
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_PROJECT_TOKEN }}
+        run: |
+          if [ -n "${{ inputs.site }}" ]; then
+            node scripts/health-check-service.mjs --site "${{ inputs.site }}"
+          else
+            node scripts/health-check-service.mjs
+          fi
+
+      - name: Check for critical alerts
+        if: success()
+        env:
+          SUPABASE_SHARED_URL: ${{ secrets.SUPABASE_SHARED_URL }}
+          SUPABASE_SHARED_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SHARED_SERVICE_ROLE_KEY }}
+        run: |
+          node -e "
+            import { createClient } from '@supabase/supabase-js';
+            const supabase = createClient(
+              process.env.SUPABASE_SHARED_URL,
+              process.env.SUPABASE_SHARED_SERVICE_ROLE_KEY
+            );
+            const { data: alerts } = await supabase
+              .from('health_alerts')
+              .select('*')
+              .eq('resolved', false)
+              .eq('severity', 'critical')
+              .gte('created_at', new Date(Date.now() - 15 * 60 * 1000).toISOString());
+
+            if (alerts?.length > 0) {
+              console.log('::warning::' + alerts.length + ' new critical alerts detected');
+              for (const alert of alerts) {
+                console.log('::error::' + alert.message);
+              }
+            }
+          "

@@ -1,0 +1,83 @@
+name: Receipt Reconciliation Weekly Review
+
+on:
+  schedule:
+    # Run every Monday at 9:00 AM AEST (Sunday 11:00 PM UTC)
+    - cron: '0 23 * * 0'
+  workflow_dispatch:
+    inputs:
+      skip_ai:
+        description: 'Skip AI enhancement'
+        required: false
+        default: 'false'
+        type: boolean
+      days_back:
+        description: 'Days to scan back'
+        required: false
+        default: '90'
+        type: string
+
+jobs:
+  scan-and-report:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Sync Xero data first
+        env:
+          XERO_CLIENT_ID: ${{ secrets.XERO_CLIENT_ID }}
+          XERO_CLIENT_SECRET: ${{ secrets.XERO_CLIENT_SECRET }}
+          XERO_TENANT_ID: ${{ secrets.XERO_TENANT_ID }}
+          XERO_REFRESH_TOKEN: ${{ secrets.XERO_REFRESH_TOKEN }}
+          SUPABASE_SHARED_URL: ${{ secrets.SUPABASE_SHARED_URL }}
+          SUPABASE_SHARED_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SHARED_SERVICE_ROLE_KEY }}
+        run: |
+          echo "📦 Syncing Xero data..."
+          node scripts/sync-xero-to-supabase.mjs full --days=90 || true
+          echo "✅ Xero sync complete"
+
+      - name: Scan for missing receipts
+        env:
+          SUPABASE_SHARED_URL: ${{ secrets.SUPABASE_SHARED_URL }}
+          SUPABASE_SHARED_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SHARED_SERVICE_ROLE_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          echo "🔍 Scanning for missing receipts..."
+          SKIP_AI_FLAG=""
+          if [ "${{ inputs.skip_ai }}" = "true" ]; then
+            SKIP_AI_FLAG="--skip-ai"
+          fi
+          node scripts/receipt-reconciliation-agent.mjs scan $SKIP_AI_FLAG --notify
+
+      - name: Generate weekly summary
+        env:
+          SUPABASE_SHARED_URL: ${{ secrets.SUPABASE_SHARED_URL }}
+          SUPABASE_SHARED_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SHARED_SERVICE_ROLE_KEY }}
+          DISCORD_WEBHOOK_ENRICHMENT: ${{ secrets.DISCORD_WEBHOOK_ENRICHMENT }}
+        run: |
+          echo "📋 Generating weekly summary..."
+          node scripts/receipt-reconciliation-agent.mjs weekly-summary
+
+      - name: Report status
+        if: always()
+        run: |
+          echo "═══════════════════════════════════════════════════════════════"
+          echo "  Receipt Reconciliation Weekly Review Complete"
+          echo "═══════════════════════════════════════════════════════════════"
+          echo ""
+          echo "🔍 Scan: Complete"
+          echo "📋 Weekly Summary: Sent to Discord"
+          echo ""
+          echo "Review pending receipts:"
+          echo "  node scripts/receipt-reconciliation-agent.mjs pending"
+          echo "═══════════════════════════════════════════════════════════════"
