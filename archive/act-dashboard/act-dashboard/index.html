@@ -1,0 +1,1251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ACT Command Center</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎯</text></svg>">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    :root {
+      --bg-primary: #0a0a0f;
+      --bg-secondary: #12121a;
+      --bg-card: #1a1a24;
+      --border: #2a2a3a;
+      --text-primary: #e4e4e7;
+      --text-secondary: #a1a1aa;
+      --text-muted: #71717a;
+      --accent: #6366f1;
+      --accent-glow: rgba(99, 102, 241, 0.3);
+      --success: #22c55e;
+      --warning: #f59e0b;
+      --error: #ef4444;
+      --info: #3b82f6;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      min-height: 100vh;
+      line-height: 1.5;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    /* Header */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 24px;
+    }
+
+    .header h1 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .header h1::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      background: var(--success);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--success);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    .health-badge {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+
+    .health-score {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .health-bar {
+      width: 100px;
+      height: 8px;
+      background: var(--bg-secondary);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .health-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--success));
+      transition: width 0.5s ease;
+    }
+
+    /* Stats Grid */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .stat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      transition: all 0.2s ease;
+    }
+
+    .stat-card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 0 20px var(--accent-glow);
+    }
+
+    .stat-icon {
+      font-size: 1.5rem;
+      margin-bottom: 8px;
+    }
+
+    .stat-value {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .stat-label {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Main Grid */
+    .main-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    @media (max-width: 1024px) {
+      .main-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Panel */
+    .panel {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg-secondary);
+    }
+
+    .panel-title {
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-secondary);
+    }
+
+    .panel-body {
+      padding: 16px 20px;
+      max-height: 400px;
+      overflow-y: auto;
+    }
+
+    /* Agent List */
+    .agent-item {
+      display: grid;
+      grid-template-columns: 120px 80px 1fr 60px;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+      gap: 16px;
+    }
+
+    .agent-item:last-child {
+      border-bottom: none;
+    }
+
+    .agent-name {
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .agent-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.75rem;
+      padding: 4px 8px;
+      border-radius: 4px;
+      text-transform: uppercase;
+    }
+
+    .agent-status.running {
+      background: rgba(34, 197, 94, 0.15);
+      color: var(--success);
+    }
+
+    .agent-status.idle {
+      background: rgba(113, 113, 122, 0.15);
+      color: var(--text-muted);
+    }
+
+    .agent-status.queued {
+      background: rgba(245, 158, 11, 0.15);
+      color: var(--warning);
+    }
+
+    .agent-status.error {
+      background: rgba(239, 68, 68, 0.15);
+      color: var(--error);
+    }
+
+    .agent-status::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+
+    .agent-task {
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .agent-time {
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      text-align: right;
+    }
+
+    /* Decision Trace */
+    .trace-item {
+      display: flex;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.875rem;
+    }
+
+    .trace-item:last-child {
+      border-bottom: none;
+    }
+
+    .trace-time {
+      color: var(--text-muted);
+      white-space: nowrap;
+      min-width: 50px;
+    }
+
+    .trace-agent {
+      color: var(--accent);
+      font-weight: 600;
+      min-width: 100px;
+    }
+
+    .trace-message {
+      color: var(--text-secondary);
+    }
+
+    .trace-icon {
+      margin-right: 4px;
+    }
+
+    /* Layer Health */
+    .layer-item {
+      display: grid;
+      grid-template-columns: 24px 1fr 60px 80px;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+      gap: 12px;
+    }
+
+    .layer-item:last-child {
+      border-bottom: none;
+    }
+
+    .layer-number {
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg-secondary);
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    .layer-name {
+      font-size: 0.875rem;
+    }
+
+    .layer-score {
+      font-weight: 600;
+      text-align: right;
+    }
+
+    .layer-bar {
+      width: 80px;
+      height: 6px;
+      background: var(--bg-secondary);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .layer-bar-fill {
+      height: 100%;
+      border-radius: 3px;
+      transition: width 0.3s ease;
+    }
+
+    .layer-bar-fill.high { background: var(--success); }
+    .layer-bar-fill.medium { background: var(--warning); }
+    .layer-bar-fill.low { background: var(--error); }
+
+    /* Search */
+    .search-container {
+      grid-column: 1 / -1;
+      margin-top: 24px;
+    }
+
+    .search-box {
+      display: flex;
+      gap: 12px;
+    }
+
+    .search-input {
+      flex: 1;
+      padding: 16px 20px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text-primary);
+      font-family: inherit;
+      font-size: 1rem;
+      transition: all 0.2s ease;
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 20px var(--accent-glow);
+    }
+
+    .search-input::placeholder {
+      color: var(--text-muted);
+    }
+
+    .search-btn {
+      padding: 16px 32px;
+      background: var(--accent);
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .search-btn:hover {
+      background: #4f46e5;
+      box-shadow: 0 0 20px var(--accent-glow);
+    }
+
+    /* Search Results */
+    .search-results {
+      margin-top: 16px;
+      display: none;
+    }
+
+    .search-results.active {
+      display: block;
+    }
+
+    .result-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin-bottom: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .result-item:hover {
+      border-color: var(--accent);
+    }
+
+    .result-type {
+      font-size: 1.5rem;
+    }
+
+    .result-content {
+      flex: 1;
+    }
+
+    .result-title {
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .result-snippet {
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+    }
+
+    .result-score {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--bg-secondary);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--text-muted);
+    }
+
+    /* Proposal Cards */
+    .proposal-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 12px;
+      transition: all 0.2s ease;
+    }
+
+    .proposal-card:hover {
+      border-color: var(--accent);
+    }
+
+    .proposal-card.urgent {
+      border-left: 3px solid var(--error);
+    }
+
+    .proposal-card.high {
+      border-left: 3px solid var(--warning);
+    }
+
+    .proposal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 8px;
+    }
+
+    .proposal-title {
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .proposal-priority {
+      font-size: 0.75rem;
+      padding: 2px 8px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .proposal-priority.urgent {
+      background: rgba(239, 68, 68, 0.2);
+      color: var(--error);
+    }
+
+    .proposal-priority.high {
+      background: rgba(245, 158, 11, 0.2);
+      color: var(--warning);
+    }
+
+    .proposal-priority.normal {
+      background: rgba(99, 102, 241, 0.2);
+      color: var(--accent);
+    }
+
+    .proposal-meta {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+    }
+
+    .proposal-reasoning {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+      padding: 8px;
+      background: var(--bg-primary);
+      border-radius: 4px;
+    }
+
+    .proposal-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .btn {
+      padding: 8px 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+
+    .btn-approve {
+      background: var(--success);
+      color: white;
+    }
+
+    .btn-approve:hover {
+      background: #16a34a;
+      box-shadow: 0 0 10px rgba(34, 197, 94, 0.3);
+    }
+
+    .btn-reject {
+      background: transparent;
+      border: 1px solid var(--error);
+      color: var(--error);
+    }
+
+    .btn-reject:hover {
+      background: rgba(239, 68, 68, 0.1);
+    }
+
+    .btn-view {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+    }
+
+    .btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .proposal-empty {
+      text-align: center;
+      padding: 40px;
+      color: var(--text-muted);
+    }
+
+    .proposal-empty-icon {
+      font-size: 2rem;
+      margin-bottom: 8px;
+    }
+
+    /* Loading */
+    .loading {
+      text-align: center;
+      padding: 40px;
+      color: var(--text-muted);
+    }
+
+    .loading::after {
+      content: '';
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 2px solid var(--border);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Navigation -->
+    <nav style="display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap;">
+      <a href="intelligence.html" style="padding: 8px 16px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; color: var(--text-secondary); text-decoration: none; font-size: 0.875rem; transition: all 0.2s ease;">Intelligence Center</a>
+      <a href="infrastructure.html" style="padding: 8px 16px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; color: var(--text-secondary); text-decoration: none; font-size: 0.875rem; transition: all 0.2s ease;">Infrastructure</a>
+      <a href="index.html" style="padding: 8px 16px; background: var(--accent); border: 1px solid var(--accent); border-radius: 6px; color: white; text-decoration: none; font-size: 0.875rem;">Command Center</a>
+      <a href="command-center.html" style="padding: 8px 16px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; color: var(--text-secondary); text-decoration: none; font-size: 0.875rem; transition: all 0.2s ease;">Agent Orchestration</a>
+      <a href="projects.html" style="padding: 8px 16px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; color: var(--text-secondary); text-decoration: none; font-size: 0.875rem; transition: all 0.2s ease;">Projects</a>
+    </nav>
+
+    <!-- Header -->
+    <header class="header">
+      <h1>ACT Command Center</h1>
+      <div class="health-badge">
+        <span class="health-label">9 Layers</span>
+        <span class="health-score" id="health-score">--</span>
+        <div class="health-bar">
+          <div class="health-bar-fill" id="health-bar" style="width: 0%"></div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Stats Grid -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon">🤖</div>
+        <div class="stat-value" id="stat-agents">--</div>
+        <div class="stat-label">Active Agents</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">👤</div>
+        <div class="stat-value" id="stat-entities">--</div>
+        <div class="stat-label">Canonical Entities</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">📝</div>
+        <div class="stat-value" id="stat-audit">--</div>
+        <div class="stat-label">Audit Actions (24h)</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">💬</div>
+        <div class="stat-value" id="stat-comms">--</div>
+        <div class="stat-label">Communications</div>
+      </div>
+    </div>
+
+    <!-- Main Grid -->
+    <div class="main-grid">
+      <!-- Agent Proposals (Agentic Workflow) -->
+      <div class="panel" style="grid-column: span 2;">
+        <div class="panel-header">
+          <span class="panel-title">🤖 Agent Proposals (Awaiting Approval)</span>
+          <span id="proposal-count">0 pending</span>
+        </div>
+        <div class="panel-body" id="proposal-list" style="max-height: 400px; overflow-y: auto;">
+          <div class="loading">Loading proposals</div>
+        </div>
+      </div>
+
+      <!-- Agent Orchestra -->
+      <div class="panel">
+        <div class="panel-header">
+          <span class="panel-title">Agent Orchestra</span>
+          <span id="agent-count">0 agents</span>
+        </div>
+        <div class="panel-body" id="agent-list">
+          <div class="loading">Loading agents</div>
+        </div>
+      </div>
+
+      <!-- Layer Health -->
+      <div class="panel">
+        <div class="panel-header">
+          <span class="panel-title">9 Layer Health</span>
+          <span id="layer-updated">--</span>
+        </div>
+        <div class="panel-body" id="layer-list">
+          <div class="loading">Loading health data</div>
+        </div>
+      </div>
+
+      <!-- Decision Trace -->
+      <div class="panel">
+        <div class="panel-header">
+          <span class="panel-title">Decision Trace (Layer 9)</span>
+          <span id="trace-count">0 traces</span>
+        </div>
+        <div class="panel-body" id="trace-list">
+          <div class="loading">Loading traces</div>
+        </div>
+      </div>
+
+      <!-- Recent Audit -->
+      <div class="panel">
+        <div class="panel-header">
+          <span class="panel-title">Agent Audit Log (Layer 7)</span>
+          <span id="audit-count">0 entries</span>
+        </div>
+        <div class="panel-body" id="audit-list">
+          <div class="loading">Loading audit log</div>
+        </div>
+      </div>
+
+      <!-- Unified Search -->
+      <div class="search-container">
+        <div class="panel">
+          <div class="panel-header">
+            <span class="panel-title">Unified Search (Layer 4)</span>
+          </div>
+          <div class="panel-body">
+            <div class="search-box">
+              <input
+                type="text"
+                class="search-input"
+                id="search-input"
+                placeholder="Search contacts, communications, projects..."
+              >
+              <button class="search-btn" id="search-btn">Search</button>
+            </div>
+            <div class="search-results" id="search-results"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Configuration - these would come from environment in production
+    const SUPABASE_URL = 'https://tednluwflfhxyucgwigh.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRlZG5sdXdmbGZoeHl1Y2d3aWdoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTIzNDYyMjksImV4cCI6MjA2NzkyMjIyOX0.PG0iGZQR2d8yo4y3q1e2tEIMa3J0AdFkI1Q6P7IDgrg';
+
+    // Initialize Supabase client (using 'db' to avoid conflict with window.supabase)
+    const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    // Agent definitions (these would come from config)
+    const AGENTS = [
+      { name: 'ralph', description: 'Long-running task agent', icon: '🦙' },
+      { name: 'scout', description: 'Codebase exploration', icon: '🔍' },
+      { name: 'kraken', description: 'TDD implementation', icon: '🐙' },
+      { name: 'architect', description: 'Feature planning', icon: '📐' },
+      { name: 'phoenix', description: 'Refactoring', icon: '🔥' },
+      { name: 'spark', description: 'Quick fixes', icon: '⚡' },
+      { name: 'oracle', description: 'External research', icon: '🔮' },
+      { name: 'arbiter', description: 'Test validation', icon: '⚖️' },
+    ];
+
+    // Layer definitions
+    const LAYERS = [
+      { num: 1, name: 'Models' },
+      { num: 2, name: 'Extraction & Integration' },
+      { num: 3, name: 'Preparation & Transformation' },
+      { num: 4, name: 'Indexing & Retrieval' },
+      { num: 5, name: 'Delivery & Orchestration' },
+      { num: 6, name: 'Memory & State' },
+      { num: 7, name: 'Governance & Safety' },
+      { num: 8, name: 'Cost & Latency' },
+      { num: 9, name: 'Observability & Evaluation' },
+    ];
+
+    // Fetch and display stats
+    async function loadStats() {
+      try {
+        // Canonical entities count
+        const { count: entityCount } = await db
+          .from('canonical_entities')
+          .select('*', { count: 'exact', head: true });
+        document.getElementById('stat-entities').textContent = entityCount?.toLocaleString() || '0';
+
+        // Audit log count (24h)
+        const yesterday = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
+        const { count: auditCount } = await db
+          .from('agent_audit_log')
+          .select('*', { count: 'exact', head: true })
+          .gte('timestamp', yesterday);
+        document.getElementById('stat-audit').textContent = auditCount?.toLocaleString() || '0';
+
+        // Communications count
+        const { count: commsCount } = await db
+          .from('communications_history')
+          .select('*', { count: 'exact', head: true });
+        document.getElementById('stat-comms').textContent = commsCount?.toLocaleString() || '0';
+
+        // Active agents (simulated - would check running processes in production)
+        document.getElementById('stat-agents').textContent = '0';
+      } catch (err) {
+        console.error('Failed to load stats:', err);
+      }
+    }
+
+    // Load agent proposals (agentic workflow)
+    async function loadProposals() {
+      const container = document.getElementById('proposal-list');
+
+      try {
+        const { data: proposals, error } = await db
+          .from('agent_proposals')
+          .select('*')
+          .eq('status', 'pending')
+          .order('created_at', { ascending: false })
+          .limit(20);
+
+        if (error) throw error;
+
+        if (!proposals || proposals.length === 0) {
+          container.innerHTML = `
+            <div class="proposal-empty">
+              <div class="proposal-empty-icon">✅</div>
+              <div>No pending proposals</div>
+              <div style="font-size: 0.8rem; margin-top: 4px;">All caught up!</div>
+            </div>
+          `;
+          document.getElementById('proposal-count').textContent = '0 pending';
+          return;
+        }
+
+        let html = '';
+        proposals.forEach(p => {
+          const reasoning = p.reasoning || {};
+          const confidence = reasoning.confidence ? Math.round(reasoning.confidence * 100) : '?';
+          const trigger = reasoning.trigger || 'unknown';
+
+          html += `
+            <div class="proposal-card ${p.priority}" data-id="${p.id}">
+              <div class="proposal-header">
+                <span class="proposal-title">${p.title}</span>
+                <span class="proposal-priority ${p.priority}">${p.priority}</span>
+              </div>
+              <div class="proposal-meta">
+                Agent: <strong>${p.agent_id}</strong> ·
+                Confidence: <strong>${confidence}%</strong> ·
+                Trigger: ${trigger}
+              </div>
+              ${p.description ? `<div class="proposal-reasoning">${p.description}</div>` : ''}
+              <div class="proposal-actions">
+                <button class="btn btn-approve" onclick="approveProposal('${p.id}')">
+                  ✓ Approve
+                </button>
+                <button class="btn btn-reject" onclick="rejectProposal('${p.id}')">
+                  ✗ Reject
+                </button>
+              </div>
+            </div>
+          `;
+        });
+
+        container.innerHTML = html;
+        document.getElementById('proposal-count').textContent = `${proposals.length} pending`;
+      } catch (err) {
+        container.innerHTML = `<div class="proposal-empty">Error: ${err.message}</div>`;
+      }
+    }
+
+    // Approve a proposal
+    async function approveProposal(id) {
+      const card = document.querySelector(`[data-id="${id}"]`);
+      const btn = card?.querySelector('.btn-approve');
+      if (btn) {
+        btn.disabled = true;
+        btn.textContent = 'Approving...';
+      }
+
+      try {
+        const { error } = await db
+          .from('agent_proposals')
+          .update({
+            status: 'approved',
+            reviewed_by: 'dashboard-user',
+            reviewed_at: new Date().toISOString(),
+            updated_at: new Date().toISOString()
+          })
+          .eq('id', id);
+
+        if (error) throw error;
+
+        // Remove card with animation
+        if (card) {
+          card.style.opacity = '0';
+          card.style.transform = 'translateX(20px)';
+          setTimeout(() => {
+            loadProposals();
+            loadStats();
+          }, 300);
+        }
+      } catch (err) {
+        alert('Failed to approve: ' + err.message);
+        if (btn) {
+          btn.disabled = false;
+          btn.textContent = '✓ Approve';
+        }
+      }
+    }
+
+    // Reject a proposal
+    async function rejectProposal(id) {
+      const reason = prompt('Reason for rejection (optional):');
+
+      const card = document.querySelector(`[data-id="${id}"]`);
+      const btn = card?.querySelector('.btn-reject');
+      if (btn) {
+        btn.disabled = true;
+        btn.textContent = 'Rejecting...';
+      }
+
+      try {
+        const { error } = await db
+          .from('agent_proposals')
+          .update({
+            status: 'rejected',
+            reviewed_by: 'dashboard-user',
+            reviewed_at: new Date().toISOString(),
+            review_notes: reason || 'Rejected via dashboard',
+            updated_at: new Date().toISOString()
+          })
+          .eq('id', id);
+
+        if (error) throw error;
+
+        // Remove card with animation
+        if (card) {
+          card.style.opacity = '0';
+          card.style.transform = 'translateX(-20px)';
+          setTimeout(() => {
+            loadProposals();
+          }, 300);
+        }
+      } catch (err) {
+        alert('Failed to reject: ' + err.message);
+        if (btn) {
+          btn.disabled = false;
+          btn.textContent = '✗ Reject';
+        }
+      }
+    }
+
+    // Load agent status
+    async function loadAgents() {
+      const container = document.getElementById('agent-list');
+
+      try {
+        // Get recent audit logs to determine agent activity
+        const { data: recentLogs } = await db
+          .from('agent_audit_log')
+          .select('agent_id, action, target_table, timestamp, success')
+          .order('timestamp', { ascending: false })
+          .limit(50);
+
+        const agentActivity = {};
+        recentLogs?.forEach(log => {
+          if (!agentActivity[log.agent_id]) {
+            agentActivity[log.agent_id] = log;
+          }
+        });
+
+        let html = '';
+        AGENTS.forEach(agent => {
+          const activity = agentActivity[agent.name];
+          const status = activity ?
+            (Date.now() - new Date(activity.timestamp).getTime() < 300000 ? 'running' : 'idle') :
+            'idle';
+          const task = activity ? `${activity.action} on ${activity.target_table}` : '';
+          const time = activity ? formatTime(new Date(activity.timestamp)) : '';
+
+          html += `
+            <div class="agent-item">
+              <span class="agent-name">${agent.icon} ${agent.name}</span>
+              <span class="agent-status ${status}">${status}</span>
+              <span class="agent-task">${task}</span>
+              <span class="agent-time">${time}</span>
+            </div>
+          `;
+        });
+
+        container.innerHTML = html || '<div class="loading">No agents configured</div>';
+        document.getElementById('agent-count').textContent = `${AGENTS.length} agents`;
+      } catch (err) {
+        container.innerHTML = `<div class="trace-item"><span class="trace-message">Error loading agents: ${err.message}</span></div>`;
+      }
+    }
+
+    // Load layer health
+    async function loadLayerHealth() {
+      const container = document.getElementById('layer-list');
+
+      // Simulated layer scores - in production would call the health check endpoint
+      const scores = {
+        1: 9, 2: 10, 3: 10, 4: 7, 5: 10, 6: 7, 7: 9, 8: 7, 9: 3
+      };
+
+      let html = '';
+      let totalScore = 0;
+
+      LAYERS.forEach(layer => {
+        const score = scores[layer.num] || 0;
+        totalScore += score;
+        const level = score >= 8 ? 'high' : score >= 5 ? 'medium' : 'low';
+
+        html += `
+          <div class="layer-item">
+            <span class="layer-number">${layer.num}</span>
+            <span class="layer-name">${layer.name}</span>
+            <span class="layer-score">${score}/10</span>
+            <div class="layer-bar">
+              <div class="layer-bar-fill ${level}" style="width: ${score * 10}%"></div>
+            </div>
+          </div>
+        `;
+      });
+
+      container.innerHTML = html;
+
+      const percentage = Math.round((totalScore / 90) * 100);
+      document.getElementById('health-score').textContent = `${percentage}%`;
+      document.getElementById('health-bar').style.width = `${percentage}%`;
+      document.getElementById('layer-updated').textContent = 'Just now';
+    }
+
+    // Load decision traces
+    async function loadDecisionTraces() {
+      const container = document.getElementById('trace-list');
+
+      try {
+        const { data: traces } = await db
+          .from('decision_traces')
+          .select('*')
+          .order('timestamp', { ascending: false })
+          .limit(20);
+
+        if (!traces || traces.length === 0) {
+          // Fall back to audit log for traces
+          const { data: auditTraces } = await db
+            .from('agent_audit_log')
+            .select('*')
+            .order('timestamp', { ascending: false })
+            .limit(10);
+
+          if (!auditTraces || auditTraces.length === 0) {
+            container.innerHTML = '<div class="trace-item"><span class="trace-message">No decision traces yet</span></div>';
+            return;
+          }
+
+          let html = '';
+          auditTraces.forEach(trace => {
+            const icon = trace.success ? '✓' : '✗';
+            html += `
+              <div class="trace-item">
+                <span class="trace-time">${formatTime(new Date(trace.timestamp))}</span>
+                <span class="trace-agent">${trace.agent_id}</span>
+                <span class="trace-message">
+                  <span class="trace-icon">${icon}</span>
+                  ${trace.action} on ${trace.target_table}
+                  ${trace.output_summary ? ` - ${JSON.stringify(trace.output_summary).substring(0, 50)}` : ''}
+                </span>
+              </div>
+            `;
+          });
+
+          container.innerHTML = html;
+          document.getElementById('trace-count').textContent = `${auditTraces.length} traces`;
+          return;
+        }
+
+        let html = '';
+        traces.forEach(trace => {
+          html += `
+            <div class="trace-item">
+              <span class="trace-time">${formatTime(new Date(trace.timestamp))}</span>
+              <span class="trace-agent">${trace.decision_type}</span>
+              <span class="trace-message">${trace.reasoning?.substring(0, 100) || 'No reasoning recorded'}</span>
+            </div>
+          `;
+        });
+
+        container.innerHTML = html;
+        document.getElementById('trace-count').textContent = `${traces.length} traces`;
+      } catch (err) {
+        container.innerHTML = `<div class="trace-item"><span class="trace-message">Error: ${err.message}</span></div>`;
+      }
+    }
+
+    // Load audit log
+    async function loadAuditLog() {
+      const container = document.getElementById('audit-list');
+
+      try {
+        const { data: logs } = await db
+          .from('agent_audit_log')
+          .select('*')
+          .order('timestamp', { ascending: false })
+          .limit(15);
+
+        if (!logs || logs.length === 0) {
+          container.innerHTML = '<div class="trace-item"><span class="trace-message">No audit entries yet</span></div>';
+          return;
+        }
+
+        let html = '';
+        logs.forEach(log => {
+          const icon = log.success ? '✓' : '✗';
+          const statusClass = log.success ? 'success' : 'error';
+          html += `
+            <div class="trace-item">
+              <span class="trace-time">${formatTime(new Date(log.timestamp))}</span>
+              <span class="trace-agent">${log.agent_id}</span>
+              <span class="trace-message" style="color: var(--${statusClass})">
+                <span class="trace-icon">${icon}</span>
+                ${log.action} → ${log.target_table || 'system'}
+                ${log.duration_ms ? ` (${log.duration_ms}ms)` : ''}
+              </span>
+            </div>
+          `;
+        });
+
+        container.innerHTML = html;
+        document.getElementById('audit-count').textContent = `${logs.length} entries`;
+      } catch (err) {
+        container.innerHTML = `<div class="trace-item"><span class="trace-message">Error: ${err.message}</span></div>`;
+      }
+    }
+
+    // Search functionality
+    async function performSearch(query) {
+      const resultsContainer = document.getElementById('search-results');
+      resultsContainer.classList.add('active');
+      resultsContainer.innerHTML = '<div class="loading">Searching</div>';
+
+      try {
+        // Search contacts
+        const { data: contacts } = await db
+          .from('canonical_entities')
+          .select('*')
+          .or(`canonical_name.ilike.%${query}%,canonical_email.ilike.%${query}%`)
+          .limit(5);
+
+        // Search communications
+        const { data: comms } = await db
+          .from('communications_history')
+          .select('id, subject, content_preview, contact_name, occurred_at')
+          .or(`subject.ilike.%${query}%,content_preview.ilike.%${query}%`)
+          .order('occurred_at', { ascending: false })
+          .limit(5);
+
+        let html = '';
+
+        // Display contacts
+        contacts?.forEach(c => {
+          html += `
+            <div class="result-item">
+              <span class="result-type">👤</span>
+              <div class="result-content">
+                <div class="result-title">${c.canonical_name || 'Unknown'}</div>
+                <div class="result-snippet">${c.canonical_email || ''} ${c.canonical_company ? '| ' + c.canonical_company : ''}</div>
+              </div>
+              <span class="result-score">Contact</span>
+            </div>
+          `;
+        });
+
+        // Display communications
+        comms?.forEach(c => {
+          html += `
+            <div class="result-item">
+              <span class="result-type">💬</span>
+              <div class="result-content">
+                <div class="result-title">${c.subject || 'No subject'}</div>
+                <div class="result-snippet">${c.content_preview?.substring(0, 100) || ''}</div>
+              </div>
+              <span class="result-score">Comms</span>
+            </div>
+          `;
+        });
+
+        if (!html) {
+          html = '<div class="result-item"><span class="result-type">🔍</span><div class="result-content"><div class="result-title">No results found</div></div></div>';
+        }
+
+        resultsContainer.innerHTML = html;
+      } catch (err) {
+        resultsContainer.innerHTML = `<div class="result-item"><span class="result-type">⚠️</span><div class="result-content"><div class="result-title">Search error</div><div class="result-snippet">${err.message}</div></div></div>`;
+      }
+    }
+
+    // Format time
+    function formatTime(date) {
+      const now = new Date();
+      const diff = now - date;
+
+      if (diff < 60000) return 'now';
+      if (diff < 3600000) return `${Math.floor(diff / 60000)}m`;
+      if (diff < 86400000) return `${Math.floor(diff / 3600000)}h`;
+      return date.toLocaleDateString();
+    }
+
+    // Event listeners
+    document.getElementById('search-btn').addEventListener('click', () => {
+      const query = document.getElementById('search-input').value.trim();
+      if (query) performSearch(query);
+    });
+
+    document.getElementById('search-input').addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        const query = e.target.value.trim();
+        if (query) performSearch(query);
+      }
+    });
+
+    // Initial load
+    async function init() {
+      await Promise.all([
+        loadStats(),
+        loadProposals(),
+        loadAgents(),
+        loadLayerHealth(),
+        loadDecisionTraces(),
+        loadAuditLog(),
+      ]);
+
+      // Refresh every 30 seconds
+      setInterval(() => {
+        loadStats();
+        loadProposals();
+        loadAgents();
+        loadDecisionTraces();
+        loadAuditLog();
+      }, 30000);
+    }
+
+    init();
+  </script>
+</body>
+</html>

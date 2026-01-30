@@ -1,0 +1,86 @@
+#!/bin/bash
+# ACT Command Center - Dev Server & Cron Control
+# Usage: ./dev [start|stop|restart|status|logs|cron|stop-cron|all]
+
+cd /Users/benknight/Code/act-global-infrastructure
+
+SERVERS="act-api act-frontend"
+CRON_SCRIPTS="imessage-sync embed-imessages detect-episodes daily-briefing storyteller-sync storyteller-link notion-sync agent-learning"
+
+case "$1" in
+  start)
+    pm2 start ecosystem.config.cjs --only "act-api,act-frontend"
+    sleep 3
+    pm2 status
+    echo ""
+    echo "Frontend: http://localhost:3001/finance/subscriptions"
+    echo "Backend:  http://localhost:3456"
+    ;;
+  stop)
+    pm2 stop $SERVERS 2>/dev/null
+    ;;
+  restart)
+    pm2 restart $SERVERS 2>/dev/null
+    ;;
+  cron)
+    pm2 start ecosystem.config.cjs --only "imessage-sync,embed-imessages,detect-episodes,daily-briefing,storyteller-sync,storyteller-link,notion-sync,agent-learning"
+    sleep 2
+    pm2 status
+    echo ""
+    echo "Scheduled scripts started. Logs in /tmp/<name>-out.log"
+    echo "  agent-learning:    daily 2am AEST"
+    echo "  storyteller-sync:  daily 4:30am AEST"
+    echo "  storyteller-link:  daily 4:45am AEST"
+    echo "  imessage-sync:     every 15 min"
+    echo "  notion-sync:       every 5 min"
+    echo "  embed-imessages:   daily 5am AEST"
+    echo "  detect-episodes:   daily 6am AEST"
+    echo "  daily-briefing:    daily 7am AEST"
+    ;;
+  stop-cron)
+    pm2 stop $CRON_SCRIPTS 2>/dev/null
+    echo "Cron scripts stopped."
+    ;;
+  all)
+    pm2 start ecosystem.config.cjs
+    sleep 3
+    pm2 status
+    echo ""
+    echo "Frontend: http://localhost:3001/finance/subscriptions"
+    echo "Backend:  http://localhost:3456"
+    echo ""
+    echo "Cron scripts also running (imessage-sync, embed, episodes, briefing)"
+    ;;
+  status)
+    pm2 status
+    echo ""
+    echo "API:      $(curl -s http://localhost:3456/api/health 2>/dev/null | jq -r '.status // "offline"')"
+    echo "Frontend: $(curl -s http://localhost:3001 -o /dev/null -w '%{http_code}' 2>/dev/null || echo 'offline')"
+    ;;
+  logs)
+    if [ -n "$2" ]; then
+      pm2 logs "$2" --lines 50
+    else
+      pm2 logs --lines 50
+    fi
+    ;;
+  *)
+    echo "Usage: ./dev [command]"
+    echo ""
+    echo "  Servers:"
+    echo "    start   - Start API and frontend servers"
+    echo "    stop    - Stop servers"
+    echo "    restart - Restart servers"
+    echo ""
+    echo "  Scheduled Scripts:"
+    echo "    cron      - Start memory system cron scripts"
+    echo "    stop-cron - Stop cron scripts"
+    echo ""
+    echo "  Combined:"
+    echo "    all     - Start servers + cron scripts"
+    echo ""
+    echo "  Info:"
+    echo "    status  - Show process status"
+    echo "    logs    - Tail logs (optional: ./dev logs <name>)"
+    ;;
+esac

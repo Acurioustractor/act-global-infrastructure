@@ -25,8 +25,8 @@ import { createClient } from '@supabase/supabase-js';
 // CONFIGURATION
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-// Use SUPABASE_SHARED_* for shared ACT database, fallback to SUPABASE_* for backward compat
-const SUPABASE_URL = process.env.SUPABASE_SHARED_URL || process.env.SUPABASE_URL;
+// Use SUPABASE_SHARED_* for shared ACT database, fallback to SUPABASE_* or NEXT_PUBLIC_* for backward compat
+const SUPABASE_URL = process.env.SUPABASE_SHARED_URL || process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
 const SUPABASE_SERVICE_KEY = process.env.SUPABASE_SHARED_SERVICE_ROLE_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY;
 const GHL_LOCATION_ID = process.env.GHL_LOCATION_ID;
 

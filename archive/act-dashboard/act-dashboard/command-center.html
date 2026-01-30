@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ACT Agent Command Center</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Inter:wght@400;500;600;700&display=swap');
+    body { font-family: 'Inter', sans-serif; background: #0a0a0f; }
+    .mono { font-family: 'JetBrains Mono', monospace; }
+    .glass {
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .gradient-border {
+      position: relative;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    }
+    .gradient-border::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 1px;
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.5), rgba(139, 92, 246, 0.3));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+    }
+    .pulse-dot {
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+    .status-online { color: #10b981; }
+    .status-idle { color: #f59e0b; }
+    .status-offline { color: #6b7280; }
+    .activity-feed {
+      max-height: 400px;
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(139, 92, 246, 0.3) transparent;
+    }
+    .activity-feed::-webkit-scrollbar { width: 6px; }
+    .activity-feed::-webkit-scrollbar-track { background: transparent; }
+    .activity-feed::-webkit-scrollbar-thumb { background: rgba(139, 92, 246, 0.3); border-radius: 3px; }
+  </style>
+</head>
+<body class="min-h-screen text-gray-100">
+  <!-- Navigation -->
+  <nav class="max-w-7xl mx-auto px-4 pt-4 flex gap-2 flex-wrap">
+    <a href="intelligence.html" class="px-4 py-2 text-sm bg-gray-800 border border-gray-700 rounded-lg text-gray-400 hover:border-indigo-500 hover:text-white transition">Intelligence Center</a>
+    <a href="infrastructure.html" class="px-4 py-2 text-sm bg-gray-800 border border-gray-700 rounded-lg text-gray-400 hover:border-indigo-500 hover:text-white transition">Infrastructure</a>
+    <a href="index.html" class="px-4 py-2 text-sm bg-gray-800 border border-gray-700 rounded-lg text-gray-400 hover:border-indigo-500 hover:text-white transition">Command Center</a>
+    <a href="command-center.html" class="px-4 py-2 text-sm bg-indigo-600 border border-indigo-600 rounded-lg text-white">Agent Orchestration</a>
+    <a href="projects.html" class="px-4 py-2 text-sm bg-gray-800 border border-gray-700 rounded-lg text-gray-400 hover:border-indigo-500 hover:text-white transition">Projects</a>
+  </nav>
+
+  <!-- Header -->
+  <header class="glass border-b border-gray-800 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-4">
+        <h1 class="text-xl font-bold bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">
+          ACT Command Center
+        </h1>
+        <span class="text-xs text-gray-500 mono" id="connection-status">Connecting...</span>
+      </div>
+      <div class="flex items-center gap-4">
+        <span class="text-xs text-gray-500" id="last-heartbeat"></span>
+        <button onclick="triggerHeartbeat()" class="px-3 py-1 text-xs bg-indigo-600 hover:bg-indigo-700 rounded-lg transition">
+          Pulse
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 py-6 space-y-6">
+    <!-- Quick Command Bar -->
+    <section class="glass rounded-xl p-4">
+      <form id="command-form" class="flex gap-3" onsubmit="handleCommand(event)">
+        <div class="flex-1 relative">
+          <span class="absolute left-3 top-1/2 -translate-y-1/2 text-indigo-400">@ACT</span>
+          <input
+            type="text"
+            id="command-input"
+            placeholder="Ask an agent to do something..."
+            class="w-full pl-16 pr-4 py-3 bg-gray-900/50 border border-gray-700 rounded-lg focus:outline-none focus:border-indigo-500 text-white placeholder-gray-500"
+          />
+        </div>
+        <button type="submit" class="px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-lg font-medium hover:opacity-90 transition">
+          Send
+        </button>
+      </form>
+    </section>
+
+    <!-- Agent Status Grid -->
+    <section>
+      <h2 class="text-sm font-semibold text-gray-400 mb-3 uppercase tracking-wider">Agents</h2>
+      <div id="agents-grid" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-3">
+        <!-- Agents populated by JS -->
+      </div>
+    </section>
+
+    <!-- Main Content Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <!-- Activity Feed -->
+      <section class="lg:col-span-2">
+        <div class="flex items-center justify-between mb-3">
+          <h2 class="text-sm font-semibold text-gray-400 uppercase tracking-wider">Live Activity</h2>
+          <button onclick="clearActivity()" class="text-xs text-gray-500 hover:text-gray-300">Clear</button>
+        </div>
+        <div class="glass rounded-xl">
+          <div id="activity-feed" class="activity-feed p-4 space-y-3">
+            <!-- Activity items populated by JS -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Agent Proposals (New!) -->
+      <section>
+        <h2 class="text-sm font-semibold text-gray-400 mb-3 uppercase tracking-wider">
+          Agent Proposals <span id="proposals-count" class="text-purple-400">(0)</span>
+        </h2>
+        <div id="agent-proposals" class="space-y-3 max-h-[500px] overflow-y-auto">
+          <!-- Proposals populated by JS -->
+        </div>
+      </section>
+    </div>
+
+    <!-- Proposals Section (Full Width) -->
+    <section class="mt-6">
+      <div class="flex items-center justify-between mb-3">
+        <h2 class="text-sm font-semibold text-gray-400 uppercase tracking-wider">All Proposals</h2>
+        <div class="flex gap-2">
+          <select id="proposal-priority-filter" onchange="loadProposals()" class="text-xs bg-gray-900 border border-gray-700 rounded px-2 py-1">
+            <option value="all">All Priorities</option>
+            <option value="urgent">Urgent</option>
+            <option value="high">High</option>
+            <option value="normal">Normal</option>
+          </select>
+          <select id="proposal-status-filter" onchange="loadProposals()" class="text-xs bg-gray-900 border border-gray-700 rounded px-2 py-1">
+            <option value="pending">Pending</option>
+            <option value="draft_ready">Draft Ready</option>
+            <option value="approved">Approved</option>
+            <option value="completed">Completed</option>
+            <option value="all">All</option>
+          </select>
+          <button onclick="batchApproveSelected()" class="text-xs bg-green-700 hover:bg-green-600 px-3 py-1 rounded">
+            Approve Selected
+          </button>
+        </div>
+      </div>
+      <div class="glass rounded-xl overflow-hidden">
+        <table class="w-full text-sm">
+          <thead class="border-b border-gray-800">
+            <tr class="text-left text-gray-400">
+              <th class="p-3 w-8"><input type="checkbox" id="select-all-proposals" onchange="toggleAllProposals(this)"></th>
+              <th class="p-3 w-16">Priority</th>
+              <th class="p-3">Proposal</th>
+              <th class="p-3 w-32">Agent</th>
+              <th class="p-3 w-24">Status</th>
+              <th class="p-3 w-32">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="proposals-table" class="divide-y divide-gray-800">
+            <!-- Proposals populated by JS -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Task Queue -->
+    <section>
+      <div class="flex items-center justify-between mb-3">
+        <h2 class="text-sm font-semibold text-gray-400 uppercase tracking-wider">Task Queue</h2>
+        <div class="flex gap-2">
+          <select id="status-filter" onchange="loadTasks()" class="text-xs bg-gray-900 border border-gray-700 rounded px-2 py-1">
+            <option value="all">All Status</option>
+            <option value="queued">Queued</option>
+            <option value="working">Working</option>
+            <option value="review">Review</option>
+            <option value="done">Done</option>
+            <option value="failed">Failed</option>
+          </select>
+          <select id="agent-filter" onchange="loadTasks()" class="text-xs bg-gray-900 border border-gray-700 rounded px-2 py-1">
+            <option value="all">All Agents</option>
+          </select>
+        </div>
+      </div>
+      <div class="glass rounded-xl overflow-hidden">
+        <table class="w-full text-sm">
+          <thead class="border-b border-gray-800">
+            <tr class="text-left text-gray-400">
+              <th class="p-3 w-8">P</th>
+              <th class="p-3">Task</th>
+              <th class="p-3 w-24">Agent</th>
+              <th class="p-3 w-24">Status</th>
+              <th class="p-3 w-32">Time</th>
+              <th class="p-3 w-24">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="task-table" class="divide-y divide-gray-800">
+            <!-- Tasks populated by JS -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <!-- Task Detail Modal -->
+  <div id="task-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden z-50 flex items-center justify-center p-4">
+    <div class="glass rounded-2xl max-w-2xl w-full max-h-[80vh] overflow-hidden">
+      <div class="p-4 border-b border-gray-800 flex items-center justify-between">
+        <h3 id="modal-title" class="font-semibold"></h3>
+        <button onclick="closeModal()" class="text-gray-400 hover:text-white">&times;</button>
+      </div>
+      <div id="modal-content" class="p-4 overflow-y-auto max-h-[60vh] mono text-sm whitespace-pre-wrap">
+      </div>
+      <div id="modal-actions" class="p-4 border-t border-gray-800 flex gap-3">
+      </div>
+    </div>
+  </div>
+
+  <!-- Draft Preview Modal (Human Verification) -->
+  <div id="draft-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden z-50 flex items-center justify-center p-4">
+    <div class="glass rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-hidden">
+      <div class="p-4 border-b border-gray-800 flex items-center justify-between">
+        <div>
+          <h3 id="draft-modal-title" class="font-semibold text-lg">Review Before Sending</h3>
+          <p class="text-xs text-gray-400">Human verification required - nothing sends without your approval</p>
+        </div>
+        <button onclick="closeDraftModal()" class="text-gray-400 hover:text-white text-2xl">&times;</button>
+      </div>
+
+      <div class="p-4 overflow-y-auto max-h-[65vh] space-y-4">
+        <!-- Draft Type Badge -->
+        <div class="flex items-center gap-2">
+          <span id="draft-type-badge" class="px-3 py-1 rounded-full text-xs font-medium bg-purple-600">Email Draft</span>
+          <span id="draft-status-badge" class="px-3 py-1 rounded-full text-xs font-medium bg-yellow-600">Needs Review</span>
+        </div>
+
+        <!-- Email Draft View -->
+        <div id="draft-email-view" class="space-y-3">
+          <div>
+            <label class="text-xs text-gray-400 block mb-1">To:</label>
+            <input id="draft-to" type="text" readonly class="w-full px-3 py-2 bg-gray-900/50 border border-gray-700 rounded-lg text-white" />
+          </div>
+          <div>
+            <label class="text-xs text-gray-400 block mb-1">Subject: <span class="text-purple-400">(editable)</span></label>
+            <input id="draft-subject" type="text" class="w-full px-3 py-2 bg-gray-800 border border-gray-600 rounded-lg text-white focus:border-purple-500 focus:outline-none" />
+          </div>
+          <div>
+            <label class="text-xs text-gray-400 block mb-1">Message: <span class="text-purple-400">(editable)</span></label>
+            <textarea id="draft-body" rows="12" class="w-full px-3 py-2 bg-gray-800 border border-gray-600 rounded-lg text-white focus:border-purple-500 focus:outline-none resize-y"></textarea>
+          </div>
+        </div>
+
+        <!-- Action Summary View (for non-email actions) -->
+        <div id="draft-action-view" class="hidden space-y-3">
+          <div class="p-4 bg-gray-900/50 rounded-lg">
+            <h4 class="font-medium mb-2">Proposed Action</h4>
+            <p id="draft-action-summary" class="text-gray-300"></p>
+          </div>
+          <div class="p-4 bg-gray-900/50 rounded-lg">
+            <h4 class="font-medium mb-2">Details</h4>
+            <pre id="draft-action-details" class="text-xs text-gray-400 overflow-x-auto"></pre>
+          </div>
+        </div>
+
+        <!-- Warning for missing email -->
+        <div id="draft-warning" class="hidden p-3 bg-red-900/30 border border-red-700 rounded-lg">
+          <p class="text-sm text-red-300">⚠️ No email address on file for this contact. You can still approve to log the intent, but no email will be sent.</p>
+        </div>
+      </div>
+
+      <div class="p-4 border-t border-gray-800 flex items-center justify-between">
+        <div class="text-xs text-gray-500">
+          <span id="draft-proposal-id"></span>
+        </div>
+        <div class="flex gap-3">
+          <button onclick="closeDraftModal()" class="px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-lg">
+            Cancel
+          </button>
+          <button onclick="rejectCurrentProposal()" class="px-4 py-2 bg-red-600 hover:bg-red-500 rounded-lg">
+            Reject
+          </button>
+          <button id="draft-confirm-btn" onclick="confirmAndSend()" class="px-6 py-2 bg-green-600 hover:bg-green-500 rounded-lg font-medium">
+            ✓ Confirm & Send
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const API_URL = 'http://localhost:3456';
+    let pollInterval;
+
+    // Agent metadata
+    const agentMeta = {
+      dispatcher: { emoji: '📡', color: 'indigo' },
+      scout: { emoji: '🔍', color: 'cyan' },
+      scribe: { emoji: '✍️', color: 'emerald' },
+      ledger: { emoji: '💰', color: 'yellow' },
+      cultivator: { emoji: '🌱', color: 'green' },
+      shepherd: { emoji: '🐑', color: 'blue' },
+      oracle: { emoji: '🔮', color: 'purple' },
+      herald: { emoji: '📣', color: 'orange' },
+      chronicler: { emoji: '📚', color: 'pink' },
+      'relationship-alert-agent': { emoji: '💕', color: 'rose' },
+      'project-intelligence': { emoji: '📊', color: 'teal' },
+      ralph: { emoji: '🤖', color: 'violet' }
+    };
+
+    // Current draft state
+    let currentProposalId = null;
+    let currentDraft = null;
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', () => {
+      loadAgents();
+      loadTasks();
+      loadPending();
+      loadProposals();
+      startPolling();
+      addActivity('system', 'Command Center initialized');
+    });
+
+    function startPolling() {
+      pollInterval = setInterval(() => {
+        loadAgents();
+        loadTasks();
+        loadPending();
+        loadProposals();
+      }, 10000);
+      document.getElementById('connection-status').textContent = 'Connected';
+      document.getElementById('connection-status').className = 'text-xs text-green-500 mono';
+    }
+
+    // Load agent status
+    async function loadAgents() {
+      try {
+        const res = await fetch(`${API_URL}/api/agents`);
+        const agents = await res.json();
+
+        const grid = document.getElementById('agents-grid');
+        grid.innerHTML = agents.map(a => {
+          const meta = agentMeta[a.id] || { emoji: '🤖', color: 'gray' };
+          const statusClass = a.status === 'online' ? 'status-online' :
+                              a.status === 'idle' ? 'status-idle' : 'status-offline';
+          const isWorking = a.current_task_id;
+
+          return `
+            <div class="glass rounded-xl p-3 hover:bg-gray-800/30 transition cursor-pointer" onclick="showAgentDetail('${a.id}')">
+              <div class="flex items-center gap-2 mb-2">
+                <span class="text-xl">${meta.emoji}</span>
+                <span class="font-medium text-sm">${a.name}</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full ${statusClass} ${a.status === 'online' ? 'pulse-dot' : ''}"></span>
+                <span class="text-xs text-gray-500">${a.status}</span>
+              </div>
+              ${isWorking ? `<p class="text-xs text-indigo-400 mt-2 truncate">${a.current_task_title || 'Working...'}</p>` : ''}
+            </div>
+          `;
+        }).join('');
+
+        // Populate agent filter
+        const agentFilter = document.getElementById('agent-filter');
+        const currentVal = agentFilter.value;
+        agentFilter.innerHTML = '<option value="all">All Agents</option>' +
+          agents.map(a => `<option value="${a.id}">${a.name}</option>`).join('');
+        agentFilter.value = currentVal;
+
+      } catch (e) {
+        console.error('Failed to load agents:', e);
+      }
+    }
+
+    // Load tasks
+    async function loadTasks() {
+      try {
+        const status = document.getElementById('status-filter').value;
+        const agent = document.getElementById('agent-filter').value;
+
+        let url = `${API_URL}/api/tasks?`;
+        if (status !== 'all') url += `status=${status}&`;
+        if (agent !== 'all') url += `agent=${agent}&`;
+
+        const res = await fetch(url);
+        const tasks = await res.json();
+
+        const tbody = document.getElementById('task-table');
+        tbody.innerHTML = tasks.map(t => {
+          const priorityColors = {
+            1: 'text-red-400',
+            2: 'text-yellow-400',
+            3: 'text-blue-400',
+            4: 'text-gray-400'
+          };
+          const statusColors = {
+            queued: 'bg-gray-600',
+            assigned: 'bg-blue-600',
+            working: 'bg-indigo-600',
+            review: 'bg-yellow-600',
+            approved: 'bg-green-600',
+            done: 'bg-green-700',
+            failed: 'bg-red-600',
+            rejected: 'bg-red-500',
+            cancelled: 'bg-gray-500'
+          };
+
+          const meta = agentMeta[t.assigned_agent] || { emoji: '🤖' };
+          const timeAgo = getTimeAgo(t.created_at);
+
+          return `
+            <tr class="hover:bg-gray-800/30">
+              <td class="p-3 ${priorityColors[t.priority] || ''} font-bold">${t.priority}</td>
+              <td class="p-3">
+                <p class="font-medium">${t.title}</p>
+                <p class="text-xs text-gray-500 truncate max-w-md">${t.description || ''}</p>
+              </td>
+              <td class="p-3">
+                <span class="flex items-center gap-1">
+                  <span>${meta.emoji}</span>
+                  <span class="text-xs">${t.agent_name || t.assigned_agent}</span>
+                </span>
+              </td>
+              <td class="p-3">
+                <span class="px-2 py-1 text-xs rounded ${statusColors[t.status] || 'bg-gray-600'}">${t.status}</span>
+              </td>
+              <td class="p-3 text-xs text-gray-400">${timeAgo}</td>
+              <td class="p-3">
+                <div class="flex gap-1">
+                  <button onclick="viewTask('${t.id}')" class="px-2 py-1 text-xs bg-gray-700 hover:bg-gray-600 rounded">View</button>
+                  ${t.status === 'queued' || t.status === 'assigned' ?
+                    `<button onclick="executeTask('${t.id}')" class="px-2 py-1 text-xs bg-indigo-600 hover:bg-indigo-500 rounded">Run</button>` : ''}
+                </div>
+              </td>
+            </tr>
+          `;
+        }).join('');
+
+        document.getElementById('last-heartbeat').textContent = `Updated: ${new Date().toLocaleTimeString()}`;
+
+      } catch (e) {
+        console.error('Failed to load tasks:', e);
+      }
+    }
+
+    // Load pending approvals
+    async function loadPending() {
+      try {
+        const res = await fetch(`${API_URL}/api/tasks?status=review`);
+        const tasks = await res.json();
+
+        document.getElementById('pending-count').textContent = `(${tasks.length})`;
+
+        const container = document.getElementById('pending-approvals');
+        container.innerHTML = tasks.length === 0
+          ? '<p class="text-gray-500 text-sm text-center py-8">No pending reviews</p>'
+          : tasks.map(t => {
+              const meta = agentMeta[t.assigned_agent] || { emoji: '🤖' };
+              const preview = t.output?.content?.substring(0, 150) || t.output?.summary?.substring(0, 150) || '';
+
+              return `
+                <div class="glass rounded-xl p-4">
+                  <div class="flex items-center gap-2 mb-2">
+                    <span>${meta.emoji}</span>
+                    <span class="font-medium text-sm">${t.agent_name || t.assigned_agent}</span>
+                  </div>
+                  <p class="font-medium mb-1">${t.title}</p>
+                  <p class="text-xs text-gray-400 mb-3 line-clamp-2">${preview}...</p>
+                  <div class="flex gap-2">
+                    <button onclick="approveTask('${t.id}')" class="flex-1 px-3 py-2 text-xs bg-green-600 hover:bg-green-500 rounded-lg">
+                      Approve
+                    </button>
+                    <button onclick="rejectTask('${t.id}')" class="flex-1 px-3 py-2 text-xs bg-red-600 hover:bg-red-500 rounded-lg">
+                      Reject
+                    </button>
+                    <button onclick="viewTask('${t.id}')" class="px-3 py-2 text-xs bg-gray-700 hover:bg-gray-600 rounded-lg">
+                      View
+                    </button>
+                  </div>
+                </div>
+              `;
+            }).join('');
+
+      } catch (e) {
+        console.error('Failed to load pending:', e);
+      }
+    }
+
+    // Handle command
+    async function handleCommand(e) {
+      e.preventDefault();
+      const input = document.getElementById('command-input');
+      const message = input.value.trim();
+      if (!message) return;
+
+      input.value = '';
+      addActivity('user', message);
+
+      try {
+        const res = await fetch(`${API_URL}/api/dispatch`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message, source: 'dashboard' })
+        });
+        const result = await res.json();
+
+        const meta = agentMeta[result.agent] || { emoji: '🤖' };
+        addActivity(result.agent, `${meta.emoji} ${result.agentName} assigned: "${result.task.title}"`);
+
+        loadTasks();
+        loadPending();
+
+      } catch (e) {
+        addActivity('error', `Failed: ${e.message}`);
+      }
+    }
+
+    // Execute task
+    async function executeTask(taskId) {
+      addActivity('system', `Executing task ${taskId.substring(0, 8)}...`);
+      try {
+        const res = await fetch(`${API_URL}/api/tasks/${taskId}/execute`, { method: 'POST' });
+        const result = await res.json();
+
+        if (result.success) {
+          addActivity('agent', `Task completed (${result.needsReview ? 'needs review' : 'done'})`);
+        } else {
+          addActivity('error', `Task failed: ${result.error}`);
+        }
+
+        loadTasks();
+        loadPending();
+
+      } catch (e) {
+        addActivity('error', `Execute failed: ${e.message}`);
+      }
+    }
+
+    // View task
+    async function viewTask(taskId) {
+      try {
+        const res = await fetch(`${API_URL}/api/tasks/${taskId}`);
+        const task = await res.json();
+
+        document.getElementById('modal-title').textContent = task.title;
+        document.getElementById('modal-content').innerHTML = `
+<strong>Description:</strong>
+${task.description || '(none)'}
+
+<strong>Status:</strong> ${task.status}
+<strong>Priority:</strong> ${task.priority}
+<strong>Agent:</strong> ${task.assigned_agent}
+<strong>Created:</strong> ${new Date(task.created_at).toLocaleString()}
+
+${task.output ? `
+<strong>Output:</strong>
+${JSON.stringify(task.output, null, 2)}
+` : ''}
+
+${task.reasoning ? `
+<strong>Reasoning:</strong>
+${task.reasoning}
+` : ''}
+
+${task.error ? `
+<strong>Error:</strong>
+${task.error}
+` : ''}
+        `;
+
+        const actions = document.getElementById('modal-actions');
+        if (task.status === 'review') {
+          actions.innerHTML = `
+            <button onclick="approveTask('${task.id}'); closeModal();" class="px-4 py-2 bg-green-600 hover:bg-green-500 rounded-lg">Approve</button>
+            <button onclick="rejectTask('${task.id}'); closeModal();" class="px-4 py-2 bg-red-600 hover:bg-red-500 rounded-lg">Reject</button>
+            <button onclick="closeModal()" class="px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-lg">Close</button>
+          `;
+        } else {
+          actions.innerHTML = `<button onclick="closeModal()" class="px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-lg">Close</button>`;
+        }
+
+        document.getElementById('task-modal').classList.remove('hidden');
+
+      } catch (e) {
+        addActivity('error', `Failed to load task: ${e.message}`);
+      }
+    }
+
+    function closeModal() {
+      document.getElementById('task-modal').classList.add('hidden');
+    }
+
+    // Approve task
+    async function approveTask(taskId) {
+      try {
+        await fetch(`${API_URL}/api/tasks/${taskId}/approve`, { method: 'POST' });
+        addActivity('user', `Approved task ${taskId.substring(0, 8)}`);
+        loadTasks();
+        loadPending();
+      } catch (e) {
+        addActivity('error', `Approve failed: ${e.message}`);
+      }
+    }
+
+    // Reject task
+    async function rejectTask(taskId) {
+      try {
+        await fetch(`${API_URL}/api/tasks/${taskId}/reject`, { method: 'POST' });
+        addActivity('user', `Rejected task ${taskId.substring(0, 8)}`);
+        loadTasks();
+        loadPending();
+      } catch (e) {
+        addActivity('error', `Reject failed: ${e.message}`);
+      }
+    }
+
+    // ============================================
+    // PROPOSAL MANAGEMENT (with Human Verification)
+    // ============================================
+
+    // Load proposals
+    async function loadProposals() {
+      try {
+        const priorityFilter = document.getElementById('proposal-priority-filter')?.value || 'all';
+        const statusFilter = document.getElementById('proposal-status-filter')?.value || 'pending';
+
+        const res = await fetch(`${API_URL}/api/agents/proposals`);
+        const data = await res.json();
+
+        let proposals = data.proposals || [];
+
+        // Apply filters
+        if (priorityFilter !== 'all') {
+          proposals = proposals.filter(p => p.priority === priorityFilter);
+        }
+        if (statusFilter !== 'all') {
+          proposals = proposals.filter(p => p.status === statusFilter);
+        }
+
+        // Update count
+        document.getElementById('proposals-count').textContent = `(${data.count})`;
+
+        // Update sidebar cards
+        const sidebar = document.getElementById('agent-proposals');
+        const urgentProposals = (data.proposals || []).filter(p => p.priority === 'urgent' || p.priority === 'high').slice(0, 5);
+
+        sidebar.innerHTML = urgentProposals.length === 0
+          ? '<p class="text-gray-500 text-sm text-center py-8">No urgent proposals</p>'
+          : urgentProposals.map(p => {
+              const meta = agentMeta[p.agent_id] || { emoji: '🤖' };
+              const priorityColors = { urgent: 'bg-red-600', high: 'bg-orange-600', normal: 'bg-blue-600', low: 'bg-gray-600' };
+
+              return `
+                <div class="glass rounded-xl p-4">
+                  <div class="flex items-center justify-between mb-2">
+                    <span class="flex items-center gap-2">
+                      <span>${meta.emoji}</span>
+                      <span class="text-xs text-gray-400">${p.agent_id}</span>
+                    </span>
+                    <span class="px-2 py-0.5 text-xs rounded ${priorityColors[p.priority] || 'bg-gray-600'}">${p.priority}</span>
+                  </div>
+                  <p class="font-medium text-sm mb-2">${p.title}</p>
+                  <p class="text-xs text-gray-400 mb-3 line-clamp-2">${p.description || ''}</p>
+                  <div class="flex gap-2">
+                    <button onclick="generateDraft('${p.id}')" class="flex-1 px-3 py-2 text-xs bg-purple-600 hover:bg-purple-500 rounded-lg">
+                      Review & Draft
+                    </button>
+                    <button onclick="quickReject('${p.id}')" class="px-3 py-2 text-xs bg-gray-700 hover:bg-gray-600 rounded-lg">
+                      ✕
+                    </button>
+                  </div>
+                </div>
+              `;
+            }).join('');
+
+        // Update table
+        const priorityColors = { urgent: 'text-red-400', high: 'text-orange-400', normal: 'text-blue-400', low: 'text-gray-400' };
+        const statusColors = { pending: 'bg-yellow-600', draft_ready: 'bg-purple-600', approved: 'bg-green-600', completed: 'bg-gray-600', rejected: 'bg-red-600' };
+
+        const table = document.getElementById('proposals-table');
+        table.innerHTML = proposals.length === 0
+          ? '<tr><td colspan="6" class="p-8 text-center text-gray-500">No proposals match filters</td></tr>'
+          : proposals.map(p => {
+              const meta = agentMeta[p.agent_id] || { emoji: '🤖' };
+              const timeAgo = getTimeAgo(p.created_at);
+
+              return `
+                <tr class="hover:bg-gray-800/30">
+                  <td class="p-3">
+                    <input type="checkbox" class="proposal-checkbox" value="${p.id}">
+                  </td>
+                  <td class="p-3 ${priorityColors[p.priority] || ''} font-bold uppercase text-xs">${p.priority || 'normal'}</td>
+                  <td class="p-3">
+                    <p class="font-medium">${p.title}</p>
+                    <p class="text-xs text-gray-500 truncate max-w-md">${p.description || ''}</p>
+                  </td>
+                  <td class="p-3">
+                    <span class="flex items-center gap-1">
+                      <span>${meta.emoji}</span>
+                      <span class="text-xs">${p.agent_id}</span>
+                    </span>
+                  </td>
+                  <td class="p-3">
+                    <span class="px-2 py-1 text-xs rounded ${statusColors[p.status] || 'bg-gray-600'}">${p.status}</span>
+                  </td>
+                  <td class="p-3">
+                    <div class="flex gap-1">
+                      ${p.status === 'pending' ? `
+                        <button onclick="generateDraft('${p.id}')" class="px-2 py-1 text-xs bg-purple-600 hover:bg-purple-500 rounded" title="Generate draft for review">
+                          Draft
+                        </button>
+                      ` : ''}
+                      ${p.status === 'draft_ready' ? `
+                        <button onclick="viewDraft('${p.id}')" class="px-2 py-1 text-xs bg-green-600 hover:bg-green-500 rounded" title="View and send">
+                          Send
+                        </button>
+                      ` : ''}
+                      ${p.status === 'pending' || p.status === 'draft_ready' ? `
+                        <button onclick="quickReject('${p.id}')" class="px-2 py-1 text-xs bg-red-600 hover:bg-red-500 rounded" title="Reject">
+                          ✕
+                        </button>
+                      ` : ''}
+                    </div>
+                  </td>
+                </tr>
+              `;
+            }).join('');
+
+      } catch (e) {
+        console.error('Failed to load proposals:', e);
+      }
+    }
+
+    // Generate draft for proposal (opens modal for human review)
+    async function generateDraft(proposalId) {
+      addActivity('system', `Generating draft for proposal ${proposalId.substring(0, 8)}...`);
+
+      try {
+        const res = await fetch(`${API_URL}/api/proposals/${proposalId}/generate-draft`, { method: 'POST' });
+        const result = await res.json();
+
+        if (!result.success) {
+          throw new Error(result.error || 'Failed to generate draft');
+        }
+
+        currentProposalId = proposalId;
+        currentDraft = result.draft;
+
+        showDraftModal(result.draft);
+        addActivity('agent', `Draft generated - awaiting human review`);
+
+      } catch (e) {
+        addActivity('error', `Draft generation failed: ${e.message}`);
+      }
+    }
+
+    // View existing draft
+    async function viewDraft(proposalId) {
+      try {
+        const res = await fetch(`${API_URL}/api/proposals/${proposalId}`);
+        const proposal = await res.json();
+
+        currentProposalId = proposalId;
+        currentDraft = proposal.modified_action;
+
+        showDraftModal(proposal.modified_action);
+
+      } catch (e) {
+        addActivity('error', `Failed to load draft: ${e.message}`);
+      }
+    }
+
+    // Show draft modal
+    function showDraftModal(draft) {
+      const modal = document.getElementById('draft-modal');
+      const emailView = document.getElementById('draft-email-view');
+      const actionView = document.getElementById('draft-action-view');
+      const warning = document.getElementById('draft-warning');
+
+      document.getElementById('draft-proposal-id').textContent = `Proposal: ${currentProposalId?.substring(0, 8)}`;
+
+      if (draft.type === 'send_email' || draft.type === 'send_notification') {
+        // Email draft view
+        emailView.classList.remove('hidden');
+        actionView.classList.add('hidden');
+
+        document.getElementById('draft-to').value = `${draft.to_name || ''} <${draft.to || ''}>`;
+        document.getElementById('draft-subject').value = draft.subject || '';
+        document.getElementById('draft-body').value = draft.body || '';
+
+        document.getElementById('draft-type-badge').textContent = 'Email Draft';
+        document.getElementById('draft-confirm-btn').textContent = draft.can_send ? '✓ Confirm & Send' : '✓ Log Intent';
+
+        // Show warning if no email
+        if (!draft.can_send) {
+          warning.classList.remove('hidden');
+        } else {
+          warning.classList.add('hidden');
+        }
+
+      } else {
+        // Action summary view
+        emailView.classList.add('hidden');
+        actionView.classList.remove('hidden');
+        warning.classList.add('hidden');
+
+        document.getElementById('draft-action-summary').textContent = draft.action_summary || draft.type;
+        document.getElementById('draft-action-details').textContent = JSON.stringify(draft.proposed_changes || {}, null, 2);
+
+        document.getElementById('draft-type-badge').textContent = draft.type;
+        document.getElementById('draft-confirm-btn').textContent = '✓ Confirm Action';
+      }
+
+      modal.classList.remove('hidden');
+    }
+
+    // Close draft modal
+    function closeDraftModal() {
+      document.getElementById('draft-modal').classList.add('hidden');
+      currentProposalId = null;
+      currentDraft = null;
+    }
+
+    // Confirm and send (human verified)
+    async function confirmAndSend() {
+      if (!currentProposalId) return;
+
+      const modifiedSubject = document.getElementById('draft-subject').value;
+      const modifiedBody = document.getElementById('draft-body').value;
+
+      addActivity('user', `Confirming send for proposal ${currentProposalId.substring(0, 8)}...`);
+
+      try {
+        const res = await fetch(`${API_URL}/api/proposals/${currentProposalId}/confirm-send`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ modified_subject: modifiedSubject, modified_body: modifiedBody })
+        });
+        const result = await res.json();
+
+        if (result.success) {
+          addActivity('user', `✓ Action confirmed and logged`);
+          closeDraftModal();
+          loadProposals();
+        } else {
+          throw new Error(result.error || 'Confirm failed');
+        }
+
+      } catch (e) {
+        addActivity('error', `Confirm failed: ${e.message}`);
+      }
+    }
+
+    // Reject current proposal from modal
+    async function rejectCurrentProposal() {
+      if (!currentProposalId) return;
+      await quickReject(currentProposalId);
+      closeDraftModal();
+    }
+
+    // Quick reject
+    async function quickReject(proposalId) {
+      try {
+        await fetch(`${API_URL}/api/proposals/${proposalId}/reject`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ reason: 'Rejected via dashboard' })
+        });
+        addActivity('user', `Rejected proposal ${proposalId.substring(0, 8)}`);
+        loadProposals();
+      } catch (e) {
+        addActivity('error', `Reject failed: ${e.message}`);
+      }
+    }
+
+    // Batch approve selected proposals
+    async function batchApproveSelected() {
+      const checkboxes = document.querySelectorAll('.proposal-checkbox:checked');
+      const ids = Array.from(checkboxes).map(cb => cb.value);
+
+      if (ids.length === 0) {
+        addActivity('system', 'No proposals selected');
+        return;
+      }
+
+      addActivity('user', `Batch approving ${ids.length} proposals...`);
+
+      try {
+        const res = await fetch(`${API_URL}/api/proposals/batch-approve`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ ids, notes: 'Batch approved via dashboard' })
+        });
+        const result = await res.json();
+
+        if (result.success) {
+          addActivity('user', `✓ Approved ${result.approved} proposals`);
+          loadProposals();
+        } else {
+          throw new Error(result.error);
+        }
+
+      } catch (e) {
+        addActivity('error', `Batch approve failed: ${e.message}`);
+      }
+    }
+
+    // Toggle all proposal checkboxes
+    function toggleAllProposals(checkbox) {
+      document.querySelectorAll('.proposal-checkbox').forEach(cb => {
+        cb.checked = checkbox.checked;
+      });
+    }
+
+    // Trigger heartbeat
+    async function triggerHeartbeat() {
+      addActivity('system', 'Triggering heartbeat...');
+      try {
+        const res = await fetch(`${API_URL}/api/heartbeat`, { method: 'POST' });
+        const result = await res.json();
+        addActivity('system', `Heartbeat complete: ${result.approved || 0} approved, ${result.queued || 0} queued, ${result.stale || 0} stale`);
+        loadTasks();
+        loadPending();
+      } catch (e) {
+        addActivity('error', `Heartbeat failed: ${e.message}`);
+      }
+    }
+
+    // Show agent detail
+    function showAgentDetail(agentId) {
+      document.getElementById('agent-filter').value = agentId;
+      loadTasks();
+    }
+
+    // Add activity to feed
+    function addActivity(type, message) {
+      const feed = document.getElementById('activity-feed');
+      const colors = {
+        system: 'text-gray-400',
+        user: 'text-indigo-400',
+        agent: 'text-purple-400',
+        error: 'text-red-400'
+      };
+
+      const item = document.createElement('div');
+      item.className = 'flex gap-3 text-sm';
+      item.innerHTML = `
+        <span class="text-gray-600 mono text-xs">${new Date().toLocaleTimeString()}</span>
+        <span class="${colors[type] || 'text-gray-300'}">${message}</span>
+      `;
+
+      feed.insertBefore(item, feed.firstChild);
+
+      // Keep only last 50 items
+      while (feed.children.length > 50) {
+        feed.removeChild(feed.lastChild);
+      }
+    }
+
+    function clearActivity() {
+      document.getElementById('activity-feed').innerHTML = '';
+      addActivity('system', 'Activity cleared');
+    }
+
+    // Utility
+    function getTimeAgo(dateStr) {
+      const date = new Date(dateStr);
+      const now = new Date();
+      const diff = Math.floor((now - date) / 1000);
+
+      if (diff < 60) return `${diff}s ago`;
+      if (diff < 3600) return `${Math.floor(diff / 60)}m ago`;
+      if (diff < 86400) return `${Math.floor(diff / 3600)}h ago`;
+      return `${Math.floor(diff / 86400)}d ago`;
+    }
+  </script>
+</body>
+</html>

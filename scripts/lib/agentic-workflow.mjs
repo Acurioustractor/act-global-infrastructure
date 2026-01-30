@@ -31,6 +31,9 @@
 
 import { createClient } from '@supabase/supabase-js';
 import '../../lib/load-env.mjs';
+import { KnowledgeGraph } from './knowledge-graph.mjs';
+import { ProceduralMemory } from './procedural-memory.mjs';
+import { WorkingMemory } from './working-memory.mjs';
 
 const supabaseUrl = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
@@ -45,6 +48,8 @@ export class AgenticWorkflow {
     this.agentId = agentId;
     this.version = options.version || '1.0.0';
     this.verbose = options.verbose || false;
+    this.knowledgeGraph = new KnowledgeGraph({ verbose: this.verbose });
+    this.workingMemory = new WorkingMemory({ verbose: this.verbose });
   }
 
   /**
@@ -202,6 +207,22 @@ export class AgenticWorkflow {
       })
       .eq('id', proposalId);
 
+    // Auto-link decision traces created during execution (Phase 2: Knowledge Graph)
+    if (success) {
+      try {
+        const { data: traces } = await supabase
+          .from('decision_traces')
+          .select('id')
+          .gte('created_at', new Date(start).toISOString())
+          .limit(10);
+        for (const trace of (traces || [])) {
+          await this.knowledgeGraph.autoLinkDecision(trace.id).catch(() => {});
+        }
+      } catch (err) {
+        // Non-critical — don't fail execution on graph linking errors
+      }
+    }
+
     if (this.verbose) {
       console.log(`${success ? '✅' : '❌'} Proposal ${proposalId} execution ${success ? 'completed' : 'failed'}`);
       console.log(`   Duration: ${duration}ms`);
@@ -296,6 +317,82 @@ export class AgenticWorkflow {
   }
 
   /**
+   * Consult learnings before executing an action.
+   *
+   * Checks mistake patterns, calibration adjustments, and procedural memory
+   * correction rules to adjust confidence and surface warnings.
+   *
+   * @param {string} action - The action name about to be executed
+   * @param {object} params - Parameters for the action
+   * @param {number} confidence - The agent's current confidence (0-1)
+   * @returns {Promise<{confidence: number, warnings: string[], blocked: boolean}>}
+   */
+  async consultLearnings(action, params, confidence) {
+    const adjustments = { confidence, warnings: [], blocked: false };
+
+    try {
+      // 1. Check agent_mistake_patterns for active patterns matching this agent+action
+      const { data: mistakes, error: mistakeErr } = await supabase
+        .from('agent_mistake_patterns')
+        .select('*')
+        .eq('agent_id', this.agentId)
+        .eq('action_name', action)
+        .eq('status', 'active')
+        .gte('expires_at', new Date().toISOString());
+
+      if (!mistakeErr && mistakes && mistakes.length > 0) {
+        adjustments.confidence = Math.max(0.3, adjustments.confidence - 0.15);
+        adjustments.warnings.push(
+          ...mistakes.map(m => `Mistake pattern: ${m.pattern_description || m.pattern_type || 'known issue'}`)
+        );
+      }
+
+      // 2. Check agent_confidence_calibration for latest adjustment
+      const { data: calibrations, error: calErr } = await supabase
+        .from('agent_confidence_calibration')
+        .select('*')
+        .eq('agent_id', this.agentId)
+        .order('created_at', { ascending: false })
+        .limit(1);
+
+      if (!calErr && calibrations && calibrations.length > 0) {
+        const cal = calibrations[0];
+        const adjustment = parseFloat(cal.adjustment || 0);
+        if (Math.abs(adjustment) > 0.05) {
+          adjustments.confidence = Math.max(0.3, adjustments.confidence + adjustment);
+          adjustments.warnings.push(
+            `Calibration adjustment: ${adjustment > 0 ? '+' : ''}${adjustment.toFixed(2)}`
+          );
+        }
+      }
+
+      // 3. Check procedural memory for correction rules
+      const pm = new ProceduralMemory({ verbose: this.verbose });
+      const procedures = await pm.findApplicableProcedures(
+        { trigger: action, agentId: this.agentId, confidence: adjustments.confidence },
+        this.agentId
+      );
+
+      if (procedures && procedures.length > 0) {
+        for (const proc of procedures) {
+          if (proc.postconditions?.correction_rule) {
+            adjustments.warnings.push(
+              `Correction rule from procedure "${proc.procedure_name}": ${proc.postconditions.correction_rule}`
+            );
+          }
+        }
+      }
+    } catch (err) {
+      // Non-fatal: proceed without learning consultation on failure
+      if (this.verbose) {
+        console.log(`Learning consultation skipped: ${err.message}`);
+      }
+    }
+
+    return adjustments;
+  }
+
+  /**
    * Smart execute - chooses propose() or executeAutonomous() based on action level
    */
   async execute(task) {
@@ -304,6 +401,42 @@ export class AgenticWorkflow {
     if (!actionDetails) {
       throw new Error(`Unknown action: ${task.action}`);
     }
+
+    // Initialize working memory for this execution session (Phase 3)
+    const sessionId = `${this.agentId}-${Date.now()}`;
+    try {
+      await this.workingMemory.initSession(this.agentId, sessionId, {
+        action: task.action,
+        params: task.params,
+        startedAt: new Date().toISOString()
+      });
+    } catch (err) {
+      // Non-critical — continue without working memory
+    }
+
+    // Load relevant historical context via hybrid search (Phase 4)
+    try {
+      const context = await this.loadContext(task.action, task.params);
+      if (context.length > 0) {
+        await this.workingMemory.updateContext(this.agentId, sessionId, {
+          historicalContext: context.map(c => ({
+            content: c.content?.slice(0, 200),
+            score: c.combined_score,
+            source: c.source_type,
+          })),
+        }).catch(() => {});
+      }
+    } catch (err) {
+      // Non-critical — proceed without historical context
+    }
+
+    // Consult learnings before routing (Phase 6: Learning Integration)
+    const taskConfidence = task.reasoning?.confidence || 0.8;
+    const learnings = await this.consultLearnings(task.action, task.params, taskConfidence);
+    if (!task.reasoning) task.reasoning = {};
+    task.reasoning.original_confidence = taskConfidence;
+    task.reasoning.confidence = learnings.confidence;
+    task.reasoning.learning_warnings = learnings.warnings;
 
     // Check bounds first
     const boundsCheck = await this.checkBounds(task.action, task.params);
@@ -375,6 +508,48 @@ export class AgenticWorkflow {
       title: task.title,
       params: task.params
     };
+  }
+
+  /**
+   * Load relevant context for an action using hybrid memory search (Phase 4)
+   *
+   * Combines vector similarity, knowledge graph, and decay scoring to find
+   * the most relevant prior knowledge for an agent's current task.
+   */
+  async loadContext(action, params, options = {}) {
+    const limit = options.limit || 10;
+    const query = `${action} ${params?.query || ''} ${params?.type || ''}`.trim();
+
+    try {
+      // Generate embedding for the query
+      const { trackedBatchEmbedding: embed } = await import('./llm-client.mjs');
+      const [embedding] = await embed([query], 'agentic-workflow');
+
+      // Use hybrid memory search — combines vector + graph + decay
+      const { data, error } = await supabase.rpc('hybrid_memory_search', {
+        query_embedding: embedding,
+        match_count: limit,
+        vector_weight: options.vectorWeight || 0.6,
+        freshness_weight: options.freshnessWeight || 0.2,
+        graph_weight: options.graphWeight || 0.2,
+        min_score: options.minScore || 0.3,
+      });
+
+      if (error) {
+        if (this.verbose) console.log(`Hybrid search unavailable: ${error.message}`);
+        return [];
+      }
+
+      if (this.verbose && data?.length > 0) {
+        console.log(`📚 Loaded ${data.length} context items via hybrid search`);
+      }
+
+      return data || [];
+    } catch (err) {
+      // Non-critical — agent can proceed without historical context
+      if (this.verbose) console.log(`Context loading skipped: ${err.message}`);
+      return [];
+    }
   }
 
   // ─────────────────────────────────────────────────────────────────────

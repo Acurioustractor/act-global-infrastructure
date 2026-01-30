@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ACT Intelligence Center</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>">
+  <style>
+    :root {
+      --bg-primary: #0a0a0f;
+      --bg-secondary: #12121a;
+      --bg-card: #1a1a24;
+      --border: #2a2a3a;
+      --text-primary: #e4e4e7;
+      --text-secondary: #a1a1aa;
+      --text-muted: #71717a;
+      --accent: #6366f1;
+      --accent-glow: rgba(99, 102, 241, 0.3);
+      --success: #22c55e;
+      --warning: #f59e0b;
+      --error: #ef4444;
+      --info: #3b82f6;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      min-height: 100vh;
+      line-height: 1.5;
+    }
+
+    .container {
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    /* Navigation */
+    .nav {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    .nav a {
+      padding: 8px 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.875rem;
+      transition: all 0.2s ease;
+    }
+
+    .nav a:hover {
+      border-color: var(--accent);
+      color: var(--text-primary);
+    }
+
+    .nav a.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: white;
+    }
+
+    /* Header */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 24px;
+    }
+
+    .header h1 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .header h1::before {
+      content: '';
+      width: 10px;
+      height: 10px;
+      background: var(--success);
+      border-radius: 50%;
+      box-shadow: 0 0 15px var(--success);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    .health-badge {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 12px 24px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+    }
+
+    .health-score {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .health-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    /* Main Grid */
+    .main-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    @media (max-width: 1200px) {
+      .main-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Panel */
+    .panel {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .panel.full-width {
+      grid-column: 1 / -1;
+    }
+
+    .panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg-secondary);
+    }
+
+    .panel-title {
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .panel-title-icon {
+      font-size: 1rem;
+    }
+
+    .panel-count {
+      font-size: 0.75rem;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .panel-body {
+      padding: 16px 18px;
+    }
+
+    /* Stats Row */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .stat-item {
+      text-align: center;
+      padding: 12px;
+      background: var(--bg-secondary);
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+
+    .stat-value {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .stat-label {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-top: 4px;
+    }
+
+    .stat-value.accent { color: var(--accent); }
+    .stat-value.success { color: var(--success); }
+    .stat-value.warning { color: var(--warning); }
+    .stat-value.error { color: var(--error); }
+
+    /* Agent Cards */
+    .agent-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 10px;
+    }
+
+    .agent-card {
+      padding: 12px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .agent-card:hover {
+      border-color: var(--accent);
+    }
+
+    .agent-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .agent-name {
+      font-weight: 600;
+      font-size: 0.85rem;
+    }
+
+    .agent-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.65rem;
+      padding: 2px 6px;
+      border-radius: 4px;
+      text-transform: uppercase;
+    }
+
+    .agent-status.active {
+      background: rgba(34, 197, 94, 0.15);
+      color: var(--success);
+    }
+
+    .agent-status.idle {
+      background: rgba(113, 113, 122, 0.15);
+      color: var(--text-muted);
+    }
+
+    .agent-status::before {
+      content: '';
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+
+    .agent-level {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+    }
+
+    .agent-level span {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    /* Activity Feed */
+    .activity-feed {
+      max-height: 300px;
+      overflow-y: auto;
+    }
+
+    .activity-item {
+      display: grid;
+      grid-template-columns: 50px 90px 1fr 60px;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.85rem;
+    }
+
+    .activity-item:last-child {
+      border-bottom: none;
+    }
+
+    .activity-time {
+      color: var(--text-muted);
+      font-size: 0.75rem;
+    }
+
+    .activity-agent {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .activity-action {
+      color: var(--text-secondary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .activity-status {
+      text-align: right;
+      font-size: 0.8rem;
+    }
+
+    .activity-status.success { color: var(--success); }
+    .activity-status.failed { color: var(--error); }
+
+    /* Relationship Bars */
+    .relationship-bars {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .rel-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .rel-label {
+      width: 80px;
+      font-size: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .rel-bar {
+      flex: 1;
+      height: 24px;
+      background: var(--bg-primary);
+      border-radius: 4px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .rel-bar-fill {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding-right: 8px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: white;
+      transition: width 0.5s ease;
+    }
+
+    .rel-bar-fill.hot { background: var(--error); }
+    .rel-bar-fill.warm { background: var(--warning); }
+    .rel-bar-fill.cool { background: var(--info); }
+
+    .rel-count {
+      width: 50px;
+      text-align: right;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    /* Communications Grid */
+    .comms-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      gap: 10px;
+    }
+
+    .comms-item {
+      text-align: center;
+      padding: 16px 12px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+
+    .comms-icon {
+      font-size: 1.5rem;
+      margin-bottom: 8px;
+    }
+
+    .comms-count {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .comms-label {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    /* Knowledge Stats */
+    .knowledge-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    @media (max-width: 600px) {
+      .knowledge-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .knowledge-item {
+      text-align: center;
+      padding: 16px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+
+    .knowledge-icon {
+      font-size: 1.25rem;
+      margin-bottom: 6px;
+    }
+
+    .knowledge-value {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .knowledge-label {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    /* Pending Approvals */
+    .approval-card {
+      padding: 14px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin-bottom: 10px;
+      transition: all 0.2s ease;
+    }
+
+    .approval-card:hover {
+      border-color: var(--accent);
+    }
+
+    .approval-card.urgent {
+      border-left: 3px solid var(--error);
+    }
+
+    .approval-card.high {
+      border-left: 3px solid var(--warning);
+    }
+
+    .approval-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 8px;
+    }
+
+    .approval-title {
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .approval-priority {
+      font-size: 0.65rem;
+      padding: 2px 8px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .approval-priority.urgent {
+      background: rgba(239, 68, 68, 0.2);
+      color: var(--error);
+    }
+
+    .approval-priority.high {
+      background: rgba(245, 158, 11, 0.2);
+      color: var(--warning);
+    }
+
+    .approval-priority.normal {
+      background: rgba(99, 102, 241, 0.2);
+      color: var(--accent);
+    }
+
+    .approval-meta {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+
+    .approval-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .btn {
+      padding: 6px 14px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 0.8rem;
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+
+    .btn-approve {
+      background: var(--success);
+      color: white;
+    }
+
+    .btn-approve:hover {
+      background: #16a34a;
+    }
+
+    .btn-reject {
+      background: transparent;
+      border: 1px solid var(--error);
+      color: var(--error);
+    }
+
+    .btn-reject:hover {
+      background: rgba(239, 68, 68, 0.1);
+    }
+
+    /* Empty State */
+    .empty-state {
+      text-align: center;
+      padding: 30px;
+      color: var(--text-muted);
+    }
+
+    .empty-icon {
+      font-size: 2rem;
+      margin-bottom: 8px;
+    }
+
+    /* Loading */
+    .loading {
+      text-align: center;
+      padding: 30px;
+      color: var(--text-muted);
+    }
+
+    .loading::after {
+      content: '';
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border: 2px solid var(--border);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--bg-secondary);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 3px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--text-muted);
+    }
+
+    /* Refresh indicator */
+    .refresh-indicator {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .refresh-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--success);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Navigation -->
+    <nav class="nav">
+      <a href="intelligence.html" class="active">Intelligence Center</a>
+      <a href="infrastructure.html">Infrastructure</a>
+      <a href="index.html">Command Center</a>
+      <a href="command-center.html">Agent Orchestration</a>
+      <a href="projects.html">Projects</a>
+    </nav>
+
+    <!-- Header -->
+    <header class="header">
+      <h1>ACT Intelligence Center</h1>
+      <div class="health-badge">
+        <div>
+          <div class="health-label">System Health</div>
+          <div class="health-score" id="health-score">--%</div>
+        </div>
+        <div class="refresh-indicator">
+          <span class="refresh-dot"></span>
+          <span id="last-refresh">--</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Grid -->
+    <div class="main-grid">
+      <!-- Agentic Layer -->
+      <div class="panel">
+        <div class="panel-header">
+          <span class="panel-title"><span class="panel-title-icon">🤖</span> Agentic Layer</span>
+          <span class="panel-count" id="agent-count">-- agents</span>
+        </div>
+        <div class="panel-body">
+          <div class="stats-row">
+            <div class="stat-item">
+              <div class="stat-value accent" id="active-agents">--</div>
+              <div class="stat-label">Active</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value warning" id="pending-approvals">--</div>
+              <div class="stat-label">Pending</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value success" id="executions-today">--</div>
+              <div class="stat-label">Executed</div>
+            </div>
+          </div>
+          <div class="agent-grid" id="agent-grid">
+            <div class="loading">Loading agents</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Knowledge Layer -->
+      <div class="panel">
+        <div class="panel-header">
+          <span class="panel-title"><span class="panel-title-icon">📚</span> Knowledge Layer</span>
+          <span class="panel-count" id="knowledge-count">-- items</span>
+        </div>
+        <div class="panel-body">
+          <div class="knowledge-grid" id="knowledge-grid">
+            <div class="knowledge-item">
+              <div class="knowledge-icon">🧩</div>
+              <div class="knowledge-value" id="knowledge-chunks">--</div>
+              <div class="knowledge-label">Chunks</div>
+            </div>
+            <div class="knowledge-item">
+              <div class="knowledge-icon">👥</div>
+              <div class="knowledge-value" id="knowledge-entities">--</div>
+              <div class="knowledge-label">Entities</div>
+            </div>
+            <div class="knowledge-item">
+              <div class="knowledge-icon">📖</div>
+              <div class="knowledge-value" id="knowledge-stories">--</div>
+              <div class="knowledge-label">Stories</div>
+            </div>
+            <div class="knowledge-item">
+              <div class="knowledge-icon">❓</div>
+              <div class="knowledge-value" id="knowledge-qa">--</div>
+              <div class="knowledge-label">QA Pairs</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Communications -->
+      <div class="panel">
+        <div class="panel-header">
+          <span class="panel-title"><span class="panel-title-icon">💬</span> Communications (Today)</span>
+          <span class="panel-count" id="comms-count">-- total</span>
+        </div>
+        <div class="panel-body">
+          <div class="comms-grid" id="comms-grid">
+            <div class="comms-item">
+              <div class="comms-icon">📧</div>
+              <div class="comms-count" id="comms-email">--</div>
+              <div class="comms-label">Email</div>
+            </div>
+            <div class="comms-item">
+              <div class="comms-icon">🔒</div>
+              <div class="comms-count" id="comms-signal">--</div>
+              <div class="comms-label">Signal</div>
+            </div>
+            <div class="comms-item">
+              <div class="comms-icon">🎮</div>
+              <div class="comms-count" id="comms-discord">--</div>
+              <div class="comms-label">Discord</div>
+            </div>
+            <div class="comms-item">
+              <div class="comms-icon">📱</div>
+              <div class="comms-count" id="comms-whatsapp">--</div>
+              <div class="comms-label">WhatsApp</div>
+            </div>
+            <div class="comms-item">
+              <div class="comms-icon">🎤</div>
+              <div class="comms-count" id="comms-voice">--</div>
+              <div class="comms-label">Voice</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Relationships -->
+      <div class="panel">
+        <div class="panel-header">
+          <span class="panel-title"><span class="panel-title-icon">❤️</span> Relationship Health</span>
+          <span class="panel-count" id="rel-count">-- contacts</span>
+        </div>
+        <div class="panel-body">
+          <div class="relationship-bars" id="rel-bars">
+            <div class="rel-row">
+              <span class="rel-label">🔥 Hot</span>
+              <div class="rel-bar">
+                <div class="rel-bar-fill hot" id="rel-hot-bar" style="width: 0%"></div>
+              </div>
+              <span class="rel-count" id="rel-hot">--</span>
+            </div>
+            <div class="rel-row">
+              <span class="rel-label">😊 Warm</span>
+              <div class="rel-bar">
+                <div class="rel-bar-fill warm" id="rel-warm-bar" style="width: 0%"></div>
+              </div>
+              <span class="rel-count" id="rel-warm">--</span>
+            </div>
+            <div class="rel-row">
+              <span class="rel-label">❄️ Cool</span>
+              <div class="rel-bar">
+                <div class="rel-bar-fill cool" id="rel-cool-bar" style="width: 0%"></div>
+              </div>
+              <span class="rel-count" id="rel-cool">--</span>
+            </div>
+          </div>
+          <div style="margin-top: 16px; display: flex; gap: 20px; font-size: 0.8rem;">
+            <div>
+              <span style="color: var(--warning);">⚠️</span>
+              <span id="rel-attention">--</span> needs attention
+            </div>
+            <div>
+              <span style="color: var(--error);">📅</span>
+              <span id="rel-overdue">--</span> overdue
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pending Approvals -->
+      <div class="panel full-width">
+        <div class="panel-header">
+          <span class="panel-title"><span class="panel-title-icon">⏳</span> Pending Approvals</span>
+          <span class="panel-count" id="approval-count">-- pending</span>
+        </div>
+        <div class="panel-body" style="max-height: 300px; overflow-y: auto;" id="approval-list">
+          <div class="loading">Loading approvals</div>
+        </div>
+      </div>
+
+      <!-- Recent Agent Activity -->
+      <div class="panel full-width">
+        <div class="panel-header">
+          <span class="panel-title"><span class="panel-title-icon">📋</span> Recent Agent Activity</span>
+          <span class="panel-count" id="activity-count">-- actions (24h)</span>
+        </div>
+        <div class="panel-body">
+          <div class="activity-feed" id="activity-feed">
+            <div class="loading">Loading activity</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    const API_URL = 'http://localhost:3456';
+
+    // Supabase for direct queries (approvals)
+    const SUPABASE_URL = 'https://tednluwflfhxyucgwigh.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRlZG5sdXdmbGZoeHl1Y2d3aWdoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTIzNDYyMjksImV4cCI6MjA2NzkyMjIyOX0.PG0iGZQR2d8yo4y3q1e2tEIMa3J0AdFkI1Q6P7IDgrg';
+    const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    // Format time
+    function formatTime(date) {
+      const now = new Date();
+      const diff = now - new Date(date);
+
+      if (diff < 60000) return 'now';
+      if (diff < 3600000) return `${Math.floor(diff / 60000)}m`;
+      if (diff < 86400000) return `${Math.floor(diff / 3600000)}h`;
+      return new Date(date).toLocaleDateString();
+    }
+
+    // Load health score
+    async function loadHealth() {
+      try {
+        const res = await fetch(`${API_URL}/api/infrastructure/health`);
+        const data = await res.json();
+        document.getElementById('health-score').textContent = `${data.percentage}%`;
+      } catch (e) {
+        document.getElementById('health-score').textContent = '--';
+      }
+    }
+
+    // Load agents
+    async function loadAgents() {
+      const grid = document.getElementById('agent-grid');
+      try {
+        const res = await fetch(`${API_URL}/api/agents/active`);
+        const agents = await res.json();
+
+        let activeCount = 0;
+        let html = '';
+
+        agents.forEach(agent => {
+          if (agent.status === 'active') activeCount++;
+          const levelClass = agent.autonomy_level === 3 ? 'L3' : agent.autonomy_level === 2 ? 'L2' : 'L1';
+
+          html += `
+            <div class="agent-card">
+              <div class="agent-header">
+                <span class="agent-name">${agent.name || agent.id}</span>
+                <span class="agent-status ${agent.status}">${agent.status}</span>
+              </div>
+              <div class="agent-level">Level: <span>${levelClass}</span> (${agent.autonomy_label || 'Manual'})</div>
+            </div>
+          `;
+        });
+
+        grid.innerHTML = html || '<div class="empty-state"><div class="empty-icon">🤖</div>No agents configured</div>';
+        document.getElementById('agent-count').textContent = `${agents.length} agents`;
+        document.getElementById('active-agents').textContent = activeCount;
+      } catch (e) {
+        grid.innerHTML = `<div style="color: var(--error);">Error: ${e.message}</div>`;
+      }
+    }
+
+    // Load proposals
+    async function loadProposals() {
+      const container = document.getElementById('approval-list');
+      try {
+        const res = await fetch(`${API_URL}/api/agents/proposals`);
+        const data = await res.json();
+
+        document.getElementById('pending-approvals').textContent = data.count;
+        document.getElementById('approval-count').textContent = `${data.count} pending`;
+
+        if (!data.proposals || data.proposals.length === 0) {
+          container.innerHTML = `
+            <div class="empty-state">
+              <div class="empty-icon">✅</div>
+              <div>No pending approvals</div>
+            </div>
+          `;
+          return;
+        }
+
+        let html = '';
+        data.proposals.forEach(p => {
+          const priorityClass = p.priority || 'normal';
+          html += `
+            <div class="approval-card ${priorityClass}" data-id="${p.id}">
+              <div class="approval-header">
+                <span class="approval-title">${p.title}</span>
+                <span class="approval-priority ${priorityClass}">${priorityClass}</span>
+              </div>
+              <div class="approval-meta">
+                Agent: <strong>${p.agent_id}</strong> ·
+                ${p.reasoning?.trigger || 'manual'}
+              </div>
+              <div class="approval-actions">
+                <button class="btn btn-approve" onclick="approveProposal('${p.id}')">Approve</button>
+                <button class="btn btn-reject" onclick="rejectProposal('${p.id}')">Reject</button>
+              </div>
+            </div>
+          `;
+        });
+
+        container.innerHTML = html;
+      } catch (e) {
+        container.innerHTML = `<div style="color: var(--error);">Error: ${e.message}</div>`;
+      }
+    }
+
+    // Approve proposal
+    async function approveProposal(id) {
+      try {
+        const { error } = await db
+          .from('agent_proposals')
+          .update({
+            status: 'approved',
+            reviewed_by: 'dashboard',
+            reviewed_at: new Date().toISOString()
+          })
+          .eq('id', id);
+
+        if (error) throw error;
+        loadProposals();
+      } catch (e) {
+        alert('Failed: ' + e.message);
+      }
+    }
+
+    // Reject proposal
+    async function rejectProposal(id) {
+      try {
+        const { error } = await db
+          .from('agent_proposals')
+          .update({
+            status: 'rejected',
+            reviewed_by: 'dashboard',
+            reviewed_at: new Date().toISOString()
+          })
+          .eq('id', id);
+
+        if (error) throw error;
+        loadProposals();
+      } catch (e) {
+        alert('Failed: ' + e.message);
+      }
+    }
+
+    // Load activity
+    async function loadActivity() {
+      const feed = document.getElementById('activity-feed');
+      try {
+        const res = await fetch(`${API_URL}/api/agents/activity`);
+        const data = await res.json();
+
+        document.getElementById('activity-count').textContent = `${data.count} actions (24h)`;
+        document.getElementById('executions-today').textContent = data.count;
+
+        if (!data.activity || data.activity.length === 0) {
+          feed.innerHTML = `
+            <div class="empty-state">
+              <div class="empty-icon">📋</div>
+              <div>No recent activity</div>
+            </div>
+          `;
+          return;
+        }
+
+        let html = '';
+        data.activity.forEach(a => {
+          const statusClass = a.success ? 'success' : 'failed';
+          const statusIcon = a.success ? '✓' : '✗';
+
+          html += `
+            <div class="activity-item">
+              <span class="activity-time">${formatTime(a.timestamp)}</span>
+              <span class="activity-agent">${a.agent_id}</span>
+              <span class="activity-action">${a.action} on ${a.target_table || 'system'}</span>
+              <span class="activity-status ${statusClass}">${statusIcon}</span>
+            </div>
+          `;
+        });
+
+        feed.innerHTML = html;
+      } catch (e) {
+        feed.innerHTML = `<div style="color: var(--error);">Error: ${e.message}</div>`;
+      }
+    }
+
+    // Load communications
+    async function loadCommunications() {
+      try {
+        const res = await fetch(`${API_URL}/api/communications/recent`);
+        const data = await res.json();
+
+        document.getElementById('comms-count').textContent = `${data.today} total`;
+        document.getElementById('comms-email').textContent = data.byChannel?.email || 0;
+        document.getElementById('comms-signal').textContent = data.byChannel?.signal || 0;
+        document.getElementById('comms-discord').textContent = data.byChannel?.discord || 0;
+        document.getElementById('comms-whatsapp').textContent = data.byChannel?.whatsapp || 0;
+        document.getElementById('comms-voice').textContent = data.voiceNotes || 0;
+      } catch (e) {
+        console.error('Communications error:', e);
+      }
+    }
+
+    // Load knowledge stats
+    async function loadKnowledge() {
+      try {
+        const res = await fetch(`${API_URL}/api/knowledge/stats`);
+        const data = await res.json();
+
+        const total = (data.knowledgeChunks || 0) + (data.entities || 0) + (data.stories || 0) + (data.qaPairs || 0);
+        document.getElementById('knowledge-count').textContent = `${total.toLocaleString()} items`;
+
+        document.getElementById('knowledge-chunks').textContent = (data.knowledgeChunks || 0).toLocaleString();
+        document.getElementById('knowledge-entities').textContent = (data.entities || 0).toLocaleString();
+        document.getElementById('knowledge-stories').textContent = data.stories || 0;
+        document.getElementById('knowledge-qa').textContent = data.qaPairs || 0;
+      } catch (e) {
+        console.error('Knowledge error:', e);
+      }
+    }
+
+    // Load relationships
+    async function loadRelationships() {
+      try {
+        const res = await fetch(`${API_URL}/api/relationships/health`);
+        const data = await res.json();
+
+        document.getElementById('rel-count').textContent = `${data.total} contacts`;
+        document.getElementById('rel-hot').textContent = data.hot;
+        document.getElementById('rel-warm').textContent = data.warm;
+        document.getElementById('rel-cool').textContent = data.cool;
+        document.getElementById('rel-attention').textContent = data.needsAttention;
+        document.getElementById('rel-overdue').textContent = data.overdue;
+
+        // Calculate bar widths
+        const total = data.hot + data.warm + data.cool;
+        if (total > 0) {
+          document.getElementById('rel-hot-bar').style.width = `${(data.hot / total) * 100}%`;
+          document.getElementById('rel-warm-bar').style.width = `${(data.warm / total) * 100}%`;
+          document.getElementById('rel-cool-bar').style.width = `${(data.cool / total) * 100}%`;
+        }
+      } catch (e) {
+        console.error('Relationships error:', e);
+      }
+    }
+
+    // Update refresh indicator
+    function updateRefreshTime() {
+      document.getElementById('last-refresh').textContent = `Updated ${new Date().toLocaleTimeString()}`;
+    }
+
+    // Initialize
+    async function init() {
+      await Promise.all([
+        loadHealth(),
+        loadAgents(),
+        loadProposals(),
+        loadActivity(),
+        loadCommunications(),
+        loadKnowledge(),
+        loadRelationships()
+      ]);
+
+      updateRefreshTime();
+
+      // Auto-refresh every 30 seconds
+      setInterval(() => {
+        loadHealth();
+        loadAgents();
+        loadProposals();
+        loadActivity();
+        loadCommunications();
+        loadRelationships();
+        updateRefreshTime();
+      }, 30000);
+    }
+
+    init();
+  </script>
+</body>
+</html>

@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ACT Infrastructure Dashboard</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏗️</text></svg>">
+  <style>
+    :root {
+      --bg-primary: #0a0a0f;
+      --bg-secondary: #12121a;
+      --bg-card: #1a1a24;
+      --border: #2a2a3a;
+      --text-primary: #e4e4e7;
+      --text-secondary: #a1a1aa;
+      --text-muted: #71717a;
+      --accent: #6366f1;
+      --accent-glow: rgba(99, 102, 241, 0.3);
+      --success: #22c55e;
+      --warning: #f59e0b;
+      --error: #ef4444;
+      --info: #3b82f6;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      min-height: 100vh;
+      line-height: 1.5;
+    }
+
+    .container {
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    /* Navigation */
+    .nav {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .nav a {
+      padding: 8px 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.875rem;
+      transition: all 0.2s ease;
+    }
+
+    .nav a:hover {
+      border-color: var(--accent);
+      color: var(--text-primary);
+    }
+
+    .nav a.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: white;
+    }
+
+    /* Header */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 24px;
+    }
+
+    .header h1 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .header h1::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      background: var(--success);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--success);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    .health-badge {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 20px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+
+    .health-score {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .health-bar {
+      width: 120px;
+      height: 10px;
+      background: var(--bg-secondary);
+      border-radius: 5px;
+      overflow: hidden;
+    }
+
+    .health-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--success));
+      transition: width 0.5s ease;
+    }
+
+    /* Main Grid */
+    .main-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    @media (max-width: 1200px) {
+      .main-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Panel */
+    .panel {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .panel.full-width {
+      grid-column: 1 / -1;
+    }
+
+    .panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg-secondary);
+    }
+
+    .panel-title {
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-secondary);
+    }
+
+    .panel-count {
+      font-size: 0.75rem;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .panel-body {
+      padding: 16px 18px;
+      max-height: 400px;
+      overflow-y: auto;
+    }
+
+    /* Tags */
+    .tag-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 0.8rem;
+      transition: all 0.2s ease;
+    }
+
+    .tag:hover {
+      border-color: var(--accent);
+    }
+
+    .tag-icon {
+      font-size: 0.9rem;
+    }
+
+    .tag.enabled {
+      border-color: var(--success);
+      background: rgba(34, 197, 94, 0.1);
+    }
+
+    .tag.disabled {
+      border-color: var(--text-muted);
+      opacity: 0.6;
+    }
+
+    /* Codebase Cards */
+    .codebase-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 12px;
+    }
+
+    .codebase-card {
+      padding: 14px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .codebase-card:hover {
+      border-color: var(--accent);
+    }
+
+    .codebase-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 8px;
+    }
+
+    .codebase-name {
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--text-primary);
+    }
+
+    .codebase-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .codebase-status.clean {
+      background: rgba(34, 197, 94, 0.15);
+      color: var(--success);
+    }
+
+    .codebase-status.modified {
+      background: rgba(245, 158, 11, 0.15);
+      color: var(--warning);
+    }
+
+    .codebase-status.error {
+      background: rgba(239, 68, 68, 0.15);
+      color: var(--error);
+    }
+
+    .codebase-status::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+
+    .codebase-description {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      line-height: 1.4;
+    }
+
+    .codebase-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.7rem;
+      color: var(--text-muted);
+    }
+
+    .codebase-commit {
+      color: var(--accent);
+    }
+
+    /* Connector Grid */
+    .connector-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 10px;
+    }
+
+    .connector-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+    }
+
+    .connector-item.configured {
+      border-left: 3px solid var(--success);
+    }
+
+    .connector-item.missing {
+      border-left: 3px solid var(--error);
+      opacity: 0.7;
+    }
+
+    .connector-icon {
+      font-size: 1.2rem;
+    }
+
+    .connector-info {
+      flex: 1;
+    }
+
+    .connector-name {
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+
+    .connector-type {
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    /* Script Categories */
+    .category-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .category-item:last-child {
+      border-bottom: none;
+    }
+
+    .category-name {
+      font-size: 0.85rem;
+      text-transform: capitalize;
+    }
+
+    .category-count {
+      padding: 3px 10px;
+      background: var(--bg-primary);
+      border-radius: 12px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    /* ClawdBot Services */
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 10px;
+    }
+
+    .service-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 14px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+    }
+
+    .service-status {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .service-status.running {
+      background: var(--success);
+      box-shadow: 0 0 10px var(--success);
+      animation: pulse 2s infinite;
+    }
+
+    .service-status.stopped {
+      background: var(--text-muted);
+    }
+
+    .service-status.unknown {
+      background: var(--warning);
+    }
+
+    .service-name {
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+
+    /* Health Checks */
+    .health-grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .health-item {
+      display: grid;
+      grid-template-columns: 120px 1fr 50px 100px;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .health-item:last-child {
+      border-bottom: none;
+    }
+
+    .health-name {
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+
+    .health-detail {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .health-points {
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-align: right;
+    }
+
+    .health-check-bar {
+      width: 100px;
+      height: 8px;
+      background: var(--bg-primary);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .health-check-fill {
+      height: 100%;
+      border-radius: 4px;
+      transition: width 0.3s ease;
+    }
+
+    .health-check-fill.high { background: var(--success); }
+    .health-check-fill.medium { background: var(--warning); }
+    .health-check-fill.low { background: var(--error); }
+
+    /* Loading */
+    .loading {
+      text-align: center;
+      padding: 40px;
+      color: var(--text-muted);
+    }
+
+    .loading::after {
+      content: '';
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 2px solid var(--border);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--bg-secondary);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 3px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--text-muted);
+    }
+
+    /* Database Table */
+    .db-table {
+      width: 100%;
+      font-size: 0.8rem;
+    }
+
+    .db-table th, .db-table td {
+      padding: 8px 12px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .db-table th {
+      color: var(--text-muted);
+      font-weight: 500;
+      text-transform: uppercase;
+      font-size: 0.7rem;
+      letter-spacing: 0.05em;
+    }
+
+    .db-table td.count {
+      text-align: right;
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    .db-table td.missing {
+      color: var(--error);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Navigation -->
+    <nav class="nav">
+      <a href="intelligence.html">Intelligence Center</a>
+      <a href="infrastructure.html" class="active">Infrastructure</a>
+      <a href="index.html">Command Center</a>
+      <a href="command-center.html">Agent Orchestration</a>
+      <a href="projects.html">Projects</a>
+    </nav>
+
+    <!-- Header -->
+    <header class="header">
+      <h1>ACT Infrastructure Dashboard</h1>
+      <div class="health-badge">
+        <span style="color: var(--text-muted); font-size: 0.8rem;">Health Score</span>
+        <span class="health-score" id="health-score">--</span>
+        <div class="health-bar">
+          <div class="health-bar-fill" id="health-bar" style="width: 0%"></div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Grid -->
+    <div class="main-grid">
+      <!-- Claude Code Layer -->
+      <div class="panel">
+        <div class="panel-header">
+          <span class="panel-title">Claude Code Layer (~/.claude/)</span>
+          <span class="panel-count" id="claude-count">--</span>
+        </div>
+        <div class="panel-body" id="claude-layer">
+          <div class="loading">Loading Claude Code infrastructure</div>
+        </div>
+      </div>
+
+      <!-- ClawdBot Docker -->
+      <div class="panel">
+        <div class="panel-header">
+          <span class="panel-title">ClawdBot Docker</span>
+          <span class="panel-count" id="clawdbot-status">--</span>
+        </div>
+        <div class="panel-body" id="clawdbot-services">
+          <div class="loading">Loading ClawdBot services</div>
+        </div>
+      </div>
+
+      <!-- Codebases -->
+      <div class="panel full-width">
+        <div class="panel-header">
+          <span class="panel-title">ACT Codebases</span>
+          <span class="panel-count" id="codebase-count">--</span>
+        </div>
+        <div class="panel-body" id="codebases" style="max-height: 500px;">
+          <div class="loading">Loading codebases</div>
+        </div>
+      </div>
+
+      <!-- Connectors -->
+      <div class="panel">
+        <div class="panel-header">
+          <span class="panel-title">Connectors & Integrations</span>
+          <span class="panel-count" id="connector-count">--</span>
+        </div>
+        <div class="panel-body" id="connectors">
+          <div class="loading">Loading connectors</div>
+        </div>
+      </div>
+
+      <!-- Scripts -->
+      <div class="panel">
+        <div class="panel-header">
+          <span class="panel-title">Scripts & Automation</span>
+          <span class="panel-count" id="script-count">--</span>
+        </div>
+        <div class="panel-body" id="scripts">
+          <div class="loading">Loading scripts</div>
+        </div>
+      </div>
+
+      <!-- Database -->
+      <div class="panel">
+        <div class="panel-header">
+          <span class="panel-title">Database Tables</span>
+          <span class="panel-count" id="db-count">--</span>
+        </div>
+        <div class="panel-body" id="database">
+          <div class="loading">Loading database</div>
+        </div>
+      </div>
+
+      <!-- Health Breakdown -->
+      <div class="panel">
+        <div class="panel-header">
+          <span class="panel-title">Health Breakdown</span>
+          <span class="panel-count" id="health-updated">--</span>
+        </div>
+        <div class="panel-body" id="health-checks">
+          <div class="loading">Calculating health</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const API_URL = 'http://localhost:3456';
+
+    // Connector icons
+    const connectorIcons = {
+      'Supabase Main': '🗄️',
+      'Supabase EL': '📖',
+      'Notion': '📝',
+      'GoHighLevel': '📊',
+      'Gmail/Calendar': '📧',
+      'OpenAI': '🤖',
+      'Anthropic': '🧠',
+      'Telegram': '💬',
+      'Discord': '🎮',
+      'Xero': '💰',
+      'Groq': '⚡',
+      'Perplexity': '🔍',
+      'Resend': '✉️',
+      'Signal': '🔒',
+      'Webflow': '🌐'
+    };
+
+    // Load Claude Code layer
+    async function loadClaudeLayer() {
+      const container = document.getElementById('claude-layer');
+      try {
+        const res = await fetch(`${API_URL}/api/infrastructure`);
+        const data = await res.json();
+
+        const totalItems = (data.agents?.length || 0) + (data.skills?.length || 0) +
+                          (data.hooks?.length || 0) + (data.mcps?.length || 0) +
+                          (data.rules?.length || 0);
+
+        let html = '';
+
+        // Agents
+        if (data.agents?.length > 0) {
+          html += `<h4 style="margin-bottom: 8px; color: var(--text-secondary); font-size: 0.75rem;">AGENTS (${data.agents.length})</h4>`;
+          html += '<div class="tag-grid" style="margin-bottom: 16px;">';
+          data.agents.forEach(a => {
+            html += `<span class="tag"><span class="tag-icon">🤖</span>${a.name}</span>`;
+          });
+          html += '</div>';
+        }
+
+        // Skills
+        if (data.skills?.length > 0) {
+          html += `<h4 style="margin-bottom: 8px; color: var(--text-secondary); font-size: 0.75rem;">SKILLS (${data.skills.length})</h4>`;
+          html += '<div class="tag-grid" style="margin-bottom: 16px;">';
+          data.skills.forEach(s => {
+            html += `<span class="tag"><span class="tag-icon">⚡</span>${s.name}</span>`;
+          });
+          html += '</div>';
+        }
+
+        // Hooks
+        if (data.hooks?.length > 0) {
+          html += `<h4 style="margin-bottom: 8px; color: var(--text-secondary); font-size: 0.75rem;">HOOKS (${data.hooks.length})</h4>`;
+          html += '<div class="tag-grid" style="margin-bottom: 16px;">';
+          data.hooks.slice(0, 20).forEach(h => {
+            html += `<span class="tag"><span class="tag-icon">🪝</span>${h.name}</span>`;
+          });
+          if (data.hooks.length > 20) {
+            html += `<span class="tag" style="color: var(--text-muted);">+${data.hooks.length - 20} more</span>`;
+          }
+          html += '</div>';
+        }
+
+        // MCPs
+        if (data.mcps?.length > 0) {
+          html += `<h4 style="margin-bottom: 8px; color: var(--text-secondary); font-size: 0.75rem;">MCPs (${data.mcps.length})</h4>`;
+          html += '<div class="tag-grid" style="margin-bottom: 16px;">';
+          data.mcps.forEach(m => {
+            const cls = m.enabled ? 'enabled' : 'disabled';
+            html += `<span class="tag ${cls}"><span class="tag-icon">🔌</span>${m.name}</span>`;
+          });
+          html += '</div>';
+        }
+
+        // Rules
+        if (data.rules?.length > 0) {
+          html += `<h4 style="margin-bottom: 8px; color: var(--text-secondary); font-size: 0.75rem;">RULES (${data.rules.length})</h4>`;
+          html += '<div class="tag-grid" style="margin-bottom: 16px;">';
+          data.rules.forEach(r => {
+            html += `<span class="tag"><span class="tag-icon">📜</span>${r.name}</span>`;
+          });
+          html += '</div>';
+        }
+
+        // Project-level
+        if (data.projectSkills?.length > 0 || data.projectSubagents?.length > 0) {
+          html += `<h4 style="margin-bottom: 8px; color: var(--text-secondary); font-size: 0.75rem;">PROJECT-LEVEL</h4>`;
+          html += '<div class="tag-grid">';
+          data.projectSkills?.forEach(s => {
+            html += `<span class="tag"><span class="tag-icon">📦</span>${s.name}</span>`;
+          });
+          data.projectSubagents?.forEach(s => {
+            html += `<span class="tag"><span class="tag-icon">🤖</span>${s.name}</span>`;
+          });
+          html += '</div>';
+        }
+
+        container.innerHTML = html || '<div style="color: var(--text-muted);">No Claude Code infrastructure found</div>';
+        document.getElementById('claude-count').textContent = `${data.agents?.length || 0}A / ${data.skills?.length || 0}S / ${data.hooks?.length || 0}H / ${data.mcps?.length || 0}M`;
+      } catch (e) {
+        container.innerHTML = `<div style="color: var(--error);">Error: ${e.message}</div>`;
+      }
+    }
+
+    // Load ClawdBot
+    async function loadClawdBot() {
+      const container = document.getElementById('clawdbot-services');
+      try {
+        const res = await fetch(`${API_URL}/api/clawdbot`);
+        const data = await res.json();
+
+        let html = '';
+
+        // Docker status
+        const dockerClass = data.dockerStatus === 'running' ? 'running' : 'stopped';
+        html += `<div style="margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+          <span class="service-status ${dockerClass}"></span>
+          <span style="font-size: 0.9rem; font-weight: 500;">Docker: ${data.dockerStatus}</span>
+        </div>`;
+
+        // Services
+        if (data.services?.length > 0) {
+          html += '<h4 style="margin-bottom: 8px; color: var(--text-secondary); font-size: 0.75rem;">COMPOSE SERVICES</h4>';
+          html += '<div class="service-grid" style="margin-bottom: 16px;">';
+          data.services.forEach(s => {
+            const statusClass = s.status === 'running' ? 'running' : s.status === 'stopped' ? 'stopped' : 'unknown';
+            html += `<div class="service-item">
+              <span class="service-status ${statusClass}"></span>
+              <span class="service-name">${s.name}</span>
+            </div>`;
+          });
+          html += '</div>';
+        }
+
+        // Service Files
+        if (data.serviceFiles?.length > 0) {
+          html += '<h4 style="margin-bottom: 8px; color: var(--text-secondary); font-size: 0.75rem;">SERVICE FILES</h4>';
+          html += '<div class="tag-grid" style="margin-bottom: 16px;">';
+          data.serviceFiles.forEach(s => {
+            html += `<span class="tag"><span class="tag-icon">📄</span>${s.name}</span>`;
+          });
+          html += '</div>';
+        }
+
+        // CLI Tools
+        if (data.cliTools?.length > 0) {
+          html += '<h4 style="margin-bottom: 8px; color: var(--text-secondary); font-size: 0.75rem;">CLI TOOLS</h4>';
+          html += '<div class="tag-grid">';
+          data.cliTools.forEach(t => {
+            html += `<span class="tag"><span class="tag-icon">⌨️</span>${t.name}</span>`;
+          });
+          html += '</div>';
+        }
+
+        container.innerHTML = html || '<div style="color: var(--text-muted);">No ClawdBot infrastructure found</div>';
+
+        const runningCount = data.runningContainers?.filter(c => c.running).length || 0;
+        document.getElementById('clawdbot-status').textContent = data.dockerStatus === 'running' ? `${runningCount} running` : 'Docker offline';
+      } catch (e) {
+        container.innerHTML = `<div style="color: var(--error);">Error: ${e.message}</div>`;
+      }
+    }
+
+    // Load Codebases
+    async function loadCodebases() {
+      const container = document.getElementById('codebases');
+      try {
+        const res = await fetch(`${API_URL}/api/codebases`);
+        const data = await res.json();
+
+        let html = '<div class="codebase-grid">';
+        let cleanCount = 0;
+
+        data.forEach(c => {
+          if (c.status === 'clean') cleanCount++;
+
+          html += `<div class="codebase-card">
+            <div class="codebase-header">
+              <span class="codebase-name">${c.name}</span>
+              <span class="codebase-status ${c.status}">
+                ${c.status === 'clean' ? 'Clean' : c.status === 'modified' ? `${c.changes} changes` : 'Error'}
+              </span>
+            </div>
+            <div class="codebase-description">${c.description || ''}</div>
+            <div class="codebase-meta">
+              <span>📁 ${c.branch}</span>
+              ${c.lastCommit ? `<span class="codebase-commit">${c.lastCommit.hash} · ${c.lastCommit.time}</span>` : ''}
+            </div>
+          </div>`;
+        });
+
+        html += '</div>';
+        container.innerHTML = html;
+        document.getElementById('codebase-count').textContent = `${cleanCount}/${data.length} clean`;
+      } catch (e) {
+        container.innerHTML = `<div style="color: var(--error);">Error: ${e.message}</div>`;
+      }
+    }
+
+    // Load Connectors
+    async function loadConnectors() {
+      const container = document.getElementById('connectors');
+      try {
+        const res = await fetch(`${API_URL}/api/connectors`);
+        const data = await res.json();
+
+        let html = '<div class="connector-grid">';
+        let configuredCount = 0;
+
+        data.forEach(c => {
+          if (c.status === 'configured') configuredCount++;
+          const icon = connectorIcons[c.name] || '🔗';
+
+          html += `<div class="connector-item ${c.status}">
+            <span class="connector-icon">${icon}</span>
+            <div class="connector-info">
+              <div class="connector-name">${c.name}</div>
+              <div class="connector-type">${c.type}</div>
+            </div>
+          </div>`;
+        });
+
+        html += '</div>';
+        container.innerHTML = html;
+        document.getElementById('connector-count').textContent = `${configuredCount}/${data.length} active`;
+      } catch (e) {
+        container.innerHTML = `<div style="color: var(--error);">Error: ${e.message}</div>`;
+      }
+    }
+
+    // Load Scripts
+    async function loadScripts() {
+      const container = document.getElementById('scripts');
+      try {
+        const res = await fetch(`${API_URL}/api/scripts`);
+        const data = await res.json();
+
+        let html = '';
+        data.categories.forEach(c => {
+          html += `<div class="category-item">
+            <span class="category-name">${c.name}</span>
+            <span class="category-count">${c.count}</span>
+          </div>`;
+        });
+
+        container.innerHTML = html || '<div style="color: var(--text-muted);">No scripts found</div>';
+        document.getElementById('script-count').textContent = `${data.total} scripts`;
+      } catch (e) {
+        container.innerHTML = `<div style="color: var(--error);">Error: ${e.message}</div>`;
+      }
+    }
+
+    // Load Database
+    async function loadDatabase() {
+      const container = document.getElementById('database');
+      try {
+        const res = await fetch(`${API_URL}/api/database`);
+        const data = await res.json();
+
+        let html = '<table class="db-table"><thead><tr><th>Table</th><th style="text-align: right;">Rows</th></tr></thead><tbody>';
+        let existingCount = 0;
+
+        Object.entries(data.counts).forEach(([table, count]) => {
+          if (count >= 0) existingCount++;
+          const cls = count < 0 ? 'missing' : 'count';
+          const display = count < 0 ? 'missing' : count.toLocaleString();
+
+          html += `<tr>
+            <td>${table}</td>
+            <td class="${cls}">${display}</td>
+          </tr>`;
+        });
+
+        html += '</tbody></table>';
+        container.innerHTML = html;
+        document.getElementById('db-count').textContent = `${existingCount}/${data.totalTables} tables`;
+      } catch (e) {
+        container.innerHTML = `<div style="color: var(--error);">Error: ${e.message}</div>`;
+      }
+    }
+
+    // Load Health
+    async function loadHealth() {
+      const container = document.getElementById('health-checks');
+      try {
+        const res = await fetch(`${API_URL}/api/infrastructure/health`);
+        const data = await res.json();
+
+        let html = '<div class="health-grid">';
+        data.checks.forEach(c => {
+          const pct = Math.round((c.score / c.max) * 100);
+          const level = pct >= 80 ? 'high' : pct >= 50 ? 'medium' : 'low';
+
+          html += `<div class="health-item">
+            <span class="health-name">${c.name}</span>
+            <span class="health-detail">${c.detail || c.error || ''}</span>
+            <span class="health-points">${c.score}/${c.max}</span>
+            <div class="health-check-bar">
+              <div class="health-check-fill ${level}" style="width: ${pct}%"></div>
+            </div>
+          </div>`;
+        });
+        html += '</div>';
+
+        container.innerHTML = html;
+        document.getElementById('health-score').textContent = `${data.percentage}%`;
+        document.getElementById('health-bar').style.width = `${data.percentage}%`;
+        document.getElementById('health-updated').textContent = new Date(data.timestamp).toLocaleTimeString();
+      } catch (e) {
+        container.innerHTML = `<div style="color: var(--error);">Error: ${e.message}</div>`;
+      }
+    }
+
+    // Initialize
+    async function init() {
+      await Promise.all([
+        loadClaudeLayer(),
+        loadClawdBot(),
+        loadCodebases(),
+        loadConnectors(),
+        loadScripts(),
+        loadDatabase(),
+        loadHealth()
+      ]);
+
+      // Refresh every 60 seconds
+      setInterval(() => {
+        loadCodebases();
+        loadClawdBot();
+        loadHealth();
+      }, 60000);
+    }
+
+    init();
+  </script>
+</body>
+</html>
