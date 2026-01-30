@@ -120,7 +120,9 @@ export async function handleGHLWebhook(
   supabase: SupabaseClient
 ): Promise<WebhookResult> {
   const startTime = Date.now();
-  const { eventType, payload } = event;
+  const { payload } = event;
+  // Normalize event type: GHL workflows send "ContactCreate", API sends "contact.create"
+  const eventType = normalizeEventType(event.eventType);
 
   try {
     // Contact events
@@ -233,4 +235,32 @@ async function handleOpportunityEvent(
     action,
     latencyMs: Date.now() - startTime,
   };
+}
+
+/**
+ * Normalize GHL event type strings to dotted lowercase format.
+ * GHL workflows send PascalCase (e.g., "ContactCreate", "OpportunityStageUpdate")
+ * while the API uses dotted format (e.g., "contact.create", "opportunity.stage_update").
+ */
+function normalizeEventType(raw: string): string {
+  if (raw.includes('.')) return raw.toLowerCase();
+
+  const map: Record<string, string> = {
+    contactcreate: 'contact.create',
+    contactupdate: 'contact.update',
+    contactdelete: 'contact.delete',
+    opportunitycreate: 'opportunity.create',
+    opportunityupdate: 'opportunity.update',
+    opportunitystageupdate: 'opportunity.stage_update',
+    opportunitystatusupdate: 'opportunity.status_update',
+    opportunitystatuschange: 'opportunity.status_change',
+    opportunitymonetaryvalueupdate: 'opportunity.monetary_value_update',
+    notecreate: 'note.create',
+    noteupdate: 'note.update',
+    taskcreate: 'task.create',
+    taskcomplete: 'task.complete',
+  };
+
+  const key = raw.toLowerCase().replace(/[^a-z]/g, '');
+  return map[key] || raw.toLowerCase();
 }
