@@ -1,0 +1,66 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+/* Organic Animations */
+@keyframes breathe {
+0% { transform: scale(1); opacity: 0.8; }
+50% { transform: scale(1.02); opacity: 1; }
+100% { transform: scale(1); opacity: 0.8; }
+}
+
+@keyframes float {
+0% { transform: translateY(0px); }
+50% { transform: translateY(-10px); }
+100% { transform: translateY(0px); }
+}
+
+.animate-breathe {
+animation: breathe 8s ease-in-out infinite;
+}
+
+.animate-float {
+animation: float 6s ease-in-out infinite;
+}
+
+.bg-paper-texture {
+background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E");
+background-repeat: repeat;
+}
+
+.rich-text {
+  line-height: 1.8;
+}
+
+.rich-text h2,
+.rich-text h3 {
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  font-family: var(--font-display);
+  color: #2f3e2e;
+}
+
+.rich-text p,
+.rich-text ul,
+.rich-text ol {
+  margin: 1rem 0;
+}
+
+.rich-text ul {
+  list-style: disc;
+  padding-left: 1.5rem;
+}
+
+.rich-text ol {
+  list-style: decimal;
+  padding-left: 1.5rem;
+}
+
+.rich-text a {
+  color: #4caf50;
+  text-decoration: underline;
+}

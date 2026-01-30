@@ -140,10 +140,11 @@ async function withRetry(fn, maxRetries = 3, baseDelayMs = 1000) {
 /**
  * Generate embedding without tracking (for simple use)
  */
-export async function embed(text, model = 'text-embedding-3-small') {
+export async function embed(text, model = 'text-embedding-3-small', dimensions = 384) {
   const result = await openai.embeddings.create({
     model,
-    input: text
+    input: text,
+    dimensions
   });
   return result.data[0].embedding;
 }
@@ -161,11 +162,13 @@ export async function trackedEmbedding(text, scriptName, options = {}) {
   const start = Date.now();
   let retries = 0;
 
+  const dimensions = options.dimensions || 384;
   const result = await withRetry(async () => {
     retries++;
     return await openai.embeddings.create({
       model,
-      input: text
+      input: text,
+      dimensions
     });
   }, options.maxRetries || 3);
 
@@ -196,13 +199,15 @@ export async function trackedEmbedding(text, scriptName, options = {}) {
  */
 export async function trackedBatchEmbedding(texts, scriptName, options = {}) {
   const model = options.model || 'text-embedding-3-small';
+  const dimensions = options.dimensions || 384;
   const start = Date.now();
   const batchId = crypto.randomUUID();
 
   const result = await withRetry(async () => {
     return await openai.embeddings.create({
       model,
-      input: texts
+      input: texts,
+      dimensions
     });
   });
 

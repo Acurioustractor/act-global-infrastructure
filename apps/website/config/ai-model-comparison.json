@@ -1,0 +1,480 @@
+{
+  "generated": "2025-12-24T23:24:08.248Z",
+  "models": {
+    "claude-sonnet-4.5": {
+      "name": "Claude Sonnet 4.5",
+      "provider": "Anthropic",
+      "type": "Proprietary",
+      "contextWindow": 200000,
+      "inputCost": 3,
+      "outputCost": 15,
+      "setupCost": 0,
+      "monthlyMinimum": 0,
+      "strengths": [
+        "Ethical reasoning",
+        "Instruction following",
+        "Long context",
+        "Cultural safety"
+      ],
+      "weaknesses": [
+        "Cost",
+        "Vendor lock-in",
+        "Rate limits"
+      ],
+      "bestFor": [
+        "Critical tasks",
+        "Elder review",
+        "Complex reasoning"
+      ]
+    },
+    "claude-haiku-3.5": {
+      "name": "Claude Haiku 3.5",
+      "provider": "Anthropic",
+      "type": "Proprietary",
+      "contextWindow": 200000,
+      "inputCost": 0.25,
+      "outputCost": 1.25,
+      "setupCost": 0,
+      "monthlyMinimum": 0,
+      "strengths": [
+        "Fast",
+        "Affordable",
+        "Good quality",
+        "Ethical"
+      ],
+      "weaknesses": [
+        "Less capable than Sonnet",
+        "Vendor lock-in"
+      ],
+      "bestFor": [
+        "Bulk tasks",
+        "Quick content",
+        "Cost-sensitive work"
+      ]
+    },
+    "gpt-4-turbo": {
+      "name": "GPT-4 Turbo",
+      "provider": "OpenAI",
+      "type": "Proprietary",
+      "contextWindow": 128000,
+      "inputCost": 10,
+      "outputCost": 30,
+      "setupCost": 0,
+      "monthlyMinimum": 0,
+      "fineTuningCost": {
+        "training": 25,
+        "input": 75,
+        "output": 150
+      },
+      "strengths": [
+        "Fine-tuning available",
+        "Strong generation",
+        "Mature ecosystem"
+      ],
+      "weaknesses": [
+        "Expensive",
+        "Vendor lock-in",
+        "Less ethical focus"
+      ],
+      "bestFor": [
+        "Brand voice fine-tuning",
+        "Creative content"
+      ]
+    },
+    "mistral-7b-hf": {
+      "name": "Mistral 7B (Hugging Face)",
+      "provider": "Hugging Face",
+      "type": "Open-Source (Managed)",
+      "contextWindow": 8192,
+      "inputCost": 0.2,
+      "outputCost": 0.2,
+      "setupCost": 0,
+      "monthlyMinimum": 0,
+      "license": "Apache 2.0",
+      "strengths": [
+        "Low cost",
+        "Open-source",
+        "Good quality",
+        "No lock-in"
+      ],
+      "weaknesses": [
+        "Smaller context",
+        "Managed service (not fully free)"
+      ],
+      "bestFor": [
+        "Testing",
+        "Bulk generation",
+        "Cost optimization"
+      ]
+    },
+    "mistral-7b-self": {
+      "name": "Mistral 7B (Self-Hosted)",
+      "provider": "Ollama (NAS)",
+      "type": "Open-Source (Self-Hosted)",
+      "contextWindow": 8192,
+      "inputCost": 0,
+      "outputCost": 0,
+      "setupCost": 0,
+      "monthlyMinimum": 0,
+      "hostingCost": 5,
+      "license": "Apache 2.0",
+      "strengths": [
+        "Zero API cost",
+        "Unlimited usage",
+        "Complete privacy",
+        "Full control"
+      ],
+      "weaknesses": [
+        "Self-maintenance",
+        "Hardware limits",
+        "Setup time"
+      ],
+      "bestFor": [
+        "High-volume tasks",
+        "Maximum savings",
+        "Privacy-sensitive"
+      ]
+    },
+    "phi-3.5-medium": {
+      "name": "Phi-3.5 Medium (14B)",
+      "provider": "Self-Hosted",
+      "type": "Open-Source (Self-Hosted)",
+      "contextWindow": 128000,
+      "inputCost": 0,
+      "outputCost": 0,
+      "setupCost": 0,
+      "monthlyMinimum": 0,
+      "hostingCost": 5,
+      "license": "MIT",
+      "strengths": [
+        "Best quality small model",
+        "Long context",
+        "Free",
+        "Reasoning"
+      ],
+      "weaknesses": [
+        "Slower inference",
+        "Needs more RAM (24GB)",
+        "Setup"
+      ],
+      "bestFor": [
+        "Complex tasks",
+        "Long documents",
+        "Grant proposals"
+      ]
+    },
+    "llama-3.1-8b": {
+      "name": "LLaMA 3.1 8B",
+      "provider": "Self-Hosted",
+      "type": "Open-Source (Self-Hosted)",
+      "contextWindow": 8192,
+      "inputCost": 0,
+      "outputCost": 0,
+      "setupCost": 0,
+      "monthlyMinimum": 0,
+      "hostingCost": 5,
+      "license": "LLaMA License (permissive)",
+      "strengths": [
+        "Most scalable",
+        "Meta ecosystem",
+        "Good quality",
+        "Free"
+      ],
+      "weaknesses": [
+        "License restrictions (non-commercial-ish)",
+        "Setup"
+      ],
+      "bestFor": [
+        "Scaling to communities",
+        "Production deployment"
+      ]
+    }
+  },
+  "scenarios": {
+    "blog-article": {
+      "name": "Blog Article (1000 words)",
+      "inputTokens": 500,
+      "outputTokens": 1500,
+      "frequency": 2,
+      "qualityRequirement": 8.5
+    },
+    "grant-proposal": {
+      "name": "Grant Proposal (2000 words)",
+      "inputTokens": 1000,
+      "outputTokens": 3000,
+      "frequency": 1,
+      "qualityRequirement": 9
+    },
+    "social-media": {
+      "name": "Social Media Post (150 words)",
+      "inputTokens": 200,
+      "outputTokens": 250,
+      "frequency": 20,
+      "qualityRequirement": 7.5
+    },
+    "email-sequence": {
+      "name": "Email Sequence (5 emails)",
+      "inputTokens": 300,
+      "outputTokens": 800,
+      "frequency": 4,
+      "qualityRequirement": 8
+    },
+    "campaign-messaging": {
+      "name": "Campaign Messaging (500 words)",
+      "inputTokens": 400,
+      "outputTokens": 800,
+      "frequency": 1,
+      "qualityRequirement": 8.5
+    },
+    "technical-docs": {
+      "name": "Technical Documentation (1500 words)",
+      "inputTokens": 500,
+      "outputTokens": 2200,
+      "frequency": 2,
+      "qualityRequirement": 9
+    },
+    "knowledge-retrieval": {
+      "name": "Knowledge Retrieval (Answer)",
+      "inputTokens": 2000,
+      "outputTokens": 500,
+      "frequency": 50,
+      "qualityRequirement": 9
+    }
+  },
+  "results": [
+    {
+      "model": "Mistral 7B (Hugging Face)",
+      "type": "Open-Source (Managed)",
+      "monthly": 0.030600000000000002,
+      "yearly": 0.3672,
+      "name": "Mistral 7B (Hugging Face)",
+      "provider": "Hugging Face",
+      "contextWindow": 8192,
+      "inputCost": 0.2,
+      "outputCost": 0.2,
+      "setupCost": 0,
+      "monthlyMinimum": 0,
+      "license": "Apache 2.0",
+      "strengths": [
+        "Low cost",
+        "Open-source",
+        "Good quality",
+        "No lock-in"
+      ],
+      "weaknesses": [
+        "Smaller context",
+        "Managed service (not fully free)"
+      ],
+      "bestFor": [
+        "Testing",
+        "Bulk generation",
+        "Cost optimization"
+      ]
+    },
+    {
+      "model": "Claude Haiku 3.5",
+      "type": "Proprietary",
+      "monthly": 0.08265,
+      "yearly": 0.9918,
+      "name": "Claude Haiku 3.5",
+      "provider": "Anthropic",
+      "contextWindow": 200000,
+      "inputCost": 0.25,
+      "outputCost": 1.25,
+      "setupCost": 0,
+      "monthlyMinimum": 0,
+      "strengths": [
+        "Fast",
+        "Affordable",
+        "Good quality",
+        "Ethical"
+      ],
+      "weaknesses": [
+        "Less capable than Sonnet",
+        "Vendor lock-in"
+      ],
+      "bestFor": [
+        "Bulk tasks",
+        "Quick content",
+        "Cost-sensitive work"
+      ]
+    },
+    {
+      "model": "Claude Sonnet 4.5",
+      "type": "Proprietary",
+      "monthly": 0.9918,
+      "yearly": 11.9016,
+      "name": "Claude Sonnet 4.5",
+      "provider": "Anthropic",
+      "contextWindow": 200000,
+      "inputCost": 3,
+      "outputCost": 15,
+      "setupCost": 0,
+      "monthlyMinimum": 0,
+      "strengths": [
+        "Ethical reasoning",
+        "Instruction following",
+        "Long context",
+        "Cultural safety"
+      ],
+      "weaknesses": [
+        "Cost",
+        "Vendor lock-in",
+        "Rate limits"
+      ],
+      "bestFor": [
+        "Critical tasks",
+        "Elder review",
+        "Complex reasoning"
+      ]
+    },
+    {
+      "model": "GPT-4 Turbo",
+      "type": "Proprietary",
+      "monthly": 2.418,
+      "yearly": 29.016000000000002,
+      "name": "GPT-4 Turbo",
+      "provider": "OpenAI",
+      "contextWindow": 128000,
+      "inputCost": 10,
+      "outputCost": 30,
+      "setupCost": 0,
+      "monthlyMinimum": 0,
+      "fineTuningCost": {
+        "training": 25,
+        "input": 75,
+        "output": 150
+      },
+      "strengths": [
+        "Fine-tuning available",
+        "Strong generation",
+        "Mature ecosystem"
+      ],
+      "weaknesses": [
+        "Expensive",
+        "Vendor lock-in",
+        "Less ethical focus"
+      ],
+      "bestFor": [
+        "Brand voice fine-tuning",
+        "Creative content"
+      ]
+    },
+    {
+      "model": "Mistral 7B (Self-Hosted)",
+      "type": "Open-Source (Self-Hosted)",
+      "monthly": 5,
+      "yearly": 60,
+      "name": "Mistral 7B (Self-Hosted)",
+      "provider": "Ollama (NAS)",
+      "contextWindow": 8192,
+      "inputCost": 0,
+      "outputCost": 0,
+      "setupCost": 0,
+      "monthlyMinimum": 0,
+      "hostingCost": 5,
+      "license": "Apache 2.0",
+      "strengths": [
+        "Zero API cost",
+        "Unlimited usage",
+        "Complete privacy",
+        "Full control"
+      ],
+      "weaknesses": [
+        "Self-maintenance",
+        "Hardware limits",
+        "Setup time"
+      ],
+      "bestFor": [
+        "High-volume tasks",
+        "Maximum savings",
+        "Privacy-sensitive"
+      ]
+    },
+    {
+      "model": "Phi-3.5 Medium (14B)",
+      "type": "Open-Source (Self-Hosted)",
+      "monthly": 5,
+      "yearly": 60,
+      "name": "Phi-3.5 Medium (14B)",
+      "provider": "Self-Hosted",
+      "contextWindow": 128000,
+      "inputCost": 0,
+      "outputCost": 0,
+      "setupCost": 0,
+      "monthlyMinimum": 0,
+      "hostingCost": 5,
+      "license": "MIT",
+      "strengths": [
+        "Best quality small model",
+        "Long context",
+        "Free",
+        "Reasoning"
+      ],
+      "weaknesses": [
+        "Slower inference",
+        "Needs more RAM (24GB)",
+        "Setup"
+      ],
+      "bestFor": [
+        "Complex tasks",
+        "Long documents",
+        "Grant proposals"
+      ]
+    },
+    {
+      "model": "LLaMA 3.1 8B",
+      "type": "Open-Source (Self-Hosted)",
+      "monthly": 5,
+      "yearly": 60,
+      "name": "LLaMA 3.1 8B",
+      "provider": "Self-Hosted",
+      "contextWindow": 8192,
+      "inputCost": 0,
+      "outputCost": 0,
+      "setupCost": 0,
+      "monthlyMinimum": 0,
+      "hostingCost": 5,
+      "license": "LLaMA License (permissive)",
+      "strengths": [
+        "Most scalable",
+        "Meta ecosystem",
+        "Good quality",
+        "Free"
+      ],
+      "weaknesses": [
+        "License restrictions (non-commercial-ish)",
+        "Setup"
+      ],
+      "bestFor": [
+        "Scaling to communities",
+        "Production deployment"
+      ]
+    }
+  ],
+  "recommendations": {
+    "bestValue": "mistral-7b-self",
+    "bestEase": "mistral-7b-hf",
+    "bestHybrid": "hybrid-mistral-claude",
+    "phasedApproach": [
+      {
+        "phase": 1,
+        "months": "1-2",
+        "model": "hybrid",
+        "cost": 60
+      },
+      {
+        "phase": 2,
+        "months": "3-4",
+        "model": "mistral-7b-self",
+        "cost": 10
+      },
+      {
+        "phase": 3,
+        "months": "5+",
+        "model": "mistral-7b-self",
+        "cost": 5
+      }
+    ]
+  }
+}

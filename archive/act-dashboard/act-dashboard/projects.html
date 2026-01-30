@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ACT Agentic Projects</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    :root {
+      --bg-primary: #0a0a0f;
+      --bg-secondary: #12121a;
+      --bg-card: #1a1a24;
+      --border: #2a2a3a;
+      --text-primary: #e4e4e7;
+      --text-secondary: #a1a1aa;
+      --text-muted: #71717a;
+      --accent: #6366f1;
+      --success: #22c55e;
+      --warning: #f59e0b;
+      --error: #ef4444;
+      --info: #3b82f6;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      min-height: 100vh;
+      line-height: 1.5;
+    }
+
+    .container { max-width: 1600px; margin: 0 auto; padding: 20px; }
+
+    /* Header */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 24px;
+    }
+
+    .header h1 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .back-link {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+
+    .back-link:hover { color: var(--accent); }
+
+    /* Project selector */
+    .project-selector {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
+    .project-card {
+      background: var(--bg-card);
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 20px;
+      cursor: pointer;
+      transition: all 0.2s;
+      min-width: 250px;
+    }
+
+    .project-card:hover { border-color: var(--accent); }
+    .project-card.active { border-color: var(--accent); background: rgba(99, 102, 241, 0.1); }
+
+    .project-name { font-weight: 600; margin-bottom: 4px; }
+    .project-stats { font-size: 0.85rem; color: var(--text-secondary); }
+
+    /* Goal input */
+    .goal-input-container {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 24px;
+    }
+
+    .goal-input {
+      width: 100%;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 16px;
+      color: var(--text-primary);
+      font-size: 1rem;
+      margin-bottom: 12px;
+    }
+
+    .goal-input:focus { outline: none; border-color: var(--accent); }
+
+    .btn {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+
+    .btn-primary { background: var(--accent); color: white; }
+    .btn-primary:hover { background: #5558e3; }
+    .btn-success { background: var(--success); color: white; }
+    .btn-success:hover { background: #16a34a; }
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+    }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* Kanban Board */
+    .kanban-board {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .kanban-column {
+      background: var(--bg-secondary);
+      border-radius: 12px;
+      padding: 16px;
+      min-height: 400px;
+    }
+
+    .column-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .column-title {
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .column-count {
+      background: var(--bg-card);
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+    }
+
+    /* Task cards */
+    .task-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .task-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+
+    .task-card.urgent { border-left: 3px solid var(--error); }
+    .task-card.high { border-left: 3px solid var(--warning); }
+
+    .task-title { font-weight: 500; font-size: 0.9rem; margin-bottom: 8px; }
+
+    .task-meta {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      font-size: 0.75rem;
+    }
+
+    .task-badge {
+      padding: 2px 8px;
+      border-radius: 4px;
+      background: var(--bg-secondary);
+    }
+
+    .task-badge.human { background: rgba(59, 130, 246, 0.2); color: var(--info); }
+    .task-badge.agent { background: rgba(34, 197, 94, 0.2); color: var(--success); }
+    .task-badge.dual { background: rgba(245, 158, 11, 0.2); color: var(--warning); }
+
+    .task-type {
+      color: var(--text-muted);
+    }
+
+    /* Task detail modal */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.8);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+
+    .modal-overlay.active { display: flex; }
+
+    .modal {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      max-width: 700px;
+      width: 90%;
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 16px;
+    }
+
+    .modal-title { font-size: 1.25rem; font-weight: 600; }
+    .modal-close {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 1.5rem;
+    }
+
+    .modal-section {
+      margin-bottom: 20px;
+    }
+
+    .modal-section h3 {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .modal-content {
+      background: var(--bg-secondary);
+      border-radius: 8px;
+      padding: 16px;
+      white-space: pre-wrap;
+      font-size: 0.9rem;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    /* Chat */
+    .chat-container {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+    }
+
+    .chat-messages {
+      max-height: 300px;
+      overflow-y: auto;
+      margin-bottom: 16px;
+    }
+
+    .chat-message {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .chat-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--bg-secondary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    .chat-bubble {
+      background: var(--bg-secondary);
+      padding: 12px 16px;
+      border-radius: 12px;
+      max-width: 80%;
+    }
+
+    .chat-bubble.user { background: var(--accent); margin-left: auto; }
+
+    .chat-input-row {
+      display: flex;
+      gap: 12px;
+    }
+
+    .chat-input {
+      flex: 1;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 16px;
+      color: var(--text-primary);
+      font-size: 0.9rem;
+    }
+
+    .chat-input:focus { outline: none; border-color: var(--accent); }
+
+    /* Loading */
+    .loading {
+      text-align: center;
+      padding: 40px;
+      color: var(--text-muted);
+    }
+
+    .spinner {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 2px solid var(--border);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-right: 8px;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Navigation -->
+    <nav style="display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap;">
+      <a href="intelligence.html" style="padding: 8px 16px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; color: var(--text-secondary); text-decoration: none; font-size: 0.875rem;">Intelligence Center</a>
+      <a href="infrastructure.html" style="padding: 8px 16px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; color: var(--text-secondary); text-decoration: none; font-size: 0.875rem;">Infrastructure</a>
+      <a href="index.html" style="padding: 8px 16px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; color: var(--text-secondary); text-decoration: none; font-size: 0.875rem;">Command Center</a>
+      <a href="command-center.html" style="padding: 8px 16px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; color: var(--text-secondary); text-decoration: none; font-size: 0.875rem;">Agent Orchestration</a>
+      <a href="projects.html" style="padding: 8px 16px; background: var(--accent); border: 1px solid var(--accent); border-radius: 6px; color: white; text-decoration: none; font-size: 0.875rem;">Projects</a>
+    </nav>
+
+    <header class="header">
+      <h1>🚀 ACT Agentic Projects</h1>
+      <span style="color: var(--text-muted); font-size: 0.85rem;">AI-Powered Project Management</span>
+    </header>
+
+    <!-- Create new project -->
+    <div class="goal-input-container">
+      <input
+        type="text"
+        class="goal-input"
+        id="goal-input"
+        placeholder="Enter a goal... e.g., 'Set up Phase 1 foundation for ACT Pty Ltd'"
+      >
+      <button class="btn btn-primary" id="create-btn">
+        🧠 Decompose into Tasks
+      </button>
+      <span id="create-status" style="margin-left: 12px; color: var(--text-muted);"></span>
+    </div>
+
+    <!-- Project selector -->
+    <div class="project-selector" id="project-selector">
+      <div class="loading"><span class="spinner"></span>Loading projects...</div>
+    </div>
+
+    <!-- Kanban Board -->
+    <div class="kanban-board" id="kanban-board" style="display: none;">
+      <div class="kanban-column" data-status="pending">
+        <div class="column-header">
+          <span class="column-title">📥 Pending</span>
+          <span class="column-count" id="count-pending">0</span>
+        </div>
+        <div class="column-tasks" id="tasks-pending"></div>
+      </div>
+
+      <div class="kanban-column" data-status="agent_working">
+        <div class="column-header">
+          <span class="column-title">🤖 Agent Working</span>
+          <span class="column-count" id="count-agent_working">0</span>
+        </div>
+        <div class="column-tasks" id="tasks-agent_working"></div>
+      </div>
+
+      <div class="kanban-column" data-status="needs_review">
+        <div class="column-header">
+          <span class="column-title">👁️ Needs Review</span>
+          <span class="column-count" id="count-needs_review">0</span>
+        </div>
+        <div class="column-tasks" id="tasks-needs_review"></div>
+      </div>
+
+      <div class="kanban-column" data-status="completed">
+        <div class="column-header">
+          <span class="column-title">✅ Completed</span>
+          <span class="column-count" id="count-completed">0</span>
+        </div>
+        <div class="column-tasks" id="tasks-completed"></div>
+      </div>
+    </div>
+
+    <!-- Agent Work Button -->
+    <div style="margin-bottom: 24px; display: none;" id="work-controls">
+      <button class="btn btn-success" id="work-btn">
+        🤖 Run Agents on Pending Tasks
+      </button>
+      <span id="work-status" style="margin-left: 12px; color: var(--text-muted);"></span>
+    </div>
+
+    <!-- Chat -->
+    <div class="chat-container" id="chat-container" style="display: none;">
+      <h3 style="margin-bottom: 16px;">💬 Chat with Project Agent</h3>
+      <div class="chat-messages" id="chat-messages"></div>
+      <div class="chat-input-row">
+        <input
+          type="text"
+          class="chat-input"
+          id="chat-input"
+          placeholder="Ask or instruct the agent..."
+        >
+        <button class="btn btn-primary" id="chat-btn">Send</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Task Detail Modal -->
+  <div class="modal-overlay" id="task-modal">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 class="modal-title" id="modal-title">Task Title</h2>
+        <button class="modal-close" onclick="closeModal()">×</button>
+      </div>
+
+      <div class="modal-section">
+        <h3>Description</h3>
+        <div class="modal-content" id="modal-description">-</div>
+      </div>
+
+      <div class="modal-section" id="modal-output-section" style="display: none;">
+        <h3>Agent Output</h3>
+        <div class="modal-content" id="modal-output"></div>
+      </div>
+
+      <div class="modal-section" id="modal-reasoning-section" style="display: none;">
+        <h3>Agent Reasoning</h3>
+        <div class="modal-content" id="modal-reasoning"></div>
+      </div>
+
+      <div class="modal-actions" id="modal-actions"></div>
+    </div>
+  </div>
+
+  <script>
+    const SUPABASE_URL = 'https://tednluwflfhxyucgwigh.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRlZG5sdXdmbGZoeHl1Y2d3aWdoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTIzNDYyMjksImV4cCI6MjA2NzkyMjIyOX0.PG0iGZQR2d8yo4y3q1e2tEIMa3J0AdFkI1Q6P7IDgrg';
+    const API_BASE = window.location.origin;
+
+    const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    let currentProject = null;
+    let currentTasks = [];
+
+    // Load projects
+    async function loadProjects() {
+      const container = document.getElementById('project-selector');
+
+      const { data: projects, error } = await db
+        .from('agentic_project_dashboard')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (error || !projects?.length) {
+        container.innerHTML = '<div style="color: var(--text-muted);">No projects yet. Create one above!</div>';
+        return;
+      }
+
+      let html = '';
+      projects.forEach(p => {
+        const progress = p.total_tasks > 0 ? Math.round((p.completed_tasks / p.total_tasks) * 100) : 0;
+        html += `
+          <div class="project-card" data-id="${p.id}" onclick="selectProject('${p.id}')">
+            <div class="project-name">${p.name}</div>
+            <div class="project-stats">
+              ${progress}% complete · ${p.needs_review} need review · ${p.agent_working} agents working
+            </div>
+          </div>
+        `;
+      });
+
+      container.innerHTML = html;
+    }
+
+    // Select a project
+    async function selectProject(projectId) {
+      currentProject = projectId;
+
+      // Update UI
+      document.querySelectorAll('.project-card').forEach(c => c.classList.remove('active'));
+      document.querySelector(`[data-id="${projectId}"]`)?.classList.add('active');
+
+      document.getElementById('kanban-board').style.display = 'grid';
+      document.getElementById('work-controls').style.display = 'block';
+      document.getElementById('chat-container').style.display = 'block';
+
+      await loadTasks(projectId);
+      await loadChat(projectId);
+    }
+
+    // Load tasks for project
+    async function loadTasks(projectId) {
+      const { data: tasks, error } = await db
+        .from('agentic_tasks')
+        .select('*')
+        .eq('project_id', projectId)
+        .order('position');
+
+      if (error) {
+        console.error('Error loading tasks:', error);
+        return;
+      }
+
+      currentTasks = tasks || [];
+
+      // Group by status
+      const columns = {
+        pending: [],
+        agent_working: [],
+        needs_review: [],
+        completed: []
+      };
+
+      tasks?.forEach(t => {
+        const col = columns[t.status] || columns.pending;
+        col.push(t);
+      });
+
+      // Render each column
+      Object.entries(columns).forEach(([status, tasks]) => {
+        const container = document.getElementById(`tasks-${status}`);
+        document.getElementById(`count-${status}`).textContent = tasks.length;
+
+        if (!tasks.length) {
+          container.innerHTML = '<div style="color: var(--text-muted); font-size: 0.85rem; text-align: center; padding: 20px;">No tasks</div>';
+          return;
+        }
+
+        container.innerHTML = tasks.map(t => {
+          const priorityClass = t.priority === 1 ? 'urgent' : t.priority === 2 ? 'high' : '';
+          const modeIcon = t.assignment_mode === 'human' ? '👤' :
+                           t.assignment_mode === 'agent' ? '🤖' :
+                           t.assignment_mode === 'dual' ? '🤝' : '👁️';
+          const modeClass = t.assignment_mode;
+
+          return `
+            <div class="task-card ${priorityClass}" onclick="openTask('${t.id}')">
+              <div class="task-title">${t.title}</div>
+              <div class="task-meta">
+                <span class="task-badge ${modeClass}">${modeIcon} ${t.assignment_mode}</span>
+                <span class="task-type">${t.task_type}</span>
+                ${t.agent_confidence ? `<span style="color: var(--success);">${Math.round(t.agent_confidence * 100)}%</span>` : ''}
+              </div>
+            </div>
+          `;
+        }).join('');
+      });
+    }
+
+    // Open task detail
+    function openTask(taskId) {
+      const task = currentTasks.find(t => t.id === taskId);
+      if (!task) return;
+
+      document.getElementById('modal-title').textContent = task.title;
+      document.getElementById('modal-description').textContent = task.description || 'No description';
+
+      // Show agent output if exists
+      const outputSection = document.getElementById('modal-output-section');
+      const outputEl = document.getElementById('modal-output');
+      if (task.agent_output) {
+        outputSection.style.display = 'block';
+        const output = task.agent_output;
+        outputEl.textContent = output.content || output.summary || output.result || JSON.stringify(output, null, 2);
+      } else {
+        outputSection.style.display = 'none';
+      }
+
+      // Show reasoning if exists
+      const reasoningSection = document.getElementById('modal-reasoning-section');
+      if (task.agent_reasoning) {
+        reasoningSection.style.display = 'block';
+        document.getElementById('modal-reasoning').textContent = task.agent_reasoning;
+      } else {
+        reasoningSection.style.display = 'none';
+      }
+
+      // Actions based on status
+      const actionsEl = document.getElementById('modal-actions');
+      let actionsHtml = '';
+
+      if (task.status === 'needs_review') {
+        actionsHtml = `
+          <button class="btn btn-success" onclick="approveTask('${task.id}')">✓ Approve</button>
+          <button class="btn btn-outline" onclick="rejectTask('${task.id}')">↩ Send Back</button>
+        `;
+      } else if (task.status === 'pending' && task.assignment_mode !== 'human') {
+        actionsHtml = `<button class="btn btn-primary" onclick="runAgentOnTask('${task.id}')">🤖 Run Agent</button>`;
+      } else if (task.status === 'pending' && task.assignment_mode === 'human') {
+        actionsHtml = `<button class="btn btn-success" onclick="markComplete('${task.id}')">✓ Mark Complete</button>`;
+      }
+
+      actionsHtml += `<button class="btn btn-outline" onclick="closeModal()">Close</button>`;
+      actionsEl.innerHTML = actionsHtml;
+
+      document.getElementById('task-modal').classList.add('active');
+    }
+
+    function closeModal() {
+      document.getElementById('task-modal').classList.remove('active');
+    }
+
+    // Approve task
+    async function approveTask(taskId) {
+      await db
+        .from('agentic_tasks')
+        .update({ status: 'completed', human_approved: true, updated_at: new Date().toISOString() })
+        .eq('id', taskId);
+
+      closeModal();
+      await loadTasks(currentProject);
+    }
+
+    // Reject task
+    async function rejectTask(taskId) {
+      await db
+        .from('agentic_tasks')
+        .update({ status: 'pending', human_approved: false, updated_at: new Date().toISOString() })
+        .eq('id', taskId);
+
+      closeModal();
+      await loadTasks(currentProject);
+    }
+
+    // Mark complete
+    async function markComplete(taskId) {
+      await db
+        .from('agentic_tasks')
+        .update({ status: 'completed', updated_at: new Date().toISOString() })
+        .eq('id', taskId);
+
+      closeModal();
+      await loadTasks(currentProject);
+    }
+
+    // Run agent on single task
+    async function runAgentOnTask(taskId) {
+      const actionsEl = document.getElementById('modal-actions');
+      actionsEl.innerHTML = '<span class="spinner"></span> Agent working...';
+
+      try {
+        const response = await fetch(`${API_BASE}/api/tasks/${taskId}/execute`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' }
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.error || 'Failed to execute task');
+        }
+
+        closeModal();
+        await loadTasks(currentProject);
+        await loadProjects();
+
+      } catch (error) {
+        actionsEl.innerHTML = `<span style="color: var(--error);">❌ ${error.message}</span>`;
+      }
+    }
+
+    // Load chat history
+    async function loadChat(projectId) {
+      const { data: messages } = await db
+        .from('agentic_chat')
+        .select('*')
+        .eq('project_id', projectId)
+        .order('created_at', { ascending: true })
+        .limit(20);
+
+      const container = document.getElementById('chat-messages');
+
+      if (!messages?.length) {
+        container.innerHTML = '<div style="color: var(--text-muted); text-align: center;">No messages yet. Ask the agent something!</div>';
+        return;
+      }
+
+      container.innerHTML = messages.map(m => `
+        <div class="chat-message">
+          <div class="chat-avatar">${m.role === 'user' ? '👤' : '🤖'}</div>
+          <div class="chat-bubble ${m.role}">${m.content}</div>
+        </div>
+      `).join('');
+
+      container.scrollTop = container.scrollHeight;
+    }
+
+    // Send chat via API
+    async function sendChat() {
+      const input = document.getElementById('chat-input');
+      const message = input.value.trim();
+      if (!message || !currentProject) return;
+
+      input.value = '';
+
+      // Add user message to UI
+      const container = document.getElementById('chat-messages');
+      container.innerHTML += `
+        <div class="chat-message">
+          <div class="chat-avatar">👤</div>
+          <div class="chat-bubble user">${message}</div>
+        </div>
+      `;
+
+      // Show typing indicator
+      container.innerHTML += `
+        <div class="chat-message" id="typing">
+          <div class="chat-avatar">🤖</div>
+          <div class="chat-bubble"><span class="spinner"></span>Thinking...</div>
+        </div>
+      `;
+      container.scrollTop = container.scrollHeight;
+
+      try {
+        const response = await fetch(`${API_BASE}/api/projects/${currentProject}/chat`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message })
+        });
+
+        const data = await response.json();
+
+        document.getElementById('typing')?.remove();
+
+        if (!response.ok) {
+          throw new Error(data.error || 'Chat failed');
+        }
+
+        // Reload chat to show the new messages
+        await loadChat(currentProject);
+
+        // If agent took an action, reload tasks
+        if (data.action) {
+          await loadTasks(currentProject);
+          await loadProjects();
+        }
+
+      } catch (error) {
+        document.getElementById('typing')?.remove();
+        container.innerHTML += `
+          <div class="chat-message">
+            <div class="chat-avatar">❌</div>
+            <div class="chat-bubble">Error: ${error.message}</div>
+          </div>
+        `;
+      }
+    }
+
+    // Create project via API
+    document.getElementById('create-btn').addEventListener('click', async () => {
+      const goal = document.getElementById('goal-input').value.trim();
+      if (!goal) return;
+
+      const btn = document.getElementById('create-btn');
+      const status = document.getElementById('create-status');
+
+      btn.disabled = true;
+      status.innerHTML = '<span class="spinner"></span>Decomposing goal into tasks...';
+
+      try {
+        const response = await fetch(`${API_BASE}/api/projects`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ goal })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.error || 'Failed to create project');
+        }
+
+        status.innerHTML = `✅ Created project with ${data.tasks_created} tasks!`;
+        document.getElementById('goal-input').value = '';
+
+        // Reload projects and select the new one
+        await loadProjects();
+        await selectProject(data.project.id);
+
+      } catch (error) {
+        status.innerHTML = `❌ Error: ${error.message}`;
+      } finally {
+        btn.disabled = false;
+      }
+    });
+
+    // Run agents via API
+    document.getElementById('work-btn').addEventListener('click', async () => {
+      if (!currentProject) return;
+
+      const btn = document.getElementById('work-btn');
+      const status = document.getElementById('work-status');
+
+      btn.disabled = true;
+      status.innerHTML = '<span class="spinner"></span>Agents working on tasks...';
+
+      try {
+        const response = await fetch(`${API_BASE}/api/projects/${currentProject}/work`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' }
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.error || 'Failed to run agents');
+        }
+
+        status.innerHTML = `✅ Completed ${data.tasks_completed} tasks!`;
+
+        // Reload tasks to show updated status
+        await loadTasks(currentProject);
+        await loadProjects(); // Update progress stats
+
+      } catch (error) {
+        status.innerHTML = `❌ Error: ${error.message}`;
+      } finally {
+        btn.disabled = false;
+      }
+    });
+
+    // Chat enter key
+    document.getElementById('chat-input').addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') sendChat();
+    });
+
+    document.getElementById('chat-btn').addEventListener('click', sendChat);
+
+    // Close modal on escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeModal();
+    });
+
+    // Close modal on overlay click
+    document.getElementById('task-modal').addEventListener('click', (e) => {
+      if (e.target.id === 'task-modal') closeModal();
+    });
+
+    // Initialize
+    loadProjects();
+  </script>
+</body>
+</html>

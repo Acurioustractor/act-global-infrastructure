@@ -6153,7 +6153,7 @@ app.get('/api/xero/transactions', async (req, res) => {
 
 class NotionIntegration {
   constructor() {
-    this.apiKey = process.env.NOTION_API_KEY || process.env.NOTION_TOKEN;
+    this.apiKey = process.env.NOTION_API_KEY;
     this.projectsDatabaseId = process.env.NOTION_PROJECTS_DATABASE_ID;
     this.isConfigured = !!(this.apiKey);
     this.client = null;
@@ -6299,8 +6299,8 @@ app.get('/api/notion/stats', async (req, res) => {
 
 class GmailIntegration {
   constructor() {
-    this.clientId = process.env.GMAIL_CLIENT_ID || process.env.GOOGLE_CLIENT_ID;
-    this.clientSecret = process.env.GMAIL_CLIENT_SECRET || process.env.GOOGLE_CLIENT_SECRET;
+    this.clientId = process.env.GMAIL_CLIENT_ID;
+    this.clientSecret = process.env.GMAIL_CLIENT_SECRET;
     this.isConfigured = !!(this.clientId && this.clientSecret);
     this.oauthClient = null;
   }
@@ -6411,6 +6411,88 @@ app.get('/api/gmail/unread', async (req, res) => {
   }
 });
 
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// REAL SLACK INTEGRATION
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+/**
+ * Slack Integration Service
+ * Uses @slack/web-api for authenticated API calls
+ */
+
+class SlackIntegration {
+  constructor() {
+    this.token = process.env.SLACK_BOT_TOKEN;
+    this.isConfigured = !!(this.token);
+    this.client = null;
+  }
+
+  async initClient() {
+    if (!this.isConfigured || this.client) return;
+    try {
+      const { WebClient } = await import('@slack/web-api');
+      this.client = new WebClient(this.token);
+    } catch (e) {
+      console.error('Failed to init Slack client:', e.message);
+    }
+  }
+
+  async getRecentMessages(channel = 'general', limit = 20) {
+    await this.initClient();
+    if (!this.isConfigured || !this.client) {
+      return {
+        messages: [
+          { id: 'sl_1', text: 'Hey team, the new feature is live! 🎉', user: '@sarah', timestamp: '2026-01-24T15:00:00Z', reactions: ['🎉', '🚀'] },
+          { id: 'sl_2', text: 'Great work on the Farm Hand AI demo', user: '@emma', timestamp: '2026-01-24T14:30:00Z', reactions: ['👏'] },
+          { id: 'sl_3', text: 'Quick sync tomorrow at 10am?', user: '@mike', timestamp: '2026-01-24T11:00:00Z', reactions: ['👍'] }
+        ]
+      };
+    }
+    try {
+      const response = await this.client.conversations.history({
+        channel,
+        limit
+      });
+      return { messages: response.messages?.map(msg => ({
+        id: msg.ts,
+        text: msg.text,
+        user: msg.user || 'unknown',
+        timestamp: new Date(Number(msg.ts) * 1000).toISOString(),
+        reactions: msg.reactions?.map(r => r.name) || []
+      })) || [] };
+    } catch (e) {
+      console.error('Slack getRecentMessages error:', e.message);
+      return { messages: [] };
+    }
+  }
+
+  async getChannels() {
+    await this.initClient();
+    if (!this.isConfigured || !this.client) {
+      return {
+        channels: [
+          { id: 'ch_1', name: 'general', member_count: 12 },
+          { id: 'ch_2', name: 'development', member_count: 5 },
+          { id: 'ch_3', name: 'community', member_count: 8 }
+        ]
+      };
+    }
+    try {
+      const response = await this.client.conversations.list({
+        types: 'public_channel,private_channel',
+        exclude_archived: true
+      });
+      return { channels: response.channels?.map(ch => ({
+        id: ch.id,
+        name: ch.name,
+        member_count: ch.num_members || 0
+      })) || [] };
+    } catch (e) {
+      console.error('Slack getChannels error:', e.message);
+      return { channels: [] };
+    }
+  }
+}
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // CLAUDE BOT INTEGRATION - For all interactions and notifications

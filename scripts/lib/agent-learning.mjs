@@ -26,6 +26,9 @@
 
 import { createClient } from '@supabase/supabase-js';
 import '../../lib/load-env.mjs';
+import { MemoryLifecycle } from './memory-lifecycle.mjs';
+import { ProceduralMemory } from './procedural-memory.mjs';
+import { EpisodicMemory } from './episodic-memory.mjs';
 
 // Default Supabase client
 const supabaseUrl = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -445,6 +448,20 @@ export class AgentLearning {
       learnings: []
     };
 
+    // Wrap entire cycle in an episodic memory episode
+    let episode = null;
+    let episodicMemory = null;
+    try {
+      episodicMemory = new EpisodicMemory({ supabase: this.supabase, verbose: this.options.verbose });
+      episode = await episodicMemory.createEpisode(
+        `Learning cycle: ${this.agentId}`,
+        'learning_journey',
+        { summary: `Automated learning cycle for agent ${this.agentId}` }
+      );
+    } catch (err) {
+      // Non-critical — episodic memory tables may not be deployed yet
+    }
+
     // 1. Analyze performance
     const performance = await this.analyzePerformance();
     if (performance.healthScore < 80) {
@@ -500,12 +517,453 @@ export class AgentLearning {
       results.learnings.push(learning);
     }
 
+    // 5. Memory consolidation — find and flag near-duplicate knowledge (Phase 1)
+    try {
+      const lifecycle = new MemoryLifecycle({ verbose: this.options.verbose });
+      const candidates = await lifecycle.findConsolidationCandidates(5);
+      if (candidates.length > 0) {
+        const learning = await this.storeLearning('pattern', {
+          type: 'consolidation_candidates',
+          candidateCount: candidates.length,
+          groups: candidates.map(c => ({
+            chunkCount: c.totalChunks,
+            preview: c.primaryContent?.substring(0, 80)
+          }))
+        }, 0.7);
+        results.learnings.push(learning);
+      }
+    } catch (err) {
+      // Non-critical — consolidation tables may not be deployed yet
+    }
+
+    // 6. Procedural extraction — detect repeated action patterns (Phase 5)
+    try {
+      const pm = new ProceduralMemory({ verbose: this.options.verbose });
+      const procedure = await pm.extractFromLearnings(this.agentId, null);
+      if (procedure) {
+        const learning = await this.storeLearning('pattern', {
+          type: 'procedure_candidate',
+          stepCount: procedure.steps.length,
+          description: procedure.description
+        }, 0.6);
+        results.learnings.push(learning);
+      }
+    } catch (err) {
+      // Non-critical — procedural memory tables may not be deployed yet
+    }
+
+    // 7. Detect repeated mistakes and auto-create correction rules
+    try {
+      const mistakePatterns = await this.detectRepeatedMistakes();
+      for (const pattern of mistakePatterns) {
+        const patternId = pattern.id;
+        // Auto-create correction rules for newly detected patterns
+        if (patternId && pattern.status === 'active') {
+          try {
+            await this.createCorrectionRule(patternId);
+            if (episode && episodicMemory) {
+              await episodicMemory.addEventToEpisode(episode.id, {
+                event_type: 'correction_rule_created',
+                description: `Created correction rule for ${pattern.action_name} (${pattern.mistake_category})`
+              });
+            }
+          } catch (ruleErr) {
+            // Non-critical — continue with other patterns
+          }
+        }
+        results.learnings.push({
+          type: 'mistake_pattern',
+          insight: {
+            action: pattern.action_name,
+            category: pattern.mistake_category,
+            occurrences: pattern.occurrence_count
+          },
+          confidence: Math.min((pattern.occurrence_count || 3) / 10, 1)
+        });
+      }
+    } catch (err) {
+      // Non-critical — mistake detection tables may not be deployed yet
+    }
+
+    // 8. Calibrate confidence
+    try {
+      const calibration = await this.calibrateConfidence();
+      if (calibration) {
+        const learning = await this.storeLearning('calibration', {
+          ece: calibration.ece,
+          adjustment: calibration.adjustment,
+          totalActions: calibration.totalActions,
+          direction: calibration.adjustment < 0 ? 'overconfident' : calibration.adjustment > 0 ? 'underconfident' : 'well-calibrated'
+        }, 1 - calibration.ece);
+        results.learnings.push(learning);
+
+        if (episode && episodicMemory) {
+          await episodicMemory.addEventToEpisode(episode.id, {
+            event_type: 'calibration_complete',
+            description: `ECE: ${calibration.ece.toFixed(4)}, adjustment: ${calibration.adjustment.toFixed(3)}`
+          });
+        }
+      }
+    } catch (err) {
+      // Non-critical — calibration tables may not be deployed yet
+    }
+
+    // 9. Evaluate autonomy adjustments
+    try {
+      const autonomyTransitions = await this.evaluateAutonomyAdjustments();
+      for (const transition of autonomyTransitions) {
+        results.learnings.push({
+          type: 'autonomy_proposal',
+          insight: {
+            action: transition.action_name,
+            currentLevel: transition.current_level,
+            suggestedLevel: transition.suggested_level,
+            direction: transition.change_direction,
+            reason: transition.reason
+          },
+          confidence: transition.confidence
+        });
+      }
+
+      if (episode && episodicMemory && autonomyTransitions.length > 0) {
+        await episodicMemory.addEventToEpisode(episode.id, {
+          event_type: 'autonomy_evaluation',
+          description: `${autonomyTransitions.length} autonomy change(s) proposed`
+        });
+      }
+    } catch (err) {
+      // Non-critical — autonomy tables may not be deployed yet
+    }
+
+    // Close the episode with outcome summary
+    if (episode && episodicMemory) {
+      try {
+        const outcomeParts = [
+          `${results.learnings.length} learnings generated`
+        ];
+        const lessons = results.learnings
+          .filter(l => l.type === 'mistake_pattern' || l.type === 'calibration')
+          .map(l => l.insight?.action || l.insight?.direction || l.type)
+          .filter(Boolean);
+
+        await episodicMemory.closeEpisode(
+          episode.id,
+          outcomeParts.join('. '),
+          lessons
+        );
+      } catch (err) {
+        // Non-critical
+      }
+    }
+
     if (this.options.verbose) {
       console.log(`\nLearning Cycle Complete:`);
       console.log(`  Generated: ${results.learnings.length} learnings`);
     }
 
     return results;
+  }
+
+  // ============================================================================
+  // REPEATED MISTAKE DETECTION & CONFIDENCE CALIBRATION
+  // ============================================================================
+
+  /**
+   * Detect repeated mistakes by calling the detect_repeated_mistakes RPC.
+   * For each result, creates or updates an agent_mistake_patterns record.
+   * @param {number} windowDays - Optional override for time window
+   * @returns {Promise<Array>} Detected mistake patterns
+   */
+  async detectRepeatedMistakes(windowDays = null) {
+    const days = windowDays || this.options.timeWindowDays || 30;
+
+    const { data, error } = await this.supabase.rpc('detect_repeated_mistakes', {
+      p_agent_id: this.agentId,
+      p_min_occurrences: 3,
+      p_window_days: days
+    });
+
+    if (error || !data) return [];
+
+    const patterns = [];
+
+    for (const row of data) {
+      // Check if an active pattern already exists for this agent/action/category
+      const { data: existing } = await this.supabase
+        .from('agent_mistake_patterns')
+        .select('*')
+        .eq('agent_id', this.agentId)
+        .eq('action_name', row.action_name)
+        .eq('mistake_category', row.mistake_category)
+        .eq('status', 'active')
+        .limit(1);
+
+      const existingPattern = existing && existing.length > 0 ? existing[0] : null;
+
+      if (existingPattern) {
+        // Update existing pattern
+        const { data: updated } = await this.supabase
+          .from('agent_mistake_patterns')
+          .update({
+            occurrence_count: row.occurrence_count,
+            last_seen_at: row.last_seen,
+            feedback_record_ids: row.feedback_record_ids,
+            common_feedback: row.common_feedback
+          })
+          .eq('id', existingPattern.id)
+          .select()
+          .single();
+
+        patterns.push(updated || { ...existingPattern, occurrence_count: row.occurrence_count });
+      } else {
+        // Insert new pattern
+        const { data: inserted } = await this.supabase
+          .from('agent_mistake_patterns')
+          .insert({
+            agent_id: this.agentId,
+            action_name: row.action_name,
+            mistake_category: row.mistake_category,
+            occurrence_count: row.occurrence_count,
+            first_seen_at: row.first_seen,
+            last_seen_at: row.last_seen,
+            feedback_record_ids: row.feedback_record_ids,
+            common_feedback: row.common_feedback,
+            status: 'active'
+          })
+          .select()
+          .single();
+
+        patterns.push(inserted || row);
+      }
+    }
+
+    if (this.options.verbose && patterns.length > 0) {
+      console.log(`\nRepeated Mistakes Detected: ${patterns.length}`);
+      patterns.forEach((p, i) => {
+        console.log(`  ${i + 1}. ${p.action_name} [${p.mistake_category}]: ${p.occurrence_count} occurrences`);
+      });
+    }
+
+    return patterns;
+  }
+
+  /**
+   * Calibrate confidence by computing Expected Calibration Error (ECE).
+   * Calls the calculate_calibration RPC and stores results.
+   * @returns {Promise<object|null>} Calibration result with ECE, adjustment, and buckets
+   */
+  async calibrateConfidence() {
+    const { data, error } = await this.supabase.rpc('calculate_calibration', {
+      p_agent_id: this.agentId,
+      p_window_days: this.options.timeWindowDays || 30
+    });
+
+    if (error || !data || data.length === 0) return null;
+
+    // Calculate ECE: weighted sum of |calibration_gap| per bucket
+    const totalActions = data.reduce((sum, b) => sum + (b.action_count || 0), 0);
+    if (totalActions === 0) return null;
+
+    const ece = data.reduce((sum, b) => {
+      const weight = b.action_count / totalActions;
+      return sum + weight * Math.abs(b.calibration_gap);
+    }, 0);
+
+    // Determine adjustment direction from weighted average gap
+    const weightedGap = data.reduce((sum, b) => {
+      const weight = b.action_count / totalActions;
+      return sum + weight * b.calibration_gap;
+    }, 0);
+
+    // Positive gap means underconfident (actual > predicted) -> positive adjustment
+    // Negative gap means overconfident (predicted > actual) -> negative adjustment
+    let adjustment = weightedGap;
+
+    // Cap adjustment at 0.15
+    if (adjustment > 0.15) adjustment = 0.15;
+    if (adjustment < -0.15) adjustment = -0.15;
+
+    const result = {
+      ece,
+      adjustment,
+      buckets: data,
+      totalActions
+    };
+
+    // Store calibration result
+    try {
+      await this.supabase
+        .from('agent_confidence_calibration')
+        .insert({
+          agent_id: this.agentId,
+          ece,
+          adjustment,
+          bucket_data: data,
+          total_actions: totalActions,
+          window_days: this.options.timeWindowDays || 30,
+          calculated_at: new Date().toISOString()
+        });
+    } catch (storeErr) {
+      // Non-critical: table may not exist yet
+    }
+
+    if (this.options.verbose) {
+      console.log(`\nConfidence Calibration:`);
+      console.log(`  ECE: ${ece.toFixed(4)}`);
+      console.log(`  Adjustment: ${adjustment.toFixed(3)}`);
+      console.log(`  Direction: ${adjustment < 0 ? 'overconfident' : adjustment > 0 ? 'underconfident' : 'well-calibrated'}`);
+      console.log(`  Total actions: ${totalActions}`);
+    }
+
+    return result;
+  }
+
+  /**
+   * Evaluate autonomy level adjustments for all actions of this agent.
+   * Calls evaluate_autonomy_change RPC for each action and creates
+   * agent_autonomy_transitions proposals for recommended changes.
+   * @returns {Promise<Array>} Proposed autonomy transitions
+   */
+  async evaluateAutonomyAdjustments() {
+    // Get all actions for this agent
+    const { data: actions, error: actionsError } = await this.supabase
+      .from('agent_actions')
+      .select('action_name, autonomy_level')
+      .eq('agent_id', this.agentId);
+
+    if (actionsError || !actions || actions.length === 0) return [];
+
+    const transitions = [];
+
+    for (const action of actions) {
+      const { data: evaluation, error: evalError } = await this.supabase.rpc('evaluate_autonomy_change', {
+        p_agent_id: this.agentId,
+        p_action_name: action.action_name,
+        p_window_days: this.options.timeWindowDays || 30
+      });
+
+      if (evalError || !evaluation) continue;
+
+      const result = Array.isArray(evaluation) ? evaluation[0] : evaluation;
+      if (!result || !result.recommended_change || result.recommended_change === 'none') continue;
+
+      // Create a transition proposal
+      const proposal = {
+        agent_id: this.agentId,
+        action_name: action.action_name,
+        current_level: result.current_level || action.autonomy_level,
+        suggested_level: result.suggested_level,
+        change_direction: result.recommended_change,
+        reason: result.reason,
+        confidence: result.confidence || 0.5,
+        status: 'proposed',
+        proposed_at: new Date().toISOString()
+      };
+
+      try {
+        await this.supabase
+          .from('agent_autonomy_transitions')
+          .insert(proposal);
+      } catch (insertErr) {
+        // Non-critical: table may not exist yet
+      }
+
+      transitions.push(proposal);
+    }
+
+    if (this.options.verbose && transitions.length > 0) {
+      console.log(`\nAutonomy Adjustment Proposals: ${transitions.length}`);
+      transitions.forEach((t, i) => {
+        console.log(`  ${i + 1}. ${t.action_name}: ${t.current_level} -> ${t.suggested_level} (${t.change_direction})`);
+        console.log(`     Reason: ${t.reason}`);
+      });
+    }
+
+    return transitions;
+  }
+
+  /**
+   * Create a correction rule from a mistake pattern.
+   * Reads the pattern, fetches feedback records, creates a procedural memory
+   * rule, and marks the pattern as mitigated.
+   * @param {string} patternId - The mistake pattern ID
+   * @returns {Promise<object>} The created procedural memory rule
+   */
+  async createCorrectionRule(patternId) {
+    // Read the mistake pattern
+    const { data: pattern, error: patternError } = await this.supabase
+      .from('agent_mistake_patterns')
+      .select('*')
+      .eq('id', patternId)
+      .single();
+
+    if (patternError || !pattern) {
+      throw new Error(`Mistake pattern not found: ${patternId}`);
+    }
+
+    // Fetch feedback records for context
+    const feedbackIds = pattern.feedback_record_ids || [];
+    let feedbackRecords = [];
+    if (feedbackIds.length > 0) {
+      const { data: feedback } = await this.supabase
+        .from('agent_feedback')
+        .select('*')
+        .in('id', feedbackIds);
+      feedbackRecords = feedback || [];
+    }
+
+    // Build correction rule as a procedural memory entry
+    const feedbackSummary = feedbackRecords
+      .map(f => f.details?.message || f.feedback_type)
+      .filter(Boolean)
+      .join('; ');
+
+    const pm = new ProceduralMemory({ supabase: this.supabase, verbose: this.options.verbose });
+    const rule = await pm.createProcedure(
+      `correction-${pattern.action_name}-${pattern.mistake_category}`,
+      this.agentId,
+      {
+        description: `Auto-generated correction rule for ${pattern.action_name} mistake: ${pattern.mistake_category}. Based on ${pattern.occurrence_count} occurrences. Feedback: ${feedbackSummary}`,
+        steps: [
+          {
+            step: 1,
+            action: 'check_precondition',
+            description: `Before ${pattern.action_name}, verify conditions to avoid ${pattern.mistake_category}`,
+            conditions: { action_name: pattern.action_name }
+          },
+          {
+            step: 2,
+            action: 'apply_correction',
+            description: `Apply learned correction: ${feedbackSummary || pattern.common_feedback || 'review before proceeding'}`,
+            conditions: {}
+          }
+        ],
+        preconditions: {
+          trigger: pattern.action_name,
+          mistake_category: pattern.mistake_category
+        },
+        status: 'active'
+      }
+    );
+
+    // Update pattern status to mitigated
+    await this.supabase
+      .from('agent_mistake_patterns')
+      .update({
+        status: 'mitigated',
+        mitigated_at: new Date().toISOString(),
+        correction_rule_id: rule?.id || null
+      })
+      .eq('id', patternId);
+
+    if (this.options.verbose) {
+      console.log(`\nCorrection rule created for pattern ${patternId}:`);
+      console.log(`  Action: ${pattern.action_name}`);
+      console.log(`  Category: ${pattern.mistake_category}`);
+      console.log(`  Rule: ${rule?.id || 'created'}`);
+    }
+
+    return rule;
   }
 
   // ============================================================================
