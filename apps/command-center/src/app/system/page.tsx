@@ -21,6 +21,7 @@ import { cn, formatRelativeDate } from '@/lib/utils'
 import { LoadingPage } from '@/components/ui/loading'
 import { DonutChart, ProgressBar } from '@tremor/react'
 import { AgentApprovals } from '@/components/agent-approvals'
+import { LiveActivityFeed } from '@/components/live-activity-feed'
 
 export default function SystemPage() {
   const { data: health, isLoading: healthLoading } = useQuery({
@@ -284,9 +285,10 @@ export default function SystemPage() {
         </div>
       </div>
 
-      {/* Agent Approvals */}
-      <div className="mt-6">
+      {/* Agent Approvals + Live Activity Feed */}
+      <div className="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-6">
         <AgentApprovals />
+        <LiveActivityFeed maxEvents={25} />
       </div>
 
       {/* Status Chart */}

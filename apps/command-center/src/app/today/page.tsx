@@ -88,6 +88,7 @@ import {
 } from '@/lib/api'
 import { cn, formatRelativeDate, getGreeting } from '@/lib/utils'
 import { ContactTodayRow } from '@/components/today'
+import { LiveActivityFeed } from '@/components/live-activity-feed'
 
 // Sprint 4: Auto-refresh interval (30 seconds)
 const REFRESH_INTERVAL = 30 * 1000
@@ -1227,6 +1228,9 @@ export default function TodayPage() {
               )}
             </div>
           </div>
+
+          {/* Live Activity Feed */}
+          <LiveActivityFeed maxEvents={10} />
 
           {/* Quick Links */}
           <div className="glass-card p-5">
