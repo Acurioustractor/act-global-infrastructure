@@ -57,7 +57,15 @@ export function createWebhookProcessor(supabase: SupabaseClient) {
       }
 
       // Determine event type from payload, normalizing GHL PascalCase to dotted format
-      const rawEventType = (payload.type as string) || (payload.event as string) || 'unknown';
+      // GHL webhooks put event type in customData.type or workflow.name, not top-level
+      const customData = payload.customData as Record<string, unknown> | undefined;
+      const workflow = payload.workflow as Record<string, unknown> | undefined;
+      const rawEventType =
+        (payload.type as string) ||
+        (payload.event as string) ||
+        (customData?.type as string) ||
+        extractEventFromWorkflowName(workflow?.name as string) ||
+        'unknown';
       const eventType = source === 'ghl' ? normalizeGHLEventType(rawEventType) : rawEventType;
 
       // Step 2: Log delivery as received
@@ -165,4 +173,17 @@ function normalizeGHLEventType(raw: string): string {
 
   const key = raw.toLowerCase().replace(/[^a-z]/g, '');
   return map[key] || raw.toLowerCase();
+}
+
+/**
+ * Extract event type from GHL workflow name.
+ * e.g., "Sync to Supabase - Contact Updated" -> "ContactUpdate"
+ *       "Sync to Supabase - Opportunity Created" -> "OpportunityCreate"
+ */
+function extractEventFromWorkflowName(name: string | undefined): string | undefined {
+  if (!name) return undefined;
+  const match = name.match(/(?:Contact|Opportunity|Note|Task)\s*(?:Create|Update|Delete|Complete|Stage\s*Update|Status\s*(?:Update|Change))[ds]?/i);
+  if (!match) return undefined;
+  // Strip trailing 'd'/'ed' and collapse spaces: "Contact Updated" -> "ContactUpdate"
+  return match[0].replace(/[ds]$/i, '').replace(/\s+/g, '');
 }

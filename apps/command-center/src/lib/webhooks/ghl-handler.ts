@@ -54,8 +54,23 @@ const PROJECT_TAGS = [
  * Strips blocked cultural fields from custom fields.
  */
 export function transformGHLContact(payload: Record<string, unknown>): Record<string, unknown> {
-  const tags = (payload.tags as string[]) || [];
-  const customFields = { ...((payload.customFields as Record<string, unknown>) || {}) };
+  // GHL API sends camelCase (id, firstName, locationId)
+  // GHL Workflows send snake_case (contact_id, first_name, location.id)
+  const location = payload.location as Record<string, unknown> | undefined;
+
+  const rawTags = payload.tags;
+  const tags: string[] = Array.isArray(rawTags)
+    ? rawTags
+    : typeof rawTags === 'string' && rawTags.length > 0
+      ? rawTags.split(',').map((t: string) => t.trim())
+      : [];
+
+  const customFields = {
+    ...((payload.customFields as Record<string, unknown>) || {}),
+    ...((payload.customData as Record<string, unknown>) || {}),
+  };
+  // Remove internal workflow fields from custom data
+  delete customFields.type;
 
   // Cultural protocol: strip blocked fields
   for (const field of BLOCKED_FIELDS_TO_GHL) {
@@ -69,22 +84,22 @@ export function transformGHLContact(payload: Record<string, unknown>): Record<st
   const engagementTags = tags.filter((tag) => tag.startsWith('engagement:'));
   const engagementStatus = engagementTags.length > 0
     ? engagementTags[0].replace('engagement:', '')
-    : 'lead';
+    : (payload.contact_type as string) || 'lead';
 
   return {
-    ghl_id: payload.id,
-    ghl_location_id: payload.locationId,
-    first_name: payload.firstName,
-    last_name: payload.lastName,
+    ghl_id: (payload.id as string) || (payload.contact_id as string),
+    ghl_location_id: (payload.locationId as string) || (location?.id as string),
+    first_name: (payload.firstName as string) || (payload.first_name as string),
+    last_name: (payload.lastName as string) || (payload.last_name as string),
     email: payload.email,
     phone: payload.phone,
-    company_name: payload.company,
+    company_name: payload.company || payload.companyName,
     tags,
-    custom_fields: customFields,
+    custom_fields: Object.keys(customFields).length > 0 ? customFields : undefined,
     projects,
     engagement_status: engagementStatus,
-    ghl_created_at: payload.dateAdded,
-    ghl_updated_at: payload.dateUpdated,
+    ghl_created_at: (payload.dateAdded as string) || (payload.date_created as string),
+    ghl_updated_at: (payload.dateUpdated as string) || (payload.date_updated as string),
     last_synced_at: new Date().toISOString(),
     sync_status: 'synced',
   };
@@ -166,7 +181,7 @@ async function handleContactEvent(
         sync_status: 'deleted',
         last_synced_at: new Date().toISOString(),
       })
-      .eq('ghl_id', payload.id as string);
+      .eq('ghl_id', (payload.id as string) || (payload.contact_id as string));
 
     if (error) {
       return {
