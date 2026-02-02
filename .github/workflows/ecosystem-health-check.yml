@@ -39,6 +39,14 @@ jobs:
             node scripts/health-check-service.mjs
           fi
 
+      - name: Data Freshness Monitor
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          SUPABASE_SHARED_URL: ${{ secrets.SUPABASE_SHARED_URL }}
+          SUPABASE_SHARED_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SHARED_SERVICE_ROLE_KEY }}
+        run: node scripts/data-freshness-monitor.mjs || echo "::warning::Data freshness check found stale data"
+
       - name: Check for critical alerts
         if: success()
         env:

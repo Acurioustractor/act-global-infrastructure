@@ -44,6 +44,23 @@ const cronScripts = [
     script: 'scripts/agent-learning-job.mjs',
     cron_restart: '0 2 * * *', // Daily 2am AEST (before storyteller sync)
   },
+  {
+    name: 'meeting-sync',
+    script: 'scripts/sync-notion-meetings.mjs',
+    args: '--days 7',
+    cron_restart: '30 5 * * *', // Daily 5:30am AEST (before embed at 6am)
+  },
+  {
+    name: 'knowledge-pipeline',
+    script: 'scripts/knowledge-pipeline.mjs',
+    args: '--verbose',
+    cron_restart: '0 8 * * *', // Daily 8am AEST (after embed-knowledge at 6am UTC/4pm AEST)
+  },
+  {
+    name: 'data-freshness',
+    script: 'scripts/data-freshness-monitor.mjs',
+    cron_restart: '0 */6 * * *', // Every 6 hours
+  },
 ];
 
 module.exports = {
