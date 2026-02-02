@@ -1,15 +1,25 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
-import { Send, Bot, User, Loader2 } from 'lucide-react'
+import { Send, Bot, User, Loader2, Zap } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
+
+interface Usage {
+  model: string
+  input_tokens: number
+  output_tokens: number
+  cost: number
+  tool_calls: number
+  latency_ms: number
+}
 
 interface Message {
   role: 'user' | 'assistant'
   content: string
   timestamp: Date
+  usage?: Usage
 }
 
 const SUGGESTIONS = [
@@ -19,17 +29,30 @@ const SUGGESTIONS = [
   'What are our top priorities this week?',
 ]
 
+function formatCost(cost: number): string {
+  if (cost < 0.001) return '<$0.001'
+  return `$${cost.toFixed(3)}`
+}
+
+function modelLabel(model: string): string {
+  if (model.includes('haiku')) return 'Haiku'
+  if (model.includes('sonnet')) return 'Sonnet'
+  if (model.includes('opus')) return 'Opus'
+  return model
+}
+
 export function AgentChat() {
   const [messages, setMessages] = useState<Message[]>([
     {
       role: 'assistant',
       content:
-        "G'day! I'm your ACT Business Agent. I can help you think through operations, projects, contacts, and finances. What can I help with?",
+        "G'day! I'm your ACT Business Agent. I can query your database, pull daily briefings, and check financial summaries. What can I help with?",
       timestamp: new Date(),
     },
   ])
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
+  const [sessionCost, setSessionCost] = useState(0)
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const textareaRef = useRef<HTMLTextAreaElement>(null)
 
@@ -77,9 +100,14 @@ export function AgentChat() {
         role: 'assistant',
         content: data.response || data.error || 'Sorry, something went wrong.',
         timestamp: new Date(),
+        usage: data.usage,
       }
 
       setMessages((prev) => [...prev, assistantMessage])
+
+      if (data.usage?.cost) {
+        setSessionCost((prev) => prev + data.usage.cost)
+      }
     } catch (error) {
       console.error('Agent chat error:', error)
       setMessages((prev) => [
@@ -161,12 +189,28 @@ export function AgentChat() {
                     {msg.content}
                   </ReactMarkdown>
                 </div>
-                <p className="mt-2 text-[10px] text-white/30">
-                  {msg.timestamp.toLocaleTimeString('en-AU', {
-                    hour: '2-digit',
-                    minute: '2-digit',
-                  })}
-                </p>
+                <div className="mt-2 flex items-center gap-2">
+                  <p className="text-[10px] text-white/30">
+                    {msg.timestamp.toLocaleTimeString('en-AU', {
+                      hour: '2-digit',
+                      minute: '2-digit',
+                    })}
+                  </p>
+                  {msg.usage && (
+                    <span className="flex items-center gap-1 text-[10px] text-white/20">
+                      <Zap className="h-2.5 w-2.5" />
+                      {modelLabel(msg.usage.model)}
+                      {msg.usage.tool_calls > 0 && (
+                        <span>
+                          {' '}
+                          {msg.usage.tool_calls} tool{msg.usage.tool_calls > 1 ? 's' : ''}
+                        </span>
+                      )}
+                      <span>{formatCost(msg.usage.cost)}</span>
+                      <span>{(msg.usage.latency_ms / 1000).toFixed(1)}s</span>
+                    </span>
+                  )}
+                </div>
               </div>
             </div>
           ))}
@@ -180,7 +224,7 @@ export function AgentChat() {
               <div className="rounded-2xl bg-white/5 px-4 py-3">
                 <div className="flex items-center gap-2 text-white/50">
                   <Loader2 className="h-4 w-4 animate-spin" />
-                  <span className="text-sm">Thinking...</span>
+                  <span className="text-sm">Querying data...</span>
                 </div>
               </div>
             </div>
@@ -212,29 +256,36 @@ export function AgentChat() {
 
       {/* Input area */}
       <div className="border-t border-white/10 bg-[#0a0f1a]/80 px-4 py-4 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-3xl gap-3">
-          <textarea
-            ref={textareaRef}
-            value={input}
-            onChange={handleTextareaChange}
-            onKeyDown={handleKeyDown}
-            placeholder="Ask the ACT Business Agent..."
-            className="flex-1 resize-none rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white placeholder-white/30 outline-none transition-colors focus:border-indigo-500/50 focus:ring-1 focus:ring-indigo-500/30"
-            rows={1}
-            disabled={loading}
-          />
-          <button
-            onClick={sendMessage}
-            disabled={!input.trim() || loading}
-            className={cn(
-              'flex h-[46px] w-[46px] shrink-0 items-center justify-center rounded-xl transition-all',
-              input.trim() && !loading
-                ? 'bg-indigo-500 text-white hover:bg-indigo-400'
-                : 'bg-white/5 text-white/20 cursor-not-allowed'
-            )}
-          >
-            <Send className="h-4 w-4" />
-          </button>
+        <div className="mx-auto max-w-3xl">
+          <div className="flex gap-3">
+            <textarea
+              ref={textareaRef}
+              value={input}
+              onChange={handleTextareaChange}
+              onKeyDown={handleKeyDown}
+              placeholder="Ask the ACT Business Agent..."
+              className="flex-1 resize-none rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white placeholder-white/30 outline-none transition-colors focus:border-indigo-500/50 focus:ring-1 focus:ring-indigo-500/30"
+              rows={1}
+              disabled={loading}
+            />
+            <button
+              onClick={sendMessage}
+              disabled={!input.trim() || loading}
+              className={cn(
+                'flex h-[46px] w-[46px] shrink-0 items-center justify-center rounded-xl transition-all',
+                input.trim() && !loading
+                  ? 'bg-indigo-500 text-white hover:bg-indigo-400'
+                  : 'bg-white/5 text-white/20 cursor-not-allowed'
+              )}
+            >
+              <Send className="h-4 w-4" />
+            </button>
+          </div>
+          {sessionCost > 0 && (
+            <p className="mt-1.5 text-right text-[10px] text-white/20">
+              Session: {formatCost(sessionCost)}
+            </p>
+          )}
         </div>
       </div>
     </div>
