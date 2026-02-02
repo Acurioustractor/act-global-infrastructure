@@ -28,6 +28,8 @@ import {
   ListChecks,
   Gavel,
   Bot,
+  Briefcase,
+  Zap,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import type { LucideIcon } from 'lucide-react'
@@ -89,6 +91,7 @@ const navGroups: NavGroup[] = [
     icon: Brain,
     children: [
       { href: '/knowledge', label: 'Overview', icon: Brain },
+      { href: '/compendium/storytellers', label: 'Storytellers', icon: Heart, color: 'text-pink-400', bg: 'bg-pink-500/20' },
       { href: '/knowledge/meetings', label: 'Meetings', icon: MessageSquare },
       { href: '/knowledge/actions', label: 'Actions', icon: ListChecks },
       { href: '/knowledge/decisions', label: 'Decisions', icon: Gavel },
@@ -100,7 +103,9 @@ const navGroups: NavGroup[] = [
     icon: Settings,
     children: [
       { href: '/agent', label: 'Agent', icon: Bot, color: 'text-purple-400', bg: 'bg-purple-500/20' },
+      { href: '/intelligence', label: 'Intelligence', icon: Zap, color: 'text-indigo-400', bg: 'bg-indigo-500/20' },
       { href: '/finance', label: 'Finance', icon: DollarSign },
+      { href: '/business', label: 'Business', icon: Briefcase },
       { href: '/reports', label: 'Reports', icon: FileBarChart },
       { href: '/wiki', label: 'Wiki', icon: BookOpen },
       { href: '/system', label: 'System', icon: Settings },

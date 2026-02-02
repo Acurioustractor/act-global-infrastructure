@@ -21,7 +21,8 @@ import {
 import { cn } from '@/lib/utils'
 import { OpportunitiesPanel } from '@/components/opportunities-panel'
 
-function formatCurrency(amount: number) {
+function formatCurrency(amount: number | undefined | null) {
+  if (amount == null) return '$0'
   if (amount >= 1000) {
     return `$${(amount / 1000).toFixed(amount >= 10000 ? 0 : 1)}K`
   }
