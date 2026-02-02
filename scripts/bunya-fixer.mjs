@@ -16,6 +16,7 @@
 
 import { createClient } from '@supabase/supabase-js';
 import { AgenticWorkflow } from './lib/agentic-workflow.mjs';
+import { readFileSync } from 'fs';
 import dotenv from 'dotenv';
 
 dotenv.config({ path: '.env.local' });
@@ -31,7 +32,15 @@ if (!SUPABASE_KEY) {
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 const workflow = new AgenticWorkflow('bunya-fixer', { verbose: true });
 
-// Project code to full name mapping
+// Load project codes from config as fallback for name resolution
+let CONFIG_PROJECTS = {};
+try {
+  const raw = readFileSync(new URL('../config/project-codes.json', import.meta.url), 'utf8');
+  const parsed = JSON.parse(raw);
+  CONFIG_PROJECTS = parsed.projects || parsed;
+} catch { /* config not available — use hardcoded map */ }
+
+// Project code to full name mapping (hardcoded primary, config fallback)
 const PROJECT_NAMES = {
   'ACT-JH': 'JusticeHub',
   'ACT-GD': 'Goods',
@@ -159,7 +168,7 @@ async function getHealthIssues(projectFilter = null) {
  */
 async function fixNoContacts(project, dryRun = false) {
   const code = project.code;
-  const projectName = PROJECT_NAMES[code] || code;
+  const projectName = PROJECT_NAMES[code] || CONFIG_PROJECTS[code]?.name || code;
   const tags = PROJECT_TAGS[code] || [];
 
   if (tags.length === 0) {
@@ -232,12 +241,31 @@ async function fixNoContacts(project, dryRun = false) {
  */
 async function fixColdContacts(project, dryRun = false) {
   const code = project.code;
-  const projectName = PROJECT_NAMES[code] || code;
+  const projectName = PROJECT_NAMES[code] || CONFIG_PROJECTS[code]?.name || code;
 
   console.log(`  🌱 Creating cultivator warmup proposal for ${projectName}`);
 
   if (dryRun) {
     return { action: 'would_propose', type: 'cultivator_warmup' };
+  }
+
+  // Check for existing pending proposal (prevent duplicates)
+  try {
+    const { data: existing } = await supabase
+      .from('agent_proposals')
+      .select('id')
+      .eq('agent_id', 'bunya-fixer')
+      .eq('action_name', 'cultivator_warmup')
+      .eq('status', 'pending')
+      .ilike('title', `%${projectName}%`)
+      .limit(1);
+
+    if (existing && existing.length > 0) {
+      console.log(`  ⏭️  Proposal already exists for ${projectName} (${existing[0].id})`);
+      return { action: 'skipped', reason: 'duplicate' };
+    }
+  } catch {
+    // Non-critical — proceed with creation
   }
 
   // Create a proposal for human approval
@@ -280,7 +308,7 @@ async function fixColdContacts(project, dryRun = false) {
  */
 async function fixNoActivity(project, dryRun = false) {
   const code = project.code;
-  const projectName = PROJECT_NAMES[code] || code;
+  const projectName = PROJECT_NAMES[code] || CONFIG_PROJECTS[code]?.name || code;
 
   // Extract days from risks
   const daysMatch = (project.risks || []).join(' ').match(/(\d+) days/);
@@ -290,6 +318,25 @@ async function fixNoActivity(project, dryRun = false) {
 
   if (dryRun) {
     return { action: 'would_propose', type: 'check_in' };
+  }
+
+  // Check for existing pending proposal (prevent duplicates)
+  try {
+    const { data: existing } = await supabase
+      .from('agent_proposals')
+      .select('id')
+      .eq('agent_id', 'bunya-fixer')
+      .eq('action_name', 'schedule_checkin')
+      .eq('status', 'pending')
+      .ilike('title', `%${projectName}%`)
+      .limit(1);
+
+    if (existing && existing.length > 0) {
+      console.log(`  ⏭️  Proposal already exists for ${projectName} (${existing[0].id})`);
+      return { action: 'skipped', reason: 'duplicate' };
+    }
+  } catch {
+    // Non-critical — proceed with creation
   }
 
   // Create a proposal for human approval

@@ -56,8 +56,9 @@ export function createWebhookProcessor(supabase: SupabaseClient) {
         };
       }
 
-      // Determine event type from payload
-      const eventType = (payload.type as string) || (payload.event as string) || 'unknown';
+      // Determine event type from payload, normalizing GHL PascalCase to dotted format
+      const rawEventType = (payload.type as string) || (payload.event as string) || 'unknown';
+      const eventType = source === 'ghl' ? normalizeGHLEventType(rawEventType) : rawEventType;
 
       // Step 2: Log delivery as received
       await eventBus.logWebhookDelivery(source, eventType, 'received', rawBody);
@@ -136,4 +137,32 @@ export function createWebhookProcessor(supabase: SupabaseClient) {
 function extractEntityType(eventType: string): string {
   const parts = eventType.split('.');
   return parts[0] || 'unknown';
+}
+
+/**
+ * Normalize GHL event type strings to dotted lowercase format.
+ * GHL workflows send PascalCase (e.g., "ContactCreate", "OpportunityStageUpdate")
+ * while the API uses dotted format (e.g., "contact.create", "opportunity.stage_update").
+ */
+function normalizeGHLEventType(raw: string): string {
+  if (raw.includes('.')) return raw.toLowerCase();
+
+  const map: Record<string, string> = {
+    contactcreate: 'contact.create',
+    contactupdate: 'contact.update',
+    contactdelete: 'contact.delete',
+    opportunitycreate: 'opportunity.create',
+    opportunityupdate: 'opportunity.update',
+    opportunitystageupdate: 'opportunity.stage_update',
+    opportunitystatusupdate: 'opportunity.status_update',
+    opportunitystatuschange: 'opportunity.status_change',
+    opportunitymonetaryvalueupdate: 'opportunity.monetary_value_update',
+    notecreate: 'note.create',
+    noteupdate: 'note.update',
+    taskcreate: 'task.create',
+    taskcomplete: 'task.complete',
+  };
+
+  const key = raw.toLowerCase().replace(/[^a-z]/g, '');
+  return map[key] || raw.toLowerCase();
 }

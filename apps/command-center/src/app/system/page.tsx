@@ -1,7 +1,9 @@
 'use client'
 
 import { useQuery } from '@tanstack/react-query'
-import { getConnectors, getAgents, getInfrastructureHealth } from '@/lib/api'
+import Link from 'next/link'
+import { getConnectors, getAgents, getInfrastructureHealth, getDataFreshness } from '@/lib/api'
+import type { DataFreshnessSource } from '@/lib/api'
 import {
   Settings,
   CheckCircle2,
@@ -39,6 +41,12 @@ export default function SystemPage() {
     queryFn: getAgents,
   })
 
+  const { data: freshnessData } = useQuery({
+    queryKey: ['data-freshness'],
+    queryFn: getDataFreshness,
+    refetchInterval: 5 * 60 * 1000, // Refresh every 5 minutes
+  })
+
   const isLoading = healthLoading || connectorsLoading || agentsLoading
 
   if (isLoading) {
@@ -50,8 +58,8 @@ export default function SystemPage() {
   const overallScore = health?.overall_score || 80
 
   // Count statuses
-  const configuredConnectors = connectors.filter((c: any) => c.status === 'configured').length
-  const missingConnectors = connectors.filter((c: any) => c.status === 'missing_vars').length
+  const configuredConnectors = connectors.filter((c: any) => c.status === 'connected').length
+  const missingConnectors = connectors.filter((c: any) => c.status === 'disconnected').length
   const activeAgents = agents.filter((a: any) => a.status === 'active').length
   const idleAgents = agents.filter((a: any) => a.status === 'idle').length
 
@@ -195,7 +203,7 @@ export default function SystemPage() {
 
             <div className="space-y-2">
               {connectors.map((connector: any) => {
-                const isConfigured = connector.status === 'configured'
+                const isConfigured = connector.status === 'connected'
                 return (
                   <div key={connector.name} className="glass-card-sm p-3 flex items-center justify-between">
                     <div className="flex items-center gap-3">
@@ -243,7 +251,9 @@ export default function SystemPage() {
                 <Bot className="h-5 w-5 text-purple-400" />
                 Agents
               </h2>
-              <span className="text-sm text-white/50">{agents.length} registered</span>
+              <Link href="/agent" className="text-sm text-purple-400 hover:text-purple-300 transition-colors">
+                Full Dashboard →
+              </Link>
             </div>
 
             <div className="space-y-2">
@@ -284,6 +294,69 @@ export default function SystemPage() {
           </div>
         </div>
       </div>
+
+      {/* Data Freshness */}
+      {freshnessData && (
+        <div className="mt-6">
+          <div className="glass-card p-6">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-lg font-semibold text-white flex items-center gap-2">
+                <Clock className="h-5 w-5 text-cyan-400" />
+                Data Freshness
+              </h2>
+              <div className="flex gap-2 text-xs">
+                <span className="px-2 py-0.5 rounded-full bg-green-500/20 text-green-400">
+                  {freshnessData.summary.healthy} healthy
+                </span>
+                {freshnessData.summary.warning > 0 && (
+                  <span className="px-2 py-0.5 rounded-full bg-orange-500/20 text-orange-400">
+                    {freshnessData.summary.warning} warning
+                  </span>
+                )}
+                {freshnessData.summary.critical > 0 && (
+                  <span className="px-2 py-0.5 rounded-full bg-red-500/20 text-red-400">
+                    {freshnessData.summary.critical} critical
+                  </span>
+                )}
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+              {freshnessData.sources.map((source: DataFreshnessSource) => (
+                <div key={source.table} className={cn(
+                  'glass-card-sm p-3 rounded-lg border',
+                  source.status === 'ok' ? 'border-green-500/20' :
+                  source.status === 'warn' ? 'border-orange-500/20' :
+                  'border-red-500/20'
+                )}>
+                  <div className="flex items-center justify-between mb-1">
+                    <p className="text-xs font-medium text-white/80 truncate">{source.label}</p>
+                    {source.status === 'ok' ? (
+                      <CheckCircle2 className="h-3.5 w-3.5 text-green-400 shrink-0" />
+                    ) : source.status === 'warn' ? (
+                      <AlertCircle className="h-3.5 w-3.5 text-orange-400 shrink-0" />
+                    ) : (
+                      <XCircle className="h-3.5 w-3.5 text-red-400 shrink-0" />
+                    )}
+                  </div>
+                  <p className={cn(
+                    'text-lg font-bold',
+                    source.status === 'ok' ? 'text-green-400' :
+                    source.status === 'warn' ? 'text-orange-400' :
+                    'text-red-400'
+                  )}>
+                    {source.age_hours != null ? `${source.age_hours}h` : '—'}
+                  </p>
+                  <p className="text-[10px] text-white/30">
+                    {source.row_count != null ? `${source.row_count.toLocaleString()} rows` : ''}
+                    {source.note ? ` · ${source.note}` : ''}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Agent Approvals + Live Activity Feed */}
       <div className="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-6">
