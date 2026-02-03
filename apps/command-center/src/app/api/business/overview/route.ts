@@ -1,13 +1,95 @@
 import { NextResponse } from 'next/server'
+import { supabase } from '@/lib/supabase'
 
 /**
  * GET /api/business/overview
  *
  * Returns BusinessData for the business setup page.
- * This is config/reference data sourced from docs/legal/entity-structure.md,
- * not database data — hardcoded and maintained here.
+ * Combines static entity config with live Xero financial data.
  */
 export async function GET() {
+  // === LIVE FINANCIAL DATA FROM XERO ===
+  const now = new Date()
+
+  // Australian financial year: July 1 to June 30
+  let fyYear = now.getFullYear()
+  if (now.getMonth() < 6) fyYear -= 1
+  const fyStart = new Date(fyYear, 6, 1)
+  const fyStartStr = fyStart.toISOString().split('T')[0]
+
+  // This month
+  const monthStart = new Date(now.getFullYear(), now.getMonth(), 1)
+  const monthStartStr = monthStart.toISOString().split('T')[0]
+
+  // Last 30 days
+  const thirtyDaysAgo = new Date()
+  thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30)
+  const thirtyDaysAgoStr = thirtyDaysAgo.toISOString().split('T')[0]
+
+  // FY totals
+  const { data: fyTxns } = await supabase
+    .from('xero_transactions')
+    .select('total, type')
+    .gte('date', fyStartStr)
+
+  let fyIncome = 0, fyExpenses = 0
+  for (const tx of fyTxns || []) {
+    const amt = Math.abs(Number(tx.total) || 0)
+    if (tx.type === 'RECEIVE') fyIncome += amt
+    else if (tx.type === 'SPEND') fyExpenses += amt
+  }
+
+  // This month
+  const { data: monthTxns } = await supabase
+    .from('xero_transactions')
+    .select('total, type')
+    .gte('date', monthStartStr)
+
+  let monthIncome = 0, monthExpenses = 0
+  for (const tx of monthTxns || []) {
+    const amt = Math.abs(Number(tx.total) || 0)
+    if (tx.type === 'RECEIVE') monthIncome += amt
+    else if (tx.type === 'SPEND') monthExpenses += amt
+  }
+
+  // Recent 30 days cash flow
+  const { data: recentTxns } = await supabase
+    .from('xero_transactions')
+    .select('total, type')
+    .gte('date', thirtyDaysAgoStr)
+
+  let recentIn = 0, recentOut = 0
+  for (const tx of recentTxns || []) {
+    const amt = Math.abs(Number(tx.total) || 0)
+    if (tx.type === 'RECEIVE') recentIn += amt
+    else if (tx.type === 'SPEND') recentOut += amt
+  }
+
+  // Bank balance (latest from Xero or estimate)
+  const { data: latestBalance } = await supabase
+    .from('xero_transactions')
+    .select('bank_account, running_balance')
+    .order('date', { ascending: false })
+    .limit(1)
+    .single()
+
+  // Subscriptions total
+  const { data: subs } = await supabase
+    .from('subscriptions')
+    .select('amount')
+    .eq('status', 'active')
+
+  const monthlySubscriptions = (subs || []).reduce((sum, s) => sum + (Number(s.amount) || 0), 0)
+
+  // Unpaid invoices (receivables)
+  const { data: unpaidInvoices } = await supabase
+    .from('xero_invoices')
+    .select('total')
+    .eq('status', 'AUTHORISED')
+
+  const receivables = (unpaidInvoices || []).reduce((sum, inv) => sum + (Number(inv.total) || 0), 0)
+
+  // === STATIC CONFIG DATA ===
   const data = {
     entities: {
       pty: {
@@ -106,5 +188,36 @@ export async function GET() {
     ],
   }
 
-  return NextResponse.json(data)
+  // Add live financial data
+  const financials = {
+    asOf: now.toISOString(),
+    fyLabel: `FY${fyYear}/${(fyYear + 1).toString().slice(-2)}`,
+    fyToDate: {
+      income: Math.round(fyIncome),
+      expenses: Math.round(fyExpenses),
+      net: Math.round(fyIncome - fyExpenses),
+    },
+    thisMonth: {
+      label: now.toLocaleDateString('en-AU', { month: 'long', year: 'numeric' }),
+      income: Math.round(monthIncome),
+      expenses: Math.round(monthExpenses),
+      net: Math.round(monthIncome - monthExpenses),
+    },
+    last30Days: {
+      cashIn: Math.round(recentIn),
+      cashOut: Math.round(recentOut),
+      netFlow: Math.round(recentIn - recentOut),
+    },
+    currentPosition: {
+      bankBalance: latestBalance?.running_balance ? Math.round(Number(latestBalance.running_balance)) : null,
+      receivables: Math.round(receivables),
+      monthlySubscriptions: Math.round(monthlySubscriptions),
+      burnRate: Math.round(monthExpenses),
+      runway: monthExpenses > 0 && latestBalance?.running_balance
+        ? Math.round(Number(latestBalance.running_balance) / monthExpenses)
+        : null,
+    },
+  }
+
+  return NextResponse.json({ ...data, financials })
 }
