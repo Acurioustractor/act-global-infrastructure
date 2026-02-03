@@ -34,8 +34,8 @@ import dotenv from 'dotenv';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-// Load environment
-dotenv.config({ path: '.env.local' });
+// Load environment from project root
+dotenv.config({ path: join(__dirname, '..', '.env.local'), override: true });
 
 // Stats tracking
 const stats = {
