@@ -22,6 +22,26 @@ Every storyteller owns their content. They decide:
 
 This is **true data sovereignty** - not just privacy, but genuine ownership and control.
 
+### OCAP Principles
+
+The platform is built on Indigenous data sovereignty principles:
+- **Ownership** - Communities own their collective data
+- **Control** - Communities control access and use
+- **Access** - Communities can access their own data anytime
+- **Possession** - Data stays under community custody
+
+## Platform Status
+
+| Metric | Value |
+|--------|-------|
+| Status | Production Ready (January 2026) |
+| Code | ~36,650 lines |
+| Components | 131 custom components |
+| API Endpoints | 60+ routes |
+| Security Score | 98/100 |
+| Sprints Completed | 8/8 (100%) |
+| Cultural Safety | 100% OCAP compliant |
+
 ## ALMA Framework
 
 ALMA (Active Listening, Measuring, Amplifying) is our methodology for capturing impact through stories:
@@ -48,6 +68,62 @@ Building technology that gives communities control over their narratives while g
 
 ### Art
 Amplifying voices through multimedia storytelling - audio, video, written, visual.
+
+## Technology
+
+### Tech Stack
+```
+Frontend: Next.js 15, React 19, TypeScript
+Styling: Tailwind CSS (Editorial Warmth palette)
+Backend: Supabase (PostgreSQL, Auth, Storage, Realtime)
+AI: Claude 3 Sonnet / GPT-4 (opt-in only)
+Maps: Mapbox (optional)
+Email: SendGrid (optional)
+Deployment: Vercel
+Testing: Vitest, Playwright
+Local Port: 3001
+```
+
+### Key Features
+
+**Cultural Safety Features**
+- Elder Review System - Required approval workflow for sacred content
+- Sacred Content Protection - Multi-layer access controls
+- Ongoing Consent - Renewable consent with expiry (6-12 months)
+- Cultural Protocols - Customizable per organization
+- Trigger Warnings - Sensitive content support
+- AI Opt-In - No AI analysis without explicit consent
+
+**Core Capabilities**
+- Multi-tenant architecture (all tables have tenant_id)
+- Row-Level Security on every table
+- SROI Calculator with cultural value proxies
+- Network visualization for thematic connections
+- Knowledge Base RAG (231 docs → 22,506 chunks)
+- Ralph Audit System for brand/UI consistency
+
+### Design System - Editorial Warmth
+```
+Colors:
+- Terracotta (#D76E56) - Primary action
+- Forest Green (#4A7C59) - Success
+- Ochre (#E8A45E) - Accent
+- Cream (#F5F1E8) - Background
+- Charcoal (#2C3E50) - Text
+```
+
+## User Roles
+
+1. **Storyteller** - Create/publish stories, manage consent
+2. **Organization Admin** - Manage storytellers, analytics, reports
+3. **Elder** - Review cultural content, set protocols
+4. **Super Admin** - Platform-wide management
+
+## Integration Points
+
+- **JusticeHub** - Youth justice platform integration
+- **ACT Farm** - Agricultural data connections
+- **Goods on Country** - Community impact stories (240 storytellers)
 
 ## Related Projects
 

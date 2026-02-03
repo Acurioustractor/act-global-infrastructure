@@ -13,6 +13,15 @@ The justice system often fails young people by treating symptoms rather than add
 - Build pathways forward rather than cycles of punishment
 - Respect cultural protocols and community wisdom
 
+### Beautiful Obsolescence
+
+Our ultimate success metric: Communities saying "We don't need ACT anymore. We run this ourselves now."
+
+We're not building dependency. We're building community power through:
+- Superior tools designed for community ownership
+- Authentic partnerships that transfer capability
+- Systems designed for independence, not lock-in
+
 ## LCAA Framework
 
 ### Listen
@@ -31,16 +40,48 @@ Building platforms and programs that center community voice:
 ### Art
 Storytelling that shifts narratives around youth and justice. Amplifying the voices of young people to challenge deficit-based thinking.
 
+## Technology
+
+### Platform Capabilities
+- Youth voice collection and amplification
+- Service mapping and referral
+- Outcome tracking and reporting
+- Community-designed workflows
+
+### Tech Stack
+```
+Framework: Next.js with App Router
+UI: React, Tailwind CSS, Radix UI
+Backend: Supabase (PostgreSQL, Auth, RLS)
+Deployment: Vercel
+Local Port: 3003
+```
+
 ## Key Partnerships
 
 - **Diagrama Foundation (Spain)** - Learning from their therapeutic community model
 - **Quandamooka community** - Co-designing justice responses on Minjerribah
 - **Queensland Youth Services** - Statewide youth voice network
+- **Healthcare providers** - Trauma-informed support integration
+
+## Data & Impact
+
+### Current Reach
+- Multiple Queensland communities engaged
+- Youth voice programs active
+- Diversion programs operational
+
+### Measurement Approach
+- Community-defined success metrics
+- Qualitative impact through storytelling
+- Systems change indicators
+- Recidivism reduction tracking
 
 ## Related Projects
 
 - [Empathy Ledger](/compendium/empathy-ledger) - Capturing storyteller voices from justice-involved young people
 - [The Studio](/compendium/the-studio) - Technology platform development
+- [Intelligence Platform](/wiki/intelligence-platform) - Monitoring and analytics
 
 ## Resources
 
