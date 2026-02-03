@@ -27,7 +27,13 @@
 
 import { createClient } from '@supabase/supabase-js';
 import { createGHLService } from './lib/ghl-api-service.mjs';
-import 'dotenv/config';
+import dotenv from 'dotenv';
+import { join, dirname } from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+dotenv.config({ path: join(__dirname, '..', '.env.local'), override: true });
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // CONFIGURATION
@@ -99,20 +105,21 @@ function createACTClient() {
 async function getStorytellersWithCounts(elClient, options = {}) {
   const { limit } = options;
 
-  // Get active storytellers
+  // Get active storytellers with profile email
+  // Note: avatar_url was renamed to public_avatar_url in EL v2
+  // email was moved to profiles table
   let query = elClient
     .from('storytellers')
     .select(`
       id,
       profile_id,
       display_name,
-      email,
       bio,
       location,
       cultural_background,
       language_skills,
       areas_of_expertise,
-      avatar_url,
+      public_avatar_url,
       is_active,
       is_elder,
       is_featured,
@@ -120,7 +127,11 @@ async function getStorytellersWithCounts(elClient, options = {}) {
       justicehub_enabled,
       author_role,
       created_at,
-      updated_at
+      updated_at,
+      profiles:profile_id (
+        email,
+        full_name
+      )
     `)
     .eq('is_active', true)
     .order('updated_at', { ascending: false });
@@ -239,7 +250,7 @@ function storytellerToGHLContact(storyteller) {
   return {
     firstName,
     lastName,
-    email: storyteller.email,
+    email: storyteller.profiles?.email || '',
     address1: storyteller.location || '',
     tags,
     customFields,
