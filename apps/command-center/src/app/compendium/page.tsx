@@ -14,6 +14,8 @@ import {
   ExternalLink,
   Activity,
   Users,
+  Github,
+  Globe,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { getProjects, type Project } from '@/lib/api'
@@ -29,6 +31,8 @@ const coreProjects = [
     bg: 'bg-blue-500/20',
     border: 'border-blue-500/30',
     actPlaceUrl: 'https://act.place/projects/justicehub',
+    website: 'https://justicehub.vercel.app',
+    github: 'https://github.com/Acurioustractor/justicehub-platform',
   },
   {
     slug: 'empathy-ledger',
@@ -40,6 +44,8 @@ const coreProjects = [
     bg: 'bg-pink-500/20',
     border: 'border-pink-500/30',
     actPlaceUrl: 'https://act.place/projects/empathy-ledger',
+    website: 'https://empathy-ledger-v2.vercel.app',
+    github: 'https://github.com/Acurioustractor/empathy-ledger-v2',
   },
   {
     slug: 'goods',
@@ -51,6 +57,8 @@ const coreProjects = [
     bg: 'bg-orange-500/20',
     border: 'border-orange-500/30',
     actPlaceUrl: 'https://act.place/projects/goods-on-country',
+    website: 'https://goods-on-country.vercel.app',
+    github: 'https://github.com/Acurioustractor/goods-asset-tracker',
   },
   {
     slug: 'the-harvest',
@@ -62,6 +70,8 @@ const coreProjects = [
     bg: 'bg-green-500/20',
     border: 'border-green-500/30',
     actPlaceUrl: 'https://act.place/projects/the-harvest',
+    website: 'https://the-harvest.vercel.app',
+    github: 'https://github.com/Acurioustractor/theharvest',
   },
   {
     slug: 'the-farm',
@@ -73,6 +83,8 @@ const coreProjects = [
     bg: 'bg-amber-500/20',
     border: 'border-amber-500/30',
     actPlaceUrl: 'https://act.place/farm',
+    website: 'https://act-farm.vercel.app',
+    github: 'https://github.com/Acurioustractor/act-farm',
   },
   {
     slug: 'the-studio',
@@ -83,7 +95,9 @@ const coreProjects = [
     color: 'text-purple-400',
     bg: 'bg-purple-500/20',
     border: 'border-purple-500/30',
-    actPlaceUrl: 'https://regenerative.studio',
+    actPlaceUrl: 'https://act.place/studio',
+    website: 'https://act-regenerative-studio.vercel.app',
+    github: 'https://github.com/Acurioustractor/act-regenerative-studio',
   },
 ]
 
@@ -173,21 +187,25 @@ export default function CompendiumPage() {
                 </div>
               )}
 
-              <div className="flex items-center justify-between mt-4 pt-4 border-t border-white/5">
+              {/* External Links */}
+              <div className="flex items-center gap-2 mt-4 pt-4 border-t border-white/5">
+                {project.website && (
+                  <span className="text-xs text-white/30 flex items-center gap-1">
+                    <Globe className="h-3 w-3" />
+                    Website
+                  </span>
+                )}
+                {project.github && (
+                  <span className="text-xs text-white/30 flex items-center gap-1">
+                    <Github className="h-3 w-3" />
+                    GitHub
+                  </span>
+                )}
+                <span className="flex-1" />
                 <span className="text-sm text-white/40 group-hover:text-white/60 transition-colors flex items-center gap-1">
                   View Compendium
                   <ArrowRight className="h-4 w-4" />
                 </span>
-                <a
-                  href={project.actPlaceUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={(e) => e.stopPropagation()}
-                  className="text-xs text-white/30 hover:text-white/50 flex items-center gap-1"
-                >
-                  <ExternalLink className="h-3 w-3" />
-                  act.place
-                </a>
               </div>
             </Link>
           )
