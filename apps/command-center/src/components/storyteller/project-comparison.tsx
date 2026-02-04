@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import {
   Scale,
   Heart,
@@ -27,7 +28,13 @@ function getProjectMeta(name: string) {
   return { icon: Heart, color: 'text-white/60', bg: 'bg-white/10' }
 }
 
-export function ProjectComparison({ radarData }: { radarData: ImpactRadarEntry[] | undefined }) {
+interface ProjectComparisonProps {
+  radarData: ImpactRadarEntry[] | undefined
+  /** Map of project name → project ID for linking to detail pages */
+  projectIdMap?: Map<string, string>
+}
+
+export function ProjectComparison({ radarData, projectIdMap }: ProjectComparisonProps) {
   if (!radarData || radarData.length === 0) {
     return null
   }
@@ -47,8 +54,10 @@ export function ProjectComparison({ radarData }: { radarData: ImpactRadarEntry[]
               project.capability + project.connection + project.sovereignty) / 6
           ).toFixed(2)
 
-          return (
-            <div key={project.project} className="glass-card p-5">
+          const projectId = projectIdMap?.get(project.project)
+
+          const cardContent = (
+            <>
               <div className="flex items-center gap-3 mb-3">
                 <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${meta.bg}`}>
                   <Icon className={`h-5 w-5 ${meta.color}`} />
@@ -70,6 +79,20 @@ export function ProjectComparison({ radarData }: { radarData: ImpactRadarEntry[]
                   <p className="text-white font-medium capitalize">{topDimension}</p>
                 </div>
               </div>
+            </>
+          )
+
+          return projectId ? (
+            <Link
+              key={project.project}
+              href={`/compendium/storytellers/project/${encodeURIComponent(projectId)}`}
+              className="glass-card p-5 hover:border-indigo-500/30 transition-colors cursor-pointer"
+            >
+              {cardContent}
+            </Link>
+          ) : (
+            <div key={project.project} className="glass-card p-5">
+              {cardContent}
             </div>
           )
         })}

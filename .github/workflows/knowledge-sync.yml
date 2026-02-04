@@ -1,0 +1,207 @@
+name: Knowledge Sync - Daily
+
+on:
+  schedule:
+    # Run daily at 6:00 AM UTC (after master-automation at 5 AM)
+    - cron: '0 6 * * *'
+
+  workflow_dispatch:
+    inputs:
+      steps:
+        description: 'Which steps to run'
+        required: false
+        default: 'all'
+        type: choice
+        options:
+          - all
+          - meetings-only
+          - embed-only
+          - decay-only
+          - pipeline-only
+          - health-only
+          - episodes-only
+          - summaries-only
+          - freshness-only
+
+jobs:
+  knowledge-sync:
+    name: Knowledge Sync Pipeline
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+      # STEP 1: Sync Notion meetings → project_knowledge
+      # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+      - name: Sync Notion meetings
+        if: >-
+          github.event.inputs.steps == 'all' ||
+          github.event.inputs.steps == 'meetings-only' ||
+          github.event.inputs.steps == ''
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+        run: |
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          echo "STEP 1: Sync Notion meetings → project_knowledge"
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          node scripts/sync-notion-meetings.mjs || echo "Meeting sync completed with warnings"
+
+      # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+      # STEP 2: Generate embeddings for new knowledge
+      # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+      - name: Embed new knowledge
+        if: >-
+          github.event.inputs.steps == 'all' ||
+          github.event.inputs.steps == 'embed-only' ||
+          github.event.inputs.steps == ''
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          echo "STEP 2: Embed new knowledge records"
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          node scripts/embed-knowledge.mjs || echo "Knowledge embedding completed with warnings"
+
+      # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+      # STEP 3: Embed new communications
+      # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+      - name: Embed new communications
+        if: >-
+          github.event.inputs.steps == 'all' ||
+          github.event.inputs.steps == 'embed-only' ||
+          github.event.inputs.steps == ''
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          echo "STEP 3: Embed new communications"
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          node scripts/embed-communications.mjs || echo "Communications embedding completed with warnings"
+
+      # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+      # STEP 4: Run memory decay cycle
+      # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+      - name: Run memory decay
+        if: >-
+          github.event.inputs.steps == 'all' ||
+          github.event.inputs.steps == 'decay-only' ||
+          github.event.inputs.steps == ''
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: |
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          echo "STEP 4: Run memory decay cycle"
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          node scripts/lib/memory-lifecycle.mjs --run-decay || echo "Decay cycle completed with warnings"
+
+      # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+      # STEP 5: Run knowledge pipeline (align + consolidate + graph)
+      # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+      - name: Run knowledge pipeline
+        if: >-
+          github.event.inputs.steps == 'all' ||
+          github.event.inputs.steps == 'pipeline-only' ||
+          github.event.inputs.steps == ''
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: |
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          echo "STEP 5: Knowledge pipeline (align + consolidate + graph)"
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          node scripts/knowledge-pipeline.mjs --verbose || echo "Knowledge pipeline completed with warnings"
+
+      # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+      # STEP 6: Detect memory episodes
+      # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+      - name: Detect episodes
+        if: >-
+          github.event.inputs.steps == 'all' ||
+          github.event.inputs.steps == 'episodes-only' ||
+          github.event.inputs.steps == ''
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          echo "STEP 6: Detect memory episodes"
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          node scripts/detect-episodes.mjs || echo "Episode detection completed with warnings"
+
+      # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+      # STEP 7: Calculate project health scores
+      # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+      - name: Calculate project health
+        if: >-
+          github.event.inputs.steps == 'all' ||
+          github.event.inputs.steps == 'health-only' ||
+          github.event.inputs.steps == ''
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: |
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          echo "STEP 7: Calculate project health scores"
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          node scripts/calculate-project-health.mjs || echo "Project health calculation completed with warnings"
+
+      # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+      # STEP 8: Generate project summaries (AI)
+      # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+      - name: Generate project summaries
+        if: >-
+          github.event.inputs.steps == 'all' ||
+          github.event.inputs.steps == 'summaries-only' ||
+          github.event.inputs.steps == ''
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          echo "STEP 8: Generate AI project summaries"
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          node scripts/generate-project-summaries.mjs --verbose || echo "Project summaries completed with warnings"
+
+      # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+      # STEP 9: Data freshness check
+      # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+      - name: Check data freshness
+        if: >-
+          github.event.inputs.steps == 'all' ||
+          github.event.inputs.steps == 'freshness-only' ||
+          github.event.inputs.steps == ''
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: |
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          echo "STEP 9: Data freshness monitor"
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          node scripts/data-freshness-monitor.mjs || echo "Data freshness check completed with warnings"
+
+      - name: Summary
+        run: |
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          echo "Knowledge sync pipeline complete (9 steps)"
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"

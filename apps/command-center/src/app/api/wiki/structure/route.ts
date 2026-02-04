@@ -1,71 +1,174 @@
 import { NextResponse } from 'next/server'
-import { supabase } from '@/lib/supabase'
+import { readdir, readFile } from 'fs/promises'
+import { join } from 'path'
+import { existsSync } from 'fs'
+
+const WIKI_DIR = join(process.cwd(), 'public', 'wiki')
+
+interface WikiPage {
+  name: string
+  path: string
+  title: string
+}
+
+function stripFrontmatter(content: string): string {
+  const match = content.match(/^---\n[\s\S]*?\n---\n([\s\S]*)$/)
+  return match ? match[1] : content
+}
+
+async function getWikiPages(dir: string): Promise<WikiPage[]> {
+  const pages: WikiPage[] = []
+
+  try {
+    const files = await readdir(dir)
+    for (const file of files) {
+      if (file.endsWith('.md')) {
+        const raw = await readFile(join(dir, file), 'utf-8')
+        // Strip frontmatter before looking for title heading
+        const content = stripFrontmatter(raw)
+        const titleMatch = content.match(/^#\s+(.+)$/m)
+        const title = titleMatch ? titleMatch[1] : file.replace('.md', '')
+        const name = file === 'index.md' ? title : file.replace('.md', '')
+        const path = file === 'index.md' ? '' : file.replace('.md', '')
+        pages.push({ name, path, title })
+      }
+    }
+  } catch {
+    // Directory doesn't exist or can't be read
+  }
+
+  return pages
+}
+
+async function getSubfolderPages(parentDir: string, subfolder: string, pathPrefix: string): Promise<WikiPage[]> {
+  const dir = join(parentDir, subfolder)
+  if (!existsSync(dir)) return []
+  const pages = await getWikiPages(dir)
+  return pages.map(p => ({
+    ...p,
+    path: p.path ? `${pathPrefix}/${subfolder}/${p.path}` : `${pathPrefix}/${subfolder}`,
+  }))
+}
 
 export async function GET() {
   try {
-    // Try to get wiki pages from knowledge table
-    const { data } = await supabase
-      .from('project_knowledge')
-      .select('id, title, project_code, type, metadata')
-      .eq('type', 'wiki')
-      .order('title', { ascending: true })
+    const sections = []
 
-    if (data && data.length > 0) {
-      // Group by project_code as sections
-      const sectionMap = new Map<string, Array<{ name: string; path: string; title: string }>>()
-      for (const page of data) {
-        const section = page.project_code || 'General'
-        if (!sectionMap.has(section)) sectionMap.set(section, [])
-        sectionMap.get(section)!.push({
-          name: page.title,
-          path: page.id,
-          title: page.title,
-        })
-      }
-
-      const sections = Array.from(sectionMap.entries()).map(([title, pages], i) => ({
-        id: String(i),
-        title,
-        pages,
+    // ACT Philosophy section — main page + sub-pages
+    if (existsSync(join(WIKI_DIR, 'act'))) {
+      const actPages = await getWikiPages(join(WIKI_DIR, 'act'))
+      const mappedPages = actPages.map(p => ({
+        ...p,
+        path: p.path ? `act/${p.path}` : 'act',
       }))
 
-      return NextResponse.json({ sections })
+      // Add identity sub-pages
+      const identityPages = await getSubfolderPages(join(WIKI_DIR, 'act'), 'identity', 'act')
+      mappedPages.push(...identityPages)
+
+      // Add appendices sub-pages
+      const appendixPages = await getSubfolderPages(join(WIKI_DIR, 'act'), 'appendices', 'act')
+      mappedPages.push(...appendixPages)
+
+      if (mappedPages.length > 0) {
+        sections.push({
+          id: 'act',
+          title: 'ACT',
+          pages: mappedPages,
+        })
+      }
     }
 
-    // Fallback: return default wiki sections based on known projects
-    const sections = [
-      {
-        id: '0',
-        title: 'ACT',
-        pages: [
-          { name: 'Mission', path: 'mission', title: 'Mission & Vision' },
-          { name: 'LCAA', path: 'lcaa', title: 'LCAA Framework' },
-          { name: 'ALMA', path: 'alma', title: 'ALMA Measurement' },
-          { name: 'Philosophy', path: 'philosophy', title: 'ACT Philosophy' },
-        ],
-      },
-      {
-        id: '1',
+    // Place section
+    if (existsSync(join(WIKI_DIR, 'place'))) {
+      const placePages = await getWikiPages(join(WIKI_DIR, 'place'))
+      if (placePages.length > 0) {
+        sections.push({
+          id: 'place',
+          title: 'Place',
+          pages: placePages.map(p => ({
+            ...p,
+            path: p.path ? `place/${p.path}` : 'place',
+          })),
+        })
+      }
+    }
+
+    // Stories section
+    if (existsSync(join(WIKI_DIR, 'stories'))) {
+      const storyPages = await getWikiPages(join(WIKI_DIR, 'stories'))
+      if (storyPages.length > 0) {
+        // Put index first, then sort rest alphabetically
+        const indexPage = storyPages.find(p => p.path === '')
+        const otherPages = storyPages
+          .filter(p => p.path !== '' && p.path !== 'vignette-template')
+          .sort((a, b) => a.title.localeCompare(b.title))
+
+        const orderedPages = [
+          ...(indexPage ? [indexPage] : []),
+          ...otherPages,
+        ].map(p => ({
+          ...p,
+          path: p.path ? `stories/${p.path}` : 'stories',
+        }))
+
+        sections.push({
+          id: 'stories',
+          title: 'Stories',
+          pages: orderedPages,
+        })
+      }
+    }
+
+    // Projects section
+    const projectFolders = ['empathy-ledger', 'justicehub', 'goods', 'the-harvest', 'the-farm', 'the-studio']
+    const projectPages: WikiPage[] = []
+
+    for (const folder of projectFolders) {
+      const folderPath = join(WIKI_DIR, folder)
+      if (existsSync(folderPath)) {
+        const pages = await getWikiPages(folderPath)
+        const indexPage = pages.find(p => p.path === '')
+        if (indexPage) {
+          projectPages.push({ ...indexPage, path: folder })
+        }
+      }
+    }
+
+    if (projectPages.length > 0) {
+      sections.push({
+        id: 'projects',
         title: 'Projects',
-        pages: [
-          { name: 'Empathy Ledger', path: 'empathy-ledger', title: 'Empathy Ledger' },
-          { name: 'JusticeHub', path: 'justicehub', title: 'JusticeHub' },
-          { name: 'Goods', path: 'goods', title: 'Goods Marketplace' },
-          { name: 'The Farm', path: 'the-farm', title: 'The Farm' },
-          { name: 'The Harvest', path: 'the-harvest', title: 'The Harvest' },
-          { name: 'The Studio', path: 'the-studio', title: 'Innovation Studio' },
+        pages: projectPages,
+      })
+    }
+
+    // If no files found, return fallback structure
+    if (sections.length === 0) {
+      return NextResponse.json({
+        sections: [
+          {
+            id: 'act',
+            title: 'ACT',
+            pages: [
+              { name: 'A Curious Tractor', path: 'act', title: 'A Curious Tractor' },
+            ],
+          },
+          {
+            id: 'projects',
+            title: 'Projects',
+            pages: [
+              { name: 'Empathy Ledger', path: 'empathy-ledger', title: 'Empathy Ledger' },
+              { name: 'JusticeHub', path: 'justicehub', title: 'JusticeHub' },
+              { name: 'Goods', path: 'goods', title: 'Goods' },
+              { name: 'The Harvest', path: 'the-harvest', title: 'The Harvest' },
+              { name: 'The Farm', path: 'the-farm', title: 'The Farm' },
+              { name: 'The Studio', path: 'the-studio', title: 'The Studio' },
+            ],
+          },
         ],
-      },
-      {
-        id: '2',
-        title: 'Operations',
-        pages: [
-          { name: 'Tech Stack', path: 'tech-stack', title: 'Technology Stack' },
-          { name: 'Architecture', path: 'architecture', title: 'System Architecture' },
-          { name: 'Integrations', path: 'integrations', title: 'Integrations' },
-        ],
-      },
-    ]
+      })
+    }
 
     return NextResponse.json({ sections })
   } catch (e) {

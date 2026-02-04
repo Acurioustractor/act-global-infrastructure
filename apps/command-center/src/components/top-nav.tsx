@@ -30,6 +30,7 @@ import {
   Bot,
   Briefcase,
   Zap,
+  Code2,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import type { LucideIcon } from 'lucide-react'
@@ -107,6 +108,7 @@ const navGroups: NavGroup[] = [
       { href: '/finance', label: 'Finance', icon: DollarSign },
       { href: '/business', label: 'Business', icon: Briefcase },
       { href: '/reports', label: 'Reports', icon: FileBarChart },
+      { href: '/development', label: 'Development', icon: Code2, color: 'text-cyan-400', bg: 'bg-cyan-500/20' },
       { href: '/wiki', label: 'Wiki', icon: BookOpen },
       { href: '/system', label: 'System', icon: Settings },
     ],

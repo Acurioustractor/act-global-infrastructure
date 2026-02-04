@@ -21,14 +21,21 @@ import {
   MessageSquare,
   ListChecks,
   Gavel,
+  UserCheck,
+  Send,
+  Edit3,
+  Check,
 } from 'lucide-react'
 import {
   getCalendarEvents,
   getEcosystemOverview,
+  getRelationshipNudges,
+  saveCalendarNote,
   search,
   searchKnowledge,
   type KnowledgeSearchHit,
   type EcosystemProject,
+  type RelationshipNudge,
 } from '@/lib/api'
 import { cn, getGreeting } from '@/lib/utils'
 import { ActionFeed } from '@/components/action-feed'
@@ -38,6 +45,7 @@ import { GrantsPipeline } from '@/components/today/grants-pipeline'
 import { UpcomingDeadlines } from '@/components/today/upcoming-deadlines'
 import { FinanceSummary } from '@/components/today/finance-summary'
 import { BusinessTasks } from '@/components/today/business-tasks'
+import { MorningBriefing } from '@/components/today/morning-briefing'
 
 const REFRESH_INTERVAL = 30 * 1000
 
@@ -139,8 +147,15 @@ export default function TodayPage() {
     refetchInterval: REFRESH_INTERVAL,
   })
 
+  const { data: nudgesData } = useQuery({
+    queryKey: ['relationships', 'nudges'],
+    queryFn: () => getRelationshipNudges(5),
+    refetchInterval: REFRESH_INTERVAL * 4,
+  })
+
   const events = calendarData?.events || []
   const projects = ecosystemData?.projects || []
+  const nudges = nudgesData?.nudges || []
 
   return (
     <div className="min-h-screen p-4 md:p-8">
@@ -243,22 +258,7 @@ export default function TodayPage() {
             ) : (
               <div className="space-y-2">
                 {events.slice(0, 5).map((event) => (
-                  <Link
-                    key={event.id}
-                    href={event.link || '/today'}
-                    target={event.link ? '_blank' : undefined}
-                    rel={event.link ? 'noopener noreferrer' : undefined}
-                    className="glass-card-sm p-3 flex items-center gap-3 hover:border-indigo-500/30 transition-all"
-                  >
-                    <div className="text-center min-w-[45px]">
-                      <p className="text-sm font-semibold text-white">
-                        {event.start_time ? format(new Date(event.start_time), 'HH:mm') : '--:--'}
-                      </p>
-                    </div>
-                    <div className="flex-1">
-                      <p className="text-sm font-medium text-white truncate">{event.title}</p>
-                    </div>
-                  </Link>
+                  <CalendarEventCard key={event.id} event={event} />
                 ))}
               </div>
             )}
@@ -285,8 +285,10 @@ export default function TodayPage() {
           <CommunicationsNeeded />
         </div>
 
-        {/* RIGHT COLUMN: Finance + Pipeline + Deadlines */}
+        {/* RIGHT COLUMN: Briefing + People + Finance + Pipeline + Deadlines */}
         <div className="order-3 lg:col-span-3 space-y-4 md:space-y-6">
+          <MorningBriefing />
+          <PeopleToReach nudges={nudges} />
           <FinanceSummary />
           <GrantsPipeline />
           <UpcomingDeadlines />
@@ -343,6 +345,11 @@ function ProjectCard({ project }: { project: EcosystemProject }) {
       <p className="text-sm font-medium text-white truncate group-hover:text-indigo-300 transition-colors">
         {project.name}
       </p>
+      {project.summary && (
+        <p className="text-[11px] text-white/40 mt-1 line-clamp-2 leading-relaxed">
+          {project.summary.substring(0, 120)}...
+        </p>
+      )}
       {hasActivity && (
         <div className="flex items-center gap-2 mt-1">
           {project.contacts > 0 && (
@@ -354,6 +361,152 @@ function ProjectCard({ project }: { project: EcosystemProject }) {
         </div>
       )}
     </Link>
+  )
+}
+
+// ─── People to Reach Card ────────────────────────────────────────
+
+function PeopleToReach({ nudges }: { nudges: RelationshipNudge[] }) {
+  if (nudges.length === 0) return null
+
+  return (
+    <div className="glass-card p-5">
+      <div className="flex items-center justify-between mb-4">
+        <h2 className="font-semibold text-white flex items-center gap-2">
+          <UserCheck className="h-5 w-5 text-amber-400" />
+          People to Reach
+        </h2>
+        <Link href="/people" className="text-xs text-indigo-400 hover:text-indigo-300 flex items-center gap-1">
+          All <ArrowUpRight className="h-3 w-3" />
+        </Link>
+      </div>
+      <div className="space-y-3">
+        {nudges.map((nudge) => (
+          <div key={nudge.id} className="glass-card-sm p-3">
+            <div className="flex items-center gap-2 mb-1">
+              <div className="w-7 h-7 rounded-full bg-amber-500/20 flex items-center justify-center">
+                <User className="h-3.5 w-3.5 text-amber-400" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-medium text-white truncate">{nudge.name}</p>
+                {nudge.company && (
+                  <p className="text-[10px] text-white/40 truncate">{nudge.company}</p>
+                )}
+              </div>
+              {nudge.daysSinceContact != null && (
+                <span className={cn(
+                  'text-[10px] px-1.5 py-0.5 rounded-full shrink-0',
+                  nudge.daysSinceContact > 60 ? 'bg-red-500/20 text-red-400' :
+                  nudge.daysSinceContact > 30 ? 'bg-amber-500/20 text-amber-400' :
+                  'bg-blue-500/20 text-blue-400'
+                )}>
+                  {nudge.daysSinceContact}d ago
+                </span>
+              )}
+            </div>
+            <p className="text-[11px] text-white/50 mt-1">{nudge.suggestedAction}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+// ─── Calendar Event Card with Note Input ─────────────────────────
+
+function CalendarEventCard({ event }: { event: { id: string; title: string; start_time: string; link?: string; attendees?: Array<{ email: string; name?: string }> } }) {
+  const [showNoteInput, setShowNoteInput] = React.useState(false)
+  const [noteText, setNoteText] = React.useState('')
+  const [saving, setSaving] = React.useState(false)
+  const [saved, setSaved] = React.useState(false)
+
+  const handleSaveNote = async () => {
+    if (!noteText.trim()) return
+    setSaving(true)
+    try {
+      await saveCalendarNote({
+        eventId: event.id,
+        eventTitle: event.title,
+        note: noteText,
+        attendees: event.attendees?.map(a => a.name || a.email) || [],
+      })
+      setSaved(true)
+      setNoteText('')
+      setTimeout(() => {
+        setSaved(false)
+        setShowNoteInput(false)
+      }, 2000)
+    } catch {
+      // silent fail
+    }
+    setSaving(false)
+  }
+
+  // Check if event is in the past (could add reflection)
+  const isPast = new Date(event.start_time) < new Date()
+
+  return (
+    <div className="glass-card-sm p-3 hover:border-indigo-500/30 transition-all">
+      <div className="flex items-center gap-3">
+        <div className="text-center min-w-[45px]">
+          <p className="text-sm font-semibold text-white">
+            {event.start_time ? format(new Date(event.start_time), 'HH:mm') : '--:--'}
+          </p>
+        </div>
+        <div className="flex-1 min-w-0">
+          {event.link ? (
+            <Link
+              href={event.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm font-medium text-white truncate block hover:text-indigo-300 transition-colors"
+            >
+              {event.title}
+            </Link>
+          ) : (
+            <p className="text-sm font-medium text-white truncate">{event.title}</p>
+          )}
+        </div>
+        {isPast && (
+          <button
+            onClick={() => setShowNoteInput(!showNoteInput)}
+            className={cn(
+              'p-1.5 rounded-md transition-all shrink-0',
+              showNoteInput ? 'bg-indigo-500/20 text-indigo-400' : 'hover:bg-white/10 text-white/30'
+            )}
+            title="Add meeting reflection"
+          >
+            <Edit3 className="h-3.5 w-3.5" />
+          </button>
+        )}
+      </div>
+      {showNoteInput && (
+        <div className="mt-2 ml-[57px]">
+          <textarea
+            value={noteText}
+            onChange={(e) => setNoteText(e.target.value)}
+            placeholder="How did it go? Key takeaways..."
+            className="w-full bg-white/5 rounded-md px-3 py-2 text-xs text-white placeholder:text-white/30 outline-none border border-white/10 focus:border-indigo-500/30 resize-none"
+            rows={2}
+          />
+          <div className="flex items-center justify-end gap-2 mt-1">
+            {saved && (
+              <span className="text-[10px] text-emerald-400 flex items-center gap-1">
+                <Check className="h-3 w-3" /> Saved
+              </span>
+            )}
+            <button
+              onClick={handleSaveNote}
+              disabled={saving || !noteText.trim()}
+              className="text-[10px] px-2 py-1 rounded bg-indigo-500/20 text-indigo-400 hover:bg-indigo-500/30 disabled:opacity-40 flex items-center gap-1"
+            >
+              <Send className="h-3 w-3" />
+              {saving ? 'Saving...' : 'Save note'}
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
   )
 }
 

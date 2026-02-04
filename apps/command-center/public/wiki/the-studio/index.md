@@ -1,200 +1,308 @@
-# The Studio (Regenerative Innovation Studio)
+---
+title: "ACT Regenerative Studio"
+slug: "act-regenerative-studio"
+website_path: /
+excerpt: "Central hub and coordination point for the ACT ecosystem"
+category: "core-platform"
+status: "active"
+last_updated: "2026-01-26"
+shareability: "PUBLIC"
 
-> Creative technology and regenerative design
+# Infrastructure
+infrastructure:
+  local_path: "/Users/benknight/Code/act-regenerative-studio"
+  github_repo: "act-now-coalition/act-regenerative-studio"
+  deployed_url: "https://act.place"
+  alt_urls:
+    - "https://act-regenerative-studio.vercel.app"
+  tech_stack:
+    framework: "Next.js 15.1.3"
+    language: "TypeScript"
+    runtime: "React 19"
+    database: "Supabase (PostgreSQL)"
+    ai: "Anthropic Claude, OpenAI"
+    hosting: "Vercel"
+  supabase_project: "tednluwflfhxyucgwigh"
 
-## Philosophy
+# Data Connections
+data_connections:
+  key_tables:
+    - wiki_pages
+    - embeddings
+    - gmail_integration
+    - notifications
+    - human_verification_system
+    - ghl_contact_sync
+    - media_items
+    - descript_platform
+    - enrichment_review
+  external_apis:
+    - notion
+    - github
+    - google
+    - resend
 
-The Studio is where **technology serves community**, not the other way around. We believe technology should amplify human connection, make itself unnecessary, and leave communities more capable than before.
+# GHL Integration
+ghl_integration:
+  pipeline: "ACT Studio"
+  tags: ["act", "studio", "farm", "retreat"]
+  central_sync: true
 
-Most tech extracts data, attention, and value from communities. The Studio inverts this by:
+# Xero Integration
+xero_integration:
+  tracking_category: "ACT"
+  project_codes: ["ACT-CORE", "ACT-ADMIN"]
 
-- Building technology that communities own and control
-- Designing for community benefit, not engagement metrics
-- Open-sourcing everything we can
-- Training communities to maintain and evolve their own systems
+# Health Monitoring
+health:
+  status: "degraded"
+  health_score: 67
+  last_check: "2026-01-24"
+  response_time_ms: 417
 
-### Beautiful Obsolescence
+# Authority Check
+authority:
+  who_holds: "ACT Foundation"
+  how_we_know: "Organizational governance"
+  consent_status: "In place"
+  handover_plan: "Open source, documentation"
+---
 
-Our ultimate success metric: Communities saying:
-> "ACT? We don't need them anymore. We run this ourselves now."
+# ACT Regenerative Studio
 
-We're not building dependency. We're building community power through:
-- Superior tools designed for community ownership
-- Authentic partnerships that transfer capability
-- Systems designed for independence, not lock-in
-- Platform forking capabilities
-- Complete data export tools
+**Central hub and coordination point for the entire ACT ecosystem. Where technology serves community ownership.**
 
-## Platform Status
+---
 
-| Metric | Value |
-|--------|-------|
-| Status | Production Ready |
-| Sites Managed | 6 applications |
-| Process Manager | PM2 (production-grade) |
-| Local Orchestration | Bash + AppleScript |
+## Philosophy Alignment
 
-## Design Principles
+The Studio embodies these ACT principles:
 
-### Regenerative by Default
-Every system we build should leave things better than we found them - more connected, more capable, more sovereign.
+| Principle | How The Studio Embodies It |
+|-----------|---------------------------|
+| **Tools Should Create Space** | Infrastructure is quiet — reduces admin, holds context |
+| **Build for Handover** | Open source, documentation, training materials |
+| **Art Returns Us to Listen** | Technology serves storytelling and cultural expression |
+| **Identity Before Product** | We start with who we serve, not what we build |
 
-### Community Ownership
-Technology belongs to the communities it serves. We build for handover, not dependency.
+---
 
-### Appropriate Technology
-The right tool for the context. Sometimes that's high-tech, sometimes it's no-tech.
+## LCAA in Practice
 
-### Privacy & Sovereignty
-Data stays with communities. Systems work offline. No surveillance capitalism.
+| Phase | Studio Application |
+|-------|--------------------|
+| **Listen** | Community needs assessments, partner conversations |
+| **Curiosity** | Technology exploration, architecture decisions |
+| **Action** | Platform development, deployment, operations |
+| **Art** | Compendium, visual system, public communication |
 
-## LCAA Framework
+---
 
-### Listen
-Understanding what communities actually need from technology. Not what we think they need, what they tell us they need.
+## Quick Links
 
-### Curiosity
-Exploring emerging technologies through a regenerative lens. What serves community? What extracts from it?
+| Resource | Link |
+|----------|------|
+| **Live Site** | [act.place](https://act.place) |
+| **GitHub** | [act-regenerative-studio](https://github.com/act-now-coalition/act-regenerative-studio) |
+| **Supabase** | [Dashboard](https://supabase.com/dashboard/project/tednluwflfhxyucgwigh) |
+| **Vercel** | [Deployment](https://vercel.com/act-now-coalition/act-regenerative-studio) |
 
-### Action
-Building tools for the ACT ecosystem:
-- Empathy Ledger platform
-- JusticeHub systems
-- Goods marketplace
-- Command Center (this platform)
-- The Harvest & Farm websites
-- Intelligence Platform
+---
 
-### Art
-Designing beautiful, intuitive interfaces that respect users. Technology as craft.
+## Infrastructure Overview
 
-## Technology
+```
+┌─────────────────────────────────────────────────────────────┐
+│ ACT REGENERATIVE STUDIO                                     │
+├─────────────────────────────────────────────────────────────┤
+│                                                             │
+│  Frontend (Vercel)          Database (Supabase)             │
+│  ┌───────────────┐          ┌──────────────────────┐       │
+│  │ Next.js 15    │          │ PostgreSQL           │       │
+│  │ React 19      │◄────────►│ Wiki pages           │       │
+│  │ TypeScript    │          │ Media items          │       │
+│  │ App Router    │          │ GHL sync             │       │
+│  └───────────────┘          └──────────────────────┘       │
+│                                                             │
+│  External Integrations                                      │
+│  ┌─────────┐  ┌─────────┐  ┌─────────┐  ┌─────────┐       │
+│  │ Notion  │  │ GitHub  │  │ Gmail   │  │ Resend  │       │
+│  │ API     │  │ Octokit │  │ OAuth   │  │ Email   │       │
+│  └─────────┘  └─────────┘  └─────────┘  └─────────┘       │
+│                                                             │
+│  AI Services                                                │
+│  ┌─────────┐  ┌─────────┐  ┌─────────┐                    │
+│  │ Claude  │  │ OpenAI  │  │ Redis   │                    │
+│  │ Anthrop │  │ GPT-4   │  │ Cache   │                    │
+│  └─────────┘  └─────────┘  └─────────┘                    │
+│                                                             │
+└─────────────────────────────────────────────────────────────┘
+```
 
-### Unified Ecosystem Orchestration
-The Studio manages all 6 ACT sites through PM2 with one-command startup:
+---
+
+## Role in Ecosystem
+
+ACT Studio is the **central hub** connecting all ecosystem projects:
+
+```
+                    ┌─────────────────────┐
+                    │  ACT STUDIO (Hub)   │
+                    │  act.place          │
+                    └──────────┬──────────┘
+                               │
+       ┌───────────┬───────────┼───────────┬───────────┐
+       │           │           │           │           │
+       ▼           ▼           ▼           ▼           ▼
+┌───────────┐ ┌───────────┐ ┌───────────┐ ┌───────────┐ ┌───────────┐
+│ Empathy   │ │ Justice   │ │   The     │ │  Goods    │ │   ACT     │
+│ Ledger    │ │   Hub     │ │ Harvest   │ │ on Country│ │   Farm    │
+└───────────┘ └───────────┘ └───────────┘ └───────────┘ └───────────┘
+```
+
+---
+
+## Data Sources
+
+### Database (Supabase)
+
+**Key Tables:**
+- `wiki_pages` - Living knowledge base with PMPP classification
+- `embeddings` - Vector search capabilities
+- `gmail_integration` - Email tracking
+- `notifications` - Alert system
+- `human_verification_system` - Quality control
+- `ghl_contact_sync` - GoHighLevel CRM sync
+- `media_items` - Media management
+- `descript_platform` - Video/audio integration
+- `enrichment_review` - Content enrichment workflow
+
+### GHL (Central Sync)
+
+| Field | Value |
+|-------|-------|
+| Pipeline | ACT Studio |
+| Tags | act, studio, farm, retreat |
+| Role | Central contact sync |
+
+### Xero (Finance)
+
+| Tracking | Code |
+|----------|------|
+| Category | ACT |
+| Projects | ACT-CORE, ACT-ADMIN |
+
+---
+
+## Health Status
+
+| Check | Status |
+|-------|--------|
+| Site Reachable | ⚠️ Degraded |
+| Health Score | 67/100 |
+| Response Time | 417ms |
+| Last Check | 2026-01-24 |
+| SSL Expires | 2026-04-04 |
+
+---
+
+## Key Features
+
+### Public Pages
+| Route | Purpose |
+|-------|---------|
+| `/` | Homepage |
+| `/about` | About ACT |
+| `/ecosystem` | Ecosystem overview |
+| `/projects/[slug]` | Project portfolio |
+| `/blog` | Content/updates |
+| `/wiki` | Living knowledge base |
+| `/contact` | Contact form |
+
+### Portfolio
+| Route | Purpose |
+|-------|---------|
+| `/art/*` | Art programs |
+| `/farm/*` | Farm programs |
+| `/harvest/*` | Harvest programs |
+| `/goods` | Goods on Country |
+| `/lcaa` | LCAA project |
+| `/media-lab` | Media production |
+
+### Admin Dashboard
+| Route | Purpose |
+|-------|---------|
+| `/admin/dashboard` | Main admin |
+| `/admin/ecosystem` | Ecosystem management |
+| `/admin/media-gallery` | Media library |
+| `/admin/media-lab` | Media production |
+| `/admin/content` | Content management |
+| `/admin/wiki-scanner` | Automated wiki updates |
+| `/admin/enrichment-review` | Content enrichment |
+| `/admin/knowledge-review` | Knowledge curation |
+
+---
+
+## Compendium (Living Wiki)
+
+The compendium at `/compendium/` contains:
+- **7 sections**: Identity, Place, Ecosystem, Story, Operations, Roadmap, Appendices
+- **~95 pages** of organizational knowledge
+- **31 vignettes** across 7 categories
+- **35 project pages** with ALMA signals
+
+---
+
+## Development
 
 ```bash
-act-start      # Start all sites + Chrome with all tabs
-act-stop       # Stop all sites
-act-restart    # Restart all sites
-act-status     # Show running sites
-act-logs       # View live logs
-act-monitor    # PM2 dashboard
+# Clone
+git clone git@github.com:act-now-coalition/act-regenerative-studio.git
+cd act-regenerative-studio
+
+# Install
+npm install
+
+# Environment
+cp .env.example .env.local
+# Add Supabase, API keys
+
+# Run
+npm run dev
+# → http://localhost:3002
 ```
 
-### Local Ecosystem Ports
-```
-Port 3001 - Empathy Ledger
-Port 3002 - ACT Regenerative Studio (main hub)
-Port 3003 - JusticeHub
-Port 3004 - The Harvest
-Port 3005 - ACT Farm
-Port 3999 - ACT Placemat (Intelligence Platform)
-```
+---
 
-### Core Tech Stack
-```
-Frontend: React, Next.js (14-16), TypeScript
-Backend: Node.js, Supabase, Vercel
-AI: Claude AI, OpenAI, local models where appropriate
-Design: Figma, Tailwind CSS
-Process Management: PM2
-Testing: Vitest, Playwright
-```
+## API Endpoints
 
-### Consistent Patterns Across Projects
+### Core
+- `/api/auth/*` - Authentication
+- `/api/dashboard/*` - Dashboard data
+- `/api/ecosystem/*` - Ecosystem data
 
-**Frontend:**
-- Next.js with App Router
-- React 18-19
-- TypeScript strict mode
-- Tailwind CSS 3-4
+### Content
+- `/api/knowledge/*` - Knowledge base
+- `/api/media/*` - Media operations
+- `/api/projects/*` - Project management
+- `/api/enrichment-review/*` - Content enrichment
 
-**Backend:**
-- Supabase (PostgreSQL, Auth, Storage, Realtime)
-- Row-Level Security (RLS) on all tables
-- Server/client pattern for Supabase access
+### Integrations
+- `/api/notifications/*` - Notifications
+- `/api/registry/*` - Service registry
+- `/api/webhooks/*` - External integrations
 
-**Deployment:**
-- Vercel for frontend hosting
-- Environment variables via `.env.local`
-- Production-ready configurations
+---
 
-## Key Innovations
+## Authority Check
 
-### Ralph Audit System
-Automated brand and UI/UX auditing with Claude:
-- Brand consistency verification
-- PRD compliance checking
-- Visual regression testing
-- Reusable across all projects
+| Question | Answer |
+|----------|--------|
+| **Who holds authority?** | ACT Foundation board |
+| **How do we know?** | Organizational governance |
+| **Consent in place?** | Standard policies |
+| **Handover plan?** | Open source, comprehensive documentation |
 
-### Knowledge Base RAG System
-231 docs → 22,506 chunks with semantic search:
-- 506 Q&A extractions
-- Vector embeddings
-- Applicable across documentation
+---
 
-### QR Asset Tracking
-778 unique QR codes for physical goods:
-- Organized by community and product
-- Public support forms via scan
-- Scalable model for other assets
-
-### ALMA (AI Living Memory Architecture)
-Intelligence layer connecting projects:
-- Seed scripts for initiatives, contexts, evidence
-- Cross-project memory and learning
-- Continuous improvement system
-
-## Integration Ecosystem
-
-**Shared APIs:**
-- Supabase (multiple projects)
-- GoHighLevel (CRM/marketing automation)
-- Stripe (payments)
-- Anthropic Claude AI
-- OpenAI
-- Notion
-- Google APIs (Gmail, Calendar)
-- Xero (financial)
-- LinkedIn (network intelligence)
-
-**Common Services:**
-- Redis caching (NAS: 192.168.0.34:6379)
-- ChromaDB (NAS: 192.168.0.34:8000)
-- PM2 process management
-- Vercel deployment
-
-## Documentation Standards
-
-### PMPP Framework
-- **Principles** - Why we do things
-- **Methods** - Frameworks and approaches
-- **Practices** - Technical design
-- **Procedures** - Step-by-step guides
-
-### Common Docs
-- README.md - Project overview
-- CLAUDE.md - AI assistant context
-- QUICKSTART.md - Fast reference
-- Package.json - Scripts and dependencies
-- .env.example - Environment template
-
-## Open Source
-
-All ACT technology is open source where possible:
-- [GitHub: Acurioustractor](https://github.com/Acurioustractor)
-
-## Related Projects
-
-- [Empathy Ledger](/compendium/empathy-ledger) - Storytelling platform
-- [JusticeHub](/compendium/justicehub) - Justice transformation platform
-- [Goods](/compendium/goods) - Community marketplace
-- [The Harvest](/compendium/the-harvest) - Community food systems
-- [The Farm](/compendium/the-farm) - Land-based healing
-
-## Resources
-
-- [Regenerative Studio](https://act-regenerative-studio.vercel.app)
-- [GitHub Repository](https://github.com/Acurioustractor/act-regenerative-studio)
+*See also: [Ecosystem Overview](../overview.md) | [Infrastructure](../../05-operations/infrastructure.md)*

@@ -34,8 +34,27 @@ export async function GET() {
     // Query open opportunities
     const { data: opportunities } = await supabase
       .from('ghl_opportunities')
-      .select('id, name, monetary_value, tags, status')
+      .select('id, name, monetary_value, project_code, status')
       .eq('status', 'open')
+
+    // Query latest project summaries
+    const { data: summaries } = await supabase
+      .from('project_summaries')
+      .select('project_code, summary_text, stats, generated_at')
+      .order('generated_at', { ascending: false })
+      .limit(50)
+
+    // Build latest summary lookup (deduplicate — keep latest per project)
+    const latestSummary: Record<string, { text: string; generatedAt: string; stats: Record<string, unknown> }> = {}
+    for (const s of summaries || []) {
+      if (!latestSummary[s.project_code]) {
+        latestSummary[s.project_code] = {
+          text: s.summary_text,
+          generatedAt: s.generated_at,
+          stats: s.stats as Record<string, unknown>,
+        }
+      }
+    }
 
     // Build per-project stats
     const projects = PROJECT_CODES.map((proj) => {
@@ -54,13 +73,16 @@ export async function GET() {
         return codes.some((pc: string) => pc.toLowerCase() === codeLower || pc.toLowerCase() === nameLower)
       }).length
 
-      // Count opportunities tagged to this project
+      // Count opportunities for this project
       const projectOpps = (opportunities || []).filter((o) => {
-        const tags = (o.tags || []).map((t: string) => t.toLowerCase())
-        return tags.some((t: string) => t.includes(codeLower) || t.includes(nameLower))
+        const code = (o.project_code || '').toLowerCase()
+        return code === codeLower || code === nameLower
       })
       const oppCount = projectOpps.length
       const oppValue = projectOpps.reduce((sum, o) => sum + (o.monetary_value || 0), 0)
+
+      // Get AI summary
+      const summary = latestSummary[proj.code] || null
 
       return {
         code: proj.code,
@@ -71,6 +93,8 @@ export async function GET() {
         recentComms: commCount,
         opportunities: oppCount,
         opportunityValue: oppValue,
+        summary: summary?.text || null,
+        summaryGeneratedAt: summary?.generatedAt || null,
       }
     })
 

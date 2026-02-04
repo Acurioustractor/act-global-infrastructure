@@ -1,6 +1,6 @@
 'use client'
 
-import { use } from 'react'
+import { use, useMemo } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import Link from 'next/link'
 import {
@@ -25,9 +25,13 @@ import {
   CheckCircle2,
   AlertCircle,
   Edit3,
+  DollarSign,
+  MessageSquare,
+  Clock,
+  Activity,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import { getProjectByCode, getNotionProjectsRaw, type NotionProject } from '@/lib/api'
+import { getProjectByCode, getNotionProjectsRaw, getStorytellerOverview, getStorytellerQuotes, getStorytellerFilters, getGHLOpportunities, getMorningBriefing, getProjectSummary } from '@/lib/api'
 
 // Project configurations with rich data
 const projectData: Record<string, {
@@ -268,6 +272,38 @@ const projectData: Record<string, {
   },
 }
 
+// Map compendium slugs to project codes for AI summary lookup
+const slugToProjectCode: Record<string, string> = {
+  'justicehub': 'JH',
+  'empathy-ledger': 'EL',
+  'the-harvest': 'TH',
+  'the-farm': 'TF',
+  'the-studio': 'TS',
+  'goods': 'GD',
+  'world-tour': 'WT',
+  'picc': 'PICC',
+  'operations': 'OPS',
+  'act-global': 'ACT',
+}
+
+// Map compendium slugs to EL project names for matching
+// These connect ACT ecosystem projects to their Empathy Ledger storyteller data
+const slugToELProjectNames: Record<string, string[]> = {
+  // Core ACT projects
+  'justicehub': ['JusticeHub', 'Diagrama Youth Support', 'Law Student Workshops', 'Young Guns Empowerment Program'],
+  'empathy-ledger': ['Empathy Ledger', 'PICC Annual Report'],
+  'goods': ['Goods.'],
+  'the-harvest': ['The Harvest', 'Fishers Oysters'],
+  'the-farm': ['The Farm', 'MingaMinga Rangers Program'],
+  'the-studio': ['The Studio', 'Regenerative Studio'],
+  // Partner/affiliated projects that roll up to ACT
+  'orange-sky': ['Orange Sky Community Services', 'Global Laundry Alliance'],
+  'palm-island': ['Palm Island Community Connection', 'MMEIC Cultural Initiative'],
+  'homestead': ['The Homestead', 'TOMNET'],
+  'deadly-hearts': ['Deadly Hearts Trek', 'BG Fit'],
+  'youth-peak': ['Youth Peak'],
+}
+
 interface PageParams {
   params: Promise<{ project: string }>
 }
@@ -292,6 +328,97 @@ export default function CompendiumProjectPage({ params }: PageParams) {
   const notionProject = notionData?.projects?.find(p =>
     p.name.toLowerCase().includes(projectSlug.replace(/-/g, ' '))
   )
+
+  // Storyteller data for insights
+  const { data: storytellerData } = useQuery({
+    queryKey: ['storytellers', 'overview'],
+    queryFn: getStorytellerOverview,
+  })
+
+  const { data: quotesData } = useQuery({
+    queryKey: ['storytellers', 'quotes'],
+    queryFn: getStorytellerQuotes,
+  })
+
+  const { data: filtersData } = useQuery({
+    queryKey: ['storyteller-filters'],
+    queryFn: getStorytellerFilters,
+  })
+
+  // Opportunities and briefing data for "What's Happening"
+  const { data: opportunitiesData } = useQuery({
+    queryKey: ['ghl', 'opportunities'],
+    queryFn: () => getGHLOpportunities(),
+  })
+
+  const { data: briefingData } = useQuery({
+    queryKey: ['briefing', 'morning'],
+    queryFn: getMorningBriefing,
+  })
+
+  // AI-generated project summary
+  const projectCode = slugToProjectCode[projectSlug]
+  const { data: summaryData } = useQuery({
+    queryKey: ['project', 'summary', projectCode],
+    queryFn: () => getProjectSummary(projectCode),
+    enabled: !!projectCode,
+  })
+
+  // Filter opportunities related to this project
+  const projectOpportunities = useMemo(() => {
+    if (!opportunitiesData?.opportunities) return []
+    const projectName = projectInfo?.name?.toLowerCase() || ''
+    return opportunitiesData.opportunities.filter(opp =>
+      opp.name?.toLowerCase().includes(projectName) ||
+      opp.pipeline_name?.toLowerCase().includes(projectName)
+    ).slice(0, 5)
+  }, [opportunitiesData?.opportunities, projectInfo?.name])
+
+  // Filter overdue actions related to this project
+  const projectActions = useMemo(() => {
+    if (!briefingData?.actions?.overdue) return []
+    const projectCode = projectSlug.toUpperCase().replace(/-/g, '-')
+    return briefingData.actions.overdue.filter(action =>
+      action.project?.includes(projectCode) ||
+      action.title?.toLowerCase().includes(projectInfo?.name?.toLowerCase() || '')
+    ).slice(0, 3)
+  }, [briefingData?.actions?.overdue, projectSlug, projectInfo?.name])
+
+  // Match EL projects to this compendium slug using exact name matching
+  const matchedProjectIds = useMemo(() => {
+    const elProjectNames = slugToELProjectNames[projectSlug] || []
+    if (!elProjectNames.length || !filtersData?.projects) return []
+    const nameSet = new Set(elProjectNames.map(n => n.toLowerCase()))
+    return filtersData.projects
+      .filter(p => nameSet.has(p.name.toLowerCase()))
+      .map(p => p.id)
+  }, [projectSlug, filtersData?.projects])
+
+  const matchedStorytellers = useMemo(() => {
+    if (!matchedProjectIds.length || !storytellerData?.storytellers) return []
+    const idSet = new Set(matchedProjectIds)
+    return storytellerData.storytellers.filter(s =>
+      s.projects.some(p => idSet.has(p.id))
+    )
+  }, [matchedProjectIds, storytellerData?.storytellers])
+
+  const matchedQuotes = useMemo(() => {
+    if (!matchedStorytellers.length || !quotesData?.quotes) return []
+    const stIds = new Set(matchedStorytellers.map(s => s.id))
+    return quotesData.quotes.filter(q => stIds.has(q.storytellerId))
+  }, [matchedStorytellers, quotesData?.quotes])
+
+  const topThemes = useMemo(() => {
+    const counts = new Map<string, number>()
+    for (const s of matchedStorytellers) {
+      for (const t of s.themes || []) {
+        counts.set(t, (counts.get(t) || 0) + 1)
+      }
+    }
+    return Array.from(counts.entries())
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 5)
+  }, [matchedStorytellers])
 
   if (!projectInfo) {
     return (
@@ -368,6 +495,31 @@ export default function CompendiumProjectPage({ params }: PageParams) {
               </div>
             ))}
           </div>
+        </div>
+      )}
+
+      {/* AI Summary Panel */}
+      {summaryData?.summary && (
+        <div className="glass-card p-6 mb-6 border-l-4 border-indigo-500/40">
+          <div className="flex items-center gap-2 mb-3">
+            <Activity className="h-5 w-5 text-indigo-400" />
+            <h2 className="text-lg font-semibold text-white">What&apos;s Happening</h2>
+            {summaryData.summary.generatedAt && (
+              <span className="ml-auto text-[10px] text-white/30">
+                Updated {new Date(summaryData.summary.generatedAt).toLocaleDateString('en-AU', { day: 'numeric', month: 'short' })}
+              </span>
+            )}
+          </div>
+          <div className="text-sm text-white/70 leading-relaxed whitespace-pre-line">
+            {summaryData.summary.text}
+          </div>
+          {summaryData.summary.dataSources?.length > 0 && (
+            <div className="flex items-center gap-2 mt-3 flex-wrap">
+              {summaryData.summary.dataSources.map((src) => (
+                <span key={src} className="text-[9px] px-1.5 py-0.5 rounded bg-white/5 text-white/30">{src}</span>
+              ))}
+            </div>
+          )}
         </div>
       )}
 
@@ -499,8 +651,178 @@ export default function CompendiumProjectPage({ params }: PageParams) {
                 <BookOpen className="h-4 w-4 text-orange-400" />
                 <span className="text-sm text-white">View on ACT</span>
               </a>
+              <Link
+                href={`/wiki?page=${projectSlug}`}
+                className="flex items-center gap-3 py-2 px-3 rounded-xl hover:bg-white/5 transition-colors"
+              >
+                <FileText className="h-4 w-4 text-indigo-400" />
+                <span className="text-sm text-white">Project Wiki</span>
+              </Link>
             </div>
           </div>
+
+          {/* Storyteller Insights */}
+          {matchedStorytellers.length > 0 && (
+            <div className="glass-card p-6">
+              <h2 className="text-lg font-semibold text-white flex items-center gap-2 mb-4">
+                <Users className="h-5 w-5 text-pink-400" />
+                Storyteller Insights
+              </h2>
+              <div className="space-y-4">
+                {/* Key Metrics */}
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="glass-card-sm p-3 text-center">
+                    <p className="text-2xl font-bold text-white">{matchedStorytellers.length}</p>
+                    <p className="text-xs text-white/50">Storytellers</p>
+                  </div>
+                  <div className="glass-card-sm p-3 text-center">
+                    <p className="text-2xl font-bold text-white">{matchedQuotes.length}</p>
+                    <p className="text-xs text-white/50">Quotes</p>
+                  </div>
+                  <div className="glass-card-sm p-3 text-center">
+                    <p className="text-2xl font-bold text-white">{matchedStorytellers.filter(s => s.isElder).length}</p>
+                    <p className="text-xs text-white/50">Elders</p>
+                  </div>
+                  <div className="glass-card-sm p-3 text-center">
+                    <p className="text-2xl font-bold text-white">{topThemes.length}</p>
+                    <p className="text-xs text-white/50">Themes</p>
+                  </div>
+                </div>
+
+                {/* Top Themes - useful for project updates */}
+                {topThemes.length > 0 && (
+                  <div>
+                    <p className="text-xs text-white/40 uppercase tracking-wide mb-2">Emerging Themes</p>
+                    <div className="flex flex-wrap gap-1.5">
+                      {topThemes.map(([theme, count]) => (
+                        <span
+                          key={theme}
+                          className="px-2 py-0.5 rounded-full text-xs bg-pink-500/20 text-pink-300 border border-pink-500/20"
+                        >
+                          {theme} ({count})
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Featured Quote - can be used in project updates */}
+                {matchedQuotes.length > 0 && (
+                  <div>
+                    <p className="text-xs text-white/40 uppercase tracking-wide mb-2">Featured Voice</p>
+                    <div className="glass-card-sm p-3 border-l-2 border-pink-500">
+                      <p className="text-sm text-white/70 italic line-clamp-4">
+                        &ldquo;{matchedQuotes[0].text}&rdquo;
+                      </p>
+                      <p className="text-xs text-white/40 mt-2">
+                        — {matchedQuotes[0].storyteller}
+                        {matchedQuotes[0].theme && (
+                          <span className="ml-2 px-1.5 py-0.5 rounded bg-white/5 text-white/30">
+                            {matchedQuotes[0].theme}
+                          </span>
+                        )}
+                      </p>
+                    </div>
+                  </div>
+                )}
+
+                {/* Links to storyteller views */}
+                <div className="pt-2 space-y-2">
+                  {matchedProjectIds.length > 0 && (
+                    <Link
+                      href={`/compendium/storytellers/project/${encodeURIComponent(matchedProjectIds[0])}`}
+                      className="flex items-center gap-2 text-sm text-pink-400 hover:text-pink-300 transition-colors"
+                    >
+                      <Heart className="h-3.5 w-3.5" />
+                      View full storyteller analysis →
+                    </Link>
+                  )}
+                  <Link
+                    href="/compendium/storytellers"
+                    className="flex items-center gap-2 text-sm text-white/40 hover:text-white/60 transition-colors"
+                  >
+                    <Users className="h-3.5 w-3.5" />
+                    Explore all storytellers →
+                  </Link>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* What's Happening - Opportunities, Actions, Reminders */}
+          {(projectOpportunities.length > 0 || projectActions.length > 0) && (
+            <div className="glass-card p-6">
+              <h2 className="text-lg font-semibold text-white flex items-center gap-2 mb-4">
+                <Activity className="h-5 w-5 text-amber-400" />
+                What&apos;s Happening
+              </h2>
+              <div className="space-y-4">
+                {/* Pipeline Opportunities */}
+                {projectOpportunities.length > 0 && (
+                  <div>
+                    <p className="text-xs text-white/40 uppercase tracking-wide mb-2">Pipeline</p>
+                    <div className="space-y-2">
+                      {projectOpportunities.map((opp) => (
+                        <div key={opp.id} className="glass-card-sm p-2.5 flex items-center gap-2">
+                          <DollarSign className="h-3.5 w-3.5 text-green-400 flex-shrink-0" />
+                          <div className="flex-1 min-w-0">
+                            <p className="text-sm text-white/70 truncate">{opp.name}</p>
+                            <p className="text-xs text-white/40">{opp.stage_name}</p>
+                          </div>
+                          {opp.monetary_value && (
+                            <span className="text-xs text-green-400 font-medium">
+                              ${(opp.monetary_value / 1000).toFixed(0)}K
+                            </span>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Overdue Actions */}
+                {projectActions.length > 0 && (
+                  <div>
+                    <p className="text-xs text-white/40 uppercase tracking-wide mb-2">Needs Attention</p>
+                    <div className="space-y-2">
+                      {projectActions.map((action) => (
+                        <div key={action.id} className="glass-card-sm p-2.5 flex items-center gap-2">
+                          <Clock className="h-3.5 w-3.5 text-orange-400 flex-shrink-0" />
+                          <p className="text-sm text-white/70 truncate flex-1">{action.title}</p>
+                          <span className="text-xs text-orange-400">{action.daysOverdue}d</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Quick Links */}
+                <div className="pt-2 flex items-center gap-4">
+                  <Link
+                    href="/pipeline"
+                    className="flex items-center gap-1.5 text-xs text-indigo-400 hover:text-indigo-300 transition-colors"
+                  >
+                    <TrendingUp className="h-3 w-3" />
+                    Pipeline
+                  </Link>
+                  <Link
+                    href="/business"
+                    className="flex items-center gap-1.5 text-xs text-cyan-400 hover:text-cyan-300 transition-colors"
+                  >
+                    <DollarSign className="h-3 w-3" />
+                    Finance
+                  </Link>
+                  <Link
+                    href={`/projects/${projectSlug}`}
+                    className="flex items-center gap-1.5 text-xs text-white/40 hover:text-white/60 transition-colors"
+                  >
+                    <MessageSquare className="h-3 w-3" />
+                    All Activity
+                  </Link>
+                </div>
+              </div>
+            </div>
+          )}
 
           {/* Edit Prompt */}
           <div className="glass-card p-6 border-dashed border-white/20">

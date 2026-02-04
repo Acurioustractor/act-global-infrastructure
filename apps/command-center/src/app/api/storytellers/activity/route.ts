@@ -1,28 +1,30 @@
 import { NextResponse } from 'next/server'
-import { supabase } from '@/lib/supabase'
+import { elSupabase as supabase } from '@/lib/supabase'
 
 export async function GET() {
   try {
-    // Recent new storytellers
+    // Recent storytellers
     const { data: recentStorytellers } = await supabase
       .from('storytellers')
       .select('id, display_name, created_at')
       .order('created_at', { ascending: false })
       .limit(10)
 
-    // Recent analyses
+    // Recent master analyses
     const { data: recentAnalyses } = await supabase
       .from('storyteller_master_analysis')
-      .select('id, storyteller_id, analyzed_at, transcript_count')
+      .select('id, storyteller_id, analyzed_at, extracted_themes, transcript_count')
       .order('analyzed_at', { ascending: false })
       .limit(10)
 
     // Get names for analyzed storytellers
-    const analyzerIds = (recentAnalyses || []).map((a) => a.storyteller_id)
-    const { data: analyzerNames } = await supabase
-      .from('storytellers')
-      .select('id, display_name')
-      .in('id', analyzerIds.length > 0 ? analyzerIds : ['none'])
+    const analyzerIds = (recentAnalyses || []).map((a) => a.storyteller_id).filter(Boolean)
+    const { data: analyzerNames } = analyzerIds.length > 0
+      ? await supabase
+          .from('storytellers')
+          .select('id, display_name')
+          .in('id', analyzerIds)
+      : { data: [] }
 
     const nameMap = new Map(
       (analyzerNames || []).map((s) => [s.id, s.display_name || 'Unknown'])
@@ -47,12 +49,16 @@ export async function GET() {
     }
 
     for (const a of recentAnalyses || []) {
+      const themes = (a.extracted_themes as Array<{ theme: string }> | null) || []
+      const themeNames = themes.slice(0, 3).map((t) => t.theme).filter(Boolean)
       timeline.push({
         id: a.id,
         type: 'analysis_complete',
         name: nameMap.get(a.storyteller_id) || 'Unknown',
         date: a.analyzed_at || '',
-        detail: `${a.transcript_count || 0} transcript(s) analyzed`,
+        detail: themeNames.length > 0
+          ? `Themes: ${themeNames.join(', ')}`
+          : `${a.transcript_count || 0} transcripts analyzed`,
       })
     }
 

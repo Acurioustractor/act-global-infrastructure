@@ -1,6 +1,17 @@
 import { NextResponse } from 'next/server'
 import { supabase } from '@/lib/supabase'
 
+// Map Notion project status → LCAA stage
+function statusToLcaaStage(status: string | null | undefined): string | null {
+  if (!status) return null
+  const s = status.toLowerCase()
+  if (s.includes('ideation')) return 'listen'
+  if (s.includes('preparation')) return 'curiosity'
+  if (s.includes('active') || s.includes('internal')) return 'action'
+  if (s.includes('archived') || s.includes('transferred') || s.includes('sunsetting')) return 'art'
+  return null
+}
+
 export async function GET() {
   try {
     // Get projects from Notion sync table
@@ -31,11 +42,13 @@ export async function GET() {
     const projects = (notionProjects || []).map((p) => {
       const code = p.data?.id || p.notion_id || p.id
       const health = healthMap.get(code)
+      const status = p.status || p.data?.status || 'active'
       return {
         code: code,
         name: p.name || p.data?.name || 'Unknown',
         description: p.data?.description || '',
-        status: p.status || p.data?.status || 'active',
+        status,
+        lcaa_stage: statusToLcaaStage(status),
         healthScore: health?.health_score ?? p.data?.healthScore ?? 75,
         contacts: contactCountByProject.get(code) || contactCountByProject.get(p.name?.toLowerCase()) || 0,
         opportunities: [],

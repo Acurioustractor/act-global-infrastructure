@@ -36,16 +36,18 @@ export async function GET() {
       const stages = (pipeline.stages || []).map((stage: { id: string; name: string }) => {
         const stageOpps = pipelineOpps.filter(o => o.ghl_stage_id === stage.id || o.stage_name === stage.name)
         const mapped = stageOpps.map(o => {
-          const updatedAt = o.updated_at || o.created_at || new Date().toISOString()
+          const updatedAt = o.ghl_updated_at || o.updated_at || o.created_at || new Date().toISOString()
+          const createdAt = o.ghl_created_at || o.created_at || ''
           const daysInStage = Math.floor((now - new Date(updatedAt).getTime()) / (1000 * 60 * 60 * 24))
           const entry = {
             id: o.id,
             ghlId: o.ghl_id || '',
             name: o.name || 'Unnamed',
             contactName: o.contact_name || '',
+            contactId: o.ghl_contact_id || '',
             value: Number(o.monetary_value) || 0,
             status: o.status || 'open',
-            createdAt: o.created_at || '',
+            createdAt,
             updatedAt,
             daysInStage,
           }
@@ -64,6 +66,8 @@ export async function GET() {
 
       return {
         id: pipeline.id,
+        ghlId: pipeline.ghl_id || '',
+        ghlLocationId: pipeline.ghl_location_id || '',
         name: pipeline.name,
         stages,
         totalValue: pipelineOpps.reduce((s, o) => s + (Number(o.monetary_value) || 0), 0),

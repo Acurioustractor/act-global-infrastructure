@@ -1,40 +1,42 @@
 import { NextResponse } from 'next/server'
-import { supabase } from '@/lib/supabase'
+import { elSupabase as supabase } from '@/lib/supabase'
+
+interface ExtractedQuote {
+  quote: string
+  context?: string
+  impact_score?: number
+  transcript_id?: string
+  can_be_featured?: boolean
+}
 
 export async function GET() {
   try {
+    // Get master analyses with quotes
     const { data: analyses } = await supabase
       .from('storyteller_master_analysis')
-      .select('storyteller_id, extracted_quotes')
+      .select('storyteller_id, extracted_quotes, extracted_themes, quality_score')
       .not('extracted_quotes', 'is', null)
+      .not('storyteller_id', 'is', null)
 
     // Get storyteller names
     const { data: storytellers } = await supabase
       .from('storytellers')
       .select('id, display_name')
 
-    const nameMap = new Map(
-      (storytellers || []).map((s) => [s.id, s.display_name || 'Unknown'])
-    )
-
     // Get project assignments
-    const { data: assignments } = await supabase
+    const { data: projectAssignments } = await supabase
       .from('project_storytellers')
-      .select('storyteller_id, projects ( name )')
+      .select('storyteller_id, project_id, projects ( name )')
 
-    const projectMap = new Map<string, string>()
-    for (const a of assignments || []) {
-      const project = a.projects as unknown as { name: string } | null
-      if (project) projectMap.set(a.storyteller_id, project.name)
+    const nameMap = new Map<string, string>()
+    for (const s of storytellers || []) {
+      nameMap.set(s.id, s.display_name || 'Unknown')
     }
 
-    interface ExtractedQuote {
-      text?: string
-      quote?: string
-      context?: string
-      theme?: string
-      impact_score?: number
-      significance?: string
+    const projectMap = new Map<string, string>()
+    for (const pa of projectAssignments || []) {
+      const project = pa.projects as unknown as { name: string } | null
+      if (project) projectMap.set(pa.storyteller_id, project.name)
     }
 
     const allQuotes: Array<{
@@ -48,21 +50,23 @@ export async function GET() {
     }> = []
 
     for (const analysis of analyses || []) {
-      const quotes = analysis.extracted_quotes as ExtractedQuote[] | null
-      if (!quotes) continue
+      const quotes = (analysis.extracted_quotes as ExtractedQuote[] | null) || []
+      if (quotes.length === 0) continue
 
-      for (const q of quotes) {
-        const text = q.text || q.quote
-        if (!text) continue
+      const themes = (analysis.extracted_themes as Array<{ theme: string }> | null) || []
+
+      for (let i = 0; i < quotes.length; i++) {
+        const q = quotes[i]
+        if (!q?.quote || typeof q.quote !== 'string') continue
 
         allQuotes.push({
-          text,
+          text: q.quote,
           storyteller: nameMap.get(analysis.storyteller_id) || 'Unknown',
           storytellerId: analysis.storyteller_id,
           project: projectMap.get(analysis.storyteller_id) || null,
           context: q.context || null,
-          theme: q.theme || null,
-          impactScore: q.impact_score ?? 0.5,
+          theme: themes[i % themes.length]?.theme || themes[0]?.theme || null,
+          impactScore: q.impact_score ?? Number(analysis.quality_score) ?? 0.5,
         })
       }
     }

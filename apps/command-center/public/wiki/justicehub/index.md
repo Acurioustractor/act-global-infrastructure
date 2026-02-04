@@ -1,90 +1,333 @@
+---
+title: "JusticeHub"
+slug: "justicehub"
+website_path: /projects/justicehub
+excerpt: "Youth justice platform connecting system-impacted youth with support services"
+category: "core-platform"
+status: "active"
+last_updated: "2026-01-26"
+shareability: "PUBLIC"
+
+# Infrastructure
+infrastructure:
+  local_path: "/Users/benknight/Code/JusticeHub"
+  github_repo: "act-now-coalition/justicehub-platform"
+  deployed_url: "https://justicehub.com.au"
+  alt_urls:
+    - "https://justicehub.act.place"
+  tech_stack:
+    framework: "Next.js 14.2.35"
+    language: "TypeScript"
+    runtime: "React 18"
+    database: "Supabase (PostgreSQL + ChromaDB)"
+    hosting: "Vercel"
+    ai: "Claude, OpenAI, Groq"
+  supabase_projects:
+    - "main"
+    - "yjsf"
+    - "qjt"
+
+# Data Connections
+data_connections:
+  key_tables:
+    - empathy_ledger_core
+    - story_workspaces
+    - services
+    - organizations
+    - organization_links
+    - art_innovation
+
+# GHL Integration
+ghl_integration:
+  pipeline: "Justice"
+  tags: ["youth-justice", "justicehub", "contained"]
+
+# Xero Integration
+xero_integration:
+  tracking_category: "JH"
+  project_codes: ["JH-CORE", "JH-CONTAINED"]
+
+# Health Monitoring
+health:
+  status: "critical"
+  health_score: 47
+  last_check: "2026-01-24"
+  response_time_ms: 141
+
+# Linked Vignettes
+linked_vignettes:
+  - brodie-germaine-journey
+  - brodie-germaine-system-change
+  - youth-voice
+  - proud-pita-pita-wayaka-man
+  - a-guarded-to-self-advocate
+  - m-homelessness-to-independent
+  - educational-transformation
+  - operation-luna
+  - collective-impact
+
+# ALMA Aggregate
+alma_aggregate:
+  avg_evidence: 4.6
+  avg_authority: 4.4
+  total_vignettes: 9
+
+# Authority Check
+authority:
+  who_holds: "Community justice practitioners and advocates"
+  how_we_know: "Partnership agreements with justice organisations, lived experience advisors"
+  consent_status: "In place"
+  handover_plan: "Open-source platform designed for community ownership"
+---
+
 # JusticeHub
 
-> Transforming youth justice through community-led solutions
+**Justice infrastructure centred on community authority and local solutions. Leading Australia into the next generation of justice innovation.**
 
-## Philosophy
+---
 
-JusticeHub exists to transform how communities and systems respond to young people. We believe that **those closest to the problem are closest to the solution**.
+## Philosophy Alignment
 
-The justice system often fails young people by treating symptoms rather than addressing root causes. JusticeHub partners with communities to co-design justice responses that:
+JusticeHub embodies these ACT principles:
 
-- Center the voices of young people and their families
-- Address the underlying factors that lead to justice system contact
-- Build pathways forward rather than cycles of punishment
-- Respect cultural protocols and community wisdom
+| Principle | How JusticeHub Embodies It |
+|-----------|---------------------------|
+| **Community Authority Comes First** | Justice solutions designed by those most impacted |
+| **Evidence is Story, Not Surveillance** | Consented stories as primary evidence, not profiling |
+| **Build for Handover** | Open-source platform designed for community ownership |
+| **Make with Lived Experience** | Pathways for lived-experience leadership |
 
-### Beautiful Obsolescence
+---
 
-Our ultimate success metric: Communities saying "We don't need ACT anymore. We run this ourselves now."
+## LCAA in Practice
 
-We're not building dependency. We're building community power through:
-- Superior tools designed for community ownership
-- Authentic partnerships that transfer capability
-- Systems designed for independence, not lock-in
+| Phase | JusticeHub Application |
+|-------|----------------------|
+| **Listen** | Hearing from communities about what justice means locally |
+| **Curiosity** | Learning from Diagrama (Spain), Oonchiumpa, and community-led alternatives |
+| **Action** | Building research platform, service directory, network visualization |
+| **Art** | Contained installation — making the case for change through art |
 
-## LCAA Framework
+---
 
-### Listen
-Deep listening with young people, families, and communities affected by the justice system. Understanding lived experience before proposing solutions.
+## 2026 Focus
 
-### Curiosity
-Exploring what authentic community-led justice looks like. Learning from Indigenous justice practices, international models like Diagrama, and local community wisdom.
+From the ACT Compendium:
 
-### Action
-Building platforms and programs that center community voice:
-- Quandamooka Justice Strategy
-- Youth Voice programs across Queensland
-- Community-led diversion programs
-- Diagrama partnership (Spain)
+1. **Deepen ALMA alignment** — Every insight respects cultural sovereignty, avoids profiling
+2. **Lead justice innovation** — Position for Australian next-generation justice practice
+3. **Support lived-experience pathways** — Real roles and leadership for those who carry truth
+4. **Strengthen story-justice connection** — Use Empathy Ledger as evidence infrastructure
 
-### Art
-Storytelling that shifts narratives around youth and justice. Amplifying the voices of young people to challenge deficit-based thinking.
+---
 
-## Technology
+## Linked Stories
 
-### Platform Capabilities
-- Youth voice collection and amplification
-- Service mapping and referral
-- Outcome tracking and reporting
-- Community-designed workflows
+| Story | Consent | Link |
+|-------|---------|------|
+| Origin of A Curious Tractor | EXTERNAL-LITE | [View](/wiki/stories/origin-curious-tractor) |
+| Uncle Dale's Vision for Youth Justice | EXTERNAL-LITE | [View](/wiki/stories/uncle-dale-healing-path) |
+| Jesús Teruel — Diagrama | EXTERNAL-LITE | [View](/wiki/stories/jesus-teruel-diagrama) |
+| Young People Murcia | EXTERNAL-LITE | [View](/wiki/stories/young-people-murcia) |
+| Operation Luna Success | EXTERNAL-LITE | [View](/wiki/stories/operation-luna-success) |
+| Educational Transformation: 72% | EXTERNAL-LITE | [View](/wiki/stories/educational-transformation) |
 
-### Tech Stack
+---
+
+## Quick Links
+
+| Resource | Link |
+|----------|------|
+| **Live Site** | [justicehub.com.au](https://justicehub.com.au) |
+| **GitHub** | [justicehub-platform](https://github.com/act-now-coalition/justicehub-platform) |
+| **Vercel** | [Deployment](https://vercel.com/act-now-coalition/justicehub) |
+
+---
+
+## Infrastructure Overview
+
 ```
-Framework: Next.js with App Router
-UI: React, Tailwind CSS, Radix UI
-Backend: Supabase (PostgreSQL, Auth, RLS)
-Deployment: Vercel
-Local Port: 3003
+┌─────────────────────────────────────────────────────────────┐
+│ JUSTICEHUB                                                  │
+├─────────────────────────────────────────────────────────────┤
+│                                                             │
+│  Frontend (Vercel)          Databases (Supabase)            │
+│  ┌───────────────┐          ┌──────────────────────┐       │
+│  │ Next.js 14    │          │ Main DB              │       │
+│  │ React 18      │◄────────►│ YJSF DB              │       │
+│  │ TypeScript    │          │ QJT DB               │       │
+│  │ TipTap/Novel  │          │ ChromaDB (vectors)   │       │
+│  └───────────────┘          └──────────────────────┘       │
+│                                                             │
+│  AI Integration               External                      │
+│  ┌─────────┐  ┌─────────┐   ┌─────────┐  ┌─────────┐      │
+│  │ Claude  │  │ OpenAI  │   │Firecrawl│  │ Notion  │      │
+│  │ Research│  │ GPT-4   │   │ Scraper │  │  API    │      │
+│  └─────────┘  └─────────┘   └─────────┘  └─────────┘      │
+│                                                             │
+└─────────────────────────────────────────────────────────────┘
 ```
 
-## Key Partnerships
+---
 
-- **Diagrama Foundation (Spain)** - Learning from their therapeutic community model
-- **Quandamooka community** - Co-designing justice responses on Minjerribah
-- **Queensland Youth Services** - Statewide youth voice network
-- **Healthcare providers** - Trauma-informed support integration
+## Data Sources
 
-## Data & Impact
+### Databases (Multiple Supabase)
 
-### Current Reach
-- Multiple Queensland communities engaged
-- Youth voice programs active
-- Diversion programs operational
+| Instance | Purpose |
+|----------|---------|
+| Main | Core platform data |
+| YJSF | Youth Justice Support Foundation |
+| QJT | Queensland Justice Taskforce |
 
-### Measurement Approach
-- Community-defined success metrics
-- Qualitative impact through storytelling
-- Systems change indicators
-- Recidivism reduction tracking
+**Key Tables:**
+- `empathy_ledger_core` - Story integration
+- `story_workspaces` - Collaborative editing
+- `services` - Support service directory
+- `organizations` - Service providers
+- `art_innovation` - Art programs (Contained)
 
-## Related Projects
+### GHL (Contacts)
 
-- [Empathy Ledger](/compendium/empathy-ledger) - Capturing storyteller voices from justice-involved young people
-- [The Studio](/compendium/the-studio) - Technology platform development
-- [Intelligence Platform](/wiki/intelligence-platform) - Monitoring and analytics
+| Field | Value |
+|-------|-------|
+| Pipeline | Justice |
+| Tags | youth-justice, justicehub, contained |
 
-## Resources
+### Xero (Finance)
 
-- [JusticeHub Platform](https://justicehub.vercel.app)
-- [GitHub Repository](https://github.com/Acurioustractor/justicehub-platform)
-- [ACT Place](https://act.place/projects/justicehub)
+| Tracking | Code |
+|----------|------|
+| Category | JH |
+| Projects | JH-CORE, JH-CONTAINED |
+
+---
+
+## Health Status
+
+| Check | Status |
+|-------|--------|
+| Site Reachable | ⚠️ Critical |
+| Health Score | 47/100 |
+| Response Time | 141ms |
+| Last Check | 2026-01-24 |
+
+**Actions Needed:**
+- [ ] Investigate site status
+- [ ] Check deployment logs
+- [ ] Verify database connections
+
+---
+
+## Key Features
+
+### Research Platform
+- **AI Research Chat** - Policy research assistant
+- **Evidence Library** - Indexed research findings
+- **Inquiry Database** - Youth justice inquiries
+- **International Comparisons** - Global best practices
+- **Recommendations Engine** - Policy recommendations
+
+### Service Directory
+- **Automated Discovery** - Firecrawl web scraping
+- **Queensland Services** - Batch scraped database
+- **Organization Profiles** - Service provider details
+- **Network Visualization** - D3/Force Graph connections
+
+### Key Routes
+
+| Section | URL |
+|---------|-----|
+| Research Hub | `/youth-justice-report/*` |
+| Intelligence | `/intelligence/*` |
+| Services | `/services` |
+| Programs | `/community-programs/*` |
+| Contained | `/contained/*` |
+
+---
+
+## Linked Stories
+
+These vignettes demonstrate what JusticeHub aims to amplify:
+
+### 1. Brodie Germaine's Journey
+> From housing commission kid to national advocate - transformation through connection.
+
+### 2. Operation Luna Success
+> 72% reduction in offending, 85% school return rate - community-led approaches work.
+
+### 3. Youth Voice
+> Young people speaking directly about what they need.
+
+[View all 9 linked vignettes →](../../04-story/vignettes/)
+
+---
+
+## Impact Evidence (ALMA Signals)
+
+| Signal | Score | Notes |
+|--------|-------|-------|
+| Evidence Strength | 4.6/5 | Quantitative outcomes documented |
+| Community Authority | 4.4/5 | Indigenous-led programs |
+| Implementation Capability | 4.0/5 | Multiple sites demonstrating replicability |
+| Option Value | 4.7/5 | Highly scalable model |
+
+---
+
+## Special Programs
+
+### Contained
+Art installation and advocacy for youth justice reform.
+- `/contained/launch-event`
+- `/contained/register`
+- `/contained/vip-dinner`
+
+### Art Innovation
+Programs connecting art with justice advocacy.
+
+---
+
+## Development
+
+```bash
+# Clone
+git clone git@github.com:act-now-coalition/justicehub-platform.git
+cd JusticeHub
+
+# Install
+npm install
+
+# Environment
+cp .env.example .env.local
+# Add Supabase keys, API keys
+
+# Run
+npm run dev
+# → http://localhost:3003
+```
+
+---
+
+## Authority Check
+
+| Question | Answer |
+|----------|--------|
+| **Who holds authority?** | Community justice practitioners, lived experience advisors |
+| **How do we know?** | Partnership agreements with Oonchiumpa, Diagrama, MMEIC |
+| **Consent in place?** | Case studies shared with explicit organisational consent |
+| **Handover plan?** | Open-source platform, community governance structure in development |
+
+---
+
+## Partners
+
+| Partner | Role |
+|---------|------|
+| Oonchiumpa | Youth justice evidence, NT partnerships |
+| Diagrama | International therapeutic justice |
+| MMEIC | Cultural authority |
+| BG Fit | Mount Isa youth wellbeing |
+
+---
+
+*See also: [Empathy Ledger](./empathy-ledger.md) | [Contained](./contained.md) | [Oonchiumpa](./oonchiumpa.md)*

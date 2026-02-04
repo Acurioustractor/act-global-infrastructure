@@ -1,0 +1,97 @@
+name: Weekly Digest - Sunday
+
+on:
+  schedule:
+    # Run Sunday at 8:00 PM AEST (10:00 AM UTC)
+    - cron: '0 10 * * 0'
+
+  workflow_dispatch:
+    inputs:
+      steps:
+        description: 'Which steps to run'
+        required: false
+        default: 'all'
+        type: choice
+        options:
+          - all
+          - digest-only
+          - programs-only
+          - decay-only
+
+jobs:
+  weekly-digest:
+    name: Weekly Digest Pipeline
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+      # STEP 1: Weekly memory decay (deeper cycle)
+      # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+      - name: Run weekly memory decay
+        if: >-
+          github.event.inputs.steps == 'all' ||
+          github.event.inputs.steps == 'decay-only' ||
+          github.event.inputs.steps == ''
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: |
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          echo "STEP 1: Weekly memory decay cycle"
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          node scripts/lib/memory-lifecycle.mjs --run-decay || echo "Weekly decay completed with warnings"
+
+      # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+      # STEP 2: Generate weekly digest
+      # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+      - name: Generate weekly digest
+        if: >-
+          github.event.inputs.steps == 'all' ||
+          github.event.inputs.steps == 'digest-only' ||
+          github.event.inputs.steps == ''
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          echo "STEP 2: Generate weekly digest"
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          node scripts/weekly-digest.mjs --verbose || echo "Weekly digest completed with warnings"
+
+      # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+      # STEP 3: Generate program area summaries
+      # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+      - name: Generate program summaries
+        if: >-
+          github.event.inputs.steps == 'all' ||
+          github.event.inputs.steps == 'programs-only' ||
+          github.event.inputs.steps == ''
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          echo "STEP 3: Generate program area summaries"
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          node scripts/generate-program-summaries.mjs --verbose || echo "Program summaries completed with warnings"
+
+      - name: Summary
+        run: |
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          echo "Weekly digest pipeline complete (3 steps)"
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"

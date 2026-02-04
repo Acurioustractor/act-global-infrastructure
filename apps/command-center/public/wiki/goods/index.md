@@ -1,139 +1,382 @@
+---
+title: "Goods on Country"
+slug: "goods"
+website_path: /projects/goods
+excerpt: "Community-owned manufacturing and asset tracking across remote Australia"
+category: "core-platform"
+status: "active"
+last_updated: "2026-01-26"
+shareability: "PUBLIC"
+
+# Infrastructure
+infrastructure:
+  local_path: "/Users/benknight/Code/Goods Asset Register"
+  github_repo: "act-now-coalition/goods-asset-tracker"
+  deployed_url: "https://goodsoncountry.au"
+  alt_urls:
+    - "https://goodsoncountry.netlify.app"
+  tech_stack:
+    v1_backend:
+      language: "Python 3.7+"
+      database: "PostgreSQL (Supabase)"
+      qr: "Python QR libraries"
+    v2_frontend:
+      framework: "Next.js 16.1.4"
+      language: "TypeScript"
+      runtime: "React 19.2.3"
+      database: "Supabase SSR"
+      payments: "Stripe"
+      hosting: "Netlify"
+  supabase_project: "goods-tracker"
+
+# Data Connections
+data_connections:
+  key_tables:
+    - assets
+    - checkins
+    - tickets
+    - usage_logs
+    - alerts
+  views:
+    - overdue_assets
+    - active_tickets_summary
+    - community_asset_health
+  total_assets: 389
+  qr_codes: 389
+
+# GHL Integration
+ghl_integration:
+  pipeline: "Goods"
+  tags: ["goods", "beds", "washers", "assets"]
+
+# Xero Integration
+xero_integration:
+  tracking_category: "GOODS"
+  project_codes: ["GOODS-BEDS", "GOODS-WASHERS", "GOODS-MAINT"]
+
+# Health Monitoring
+health:
+  status: "critical"
+  health_score: 47
+  last_check: "2026-01-24"
+  response_time_ms: 266
+
+# Linked Vignettes
+linked_vignettes: []
+
+# ALMA Aggregate
+alma_aggregate:
+  avg_evidence: 0
+  avg_authority: 0
+  total_vignettes: 0
+
+# Authority Check
+authority:
+  who_holds: "ACT + Community Partners"
+  how_we_know: "Co-design process with communities we serve"
+  consent_status: "In place"
+  handover_plan: "Enterprise designed for community ownership"
+---
+
 # Goods on Country
 
-> Economic empowerment through community-owned enterprise
+**Community-owned manufacturing that turns waste into local value and protects health, dignity, and wellbeing through beds, washing machines, and related essentials.**
 
-## Philosophy
+---
 
-Goods creates pathways for community economic sovereignty. We believe **communities should own the means to build wealth**, not just participate in external economies.
+## Philosophy Alignment
 
-The extractive economy takes resources, labor, and value from communities. Goods inverts this by:
+Goods embodies these ACT principles:
 
-- Supporting community-owned enterprises
-- Building supply chains that keep value local
-- Celebrating the story and provenance of community-made goods
-- Creating markets that respect cultural protocols
+| Principle | How Goods Embodies It |
+|-----------|----------------------|
+| **Make with Lived Experience** | Products co-designed with communities who carry the truth of the problem |
+| **Enterprise Funds the Commons** | 40% profit-sharing to communities, manufacturing supports local value |
+| **Build for Handover** | Local maintenance capability, repair pathways, community ownership |
+| **Community Authority Comes First** | Communities define needs, not external assumptions |
 
-### Premium Quality + Social Impact
+---
 
-We lead with quality, not charity. Every product demonstrates that:
-- Community-made can mean premium quality
-- Social impact enhances rather than diminishes value
-- Fair wages and sustainable practices are non-negotiable
+## LCAA in Practice
 
-## Platform Status
+| Phase | Goods Application |
+|-------|-------------------|
+| **Listen** | Community conversations revealing need for safe beds, working appliances |
+| **Curiosity** | Prototyping with communities — what works remotely? What can be maintained? |
+| **Action** | Manufacturing and deployment of 389 assets across 8 communities |
+| **Art** | Stories of dignity restored through essentials that work |
 
-| Metric | Value |
+---
+
+## 2026 Focus
+
+From the ACT Compendium:
+
+1. **Move from pilots to reliable production** — Strengthen manufacturing consistency
+2. **Strengthen recycling, maintenance, and support pathways** — Local capability building
+3. **Keep community ownership and value return explicit** — 40% sharing model operational
+4. **Health focus** — Replace unsafe/dirty mattresses, improve sleep and hygiene
+5. **Next essential** — Build toward fridge pathway when capacity ready
+
+> Field note: Health and dignity cost of broken essentials is not abstract — it's Ellen still waiting for a fridge.
+
+---
+
+## Linked Stories
+
+These vignettes connect to Goods:
+
+| Story | Consent | Link |
+|-------|---------|------|
+| Community Innovation: Beds, Washing Machines | EXTERNAL-LITE | [View](/wiki/stories/community-innovation-goods) |
+| Ellen Friday: Still Waiting for a Fridge | INTERNAL ONLY | [View](/wiki/stories/ellen-friday-fridge) |
+
+---
+
+## Quick Links
+
+| Resource | Link |
+|----------|------|
+| **Live Site** | [goodsoncountry.au](https://goodsoncountry.au) |
+| **GitHub** | [goods-asset-tracker](https://github.com/act-now-coalition/goods-asset-tracker) |
+| **Netlify** | [Deployment](https://app.netlify.com/sites/goodsoncountry) |
+
+---
+
+## Infrastructure Overview
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│ GOODS ON COUNTRY                                            │
+├─────────────────────────────────────────────────────────────┤
+│                                                             │
+│  Asset Tracking (V1)        Frontend (V2)                   │
+│  ┌───────────────┐          ┌──────────────────────┐       │
+│  │ Python Scripts│          │ Next.js 16           │       │
+│  │ QR Generation │──────────│ React 19             │       │
+│  │ CSV Processing│          │ TypeScript           │       │
+│  │ SQL Seeding   │          │ Stripe Payments      │       │
+│  └───────────────┘          └──────────────────────┘       │
+│                                    │                        │
+│                                    ▼                        │
+│                        ┌──────────────────────┐            │
+│                        │ Supabase Database    │            │
+│                        │ 389 assets           │            │
+│                        │ 8 communities        │            │
+│                        │ QR tracking          │            │
+│                        └──────────────────────┘            │
+│                                                             │
+└─────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## Asset Inventory
+
+### By Community
+
+| Community | Assets |
+|-----------|--------|
+| Palm Island | 141 |
+| Tennant Creek | 139 |
+| Alice Homelands | 60 |
+| Maningrida | 24 |
+| Kalgoorlie | 20 |
+| Others | 5 |
+| **Total** | **389** |
+
+### By Product Type
+
+| Product | Count |
+|---------|-------|
+| Basket Beds | 363 |
+| ID Washing Machines | 20 |
+| Weave Beds | 6 |
+| **Total** | **389** |
+
+---
+
+## Data Sources
+
+### Database (Supabase)
+
+**Tables:**
+- `assets` - 389 individual assets with QR codes
+- `checkins` - Visit/inspection records
+- `tickets` - Support requests via QR scans
+- `usage_logs` - IoT washer monitoring (optional)
+- `alerts` - Automated alert system
+
+**Views:**
+- `overdue_assets` - No check-in in 6+ months
+- `active_tickets_summary` - Ticket counts
+- `community_asset_health` - Health score per community
+
+### GHL (Contacts)
+
+| Field | Value |
+|-------|-------|
+| Pipeline | Goods |
+| Tags | goods, beds, washers, assets |
+
+### Xero (Finance)
+
+| Tracking | Code |
+|----------|------|
+| Category | GOODS |
+| Projects | GOODS-BEDS, GOODS-WASHERS, GOODS-MAINT |
+
+---
+
+## Health Status
+
+| Check | Status |
+|-------|--------|
+| Site Reachable | ⚠️ Critical |
+| Health Score | 47/100 |
+| Response Time | 266ms |
+| Last Check | 2026-01-24 |
+
+---
+
+## QR Code System
+
+### How It Works
+
+1. **Each asset** has unique QR code (SVG + PNG)
+2. **URL pattern:** `https://goods-tracker.app/support?asset_id={id}`
+3. **Scanning** opens support form
+4. **Check-ins** track location and condition
+5. **Tickets** created for maintenance needs
+
+### Organization
+
+QR codes organized by:
+- Community (Palm Island, Tennant Creek, etc.)
+- Product type (Basket Bed, Washing Machine, Weave Bed)
+
+---
+
+## Alert System
+
+| Alert Type | Trigger |
+|------------|---------|
+| Overuse | High usage detected |
+| Maintenance | Scheduled maintenance due |
+| No Check-in | 6+ months since last check |
+| High Priority | Critical ticket submitted |
+
+**Severity Levels:** Low → Medium → High → Critical
+
+---
+
+## Development Status
+
+| Phase | Status |
+|-------|--------|
+| Phase 1: Data Foundation | ✅ Complete |
+| Phase 2: Database Architecture | ✅ Complete |
+| Phase 3: QR Code Generation | ✅ Complete |
+| Phase 4: Frontend V2 | 🚧 In Progress |
+| Phase 5: IoT Integration | ⏳ Planned |
+| Phase 6: Community Dashboard | ⏳ Planned |
+
+---
+
+## Product Lines
+
+### Basket Beds
+- Co-designed with communities
+- Durable, maintainable
+- 363 deployed
+
+### ID Washing Machines
+- IoT-enabled (optional)
+- Community laundry support
+- 20 deployed
+
+### Weave Beds
+- Cultural design elements
+- Premium line
+- 6 deployed
+
+---
+
+## Development
+
+```bash
+# Clone
+git clone git@github.com:act-now-coalition/goods-asset-tracker.git
+cd "Goods Asset Register"
+
+# V1 (Python scripts)
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+
+# Generate QR codes
+python scripts/generate_qr.py
+
+# V2 (Next.js frontend)
+cd v2
+npm install
+npm run dev
+# → http://localhost:3005
+```
+
+---
+
+## Data Pipeline
+
+```
+CSV (97 entries)
+    ↓
+Expansion (389 individual assets)
+    ↓
+Validation (unique IDs)
+    ↓
+QR Generation (SVG + PNG)
+    ↓
+Organization (by community/product)
+    ↓
+Database Seeding (SQL INSERTs)
+```
+
+---
+
+## Impact Evidence (ALMA Signals)
+
+| Signal | Notes |
 |--------|-------|
-| Status | Active (v2 rebuild) |
-| Assets Tracked | 389 individual items |
-| Communities Served | 8 locations |
-| QR Codes Generated | 778 files (389 SVG + 389 PNG) |
+| **Evidence Strength** | Prototype + deployment data across 8 communities |
+| **Community Authority** | Co-design process with community partners |
+| **Harm Risk** | Low (product-focused, not personal) |
+| **Implementation Capability** | Manufacturing scaling underway |
+| **Option Value** | Pathway to fridge, local manufacturing |
+| **Community Value Return** | 40% profit-sharing, local maintenance jobs |
 
-## Products
+---
 
-### The Stretch Bed (FLAGSHIP)
-Flat-packable, washable bed for remote communities.
+## Authority Check
 
-**Materials:**
-- Recycled HDPE plastic panels (legs)
-- 2x galvanised steel poles (26.9mm OD)
-- Heavy-duty Australian canvas
+| Question | Answer |
+|----------|--------|
+| **Who holds authority?** | ACT as producer, community co-design authority |
+| **How do we know?** | Products developed through community conversations |
+| **Consent in place?** | Co-design process documented |
+| **Handover plan?** | Open sourcing designs, supporting community production |
 
-**Specs:**
-- Weight: 12kg
-- Capacity: 200kg
-- Size: 188x92x25cm
-- Assembly: 5 minutes, no tools
-- Impact: 21kg HDPE diverted per bed
+---
 
-**Status:** For sale, with manufacturing designed for on-country ownership transfer.
+## Partners
 
-### Washing Machines (PROTOTYPE)
-*Pakkimjalki Kari* (Warumungu language, named by Elder Dianne Stokes)
-- Base: Commercial-grade Speed Queen
-- Goal: Reduce price while maintaining remote reliability
-- Status: Register interest only
+| Partner | Role |
+|---------|------|
+| Palm Island community | Asset deployment, feedback |
+| Tennant Creek community | Asset deployment, feedback |
+| Orange Sky Australia | Origin story, distribution |
+| Community services | Distribution network |
 
-### Basket Bed (OPEN SOURCE)
-- First prototype design
-- Status: Discontinuing sales, open-sourcing design docs
+---
 
-## LCAA Framework
-
-### Listen
-Understanding community economic aspirations and barriers. What do communities want to build? What's standing in their way?
-
-### Curiosity
-Exploring models of community ownership and wealth building. Learning from Indigenous economic practices and cooperative models.
-
-### Action
-Creating platforms for community enterprise and exchange:
-- Marketplace for community-made products
-- Supply chain tracking and provenance
-- Direct producer-to-consumer connections
-- Enterprise development support
-
-### Art
-Celebrating the story behind every product. Every item carries the story of its maker, their community, and their country.
-
-## Technology
-
-### Tech Stack
-```
-Framework: Next.js 16.1.4 with App Router, Turbopack
-UI: React 19, Tailwind CSS 4, Radix UI, shadcn/ui
-Backend: Supabase (PostgreSQL, Auth, Storage)
-Payments: Stripe
-Fonts: Georgia (display), system sans-serif (body)
-Deployment: Vercel
-```
-
-### Asset Tracking System
-QR code-based system for tracking deployed goods:
-
-**Features:**
-- Auto-update on check-in
-- Support ticket creation via QR scan
-- Real-time subscriptions
-- Public QR form access + staff authentication
-
-**Distribution:**
-- Palm Island: 141 assets
-- Tennant Creek: 139 assets
-- Alice Homelands: 60 assets
-- Maningrida: 24 assets
-- Kalgoorlie: 20 assets
-
-## Enterprise Model
-
-Goods supports three types of community enterprise:
-
-1. **Producer Enterprises** - Individual makers and small producers
-2. **Community Enterprises** - Cooperatives and community-owned businesses
-3. **Social Enterprises** - Mission-driven businesses with community benefit
-
-## Provenance & Story
-
-Every product on Goods carries:
-- **Maker story** - Who made this and why
-- **Community connection** - Where value flows
-- **Country acknowledgment** - Whose land this comes from
-- **Impact metrics** - What difference your purchase makes
-
-## Integration Points
-
-- **Empathy Ledger** - Storyteller integration (240 storytellers linked)
-- **The Harvest** - Agricultural products from the land
-- **The Farm** - Land-based production
-
-## Related Projects
-
-- [The Harvest](/compendium/the-harvest) - Food and agricultural products
-- [Empathy Ledger](/compendium/empathy-ledger) - Capturing producer stories
-- [The Farm](/compendium/the-farm) - Land-based production
-
-## Resources
-
-- [Goods Platform](https://goods-on-country.vercel.app)
-- [GitHub Repository](https://github.com/Acurioustractor/goods-asset-tracker)
-- [ACT Place](https://act.place/projects/goods-on-country)
+*See also: [The Harvest](./the-harvest.md) | [Ecosystem Overview](../overview.md)*

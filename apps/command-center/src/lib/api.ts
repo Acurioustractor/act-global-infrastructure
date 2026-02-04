@@ -582,6 +582,86 @@ export async function getEmailStats() {
   return fetchApi<{ success: boolean; unread: number; requiresResponse: number; todayCount: number }>('/api/emails/stats')
 }
 
+// ─── Project Summaries ───────────────────────────────────────────
+
+export interface ProjectSummary {
+  projectCode: string
+  text: string
+  dataSources: string[]
+  stats: Record<string, number>
+  generatedAt: string
+}
+
+export async function getProjectSummary(code: string) {
+  return fetchApi<{ summary: ProjectSummary | null }>(`/api/projects/${encodeURIComponent(code)}/summary`)
+}
+
+// ─── Relationship Nudges ─────────────────────────────────────────
+
+export interface RelationshipNudge {
+  id: string
+  ghlId: string
+  name: string
+  email?: string
+  company?: string
+  engagementStatus: string
+  lastContactDate: string
+  daysSinceContact: number | null
+  projects: string[]
+  tags: string[]
+  lastContext?: {
+    subject: string
+    summary: string
+    channel: string
+    direction: string
+    date: string
+  } | null
+  suggestedAction: string
+}
+
+export async function getRelationshipNudges(limit = 5) {
+  return fetchApi<{ nudges: RelationshipNudge[]; total: number }>(`/api/relationships/nudges?limit=${limit}`)
+}
+
+// ─── Calendar Notes ──────────────────────────────────────────────
+
+export async function saveCalendarNote(data: {
+  eventId: string
+  eventTitle: string
+  note: string
+  attendees?: string[]
+}) {
+  return fetchApi<{ success: boolean; id: string }>('/api/calendar/note', {
+    method: 'POST',
+    body: JSON.stringify(data),
+  })
+}
+
+// ─── Weekly Briefing ─────────────────────────────────────────────
+
+export interface WeeklyDigest {
+  text: string
+  stats: Record<string, number>
+  generatedAt: string
+  dataSources: string[]
+}
+
+export interface ProgramSummary {
+  area: string
+  text: string
+  projectCodes: string[]
+  stats: Record<string, unknown>
+  generatedAt: string
+}
+
+export async function getWeeklyBriefing() {
+  return fetchApi<{
+    success: boolean
+    digest: WeeklyDigest | null
+    programSummaries: ProgramSummary[]
+  }>('/api/briefing/weekly')
+}
+
 // Wiki / Compendium
 export interface WikiSection {
   id: string
@@ -1264,6 +1344,7 @@ export interface PipelineOpportunity {
   ghlId: string
   name: string
   contactName: string
+  contactId: string
   value: number
   status: string
   createdAt: string
@@ -1279,6 +1360,8 @@ export interface PipelineStage {
 
 export interface PipelineBoard {
   id: string
+  ghlId: string
+  ghlLocationId: string
   name: string
   stages: PipelineStage[]
   totalValue: number
@@ -1920,6 +2003,8 @@ export interface EcosystemProject {
   recentComms: number
   opportunities: number
   opportunityValue: number
+  summary?: string | null
+  summaryGeneratedAt?: string | null
 }
 
 export interface EcosystemOverviewResponse {
@@ -2085,6 +2170,42 @@ export async function getStorytellerActivity() {
   return fetchApi<StorytellerActivityResponse>('/api/storytellers/activity')
 }
 
+// Storyteller Filters
+export interface StorytellerFilterProject {
+  id: string
+  name: string
+  count: number
+}
+
+export interface StorytellerFilterTheme {
+  theme: string
+  count: number
+}
+
+export interface StorytellerFilterBackground {
+  background: string
+  count: number
+}
+
+export interface StorytellerFilterOrganisation {
+  id: string
+  name: string
+  projectIds: string[]
+  projectNames: string[]
+}
+
+export interface StorytellerFilterOptions {
+  success: boolean
+  projects: StorytellerFilterProject[]
+  themes: StorytellerFilterTheme[]
+  culturalBackgrounds: StorytellerFilterBackground[]
+  organisations: StorytellerFilterOrganisation[]
+}
+
+export async function getStorytellerFilters() {
+  return fetchApi<StorytellerFilterOptions>('/api/storytellers/filters')
+}
+
 // ─── Dashboard: Pending Communications ──────────────────────────
 
 export interface PendingCommunication {
@@ -2151,4 +2272,228 @@ export async function getUpcomingDeadlines() {
 export async function getGrantPipeline() {
   // Reuses existing GHL pipeline data, filtered client-side
   return getGHLOpportunities()
+}
+
+// ─── Morning Briefing ────────────────────────────────────────────
+
+export interface MorningBriefingCalendarEvent {
+  title: string
+  time: string
+  endTime: string
+  type: string
+  location?: string
+}
+
+export interface MorningBriefingAction {
+  id: string
+  project: string
+  title: string
+  content?: string
+  followUpDate: string
+  importance: string
+  daysOverdue?: number
+}
+
+export interface MorningBriefingCommunication {
+  id: string
+  from: string
+  subject: string
+  channel: string
+  receivedAt: string
+  summary?: string
+}
+
+export interface MorningBriefingRelationship {
+  id: string
+  name: string
+  email?: string
+  company?: string
+  engagementStatus: string
+  lastContactDate: string
+  daysSinceContact: number | null
+  projects: string[]
+}
+
+export interface MorningBriefingResponse {
+  success: boolean
+  generated: string
+  date: string
+  moonPhase: { phase: string; energy: string }
+  thought: string
+  calendar: {
+    events: MorningBriefingCalendarEvent[]
+    meetingCount: number
+  }
+  actions: {
+    overdue: MorningBriefingAction[]
+    upcoming: MorningBriefingAction[]
+    overdueCount: number
+    upcomingCount: number
+  }
+  communications: {
+    stats: { today: number; yesterday: number; trend: string }
+    needToRespond: MorningBriefingCommunication[]
+    needToRespondCount: number
+  }
+  relationships: {
+    alerts: MorningBriefingRelationship[]
+    alertCount: number
+  }
+  financial: {
+    totalPipeline: number
+    openValue: number
+    wonValue: number
+    lostValue: number
+    opportunityCount: number
+    byStage: Record<string, { value: number; count: number }>
+  }
+  projects: {
+    activity: Array<{ code: string; meetings: number; actions: number; decisions: number; total: number }>
+    activeCount: number
+  }
+  storytellers: {
+    recentAnalyses: Array<{ storyteller: string; themes: string[]; date: string }>
+    totalQuotes: number
+    topThemes: string[]
+  }
+  summary: {
+    urgentItems: number
+    meetingsToday: number
+    pipelineValue: number
+    staleRelationships: number
+  }
+}
+
+export async function getMorningBriefing() {
+  return fetchApi<MorningBriefingResponse>('/api/briefing/morning')
+}
+
+// ─── Development Overview ────────────────────────────────────────
+
+export interface DevelopmentOverviewResponse {
+  coreSites: Array<{
+    name: string
+    slug: string
+    url: string | null
+    liveUrl: string | null
+    screenshot: string | null
+    githubUrl: string
+    githubRepo: string
+    projectCode: string
+    localPath: string | null
+    language: string | null
+    lastPushed: string | null
+    description: string | null
+    healthStatus: string | null
+    healthScore: number | null
+  }>
+  satelliteSites: Array<{
+    name: string
+    url: string
+    slug: string
+    screenshot: string | null
+    category: string
+    healthStatus: string | null
+    healthScore: number | null
+    githubRepo: string | null
+    vercelProject: string | null
+  }>
+  repos: Array<{
+    name: string
+    fullName: string
+    description: string | null
+    url: string
+    homepage: string | null
+    screenshot: string | null
+    language: string | null
+    lastPushed: string
+    isPrivate: boolean
+    stars: number
+    topics: string[]
+    projectCode: string | null
+    projectLinks: Array<{ project_code: string; project_name: string | null; notes: string | null }>
+    taggedContacts: Array<{ contact_id: string; contact_name: string | null; role: string | null }>
+    localPath: string | null
+    hasWebsite: boolean
+    hasLocalCodebase: boolean
+  }>
+  localCodebases: Array<{
+    repoName: string
+    path: string
+    githubUrl: string
+    projectCode: string | null
+  }>
+  stats: {
+    totalRepos: number
+    totalDeployments: number
+    totalLocalCodebases: number
+    linkedRepos: number
+    linkedPercent: number
+    languages: string[]
+  }
+}
+
+export async function getDevelopmentOverview() {
+  return fetchApi<DevelopmentOverviewResponse>('/api/development/overview')
+}
+
+// Repo-project link management
+export async function addRepoProjectLink(repoName: string, projectCode: string, projectName?: string, notes?: string) {
+  return fetchApi<{ link: { repo_name: string; project_code: string; project_name: string | null; notes: string | null } }>(
+    '/api/development/links',
+    { method: 'POST', body: JSON.stringify({ repoName, projectCode, projectName, notes }) }
+  )
+}
+
+export async function removeRepoProjectLink(repoName: string, projectCode: string) {
+  return fetchApi<{ success: boolean }>(
+    '/api/development/links',
+    { method: 'DELETE', body: JSON.stringify({ repoName, projectCode }) }
+  )
+}
+
+// Repo-contact tag management
+export interface RepoContact {
+  contact_id: string
+  contact_name: string | null
+  role: string | null
+}
+
+export async function getRepoContacts(repoName: string) {
+  return fetchApi<{ contacts: RepoContact[] }>(`/api/development/contacts?repo=${encodeURIComponent(repoName)}`)
+}
+
+export async function addRepoContact(repoName: string, contactId: string, contactName: string, role?: string) {
+  return fetchApi<{ contact: RepoContact }>(
+    '/api/development/contacts',
+    { method: 'POST', body: JSON.stringify({ repoName, contactId, contactName, role }) }
+  )
+}
+
+export async function removeRepoContact(repoName: string, contactId: string) {
+  return fetchApi<{ success: boolean }>(
+    '/api/development/contacts',
+    { method: 'DELETE', body: JSON.stringify({ repoName, contactId }) }
+  )
+}
+
+// Wiki: Project Storytellers
+export interface ProjectStorytellersResponse {
+  project: string
+  projectId: string
+  storytellerCount: number
+  storytellers: Array<{
+    id: string
+    displayName: string
+    bio: string | null
+    culturalBackground: string | null
+    isFeatured: boolean
+    isElder: boolean
+  }>
+  topThemes: Array<{ theme: string; count: number }>
+  topQuotes: Array<{ quote: string; storytellerId: string; storytellerName: string }>
+}
+
+export async function getProjectStorytellers(project: string) {
+  return fetchApi<ProjectStorytellersResponse>(`/api/wiki/project-storytellers?project=${encodeURIComponent(project)}`)
 }

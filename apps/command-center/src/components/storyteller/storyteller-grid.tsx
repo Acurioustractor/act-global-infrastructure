@@ -126,9 +126,9 @@ export function StorytellerGrid({ storytellers }: { storytellers: StorytellerSum
                     )}
                     {s.culturalBackground.length > 0 && (
                       <div className="flex flex-wrap gap-1 mt-2">
-                        {s.culturalBackground.map((c) => (
+                        {s.culturalBackground.map((c, ci) => (
                           <span
-                            key={c}
+                            key={`${c}-${ci}`}
                             className="text-[10px] px-1.5 py-0.5 rounded bg-amber-500/10 text-amber-300"
                           >
                             {c}

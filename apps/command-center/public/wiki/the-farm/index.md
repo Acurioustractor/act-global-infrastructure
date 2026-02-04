@@ -1,172 +1,163 @@
-# The Farm (Black Cockatoo Valley)
+---
+title: ACT Farm
+slug: act-farm
+website_path: /places/farm
+excerpt: "Home base where land care, learning, art-making, and community programs meet"
+status: published
+last_updated: 2026-01-12
+---
 
-> Land-based healing and cultural connection
+# ACT Farm
 
-## Philosophy
+**Home base where land care, learning, art-making, and community programs meet.**
 
-The Farm is a place of **healing through connection to land**. We believe that many of the challenges facing communities - trauma, disconnection, loss of identity - can be addressed through meaningful relationship with Country.
+ACT Farm is the studio practice—the operational heart where methodology becomes action. It's where we prototype, learn, fail, iterate, and prepare tools for handover.
 
-Colonial systems severed people from land. The Farm works to restore these connections by:
+---
 
-- Creating spaces for cultural practice on Country
-- Supporting land-based healing programs
-- Building intergenerational knowledge transfer
-- Practicing regenerative land stewardship
+## Purpose
 
-### Conservation-First Model
+The farm serves as:
+- **Living laboratory** for regenerative innovation
+- **Studio space** where land practice meets technology
+- **Prototype ground** for tools and processes
+- **Training base** for community capability building
+- **Home** for the work that matters
 
-We operate a premium, low-volume model where conservation comes first. This demonstrates that:
-- Low-impact practices are financially viable
-- Conservation investment creates value
-- Premium pricing supports authentic sustainability
-- Research partnerships advance the field
+---
 
-## Platform Status
+## The Farm Metaphor
 
-| Metric | Value |
+The farm metaphor is not branding. It shapes daily operations and enterprise choices:
+
+| Farm Element | What It Means |
+|--------------|---------------|
+| **Soil** | The knowledge network, community wisdom |
+| **Seeds** | Projects, ideas, initiatives |
+| **Tending** | Ongoing care and attention |
+| **Harvest** | Impact, results, value returned |
+| **Compost** | Learning from failure |
+| **Seasons** | Natural rhythms and timing |
+
+The system is the tractor, the humans are the farmers, the community is the harvest.
+
+---
+
+## 2026 Focus
+
+1. **Run retreats, programs, workshops, and produce pathways** grounded in land practice
+2. **Keep the farm metaphor visible** in daily operations and enterprise choices
+3. **Link studio outputs** to land practice and community value
+4. **Grow the capability** to hand over when ready
+
+---
+
+## Key Activities
+
+### Retreats & Programs
+- Strategic retreats for partners
+- Community leadership programs
+- Skills-building workshops
+- Rest and renewal spaces
+
+### Studio Innovation
+- Prototype development
+- Technical architecture
+- Documentation and training materials
+- Handover preparation
+
+### Land Practice Integration
+Every studio project should answer:
+- How does this strengthen land practice?
+- How does this advance responsible innovation?
+- Who holds authority here, and how do we know?
+
+---
+
+## Farmhand & AI Strategy
+
+Farmhand is ACT's AI layer—not a replacement for human judgment, but infrastructure that should:
+- **Reduce admin** and hold context
+- **Make it easier** to do the work that matters
+- **Never override** community voice
+- **Make listening easier** to hear
+
+The Knowledge Hub is shared memory, not surveillance.
+
+> Field note: Farmhand should never override community voice; it should make it easier to hear.
+
+---
+
+## How Studio and Land Connect
+
+```
+Land Practice (BCV, The Harvest)
+         ↓
+    Learnings
+         ↓
+Studio Innovation (ACT Farm)
+         ↓
+    Tools & Methods
+         ↓
+Community Partners
+         ↓
+    Feedback
+         ↓
+Back to Land Practice
+```
+
+This loop ensures:
+- Technology serves land, not the reverse
+- Innovation is grounded in real practice
+- Community voice shapes tool development
+- Handover readiness is built in
+
+---
+
+## Principles in Practice
+
+### Tools Create Space
+Infrastructure should be quiet. Reduce admin, hold context, make it easier to do the work that matters.
+
+### Make With Lived Experience
+Lived experience is not advisory; it is core capability. We build pathways for people under-skilled in formal systems but rich in lived knowledge.
+
+### Enterprise Funds the Commons
+Studio revenue funds land care, community wages, and long-term repair. Enterprise keeps the commons alive.
+
+---
+
+## LCAA in Practice
+
+| Phase | Farm Application |
+|-------|-----------------|
+| **Listen** | Land practice observations, community feedback |
+| **Curiosity** | Prototyping tools, testing methods |
+| **Action** | Retreats, programs, workshops, produce pathways |
+| **Art** | Making the farm metaphor visible in daily operations |
+
+---
+
+## Impact Evidence (ALMA Signals)
+
+| Signal | Notes |
 |--------|-------|
-| Status | Active |
-| Property Size | 150 acres |
-| Location | Jinibara lands, Queensland |
-| Residency Price | $300-500/night |
-| Threatened Species | Multiple habitat zones protected |
+| **Evidence Strength** | Operational learning from programs and retreats |
+| **Community Authority** | Studio serves community, not the reverse |
+| **Harm Risk** | Low (facilitation and infrastructure) |
+| **Implementation Capability** | High — core operational capacity |
+| **Option Value** | Foundation for all other projects |
+| **Community Value Return** | Tools, training, and capability building |
 
-## LCAA Framework
+---
 
-### Listen
-Co-design with community, First Nations knowledge holders, and the land itself. Hearing what communities need from land-based programs. Understanding trauma histories and healing aspirations.
+## Current Status
 
-### Curiosity
-R&D prototyping and testing hypotheses. Learning from Indigenous land management practices. Exploring how land connection supports mental health and cultural identity.
+- Retreats and programs operating
+- Studio innovation active
+- Farm metaphor guiding operations
+- Capability building for handover ongoing
 
-### Action
-Creating land-based programs:
-- Youth camps and cultural immersion
-- Elder knowledge-sharing programs
-- Regenerative land management training
-- Healing retreats and ceremonies
+---
 
-### Art
-Felt stories, beauty, and connection through experience. Documenting and sharing the stories of healing that happen on Country. Showing what's possible when people reconnect with land.
-
-## Healing Model
-
-### Connection to Country
-Time on land, learning to read and respond to the natural world. Understanding seasons, cycles, and the web of relationships that sustain life.
-
-### Cultural Practice
-Space for ceremony, story, and traditional practices. Elders sharing knowledge with young people. Reconnecting to cultural identity through doing.
-
-### Productive Work
-Meaningful labor that contributes to community wellbeing. Growing food, caring for animals, building structures. Work that matters.
-
-### Community
-Shared meals, shared work, shared stories. Building relationships through time spent together on Country.
-
-## Technology
-
-### Tech Stack
-```
-Framework: Next.js 16.1.1
-UI: React 19, Tailwind CSS 4, Lucide icons
-Deployment: Vercel
-Caching: ioredis integration
-Local Port: 3005
-```
-
-### Interactive Drone Map
-Key feature based on proven PICC Station pattern:
-
-**Capabilities:**
-- Clickable location pins on aerial photography
-- Multiple map layers: current, before, site plan, habitat zones
-- Responsive sidebar with rich content
-- Admin tool at `/map/admin` for pin positioning
-
-**Map Locations:**
-- June's Patch (regenerative garden)
-- R&D Residency Accommodation
-- Threatened Species Habitat Zones
-- Mary River Viewpoint
-- Elaman Creek Corridor
-- Workshop & Gathering Space
-
-## June's Patch Program
-
-"Prescription to nature" for healthcare workers:
-
-- Fresh food subscriptions from regenerative gardens
-- Restorative experiences on land
-- Community connection outside clinical settings
-- Partnership: Wishlist community + University of the Sunshine Coast
-
-## Site Structure
-
-```
-Pages:
-/ (Home)           - Hero, LCAA intro, key offerings
-/map               - Interactive drone photo map
-/about             - Mission, LCAA, land, business model
-/activities        - Workshops, events, conservation experiences
-/junes-patch       - Healthcare worker program
-/residencies       - R&D residency details, pricing, principles
-/accommodation     - Current and future eco-stays
-/connect           - Contact form
-/map/admin         - Pin positioning tool
-```
-
-## Land Stewardship
-
-The Farm practices:
-- Regenerative grazing
-- Food forest development
-- Water cycle restoration
-- Native habitat protection
-
-## Design System
-
-```
-Colors:
-- Stone (50-900) - Primary neutral
-- Emerald (50-900) - Brand color for CTAs, conservation themes
-- Natural, earthy tones
-
-Typography:
-- System fonts (Geist Sans, Geist Mono)
-- Large headings (text-4xl to text-7xl)
-- Readable body (text-lg, leading-relaxed)
-```
-
-## Content Strategy
-
-**Tone:** Honest, authentic, conservation-focused, professional but warm
-
-**Key Messages:**
-1. Conservation comes first
-2. Low-impact premium model is financially viable
-3. Phased toward community co-stewardship (Beautiful Obsolescence)
-4. R&D focus produces tangible outputs
-5. Research partnerships with institutions
-
-## Future Enhancements
-
-- Before/after photo slider
-- Full-screen gallery
-- GHL Integration for lead nurturing
-- Headless CMS for map content updates
-- 360° drone views
-- Blog for conservation updates
-- Booking system for residencies
-- Privacy-focused analytics (Plausible/Fathom)
-
-## Related Projects
-
-- [The Harvest](/compendium/the-harvest) - Food products from the land
-- [JusticeHub](/compendium/justicehub) - Youth programs and healing
-- [Empathy Ledger](/compendium/empathy-ledger) - Capturing healing stories
-
-## Resources
-
-- [The Farm Platform](https://act-farm.vercel.app)
-- [GitHub Repository](https://github.com/Acurioustractor/act-farm)
-- [ACT Place](https://act.place/farm)
+*See also: [Black Cockatoo Valley](/wiki/place/black-cockatoo-valley) | [The Harvest](/wiki/the-harvest) | [AI Ethics](/wiki/act/ai-ethics)*

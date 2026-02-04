@@ -1,187 +1,344 @@
+---
+title: "The Harvest"
+slug: "the-harvest"
+website_path: /projects/the-harvest
+excerpt: "Community hub for CSA programs and seasonal gatherings on Jinibara Country"
+category: "core-platform"
+status: "active"
+last_updated: "2026-01-26"
+shareability: "PUBLIC"
+
+# Infrastructure
+infrastructure:
+  local_path: "/Users/benknight/Code/The Harvest Website"
+  github_repo: "act-now-coalition/theharvest"
+  deployed_url: "https://theharvestwitta.com.au"
+  alt_urls:
+    - "https://harvest.act.place"
+  tech_stack:
+    framework: "Vite + React"
+    language: "TypeScript"
+    runtime: "React 19.2.1"
+    backend: "tRPC + Express"
+    database: "Drizzle ORM + Supabase"
+    storage: "AWS S3"
+    hosting: "Vercel (frontend)"
+  supabase_project: "custom-instance"
+
+# Data Connections
+data_connections:
+  key_tables:
+    - app_users
+    - events
+    - businesses
+  edge_functions:
+    - app-user-sync
+    - admin-events
+    - admin-businesses
+    - business-claim
+    - newsletter-subscribe
+
+# GHL Integration
+ghl_integration:
+  pipeline: "Harvest"
+  tags: ["harvest", "witta", "csa", "events"]
+  location_tracking: true
+
+# Xero Integration
+xero_integration:
+  tracking_category: "HARVEST"
+  project_codes: ["HARVEST-CSA", "HARVEST-VENUE", "HARVEST-EVENTS"]
+
+# Health Monitoring
+health:
+  status: "healthy"
+  last_check: "2026-01-26"
+
+# Linked Vignettes
+linked_vignettes: []
+
+# ALMA Aggregate
+alma_aggregate:
+  avg_evidence: 0
+  avg_authority: 0
+  total_vignettes: 0
+
+# Authority Check
+authority:
+  who_holds: "ACT + Witta Community"
+  how_we_know: "Land stewardship on Jinibara Country, community participation agreements"
+  consent_status: "In place"
+  handover_plan: "Community commons model - shared governance in development"
+---
+
 # The Harvest
 
-> Regenerative agriculture and community food systems
+**Local enterprise hub for makers, markets, and community connection in Witta, Queensland.**
 
-## Philosophy
+An old nursery in Witta, now a small enterprise hub. Not just a venue — it is belonging tested in markets, meals, and shared work.
 
-The Harvest connects regenerative producers with conscious consumers, building **food systems that heal rather than harm**.
+---
 
-Industrial agriculture extracts from land and community. The Harvest inverts this by:
+## Philosophy Alignment
 
-- Supporting regenerative farming practices
-- Shortening supply chains to keep value local
-- Celebrating seasonal, place-based eating
-- Building relationships between eaters and growers
+The Harvest embodies these ACT principles:
 
-### Core Vision
+| Principle | How The Harvest Embodies It |
+|-----------|----------------------------|
+| **Identity Before Product** | The Harvest is belonging, not just a venue |
+| **Enterprise Funds the Commons** | Revenue supports land care and community value |
+| **Country Sets the Pace** | Activity scaled to land capacity and season |
+| **Make with Lived Experience** | Maker pathways for local enterprise |
 
-*"A regenerative community space that fosters connection, safety and sustainability, grounded in respect for the past, present and future. Through innovative practices, shared learning and collaborative care, we create a thriving environment that empowers individuals and nurtures the land to support generations to come."*
+---
 
-## Platform Status
+## LCAA in Practice
 
-| Metric | Value |
+| Phase | Harvest Application |
+|-------|---------------------|
+| **Listen** | Community conversations about what Witta needs |
+| **Curiosity** | Testing market formats, workshop models, venue use |
+| **Action** | Regular markets, workshops, venue hire operating |
+| **Art** | Seasonal gatherings, community storytelling, shared meals |
+
+---
+
+## 2026 Focus
+
+From the ACT Compendium:
+
+1. **Support micro-enterprise** — Maker pathways and local business support in Witta
+2. **Build repeatable operations** — Workshops, markets, venue use patterns established
+3. **Testing ground** — Use enterprise as testing ground for sustainable practice
+4. **Community connection** — Build relationships through practical enterprise and shared learning
+
+> Field note: The Harvest is not just a venue; it is belonging tested in markets, meals, and shared work.
+
+---
+
+## Quick Links
+
+| Resource | Link |
+|----------|------|
+| **Live Site** | [theharvestwitta.com.au](https://theharvestwitta.com.au) |
+| **GitHub** | [theharvest](https://github.com/act-now-coalition/theharvest) |
+| **Vercel** | [Deployment](https://vercel.com/act-now-coalition/theharvest) |
+
+---
+
+## Infrastructure Overview
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│ THE HARVEST                                                 │
+├─────────────────────────────────────────────────────────────┤
+│                                                             │
+│  Frontend (Vercel)          Backend (Supabase)              │
+│  ┌───────────────┐          ┌──────────────────────┐       │
+│  │ Vite + React  │          │ Supabase + Drizzle   │       │
+│  │ React 19      │◄────────►│ Edge Functions       │       │
+│  │ TypeScript    │  tRPC    │ PostgreSQL           │       │
+│  │ Wouter Router │          │ Realtime             │       │
+│  └───────────────┘          └──────────────────────┘       │
+│                                                             │
+│  External Services                                          │
+│  ┌─────────┐  ┌─────────┐  ┌─────────┐  ┌─────────┐       │
+│  │ AWS S3  │  │ GHL CRM │  │ Empathy │  │ Stripe  │       │
+│  │ Media   │  │ Contacts│  │ Ledger  │  │ Payments│       │
+│  └─────────┘  └─────────┘  └─────────┘  └─────────┘       │
+│                                                             │
+└─────────────────────────────────────────────────────────────┘
+```
+
+**Note:** The Harvest uses Vite + tRPC, not Next.js. Unique architecture in the ecosystem.
+
+---
+
+## Data Sources
+
+### Database (Supabase)
+
+**Tables:**
+- `app_users` - User management with RLS
+- `events` - Event calendar
+- `businesses` - Local business directory
+
+**Edge Functions:**
+- `app-user-sync` - User synchronization
+- `admin-events` - Event CRUD
+- `admin-businesses` - Business CRUD
+- `business-claim` - Business ownership claims
+- `newsletter-subscribe` - Newsletter signups
+
+### GHL (Contacts)
+
+| Field | Value |
+|-------|-------|
+| Pipeline | Harvest |
+| Tags | harvest, witta, csa, events |
+| Location | Witta/Maleny |
+
+### Xero (Finance)
+
+| Tracking | Code |
+|----------|------|
+| Category | HARVEST |
+| Projects | HARVEST-CSA, HARVEST-VENUE, HARVEST-EVENTS |
+
+### Content (Empathy Ledger)
+
+Blog content is served from Empathy Ledger Content Hub:
+- `/blog/[slug]` pulls from EL syndication API
+
+---
+
+## Health Status
+
+| Check | Status |
+|-------|--------|
+| Site | ✅ Live |
+| Domain | theharvestwitta.com.au |
+| SSL | Valid |
+
+---
+
+## Key Features
+
+### Public Pages
+| Route | Purpose |
+|-------|---------|
+| `/` | Homepage |
+| `/visit` | Visitor info |
+| `/whats-on` | Events calendar |
+| `/venue-hire` | Venue booking |
+| `/about` | About |
+
+### Community
+| Route | Purpose |
+|-------|---------|
+| `/journey` | Experience journey |
+| `/explore` | Exploration hub |
+| `/stories` | Community stories |
+| `/witta` | Area info |
+| `/enterprises` | Local businesses |
+
+### Admin
+| Route | Purpose |
+|-------|---------|
+| `/admin` | Dashboard |
+| `/admin/photos` | Photo management |
+| `/my-business` | Business owner portal |
+
+---
+
+## Programs
+
+### CSA (Community Supported Agriculture)
+- Seasonal produce shares
+- Member subscriptions
+- Local farmer partnerships
+
+### Events
+- Seasonal gatherings
+- Workshops
+- Community markets
+- Venue hire
+
+### Enterprise Hub
+- Local business directory
+- Maker pathways
+- Business owner portal
+
+---
+
+## Impact Evidence (ALMA Signals)
+
+| Signal | Notes |
 |--------|-------|
-| Status | Phase 1: Foundation (through March 2025) |
-| Legacy | 31 years Green Harvest organic gardening |
-| Target Community | 12,000+ former customers |
-| Location | Witta, Queensland (1,296 residents) |
+| **Evidence Strength** | Operational data — events, market attendance, venue bookings |
+| **Community Authority** | ACT + Witta community governance in development |
+| **Harm Risk** | Low (positive enterprise) |
+| **Implementation Capability** | Venue operational, programs running |
+| **Option Value** | Model for community enterprise hub |
+| **Community Value Return** | Local makers supported, community gathering space |
 
-## Strategic Framework - Three Pillars
+## Story Opportunities
 
-### 1. SAFE
-- Physical and emotional safety
-- Trauma-informed design
-- Universal accessibility
-- Risk management integrated
+**Priority storytelling:**
+- Monthly dinner conversations
+- Farm working bee reflections
+- Market stallholder experiences
+- Visiting partner impressions
 
-### 2. GROUNDED
-- Respect for Jinibara Nation traditional ownership
-- Honor German settler agricultural heritage
-- Green Harvest organic legacy
-- Seasonal rhythms and local wisdom
+---
 
-### 3. REGENERATIVE
-- Soil health = community health
-- Every activity enhances rather than depletes
-- Circular economy principles
-- Intergenerational knowledge sharing
+## Development
 
-## Regenerative Principles
+```bash
+# Clone
+git clone git@github.com:act-now-coalition/theharvest.git
+cd "The Harvest Website"
 
-We work with producers who practice:
+# Install (uses pnpm)
+pnpm install
 
-- **Soil health** - Building rather than depleting soil carbon
-- **Biodiversity** - Working with nature's complexity
-- **Water stewardship** - Protecting and restoring watersheds
-- **Community connection** - Food as relationship, not commodity
+# Environment
+cp .env.example .env.local
+# Add Supabase, AWS, GHL keys
 
-## LCAA Framework
-
-### Listen
-Understanding what regenerative producers need to thrive. What barriers prevent sustainable farming? What would help them scale?
-
-### Curiosity
-Exploring models for regenerative food systems. Learning from traditional Indigenous land management and contemporary permaculture.
-
-### Action
-Building infrastructure for regenerative food:
-- Direct producer-consumer connections
-- Seasonal subscription boxes
-- Restaurant and institution partnerships
-- Producer support and training
-
-### Art
-Storytelling that reconnects people with their food. Every meal has a story of land, labor, and love.
-
-## Development Phases
-
-### Phase 1: Foundation (Current - March 2025)
-- Project Manager recruitment (0.4 FTE)
-- Architect selection (regenerative design RFQ)
-- Garden development with Cath Manuel (Soil to Supper)
-- Pop-up testing - Monthly events
-
-### Phase 2: Build & Test (April - December 2025)
-- Commercial kitchen development (50m²)
-- Therapeutic garden implementation
-- Event space creation (100+ capacity)
-- Launch therapeutic horticulture (5-10 participants)
-- Restaurant concept testing
-- Monthly community meals
-
-### Phase 3: Scale & Sustain (2026-2027)
-- Farm-to-table restaurant opening
-- Accommodation development
-- Regional training hub status
-- Social enterprise incubation
-
-## Restaurant Model - Inspired by Plate It Forward
-
-Learning from Plate It Forward's achievements:
-- $6+ million in wages to marginalized workers
-- 692,818 meals provided
-- 271 people employed
-- 100% self-funding goal
-
-### The Harvest Implementation
-
-**Workforce Development:**
-- 20-week training programs
-- Partner with refugee services, disability employment, youth justice
-- Living wages (25% above industry standard)
-- Progression pathways to leadership
-
-**Menu as Mission:**
-- Seasonal therapeutic garden produce
-- German heritage AND newcomer cultural dishes
-- "From our soil to your soul" philosophy
-- Transparent pricing showing social impact
-
-**Revenue Model:**
-- Premium pricing for exceptional experience
-- Corporate catering leveraging social impact
-- Regular "Community Feast" accessible pricing nights
-- Goal: 70% self-funded within 3 years
-
-## Technology
-
-### Tech Stack
-```
-Framework: Next.js 14.0.4
-UI: React 18, Tailwind CSS 3.4, Framer Motion
-Integrations: GoHighLevel (GHL) for CRM
-Caching: ioredis (Redis on NAS)
-Deployment: Vercel
-Local Port: 3004
-Package Manager: pnpm
+# Run
+pnpm dev
+# → http://localhost:3004
 ```
 
-### GoHighLevel Integration
-- Contact management with automated tagging
-- Pipeline assignment by interest type
-- Volunteer, Event, Partnership pipelines
-- Redis caching for duplicate prevention
+---
 
-## Business Model
+## Unique Architecture
 
-### Revenue Mix
-- **Core Agriculture (60%)** - CSA memberships, therapeutic produce, value-added products
-- **Tourism & Hospitality (25%)** - Farm-to-table dining, workshops, event hosting
-- **Social Programs (15%)** - Therapeutic services, youth partnerships, training funding
+| Tech | Choice | Why |
+|------|--------|-----|
+| Framework | Vite (not Next.js) | Lightweight |
+| API | tRPC | Type-safe |
+| ORM | Drizzle | Modern |
+| Router | Wouter | Lightweight |
+| Storage | AWS S3 | Presigned URLs |
+| Theming | Seasonal system | Custom |
 
-## Key Partners
+---
 
-- **Cath Manuel / Soil to Supper** - Therapeutic horticulture expert
-- **A Curious Tractor** - Innovation and community building
-- **Grant & Michelle Luff** - Site owners, community champions
-- **Healthcare providers** - Program participant referrals
+## The Land
 
-## Food as Medicine
+The Harvest sits on **Jinibara Country** in the Sunshine Coast Hinterland.
 
-The Harvest recognizes food as:
-- **Physical nourishment** - Nutrient-dense, clean food
-- **Cultural connection** - Traditional foods and practices
-- **Community building** - Shared meals and markets
-- **Economic justice** - Fair prices for producers
+The site includes:
+- Pasture under regenerative grazing
+- Food forest and orchard
+- Native corridor restoration
+- Water catchment systems
+- Studio and gathering buildings
 
-## Brand Identity
+---
 
-**Brand Essence:** "Where time slows, roots deepen, and community grows"
+## Authority Check
 
-**Communication Principles:**
-1. **Analog First** - Handwritten notes, printed materials, face-to-face
-2. **Seasonal Rhythm** - Communications follow agricultural calendar
-3. **Story-Led** - Human stories, not statistics
-4. **Transparency** - Open books, visible impact
+| Question | Answer |
+|----------|--------|
+| **Who holds authority?** | ACT as steward, community governance board in development |
+| **How do we know?** | Land title and partnership agreements |
+| **Consent in place?** | Jinibara acknowledgment, community participation agreements |
+| **Handover plan?** | Commons model with community land trust structure |
 
-## Related Projects
+---
 
-- [Goods](/compendium/goods) - Marketplace for community products
-- [The Farm](/compendium/the-farm) - Land-based production and healing
-- [Empathy Ledger](/compendium/empathy-ledger) - Producer and community stories
+## Partners
 
-## Resources
+| Partner | Role |
+|---------|------|
+| Jinibara People | Traditional Custodians |
+| Local producers | Market and supply network |
+| Goods. team | Product development |
+| ACT Dinner community | Regular gathering participants |
 
-- [The Harvest Platform](https://the-harvest.vercel.app)
-- [GitHub Repository](https://github.com/Acurioustractor/theharvest)
-- [ACT Place](https://act.place/projects/the-harvest)
+---
+
+*See also: [ACT Farm](../../02-place/act-farm.md) | [Black Cockatoo Valley](../../02-place/black-cockatoo-valley.md) | [Goods](./goods.md)*

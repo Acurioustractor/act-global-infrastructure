@@ -1,158 +1,122 @@
 # A Curious Tractor (ACT)
 
-> Technology and storytelling for community transformation
+> A regenerative innovation studio stewarding a working farm on Jinibara Country.
 
-## Mission
+---
 
-ACT exists to support communities to tell their own stories, build their own systems, and drive their own transformation.
+## Identity and Intent
 
-We are not a service provider. We are a **partner and enabler** - building tools, platforms, and capabilities that communities can own and evolve themselves.
+ACT exists to grow co-stewardship and shared governance through land, story, and action. The studio is the toolkit communities can hold, shape, and outgrow. We work to dismantle extractive systems through ethical technology, Indigenous data sovereignty, and community-centred design.
 
-## Philosophy
+This compendium anchors decisions in **LCAA** (Listen, Curiosity, Action and Art) and balances land practice with innovation, enterprise, and product work so we speak with one voice across projects. **ALMA** (Authentic Learning for Meaningful Accountability) is the core impact and learning model; **Empathy Ledger** is the core impact tool.
 
-### Stories are Data
-Quantitative metrics often miss what matters most. We believe lived experience, captured through stories, is the most powerful form of impact evidence.
+### A Practice Book, Not a Report
 
-### Community Sovereignty
-Communities should control their own narratives, their own data, and their own futures. We build technology that enables sovereignty, not dependency.
+This compendium is a field guide, written to be used: on Country, in the studio, in meetings, and in the quiet hours where decisions are made. It will never be finished. We add stories, prototypes, drawings, and learnings as we go. A good page helps someone act with care.
 
-### Regenerative Practice
-Everything we do should leave systems better than we found them. We work to heal, not extract.
+### The ACT Way: Make Space
 
-### Systems Change
-Individual programs aren't enough. We work at the systems level - changing policies, practices, and power dynamics.
+> "The best systems are invisible. They create space for humans to be human."
 
-### Beautiful Obsolescence
+We build tractors and toolkits, not empires. Infrastructure should disappear into the work, make listening easier, keep consent visible, and leave more time for people to gather, make, and lead.
 
-Our ultimate success metric: Communities saying:
-> "ACT? We don't need them anymore. We run this ourselves now."
+### Identity Before Product
 
-We're not building dependency. We're building community power through:
-- Superior tools designed for community ownership
-- Authentic partnerships that transfer capability
-- Systems designed for independence, not lock-in
-- Platform forking capabilities
-- Complete data export tools
+We start with identity and belonging, then build the thing. Events are culture, not marketing. Communities are owners, not audiences.
 
-## LCAA Framework
+---
 
-LCAA is our methodology for community engagement:
+## How to Use This Compendium
 
-### Listen
-Start by listening. Deep, patient, humble listening. Understanding context, history, relationships, and aspirations before proposing solutions.
+- Align project plans, product choices, and communications with LCAA
+- Keep land practice and cultural sovereignty central as enterprise grows
+- Coordinate across projects without flattening their identities
+- Keep claims honest and grounded in lived practice
+- Use it as a living record: add stories, shifts, and open questions as they arise
 
-### Curiosity
-Stay curious. Question assumptions, explore alternatives, learn from failure. The best solutions often come from unexpected places.
+---
 
-### Action
-Move from understanding to action. Build, prototype, iterate. Small experiments that inform larger change.
+## Core Frameworks
 
-### Art
-Express through story, image, sound, performance. Art reaches places that data cannot. Art moves people to action.
+| Framework | Purpose | Learn More |
+|-----------|---------|------------|
+| **LCAA** | Operating rhythm for choice, build, and learn | [LCAA Methodology](/wiki/act/lcaa) |
+| **ALMA** | Impact and learning model | [ALMA Framework](/wiki/act/alma) |
+| **Beautiful Obsolescence** | Design for handover and community ownership | [A Curious Tractor](/wiki/act/beautiful-obsolescence) |
 
-## ALMA Framework
-
-ALMA (Active Listening, Measuring, Amplifying) is our approach to impact measurement:
-
-- **Active Listening** - Creating conditions for authentic storytelling
-- **Measuring** - Connecting stories to outcomes
-- **Amplifying** - Sharing stories to drive change
+---
 
 ## The Ecosystem
 
-ACT's work flows through interconnected projects:
+We work in two layers:
 
-| Project | Focus | Status |
-|---------|-------|--------|
-| [JusticeHub](/compendium/justicehub) | Youth justice transformation | Active |
-| [Empathy Ledger](/compendium/empathy-ledger) | Community storytelling platform | Production Ready |
-| [Goods](/compendium/goods) | Community enterprise marketplace | v2 Rebuild |
-| [The Harvest](/compendium/the-harvest) | Regenerative food systems | Phase 1 |
-| [The Farm](/compendium/the-farm) | Land-based healing | Active |
-| [The Studio](/compendium/the-studio) | Technology and design | Production Ready |
+### Outputs (Core Projects)
 
-## Technical Architecture
+| Project | Focus | Link |
+|---------|-------|------|
+| Empathy Ledger | Consent-first storytelling | [View](/wiki/empathy-ledger) |
+| JusticeHub | Youth justice transformation | [View](/wiki/justicehub) |
+| Goods on Country | Community-owned manufacturing | [View](/wiki/goods) |
+| The Harvest | Enterprise hub in Witta | [View](/wiki/the-harvest) |
+| ACT Farm | Studio practice and land care | [View](/wiki/the-farm) |
+| The Studio | Technology and design | [View](/wiki/the-studio) |
 
-### Consistent Stack Across Projects
-```
-Frontend: Next.js (14-16), React (18-19), TypeScript, Tailwind CSS
-Backend: Supabase (PostgreSQL, Auth, Storage, Realtime, RLS)
-AI: Claude AI, OpenAI (opt-in only)
-Deployment: Vercel
-Process Management: PM2
-```
+### Expressions (How People Experience the Work)
 
-### Local Development Ports
-```
-Port 3001 - Empathy Ledger
-Port 3002 - ACT Regenerative Studio
-Port 3003 - JusticeHub
-Port 3004 - The Harvest
-Port 3005 - ACT Farm
-Port 3999 - Intelligence Platform
-```
+- Residencies and workshops
+- Events and gatherings
+- Artworks and exhibitions
+- Seasonal moments and harvest gatherings
+- Practical building and making roles for people with lived experience
+- Community enterprise pathways through Goods
+- Justice and storytelling pathways that centre lived experience
 
-### Shared Services
-- **Supabase** - Multiple projects with Row-Level Security
-- **GoHighLevel** - CRM and marketing automation
-- **Stripe** - Payment processing (Goods)
-- **Xero** - Financial management
-- **Notion** - Project management
+> Field note: If people cannot see themselves in the work, the output is incomplete.
 
-## Cultural Safety Principles
+---
 
-### OCAP (Indigenous Data Sovereignty)
-- **Ownership** - Communities own their collective data
-- **Control** - Communities control access and use
-- **Access** - Communities can access their own data anytime
-- **Possession** - Data stays under community custody
+## 2026 Focus Areas
 
-### Implementation
-- Elder Review Systems for sacred content
-- Ongoing Consent with renewable expiry
-- Cultural Protocols customizable per organization
-- AI analysis only with explicit opt-in
+This year is about balance: land stewardship, studio innovation, and enterprise maturity moving in step.
 
-## Impact Metrics
+1. **Land stewardship with shared governance** — Keep conservation-first practice, prepare co-stewardship groundwork
+2. **Innovation studio and product work** — Build tools that serve community ownership, not dependence
+3. **The Harvest as grounded enterprise** — Support local makers and micro-enterprise in Witta
+4. **Goods on Country manufacturing** — Move from pilots to reliable production
+5. **Story and evidence** — Treat storytelling as infrastructure for change, not marketing
 
-### Current Scale
-- **389** assets tracked (Goods on Country)
-- **240** storytellers connected (Empathy Ledger)
-- **8** remote communities served
-- **6** integrated platforms
-- **131** custom components (Empathy Ledger)
-- **60+** API endpoints
+> Field note: Pace is a form of ethics. We move at the speed of trust, maintenance, and land capacity.
 
-### Measurement Approach
-- Community-defined success metrics
-- SROI Calculator with cultural value proxies
-- Qualitative impact through storytelling
-- Systems change indicators
+---
 
-## Key Partnerships
+## Deep Dives
 
-- **Diagrama Foundation (Spain)** - Therapeutic community models
-- **Quandamooka community** - Justice co-design
-- **Cath Manuel / Soil to Supper** - Therapeutic horticulture
-- **Plate It Forward** - Social enterprise restaurant inspiration
-- **Queensland Youth Services** - Statewide networks
-- **University of the Sunshine Coast** - Research partnerships
+### Philosophy & Method
+- [LCAA Methodology](/wiki/act/lcaa) — Listen, Curiosity, Action, Art
+- [Principles of Practice](/wiki/act/identity/principles) — The 10 principles that guide decisions
+- [Beautiful Obsolescence](/wiki/act/beautiful-obsolescence) — Design for handover
+- [ALMA Framework](/wiki/act/alma) — Impact and learning model
 
-## Documentation Standards
+### Governance & Ethics
+- [Governance & Consent](/wiki/act/governance) — Community authority and consent
+- [AI Ethics](/wiki/act/ai-ethics) — AI agent strategy aligned to ALMA
+- [Ways of Working](/wiki/act/ways-of-working) — Internal practices
 
-### PMPP Framework
-- **Principles** - Why we do things
-- **Methods** - Frameworks and approaches
-- **Practices** - Technical design
-- **Procedures** - Step-by-step guides
+### Place
+- [Black Cockatoo Valley](/wiki/place/black-cockatoo-valley) — Land practice on Jinibara Country
+- [The Harvest (Witta)](/wiki/the-harvest) — Enterprise hub
 
-### Common Docs
-- README.md - Project overview
-- CLAUDE.md - AI assistant context
-- QUICKSTART.md - Fast reference
+### Reference
+- [Glossary](/wiki/act/appendices/glossary) — Key terms and definitions
+- [Visual System](/wiki/act/appendices/visual-system) — Design language
+- [ALMA Template](/wiki/act/appendices/alma-template) — Impact reporting
+- [2026 Roadmap](/wiki/act/appendices/roadmap-2026) — Seasonal plan
+
+---
 
 ## Resources
 
 - [ACT Place](https://act.place)
 - [GitHub](https://github.com/Acurioustractor)
 - [Storyteller Intelligence](/compendium/storytellers)
+- [Story Vignettes](/wiki/stories) — 28 consented stories
