@@ -42,18 +42,18 @@ const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
 const SCRIPT_NAME = 'generate-project-summaries';
 
-// Project codes — same as ecosystem overview
+// Project codes with all known aliases (tags, knowledge codes, comm codes)
 const PROJECT_CODES = [
-  { code: 'JH', name: 'JusticeHub' },
-  { code: 'EL', name: 'Empathy Ledger' },
-  { code: 'TH', name: 'The Harvest' },
-  { code: 'TF', name: 'The Farm' },
-  { code: 'TS', name: 'The Studio' },
-  { code: 'GD', name: 'Goods' },
-  { code: 'WT', name: 'World Tour' },
-  { code: 'PICC', name: 'PICC' },
-  { code: 'OPS', name: 'Operations' },
-  { code: 'ACT', name: 'ACT Global' },
+  { code: 'JH', name: 'JusticeHub', aliases: ['justicehub', 'justice', 'ACT-JH'] },
+  { code: 'EL', name: 'Empathy Ledger', aliases: ['empathy-ledger', 'empathy ledger', 'ACT-EL'] },
+  { code: 'TH', name: 'The Harvest', aliases: ['harvest', 'the-harvest', 'ACT-HV'] },
+  { code: 'TF', name: 'The Farm', aliases: ['farm', 'the-farm', 'ACT-TF'] },
+  { code: 'TS', name: 'The Studio', aliases: ['studio', 'the-studio', 'act-regenerative-studio', 'ACT-TS'] },
+  { code: 'GD', name: 'Goods', aliases: ['goods', 'GOODS', 'ACT-GD'] },
+  { code: 'WT', name: 'World Tour', aliases: ['world-tour', 'world tour', 'ACT-WT'] },
+  { code: 'PICC', name: 'PICC', aliases: ['picc', 'palm-island', 'ACT-PI'] },
+  { code: 'OPS', name: 'Operations', aliases: ['operations', 'ops', 'ACT-OP'] },
+  { code: 'ACT', name: 'ACT Global', aliases: ['act', 'act-global', 'ACT-10'] },
 ];
 
 // CLI args
@@ -78,27 +78,28 @@ function daysFromNow(n) {
 // DATA GATHERING PER PROJECT
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-async function gatherProjectData(code, name) {
-  const codeLower = code.toLowerCase();
-  const nameLower = name.toLowerCase();
+async function gatherProjectData(code, name, aliases = []) {
+  const allCodes = [code, name, ...aliases];
+  const allCodesLower = allCodes.map(c => c.toLowerCase());
   const sources = [];
 
-  // 1. Recent communications (last 7 days)
+  // 1. Recent communications (last 7 days) — match any alias in project_codes array
   const { data: comms } = await supabase
     .from('communications_history')
     .select('subject, summary, direction, sentiment, occurred_at, channel')
-    .overlaps('project_codes', [code])
+    .overlaps('project_codes', allCodes)
     .gte('occurred_at', daysAgo(7))
     .order('occurred_at', { ascending: false })
     .limit(15);
 
   if (comms?.length) sources.push('communications');
 
-  // 2. Knowledge items (meetings, decisions, actions — last 14 days)
+  // 2. Knowledge items — match ACT-XX prefixed codes + bare codes
+  const knowledgeCodes = allCodes.filter(c => c.startsWith('ACT-') || c === code);
   const { data: knowledge } = await supabase
     .from('project_knowledge')
     .select('title, summary, content, knowledge_type, importance, action_required, follow_up_date, recorded_at')
-    .eq('project_code', code)
+    .in('project_code', knowledgeCodes)
     .gte('recorded_at', daysAgo(14))
     .order('recorded_at', { ascending: false })
     .limit(10);
@@ -109,17 +110,17 @@ async function gatherProjectData(code, name) {
   const { data: opportunities } = await supabase
     .from('ghl_opportunities')
     .select('name, monetary_value, status, stage_name, updated_at')
-    .ilike('project_code', codeLower)
+    .or(allCodesLower.map(c => `project_code.ilike.${c}`).join(','))
     .order('updated_at', { ascending: false })
     .limit(10);
 
   if (opportunities?.length) sources.push('pipeline');
 
-  // 4. Contacts tagged with this project
+  // 4. Contacts tagged with this project — match any alias in tags array
   const { data: contacts } = await supabase
     .from('ghl_contacts')
-    .select('id, full_name, engagement_status, last_contact_date, temperature')
-    .overlaps('tags', [code, name])
+    .select('id, full_name, engagement_status, last_contact_date, tags, projects')
+    .overlaps('tags', allCodes)
     .order('last_contact_date', { ascending: false, nullsFirst: false })
     .limit(10);
 
@@ -129,7 +130,7 @@ async function gatherProjectData(code, name) {
   const { data: overdueActions } = await supabase
     .from('project_knowledge')
     .select('title, follow_up_date, importance')
-    .eq('project_code', code)
+    .in('project_code', knowledgeCodes)
     .eq('action_required', true)
     .lt('follow_up_date', new Date().toISOString().split('T')[0])
     .order('follow_up_date', { ascending: true })
@@ -291,7 +292,7 @@ async function main() {
     if (verbose) console.log(`\n--- ${project.name} (${project.code}) ---`);
 
     // Gather data
-    const data = await gatherProjectData(project.code, project.name);
+    const data = await gatherProjectData(project.code, project.name, project.aliases || []);
 
     if (verbose) {
       console.log(`  Data: ${data.comms.length} comms, ${data.knowledge.length} knowledge, ${data.opportunities.length} opps, ${data.contacts.length} contacts`);
