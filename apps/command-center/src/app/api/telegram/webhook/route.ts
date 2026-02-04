@@ -16,9 +16,9 @@ const handler = async (req: NextRequest) => {
 
   try {
     const bot = getBot()
+    await bot.init()
     const body = await req.json()
 
-    // Process update directly via bot.handleUpdate (simpler than webhookCallback)
     await bot.handleUpdate(body)
 
     return NextResponse.json({ ok: true })
