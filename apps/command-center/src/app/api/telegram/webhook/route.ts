@@ -2,6 +2,9 @@ import { NextRequest, NextResponse } from 'next/server'
 import { webhookCallback } from 'grammy'
 import { getBot } from '@/lib/telegram/bot'
 
+// Voice pipeline (download → transcribe → agent → TTS) needs more than default 10s
+export const maxDuration = 60
+
 // grammY webhook handler adapted for Next.js App Router
 const handler = async (req: NextRequest) => {
   // Verify webhook secret
