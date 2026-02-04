@@ -313,6 +313,42 @@ export async function checkFinanceAlerts(): Promise<{ sent: number; alerts: stri
 }
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// EVENING REFLECTION PROMPT
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+export async function sendReflectionPrompt(): Promise<{ sent: number; errors: string[] }> {
+  const chatIds = getNotifyChatIds()
+  const errors: string[] = []
+  let sent = 0
+
+  const today = new Date().toISOString().split('T')[0]
+
+  for (const chatId of chatIds) {
+    try {
+      // Check if today's reflection already exists
+      const { data } = await supabase
+        .from('daily_reflections')
+        .select('id')
+        .eq('chat_id', chatId)
+        .eq('reflection_date', today)
+        .maybeSingle()
+
+      if (data) continue // Already reflected today
+
+      await sendNotification(
+        chatId,
+        "Time to reflect on today. Send me a voice note about your day \u2014 what you listened to, what surprised you, what you built, and what meaning you made. I'll weave it into your LCAA reflection.\n\nOr just say \"not tonight\" to skip."
+      )
+      sent++
+    } catch (err) {
+      errors.push(`Chat ${chatId}: ${(err as Error).message}`)
+    }
+  }
+
+  return { sent, errors }
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // REMINDER CHECKER
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 

@@ -329,6 +329,103 @@ export const AGENT_TOOLS: Anthropic.Tool[] = [
       required: [],
     },
   },
+
+  // ── REFLECTION TOOLS ──────────────────────────────────────────────────
+
+  {
+    name: 'get_day_context',
+    description:
+      "Get a summary of today's activity for reflection — calendar events, communications, project activity, decisions, and contacts engaged with. Use this before generating a daily reflection to enrich the user's voice input with data.",
+    input_schema: {
+      type: 'object' as const,
+      properties: {
+        date: {
+          type: 'string',
+          description: 'Date in YYYY-MM-DD. Default: today.',
+        },
+      },
+      required: [],
+    },
+  },
+  {
+    name: 'save_daily_reflection',
+    description:
+      "Save a daily LCAA reflection. Use when the user has shared their thoughts about the day and you've synthesized it through the LCAA framework. Pass the complete reflection with all sections.",
+    input_schema: {
+      type: 'object' as const,
+      properties: {
+        voice_transcript: {
+          type: 'string',
+          description: 'Raw user voice/text input.',
+        },
+        lcaa_listen: {
+          type: 'string',
+          description: 'Listen section — who/what was listened to.',
+        },
+        lcaa_curiosity: {
+          type: 'string',
+          description: 'Curiosity section — questions explored, surprises.',
+        },
+        lcaa_action: {
+          type: 'string',
+          description: 'Action section — what was built, delivered, moved.',
+        },
+        lcaa_art: {
+          type: 'string',
+          description: 'Art section — stories told, meaning made.',
+        },
+        loop_to_tomorrow: {
+          type: 'string',
+          description: 'How today returns to Listen tomorrow.',
+        },
+        gratitude: {
+          type: 'array',
+          items: { type: 'string' },
+          description: 'Things grateful for.',
+        },
+        challenges: {
+          type: 'array',
+          items: { type: 'string' },
+          description: 'What was hard.',
+        },
+        learnings: {
+          type: 'array',
+          items: { type: 'string' },
+          description: 'What was learned.',
+        },
+        intentions: {
+          type: 'array',
+          items: { type: 'string' },
+          description: 'Intentions for tomorrow.',
+        },
+      },
+      required: ['voice_transcript', 'lcaa_listen', 'lcaa_curiosity', 'lcaa_action', 'lcaa_art'],
+    },
+  },
+  {
+    name: 'search_past_reflections',
+    description:
+      'Search past daily reflections by keyword or date range. Use when the user asks "what did I reflect on last week" or "when did I last think about X".',
+    input_schema: {
+      type: 'object' as const,
+      properties: {
+        query: {
+          type: 'string',
+          description:
+            'Search text (searches across all LCAA sections, gratitude, challenges, learnings).',
+        },
+        days: {
+          type: 'number',
+          description: 'Look back N days. Default 30.',
+        },
+        limit: {
+          type: 'number',
+          description: 'Max results. Default 7.',
+        },
+      },
+      required: [],
+    },
+  },
 ]
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -378,6 +475,27 @@ export async function executeTool(
       return await executeGetGrantPipeline(input as { status?: string })
     case 'get_pending_receipts':
       return await executeGetPendingReceipts(input as { limit?: number })
+    // Reflection tools
+    case 'get_day_context':
+      return await executeGetDayContext(input as { date?: string })
+    case 'save_daily_reflection':
+      return await executeSaveDailyReflection(
+        input as {
+          voice_transcript: string
+          lcaa_listen: string
+          lcaa_curiosity: string
+          lcaa_action: string
+          lcaa_art: string
+          loop_to_tomorrow?: string
+          gratitude?: string[]
+          challenges?: string[]
+          learnings?: string[]
+          intentions?: string[]
+        },
+        chatId
+      )
+    case 'search_past_reflections':
+      return await executeSearchPastReflections(input as { query?: string; days?: number; limit?: number })
     default:
       return JSON.stringify({ error: `Unknown tool: ${name}` })
   }
@@ -1439,6 +1557,207 @@ async function executeGetPendingReceipts(input: {
       count: receipts.length,
       total_pending: `$${totalAmount.toFixed(2)}`,
       receipts,
+    })
+  } catch (err) {
+    return JSON.stringify({ error: (err as Error).message })
+  }
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// TOOL: get_day_context
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+async function executeGetDayContext(input: { date?: string }): Promise<string> {
+  const date = input.date || new Date().toISOString().split('T')[0]
+
+  try {
+    const [calendar, comms, knowledge, actions] = await Promise.all([
+      supabase
+        .from('calendar_events')
+        .select('title, start_time, end_time, location, attendees')
+        .gte('start_time', `${date}T00:00:00Z`)
+        .lte('start_time', `${date}T23:59:59Z`)
+        .order('start_time'),
+      supabase
+        .from('communications_history')
+        .select('contact_name, direction, channel, subject, ai_summary')
+        .gte('created_at', `${date}T00:00:00Z`)
+        .lte('created_at', `${date}T23:59:59Z`)
+        .order('created_at', { ascending: false })
+        .limit(20),
+      supabase
+        .from('project_knowledge')
+        .select('project_code, knowledge_type, title, summary, participants')
+        .gte('recorded_at', `${date}T00:00:00Z`)
+        .lte('recorded_at', `${date}T23:59:59Z`)
+        .order('recorded_at', { ascending: false })
+        .limit(20),
+      supabase
+        .from('project_knowledge')
+        .select('project_code, title, action_items')
+        .eq('action_required', true)
+        .gte('recorded_at', `${date}T00:00:00Z`)
+        .lte('recorded_at', `${date}T23:59:59Z`),
+    ])
+
+    return JSON.stringify({
+      date,
+      calendar_events: calendar.data || [],
+      communications: comms.data || [],
+      knowledge_entries: knowledge.data || [],
+      action_items: actions.data || [],
+      stats: {
+        meetings: (calendar.data || []).length,
+        communications: (comms.data || []).length,
+        knowledge_entries: (knowledge.data || []).length,
+        actions_created: (actions.data || []).length,
+      },
+    })
+  } catch (err) {
+    return JSON.stringify({ error: (err as Error).message })
+  }
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// TOOL: save_daily_reflection
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+async function executeSaveDailyReflection(
+  input: {
+    voice_transcript: string
+    lcaa_listen: string
+    lcaa_curiosity: string
+    lcaa_action: string
+    lcaa_art: string
+    loop_to_tomorrow?: string
+    gratitude?: string[]
+    challenges?: string[]
+    learnings?: string[]
+    intentions?: string[]
+  },
+  chatId?: number
+): Promise<string> {
+  if (!chatId) return JSON.stringify({ error: 'Reflections require Telegram context.' })
+
+  const today = new Date().toISOString().split('T')[0]
+
+  try {
+    // Gather day stats for enrichment
+    const [calResult, commsResult, knowledgeResult] = await Promise.all([
+      supabase
+        .from('calendar_events')
+        .select('id', { count: 'exact', head: true })
+        .gte('start_time', `${today}T00:00:00Z`)
+        .lte('start_time', `${today}T23:59:59Z`),
+      supabase
+        .from('communications_history')
+        .select('id', { count: 'exact', head: true })
+        .gte('created_at', `${today}T00:00:00Z`),
+      supabase
+        .from('project_knowledge')
+        .select('id', { count: 'exact', head: true })
+        .gte('recorded_at', `${today}T00:00:00Z`),
+    ])
+
+    const dayStats = {
+      meetings: calResult.count || 0,
+      communications: commsResult.count || 0,
+      knowledge_entries: knowledgeResult.count || 0,
+    }
+
+    // Upsert (allow updating today's reflection)
+    const { data, error } = await supabase
+      .from('daily_reflections')
+      .upsert(
+        {
+          chat_id: chatId,
+          reflection_date: today,
+          voice_transcript: input.voice_transcript,
+          lcaa_listen: input.lcaa_listen,
+          lcaa_curiosity: input.lcaa_curiosity,
+          lcaa_action: input.lcaa_action,
+          lcaa_art: input.lcaa_art,
+          loop_to_tomorrow: input.loop_to_tomorrow || null,
+          gratitude: input.gratitude || [],
+          challenges: input.challenges || [],
+          learnings: input.learnings || [],
+          intentions: input.intentions || [],
+          day_stats: dayStats,
+          updated_at: new Date().toISOString(),
+        },
+        { onConflict: 'chat_id,reflection_date' }
+      )
+      .select()
+      .single()
+
+    if (error) return JSON.stringify({ error: error.message })
+
+    return JSON.stringify({
+      action: 'reflection_saved',
+      id: data.id,
+      date: today,
+      day_stats: dayStats,
+      confirmation: `Reflection saved for ${today}. Your LCAA loop is complete.`,
+    })
+  } catch (err) {
+    return JSON.stringify({ error: (err as Error).message })
+  }
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// TOOL: search_past_reflections
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+async function executeSearchPastReflections(input: {
+  query?: string
+  days?: number
+  limit?: number
+}): Promise<string> {
+  const days = input.days || 30
+  const limit = input.limit || 7
+  const lookback = new Date(Date.now() - days * 86400000).toISOString().split('T')[0]
+
+  try {
+    let query = supabase
+      .from('daily_reflections')
+      .select(
+        'id, reflection_date, lcaa_listen, lcaa_curiosity, lcaa_action, lcaa_art, loop_to_tomorrow, gratitude, challenges, learnings, intentions, day_stats'
+      )
+      .gte('reflection_date', lookback)
+      .order('reflection_date', { ascending: false })
+      .limit(limit)
+
+    if (input.query) {
+      const searchTerm = `%${input.query}%`
+      query = query.or(
+        `lcaa_listen.ilike.${searchTerm},lcaa_curiosity.ilike.${searchTerm},lcaa_action.ilike.${searchTerm},lcaa_art.ilike.${searchTerm},loop_to_tomorrow.ilike.${searchTerm},voice_transcript.ilike.${searchTerm}`
+      )
+    }
+
+    const { data, error } = await query
+
+    if (error) return JSON.stringify({ error: error.message })
+
+    const reflections = (data || []).map((r) => ({
+      id: r.id,
+      date: r.reflection_date,
+      listen: r.lcaa_listen,
+      curiosity: r.lcaa_curiosity,
+      action: r.lcaa_action,
+      art: r.lcaa_art,
+      loop: r.loop_to_tomorrow,
+      gratitude: r.gratitude,
+      challenges: r.challenges,
+      learnings: r.learnings,
+      intentions: r.intentions,
+      day_stats: r.day_stats,
+    }))
+
+    return JSON.stringify({
+      query: input.query || '(all recent)',
+      lookback_days: days,
+      count: reflections.length,
+      reflections,
     })
   } catch (err) {
     return JSON.stringify({ error: (err as Error).message })

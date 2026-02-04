@@ -4,6 +4,7 @@ import {
   checkGrantAlerts,
   checkFinanceAlerts,
   checkAndSendReminders,
+  sendReflectionPrompt,
 } from '@/lib/telegram/notifications'
 
 // Cron-triggered notification endpoint
@@ -36,6 +37,11 @@ export async function GET(req: NextRequest) {
 
     if (type === 'reminders' || type === 'all') {
       results.reminders = await checkAndSendReminders()
+    }
+
+    // Reflection runs on its own schedule — NOT included in type=all
+    if (type === 'reflection') {
+      results.reflection = await sendReflectionPrompt()
     }
 
     return NextResponse.json({
