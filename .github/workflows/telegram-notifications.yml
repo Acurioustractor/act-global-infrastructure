@@ -1,0 +1,87 @@
+name: Telegram Notifications
+
+on:
+  schedule:
+    # Daily briefing at 8:00 AM AEST (22:00 UTC previous day)
+    - cron: '0 22 * * *'
+    # Reminder check every 5 minutes
+    - cron: '*/5 * * * *'
+
+  workflow_dispatch:
+    inputs:
+      type:
+        description: 'Notification type to trigger'
+        required: false
+        default: 'all'
+        type: choice
+        options:
+          - all
+          - daily
+          - grants
+          - finance
+          - reminders
+
+jobs:
+  # Daily briefing + grants + finance (runs at 8am AEST only)
+  daily-briefing:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    # Only run at 22:00 UTC (8am AEST) or on manual trigger
+    if: github.event_name == 'workflow_dispatch' || github.event.schedule == '0 22 * * *'
+
+    steps:
+      - name: Send daily briefing via Telegram
+        env:
+          COMMAND_CENTER_URL: ${{ secrets.COMMAND_CENTER_URL }}
+          CRON_SECRET: ${{ secrets.CRON_SECRET }}
+        run: |
+          TYPE="${{ github.event.inputs.type || 'daily' }}"
+
+          # For scheduled 8am run, send daily + grants + finance
+          if [ "${{ github.event_name }}" = "schedule" ]; then
+            TYPE="all"
+          fi
+
+          RESPONSE=$(curl -sf -w "\n%{http_code}" \
+            -H "Authorization: Bearer ${CRON_SECRET}" \
+            "${COMMAND_CENTER_URL}/api/telegram/notify?type=${TYPE}")
+
+          HTTP_CODE=$(echo "$RESPONSE" | tail -n1)
+          BODY=$(echo "$RESPONSE" | head -n -1)
+
+          echo "Status: ${HTTP_CODE}"
+          echo "Response: ${BODY}"
+
+          if [ "$HTTP_CODE" != "200" ]; then
+            echo "Notification request failed with status ${HTTP_CODE}"
+            exit 1
+          fi
+
+  # Reminder check (runs every 5 minutes)
+  check-reminders:
+    runs-on: ubuntu-latest
+    timeout-minutes: 1
+    # Only run on the */5 schedule or manual trigger with type=reminders
+    if: >-
+      (github.event_name == 'schedule' && github.event.schedule == '*/5 * * * *') ||
+      (github.event_name == 'workflow_dispatch' && github.event.inputs.type == 'reminders')
+
+    steps:
+      - name: Check and send due reminders
+        env:
+          COMMAND_CENTER_URL: ${{ secrets.COMMAND_CENTER_URL }}
+          CRON_SECRET: ${{ secrets.CRON_SECRET }}
+        run: |
+          RESPONSE=$(curl -sf -w "\n%{http_code}" \
+            -H "Authorization: Bearer ${CRON_SECRET}" \
+            "${COMMAND_CENTER_URL}/api/telegram/notify?type=reminders")
+
+          HTTP_CODE=$(echo "$RESPONSE" | tail -n1)
+          BODY=$(echo "$RESPONSE" | head -n -1)
+
+          # Only log non-empty results to keep noise down
+          if echo "$BODY" | grep -q '"sent":0'; then
+            echo "No reminders due"
+          else
+            echo "Response: ${BODY}"
+          fi
