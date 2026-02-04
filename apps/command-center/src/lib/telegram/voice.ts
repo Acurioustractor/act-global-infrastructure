@@ -1,6 +1,11 @@
 import OpenAI from 'openai'
 
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
+// Lazy-initialized — must not instantiate at module level or Next.js build fails
+let _openai: OpenAI | null = null
+function getOpenAI(): OpenAI {
+  if (!_openai) _openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
+  return _openai
+}
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // TYPES
@@ -82,7 +87,7 @@ export async function transcribeVoice(fileBuffer: Buffer): Promise<string> {
   // OpenAI accepts OGG natively — no conversion needed
   const file = new File([new Uint8Array(fileBuffer)], 'voice.ogg', { type: 'audio/ogg' })
 
-  const response = await openai.audio.transcriptions.create({
+  const response = await getOpenAI().audio.transcriptions.create({
     model: 'gpt-4o-transcribe',
     file,
     language: 'en',
@@ -113,7 +118,7 @@ export async function synthesizeSpeech(text: string, chatId?: number): Promise<B
 async function synthesizeWithOpenAI(text: string, voice: string): Promise<Buffer> {
   const voiceText = text.length > 2000 ? text.slice(0, 2000) + '...' : text
 
-  const response = await openai.audio.speech.create({
+  const response = await getOpenAI().audio.speech.create({
     model: 'gpt-4o-mini-tts',
     voice: voice as OpenAIVoice,
     input: voiceText,
