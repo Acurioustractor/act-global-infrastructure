@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { supabase } from '@/lib/supabase'
+import { ghlUpdateContact, ghlAddTag, ghlRemoveTag } from '@/lib/ghl'
 
 export async function GET(_req: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
@@ -108,7 +109,7 @@ export async function PATCH(req: Request, { params }: { params: Promise<{ id: st
     // Resolve contact (accept both ghl_id and UUID)
     let { data: contact } = await supabase
       .from('ghl_contacts')
-      .select('id, ghl_id, tags')
+      .select('id, ghl_id, tags, first_name, last_name, company_name, email, website')
       .eq('ghl_id', id)
       .limit(1)
       .single()
@@ -116,7 +117,7 @@ export async function PATCH(req: Request, { params }: { params: Promise<{ id: st
     if (!contact) {
       const fallback = await supabase
         .from('ghl_contacts')
-        .select('id, ghl_id, tags')
+        .select('id, ghl_id, tags, first_name, last_name, company_name, email, website')
         .eq('id', id)
         .limit(1)
         .single()
@@ -127,25 +128,70 @@ export async function PATCH(req: Request, { params }: { params: Promise<{ id: st
       return NextResponse.json({ error: 'Contact not found' }, { status: 404 })
     }
 
+    // Build Supabase update and GHL update payloads
+    const supabaseUpdate: Record<string, unknown> = { updated_at: new Date().toISOString() }
+    const ghlUpdate: Record<string, unknown> = {}
+
+    // Field updates
+    if (body.firstName !== undefined) {
+      supabaseUpdate.first_name = body.firstName
+      ghlUpdate.firstName = body.firstName
+      // Update full_name
+      const lastName = body.lastName ?? contact.last_name ?? ''
+      supabaseUpdate.full_name = `${body.firstName} ${lastName}`.trim()
+    }
+    if (body.lastName !== undefined) {
+      supabaseUpdate.last_name = body.lastName
+      ghlUpdate.lastName = body.lastName
+      const firstName = body.firstName ?? contact.first_name ?? ''
+      supabaseUpdate.full_name = `${firstName} ${body.lastName}`.trim()
+    }
+    if (body.companyName !== undefined) {
+      supabaseUpdate.company_name = body.companyName
+      ghlUpdate.companyName = body.companyName
+    }
+    if (body.website !== undefined) {
+      supabaseUpdate.website = body.website
+      ghlUpdate.website = body.website
+    }
+    if (body.email !== undefined) {
+      supabaseUpdate.email = body.email
+      ghlUpdate.email = body.email
+    }
+
     // Handle tag operations
     if (body.addTag) {
       const currentTags: string[] = contact.tags || []
       if (!currentTags.includes(body.addTag)) {
-        const { error } = await supabase
-          .from('ghl_contacts')
-          .update({ tags: [...currentTags, body.addTag], updated_at: new Date().toISOString() })
-          .eq('id', contact.id)
-        if (error) return NextResponse.json({ error: error.message }, { status: 500 })
+        supabaseUpdate.tags = [...currentTags, body.addTag]
       }
     }
 
     if (body.removeTag) {
       const currentTags: string[] = contact.tags || []
-      const { error } = await supabase
-        .from('ghl_contacts')
-        .update({ tags: currentTags.filter(t => t !== body.removeTag), updated_at: new Date().toISOString() })
-        .eq('id', contact.id)
-      if (error) return NextResponse.json({ error: error.message }, { status: 500 })
+      supabaseUpdate.tags = currentTags.filter(t => t !== body.removeTag)
+    }
+
+    // Update Supabase
+    const { error } = await supabase
+      .from('ghl_contacts')
+      .update(supabaseUpdate)
+      .eq('id', contact.id)
+    if (error) return NextResponse.json({ error: error.message }, { status: 500 })
+
+    // Push to GHL (best-effort — don't roll back Supabase on failure)
+    try {
+      if (Object.keys(ghlUpdate).length > 0) {
+        await ghlUpdateContact(contact.ghl_id, ghlUpdate)
+      }
+      if (body.addTag) {
+        await ghlAddTag(contact.ghl_id, body.addTag)
+      }
+      if (body.removeTag) {
+        await ghlRemoveTag(contact.ghl_id, body.removeTag)
+      }
+    } catch (ghlErr) {
+      console.error('GHL sync error (non-blocking):', ghlErr)
     }
 
     return NextResponse.json({ ok: true })

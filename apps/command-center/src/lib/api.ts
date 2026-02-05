@@ -2477,6 +2477,106 @@ export async function removeRepoContact(repoName: string, contactId: string) {
   )
 }
 
+// ─── Goods Intelligence ─────────────────────────────────────────
+
+export interface GoodsContact {
+  id: string
+  ghl_id: string
+  full_name: string
+  first_name: string | null
+  last_name: string | null
+  email: string | null
+  company_name: string | null
+  website: string | null
+  tags: string[]
+  last_contact_date: string | null
+  newsletter_consent: boolean
+  segment: 'funder' | 'partner' | 'community' | 'supporter' | 'storyteller'
+  days_since_contact: number | null
+}
+
+export interface GoodsContent {
+  id: string
+  el_id: string | null
+  content_type: string
+  title: string
+  excerpt: string | null
+  storyteller_name: string | null
+  url: string | null
+  image_url: string | null
+  topics: string[] | null
+  impact_themes: string[] | null
+  audience_fit: string[] | null
+  key_message: string | null
+  suggested_use: string | null
+  emotional_tone: string | null
+  times_used_newsletter: number
+  last_used_newsletter_at: string | null
+  published_at: string | null
+}
+
+export interface GoodsOutreach {
+  id: string
+  name: string
+  email: string | null
+  reason: string
+  priority: 'high' | 'medium' | 'low'
+  days_since_contact: number | null
+  ghl_id: string
+  segment: string
+}
+
+export interface GoodsDashboard {
+  segments: {
+    total: number
+    newsletter: number
+    funders: number
+    partners: number
+    community: number
+    supporters: number
+    storytellers: number
+    needingAttention: number
+  }
+  contacts: GoodsContact[]
+  content: GoodsContent[]
+  outreach: GoodsOutreach[]
+}
+
+export async function getGoodsDashboard() {
+  return fetchApi<GoodsDashboard>('/api/goods/dashboard')
+}
+
+export async function updateContactNewsletter(contactId: string, subscribe: boolean) {
+  return updateContactTag(contactId, subscribe ? 'add' : 'remove', 'goods-newsletter')
+}
+
+export async function createGoodsContact(data: {
+  email: string
+  firstName?: string
+  lastName?: string
+  companyName?: string
+  website?: string
+  tags?: string[]
+}) {
+  return fetchApi<{ contact: GoodsContact }>('/api/contacts', {
+    method: 'POST',
+    body: JSON.stringify(data),
+  })
+}
+
+export async function updateGoodsContact(id: string, updates: {
+  firstName?: string
+  lastName?: string
+  companyName?: string
+  website?: string
+  email?: string
+}) {
+  return fetchApi<{ ok: boolean }>(`/api/contacts/${id}`, {
+    method: 'PATCH',
+    body: JSON.stringify(updates),
+  })
+}
+
 // Wiki: Project Storytellers
 export interface ProjectStorytellersResponse {
   project: string

@@ -1,0 +1,1 @@
+ALTER TABLE ghl_contacts ADD COLUMN IF NOT EXISTS website TEXT;
