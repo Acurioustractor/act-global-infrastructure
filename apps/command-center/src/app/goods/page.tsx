@@ -8,11 +8,17 @@ import {
   updateContactTag,
   updateGoodsContact,
   createGoodsContact,
+  getGoodsDuplicates,
+  mergeGoodsContacts,
+  searchAllContacts,
   type GoodsContact,
   type GoodsContent,
   type GoodsOutreach,
+  type DuplicateGroup,
+  type SearchContact,
 } from '@/lib/api'
 import { ghlContactUrl, ghlEmailMarketingUrl, formatRelativeDate } from '@/lib/utils'
+import { ContactDrawer } from '@/components/contact-drawer'
 import { LoadingPage } from '@/components/ui/loading'
 import {
   ShoppingBag,
@@ -32,6 +38,8 @@ import {
   X,
   Check,
   Pencil,
+  Merge,
+  AlertTriangle,
 } from 'lucide-react'
 
 type Tab = 'overview' | 'contacts' | 'content' | 'newsletter'
@@ -62,11 +70,19 @@ export default function GoodsPage() {
   const [segment, setSegment] = useState<Segment>('all')
   const [search, setSearch] = useState('')
   const [showAddContact, setShowAddContact] = useState(false)
+  const [showAddExisting, setShowAddExisting] = useState(false)
+  const [selectedContactId, setSelectedContactId] = useState<string | null>(null)
+  const [showDedupModal, setShowDedupModal] = useState(false)
   const queryClient = useQueryClient()
 
   const { data, isLoading, error } = useQuery({
     queryKey: ['goods', 'dashboard'],
     queryFn: getGoodsDashboard,
+  })
+
+  const { data: dupData } = useQuery({
+    queryKey: ['goods', 'duplicates'],
+    queryFn: getGoodsDuplicates,
   })
 
   const newsletterMutation = useMutation({
@@ -146,11 +162,18 @@ export default function GoodsPage() {
           </div>
           <div className="flex items-center gap-3">
             <button
+              onClick={() => setShowAddExisting(true)}
+              className="flex items-center gap-2 rounded-lg bg-white/10 px-4 py-2 text-sm font-medium text-white hover:bg-white/15 transition-colors"
+            >
+              <Search className="h-4 w-4" />
+              Add from CRM
+            </button>
+            <button
               onClick={() => setShowAddContact(true)}
               className="flex items-center gap-2 rounded-lg bg-white/10 px-4 py-2 text-sm font-medium text-white hover:bg-white/15 transition-colors"
             >
               <Plus className="h-4 w-4" />
-              Add Contact
+              New Contact
             </button>
             <a
               href={ghlEmailMarketingUrl()}
@@ -221,16 +244,36 @@ export default function GoodsPage() {
       )}
 
       {tab === 'contacts' && (
-        <ContactsTab
-          contacts={filteredContacts}
-          segment={segment}
-          setSegment={setSegment}
-          search={search}
-          setSearch={setSearch}
-          segments={segments}
-          onToggleNewsletter={(id, subscribe) => newsletterMutation.mutate({ id, subscribe })}
-          onUpdateContact={(id, updates) => updateMutation.mutate({ id, updates })}
-        />
+        <>
+          {dupData && dupData.count > 0 && (
+            <div className="mb-4 glass-card p-4 border-amber-500/30 flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <AlertTriangle className="h-5 w-5 text-amber-400" />
+                <span className="text-sm text-amber-300">
+                  {dupData.count} duplicate contact{dupData.count > 1 ? 's' : ''} found
+                </span>
+              </div>
+              <button
+                onClick={() => setShowDedupModal(true)}
+                className="flex items-center gap-2 px-3 py-1.5 text-xs font-medium bg-amber-500/20 text-amber-300 rounded-lg hover:bg-amber-500/30 transition-colors"
+              >
+                <Merge className="h-3.5 w-3.5" />
+                Review &amp; Merge
+              </button>
+            </div>
+          )}
+          <ContactsTab
+            contacts={filteredContacts}
+            segment={segment}
+            setSegment={setSegment}
+            search={search}
+            setSearch={setSearch}
+            segments={segments}
+            onToggleNewsletter={(id, subscribe) => newsletterMutation.mutate({ id, subscribe })}
+            onUpdateContact={(id, updates) => updateMutation.mutate({ id, updates })}
+            onSelectContact={(ghlId) => setSelectedContactId(ghlId)}
+          />
+        </>
       )}
 
       {tab === 'content' && (
@@ -254,6 +297,34 @@ export default function GoodsPage() {
           onClose={() => setShowAddContact(false)}
           onSubmit={(data) => createMutation.mutate(data)}
           isLoading={createMutation.isPending}
+        />
+      )}
+
+      {/* Add Existing Contact Picker */}
+      {showAddExisting && (
+        <AddExistingModal
+          onClose={() => setShowAddExisting(false)}
+          onAdded={() => queryClient.invalidateQueries({ queryKey: ['goods'] })}
+        />
+      )}
+
+      {/* Contact Detail Drawer */}
+      {selectedContactId && (
+        <ContactDrawer
+          ghlId={selectedContactId}
+          onClose={() => setSelectedContactId(null)}
+        />
+      )}
+
+      {/* Dedup Modal */}
+      {showDedupModal && dupData && (
+        <DedupModal
+          duplicates={dupData.duplicates}
+          onClose={() => setShowDedupModal(false)}
+          onMerge={async (keepId, mergeIds) => {
+            await mergeGoodsContacts(keepId, mergeIds)
+            queryClient.invalidateQueries({ queryKey: ['goods'] })
+          }}
         />
       )}
     </div>
@@ -561,7 +632,7 @@ function OverviewTab({ outreach, content, segments }: {
 
 // ─── Contacts Tab ─────────────────────────────────────────────────
 
-function ContactsTab({ contacts, segment, setSegment, search, setSearch, segments, onToggleNewsletter, onUpdateContact }: {
+function ContactsTab({ contacts, segment, setSegment, search, setSearch, segments, onToggleNewsletter, onUpdateContact, onSelectContact }: {
   contacts: GoodsContact[]
   segment: Segment
   setSegment: (s: Segment) => void
@@ -570,6 +641,7 @@ function ContactsTab({ contacts, segment, setSegment, search, setSearch, segment
   segments: { total: number; newsletter: number; funders: number; partners: number; community: number; supporters: number; storytellers: number }
   onToggleNewsletter: (id: string, subscribe: boolean) => void
   onUpdateContact: (id: string, updates: Record<string, string>) => void
+  onSelectContact: (ghlId: string) => void
 }) {
   const chips: { key: Segment; label: string; count: number }[] = [
     { key: 'all', label: 'All', count: segments.total },
@@ -629,12 +701,12 @@ function ContactsTab({ contacts, segment, setSegment, search, setSearch, segment
         ) : (
           <div className="space-y-1">
             {/* Header */}
-            <div className="grid grid-cols-[1fr_160px_140px_100px_100px_80px_80px] gap-3 px-3 py-2 text-xs text-white/40 uppercase tracking-wider">
+            <div className="grid grid-cols-[1fr_140px_140px_90px_1fr_60px_60px] gap-3 px-3 py-2 text-xs text-white/40 uppercase tracking-wider">
               <span>Name</span>
               <span>Company</span>
               <span>Email</span>
               <span>Segment</span>
-              <span>Last Contact</span>
+              <span>Last Email</span>
               <span>News</span>
               <span>Links</span>
             </div>
@@ -644,6 +716,7 @@ function ContactsTab({ contacts, segment, setSegment, search, setSearch, segment
                 contact={contact}
                 onToggleNewsletter={onToggleNewsletter}
                 onUpdateContact={onUpdateContact}
+                onSelect={() => onSelectContact(contact.ghl_id)}
               />
             ))}
           </div>
@@ -653,13 +726,14 @@ function ContactsTab({ contacts, segment, setSegment, search, setSearch, segment
   )
 }
 
-function ContactRow({ contact, onToggleNewsletter, onUpdateContact }: {
+function ContactRow({ contact, onToggleNewsletter, onUpdateContact, onSelect }: {
   contact: GoodsContact
   onToggleNewsletter: (id: string, subscribe: boolean) => void
   onUpdateContact: (id: string, updates: Record<string, string>) => void
+  onSelect: () => void
 }) {
   return (
-    <div className="grid grid-cols-[1fr_160px_140px_100px_100px_80px_80px] gap-3 px-3 py-2.5 rounded-lg hover:bg-white/5 transition-colors items-center">
+    <div className="grid grid-cols-[1fr_140px_140px_90px_1fr_60px_60px] gap-3 px-3 py-2.5 rounded-lg hover:bg-white/5 transition-colors items-center cursor-pointer" onClick={onSelect}>
       {/* Name (inline editable) */}
       <div className="min-w-0">
         <InlineEditField
@@ -704,19 +778,26 @@ function ContactRow({ contact, onToggleNewsletter, onUpdateContact }: {
       <span className={`text-xs px-2 py-1 rounded-full w-fit ${SEGMENT_COLORS[contact.segment] || 'bg-white/10 text-white/60'}`}>
         {contact.segment}
       </span>
-      <span className={`text-sm ${
-        contact.days_since_contact === null ? 'text-red-400'
-        : contact.days_since_contact > 30 ? 'text-amber-400'
-        : 'text-white/60'
-      }`}>
-        {contact.days_since_contact === null
-          ? 'Never'
-          : contact.last_contact_date
-            ? formatRelativeDate(contact.last_contact_date)
-            : '—'}
-      </span>
+      <div className="min-w-0">
+        {contact.last_email_subject ? (
+          <>
+            <p className="text-xs text-white/60 truncate">{contact.last_email_subject}</p>
+            <p className={`text-[10px] ${
+              contact.days_since_contact === null ? 'text-red-400'
+              : contact.days_since_contact > 30 ? 'text-amber-400'
+              : 'text-white/30'
+            }`}>
+              {contact.last_email_date ? formatRelativeDate(contact.last_email_date) : '—'}
+            </p>
+          </>
+        ) : (
+          <span className={`text-xs ${contact.days_since_contact === null ? 'text-red-400' : 'text-white/30'}`}>
+            {contact.days_since_contact === null ? 'Never contacted' : 'No emails'}
+          </span>
+        )}
+      </div>
       <button
-        onClick={() => onToggleNewsletter(contact.id, !contact.newsletter_consent)}
+        onClick={(e) => { e.stopPropagation(); onToggleNewsletter(contact.id, !contact.newsletter_consent) }}
         className="flex items-center"
         title={contact.newsletter_consent ? 'Unsubscribe from newsletter' : 'Subscribe to newsletter'}
       >
@@ -732,6 +813,7 @@ function ContactRow({ contact, onToggleNewsletter, onUpdateContact }: {
         rel="noopener noreferrer"
         className="flex items-center gap-1 text-xs text-emerald-400 hover:text-emerald-300"
         title="Open in GHL"
+        onClick={(e) => e.stopPropagation()}
       >
         GHL
         <ExternalLink className="h-3 w-3" />
@@ -929,6 +1011,266 @@ function NewsletterTab({ contacts, totalSubscribers, contentCount, search, setSe
                   Open in GHL
                   <ExternalLink className="h-3 w-3" />
                 </a>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  )
+}
+
+// ─── Add Existing Contact Picker ──────────────────────────────────
+
+function AddExistingModal({ onClose, onAdded }: {
+  onClose: () => void
+  onAdded: () => void
+}) {
+  const [query, setQuery] = useState('')
+  const [results, setResults] = useState<SearchContact[]>([])
+  const [searching, setSearching] = useState(false)
+  const [adding, setAdding] = useState<Set<string>>(new Set())
+  const [added, setAdded] = useState<Set<string>>(new Set())
+  const debounceRef = useRef<ReturnType<typeof setTimeout>>(null)
+
+  useEffect(() => {
+    if (query.length < 2) {
+      setResults([])
+      return
+    }
+    if (debounceRef.current) clearTimeout(debounceRef.current)
+    debounceRef.current = setTimeout(async () => {
+      setSearching(true)
+      try {
+        const data = await searchAllContacts(query)
+        setResults(data.contacts)
+      } catch {
+        setResults([])
+      } finally {
+        setSearching(false)
+      }
+    }, 300)
+    return () => { if (debounceRef.current) clearTimeout(debounceRef.current) }
+  }, [query])
+
+  const handleAdd = async (contact: SearchContact) => {
+    setAdding(prev => new Set(prev).add(contact.ghl_id))
+    try {
+      await updateContactTag(contact.ghl_id, 'add', 'goods')
+      setAdded(prev => new Set(prev).add(contact.ghl_id))
+      onAdded()
+    } finally {
+      setAdding(prev => {
+        const next = new Set(prev)
+        next.delete(contact.ghl_id)
+        return next
+      })
+    }
+  }
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
+      <div className="glass-card p-6 w-full max-w-lg mx-4 max-h-[80vh] flex flex-col">
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-lg font-semibold text-white">Add Existing Contact to Goods</h2>
+          <button onClick={onClose} className="text-white/40 hover:text-white/60">
+            <X className="h-5 w-5" />
+          </button>
+        </div>
+
+        <div className="relative mb-4">
+          <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-white/40" />
+          <input
+            type="text"
+            placeholder="Search by name, email, or company..."
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            autoFocus
+            className="w-full bg-white/5 border border-white/10 rounded-lg py-2.5 pl-10 pr-4 text-white placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-emerald-500/50"
+          />
+        </div>
+
+        <div className="flex-1 overflow-y-auto min-h-0">
+          {query.length < 2 ? (
+            <p className="text-sm text-white/40 text-center py-8">Type at least 2 characters to search</p>
+          ) : searching ? (
+            <div className="space-y-2">
+              {[1, 2, 3].map(i => (
+                <div key={i} className="h-14 bg-white/5 rounded-lg animate-pulse" />
+              ))}
+            </div>
+          ) : results.length === 0 ? (
+            <p className="text-sm text-white/40 text-center py-8">No contacts found</p>
+          ) : (
+            <div className="space-y-1">
+              {results.map(contact => {
+                const isAdded = added.has(contact.ghl_id) || contact.already_goods
+                const isAdding = adding.has(contact.ghl_id)
+                return (
+                  <div
+                    key={contact.ghl_id}
+                    className="flex items-center gap-3 p-3 rounded-lg bg-white/5 hover:bg-white/8 transition-colors"
+                  >
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-medium text-white truncate">{contact.full_name}</p>
+                      <div className="flex items-center gap-2 mt-0.5">
+                        {contact.email && (
+                          <span className="text-xs text-white/40 truncate">{contact.email}</span>
+                        )}
+                        {contact.company_name && (
+                          <span className="text-xs text-white/30">· {contact.company_name}</span>
+                        )}
+                      </div>
+                    </div>
+                    {isAdded ? (
+                      <span className="flex items-center gap-1 text-xs text-emerald-400 shrink-0">
+                        <Check className="h-3.5 w-3.5" />
+                        In Goods
+                      </span>
+                    ) : (
+                      <button
+                        onClick={() => handleAdd(contact)}
+                        disabled={isAdding}
+                        className="flex items-center gap-1 px-3 py-1.5 text-xs font-medium bg-emerald-500/20 text-emerald-400 rounded-lg hover:bg-emerald-500/30 disabled:opacity-50 transition-colors shrink-0"
+                      >
+                        <Plus className="h-3 w-3" />
+                        {isAdding ? 'Adding...' : 'Add'}
+                      </button>
+                    )}
+                  </div>
+                )
+              })}
+            </div>
+          )}
+        </div>
+
+        {added.size > 0 && (
+          <div className="mt-4 pt-4 border-t border-white/10 flex items-center justify-between">
+            <span className="text-sm text-emerald-400">{added.size} contact{added.size > 1 ? 's' : ''} added to Goods</span>
+            <button
+              onClick={onClose}
+              className="px-4 py-2 text-sm font-medium bg-emerald-500/20 text-emerald-400 rounded-lg hover:bg-emerald-500/30 transition-colors"
+            >
+              Done
+            </button>
+          </div>
+        )}
+      </div>
+    </div>
+  )
+}
+
+// ─── Dedup Modal ──────────────────────────────────────────────────
+
+function DedupModal({ duplicates, onClose, onMerge }: {
+  duplicates: DuplicateGroup[]
+  onClose: () => void
+  onMerge: (keepId: string, mergeIds: string[]) => Promise<void>
+}) {
+  const [selections, setSelections] = useState<Record<string, string>>(() => {
+    const initial: Record<string, string> = {}
+    for (const group of duplicates) {
+      const sorted = [...group.contacts].sort((a, b) => b.tags.length - a.tags.length)
+      initial[group.email] = sorted[0].ghl_id
+    }
+    return initial
+  })
+  const [merging, setMerging] = useState(false)
+  const [merged, setMerged] = useState<Set<string>>(new Set())
+
+  const handleMerge = async (email: string) => {
+    const keepId = selections[email]
+    const group = duplicates.find(d => d.email === email)
+    if (!group) return
+    const mergeIds = group.contacts.filter(c => c.ghl_id !== keepId).map(c => c.ghl_id)
+    setMerging(true)
+    try {
+      await onMerge(keepId, mergeIds)
+      setMerged(prev => new Set(prev).add(email))
+    } finally {
+      setMerging(false)
+    }
+  }
+
+  const allMerged = merged.size === duplicates.length
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
+      <div className="glass-card p-6 w-full max-w-2xl mx-4 max-h-[80vh] overflow-y-auto">
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="text-lg font-semibold text-white flex items-center gap-2">
+            <Merge className="h-5 w-5 text-amber-400" />
+            Merge Duplicate Contacts
+          </h2>
+          <button onClick={onClose} className="text-white/40 hover:text-white/60">
+            <X className="h-5 w-5" />
+          </button>
+        </div>
+
+        {allMerged ? (
+          <div className="py-8 text-center">
+            <Check className="mx-auto h-12 w-12 text-emerald-400" />
+            <p className="mt-4 text-white/70">All duplicates merged!</p>
+            <button
+              onClick={onClose}
+              className="mt-4 px-4 py-2 text-sm font-medium bg-emerald-500/20 text-emerald-400 rounded-lg hover:bg-emerald-500/30 transition-colors"
+            >
+              Done
+            </button>
+          </div>
+        ) : (
+          <div className="space-y-6">
+            {duplicates.filter(d => !merged.has(d.email)).map(group => (
+              <div key={group.email} className="bg-white/5 rounded-lg p-4">
+                <div className="flex items-center justify-between mb-3">
+                  <p className="text-sm font-medium text-white">{group.email}</p>
+                  <span className="text-xs text-white/40">{group.contacts.length} contacts</span>
+                </div>
+                <div className="space-y-2 mb-3">
+                  {group.contacts.map(c => (
+                    <label
+                      key={c.ghl_id}
+                      className={`flex items-center gap-3 p-2 rounded-lg cursor-pointer transition-colors ${
+                        selections[group.email] === c.ghl_id
+                          ? 'bg-emerald-500/10 ring-1 ring-emerald-500/30'
+                          : 'hover:bg-white/5'
+                      }`}
+                    >
+                      <input
+                        type="radio"
+                        name={`keep-${group.email}`}
+                        checked={selections[group.email] === c.ghl_id}
+                        onChange={() => setSelections(prev => ({ ...prev, [group.email]: c.ghl_id }))}
+                        className="accent-emerald-500"
+                      />
+                      <div className="flex-1 min-w-0">
+                        <span className="text-sm text-white">{c.full_name}</span>
+                        {c.company_name && (
+                          <span className="text-xs text-white/40 ml-2">{c.company_name}</span>
+                        )}
+                        <div className="flex gap-1 mt-1">
+                          {c.tags.slice(0, 5).map(t => (
+                            <span key={t} className="text-[10px] px-1.5 py-0.5 rounded bg-white/10 text-white/40">{t}</span>
+                          ))}
+                          {c.tags.length > 5 && (
+                            <span className="text-[10px] text-white/30">+{c.tags.length - 5}</span>
+                          )}
+                        </div>
+                      </div>
+                      <span className="text-[10px] text-white/30 shrink-0">
+                        {formatRelativeDate(c.created_at)}
+                      </span>
+                    </label>
+                  ))}
+                </div>
+                <button
+                  onClick={() => handleMerge(group.email)}
+                  disabled={merging}
+                  className="flex items-center gap-2 px-3 py-1.5 text-xs font-medium bg-amber-500/20 text-amber-300 rounded-lg hover:bg-amber-500/30 disabled:opacity-50 transition-colors"
+                >
+                  <Merge className="h-3.5 w-3.5" />
+                  {merging ? 'Merging...' : 'Merge — keep selected'}
+                </button>
               </div>
             ))}
           </div>

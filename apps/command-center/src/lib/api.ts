@@ -1157,6 +1157,108 @@ export async function getProjectCodes() {
   }>('/api/project-codes')
 }
 
+// ─── Ecosystem Project Codes (from JSON config) ─────────────────
+
+export interface EcosystemProjectCode {
+  code: string
+  name: string
+  category: string
+  ghlTag: string
+  status: string
+  priority: string
+}
+
+export async function getEcosystemProjectCodes() {
+  return fetchApi<{ projects: EcosystemProjectCode[] }>('/api/ecosystem/project-codes')
+}
+
+// ─── All Contacts (cross-project) ───────────────────────────────
+
+export interface AllContact {
+  id: string
+  ghl_id: string
+  full_name: string
+  email: string | null
+  company_name: string | null
+  tags: string[]
+  projects: string[]
+  days_since_contact: number | null
+  last_email_subject: string | null
+  last_email_date: string | null
+}
+
+export async function getAllContacts(params?: {
+  search?: string
+  project?: string
+  untagged?: boolean
+  company?: string
+  engagement?: string
+  noEmail?: boolean
+  sort?: string
+  limit?: number
+  offset?: number
+}) {
+  const q = new URLSearchParams()
+  if (params?.search) q.set('search', params.search)
+  if (params?.project) q.set('project', params.project)
+  if (params?.untagged) q.set('untagged', 'true')
+  if (params?.company) q.set('company', params.company)
+  if (params?.engagement) q.set('engagement', params.engagement)
+  if (params?.noEmail) q.set('noEmail', 'true')
+  if (params?.sort) q.set('sort', params.sort)
+  if (params?.limit) q.set('limit', String(params.limit))
+  if (params?.offset) q.set('offset', String(params.offset))
+  return fetchApi<{ contacts: AllContact[]; total: number; companies: string[]; limit: number; offset: number }>(`/api/contacts/all?${q}`)
+}
+
+export async function bulkDeleteContacts(ids: string[]) {
+  return fetchApi<{ ok: boolean; deleted: number }>('/api/contacts/all', {
+    method: 'DELETE',
+    body: JSON.stringify({ ids }),
+  })
+}
+
+export async function bulkUpdateContacts(ids: string[], updates: { companyName?: string }) {
+  return fetchApi<{ ok: boolean; updated: number }>('/api/contacts/all', {
+    method: 'PATCH',
+    body: JSON.stringify({ ids, ...updates }),
+  })
+}
+
+export interface DuplicateContact {
+  ghl_id: string
+  full_name: string
+  email: string | null
+  company_name: string | null
+  tags: string[]
+  created_at: string | null
+  last_contact_date: string | null
+  is_placeholder_email: boolean
+}
+
+export interface DuplicateSet {
+  key: string
+  match_type: 'email' | 'name'
+  contacts: DuplicateContact[]
+}
+
+export async function getContactDuplicates() {
+  return fetchApi<{
+    duplicate_sets: DuplicateSet[]
+    total_sets: number
+    total_duplicates: number
+    blank_contacts: DuplicateContact[]
+    total_contacts: number
+  }>('/api/contacts/duplicates')
+}
+
+export async function mergeContacts(keepId: string, mergeIds: string[]) {
+  return fetchApi<{ ok: boolean; kept: string; merged: number; tags: string[] }>('/api/contacts/merge', {
+    method: 'POST',
+    body: JSON.stringify({ keepId, mergeIds }),
+  })
+}
+
 export async function getSpendingByProject(months?: number) {
   const query = months ? `?months=${months}` : ''
   return fetchApi<{
@@ -2493,6 +2595,9 @@ export interface GoodsContact {
   newsletter_consent: boolean
   segment: 'funder' | 'partner' | 'community' | 'supporter' | 'storyteller'
   days_since_contact: number | null
+  last_email_subject: string | null
+  last_email_date: string | null
+  last_email_direction: string | null
 }
 
 export interface GoodsContent {
@@ -2544,6 +2649,40 @@ export interface GoodsDashboard {
 
 export async function getGoodsDashboard() {
   return fetchApi<GoodsDashboard>('/api/goods/dashboard')
+}
+
+// ─── Goods Deduplication ──────────────────────────────────────────
+
+export interface DuplicateGroup {
+  email: string
+  contacts: Array<{ ghl_id: string; full_name: string; tags: string[]; company_name: string | null; created_at: string }>
+}
+
+export async function getGoodsDuplicates() {
+  return fetchApi<{ duplicates: DuplicateGroup[]; count: number }>('/api/goods/duplicates')
+}
+
+export interface SearchContact {
+  id: string
+  ghl_id: string
+  full_name: string
+  email: string | null
+  company_name: string | null
+  tags: string[]
+  already_goods: boolean
+}
+
+export async function searchAllContacts(q: string, excludeTag?: string) {
+  const params = new URLSearchParams({ q })
+  if (excludeTag) params.set('excludeTag', excludeTag)
+  return fetchApi<{ contacts: SearchContact[]; total: number }>(`/api/contacts/search?${params}`)
+}
+
+export async function mergeGoodsContacts(keepId: string, mergeIds: string[]) {
+  return fetchApi<{ ok: boolean; mergedCount: number }>('/api/goods/merge', {
+    method: 'POST',
+    body: JSON.stringify({ keepId, mergeIds }),
+  })
 }
 
 export async function updateContactNewsletter(contactId: string, subscribe: boolean) {

@@ -12,6 +12,7 @@ import {
   DollarSign,
   Briefcase,
   Settings,
+  ShoppingBag,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
@@ -19,6 +20,7 @@ const navItems = [
   { href: '/today', label: 'Today', icon: Sun },
   { href: '/people', label: 'People', icon: Users },
   { href: '/projects', label: 'Projects', icon: FolderKanban },
+  { href: '/goods', label: 'Goods', icon: ShoppingBag },
   { href: '/goals', label: 'Goals', icon: Target },
   { href: '/knowledge', label: 'Knowledge', icon: Brain },
   { href: '/agent', label: 'Agent', icon: Bot },

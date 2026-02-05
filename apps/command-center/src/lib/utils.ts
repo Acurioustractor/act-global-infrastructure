@@ -82,6 +82,17 @@ export function getLCAAColor(stage: string): string {
   }
 }
 
+// GHL deep links
+const GHL_LOCATION_ID = process.env.NEXT_PUBLIC_GHL_LOCATION_ID || ''
+
+export function ghlContactUrl(ghlId: string): string {
+  return `https://app.gohighlevel.com/v2/location/${GHL_LOCATION_ID}/contacts/detail/${ghlId}`
+}
+
+export function ghlEmailMarketingUrl(): string {
+  return `https://app.gohighlevel.com/v2/location/${GHL_LOCATION_ID}/marketing/emails`
+}
+
 export function getLCAABg(stage: string): string {
   switch (stage?.toLowerCase()) {
     case 'listen':
