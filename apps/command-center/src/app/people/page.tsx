@@ -175,33 +175,33 @@ export default function PeoplePage() {
   }
 
   return (
-    <div className="min-h-screen p-8">
+    <div className="min-h-screen p-4 sm:p-8 pb-24 sm:pb-8">
       {/* Header */}
-      <header className="mb-8">
-        <div className="flex items-center justify-between mb-6">
+      <header className="mb-6 sm:mb-8">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4 sm:mb-6">
           <div>
-            <h1 className="text-3xl font-bold text-white flex items-center gap-3">
-              <Users className="h-8 w-8 text-indigo-400" />
+            <h1 className="text-2xl sm:text-3xl font-bold text-white flex items-center gap-3">
+              <Users className="h-7 w-7 sm:h-8 sm:w-8 text-indigo-400" />
               People
             </h1>
-            <p className="text-lg text-white/60 mt-1">
-              {total} contacts in CRM{activeFilterCount > 0 ? ` (${activeFilterCount} filter${activeFilterCount > 1 ? 's' : ''} active)` : ''} — tag across ecosystem projects
+            <p className="text-sm sm:text-lg text-white/60 mt-1">
+              {total} contacts{activeFilterCount > 0 ? ` (${activeFilterCount} filter${activeFilterCount > 1 ? 's' : ''})` : ''}
             </p>
           </div>
           {/* View Toggle */}
-          <div className="flex items-center bg-white/5 rounded-lg p-1 gap-1">
+          <div className="flex items-center bg-white/5 rounded-lg p-1 gap-1 self-start sm:self-auto">
             <button
               onClick={() => setView('contacts')}
-              className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${
+              className={`px-3 sm:px-4 py-2 text-sm font-medium rounded-md transition-colors ${
                 view === 'contacts' ? 'bg-white/10 text-white' : 'text-white/50 hover:text-white/70'
               }`}
             >
               <Users className="h-4 w-4 inline mr-1.5" />
-              All Contacts
+              Contacts
             </button>
             <button
               onClick={() => setView('duplicates')}
-              className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${
+              className={`px-3 sm:px-4 py-2 text-sm font-medium rounded-md transition-colors ${
                 view === 'duplicates' ? 'bg-white/10 text-white' : 'text-white/50 hover:text-white/70'
               }`}
             >
@@ -211,93 +211,95 @@ export default function PeoplePage() {
           </div>
         </div>
 
-        {/* Filters Row (contacts view only) */}
-        {view === 'contacts' && <div className="flex items-center gap-3 flex-wrap">
-          {/* Search */}
-          <div className="relative flex-1 min-w-[280px]">
+        {/* Filters (contacts view only) */}
+        {view === 'contacts' && <div className="space-y-3">
+          {/* Search - full width */}
+          <div className="relative">
             <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-white/40" />
             <input
               type="text"
-              placeholder="Search by name, email, or company..."
+              placeholder="Search name, email, company..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               className="w-full bg-white/5 border border-white/10 rounded-lg py-2.5 pl-10 pr-4 text-sm text-white placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-indigo-500/50"
             />
           </div>
 
-          {/* Sort */}
-          <div className="relative">
-            <div className="flex items-center">
-              <ArrowUpDown className="absolute left-2.5 h-3.5 w-3.5 text-white/40 pointer-events-none" />
+          {/* Filter controls - wrap on mobile */}
+          <div className="flex items-center gap-2 flex-wrap">
+            {/* Sort */}
+            <div className="relative">
+              <ArrowUpDown className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-white/40 pointer-events-none" />
               <select
                 value={sort}
                 onChange={(e) => setSort(e.target.value)}
-                className="appearance-none bg-white/5 border border-white/10 rounded-lg py-2.5 pl-8 pr-8 text-sm text-white focus:outline-none focus:ring-2 focus:ring-indigo-500/50 cursor-pointer"
+                className="appearance-none bg-white/5 border border-white/10 rounded-lg py-2 pl-8 pr-7 text-xs sm:text-sm text-white focus:outline-none focus:ring-2 focus:ring-indigo-500/50 cursor-pointer"
               >
                 {SORT_OPTIONS.map(o => (
                   <option key={o.value} value={o.value}>{o.label}</option>
                 ))}
               </select>
-              <ChevronDown className="absolute right-2 h-4 w-4 text-white/40 pointer-events-none" />
+              <ChevronDown className="absolute right-1.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-white/40 pointer-events-none" />
             </div>
-          </div>
 
-          {/* Project Filter */}
-          <div className="relative">
-            <select
-              value={projectFilter}
-              onChange={(e) => { setProjectFilter(e.target.value); setUntaggedOnly(false) }}
-              className="appearance-none bg-white/5 border border-white/10 rounded-lg py-2.5 pl-3 pr-8 text-sm text-white focus:outline-none focus:ring-2 focus:ring-indigo-500/50 cursor-pointer"
+            {/* Project Filter */}
+            <div className="relative">
+              <select
+                value={projectFilter}
+                onChange={(e) => { setProjectFilter(e.target.value); setUntaggedOnly(false) }}
+                className="appearance-none bg-white/5 border border-white/10 rounded-lg py-2 pl-2.5 pr-7 text-xs sm:text-sm text-white focus:outline-none focus:ring-2 focus:ring-indigo-500/50 cursor-pointer max-w-[150px] sm:max-w-none"
+              >
+                <option value="">All Projects</option>
+                {projects.map(p => (
+                  <option key={p.code} value={p.code}>{p.name}</option>
+                ))}
+              </select>
+              <ChevronDown className="absolute right-1.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-white/40 pointer-events-none" />
+            </div>
+
+            {/* Company Filter */}
+            <div className="relative">
+              <Building2 className="absolute left-2 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-white/40 pointer-events-none" />
+              <select
+                value={companyFilter}
+                onChange={(e) => setCompanyFilter(e.target.value)}
+                className="appearance-none bg-white/5 border border-white/10 rounded-lg py-2 pl-7 pr-7 text-xs sm:text-sm text-white focus:outline-none focus:ring-2 focus:ring-indigo-500/50 cursor-pointer max-w-[150px] sm:max-w-[220px]"
+              >
+                <option value="">All Companies</option>
+                {companies.map(c => (
+                  <option key={c} value={c}>{c}</option>
+                ))}
+              </select>
+              <ChevronDown className="absolute right-1.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-white/40 pointer-events-none" />
+            </div>
+
+            {/* Untagged Filter */}
+            <button
+              onClick={() => { setUntaggedOnly(!untaggedOnly); setProjectFilter('') }}
+              className={`flex items-center gap-1.5 px-2.5 py-2 rounded-lg text-xs sm:text-sm font-medium transition-colors ${
+                untaggedOnly
+                  ? 'bg-amber-500/20 text-amber-300 ring-1 ring-amber-500/50'
+                  : 'bg-white/5 text-white/60 hover:bg-white/10'
+              }`}
             >
-              <option value="">All Projects</option>
-              {projects.map(p => (
-                <option key={p.code} value={p.code}>{p.name} ({p.code})</option>
-              ))}
-            </select>
-            <ChevronDown className="absolute right-2 top-1/2 -translate-y-1/2 h-4 w-4 text-white/40 pointer-events-none" />
-          </div>
+              <Filter className="h-3.5 w-3.5" />
+              Untagged
+            </button>
 
-          {/* Company Filter */}
-          <div className="relative">
-            <Building2 className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-white/40 pointer-events-none" />
-            <select
-              value={companyFilter}
-              onChange={(e) => setCompanyFilter(e.target.value)}
-              className="appearance-none bg-white/5 border border-white/10 rounded-lg py-2.5 pl-8 pr-8 text-sm text-white focus:outline-none focus:ring-2 focus:ring-indigo-500/50 cursor-pointer max-w-[220px]"
+            {/* No Email Filter */}
+            <button
+              onClick={() => setNoEmailOnly(!noEmailOnly)}
+              className={`flex items-center gap-1.5 px-2.5 py-2 rounded-lg text-xs sm:text-sm font-medium transition-colors ${
+                noEmailOnly
+                  ? 'bg-red-500/20 text-red-300 ring-1 ring-red-500/50'
+                  : 'bg-white/5 text-white/60 hover:bg-white/10'
+              }`}
             >
-              <option value="">All Companies</option>
-              {companies.map(c => (
-                <option key={c} value={c}>{c}</option>
-              ))}
-            </select>
-            <ChevronDown className="absolute right-2 top-1/2 -translate-y-1/2 h-4 w-4 text-white/40 pointer-events-none" />
+              {noEmailOnly ? <MailX className="h-3.5 w-3.5" /> : <Mail className="h-3.5 w-3.5" />}
+              <span className="hidden sm:inline">No Email</span>
+              <span className="sm:hidden">No Email</span>
+            </button>
           </div>
-
-          {/* Untagged Filter */}
-          <button
-            onClick={() => { setUntaggedOnly(!untaggedOnly); setProjectFilter('') }}
-            className={`flex items-center gap-2 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
-              untaggedOnly
-                ? 'bg-amber-500/20 text-amber-300 ring-1 ring-amber-500/50'
-                : 'bg-white/5 text-white/60 hover:bg-white/10'
-            }`}
-          >
-            <Filter className="h-4 w-4" />
-            Untagged
-          </button>
-
-          {/* No Email Filter */}
-          <button
-            onClick={() => setNoEmailOnly(!noEmailOnly)}
-            className={`flex items-center gap-2 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
-              noEmailOnly
-                ? 'bg-red-500/20 text-red-300 ring-1 ring-red-500/50'
-                : 'bg-white/5 text-white/60 hover:bg-white/10'
-            }`}
-          >
-            {noEmailOnly ? <MailX className="h-4 w-4" /> : <Mail className="h-4 w-4" />}
-            No Email
-          </button>
         </div>}
       </header>
 
@@ -311,17 +313,18 @@ export default function PeoplePage() {
 
       {/* Bulk Actions Bar */}
       {view === 'contacts' && selectedIds.size > 0 && (
-        <div className="mb-4 glass-card p-3 flex items-center gap-4">
-          <span className="text-sm text-white/70">{selectedIds.size} selected</span>
+        <div className="mb-4 glass-card p-3 flex items-center gap-2 sm:gap-4 flex-wrap">
+          <span className="text-xs sm:text-sm text-white/70">{selectedIds.size} selected</span>
 
           {/* Bulk Tag */}
           <div className="relative">
             <button
               onClick={() => setBulkTagDropdown(!bulkTagDropdown)}
-              className="flex items-center gap-2 px-3 py-1.5 text-xs font-medium bg-indigo-500/20 text-indigo-300 rounded-lg hover:bg-indigo-500/30 transition-colors"
+              className="flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium bg-indigo-500/20 text-indigo-300 rounded-lg hover:bg-indigo-500/30 transition-colors"
             >
               <Tag className="h-3.5 w-3.5" />
-              Tag Selected
+              <span className="hidden sm:inline">Tag Selected</span>
+              <span className="sm:hidden">Tag</span>
               <ChevronDown className="h-3 w-3" />
             </button>
             {bulkTagDropdown && (
@@ -338,16 +341,17 @@ export default function PeoplePage() {
           {/* Bulk Set Company */}
           <button
             onClick={() => setShowCompanyModal(true)}
-            className="flex items-center gap-2 px-3 py-1.5 text-xs font-medium bg-emerald-500/20 text-emerald-300 rounded-lg hover:bg-emerald-500/30 transition-colors"
+            className="flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium bg-emerald-500/20 text-emerald-300 rounded-lg hover:bg-emerald-500/30 transition-colors"
           >
             <Building2 className="h-3.5 w-3.5" />
-            Set Company
+            <span className="hidden sm:inline">Set Company</span>
+            <span className="sm:hidden">Company</span>
           </button>
 
           {/* Bulk Delete */}
           <button
             onClick={() => setShowDeleteConfirm(true)}
-            className="flex items-center gap-2 px-3 py-1.5 text-xs font-medium bg-red-500/20 text-red-300 rounded-lg hover:bg-red-500/30 transition-colors"
+            className="flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium bg-red-500/20 text-red-300 rounded-lg hover:bg-red-500/30 transition-colors"
           >
             <Trash2 className="h-3.5 w-3.5" />
             Delete
@@ -357,64 +361,92 @@ export default function PeoplePage() {
             onClick={() => setSelectedIds(new Set())}
             className="text-xs text-white/40 hover:text-white/60 ml-auto"
           >
-            Clear selection
+            Clear
           </button>
         </div>
       )}
 
-      {/* Table */}
-      {view === 'contacts' && <div className="glass-card overflow-hidden">
-        <div className="overflow-x-auto">
-          <table className="w-full">
-            <thead>
-              <tr className="border-b border-white/10">
-                <th className="w-10 px-3 py-3 text-left">
-                  <input
-                    type="checkbox"
-                    checked={selectedIds.size === contacts.length && contacts.length > 0}
-                    onChange={toggleSelectAll}
-                    className="accent-indigo-500 rounded"
-                  />
-                </th>
-                <th className="px-3 py-3 text-left text-xs font-medium text-white/40 uppercase tracking-wider">Name</th>
-                <th className="px-3 py-3 text-left text-xs font-medium text-white/40 uppercase tracking-wider">Email</th>
-                <th className="px-3 py-3 text-left text-xs font-medium text-white/40 uppercase tracking-wider">Company</th>
-                <th className="px-3 py-3 text-left text-xs font-medium text-white/40 uppercase tracking-wider min-w-[200px]">Projects</th>
-                <th className="px-3 py-3 text-left text-xs font-medium text-white/40 uppercase tracking-wider">Last Email</th>
-                <th className="w-12 px-3 py-3"></th>
-              </tr>
-            </thead>
-            <tbody>
-              {contacts.length === 0 ? (
-                <tr>
-                  <td colSpan={7} className="py-16 text-center">
-                    <Users className="mx-auto h-12 w-12 text-white/20" />
-                    <p className="mt-4 text-white/60">No contacts found</p>
-                  </td>
-                </tr>
-              ) : (
-                contacts.map(contact => (
-                  <ContactRow
-                    key={contact.ghl_id}
-                    contact={contact}
-                    projects={projects}
-                    isSelected={selectedIds.has(contact.ghl_id)}
-                    onToggleSelect={() => toggleSelect(contact.ghl_id)}
-                    onOpenDrawer={() => setSelectedContactId(contact.ghl_id)}
-                    onAddTag={(tag) => tagMutation.mutate({ id: contact.ghl_id, action: 'add', tag })}
-                    onRemoveTag={(tag) => tagMutation.mutate({ id: contact.ghl_id, action: 'remove', tag })}
-                  />
-                ))
-              )}
-            </tbody>
-          </table>
-        </div>
+      {/* Contact List */}
+      {view === 'contacts' && <>
+        {contacts.length === 0 ? (
+          <div className="glass-card p-16 text-center">
+            <Users className="mx-auto h-12 w-12 text-white/20" />
+            <p className="mt-4 text-white/60">No contacts found</p>
+          </div>
+        ) : (
+          <>
+            {/* Select all bar */}
+            <div className="flex items-center gap-3 mb-3 px-1">
+              <label className="flex items-center gap-2 text-xs text-white/40 cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={selectedIds.size === contacts.length && contacts.length > 0}
+                  onChange={toggleSelectAll}
+                  className="accent-indigo-500 rounded"
+                />
+                Select all
+              </label>
+              <span className="text-xs text-white/30">Showing {contacts.length} of {total}</span>
+            </div>
 
-        {/* Footer */}
-        <div className="px-4 py-3 border-t border-white/10 flex items-center justify-between">
-          <span className="text-xs text-white/40">Showing {contacts.length} of {total} contacts</span>
-        </div>
-      </div>}
+            {/* Desktop Table */}
+            <div className="hidden md:block glass-card overflow-hidden">
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead>
+                    <tr className="border-b border-white/10">
+                      <th className="w-10 px-3 py-3 text-left">
+                        <input
+                          type="checkbox"
+                          checked={selectedIds.size === contacts.length && contacts.length > 0}
+                          onChange={toggleSelectAll}
+                          className="accent-indigo-500 rounded"
+                        />
+                      </th>
+                      <th className="px-3 py-3 text-left text-xs font-medium text-white/40 uppercase tracking-wider">Name</th>
+                      <th className="px-3 py-3 text-left text-xs font-medium text-white/40 uppercase tracking-wider">Email</th>
+                      <th className="px-3 py-3 text-left text-xs font-medium text-white/40 uppercase tracking-wider">Company</th>
+                      <th className="px-3 py-3 text-left text-xs font-medium text-white/40 uppercase tracking-wider min-w-[200px]">Projects</th>
+                      <th className="px-3 py-3 text-left text-xs font-medium text-white/40 uppercase tracking-wider">Last Email</th>
+                      <th className="w-12 px-3 py-3"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {contacts.map(contact => (
+                      <ContactRow
+                        key={contact.ghl_id}
+                        contact={contact}
+                        projects={projects}
+                        isSelected={selectedIds.has(contact.ghl_id)}
+                        onToggleSelect={() => toggleSelect(contact.ghl_id)}
+                        onOpenDrawer={() => setSelectedContactId(contact.ghl_id)}
+                        onAddTag={(tag) => tagMutation.mutate({ id: contact.ghl_id, action: 'add', tag })}
+                        onRemoveTag={(tag) => tagMutation.mutate({ id: contact.ghl_id, action: 'remove', tag })}
+                      />
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            {/* Mobile Cards */}
+            <div className="md:hidden space-y-2">
+              {contacts.map(contact => (
+                <MobileContactCard
+                  key={contact.ghl_id}
+                  contact={contact}
+                  projects={projects}
+                  isSelected={selectedIds.has(contact.ghl_id)}
+                  onToggleSelect={() => toggleSelect(contact.ghl_id)}
+                  onOpenDrawer={() => setSelectedContactId(contact.ghl_id)}
+                  onAddTag={(tag) => tagMutation.mutate({ id: contact.ghl_id, action: 'add', tag })}
+                  onRemoveTag={(tag) => tagMutation.mutate({ id: contact.ghl_id, action: 'remove', tag })}
+                />
+              ))}
+            </div>
+          </>
+        )}
+      </>}
 
       {/* Contact Drawer */}
       {selectedContactId && (
@@ -547,50 +579,52 @@ function DuplicatesView({ onDelete, isDeleting }: {
   return (
     <div>
       {/* Summary */}
-      <div className="glass-card p-4 mb-4 flex items-center gap-6 flex-wrap">
-        <div>
-          <span className="text-2xl font-bold text-white">{sets.length}</span>
-          <span className="text-sm text-white/50 ml-2">duplicate groups</span>
+      <div className="glass-card p-3 sm:p-4 mb-4">
+        <div className="flex items-center gap-4 sm:gap-6 flex-wrap">
+          <div>
+            <span className="text-xl sm:text-2xl font-bold text-white">{sets.length}</span>
+            <span className="text-xs sm:text-sm text-white/50 ml-1.5">groups</span>
+          </div>
+          <div>
+            <span className="text-xl sm:text-2xl font-bold text-amber-400">{data?.total_duplicates || 0}</span>
+            <span className="text-xs sm:text-sm text-white/50 ml-1.5">dupes</span>
+          </div>
+          <div>
+            <span className="text-xl sm:text-2xl font-bold text-red-400">{blanks.length}</span>
+            <span className="text-xs sm:text-sm text-white/50 ml-1.5">blank</span>
+          </div>
         </div>
-        <div>
-          <span className="text-2xl font-bold text-amber-400">{data?.total_duplicates || 0}</span>
-          <span className="text-sm text-white/50 ml-2">extra contacts to clean</span>
-        </div>
-        <div>
-          <span className="text-2xl font-bold text-red-400">{blanks.length}</span>
-          <span className="text-sm text-white/50 ml-2">blank contacts</span>
-        </div>
-        <div className="ml-auto flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3 mt-3 flex-wrap">
           {sets.length > 0 && !mergeAllProgress && (
             <button
               onClick={() => setShowMergeAllConfirm(true)}
-              className="flex items-center gap-2 px-4 py-2 text-sm font-medium bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg transition-colors"
+              className="flex items-center gap-1.5 px-3 py-2 text-xs sm:text-sm font-medium bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg transition-colors"
             >
               <Check className="h-4 w-4" />
-              Merge All {sets.length} Groups
+              Merge All {sets.length}
             </button>
           )}
           {mergeAllProgress && (
-            <div className="flex items-center gap-3">
-              <div className="w-48 h-2 bg-white/10 rounded-full overflow-hidden">
+            <div className="flex items-center gap-2 flex-1 min-w-0">
+              <div className="flex-1 h-2 bg-white/10 rounded-full overflow-hidden">
                 <div
                   className="h-full bg-emerald-500 rounded-full transition-all duration-300"
                   style={{ width: `${(mergeAllProgress.done / mergeAllProgress.total) * 100}%` }}
                 />
               </div>
-              <span className="text-sm text-emerald-400">
+              <span className="text-xs text-emerald-400 shrink-0">
                 {mergeAllProgress.done}/{mergeAllProgress.total}
               </span>
             </div>
           )}
           {selectedForDelete.size > 0 && (
             <>
-              <span className="text-sm text-white/60">{selectedForDelete.size} marked</span>
+              <span className="text-xs text-white/60">{selectedForDelete.size} marked</span>
               <button
                 onClick={() => setShowConfirm(true)}
-                className="flex items-center gap-2 px-3 py-2 text-sm font-medium bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors"
+                className="flex items-center gap-1.5 px-2.5 py-2 text-xs font-medium bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors"
               >
-                <Trash2 className="h-4 w-4" />
+                <Trash2 className="h-3.5 w-3.5" />
                 Delete
               </button>
               <button
@@ -742,27 +776,25 @@ function DuplicateGroup({ duplicateSet, selectedForDelete, onToggleDelete }: {
           Merge failed: {(mergeMutation.error as Error)?.message}
         </div>
       )}
-      <table className="w-full">
-        <tbody>
-          {duplicateSet.contacts.map((c, idx) => {
-            const isKeep = c.ghl_id === keepId
-            return (
-              <tr key={c.ghl_id} className={`border-b border-white/5 last:border-0 hover:bg-white/5 ${isKeep ? 'bg-emerald-500/5' : ''}`}>
-                <td className="w-10 px-3 py-2">
-                  <button
-                    onClick={() => setKeepId(c.ghl_id)}
-                    className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-colors ${
-                      isKeep
-                        ? 'border-emerald-500 bg-emerald-500'
-                        : 'border-white/20 hover:border-white/40'
-                    }`}
-                    title={isKeep ? 'Will be kept' : 'Click to keep this one'}
-                  >
-                    {isKeep && <Check className="h-3 w-3 text-white" />}
-                  </button>
-                </td>
-                <td className="px-3 py-2">
-                  <div className="flex items-center gap-2">
+      <div className="divide-y divide-white/5">
+        {duplicateSet.contacts.map((c) => {
+          const isKeep = c.ghl_id === keepId
+          return (
+            <div key={c.ghl_id} className={`px-3 py-2.5 hover:bg-white/5 ${isKeep ? 'bg-emerald-500/5' : ''}`}>
+              <div className="flex items-start gap-2.5">
+                <button
+                  onClick={() => setKeepId(c.ghl_id)}
+                  className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-colors shrink-0 mt-0.5 ${
+                    isKeep
+                      ? 'border-emerald-500 bg-emerald-500'
+                      : 'border-white/20 hover:border-white/40'
+                  }`}
+                  title={isKeep ? 'Will be kept' : 'Click to keep this one'}
+                >
+                  {isKeep && <Check className="h-3 w-3 text-white" />}
+                </button>
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-2 flex-wrap">
                     <span className="text-sm text-white">{c.full_name}</span>
                     {isKeep && (
                       <span className="text-[10px] px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-medium">keep</span>
@@ -774,35 +806,29 @@ function DuplicateGroup({ duplicateSet, selectedForDelete, onToggleDelete }: {
                       <span className="text-[10px] px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-400">placeholder</span>
                     )}
                   </div>
-                </td>
-                <td className="px-3 py-2">
-                  <span className={`text-xs ${c.is_placeholder_email ? 'text-white/20' : 'text-white/50'}`}>
-                    {c.email || '—'}
-                  </span>
-                </td>
-                <td className="px-3 py-2">
-                  <span className="text-xs text-white/50">{c.company_name || '—'}</span>
-                </td>
-                <td className="px-3 py-2">
-                  <div className="flex gap-1 flex-wrap">
-                    {c.tags.slice(0, 4).map(t => (
-                      <span key={t} className="text-[10px] px-1.5 py-0.5 rounded bg-white/5 text-white/40">{t}</span>
-                    ))}
-                    {c.tags.length > 4 && (
-                      <span className="text-[10px] text-white/30">+{c.tags.length - 4}</span>
-                    )}
+                  <div className="flex items-center gap-3 mt-1 text-xs text-white/50 flex-wrap">
+                    <span className={c.is_placeholder_email ? 'text-white/20' : ''}>{c.email || '—'}</span>
+                    {c.company_name && <span>{c.company_name}</span>}
+                    <span className="text-[10px] text-white/30">
+                      {c.last_contact_date ? formatRelativeDate(c.last_contact_date) : 'never'}
+                    </span>
                   </div>
-                </td>
-                <td className="px-3 py-2">
-                  <span className="text-[10px] text-white/30">
-                    {c.last_contact_date ? formatRelativeDate(c.last_contact_date) : 'never'}
-                  </span>
-                </td>
-              </tr>
-            )
-          })}
-        </tbody>
-      </table>
+                  {c.tags.length > 0 && (
+                    <div className="flex gap-1 flex-wrap mt-1.5">
+                      {c.tags.slice(0, 4).map(t => (
+                        <span key={t} className="text-[10px] px-1.5 py-0.5 rounded bg-white/5 text-white/40">{t}</span>
+                      ))}
+                      {c.tags.length > 4 && (
+                        <span className="text-[10px] text-white/30">+{c.tags.length - 4}</span>
+                      )}
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          )
+        })}
+      </div>
     </div>
   )
 }
@@ -843,6 +869,98 @@ function ConfirmModal({ title, message, confirmLabel, confirmColor, onConfirm, o
         </div>
       </div>
     </>
+  )
+}
+
+// ─── Mobile Contact Card ──────────────────────────────────────────
+
+function MobileContactCard({ contact, projects, isSelected, onToggleSelect, onOpenDrawer, onAddTag, onRemoveTag }: {
+  contact: AllContact
+  projects: EcosystemProjectCode[]
+  isSelected: boolean
+  onToggleSelect: () => void
+  onOpenDrawer: () => void
+  onAddTag: (tag: string) => void
+  onRemoveTag: (tag: string) => void
+}) {
+  const [showAddProject, setShowAddProject] = useState(false)
+  const projectsMap = new Map(projects.map(p => [p.code, p]))
+  const contactProjects = contact.projects
+    .map(code => projectsMap.get(code))
+    .filter(Boolean) as EcosystemProjectCode[]
+
+  return (
+    <div className="glass-card p-3" onClick={onOpenDrawer}>
+      <div className="flex items-start gap-3">
+        <div className="pt-0.5" onClick={(e) => e.stopPropagation()}>
+          <input
+            type="checkbox"
+            checked={isSelected}
+            onChange={onToggleSelect}
+            className="accent-indigo-500 rounded w-4 h-4"
+          />
+        </div>
+        <div className="flex-1 min-w-0">
+          <div className="flex items-center justify-between gap-2">
+            <span className="text-sm font-medium text-white truncate">{contact.full_name}</span>
+            <a
+              href={ghlContactUrl(contact.ghl_id)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white/30 hover:text-indigo-400 shrink-0"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <ExternalLink className="h-3.5 w-3.5" />
+            </a>
+          </div>
+          {contact.email && (
+            <p className="text-xs text-white/50 truncate mt-0.5">{contact.email}</p>
+          )}
+          {contact.company_name && (
+            <p className="text-xs text-white/40 mt-0.5">{contact.company_name}</p>
+          )}
+          {/* Projects */}
+          <div className="flex items-center gap-1.5 flex-wrap mt-2" onClick={(e) => e.stopPropagation()}>
+            {contactProjects.map(p => (
+              <span
+                key={p.code}
+                className={`inline-flex items-center gap-1 text-[10px] px-1.5 py-0.5 rounded-full border ${getChipColor(p.category)}`}
+              >
+                {p.code}
+                <button onClick={() => onRemoveTag(p.ghlTag)} className="hover:text-white">
+                  <X className="h-2.5 w-2.5" />
+                </button>
+              </span>
+            ))}
+            <div className="relative">
+              <button
+                onClick={() => setShowAddProject(!showAddProject)}
+                className="inline-flex items-center justify-center h-5 w-5 rounded-full bg-white/5 text-white/30 hover:bg-white/10 hover:text-white/60"
+              >
+                <Plus className="h-3 w-3" />
+              </button>
+              {showAddProject && (
+                <ProjectDropdown
+                  projects={projects.filter(p => !contact.projects.includes(p.code))}
+                  onSelect={(tag) => { onAddTag(tag); setShowAddProject(false) }}
+                  onClose={() => setShowAddProject(false)}
+                />
+              )}
+            </div>
+          </div>
+          {/* Last contact */}
+          {contact.last_email_subject ? (
+            <p className="text-[10px] text-white/30 mt-1.5 truncate">
+              {contact.last_email_date ? formatRelativeDate(contact.last_email_date) : ''} — {contact.last_email_subject}
+            </p>
+          ) : (
+            <p className={`text-[10px] mt-1.5 ${contact.days_since_contact === null ? 'text-red-400/60' : 'text-white/20'}`}>
+              {contact.days_since_contact === null ? 'Never contacted' : 'No emails'}
+            </p>
+          )}
+        </div>
+      </div>
+    </div>
   )
 }
 
