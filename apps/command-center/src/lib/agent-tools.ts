@@ -506,6 +506,10 @@ export const AGENT_TOOLS: Anthropic.Tool[] = [
           type: 'boolean',
           description: 'If true, append to existing draft with this title instead of creating new. Default false.',
         },
+        project: {
+          type: 'string',
+          description: 'ACT ecosystem project this writing relates to (e.g. "JusticeHub", "Empathy Ledger", "The Harvest", "Goods on Country", "PICC", "Diagrama", "Double Disadvantage"). Ask the user which project if the writing is clearly project-related.',
+        },
         tags: {
           type: 'array',
           items: { type: 'string' },
@@ -595,7 +599,7 @@ export async function executeTool(
     // Writing tools
     case 'save_writing_draft':
       return await executeSaveWritingDraft(
-        input as { title: string; content: string; append?: boolean; tags?: string[] }
+        input as { title: string; content: string; append?: boolean; project?: string; tags?: string[] }
       )
     default:
       return JSON.stringify({ error: `Unknown tool: ${name}` })
@@ -2521,9 +2525,10 @@ async function executeSaveWritingDraft(input: {
   title: string
   content: string
   append?: boolean
+  project?: string
   tags?: string[]
 }): Promise<string> {
-  const { title, content, append, tags } = input
+  const { title, content, append, project, tags } = input
 
   const token = process.env.GITHUB_PAT || process.env.GITHUB_TOKEN
   if (!token) {
@@ -2547,6 +2552,7 @@ async function executeSaveWritingDraft(input: {
 
   // Build markdown content
   const now = new Date().toISOString()
+  const projectLine = project ? `\nproject: "${project}"` : ''
   const tagLine = tags?.length ? `\ntags: [${tags.map(t => `"${t}"`).join(', ')}]` : ''
 
   let fileContent: string
@@ -2574,23 +2580,23 @@ async function executeSaveWritingDraft(input: {
             fileContent = `${existing}\n\n---\n\n*Appended ${now}*\n\n${content}`
             commitMessage = `writing: append to "${title}"`
           } else {
-            fileContent = buildNewDraft(title, content, now, tagLine)
+            fileContent = buildNewDraft(title, content, now, projectLine, tagLine)
             commitMessage = `writing: new draft "${title}"`
           }
         } else {
-          fileContent = buildNewDraft(title, content, now, tagLine)
+          fileContent = buildNewDraft(title, content, now, projectLine, tagLine)
           commitMessage = `writing: new draft "${title}"`
         }
       } else {
-        fileContent = buildNewDraft(title, content, now, tagLine)
+        fileContent = buildNewDraft(title, content, now, projectLine, tagLine)
         commitMessage = `writing: new draft "${title}"`
       }
     } catch {
-      fileContent = buildNewDraft(title, content, now, tagLine)
+      fileContent = buildNewDraft(title, content, now, projectLine, tagLine)
       commitMessage = `writing: new draft "${title}"`
     }
   } else {
-    fileContent = buildNewDraft(title, content, now, tagLine)
+    fileContent = buildNewDraft(title, content, now, projectLine, tagLine)
     commitMessage = `writing: new draft "${title}"`
   }
 
@@ -2633,11 +2639,11 @@ async function executeSaveWritingDraft(input: {
   }
 }
 
-function buildNewDraft(title: string, content: string, created: string, tagLine: string): string {
+function buildNewDraft(title: string, content: string, created: string, projectLine: string, tagLine: string): string {
   return `---
 title: "${title}"
 created: ${created}
-status: draft${tagLine}
+status: draft${projectLine}${tagLine}
 ---
 
 # ${title}
