@@ -330,6 +330,64 @@ export const AGENT_TOOLS: Anthropic.Tool[] = [
     },
   },
 
+  // ── FINANCIAL REVIEW TOOLS ──────────────────────────────────────────
+
+  {
+    name: 'get_quarterly_review',
+    description:
+      'Get a comprehensive quarterly financial review including income/expenses, BAS summary (GST), outstanding invoices with aging, project spending, subscription costs, pending receipts, cashflow trends, and flagged issues. Use when the user wants to review finances, prepare for BAS, or do a quarterly check-in.',
+    input_schema: {
+      type: 'object' as const,
+      properties: {
+        quarter: {
+          type: 'string',
+          description:
+            'Quarter in format "YYYY-Q1" through "YYYY-Q4". Q1=Jul-Sep (Australian FY), Q2=Oct-Dec, Q3=Jan-Mar, Q4=Apr-Jun. Default: current quarter.',
+        },
+      },
+      required: [],
+    },
+  },
+  {
+    name: 'get_xero_transactions',
+    description:
+      'Browse Xero bank transactions with filters. Use to drill into specific spending, find transactions by vendor, review a date range, or investigate issues found in the quarterly review.',
+    input_schema: {
+      type: 'object' as const,
+      properties: {
+        type: {
+          type: 'string',
+          description: 'Filter by type: RECEIVE, SPEND, TRANSFER. Default: all.',
+        },
+        vendor: {
+          type: 'string',
+          description: 'Filter by contact/vendor name (partial match).',
+        },
+        project_code: {
+          type: 'string',
+          description: 'Filter by project code (e.g. ACT-JH).',
+        },
+        start_date: {
+          type: 'string',
+          description: 'Start date YYYY-MM-DD. Default: 90 days ago.',
+        },
+        end_date: {
+          type: 'string',
+          description: 'End date YYYY-MM-DD. Default: today.',
+        },
+        min_amount: {
+          type: 'number',
+          description: 'Minimum transaction amount.',
+        },
+        limit: {
+          type: 'number',
+          description: 'Max results. Default 25.',
+        },
+      },
+      required: [],
+    },
+  },
+
   // ── REFLECTION TOOLS ──────────────────────────────────────────────────
 
   {
@@ -426,6 +484,37 @@ export const AGENT_TOOLS: Anthropic.Tool[] = [
       required: [],
     },
   },
+
+  // ── WRITING TOOLS ───────────────────────────────────────────────────
+
+  {
+    name: 'save_writing_draft',
+    description:
+      'Save a writing draft to the Obsidian vault (thoughts/writing/drafts/). Use when the user is writing, brainstorming, or composing text they want to continue editing on their laptop. The draft is committed to git and pushed so it syncs immediately. Supports creating new drafts or appending to existing ones.',
+    input_schema: {
+      type: 'object' as const,
+      properties: {
+        title: {
+          type: 'string',
+          description: 'Title for the draft. Used as filename (kebab-cased) and markdown heading.',
+        },
+        content: {
+          type: 'string',
+          description: 'The draft content in markdown format.',
+        },
+        append: {
+          type: 'boolean',
+          description: 'If true, append to existing draft with this title instead of creating new. Default false.',
+        },
+        tags: {
+          type: 'array',
+          items: { type: 'string' },
+          description: 'Optional tags for the draft (e.g. ["essay", "act-philosophy", "lcaa"]).',
+        },
+      },
+      required: ['title', 'content'],
+    },
+  },
 ]
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -475,6 +564,13 @@ export async function executeTool(
       return await executeGetGrantPipeline(input as { status?: string })
     case 'get_pending_receipts':
       return await executeGetPendingReceipts(input as { limit?: number })
+    // Financial review tools
+    case 'get_quarterly_review':
+      return await executeGetQuarterlyReview(input as { quarter?: string })
+    case 'get_xero_transactions':
+      return await executeGetXeroTransactions(
+        input as { type?: string; vendor?: string; project_code?: string; start_date?: string; end_date?: string; min_amount?: number; limit?: number }
+      )
     // Reflection tools
     case 'get_day_context':
       return await executeGetDayContext(input as { date?: string })
@@ -496,6 +592,11 @@ export async function executeTool(
       )
     case 'search_past_reflections':
       return await executeSearchPastReflections(input as { query?: string; days?: number; limit?: number })
+    // Writing tools
+    case 'save_writing_draft':
+      return await executeSaveWritingDraft(
+        input as { title: string; content: string; append?: boolean; tags?: string[] }
+      )
     default:
       return JSON.stringify({ error: `Unknown tool: ${name}` })
   }
@@ -1564,6 +1665,551 @@ async function executeGetPendingReceipts(input: {
 }
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// TOOL: get_quarterly_review
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+function getAustralianQuarter(date: Date): { quarter: number; fyStart: number; fyEnd: number } {
+  const month = date.getMonth() // 0-based
+  // Australian FY: Jul-Jun. Q1=Jul-Sep, Q2=Oct-Dec, Q3=Jan-Mar, Q4=Apr-Jun
+  if (month >= 6 && month <= 8) return { quarter: 1, fyStart: date.getFullYear(), fyEnd: date.getFullYear() + 1 }
+  if (month >= 9 && month <= 11) return { quarter: 2, fyStart: date.getFullYear(), fyEnd: date.getFullYear() + 1 }
+  if (month >= 0 && month <= 2) return { quarter: 3, fyStart: date.getFullYear() - 1, fyEnd: date.getFullYear() }
+  return { quarter: 4, fyStart: date.getFullYear() - 1, fyEnd: date.getFullYear() }
+}
+
+function getQuarterDates(quarterStr?: string): { label: string; start: string; end: string; fyLabel: string; prevStart: string; prevEnd: string } {
+  const now = new Date()
+  let year: number
+  let q: number
+
+  if (quarterStr) {
+    const match = quarterStr.match(/^(\d{4})-Q([1-4])$/i)
+    if (match) {
+      year = parseInt(match[1])
+      q = parseInt(match[2])
+    } else {
+      const aq = getAustralianQuarter(now)
+      year = aq.fyStart
+      q = aq.quarter
+    }
+  } else {
+    const aq = getAustralianQuarter(now)
+    year = aq.fyStart
+    q = aq.quarter
+  }
+
+  // Map quarter to date ranges (Australian FY)
+  const ranges: Record<number, { start: string; end: string }> = {
+    1: { start: `${year}-07-01`, end: `${year}-09-30` },
+    2: { start: `${year}-10-01`, end: `${year}-12-31` },
+    3: { start: `${year + 1}-01-01`, end: `${year + 1}-03-31` },
+    4: { start: `${year + 1}-04-01`, end: `${year + 1}-06-30` },
+  }
+
+  const prevQ = q === 1 ? 4 : q - 1
+  const prevYear = q === 1 ? year - 1 : year
+  const prevRanges: Record<number, { start: string; end: string }> = {
+    1: { start: `${prevYear}-07-01`, end: `${prevYear}-09-30` },
+    2: { start: `${prevYear}-10-01`, end: `${prevYear}-12-31` },
+    3: { start: `${prevYear + 1}-01-01`, end: `${prevYear + 1}-03-31` },
+    4: { start: `${prevYear + 1}-04-01`, end: `${prevYear + 1}-06-30` },
+  }
+
+  return {
+    label: `Q${q} FY${year}/${year + 1}`,
+    start: ranges[q].start,
+    end: ranges[q].end,
+    fyLabel: `FY${year}/${year + 1}`,
+    prevStart: prevRanges[prevQ].start,
+    prevEnd: prevRanges[prevQ].end,
+  }
+}
+
+async function executeGetQuarterlyReview(input: { quarter?: string }): Promise<string> {
+  const qDates = getQuarterDates(input.quarter)
+
+  try {
+    // Run all queries in parallel
+    const [
+      incomeInvoices,
+      expenseInvoices,
+      prevIncomeInvoices,
+      prevExpenseInvoices,
+      outstandingInvoices,
+      pendingReceipts,
+      resolvedReceipts,
+      activeSubscriptions,
+      subscriptionAlerts,
+      upcomingRenewals,
+      transactions6m,
+    ] = await Promise.all([
+      // Income invoices (ACCREC) for the quarter
+      supabase
+        .from('xero_invoices')
+        .select('contact_name, total, amount_paid, amount_due, project_code, status')
+        .eq('type', 'ACCREC')
+        .gte('date', qDates.start)
+        .lte('date', qDates.end),
+
+      // Expense invoices (ACCPAY) for the quarter
+      supabase
+        .from('xero_invoices')
+        .select('contact_name, total, amount_paid, amount_due, project_code, status')
+        .eq('type', 'ACCPAY')
+        .gte('date', qDates.start)
+        .lte('date', qDates.end),
+
+      // Previous quarter income (for comparison)
+      supabase
+        .from('xero_invoices')
+        .select('total')
+        .eq('type', 'ACCREC')
+        .gte('date', qDates.prevStart)
+        .lte('date', qDates.prevEnd),
+
+      // Previous quarter expenses (for comparison)
+      supabase
+        .from('xero_invoices')
+        .select('total')
+        .eq('type', 'ACCPAY')
+        .gte('date', qDates.prevStart)
+        .lte('date', qDates.prevEnd),
+
+      // Outstanding invoices (all unpaid)
+      supabase
+        .from('xero_invoices')
+        .select('invoice_number, contact_name, amount_due, due_date, type, status')
+        .gt('amount_due', 0)
+        .in('status', ['AUTHORISED', 'SENT'])
+        .order('due_date', { ascending: true }),
+
+      // Pending receipts
+      supabase
+        .from('receipt_matches')
+        .select('id, vendor_name, amount, transaction_date, category, status, created_at')
+        .in('status', ['pending', 'email_suggested']),
+
+      // Resolved receipts this quarter
+      supabase
+        .from('receipt_matches')
+        .select('id')
+        .eq('status', 'resolved')
+        .gte('transaction_date', qDates.start)
+        .lte('transaction_date', qDates.end),
+
+      // Active subscriptions
+      supabase
+        .from('subscriptions')
+        .select('vendor, name, amount_aud, billing_cycle, category, status, renewal_date, value_rating')
+        .eq('status', 'active')
+        .order('amount_aud', { ascending: false }),
+
+      // Subscription alerts
+      supabase
+        .from('v_subscription_alerts')
+        .select('*')
+        .limit(20),
+
+      // Upcoming renewals (next 30 days)
+      supabase
+        .from('v_upcoming_renewals')
+        .select('*')
+        .limit(20),
+
+      // Transactions for last 6 months (for cashflow trend)
+      supabase
+        .from('xero_transactions')
+        .select('date, type, total, contact_name')
+        .gte('date', new Date(new Date().getTime() - 180 * 86400000).toISOString().split('T')[0])
+        .order('date', { ascending: true }),
+    ])
+
+    // ── Income & Expenses ──────────────────────────────────
+    const incomeData = incomeInvoices.data || []
+    const expenseData = expenseInvoices.data || []
+
+    const totalIncome = incomeData.reduce((sum, i) => sum + (parseFloat(String(i.total)) || 0), 0)
+    const totalExpenses = expenseData.reduce((sum, i) => sum + (parseFloat(String(i.total)) || 0), 0)
+    const netProfit = totalIncome - totalExpenses
+
+    // Income by source (top 15)
+    const incomeBySource: Record<string, number> = {}
+    for (const inv of incomeData) {
+      const key = inv.contact_name || 'Unknown'
+      incomeBySource[key] = (incomeBySource[key] || 0) + (parseFloat(String(inv.total)) || 0)
+    }
+    const topIncome = Object.entries(incomeBySource)
+      .sort(([, a], [, b]) => b - a)
+      .slice(0, 15)
+      .map(([contact, amount]) => ({ contact, amount: Math.round(amount * 100) / 100 }))
+
+    // Expenses by vendor (top 15)
+    const expensesByVendor: Record<string, number> = {}
+    for (const inv of expenseData) {
+      const key = inv.contact_name || 'Unknown'
+      expensesByVendor[key] = (expensesByVendor[key] || 0) + (parseFloat(String(inv.total)) || 0)
+    }
+    const topExpenses = Object.entries(expensesByVendor)
+      .sort(([, a], [, b]) => b - a)
+      .slice(0, 15)
+      .map(([vendor, amount]) => ({ vendor, amount: Math.round(amount * 100) / 100 }))
+
+    // Expenses by project
+    const expensesByProject: Record<string, number> = {}
+    for (const inv of expenseData) {
+      const key = inv.project_code || 'Unallocated'
+      expensesByProject[key] = (expensesByProject[key] || 0) + (parseFloat(String(inv.total)) || 0)
+    }
+    const topProjectExpenses = Object.entries(expensesByProject)
+      .sort(([, a], [, b]) => b - a)
+      .map(([project, amount]) => ({ project, amount: Math.round(amount * 100) / 100 }))
+
+    // Previous quarter comparison
+    const prevIncome = (prevIncomeInvoices.data || []).reduce((sum, i) => sum + (parseFloat(String(i.total)) || 0), 0)
+    const prevExpenses = (prevExpenseInvoices.data || []).reduce((sum, i) => sum + (parseFloat(String(i.total)) || 0), 0)
+    const incomeChangePct = prevIncome > 0 ? Math.round(((totalIncome - prevIncome) / prevIncome) * 100) : null
+    const expenseChangePct = prevExpenses > 0 ? Math.round(((totalExpenses - prevExpenses) / prevExpenses) * 100) : null
+
+    // ── BAS Summary ────────────────────────────────────────
+    const g1TotalSales = totalIncome
+    const g11NonCapitalPurchases = totalExpenses
+    const label1aGstOnSales = Math.round((g1TotalSales / 11) * 100) / 100
+    const label1bGstOnPurchases = Math.round((g11NonCapitalPurchases / 11) * 100) / 100
+    const estimatedGstPayable = Math.round((label1aGstOnSales - label1bGstOnPurchases) * 100) / 100
+
+    // ── Outstanding Invoices ───────────────────────────────
+    const outstanding = outstandingInvoices.data || []
+    const now = new Date()
+    const totalOutstanding = outstanding.reduce((sum, i) => sum + (parseFloat(String(i.amount_due)) || 0), 0)
+
+    const aging: Record<string, number> = { current: 0, '1-30': 0, '31-60': 0, '61-90': 0, '90+': 0 }
+    const overdueItems: Array<{ invoice_number: string; contact: string; amount_due: number; days_overdue: number }> = []
+
+    for (const inv of outstanding) {
+      const dueDate = new Date(inv.due_date)
+      const daysOverdue = Math.floor((now.getTime() - dueDate.getTime()) / 86400000)
+      const amountDue = parseFloat(String(inv.amount_due)) || 0
+
+      if (daysOverdue <= 0) aging.current += amountDue
+      else if (daysOverdue <= 30) aging['1-30'] += amountDue
+      else if (daysOverdue <= 60) aging['31-60'] += amountDue
+      else if (daysOverdue <= 90) aging['61-90'] += amountDue
+      else aging['90+'] += amountDue
+
+      if (daysOverdue > 0 && inv.type === 'ACCREC') {
+        overdueItems.push({
+          invoice_number: inv.invoice_number,
+          contact: inv.contact_name,
+          amount_due: amountDue,
+          days_overdue: daysOverdue,
+        })
+      }
+    }
+    overdueItems.sort((a, b) => b.days_overdue - a.days_overdue)
+
+    // ── Receipts ───────────────────────────────────────────
+    const pending = pendingReceipts.data || []
+    const pendingCount = pending.length
+    const pendingTotal = pending.reduce((sum, r) => sum + (parseFloat(String(r.amount)) || 0), 0)
+    let oldestPendingDays = 0
+    for (const r of pending) {
+      const days = Math.floor((now.getTime() - new Date(r.created_at).getTime()) / 86400000)
+      if (days > oldestPendingDays) oldestPendingDays = days
+    }
+    const receiptsByCategory: Record<string, number> = {}
+    for (const r of pending) {
+      const cat = r.category || 'uncategorised'
+      receiptsByCategory[cat] = (receiptsByCategory[cat] || 0) + 1
+    }
+
+    // ── Subscriptions ──────────────────────────────────────
+    const subs = activeSubscriptions.data || []
+    let monthlyTotal = 0
+    let annualTotal = 0
+    for (const sub of subs) {
+      const amount = parseFloat(String(sub.amount_aud)) || 0
+      if (sub.billing_cycle === 'monthly') {
+        monthlyTotal += amount
+        annualTotal += amount * 12
+      } else if (sub.billing_cycle === 'yearly') {
+        monthlyTotal += amount / 12
+        annualTotal += amount
+      } else if (sub.billing_cycle === 'quarterly') {
+        monthlyTotal += amount / 3
+        annualTotal += amount * 4
+      }
+    }
+
+    const topSubCosts = subs.slice(0, 10).map((s) => ({
+      vendor: s.vendor || s.name,
+      monthly_amount: parseFloat(String(s.amount_aud)) || 0,
+      category: s.category,
+      billing_cycle: s.billing_cycle,
+    }))
+
+    // ── Cashflow Trend ─────────────────────────────────────
+    const txns = transactions6m.data || []
+    const monthlyMap: Record<string, { income: number; expenses: number }> = {}
+    for (const t of txns) {
+      const month = t.date?.substring(0, 7) // YYYY-MM
+      if (!month) continue
+      if (!monthlyMap[month]) monthlyMap[month] = { income: 0, expenses: 0 }
+      const amount = Math.abs(parseFloat(String(t.total)) || 0)
+      if (t.type === 'RECEIVE') monthlyMap[month].income += amount
+      else if (t.type === 'SPEND') monthlyMap[month].expenses += amount
+    }
+    const monthlyTrend = Object.entries(monthlyMap)
+      .sort(([a], [b]) => a.localeCompare(b))
+      .map(([month, data]) => ({
+        month,
+        income: Math.round(data.income * 100) / 100,
+        expenses: Math.round(data.expenses * 100) / 100,
+        net: Math.round((data.income - data.expenses) * 100) / 100,
+      }))
+
+    const avgIncome = monthlyTrend.length > 0
+      ? monthlyTrend.reduce((sum, m) => sum + m.income, 0) / monthlyTrend.length
+      : 0
+    const avgExpenses = monthlyTrend.length > 0
+      ? monthlyTrend.reduce((sum, m) => sum + m.expenses, 0) / monthlyTrend.length
+      : 0
+
+    // ── Issue Detection ────────────────────────────────────
+    const issues: Array<{ type: string; severity: string; detail: string }> = []
+
+    // Overdue invoices > 30 days
+    const overdue30 = overdueItems.filter((i) => i.days_overdue > 30)
+    if (overdue30.length > 0) {
+      const totalOverdue30 = overdue30.reduce((sum, i) => sum + i.amount_due, 0)
+      issues.push({
+        type: 'overdue_invoices',
+        severity: 'high',
+        detail: `${overdue30.length} invoices overdue >30 days, totalling $${totalOverdue30.toFixed(2)}`,
+      })
+    }
+
+    // Large outstanding amounts
+    if (totalOutstanding > 5000) {
+      issues.push({
+        type: 'large_outstanding',
+        severity: 'high',
+        detail: `$${totalOutstanding.toFixed(2)} total outstanding across ${outstanding.length} invoices`,
+      })
+    }
+
+    // Pending receipts > 14 days
+    const staleReceipts = pending.filter(
+      (r) => Math.floor((now.getTime() - new Date(r.created_at).getTime()) / 86400000) > 14
+    )
+    if (staleReceipts.length > 0) {
+      issues.push({
+        type: 'stale_receipts',
+        severity: 'medium',
+        detail: `${staleReceipts.length} receipts pending >14 days (oldest: ${oldestPendingDays} days)`,
+      })
+    }
+
+    // Subscriptions renewing soon
+    const renewals = upcomingRenewals.data || []
+    const urgentRenewals = renewals.filter((r) => {
+      const daysUntil = r.renewal_date
+        ? Math.ceil((new Date(r.renewal_date).getTime() - now.getTime()) / 86400000)
+        : 999
+      return daysUntil <= 7
+    })
+    if (urgentRenewals.length > 0) {
+      issues.push({
+        type: 'upcoming_renewals',
+        severity: 'medium',
+        detail: `${urgentRenewals.length} subscriptions renewing within 7 days`,
+      })
+    }
+
+    // Subscription alerts
+    const alerts = subscriptionAlerts.data || []
+    if (alerts.length > 0) {
+      issues.push({
+        type: 'subscription_alerts',
+        severity: 'medium',
+        detail: `${alerts.length} subscription alerts (missed payments, price changes, etc.)`,
+      })
+    }
+
+    // Expenses exceeding income
+    if (totalExpenses > totalIncome && totalIncome > 0) {
+      issues.push({
+        type: 'expenses_exceed_income',
+        severity: 'high',
+        detail: `Expenses ($${totalExpenses.toFixed(2)}) exceed income ($${totalIncome.toFixed(2)}) by $${(totalExpenses - totalIncome).toFixed(2)}`,
+      })
+    }
+
+    // Unusual vendor spending (>50% increase vs previous quarter)
+    if (prevExpenses > 0) {
+      // Check at vendor level by comparing current vs previous quarter
+      // (simplified: flag if overall expenses jumped >50%)
+      if (expenseChangePct !== null && expenseChangePct > 50) {
+        issues.push({
+          type: 'spending_spike',
+          severity: 'low',
+          detail: `Total expenses increased ${expenseChangePct}% vs previous quarter`,
+        })
+      }
+    }
+
+    return JSON.stringify({
+      quarter: {
+        label: qDates.label,
+        start_date: qDates.start,
+        end_date: qDates.end,
+        fy_label: qDates.fyLabel,
+      },
+      income_expenses: {
+        total_income: Math.round(totalIncome * 100) / 100,
+        total_expenses: Math.round(totalExpenses * 100) / 100,
+        net_profit: Math.round(netProfit * 100) / 100,
+        income_by_source: topIncome,
+        expenses_by_vendor: topExpenses,
+        expenses_by_project: topProjectExpenses,
+        vs_previous_quarter: {
+          income_change_pct: incomeChangePct,
+          expenses_change_pct: expenseChangePct,
+        },
+      },
+      bas_summary: {
+        g1_total_sales: Math.round(g1TotalSales * 100) / 100,
+        g11_non_capital_purchases: Math.round(g11NonCapitalPurchases * 100) / 100,
+        label_1a_gst_on_sales: label1aGstOnSales,
+        label_1b_gst_on_purchases: label1bGstOnPurchases,
+        estimated_gst_payable: estimatedGstPayable,
+        note: 'Estimates from Xero invoice totals. Verify against Xero BAS report.',
+        invoice_count: { receivable: incomeData.length, payable: expenseData.length },
+      },
+      outstanding_invoices: {
+        total_outstanding: Math.round(totalOutstanding * 100) / 100,
+        by_aging: Object.fromEntries(
+          Object.entries(aging).map(([k, v]) => [k, Math.round(v * 100) / 100])
+        ),
+        overdue_items: overdueItems.slice(0, 10),
+      },
+      receipts: {
+        pending_count: pendingCount,
+        pending_total: Math.round(pendingTotal * 100) / 100,
+        oldest_pending_days: oldestPendingDays,
+        by_category: receiptsByCategory,
+        resolved_this_quarter: (resolvedReceipts.data || []).length,
+      },
+      subscriptions: {
+        active_count: subs.length,
+        monthly_total: Math.round(monthlyTotal * 100) / 100,
+        annual_total: Math.round(annualTotal * 100) / 100,
+        top_costs: topSubCosts,
+        upcoming_renewals: (renewals).slice(0, 5),
+        alerts: (alerts).slice(0, 5),
+      },
+      cashflow: {
+        monthly_trend: monthlyTrend,
+        avg_monthly_income: Math.round(avgIncome * 100) / 100,
+        avg_monthly_expenses: Math.round(avgExpenses * 100) / 100,
+        months_of_runway: avgExpenses > avgIncome && avgExpenses > 0
+          ? null
+          : undefined,
+      },
+      issues,
+    })
+  } catch (err) {
+    return JSON.stringify({ error: (err as Error).message })
+  }
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// TOOL: get_xero_transactions
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+async function executeGetXeroTransactions(input: {
+  type?: string
+  vendor?: string
+  project_code?: string
+  start_date?: string
+  end_date?: string
+  min_amount?: number
+  limit?: number
+}): Promise<string> {
+  const limit = input.limit || 25
+  const endDate = input.end_date || new Date().toISOString().split('T')[0]
+  const startDate = input.start_date || new Date(Date.now() - 90 * 86400000).toISOString().split('T')[0]
+
+  try {
+    let query = supabase
+      .from('xero_transactions')
+      .select('date, type, contact_name, bank_account, project_code, total, line_items, has_attachments')
+      .gte('date', startDate)
+      .lte('date', endDate)
+      .order('date', { ascending: false })
+      .limit(limit)
+
+    if (input.type) {
+      query = query.eq('type', input.type.toUpperCase())
+    }
+    if (input.vendor) {
+      query = query.ilike('contact_name', `%${input.vendor}%`)
+    }
+    if (input.project_code) {
+      query = query.eq('project_code', input.project_code.toUpperCase())
+    }
+    if (input.min_amount) {
+      query = query.gte('total', input.min_amount)
+    }
+
+    const { data, error } = await query
+
+    if (error) {
+      return JSON.stringify({ error: error.message })
+    }
+
+    const transactions = (data || []).map((t) => {
+      // Extract line items summary from JSONB
+      let lineItemsSummary = ''
+      if (t.line_items && Array.isArray(t.line_items)) {
+        const items = t.line_items as Array<{ Description?: string; description?: string }>
+        const first = items[0]
+        const desc = first?.Description || first?.description || ''
+        lineItemsSummary = desc
+        if (items.length > 1) lineItemsSummary += ` (+${items.length - 1} more)`
+      }
+
+      return {
+        date: t.date,
+        type: t.type,
+        contact_name: t.contact_name,
+        bank_account: t.bank_account,
+        project_code: t.project_code,
+        total: parseFloat(String(t.total)) || 0,
+        has_attachments: t.has_attachments || false,
+        line_items_summary: lineItemsSummary,
+      }
+    })
+
+    const totalAmount = transactions.reduce((sum, t) => sum + Math.abs(t.total), 0)
+
+    return JSON.stringify({
+      filters: {
+        type: input.type || 'all',
+        vendor: input.vendor || null,
+        project_code: input.project_code || null,
+        date_range: { start: startDate, end: endDate },
+        min_amount: input.min_amount || null,
+      },
+      count: transactions.length,
+      total_amount: Math.round(totalAmount * 100) / 100,
+      transactions,
+    })
+  } catch (err) {
+    return JSON.stringify({ error: (err as Error).message })
+  }
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // TOOL: get_day_context
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -1865,4 +2511,137 @@ export async function logAgentUsage(params: {
   }
 
   return cost
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// TOOL: save_writing_draft
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+async function executeSaveWritingDraft(input: {
+  title: string
+  content: string
+  append?: boolean
+  tags?: string[]
+}): Promise<string> {
+  const { title, content, append, tags } = input
+
+  const token = process.env.GITHUB_PAT || process.env.GITHUB_TOKEN
+  if (!token) {
+    return JSON.stringify({ error: 'GITHUB_PAT or GITHUB_TOKEN not configured' })
+  }
+
+  const owner = 'Acurioustractor'
+  const repo = 'act-global-infrastructure'
+  const branch = 'main'
+
+  // Generate filename from title
+  const slug = title
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-')
+    .slice(0, 60)
+  const date = new Date().toISOString().split('T')[0]
+  const filename = `${date}-${slug}.md`
+  const filepath = `thoughts/writing/drafts/${filename}`
+
+  // Build markdown content
+  const now = new Date().toISOString()
+  const tagLine = tags?.length ? `\ntags: [${tags.map(t => `"${t}"`).join(', ')}]` : ''
+
+  let fileContent: string
+  let commitMessage: string
+  let sha: string | undefined
+
+  if (append) {
+    // Try to find existing file by slug (any date prefix)
+    try {
+      const searchRes = await fetch(
+        `https://api.github.com/repos/${owner}/${repo}/contents/thoughts/writing/drafts`,
+        { headers: { Authorization: `token ${token}`, Accept: 'application/vnd.github.v3+json' } }
+      )
+      if (searchRes.ok) {
+        const files = await searchRes.json()
+        const match = files.find((f: { name: string }) => f.name.endsWith(`${slug}.md`))
+        if (match) {
+          const fileRes = await fetch(match.url, {
+            headers: { Authorization: `token ${token}`, Accept: 'application/vnd.github.v3+json' },
+          })
+          if (fileRes.ok) {
+            const fileData = await fileRes.json()
+            sha = fileData.sha
+            const existing = Buffer.from(fileData.content, 'base64').toString('utf-8')
+            fileContent = `${existing}\n\n---\n\n*Appended ${now}*\n\n${content}`
+            commitMessage = `writing: append to "${title}"`
+          } else {
+            fileContent = buildNewDraft(title, content, now, tagLine)
+            commitMessage = `writing: new draft "${title}"`
+          }
+        } else {
+          fileContent = buildNewDraft(title, content, now, tagLine)
+          commitMessage = `writing: new draft "${title}"`
+        }
+      } else {
+        fileContent = buildNewDraft(title, content, now, tagLine)
+        commitMessage = `writing: new draft "${title}"`
+      }
+    } catch {
+      fileContent = buildNewDraft(title, content, now, tagLine)
+      commitMessage = `writing: new draft "${title}"`
+    }
+  } else {
+    fileContent = buildNewDraft(title, content, now, tagLine)
+    commitMessage = `writing: new draft "${title}"`
+  }
+
+  // Commit via GitHub API
+  try {
+    const body: Record<string, unknown> = {
+      message: commitMessage,
+      content: Buffer.from(fileContent).toString('base64'),
+      branch,
+    }
+    if (sha) body.sha = sha
+
+    const putRes = await fetch(
+      `https://api.github.com/repos/${owner}/${repo}/contents/${filepath}`,
+      {
+        method: 'PUT',
+        headers: {
+          Authorization: `token ${token}`,
+          Accept: 'application/vnd.github.v3+json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(body),
+      }
+    )
+
+    if (!putRes.ok) {
+      const err = await putRes.text()
+      return JSON.stringify({ error: `GitHub API error: ${putRes.status} ${err}` })
+    }
+
+    const result = await putRes.json()
+    return JSON.stringify({
+      saved: true,
+      path: filepath,
+      url: result.content?.html_url,
+      message: `Draft "${title}" saved to ${filepath} and pushed to git. Pull on your laptop to start editing.`,
+    })
+  } catch (err) {
+    return JSON.stringify({ error: `Failed to save draft: ${(err as Error).message}` })
+  }
+}
+
+function buildNewDraft(title: string, content: string, created: string, tagLine: string): string {
+  return `---
+title: "${title}"
+created: ${created}
+status: draft${tagLine}
+---
+
+# ${title}
+
+${content}
+`
 }
