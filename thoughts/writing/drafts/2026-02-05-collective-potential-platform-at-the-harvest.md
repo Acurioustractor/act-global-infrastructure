@@ -17,7 +17,7 @@ tags:
   - collaborative-design
 collaborators: 
   - Nic Marchesi
-  - Ben Pawson
+  - Ben Knight
 location: The Harvest, Witta QLD
 ---
 

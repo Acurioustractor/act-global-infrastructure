@@ -5,7 +5,7 @@
 cd /Users/benknight/Code/act-global-infrastructure
 
 SERVERS="act-api act-frontend"
-CRON_SCRIPTS="imessage-sync embed-imessages detect-episodes daily-briefing storyteller-sync storyteller-link notion-sync agent-learning"
+CRON_SCRIPTS="imessage-sync embed-imessages detect-episodes daily-briefing storyteller-sync storyteller-link notion-sync agent-learning meeting-sync knowledge-pipeline data-freshness gmail-sync"
 
 case "$1" in
   start)
@@ -23,7 +23,7 @@ case "$1" in
     pm2 restart $SERVERS 2>/dev/null
     ;;
   cron)
-    pm2 start ecosystem.config.cjs --only "imessage-sync,embed-imessages,detect-episodes,daily-briefing,storyteller-sync,storyteller-link,notion-sync,agent-learning"
+    pm2 start ecosystem.config.cjs --only "imessage-sync,embed-imessages,detect-episodes,daily-briefing,storyteller-sync,storyteller-link,notion-sync,agent-learning,meeting-sync,knowledge-pipeline,data-freshness,gmail-sync"
     sleep 2
     pm2 status
     echo ""
@@ -34,8 +34,12 @@ case "$1" in
     echo "  imessage-sync:     every 15 min"
     echo "  notion-sync:       every 5 min"
     echo "  embed-imessages:   daily 5am AEST"
+    echo "  meeting-sync:      daily 5:30am AEST"
     echo "  detect-episodes:   daily 6am AEST"
     echo "  daily-briefing:    daily 7am AEST"
+    echo "  knowledge-pipeline: daily 8am AEST"
+    echo "  data-freshness:    every 6 hours"
+    echo "  gmail-sync:        every 6 hours (4 mailboxes)"
     ;;
   stop-cron)
     pm2 stop $CRON_SCRIPTS 2>/dev/null

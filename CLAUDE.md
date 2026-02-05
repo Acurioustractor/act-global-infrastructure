@@ -56,3 +56,51 @@ pnpm --filter @act/website dev          # Start website
 ./dev cron                               # Start cron scripts
 ./dev all                                # Start everything
 ```
+
+## Development Workflow
+
+- **Build early, build often.** After editing TypeScript files, run `npx tsc --noEmit` in the relevant app directory before moving to the next file. Don't batch all changes then discover type errors at the end.
+- **Read before edit.** Always read a file before modifying it. Check existing types, imports, and property names — don't guess.
+- **Migrations need manual steps.** Database migrations in `supabase/migrations/` do NOT auto-run. After generating SQL, provide clear instructions for applying it. Verify the migration succeeded before writing dependent code.
+
+## Integration Rules (CRITICAL)
+
+Before implementing ANY external service integration, **STOP and audit first**:
+
+1. **Check what's already configured** — search for existing SDKs, env vars, and API clients
+2. **Check API limitations** — rate limits, feature gaps, auth requirements
+3. **Check existing patterns** — how similar integrations are done in this codebase
+4. **Only then propose an approach** — with a fallback if the primary approach has risks
+
+### Already Configured Services
+
+| Service | Package | Key Files |
+|---------|---------|-----------|
+| Supabase | `@supabase/supabase-js` | `src/lib/supabase.ts`, all API routes |
+| Anthropic | `@anthropic-ai/sdk` | `src/lib/telegram/bot.ts`, `src/lib/agent-tools.ts` |
+| OpenAI | `openai` | `src/lib/embeddings.ts`, `src/lib/telegram/voice.ts` |
+| Telegram | `grammy` | `src/lib/telegram/bot.ts`, `/api/telegram/webhook/` |
+| Google | `googleapis` | Service account + domain delegation for Gmail/Calendar |
+| Xero | `xero-node` | `scripts/sync-xero-to-supabase.mjs`, `/api/webhooks/xero/` |
+| Notion | `@notionhq/client` | `scripts/sync-notion-to-supabase.mjs` |
+| GHL | Custom API | `scripts/lib/ghl-api-service.mjs`, `/api/webhooks/ghl/` |
+| GitHub | `@octokit/graphql` | Project sync scripts |
+| Webflow | Custom API | 2 sites (ACT + JusticeHub) |
+
+### Auth Patterns
+
+- **Google**: Service account with domain-wide delegation (JWT signing, no googleapis for TTS)
+- **Xero**: OAuth2 with refresh token rotation
+- **Telegram**: Webhook with `x-telegram-bot-api-secret-token` header
+- **GHL/Xero webhooks**: Signature validation in route handlers
+- **Supabase**: Service role key for backend, anon key for frontend
+
+### Google Workspace Accounts
+
+4 mailboxes: `benjamin@act.place`, `nicholas@act.place`, `hi@act.place`, `accounts@act.place`
+
+## Bias Towards Action
+
+- **Default to implementation, not planning.** Unless the user explicitly asks for a plan, start building.
+- **If unsure, ask one question** — don't enter a multi-question discovery phase.
+- **Show working code quickly** — a rough working version beats a perfect plan.

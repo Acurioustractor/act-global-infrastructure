@@ -61,6 +61,12 @@ const cronScripts = [
     script: 'scripts/data-freshness-monitor.mjs',
     cron_restart: '0 */6 * * *', // Every 6 hours
   },
+  {
+    name: 'gmail-sync',
+    script: 'scripts/sync-gmail-to-supabase.mjs',
+    args: '--days 3',
+    cron_restart: '0 */6 * * *', // Every 6 hours (4 mailboxes, ~500 msgs per run)
+  },
 ];
 
 module.exports = {
