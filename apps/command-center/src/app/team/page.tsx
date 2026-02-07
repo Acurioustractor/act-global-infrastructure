@@ -52,7 +52,7 @@ export default function TeamPage() {
   const teamData: TeamData = data ?? EMPTY_STATE
 
   const StatCard = ({ label, value, icon: Icon, trend }: { label: string; value: string | number; icon: any; trend?: string }) => (
-    <div className="glass-card p-6 border border-white/10 bg-white/5">
+    <div className="glass-card p-5">
       <div className="flex items-start justify-between">
         <div>
           <p className="text-white/60 text-sm font-medium">{label}</p>
@@ -99,7 +99,7 @@ export default function TeamPage() {
   const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 p-8">
+    <div className="p-6 lg:p-8">
       {/* Header */}
       <div className="mb-8">
         <div className="flex items-center gap-3 mb-2">
@@ -110,7 +110,7 @@ export default function TeamPage() {
       </div>
 
       {/* Stat Cards */}
-      <div className="grid grid-cols-4 gap-6 mb-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
         <StatCard
           label="Active Team Members"
           value={teamData.teamMembers.length}
@@ -138,11 +138,11 @@ export default function TeamPage() {
       </div>
 
       {/* Main Content */}
-      <div className="grid grid-cols-8 gap-8 mb-8">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Left Column */}
-        <div className="col-span-5 space-y-6">
+        <div className="col-span-12 lg:col-span-8 space-y-6">
           {/* Team Overview */}
-          <div className="glass-card p-6 border border-white/10 bg-white/5">
+          <div className="glass-card p-6">
             <h2 className="text-white font-semibold text-lg mb-6">Team Overview</h2>
             {teamData.teamMembers.length === 0 ? (
               <div className="py-8 text-center">
@@ -208,7 +208,7 @@ export default function TeamPage() {
           </div>
 
           {/* Allocation Matrix */}
-          <div className="glass-card p-6 border border-white/10 bg-white/5">
+          <div className="glass-card p-6">
             <h2 className="text-white font-semibold text-lg mb-6">Project Allocation Matrix</h2>
             <div className="overflow-x-auto">
               <div className="min-w-full inline-block">
@@ -255,7 +255,7 @@ export default function TeamPage() {
           </div>
 
           {/* Seasonal Demand Heatmap */}
-          <div className="glass-card p-6 border border-white/10 bg-white/5">
+          <div className="glass-card p-6">
             <h2 className="text-white font-semibold text-lg mb-6">Seasonal Demand Heatmap</h2>
             {teamData.teamMembers.length === 0 ? (
               <div className="py-8 text-center">
@@ -304,9 +304,9 @@ export default function TeamPage() {
         </div>
 
         {/* Right Sidebar */}
-        <div className="col-span-3 space-y-6">
+        <div className="col-span-12 lg:col-span-4 space-y-6">
           {/* Capacity Summary */}
-          <div className="glass-card p-6 border border-white/10 bg-white/5">
+          <div className="glass-card p-6">
             <h3 className="text-white font-semibold text-lg mb-6">Capacity by Zone</h3>
             <div className="space-y-4">
               {Object.entries(teamData.zoneCapacity).map(([zone, capacity]) => (
@@ -327,7 +327,7 @@ export default function TeamPage() {
           </div>
 
           {/* Skills Inventory */}
-          <div className="glass-card p-6 border border-white/10 bg-white/5">
+          <div className="glass-card p-6">
             <h3 className="text-white font-semibold text-lg mb-6">Skills Inventory</h3>
             {teamData.skillsInventory.length === 0 ? (
               <div className="py-4 text-center">
@@ -349,7 +349,7 @@ export default function TeamPage() {
 
           {/* Hiring Alerts */}
           {teamData.hiringAlerts.length > 0 && (
-            <div className="glass-card p-6 border border-red-500/30 bg-red-500/10">
+            <div className="glass-card p-6 border-red-500/30 bg-red-500/5">
               <div className="flex items-start gap-3 mb-4">
                 <AlertTriangle className="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5" />
                 <h3 className="text-white font-semibold text-lg">Hiring Needs</h3>
@@ -368,7 +368,7 @@ export default function TeamPage() {
           )}
 
           {/* Labour Cost */}
-          <div className="glass-card p-6 border border-white/10 bg-white/5">
+          <div className="glass-card p-6">
             <h3 className="text-white font-semibold text-lg mb-6">Labour Cost Summary</h3>
             <div>
               <p className="text-white/60 text-xs font-medium mb-2 uppercase">Monthly Cost</p>
@@ -402,7 +402,7 @@ export default function TeamPage() {
           </div>
 
           {/* Next Actions */}
-          <div className="glass-card p-6 border border-white/10 bg-white/5">
+          <div className="glass-card p-6">
             <h3 className="text-white font-semibold text-lg mb-4">Quick Actions</h3>
             <div className="space-y-2">
               <button className="w-full px-4 py-2 bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white rounded-lg text-sm font-medium transition-all">

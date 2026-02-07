@@ -259,7 +259,7 @@ const StatCard = ({
   }[color]
 
   return (
-    <div className={cn('glass-card p-6 rounded-lg border border-white/10', bgColor)}>
+    <div className={cn('glass-card p-6 rounded-lg', bgColor)}>
       <div className="flex items-start justify-between">
         <div className="flex-1">
           <p className="text-white/60 text-sm mb-2">{label}</p>
@@ -308,7 +308,7 @@ const AlertCard = ({
   const config = colors[type]
 
   return (
-    <div className={cn('glass-card p-4 rounded-lg border', config.bg, config.border)}>
+    <div className={cn('glass-card p-4 rounded-lg', config.bg, config.border)}>
       <div className="flex gap-3">
         <AlertTriangle className={cn('w-5 h-5 flex-shrink-0 mt-0.5', config.icon)} />
         <div className="flex-1 min-w-0">
@@ -385,7 +385,7 @@ const ScenarioForm = ({
     return (
       <button
         onClick={() => setFormOpen(true)}
-        className="w-full glass-card p-4 rounded-lg border border-white/10 hover:border-white/20 transition-colors flex items-center gap-2 text-white/60 hover:text-white"
+        className="w-full glass-card p-4 rounded-lg hover:border-white/20 transition-colors flex items-center gap-2 text-white/60 hover:text-white"
       >
         <Plus className="w-4 h-4" />
         Create Scenario
@@ -394,7 +394,7 @@ const ScenarioForm = ({
   }
 
   return (
-    <form onSubmit={handleSubmit} className="glass-card p-6 rounded-lg border border-white/10 space-y-4">
+    <form onSubmit={handleSubmit} className="glass-card p-6 rounded-lg space-y-4">
       <input
         type="text"
         placeholder="Scenario name"
@@ -471,7 +471,7 @@ const ProjectionDetails = ({ projections }: { projections: ProjectionMonth[] }) 
         return (
           <div
             key={idx}
-            className="glass-card p-3 rounded-lg border border-white/10 hover:border-white/20 transition-colors"
+            className="glass-card p-3 rounded-lg hover:border-white/20 transition-colors"
           >
             <div className="flex items-center justify-between mb-2">
               <span className="text-white font-semibold text-sm">
@@ -591,7 +591,7 @@ export default function CashflowPage() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-950 text-white p-8">
+    <div className="text-white p-6 lg:p-8">
       {/* Header */}
       <div className="mb-8">
         <div className="flex items-center gap-3 mb-2">
@@ -676,7 +676,7 @@ export default function CashflowPage() {
             {/* Left Column - Charts & Projections */}
             <div className="col-span-12 lg:col-span-8 space-y-6">
               {/* Cash Flow Chart */}
-              <div className="glass-card p-6 rounded-lg border border-white/10">
+              <div className="glass-card p-6 rounded-lg">
                 <div className="flex items-center gap-2 mb-4">
                   <Calculator className="w-5 h-5 text-blue-400" />
                   <h2 className="text-xl font-bold text-white">
@@ -690,7 +690,7 @@ export default function CashflowPage() {
               </div>
 
               {/* Projections Section */}
-              <div className="glass-card p-6 rounded-lg border border-white/10">
+              <div className="glass-card p-6 rounded-lg">
                 <div className="flex items-center gap-2 mb-4">
                   <Calendar className="w-5 h-5 text-emerald-400" />
                   <h2 className="text-xl font-bold text-white">
@@ -701,7 +701,7 @@ export default function CashflowPage() {
               </div>
 
               {/* Scenario Builder */}
-              <div className="glass-card p-6 rounded-lg border border-white/10">
+              <div className="glass-card p-6 rounded-lg">
                 <div className="flex items-center gap-2 mb-4">
                   <Plus className="w-5 h-5 text-purple-400" />
                   <h2 className="text-xl font-bold text-white">
@@ -726,7 +726,7 @@ export default function CashflowPage() {
                       {cashflowData.scenarios.slice(0, 3).map((scenario) => (
                         <div
                           key={scenario.id}
-                          className="glass-card p-3 rounded-lg border border-white/10 flex items-start justify-between"
+                          className="glass-card p-3 rounded-lg flex items-start justify-between"
                         >
                           <div className="flex-1">
                             <p className="text-white text-sm font-semibold">
@@ -748,7 +748,7 @@ export default function CashflowPage() {
             {/* Right Column - Metrics & Alerts */}
             <div className="col-span-12 lg:col-span-4 space-y-6">
               {/* Quick Metrics */}
-              <div className="glass-card p-6 rounded-lg border border-white/10">
+              <div className="glass-card p-6 rounded-lg">
                 <h2 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
                   <Activity className="w-5 h-5 text-blue-400" />
                   Quick Metrics
@@ -791,7 +791,7 @@ export default function CashflowPage() {
               </div>
 
               {/* Upcoming Items */}
-              <div className="glass-card p-6 rounded-lg border border-white/10">
+              <div className="glass-card p-6 rounded-lg">
                 <h2 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
                   <Calendar className="w-5 h-5 text-amber-400" />
                   Upcoming Items
@@ -804,7 +804,7 @@ export default function CashflowPage() {
               </div>
 
               {/* Alerts */}
-              <div className="glass-card p-6 rounded-lg border border-white/10">
+              <div className="glass-card p-6 rounded-lg">
                 <h2 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
                   <AlertTriangle className="w-5 h-5 text-amber-400" />
                   Alerts & Insights
@@ -817,7 +817,7 @@ export default function CashflowPage() {
               </div>
 
               {/* Data Freshness */}
-              <div className="glass-card p-4 rounded-lg border border-white/10 text-center">
+              <div className="glass-card p-4 rounded-lg text-center">
                 <p className="text-white/60 text-xs">
                   Last updated {new Date(cashflowData.lastUpdated).toLocaleTimeString('en-AU')}
                 </p>

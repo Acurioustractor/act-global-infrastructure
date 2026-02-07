@@ -22,6 +22,7 @@ import {
   BarChart3,
   FolderKanban,
   Building2,
+  Landmark,
 } from 'lucide-react'
 import { DonutChart, ProgressBar, BarChart } from '@tremor/react'
 import {
@@ -527,6 +528,66 @@ export default function FinancePage() {
               <div className="flex items-center gap-2 text-xs text-white/40">
                 <span className="px-2 py-0.5 rounded bg-green-500/15 text-green-400">P&L</span>
                 <span className="px-2 py-0.5 rounded bg-blue-500/15 text-blue-400">Cash Flow</span>
+              </div>
+            </div>
+          </Link>
+
+          {/* Cash Flow Forecast Widget */}
+          <Link href="/finance/cashflow">
+            <div className="glass-card p-5 hover:border-emerald-500/50 transition-colors cursor-pointer group">
+              <div className="flex items-center justify-between mb-3">
+                <h3 className="font-semibold text-white flex items-center gap-2">
+                  <Wallet className="h-5 w-5 text-emerald-400" />
+                  Cash Flow Forecast
+                </h3>
+                <ChevronRight className="h-4 w-4 text-white/40 group-hover:text-white/70 transition-colors" />
+              </div>
+              <p className="text-sm text-white/50 mb-2">
+                Burn rate, runway & projections
+              </p>
+              <div className="flex items-center gap-2 text-xs text-white/40">
+                <span className="px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-400">Forecast</span>
+                <span className="px-2 py-0.5 rounded bg-blue-500/15 text-blue-400">Scenarios</span>
+              </div>
+            </div>
+          </Link>
+
+          {/* Revenue Streams Widget */}
+          <Link href="/finance/revenue">
+            <div className="glass-card p-5 hover:border-blue-500/50 transition-colors cursor-pointer group">
+              <div className="flex items-center justify-between mb-3">
+                <h3 className="font-semibold text-white flex items-center gap-2">
+                  <BarChart3 className="h-5 w-5 text-blue-400" />
+                  Revenue Streams
+                </h3>
+                <ChevronRight className="h-4 w-4 text-white/40 group-hover:text-white/70 transition-colors" />
+              </div>
+              <p className="text-sm text-white/50 mb-2">
+                Income by project & pipeline
+              </p>
+              <div className="flex items-center gap-2 text-xs text-white/40">
+                <span className="px-2 py-0.5 rounded bg-blue-500/15 text-blue-400">Streams</span>
+                <span className="px-2 py-0.5 rounded bg-purple-500/15 text-purple-400">Pipeline</span>
+              </div>
+            </div>
+          </Link>
+
+          {/* Property Payoff Widget */}
+          <Link href="/finance/debt">
+            <div className="glass-card p-5 hover:border-amber-500/50 transition-colors cursor-pointer group">
+              <div className="flex items-center justify-between mb-3">
+                <h3 className="font-semibold text-white flex items-center gap-2">
+                  <Landmark className="h-5 w-5 text-amber-400" />
+                  Property Payoff
+                </h3>
+                <ChevronRight className="h-4 w-4 text-white/40 group-hover:text-white/70 transition-colors" />
+              </div>
+              <p className="text-sm text-white/50 mb-2">
+                Mortgage tracking & scenarios
+              </p>
+              <div className="flex items-center gap-2 text-xs text-white/40">
+                <span className="px-2 py-0.5 rounded bg-amber-500/15 text-amber-400">Equity</span>
+                <span className="px-2 py-0.5 rounded bg-green-500/15 text-green-400">Offset</span>
               </div>
             </div>
           </Link>

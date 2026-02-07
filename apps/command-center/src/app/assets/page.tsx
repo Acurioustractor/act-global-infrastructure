@@ -174,7 +174,7 @@ export default function AssetsPage() {
   const occupancyRate = totalCapacity > 0 ? (totalOccupancy / totalCapacity) * 100 : 0
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 p-8">
+    <div className="p-6 lg:p-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8">
@@ -189,7 +189,7 @@ export default function AssetsPage() {
 
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-          <div className="glass-card p-6 rounded-lg border border-white/10 bg-white/5 backdrop-blur">
+          <div className="glass-card p-5">
             <div className="flex items-start justify-between">
               <div>
                 <p className="text-gray-400 text-sm font-medium mb-2">Total Asset Value</p>
@@ -201,7 +201,7 @@ export default function AssetsPage() {
             </div>
           </div>
 
-          <div className="glass-card p-6 rounded-lg border border-white/10 bg-white/5 backdrop-blur">
+          <div className="glass-card p-5">
             <div className="flex items-start justify-between">
               <div>
                 <p className="text-gray-400 text-sm font-medium mb-2">Assets Needing Attention</p>
@@ -214,7 +214,7 @@ export default function AssetsPage() {
             </div>
           </div>
 
-          <div className="glass-card p-6 rounded-lg border border-white/10 bg-white/5 backdrop-blur">
+          <div className="glass-card p-5">
             <div className="flex items-start justify-between">
               <div>
                 <p className="text-gray-400 text-sm font-medium mb-2">Upcoming Maintenance</p>
@@ -227,7 +227,7 @@ export default function AssetsPage() {
             </div>
           </div>
 
-          <div className="glass-card p-6 rounded-lg border border-white/10 bg-white/5 backdrop-blur">
+          <div className="glass-card p-5">
             <div className="flex items-start justify-between">
               <div>
                 <p className="text-gray-400 text-sm font-medium mb-2">Lodging Capacity</p>
@@ -241,11 +241,11 @@ export default function AssetsPage() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
           {/* Main Content */}
-          <div className="lg:col-span-2 space-y-8">
+          <div className="col-span-12 lg:col-span-8 space-y-6">
             {/* Zone Map */}
-            <div className="glass-card p-6 rounded-lg border border-white/10 bg-white/5 backdrop-blur">
+            <div className="glass-card p-6">
               <h2 className="text-xl font-bold text-white mb-6">Asset Distribution by Zone</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {Object.entries(ZONES).map(([zoneId, zone]) => {
@@ -292,7 +292,7 @@ export default function AssetsPage() {
             </div>
 
             {/* Asset List */}
-            <div className="glass-card p-6 rounded-lg border border-white/10 bg-white/5 backdrop-blur">
+            <div className="glass-card p-6">
               <div className="flex items-center justify-between mb-6">
                 <h2 className="text-xl font-bold text-white">Asset Inventory</h2>
                 <button
@@ -488,7 +488,7 @@ export default function AssetsPage() {
             </div>
 
             {/* Maintenance Schedule */}
-            <div className="glass-card p-6 rounded-lg border border-white/10 bg-white/5 backdrop-blur">
+            <div className="glass-card p-6">
               <h2 className="text-xl font-bold text-white mb-6">Upcoming Maintenance</h2>
               {assetsData.maintenanceTasks.length === 0 ? (
                 <div className="py-8 text-center">
@@ -553,7 +553,7 @@ export default function AssetsPage() {
             </div>
 
             {/* Lodgings */}
-            <div className="glass-card p-6 rounded-lg border border-white/10 bg-white/5 backdrop-blur">
+            <div className="glass-card p-6">
               <h2 className="text-xl font-bold text-white mb-6">Lodging Facilities</h2>
               {assetsData.lodgings.length === 0 ? (
                 <div className="py-8 text-center">
@@ -623,9 +623,9 @@ export default function AssetsPage() {
           </div>
 
           {/* Right Sidebar */}
-          <div className="space-y-6">
+          <div className="col-span-12 lg:col-span-4 space-y-6">
             {/* Asset Value by Zone */}
-            <div className="glass-card p-6 rounded-lg border border-white/10 bg-white/5 backdrop-blur">
+            <div className="glass-card p-6">
               <h3 className="text-lg font-bold text-white mb-6">Value by Zone</h3>
               <div className="space-y-4">
                 {Object.entries(ZONES).map(([zoneId, zone]) => {
@@ -657,7 +657,7 @@ export default function AssetsPage() {
             </div>
 
             {/* Condition Overview */}
-            <div className="glass-card p-6 rounded-lg border border-white/10 bg-white/5 backdrop-blur">
+            <div className="glass-card p-6">
               <h3 className="text-lg font-bold text-white mb-6">Asset Condition</h3>
               <div className="space-y-4">
                 {Object.entries(CONDITION_CONFIG).map(([condition, config]) => {
@@ -690,7 +690,7 @@ export default function AssetsPage() {
             </div>
 
             {/* Occupancy Overview */}
-            <div className="glass-card p-6 rounded-lg border border-white/10 bg-white/5 backdrop-blur">
+            <div className="glass-card p-6">
               <h3 className="text-lg font-bold text-white mb-4">Lodging Occupancy</h3>
               <div className="space-y-4">
                 <div className="flex items-center justify-between py-3 border-b border-white/10">
@@ -717,7 +717,7 @@ export default function AssetsPage() {
             </div>
 
             {/* Quick Stats */}
-            <div className="glass-card p-6 rounded-lg border border-white/10 bg-white/5 backdrop-blur">
+            <div className="glass-card p-6">
               <h3 className="text-lg font-bold text-white mb-4">Summary</h3>
               <div className="space-y-4">
                 <div className="flex items-center justify-between py-3 border-b border-white/10">

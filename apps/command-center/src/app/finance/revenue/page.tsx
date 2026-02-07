@@ -247,7 +247,7 @@ export default function RevenueStreamsPage() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 p-8 flex items-center justify-center">
+      <div className="flex items-center justify-center min-h-screen p-8">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-500 mx-auto mb-4" />
           <p className="text-gray-400">Loading revenue data...</p>
@@ -257,7 +257,7 @@ export default function RevenueStreamsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 p-8">
+    <div className="p-6 lg:p-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8">
@@ -272,7 +272,7 @@ export default function RevenueStreamsPage() {
 
         {/* Empty State */}
         {revenueData.isEmpty && (
-          <div className="rounded-lg border border-white/10 bg-white/5 backdrop-blur p-12 text-center">
+          <div className="glass-card p-12 text-center">
             <AlertCircle className="w-12 h-12 text-amber-400 mx-auto mb-4" />
             <h2 className="text-xl font-bold text-white mb-2">No revenue data yet</h2>
             <p className="text-gray-400 mb-6">Run Xero sync to populate revenue streams and entries</p>
@@ -286,7 +286,7 @@ export default function RevenueStreamsPage() {
           <>
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-          <div className="glass-card p-6 rounded-lg border border-white/10 bg-white/5 backdrop-blur">
+          <div className="glass-card p-6 rounded-lg">
             <div className="flex items-start justify-between">
               <div>
                 <p className="text-gray-400 text-sm font-medium mb-2">Total Monthly Revenue</p>
@@ -298,7 +298,7 @@ export default function RevenueStreamsPage() {
             </div>
           </div>
 
-          <div className="glass-card p-6 rounded-lg border border-white/10 bg-white/5 backdrop-blur">
+          <div className="glass-card p-6 rounded-lg">
             <div className="flex items-start justify-between">
               <div>
                 <p className="text-gray-400 text-sm font-medium mb-2">Fastest Growing Stream</p>
@@ -313,7 +313,7 @@ export default function RevenueStreamsPage() {
             </div>
           </div>
 
-          <div className="glass-card p-6 rounded-lg border border-white/10 bg-white/5 backdrop-blur">
+          <div className="glass-card p-6 rounded-lg">
             <div className="flex items-start justify-between">
               <div>
                 <p className="text-gray-400 text-sm font-medium mb-2">Streams On Target</p>
@@ -326,7 +326,7 @@ export default function RevenueStreamsPage() {
             </div>
           </div>
 
-          <div className="glass-card p-6 rounded-lg border border-white/10 bg-white/5 backdrop-blur">
+          <div className="glass-card p-6 rounded-lg">
             <div className="flex items-start justify-between">
               <div>
                 <p className="text-gray-400 text-sm font-medium mb-2">Pipeline Value</p>
@@ -340,11 +340,11 @@ export default function RevenueStreamsPage() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
           {/* Main Content */}
-          <div className="lg:col-span-2 space-y-8">
+          <div className="lg:col-span-8 space-y-6">
             {/* Monthly Revenue Chart */}
-            <div className="glass-card p-6 rounded-lg border border-white/10 bg-white/5 backdrop-blur">
+            <div className="glass-card p-6 rounded-lg">
               <h2 className="text-xl font-bold text-white mb-6">Revenue by Stream (Last 6 Months)</h2>
               <div className="space-y-4">
                 {revenueData.monthlyData.map((monthData) => {
@@ -395,7 +395,7 @@ export default function RevenueStreamsPage() {
             </div>
 
             {/* Revenue Streams Cards */}
-            <div className="glass-card p-6 rounded-lg border border-white/10 bg-white/5 backdrop-blur">
+            <div className="glass-card p-6 rounded-lg">
               <h2 className="text-xl font-bold text-white mb-6">Stream Performance</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {revenueData.streams.map((stream) => {
@@ -452,7 +452,7 @@ export default function RevenueStreamsPage() {
             </div>
 
             {/* Fundraising Pipeline */}
-            <div className="glass-card p-6 rounded-lg border border-white/10 bg-white/5 backdrop-blur">
+            <div className="glass-card p-6 rounded-lg">
               <div className="flex items-center justify-between mb-6">
                 <h2 className="text-xl font-bold text-white">Fundraising Pipeline</h2>
                 <button
@@ -578,9 +578,9 @@ export default function RevenueStreamsPage() {
           </div>
 
           {/* Right Sidebar */}
-          <div className="space-y-6">
+          <div className="lg:col-span-4 space-y-6">
             {/* Revenue Mix */}
-            <div className="glass-card p-6 rounded-lg border border-white/10 bg-white/5 backdrop-blur">
+            <div className="glass-card p-6 rounded-lg">
               <h3 className="text-lg font-bold text-white mb-6">Revenue Mix</h3>
               <div className="space-y-4">
                 {revenueData.streams.map((stream) => {
@@ -607,7 +607,7 @@ export default function RevenueStreamsPage() {
             </div>
 
             {/* Growth Insights */}
-            <div className="glass-card p-6 rounded-lg border border-white/10 bg-white/5 backdrop-blur">
+            <div className="glass-card p-6 rounded-lg">
               <h3 className="text-lg font-bold text-white mb-4">Fastest Growing Stream</h3>
               <div className="space-y-3">
                 <div className="flex items-center justify-between py-2 px-3 rounded bg-emerald-500/10">
@@ -621,7 +621,7 @@ export default function RevenueStreamsPage() {
             </div>
 
             {/* Quick Stats */}
-            <div className="glass-card p-6 rounded-lg border border-white/10 bg-white/5 backdrop-blur">
+            <div className="glass-card p-6 rounded-lg">
               <h3 className="text-lg font-bold text-white mb-4">Key Metrics</h3>
               <div className="space-y-4">
                 <div className="flex items-center justify-between py-3 border-b border-white/10">

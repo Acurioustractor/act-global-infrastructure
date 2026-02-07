@@ -147,7 +147,7 @@ export default function BusinessDevPage() {
   const totalSpent = metrics.totalRDSpend
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 p-8">
+    <div className="p-6 lg:p-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8">
@@ -160,7 +160,7 @@ export default function BusinessDevPage() {
 
         {/* Stat Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-          <div className="glass-card p-6 border border-white/10 rounded-lg bg-white/5 text-white">
+          <div className="glass-card p-5 text-white">
             <div className="flex items-center justify-between mb-2">
               <span className="text-gray-300">Active Initiatives</span>
               <Target className="w-4 h-4 text-blue-400" />
@@ -169,7 +169,7 @@ export default function BusinessDevPage() {
             <p className="text-sm text-gray-400 mt-1">Across all stages</p>
           </div>
 
-          <div className="glass-card p-6 border border-white/10 rounded-lg bg-white/5 text-white">
+          <div className="glass-card p-5 text-white">
             <div className="flex items-center justify-between mb-2">
               <span className="text-gray-300">R&D Investment</span>
               <TrendingUp className="w-4 h-4 text-green-400" />
@@ -178,7 +178,7 @@ export default function BusinessDevPage() {
             <p className="text-sm text-gray-400 mt-1">Allocated this quarter</p>
           </div>
 
-          <div className="glass-card p-6 border border-white/10 rounded-lg bg-white/5 text-white">
+          <div className="glass-card p-5 text-white">
             <div className="flex items-center justify-between mb-2">
               <span className="text-gray-300">Revenue Impact</span>
               <DollarSign className="w-4 h-4 text-amber-400" />
@@ -187,7 +187,7 @@ export default function BusinessDevPage() {
             <p className="text-sm text-gray-400 mt-1">Expected within 12 months</p>
           </div>
 
-          <div className="glass-card p-6 border border-white/10 rounded-lg bg-white/5 text-white">
+          <div className="glass-card p-5 text-white">
             <div className="flex items-center justify-between mb-2">
               <span className="text-gray-300">Experiments Running</span>
               <FlaskConical className="w-4 h-4 text-cyan-400" />
@@ -202,7 +202,7 @@ export default function BusinessDevPage() {
           {/* Left Content - 8 cols */}
           <div className="col-span-12 lg:col-span-8 space-y-6">
             {/* Initiative Pipeline - Kanban */}
-            <div className="glass-card p-6 border border-white/10 rounded-lg bg-white/5">
+            <div className="glass-card p-6">
               <h2 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
                 <BarChart3 className="w-5 h-5 text-amber-400" />
                 Initiative Pipeline
@@ -277,7 +277,7 @@ export default function BusinessDevPage() {
             </div>
 
             {/* Revenue Impact Tracker */}
-            <div className="glass-card p-6 border border-white/10 rounded-lg bg-white/5">
+            <div className="glass-card p-6">
               <h2 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
                 <TrendingUp className="w-5 h-5 text-green-400" />
                 12-Month Revenue Projection
@@ -320,7 +320,7 @@ export default function BusinessDevPage() {
             </div>
 
             {/* Experiment Log */}
-            <div className="glass-card p-6 border border-white/10 rounded-lg bg-white/5">
+            <div className="glass-card p-6">
               <h2 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
                 <FlaskConical className="w-5 h-5 text-cyan-400" />
                 Active Experiments
@@ -388,7 +388,7 @@ export default function BusinessDevPage() {
             </div>
 
             {/* New Initiative Form */}
-            <div className="glass-card p-6 border border-white/10 rounded-lg bg-white/5">
+            <div className="glass-card p-6">
               <button
                 onClick={() => setExpandForm(!expandForm)}
                 className="w-full flex items-center justify-between text-white font-semibold hover:text-amber-400 transition-colors"
@@ -497,7 +497,7 @@ export default function BusinessDevPage() {
           {/* Right Sidebar - 4 cols */}
           <div className="col-span-12 lg:col-span-4 space-y-6">
             {/* Type Distribution */}
-            <div className="glass-card p-6 border border-white/10 rounded-lg bg-white/5">
+            <div className="glass-card p-6">
               <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
                 <Award className="w-5 h-5 text-purple-400" />
                 Initiative Types
@@ -515,7 +515,7 @@ export default function BusinessDevPage() {
             </div>
 
             {/* Investment Summary */}
-            <div className="glass-card p-6 border border-white/10 rounded-lg bg-white/5">
+            <div className="glass-card p-6">
               <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
                 <DollarSign className="w-5 h-5 text-green-400" />
                 Budget Status
@@ -546,7 +546,7 @@ export default function BusinessDevPage() {
             </div>
 
             {/* Key Learnings */}
-            <div className="glass-card p-6 border border-white/10 rounded-lg bg-white/5">
+            <div className="glass-card p-6">
               <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
                 <Lightbulb className="w-5 h-5 text-yellow-400" />
                 Key Learnings
@@ -563,7 +563,7 @@ export default function BusinessDevPage() {
             </div>
 
             {/* Quick Actions */}
-            <div className="glass-card p-6 border border-white/10 rounded-lg bg-white/5">
+            <div className="glass-card p-6">
               <h3 className="text-lg font-bold text-white mb-4">Quick Actions</h3>
               <div className="space-y-3">
                 <button className="w-full px-4 py-2 rounded-lg bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-300 border border-cyan-500/30 font-semibold text-sm transition-all flex items-center justify-center gap-2">

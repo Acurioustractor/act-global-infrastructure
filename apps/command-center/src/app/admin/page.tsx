@@ -71,8 +71,8 @@ export default function AdminPage() {
 
   const StatCard = ({ label, value, icon: Icon, highlight }: { label: string; value: string | number; icon: any; highlight?: boolean }) => (
     <div className={cn(
-      'glass-card p-6 border bg-white/5',
-      highlight ? 'border-red-500/30 bg-red-500/10' : 'border-white/10'
+      'glass-card p-5',
+      highlight ? 'border-red-500/30 bg-red-500/10' : ''
     )}>
       <div className="flex items-start justify-between">
         <div>
@@ -144,7 +144,7 @@ export default function AdminPage() {
   const firstDayOfWeek = 3 // Wednesday
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 p-8">
+    <div className="p-6 lg:p-8">
       {/* Header */}
       <div className="mb-8">
         <div className="flex items-center gap-3 mb-2">
@@ -155,7 +155,7 @@ export default function AdminPage() {
       </div>
 
       {/* Stat Cards */}
-      <div className="grid grid-cols-4 gap-6 mb-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
         <StatCard
           label="Items Due This Month"
           value={complianceData.itemsDueThisMonth}
@@ -180,11 +180,11 @@ export default function AdminPage() {
       </div>
 
       {/* Main Content */}
-      <div className="grid grid-cols-8 gap-8 mb-8">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Left Column */}
-        <div className="col-span-5 space-y-6">
+        <div className="col-span-12 lg:col-span-8 space-y-6">
           {/* Compliance Calendar */}
-          <div className="glass-card p-6 border border-white/10 bg-white/5">
+          <div className="glass-card p-6">
             <h2 className="text-white font-semibold text-lg mb-6">Compliance Calendar - February 2024</h2>
 
             <div className="grid grid-cols-7 gap-2 mb-4">
@@ -244,7 +244,7 @@ export default function AdminPage() {
           </div>
 
           {/* Items List */}
-          <div className="glass-card p-6 border border-white/10 bg-white/5">
+          <div className="glass-card p-6">
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-white font-semibold text-lg">Compliance Items</h2>
               <div className="flex gap-2">
@@ -340,7 +340,7 @@ export default function AdminPage() {
           </div>
 
           {/* Document Tracker */}
-          <div className="glass-card p-6 border border-white/10 bg-white/5">
+          <div className="glass-card p-6">
             <h2 className="text-white font-semibold text-lg mb-6">Document Tracker</h2>
             {complianceData.documents.length === 0 ? (
               <div className="py-8 text-center">
@@ -404,9 +404,9 @@ export default function AdminPage() {
         </div>
 
         {/* Right Sidebar */}
-        <div className="col-span-3 space-y-6">
+        <div className="col-span-12 lg:col-span-4 space-y-6">
           {/* Category Breakdown */}
-          <div className="glass-card p-6 border border-white/10 bg-white/5">
+          <div className="glass-card p-6">
             <h3 className="text-white font-semibold text-lg mb-6">Category Breakdown</h3>
             <div className="space-y-4">
               {Object.entries(categoryBreakdown).map(([category, count]) => (
@@ -430,7 +430,7 @@ export default function AdminPage() {
           </div>
 
           {/* Upcoming Deadlines */}
-          <div className="glass-card p-6 border border-white/10 bg-white/5">
+          <div className="glass-card p-6">
             <h3 className="text-white font-semibold text-lg mb-6">Next 5 Deadlines</h3>
             <div className="space-y-3">
               {upcomingDeadlines.map((item: ComplianceItem) => {
@@ -458,7 +458,7 @@ export default function AdminPage() {
 
           {/* Overdue Items */}
           {complianceData.overdueItems > 0 && (
-            <div className="glass-card p-6 border border-red-500/30 bg-red-500/10">
+            <div className="glass-card p-6 border-red-500/30 bg-red-500/5">
               <div className="flex items-start gap-3 mb-4">
                 <AlertCircle className="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5" />
                 <h3 className="text-white font-semibold text-lg">Overdue Action Items</h3>
@@ -480,7 +480,7 @@ export default function AdminPage() {
           )}
 
           {/* Quick Add Form */}
-          <div className="glass-card p-6 border border-white/10 bg-white/5">
+          <div className="glass-card p-6">
             <button
               onClick={() => setShowAddForm(!showAddForm)}
               className="w-full px-4 py-3 bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white rounded-lg font-medium transition-all flex items-center justify-center gap-2"
