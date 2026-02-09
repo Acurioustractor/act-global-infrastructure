@@ -317,8 +317,8 @@ export default function RevenueStreamsPage() {
             <div className="flex items-start justify-between">
               <div>
                 <p className="text-gray-400 text-sm font-medium mb-2">Streams On Target</p>
-                <p className="text-2xl font-bold text-white">{revenueData.streamsOnTarget} / 6</p>
-                <p className="text-amber-400 text-sm mt-1">{Math.round((revenueData.streamsOnTarget / 6) * 100)}% on track</p>
+                <p className="text-2xl font-bold text-white">{revenueData.streamsOnTarget} / {revenueData.streams.length}</p>
+                <p className="text-amber-400 text-sm mt-1">{revenueData.streams.length > 0 ? Math.round((revenueData.streamsOnTarget / revenueData.streams.length) * 100) : 0}% on track</p>
               </div>
               <div className="p-3 rounded-lg bg-amber-500/20">
                 <Target className="w-5 h-5 text-amber-400" />
@@ -331,7 +331,7 @@ export default function RevenueStreamsPage() {
               <div>
                 <p className="text-gray-400 text-sm font-medium mb-2">Pipeline Value</p>
                 <p className="text-2xl font-bold text-white">{formatter.format(revenueData.pipelineValue)}</p>
-                <p className="text-purple-400 text-sm mt-1">4 opportunities</p>
+                <p className="text-purple-400 text-sm mt-1">{revenueData.pipelineItems.length} opportunities</p>
               </div>
               <div className="p-3 rounded-lg bg-purple-500/20">
                 <AlertCircle className="w-5 h-5 text-purple-400" />
@@ -360,7 +360,7 @@ export default function RevenueStreamsPage() {
                       </div>
                       <div className="flex h-8 rounded-lg overflow-hidden gap-0.5 bg-slate-800/50">
                         {revenueData.streams.map((stream) => {
-                          const value = monthData[stream.id] as number || 0
+                          const value = (monthData[stream.name] || monthData[stream.id]) as number || 0
                           const percentage = (value / maxMonthlyValue) * 100
                           return (
                             <div

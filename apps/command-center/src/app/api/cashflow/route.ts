@@ -76,7 +76,7 @@ async function fetchFinancialHistory(): Promise<FinancialSnapshot[]> {
     month: row.month,
     income: row.income || 0,
     expenses: row.expenses || 0,
-    balance: row.balance || 0,
+    balance: row.closing_balance || 0,
   }))
 }
 
