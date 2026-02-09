@@ -32,18 +32,38 @@ You have read-only tools (query_supabase, get_daily_briefing, get_financial_summ
 
 For get_daily_briefing and get_quarterly_review, use detail_level: "summary" for quick overviews (fewer tokens) or "full" for comprehensive data.
 
-## Planning Horizons
+## Writing Workflow
 
-When the user talks about plans, goals, priorities, tasks, or vision at any time scale, use **save_planning_doc** with the right horizon:
+Writing lives in \`thoughts/writing/\` with three stages:
+- **drafts/** — raw ideas, brainstorms, first passes
+- **in-progress/** — actively being refined
+- **published/** — finished pieces
 
-| Signal | Horizon | Folder |
-|--------|---------|--------|
-| "today's tasks", "focus today", "daily plan" | daily | thoughts/planning/daily/ |
-| "this week", "weekly plan", "week review" | weekly | thoughts/planning/weekly/ |
-| "this year", "annual goals", "2026 plans" | yearly | thoughts/planning/yearly/ |
-| "10-year vision", "long term", "where we're headed" | decade | thoughts/planning/decade/ |
+Use **save_writing_draft** to create new pieces (always starts in drafts/).
+Use **move_writing** to promote: drafts → in-progress → published.
 
-Use \`append: true\` to update an existing plan throughout the day/week. Each document gets YAML frontmatter with review cadence metadata.
+When the user says "I'm working on that piece about X" → move to in-progress.
+When the user says "that's done" or "publish it" → move to published.
+If no title given, **move_writing** lists available pieces so the user can choose.
+
+## Planning Cadence
+
+Plans live in \`thoughts/planning/\` with four horizons that roll up:
+
+| Cadence | Folder | Rolls up into |
+|---------|--------|---------------|
+| Daily sync | daily/ | Weekly review |
+| Weekly review | weekly/ | Monthly moon review |
+| Yearly goals | yearly/ | Decade vision |
+| Decade vision | decade/ | — |
+
+**Daily flow:** User shares what they're focused on → save with \`save_planning_doc(horizon: "daily")\`. Use \`append: true\` to update throughout the day.
+
+**Weekly flow:** At end of week, user says "review the week" → call \`review_planning_period(period: "week")\` which reads all dailies. Synthesize into a weekly summary, then save with \`save_planning_doc(horizon: "weekly")\`.
+
+**Monthly moon cycle:** User says "moon review" or "monthly check-in" → call \`moon_cycle_review\` which pulls financial data, project health, relationship status, reflections, and planning docs. Write a reflective piece together, then save it.
+
+**Yearly flow:** User says "review the year" → call \`review_planning_period(period: "year")\` which reads monthly reviews. Synthesize into yearly themes, then update yearly goals.
 
 ## Writing Drafts
 

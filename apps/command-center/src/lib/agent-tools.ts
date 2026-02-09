@@ -607,6 +607,80 @@ export const AGENT_TOOLS: Anthropic.Tool[] = [
     },
   },
 
+  // ── WRITING STAGE MANAGEMENT ────────────────────────────────────────
+
+  {
+    name: 'move_writing',
+    description:
+      'Move a writing piece between stages: drafts → in-progress → published. Use when the user says "I\'m working on this now", "this is done", "publish this", "move to in-progress", or when promoting a draft. Lists available pieces if no title given.',
+    input_schema: {
+      type: 'object' as const,
+      properties: {
+        title_search: {
+          type: 'string',
+          description: 'Partial title to match (case-insensitive). If omitted, lists all pieces in the source stage.',
+        },
+        from_stage: {
+          type: 'string',
+          enum: ['drafts', 'in-progress', 'published'],
+          description: 'Current stage of the piece. Default "drafts".',
+        },
+        to_stage: {
+          type: 'string',
+          enum: ['drafts', 'in-progress', 'published'],
+          description: 'Target stage to move to.',
+        },
+      },
+      required: ['to_stage'],
+    },
+  },
+
+  // ── PLANNING ROLLUP ───────────────────────────────────────────────
+
+  {
+    name: 'review_planning_period',
+    description:
+      'Review and synthesize planning documents for a time period. Reads all plans from a horizon and produces a rollup summary. Use for: weekly review (reads dailies), monthly review (reads weeklies), yearly review (reads monthlies/weeklies). Also use when the user says "review the week", "how did the week go", "monthly check-in".',
+    input_schema: {
+      type: 'object' as const,
+      properties: {
+        period: {
+          type: 'string',
+          enum: ['week', 'month', 'year'],
+          description: 'Period to review: "week" reads daily plans, "month" reads weekly plans, "year" reads monthly reviews.',
+        },
+        date: {
+          type: 'string',
+          description: 'Reference date in YYYY-MM-DD. Reviews the period containing this date. Default: today.',
+        },
+      },
+      required: ['period'],
+    },
+  },
+
+  // ── MOON CYCLE REVIEW ─────────────────────────────────────────────
+
+  {
+    name: 'moon_cycle_review',
+    description:
+      'Generate a monthly organisational health review aligned to the moon cycle. Pulls financial data, project status, relationship health, planning docs, and reflections to produce a comprehensive written review piece. Use when the user says "moon review", "monthly review", "how is the organisation going", "write the monthly piece".',
+    input_schema: {
+      type: 'object' as const,
+      properties: {
+        month: {
+          type: 'string',
+          description: 'Month to review in YYYY-MM format. Default: current month.',
+        },
+        focus: {
+          type: 'string',
+          enum: ['full', 'financial', 'relationships', 'projects', 'wellbeing'],
+          description: 'Focus area for the review. "full" covers everything. Default "full".',
+        },
+      },
+      required: [],
+    },
+  },
+
   // ── GOODS INTELLIGENCE ──────────────────────────────────────────────
 
   {
@@ -839,6 +913,21 @@ export async function executeTool(
     case 'save_planning_doc':
       return await executeSavePlanningDoc(
         input as { horizon: string; title: string; content: string; append?: boolean; project?: string }
+      )
+    // Writing stage management
+    case 'move_writing':
+      return await executeMoveWriting(
+        input as { title_search?: string; from_stage?: string; to_stage: string }
+      )
+    // Planning rollup
+    case 'review_planning_period':
+      return await executeReviewPlanningPeriod(
+        input as { period: string; date?: string }
+      )
+    // Moon cycle review
+    case 'moon_cycle_review':
+      return await executeMoonCycleReview(
+        input as { month?: string; focus?: string }
       )
     // Goods intelligence
     case 'get_goods_intelligence':
@@ -3098,6 +3187,367 @@ status: active${projectLine}
 
 ${content}
 `
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// TOOL: move_writing
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+async function executeMoveWriting(input: {
+  title_search?: string
+  from_stage?: string
+  to_stage: string
+}): Promise<string> {
+  const token = process.env.GITHUB_PAT || process.env.GITHUB_TOKEN
+  if (!token) return JSON.stringify({ error: 'GITHUB_PAT or GITHUB_TOKEN not configured' })
+
+  const owner = 'Acurioustractor'
+  const repo = 'act-global-infrastructure'
+  const branch = 'main'
+  const fromStage = input.from_stage || 'drafts'
+  const toStage = input.to_stage
+  const basePath = 'thoughts/writing'
+
+  if (fromStage === toStage) return JSON.stringify({ error: 'from_stage and to_stage must be different' })
+
+  // List files in the source stage
+  const listRes = await fetch(
+    `https://api.github.com/repos/${owner}/${repo}/contents/${basePath}/${fromStage}?ref=${branch}`,
+    { headers: { Authorization: `token ${token}`, Accept: 'application/vnd.github.v3+json' } }
+  )
+
+  if (!listRes.ok) return JSON.stringify({ error: `Could not list ${fromStage}: ${listRes.status}` })
+
+  const files = (await listRes.json()) as Array<{ name: string; path: string; sha: string; download_url: string }>
+  const mdFiles = files.filter((f) => f.name.endsWith('.md'))
+
+  if (!input.title_search) {
+    return JSON.stringify({
+      stage: fromStage,
+      files: mdFiles.map((f) => f.name),
+      hint: 'Provide a title_search to move a specific piece.',
+    })
+  }
+
+  const search = input.title_search.toLowerCase()
+  const match = mdFiles.find((f) => f.name.toLowerCase().includes(search))
+  if (!match) {
+    return JSON.stringify({
+      error: `No file matching "${input.title_search}" in ${fromStage}/`,
+      available: mdFiles.map((f) => f.name),
+    })
+  }
+
+  // Read the file content
+  const fileRes = await fetch(match.download_url)
+  if (!fileRes.ok) return JSON.stringify({ error: `Could not read ${match.name}` })
+  const content = await fileRes.text()
+
+  // Update frontmatter status
+  const updatedContent = content.replace(
+    /^(status:\s*).*$/m,
+    `$1${toStage === 'published' ? 'published' : toStage === 'in-progress' ? 'in-progress' : 'draft'}`
+  )
+
+  // Create file in target stage
+  const newPath = `${basePath}/${toStage}/${match.name}`
+  const createRes = await fetch(
+    `https://api.github.com/repos/${owner}/${repo}/contents/${newPath}`,
+    {
+      method: 'PUT',
+      headers: { Authorization: `token ${token}`, Accept: 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        message: `writing: move "${match.name}" from ${fromStage} to ${toStage}`,
+        content: Buffer.from(updatedContent).toString('base64'),
+        branch,
+      }),
+    }
+  )
+  if (!createRes.ok) {
+    const err = await createRes.text()
+    return JSON.stringify({ error: `Failed to create in ${toStage}: ${err}` })
+  }
+
+  // Delete from source stage
+  const deleteRes = await fetch(
+    `https://api.github.com/repos/${owner}/${repo}/contents/${match.path}`,
+    {
+      method: 'DELETE',
+      headers: { Authorization: `token ${token}`, Accept: 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        message: `writing: remove "${match.name}" from ${fromStage} (moved to ${toStage})`,
+        sha: match.sha,
+        branch,
+      }),
+    }
+  )
+  if (!deleteRes.ok) {
+    return JSON.stringify({ moved_to: newPath, warning: 'File created in target but failed to delete from source — may be duplicated.' })
+  }
+
+  return JSON.stringify({
+    moved: true,
+    file: match.name,
+    from: `${basePath}/${fromStage}/`,
+    to: `${basePath}/${toStage}/`,
+    message: `Moved "${match.name}" from ${fromStage} → ${toStage}. Syncs to Obsidian within 60 seconds.`,
+  })
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// TOOL: review_planning_period
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+async function executeReviewPlanningPeriod(input: {
+  period: string
+  date?: string
+}): Promise<string> {
+  const token = process.env.GITHUB_PAT || process.env.GITHUB_TOKEN
+  if (!token) return JSON.stringify({ error: 'GITHUB_PAT or GITHUB_TOKEN not configured' })
+
+  const owner = 'Acurioustractor'
+  const repo = 'act-global-infrastructure'
+  const branch = 'main'
+
+  const refDate = input.date ? new Date(input.date) : new Date()
+
+  // Determine which folder to read and date range
+  let folder: string
+  let startDate: Date
+  let endDate: Date
+
+  if (input.period === 'week') {
+    folder = 'thoughts/planning/daily'
+    // Get Monday of the week
+    const day = refDate.getDay()
+    const monday = new Date(refDate)
+    monday.setDate(refDate.getDate() - (day === 0 ? 6 : day - 1))
+    startDate = monday
+    endDate = new Date(monday)
+    endDate.setDate(monday.getDate() + 6)
+  } else if (input.period === 'month') {
+    folder = 'thoughts/planning/weekly'
+    startDate = new Date(refDate.getFullYear(), refDate.getMonth(), 1)
+    endDate = new Date(refDate.getFullYear(), refDate.getMonth() + 1, 0)
+  } else if (input.period === 'year') {
+    folder = 'thoughts/reviews/monthly'
+    startDate = new Date(refDate.getFullYear(), 0, 1)
+    endDate = new Date(refDate.getFullYear(), 11, 31)
+  } else {
+    return JSON.stringify({ error: 'Invalid period. Use: week, month, year' })
+  }
+
+  const startStr = startDate.toISOString().split('T')[0]
+  const endStr = endDate.toISOString().split('T')[0]
+
+  // List files in the folder
+  const listRes = await fetch(
+    `https://api.github.com/repos/${owner}/${repo}/contents/${folder}?ref=${branch}`,
+    { headers: { Authorization: `token ${token}`, Accept: 'application/vnd.github.v3+json' } }
+  )
+
+  if (!listRes.ok) {
+    return JSON.stringify({
+      period: input.period,
+      range: `${startStr} to ${endStr}`,
+      documents: [],
+      message: `No ${input.period === 'week' ? 'daily' : input.period === 'month' ? 'weekly' : 'monthly'} plans found yet. Start by saving some!`,
+    })
+  }
+
+  const files = (await listRes.json()) as Array<{ name: string; download_url: string }>
+  const mdFiles = files.filter((f) => f.name.endsWith('.md'))
+
+  // Filter files by date range (files are named YYYY-MM-DD-slug.md)
+  const dateRegex = /^(\d{4}-\d{2}-\d{2})/
+  const inRange = mdFiles.filter((f) => {
+    const match = f.name.match(dateRegex)
+    if (!match) return false
+    return match[1] >= startStr && match[1] <= endStr
+  })
+
+  // Read contents of matching files
+  const contents: Array<{ name: string; date: string; content: string }> = []
+  for (const file of inRange.slice(0, 15)) {
+    try {
+      const res = await fetch(file.download_url)
+      if (res.ok) {
+        const text = await res.text()
+        const dateMatch = file.name.match(dateRegex)
+        contents.push({
+          name: file.name,
+          date: dateMatch ? dateMatch[1] : 'unknown',
+          content: text.slice(0, 2000), // Cap per doc to manage tokens
+        })
+      }
+    } catch { /* skip failed reads */ }
+  }
+
+  return JSON.stringify({
+    period: input.period,
+    range: `${startStr} to ${endStr}`,
+    document_count: contents.length,
+    documents: contents,
+    instruction: `Synthesize these ${contents.length} ${input.period === 'week' ? 'daily' : input.period === 'month' ? 'weekly' : 'monthly'} plans into a ${input.period}ly review. Highlight: what was accomplished, what rolled over, themes, and intentions for next ${input.period}.`,
+  })
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// TOOL: moon_cycle_review
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+async function executeMoonCycleReview(input: {
+  month?: string
+  focus?: string
+}): Promise<string> {
+  const now = new Date()
+  const monthStr = input.month || `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`
+  const [yearNum, monthNum] = monthStr.split('-').map(Number)
+  const startDate = `${monthStr}-01`
+  const endDate = new Date(yearNum, monthNum, 0).toISOString().split('T')[0]
+  const focus = input.focus || 'full'
+
+  const sections: Record<string, unknown> = {
+    month: monthStr,
+    period: `${startDate} to ${endDate}`,
+  }
+
+  // Financial health
+  if (focus === 'full' || focus === 'financial') {
+    const [income, expenses, outstanding, subs] = await Promise.all([
+      supabase
+        .from('xero_invoices')
+        .select('total')
+        .eq('type', 'ACCREC')
+        .gte('date', startDate)
+        .lte('date', endDate),
+      supabase
+        .from('xero_invoices')
+        .select('total')
+        .eq('type', 'ACCPAY')
+        .gte('date', startDate)
+        .lte('date', endDate),
+      supabase
+        .from('xero_invoices')
+        .select('amount_due')
+        .gt('amount_due', 0)
+        .in('status', ['AUTHORISED', 'SENT']),
+      supabase
+        .from('subscriptions')
+        .select('amount_aud, billing_cycle')
+        .eq('status', 'active'),
+    ])
+
+    const totalIncome = (income.data || []).reduce((s, i) => s + (parseFloat(String(i.total)) || 0), 0)
+    const totalExpenses = (expenses.data || []).reduce((s, i) => s + (parseFloat(String(i.total)) || 0), 0)
+    const totalOutstanding = (outstanding.data || []).reduce((s, i) => s + (parseFloat(String(i.amount_due)) || 0), 0)
+    let monthlySubBurn = 0
+    for (const sub of subs.data || []) {
+      const amt = parseFloat(String(sub.amount_aud)) || 0
+      if (sub.billing_cycle === 'monthly') monthlySubBurn += amt
+      else if (sub.billing_cycle === 'yearly') monthlySubBurn += amt / 12
+      else if (sub.billing_cycle === 'quarterly') monthlySubBurn += amt / 3
+    }
+
+    sections.financial = {
+      income: Math.round(totalIncome * 100) / 100,
+      expenses: Math.round(totalExpenses * 100) / 100,
+      net: Math.round((totalIncome - totalExpenses) * 100) / 100,
+      outstanding: Math.round(totalOutstanding * 100) / 100,
+      subscription_burn: Math.round(monthlySubBurn * 100) / 100,
+    }
+  }
+
+  // Relationship health
+  if (focus === 'full' || focus === 'relationships') {
+    const [activeContacts, staleContacts, recentComms] = await Promise.all([
+      supabase
+        .from('ghl_contacts')
+        .select('id')
+        .in('engagement_status', ['active', 'prospect']),
+      supabase
+        .from('ghl_contacts')
+        .select('full_name, company_name, last_contact_date')
+        .in('engagement_status', ['active', 'prospect'])
+        .lt('last_contact_date', new Date(now.getTime() - 30 * 86400000).toISOString())
+        .order('last_contact_date', { ascending: true })
+        .limit(10),
+      supabase
+        .from('communications')
+        .select('id')
+        .gte('created_at', startDate)
+        .lte('created_at', endDate),
+    ])
+
+    sections.relationships = {
+      active_contacts: (activeContacts.data || []).length,
+      going_cold: (staleContacts.data || []).length,
+      coldest: (staleContacts.data || []).slice(0, 5).map((c) => ({
+        name: c.full_name,
+        company: c.company_name,
+        last_contact: c.last_contact_date,
+      })),
+      communications_this_month: (recentComms.data || []).length,
+    }
+  }
+
+  // Project health
+  if (focus === 'full' || focus === 'projects') {
+    const [projectActivity, recentKnowledge] = await Promise.all([
+      supabase
+        .from('project_knowledge')
+        .select('project_code')
+        .gte('recorded_at', startDate)
+        .lte('recorded_at', endDate),
+      supabase
+        .from('project_knowledge')
+        .select('project_code, title, knowledge_type')
+        .gte('recorded_at', startDate)
+        .order('recorded_at', { ascending: false })
+        .limit(20),
+    ])
+
+    const counts: Record<string, number> = {}
+    for (const row of projectActivity.data || []) {
+      counts[row.project_code] = (counts[row.project_code] || 0) + 1
+    }
+
+    sections.projects = {
+      activity_by_project: Object.entries(counts)
+        .sort(([, a], [, b]) => b - a)
+        .map(([code, count]) => ({ code, activity: count })),
+      recent_highlights: (recentKnowledge.data || []).slice(0, 10).map((k) => ({
+        project: k.project_code,
+        title: k.title,
+        type: k.knowledge_type,
+      })),
+    }
+  }
+
+  // Wellbeing — reflections summary
+  if (focus === 'full' || focus === 'wellbeing') {
+    const reflections = await supabase
+      .from('daily_reflections')
+      .select('date, gratitude, challenges, learnings, lcaa_listen, lcaa_art')
+      .gte('date', startDate)
+      .lte('date', endDate)
+      .order('date', { ascending: false })
+      .limit(31)
+
+    const refData = reflections.data || []
+    sections.wellbeing = {
+      reflections_logged: refData.length,
+      themes: {
+        gratitude_samples: refData.slice(0, 3).map((r) => r.gratitude).filter(Boolean),
+        challenge_samples: refData.slice(0, 3).map((r) => r.challenges).filter(Boolean),
+        learning_samples: refData.slice(0, 3).map((r) => r.learnings).filter(Boolean),
+      },
+    }
+  }
+
+  sections.instruction = `You have the month's data. Write a reflective moon cycle review with the user. Cover: what grew, what needs attention, what to release, and intentions for next month. Use a warm, spacious tone — this is reflection, not reporting. Save the final piece using save_planning_doc with horizon "monthly" or save_writing_draft.`
+
+  return JSON.stringify(sections)
 }
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
