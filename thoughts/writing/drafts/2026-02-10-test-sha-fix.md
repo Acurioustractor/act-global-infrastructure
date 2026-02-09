@@ -1,9 +1,9 @@
 ---
 title: "Test SHA Fix"
-created: 2026-02-09T20:45:20Z
+created: 2026-02-09T20:45:49Z
 status: draft
 ---
 
 # Test SHA Fix
 
-First save — should succeed.
+Third save — WITH SHA (fixed behavior). This overwrites correctly\!
