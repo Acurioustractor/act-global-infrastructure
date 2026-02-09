@@ -1,12 +1,8 @@
 import type { NextConfig } from 'next'
-import { resolve } from 'path'
 
 const nextConfig: NextConfig = {
   // Enable React strict mode for better development experience
   reactStrictMode: true,
-
-  // Include mono-repo root so serverless functions can access shared config
-  outputFileTracingRoot: resolve(__dirname, '../../'),
 
   // Optimize images
   images: {

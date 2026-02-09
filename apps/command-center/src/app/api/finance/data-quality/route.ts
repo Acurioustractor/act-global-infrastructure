@@ -1,25 +1,6 @@
 import { NextResponse } from 'next/server'
 import { supabase } from '@/lib/supabase'
-import { readFileSync, existsSync } from 'fs'
-import { join, resolve } from 'path'
-
-// Lazy-load config (avoid build-time file reads on Vercel)
-let _projectCodesConfig: any = null
-function getProjectCodesConfig() {
-  if (_projectCodesConfig) return _projectCodesConfig
-  const candidates = [
-    join(process.cwd(), '../../config/project-codes.json'),
-    join(process.cwd(), 'config/project-codes.json'),
-    resolve(process.cwd(), '../config/project-codes.json'),
-  ]
-  for (const p of candidates) {
-    if (existsSync(p)) {
-      _projectCodesConfig = JSON.parse(readFileSync(p, 'utf8'))
-      return _projectCodesConfig
-    }
-  }
-  throw new Error(`project-codes.json not found. Tried: ${candidates.join(', ')}`)
-}
+import projectCodesConfig from '@/config/project-codes.json'
 
 export async function GET() {
   try {
@@ -145,7 +126,7 @@ export async function POST(request: Request) {
 }
 
 function buildProjectKeywordMap() {
-  const projects = getProjectCodesConfig().projects
+  const projects = (projectCodesConfig as any).projects
   const map: Array<{ code: string; name: string; keywords: string[] }> = []
 
   for (const [code, project] of Object.entries(projects) as [string, any][]) {
