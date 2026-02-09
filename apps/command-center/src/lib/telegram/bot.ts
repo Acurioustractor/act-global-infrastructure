@@ -320,7 +320,7 @@ async function processMessage(chatId: number, userMessage: string): Promise<stri
     const response = await client.messages.create({
       model: MODEL,
       max_tokens: MAX_TOKENS,
-      system: AGENT_SYSTEM_PROMPT,
+      system: [{ type: 'text', text: AGENT_SYSTEM_PROMPT, cache_control: { type: 'ephemeral' } }],
       tools: AGENT_TOOLS,
       messages,
     })

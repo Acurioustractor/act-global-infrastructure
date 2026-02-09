@@ -74,6 +74,11 @@ export const AGENT_TOOLS: Anthropic.Tool[] = [
           type: 'number',
           description: 'Number of days to look back for recent activity. Default 7.',
         },
+        detail_level: {
+          type: 'string',
+          enum: ['summary', 'full'],
+          description: 'Level of detail: "summary" returns counts and headlines only (fewer tokens), "full" returns all items. Default "full".',
+        },
       },
       required: [],
     },
@@ -386,6 +391,11 @@ export const AGENT_TOOLS: Anthropic.Tool[] = [
           description:
             'Quarter in format "YYYY-Q1" through "YYYY-Q4". Q1=Jul-Sep (Australian FY), Q2=Oct-Dec, Q3=Jan-Mar, Q4=Apr-Jun. Default: current quarter.',
         },
+        detail_level: {
+          type: 'string',
+          enum: ['summary', 'full'],
+          description: 'Level of detail: "summary" returns headline numbers and issues only (fewer tokens), "full" returns all breakdowns. Default "full".',
+        },
       },
       required: [],
     },
@@ -562,6 +572,41 @@ export const AGENT_TOOLS: Anthropic.Tool[] = [
     },
   },
 
+  // ── PLANNING TOOLS ─────────────────────────────────────────────────
+
+  {
+    name: 'save_planning_doc',
+    description:
+      'Save a planning document at the right time horizon — daily tasks, weekly plans, yearly goals, or decade visions. Use when the user talks about plans, goals, intentions, priorities, reviews, or retrospectives at any time scale. The document is committed to git and syncs to Obsidian.',
+    input_schema: {
+      type: 'object' as const,
+      properties: {
+        horizon: {
+          type: 'string',
+          enum: ['daily', 'weekly', 'yearly', 'decade'],
+          description: 'Planning horizon: "daily" for today\'s tasks/focus, "weekly" for this week\'s plan/retro, "yearly" for annual goals/themes, "decade" for 10-year vision.',
+        },
+        title: {
+          type: 'string',
+          description: 'Title for the document. For daily: include the date. For weekly: include week number or date range. For yearly: include the year. For decade: a vision theme.',
+        },
+        content: {
+          type: 'string',
+          description: 'The planning content in markdown format.',
+        },
+        append: {
+          type: 'boolean',
+          description: 'If true, append to existing document with this title slug instead of creating new. Useful for updating daily plans throughout the day. Default false.',
+        },
+        project: {
+          type: 'string',
+          description: 'ACT ecosystem project this planning relates to, if specific to one project.',
+        },
+      },
+      required: ['horizon', 'title', 'content'],
+    },
+  },
+
   // ── GOODS INTELLIGENCE ──────────────────────────────────────────────
 
   {
@@ -723,7 +768,7 @@ export async function executeTool(
     case 'query_supabase':
       return await executeQuerySupabase(input as { sql: string; description: string })
     case 'get_daily_briefing':
-      return await executeGetDailyBriefing(input as { lookback_days?: number })
+      return await executeGetDailyBriefing(input as { lookback_days?: number; detail_level?: string })
     case 'get_financial_summary':
       return await executeGetFinancialSummary(input as { days?: number })
     case 'search_contacts':
@@ -759,7 +804,7 @@ export async function executeTool(
       return await executeGetPendingReceipts(input as { limit?: number })
     // Financial review tools
     case 'get_quarterly_review':
-      return await executeGetQuarterlyReview(input as { quarter?: string })
+      return await executeGetQuarterlyReview(input as { quarter?: string; detail_level?: string })
     case 'get_xero_transactions':
       return await executeGetXeroTransactions(
         input as { type?: string; vendor?: string; project_code?: string; start_date?: string; end_date?: string; min_amount?: number; limit?: number }
@@ -789,6 +834,11 @@ export async function executeTool(
     case 'save_writing_draft':
       return await executeSaveWritingDraft(
         input as { title: string; content: string; append?: boolean; project?: string; tags?: string[] }
+      )
+    // Planning tools
+    case 'save_planning_doc':
+      return await executeSavePlanningDoc(
+        input as { horizon: string; title: string; content: string; append?: boolean; project?: string }
       )
     // Goods intelligence
     case 'get_goods_intelligence':
@@ -907,6 +957,7 @@ async function fallbackQuery(sql: string, description: string): Promise<string> 
 
 async function executeGetDailyBriefing(input: {
   lookback_days?: number
+  detail_level?: string
 }): Promise<string> {
   const days = input.lookback_days || 7
   const now = new Date()
@@ -965,6 +1016,23 @@ async function executeGetDailyBriefing(input: {
   for (const row of projects.data || []) {
     const code = row.project_code
     projectCounts[code] = (projectCounts[code] || 0) + 1
+  }
+
+  const isSummary = input.detail_level === 'summary'
+
+  if (isSummary) {
+    return JSON.stringify({
+      generated_at: now.toISOString(),
+      overdue_actions: (overdue.data || []).length,
+      upcoming_followups: (upcoming.data || []).length,
+      recent_meetings: (meetings.data || []).length,
+      stale_relationships: (relationships.data || []).length,
+      active_projects: Object.keys(projectCounts).length,
+      top_projects: Object.entries(projectCounts)
+        .sort(([, a], [, b]) => b - a)
+        .slice(0, 5)
+        .map(([code, count]) => `${code}(${count})`).join(', '),
+    })
   }
 
   return JSON.stringify({
@@ -1946,7 +2014,7 @@ function getQuarterDates(quarterStr?: string): { label: string; start: string; e
   }
 }
 
-async function executeGetQuarterlyReview(input: { quarter?: string }): Promise<string> {
+async function executeGetQuarterlyReview(input: { quarter?: string; detail_level?: string }): Promise<string> {
   const qDates = getQuarterDates(input.quarter)
 
   try {
@@ -2276,6 +2344,22 @@ async function executeGetQuarterlyReview(input: { quarter?: string }): Promise<s
           detail: `Total expenses increased ${expenseChangePct}% vs previous quarter`,
         })
       }
+    }
+
+    // Summary mode: headline numbers + issues only (~200 tokens vs ~2000)
+    if (input.detail_level === 'summary') {
+      return JSON.stringify({
+        quarter: qDates.label,
+        income: Math.round(totalIncome * 100) / 100,
+        expenses: Math.round(totalExpenses * 100) / 100,
+        net_profit: Math.round(netProfit * 100) / 100,
+        vs_prev: { income_pct: incomeChangePct, expenses_pct: expenseChangePct },
+        gst_payable: estimatedGstPayable,
+        outstanding: Math.round(totalOutstanding * 100) / 100,
+        pending_receipts: pendingCount,
+        subscriptions_monthly: Math.round(monthlyTotal * 100) / 100,
+        issues,
+      })
     }
 
     return JSON.stringify({
@@ -2861,6 +2945,153 @@ function buildNewDraft(title: string, content: string, created: string, projectL
 title: "${title}"
 created: ${created}
 status: draft${projectLine}${tagLine}
+---
+
+# ${title}
+
+${content}
+`
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// TOOL: save_planning_doc
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+async function executeSavePlanningDoc(input: {
+  horizon: string
+  title: string
+  content: string
+  append?: boolean
+  project?: string
+}): Promise<string> {
+  const { horizon, title, content, append, project } = input
+
+  const token = process.env.GITHUB_PAT || process.env.GITHUB_TOKEN
+  if (!token) {
+    return JSON.stringify({ error: 'GITHUB_PAT or GITHUB_TOKEN not configured' })
+  }
+
+  const validHorizons = ['daily', 'weekly', 'yearly', 'decade']
+  if (!validHorizons.includes(horizon)) {
+    return JSON.stringify({ error: `Invalid horizon "${horizon}". Use: ${validHorizons.join(', ')}` })
+  }
+
+  const owner = 'Acurioustractor'
+  const repo = 'act-global-infrastructure'
+  const branch = 'main'
+
+  // Generate filename
+  const slug = title
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-')
+    .slice(0, 60)
+  const date = new Date().toISOString().split('T')[0]
+  const filename = `${date}-${slug}.md`
+  const filepath = `thoughts/planning/${horizon}/${filename}`
+
+  // Build frontmatter
+  const now = new Date().toISOString()
+  const projectLine = project ? `\nproject: "${project}"` : ''
+  const horizonTemplates: Record<string, string> = {
+    daily: 'type: daily-plan\nreview_cadence: daily',
+    weekly: 'type: weekly-plan\nreview_cadence: weekly',
+    yearly: 'type: yearly-goals\nreview_cadence: quarterly',
+    decade: 'type: decade-vision\nreview_cadence: yearly',
+  }
+
+  let fileContent: string
+  let commitMessage: string
+  let sha: string | undefined
+
+  if (append) {
+    // Try to find existing file by slug
+    try {
+      const searchRes = await fetch(
+        `https://api.github.com/repos/${owner}/${repo}/contents/thoughts/planning/${horizon}`,
+        { headers: { Authorization: `token ${token}`, Accept: 'application/vnd.github.v3+json' } }
+      )
+      if (searchRes.ok) {
+        const files = await searchRes.json()
+        const match = (files as { name: string; url: string }[]).find((f) => f.name.endsWith(`${slug}.md`))
+        if (match) {
+          const fileRes = await fetch(match.url, {
+            headers: { Authorization: `token ${token}`, Accept: 'application/vnd.github.v3+json' },
+          })
+          if (fileRes.ok) {
+            const fileData = await fileRes.json()
+            sha = fileData.sha
+            const existing = Buffer.from(fileData.content, 'base64').toString('utf-8')
+            fileContent = `${existing}\n\n---\n\n*Updated ${now}*\n\n${content}`
+            commitMessage = `planning(${horizon}): update "${title}"`
+          } else {
+            fileContent = buildPlanningDoc(title, content, now, horizon, horizonTemplates[horizon], projectLine)
+            commitMessage = `planning(${horizon}): new "${title}"`
+          }
+        } else {
+          fileContent = buildPlanningDoc(title, content, now, horizon, horizonTemplates[horizon], projectLine)
+          commitMessage = `planning(${horizon}): new "${title}"`
+        }
+      } else {
+        fileContent = buildPlanningDoc(title, content, now, horizon, horizonTemplates[horizon], projectLine)
+        commitMessage = `planning(${horizon}): new "${title}"`
+      }
+    } catch {
+      fileContent = buildPlanningDoc(title, content, now, horizon, horizonTemplates[horizon], projectLine)
+      commitMessage = `planning(${horizon}): new "${title}"`
+    }
+  } else {
+    fileContent = buildPlanningDoc(title, content, now, horizon, horizonTemplates[horizon], projectLine)
+    commitMessage = `planning(${horizon}): new "${title}"`
+  }
+
+  // Commit via GitHub API
+  try {
+    const body: Record<string, unknown> = {
+      message: commitMessage,
+      content: Buffer.from(fileContent).toString('base64'),
+      branch,
+    }
+    if (sha) body.sha = sha
+
+    const putRes = await fetch(
+      `https://api.github.com/repos/${owner}/${repo}/contents/${filepath}`,
+      {
+        method: 'PUT',
+        headers: {
+          Authorization: `token ${token}`,
+          Accept: 'application/vnd.github.v3+json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(body),
+      }
+    )
+
+    if (!putRes.ok) {
+      const err = await putRes.text()
+      return JSON.stringify({ error: `GitHub API error: ${putRes.status} ${err}` })
+    }
+
+    const result = await putRes.json()
+    return JSON.stringify({
+      saved: true,
+      horizon,
+      path: filepath,
+      url: result.content?.html_url,
+      message: `${horizon} plan "${title}" saved to ${filepath}. Syncs to Obsidian within 60 seconds.`,
+    })
+  } catch (err) {
+    return JSON.stringify({ error: `Failed to save planning doc: ${(err as Error).message}` })
+  }
+}
+
+function buildPlanningDoc(title: string, content: string, created: string, horizon: string, typeBlock: string, projectLine: string): string {
+  return `---
+title: "${title}"
+created: ${created}
+${typeBlock}
+status: active${projectLine}
 ---
 
 # ${title}

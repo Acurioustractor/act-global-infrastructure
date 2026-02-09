@@ -99,6 +99,34 @@ Before implementing ANY external service integration, **STOP and audit first**:
 
 4 mailboxes: `benjamin@act.place`, `nicholas@act.place`, `hi@act.place`, `accounts@act.place`
 
+## Database (Schema-First Rule)
+
+Before writing ANY code that touches the database:
+1. **Query the actual schema first** — use `mcp__supabase__execute_sql` with `SELECT column_name, data_type FROM information_schema.columns WHERE table_name = '<table>'` or read the relevant migration file
+2. **Never assume column names** from context, grep results, or memory — verify them
+3. **Check for existing views** (`v_` prefix) before writing complex joins — there may already be a view for what you need
+
+## Testing & Deployment
+
+- **Never tell the user to test** until the fix is deployed/running in the target environment
+- After making changes, verify: TypeScript compiles clean → build passes → deployment completed → env vars set → THEN report ready to test
+- For Vercel deployments, check `vercel ls` or the deployment URL before declaring success
+
+## Model Routing (Token Efficiency)
+
+When using the Task tool with sub-agents:
+- Use `model: "haiku"` for exploration, file finding, pattern matching (10-20x cheaper)
+- Use `model: "sonnet"` for implementation, refactoring, and code generation
+- Reserve Opus for architectural decisions and complex multi-file plans
+- Don't duplicate sub-agent work in the main context — trust agent output
+
+## Phase-at-a-Time Execution
+
+For multi-phase plans, feed one phase at a time rather than the full plan upfront:
+- Each phase should have specific files + acceptance criteria
+- Run `npx tsc --noEmit` between phases
+- Report phase status before proceeding to next
+
 ## Bias Towards Action
 
 - **Default to implementation, not planning.** Unless the user explicitly asks for a plan, start building.
