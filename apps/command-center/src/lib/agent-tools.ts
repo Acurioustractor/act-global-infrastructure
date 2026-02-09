@@ -3175,6 +3175,18 @@ async function executeSavePlanningDoc(input: {
   } else {
     fileContent = buildPlanningDoc(title, content, now, horizon, horizonTemplates[horizon], projectLine)
     commitMessage = `planning(${horizon}): new "${title}"`
+    // Check if file already exists to get SHA (avoids 422 conflict)
+    try {
+      const existRes = await fetch(
+        `https://api.github.com/repos/${owner}/${repo}/contents/${filepath}?ref=${branch}`,
+        { headers: { Authorization: `token ${token}`, Accept: 'application/vnd.github.v3+json' } }
+      )
+      if (existRes.ok) {
+        const existData = await existRes.json()
+        sha = existData.sha
+        commitMessage = `planning(${horizon}): overwrite "${title}"`
+      }
+    } catch { /* new file, no sha needed */ }
   }
 
   // Commit via GitHub API
