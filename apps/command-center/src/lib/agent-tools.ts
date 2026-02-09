@@ -1,6 +1,43 @@
 import Anthropic from '@anthropic-ai/sdk'
 import { google } from 'googleapis'
 import { supabase } from './supabase'
+import { readFileSync } from 'fs'
+import { join } from 'path'
+
+// Helper: load project codes from config JSON (works both locally and on Vercel)
+let _projectCodesCache: Record<string, any> | null = null
+async function loadProjectCodes(): Promise<Record<string, any>> {
+  if (_projectCodesCache) return _projectCodesCache
+
+  // Try reading the config file (works locally)
+  try {
+    const configPath = join(process.cwd(), '..', '..', 'config', 'project-codes.json')
+    const raw = readFileSync(configPath, 'utf-8')
+    const parsed = JSON.parse(raw)
+    const result = parsed.projects || {}
+    _projectCodesCache = result
+    return result
+  } catch {
+    // Fallback: query distinct project codes from project_knowledge
+    const { data } = await supabase
+      .from('project_knowledge')
+      .select('project_code, project_name')
+      .not('project_code', 'is', null)
+      .limit(500)
+
+    const projects: Record<string, any> = {}
+    for (const row of data || []) {
+      if (row.project_code && !projects[row.project_code]) {
+        projects[row.project_code] = {
+          name: row.project_name || row.project_code,
+          status: 'active',
+        }
+      }
+    }
+    _projectCodesCache = projects
+    return projects
+  }
+}
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // TOOL DEFINITIONS (Anthropic tool_use format)
@@ -3289,8 +3326,7 @@ async function executeGetProjectHealth(input: {
 
   try {
     // Load project codes config
-    const projectCodesModule = await import('../../../../config/project-codes.json')
-    const allProjects: Record<string, any> = projectCodesModule.default?.projects || projectCodesModule.projects || {}
+    const allProjects: Record<string, any> = await loadProjectCodes()
 
     const codes = project_code
       ? [project_code.toUpperCase()]
