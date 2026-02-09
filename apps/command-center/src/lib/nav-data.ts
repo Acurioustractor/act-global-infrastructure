@@ -29,6 +29,9 @@ import {
   Code2,
   BookOpen,
   Settings,
+  Clock,
+  Calculator,
+  Trophy,
 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 
@@ -113,13 +116,16 @@ export const navStructure: SidebarNavGroup[] = [
         label: 'Finance',
         icon: DollarSign,
         children: [
-          { href: '/finance/cashflow', label: 'Cash Flow', icon: Wallet, color: 'text-emerald-400', bg: 'bg-emerald-500/20' },
-          { href: '/finance/revenue', label: 'Revenue Streams', icon: BarChart3, color: 'text-blue-400', bg: 'bg-blue-500/20' },
-          { href: '/finance/debt', label: 'Property Payoff', icon: Landmark, color: 'text-amber-400', bg: 'bg-amber-500/20' },
+          { href: '/finance/runway', label: 'Runway', icon: Clock, color: 'text-emerald-400', bg: 'bg-emerald-500/20' },
+          { href: '/finance/cashflow', label: 'Cash Flow', icon: Wallet, color: 'text-blue-400', bg: 'bg-blue-500/20' },
+          { href: '/finance/revenue', label: 'Revenue Streams', icon: BarChart3, color: 'text-purple-400', bg: 'bg-purple-500/20' },
+          { href: '/finance/tax', label: 'Tax & BAS', icon: Calculator, color: 'text-amber-400', bg: 'bg-amber-500/20' },
+          { href: '/finance/debt', label: 'Property Payoff', icon: Landmark },
           { href: '/finance/receipts', label: 'Receipts', icon: FileBarChart },
           { href: '/finance/subscriptions', label: 'Subscriptions', icon: DollarSign },
         ],
       },
+      { href: '/grants', label: 'Grants', icon: Trophy, color: 'text-amber-400', bg: 'bg-amber-500/20' },
       { href: '/team', label: 'Team & Resources', icon: Users, color: 'text-cyan-400', bg: 'bg-cyan-500/20' },
       { href: '/assets', label: 'Assets & Property', icon: Building2, color: 'text-orange-400', bg: 'bg-orange-500/20' },
       { href: '/admin', label: 'Compliance', icon: Shield, color: 'text-red-400', bg: 'bg-red-500/20' },

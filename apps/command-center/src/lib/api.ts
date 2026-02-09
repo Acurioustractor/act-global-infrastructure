@@ -1413,6 +1413,8 @@ export interface ProjectFinancials {
   expenses: number
   net: number
   receivable: number
+  budget: number | null
+  budgetUsed: number
   subscriptions: {
     count: number
     monthlyTotal: number
@@ -1423,6 +1425,7 @@ export interface ProjectFinancials {
     date: string
     description: string
     amount: number
+    contactName?: string
   }>
   invoices: Array<{
     id: string
@@ -1431,6 +1434,33 @@ export interface ProjectFinancials {
     total: number
     due: number
     type: string
+    status: string
+  }>
+  grants: Array<{
+    name: string
+    status: string
+    amountRequested: number
+    outcomeAmount: number | null
+    provider: string | null
+  }>
+  monthlyTrend: Array<{
+    month: string
+    income: number
+    expenses: number
+  }>
+  ecosystemActivity: {
+    emailCount: number
+    crmTouches: number
+    contentCount: number
+  }
+  keyStakeholders: Array<{
+    name: string
+    company: string | null
+    role: string | null
+  }>
+  fundraising: Array<{
+    name: string
+    amount: number
     status: string
   }>
 }
@@ -2806,4 +2836,104 @@ export interface ProjectStorytellersResponse {
 
 export async function getProjectStorytellers(project: string) {
   return fetchApi<ProjectStorytellersResponse>(`/api/wiki/project-storytellers?project=${encodeURIComponent(project)}`)
+}
+
+// --- Runway Dashboard ---
+
+export interface RunwayData {
+  runwayMonths: number
+  burnRate: number
+  currentBalance: number
+  diversificationIndex: number
+  restrictedFunds: number
+  unrestrictedFunds: number
+  burnTrend: Array<{ month: string; burn: number; income: number }>
+  grantCliffs: Array<{
+    name: string
+    projectCode: string
+    amount: number
+    expiresAt: string
+    daysRemaining: number
+  }>
+  revenueSources: Array<{ source: string; amount: number; percentage: number }>
+  scenarios: Array<{ name: string; runwayMonths: number; adjustments: Record<string, number> }>
+  fundraisingPipeline: Array<{ name: string; amount: number; status: string; projectCode: string }>
+  lastUpdated: string
+}
+
+export async function getRunwayData() {
+  return fetchApi<RunwayData>('/api/finance/runway')
+}
+
+// --- Grants Pipeline ---
+
+export interface GrantPipelineCard {
+  id: string
+  name: string
+  status: string
+  amount: number
+  outcomeAmount: number | null
+  projectCode: string | null
+  leadContact: string | null
+  submittedAt: string | null
+  provider: string | null
+  deadline: string | null
+  fitScore: number | null
+  url: string | null
+  ghlStage: string | null
+  ghlValue: number | null
+  milestones: any[]
+  notes: string | null
+}
+
+export interface GrantPipelineData {
+  stages: string[]
+  grouped: Record<string, GrantPipelineCard[]>
+}
+
+export async function getGrantsPipeline() {
+  return fetchApi<GrantPipelineData>('/api/grants/pipeline')
+}
+
+export interface GrantMetrics {
+  pipelineValue: number
+  activeCount: number
+  winRate: number
+  totalAwarded: number
+  nextDeadline: string | null
+  nextDeadlineName: string | null
+  upcomingDeadlines: Array<{
+    name: string
+    closesAt: string
+    fitScore: number
+    daysRemaining: number
+  }>
+}
+
+export async function getGrantMetrics() {
+  return fetchApi<GrantMetrics>('/api/grants/metrics')
+}
+
+export async function updateGrantStatus(id: string, status: string) {
+  return fetchApi<any>(`/api/grants/${id}`, {
+    method: 'PATCH',
+    body: JSON.stringify({ status }),
+  })
+}
+
+// --- Tax / BAS ---
+
+export interface TaxData {
+  quarter: string
+  basLabels: Record<string, { label: string; amount: number; description: string }>
+  gstSummary: { collected: number; paid: number; net: number }
+  acncRevenue: Array<{ category: string; amount: number; percentage: number }>
+  acncExpenses: Array<{ category: string; amount: number; percentage: number }>
+  entitySelector: string[]
+  lastUpdated: string
+}
+
+export async function getTaxData(quarter?: string) {
+  const params = quarter ? `?quarter=${quarter}` : ''
+  return fetchApi<TaxData>(`/api/finance/tax${params}`)
 }

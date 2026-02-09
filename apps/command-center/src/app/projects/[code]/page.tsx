@@ -514,6 +514,163 @@ export default function ProjectPage({ params, searchParams }: PageParams) {
                   </div>
                 )}
 
+                {/* Grant Funding */}
+                {financialsData.grants && financialsData.grants.length > 0 && (
+                  <div className="glass-card p-6">
+                    <h2 className="text-lg font-semibold text-white flex items-center gap-2 mb-4">
+                      <FileText className="h-5 w-5 text-amber-400" />
+                      Grant Funding
+                    </h2>
+                    <div className="space-y-2">
+                      {financialsData.grants.map((grant, i) => (
+                        <div key={i} className="flex items-center justify-between py-2 px-3 rounded-lg bg-white/5">
+                          <div className="min-w-0 flex-1">
+                            <span className="text-sm font-medium text-white">{grant.name}</span>
+                            {grant.provider && <span className="text-xs text-white/40 ml-2">{grant.provider}</span>}
+                          </div>
+                          <div className="flex items-center gap-3 flex-shrink-0">
+                            <span className="text-sm text-white/70 tabular-nums">
+                              ${(grant.outcomeAmount || grant.amountRequested).toLocaleString()}
+                            </span>
+                            <span className={cn(
+                              'text-xs px-2 py-0.5 rounded capitalize',
+                              grant.status === 'successful' ? 'bg-green-500/20 text-green-400' :
+                              grant.status === 'submitted' || grant.status === 'under_review' ? 'bg-blue-500/20 text-blue-400' :
+                              'bg-white/10 text-white/60'
+                            )}>
+                              {grant.status.replace('_', ' ')}
+                            </span>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Monthly Trend Chart */}
+                {financialsData.monthlyTrend && financialsData.monthlyTrend.some(m => m.income > 0 || m.expenses > 0) && (
+                  <div className="glass-card p-6">
+                    <h2 className="text-lg font-semibold text-white flex items-center gap-2 mb-4">
+                      <Activity className="h-5 w-5 text-blue-400" />
+                      Monthly Trend
+                    </h2>
+                    <div className="space-y-2">
+                      {financialsData.monthlyTrend.filter(m => m.income > 0 || m.expenses > 0).map((m, i) => {
+                        const maxVal = Math.max(...financialsData.monthlyTrend.map(t => Math.max(t.income, t.expenses)))
+                        const incPct = maxVal > 0 ? (m.income / maxVal) * 100 : 0
+                        const expPct = maxVal > 0 ? (m.expenses / maxVal) * 100 : 0
+                        const [yr, mo] = m.month.split('-')
+                        const label = new Date(parseInt(yr), parseInt(mo) - 1).toLocaleDateString('en-AU', { month: 'short', year: '2-digit' })
+                        return (
+                          <div key={i} className="flex items-center gap-2 text-xs">
+                            <span className="w-14 text-white/40">{label}</span>
+                            <div className="flex-1 flex gap-1">
+                              <div className="h-4 rounded bg-emerald-500/60" style={{ width: `${incPct}%`, minWidth: incPct > 0 ? '2px' : '0' }} />
+                              <div className="h-4 rounded bg-red-500/60" style={{ width: `${expPct}%`, minWidth: expPct > 0 ? '2px' : '0' }} />
+                            </div>
+                            <span className="w-16 text-right text-white/50 tabular-nums">${Math.round(m.income - m.expenses).toLocaleString()}</span>
+                          </div>
+                        )
+                      })}
+                    </div>
+                  </div>
+                )}
+
+                {/* === Project-Specific Deep Widgets === */}
+
+                {/* Harvest (ACT-HV): Grant scenario modeling + staff projections */}
+                {financialsData.projectCode === 'ACT-HV' && (
+                  <div className="glass-card p-6 border border-green-500/20">
+                    <h2 className="text-lg font-semibold text-white flex items-center gap-2 mb-4">
+                      <Apple className="h-5 w-5 text-green-400" />
+                      Harvest Deep View
+                    </h2>
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                      <div className="glass-card-sm p-4 text-center">
+                        <p className="text-xl font-bold text-green-400">$100K</p>
+                        <p className="text-xs text-white/40 mt-1">Grant Target</p>
+                      </div>
+                      <div className="glass-card-sm p-4 text-center">
+                        <p className="text-xl font-bold text-amber-400">$45K</p>
+                        <p className="text-xs text-white/40 mt-1">RAA Grant</p>
+                      </div>
+                      <div className="glass-card-sm p-4 text-center">
+                        <p className="text-xl font-bold text-blue-400">$26K/yr</p>
+                        <p className="text-xs text-white/40 mt-1">Staff (Susie)</p>
+                      </div>
+                    </div>
+                    <div className="mt-4 space-y-2">
+                      {financialsData.grants?.filter(g => g.status === 'successful').map((g, i) => (
+                        <div key={i} className="flex justify-between items-center py-1.5 px-3 rounded bg-green-500/10">
+                          <span className="text-sm text-white/70">{g.name}</span>
+                          <span className="text-sm text-green-400 font-medium">${(g.outcomeAmount || g.amountRequested).toLocaleString()}</span>
+                        </div>
+                      ))}
+                      {financialsData.ecosystemActivity && (
+                        <p className="text-xs text-white/40 mt-2">
+                          Storyteller activity: {financialsData.ecosystemActivity.crmTouches} contacts, {financialsData.ecosystemActivity.emailCount} emails
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                )}
+
+                {/* Goods (ACT-GD): Manufacturing costs + content metrics */}
+                {financialsData.projectCode === 'ACT-GD' && (
+                  <div className="glass-card p-6 border border-orange-500/20">
+                    <h2 className="text-lg font-semibold text-white flex items-center gap-2 mb-4">
+                      <ShoppingBag className="h-5 w-5 text-orange-400" />
+                      Goods Deep View
+                    </h2>
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                      <div className="glass-card-sm p-4 text-center">
+                        <p className="text-xl font-bold text-orange-400">
+                          {financialsData.ecosystemActivity?.contentCount || 0}
+                        </p>
+                        <p className="text-xs text-white/40 mt-1">Content Library</p>
+                      </div>
+                      <div className="glass-card-sm p-4 text-center">
+                        <p className="text-xl font-bold text-red-400">
+                          ${(financialsData.recentTransactions
+                            .filter(tx => tx.contactName?.toLowerCase().includes('defy'))
+                            .reduce((s, tx) => s + Math.abs(tx.amount), 0) / 1000).toFixed(1)}K
+                        </p>
+                        <p className="text-xs text-white/40 mt-1">Defy Mfg Costs</p>
+                      </div>
+                      <div className="glass-card-sm p-4 text-center">
+                        <p className="text-xl font-bold text-blue-400">
+                          {financialsData.revenue > 0 && financialsData.grants?.some(g => g.status === 'successful')
+                            ? `${Math.round((financialsData.revenue / (financialsData.revenue + financialsData.grants.filter(g => g.status === 'successful').reduce((s, g) => s + (g.outcomeAmount || 0), 0))) * 100)}%`
+                            : '0%'}
+                        </p>
+                        <p className="text-xs text-white/40 mt-1">Earned vs Grant</p>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* Farm: Infrastructure + capex/opex */}
+                {(code === 'the-farm' || financialsData.projectCode === 'ACT-FM') && (
+                  <div className="glass-card p-6 border border-amber-500/20">
+                    <h2 className="text-lg font-semibold text-white flex items-center gap-2 mb-4">
+                      <Wheat className="h-5 w-5 text-amber-400" />
+                      Farm Deep View
+                    </h2>
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="glass-card-sm p-4 text-center">
+                        <p className="text-xl font-bold text-amber-400">$30K</p>
+                        <p className="text-xs text-white/40 mt-1">Infrastructure Allocation</p>
+                      </div>
+                      <div className="glass-card-sm p-4 text-center">
+                        <p className="text-xl font-bold text-blue-400">
+                          {financialsData.recentTransactions.length}
+                        </p>
+                        <p className="text-xs text-white/40 mt-1">Transactions</p>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
                 {/* Recent Transactions */}
                 {financialsData.recentTransactions.length > 0 && (
                   <div className="glass-card p-6">
@@ -547,10 +704,40 @@ export default function ProjectPage({ params, searchParams }: PageParams) {
               </div>
             )}
           </div>
-          {/* Right column - reuse sidebar */}
+          {/* Right column - enhanced sidebar */}
           <div className="lg:col-span-4 space-y-6">
-            {/* Budget from Notion if available */}
-            {projectData?.budget && projectData.budget > 0 && (
+            {/* Budget vs Actual */}
+            {financialsData && financialsData.budget && financialsData.budget > 0 && (
+              <div className="glass-card p-5">
+                <h3 className="font-semibold text-white mb-3 flex items-center gap-2">
+                  <BarChart3 className="h-5 w-5 text-indigo-400" />
+                  Budget vs Actual
+                </h3>
+                <div className="space-y-3">
+                  <div className="flex justify-between text-sm">
+                    <span className="text-white/40">Budget</span>
+                    <span className="text-white font-medium">${(financialsData.budget / 1000).toFixed(0)}K</span>
+                  </div>
+                  <div className="w-full h-4 bg-white/10 rounded-full overflow-hidden">
+                    <div
+                      className={cn(
+                        'h-full rounded-full transition-all',
+                        financialsData.budgetUsed > 100 ? 'bg-red-500' :
+                        financialsData.budgetUsed > 80 ? 'bg-amber-500' : 'bg-emerald-500'
+                      )}
+                      style={{ width: `${Math.min(financialsData.budgetUsed, 100)}%` }}
+                    />
+                  </div>
+                  <div className="flex justify-between text-xs text-white/50">
+                    <span>{financialsData.budgetUsed}% used</span>
+                    <span>${((financialsData.budget - financialsData.expenses) / 1000).toFixed(1)}K remaining</span>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Budget from Notion if available (fallback when no API budget) */}
+            {projectData?.budget && projectData.budget > 0 && !(financialsData?.budget && financialsData.budget > 0) && (
               <div className="glass-card p-5">
                 <h3 className="font-semibold text-white mb-3 flex items-center gap-2">
                   <BarChart3 className="h-5 w-5 text-indigo-400" />
@@ -583,6 +770,71 @@ export default function ProjectPage({ params, searchParams }: PageParams) {
                       </div>
                     </div>
                   )}
+                </div>
+              </div>
+            )}
+
+            {/* Ecosystem Activity */}
+            {financialsData?.ecosystemActivity && (
+              <div className="glass-card p-5">
+                <h3 className="font-semibold text-white mb-3 flex items-center gap-2">
+                  <Zap className="h-5 w-5 text-yellow-400" />
+                  Ecosystem Activity
+                </h3>
+                <div className="grid grid-cols-3 gap-3 text-center">
+                  <div>
+                    <p className="text-xl font-bold text-blue-400">{financialsData.ecosystemActivity.emailCount}</p>
+                    <p className="text-xs text-white/40">Emails</p>
+                  </div>
+                  <div>
+                    <p className="text-xl font-bold text-purple-400">{financialsData.ecosystemActivity.crmTouches}</p>
+                    <p className="text-xs text-white/40">CRM</p>
+                  </div>
+                  <div>
+                    <p className="text-xl font-bold text-pink-400">{financialsData.ecosystemActivity.contentCount}</p>
+                    <p className="text-xs text-white/40">Content</p>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Key Stakeholders */}
+            {financialsData?.keyStakeholders && financialsData.keyStakeholders.length > 0 && (
+              <div className="glass-card p-5">
+                <h3 className="font-semibold text-white mb-3 flex items-center gap-2">
+                  <Users className="h-5 w-5 text-cyan-400" />
+                  Key Stakeholders
+                </h3>
+                <div className="space-y-2">
+                  {financialsData.keyStakeholders.slice(0, 8).map((s, i) => (
+                    <div key={i} className="flex items-center gap-2 py-1">
+                      <div className="w-6 h-6 rounded-full bg-white/10 flex items-center justify-center text-xs text-white/60">
+                        {s.name.charAt(0)}
+                      </div>
+                      <div className="min-w-0">
+                        <p className="text-sm text-white/80 truncate">{s.name}</p>
+                        {s.company && <p className="text-xs text-white/40 truncate">{s.company}</p>}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Fundraising */}
+            {financialsData?.fundraising && financialsData.fundraising.length > 0 && (
+              <div className="glass-card p-5">
+                <h3 className="font-semibold text-white mb-3 flex items-center gap-2">
+                  <DollarSign className="h-5 w-5 text-emerald-400" />
+                  Fundraising
+                </h3>
+                <div className="space-y-2">
+                  {financialsData.fundraising.map((f, i) => (
+                    <div key={i} className="flex items-center justify-between py-1">
+                      <span className="text-sm text-white/70 truncate">{f.name}</span>
+                      <span className="text-sm text-white/60 tabular-nums ml-2">${f.amount.toLocaleString()}</span>
+                    </div>
+                  ))}
                 </div>
               </div>
             )}
