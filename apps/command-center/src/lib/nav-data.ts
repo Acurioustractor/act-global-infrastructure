@@ -32,6 +32,7 @@ import {
   Clock,
   Calculator,
   Trophy,
+  Database,
 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 
@@ -123,6 +124,7 @@ export const navStructure: SidebarNavGroup[] = [
           { href: '/finance/debt', label: 'Property Payoff', icon: Landmark },
           { href: '/finance/receipts', label: 'Receipts', icon: FileBarChart },
           { href: '/finance/subscriptions', label: 'Subscriptions', icon: DollarSign },
+          { href: '/finance/data-quality', label: 'Data Quality', icon: Database, color: 'text-cyan-400', bg: 'bg-cyan-500/20' },
         ],
       },
       { href: '/grants', label: 'Grants', icon: Trophy, color: 'text-amber-400', bg: 'bg-amber-500/20' },

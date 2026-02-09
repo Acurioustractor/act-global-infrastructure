@@ -838,6 +838,81 @@ export default function ProjectPage({ params, searchParams }: PageParams) {
                 </div>
               </div>
             )}
+
+            {/* Health Score */}
+            {financialsData?.healthScore != null && (
+              <div className="glass-card p-5">
+                <h3 className="font-semibold text-white mb-3 flex items-center gap-2">
+                  <Activity className="h-5 w-5 text-indigo-400" />
+                  Health Score
+                </h3>
+                <div className="text-center">
+                  <span className={cn(
+                    'text-4xl font-bold',
+                    financialsData.healthScore >= 60 ? 'text-green-400' :
+                    financialsData.healthScore >= 30 ? 'text-amber-400' : 'text-red-400'
+                  )}>
+                    {financialsData.healthScore}
+                  </span>
+                  <span className="text-white/40 text-lg">/100</span>
+                </div>
+              </div>
+            )}
+
+            {/* Data Completeness */}
+            {financialsData?.dataCompleteness && (
+              <div className="glass-card p-5">
+                <h3 className="font-semibold text-white mb-3 flex items-center gap-2">
+                  <CheckCircle2 className="h-5 w-5 text-cyan-400" />
+                  Data Completeness
+                </h3>
+                <div className="text-center mb-3">
+                  <span className={cn(
+                    'text-2xl font-bold',
+                    financialsData.dataCompleteness.score >= 70 ? 'text-emerald-400' :
+                    financialsData.dataCompleteness.score >= 40 ? 'text-amber-400' : 'text-red-400'
+                  )}>
+                    {financialsData.dataCompleteness.score}%
+                  </span>
+                  <span className="text-white/40 text-sm ml-1">aligned</span>
+                </div>
+                <div className="space-y-1.5">
+                  {Object.entries(financialsData.dataCompleteness.sources).map(([source, has]) => (
+                    <div key={source} className="flex items-center justify-between text-xs">
+                      <span className="text-white/50 capitalize">{source}</span>
+                      <span className={has ? 'text-emerald-400' : 'text-white/20'}>
+                        {has ? '●' : '○'}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* GHL Pipeline (from API) */}
+            {financialsData?.opportunities && financialsData.opportunities.length > 0 && (
+              <div className="glass-card p-5">
+                <h3 className="font-semibold text-white mb-3 flex items-center gap-2">
+                  <GitBranch className="h-5 w-5 text-purple-400" />
+                  GHL Pipeline
+                </h3>
+                <div className="space-y-2">
+                  {financialsData.opportunities.slice(0, 5).map((opp) => (
+                    <div key={opp.id} className="py-1.5">
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm text-white/80 truncate flex-1">{opp.name}</span>
+                        {opp.value > 0 && (
+                          <span className="text-xs text-green-400 font-medium ml-2">
+                            ${(opp.value / 1000).toFixed(0)}K
+                          </span>
+                        )}
+                      </div>
+                      <div className="text-xs text-white/40">{opp.pipeline} · {opp.stage || opp.status}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         </div>
       )}

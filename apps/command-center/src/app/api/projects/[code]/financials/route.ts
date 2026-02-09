@@ -57,6 +57,19 @@ interface EnhancedProjectFinancials {
     amount: number
     status: string
   }>
+  opportunities: Array<{
+    id: string
+    name: string
+    pipeline: string
+    stage: string
+    value: number
+    status: string
+  }>
+  healthScore: number | null
+  dataCompleteness: {
+    score: number
+    sources: Record<string, boolean>
+  }
 }
 
 export async function GET(
@@ -78,6 +91,7 @@ export async function GET(
       fundraising,
       donations,
       health,
+      ghlOpportunities,
     ] = await Promise.all([
       // Xero transactions for this project
       supabase
@@ -140,6 +154,13 @@ export async function GET(
         .select('*')
         .eq('project_code', projectCode)
         .maybeSingle(),
+
+      // GHL opportunities for this project
+      supabase
+        .from('ghl_opportunities')
+        .select('id, name, pipeline_name, stage_name, monetary_value, status')
+        .eq('project_code', projectCode)
+        .order('monetary_value', { ascending: false, nullsFirst: false }),
     ])
 
     const txData = transactions.data || []
@@ -265,6 +286,28 @@ export async function GET(
         amount: f.amount || 0,
         status: f.status,
       })),
+      opportunities: (ghlOpportunities.data || []).map((opp: any) => ({
+        id: opp.id,
+        name: opp.name,
+        pipeline: opp.pipeline_name || '',
+        stage: opp.stage_name || '',
+        value: (opp.monetary_value || 0) / 100,
+        status: opp.status || '',
+      })),
+      healthScore: health.data?.health_score || null,
+      dataCompleteness: (() => {
+        const sources: Record<string, boolean> = {
+          transactions: txData.length > 0,
+          invoices: invData.length > 0,
+          grants: grantData.length > 0,
+          subscriptions: subData.length > 0,
+          emails: (emails.count || 0) > 0,
+          contacts: (contacts.data || []).length > 0,
+          opportunities: (ghlOpportunities.data || []).length > 0,
+        }
+        const filled = Object.values(sources).filter(Boolean).length
+        return { score: Math.round((filled / Object.keys(sources).length) * 100), sources }
+      })(),
     }
 
     // Special: Goods content library count

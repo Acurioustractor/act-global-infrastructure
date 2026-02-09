@@ -1463,6 +1463,19 @@ export interface ProjectFinancials {
     amount: number
     status: string
   }>
+  opportunities: Array<{
+    id: string
+    name: string
+    pipeline: string
+    stage: string
+    value: number
+    status: string
+  }>
+  healthScore: number | null
+  dataCompleteness: {
+    score: number
+    sources: Record<string, boolean>
+  }
 }
 
 export async function getProjectFinancials(code: string) {
