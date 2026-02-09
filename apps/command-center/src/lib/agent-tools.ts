@@ -3563,8 +3563,7 @@ async function executeCreateMeetingNotes(input: {
     // Look up project name from code
     let projectName: string | null = null
     if (project_code) {
-      const projectCodesModule = await import('../../../../config/project-codes.json')
-      const allProjects: Record<string, any> = projectCodesModule.default?.projects || projectCodesModule.projects || {}
+      const allProjects = await loadProjectCodes()
       projectName = allProjects[project_code.toUpperCase()]?.name || null
     }
 
