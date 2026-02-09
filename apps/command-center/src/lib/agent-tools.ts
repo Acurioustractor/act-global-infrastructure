@@ -1,4 +1,5 @@
 import Anthropic from '@anthropic-ai/sdk'
+import { google } from 'googleapis'
 import { supabase } from './supabase'
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -149,13 +150,17 @@ export const AGENT_TOOLS: Anthropic.Tool[] = [
   {
     name: 'get_contacts_needing_attention',
     description:
-      'Get contacts who need follow-up — people who were recently active but haven\'t been contacted in 14-60 days. Use this when the user asks "who should I reach out to" or "who needs follow-up".',
+      'Get contacts who need follow-up — people who were recently active but haven\'t been contacted in 14-60 days. Use this when the user asks "who should I reach out to" or "who needs follow-up". Optionally filter by project (e.g. "who needs attention for Goods?").',
     input_schema: {
       type: 'object' as const,
       properties: {
         limit: {
           type: 'number',
           description: 'Max contacts to return. Default 10.',
+        },
+        project: {
+          type: 'string',
+          description: 'Optional project tag to filter by (e.g. "goods", "the-harvest"). Only returns contacts with this tag.',
         },
       },
       required: [],
@@ -519,6 +524,153 @@ export const AGENT_TOOLS: Anthropic.Tool[] = [
       required: ['title', 'content'],
     },
   },
+
+  // ── GOODS INTELLIGENCE ──────────────────────────────────────────────
+
+  {
+    name: 'get_goods_intelligence',
+    description:
+      'Get Goods on Country intelligence — newsletter planning, outreach recommendations, content strategy, or an overview. Use when the user asks about Goods newsletter, who to reach out to for Goods, content ideas, or a Goods overview.',
+    input_schema: {
+      type: 'object' as const,
+      properties: {
+        focus: {
+          type: 'string',
+          enum: ['newsletter_plan', 'outreach', 'content_ideas', 'overview'],
+          description: 'What intelligence to focus on. newsletter_plan = content picks + audience breakdown. outreach = who to contact + suggested content. content_ideas = gaps and angles. overview = full summary.',
+        },
+      },
+      required: ['focus'],
+    },
+  },
+
+  // ── EMAIL SEARCH ──────────────────────────────────────────────────
+
+  {
+    name: 'search_emails',
+    description:
+      'Search emails across ACT mailboxes using Gmail API. Use when the user asks to find an email, check what someone sent, or look up a conversation. Searches benjamin@act.place by default.',
+    input_schema: {
+      type: 'object' as const,
+      properties: {
+        query: {
+          type: 'string',
+          description: 'Gmail search query — supports from:, to:, subject:, has:attachment, after:, before:, and free text. Examples: "from:jane subject:invoice", "to:hi@act.place grant".',
+        },
+        mailbox: {
+          type: 'string',
+          description: 'Which mailbox to search: benjamin@act.place, nicholas@act.place, hi@act.place, accounts@act.place. Default: benjamin@act.place.',
+        },
+        limit: {
+          type: 'number',
+          description: 'Max results. Default 10.',
+        },
+      },
+      required: ['query'],
+    },
+  },
+
+  // ── CASHFLOW FORECAST ─────────────────────────────────────────────
+
+  {
+    name: 'get_cashflow_forecast',
+    description:
+      'Get a cash flow forecast including historical snapshots, current month actuals, projections, and key metrics (burn rate, runway). Use when the user asks about cash flow, financial outlook, burn rate, or "how long will our money last".',
+    input_schema: {
+      type: 'object' as const,
+      properties: {
+        months_ahead: {
+          type: 'number',
+          description: 'How many months to project forward. Default 6.',
+        },
+      },
+      required: [],
+    },
+  },
+
+  // ── PROJECT HEALTH ────────────────────────────────────────────────
+
+  {
+    name: 'get_project_health',
+    description:
+      'Get health overview for one or all ACT projects — last activity, open actions, financial position, team engagement. Use when the user asks "how is project X going", "which projects need attention", or "project health check".',
+    input_schema: {
+      type: 'object' as const,
+      properties: {
+        project_code: {
+          type: 'string',
+          description: 'Specific project code (e.g. ACT-JH). Omit for all projects overview.',
+        },
+      },
+      required: [],
+    },
+  },
+
+  // ── UPCOMING DEADLINES ────────────────────────────────────────────
+
+  {
+    name: 'get_upcoming_deadlines',
+    description:
+      'Get upcoming deadlines across grants, compliance, projects, and calendar. Use when the user asks "what deadlines are coming up", "what\'s due soon", or "upcoming compliance dates".',
+    input_schema: {
+      type: 'object' as const,
+      properties: {
+        days_ahead: {
+          type: 'number',
+          description: 'How many days ahead to look. Default 30.',
+        },
+        category: {
+          type: 'string',
+          description: 'Filter by category: grants, compliance, calendar, all. Default: all.',
+        },
+      },
+      required: [],
+    },
+  },
+
+  // ── MEETING NOTES ─────────────────────────────────────────────────
+
+  {
+    name: 'create_meeting_notes',
+    description:
+      'Save meeting notes to the knowledge base. Use when the user describes a meeting they had, or dictates meeting notes via voice. Links to project codes and participants automatically.',
+    input_schema: {
+      type: 'object' as const,
+      properties: {
+        title: {
+          type: 'string',
+          description: 'Meeting title.',
+        },
+        summary: {
+          type: 'string',
+          description: 'Brief summary of the meeting.',
+        },
+        content: {
+          type: 'string',
+          description: 'Full meeting notes in markdown.',
+        },
+        project_code: {
+          type: 'string',
+          description: 'Project code this meeting relates to (e.g. ACT-JH).',
+        },
+        participants: {
+          type: 'array',
+          items: { type: 'string' },
+          description: 'Names of people in the meeting.',
+        },
+        action_items: {
+          type: 'array',
+          items: { type: 'string' },
+          description: 'Action items from the meeting.',
+        },
+        date: {
+          type: 'string',
+          description: 'Meeting date in YYYY-MM-DD. Default: today.',
+        },
+      },
+      required: ['title', 'summary', 'content'],
+    },
+  },
 ]
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -548,7 +700,7 @@ export async function executeTool(
     case 'get_project_summary':
       return await executeGetProjectSummary(input as { project_code: string })
     case 'get_contacts_needing_attention':
-      return await executeGetContactsNeedingAttention(input as { limit?: number })
+      return await executeGetContactsNeedingAttention(input as { limit?: number; project?: string })
     // Write actions
     case 'draft_email':
       return await executeDraftEmail(input as { to: string; subject: string; body: string }, chatId)
@@ -601,6 +753,27 @@ export async function executeTool(
       return await executeSaveWritingDraft(
         input as { title: string; content: string; append?: boolean; project?: string; tags?: string[] }
       )
+    // Goods intelligence
+    case 'get_goods_intelligence':
+      return await executeGetGoodsIntelligence(input as { focus: string })
+    // Email search
+    case 'search_emails':
+      return await executeSearchEmails(input as { query: string; mailbox?: string; limit?: number })
+    // Cashflow forecast
+    case 'get_cashflow_forecast':
+      return await executeGetCashflowForecast(input as { months_ahead?: number })
+    // Project health
+    case 'get_project_health':
+      return await executeGetProjectHealth(input as { project_code?: string })
+    // Upcoming deadlines
+    case 'get_upcoming_deadlines':
+      return await executeGetUpcomingDeadlines(input as { days_ahead?: number; category?: string })
+    // Meeting notes
+    case 'create_meeting_notes':
+      return await executeCreateMeetingNotes(input as {
+        title: string; summary: string; content: string;
+        project_code?: string; participants?: string[]; action_items?: string[]; date?: string
+      })
     default:
       return JSON.stringify({ error: `Unknown tool: ${name}` })
   }
@@ -1141,6 +1314,7 @@ async function executeGetProjectSummary(input: {
 
 async function executeGetContactsNeedingAttention(input: {
   limit?: number
+  project?: string
 }): Promise<string> {
   const limit = input.limit || 10
 
@@ -1150,13 +1324,19 @@ async function executeGetContactsNeedingAttention(input: {
     const sixtyDaysAgo = new Date()
     sixtyDaysAgo.setDate(sixtyDaysAgo.getDate() - 60)
 
-    const { data, error } = await supabase
+    let query = supabase
       .from('ghl_contacts')
       .select('id, ghl_id, full_name, email, phone, company_name, engagement_status, tags, projects, last_contact_date')
       .lt('last_contact_date', fourteenDaysAgo.toISOString())
       .gt('last_contact_date', sixtyDaysAgo.toISOString())
       .order('last_contact_date', { ascending: true })
       .limit(limit)
+
+    if (input.project) {
+      query = query.contains('tags', [input.project.toLowerCase()])
+    }
+
+    const { data, error } = await query
 
     if (error) {
       return JSON.stringify({ error: error.message })
@@ -2650,4 +2830,751 @@ status: draft${projectLine}${tagLine}
 
 ${content}
 `
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// TOOL: get_goods_intelligence
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+async function executeGetGoodsIntelligence(input: { focus: string }): Promise<string> {
+  const { focus } = input
+
+  if (focus === 'newsletter_plan') {
+    // Get unused/least-used content
+    const { data: content } = await supabase
+      .from('goods_content_library')
+      .select('*')
+      .not('analyzed_at', 'is', null)
+      .order('times_used_newsletter', { ascending: true })
+      .order('published_at', { ascending: false })
+      .limit(8)
+
+    // Get audience breakdown
+    const { data: contacts } = await supabase
+      .from('ghl_contacts')
+      .select('tags, newsletter_consent')
+      .contains('tags', ['goods'])
+
+    const c = contacts || []
+    const subscribers = c.filter(x => x.newsletter_consent && x.tags?.includes('goods-newsletter')).length
+    const funders = c.filter(x => x.tags?.includes('goods-funder')).length
+    const partners = c.filter(x => x.tags?.includes('goods-partner')).length
+    const community = c.filter(x => x.tags?.includes('goods-community')).length
+    const supporters = c.filter(x => x.tags?.includes('goods-supporter')).length
+
+    const stories = (content || []).filter(c => c.content_type === 'story')
+    const articles = (content || []).filter(c => c.content_type === 'article')
+    const featured = stories[0] || (content || [])[0]
+
+    let result = `## Newsletter Plan\n\n`
+    result += `**Audience:** ${subscribers} newsletter subscribers (${funders} funders, ${partners} partners, ${community} community, ${supporters} supporters)\n\n`
+
+    if (featured) {
+      result += `### Recommended Featured Story\n`
+      result += `**"${featured.title}"** (${featured.content_type})\n`
+      if (featured.storyteller_name) result += `By ${featured.storyteller_name}\n`
+      result += `${featured.key_message || featured.excerpt || ''}\n`
+      result += `Tone: ${featured.emotional_tone || 'N/A'} | Topics: ${(featured.topics || []).join(', ')}\n`
+      result += `Used in newsletters: ${featured.times_used_newsletter} times\n\n`
+    }
+
+    if (content && content.length > 1) {
+      result += `### More Content Available\n`
+      for (const item of content.slice(1, 5)) {
+        result += `- **"${item.title}"** (${item.content_type}) — ${item.key_message || item.excerpt?.substring(0, 100) || 'No summary'}\n`
+      }
+      result += `\n`
+    }
+
+    result += `### Suggested Approach\n`
+    if (funders > 0 && stories.length > 0) {
+      result += `- Lead with "${featured?.title}" — impact stories resonate with funders\n`
+    }
+    if (articles.length > 0) {
+      result += `- Include an article for depth: "${articles[0].title}"\n`
+    }
+    result += `- Build and send the newsletter in GHL (Marketing → Email Templates)\n`
+    result += `- Filter by tag: goods-newsletter\n`
+    result += `- Run \`node scripts/prepare-goods-newsletter.mjs\` for AI-generated copy suggestions\n`
+
+    return result
+
+  } else if (focus === 'outreach') {
+    // Get contacts needing attention
+    const { data: contacts } = await supabase
+      .from('ghl_contacts')
+      .select('id, full_name, first_name, last_name, email, tags, last_contact_date, created_at')
+      .contains('tags', ['goods'])
+      .order('last_contact_date', { ascending: true, nullsFirst: true })
+      .limit(50)
+
+    // Get content for pairing
+    const { data: content } = await supabase
+      .from('goods_content_library')
+      .select('title, content_type, key_message, audience_fit, url')
+      .not('analyzed_at', 'is', null)
+      .order('times_used_newsletter', { ascending: true })
+      .limit(10)
+
+    const now = new Date()
+    let result = `## Outreach Recommendations\n\n`
+    const recs: { name: string; email: string | null; reason: string; priority: string; content: string }[] = []
+
+    for (const contact of contacts || []) {
+      const name = contact.full_name || `${contact.first_name || ''} ${contact.last_name || ''}`.trim() || 'Unknown'
+      const daysSinceContact = contact.last_contact_date
+        ? Math.floor((now.getTime() - new Date(contact.last_contact_date).getTime()) / 86400000)
+        : null
+
+      let reason = ''
+      let priority = 'low'
+
+      if (daysSinceContact === null) {
+        reason = 'Never contacted — introduce Goods'
+        priority = 'high'
+      } else if (daysSinceContact > 60) {
+        reason = `No contact in ${daysSinceContact} days`
+        priority = 'high'
+      } else if (daysSinceContact > 30) {
+        reason = `${daysSinceContact} days since last contact`
+        priority = 'medium'
+      } else {
+        continue
+      }
+
+      // Match content to contact segment
+      const tags = contact.tags || []
+      let suggestedContent = ''
+      if (content && content.length > 0) {
+        const segment = tags.includes('goods-funder') ? 'funders'
+          : tags.includes('goods-partner') ? 'partners'
+          : tags.includes('goods-community') ? 'community'
+          : 'supporters'
+
+        const match = content.find(c => c.audience_fit?.includes(segment)) || content[0]
+        suggestedContent = `Share: "${match.title}" — ${match.key_message || ''}`
+      }
+
+      recs.push({ name, email: contact.email, reason, priority, content: suggestedContent })
+    }
+
+    // Sort by priority
+    const order: Record<string, number> = { high: 0, medium: 1, low: 2 }
+    recs.sort((a, b) => (order[a.priority] ?? 2) - (order[b.priority] ?? 2))
+
+    const top = recs.slice(0, 10)
+    for (const r of top) {
+      result += `**${r.name}** (${r.priority} priority)\n`
+      result += `${r.reason}${r.email ? ` | ${r.email}` : ''}\n`
+      if (r.content) result += `→ ${r.content}\n`
+      result += `\n`
+    }
+
+    result += `*${recs.length} contacts need attention total. Showing top 10.*\n`
+    return result
+
+  } else if (focus === 'content_ideas') {
+    // Check what topics are covered vs gaps
+    const { data: content } = await supabase
+      .from('goods_content_library')
+      .select('topics, impact_themes, audience_fit, content_type')
+      .not('analyzed_at', 'is', null)
+
+    // Count topic frequency
+    const topicCounts: Record<string, number> = {}
+    const audienceCounts: Record<string, number> = {}
+    for (const item of content || []) {
+      for (const t of item.topics || []) topicCounts[t] = (topicCounts[t] || 0) + 1
+      for (const a of item.audience_fit || []) audienceCounts[a] = (audienceCounts[a] || 0) + 1
+    }
+
+    // Get contact segments for gap analysis
+    const { data: contacts } = await supabase
+      .from('ghl_contacts')
+      .select('tags')
+      .contains('tags', ['goods'])
+
+    const c = contacts || []
+    const segmentSizes: Record<string, number> = {
+      funders: c.filter(x => x.tags?.includes('goods-funder')).length,
+      partners: c.filter(x => x.tags?.includes('goods-partner')).length,
+      community: c.filter(x => x.tags?.includes('goods-community')).length,
+      supporters: c.filter(x => x.tags?.includes('goods-supporter')).length,
+      storytellers: c.filter(x => x.tags?.includes('goods-storyteller')).length,
+    }
+
+    let result = `## Content Ideas & Gaps\n\n`
+
+    result += `### Topic Coverage\n`
+    const sortedTopics = Object.entries(topicCounts).sort((a, b) => b[1] - a[1])
+    for (const [topic, count] of sortedTopics.slice(0, 8)) {
+      result += `- ${topic}: ${count} pieces\n`
+    }
+
+    result += `\n### Audience Content Gap Analysis\n`
+    const allSegments = ['funders', 'partners', 'community', 'media', 'government', 'storytellers', 'supporters']
+    for (const seg of allSegments) {
+      const contentCount = audienceCounts[seg] || 0
+      const contactCount = segmentSizes[seg] || 0
+      const ratio = contactCount > 0 ? (contentCount / contactCount).toFixed(1) : 'N/A'
+      const gap = contactCount > 0 && contentCount < 2 ? ' ⚠️ UNDERSERVED' : ''
+      result += `- **${seg}**: ${contentCount} content pieces for ${contactCount} contacts (ratio: ${ratio})${gap}\n`
+    }
+
+    result += `\n### Suggested Content Angles\n`
+    // Identify underserved segments
+    for (const [seg, count] of Object.entries(segmentSizes)) {
+      if (count > 5 && (audienceCounts[seg] || 0) < 2) {
+        result += `- You have ${count} ${seg} but very little content targeted at them. Consider a ${seg === 'funders' ? 'impact report or economic outcomes story' : seg === 'partners' ? 'collaboration spotlight or partnership update' : 'community update or participation story'}.\n`
+      }
+    }
+
+    const underrepresented = ['food-sovereignty', 'youth-programs', 'circular-economy', 'regenerative-agriculture']
+      .filter(t => !topicCounts[t] || topicCounts[t] < 2)
+    if (underrepresented.length > 0) {
+      result += `- Underrepresented topics to explore: ${underrepresented.join(', ')}\n`
+    }
+
+    return result
+
+  } else {
+    // overview
+    const { data: contacts } = await supabase
+      .from('ghl_contacts')
+      .select('tags, newsletter_consent, last_contact_date')
+      .contains('tags', ['goods'])
+
+    const { data: content } = await supabase
+      .from('goods_content_library')
+      .select('id, times_used_newsletter, analyzed_at')
+
+    const { data: recentComms } = await supabase
+      .from('communications_history')
+      .select('id')
+      .contains('project_codes', ['GOODS'])
+      .gte('created_at', new Date(Date.now() - 30 * 86400000).toISOString())
+
+    const c = contacts || []
+    const now = new Date()
+
+    let result = `## Goods on Country Overview\n\n`
+    result += `### Contacts\n`
+    result += `- Total: ${c.length}\n`
+    result += `- Newsletter subscribers: ${c.filter(x => x.newsletter_consent && x.tags?.includes('goods-newsletter')).length}\n`
+    result += `- Funders: ${c.filter(x => x.tags?.includes('goods-funder')).length}\n`
+    result += `- Partners: ${c.filter(x => x.tags?.includes('goods-partner')).length}\n`
+    result += `- Community: ${c.filter(x => x.tags?.includes('goods-community')).length}\n`
+    result += `- Supporters: ${c.filter(x => x.tags?.includes('goods-supporter')).length}\n`
+    result += `- Storytellers: ${c.filter(x => x.tags?.includes('goods-storyteller')).length}\n`
+    result += `- Needing attention (>30 days): ${c.filter(x => {
+      if (!x.last_contact_date) return true
+      return (now.getTime() - new Date(x.last_contact_date).getTime()) / 86400000 > 30
+    }).length}\n`
+
+    result += `\n### Content Library\n`
+    const ct = content || []
+    result += `- Total items: ${ct.length}\n`
+    result += `- Analyzed: ${ct.filter(x => x.analyzed_at).length}\n`
+    result += `- Unused in newsletters: ${ct.filter(x => !x.times_used_newsletter).length}\n`
+
+    result += `\n### Recent Activity\n`
+    result += `- Communications (30 days): ${recentComms?.length || 0}\n`
+
+    result += `\n### Quick Actions\n`
+    result += `- "Plan the next Goods newsletter" → newsletter_plan focus\n`
+    result += `- "Who should I reach out to for Goods?" → outreach focus\n`
+    result += `- "What content should we create for Goods?" → content_ideas focus\n`
+
+    return result
+  }
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// TOOL: search_emails
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+async function executeSearchEmails(input: {
+  query: string
+  mailbox?: string
+  limit?: number
+}): Promise<string> {
+  const { query, mailbox = 'benjamin@act.place', limit = 10 } = input
+
+  try {
+    const keyJson = process.env.GOOGLE_SERVICE_ACCOUNT_KEY
+    if (!keyJson) {
+      return JSON.stringify({ error: 'GOOGLE_SERVICE_ACCOUNT_KEY not configured' })
+    }
+
+    const credentials = JSON.parse(keyJson)
+    const auth = new google.auth.JWT({
+      email: credentials.client_email,
+      key: credentials.private_key,
+      scopes: ['https://www.googleapis.com/auth/gmail.readonly'],
+      subject: mailbox,
+    })
+
+    await auth.authorize()
+    const gmail = google.gmail({ version: 'v1', auth })
+
+    // Search messages
+    const listRes = await gmail.users.messages.list({
+      userId: 'me',
+      q: query,
+      maxResults: Math.min(limit, 20),
+    })
+
+    const messageIds = listRes.data.messages || []
+    if (messageIds.length === 0) {
+      return JSON.stringify({ mailbox, query, results: [], message: 'No emails found matching query.' })
+    }
+
+    // Fetch details for each message (headers only for speed)
+    const emails = await Promise.all(
+      messageIds.slice(0, limit).map(async (msg) => {
+        const detail = await gmail.users.messages.get({
+          userId: 'me',
+          id: msg.id!,
+          format: 'metadata',
+          metadataHeaders: ['From', 'To', 'Subject', 'Date'],
+        })
+
+        const headers = detail.data.payload?.headers || []
+        const getHeader = (name: string) => headers.find(h => h.name === name)?.value || ''
+
+        return {
+          id: msg.id,
+          from: getHeader('From'),
+          to: getHeader('To'),
+          subject: getHeader('Subject'),
+          date: getHeader('Date'),
+          snippet: detail.data.snippet || '',
+        }
+      })
+    )
+
+    return JSON.stringify({
+      mailbox,
+      query,
+      count: emails.length,
+      total_matches: listRes.data.resultSizeEstimate || emails.length,
+      results: emails,
+    })
+  } catch (err) {
+    return JSON.stringify({ error: (err as Error).message })
+  }
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// TOOL: get_cashflow_forecast
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+async function executeGetCashflowForecast(input: {
+  months_ahead?: number
+}): Promise<string> {
+  const monthsAhead = input.months_ahead || 6
+
+  try {
+    // Fetch historical snapshots, current month transactions, and upcoming invoices in parallel
+    const now = new Date()
+    const monthStart = new Date(now.getFullYear(), now.getMonth(), 1).toISOString().split('T')[0]
+    const monthEnd = new Date(now.getFullYear(), now.getMonth() + 1, 0).toISOString().split('T')[0]
+
+    const [snapshotsRes, txRes, invoicesRes, scenariosRes] = await Promise.all([
+      supabase
+        .from('financial_snapshots')
+        .select('month, income, expenses, net, closing_balance, is_projection, confidence')
+        .eq('is_projection', false)
+        .order('month', { ascending: true })
+        .limit(24),
+      supabase
+        .from('xero_transactions')
+        .select('total, type')
+        .gte('date', monthStart)
+        .lte('date', monthEnd),
+      supabase
+        .from('xero_invoices')
+        .select('total, amount_due, type, due_date')
+        .gt('amount_due', 0)
+        .in('status', ['AUTHORISED', 'SUBMITTED']),
+      supabase
+        .from('cashflow_scenarios')
+        .select('name, description, adjustments')
+        .eq('is_active', true),
+    ])
+
+    const snapshots = snapshotsRes.data || []
+    const transactions = txRes.data || []
+    const invoices = invoicesRes.data || []
+
+    // Current month actuals
+    let monthIncome = 0
+    let monthExpenses = 0
+    for (const tx of transactions) {
+      if (tx.type === 'RECEIVE') monthIncome += Math.abs(tx.total || 0)
+      else if (tx.type === 'SPEND') monthExpenses += Math.abs(tx.total || 0)
+    }
+
+    // Outstanding invoices
+    let receivables = 0
+    let payables = 0
+    for (const inv of invoices) {
+      const amt = Math.abs(inv.amount_due || 0)
+      if (inv.type === 'ACCREC') receivables += amt
+      else if (inv.type === 'ACCPAY') payables += amt
+    }
+
+    // Calculate averages from last 6 months of snapshots
+    const recent = snapshots.slice(-6)
+    const avgIncome = recent.length > 0 ? recent.reduce((s, r) => s + Number(r.income || 0), 0) / recent.length : 0
+    const avgExpenses = recent.length > 0 ? recent.reduce((s, r) => s + Number(r.expenses || 0), 0) / recent.length : 0
+    const lastBalance = snapshots.length > 0 ? Number(snapshots[snapshots.length - 1].closing_balance || 0) : 0
+
+    // Generate projection
+    const projections: Array<{ month: string; income: number; expenses: number; balance: number; confidence: number }> = []
+    let balance = lastBalance + (monthIncome - monthExpenses)
+    for (let i = 1; i <= monthsAhead; i++) {
+      const d = new Date(now.getFullYear(), now.getMonth() + i, 1)
+      const monthNet = avgIncome - avgExpenses
+      balance += monthNet
+      projections.push({
+        month: d.toISOString().slice(0, 7),
+        income: Math.round(avgIncome),
+        expenses: Math.round(avgExpenses),
+        balance: Math.round(balance),
+        confidence: Math.max(0.5, 1 - i * 0.08),
+      })
+    }
+
+    // Metrics
+    const burnRate = Math.max(0, Math.round(avgExpenses - avgIncome))
+    const runway = burnRate > 0 ? Math.round((balance / burnRate) * 10) / 10 : null
+
+    return JSON.stringify({
+      current_month: {
+        period: now.toISOString().slice(0, 7),
+        income: Math.round(monthIncome),
+        expenses: Math.round(monthExpenses),
+        net: Math.round(monthIncome - monthExpenses),
+      },
+      outstanding: {
+        receivables: Math.round(receivables),
+        payables: Math.round(payables),
+        net: Math.round(receivables - payables),
+      },
+      metrics: {
+        avg_monthly_income: Math.round(avgIncome),
+        avg_monthly_expenses: Math.round(avgExpenses),
+        burn_rate: burnRate,
+        estimated_balance: Math.round(balance),
+        runway_months: runway,
+      },
+      projections,
+      scenarios: scenariosRes.data || [],
+      history_months: snapshots.length,
+    })
+  } catch (err) {
+    return JSON.stringify({ error: (err as Error).message })
+  }
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// TOOL: get_project_health
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+async function executeGetProjectHealth(input: {
+  project_code?: string
+}): Promise<string> {
+  const { project_code } = input
+
+  try {
+    // Load project codes config
+    const projectCodesModule = await import('../../../../config/project-codes.json')
+    const allProjects: Record<string, any> = projectCodesModule.default?.projects || projectCodesModule.projects || {}
+
+    const codes = project_code
+      ? [project_code.toUpperCase()]
+      : Object.keys(allProjects).filter(k => allProjects[k]?.status === 'active')
+
+    // Fetch data across all dimensions in parallel
+    const [knowledgeRes, financialsRes, commsRes, actionsRes] = await Promise.all([
+      supabase
+        .from('project_knowledge')
+        .select('project_code, recorded_at, knowledge_type')
+        .in('project_code', codes)
+        .order('recorded_at', { ascending: false })
+        .limit(500),
+      supabase
+        .from('v_project_financials')
+        .select('*')
+        .in('project_code', codes),
+      supabase
+        .from('communications_history')
+        .select('project_codes, created_at')
+        .gte('created_at', new Date(Date.now() - 30 * 86400000).toISOString())
+        .limit(1000),
+      supabase
+        .from('project_knowledge')
+        .select('project_code, title, recorded_at')
+        .in('project_code', codes)
+        .eq('knowledge_type', 'action')
+        .eq('action_required', true)
+        .limit(200),
+    ])
+
+    const knowledge = knowledgeRes.data || []
+    const financials = financialsRes.data || []
+    const comms = commsRes.data || []
+    const actions = actionsRes.data || []
+
+    // Build per-project health
+    const results = codes.map(code => {
+      const proj = allProjects[code]
+      const projKnowledge = knowledge.filter(k => k.project_code === code)
+      const projFinancials = financials.find(f => f.project_code === code)
+      const projComms = comms.filter(c => c.project_codes?.includes(code))
+      const projActions = actions.filter(a => a.project_code === code)
+
+      const lastActivity = projKnowledge.length > 0
+        ? projKnowledge[0].recorded_at
+        : null
+      const daysSinceActivity = lastActivity
+        ? Math.round((Date.now() - new Date(lastActivity).getTime()) / 86400000)
+        : null
+
+      return {
+        code,
+        name: proj?.name || code,
+        category: proj?.category || 'unknown',
+        priority: proj?.priority || 'normal',
+        last_activity: lastActivity,
+        days_since_activity: daysSinceActivity,
+        knowledge_entries: projKnowledge.length,
+        comms_last_30_days: projComms.length,
+        open_actions: projActions.length,
+        financials: projFinancials ? {
+          total_receivables: projFinancials.total_receivables,
+          total_payables: projFinancials.total_payables,
+          outstanding_receivables: projFinancials.outstanding_receivables,
+          net_position: projFinancials.net_position,
+        } : null,
+        health: daysSinceActivity === null ? 'unknown'
+          : daysSinceActivity <= 7 ? 'active'
+          : daysSinceActivity <= 30 ? 'steady'
+          : daysSinceActivity <= 90 ? 'stale'
+          : 'dormant',
+      }
+    })
+
+    // Sort: active first, then by days since activity
+    results.sort((a, b) => {
+      const order = { active: 0, steady: 1, stale: 2, dormant: 3, unknown: 4 }
+      const aOrder = order[a.health as keyof typeof order] ?? 4
+      const bOrder = order[b.health as keyof typeof order] ?? 4
+      return aOrder - bOrder || (a.days_since_activity || 999) - (b.days_since_activity || 999)
+    })
+
+    return JSON.stringify({
+      total_projects: results.length,
+      summary: {
+        active: results.filter(r => r.health === 'active').length,
+        steady: results.filter(r => r.health === 'steady').length,
+        stale: results.filter(r => r.health === 'stale').length,
+        dormant: results.filter(r => r.health === 'dormant').length,
+      },
+      projects: project_code ? results : results.slice(0, 20),
+    })
+  } catch (err) {
+    return JSON.stringify({ error: (err as Error).message })
+  }
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// TOOL: get_upcoming_deadlines
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+async function executeGetUpcomingDeadlines(input: {
+  days_ahead?: number
+  category?: string
+}): Promise<string> {
+  const daysAhead = input.days_ahead || 30
+  const category = input.category || 'all'
+  const cutoff = new Date(Date.now() + daysAhead * 86400000).toISOString().split('T')[0]
+  const today = new Date().toISOString().split('T')[0]
+
+  try {
+    const deadlines: Array<{
+      type: string
+      title: string
+      due_date: string
+      days_until: number
+      status: string
+      project_code?: string
+      details?: string
+    }> = []
+
+    // Grants deadlines
+    if (category === 'all' || category === 'grants') {
+      const { data: grants } = await supabase
+        .from('fundraising_pipeline')
+        .select('name, deadline, expected_date, status, project_codes')
+        .or(`deadline.lte.${cutoff},expected_date.lte.${cutoff}`)
+        .not('status', 'in', '("successful","unsuccessful","cancelled")')
+
+      for (const g of grants || []) {
+        const dueDate = g.deadline || g.expected_date
+        if (!dueDate) continue
+        const daysUntil = Math.round((new Date(dueDate).getTime() - Date.now()) / 86400000)
+        deadlines.push({
+          type: 'grant',
+          title: g.name,
+          due_date: dueDate,
+          days_until: daysUntil,
+          status: daysUntil < 0 ? 'overdue' : daysUntil <= 7 ? 'urgent' : 'upcoming',
+          project_code: g.project_codes?.[0],
+          details: `Status: ${g.status}`,
+        })
+      }
+    }
+
+    // Compliance deadlines
+    if (category === 'all' || category === 'compliance') {
+      const { data: compliance } = await supabase
+        .from('compliance_items')
+        .select('title, next_due, category, status, project_code, responsible')
+        .lte('next_due', cutoff)
+        .not('status', 'in', '("completed","not-applicable")')
+
+      for (const c of compliance || []) {
+        if (!c.next_due) continue
+        const daysUntil = Math.round((new Date(c.next_due).getTime() - Date.now()) / 86400000)
+        deadlines.push({
+          type: 'compliance',
+          title: c.title,
+          due_date: c.next_due,
+          days_until: daysUntil,
+          status: daysUntil < 0 ? 'overdue' : daysUntil <= 7 ? 'urgent' : 'upcoming',
+          project_code: c.project_code,
+          details: `Category: ${c.category}. Responsible: ${c.responsible || 'unassigned'}`,
+        })
+      }
+    }
+
+    // Calendar deadlines (events with "deadline" or "due" in title)
+    if (category === 'all' || category === 'calendar') {
+      const { data: events } = await supabase
+        .from('calendar_events')
+        .select('title, start_time, project_code')
+        .gte('start_time', `${today}T00:00:00Z`)
+        .lte('start_time', `${cutoff}T23:59:59Z`)
+        .or('title.ilike.%deadline%,title.ilike.%due%,title.ilike.%submission%,title.ilike.%lodge%')
+
+      for (const e of events || []) {
+        const dueDate = e.start_time.split('T')[0]
+        const daysUntil = Math.round((new Date(dueDate).getTime() - Date.now()) / 86400000)
+        deadlines.push({
+          type: 'calendar',
+          title: e.title,
+          due_date: dueDate,
+          days_until: daysUntil,
+          status: daysUntil <= 3 ? 'urgent' : 'upcoming',
+          project_code: e.project_code,
+        })
+      }
+    }
+
+    // Sort by due date
+    deadlines.sort((a, b) => a.days_until - b.days_until)
+
+    return JSON.stringify({
+      period: `${today} to ${cutoff}`,
+      total: deadlines.length,
+      overdue: deadlines.filter(d => d.status === 'overdue').length,
+      urgent: deadlines.filter(d => d.status === 'urgent').length,
+      deadlines,
+    })
+  } catch (err) {
+    return JSON.stringify({ error: (err as Error).message })
+  }
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// TOOL: create_meeting_notes
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+async function executeCreateMeetingNotes(input: {
+  title: string
+  summary: string
+  content: string
+  project_code?: string
+  participants?: string[]
+  action_items?: string[]
+  date?: string
+}): Promise<string> {
+  const {
+    title,
+    summary,
+    content,
+    project_code,
+    participants = [],
+    action_items = [],
+    date,
+  } = input
+
+  const meetingDate = date || new Date().toISOString().split('T')[0]
+
+  try {
+    // Look up project name from code
+    let projectName: string | null = null
+    if (project_code) {
+      const projectCodesModule = await import('../../../../config/project-codes.json')
+      const allProjects: Record<string, any> = projectCodesModule.default?.projects || projectCodesModule.projects || {}
+      projectName = allProjects[project_code.toUpperCase()]?.name || null
+    }
+
+    // Build full content with action items
+    let fullContent = content
+    if (action_items.length > 0) {
+      fullContent += '\n\n## Action Items\n'
+      for (const item of action_items) {
+        fullContent += `- [ ] ${item}\n`
+      }
+    }
+
+    // Insert into project_knowledge
+    const { data, error } = await supabase
+      .from('project_knowledge')
+      .insert({
+        project_code: project_code?.toUpperCase() || null,
+        project_name: projectName,
+        knowledge_type: 'meeting',
+        title,
+        content: fullContent,
+        summary,
+        source_type: 'telegram',
+        recorded_by: 'Ben Knight',
+        recorded_at: `${meetingDate}T12:00:00Z`,
+        participants,
+        topics: [],
+        importance: 'normal',
+        action_required: action_items.length > 0,
+      })
+      .select('id')
+      .single()
+
+    if (error) return JSON.stringify({ error: error.message })
+
+    return JSON.stringify({
+      action: 'meeting_notes_saved',
+      id: data.id,
+      title,
+      date: meetingDate,
+      project_code: project_code || null,
+      participants_count: participants.length,
+      action_items_count: action_items.length,
+      confirmation: `Meeting notes "${title}" saved for ${meetingDate}${project_code ? ` (${project_code})` : ''}.`,
+    })
+  } catch (err) {
+    return JSON.stringify({ error: (err as Error).message })
+  }
 }
