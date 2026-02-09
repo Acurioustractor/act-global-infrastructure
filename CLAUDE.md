@@ -119,6 +119,8 @@ When using the Task tool with sub-agents:
 - Use `model: "sonnet"` for implementation, refactoring, and code generation
 - Reserve Opus for architectural decisions and complex multi-file plans
 - Don't duplicate sub-agent work in the main context — trust agent output
+- For codebase exploration: use `subagent_type: "scout"` (Sonnet), NOT `"Explore"` (Haiku — inaccurate)
+- On Opus needing high accuracy: use Grep/Glob/Read directly instead of agents
 
 ## Phase-at-a-Time Execution
 

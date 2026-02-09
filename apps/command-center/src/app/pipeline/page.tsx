@@ -24,6 +24,7 @@ import {
   type PipelineOpportunity,
   type PipelineBoard,
 } from '@/lib/api'
+import { FolderKanban } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 const GHL_APP_URL = 'https://app.gohighlevel.com'
@@ -83,9 +84,23 @@ function OpportunityCard({ opp, locationId }: { opp: PipelineOpportunity; locati
         </div>
       </div>
       {opp.contactName && (
-        <p className="text-xs text-white/50 mb-1.5">{opp.contactName}</p>
+        <Link
+          href={`/people?search=${encodeURIComponent(opp.contactName)}`}
+          className="text-xs text-white/50 hover:text-indigo-400 transition-colors mb-1.5 block truncate"
+        >
+          {opp.contactName}
+        </Link>
       )}
       <div className="flex items-center gap-2 flex-wrap">
+        {opp.projectCode && (
+          <Link
+            href={`/projects/${opp.projectCode}`}
+            className="text-xs px-1.5 py-0.5 rounded bg-indigo-500/20 text-indigo-400 hover:bg-indigo-500/30 transition-colors flex items-center gap-1"
+          >
+            <FolderKanban className="h-3 w-3" />
+            {opp.projectCode}
+          </Link>
+        )}
         <span className={cn(
           'text-xs flex items-center gap-1',
           isStale ? 'text-amber-400' : 'text-white/30'
@@ -363,7 +378,7 @@ export default function PipelinePage() {
 
       {/* Summary Stats */}
       {summary && (
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
           <div className="glass-card p-5">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-xl bg-green-500/20 flex items-center justify-center shrink-0">
@@ -372,18 +387,7 @@ export default function PipelinePage() {
               <div className="min-w-0">
                 <p className="text-xs text-white/50">Pipeline Value</p>
                 <p className="text-lg font-bold text-green-400 tabular-nums truncate">{formatCurrency(summary.totalValue)}</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="glass-card p-5">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-blue-500/20 flex items-center justify-center shrink-0">
-                <CircleDot className="h-5 w-5 text-blue-400" />
-              </div>
-              <div>
-                <p className="text-xs text-white/50">Open Deals</p>
-                <p className="text-lg font-bold text-white tabular-nums">{summary.openDeals}</p>
+                <p className="text-xs text-white/30">{summary.openDeals} open deals</p>
               </div>
             </div>
           </div>
@@ -391,25 +395,25 @@ export default function PipelinePage() {
           <div className="glass-card p-5">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-xl bg-emerald-500/20 flex items-center justify-center shrink-0">
-                <TrendingUp className="h-5 w-5 text-emerald-400" />
+                <Trophy className="h-5 w-5 text-emerald-400" />
               </div>
               <div>
-                <p className="text-xs text-white/50">Avg Deal Size</p>
-                <p className="text-lg font-bold text-emerald-400 tabular-nums">{formatCurrency(summary.avgDealSize)}</p>
+                <p className="text-xs text-white/50">Won (Quarter)</p>
+                <p className="text-lg font-bold text-emerald-400 tabular-nums">{formatCurrency(summary.wonValueThisQuarter || 0)}</p>
+                <p className="text-xs text-white/30">{summary.wonThisQuarter || 0} deals</p>
               </div>
             </div>
           </div>
 
           <div className="glass-card p-5">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-amber-500/20 flex items-center justify-center shrink-0">
-                <AlertTriangle className="h-5 w-5 text-amber-400" />
+              <div className="w-10 h-10 rounded-xl bg-red-500/20 flex items-center justify-center shrink-0">
+                <TrendingUp className="h-5 w-5 text-red-400" />
               </div>
               <div>
-                <p className="text-xs text-white/50">Stale ({'>'}14d)</p>
-                <p className={cn('text-lg font-bold tabular-nums', summary.staleDeals > 0 ? 'text-amber-400' : 'text-white/40')}>
-                  {summary.staleDeals}
-                </p>
+                <p className="text-xs text-white/50">Lost (Quarter)</p>
+                <p className="text-lg font-bold text-red-400 tabular-nums">{formatCurrency(summary.lostValueThisQuarter || 0)}</p>
+                <p className="text-xs text-white/30">{summary.lostThisQuarter || 0} deals</p>
               </div>
             </div>
           </div>
@@ -417,11 +421,15 @@ export default function PipelinePage() {
           <div className="glass-card p-5">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-xl bg-purple-500/20 flex items-center justify-center shrink-0">
-                <Trophy className="h-5 w-5 text-purple-400" />
+                <CircleDot className="h-5 w-5 text-purple-400" />
               </div>
               <div>
-                <p className="text-xs text-white/50">Won This Month</p>
-                <p className="text-lg font-bold text-purple-400 tabular-nums">{summary.wonThisMonth}</p>
+                <p className="text-xs text-white/50">Win Rate</p>
+                <p className="text-lg font-bold text-purple-400 tabular-nums">{summary.winRate || 0}%</p>
+                <p className="text-xs text-white/30">
+                  {summary.wonAllTime || 0}W / {(summary.wonAllTime || 0) + (summary.lostThisQuarter || 0)}T
+                  {summary.staleDeals > 0 && <span className="text-amber-400 ml-1">• {summary.staleDeals} stale</span>}
+                </p>
               </div>
             </div>
           </div>

@@ -9,6 +9,7 @@
   "auto_publish_rules": {
     "subscriptions": {
       "description": "Software and subscription vendors - consistent amounts, auto-publish enabled",
+      "rd_eligible": true,
       "vendors": [
         {
           "name": "Notion Labs",

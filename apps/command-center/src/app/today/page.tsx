@@ -46,6 +46,8 @@ import { UpcomingDeadlines } from '@/components/today/upcoming-deadlines'
 import { FinanceSummary } from '@/components/today/finance-summary'
 import { BusinessTasks } from '@/components/today/business-tasks'
 import { MorningBriefing } from '@/components/today/morning-briefing'
+import { ProjectHealthGrid } from '@/components/today/project-health-grid'
+import { RecentActivity } from '@/components/today/recent-activity'
 
 const REFRESH_INTERVAL = 30 * 1000
 
@@ -290,6 +292,8 @@ export default function TodayPage() {
           <MorningBriefing />
           <PeopleToReach nudges={nudges} />
           <FinanceSummary />
+          <ProjectHealthGrid />
+          <RecentActivity />
           <GrantsPipeline />
           <UpcomingDeadlines />
           <BusinessTasks />

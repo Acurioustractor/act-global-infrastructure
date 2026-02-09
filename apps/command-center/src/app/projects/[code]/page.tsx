@@ -45,12 +45,14 @@ import {
   getGHLOpportunities,
   getProjectFinancials,
   getKnowledgeMeetings,
+  getActivityStream,
   getContactName,
   getTemperatureCategory,
   type Contact,
   type NotionProject,
   type ProjectFinancials,
 } from '@/lib/api'
+import { ActivityTimeline } from '@/components/activity-timeline'
 import { formatDistanceToNow, format } from 'date-fns'
 
 // Map project names to icons and ACT website slugs
@@ -201,6 +203,12 @@ export default function ProjectPage({ params, searchParams }: PageParams) {
   const { data: meetingsData } = useQuery({
     queryKey: ['project', 'meetings', code],
     queryFn: () => getKnowledgeMeetings({ project: code, days: 90, limit: 5 }),
+  })
+
+  // Fetch activity stream for this project
+  const { data: activityData } = useQuery({
+    queryKey: ['project', 'activity', code],
+    queryFn: () => getActivityStream({ project: code, limit: 15 }),
   })
 
   // Tab state (supports ?tab=financials deep-linking from Notion)
@@ -493,7 +501,13 @@ export default function ProjectPage({ params, searchParams }: PageParams) {
                           {financialsData.invoices.map(inv => (
                             <tr key={inv.id} className="border-b border-white/5 hover:bg-white/5 transition-colors">
                               <td className="px-4 py-2 text-sm text-white">{inv.number || '-'}</td>
-                              <td className="px-4 py-2 text-sm text-white/70">{inv.contact}</td>
+                              <td className="px-4 py-2 text-sm text-white/70">
+                                {inv.contact ? (
+                                  <Link href={`/people?search=${encodeURIComponent(inv.contact)}`} className="hover:text-indigo-400 transition-colors">
+                                    {inv.contact}
+                                  </Link>
+                                ) : '-'}
+                              </td>
                               <td className="px-4 py-2 text-sm text-white/70 text-right tabular-nums">${inv.total.toLocaleString()}</td>
                               <td className="px-4 py-2 text-sm text-white/70 text-right tabular-nums">${inv.due.toLocaleString()}</td>
                               <td className="px-4 py-2">
@@ -812,7 +826,7 @@ export default function ProjectPage({ params, searchParams }: PageParams) {
                         {s.name.charAt(0)}
                       </div>
                       <div className="min-w-0">
-                        <p className="text-sm text-white/80 truncate">{s.name}</p>
+                        <Link href={`/people?search=${encodeURIComponent(s.name)}`} className="text-sm text-white/80 truncate block hover:text-indigo-400 transition-colors">{s.name}</Link>
                         {s.company && <p className="text-xs text-white/40 truncate">{s.company}</p>}
                       </div>
                     </div>
@@ -955,7 +969,9 @@ export default function ProjectPage({ params, searchParams }: PageParams) {
                       )}
                     </div>
                     {opp.contact_name && (
-                      <p className="text-sm text-white/50 mt-2">Contact: {opp.contact_name}</p>
+                      <p className="text-sm text-white/50 mt-2">
+                        Contact: <Link href={`/people?search=${encodeURIComponent(opp.contact_name)}`} className="hover:text-indigo-400 transition-colors">{opp.contact_name}</Link>
+                      </p>
                     )}
                   </div>
                 ))}
@@ -1215,6 +1231,20 @@ export default function ProjectPage({ params, searchParams }: PageParams) {
                 <MessageSquare className="h-4 w-4" />
                 View All Meetings
               </Link>
+            </div>
+          )}
+
+          {/* Activity Timeline */}
+          {activityData && activityData.activities.length > 0 && (
+            <div className="glass-card p-6">
+              <h2 className="text-lg font-semibold text-white flex items-center gap-2 mb-4">
+                <Activity className="h-5 w-5 text-indigo-400" />
+                Recent Activity
+                <span className="text-sm text-white/40 font-normal ml-auto">
+                  {activityData.activities.length} events
+                </span>
+              </h2>
+              <ActivityTimeline activities={activityData.activities} showFilters={true} />
             </div>
           )}
 

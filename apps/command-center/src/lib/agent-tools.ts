@@ -827,6 +827,31 @@ export const AGENT_TOOLS: Anthropic.Tool[] = [
       required: ['title', 'summary', 'content'],
     },
   },
+  {
+    name: 'get_project_360',
+    description:
+      'Get a comprehensive 360-degree view of a project: financial summary, key contacts, recent activity, health score, and pipeline. Use when the user asks "what\'s happening with X?" or wants a full project overview.',
+    input_schema: {
+      type: 'object' as const,
+      properties: {
+        project_code: {
+          type: 'string',
+          description: 'The project code (e.g. ACT-JH, ACT-HV, ACT-EL).',
+        },
+      },
+      required: ['project_code'],
+    },
+  },
+  {
+    name: 'get_ecosystem_pulse',
+    description:
+      'Get a pulse check on the entire ACT ecosystem: projects by health status, total pipeline value, cash position, contacts needing attention, and recent highlights. Use when the user asks "how\'s the ecosystem?" or wants an overall status.',
+    input_schema: {
+      type: 'object' as const,
+      properties: {},
+      required: [],
+    },
+  },
 ]
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -950,6 +975,10 @@ export async function executeTool(
         title: string; summary: string; content: string;
         project_code?: string; participants?: string[]; action_items?: string[]; date?: string
       })
+    case 'get_project_360':
+      return await executeGetProject360(input as { project_code: string })
+    case 'get_ecosystem_pulse':
+      return await executeGetEcosystemPulse()
     default:
       return JSON.stringify({ error: `Unknown tool: ${name}` })
   }
@@ -2988,6 +3017,19 @@ async function executeSaveWritingDraft(input: {
   } else {
     fileContent = buildNewDraft(title, content, now, projectLine, tagLine)
     commitMessage = `writing: new draft "${title}"`
+    // Check if file already exists — need SHA for overwrites
+    try {
+      const existRes = await fetch(
+        `https://api.github.com/repos/${owner}/${repo}/contents/${filepath}`,
+        { headers: { Authorization: `token ${token}`, Accept: 'application/vnd.github.v3+json' } }
+      )
+      if (existRes.ok) {
+        const existData = await existRes.json()
+        sha = existData.sha
+      }
+    } catch {
+      // File doesn't exist yet, no SHA needed
+    }
   }
 
   // Commit via GitHub API
@@ -4289,6 +4331,146 @@ async function executeCreateMeetingNotes(input: {
       participants_count: participants.length,
       action_items_count: action_items.length,
       confirmation: `Meeting notes "${title}" saved for ${meetingDate}${project_code ? ` (${project_code})` : ''}.`,
+    })
+  } catch (err) {
+    return JSON.stringify({ error: (err as Error).message })
+  }
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// TOOL: get_project_360
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+async function executeGetProject360(input: { project_code: string }): Promise<string> {
+  const { project_code } = input
+  try {
+    const [summaryRes, activityRes, contactsRes] = await Promise.all([
+      supabase.from('v_project_summary').select('*').eq('project_code', project_code).single(),
+      supabase.from('v_activity_stream').select('*').eq('project_code', project_code).order('activity_date', { ascending: false }).limit(10),
+      supabase.from('ghl_contacts').select('full_name, email, company_name, engagement_status, last_contact_date').contains('tags', [project_code]).limit(5),
+    ])
+
+    const summary = summaryRes.data
+    const activities = activityRes.data || []
+    const contacts = contactsRes.data || []
+
+    // Also try to get contacts via project tag matching from config
+    let tagContacts = contacts
+    if (contacts.length === 0) {
+      try {
+        const codes = await loadProjectCodes()
+        const project = codes[project_code]
+        if (project?.ghl_tags?.[0]) {
+          const { data } = await supabase
+            .from('ghl_contacts')
+            .select('full_name, email, company_name, engagement_status, last_contact_date')
+            .contains('tags', [project.ghl_tags[0]])
+            .limit(5)
+          tagContacts = data || []
+        }
+      } catch { /* ignore */ }
+    }
+
+    return JSON.stringify({
+      project_code,
+      financial: summary ? {
+        revenue: summary.total_income,
+        expenses: summary.total_expenses,
+        net: summary.net,
+        pipeline_value: summary.pipeline_value,
+        open_opportunities: summary.open_opportunities,
+        outstanding_invoices: summary.outstanding_amount,
+        grants_won: summary.grants_won,
+        grants_pending: summary.grants_pending,
+        subscription_monthly_cost: summary.subscription_monthly_cost,
+      } : null,
+      health: summary ? {
+        score: summary.health_score,
+        status: summary.health_status,
+        momentum: summary.momentum_score,
+        engagement: summary.engagement_score,
+        financial: summary.financial_score,
+      } : null,
+      key_contacts: tagContacts.map((c: any) => ({
+        name: c.full_name,
+        email: c.email,
+        company: c.company_name,
+        engagement: c.engagement_status,
+        last_contact: c.last_contact_date,
+      })),
+      recent_activity: activities.map((a: any) => ({
+        type: a.activity_type,
+        title: a.title,
+        date: a.activity_date,
+        amount: a.amount,
+      })),
+    })
+  } catch (err) {
+    return JSON.stringify({ error: (err as Error).message })
+  }
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// TOOL: get_ecosystem_pulse
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+async function executeGetEcosystemPulse(): Promise<string> {
+  try {
+    const [projectsRes, bookkeepingRes, nudgesRes, oppsRes] = await Promise.all([
+      supabase.from('v_project_summary').select('project_code, project_name, health_score, health_status, total_income, total_expenses, pipeline_value, open_opportunities, email_count'),
+      supabase.from('xero_transactions').select('total, type').gte('date', new Date(Date.now() - 30 * 86400000).toISOString().slice(0, 10)),
+      supabase.from('ghl_contacts').select('full_name, last_contact_date').not('last_contact_date', 'is', null).order('last_contact_date', { ascending: true }).limit(5),
+      supabase.from('ghl_opportunities').select('monetary_value, status').eq('status', 'open'),
+    ])
+
+    const projects = projectsRes.data || []
+    const transactions = bookkeepingRes.data || []
+    const staleContacts = nudgesRes.data || []
+    const openOpps = oppsRes.data || []
+
+    // Categorize projects by health
+    const healthy = projects.filter((p: any) => p.health_status === 'healthy' || (p.health_score && p.health_score >= 60))
+    const atRisk = projects.filter((p: any) => p.health_status === 'at_risk' || (p.health_score && p.health_score >= 30 && p.health_score < 60))
+    const critical = projects.filter((p: any) => p.health_status === 'critical' || (p.health_score && p.health_score < 30))
+
+    // Cash flow last 30 days
+    const income30d = transactions.filter((t: any) => t.type === 'RECEIVE').reduce((s: number, t: any) => s + Math.abs(Number(t.total) || 0), 0)
+    const expenses30d = transactions.filter((t: any) => t.type === 'SPEND').reduce((s: number, t: any) => s + Math.abs(Number(t.total) || 0), 0)
+
+    // Pipeline
+    const totalPipeline = openOpps.reduce((s: number, o: any) => s + (Number(o.monetary_value) || 0), 0)
+
+    return JSON.stringify({
+      projects_overview: {
+        total: projects.length,
+        healthy: { count: healthy.length, names: healthy.map((p: any) => p.project_code) },
+        at_risk: { count: atRisk.length, names: atRisk.map((p: any) => p.project_code) },
+        critical: { count: critical.length, names: critical.map((p: any) => p.project_code) },
+      },
+      financials_30d: {
+        income: income30d,
+        expenses: expenses30d,
+        net: income30d - expenses30d,
+      },
+      pipeline: {
+        total_value: totalPipeline,
+        open_deals: openOpps.length,
+      },
+      contacts_needing_attention: staleContacts.map((c: any) => ({
+        name: c.full_name,
+        last_contact: c.last_contact_date,
+        days_ago: Math.floor((Date.now() - new Date(c.last_contact_date).getTime()) / 86400000),
+      })),
+      top_projects: projects
+        .sort((a: any, b: any) => (b.pipeline_value || 0) - (a.pipeline_value || 0))
+        .slice(0, 5)
+        .map((p: any) => ({
+          code: p.project_code,
+          name: p.project_name,
+          health: p.health_score,
+          revenue: p.total_income,
+          pipeline: p.pipeline_value,
+        })),
     })
   } catch (err) {
     return JSON.stringify({ error: (err as Error).message })

@@ -99,7 +99,7 @@ export async function GET() {
 
     const pipelineValue = oppData
       .filter((o: any) => o.status !== 'lost')
-      .reduce((s: number, o: any) => s + ((o.monetary_value || 0) / 100), 0)
+      .reduce((s: number, o: any) => s + (Number(o.monetary_value) || 0), 0)
 
     const grantFunding = grantData
       .filter((g: any) => g.status === 'approved' || g.status === 'acquitted')
@@ -194,7 +194,7 @@ export async function GET() {
         name: opp.name,
         pipeline: opp.pipeline_name,
         stage: opp.stage_name,
-        value: (opp.monetary_value || 0) / 100,
+        value: Number(opp.monetary_value) || 0,
         status: opp.status,
       })),
       grants: grantData.map((g: any) => ({

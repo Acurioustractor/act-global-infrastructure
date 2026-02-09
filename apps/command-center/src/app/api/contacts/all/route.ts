@@ -132,17 +132,24 @@ export async function GET(request: NextRequest) {
     const contacts = rawContacts || []
     const now = new Date()
 
-    // Fetch latest communication per contact
+    // Fetch latest communication + pipeline stats per contact
     const ghlIds = contacts.map(c => c.ghl_id)
     const latestCommsMap = new Map<string, { subject: string; occurred_at: string }>()
+    const pipelineMap = new Map<string, { pipeline_value: number; opp_count: number }>()
 
     if (ghlIds.length > 0) {
-      const { data: latestComms } = await supabase
-        .from('communications_history')
-        .select('ghl_contact_id, subject, occurred_at')
-        .in('ghl_contact_id', ghlIds)
-        .order('ghl_contact_id')
-        .order('occurred_at', { ascending: false })
+      const [{ data: latestComms }, { data: opps }] = await Promise.all([
+        supabase
+          .from('communications_history')
+          .select('ghl_contact_id, subject, occurred_at')
+          .in('ghl_contact_id', ghlIds)
+          .order('ghl_contact_id')
+          .order('occurred_at', { ascending: false }),
+        supabase
+          .from('ghl_opportunities')
+          .select('ghl_contact_id, monetary_value, status')
+          .in('ghl_contact_id', ghlIds),
+      ])
 
       if (latestComms) {
         for (const comm of latestComms) {
@@ -152,6 +159,16 @@ export async function GET(request: NextRequest) {
               occurred_at: comm.occurred_at,
             })
           }
+        }
+      }
+
+      if (opps) {
+        for (const opp of opps) {
+          if (!opp.ghl_contact_id) continue
+          const existing = pipelineMap.get(opp.ghl_contact_id) || { pipeline_value: 0, opp_count: 0 }
+          existing.pipeline_value += Number(opp.monetary_value) || 0
+          existing.opp_count += 1
+          pipelineMap.set(opp.ghl_contact_id, existing)
         }
       }
     }
@@ -165,6 +182,8 @@ export async function GET(request: NextRequest) {
         ? Math.floor((now.getTime() - new Date(c.last_contact_date).getTime()) / 86400000)
         : null
 
+      const pipelineStats = pipelineMap.get(c.ghl_id)
+
       return {
         id: c.id,
         ghl_id: c.ghl_id,
@@ -176,6 +195,8 @@ export async function GET(request: NextRequest) {
         days_since_contact: daysSinceContact,
         last_email_subject: latestComm?.subject || null,
         last_email_date: latestComm?.occurred_at || null,
+        pipeline_value: pipelineStats?.pipeline_value || 0,
+        opportunity_count: pipelineStats?.opp_count || 0,
       }
     })
 

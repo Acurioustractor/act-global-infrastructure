@@ -4,7 +4,8 @@ import { useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import Link from 'next/link'
 import Image from 'next/image'
-import { getProjects, getNotionProjectsRaw, type Project, type NotionProject } from '@/lib/api'
+import { getProjects, getNotionProjectsRaw, getProjectsSummary, type Project, type NotionProject, type ProjectSummaryRow } from '@/lib/api'
+import { TrendingUp, TrendingDown } from 'lucide-react'
 import {
   Search,
   FolderKanban,
@@ -79,6 +80,17 @@ export default function ProjectsPage() {
   const { data: notionData } = useQuery({
     queryKey: ['projects', 'notion'],
     queryFn: getNotionProjectsRaw,
+  })
+
+  const { data: summaryData } = useQuery({
+    queryKey: ['projects', 'summary'],
+    queryFn: () => getProjectsSummary(),
+  })
+
+  // Create a map of project summaries by code for quick lookup
+  const summaryMap = new Map<string, ProjectSummaryRow>()
+  summaryData?.projects?.forEach(p => {
+    summaryMap.set(p.project_code, p)
   })
 
   // Create a map of notion projects by name for quick lookup
@@ -470,13 +482,38 @@ export default function ProjectsPage() {
 
                     {/* Stats Row */}
                     <div className="flex items-center gap-4 mt-3 pt-3 border-t border-white/5">
+                      {(() => {
+                        const ps = summaryMap.get(project.code || '')
+                        return ps ? (
+                          <>
+                            {ps.total_income > 0 && (
+                              <div className="flex items-center gap-1 text-xs text-green-400">
+                                <TrendingUp className="h-3 w-3" />
+                                <span>${ps.total_income >= 1000 ? `${(ps.total_income / 1000).toFixed(0)}k` : ps.total_income.toLocaleString()}</span>
+                              </div>
+                            )}
+                            {ps.total_expenses > 0 && (
+                              <div className="flex items-center gap-1 text-xs text-red-400">
+                                <TrendingDown className="h-3 w-3" />
+                                <span>${ps.total_expenses >= 1000 ? `${(ps.total_expenses / 1000).toFixed(0)}k` : ps.total_expenses.toLocaleString()}</span>
+                              </div>
+                            )}
+                            {ps.pipeline_value > 0 && (
+                              <div className="flex items-center gap-1 text-xs text-indigo-400">
+                                <DollarSign className="h-3 w-3" />
+                                <span>${ps.pipeline_value >= 1000 ? `${(ps.pipeline_value / 1000).toFixed(0)}k` : ps.pipeline_value.toLocaleString()}</span>
+                              </div>
+                            )}
+                          </>
+                        ) : null
+                      })()}
                       {project.contacts !== undefined && project.contacts > 0 && (
                         <div className="flex items-center gap-1 text-xs text-white/40">
                           <Users className="h-3 w-3" />
                           <span>{project.contacts}</span>
                         </div>
                       )}
-                      {notionProject?.data?.budget !== undefined && notionProject.data.budget > 0 && (
+                      {notionProject?.data?.budget !== undefined && notionProject.data.budget > 0 && !summaryMap.has(project.code || '') && (
                         <div className="flex items-center gap-1 text-xs text-white/40">
                           <DollarSign className="h-3 w-3" />
                           <span>${(notionProject.data.budget / 1000).toFixed(0)}k</span>

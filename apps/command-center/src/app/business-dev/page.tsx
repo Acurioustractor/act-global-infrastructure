@@ -12,6 +12,7 @@ import {
   ChevronDown,
   ChevronRight,
   Target,
+  Tag,
   Users,
   Calendar,
   DollarSign,
@@ -79,6 +80,21 @@ export default function BusinessDevPage() {
     },
     staleTime: 5 * 60 * 1000
   })
+
+  // Also fetch business overview for R&D live data
+  const { data: bizData } = useQuery({
+    queryKey: ['business', 'overview'],
+    queryFn: async () => {
+      const response = await fetch('/api/business/overview')
+      if (!response.ok) throw new Error('Failed to fetch')
+      return response.json()
+    },
+    staleTime: 5 * 60 * 1000
+  })
+
+  const rdLive = bizData?.rdTaxCredit?.liveSpend
+  const txCoverage = bizData?.transactionCoverage
+  const actions = bizData?.quarterReviewActions
 
   const initiatives: Initiative[] = data?.initiatives || []
   const metrics: Metric = data?.metrics || EMPTY_METRICS
@@ -545,22 +561,112 @@ export default function BusinessDevPage() {
               </div>
             </div>
 
-            {/* Key Learnings */}
+            {/* R&D Alignment & FY26 Review */}
             <div className="glass-card p-6">
               <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
-                <Lightbulb className="w-5 h-5 text-yellow-400" />
-                Key Learnings
+                <FlaskConical className="w-5 h-5 text-purple-400" />
+                R&D Tax Alignment
               </h3>
-              {initiatives.length === 0 ? (
-                <div className="py-6 text-center">
-                  <p className="text-gray-400 text-sm">No learnings recorded yet.</p>
+              {rdLive ? (
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm text-gray-400">R&D Spend (FY26)</span>
+                    <span className="text-sm font-bold text-white">${(rdLive.total / 1000).toFixed(0)}k</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm text-gray-400">$20K Threshold</span>
+                    <span className={cn(
+                      'text-sm font-bold',
+                      rdLive.aboveThreshold ? 'text-green-400' : 'text-amber-400'
+                    )}>
+                      {rdLive.aboveThreshold ? 'Met' : 'Below'}
+                    </span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm text-gray-400">43.5% Refund</span>
+                    <span className="text-sm font-bold text-purple-400">${(rdLive.refundPotential / 1000).toFixed(0)}k</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm text-gray-400">+ Payroll (est.)</span>
+                    <span className="text-sm font-bold text-purple-300">~$62k/yr</span>
+                  </div>
+                  <div className="pt-3 border-t border-white/10">
+                    <p className="text-xs text-gray-500">
+                      Wages are biggest R&D item. Need: Pty Ltd → Payroll → AusIndustry registration.
+                    </p>
+                  </div>
                 </div>
               ) : (
-                <div className="space-y-3">
-                  {/* Learnings would be populated from API data */}
-                </div>
+                <p className="text-gray-400 text-sm">Loading R&D data...</p>
               )}
             </div>
+
+            {/* Transaction Coverage */}
+            {txCoverage && (
+              <div className="glass-card p-6">
+                <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                  <Tag className="w-5 h-5 text-amber-400" />
+                  Transaction Coverage
+                </h3>
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-sm text-gray-400">Tagged</span>
+                    <span className="text-sm font-bold text-white">
+                      {txCoverage.tagged}/{txCoverage.total} ({txCoverage.pct}%)
+                    </span>
+                  </div>
+                  <div className="w-full h-2 bg-white/10 rounded-full overflow-hidden">
+                    <div
+                      className={cn(
+                        'h-full rounded-full',
+                        txCoverage.pct >= 80 ? 'bg-green-500' : txCoverage.pct >= 50 ? 'bg-amber-500' : 'bg-red-500'
+                      )}
+                      style={{ width: `${txCoverage.pct}%` }}
+                    />
+                  </div>
+                  <a
+                    href="/finance/tagger"
+                    className="block text-center mt-3 px-3 py-2 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/30 text-xs font-semibold transition-all"
+                  >
+                    Open Tagger
+                  </a>
+                </div>
+              </div>
+            )}
+
+            {/* FY26 Action Steps */}
+            {actions && (
+              <div className="glass-card p-6">
+                <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                  <CheckCircle2 className="w-5 h-5 text-green-400" />
+                  Quarter Review Steps
+                </h3>
+                <div className="space-y-3">
+                  {Object.values(actions).map((action: any) => (
+                    <div key={action.title} className="p-3 rounded-lg bg-white/5">
+                      <p className="text-xs font-semibold text-white mb-2">{action.title}</p>
+                      <div className="flex items-center gap-1">
+                        <span className="text-xs text-gray-500">
+                          {action.steps.filter((s: any) => s.done).length}/{action.steps.length} done
+                        </span>
+                        <div className="flex-1 h-1 bg-white/10 rounded-full overflow-hidden ml-2">
+                          <div
+                            className="h-full bg-green-500"
+                            style={{ width: `${(action.steps.filter((s: any) => s.done).length / action.steps.length) * 100}%` }}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                  <a
+                    href="/business#rd-tax"
+                    className="block text-center mt-2 px-3 py-2 rounded-lg bg-purple-500/20 hover:bg-purple-500/30 text-purple-300 border border-purple-500/30 text-xs font-semibold transition-all"
+                  >
+                    View Full Action Plans
+                  </a>
+                </div>
+              </div>
+            )}
 
             {/* Quick Actions */}
             <div className="glass-card p-6">

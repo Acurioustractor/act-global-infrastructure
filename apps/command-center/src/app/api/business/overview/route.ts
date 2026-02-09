@@ -89,6 +89,46 @@ export async function GET() {
 
   const receivables = (unpaidInvoices || []).reduce((sum, inv) => sum + (Number(inv.total) || 0), 0)
 
+  // === LIVE R&D SPEND DATA ===
+  const RD_ELIGIBLE_PROJECTS = ['ACT-EL', 'ACT-IN', 'ACT-JH', 'ACT-GD', 'ACT-PS', 'ACT-CF']
+
+  const { data: rdTxns } = await supabase
+    .from('xero_transactions')
+    .select('project_code, total')
+    .in('project_code', RD_ELIGIBLE_PROJECTS)
+    .gte('date', fyStartStr)
+
+  let rdSpendTotal = 0
+  const rdByProject: Record<string, number> = {}
+  for (const tx of rdTxns || []) {
+    const amt = Math.abs(Number(tx.total) || 0)
+    rdSpendTotal += amt
+    rdByProject[tx.project_code] = (rdByProject[tx.project_code] || 0) + amt
+  }
+
+  // Transaction tagging coverage
+  const { count: totalTxnCount } = await supabase
+    .from('xero_transactions')
+    .select('*', { count: 'exact', head: true })
+    .gte('date', fyStartStr)
+
+  const { count: taggedTxnCount } = await supabase
+    .from('xero_transactions')
+    .select('*', { count: 'exact', head: true })
+    .gte('date', fyStartStr)
+    .not('project_code', 'is', null)
+    .neq('project_code', '')
+
+  // Missing receipts (SPEND > $50 with no contact)
+  const { data: missingReceiptTxns } = await supabase
+    .from('xero_transactions')
+    .select('id, total, date, contact_name')
+    .gte('date', fyStartStr)
+    .eq('type', 'SPEND')
+    .is('contact_name', null)
+    .order('total', { ascending: true })
+    .limit(20)
+
   // === STATIC CONFIG DATA ===
   const data = {
     entities: {
@@ -165,16 +205,75 @@ export async function GET() {
       minSpend: 20000,
       ausIndustryRegistered: false,
       eligibleActivities: [
-        'Empathy Ledger',
-        'JusticeHub',
-        'Goods Marketplace',
-        'World Tour 2026',
-        'Farm R&D',
-        'ALMA Measurement',
-        'LCAA Framework',
-        'Agentic System',
+        'Empathy Ledger (Core R&D)',
+        'ALMA / Bot Intelligence (Core R&D)',
+        'JusticeHub Tech (Supporting)',
+        'Goods Marketplace (Supporting)',
+        'PICC Photo Studio (Supporting)',
+        'The Confessional (Supporting)',
       ],
       trackingPlatform: 'Git commits + time logs + this system',
+      liveSpend: {
+        total: Math.round(rdSpendTotal),
+        byProject: rdByProject,
+        refundPotential: Math.round(rdSpendTotal * 0.435),
+        aboveThreshold: rdSpendTotal >= 20000,
+      },
+    },
+    transactionCoverage: {
+      total: totalTxnCount || 0,
+      tagged: taggedTxnCount || 0,
+      pct: totalTxnCount ? Math.round(((taggedTxnCount || 0) / totalTxnCount) * 100) : 0,
+    },
+    missingReceipts: (missingReceiptTxns || []).map(t => ({
+      id: t.id,
+      total: Math.abs(Number(t.total)),
+      date: t.date,
+      contact: t.contact_name || '(no contact)',
+    })),
+    quarterReviewActions: {
+      receiptChase: {
+        title: 'Chase Missing Receipts',
+        steps: [
+          { step: 'Review missing receipts list below (SPEND >$50, no contact)', done: false },
+          { step: 'Cross-reference with NAB bank statements to identify vendors', done: false },
+          { step: 'Upload receipts via Dext mobile app', done: false },
+          { step: 'For <$50 without receipts, document with bank statement backup', done: false },
+          { step: 'Set up Dext mobile app for real-time capture going forward', done: false },
+        ],
+      },
+      payrollSetup: {
+        title: 'Payroll & Employment Setup',
+        steps: [
+          { step: 'Register ACT Pty Ltd as employer with ATO', done: false },
+          { step: 'Set up payroll in Xero (built-in payroll module)', done: false },
+          { step: 'Draft employment contracts — Ben: 60% R&D, Nic: 40% R&D', done: false },
+          { step: 'Set up superannuation accounts (11.5%)', done: false },
+          { step: 'Register for PAYG withholding', done: false },
+          { step: 'Set up STP (Single Touch Payroll) reporting', done: false },
+        ],
+      },
+      trustSetup: {
+        title: 'Trust & Distribution Structure',
+        steps: [
+          { step: 'Create Knight Family Trust (accountant)', done: false },
+          { step: 'Create Marchesi Family Trust (accountant)', done: false },
+          { step: 'Set up trust bank accounts', done: false },
+          { step: 'Establish quarterly distribution schedule', done: false },
+          { step: 'Link trust accounts to personal mortgage offset accounts', done: false },
+        ],
+      },
+      rdRegistration: {
+        title: 'R&D Tax Incentive Registration',
+        steps: [
+          { step: 'Create ACT Pty Ltd first (sole trader not eligible)', done: false },
+          { step: 'Document R&D activities NOW — git commits, time logs, hypotheses', done: false },
+          { step: 'Run: node scripts/generate-rd-activity-log.mjs for evidence', done: false },
+          { step: 'Engage R&D tax consultant (Standard Ledger or Azure Group)', done: false },
+          { step: 'Register with AusIndustry (within 10 months of FY end)', done: false },
+          { step: 'File R&D claim with tax return', done: false },
+        ],
+      },
     },
     compliance: [
       { name: 'ASIC Annual Review (AKT)', dueDate: '2026-06-30', status: 'pending', owner: 'Nic' },

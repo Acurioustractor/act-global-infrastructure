@@ -7,12 +7,14 @@ import {
   TrendingUp,
   Mail,
   ListChecks,
+  Activity,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import {
   getEcosystemOverview,
   getActionFeed,
   getBookkeepingProgress,
+  getProjectsSummary,
 } from '@/lib/api'
 
 const REFRESH_INTERVAL = 30 * 1000
@@ -36,6 +38,12 @@ export function QuickStats() {
     refetchInterval: REFRESH_INTERVAL,
   })
 
+  const { data: summaryData } = useQuery({
+    queryKey: ['projects', 'summary'],
+    queryFn: () => getProjectsSummary(),
+    refetchInterval: REFRESH_INTERVAL * 2,
+  })
+
   const activeProjects = (ecosystem?.projects || []).filter(
     (p) => p.contacts > 0 || p.recentComms > 0 || p.opportunities > 0
   ).length
@@ -43,7 +51,13 @@ export function QuickStats() {
   const totalOppValue = ecosystem?.totals?.opportunityValue || 0
   const emailActions = actionData?.counts?.email_reply || 0
   const taskActions = (actionData?.counts?.task || 0) + (actionData?.counts?.overdue_contact || 0)
-  const bankBalance = financeData?.summary?.bankBalance || 0
+  const netPosition = financeData?.summary?.netPosition || 0
+
+  // Ecosystem health: weighted average of project health scores
+  const healthProjects = (summaryData?.projects || []).filter((p: any) => p.health_score != null)
+  const ecosystemHealth = healthProjects.length > 0
+    ? Math.round(healthProjects.reduce((sum: number, p: any) => sum + p.health_score, 0) / healthProjects.length)
+    : null
 
   const stats = [
     {
@@ -79,10 +93,19 @@ export function QuickStats() {
       bg: taskActions > 0 ? 'bg-red-500/20' : 'bg-green-500/20',
       href: '/knowledge/actions',
     },
+    ...(ecosystemHealth != null ? [{
+      label: 'Ecosystem Health',
+      value: ecosystemHealth,
+      sub: `${healthProjects.length} projects`,
+      icon: Activity,
+      color: ecosystemHealth >= 60 ? 'text-green-400' : ecosystemHealth >= 30 ? 'text-amber-400' : 'text-red-400',
+      bg: ecosystemHealth >= 60 ? 'bg-green-500/20' : ecosystemHealth >= 30 ? 'bg-amber-500/20' : 'bg-red-500/20',
+      href: '/projects',
+    }] : []),
   ]
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3">
+    <div className={cn('grid grid-cols-2 gap-2 md:gap-3', stats.length > 4 ? 'md:grid-cols-5' : 'md:grid-cols-4')}>
       {stats.map((stat) => {
         const Icon = stat.icon
         return (

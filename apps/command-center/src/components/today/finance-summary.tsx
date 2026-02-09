@@ -43,9 +43,9 @@ export function FinanceSummary() {
         <div className="space-y-3">
           <Link href="/finance" className="glass-card-sm p-3 block hover:border-green-500/30 transition-all">
             <div className="flex items-center justify-between">
-              <span className="text-xs text-white/50">Bank Balance</span>
+              <span className="text-xs text-white/50">Net Position</span>
               <span className="text-lg font-bold text-green-400">
-                ${(finance.bankBalance || 0).toLocaleString()}
+                ${(finance.netPosition || 0).toLocaleString()}
               </span>
             </div>
           </Link>

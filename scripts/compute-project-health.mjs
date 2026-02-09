@@ -108,7 +108,7 @@ async function computeProjectHealth(code, project) {
 
   const pipelineValue = opportunities
     .filter(o => o.status !== 'lost')
-    .reduce((s, o) => s + ((o.monetary_value || 0) / 100), 0);
+    .reduce((s, o) => s + (Number(o.monetary_value) || 0), 0);
 
   const grantFunding = grants
     .filter(g => g.status === 'approved' || g.status === 'acquitted')

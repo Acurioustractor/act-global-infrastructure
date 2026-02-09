@@ -752,26 +752,96 @@ function EmploymentSection() {
   )
 }
 
+function StepChecklist({ title, steps }: { title: string; steps: Array<{ step: string; done: boolean }> }) {
+  const doneCount = steps.filter(s => s.done).length
+  return (
+    <div className="glass-card p-5 mb-4">
+      <div className="flex items-center justify-between mb-3">
+        <h4 className="font-semibold text-white text-sm">{title}</h4>
+        <span className="text-xs text-white/40">{doneCount}/{steps.length}</span>
+      </div>
+      <div className="space-y-1">
+        {steps.map((item, i) => (
+          <div key={i} className="flex items-center gap-3 py-1.5 px-2 rounded-lg hover:bg-white/5">
+            {item.done ? (
+              <CheckCircle2 className="h-4 w-4 text-green-400 shrink-0" />
+            ) : (
+              <div className="h-4 w-4 rounded border border-white/20 shrink-0" />
+            )}
+            <span className={cn('text-sm', item.done ? 'text-white/50 line-through' : 'text-white')}>
+              {item.step}
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 function RdTaxSection({ data }: { data: BusinessData }) {
+  const liveSpend = data.rdTaxCredit.liveSpend
+  const actions = data.quarterReviewActions
+
   return (
     <div className="space-y-6">
-      <SectionHeader title="R&D Tax Incentive" description="43.5% refundable offset for eligible R&D activities." />
+      <SectionHeader title="R&D Tax Incentive" description="43.5% refundable offset for eligible R&D activities. Live data from FY26 transaction tagging." />
 
       <div className="glass-card p-6">
-        <div className="grid grid-cols-3 gap-4 mb-6">
+        {/* Live R&D stats */}
+        <div className="grid grid-cols-4 gap-4 mb-6">
           <div className="glass-card p-4 text-center">
             <p className="text-2xl font-bold text-emerald-400">{data.rdTaxCredit.refundRate}</p>
             <p className="text-xs text-white/40 mt-1">Refund Rate</p>
           </div>
           <div className="glass-card p-4 text-center">
-            <p className="text-2xl font-bold text-blue-400">${(data.rdTaxCredit.minSpend / 1000).toFixed(0)}K</p>
-            <p className="text-xs text-white/40 mt-1">Min Spend Threshold</p>
+            <p className={cn(
+              'text-2xl font-bold',
+              liveSpend && liveSpend.aboveThreshold ? 'text-green-400' : 'text-amber-400'
+            )}>
+              {liveSpend ? formatCurrency(liveSpend.total) : `$${(data.rdTaxCredit.minSpend / 1000).toFixed(0)}K`}
+            </p>
+            <p className="text-xs text-white/40 mt-1">
+              {liveSpend ? 'R&D Spend (tagged)' : 'Min Spend Threshold'}
+            </p>
           </div>
           <div className="glass-card p-4 text-center">
-            <p className="text-2xl font-bold text-white">{data.rdTaxCredit.ausIndustryRegistered ? 'Yes' : 'No'}</p>
-            <p className="text-xs text-white/40 mt-1">AusIndustry Registered</p>
+            <p className="text-2xl font-bold text-purple-400">
+              {liveSpend ? formatCurrency(liveSpend.refundPotential) : '$0'}
+            </p>
+            <p className="text-xs text-white/40 mt-1">Refund Potential (spend)</p>
+          </div>
+          <div className="glass-card p-4 text-center">
+            <p className="text-2xl font-bold text-blue-400">~$62K</p>
+            <p className="text-xs text-white/40 mt-1">With Payroll (est.)</p>
           </div>
         </div>
+
+        {/* R&D spend by project */}
+        {liveSpend && Object.keys(liveSpend.byProject).length > 0 && (
+          <div className="mb-6">
+            <h3 className="text-xs font-semibold text-white/40 uppercase tracking-wider mb-3">R&D Spend by Project</h3>
+            <div className="space-y-1">
+              {Object.entries(liveSpend.byProject)
+                .sort(([, a], [, b]) => b - a)
+                .map(([code, amount]) => (
+                  <div key={code} className="flex items-center justify-between py-2 px-3 rounded-lg bg-white/5">
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs px-2 py-0.5 rounded bg-purple-500/20 text-purple-300">
+                        {['ACT-EL', 'ACT-IN'].includes(code) ? 'Core' : 'Supporting'}
+                      </span>
+                      <span className="text-sm text-white">{code}</span>
+                    </div>
+                    <span className="text-sm font-semibold text-white/80 tabular-nums">{formatCurrency(amount)}</span>
+                  </div>
+                ))}
+            </div>
+            <div className="mt-2 p-3 rounded-lg bg-white/5 border border-white/10">
+              <p className="text-xs text-white/50">
+                Note: Excludes wages — the biggest R&D item. With payroll set up ($120K/person, 60%/40% R&D split), total R&D refund potential is ~$62K/year for two founders.
+              </p>
+            </div>
+          </div>
+        )}
 
         <h3 className="font-semibold text-white mb-3">Eligible Activities</h3>
         <div className="flex flex-wrap gap-2 mb-6">
@@ -783,18 +853,17 @@ function RdTaxSection({ data }: { data: BusinessData }) {
         </div>
 
         <SuggestionsList items={[
-          "Don't register until after first FY with the Pty Ltd",
+          "Create Pty Ltd FIRST — sole traders can't claim R&D",
           'Start documenting R&D activities NOW — git commits, time logs, hypotheses',
           '43.5% refundable offset for companies with turnover < $20M',
-          'Both software and physical R&D (manufacturing, gardens) are eligible',
+          'Wages are the biggest R&D expense — need payroll set up to claim',
           'Standard Ledger offers flat-fee R&D claims ($3K-5K)',
-          'New AusIndustry application form mandatory from FY25 onwards',
-          'World Tour 2026: international field testing may be claimable',
           'Keep experiment logs: hypothesis, method, results, what was learned',
         ]} />
 
         <ActionLinks links={[
           { label: 'AusIndustry R&D Tax Incentive', url: 'https://business.gov.au/grants-and-programs/research-and-development-tax-incentive' },
+          { label: 'Transaction Tagger (R&D view)', url: '/finance/tagger' },
         ]} />
 
         <div className="mb-5">
@@ -803,6 +872,50 @@ function RdTaxSection({ data }: { data: BusinessData }) {
 
         <AskAdvisorButton sectionId="rd-tax" question="How do we register for the R&D Tax Incentive? What documentation should we start collecting now? Can we claim international R&D activities from the World Tour?" />
       </div>
+
+      {/* Step-by-step action plans */}
+      {actions && (
+        <div>
+          <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
+            <ListChecks className="h-5 w-5 text-purple-400" />
+            FY26 Quarter Review — Action Plans
+          </h3>
+          <StepChecklist title={actions.rdRegistration.title} steps={actions.rdRegistration.steps} />
+          <StepChecklist title={actions.payrollSetup.title} steps={actions.payrollSetup.steps} />
+          <StepChecklist title={actions.trustSetup.title} steps={actions.trustSetup.steps} />
+          <StepChecklist title={actions.receiptChase.title} steps={actions.receiptChase.steps} />
+        </div>
+      )}
+
+      {/* Missing receipts */}
+      {data.missingReceipts && data.missingReceipts.length > 0 && (
+        <div className="glass-card p-6">
+          <h3 className="font-semibold text-white mb-4 flex items-center gap-2">
+            <AlertTriangle className="h-5 w-5 text-amber-400" />
+            Missing Receipts (SPEND, no contact)
+          </h3>
+          <div className="overflow-hidden rounded-xl border border-white/10">
+            <table className="w-full">
+              <thead>
+                <tr className="border-b border-white/10 bg-white/5">
+                  <th className="text-left text-xs font-medium text-white/40 uppercase tracking-wider px-5 py-3">Date</th>
+                  <th className="text-right text-xs font-medium text-white/40 uppercase tracking-wider px-5 py-3">Amount</th>
+                  <th className="text-left text-xs font-medium text-white/40 uppercase tracking-wider px-5 py-3">Contact</th>
+                </tr>
+              </thead>
+              <tbody>
+                {data.missingReceipts.map((tx: { id: string; date: string; total: number; contact: string }) => (
+                  <tr key={tx.id} className="border-b border-white/5 hover:bg-white/5 transition-colors">
+                    <td className="px-5 py-2 text-sm text-white/60">{tx.date}</td>
+                    <td className="px-5 py-2 text-sm text-right text-white tabular-nums">{formatCurrency(tx.total)}</td>
+                    <td className="px-5 py-2 text-sm text-white/40">{tx.contact}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

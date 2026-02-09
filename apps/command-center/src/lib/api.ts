@@ -430,12 +430,17 @@ export async function getProposalStats() {
 // Bookkeeping/Finance
 export interface BookkeepingProgress {
   summary: {
+    totalIncome: number
+    totalExpenses: number
+    netPosition: number
     receivables: { total: number; count: number }
     payables: { total: number; count: number }
-    bankBalance: number
     monthlyIncome: number
     monthlyExpenses: number
   }
+  monthlyTrend: Array<{ month: string; income: number; expenses: number }>
+  topIncomeContacts: Array<{ name: string; total: number }>
+  topExpenseContacts: Array<{ name: string; total: number }>
   overdueInvoices: {
     count: number
     total: number
@@ -446,10 +451,13 @@ export interface BookkeepingProgress {
       due_date: string
     }>
   }
-  uncategorized: {
-    count: number
-    amount: number
-  }
+  outstandingReceivables: Array<{
+    invoice_number: string
+    contact_name: string
+    amount_due: number
+    due_date: string
+    overdue: boolean
+  }>
 }
 
 export async function getBookkeepingProgress() {
@@ -1185,6 +1193,8 @@ export interface AllContact {
   days_since_contact: number | null
   last_email_subject: string | null
   last_email_date: string | null
+  pipeline_value?: number
+  opportunity_count?: number
 }
 
 export async function getAllContacts(params?: {
@@ -1319,6 +1329,29 @@ export interface BusinessData {
     ausIndustryRegistered: boolean
     eligibleActivities: string[]
     trackingPlatform: string
+    liveSpend?: {
+      total: number
+      byProject: Record<string, number>
+      refundPotential: number
+      aboveThreshold: boolean
+    }
+  }
+  transactionCoverage?: {
+    total: number
+    tagged: number
+    pct: number
+  }
+  missingReceipts?: Array<{
+    id: string
+    total: number
+    date: string
+    contact: string
+  }>
+  quarterReviewActions?: {
+    receiptChase: { title: string; steps: Array<{ step: string; done: boolean }> }
+    payrollSetup: { title: string; steps: Array<{ step: string; done: boolean }> }
+    trustSetup: { title: string; steps: Array<{ step: string; done: boolean }> }
+    rdRegistration: { title: string; steps: Array<{ step: string; done: boolean }> }
   }
   compliance: Array<{
     name: string
@@ -1495,6 +1528,8 @@ export interface PipelineOpportunity {
   createdAt: string
   updatedAt: string
   daysInStage: number
+  projectCode?: string
+  contactEmail?: string
 }
 
 export interface PipelineStage {
@@ -1524,6 +1559,13 @@ export interface PipelineSummary {
     daysSinceUpdate: number
   }>
   wonThisMonth: number
+  wonThisQuarter: number
+  wonAllTime: number
+  wonValueThisQuarter: number
+  wonValueAllTime: number
+  lostThisQuarter: number
+  lostValueThisQuarter: number
+  winRate: number
   avgDealSize: number
 }
 
@@ -2949,4 +2991,116 @@ export interface TaxData {
 export async function getTaxData(quarter?: string) {
   const params = quarter ? `?quarter=${quarter}` : ''
   return fetchApi<TaxData>(`/api/finance/tax${params}`)
+}
+
+// ==========================================
+// Transaction Tagger
+// ==========================================
+
+export interface UntaggedGroup {
+  contactName: string
+  type: string
+  count: number
+  total: number
+  sampleDates: string[]
+  suggestedCode: string | null
+  rdEligible: boolean
+}
+
+export interface ProjectCodeOption {
+  code: string
+  name: string
+  category: string
+}
+
+export interface RdSummary {
+  totalSpend: number
+  byProject: Record<string, number>
+  threshold: number
+  eligibleProjects: string[]
+  refundRate: number
+}
+
+export interface UntaggedTransactionsResponse {
+  groups: UntaggedGroup[]
+  totalUntagged: number
+  totalTransactions: number
+  projectCodes: ProjectCodeOption[]
+  rd: RdSummary
+}
+
+export async function getUntaggedTransactions() {
+  return fetchApi<UntaggedTransactionsResponse>('/api/transactions/untagged')
+}
+
+export async function tagTransactions(params: {
+  contactName?: string
+  type?: string
+  ids?: string[]
+  projectCode: string
+}) {
+  return fetchApi<{ success: boolean; updated: number }>('/api/transactions/tag', {
+    method: 'POST',
+    body: JSON.stringify(params),
+  })
+}
+
+// ── Cross-Domain Intelligence ─────────────────────────────────────────
+
+export interface ActivityStreamItem {
+  activity_type: 'transaction' | 'email' | 'opportunity' | 'meeting'
+  source_id: string
+  project_code: string | null
+  activity_date: string
+  title: string
+  description: string | null
+  amount: number | null
+}
+
+export interface ActivityStreamResponse {
+  activities: ActivityStreamItem[]
+}
+
+export async function getActivityStream(params?: { project?: string; limit?: number }) {
+  const qs = new URLSearchParams()
+  if (params?.project) qs.set('project', params.project)
+  if (params?.limit) qs.set('limit', String(params.limit))
+  const query = qs.toString() ? `?${qs.toString()}` : ''
+  return fetchApi<ActivityStreamResponse>(`/api/activity${query}`)
+}
+
+export interface ProjectSummaryRow {
+  project_code: string
+  project_name: string | null
+  health_score: number | null
+  health_status: string | null
+  momentum_score: number | null
+  engagement_score: number | null
+  financial_score: number | null
+  timeline_score: number | null
+  health_calculated_at: string | null
+  total_income: number
+  total_expenses: number
+  net: number
+  transaction_count: number
+  invoice_count: number
+  outstanding_amount: number
+  opportunity_count: number
+  pipeline_value: number
+  open_opportunities: number
+  email_count: number
+  last_email_date: string | null
+  grant_count: number
+  grants_won: number
+  grants_pending: number
+  subscription_monthly_cost: number
+}
+
+export interface ProjectSummaryResponse {
+  projects: ProjectSummaryRow[]
+}
+
+export async function getProjectsSummary(project?: string) {
+  const qs = project ? `?project=${encodeURIComponent(project)}` : ''
+  return fetchApi<ProjectSummaryResponse>(`/api/projects/summary${qs}`)
 }

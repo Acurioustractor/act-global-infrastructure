@@ -408,6 +408,7 @@ export default function PeoplePage() {
                       <th className="px-3 py-3 text-left text-xs font-medium text-white/40 uppercase tracking-wider">Company</th>
                       <th className="px-3 py-3 text-left text-xs font-medium text-white/40 uppercase tracking-wider min-w-[200px]">Projects</th>
                       <th className="px-3 py-3 text-left text-xs font-medium text-white/40 uppercase tracking-wider">Last Email</th>
+                      <th className="px-3 py-3 text-left text-xs font-medium text-white/40 uppercase tracking-wider">Pipeline</th>
                       <th className="w-12 px-3 py-3"></th>
                     </tr>
                   </thead>
@@ -1060,6 +1061,15 @@ function ContactRow({ contact, projects, isSelected, onToggleSelect, onOpenDrawe
             {contact.days_since_contact === null ? 'Never contacted' : 'No emails'}
           </span>
         )}
+      </td>
+      <td className="px-3 py-3">
+        <div className="flex items-center gap-2">
+          {(contact.pipeline_value || 0) > 0 && (
+            <span className="text-[11px] px-1.5 py-0.5 rounded bg-green-500/20 text-green-400 tabular-nums">
+              ${(contact.pipeline_value || 0) >= 1000 ? `${((contact.pipeline_value || 0) / 1000).toFixed(0)}k` : contact.pipeline_value?.toLocaleString()}
+            </span>
+          )}
+        </div>
       </td>
       <td className="px-3 py-3" onClick={(e) => e.stopPropagation()}>
         <a
