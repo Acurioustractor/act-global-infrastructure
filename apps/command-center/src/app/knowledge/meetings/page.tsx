@@ -17,6 +17,7 @@ import {
   Star,
   FileText,
   TrendingUp,
+  ExternalLink,
 } from 'lucide-react'
 import { getKnowledgeMeetings, type KnowledgeMeeting } from '@/lib/api'
 import { cn } from '@/lib/utils'
@@ -124,6 +125,18 @@ export default function MeetingsPage() {
                       <div className="flex items-center gap-2 mb-1">
                         <MessageSquare className="h-4 w-4 text-blue-400 shrink-0" />
                         <h4 className="text-sm font-medium text-white truncate">{m.title}</h4>
+                        {m.source_url && (
+                          <a
+                            href={m.source_url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={(e) => e.stopPropagation()}
+                            className="text-white/30 hover:text-white/70 transition-colors shrink-0"
+                            title="Open in Notion"
+                          >
+                            <ExternalLink className="h-3.5 w-3.5" />
+                          </a>
+                        )}
 
                         {/* Intelligence badges */}
                         {meeting.importance && (
@@ -266,13 +279,26 @@ export default function MeetingsPage() {
                       </div>
                     )}
 
-                    {/* Timestamp */}
-                    {m.recorded_at && (
-                      <div className="text-xs text-white/30">
-                        {format(new Date(m.recorded_at), 'EEEE, MMMM d, yyyy')} &middot;{' '}
-                        {formatDistanceToNow(new Date(m.recorded_at), { addSuffix: true })}
-                      </div>
-                    )}
+                    {/* Timestamp & Notion link */}
+                    <div className="flex items-center justify-between">
+                      {m.recorded_at && (
+                        <div className="text-xs text-white/30">
+                          {format(new Date(m.recorded_at), 'EEEE, MMMM d, yyyy')} &middot;{' '}
+                          {formatDistanceToNow(new Date(m.recorded_at), { addSuffix: true })}
+                        </div>
+                      )}
+                      {m.source_url && (
+                        <a
+                          href={m.source_url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1.5 text-xs text-indigo-400 hover:text-indigo-300 transition-colors"
+                        >
+                          <ExternalLink className="h-3 w-3" />
+                          Open in Notion
+                        </a>
+                      )}
+                    </div>
                   </div>
                 )}
               </div>

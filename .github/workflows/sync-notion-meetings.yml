@@ -1,0 +1,105 @@
+name: Sync Notion Meetings
+
+on:
+  schedule:
+    # Run every 6 hours
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+    inputs:
+      hours_back:
+        description: 'Hours back to sync (default: 12 for overlap safety)'
+        required: false
+        default: '12'
+      full_sync:
+        description: 'Full sync (ignore time filter)'
+        required: false
+        default: 'false'
+        type: boolean
+      dry_run:
+        description: 'Dry run (preview only)'
+        required: false
+        default: 'false'
+        type: boolean
+
+env:
+  NODE_VERSION: '20'
+
+jobs:
+  sync-meetings:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run meeting sync
+        id: sync
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          ARGS="--verbose"
+
+          if [ "${{ github.event_name }}" == "schedule" ]; then
+            ARGS="$ARGS --hours 12"
+          else
+            if [ "${{ github.event.inputs.hours_back }}" != "" ]; then
+              ARGS="$ARGS --hours ${{ github.event.inputs.hours_back }}"
+            fi
+            if [ "${{ github.event.inputs.full_sync }}" == "true" ]; then
+              ARGS="$ARGS --full"
+            fi
+            if [ "${{ github.event.inputs.dry_run }}" == "true" ]; then
+              ARGS="$ARGS --dry-run"
+            fi
+          fi
+
+          echo "Running: node scripts/sync-notion-meetings.mjs $ARGS"
+          node scripts/sync-notion-meetings.mjs $ARGS 2>&1 | tee sync-output.txt
+
+          SYNCED=$(grep -oP 'Synced:\s+\K\d+' sync-output.txt || echo "0")
+          ERRORS=$(grep -oP 'Errors:\s+\K\d+' sync-output.txt || echo "0")
+
+          echo "synced=$SYNCED" >> $GITHUB_OUTPUT
+          echo "errors=$ERRORS" >> $GITHUB_OUTPUT
+
+      - name: Upload sync log
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: meeting-sync-log-${{ github.run_number }}
+          path: sync-output.txt
+          retention-days: 7
+
+      - name: Job summary
+        run: |
+          echo "## Notion Meeting Sync Results" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Metric | Count |" >> $GITHUB_STEP_SUMMARY
+          echo "|--------|-------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Synced | ${{ steps.sync.outputs.synced }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Errors | ${{ steps.sync.outputs.errors }} |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Run at: $(date -u '+%Y-%m-%d %H:%M:%S UTC')" >> $GITHUB_STEP_SUMMARY
+
+  notify-on-failure:
+    runs-on: ubuntu-latest
+    needs: sync-meetings
+    if: failure()
+    steps:
+      - name: Log failure
+        run: |
+          echo "Meeting sync failed at $(date)"
+          echo "Check workflow logs for details"

@@ -67,6 +67,36 @@ const cronScripts = [
     args: '--days 3',
     cron_restart: '0 */6 * * *', // Every 6 hours (4 mailboxes, ~500 msgs per run)
   },
+  {
+    name: 'goods-auto-tagger',
+    script: 'scripts/goods-auto-tagger.mjs',
+    args: '--days 7',
+    cron_restart: '0 9 * * *', // Daily 9am AEST (after gmail sync and briefing)
+  },
+  {
+    name: 'contact-reconciliation',
+    script: 'scripts/reconcile-contacts.mjs',
+    args: '--create-contacts --skip-refetch --limit 100',
+    cron_restart: '30 */6 * * *', // Every 6 hours (30 min after gmail sync)
+  },
+  {
+    name: 'goods-content-sync',
+    script: 'scripts/sync-goods-content-library.mjs',
+    args: '--verbose',
+    cron_restart: '0 10 * * *', // Daily 10am AEST (after auto-tagger at 9am)
+  },
+  {
+    name: 'notion-intelligence',
+    script: 'scripts/sync-project-intelligence-to-notion.mjs',
+    args: '--verbose',
+    cron_restart: '30 7 * * *', // Daily 7:30am AEST (after daily-briefing at 7am)
+  },
+  {
+    name: 'notion-checkbox-poll',
+    script: 'scripts/poll-notion-checkboxes.mjs',
+    args: '--verbose',
+    cron_restart: '*/15 * * * *', // Every 15 minutes
+  },
 ];
 
 module.exports = {

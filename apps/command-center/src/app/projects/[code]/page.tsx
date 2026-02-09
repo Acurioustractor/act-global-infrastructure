@@ -34,6 +34,7 @@ import {
   Receipt,
   CreditCard,
   GitBranch,
+  MessageSquare,
 } from 'lucide-react'
 import { cn, formatRelativeDate } from '@/lib/utils'
 import { AlmaImpact } from '@/components/alma-impact'
@@ -43,6 +44,7 @@ import {
   getRelationships,
   getGHLOpportunities,
   getProjectFinancials,
+  getKnowledgeMeetings,
   getContactName,
   getTemperatureCategory,
   type Contact,
@@ -153,12 +155,17 @@ function getProjectConfig(name: string) {
   }
 }
 
+type TabId = 'overview' | 'financials' | 'pipeline' | 'alma'
+const validTabs: TabId[] = ['overview', 'financials', 'pipeline', 'alma']
+
 interface PageParams {
   params: Promise<{ code: string }>
+  searchParams: Promise<{ tab?: string }>
 }
 
-export default function ProjectPage({ params }: PageParams) {
+export default function ProjectPage({ params, searchParams }: PageParams) {
   const { code } = use(params)
+  const { tab: initialTab } = use(searchParams)
 
   // Fetch Notion projects
   const { data: notionData, isLoading: notionLoading } = useQuery({
@@ -190,8 +197,15 @@ export default function ProjectPage({ params }: PageParams) {
     queryFn: () => getProjectFinancials(code),
   })
 
-  // Tab state
-  const [activeTab, setActiveTab] = useState<'overview' | 'financials' | 'pipeline' | 'alma'>('overview')
+  // Fetch recent meetings for this project
+  const { data: meetingsData } = useQuery({
+    queryKey: ['project', 'meetings', code],
+    queryFn: () => getKnowledgeMeetings({ project: code, days: 90, limit: 5 }),
+  })
+
+  // Tab state (supports ?tab=financials deep-linking from Notion)
+  const defaultTab: TabId = initialTab && validTabs.includes(initialTab as TabId) ? initialTab as TabId : 'overview'
+  const [activeTab, setActiveTab] = useState<TabId>(defaultTab)
 
   // Find the matching Notion project
   const notionProject = notionData?.projects?.find(p => {
@@ -816,6 +830,64 @@ export default function ProjectPage({ params }: PageParams) {
                   </div>
                 ))}
               </div>
+            </div>
+          )}
+
+          {/* Recent Meetings */}
+          {meetingsData && meetingsData.meetings.length > 0 && (
+            <div className="glass-card p-6">
+              <h2 className="text-lg font-semibold text-white flex items-center gap-2 mb-4">
+                <MessageSquare className="h-5 w-5 text-blue-400" />
+                Recent Meetings
+                <span className="text-sm text-white/40 font-normal ml-auto">
+                  {meetingsData.count} in last 90 days
+                </span>
+              </h2>
+              <div className="space-y-3">
+                {meetingsData.meetings.map((m) => (
+                  <div key={m.id} className="glass-card-sm p-4">
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="flex-1 min-w-0">
+                        <h3 className="font-medium text-white text-sm truncate">{m.title}</h3>
+                        {m.summary && (
+                          <p className="text-xs text-white/50 mt-1 line-clamp-2">{m.summary}</p>
+                        )}
+                        <div className="flex items-center gap-3 mt-2">
+                          {m.recorded_at && (
+                            <span className="text-xs text-white/30">
+                              {format(new Date(m.recorded_at), 'MMM d, yyyy')}
+                            </span>
+                          )}
+                          {m.participants && m.participants.length > 0 && (
+                            <span className="text-xs text-white/30 flex items-center gap-1">
+                              <Users className="h-3 w-3" />
+                              {m.participants.length}
+                            </span>
+                          )}
+                        </div>
+                      </div>
+                      {m.source_url && (
+                        <a
+                          href={m.source_url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-white/30 hover:text-white/70 transition-colors shrink-0 mt-1"
+                          title="Open in Notion"
+                        >
+                          <ExternalLink className="h-4 w-4" />
+                        </a>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <Link
+                href={`/knowledge/meetings?project=${code}`}
+                className="btn-glass w-full flex items-center justify-center gap-2 mt-4"
+              >
+                <MessageSquare className="h-4 w-4" />
+                View All Meetings
+              </Link>
             </div>
           )}
 

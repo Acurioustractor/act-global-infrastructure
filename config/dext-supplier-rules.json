@@ -1,0 +1,302 @@
+{
+  "_meta": {
+    "description": "Dext Supplier Rules Configuration - Auto-publish settings for recurring vendors",
+    "version": "1.0.0",
+    "updated": "2026-01-23",
+    "instructions": "Configure these rules in Dext: Business Settings → Connections → Manage (Xero) → Auto-publish",
+    "documentation": "docs/FINANCE_AUTOMATION_SYSTEM.md"
+  },
+  "auto_publish_rules": {
+    "subscriptions": {
+      "description": "Software and subscription vendors - consistent amounts, auto-publish enabled",
+      "vendors": [
+        {
+          "name": "Notion Labs",
+          "aliases": ["Notion", "NOTION LABS"],
+          "auto_publish": true,
+          "category": "Software & Subscriptions",
+          "tax_rate": "GST on Expenses",
+          "tracking": "ACT-IN",
+          "avg_amount": 163.34,
+          "frequency": "monthly"
+        },
+        {
+          "name": "OpenAI",
+          "aliases": ["OPENAI", "OpenAI, LLC"],
+          "auto_publish": true,
+          "category": "Software & Subscriptions",
+          "tax_rate": "GST on Expenses",
+          "tracking": "ACT-IN",
+          "avg_amount": 62.89,
+          "frequency": "monthly"
+        },
+        {
+          "name": "Anthropic",
+          "aliases": ["ANTHROPIC", "Anthropic PBC"],
+          "auto_publish": true,
+          "category": "Software & Subscriptions",
+          "tax_rate": "GST on Expenses",
+          "tracking": "ACT-IN",
+          "avg_amount": 17.01,
+          "frequency": "monthly"
+        },
+        {
+          "name": "Webflow",
+          "aliases": ["WEBFLOW", "Webflow Inc"],
+          "auto_publish": true,
+          "category": "Software & Subscriptions",
+          "tax_rate": "GST on Expenses",
+          "tracking": "ACT-IN",
+          "avg_amount": 78.82,
+          "frequency": "monthly"
+        },
+        {
+          "name": "Xero",
+          "aliases": ["XERO", "Xero Australia"],
+          "auto_publish": true,
+          "category": "Software & Subscriptions",
+          "tax_rate": "GST on Expenses",
+          "tracking": "ACT-IN",
+          "avg_amount": 75.00,
+          "frequency": "monthly"
+        },
+        {
+          "name": "Descript",
+          "aliases": ["DESCRIPT", "Descript Inc"],
+          "auto_publish": true,
+          "category": "Software & Subscriptions",
+          "tax_rate": "GST on Expenses",
+          "tracking": "ACT-IN",
+          "avg_amount": 447.62,
+          "frequency": "monthly"
+        },
+        {
+          "name": "Adobe",
+          "aliases": ["ADOBE", "Adobe Systems"],
+          "auto_publish": true,
+          "category": "Software & Subscriptions",
+          "tax_rate": "GST on Expenses",
+          "tracking": "ACT-IN",
+          "avg_amount": 50.00,
+          "frequency": "monthly"
+        },
+        {
+          "name": "Vercel",
+          "aliases": ["VERCEL", "Vercel Inc"],
+          "auto_publish": true,
+          "category": "Software & Subscriptions",
+          "tax_rate": "GST on Expenses",
+          "tracking": "ACT-IN",
+          "avg_amount": 20.00,
+          "frequency": "monthly"
+        },
+        {
+          "name": "Supabase",
+          "aliases": ["SUPABASE", "Supabase Inc"],
+          "auto_publish": true,
+          "category": "Software & Subscriptions",
+          "tax_rate": "GST on Expenses",
+          "tracking": "ACT-IN",
+          "avg_amount": 25.00,
+          "frequency": "monthly"
+        },
+        {
+          "name": "HighLevel",
+          "aliases": ["HIGHLEVEL", "GoHighLevel", "GHL"],
+          "auto_publish": true,
+          "category": "Software & Subscriptions",
+          "tax_rate": "GST on Expenses",
+          "tracking": "ACT-IN",
+          "avg_amount": 497.00,
+          "frequency": "monthly"
+        },
+        {
+          "name": "GitHub",
+          "aliases": ["GITHUB", "GitHub Inc"],
+          "auto_publish": true,
+          "category": "Software & Subscriptions",
+          "tax_rate": "GST on Expenses",
+          "tracking": "ACT-IN",
+          "avg_amount": 10.00,
+          "frequency": "monthly"
+        },
+        {
+          "name": "Audible",
+          "aliases": ["AUDIBLE", "Audible Australia"],
+          "auto_publish": true,
+          "category": "Software & Subscriptions",
+          "tax_rate": "GST on Expenses",
+          "tracking": "ACT-IN",
+          "avg_amount": 16.45,
+          "frequency": "monthly"
+        },
+        {
+          "name": "Apple",
+          "aliases": ["APPLE PTY LTD", "Apple Inc"],
+          "auto_publish": true,
+          "category": "Software & Subscriptions",
+          "tax_rate": "GST on Expenses",
+          "tracking": "ACT-IN",
+          "avg_amount": 13.49,
+          "frequency": "monthly"
+        }
+      ]
+    },
+    "travel_review": {
+      "description": "Travel vendors - variable amounts, manual review required",
+      "vendors": [
+        {
+          "name": "Qantas",
+          "aliases": ["QANTAS", "Qantas Airways Limited", "Qantas Group Accommodation"],
+          "auto_publish": false,
+          "category": "Travel - Airfare",
+          "tax_rate": "GST on Expenses",
+          "tracking": "ASK_USER",
+          "avg_amount": 1061.63,
+          "note": "Variable amounts - review for project allocation"
+        },
+        {
+          "name": "Uber",
+          "aliases": ["UBER", "Uber Technologies"],
+          "auto_publish": false,
+          "category": "Travel - Transport",
+          "tax_rate": "GST on Expenses",
+          "tracking": "ASK_USER",
+          "avg_amount": 45.38,
+          "note": "Variable - tag with project code on review"
+        },
+        {
+          "name": "Uber Eats",
+          "aliases": ["UBER EATS"],
+          "auto_publish": false,
+          "category": "Meals & Entertainment",
+          "tax_rate": "GST on Expenses",
+          "tracking": "ASK_USER",
+          "avg_amount": 44.26,
+          "note": "Review - may be personal or project-related"
+        },
+        {
+          "name": "Cabcharge",
+          "aliases": ["CABCHARGE", "CabCharge Australia"],
+          "auto_publish": false,
+          "category": "Travel - Transport",
+          "tax_rate": "GST on Expenses",
+          "tracking": "ASK_USER",
+          "avg_amount": 52.21,
+          "note": "Variable - review for project allocation"
+        },
+        {
+          "name": "Taxi",
+          "aliases": ["TAXI RECEIPT", "Taxi"],
+          "auto_publish": false,
+          "category": "Travel - Transport",
+          "tax_rate": "GST on Expenses",
+          "tracking": "ASK_USER",
+          "avg_amount": 39.14,
+          "note": "Variable - review for project allocation"
+        },
+        {
+          "name": "GoGet",
+          "aliases": ["GOGET", "GoGet Carshare"],
+          "auto_publish": false,
+          "category": "Travel - Transport",
+          "tax_rate": "GST on Expenses",
+          "tracking": "ASK_USER",
+          "avg_amount": 12.25,
+          "note": "Car share - tag with project"
+        }
+      ]
+    },
+    "supplies_review": {
+      "description": "Supplies and hardware - variable amounts, manual review",
+      "vendors": [
+        {
+          "name": "Bunnings",
+          "aliases": ["BUNNINGS", "Bunnings Warehouse"],
+          "auto_publish": false,
+          "category": "Supplies & Materials",
+          "tax_rate": "GST on Expenses",
+          "tracking": "ASK_USER",
+          "avg_amount": 2321.45,
+          "note": "Large variable purchases - review carefully"
+        },
+        {
+          "name": "Woolworths",
+          "aliases": ["WOOLWORTHS", "Woolworths Group"],
+          "auto_publish": false,
+          "category": "Supplies & Materials",
+          "tax_rate": "GST on Expenses",
+          "tracking": "ASK_USER",
+          "avg_amount": 80.43,
+          "note": "Could be event catering or supplies"
+        },
+        {
+          "name": "Maleny Hardware",
+          "aliases": ["MALENY HARDWARE", "Maleny Hardware And Rural Supplies"],
+          "auto_publish": false,
+          "category": "Supplies & Materials",
+          "tax_rate": "GST on Expenses",
+          "tracking": "ACT-HV",
+          "avg_amount": 285.20,
+          "note": "Usually Harvest Witta project"
+        }
+      ]
+    },
+    "project_specific": {
+      "description": "Vendors tied to specific projects",
+      "vendors": [
+        {
+          "name": "Defy Manufacturing",
+          "aliases": ["DEFY MANUFACTURING"],
+          "auto_publish": false,
+          "category": "Project Materials",
+          "tax_rate": "GST on Expenses",
+          "tracking": "ACT-GD",
+          "avg_amount": 9616.86,
+          "note": "Goods project manufacturing"
+        }
+      ]
+    }
+  },
+  "bank_fees": {
+    "description": "Bank fees - auto-reconcile without receipt",
+    "vendors": [
+      {
+        "name": "NAB",
+        "aliases": ["NAB", "National Australia Bank"],
+        "category": "Bank Fees",
+        "tax_rate": "No GST",
+        "tracking": "ACT-IN",
+        "no_receipt_required": true
+      },
+      {
+        "name": "NAB International Fee",
+        "aliases": ["NAB INTERNATIONAL FEE"],
+        "category": "Bank Fees",
+        "tax_rate": "No GST",
+        "tracking": "ACT-IN",
+        "no_receipt_required": true
+      }
+    ]
+  },
+  "xero_accounts": {
+    "Software & Subscriptions": "6350",
+    "Travel - Airfare": "6400",
+    "Travel - Transport": "6410",
+    "Travel - Accommodation": "6420",
+    "Meals & Entertainment": "6500",
+    "Supplies & Materials": "6600",
+    "Project Materials": "6700",
+    "Bank Fees": "6800"
+  },
+  "setup_checklist": [
+    "1. Log in to Dext: https://prepare.dext.com",
+    "2. Go to Business Settings → Connections → Manage (Xero)",
+    "3. For each subscription vendor: Create Supplier Rule with auto-publish ON",
+    "4. For each travel vendor: Create Supplier Rule with auto-publish OFF",
+    "5. Set default categories and tax rates as specified",
+    "6. For subscriptions: Set tracking category to ACT-IN",
+    "7. For project vendors: Set tracking to specific project code",
+    "8. Test with one receipt before enabling batch auto-publish"
+  ]
+}

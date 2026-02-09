@@ -1,0 +1,55 @@
+name: Subscription Discovery
+
+on:
+  schedule:
+    # Run every Monday at 6am AEST (Sunday 8pm UTC)
+    - cron: '0 20 * * 0'
+  workflow_dispatch:
+    inputs:
+      days_back:
+        description: 'Days to analyze'
+        required: false
+        default: '90'
+      auto_update:
+        description: 'Apply updates to database'
+        required: false
+        default: 'true'
+
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Subscription Discovery
+        env:
+          SUPABASE_SHARED_URL: ${{ secrets.SUPABASE_SHARED_URL }}
+          SUPABASE_SHARED_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SHARED_SERVICE_ROLE_KEY }}
+          XERO_CLIENT_ID: ${{ secrets.XERO_CLIENT_ID }}
+          XERO_CLIENT_SECRET: ${{ secrets.XERO_CLIENT_SECRET }}
+          XERO_TENANT_ID: ${{ secrets.XERO_TENANT_ID }}
+        run: |
+          DAYS="${{ github.event.inputs.days_back || '90' }}"
+          UPDATE="${{ github.event.inputs.auto_update || 'true' }}"
+
+          if [ "$UPDATE" = "true" ]; then
+            node scripts/discover-subscriptions.mjs --sources=xero,transactions --days=$DAYS --update
+          else
+            node scripts/discover-subscriptions.mjs --sources=xero,transactions --days=$DAYS
+          fi
+
+      - name: Show Discovery Status
+        env:
+          SUPABASE_SHARED_URL: ${{ secrets.SUPABASE_SHARED_URL }}
+          SUPABASE_SHARED_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SHARED_SERVICE_ROLE_KEY }}
+        run: node scripts/discover-subscriptions.mjs --status

@@ -2716,6 +2716,77 @@ export async function updateGoodsContact(id: string, updates: {
   })
 }
 
+// ==========================================
+// Strategic Systems (Feb 2026)
+// ==========================================
+
+// Cash Flow
+export async function getCashFlow() {
+  return fetchApi<{
+    history: Array<{ month: string; income: number; expenses: number; net: number; closing_balance: number }>
+    projections: Array<{ month: string; income: number; expenses: number; net: number; balance: number; confidence: number }>
+    scenarios: Array<{ id: string; name: string; description: string; adjustments: unknown[] }>
+    metrics: { burnRate: number; runway: number; trend: string }
+  }>('/api/cashflow')
+}
+
+// Revenue Streams
+export async function getRevenueStreams() {
+  return fetchApi<{
+    streams: Array<{ id: string; name: string; code: string; category: string; color: string; icon: string; target_monthly: number; status: string }>
+    entries: Array<{ stream_id: string; month: string; amount: number }>
+    pipeline: Array<{ id: string; name: string; funder: string; type: string; amount: number; status: string; probability: number; expected_date: string }>
+    metrics: { totalMonthly: number; fastestGrowing: string; onTarget: number; pipelineValue: number }
+  }>('/api/revenue-streams')
+}
+
+// Assets
+export async function getAssets() {
+  return fetchApi<{
+    assets: Array<{ id: string; name: string; asset_type: string; location_zone: string; condition: string; current_value: number; status: string }>
+    maintenance: Array<{ id: string; asset_id: string; title: string; maintenance_type: string; next_due: string; status: string; estimated_cost: number }>
+    properties: Array<{ id: string; name: string; address: string; total_area_hectares: number; current_valuation: number }>
+    lodgings: Array<{ id: string; name: string; lodging_type: string; capacity: number; status: string; current_occupant: string }>
+    metrics: { totalValue: number; needsAttention: number; upcomingMaintenance: number; lodgingCapacity: number }
+  }>('/api/assets')
+}
+
+// Debt
+export async function getDebt() {
+  return fetchApi<{
+    debts: Array<{ id: string; name: string; debt_type: string; original_amount: number; current_balance: number; interest_rate: number; regular_payment: number; offset_balance: number }>
+    payments: Array<{ id: string; payment_date: string; amount: number; principal: number; interest: number; balance_after: number }>
+    scenarios: Array<{ id: string; name: string; extra_monthly: number; projected_payoff_date: string; total_interest_saved: number; months_saved: number }>
+    metrics: { totalBalance: number; equityPct: number; monthlyPayment: number; projectedPayoff: string }
+  }>('/api/debt')
+}
+
+// Team
+export async function getTeam() {
+  return fetchApi<{
+    members: Array<{ id: string; name: string; role: string; employment_type: string; available_hours_per_week: number; hourly_rate: number; skills: string[]; primary_zone: string; allocations: Array<{ project_code: string; hours_per_week: number }> }>
+    seasonalDemand: Array<{ project_code: string; month: number; demand_hours: number; demand_level: string }>
+    metrics: { activeTeam: number; totalWeeklyHours: number; utilisationPct: number; availableCapacity: number }
+  }>('/api/team')
+}
+
+// Compliance
+export async function getCompliance() {
+  return fetchApi<{
+    items: Array<{ id: string; title: string; category: string; next_due: string; status: string; responsible: string; frequency: string }>
+    documents: Array<{ id: string; name: string; document_type: string; expiry_date: string; status: string }>
+    metrics: { dueThisMonth: number; overdueCount: number; trackedDocs: number; nextDeadline: string }
+  }>('/api/compliance')
+}
+
+// Business Development
+export async function getBusinessDev() {
+  return fetchApi<{
+    initiatives: Array<{ id: string; title: string; initiative_type: string; status: string; progress: number; expected_monthly_revenue: number; owner: string; hypothesis: string; success_criteria: string; learnings: string }>
+    metrics: { activeInitiatives: number; rdInvestment: number; revenueImpact: number; experimentsRunning: number }
+  }>('/api/business-dev')
+}
+
 // Wiki: Project Storytellers
 export interface ProjectStorytellersResponse {
   project: string

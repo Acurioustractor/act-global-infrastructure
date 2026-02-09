@@ -113,7 +113,7 @@ export default function EcosystemPage() {
 
   const connectors = connectorsData?.connectors || []
   const configuredConnectors = connectors.filter(c => c.status === 'configured')
-  const agents = agentsData || []
+  const agents = Array.isArray(agentsData) ? agentsData : []
   const proposals = proposalsData?.proposals || []
 
   // Filter sites based on search

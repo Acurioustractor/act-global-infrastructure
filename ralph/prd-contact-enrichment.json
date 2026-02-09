@@ -1,0 +1,79 @@
+{
+  "project": "ACT Contact Enrichment",
+  "description": "Ongoing contact discovery, linking, and enrichment tasks",
+  "created": "2026-01-20",
+  "schedule": "weekly",
+  "features": [
+    {
+      "id": "link-new-communications",
+      "priority": 1,
+      "title": "Link New Communications to Contacts",
+      "description": "Run communication-contact linking to connect any new emails to GHL contacts.",
+      "command": "node scripts/link-communications-to-contacts.mjs link",
+      "acceptance_criteria": [
+        "Script completes without errors",
+        "Reports number matched/unmatched"
+      ],
+      "passes": false
+    },
+    {
+      "id": "consolidate-identities",
+      "priority": 2,
+      "title": "Consolidate Identity Records",
+      "description": "Link person_identity_map records to GHL contacts by email matching.",
+      "command": "node scripts/consolidate-contacts.mjs link",
+      "acceptance_criteria": [
+        "Script completes without errors",
+        "Reports matched/unmatched counts"
+      ],
+      "passes": false
+    },
+    {
+      "id": "update-last-contact",
+      "priority": 3,
+      "title": "Update Last Contact Dates",
+      "description": "Backfill last_contact_date for any contacts with new communications.",
+      "command": "node scripts/backfill-last-contact.mjs",
+      "acceptance_criteria": [
+        "Script completes without errors",
+        "Reports updated count"
+      ],
+      "passes": false
+    },
+    {
+      "id": "generate-alerts",
+      "priority": 4,
+      "title": "Generate Relationship Alerts",
+      "description": "Create morning brief with relationship health alerts.",
+      "command": "node scripts/relationship-alerts.mjs weekly",
+      "acceptance_criteria": [
+        "Report generated successfully",
+        "Shows dormant/critical contacts"
+      ],
+      "passes": false
+    },
+    {
+      "id": "discover-new-contacts",
+      "priority": 5,
+      "title": "Discover New Contacts from Communications",
+      "description": "Find new contacts from emails that aren't in GHL yet.",
+      "command": "node scripts/contact-discovery.mjs discover",
+      "acceptance_criteria": [
+        "Script completes without errors",
+        "New contacts queued for review"
+      ],
+      "passes": false
+    },
+    {
+      "id": "quality-report",
+      "priority": 6,
+      "title": "Generate Quality Report",
+      "description": "Show contacts needing attention (high-priority unlinked, dormant VIPs).",
+      "command": "node scripts/consolidate-contacts.mjs quality",
+      "acceptance_criteria": [
+        "Report shows actionable contacts"
+      ],
+      "passes": false
+    }
+  ]
+}

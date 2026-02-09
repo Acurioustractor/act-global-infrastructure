@@ -1,0 +1,434 @@
+{
+  "_meta": {
+    "description": "Xero Bank Rules Configuration - Auto-reconciliation settings for recurring transactions",
+    "version": "1.0.0",
+    "updated": "2026-01-23",
+    "instructions": "Configure in Xero: Settings → Bank Account → Bank Rules → New Rule",
+    "documentation": "docs/FINANCE_AUTOMATION_SYSTEM.md"
+  },
+  "bank_rules": {
+    "subscriptions": {
+      "description": "Software subscriptions - consistent amounts, auto-match to Software & Subscriptions account",
+      "rules": [
+        {
+          "name": "Notion Subscription",
+          "condition": {
+            "field": "Bank Statement Line",
+            "contains": ["NOTION", "Notion Labs"]
+          },
+          "then": {
+            "account": "6350 - Software & Subscriptions",
+            "tax_rate": "GST on Expenses",
+            "tracking": "ACT-IN"
+          },
+          "auto_reconcile": true
+        },
+        {
+          "name": "OpenAI Subscription",
+          "condition": {
+            "field": "Bank Statement Line",
+            "contains": ["OPENAI", "OpenAI"]
+          },
+          "then": {
+            "account": "6350 - Software & Subscriptions",
+            "tax_rate": "GST on Expenses",
+            "tracking": "ACT-IN"
+          },
+          "auto_reconcile": true
+        },
+        {
+          "name": "Anthropic/Claude Subscription",
+          "condition": {
+            "field": "Bank Statement Line",
+            "contains": ["ANTHROPIC", "Anthropic"]
+          },
+          "then": {
+            "account": "6350 - Software & Subscriptions",
+            "tax_rate": "GST on Expenses",
+            "tracking": "ACT-IN"
+          },
+          "auto_reconcile": true
+        },
+        {
+          "name": "Webflow Subscription",
+          "condition": {
+            "field": "Bank Statement Line",
+            "contains": ["WEBFLOW", "Webflow"]
+          },
+          "then": {
+            "account": "6350 - Software & Subscriptions",
+            "tax_rate": "GST on Expenses",
+            "tracking": "ACT-IN"
+          },
+          "auto_reconcile": true
+        },
+        {
+          "name": "Xero Subscription",
+          "condition": {
+            "field": "Bank Statement Line",
+            "contains": ["XERO"]
+          },
+          "then": {
+            "account": "6350 - Software & Subscriptions",
+            "tax_rate": "GST on Expenses",
+            "tracking": "ACT-IN"
+          },
+          "auto_reconcile": true
+        },
+        {
+          "name": "Descript Subscription",
+          "condition": {
+            "field": "Bank Statement Line",
+            "contains": ["DESCRIPT"]
+          },
+          "then": {
+            "account": "6350 - Software & Subscriptions",
+            "tax_rate": "GST on Expenses",
+            "tracking": "ACT-IN"
+          },
+          "auto_reconcile": true
+        },
+        {
+          "name": "Adobe Subscription",
+          "condition": {
+            "field": "Bank Statement Line",
+            "contains": ["ADOBE"]
+          },
+          "then": {
+            "account": "6350 - Software & Subscriptions",
+            "tax_rate": "GST on Expenses",
+            "tracking": "ACT-IN"
+          },
+          "auto_reconcile": true
+        },
+        {
+          "name": "Vercel Subscription",
+          "condition": {
+            "field": "Bank Statement Line",
+            "contains": ["VERCEL"]
+          },
+          "then": {
+            "account": "6350 - Software & Subscriptions",
+            "tax_rate": "GST on Expenses",
+            "tracking": "ACT-IN"
+          },
+          "auto_reconcile": true
+        },
+        {
+          "name": "Supabase Subscription",
+          "condition": {
+            "field": "Bank Statement Line",
+            "contains": ["SUPABASE"]
+          },
+          "then": {
+            "account": "6350 - Software & Subscriptions",
+            "tax_rate": "GST on Expenses",
+            "tracking": "ACT-IN"
+          },
+          "auto_reconcile": true
+        },
+        {
+          "name": "GoHighLevel Subscription",
+          "condition": {
+            "field": "Bank Statement Line",
+            "contains": ["HIGHLEVEL", "GOHIGHLEVEL"]
+          },
+          "then": {
+            "account": "6350 - Software & Subscriptions",
+            "tax_rate": "GST on Expenses",
+            "tracking": "ACT-IN"
+          },
+          "auto_reconcile": true
+        },
+        {
+          "name": "GitHub Subscription",
+          "condition": {
+            "field": "Bank Statement Line",
+            "contains": ["GITHUB"]
+          },
+          "then": {
+            "account": "6350 - Software & Subscriptions",
+            "tax_rate": "GST on Expenses",
+            "tracking": "ACT-IN"
+          },
+          "auto_reconcile": true
+        },
+        {
+          "name": "Audible Subscription",
+          "condition": {
+            "field": "Bank Statement Line",
+            "contains": ["AUDIBLE"]
+          },
+          "then": {
+            "account": "6350 - Software & Subscriptions",
+            "tax_rate": "GST on Expenses",
+            "tracking": "ACT-IN"
+          },
+          "auto_reconcile": true
+        },
+        {
+          "name": "Apple Subscription",
+          "condition": {
+            "field": "Bank Statement Line",
+            "contains": ["APPLE PTY", "APPLE.COM"]
+          },
+          "then": {
+            "account": "6350 - Software & Subscriptions",
+            "tax_rate": "GST on Expenses",
+            "tracking": "ACT-IN"
+          },
+          "auto_reconcile": true
+        }
+      ]
+    },
+    "travel": {
+      "description": "Travel expenses - variable amounts, suggest match but require manual project allocation",
+      "rules": [
+        {
+          "name": "Qantas Airways",
+          "condition": {
+            "field": "Bank Statement Line",
+            "contains": ["QANTAS"]
+          },
+          "then": {
+            "account": "6400 - Travel - Airfare",
+            "tax_rate": "GST on Expenses",
+            "tracking": "ASK"
+          },
+          "auto_reconcile": false,
+          "note": "Variable amounts - review for project allocation"
+        },
+        {
+          "name": "Virgin Australia",
+          "condition": {
+            "field": "Bank Statement Line",
+            "contains": ["VIRGIN AUST", "VIRGIN AU"]
+          },
+          "then": {
+            "account": "6400 - Travel - Airfare",
+            "tax_rate": "GST on Expenses",
+            "tracking": "ASK"
+          },
+          "auto_reconcile": false
+        },
+        {
+          "name": "Uber",
+          "condition": {
+            "field": "Bank Statement Line",
+            "contains": ["UBER* TRIP", "UBER AU"]
+          },
+          "then": {
+            "account": "6410 - Travel - Transport",
+            "tax_rate": "GST on Expenses",
+            "tracking": "ASK"
+          },
+          "auto_reconcile": false,
+          "note": "Variable - tag with project code"
+        },
+        {
+          "name": "Uber Eats",
+          "condition": {
+            "field": "Bank Statement Line",
+            "contains": ["UBER* EATS", "UBEREATS"]
+          },
+          "then": {
+            "account": "6500 - Meals & Entertainment",
+            "tax_rate": "GST on Expenses",
+            "tracking": "ASK"
+          },
+          "auto_reconcile": false
+        },
+        {
+          "name": "Cabcharge",
+          "condition": {
+            "field": "Bank Statement Line",
+            "contains": ["CABCHARGE"]
+          },
+          "then": {
+            "account": "6410 - Travel - Transport",
+            "tax_rate": "GST on Expenses",
+            "tracking": "ASK"
+          },
+          "auto_reconcile": false
+        },
+        {
+          "name": "GoGet Carshare",
+          "condition": {
+            "field": "Bank Statement Line",
+            "contains": ["GOGET"]
+          },
+          "then": {
+            "account": "6410 - Travel - Transport",
+            "tax_rate": "GST on Expenses",
+            "tracking": "ASK"
+          },
+          "auto_reconcile": false
+        },
+        {
+          "name": "Booking.com",
+          "condition": {
+            "field": "Bank Statement Line",
+            "contains": ["BOOKING.COM", "BOOKING COM"]
+          },
+          "then": {
+            "account": "6420 - Travel - Accommodation",
+            "tax_rate": "GST on Expenses",
+            "tracking": "ASK"
+          },
+          "auto_reconcile": false
+        },
+        {
+          "name": "Airbnb",
+          "condition": {
+            "field": "Bank Statement Line",
+            "contains": ["AIRBNB"]
+          },
+          "then": {
+            "account": "6420 - Travel - Accommodation",
+            "tax_rate": "GST on Expenses",
+            "tracking": "ASK"
+          },
+          "auto_reconcile": false
+        }
+      ]
+    },
+    "bank_fees": {
+      "description": "Bank fees - no receipt required, auto-reconcile",
+      "rules": [
+        {
+          "name": "NAB Account Fee",
+          "condition": {
+            "field": "Bank Statement Line",
+            "contains": ["NAB ACCOUNT FEE", "A/C FEE"]
+          },
+          "then": {
+            "account": "6800 - Bank Fees",
+            "tax_rate": "No GST",
+            "tracking": "ACT-IN"
+          },
+          "auto_reconcile": true,
+          "no_receipt_required": true
+        },
+        {
+          "name": "NAB International Fee",
+          "condition": {
+            "field": "Bank Statement Line",
+            "contains": ["NAB INT'L", "INTERNATIONAL FEE", "INTL FEE"]
+          },
+          "then": {
+            "account": "6800 - Bank Fees",
+            "tax_rate": "No GST",
+            "tracking": "ACT-IN"
+          },
+          "auto_reconcile": true,
+          "no_receipt_required": true
+        },
+        {
+          "name": "NAB Merchant Fee",
+          "condition": {
+            "field": "Bank Statement Line",
+            "contains": ["MERCHANT FEE", "MSF"]
+          },
+          "then": {
+            "account": "6800 - Bank Fees",
+            "tax_rate": "No GST",
+            "tracking": "ACT-IN"
+          },
+          "auto_reconcile": true,
+          "no_receipt_required": true
+        }
+      ]
+    },
+    "payment_processors": {
+      "description": "Payment processor fees",
+      "rules": [
+        {
+          "name": "Stripe Fee",
+          "condition": {
+            "field": "Bank Statement Line",
+            "contains": ["STRIPE"]
+          },
+          "then": {
+            "account": "6810 - Payment Processing Fees",
+            "tax_rate": "GST on Expenses",
+            "tracking": "ACT-IN"
+          },
+          "auto_reconcile": false
+        },
+        {
+          "name": "PayPal Fee",
+          "condition": {
+            "field": "Bank Statement Line",
+            "contains": ["PAYPAL"]
+          },
+          "then": {
+            "account": "6810 - Payment Processing Fees",
+            "tax_rate": "GST on Expenses",
+            "tracking": "ACT-IN"
+          },
+          "auto_reconcile": false
+        },
+        {
+          "name": "GoPayID (GHL)",
+          "condition": {
+            "field": "Bank Statement Line",
+            "contains": ["GOPAYID"]
+          },
+          "then": {
+            "account": "6810 - Payment Processing Fees",
+            "tax_rate": "No GST",
+            "tracking": "ACT-IN"
+          },
+          "auto_reconcile": true,
+          "note": "GHL payment processor fees"
+        }
+      ]
+    }
+  },
+  "xero_accounts": {
+    "6350": "Software & Subscriptions",
+    "6400": "Travel - Airfare",
+    "6410": "Travel - Transport",
+    "6420": "Travel - Accommodation",
+    "6500": "Meals & Entertainment",
+    "6600": "Supplies & Materials",
+    "6700": "Project Materials",
+    "6800": "Bank Fees",
+    "6810": "Payment Processing Fees"
+  },
+  "tracking_categories": {
+    "description": "Project codes used for tracking in Xero",
+    "source": "config/project-codes.json",
+    "common_codes": [
+      "ACT-IN (Infrastructure/Operations)",
+      "ACT-JH (JusticeHub)",
+      "ACT-PI (PICC)",
+      "ACT-HV (The Harvest)",
+      "ACT-GD (Goods)",
+      "ACT-EL (Empathy Ledger)"
+    ]
+  },
+  "jax_automation": {
+    "description": "Xero JAX AI automation settings",
+    "enable": true,
+    "confidence_threshold": 0.85,
+    "learn_from_corrections": true,
+    "instructions": [
+      "1. Go to Xero → Bank Accounts → Select account",
+      "2. Look for 'Automation' or 'JAX' toggle",
+      "3. Turn ON automation",
+      "4. JAX learns from your manual reconciliations",
+      "5. Review suggested matches weekly"
+    ]
+  },
+  "setup_checklist": [
+    "1. Log in to Xero: https://go.xero.com",
+    "2. Go to Settings → Bank Account → Bank Rules",
+    "3. Create rule for each subscription (copy conditions from this config)",
+    "4. For subscriptions: Enable auto-reconcile",
+    "5. For travel: Disable auto-reconcile, set tracking to 'Ask'",
+    "6. For bank fees: Enable auto-reconcile, no receipt required",
+    "7. Enable JAX automation on bank accounts",
+    "8. Test with recent transactions before enabling batch"
+  ]
+}

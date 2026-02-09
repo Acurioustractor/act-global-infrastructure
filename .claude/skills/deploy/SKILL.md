@@ -71,13 +71,13 @@ Hit key endpoints to verify the deployment:
 
 ```bash
 # Main app
-curl -s -o /dev/null -w "%{http_code}" https://command.act.place/
+curl -s -o /dev/null -w "%{http_code}" https://act-global-infrastructure.vercel.app/
 
 # API health
-curl -s -o /dev/null -w "%{http_code}" https://command.act.place/api/health
+curl -s -o /dev/null -w "%{http_code}" https://act-global-infrastructure.vercel.app/api/health
 
 # Telegram webhook (should return 200 or method not allowed)
-curl -s -o /dev/null -w "%{http_code}" https://command.act.place/api/telegram/webhook
+curl -s -o /dev/null -w "%{http_code}" https://act-global-infrastructure.vercel.app/api/telegram/webhook
 ```
 
 Report status codes. If any return 5xx, investigate immediately.
@@ -94,7 +94,7 @@ Report:
 
 - **Project**: command-center (apps/command-center)
 - **Team**: Check with `npx vercel whoami`
-- **Production URL**: command.act.place
+- **Production URL**: act-global-infrastructure.vercel.app (future: goodsoncountry.com)
 - **Framework**: Next.js (App Router)
 
 ## Common Issues

@@ -4,9 +4,16 @@ node_modules/
 .env
 .env.local
 .env*.local
+.env.local.bak*
+.envrc
+.envrc.bak*
 
 # MCP Configuration (contains credentials)
 .mcp.json
+.mcp.json.example
+
+# Token files (secrets)
+.xero-tokens.json
 
 # IDE and Editor Files
 .cursor/
@@ -14,9 +21,46 @@ node_modules/
 *.cursor
 .vscode/settings.json
 .vscode/launch.json
+
+# Build artifacts
+.next/
+.vercel
+
+# TLDR cache
+.tldr/
+.tldrignore
+apps/command-center/.tldr/
+apps/command-center/.tldrignore
+
+# Obsidian config (local only)
+.obsidian/
+
+# Claude Code caches (not code, regenerated)
+.claude/cache/
+.claude/tsc-cache/
+.claude/artifact-index/
+
+# Logs
 deployment/logs/*.log
 *.log
+
+# Legacy / one-off
 act-personal-ai/.venv311/
-.vercel
 clawdbot-docker/clawdbot-farmhand.tar.gz
 config/ACT_MASTER_SECRETS.md
+
+# Backups (large)
+backups/
+
+# Binary documents (track in cloud storage, not git)
+*.docx
+
+# Archive with secrets (reference only, not tracked)
+archive/intelligence-platform/
+
+# Fuse hidden files
+.fuse_hidden*
+**/.fuse_hidden*
+
+# Duplicate nested app dirs (build artifact)
+apps/command-center/apps/

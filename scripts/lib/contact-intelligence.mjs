@@ -11,6 +11,36 @@
 
 import { shouldAutoCreateContact } from './cultural-guard.mjs';
 
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// CONTEXTUAL TAGGING
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+const GOODS_KEYWORDS = [
+  'goods on country', 'goods-on-country', 'goods_on_country',
+  'circular economy', 'waste to wealth', 'waste-to-wealth',
+  'manufacturing', 'recycl', 'upcycl', 'compost',
+  'goods project', 'goods program',
+];
+
+/**
+ * Infer project tags from subject line context.
+ * Returns tags to add to auto-created contacts.
+ *
+ * @param {string} subject - Email subject line
+ * @returns {string[]} Tags to apply
+ */
+export function contextualTags(subject) {
+  if (!subject) return [];
+  const lower = subject.toLowerCase();
+  const tags = [];
+
+  if (GOODS_KEYWORDS.some(kw => lower.includes(kw))) {
+    tags.push('goods', 'goods-supporter');
+  }
+
+  return tags;
+}
+
 /**
  * Extract name from "Display Name <email>" format
  */
@@ -68,7 +98,11 @@ export async function matchOrCreateContact(supabase, email, context = {}) {
   const firstName = nameParts[0] || normalizedEmail.split('@')[0];
   const lastName = nameParts.slice(1).join(' ') || '';
 
-  // 4. Create contact
+  // 4. Infer contextual tags from subject line
+  const autoTags = contextualTags(context.subject);
+  const autoProjects = autoTags.includes('goods') ? ['goods'] : [];
+
+  // 5. Create contact
   const contactId = crypto.randomUUID();
   const { data: created, error } = await supabase
     .from('ghl_contacts')
@@ -85,6 +119,8 @@ export async function matchOrCreateContact(supabase, email, context = {}) {
       first_seen_subject: (context.subject || '').substring(0, 200),
       enrichment_status: 'pending',
       last_synced_at: new Date().toISOString(),
+      ...(autoTags.length > 0 && { tags: autoTags }),
+      ...(autoProjects.length > 0 && { projects: autoProjects }),
     })
     .select('id, ghl_id')
     .single();
@@ -104,7 +140,7 @@ export async function matchOrCreateContact(supabase, email, context = {}) {
     return { contactId: null, wasCreated: false };
   }
 
-  // 5. Fire integration event
+  // 6. Fire integration event
   await supabase.from('integration_events').insert({
     source: 'gmail',
     event_type: 'contact.auto_created',
@@ -168,4 +204,4 @@ export async function batchMatchOrCreate(supabase, existingContactMap, emails) {
   return { matched, created, results };
 }
 
-export default { matchOrCreateContact, batchMatchOrCreate };
+export default { matchOrCreateContact, batchMatchOrCreate, contextualTags };

@@ -37,7 +37,7 @@ cd /Users/benknight/Code/act-global-infrastructure
 ```
 
 This starts via PM2:
-- **act-frontend**: Next.js on `http://localhost:3001`
+- **act-frontend**: Next.js on `http://localhost:3002`
 - **act-api**: API server on `http://localhost:3456`
 
 ### Step 3: Verify
@@ -47,7 +47,7 @@ This starts via PM2:
 sleep 5
 
 # Check frontend
-curl -s -o /dev/null -w "Dashboard: %{http_code}\n" http://localhost:3001/
+curl -s -o /dev/null -w "Dashboard: %{http_code}\n" http://localhost:3002/
 
 # Check API
 curl -s -o /dev/null -w "API: %{http_code}\n" http://localhost:3456/api/health 2>/dev/null || echo "API: standalone API not needed (Next.js API routes handle it)"
@@ -60,8 +60,8 @@ pm2 status
 
 ```
 Local dev environment ready:
-- Dashboard: http://localhost:3001
-- API routes: http://localhost:3001/api/...
+- Dashboard: http://localhost:3002
+- API routes: http://localhost:3002/api/...
 ```
 
 ## Workflow: Tunnel (for webhook testing)
@@ -75,7 +75,7 @@ Use this when testing Telegram bot, GHL webhooks, or Xero webhooks locally.
 IMPORTANT: Use `--config /dev/null` to avoid the catch-all 404 from existing config.yml.
 
 ```bash
-cloudflared tunnel --config /dev/null --url http://localhost:3001 2>&1 &
+cloudflared tunnel --config /dev/null --url http://localhost:3002 2>&1 &
 ```
 
 Wait a few seconds, then grab the tunnel URL from the output (looks like `https://something-random.trycloudflare.com`).
@@ -168,8 +168,8 @@ pm2 stop all
 
 | Service | Local URL | Production URL |
 |---------|-----------|---------------|
-| Dashboard | `http://localhost:3001` | `https://command.act.place` |
-| API routes | `http://localhost:3001/api/*` | `https://command.act.place/api/*` |
+| Dashboard | `http://localhost:3002` | `https://command.act.place` |
+| API routes | `http://localhost:3002/api/*` | `https://command.act.place/api/*` |
 | Legacy API | `http://localhost:3456` | (deprecated) |
 | Telegram webhook | `/api/telegram/webhook` | same path |
 | GHL webhook | `/api/webhooks/ghl` | same path |

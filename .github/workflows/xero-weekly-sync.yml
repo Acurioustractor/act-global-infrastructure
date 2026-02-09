@@ -1,0 +1,63 @@
+name: Xero Weekly Sync
+
+on:
+  schedule:
+    # Run every Monday at 6am AEST (Sunday 8pm UTC)
+    - cron: '0 20 * * 0'
+  workflow_dispatch:
+    inputs:
+      days:
+        description: 'Days to sync (default: 90)'
+        required: false
+        default: '90'
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Xero Sync
+        env:
+          XERO_CLIENT_ID: ${{ secrets.XERO_CLIENT_ID }}
+          XERO_CLIENT_SECRET: ${{ secrets.XERO_CLIENT_SECRET }}
+          XERO_TENANT_ID: ${{ secrets.XERO_TENANT_ID }}
+          SUPABASE_SHARED_URL: ${{ secrets.SUPABASE_SHARED_URL }}
+          SUPABASE_SHARED_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SHARED_SERVICE_ROLE_KEY }}
+        run: |
+          echo "Starting Xero sync..."
+          node scripts/sync-xero-to-supabase.mjs full --days=${{ github.event.inputs.days || '90' }}
+
+      - name: Detect Missing Receipts
+        env:
+          XERO_CLIENT_ID: ${{ secrets.XERO_CLIENT_ID }}
+          XERO_CLIENT_SECRET: ${{ secrets.XERO_CLIENT_SECRET }}
+          XERO_TENANT_ID: ${{ secrets.XERO_TENANT_ID }}
+          SUPABASE_SHARED_URL: ${{ secrets.SUPABASE_SHARED_URL }}
+          SUPABASE_SHARED_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SHARED_SERVICE_ROLE_KEY }}
+        run: |
+          echo "Detecting missing receipts..."
+          node scripts/sync-xero-bank-feed.mjs --days=${{ github.event.inputs.days || '90' }}
+
+      - name: Post to Discord (optional)
+        if: always()
+        continue-on-error: true
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        run: |
+          if [ -n "$DISCORD_WEBHOOK_URL" ]; then
+            curl -X POST "$DISCORD_WEBHOOK_URL" \
+              -H "Content-Type: application/json" \
+              -d '{"content": "📊 **Xero Weekly Sync Complete**\nStatus: ${{ job.status }}\nRun: ${{ github.run_number }}"}'
+          fi

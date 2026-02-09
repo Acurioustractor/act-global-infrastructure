@@ -203,6 +203,20 @@ async function handleContactEvent(
   const contactData = transformGHLContact(payload);
   const action = eventType === 'contact.create' ? 'created' : 'updated';
 
+  // Auto-enroll Goods contacts: if tags contain 'goods' and 'goods-newsletter' is missing,
+  // add newsletter tags and set consent
+  const tags = contactData.tags as string[] | undefined;
+  if (tags && tags.some((t) => t.toLowerCase() === 'goods') && !tags.includes('goods-newsletter')) {
+    tags.push('goods-newsletter');
+    if (!tags.includes('goods-supporter')) tags.push('goods-supporter');
+    contactData.tags = tags;
+    if (!contactData.projects || !(contactData.projects as string[]).includes('goods')) {
+      contactData.projects = [...((contactData.projects as string[]) || []), 'goods'];
+    }
+    contactData.newsletter_consent = true;
+    contactData.newsletter_consent_at = new Date().toISOString();
+  }
+
   const { error } = await supabase
     .from('ghl_contacts')
     .upsert(contactData, { onConflict: 'ghl_id' });

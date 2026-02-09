@@ -36,6 +36,33 @@ export async function GET() {
     const content = contentResult.data || []
     const now = new Date()
 
+    // Fetch latest communication per contact (batch query)
+    const ghlIds = rawContacts.map(c => c.ghl_id)
+    const latestCommsMap = new Map<string, { subject: string; occurred_at: string; direction: string }>()
+
+    if (ghlIds.length > 0) {
+      // Get the most recent communication for each contact using distinct on
+      const { data: latestComms } = await supabase
+        .from('communications_history')
+        .select('ghl_contact_id, subject, occurred_at, direction')
+        .in('ghl_contact_id', ghlIds)
+        .order('ghl_contact_id')
+        .order('occurred_at', { ascending: false })
+
+      // Deduplicate to keep only the latest per contact
+      if (latestComms) {
+        for (const comm of latestComms) {
+          if (!latestCommsMap.has(comm.ghl_contact_id)) {
+            latestCommsMap.set(comm.ghl_contact_id, {
+              subject: comm.subject || 'No subject',
+              occurred_at: comm.occurred_at,
+              direction: comm.direction,
+            })
+          }
+        }
+      }
+    }
+
     // Derive segment from tags
     function getSegment(tags: string[]): string {
       if (tags.includes('goods-funder')) return 'funder'
@@ -52,6 +79,8 @@ export async function GET() {
         ? Math.floor((now.getTime() - new Date(c.last_contact_date).getTime()) / 86400000)
         : null
 
+      const latestComm = latestCommsMap.get(c.ghl_id)
+
       return {
         id: c.id,
         ghl_id: c.ghl_id,
@@ -66,6 +95,9 @@ export async function GET() {
         newsletter_consent: tags.includes('goods-newsletter'),
         segment: getSegment(tags),
         days_since_contact: daysSinceContact,
+        last_email_subject: latestComm?.subject || null,
+        last_email_date: latestComm?.occurred_at || null,
+        last_email_direction: latestComm?.direction || null,
       }
     })
 

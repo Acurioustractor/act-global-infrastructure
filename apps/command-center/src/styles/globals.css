@@ -385,6 +385,13 @@
     border: 1px solid rgba(79, 70, 229, 0.2);
   }
 
+  /* Sidebar nav active */
+  .sidebar-item-active {
+    background: linear-gradient(135deg, rgba(79, 70, 229, 0.15) 0%, rgba(124, 58, 237, 0.1) 100%);
+    color: hsl(var(--foreground));
+    border: 1px solid rgba(79, 70, 229, 0.2);
+  }
+
   /* Scrollbar */
   .scrollbar-glass {
     scrollbar-width: thin;

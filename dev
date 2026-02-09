@@ -13,7 +13,7 @@ case "$1" in
     sleep 3
     pm2 status
     echo ""
-    echo "Frontend: http://localhost:3001/finance/subscriptions"
+    echo "Frontend: http://localhost:3002"
     echo "Backend:  http://localhost:3456"
     ;;
   stop)
@@ -50,7 +50,7 @@ case "$1" in
     sleep 3
     pm2 status
     echo ""
-    echo "Frontend: http://localhost:3001/finance/subscriptions"
+    echo "Frontend: http://localhost:3002/finance/subscriptions"
     echo "Backend:  http://localhost:3456"
     echo ""
     echo "Cron scripts also running (imessage-sync, embed, episodes, briefing)"
@@ -59,7 +59,7 @@ case "$1" in
     pm2 status
     echo ""
     echo "API:      $(curl -s http://localhost:3456/api/health 2>/dev/null | jq -r '.status // "offline"')"
-    echo "Frontend: $(curl -s http://localhost:3001 -o /dev/null -w '%{http_code}' 2>/dev/null || echo 'offline')"
+    echo "Frontend: $(curl -s http://localhost:3002 -o /dev/null -w '%{http_code}' 2>/dev/null || echo 'offline')"
     ;;
   logs)
     if [ -n "$2" ]; then
