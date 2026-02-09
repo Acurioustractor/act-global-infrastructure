@@ -1,11 +1,22 @@
 import { NextResponse } from 'next/server'
 import { supabase } from '@/lib/supabase'
-import { readFileSync } from 'fs'
-import { join } from 'path'
+import { readFileSync, existsSync } from 'fs'
+import { join, resolve } from 'path'
 
-const projectCodesConfig = JSON.parse(
-  readFileSync(join(process.cwd(), '../../config/project-codes.json'), 'utf8')
-)
+// Resolve config path — works both locally (mono-repo) and on Vercel (outputFileTracingRoot)
+function resolveConfigPath() {
+  const candidates = [
+    join(process.cwd(), '../../config/project-codes.json'),  // local dev (app is apps/command-center)
+    join(process.cwd(), 'config/project-codes.json'),         // Vercel with outputFileTracingRoot
+    resolve(__dirname, '../../../../../../config/project-codes.json'), // fallback
+  ]
+  for (const p of candidates) {
+    if (existsSync(p)) return p
+  }
+  throw new Error(`project-codes.json not found. Tried: ${candidates.join(', ')}`)
+}
+
+const projectCodesConfig = JSON.parse(readFileSync(resolveConfigPath(), 'utf8'))
 
 export async function GET() {
   try {
