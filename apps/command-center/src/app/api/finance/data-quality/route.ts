@@ -3,20 +3,23 @@ import { supabase } from '@/lib/supabase'
 import { readFileSync, existsSync } from 'fs'
 import { join, resolve } from 'path'
 
-// Resolve config path — works both locally (mono-repo) and on Vercel (outputFileTracingRoot)
-function resolveConfigPath() {
+// Lazy-load config (avoid build-time file reads on Vercel)
+let _projectCodesConfig: any = null
+function getProjectCodesConfig() {
+  if (_projectCodesConfig) return _projectCodesConfig
   const candidates = [
-    join(process.cwd(), '../../config/project-codes.json'),  // local dev (app is apps/command-center)
-    join(process.cwd(), 'config/project-codes.json'),         // Vercel with outputFileTracingRoot
-    resolve(__dirname, '../../../../../../config/project-codes.json'), // fallback
+    join(process.cwd(), '../../config/project-codes.json'),
+    join(process.cwd(), 'config/project-codes.json'),
+    resolve(process.cwd(), '../config/project-codes.json'),
   ]
   for (const p of candidates) {
-    if (existsSync(p)) return p
+    if (existsSync(p)) {
+      _projectCodesConfig = JSON.parse(readFileSync(p, 'utf8'))
+      return _projectCodesConfig
+    }
   }
   throw new Error(`project-codes.json not found. Tried: ${candidates.join(', ')}`)
 }
-
-const projectCodesConfig = JSON.parse(readFileSync(resolveConfigPath(), 'utf8'))
 
 export async function GET() {
   try {
@@ -142,7 +145,7 @@ export async function POST(request: Request) {
 }
 
 function buildProjectKeywordMap() {
-  const projects = (projectCodesConfig as any).projects
+  const projects = getProjectCodesConfig().projects
   const map: Array<{ code: string; name: string; keywords: string[] }> = []
 
   for (const [code, project] of Object.entries(projects) as [string, any][]) {
