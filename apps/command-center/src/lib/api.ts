@@ -2168,7 +2168,9 @@ export async function getIntelligenceFeed(params?: {
   return fetchApi<{ insights: IntelligenceInsight[]; count: number }>(`/api/intelligence/feed?${q}`)
 }
 
-export async function updateInsight(id: string, action: 'dismiss' | 'act') {
+export type InsightAction = 'dismiss' | 'act' | 'upvote' | 'downvote' | 'important'
+
+export async function updateInsight(id: string, action: InsightAction) {
   return fetchApi<{ insight: IntelligenceInsight }>(`/api/intelligence/feed/${id}`, {
     method: 'PATCH',
     body: JSON.stringify({ action }),

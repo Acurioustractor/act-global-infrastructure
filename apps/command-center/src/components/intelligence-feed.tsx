@@ -3,7 +3,7 @@
 import { useEffect, useState, useCallback } from 'react'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { supabaseClient } from '@/lib/supabase-client'
-import { getIntelligenceFeed, updateInsight, type IntelligenceInsight } from '@/lib/api'
+import { getIntelligenceFeed, updateInsight, type IntelligenceInsight, type InsightAction } from '@/lib/api'
 import {
   Mail,
   UserPlus,
@@ -13,8 +13,10 @@ import {
   Radio,
   GitBranch,
   Search,
-  X,
-  Check,
+  ThumbsUp,
+  ThumbsDown,
+  Flame,
+  Trash2,
   ChevronRight,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
@@ -38,11 +40,13 @@ const PRIORITY_COLORS: Record<string, string> = {
   low: 'opacity-80',
 }
 
-function InsightCard({ insight, onDismiss, onAct }: {
+type VoteState = 'up' | 'down' | 'important' | null
+
+function InsightCard({ insight, onAction }: {
   insight: IntelligenceInsight
-  onDismiss: (id: string) => void
-  onAct: (id: string) => void
+  onAction: (id: string, action: InsightAction) => void
 }) {
+  const [vote, setVote] = useState<VoteState>(null)
   const config = TYPE_CONFIG[insight.insight_type] || TYPE_CONFIG.cross_domain
   const Icon = config.icon
   const priorityClass = PRIORITY_COLORS[insight.priority] || ''
@@ -52,8 +56,19 @@ function InsightCard({ insight, onDismiss, onAct }: {
 
   const timeAgo = getTimeAgo(insight.created_at)
 
+  const handleVote = (action: InsightAction) => {
+    if (action === 'upvote') {
+      setVote(vote === 'up' ? null : 'up')
+    } else if (action === 'downvote') {
+      setVote(vote === 'down' ? null : 'down')
+    } else if (action === 'important') {
+      setVote(vote === 'important' ? null : 'important')
+    }
+    onAction(insight.id, action)
+  }
+
   return (
-    <div className={cn('glass-card-sm p-3 group transition-all', priorityClass)}>
+    <div className={cn('glass-card-sm p-3 transition-all', priorityClass)}>
       <div className="flex items-start gap-3">
         <div className={cn('w-8 h-8 rounded-lg flex items-center justify-center shrink-0', config.bg)}>
           <Icon className={cn('h-4 w-4', config.color)} />
@@ -75,27 +90,53 @@ function InsightCard({ insight, onDismiss, onAct }: {
               {config.label}
             </span>
             <span className="text-[10px] text-white/30">{timeAgo}</span>
-            {insight.priority === 'high' || insight.priority === 'critical' ? (
+            {insight.priority === 'critical' && (
+              <span className="text-[10px] text-red-400 font-medium">CRITICAL</span>
+            )}
+            {insight.priority === 'high' && (
               <span className="text-[10px] text-red-400">!</span>
-            ) : null}
+            )}
           </div>
         </div>
 
-        {/* Action buttons — visible on hover */}
-        <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity shrink-0">
+        {/* Action buttons — always visible */}
+        <div className="flex items-center gap-0.5 shrink-0">
           <button
-            onClick={(e) => { e.preventDefault(); onAct(insight.id) }}
-            className="p-1.5 rounded-lg hover:bg-green-500/20 transition-colors"
-            title="Mark as acted"
+            onClick={(e) => { e.preventDefault(); handleVote('upvote') }}
+            className={cn(
+              'p-1.5 rounded-lg transition-colors',
+              vote === 'up' ? 'bg-green-500/20 text-green-400' : 'text-white/30 hover:bg-green-500/10 hover:text-green-400'
+            )}
+            title="Upvote — boost importance"
           >
-            <Check className="h-3.5 w-3.5 text-green-400" />
+            <ThumbsUp className="h-3.5 w-3.5" />
           </button>
           <button
-            onClick={(e) => { e.preventDefault(); onDismiss(insight.id) }}
-            className="p-1.5 rounded-lg hover:bg-white/10 transition-colors"
+            onClick={(e) => { e.preventDefault(); handleVote('downvote') }}
+            className={cn(
+              'p-1.5 rounded-lg transition-colors',
+              vote === 'down' ? 'bg-red-500/20 text-red-400' : 'text-white/30 hover:bg-red-500/10 hover:text-red-400'
+            )}
+            title="Downvote — lower importance"
+          >
+            <ThumbsDown className="h-3.5 w-3.5" />
+          </button>
+          <button
+            onClick={(e) => { e.preventDefault(); handleVote('important') }}
+            className={cn(
+              'p-1.5 rounded-lg transition-colors',
+              vote === 'important' ? 'bg-amber-500/20 text-amber-400' : 'text-white/30 hover:bg-amber-500/10 hover:text-amber-400'
+            )}
+            title="Mark critical"
+          >
+            <Flame className="h-3.5 w-3.5" />
+          </button>
+          <button
+            onClick={(e) => { e.preventDefault(); onAction(insight.id, 'dismiss') }}
+            className="p-1.5 rounded-lg text-white/30 hover:bg-white/10 hover:text-white/60 transition-colors"
             title="Dismiss"
           >
-            <X className="h-3.5 w-3.5 text-white/40" />
+            <Trash2 className="h-3.5 w-3.5" />
           </button>
         </div>
       </div>
@@ -153,14 +194,11 @@ export function IntelligenceFeed({
     }
   }, [queryClient])
 
-  const handleDismiss = useCallback(async (id: string) => {
-    await updateInsight(id, 'dismiss')
-    queryClient.invalidateQueries({ queryKey: ['intelligence', 'feed'] })
-  }, [queryClient])
-
-  const handleAct = useCallback(async (id: string) => {
-    await updateInsight(id, 'act')
-    queryClient.invalidateQueries({ queryKey: ['intelligence', 'feed'] })
+  const handleAction = useCallback(async (id: string, action: InsightAction) => {
+    await updateInsight(id, action)
+    if (action === 'dismiss') {
+      queryClient.invalidateQueries({ queryKey: ['intelligence', 'feed'] })
+    }
   }, [queryClient])
 
   const insights = data?.insights || []
@@ -200,8 +238,7 @@ export function IntelligenceFeed({
             <InsightCard
               key={insight.id}
               insight={insight}
-              onDismiss={handleDismiss}
-              onAct={handleAct}
+              onAction={handleAction}
             />
           ))}
         </div>

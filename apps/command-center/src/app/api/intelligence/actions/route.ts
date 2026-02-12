@@ -47,6 +47,13 @@ interface Vote {
   activity_snapshot_at: string | null
 }
 
+interface InsightVote {
+  vote_type: 'up' | 'down' | 'important'
+  contact_id: string | null
+  project_codes: string[] | null
+  voted_at: string
+}
+
 interface ProjectLink {
   ghl_contact_id: string
   project_code: string
@@ -59,6 +66,7 @@ function computeRankScore(
   votes: Vote[],
   projectLinks: string[],
   now: Date,
+  insightVotesForContact?: InsightVote[],
 ): number {
   // Base weighted signal scores
   const base = rh
@@ -88,10 +96,19 @@ function computeRankScore(
   // Deal boost
   const dealBoost = contactDeals?.some(d => (d.monetary_value || 0) > 0) ? 25 : 0
 
+  // Insight vote boost (implicit contact importance from insight feedback)
+  let insightVoteScore = 0
+  for (const iv of insightVotesForContact || []) {
+    const daysAgo = (now.getTime() - new Date(iv.voted_at).getTime()) / (1000 * 60 * 60 * 24)
+    const decay = Math.pow(0.5, daysAgo / 30)
+    const weight = iv.vote_type === 'important' ? 20 : iv.vote_type === 'up' ? 10 : -10
+    insightVoteScore += weight * decay
+  }
+
   // Recency penalty
   const recencyPenalty = rh?.days_since_contact ? Math.min(rh.days_since_contact * 2, 60) : 0
 
-  return Math.round(base + voteScore + projectBoost + dealBoost - recencyPenalty)
+  return Math.round(base + voteScore + insightVoteScore + projectBoost + dealBoost - recencyPenalty)
 }
 
 function scoreToPriority(score: number): 'urgent' | 'high' | 'medium' | 'low' {
@@ -133,6 +150,7 @@ export async function GET(request: NextRequest) {
       { data: latestActivities },
       { data: insights },
       { data: overdueActions },
+      { data: allInsightVotes },
     ] = await Promise.all([
       // 1. Communications waiting for response
       supabase
@@ -201,6 +219,12 @@ export async function GET(request: NextRequest) {
         .lt('follow_up_date', now.toISOString())
         .order('follow_up_date', { ascending: true })
         .limit(8),
+
+      // 9. Insight votes (for contact/project importance boost)
+      supabase
+        .from('insight_votes')
+        .select('vote_type, contact_id, project_codes, voted_at')
+        .order('voted_at', { ascending: false }),
     ])
 
     // Build lookup maps
@@ -221,6 +245,14 @@ export async function GET(request: NextRequest) {
       if (!deal.ghl_contact_id) continue
       if (!dealsByContact[deal.ghl_contact_id]) dealsByContact[deal.ghl_contact_id] = []
       dealsByContact[deal.ghl_contact_id]!.push(deal)
+    }
+
+    // Insight votes by contact (for implicit importance boost)
+    const insightVotesByContact: Record<string, InsightVote[]> = {}
+    for (const iv of (allInsightVotes || []) as InsightVote[]) {
+      if (!iv.contact_id) continue
+      if (!insightVotesByContact[iv.contact_id]) insightVotesByContact[iv.contact_id] = []
+      insightVotesByContact[iv.contact_id].push(iv)
     }
 
     // Latest activity by contact (for suppression check)
@@ -292,7 +324,7 @@ export async function GET(request: NextRequest) {
       const rh = rhByContact[comm.ghl_contact_id]
       const contactDeals = dealsByContact[comm.ghl_contact_id] || null
       const contactVotes = votesByContact[comm.ghl_contact_id] || []
-      const rankScore = computeRankScore(comm.ghl_contact_id, rh || null, contactDeals, contactVotes, contactLinks, now)
+      const rankScore = computeRankScore(comm.ghl_contact_id, rh || null, contactDeals, contactVotes, contactLinks, now, insightVotesByContact[comm.ghl_contact_id])
 
       actions.push({
         id: `comm-${comm.id}`,
@@ -343,7 +375,7 @@ export async function GET(request: NextRequest) {
       const riskFlags: string[] = rh.risk_flags || []
       const contactVotes = votesByContact[rh.ghl_contact_id] || []
       const contactDeals = dealsByContact[rh.ghl_contact_id] || null
-      const rankScore = computeRankScore(rh.ghl_contact_id, rh, contactDeals, contactVotes, contactLinks, now)
+      const rankScore = computeRankScore(rh.ghl_contact_id, rh, contactDeals, contactVotes, contactLinks, now, insightVotesByContact[rh.ghl_contact_id])
 
       const tempLabel = rh.temperature != null ? `${rh.temperature}°` : ''
       const trendLabel = rh.temperature_trend ? ` ${rh.temperature_trend}` : ''
@@ -404,7 +436,7 @@ export async function GET(request: NextRequest) {
       const contactLinks = linksByContact[deal.ghl_contact_id] || []
       const contactVotes = votesByContact[deal.ghl_contact_id] || []
       const contactDeals = dealsByContact[deal.ghl_contact_id] || null
-      const rankScore = computeRankScore(deal.ghl_contact_id, rh, contactDeals, contactVotes, contactLinks, now)
+      const rankScore = computeRankScore(deal.ghl_contact_id, rh, contactDeals, contactVotes, contactLinks, now, insightVotesByContact[deal.ghl_contact_id])
 
       alertedContactIds.add(deal.ghl_contact_id)
 
