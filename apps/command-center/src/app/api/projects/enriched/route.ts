@@ -80,6 +80,14 @@ export async function GET(request: NextRequest) {
       }
     })
 
+    // Deduplicate: multiple Notion pages can map to the same config code
+    const seen = new Set<string>()
+    const deduped = projects.filter(p => {
+      if (seen.has(p.code)) return false
+      seen.add(p.code)
+      return true
+    })
+
     // Filter out archived projects unless explicitly requested
     // Config status is authoritative — if config says active, it's active regardless of Notion status
     const isArchived = (p: typeof projects[number] & { _hasConfigMatch?: boolean }) => {
@@ -92,8 +100,8 @@ export async function GET(request: NextRequest) {
       return s.includes('archived') || s.includes('sunsetting') || s.includes('transferred')
     }
     const filtered = includeArchived
-      ? projects
-      : projects.filter(p => !isArchived(p))
+      ? deduped
+      : deduped.filter(p => !isArchived(p))
 
     // Strip internal flag
     const result = filtered.map(({ _hasConfigMatch, ...rest }) => rest)
