@@ -261,6 +261,7 @@ export interface Project {
   name: string
   description?: string
   status?: string
+  category?: string
   lcaa_stage?: 'listen' | 'curiosity' | 'action' | 'art'
   health_score?: number
   healthScore?: number  // API returns camelCase
@@ -275,8 +276,9 @@ export interface Project {
   }>
 }
 
-export async function getProjects() {
-  return fetchApi<{ projects: Project[] }>('/api/projects/enriched')
+export async function getProjects(opts?: { includeArchived?: boolean }) {
+  const q = opts?.includeArchived ? '?include_archived=true' : ''
+  return fetchApi<{ projects: Project[] }>(`/api/projects/enriched${q}`)
 }
 
 export async function getNotionProjects() {

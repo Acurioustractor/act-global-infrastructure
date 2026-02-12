@@ -74,7 +74,7 @@ export default function ProjectsPage() {
 
   const { data, isLoading, error } = useQuery({
     queryKey: ['projects', 'enriched'],
-    queryFn: getProjects,
+    queryFn: () => getProjects(),
   })
 
   const { data: notionData } = useQuery({
@@ -171,13 +171,22 @@ export default function ProjectsPage() {
               {allProjects.length} active projects across the ACT ecosystem
             </p>
           </div>
-          <Link
-            href="/compendium"
-            className="btn-glass flex items-center gap-2"
-          >
-            <BookOpen className="h-4 w-4" />
-            View Compendium
-          </Link>
+          <div className="flex items-center gap-3">
+            <Link
+              href="/projects/archived"
+              className="btn-glass flex items-center gap-2 text-white/50 hover:text-white/80"
+            >
+              <Pause className="h-4 w-4" />
+              Archived
+            </Link>
+            <Link
+              href="/compendium"
+              className="btn-glass flex items-center gap-2"
+            >
+              <BookOpen className="h-4 w-4" />
+              View Compendium
+            </Link>
+          </div>
         </div>
 
         {/* LCAA Stage Stats */}

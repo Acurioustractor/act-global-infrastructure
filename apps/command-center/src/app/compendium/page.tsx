@@ -119,7 +119,7 @@ function healthColor(score: number) {
 export default function CompendiumPage() {
   const { data: projectsData } = useQuery({
     queryKey: ['projects-enriched'],
-    queryFn: getProjects,
+    queryFn: () => getProjects(),
   })
 
   const apiProjects = projectsData?.projects || []

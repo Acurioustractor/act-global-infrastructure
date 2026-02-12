@@ -8,13 +8,18 @@ export async function GET() {
       .select('name, status, data')
       .order('name', { ascending: true })
 
-    const codes = (data || []).map((p) => ({
-      code: p.data?.id || p.name?.toLowerCase().replace(/\s+/g, '-') || '',
-      name: p.name,
-      category: p.data?.projectType || 'project',
-      status: p.status || 'active',
-      priority: p.data?.priority || 'medium',
-    }))
+    const codes = (data || [])
+      .filter((p) => {
+        const status = p.status || 'active'
+        return status !== 'archived'
+      })
+      .map((p) => ({
+        code: p.data?.id || p.name?.toLowerCase().replace(/\s+/g, '-') || '',
+        name: p.name,
+        category: p.data?.projectType || 'project',
+        status: p.status || 'active',
+        priority: p.data?.priority || 'medium',
+      }))
 
     return NextResponse.json({
       codes,

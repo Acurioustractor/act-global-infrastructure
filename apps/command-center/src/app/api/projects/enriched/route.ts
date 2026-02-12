@@ -18,12 +18,14 @@ export async function GET(request: NextRequest) {
   try {
     const includeArchived = request.nextUrl.searchParams.get('include_archived') === 'true'
 
-    // Load archived project codes from config
+    // Load project metadata from config
     let archivedCodes = new Set<string>()
+    const configMeta: Record<string, { status?: string; category?: string }> = {}
     try {
       const filePath = join(process.cwd(), '..', '..', 'config', 'project-codes.json')
       const raw = JSON.parse(readFileSync(filePath, 'utf-8'))
-      for (const [code, proj] of Object.entries(raw.projects as Record<string, { status?: string }>)) {
+      for (const [code, proj] of Object.entries(raw.projects as Record<string, { status?: string; category?: string }>)) {
+        configMeta[code] = proj
         if (proj.status === 'archived') archivedCodes.add(code)
       }
     } catch { /* ignore */ }
@@ -60,7 +62,8 @@ export async function GET(request: NextRequest) {
         code: code,
         name: p.name || p.data?.name || 'Unknown',
         description: p.data?.description || '',
-        status,
+        status: configMeta[code]?.status || status,
+        category: configMeta[code]?.category || null,
         lcaa_stage: statusToLcaaStage(status),
         healthScore: health?.health_score ?? p.data?.healthScore ?? 75,
         contacts: contactCountByProject.get(code) || contactCountByProject.get(p.name?.toLowerCase()) || 0,
