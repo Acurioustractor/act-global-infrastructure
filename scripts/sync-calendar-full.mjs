@@ -13,6 +13,7 @@
  *   node scripts/sync-calendar-full.mjs --since 3m       # 3 months back
  *   node scripts/sync-calendar-full.mjs --until 6m       # 6 months forward
  *   node scripts/sync-calendar-full.mjs --calendar-id X  # Specific calendar
+ *   node scripts/sync-calendar-full.mjs --all-calendars   # Sync all accessible calendars
  *   node scripts/sync-calendar-full.mjs --dry-run        # Preview without writing
  */
 
@@ -134,6 +135,12 @@ function getSupabase() {
   return createClient(url, key);
 }
 
+// Discover all accessible calendars
+async function getAllCalendars(calendarApi) {
+  const response = await calendarApi.calendarList.list();
+  return (response.data.items || []).filter(c => c.accessRole !== 'freeBusyReader');
+}
+
 // Auto-detect project from event title and description
 function detectProject(title, description) {
   const text = `${title || ''} ${description || ''}`.toLowerCase();
@@ -182,8 +189,8 @@ function parseDuration(str) {
 async function loadGhlContacts(supabase) {
   const { data, error } = await supabase
     .from('ghl_contacts')
-    .select('id, ghl_id, email_address, full_name')
-    .not('email_address', 'is', null);
+    .select('id, ghl_id, email, full_name')
+    .not('email', 'is', null);
 
   if (error) {
     console.warn('Warning: Could not load GHL contacts:', error.message);
@@ -192,8 +199,8 @@ async function loadGhlContacts(supabase) {
 
   const emailMap = new Map();
   for (const contact of data || []) {
-    if (contact.email_address) {
-      emailMap.set(contact.email_address.toLowerCase(), {
+    if (contact.email) {
+      emailMap.set(contact.email.toLowerCase(), {
         ghl_contact_id: contact.ghl_id || contact.id,
         full_name: contact.full_name,
       });
@@ -291,12 +298,44 @@ function transformEvent(event, ghlContactMap, calendarInfo) {
   };
 }
 
+// Fetch all events from a single calendar within a date range
+async function fetchCalendarEvents(calendarApi, calendarId, startDate, endDate, verbose) {
+  let allEvents = [];
+  let pageToken = null;
+
+  do {
+    const params = {
+      calendarId,
+      timeMin: startDate.toISOString(),
+      timeMax: endDate.toISOString(),
+      singleEvents: true,
+      orderBy: 'startTime',
+      maxResults: 250,
+    };
+
+    if (pageToken) {
+      params.pageToken = pageToken;
+    }
+
+    const { data } = await calendarApi.events.list(params);
+    allEvents = allEvents.concat(data.items || []);
+    pageToken = data.nextPageToken;
+
+    if (verbose) {
+      console.log(`    Fetched ${allEvents.length} events so far...`);
+    }
+  } while (pageToken);
+
+  return allEvents;
+}
+
 // Main sync function
 async function syncCalendar(options = {}) {
   const {
     since = '6m',
     until = '3m',
     calendarId = 'primary',
+    allCalendars = false,
     dryRun = false,
     verbose = false,
   } = options;
@@ -305,7 +344,7 @@ async function syncCalendar(options = {}) {
   console.log('Options:');
   console.log(`  Since: ${since} ago`);
   console.log(`  Until: ${until} ahead`);
-  console.log(`  Calendar: ${calendarId}`);
+  console.log(`  Calendar: ${allCalendars ? 'ALL' : calendarId}`);
   console.log(`  Dry run: ${dryRun}`);
   console.log();
 
@@ -331,86 +370,89 @@ async function syncCalendar(options = {}) {
   const ghlContactMap = await loadGhlContacts(supabase);
   console.log(`  Loaded ${ghlContactMap.size} contacts with email addresses\n`);
 
-  // Get calendar info
-  let calendarInfo = null;
-  try {
-    const { data } = await calendar.calendars.get({ calendarId });
-    calendarInfo = data;
-    console.log(`Calendar: ${calendarInfo.summary}`);
-  } catch (e) {
-    console.log(`Calendar: ${calendarId}`);
+  // Determine which calendars to sync
+  let calendarsToSync;
+  if (allCalendars) {
+    console.log('Discovering all accessible calendars...');
+    const discovered = await getAllCalendars(calendar);
+    calendarsToSync = discovered.map(c => ({
+      id: c.id,
+      summary: c.summary || c.id,
+      backgroundColor: c.backgroundColor || null,
+    }));
+    console.log(`  Found ${calendarsToSync.length} calendars:`);
+    for (const cal of calendarsToSync) {
+      console.log(`    - ${cal.summary} (${cal.id})`);
+    }
+    console.log();
+  } else {
+    // Single calendar mode
+    let calInfo = { id: calendarId, summary: calendarId, backgroundColor: null };
+    try {
+      const { data } = await calendar.calendars.get({ calendarId });
+      calInfo = { id: calendarId, summary: data.summary || calendarId, backgroundColor: null };
+    } catch (e) {
+      // Use defaults
+    }
+    calendarsToSync = [calInfo];
   }
 
-  // Fetch all events in date range
-  console.log('Fetching events from Google Calendar...\n');
-  let allEvents = [];
-  let pageToken = null;
+  // Fetch and transform events from all calendars
+  let allTransformed = [];
+  const totalProjectCounts = {};
+  const totalTypeCounts = {};
+  let totalMatchedContacts = 0;
 
-  do {
-    const params = {
-      calendarId,
-      timeMin: startDate.toISOString(),
-      timeMax: endDate.toISOString(),
-      singleEvents: true,
-      orderBy: 'startTime',
-      maxResults: 250,
-    };
+  for (const cal of calendarsToSync) {
+    console.log(`Syncing calendar: ${cal.summary} (${cal.id})`);
 
-    if (pageToken) {
-      params.pageToken = pageToken;
+    const calendarInfo = { id: cal.id, summary: cal.summary, backgroundColor: cal.backgroundColor };
+    const events = await fetchCalendarEvents(calendar, cal.id, startDate, endDate, verbose);
+    console.log(`  Found ${events.length} events`);
+
+    // Transform events with source='google'
+    const transformed = events.map(e => ({
+      ...transformEvent(e, ghlContactMap, calendarInfo),
+      sync_source: 'google',
+    }));
+
+    // Count stats
+    for (const event of transformed) {
+      if (event.detected_project_code) {
+        totalProjectCounts[event.detected_project_code] = (totalProjectCounts[event.detected_project_code] || 0) + 1;
+      }
+      totalTypeCounts[event.event_type] = (totalTypeCounts[event.event_type] || 0) + 1;
+      totalMatchedContacts += event.ghl_contact_ids?.length || 0;
     }
 
-    const { data } = await calendar.events.list(params);
-    allEvents = allEvents.concat(data.items || []);
-    pageToken = data.nextPageToken;
-
-    if (verbose) {
-      console.log(`  Fetched ${allEvents.length} events so far...`);
-    }
-  } while (pageToken);
-
-  console.log(`Found ${allEvents.length} events\n`);
-
-  // Transform events
-  console.log('Transforming and detecting projects...\n');
-  const transformed = allEvents.map(e => transformEvent(e, ghlContactMap, calendarInfo));
-
-  // Count project detections
-  const projectCounts = {};
-  const typeCounts = {};
-  let matchedContacts = 0;
-
-  for (const event of transformed) {
-    if (event.detected_project_code) {
-      projectCounts[event.detected_project_code] = (projectCounts[event.detected_project_code] || 0) + 1;
-    }
-    typeCounts[event.event_type] = (typeCounts[event.event_type] || 0) + 1;
-    matchedContacts += event.ghl_contact_ids?.length || 0;
+    allTransformed = allTransformed.concat(transformed);
   }
+
+  console.log(`\nTotal: ${allTransformed.length} events across ${calendarsToSync.length} calendar(s)\n`);
 
   console.log('Event types:');
-  for (const [type, count] of Object.entries(typeCounts).sort((a, b) => b[1] - a[1])) {
+  for (const [type, count] of Object.entries(totalTypeCounts).sort((a, b) => b[1] - a[1])) {
     console.log(`  ${type}: ${count}`);
   }
   console.log();
 
   console.log('Project detections:');
-  for (const [code, count] of Object.entries(projectCounts).sort((a, b) => b[1] - a[1])) {
+  for (const [code, count] of Object.entries(totalProjectCounts).sort((a, b) => b[1] - a[1])) {
     const project = PROJECT_CODES[code];
     console.log(`  ${code} (${project?.name || 'Unknown'}): ${count}`);
   }
-  console.log(`  (Unlinked): ${transformed.filter(e => !e.detected_project_code).length}`);
+  console.log(`  (Unlinked): ${allTransformed.filter(e => !e.detected_project_code).length}`);
   console.log();
 
-  console.log(`Contact matches: ${matchedContacts} attendees linked to GHL contacts\n`);
+  console.log(`Contact matches: ${totalMatchedContacts} attendees linked to GHL contacts\n`);
 
   if (dryRun) {
     console.log('DRY RUN - No changes written to database\n');
 
     // Show sample events
     console.log('Sample events:');
-    for (const event of transformed.slice(0, 5)) {
-      console.log(`  - ${event.title}`);
+    for (const event of allTransformed.slice(0, 5)) {
+      console.log(`  - ${event.title} [${event.calendar_name}]`);
       console.log(`    Time: ${event.start_time}`);
       console.log(`    Type: ${event.event_type}`);
       console.log(`    Project: ${event.detected_project_code || '(none)'}`);
@@ -422,12 +464,11 @@ async function syncCalendar(options = {}) {
   // Upsert to Supabase in batches
   console.log('Syncing to Supabase...\n');
   const batchSize = 50;
-  let inserted = 0;
   let updated = 0;
   let errors = 0;
 
-  for (let i = 0; i < transformed.length; i += batchSize) {
-    const batch = transformed.slice(i, i + batchSize);
+  for (let i = 0; i < allTransformed.length; i += batchSize) {
+    const batch = allTransformed.slice(i, i + batchSize);
 
     const { data, error } = await supabase
       .from('calendar_events')
@@ -445,17 +486,18 @@ async function syncCalendar(options = {}) {
     }
 
     if (verbose || (i % 200 === 0 && i > 0)) {
-      console.log(`  Processed ${Math.min(i + batchSize, transformed.length)}/${transformed.length} events...`);
+      console.log(`  Processed ${Math.min(i + batchSize, allTransformed.length)}/${allTransformed.length} events...`);
     }
   }
 
   console.log();
   console.log('✅ Sync complete!');
-  console.log(`  Total events: ${transformed.length}`);
+  console.log(`  Calendars: ${calendarsToSync.length}`);
+  console.log(`  Total events: ${allTransformed.length}`);
   console.log(`  Synced: ${updated}`);
   console.log(`  Errors: ${errors}`);
-  console.log(`  Projects detected: ${Object.keys(projectCounts).length}`);
-  console.log(`  Contacts matched: ${matchedContacts}`);
+  console.log(`  Projects detected: ${Object.keys(totalProjectCounts).length}`);
+  console.log(`  Contacts matched: ${totalMatchedContacts}`);
   console.log();
 }
 
@@ -472,6 +514,7 @@ const options = {
   since: getArg('since', '6m'),
   until: getArg('until', '3m'),
   calendarId: getArg('calendar-id', 'primary'),
+  allCalendars: args.includes('--all-calendars'),
   dryRun: args.includes('--dry-run'),
   verbose: args.includes('--verbose') || args.includes('-v'),
 };

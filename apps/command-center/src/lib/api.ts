@@ -375,14 +375,35 @@ export interface CalendarEvent {
   status?: string
   link?: string
   attendees?: Array<{ email: string; name?: string; response_status?: string }>
+  event_type?: string | null
+  calendar_name?: string | null
+  calendar_color?: string | null
+  google_calendar_id?: string
+  sync_source?: string
+  recurrence_rule?: string | null
 }
 
-export async function getCalendarEvents(date?: string) {
-  if (date) {
-    // Send start/end for the specific day
-    const start = `${date}T00:00:00`
-    const end = `${date}T23:59:59`
-    return fetchApi<{ events: CalendarEvent[] }>(`/api/calendar/events?start=${start}&end=${end}`)
+export interface CalendarSource {
+  id: string
+  name: string
+  color: string | null
+  source: string
+  event_count: number
+}
+
+export async function getCalendarSources() {
+  return fetchApi<{ calendars: CalendarSource[] }>('/api/calendar/calendars')
+}
+
+export async function getCalendarEvents(start?: string, end?: string) {
+  if (start && end) {
+    return fetchApi<{ events: CalendarEvent[] }>(`/api/calendar/events?start=${encodeURIComponent(start)}&end=${encodeURIComponent(end)}`)
+  }
+  if (start) {
+    // Single day: treat start as a date string like "2026-02-12"
+    const dayStart = `${start}T00:00:00`
+    const dayEnd = `${start}T23:59:59`
+    return fetchApi<{ events: CalendarEvent[] }>(`/api/calendar/events?start=${dayStart}&end=${dayEnd}`)
   }
   return fetchApi<{ events: CalendarEvent[] }>(`/api/calendar/events`)
 }

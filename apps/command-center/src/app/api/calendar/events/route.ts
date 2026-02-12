@@ -22,7 +22,17 @@ export async function GET(request: NextRequest) {
 
     if (error) throw error
 
-    const events = (data || []).map((e) => ({
+    // Optional server-side calendar filter
+    const calendarsParam = searchParams.get('calendars')
+    let filteredData = data || []
+    if (calendarsParam) {
+      const allowedCalendars = new Set(calendarsParam.split(','))
+      filteredData = filteredData.filter(e =>
+        allowedCalendars.has(e.google_calendar_id || 'primary')
+      )
+    }
+
+    const events = filteredData.map((e) => ({
       id: e.id,
       title: e.title || e.summary || 'Untitled Event',
       start_time: e.start_time,
@@ -34,6 +44,12 @@ export async function GET(request: NextRequest) {
       status: e.status || 'confirmed',
       link: e.html_link || e.link,
       attendees: e.attendees || [],
+      event_type: e.event_type || null,
+      calendar_name: e.calendar_name || null,
+      calendar_color: e.calendar_color || null,
+      google_calendar_id: e.google_calendar_id || 'primary',
+      sync_source: e.sync_source || 'google',
+      recurrence_rule: e.recurrence_rule || null,
     }))
 
     return NextResponse.json({ events })

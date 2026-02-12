@@ -76,10 +76,10 @@ async function buildDailyBriefing(): Promise<string> {
   const fourteenDaysAgo = new Date(now.getTime() - 14 * 86400000).toISOString()
 
   const [calendar, overdue, followUps, staleContacts, grants] = await Promise.all([
-    // Today's calendar
+    // Today's calendar — all sources
     supabase
       .from('calendar_events')
-      .select('title, start_time, end_time, location')
+      .select('title, start_time, end_time, location, is_all_day, sync_source, calendar_name, metadata, event_type')
       .gte('start_time', `${today}T00:00:00.000Z`)
       .lte('start_time', `${today}T23:59:59.999Z`)
       .order('start_time', { ascending: true }),
@@ -127,13 +127,59 @@ async function buildDailyBriefing(): Promise<string> {
   const dayName = now.toLocaleDateString('en-AU', { weekday: 'long', day: 'numeric', month: 'long' })
   lines.push(`Good morning! Here's your briefing for ${dayName}.\n`)
 
-  // Calendar
+  // Calendar — grouped by time blocks with source badges
   const events = calendar.data || []
   if (events.length > 0) {
-    lines.push(`CALENDAR (${events.length} events)`)
-    for (const e of events) {
-      const time = new Date(e.start_time).toLocaleTimeString('en-AU', { hour: '2-digit', minute: '2-digit', hour12: true })
-      lines.push(`  ${time} — ${e.title}${e.location ? ` (${e.location})` : ''}`)
+    lines.push(`YOUR SCHEDULE (${events.length} events)`)
+
+    const allDay = events.filter((e: { is_all_day?: boolean }) => e.is_all_day)
+    const timed = events.filter((e: { is_all_day?: boolean }) => !e.is_all_day)
+
+    // Group timed events by time block
+    const morning: typeof timed = []
+    const afternoon: typeof timed = []
+    const evening: typeof timed = []
+    for (const e of timed) {
+      const hour = new Date(e.start_time).getHours()
+      if (hour < 12) morning.push(e)
+      else if (hour < 17) afternoon.push(e)
+      else evening.push(e)
+    }
+
+    const formatEvent = (e: typeof events[0]) => {
+      const time = new Date(e.start_time).toLocaleTimeString('en-AU', { hour: '2-digit', minute: '2-digit', hour12: false })
+      const endTime = e.end_time ? new Date(e.end_time).toLocaleTimeString('en-AU', { hour: '2-digit', minute: '2-digit', hour12: false }) : ''
+      const timeStr = endTime && endTime !== time ? `${time}–${endTime}` : time
+      const source = e.sync_source === 'notion' ? ' [Notion]' : (e.calendar_name && e.calendar_name !== 'Primary' ? ` [${e.calendar_name}]` : '')
+      // Extract conference link from metadata
+      let confLink = ''
+      try {
+        const meta = typeof e.metadata === 'string' ? JSON.parse(e.metadata) : e.metadata
+        if (meta?.conferenceData?.entryPoints?.[0]?.uri) {
+          confLink = ` (${meta.conferenceData.entryPoints[0].label || 'Join'})`
+        }
+      } catch { /* ignore */ }
+      return `  ${timeStr}  ${e.title}${confLink}${e.location ? ` (${e.location})` : ''}${source}`
+    }
+
+    if (morning.length > 0) {
+      lines.push('MORNING')
+      for (const e of morning) lines.push(formatEvent(e))
+    }
+    if (afternoon.length > 0) {
+      lines.push('AFTERNOON')
+      for (const e of afternoon) lines.push(formatEvent(e))
+    }
+    if (evening.length > 0) {
+      lines.push('EVENING')
+      for (const e of evening) lines.push(formatEvent(e))
+    }
+    if (allDay.length > 0) {
+      lines.push('ALL DAY')
+      for (const e of allDay) {
+        const source = e.sync_source === 'notion' ? ' [Notion]' : ''
+        lines.push(`  ${e.title}${e.location ? ` — ${e.location}` : ''}${source}`)
+      }
     }
     lines.push('')
   } else {
@@ -182,6 +228,24 @@ async function buildDailyBriefing(): Promise<string> {
     lines.push('')
   }
 
+  // Intelligence insights
+  const insightsSummary = await getInsightsSummary()
+  if (insightsSummary) {
+    lines.push(insightsSummary)
+  }
+
+  // Relationship decay alerts
+  const relationshipAlerts = await getRelationshipAlerts()
+  if (relationshipAlerts) {
+    lines.push(relationshipAlerts)
+  }
+
+  // Sync health
+  const syncHealth = await getSyncHealthSummary()
+  if (syncHealth) {
+    lines.push(syncHealth)
+  }
+
   if (lines.length <= 2) {
     lines.push('All clear — nothing urgent today.')
   }
@@ -204,7 +268,7 @@ export async function checkGrantAlerts(): Promise<{ sent: number; alerts: string
   // New grants discovered in last 24h
   const { data: newGrants } = await supabase
     .from('grant_opportunities')
-    .select('name, provider, amount_max, closes_at, fit_score')
+    .select('name, provider, amount_max, closes_at, fit_score, aligned_projects')
     .gte('discovered_at', yesterday)
     .order('fit_score', { ascending: false })
     .limit(5)
@@ -214,7 +278,11 @@ export async function checkGrantAlerts(): Promise<{ sent: number; alerts: string
     for (const g of newGrants) {
       const amount = g.amount_max ? ` ($${Number(g.amount_max).toLocaleString()})` : ''
       const fit = g.fit_score ? ` — fit: ${g.fit_score}%` : ''
-      lines.push(`  ${g.name} — ${g.provider}${amount}${fit}`)
+      const projects = (g.aligned_projects as string[] | null)?.length
+        ? ` — ${(g.aligned_projects as string[]).join(', ')}`
+        : ''
+      const closes = g.closes_at ? ` — closes ${g.closes_at}` : ''
+      lines.push(`  ${g.name} — ${g.provider}${amount}${fit}${projects}${closes}`)
     }
     alerts.push(lines.join('\n'))
   }
@@ -278,6 +346,28 @@ export async function checkFinanceAlerts(): Promise<{ sent: number; alerts: stri
   const now = new Date()
   const sevenDaysAgo = new Date(now.getTime() - 7 * 86400000).toISOString()
 
+  // Overdue invoices (receivables past due date)
+  const today = now.toISOString().split('T')[0]
+  const { data: overdueInvoices } = await supabase
+    .from('xero_invoices')
+    .select('invoice_number, contact_name, amount_due, due_date')
+    .eq('type', 'ACCREC')
+    .in('status', ['AUTHORISED', 'SUBMITTED'])
+    .gt('amount_due', 0)
+    .lt('due_date', today)
+    .order('due_date', { ascending: true })
+    .limit(10)
+
+  if (overdueInvoices && overdueInvoices.length > 0) {
+    const totalOverdue = overdueInvoices.reduce((sum, inv) => sum + (parseFloat(String(inv.amount_due)) || 0), 0)
+    const lines = [`OVERDUE INVOICES (${overdueInvoices.length}, $${totalOverdue.toLocaleString('en-AU', { minimumFractionDigits: 2 })})`]
+    for (const inv of overdueInvoices) {
+      const daysOverdue = Math.floor((now.getTime() - new Date(inv.due_date).getTime()) / 86400000)
+      lines.push(`  ${inv.contact_name || 'Unknown'} — $${Number(inv.amount_due).toLocaleString('en-AU', { minimumFractionDigits: 2 })} — ${daysOverdue}d overdue (${inv.invoice_number || ''})`)
+    }
+    alerts.push(lines.join('\n'))
+  }
+
   // Pending receipts older than 7 days
   const { data: pendingReceipts } = await supabase
     .from('receipt_matches')
@@ -294,6 +384,34 @@ export async function checkFinanceAlerts(): Promise<{ sent: number; alerts: stri
       lines.push(`  ${r.vendor_name || 'Unknown'} — $${Number(r.amount).toFixed(2)} (${r.transaction_date})`)
     }
     alerts.push(lines.join('\n'))
+  }
+
+  // Cashflow runway warning
+  const { data: snapshots } = await supabase
+    .from('financial_snapshots')
+    .select('income, expenses, closing_balance')
+    .order('month', { ascending: false })
+    .limit(6)
+
+  if (snapshots && snapshots.length >= 3) {
+    const currentBalance = snapshots[0]?.closing_balance || 0
+    let totalBurn = 0
+    for (const s of snapshots) {
+      const burn = (s.expenses || 0) - (s.income || 0)
+      totalBurn += Math.max(0, burn)
+    }
+    const avgBurn = totalBurn / snapshots.length
+    const runwayMonths = avgBurn > 0 ? currentBalance / avgBurn : Infinity
+
+    if (runwayMonths < 3 && runwayMonths > 0) {
+      const lines = [`CASHFLOW WARNING — ${runwayMonths.toFixed(1)} MONTHS RUNWAY`]
+      lines.push(`  Balance: $${Number(currentBalance).toLocaleString('en-AU', { minimumFractionDigits: 2 })}`)
+      lines.push(`  Avg monthly burn: $${Math.round(avgBurn).toLocaleString('en-AU')}`)
+      if (runwayMonths < 1) {
+        lines.push(`  CRITICAL: Less than 1 month of runway remaining`)
+      }
+      alerts.push(lines.join('\n'))
+    }
   }
 
   if (alerts.length === 0) return { sent: 0, alerts: [] }
@@ -395,6 +513,170 @@ export async function checkAndSendReminders(): Promise<{ sent: number; errors: s
 
   return { sent, errors }
 }
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// INTELLIGENCE INSIGHTS SUMMARY
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+export async function getInsightsSummary(): Promise<string> {
+  const { data: insights } = await supabase
+    .from('intelligence_insights')
+    .select('insight_type, title, description, priority')
+    .eq('status', 'active')
+    .in('priority', ['high', 'medium'])
+    .order('priority', { ascending: true })
+    .order('created_at', { ascending: false })
+    .limit(8)
+
+  if (!insights || insights.length === 0) return ''
+
+  const highPriority = insights.filter((i) => i.priority === 'high')
+  const medPriority = insights.filter((i) => i.priority === 'medium')
+
+  const lines: string[] = []
+
+  if (highPriority.length > 0) {
+    lines.push(`INTELLIGENCE — HIGH PRIORITY (${highPriority.length})`)
+    for (const i of highPriority) {
+      lines.push(`  ${i.title}`)
+      if (i.description) lines.push(`    ${i.description.substring(0, 100)}`)
+    }
+    lines.push('')
+  }
+
+  if (medPriority.length > 0) {
+    lines.push(`INTELLIGENCE — INSIGHTS (${medPriority.length})`)
+    for (const i of medPriority.slice(0, 5)) {
+      lines.push(`  ${i.title}`)
+    }
+    lines.push('')
+  }
+
+  return lines.join('\n')
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// RELATIONSHIP DECAY ALERTS
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+export async function getRelationshipAlerts(): Promise<string> {
+  const now = new Date()
+
+  // Contacts awaiting response (inbound with no reply > 2 days)
+  const { data: awaitingResponse } = await supabase
+    .from('communications_history')
+    .select('subject, ghl_contact_id, occurred_at, metadata')
+    .eq('waiting_for_response', true)
+    .eq('response_needed_by', 'us')
+    .eq('direction', 'inbound')
+    .lt('occurred_at', new Date(now.getTime() - 2 * 86400000).toISOString())
+    .order('occurred_at', { ascending: true })
+    .limit(5)
+
+  // Contacts going cold — important tags past threshold
+  const { data: coolingContacts } = await supabase
+    .from('ghl_contacts')
+    .select('full_name, tags, last_contact_date')
+    .or('tags.cs.{"partner"},tags.cs.{"funder"},tags.cs.{"responsive"}')
+    .lt('last_contact_date', new Date(now.getTime() - 30 * 86400000).toISOString())
+    .not('full_name', 'is', null)
+    .order('last_contact_date', { ascending: true })
+    .limit(5)
+
+  const lines: string[] = []
+
+  if (awaitingResponse && awaitingResponse.length > 0) {
+    lines.push(`AWAITING YOUR RESPONSE (${awaitingResponse.length})`)
+    for (const email of awaitingResponse) {
+      const from = email.metadata?.from || 'Unknown'
+      const days = Math.floor((now.getTime() - new Date(email.occurred_at).getTime()) / 86400000)
+      const subject = (email.subject || '(no subject)').substring(0, 50)
+      lines.push(`  ${from.substring(0, 25)} — ${days}d — "${subject}"`)
+    }
+    lines.push('')
+  }
+
+  if (coolingContacts && coolingContacts.length > 0) {
+    lines.push(`RELATIONSHIPS GOING COLD (${coolingContacts.length})`)
+    for (const c of coolingContacts) {
+      const days = Math.floor((now.getTime() - new Date(c.last_contact_date).getTime()) / 86400000)
+      const tags = (c.tags || []).slice(0, 2).join(', ')
+      lines.push(`  ${c.full_name?.substring(0, 25)} — ${days}d — ${tags}`)
+    }
+    lines.push('')
+  }
+
+  return lines.join('\n')
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// SYNC HEALTH SUMMARY
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+interface SyncCheck {
+  label: string
+  table: string
+  column: string
+  warnHours: number
+  criticalHours: number
+}
+
+const SYNC_CHECKS: SyncCheck[] = [
+  { label: 'GHL Contacts', table: 'ghl_contacts', column: 'updated_at', warnHours: 48, criticalHours: 168 },
+  { label: 'Communications', table: 'communications_history', column: 'occurred_at', warnHours: 24, criticalHours: 72 },
+  { label: 'GHL Opportunities', table: 'ghl_opportunities', column: 'updated_at', warnHours: 48, criticalHours: 168 },
+  { label: 'Calendar', table: 'calendar_events', column: 'synced_at', warnHours: 72, criticalHours: 336 },
+  { label: 'Knowledge', table: 'project_knowledge', column: 'recorded_at', warnHours: 48, criticalHours: 168 },
+]
+
+export async function getSyncHealthSummary(): Promise<string> {
+  const stale: string[] = []
+  const critical: string[] = []
+
+  for (const check of SYNC_CHECKS) {
+    const { data } = await supabase
+      .from(check.table)
+      .select(check.column)
+      .order(check.column, { ascending: false })
+      .limit(1)
+      .maybeSingle()
+
+    if (!data) {
+      critical.push(`${check.label}: NO DATA`)
+      continue
+    }
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const lastUpdate = new Date((data as any)[check.column])
+    const hoursAgo = (Date.now() - lastUpdate.getTime()) / (1000 * 60 * 60)
+
+    if (hoursAgo >= check.criticalHours) {
+      critical.push(`${check.label}: ${Math.floor(hoursAgo / 24)}d stale`)
+    } else if (hoursAgo >= check.warnHours) {
+      stale.push(`${check.label}: ${Math.floor(hoursAgo)}h since last update`)
+    }
+  }
+
+  if (critical.length === 0 && stale.length === 0) return ''
+
+  const lines: string[] = []
+  if (critical.length > 0) {
+    lines.push(`DATA SYNC — CRITICAL`)
+    for (const c of critical) lines.push(`  ${c}`)
+    lines.push('')
+  }
+  if (stale.length > 0) {
+    lines.push(`DATA SYNC — STALE`)
+    for (const s of stale) lines.push(`  ${s}`)
+    lines.push('')
+  }
+
+  return lines.join('\n')
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// HELPERS
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 function getNextTriggerTime(current: Date, recurring: string): Date {
   const next = new Date(current)
