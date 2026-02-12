@@ -1,5 +1,6 @@
 import Anthropic from '@anthropic-ai/sdk'
 import { google } from 'googleapis'
+import { Client as NotionClient } from '@notionhq/client'
 import { supabase } from './supabase'
 import { readFileSync } from 'fs'
 import { join } from 'path'
@@ -120,7 +121,7 @@ export const AGENT_TOOLS: Anthropic.Tool[] = [
   {
     name: 'get_contact_details',
     description:
-      'Get full details for a specific contact including email, phone, organisation, tags, engagement history, and recent communications. Use this after finding a contact via search, or when the user asks for details about a known person.',
+      'Get full contact card including relationship health (temperature 0-100, trend, risk flags, signal scores), open pipeline value, next meeting, and recent communications. Use this after finding a contact via search, or when the user asks for details about a known person.',
     input_schema: {
       type: 'object' as const,
       properties: {
@@ -192,7 +193,7 @@ export const AGENT_TOOLS: Anthropic.Tool[] = [
   {
     name: 'get_contacts_needing_attention',
     description:
-      'Get contacts who need follow-up — people who were recently active but haven\'t been contacted in 14-60 days. Use this when the user asks "who should I reach out to" or "who needs follow-up". Optionally filter by project (e.g. "who needs attention for Goods?").',
+      'Get contacts who need follow-up — prioritized by relationship signals (falling temperature, risk flags like going_cold, awaiting_response, high_value_inactive). Use this when the user asks "who should I reach out to", "who needs follow-up", or "who needs attention". Includes recommended actions.',
     input_schema: {
       type: 'object' as const,
       properties: {
@@ -203,6 +204,22 @@ export const AGENT_TOOLS: Anthropic.Tool[] = [
         project: {
           type: 'string',
           description: 'Optional project tag to filter by (e.g. "goods", "the-harvest"). Only returns contacts with this tag.',
+        },
+      },
+      required: [],
+    },
+  },
+
+  {
+    name: 'get_deal_risks',
+    description:
+      'Get at-risk deals — open opportunities where the contact relationship is cooling, inactive, or awaiting response. Use this when the user asks "any deal risks?", "which deals are at risk?", or "pipeline health".',
+    input_schema: {
+      type: 'object' as const,
+      properties: {
+        limit: {
+          type: 'number',
+          description: 'Max deals to return. Default 10.',
         },
       },
       required: [],
@@ -852,6 +869,125 @@ export const AGENT_TOOLS: Anthropic.Tool[] = [
       required: [],
     },
   },
+
+  // ── NOTION WRITE TOOLS ────────────────────────────────────────────
+
+  {
+    name: 'add_meeting_to_notion',
+    description:
+      'Add a meeting record to the unified Notion Meetings database. Use when the user says "record meeting with..." or "log meeting about...". Also saves to Supabase project_knowledge. Requires confirmation before writing.',
+    input_schema: {
+      type: 'object' as const,
+      properties: {
+        title: {
+          type: 'string',
+          description: 'Meeting title.',
+        },
+        date: {
+          type: 'string',
+          description: 'Meeting date in YYYY-MM-DD format. Default: today.',
+        },
+        project_code: {
+          type: 'string',
+          description: 'Project code (e.g. ACT-JH). Auto-detected from title if not provided.',
+        },
+        attendees: {
+          type: 'array',
+          items: { type: 'string' },
+          description: 'Names of attendees.',
+        },
+        notes: {
+          type: 'string',
+          description: 'Meeting notes in markdown.',
+        },
+        decisions: {
+          type: 'array',
+          items: { type: 'string' },
+          description: 'Key decisions made during the meeting.',
+        },
+        action_items: {
+          type: 'array',
+          items: { type: 'string' },
+          description: 'Action items from the meeting.',
+        },
+        meeting_type: {
+          type: 'string',
+          enum: ['internal', 'external', 'workshop', 'standup', 'review', 'other'],
+          description: 'Type of meeting. Default: "external".',
+        },
+      },
+      required: ['title', 'notes'],
+    },
+  },
+  {
+    name: 'add_action_item',
+    description:
+      'Add an action item to the Notion Actions database and Supabase project_knowledge. Use when the user says "add action..." or "I need to..." or dictates a task. Requires confirmation.',
+    input_schema: {
+      type: 'object' as const,
+      properties: {
+        title: {
+          type: 'string',
+          description: 'Action item title.',
+        },
+        project_code: {
+          type: 'string',
+          description: 'Project code (e.g. ACT-JH).',
+        },
+        due_date: {
+          type: 'string',
+          description: 'Due date in YYYY-MM-DD format.',
+        },
+        priority: {
+          type: 'string',
+          enum: ['high', 'normal', 'low'],
+          description: 'Priority level. Default: "normal".',
+        },
+        details: {
+          type: 'string',
+          description: 'Additional context or details.',
+        },
+        assignee: {
+          type: 'string',
+          description: 'Who is responsible (e.g. "Ben", "Nic").',
+        },
+      },
+      required: ['title'],
+    },
+  },
+  {
+    name: 'add_decision',
+    description:
+      'Record a decision in the Notion Decisions database and Supabase project_knowledge. Use when the user says "we decided..." or "decision: ..." or describes a choice that was made. Requires confirmation.',
+    input_schema: {
+      type: 'object' as const,
+      properties: {
+        title: {
+          type: 'string',
+          description: 'Decision title — what was decided.',
+        },
+        project_code: {
+          type: 'string',
+          description: 'Project code (e.g. ACT-JH).',
+        },
+        rationale: {
+          type: 'string',
+          description: 'Why this decision was made.',
+        },
+        alternatives_considered: {
+          type: 'array',
+          items: { type: 'string' },
+          description: 'Other options that were considered.',
+        },
+        status: {
+          type: 'string',
+          enum: ['active', 'superseded', 'revisit'],
+          description: 'Decision status. Default: "active".',
+        },
+      },
+      required: ['title'],
+    },
+  },
 ]
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -882,6 +1018,8 @@ export async function executeTool(
       return await executeGetProjectSummary(input as { project_code: string })
     case 'get_contacts_needing_attention':
       return await executeGetContactsNeedingAttention(input as { limit?: number; project?: string })
+    case 'get_deal_risks':
+      return await executeGetDealRisks(input as { limit?: number })
     // Write actions
     case 'draft_email':
       return await executeDraftEmail(input as { to: string; subject: string; body: string }, chatId)
@@ -979,6 +1117,22 @@ export async function executeTool(
       return await executeGetProject360(input as { project_code: string })
     case 'get_ecosystem_pulse':
       return await executeGetEcosystemPulse()
+    // Notion write tools
+    case 'add_meeting_to_notion':
+      return await executeAddMeetingToNotion(input as {
+        title: string; date?: string; project_code?: string; attendees?: string[];
+        notes: string; decisions?: string[]; action_items?: string[]; meeting_type?: string
+      })
+    case 'add_action_item':
+      return await executeAddActionItem(input as {
+        title: string; project_code?: string; due_date?: string;
+        priority?: string; details?: string; assignee?: string
+      })
+    case 'add_decision':
+      return await executeAddDecision(input as {
+        title: string; project_code?: string; rationale?: string;
+        alternatives_considered?: string[]; status?: string
+      })
     default:
       return JSON.stringify({ error: `Unknown tool: ${name}` })
   }
@@ -1350,15 +1504,48 @@ async function executeGetContactDetails(input: {
       return JSON.stringify({ error: 'Contact not found', contact_id })
     }
 
-    // Get recent communications
-    const { data: comms } = await supabase
-      .from('communications_history')
-      .select('direction, channel, subject, summary, communication_date')
-      .eq('contact_id', contact.id)
-      .order('communication_date', { ascending: false })
-      .limit(5)
+    // Fetch comms + relationship health + next meeting + open pipeline in parallel
+    const [commsResult, healthResult, nextMeetingResult, pipelineResult] = await Promise.all([
+      supabase
+        .from('communications_history')
+        .select('direction, channel, subject, summary, communication_date')
+        .eq('contact_id', contact.id)
+        .order('communication_date', { ascending: false })
+        .limit(5),
+      supabase
+        .from('relationship_health')
+        .select('temperature, temperature_trend, last_temperature_change, lcaa_stage, risk_flags, email_score, calendar_score, financial_score, pipeline_score, knowledge_score, signal_breakdown, next_meeting_date, open_invoice_amount')
+        .eq('ghl_contact_id', contact.ghl_id)
+        .maybeSingle(),
+      supabase
+        .from('calendar_events')
+        .select('title, start_time, attendees')
+        .gte('start_time', new Date().toISOString())
+        .order('start_time', { ascending: true })
+        .limit(10),
+      supabase
+        .from('ghl_opportunities')
+        .select('name, monetary_value, stage_name, status')
+        .eq('contact_id', contact.ghl_id)
+        .eq('status', 'open'),
+    ])
+
+    const comms = commsResult.data
+    const health = healthResult.data
+    const pipeline = pipelineResult.data
+
+    // Find next meeting involving this contact
+    const contactName = (contact.full_name || '').toLowerCase()
+    const contactEmail = (contact.email || '').toLowerCase()
+    const nextMeeting = (nextMeetingResult.data || []).find((e) => {
+      const attendees = JSON.stringify(e.attendees || []).toLowerCase()
+      const title = (e.title || '').toLowerCase()
+      return (contactEmail && attendees.includes(contactEmail)) || (contactName && title.includes(contactName))
+    })
 
     const now = new Date()
+    const openPipelineValue = (pipeline || []).reduce((sum: number, o: { monetary_value?: number }) => sum + (o.monetary_value || 0), 0)
+
     return JSON.stringify({
       id: contact.id,
       ghl_id: contact.ghl_id,
@@ -1373,6 +1560,33 @@ async function executeGetContactDetails(input: {
       days_since_contact: contact.last_contact_date
         ? Math.floor((now.getTime() - new Date(contact.last_contact_date).getTime()) / 86400000)
         : null,
+      // Relationship health signals
+      relationship: health ? {
+        temperature: health.temperature,
+        trend: health.temperature_trend,
+        last_change: health.last_temperature_change,
+        lcaa_stage: health.lcaa_stage,
+        risk_flags: health.risk_flags || [],
+        signals: {
+          email: health.email_score,
+          calendar: health.calendar_score,
+          financial: health.financial_score,
+          pipeline: health.pipeline_score,
+          knowledge: health.knowledge_score,
+        },
+      } : null,
+      // Pipeline
+      open_pipeline: {
+        count: (pipeline || []).length,
+        total_value: openPipelineValue,
+        opportunities: (pipeline || []).map((o: { name: string; monetary_value?: number; stage_name?: string }) => ({
+          name: o.name,
+          value: o.monetary_value,
+          stage: o.stage_name,
+        })),
+      },
+      // Next meeting
+      next_meeting: nextMeeting ? { title: nextMeeting.title, date: nextMeeting.start_time } : null,
       recent_communications: (comms || []).map((c) => ({
         direction: c.direction,
         channel: c.channel,
@@ -1542,49 +1756,219 @@ async function executeGetContactsNeedingAttention(input: {
   const limit = input.limit || 10
 
   try {
-    const fourteenDaysAgo = new Date()
-    fourteenDaysAgo.setDate(fourteenDaysAgo.getDate() - 14)
-    const sixtyDaysAgo = new Date()
-    sixtyDaysAgo.setDate(sixtyDaysAgo.getDate() - 60)
+    // Primary: use relationship_health signals (falling temperature or risk flags)
+    const { data: healthData, error: healthError } = await supabase
+      .from('relationship_health')
+      .select('ghl_contact_id, temperature, temperature_trend, last_temperature_change, risk_flags, email_score, calendar_score, next_meeting_date')
+      .or('temperature_trend.eq.falling,risk_flags.not.is.null')
+      .order('temperature', { ascending: true })
+      .limit(limit * 2)
 
-    let query = supabase
+    // Get contact details for matched health records
+    const ghlIds = (healthData || []).map((h) => h.ghl_contact_id)
+
+    let contactQuery = supabase
       .from('ghl_contacts')
       .select('id, ghl_id, full_name, email, phone, company_name, engagement_status, tags, projects, last_contact_date')
-      .lt('last_contact_date', fourteenDaysAgo.toISOString())
-      .gt('last_contact_date', sixtyDaysAgo.toISOString())
-      .order('last_contact_date', { ascending: true })
-      .limit(limit)
+      .in('ghl_id', ghlIds.length > 0 ? ghlIds : ['__none__'])
 
     if (input.project) {
-      query = query.contains('tags', [input.project.toLowerCase()])
+      contactQuery = contactQuery.contains('tags', [input.project.toLowerCase()])
     }
 
-    const { data, error } = await query
+    const { data: contactData } = await contactQuery
+
+    // Build health lookup
+    const healthMap: Record<string, (typeof healthData extends (infer T)[] | null ? T : never)> = {}
+    for (const h of (healthData || [])) {
+      healthMap[h.ghl_contact_id] = h
+    }
+
+    const now = new Date()
+    const contacts = (contactData || [])
+      .map((c) => {
+        const health = healthMap[c.ghl_id]
+        const riskFlags = health?.risk_flags || []
+        return {
+          id: c.id,
+          name: c.full_name || 'Unknown',
+          email: c.email,
+          phone: c.phone,
+          company: c.company_name,
+          status: c.engagement_status,
+          tags: c.tags || [],
+          projects: c.projects || [],
+          last_contact: c.last_contact_date,
+          days_since_contact: c.last_contact_date
+            ? Math.floor((now.getTime() - new Date(c.last_contact_date).getTime()) / 86400000)
+            : null,
+          temperature: health?.temperature,
+          trend: health?.temperature_trend,
+          temperature_change: health?.last_temperature_change,
+          risk_flags: riskFlags,
+          recommended_action: suggestAction(riskFlags, health),
+        }
+      })
+      .sort((a, b) => (a.temperature ?? 999) - (b.temperature ?? 999))
+      .slice(0, limit)
+
+    // Fallback: if no signal-based results, use the simple date threshold
+    if (contacts.length === 0) {
+      const fourteenDaysAgo = new Date()
+      fourteenDaysAgo.setDate(fourteenDaysAgo.getDate() - 14)
+      const sixtyDaysAgo = new Date()
+      sixtyDaysAgo.setDate(sixtyDaysAgo.getDate() - 60)
+
+      let fallbackQuery = supabase
+        .from('ghl_contacts')
+        .select('id, ghl_id, full_name, email, phone, company_name, engagement_status, tags, projects, last_contact_date')
+        .lt('last_contact_date', fourteenDaysAgo.toISOString())
+        .gt('last_contact_date', sixtyDaysAgo.toISOString())
+        .order('last_contact_date', { ascending: true })
+        .limit(limit)
+
+      if (input.project) {
+        fallbackQuery = fallbackQuery.contains('tags', [input.project.toLowerCase()])
+      }
+
+      const { data: fallbackData } = await fallbackQuery
+
+      const fallbackContacts = (fallbackData || []).map((c) => ({
+        id: c.id,
+        name: c.full_name || 'Unknown',
+        email: c.email,
+        phone: c.phone,
+        company: c.company_name,
+        status: c.engagement_status,
+        tags: c.tags || [],
+        projects: c.projects || [],
+        last_contact: c.last_contact_date,
+        days_since_contact: c.last_contact_date
+          ? Math.floor((now.getTime() - new Date(c.last_contact_date).getTime()) / 86400000)
+          : null,
+        recommended_action: 'Reach out — no recent contact',
+      }))
+
+      return JSON.stringify({
+        description: 'Contacts who need follow-up (14-60 days since last contact, no signal data available yet)',
+        count: fallbackContacts.length,
+        contacts: fallbackContacts,
+      })
+    }
+
+    return JSON.stringify({
+      description: 'Contacts with falling relationship temperature or active risk flags, prioritized by urgency',
+      count: contacts.length,
+      contacts,
+    })
+  } catch (err) {
+    return JSON.stringify({ error: (err as Error).message })
+  }
+}
+
+function suggestAction(
+  riskFlags: string[],
+  health: { email_score?: number; calendar_score?: number; next_meeting_date?: string } | null | undefined
+): string {
+  if (riskFlags.includes('awaiting_response')) return 'Reply to their recent message — they\'re waiting to hear back'
+  if (riskFlags.includes('high_value_inactive')) return 'High-value deal at risk — schedule a call or meeting ASAP'
+  if (riskFlags.includes('one_way_outbound')) return 'Emails going unanswered — try a different channel (call, text, in-person)'
+  if (riskFlags.includes('going_cold')) return 'Relationship cooling — send a check-in or share something relevant'
+  if (health?.next_meeting_date) return `Meeting scheduled ${new Date(health.next_meeting_date).toLocaleDateString()} — prepare talking points`
+  return 'Consider reaching out with a relevant update or check-in'
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// TOOL: get_deal_risks
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+async function executeGetDealRisks(input: {
+  limit?: number
+}): Promise<string> {
+  const limit = input.limit || 10
+
+  try {
+    // Get open opportunities
+    const { data: opportunities, error } = await supabase
+      .from('ghl_opportunities')
+      .select('id, name, monetary_value, stage_name, pipeline_name, contact_id, status, updated_at')
+      .eq('status', 'open')
+      .order('monetary_value', { ascending: false })
 
     if (error) {
       return JSON.stringify({ error: error.message })
     }
 
+    if (!opportunities || opportunities.length === 0) {
+      return JSON.stringify({ description: 'No open opportunities in pipeline', deals: [] })
+    }
+
+    // Get relationship health for all contacts with open deals
+    const contactIds = [...new Set(opportunities.map((o) => o.contact_id).filter(Boolean))]
+    const { data: healthData } = await supabase
+      .from('relationship_health')
+      .select('ghl_contact_id, temperature, temperature_trend, risk_flags, last_contact_at, email_score')
+      .in('ghl_contact_id', contactIds.length > 0 ? contactIds : ['__none__'])
+
+    const healthMap: Record<string, { temperature?: number; temperature_trend?: string; risk_flags?: string[]; last_contact_at?: string; email_score?: number }> = {}
+    for (const h of (healthData || [])) {
+      healthMap[h.ghl_contact_id] = h
+    }
+
+    // Get contact names
+    const { data: contactData } = await supabase
+      .from('ghl_contacts')
+      .select('ghl_id, full_name, email')
+      .in('ghl_id', contactIds.length > 0 ? contactIds : ['__none__'])
+
+    const contactMap: Record<string, { full_name?: string; email?: string }> = {}
+    for (const c of (contactData || [])) {
+      contactMap[c.ghl_id] = c
+    }
+
     const now = new Date()
-    const contacts = (data || []).map((c) => ({
-      id: c.id,
-      name: c.full_name || 'Unknown',
-      email: c.email,
-      phone: c.phone,
-      company: c.company_name,
-      status: c.engagement_status,
-      tags: c.tags || [],
-      projects: c.projects || [],
-      last_contact: c.last_contact_date,
-      days_since_contact: c.last_contact_date
-        ? Math.floor((now.getTime() - new Date(c.last_contact_date).getTime()) / 86400000)
-        : null,
-    }))
+    const atRiskDeals = opportunities
+      .map((opp) => {
+        const health = healthMap[opp.contact_id]
+        const contact = contactMap[opp.contact_id]
+        const daysSinceUpdate = Math.floor((now.getTime() - new Date(opp.updated_at).getTime()) / 86400000)
+        const daysSinceContact = health?.last_contact_at
+          ? Math.floor((now.getTime() - new Date(health.last_contact_at).getTime()) / 86400000)
+          : null
+
+        // Determine risk reasons
+        const risks: string[] = []
+        if (health?.temperature_trend === 'falling') risks.push('Contact temperature falling')
+        if (health?.risk_flags?.includes('going_cold')) risks.push('Contact going cold')
+        if (health?.risk_flags?.includes('awaiting_response')) risks.push('Awaiting your response')
+        if (health?.risk_flags?.includes('one_way_outbound')) risks.push('One-way outbound — no replies')
+        if (health?.risk_flags?.includes('high_value_inactive')) risks.push('High value but inactive')
+        if (daysSinceUpdate > 14) risks.push(`No deal activity in ${daysSinceUpdate} days`)
+        if (daysSinceContact && daysSinceContact > 21) risks.push(`No contact in ${daysSinceContact} days`)
+
+        if (risks.length === 0) return null
+
+        return {
+          deal: opp.name,
+          value: opp.monetary_value,
+          stage: opp.stage_name,
+          pipeline: opp.pipeline_name,
+          contact_name: contact?.full_name || 'Unknown',
+          contact_email: contact?.email,
+          temperature: health?.temperature,
+          trend: health?.temperature_trend,
+          risks,
+          suggested_action: suggestAction(health?.risk_flags || [], health),
+        }
+      })
+      .filter(Boolean)
+      .slice(0, limit)
 
     return JSON.stringify({
-      description: 'Contacts who were recently active but need follow-up (14-60 days since last contact)',
-      count: contacts.length,
-      contacts,
+      description: 'Open deals with relationship or activity risk signals',
+      count: atRiskDeals.length,
+      total_at_risk_value: atRiskDeals.reduce((sum, d) => sum + ((d as { value?: number }).value || 0), 0),
+      deals: atRiskDeals,
     })
   } catch (err) {
     return JSON.stringify({ error: (err as Error).message })
@@ -4483,6 +4867,391 @@ async function executeGetEcosystemPulse(): Promise<string> {
           revenue: p.total_income,
           pipeline: p.pipeline_value,
         })),
+    })
+  } catch (err) {
+    return JSON.stringify({ error: (err as Error).message })
+  }
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// NOTION WRITE TOOLS — shared helpers
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+let _notionDbIdsCache: Record<string, string> | null = null
+function loadNotionDbIds(): Record<string, string> {
+  if (_notionDbIdsCache) return _notionDbIdsCache
+  try {
+    const configPath = join(process.cwd(), '..', '..', 'config', 'notion-database-ids.json')
+    _notionDbIdsCache = JSON.parse(readFileSync(configPath, 'utf-8'))
+    return _notionDbIdsCache!
+  } catch {
+    return {}
+  }
+}
+
+function getNotionClient(): NotionClient {
+  return new NotionClient({ auth: process.env.NOTION_TOKEN })
+}
+
+// Resolve a project_code to its Notion page ID in the Projects database
+async function resolveProjectPageId(projectCode: string): Promise<string | null> {
+  const dbIds = loadNotionDbIds()
+  const projectsDbId = dbIds.actProjects
+  if (!projectsDbId || !process.env.NOTION_TOKEN) return null
+
+  try {
+    const notion = getNotionClient()
+    // Search by title match
+    const response = await notion.databases.query({
+      database_id: projectsDbId,
+      filter: {
+        property: 'Name',
+        title: { contains: projectCode },
+      },
+      page_size: 5,
+    })
+    if (response.results.length > 0) return response.results[0].id
+  } catch { /* ignore — relation linking is optional */ }
+  return null
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// TOOL: add_meeting_to_notion
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+async function executeAddMeetingToNotion(input: {
+  title: string
+  date?: string
+  project_code?: string
+  attendees?: string[]
+  notes: string
+  decisions?: string[]
+  action_items?: string[]
+  meeting_type?: string
+}): Promise<string> {
+  const { title, notes, decisions, action_items, meeting_type } = input
+  const date = input.date || new Date().toISOString().slice(0, 10)
+  const attendees = input.attendees || []
+  const projectCode = input.project_code || null
+
+  try {
+    // 1. Save to Supabase project_knowledge
+    const { data: pkData, error: pkError } = await supabase
+      .from('project_knowledge')
+      .insert({
+        title,
+        content: notes,
+        knowledge_type: 'meeting',
+        project_code: projectCode,
+        recorded_at: new Date(date).toISOString(),
+        participants: attendees,
+        action_items: action_items ? action_items.map(a => ({ text: a, done: false })) : null,
+        source_type: 'telegram',
+        importance: 'normal',
+        action_required: (action_items && action_items.length > 0) || false,
+      })
+      .select('id')
+      .single()
+
+    if (pkError) {
+      return JSON.stringify({ error: `Failed to save to knowledge base: ${pkError.message}` })
+    }
+
+    // 2. Save to Notion Meetings database (if configured)
+    const dbIds = loadNotionDbIds()
+    const meetingsDbId = dbIds.meetings || dbIds.unifiedMeetings
+    let notionPageId: string | null = null
+
+    if (meetingsDbId && process.env.NOTION_TOKEN) {
+      const notion = getNotionClient()
+
+      const properties: Record<string, any> = {
+        'Name': { title: [{ text: { content: title } }] },
+        'Date': { date: { start: date } },
+        'Type': { select: { name: meeting_type || 'external' } },
+        'Status': { select: { name: 'Completed' } },
+        'Supabase ID': { rich_text: [{ text: { content: pkData.id } }] },
+      }
+
+      // Link to project via relation
+      if (projectCode) {
+        const projectPageId = await resolveProjectPageId(projectCode)
+        if (projectPageId) {
+          properties['Project'] = { relation: [{ id: projectPageId }] }
+        }
+      }
+
+      if (attendees.length > 0) {
+        properties['Attendees'] = { rich_text: [{ text: { content: attendees.join(', ') } }] }
+      }
+
+      // Build page content
+      const children: any[] = []
+      children.push({
+        object: 'block', type: 'paragraph',
+        paragraph: { rich_text: [{ text: { content: notes.slice(0, 2000) } }] },
+      })
+
+      if (decisions && decisions.length > 0) {
+        children.push({
+          object: 'block', type: 'heading_3',
+          heading_3: { rich_text: [{ text: { content: 'Decisions' } }] },
+        })
+        for (const d of decisions) {
+          children.push({
+            object: 'block', type: 'bulleted_list_item',
+            bulleted_list_item: { rich_text: [{ text: { content: d } }] },
+          })
+        }
+      }
+
+      if (action_items && action_items.length > 0) {
+        children.push({
+          object: 'block', type: 'heading_3',
+          heading_3: { rich_text: [{ text: { content: 'Action Items' } }] },
+        })
+        for (const a of action_items) {
+          children.push({
+            object: 'block', type: 'to_do',
+            to_do: { rich_text: [{ text: { content: a } }], checked: false },
+          })
+        }
+      }
+
+      const page = await notion.pages.create({
+        parent: { database_id: meetingsDbId },
+        properties,
+        children,
+      })
+      notionPageId = page.id
+    }
+
+    // 3. Also save decisions as separate knowledge items
+    if (decisions && decisions.length > 0) {
+      for (const d of decisions) {
+        await supabase.from('project_knowledge').insert({
+          title: d,
+          content: d,
+          knowledge_type: 'decision',
+          project_code: projectCode,
+          recorded_at: new Date(date).toISOString(),
+          decision_status: 'active',
+          source_type: 'telegram',
+          importance: 'normal',
+        })
+      }
+    }
+
+    return JSON.stringify({
+      success: true,
+      meeting_id: pkData.id,
+      notion_page_id: notionPageId,
+      saved_to: notionPageId ? 'supabase + notion' : 'supabase only',
+      decisions_count: decisions?.length || 0,
+      action_items_count: action_items?.length || 0,
+    })
+  } catch (err) {
+    return JSON.stringify({ error: (err as Error).message })
+  }
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// TOOL: add_action_item
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+async function executeAddActionItem(input: {
+  title: string
+  project_code?: string
+  due_date?: string
+  priority?: string
+  details?: string
+  assignee?: string
+}): Promise<string> {
+  const { title, project_code, due_date, priority, details, assignee } = input
+
+  try {
+    // 1. Save to Supabase
+    const { data, error } = await supabase
+      .from('project_knowledge')
+      .insert({
+        title,
+        content: details || title,
+        knowledge_type: 'action',
+        project_code: project_code || null,
+        recorded_at: new Date().toISOString(),
+        action_required: true,
+        follow_up_date: due_date || null,
+        importance: priority || 'normal',
+        recorded_by: assignee || null,
+        source_type: 'telegram',
+      })
+      .select('id')
+      .single()
+
+    if (error) {
+      return JSON.stringify({ error: `Failed to save action: ${error.message}` })
+    }
+
+    // 2. Save to Notion Actions database (if configured)
+    const dbIds = loadNotionDbIds()
+    const actionsDbId = dbIds.actions
+    let notionPageId: string | null = null
+
+    if (actionsDbId && process.env.NOTION_TOKEN) {
+      const notion = getNotionClient()
+
+      // Existing Actions DB: 'Action Item' (title), 'Status' (status type), 'Projects' (relation)
+      const properties: Record<string, any> = {
+        'Action Item': { title: [{ text: { content: title } }] },
+        'Status': { status: { name: 'In progress' } },
+        'Supabase ID': { rich_text: [{ text: { content: data.id } }] },
+      }
+
+      // Link to project via relation
+      if (project_code) {
+        const projectPageId = await resolveProjectPageId(project_code)
+        if (projectPageId) {
+          properties['Projects'] = { relation: [{ id: projectPageId }] }
+        }
+      }
+
+      if (due_date) {
+        properties['Due Date'] = { date: { start: due_date } }
+      }
+
+      const children: any[] = []
+      if (details) {
+        children.push({
+          object: 'block', type: 'paragraph',
+          paragraph: { rich_text: [{ text: { content: details.slice(0, 2000) } }] },
+        })
+      }
+
+      const page = await notion.pages.create({
+        parent: { database_id: actionsDbId },
+        properties,
+        children,
+      })
+      notionPageId = page.id
+    }
+
+    return JSON.stringify({
+      success: true,
+      action_id: data.id,
+      notion_page_id: notionPageId,
+      saved_to: notionPageId ? 'supabase + notion' : 'supabase only',
+    })
+  } catch (err) {
+    return JSON.stringify({ error: (err as Error).message })
+  }
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// TOOL: add_decision
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+async function executeAddDecision(input: {
+  title: string
+  project_code?: string
+  rationale?: string
+  alternatives_considered?: string[]
+  status?: string
+}): Promise<string> {
+  const { title, project_code, rationale, alternatives_considered, status } = input
+
+  try {
+    const content = [
+      title,
+      rationale ? `\nRationale: ${rationale}` : '',
+      alternatives_considered?.length ? `\nAlternatives considered: ${alternatives_considered.join(', ')}` : '',
+    ].filter(Boolean).join('')
+
+    // 1. Save to Supabase
+    const { data, error } = await supabase
+      .from('project_knowledge')
+      .insert({
+        title,
+        content,
+        knowledge_type: 'decision',
+        project_code: project_code || null,
+        recorded_at: new Date().toISOString(),
+        decision_status: status || 'active',
+        decision_rationale: rationale || null,
+        importance: 'high',
+        source_type: 'telegram',
+      })
+      .select('id')
+      .single()
+
+    if (error) {
+      return JSON.stringify({ error: `Failed to save decision: ${error.message}` })
+    }
+
+    // 2. Save to Notion Decisions database (if configured)
+    const dbIds = loadNotionDbIds()
+    const decisionsDbId = dbIds.decisions
+    let notionPageId: string | null = null
+
+    if (decisionsDbId && process.env.NOTION_TOKEN) {
+      const notion = getNotionClient()
+
+      const properties: Record<string, any> = {
+        'Name': { title: [{ text: { content: title } }] },
+        'Status': { select: { name: status || 'active' } },
+        'Priority': { select: { name: 'high' } },
+        'Date': { date: { start: new Date().toISOString().slice(0, 10) } },
+        'Supabase ID': { rich_text: [{ text: { content: data.id } }] },
+      }
+
+      // Link to project via relation
+      if (project_code) {
+        const projectPageId = await resolveProjectPageId(project_code)
+        if (projectPageId) {
+          properties['Project'] = { relation: [{ id: projectPageId }] }
+        }
+      }
+
+      // Store rationale in dedicated property
+      if (rationale) {
+        properties['Rationale'] = { rich_text: [{ text: { content: rationale.slice(0, 2000) } }] }
+      }
+
+      const children: any[] = []
+      if (rationale) {
+        children.push({
+          object: 'block', type: 'callout',
+          callout: {
+            rich_text: [{ text: { content: `Rationale: ${rationale}` } }],
+            icon: { type: 'emoji', emoji: '\u{1F4AD}' },
+          },
+        })
+      }
+      if (alternatives_considered?.length) {
+        children.push({
+          object: 'block', type: 'heading_3',
+          heading_3: { rich_text: [{ text: { content: 'Alternatives Considered' } }] },
+        })
+        for (const alt of alternatives_considered) {
+          children.push({
+            object: 'block', type: 'bulleted_list_item',
+            bulleted_list_item: { rich_text: [{ text: { content: alt } }] },
+          })
+        }
+      }
+
+      const page = await notion.pages.create({
+        parent: { database_id: decisionsDbId },
+        properties,
+        children,
+      })
+      notionPageId = page.id
+    }
+
+    return JSON.stringify({
+      success: true,
+      decision_id: data.id,
+      notion_page_id: notionPageId,
+      saved_to: notionPageId ? 'supabase + notion' : 'supabase only',
     })
   } catch (err) {
     return JSON.stringify({ error: (err as Error).message })

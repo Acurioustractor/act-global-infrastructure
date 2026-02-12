@@ -181,6 +181,46 @@ async function fetchSubscriptions(): Promise<number> {
   }
 }
 
+async function fetchPipelineIncome(): Promise<number> {
+  // GHL opportunities with probability weighting by stage
+  const { data: opportunities, error } = await supabase
+    .from('ghl_opportunities')
+    .select('monetary_value, stage_name, status')
+    .eq('status', 'open')
+    .gt('monetary_value', 0)
+
+  if (error) {
+    console.error('Error fetching pipeline:', error)
+    return 0
+  }
+
+  // Weight by stage — later stages are more likely to convert
+  const stageWeights: Record<string, number> = {
+    'lead': 0.1,
+    'qualified': 0.2,
+    'proposal': 0.4,
+    'negotiation': 0.6,
+    'contract sent': 0.7,
+    'won': 0.9,
+  }
+
+  let weightedTotal = 0
+  ;(opportunities || []).forEach((opp: any) => {
+    const stageLower = (opp.stage_name || '').toLowerCase()
+    // Find best matching weight
+    let weight = 0.3 // default for unknown stages
+    for (const [key, w] of Object.entries(stageWeights)) {
+      if (stageLower.includes(key)) {
+        weight = w
+        break
+      }
+    }
+    weightedTotal += (opp.monetary_value || 0) * weight
+  })
+
+  return weightedTotal
+}
+
 async function fetchScenarios(): Promise<
   Array<{
     id: string
@@ -267,7 +307,8 @@ function calculateMetrics(
 function generateProjections(
   history: FinancialSnapshot[],
   currentBalance: number,
-  monthlyRecurring: number
+  monthlyRecurring: number,
+  pipelineIncome: number = 0
 ): ProjectionMonth[] {
   const projections: ProjectionMonth[] = []
 
@@ -292,6 +333,10 @@ function generateProjections(
   // Add recurring subscriptions to expenses
   const projectedMonthlyExpenses = avgMonthlyExpenses + monthlyRecurring
 
+  // Spread pipeline income across next 6 months (weighted — more in near months)
+  // Pipeline is total weighted value, distribute with decay
+  const pipelineMonthlyBase = pipelineIncome / 6
+
   // Generate 12-month projection
   let projectedBalance = currentBalance
   const now = new Date()
@@ -303,7 +348,10 @@ function generateProjections(
     // Add some seasonal variation (slightly higher spending in Q4)
     const seasonalFactor = [10, 11].includes(projectionDate.getMonth()) ? 1.15 : 1
 
-    const projectedIncome = avgMonthlyIncome
+    // Pipeline income tapers off after 6 months
+    const pipelineContribution = i <= 6 ? pipelineMonthlyBase * (1 - (i - 1) * 0.15) : 0
+
+    const projectedIncome = avgMonthlyIncome + Math.max(0, pipelineContribution)
     const projectedExpenses = projectedMonthlyExpenses * seasonalFactor
     const monthlyNet = projectedIncome - projectedExpenses
 
@@ -327,13 +375,14 @@ function generateProjections(
 export async function GET(): Promise<NextResponse<CashflowResponse>> {
   try {
     // Fetch all required data in parallel
-    const [history, currentMonth, invoices, subscriptions, scenarios] =
+    const [history, currentMonth, invoices, subscriptions, scenarios, pipelineIncome] =
       await Promise.all([
         fetchFinancialHistory(),
         fetchCurrentMonthData(),
         fetchUpcomingInvoices(),
         fetchSubscriptions(),
         fetchScenarios(),
+        fetchPipelineIncome(),
       ])
 
     // Get the most recent balance from history
@@ -356,11 +405,12 @@ export async function GET(): Promise<NextResponse<CashflowResponse>> {
     // Calculate metrics
     const metrics = calculateMetrics(history, currentBalance)
 
-    // Generate projections
+    // Generate projections (includes pipeline-weighted income)
     const projections = generateProjections(
       history,
       currentBalance,
-      subscriptions
+      subscriptions,
+      pipelineIncome
     )
 
     const response: CashflowResponse = {

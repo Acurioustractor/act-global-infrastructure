@@ -226,10 +226,11 @@ export default function TodayPage() {
           {/* Today's Calendar */}
           <div className="glass-card p-5 md:p-6">
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-lg font-semibold text-white flex items-center gap-2">
+              <Link href="/calendar" className="text-lg font-semibold text-white flex items-center gap-2 hover:text-indigo-300 transition-colors">
                 <Calendar className="h-5 w-5 text-indigo-400" />
                 Today's Schedule
-              </h2>
+                <ChevronRight className="h-4 w-4 text-white/30" />
+              </Link>
               <span className="text-sm text-white/50">{events.length} events</span>
             </div>
             {events.length === 0 ? (
@@ -418,7 +419,7 @@ function PeopleToReach({ nudges }: { nudges: RelationshipNudge[] }) {
 
 // ─── Calendar Event Card with Note Input ─────────────────────────
 
-function CalendarEventCard({ event }: { event: { id: string; title: string; start_time: string; link?: string; attendees?: Array<{ email: string; name?: string }> } }) {
+function CalendarEventCard({ event }: { event: { id: string; title: string; start_time: string; link?: string; is_all_day?: boolean; event_type?: string | null; attendees?: Array<{ email: string; name?: string }> } }) {
   const [showNoteInput, setShowNoteInput] = React.useState(false)
   const [noteText, setNoteText] = React.useState('')
   const [saving, setSaving] = React.useState(false)
@@ -454,7 +455,7 @@ function CalendarEventCard({ event }: { event: { id: string; title: string; star
       <div className="flex items-center gap-3">
         <div className="text-center min-w-[45px]">
           <p className="text-sm font-semibold text-white">
-            {event.start_time ? format(new Date(event.start_time), 'HH:mm') : '--:--'}
+            {event.is_all_day ? 'All day' : event.start_time ? format(new Date(event.start_time), 'HH:mm') : '--:--'}
           </p>
         </div>
         <div className="flex-1 min-w-0">
@@ -469,6 +470,12 @@ function CalendarEventCard({ event }: { event: { id: string; title: string; star
             </Link>
           ) : (
             <p className="text-sm font-medium text-white truncate">{event.title}</p>
+          )}
+          {event.attendees && event.attendees.length > 0 && (
+            <p className="text-[10px] text-white/30 flex items-center gap-1 mt-0.5">
+              <User className="h-2.5 w-2.5" />
+              {event.attendees.length} attendee{event.attendees.length !== 1 ? 's' : ''}
+            </p>
           )}
         </div>
         {isPast && (

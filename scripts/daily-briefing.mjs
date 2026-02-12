@@ -234,45 +234,161 @@ async function fetchRecentDecisions() {
 }
 
 /**
- * 5. Relationship Alerts - contacts that are engaged but inactive
- *    ghl_contacts uses engagement_status (lead, prospect, active, alumni, lapsed, opted-out)
- *    and last_contact_date. We flag active/prospect contacts with stale last_contact_date.
+ * 5. Relationship Alerts - signal-based relationship health
+ *    Uses relationship_health table with multi-signal temperature scores.
+ *    Groups by risk type: going_cold, awaiting_response, high_value_inactive, one_way_outbound.
+ *    Falls back to simple date threshold if no signal data available.
  */
 async function fetchRelationshipAlerts() {
-  const staleThreshold = daysAgo(30);
+  // Primary: signal-based alerts from relationship_health
+  const { data: healthData, error: healthError } = await supabase
+    .from('relationship_health')
+    .select('ghl_contact_id, temperature, temperature_trend, last_temperature_change, risk_flags, email_score, calendar_score, financial_score, pipeline_score, knowledge_score, last_contact_at')
+    .or('temperature_trend.eq.falling,risk_flags.not.is.null')
+    .order('temperature', { ascending: true })
+    .limit(30);
 
-  const { data, error } = await supabase
-    .from('ghl_contacts')
-    .select('id, ghl_id, full_name, first_name, last_name, email, company_name, engagement_status, last_contact_date, tags, projects')
-    .in('engagement_status', ['active', 'prospect'])
-    .lt('last_contact_date', staleThreshold)
-    .order('last_contact_date', { ascending: true })
-    .limit(20);
-
-  if (error) {
-    console.warn('  Warning: Could not fetch relationship alerts:', error.message);
-    return [];
+  if (healthError) {
+    console.warn('  Warning: Could not fetch relationship health:', healthError.message);
   }
 
-  return (data || []).map(row => {
-    const name = row.full_name?.trim() || `${row.first_name || ''} ${row.last_name || ''}`.trim() || row.email || 'Unknown';
-    const daysSinceContact = row.last_contact_date
-      ? Math.floor((Date.now() - new Date(row.last_contact_date).getTime()) / 86400000)
+  const ghlIds = (healthData || []).map(h => h.ghl_contact_id);
+
+  // Get contact details for matched health records
+  let contacts = [];
+  if (ghlIds.length > 0) {
+    const { data } = await supabase
+      .from('ghl_contacts')
+      .select('ghl_id, full_name, first_name, last_name, email, company_name, engagement_status, last_contact_date, projects')
+      .in('ghl_id', ghlIds);
+    contacts = data || [];
+  }
+
+  const contactMap = {};
+  for (const c of contacts) {
+    contactMap[c.ghl_id] = c;
+  }
+
+  const alerts = (healthData || []).map(h => {
+    const c = contactMap[h.ghl_contact_id] || {};
+    const name = c.full_name?.trim() || `${c.first_name || ''} ${c.last_name || ''}`.trim() || c.email || 'Unknown';
+    const daysSinceContact = h.last_contact_at
+      ? Math.floor((Date.now() - new Date(h.last_contact_at).getTime()) / 86400000)
       : null;
 
     return {
-      id: row.id,
-      ghlId: row.ghl_id,
       name,
-      email: row.email,
-      company: row.company_name,
-      engagementStatus: row.engagement_status,
-      lastContactDate: row.last_contact_date,
+      email: c.email,
+      company: c.company_name,
+      engagementStatus: c.engagement_status,
       daysSinceContact,
-      tags: row.tags || [],
-      projects: row.projects || [],
+      projects: c.projects || [],
+      temperature: h.temperature,
+      trend: h.temperature_trend,
+      temperatureChange: h.last_temperature_change,
+      riskFlags: h.risk_flags || [],
+      signals: {
+        email: h.email_score,
+        calendar: h.calendar_score,
+        financial: h.financial_score,
+        pipeline: h.pipeline_score,
+        knowledge: h.knowledge_score,
+      },
     };
   });
+
+  // Fallback if no signal data
+  if (alerts.length === 0) {
+    const staleThreshold = daysAgo(30);
+    const { data, error } = await supabase
+      .from('ghl_contacts')
+      .select('id, ghl_id, full_name, first_name, last_name, email, company_name, engagement_status, last_contact_date, tags, projects')
+      .in('engagement_status', ['active', 'prospect'])
+      .lt('last_contact_date', staleThreshold)
+      .order('last_contact_date', { ascending: true })
+      .limit(20);
+
+    if (error) {
+      console.warn('  Warning: Could not fetch relationship alerts:', error.message);
+      return [];
+    }
+
+    return (data || []).map(row => {
+      const name = row.full_name?.trim() || `${row.first_name || ''} ${row.last_name || ''}`.trim() || row.email || 'Unknown';
+      const daysSinceContact = row.last_contact_date
+        ? Math.floor((Date.now() - new Date(row.last_contact_date).getTime()) / 86400000)
+        : null;
+      return {
+        name, email: row.email, company: row.company_name,
+        engagementStatus: row.engagement_status, daysSinceContact,
+        projects: row.projects || [], temperature: null, trend: null,
+        temperatureChange: null, riskFlags: [], signals: null,
+      };
+    });
+  }
+
+  return alerts;
+}
+
+/**
+ * 5b. Deal Risks - open opportunities with relationship risk signals
+ */
+async function fetchDealRisks() {
+  const { data: opportunities, error } = await supabase
+    .from('ghl_opportunities')
+    .select('name, monetary_value, stage_name, pipeline_name, contact_id, status, updated_at')
+    .eq('status', 'open')
+    .order('monetary_value', { ascending: false });
+
+  if (error) {
+    console.warn('  Warning: Could not fetch opportunities:', error.message);
+    return [];
+  }
+
+  if (!opportunities || opportunities.length === 0) return [];
+
+  const contactIds = [...new Set(opportunities.map(o => o.contact_id).filter(Boolean))];
+  if (contactIds.length === 0) return [];
+
+  const [healthResult, contactResult] = await Promise.all([
+    supabase.from('relationship_health')
+      .select('ghl_contact_id, temperature, temperature_trend, risk_flags, last_contact_at')
+      .in('ghl_contact_id', contactIds),
+    supabase.from('ghl_contacts')
+      .select('ghl_id, full_name')
+      .in('ghl_id', contactIds),
+  ]);
+
+  const healthMap = {};
+  for (const h of (healthResult.data || [])) healthMap[h.ghl_contact_id] = h;
+  const contactMap = {};
+  for (const c of (contactResult.data || [])) contactMap[c.ghl_id] = c;
+
+  const now = Date.now();
+  return opportunities
+    .map(opp => {
+      const health = healthMap[opp.contact_id];
+      const contact = contactMap[opp.contact_id];
+      const daysSinceUpdate = Math.floor((now - new Date(opp.updated_at).getTime()) / 86400000);
+
+      const risks = [];
+      if (health?.temperature_trend === 'falling') risks.push('temperature falling');
+      if (health?.risk_flags?.includes('going_cold')) risks.push('going cold');
+      if (health?.risk_flags?.includes('high_value_inactive')) risks.push('high value inactive');
+      if (health?.risk_flags?.includes('awaiting_response')) risks.push('awaiting response');
+      if (daysSinceUpdate > 14) risks.push(`stale ${daysSinceUpdate}d`);
+
+      if (risks.length === 0) return null;
+      return {
+        deal: opp.name,
+        value: opp.monetary_value,
+        stage: opp.stage_name,
+        contact: contact?.full_name || 'Unknown',
+        temperature: health?.temperature,
+        risks,
+      };
+    })
+    .filter(Boolean);
 }
 
 /**
@@ -470,19 +586,58 @@ function generateMarkdown(briefing) {
   }
   lines.push('');
 
-  // 5. Relationship Alerts
+  // 5. Relationship Alerts (signal-based)
   lines.push('## 5. Relationship Alerts');
   if (briefing.relationshipAlerts.length === 0) {
-    lines.push('No stale relationships detected. All active/prospect contacts are recently engaged.');
+    lines.push('No relationship alerts. All contacts are healthy.');
   } else {
-    lines.push(`**${briefing.relationshipAlerts.length} contact(s) need attention** (active/prospect, no contact >30 days):`);
+    lines.push(`**${briefing.relationshipAlerts.length} contact(s) need attention:**`);
     lines.push('');
+
+    // Group by risk type
+    const byRisk = { going_cold: [], awaiting_response: [], high_value_inactive: [], one_way_outbound: [], other: [] };
     for (const r of briefing.relationshipAlerts) {
-      const daysStr = r.daysSinceContact != null ? `${r.daysSinceContact} days ago` : 'never';
-      const company = r.company ? ` (${r.company})` : '';
-      const projects = r.projects.length > 0 ? ` [${r.projects.join(', ')}]` : '';
-      lines.push(`- **${r.name}**${company} - ${r.engagementStatus} - last contact: ${daysStr}${projects}`);
+      const flags = r.riskFlags || [];
+      let placed = false;
+      for (const flag of ['going_cold', 'awaiting_response', 'high_value_inactive', 'one_way_outbound']) {
+        if (flags.includes(flag)) { byRisk[flag].push(r); placed = true; break; }
+      }
+      if (!placed) byRisk.other.push(r);
     }
+
+    const riskLabels = {
+      going_cold: 'Going Cold',
+      awaiting_response: 'Awaiting Your Response',
+      high_value_inactive: 'High Value — Inactive',
+      one_way_outbound: 'One-Way Outbound',
+      other: 'Falling Temperature',
+    };
+
+    for (const [key, contacts] of Object.entries(byRisk)) {
+      if (contacts.length === 0) continue;
+      lines.push(`### ${riskLabels[key]}`);
+      for (const r of contacts) {
+        const tempStr = r.temperature != null ? `${r.temperature}/100` : '?';
+        const trendStr = r.trend ? ` ${r.trend === 'falling' ? '↓' : r.trend === 'rising' ? '↑' : '→'}` : '';
+        const company = r.company ? ` (${r.company})` : '';
+        const daysStr = r.daysSinceContact != null ? ` — ${r.daysSinceContact}d ago` : '';
+        lines.push(`- **${r.name}**${company} — temp: ${tempStr}${trendStr}${daysStr}`);
+      }
+      lines.push('');
+    }
+  }
+
+  // 5b. Deal Risks
+  if (briefing.dealRisks && briefing.dealRisks.length > 0) {
+    lines.push('### Deal Risks');
+    const totalAtRisk = briefing.dealRisks.reduce((sum, d) => sum + (d.value || 0), 0);
+    lines.push(`**${briefing.dealRisks.length} deal(s) at risk** ($${totalAtRisk.toLocaleString()} total value):`);
+    lines.push('');
+    for (const d of briefing.dealRisks) {
+      const tempStr = d.temperature != null ? ` temp: ${d.temperature}/100` : '';
+      lines.push(`- **${d.deal}** ($${(d.value || 0).toLocaleString()}) — ${d.contact} — ${d.risks.join(', ')}${tempStr}`);
+    }
+    lines.push('');
   }
   lines.push('');
 
@@ -589,11 +744,22 @@ function generateConsoleOutput(briefing) {
   lines.push('');
   lines.push('--- 5. RELATIONSHIP ALERTS ---');
   if (briefing.relationshipAlerts.length === 0) {
-    lines.push('  No stale relationships detected.');
+    lines.push('  No relationship alerts.');
   } else {
     for (const r of briefing.relationshipAlerts) {
       const daysStr = r.daysSinceContact != null ? `${r.daysSinceContact}d ago` : 'never';
-      lines.push(`  ${r.name} (${r.engagementStatus}) - last contact: ${daysStr}`);
+      const tempStr = r.temperature != null ? ` [${r.temperature}/100 ${r.trend || ''}]` : '';
+      const flags = (r.riskFlags || []).length > 0 ? ` ⚠ ${r.riskFlags.join(', ')}` : '';
+      lines.push(`  ${r.name} - last: ${daysStr}${tempStr}${flags}`);
+    }
+  }
+
+  // 5b. Deal Risks
+  if (briefing.dealRisks && briefing.dealRisks.length > 0) {
+    lines.push('');
+    lines.push('--- 5b. DEAL RISKS ---');
+    for (const d of briefing.dealRisks) {
+      lines.push(`  ${d.deal} ($${(d.value || 0).toLocaleString()}) - ${d.contact} - ${d.risks.join(', ')}`);
     }
   }
 
@@ -654,6 +820,7 @@ async function main() {
     recentMeetings,
     recentDecisions,
     relationshipAlerts,
+    dealRisks,
     financialSummary,
     activeProjects,
   ] = await Promise.all([
@@ -662,6 +829,7 @@ async function main() {
     fetchRecentMeetings(),
     fetchRecentDecisions(),
     fetchRelationshipAlerts(),
+    fetchDealRisks(),
     fetchFinancialSummary(),
     fetchActiveProjectsSummary(),
   ]);
@@ -675,6 +843,7 @@ async function main() {
     recentMeetings,
     recentDecisions,
     relationshipAlerts,
+    dealRisks,
     financialSummary,
     activeProjects,
     summary: {
@@ -683,6 +852,7 @@ async function main() {
       meetingCount: recentMeetings.length,
       decisionCount: recentDecisions.length,
       relationshipAlertCount: relationshipAlerts.length,
+      dealRiskCount: dealRisks.length,
       activeProjectCount: activeProjects.length,
       pipelineTotal: financialSummary.totalPipeline,
     },
