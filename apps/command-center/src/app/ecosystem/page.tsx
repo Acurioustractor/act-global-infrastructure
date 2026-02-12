@@ -50,8 +50,20 @@ const projectMeta: Record<string, { icon: typeof Globe; color: string; bg: strin
   'justicehub': { icon: Scale, color: 'text-blue-400', bg: 'bg-blue-500/20' },
   'empathy-ledger': { icon: Heart, color: 'text-pink-400', bg: 'bg-pink-500/20' },
   'harvest': { icon: Wheat, color: 'text-amber-400', bg: 'bg-amber-500/20' },
-  'goods': { icon: Apple, color: 'text-green-400', bg: 'bg-green-500/20' },
+  'the-farm': { icon: Apple, color: 'text-emerald-400', bg: 'bg-emerald-500/20' },
+  'goods': { icon: Apple, color: 'text-orange-400', bg: 'bg-orange-500/20' },
   'command-center': { icon: Server, color: 'text-cyan-400', bg: 'bg-cyan-500/20' },
+}
+
+// Category display config aligned with tier system
+const categoryConfig: Record<string, { name: string; icon: typeof Globe; color: string }> = {
+  ecosystem: { name: 'Ecosystem Platforms', icon: Layers, color: 'text-indigo-400' },
+  infrastructure: { name: 'Infrastructure', icon: Server, color: 'text-cyan-400' },
+  studio: { name: 'The Studio', icon: Heart, color: 'text-pink-400' },
+  // fallbacks
+  core: { name: 'Core', icon: Server, color: 'text-indigo-400' },
+  platform: { name: 'Platforms', icon: Layers, color: 'text-purple-400' },
+  community: { name: 'Community', icon: Users, color: 'text-green-400' },
 }
 
 function getStatusIcon(status: string) {
@@ -211,10 +223,12 @@ export default function EcosystemPage() {
               <div key={catKey} className="glass-card p-6">
                 <div className="flex items-center justify-between mb-4">
                   <h2 className="text-lg font-semibold text-white flex items-center gap-2">
-                    {catKey === 'core' && <Server className="h-5 w-5 text-indigo-400" />}
-                    {catKey === 'platform' && <Layers className="h-5 w-5 text-purple-400" />}
-                    {catKey === 'community' && <Users className="h-5 w-5 text-green-400" />}
-                    {category.name}
+                    {(() => {
+                      const catConf = categoryConfig[catKey]
+                      const CatIcon = catConf?.icon || Globe
+                      return <CatIcon className={cn('h-5 w-5', catConf?.color || 'text-white/60')} />
+                    })()}
+                    {categoryConfig[catKey]?.name || category.name}
                   </h2>
                   <span className="text-sm text-white/50">{catSites.length} sites</span>
                 </div>
