@@ -1,5 +1,6 @@
 import {
   Sun,
+  Calendar,
   Users,
   GitBranch,
   Layers,
@@ -62,6 +63,7 @@ export const navStructure: SidebarNavGroup[] = [
     label: '',
     items: [
       { href: '/today', label: 'Today', icon: Sun },
+      { href: '/calendar', label: 'Calendar', icon: Calendar },
     ],
     defaultExpanded: true,
   },

@@ -156,6 +156,27 @@ export async function matchOrCreateContact(supabase, email, context = {}) {
     processed_at: new Date().toISOString(),
   });
 
+  // 7. Resolve canonical entity (cross-source dedup)
+  try {
+    const fullName = [firstName, lastName].filter(Boolean).join(' ');
+    const { data: entityId } = await supabase.rpc('resolve_entity', {
+      p_source: 'ghl',
+      p_source_id: created.ghl_id,
+      p_name: fullName || normalizedEmail.split('@')[0],
+      p_email: normalizedEmail,
+      p_entity_type: 'person',
+    });
+    if (entityId) {
+      await supabase
+        .from('ghl_contacts')
+        .update({ canonical_entity_id: entityId })
+        .eq('ghl_id', created.ghl_id);
+    }
+  } catch (err) {
+    // Non-blocking — entity resolution failure shouldn't break contact creation
+    console.warn(`[ContactIntel] Entity resolution failed for ${normalizedEmail}:`, err.message);
+  }
+
   return { contactId: created.ghl_id, wasCreated: true };
 }
 

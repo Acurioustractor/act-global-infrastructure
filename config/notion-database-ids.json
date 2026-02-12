@@ -14,5 +14,13 @@
   "subscriptionTracking": "2d8ebcf9-81cf-811c-a325-f38a354d9750",
   "momentumDashboard": "2d9ebcf9-81cf-815d-bceb-d12dddb92c66",
   "contentHub": "e400e93e-fd9d-4a21-810c-58d67ed9fe97",
-  "contentHubView": "7005d0d1-41d3-436c-9f86-526d275c2f10"
+  "contentHubView": "7005d0d1-41d3-436c-9f86-526d275c2f10",
+
+  "operationsHub": "305ebcf9-81cf-8105-9dc9-d01fc36413f4",
+  "missionControl": "305ebcf9-81cf-81e9-8d08-e30d3f3416b1",
+  "financeOverview": "305ebcf9-81cf-81be-bce4-fe9eef5abfa3",
+  "meetings": "305ebcf9-81cf-81d2-80e6-fc6ad3617daa",
+  "actions": "177ebcf9-81cf-8023-af6e-dff974284218",
+  "decisions": "305ebcf9-81cf-81b5-9c0f-e16b51db96bf",
+  "peopleDirectory": "305ebcf9-81cf-818c-8a38-fc7a6475d8a9"
 }
