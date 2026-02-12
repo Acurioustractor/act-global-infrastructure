@@ -38,7 +38,6 @@ import {
   type RelationshipNudge,
 } from '@/lib/api'
 import { cn, getGreeting } from '@/lib/utils'
-import { ActionFeed } from '@/components/action-feed'
 import { QuickStats } from '@/components/today/quick-stats'
 import { CommunicationsNeeded } from '@/components/today/communications-needed'
 import { GrantsPipeline } from '@/components/today/grants-pipeline'
@@ -281,9 +280,8 @@ export default function TodayPage() {
           </Link>
         </div>
 
-        {/* CENTER COLUMN: Actions (primary focus) — shows first on mobile */}
+        {/* CENTER COLUMN: Primary focus — shows first on mobile */}
         <div className="order-1 lg:order-2 lg:col-span-5 space-y-4 md:space-y-6">
-          <ActionFeed maxItems={15} />
           <CommunicationsNeeded />
         </div>
 
