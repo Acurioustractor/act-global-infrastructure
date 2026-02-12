@@ -219,28 +219,9 @@ export default function TodayPage() {
 
       {/* Main 3-Column Layout */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 md:gap-6">
-        {/* LEFT COLUMN: Projects + Calendar */}
-        <div className="order-2 lg:order-1 lg:col-span-4 space-y-4 md:space-y-6">
-          {/* Projects Overview */}
-          <div className="glass-card p-5 md:p-6">
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="text-lg font-semibold text-white flex items-center gap-2">
-                <FolderKanban className="h-5 w-5 text-indigo-400" />
-                Projects
-              </h2>
-              <Link href="/compendium" className="text-xs text-indigo-400 hover:text-indigo-300 flex items-center gap-1">
-                All <ArrowUpRight className="h-3 w-3" />
-              </Link>
-            </div>
-            <div className="grid grid-cols-2 gap-2">
-              {projects
-                .filter((p) => p.contacts > 0 || p.recentComms > 0 || p.opportunities > 0 || p.status === 'active')
-                .slice(0, 8)
-                .map((project) => (
-                  <ProjectCard key={project.code} project={project} />
-                ))}
-            </div>
-          </div>
+        {/* LEFT COLUMN: Briefing + Schedule + People */}
+        <div className="order-1 lg:col-span-4 space-y-4 md:space-y-6">
+          <MorningBriefing />
 
           {/* Today's Calendar */}
           <div className="glass-card p-5 md:p-6">
@@ -265,6 +246,36 @@ export default function TodayPage() {
             )}
           </div>
 
+          <PeopleToReach nudges={nudges} />
+          <CommunicationsNeeded />
+        </div>
+
+        {/* CENTER COLUMN: Projects + Activity + Health */}
+        <div className="order-2 lg:col-span-4 space-y-4 md:space-y-6">
+          {/* Projects Overview */}
+          <div className="glass-card p-5 md:p-6">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-lg font-semibold text-white flex items-center gap-2">
+                <FolderKanban className="h-5 w-5 text-indigo-400" />
+                Projects
+              </h2>
+              <Link href="/projects" className="text-xs text-indigo-400 hover:text-indigo-300 flex items-center gap-1">
+                All <ArrowUpRight className="h-3 w-3" />
+              </Link>
+            </div>
+            <div className="grid grid-cols-2 gap-2">
+              {projects
+                .filter((p) => p.contacts > 0 || p.recentComms > 0 || p.opportunities > 0 || p.status === 'active')
+                .slice(0, 8)
+                .map((project) => (
+                  <ProjectCard key={project.code} project={project} />
+                ))}
+            </div>
+          </div>
+
+          <ProjectHealthGrid />
+          <RecentActivity />
+
           {/* Wiki Quick Access */}
           <Link href="/wiki" className="glass-card p-5 block hover:border-indigo-500/30 transition-all group">
             <div className="flex items-center gap-3">
@@ -280,18 +291,9 @@ export default function TodayPage() {
           </Link>
         </div>
 
-        {/* CENTER COLUMN: Primary focus — shows first on mobile */}
-        <div className="order-1 lg:order-2 lg:col-span-5 space-y-4 md:space-y-6">
-          <CommunicationsNeeded />
-        </div>
-
-        {/* RIGHT COLUMN: Briefing + People + Finance + Pipeline + Deadlines */}
-        <div className="order-3 lg:col-span-3 space-y-4 md:space-y-6">
-          <MorningBriefing />
-          <PeopleToReach nudges={nudges} />
+        {/* RIGHT COLUMN: Finance + Pipeline + Deadlines + Business */}
+        <div className="order-3 lg:col-span-4 space-y-4 md:space-y-6">
           <FinanceSummary />
-          <ProjectHealthGrid />
-          <RecentActivity />
           <GrantsPipeline />
           <UpcomingDeadlines />
           <BusinessTasks />
