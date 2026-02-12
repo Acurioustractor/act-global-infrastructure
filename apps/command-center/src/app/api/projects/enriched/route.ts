@@ -19,12 +19,12 @@ export async function GET(request: NextRequest) {
     const includeArchived = request.nextUrl.searchParams.get('include_archived') === 'true'
 
     // Load project metadata from config — index by name + notion_pages for matching
-    const configByName: Record<string, { code: string; status?: string; category?: string }> = {}
+    const configByName: Record<string, { code: string; status?: string; category?: string; tier?: string }> = {}
     try {
       const filePath = join(process.cwd(), '..', '..', 'config', 'project-codes.json')
       const raw = JSON.parse(readFileSync(filePath, 'utf-8'))
-      for (const [code, proj] of Object.entries(raw.projects as Record<string, { name?: string; status?: string; category?: string; notion_pages?: string[] }>)) {
-        const entry = { code, status: proj.status, category: proj.category }
+      for (const [code, proj] of Object.entries(raw.projects as Record<string, { name?: string; status?: string; category?: string; tier?: string; notion_pages?: string[] }>)) {
+        const entry = { code, status: proj.status, category: proj.category, tier: proj.tier }
         if (proj.name) configByName[proj.name.toLowerCase()] = entry
         // Also index by notion page names for fuzzy matching
         for (const np of proj.notion_pages || []) {
@@ -69,6 +69,7 @@ export async function GET(request: NextRequest) {
         description: p.data?.description || '',
         status: configMatch?.status || status,
         category: configMatch?.category || null,
+        tier: configMatch?.tier || null,
         lcaa_stage: statusToLcaaStage(configMatch?.status || status),
         _hasConfigMatch: !!configMatch,
         healthScore: health?.health_score ?? p.data?.healthScore ?? 75,

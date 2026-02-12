@@ -25,6 +25,9 @@ import {
   AlertTriangle,
   CheckCircle2,
   Pause,
+  Star,
+  Sparkles,
+  Globe,
 } from 'lucide-react'
 import { LoadingPage } from '@/components/ui/loading'
 import { ProgressBar } from '@tremor/react'
@@ -383,318 +386,243 @@ export default function ProjectsPage() {
         )}
       </div>
 
-      {/* Project List */}
-      <div className="glass-card p-6">
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-lg font-semibold text-white">
-            {stage ? `${stageConfig[stage as keyof typeof stageConfig]?.label} Projects` : 'All Projects'}
-          </h2>
-          <span className="text-sm text-white/50">{projects.length} shown</span>
+      {/* Project List — grouped by tier */}
+      {isLoading ? (
+        <LoadingPage />
+      ) : error ? (
+        <div className="glass-card p-6 border-red-500/30">
+          <div className="flex items-center gap-3 text-red-400">
+            <AlertCircle className="h-5 w-5" />
+            <span>Failed to load projects. Is the API running?</span>
+          </div>
         </div>
-
-        {isLoading ? (
-          <LoadingPage />
-        ) : error ? (
-          <div className="glass-card-sm p-4 border-red-500/30">
-            <div className="flex items-center gap-3 text-red-400">
-              <AlertCircle className="h-5 w-5" />
-              <span>Failed to load projects. Is the API running?</span>
-            </div>
-          </div>
-        ) : projects.length === 0 ? (
-          <div className="py-12 text-center">
-            <FolderKanban className="mx-auto h-12 w-12 text-white/20" />
-            <p className="mt-4 text-white/60">No projects found</p>
-            <p className="text-sm text-white/40">
-              {search || stage ? 'Try a different filter' : 'Start creating projects'}
-            </p>
-          </div>
-        ) : viewMode === 'cards' ? (
-          /* Card View */
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {projects.map((project) => {
-              const notionProject = notionMap.get(project.name?.toLowerCase() || '')
-              const imageUrl = getProjectImage(project, notionProject)
-              const healthScore = project.health_score ?? project.healthScore ?? 0
-
-              return (
-                <Link
-                  key={project.code || project.id}
-                  href={`/projects/${project.code || project.id}`}
-                  className="glass-card-sm overflow-hidden hover:border-indigo-500/30 transition-all group"
-                >
-                  {/* Project Image */}
-                  <div className={cn(
-                    'h-32 relative bg-gradient-to-br',
-                    getProjectGradient(project.code || '')
-                  )}>
-                    {imageUrl ? (
-                      <Image
-                        src={imageUrl}
-                        alt={project.name || 'Project'}
-                        fill
-                        className="object-cover"
-                      />
-                    ) : (
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        {project.lcaa_stage === 'listen' && <Ear className="h-12 w-12 text-white/20" />}
-                        {project.lcaa_stage === 'curiosity' && <Lightbulb className="h-12 w-12 text-white/20" />}
-                        {project.lcaa_stage === 'action' && <Zap className="h-12 w-12 text-white/20" />}
-                        {project.lcaa_stage === 'art' && <Palette className="h-12 w-12 text-white/20" />}
-                        {!project.lcaa_stage && <FolderKanban className="h-12 w-12 text-white/20" />}
-                      </div>
-                    )}
-
-                    {/* Health Score Badge */}
-                    {healthScore > 0 && (
-                      <div className={cn(
-                        'absolute top-2 right-2 px-2 py-1 rounded-full text-xs font-medium backdrop-blur-sm',
-                        healthScore >= 70 && 'bg-green-500/30 text-green-300',
-                        healthScore >= 40 && healthScore < 70 && 'bg-orange-500/30 text-orange-300',
-                        healthScore < 40 && 'bg-red-500/30 text-red-300'
-                      )}>
-                        {healthScore}%
-                      </div>
-                    )}
-
-                    {/* LCAA Stage Badge */}
-                    {project.lcaa_stage && (
-                      <div className={cn(
-                        'absolute top-2 left-2 px-2 py-1 rounded-full text-xs font-medium backdrop-blur-sm',
-                        project.lcaa_stage === 'listen' && 'bg-indigo-500/30 text-indigo-300',
-                        project.lcaa_stage === 'curiosity' && 'bg-violet-500/30 text-violet-300',
-                        project.lcaa_stage === 'action' && 'bg-emerald-500/30 text-emerald-300',
-                        project.lcaa_stage === 'art' && 'bg-amber-500/30 text-amber-300'
-                      )}>
-                        {stageConfig[project.lcaa_stage]?.label}
-                      </div>
-                    )}
+      ) : projects.length === 0 ? (
+        <div className="glass-card p-6 py-12 text-center">
+          <FolderKanban className="mx-auto h-12 w-12 text-white/20" />
+          <p className="mt-4 text-white/60">No projects found</p>
+          <p className="text-sm text-white/40">
+            {search || stage ? 'Try a different filter' : 'Start creating projects'}
+          </p>
+        </div>
+      ) : (
+        <div className="space-y-8">
+          {/* Ecosystem — the 5 core platforms */}
+          {(() => {
+            const ecosystem = projects.filter(p => p.tier === 'ecosystem')
+            if (ecosystem.length === 0) return null
+            return (
+              <section>
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-8 h-8 rounded-lg bg-indigo-500/20 flex items-center justify-center">
+                    <Star className="h-4 w-4 text-indigo-400" />
                   </div>
-
-                  {/* Project Info */}
-                  <div className="p-4">
-                    <div className="flex items-start justify-between gap-2">
-                      <div className="min-w-0">
-                        <h3 className="font-medium text-white truncate group-hover:text-indigo-400 transition-colors">
-                          {project.name}
-                        </h3>
-                        {project.code && (
-                          <span className="text-xs text-white/40 font-mono">{project.code}</span>
-                        )}
-                      </div>
-                      <ArrowUpRight className="h-4 w-4 text-white/20 group-hover:text-indigo-400 transition-colors flex-shrink-0 mt-1" />
-                    </div>
-
-                    {project.description && (
-                      <p className="text-sm text-white/50 line-clamp-2 mt-2">{project.description}</p>
-                    )}
-
-                    {/* Stats Row */}
-                    <div className="flex items-center gap-4 mt-3 pt-3 border-t border-white/5">
-                      {(() => {
-                        const ps = summaryMap.get(project.code || '')
-                        return ps ? (
-                          <>
-                            {ps.total_income > 0 && (
-                              <div className="flex items-center gap-1 text-xs text-green-400">
-                                <TrendingUp className="h-3 w-3" />
-                                <span>${ps.total_income >= 1000 ? `${(ps.total_income / 1000).toFixed(0)}k` : ps.total_income.toLocaleString()}</span>
-                              </div>
-                            )}
-                            {ps.total_expenses > 0 && (
-                              <div className="flex items-center gap-1 text-xs text-red-400">
-                                <TrendingDown className="h-3 w-3" />
-                                <span>${ps.total_expenses >= 1000 ? `${(ps.total_expenses / 1000).toFixed(0)}k` : ps.total_expenses.toLocaleString()}</span>
-                              </div>
-                            )}
-                            {ps.pipeline_value > 0 && (
-                              <div className="flex items-center gap-1 text-xs text-indigo-400">
-                                <DollarSign className="h-3 w-3" />
-                                <span>${ps.pipeline_value >= 1000 ? `${(ps.pipeline_value / 1000).toFixed(0)}k` : ps.pipeline_value.toLocaleString()}</span>
-                              </div>
-                            )}
-                          </>
-                        ) : null
-                      })()}
-                      {project.contacts !== undefined && project.contacts > 0 && (
-                        <div className="flex items-center gap-1 text-xs text-white/40">
-                          <Users className="h-3 w-3" />
-                          <span>{project.contacts}</span>
-                        </div>
-                      )}
-                      {notionProject?.data?.budget !== undefined && notionProject.data.budget > 0 && !summaryMap.has(project.code || '') && (
-                        <div className="flex items-center gap-1 text-xs text-white/40">
-                          <DollarSign className="h-3 w-3" />
-                          <span>${(notionProject.data.budget / 1000).toFixed(0)}k</span>
-                        </div>
-                      )}
-                      <span className={cn(
-                        'text-xs px-2 py-0.5 rounded-full ml-auto',
-                        project.status === 'active' && 'bg-green-500/20 text-green-400',
-                        project.status === 'paused' && 'bg-orange-500/20 text-orange-400',
-                        project.status === 'completed' && 'bg-blue-500/20 text-blue-400',
-                        (!project.status || !['active', 'paused', 'completed'].includes(project.status)) && 'bg-white/10 text-white/50'
-                      )}>
-                        {project.status || 'active'}
-                      </span>
-                    </div>
+                  <div>
+                    <h2 className="text-lg font-semibold text-white">Ecosystem</h2>
+                    <p className="text-xs text-white/40">The 5 core ACT platforms</p>
                   </div>
-                </Link>
-              )
-            })}
-          </div>
-        ) : (
-          /* Table View */
-          <div className="overflow-x-auto">
-            <table className="w-full">
-              <thead>
-                <tr className="border-b border-white/10">
-                  <th className="text-left py-3 px-4">
-                    <button
-                      onClick={() => handleSort('name')}
-                      className="flex items-center gap-1 text-sm font-medium text-white/60 hover:text-white transition-colors"
-                    >
-                      Project
-                      <ArrowUpDown className={cn('h-3 w-3', sortField === 'name' && 'text-indigo-400')} />
-                    </button>
-                  </th>
-                  <th className="text-left py-3 px-4">
-                    <span className="text-sm font-medium text-white/60">Stage</span>
-                  </th>
-                  <th className="text-left py-3 px-4">
-                    <span className="text-sm font-medium text-white/60">Status</span>
-                  </th>
-                  <th className="text-left py-3 px-4">
-                    <button
-                      onClick={() => handleSort('health')}
-                      className="flex items-center gap-1 text-sm font-medium text-white/60 hover:text-white transition-colors"
-                    >
-                      Health
-                      <ArrowUpDown className={cn('h-3 w-3', sortField === 'health' && 'text-indigo-400')} />
-                    </button>
-                  </th>
-                  <th className="text-left py-3 px-4">
-                    <button
-                      onClick={() => handleSort('contacts')}
-                      className="flex items-center gap-1 text-sm font-medium text-white/60 hover:text-white transition-colors"
-                    >
-                      Contacts
-                      <ArrowUpDown className={cn('h-3 w-3', sortField === 'contacts' && 'text-indigo-400')} />
-                    </button>
-                  </th>
-                  <th className="text-left py-3 px-4">
-                    <button
-                      onClick={() => handleSort('budget')}
-                      className="flex items-center gap-1 text-sm font-medium text-white/60 hover:text-white transition-colors"
-                    >
-                      Budget
-                      <ArrowUpDown className={cn('h-3 w-3', sortField === 'budget' && 'text-indigo-400')} />
-                    </button>
-                  </th>
-                  <th className="w-10"></th>
-                </tr>
-              </thead>
-              <tbody>
-                {projects.map((project) => {
-                  const notionProject = notionMap.get(project.name?.toLowerCase() || '')
-                  const healthScore = project.health_score ?? project.healthScore ?? 0
-
-                  return (
-                    <tr
+                </div>
+                <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+                  {ecosystem.map((project) => (
+                    <ProjectCard
                       key={project.code || project.id}
-                      className="border-b border-white/5 hover:bg-white/5 transition-colors group"
-                    >
-                      <td className="py-3 px-4">
-                        <Link href={`/projects/${project.code || project.id}`} className="block">
-                          <div className="flex items-center gap-3">
-                            <div className={cn(
-                              'w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0',
-                              project.lcaa_stage === 'listen' && 'bg-indigo-500/20',
-                              project.lcaa_stage === 'curiosity' && 'bg-violet-500/20',
-                              project.lcaa_stage === 'action' && 'bg-emerald-500/20',
-                              project.lcaa_stage === 'art' && 'bg-amber-500/20',
-                              !project.lcaa_stage && 'bg-white/10'
-                            )}>
-                              {project.lcaa_stage === 'listen' && <Ear className="h-4 w-4 text-indigo-400" />}
-                              {project.lcaa_stage === 'curiosity' && <Lightbulb className="h-4 w-4 text-violet-400" />}
-                              {project.lcaa_stage === 'action' && <Zap className="h-4 w-4 text-emerald-400" />}
-                              {project.lcaa_stage === 'art' && <Palette className="h-4 w-4 text-amber-400" />}
-                              {!project.lcaa_stage && <FolderKanban className="h-4 w-4 text-white/50" />}
-                            </div>
-                            <div>
-                              <p className="font-medium text-white group-hover:text-indigo-400 transition-colors">{project.name}</p>
-                              {project.code && <p className="text-xs text-white/40 font-mono">{project.code}</p>}
-                            </div>
-                          </div>
-                        </Link>
-                      </td>
-                      <td className="py-3 px-4">
-                        {project.lcaa_stage ? (
-                          <span className={cn(
-                            'px-2 py-0.5 rounded-full text-xs font-medium',
-                            project.lcaa_stage === 'listen' && 'bg-indigo-500/20 text-indigo-400',
-                            project.lcaa_stage === 'curiosity' && 'bg-violet-500/20 text-violet-400',
-                            project.lcaa_stage === 'action' && 'bg-emerald-500/20 text-emerald-400',
-                            project.lcaa_stage === 'art' && 'bg-amber-500/20 text-amber-400'
-                          )}>
-                            {stageConfig[project.lcaa_stage]?.label}
-                          </span>
-                        ) : (
-                          <span className="text-white/30">-</span>
-                        )}
-                      </td>
-                      <td className="py-3 px-4">
-                        <span className={cn(
-                          'px-2 py-0.5 rounded-full text-xs font-medium',
-                          project.status === 'active' && 'bg-green-500/20 text-green-400',
-                          project.status === 'paused' && 'bg-orange-500/20 text-orange-400',
-                          project.status === 'completed' && 'bg-blue-500/20 text-blue-400',
-                          (!project.status || !['active', 'paused', 'completed'].includes(project.status)) && 'bg-white/10 text-white/50'
-                        )}>
-                          {project.status || 'active'}
-                        </span>
-                      </td>
-                      <td className="py-3 px-4">
-                        {healthScore > 0 ? (
-                          <span className={cn(
-                            'text-sm font-medium',
-                            healthScore >= 70 && 'text-green-400',
-                            healthScore >= 40 && healthScore < 70 && 'text-orange-400',
-                            healthScore < 40 && 'text-red-400'
-                          )}>
-                            {healthScore}%
-                          </span>
-                        ) : (
-                          <span className="text-white/30">-</span>
-                        )}
-                      </td>
-                      <td className="py-3 px-4">
-                        {project.contacts !== undefined && project.contacts > 0 ? (
-                          <span className="text-sm text-white/60">{project.contacts}</span>
-                        ) : (
-                          <span className="text-white/30">-</span>
-                        )}
-                      </td>
-                      <td className="py-3 px-4">
-                        {notionProject?.data?.budget !== undefined && notionProject.data.budget > 0 ? (
-                          <span className="text-sm text-white/60">${notionProject.data.budget.toLocaleString()}</span>
-                        ) : (
-                          <span className="text-white/30">-</span>
-                        )}
-                      </td>
-                      <td className="py-3 px-4">
-                        <Link href={`/projects/${project.code || project.id}`}>
-                          <ArrowUpRight className="h-4 w-4 text-white/20 group-hover:text-indigo-400 transition-colors" />
-                        </Link>
-                      </td>
-                    </tr>
-                  )
-                })}
-              </tbody>
-            </table>
+                      project={project}
+                      notionProject={notionMap.get(project.name?.toLowerCase() || '')}
+                      summary={summaryMap.get(project.code || '')}
+                      highlight
+                    />
+                  ))}
+                </div>
+              </section>
+            )
+          })()}
+
+          {/* The Studio — art & storytelling */}
+          {(() => {
+            const studio = projects.filter(p => p.tier === 'studio')
+            if (studio.length === 0) return null
+            return (
+              <section>
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-8 h-8 rounded-lg bg-pink-500/20 flex items-center justify-center">
+                    <Sparkles className="h-4 w-4 text-pink-400" />
+                  </div>
+                  <div>
+                    <h2 className="text-lg font-semibold text-white">The Studio</h2>
+                    <p className="text-xs text-white/40">Art, storytelling, and creative projects — the lifeblood of the ecosystem</p>
+                  </div>
+                </div>
+                <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                  {studio.map((project) => (
+                    <ProjectCard
+                      key={project.code || project.id}
+                      project={project}
+                      notionProject={notionMap.get(project.name?.toLowerCase() || '')}
+                      summary={summaryMap.get(project.code || '')}
+                    />
+                  ))}
+                </div>
+              </section>
+            )
+          })()}
+
+          {/* Satellite projects */}
+          {(() => {
+            const satellite = projects.filter(p => p.tier === 'satellite' || !p.tier)
+            if (satellite.length === 0) return null
+            return (
+              <section>
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center">
+                    <Globe className="h-4 w-4 text-white/50" />
+                  </div>
+                  <div>
+                    <h2 className="text-lg font-semibold text-white">Satellite</h2>
+                    <p className="text-xs text-white/40">Supporting projects, partnerships, and community initiatives</p>
+                  </div>
+                </div>
+                <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                  {satellite.map((project) => (
+                    <ProjectCard
+                      key={project.code || project.id}
+                      project={project}
+                      notionProject={notionMap.get(project.name?.toLowerCase() || '')}
+                      summary={summaryMap.get(project.code || '')}
+                    />
+                  ))}
+                </div>
+              </section>
+            )
+          })()}
+        </div>
+      )}
+    </div>
+  )
+}
+
+function ProjectCard({
+  project,
+  notionProject,
+  summary,
+  highlight,
+}: {
+  project: Project
+  notionProject?: NotionProject
+  summary?: ProjectSummaryRow
+  highlight?: boolean
+}) {
+  const imageUrl = getProjectImage(project, notionProject)
+  const healthScore = project.health_score ?? project.healthScore ?? 0
+
+  return (
+    <Link
+      key={project.code || project.id}
+      href={`/projects/${project.code || project.id}`}
+      className={cn(
+        'glass-card-sm overflow-hidden transition-all group',
+        highlight ? 'hover:border-indigo-500/30 ring-1 ring-indigo-500/10' : 'hover:border-white/20'
+      )}
+    >
+      {/* Project Image */}
+      <div className={cn(
+        'h-32 relative bg-gradient-to-br',
+        getProjectGradient(project.code || '')
+      )}>
+        {imageUrl ? (
+          <Image
+            src={imageUrl}
+            alt={project.name || 'Project'}
+            fill
+            className="object-cover"
+          />
+        ) : (
+          <div className="absolute inset-0 flex items-center justify-center">
+            {project.lcaa_stage === 'listen' && <Ear className="h-12 w-12 text-white/20" />}
+            {project.lcaa_stage === 'curiosity' && <Lightbulb className="h-12 w-12 text-white/20" />}
+            {project.lcaa_stage === 'action' && <Zap className="h-12 w-12 text-white/20" />}
+            {project.lcaa_stage === 'art' && <Palette className="h-12 w-12 text-white/20" />}
+            {!project.lcaa_stage && <FolderKanban className="h-12 w-12 text-white/20" />}
+          </div>
+        )}
+
+        {healthScore > 0 && (
+          <div className={cn(
+            'absolute top-2 right-2 px-2 py-1 rounded-full text-xs font-medium backdrop-blur-sm',
+            healthScore >= 70 && 'bg-green-500/30 text-green-300',
+            healthScore >= 40 && healthScore < 70 && 'bg-orange-500/30 text-orange-300',
+            healthScore < 40 && 'bg-red-500/30 text-red-300'
+          )}>
+            {healthScore}%
+          </div>
+        )}
+
+        {project.lcaa_stage && (
+          <div className={cn(
+            'absolute top-2 left-2 px-2 py-1 rounded-full text-xs font-medium backdrop-blur-sm',
+            project.lcaa_stage === 'listen' && 'bg-indigo-500/30 text-indigo-300',
+            project.lcaa_stage === 'curiosity' && 'bg-violet-500/30 text-violet-300',
+            project.lcaa_stage === 'action' && 'bg-emerald-500/30 text-emerald-300',
+            project.lcaa_stage === 'art' && 'bg-amber-500/30 text-amber-300'
+          )}>
+            {stageConfig[project.lcaa_stage]?.label}
           </div>
         )}
       </div>
-    </div>
+
+      {/* Project Info */}
+      <div className="p-4">
+        <div className="flex items-start justify-between gap-2">
+          <div className="min-w-0">
+            <h3 className="font-medium text-white truncate group-hover:text-indigo-400 transition-colors">
+              {project.name}
+            </h3>
+            {project.code && (
+              <span className="text-xs text-white/40 font-mono">{project.code}</span>
+            )}
+          </div>
+          <ArrowUpRight className="h-4 w-4 text-white/20 group-hover:text-indigo-400 transition-colors flex-shrink-0 mt-1" />
+        </div>
+
+        {project.description && (
+          <p className="text-sm text-white/50 line-clamp-2 mt-2">{project.description}</p>
+        )}
+
+        {/* Stats Row */}
+        <div className="flex items-center gap-4 mt-3 pt-3 border-t border-white/5">
+          {summary && (
+            <>
+              {summary.total_income > 0 && (
+                <div className="flex items-center gap-1 text-xs text-green-400">
+                  <TrendingUp className="h-3 w-3" />
+                  <span>${summary.total_income >= 1000 ? `${(summary.total_income / 1000).toFixed(0)}k` : summary.total_income.toLocaleString()}</span>
+                </div>
+              )}
+              {summary.total_expenses > 0 && (
+                <div className="flex items-center gap-1 text-xs text-red-400">
+                  <TrendingDown className="h-3 w-3" />
+                  <span>${summary.total_expenses >= 1000 ? `${(summary.total_expenses / 1000).toFixed(0)}k` : summary.total_expenses.toLocaleString()}</span>
+                </div>
+              )}
+              {summary.pipeline_value > 0 && (
+                <div className="flex items-center gap-1 text-xs text-indigo-400">
+                  <DollarSign className="h-3 w-3" />
+                  <span>${summary.pipeline_value >= 1000 ? `${(summary.pipeline_value / 1000).toFixed(0)}k` : summary.pipeline_value.toLocaleString()}</span>
+                </div>
+              )}
+            </>
+          )}
+          {(project.contacts ?? 0) > 0 && (
+            <div className="flex items-center gap-1 text-xs text-white/40">
+              <Users className="h-3 w-3" />
+              <span>{project.contacts}</span>
+            </div>
+          )}
+          {project.category && (
+            <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-white/5 text-white/40 ml-auto">
+              {project.category}
+            </span>
+          )}
+        </div>
+      </div>
+    </Link>
   )
 }

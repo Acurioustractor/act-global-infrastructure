@@ -262,6 +262,7 @@ export interface Project {
   description?: string
   status?: string
   category?: string
+  tier?: 'ecosystem' | 'studio' | 'satellite'
   lcaa_stage?: 'listen' | 'curiosity' | 'action' | 'art'
   health_score?: number
   healthScore?: number  // API returns camelCase
