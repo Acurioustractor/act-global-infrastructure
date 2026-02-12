@@ -18,15 +18,18 @@ export async function GET(request: NextRequest) {
   try {
     const includeArchived = request.nextUrl.searchParams.get('include_archived') === 'true'
 
-    // Load project metadata from config
-    let archivedCodes = new Set<string>()
-    const configMeta: Record<string, { status?: string; category?: string }> = {}
+    // Load project metadata from config — index by name + notion_pages for matching
+    const configByName: Record<string, { code: string; status?: string; category?: string }> = {}
     try {
       const filePath = join(process.cwd(), '..', '..', 'config', 'project-codes.json')
       const raw = JSON.parse(readFileSync(filePath, 'utf-8'))
-      for (const [code, proj] of Object.entries(raw.projects as Record<string, { status?: string; category?: string }>)) {
-        configMeta[code] = proj
-        if (proj.status === 'archived') archivedCodes.add(code)
+      for (const [code, proj] of Object.entries(raw.projects as Record<string, { name?: string; status?: string; category?: string; notion_pages?: string[] }>)) {
+        const entry = { code, status: proj.status, category: proj.category }
+        if (proj.name) configByName[proj.name.toLowerCase()] = entry
+        // Also index by notion page names for fuzzy matching
+        for (const np of proj.notion_pages || []) {
+          configByName[np.toLowerCase()] = entry
+        }
       }
     } catch { /* ignore */ }
     // Get projects from Notion sync table
@@ -55,18 +58,21 @@ export async function GET(request: NextRequest) {
     }
 
     const projects = (notionProjects || []).map((p) => {
-      const code = p.data?.id || p.notion_id || p.id
-      const health = healthMap.get(code)
+      const notionCode = p.data?.id || p.notion_id || p.id
+      const health = healthMap.get(notionCode)
       const status = p.status || p.data?.status || 'active'
+      const name = (p.name || p.data?.name || 'Unknown').trim()
+      const configMatch = configByName[name.toLowerCase()]
       return {
-        code: code,
-        name: p.name || p.data?.name || 'Unknown',
+        code: configMatch?.code || notionCode,
+        name,
         description: p.data?.description || '',
-        status: configMeta[code]?.status || status,
-        category: configMeta[code]?.category || null,
-        lcaa_stage: statusToLcaaStage(status),
+        status: configMatch?.status || status,
+        category: configMatch?.category || null,
+        lcaa_stage: statusToLcaaStage(configMatch?.status || status),
+        _hasConfigMatch: !!configMatch,
         healthScore: health?.health_score ?? p.data?.healthScore ?? 75,
-        contacts: contactCountByProject.get(code) || contactCountByProject.get(p.name?.toLowerCase()) || 0,
+        contacts: contactCountByProject.get(notionCode) || contactCountByProject.get(name.toLowerCase()) || 0,
         opportunities: [],
         relationships: {},
         recentActivity: [],
@@ -75,11 +81,24 @@ export async function GET(request: NextRequest) {
     })
 
     // Filter out archived projects unless explicitly requested
+    // Config status is authoritative — if config says active, it's active regardless of Notion status
+    const isArchived = (p: typeof projects[number] & { _hasConfigMatch?: boolean }) => {
+      if (p._hasConfigMatch) {
+        // Config is source of truth — only archived if config says so
+        return p.status === 'archived'
+      }
+      // No config match — fall back to Notion status
+      const s = p.status.toLowerCase()
+      return s.includes('archived') || s.includes('sunsetting') || s.includes('transferred')
+    }
     const filtered = includeArchived
       ? projects
-      : projects.filter(p => !archivedCodes.has(p.code))
+      : projects.filter(p => !isArchived(p))
 
-    return NextResponse.json({ projects: filtered })
+    // Strip internal flag
+    const result = filtered.map(({ _hasConfigMatch, ...rest }) => rest)
+
+    return NextResponse.json({ projects: result })
   } catch (e) {
     console.error('Projects enriched error:', e)
     return NextResponse.json({ projects: [] })

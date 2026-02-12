@@ -145,7 +145,7 @@
       "status": "active",
       "description": "Documentary and storytelling project capturing Palm Island community resilience",
       "parent_project": "ACT-PI",
-      "notion_pages": ["PICC - Storm Stories"],
+      "notion_pages": ["PICC - Storm Stories", "PICC Storm Stories"],
       "notion_ids": {
         "main": "178ebcf9-81cf-801c-8815-fb32a9259a1c"
       },

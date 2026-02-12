@@ -27,9 +27,10 @@ export default function ArchivedProjectsPage() {
   })
 
   const allProjects = data?.projects || []
-  const archivedProjects = allProjects.filter(
-    (p) => p.status === 'archived' || p.status === 'sunsetting' || p.status === 'transferred'
-  )
+  const archivedProjects = allProjects.filter((p) => {
+    const s = (p.status || '').toLowerCase()
+    return s.includes('archived') || s.includes('sunsetting') || s.includes('transferred')
+  })
 
   return (
     <div className="min-h-screen p-8">
