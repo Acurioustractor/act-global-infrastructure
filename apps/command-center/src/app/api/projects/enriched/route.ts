@@ -19,12 +19,15 @@ export async function GET(request: NextRequest) {
     const includeArchived = request.nextUrl.searchParams.get('include_archived') === 'true'
 
     // Load project metadata from config — index by name + notion_pages for matching
-    const configByName: Record<string, { code: string; status?: string; category?: string; tier?: string }> = {}
+    type ConfigEntry = { code: string; name?: string; description?: string; status?: string; category?: string; tier?: string }
+    const configByName: Record<string, ConfigEntry> = {}
+    const allConfigProjects: ConfigEntry[] = []
     try {
       const filePath = join(process.cwd(), '..', '..', 'config', 'project-codes.json')
       const raw = JSON.parse(readFileSync(filePath, 'utf-8'))
-      for (const [code, proj] of Object.entries(raw.projects as Record<string, { name?: string; status?: string; category?: string; tier?: string; notion_pages?: string[] }>)) {
-        const entry = { code, status: proj.status, category: proj.category, tier: proj.tier }
+      for (const [code, proj] of Object.entries(raw.projects as Record<string, { name?: string; description?: string; status?: string; category?: string; tier?: string; notion_pages?: string[] }>)) {
+        const entry: ConfigEntry = { code, name: proj.name, description: proj.description, status: proj.status, category: proj.category, tier: proj.tier }
+        allConfigProjects.push(entry)
         if (proj.name) configByName[proj.name.toLowerCase()] = entry
         // Also index by notion page names for fuzzy matching
         for (const np of proj.notion_pages || []) {
@@ -88,6 +91,29 @@ export async function GET(request: NextRequest) {
       seen.add(p.code)
       return true
     })
+
+    // Inject config-only projects that have no Notion match (e.g. The Farm)
+    for (const cp of allConfigProjects) {
+      if (!seen.has(cp.code)) {
+        seen.add(cp.code)
+        deduped.push({
+          code: cp.code,
+          name: cp.name || cp.code,
+          description: cp.description || '',
+          status: cp.status || 'active',
+          category: cp.category || null,
+          tier: cp.tier || null,
+          lcaa_stage: statusToLcaaStage(cp.status),
+          _hasConfigMatch: true,
+          healthScore: 75,
+          contacts: contactCountByProject.get(cp.code.toLowerCase()) || contactCountByProject.get((cp.name || '').toLowerCase()) || 0,
+          opportunities: [],
+          relationships: {},
+          recentActivity: [],
+          last_activity: null,
+        })
+      }
+    }
 
     // Filter out archived projects unless explicitly requested
     // Config status is authoritative — if config says active, it's active regardless of Notion status
