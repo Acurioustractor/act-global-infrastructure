@@ -1,5 +1,7 @@
-import { NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 import { supabase } from '@/lib/supabase'
+import { readFileSync } from 'fs'
+import { join } from 'path'
 
 // Map Notion project status → LCAA stage
 function statusToLcaaStage(status: string | null | undefined): string | null {
@@ -12,8 +14,19 @@ function statusToLcaaStage(status: string | null | undefined): string | null {
   return null
 }
 
-export async function GET() {
+export async function GET(request: NextRequest) {
   try {
+    const includeArchived = request.nextUrl.searchParams.get('include_archived') === 'true'
+
+    // Load archived project codes from config
+    let archivedCodes = new Set<string>()
+    try {
+      const filePath = join(process.cwd(), '..', '..', 'config', 'project-codes.json')
+      const raw = JSON.parse(readFileSync(filePath, 'utf-8'))
+      for (const [code, proj] of Object.entries(raw.projects as Record<string, { status?: string }>)) {
+        if (proj.status === 'archived') archivedCodes.add(code)
+      }
+    } catch { /* ignore */ }
     // Get projects from Notion sync table
     const { data: notionProjects } = await supabase
       .from('notion_projects')
@@ -58,7 +71,12 @@ export async function GET() {
       }
     })
 
-    return NextResponse.json({ projects })
+    // Filter out archived projects unless explicitly requested
+    const filtered = includeArchived
+      ? projects
+      : projects.filter(p => !archivedCodes.has(p.code))
+
+    return NextResponse.json({ projects: filtered })
   } catch (e) {
     console.error('Projects enriched error:', e)
     return NextResponse.json({ projects: [] })
