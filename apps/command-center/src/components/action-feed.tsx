@@ -16,9 +16,23 @@ import {
   Building2,
   Phone,
   MessageCircle,
+  TrendingDown,
+  Thermometer,
+  ThumbsUp,
+  ThumbsDown,
+  FolderPlus,
+  X,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import { getActionFeed, snoozeContact, type ActionItem } from '@/lib/api'
+import {
+  getActionFeed,
+  snoozeContact,
+  voteContact,
+  linkContactProject,
+  unlinkContactProject,
+  getEcosystemProjectCodes,
+  type ActionItem,
+} from '@/lib/api'
 
 const REFRESH_INTERVAL = 30 * 1000
 
@@ -28,6 +42,8 @@ const typeConfig: Record<string, { icon: typeof Mail; color: string; bg: string;
   overdue_contact: { icon: UserX, color: 'text-orange-400', bg: 'bg-orange-500/20', label: 'Reconnect' },
   insight: { icon: Lightbulb, color: 'text-amber-400', bg: 'bg-amber-500/20', label: 'Insight' },
   task: { icon: ListChecks, color: 'text-emerald-400', bg: 'bg-emerald-500/20', label: 'Task' },
+  deal_risk: { icon: TrendingDown, color: 'text-red-400', bg: 'bg-red-500/20', label: 'Deal risk' },
+  relationship_alert: { icon: Thermometer, color: 'text-amber-400', bg: 'bg-amber-500/20', label: 'Cooling' },
 }
 
 const channelIcons: Record<string, typeof Mail> = {
@@ -51,6 +67,7 @@ export function ActionFeed({ maxItems = 15 }: ActionFeedProps) {
   const queryClient = useQueryClient()
   const [dismissed, setDismissed] = React.useState<Set<string>>(new Set())
   const [snoozed, setSnoozed] = React.useState<Set<string>>(new Set())
+  const [animatingOut, setAnimatingOut] = React.useState<Set<string>>(new Set())
 
   const { data, isLoading } = useQuery({
     queryKey: ['action-feed'],
@@ -59,7 +76,9 @@ export function ActionFeed({ maxItems = 15 }: ActionFeedProps) {
   })
 
   const allActions = data?.actions || []
-  const actions = allActions.filter(a => !dismissed.has(a.id) && !snoozed.has(a.id)).slice(0, maxItems)
+  const actions = allActions
+    .filter(a => !dismissed.has(a.id) && !snoozed.has(a.id) && !animatingOut.has(a.id))
+    .slice(0, maxItems)
   const counts = data?.counts || {}
 
   const handleDismiss = (id: string) => {
@@ -68,13 +87,54 @@ export function ActionFeed({ maxItems = 15 }: ActionFeedProps) {
 
   const handleSnooze = async (action: ActionItem) => {
     setSnoozed(prev => new Set([...prev, action.id]))
-    // If it's a contact, actually snooze in the backend
-    if (action.type === 'overdue_contact' && action.entity_id) {
+    if (action.entity_id) {
       try {
         await snoozeContact(action.entity_id, 7)
       } catch {
         // Still keep snoozed in UI even if backend fails
       }
+    }
+  }
+
+  const handleVote = async (action: ActionItem, vote: 'up' | 'down') => {
+    if (!action.entity_id) return
+    if (vote === 'down') {
+      // Animate out then remove
+      setAnimatingOut(prev => new Set([...prev, action.id]))
+      setTimeout(() => {
+        setAnimatingOut(prev => {
+          const next = new Set(prev)
+          next.delete(action.id)
+          return next
+        })
+        setDismissed(prev => new Set([...prev, action.id]))
+      }, 300)
+    }
+    try {
+      await voteContact(action.entity_id, vote)
+      queryClient.invalidateQueries({ queryKey: ['action-feed'] })
+    } catch {
+      // Silently fail
+    }
+  }
+
+  const handleLinkProject = async (action: ActionItem, projectCode: string) => {
+    if (!action.entity_id) return
+    try {
+      await linkContactProject(action.entity_id, projectCode)
+      queryClient.invalidateQueries({ queryKey: ['action-feed'] })
+    } catch {
+      // Silently fail
+    }
+  }
+
+  const handleUnlinkProject = async (action: ActionItem, projectCode: string) => {
+    if (!action.entity_id) return
+    try {
+      await unlinkContactProject(action.entity_id, projectCode)
+      queryClient.invalidateQueries({ queryKey: ['action-feed'] })
+    } catch {
+      // Silently fail
     }
   }
 
@@ -104,9 +164,9 @@ export function ActionFeed({ maxItems = 15 }: ActionFeedProps) {
               {counts.email_reply} emails
             </span>
           )}
-          {(counts.overdue_contact || 0) > 0 && (
-            <span className="px-2 py-0.5 rounded-full bg-orange-500/20 text-orange-400 text-xs">
-              {counts.overdue_contact} stale
+          {((counts.deal_risk || 0) + (counts.relationship_alert || 0)) > 0 && (
+            <span className="px-2 py-0.5 rounded-full bg-red-500/20 text-red-400 text-xs">
+              {(counts.deal_risk || 0) + (counts.relationship_alert || 0)} risks
             </span>
           )}
           {(counts.task || 0) > 0 && (
@@ -131,6 +191,9 @@ export function ActionFeed({ maxItems = 15 }: ActionFeedProps) {
               action={action}
               onDismiss={() => handleDismiss(action.id)}
               onSnooze={() => handleSnooze(action)}
+              onVote={(vote) => handleVote(action, vote)}
+              onLinkProject={(code) => handleLinkProject(action, code)}
+              onUnlinkProject={(code) => handleUnlinkProject(action, code)}
             />
           ))}
         </div>
@@ -153,11 +216,19 @@ function ActionRow({
   action,
   onDismiss,
   onSnooze,
+  onVote,
+  onLinkProject,
+  onUnlinkProject,
 }: {
   action: ActionItem
   onDismiss: () => void
   onSnooze: () => void
+  onVote: (vote: 'up' | 'down') => void
+  onLinkProject: (code: string) => void
+  onUnlinkProject: (code: string) => void
 }) {
+  const [showProjectPicker, setShowProjectPicker] = React.useState(false)
+  const [voteFlash, setVoteFlash] = React.useState<'up' | null>(null)
   const config = typeConfig[action.type] || typeConfig.task
   const Icon = config.icon
   const ChannelIcon = action.channel ? channelIcons[action.channel] || Mail : null
@@ -177,10 +248,23 @@ function ActionRow({
     }
   }
 
+  const handleUpvote = (e: React.MouseEvent) => {
+    e.preventDefault()
+    setVoteFlash('up')
+    setTimeout(() => setVoteFlash(null), 600)
+    onVote('up')
+  }
+
+  const handleDownvote = (e: React.MouseEvent) => {
+    e.preventDefault()
+    onVote('down')
+  }
+
   return (
     <div className={cn(
       'glass-card-sm p-3 border-l-2 transition-all group',
-      priorityColors[action.priority] || priorityColors.medium
+      priorityColors[action.priority] || priorityColors.medium,
+      voteFlash === 'up' && 'ring-1 ring-emerald-500/40',
     )}>
       <div className="flex items-start gap-3">
         {/* Type icon */}
@@ -197,6 +281,26 @@ function ActionRow({
 
           {/* Description / subject */}
           <p className="text-xs text-white/50 truncate mt-0.5">{action.description}</p>
+
+          {/* Linked project pills */}
+          {action.linked_projects && action.linked_projects.length > 0 && (
+            <div className="flex flex-wrap gap-1 mt-1">
+              {action.linked_projects.map((code) => (
+                <span
+                  key={code}
+                  className="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded text-[10px] bg-violet-500/20 text-violet-400"
+                >
+                  {code}
+                  <button
+                    onClick={(e) => { e.preventDefault(); onUnlinkProject(code) }}
+                    className="hover:text-white transition-colors"
+                  >
+                    <X className="h-2.5 w-2.5" />
+                  </button>
+                </span>
+              ))}
+            </div>
+          )}
 
           {/* Meta row: type label, company, channel, tags, time */}
           <div className="flex flex-wrap items-center gap-1.5 mt-1.5">
@@ -233,8 +337,54 @@ function ActionRow({
           </div>
         </div>
 
+        {/* Score badge */}
+        {action.rank_score != null && (
+          <div className="flex-shrink-0 mt-1">
+            <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-white/5 text-white/30">
+              {action.rank_score}
+            </span>
+          </div>
+        )}
+
         {/* Action buttons — visible on hover */}
         <div className="flex items-center gap-0.5 opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0 mt-0.5">
+          {action.entity_id && (
+            <>
+              <button
+                onClick={handleUpvote}
+                className="p-1.5 rounded-lg hover:bg-emerald-500/20 text-white/40 hover:text-emerald-400 transition-colors"
+                title="More like this"
+              >
+                <ThumbsUp className="h-3.5 w-3.5" />
+              </button>
+              <button
+                onClick={handleDownvote}
+                className="p-1.5 rounded-lg hover:bg-red-500/20 text-white/40 hover:text-red-400 transition-colors"
+                title="Less like this"
+              >
+                <ThumbsDown className="h-3.5 w-3.5" />
+              </button>
+              <div className="relative">
+                <button
+                  onClick={(e) => { e.preventDefault(); setShowProjectPicker(!showProjectPicker) }}
+                  className="p-1.5 rounded-lg hover:bg-indigo-500/20 text-white/40 hover:text-indigo-400 transition-colors"
+                  title="Link to project"
+                >
+                  <FolderPlus className="h-3.5 w-3.5" />
+                </button>
+                {showProjectPicker && (
+                  <ProjectPicker
+                    onSelect={(code) => {
+                      setShowProjectPicker(false)
+                      onLinkProject(code)
+                    }}
+                    onClose={() => setShowProjectPicker(false)}
+                    existingLinks={action.linked_projects || []}
+                  />
+                )}
+              </div>
+            </>
+          )}
           <button
             onClick={(e) => { e.preventDefault(); onSnooze() }}
             className="p-1.5 rounded-lg hover:bg-amber-500/20 text-white/40 hover:text-amber-400 transition-colors"
@@ -251,6 +401,58 @@ function ActionRow({
           </button>
         </div>
       </div>
+    </div>
+  )
+}
+
+function ProjectPicker({
+  onSelect,
+  onClose,
+  existingLinks,
+}: {
+  onSelect: (code: string) => void
+  onClose: () => void
+  existingLinks: string[]
+}) {
+  const ref = React.useRef<HTMLDivElement>(null)
+
+  const { data } = useQuery({
+    queryKey: ['ecosystem', 'project-codes'],
+    queryFn: getEcosystemProjectCodes,
+    staleTime: Infinity,
+  })
+
+  React.useEffect(() => {
+    const handleClick = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) {
+        onClose()
+      }
+    }
+    document.addEventListener('mousedown', handleClick)
+    return () => document.removeEventListener('mousedown', handleClick)
+  }, [onClose])
+
+  const projects = (data?.projects || []).filter(p => !existingLinks.includes(p.code))
+
+  return (
+    <div
+      ref={ref}
+      className="absolute right-0 top-full mt-1 z-50 w-48 max-h-56 overflow-y-auto bg-gray-900 border border-white/10 rounded-lg shadow-xl p-1"
+    >
+      {projects.length === 0 ? (
+        <p className="text-xs text-white/40 p-2">No projects available</p>
+      ) : (
+        projects.map((p) => (
+          <button
+            key={p.code}
+            onClick={(e) => { e.preventDefault(); onSelect(p.code) }}
+            className="w-full text-left px-2 py-1.5 rounded text-xs text-white/70 hover:bg-white/10 hover:text-white transition-colors"
+          >
+            <span className="font-medium text-indigo-400">{p.code}</span>
+            <span className="ml-1.5 text-white/40">{p.name}</span>
+          </button>
+        ))
+      )}
     </div>
   )
 }

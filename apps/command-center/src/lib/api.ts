@@ -2212,7 +2212,7 @@ export async function getEcosystemOverview() {
 
 export interface ActionItem {
   id: string
-  type: 'email_reply' | 'follow_up' | 'overdue_contact' | 'insight' | 'task'
+  type: 'email_reply' | 'follow_up' | 'overdue_contact' | 'insight' | 'task' | 'deal_risk' | 'relationship_alert'
   priority: 'urgent' | 'high' | 'medium' | 'low'
   title: string
   description: string
@@ -2226,6 +2226,8 @@ export interface ActionItem {
   action_url?: string
   channel?: string
   created_at: string
+  rank_score?: number
+  linked_projects?: string[]
 }
 
 export interface ActionFeedResponse {
@@ -2239,6 +2241,27 @@ export async function getActionFeed(params?: { limit?: number; project?: string 
   if (params?.limit) q.set('limit', String(params.limit))
   if (params?.project) q.set('project', params.project)
   return fetchApi<ActionFeedResponse>(`/api/intelligence/actions?${q}`)
+}
+
+export async function voteContact(contactId: string, vote: 'up' | 'down') {
+  return fetchApi<{ success: boolean }>(`/api/contacts/${contactId}/vote`, {
+    method: 'POST',
+    body: JSON.stringify({ vote }),
+  })
+}
+
+export async function linkContactProject(contactId: string, projectCode: string) {
+  return fetchApi<{ success: boolean }>(`/api/contacts/${contactId}/link-project`, {
+    method: 'POST',
+    body: JSON.stringify({ project_code: projectCode }),
+  })
+}
+
+export async function unlinkContactProject(contactId: string, projectCode: string) {
+  return fetchApi<{ success: boolean }>(`/api/contacts/${contactId}/link-project`, {
+    method: 'DELETE',
+    body: JSON.stringify({ project_code: projectCode }),
+  })
 }
 
 // ─── Storyteller Intelligence ────────────────────────────────────
