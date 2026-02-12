@@ -19,6 +19,12 @@ const cronScripts = [
     cron_restart: '0 6 * * *', // Daily 6am AEST
   },
   {
+    name: 'contact-signals',
+    script: 'scripts/compute-contact-signals.mjs',
+    args: '--verbose',
+    cron_restart: '0 3 * * *', // Daily 3am AEST (before daily briefing at 7am)
+  },
+  {
     name: 'daily-briefing',
     script: 'scripts/daily-briefing.mjs',
     cron_restart: '0 7 * * *', // Daily 7am AEST
@@ -86,6 +92,17 @@ const cronScripts = [
     cron_restart: '0 10 * * *', // Daily 10am AEST (after auto-tagger at 9am)
   },
   {
+    name: 'calendar-sync',
+    script: 'scripts/sync-calendar-full.mjs',
+    args: '--since 1m --until 2m',
+    cron_restart: '0 */12 * * *', // Every 12 hours
+  },
+  {
+    name: 'ghl-sync',
+    script: 'scripts/sync-ghl-to-supabase.mjs',
+    cron_restart: '0 */6 * * *', // Every 6 hours
+  },
+  {
     name: 'notion-intelligence',
     script: 'scripts/sync-project-intelligence-to-notion.mjs',
     args: '--verbose',
@@ -96,6 +113,31 @@ const cronScripts = [
     script: 'scripts/poll-notion-checkboxes.mjs',
     args: '--verbose',
     cron_restart: '*/15 * * * *', // Every 15 minutes
+  },
+  {
+    name: 'mission-control',
+    script: 'scripts/sync-mission-control-to-notion.mjs',
+    args: '--verbose',
+    cron_restart: '0 6,12,18 * * *', // 3x daily: 6am, 12pm, 6pm AEST
+  },
+  {
+    name: 'actions-decisions-sync',
+    script: 'scripts/sync-actions-decisions-to-notion.mjs',
+    args: '--verbose',
+    cron_restart: '*/15 * * * *', // Every 15 minutes (matches checkbox polling)
+  },
+  // contacts-sync removed — People Directory too noisy, focus on knowledge + meetings
+  {
+    name: 'generate-insights',
+    script: 'scripts/generate-insights.mjs',
+    args: '--verbose',
+    cron_restart: '*/30 * * * *', // Every 30 minutes
+  },
+  {
+    name: 'finance-sync',
+    script: 'scripts/sync-finance-to-notion.mjs',
+    args: '--verbose',
+    cron_restart: '30 8 * * *', // Daily 8:30am AEST (after knowledge pipeline at 8am)
   },
 ];
 
