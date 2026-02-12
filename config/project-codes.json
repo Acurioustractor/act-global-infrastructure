@@ -438,7 +438,7 @@
       "category": "regenerative",
       "tier": "satellite",
       "priority": "medium",
-      "status": "active",
+      "status": "archived",
       "description": "Regenerative conservation",
       "notion_pages": ["BCV Reforest", "BCV: Regenerative Conservation"],
       "ghl_tags": ["bcv", "black-cockatoo"],
@@ -521,7 +521,7 @@
       "category": "funding",
       "tier": "satellite",
       "priority": "medium",
-      "status": "active",
+      "status": "archived",
       "description": "Social Enterprise Finance Australia",
       "notion_pages": ["SEFA Partnership"],
       "ghl_tags": ["sefa"],
@@ -925,6 +925,38 @@
       "xero_tracking": "Operations",
       "dext_category": "Technology",
       "alma_program": "economic-models"
+    },
+    "ACT-GCC": {
+      "name": "Global Community Connections",
+      "code": "ACT-GCC",
+      "category": "community",
+      "status": "archived",
+      "description": "Building bridges between local and international communities",
+      "notion_pages": ["Global Community Connections"]
+    },
+    "ACT-EFI": {
+      "name": "Economic Freedom Initiative",
+      "code": "ACT-EFI",
+      "category": "enterprise",
+      "status": "archived",
+      "description": "Creating pathways for economic empowerment in regional communities",
+      "notion_pages": ["Economic Freedom Initiative"]
+    },
+    "ACT-APO": {
+      "name": "Active Projects Overview",
+      "code": "ACT-APO",
+      "category": "tech",
+      "status": "archived",
+      "description": "Notion overview page - not a real project",
+      "notion_pages": ["Active Projects Overview"]
+    },
+    "ACT-AMT": {
+      "name": "API Migration Test",
+      "code": "ACT-AMT",
+      "category": "tech",
+      "status": "archived",
+      "description": "Test project for Notion API migration",
+      "notion_pages": ["API Migration Test Project"]
     }
   },
   "categories": {
