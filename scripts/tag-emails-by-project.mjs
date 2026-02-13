@@ -70,6 +70,15 @@ function buildKeywordMap() {
   return map;
 }
 
+// Operational tool senders → ACT-DO (digital operations)
+const OPS_TOOL_SENDERS = [
+  'xero', 'stripe', 'github', 'vercel', 'notion', 'canva',
+  'figma', 'slack', 'linear', 'netlify', 'cloudflare', 'supabase',
+  'digitalocean', 'aws', 'google cloud', 'openai', 'anthropic',
+  'dext.com', 'gohighlevel', 'dropbox',
+  'zapier', 'make.com', 'twilio', 'sendgrid',
+];
+
 async function tagEmails() {
   const keywordMap = buildKeywordMap();
 
@@ -79,11 +88,23 @@ async function tagEmails() {
 
   // Build contact → projects map from GHL contacts
   // Key on ghl_id (not uuid) since communications_history stores GHL IDs
-  const { data: contacts } = await supabase
-    .from('ghl_contacts')
-    .select('ghl_id, projects')
-    .not('projects', 'is', null)
-    .not('ghl_id', 'is', null);
+  // Paginate to avoid Supabase 1000-row default limit
+  let allContacts = [];
+  let contactOffset = 0;
+  const contactPageSize = 1000;
+  while (true) {
+    const { data: page } = await supabase
+      .from('ghl_contacts')
+      .select('ghl_id, projects')
+      .not('projects', 'is', null)
+      .not('ghl_id', 'is', null)
+      .range(contactOffset, contactOffset + contactPageSize - 1);
+    if (!page || page.length === 0) break;
+    allContacts.push(...page);
+    if (page.length < contactPageSize) break;
+    contactOffset += contactPageSize;
+  }
+  const contacts = allContacts;
 
   const contactProjects = {};
   for (const c of contacts || []) {
@@ -112,7 +133,7 @@ async function tagEmails() {
   while (true) {
     const { data, error } = await supabase
       .from('communications_history')
-      .select('id, subject, content_preview, ghl_contact_id, project_codes')
+      .select('id, subject, content_preview, ghl_contact_id, project_codes, metadata')
       .eq('source_system', 'gmail')
       .or('project_codes.is.null,project_codes.eq.{}')
       .range(offset, offset + pageSize - 1);
@@ -130,7 +151,7 @@ async function tagEmails() {
 
   console.log(`Untagged emails: ${allEmails.length}`);
 
-  const stats = { contactMatch: 0, keywordMatch: 0, unmatched: 0 };
+  const stats = { contactMatch: 0, keywordMatch: 0, senderMatch: 0, unmatched: 0 };
   const updates = [];
 
   for (const email of allEmails) {
@@ -160,8 +181,35 @@ async function tagEmails() {
 
     if (codes.size > 0 && !email.ghl_contact_id) stats.keywordMatch++;
 
+    // Method 3: Sender-based matching for operational tools → ACT-DO
+    if (codes.size === 0) {
+      const senderFrom = (email.metadata?.from || '').toLowerCase();
+      if (OPS_TOOL_SENDERS.some(tool => senderFrom.includes(tool))) {
+        codes.add('ACT-DO');
+        stats.senderMatch++;
+      }
+    }
+
+    // Method 4: Internal @act.place emails default to ACT-IN
+    if (codes.size === 0) {
+      const senderFrom = (email.metadata?.from || '').toLowerCase();
+      if (senderFrom.includes('@act.place')) {
+        codes.add('ACT-IN');
+        stats.internalMatch = (stats.internalMatch || 0) + 1;
+      }
+    }
+
+    // Determine source based on which method matched
+    let source = 'keyword_match';
+    if (email.ghl_contact_id && contactProjects[email.ghl_contact_id]) {
+      source = 'contact_inherit';
+    } else if (codes.has('ACT-DO') && codes.size === 1) {
+      source = 'sender_match';
+    } else if (codes.has('ACT-IN') && codes.size === 1) {
+      source = 'internal_default';
+    }
+
     if (codes.size > 0) {
-      const source = email.ghl_contact_id && contactProjects[email.ghl_contact_id] ? 'contact_inherit' : 'keyword_match';
       updates.push({ id: email.id, projectCodes: [...codes], source });
     } else {
       stats.unmatched++;
@@ -172,6 +220,8 @@ async function tagEmails() {
   console.log('─'.repeat(40));
   console.log(`Contact match:  ${stats.contactMatch}`);
   console.log(`Keyword match:  ${stats.keywordMatch}`);
+  console.log(`Sender match:   ${stats.senderMatch}`);
+  console.log(`Internal match: ${stats.internalMatch || 0}`);
   console.log(`Total tagged:   ${updates.length}`);
   console.log(`Unmatched:      ${stats.unmatched}`);
 
