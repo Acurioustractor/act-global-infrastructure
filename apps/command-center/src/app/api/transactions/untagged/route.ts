@@ -81,11 +81,12 @@ export async function GET() {
       loadVendorSuggestions(),
     ])
 
-    // Fetch all untagged transactions (no project_code)
+    // Fetch all untagged transactions (no project_code), exclude internal transfers
     const { data: transactions, error } = await supabase
       .from('xero_transactions')
-      .select('id, contact_name, type, total, date, project_code')
+      .select('id, contact_name, type, total, date, project_code, bank_account')
       .or('project_code.is.null,project_code.eq.')
+      .not('type', 'in', '("SPEND-TRANSFER","RECEIVE-TRANSFER")')
       .order('date', { ascending: false })
 
     if (error) throw error
@@ -105,6 +106,7 @@ export async function GET() {
       total: number
       dates: Set<string>
       ids: string[]
+      bankAccounts: Set<string>
     }>()
 
     for (const tx of rows) {
@@ -120,6 +122,7 @@ export async function GET() {
           total: 0,
           dates: new Set(),
           ids: [],
+          bankAccounts: new Set(),
         })
       }
 
@@ -128,6 +131,7 @@ export async function GET() {
       group.total += Math.abs(Number(tx.total) || 0)
       if (tx.date) group.dates.add(tx.date.substring(0, 7))
       group.ids.push(tx.id)
+      if (tx.bank_account) group.bankAccounts.add(tx.bank_account)
     }
 
     // Convert to sorted array
@@ -140,6 +144,7 @@ export async function GET() {
           count: g.count,
           total: Math.round(g.total),
           sampleDates: Array.from(g.dates).sort().slice(-3),
+          bankAccounts: Array.from(g.bankAccounts),
           suggestedCode: suggested,
           rdEligible: isRdEligible(suggested),
         }

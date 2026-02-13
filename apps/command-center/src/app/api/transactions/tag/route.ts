@@ -4,11 +4,13 @@ import { supabase } from '@/lib/supabase'
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
-    const { contactName, type, ids, projectCode } = body as {
+    const { contactName, type, ids, projectCode, saveAsRule, category } = body as {
       contactName?: string
       type?: string
       ids?: string[]
       projectCode: string
+      saveAsRule?: boolean
+      category?: string
     }
 
     if (!projectCode) {
@@ -49,7 +51,21 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    return NextResponse.json({ success: true, updated })
+    // Optionally save as a vendor rule for future auto-tagging
+    if (saveAsRule && contactName && updated > 0) {
+      await supabase
+        .from('vendor_project_rules')
+        .upsert({
+          vendor_name: contactName,
+          project_code: projectCode,
+          category: category || 'Operations',
+          auto_apply: true,
+          rd_eligible: false,
+          aliases: [],
+        }, { onConflict: 'vendor_name' })
+    }
+
+    return NextResponse.json({ success: true, updated, ruleSaved: saveAsRule && !!contactName })
   } catch (e) {
     console.error('Tag transactions error:', e)
     return NextResponse.json(

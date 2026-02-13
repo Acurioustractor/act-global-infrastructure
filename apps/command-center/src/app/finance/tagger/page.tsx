@@ -30,6 +30,7 @@ export default function TaggerPage() {
   const [searchQuery, setSearchQuery] = useState('')
   const [typeFilter, setTypeFilter] = useState<'all' | 'SPEND' | 'RECEIVE'>('all')
   const [selectedCodes, setSelectedCodes] = useState<Record<string, string>>({})
+  const [saveAsRule, setSaveAsRule] = useState<Record<string, boolean>>({})
   const [taggedGroups, setTaggedGroups] = useState<Set<string>>(new Set())
   const [skippedGroups, setSkippedGroups] = useState<Set<string>>(new Set())
 
@@ -98,6 +99,7 @@ export default function TaggerPage() {
       contactName: group.contactName,
       type: group.type,
       projectCode: code,
+      saveAsRule: saveAsRule[key] ?? (group.count >= 2),
     })
     setTaggedGroups(prev => new Set(prev).add(key))
   }
@@ -318,7 +320,7 @@ export default function TaggerPage() {
                 <th className="text-left py-3 px-4 text-sm font-medium text-white/50">Type</th>
                 <th className="text-right py-3 px-4 text-sm font-medium text-white/50">Count</th>
                 <th className="text-right py-3 px-4 text-sm font-medium text-white/50">Total</th>
-                <th className="text-left py-3 px-4 text-sm font-medium text-white/50">Dates</th>
+                <th className="text-left py-3 px-4 text-sm font-medium text-white/50">Account</th>
                 {activeTab === 'rd' && (
                   <th className="text-left py-3 px-4 text-sm font-medium text-white/50">R&D</th>
                 )}
@@ -363,7 +365,7 @@ export default function TaggerPage() {
                     </td>
                     <td className="py-3 px-4">
                       <span className="text-xs text-white/40">
-                        {group.sampleDates.join(', ')}
+                        {(group.bankAccounts || []).map(a => a.replace(/NJ Marchesi T\/as /, '').replace(/NM Personal\s*/, 'Personal').trim()).join(', ')}
                       </span>
                     </td>
                     {activeTab === 'rd' && (
@@ -396,6 +398,15 @@ export default function TaggerPage() {
                     </td>
                     <td className="py-3 px-4 text-right">
                       <div className="flex items-center justify-end gap-2">
+                        <label className="flex items-center gap-1 text-xs text-white/40 cursor-pointer" title="Save as vendor rule for future auto-tagging">
+                          <input
+                            type="checkbox"
+                            checked={saveAsRule[key] ?? (group.count >= 2)}
+                            onChange={e => setSaveAsRule(prev => ({ ...prev, [key]: e.target.checked }))}
+                            className="rounded border-white/20 bg-white/5 text-amber-500 focus:ring-0 focus:ring-offset-0 h-3.5 w-3.5"
+                          />
+                          Rule
+                        </label>
                         <button
                           onClick={() => handleTag(group)}
                           disabled={!currentCode || tagMutation.isPending}

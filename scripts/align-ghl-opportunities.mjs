@@ -29,6 +29,24 @@ const supabase = createClient(
 const projectCodes = await loadProjectsConfig();
 const applyMode = process.argv.includes('--apply');
 
+// Explicit pipeline name → project code mapping
+const PIPELINE_MAP = {
+  'a curious tractor': 'ACT-CA',
+  'goods': 'ACT-GD',
+  'goods.': 'ACT-GD',
+  'festivals': 'ACT-CE',
+  'act events': 'ACT-CE',
+  'empathy ledger': 'ACT-EL',
+  'justicehub': 'ACT-JH',
+  'photo studio': 'ACT-PS',
+  'radical scoops': 'ACT-RA',
+  'picc': 'ACT-PI',
+  'the harvest': 'ACT-HV',
+  'confit': 'ACT-CF',
+  'smart stories': 'ACT-SM',
+  'marriage celebrant': 'ACT-MC',
+};
+
 // Build keyword map: keyword → { projectCode, weight }
 function buildKeywordMap() {
   const map = [];
@@ -58,6 +76,18 @@ function scoreOpportunity(oppName, pipelineName, keywordMap) {
   const pipeLower = (pipelineName || '').toLowerCase();
   let bestMatch = null;
   let bestScore = 0;
+
+  // Check explicit pipeline map first (high confidence)
+  if (PIPELINE_MAP[pipeLower]) {
+    const mappedCode = PIPELINE_MAP[pipeLower];
+    const project = keywordMap.find(p => p.code === mappedCode);
+    return {
+      code: mappedCode,
+      score: 0.8,
+      matchedKeyword: `pipeline_map:${pipeLower}`,
+      name: project?.name || mappedCode,
+    };
+  }
 
   for (const project of keywordMap) {
     let score = 0;

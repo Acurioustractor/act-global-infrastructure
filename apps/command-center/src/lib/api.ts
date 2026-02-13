@@ -3162,6 +3162,7 @@ export interface UntaggedGroup {
   count: number
   total: number
   sampleDates: string[]
+  bankAccounts: string[]
   suggestedCode: string | null
   rdEligible: boolean
 }
@@ -3197,8 +3198,10 @@ export async function tagTransactions(params: {
   type?: string
   ids?: string[]
   projectCode: string
+  saveAsRule?: boolean
+  category?: string
 }) {
-  return fetchApi<{ success: boolean; updated: number }>('/api/transactions/tag', {
+  return fetchApi<{ success: boolean; updated: number; ruleSaved?: boolean }>('/api/transactions/tag', {
     method: 'POST',
     body: JSON.stringify(params),
   })

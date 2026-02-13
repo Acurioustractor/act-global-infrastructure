@@ -220,17 +220,18 @@ async function setupTracking() {
   }
 
   const existingNames = existing.map(c => c.Name);
-  const projectCatExists = existingNames.includes('Project');
-  const costTypeCatExists = existingNames.includes('Cost Type');
+  // Match existing categories by flexible names
+  const projectCatExists = existingNames.some(n => n.toLowerCase().includes('project'));
+  const costTypeCatExists = existingNames.some(n => n === 'Cost Type');
 
   console.log('\n--- Plan ---');
 
-  // Project category
+  // Find project category (may be called "Project" or "Project Tracking")
+  const projectCat = existing.find(c => c.Name.toLowerCase().includes('project'));
   if (projectCatExists) {
-    const cat = existing.find(c => c.Name === 'Project');
-    const existingOptions = new Set((cat.Options || []).map(o => o.Name));
+    const existingOptions = new Set((projectCat.Options || []).map(o => o.Name));
     const newOptions = projectOptions.filter(o => !existingOptions.has(o));
-    console.log(`Project: exists (${existingOptions.size} options), ${newOptions.length} to add`);
+    console.log(`${projectCat.Name}: exists (${existingOptions.size} options), ${newOptions.length} to add`);
     if (newOptions.length > 0) console.log(`  New: ${newOptions.join(', ')}`);
   } else {
     console.log(`Project: CREATE with ${projectOptions.length} options`);
@@ -238,21 +239,19 @@ async function setupTracking() {
   }
 
   // Cost Type category
+  const costTypeCat = existing.find(c => c.Name === 'Cost Type');
   if (costTypeCatExists) {
-    const cat = existing.find(c => c.Name === 'Cost Type');
-    const existingOptions = new Set((cat.Options || []).map(o => o.Name));
+    const existingOptions = new Set((costTypeCat.Options || []).map(o => o.Name));
     const newOptions = costTypes.filter(o => !existingOptions.has(o));
     console.log(`Cost Type: exists (${existingOptions.size} options), ${newOptions.length} to add`);
     if (newOptions.length > 0) console.log(`  New: ${newOptions.join(', ')}`);
+  } else if (existing.length >= 2 && !costTypeCatExists) {
+    const otherCat = existing.find(c => !c.Name.toLowerCase().includes('project'));
+    console.log(`Cost Type: CANNOT CREATE — both slots used. "${otherCat?.Name}" occupies the second slot.`);
+    console.log(`  To add Cost Type, archive "${otherCat?.Name}" in Xero Settings → Tracking Categories.`);
   } else {
     console.log(`Cost Type: CREATE with ${costTypes.length} options`);
     console.log(`  ${costTypes.join(', ')}`);
-  }
-
-  if (existing.length >= 2 && !projectCatExists && !costTypeCatExists) {
-    console.error('\nXero only allows 2 tracking categories. Both slots are used by other categories.');
-    console.error('You need to archive one first in Xero Settings → Tracking Categories.');
-    return;
   }
 
   if (!applyMode) {
@@ -263,45 +262,47 @@ async function setupTracking() {
   // Apply: Project category
   console.log('\nApplying...');
 
-  let projectCat;
-  if (projectCatExists) {
-    projectCat = existing.find(c => c.Name === 'Project');
-  } else {
+  let appliedProjectCat = projectCat;
+  if (!appliedProjectCat) {
     console.log('Creating "Project" tracking category...');
-    projectCat = await createCategory('Project');
-    console.log(`  Created: ${projectCat.TrackingCategoryID}`);
+    appliedProjectCat = await createCategory('Project');
+    console.log(`  Created: ${appliedProjectCat.TrackingCategoryID}`);
   }
 
-  const existingProjectOptions = new Set((projectCat.Options || []).map(o => o.Name));
+  const existingProjectOptions = new Set((appliedProjectCat.Options || []).map(o => o.Name));
   let added = 0;
   for (const code of projectOptions) {
     if (existingProjectOptions.has(code)) continue;
-    await addOption(projectCat.TrackingCategoryID, code);
+    console.log(`  Adding: ${code}`);
+    await addOption(appliedProjectCat.TrackingCategoryID, code);
     added++;
     // Rate limit: 500ms between calls
     await new Promise(r => setTimeout(r, 500));
   }
-  console.log(`  Project: ${added} options added (${existingProjectOptions.size} already existed)`);
+  console.log(`  ${appliedProjectCat.Name}: ${added} options added (${existingProjectOptions.size} already existed)`);
 
   // Apply: Cost Type category
-  let costTypeCat;
-  if (costTypeCatExists) {
-    costTypeCat = existing.find(c => c.Name === 'Cost Type');
-  } else {
+  let appliedCostTypeCat = costTypeCat;
+  if (!appliedCostTypeCat && existing.length < 2) {
     console.log('Creating "Cost Type" tracking category...');
-    costTypeCat = await createCategory('Cost Type');
-    console.log(`  Created: ${costTypeCat.TrackingCategoryID}`);
+    appliedCostTypeCat = await createCategory('Cost Type');
+    console.log(`  Created: ${appliedCostTypeCat.TrackingCategoryID}`);
   }
 
-  const existingCostOptions = new Set((costTypeCat.Options || []).map(o => o.Name));
-  added = 0;
-  for (const type of costTypes) {
-    if (existingCostOptions.has(type)) continue;
-    await addOption(costTypeCat.TrackingCategoryID, type);
-    added++;
-    await new Promise(r => setTimeout(r, 500));
+  if (appliedCostTypeCat) {
+    const existingCostOptions = new Set((appliedCostTypeCat.Options || []).map(o => o.Name));
+    added = 0;
+    for (const type of costTypes) {
+      if (existingCostOptions.has(type)) continue;
+      console.log(`  Adding: ${type}`);
+      await addOption(appliedCostTypeCat.TrackingCategoryID, type);
+      added++;
+      await new Promise(r => setTimeout(r, 500));
+    }
+    console.log(`  Cost Type: ${added} options added (${existingCostOptions.size} already existed)`);
+  } else {
+    console.log('\n  Skipping Cost Type — no available slot. Archive "Business Divisions" in Xero first.');
   }
-  console.log(`  Cost Type: ${added} options added (${existingCostOptions.size} already existed)`);
 
   console.log('\nDone! Tracking categories configured in Xero.');
 }
