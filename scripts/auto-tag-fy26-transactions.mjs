@@ -13,9 +13,8 @@
  */
 
 import { createClient } from '@supabase/supabase-js';
-import { readFileSync } from 'fs';
+import { loadProjectsConfig } from './lib/project-loader.mjs';
 import dotenv from 'dotenv';
-import path from 'path';
 
 dotenv.config({ path: '.env.local' });
 
@@ -34,9 +33,7 @@ if (!SUPABASE_URL || !SUPABASE_KEY) {
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
 // Load project codes
-const PROJECT_CODES = JSON.parse(
-  readFileSync(path.join(process.cwd(), 'config/project-codes.json'), 'utf8')
-);
+const PROJECT_CODES = await loadProjectsConfig();
 
 // FY26: 1 Jul 2025 → 30 Jun 2026
 const FY26_START = '2025-07-01';
@@ -46,64 +43,34 @@ const DRY_RUN = process.argv.includes('--dry-run');
 const REPORT_ONLY = process.argv.includes('--report');
 
 // ============================================================================
-// VENDOR RULES — Tier 1: Direct vendor → project code mapping
+// VENDOR RULES — Tier 1: Loaded from vendor_project_rules DB table
 // ============================================================================
 
-const VENDOR_RULES = [
-  // Co-founder income
-  { match: 'Nicholas Marchesi', code: 'ACT-IN', type: 'RECEIVE', reason: 'Co-founder income' },
+let VENDOR_RULES = [];
 
-  // Software subscriptions → ACT-IN
-  { match: 'Mighty Networks', code: 'ACT-IN', reason: 'Software subscription' },
-  { match: 'Linktree', code: 'ACT-IN', reason: 'Software subscription' },
-  { match: 'LinkedIn', code: 'ACT-IN', reason: 'Software subscription' },
-  { match: 'Zapier', code: 'ACT-IN', reason: 'Software subscription' },
-  { match: 'Squarespace', code: 'ACT-IN', reason: 'Software subscription' },
-  { match: 'Notion', code: 'ACT-IN', reason: 'Software subscription' },
-  { match: 'OpenAI', code: 'ACT-IN', reason: 'Software subscription' },
-  { match: 'Anthropic', code: 'ACT-IN', reason: 'Software subscription' },
-  { match: 'Webflow', code: 'ACT-IN', reason: 'Software subscription' },
-  { match: 'Xero', code: 'ACT-IN', reason: 'Software subscription' },
-  { match: 'Descript', code: 'ACT-IN', reason: 'Software subscription' },
-  { match: 'Adobe', code: 'ACT-IN', reason: 'Software subscription' },
-  { match: 'Vercel', code: 'ACT-IN', reason: 'Software subscription' },
-  { match: 'Supabase', code: 'ACT-IN', reason: 'Software subscription' },
-  { match: 'HighLevel', code: 'ACT-IN', reason: 'Software subscription' },
-  { match: 'GoHighLevel', code: 'ACT-IN', reason: 'Software subscription' },
-  { match: 'GitHub', code: 'ACT-IN', reason: 'Software subscription' },
-  { match: 'Audible', code: 'ACT-IN', reason: 'Software subscription' },
-  { match: 'Apple', code: 'ACT-IN', reason: 'Software subscription' },
-  { match: 'Google', code: 'ACT-IN', reason: 'Software/cloud' },
-  { match: 'Canva', code: 'ACT-IN', reason: 'Software subscription' },
-  { match: 'Slack', code: 'ACT-IN', reason: 'Software subscription' },
-  { match: 'Zoom', code: 'ACT-IN', reason: 'Software subscription' },
-  { match: 'Calendly', code: 'ACT-IN', reason: 'Software subscription' },
-  { match: 'Loom', code: 'ACT-IN', reason: 'Software subscription' },
-  { match: 'Figma', code: 'ACT-IN', reason: 'Software subscription' },
-  { match: 'Dext', code: 'ACT-IN', reason: 'Software subscription' },
+async function loadVendorRules() {
+  const { data, error } = await supabase
+    .from('vendor_project_rules')
+    .select('vendor_name, aliases, project_code, category, auto_apply');
 
-  // Infrastructure/personal → ACT-IN
-  { match: 'AHM', code: 'ACT-IN', reason: 'Insurance' },
-  { match: 'Belong', code: 'ACT-IN', reason: 'Telco' },
-  { match: 'Updoc', code: 'ACT-IN', reason: 'Infrastructure' },
-  { match: 'GoPayID', code: 'ACT-IN', reason: 'Infrastructure' },
-  { match: '2Up Spending', code: 'ACT-IN', reason: 'Infrastructure' },
-  { match: 'Amazon', code: 'ACT-IN', reason: 'General supplies' },
+  if (error) {
+    console.error('Failed to load vendor rules from DB:', error.message);
+    return;
+  }
 
-  // Uber/transport → ACT-IN (default, can be overridden by date-based project matching later)
-  { match: 'Uber Eats', code: 'ACT-IN', reason: 'Meals (infrastructure)' },
-  { match: 'Uber', code: 'ACT-IN', reason: 'Transport (infrastructure)' },
+  VENDOR_RULES = (data || []).map(r => ({
+    match: r.vendor_name,
+    aliases: r.aliases || [],
+    code: r.project_code,
+    reason: r.category || 'Vendor rule',
+    autoApply: r.auto_apply,
+  }));
 
-  // Bank fees → ACT-IN
-  { match: 'NAB', code: 'ACT-IN', reason: 'Bank fees' },
+  // Add the SKIP rule for transfers (not stored in DB)
+  VENDOR_RULES.push({ match: 'Transfer', code: 'SKIP', type: 'TRANSFER', reason: 'Bank-to-bank transfer' });
 
-  // Project-specific vendors
-  { match: 'Defy Manufacturing', code: 'ACT-GD', reason: 'Goods manufacturing' },
-  { match: 'Maleny Hardware', code: 'ACT-HV', reason: 'Harvest Witta supplies' },
-
-  // Transfers → SKIP
-  { match: 'Transfer', code: 'SKIP', type: 'TRANSFER', reason: 'Bank-to-bank transfer' },
-];
+  console.log(`Loaded ${VENDOR_RULES.length} vendor rules from DB`);
+}
 
 // ============================================================================
 // R&D ELIGIBLE PROJECTS AND SOFTWARE
@@ -231,8 +198,17 @@ function matchVendorRule(contactName, type) {
     // Type-specific rules
     if (rule.type && rule.type !== type) continue;
 
+    // Check primary name
     if (lower.includes(rule.match.toLowerCase())) {
       return { code: rule.code, reason: rule.reason };
+    }
+    // Check aliases from DB
+    if (rule.aliases) {
+      for (const alias of rule.aliases) {
+        if (lower.includes(alias.toLowerCase())) {
+          return { code: rule.code, reason: rule.reason };
+        }
+      }
     }
   }
   return null;
@@ -268,6 +244,9 @@ async function main() {
   console.log(`Period: ${FY26_START} → ${FY26_END}`);
   console.log('='.repeat(70));
   console.log();
+
+  // Load vendor rules from DB
+  await loadVendorRules();
 
   // Fetch all FY26 transactions
   const { data: allTxns, error: allErr } = await supabase

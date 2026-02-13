@@ -20,7 +20,7 @@
 
 import { createClient } from '@supabase/supabase-js';
 import { AgenticWorkflow, listPendingProposals, approveProposal } from './lib/agentic-workflow.mjs';
-import { readFileSync } from 'fs';
+import { loadProjectsConfig } from './lib/project-loader.mjs';
 import dotenv from 'dotenv';
 
 dotenv.config({ path: '.env.local' });
@@ -35,7 +35,7 @@ const AGENT_ID = 'project-intelligence';
 // Load project codes
 let PROJECT_CODES = {};
 try {
-  PROJECT_CODES = JSON.parse(readFileSync('config/project-codes.json', 'utf8'));
+  PROJECT_CODES = await loadProjectsConfig();
 } catch (e) {
   console.warn('Could not load project codes');
 }

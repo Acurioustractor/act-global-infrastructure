@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server'
 import { supabase } from '@/lib/supabase'
-import projectCodesJson from '@/config/project-codes.json'
 
 interface ProjectConfig {
   name: string
@@ -10,41 +9,30 @@ interface ProjectConfig {
   [key: string]: unknown
 }
 
-const projectsMap = projectCodesJson.projects as Record<string, ProjectConfig>
+// Load project configs from DB (cached per request)
+async function loadProjectsMap(): Promise<Record<string, ProjectConfig>> {
+  const { data } = await supabase
+    .from('projects')
+    .select('code, name, category, ghl_tags, xero_tracking')
+  const map: Record<string, ProjectConfig> = {}
+  for (const p of data || []) {
+    map[p.code] = p as ProjectConfig
+  }
+  return map
+}
 
-// Known vendor → project code suggestions
-const VENDOR_SUGGESTIONS: Record<string, string> = {
-  'Nicholas Marchesi': 'ACT-IN',
-  'Mighty Networks': 'ACT-IN',
-  'Linktree': 'ACT-IN',
-  'LinkedIn Singapore': 'ACT-IN',
-  'AHM': 'ACT-IN',
-  'Belong': 'ACT-IN',
-  'Zapier': 'ACT-IN',
-  'Squarespace': 'ACT-IN',
-  'Updoc': 'ACT-IN',
-  'GoPayID': 'ACT-IN',
-  '2Up Spending': 'ACT-IN',
-  'Amazon': 'ACT-IN',
-  'Uber': 'ACT-IN',
-  'Uber Eats': 'ACT-IN',
-  'OpenAI': 'ACT-IN',
-  'Anthropic': 'ACT-IN',
-  'Notion': 'ACT-IN',
-  'Webflow': 'ACT-IN',
-  'Xero': 'ACT-IN',
-  'Descript': 'ACT-IN',
-  'Adobe': 'ACT-IN',
-  'Vercel': 'ACT-IN',
-  'Supabase': 'ACT-IN',
-  'HighLevel': 'ACT-IN',
-  'GitHub': 'ACT-IN',
-  'Audible': 'ACT-IN',
-  'Apple': 'ACT-IN',
-  'Google': 'ACT-IN',
-  'NAB': 'ACT-IN',
-  'Defy Manufacturing': 'ACT-GD',
-  'Maleny Hardware': 'ACT-HV',
+// Load vendor→project suggestions from DB
+async function loadVendorSuggestions(): Promise<Array<{ vendorName: string; aliases: string[]; projectCode: string; rdEligible: boolean }>> {
+  const { data } = await supabase
+    .from('vendor_project_rules')
+    .select('vendor_name, aliases, project_code, rd_eligible')
+
+  return (data || []).map(r => ({
+    vendorName: r.vendor_name,
+    aliases: r.aliases || [],
+    projectCode: r.project_code,
+    rdEligible: r.rd_eligible,
+  }))
 }
 
 // R&D-eligible project codes
@@ -56,17 +44,18 @@ function isRdEligible(projectCode: string | null): boolean {
   return !!projectCode && RD_ELIGIBLE_PROJECTS.has(projectCode)
 }
 
-function suggestProjectCode(contactName: string): string | null {
-  // Direct match
-  if (VENDOR_SUGGESTIONS[contactName]) {
-    return VENDOR_SUGGESTIONS[contactName]
-  }
-
-  // Case-insensitive match
+function suggestProjectCode(
+  contactName: string,
+  projectsMap: Record<string, ProjectConfig>,
+  vendorRules: Array<{ vendorName: string; aliases: string[]; projectCode: string }>
+): string | null {
   const lower = contactName.toLowerCase()
-  for (const [vendor, code] of Object.entries(VENDOR_SUGGESTIONS)) {
-    if (lower.includes(vendor.toLowerCase()) || vendor.toLowerCase().includes(lower)) {
-      return code
+
+  // Check DB vendor rules (name + aliases)
+  for (const rule of vendorRules) {
+    if (lower.includes(rule.vendorName.toLowerCase())) return rule.projectCode
+    for (const alias of rule.aliases) {
+      if (lower.includes(alias.toLowerCase())) return rule.projectCode
     }
   }
 
@@ -87,6 +76,11 @@ function suggestProjectCode(contactName: string): string | null {
 
 export async function GET() {
   try {
+    const [projectsMap, vendorRules] = await Promise.all([
+      loadProjectsMap(),
+      loadVendorSuggestions(),
+    ])
+
     // Fetch all untagged transactions (no project_code)
     const { data: transactions, error } = await supabase
       .from('xero_transactions')
@@ -139,7 +133,7 @@ export async function GET() {
     // Convert to sorted array
     const groups = Array.from(groupMap.values())
       .map(g => {
-        const suggested = suggestProjectCode(g.contactName)
+        const suggested = suggestProjectCode(g.contactName, projectsMap, vendorRules)
         return {
           contactName: g.contactName,
           type: g.type,
@@ -167,7 +161,7 @@ export async function GET() {
     }
 
     // Build project codes list for the dropdown
-    const projectCodes = Object.values(projectsMap).map(p => ({
+    const projectCodes = Object.values(projectsMap).map((p: ProjectConfig) => ({
       code: p.code,
       name: p.name,
       category: p.category,

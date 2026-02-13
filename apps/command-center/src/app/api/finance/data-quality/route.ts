@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server'
 import { supabase } from '@/lib/supabase'
-import projectCodesConfig from '@/config/project-codes.json'
 
 export async function GET() {
   try {
@@ -32,7 +31,7 @@ export async function GET() {
       .limit(30)
 
     // Build project keyword suggestions for untagged vendors
-    const projectKeywords = buildProjectKeywordMap()
+    const projectKeywords = await buildProjectKeywordMap()
 
     // Enrich untagged vendors with suggestions
     const enrichedUntagged = (untagged || []).map((vendor: any) => {
@@ -102,7 +101,7 @@ export async function POST(request: Request) {
 
     const { data, error } = await supabase
       .from('xero_transactions')
-      .update({ project_code: projectCode })
+      .update({ project_code: projectCode, project_code_source: 'manual' })
       .eq('contact_name', contactName)
       .is('project_code', null)
       .select('id')
@@ -114,7 +113,7 @@ export async function POST(request: Request) {
     // Also tag invoices from same contact
     await supabase
       .from('xero_invoices')
-      .update({ project_code: projectCode })
+      .update({ project_code: projectCode, project_code_source: 'manual' })
       .eq('contact_name', contactName)
       .is('project_code', null)
 
@@ -125,17 +124,20 @@ export async function POST(request: Request) {
   }
 }
 
-function buildProjectKeywordMap() {
-  const projects = (projectCodesConfig as any).projects
+async function buildProjectKeywordMap() {
+  const { data: projects } = await supabase
+    .from('projects')
+    .select('code, name, ghl_tags, xero_tracking')
+
   const map: Array<{ code: string; name: string; keywords: string[] }> = []
 
-  for (const [code, project] of Object.entries(projects) as [string, any][]) {
+  for (const project of projects || []) {
     const keywords = [
       ...((project.ghl_tags || []) as string[]),
       project.name?.toLowerCase(),
       project.xero_tracking?.toLowerCase(),
     ].filter(Boolean)
-    map.push({ code, name: project.name, keywords })
+    map.push({ code: project.code, name: project.name, keywords })
   }
   return map
 }

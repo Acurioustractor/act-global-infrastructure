@@ -28,6 +28,7 @@ import {
   Star,
   Sparkles,
   Globe,
+  BarChart3,
 } from 'lucide-react'
 import { LoadingPage } from '@/components/ui/loading'
 import { ProgressBar } from '@tremor/react'
@@ -35,7 +36,7 @@ import { cn } from '@/lib/utils'
 
 type StageColor = 'indigo' | 'violet' | 'emerald' | 'amber'
 type ViewMode = 'cards' | 'table'
-type SortField = 'name' | 'health' | 'contacts' | 'budget'
+type SortField = 'name' | 'health' | 'contacts' | 'budget' | 'importance'
 
 const stageConfig: Record<string, { icon: typeof Ear; color: StageColor; label: string; description: string }> = {
   listen: { icon: Ear, color: 'indigo', label: 'Listen', description: 'Understanding & observing' },
@@ -72,8 +73,8 @@ export default function ProjectsPage() {
   const [stage, setStage] = useState<string | null>(null)
   const [search, setSearch] = useState('')
   const [viewMode, setViewMode] = useState<ViewMode>('cards')
-  const [sortField, setSortField] = useState<SortField>('name')
-  const [sortAsc, setSortAsc] = useState(true)
+  const [sortField, setSortField] = useState<SortField>('importance')
+  const [sortAsc, setSortAsc] = useState(false)
 
   const { data, isLoading, error } = useQuery({
     queryKey: ['projects', 'enriched'],
@@ -137,6 +138,9 @@ export default function ProjectsPage() {
       case 'budget':
         comparison = (aNotion?.data?.budget || 0) - (bNotion?.data?.budget || 0)
         break
+      case 'importance':
+        comparison = (a.importance_weight ?? 5) - (b.importance_weight ?? 5)
+        break
     }
     return sortAsc ? comparison : -comparison
   })
@@ -175,6 +179,13 @@ export default function ProjectsPage() {
             </p>
           </div>
           <div className="flex items-center gap-3">
+            <Link
+              href="/projects/alignment"
+              className="btn-glass flex items-center gap-2 text-indigo-400 hover:text-indigo-300"
+            >
+              <BarChart3 className="h-4 w-4" />
+              Alignment
+            </Link>
             <Link
               href="/projects/archived"
               className="btn-glass flex items-center gap-2 text-white/50 hover:text-white/80"
@@ -576,7 +587,14 @@ function ProjectCard({
               {project.name}
             </h3>
             {project.code && (
-              <span className="text-xs text-white/40 font-mono">{project.code}</span>
+              <div className="flex items-center gap-2">
+                <span className="text-xs text-white/40 font-mono">{project.code}</span>
+                {(project.importance_weight ?? 0) >= 7 && (
+                  <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-indigo-500/20 text-indigo-400 font-medium">
+                    W{project.importance_weight}
+                  </span>
+                )}
+              </div>
             )}
           </div>
           <ArrowUpRight className="h-4 w-4 text-white/20 group-hover:text-indigo-400 transition-colors flex-shrink-0 mt-1" />

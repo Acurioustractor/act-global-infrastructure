@@ -27,6 +27,7 @@
 import { Client } from '@notionhq/client';
 import { createClient } from '@supabase/supabase-js';
 import { readFileSync, existsSync } from 'fs';
+import { loadProjectsConfig } from './lib/project-loader.mjs';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import dotenv from 'dotenv';
@@ -60,9 +61,8 @@ function parseArgs() {
 }
 
 // Load config files
-function loadConfig() {
+async function loadConfig() {
   const configPath = join(__dirname, '../config/notion-database-ids.json');
-  const projectCodesPath = join(__dirname, '../config/project-codes.json');
 
   let databaseIds = {};
   let projectCodes = {};
@@ -76,9 +76,7 @@ function loadConfig() {
   }
 
   try {
-    if (existsSync(projectCodesPath)) {
-      projectCodes = JSON.parse(readFileSync(projectCodesPath, 'utf8'));
-    }
+    projectCodes = await loadProjectsConfig();
   } catch (e) {
     console.warn('Warning: Could not load project-codes.json');
   }
@@ -396,7 +394,7 @@ async function updateSyncState(supabase, syncType, recordCount, options) {
 
 // Main sync function
 async function syncNotionToSupabase(options) {
-  const { databaseIds, projectCodes } = loadConfig();
+  const { databaseIds, projectCodes } = await loadConfig();
 
   if (!databaseIds.actProjects) {
     throw new Error('actProjects database ID not found in config/notion-database-ids.json');

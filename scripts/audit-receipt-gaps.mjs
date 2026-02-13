@@ -18,7 +18,7 @@
 
 import { createClient } from '@supabase/supabase-js';
 import dotenv from 'dotenv';
-import { readFileSync } from 'fs';
+import { loadProjectsConfig } from './lib/project-loader.mjs';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 
@@ -33,8 +33,7 @@ const supabase = createClient(
 );
 
 // Load project codes
-const projectCodesPath = join(__dirname, '../config/project-codes.json');
-const projectCodes = JSON.parse(readFileSync(projectCodesPath, 'utf8'));
+const projectCodes = await loadProjectsConfig();
 
 // Format currency
 function formatCurrency(amount) {

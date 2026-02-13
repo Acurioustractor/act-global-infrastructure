@@ -15,7 +15,7 @@
 
 import { createClient } from '@supabase/supabase-js';
 import dotenv from 'dotenv';
-import { readFileSync } from 'fs';
+import { loadProjectsConfig } from './lib/project-loader.mjs';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 
@@ -29,53 +29,29 @@ const supabase = createClient(
 );
 
 // Load configs
-const supplierRules = JSON.parse(readFileSync(join(__dirname, '../config/dext-supplier-rules.json'), 'utf8'));
-const projectCodes = JSON.parse(readFileSync(join(__dirname, '../config/project-codes.json'), 'utf8'));
+const projectCodes = await loadProjectsConfig();
 
 const args = process.argv.slice(2);
 const applyMode = args.includes('--apply');
 const statsMode = args.includes('--stats');
 
-// Build lookup structures
-function buildVendorMap() {
-  const vendorMap = []; // { aliases: string[], projectCode: string, vendorName: string }
+// Build lookup structures — load vendor rules from DB
+async function buildVendorMap() {
+  const { data: rules, error } = await supabase
+    .from('vendor_project_rules')
+    .select('vendor_name, aliases, project_code, auto_apply')
+    .eq('auto_apply', true);
 
-  // Flatten all vendor categories from supplier rules
-  for (const category of Object.values(supplierRules.auto_publish_rules || {})) {
-    for (const vendor of category.vendors || []) {
-      if (vendor.tracking && vendor.tracking !== 'ASK_USER') {
-        vendorMap.push({
-          vendorName: vendor.name,
-          aliases: [vendor.name, ...(vendor.aliases || [])].map(a => a.toLowerCase()),
-          trackingCode: vendor.tracking,
-        });
-      }
-    }
+  if (error) {
+    console.error('Failed to load vendor rules from DB:', error.message);
+    return [];
   }
 
-  // Bank fees
-  for (const vendor of supplierRules.bank_fees?.vendors || []) {
-    if (vendor.tracking) {
-      vendorMap.push({
-        vendorName: vendor.name,
-        aliases: [vendor.name, ...(vendor.aliases || [])].map(a => a.toLowerCase()),
-        trackingCode: vendor.tracking,
-      });
-    }
-  }
-
-  // Project-specific
-  for (const vendor of supplierRules.auto_publish_rules?.project_specific?.vendors || []) {
-    if (vendor.tracking) {
-      vendorMap.push({
-        vendorName: vendor.name,
-        aliases: [vendor.name, ...(vendor.aliases || [])].map(a => a.toLowerCase()),
-        trackingCode: vendor.tracking,
-      });
-    }
-  }
-
-  return vendorMap;
+  return (rules || []).map(r => ({
+    vendorName: r.vendor_name,
+    aliases: [r.vendor_name, ...(r.aliases || [])].map(a => a.toLowerCase()),
+    projectCode: r.project_code,
+  }));
 }
 
 function buildTrackingToProjectMap() {
@@ -106,17 +82,6 @@ function buildKeywordMap() {
   return map;
 }
 
-function resolveTrackingToProject(trackingCode, trackingToProjectMap) {
-  // Direct match from tracking code to project code
-  // Some tracking codes ARE project codes (ACT-IN, ACT-GD, ACT-HV etc)
-  if (trackingCode.startsWith('ACT-')) return trackingCode;
-
-  const lower = trackingCode.toLowerCase();
-  if (trackingToProjectMap[lower]) return trackingToProjectMap[lower];
-
-  return null;
-}
-
 // Tier 1: Match contact_name against vendor aliases
 function matchVendor(contactName, vendorMap) {
   if (!contactName) return null;
@@ -125,7 +90,7 @@ function matchVendor(contactName, vendorMap) {
   for (const vendor of vendorMap) {
     for (const alias of vendor.aliases) {
       if (lower.includes(alias) || alias.includes(lower)) {
-        return { trackingCode: vendor.trackingCode, vendorName: vendor.vendorName };
+        return { projectCode: vendor.projectCode, vendorName: vendor.vendorName };
       }
     }
   }
@@ -223,7 +188,7 @@ async function showStats() {
 }
 
 async function tagTransactions() {
-  const vendorMap = buildVendorMap();
+  const vendorMap = await buildVendorMap();
   const trackingToProjectMap = buildTrackingToProjectMap();
   const keywordMap = buildKeywordMap();
 
@@ -266,14 +231,12 @@ async function tagTransactions() {
     let projectCode = null;
     let source = null;
 
-    // Tier 1: Vendor match
+    // Tier 1: Vendor match (direct project code from DB rules)
     const vendorMatch = matchVendor(tx.contact_name, vendorMap);
     if (vendorMatch) {
-      projectCode = resolveTrackingToProject(vendorMatch.trackingCode, trackingToProjectMap);
-      if (projectCode) {
-        source = 'vendor_rule';
-        stats.tier1++;
-      }
+      projectCode = vendorMatch.projectCode;
+      source = 'vendor_rule';
+      stats.tier1++;
     }
 
     // Tier 2: Line items tracking
@@ -399,8 +362,9 @@ async function tagTransactions() {
 
     const vendorMatch = matchVendor(inv.contact_name, vendorMap);
     if (vendorMatch) {
-      projectCode = resolveTrackingToProject(vendorMatch.trackingCode, trackingToProjectMap);
-      if (projectCode) { source = 'vendor_rule'; invoiceStats.tier1++; }
+      projectCode = vendorMatch.projectCode;
+      source = 'vendor_rule';
+      invoiceStats.tier1++;
     }
 
     // Tier 2: Check tracking_option columns + line_items tracking

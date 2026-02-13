@@ -1,7 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { supabase } from '@/lib/supabase'
-import { readFileSync } from 'fs'
-import { join } from 'path'
 
 interface ActionItem {
   id: string
@@ -25,15 +23,14 @@ interface ActionItem {
 
 // Load active project codes for boost calculation
 let activeProjectCodes: Set<string> | null = null
-function getActiveProjectCodes(): Set<string> {
+async function getActiveProjectCodes(): Promise<Set<string>> {
   if (activeProjectCodes) return activeProjectCodes
   try {
-    const filePath = join(process.cwd(), '..', '..', 'config', 'project-codes.json')
-    const raw = JSON.parse(readFileSync(filePath, 'utf-8'))
-    activeProjectCodes = new Set<string>()
-    for (const [code, proj] of Object.entries(raw.projects as Record<string, { status?: string }>)) {
-      if (!proj.status || proj.status === 'active') activeProjectCodes.add(code)
-    }
+    const { data } = await supabase
+      .from('projects')
+      .select('code')
+      .eq('status', 'active')
+    activeProjectCodes = new Set<string>((data || []).map(r => r.code))
   } catch {
     activeProjectCodes = new Set()
   }
@@ -59,7 +56,7 @@ interface ProjectLink {
   project_code: string
 }
 
-function computeRankScore(
+async function computeRankScore(
   contactId: string,
   rh: { pipeline_score?: number; financial_score?: number; email_score?: number; calendar_score?: number; knowledge_score?: number; days_since_contact?: number } | null,
   contactDeals: { monetary_value?: number }[] | null,
@@ -67,7 +64,7 @@ function computeRankScore(
   projectLinks: string[],
   now: Date,
   insightVotesForContact?: InsightVote[],
-): number {
+): Promise<number> {
   // Base weighted signal scores
   const base = rh
     ? (rh.pipeline_score || 0) * 0.30 +
@@ -86,7 +83,7 @@ function computeRankScore(
   }
 
   // Project boost
-  const activeCodes = getActiveProjectCodes()
+  const activeCodes = await getActiveProjectCodes()
   let projectBoost = 0
   for (const code of projectLinks) {
     if (activeCodes.has(code)) { projectBoost = 20; break }
@@ -324,7 +321,7 @@ export async function GET(request: NextRequest) {
       const rh = rhByContact[comm.ghl_contact_id]
       const contactDeals = dealsByContact[comm.ghl_contact_id] || null
       const contactVotes = votesByContact[comm.ghl_contact_id] || []
-      const rankScore = computeRankScore(comm.ghl_contact_id, rh || null, contactDeals, contactVotes, contactLinks, now, insightVotesByContact[comm.ghl_contact_id])
+      const rankScore = await computeRankScore(comm.ghl_contact_id, rh || null, contactDeals, contactVotes, contactLinks, now, insightVotesByContact[comm.ghl_contact_id])
 
       actions.push({
         id: `comm-${comm.id}`,
@@ -375,7 +372,7 @@ export async function GET(request: NextRequest) {
       const riskFlags: string[] = rh.risk_flags || []
       const contactVotes = votesByContact[rh.ghl_contact_id] || []
       const contactDeals = dealsByContact[rh.ghl_contact_id] || null
-      const rankScore = computeRankScore(rh.ghl_contact_id, rh, contactDeals, contactVotes, contactLinks, now, insightVotesByContact[rh.ghl_contact_id])
+      const rankScore = await computeRankScore(rh.ghl_contact_id, rh, contactDeals, contactVotes, contactLinks, now, insightVotesByContact[rh.ghl_contact_id])
 
       const tempLabel = rh.temperature != null ? `${rh.temperature}°` : ''
       const trendLabel = rh.temperature_trend ? ` ${rh.temperature_trend}` : ''
@@ -436,7 +433,7 @@ export async function GET(request: NextRequest) {
       const contactLinks = linksByContact[deal.ghl_contact_id] || []
       const contactVotes = votesByContact[deal.ghl_contact_id] || []
       const contactDeals = dealsByContact[deal.ghl_contact_id] || null
-      const rankScore = computeRankScore(deal.ghl_contact_id, rh, contactDeals, contactVotes, contactLinks, now, insightVotesByContact[deal.ghl_contact_id])
+      const rankScore = await computeRankScore(deal.ghl_contact_id, rh, contactDeals, contactVotes, contactLinks, now, insightVotesByContact[deal.ghl_contact_id])
 
       alertedContactIds.add(deal.ghl_contact_id)
 

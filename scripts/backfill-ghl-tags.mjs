@@ -12,7 +12,7 @@
 
 import { createClient } from '@supabase/supabase-js';
 import dotenv from 'dotenv';
-import { readFileSync } from 'fs';
+import { loadProjectsConfig } from './lib/project-loader.mjs';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 
@@ -25,7 +25,7 @@ const supabase = createClient(
   process.env.SUPABASE_SERVICE_ROLE_KEY
 );
 
-const projectCodes = JSON.parse(readFileSync(join(__dirname, '../config/project-codes.json'), 'utf8'));
+const projectCodes = await loadProjectsConfig();
 const applyMode = process.argv.includes('--apply');
 
 // Build tag → project_code map from project-codes.json

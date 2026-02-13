@@ -1,0 +1,195 @@
+{
+  "period": {
+    "from": "2025-07-01",
+    "to": "2026-02-09"
+  },
+  "generatedAt": "2026-02-09T19:52:05.946Z",
+  "projects": {
+    "ACT-EL": {
+      "name": "Empathy Ledger",
+      "category": "Core R&D",
+      "description": "Novel AI-powered story collection and analysis platform",
+      "commits": 2,
+      "workDays": 2,
+      "estimatedDevHours": 12,
+      "calendarMeetingHours": 6.8,
+      "totalEstimatedHours": 18.8,
+      "sampleActivities": [
+        {
+          "date": "2026-02-04",
+          "author": "Acurioustractor",
+          "description": "fix: Update storyteller scripts for EL v2 schema changes"
+        },
+        {
+          "date": "2025-12-30",
+          "author": "Acurioustractor",
+          "description": "docs: update Empathy Ledger path references"
+        }
+      ],
+      "monthlySummary": {
+        "2026-02": {
+          "days": 1,
+          "hours": 6,
+          "commits": 19
+        },
+        "2025-12": {
+          "days": 1,
+          "hours": 6,
+          "commits": 16
+        }
+      }
+    },
+    "ACT-IN": {
+      "name": "ALMA / Bot Intelligence",
+      "category": "Core R&D",
+      "description": "Experimental knowledge graph, episodic memory, AI agent with tool_use",
+      "commits": 122,
+      "workDays": 18,
+      "estimatedDevHours": 76,
+      "calendarMeetingHours": 61.69999999999999,
+      "totalEstimatedHours": 137.7,
+      "sampleActivities": [
+        {
+          "date": "2026-02-09",
+          "author": "Ben",
+          "description": "fix: bundle project-codes.json into app source for Vercel builds"
+        },
+        {
+          "date": "2026-02-09",
+          "author": "Ben",
+          "description": "fix: lazy-load project-codes.json to avoid Vercel build-time file read"
+        },
+        {
+          "date": "2026-02-09",
+          "author": "Ben",
+          "description": "fix: resolve project-codes.json path for Vercel serverless builds"
+        },
+        {
+          "date": "2026-02-09",
+          "author": "Ben",
+          "description": "feat: deep ecosystem alignment — data quality dashboard, harvest view, backfill scripts"
+        },
+        {
+          "date": "2026-02-09",
+          "author": "Ben",
+          "description": "fix: rewire revenue streams to real Xero/GHL/grants data, remove seed data"
+        },
+        {
+          "date": "2026-02-09",
+          "author": "Ben",
+          "description": "feat: financial dashboards, grant Kanban, tax/BAS, and cross-ecosystem data linking"
+        },
+        {
+          "date": "2026-02-09",
+          "author": "A Curious Tractor",
+          "description": "writing: new draft \"Git Push Synchronization Issue in Planning Document Save\""
+        },
+        {
+          "date": "2026-02-09",
+          "author": "A Curious Tractor",
+          "description": "writing: new draft \"GitHub Planning Doc Save Technical Issue\""
+        },
+        {
+          "date": "2026-02-09",
+          "author": "A Curious Tractor",
+          "description": "planning(daily): new \"2026-02-10 Daily Plan\""
+        },
+        {
+          "date": "2026-02-09",
+          "author": "Ben",
+          "description": "chore: reorganize thoughts/ directory for planning cadence workflow"
+        }
+      ],
+      "monthlySummary": {
+        "2026-02": {
+          "days": 7,
+          "hours": 32,
+          "commits": 40
+        },
+        "2026-01": {
+          "days": 9,
+          "hours": 32,
+          "commits": 20
+        },
+        "2025-12": {
+          "days": 2,
+          "hours": 12,
+          "commits": 22
+        }
+      }
+    },
+    "ACT-JH": {
+      "name": "JusticeHub Tech",
+      "category": "Supporting R&D",
+      "description": "Technology platform for justice reform network",
+      "commits": 0,
+      "workDays": 0,
+      "estimatedDevHours": 0,
+      "calendarMeetingHours": 7.3999999999999995,
+      "totalEstimatedHours": 7.3999999999999995,
+      "sampleActivities": [],
+      "monthlySummary": {}
+    },
+    "ACT-GD": {
+      "name": "Goods Marketplace",
+      "category": "Supporting R&D",
+      "description": "Social enterprise marketplace technology",
+      "commits": 2,
+      "workDays": 2,
+      "estimatedDevHours": 12,
+      "calendarMeetingHours": 10.6,
+      "totalEstimatedHours": 22.6,
+      "sampleActivities": [
+        {
+          "date": "2026-02-06",
+          "author": "Acurioustractor",
+          "description": "feat: Goods dashboard — org display, inline editing, bidirectional GHL sync"
+        },
+        {
+          "date": "2026-02-05",
+          "author": "A Curious Tractor",
+          "description": "writing: new draft \"On Country Goods - Community Manufacturing Model\""
+        }
+      ],
+      "monthlySummary": {
+        "2026-02": {
+          "days": 2,
+          "hours": 12,
+          "commits": 10
+        }
+      }
+    },
+    "ACT-PS": {
+      "name": "PICC Photo Studio",
+      "category": "Supporting R&D",
+      "description": "Experimental community storytelling technology",
+      "commits": 0,
+      "workDays": 0,
+      "estimatedDevHours": 0,
+      "calendarMeetingHours": 37.8,
+      "totalEstimatedHours": 37.8,
+      "sampleActivities": [],
+      "monthlySummary": {}
+    },
+    "ACT-CF": {
+      "name": "The Confessional",
+      "category": "Supporting R&D",
+      "description": "Novel story capture technology",
+      "commits": 0,
+      "workDays": 0,
+      "estimatedDevHours": 0,
+      "calendarMeetingHours": 1,
+      "totalEstimatedHours": 1,
+      "sampleActivities": [],
+      "monthlySummary": {}
+    }
+  },
+  "totals": {
+    "commits": 126,
+    "devHours": 100,
+    "meetingHours": 125.29999999999998,
+    "totalHours": 225.29999999999998,
+    "workDays": 22,
+    "rdPercentage": 11
+  }
+}

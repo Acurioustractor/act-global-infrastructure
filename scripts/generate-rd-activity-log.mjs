@@ -16,6 +16,7 @@
 import { execSync } from 'child_process';
 import { createClient } from '@supabase/supabase-js';
 import { readFileSync, writeFileSync } from 'fs';
+import { loadProjectsConfig } from './lib/project-loader.mjs';
 import dotenv from 'dotenv';
 import path from 'path';
 
@@ -25,9 +26,7 @@ const SUPABASE_URL = process.env.SUPABASE_SHARED_URL || process.env.NEXT_PUBLIC_
 const SUPABASE_KEY = process.env.SUPABASE_SHARED_SERVICE_ROLE_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY;
 const supabase = (SUPABASE_URL && SUPABASE_KEY) ? createClient(SUPABASE_URL, SUPABASE_KEY) : null;
 
-const PROJECT_CODES = JSON.parse(
-  readFileSync(path.join(process.cwd(), 'config/project-codes.json'), 'utf8')
-);
+const PROJECT_CODES = await loadProjectsConfig();
 
 // Parse args
 const args = process.argv.slice(2);

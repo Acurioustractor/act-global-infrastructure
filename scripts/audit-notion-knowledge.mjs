@@ -20,6 +20,7 @@
 
 import { Client } from '@notionhq/client';
 import { readFileSync, existsSync, writeFileSync } from 'fs';
+import { loadProjectsConfig } from './lib/project-loader.mjs';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import dotenv from 'dotenv';
@@ -38,10 +39,9 @@ function parseArgs() {
   };
 }
 
-function loadProjectCodes() {
-  const path = join(__dirname, '../config/project-codes.json');
+async function loadProjectCodes() {
   try {
-    if (existsSync(path)) return JSON.parse(readFileSync(path, 'utf8'));
+    return await loadProjectsConfig();
   } catch { /* ignore */ }
   return { projects: {} };
 }
@@ -190,7 +190,7 @@ function matchProjectCode(name, projectCodes) {
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 async function runAudit(options) {
-  const projectCodes = loadProjectCodes();
+  const projectCodes = await loadProjectCodes();
   const notion = getNotion();
 
   // Load notion database IDs

@@ -1,9 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { supabase } from '@/lib/supabase'
-import { readFileSync } from 'fs'
-import { join } from 'path'
 
-// Map Notion project status → LCAA stage
+// Map project status → LCAA stage
 function statusToLcaaStage(status: string | null | undefined): string | null {
   if (!status) return null
   const s = status.toLowerCase()
@@ -18,28 +16,18 @@ export async function GET(request: NextRequest) {
   try {
     const includeArchived = request.nextUrl.searchParams.get('include_archived') === 'true'
 
-    // Load project metadata from config — index by name + notion_pages for matching
-    type ConfigEntry = { code: string; name?: string; description?: string; status?: string; category?: string; tier?: string }
-    const configByName: Record<string, ConfigEntry> = {}
-    const allConfigProjects: ConfigEntry[] = []
-    try {
-      const filePath = join(process.cwd(), '..', '..', 'config', 'project-codes.json')
-      const raw = JSON.parse(readFileSync(filePath, 'utf-8'))
-      for (const [code, proj] of Object.entries(raw.projects as Record<string, { name?: string; description?: string; status?: string; category?: string; tier?: string; notion_pages?: string[] }>)) {
-        const entry: ConfigEntry = { code, name: proj.name, description: proj.description, status: proj.status, category: proj.category, tier: proj.tier }
-        allConfigProjects.push(entry)
-        if (proj.name) configByName[proj.name.toLowerCase()] = entry
-        // Also index by notion page names for fuzzy matching
-        for (const np of proj.notion_pages || []) {
-          configByName[np.toLowerCase()] = entry
-        }
-      }
-    } catch { /* ignore */ }
-    // Get projects from Notion sync table
-    const { data: notionProjects } = await supabase
-      .from('notion_projects')
+    // Query canonical projects table — single source of truth
+    const query = supabase
+      .from('projects')
       .select('*')
-      .order('name', { ascending: true })
+      .order('importance_weight', { ascending: false })
+
+    if (!includeArchived) {
+      query.neq('status', 'archived')
+    }
+
+    const { data: allProjects, error: projectsError } = await query
+    if (projectsError) throw projectsError
 
     // Get project health data
     const { data: healthData } = await supabase
@@ -53,30 +41,33 @@ export async function GET(request: NextRequest) {
       .from('ghl_contacts')
       .select('tags')
 
-    const contactCountByProject = new Map<string, number>()
+    const contactCountByTag = new Map<string, number>()
     for (const c of contacts || []) {
       for (const tag of c.tags || []) {
-        contactCountByProject.set(tag, (contactCountByProject.get(tag) || 0) + 1)
+        contactCountByTag.set(tag, (contactCountByTag.get(tag) || 0) + 1)
       }
     }
 
-    const projects = (notionProjects || []).map((p) => {
-      const notionCode = p.data?.id || p.notion_id || p.id
-      const health = healthMap.get(notionCode)
-      const status = p.status || p.data?.status || 'active'
-      const name = (p.name || p.data?.name || 'Unknown').trim()
-      const configMatch = configByName[name.toLowerCase()]
+    const projects = (allProjects || []).map((p) => {
+      const health = healthMap.get(p.code)
+
+      // Count contacts matching any of this project's ghl_tags
+      let contactCount = 0
+      for (const tag of p.ghl_tags || []) {
+        contactCount += contactCountByTag.get(tag) || 0
+      }
+
       return {
-        code: configMatch?.code || notionCode,
-        name,
-        description: p.data?.description || '',
-        status: configMatch?.status || status,
-        category: configMatch?.category || null,
-        tier: configMatch?.tier || null,
-        lcaa_stage: statusToLcaaStage(configMatch?.status || status),
-        _hasConfigMatch: !!configMatch,
-        healthScore: health?.health_score ?? p.data?.healthScore ?? 75,
-        contacts: contactCountByProject.get(notionCode) || contactCountByProject.get(name.toLowerCase()) || 0,
+        code: p.code,
+        name: p.name,
+        description: p.description || '',
+        status: p.status,
+        category: p.category,
+        tier: p.tier,
+        importance_weight: p.importance_weight,
+        lcaa_stage: statusToLcaaStage(p.status),
+        healthScore: health?.health_score ?? health?.overall_score ?? 75,
+        contacts: contactCount,
         opportunities: [],
         relationships: {},
         recentActivity: [],
@@ -84,56 +75,7 @@ export async function GET(request: NextRequest) {
       }
     })
 
-    // Deduplicate: multiple Notion pages can map to the same config code
-    const seen = new Set<string>()
-    const deduped = projects.filter(p => {
-      if (seen.has(p.code)) return false
-      seen.add(p.code)
-      return true
-    })
-
-    // Inject config-only projects that have no Notion match (e.g. The Farm)
-    for (const cp of allConfigProjects) {
-      if (!seen.has(cp.code)) {
-        seen.add(cp.code)
-        deduped.push({
-          code: cp.code,
-          name: cp.name || cp.code,
-          description: cp.description || '',
-          status: cp.status || 'active',
-          category: cp.category || null,
-          tier: cp.tier || null,
-          lcaa_stage: statusToLcaaStage(cp.status),
-          _hasConfigMatch: true,
-          healthScore: 75,
-          contacts: contactCountByProject.get(cp.code.toLowerCase()) || contactCountByProject.get((cp.name || '').toLowerCase()) || 0,
-          opportunities: [],
-          relationships: {},
-          recentActivity: [],
-          last_activity: null,
-        })
-      }
-    }
-
-    // Filter out archived projects unless explicitly requested
-    // Config status is authoritative — if config says active, it's active regardless of Notion status
-    const isArchived = (p: typeof projects[number] & { _hasConfigMatch?: boolean }) => {
-      if (p._hasConfigMatch) {
-        // Config is source of truth — only archived if config says so
-        return p.status === 'archived'
-      }
-      // No config match — fall back to Notion status
-      const s = p.status.toLowerCase()
-      return s.includes('archived') || s.includes('sunsetting') || s.includes('transferred')
-    }
-    const filtered = includeArchived
-      ? deduped
-      : deduped.filter(p => !isArchived(p))
-
-    // Strip internal flag
-    const result = filtered.map(({ _hasConfigMatch, ...rest }) => rest)
-
-    return NextResponse.json({ projects: result })
+    return NextResponse.json({ projects })
   } catch (e) {
     console.error('Projects enriched error:', e)
     return NextResponse.json({ projects: [] })

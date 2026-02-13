@@ -32,6 +32,7 @@
 
 import { createClient } from '@supabase/supabase-js';
 import { readFileSync, writeFileSync, existsSync } from 'fs';
+import { loadProjectsConfig } from './lib/project-loader.mjs';
 import { createServer } from 'http';
 import dotenv from 'dotenv';
 
@@ -45,7 +46,7 @@ const NOTION_TOKEN = process.env.NOTION_TOKEN;
 // Load project codes for keyword matching
 let PROJECT_CODES = {};
 try {
-  PROJECT_CODES = JSON.parse(readFileSync('config/project-codes.json', 'utf8'));
+  PROJECT_CODES = await loadProjectsConfig();
 } catch (e) {
   console.warn('Could not load project codes');
 }

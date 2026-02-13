@@ -8,33 +8,28 @@
  */
 
 import { NextResponse } from 'next/server'
-import { readFileSync } from 'fs'
-import { join } from 'path'
-
-interface ProjectCodeEntry {
-  name: string
-  code: string
-  category: string
-  status: string
-  priority?: string
-  ghl_tags?: string[]
-}
+import { supabase } from '@/lib/supabase'
 
 export async function GET() {
   try {
-    const filePath = join(process.cwd(), '..', '..', 'config', 'project-codes.json')
-    const raw = JSON.parse(readFileSync(filePath, 'utf-8'))
-    const projects = Object.values(raw.projects as Record<string, ProjectCodeEntry>)
-      .filter((p) => p.status === 'active' || p.status === 'ideation')
-      .map((p) => ({
-        code: p.code,
-        name: p.name,
-        category: p.category,
-        ghlTag: p.ghl_tags?.[0] || p.code.toLowerCase(),
-        status: p.status,
-        priority: p.priority || 'medium',
-      }))
-      .sort((a, b) => a.name.localeCompare(b.name))
+    const { data: projectRows, error } = await supabase
+      .from('projects')
+      .select('code, name, category, status, priority, ghl_tags')
+      .in('status', ['active', 'ideation'])
+      .order('name')
+
+    if (error) {
+      return NextResponse.json({ error: error.message }, { status: 500 })
+    }
+
+    const projects = (projectRows || []).map((p) => ({
+      code: p.code,
+      name: p.name,
+      category: p.category,
+      ghlTag: p.ghl_tags?.[0] || p.code.toLowerCase(),
+      status: p.status,
+      priority: p.priority || 'medium',
+    }))
 
     return NextResponse.json({ projects })
   } catch (err) {

@@ -144,6 +144,30 @@ const cronScripts = [
     args: '--verbose',
     cron_restart: '30 8 * * *', // Daily 8:30am AEST (after knowledge pipeline at 8am)
   },
+  {
+    name: 'auto-tag-transactions',
+    script: 'scripts/tag-transactions-by-vendor.mjs',
+    args: '--apply',
+    cron_restart: '30 9 * * *', // Daily 9:30am AEST (after finance-sync at 8:30am)
+  },
+  {
+    name: 'auto-tag-emails',
+    script: 'scripts/tag-emails-by-project.mjs',
+    args: '--apply',
+    cron_restart: '15 */6 * * *', // Every 6h +15min (after gmail-sync)
+  },
+  {
+    name: 'auto-align-ghl',
+    script: 'scripts/align-ghl-opportunities.mjs',
+    args: '--apply --threshold 0.7',
+    cron_restart: '0 10 * * *', // Daily 10am AEST
+  },
+  {
+    name: 'project-health',
+    script: 'scripts/compute-project-health.mjs',
+    args: '--apply',
+    cron_restart: '0 */6 * * *', // Every 6 hours
+  },
 ];
 
 module.exports = {

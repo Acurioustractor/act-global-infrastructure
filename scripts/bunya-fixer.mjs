@@ -16,7 +16,7 @@
 
 import { createClient } from '@supabase/supabase-js';
 import { AgenticWorkflow } from './lib/agentic-workflow.mjs';
-import { readFileSync } from 'fs';
+import { loadProjects } from './lib/project-loader.mjs';
 import dotenv from 'dotenv';
 
 dotenv.config({ path: '.env.local' });
@@ -32,12 +32,10 @@ if (!SUPABASE_KEY) {
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 const workflow = new AgenticWorkflow('bunya-fixer', { verbose: true });
 
-// Load project codes from config as fallback for name resolution
+// Load project codes from DB as fallback for name resolution
 let CONFIG_PROJECTS = {};
 try {
-  const raw = readFileSync(new URL('../config/project-codes.json', import.meta.url), 'utf8');
-  const parsed = JSON.parse(raw);
-  CONFIG_PROJECTS = parsed.projects || parsed;
+  CONFIG_PROJECTS = await loadProjects();
 } catch { /* config not available — use hardcoded map */ }
 
 // Project code to full name mapping (hardcoded primary, config fallback)

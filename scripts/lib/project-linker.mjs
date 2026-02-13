@@ -10,30 +10,32 @@
  */
 
 import { trackedCompletion } from './llm-client.mjs';
+import { loadProjects } from './project-loader.mjs';
 
-// ACT project codes with descriptions for context
-const PROJECT_CODES = {
-  'JH': 'JusticeHub - digital justice platform, legal tech, access to justice',
-  'EL': 'Empathy Ledger - storytelling platform, impact measurement, ALMA scores',
-  'HARVEST': 'The Harvest - venue, workshops, retail, events, community space',
-  'FARM': 'The Farm - R&D site, manufacturing, gardens, workshops',
-  'STUDIO': 'Innovation Studio - consulting, contracts, client work',
-  'GOODS': 'Goods - social enterprise marketplace, products',
-  'WORLD-TOUR': 'World Tour 2026 - field testing, travel, international connections',
-  'OPS': 'Operations - business admin, finance, legal, compliance, insurance',
-  'TECH': 'Technology - infrastructure, websites, databases, dev ops',
-  'PICC': 'PICC - community program',
-};
+// Dynamically loaded from Supabase projects table (cached 5 min)
+let PROJECT_CODES = null;
 
-const PROJECT_CODE_LIST = Object.entries(PROJECT_CODES)
-  .map(([code, desc]) => `  ${code}: ${desc}`)
-  .join('\n');
+async function getProjectCodes() {
+  if (PROJECT_CODES) return PROJECT_CODES;
+  const projects = await loadProjects();
+  PROJECT_CODES = {};
+  for (const [code, proj] of Object.entries(projects)) {
+    PROJECT_CODES[code] = `${proj.name} - ${proj.description || ''}`;
+  }
+  return PROJECT_CODES;
+}
 
-const SYSTEM_PROMPT = `You are an AI classifier for ACT (A Curious Tractor), a social enterprise ecosystem.
+async function buildSystemPrompt() {
+  const codes = await getProjectCodes();
+  const codeList = Object.entries(codes)
+    .map(([code, desc]) => `  ${code}: ${desc}`)
+    .join('\n');
+
+  return `You are an AI classifier for ACT (A Curious Tractor), a social enterprise ecosystem.
 Given a batch of emails, classify each one to the most relevant ACT project code(s).
 
 Available project codes:
-${PROJECT_CODE_LIST}
+${codeList}
 
 Rules:
 - Return JSON array with one object per email (same order as input)
@@ -42,6 +44,7 @@ Rules:
 - Max 2 codes per email
 - Confidence: 0.9+ = very clear match, 0.7-0.9 = likely, 0.5-0.7 = possible, <0.5 = skip
 - Return ONLY valid JSON array, no markdown`;
+}
 
 /**
  * Classify a batch of emails to project codes
@@ -54,6 +57,8 @@ export async function classifyBatch(emails, options = {}) {
   if (!emails || emails.length === 0) return [];
 
   const threshold = options.confidenceThreshold || 0.7;
+  const systemPrompt = await buildSystemPrompt();
+  const codes = await getProjectCodes();
 
   // Format emails for the prompt
   const emailList = emails.map((e, i) => {
@@ -66,7 +71,7 @@ export async function classifyBatch(emails, options = {}) {
   try {
     const raw = await trackedCompletion(
       [
-        { role: 'system', content: SYSTEM_PROMPT },
+        { role: 'system', content: systemPrompt },
         { role: 'user', content: userMessage },
       ],
       'enrich-communications',
@@ -90,7 +95,7 @@ export async function classifyBatch(emails, options = {}) {
       const result = parsed[i] || { codes: [], confidence: 0, reasoning: 'missing' };
       return {
         id: email.id,
-        codes: (result.codes || []).filter(c => PROJECT_CODES[c]),
+        codes: (result.codes || []).filter(c => codes[c]),
         confidence: Math.min(result.confidence || 0, 1.0),
         reasoning: result.reasoning || '',
         aboveThreshold: (result.confidence || 0) >= threshold,
@@ -157,5 +162,5 @@ export async function saveProjectLinks(supabase, classifications, threshold = 0.
   return { saved: links.length, updated: updates.length };
 }
 
-export { PROJECT_CODES };
-export default { classifyBatch, saveProjectLinks, PROJECT_CODES };
+export { getProjectCodes };
+export default { classifyBatch, saveProjectLinks, getProjectCodes };

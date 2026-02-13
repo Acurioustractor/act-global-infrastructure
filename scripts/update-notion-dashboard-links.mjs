@@ -17,7 +17,7 @@
  */
 
 import { Client } from '@notionhq/client';
-import { readFileSync } from 'fs';
+import { loadProjectsConfig } from './lib/project-loader.mjs';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import dotenv from 'dotenv';
@@ -40,8 +40,7 @@ const CALLOUT_MARKER = 'Dashboard Links';
 const notion = new Client({ auth: process.env.NOTION_TOKEN });
 
 // Load project codes
-const projectCodesPath = join(__dirname, '..', 'config', 'project-codes.json');
-const projectCodesData = JSON.parse(readFileSync(projectCodesPath, 'utf-8'));
+const projectCodesData = await loadProjectsConfig();
 
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));

@@ -37,6 +37,7 @@
 
 import { createClient } from '@supabase/supabase-js';
 import { readFileSync, existsSync } from 'fs';
+import { loadProjectsConfig } from './lib/project-loader.mjs';
 import { resolve } from 'path';
 import readline from 'readline';
 import dotenv from 'dotenv';
@@ -52,7 +53,7 @@ const supabase = SUPABASE_KEY ? createClient(SUPABASE_URL, SUPABASE_KEY) : null;
 // Load project codes
 let PROJECT_CODES = {};
 try {
-  PROJECT_CODES = JSON.parse(readFileSync('config/project-codes.json', 'utf8'));
+  PROJECT_CODES = await loadProjectsConfig();
 } catch (e) {
   console.warn('Could not load project codes');
 }

@@ -25,7 +25,8 @@
 import dotenv from 'dotenv';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
-import { writeFileSync, mkdirSync, existsSync, readFileSync } from 'fs';
+import { writeFileSync, mkdirSync, existsSync } from 'fs';
+import { loadProjects } from './lib/project-loader.mjs';
 import { createClient } from '@supabase/supabase-js';
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -46,11 +47,11 @@ if (!SUPABASE_URL || !SUPABASE_KEY) {
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
 // Load project codes for name resolution
-const projectCodesPath = join(__dirname, '..', 'config', 'project-codes.json');
 let PROJECT_CODES = {};
-if (existsSync(projectCodesPath)) {
-  const raw = readFileSync(projectCodesPath, 'utf-8');
-  PROJECT_CODES = JSON.parse(raw).projects || {};
+try {
+  PROJECT_CODES = await loadProjects();
+} catch (e) {
+  console.warn('Could not load project codes:', e.message);
 }
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

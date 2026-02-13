@@ -21,7 +21,7 @@ export async function POST(request: NextRequest) {
       // Tag specific transactions by ID
       const { data, error } = await supabase
         .from('xero_transactions')
-        .update({ project_code: projectCode })
+        .update({ project_code: projectCode, project_code_source: 'manual' })
         .in('id', ids)
         .select('id')
 
@@ -31,7 +31,7 @@ export async function POST(request: NextRequest) {
       // Tag all transactions matching contact_name + type
       let query = supabase
         .from('xero_transactions')
-        .update({ project_code: projectCode })
+        .update({ project_code: projectCode, project_code_source: 'manual' })
         .eq('contact_name', contactName)
         .or('project_code.is.null,project_code.eq.')
 

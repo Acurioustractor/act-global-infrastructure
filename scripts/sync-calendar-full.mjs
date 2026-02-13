@@ -20,7 +20,7 @@
 import { execSync } from 'child_process';
 import { google } from 'googleapis';
 import { createClient } from '@supabase/supabase-js';
-import { readFile } from 'fs/promises';
+import { loadProjects } from './lib/project-loader.mjs';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 
@@ -30,9 +30,7 @@ const __dirname = dirname(__filename);
 // Load project codes for auto-detection
 let PROJECT_CODES = {};
 try {
-  const projectCodesPath = join(__dirname, '../config/project-codes.json');
-  const raw = await readFile(projectCodesPath, 'utf8');
-  PROJECT_CODES = JSON.parse(raw).projects;
+  PROJECT_CODES = await loadProjects();
 } catch (e) {
   console.warn('Warning: Could not load project codes:', e.message);
 }

@@ -795,11 +795,8 @@ function cosineSimilarity(a, b) {
 
 async function loadProjectCodes() {
   try {
-    const fs = await import('fs/promises');
-    const path = await import('path');
-    const configPath = path.join(process.cwd(), 'config', 'project-codes.json');
-    const content = await fs.readFile(configPath, 'utf-8');
-    return JSON.parse(content);
+    const { loadProjectsConfig } = await import('./lib/project-loader.mjs');
+    return await loadProjectsConfig();
   } catch (err) {
     return {};
   }

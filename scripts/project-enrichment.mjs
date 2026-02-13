@@ -22,6 +22,7 @@
 
 import { createClient } from '@supabase/supabase-js';
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'fs';
+import { loadProjectsConfig } from './lib/project-loader.mjs';
 import { sendDiscordMessage, sendEmbed } from './discord-notify.mjs';
 import dotenv from 'dotenv';
 
@@ -137,9 +138,9 @@ const ACT_FRONTENDS = {
 // KNOWLEDGE SOURCES
 // ============================================================================
 
-function loadProjectCodes() {
+async function loadProjectCodes() {
   try {
-    return JSON.parse(readFileSync('config/project-codes.json', 'utf8'));
+    return await loadProjectsConfig();
   } catch (e) {
     console.warn('Could not load project codes:', e.message);
     return { projects: {} };
@@ -498,7 +499,7 @@ function calculateHealthScore(project, enrichment) {
  * Full enrichment of a single project
  */
 async function enrichProject(projectCode) {
-  const config = loadProjectCodes();
+  const config = await loadProjectCodes();
   const project = config.projects[projectCode.toUpperCase()];
 
   if (!project) {
@@ -582,7 +583,7 @@ async function enrichAllProjects() {
   console.log('  🚀 ACT Project Enrichment - Full Run');
   console.log('═══════════════════════════════════════════════════════════════\n');
 
-  const config = loadProjectCodes();
+  const config = await loadProjectCodes();
   const projectCodes = Object.keys(config.projects);
 
   console.log(`Processing ${projectCodes.length} projects...\n`);
@@ -925,7 +926,7 @@ switch (command) {
   case 'opportunities':
     // Quick scan for opportunities
     console.log('\n🔍 Scanning for opportunities across all projects...\n');
-    const config = loadProjectCodes();
+    const config = await loadProjectCodes();
     const highPriorityProjects = Object.entries(config.projects)
       .filter(([_, p]) => p.priority === 'high')
       .slice(0, 10);

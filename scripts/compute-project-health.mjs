@@ -18,7 +18,6 @@
 
 import { createClient } from '@supabase/supabase-js';
 import dotenv from 'dotenv';
-import { readFileSync } from 'fs';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 
@@ -31,8 +30,21 @@ const supabase = createClient(
   process.env.SUPABASE_SERVICE_ROLE_KEY
 );
 
-const projectCodes = JSON.parse(readFileSync(join(__dirname, '../config/project-codes.json'), 'utf8'));
 const applyMode = process.argv.includes('--apply');
+
+// Load active projects directly from canonical projects table
+const { data: projectRows, error: loadError } = await supabase
+  .from('projects')
+  .select('*')
+  .in('status', ['active', 'ideation'])
+  .order('importance_weight', { ascending: false });
+
+if (loadError) {
+  console.error('Failed to load projects:', loadError.message);
+  process.exit(1);
+}
+
+const thirtyDaysAgo = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString();
 
 async function computeProjectHealth(code, project) {
   // Parallel fetch all metrics
@@ -182,18 +194,15 @@ async function computeProjectHealth(code, project) {
 async function main() {
   console.log(`\n📊 Project Health Calculator ${applyMode ? '(APPLY MODE)' : '(DRY RUN)'}\n`);
 
-  const activeProjects = Object.entries(projectCodes.projects)
-    .filter(([, p]) => p.status === 'active' || p.status === 'ideation');
-
-  console.log(`Computing health for ${activeProjects.length} active projects...\n`);
+  console.log(`Computing health for ${projectRows.length} active projects...\n`);
 
   const results = [];
 
   // Process in batches of 5 to avoid overwhelming the DB
-  for (let i = 0; i < activeProjects.length; i += 5) {
-    const batch = activeProjects.slice(i, i + 5);
+  for (let i = 0; i < projectRows.length; i += 5) {
+    const batch = projectRows.slice(i, i + 5);
     const batchResults = await Promise.all(
-      batch.map(([code, project]) => computeProjectHealth(code, project))
+      batch.map(p => computeProjectHealth(p.code, p))
     );
     results.push(...batchResults);
   }

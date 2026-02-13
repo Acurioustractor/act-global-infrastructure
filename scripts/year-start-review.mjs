@@ -20,6 +20,7 @@
 
 import { createClient } from '@supabase/supabase-js';
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'fs';
+import { loadProjects } from './lib/project-loader.mjs';
 import { sendDiscordMessage, sendEmbed } from './discord-notify.mjs';
 import dotenv from 'dotenv';
 
@@ -38,17 +39,16 @@ const REVIEW_STATE_FILE = '.claude/cache/year-start-review-state.json';
 // PROJECT DATA
 // ============================================================================
 
-function loadProjectCodes() {
+async function loadProjectCodes() {
   try {
-    const data = JSON.parse(readFileSync('config/project-codes.json', 'utf8'));
-    return data.projects || {};
+    return await loadProjects();
   } catch (e) {
     console.error('Could not load project codes:', e.message);
     return {};
   }
 }
 
-function getReviewState() {
+async function getReviewState() {
   try {
     if (existsSync(REVIEW_STATE_FILE)) {
       return JSON.parse(readFileSync(REVIEW_STATE_FILE, 'utf8'));
@@ -61,7 +61,7 @@ function getReviewState() {
     year: new Date().getFullYear(),
     started_at: new Date().toISOString(),
     reviewed: [],
-    pending: Object.keys(loadProjectCodes()),
+    pending: Object.keys(await loadProjectCodes()),
     findings: [],
     proposals_created: 0,
     last_batch_at: null
@@ -379,8 +379,8 @@ async function runDailyBatch() {
   console.log('  📋 Year-Start Project Review - Daily Batch');
   console.log('═══════════════════════════════════════════════════════════════\n');
 
-  const projects = loadProjectCodes();
-  let state = getReviewState();
+  const projects = await loadProjectCodes();
+  let state = await getReviewState();
 
   // Check if we're in a new year
   if (state.year !== new Date().getFullYear()) {
@@ -463,7 +463,7 @@ async function showStatus() {
   console.log('  📋 Year-Start Review Status');
   console.log('═══════════════════════════════════════════════════════════════\n');
 
-  const state = getReviewState();
+  const state = await getReviewState();
   const total = state.reviewed.length + state.pending.length;
   const progress = Math.round((state.reviewed.length / total) * 100);
 
@@ -501,8 +501,8 @@ async function showGaps() {
   console.log('  📋 Compendium Gap Analysis');
   console.log('═══════════════════════════════════════════════════════════════\n');
 
-  const state = getReviewState();
-  const projects = loadProjectCodes();
+  const state = await getReviewState();
+  const projects = await loadProjectCodes();
 
   // Count gaps by type
   const gapsByType = {};
@@ -543,7 +543,7 @@ async function showGaps() {
 }
 
 async function reviewSingleProject(projectCode) {
-  const projects = loadProjectCodes();
+  const projects = await loadProjectCodes();
   const project = projects[projectCode.toUpperCase()];
 
   if (!project) {
@@ -590,7 +590,7 @@ async function reviewAll() {
   console.log('  📋 Full Year-Start Review (All Projects)');
   console.log('═══════════════════════════════════════════════════════════════\n');
 
-  const projects = loadProjectCodes();
+  const projects = await loadProjectCodes();
   const projectCodes = Object.keys(projects);
 
   console.log(`Total projects: ${projectCodes.length}`);
@@ -643,7 +643,7 @@ function resetReview() {
     year: new Date().getFullYear(),
     started_at: new Date().toISOString(),
     reviewed: [],
-    pending: Object.keys(loadProjectCodes()),
+    pending: Object.keys(await loadProjectCodes()),
     findings: [],
     proposals_created: 0,
     last_batch_at: null

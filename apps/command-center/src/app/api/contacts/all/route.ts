@@ -16,46 +16,27 @@
 
 import { NextRequest, NextResponse } from 'next/server'
 import { supabase } from '@/lib/supabase'
-import { readFileSync } from 'fs'
-import { join } from 'path'
 
-// Load project codes once at module level
+// Load project tag-to-code map from DB (cached at module level)
 let projectTagMap: Map<string, string> | null = null
 
-function getProjectTagMap(): Map<string, string> {
+async function getProjectTagMap(): Promise<Map<string, string>> {
   if (projectTagMap) return projectTagMap
   try {
-    const filePath = join(process.cwd(), '..', '..', 'config', 'project-codes.json')
-    const raw = JSON.parse(readFileSync(filePath, 'utf-8'))
+    const { data } = await supabase
+      .from('projects')
+      .select('code, ghl_tags')
     projectTagMap = new Map<string, string>()
-    for (const [, project] of Object.entries(raw.projects as Record<string, { ghl_tags?: string[]; name: string }>)) {
-      const tags = project.ghl_tags || []
+    for (const row of data || []) {
+      const tags: string[] = row.ghl_tags || []
       for (const tag of tags) {
-        projectTagMap.set(tag.toLowerCase(), (project as { ghl_tags?: string[]; name: string; code?: string }).code || '')
-      }
-    }
-    // Re-do with code from keys
-    projectTagMap = new Map<string, string>()
-    for (const [code, project] of Object.entries(raw.projects as Record<string, { ghl_tags?: string[]; name: string }>)) {
-      const tags = project.ghl_tags || []
-      for (const tag of tags) {
-        projectTagMap.set(tag.toLowerCase(), code)
+        projectTagMap.set(tag.toLowerCase(), row.code)
       }
     }
   } catch {
     projectTagMap = new Map()
   }
   return projectTagMap
-}
-
-function deriveProjects(tags: string[]): string[] {
-  const tagMap = getProjectTagMap()
-  const projects = new Set<string>()
-  for (const tag of tags) {
-    const code = tagMap.get(tag.toLowerCase())
-    if (code) projects.add(code)
-  }
-  return Array.from(projects)
 }
 
 export async function GET(request: NextRequest) {
@@ -98,11 +79,14 @@ export async function GET(request: NextRequest) {
 
     // Project filter
     if (project) {
-      const filePath = join(process.cwd(), '..', '..', 'config', 'project-codes.json')
-      const raw = JSON.parse(readFileSync(filePath, 'utf-8'))
-      const projectEntry = raw.projects[project]
-      if (projectEntry?.ghl_tags?.[0]) {
-        query = query.contains('tags', [projectEntry.ghl_tags[0]])
+      const { data: projRows } = await supabase
+        .from('projects')
+        .select('ghl_tags')
+        .eq('code', project)
+        .limit(1)
+      const ghlTag = projRows?.[0]?.ghl_tags?.[0]
+      if (ghlTag) {
+        query = query.contains('tags', [ghlTag])
       }
     }
 
@@ -173,10 +157,18 @@ export async function GET(request: NextRequest) {
       }
     }
 
+    // Pre-load tag map for synchronous use in .map()
+    const tagMap = await getProjectTagMap()
+
     // Build response
     const result = contacts.map(c => {
       const tags = c.tags || []
-      const projects = deriveProjects(tags)
+      const projectSet = new Set<string>()
+      for (const tag of tags) {
+        const code = tagMap.get(tag.toLowerCase())
+        if (code) projectSet.add(code)
+      }
+      const projects = Array.from(projectSet)
       const latestComm = latestCommsMap.get(c.ghl_id)
       const daysSinceContact = c.last_contact_date
         ? Math.floor((now.getTime() - new Date(c.last_contact_date).getTime()) / 86400000)

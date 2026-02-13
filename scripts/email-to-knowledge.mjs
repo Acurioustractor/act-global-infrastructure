@@ -17,15 +17,14 @@ import { execSync } from 'child_process';
 import { google } from 'googleapis';
 import { createClient } from '@supabase/supabase-js';
 import { readFileSync } from 'fs';
+import { loadProjectsConfig } from './lib/project-loader.mjs';
 import { dirname, join } from 'path';
 import { fileURLToPath } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 // Load project codes for matching
-const projectCodes = JSON.parse(
-  readFileSync(join(__dirname, '../config/project-codes.json'), 'utf8')
-);
+const projectCodes = await loadProjectsConfig();
 
 // Supabase config (client created after secrets loaded)
 const supabaseUrl = process.env.SUPABASE_URL || 'https://tednluwflfhxyucgwigh.supabase.co';

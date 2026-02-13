@@ -50,6 +50,9 @@ export async function GET(request: NextRequest) {
       google_calendar_id: e.google_calendar_id || 'primary',
       sync_source: e.sync_source || 'google',
       recurrence_rule: e.recurrence_rule || null,
+      tags: e.tags || [],
+      metadata: e.metadata || {},
+      ghl_contact_ids: e.ghl_contact_ids || [],
     }))
 
     return NextResponse.json({ events })

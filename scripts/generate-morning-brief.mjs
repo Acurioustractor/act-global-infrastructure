@@ -484,8 +484,8 @@ async function getMoonCycleTodos(moonPhase) {
   // Load project codes for context
   let projectCodes = {};
   try {
-    const { readFile } = await import('fs/promises');
-    projectCodes = JSON.parse(await readFile('./config/project-codes.json', 'utf8'));
+    const { loadProjectsConfig } = await import('./lib/project-loader.mjs');
+    projectCodes = await loadProjectsConfig();
   } catch {
     // Continue without project codes
   }

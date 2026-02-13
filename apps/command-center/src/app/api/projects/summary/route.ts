@@ -1,17 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { supabase } from '@/lib/supabase'
-import { readFileSync } from 'fs'
-import { join } from 'path'
 
-function getArchivedCodes(): Set<string> {
+async function getArchivedCodes(): Promise<Set<string>> {
   try {
-    const filePath = join(process.cwd(), '..', '..', 'config', 'project-codes.json')
-    const raw = JSON.parse(readFileSync(filePath, 'utf-8'))
-    const codes = new Set<string>()
-    for (const [, proj] of Object.entries(raw.projects as Record<string, { code?: string; status?: string }>)) {
-      if (proj.status === 'archived' && proj.code) codes.add(proj.code)
-    }
-    return codes
+    const { data } = await supabase
+      .from('projects')
+      .select('code')
+      .eq('status', 'archived')
+    return new Set<string>((data || []).map(r => r.code))
   } catch {
     return new Set()
   }
@@ -39,9 +35,10 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ projects: [], error: error.message }, { status: 500 })
     }
 
+    const archivedCodes = await getArchivedCodes()
     const projects = includeArchived
       ? (data || [])
-      : (data || []).filter(p => !getArchivedCodes().has(p.project_code))
+      : (data || []).filter(p => !archivedCodes.has(p.project_code))
 
     return NextResponse.json({ projects })
   } catch (e) {

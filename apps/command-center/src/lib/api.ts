@@ -263,6 +263,7 @@ export interface Project {
   status?: string
   category?: string
   tier?: 'ecosystem' | 'studio' | 'satellite'
+  importance_weight?: number
   lcaa_stage?: 'listen' | 'curiosity' | 'action' | 'art'
   health_score?: number
   healthScore?: number  // API returns camelCase
@@ -275,6 +276,62 @@ export interface Project {
     description: string
     action: string
   }>
+}
+
+// Project Alignment
+export interface ProjectAlignment {
+  id: string
+  code: string
+  name: string
+  tier: string | null
+  category: string | null
+  status: string
+  importance_weight: number
+  cultural_protocols: boolean
+  has_gmail_coverage: boolean
+  has_calendar_coverage: boolean
+  has_xero_coverage: boolean
+  has_contacts: boolean
+  has_notion_page: boolean
+  knowledge_count: number
+  coverage_score: number
+  has_coverage_gaps: boolean
+}
+
+export async function getProjectAlignment() {
+  return fetchApi<{ projects: ProjectAlignment[]; summary: { total: number; with_gaps: number; avg_coverage: number } }>('/api/projects/alignment')
+}
+
+// Project Financial Summary (all projects)
+export interface ProjectFinancialSummary {
+  code: string
+  name: string
+  tier: string | null
+  importance_weight: number
+  total_income: number
+  total_expenses: number
+  net_position: number
+  fy_expenses: number
+  fy_income: number
+  transaction_count: number
+  receivable: number
+  pipeline_value: number
+  grant_funding: number
+  monthly_subscriptions: number
+}
+
+export async function getProjectFinancialsSummary() {
+  return fetchApi<{
+    projects: ProjectFinancialSummary[]
+    summary: {
+      total_projects: number
+      ecosystem_count: number
+      fy_expenses: number
+      fy_income: number
+      pipeline_value: number
+      grant_funding: number
+    }
+  }>('/api/projects/financials')
 }
 
 export async function getProjects(opts?: { includeArchived?: boolean }) {
@@ -381,6 +438,25 @@ export interface CalendarEvent {
   google_calendar_id?: string
   sync_source?: string
   recurrence_rule?: string | null
+  tags?: string[]
+  metadata?: Record<string, unknown>
+  ghl_contact_ids?: string[]
+}
+
+export interface MeetingNote {
+  id: string
+  title: string
+  summary?: string
+  content?: string
+  action_items?: string[]
+  participants?: string[]
+  topics?: string[]
+  source_url?: string
+  recorded_at?: string
+}
+
+export async function getMeetingNote(knowledgeId: string) {
+  return fetchApi<{ meeting: MeetingNote }>(`/api/calendar/meeting-note?id=${encodeURIComponent(knowledgeId)}`)
 }
 
 export interface CalendarSource {
@@ -393,6 +469,20 @@ export interface CalendarSource {
 
 export async function getCalendarSources() {
   return fetchApi<{ calendars: CalendarSource[] }>('/api/calendar/calendars')
+}
+
+export async function updateCalendarEvent(id: string, updates: { tags?: string[]; manual_project_code?: string | null }) {
+  return fetchApi<{ event: CalendarEvent }>(`/api/calendar/events/${id}`, {
+    method: 'PATCH',
+    body: JSON.stringify(updates),
+  })
+}
+
+export async function bulkUpdateCalendarEvents(ids: string[], updates: { tags?: string[]; manual_project_code?: string | null }) {
+  return fetchApi<{ updated: number; events: Array<{ id: string; tags: string[]; project_code: string | null }> }>('/api/calendar/events/bulk', {
+    method: 'PATCH',
+    body: JSON.stringify({ ids, ...updates }),
+  })
 }
 
 export async function getCalendarEvents(start?: string, end?: string) {

@@ -21,7 +21,7 @@
  */
 
 import { createClient } from '@supabase/supabase-js';
-import { readFileSync, existsSync } from 'fs';
+import { loadProjectsConfig } from './lib/project-loader.mjs';
 import { dirname, join } from 'path';
 import { fileURLToPath } from 'url';
 import { execSync } from 'child_process';
@@ -50,14 +50,14 @@ const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
 // Load project codes for matching
 let projectCodes = null;
-function loadProjectCodes() {
+async function loadProjectCodes() {
   if (projectCodes) return projectCodes;
-  const configPath = join(__dirname, '../config/project-codes.json');
-  if (existsSync(configPath)) {
-    projectCodes = JSON.parse(readFileSync(configPath, 'utf8'));
+  try {
+    projectCodes = await loadProjectsConfig();
     return projectCodes;
+  } catch (e) {
+    return null;
   }
-  return null;
 }
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -227,7 +227,7 @@ async function scoutGrants(options = {}) {
   }
 
   // Show relevant ACT projects
-  const config = loadProjectCodes();
+  const config = await loadProjectCodes();
   if (config) {
     const relevantProjects = Object.entries(config.projects)
       .filter(([code, p]) => !category || p.category === category)
@@ -321,7 +321,7 @@ async function matchGrants(projectFilter = null) {
   }
 
   // Load project config
-  const config = loadProjectCodes();
+  const config = await loadProjectCodes();
   if (!config) {
     console.log('Project codes not found.');
     return [];

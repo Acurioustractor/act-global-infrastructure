@@ -30,6 +30,7 @@
 
 import { createClient } from '@supabase/supabase-js';
 import { readFileSync, writeFileSync } from 'fs';
+import { loadProjectsConfig } from './lib/project-loader.mjs';
 import dotenv from 'dotenv';
 
 dotenv.config({ path: '.env.local' });
@@ -45,7 +46,7 @@ if (!MAIN_KEY) {
 const supabase = createClient(MAIN_URL, MAIN_KEY);
 
 // Load project codes
-const PROJECT_CODES = JSON.parse(readFileSync('config/project-codes.json', 'utf8'));
+const PROJECT_CODES = await loadProjectsConfig();
 
 // ============================================================================
 // HELPER FUNCTIONS

@@ -5,38 +5,25 @@ import { supabase } from './supabase'
 import { readFileSync } from 'fs'
 import { join } from 'path'
 
-// Helper: load project codes from config JSON (works both locally and on Vercel)
+// Helper: load project codes from the projects table
 let _projectCodesCache: Record<string, any> | null = null
 async function loadProjectCodes(): Promise<Record<string, any>> {
   if (_projectCodesCache) return _projectCodesCache
 
-  // Try reading the config file (works locally)
   try {
-    const configPath = join(process.cwd(), '..', '..', 'config', 'project-codes.json')
-    const raw = readFileSync(configPath, 'utf-8')
-    const parsed = JSON.parse(raw)
-    const result = parsed.projects || {}
-    _projectCodesCache = result
-    return result
-  } catch {
-    // Fallback: query distinct project codes from project_knowledge
     const { data } = await supabase
-      .from('project_knowledge')
-      .select('project_code, project_name')
-      .not('project_code', 'is', null)
-      .limit(500)
+      .from('projects')
+      .select('*')
 
     const projects: Record<string, any> = {}
     for (const row of data || []) {
-      if (row.project_code && !projects[row.project_code]) {
-        projects[row.project_code] = {
-          name: row.project_name || row.project_code,
-          status: 'active',
-        }
-      }
+      projects[row.code] = row
     }
     _projectCodesCache = projects
     return projects
+  } catch {
+    _projectCodesCache = {}
+    return {}
   }
 }
 
@@ -988,6 +975,49 @@ export const AGENT_TOOLS: Anthropic.Tool[] = [
       required: ['title'],
     },
   },
+
+  // ── PROJECT FINANCIALS ─────────────────────────────────────────────
+
+  {
+    name: 'get_project_financials',
+    description:
+      'Get per-project financial summary — FY income, expenses, net position, pipeline, grants, subscriptions. Use when the user asks "how is X doing financially", "project finances", or "financial overview".',
+    input_schema: {
+      type: 'object' as const,
+      properties: {
+        project_code: {
+          type: 'string',
+          description: 'Specific project code (e.g. ACT-JH). Omit for all projects.',
+        },
+      },
+      required: [],
+    },
+  },
+  {
+    name: 'get_untagged_summary',
+    description:
+      'Get count of untagged transactions and top vendors needing project tags. Use when the user asks about transaction tagging coverage or "how many transactions need tagging".',
+    input_schema: {
+      type: 'object' as const,
+      properties: {},
+      required: [],
+    },
+  },
+  {
+    name: 'trigger_auto_tag',
+    description:
+      'Trigger auto-tagging of untagged transactions using vendor rules and keyword matching. Use when the user says "tag transactions", "run auto-tagger", or "fix untagged transactions". Requires confirmation.',
+    input_schema: {
+      type: 'object' as const,
+      properties: {
+        dry_run: {
+          type: 'boolean',
+          description: 'If true, preview matches without applying. Default false.',
+        },
+      },
+      required: [],
+    },
+  },
 ]
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -1133,6 +1163,12 @@ export async function executeTool(
         title: string; project_code?: string; rationale?: string;
         alternatives_considered?: string[]; status?: string
       })
+    case 'get_project_financials':
+      return await executeGetProjectFinancials(input as { project_code?: string })
+    case 'get_untagged_summary':
+      return await executeGetUntaggedSummary()
+    case 'trigger_auto_tag':
+      return await executeTriggerAutoTag(input as { dry_run?: boolean })
     default:
       return JSON.stringify({ error: `Unknown tool: ${name}` })
   }
@@ -5252,6 +5288,152 @@ async function executeAddDecision(input: {
       decision_id: data.id,
       notion_page_id: notionPageId,
       saved_to: notionPageId ? 'supabase + notion' : 'supabase only',
+    })
+  } catch (err) {
+    return JSON.stringify({ error: (err as Error).message })
+  }
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// TOOL: get_project_financials
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+async function executeGetProjectFinancials(input: { project_code?: string }): Promise<string> {
+  try {
+    let query = supabase.from('v_project_financials').select('*')
+    if (input.project_code) {
+      query = query.eq('code', input.project_code)
+    }
+    const { data, error } = await query
+
+    if (error) return JSON.stringify({ error: error.message })
+    if (!data || data.length === 0) return JSON.stringify({ message: 'No financial data found' })
+
+    const projects = data.map((p: Record<string, unknown>) => ({
+      code: p.code,
+      name: p.name,
+      tier: p.tier,
+      fy_income: Math.round(Number(p.fy_income || 0)),
+      fy_expenses: Math.round(Number(p.fy_expenses || 0)),
+      net_position: Math.round(Number(p.net_position || 0)),
+      receivable: Math.round(Number(p.receivable || 0)),
+      pipeline_value: Math.round(Number(p.pipeline_value || 0)),
+      grant_funding: Math.round(Number(p.grant_funding || 0)),
+      monthly_subscriptions: Math.round(Number(p.monthly_subscriptions || 0)),
+      transaction_count: Number(p.transaction_count || 0),
+    }))
+
+    return JSON.stringify({ projects, count: projects.length })
+  } catch (err) {
+    return JSON.stringify({ error: (err as Error).message })
+  }
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// TOOL: get_untagged_summary
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+async function executeGetUntaggedSummary(): Promise<string> {
+  try {
+    const { count: untaggedCount } = await supabase
+      .from('xero_transactions')
+      .select('*', { count: 'exact', head: true })
+      .is('project_code', null)
+
+    const { count: totalCount } = await supabase
+      .from('xero_transactions')
+      .select('*', { count: 'exact', head: true })
+
+    // Top untagged vendors
+    const { data: untagged } = await supabase
+      .from('xero_transactions')
+      .select('contact_name')
+      .is('project_code', null)
+
+    const vendorCounts: Record<string, number> = {}
+    for (const tx of untagged || []) {
+      const name = tx.contact_name || '(No contact)'
+      vendorCounts[name] = (vendorCounts[name] || 0) + 1
+    }
+
+    const topVendors = Object.entries(vendorCounts)
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 15)
+      .map(([name, count]) => ({ vendor: name, count }))
+
+    const coverage = totalCount ? Math.round(((totalCount - (untaggedCount || 0)) / totalCount) * 100) : 0
+
+    return JSON.stringify({
+      untagged: untaggedCount || 0,
+      total: totalCount || 0,
+      coverage_pct: coverage,
+      top_untagged_vendors: topVendors,
+    })
+  } catch (err) {
+    return JSON.stringify({ error: (err as Error).message })
+  }
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// TOOL: trigger_auto_tag
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+async function executeTriggerAutoTag(input: { dry_run?: boolean }): Promise<string> {
+  try {
+    // Load vendor rules from DB
+    const { data: rules, error: rulesErr } = await supabase
+      .from('vendor_project_rules')
+      .select('vendor_name, aliases, project_code')
+      .eq('auto_apply', true)
+
+    if (rulesErr) return JSON.stringify({ error: rulesErr.message })
+
+    // Fetch untagged transactions
+    const { data: untagged, error: txErr } = await supabase
+      .from('xero_transactions')
+      .select('id, contact_name')
+      .is('project_code', null)
+      .limit(5000)
+
+    if (txErr) return JSON.stringify({ error: txErr.message })
+
+    // Match
+    const matches: Array<{ id: string; project_code: string; vendor: string }> = []
+    for (const tx of untagged || []) {
+      if (!tx.contact_name) continue
+      const lower = tx.contact_name.toLowerCase()
+      for (const rule of rules || []) {
+        const names = [rule.vendor_name, ...(rule.aliases || [])].map((a: string) => a.toLowerCase())
+        if (names.some((n: string) => lower.includes(n) || n.includes(lower))) {
+          matches.push({ id: tx.id, project_code: rule.project_code, vendor: tx.contact_name })
+          break
+        }
+      }
+    }
+
+    if (input.dry_run || matches.length === 0) {
+      return JSON.stringify({
+        mode: 'dry_run',
+        would_tag: matches.length,
+        untagged_remaining: (untagged?.length || 0) - matches.length,
+        sample: matches.slice(0, 10),
+      })
+    }
+
+    // Apply
+    let applied = 0
+    for (const m of matches) {
+      const { error } = await supabase
+        .from('xero_transactions')
+        .update({ project_code: m.project_code, project_code_source: 'vendor_rule' })
+        .eq('id', m.id)
+      if (!error) applied++
+    }
+
+    return JSON.stringify({
+      mode: 'applied',
+      tagged: applied,
+      untagged_remaining: (untagged?.length || 0) - applied,
     })
   } catch (err) {
     return JSON.stringify({ error: (err as Error).message })

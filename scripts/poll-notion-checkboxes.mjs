@@ -17,7 +17,7 @@
 
 import { Client } from '@notionhq/client';
 import { createClient } from '@supabase/supabase-js';
-import { readFileSync } from 'fs';
+import { loadProjectsConfig } from './lib/project-loader.mjs';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import { sendEmbed } from './discord-notify.mjs';
@@ -40,8 +40,7 @@ const SUPABASE_KEY = process.env.SUPABASE_SHARED_SERVICE_ROLE_KEY || process.env
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
 // Load project codes
-const projectCodesPath = join(__dirname, '..', 'config', 'project-codes.json');
-const projectCodesData = JSON.parse(readFileSync(projectCodesPath, 'utf-8'));
+const projectCodesData = await loadProjectsConfig();
 
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));

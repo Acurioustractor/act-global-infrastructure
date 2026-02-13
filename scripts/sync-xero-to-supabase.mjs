@@ -27,6 +27,7 @@
 
 import { createClient } from '@supabase/supabase-js';
 import { readFileSync, writeFileSync, existsSync } from 'fs';
+import { loadProjectsConfig } from './lib/project-loader.mjs';
 import dotenv from 'dotenv';
 import path from 'path';
 
@@ -53,7 +54,7 @@ const TOKEN_FILE = path.join(process.cwd(), '.xero-tokens.json');
 // Load project codes for tracking category mapping
 let PROJECT_CODES = {};
 try {
-  PROJECT_CODES = JSON.parse(readFileSync('config/project-codes.json', 'utf8'));
+  PROJECT_CODES = await loadProjectsConfig();
 } catch (e) {
   console.warn('Could not load project codes config');
 }
