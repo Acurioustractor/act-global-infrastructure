@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.72.1",
+    "@notionhq/client": "^5.9.0",
     "@supabase/supabase-js": "^2.47.0",
     "@tanstack/react-query": "^5.90.20",
     "@tremor/react": "^3.18.7",
