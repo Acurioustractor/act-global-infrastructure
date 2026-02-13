@@ -12,66 +12,99 @@ CREATE TABLE IF NOT EXISTS vendor_project_rules (
     created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
-CREATE INDEX idx_vendor_rules_project ON vendor_project_rules(project_code);
+CREATE INDEX IF NOT EXISTS idx_vendor_rules_project ON vendor_project_rules(project_code);
 
--- Seed from config/dext-supplier-rules.json + auto-tag-fy26-transactions.mjs VENDOR_RULES
--- Subscriptions (all → ACT-IN, R&D eligible)
+-- Seed: 64 vendor rules across 7 categories
+-- Categories: Software & Subscriptions, Travel, Operations, Materials & Supplies,
+--             Bank Fees, Meals & Entertainment, Income
+
 INSERT INTO vendor_project_rules (vendor_name, aliases, project_code, category, rd_eligible, auto_apply) VALUES
-('Notion Labs', ARRAY['Notion', 'NOTION LABS'], 'ACT-IN', 'Software & Subscriptions', TRUE, TRUE),
-('OpenAI', ARRAY['OPENAI', 'OpenAI, LLC'], 'ACT-IN', 'Software & Subscriptions', TRUE, TRUE),
-('Anthropic', ARRAY['ANTHROPIC', 'Anthropic PBC'], 'ACT-IN', 'Software & Subscriptions', TRUE, TRUE),
-('Webflow', ARRAY['WEBFLOW', 'Webflow Inc'], 'ACT-IN', 'Software & Subscriptions', TRUE, TRUE),
-('Xero', ARRAY['XERO', 'Xero Australia'], 'ACT-IN', 'Software & Subscriptions', FALSE, TRUE),
-('Descript', ARRAY['DESCRIPT', 'Descript Inc'], 'ACT-IN', 'Software & Subscriptions', TRUE, TRUE),
-('Adobe', ARRAY['ADOBE', 'Adobe Systems'], 'ACT-IN', 'Software & Subscriptions', FALSE, TRUE),
-('Vercel', ARRAY['VERCEL', 'Vercel Inc'], 'ACT-IN', 'Software & Subscriptions', TRUE, TRUE),
-('Supabase', ARRAY['SUPABASE', 'Supabase Inc'], 'ACT-IN', 'Software & Subscriptions', TRUE, TRUE),
-('HighLevel', ARRAY['HIGHLEVEL', 'GoHighLevel', 'GHL'], 'ACT-IN', 'Software & Subscriptions', FALSE, TRUE),
-('GitHub', ARRAY['GITHUB', 'GitHub Inc'], 'ACT-IN', 'Software & Subscriptions', TRUE, TRUE),
-('Audible', ARRAY['AUDIBLE', 'Audible Australia'], 'ACT-IN', 'Software & Subscriptions', FALSE, TRUE),
-('Apple', ARRAY['APPLE PTY LTD', 'Apple Inc'], 'ACT-IN', 'Software & Subscriptions', FALSE, TRUE),
-('Google', ARRAY['GOOGLE', 'Google Cloud'], 'ACT-IN', 'Software & Subscriptions', TRUE, TRUE),
-('Canva', ARRAY['CANVA'], 'ACT-IN', 'Software & Subscriptions', FALSE, TRUE),
-('Slack', ARRAY['SLACK'], 'ACT-IN', 'Software & Subscriptions', FALSE, TRUE),
-('Zoom', ARRAY['ZOOM'], 'ACT-IN', 'Software & Subscriptions', FALSE, TRUE),
-('Calendly', ARRAY['CALENDLY'], 'ACT-IN', 'Software & Subscriptions', FALSE, TRUE),
-('Loom', ARRAY['LOOM'], 'ACT-IN', 'Software & Subscriptions', FALSE, TRUE),
-('Figma', ARRAY['FIGMA'], 'ACT-IN', 'Software & Subscriptions', TRUE, TRUE),
-('Dext', ARRAY['DEXT'], 'ACT-IN', 'Software & Subscriptions', FALSE, TRUE),
-('Mighty Networks', ARRAY['MIGHTY NETWORKS'], 'ACT-IN', 'Software & Subscriptions', FALSE, TRUE),
-('Linktree', ARRAY['LINKTREE'], 'ACT-IN', 'Software & Subscriptions', FALSE, TRUE),
-('LinkedIn', ARRAY['LINKEDIN', 'LinkedIn Singapore'], 'ACT-IN', 'Software & Subscriptions', FALSE, TRUE),
-('Zapier', ARRAY['ZAPIER'], 'ACT-IN', 'Software & Subscriptions', FALSE, TRUE),
-('Squarespace', ARRAY['SQUARESPACE'], 'ACT-IN', 'Software & Subscriptions', FALSE, TRUE),
 
--- Income + Operations → ACT-IN
-('Nicholas Marchesi', ARRAY['NICHOLAS MARCHESI'], 'ACT-IN', 'Income', FALSE, TRUE),
-('AHM', ARRAY['AHM'], 'ACT-IN', 'Operations', FALSE, TRUE),
-('Belong', ARRAY['BELONG'], 'ACT-IN', 'Operations', FALSE, TRUE),
-('Updoc', ARRAY['UPDOC'], 'ACT-IN', 'Operations', FALSE, TRUE),
-('GoPayID', ARRAY['GOPAYID'], 'ACT-IN', 'Operations', FALSE, TRUE),
-('2Up Spending', ARRAY['2UP SPENDING'], 'ACT-IN', 'Operations', FALSE, TRUE),
-('Amazon', ARRAY['AMAZON'], 'ACT-IN', 'Materials & Supplies', FALSE, TRUE),
+-- === ACT-GD (Goods Design) ===
+('Defy Design', ARRAY['DEFY DESIGN'], 'ACT-GD', 'Materials & Supplies', FALSE, TRUE),
+('Defy Manufacturing', ARRAY['DEFY MANUFACTURING'], 'ACT-GD', 'Materials & Supplies', FALSE, TRUE),
 
--- Transport (default ACT-IN, auto_apply=false for manual review)
-('Uber', ARRAY['UBER', 'Uber Technologies'], 'ACT-IN', 'Travel', FALSE, FALSE),
-('Uber Eats', ARRAY['UBER EATS'], 'ACT-IN', 'Meals & Entertainment', FALSE, FALSE),
-('Qantas', ARRAY['QANTAS', 'Qantas Airways Limited', 'Qantas Group Accommodation'], 'ACT-IN', 'Travel', FALSE, FALSE),
-('Cabcharge', ARRAY['CABCHARGE', 'CabCharge Australia'], 'ACT-IN', 'Travel', FALSE, FALSE),
-('Taxi', ARRAY['TAXI RECEIPT', 'Taxi'], 'ACT-IN', 'Travel', FALSE, FALSE),
-('GoGet', ARRAY['GOGET', 'GoGet Carshare'], 'ACT-IN', 'Travel', FALSE, FALSE),
+-- === ACT-HV (Hinterland Village) ===
+('Kennards Hire', ARRAY['KENNARDS', 'Kennards Hire'], 'ACT-HV', 'Materials & Supplies', FALSE, TRUE),
+('Maleny Hardware', ARRAY['MALENY HARDWARE', 'Maleny Hardware And Rural Supplies'], 'ACT-HV', 'Materials & Supplies', FALSE, TRUE),
 
--- Bank fees → ACT-IN
+-- === ACT-IN (Infrastructure / Operations) ===
+
+-- Bank Fees
 ('NAB', ARRAY['NAB', 'National Australia Bank'], 'ACT-IN', 'Bank Fees', FALSE, TRUE),
 ('NAB International Fee', ARRAY['NAB INTERNATIONAL FEE'], 'ACT-IN', 'Bank Fees', FALSE, TRUE),
 
--- Supplies (auto_apply=false for manual review)
-('Bunnings', ARRAY['BUNNINGS', 'Bunnings Warehouse'], 'ACT-IN', 'Materials & Supplies', FALSE, FALSE),
-('Woolworths', ARRAY['WOOLWORTHS', 'Woolworths Group'], 'ACT-IN', 'Materials & Supplies', FALSE, FALSE),
+-- Income
+('Nicholas Marchesi', ARRAY['NICHOLAS MARCHESI'], 'ACT-IN', 'Income', FALSE, TRUE),
 
--- Project-specific vendors
-('Maleny Hardware', ARRAY['MALENY HARDWARE', 'Maleny Hardware And Rural Supplies'], 'ACT-HV', 'Materials & Supplies', FALSE, TRUE),
-('Defy Manufacturing', ARRAY['DEFY MANUFACTURING'], 'ACT-GD', 'Materials & Supplies', FALSE, TRUE)
+-- Materials & Supplies
+('Amazon', ARRAY['AMAZON'], 'ACT-IN', 'Materials & Supplies', FALSE, TRUE),
+('Bunnings', ARRAY['BUNNINGS', 'Bunnings Warehouse'], 'ACT-IN', 'Materials & Supplies', FALSE, TRUE),
+('Woolworths', ARRAY['WOOLWORTHS', 'Woolworths Group'], 'ACT-IN', 'Materials & Supplies', FALSE, TRUE),
+
+-- Meals & Entertainment
+('Uber Eats', ARRAY['UBER EATS'], 'ACT-IN', 'Meals & Entertainment', FALSE, TRUE),
+
+-- Operations
+('2Up Spending', ARRAY['2UP SPENDING'], 'ACT-IN', 'Operations', FALSE, TRUE),
+('AHM', ARRAY['AHM'], 'ACT-IN', 'Operations', FALSE, TRUE),
+('Belong', ARRAY['BELONG'], 'ACT-IN', 'Operations', FALSE, TRUE),
+('GoPayID', ARRAY['GOPAYID'], 'ACT-IN', 'Operations', FALSE, TRUE),
+('HelloFresh', ARRAY['HELLOFRESH', 'HelloFresh'], 'ACT-IN', 'Operations', FALSE, TRUE),
+('MetLife', ARRAY['METLIFE'], 'ACT-IN', 'Operations', FALSE, TRUE),
+('Telstra', ARRAY['TELSTRA'], 'ACT-IN', 'Operations', FALSE, TRUE),
+('Updoc', ARRAY['UPDOC'], 'ACT-IN', 'Operations', FALSE, TRUE),
+
+-- Software & Subscriptions (R&D eligible marked)
+('Anthropic', ARRAY['ANTHROPIC', 'Anthropic PBC'], 'ACT-IN', 'Software & Subscriptions', TRUE, TRUE),
+('ChatGPT', ARRAY['CHATGPT', 'ChatGPT Plus'], 'ACT-IN', 'Software & Subscriptions', TRUE, TRUE),
+('Claude.AI', ARRAY['CLAUDE.AI', 'Claude AI'], 'ACT-IN', 'Software & Subscriptions', TRUE, TRUE),
+('Codeguide', ARRAY['CODEGUIDE'], 'ACT-IN', 'Software & Subscriptions', TRUE, TRUE),
+('Cursor AI', ARRAY['CURSOR', 'Cursor AI'], 'ACT-IN', 'Software & Subscriptions', TRUE, TRUE),
+('Descript', ARRAY['DESCRIPT', 'Descript Inc'], 'ACT-IN', 'Software & Subscriptions', TRUE, TRUE),
+('Figma', ARRAY['FIGMA'], 'ACT-IN', 'Software & Subscriptions', TRUE, TRUE),
+('GitHub', ARRAY['GITHUB', 'GitHub Inc'], 'ACT-IN', 'Software & Subscriptions', TRUE, TRUE),
+('Google', ARRAY['GOOGLE', 'Google Cloud'], 'ACT-IN', 'Software & Subscriptions', TRUE, TRUE),
+('Midjourney', ARRAY['MIDJOURNEY', 'Midjourney Inc'], 'ACT-IN', 'Software & Subscriptions', TRUE, TRUE),
+('Notion Labs', ARRAY['Notion', 'NOTION LABS'], 'ACT-IN', 'Software & Subscriptions', TRUE, TRUE),
+('OpenAI', ARRAY['OPENAI', 'OpenAI, LLC'], 'ACT-IN', 'Software & Subscriptions', TRUE, TRUE),
+('Supabase', ARRAY['SUPABASE', 'Supabase Inc'], 'ACT-IN', 'Software & Subscriptions', TRUE, TRUE),
+('Vercel', ARRAY['VERCEL', 'Vercel Inc'], 'ACT-IN', 'Software & Subscriptions', TRUE, TRUE),
+('Webflow', ARRAY['WEBFLOW', 'Webflow Inc'], 'ACT-IN', 'Software & Subscriptions', TRUE, TRUE),
+-- Non-R&D subscriptions
+('Adobe', ARRAY['ADOBE', 'Adobe Systems'], 'ACT-IN', 'Software & Subscriptions', FALSE, TRUE),
+('Apple', ARRAY['APPLE PTY LTD', 'Apple Inc'], 'ACT-IN', 'Software & Subscriptions', FALSE, TRUE),
+('Audible', ARRAY['AUDIBLE', 'Audible Australia'], 'ACT-IN', 'Software & Subscriptions', FALSE, TRUE),
+('Calendly', ARRAY['CALENDLY'], 'ACT-IN', 'Software & Subscriptions', FALSE, TRUE),
+('Canva', ARRAY['CANVA'], 'ACT-IN', 'Software & Subscriptions', FALSE, TRUE),
+('Dext', ARRAY['DEXT'], 'ACT-IN', 'Software & Subscriptions', FALSE, TRUE),
+('Dialpad', ARRAY['DIALPAD'], 'ACT-IN', 'Software & Subscriptions', FALSE, TRUE),
+('DocPlay', ARRAY['DOCPLAY'], 'ACT-IN', 'Software & Subscriptions', FALSE, TRUE),
+('Garmin', ARRAY['GARMIN', 'Garmin Australasia'], 'ACT-IN', 'Software & Subscriptions', FALSE, TRUE),
+('HighLevel', ARRAY['HIGHLEVEL', 'GoHighLevel', 'GHL'], 'ACT-IN', 'Software & Subscriptions', FALSE, TRUE),
+('LinkedIn', ARRAY['LINKEDIN', 'LinkedIn Singapore'], 'ACT-IN', 'Software & Subscriptions', FALSE, TRUE),
+('Linktree', ARRAY['LINKTREE'], 'ACT-IN', 'Software & Subscriptions', FALSE, TRUE),
+('Loom', ARRAY['LOOM'], 'ACT-IN', 'Software & Subscriptions', FALSE, TRUE),
+('Mighty Networks', ARRAY['MIGHTY NETWORKS'], 'ACT-IN', 'Software & Subscriptions', FALSE, TRUE),
+('Only Domains', ARRAY['ONLY DOMAINS', 'OnlyDomains'], 'ACT-IN', 'Software & Subscriptions', FALSE, TRUE),
+('Slack', ARRAY['SLACK'], 'ACT-IN', 'Software & Subscriptions', FALSE, TRUE),
+('Spotify', ARRAY['SPOTIFY'], 'ACT-IN', 'Software & Subscriptions', FALSE, TRUE),
+('Squarespace', ARRAY['SQUARESPACE'], 'ACT-IN', 'Software & Subscriptions', FALSE, TRUE),
+('Vidzflow', ARRAY['VIDZFLOW'], 'ACT-IN', 'Software & Subscriptions', FALSE, TRUE),
+('Xero', ARRAY['XERO', 'Xero Australia'], 'ACT-IN', 'Software & Subscriptions', FALSE, TRUE),
+('Zapier', ARRAY['ZAPIER'], 'ACT-IN', 'Software & Subscriptions', FALSE, TRUE),
+('Zoom', ARRAY['ZOOM'], 'ACT-IN', 'Software & Subscriptions', FALSE, TRUE),
+
+-- Travel
+('Booking.com', ARRAY['BOOKING.COM', 'Booking Com'], 'ACT-IN', 'Travel', FALSE, TRUE),
+('BP', ARRAY['BP', 'BP FUEL'], 'ACT-IN', 'Travel', FALSE, TRUE),
+('Cabcharge', ARRAY['CABCHARGE', 'CabCharge Australia'], 'ACT-IN', 'Travel', FALSE, TRUE),
+('GoGet', ARRAY['GOGET', 'GoGet Carshare'], 'ACT-IN', 'Travel', FALSE, TRUE),
+('Overseas Travel', ARRAY['OVERSEAS TRAVEL', 'Overseas Travel - Misc small expenses'], 'ACT-IN', 'Travel', FALSE, TRUE),
+('Qantas', ARRAY['QANTAS', 'Qantas Airways Limited', 'Qantas Group Accommodation'], 'ACT-IN', 'Travel', FALSE, TRUE),
+('Taxi', ARRAY['TAXI RECEIPT', 'Taxi'], 'ACT-IN', 'Travel', FALSE, TRUE),
+('Uber', ARRAY['UBER', 'Uber Technologies', 'Uber Amsterdam', 'UBER AMSTERDAM'], 'ACT-IN', 'Travel', FALSE, TRUE),
+('Virgin Australia', ARRAY['VIRGIN AUSTRALIA', 'Virgin Australia Airlines'], 'ACT-IN', 'Travel', FALSE, TRUE)
 
 ON CONFLICT DO NOTHING;
 

@@ -91,6 +91,13 @@ export default function FinancePage() {
           </div>
           <div className="flex gap-3">
             <Link
+              href="/finance/ecosystem"
+              className="btn-glass flex items-center gap-2"
+            >
+              <FolderKanban className="h-4 w-4" />
+              By Project
+            </Link>
+            <Link
               href="/finance/tagger"
               className="btn-glass flex items-center gap-2"
             >
