@@ -29,6 +29,27 @@ const supabase = createClient(
 const projectCodes = await loadProjectsConfig();
 const applyMode = process.argv.includes('--apply');
 
+// Build slug → ACT code map from projects config
+function buildSlugToCodeMap() {
+  const map = {};
+  for (const [code, project] of Object.entries(projectCodes.projects)) {
+    // Map various slug formats to project code
+    const slugs = [
+      project.name.toLowerCase().replace(/\s+/g, '-'),
+      project.name.toLowerCase().replace(/\s+/g, ''),
+      ...(project.ghl_tags || []).map(t => t.toLowerCase()),
+    ];
+    for (const slug of slugs) {
+      // Don't overwrite — first project to claim a slug wins
+      if (!map[slug]) map[slug] = code;
+    }
+    // Also map the code itself
+    map[code.toLowerCase()] = code;
+  }
+  return map;
+}
+const slugToCode = buildSlugToCodeMap();
+
 // Build keyword → project code map
 function buildKeywordMap() {
   const map = [];
@@ -57,19 +78,27 @@ async function tagEmails() {
   console.log(`Keywords: ${keywordMap.length}`);
 
   // Build contact → projects map from GHL contacts
+  // Key on ghl_id (not uuid) since communications_history stores GHL IDs
   const { data: contacts } = await supabase
     .from('ghl_contacts')
-    .select('id, projects')
-    .not('projects', 'is', null);
+    .select('ghl_id, projects')
+    .not('projects', 'is', null)
+    .not('ghl_id', 'is', null);
 
   const contactProjects = {};
   for (const c of contacts || []) {
-    if (Array.isArray(c.projects)) {
+    if (Array.isArray(c.projects) && c.projects.length > 0) {
       const codes = c.projects
-        .map(p => typeof p === 'string' ? p : p.code)
+        .map(p => {
+          const raw = typeof p === 'string' ? p : p.code;
+          if (!raw) return null;
+          // Map slug to ACT code if needed
+          if (raw.startsWith('ACT-')) return raw;
+          return slugToCode[raw.toLowerCase()] || null;
+        })
         .filter(Boolean);
       if (codes.length > 0) {
-        contactProjects[c.id] = codes;
+        contactProjects[c.ghl_id] = codes;
       }
     }
   }
