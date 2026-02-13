@@ -44,34 +44,34 @@ INSERT INTO vendor_project_rules (vendor_name, aliases, project_code, category, 
 ('Zapier', ARRAY['ZAPIER'], 'ACT-IN', 'Software & Subscriptions', FALSE, TRUE),
 ('Squarespace', ARRAY['SQUARESPACE'], 'ACT-IN', 'Software & Subscriptions', FALSE, TRUE),
 
--- Infrastructure / personal → ACT-IN
-('Nicholas Marchesi', ARRAY['NICHOLAS MARCHESI'], 'ACT-IN', 'Co-founder Income', FALSE, TRUE),
-('AHM', ARRAY['AHM'], 'ACT-IN', 'Insurance', FALSE, TRUE),
-('Belong', ARRAY['BELONG'], 'ACT-IN', 'Telco', FALSE, TRUE),
-('Updoc', ARRAY['UPDOC'], 'ACT-IN', 'Infrastructure', FALSE, TRUE),
-('GoPayID', ARRAY['GOPAYID'], 'ACT-IN', 'Infrastructure', FALSE, TRUE),
-('2Up Spending', ARRAY['2UP SPENDING'], 'ACT-IN', 'Infrastructure', FALSE, TRUE),
-('Amazon', ARRAY['AMAZON'], 'ACT-IN', 'General Supplies', FALSE, TRUE),
+-- Income + Operations → ACT-IN
+('Nicholas Marchesi', ARRAY['NICHOLAS MARCHESI'], 'ACT-IN', 'Income', FALSE, TRUE),
+('AHM', ARRAY['AHM'], 'ACT-IN', 'Operations', FALSE, TRUE),
+('Belong', ARRAY['BELONG'], 'ACT-IN', 'Operations', FALSE, TRUE),
+('Updoc', ARRAY['UPDOC'], 'ACT-IN', 'Operations', FALSE, TRUE),
+('GoPayID', ARRAY['GOPAYID'], 'ACT-IN', 'Operations', FALSE, TRUE),
+('2Up Spending', ARRAY['2UP SPENDING'], 'ACT-IN', 'Operations', FALSE, TRUE),
+('Amazon', ARRAY['AMAZON'], 'ACT-IN', 'Materials & Supplies', FALSE, TRUE),
 
 -- Transport (default ACT-IN, auto_apply=false for manual review)
-('Uber', ARRAY['UBER', 'Uber Technologies'], 'ACT-IN', 'Travel - Transport', FALSE, FALSE),
+('Uber', ARRAY['UBER', 'Uber Technologies'], 'ACT-IN', 'Travel', FALSE, FALSE),
 ('Uber Eats', ARRAY['UBER EATS'], 'ACT-IN', 'Meals & Entertainment', FALSE, FALSE),
-('Qantas', ARRAY['QANTAS', 'Qantas Airways Limited', 'Qantas Group Accommodation'], 'ACT-IN', 'Travel - Airfare', FALSE, FALSE),
-('Cabcharge', ARRAY['CABCHARGE', 'CabCharge Australia'], 'ACT-IN', 'Travel - Transport', FALSE, FALSE),
-('Taxi', ARRAY['TAXI RECEIPT', 'Taxi'], 'ACT-IN', 'Travel - Transport', FALSE, FALSE),
-('GoGet', ARRAY['GOGET', 'GoGet Carshare'], 'ACT-IN', 'Travel - Transport', FALSE, FALSE),
+('Qantas', ARRAY['QANTAS', 'Qantas Airways Limited', 'Qantas Group Accommodation'], 'ACT-IN', 'Travel', FALSE, FALSE),
+('Cabcharge', ARRAY['CABCHARGE', 'CabCharge Australia'], 'ACT-IN', 'Travel', FALSE, FALSE),
+('Taxi', ARRAY['TAXI RECEIPT', 'Taxi'], 'ACT-IN', 'Travel', FALSE, FALSE),
+('GoGet', ARRAY['GOGET', 'GoGet Carshare'], 'ACT-IN', 'Travel', FALSE, FALSE),
 
 -- Bank fees → ACT-IN
 ('NAB', ARRAY['NAB', 'National Australia Bank'], 'ACT-IN', 'Bank Fees', FALSE, TRUE),
 ('NAB International Fee', ARRAY['NAB INTERNATIONAL FEE'], 'ACT-IN', 'Bank Fees', FALSE, TRUE),
 
 -- Supplies (auto_apply=false for manual review)
-('Bunnings', ARRAY['BUNNINGS', 'Bunnings Warehouse'], 'ACT-IN', 'Supplies & Materials', FALSE, FALSE),
-('Woolworths', ARRAY['WOOLWORTHS', 'Woolworths Group'], 'ACT-IN', 'Supplies & Materials', FALSE, FALSE),
+('Bunnings', ARRAY['BUNNINGS', 'Bunnings Warehouse'], 'ACT-IN', 'Materials & Supplies', FALSE, FALSE),
+('Woolworths', ARRAY['WOOLWORTHS', 'Woolworths Group'], 'ACT-IN', 'Materials & Supplies', FALSE, FALSE),
 
 -- Project-specific vendors
-('Maleny Hardware', ARRAY['MALENY HARDWARE', 'Maleny Hardware And Rural Supplies'], 'ACT-HV', 'Supplies & Materials', FALSE, TRUE),
-('Defy Manufacturing', ARRAY['DEFY MANUFACTURING'], 'ACT-GD', 'Project Materials', FALSE, TRUE)
+('Maleny Hardware', ARRAY['MALENY HARDWARE', 'Maleny Hardware And Rural Supplies'], 'ACT-HV', 'Materials & Supplies', FALSE, TRUE),
+('Defy Manufacturing', ARRAY['DEFY MANUFACTURING'], 'ACT-GD', 'Materials & Supplies', FALSE, TRUE)
 
 ON CONFLICT DO NOTHING;
 
