@@ -4938,7 +4938,7 @@ async function resolveProjectPageId(projectCode: string): Promise<string | null>
   try {
     const notion = getNotionClient()
     // Search by title match
-    const response = await notion.databases.query({
+    const response = await (notion.databases as any).query({
       database_id: projectsDbId,
       filter: {
         property: 'Name',
