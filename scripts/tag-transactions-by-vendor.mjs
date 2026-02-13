@@ -423,18 +423,19 @@ async function tagTransactions() {
     .from('xero_transactions')
     .select('*', { count: 'exact', head: true });
 
-  const { count: alreadyTagged } = await supabase
+  const { count: currentTagged } = await supabase
     .from('xero_transactions')
     .select('*', { count: 'exact', head: true })
     .not('project_code', 'is', null);
 
-  const projectedTagged = (alreadyTagged || 0) + matchedCount;
-  const projectedCoverage = finalTotal > 0 ? ((projectedTagged / finalTotal) * 100).toFixed(1) : '0';
+  // In apply mode, currentTagged already includes new tags; in dry-run, project the count
+  const beforeCount = applyMode ? (currentTagged || 0) - matchedCount : (currentTagged || 0);
+  const afterCount = applyMode ? (currentTagged || 0) : (currentTagged || 0) + matchedCount;
 
   console.log('\n📈 Coverage Summary');
   console.log('─'.repeat(40));
-  console.log(`Before:  ${alreadyTagged}/${finalTotal} (${finalTotal > 0 ? ((alreadyTagged / finalTotal) * 100).toFixed(1) : 0}%)`);
-  console.log(`After:   ${projectedTagged}/${finalTotal} (${projectedCoverage}%)`);
+  console.log(`Before:  ${beforeCount}/${finalTotal} (${finalTotal > 0 ? ((beforeCount / finalTotal) * 100).toFixed(1) : 0}%)`);
+  console.log(`After:   ${afterCount}/${finalTotal} (${finalTotal > 0 ? ((afterCount / finalTotal) * 100).toFixed(1) : 0}%)`);
 
   if (!applyMode) {
     console.log('\n💡 Run with --apply to save changes');
