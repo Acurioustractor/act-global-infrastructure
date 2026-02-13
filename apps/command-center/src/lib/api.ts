@@ -320,18 +320,38 @@ export interface ProjectFinancialSummary {
   monthly_subscriptions: number
 }
 
+export interface RdVendor {
+  name: string
+  count: number
+  total: number
+}
+
+export interface FinancialsSummaryResponse {
+  projects: ProjectFinancialSummary[]
+  summary: {
+    total_projects: number
+    ecosystem_count: number
+    fy_expenses: number
+    fy_income: number
+    pipeline_value: number
+    grant_funding: number
+  }
+  rd: {
+    total: number
+    vendor_count: number
+    transaction_count: number
+    by_vendor: RdVendor[]
+  }
+  coverage: {
+    total: number
+    tagged: number
+    untagged: number
+    pct: number
+  }
+}
+
 export async function getProjectFinancialsSummary() {
-  return fetchApi<{
-    projects: ProjectFinancialSummary[]
-    summary: {
-      total_projects: number
-      ecosystem_count: number
-      fy_expenses: number
-      fy_income: number
-      pipeline_value: number
-      grant_funding: number
-    }
-  }>('/api/projects/financials')
+  return fetchApi<FinancialsSummaryResponse>('/api/projects/financials')
 }
 
 export async function getProjects(opts?: { includeArchived?: boolean }) {

@@ -116,17 +116,24 @@ async function tagEmails() {
     }
 
     // Method 2: Keyword match on subject + content preview
+    // Use word-boundary matching for short keywords to avoid false positives
     const searchText = [email.subject, email.content_preview].filter(Boolean).join(' ').toLowerCase();
     for (const { keyword, code } of keywordMap) {
-      if (searchText.includes(keyword)) {
-        codes.add(code);
+      if (keyword.length >= 8) {
+        // Long keywords: substring match is fine
+        if (searchText.includes(keyword)) codes.add(code);
+      } else {
+        // Short keywords: require word boundary (not part of a larger word)
+        const regex = new RegExp(`\\b${keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`);
+        if (regex.test(searchText)) codes.add(code);
       }
     }
 
-    if (codes.size > 0 && stats.contactMatch === 0) stats.keywordMatch++;
+    if (codes.size > 0 && !email.ghl_contact_id) stats.keywordMatch++;
 
     if (codes.size > 0) {
-      updates.push({ id: email.id, projectCodes: [...codes] });
+      const source = email.ghl_contact_id && contactProjects[email.ghl_contact_id] ? 'contact_inherit' : 'keyword_match';
+      updates.push({ id: email.id, projectCodes: [...codes], source });
     } else {
       stats.unmatched++;
     }
