@@ -65,7 +65,7 @@ export async function POST(
     // 2. Load project
     const { data: project, error: projErr } = await supabase
       .from('projects')
-      .select('code, name, description, category, lead, status')
+      .select('code, name, description, category, leads, status')
       .eq('code', projectCode)
       .single()
 
@@ -171,7 +171,7 @@ export async function POST(
       `Project: ${project.name} (${project.code})`,
       project.description ? `Description: ${project.description}` : '',
       project.category ? `Category: ${project.category}` : '',
-      project.lead ? `Lead: ${project.lead}` : '',
+      project.leads ? `Leads: ${(project.leads as string[]).join(', ')}` : '',
     ].filter(Boolean).join('\n')
 
     const drafts: Record<string, string> = {}
