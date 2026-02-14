@@ -74,20 +74,16 @@ export async function getProposals(status?: string) {
 }
 
 export async function approveProposal(id: string) {
-  return fetchApi<{ success: boolean }>(`/api/proposals/${id}/approve`, {
+  return fetchApi<{ success: boolean }>(`/api/agent/proposals`, {
     method: 'POST',
+    body: JSON.stringify({ id, action: 'approve' }),
   })
 }
 
 export async function rejectProposal(id: string) {
-  return fetchApi<{ success: boolean }>(`/api/proposals/${id}/reject`, {
+  return fetchApi<{ success: boolean }>(`/api/agent/proposals`, {
     method: 'POST',
-  })
-}
-
-export async function executeProposal(id: string) {
-  return fetchApi<{ success: boolean }>(`/api/proposals/${id}/execute`, {
-    method: 'POST',
+    body: JSON.stringify({ id, action: 'reject' }),
   })
 }
 
@@ -681,25 +677,10 @@ export async function getAgentInsights(limit = 10) {
   }
 }
 
-// Contact Actions (Sprint 3)
-export async function markContactedToday(contactId: string) {
-  return fetchApi<{ success: boolean }>(`/api/relationships/${contactId}/contacted`, {
-    method: 'POST',
-    body: JSON.stringify({ date: new Date().toISOString() }),
-  })
-}
-
 export async function snoozeContact(contactId: string, days: number) {
   return fetchApi<{ success: boolean }>(`/api/relationships/${contactId}/snooze`, {
     method: 'POST',
     body: JSON.stringify({ days }),
-  })
-}
-
-export async function addContactNote(contactId: string, note: string) {
-  return fetchApi<{ success: boolean }>(`/api/relationships/${contactId}/notes`, {
-    method: 'POST',
-    body: JSON.stringify({ note }),
   })
 }
 
@@ -1831,6 +1812,7 @@ export interface KnowledgeAction {
   follow_up_date?: string
   importance?: string
   source_ref?: string
+  status?: string
   created_at?: string
 }
 
@@ -1889,6 +1871,7 @@ export interface KnowledgeActionsResponse {
   count: number
   totalActions: number
   overdueCount: number
+  completedCount: number
   byProject: Record<string, number>
 }
 
@@ -1951,12 +1934,27 @@ export async function getKnowledgeMeetings(params?: { project?: string; days?: n
   return fetchApi<KnowledgeMeetingsResponse>(`/api/knowledge/meetings?${q}`)
 }
 
-export async function getKnowledgeActions(params?: { project?: string; overdue?: boolean; limit?: number }) {
+export async function getKnowledgeActions(params?: { project?: string; status?: string; overdue?: boolean; limit?: number }) {
   const q = new URLSearchParams()
   if (params?.project) q.set('project', params.project)
+  if (params?.status) q.set('status', params.status)
   if (params?.overdue) q.set('overdue', 'true')
   if (params?.limit) q.set('limit', String(params.limit))
   return fetchApi<KnowledgeActionsResponse>(`/api/knowledge/actions?${q}`)
+}
+
+export async function createAction(data: { title: string; project_code?: string; follow_up_date?: string; importance?: string; content?: string }) {
+  return fetchApi<{ success: boolean; action: KnowledgeAction }>('/api/knowledge/actions', {
+    method: 'POST',
+    body: JSON.stringify(data),
+  })
+}
+
+export async function updateActionStatus(id: string, status: 'open' | 'completed' | 'archived') {
+  return fetchApi<{ success: boolean; action: KnowledgeAction }>('/api/knowledge/actions', {
+    method: 'PATCH',
+    body: JSON.stringify({ id, status }),
+  })
 }
 
 export async function getKnowledgeDecisions(params?: { project?: string; limit?: number }) {
@@ -2702,6 +2700,13 @@ export interface MorningBriefingResponse {
     totalQuotes: number
     topThemes: string[]
   }
+  grants: {
+    newDiscoveries: Array<{ name: string; provider: string; fitScore: number; projects: string[]; amount: number; closesAt: string }>
+    newCount: number
+    upcomingDeadlines: Array<{ name: string; provider: string; closesAt: string; fitScore: number; daysRemaining: number }>
+    activeApplications: number
+    pipelineValue: number
+  }
   summary: {
     urgentItems: number
     meetingsToday: number
@@ -3265,4 +3270,81 @@ export interface ProjectSummaryResponse {
 export async function getProjectsSummary(project?: string) {
   const qs = project ? `?project=${encodeURIComponent(project)}` : ''
   return fetchApi<ProjectSummaryResponse>(`/api/projects/summary${qs}`)
+}
+
+// ─── Project Pulse ──────────────────────────────────────────────
+
+export interface ProjectPulse {
+  code: string
+  name: string
+  status: string
+  emailsThisWeek: number
+  emailsLastWeek: number
+  spendThisMonth: number
+  meetingsThisWeek: number
+  actionsOpen: number
+  actionsOverdue: number
+  decisionsThisMonth: number
+  pipelineValue: number
+  opportunityCount: number
+  lastActivityDate: string | null
+  activityLevel: 'active' | 'quiet' | 'dormant'
+}
+
+export async function getProjectPulse() {
+  return fetchApi<{ pulse: ProjectPulse[]; totals: { active: number; quiet: number; dormant: number } }>('/api/projects/pulse')
+}
+
+// ─── Unified Priority Inbox ─────────────────────────────────────
+
+export interface InboxItem {
+  id: string
+  type: 'overdue_action' | 'unanswered_email' | 'upcoming_deadline' | 'stale_contact'
+  title: string
+  subtitle: string | null
+  projectCode: string | null
+  urgency: 'critical' | 'high' | 'medium' | 'low'
+  score: number
+  daysOld: number | null
+  link: string | null
+  meta: Record<string, unknown>
+}
+
+export async function getInbox() {
+  return fetchApi<{ items: InboxItem[]; counts: Record<string, number> }>('/api/inbox')
+}
+
+// ─── Unified Opportunities ──────────────────────────────────────
+
+export interface UnifiedOpportunity {
+  id: string
+  source: 'grant' | 'ghl' | 'fundraising'
+  name: string
+  type: string
+  projectCodes: string[]
+  amount: { min?: number; max?: number }
+  deadline?: string
+  fitScore?: number
+  status: string
+  provider?: string
+  url?: string
+  discoveredAt?: string
+}
+
+export interface OpportunitiesSummary {
+  total: number
+  grants: number
+  ghl: number
+  fundraising: number
+  totalValue: number
+  highFit: number
+}
+
+export async function getOpportunities(params?: { project?: string; type?: string; status?: string }) {
+  const q = new URLSearchParams()
+  if (params?.project) q.set('project', params.project)
+  if (params?.type) q.set('type', params.type)
+  if (params?.status) q.set('status', params.status)
+  const query = q.toString() ? `?${q.toString()}` : ''
+  return fetchApi<{ opportunities: UnifiedOpportunity[]; summary: OpportunitiesSummary }>(`/api/opportunities${query}`)
 }

@@ -65,11 +65,14 @@ async function fetchCalendarToday() {
   const tomorrow = new Date(today)
   tomorrow.setDate(tomorrow.getDate() + 1)
 
+  // Only fetch events from Ben's calendars
+  const BEN_CALENDARS = ['benjamin@act.place', 'bk@aimementoring.com']
   const { data } = await supabase
     .from('calendar_events')
-    .select('title, start_time, end_time, event_type, location')
+    .select('title, start_time, end_time, event_type, location, google_calendar_id')
     .gte('start_time', today.toISOString())
     .lt('start_time', tomorrow.toISOString())
+    .in('google_calendar_id', BEN_CALENDARS)
     .order('start_time', { ascending: true })
 
   return (data || []).map(e => ({
@@ -86,6 +89,7 @@ async function fetchOverdueActions() {
     .from('project_knowledge')
     .select('id, project_code, title, content, follow_up_date, importance')
     .eq('action_required', true)
+    .eq('status', 'open')
     .lt('follow_up_date', todayStr())
     .order('follow_up_date', { ascending: true })
     .limit(10)
@@ -106,6 +110,7 @@ async function fetchUpcomingFollowups() {
     .from('project_knowledge')
     .select('id, project_code, title, follow_up_date, importance')
     .eq('action_required', true)
+    .eq('status', 'open')
     .gte('follow_up_date', todayStr())
     .lte('follow_up_date', futureDate(7))
     .order('follow_up_date', { ascending: true })
@@ -295,6 +300,64 @@ async function fetchCommunicationStats() {
   }
 }
 
+async function fetchGrantsSection() {
+  const yesterday = daysAgo(1)
+  const nextWeek = futureDate(7)
+
+  // New discoveries (last 24h) — column is created_at, not discovered_at; application_status not status
+  const { data: newGrants } = await supabase
+    .from('grant_opportunities')
+    .select('id, name, provider, fit_score, relevance_score, aligned_projects, amount_max, closes_at')
+    .gte('created_at', yesterday)
+    .order('relevance_score', { ascending: false })
+    .limit(5)
+
+  // Upcoming deadlines (next 7 days)
+  const { data: upcomingDeadlines } = await supabase
+    .from('grant_opportunities')
+    .select('id, name, provider, closes_at, fit_score, relevance_score, aligned_projects')
+    .not('closes_at', 'is', null)
+    .gte('closes_at', todayStr())
+    .lte('closes_at', nextWeek)
+    .order('closes_at', { ascending: true })
+    .limit(5)
+
+  // Active applications count
+  const { count: activeApps } = await supabase
+    .from('grant_applications')
+    .select('id', { count: 'exact', head: true })
+    .in('status', ['draft', 'in_progress', 'submitted', 'under_review'])
+
+  // Pipeline value
+  const { data: pipelineData } = await supabase
+    .from('grant_applications')
+    .select('amount_requested')
+    .in('status', ['draft', 'in_progress', 'submitted', 'under_review'])
+
+  const pipelineValue = (pipelineData || []).reduce((sum, a) => sum + (a.amount_requested || 0), 0)
+
+  return {
+    newDiscoveries: (newGrants || []).map(g => ({
+      name: g.name,
+      provider: g.provider,
+      fitScore: g.fit_score ?? g.relevance_score,
+      projects: g.aligned_projects || [],
+      amount: g.amount_max,
+      closesAt: g.closes_at,
+    })),
+    newCount: (newGrants || []).length,
+    upcomingDeadlines: (upcomingDeadlines || []).map(d => ({
+      name: d.name,
+      provider: d.provider,
+      closesAt: d.closes_at,
+      fitScore: d.fit_score ?? d.relevance_score,
+      daysRemaining: d.closes_at ? Math.ceil((new Date(d.closes_at).getTime() - Date.now()) / (1000 * 60 * 60 * 24)) : 0,
+    })),
+    activeApplications: activeApps || 0,
+    pipelineValue,
+  }
+}
+
 export async function GET() {
   try {
     const now = new Date()
@@ -316,6 +379,7 @@ export async function GET() {
       projectActivity,
       storytellerHighlights,
       communicationStats,
+      grantsSection,
     ] = await Promise.all([
       fetchCalendarToday(),
       fetchOverdueActions(),
@@ -326,6 +390,7 @@ export async function GET() {
       fetchProjectActivity(),
       fetchStorytellerHighlights(),
       fetchCommunicationStats(),
+      fetchGrantsSection(),
     ])
 
     const briefing = {
@@ -373,6 +438,9 @@ export async function GET() {
 
       // Storytellers
       storytellers: storytellerHighlights,
+
+      // Grants
+      grants: grantsSection,
 
       // Summary for quick glance
       summary: {

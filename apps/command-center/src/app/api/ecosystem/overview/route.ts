@@ -37,22 +37,15 @@ export async function GET() {
       .select('id, name, monetary_value, project_code, status')
       .eq('status', 'open')
 
-    // Query latest project summaries
-    const { data: summaries } = await supabase
-      .from('project_summaries')
-      .select('project_code, summary_text, stats, generated_at')
-      .order('generated_at', { ascending: false })
-      .limit(50)
+    // Query project descriptions from canonical projects table
+    const { data: projectDescs } = await supabase
+      .from('projects')
+      .select('code, description')
 
-    // Build latest summary lookup (deduplicate — keep latest per project)
-    const latestSummary: Record<string, { text: string; generatedAt: string; stats: Record<string, unknown> }> = {}
-    for (const s of summaries || []) {
-      if (!latestSummary[s.project_code]) {
-        latestSummary[s.project_code] = {
-          text: s.summary_text,
-          generatedAt: s.generated_at,
-          stats: s.stats as Record<string, unknown>,
-        }
+    const descriptionMap: Record<string, string> = {}
+    for (const p of projectDescs || []) {
+      if (p.code && p.description) {
+        descriptionMap[p.code] = p.description
       }
     }
 
@@ -81,9 +74,6 @@ export async function GET() {
       const oppCount = projectOpps.length
       const oppValue = projectOpps.reduce((sum, o) => sum + (o.monetary_value || 0), 0)
 
-      // Get AI summary
-      const summary = latestSummary[proj.code] || null
-
       return {
         code: proj.code,
         name: proj.name,
@@ -93,8 +83,7 @@ export async function GET() {
         recentComms: commCount,
         opportunities: oppCount,
         opportunityValue: oppValue,
-        summary: summary?.text || null,
-        summaryGeneratedAt: summary?.generatedAt || null,
+        summary: descriptionMap[proj.code] || null,
       }
     })
 

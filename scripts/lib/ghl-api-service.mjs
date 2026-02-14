@@ -289,6 +289,21 @@ export class GHLService {
   }
 
   /**
+   * Update an opportunity in GHL
+   *
+   * @param {string} opportunityId - GHL opportunity ID
+   * @param {Object} updates - Fields to update (name, stageId, monetaryValue, status, etc.)
+   * @returns {Promise<Object>} Updated opportunity
+   */
+  async updateOpportunity(opportunityId, updates) {
+    const data = await this.request(`/opportunities/${opportunityId}`, {
+      method: 'PUT',
+      body: JSON.stringify(updates)
+    });
+    return data.opportunity || data;
+  }
+
+  /**
    * Get all opportunities across all pipelines
    *
    * @returns {Promise<Array>} All opportunities

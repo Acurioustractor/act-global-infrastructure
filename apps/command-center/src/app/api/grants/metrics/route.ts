@@ -38,8 +38,8 @@ export async function GET() {
     // Upcoming deadlines (90 days)
     const { data: opps } = await supabase
       .from('grant_opportunities')
-      .select('name, closes_at, fit_score')
-      .eq('status', 'open')
+      .select('name, closes_at, fit_score, relevance_score')
+      .not('closes_at', 'is', null)
       .gte('closes_at', now.toISOString().split('T')[0])
       .order('closes_at', { ascending: true })
       .limit(10)
@@ -54,7 +54,7 @@ export async function GET() {
       upcomingDeadlines: (opps || []).map(o => ({
         name: o.name,
         closesAt: o.closes_at,
-        fitScore: o.fit_score,
+        fitScore: o.fit_score ?? o.relevance_score,
         daysRemaining: Math.round((new Date(o.closes_at).getTime() - now.getTime()) / (1000 * 60 * 60 * 24)),
       })),
     })

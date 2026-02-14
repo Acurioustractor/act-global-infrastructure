@@ -4,16 +4,18 @@
  *
  * Runs the full knowledge pipeline in sequence:
  *   Step 1: Embed — Generate embeddings for new project_knowledge + knowledge_chunks
- *   Step 2: Align — Cross-source vector similarity matching (KnowledgeAligner)
- *   Step 3: Consolidate — Merge near-duplicate chunks, run decay (MemoryLifecycle)
- *   Step 4: Graph — Auto-link entities and knowledge items (KnowledgeGraph)
+ *   Step 2: Extract — LLM-powered decision/action extraction from meetings
+ *   Step 3: Align — Cross-source vector similarity matching (KnowledgeAligner)
+ *   Step 4: Consolidate — Merge near-duplicate chunks, run decay (MemoryLifecycle)
+ *   Step 5: Graph — Auto-link entities and knowledge items (KnowledgeGraph)
  *
  * Each step is independent and will not block subsequent steps on failure.
  * Results are logged to api_usage table for monitoring.
  *
  * Usage:
  *   node scripts/knowledge-pipeline.mjs              # Full pipeline
- *   node scripts/knowledge-pipeline.mjs --step embed # Single step
+ *   node scripts/knowledge-pipeline.mjs --step embed       # Single step
+ *   node scripts/knowledge-pipeline.mjs --step extract     # LLM extraction only
  *   node scripts/knowledge-pipeline.mjs --step align
  *   node scripts/knowledge-pipeline.mjs --step consolidate
  *   node scripts/knowledge-pipeline.mjs --step graph
@@ -26,6 +28,7 @@
 import '../lib/load-env.mjs';
 import { createClient } from '@supabase/supabase-js';
 import { KnowledgeAligner } from './lib/knowledge-aligner.mjs';
+import { KnowledgeExtractor } from './lib/knowledge-extractor.mjs';
 import { MemoryLifecycle } from './lib/memory-lifecycle.mjs';
 import { KnowledgeGraph } from './lib/knowledge-graph.mjs';
 
@@ -41,7 +44,7 @@ const stepFilter = args.includes('--step') ? args[args.indexOf('--step') + 1] : 
 const dryRun = args.includes('--dry-run');
 const verbose = args.includes('--verbose') || args.includes('-v');
 
-const steps = ['embed', 'align', 'consolidate', 'graph'];
+const steps = ['embed', 'extract', 'align', 'consolidate', 'graph'];
 
 async function main() {
   const start = Date.now();
@@ -92,6 +95,8 @@ async function runStep(step) {
   switch (step) {
     case 'embed':
       return await runEmbed();
+    case 'extract':
+      return await runExtract();
     case 'align':
       return await runAlign();
     case 'consolidate':
@@ -128,7 +133,21 @@ async function runEmbed() {
   return { missing_knowledge: missingKnowledge || 0, missing_chunks: missingChunks || 0 };
 }
 
-// Step 2: Cross-source alignment
+// Step 2: LLM extraction of decisions/actions from meetings
+async function runExtract() {
+  const extractor = new KnowledgeExtractor({
+    supabase,
+    verbose,
+    dryRun,
+    maxPerRun: 10,
+  });
+
+  // Look back 72 hours to catch meetings synced since last run
+  const result = await extractor.extractFromMeetings(72);
+  return result;
+}
+
+// Step 3: Cross-source alignment
 async function runAlign() {
   if (dryRun) {
     const { count } = await supabase

@@ -799,7 +799,7 @@ export default function CompendiumProjectPage({ params }: PageParams) {
                 {/* Quick Links */}
                 <div className="pt-2 flex items-center gap-4">
                   <Link
-                    href="/pipeline"
+                    href="/opportunities"
                     className="flex items-center gap-1.5 text-xs text-indigo-400 hover:text-indigo-300 transition-colors"
                   >
                     <TrendingUp className="h-3 w-3" />

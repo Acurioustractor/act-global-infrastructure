@@ -1,7 +1,7 @@
 'use client'
 
 import * as React from 'react'
-import { useQuery, useQueryClient } from '@tanstack/react-query'
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import Link from 'next/link'
 import {
   Mail,
@@ -22,6 +22,9 @@ import {
   ThumbsDown,
   FolderPlus,
   X,
+  Plus,
+  Loader2,
+  ChevronDown,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import {
@@ -31,6 +34,7 @@ import {
   linkContactProject,
   unlinkContactProject,
   getEcosystemProjectCodes,
+  createAction,
   type ActionItem,
 } from '@/lib/api'
 
@@ -199,9 +203,12 @@ export function ActionFeed({ maxItems = 15 }: ActionFeedProps) {
         </div>
       )}
 
+      {/* Inline quick-add */}
+      <InlineQuickAdd onCreated={() => queryClient.invalidateQueries({ queryKey: ['action-feed'] })} />
+
       {actions.length > 0 && (
         <Link
-          href="/intelligence"
+          href="/knowledge/actions"
           className="btn-glass w-full mt-4 flex items-center justify-center gap-2 text-sm"
         >
           View All Actions
@@ -454,5 +461,98 @@ function ProjectPicker({
         ))
       )}
     </div>
+  )
+}
+
+function InlineQuickAdd({ onCreated }: { onCreated: () => void }) {
+  const [open, setOpen] = React.useState(false)
+  const [title, setTitle] = React.useState('')
+  const [projectCode, setProjectCode] = React.useState('')
+  const inputRef = React.useRef<HTMLInputElement>(null)
+
+  const { data: projectsData } = useQuery({
+    queryKey: ['ecosystem', 'project-codes'],
+    queryFn: getEcosystemProjectCodes,
+    staleTime: Infinity,
+    enabled: open,
+  })
+
+  const mutation = useMutation({
+    mutationFn: () => createAction({
+      title,
+      project_code: projectCode || undefined,
+      importance: 'medium',
+    }),
+    onSuccess: () => {
+      setTitle('')
+      setProjectCode('')
+      setOpen(false)
+      onCreated()
+    },
+  })
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!title.trim()) return
+    mutation.mutate()
+  }
+
+  React.useEffect(() => {
+    if (open && inputRef.current) inputRef.current.focus()
+  }, [open])
+
+  if (!open) {
+    return (
+      <button
+        onClick={() => setOpen(true)}
+        className="w-full mt-2 flex items-center justify-center gap-1.5 py-2 rounded-lg text-xs text-white/30 hover:text-white/50 hover:bg-white/5 transition-colors"
+      >
+        <Plus className="h-3.5 w-3.5" />
+        Add action
+      </button>
+    )
+  }
+
+  return (
+    <form onSubmit={handleSubmit} className="mt-2 p-3 rounded-lg bg-white/5 border border-white/10">
+      <div className="flex items-center gap-2">
+        <input
+          ref={inputRef}
+          type="text"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          placeholder="New action..."
+          className="flex-1 bg-transparent text-sm text-white placeholder-white/30 focus:outline-none"
+          onKeyDown={(e) => { if (e.key === 'Escape') { setOpen(false); setTitle('') } }}
+        />
+        <div className="relative">
+          <select
+            value={projectCode}
+            onChange={(e) => setProjectCode(e.target.value)}
+            className="appearance-none bg-white/5 border border-white/10 rounded px-2 py-1 pr-6 text-[10px] text-white/60 focus:outline-none"
+          >
+            <option value="">Project</option>
+            {(projectsData?.projects || []).map((p) => (
+              <option key={p.code} value={p.code}>{p.code}</option>
+            ))}
+          </select>
+          <ChevronDown className="absolute right-1 top-1/2 -translate-y-1/2 h-2.5 w-2.5 text-white/30 pointer-events-none" />
+        </div>
+        <button
+          type="submit"
+          disabled={!title.trim() || mutation.isPending}
+          className="px-2.5 py-1 rounded bg-emerald-500/20 text-emerald-400 text-xs font-medium hover:bg-emerald-500/30 transition-colors disabled:opacity-40"
+        >
+          {mutation.isPending ? <Loader2 className="h-3 w-3 animate-spin" /> : 'Add'}
+        </button>
+        <button
+          type="button"
+          onClick={() => { setOpen(false); setTitle('') }}
+          className="text-white/30 hover:text-white/50"
+        >
+          <X className="h-3.5 w-3.5" />
+        </button>
+      </div>
+    </form>
   )
 }

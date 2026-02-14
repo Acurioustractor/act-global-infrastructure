@@ -2,7 +2,6 @@ import {
   Sun,
   Calendar,
   Users,
-  GitBranch,
   Layers,
   FolderKanban,
   Scale,
@@ -20,9 +19,6 @@ import {
   Wallet,
   BarChart3,
   Landmark,
-  Building2,
-  Shield,
-  Rocket,
   Bot,
   Zap,
   Briefcase,
@@ -32,8 +28,8 @@ import {
   Settings,
   Clock,
   Calculator,
-  Trophy,
   Database,
+  Telescope,
 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 
@@ -72,7 +68,7 @@ export const navStructure: SidebarNavGroup[] = [
     label: 'Relationships',
     items: [
       { href: '/people', label: 'People', icon: Users },
-      { href: '/pipeline', label: 'Pipeline', icon: GitBranch },
+      { href: '/opportunities', label: 'Pipeline & Grants', icon: Telescope },
       { href: '/ecosystem', label: 'Ecosystem', icon: Layers },
     ],
     defaultExpanded: true,
@@ -129,11 +125,7 @@ export const navStructure: SidebarNavGroup[] = [
           { href: '/finance/data-quality', label: 'Data Quality', icon: Database, color: 'text-cyan-400', bg: 'bg-cyan-500/20' },
         ],
       },
-      { href: '/grants', label: 'Grants', icon: Trophy, color: 'text-amber-400', bg: 'bg-amber-500/20' },
       { href: '/team', label: 'Team & Resources', icon: Users, color: 'text-cyan-400', bg: 'bg-cyan-500/20' },
-      { href: '/assets', label: 'Assets & Property', icon: Building2, color: 'text-orange-400', bg: 'bg-orange-500/20' },
-      { href: '/admin', label: 'Compliance', icon: Shield, color: 'text-red-400', bg: 'bg-red-500/20' },
-      { href: '/business-dev', label: 'Business Dev', icon: Rocket, color: 'text-purple-400', bg: 'bg-purple-500/20' },
     ],
     defaultExpanded: false,
   },

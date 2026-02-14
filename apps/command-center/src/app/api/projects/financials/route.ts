@@ -6,7 +6,7 @@ export async function GET() {
     // Fetch project financials, R&D expenses, and tagging coverage in parallel
     const [financialsResult, rdResult, coverageResult] = await Promise.all([
       supabase.from('v_project_financials').select('*'),
-      supabase.from('v_rd_expenses').select('vendor_name, total, date'),
+      supabase.from('xero_transactions').select('vendor_name, total, date').eq('project_code', 'ACT-RD'),
       supabase.from('xero_transactions').select('id, project_code', { count: 'exact', head: false }),
     ])
 

@@ -982,7 +982,7 @@ export default function ProjectPage({ params, searchParams }: PageParams) {
               <GitBranch className="h-12 w-12 text-white/20 mx-auto mb-4" />
               <h2 className="text-xl font-semibold text-white/60 mb-2">No pipeline opportunities</h2>
               <p className="text-white/40">No GHL opportunities linked to this project yet.</p>
-              <Link href="/pipeline" className="inline-flex items-center gap-2 mt-4 text-sm text-indigo-400 hover:text-indigo-300 transition-colors">
+              <Link href="/opportunities" className="inline-flex items-center gap-2 mt-4 text-sm text-indigo-400 hover:text-indigo-300 transition-colors">
                 View full pipeline &rarr;
               </Link>
             </div>

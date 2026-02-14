@@ -6,7 +6,6 @@ export async function GET() {
     const { data, error } = await supabase
       .from('grant_opportunities')
       .select('*')
-      .eq('status', 'open')
       .order('closes_at', { ascending: true })
 
     if (error) throw error
@@ -20,8 +19,7 @@ export async function GET() {
         amountMin: o.amount_min,
         amountMax: o.amount_max,
         closesAt: o.closes_at,
-        fitScore: o.fit_score,
-        eligibilityScore: o.eligibility_score,
+        fitScore: o.fit_score ?? o.relevance_score,
         alignedProjects: o.aligned_projects,
         categories: o.categories,
         url: o.url,

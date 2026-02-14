@@ -46,7 +46,7 @@ export function GrantsPipeline() {
           <span className="text-sm text-green-400 font-medium">
             ${totalValue.toLocaleString()}
           </span>
-          <Link href="/pipeline" className="text-xs text-indigo-400 hover:text-indigo-300">
+          <Link href="/opportunities" className="text-xs text-indigo-400 hover:text-indigo-300">
             Board &rarr;
           </Link>
         </div>
@@ -62,7 +62,7 @@ export function GrantsPipeline() {
           {pipelineStats.slice(0, 4).map((pipeline) => (
             <Link
               key={pipeline.id}
-              href="/pipeline"
+              href="/opportunities"
               className="glass-card-sm p-3 block hover:border-green-500/30 transition-all"
             >
               <div className="flex items-center justify-between mb-2">
@@ -93,7 +93,7 @@ export function GrantsPipeline() {
                 .map((opp) => (
                   <Link
                     key={opp.id}
-                    href="/pipeline"
+                    href="/opportunities"
                     className="flex items-center justify-between py-1.5 px-1 -mx-1 rounded hover:bg-white/5 transition-colors"
                   >
                     <span className="text-sm text-white truncate flex-1">{opp.name}</span>

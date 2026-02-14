@@ -151,6 +151,12 @@ const cronScripts = [
     cron_restart: '30 9 * * *', // Daily 9:30am AEST (after finance-sync at 8:30am)
   },
   {
+    name: 'email-to-knowledge',
+    script: 'scripts/email-to-knowledge.mjs',
+    args: '--since 1d --limit 50',
+    cron_restart: '10 */6 * * *', // Every 6h +10min (after gmail-sync at :00)
+  },
+  {
     name: 'auto-tag-emails',
     script: 'scripts/tag-emails-by-project.mjs',
     args: '--apply',
@@ -166,6 +172,27 @@ const cronScripts = [
     name: 'project-health',
     script: 'scripts/compute-project-health.mjs',
     args: '--apply',
+    cron_restart: '0 */6 * * *', // Every 6 hours
+  },
+  {
+    name: 'engagement-status',
+    script: 'scripts/update-engagement-status.mjs',
+    args: '--apply',
+    cron_restart: '0 11 * * *', // Daily 11am AEST (after GHL align + health)
+  },
+  {
+    name: 'weekly-digest',
+    script: 'scripts/weekly-digest.mjs',
+    cron_restart: '0 18 * * 0', // Sunday 6pm AEST
+  },
+  {
+    name: 'discover-grants',
+    script: 'scripts/discover-grants.mjs',
+    cron_restart: '0 6 * * *', // Daily 6am AEST
+  },
+  {
+    name: 'check-grant-deadlines',
+    script: 'scripts/check-grant-deadlines.mjs',
     cron_restart: '0 */6 * * *', // Every 6 hours
   },
 ];

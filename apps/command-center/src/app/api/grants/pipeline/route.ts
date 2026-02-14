@@ -30,7 +30,7 @@ export async function GET() {
     // Fetch linked opportunities
     const { data: opportunities } = await supabase
       .from('grant_opportunities')
-      .select('id, name, provider, closes_at, fit_score, aligned_projects, url')
+      .select('id, name, provider, closes_at, fit_score, relevance_score, aligned_projects, url')
 
     const oppMap: Record<string, any> = {}
     for (const opp of opportunities || []) {
@@ -76,7 +76,7 @@ export async function GET() {
         submittedAt: app.submitted_at,
         provider: opp?.provider || null,
         deadline: opp?.closes_at || null,
-        fitScore: opp?.fit_score || null,
+        fitScore: opp?.fit_score ?? opp?.relevance_score ?? null,
         url: opp?.url || null,
         ghlStage: ghl?.stage_name || null,
         ghlValue: ghl?.monetary_value || null,

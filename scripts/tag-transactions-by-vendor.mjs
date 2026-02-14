@@ -82,10 +82,17 @@ function buildKeywordMap() {
   return map;
 }
 
+// Normalize smart quotes/apostrophes to ASCII for consistent matching
+function normalizeText(text) {
+  return text.toLowerCase().trim()
+    .replace(/[\u2018\u2019\u201A\u201B]/g, "'")  // smart single quotes → '
+    .replace(/[\u201C\u201D\u201E\u201F]/g, '"');  // smart double quotes → "
+}
+
 // Tier 1: Match contact_name against vendor aliases
 function matchVendor(contactName, vendorMap) {
   if (!contactName) return null;
-  const lower = contactName.toLowerCase().trim();
+  const lower = normalizeText(contactName);
 
   for (const vendor of vendorMap) {
     for (const alias of vendor.aliases) {

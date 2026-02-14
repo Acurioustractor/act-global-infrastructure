@@ -237,13 +237,22 @@ async function syncOpportunities(supabase, ghl) {
     const pipelines = await ghl.getPipelines();
     const pipelineMap = new Map(pipelines.map(p => [p.id, p.name]));
 
+    // Build stage ID -> name lookup from pipeline stages
+    const stageMap = new Map();
+    for (const pipeline of pipelines) {
+      for (const stage of (pipeline.stages || [])) {
+        stageMap.set(stage.id, stage.name);
+      }
+    }
+
     // Fetch opportunities from each pipeline
     const allOpportunities = [];
     for (const pipeline of pipelines) {
       const opportunities = await ghl.getOpportunities(pipeline.id);
       allOpportunities.push(...opportunities.map(opp => ({
         ...opp,
-        pipelineName: pipeline.name
+        pipelineName: pipeline.name,
+        resolvedStageName: stageMap.get(opp.pipelineStageId) || null,
       })));
     }
 
@@ -259,7 +268,7 @@ async function syncOpportunities(supabase, ghl) {
           ghl_stage_id: opp.pipelineStageId,
           name: opp.name,
           pipeline_name: opp.pipelineName,
-          stage_name: opp.stageName,
+          stage_name: opp.resolvedStageName || opp.stageName,
           status: opp.status,
           monetary_value: opp.monetaryValue,
           custom_fields: opp.customFields || {},

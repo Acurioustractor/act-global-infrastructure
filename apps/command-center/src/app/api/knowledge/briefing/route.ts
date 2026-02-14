@@ -57,6 +57,7 @@ export async function GET(request: NextRequest) {
         .select('id, title, project_code, project_name, participants, follow_up_date, importance')
         .eq('knowledge_type', 'action')
         .eq('action_required', true)
+        .eq('status', 'open')
         .lt('follow_up_date', todayISO)
         .order('follow_up_date', { ascending: true })
         .limit(20),
@@ -66,6 +67,7 @@ export async function GET(request: NextRequest) {
         .select('id, title, project_code, project_name, participants, follow_up_date, importance')
         .eq('knowledge_type', 'action')
         .eq('action_required', true)
+        .eq('status', 'open')
         .gte('follow_up_date', todayISO)
         .lte('follow_up_date', new Date(Date.now() + 7 * 86400000).toISOString().split('T')[0])
         .order('follow_up_date', { ascending: true })

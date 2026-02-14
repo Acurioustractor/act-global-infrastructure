@@ -14,28 +14,22 @@ import {
   ChevronRight,
   FolderKanban,
   BookOpen,
-  ArrowUpRight,
   User,
   FileQuestion,
   Brain,
   MessageSquare,
   ListChecks,
   Gavel,
-  UserCheck,
   Send,
   Edit3,
   Check,
 } from 'lucide-react'
 import {
   getCalendarEvents,
-  getEcosystemOverview,
-  getRelationshipNudges,
   saveCalendarNote,
   search,
   searchKnowledge,
   type KnowledgeSearchHit,
-  type EcosystemProject,
-  type RelationshipNudge,
 } from '@/lib/api'
 import { cn, getGreeting } from '@/lib/utils'
 import { QuickStats } from '@/components/today/quick-stats'
@@ -45,24 +39,13 @@ import { UpcomingDeadlines } from '@/components/today/upcoming-deadlines'
 import { FinanceSummary } from '@/components/today/finance-summary'
 import { BusinessTasks } from '@/components/today/business-tasks'
 import { MorningBriefing } from '@/components/today/morning-briefing'
-import { ProjectHealthGrid } from '@/components/today/project-health-grid'
-import { RecentActivity } from '@/components/today/recent-activity'
+import { ProjectPulseGrid } from '@/components/today/project-pulse'
+import { PriorityInbox } from '@/components/today/priority-inbox'
+import { WeeklyDigestCard } from '@/components/today/weekly-digest'
+import { EcosystemPulse } from '@/components/today/ecosystem-pulse'
+import { PartnerTouchpoints } from '@/components/today/partner-touchpoints'
 
 const REFRESH_INTERVAL = 30 * 1000
-
-// Project color mapping
-const projectColors: Record<string, string> = {
-  blue: 'bg-blue-500/20 text-blue-400',
-  pink: 'bg-pink-500/20 text-pink-400',
-  green: 'bg-green-500/20 text-green-400',
-  amber: 'bg-amber-500/20 text-amber-400',
-  purple: 'bg-purple-500/20 text-purple-400',
-  orange: 'bg-orange-500/20 text-orange-400',
-  cyan: 'bg-cyan-500/20 text-cyan-400',
-  teal: 'bg-teal-500/20 text-teal-400',
-  slate: 'bg-slate-500/20 text-slate-400',
-  indigo: 'bg-indigo-500/20 text-indigo-400',
-}
 
 export default function TodayPage() {
   const today = format(new Date(), 'yyyy-MM-dd')
@@ -142,21 +125,11 @@ export default function TodayPage() {
     refetchInterval: REFRESH_INTERVAL,
   })
 
-  const { data: ecosystemData } = useQuery({
-    queryKey: ['ecosystem', 'overview'],
-    queryFn: getEcosystemOverview,
-    refetchInterval: REFRESH_INTERVAL,
-  })
-
-  const { data: nudgesData } = useQuery({
-    queryKey: ['relationships', 'nudges'],
-    queryFn: () => getRelationshipNudges(5),
-    refetchInterval: REFRESH_INTERVAL * 4,
-  })
-
-  const events = calendarData?.events || []
-  const projects = ecosystemData?.projects || []
-  const nudges = nudgesData?.nudges || []
+  // Filter calendar to Ben's calendars only
+  const BEN_CALENDARS = ['benjamin@act.place', 'bk@aimementoring.com']
+  const events = (calendarData?.events || []).filter((e: any) =>
+    !e.google_calendar_id || BEN_CALENDARS.includes(e.google_calendar_id)
+  )
 
   return (
     <div className="min-h-screen p-4 md:p-8">
@@ -247,35 +220,15 @@ export default function TodayPage() {
             )}
           </div>
 
-          <PeopleToReach nudges={nudges} />
           <CommunicationsNeeded />
+          <PartnerTouchpoints />
         </div>
 
-        {/* CENTER COLUMN: Projects + Activity + Health */}
+        {/* CENTER COLUMN: Ecosystem Pulse + Project Pulse + Priority Inbox */}
         <div className="order-2 lg:col-span-4 space-y-4 md:space-y-6">
-          {/* Projects Overview */}
-          <div className="glass-card p-5 md:p-6">
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="text-lg font-semibold text-white flex items-center gap-2">
-                <FolderKanban className="h-5 w-5 text-indigo-400" />
-                Projects
-              </h2>
-              <Link href="/projects" className="text-xs text-indigo-400 hover:text-indigo-300 flex items-center gap-1">
-                All <ArrowUpRight className="h-3 w-3" />
-              </Link>
-            </div>
-            <div className="grid grid-cols-2 gap-2">
-              {projects
-                .filter((p) => p.contacts > 0 || p.recentComms > 0 || p.opportunities > 0 || p.status === 'active')
-                .slice(0, 8)
-                .map((project) => (
-                  <ProjectCard key={project.code} project={project} />
-                ))}
-            </div>
-          </div>
-
-          <ProjectHealthGrid />
-          <RecentActivity />
+          <EcosystemPulse />
+          <ProjectPulseGrid />
+          <PriorityInbox />
 
           {/* Wiki Quick Access */}
           <Link href="/wiki" className="glass-card p-5 block hover:border-indigo-500/30 transition-all group">
@@ -297,13 +250,14 @@ export default function TodayPage() {
           <FinanceSummary />
           <GrantsPipeline />
           <UpcomingDeadlines />
+          <WeeklyDigestCard />
           <BusinessTasks />
 
           {/* Quick Links */}
           <div className="glass-card p-5">
             <h2 className="font-semibold text-white mb-4">Quick Links</h2>
             <div className="space-y-2">
-              <Link href="/pipeline" className="flex items-center gap-3 py-2 px-2 rounded-lg hover:bg-white/5 transition-colors">
+              <Link href="/opportunities" className="flex items-center gap-3 py-2 px-2 rounded-lg hover:bg-white/5 transition-colors">
                 <FolderKanban className="h-4 w-4 text-indigo-400" />
                 <span className="text-sm text-white">Pipeline Board</span>
               </Link>
@@ -322,96 +276,6 @@ export default function TodayPage() {
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  )
-}
-
-// ─── Project Card ─────────────────────────────────────────────────
-
-function ProjectCard({ project }: { project: EcosystemProject }) {
-  const slug = project.name.toLowerCase().replace(/\s+/g, '-')
-  const colorClasses = projectColors[project.color] || projectColors.indigo
-  const hasActivity = project.contacts > 0 || project.recentComms > 0 || project.opportunities > 0
-
-  return (
-    <Link
-      href={`/compendium/${slug}`}
-      className="glass-card-sm p-3 hover:border-indigo-500/30 transition-all group"
-    >
-      <div className="flex items-center gap-2 mb-1.5">
-        <div className={cn('w-6 h-6 rounded-md flex items-center justify-center text-[10px] font-bold', colorClasses)}>
-          {project.code}
-        </div>
-        {project.status !== 'active' && (
-          <span className="text-[9px] px-1 py-0.5 rounded bg-white/10 text-white/40">{project.status}</span>
-        )}
-      </div>
-      <p className="text-sm font-medium text-white truncate group-hover:text-indigo-300 transition-colors">
-        {project.name}
-      </p>
-      {project.summary && (
-        <p className="text-[11px] text-white/40 mt-1 line-clamp-2 leading-relaxed">
-          {project.summary.substring(0, 120)}...
-        </p>
-      )}
-      {hasActivity && (
-        <div className="flex items-center gap-2 mt-1">
-          {project.contacts > 0 && (
-            <span className="text-[10px] text-white/40">{project.contacts} contacts</span>
-          )}
-          {project.opportunities > 0 && (
-            <span className="text-[10px] text-green-400">{project.opportunities} opps</span>
-          )}
-        </div>
-      )}
-    </Link>
-  )
-}
-
-// ─── People to Reach Card ────────────────────────────────────────
-
-function PeopleToReach({ nudges }: { nudges: RelationshipNudge[] }) {
-  if (nudges.length === 0) return null
-
-  return (
-    <div className="glass-card p-5">
-      <div className="flex items-center justify-between mb-4">
-        <h2 className="font-semibold text-white flex items-center gap-2">
-          <UserCheck className="h-5 w-5 text-amber-400" />
-          People to Reach
-        </h2>
-        <Link href="/people" className="text-xs text-indigo-400 hover:text-indigo-300 flex items-center gap-1">
-          All <ArrowUpRight className="h-3 w-3" />
-        </Link>
-      </div>
-      <div className="space-y-3">
-        {nudges.map((nudge) => (
-          <div key={nudge.id} className="glass-card-sm p-3">
-            <div className="flex items-center gap-2 mb-1">
-              <div className="w-7 h-7 rounded-full bg-amber-500/20 flex items-center justify-center">
-                <User className="h-3.5 w-3.5 text-amber-400" />
-              </div>
-              <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium text-white truncate">{nudge.name}</p>
-                {nudge.company && (
-                  <p className="text-[10px] text-white/40 truncate">{nudge.company}</p>
-                )}
-              </div>
-              {nudge.daysSinceContact != null && (
-                <span className={cn(
-                  'text-[10px] px-1.5 py-0.5 rounded-full shrink-0',
-                  nudge.daysSinceContact > 60 ? 'bg-red-500/20 text-red-400' :
-                  nudge.daysSinceContact > 30 ? 'bg-amber-500/20 text-amber-400' :
-                  'bg-blue-500/20 text-blue-400'
-                )}>
-                  {nudge.daysSinceContact}d ago
-                </span>
-              )}
-            </div>
-            <p className="text-[11px] text-white/50 mt-1">{nudge.suggestedAction}</p>
-          </div>
-        ))}
       </div>
     </div>
   )
