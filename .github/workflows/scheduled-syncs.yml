@@ -156,6 +156,8 @@ jobs:
         env:
           SUPABASE_SHARED_URL: ${{ secrets.SUPABASE_SHARED_URL }}
           SUPABASE_SHARED_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SHARED_SERVICE_ROLE_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
         run: node scripts/calculate-project-health.mjs
 
   # ========================================

@@ -161,7 +161,7 @@ async function main() {
     console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
     console.log('✅ DEPLOYMENT LOGGED');
     console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-    console.log(`\n📊 Deployment: ${deploymentName}`);
+    console.log(`\n📊 Deployment: ${PROJECT_NAME} - ${VERSION || 'latest'}`);
     console.log(`   Status: ${healthCheck.status}`);
     console.log(`   Health: ${healthCheck.health}`);
     console.log(`\n📋 View in Notion: https://www.notion.so/${dbIds.deployments.replace(/-/g, '')}\n`);
