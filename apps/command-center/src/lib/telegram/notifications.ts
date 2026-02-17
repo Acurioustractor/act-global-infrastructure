@@ -1,5 +1,6 @@
 import { Bot } from 'grammy'
 import { supabase } from '@/lib/supabase'
+import { getBrisbaneDate, getBrisbaneNow, getBrisbaneDateOffset } from '@/lib/timezone'
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // CORE NOTIFICATION SENDER
@@ -70,9 +71,9 @@ export async function sendDailyBriefing(): Promise<{ sent: number; errors: strin
 }
 
 async function buildDailyBriefing(): Promise<string> {
-  const now = new Date()
-  const today = now.toISOString().split('T')[0]
-  const weekFromNow = new Date(now.getTime() + 7 * 86400000).toISOString().split('T')[0]
+  const now = getBrisbaneNow()
+  const today = getBrisbaneDate()
+  const weekFromNow = getBrisbaneDateOffset(7)
   const fourteenDaysAgo = new Date(now.getTime() - 14 * 86400000).toISOString()
 
   const [calendar, overdue, followUps, staleContacts, grants] = await Promise.all([
@@ -260,10 +261,10 @@ async function buildDailyBriefing(): Promise<string> {
 export async function checkGrantAlerts(): Promise<{ sent: number; alerts: string[] }> {
   const chatIds = getNotifyChatIds()
   const alerts: string[] = []
-  const now = new Date()
+  const now = getBrisbaneNow()
   const yesterday = new Date(now.getTime() - 24 * 60 * 60 * 1000).toISOString()
-  const weekFromNow = new Date(now.getTime() + 7 * 86400000).toISOString().split('T')[0]
-  const today = now.toISOString().split('T')[0]
+  const weekFromNow = getBrisbaneDateOffset(7)
+  const today = getBrisbaneDate()
 
   // New grants discovered in last 24h
   const { data: newGrants } = await supabase
@@ -343,11 +344,11 @@ export async function checkGrantAlerts(): Promise<{ sent: number; alerts: string
 export async function checkFinanceAlerts(): Promise<{ sent: number; alerts: string[] }> {
   const chatIds = getNotifyChatIds()
   const alerts: string[] = []
-  const now = new Date()
+  const now = getBrisbaneNow()
   const sevenDaysAgo = new Date(now.getTime() - 7 * 86400000).toISOString()
 
   // Overdue invoices (receivables past due date)
-  const today = now.toISOString().split('T')[0]
+  const today = getBrisbaneDate()
   const { data: overdueInvoices } = await supabase
     .from('xero_invoices')
     .select('invoice_number, contact_name, amount_due, due_date')
@@ -439,7 +440,7 @@ export async function sendReflectionPrompt(): Promise<{ sent: number; errors: st
   const errors: string[] = []
   let sent = 0
 
-  const today = new Date().toISOString().split('T')[0]
+  const today = getBrisbaneDate()
 
   for (const chatId of chatIds) {
     try {

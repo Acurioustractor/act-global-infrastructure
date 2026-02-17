@@ -5,6 +5,7 @@ import { supabase } from './supabase'
 import { readFileSync } from 'fs'
 import { join } from 'path'
 import { savePendingAction, type SerializablePendingAction } from './telegram/pending-action-state'
+import { getBrisbaneDate, getBrisbaneNow, getBrisbaneDateOffset } from './timezone'
 
 // Helper: load project codes from the projects table
 let _projectCodesCache: Record<string, any> | null = null
@@ -1269,10 +1270,10 @@ async function executeGetDailyBriefing(input: {
   detail_level?: string
 }): Promise<string> {
   const days = input.lookback_days || 7
-  const now = new Date()
+  const now = getBrisbaneNow()
   const lookback = new Date(now.getTime() - days * 86400000).toISOString()
-  const today = now.toISOString().split('T')[0]
-  const futureDate = new Date(now.getTime() + days * 86400000).toISOString().split('T')[0]
+  const today = getBrisbaneDate()
+  const futureDate = getBrisbaneDateOffset(days)
 
   // Run all queries in parallel
   const [overdue, upcoming, meetings, relationships, projects] = await Promise.all([
@@ -1645,12 +1646,12 @@ async function executeGetCalendarEvents(input: {
   start_date?: string
   end_date?: string
 }): Promise<string> {
-  const now = new Date()
-  const startDate = input.start_date || now.toISOString().split('T')[0]
+  const startDate = input.start_date || getBrisbaneDate()
   const endDate = input.end_date || startDate
 
-  const dayStart = `${startDate}T00:00:00.000Z`
-  const dayEnd = `${endDate}T23:59:59.999Z`
+  // Use AEST boundaries (UTC+10) so "today" means today in Brisbane
+  const dayStart = `${startDate}T00:00:00+10:00`
+  const dayEnd = `${endDate}T23:59:59+10:00`
 
   try {
     const { data, error } = await supabase
@@ -2974,8 +2975,8 @@ async function executeGetXeroTransactions(input: {
   limit?: number
 }): Promise<string> {
   const limit = input.limit || 25
-  const endDate = input.end_date || new Date().toISOString().split('T')[0]
-  const startDate = input.start_date || new Date(Date.now() - 90 * 86400000).toISOString().split('T')[0]
+  const endDate = input.end_date || getBrisbaneDate()
+  const startDate = input.start_date || getBrisbaneDateOffset(-90)
 
   try {
     let query = supabase
@@ -3052,7 +3053,7 @@ async function executeGetXeroTransactions(input: {
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 async function executeGetDayContext(input: { date?: string }): Promise<string> {
-  const date = input.date || new Date().toISOString().split('T')[0]
+  const date = input.date || getBrisbaneDate()
 
   try {
     const [calendar, comms, knowledge, actions] = await Promise.all([
@@ -3123,7 +3124,7 @@ async function executeSaveDailyReflection(
 ): Promise<string> {
   if (!chatId) return JSON.stringify({ error: 'Reflections require Telegram context.' })
 
-  const today = new Date().toISOString().split('T')[0]
+  const today = getBrisbaneDate()
 
   try {
     // Gather day stats for enrichment
@@ -3400,12 +3401,12 @@ async function executeSaveWritingDraft(input: {
     .replace(/\s+/g, '-')
     .replace(/-+/g, '-')
     .slice(0, 60)
-  const date = new Date().toISOString().split('T')[0]
+  const date = getBrisbaneDate()
   const filename = `${date}-${slug}.md`
   const filepath = `thoughts/writing/drafts/${filename}`
 
   // Build markdown content
-  const now = new Date().toISOString()
+  const now = getBrisbaneNow().toISOString()
   const projectLine = project ? `\nproject: "${project}"` : ''
   const tagLine = tags?.length ? `\ntags: [${tags.map(t => `"${t}"`).join(', ')}]` : ''
 
@@ -3553,12 +3554,12 @@ async function executeSavePlanningDoc(input: {
     .replace(/\s+/g, '-')
     .replace(/-+/g, '-')
     .slice(0, 60)
-  const date = new Date().toISOString().split('T')[0]
+  const date = getBrisbaneDate()
   const filename = `${date}-${slug}.md`
   const filepath = `thoughts/planning/${horizon}/${filename}`
 
   // Build frontmatter
-  const now = new Date().toISOString()
+  const now = getBrisbaneNow().toISOString()
   const projectLine = project ? `\nproject: "${project}"` : ''
   const horizonTemplates: Record<string, string> = {
     daily: 'type: daily-plan\nreview_cadence: daily',
@@ -4605,8 +4606,8 @@ async function executeGetUpcomingDeadlines(input: {
 }): Promise<string> {
   const daysAhead = input.days_ahead || 30
   const category = input.category || 'all'
-  const cutoff = new Date(Date.now() + daysAhead * 86400000).toISOString().split('T')[0]
-  const today = new Date().toISOString().split('T')[0]
+  const cutoff = getBrisbaneDateOffset(daysAhead)
+  const today = getBrisbaneDate()
 
   try {
     const deadlines: Array<{
@@ -4981,7 +4982,7 @@ async function executeAddMeetingToNotion(input: {
   meeting_type?: string
 }): Promise<string> {
   const { title, notes, decisions, action_items, meeting_type } = input
-  const date = input.date || new Date().toISOString().slice(0, 10)
+  const date = input.date || getBrisbaneDate()
   const attendees = input.attendees || []
   const projectCode = input.project_code || null
 
