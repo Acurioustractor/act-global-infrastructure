@@ -48,8 +48,11 @@ export async function GET() {
     const items = (pending || [])
       .map((comm) => {
         const resolved = nameMap[comm.ghl_contact_id] || {}
-        const contactName = comm.contact_name || resolved.name || null
-        if (!contactName) return null  // Skip unidentifiable contacts
+        const email = comm.contact_email || resolved.email || null
+        // Fallback chain: contact_name → GHL name → email local part → skip
+        const contactName = comm.contact_name || resolved.name
+          || (email ? email.split('@')[0].replace(/[._+]/g, ' ') : null)
+        if (!contactName) return null
         const userAction = actionMap[comm.id] || null
         if (userAction === 'archived') return null  // Filter out archived
         const daysSince = Math.floor((now.getTime() - new Date(comm.occurred_at).getTime()) / (1000 * 60 * 60 * 24))
