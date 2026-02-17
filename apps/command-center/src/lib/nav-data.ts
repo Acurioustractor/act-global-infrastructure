@@ -133,6 +133,7 @@ export const navStructure: SidebarNavGroup[] = [
     id: 'systems',
     label: 'Systems',
     items: [
+      { href: '/chat', label: 'Chat', icon: MessageSquare, color: 'text-indigo-400', bg: 'bg-indigo-500/20' },
       { href: '/agent', label: 'Agent', icon: Bot, color: 'text-violet-400', bg: 'bg-violet-500/20' },
       { href: '/intelligence', label: 'Intelligence', icon: Zap, color: 'text-indigo-400', bg: 'bg-indigo-500/20' },
       { href: '/business', label: 'Business Setup', icon: Briefcase },

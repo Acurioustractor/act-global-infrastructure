@@ -22,5 +22,13 @@
     }
   ],
   "categories": ["productivity", "business"],
+  "shortcuts": [
+    {
+      "name": "Chat",
+      "short_name": "Chat",
+      "url": "/chat",
+      "description": "Chat with ACT Agent"
+    }
+  ],
   "screenshots": []
 }

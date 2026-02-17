@@ -1,34 +1,10 @@
 import { Bot, Context, InputFile, GrammyError, HttpError } from 'grammy'
-import Anthropic from '@anthropic-ai/sdk'
-import OpenAI from 'openai'
-import { AGENT_SYSTEM_PROMPT } from '@/lib/agent-system-prompt'
-import { AGENT_TOOLS, executeTool, executeConfirmedAction, logAgentUsage } from '@/lib/agent-tools'
+import { executeConfirmedAction } from '@/lib/agent-tools'
 import { transcribeVoice, synthesizeSpeech, cycleVoice, getVoicePreference } from './voice'
-import { loadConversation, saveConversation, clearConversation } from './conversation-state'
+import { clearConversation } from './conversation-state'
 import { loadPendingAction, clearPendingAction } from './pending-action-state'
-
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// CONFIG
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-const HAIKU_MODEL = 'claude-3-5-haiku-20241022'
-const SONNET_MODEL = 'claude-sonnet-4-5-20250929'
-const MAX_TOKENS = 4096
-const MAX_TOOL_ROUNDS = 10
-const ESCALATION_ROUND = 4 // Switch to Sonnet if Haiku hasn't resolved by this round
-
-// Write tools that require sequential execution (confirmation flow)
-const WRITE_TOOLS = new Set(['draft_email', 'create_calendar_event', 'set_reminder'])
-
-// Patterns that should start with Sonnet instead of Haiku
-const SONNET_PATTERNS = [
-  /\b(analy[sz]e|compare|contrast|evaluate)\b/i,
-  /\b(plan|strategy|strategi[cs]|roadmap)\b.*\b(quarter|year|month|project)\b/i,
-  /\b(monthly|quarterly|annual|yearly)\s+(review|report|summary|update)\b/i,
-  /\b(moon\s+cycle|lunar|astro)/i,
-  /\b(review|assess)\s+(all|every|across)\b/i,
-  /\band\b.*\band\b.*\band\b/i, // 3+ compound "and" clauses
-]
+import { processAgentMessage } from '@/lib/agent-loop'
+import { extractReceiptFromPhoto } from '@/lib/receipt-extractor'
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // AUTH
@@ -47,17 +23,6 @@ function getAuthorizedUsers(): Set<number> {
 function isAuthorized(userId: number): boolean {
   const authorized = getAuthorizedUsers()
   return authorized.size === 0 || authorized.has(userId)
-}
-
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// MODEL ROUTING
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-function selectModel(userMessage: string): string {
-  for (const pattern of SONNET_PATTERNS) {
-    if (pattern.test(userMessage)) return SONNET_MODEL
-  }
-  return HAIKU_MODEL
 }
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -138,10 +103,10 @@ export function getBot(): Bot {
       await ctx.replyWithChatAction('typing')
 
       // Process through agent
-      const agentResponse = await processMessage(ctx.chat.id, transcription)
+      const agentResult = await processAgentMessage(ctx.chat.id, transcription)
 
       // Reply with both text and voice
-      await sendResponse(ctx, agentResponse, true)
+      await sendResponse(ctx, agentResult.text, true)
     } catch (err) {
       console.error('Voice processing error:', err)
       await ctx.reply(`Error: ${(err as Error).message}`)
@@ -180,8 +145,8 @@ export function getBot(): Bot {
 
       // Ask agent to add the receipt
       const prompt = `Add a receipt: vendor="${extracted.vendor}", amount=${extracted.amount}, date="${extracted.date}"${extracted.category ? `, category="${extracted.category}"` : ''}${caption ? `, notes="${caption}"` : ''}`
-      const agentResponse = await processMessage(ctx.chat.id, prompt)
-      await sendResponse(ctx, agentResponse, false)
+      const agentResult = await processAgentMessage(ctx.chat.id, prompt)
+      await sendResponse(ctx, agentResult.text, false)
     } catch (err) {
       console.error('Photo processing error:', err)
       await ctx.reply(`Error processing photo: ${(err as Error).message}`)
@@ -225,8 +190,8 @@ export function getBot(): Bot {
     await ctx.replyWithChatAction('typing')
 
     try {
-      const agentResponse = await processMessage(ctx.chat.id, text)
-      await sendResponse(ctx, agentResponse, false)
+      const agentResult = await processAgentMessage(ctx.chat.id, text)
+      await sendResponse(ctx, agentResult.text, false)
     } catch (err) {
       console.error('Text processing error:', err)
       await ctx.reply(`Error: ${(err as Error).message}`)
@@ -246,184 +211,6 @@ export function getBot(): Bot {
   })
 
   return _bot
-}
-
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// RECEIPT PHOTO EXTRACTION
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-interface ExtractedReceipt {
-  vendor: string
-  amount: number
-  date: string
-  category?: string
-}
-
-async function extractReceiptFromPhoto(base64Image: string, caption: string): Promise<ExtractedReceipt | null> {
-  const openaiClient = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
-
-  const response = await openaiClient.chat.completions.create({
-    model: 'gpt-4o',
-    messages: [
-      {
-        role: 'user',
-        content: [
-          {
-            type: 'text',
-            text: `Extract receipt details from this image. Return ONLY valid JSON with these fields:
-- vendor: string (store/company name)
-- amount: number (total amount in AUD)
-- date: string (YYYY-MM-DD format)
-- category: string (one of: travel, supplies, food, subscription, utilities, other)
-
-If you cannot identify receipt details, return null.${caption ? `\nUser caption: "${caption}"` : ''}`,
-          },
-          {
-            type: 'image_url',
-            image_url: { url: `data:image/jpeg;base64,${base64Image}` },
-          },
-        ],
-      },
-    ],
-    max_tokens: 200,
-  })
-
-  const text = response.choices[0]?.message?.content?.trim()
-  if (!text || text === 'null') return null
-
-  try {
-    // Strip markdown code fences if present
-    const cleaned = text.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim()
-    return JSON.parse(cleaned)
-  } catch {
-    return null
-  }
-}
-
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// AGENT LOOP — persistent state, parallel tools, smart model routing
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-async function processMessage(chatId: number, userMessage: string): Promise<string> {
-  const start = Date.now()
-  const apiKey = process.env.ANTHROPIC_API_KEY
-  if (!apiKey) throw new Error('ANTHROPIC_API_KEY not configured')
-
-  const client = new Anthropic({ apiKey })
-
-  // Load persistent conversation history from Supabase
-  const history = await loadConversation(chatId)
-  const messages: Anthropic.MessageParam[] = [
-    ...history,
-    { role: 'user' as const, content: userMessage },
-  ]
-
-  // Smart model routing — keyword-based initial selection
-  let currentModel = selectModel(userMessage)
-
-  let totalInputTokens = 0
-  let totalOutputTokens = 0
-  let toolCallCount = 0
-  const modelsUsed = new Set<string>()
-
-  for (let round = 0; round < MAX_TOOL_ROUNDS; round++) {
-    // Mid-loop escalation: if Haiku hasn't resolved by ESCALATION_ROUND, switch to Sonnet
-    if (round === ESCALATION_ROUND && currentModel === HAIKU_MODEL) {
-      currentModel = SONNET_MODEL
-      console.log(`[agent] Escalating to Sonnet at round ${round} for chat ${chatId}`)
-    }
-
-    modelsUsed.add(currentModel)
-
-    const response = await client.messages.create({
-      model: currentModel,
-      max_tokens: MAX_TOKENS,
-      system: [{ type: 'text', text: AGENT_SYSTEM_PROMPT, cache_control: { type: 'ephemeral' } }],
-      tools: AGENT_TOOLS,
-      messages,
-    })
-
-    totalInputTokens += response.usage.input_tokens
-    totalOutputTokens += response.usage.output_tokens
-
-    const toolUseBlocks = response.content.filter(
-      (block): block is Anthropic.ToolUseBlock => block.type === 'tool_use'
-    )
-
-    if (toolUseBlocks.length === 0 || response.stop_reason === 'end_turn') {
-      const textBlocks = response.content.filter(
-        (block): block is Anthropic.TextBlock => block.type === 'text'
-      )
-      const responseText = textBlocks.map((b) => b.text).join('\n') || 'No response generated.'
-
-      // Log usage (per-model tracking via modelsUsed)
-      const latencyMs = Date.now() - start
-      const modelLabel = modelsUsed.size > 1
-        ? `${HAIKU_MODEL}+${SONNET_MODEL}`
-        : currentModel
-      logAgentUsage({
-        model: modelLabel,
-        inputTokens: totalInputTokens,
-        outputTokens: totalOutputTokens,
-        latencyMs,
-        toolCalls: toolCallCount,
-      }).catch(() => {})
-
-      // Save full Anthropic message format to Supabase (persistent)
-      messages.push({ role: 'assistant', content: response.content })
-      await saveConversation(chatId, messages)
-
-      return responseText
-    }
-
-    // Add assistant response with tool_use blocks
-    messages.push({ role: 'assistant', content: response.content })
-
-    // Execute tools — parallel for read-only, sequential if any write tool present
-    const hasWriteTool = toolUseBlocks.some((t) => WRITE_TOOLS.has(t.name))
-
-    let toolResults: Anthropic.ToolResultBlockParam[]
-    if (hasWriteTool) {
-      // Sequential execution for write tools
-      toolResults = []
-      for (const toolUse of toolUseBlocks) {
-        toolCallCount++
-        const result = await executeTool(
-          toolUse.name,
-          toolUse.input as Record<string, unknown>,
-          chatId
-        )
-        toolResults.push({
-          type: 'tool_result',
-          tool_use_id: toolUse.id,
-          content: result,
-        })
-      }
-    } else {
-      // Parallel execution for read-only tools
-      toolCallCount += toolUseBlocks.length
-      toolResults = await Promise.all(
-        toolUseBlocks.map(async (toolUse) => {
-          const result = await executeTool(
-            toolUse.name,
-            toolUse.input as Record<string, unknown>,
-            chatId
-          )
-          return {
-            type: 'tool_result' as const,
-            tool_use_id: toolUse.id,
-            content: result,
-          }
-        })
-      )
-    }
-    messages.push({ role: 'user', content: toolResults })
-  }
-
-  // Save conversation even on exhaustion
-  await saveConversation(chatId, messages)
-
-  return 'I ran into some complexity. Could you try rephrasing?'
 }
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
