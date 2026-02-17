@@ -2562,6 +2562,7 @@ export interface PendingCommunication {
   projectCode: string
   daysWaiting: number
   occurredAt: string
+  priority: 'important' | 'follow_up_today' | null
 }
 
 export interface FollowUpSuggestion {
@@ -2574,6 +2575,9 @@ export interface FollowUpSuggestion {
 
 export interface PendingCommunicationsResponse {
   pending: PendingCommunication[]
+  important: PendingCommunication[]
+  followUpToday: PendingCommunication[]
+  other: PendingCommunication[]
   byProject: Record<string, PendingCommunication[]>
   total: number
   followUps: FollowUpSuggestion[]
@@ -2581,6 +2585,20 @@ export interface PendingCommunicationsResponse {
 
 export async function getPendingCommunications() {
   return fetchApi<PendingCommunicationsResponse>('/api/communications/pending')
+}
+
+export async function setCommunicationAction(communicationId: string, action: 'archived' | 'important' | 'follow_up_today') {
+  return fetchApi<{ success: boolean }>('/api/communications/action', {
+    method: 'POST',
+    body: JSON.stringify({ communicationId, action }),
+  })
+}
+
+export async function removeCommunicationAction(communicationId: string) {
+  return fetchApi<{ success: boolean }>('/api/communications/action', {
+    method: 'DELETE',
+    body: JSON.stringify({ communicationId }),
+  })
 }
 
 // ─── Dashboard: Upcoming Deadlines ──────────────────────────────
