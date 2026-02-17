@@ -4,6 +4,7 @@ import { Client as NotionClient } from '@notionhq/client'
 import { supabase } from './supabase'
 import { readFileSync } from 'fs'
 import { join } from 'path'
+import { savePendingAction, type SerializablePendingAction } from './telegram/pending-action-state'
 
 // Helper: load project codes from the projects table
 let _projectCodesCache: Record<string, any> | null = null
@@ -2045,12 +2046,9 @@ async function executeDraftEmail(
 
   // Store as pending action if in Telegram context
   if (chatId) {
-    const { setPendingAction } = await import('@/lib/telegram/bot')
-    setPendingAction(chatId, {
-      description: `Send email to ${recipientName} <${recipientEmail}>`,
-      execute: async () => {
-        return await sendEmailViaGmail(recipientEmail, input.subject, input.body)
-      },
+    await savePendingAction(chatId, `Send email to ${recipientName} <${recipientEmail}>`, {
+      type: 'draft_email',
+      params: { to: recipientEmail, subject: input.subject, body: input.body },
     })
   }
 
@@ -2156,12 +2154,9 @@ async function executeCreateCalendarEvent(
 
   // Store as pending action if in Telegram context
   if (chatId) {
-    const { setPendingAction } = await import('@/lib/telegram/bot')
-    setPendingAction(chatId, {
-      description: `Create calendar event: ${input.title}`,
-      execute: async () => {
-        return await createGoogleCalendarEvent(eventSummary)
-      },
+    await savePendingAction(chatId, `Create calendar event: ${input.title}`, {
+      type: 'create_calendar_event',
+      params: eventSummary,
     })
   }
 
@@ -3302,6 +3297,7 @@ async function getGoogleAccessToken(
 
 const PRICING: Record<string, { input: number; output: number }> = {
   'claude-3-5-haiku-20241022': { input: 0.80, output: 4.00 },
+  'claude-sonnet-4-5-20250929': { input: 3.00, output: 15.00 },
   'claude-sonnet-4-20250514': { input: 3.00, output: 15.00 },
   'claude-opus-4-5-20251101': { input: 15.00, output: 75.00 },
 }
@@ -3357,6 +3353,25 @@ export async function logAgentUsage(params: {
 }
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// CONFIRMED ACTION EXECUTOR (for pending actions from Supabase)
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+export async function executeConfirmedAction(action: SerializablePendingAction): Promise<string> {
+  switch (action.type) {
+    case 'draft_email': {
+      const { to, subject, body } = action.params as { to: string; subject: string; body: string }
+      return await sendEmailViaGmail(to, subject, body)
+    }
+    case 'create_calendar_event': {
+      const event = action.params as { title: string; start: string; end: string; attendees?: string[]; location?: string }
+      return await createGoogleCalendarEvent(event)
+    }
+    default:
+      return `Unknown action type: ${action.type}`
+  }
+}
+
 // TOOL: save_writing_draft
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 

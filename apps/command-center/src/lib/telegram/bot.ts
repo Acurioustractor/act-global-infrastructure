@@ -2,38 +2,33 @@ import { Bot, Context, InputFile, GrammyError, HttpError } from 'grammy'
 import Anthropic from '@anthropic-ai/sdk'
 import OpenAI from 'openai'
 import { AGENT_SYSTEM_PROMPT } from '@/lib/agent-system-prompt'
-import { AGENT_TOOLS, executeTool, logAgentUsage, calculateCost } from '@/lib/agent-tools'
+import { AGENT_TOOLS, executeTool, executeConfirmedAction, logAgentUsage } from '@/lib/agent-tools'
 import { transcribeVoice, synthesizeSpeech, cycleVoice, getVoicePreference } from './voice'
+import { loadConversation, saveConversation, clearConversation } from './conversation-state'
+import { loadPendingAction, clearPendingAction } from './pending-action-state'
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // CONFIG
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-const MODEL = 'claude-3-5-haiku-20241022'
-const MAX_TOKENS = 2048
-const MAX_TOOL_ROUNDS = 5
-const MAX_CONVERSATION_HISTORY = 10 // Keep last 10 exchanges per chat
-const PENDING_ACTION_TTL_MS = 5 * 60 * 1000 // 5 minutes
+const HAIKU_MODEL = 'claude-3-5-haiku-20241022'
+const SONNET_MODEL = 'claude-sonnet-4-5-20250929'
+const MAX_TOKENS = 4096
+const MAX_TOOL_ROUNDS = 10
+const ESCALATION_ROUND = 4 // Switch to Sonnet if Haiku hasn't resolved by this round
 
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// STATE
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// Write tools that require sequential execution (confirmation flow)
+const WRITE_TOOLS = new Set(['draft_email', 'create_calendar_event', 'set_reminder'])
 
-interface ConversationEntry {
-  role: 'user' | 'assistant'
-  content: string
-}
-
-// In-memory conversation history (per chat)
-const conversations = new Map<number, ConversationEntry[]>()
-
-// Pending confirmations (per chat)
-export interface PendingAction {
-  description: string
-  execute: () => Promise<string>
-  expiresAt: number
-}
-const pendingActions = new Map<number, PendingAction>()
+// Patterns that should start with Sonnet instead of Haiku
+const SONNET_PATTERNS = [
+  /\b(analy[sz]e|compare|contrast|evaluate)\b/i,
+  /\b(plan|strategy|strategi[cs]|roadmap)\b.*\b(quarter|year|month|project)\b/i,
+  /\b(monthly|quarterly|annual|yearly)\s+(review|report|summary|update)\b/i,
+  /\b(moon\s+cycle|lunar|astro)/i,
+  /\b(review|assess)\s+(all|every|across)\b/i,
+  /\band\b.*\band\b.*\band\b/i, // 3+ compound "and" clauses
+]
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // AUTH
@@ -52,6 +47,17 @@ function getAuthorizedUsers(): Set<number> {
 function isAuthorized(userId: number): boolean {
   const authorized = getAuthorizedUsers()
   return authorized.size === 0 || authorized.has(userId)
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// MODEL ROUTING
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+function selectModel(userMessage: string): string {
+  for (const pattern of SONNET_PATTERNS) {
+    if (pattern.test(userMessage)) return SONNET_MODEL
+  }
+  return HAIKU_MODEL
 }
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -89,10 +95,10 @@ export function getBot(): Bot {
     )
   })
 
-  // /clear command — reset conversation memory
+  // /clear command — reset conversation memory (now Supabase-backed)
   _bot.command('clear', async (ctx) => {
     if (!ctx.from || !isAuthorized(ctx.from.id)) return
-    conversations.delete(ctx.chat.id)
+    await clearConversation(ctx.chat.id)
     await ctx.reply('Conversation cleared. Fresh start.')
   })
 
@@ -191,26 +197,26 @@ export function getBot(): Bot {
 
     const text = ctx.message.text
 
-    // Check for confirmation of pending action
-    const pending = pendingActions.get(ctx.chat.id)
-    if (pending && Date.now() < pending.expiresAt) {
+    // Check for confirmation of pending action (Supabase-backed)
+    const pending = await loadPendingAction(ctx.chat.id)
+    if (pending) {
       const lower = text.toLowerCase().trim()
       if (lower === 'yes' || lower === 'y' || lower === 'confirm' || lower === 'send') {
-        pendingActions.delete(ctx.chat.id)
+        await clearPendingAction(ctx.chat.id)
         await ctx.replyWithChatAction('typing')
         try {
-          const result = await pending.execute()
+          const result = await executeConfirmedAction(pending.action)
           await ctx.reply(result)
         } catch (err) {
           await ctx.reply(`Failed: ${(err as Error).message}`)
         }
         return
       } else if (lower === 'no' || lower === 'n' || lower === 'cancel') {
-        pendingActions.delete(ctx.chat.id)
+        await clearPendingAction(ctx.chat.id)
         await ctx.reply('Cancelled.')
         return
       } else if (lower === 'edit') {
-        pendingActions.delete(ctx.chat.id)
+        await clearPendingAction(ctx.chat.id)
         await ctx.reply('Cancelled. Tell me what to change and I\'ll prepare a new version.')
         return
       }
@@ -295,7 +301,7 @@ If you cannot identify receipt details, return null.${caption ? `\nUser caption:
 }
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// AGENT LOOP (same pattern as /api/agent/chat)
+// AGENT LOOP — persistent state, parallel tools, smart model routing
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 async function processMessage(chatId: number, userMessage: string): Promise<string> {
@@ -305,20 +311,32 @@ async function processMessage(chatId: number, userMessage: string): Promise<stri
 
   const client = new Anthropic({ apiKey })
 
-  // Build messages from conversation history
-  const history = conversations.get(chatId) || []
+  // Load persistent conversation history from Supabase
+  const history = await loadConversation(chatId)
   const messages: Anthropic.MessageParam[] = [
-    ...history.map((h) => ({ role: h.role as 'user' | 'assistant', content: h.content })),
+    ...history,
     { role: 'user' as const, content: userMessage },
   ]
+
+  // Smart model routing — keyword-based initial selection
+  let currentModel = selectModel(userMessage)
 
   let totalInputTokens = 0
   let totalOutputTokens = 0
   let toolCallCount = 0
+  const modelsUsed = new Set<string>()
 
   for (let round = 0; round < MAX_TOOL_ROUNDS; round++) {
+    // Mid-loop escalation: if Haiku hasn't resolved by ESCALATION_ROUND, switch to Sonnet
+    if (round === ESCALATION_ROUND && currentModel === HAIKU_MODEL) {
+      currentModel = SONNET_MODEL
+      console.log(`[agent] Escalating to Sonnet at round ${round} for chat ${chatId}`)
+    }
+
+    modelsUsed.add(currentModel)
+
     const response = await client.messages.create({
-      model: MODEL,
+      model: currentModel,
       max_tokens: MAX_TOKENS,
       system: [{ type: 'text', text: AGENT_SYSTEM_PROMPT, cache_control: { type: 'ephemeral' } }],
       tools: AGENT_TOOLS,
@@ -338,48 +356,72 @@ async function processMessage(chatId: number, userMessage: string): Promise<stri
       )
       const responseText = textBlocks.map((b) => b.text).join('\n') || 'No response generated.'
 
-      // Log usage
+      // Log usage (per-model tracking via modelsUsed)
       const latencyMs = Date.now() - start
+      const modelLabel = modelsUsed.size > 1
+        ? `${HAIKU_MODEL}+${SONNET_MODEL}`
+        : currentModel
       logAgentUsage({
-        model: MODEL,
+        model: modelLabel,
         inputTokens: totalInputTokens,
         outputTokens: totalOutputTokens,
         latencyMs,
         toolCalls: toolCallCount,
       }).catch(() => {})
 
-      // Update conversation history
-      history.push({ role: 'user', content: userMessage })
-      history.push({ role: 'assistant', content: responseText })
-
-      // Trim to max history length
-      while (history.length > MAX_CONVERSATION_HISTORY * 2) {
-        history.shift()
-      }
-      conversations.set(chatId, history)
+      // Save full Anthropic message format to Supabase (persistent)
+      messages.push({ role: 'assistant', content: response.content })
+      await saveConversation(chatId, messages)
 
       return responseText
     }
 
-    // Execute tools
+    // Add assistant response with tool_use blocks
     messages.push({ role: 'assistant', content: response.content })
 
-    const toolResults: Anthropic.ToolResultBlockParam[] = []
-    for (const toolUse of toolUseBlocks) {
-      toolCallCount++
-      const result = await executeTool(
-        toolUse.name,
-        toolUse.input as Record<string, unknown>,
-        chatId
+    // Execute tools — parallel for read-only, sequential if any write tool present
+    const hasWriteTool = toolUseBlocks.some((t) => WRITE_TOOLS.has(t.name))
+
+    let toolResults: Anthropic.ToolResultBlockParam[]
+    if (hasWriteTool) {
+      // Sequential execution for write tools
+      toolResults = []
+      for (const toolUse of toolUseBlocks) {
+        toolCallCount++
+        const result = await executeTool(
+          toolUse.name,
+          toolUse.input as Record<string, unknown>,
+          chatId
+        )
+        toolResults.push({
+          type: 'tool_result',
+          tool_use_id: toolUse.id,
+          content: result,
+        })
+      }
+    } else {
+      // Parallel execution for read-only tools
+      toolCallCount += toolUseBlocks.length
+      toolResults = await Promise.all(
+        toolUseBlocks.map(async (toolUse) => {
+          const result = await executeTool(
+            toolUse.name,
+            toolUse.input as Record<string, unknown>,
+            chatId
+          )
+          return {
+            type: 'tool_result' as const,
+            tool_use_id: toolUse.id,
+            content: result,
+          }
+        })
       )
-      toolResults.push({
-        type: 'tool_result',
-        tool_use_id: toolUse.id,
-        content: result,
-      })
     }
     messages.push({ role: 'user', content: toolResults })
   }
+
+  // Save conversation even on exhaustion
+  await saveConversation(chatId, messages)
 
   return 'I ran into some complexity. Could you try rephrasing?'
 }
@@ -434,16 +476,3 @@ function splitMessage(text: string, maxLength: number): string[] {
 
   return chunks
 }
-
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// EXPORTS for confirmation flow + notifications
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-export function setPendingAction(chatId: number, action: Omit<PendingAction, 'expiresAt'>) {
-  pendingActions.set(chatId, {
-    ...action,
-    expiresAt: Date.now() + PENDING_ACTION_TTL_MS,
-  })
-}
-
-export { conversations }
