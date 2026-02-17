@@ -1852,9 +1852,9 @@ async function executeGetContactsNeedingAttention(input: {
 
     // Fallback: if no signal-based results, use the simple date threshold
     if (contacts.length === 0) {
-      const fourteenDaysAgo = new Date()
+      const fourteenDaysAgo = getBrisbaneNow()
       fourteenDaysAgo.setDate(fourteenDaysAgo.getDate() - 14)
-      const sixtyDaysAgo = new Date()
+      const sixtyDaysAgo = getBrisbaneNow()
       sixtyDaysAgo.setDate(sixtyDaysAgo.getDate() - 60)
 
       let fallbackQuery = supabase
@@ -2643,7 +2643,7 @@ async function executeGetQuarterlyReview(input: { quarter?: string; detail_level
       supabase
         .from('xero_transactions')
         .select('date, type, total, contact_name')
-        .gte('date', new Date(new Date().getTime() - 180 * 86400000).toISOString().split('T')[0])
+        .gte('date', getBrisbaneDateOffset(-180))
         .order('date', { ascending: true }),
     ])
 
@@ -3200,7 +3200,7 @@ async function executeSearchPastReflections(input: {
 }): Promise<string> {
   const days = input.days || 30
   const limit = input.limit || 7
-  const lookback = new Date(Date.now() - days * 86400000).toISOString().split('T')[0]
+  const lookback = getBrisbaneDateOffset(-days)
 
   try {
     let query = supabase
@@ -3799,7 +3799,7 @@ async function executeReviewPlanningPeriod(input: {
   const repo = 'act-global-infrastructure'
   const branch = 'main'
 
-  const refDate = input.date ? new Date(input.date) : new Date()
+  const refDate = input.date ? new Date(input.date) : getBrisbaneNow()
 
   // Determine which folder to read and date range
   let folder: string
@@ -3890,7 +3890,7 @@ async function executeMoonCycleReview(input: {
   month?: string
   focus?: string
 }): Promise<string> {
-  const now = new Date()
+  const now = getBrisbaneNow()
   const monthStr = input.month || `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`
   const [yearNum, monthNum] = monthStr.split('-').map(Number)
   const startDate = `${monthStr}-01`
@@ -4384,7 +4384,7 @@ async function executeGetCashflowForecast(input: {
 
   try {
     // Fetch historical snapshots, current month transactions, and upcoming invoices in parallel
-    const now = new Date()
+    const now = getBrisbaneNow()
     const monthStart = new Date(now.getFullYear(), now.getMonth(), 1).toISOString().split('T')[0]
     const monthEnd = new Date(now.getFullYear(), now.getMonth() + 1, 0).toISOString().split('T')[0]
 
@@ -4728,7 +4728,7 @@ async function executeCreateMeetingNotes(input: {
     date,
   } = input
 
-  const meetingDate = date || new Date().toISOString().split('T')[0]
+  const meetingDate = date || getBrisbaneDate()
 
   try {
     // Look up project name from code
@@ -4866,7 +4866,7 @@ async function executeGetEcosystemPulse(): Promise<string> {
   try {
     const [projectsRes, bookkeepingRes, nudgesRes, oppsRes] = await Promise.all([
       supabase.from('v_project_summary').select('project_code, project_name, health_score, health_status, total_income, total_expenses, pipeline_value, open_opportunities, email_count'),
-      supabase.from('xero_transactions').select('total, type').gte('date', new Date(Date.now() - 30 * 86400000).toISOString().slice(0, 10)),
+      supabase.from('xero_transactions').select('total, type').gte('date', getBrisbaneDateOffset(-30)),
       supabase.from('ghl_contacts').select('full_name, last_contact_date').not('last_contact_date', 'is', null).order('last_contact_date', { ascending: true }).limit(5),
       supabase.from('ghl_opportunities').select('monetary_value, status').eq('status', 'open'),
     ])
@@ -5251,7 +5251,7 @@ async function executeAddDecision(input: {
         'Name': { title: [{ text: { content: title } }] },
         'Status': { select: { name: status || 'active' } },
         'Priority': { select: { name: 'high' } },
-        'Date': { date: { start: new Date().toISOString().slice(0, 10) } },
+        'Date': { date: { start: getBrisbaneDate() } },
         'Supabase ID': { rich_text: [{ text: { content: data.id } }] },
       }
 
