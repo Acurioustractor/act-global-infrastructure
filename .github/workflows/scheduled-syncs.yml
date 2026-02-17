@@ -87,12 +87,12 @@ jobs:
       - name: Run Calendar Sync
         id: sync
         env:
-          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
-          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          GOOGLE_SERVICE_ACCOUNT_KEY: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY }}
+          GOOGLE_DELEGATED_USER: ${{ secrets.GOOGLE_DELEGATED_USER }}
           SUPABASE_SHARED_URL: ${{ secrets.SUPABASE_SHARED_URL }}
           SUPABASE_SHARED_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SHARED_SERVICE_ROLE_KEY }}
         run: |
-          node scripts/sync-calendar-to-supabase.mjs || echo "Calendar sync skipped (may need OAuth)"
+          node scripts/sync-calendar-full.mjs || echo "Calendar sync failed"
           echo "events_count=$(cat /tmp/events-count.txt 2>/dev/null || echo 'N/A')" >> $GITHUB_OUTPUT
         continue-on-error: true
 
