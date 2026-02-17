@@ -1,0 +1,54 @@
+name: Enrich Communications
+
+on:
+  schedule:
+    # Run every 6 hours, 30min after Gmail sync to let new emails land first
+    - cron: '30 */6 * * *'
+
+  workflow_dispatch:
+    inputs:
+      limit:
+        description: 'Max emails to process'
+        required: false
+        default: '100'
+
+jobs:
+  enrich:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install --production
+
+      - name: Run enrichment
+        id: enrich
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_SHARED_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SHARED_SERVICE_ROLE_KEY }}
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.SUPABASE_SHARED_URL }}
+        run: |
+          LIMIT="${{ github.event.inputs.limit || '100' }}"
+          node scripts/enrich-communications.mjs --limit "$LIMIT"
+
+      - name: Generate summary
+        if: always()
+        run: |
+          echo "## Communication Enrichment Results" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Time:** $(date -u '+%Y-%m-%d %H:%M UTC')" >> $GITHUB_STEP_SUMMARY
+          echo "**Trigger:** ${{ github.event_name }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Limit:** ${{ github.event.inputs.limit || '100' }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Component | Status |" >> $GITHUB_STEP_SUMMARY
+          echo "|-----------|--------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Enrichment | ${{ steps.enrich.outcome == 'success' && 'Success' || 'Failed' }} |" >> $GITHUB_STEP_SUMMARY
