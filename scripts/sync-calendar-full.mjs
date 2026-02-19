@@ -95,10 +95,22 @@ function getSecret(name) {
   return secrets[name] || process.env[name];
 }
 
-// Initialize Google Calendar with service account
-async function getCalendar() {
+// Get list of delegated users to sync (multi-user like Gmail sync)
+function getDelegatedUsers() {
+  const multiUser = getSecret('GOOGLE_DELEGATED_USERS');
+  if (multiUser) {
+    return multiUser.split(',').map(e => e.trim()).filter(Boolean);
+  }
+  const singleUser = getSecret('GOOGLE_DELEGATED_USER');
+  if (singleUser) {
+    return [singleUser.trim()];
+  }
+  throw new Error('GOOGLE_DELEGATED_USERS or GOOGLE_DELEGATED_USER not configured');
+}
+
+// Initialize Google Calendar with service account for a specific user
+async function getCalendarForUser(userEmail) {
   const keyJson = getSecret('GOOGLE_SERVICE_ACCOUNT_KEY');
-  const delegatedUser = getSecret('GOOGLE_DELEGATED_USER');
 
   if (!keyJson) {
     throw new Error('GOOGLE_SERVICE_ACCOUNT_KEY not configured');
@@ -113,7 +125,7 @@ async function getCalendar() {
       'https://www.googleapis.com/auth/calendar',
       'https://www.googleapis.com/auth/calendar.events',
     ],
-    subject: delegatedUser,
+    subject: userEmail,
   });
 
   await auth.authorize();
@@ -360,73 +372,99 @@ async function syncCalendar(options = {}) {
   console.log(`Date range: ${startDate.toISOString().split('T')[0]} to ${endDate.toISOString().split('T')[0]}\n`);
 
   // Initialize APIs
-  const calendar = await getCalendar();
   const supabase = getSupabase();
+  const delegatedUsers = getDelegatedUsers();
 
   // Load GHL contacts for matching
   console.log('Loading GHL contacts for attendee matching...');
   const ghlContactMap = await loadGhlContacts(supabase);
   console.log(`  Loaded ${ghlContactMap.size} contacts with email addresses\n`);
 
-  // Determine which calendars to sync
-  let calendarsToSync;
-  if (allCalendars) {
-    console.log('Discovering all accessible calendars...');
-    const discovered = await getAllCalendars(calendar);
-    calendarsToSync = discovered.map(c => ({
-      id: c.id,
-      summary: c.summary || c.id,
-      backgroundColor: c.backgroundColor || null,
-    }));
-    console.log(`  Found ${calendarsToSync.length} calendars:`);
-    for (const cal of calendarsToSync) {
-      console.log(`    - ${cal.summary} (${cal.id})`);
-    }
-    console.log();
-  } else {
-    // Single calendar mode
-    let calInfo = { id: calendarId, summary: calendarId, backgroundColor: null };
-    try {
-      const { data } = await calendar.calendars.get({ calendarId });
-      calInfo = { id: calendarId, summary: data.summary || calendarId, backgroundColor: null };
-    } catch (e) {
-      // Use defaults
-    }
-    calendarsToSync = [calInfo];
-  }
+  console.log(`Syncing ${delegatedUsers.length} account(s): ${delegatedUsers.join(', ')}\n`);
 
-  // Fetch and transform events from all calendars
+  // Track seen event IDs to deduplicate across accounts (shared calendar events)
+  const seenEventIds = new Set();
+
+  // Fetch and transform events from all calendars across all users
   let allTransformed = [];
   const totalProjectCounts = {};
   const totalTypeCounts = {};
   let totalMatchedContacts = 0;
 
-  for (const cal of calendarsToSync) {
-    console.log(`Syncing calendar: ${cal.summary} (${cal.id})`);
+  for (const delegatedUser of delegatedUsers) {
+    console.log(`\n━━━ Account: ${delegatedUser} ━━━\n`);
 
-    const calendarInfo = { id: cal.id, summary: cal.summary, backgroundColor: cal.backgroundColor };
-    const events = await fetchCalendarEvents(calendar, cal.id, startDate, endDate, verbose);
-    console.log(`  Found ${events.length} events`);
-
-    // Transform events with source='google'
-    const transformed = events.map(e => ({
-      ...transformEvent(e, ghlContactMap, calendarInfo),
-      sync_source: 'google',
-    }));
-
-    // Count stats
-    for (const event of transformed) {
-      if (event.detected_project_code) {
-        totalProjectCounts[event.detected_project_code] = (totalProjectCounts[event.detected_project_code] || 0) + 1;
-      }
-      totalTypeCounts[event.event_type] = (totalTypeCounts[event.event_type] || 0) + 1;
-      totalMatchedContacts += event.ghl_contact_ids?.length || 0;
+    let calendar;
+    try {
+      calendar = await getCalendarForUser(delegatedUser);
+    } catch (err) {
+      console.error(`  ❌ Failed to auth as ${delegatedUser}: ${err.message}`);
+      continue;
     }
 
-    allTransformed = allTransformed.concat(transformed);
+    // Determine which calendars to sync
+    let calendarsToSync;
+    if (allCalendars) {
+      console.log('  Discovering all accessible calendars...');
+      const discovered = await getAllCalendars(calendar);
+      calendarsToSync = discovered.map(c => ({
+        id: c.id,
+        summary: c.summary || c.id,
+        backgroundColor: c.backgroundColor || null,
+      }));
+      console.log(`  Found ${calendarsToSync.length} calendars:`);
+      for (const cal of calendarsToSync) {
+        console.log(`    - ${cal.summary} (${cal.id})`);
+      }
+      console.log();
+    } else {
+      // Single calendar mode
+      let calInfo = { id: calendarId, summary: calendarId, backgroundColor: null };
+      try {
+        const { data } = await calendar.calendars.get({ calendarId });
+        calInfo = { id: calendarId, summary: data.summary || calendarId, backgroundColor: null };
+      } catch (e) {
+        // Use defaults
+      }
+      calendarsToSync = [calInfo];
+    }
+
+    for (const cal of calendarsToSync) {
+      console.log(`  Syncing calendar: ${cal.summary} (${cal.id})`);
+
+      const calendarInfo = { id: cal.id, summary: cal.summary, backgroundColor: cal.backgroundColor };
+      const events = await fetchCalendarEvents(calendar, cal.id, startDate, endDate, verbose);
+      console.log(`    Found ${events.length} events`);
+
+      // Transform events with source='google', deduplicate by google_event_id
+      let newCount = 0;
+      for (const e of events) {
+        const eventId = e.id;
+        if (seenEventIds.has(eventId)) continue;
+        seenEventIds.add(eventId);
+
+        const transformed = {
+          ...transformEvent(e, ghlContactMap, calendarInfo),
+          sync_source: 'google',
+        };
+
+        if (transformed.detected_project_code) {
+          totalProjectCounts[transformed.detected_project_code] = (totalProjectCounts[transformed.detected_project_code] || 0) + 1;
+        }
+        totalTypeCounts[transformed.event_type] = (totalTypeCounts[transformed.event_type] || 0) + 1;
+        totalMatchedContacts += transformed.ghl_contact_ids?.length || 0;
+
+        allTransformed.push(transformed);
+        newCount++;
+      }
+
+      if (newCount < events.length) {
+        console.log(`    (${events.length - newCount} duplicates skipped — already seen from another account)`);
+      }
+    }
   }
 
-  console.log(`\nTotal: ${allTransformed.length} events across ${calendarsToSync.length} calendar(s)\n`);
+  console.log(`\nTotal: ${allTransformed.length} events across ${delegatedUsers.length} account(s) (${seenEventIds.size} unique)\n`);
 
   console.log('Event types:');
   for (const [type, count] of Object.entries(totalTypeCounts).sort((a, b) => b[1] - a[1])) {
@@ -490,7 +528,7 @@ async function syncCalendar(options = {}) {
 
   console.log();
   console.log('✅ Sync complete!');
-  console.log(`  Calendars: ${calendarsToSync.length}`);
+  console.log(`  Accounts: ${delegatedUsers.length}`);
   console.log(`  Total events: ${allTransformed.length}`);
   console.log(`  Synced: ${updated}`);
   console.log(`  Errors: ${errors}`);

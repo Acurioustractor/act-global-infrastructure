@@ -95,7 +95,7 @@ const cronScripts = [
     name: 'calendar-sync',
     script: 'scripts/sync-calendar-full.mjs',
     args: '--since 1m --until 2m --all-calendars',
-    cron_restart: '0 */12 * * *', // Every 12 hours
+    cron_restart: '0 */6 * * *', // Every 6 hours (all accounts via GOOGLE_DELEGATED_USERS)
   },
   {
     name: 'notion-calendar-sync',

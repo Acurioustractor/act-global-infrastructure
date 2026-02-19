@@ -30,6 +30,7 @@ import {
   Calculator,
   Database,
   Telescope,
+  FlaskConical,
 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 
@@ -123,6 +124,7 @@ export const navStructure: SidebarNavGroup[] = [
           { href: '/finance/receipts', label: 'Receipts', icon: FileBarChart },
           { href: '/finance/subscriptions', label: 'Subscriptions', icon: DollarSign },
           { href: '/finance/data-quality', label: 'Data Quality', icon: Database, color: 'text-cyan-400', bg: 'bg-cyan-500/20' },
+          { href: '/finance/rd-tracking', label: 'R&D Tracking', icon: FlaskConical, color: 'text-lime-400', bg: 'bg-lime-500/20' },
         ],
       },
       { href: '/team', label: 'Team & Resources', icon: Users, color: 'text-cyan-400', bg: 'bg-cyan-500/20' },

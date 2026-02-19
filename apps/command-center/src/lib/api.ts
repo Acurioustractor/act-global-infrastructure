@@ -3366,3 +3366,49 @@ export async function getOpportunities(params?: { project?: string; type?: strin
   const query = q.toString() ? `?${q.toString()}` : ''
   return fetchApi<{ opportunities: UnifiedOpportunity[]; summary: OpportunitiesSummary }>(`/api/opportunities${query}`)
 }
+
+// ─── R&D Tax Tracking ───────────────────────────────────────────
+
+export interface RdTrackingData {
+  deadlines: Array<{
+    name: string
+    date: string
+    description: string
+    daysUntil: number
+    status: 'overdue' | 'urgent' | 'upcoming' | 'future'
+  }>
+  spendByFY: Record<string, {
+    software: number
+    hardware: number
+    product: number
+    travel: number
+    operations: number
+    total: number
+  }>
+  spendByProject: Array<{
+    code: string
+    name: string
+    rdSpend: number
+    totalSpend: number
+    rdPct: number
+  }>
+  topVendors: Array<{
+    vendor: string
+    project: string
+    category: string
+    spend: number
+    rdEligible: boolean
+  }>
+  actionChecklist: Array<{
+    task: string
+    status: 'done' | 'in_progress' | 'pending' | 'overdue'
+    dueDate?: string
+    category: string
+  }>
+  offset43pct: { fy2425: number; fy2526: number; combined: number }
+  taggingCoverage: Record<string, { total: number; tagged: number; pct: number }>
+}
+
+export async function getRdTracking() {
+  return fetchApi<RdTrackingData>('/api/finance/rd-tracking')
+}
