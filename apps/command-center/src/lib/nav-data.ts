@@ -1,6 +1,7 @@
 import {
   Sun,
   Calendar,
+  Rocket,
   Users,
   Layers,
   FolderKanban,
@@ -60,6 +61,7 @@ export const navStructure: SidebarNavGroup[] = [
     label: '',
     items: [
       { href: '/today', label: 'Today', icon: Sun },
+      { href: '/sprint', label: 'Sprint', icon: Rocket },
       { href: '/calendar', label: 'Calendar', icon: Calendar },
     ],
     defaultExpanded: true,

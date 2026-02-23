@@ -255,6 +255,35 @@
           "tracking": "ACT-GD",
           "avg_amount": 9616.86,
           "note": "Goods project manufacturing"
+        },
+        {
+          "name": "Thais Pupio Design",
+          "aliases": ["THAIS PUPIO", "Thais Pupio", "PUPIO"],
+          "auto_publish": false,
+          "category": "Leasehold Improvements",
+          "tax_rate": "No GST",
+          "tracking": "ACT-HV",
+          "note": "The Harvest Witta architect/designer. ABN 38700952757. Not GST-registered. Design rate ~$130/hr."
+        },
+        {
+          "name": "Sonas Properties",
+          "aliases": ["SONAS PROPERTIES", "Sonas Properties Pty Ltd"],
+          "auto_publish": false,
+          "category": "Capital Improvement Fund Income",
+          "tax_rate": "GST on Income",
+          "tracking": "ACT-HV",
+          "avg_amount": 44000.00,
+          "note": "The Harvest Witta landlord. Fund drawdown payments RECEIVED (ACCREC). Sonas pays ACT milestone invoices from the $250k Capital Improvement Fund."
+        },
+        {
+          "name": "Barry (Timber)",
+          "aliases": ["BARRY", "BARRY TIMBER"],
+          "auto_publish": false,
+          "category": "Project Materials",
+          "tax_rate": "GST on Expenses",
+          "tracking": "ACT-HV",
+          "avg_amount": 6500.00,
+          "note": "Timber supplier for Harvest shed cladding. Recycled timber option."
         }
       ]
     }
@@ -288,6 +317,12 @@
     "Meals & Entertainment": "6500",
     "Supplies & Materials": "6600",
     "Project Materials": "6700",
+    "Leasehold Improvements": "1700",
+    "Rent": "6100",
+    "Utilities": "6200",
+    "Insurance": "6250",
+    "Rates": "6300",
+    "Contractor Payments": "7100",
     "Bank Fees": "6800"
   },
   "setup_checklist": [

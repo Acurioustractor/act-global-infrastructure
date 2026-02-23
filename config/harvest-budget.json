@@ -1,0 +1,441 @@
+{
+  "_meta": {
+    "description": "The Harvest Witta — Budget Configuration",
+    "version": "1.0.0",
+    "updated": "2026-02-22",
+    "project_code": "ACT-HV",
+    "location": "9 Gumland Dr, Maleny QLD (601 Maleny Kenilworth Rd, Witta QLD 4552)",
+    "landlord": "Sonas Properties Pty Ltd (ACN: 671 416 532)",
+    "tenant": "A Curious Tractor (ABN: 21 591 780 066)",
+    "lead": "Nicholas Marchesi"
+  },
+  "capital_improvement_fund": {
+    "total_budget": 250000,
+    "source": "Landlord-funded (Sonas Properties) per lease Section 5",
+    "note": "Invoiced in milestones. Improvements become landlord property on lease termination.",
+    "phases": {
+      "phase_1": {
+        "name": "Phase 1 — Site Activation",
+        "budget": 117800,
+        "status": "in_progress",
+        "line_items": [
+          {
+            "id": "P1-01",
+            "name": "Siteworks: access paths, drainage, basic lighting & signage",
+            "budget": 25000,
+            "zone": "Cross-cutting",
+            "category": "Siteworks & access",
+            "cost_centre": "HV-Siteworks",
+            "notes": "Make site safe + accessible for public activation"
+          },
+          {
+            "id": "P1-02",
+            "name": "Community Garden: tools & storage (basic shed/lockup)",
+            "budget": 3800,
+            "zone": "Community Garden",
+            "category": "Garden build & irrigation",
+            "cost_centre": "HV-Garden",
+            "notes": "Tools, wheelbarrows, buckets, hand tools; lockable storage"
+          },
+          {
+            "id": "P1-03",
+            "name": "Pavilion build (structure, fixings, safety, lighting, flooring)",
+            "budget": 13200,
+            "zone": "Pavilion",
+            "category": "Pavilion",
+            "cost_centre": "HV-Pavilion",
+            "notes": "Milk-crate pavilion build materials + install"
+          },
+          {
+            "id": "P1-04",
+            "name": "Timber & fire cooking: pizza oven + fire cook stations",
+            "budget": 13200,
+            "zone": "Timber & Fire Cooking",
+            "category": "Timber & fire cooking",
+            "cost_centre": "HV-FireCook",
+            "notes": "Oven + fire pits/BBQs + safety barriers allowance"
+          },
+          {
+            "id": "P1-05",
+            "name": "Timber & fire cooking: prep benches, storage, utensils, wash-up station",
+            "budget": 6000,
+            "zone": "Timber & Fire Cooking",
+            "category": "Timber & fire cooking",
+            "cost_centre": "HV-FireCook",
+            "notes": "Basic outdoor prep + clean-down setup"
+          },
+          {
+            "id": "P1-06",
+            "name": "Kids play area: co-design + build materials + signage",
+            "budget": 7000,
+            "zone": "Kids Play Area",
+            "category": "Siteworks & access",
+            "cost_centre": "HV-Siteworks",
+            "notes": "Low-risk play build + safety signage"
+          },
+          {
+            "id": "P1-07",
+            "name": "Amenities: toilets/handwash upgrades",
+            "budget": 9000,
+            "zone": "Cross-cutting",
+            "category": "Amenities",
+            "cost_centre": "HV-Amenities",
+            "notes": "Allowance depends on existing condition"
+          },
+          {
+            "id": "P1-08",
+            "name": "Community Garden: irrigation + water points + hose reels",
+            "budget": 5000,
+            "zone": "Community Garden",
+            "category": "Garden build & irrigation",
+            "cost_centre": "HV-Garden",
+            "notes": "Irrigation hardware and plumbing allowance"
+          },
+          {
+            "id": "P1-09",
+            "name": "Community Garden: beds, soil, compost + initial plantings",
+            "budget": 12000,
+            "zone": "Community Garden",
+            "category": "Garden build & irrigation",
+            "cost_centre": "HV-Garden",
+            "notes": "Includes soil/compost/top-up materials"
+          },
+          {
+            "id": "P1-10",
+            "name": "Staffing / contractors: short-term labour for build + setup - Phase 1",
+            "budget": 13600,
+            "zone": "Cross-cutting",
+            "category": "Staffing",
+            "cost_centre": "HV-Staffing",
+            "notes": "Casual labour / trades support (non-quote placeholder)"
+          },
+          {
+            "id": "P1-11",
+            "name": "Phase 1 Contingency",
+            "budget": 10000,
+            "zone": "Cross-cutting",
+            "category": "Contingency",
+            "cost_centre": "HV-Contingency",
+            "notes": "Set as 10% of total fund (250k). Adjust once base costs firm up."
+          }
+        ]
+      },
+      "phase_2": {
+        "name": "Phase 2 — Interior & Hospitality",
+        "budget": 132200,
+        "status": "planning",
+        "line_items": [
+          {
+            "id": "P2-01",
+            "name": "Design + documentation (phase 1+2 concept + services)",
+            "budget": 20000,
+            "zone": "Cross-cutting",
+            "category": "Design & documentation",
+            "cost_centre": "HV-Design",
+            "notes": "Early phase 2 planning while phase 1 runs"
+          },
+          {
+            "id": "P2-02",
+            "name": "Milk bar: refrigeration + POS / checkout basics",
+            "budget": 4500,
+            "zone": "Milk Bar",
+            "category": "Milk bar",
+            "cost_centre": "HV-MilkBar",
+            "notes": "1-2 fridges/freezer + small POS setup"
+          },
+          {
+            "id": "P2-03",
+            "name": "Milk bar (light): taps + plumbing + bar build basics",
+            "budget": 15000,
+            "zone": "Milk Bar",
+            "category": "Milk bar",
+            "cost_centre": "HV-MilkBar",
+            "notes": "Self-serve tap system allowance + simple bar/checkout point"
+          },
+          {
+            "id": "P2-04",
+            "name": "Open kitchen fit-out allowance (services + benches)",
+            "budget": 19000,
+            "zone": "Open Kitchen",
+            "category": "Interior fit-out",
+            "cost_centre": "HV-Kitchen",
+            "notes": "Fit-out works excluding major equipment"
+          },
+          {
+            "id": "P2-05",
+            "name": "Kitchen equipment allowance",
+            "budget": 21000,
+            "zone": "Open Kitchen",
+            "category": "Kitchen equipment",
+            "cost_centre": "HV-Kitchen",
+            "notes": "Combi/underbench fridges/induction (placeholder)"
+          },
+          {
+            "id": "P2-06",
+            "name": "Theatre/gallery basic interior fit-out allowance",
+            "budget": 26000,
+            "zone": "Theatre/Gallery Space",
+            "category": "Interior fit-out",
+            "cost_centre": "HV-Theatre",
+            "notes": "Paint/lighting/furniture/flexible rigging (placeholder)"
+          },
+          {
+            "id": "P2-07",
+            "name": "Workshop + residency setup allowance",
+            "budget": 5700,
+            "zone": "Artist Residency Workshop",
+            "category": "Workshop/residency",
+            "cost_centre": "HV-Workshop",
+            "notes": "Tools, benches, storage, safety (placeholder)"
+          },
+          {
+            "id": "P2-08",
+            "name": "Staffing / contractors: short-term labour for build + setup - Phase 2",
+            "budget": 11000,
+            "zone": "Cross-cutting",
+            "category": "Staffing",
+            "cost_centre": "HV-Staffing",
+            "notes": "Casual labour / trades support (non-quote placeholder)"
+          },
+          {
+            "id": "P2-09",
+            "name": "Phase 2 Contingency",
+            "budget": 10000,
+            "zone": "Cross-cutting",
+            "category": "Contingency",
+            "cost_centre": "HV-Contingency",
+            "notes": "Set as 10% of total fund (250k). Adjust once base costs firm up."
+          }
+        ]
+      }
+    }
+  },
+  "cost_centres": {
+    "description": "Xero Tracking Category 2 options for The Harvest",
+    "values": {
+      "HV-Garden": "Garden build & irrigation — beds, soil, tools, irrigation",
+      "HV-Siteworks": "Siteworks & access — paths, drainage, lighting, signage, kids play",
+      "HV-Pavilion": "Pavilion — milk-crate pavilion structure",
+      "HV-FireCook": "Timber & fire cooking — pizza oven, fire pits, prep areas",
+      "HV-Kitchen": "Kitchen — equipment, fit-out, benches, fridges",
+      "HV-MilkBar": "Milk bar — taps, plumbing, POS, bar build",
+      "HV-Theatre": "Theatre/gallery — interior fit-out, lighting, rigging",
+      "HV-Workshop": "Workshop/residency — tools, benches, storage",
+      "HV-Amenities": "Amenities — toilets, handwash",
+      "HV-Staffing": "Staffing — casual labour, contractors",
+      "HV-Design": "Design & documentation — architecture, planning",
+      "HV-Contingency": "Contingency — overruns, unexpected costs",
+      "HV-Ops": "Operations — rent, insurance, utilities, rates"
+    }
+  },
+  "lease": {
+    "landlord": "Sonas Properties Pty Ltd",
+    "landlord_acn": "671 416 532",
+    "landlord_contacts": ["Grant Luff", "Michelle Luff"],
+    "premises": "9 Gumland Dr, Maleny QLD",
+    "building_sqm": 500,
+    "property_value": 2000000,
+    "commencement_date": "2026-07-01",
+    "initial_term_months": 12,
+    "expiry": "2027-06-30",
+    "early_access": {
+      "start": "2026-01-01",
+      "end": "2026-06-30",
+      "rent_free": true,
+      "purpose": "Planning, preparation, and initial capital works"
+    },
+    "options_to_extend": [
+      { "option": 1, "years": 2 },
+      { "option": 2, "years": 2 },
+      { "option": 3, "years": 5 }
+    ],
+    "rent": {
+      "target_rent_pa": 100000,
+      "base_rent_pa": 50000,
+      "base_rent_monthly": 4167,
+      "base_rent_pct_of_target": 0.5,
+      "target_rent_pct_of_property_value": 0.05,
+      "revenue_share": "100% of net profit, capped so Base Rent + Revenue Share <= Target Rent"
+    },
+    "outgoings": [
+      "Council rates",
+      "Water and sewerage",
+      "Electricity, gas, utilities",
+      "Waste removal",
+      "Public liability insurance ($20M minimum)"
+    ],
+    "reporting": {
+      "quarterly": "Gross Revenue, Operating Costs, Net Profit",
+      "annual": "Financial statements within 90 days of FY end",
+      "fund_reporting": "Quarterly reports on Capital Improvement Fund expenditure"
+    }
+  },
+  "fund_drawdowns": {
+    "description": "Money IN from landlord (Sonas/Luffs) — ACT invoices Sonas for milestone payments from the $250k Capital Improvement Fund. These are ACCREC invoices in Xero.",
+    "drawdowns": [
+      {
+        "number": "INV-0316",
+        "billed_to": "Sonas Properties Pty Ltd",
+        "date": "2026-02-16",
+        "due_date": "2026-02-20",
+        "paid_date": "2026-02-21",
+        "subtotal": 40000,
+        "gst": 4000,
+        "total": 44000,
+        "status": "paid",
+        "xero_type": "ACCREC",
+        "description": "Phase 1: Mobilisation + site establishment + community garden works commenced + access & amenities baseline works",
+        "phase": "phase_1",
+        "milestone_covers": ["HV-Siteworks", "HV-Garden", "HV-Amenities"],
+        "xero_tracking": "ACT-HV"
+      }
+    ],
+    "total_drawn": 40000,
+    "total_drawn_inc_gst": 44000,
+    "remaining_to_draw": 210000
+  },
+  "expenses": {
+    "description": "Money OUT — ACT pays contractors, suppliers, staff from the fund. These are ACCPAY bills or direct bank payments in Xero.",
+    "payments": [
+      {
+        "number": "TP-002",
+        "vendor": "Thais Pupio Design",
+        "vendor_abn": "38700952757",
+        "date": "2026-02-15",
+        "total": 1420,
+        "gst": 0,
+        "status": "paid",
+        "xero_type": "ACCPAY",
+        "description": "Concept Design phase — sketch drawings, meetings + driving (10-12 Feb 2026)",
+        "line_items_detail": [
+          { "description": "Driving", "hours": 7.25, "subtotal": 250 },
+          { "description": "Concept Design phase - sketch drawings, meetings", "hours": 9, "subtotal": 1170 }
+        ],
+        "total_hours": 16.25,
+        "phase": "phase_2",
+        "cost_centre": "HV-Design",
+        "xero_tracking": "ACT-HV",
+        "notes": "Reference: Concept Design, Harvest Garden & Restaurant Project"
+      },
+      {
+        "number": "TP-003",
+        "vendor": "Thais Pupio Design",
+        "vendor_abn": "38700952757",
+        "date": "2026-03-01",
+        "total": 15500,
+        "gst": 0,
+        "status": "paid",
+        "xero_type": "ACCPAY",
+        "description": "Design Development & Construction phase — on site work, design and building site coordination + 2 return trips",
+        "line_items_detail": [
+          { "description": "Driving - 2 trips back and forth", "hours": 14.5, "subtotal": 550 },
+          { "description": "Design Development & Construction phase - On site work, design and building site coordination", "hours": 115, "subtotal": 14950 }
+        ],
+        "total_hours": 129.5,
+        "phase": "phase_2",
+        "cost_centre": "HV-Design",
+        "xero_tracking": "ACT-HV",
+        "notes": "Reference: Design development Phase_Harvest Project - Witta, QLD"
+      }
+    ],
+    "total_spent": 16920,
+    "total_spent_inc_gst": 16920
+  },
+  "upcoming_capital_costs": {
+    "description": "Known upcoming capital expenses (from $250k fund) — not yet invoiced/paid",
+    "items": [
+      {
+        "vendor": "Barry (Timber supplier)",
+        "description": "Timber top clad the shed — 300 pieces × $50",
+        "estimated_total": 5000,
+        "phase": "phase_1",
+        "cost_centre": "HV-Pavilion",
+        "status": "quoting",
+        "notes": "Option to buy recycled timber. Potential story with recycling wood place."
+      },
+      {
+        "vendor": "Barry (Timber supplier)",
+        "description": "Bigger timber pieces for shed structure",
+        "estimated_total": 8000,
+        "phase": "phase_1",
+        "cost_centre": "HV-Pavilion",
+        "status": "quoting"
+      },
+      {
+        "vendor": "Thais Pupio Design",
+        "description": "Remaining design work — mark outs, thinking, on-site coordination",
+        "estimated_total": 3080,
+        "budget_cap": 20000,
+        "already_spent": 16920,
+        "phase": "phase_2",
+        "cost_centre": "HV-Design",
+        "status": "in_progress",
+        "notes": "Thais on site this week. Total budget $20k, $16,920 already invoiced."
+      }
+    ],
+    "total_upcoming_estimate": 16080
+  },
+  "staff_rates": {
+    "description": "Team member rates for Harvest work — tracked via ACT Time Log (Notion) and invoiced to Xero",
+    "team": [
+      {
+        "name": "Thais Pupio",
+        "role": "Architect / Designer",
+        "rate_per_hour": 130,
+        "rate_type": "contractor",
+        "gst_registered": false,
+        "abn": "38700952757",
+        "fund_source": "capital",
+        "cost_centre": "HV-Design",
+        "notes": "Design rate ~$130/hr. Driving billed separately."
+      },
+      {
+        "name": "Sophie",
+        "role": "Garden / Community coordination",
+        "rate_per_hour": 80,
+        "rate_type": "contractor",
+        "fund_source": "operations",
+        "cost_centre": "HV-Garden",
+        "notes": "Working with Joey on beds and garden. $80/hr."
+      },
+      {
+        "name": "Joey",
+        "role": "Beds, garden, build coordination",
+        "rate_per_hour": 43,
+        "rate_type": "contractor",
+        "fund_source": "operations",
+        "cost_centre": "HV-Garden",
+        "notes": "Three of Joey's hours ≈ one of Thais's. Beds and garden lead."
+      },
+      {
+        "name": "Suzie",
+        "role": "Operations / community",
+        "rate_per_week": 850,
+        "rate_per_hour_equiv": 21.25,
+        "rate_type": "contractor",
+        "fund_source": "operations",
+        "cost_centre": "HV-Staffing",
+        "notes": "$850/week fixed. Based on ~40hr week = ~$21.25/hr equiv."
+      }
+    ]
+  },
+  "operations_forecast": {
+    "description": "Ongoing farm operations costs (from ACT cash flow, NOT the $250k fund). Starts ramping now, full from July 2026.",
+    "monthly_staff": {
+      "suzie": { "weekly": 850, "monthly": 3683, "notes": "$850 × 52 / 12" },
+      "sophie": { "hourly": 80, "est_hours_per_week": 15, "est_monthly": 5200, "notes": "Estimate — varies by week" },
+      "joey": { "hourly": 43, "est_hours_per_week": 20, "est_monthly": 3720, "notes": "Estimate — varies by week" },
+      "total_est_monthly_staff": 12603
+    },
+    "monthly_fixed_from_july": {
+      "rent": 4167,
+      "insurance_est": 500,
+      "utilities_est": 400,
+      "rates_est": 300,
+      "waste_est": 200,
+      "total_est_monthly_fixed": 5567
+    },
+    "total_est_monthly_ops": 18170,
+    "notes": "Staff costs start now (pre-opening). Fixed costs from July lease commencement. Revenue share kicks in once generating income."
+  }
+}
