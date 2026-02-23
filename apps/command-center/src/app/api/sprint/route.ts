@@ -34,7 +34,7 @@ export async function POST(req: NextRequest) {
   }
 
   if (body.action === 'update') {
-    const { id, ...fields } = body
+    const { id, action: _action, ...fields } = body
     const { error } = await supabase
       .from('sprint_items')
       .update({ ...fields, updated_at: new Date().toISOString() })
