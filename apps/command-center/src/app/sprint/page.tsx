@@ -11,6 +11,7 @@ import {
   ArrowRight,
   ArrowLeft,
   Loader2,
+  MessageSquare,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
@@ -60,6 +61,7 @@ export default function SprintPage() {
   const [newTitle, setNewTitle] = React.useState('')
   const [newStream, setNewStream] = React.useState('Infrastructure')
   const [toggling, setToggling] = React.useState<Set<string>>(new Set())
+  const [expandedId, setExpandedId] = React.useState<string | null>(null)
 
   const fetchItems = React.useCallback(async () => {
     try {
@@ -124,6 +126,15 @@ export default function SprintPage() {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ action: 'move_to_backlog', id }),
+    })
+  }
+
+  const updateNotes = async (id: string, notes: string) => {
+    setItems(prev => prev.map(i => i.id === id ? { ...i, notes } : i))
+    await fetch('/api/sprint', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action: 'update', id, notes }),
     })
   }
 
@@ -198,7 +209,10 @@ export default function SprintPage() {
                     item={item}
                     onToggle={() => toggleDone(item)}
                     onMoveToBacklog={() => moveToBacklog(item.id)}
+                    onUpdateNotes={(notes) => updateNotes(item.id, notes)}
                     isToggling={toggling.has(item.id)}
+                    isExpanded={expandedId === item.id}
+                    onExpand={() => setExpandedId(expandedId === item.id ? null : item.id)}
                   />
                 ))}
                 {/* Show done items for this stream inline */}
@@ -212,7 +226,10 @@ export default function SprintPage() {
                       item={item}
                       onToggle={() => toggleDone(item)}
                       onMoveToBacklog={() => moveToBacklog(item.id)}
+                      onUpdateNotes={(notes) => updateNotes(item.id, notes)}
                       isToggling={toggling.has(item.id)}
+                      isExpanded={expandedId === item.id}
+                      onExpand={() => setExpandedId(expandedId === item.id ? null : item.id)}
                     />
                   ))
                 }
@@ -342,65 +359,115 @@ function SprintItemRow({
   item,
   onToggle,
   onMoveToBacklog,
+  onUpdateNotes,
   isToggling,
+  isExpanded,
+  onExpand,
 }: {
   item: SprintItem
   onToggle: () => void
   onMoveToBacklog: () => void
+  onUpdateNotes: (notes: string) => void
   isToggling: boolean
+  isExpanded: boolean
+  onExpand: () => void
 }) {
   const isDone = item.status === 'done'
   const colors = STREAM_COLORS[item.stream] || STREAM_COLORS['Infrastructure']
+  const [localNotes, setLocalNotes] = React.useState(item.notes || '')
+  const saveTimer = React.useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  // Sync local notes when item changes from server
+  React.useEffect(() => {
+    setLocalNotes(item.notes || '')
+  }, [item.notes])
+
+  const handleNotesChange = (value: string) => {
+    setLocalNotes(value)
+    // Debounce save — 800ms after typing stops
+    if (saveTimer.current) clearTimeout(saveTimer.current)
+    saveTimer.current = setTimeout(() => {
+      onUpdateNotes(value)
+    }, 800)
+  }
 
   return (
-    <div
-      className={cn(
-        'flex items-center gap-3 py-2.5 px-3 rounded-lg transition-all group',
-        isDone ? 'opacity-50' : 'hover:bg-white/5'
-      )}
-    >
-      <button
-        onClick={onToggle}
-        disabled={isToggling}
-        className="shrink-0 transition-transform active:scale-90"
-      >
-        {isDone ? (
-          <CheckCircle2 className="h-5 w-5 text-emerald-400" />
-        ) : (
-          <Circle className="h-5 w-5 text-white/20 hover:text-white/40" />
+    <div>
+      <div
+        className={cn(
+          'flex items-center gap-3 py-2.5 px-3 rounded-lg transition-all group',
+          isDone ? 'opacity-50' : 'hover:bg-white/5',
+          isExpanded && !isDone && 'bg-white/5'
         )}
-      </button>
-
-      <span className={cn('text-sm flex-1', isDone ? 'text-white/40 line-through' : 'text-white')}>
-        {item.title}
-      </span>
-
-      {!isDone && item.priority === 'now' && (
-        <span className={cn('text-[10px] px-1.5 py-0.5 rounded-full', PRIORITY_BADGE['now'])}>
-          now
-        </span>
-      )}
-
-      {!isDone && item.time_est && TIME_LABELS[item.time_est] && (
-        <span className="text-[10px] text-white/30 font-mono">
-          {TIME_LABELS[item.time_est]}
-        </span>
-      )}
-
-      {item.owner && (
-        <span className="text-[10px] text-white/30 hidden sm:inline">
-          {item.owner}
-        </span>
-      )}
-
-      {!isDone && (
+      >
         <button
-          onClick={onMoveToBacklog}
-          className="opacity-0 group-hover:opacity-100 transition-opacity"
-          title="Move to backlog"
+          onClick={onToggle}
+          disabled={isToggling}
+          className="shrink-0 transition-transform active:scale-90"
         >
-          <ArrowLeft className="h-3 w-3 text-white/20 hover:text-white/40" />
+          {isDone ? (
+            <CheckCircle2 className="h-5 w-5 text-emerald-400" />
+          ) : (
+            <Circle className="h-5 w-5 text-white/20 hover:text-white/40" />
+          )}
         </button>
+
+        <button
+          onClick={onExpand}
+          className={cn('text-sm flex-1 text-left', isDone ? 'text-white/40 line-through' : 'text-white')}
+        >
+          {item.title}
+        </button>
+
+        {/* Notes indicator */}
+        {item.notes && !isExpanded && (
+          <MessageSquare className="h-3 w-3 text-white/20 shrink-0" />
+        )}
+
+        {!isDone && item.priority === 'now' && (
+          <span className={cn('text-[10px] px-1.5 py-0.5 rounded-full', PRIORITY_BADGE['now'])}>
+            now
+          </span>
+        )}
+
+        {!isDone && item.time_est && TIME_LABELS[item.time_est] && (
+          <span className="text-[10px] text-white/30 font-mono">
+            {TIME_LABELS[item.time_est]}
+          </span>
+        )}
+
+        {item.owner && (
+          <span className="text-[10px] text-white/30 hidden sm:inline">
+            {item.owner}
+          </span>
+        )}
+
+        {!isDone && (
+          <button
+            onClick={onMoveToBacklog}
+            className="opacity-0 group-hover:opacity-100 transition-opacity"
+            title="Move to backlog"
+          >
+            <ArrowLeft className="h-3 w-3 text-white/20 hover:text-white/40" />
+          </button>
+        )}
+      </div>
+
+      {/* Expandable notes area */}
+      {isExpanded && (
+        <div className="ml-11 mr-3 mb-2">
+          <textarea
+            value={localNotes}
+            onChange={e => handleNotesChange(e.target.value)}
+            placeholder="Quick notes — what happened, what's needed, who to talk to..."
+            className="w-full bg-white/[0.03] border border-white/[0.06] rounded-lg px-3 py-2 text-sm text-white/70 placeholder:text-white/20 outline-none focus:border-white/10 resize-none min-h-[60px]"
+            rows={Math.max(2, localNotes.split('\n').length)}
+            autoFocus={!localNotes}
+          />
+          {localNotes && (
+            <p className="text-[10px] text-white/20 mt-1">Auto-saves as you type</p>
+          )}
+        </div>
       )}
     </div>
   )
