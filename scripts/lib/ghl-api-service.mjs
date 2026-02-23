@@ -289,6 +289,35 @@ export class GHLService {
   }
 
   /**
+   * Create a new opportunity in GHL
+   *
+   * @param {Object} data - Opportunity data
+   * @param {string} data.pipelineId - Pipeline ID
+   * @param {string} data.stageId - Stage ID
+   * @param {string} data.name - Opportunity name
+   * @param {number} [data.monetaryValue] - Dollar value
+   * @param {string} [data.status] - Status (open, won, lost, abandoned)
+   * @param {string} [data.contactId] - Contact ID to associate
+   * @returns {Promise<Object>} Created opportunity
+   */
+  async createOpportunity(data) {
+    const payload = {
+      locationId: this.locationId,
+      pipelineId: data.pipelineId,
+      pipelineStageId: data.stageId,
+      name: data.name,
+      status: data.status || 'open',
+      ...(data.monetaryValue && { monetaryValue: data.monetaryValue }),
+      ...(data.contactId && { contactId: data.contactId }),
+    };
+    const result = await this.request('/opportunities/', {
+      method: 'POST',
+      body: JSON.stringify(payload)
+    });
+    return result.opportunity || result;
+  }
+
+  /**
    * Update an opportunity in GHL
    *
    * @param {string} opportunityId - GHL opportunity ID

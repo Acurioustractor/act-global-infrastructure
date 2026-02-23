@@ -195,6 +195,11 @@ const cronScripts = [
     script: 'scripts/check-grant-deadlines.mjs',
     cron_restart: '0 */6 * * *', // Every 6 hours
   },
+  {
+    name: 'sync-grants-ghl',
+    script: 'scripts/sync-grants-ghl.mjs',
+    cron_restart: '15 */6 * * *', // Every 6 hours, 15min after ghl-sync
+  },
 ];
 
 module.exports = {
