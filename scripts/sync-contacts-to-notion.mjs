@@ -262,6 +262,48 @@ async function main() {
     process.exit(1);
   }
 
+  // Ensure new properties exist on the database
+  log('Ensuring Partnership Thread and Tour Stop properties exist...');
+  try {
+    await notion.databases.update({
+      database_id: databaseId,
+      properties: {
+        'Partnership Thread': {
+          multi_select: {
+            options: [
+              { name: 'World Tour', color: 'blue' },
+              { name: 'ILA Grant', color: 'red' },
+              { name: 'Mukurtu', color: 'orange' },
+              { name: 'JusticeHub', color: 'purple' },
+              { name: 'Harvest', color: 'green' },
+            ],
+          },
+        },
+        'Tour Stop': {
+          select: {
+            options: [
+              { name: 'Alice Springs', color: 'red' },
+              { name: 'Darwin', color: 'orange' },
+              { name: 'Sydney', color: 'blue' },
+              { name: 'South Africa', color: 'yellow' },
+              { name: 'Botswana', color: 'brown' },
+              { name: 'Uganda', color: 'green' },
+              { name: 'Kenya', color: 'pink' },
+              { name: 'Spain', color: 'red' },
+              { name: 'Netherlands', color: 'orange' },
+              { name: 'Sweden', color: 'blue' },
+              { name: 'Scotland', color: 'purple' },
+            ],
+          },
+        },
+      },
+    });
+    log('  Properties ensured');
+  } catch (err) {
+    log(`  Warning: Could not update database schema: ${err.message}`);
+    log('  Contacts without thread tags will still sync fine');
+  }
+
   // Fetch contacts
   const contacts = await fetchContacts();
   log(`Found ${contacts.length} contacts to sync`);

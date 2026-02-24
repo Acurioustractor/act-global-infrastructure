@@ -365,10 +365,10 @@ async function main() {
   log('=== Notion Partnership Databases Setup ===');
   if (DRY_RUN) log('DRY RUN MODE');
 
-  // Find parent page — use operationsHub as parent
-  const parentPageId = notionDbIds.operationsHub;
+  // Use Mission Control as parent page
+  const parentPageId = notionDbIds.missionControl;
   if (!parentPageId) {
-    log('ERROR: No operationsHub page ID in config/notion-database-ids.json');
+    log('ERROR: No missionControl page ID in config/notion-database-ids.json');
     log('Provide a Notion page ID where databases should be created.');
     process.exit(1);
   }
