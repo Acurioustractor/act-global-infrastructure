@@ -967,9 +967,13 @@ export default function OpportunitiesPage() {
             >
               <option value="">All Statuses</option>
               <option value="open">Open</option>
+              <option value="reviewing">Reviewing</option>
+              <option value="will_apply">Will Apply</option>
               <option value="applied">Applied</option>
               <option value="won">Won</option>
               <option value="lost">Lost</option>
+              <option value="not_relevant">Not Relevant</option>
+              <option value="next_round">Next Round</option>
               <option value="closed">Closed</option>
             </select>
 
@@ -1166,7 +1170,16 @@ export default function OpportunitiesPage() {
                             value={opp.status}
                             options={
                               opp.source === 'grant'
-                                ? [{ value: 'open', label: 'Open' }, { value: 'applied', label: 'Applied' }, { value: 'won', label: 'Won' }, { value: 'lost', label: 'Lost' }]
+                                ? [
+                                    { value: 'open', label: 'Open' },
+                                    { value: 'reviewing', label: 'Reviewing' },
+                                    { value: 'will_apply', label: 'Will Apply' },
+                                    { value: 'applied', label: 'Applied' },
+                                    { value: 'won', label: 'Won' },
+                                    { value: 'lost', label: 'Lost' },
+                                    { value: 'not_relevant', label: 'Not Relevant' },
+                                    { value: 'next_round', label: 'Next Round' },
+                                  ]
                                 : [{ value: 'open', label: 'Open' }, { value: 'won', label: 'Won' }, { value: 'lost', label: 'Lost' }, { value: 'abandoned', label: 'Abandoned' }]
                             }
                             onSave={val => saveField(opp, 'status', val)}

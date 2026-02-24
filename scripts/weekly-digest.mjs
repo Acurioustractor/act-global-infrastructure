@@ -159,6 +159,31 @@ async function collectWeekData() {
       .select('id', { count: 'exact', head: true }),
   ]);
 
+  // 11. Grant pipeline health
+  const nextWeekDate = new Date(Date.now() + 7 * 86400000).toISOString();
+  const [
+    { count: enrichedCount },
+    { count: unenrichedCount },
+    { data: deadlinesThisWeek },
+    { data: staleGrants },
+    { count: autoCreatedApps },
+  ] = await Promise.all([
+    supabase.from('grant_opportunities').select('id', { count: 'exact', head: true }).not('enriched_at', 'is', null),
+    supabase.from('grant_opportunities').select('id', { count: 'exact', head: true }).is('enriched_at', null),
+    supabase.from('grant_opportunities')
+      .select('name, closes_at, fit_score')
+      .gte('closes_at', new Date().toISOString())
+      .lte('closes_at', nextWeekDate)
+      .order('closes_at', { ascending: true }),
+    supabase.from('grant_opportunities')
+      .select('name, application_status, fit_score')
+      .eq('application_status', 'not_applied')
+      .gte('fit_score', 70)
+      .not('enriched_at', 'is', null)
+      .limit(5),
+    supabase.from('grant_applications').select('id', { count: 'exact', head: true }).eq('auto_created', true).gte('created_at', weekStart),
+  ]);
+
   return {
     projectSummaries: Object.values(latestByProject),
     knowledge: knowledge || [],
@@ -175,6 +200,13 @@ async function collectWeekData() {
     newGrants: newGrants || [],
     activeApps: activeApps || [],
     totalOpenGrants: totalOpen || 0,
+    grantPipelineHealth: {
+      enrichedCount: enrichedCount || 0,
+      unenrichedCount: unenrichedCount || 0,
+      deadlinesThisWeek: deadlinesThisWeek || [],
+      staleHighFit: staleGrants || [],
+      autoCreatedApps: autoCreatedApps || 0,
+    },
   };
 }
 
@@ -253,7 +285,7 @@ async function generateDigest(data) {
   }
 
   // Grants
-  if (data.newGrants.length > 0 || data.activeApps.length > 0) {
+  {
     const grantLines = [];
     if (data.newGrants.length > 0) {
       const topGrants = data.newGrants.slice(0, 3).map(g => `${g.name} (${g.provider}, fit ${g.fit_score ?? g.relevance_score ?? '?'}%)`).join('; ');
@@ -264,7 +296,32 @@ async function generateDigest(data) {
       grantLines.push(`  Active applications: ${data.activeApps.length} ($${pipelineValue.toLocaleString()} pipeline)`);
     }
     grantLines.push(`  Total open opportunities: ${data.totalOpenGrants}`);
-    sections.push(`GRANTS:\n${grantLines.join('\n')}`);
+
+    // Pipeline health
+    const ph = data.grantPipelineHealth;
+    const enrichPct = (ph.enrichedCount + ph.unenrichedCount) > 0
+      ? Math.round(ph.enrichedCount / (ph.enrichedCount + ph.unenrichedCount) * 100)
+      : 0;
+    grantLines.push(`  Enrichment coverage: ${enrichPct}% (${ph.enrichedCount} enriched, ${ph.unenrichedCount} pending)`);
+
+    if (ph.deadlinesThisWeek.length > 0) {
+      const deadlineNames = ph.deadlinesThisWeek.map(d => {
+        const days = Math.ceil((new Date(d.closes_at) - Date.now()) / 86400000);
+        return `${d.name} (${days}d, fit ${d.fit_score ?? '?'}%)`;
+      }).join('; ');
+      grantLines.push(`  ⚠ DEADLINES THIS WEEK: ${deadlineNames}`);
+    }
+
+    if (ph.staleHighFit.length > 0) {
+      const staleNames = ph.staleHighFit.map(g => `${g.name} (${g.fit_score}%)`).join('; ');
+      grantLines.push(`  Action needed — high-fit but not applied: ${staleNames}`);
+    }
+
+    if (ph.autoCreatedApps > 0) {
+      grantLines.push(`  Auto-created ${ph.autoCreatedApps} draft application(s) this week`);
+    }
+
+    sections.push(`GRANTS PIPELINE:\n${grantLines.join('\n')}`);
   }
 
   // Upcoming
@@ -287,11 +344,12 @@ async function generateDigest(data) {
       {
         role: 'system',
         content: `You write weekly digest summaries for ACT (A Curious Tractor), a social enterprise.
-Write a 4-5 paragraph retrospective covering:
+Write a 5-6 paragraph retrospective covering:
 1. This Week's Highlights — what moved forward
 2. Relationships — who's warming/cooling, who needs outreach
-3. Decisions & Actions — key decisions made, what's pending
-4. Looking Ahead — upcoming events, priorities for next week
+3. Grants & Pipeline — new opportunities, deadlines, applications status, what needs action
+4. Decisions & Actions — key decisions made, what's pending
+5. Looking Ahead — upcoming events, priorities for next week
 
 Be specific, warm but professional. Use names and numbers. No markdown — plain text paragraphs.
 Max 500 words.`,
@@ -309,8 +367,6 @@ Max 500 words.`,
       operation: 'weekly_digest',
     }
   );
-
-  const spendThisWeek = data.xeroThisWeek.reduce((s, t) => s + Math.abs(parseFloat(t.total) || 0), 0);
 
   return {
     digestText: digestText.trim(),
@@ -330,6 +386,10 @@ Max 500 words.`,
       newGrants: data.newGrants.length,
       activeGrantApps: data.activeApps.length,
       totalOpenGrants: data.totalOpenGrants,
+      grantEnrichmentPct: (data.grantPipelineHealth.enrichedCount + data.grantPipelineHealth.unenrichedCount) > 0
+        ? Math.round(data.grantPipelineHealth.enrichedCount / (data.grantPipelineHealth.enrichedCount + data.grantPipelineHealth.unenrichedCount) * 100) : 0,
+      grantDeadlinesThisWeek: data.grantPipelineHealth.deadlinesThisWeek.length,
+      grantAutoCreatedApps: data.grantPipelineHealth.autoCreatedApps,
     },
     weekEnd: new Date().toISOString(),
   };

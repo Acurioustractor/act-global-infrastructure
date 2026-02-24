@@ -53,9 +53,13 @@ const GHL_STAGES = {
 // Status mapping: grant_opportunities.application_status <-> GHL stage
 const STATUS_TO_GHL_STAGE = {
   'not_applied':   'Grant Opportunity Identified',
+  'reviewing':     'Grant Opportunity Identified',
+  'will_apply':    'Application In Progress',
   'in_progress':   'Application In Progress',
   'applied':       'Grant Submitted',
   'submitted':     'Grant Submitted',
+  'not_relevant':  null,  // Don't push to GHL
+  'next_round':    null,  // Don't push to GHL
 };
 
 const GHL_STAGE_TO_STATUS = {
@@ -309,8 +313,13 @@ async function syncGrantsToGHL() {
   if (!unlinkedGrants?.length) return;
 
   for (const grant of unlinkedGrants) {
-    const stageName = STATUS_TO_GHL_STAGE[grant.application_status] || 'Grant Opportunity Identified';
-    const stageId = GHL_STAGES[stageName];
+    const stageName = STATUS_TO_GHL_STAGE[grant.application_status];
+    if (stageName === null) {
+      // not_relevant / next_round — don't push to GHL
+      stats.grantsToGhl.skipped++;
+      continue;
+    }
+    const stageId = GHL_STAGES[stageName || 'Grant Opportunity Identified'];
 
     if (!stageId) {
       console.log(`  ⚠ No stage mapping for "${grant.application_status}" — skipping ${grant.name}`);
@@ -407,6 +416,113 @@ async function linkApplications() {
 }
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// STEP 4: Auto-Advance GHL Stages Based on Supabase State
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+async function autoAdvanceGHLStages() {
+  console.log('\n⏩ Step 4: Auto-advance GHL stages');
+  console.log('─'.repeat(50));
+
+  let ghl = null;
+  try {
+    ghl = createGHLService();
+  } catch {
+    console.log('  ⚠ GHL API not configured — skipping auto-advance');
+    return;
+  }
+
+  // Get grants linked to GHL with their current GHL stage
+  const { data: linkedGrants, error } = await supabase
+    .from('grant_opportunities')
+    .select('id, name, ghl_opportunity_id, application_status, enriched_at')
+    .not('ghl_opportunity_id', 'is', null);
+
+  if (error || !linkedGrants?.length) return;
+
+  // Get GHL opportunities for stage lookup
+  const { data: ghlOpps } = await supabase
+    .from('ghl_opportunities')
+    .select('id, ghl_id, stage_name')
+    .eq('pipeline_name', 'Grants');
+
+  const ghlStageByUuid = new Map();
+  const ghlIdByUuid = new Map();
+  for (const opp of ghlOpps || []) {
+    ghlStageByUuid.set(opp.id, opp.stage_name);
+    ghlIdByUuid.set(opp.id, opp.ghl_id);
+  }
+
+  // Get applications to know which grants have active apps
+  const { data: applications } = await supabase
+    .from('grant_applications')
+    .select('opportunity_id, status')
+    .not('opportunity_id', 'is', null);
+
+  const appByOppId = new Map();
+  for (const app of applications || []) {
+    appByOppId.set(app.opportunity_id, app.status);
+  }
+
+  let advanced = 0;
+  for (const grant of linkedGrants) {
+    const currentGhlStage = ghlStageByUuid.get(grant.ghl_opportunity_id);
+    if (!currentGhlStage) continue;
+
+    const realGhlId = ghlIdByUuid.get(grant.ghl_opportunity_id) || grant.ghl_opportunity_id;
+    const appStatus = appByOppId.get(grant.id);
+
+    // Determine what stage the grant SHOULD be in
+    let targetStage = null;
+
+    if (['submitted', 'applied'].includes(grant.application_status) ||
+        ['submitted', 'under_review'].includes(appStatus)) {
+      targetStage = 'Grant Submitted';
+    } else if (['in_progress', 'will_apply', 'reviewing'].includes(grant.application_status) ||
+               ['draft', 'in_progress'].includes(appStatus)) {
+      targetStage = 'Application In Progress';
+    }
+
+    // Only advance forward, never backward
+    const stageOrder = ['Grant Opportunity Identified', 'Application In Progress', 'Grant Submitted'];
+    const currentIdx = stageOrder.indexOf(currentGhlStage);
+    const targetIdx = targetStage ? stageOrder.indexOf(targetStage) : -1;
+
+    if (targetIdx > currentIdx) {
+      const targetStageId = GHL_STAGES[targetStage];
+      if (!targetStageId) continue;
+
+      console.log(`  ⏩ "${grant.name}": ${currentGhlStage} → ${targetStage}`);
+
+      if (!dryRun) {
+        try {
+          await ghl.request(`/opportunities/${realGhlId}`, {
+            method: 'PUT',
+            body: JSON.stringify({
+              pipelineStageId: targetStageId,
+              pipelineId: GRANTS_PIPELINE_ID,
+            }),
+          });
+
+          // Also update local mirror
+          await supabase
+            .from('ghl_opportunities')
+            .update({ stage_name: targetStage, ghl_stage_id: targetStageId })
+            .eq('id', grant.ghl_opportunity_id);
+
+          advanced++;
+        } catch (err) {
+          console.log(`  ⚠ Failed to advance "${grant.name}": ${err.message}`);
+        }
+      } else {
+        advanced++;
+      }
+    }
+  }
+
+  console.log(`  Advanced ${advanced} opportunities`);
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // MAIN
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -418,6 +534,7 @@ async function main() {
   await enrichFromGHLCustomFields();
   await syncGrantsToGHL();
   await linkApplications();
+  await autoAdvanceGHLStages();
 
   console.log('\n📊 Summary');
   console.log('─'.repeat(50));

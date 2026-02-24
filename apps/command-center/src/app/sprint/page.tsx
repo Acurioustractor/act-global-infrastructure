@@ -12,6 +12,8 @@ import {
   ArrowLeft,
   Loader2,
   MessageSquare,
+  X,
+  Lightbulb,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
@@ -27,6 +29,19 @@ type SprintItem = {
   notes: string | null
   done_date: string | null
   sort_order: number
+}
+
+type Suggestion = {
+  id: string
+  title: string
+  stream: string
+  priority: string
+  notes: string | null
+  source_type: string
+  source_ref: string | null
+  due_date: string | null
+  project_code: string | null
+  owner: string | null
 }
 
 const STREAM_COLORS: Record<string, { bg: string; text: string; border: string }> = {
@@ -52,22 +67,34 @@ const TIME_LABELS: Record<string, string> = {
   'long': '2h',
 }
 
+const SOURCE_ICONS: Record<string, string> = {
+  'grant_deadline': '\uD83C\uDFAF',
+  'overdue_action': '\u2705',
+  'email_followup': '\uD83D\uDCE7',
+  'calendar_deadline': '\uD83D\uDCC5',
+  'insight': '\uD83D\uDCA1',
+}
+
 export default function SprintPage() {
   const [items, setItems] = React.useState<SprintItem[]>([])
+  const [suggestions, setSuggestions] = React.useState<Suggestion[]>([])
   const [loading, setLoading] = React.useState(true)
   const [showBacklog, setShowBacklog] = React.useState(false)
   const [showDone, setShowDone] = React.useState(false)
+  const [showSuggestions, setShowSuggestions] = React.useState(true)
   const [showAddForm, setShowAddForm] = React.useState(false)
   const [newTitle, setNewTitle] = React.useState('')
   const [newStream, setNewStream] = React.useState('Infrastructure')
   const [toggling, setToggling] = React.useState<Set<string>>(new Set())
   const [expandedId, setExpandedId] = React.useState<string | null>(null)
+  const [actioningIds, setActioningIds] = React.useState<Set<string>>(new Set())
 
   const fetchItems = React.useCallback(async () => {
     try {
       const res = await fetch('/api/sprint')
       const data = await res.json()
       setItems(data.items || [])
+      setSuggestions(data.suggestions || [])
     } catch {
       // silent
     }
@@ -148,6 +175,39 @@ export default function SprintPage() {
     setNewTitle('')
     setShowAddForm(false)
     fetchItems()
+  }
+
+  const acceptSuggestion = async (id: string) => {
+    setActioningIds(prev => new Set(prev).add(id))
+    await fetch('/api/sprint', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action: 'accept_suggestion', suggestion_id: id }),
+    })
+    // Remove from local suggestions and refresh items
+    setSuggestions(prev => prev.filter(s => s.id !== id))
+    fetchItems()
+    setActioningIds(prev => {
+      const next = new Set(prev)
+      next.delete(id)
+      return next
+    })
+  }
+
+  const dismissSuggestion = async (id: string) => {
+    setActioningIds(prev => new Set(prev).add(id))
+    // Optimistic remove
+    setSuggestions(prev => prev.filter(s => s.id !== id))
+    await fetch('/api/sprint', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action: 'dismiss_suggestion', suggestion_id: id }),
+    })
+    setActioningIds(prev => {
+      const next = new Set(prev)
+      next.delete(id)
+      return next
+    })
   }
 
   const todayDoneCount = doneItems.filter(i => {
@@ -287,6 +347,74 @@ export default function SprintPage() {
           </button>
         )}
       </div>
+
+      {/* Suggestions Panel */}
+      {suggestions.length > 0 && (
+        <div className="mt-8">
+          <button
+            onClick={() => setShowSuggestions(!showSuggestions)}
+            className="flex items-center gap-2 text-sm font-semibold text-amber-400/80 hover:text-amber-400 mb-3"
+          >
+            {showSuggestions ? <ChevronDown className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />}
+            <Lightbulb className="h-4 w-4" />
+            Suggested ({suggestions.length})
+          </button>
+          {showSuggestions && (
+            <div className="space-y-1">
+              {suggestions.map(s => (
+                <div
+                  key={s.id}
+                  className={cn(
+                    'flex items-center gap-3 py-2.5 px-3 rounded-lg hover:bg-white/5 group transition-all',
+                    actioningIds.has(s.id) && 'opacity-50 pointer-events-none'
+                  )}
+                >
+                  <span className="text-base shrink-0" title={s.source_type}>
+                    {SOURCE_ICONS[s.source_type] || '\uD83D\uDCA1'}
+                  </span>
+
+                  <div className="flex-1 min-w-0">
+                    <span className="text-sm text-white/80 block truncate">{s.title}</span>
+                    {s.due_date && (
+                      <span className="text-[10px] text-white/30">
+                        Due {format(new Date(s.due_date + 'T00:00:00'), 'dd MMM')}
+                      </span>
+                    )}
+                  </div>
+
+                  <span className={cn(
+                    'text-[10px] px-1.5 py-0.5 rounded shrink-0',
+                    STREAM_COLORS[s.stream]?.text || 'text-white/30'
+                  )}>
+                    {s.stream}
+                  </span>
+
+                  {s.priority === 'now' && (
+                    <span className={cn('text-[10px] px-1.5 py-0.5 rounded-full shrink-0', PRIORITY_BADGE['now'])}>
+                      now
+                    </span>
+                  )}
+
+                  <button
+                    onClick={() => acceptSuggestion(s.id)}
+                    className="opacity-0 group-hover:opacity-100 text-xs text-emerald-400 hover:text-emerald-300 flex items-center gap-1 transition-opacity shrink-0"
+                  >
+                    <Plus className="h-3 w-3" /> Add
+                  </button>
+
+                  <button
+                    onClick={() => dismissSuggestion(s.id)}
+                    className="opacity-0 group-hover:opacity-100 text-xs text-white/30 hover:text-white/50 transition-opacity shrink-0"
+                    title="Dismiss"
+                  >
+                    <X className="h-3 w-3" />
+                  </button>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
 
       {/* Backlog */}
       {backlogItems.length > 0 && (

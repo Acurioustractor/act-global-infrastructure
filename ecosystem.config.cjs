@@ -191,9 +191,21 @@ const cronScripts = [
     cron_restart: '0 6 * * *', // Daily 6am AEST
   },
   {
+    name: 'enrich-grants',
+    script: 'scripts/enrich-grant-opportunities.mjs',
+    args: '--batch-size 20',
+    cron_restart: '0 7 * * *', // Daily 7am AEST (after discover-grants at 6am)
+  },
+  {
     name: 'check-grant-deadlines',
     script: 'scripts/check-grant-deadlines.mjs',
     cron_restart: '0 */6 * * *', // Every 6 hours
+  },
+  {
+    name: 'sprint-suggestions',
+    script: 'scripts/generate-sprint-suggestions.mjs',
+    args: '--verbose',
+    cron_restart: '0 6,12,18 * * *', // 3x daily: 6am, 12pm, 6pm AEST
   },
   {
     name: 'sync-grants-ghl',
