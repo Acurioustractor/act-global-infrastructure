@@ -21,10 +21,15 @@ import {
   CheckCircle2,
   Circle,
   BarChart3,
+  Link2,
+  Pencil,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import Link from 'next/link'
+
+const GHL_APP_URL = 'https://app.gohighlevel.com'
+const GHL_LOCATION_ID = process.env.NEXT_PUBLIC_GHL_LOCATION_ID || 'agzsSZWgovjwgpcoASWG'
 
 // ─── Types ───────────────────────────────────────────────────
 
@@ -105,6 +110,7 @@ interface GrantOpportunity {
   categories: string[] | null
   focus_areas: string[] | null
   url: string | null
+  ghl_opportunity_id: string | null
   discovered_by: string | null
   created_at: string | null
   eligibility_criteria: EligibilityCriterion[] | null
@@ -186,6 +192,9 @@ export default function GrantDetailPage() {
   const [drafts, setDrafts] = useState<Record<string, string>>({})
   const [copiedSection, setCopiedSection] = useState<string | null>(null)
   const [expandedDoc, setExpandedDoc] = useState<string | null>(null)
+  const [editingUrl, setEditingUrl] = useState(false)
+  const [urlDraft, setUrlDraft] = useState('')
+  const urlInputRef = useRef<HTMLInputElement>(null)
 
   // Load grant details + funder documents
   const { data, isLoading } = useQuery<{ grant: GrantOpportunity; funderDocuments: FunderDocument[] }>({
@@ -229,6 +238,22 @@ export default function GrantDetailPage() {
       if (!res.ok) throw new Error('Update failed')
     },
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['grant', id] }),
+  })
+
+  // URL update mutation
+  const urlMutation = useMutation({
+    mutationFn: async (url: string) => {
+      const res = await fetch(`/api/grants/${id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ url }),
+      })
+      if (!res.ok) throw new Error('Update failed')
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['grant', id] })
+      setEditingUrl(false)
+    },
   })
 
   // Draft generation mutation
@@ -358,6 +383,16 @@ export default function GrantDetailPage() {
                 <Mail className="w-4 h-4" />
               </a>
             )}
+            {grant.ghl_opportunity_id && (
+              <a
+                href={`${GHL_APP_URL}/v2/location/${GHL_LOCATION_ID}/opportunities/list?opportunityId=${grant.ghl_opportunity_id}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-indigo-400 hover:text-indigo-300 flex items-center gap-1 text-sm px-3 py-1.5 rounded-lg bg-indigo-500/10 hover:bg-indigo-500/20"
+              >
+                GHL <ExternalLink className="w-3 h-3" />
+              </a>
+            )}
             {grant.url && (
               <a
                 href={grant.url}
@@ -369,6 +404,67 @@ export default function GrantDetailPage() {
               </a>
             )}
           </div>
+        </div>
+
+        {/* Grant URL — prominent link bar */}
+        <div className="flex items-center gap-2 p-3 rounded-lg bg-white/5 border border-white/10">
+          <Link2 className="w-4 h-4 text-white/30 shrink-0" />
+          {grant.url && !editingUrl ? (
+            <div className="flex items-center gap-2 flex-1 min-w-0">
+              <a
+                href={grant.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-blue-400 hover:text-blue-300 truncate flex-1"
+              >
+                {grant.url}
+              </a>
+              <button
+                onClick={() => { setUrlDraft(grant.url || ''); setEditingUrl(true); setTimeout(() => urlInputRef.current?.focus(), 50) }}
+                className="text-white/20 hover:text-white/40 shrink-0"
+              >
+                <Pencil className="w-3 h-3" />
+              </button>
+            </div>
+          ) : editingUrl ? (
+            <div className="flex items-center gap-2 flex-1">
+              <input
+                ref={urlInputRef}
+                type="url"
+                value={urlDraft}
+                onChange={e => setUrlDraft(e.target.value)}
+                onKeyDown={e => {
+                  if (e.key === 'Enter') urlMutation.mutate(urlDraft)
+                  if (e.key === 'Escape') setEditingUrl(false)
+                }}
+                placeholder="https://..."
+                className="flex-1 bg-transparent text-sm text-white outline-none placeholder:text-white/20"
+              />
+              <button
+                onClick={() => urlMutation.mutate(urlDraft)}
+                disabled={urlMutation.isPending}
+                className="text-xs text-emerald-400 hover:text-emerald-300 px-2 py-0.5 rounded bg-emerald-500/10"
+              >
+                {urlMutation.isPending ? <Loader2 className="w-3 h-3 animate-spin" /> : 'Save'}
+              </button>
+              <button
+                onClick={() => setEditingUrl(false)}
+                className="text-xs text-white/30 hover:text-white/50"
+              >
+                Cancel
+              </button>
+            </div>
+          ) : (
+            <div className="flex items-center gap-2 flex-1">
+              <span className="text-sm text-white/30">No grant URL — </span>
+              <button
+                onClick={() => { setUrlDraft(''); setEditingUrl(true); setTimeout(() => urlInputRef.current?.focus(), 50) }}
+                className="text-sm text-blue-400 hover:text-blue-300"
+              >
+                Add link
+              </button>
+            </div>
+          )}
         </div>
 
         {/* Key stats */}

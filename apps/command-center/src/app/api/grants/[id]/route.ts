@@ -44,11 +44,12 @@ export async function PATCH(
     const { id } = await params
     const body = await request.json()
 
-    // Update grant_opportunities fields (eligibility, status, etc.)
-    if (body.eligibility_criteria || body.application_status) {
+    // Update grant_opportunities fields (eligibility, status, url, etc.)
+    if (body.eligibility_criteria || body.application_status || body.url !== undefined) {
       const oppUpdates: Record<string, unknown> = {}
       if (body.eligibility_criteria) oppUpdates.eligibility_criteria = body.eligibility_criteria
       if (body.application_status) oppUpdates.application_status = body.application_status
+      if (body.url !== undefined) oppUpdates.url = body.url || null
 
       const { error } = await supabase
         .from('grant_opportunities')
