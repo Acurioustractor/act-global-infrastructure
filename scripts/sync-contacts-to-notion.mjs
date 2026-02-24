@@ -105,6 +105,59 @@ async function getExistingContacts(databaseId) {
 // Upsert Contact to Notion
 // ============================================
 
+// ============================================
+// Partnership Thread Derivation
+// ============================================
+
+// Map GHL tags to partnership threads for Notion filtering
+const THREAD_TAG_MAP = {
+  'world-tour': 'World Tour',
+  'world-tour-partner': 'World Tour',
+  'ila-grant': 'ILA Grant',
+  'mukurtu-node': 'Mukurtu',
+  'justicehub': 'JusticeHub',
+  'justice': 'JusticeHub',
+  'the-harvest': 'Harvest',
+  'harvest': 'Harvest',
+  'picc': 'ILA Grant',
+  'palm-island': 'ILA Grant',
+  'palm island': 'ILA Grant',
+};
+
+// Map GHL tags to world tour stops
+const TOUR_STOP_TAG_MAP = {
+  'alice-springs': 'Alice Springs',
+  'darwin': 'Darwin',
+  'sydney': 'Sydney',
+  'south-africa': 'South Africa',
+  'botswana': 'Botswana',
+  'uganda': 'Uganda',
+  'kenya': 'Kenya',
+  'spain': 'Spain',
+  'netherlands': 'Netherlands',
+  'sweden': 'Sweden',
+  'scotland': 'Scotland',
+};
+
+function derivePartnershipThreads(tags) {
+  if (!tags || !Array.isArray(tags)) return [];
+  const threads = new Set();
+  for (const tag of tags) {
+    const thread = THREAD_TAG_MAP[tag.toLowerCase()];
+    if (thread) threads.add(thread);
+  }
+  return [...threads];
+}
+
+function deriveTourStop(tags) {
+  if (!tags || !Array.isArray(tags)) return null;
+  for (const tag of tags) {
+    const stop = TOUR_STOP_TAG_MAP[tag.toLowerCase()];
+    if (stop) return stop;
+  }
+  return null;
+}
+
 function buildContactProperties(contact) {
   const name = contact.full_name
     || [contact.first_name, contact.last_name].filter(Boolean).join(' ').trim()
@@ -131,6 +184,22 @@ function buildContactProperties(contact) {
   if (contact.tags && Array.isArray(contact.tags) && contact.tags.length > 0) {
     properties['Tags'] = {
       multi_select: contact.tags.slice(0, 10).map(t => ({ name: String(t) })),
+    };
+  }
+
+  // Partnership Threads — derived from tags (multi-select for Notion filtering)
+  const threads = derivePartnershipThreads(contact.tags);
+  if (threads.length > 0) {
+    properties['Partnership Thread'] = {
+      multi_select: threads.map(t => ({ name: t })),
+    };
+  }
+
+  // World Tour Stop — derived from tags (select for Notion filtering)
+  const tourStop = deriveTourStop(contact.tags);
+  if (tourStop) {
+    properties['Tour Stop'] = {
+      select: { name: tourStop },
     };
   }
 
