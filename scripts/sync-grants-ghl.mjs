@@ -37,6 +37,13 @@ const dryRun = process.argv.includes('--dry-run');
 // GHL Grants Pipeline config
 const GRANTS_PIPELINE_ID = 'scom3L0kNwA1W0zPIzMe';
 const DEFAULT_CONTACT_ID = 'AXrbvQAQKR0TcTcZL71H'; // Benjamin Knight — default owner for grant opportunities
+
+// GHL custom field IDs for opportunity metadata
+const GHL_CUSTOM_FIELDS = {
+  submissionLink: 'GwPgNgVUr6MiyVOKqavt',  // TEXT — grant application URL
+  submissionDate: 'dRUwAKU9k70EOqsKVeWN',  // DATE — application deadline
+};
+
 const GHL_STAGES = {
   'Grant Opportunity Identified': '8124c61a-1175-461e-be5d-1fa64ef6dd65',
   'Application In Progress':      '3eb617e6-5635-4091-bd04-acc72d2ae5b0',
@@ -186,6 +193,89 @@ async function syncGHLToGrants() {
 }
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// STEP 1b: Enrich grant_opportunities with GHL custom fields (URL, deadline)
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+async function enrichFromGHLCustomFields() {
+  console.log('\n🔗 Step 1b: Enrich grants with GHL custom fields (URL, deadline)');
+  console.log('─'.repeat(50));
+
+  let ghl = null;
+  try {
+    ghl = createGHLService();
+  } catch {
+    console.log('  ⚠ GHL API not configured — skipping enrichment');
+    return;
+  }
+
+  // Get grants linked to GHL that are missing url or closes_at
+  const { data: grants, error } = await supabase
+    .from('grant_opportunities')
+    .select('id, name, ghl_opportunity_id, url, closes_at')
+    .not('ghl_opportunity_id', 'is', null);
+
+  if (error || !grants?.length) {
+    console.log(`  No linked grants to enrich (${grants?.length || 0})`);
+    return;
+  }
+
+  // Build a lookup from Supabase UUID → real GHL ID
+  const { data: ghlOpps } = await supabase
+    .from('ghl_opportunities')
+    .select('id, ghl_id')
+    .eq('pipeline_name', 'Grants');
+
+  const uuidToGhlId = new Map();
+  for (const opp of ghlOpps || []) {
+    uuidToGhlId.set(opp.id, opp.ghl_id);
+  }
+
+  let enriched = 0;
+  for (const grant of grants) {
+    // Only fetch from API if missing url or closes_at
+    if (grant.url && grant.closes_at) continue;
+
+    // Resolve actual GHL ID — could be stored as UUID or real GHL ID
+    const realGhlId = uuidToGhlId.get(grant.ghl_opportunity_id) || grant.ghl_opportunity_id;
+
+    try {
+      const result = await ghl.request(`/opportunities/${realGhlId}`);
+      const opp = result.opportunity;
+      if (!opp?.customFields?.length) continue;
+
+      const updates = {};
+      for (const cf of opp.customFields) {
+        if (cf.id === GHL_CUSTOM_FIELDS.submissionLink && cf.fieldValue && !grant.url) {
+          updates.url = cf.fieldValue;
+        }
+        if (cf.id === GHL_CUSTOM_FIELDS.submissionDate && cf.fieldValue && !grant.closes_at) {
+          updates.closes_at = cf.fieldValue;
+        }
+      }
+
+      if (Object.keys(updates).length > 0) {
+        console.log(`  📎 ${grant.name}: ${updates.url ? 'URL' : ''}${updates.url && updates.closes_at ? ' + ' : ''}${updates.closes_at ? 'deadline ' + updates.closes_at : ''}`);
+        if (!dryRun) {
+          await supabase
+            .from('grant_opportunities')
+            .update({ ...updates, updated_at: new Date().toISOString() })
+            .eq('id', grant.id);
+        }
+        enriched++;
+      }
+    } catch (err) {
+      // Skip individual failures silently (rate limits etc)
+      if (err.message?.includes('429')) {
+        console.log('  ⚠ Rate limited — pausing enrichment');
+        break;
+      }
+    }
+  }
+
+  console.log(`  Enriched ${enriched} grants with custom field data`);
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // STEP 2: grant_opportunities → GHL
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -325,6 +415,7 @@ async function main() {
   console.log('═'.repeat(50));
 
   await syncGHLToGrants();
+  await enrichFromGHLCustomFields();
   await syncGrantsToGHL();
   await linkApplications();
 
