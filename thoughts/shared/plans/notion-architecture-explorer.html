@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Notion 3.3 Architecture Explorer — ACT Ecosystem</title>
+<style>
+  :root {
+    --act: #3b82f6;
+    --supabase: #10b981;
+    --notion: #191919;
+    --external: #6b7280;
+    --agent: #f59e0b;
+    --retired: #ef4444;
+    --new-infra: #8b5cf6;
+    --bg: #0f172a;
+    --surface: #1e293b;
+    --surface2: #334155;
+    --text: #e2e8f0;
+    --text-muted: #94a3b8;
+    --border: #475569;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+  header { padding: 24px 32px 0; }
+  header h1 { font-size: 24px; font-weight: 700; margin-bottom: 4px; }
+  header p { color: var(--text-muted); font-size: 14px; margin-bottom: 20px; }
+
+  .tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--border); padding: 0 32px; overflow-x: auto; }
+  .tab { padding: 10px 18px; font-size: 13px; font-weight: 500; color: var(--text-muted); cursor: pointer; border: none; background: none; border-bottom: 2px solid transparent; white-space: nowrap; transition: all 0.15s; }
+  .tab:hover { color: var(--text); }
+  .tab.active { color: var(--act); border-bottom-color: var(--act); }
+
+  .content { padding: 24px 32px; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  .legend { display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 20px; font-size: 12px; }
+  .legend-item { display: flex; align-items: center; gap: 6px; }
+  .legend-dot { width: 12px; height: 12px; border-radius: 3px; }
+
+  .diagram-container { background: var(--surface); border-radius: 12px; padding: 20px; overflow-x: auto; margin-bottom: 24px; }
+  svg text { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+
+  .desc { max-width: 800px; margin-bottom: 20px; }
+  .desc h2 { font-size: 18px; margin-bottom: 8px; }
+  .desc h3 { font-size: 15px; margin: 16px 0 8px; color: var(--text-muted); }
+  .desc p, .desc li { font-size: 14px; line-height: 1.6; color: var(--text-muted); }
+  .desc ul { padding-left: 20px; }
+  .desc strong { color: var(--text); }
+
+  .stats-row { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 20px; }
+  .stat-card { background: var(--surface); border-radius: 8px; padding: 16px 20px; min-width: 140px; }
+  .stat-card .num { font-size: 28px; font-weight: 700; }
+  .stat-card .label { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+  .stat-card.green .num { color: var(--supabase); }
+  .stat-card.blue .num { color: var(--act); }
+  .stat-card.amber .num { color: var(--agent); }
+  .stat-card.red .num { color: var(--retired); }
+  .stat-card.purple .num { color: var(--new-infra); }
+
+  /* Comparison matrix */
+  .matrix { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .matrix th, .matrix td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); }
+  .matrix th { background: var(--surface2); color: var(--text-muted); font-weight: 600; position: sticky; top: 0; }
+  .matrix td:first-child { font-weight: 500; color: var(--text); white-space: nowrap; }
+  .matrix tr:hover td { background: rgba(59, 130, 246, 0.05); }
+  .matrix .best { color: var(--supabase); font-weight: 600; }
+  .matrix .worst { color: var(--retired); }
+  .matrix .mid { color: var(--agent); }
+
+  /* Timeline */
+  .timeline { position: relative; padding: 20px 0; }
+  .tl-track { display: flex; gap: 0; margin-bottom: 32px; }
+  .tl-phase { flex: 1; background: var(--surface); border-radius: 8px; padding: 16px; margin: 0 4px; position: relative; border-top: 3px solid var(--act); }
+  .tl-phase.amber { border-top-color: var(--agent); }
+  .tl-phase.purple { border-top-color: var(--new-infra); }
+  .tl-phase.red { border-top-color: var(--retired); }
+  .tl-phase h4 { font-size: 14px; margin-bottom: 4px; }
+  .tl-phase .date { font-size: 12px; color: var(--text-muted); margin-bottom: 8px; }
+  .tl-phase ul { font-size: 12px; color: var(--text-muted); padding-left: 16px; }
+  .tl-phase li { margin-bottom: 4px; }
+  .tl-gate { background: var(--surface2); border-radius: 8px; padding: 16px; margin-top: 12px; border-left: 3px solid var(--agent); }
+  .tl-gate h4 { font-size: 14px; color: var(--agent); margin-bottom: 8px; }
+  .tl-gate ul { font-size: 12px; color: var(--text-muted); padding-left: 16px; }
+
+  .pill { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; }
+  .pill-green { background: rgba(16,185,129,0.15); color: var(--supabase); }
+  .pill-amber { background: rgba(245,158,11,0.15); color: var(--agent); }
+  .pill-red { background: rgba(239,68,68,0.15); color: var(--retired); }
+  .pill-blue { background: rgba(59,130,246,0.15); color: var(--act); }
+  .pill-purple { background: rgba(139,92,246,0.15); color: var(--new-infra); }
+
+  @media (max-width: 768px) {
+    .tabs { padding: 0 16px; }
+    .content { padding: 16px; }
+    header { padding: 16px 16px 0; }
+    .tl-track { flex-direction: column; }
+    .stats-row { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Notion 3.3 Custom Agents — Architecture Explorer</h1>
+  <p>ACT ecosystem integration options after Notion's Custom Agents launch (Feb 24, 2026)</p>
+</header>
+
+<div class="tabs" id="tabs">
+  <button class="tab active" data-panel="current">Current State</button>
+  <button class="tab" data-panel="optionA">A: Conservative</button>
+  <button class="tab" data-panel="optionB">B: Hybrid</button>
+  <button class="tab" data-panel="optionC">C: MCP Provider</button>
+  <button class="tab" data-panel="optionD">D: Notion-First</button>
+  <button class="tab" data-panel="compare">Comparison</button>
+  <button class="tab" data-panel="timeline">Migration</button>
+</div>
+
+<div class="content">
+
+<!-- ==================== CURRENT STATE ==================== -->
+<div class="panel active" id="current">
+  <div class="desc">
+    <h2>Current Architecture</h2>
+    <p>ACT runs <strong>8 scheduled sync scripts</strong> that bridge Notion (27 databases) with Supabase and 8 external systems. Supabase is the central hub — all data flows through it.</p>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-card blue"><div class="num">8</div><div class="label">Sync Scripts</div></div>
+    <div class="stat-card green"><div class="num">27</div><div class="label">Notion DBs</div></div>
+    <div class="stat-card"><div class="num">12+</div><div class="label">Supabase Views</div></div>
+    <div class="stat-card"><div class="num">8</div><div class="label">External Systems</div></div>
+  </div>
+
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:var(--external)"></div> External Systems</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--act)"></div> ACT Scripts</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--supabase)"></div> Supabase</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--notion)"></div> Notion</div>
+  </div>
+
+  <div class="diagram-container" id="diagram-current"></div>
+
+  <div class="desc">
+    <h3>Sync Scripts Detail</h3>
+    <ul>
+      <li><strong>sync-notion-to-supabase</strong> — Pull projects from Notion every 5 min (inbound)</li>
+      <li><strong>poll-notion-checkboxes</strong> — Detect completed actions/decisions every 15 min (inbound)</li>
+      <li><strong>sync-actions-decisions-to-notion</strong> — Push actions + decisions every 15 min (bidirectional)</li>
+      <li><strong>sync-notion-meetings</strong> — Extract meeting notes daily 5:30am (inbound)</li>
+      <li><strong>sync-project-intelligence-to-notion</strong> — Push health + decisions daily 7:30am (outbound)</li>
+      <li><strong>sync-finance-to-notion</strong> — Push financial overview daily 8:30am (outbound)</li>
+      <li><strong>sync-mission-control-to-notion</strong> — Alerts + focus 3x daily (outbound)</li>
+      <li><strong>sync-ghl-to-notion</strong> — Partners + grants every 6h (outbound)</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ==================== OPTION A ==================== -->
+<div class="panel" id="optionA">
+  <div class="desc">
+    <h2>Option A: Conservative — Add Agents Alongside</h2>
+    <p>Keep all existing scripts running. Add 3 Notion agents for <strong>Notion-internal automation</strong> only (no cross-system sync). Zero risk — agents enhance Notion workspace without touching ACT infrastructure.</p>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-card red"><div class="num">0</div><div class="label">Scripts Retired</div></div>
+    <div class="stat-card amber"><div class="num">3</div><div class="label">New Agents</div></div>
+    <div class="stat-card blue"><div class="num">0</div><div class="label">New ACT Code</div></div>
+    <div class="stat-card green"><div class="num">Low</div><div class="label">Risk</div></div>
+  </div>
+
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:var(--external)"></div> External Systems</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--act)"></div> ACT Scripts (kept)</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--supabase)"></div> Supabase</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--notion)"></div> Notion</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--agent)"></div> New Notion Agents</div>
+  </div>
+
+  <div class="diagram-container" id="diagram-optionA"></div>
+
+  <div class="desc">
+    <h3>New Notion Agents</h3>
+    <ul>
+      <li><strong>Sprint Standup Agent</strong> — Summarizes overdue actions, suggests priorities from Notion data alone</li>
+      <li><strong>Meeting Prep Agent</strong> — Pre-populates meeting pages with context from linked projects</li>
+      <li><strong>Project Health Agent</strong> — Scans project DBs, flags stale items, suggests updates</li>
+    </ul>
+    <h3>Why This Works</h3>
+    <ul>
+      <li>Zero changes to ACT codebase</li>
+      <li>Agents only read/write within Notion — no external side effects</li>
+      <li>Tests Notion agent reliability before trusting them with cross-system flows</li>
+      <li>Can be set up in a single afternoon</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ==================== OPTION B ==================== -->
+<div class="panel" id="optionB">
+  <div class="desc">
+    <h2>Option B: Hybrid — Replace Push Scripts Where Agents Are Better</h2>
+    <p>Retire <strong>2 push-to-Notion scripts</strong> and replace them with Notion agents that pull data via ACT API. Keep all cross-system and inbound sync in ACT. Best balance of simplification and safety.</p>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-card red"><div class="num">2</div><div class="label">Scripts Retired</div></div>
+    <div class="stat-card amber"><div class="num">5</div><div class="label">New Agents</div></div>
+    <div class="stat-card blue"><div class="num">~200 LOC</div><div class="label">New ACT Code</div></div>
+    <div class="stat-card amber"><div class="num">Medium</div><div class="label">Risk</div></div>
+  </div>
+
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:var(--external)"></div> External Systems</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--act)"></div> ACT Scripts (kept)</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--retired)"></div> Retired Scripts</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--supabase)"></div> Supabase</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--notion)"></div> Notion</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--agent)"></div> New Notion Agents</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--new-infra)"></div> New API Endpoints</div>
+  </div>
+
+  <div class="diagram-container" id="diagram-optionB"></div>
+
+  <div class="desc">
+    <h3>Scripts Retired</h3>
+    <ul>
+      <li><span class="pill pill-red">RETIRED</span> <strong>sync-project-intelligence-to-notion</strong> — Agent pulls health data from ACT API instead</li>
+      <li><span class="pill pill-red">RETIRED</span> <strong>sync-mission-control-to-notion</strong> — Agent pulls mission items from ACT API instead</li>
+    </ul>
+    <h3>New Notion Agents (5)</h3>
+    <ul>
+      <li><span class="pill pill-amber">AGENT</span> <strong>Project Intelligence Agent</strong> — Pulls from /api/projects/health, writes to Notion dashboard</li>
+      <li><span class="pill pill-amber">AGENT</span> <strong>Mission Control Agent</strong> — Pulls alerts + focus items from /api/mission-control</li>
+      <li><span class="pill pill-amber">AGENT</span> Plus 3 agents from Option A (Sprint, Meeting Prep, Project Health)</li>
+    </ul>
+    <h3>New ACT Code</h3>
+    <ul>
+      <li><span class="pill pill-purple">API</span> <code>/api/notion-agent/health</code> — Read-only endpoint for project health data</li>
+      <li><span class="pill pill-purple">API</span> <code>/api/notion-agent/mission</code> — Read-only endpoint for mission control items</li>
+    </ul>
+    <h3>Why Retire These Two?</h3>
+    <p>These are pure <strong>push-to-Notion</strong> scripts — they read Supabase and write to Notion. A Notion agent can do the same by pulling from an API. The agent runs on Notion's schedule, reducing ACT compute and giving Notion native control over its own data.</p>
+  </div>
+</div>
+
+<!-- ==================== OPTION C ==================== -->
+<div class="panel" id="optionC">
+  <div class="desc">
+    <h2>Option C: MCP Provider — ACT as Data Server</h2>
+    <p>ACT exposes an <strong>MCP server</strong> that Notion agents can query on demand. Replaces all 4 outbound push scripts. Notion agents pull data when needed instead of ACT pushing on a schedule. <em>Blocked on Notion supporting custom MCP servers in agents.</em></p>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-card red"><div class="num">4</div><div class="label">Scripts Retired</div></div>
+    <div class="stat-card amber"><div class="num">7</div><div class="label">New Agents</div></div>
+    <div class="stat-card blue"><div class="num">~500 LOC</div><div class="label">New ACT Code</div></div>
+    <div class="stat-card red"><div class="num">High</div><div class="label">Risk</div></div>
+  </div>
+
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:var(--external)"></div> External Systems</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--act)"></div> ACT Scripts (kept)</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--retired)"></div> Retired Scripts</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--supabase)"></div> Supabase</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--notion)"></div> Notion</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--agent)"></div> New Notion Agents</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--new-infra)"></div> ACT MCP Server</div>
+  </div>
+
+  <div class="diagram-container" id="diagram-optionC"></div>
+
+  <div class="desc">
+    <h3>Scripts Retired</h3>
+    <ul>
+      <li><span class="pill pill-red">RETIRED</span> sync-project-intelligence-to-notion</li>
+      <li><span class="pill pill-red">RETIRED</span> sync-mission-control-to-notion</li>
+      <li><span class="pill pill-red">RETIRED</span> sync-finance-to-notion</li>
+      <li><span class="pill pill-red">RETIRED</span> sync-ghl-to-notion</li>
+    </ul>
+    <h3>New Infrastructure</h3>
+    <ul>
+      <li><span class="pill pill-purple">MCP</span> ACT MCP Server — exposes tools: get_project_health, get_financials, get_mission_items, get_partners, get_grants, search_emails, get_calendar</li>
+      <li>Agents query MCP tools on demand instead of receiving scheduled pushes</li>
+    </ul>
+    <h3>Blockers</h3>
+    <p><strong>Notion custom MCP support is not confirmed.</strong> This option is conditional on Notion 3.3+ allowing agents to connect to external MCP servers. Without this, agents can only use Notion's built-in connectors or webhooks.</p>
+  </div>
+</div>
+
+<!-- ==================== OPTION D ==================== -->
+<div class="panel" id="optionD">
+  <div class="desc">
+    <h2>Option D: Notion-First — Maximum Delegation</h2>
+    <p>Notion becomes the primary workspace orchestrator. ACT reduces to a <strong>thin sync layer</strong> — only handling external system ingestion (Xero, Gmail, GHL). All Notion-internal and cross-DB workflows move to agents. <em>Highest reward, highest risk.</em></p>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-card red"><div class="num">6</div><div class="label">Scripts Retired</div></div>
+    <div class="stat-card amber"><div class="num">10+</div><div class="label">New Agents</div></div>
+    <div class="stat-card blue"><div class="num">~800 LOC</div><div class="label">New ACT Code</div></div>
+    <div class="stat-card red"><div class="num">Very High</div><div class="label">Risk</div></div>
+  </div>
+
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:var(--external)"></div> External Systems</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--act)"></div> ACT Scripts (kept)</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--retired)"></div> Retired Scripts</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--supabase)"></div> Supabase</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--notion)"></div> Notion (primary)</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--agent)"></div> Notion Agents (many)</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--new-infra)"></div> Webhook Bridge + MCP</div>
+  </div>
+
+  <div class="diagram-container" id="diagram-optionD"></div>
+
+  <div class="desc">
+    <h3>Scripts Retired</h3>
+    <ul>
+      <li><span class="pill pill-red">RETIRED</span> sync-project-intelligence-to-notion</li>
+      <li><span class="pill pill-red">RETIRED</span> sync-mission-control-to-notion</li>
+      <li><span class="pill pill-red">RETIRED</span> sync-finance-to-notion</li>
+      <li><span class="pill pill-red">RETIRED</span> sync-ghl-to-notion</li>
+      <li><span class="pill pill-red">RETIRED</span> poll-notion-checkboxes</li>
+      <li><span class="pill pill-red">RETIRED</span> sync-actions-decisions-to-notion</li>
+    </ul>
+    <h3>Scripts Kept</h3>
+    <ul>
+      <li><span class="pill pill-green">KEEP</span> sync-notion-to-supabase — Still need project data in Supabase for dashboard</li>
+      <li><span class="pill pill-green">KEEP</span> sync-notion-meetings — Meeting extraction with embeddings is ACT-specific</li>
+    </ul>
+    <h3>Risks</h3>
+    <ul>
+      <li>Notion agent reliability is unproven at scale</li>
+      <li>Debugging becomes harder — split between ACT logs and Notion agent logs</li>
+      <li>Vendor lock-in increases significantly</li>
+      <li>No rollback path without re-implementing retired scripts</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ==================== COMPARISON ==================== -->
+<div class="panel" id="compare">
+  <div class="desc">
+    <h2>Comparison Matrix</h2>
+    <p>Side-by-side evaluation of all 4 architecture options across 12 dimensions.</p>
+  </div>
+
+  <div style="overflow-x:auto">
+  <table class="matrix">
+    <thead>
+      <tr>
+        <th>Dimension</th>
+        <th>A: Conservative</th>
+        <th>B: Hybrid</th>
+        <th>C: MCP Provider</th>
+        <th>D: Notion-First</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Scripts Retired</td>
+        <td class="best">0</td>
+        <td>2</td>
+        <td>4</td>
+        <td class="worst">6</td>
+      </tr>
+      <tr>
+        <td>New Agents</td>
+        <td>3</td>
+        <td>5</td>
+        <td>7</td>
+        <td class="worst">10+</td>
+      </tr>
+      <tr>
+        <td>New ACT Code</td>
+        <td class="best">0 LOC</td>
+        <td>~200 LOC</td>
+        <td>~500 LOC</td>
+        <td class="worst">~800 LOC</td>
+      </tr>
+      <tr>
+        <td>Implementation Effort</td>
+        <td class="best">1 afternoon</td>
+        <td>2-3 days</td>
+        <td>1-2 weeks</td>
+        <td class="worst">3-4 weeks</td>
+      </tr>
+      <tr>
+        <td>Risk Level</td>
+        <td class="best">Low</td>
+        <td class="mid">Medium</td>
+        <td class="worst">High</td>
+        <td class="worst">Very High</td>
+      </tr>
+      <tr>
+        <td>Blocked on Notion?</td>
+        <td class="best">No</td>
+        <td class="best">No</td>
+        <td class="worst">Yes — MCP support</td>
+        <td class="worst">Yes — MCP + webhooks</td>
+      </tr>
+      <tr>
+        <td>Compute Saved</td>
+        <td class="worst">None</td>
+        <td>~15%</td>
+        <td class="mid">~30%</td>
+        <td class="best">~50%</td>
+      </tr>
+      <tr>
+        <td>Maintenance Reduction</td>
+        <td class="worst">None</td>
+        <td>~20%</td>
+        <td class="mid">~40%</td>
+        <td class="best">~60%</td>
+      </tr>
+      <tr>
+        <td>Vendor Lock-in</td>
+        <td class="best">No change</td>
+        <td class="mid">Slight increase</td>
+        <td>Moderate</td>
+        <td class="worst">Significant</td>
+      </tr>
+      <tr>
+        <td>Data Freshness</td>
+        <td>Same (5-15 min)</td>
+        <td class="best">Better (on-demand)</td>
+        <td class="best">Best (real-time)</td>
+        <td class="mid">Varies by agent</td>
+      </tr>
+      <tr>
+        <td>Resilience</td>
+        <td class="best">High — battle-tested</td>
+        <td class="best">High — fallback to scripts</td>
+        <td class="mid">Medium — new infra</td>
+        <td class="worst">Low — Notion dependency</td>
+      </tr>
+      <tr>
+        <td>Monthly Cost Impact</td>
+        <td>+$0 (agents free on Team)</td>
+        <td>-$5 (less compute)</td>
+        <td class="mid">-$10 + MCP hosting</td>
+        <td>-$15 + agent limits?</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="desc" style="margin-top: 24px">
+    <h3>Recommendation</h3>
+    <p><strong>Start with Option A</strong> (zero risk, immediate value), then graduate to <strong>Option B</strong> after validating agent reliability over 2-4 weeks. Option C is only worth pursuing if Notion ships custom MCP support. Option D is a long-term possibility but premature today.</p>
+  </div>
+</div>
+
+<!-- ==================== TIMELINE ==================== -->
+<div class="panel" id="timeline">
+  <div class="desc">
+    <h2>Migration Timeline</h2>
+    <p>Phased approach from conservative to hybrid, with decision gates before advancing.</p>
+  </div>
+
+  <div class="timeline">
+    <div class="tl-track">
+      <div class="tl-phase">
+        <h4><span class="pill pill-blue">Phase 1</span> Conservative</h4>
+        <div class="date">March 2026 (1 afternoon)</div>
+        <ul>
+          <li>Create 3 Notion agents (Sprint, Meeting Prep, Project Health)</li>
+          <li>Agents work within Notion only</li>
+          <li>Zero ACT code changes</li>
+          <li>Monitor agent reliability for 2-4 weeks</li>
+          <li>Collect: accuracy, latency, failure rate</li>
+        </ul>
+      </div>
+      <div class="tl-phase amber">
+        <h4><span class="pill pill-amber">Phase 2</span> Hybrid</h4>
+        <div class="date">April 2026 (2-3 days)</div>
+        <ul>
+          <li>Build 2 read-only API endpoints</li>
+          <li>Create Project Intelligence + Mission Control agents</li>
+          <li>Run agents in parallel with scripts for 1 week</li>
+          <li>Compare output: agent vs script</li>
+          <li>Retire scripts only after parity confirmed</li>
+        </ul>
+      </div>
+      <div class="tl-phase purple">
+        <h4><span class="pill pill-purple">Phase 3</span> MCP (Conditional)</h4>
+        <div class="date">May-June 2026 (1-2 weeks)</div>
+        <ul>
+          <li>Only if Notion ships custom MCP support</li>
+          <li>Build ACT MCP server with 7 tools</li>
+          <li>Migrate finance + GHL push to agents</li>
+          <li>Retire 2 more scripts</li>
+          <li>Keep all inbound sync in ACT</li>
+        </ul>
+      </div>
+      <div class="tl-phase red">
+        <h4><span class="pill pill-red">Phase 4</span> Notion-First (Gate)</h4>
+        <div class="date">Aug 2026+ (decision gate)</div>
+        <ul>
+          <li>Only if ALL criteria met (see below)</li>
+          <li>Migrate checkbox polling to Notion automation</li>
+          <li>Migrate actions sync to agent</li>
+          <li>ACT becomes thin ingest layer</li>
+          <li>Requires proven agent reliability</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tl-gate">
+      <h4>Decision Gate Criteria (for Phase 4)</h4>
+      <ul>
+        <li>Notion agents have been running reliably for 3+ months with &lt;1% failure rate</li>
+        <li>Notion supports custom MCP servers in agents (confirmed and stable)</li>
+        <li>Agent logs are accessible via API for monitoring/alerting</li>
+        <li>Rollback to scripts can be done within 1 hour (kept in archive)</li>
+        <li>No critical business process depends solely on a Notion agent without ACT fallback</li>
+        <li>Cost savings exceed the operational overhead of managing 10+ agents</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+</div><!-- /content -->
+
+<script>
+// === Tab Navigation ===
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById(tab.dataset.panel).classList.add('active');
+  });
+});
+
+// === SVG Diagram Engine ===
+const C = {
+  act: '#3b82f6', supabase: '#10b981', notion: '#191919', notionText: '#fff',
+  external: '#6b7280', agent: '#f59e0b', retired: '#ef4444', newInfra: '#8b5cf6',
+  text: '#e2e8f0', textMuted: '#94a3b8', bg: '#1e293b', line: '#475569',
+  surface: '#334155'
+};
+
+function svg(w, h) {
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}" width="${w}" height="${h}" style="max-width:100%">`;
+}
+
+function box(x, y, w, h, fill, label, sub, opts={}) {
+  const stroke = opts.stroke || 'none';
+  const sw = opts.strokeWidth || 0;
+  const textColor = opts.textColor || (fill === C.notion ? C.notionText : C.text);
+  const opacity = opts.opacity || 1;
+  const dashed = opts.dashed ? ' stroke-dasharray="6,4"' : '';
+  const strikethrough = opts.strikethrough ? `<line x1="${x+8}" y1="${y+h/2}" x2="${x+w-8}" y2="${y+h/2}" stroke="${C.retired}" stroke-width="2"/>` : '';
+  let glow = '';
+  if (opts.glow) {
+    glow = `<rect x="${x-2}" y="${y-2}" width="${w+4}" height="${h+4}" rx="10" fill="none" stroke="${opts.glow}" stroke-width="2" opacity="0.4"/>`;
+  }
+  return `${glow}<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="8" fill="${fill}" opacity="${opacity}" stroke="${stroke}" stroke-width="${sw}"${dashed}/>
+    <text x="${x+w/2}" y="${y+h/2 - (sub ? 6 : 0)}" text-anchor="middle" fill="${textColor}" font-size="12" font-weight="600">${label}</text>
+    ${sub ? `<text x="${x+w/2}" y="${y+h/2+12}" text-anchor="middle" fill="${textColor}" font-size="10" opacity="0.7">${sub}</text>` : ''}
+    ${strikethrough}`;
+}
+
+function arrow(x1, y1, x2, y2, color, label, opts={}) {
+  const dashed = opts.dashed ? ' stroke-dasharray="5,3"' : '';
+  const mx = (x1+x2)/2, my = (y1+y2)/2;
+  const dx = x2-x1, dy = y2-y1;
+  const len = Math.sqrt(dx*dx+dy*dy);
+  const ux = dx/len, uy = dy/len;
+  const ax = x2 - ux*8, ay = y2 - uy*8;
+  const px = -uy*4, py = ux*4;
+  return `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${color}" stroke-width="1.5"${dashed} opacity="0.7"/>
+    <polygon points="${x2},${y2} ${ax+px},${ay+py} ${ax-px},${ay-py}" fill="${color}" opacity="0.7"/>
+    ${label ? `<text x="${mx}" y="${my-6}" text-anchor="middle" fill="${C.textMuted}" font-size="9">${label}</text>` : ''}`;
+}
+
+function sectionLabel(x, y, label) {
+  return `<text x="${x}" y="${y}" fill="${C.textMuted}" font-size="11" font-weight="600" text-transform="uppercase" letter-spacing="1">${label}</text>`;
+}
+
+// === Current State Diagram ===
+function drawCurrent() {
+  let s = svg(960, 520);
+
+  // Section labels
+  s += sectionLabel(20, 20, 'EXTERNAL SYSTEMS');
+  s += sectionLabel(310, 20, 'ACT SYNC SCRIPTS');
+  s += sectionLabel(620, 20, 'DATA LAYER');
+  s += sectionLabel(800, 20, 'NOTION (27 DBs)');
+
+  // External systems (left column)
+  const ext = [
+    ['Xero', 'Finance'], ['Gmail (4)', 'Email'], ['GHL', 'CRM'],
+    ['Google Cal', 'Calendar'], ['GitHub', 'Code'], ['Webflow', 'Web'],
+    ['Telegram', 'Bot'], ['iMessage', 'Chat']
+  ];
+  ext.forEach(([name, sub], i) => {
+    s += box(20, 40 + i*58, 120, 44, C.external, name, sub);
+  });
+
+  // ACT Scripts (middle column)
+  const scripts = [
+    ['sync-notion', '5 min', 'inbound'],
+    ['poll-checkboxes', '15 min', 'inbound'],
+    ['actions-decisions', '15 min', 'bidir'],
+    ['meetings', 'daily', 'inbound'],
+    ['project-intel', 'daily', 'outbound'],
+    ['finance', 'daily', 'outbound'],
+    ['mission-ctrl', '3x/day', 'outbound'],
+    ['ghl-to-notion', '6h', 'outbound']
+  ];
+  scripts.forEach(([name, freq, dir], i) => {
+    s += box(280, 40 + i*58, 150, 44, C.act, name, freq);
+  });
+
+  // Supabase (center-right)
+  s += box(580, 120, 120, 280, C.supabase, 'Supabase', '12+ views');
+
+  // Notion DBs (right column, grouped)
+  const notionGroups = [
+    ['Projects', '5 DBs'],
+    ['Sprint', '4 DBs'],
+    ['Execution', '5 DBs'],
+    ['Finance', '2 DBs'],
+    ['Partners', '2 DBs'],
+    ['Content', '3 DBs'],
+    ['Ops', '3 DBs'],
+    ['People', '1 DB']
+  ];
+  notionGroups.forEach(([name, sub], i) => {
+    s += box(810, 40 + i*58, 130, 44, C.notion, name, sub);
+  });
+
+  // Arrows: External → Supabase
+  [0,1,2,3,4,5,6,7].forEach(i => {
+    s += arrow(140, 62+i*58, 580, 260, C.line, '');
+  });
+
+  // Arrows: Scripts ↔ Supabase
+  scripts.forEach(([,,dir], i) => {
+    const sy = 62 + i*58;
+    if (dir === 'inbound' || dir === 'bidir') {
+      s += arrow(580, 260, 430, sy, C.supabase, '');
+    }
+    if (dir === 'outbound' || dir === 'bidir') {
+      s += arrow(430, sy, 580, 260, C.act, '');
+    }
+  });
+
+  // Arrows: Scripts ↔ Notion
+  scripts.forEach(([,,dir], i) => {
+    const sy = 62 + i*58;
+    const ny = 62 + i*58;
+    if (dir === 'inbound' || dir === 'bidir') {
+      s += arrow(810, ny, 700, 260, C.notion, '');
+    }
+    if (dir === 'outbound' || dir === 'bidir') {
+      s += arrow(700, 260, 810, ny, C.act, '');
+    }
+  });
+
+  s += '</svg>';
+  document.getElementById('diagram-current').innerHTML = s;
+}
+
+// === Option A Diagram ===
+function drawOptionA() {
+  let s = svg(960, 520);
+
+  s += sectionLabel(20, 20, 'EXTERNAL SYSTEMS');
+  s += sectionLabel(310, 20, 'ACT SYNC (ALL KEPT)');
+  s += sectionLabel(620, 20, 'SUPABASE');
+  s += sectionLabel(780, 20, 'NOTION + NEW AGENTS');
+
+  // External systems
+  const ext = ['Xero', 'Gmail (4)', 'GHL', 'Google Cal', 'GitHub', 'Webflow', 'Telegram', 'iMessage'];
+  ext.forEach((name, i) => {
+    s += box(20, 40 + i*58, 120, 44, C.external, name, '');
+  });
+
+  // ACT Scripts (all kept)
+  const scripts = ['sync-notion', 'poll-checkboxes', 'actions-decisions', 'meetings', 'project-intel', 'finance', 'mission-ctrl', 'ghl-to-notion'];
+  scripts.forEach((name, i) => {
+    s += box(280, 40 + i*58, 150, 44, C.act, name, 'kept');
+  });
+
+  // Supabase
+  s += box(580, 150, 120, 220, C.supabase, 'Supabase', 'unchanged');
+
+  // Notion DBs
+  s += box(780, 40, 160, 120, C.notion, 'Notion', '27 databases');
+
+  // New agents (amber glow)
+  const agents = ['Sprint Standup', 'Meeting Prep', 'Project Health'];
+  agents.forEach((name, i) => {
+    s += box(780, 200 + i*70, 160, 50, C.agent, name, 'Notion Agent', {glow: C.agent});
+  });
+
+  // Agent arrows (internal to Notion)
+  agents.forEach((_, i) => {
+    s += arrow(860, 160, 860, 200 + i*70, C.agent, '', {dashed: true});
+  });
+
+  // Arrows: external → supabase → scripts → notion (simplified)
+  s += arrow(140, 260, 280, 260, C.line, '');
+  s += arrow(430, 260, 580, 260, C.line, '');
+  s += arrow(700, 260, 780, 100, C.line, '');
+
+  s += `<text x="860" y="470" text-anchor="middle" fill="${C.agent}" font-size="13" font-weight="600">Agents work within Notion only</text>`;
+  s += `<text x="860" y="488" text-anchor="middle" fill="${C.textMuted}" font-size="11">No cross-system data access</text>`;
+
+  s += '</svg>';
+  document.getElementById('diagram-optionA').innerHTML = s;
+}
+
+// === Option B Diagram ===
+function drawOptionB() {
+  let s = svg(960, 560);
+
+  s += sectionLabel(20, 20, 'EXTERNAL');
+  s += sectionLabel(200, 20, 'ACT SCRIPTS');
+  s += sectionLabel(470, 20, 'SUPABASE + API');
+  s += sectionLabel(730, 20, 'NOTION + AGENTS');
+
+  // External (compact)
+  const ext = ['Xero', 'Gmail', 'GHL', 'Cal', 'GitHub', 'Webflow', 'Telegram'];
+  ext.forEach((name, i) => {
+    s += box(20, 40 + i*52, 100, 38, C.external, name, '');
+  });
+
+  // ACT Scripts — kept vs retired
+  const scripts = [
+    ['sync-notion', '5m', false],
+    ['poll-checkboxes', '15m', false],
+    ['actions-decisions', '15m', false],
+    ['meetings', 'daily', false],
+    ['project-intel', 'daily', true],   // RETIRED
+    ['finance', 'daily', false],
+    ['mission-ctrl', '3x/day', true],   // RETIRED
+    ['ghl-to-notion', '6h', false]
+  ];
+  scripts.forEach(([name, freq, retired], i) => {
+    if (retired) {
+      s += box(180, 40 + i*52, 150, 38, C.surface, name, 'RETIRED', {stroke: C.retired, strokeWidth: 2, dashed: true, strikethrough: true, opacity: 0.5});
+    } else {
+      s += box(180, 40 + i*52, 150, 38, C.act, name, freq);
+    }
+  });
+
+  // Supabase + new API endpoints
+  s += box(440, 80, 140, 180, C.supabase, 'Supabase', '12+ views');
+  s += box(440, 300, 140, 40, C.newInfra, '/api/health', 'NEW', {glow: C.newInfra});
+  s += box(440, 350, 140, 40, C.newInfra, '/api/mission', 'NEW', {glow: C.newInfra});
+
+  // API arrows from Supabase
+  s += arrow(510, 260, 510, 300, C.newInfra, '');
+
+  // Notion + agents
+  s += box(720, 40, 220, 100, C.notion, 'Notion', '27 databases');
+
+  const agents = [
+    ['Sprint Standup', 'internal'],
+    ['Meeting Prep', 'internal'],
+    ['Project Health', 'internal'],
+    ['Project Intel Agent', 'pulls API'],
+    ['Mission Ctrl Agent', 'pulls API']
+  ];
+  agents.forEach(([name, sub], i) => {
+    const isNew = i >= 3;
+    s += box(720, 170 + i*56, 220, 42, C.agent, name, sub, {glow: isNew ? C.newInfra : C.agent});
+  });
+
+  // Agent → API arrows for pull agents
+  s += arrow(720, 170 + 3*56 + 21, 580, 320, C.newInfra, 'pulls', {dashed: true});
+  s += arrow(720, 170 + 4*56 + 21, 580, 370, C.newInfra, 'pulls', {dashed: true});
+
+  // Internal agents → Notion
+  [0,1,2].forEach(i => {
+    s += arrow(830, 140, 830, 170 + i*56, C.agent, '', {dashed: true});
+  });
+
+  s += '</svg>';
+  document.getElementById('diagram-optionB').innerHTML = s;
+}
+
+// === Option C Diagram ===
+function drawOptionC() {
+  let s = svg(960, 520);
+
+  s += sectionLabel(20, 20, 'EXTERNAL');
+  s += sectionLabel(180, 20, 'ACT (REDUCED)');
+  s += sectionLabel(420, 20, 'ACT MCP SERVER');
+  s += sectionLabel(700, 20, 'NOTION AGENTS');
+
+  // External
+  const ext = ['Xero', 'Gmail', 'GHL', 'Cal', 'GitHub', 'Telegram'];
+  ext.forEach((name, i) => {
+    s += box(20, 40 + i*60, 100, 44, C.external, name, '');
+  });
+
+  // ACT Scripts (reduced — 4 kept, 4 retired)
+  const scripts = [
+    ['sync-notion', '5m', false],
+    ['poll-checkboxes', '15m', false],
+    ['actions-decisions', '15m', false],
+    ['meetings', 'daily', false],
+    ['project-intel', '', true],
+    ['finance', '', true],
+    ['mission-ctrl', '', true],
+    ['ghl-to-notion', '', true]
+  ];
+  scripts.forEach(([name, freq, retired], i) => {
+    if (retired) {
+      s += box(160, 40 + i*52, 140, 38, C.surface, name, 'RETIRED', {stroke: C.retired, strokeWidth: 2, dashed: true, strikethrough: true, opacity: 0.4});
+    } else {
+      s += box(160, 40 + i*52, 140, 38, C.act, name, freq);
+    }
+  });
+
+  // MCP Server (new infra, center)
+  s += box(390, 60, 180, 340, C.newInfra, '', '', {glow: C.newInfra});
+  s += `<text x="480" y="85" text-anchor="middle" fill="${C.text}" font-size="14" font-weight="700">ACT MCP Server</text>`;
+
+  const tools = ['get_project_health', 'get_financials', 'get_mission_items', 'get_partners', 'get_grants', 'search_emails', 'get_calendar'];
+  tools.forEach((name, i) => {
+    s += `<rect x="405" y="${100 + i*38}" width="150" height="28" rx="4" fill="rgba(255,255,255,0.1)"/>`;
+    s += `<text x="480" y="${118 + i*38}" text-anchor="middle" fill="${C.text}" font-size="10">${name}</text>`;
+  });
+
+  // Supabase (below MCP)
+  s += box(420, 430, 120, 50, C.supabase, 'Supabase', 'data source');
+  s += arrow(480, 430, 480, 400, C.supabase, '');
+
+  // Notion Agents (right)
+  const agents = [
+    'Project Intel', 'Finance Agent', 'Mission Control',
+    'GHL Bridge', 'Sprint Standup', 'Meeting Prep', 'Project Health'
+  ];
+  agents.forEach((name, i) => {
+    s += box(700, 60 + i*56, 180, 42, C.agent, name, 'calls MCP', {glow: C.agent});
+    s += arrow(700, 81 + i*56, 570, 81 + i*56, C.newInfra, '', {dashed: true});
+  });
+
+  // Notion
+  s += box(700, 460, 180, 40, C.notion, 'Notion (27 DBs)', '');
+  agents.forEach((_, i) => {
+    s += arrow(790, 102 + i*56, 790, 460, C.agent, '', {dashed: true});
+  });
+
+  s += `<text x="480" y="510" text-anchor="middle" fill="${C.retired}" font-size="12" font-weight="600">BLOCKED: Requires Notion custom MCP support</text>`;
+
+  s += '</svg>';
+  document.getElementById('diagram-optionC').innerHTML = s;
+}
+
+// === Option D Diagram ===
+function drawOptionD() {
+  let s = svg(960, 540);
+
+  s += sectionLabel(20, 20, 'EXTERNAL');
+  s += sectionLabel(180, 20, 'ACT (THIN LAYER)');
+  s += sectionLabel(420, 20, 'BRIDGE INFRA');
+  s += sectionLabel(700, 20, 'NOTION (PRIMARY)');
+
+  // External
+  const ext = ['Xero', 'Gmail', 'GHL', 'Cal', 'GitHub', 'Telegram'];
+  ext.forEach((name, i) => {
+    s += box(20, 40 + i*60, 100, 44, C.external, name, '');
+  });
+
+  // ACT — mostly retired
+  const scripts = [
+    ['sync-notion', '5m', false],
+    ['meetings', 'daily', false],
+    ['poll-checkboxes', '', true],
+    ['actions-decisions', '', true],
+    ['project-intel', '', true],
+    ['finance', '', true],
+    ['mission-ctrl', '', true],
+    ['ghl-to-notion', '', true]
+  ];
+  scripts.forEach(([name, freq, retired], i) => {
+    if (retired) {
+      s += box(160, 40 + i*52, 140, 38, C.surface, name, 'RETIRED', {stroke: C.retired, strokeWidth: 2, dashed: true, strikethrough: true, opacity: 0.3});
+    } else {
+      s += box(160, 40 + i*52, 140, 38, C.act, name, freq);
+    }
+  });
+
+  // Bridge infra
+  s += box(400, 60, 170, 140, C.newInfra, 'MCP Server', '7 tools', {glow: C.newInfra});
+  s += box(400, 230, 170, 80, C.newInfra, 'Webhook Bridge', 'events → agents', {glow: C.newInfra});
+  s += box(400, 340, 170, 60, C.supabase, 'Supabase', 'still central DB');
+
+  // Notion (primary, large)
+  s += box(690, 40, 250, 120, C.notion, 'Notion Workspace', '27 databases — primary', {});
+
+  // Many agents
+  const agents = [
+    'Project Intel', 'Mission Control', 'Finance',
+    'GHL Bridge', 'Sprint', 'Meeting Prep',
+    'Actions Sync', 'Checkbox Monitor', 'Health', 'Alerts'
+  ];
+  agents.forEach((name, i) => {
+    const row = Math.floor(i / 2);
+    const col = i % 2;
+    s += box(690 + col*128, 180 + row*52, 120, 38, C.agent, name, '', {glow: C.agent});
+  });
+
+  // Arrows
+  s += arrow(570, 130, 690, 80, C.newInfra, 'MCP calls', {dashed: true});
+  s += arrow(570, 270, 690, 240, C.newInfra, 'events', {dashed: true});
+  s += arrow(485, 340, 485, 310, C.supabase, '');
+
+  s += `<text x="480" y="440" text-anchor="middle" fill="${C.retired}" font-size="11" font-weight="600">VERY HIGH RISK — Only if all gate criteria met (Aug 2026+)</text>`;
+  s += `<text x="480" y="458" text-anchor="middle" fill="${C.textMuted}" font-size="10">Vendor lock-in significant. No rollback without re-implementing 6 scripts.</text>`;
+
+  s += '</svg>';
+  document.getElementById('diagram-optionD').innerHTML = s;
+}
+
+// Render all diagrams
+drawCurrent();
+drawOptionA();
+drawOptionB();
+drawOptionC();
+drawOptionD();
+</script>
+
+</body>
+</html>
