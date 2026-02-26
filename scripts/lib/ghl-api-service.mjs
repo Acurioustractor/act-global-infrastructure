@@ -333,6 +333,18 @@ export class GHLService {
   }
 
   /**
+   * Delete an opportunity by ID
+   *
+   * @param {string} opportunityId - GHL opportunity ID
+   * @returns {Promise<Object>} Deletion result
+   */
+  async deleteOpportunity(opportunityId) {
+    return this.request(`/opportunities/${opportunityId}`, {
+      method: 'DELETE',
+    });
+  }
+
+  /**
    * Get all opportunities across all pipelines
    *
    * @returns {Promise<Array>} All opportunities
