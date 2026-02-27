@@ -156,6 +156,12 @@ const cronScripts = [
     cron_restart: '30 9 * * *', // Daily 9:30am AEST (after finance-sync at 8:30am)
   },
   {
+    name: 'enrich-communications',
+    script: 'scripts/enrich-communications.mjs',
+    args: '--limit 100',
+    cron_restart: '20 */6 * * *', // Every 6h +20min (after gmail-sync at :00, email-to-knowledge at :10)
+  },
+  {
     name: 'email-to-knowledge',
     script: 'scripts/email-to-knowledge.mjs',
     args: '--since 1d --limit 50',
@@ -189,6 +195,22 @@ const cronScripts = [
     name: 'weekly-digest',
     script: 'scripts/weekly-digest.mjs',
     cron_restart: '0 18 * * 0', // Sunday 6pm AEST
+  },
+  {
+    name: 'push-highlights-notion',
+    script: 'scripts/push-highlights-to-notion.mjs',
+    cron_restart: '*/30 * * * *', // Every 30 minutes
+  },
+  {
+    name: 'notion-weekly-review',
+    script: 'scripts/notion-weekly-review.mjs',
+    cron_restart: '0 17 * * 0', // Sunday 5pm AEST (before weekly-digest at 6pm)
+  },
+  {
+    name: 'weekly-relationship-review',
+    script: 'scripts/weekly-relationship-review.mjs',
+    args: '--verbose',
+    cron_restart: '0 18 * * 5', // Friday 6pm AEST
   },
   {
     name: 'discover-grants',
