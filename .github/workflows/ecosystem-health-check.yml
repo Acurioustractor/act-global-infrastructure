@@ -32,6 +32,7 @@ jobs:
           SUPABASE_SHARED_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SHARED_SERVICE_ROLE_KEY }}
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GH_PROJECT_TOKEN }}
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
         run: |
           if [ -n "${{ inputs.site }}" ]; then
             node scripts/health-check-service.mjs --site "${{ inputs.site }}"
