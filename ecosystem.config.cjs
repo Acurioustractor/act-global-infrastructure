@@ -65,13 +65,18 @@ const cronScripts = [
   {
     name: 'data-freshness',
     script: 'scripts/data-freshness-monitor.mjs',
-    cron_restart: '0 */6 * * *', // Every 6 hours
+    cron_restart: '0 6 * * *', // Daily 6am AEST (reduced from 6h — health dashboard covers real-time)
+  },
+  {
+    name: 'gmail-watch-renew',
+    script: 'scripts/renew-gmail-watch.mjs',
+    cron_restart: '0 3 * * *', // Daily 3am AEST (watch expires after 7 days, daily safety margin)
   },
   {
     name: 'gmail-sync',
     script: 'scripts/sync-gmail-to-supabase.mjs',
-    args: '--days 3',
-    cron_restart: '0 */6 * * *', // Every 6 hours (4 mailboxes, ~500 msgs per run)
+    args: '--days 1',
+    cron_restart: '0 4 * * *', // Daily 4am AEST reconciliation (push handles real-time)
   },
   {
     name: 'goods-auto-tagger',
@@ -136,7 +141,7 @@ const cronScripts = [
     name: 'generate-insights',
     script: 'scripts/generate-insights.mjs',
     args: '--verbose',
-    cron_restart: '*/30 * * * *', // Every 30 minutes
+    cron_restart: '0 */2 * * *', // Every 2 hours (reduced from 30min — most insights don't need 30-min freshness)
   },
   {
     name: 'finance-sync',
@@ -199,13 +204,13 @@ const cronScripts = [
   {
     name: 'check-grant-deadlines',
     script: 'scripts/check-grant-deadlines.mjs',
-    cron_restart: '0 */6 * * *', // Every 6 hours
+    cron_restart: '0 7 * * *', // Daily 7am AEST (reduced from 6h — reactor handles alerts)
   },
   {
     name: 'sprint-suggestions',
     script: 'scripts/generate-sprint-suggestions.mjs',
     args: '--verbose',
-    cron_restart: '0 6,12,18 * * *', // 3x daily: 6am, 12pm, 6pm AEST
+    cron_restart: '0 7 * * *', // Daily 7am AEST (reduced from 3x — reactor handles urgent items)
   },
   {
     name: 'sync-grants-ghl',

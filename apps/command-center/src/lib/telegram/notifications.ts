@@ -1,6 +1,7 @@
-import { Bot } from 'grammy'
+import { Bot, InlineKeyboard } from 'grammy'
 import { supabase } from '@/lib/supabase'
 import { getBrisbaneDate, getBrisbaneNow, getBrisbaneDateOffset } from '@/lib/timezone'
+import type { TelegramAction } from '@/lib/events/types'
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // CORE NOTIFICATION SENDER
@@ -673,6 +674,58 @@ export async function getSyncHealthSummary(): Promise<string> {
   }
 
   return lines.join('\n')
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// HELPERS
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// REACTIVE NOTIFICATIONS (Event-driven)
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+/**
+ * Send a reactive notification to all authorized users with optional inline action buttons.
+ * Used by the event reactor for real-time push notifications.
+ */
+export async function sendReactiveNotification(
+  message: string,
+  actions?: TelegramAction[]
+): Promise<{ sent: number; errors: string[] }> {
+  const chatIds = getNotifyChatIds()
+  const errors: string[] = []
+  let sent = 0
+
+  const api = getBotApi()
+
+  // Build inline keyboard if actions provided
+  let reply_markup: InlineKeyboard | undefined
+  if (actions && actions.length > 0) {
+    const keyboard = new InlineKeyboard()
+    for (const action of actions) {
+      keyboard.text(action.label, action.callback)
+    }
+    reply_markup = keyboard
+  }
+
+  for (const chatId of chatIds) {
+    try {
+      const chunks = splitNotification(message, 4000)
+      for (let i = 0; i < chunks.length; i++) {
+        const isLast = i === chunks.length - 1
+        if (isLast && reply_markup) {
+          await api.sendMessage(chatId, chunks[i], { reply_markup })
+        } else {
+          await api.sendMessage(chatId, chunks[i])
+        }
+      }
+      sent++
+    } catch (err) {
+      errors.push(`Chat ${chatId}: ${(err as Error).message}`)
+    }
+  }
+
+  return { sent, errors }
 }
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
