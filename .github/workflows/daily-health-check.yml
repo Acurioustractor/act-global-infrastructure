@@ -6,6 +6,10 @@ on:
     - cron: '0 17 * * *'
   workflow_dispatch: # Manual trigger
 
+permissions:
+  issues: write
+  contents: read
+
 jobs:
   health-check:
     name: Monitor Deployment Health
