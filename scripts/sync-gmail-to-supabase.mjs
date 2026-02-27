@@ -22,6 +22,7 @@ import { sendDiscordMessage, sendEmbed } from './discord-notify.mjs';
 import OpenAI from 'openai';
 import { batchMatchOrCreate } from './lib/contact-intelligence.mjs';
 import { isOwnDomainEmail } from './lib/cultural-guard.mjs';
+import { recordSyncStatus } from './lib/sync-status.mjs';
 
 // Stats tracking
 const stats = {
@@ -712,6 +713,12 @@ async function syncGmail(options = {}) {
   console.log(`  Errors: ${stats.errors}`);
   console.log(`  Duration: ${duration}s`);
   console.log();
+
+  await recordSyncStatus(supabase, 'gmail_sync', {
+    success: stats.errors === 0,
+    recordCount: stats.inserted,
+    durationMs: Date.now() - stats.startTime,
+  });
 }
 
 // Parse CLI arguments
@@ -741,5 +748,7 @@ try {
   }
   // Notify Discord of failure
   await notifyDiscord('error', err.message);
+  const sb = createClient(process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY);
+  await recordSyncStatus(sb, 'gmail_sync', { success: false, error: err.message });
   process.exit(1);
 }

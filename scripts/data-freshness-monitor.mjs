@@ -25,6 +25,7 @@
 
 import '../lib/load-env.mjs';
 import { createClient } from '@supabase/supabase-js';
+import { recordSyncStatus } from './lib/sync-status.mjs';
 
 const supabaseUrl = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
@@ -115,7 +116,30 @@ async function main() {
   // Log to api_usage for tracking
   await logMonitorRun(results, Date.now() - start, stale.length);
 
+  // Record own sync status
+  await recordSyncStatus(supabase, 'data_freshness_monitor', {
+    success: true,
+    recordCount: results.length,
+    durationMs: Date.now() - start,
+  });
+
+  // Fire integration_event for stale integrations (triggers Telegram via event reactor)
   if (stale.length > 0) {
+    const staleNames = stale.map(r => r.label).join(', ');
+    await supabase.from('integration_events').insert({
+      source: 'data-freshness-monitor',
+      event_type: 'staleness_alert',
+      entity_type: 'sync_status',
+      payload: {
+        critical_count: stale.length,
+        warning_count: warning.length,
+        stale_sources: stale.map(r => ({ label: r.label, table: r.table, age_hours: r.age_hours })),
+        message: `${stale.length} data source(s) critically stale: ${staleNames}`,
+      },
+      triggered_by: SCRIPT_NAME,
+      latency_ms: Date.now() - start,
+    });
+
     process.exit(1); // Non-zero exit for alerting
   }
 }

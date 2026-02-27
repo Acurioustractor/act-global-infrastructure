@@ -17,6 +17,7 @@
  */
 
 import { createClient } from '@supabase/supabase-js';
+import { recordSyncStatus } from './lib/sync-status.mjs';
 import dotenv from 'dotenv';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
@@ -250,12 +251,17 @@ async function main() {
       }
     }
     console.log(`✅ Upserted ${upserted}/${results.length} project health records\n`);
+    await recordSyncStatus(supabase, 'compute_project_health', {
+      success: true,
+      recordCount: upserted,
+    });
   } else {
     console.log('\nRun with --apply to upsert to project_health table.\n');
   }
 }
 
-main().catch(err => {
+main().catch(async err => {
   console.error('Fatal error:', err);
+  await recordSyncStatus(supabase, 'compute_project_health', { success: false, error: err.message });
   process.exit(1);
 });

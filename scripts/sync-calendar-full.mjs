@@ -21,6 +21,7 @@ import { execSync } from 'child_process';
 import { google } from 'googleapis';
 import { createClient } from '@supabase/supabase-js';
 import { loadProjects } from './lib/project-loader.mjs';
+import { recordSyncStatus } from './lib/sync-status.mjs';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 
@@ -535,6 +536,11 @@ async function syncCalendar(options = {}) {
   console.log(`  Projects detected: ${Object.keys(totalProjectCounts).length}`);
   console.log(`  Contacts matched: ${totalMatchedContacts}`);
   console.log();
+
+  await recordSyncStatus(supabase, 'sync_calendar', {
+    success: errors === 0,
+    recordCount: updated,
+  });
 }
 
 // Parse CLI arguments
@@ -563,5 +569,7 @@ try {
   if (options.verbose) {
     console.error(err.stack);
   }
+  const sb = createClient(process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY);
+  await recordSyncStatus(sb, 'sync_calendar', { success: false, error: err.message });
   process.exit(1);
 }

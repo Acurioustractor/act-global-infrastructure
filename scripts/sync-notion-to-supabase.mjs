@@ -28,6 +28,7 @@ import { Client } from '@notionhq/client';
 import { createClient } from '@supabase/supabase-js';
 import { readFileSync, existsSync } from 'fs';
 import { loadProjectsConfig } from './lib/project-loader.mjs';
+import { recordSyncStatus } from './lib/sync-status.mjs';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import dotenv from 'dotenv';
@@ -541,6 +542,12 @@ Environment Variables:
     console.log(`   Errors:   ${stats.errors}`);
     console.log(`   Duration: ${duration}s\n`);
 
+    await recordSyncStatus(supabase, 'sync_notion', {
+      success: stats.errors === 0,
+      recordCount: stats.created + stats.updated,
+      durationMs: Date.now() - stats.startTime,
+    });
+
     if (stats.errors > 0) {
       console.log('Sync completed with errors (see above)\n');
       process.exit(1);
@@ -553,6 +560,7 @@ Environment Variables:
     console.error('  - SUPABASE_SERVICE_ROLE_KEY environment variable');
     console.error('  - Database ID in config/notion-database-ids.json (actProjects)');
     console.error('');
+    await recordSyncStatus(supabase, 'sync_notion', { success: false, error: error.message });
     process.exit(1);
   }
 }

@@ -20,6 +20,7 @@ import { createClient } from '@supabase/supabase-js';
 import { trackedCompletion } from './lib/llm-client.mjs';
 import { shouldProcessEmail, isOwnDomainEmail } from './lib/cultural-guard.mjs';
 import { saveProjectLinks } from './lib/project-linker.mjs';
+import { recordSyncStatus } from './lib/sync-status.mjs';
 
 // Current enrichment version — bump to re-process all
 const INTELLIGENCE_VERSION = 2;
@@ -37,7 +38,7 @@ For each email, return a JSON object with:
 - sentiment: "positive" | "neutral" | "negative" | "urgent"
 - topics: array of 1-3 short topic tags (lowercase)
 - requires_response: boolean (see rules below)
-- project_codes: array of 0-2 project codes from: JH, EL, HARVEST, FARM, STUDIO, GOODS, WORLD-TOUR, OPS, TECH, PICC
+- project_codes: array of 0-2 project codes using ONLY the ACT-XX format codes listed below
 - project_confidence: 0.0-1.0
 
 REQUIRES_RESPONSE RULES (strict):
@@ -49,12 +50,23 @@ REQUIRES_RESPONSE RULES (strict):
 - Receipts, invoices, payment confirmations → false
 - Only set true for INBOUND emails from real people asking a question, making a request, or expecting a reply
 
-Project code guide:
-  JH = JusticeHub (digital justice), EL = Empathy Ledger (storytelling/impact),
-  HARVEST = The Harvest (venue/events), FARM = The Farm (R&D/manufacturing),
-  STUDIO = Innovation Studio (consulting), GOODS = marketplace,
-  WORLD-TOUR = 2026 travel/field testing, OPS = business admin,
-  TECH = infrastructure/dev, PICC = community program
+Project codes (use ONLY these exact codes):
+  ACT-JH = JusticeHub (youth justice reform)
+  ACT-EL = Empathy Ledger (storytelling/impact platform)
+  ACT-HV = The Harvest Witta (venue/events)
+  ACT-FM = The Farm (R&D/manufacturing)
+  ACT-GD = Goods (social enterprise marketplace)
+  ACT-IN = ACT Infrastructure (business admin, operations, software, travel)
+  ACT-DO = Designing for Obsolescence (tech/infrastructure/dev/R&D)
+  ACT-PI = PICC (community program)
+  ACT-UA = Uncle Allan Palm Island Art
+  ACT-CA = Caring for those who care
+  ACT-BG = BG Fit / CAMPFIRE (Brodie Germaine, youth fitness)
+  ACT-OO = Oonchiumpa (Portugal/international)
+  ACT-SM = SMART
+  ACT-CN = Contained
+  ACT-CE = Custodian Economy
+  ACT-TR = Treacher
 
 Return a JSON array with one object per email (same order). No markdown, ONLY valid JSON.`;
 
@@ -118,7 +130,9 @@ async function enrichBatch(emails, dryRun, verbose) {
         response_needed_by: result.requires_response
           ? (email.direction === 'inbound' ? 'us' : 'them')
           : null,
-        project_codes: Array.isArray(result.project_codes) ? result.project_codes : [],
+        project_codes: Array.isArray(result.project_codes)
+          ? result.project_codes.filter(c => /^ACT-[A-Z0-9]{2,3}$/.test(c))
+          : [],
         ai_project_confidence: result.project_confidence || 0,
         intelligence_version: INTELLIGENCE_VERSION,
         enriched_at: new Date().toISOString(),
@@ -256,11 +270,17 @@ async function main() {
   }
 
   console.log(`\n[OK] Enriched ${totalEnriched}/${toProcess.length} emails${dryRun ? ' (DRY RUN)' : ''}\n`);
+
+  await recordSyncStatus(supabase, 'enrich_communications', {
+    success: true,
+    recordCount: totalEnriched,
+  });
 }
 
 try {
   await main();
 } catch (err) {
   console.error('\n[ERROR]', err.message);
+  await recordSyncStatus(supabase, 'enrich_communications', { success: false, error: err.message });
   process.exit(1);
 }
