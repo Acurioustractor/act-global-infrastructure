@@ -134,8 +134,8 @@ function matchContact(
 export async function processGmailHistory(
   emailAddress: string,
   notifiedHistoryId: string
-): Promise<{ messagesProcessed: number; errors: number }> {
-  const stats = { messagesProcessed: 0, errors: 0 };
+): Promise<{ messagesProcessed: number; errors: number; processedSourceIds: string[] }> {
+  const stats = { messagesProcessed: 0, errors: 0, processedSourceIds: [] as string[] };
 
   // Get last known historyId from our sync state
   const { data: syncState } = await supabase
@@ -273,6 +273,7 @@ export async function processGmailHistory(
       });
 
       stats.messagesProcessed++;
+      stats.processedSourceIds.push(fullMessage.id!);
 
       // Rate limit
       await new Promise((resolve) => setTimeout(resolve, 50));

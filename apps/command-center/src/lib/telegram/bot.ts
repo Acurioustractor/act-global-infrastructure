@@ -3,6 +3,7 @@ import { executeConfirmedAction } from '@/lib/agent-tools'
 import { transcribeVoice, synthesizeSpeech, cycleVoice, getVoicePreference } from './voice'
 import { clearConversation } from './conversation-state'
 import { loadPendingAction, clearPendingAction } from './pending-action-state'
+import { handleReactorCallback } from './reactor-callbacks'
 import { processAgentMessage } from '@/lib/agent-loop'
 import { extractReceiptFromPhoto } from '@/lib/receipt-extractor'
 
@@ -195,6 +196,29 @@ export function getBot(): Bot {
     } catch (err) {
       console.error('Text processing error:', err)
       await ctx.reply(`Error: ${(err as Error).message}`)
+    }
+  })
+
+  // Callback queries from inline keyboard buttons (reactor notifications)
+  _bot.on('callback_query:data', async (ctx) => {
+    if (!ctx.from || !isAuthorized(ctx.from.id)) {
+      await ctx.answerCallbackQuery({ text: 'Unauthorised.' })
+      return
+    }
+
+    try {
+      const result = await handleReactorCallback(ctx.callbackQuery.data, ctx.chat?.id ?? ctx.from.id)
+      await ctx.answerCallbackQuery({ text: result.toast || 'Done' })
+      if (result.reply) {
+        await ctx.reply(result.reply)
+      }
+      if (result.editMessage) {
+        // Update the original notification to show action was taken
+        await ctx.editMessageText(result.editMessage)
+      }
+    } catch (err) {
+      console.error('Callback query error:', err)
+      await ctx.answerCallbackQuery({ text: 'Error processing action' })
     }
   })
 

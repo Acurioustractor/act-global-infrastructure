@@ -29,21 +29,22 @@ export const rules: ReactionRule[] = [
       if (messagesProcessed === 0) return null;
 
       const emailAddress = payload.emailAddress as string;
+      const sourceIds = (payload.processedSourceIds as string[]) || [];
+      if (sourceIds.length === 0) return null;
 
-      // Check if any of the new messages are from key contacts
-      const { data: recentEmails } = await supabase
+      // Look up only the specific messages from this push event
+      const { data: newEmails } = await supabase
         .from('communications_history')
         .select('subject, metadata, ghl_contact_id, direction')
         .eq('source_system', 'gmail')
         .eq('direction', 'inbound')
-        .not('ghl_contact_id', 'is', null)
-        .order('occurred_at', { ascending: false })
-        .limit(5);
+        .in('source_id', sourceIds)
+        .not('ghl_contact_id', 'is', null);
 
-      if (!recentEmails || recentEmails.length === 0) return null;
+      if (!newEmails || newEmails.length === 0) return null;
 
       // Check if any matched contacts have key tags
-      const contactIds = [...new Set(recentEmails.map((e) => e.ghl_contact_id).filter(Boolean))];
+      const contactIds = [...new Set(newEmails.map((e) => e.ghl_contact_id).filter(Boolean))];
       if (contactIds.length === 0) return null;
 
       const { data: keyContacts } = await supabase
@@ -56,7 +57,7 @@ export const rules: ReactionRule[] = [
 
       // Build notification for the first key contact email
       const keyContact = keyContacts[0];
-      const email = recentEmails.find((e) => e.ghl_contact_id === keyContact.ghl_id);
+      const email = newEmails.find((e) => e.ghl_contact_id === keyContact.ghl_id);
       if (!email) return null;
 
       const from = (email.metadata as Record<string, string>)?.from || 'Unknown';

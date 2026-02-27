@@ -111,6 +111,7 @@ export async function POST(request: NextRequest) {
         historyId: String(historyId),
         messagesProcessed: result.messagesProcessed,
         errors: result.errors,
+        processedSourceIds: result.processedSourceIds,
       },
       latency_ms: latencyMs,
       processed_at: new Date().toISOString(),
