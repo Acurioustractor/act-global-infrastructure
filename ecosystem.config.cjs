@@ -280,21 +280,6 @@ module.exports = {
   apps: [
     // === Dev Servers ===
     {
-      name: 'act-api',
-      script: 'packages/act-dashboard/api-server.mjs',
-      cwd: CWD,
-      watch: false,
-      autorestart: true,
-      max_restarts: 10,
-      restart_delay: 1000,
-      env: {
-        NODE_ENV: 'development'
-      },
-      error_file: '/tmp/act-api-error.log',
-      out_file: '/tmp/act-api-out.log',
-      log_date_format: 'YYYY-MM-DD HH:mm:ss',
-    },
-    {
       name: 'act-frontend',
       script: 'npm',
       args: 'run dev',
