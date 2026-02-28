@@ -17,13 +17,17 @@ import {
   CreditCard,
   ArrowUpRight,
   ArrowDownRight,
+  Hammer,
+  Building2,
+  Leaf,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
-type TabId = 'overview' | 'financials' | 'pipeline' | 'grants' | 'team'
+type TabId = 'overview' | 'budget' | 'financials' | 'pipeline' | 'grants' | 'team'
 
 const tabs: { id: TabId; label: string }[] = [
   { id: 'overview', label: 'Overview' },
+  { id: 'budget', label: 'Budget' },
   { id: 'financials', label: 'Financials' },
   { id: 'pipeline', label: 'Pipeline' },
   { id: 'grants', label: 'Grants' },
@@ -92,6 +96,7 @@ export default function HarvestPage() {
 
       {/* Tab content */}
       {activeTab === 'overview' && <OverviewTab data={data} />}
+      {activeTab === 'budget' && <BudgetTab />}
       {activeTab === 'financials' && <FinancialsTab data={data} />}
       {activeTab === 'pipeline' && <PipelineTab data={data} />}
       {activeTab === 'grants' && <GrantsTab data={data} />}
@@ -427,6 +432,281 @@ function TeamTab({ data }: { data: any }) {
           {stakeholders.length === 0 && (
             <div className="p-6 text-center text-zinc-500 text-sm">No stakeholders tagged with Harvest in GHL</div>
           )}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function BudgetTab() {
+  const { data, isLoading } = useQuery({
+    queryKey: ['harvest-budget'],
+    queryFn: () => fetch('/api/harvest/budget').then(r => r.json()),
+  })
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center h-64">
+        <Loader2 className="h-6 w-6 animate-spin text-zinc-400" />
+      </div>
+    )
+  }
+
+  const summary = data?.summary || {}
+  const phases = data?.phases || []
+  const costCentres = data?.costCentres || []
+  const drawdowns = data?.drawdowns || []
+  const expenses = data?.expenses || []
+  const lease = data?.lease || {}
+
+  return (
+    <div className="space-y-6">
+      {/* Budget overview cards */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <MetricCard icon={Hammer} label="Total Fund" value={`$${(summary.totalBudget || 0).toLocaleString()}`} color="text-amber-400" />
+        <MetricCard icon={ArrowDownRight} label="Drawn from Fund" value={`$${(summary.totalDrawn || 0).toLocaleString()}`} color="text-emerald-400" />
+        <MetricCard icon={ArrowUpRight} label="Spent" value={`$${(summary.totalExpensed || 0).toLocaleString()}`} color="text-red-400" />
+        <MetricCard icon={DollarSign} label="Cash Available" value={`$${(summary.cashAvailable || 0).toLocaleString()}`} color="text-blue-400" />
+      </div>
+
+      {/* Fund progress — drawn vs total */}
+      <div className="bg-zinc-900 border border-zinc-800 rounded-lg p-5">
+        <div className="flex items-center justify-between mb-2">
+          <h3 className="text-sm font-medium text-zinc-300">Capital Improvement Fund — $250k from Landlord</h3>
+          <span className="text-sm text-zinc-400">{summary.pctDrawn || 0}% drawn</span>
+        </div>
+        <div className="space-y-2">
+          <div>
+            <div className="flex justify-between text-xs text-zinc-500 mb-1">
+              <span>Drawn (received from owners)</span>
+              <span>${(summary.totalDrawn || 0).toLocaleString()} of ${(summary.totalBudget || 0).toLocaleString()}</span>
+            </div>
+            <div className="w-full bg-zinc-800 rounded-full h-3 overflow-hidden">
+              <div
+                className="h-full bg-gradient-to-r from-emerald-600 to-emerald-400 rounded-full transition-all"
+                style={{ width: `${Math.min(Number(summary.pctDrawn) || 0, 100)}%` }}
+              />
+            </div>
+          </div>
+          <div>
+            <div className="flex justify-between text-xs text-zinc-500 mb-1">
+              <span>Spent (paid to contractors/suppliers)</span>
+              <span>${(summary.totalExpensed || 0).toLocaleString()} of ${(summary.totalBudget || 0).toLocaleString()}</span>
+            </div>
+            <div className="w-full bg-zinc-800 rounded-full h-3 overflow-hidden">
+              <div
+                className="h-full bg-gradient-to-r from-red-600 to-red-400 rounded-full transition-all"
+                style={{ width: `${Math.min(Number(summary.pctSpent) || 0, 100)}%` }}
+              />
+            </div>
+          </div>
+        </div>
+        <div className="flex justify-between mt-3 text-xs text-zinc-500">
+          <span>Phase 1: ${(summary.phase1Budget || 0).toLocaleString()}</span>
+          <span>Still to draw: ${(summary.remainingToDraw || 0).toLocaleString()}</span>
+          <span>Phase 2: ${(summary.phase2Budget || 0).toLocaleString()}</span>
+        </div>
+      </div>
+
+      {/* Fund drawdowns — money IN */}
+      <div className="bg-zinc-900 border border-zinc-800 rounded-lg">
+        <div className="p-4 border-b border-zinc-800">
+          <h3 className="text-sm font-medium text-zinc-300 flex items-center gap-2">
+            <ArrowDownRight className="h-4 w-4 text-emerald-400" />
+            Fund Drawdowns (Money In from Owners)
+          </h3>
+        </div>
+        <div className="divide-y divide-zinc-800">
+          {drawdowns.map((d: any) => (
+            <div key={d.number} className="px-4 py-3 flex items-center justify-between">
+              <div>
+                <div className="text-sm text-zinc-200">{d.number} — Billed to {d.billed_to}</div>
+                <div className="text-xs text-zinc-500 max-w-md truncate">{d.description}</div>
+                <div className="text-xs text-zinc-600 mt-0.5">{d.date} · {(d.phase || '').replace('_', ' ')}</div>
+              </div>
+              <div className="text-right flex-shrink-0">
+                <div className="text-sm font-medium text-emerald-400">+${(d.subtotal || 0).toLocaleString()}</div>
+                <div className="text-xs text-zinc-500">{d.pctOfFund}% of fund</div>
+                <span className={cn(
+                  'text-xs px-1.5 py-0.5 rounded mt-0.5 inline-block',
+                  d.status === 'paid' ? 'bg-emerald-500/20 text-emerald-400' : 'bg-amber-500/20 text-amber-400'
+                )}>
+                  {d.status}
+                </span>
+              </div>
+            </div>
+          ))}
+          {drawdowns.length === 0 && (
+            <div className="p-6 text-center text-zinc-500 text-sm">No fund drawdowns yet</div>
+          )}
+        </div>
+      </div>
+
+      {/* Expenses — money OUT */}
+      <div className="bg-zinc-900 border border-zinc-800 rounded-lg">
+        <div className="p-4 border-b border-zinc-800">
+          <h3 className="text-sm font-medium text-zinc-300 flex items-center gap-2">
+            <ArrowUpRight className="h-4 w-4 text-red-400" />
+            Expenses (Money Out to Contractors &amp; Suppliers)
+          </h3>
+        </div>
+        <div className="divide-y divide-zinc-800">
+          {expenses.map((exp: any) => (
+            <div key={exp.number} className="px-4 py-3 flex items-center justify-between">
+              <div>
+                <div className="text-sm text-zinc-200">{exp.vendor}</div>
+                <div className="text-xs text-zinc-500 max-w-md truncate">{exp.description}</div>
+                <div className="flex items-center gap-2 mt-0.5">
+                  <span className="text-xs text-zinc-600">{exp.date}</span>
+                  {exp.cost_centre && <span className="text-xs px-1.5 py-0.5 bg-zinc-800 text-zinc-400 rounded">{exp.cost_centre}</span>}
+                  {exp.total_hours && <span className="text-xs text-zinc-600">{exp.total_hours}hrs</span>}
+                </div>
+              </div>
+              <div className="text-right flex-shrink-0">
+                <div className="text-sm font-medium text-red-400">-${(exp.total || 0).toLocaleString()}</div>
+                <div className="text-xs text-zinc-500">{exp.pctOfFund}% of fund</div>
+                <span className={cn(
+                  'text-xs px-1.5 py-0.5 rounded mt-0.5 inline-block',
+                  exp.status === 'paid' ? 'bg-emerald-500/20 text-emerald-400' : 'bg-amber-500/20 text-amber-400'
+                )}>
+                  {exp.status}
+                </span>
+              </div>
+            </div>
+          ))}
+          {expenses.length === 0 && (
+            <div className="p-6 text-center text-zinc-500 text-sm">No expenses recorded yet</div>
+          )}
+        </div>
+      </div>
+
+      {/* Phase budgets */}
+      {phases.map((phase: any) => (
+        <div key={phase.id} className="bg-zinc-900 border border-zinc-800 rounded-lg">
+          <div className="p-4 border-b border-zinc-800 flex items-center justify-between">
+            <h3 className="text-sm font-medium text-zinc-300 flex items-center gap-2">
+              <Hammer className="h-4 w-4 text-amber-400" />
+              {phase.name}
+            </h3>
+            <div className="flex items-center gap-3">
+              <span className="text-sm text-zinc-400">${phase.budget.toLocaleString()}</span>
+              <span className={cn(
+                'text-xs px-1.5 py-0.5 rounded',
+                phase.status === 'in_progress' ? 'bg-blue-500/20 text-blue-400' :
+                phase.status === 'complete' ? 'bg-emerald-500/20 text-emerald-400' :
+                'bg-zinc-700 text-zinc-400'
+              )}>
+                {phase.status.replace('_', ' ')}
+              </span>
+            </div>
+          </div>
+          <div className="divide-y divide-zinc-800">
+            {phase.lineItems.map((item: any) => (
+              <div key={item.id} className="px-4 py-2.5">
+                <div className="flex items-center justify-between">
+                  <div className="min-w-0 flex-1">
+                    <div className="text-sm text-zinc-200 truncate">{item.name}</div>
+                    <div className="flex items-center gap-2 mt-0.5">
+                      <span className="text-xs px-1.5 py-0.5 bg-zinc-800 text-zinc-400 rounded">{item.cost_centre}</span>
+                      <span className="text-xs text-zinc-600">{item.zone}</span>
+                    </div>
+                  </div>
+                  <div className="text-right flex-shrink-0 ml-4">
+                    <div className="text-sm font-medium text-zinc-300">${item.budget.toLocaleString()}</div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+
+      {/* Cost centres summary */}
+      <div className="bg-zinc-900 border border-zinc-800 rounded-lg">
+        <div className="p-4 border-b border-zinc-800">
+          <h3 className="text-sm font-medium text-zinc-300 flex items-center gap-2">
+            <Leaf className="h-4 w-4 text-green-400" />
+            Budget by Cost Centre
+          </h3>
+        </div>
+        <div className="divide-y divide-zinc-800">
+          {costCentres.map((cc: any) => (
+            <div key={cc.code} className="px-4 py-2.5 flex items-center justify-between">
+              <div>
+                <div className="text-sm text-zinc-200">{cc.code}</div>
+                <div className="text-xs text-zinc-500">{cc.description} ({cc.lineItemCount} items)</div>
+              </div>
+              <span className="text-sm font-medium text-zinc-300">${cc.budget.toLocaleString()}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Lease summary */}
+      <div className="bg-zinc-900 border border-zinc-800 rounded-lg">
+        <div className="p-4 border-b border-zinc-800">
+          <h3 className="text-sm font-medium text-zinc-300 flex items-center gap-2">
+            <Building2 className="h-4 w-4 text-purple-400" />
+            Lease Summary
+          </h3>
+        </div>
+        <div className="p-4 space-y-3">
+          <div className="grid grid-cols-2 gap-4 text-sm">
+            <div>
+              <div className="text-zinc-500 text-xs">Landlord</div>
+              <div className="text-zinc-200">{lease.landlord}</div>
+            </div>
+            <div>
+              <div className="text-zinc-500 text-xs">Premises</div>
+              <div className="text-zinc-200">{lease.premises}</div>
+            </div>
+            <div>
+              <div className="text-zinc-500 text-xs">Early Access (Rent-Free)</div>
+              <div className="text-zinc-200">{lease.earlyAccess?.start} to {lease.earlyAccess?.end}</div>
+            </div>
+            <div>
+              <div className="text-zinc-500 text-xs">Lease Commencement</div>
+              <div className="text-zinc-200">{lease.commencementDate}</div>
+            </div>
+            <div>
+              <div className="text-zinc-500 text-xs">Base Rent</div>
+              <div className="text-zinc-200">${(lease.baseRentMonthly || 0).toLocaleString()}/mo (${(lease.baseRentAnnual || 0).toLocaleString()}/yr)</div>
+            </div>
+            <div>
+              <div className="text-zinc-500 text-xs">Target Rent</div>
+              <div className="text-zinc-200">${(lease.targetRentAnnual || 0).toLocaleString()}/yr</div>
+            </div>
+          </div>
+          <div>
+            <div className="text-zinc-500 text-xs mb-1">Revenue Share</div>
+            <div className="text-zinc-300 text-sm">{lease.revenueShare}</div>
+          </div>
+          <div>
+            <div className="text-zinc-500 text-xs mb-1">Extension Options</div>
+            <div className="flex gap-2">
+              {(lease.options || []).map((opt: any, i: number) => (
+                <span key={i} className="text-xs px-2 py-1 bg-zinc-800 text-zinc-300 rounded">
+                  Option {opt.option}: +{opt.years}yr{opt.years > 1 ? 's' : ''}
+                </span>
+              ))}
+            </div>
+          </div>
+          <div>
+            <div className="text-zinc-500 text-xs mb-1">Tenant Outgoings</div>
+            <div className="flex flex-wrap gap-1">
+              {(lease.outgoings || []).map((item: string, i: number) => (
+                <span key={i} className="text-xs px-2 py-0.5 bg-zinc-800 text-zinc-400 rounded">{item}</span>
+              ))}
+            </div>
+          </div>
+          <div>
+            <div className="text-zinc-500 text-xs mb-1">Reporting Requirements</div>
+            <div className="space-y-1 text-sm text-zinc-300">
+              <div>Quarterly: {lease.reporting?.quarterly}</div>
+              <div>Annual: {lease.reporting?.annual}</div>
+              <div>Fund: {lease.reporting?.fund_reporting}</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

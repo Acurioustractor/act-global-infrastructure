@@ -23,6 +23,9 @@ import {
   BarChart3,
   Link2,
   Pencil,
+  Target,
+  FileText,
+  CircleAlert,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { useState, useRef } from 'react'
@@ -93,6 +96,27 @@ interface FunderDocument {
   sort_order: number
 }
 
+interface ActReadinessProject {
+  code: string
+  score: number
+  reason: string
+}
+
+interface ActReadinessStory {
+  title: string
+  type?: string
+  relevance: number
+}
+
+interface ActReadiness {
+  readiness_pct: number
+  aligned_projects: ActReadinessProject[]
+  matched_stories: ActReadinessStory[]
+  assets: { ready: string[]; missing: string[] }
+  knowledge_hits: number
+  gaps: string[]
+}
+
 interface GrantOpportunity {
   id: string
   name: string
@@ -118,6 +142,10 @@ interface GrantOpportunity {
   timeline_stages: TimelineStage[] | null
   funder_info: FunderInfo | null
   grant_structure: GrantStructure | null
+  requirements_summary: string | null
+  act_readiness: ActReadiness | null
+  enriched_at: string | null
+  enrichment_source: string | null
 }
 
 interface GrantAsset {
@@ -545,6 +573,156 @@ export default function GrantDetailPage() {
           <p className="text-white/50 text-sm leading-relaxed">{grant.description}</p>
         )}
       </div>
+
+      {/* ─── Requirements Summary ─── */}
+      <div className="glass-card p-5 rounded-lg">
+        <h2 className="text-sm font-semibold text-white mb-3 flex items-center gap-2">
+          <FileText className="w-4 h-4 text-cyan-400" />
+          Requirements Summary
+        </h2>
+        {grant.requirements_summary ? (
+          <div>
+            <p className="text-sm text-white/60 leading-relaxed">{grant.requirements_summary}</p>
+            {grant.enriched_at && (
+              <p className="text-[10px] text-white/20 mt-3 flex items-center gap-1">
+                Auto-extracted from grant page · {formatDate(grant.enriched_at)}
+              </p>
+            )}
+          </div>
+        ) : (
+          <p className="text-sm text-white/30">
+            {grant.url ? 'Not yet analyzed — run enrichment to extract requirements' : 'No grant URL — add a URL above to enable auto-extraction'}
+          </p>
+        )}
+      </div>
+
+      {/* ─── ACT Readiness ─── */}
+      {grant.act_readiness && (
+        <div className="glass-card p-5 rounded-lg space-y-4">
+          <div className="flex items-center justify-between">
+            <h2 className="text-sm font-semibold text-white flex items-center gap-2">
+              <Target className="w-4 h-4 text-amber-400" />
+              ACT Readiness
+            </h2>
+            <div className="flex items-center gap-2">
+              <div className="relative w-10 h-10">
+                <svg className="w-10 h-10 -rotate-90" viewBox="0 0 36 36">
+                  <circle cx="18" cy="18" r="15" fill="none" stroke="currentColor" className="text-white/10" strokeWidth="3" />
+                  <circle
+                    cx="18" cy="18" r="15" fill="none"
+                    strokeWidth="3"
+                    strokeLinecap="round"
+                    strokeDasharray={`${(grant.act_readiness.readiness_pct / 100) * 94.2} 94.2`}
+                    className={cn(
+                      grant.act_readiness.readiness_pct >= 70 ? 'text-emerald-400' :
+                      grant.act_readiness.readiness_pct >= 40 ? 'text-amber-400' : 'text-red-400'
+                    )}
+                    stroke="currentColor"
+                  />
+                </svg>
+                <span className={cn(
+                  'absolute inset-0 flex items-center justify-center text-[10px] font-bold',
+                  grant.act_readiness.readiness_pct >= 70 ? 'text-emerald-400' :
+                  grant.act_readiness.readiness_pct >= 40 ? 'text-amber-400' : 'text-red-400'
+                )}>
+                  {grant.act_readiness.readiness_pct}%
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {/* Aligned Projects */}
+            {grant.act_readiness.aligned_projects.length > 0 && (
+              <div>
+                <p className="text-[10px] uppercase tracking-wider text-white/30 mb-2">Aligned Projects</p>
+                <div className="space-y-1.5">
+                  {grant.act_readiness.aligned_projects.map(p => (
+                    <Link
+                      key={p.code}
+                      href={`/projects/${p.code}`}
+                      className="flex items-center gap-2 py-1 px-2 rounded hover:bg-white/5 transition-colors group"
+                    >
+                      <span className={cn(
+                        'text-xs font-mono font-medium',
+                        p.score >= 70 ? 'text-emerald-400' :
+                        p.score >= 50 ? 'text-amber-400' : 'text-white/50'
+                      )}>
+                        {p.score}%
+                      </span>
+                      <span className="text-xs text-white/60 group-hover:text-white/80">{p.code}</span>
+                      <span className="text-[10px] text-white/25 truncate flex-1">{p.reason}</span>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Matched Stories */}
+            {grant.act_readiness.matched_stories.length > 0 && (
+              <div>
+                <p className="text-[10px] uppercase tracking-wider text-white/30 mb-2">Matched Stories</p>
+                <div className="space-y-1">
+                  {grant.act_readiness.matched_stories.map((s, i) => (
+                    <div key={i} className="flex items-center gap-2 py-0.5">
+                      <span className="text-[10px] text-white/20 shrink-0">{s.type || 'story'}</span>
+                      <span className="text-xs text-white/50 truncate">{s.title}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Asset Checklist */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            {grant.act_readiness.assets.ready.length > 0 && (
+              <div>
+                <p className="text-[10px] uppercase tracking-wider text-white/30 mb-1.5">Ready</p>
+                <div className="space-y-0.5">
+                  {grant.act_readiness.assets.ready.map((a, i) => (
+                    <div key={i} className="flex items-center gap-1.5">
+                      <CircleCheck className="w-3 h-3 text-emerald-400 shrink-0" />
+                      <span className="text-xs text-white/50">{a}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+            {grant.act_readiness.assets.missing.length > 0 && (
+              <div>
+                <p className="text-[10px] uppercase tracking-wider text-white/30 mb-1.5">Missing</p>
+                <div className="space-y-0.5">
+                  {grant.act_readiness.assets.missing.map((a, i) => (
+                    <div key={i} className="flex items-center gap-1.5">
+                      <CircleAlert className="w-3 h-3 text-red-400 shrink-0" />
+                      <span className="text-xs text-white/40">{a}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Gaps */}
+          {grant.act_readiness.gaps.length > 0 && (
+            <div>
+              <p className="text-[10px] uppercase tracking-wider text-white/30 mb-1.5">Gaps to Address</p>
+              <div className="flex flex-wrap gap-1.5">
+                {grant.act_readiness.gaps.map((g, i) => (
+                  <span key={i} className="text-[10px] bg-red-500/10 text-red-400 px-2 py-0.5 rounded-full">{g}</span>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {grant.act_readiness.knowledge_hits > 0 && (
+            <p className="text-[10px] text-white/20">
+              {grant.act_readiness.knowledge_hits} related knowledge entries found
+            </p>
+          )}
+        </div>
+      )}
 
       {/* ─── Two-column layout: Timeline + Eligibility ─── */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

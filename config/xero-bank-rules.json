@@ -385,7 +385,64 @@
       ]
     }
   },
+  "harvest_fund_income": {
+    "description": "The Harvest Witta - Capital Improvement Fund milestone payments received FROM Sonas Properties (landlord). This is INCOME.",
+    "rules": [
+      {
+        "name": "Sonas Properties - Fund Drawdown (Income)",
+        "condition": {
+          "field": "Bank Statement Line",
+          "contains": ["SONAS PROPERTIES", "SONAS PROP"]
+        },
+        "then": {
+          "account": "200 - Revenue / Capital Fund Income",
+          "tax_rate": "GST on Income",
+          "tracking": "ACT-HV"
+        },
+        "auto_reconcile": false,
+        "note": "Money IN from landlord. Match to ACCREC invoice (e.g. INV-0316). Part of $250k Capital Improvement Fund."
+      }
+    ]
+  },
+  "harvest_operations": {
+    "description": "The Harvest Witta - Ongoing operating costs (from July 2026)",
+    "rules": [
+      {
+        "name": "Harvest Rent - Sonas Properties",
+        "condition": {
+          "field": "Bank Statement Line",
+          "contains": ["SONAS RENT", "SONAS PROPERTIES RENT"]
+        },
+        "then": {
+          "account": "6100 - Rent",
+          "tax_rate": "GST on Expenses",
+          "tracking": "ACT-HV"
+        },
+        "auto_reconcile": true,
+        "note": "Base rent $4,167/mo from Jul 2026"
+      },
+      {
+        "name": "Maleny Hardware - Harvest Supplies",
+        "condition": {
+          "field": "Bank Statement Line",
+          "contains": ["MALENY HARDWARE"]
+        },
+        "then": {
+          "account": "6600 - Supplies & Materials",
+          "tax_rate": "GST on Expenses",
+          "tracking": "ACT-HV"
+        },
+        "auto_reconcile": false,
+        "note": "Usually Harvest project supplies - review amount and assign cost centre"
+      }
+    ]
+  },
   "xero_accounts": {
+    "1700": "Leasehold Improvements",
+    "6100": "Rent",
+    "6200": "Utilities",
+    "6250": "Insurance",
+    "6300": "Rates",
     "6350": "Software & Subscriptions",
     "6400": "Travel - Airfare",
     "6410": "Travel - Transport",
@@ -394,7 +451,8 @@
     "6600": "Supplies & Materials",
     "6700": "Project Materials",
     "6800": "Bank Fees",
-    "6810": "Payment Processing Fees"
+    "6810": "Payment Processing Fees",
+    "7100": "Contractor Payments"
   },
   "tracking_categories": {
     "description": "Project codes used for tracking in Xero",

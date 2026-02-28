@@ -1,26 +1,27 @@
-#!/usr/bin/env node
+#!/usr/bin/env npx tsx
 
 /**
  * Grant Discovery Orchestrator
  *
  * Daily cron job that:
- * 1. Discovers grants from Australian funding sources (LLM-powered)
+ * 1. Discovers grants via GrantScope engine (GrantConnect, web search, LLM knowledge)
  * 2. Deduplicates against existing grant_opportunities
  * 3. Scores new grants against all 26 ACT projects
  * 4. Upserts to database with scores
  * 5. Sends Telegram alert for high-fit grants (>70%)
- * 6. Logs stats
+ * 6. Auto-creates applications for high-fit grants
  *
  * Usage:
  *   node scripts/discover-grants.mjs              # Full discovery
  *   node scripts/discover-grants.mjs --dry-run    # Preview only
  *   node scripts/discover-grants.mjs --score-only # Re-score existing unscored grants
+ *   node scripts/discover-grants.mjs --sources grantconnect,web-search  # Specific sources
  */
 
 import { createClient } from '@supabase/supabase-js';
 import { loadProjects } from './lib/project-loader.mjs';
-import { discoverAll } from './lib/grant-sources.mjs';
 import { scoreGrantBatch } from './lib/grant-scorer.mjs';
+import { GrantEngine } from '../packages/grant-engine/src/index.ts';
 import dotenv from 'dotenv';
 
 dotenv.config({ path: '.env.local' });
@@ -40,6 +41,11 @@ const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 const args = process.argv.slice(2);
 const DRY_RUN = args.includes('--dry-run');
 const SCORE_ONLY = args.includes('--score-only');
+const sourcesArg = args.find(a => a.startsWith('--sources'));
+const sourcesIdx = args.indexOf('--sources');
+const SOURCES = sourcesIdx >= 0 && args[sourcesIdx + 1]
+  ? args[sourcesIdx + 1].split(',')
+  : undefined;
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // TELEGRAM ALERTS
@@ -82,75 +88,6 @@ async function sendTelegramAlert(grants) {
       console.error('Telegram alert failed:', err.message);
     }
   }
-}
-
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// DEDUPLICATION
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-async function getExistingUrls() {
-  const { data } = await supabase
-    .from('grant_opportunities')
-    .select('url, name');
-
-  const urls = new Set((data || []).filter(d => d.url).map(d => d.url));
-  const names = new Set((data || []).map(d => d.name.toLowerCase()));
-  return { urls, names };
-}
-
-function deduplicateGrants(grants, existing) {
-  return grants.filter(g => {
-    // Skip if URL already exists
-    if (g.url && existing.urls.has(g.url)) return false;
-    // Skip if exact name match
-    if (existing.names.has(g.name.toLowerCase())) return false;
-    return true;
-  });
-}
-
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// UPSERT
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-async function upsertGrants(scoredGrants) {
-  let inserted = 0;
-
-  for (const sg of scoredGrants) {
-    const row = {
-      name: sg.grant.name,
-      provider: sg.grant.provider || 'Unknown',
-      program: sg.grant.program || null,
-      amount_min: sg.grant.amountMin || null,
-      amount_max: sg.grant.amountMax || null,
-      closes_at: sg.grant.closesAt || null,
-      url: sg.grant.url || null,
-      application_status: 'not_applied',
-      fit_score: sg.fitScore,
-      relevance_score: sg.fitScore,
-      eligibility_score: sg.eligibilityScore || null,
-      aligned_projects: sg.alignedProjects,
-      categories: sg.categories,
-      source: 'alta_agent',
-    };
-
-    const { error } = await supabase
-      .from('grant_opportunities')
-      .insert(row);
-
-    if (error) {
-      // Likely duplicate URL constraint
-      if (error.code === '23505') {
-        console.log(`  Skipped (duplicate): ${sg.grant.name}`);
-      } else {
-        console.error(`  Error inserting ${sg.grant.name}:`, error.message);
-      }
-    } else {
-      inserted++;
-      console.log(`  ✓ Inserted: ${sg.grant.name} (fit: ${sg.fitScore}%)`);
-    }
-  }
-
-  return inserted;
 }
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -216,14 +153,12 @@ async function scoreExistingUnscored(projects) {
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 async function autoPipeline(scoredGrants) {
-  // Only auto-pipeline grants with fit >= 70% and a closing date
   const eligible = scoredGrants.filter(sg => sg.fitScore >= 70);
   if (eligible.length === 0) return 0;
 
   let created = 0;
 
   for (const sg of eligible) {
-    // Find the grant in DB
     const { data: grant } = await supabase
       .from('grant_opportunities')
       .select('id, name, closes_at, aligned_projects, amount_max')
@@ -233,7 +168,6 @@ async function autoPipeline(scoredGrants) {
 
     if (!grant) continue;
 
-    // Check if application already exists
     const { data: existing } = await supabase
       .from('grant_applications')
       .select('id')
@@ -242,13 +176,11 @@ async function autoPipeline(scoredGrants) {
 
     if (existing && existing.length > 0) continue;
 
-    // Auto-create application with milestones
     const closesAt = grant.closes_at ? new Date(grant.closes_at) : null;
     const now = new Date();
     const daysUntil = closesAt ? Math.ceil((closesAt - now) / (1000 * 60 * 60 * 24)) : 90;
     const primaryProject = (grant.aligned_projects || [])[0] || null;
 
-    // Generate milestones based on timeline
     const milestones = [];
     if (daysUntil > 14) {
       milestones.push({ name: 'Research grant requirements', completed: false, due: addDays(now, 3) });
@@ -261,7 +193,6 @@ async function autoPipeline(scoredGrants) {
       milestones.push({ name: 'Review and submit', completed: false, due: closesAt ? addDays(closesAt, -1) : addDays(now, daysUntil - 1) });
     }
 
-    // Determine priority based on fit score and amount
     const priority = sg.fitScore >= 85 ? 'high' : sg.fitScore >= 70 ? 'medium' : 'low';
     const effort = (grant.amount_max || 0) >= 100000 ? 'large' : (grant.amount_max || 0) >= 25000 ? 'medium' : 'small';
 
@@ -298,11 +229,10 @@ function addDays(date, days) {
 }
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// AUTO-REQUIREMENTS: Link common requirements to new applications
+// AUTO-REQUIREMENTS
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 async function autoRequirements() {
-  // Find applications with no requirements linked yet
   const { data: apps } = await supabase
     .from('grant_applications')
     .select('id, opportunity_id')
@@ -310,14 +240,12 @@ async function autoRequirements() {
 
   if (!apps || apps.length === 0) return 0;
 
-  // Get all asset types
   const { data: assets } = await supabase
     .from('grant_assets')
     .select('id, asset_type, name, category');
 
   if (!assets || assets.length === 0) return 0;
 
-  // Standard requirements every grant application needs
   const standardTypes = [
     'abn', 'nfp_status', 'constitution', 'insurance_public_liability',
     'annual_report', 'budget_template', 'capability_statement',
@@ -327,7 +255,6 @@ async function autoRequirements() {
   let linked = 0;
 
   for (const app of apps) {
-    // Check if requirements already exist
     const { data: existingReqs } = await supabase
       .from('grant_application_requirements')
       .select('id')
@@ -336,7 +263,6 @@ async function autoRequirements() {
 
     if (existingReqs && existingReqs.length > 0) continue;
 
-    // Create standard requirements
     const requirements = standardTypes.map(assetType => {
       const asset = assets.find(a => a.asset_type === assetType);
       return {
@@ -368,7 +294,7 @@ async function autoRequirements() {
 
 async function main() {
   const startTime = Date.now();
-  console.log('🦅 ALTA Grant Discovery\n');
+  console.log('🦅 ALTA Grant Discovery (powered by GrantScope)\n');
 
   // Load projects for scoring
   const projects = await loadProjects();
@@ -381,78 +307,106 @@ async function main() {
     return;
   }
 
-  // Step 1: Discover
-  console.log('Step 1: Discovering grants from Australian sources...');
-  const discovered = await discoverAll();
-  console.log(`\nDiscovered ${discovered.length} total grants.\n`);
+  // Step 1: Discover using GrantScope engine
+  console.log('Step 1: Discovering grants via GrantScope engine...');
+  const engine = new GrantEngine({
+    supabase,
+    sources: SOURCES,
+    dryRun: DRY_RUN,
+  });
 
-  if (discovered.length === 0) {
-    console.log('No grants discovered. Check API keys and network.');
-    return;
-  }
+  const discoveryResult = await engine.discover({
+    geography: ['AU'],
+    categories: ['arts', 'indigenous', 'community', 'enterprise', 'justice', 'regenerative', 'health'],
+  });
 
-  // Step 2: Deduplicate
-  console.log('Step 2: Deduplicating...');
-  const existing = await getExistingUrls();
-  const newGrants = deduplicateGrants(discovered, existing);
-  console.log(`  ${discovered.length} discovered, ${discovered.length - newGrants.length} duplicates, ${newGrants.length} new.\n`);
+  console.log(`\nDiscovery: ${discoveryResult.grantsDiscovered} found, ${discoveryResult.grantsNew} new, ${discoveryResult.grantsUpdated} updated.\n`);
 
-  if (newGrants.length === 0) {
-    console.log('No new grants to process.');
+  // Step 2: Score new grants
+  if (discoveryResult.grantsNew > 0 && !DRY_RUN) {
+    console.log('Step 2: Scoring new grants against projects...');
 
-    // Still score existing unscored ones
-    const updated = await scoreExistingUnscored(projects);
-    if (updated > 0) console.log(`Also scored ${updated} existing grants.`);
-    return;
-  }
+    // Fetch newly inserted grants for scoring
+    const { data: newGrants } = await supabase
+      .from('grant_opportunities')
+      .select('*')
+      .is('fit_score', null)
+      .order('created_at', { ascending: false })
+      .limit(discoveryResult.grantsNew);
 
-  // Step 3: Score
-  console.log('Step 3: AI scoring against projects...');
-  const scored = await scoreGrantBatch(newGrants, projects);
-  console.log(`  Scored ${scored.length} grants.\n`);
+    if (newGrants && newGrants.length > 0) {
+      const normalized = newGrants.map(g => ({
+        name: g.name,
+        provider: g.provider,
+        program: g.program,
+        amountMin: g.amount_min,
+        amountMax: g.amount_max,
+        closesAt: g.closes_at,
+        url: g.url,
+        description: g.fit_notes || g.notes || '',
+        categories: g.categories || [],
+      }));
 
-  // Step 4: Upsert
-  if (DRY_RUN) {
-    console.log('DRY RUN — Would insert:');
-    for (const sg of scored) {
-      console.log(`  ${sg.grant.name} — Fit: ${sg.fitScore}%, Projects: ${sg.alignedProjects.join(', ')}`);
+      const scored = await scoreGrantBatch(normalized, projects);
+      let scoredCount = 0;
+
+      for (const sg of scored) {
+        if (sg.fitScore === 0 && sg.fitNotes === 'Scoring failed') continue;
+
+        const original = newGrants.find(u => u.name === sg.grant.name);
+        if (!original) continue;
+
+        const { error } = await supabase
+          .from('grant_opportunities')
+          .update({
+            fit_score: sg.fitScore,
+            relevance_score: sg.fitScore,
+            eligibility_score: sg.eligibilityScore || undefined,
+            aligned_projects: sg.alignedProjects,
+            categories: sg.categories.length > 0 ? sg.categories : undefined,
+          })
+          .eq('id', original.id);
+
+        if (!error) {
+          scoredCount++;
+          console.log(`  ✓ Scored: ${sg.grant.name} → ${sg.fitScore}%`);
+        }
+      }
+      console.log(`  Scored ${scoredCount} grants.\n`);
+
+      // Step 3: Auto-pipeline for high-fit grants
+      const highFit = scored.filter(s => s.fitScore >= 70);
+      if (highFit.length > 0) {
+        console.log(`Step 3: Auto-pipeline for ${highFit.length} high-fit grants...`);
+        const pipelined = await autoPipeline(scored);
+        if (pipelined > 0) {
+          console.log(`  Created ${pipelined} draft applications.\n`);
+          console.log('Step 3b: Linking standard requirements...');
+          const linked = await autoRequirements();
+          console.log(`  Linked ${linked} requirements.\n`);
+        }
+
+        // Step 4: Telegram alerts
+        console.log(`Step 4: Sending alerts for ${highFit.length} high-fit grants...`);
+        await sendTelegramAlert(highFit);
+      }
     }
-  } else {
-    console.log('Step 4: Inserting into database...');
-    const inserted = await upsertGrants(scored);
-    console.log(`  Inserted ${inserted} grants.\n`);
   }
 
-  // Step 5: Auto-pipeline — create applications for high-fit grants
-  const highFit = scored.filter(s => s.fitScore >= 70);
-  if (highFit.length > 0 && !DRY_RUN) {
-    console.log(`Step 5: Auto-pipeline for ${highFit.length} high-fit grants...`);
-    const pipelined = await autoPipeline(scored);
-    if (pipelined > 0) {
-      console.log(`  Created ${pipelined} draft applications.\n`);
-
-      // Step 5b: Link standard requirements to new applications
-      console.log('Step 5b: Linking standard requirements...');
-      const linked = await autoRequirements();
-      console.log(`  Linked ${linked} requirements.\n`);
-    }
-  }
-
-  // Step 6: Telegram alerts for high-fit grants
-  if (highFit.length > 0 && !DRY_RUN) {
-    console.log(`Step 6: Sending alerts for ${highFit.length} high-fit grants...`);
-    await sendTelegramAlert(highFit);
-  }
+  // Also score existing unscored
+  const updated = await scoreExistingUnscored(projects);
+  if (updated > 0) console.log(`Also scored ${updated} existing grants.`);
 
   // Stats
-  const sources = (await import('./lib/grant-sources.mjs')).getSources();
   const elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
   console.log(`\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`);
   console.log(`✅ ALTA Discovery Complete`);
-  console.log(`   Sources searched: ${sources.length}`);
-  console.log(`   Grants discovered: ${discovered.length}`);
-  console.log(`   New grants: ${newGrants.length}`);
-  console.log(`   High fit (70%+): ${highFit.length}`);
+  console.log(`   Sources: ${discoveryResult.sourcesUsed.join(', ')}`);
+  console.log(`   Grants discovered: ${discoveryResult.grantsDiscovered}`);
+  console.log(`   New grants: ${discoveryResult.grantsNew}`);
+  console.log(`   Updated: ${discoveryResult.grantsUpdated}`);
+  console.log(`   Errors: ${discoveryResult.errors.length}`);
+  console.log(`   Run ID: ${discoveryResult.runId.slice(0, 8)}`);
   console.log(`   Time: ${elapsed}s`);
   console.log(`━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`);
 }

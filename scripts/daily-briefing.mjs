@@ -439,7 +439,46 @@ async function fetchFinancialSummary() {
 }
 
 /**
- * 7. Active Projects Summary - activity counts per project in last 30 days
+ * 7. Sprint Suggestions - auto-generated from ecosystem signals
+ */
+async function fetchSprintSuggestions() {
+  const { data, error } = await supabase
+    .from('sprint_suggestions')
+    .select('id, title, stream, priority, notes, source_type, due_date, project_code')
+    .eq('dismissed', false)
+    .is('promoted_to', null)
+    .order('priority', { ascending: true })
+    .order('due_date', { ascending: true })
+    .limit(10);
+
+  if (error) {
+    console.warn('  Warning: Could not fetch sprint suggestions:', error.message);
+    return [];
+  }
+
+  const SOURCE_ICONS = {
+    grant_deadline: '🎯',
+    overdue_action: '✅',
+    email_followup: '📧',
+    calendar_deadline: '📅',
+    insight: '💡',
+  };
+
+  return (data || []).map(s => ({
+    title: s.title,
+    stream: s.stream,
+    priority: s.priority,
+    notes: s.notes,
+    sourceType: s.source_type,
+    icon: SOURCE_ICONS[s.source_type] || '💡',
+    dueDate: s.due_date,
+    project: s.project_code,
+    projectName: projectName(s.project_code),
+  }));
+}
+
+/**
+ * 8. Active Projects Summary - activity counts per project in last 30 days
  */
 async function fetchActiveProjectsSummary() {
   const thirtyDaysAgo = daysAgo(30);
@@ -667,8 +706,38 @@ function generateMarkdown(briefing) {
   }
   lines.push('');
 
-  // 7. Active Projects
-  lines.push('## 7. Active Projects Summary (Last 30 Days)');
+  // 7. Sprint Suggestions
+  lines.push('## 7. Sprint Suggestions');
+  if (briefing.sprintSuggestions.length === 0) {
+    lines.push('No sprint suggestions. All signals clear.');
+  } else {
+    lines.push(`**${briefing.sprintSuggestions.length} suggestion(s) from ecosystem signals:**`);
+    lines.push('');
+    const byPriority = { now: [], next: [] };
+    for (const s of briefing.sprintSuggestions) {
+      (byPriority[s.priority] || byPriority.next).push(s);
+    }
+    if (byPriority.now.length > 0) {
+      lines.push('### Urgent (Now)');
+      for (const s of byPriority.now) {
+        const due = s.dueDate ? ` — due ${formatDate(s.dueDate)}` : '';
+        lines.push(`- ${s.icon} **${s.title}**${due}`);
+      }
+      lines.push('');
+    }
+    if (byPriority.next.length > 0) {
+      lines.push('### Next');
+      for (const s of byPriority.next) {
+        const due = s.dueDate ? ` — due ${formatDate(s.dueDate)}` : '';
+        lines.push(`- ${s.icon} **${s.title}**${due}`);
+      }
+      lines.push('');
+    }
+  }
+  lines.push('');
+
+  // 8. Active Projects
+  lines.push('## 8. Active Projects Summary (Last 30 Days)');
   if (briefing.activeProjects.length === 0) {
     lines.push('No project activity recorded in the last 30 days.');
   } else {
@@ -778,9 +847,34 @@ function generateConsoleOutput(briefing) {
     lines.push(`  Opportunities:   ${fin.opportunityCount}`);
   }
 
-  // 7. Active Projects
+  // 7. Sprint Suggestions
   lines.push('');
-  lines.push('--- 7. ACTIVE PROJECTS (LAST 30 DAYS) ---');
+  lines.push('--- 7. SPRINT SUGGESTIONS ---');
+  if (briefing.sprintSuggestions.length === 0) {
+    lines.push('  No sprint suggestions.');
+  } else {
+    const nowItems = briefing.sprintSuggestions.filter(s => s.priority === 'now');
+    const nextItems = briefing.sprintSuggestions.filter(s => s.priority !== 'now');
+    if (nowItems.length > 0) {
+      lines.push('  [URGENT]');
+      for (const s of nowItems) {
+        const due = s.dueDate ? ` (due ${formatDate(s.dueDate)})` : '';
+        lines.push(`  ${s.icon} ${s.title}${due}`);
+      }
+    }
+    if (nextItems.length > 0) {
+      if (nowItems.length > 0) lines.push('');
+      lines.push('  [NEXT]');
+      for (const s of nextItems) {
+        const due = s.dueDate ? ` (due ${formatDate(s.dueDate)})` : '';
+        lines.push(`  ${s.icon} ${s.title}${due}`);
+      }
+    }
+  }
+
+  // 8. Active Projects
+  lines.push('');
+  lines.push('--- 8. ACTIVE PROJECTS (LAST 30 DAYS) ---');
   if (briefing.activeProjects.length === 0) {
     lines.push('  No project activity recorded.');
   } else {
@@ -823,6 +917,7 @@ async function main() {
     relationshipAlerts,
     dealRisks,
     financialSummary,
+    sprintSuggestions,
     activeProjects,
   ] = await Promise.all([
     fetchOverdueActions(),
@@ -832,6 +927,7 @@ async function main() {
     fetchRelationshipAlerts(),
     fetchDealRisks(),
     fetchFinancialSummary(),
+    fetchSprintSuggestions(),
     fetchActiveProjectsSummary(),
   ]);
 
@@ -846,6 +942,7 @@ async function main() {
     relationshipAlerts,
     dealRisks,
     financialSummary,
+    sprintSuggestions,
     activeProjects,
     summary: {
       overdueCount: overdueActions.length,
@@ -854,6 +951,7 @@ async function main() {
       decisionCount: recentDecisions.length,
       relationshipAlertCount: relationshipAlerts.length,
       dealRiskCount: dealRisks.length,
+      sprintSuggestionCount: sprintSuggestions.length,
       activeProjectCount: activeProjects.length,
       pipelineTotal: financialSummary.totalPipeline,
     },

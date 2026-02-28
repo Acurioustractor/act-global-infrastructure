@@ -119,10 +119,10 @@ async function main() {
       alertsSent++;
     }
 
-    // Deadline reminders at 7/3/1 days
-    const reminderDays = [7, 3, 1];
+    // Deadline reminders at 30/14/7/3/1 days
+    const reminderDays = [30, 14, 7, 3, 1];
     if (reminderDays.includes(daysRemaining)) {
-      const urgency = daysRemaining === 1 ? '🔴' : daysRemaining === 3 ? '🟡' : '⏰';
+      const urgency = daysRemaining === 1 ? '🔴' : daysRemaining <= 3 ? '🟡' : daysRemaining <= 7 ? '🟠' : '⏰';
       const message = [
         `${urgency} *Grant Deadline in ${daysRemaining} day${daysRemaining === 1 ? '' : 's'}*`,
         `📋 ${app.application_name}`,

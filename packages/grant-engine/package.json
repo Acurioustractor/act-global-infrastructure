@@ -1,0 +1,34 @@
+{
+  "name": "@act/grant-engine",
+  "version": "0.1.0",
+  "description": "Open-source grant discovery engine — pluggable sources, dedup, scoring",
+  "type": "module",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.39.0",
+    "@mendable/firecrawl-js": "^4.15.0",
+    "@supabase/supabase-js": "^2.49.1",
+    "cheerio": "^1.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "keywords": [
+    "grants",
+    "discovery",
+    "australia",
+    "scraper",
+    "open-source"
+  ],
+  "author": "A Curious Tractor",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Acurioustractor/act-global-infrastructure.git",
+    "directory": "packages/grant-engine"
+  }
+}
