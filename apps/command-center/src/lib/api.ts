@@ -543,12 +543,12 @@ export interface CronScript {
   unstable: boolean
   recent_errors: string[]
   frequency: string
-  pm2_id: number
 }
 
 export interface CronHealthResponse {
   summary: { running: number; stopped: number; errored: number; total: number }
   groups: { label: string; frequency: string; scripts: CronScript[] }[]
+  last_sync: string | null
 }
 
 export async function getCronHealth() {

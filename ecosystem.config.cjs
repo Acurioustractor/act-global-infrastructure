@@ -269,6 +269,11 @@ const cronScripts = [
     script: 'scripts/sync-grants-ghl.mjs',
     cron_restart: '15 */6 * * *', // Every 6 hours, 15min after ghl-sync
   },
+  {
+    name: 'pm2-status-sync',
+    script: 'scripts/sync-pm2-status.mjs',
+    cron_restart: '* * * * *', // Every minute (lightweight — just reads pm2 jlist + upserts)
+  },
 ];
 
 module.exports = {
