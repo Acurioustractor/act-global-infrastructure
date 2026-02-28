@@ -337,7 +337,7 @@ async function fetchRelationshipAlerts() {
 async function fetchDealRisks() {
   const { data: opportunities, error } = await supabase
     .from('ghl_opportunities')
-    .select('name, monetary_value, stage_name, pipeline_name, contact_id, status, updated_at')
+    .select('name, monetary_value, stage_name, pipeline_name, ghl_contact_id, status, updated_at')
     .eq('status', 'open')
     .order('monetary_value', { ascending: false });
 
@@ -348,7 +348,7 @@ async function fetchDealRisks() {
 
   if (!opportunities || opportunities.length === 0) return [];
 
-  const contactIds = [...new Set(opportunities.map(o => o.contact_id).filter(Boolean))];
+  const contactIds = [...new Set(opportunities.map(o => o.ghl_contact_id).filter(Boolean))];
   if (contactIds.length === 0) return [];
 
   const [healthResult, contactResult] = await Promise.all([
@@ -368,8 +368,8 @@ async function fetchDealRisks() {
   const now = Date.now();
   return opportunities
     .map(opp => {
-      const health = healthMap[opp.contact_id];
-      const contact = contactMap[opp.contact_id];
+      const health = healthMap[opp.ghl_contact_id];
+      const contact = contactMap[opp.ghl_contact_id];
       const daysSinceUpdate = Math.floor((now - new Date(opp.updated_at).getTime()) / 86400000);
 
       const risks = [];
