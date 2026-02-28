@@ -23,6 +23,23 @@
  *  12. triage_emails           — Prioritized email triage (key contacts → recent → backlog)
  *  13. get_grant_readiness     — Grant readiness checklist (ready vs gaps)
  *
+ * Tools (Wave 4 — Project Intelligence):
+ *  14. get_project_intelligence — Comprehensive project overview (financials, focus, relationships, health)
+ *
+ * Tools (Wave 5 — Financial Clarity):
+ *  15. explain_cashflow          — Monthly cash flow with variance explanations
+ *  16. get_project_pnl           — Monthly P&L for specific project with trends
+ *
+ * Tools (Wave 6 — Opportunity Pipeline):
+ *  17. get_pipeline_value        — Weighted pipeline value by type and stage
+ *  18. get_revenue_forecast      — 10-year revenue scenarios
+ *
+ * Tools (Wave 7 — Agent Intelligence):
+ *  19. suggest_transaction_fixes — Unmapped transactions, duplicates, anomalies
+ *  20. get_impact_summary        — Aggregated impact metrics across projects
+ *  21. search_knowledge_graph    — Semantic knowledge search with related items
+ *  16. get_project_pnl           — Monthly P&L for specific project with trends
+ *
  * Secrets required (set via `ntn workers env set`):
  *   SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY
  *
@@ -1037,6 +1054,783 @@ worker.tool("get_grant_readiness", {
       : `GRANT READINESS — ${data.length} applications, none fully ready`;
 
     return `${header}\n${"─".repeat(40)}\n\n${lines.join("\n\n")}`;
+  },
+});
+
+// ─────────────────────────────────────────────────────────────────────────
+// TOOL 14: Project Intelligence
+// ─────────────────────────────────────────────────────────────────────────
+
+worker.tool("get_project_intelligence", {
+  title: "Project Intelligence",
+  description:
+    "Query the ACT Supabase database for comprehensive project intelligence. Returns: financial summary (FY revenue/expenses/net, burn rate, pipeline value), focus areas (current/upcoming/blocked), key relationships (top contacts with temperature/trend), recent activity (emails/transactions/knowledge/meetings), health scores, and recent knowledge items. ALWAYS use this tool instead of searching Notion pages when the user asks about: 'what's happening with [project]', project overview, project status, project summary, or 'give me the full picture on [project]'. Data source: project_intelligence_snapshots + project_focus_areas + project_health + project_knowledge + relationship_health tables. Example queries: 'What's happening with ACT-EL?', 'Give me the full picture on Harvest', 'Summarize JusticeHub', 'What's the status of ACT-HV?'",
+  schema: {
+    type: "object" as const,
+    properties: {
+      project_code: {
+        type: "string" as const,
+        description: "ACT project code (e.g. ACT-EL, ACT-HV, ACT-JH, ACT-GD, ACT-FM, ACT-HQ)",
+      },
+    },
+    required: ["project_code"] as const,
+    additionalProperties: false,
+  },
+  execute: async (params: { project_code: string }) => {
+    const supabase = getSupabase();
+    const code = params.project_code.toUpperCase();
+
+    // Parallel fetch all intelligence data
+    const [snapshot, focusAreas, health, knowledge, relationships, grants] = await Promise.all([
+      // Latest snapshot
+      supabase
+        .from("project_intelligence_snapshots")
+        .select("*")
+        .eq("project_code", code)
+        .order("snapshot_date", { ascending: false })
+        .limit(1)
+        .maybeSingle(),
+
+      // Focus areas
+      supabase
+        .from("project_focus_areas")
+        .select("title, description, status, priority, target_date")
+        .eq("project_code", code)
+        .in("status", ["current", "upcoming", "blocked"])
+        .order("priority"),
+
+      // Health
+      supabase
+        .from("project_health")
+        .select("health_score, momentum_score, engagement_score, financial_score, timeline_score, calculated_at")
+        .eq("project_code", code)
+        .maybeSingle(),
+
+      // Recent knowledge
+      supabase
+        .from("project_knowledge")
+        .select("title, knowledge_type, importance, recorded_at, action_required, follow_up_date")
+        .eq("project_code", code)
+        .order("recorded_at", { ascending: false })
+        .limit(10),
+
+      // Key contacts
+      supabase
+        .from("v_project_relationships")
+        .select("contact_name, company_name, temperature, temperature_trend, last_contact_at")
+        .eq("project_code", code)
+        .order("temperature", { ascending: false, nullsFirst: false })
+        .limit(8),
+
+      // Active grants
+      supabase
+        .from("grant_applications")
+        .select("application_name, status, amount_requested, project_code")
+        .eq("project_code", code)
+        .in("status", ["draft", "in_progress", "submitted", "under_review"]),
+    ]);
+
+    const sections: string[] = [];
+    sections.push(`PROJECT INTELLIGENCE: ${code}`);
+    sections.push("─".repeat(40));
+
+    // Snapshot / financials
+    const s = snapshot.data as any;
+    if (s) {
+      const finLines: string[] = [
+        `\nFINANCIALS (FY):`,
+        `  Revenue: $${Number(s.fy_revenue || 0).toLocaleString()}`,
+        `  Expenses: $${Number(s.fy_expenses || 0).toLocaleString()}`,
+        `  Net: $${Number(s.fy_net || 0).toLocaleString()}`,
+      ];
+      if (s.monthly_burn_rate) finLines.push(`  Burn rate: $${Number(s.monthly_burn_rate).toLocaleString()}/mo`);
+      if (s.pipeline_value) finLines.push(`  Pipeline: $${Number(s.pipeline_value).toLocaleString()}`);
+      sections.push(...finLines);
+    }
+
+    // Health
+    const h = health.data as any;
+    if (h) {
+      sections.push(
+        `\nHEALTH SCORES:`,
+        `  Overall: ${h.health_score}/100 | Momentum: ${h.momentum_score}/100`,
+        `  Engagement: ${h.engagement_score}/100 | Financial: ${h.financial_score}/100 | Timeline: ${h.timeline_score}/100`,
+      );
+    }
+
+    // Focus areas
+    const fa = (focusAreas.data || []) as any[];
+    const current = fa.filter((f) => f.status === "current");
+    const blocked = fa.filter((f) => f.status === "blocked");
+    const upcoming = fa.filter((f) => f.status === "upcoming");
+
+    if (current.length || blocked.length || upcoming.length) {
+      sections.push(`\nFOCUS AREAS:`);
+      if (current.length) {
+        sections.push(`  Current:`);
+        current.forEach((f: any) => sections.push(`    - ${f.title}${f.description ? `: ${f.description}` : ""}`));
+      }
+      if (blocked.length) {
+        sections.push(`  Blocked:`);
+        blocked.forEach((f: any) => sections.push(`    - ${f.title}${f.description ? `: ${f.description}` : ""}`));
+      }
+      if (upcoming.length) {
+        sections.push(`  Upcoming:`);
+        upcoming.forEach((f: any) => {
+          const target = f.target_date ? ` (target: ${f.target_date})` : "";
+          sections.push(`    - ${f.title}${target}`);
+        });
+      }
+    }
+
+    // Relationships
+    const rels = (relationships.data || []) as any[];
+    if (rels.length) {
+      sections.push(`\nKEY RELATIONSHIPS (${rels.length}):`);
+      rels.forEach((r: any) => {
+        const trend = r.temperature_trend ? ` (${r.temperature_trend})` : "";
+        const company = r.company_name ? ` — ${r.company_name}` : "";
+        sections.push(`  - ${r.contact_name}${company}: temp ${r.temperature || "?"}/100${trend}`);
+      });
+    }
+
+    // Grants
+    const gr = (grants.data || []) as any[];
+    if (gr.length) {
+      const totalPipeline = gr.reduce((s: number, g: any) => s + (g.amount_requested || 0), 0);
+      sections.push(`\nACTIVE GRANTS (${gr.length}, $${totalPipeline.toLocaleString()} pipeline):`);
+      gr.forEach((g: any) => {
+        sections.push(`  - ${g.application_name} (${g.status}) — $${(g.amount_requested || 0).toLocaleString()}`);
+      });
+    }
+
+    // Recent knowledge
+    const kn = (knowledge.data || []) as any[];
+    if (kn.length) {
+      sections.push(`\nRECENT KNOWLEDGE (${kn.length}):`);
+      kn.slice(0, 5).forEach((k: any) => {
+        const date = k.recorded_at ? k.recorded_at.split("T")[0] : "";
+        const action = k.action_required ? " [ACTION REQUIRED]" : "";
+        sections.push(`  - [${k.knowledge_type}] ${k.title} (${date})${action}`);
+      });
+    }
+
+    // Recent wins / blockers from snapshot
+    if (s?.recent_wins?.length) {
+      sections.push(`\nRECENT WINS:`);
+      (s.recent_wins as string[]).forEach((w: string) => sections.push(`  - ${w}`));
+    }
+    if (s?.blockers?.length) {
+      sections.push(`\nBLOCKERS:`);
+      (s.blockers as string[]).forEach((b: string) => sections.push(`  - ${b}`));
+    }
+
+    return sections.filter(Boolean).join("\n");
+  },
+});
+
+// ─────────────────────────────────────────────────────────────────────────
+// TOOL 15: Explain Cash Flow
+// ─────────────────────────────────────────────────────────────────────────
+
+worker.tool("explain_cashflow", {
+  title: "Explain Cash Flow",
+  description:
+    "Query the ACT Supabase database for monthly cash flow with explanations. Returns: monthly income, expenses, net, closing balance, change from prior month, and auto-generated variance explanations. ALWAYS use this tool when the user asks about: 'why did our balance change', cash flow explanation, monthly comparison, 'what happened financially this month', or balance changes. Data source: v_cashflow_explained view (v_cashflow_summary + financial_variance_notes). Example queries: 'Why did our balance drop?', 'Explain this month's finances', 'Compare income month over month', 'What's driving our expenses?'",
+  schema: {
+    type: "object" as const,
+    properties: {
+      months: {
+        anyOf: [{ type: "number" as const }, { type: "null" as const }],
+        description: "Number of months to show (default: 6). Pass null for default.",
+      },
+    },
+    required: ["months"] as const,
+    additionalProperties: false,
+  },
+  execute: async (params: { months: number | null }) => {
+    const supabase = getSupabase();
+    const max = params.months ?? 6;
+
+    const { data, error } = await supabase
+      .from("v_cashflow_explained")
+      .select("*")
+      .order("month", { ascending: false })
+      .limit(max);
+
+    if (error) return `Error: ${error.message}`;
+    if (!data?.length) return "No cash flow data available.";
+
+    const lines = (data as any[]).reverse().map((m) => {
+      const monthLabel = new Date(m.month).toLocaleDateString("en-AU", { month: "short", year: "numeric" });
+      const incChange = m.income_change != null ? ` (${Number(m.income_change) >= 0 ? "+" : ""}$${Number(m.income_change).toLocaleString()})` : "";
+      const expChange = m.expense_change != null ? ` (${Number(m.expense_change) >= 0 ? "+" : ""}$${Number(m.expense_change).toLocaleString()})` : "";
+
+      const result = [
+        `${monthLabel}`,
+        `  Income: $${Number(m.income || 0).toLocaleString()}${incChange}`,
+        `  Expenses: $${Number(m.expenses || 0).toLocaleString()}${expChange}`,
+        `  Net: $${Number(m.net || 0).toLocaleString()} | Balance: $${Number(m.closing_balance || 0).toLocaleString()}`,
+      ];
+
+      // Add variance explanations
+      const explanations = m.explanations as any[] | null;
+      if (explanations?.length) {
+        for (const e of explanations) {
+          result.push(`  → ${e.explanation}`);
+        }
+      }
+
+      return result.join("\n");
+    });
+
+    return `CASH FLOW EXPLAINED\n${"─".repeat(40)}\n\n${lines.join("\n\n")}`;
+  },
+});
+
+// ─────────────────────────────────────────────────────────────────────────
+// TOOL 16: Project P&L
+// ─────────────────────────────────────────────────────────────────────────
+
+worker.tool("get_project_pnl", {
+  title: "Project P&L",
+  description:
+    "Query the ACT Supabase database for monthly profit & loss for a specific project. Returns: monthly revenue, expenses, net, expense/revenue breakdowns by category, FY year-to-date totals, and transaction counts. ALWAYS use this tool when the user asks about: project P&L, project profit and loss, 'how much did we spend on [project]', project financial breakdown, or 'show me [project] expenses by category'. Data source: project_monthly_financials table. Example queries: 'P&L for ACT-GD', 'What did we spend on Goods?', 'Harvest financial breakdown', 'Show ACT-EL expenses by category'",
+  schema: {
+    type: "object" as const,
+    properties: {
+      project_code: {
+        type: "string" as const,
+        description: "ACT project code (e.g. ACT-EL, ACT-HV, ACT-GD)",
+      },
+      months: {
+        anyOf: [{ type: "number" as const }, { type: "null" as const }],
+        description: "Number of months to show (default: 12). Pass null for default.",
+      },
+    },
+    required: ["project_code", "months"] as const,
+    additionalProperties: false,
+  },
+  execute: async (params: { project_code: string; months: number | null }) => {
+    const supabase = getSupabase();
+    const code = params.project_code.toUpperCase();
+    const max = params.months ?? 12;
+
+    const { data, error } = await supabase
+      .from("project_monthly_financials")
+      .select("*")
+      .eq("project_code", code)
+      .order("month", { ascending: false })
+      .limit(max);
+
+    if (error) return `Error: ${error.message}`;
+    if (!data?.length) return `No monthly financial data for ${code}. Run the monthly calculation first.`;
+
+    const months = (data as any[]).reverse();
+    let totalRev = 0;
+    let totalExp = 0;
+
+    const lines = months.map((m) => {
+      const label = new Date(m.month).toLocaleDateString("en-AU", { month: "short", year: "numeric" });
+      const rev = Number(m.revenue || 0);
+      const exp = Number(m.expenses || 0);
+      const net = Number(m.net || 0);
+      totalRev += rev;
+      totalExp += exp;
+
+      const expBreakdown = m.expense_breakdown || {};
+      const topExp = Object.entries(expBreakdown)
+        .sort(([, a], [, b]) => (b as number) - (a as number))
+        .slice(0, 3)
+        .map(([cat, amt]) => `${cat}: $${Number(amt).toLocaleString()}`)
+        .join(", ");
+
+      return [
+        `${label}: Revenue $${rev.toLocaleString()} | Expenses $${exp.toLocaleString()} | Net $${net.toLocaleString()}`,
+        topExp ? `  Top expenses: ${topExp}` : null,
+      ].filter(Boolean).join("\n");
+    });
+
+    const latest = months[months.length - 1];
+    const header = [
+      `PROJECT P&L: ${code}`,
+      "─".repeat(40),
+      `Period total: Revenue $${totalRev.toLocaleString()} | Expenses $${totalExp.toLocaleString()} | Net $${(totalRev - totalExp).toLocaleString()}`,
+      latest.fy_ytd_revenue ? `FY YTD: Revenue $${Number(latest.fy_ytd_revenue).toLocaleString()} | Expenses $${Number(latest.fy_ytd_expenses).toLocaleString()} | Net $${Number(latest.fy_ytd_net).toLocaleString()}` : null,
+      "",
+    ].filter(Boolean).join("\n");
+
+    return `${header}\n${lines.join("\n\n")}`;
+  },
+});
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// TOOL 17: Unified Pipeline Value
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+worker.tool("get_pipeline_value", {
+  title: "Get Pipeline Value",
+  description:
+    "Returns the total weighted pipeline value by opportunity type and stage. " +
+    "Shows how much potential revenue is in each stage of the pipeline across grants, deals, investments, and other types. " +
+    "Use when asked about pipeline value, opportunity totals, or revenue potential.",
+  schema: {
+    type: "object" as const,
+    properties: {
+      type: {
+        anyOf: [{ type: "string" as const }, { type: "null" as const }],
+        description:
+          "Filter by opportunity type: grant, deal, investment, land_equity, community_capital, donation, earned_revenue. Pass null for all.",
+      },
+    },
+    required: ["type"] as const,
+    additionalProperties: false,
+  },
+  execute: async (params: { type: string | null }) => {
+    const supabase = getSupabase();
+    const type = params.type;
+
+    // Pipeline value by type and stage
+    let pvQuery = supabase.from("v_pipeline_value").select("*");
+    if (type) pvQuery = pvQuery.eq("opportunity_type", type);
+
+    const { data: pv, error: pvError } = await pvQuery;
+    if (pvError) return `Error: ${pvError.message}`;
+    if (!pv || pv.length === 0)
+      return "No active opportunities in the pipeline.";
+
+    // Summary
+    const totalWeighted = pv.reduce(
+      (sum: number, r: any) => sum + Number(r.weighted_value || 0),
+      0
+    );
+    const totalUnweighted = pv.reduce(
+      (sum: number, r: any) => sum + Number(r.total_value || 0),
+      0
+    );
+    const totalCount = pv.reduce(
+      (sum: number, r: any) => sum + Number(r.opportunity_count || 0),
+      0
+    );
+
+    // Group by type
+    const byType: Record<string, { weighted: number; total: number; count: number }> = {};
+    for (const r of pv) {
+      const t = r.opportunity_type;
+      if (!byType[t]) byType[t] = { weighted: 0, total: 0, count: 0 };
+      byType[t].weighted += Number(r.weighted_value || 0);
+      byType[t].total += Number(r.total_value || 0);
+      byType[t].count += Number(r.opportunity_count || 0);
+    }
+
+    const sections: string[] = [
+      "PIPELINE VALUE SUMMARY",
+      "─".repeat(40),
+      `Total opportunities: ${totalCount}`,
+      `Unweighted value: $${totalUnweighted.toLocaleString()}`,
+      `Weighted value (probability-adjusted): $${totalWeighted.toLocaleString()}`,
+      "",
+      "BY TYPE:",
+    ];
+
+    for (const [t, v] of Object.entries(byType)) {
+      sections.push(
+        `  ${t}: ${v.count} opps | $${v.total.toLocaleString()} total | $${v.weighted.toLocaleString()} weighted`
+      );
+    }
+
+    // Group by stage
+    sections.push("", "BY STAGE:");
+    const byStage: Record<string, { weighted: number; total: number; count: number }> = {};
+    for (const r of pv) {
+      const s = r.stage;
+      if (!byStage[s]) byStage[s] = { weighted: 0, total: 0, count: 0 };
+      byStage[s].weighted += Number(r.weighted_value || 0);
+      byStage[s].total += Number(r.total_value || 0);
+      byStage[s].count += Number(r.opportunity_count || 0);
+    }
+
+    const stageOrder = [
+      "identified", "researching", "pursuing", "submitted",
+      "negotiating", "approved",
+    ];
+    for (const s of stageOrder) {
+      if (byStage[s]) {
+        sections.push(
+          `  ${s}: ${byStage[s].count} opps | $${byStage[s].total.toLocaleString()} | $${byStage[s].weighted.toLocaleString()} weighted`
+        );
+      }
+    }
+
+    return sections.join("\n");
+  },
+});
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// TOOL 18: Revenue Forecast
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+worker.tool("get_revenue_forecast", {
+  title: "Get Revenue Forecast",
+  description:
+    "Returns 10-year revenue projections across Conservative, Moderate, and Aggressive scenarios. " +
+    "Shows annual targets by revenue stream and growth assumptions. " +
+    "Use when asked about revenue planning, financial forecasts, growth projections, or long-term financial outlook.",
+  schema: {
+    type: "object" as const,
+    properties: {
+      scenario: {
+        anyOf: [{ type: "string" as const }, { type: "null" as const }],
+        description:
+          "Specific scenario to show: conservative, moderate, aggressive. Pass null for all three.",
+      },
+    },
+    required: ["scenario"] as const,
+    additionalProperties: false,
+  },
+  execute: async (params: { scenario: string | null }) => {
+    const supabase = getSupabase();
+    const scenario = params.scenario;
+
+    let query = supabase
+      .from("revenue_scenarios")
+      .select("*")
+      .order("name");
+    if (scenario) query = query.eq("name", scenario.toLowerCase());
+
+    const { data: scenarios, error: scenError } = await query;
+    if (scenError) return `Error: ${scenError.message}`;
+    if (!scenarios || scenarios.length === 0)
+      return "No revenue scenarios configured. Run: node scripts/build-revenue-scenarios.mjs";
+
+    const sections: string[] = [
+      "10-YEAR REVENUE FORECAST",
+      "─".repeat(40),
+    ];
+
+    for (const s of scenarios) {
+      const targets = s.annual_targets || {};
+      const years = Object.keys(targets).sort();
+      if (years.length === 0) continue;
+
+      const firstYear = Number(years[0]);
+      const lastYear = Number(years[years.length - 1]);
+      const firstVal = targets[years[0]];
+      const lastVal = targets[years[years.length - 1]];
+      const totalGrowth =
+        firstVal > 0 ? ((lastVal / firstVal - 1) * 100).toFixed(0) : "N/A";
+
+      sections.push("");
+      sections.push(`${s.name.toUpperCase()}: ${s.description || ""}`);
+      sections.push(`  ${firstYear}-${lastYear} | Total growth: ${totalGrowth}%`);
+
+      // Show key years (first, mid, last)
+      const keyYears = [
+        years[0],
+        years[Math.floor(years.length / 3)],
+        years[Math.floor((years.length * 2) / 3)],
+        years[years.length - 1],
+      ];
+      const uniqueYears = [...new Set(keyYears)];
+      for (const y of uniqueYears) {
+        sections.push(`  ${y}: $${Number(targets[y]).toLocaleString()}`);
+      }
+
+      // Assumptions
+      const assumptions = s.assumptions || {};
+      if (Object.keys(assumptions).length > 0) {
+        const aStr = Object.entries(assumptions)
+          .map(([k, v]) => {
+            const val =
+              typeof v === "number" && v < 1
+                ? `${(v * 100).toFixed(0)}%`
+                : String(v);
+            return `${k.replace(/_/g, " ")}: ${val}`;
+          })
+          .join(", ");
+        sections.push(`  Assumptions: ${aStr}`);
+      }
+    }
+
+    return sections.join("\n");
+  },
+});
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// TOOL 19: Suggest Transaction Fixes
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+worker.tool("suggest_transaction_fixes", {
+  title: "Suggest Transaction Fixes",
+  description:
+    "Identifies financial data issues: unmapped transactions (no project code), " +
+    "potential duplicate subscriptions, and vendor anomalies. " +
+    "Use when asked about transaction issues, data quality, unmapped expenses, or financial cleanup.",
+  schema: {
+    type: "object" as const,
+    properties: {
+      limit: {
+        anyOf: [{ type: "number" as const }, { type: "null" as const }],
+        description: "Max issues to return (default: 20). Pass null for default.",
+      },
+    },
+    required: ["limit"] as const,
+    additionalProperties: false,
+  },
+  execute: async (params: { limit: number | null }) => {
+    const supabase = getSupabase();
+    const maxItems = params.limit ?? 20;
+    const sections: string[] = [
+      "TRANSACTION FIX SUGGESTIONS",
+      "─".repeat(40),
+    ];
+
+    // 1. Unmapped transactions with suggestions
+    const { data: unmapped } = await supabase
+      .from("v_unmapped_transactions")
+      .select("*")
+      .limit(maxItems);
+
+    if (unmapped && unmapped.length > 0) {
+      const withSuggestion = unmapped.filter((u: any) => u.suggested_project);
+      const withoutSuggestion = unmapped.filter((u: any) => !u.suggested_project);
+
+      sections.push("");
+      sections.push(`UNMAPPED TRANSACTIONS: ${unmapped.length} found`);
+
+      if (withSuggestion.length > 0) {
+        sections.push(`  Auto-fixable (${withSuggestion.length}):`);
+        for (const u of withSuggestion.slice(0, 10) as any[]) {
+          sections.push(
+            `    ${u.date} | ${u.contact_name} | $${Math.abs(Number(u.total)).toLocaleString()} → ${u.suggested_project} (${u.suggested_category || "general"})`
+          );
+        }
+      }
+
+      if (withoutSuggestion.length > 0) {
+        sections.push(`  Need manual tagging (${withoutSuggestion.length}):`);
+        for (const u of withoutSuggestion.slice(0, 5) as any[]) {
+          sections.push(
+            `    ${u.date} | ${u.contact_name} | $${Math.abs(Number(u.total)).toLocaleString()}`
+          );
+        }
+      }
+    } else {
+      sections.push("");
+      sections.push("UNMAPPED TRANSACTIONS: None found");
+    }
+
+    // 2. Potential duplicate subscriptions
+    let dupes: any[] | null = null;
+    try {
+      const { data } = await supabase.rpc("get_potential_duplicate_subscriptions");
+      dupes = data;
+    } catch { /* RPC may not exist */ }
+    if (dupes && (dupes as any[]).length > 0) {
+      sections.push("");
+      sections.push(`POTENTIAL DUPLICATE SUBSCRIPTIONS: ${(dupes as any[]).length}`);
+      for (const d of (dupes as any[]).slice(0, 5)) {
+        sections.push(`  ${d.contact_name}: ${d.count}x in period ($${d.total})`);
+      }
+    }
+
+    // 3. Large variance vendors (month-to-month)
+    const { data: variances } = await supabase
+      .from("financial_variance_notes")
+      .select("*")
+      .eq("severity", "critical")
+      .order("created_at", { ascending: false })
+      .limit(5);
+
+    if (variances && variances.length > 0) {
+      sections.push("");
+      sections.push(`CRITICAL VARIANCES: ${variances.length}`);
+      for (const v of variances as any[]) {
+        sections.push(
+          `  ${v.project_code || "Org-wide"} (${v.month}): ${v.variance_type} — ${v.explanation}`
+        );
+      }
+    }
+
+    return sections.join("\n");
+  },
+});
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// TOOL 20: Impact Summary
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+worker.tool("get_impact_summary", {
+  title: "Get Impact Summary",
+  description:
+    "Returns aggregated impact metrics across all projects or a specific project. " +
+    "Shows people reached, revenue generated, stories collected, events held, and other impact data. " +
+    "Use when asked about impact, outcomes, community reach, or social metrics.",
+  schema: {
+    type: "object" as const,
+    properties: {
+      project_code: {
+        anyOf: [{ type: "string" as const }, { type: "null" as const }],
+        description: "Filter by project code (e.g. ACT-EL). Pass null for all projects.",
+      },
+    },
+    required: ["project_code"] as const,
+    additionalProperties: false,
+  },
+  execute: async (params: { project_code: string | null }) => {
+    const supabase = getSupabase();
+
+    let query = supabase
+      .from("impact_metrics")
+      .select("*")
+      .order("metric_type");
+
+    if (params.project_code) {
+      query = query.eq("project_code", params.project_code);
+    }
+
+    const { data, error } = await query;
+    if (error) return `Error: ${error.message}`;
+    if (!data || data.length === 0)
+      return params.project_code
+        ? `No impact metrics recorded for ${params.project_code}. Run: node scripts/extract-impact-metrics.mjs`
+        : "No impact metrics recorded yet. Run: node scripts/extract-impact-metrics.mjs";
+
+    // Aggregate by metric_type
+    const agg: Record<string, { total: number; unit: string; count: number; projects: Set<string> }> = {};
+    for (const m of data as any[]) {
+      const t = m.metric_type;
+      if (!agg[t]) agg[t] = { total: 0, unit: m.unit || "", count: 0, projects: new Set() };
+      agg[t].total += Number(m.value);
+      agg[t].count++;
+      agg[t].projects.add(m.project_code);
+    }
+
+    const verified = (data as any[]).filter(m => m.verified).length;
+    const total = data.length;
+
+    const sections: string[] = [
+      params.project_code ? `IMPACT SUMMARY: ${params.project_code}` : "IMPACT SUMMARY: All Projects",
+      "─".repeat(40),
+      `${total} metrics recorded (${verified} verified)`,
+      "",
+    ];
+
+    for (const [type, v] of Object.entries(agg)) {
+      const projectList = [...v.projects].join(", ");
+      sections.push(
+        `${type.replace(/_/g, " ").toUpperCase()}: ${v.total.toLocaleString()} ${v.unit}`
+      );
+      if (!params.project_code && v.projects.size > 1) {
+        sections.push(`  Projects: ${projectList}`);
+      }
+    }
+
+    return sections.join("\n");
+  },
+});
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// TOOL 21: Knowledge Graph Search
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+worker.tool("search_knowledge_graph", {
+  title: "Search Knowledge Graph",
+  description:
+    "Searches the ACT knowledge base by keywords and returns matching knowledge items with related links. " +
+    "Covers meeting notes, decisions, research, action items, and learnings across all projects. " +
+    "Use when asked to find information, past decisions, meeting notes, or any organisational knowledge.",
+  schema: {
+    type: "object" as const,
+    properties: {
+      query: {
+        type: "string" as const,
+        description: "Search query — keywords, topic, or question.",
+      },
+      project_code: {
+        anyOf: [{ type: "string" as const }, { type: "null" as const }],
+        description: "Filter by project code. Pass null for all.",
+      },
+      limit: {
+        anyOf: [{ type: "number" as const }, { type: "null" as const }],
+        description: "Max results (default: 10). Pass null for default.",
+      },
+    },
+    required: ["query", "project_code", "limit"] as const,
+    additionalProperties: false,
+  },
+  execute: async (params: {
+    query: string;
+    project_code: string | null;
+    limit: number | null;
+  }) => {
+    const supabase = getSupabase();
+    const maxResults = params.limit ?? 10;
+
+    // Text search across project_knowledge
+    let query = supabase
+      .from("project_knowledge")
+      .select("id, title, content, knowledge_type, project_code, topics, importance, recorded_at, summary")
+      .or(`title.ilike.%${params.query}%,content.ilike.%${params.query}%,summary.ilike.%${params.query}%`)
+      .order("recorded_at", { ascending: false })
+      .limit(maxResults);
+
+    if (params.project_code) {
+      query = query.eq("project_code", params.project_code);
+    }
+
+    const { data, error } = await query;
+    if (error) return `Error: ${error.message}`;
+    if (!data || data.length === 0) return `No knowledge found matching "${params.query}".`;
+
+    // Get linked items for top results
+    const topIds = (data as any[]).slice(0, 3).map((d: any) => d.id);
+    const { data: links } = await supabase
+      .from("knowledge_links")
+      .select("source_id, target_id, link_type, reason")
+      .or(`source_id.in.(${topIds.join(",")}),target_id.in.(${topIds.join(",")})`)
+      .limit(10);
+
+    const sections: string[] = [
+      `KNOWLEDGE SEARCH: "${params.query}"`,
+      "─".repeat(40),
+      `Found ${data.length} results`,
+      "",
+    ];
+
+    for (const item of data as any[]) {
+      const date = item.recorded_at
+        ? new Date(item.recorded_at).toLocaleDateString("en-AU", {
+            day: "numeric",
+            month: "short",
+            year: "2-digit",
+          })
+        : "Unknown";
+      const topics = item.topics?.length
+        ? ` [${item.topics.slice(0, 3).join(", ")}]`
+        : "";
+      const summary = item.summary || item.content?.substring(0, 150) || "";
+
+      sections.push(`${item.title || "Untitled"} (${item.knowledge_type})`);
+      sections.push(`  Project: ${item.project_code} | Date: ${date}${topics}`);
+      if (summary) sections.push(`  ${summary.substring(0, 200)}`);
+
+      // Show linked items
+      if (links) {
+        const related = (links as any[]).filter(
+          (l: any) => l.source_id === item.id || l.target_id === item.id
+        );
+        if (related.length > 0) {
+          sections.push(
+            `  Links: ${related.map((l: any) => `${l.link_type}${l.reason ? ` (${l.reason})` : ""}`).join(", ")}`
+          );
+        }
+      }
+
+      sections.push("");
+    }
+
+    return sections.join("\n");
   },
 });
 

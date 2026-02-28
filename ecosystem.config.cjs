@@ -213,6 +213,36 @@ const cronScripts = [
     cron_restart: '0 18 * * 5', // Friday 6pm AEST
   },
   {
+    name: 'project-intelligence',
+    script: 'scripts/generate-project-intelligence-snapshots.mjs',
+    cron_restart: '0 6 * * *', // Daily 6am AEST (before daily-briefing at 7am)
+  },
+  {
+    name: 'extract-impact',
+    script: 'scripts/extract-impact-metrics.mjs',
+    cron_restart: '0 3 * * 0', // Sunday 3am AEST (weekly)
+  },
+  {
+    name: 'auto-link-knowledge',
+    script: 'scripts/auto-link-knowledge.mjs',
+    cron_restart: '0 5 * * *', // Daily 5am AEST (before embed at 5am — runs fast)
+  },
+  {
+    name: 'pipeline-sync',
+    script: 'scripts/sync-opportunities-to-unified-pipeline.mjs',
+    cron_restart: '30 6 * * *', // Daily 6:30am AEST (after discover-grants at 6am)
+  },
+  {
+    name: 'monthly-financials',
+    script: 'scripts/calculate-project-monthly-financials.mjs',
+    cron_restart: '0 7 1 * *', // 1st of month at 7am AEST
+  },
+  {
+    name: 'variance-notes',
+    script: 'scripts/generate-financial-variance-notes.mjs',
+    cron_restart: '0 8 1 * *', // 1st of month at 8am AEST (after monthly-financials)
+  },
+  {
     name: 'discover-grants',
     script: 'scripts/discover-grants.mjs',
     cron_restart: '0 6 * * *', // Daily 6am AEST

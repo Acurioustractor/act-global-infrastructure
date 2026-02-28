@@ -25,6 +25,7 @@ import {
   User,
   Mail,
   Pencil,
+  Search,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { useState, useMemo, useRef, useEffect } from 'react'
@@ -598,6 +599,11 @@ export default function OpportunitiesPage() {
   const [selectedProject, setSelectedProject] = useState('')
   const [drafts, setDrafts] = useState<Record<string, string>>({})
   const [copiedSection, setCopiedSection] = useState<string | null>(null)
+  const [searchQuery, setSearchQuery] = useState('')
+  const [fitFilter, setFitFilter] = useState<'all' | 'high' | 'medium' | 'low' | 'unscored'>('all')
+  const [amountFilter, setAmountFilter] = useState<'all' | '10k' | '50k' | '100k' | '500k'>('all')
+  const [enrichedFilter, setEnrichedFilter] = useState<'all' | 'enriched' | 'unenriched'>('all')
+  const [providerFilter, setProviderFilter] = useState('')
 
   // Table view data
   const { data, isLoading } = useQuery<{ opportunities: UnifiedOpportunity[]; summary: Summary }>({
@@ -733,10 +739,20 @@ export default function OpportunitiesPage() {
   const summary = data?.summary || { total: 0, grants: 0, ghl: 0, fundraising: 0, totalValue: 0, highFit: 0 }
   const projects = projectsData?.projects || []
 
+  const providers = useMemo(() => {
+    const set = new Set(opportunities.map(o => o.provider).filter(Boolean))
+    return [...set].sort() as string[]
+  }, [opportunities])
+
   const activeFilterCount = [
     projectFilter,
     statusFilter,
     deadlineFilter !== 'all' ? deadlineFilter : '',
+    searchQuery,
+    fitFilter !== 'all' ? fitFilter : '',
+    amountFilter !== 'all' ? amountFilter : '',
+    enrichedFilter !== 'all' ? enrichedFilter : '',
+    providerFilter,
   ].filter(Boolean).length
 
   const filtered = useMemo(() => {
@@ -759,6 +775,37 @@ export default function OpportunitiesPage() {
         result = result.filter(o => o.deadline && new Date(o.deadline).getTime() <= cutoff)
       }
     }
+
+    // Text search
+    if (searchQuery) {
+      const q = searchQuery.toLowerCase()
+      result = result.filter(o =>
+        o.name.toLowerCase().includes(q) ||
+        o.provider?.toLowerCase().includes(q) ||
+        o.contact?.name.toLowerCase().includes(q) ||
+        o.contact?.company?.toLowerCase().includes(q) ||
+        o.projectCodes.some(p => p.toLowerCase().includes(q))
+      )
+    }
+
+    // Fit score ranges
+    if (fitFilter === 'high') result = result.filter(o => (o.fitScore || 0) >= 70)
+    else if (fitFilter === 'medium') result = result.filter(o => (o.fitScore || 0) >= 40 && (o.fitScore || 0) < 70)
+    else if (fitFilter === 'low') result = result.filter(o => o.fitScore != null && o.fitScore < 40)
+    else if (fitFilter === 'unscored') result = result.filter(o => o.fitScore == null)
+
+    // Amount minimum
+    if (amountFilter !== 'all') {
+      const min = parseInt(amountFilter) * 1000
+      result = result.filter(o => (o.amount.max || o.amount.min || 0) >= min)
+    }
+
+    // Enrichment status
+    if (enrichedFilter === 'enriched') result = result.filter(o => o.fitScore != null)
+    else if (enrichedFilter === 'unenriched') result = result.filter(o => o.fitScore == null)
+
+    // Provider
+    if (providerFilter) result = result.filter(o => o.provider === providerFilter)
 
     result = [...result].sort((a, b) => {
       let cmp = 0
@@ -789,7 +836,7 @@ export default function OpportunitiesPage() {
     })
 
     return result
-  }, [opportunities, tab, projectFilter, statusFilter, deadlineFilter, sortField, sortAsc])
+  }, [opportunities, tab, projectFilter, statusFilter, deadlineFilter, searchQuery, fitFilter, amountFilter, enrichedFilter, providerFilter, sortField, sortAsc])
 
   const handleSort = (field: SortField) => {
     if (sortField === field) {
@@ -801,9 +848,14 @@ export default function OpportunitiesPage() {
   }
 
   const clearFilters = () => {
+    setSearchQuery('')
     setProjectFilter('')
     setStatusFilter('')
     setDeadlineFilter('all')
+    setFitFilter('all')
+    setAmountFilter('all')
+    setEnrichedFilter('all')
+    setProviderFilter('')
   }
 
   // Combined metrics for board view
@@ -946,6 +998,26 @@ export default function OpportunitiesPage() {
         </div>
 
         {viewMode === 'table' && (
+          <span className="text-white/40 text-sm ml-auto">{filtered.length} results</span>
+        )}
+      </div>
+
+      {/* Search + Filters — table view only */}
+      {viewMode === 'table' && (
+        <div className="space-y-3">
+          {/* Search bar */}
+          <div className="relative">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/30" />
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={e => setSearchQuery(e.target.value)}
+              placeholder="Search grants, contacts, projects..."
+              className="w-full bg-white/5 border border-white/10 rounded-lg pl-10 pr-4 py-2 text-sm text-white placeholder:text-white/30 outline-none focus:border-white/30"
+            />
+          </div>
+
+          {/* Filter row */}
           <div className="flex items-center gap-2 flex-wrap">
             <Filter className="w-4 h-4 text-white/40" />
 
@@ -989,6 +1061,53 @@ export default function OpportunitiesPage() {
               <option value="none">No deadline</option>
             </select>
 
+            <select
+              value={fitFilter}
+              onChange={e => setFitFilter(e.target.value as typeof fitFilter)}
+              className="bg-white/5 border border-white/10 text-white/80 text-sm rounded-lg px-3 py-1.5 outline-none focus:border-white/30"
+            >
+              <option value="all">Any Fit Score</option>
+              <option value="high">High (70%+)</option>
+              <option value="medium">Medium (40-69%)</option>
+              <option value="low">Low (&lt;40%)</option>
+              <option value="unscored">Unscored</option>
+            </select>
+
+            <select
+              value={amountFilter}
+              onChange={e => setAmountFilter(e.target.value as typeof amountFilter)}
+              className="bg-white/5 border border-white/10 text-white/80 text-sm rounded-lg px-3 py-1.5 outline-none focus:border-white/30"
+            >
+              <option value="all">Any Amount</option>
+              <option value="10k">$10K+</option>
+              <option value="50k">$50K+</option>
+              <option value="100k">$100K+</option>
+              <option value="500k">$500K+</option>
+            </select>
+
+            <select
+              value={enrichedFilter}
+              onChange={e => setEnrichedFilter(e.target.value as typeof enrichedFilter)}
+              className="bg-white/5 border border-white/10 text-white/80 text-sm rounded-lg px-3 py-1.5 outline-none focus:border-white/30"
+            >
+              <option value="all">All Enrichment</option>
+              <option value="enriched">Enriched</option>
+              <option value="unenriched">Unenriched</option>
+            </select>
+
+            {providers.length > 0 && (
+              <select
+                value={providerFilter}
+                onChange={e => setProviderFilter(e.target.value)}
+                className="bg-white/5 border border-white/10 text-white/80 text-sm rounded-lg px-3 py-1.5 outline-none focus:border-white/30"
+              >
+                <option value="">All Providers</option>
+                {providers.map(p => (
+                  <option key={p} value={p}>{p}</option>
+                ))}
+              </select>
+            )}
+
             {activeFilterCount > 0 && (
               <button
                 onClick={clearFilters}
@@ -999,12 +1118,8 @@ export default function OpportunitiesPage() {
               </button>
             )}
           </div>
-        )}
-
-        {viewMode === 'table' && (
-          <span className="text-white/40 text-sm ml-auto">{filtered.length} results</span>
-        )}
-      </div>
+        </div>
+      )}
 
       {/* ==================== TABLE VIEW ==================== */}
       {viewMode === 'table' && (

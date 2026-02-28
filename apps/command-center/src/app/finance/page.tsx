@@ -32,6 +32,7 @@ import {
   getSubscriptionsSummary,
   getReceiptScore,
   getSpendingByProject,
+  getCashflowExplained,
 } from '@/lib/api'
 import { cn } from '@/lib/utils'
 
@@ -65,6 +66,11 @@ export default function FinancePage() {
   const { data: projectSpending } = useQuery({
     queryKey: ['spending', 'by-project'],
     queryFn: () => getSpendingByProject(3),
+  })
+
+  const { data: cashflowExplained } = useQuery({
+    queryKey: ['cashflow', 'explained'],
+    queryFn: getCashflowExplained,
   })
 
   const summary = progress?.summary
@@ -185,6 +191,66 @@ export default function FinancePage() {
           </div>
         </div>
       </div>
+
+      {/* Cash Flow Explainer + Unmapped Alert */}
+      {cashflowExplained && cashflowExplained.months?.length >= 2 && (() => {
+        const latest = cashflowExplained.months[cashflowExplained.months.length - 1]
+        const prior = cashflowExplained.months[cashflowExplained.months.length - 2]
+        const balanceChange = (latest?.closing_balance || 0) - (prior?.closing_balance || 0)
+        const explanations = latest?.explanations || []
+        return (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+            <div className="glass-card p-5 border border-white/10">
+              <h3 className="text-sm font-medium text-white/50 uppercase tracking-wider mb-3 flex items-center gap-2">
+                <Wallet className="h-4 w-4" />
+                This Month&apos;s Cash Flow
+              </h3>
+              <div className="flex items-baseline gap-2 mb-2">
+                <span className={cn('text-2xl font-bold', balanceChange >= 0 ? 'text-green-400' : 'text-red-400')}>
+                  {balanceChange >= 0 ? '+' : '-'}{formatMoney(Math.abs(balanceChange))}
+                </span>
+                <span className="text-sm text-white/40">balance change</span>
+              </div>
+              <div className="text-sm text-white/50 space-y-1">
+                <p>Income: {formatMoney(latest?.income || 0)} | Expenses: {formatMoney(latest?.expenses || 0)}</p>
+                {latest?.income_change != null && prior && (
+                  <p className="text-xs text-white/30">
+                    vs prior: income {(latest.income_change || 0) >= 0 ? '+' : ''}{formatMoney(latest.income_change || 0)},
+                    expenses {(latest.expense_change || 0) >= 0 ? '+' : ''}{formatMoney(latest.expense_change || 0)}
+                  </p>
+                )}
+              </div>
+              {explanations.length > 0 && (
+                <div className="mt-3 space-y-1">
+                  {(explanations as any[]).slice(0, 2).map((e: any, i: number) => (
+                    <p key={i} className={cn(
+                      'text-xs px-2 py-1 rounded',
+                      e.severity === 'critical' ? 'bg-red-500/10 text-red-400' :
+                      e.severity === 'warning' ? 'bg-amber-500/10 text-amber-400' :
+                      'bg-white/5 text-white/50'
+                    )}>
+                      {e.explanation}
+                    </p>
+                  ))}
+                </div>
+              )}
+            </div>
+            {projectSpending && (projectSpending as any).unmappedCount > 0 && (
+              <Link href="/finance/tagger" className="glass-card p-5 border border-amber-500/20 hover:bg-white/5 transition-colors">
+                <h3 className="text-sm font-medium text-amber-400 uppercase tracking-wider mb-3 flex items-center gap-2">
+                  <AlertTriangle className="h-4 w-4" />
+                  Unmapped Transactions
+                </h3>
+                <p className="text-2xl font-bold text-amber-400">{(projectSpending as any).unmappedCount}</p>
+                <p className="text-sm text-white/40 mt-1">transactions need project codes</p>
+                <p className="text-xs text-white/30 mt-2 flex items-center gap-1">
+                  Go to tagger <ChevronRight className="h-3 w-3" />
+                </p>
+              </Link>
+            )}
+          </div>
+        )
+      })()}
 
       {/* Main Grid */}
       <div className="grid grid-cols-12 gap-6">

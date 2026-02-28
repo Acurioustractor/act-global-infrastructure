@@ -46,11 +46,14 @@ import {
   getProjectFinancials,
   getKnowledgeMeetings,
   getActivityStream,
+  getProjectIntelligence,
   getContactName,
   getTemperatureCategory,
   type Contact,
   type NotionProject,
   type ProjectFinancials,
+  type ProjectFocusArea,
+  type ProjectIntelligence,
 } from '@/lib/api'
 import { ActivityTimeline } from '@/components/activity-timeline'
 import { formatDistanceToNow, format } from 'date-fns'
@@ -209,6 +212,12 @@ export default function ProjectPage({ params, searchParams }: PageParams) {
   const { data: activityData } = useQuery({
     queryKey: ['project', 'activity', code],
     queryFn: () => getActivityStream({ project: code, limit: 15 }),
+  })
+
+  // Fetch project intelligence (focus areas, relationships, snapshot)
+  const { data: intelligenceData } = useQuery({
+    queryKey: ['project', 'intelligence', code],
+    queryFn: () => getProjectIntelligence(code),
   })
 
   // Tab state (supports ?tab=financials deep-linking from Notion)
@@ -1043,6 +1052,117 @@ export default function ProjectPage({ params, searchParams }: PageParams) {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Left Column - Details */}
         <div className="lg:col-span-8 space-y-6">
+
+          {/* Focus Tiles */}
+          {intelligenceData && (intelligenceData.focus.current.length > 0 || intelligenceData.focus.blocked.length > 0 || intelligenceData.summary.recentWins.length > 0) && (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {/* Current Focus */}
+              {intelligenceData.focus.current.length > 0 && (
+                <div className="glass-card p-5 border border-indigo-500/20">
+                  <h3 className="text-sm font-medium text-indigo-400 uppercase tracking-wider mb-3 flex items-center gap-2">
+                    <Zap className="h-4 w-4" />
+                    Current Focus
+                  </h3>
+                  <div className="space-y-2">
+                    {intelligenceData.focus.current.slice(0, 3).map((f) => (
+                      <div key={f.id} className="text-sm">
+                        <p className="text-white font-medium">{f.title}</p>
+                        {f.description && <p className="text-white/40 text-xs mt-0.5 line-clamp-2">{f.description}</p>}
+                        {f.targetDate && (
+                          <p className="text-xs text-white/30 mt-1">Target: {format(new Date(f.targetDate), 'MMM d')}</p>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Blockers */}
+              {intelligenceData.focus.blocked.length > 0 && (
+                <div className="glass-card p-5 border border-red-500/20">
+                  <h3 className="text-sm font-medium text-red-400 uppercase tracking-wider mb-3 flex items-center gap-2">
+                    <AlertTriangle className="h-4 w-4" />
+                    Blockers
+                  </h3>
+                  <div className="space-y-2">
+                    {intelligenceData.focus.blocked.slice(0, 3).map((f) => (
+                      <div key={f.id} className="text-sm">
+                        <p className="text-white font-medium">{f.title}</p>
+                        {f.description && <p className="text-white/40 text-xs mt-0.5 line-clamp-2">{f.description}</p>}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Recent Wins */}
+              {intelligenceData.summary.recentWins.length > 0 && (
+                <div className="glass-card p-5 border border-green-500/20">
+                  <h3 className="text-sm font-medium text-green-400 uppercase tracking-wider mb-3 flex items-center gap-2">
+                    <CheckCircle2 className="h-4 w-4" />
+                    Recent Wins
+                  </h3>
+                  <div className="space-y-2">
+                    {intelligenceData.summary.recentWins.slice(0, 3).map((win, i) => (
+                      <p key={i} className="text-sm text-white">{win}</p>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Snapshot summary when no blockers or wins */}
+              {intelligenceData.focus.blocked.length === 0 && intelligenceData.summary.recentWins.length === 0 && (
+                <div className="glass-card p-5 border border-white/10 md:col-span-2">
+                  <h3 className="text-sm font-medium text-white/50 uppercase tracking-wider mb-3 flex items-center gap-2">
+                    <TrendingUp className="h-4 w-4" />
+                    Snapshot
+                  </h3>
+                  <div className="grid grid-cols-3 gap-4 text-center">
+                    <div>
+                      <p className="text-xl font-bold text-white">{intelligenceData.summary.contactCount}</p>
+                      <p className="text-xs text-white/40">Contacts</p>
+                    </div>
+                    <div>
+                      <p className="text-xl font-bold text-white">{intelligenceData.summary.activeGrants}</p>
+                      <p className="text-xs text-white/40">Active Grants</p>
+                    </div>
+                    <div>
+                      <p className="text-xl font-bold text-green-400">
+                        ${intelligenceData.summary.pipelineValue > 0 ? `${(intelligenceData.summary.pipelineValue / 1000).toFixed(0)}K` : '0'}
+                      </p>
+                      <p className="text-xs text-white/40">Pipeline</p>
+                    </div>
+                  </div>
+                  {intelligenceData.summary.burnRate > 0 && (
+                    <p className="text-xs text-white/30 mt-3 text-center">
+                      Burn rate: ${(intelligenceData.summary.burnRate / 1000).toFixed(1)}K/mo
+                    </p>
+                  )}
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Upcoming Focus */}
+          {intelligenceData && intelligenceData.focus.upcoming.length > 0 && (
+            <div className="glass-card p-5">
+              <h3 className="text-sm font-medium text-amber-400 uppercase tracking-wider mb-3 flex items-center gap-2">
+                <Clock className="h-4 w-4" />
+                Upcoming
+              </h3>
+              <div className="space-y-2">
+                {intelligenceData.focus.upcoming.slice(0, 5).map((f) => (
+                  <div key={f.id} className="flex items-center justify-between py-1.5 px-3 rounded-lg bg-white/5">
+                    <span className="text-sm text-white">{f.title}</span>
+                    {f.targetDate && (
+                      <span className="text-xs text-white/40">{format(new Date(f.targetDate), 'MMM d')}</span>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
           {/* Budget (from Notion) */}
           {projectData?.budget && projectData.budget > 0 && (
             <div className="glass-card p-6">
@@ -1323,17 +1443,53 @@ export default function ProjectPage({ params, searchParams }: PageParams) {
             </div>
           )}
 
-          {/* Related Contacts */}
+          {/* Key Relationships (from intelligence) */}
           <div className="glass-card p-6">
             <h2 className="text-lg font-semibold text-white flex items-center gap-2 mb-4">
               <Link2 className="h-5 w-5 text-pink-400" />
-              Related Contacts
+              Key Relationships
             </h2>
-            {contacts.length === 0 ? (
-              <p className="text-sm text-white/40 text-center py-4">
-                No contacts linked yet
-              </p>
-            ) : (
+            {intelligenceData && intelligenceData.relationships.length > 0 ? (
+              <div className="space-y-2">
+                {intelligenceData.relationships.map((rel) => {
+                  const temp = rel.temperature ?? 0
+                  const tempCategory = temp >= 70 ? 'hot' : temp >= 40 ? 'warm' : 'cold'
+                  return (
+                    <div key={rel.contactId} className="flex items-center gap-3 py-2 px-2 rounded-lg hover:bg-white/5 transition-colors">
+                      <div className={cn(
+                        'w-8 h-8 rounded-full flex items-center justify-center',
+                        tempCategory === 'hot' ? 'bg-red-500/20' :
+                        tempCategory === 'warm' ? 'bg-orange-500/20' : 'bg-blue-500/20'
+                      )}>
+                        <span className="text-xs font-medium text-white">
+                          {(rel.name || '?').charAt(0).toUpperCase()}
+                        </span>
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <Link href={`/people?search=${encodeURIComponent(rel.name || '')}`} className="text-sm font-medium text-white truncate block hover:text-indigo-400 transition-colors">
+                          {rel.name || rel.email || 'Unknown'}
+                        </Link>
+                        <div className="flex items-center gap-2 text-xs text-white/40">
+                          {rel.company && <span className="truncate">{rel.company}</span>}
+                          {rel.trend === 'falling' && <span className="text-red-400">falling</span>}
+                          {rel.trend === 'rising' && <span className="text-green-400">rising</span>}
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-1.5">
+                        {rel.temperature != null && (
+                          <span className="text-xs text-white/30 tabular-nums">{rel.temperature}</span>
+                        )}
+                        <div className={cn(
+                          'w-2 h-2 rounded-full',
+                          tempCategory === 'hot' ? 'bg-red-400' :
+                          tempCategory === 'warm' ? 'bg-orange-400' : 'bg-blue-400'
+                        )} />
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
+            ) : contacts.length > 0 ? (
               <div className="space-y-2">
                 {contacts.map((contact) => {
                   const name = getContactName(contact)
@@ -1364,6 +1520,10 @@ export default function ProjectPage({ params, searchParams }: PageParams) {
                   )
                 })}
               </div>
+            ) : (
+              <p className="text-sm text-white/40 text-center py-4">
+                No contacts linked yet
+              </p>
             )}
             <Link
               href={`/people`}

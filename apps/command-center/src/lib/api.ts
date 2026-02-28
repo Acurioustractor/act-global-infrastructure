@@ -3412,3 +3412,103 @@ export interface RdTrackingData {
 export async function getRdTracking() {
   return fetchApi<RdTrackingData>('/api/finance/rd-tracking')
 }
+
+// ─── Cash Flow Explained ───────────────────────────────────────
+
+export interface CashflowExplainedMonth {
+  month: string
+  income: number
+  expenses: number
+  net: number
+  closing_balance: number
+  is_projection: boolean
+  income_change: number | null
+  expense_change: number | null
+  net_change: number | null
+  explanations: Array<{
+    type: string
+    explanation: string
+    amount: number
+    severity: string
+  }> | null
+}
+
+export interface CashflowExplainedResponse {
+  months: CashflowExplainedMonth[]
+}
+
+export async function getCashflowExplained() {
+  return fetchApi<CashflowExplainedResponse>('/api/finance/cashflow-explained')
+}
+
+// ─── Project Intelligence ──────────────────────────────────────
+
+export interface ProjectFocusArea {
+  id: string
+  title: string
+  description: string | null
+  status: 'current' | 'upcoming' | 'blocked' | 'completed'
+  priority: string
+  targetDate: string | null
+}
+
+export interface ProjectIntelligenceRelationship {
+  contactId: string
+  name: string
+  email: string | null
+  company: string | null
+  tags: string[]
+  temperature: number | null
+  trend: string | null
+  lastContact: string | null
+}
+
+export interface ProjectActivityItem {
+  id: string
+  type: 'email' | 'transaction' | 'knowledge' | 'meeting'
+  title: string
+  description: string | null
+  date: string
+  metadata: Record<string, unknown>
+}
+
+export interface ProjectIntelligence {
+  projectCode: string
+  snapshot: Record<string, unknown> | null
+  focus: {
+    current: ProjectFocusArea[]
+    upcoming: ProjectFocusArea[]
+    blocked: ProjectFocusArea[]
+  }
+  relationships: ProjectIntelligenceRelationship[]
+  activityStream: ProjectActivityItem[]
+  health: {
+    overall: number
+    momentum: number
+    engagement: number
+    financial: number
+    timeline: number
+    calculatedAt: string
+  } | null
+  recentKnowledge: Array<{
+    id: string
+    title: string
+    type: string
+    importance: string
+    recordedAt: string
+    actionRequired: boolean
+    followUpDate: string | null
+  }>
+  summary: {
+    burnRate: number
+    pipelineValue: number
+    contactCount: number
+    activeGrants: number
+    recentWins: string[]
+    blockers: string[]
+  }
+}
+
+export async function getProjectIntelligence(code: string) {
+  return fetchApi<ProjectIntelligence>(`/api/projects/${encodeURIComponent(code)}/intelligence`)
+}
