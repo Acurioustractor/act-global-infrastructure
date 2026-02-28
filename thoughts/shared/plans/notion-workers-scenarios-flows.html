@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Notion Workers — Scenarios & Flows</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0f1117;
+    --surface: #1a1d27;
+    --surface2: #232733;
+    --border: #2e3347;
+    --text: #e2e4ea;
+    --text-dim: #8b8fa3;
+    --telegram: #2AABEE;
+    --telegram-bg: rgba(42,171,238,0.12);
+    --command: #a78bfa;
+    --command-bg: rgba(167,139,250,0.12);
+    --notion: #34d399;
+    --notion-bg: rgba(52,211,153,0.12);
+    --supabase: #f59e0b;
+    --supabase-bg: rgba(245,158,11,0.12);
+    --either: #f472b6;
+    --either-bg: rgba(244,114,182,0.12);
+    --radius: 12px;
+    --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+  /* ── Hero ── */
+  .hero {
+    text-align: center;
+    padding: 64px 0 40px;
+  }
+  .hero h1 {
+    font-size: 2.4rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    margin-bottom: 8px;
+    background: linear-gradient(135deg, var(--notion), var(--supabase));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .hero .subtitle {
+    font-size: 1.1rem;
+    color: var(--text-dim);
+    max-width: 600px;
+    margin: 0 auto 12px;
+  }
+  .hero .insight {
+    display: inline-block;
+    font-size: 0.85rem;
+    color: var(--notion);
+    background: var(--notion-bg);
+    border: 1px solid rgba(52,211,153,0.25);
+    border-radius: 20px;
+    padding: 6px 16px;
+    margin-top: 8px;
+  }
+
+  /* ── Architecture Diagram ── */
+  .arch {
+    position: relative;
+    padding: 48px 0 56px;
+  }
+  .arch-db {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  .arch-db-box {
+    display: inline-block;
+    background: var(--supabase-bg);
+    border: 1.5px solid rgba(245,158,11,0.35);
+    border-radius: var(--radius);
+    padding: 20px 32px;
+    position: relative;
+  }
+  .arch-db-box h3 {
+    color: var(--supabase);
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .arch-db-box .tables {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    justify-content: center;
+    max-width: 480px;
+  }
+  .arch-db-box .tables span {
+    font-size: 0.7rem;
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    color: var(--supabase);
+    background: rgba(245,158,11,0.08);
+    border-radius: 4px;
+    padding: 2px 7px;
+  }
+
+  .arch-connectors {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    margin-bottom: 16px;
+    height: 48px;
+    position: relative;
+  }
+  .arch-connectors .line {
+    width: 2px;
+    height: 48px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .arch-connectors .line::before,
+  .arch-connectors .line::after {
+    content: '';
+    position: absolute;
+    background: var(--border);
+  }
+  .arch-connectors .line::before {
+    width: 2px; height: 48px; left: 0; top: 0;
+  }
+
+  .arch-interfaces {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .arch-card {
+    border-radius: var(--radius);
+    padding: 24px 20px;
+    text-align: center;
+    position: relative;
+    transition: var(--transition);
+    cursor: default;
+  }
+  .arch-card::before {
+    content: '';
+    position: absolute;
+    top: -24px;
+    left: 50%;
+    width: 2px;
+    height: 24px;
+    transform: translateX(-50%);
+  }
+  .arch-card.telegram {
+    background: var(--telegram-bg);
+    border: 1px solid rgba(42,171,238,0.25);
+  }
+  .arch-card.telegram::before { background: var(--telegram); opacity: 0.4; }
+  .arch-card.telegram h4 { color: var(--telegram); }
+
+  .arch-card.command {
+    background: var(--command-bg);
+    border: 1px solid rgba(167,139,250,0.25);
+  }
+  .arch-card.command::before { background: var(--command); opacity: 0.4; }
+  .arch-card.command h4 { color: var(--command); }
+
+  .arch-card.notion-w {
+    background: var(--notion-bg);
+    border: 1px solid rgba(52,211,153,0.25);
+  }
+  .arch-card.notion-w::before { background: var(--notion); opacity: 0.4; }
+  .arch-card.notion-w h4 { color: var(--notion); }
+
+  .arch-card h4 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .arch-card .desc {
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    line-height: 1.5;
+  }
+  .arch-card .context-label {
+    display: inline-block;
+    font-size: 0.68rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-top: 10px;
+    padding: 3px 10px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.06);
+    color: var(--text-dim);
+  }
+
+  .arch-card:hover { transform: translateY(-2px); }
+
+  /* ── Section Titles ── */
+  .section-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin: 56px 0 8px;
+  }
+  .section-desc {
+    color: var(--text-dim);
+    font-size: 0.9rem;
+    margin-bottom: 24px;
+  }
+
+  /* ── Scenario Cards ── */
+  .scenarios { display: flex; flex-direction: column; gap: 12px; }
+
+  .scenario {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: var(--transition);
+  }
+  .scenario.open { border-color: rgba(52,211,153,0.35); }
+
+  .scenario-header {
+    display: flex;
+    align-items: center;
+    padding: 18px 24px;
+    cursor: pointer;
+    gap: 16px;
+    user-select: none;
+    transition: var(--transition);
+  }
+  .scenario-header:hover { background: rgba(255,255,255,0.02); }
+
+  .scenario-num {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--notion);
+    background: var(--notion-bg);
+    border-radius: 6px;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .scenario-header h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    flex: 1;
+  }
+  .scenario-tools {
+    display: flex;
+    gap: 6px;
+  }
+  .scenario-tools span {
+    font-size: 0.65rem;
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    padding: 2px 8px;
+    border-radius: 4px;
+    background: var(--notion-bg);
+    color: var(--notion);
+    white-space: nowrap;
+  }
+  .scenario-chevron {
+    width: 20px;
+    height: 20px;
+    color: var(--text-dim);
+    transition: var(--transition);
+    flex-shrink: 0;
+  }
+  .scenario.open .scenario-chevron { transform: rotate(180deg); }
+
+  .scenario-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .scenario.open .scenario-body { max-height: 900px; }
+
+  .scenario-content {
+    padding: 0 24px 24px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .flow-col h4 {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 700;
+    margin-bottom: 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  .flow-col.before h4 { color: var(--text-dim); }
+  .flow-col.after h4 { color: var(--notion); }
+
+  .flow-steps { display: flex; flex-direction: column; gap: 0; }
+
+  .flow-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 8px 0;
+    position: relative;
+  }
+  .flow-step::before {
+    content: '';
+    position: absolute;
+    left: 7px;
+    top: 24px;
+    bottom: -8px;
+    width: 1.5px;
+    background: var(--border);
+  }
+  .flow-step:last-child::before { display: none; }
+
+  .flow-dot {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .flow-dot::after {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+  }
+  .flow-col.before .flow-dot { border: 1.5px solid var(--border); }
+  .flow-col.before .flow-dot::after { background: var(--text-dim); }
+  .flow-col.after .flow-dot { border: 1.5px solid rgba(52,211,153,0.4); }
+  .flow-col.after .flow-dot::after { background: var(--notion); }
+
+  .flow-text {
+    font-size: 0.82rem;
+    color: var(--text-dim);
+    line-height: 1.5;
+  }
+  .flow-col.after .flow-text { color: var(--text); }
+  .flow-text em {
+    font-style: normal;
+    font-weight: 600;
+    color: var(--notion);
+  }
+  .flow-text .tool-call {
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: 0.75rem;
+    color: var(--notion);
+    background: var(--notion-bg);
+    padding: 1px 5px;
+    border-radius: 3px;
+  }
+  .flow-text .pain {
+    color: #ef4444;
+    font-weight: 500;
+  }
+
+  .what-changes {
+    grid-column: 1 / -1;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    padding-top: 8px;
+    border-top: 1px solid var(--border);
+  }
+  .change-badge {
+    font-size: 0.78rem;
+    background: var(--notion-bg);
+    color: var(--notion);
+    padding: 6px 14px;
+    border-radius: 8px;
+    border: 1px solid rgba(52,211,153,0.15);
+  }
+
+  /* ── Routing Table ── */
+  .routing { margin: 32px 0; }
+  .routing-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .routing-row {
+    display: grid;
+    grid-template-columns: 1fr 160px 1fr;
+    gap: 12px;
+    align-items: center;
+    padding: 14px 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: var(--transition);
+    user-select: none;
+  }
+  .routing-row:hover {
+    border-color: rgba(255,255,255,0.1);
+    background: var(--surface2);
+  }
+  .routing-row.active { border-color: var(--active-color, var(--notion)); }
+  .routing-row .situation {
+    font-size: 0.88rem;
+    font-weight: 500;
+  }
+  .routing-row .interface {
+    text-align: center;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 4px 12px;
+    border-radius: 6px;
+    transition: var(--transition);
+  }
+  .routing-row .reason {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    text-align: right;
+  }
+
+  .routing-row[data-if="telegram"] .interface { color: var(--telegram); background: var(--telegram-bg); }
+  .routing-row[data-if="telegram"] { --active-color: var(--telegram); }
+  .routing-row[data-if="command"] .interface { color: var(--command); background: var(--command-bg); }
+  .routing-row[data-if="command"] { --active-color: var(--command); }
+  .routing-row[data-if="notion"] .interface { color: var(--notion); background: var(--notion-bg); }
+  .routing-row[data-if="notion"] { --active-color: var(--notion); }
+  .routing-row[data-if="either"] .interface { color: var(--either); background: var(--either-bg); }
+  .routing-row[data-if="either"] { --active-color: var(--either); }
+
+  .routing-row.active .interface {
+    transform: scale(1.05);
+  }
+
+  /* filter buttons */
+  .routing-filters {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+  }
+  .routing-filter {
+    font-size: 0.78rem;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-dim);
+    cursor: pointer;
+    transition: var(--transition);
+  }
+  .routing-filter:hover { background: rgba(255,255,255,0.04); color: var(--text); }
+  .routing-filter.active { border-color: var(--filter-color); color: var(--filter-color); background: var(--filter-bg); }
+  .routing-filter[data-f="all"] { --filter-color: var(--text); --filter-bg: rgba(255,255,255,0.06); }
+  .routing-filter[data-f="telegram"] { --filter-color: var(--telegram); --filter-bg: var(--telegram-bg); }
+  .routing-filter[data-f="command"] { --filter-color: var(--command); --filter-bg: var(--command-bg); }
+  .routing-filter[data-f="notion"] { --filter-color: var(--notion); --filter-bg: var(--notion-bg); }
+
+  /* ── Verification ── */
+  .verification {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px;
+    margin: 40px 0 64px;
+  }
+  .verification h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .verification .v-desc {
+    font-size: 0.82rem;
+    color: var(--text-dim);
+    margin-bottom: 18px;
+  }
+  .v-progress {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+  .v-bar {
+    flex: 1;
+    height: 6px;
+    background: var(--surface2);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .v-bar-fill {
+    height: 100%;
+    background: var(--notion);
+    border-radius: 3px;
+    transition: width 0.4s ease;
+    width: 0%;
+  }
+  .v-count {
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .v-list { display: flex; flex-direction: column; gap: 6px; }
+  .v-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: var(--transition);
+    user-select: none;
+  }
+  .v-item:hover { background: rgba(255,255,255,0.03); }
+  .v-item.checked .v-check { background: var(--notion); border-color: var(--notion); }
+  .v-item.checked .v-check svg { opacity: 1; }
+  .v-item.checked .v-label { color: var(--text-dim); text-decoration: line-through; text-decoration-color: rgba(255,255,255,0.15); }
+  .v-check {
+    width: 20px;
+    height: 20px;
+    border: 1.5px solid var(--border);
+    border-radius: 5px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+    margin-top: 1px;
+  }
+  .v-check svg {
+    width: 12px;
+    height: 12px;
+    opacity: 0;
+    transition: var(--transition);
+    color: var(--bg);
+  }
+  .v-label { font-size: 0.85rem; }
+  .v-label code {
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: 0.78rem;
+    background: rgba(255,255,255,0.06);
+    padding: 1px 5px;
+    border-radius: 3px;
+  }
+
+  .troubleshoot {
+    margin-top: 18px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+  }
+  .troubleshoot h4 {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-dim);
+    margin-bottom: 8px;
+  }
+  .troubleshoot ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .troubleshoot li {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    padding-left: 16px;
+    position: relative;
+  }
+  .troubleshoot li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--supabase);
+  }
+  .troubleshoot code {
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: 0.75rem;
+    background: rgba(255,255,255,0.06);
+    padding: 1px 5px;
+    border-radius: 3px;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 720px) {
+    .hero h1 { font-size: 1.8rem; }
+    .arch-interfaces { grid-template-columns: 1fr; }
+    .arch-card::before { display: none; }
+    .scenario-content { grid-template-columns: 1fr; }
+    .scenario-tools { display: none; }
+    .routing-row { grid-template-columns: 1fr; gap: 6px; }
+    .routing-row .reason { text-align: left; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- Hero -->
+  <div class="hero">
+    <h1>Notion Workers</h1>
+    <p class="subtitle">Scenarios & Flows — how ACT ecosystem intelligence surfaces inline where the work happens</p>
+    <span class="insight">Zero context switching. The data exists — Workers just surface it in place.</span>
+  </div>
+
+  <!-- Architecture Diagram -->
+  <div class="arch">
+    <div class="arch-db">
+      <div class="arch-db-box">
+        <h3>Supabase</h3>
+        <div class="tables">
+          <span>project_knowledge</span>
+          <span>ghl_contacts</span>
+          <span>grant_applications</span>
+          <span>communications</span>
+          <span>relationship_health</span>
+          <span>xero_txns</span>
+          <span>ghl_opportunities</span>
+          <span>calendar_events</span>
+          <span>api_usage</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="arch-connectors"><div class="line"></div></div>
+
+    <div class="arch-interfaces">
+      <div class="arch-card telegram">
+        <h4>Telegram Bot</h4>
+        <p class="desc">Voice-first, mobile, quick Q&A, write operations, receipt capture</p>
+        <span class="context-label">Mobile · On-the-go</span>
+      </div>
+      <div class="arch-card command">
+        <h4>Command Center</h4>
+        <p class="desc">Dashboard, charts, tables, bulk operations, admin tools</p>
+        <span class="context-label">Desktop · Deep work</span>
+      </div>
+      <div class="arch-card notion-w">
+        <h4>Notion Workers</h4>
+        <p class="desc">Inline in workspace, context-aware, follow-up chains, planning</p>
+        <span class="context-label">Workspace · Planning</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scenarios -->
+  <h2 class="section-title">Scenarios</h2>
+  <p class="section-desc">Click to expand — see the current flow vs the Notion Worker flow side-by-side.</p>
+
+  <div class="scenarios" id="scenarios"></div>
+
+  <!-- Routing Table -->
+  <h2 class="section-title">When to Use What</h2>
+  <p class="section-desc">Click a row to highlight. Filter by interface.</p>
+
+  <div class="routing">
+    <div class="routing-filters" id="routing-filters"></div>
+    <div class="routing-grid" id="routing-grid"></div>
+  </div>
+
+  <!-- Verification -->
+  <div class="verification">
+    <h3>Post-Deploy Verification</h3>
+    <p class="v-desc">Test each scenario manually after deployment.</p>
+    <div class="v-progress">
+      <div class="v-bar"><div class="v-bar-fill" id="v-bar-fill"></div></div>
+      <span class="v-count" id="v-count">0 / 5</span>
+    </div>
+    <div class="v-list" id="v-list"></div>
+
+    <div class="troubleshoot">
+      <h4>If a tool returns empty or errors</h4>
+      <ul>
+        <li>Secrets set correctly — <code>ntn workers env set</code></li>
+        <li>Supabase tables exist and have data</li>
+        <li>Worker deployed — <code>ntn workers deploy</code></li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// ── Data ──
+
+const scenarios = [
+  {
+    num: 1,
+    title: 'Morning Briefing Inside a Daily Page',
+    tools: ['get_daily_briefing', 'lookup_contact'],
+    before: [
+      'Opens Telegram',
+      'Voice: "Give me my briefing"',
+      'Bot returns text wall in chat',
+      'Reads, mentally maps items to Notion projects',
+      { text: 'Switches to Notion to update pages', pain: true },
+      { text: 'Context lost between apps', pain: true },
+    ],
+    after: [
+      'Opens Notion daily page',
+      'Types: <em>"What\'s my briefing today?"</em>',
+      'Agent calls <span class="tool-call">get_daily_briefing</span>',
+      'Briefing appears <em>inline</em> — overdue actions, relationship alerts',
+      'Asks follow-up: <em>"Tell me more about Brodie"</em>',
+      'Agent calls <span class="tool-call">lookup_contact</span> — relationship card with signals',
+      'Drags key info into the daily page as action items',
+    ],
+    changes: ['No app switching', 'Follow-up chains', 'Inline capture'],
+  },
+  {
+    num: 2,
+    title: 'Grant Review During Project Planning',
+    tools: ['check_grant_deadlines', 'get_project_health'],
+    before: [
+      'Reviewing Empathy Ledger in Notion',
+      'Wonders: "Any grants closing soon?"',
+      { text: 'Opens Telegram or terminal', pain: true },
+      'Runs grant check, reads output',
+      { text: 'Manually copies info back to Notion', pain: true },
+    ],
+    after: [
+      'Same Notion project page',
+      'Asks: <em>"What grants are closing for Empathy Ledger?"</em>',
+      'Agent calls <span class="tool-call">check_grant_deadlines</span> with ACT-EL',
+      'Grant details appear inline — deadlines, amounts, milestones',
+      'Asks: <em>"What about overall project health?"</em>',
+      'Agent calls <span class="tool-call">get_project_health</span> — activity scores, pipeline value',
+      'Updates project status right there',
+    ],
+    changes: ['Zero context switch', 'Project-scoped', 'Actionable inline'],
+  },
+  {
+    num: 3,
+    title: 'Pre-Meeting Contact Prep',
+    tools: ['lookup_contact', 'get_financial_summary'],
+    before: [
+      'Meeting with Sarah Chen in 30 min',
+      'Opens Telegram: "Tell me about Sarah Chen"',
+      'Reads contact card in Telegram',
+      { text: 'Opens Notion meeting page, manually writes prep', pain: true },
+      { text: 'References Telegram during meeting', pain: true },
+    ],
+    after: [
+      'Creates meeting page in Notion',
+      'Asks: <em>"Prep me for this meeting. Who is Sarah Chen?"</em>',
+      'Agent calls <span class="tool-call">lookup_contact</span> — full relationship card',
+      'Asks: <em>"What\'s our financial relationship?"</em>',
+      'Agent calls <span class="tool-call">get_financial_summary</span>',
+      'All prep is <em>on the meeting page</em>',
+      'Takes notes during meeting — prep + notes + follow-ups, one place',
+    ],
+    changes: ['30-second prep', 'Prep + notes coexist', 'Signals at point of use'],
+  },
+  {
+    num: 4,
+    title: 'Weekly Financial Review',
+    tools: ['get_financial_summary', 'get_project_health'],
+    before: [
+      'Friday afternoon — review time',
+      'Opens Command Center dashboard',
+      { text: 'Switches to Xero for untagged transactions', pain: true },
+      'Runs auto-tag script in terminal',
+      { text: 'Goes back to Notion to update project budgets', pain: true },
+    ],
+    after: [
+      'Opens Notion "Weekly Review" page',
+      'Asks: <em>"Financial summary for the last month?"</em>',
+      'Agent calls <span class="tool-call">get_financial_summary</span> — spend by project, untagged, pipeline',
+      'Asks: <em>"How healthy are our projects?"</em>',
+      'Agent calls <span class="tool-call">get_project_health</span> — activity scores',
+      'Writes review notes right on the page',
+      'Tags action items for next week',
+    ],
+    changes: ['Single-surface review', 'No dashboard for summaries', 'Persistent artifact'],
+  },
+  {
+    num: 5,
+    title: 'Multi-Tool Chain — "Morning Routine"',
+    tools: ['all 4 tools', 'synthesised'],
+    before: [
+      'Check Telegram for briefing',
+      'Check terminal for grant deadlines',
+      'Check Command Center for finances',
+      { text: 'Mentally synthesise priorities', pain: true },
+      { text: 'Open Notion, manually write today\'s focus', pain: true },
+    ],
+    after: [
+      'Types: <em>"Run my morning routine"</em>',
+      'Agent calls <span class="tool-call">get_daily_briefing</span>',
+      'Agent calls <span class="tool-call">check_grant_deadlines</span>',
+      'Agent calls <span class="tool-call">lookup_contact</span> for alerts',
+      'Agent calls <span class="tool-call">get_financial_summary</span>',
+      '<em>Synthesised focus list</em> — urgent, relationships, finances, follow-ups',
+      'Turns each item into a Notion checkbox — works through the day',
+    ],
+    changes: ['One command, full picture', 'AI-synthesised priorities', 'Everything on daily page'],
+  },
+];
+
+const routing = [
+  { situation: 'Walking, quick question', iface: 'Telegram', ifKey: 'telegram', reason: 'Hands-free, mobile' },
+  { situation: 'Deep financial analysis', iface: 'Command Center', ifKey: 'command', reason: 'Charts, tables, bulk ops' },
+  { situation: 'Morning briefing', iface: 'Notion Worker', ifKey: 'notion', reason: 'Stays on daily page, follow-up chains' },
+  { situation: 'Pre-meeting prep', iface: 'Notion Worker', ifKey: 'notion', reason: 'Prep + notes on same page' },
+  { situation: 'Project review', iface: 'Notion Worker', ifKey: 'notion', reason: 'Inline data alongside project docs' },
+  { situation: 'Send an email', iface: 'Telegram', ifKey: 'telegram', reason: 'Write tools + confirmation flow' },
+  { situation: 'Receipt capture', iface: 'Telegram', ifKey: 'telegram', reason: 'Photo → OCR pipeline' },
+  { situation: 'Tag transactions', iface: 'Command Center', ifKey: 'command', reason: 'Bulk UI, better for lists' },
+  { situation: 'Who needs follow-up?', iface: 'Either', ifKey: 'either', reason: 'Telegram for quick, Notion for action' },
+];
+
+const verificationItems = [
+  'Open a Notion daily page → ask <em>"What\'s my briefing?"</em> → verify response quality',
+  'Open a project page → ask <em>"Any grants closing for ACT-EL?"</em> → verify filtering works',
+  'Ask <em>"Tell me about [known contact]"</em> → verify relationship data appears',
+  'Ask <em>"What\'s our spend this month?"</em> → verify financial data',
+  'Chain: briefing → <em>"tell me more about [alert item]"</em> → verify agent chains tools',
+];
+
+// ── Render Scenarios ──
+
+const chevronSvg = '<svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>';
+const checkSvg = '<svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>';
+
+function renderStep(step, isAfter) {
+  const isPain = typeof step === 'object' && step.pain;
+  const text = typeof step === 'object' ? step.text : step;
+  return `<div class="flow-step"><div class="flow-dot"></div><span class="flow-text">${isPain ? '<span class="pain">' + text + '</span>' : text}</span></div>`;
+}
+
+const scenariosEl = document.getElementById('scenarios');
+scenarios.forEach((s, i) => {
+  const div = document.createElement('div');
+  div.className = 'scenario' + (i === 0 ? ' open' : '');
+  div.innerHTML = `
+    <div class="scenario-header">
+      <span class="scenario-num">${s.num}</span>
+      <h3>${s.title}</h3>
+      <div class="scenario-tools">${s.tools.map(t => `<span>${t}</span>`).join('')}</div>
+      <div class="scenario-chevron">${chevronSvg}</div>
+    </div>
+    <div class="scenario-body">
+      <div class="scenario-content">
+        <div class="flow-col before">
+          <h4>Current Flow</h4>
+          <div class="flow-steps">${s.before.map(st => renderStep(st, false)).join('')}</div>
+        </div>
+        <div class="flow-col after">
+          <h4>Notion Worker Flow</h4>
+          <div class="flow-steps">${s.after.map(st => renderStep(st, true)).join('')}</div>
+        </div>
+        <div class="what-changes">${s.changes.map(c => `<span class="change-badge">${c}</span>`).join('')}</div>
+      </div>
+    </div>
+  `;
+  div.querySelector('.scenario-header').addEventListener('click', () => {
+    div.classList.toggle('open');
+  });
+  scenariosEl.appendChild(div);
+});
+
+// ── Render Routing ──
+
+const filtersEl = document.getElementById('routing-filters');
+const gridEl = document.getElementById('routing-grid');
+let activeFilter = 'all';
+
+const filters = [
+  { key: 'all', label: 'All' },
+  { key: 'telegram', label: 'Telegram' },
+  { key: 'command', label: 'Command Center' },
+  { key: 'notion', label: 'Notion Worker' },
+];
+
+filters.forEach(f => {
+  const btn = document.createElement('button');
+  btn.className = 'routing-filter' + (f.key === 'all' ? ' active' : '');
+  btn.dataset.f = f.key;
+  btn.textContent = f.label;
+  btn.addEventListener('click', () => {
+    activeFilter = f.key;
+    filtersEl.querySelectorAll('.routing-filter').forEach(b => b.classList.toggle('active', b.dataset.f === f.key));
+    renderRouting();
+  });
+  filtersEl.appendChild(btn);
+});
+
+function renderRouting() {
+  gridEl.innerHTML = '';
+  routing.forEach(r => {
+    if (activeFilter !== 'all' && r.ifKey !== activeFilter) return;
+    const row = document.createElement('div');
+    row.className = 'routing-row';
+    row.dataset.if = r.ifKey;
+    row.innerHTML = `
+      <span class="situation">${r.situation}</span>
+      <span class="interface">${r.iface}</span>
+      <span class="reason">${r.reason}</span>
+    `;
+    row.addEventListener('click', () => {
+      gridEl.querySelectorAll('.routing-row').forEach(rr => rr.classList.remove('active'));
+      row.classList.add('active');
+    });
+    gridEl.appendChild(row);
+  });
+}
+renderRouting();
+
+// ── Render Verification ──
+
+const vList = document.getElementById('v-list');
+const vBarFill = document.getElementById('v-bar-fill');
+const vCount = document.getElementById('v-count');
+let checked = new Set();
+
+verificationItems.forEach((item, i) => {
+  const div = document.createElement('div');
+  div.className = 'v-item';
+  div.innerHTML = `<div class="v-check">${checkSvg}</div><span class="v-label">${item}</span>`;
+  div.addEventListener('click', () => {
+    if (checked.has(i)) checked.delete(i); else checked.add(i);
+    div.classList.toggle('checked', checked.has(i));
+    updateProgress();
+  });
+  vList.appendChild(div);
+});
+
+function updateProgress() {
+  const pct = (checked.size / verificationItems.length) * 100;
+  vBarFill.style.width = pct + '%';
+  vCount.textContent = `${checked.size} / ${verificationItems.length}`;
+}
+</script>
+
+</body>
+</html>

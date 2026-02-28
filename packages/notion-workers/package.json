@@ -1,0 +1,20 @@
+{
+  "name": "@act/notion-workers",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Notion Workers — custom agent tools powered by ACT ecosystem data",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "check": "tsc --noEmit",
+    "dev": "tsc --watch"
+  },
+  "dependencies": {
+    "@notionhq/workers": "^0.0.85",
+    "@supabase/supabase-js": "^2.49.1",
+    "tsx": "^4.21.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.0"
+  }
+}
