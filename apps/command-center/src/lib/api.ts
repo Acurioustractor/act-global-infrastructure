@@ -533,6 +533,28 @@ export async function getInfrastructureHealth() {
   return fetchApi<InfrastructureHealth>('/api/infrastructure/health')
 }
 
+// Cron Health
+export interface CronScript {
+  name: string
+  status: 'online' | 'stopped' | 'errored'
+  restarts: number
+  memory_mb: number
+  uptime_ms: number
+  unstable: boolean
+  recent_errors: string[]
+  frequency: string
+  pm2_id: number
+}
+
+export interface CronHealthResponse {
+  summary: { running: number; stopped: number; errored: number; total: number }
+  groups: { label: string; frequency: string; scripts: CronScript[] }[]
+}
+
+export async function getCronHealth() {
+  return fetchApi<CronHealthResponse>('/api/health/crons')
+}
+
 export async function getConnectors() {
   const data = await fetchApi<Array<{ name: string; type: string; status: string; required: string[]; missingVars: string[] }>>('/api/connectors')
   return { connectors: data }
