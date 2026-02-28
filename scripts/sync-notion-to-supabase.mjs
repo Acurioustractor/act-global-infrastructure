@@ -526,6 +526,8 @@ Environment Variables:
     process.exit(0);
   }
 
+  const supabase = getSupabase();
+
   try {
     const stats = await syncNotionToSupabase(options);
 
