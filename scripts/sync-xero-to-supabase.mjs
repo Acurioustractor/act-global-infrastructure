@@ -417,13 +417,29 @@ function detectProjectFromTracking(trackingCategories) {
 
   for (const tracking of trackingCategories) {
     // Look for Project tracking category
-    if (tracking.Name === 'Project' || tracking.Name === 'Tracking' || tracking.Name === 'Region') {
-      const trackingValue = (tracking.Option || '').toLowerCase();
+    const catName = tracking.Name || '';
+    if (catName === 'Project' || catName === 'Tracking' || catName === 'Region' || catName === 'Project Tracking') {
+      const trackingValue = (tracking.Option || '').trim();
+      const trackingLower = trackingValue.toLowerCase();
 
-      // Find matching project by xero_tracking field
+      // If value starts with "ACT-", extract the code directly
+      if (trackingValue.startsWith('ACT-')) {
+        const code = trackingValue.split(/\s*[—–-]\s*/)[0].trim();
+        // Verify it's a known project code
+        if (PROJECT_CODES.projects?.[code]) {
+          return code;
+        }
+      }
+
+      // Find matching project by xero_tracking field or aliases
       for (const [code, proj] of Object.entries(PROJECT_CODES.projects || {})) {
         const xeroTracking = (proj.xero_tracking || '').toLowerCase();
-        if (xeroTracking && xeroTracking === trackingValue) {
+        if (xeroTracking && xeroTracking === trackingLower) {
+          return code;
+        }
+        // Check xero_tracking_aliases for old names
+        const aliases = (proj.xero_tracking_aliases || []).map(a => a.toLowerCase());
+        if (aliases.includes(trackingLower)) {
           return code;
         }
       }

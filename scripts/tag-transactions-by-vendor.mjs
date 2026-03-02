@@ -58,11 +58,30 @@ function buildTrackingToProjectMap() {
   // xero_tracking value → ACT project code
   const map = {};
   for (const [code, project] of Object.entries(projectCodes.projects)) {
+    // Map the primary xero_tracking value
     if (project.xero_tracking) {
       map[project.xero_tracking.toLowerCase()] = code;
     }
+    // Map xero_tracking_aliases (old names for backward compat)
+    if (project.xero_tracking_aliases) {
+      for (const alias of project.xero_tracking_aliases) {
+        map[alias.toLowerCase()] = code;
+      }
+    }
+    // Map "ACT-XX — Name" format (extract code from prefix)
+    map[code.toLowerCase()] = code;
   }
   return map;
+}
+
+// Extract project code from "ACT-XX — Name" format tracking values
+function parseTrackingCode(value) {
+  if (!value) return null;
+  const trimmed = value.trim();
+  if (trimmed.startsWith('ACT-')) {
+    return trimmed.split(/\s*[—–-]\s*/)[0].trim();
+  }
+  return null;
 }
 
 function buildKeywordMap() {
@@ -113,15 +132,24 @@ function matchLineItemsTracking(lineItems, trackingToProjectMap) {
     if (!Array.isArray(tracking)) continue;
 
     for (const t of tracking) {
-      const name = (t.Name || t.name || t.Option || t.option || '').toLowerCase();
+      const option = t.Option || t.option || '';
+
+      // Try parsing "ACT-XX — Name" format directly
+      const parsedCode = parseTrackingCode(option);
+      if (parsedCode && trackingToProjectMap[parsedCode.toLowerCase()]) {
+        return trackingToProjectMap[parsedCode.toLowerCase()];
+      }
+
+      // Try exact match on option value
+      const optLower = option.toLowerCase().trim();
+      if (optLower && trackingToProjectMap[optLower]) {
+        return trackingToProjectMap[optLower];
+      }
+
+      // Try Name field as fallback
+      const name = (t.Name || t.name || '').toLowerCase().trim();
       if (name && trackingToProjectMap[name]) {
         return trackingToProjectMap[name];
-      }
-      // Check nested option
-      const option = t.Option || t.option;
-      if (typeof option === 'string') {
-        const optLower = option.toLowerCase();
-        if (trackingToProjectMap[optLower]) return trackingToProjectMap[optLower];
       }
     }
   }
