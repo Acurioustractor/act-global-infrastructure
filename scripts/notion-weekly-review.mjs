@@ -201,12 +201,22 @@ async function main() {
     paragraph(emails),
   ];
 
+  // Auto-detect title property name from database schema
+  const dbMeta = await notion.databases.retrieve({ database_id: WEEKLY_REPORTS_DB_ID });
+  const titleProp = Object.entries(dbMeta.properties).find(([, v]) => v.type === 'title');
+  const dateProp = Object.entries(dbMeta.properties).find(([, v]) => v.type === 'date');
+  const titleKey = titleProp ? titleProp[0] : 'Name';
+
+  const properties = {
+    [titleKey]: { title: [{ text: { content: `📊 ${title}` } }] },
+  };
+  if (dateProp) {
+    properties[dateProp[0]] = { date: { start: new Date().toISOString().split('T')[0] } };
+  }
+
   await notion.pages.create({
     parent: { database_id: WEEKLY_REPORTS_DB_ID },
-    properties: {
-      'Name': { title: [{ text: { content: `📊 ${title}` } }] },
-      'Date': { date: { start: new Date().toISOString().split('T')[0] } },
-    },
+    properties,
     children,
   });
 

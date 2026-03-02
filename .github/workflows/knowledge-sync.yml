@@ -163,7 +163,7 @@ jobs:
           echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
           echo "STEP 7: Calculate project health scores"
           echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-          node scripts/calculate-project-health.mjs || echo "Project health calculation completed with warnings"
+          node scripts/compute-project-health.mjs --apply || echo "Project health calculation completed with warnings"
 
       # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
       # STEP 8: Generate project summaries (AI)
