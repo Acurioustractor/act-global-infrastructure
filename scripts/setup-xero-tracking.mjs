@@ -186,20 +186,48 @@ async function addOption(categoryId, optionName) {
   return data.Options?.[0];
 }
 
-async function setupTracking() {
-  // Load project codes from DB
-  const { data: projects, error } = await supabase
-    .from('projects')
-    .select('code, name')
-    .in('status', ['active', 'ideation'])
-    .order('code');
+async function renameOption(categoryId, optionId, newName) {
+  const data = await xeroRequest(`TrackingCategories/${categoryId}/Options/${optionId}`, {
+    method: 'POST',
+    body: { Name: newName },
+  });
+  return data.Options?.[0];
+}
 
-  if (error) {
-    console.error('Failed to load projects:', error.message);
-    return;
+async function archiveOption(categoryId, optionId) {
+  const data = await xeroRequest(`TrackingCategories/${categoryId}/Options/${optionId}`, {
+    method: 'POST',
+    body: { Status: 'ARCHIVED' },
+  });
+  return data.Options?.[0];
+}
+
+async function setupTracking() {
+  // Load project codes from config (canonical source)
+  const projectCodes = JSON.parse(readFileSync(path.join(process.cwd(), 'config/project-codes.json'), 'utf8'));
+
+  // Build desired options: "ACT-XX — Name" format from xero_tracking field
+  const desiredOptions = {};
+  for (const [code, proj] of Object.entries(projectCodes.projects || {})) {
+    if (proj.xero_tracking) {
+      desiredOptions[code] = proj.xero_tracking; // e.g. "ACT-JH — JusticeHub"
+    }
   }
 
-  const projectOptions = projects.map(p => p.code);
+  // Build reverse lookup: old name → { code, newName }
+  // This maps aliases and bare codes to the desired new name for renaming
+  const renameLookup = {};
+  for (const [code, proj] of Object.entries(projectCodes.projects || {})) {
+    if (!proj.xero_tracking) continue;
+    // Bare code (e.g. "ACT-JH") should be renamed to full format
+    if (proj.xero_tracking !== code) {
+      renameLookup[code] = { code, newName: proj.xero_tracking };
+    }
+    // Old aliases (e.g. "JusticeHub") should be renamed to full format
+    for (const alias of (proj.xero_tracking_aliases || [])) {
+      renameLookup[alias] = { code, newName: proj.xero_tracking };
+    }
+  }
 
   const costTypes = [
     'Software & Subscriptions',
@@ -219,92 +247,127 @@ async function setupTracking() {
     console.log(`  ${cat.Name} (${options.length} options): ${options.slice(0, 5).join(', ')}${options.length > 5 ? '...' : ''}`);
   }
 
-  const existingNames = existing.map(c => c.Name);
-  // Match existing categories by flexible names
-  const projectCatExists = existingNames.some(n => n.toLowerCase().includes('project'));
-  const costTypeCatExists = existingNames.some(n => n === 'Cost Type');
+  // Find project category (may be called "Project" or "Project Tracking")
+  const projectCat = existing.find(c => c.Name.toLowerCase().includes('project'));
 
   console.log('\n--- Plan ---');
 
-  // Find project category (may be called "Project" or "Project Tracking")
-  const projectCat = existing.find(c => c.Name.toLowerCase().includes('project'));
-  if (projectCatExists) {
-    const existingOptions = new Set((projectCat.Options || []).map(o => o.Name));
-    const newOptions = projectOptions.filter(o => !existingOptions.has(o));
-    console.log(`${projectCat.Name}: exists (${existingOptions.size} options), ${newOptions.length} to add`);
-    if (newOptions.length > 0) console.log(`  New: ${newOptions.join(', ')}`);
+  if (projectCat) {
+    const existingOpts = projectCat.Options || [];
+    const existingByName = new Map(existingOpts.map(o => [o.Name, o]));
+
+    // Classify each existing option
+    const toRename = [];    // { optionId, oldName, newName }
+    const toDelete = [];    // { optionId, name, reason }
+    const alreadyCorrect = new Set();
+
+    for (const opt of existingOpts) {
+      const name = opt.Name;
+      // Already in correct ACT-XX — Name format?
+      if (Object.values(desiredOptions).includes(name)) {
+        alreadyCorrect.add(name);
+        continue;
+      }
+      // Is it a bare code or old alias that should be renamed?
+      if (renameLookup[name]) {
+        const { newName } = renameLookup[name];
+        // Check if the correct version already exists — if so, delete this duplicate
+        if (existingByName.has(newName) || alreadyCorrect.has(newName)) {
+          toDelete.push({ optionId: opt.TrackingOptionID, name, reason: `duplicate of ${newName}` });
+        } else {
+          toRename.push({ optionId: opt.TrackingOptionID, oldName: name, newName });
+          alreadyCorrect.add(newName); // Mark as handled
+        }
+        continue;
+      }
+      // Unknown option — leave it alone
+      console.log(`  ⚠️  Unknown option: "${name}" — leaving as-is`);
+    }
+
+    // Find options that need to be added (not existing and not being renamed to)
+    const toAdd = Object.values(desiredOptions).filter(name => !alreadyCorrect.has(name));
+
+    console.log(`\n${projectCat.Name}:`);
+    console.log(`  ✓ Already correct: ${alreadyCorrect.size}`);
+    if (toRename.length > 0) {
+      console.log(`  ✏️  To rename: ${toRename.length}`);
+      for (const r of toRename) console.log(`    "${r.oldName}" → "${r.newName}"`);
+    }
+    if (toDelete.length > 0) {
+      console.log(`  📦 To archive (duplicates): ${toDelete.length}`);
+      for (const d of toDelete) console.log(`    "${d.name}" (${d.reason})`);
+    }
+    if (toAdd.length > 0) {
+      console.log(`  ➕ To add: ${toAdd.length}`);
+      for (const a of toAdd) console.log(`    "${a}"`);
+    }
+
+    if (!applyMode) {
+      console.log('\nRun with --apply to execute these changes in Xero');
+    } else {
+      console.log('\nApplying...');
+      let ops = 0;
+
+      // Renames first (preserves transaction history)
+      for (const r of toRename) {
+        console.log(`  Renaming: "${r.oldName}" → "${r.newName}"`);
+        await renameOption(projectCat.TrackingCategoryID, r.optionId, r.newName);
+        ops++;
+        await new Promise(r => setTimeout(r, 500));
+      }
+
+      // Archive duplicates (can't delete in-use options)
+      for (const d of toDelete) {
+        console.log(`  Archiving: "${d.name}"`);
+        await archiveOption(projectCat.TrackingCategoryID, d.optionId);
+        ops++;
+        await new Promise(r => setTimeout(r, 500));
+      }
+
+      // Adds (new projects)
+      for (const name of toAdd) {
+        console.log(`  Adding: "${name}"`);
+        await addOption(projectCat.TrackingCategoryID, name);
+        ops++;
+        await new Promise(r => setTimeout(r, 500));
+      }
+
+      console.log(`  Done: ${ops} operations applied`);
+    }
   } else {
-    console.log(`Project: CREATE with ${projectOptions.length} options`);
-    console.log(`  ${projectOptions.join(', ')}`);
+    // No project category exists — create it
+    const allOptions = Object.values(desiredOptions);
+    console.log(`Project: CREATE with ${allOptions.length} options`);
+    if (applyMode) {
+      console.log('Creating "Project" tracking category...');
+      const newCat = await createCategory('Project');
+      console.log(`  Created: ${newCat.TrackingCategoryID}`);
+      for (const name of allOptions) {
+        console.log(`  Adding: "${name}"`);
+        await addOption(newCat.TrackingCategoryID, name);
+        await new Promise(r => setTimeout(r, 500));
+      }
+    }
   }
 
-  // Cost Type category
+  // Cost Type category (unchanged)
   const costTypeCat = existing.find(c => c.Name === 'Cost Type');
-  if (costTypeCatExists) {
+  if (costTypeCat) {
     const existingOptions = new Set((costTypeCat.Options || []).map(o => o.Name));
     const newOptions = costTypes.filter(o => !existingOptions.has(o));
-    console.log(`Cost Type: exists (${existingOptions.size} options), ${newOptions.length} to add`);
-    if (newOptions.length > 0) console.log(`  New: ${newOptions.join(', ')}`);
-  } else if (existing.length >= 2 && !costTypeCatExists) {
-    const otherCat = existing.find(c => !c.Name.toLowerCase().includes('project'));
-    console.log(`Cost Type: CANNOT CREATE — both slots used. "${otherCat?.Name}" occupies the second slot.`);
-    console.log(`  To add Cost Type, archive "${otherCat?.Name}" in Xero Settings → Tracking Categories.`);
-  } else {
-    console.log(`Cost Type: CREATE with ${costTypes.length} options`);
-    console.log(`  ${costTypes.join(', ')}`);
-  }
-
-  if (!applyMode) {
-    console.log('\nRun with --apply to create these in Xero');
-    return;
-  }
-
-  // Apply: Project category
-  console.log('\nApplying...');
-
-  let appliedProjectCat = projectCat;
-  if (!appliedProjectCat) {
-    console.log('Creating "Project" tracking category...');
-    appliedProjectCat = await createCategory('Project');
-    console.log(`  Created: ${appliedProjectCat.TrackingCategoryID}`);
-  }
-
-  const existingProjectOptions = new Set((appliedProjectCat.Options || []).map(o => o.Name));
-  let added = 0;
-  for (const code of projectOptions) {
-    if (existingProjectOptions.has(code)) continue;
-    console.log(`  Adding: ${code}`);
-    await addOption(appliedProjectCat.TrackingCategoryID, code);
-    added++;
-    // Rate limit: 500ms between calls
-    await new Promise(r => setTimeout(r, 500));
-  }
-  console.log(`  ${appliedProjectCat.Name}: ${added} options added (${existingProjectOptions.size} already existed)`);
-
-  // Apply: Cost Type category
-  let appliedCostTypeCat = costTypeCat;
-  if (!appliedCostTypeCat && existing.length < 2) {
-    console.log('Creating "Cost Type" tracking category...');
-    appliedCostTypeCat = await createCategory('Cost Type');
-    console.log(`  Created: ${appliedCostTypeCat.TrackingCategoryID}`);
-  }
-
-  if (appliedCostTypeCat) {
-    const existingCostOptions = new Set((appliedCostTypeCat.Options || []).map(o => o.Name));
-    added = 0;
-    for (const type of costTypes) {
-      if (existingCostOptions.has(type)) continue;
-      console.log(`  Adding: ${type}`);
-      await addOption(appliedCostTypeCat.TrackingCategoryID, type);
-      added++;
-      await new Promise(r => setTimeout(r, 500));
+    if (newOptions.length > 0) {
+      console.log(`\nCost Type: ${newOptions.length} to add`);
+      if (applyMode) {
+        for (const type of newOptions) {
+          console.log(`  Adding: ${type}`);
+          await addOption(costTypeCat.TrackingCategoryID, type);
+          await new Promise(r => setTimeout(r, 500));
+        }
+      }
     }
-    console.log(`  Cost Type: ${added} options added (${existingCostOptions.size} already existed)`);
-  } else {
-    console.log('\n  Skipping Cost Type — no available slot. Archive "Business Divisions" in Xero first.');
   }
 
-  console.log('\nDone! Tracking categories configured in Xero.');
+  console.log('\nDone!');
 }
 
 async function showStatus() {
