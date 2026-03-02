@@ -34,10 +34,10 @@ function formatCurrency(amount) {
   }).format(amount || 0);
 }
 
-// Get first day of month
+// Get first day of month (string-based to avoid timezone shifts)
 function getFirstOfMonth(date) {
-  const d = new Date(date);
-  return new Date(d.getFullYear(), d.getMonth(), 1).toISOString().split('T')[0];
+  const dateStr = typeof date === 'string' ? date : date.toISOString().split('T')[0];
+  return dateStr.substring(0, 7) + '-01';
 }
 
 // Get top N items from breakdown
@@ -67,35 +67,54 @@ async function aggregateTransactions(monthsBack) {
 
   console.log(`   Range: ${startDate.toISOString().split('T')[0]} to ${endDate.toISOString().split('T')[0]}`);
 
-  // Fetch transactions
-  const { data: transactions, error: txError } = await supabase
-    .from('xero_transactions')
-    .select('*')
-    .gte('date', startDate.toISOString().split('T')[0])
-    .lte('date', endDate.toISOString().split('T')[0])
-    .order('date', { ascending: true });
+  // Fetch transactions (paginated to avoid 1000-row Supabase limit)
+  let transactions = [];
+  let offset = 0;
+  const pageSize = 1000;
 
-  if (txError) {
-    console.error('   ❌ Error fetching transactions:', txError);
-    return null;
+  while (true) {
+    const { data, error: txError } = await supabase
+      .from('xero_transactions')
+      .select('*')
+      .gte('date', startDate.toISOString().split('T')[0])
+      .lte('date', endDate.toISOString().split('T')[0])
+      .order('date', { ascending: true })
+      .range(offset, offset + pageSize - 1);
+
+    if (txError) {
+      console.error('   ❌ Error fetching transactions:', txError);
+      return null;
+    }
+
+    if (!data || data.length === 0) break;
+    transactions.push(...data);
+    if (data.length < pageSize) break;
+    offset += pageSize;
   }
 
   console.log(`   Found ${transactions.length} transactions`);
 
-  // Check if xero_invoices table exists and fetch paid invoices
+  // Fetch paid invoices (paginated)
   let invoices = [];
-  const { data: invoiceData, error: invError } = await supabase
-    .from('xero_invoices')
-    .select('*')
-    .eq('type', 'ACCREC') // Accounts receivable = income
-    .in('status', ['PAID', 'AUTHORISED'])
-    .gte('date', startDate.toISOString().split('T')[0])
-    .lte('date', endDate.toISOString().split('T')[0]);
+  offset = 0;
 
-  if (!invError && invoiceData) {
-    invoices = invoiceData;
-    console.log(`   Found ${invoices.length} income invoices`);
+  while (true) {
+    const { data: invoiceData, error: invError } = await supabase
+      .from('xero_invoices')
+      .select('*')
+      .eq('type', 'ACCREC') // Accounts receivable = income
+      .in('status', ['PAID', 'AUTHORISED'])
+      .gte('date', startDate.toISOString().split('T')[0])
+      .lte('date', endDate.toISOString().split('T')[0])
+      .range(offset, offset + pageSize - 1);
+
+    if (invError || !invoiceData || invoiceData.length === 0) break;
+    invoices.push(...invoiceData);
+    if (invoiceData.length < pageSize) break;
+    offset += pageSize;
   }
+
+  console.log(`   Found ${invoices.length} income invoices`);
 
   // Group by month
   const byMonth = {};
