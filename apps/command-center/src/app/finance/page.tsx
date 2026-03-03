@@ -97,6 +97,13 @@ export default function FinancePage() {
           </div>
           <div className="flex gap-3">
             <Link
+              href="/finance/weekly-review"
+              className="btn-glass flex items-center gap-2 border-indigo-500/30"
+            >
+              <FileText className="h-4 w-4" />
+              Weekly Review
+            </Link>
+            <Link
               href="/finance/ecosystem"
               className="btn-glass flex items-center gap-2"
             >

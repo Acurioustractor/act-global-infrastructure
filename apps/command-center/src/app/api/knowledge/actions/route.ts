@@ -12,6 +12,7 @@ export async function GET(request: NextRequest) {
     const project = searchParams.get('project')
     const status = searchParams.get('status')
     const overdue = searchParams.get('overdue') === 'true'
+    const sourceType = searchParams.get('source_type')
     const limit = parseInt(searchParams.get('limit') || '100')
 
     let query = supabase
@@ -27,6 +28,10 @@ export async function GET(request: NextRequest) {
 
     if (status) {
       query = query.eq('status', status)
+    }
+
+    if (sourceType) {
+      query = query.like('source_ref', `${sourceType}:%`)
     }
 
     if (overdue) {
@@ -90,7 +95,7 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
-    const { title, project_code, follow_up_date, importance, content } = body
+    const { title, project_code, follow_up_date, importance, content, source_type, source_id } = body
 
     if (!title) {
       return NextResponse.json({ success: false, error: 'title is required' }, { status: 400 })
@@ -108,8 +113,9 @@ export async function POST(request: NextRequest) {
         action_required: true,
         status: 'open',
         recorded_at: new Date().toISOString(),
+        source_ref: source_type ? `${source_type}:${source_id || ''}` : null,
       })
-      .select('id, title, status, project_code, follow_up_date, importance, created_at')
+      .select('id, title, status, project_code, follow_up_date, importance, source_ref, created_at')
       .single()
 
     if (error) throw error

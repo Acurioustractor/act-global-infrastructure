@@ -58,7 +58,7 @@ async function fetchActions() {
   const sixMonthsAgo = new Date(Date.now() - 180 * 24 * 60 * 60 * 1000).toISOString();
   const { data, error } = await supabase
     .from('project_knowledge')
-    .select('id, title, content, project_code, project_name, recorded_at, source_url, action_required, follow_up_date, importance, participants')
+    .select('id, title, content, project_code, project_name, recorded_at, source_url, action_required, follow_up_date, importance, participants, status')
     .eq('knowledge_type', 'action')
     .gte('recorded_at', sixMonthsAgo)
     .order('recorded_at', { ascending: false })
@@ -306,6 +306,8 @@ async function main() {
 
   log(`Found ${actions.length} actions and ${decisions.length} decisions`);
 
+  const liveAlertsDbId = notionDbIds.liveAlerts;
+
   // Sync actions
   if (actionsDbId && actions.length > 0) {
     log('\nSyncing actions...');
@@ -346,6 +348,79 @@ async function main() {
     log(`Decisions: ${stats.created} created, ${stats.updated} updated, ${stats.errors} errors`);
   } else if (!decisionsDbId) {
     log('Skipping decisions — no DB ID configured');
+  }
+
+  // Sync urgent/overdue actions to Live Alerts DB
+  if (liveAlertsDbId && actions.length > 0) {
+    log('\nSyncing urgent follow-ups to Live Alerts...');
+    const threeDaysFromNow = new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+    const today = new Date().toISOString().split('T')[0];
+
+    const urgentActions = actions.filter(a =>
+      a.follow_up_date &&
+      a.follow_up_date <= threeDaysFromNow &&
+      a.status !== 'completed' &&
+      a.status !== 'archived'
+    );
+
+    if (urgentActions.length === 0) {
+      log('  No urgent follow-ups to sync');
+    } else {
+      const existingAlerts = await getExistingNotionIds(liveAlertsDbId);
+      verbose(`  ${existingAlerts.size} existing alerts in Notion`);
+
+      const stats = { created: 0, updated: 0, errors: 0 };
+      for (const action of urgentActions) {
+        try {
+          const notionPageId = existingAlerts.get(action.id);
+          const title = action.title || 'Untitled follow-up';
+          const isOverdue = action.follow_up_date < today;
+
+          const properties = {
+            'Name': { title: [{ text: { content: title } }] },
+            'Status': { select: { name: isOverdue ? 'Overdue' : 'Due Soon' } },
+            'Priority': { select: { name: action.importance || 'medium' } },
+            'Due Date': { date: { start: action.follow_up_date } },
+            'Source': { select: { name: 'Follow-up' } },
+            'Supabase ID': { rich_text: [{ text: { content: action.id } }] },
+          };
+
+          if (notionPageId) {
+            verbose(`  Updating alert: ${title}`);
+            if (!DRY_RUN) {
+              await notion.pages.update({ page_id: notionPageId, properties });
+              await sleep(350);
+            }
+            stats.updated++;
+          } else {
+            verbose(`  Creating alert: ${title}`);
+            if (!DRY_RUN) {
+              const children = [];
+              if (action.content) {
+                children.push({
+                  object: 'block',
+                  type: 'paragraph',
+                  paragraph: { rich_text: [{ text: { content: action.content.slice(0, 2000) } }] },
+                });
+              }
+              await notion.pages.create({
+                parent: { database_id: liveAlertsDbId },
+                properties,
+                children,
+              });
+              await sleep(350);
+            }
+            stats.created++;
+          }
+        } catch (err) {
+          log(`  Error syncing alert "${action.title}": ${err.message}`);
+          stats.errors++;
+        }
+      }
+      log(`Live Alerts: ${stats.created} created, ${stats.updated} updated, ${stats.errors} errors`);
+    }
+  } else if (!liveAlertsDbId) {
+    log('Skipping live alerts — no DB ID configured');
   }
 
   log('\nDone!');

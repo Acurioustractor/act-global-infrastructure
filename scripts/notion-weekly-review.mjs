@@ -158,25 +158,159 @@ async function getEmailStats() {
   return `Received this week: ${received || 0} | Unanswered: ${unanswered || 0}`;
 }
 
+async function getInvoiceAging() {
+  const now = new Date();
+  const today = now.toISOString().split('T')[0];
+  const { data: invoices } = await supabase
+    .from('xero_invoices')
+    .select('invoice_number, contact_name, amount_due, due_date, status')
+    .in('status', ['AUTHORISED', 'SENT'])
+    .eq('type', 'ACCREC')
+    .gt('amount_due', 0);
+
+  const buckets = { current: 0, '1-30d': 0, '31-60d': 0, '61-90d': 0, '90d+': 0 };
+  let totalDue = 0;
+  const overdueList = [];
+
+  for (const inv of invoices || []) {
+    const amt = Number(inv.amount_due) || 0;
+    totalDue += amt;
+    if (!inv.due_date || inv.due_date >= today) {
+      buckets.current += amt;
+    } else {
+      const daysOverdue = Math.floor((now.getTime() - new Date(inv.due_date).getTime()) / (1000 * 60 * 60 * 24));
+      if (daysOverdue <= 30) buckets['1-30d'] += amt;
+      else if (daysOverdue <= 60) buckets['31-60d'] += amt;
+      else if (daysOverdue <= 90) buckets['61-90d'] += amt;
+      else buckets['90d+'] += amt;
+      overdueList.push(`  ${inv.contact_name || 'Unknown'} — $${amt.toLocaleString()} (${daysOverdue}d overdue)`);
+    }
+  }
+
+  const lines = [
+    `Total due: $${Math.round(totalDue).toLocaleString()} (${(invoices || []).length} invoices)`,
+    `Aging: Current $${Math.round(buckets.current).toLocaleString()} | 1-30d $${Math.round(buckets['1-30d']).toLocaleString()} | 31-60d $${Math.round(buckets['31-60d']).toLocaleString()} | 61-90d $${Math.round(buckets['61-90d']).toLocaleString()} | 90d+ $${Math.round(buckets['90d+']).toLocaleString()}`,
+  ];
+  if (overdueList.length > 0) {
+    lines.push(`Overdue (${overdueList.length}):`);
+    lines.push(...overdueList.slice(0, 10));
+  } else {
+    lines.push('All invoices current — none overdue!');
+  }
+  return lines.join('\n');
+}
+
+async function getReceiptGap() {
+  const threeMonthsAgo = new Date();
+  threeMonthsAgo.setMonth(threeMonthsAgo.getMonth() - 3);
+  const since = threeMonthsAgo.toISOString().split('T')[0];
+
+  const { count: totalExpenses } = await supabase
+    .from('xero_transactions')
+    .select('*', { count: 'exact', head: true })
+    .eq('type', 'SPEND')
+    .gte('date', since);
+
+  const { count: withReceipts } = await supabase
+    .from('xero_transactions')
+    .select('*', { count: 'exact', head: true })
+    .eq('type', 'SPEND')
+    .eq('has_attachment', true)
+    .gte('date', since);
+
+  const total = totalExpenses || 0;
+  const matched = withReceipts || 0;
+  const missing = total - matched;
+  const score = total > 0 ? Math.round((matched / total) * 100) : 100;
+
+  return `Receipt score: ${score}% (${matched} of ${total} matched, ${missing} missing)`;
+}
+
+async function getRdSpend() {
+  const now = new Date();
+  const fyStart = now.getMonth() >= 6
+    ? `${now.getFullYear()}-07-01`
+    : `${now.getFullYear() - 1}-07-01`;
+
+  const { data: rules } = await supabase
+    .from('vendor_project_rules')
+    .select('vendor_name')
+    .eq('rd_eligible', true);
+
+  const rdVendors = new Set((rules || []).map(r => r.vendor_name));
+
+  const since = daysAgo(7).split('T')[0];
+  const { data: weekTxns } = await supabase
+    .from('xero_transactions')
+    .select('contact_name, total')
+    .lt('total', 0)
+    .gte('date', since);
+
+  let weekRd = 0;
+  for (const tx of weekTxns || []) {
+    if (rdVendors.has(tx.contact_name)) weekRd += Math.abs(Number(tx.total) || 0);
+  }
+
+  const { data: ytdTxns } = await supabase
+    .from('xero_transactions')
+    .select('contact_name, total')
+    .lt('total', 0)
+    .gte('date', fyStart);
+
+  let ytdRd = 0;
+  for (const tx of ytdTxns || []) {
+    if (rdVendors.has(tx.contact_name)) ytdRd += Math.abs(Number(tx.total) || 0);
+  }
+
+  return `This week: $${Math.round(weekRd).toLocaleString()} | YTD: $${Math.round(ytdRd).toLocaleString()} | 43.5% offset: $${Math.round(ytdRd * 0.435).toLocaleString()}`;
+}
+
+function generateActions(financial, invoiceAging, receiptGap, rdSpend) {
+  const actions = [];
+
+  // Parse overdue count from invoice aging text
+  const overdueMatch = invoiceAging.match(/Overdue \((\d+)\)/);
+  if (overdueMatch) actions.push(`→ CHASE: ${overdueMatch[1]} overdue invoices`);
+
+  // Parse missing receipts
+  const missingMatch = receiptGap.match(/(\d+) missing/);
+  if (missingMatch && parseInt(missingMatch[1]) > 5) actions.push(`→ CAPTURE: ${missingMatch[1]} missing receipts`);
+
+  // Parse untagged from financial
+  const untaggedMatch = financial.match(/Untagged: \$([0-9,]+)/);
+  if (untaggedMatch) actions.push(`→ TAG: $${untaggedMatch[1]} in untagged transactions`);
+
+  return actions.length > 0 ? actions.join('\n') : '✅ No urgent actions this week';
+}
+
 async function main() {
   const start = Date.now();
   const title = weekLabel();
 
   console.log(`Creating weekly review: ${title}`);
 
-  const [financial, health, relationships, grants, emails] = await Promise.all([
+  const [financial, health, relationships, grants, emails, invoiceAging, receiptGap, rdSpend] = await Promise.all([
     getFinancialSummary(),
     getProjectHealth(),
     getRelationshipChanges(),
     getGrantPipeline(),
     getEmailStats(),
+    getInvoiceAging(),
+    getReceiptGap(),
+    getRdSpend(),
   ]);
+
+  const actions = generateActions(financial, invoiceAging, receiptGap, rdSpend);
 
   verbose('\n--- Financial ---\n' + financial);
   verbose('\n--- Project Health ---\n' + health);
   verbose('\n--- Relationships ---\n' + relationships);
   verbose('\n--- Grants ---\n' + grants);
   verbose('\n--- Emails ---\n' + emails);
+  verbose('\n--- Invoice Aging ---\n' + invoiceAging);
+  verbose('\n--- Receipt Gap ---\n' + receiptGap);
+  verbose('\n--- R&D Spend ---\n' + rdSpend);
+  verbose('\n--- Actions ---\n' + actions);
 
   if (DRY_RUN) {
     console.log('\n[DRY RUN] Would create Notion page with above content.');
@@ -189,8 +323,16 @@ async function main() {
   }
 
   const children = [
+    heading('Action Items'),
+    paragraph(actions),
     heading('Financial Summary'),
     paragraph(financial),
+    heading('Invoice Aging'),
+    paragraph(invoiceAging),
+    heading('Receipt Gap'),
+    paragraph(receiptGap),
+    heading('R&D Spend'),
+    paragraph(rdSpend),
     heading('Project Health'),
     paragraph(health),
     heading('Relationships'),

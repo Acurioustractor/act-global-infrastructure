@@ -416,16 +416,15 @@ function detectProjectFromTracking(trackingCategories) {
   if (!trackingCategories?.length) return null;
 
   for (const tracking of trackingCategories) {
-    // Look for Project tracking category
     const catName = tracking.Name || '';
-    if (catName === 'Project' || catName === 'Tracking' || catName === 'Region' || catName === 'Project Tracking') {
-      const trackingValue = (tracking.Option || '').trim();
-      const trackingLower = trackingValue.toLowerCase();
+    const trackingValue = (tracking.Option || '').trim();
+    const trackingLower = trackingValue.toLowerCase();
 
+    // Project Tracking category — contains ACT-XX codes directly
+    if (catName === 'Project' || catName === 'Tracking' || catName === 'Region' || catName === 'Project Tracking') {
       // If value starts with "ACT-", extract the code directly
       if (trackingValue.startsWith('ACT-')) {
         const code = trackingValue.split(/\s*[—–-]\s*/)[0].trim();
-        // Verify it's a known project code
         if (PROJECT_CODES.projects?.[code]) {
           return code;
         }
@@ -437,10 +436,31 @@ function detectProjectFromTracking(trackingCategories) {
         if (xeroTracking && xeroTracking === trackingLower) {
           return code;
         }
-        // Check xero_tracking_aliases for old names
         const aliases = (proj.xero_tracking_aliases || []).map(a => a.toLowerCase());
         if (aliases.includes(trackingLower)) {
           return code;
+        }
+      }
+    }
+
+    // Business Divisions category — maps division names to default project codes
+    // Only used as fallback when no Project Tracking is set
+    if (catName === 'Business Divisions') {
+      const divisionMap = {
+        'a curious tractor': 'ACT-IN',
+        'eco-tourism': 'ACT-HV',
+        'farm activities': 'ACT-FM',
+      };
+      if (divisionMap[trackingLower]) {
+        // Only use this if no Project Tracking was found (continue loop)
+        // Store as candidate and return at end
+        const candidate = divisionMap[trackingLower];
+        // Check if there's also a Project Tracking entry
+        const hasProjectTracking = trackingCategories.some(t =>
+          t.Name === 'Project Tracking' || t.Name === 'Project'
+        );
+        if (!hasProjectTracking) {
+          return candidate;
         }
       }
     }
@@ -528,18 +548,43 @@ async function syncInvoices(options = {}) {
 
   // Build where clause for date filter
   const whereClause = `Date>=DateTime(${since.getFullYear()},${since.getMonth() + 1},${since.getDate()})`;
-  const data = await xeroRequest(`Invoices?where=${encodeURIComponent(whereClause)}&order=Date DESC`);
 
-  if (!data?.Invoices) {
+  // Paginate to get full line items with tracking categories
+  let allInvoices = [];
+  let page = 1;
+  while (true) {
+    const data = await xeroRequest(`Invoices?where=${encodeURIComponent(whereClause)}&order=Date DESC&page=${page}`);
+    if (!data?.Invoices?.length) break;
+    allInvoices = allInvoices.concat(data.Invoices);
+    if (data.Invoices.length < 100) break;
+    page++;
+  }
+
+  if (allInvoices.length === 0) {
     console.error('   No invoice data received');
     return { synced: 0, errors: 0 };
   }
 
-  console.log(`   Found ${data.Invoices.length} invoices`);
+  console.log(`   Found ${allInvoices.length} invoices (${page} page${page > 1 ? 's' : ''})`);
+
+  // Check if list API returned tracking — if not, fetch individually
+  const sampleTracking = allInvoices.slice(0, 3).flatMap(inv => inv.LineItems?.flatMap(l => l.Tracking || []) || []);
+  if (sampleTracking.length === 0 && allInvoices.length <= 500) {
+    console.log('   List API omitted tracking — fetching individual invoices for full detail...');
+    for (let i = 0; i < allInvoices.length; i++) {
+      const inv = allInvoices[i];
+      const detail = await xeroRequest(`Invoices/${inv.InvoiceID}`);
+      if (detail?.Invoices?.[0]) {
+        allInvoices[i] = detail.Invoices[0];
+      }
+      if (i % 20 === 0 && i > 0) process.stdout.write(`${i}..`);
+    }
+    if (allInvoices.length > 20) console.log(` ${allInvoices.length} done`);
+  }
 
   const errors = [];
 
-  for (const invoice of data.Invoices) {
+  for (const invoice of allInvoices) {
     try {
       // Detect project code
       const projectCode = detectProjectCode(invoice);
@@ -654,20 +699,46 @@ async function syncTransactions(options = {}) {
 
   // Build where clause for date filter
   const whereClause = `Date>=DateTime(${since.getFullYear()},${since.getMonth() + 1},${since.getDate()})`;
-  const data = await xeroRequest(`BankTransactions?where=${encodeURIComponent(whereClause)}&order=Date DESC`);
 
-  if (!data?.BankTransactions) {
+  // Paginate to get full line items with tracking categories
+  // The list endpoint omits Tracking[] unless we paginate with page=N
+  let allTransactions = [];
+  let page = 1;
+  while (true) {
+    const data = await xeroRequest(`BankTransactions?where=${encodeURIComponent(whereClause)}&order=Date DESC&page=${page}`);
+    if (!data?.BankTransactions?.length) break;
+    allTransactions = allTransactions.concat(data.BankTransactions);
+    if (data.BankTransactions.length < 100) break; // last page
+    page++;
+  }
+
+  if (allTransactions.length === 0) {
     console.error('   No transaction data received');
     return { synced: 0, errors: 0 };
   }
 
-  console.log(`   Found ${data.BankTransactions.length} transactions`);
+  console.log(`   Found ${allTransactions.length} transactions (${page} page${page > 1 ? 's' : ''})`);
+
+  // Check if list API returned tracking — if not, fetch individually for recent transactions
+  const sampleTracking = allTransactions.slice(0, 3).flatMap(t => t.LineItems?.flatMap(l => l.Tracking || []) || []);
+  if (sampleTracking.length === 0 && allTransactions.length <= 500) {
+    console.log('   List API omitted tracking — fetching individual transactions for full detail...');
+    for (let i = 0; i < allTransactions.length; i++) {
+      const txn = allTransactions[i];
+      const detail = await xeroRequest(`BankTransactions/${txn.BankTransactionID}`);
+      if (detail?.BankTransactions?.[0]) {
+        allTransactions[i] = detail.BankTransactions[0];
+      }
+      if (i % 20 === 0 && i > 0) process.stdout.write(`${i}..`);
+    }
+    if (allTransactions.length > 20) console.log(` ${allTransactions.length} done`);
+  }
 
   const errors = [];
   const byProject = {};
   const byType = { RECEIVE: 0, SPEND: 0, TRANSFER: 0 };
 
-  for (const txn of data.BankTransactions) {
+  for (const txn of allTransactions) {
     try {
       // Detect project code
       const projectCode = detectProjectCode(txn);

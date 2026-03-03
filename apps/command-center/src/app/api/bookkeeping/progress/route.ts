@@ -96,17 +96,44 @@ export async function GET() {
       i => i.due_date && i.due_date < todayStr
     )
 
+    // Aging buckets for overdue invoices
+    const agingBuckets = { current: 0, days30: 0, days60: 0, days90: 0, days120plus: 0 }
+    const agingBucketCounts = { current: 0, days30: 0, days60: 0, days90: 0, days120plus: 0 }
+    for (const inv of outstandingReceivables) {
+      const amt = Number(inv.amount_due) || 0
+      if (!inv.due_date || inv.due_date >= todayStr) {
+        agingBuckets.current += amt
+        agingBucketCounts.current++
+      } else {
+        const dueDate = new Date(inv.due_date)
+        const daysOverdue = Math.floor((now.getTime() - dueDate.getTime()) / (1000 * 60 * 60 * 24))
+        if (daysOverdue <= 30) { agingBuckets.days30 += amt; agingBucketCounts.days30++ }
+        else if (daysOverdue <= 60) { agingBuckets.days60 += amt; agingBucketCounts.days60++ }
+        else if (daysOverdue <= 90) { agingBuckets.days90 += amt; agingBucketCounts.days90++ }
+        else { agingBuckets.days120plus += amt; agingBucketCounts.days120plus++ }
+      }
+    }
+
     // Outstanding receivables list (for display)
     const receivablesList = outstandingReceivables
       .sort((a, b) => (Number(b.amount_due) || 0) - (Number(a.amount_due) || 0))
       .slice(0, 20)
-      .map(i => ({
-        invoice_number: i.invoice_number || '',
-        contact_name: i.contact_name || '',
-        amount_due: Number(i.amount_due) || 0,
-        due_date: i.due_date || '',
-        overdue: !!(i.due_date && i.due_date < todayStr),
-      }))
+      .map(i => {
+        const amt = Number(i.amount_due) || 0
+        const isOverdue = !!(i.due_date && i.due_date < todayStr)
+        let daysOverdue = 0
+        if (isOverdue && i.due_date) {
+          daysOverdue = Math.floor((now.getTime() - new Date(i.due_date).getTime()) / (1000 * 60 * 60 * 24))
+        }
+        return {
+          invoice_number: i.invoice_number || '',
+          contact_name: i.contact_name || '',
+          amount_due: amt,
+          due_date: i.due_date || '',
+          overdue: isOverdue,
+          days_overdue: daysOverdue,
+        }
+      })
 
     return NextResponse.json({
       summary: {
@@ -124,12 +151,27 @@ export async function GET() {
       overdueInvoices: {
         count: overdueInvoices.length,
         total: Math.round(overdueInvoices.reduce((s, i) => s + (Number(i.amount_due) || 0), 0)),
-        invoices: overdueInvoices.map(i => ({
-          invoice_number: i.invoice_number || '',
-          contact_name: i.contact_name || '',
-          amount_due: Number(i.amount_due) || 0,
-          due_date: i.due_date || '',
-        })),
+        invoices: overdueInvoices.map(i => {
+          let daysOverdue = 0
+          if (i.due_date) {
+            daysOverdue = Math.floor((now.getTime() - new Date(i.due_date).getTime()) / (1000 * 60 * 60 * 24))
+          }
+          return {
+            invoice_number: i.invoice_number || '',
+            contact_name: i.contact_name || '',
+            amount_due: Number(i.amount_due) || 0,
+            due_date: i.due_date || '',
+            days_overdue: daysOverdue,
+          }
+        }),
+      },
+      agingBuckets: {
+        current: Math.round(agingBuckets.current),
+        days30: Math.round(agingBuckets.days30),
+        days60: Math.round(agingBuckets.days60),
+        days90: Math.round(agingBuckets.days90),
+        days120plus: Math.round(agingBuckets.days120plus),
+        counts: agingBucketCounts,
       },
       outstandingReceivables: receivablesList,
     })
@@ -149,6 +191,7 @@ export async function GET() {
       topIncomeContacts: [],
       topExpenseContacts: [],
       overdueInvoices: { count: 0, total: 0, invoices: [] },
+      agingBuckets: { current: 0, days30: 0, days60: 0, days90: 0, days120plus: 0, counts: { current: 0, days30: 0, days60: 0, days90: 0, days120plus: 0 } },
       outstandingReceivables: [],
     })
   }

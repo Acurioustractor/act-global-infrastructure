@@ -43,6 +43,7 @@ export class GrantRepository {
         ? new Date().toISOString()
         : null,
       discovered_by: 'grant_engine',
+      grant_type: 'open_opportunity',
     };
 
     // Try insert first
