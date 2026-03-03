@@ -12,8 +12,8 @@ importers:
         specifier: ^0.71.2
         version: 0.71.2(zod@3.25.76)
       '@notionhq/client':
-        specifier: ^4.0.2
-        version: 4.0.2
+        specifier: ^5.11.0
+        version: 5.11.1
       '@octokit/graphql':
         specifier: ^9.0.3
         version: 9.0.3
@@ -284,7 +284,7 @@ importers:
     dependencies:
       '@notionhq/workers':
         specifier: '>=0.0.0'
-        version: 0.0.85(@notionhq/client@5.9.0)
+        version: 0.0.85(@notionhq/client@5.11.1)
       '@supabase/supabase-js':
         specifier: ^2.49.1
         version: 2.93.3
@@ -783,8 +783,8 @@ packages:
     resolution: {integrity: sha512-nn5ozdjYQpUCZlWGuxcJY/KpxkWQs4DcbMCmKojjyrYDEAGy4Ce19NN4v5MduafTwJlbKc99UA8YhSVqq9yPZA==}
     engines: {node: '>=12.4.0'}
 
-  '@notionhq/client@4.0.2':
-    resolution: {integrity: sha512-4pk3dm4umhjsRI0umCnJ8lCZh0TMiaMdkY0rz6FV4OqVuTsmYFV3pk+YTR5S8792ZY2Rm4lJHlLj05HQVKDuIg==}
+  '@notionhq/client@5.11.1':
+    resolution: {integrity: sha512-393XUAb4706eWKQx1xxg/tdn/rTY6+qj3PxTGyTr03D7ydO6e7B7tYyidxJCbKzNSSCVTUAth/bLoKNhm0VoUQ==}
     engines: {node: '>=18'}
 
   '@notionhq/client@5.9.0':
@@ -4653,13 +4653,13 @@ snapshots:
 
   '@nolyfill/is-core-module@1.0.39': {}
 
-  '@notionhq/client@4.0.2': {}
+  '@notionhq/client@5.11.1': {}
 
   '@notionhq/client@5.9.0': {}
 
-  '@notionhq/workers@0.0.85(@notionhq/client@5.9.0)':
+  '@notionhq/workers@0.0.85(@notionhq/client@5.11.1)':
     dependencies:
-      '@notionhq/client': 5.9.0
+      '@notionhq/client': 5.11.1
       ajv: 8.18.0
 
   '@octokit/auth-token@6.0.0': {}

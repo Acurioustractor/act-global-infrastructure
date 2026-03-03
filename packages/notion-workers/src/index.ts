@@ -38,7 +38,13 @@
  *  19. suggest_transaction_fixes — Unmapped transactions, duplicates, anomalies
  *  20. get_impact_summary        — Aggregated impact metrics across projects
  *  21. search_knowledge_graph    — Semantic knowledge search with related items
- *  16. get_project_pnl           — Monthly P&L for specific project with trends
+ *
+ * Tools (Wave 8 — Weekly Review):
+ *  22. run_weekly_financial_review — Comprehensive weekly financial review with action items
+ *
+ * Tools (Wave 9 — Meeting Intelligence):
+ *  23. query_meeting_notes          — Search meetings by project, participant, date, keyword
+ *  24. get_meeting_actions           — Open action items extracted from meetings
  *
  * Secrets required (set via `ntn workers env set`):
  *   SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY
@@ -1831,6 +1837,492 @@ worker.tool("search_knowledge_graph", {
     }
 
     return sections.join("\n");
+  },
+});
+
+// ─────────────────────────────────────────────────────────────────────────
+// TOOL 22: Weekly Financial Review
+// ─────────────────────────────────────────────────────────────────────────
+
+worker.tool("run_weekly_financial_review", {
+  title: "Weekly Financial Review",
+  description:
+    "Generate a comprehensive weekly financial review for the ACT ecosystem. Returns: cash position & runway, weekly income/expenses with top items, overdue invoices with aging buckets, receipt gap score, top 5 projects by spend, grant deadlines, R&D eligible spend, data quality coverage, and auto-generated action items. ALWAYS use this tool when the user asks about: weekly review, financial overview, 'how are we doing financially', 'weekly check-in', financial health, or 'what needs attention'. This is the single most comprehensive financial summary tool. Data sources: financial_snapshots, xero_transactions, xero_invoices, vendor_project_rules, grant_applications, grant_opportunities, projects.",
+  schema: {
+    type: "object" as const,
+    properties: {
+      include_details: {
+        anyOf: [{ type: "boolean" as const }, { type: "null" as const }],
+        description: "Include detailed line items in each section. Default true. Pass false for a summary-only view.",
+      },
+    },
+    required: ["include_details"] as const,
+    additionalProperties: false,
+  },
+  execute: async (params: { include_details: boolean | null }) => {
+    const supabase = getSupabase();
+    const now = new Date();
+    const today = todayStr();
+    const weekAgo = new Date(now);
+    weekAgo.setDate(now.getDate() - 7);
+    const weekAgoStr = weekAgo.toISOString().split("T")[0];
+
+    // ── 1. CASH POSITION ──
+    const { data: snapshots } = await supabase
+      .from("financial_snapshots")
+      .select("month, closing_balance, income, expenses")
+      .order("month", { ascending: false })
+      .limit(6);
+
+    const latest = snapshots?.[0];
+    const prior = snapshots?.[1];
+    const balance = latest?.closing_balance || 0;
+    const balanceChange = prior ? balance - (prior.closing_balance || 0) : 0;
+
+    let totalBurn = 0;
+    for (const m of snapshots || []) {
+      totalBurn += Math.max(0, (m.expenses || 0) - (m.income || 0));
+    }
+    const burnRate = (snapshots?.length || 1) > 0 ? totalBurn / (snapshots?.length || 1) : 0;
+    const runway = burnRate > 0 ? Math.round((balance / burnRate) * 10) / 10 : 0;
+
+    // ── 2. THIS WEEK ──
+    const { data: weekTxns } = await supabase
+      .from("xero_transactions")
+      .select("total, type, contact_name, project_code")
+      .gte("date", weekAgoStr);
+
+    let weekIncome = 0, weekExpenses = 0;
+    const incomeByContact: Record<string, number> = {};
+    const expenseByContact: Record<string, number> = {};
+
+    for (const tx of weekTxns || []) {
+      const amt = Math.abs(Number(tx.total) || 0);
+      const contact = tx.contact_name || "Unknown";
+      if (tx.type === "RECEIVE") {
+        weekIncome += amt;
+        incomeByContact[contact] = (incomeByContact[contact] || 0) + amt;
+      } else if (tx.type === "SPEND") {
+        weekExpenses += amt;
+        expenseByContact[contact] = (expenseByContact[contact] || 0) + amt;
+      }
+    }
+
+    const topIncome = Object.entries(incomeByContact).sort(([, a], [, b]) => b - a).slice(0, 3);
+    const topExpenses = Object.entries(expenseByContact).sort(([, a], [, b]) => b - a).slice(0, 3);
+
+    // ── 3. OVERDUE INVOICES ──
+    const { data: invoices } = await supabase
+      .from("xero_invoices")
+      .select("invoice_number, contact_name, amount_due, due_date, status")
+      .in("status", ["AUTHORISED", "SENT"])
+      .eq("type", "ACCREC")
+      .gt("amount_due", 0);
+
+    const buckets = { current: 0, "1-30d": 0, "31-60d": 0, "61-90d": 0, "90d+": 0 };
+    const overdueList: string[] = [];
+    let totalDue = 0;
+
+    for (const inv of invoices || []) {
+      const amt = Number(inv.amount_due) || 0;
+      totalDue += amt;
+      if (!inv.due_date || inv.due_date >= today) {
+        buckets.current += amt;
+      } else {
+        const daysOverdue = Math.floor((now.getTime() - new Date(inv.due_date).getTime()) / (1000 * 60 * 60 * 24));
+        if (daysOverdue <= 30) buckets["1-30d"] += amt;
+        else if (daysOverdue <= 60) buckets["31-60d"] += amt;
+        else if (daysOverdue <= 90) buckets["61-90d"] += amt;
+        else buckets["90d+"] += amt;
+
+        overdueList.push(
+          `  ${inv.contact_name || "Unknown"} — $${amt.toLocaleString()} (${daysOverdue}d overdue) [${inv.invoice_number}]`
+        );
+      }
+    }
+
+    // ── 4. RECEIPT GAP ──
+    const threeMonthsAgo = new Date(now);
+    threeMonthsAgo.setMonth(now.getMonth() - 3);
+    const threeMonthsAgoStr = threeMonthsAgo.toISOString().split("T")[0];
+
+    const { count: totalExpenses } = await supabase
+      .from("xero_transactions")
+      .select("*", { count: "exact", head: true })
+      .eq("type", "SPEND")
+      .gte("date", threeMonthsAgoStr);
+
+    const { count: withReceipts } = await supabase
+      .from("xero_transactions")
+      .select("*", { count: "exact", head: true })
+      .eq("type", "SPEND")
+      .eq("has_attachment", true)
+      .gte("date", threeMonthsAgoStr);
+
+    const receiptTotal = totalExpenses || 0;
+    const receiptMatched = withReceipts || 0;
+    const receiptScore = receiptTotal > 0 ? Math.round((receiptMatched / receiptTotal) * 100) : 100;
+
+    // ── 5. PROJECT SPEND ──
+    const projectSpend: Record<string, number> = {};
+    for (const tx of weekTxns || []) {
+      if (tx.project_code && (Number(tx.total) || 0) < 0) {
+        projectSpend[tx.project_code] = (projectSpend[tx.project_code] || 0) + Math.abs(Number(tx.total));
+      }
+    }
+    const topProjects = Object.entries(projectSpend).sort(([, a], [, b]) => b - a).slice(0, 5);
+
+    // ── 6. GRANT DEADLINES ──
+    const cutoff = new Date(now);
+    cutoff.setDate(now.getDate() + 14);
+    const cutoffStr = cutoff.toISOString().split("T")[0];
+
+    const { data: grants } = await supabase
+      .from("grant_applications")
+      .select("application_name, project_code, status, milestones")
+      .in("status", ["draft", "in_progress", "submitted", "under_review", "successful"]);
+
+    const grantLines: string[] = [];
+    for (const g of grants || []) {
+      for (const m of g.milestones || []) {
+        if (m.due && m.due <= cutoffStr && m.due >= today && !m.completed) {
+          const daysLeft = Math.ceil((new Date(m.due).getTime() - now.getTime()) / (1000 * 60 * 60 * 24));
+          grantLines.push(`  ${g.application_name}: ${m.name || "Milestone"} — ${daysLeft}d remaining`);
+        }
+      }
+    }
+
+    // ── 7. R&D SPEND ──
+    const { data: rdRules } = await supabase
+      .from("vendor_project_rules")
+      .select("vendor_name")
+      .eq("rd_eligible", true);
+
+    const rdVendors = new Set((rdRules || []).map((r: any) => r.vendor_name));
+    let weekRd = 0;
+    for (const tx of weekTxns || []) {
+      if (rdVendors.has(tx.contact_name) && (Number(tx.total) || 0) < 0) {
+        weekRd += Math.abs(Number(tx.total));
+      }
+    }
+
+    const fyStart = now.getMonth() >= 6 ? `${now.getFullYear()}-07-01` : `${now.getFullYear() - 1}-07-01`;
+    const { data: ytdTxns } = await supabase
+      .from("xero_transactions")
+      .select("contact_name, total")
+      .lt("total", 0)
+      .gte("date", fyStart);
+
+    let ytdRd = 0;
+    for (const tx of ytdTxns || []) {
+      if (rdVendors.has(tx.contact_name)) ytdRd += Math.abs(Number(tx.total));
+    }
+
+    // ── 8. DATA QUALITY ──
+    const { count: untaggedCount } = await supabase
+      .from("xero_transactions")
+      .select("*", { count: "exact", head: true })
+      .is("project_code", null)
+      .gte("date", "2024-07-01")
+      .lt("total", 0);
+
+    const { count: totalTxCount } = await supabase
+      .from("xero_transactions")
+      .select("*", { count: "exact", head: true })
+      .gte("date", "2024-07-01")
+      .lt("total", 0);
+
+    const untagged = untaggedCount || 0;
+    const totalTx = totalTxCount || 0;
+    const coverage = totalTx > 0 ? Math.round(((totalTx - untagged) / totalTx) * 100) : 100;
+
+    // ── 9. ACTION ITEMS ──
+    const actions: string[] = [];
+    if (overdueList.length > 0)
+      actions.push(`CHASE: ${overdueList.length} overdue invoices ($${Math.round(totalDue - buckets.current).toLocaleString()})`);
+    if (receiptTotal - receiptMatched > 5)
+      actions.push(`CAPTURE: ${receiptTotal - receiptMatched} missing receipts (score: ${receiptScore}%)`);
+    if (untagged > 10)
+      actions.push(`TAG: ${untagged} untagged transactions (coverage: ${coverage}%)`);
+    if (grantLines.length > 0)
+      actions.push(`GRANTS: ${grantLines.length} deadline(s) within 14 days`);
+    if (runway > 0 && runway < 6)
+      actions.push(`RUNWAY: ${runway} months — review burn rate`);
+
+    // ── FORMAT OUTPUT ──
+    const f = (n: number) => `$${Math.round(n).toLocaleString()}`;
+    const sections = [
+      `WEEKLY FINANCIAL REVIEW — Week of ${weekAgoStr}`,
+      "═".repeat(50),
+      "",
+      `1. CASH POSITION`,
+      `   Balance: ${f(balance)} (${balanceChange >= 0 ? "+" : ""}${f(balanceChange)} this month)`,
+      `   Burn rate: ${f(burnRate)}/mo | Runway: ${runway} months`,
+      "",
+      `2. THIS WEEK`,
+      `   Income: ${f(weekIncome)} | Expenses: ${f(weekExpenses)} | Net: ${weekIncome - weekExpenses >= 0 ? "+" : ""}${f(weekIncome - weekExpenses)}`,
+      ...(topIncome.length > 0 ? [`   Top income: ${topIncome.map(([n, a]) => `${n} (${f(a)})`).join(", ")}`] : []),
+      ...(topExpenses.length > 0 ? [`   Top expenses: ${topExpenses.map(([n, a]) => `${n} (${f(a)})`).join(", ")}`] : []),
+      "",
+      `3. OVERDUE INVOICES (${overdueList.length} overdue of ${invoices?.length || 0} total, ${f(totalDue)} due)`,
+      `   Aging: Current ${f(buckets.current)} | 1-30d ${f(buckets["1-30d"])} | 31-60d ${f(buckets["31-60d"])} | 61-90d ${f(buckets["61-90d"])} | 90d+ ${f(buckets["90d+"])}`,
+      ...(overdueList.length > 0 ? overdueList.slice(0, 10) : ["   All current — no overdue invoices!"]),
+      "",
+      `4. RECEIPT GAP`,
+      `   Score: ${receiptScore}% (${receiptMatched} of ${receiptTotal} matched, ${receiptTotal - receiptMatched} missing)`,
+      "",
+      `5. PROJECT SPEND (this week)`,
+      ...(topProjects.length > 0
+        ? topProjects.map(([code, amt]) => `   ${code}: ${f(amt)}`)
+        : ["   No project spend this week"]),
+      "",
+      `6. GRANT DEADLINES (next 14 days)`,
+      ...(grantLines.length > 0 ? grantLines : ["   No upcoming deadlines"]),
+      "",
+      `7. R&D SPEND`,
+      `   This week: ${f(weekRd)} | YTD: ${f(ytdRd)} | 43.5% offset: ${f(ytdRd * 0.435)}`,
+      "",
+      `8. DATA QUALITY`,
+      `   Tagging coverage: ${coverage}% (${untagged} untagged of ${totalTx})`,
+      "",
+      `9. ACTION ITEMS`,
+      ...(actions.length > 0 ? actions.map(a => `   → ${a}`) : ["   ✅ No urgent actions this week"]),
+    ];
+
+    return sections.join("\n");
+  },
+});
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// Wave 9 — Meeting Intelligence
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+worker.tool("query_meeting_notes", {
+  title: "Query Meeting Notes",
+  description:
+    "Search meetings by project, participant, date range, or keyword. Returns title, date, participants, AI summary, action items, and decisions. Optionally includes full transcript.",
+  schema: {
+    type: "object" as const,
+    properties: {
+      query: {
+        anyOf: [{ type: "string" as const }, { type: "null" as const }],
+        description: "Free-text search across meeting titles and content. Pass null to skip text search.",
+      },
+      project_code: {
+        anyOf: [{ type: "string" as const }, { type: "null" as const }],
+        description: "Filter by project code (e.g. 'ACT-BCV', 'ACT-GD'). Pass null for all projects.",
+      },
+      participant: {
+        anyOf: [{ type: "string" as const }, { type: "null" as const }],
+        description: "Filter by participant name. Pass null for all participants.",
+      },
+      days_back: {
+        type: "number" as const,
+        description: "How many days back to search. Default 30.",
+      },
+      include_transcript: {
+        type: "boolean" as const,
+        description: "Include full transcript in results (can be very long). Default false.",
+      },
+      limit: {
+        type: "number" as const,
+        description: "Max meetings to return. Default 10.",
+      },
+    },
+    required: ["query", "project_code", "participant", "days_back", "include_transcript", "limit"] as const,
+    additionalProperties: false,
+  },
+  execute: async (params: {
+    query: string | null;
+    project_code: string | null;
+    participant: string | null;
+    days_back: number;
+    include_transcript: boolean;
+    limit: number;
+  }) => {
+    const supabase = getSupabase();
+    const daysBack = params.days_back || 30;
+    const maxResults = Math.min(params.limit || 10, 20);
+    const cutoff = new Date(Date.now() - daysBack * 86400000).toISOString();
+
+    let query = supabase
+      .from("project_knowledge")
+      .select("id, title, recorded_at, project_code, project_name, participants, content, summary, ai_summary, ai_action_items, transcript, meeting_duration_minutes, transcription_status, topics, action_required, metadata")
+      .eq("knowledge_type", "meeting")
+      .gte("recorded_at", cutoff)
+      .order("recorded_at", { ascending: false })
+      .limit(maxResults);
+
+    if (params.project_code) {
+      query = query.eq("project_code", params.project_code);
+    }
+
+    if (params.participant) {
+      query = query.contains("participants", [params.participant]);
+    }
+
+    if (params.query) {
+      query = query.or(`title.ilike.%${params.query}%,content.ilike.%${params.query}%`);
+    }
+
+    const { data, error } = await query;
+    if (error) return `Error: ${error.message}`;
+    if (!data?.length) return "No meetings found matching your criteria.";
+
+    const lines: string[] = [`MEETING NOTES — ${data.length} results (last ${daysBack} days)`, ""];
+
+    for (const m of data as any[]) {
+      const date = m.recorded_at ? new Date(m.recorded_at).toISOString().split("T")[0] : "unknown";
+      const duration = m.meeting_duration_minutes ? ` (${m.meeting_duration_minutes} min)` : "";
+      const participants = (m.participants || []).join(", ") || "unknown";
+
+      lines.push(`━━━ ${m.title || "Untitled"} ━━━`);
+      lines.push(`Date: ${date}${duration} | Project: ${m.project_code || "unassigned"}`);
+      lines.push(`Participants: ${participants}`);
+
+      // Prefer AI summary, fall back to LLM-extracted summary
+      const summary = m.ai_summary || m.summary;
+      if (summary) {
+        lines.push(`Summary: ${summary.slice(0, 500)}`);
+      }
+
+      // Show AI action items if available
+      if (m.ai_action_items?.length) {
+        lines.push("Action items:");
+        for (const item of m.ai_action_items.slice(0, 5)) {
+          const check = item.completed ? "x" : " ";
+          lines.push(`  [${check}] ${item.action}`);
+        }
+      }
+
+      // Show strategic relevance from LLM extraction
+      if (m.metadata?.strategic_relevance) {
+        lines.push(`Strategic: ${m.metadata.strategic_relevance}`);
+      }
+
+      // Optionally include transcript (truncated)
+      if (params.include_transcript && m.transcript) {
+        const truncated = m.transcript.length > 4000 ? m.transcript.slice(0, 4000) + "\n... [truncated]" : m.transcript;
+        lines.push(`\nTranscript:\n${truncated}`);
+      }
+
+      lines.push("");
+    }
+
+    return lines.join("\n");
+  },
+});
+
+worker.tool("get_meeting_actions", {
+  title: "Get Meeting Action Items",
+  description:
+    "Returns open action items extracted from meetings. Shows what was agreed, who is responsible, and what needs follow-up. Includes both AI-extracted and LLM-extracted actions.",
+  schema: {
+    type: "object" as const,
+    properties: {
+      project_code: {
+        anyOf: [{ type: "string" as const }, { type: "null" as const }],
+        description: "Filter by project code. Pass null for all projects.",
+      },
+      days_back: {
+        type: "number" as const,
+        description: "How many days back to search. Default 30.",
+      },
+      include_completed: {
+        type: "boolean" as const,
+        description: "Include completed action items. Default false.",
+      },
+    },
+    required: ["project_code", "days_back", "include_completed"] as const,
+    additionalProperties: false,
+  },
+  execute: async (params: {
+    project_code: string | null;
+    days_back: number;
+    include_completed: boolean;
+  }) => {
+    const supabase = getSupabase();
+    const daysBack = params.days_back || 30;
+    const cutoff = new Date(Date.now() - daysBack * 86400000).toISOString();
+
+    // 1. Get meetings with AI action items
+    let meetingQuery = supabase
+      .from("project_knowledge")
+      .select("id, title, recorded_at, project_code, ai_action_items, participants")
+      .eq("knowledge_type", "meeting")
+      .not("ai_action_items", "is", null)
+      .gte("recorded_at", cutoff)
+      .order("recorded_at", { ascending: false })
+      .limit(50);
+
+    if (params.project_code) {
+      meetingQuery = meetingQuery.eq("project_code", params.project_code);
+    }
+
+    const { data: meetings } = await meetingQuery;
+
+    // 2. Get LLM-extracted action items linked to meetings
+    let actionQuery = supabase
+      .from("project_knowledge")
+      .select("id, title, content, project_code, recorded_at, participants, action_items, importance")
+      .eq("knowledge_type", "action")
+      .eq("source_type", "meeting_extraction")
+      .gte("recorded_at", cutoff)
+      .order("recorded_at", { ascending: false })
+      .limit(50);
+
+    if (params.project_code) {
+      actionQuery = actionQuery.eq("project_code", params.project_code);
+    }
+
+    const { data: extractedActions } = await actionQuery;
+
+    const lines: string[] = [`MEETING ACTION ITEMS — Last ${daysBack} days`, ""];
+
+    // AI-extracted action items (from Notion transcription)
+    let aiActionCount = 0;
+    if (meetings?.length) {
+      lines.push("── From AI Transcription ──");
+      for (const m of meetings as any[]) {
+        if (!m.ai_action_items?.length) continue;
+        const items = params.include_completed
+          ? m.ai_action_items
+          : m.ai_action_items.filter((a: any) => !a.completed);
+        if (!items.length) continue;
+
+        const date = new Date(m.recorded_at).toISOString().split("T")[0];
+        lines.push(`\n${m.title} (${date}) [${m.project_code}]`);
+        for (const item of items) {
+          const check = item.completed ? "x" : " ";
+          lines.push(`  [${check}] ${item.action}`);
+          aiActionCount++;
+        }
+      }
+      if (aiActionCount === 0) lines.push("  No open AI action items.");
+      lines.push("");
+    }
+
+    // LLM-extracted action items
+    if (extractedActions?.length) {
+      lines.push("── From Intelligence Extraction ──");
+      for (const a of extractedActions as any[]) {
+        const date = new Date(a.recorded_at).toISOString().split("T")[0];
+        const assignee = a.action_items?.[0]?.assignee || "Unassigned";
+        const priority = a.importance === "high" ? " [HIGH]" : "";
+        lines.push(`  ${priority} ${a.title}`);
+        lines.push(`    From: ${date} [${a.project_code}] | Assignee: ${assignee}`);
+      }
+      lines.push("");
+    }
+
+    if (!meetings?.length && !extractedActions?.length) {
+      return "No meeting action items found for the specified criteria.";
+    }
+
+    const total = aiActionCount + (extractedActions?.length || 0);
+    lines.push(`Total: ${total} action items`);
+
+    return lines.join("\n");
   },
 });
 

@@ -57,6 +57,12 @@ const cronScripts = [
     cron_restart: '30 5 * * *', // Daily 5:30am AEST (before embed at 6am)
   },
   {
+    name: 'meeting-intelligence',
+    script: 'scripts/run-meeting-intelligence.mjs',
+    args: '--verbose',
+    cron_restart: '0 6 * * *', // Daily 6am AEST (after meeting-sync at 5:30am)
+  },
+  {
     name: 'knowledge-pipeline',
     script: 'scripts/knowledge-pipeline.mjs',
     args: '--verbose',
@@ -273,6 +279,12 @@ const cronScripts = [
     name: 'pm2-status-sync',
     script: 'scripts/sync-pm2-status.mjs',
     cron_restart: '* * * * *', // Every minute (lightweight — just reads pm2 jlist + upserts)
+  },
+  {
+    name: 'dext-receipt-forward',
+    script: 'scripts/forward-receipts-to-dext.mjs',
+    args: '--days 3',
+    cron_restart: '0 */6 * * *', // Every 6 hours — catch new billing emails promptly
   },
 ];
 

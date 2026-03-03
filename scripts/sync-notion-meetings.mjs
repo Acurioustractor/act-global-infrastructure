@@ -279,8 +279,9 @@ function parsePeopleFromTitle(title) {
 
 /**
  * Extract full text content from a Notion page's blocks.
+ * Returns { text, blocks } — blocks are the raw top-level blocks for transcription detection.
  */
-async function extractPageContent(notion, pageId) {
+async function extractPageContent(notion, pageId, _isRecursion = false) {
   const blocks = [];
   let cursor;
 
@@ -296,7 +297,7 @@ async function extractPageContent(notion, pageId) {
       cursor = response.has_more ? response.next_cursor : null;
     } while (cursor);
   } catch (e) {
-    return ''; // Page not accessible
+    return _isRecursion ? '' : { text: '', blocks: [] };
   }
 
   const lines = [];
@@ -305,15 +306,18 @@ async function extractPageContent(notion, pageId) {
     if (text) lines.push(text);
 
     // Recurse into children (toggle lists, callouts, etc.)
-    if (block.has_children && block.type !== 'child_database' && block.type !== 'child_page') {
+    if (block.has_children && block.type !== 'child_database' && block.type !== 'child_page' && block.type !== 'transcription') {
       try {
-        const childContent = await extractPageContent(notion, block.id);
-        if (childContent) lines.push(childContent);
+        const childContent = await extractPageContent(notion, block.id, true);
+        const childText = typeof childContent === 'string' ? childContent : childContent.text;
+        if (childText) lines.push(childText);
       } catch { /* skip inaccessible children */ }
     }
   }
 
-  return lines.join('\n');
+  const text = lines.join('\n');
+  if (_isRecursion) return text;
+  return { text, blocks };
 }
 
 /**
@@ -350,10 +354,110 @@ function extractBlockText(block) {
     return '```' + content.language + '\n' + content.rich_text.map(rt => rt.plain_text).join('') + '\n```';
   }
 
+  // Transcription blocks — surface the title as a reference
+  if (type === 'transcription') {
+    const title = content.title?.[0]?.plain_text || content.title?.[0]?.text?.content || 'Untitled';
+    return `[Meeting Recording: ${title}]`;
+  }
+
   // Dividers
   if (type === 'divider') return '---';
 
   return null;
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// Transcription Extraction (Notion AI Meeting Notes)
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+/**
+ * Extract transcription content from a page's blocks.
+ * Looks for `transcription` block type → reads summary, notes, and transcript
+ * child blocks via their IDs. Returns null if no transcription block found.
+ */
+async function extractTranscriptionContent(notion, pageId, blocks) {
+  // Find the transcription block among the page's top-level blocks
+  const transcriptionBlock = blocks.find(b => b.type === 'transcription');
+  if (!transcriptionBlock) return null;
+
+  const tc = transcriptionBlock.transcription || {};
+  const result = {
+    status: tc.status || null,
+    title: tc.title?.[0]?.plain_text || tc.title?.[0]?.text?.content || null,
+    aiSummary: null,
+    aiNotes: null,
+    transcript: null,
+    aiActionItems: [],
+    durationMinutes: null,
+    attendeeUserIds: [],
+  };
+
+  // Compute duration from calendar_event or recording times
+  const event = tc.calendar_event || {};
+  const recording = tc.recording || {};
+  const startTime = event.start_time || recording.start_time;
+  const endTime = event.end_time || recording.end_time;
+  if (startTime && endTime) {
+    const ms = new Date(endTime).getTime() - new Date(startTime).getTime();
+    if (ms > 0) result.durationMinutes = Math.round(ms / 60000);
+  }
+
+  // Collect attendee user IDs from calendar_event
+  if (event.attendees?.length) {
+    result.attendeeUserIds = event.attendees;
+  }
+
+  // Only extract content when notes are ready
+  if (tc.status !== 'notes_ready') return result;
+
+  const children = tc.children || {};
+
+  // Helper: fetch all text from a block's children
+  async function fetchBlockChildrenText(blockId) {
+    if (!blockId) return null;
+    try {
+      const lines = [];
+      let cursor;
+      do {
+        const resp = await notion.blocks.children.list({
+          block_id: blockId,
+          start_cursor: cursor,
+          page_size: 100,
+        });
+        for (const child of resp.results) {
+          const text = extractBlockText(child);
+          if (text) lines.push(text);
+        }
+        cursor = resp.has_more ? resp.next_cursor : null;
+      } while (cursor);
+      return lines.length > 0 ? lines.join('\n') : null;
+    } catch {
+      return null;
+    }
+  }
+
+  // Fetch summary, notes, and transcript in parallel
+  const [summary, notes, transcript] = await Promise.all([
+    fetchBlockChildrenText(children.summary_block_id),
+    fetchBlockChildrenText(children.notes_block_id),
+    fetchBlockChildrenText(children.transcript_block_id),
+  ]);
+
+  result.aiSummary = summary;
+  result.aiNotes = notes;
+  result.transcript = transcript;
+
+  // Parse action items from notes (Notion formats them as to_do blocks)
+  if (notes) {
+    const actionLines = notes.split('\n').filter(l => /^- \[ \]/.test(l) || /^- \[x\]/.test(l));
+    result.aiActionItems = actionLines.map(line => {
+      const completed = line.startsWith('- [x]');
+      const text = line.replace(/^- \[.\] /, '').trim();
+      return { action: text, completed };
+    });
+  }
+
+  return result;
 }
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -619,14 +723,17 @@ async function syncMeetings(options) {
               console.log(`       Attendees: ${meta.attendees.map(a => a.name).join(', ') || 'none detected'}`);
             }
 
-            // Extract full page content
-            const content = await extractPageContent(notion, page.id);
+            // Extract full page content (returns { text, blocks })
+            const { text: content, blocks: pageBlocks } = await extractPageContent(notion, page.id);
 
             if (!content || content.trim().length < 10) {
               stats.skipped++;
               if (options.verbose) console.log('       Skipped: empty content');
               continue;
             }
+
+            // Extract transcription data (if this is a recorded meeting)
+            const transcription = await extractTranscriptionContent(notion, page.id, pageBlocks);
 
             // Detect project code
             let projectCode = db.project?.code || null;
@@ -644,16 +751,24 @@ async function syncMeetings(options) {
               }
               console.log(`       Project: ${projectCode || 'unassigned'}`);
               console.log(`       Content: ${content.length} chars`);
+              if (transcription) {
+                console.log(`       Transcription: ${transcription.status || 'found'}`);
+                if (transcription.transcript) console.log(`       Transcript: ${transcription.transcript.length} chars`);
+                if (transcription.aiSummary) console.log(`       AI Summary: ${transcription.aiSummary.length} chars`);
+                if (transcription.aiActionItems?.length) console.log(`       AI Actions: ${transcription.aiActionItems.length}`);
+                if (transcription.durationMinutes) console.log(`       Duration: ${transcription.durationMinutes} min`);
+              }
             }
 
-            // Build the content string
+            // Build the content string — use AI summary for embedding if available (better signal, less noise)
             const participantNames = matchedAttendees.map(a => a.ghlContactName || a.name).filter(Boolean);
+            const embeddingSource = transcription?.aiSummary || content;
             const contentForEmbedding = [
               meta.title,
               meta.date ? `Date: ${meta.date}` : null,
               participantNames.length ? `Attendees: ${participantNames.join(', ')}` : null,
               meta.location ? `Location: ${meta.location}` : null,
-              content
+              embeddingSource
             ].filter(Boolean).join('\n');
 
             // Generate embedding
@@ -663,12 +778,17 @@ async function syncMeetings(options) {
             const notionPageId = page.id.replace(/-/g, '');
             const ghlContactIds = matchedAttendees.filter(a => a.ghlContactId).map(a => a.ghlContactId);
 
+            // Combine manual notes + AI notes for the content field
+            const fullContent = transcription?.aiNotes
+              ? `${content}\n\n--- AI Notes ---\n${transcription.aiNotes}`
+              : content;
+
             const record = {
               project_code: projectCode || 'ACT-MISC',
               project_name: db.project?.name || db.title.replace(/Meeting Notes?/i, '').trim() || null,
               knowledge_type: 'meeting',
               title: meta.title,
-              content: contentForEmbedding,
+              content: fullContent,
               source_type: 'notion',
               source_ref: notionPageId,
               source_url: page.url,
@@ -679,7 +799,13 @@ async function syncMeetings(options) {
               topics: projectCode ? [projectCode] : null,
               recorded_at: meta.date || page.created_time,
               recorded_by: 'meeting-sync',
-              embedding
+              embedding,
+              // Transcription fields (null if not a recorded meeting)
+              transcript: transcription?.transcript || null,
+              ai_summary: transcription?.aiSummary || null,
+              ai_action_items: transcription?.aiActionItems?.length ? transcription.aiActionItems : null,
+              meeting_duration_minutes: transcription?.durationMinutes || null,
+              transcription_status: transcription?.status || null,
             };
 
             if (options.dryRun) {
@@ -827,4 +953,4 @@ Examples:
 
 main();
 
-export { syncMeetings, discoverMeetingDatabases, extractPageContent, matchAttendeesToContacts, parsePeopleFromTitle };
+export { syncMeetings, discoverMeetingDatabases, extractPageContent, extractTranscriptionContent, matchAttendeesToContacts, parsePeopleFromTitle };
