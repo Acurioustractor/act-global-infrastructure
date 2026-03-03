@@ -9,41 +9,36 @@ status: active
 
 ## Ledger
 <!-- This section is extracted by SessionStart hook for quick resume -->
-**Updated:** 2026-03-03T14:00:00Z
+**Updated:** 2026-03-04T05:45:00Z
 **Goal:** Full ACT Intelligence System — all 4 phases deployed. 21 Notion Worker tools live. Subscription management + Dext receipt forwarding automated.
 **Branch:** main
 **Test:** `cd packages/notion-workers && npx tsc --noEmit && cd ../../apps/command-center && npx tsc --noEmit`
 
 ### Now
-[->] Commit code changes (forward-receipts-to-dext.mjs, ecosystem.config.cjs, migration) + subscription migration to accounts@act.place
+[->] Manually cancel 3 still-charging subs (CodeGuide, LinkedIn, X/Twitter) + begin manual migration of 30 subs to accounts@act.place
 
 ### This Session
-- [x] Built `scripts/forward-receipts-to-dext.mjs` — Gmail API receipt forwarding to Dext (nicmarchesi@dext.cc)
-- [x] Created `dext_forwarded_emails` tracking table + migration (deduplication by gmail_message_id)
-- [x] Added `dext-receipt-forward` PM2 cron (every 6h, --days 3) to ecosystem.config.cjs
-- [x] Smart receipt filter (`isLikelyReceipt()`) — rejects marketing/promo emails, checks subject + from patterns
-- [x] 33 vendor domain patterns across all 4 mailboxes (including subdomains: email.openai.com, mail.perplexity.ai, etc.)
-- [x] Successfully forwarded 45 receipts to Dext across 3 test runs, dedup confirmed working
-- [x] Integration health: `dext_receipt_forwarding` registered and showing "healthy"
-- [x] Full subscription audit: cross-referenced subscriptions table with Xero bank transactions
-- [x] Cancelled ~18 dead subscriptions (AHM, Amazon Prime, ChatGPT, Descript x2, MetLife, Midjourney, Cursor AI, etc.)
-- [x] Added 9 missing subscriptions from Xero bank data (Canva, Figma, Obsidian, Starlink, Telstra, X/Twitter, Zapier, Easel, Landingfolio)
-- [x] Set `current_login_email` for verified subscriptions (only @act.place mailboxes — cannot verify personal emails)
-- [x] Set `account_email = accounts@act.place` as migration target for all subscriptions
-- [x] Updated amounts: Claude Pro $287.07 (was $160), Supabase $126.22 (was $85)
-- [x] Identified $178/mo waste: CodeGuide ($41), LinkedIn ($75), X/Twitter ($62) still charging despite being "cancelled"
+- [x] Committed 4 logical commits + pushed to remote
+  - `313f7ae` Dext receipt forwarding script + migration
+  - `7e90a9d` Subscription management API + UI (discover, CRUD, summary)
+  - `5cf7091` Finance enhancements (weekly review, Stripe webhook, Xero sync)
+  - `85868c5` Handoff ledger + research docs
+- [x] Marked CodeGuide ($41/mo), LinkedIn ($75/mo), X/Twitter ($62/mo) as cancelled with action notes — $178/mo savings
+- [x] Deleted 3 duplicate subscription records (CodeGuide dup, old Dialpad AUD, duplicate Linktree)
+- [x] Annotated remaining duplicates: HighLevel (2 records — sub + API), Webflow (2 — multiple sites), Mighty Networks (2 — different plans)
+- [x] Set all 30 unmigrated subs to `pending_migration` with per-service instructions and login URLs
+- [x] Grouped migration by actor: Ben (7 subs), Nick (6 subs), hi@ admin (4 subs), personal email (5 subs), unknown login (4 subs)
 
 ### Next
-- [ ] **Commit all code changes** — forward-receipts-to-dext.mjs, ecosystem.config.cjs, migration SQL
-- [ ] **Cancel CodeGuide, LinkedIn Singapore, X/Twitter** — still charging $178/mo, find which email/account
-- [ ] **Migrate ~20 subscriptions to accounts@act.place** — all have target set in DB
-- [ ] **Resolve duplicate records** — Dialpad, HighLevel, Webflow, Mighty Networks may be dupes or separate accounts
-- [ ] **Verify Webflow's 10 charges** — are all site plans needed?
+- [ ] **MANUAL: Cancel CodeGuide** — card ending 1656, no billing emails found. Check card provider.
+- [ ] **MANUAL: Cancel LinkedIn Premium** — login benjamin@act.place → linkedin.com/premium/cancel
+- [ ] **MANUAL: Cancel X Premium** — find which account at x.com/settings/premium
+- [ ] **MANUAL: Migrate 30 subs to accounts@act.place** — instructions in DB per service
+- [ ] **Verify Webflow charges** — 10+ charges/mo at varying amounts, are all site plans needed?
 - [ ] Create remaining 4 Custom Agents in Notion (Finance, Grants, Project Intel, Comms)
 - [ ] Give Morning Briefing agent edit access to Morning Briefings page
 - [ ] Phase 2b: Gmail push via GCP Pub/Sub (requires GCP console setup)
 - [ ] Drop ~50 dead DB tables (cleanup migration)
-- [ ] Push commits to remote
 
 ### Decisions
 - **Package location:** `packages/notion-workers/` (mono-repo workspace pattern)
@@ -75,11 +70,14 @@ status: active
 - RESOLVED: Custom Agents feature — working, ACTbot visible in agent settings with all 21 tools
 - RESOLVED: Morning Briefing agent — working, tested, producing quality output with real data
 - RESOLVED: Dext receipt forwarding — 45 receipts forwarded, dedup working, integration health "healthy"
+- RESOLVED: Subscription duplicates — Dialpad dup deleted, CodeGuide dup deleted, Linktree dup deleted. HighLevel/Webflow/Mighty kept (different amounts = likely different plans)
+- RESOLVED: Code committed and pushed — 4 commits on main (313f7ae..85868c5)
 - UNCONFIRMED: Worker execution timeout limits? (may affect daily briefing which makes 5+ Supabase queries)
 - UNCONFIRMED: ntn keychain bug — need to report to Kenneth
-- UNCONFIRMED: Which email account has CodeGuide, LinkedIn Singapore, X/Twitter logins (for cancellation)
+- UNCONFIRMED: CodeGuide login — no billing emails in ANY mailbox, card ending 1656. Need card provider to trace.
+- UNCONFIRMED: X/Twitter login — "X Global LLC" in Xero, no billing emails found. Which personal email?
 - UNCONFIRMED: Easel Software $312.71 — one-off or recurring?
-- UNCONFIRMED: Starlink, Landingfolio, Only Domains — no @act.place emails found, which personal email?
+- UNCONFIRMED: Starlink, Landingfolio, Only Domains, Mighty Networks #2 — unknown login emails
 
 ### Workflow State
 pattern: incremental-deployment
@@ -104,7 +102,9 @@ max_retries: 3
 - worker_timeout_limits: UNKNOWN
 - gmail_push_pubsub_setup: UNKNOWN (requires GCP console)
 - openai_quota_restoration: UNKNOWN (blocks 22 scripts)
-- codeguide_linkedin_xtwitter_cancellation: UNKNOWN (which account/email)
+- codeguide_cancellation: UNKNOWN (no billing emails, card ending 1656)
+- xtwitter_cancellation: UNKNOWN (which personal email)
+- manual_sub_migration: 30 subs need manual email change (instructions in DB)
 
 #### Last Failure
 (none)
@@ -113,7 +113,7 @@ max_retries: 3
 **Agent:** (manual — user-driven deployment)
 **Task:** ACT Intelligence System — hardening, Notion Workers, subscription management
 **Started:** 2026-02-28T06:00:00Z
-**Last Updated:** 2026-03-03T14:00:00Z
+**Last Updated:** 2026-03-04T05:45:00Z
 
 #### Phase Status
 - Phase 1 (Project Intelligence Hub): ✓ DEPLOYED
@@ -126,7 +126,8 @@ max_retries: 3
 - Notion Workers Deploy: ✓ DEPLOYED (21 tools live)
 - Dext Receipt Forwarding: ✓ DEPLOYED (45 receipts forwarded, PM2 cron every 6h)
 - Subscription Audit: ✓ DONE (18 cancelled, 9 added, amounts corrected, migration targets set)
-- Subscription Migration: → IN_PROGRESS (targets set, actual migration pending)
+- Subscription Cleanup: ✓ DONE (3 cancellations marked, 3 duplicates deleted, 4 annotated)
+- Subscription Migration: → IN_PROGRESS (30 subs pending_migration with instructions + login URLs, needs manual action)
 
 #### Validation State
 ```json
@@ -144,18 +145,19 @@ max_retries: 3
 ```
 
 #### Resume Context
-- Current focus: Dext forwarding working. Subscription audit complete. Need to commit code + cancel 3 still-charging subs.
-- Next action: Commit forward-receipts-to-dext.mjs + ecosystem.config.cjs + migration. Then cancel CodeGuide/LinkedIn/X.
-- Blockers: Need user to confirm which email accounts have CodeGuide, LinkedIn, X/Twitter logins
+- Current focus: All code committed + pushed. Subscriptions cleaned up in DB. Manual actions remain.
+- Next action: User needs to manually cancel 3 subs and migrate 30 subs to accounts@act.place (instructions in DB)
+- Blockers: CodeGuide has no billing trail — need card provider to trace. X/Twitter login unknown.
 
-### Subscription State (Mar 3 2026)
-- **Active count:** ~35 subscriptions across 4+ email accounts
+### Subscription State (Mar 4 2026)
+- **Active count:** ~30 subscriptions (after cleanup)
 - **Monthly spend:** ~$3,500-4,000/mo (estimated from Xero bank data)
-- **Still charging but "cancelled":** CodeGuide $41, LinkedIn $75, X/Twitter $62 = **$178/mo waste**
+- **Cancelled (needs manual action):** CodeGuide $41, LinkedIn $75, X/Twitter $62 = **$178/mo to recover**
 - **Migration target:** All → accounts@act.place (centralised billing)
+- **Pending migration:** 30 subs with instructions + login URLs in DB
+- **Migration by actor:** Ben (7), Nick (6), hi@ admin (4), personal email (5), unknown login (4)
+- **Duplicates resolved:** 3 deleted (CodeGuide, Dialpad, Linktree), 3 kept with notes (HighLevel, Webflow, Mighty Networks)
 - **Key personal email subs:** Anthropic, Claude Pro, Webflow, Xero on ben@benjamink.com.au
-- **Dext billing:** Goes to nicholas@act.place (not benjamin@)
-- **Duplicate records to resolve:** Dialpad, HighLevel (2 accounts), Webflow (10 charges), Mighty Networks
 
 ### Ecosystem Audit Findings (Mar 1 2026)
 - **API Routes:** 171/173 real (2 stubs: `/api/ai/proposals`, `/api/ai/learning`)
