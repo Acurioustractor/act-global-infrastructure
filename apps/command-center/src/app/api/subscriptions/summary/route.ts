@@ -6,7 +6,7 @@ export async function GET() {
     const { data, error } = await supabase
       .from('subscriptions')
       .select('*')
-      .eq('status', 'active')
+      .eq('account_status', 'active')
 
     if (error) throw error
 
@@ -22,11 +22,10 @@ export async function GET() {
     twoWeeksFromNow.setDate(twoWeeksFromNow.getDate() + 14)
 
     for (const sub of subs) {
-      const cost = sub.cost_per_cycle || 0
+      const cost = sub.amount || 0
       const currency = (sub.currency || 'AUD').toUpperCase()
       const cycle = sub.billing_cycle || 'monthly'
 
-      // Normalize to monthly
       let monthly = cost
       if (cycle === 'annual' || cycle === 'yearly') monthly = cost / 12
       else if (cycle === 'quarterly') monthly = cost / 3
@@ -34,32 +33,28 @@ export async function GET() {
       if (currency === 'USD') totalMonthlyUsd += monthly
       else totalMonthlyAud += monthly
 
-      // Category tracking
-      const cat = sub.category || 'Other'
+      const cat = sub.category || 'other'
       byCategory[cat] = (byCategory[cat] || 0) + monthly
 
-      // Unassigned (no project codes)
       if (!sub.project_codes || sub.project_codes.length === 0) unassigned++
 
-      // Due soon
-      if (sub.renewal_date) {
-        const renewal = new Date(sub.renewal_date)
+      if (sub.next_billing_date) {
+        const renewal = new Date(sub.next_billing_date)
         if (renewal <= twoWeeksFromNow && renewal >= now) dueSoon++
       }
     }
 
-    // Top subscriptions by monthly cost
     const topSubscriptions = subs
       .map((s) => {
-        const cost = s.cost_per_cycle || 0
+        const cost = s.amount || 0
         const cycle = s.billing_cycle || 'monthly'
         let monthly = cost
         if (cycle === 'annual' || cycle === 'yearly') monthly = cost / 12
         else if (cycle === 'quarterly') monthly = cost / 3
         return {
           id: s.id,
-          name: s.name,
-          provider: s.provider || s.name,
+          name: s.vendor_name,
+          provider: s.vendor_name,
           amount: Math.round(monthly * 100) / 100,
           billing_cycle: cycle,
           project_codes: s.project_codes,

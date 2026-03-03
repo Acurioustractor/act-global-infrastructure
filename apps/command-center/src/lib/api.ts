@@ -957,7 +957,7 @@ export interface Subscription {
   name: string
   provider: string
   category: string
-  billing_cycle: 'monthly' | 'annual' | 'quarterly' | 'one-time' | 'usage'
+  billing_cycle: 'monthly' | 'annual' | 'one_time' | 'usage'
   cost_per_cycle: number
   currency: string
   renewal_date?: string
@@ -1956,19 +1956,32 @@ export async function getKnowledgeMeetings(params?: { project?: string; days?: n
   return fetchApi<KnowledgeMeetingsResponse>(`/api/knowledge/meetings?${q}`)
 }
 
-export async function getKnowledgeActions(params?: { project?: string; status?: string; overdue?: boolean; limit?: number }) {
+export async function getKnowledgeActions(params?: { project?: string; status?: string; overdue?: boolean; source_type?: string; limit?: number }) {
   const q = new URLSearchParams()
   if (params?.project) q.set('project', params.project)
   if (params?.status) q.set('status', params.status)
   if (params?.overdue) q.set('overdue', 'true')
+  if (params?.source_type) q.set('source_type', params.source_type)
   if (params?.limit) q.set('limit', String(params.limit))
   return fetchApi<KnowledgeActionsResponse>(`/api/knowledge/actions?${q}`)
 }
 
-export async function createAction(data: { title: string; project_code?: string; follow_up_date?: string; importance?: string; content?: string }) {
+export async function createAction(data: { title: string; project_code?: string; follow_up_date?: string; importance?: string; content?: string; source_type?: string; source_id?: string }) {
   return fetchApi<{ success: boolean; action: KnowledgeAction }>('/api/knowledge/actions', {
     method: 'POST',
     body: JSON.stringify(data),
+  })
+}
+
+export async function createFollowUp(subscription: { id: string; name: string; provider: string; cost_per_cycle: number; currency: string; project_codes?: string[] }, data: { title: string; notes?: string; follow_up_date?: string; importance?: string }) {
+  return createAction({
+    title: data.title,
+    content: data.notes || `Follow-up for subscription: ${subscription.name} (${subscription.provider}) — $${subscription.cost_per_cycle} ${subscription.currency}`,
+    project_code: subscription.project_codes?.[0] || undefined,
+    follow_up_date: data.follow_up_date || undefined,
+    importance: data.importance || 'medium',
+    source_type: 'subscription',
+    source_id: subscription.id,
   })
 }
 
@@ -3122,6 +3135,12 @@ export interface RunwayData {
 
 export async function getRunwayData() {
   return fetchApi<RunwayData>('/api/finance/runway')
+}
+
+// --- Weekly Financial Review ---
+
+export async function getWeeklyReview() {
+  return fetchApi<any>('/api/finance/weekly-review')
 }
 
 // --- Grants Pipeline ---

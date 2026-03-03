@@ -18,6 +18,8 @@ import {
   Check,
   X,
   Loader2,
+  Flag,
+  CheckCircle2,
 } from 'lucide-react'
 import {
   getSubscriptions,
@@ -30,10 +32,14 @@ import {
   confirmPendingSubscription,
   rejectPendingSubscription,
   runSubscriptionDiscovery,
+  getKnowledgeActions,
+  createFollowUp,
+  updateActionStatus,
   type Subscription,
   type ProjectCode,
   type PendingSubscription,
   type SubscriptionAlert,
+  type KnowledgeAction,
 } from '@/lib/api'
 import { cn } from '@/lib/utils'
 
@@ -79,10 +85,11 @@ function formatPaymentMethod(method: string): string {
 
 export default function SubscriptionsPage() {
   const queryClient = useQueryClient()
-  const [filter, setFilter] = useState<'all' | 'active' | 'needs_review' | 'cancelled' | 'discovered' | 'alerts'>('active')
+  const [filter, setFilter] = useState<'all' | 'active' | 'needs_review' | 'cancelled' | 'discovered' | 'alerts' | 'followups'>('active')
   const [search, setSearch] = useState('')
   const [showAddModal, setShowAddModal] = useState(false)
   const [editingSub, setEditingSub] = useState<Subscription | null>(null)
+  const [followUpSub, setFollowUpSub] = useState<Subscription | null>(null)
   const [isScanning, setIsScanning] = useState(false)
 
   const { data: subscriptionsData, isLoading } = useQuery({
@@ -110,8 +117,14 @@ export default function SubscriptionsPage() {
     queryFn: getSubscriptionAlerts,
   })
 
+  const { data: followUpsData } = useQuery({
+    queryKey: ['knowledge-actions', 'subscription'],
+    queryFn: () => getKnowledgeActions({ source_type: 'subscription', status: 'open' }),
+  })
+
   const pendingSubscriptions = pendingData?.pending || []
   const alerts = alertsData?.alerts || []
+  const followUps = followUpsData?.actions || []
 
   const handleScanXero = async () => {
     setIsScanning(true)
@@ -287,6 +300,17 @@ export default function SubscriptionsPage() {
           >
             Alerts ({alerts.length})
           </button>
+          <button
+            onClick={() => setFilter('followups')}
+            className={cn(
+              'px-4 py-2 rounded-lg text-sm font-medium transition-colors',
+              filter === 'followups'
+                ? 'bg-purple-500/20 text-purple-400'
+                : 'text-white/50 hover:text-white hover:bg-white/5'
+            )}
+          >
+            Follow-ups ({followUps.length})
+          </button>
         </div>
 
         <div className="relative">
@@ -381,8 +405,31 @@ export default function SubscriptionsPage() {
         </div>
       )}
 
+      {/* Follow-ups */}
+      {filter === 'followups' && (
+        <div className="glass-card overflow-hidden">
+          {followUps.length === 0 ? (
+            <div className="py-12 text-center text-white/40">No open follow-ups</div>
+          ) : (
+            <div className="divide-y divide-white/10">
+              {followUps.map((action) => (
+                <FollowUpRow
+                  key={action.id}
+                  action={action}
+                  onComplete={() => {
+                    updateActionStatus(action.id, 'completed').then(() => {
+                      queryClient.invalidateQueries({ queryKey: ['knowledge-actions'] })
+                    })
+                  }}
+                />
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+
       {/* Subscriptions Table */}
-      {filter !== 'discovered' && filter !== 'alerts' && (
+      {filter !== 'discovered' && filter !== 'alerts' && filter !== 'followups' && (
         <div className="glass-card overflow-hidden">
           {isLoading ? (
             <div className="py-12 text-center text-white/40">Loading subscriptions...</div>
@@ -410,6 +457,7 @@ export default function SubscriptionsPage() {
                     key={sub.id}
                     subscription={sub}
                     onEdit={() => setEditingSub(sub)}
+                    onFollowUp={() => setFollowUpSub(sub)}
                   />
                 ))}
               </tbody>
@@ -442,6 +490,18 @@ export default function SubscriptionsPage() {
           }}
         />
       )}
+
+      {/* Follow-up Modal */}
+      {followUpSub && (
+        <FollowUpModal
+          subscription={followUpSub}
+          onClose={() => setFollowUpSub(null)}
+          onSuccess={() => {
+            queryClient.invalidateQueries({ queryKey: ['knowledge-actions'] })
+            setFollowUpSub(null)
+          }}
+        />
+      )}
     </div>
   )
 }
@@ -449,9 +509,11 @@ export default function SubscriptionsPage() {
 function SubscriptionRow({
   subscription,
   onEdit,
+  onFollowUp,
 }: {
   subscription: Subscription
   onEdit: () => void
+  onFollowUp: () => void
 }) {
   const isUnassigned = !subscription.project_codes || subscription.project_codes.length === 0
   const isCancelled = subscription.status === 'cancelled'
@@ -545,6 +607,13 @@ function SubscriptionRow({
       </td>
       <td className="px-6 py-4 text-right">
         <div className="flex items-center justify-end gap-2">
+          <button
+            onClick={onFollowUp}
+            className="p-1.5 rounded hover:bg-purple-500/20 text-white/30 hover:text-purple-400 transition-colors"
+            title="Create follow-up"
+          >
+            <Flag className="h-4 w-4" />
+          </button>
           {subscription.login_url && (
             <a
               href={subscription.login_url}
@@ -582,7 +651,7 @@ function EditSubscriptionModal({
     name: subscription.name,
     provider: subscription.provider,
     category: subscription.category,
-    billing_cycle: subscription.billing_cycle as 'monthly' | 'annual' | 'quarterly' | 'one-time' | 'usage',
+    billing_cycle: subscription.billing_cycle as 'monthly' | 'annual' | 'one_time' | 'usage',
     cost_per_cycle: subscription.cost_per_cycle,
     currency: subscription.currency,
     renewal_date: subscription.renewal_date || '',
@@ -678,13 +747,12 @@ function EditSubscriptionModal({
               <label className="block text-sm text-white/50 mb-1">Cycle</label>
               <select
                 value={formData.billing_cycle}
-                onChange={(e) => setFormData(d => ({ ...d, billing_cycle: e.target.value as 'monthly' | 'annual' | 'quarterly' | 'one-time' }))}
+                onChange={(e) => setFormData(d => ({ ...d, billing_cycle: e.target.value as 'monthly' | 'annual' | 'one_time' | 'usage' }))}
                 className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white"
               >
                 <option value="monthly">Monthly</option>
                 <option value="annual">Annual</option>
-                <option value="quarterly">Quarterly</option>
-                <option value="one-time">One-time</option>
+                <option value="one_time">One-time</option>
                 <option value="usage">Usage-based</option>
               </select>
             </div>
@@ -867,7 +935,7 @@ function AddSubscriptionModal({
     name: string
     provider: string
     category: string
-    billing_cycle: 'monthly' | 'annual' | 'quarterly' | 'one-time'
+    billing_cycle: 'monthly' | 'annual' | 'one_time' | 'usage'
     cost_per_cycle: number
     currency: string
     renewal_date: string
@@ -959,7 +1027,7 @@ function AddSubscriptionModal({
               <label className="block text-sm text-white/50 mb-1">Cycle</label>
               <select
                 value={formData.billing_cycle}
-                onChange={(e) => setFormData(d => ({ ...d, billing_cycle: e.target.value as 'monthly' | 'annual' | 'quarterly' | 'one-time' }))}
+                onChange={(e) => setFormData(d => ({ ...d, billing_cycle: e.target.value as 'monthly' | 'annual' | 'one_time' | 'usage' }))}
                 className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white"
               >
                 <option value="monthly">Monthly</option>
@@ -1214,6 +1282,190 @@ function AlertRow({ alert }: { alert: SubscriptionAlert }) {
       )}>
         {alert.alert_priority}
       </span>
+    </div>
+  )
+}
+
+function FollowUpModal({
+  subscription,
+  onClose,
+  onSuccess,
+}: {
+  subscription: Subscription
+  onClose: () => void
+  onSuccess: () => void
+}) {
+  const [title, setTitle] = useState(`Review ${subscription.name}`)
+  const [notes, setNotes] = useState('')
+  const [followUpDate, setFollowUpDate] = useState(
+    new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0]
+  )
+  const [importance, setImportance] = useState<'low' | 'medium' | 'high'>('medium')
+
+  const mutation = useMutation({
+    mutationFn: () => createFollowUp(subscription, { title, notes, follow_up_date: followUpDate, importance }),
+    onSuccess,
+  })
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    mutation.mutate()
+  }
+
+  return (
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50" onClick={onClose}>
+      <div className="glass-card p-6 w-full max-w-md" onClick={e => e.stopPropagation()}>
+        <div className="flex items-center gap-3 mb-6">
+          <Flag className="h-5 w-5 text-purple-400" />
+          <h2 className="text-xl font-bold text-white">Create Follow-up</h2>
+        </div>
+        <p className="text-sm text-white/50 mb-4">
+          {subscription.name} — ${subscription.cost_per_cycle} {subscription.currency}/{subscription.billing_cycle}
+        </p>
+
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <label className="block text-sm text-white/50 mb-1">Action</label>
+            <input
+              type="text"
+              required
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white"
+              placeholder="e.g. Cancel Codeguide"
+            />
+            <div className="flex gap-2 mt-2">
+              {['Cancel', 'Review', 'Downgrade', 'Renew'].map(action => (
+                <button
+                  key={action}
+                  type="button"
+                  onClick={() => setTitle(`${action} ${subscription.name}`)}
+                  className="px-2 py-1 rounded text-xs bg-white/5 hover:bg-white/10 text-white/50 hover:text-white transition-colors"
+                >
+                  {action}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm text-white/50 mb-1">Due Date</label>
+              <input
+                type="date"
+                value={followUpDate}
+                onChange={(e) => setFollowUpDate(e.target.value)}
+                className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white"
+              />
+            </div>
+            <div>
+              <label className="block text-sm text-white/50 mb-1">Priority</label>
+              <select
+                value={importance}
+                onChange={(e) => setImportance(e.target.value as 'low' | 'medium' | 'high')}
+                className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white"
+              >
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label className="block text-sm text-white/50 mb-1">Notes (optional)</label>
+            <textarea
+              value={notes}
+              onChange={(e) => setNotes(e.target.value)}
+              className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white h-20"
+              placeholder="Why this follow-up?"
+            />
+          </div>
+
+          <div className="flex justify-end gap-3 pt-2">
+            <button type="button" onClick={onClose} className="btn-glass">
+              Cancel
+            </button>
+            <button
+              type="submit"
+              disabled={mutation.isPending}
+              className="btn-action flex items-center gap-2"
+            >
+              {mutation.isPending && <Loader2 className="h-4 w-4 animate-spin" />}
+              Create Follow-up
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  )
+}
+
+function FollowUpRow({
+  action,
+  onComplete,
+}: {
+  action: KnowledgeAction
+  onComplete: () => void
+}) {
+  const [completing, setCompleting] = useState(false)
+  const isOverdue = action.follow_up_date && new Date(action.follow_up_date) < new Date()
+
+  const handleComplete = async () => {
+    setCompleting(true)
+    await onComplete()
+    setCompleting(false)
+  }
+
+  return (
+    <div className={cn(
+      'px-6 py-4 flex items-center justify-between',
+      isOverdue && 'bg-red-500/5'
+    )}>
+      <div className="flex items-center gap-3">
+        <Flag className={cn('h-4 w-4', isOverdue ? 'text-red-400' : 'text-purple-400')} />
+        <div>
+          <p className="font-medium text-white">{action.title}</p>
+          {action.content && (
+            <p className="text-xs text-white/40 mt-0.5 line-clamp-1">{action.content}</p>
+          )}
+          <div className="flex items-center gap-3 mt-1">
+            {action.follow_up_date && (
+              <span className={cn(
+                'text-xs flex items-center gap-1',
+                isOverdue ? 'text-red-400' : 'text-white/50'
+              )}>
+                <Calendar className="h-3 w-3" />
+                {format(new Date(action.follow_up_date), 'MMM d, yyyy')}
+                {isOverdue && ' (overdue)'}
+              </span>
+            )}
+            {action.project_code && (
+              <span className="text-xs px-2 py-0.5 rounded bg-white/10 text-white/50">
+                {action.project_code}
+              </span>
+            )}
+            {action.importance && (
+              <span className={cn(
+                'text-xs px-2 py-0.5 rounded',
+                action.importance === 'high' ? 'bg-red-500/20 text-red-400'
+                  : action.importance === 'medium' ? 'bg-yellow-500/20 text-yellow-400'
+                    : 'bg-white/10 text-white/50'
+              )}>
+                {action.importance}
+              </span>
+            )}
+          </div>
+        </div>
+      </div>
+      <button
+        onClick={handleComplete}
+        disabled={completing}
+        className="px-3 py-1.5 rounded text-xs bg-green-500/20 hover:bg-green-500/30 text-green-400 transition-colors flex items-center gap-1"
+      >
+        {completing ? <Loader2 className="h-3 w-3 animate-spin" /> : <CheckCircle2 className="h-3 w-3" />}
+        Complete
+      </button>
     </div>
   )
 }
