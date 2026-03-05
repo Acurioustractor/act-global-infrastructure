@@ -103,7 +103,7 @@ async function discoverMeetingDatabases(notion) {
     do {
       const response = await notion.search({
         query,
-        filter: { property: 'object', value: 'database' },
+        filter: { property: 'object', value: 'data_source' },
         start_cursor: cursor,
         page_size: 100
       });
@@ -705,8 +705,8 @@ async function syncMeetings(options) {
       let dbMeetingCount = 0;
 
       do {
-        const response = await notion.databases.query({
-          database_id: db.id,
+        const response = await notion.dataSources.query({
+          data_source_id: db.id,
           start_cursor: cursor,
           filter,
           sorts: [{ timestamp: 'last_edited_time', direction: 'descending' }]

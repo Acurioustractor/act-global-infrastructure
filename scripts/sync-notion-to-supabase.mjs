@@ -28,6 +28,7 @@ import { Client } from '@notionhq/client';
 import { createClient } from '@supabase/supabase-js';
 import { readFileSync, existsSync } from 'fs';
 import { loadProjectsConfig } from './lib/project-loader.mjs';
+import { queryDatabase } from './lib/notion-datasource.mjs';
 import { recordSyncStatus } from './lib/sync-status.mjs';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
@@ -260,8 +261,7 @@ async function fetchNotionProjects(notion, databaseId, options) {
   };
 
   do {
-    const response = await notion.databases.query({
-      database_id: databaseId,
+    const response = await queryDatabase(notion, databaseId, {
       start_cursor: cursor,
       filter,
       sorts: [{ timestamp: 'last_edited_time', direction: 'descending' }]

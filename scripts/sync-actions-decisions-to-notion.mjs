@@ -21,6 +21,7 @@ import { createClient } from '@supabase/supabase-js';
 import { readFileSync } from 'fs';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
+import { queryDatabase } from './lib/notion-datasource.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -97,8 +98,7 @@ async function getExistingNotionIds(databaseId) {
   let cursor;
 
   do {
-    const response = await notion.databases.query({
-      database_id: databaseId,
+    const response = await queryDatabase(notion, databaseId, {
       page_size: 100,
       ...(cursor ? { start_cursor: cursor } : {}),
     });
@@ -275,8 +275,7 @@ async function main() {
     log('Loading project pages for relation linking...');
     let cursor;
     do {
-      const response = await notion.databases.query({
-        database_id: projectsDbId,
+      const response = await queryDatabase(notion, projectsDbId, {
         page_size: 100,
         ...(cursor ? { start_cursor: cursor } : {}),
       });

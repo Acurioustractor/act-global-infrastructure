@@ -31,6 +31,7 @@ const notion = new Client({ auth: process.env.NOTION_TOKEN });
 import { readFileSync } from 'fs';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
+import { retrieveDatabase } from './lib/notion-datasource.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -344,7 +345,7 @@ async function main() {
   ];
 
   // Auto-detect title property name from database schema
-  const dbMeta = await notion.databases.retrieve({ database_id: WEEKLY_REPORTS_DB_ID });
+  const dbMeta = await retrieveDatabase(notion, WEEKLY_REPORTS_DB_ID);
   const titleProp = Object.entries(dbMeta.properties).find(([, v]) => v.type === 'title');
   const dateProp = Object.entries(dbMeta.properties).find(([, v]) => v.type === 'date');
   const titleKey = titleProp ? titleProp[0] : 'Name';
