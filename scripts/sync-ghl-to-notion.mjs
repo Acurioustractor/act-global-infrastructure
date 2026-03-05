@@ -18,6 +18,7 @@ import { Client } from '@notionhq/client';
 import { readFileSync } from 'fs';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
+import { queryDatabase } from './lib/notion-datasource.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -109,8 +110,8 @@ async function getAllNotionPartners() {
   let cursor;
 
   do {
-    const response = await notion.databases.query({
-      database_id: databaseIds.partners,
+    const response = await queryDatabase(notion, databaseIds.partners, {
+
       start_cursor: cursor
     });
 
@@ -253,8 +254,8 @@ async function getAllNotionGrants() {
   let cursor;
 
   do {
-    const response = await notion.databases.query({
-      database_id: databaseIds.grantOpportunities,
+    const response = await queryDatabase(notion, databaseIds.grantOpportunities, {
+
       start_cursor: cursor
     });
 

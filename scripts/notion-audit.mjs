@@ -2,6 +2,7 @@ import dotenv from 'dotenv';
 import { Client } from '@notionhq/client';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { queryDatabase } from './lib/notion-datasource.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.resolve(__dirname, '..');
@@ -22,7 +23,7 @@ try {
     console.log(`Searching for: ${term}`);
     const response = await notion.search({
       query: term,
-      filter: { property: 'object', value: 'database' }
+      filter: { property: 'object', value: 'data_source' }
     });
     
     for (const db of response.results) {
@@ -55,8 +56,8 @@ try {
     }
     
     // Get item count
-    const query = await notion.databases.query({ 
-      database_id: id,
+    const query = await queryDatabase(notion, id, {
+
       page_size: 1
     });
     

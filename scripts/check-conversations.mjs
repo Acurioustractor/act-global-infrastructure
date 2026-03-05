@@ -2,6 +2,7 @@ import dotenv from 'dotenv';
 import { Client } from '@notionhq/client';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { queryDatabase } from './lib/notion-datasource.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.resolve(__dirname, '..');
@@ -42,8 +43,8 @@ try {
       
       // Get sample items
       console.log(`\nSample items (first 5):`);
-      const items = await notion.databases.query({ 
-        database_id: conversationsProp.relation.database_id,
+      const items = await queryDatabase(notion, conversationsProp.relation.database_id, {
+
         page_size: 5
       });
       

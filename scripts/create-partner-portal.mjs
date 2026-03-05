@@ -19,6 +19,7 @@ import { Client } from '@notionhq/client';
 import { readFileSync } from 'fs';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
+import { queryDatabase } from './lib/notion-datasource.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -48,8 +49,8 @@ const notion = new Client({ auth: process.env.NOTION_TOKEN });
 async function findPartner(partnerName) {
   console.log(`🔍 Searching for partner: "${partnerName}"\n`);
 
-  const response = await notion.databases.query({
-    database_id: databaseIds.partners,
+  const response = await queryDatabase(notion, databaseIds.partners, {
+
     filter: {
       property: 'Name',
       title: {

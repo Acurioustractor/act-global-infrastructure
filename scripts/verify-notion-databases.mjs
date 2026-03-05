@@ -9,6 +9,7 @@
 
 import '../lib/load-env.mjs';
 import { Client } from '@notionhq/client';
+import { queryDatabase } from './lib/notion-datasource.mjs';
 
 const NOTION_TOKEN = process.env.NOTION_TOKEN;
 
@@ -40,8 +41,8 @@ async function fetchDatabaseInfo(dbId, name, system) {
     });
 
     // Get page count
-    const pages = await notion.databases.query({
-      database_id: dbId,
+    const pages = await queryDatabase(notion, dbId, {
+
       page_size: 1
     });
 

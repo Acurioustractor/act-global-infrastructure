@@ -11,6 +11,7 @@
 import { createClient } from '@supabase/supabase-js';
 import { Client } from '@notionhq/client';
 import 'dotenv/config';
+import { queryDatabase } from './lib/notion-datasource.mjs';
 
 const supabase = createClient(
   process.env.SUPABASE_URL,
@@ -186,8 +187,8 @@ export async function queueFollowups(triggers) {
       const template = TEMPLATES[trigger.template];
 
       // Check if similar action already exists
-      const existingQuery = await notion.databases.query({
-        database_id: actionsDbId,
+      const existingQuery = await queryDatabase(notion, actionsDbId, {
+
         filter: {
           and: [
             { property: 'Status', status: { does_not_equal: 'Done' } },

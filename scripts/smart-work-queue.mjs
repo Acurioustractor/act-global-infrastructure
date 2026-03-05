@@ -23,6 +23,7 @@ import { Client } from '@notionhq/client';
 import { readFileSync } from 'fs';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
+import { queryDatabase } from './lib/notion-datasource.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -77,8 +78,8 @@ async function fetchGrantOpportunities() {
     const twoWeeks = new Date();
     twoWeeks.setDate(twoWeeks.getDate() + 14);
 
-    const response = await notion.databases.query({
-      database_id: databaseIds.grantOpportunities,
+    const response = await queryDatabase(notion, databaseIds.grantOpportunities, {
+
       filter: {
         and: [
           {
@@ -126,8 +127,8 @@ async function fetchPartnerCheckIns() {
     const twoWeeks = new Date();
     twoWeeks.setDate(twoWeeks.getDate() + 14);
 
-    const response = await notion.databases.query({
-      database_id: databaseIds.partners,
+    const response = await queryDatabase(notion, databaseIds.partners, {
+
       filter: {
         and: [
           {

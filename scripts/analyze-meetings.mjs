@@ -2,6 +2,7 @@ import dotenv from 'dotenv';
 import { Client } from '@notionhq/client';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { queryDatabase } from './lib/notion-datasource.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.resolve(__dirname, '..');
@@ -41,8 +42,8 @@ try {
     let cursor = undefined;
     
     while (hasMore && count < 100) {
-      const query = await notion.databases.query({ 
-        database_id: db.id,
+      const query = await queryDatabase(notion, db.id, {
+
         page_size: 100,
         start_cursor: cursor
       });
@@ -54,8 +55,8 @@ try {
     console.log(`\nItem count: ${count}${hasMore ? '+' : ''}`);
     
     // Get sample items with actual data
-    const items = await notion.databases.query({ 
-      database_id: db.id,
+    const items = await queryDatabase(notion, db.id, {
+
       page_size: 3,
       sorts: [{ timestamp: 'created_time', direction: 'descending' }]
     });

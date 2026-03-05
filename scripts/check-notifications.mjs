@@ -18,6 +18,7 @@ import { Client } from '@notionhq/client';
 import { readFileSync } from 'fs';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
+import { queryDatabase } from './lib/notion-datasource.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -93,8 +94,8 @@ async function checkGrantDeadlines() {
   const twoWeeks = getTwoWeeksFromNow();
 
   try {
-    const response = await notion.databases.query({
-      database_id: databaseIds.grantOpportunities,
+    const response = await queryDatabase(notion, databaseIds.grantOpportunities, {
+
       filter: {
         and: [
           {
@@ -150,8 +151,8 @@ async function checkPartnerCheckIns() {
   const thisWeek = getThisWeekDates();
 
   try {
-    const response = await notion.databases.query({
-      database_id: databaseIds.partners,
+    const response = await queryDatabase(notion, databaseIds.partners, {
+
       filter: {
         and: [
           {
@@ -203,8 +204,8 @@ async function checkOverdueItems() {
 
   try {
     // Check for overdue grants
-    const overdueGrants = await notion.databases.query({
-      database_id: databaseIds.grantOpportunities,
+    const overdueGrants = await queryDatabase(notion, databaseIds.grantOpportunities, {
+
       filter: {
         and: [
           {
@@ -222,8 +223,8 @@ async function checkOverdueItems() {
     });
 
     // Check for overdue partner check-ins
-    const overduePartners = await notion.databases.query({
-      database_id: databaseIds.partners,
+    const overduePartners = await queryDatabase(notion, databaseIds.partners, {
+
       filter: {
         property: 'Next Check-in',
         date: {
