@@ -6,7 +6,7 @@ export async function GET() {
     const { data, error } = await supabase
       .from('subscriptions')
       .select('*')
-      .eq('account_status', 'active')
+      .in('account_status', ['active', 'pending_migration'])
 
     if (error) throw error
 

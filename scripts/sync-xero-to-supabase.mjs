@@ -775,6 +775,7 @@ async function syncTransactions(options = {}) {
         status: txn.Status || 'ACTIVE',
         date: parseXeroDate(txn.Date),
         has_attachments: txn.HasAttachments || false,  // For receipt reconciliation
+        is_reconciled: txn.IsReconciled || false,
         line_items: (txn.LineItems || []).map(li => ({
           description: li.Description,
           quantity: li.Quantity,

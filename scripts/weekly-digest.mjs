@@ -129,7 +129,31 @@ async function collectWeekData() {
     .order('start_time', { ascending: true })
     .limit(15);
 
-  // 8. Xero spend — this week + last week for comparison
+  // 8. Past meetings this week (from calendar)
+  const { data: pastMeetings } = await supabase
+    .from('calendar_events')
+    .select('title, start_time, attendees, detected_project_code, ghl_contact_ids')
+    .lte('end_time', new Date().toISOString())
+    .gte('start_time', weekStart)
+    .order('start_time', { ascending: true });
+
+  // Meeting notes captured this week
+  const { data: meetingNotes } = await supabase
+    .from('project_knowledge')
+    .select('title, summary, participants, project_code, recorded_at, ai_summary')
+    .eq('knowledge_type', 'meeting')
+    .gte('recorded_at', weekStart)
+    .order('recorded_at', { ascending: false });
+
+  // Open action items from meetings
+  const { data: meetingActions } = await supabase
+    .from('project_knowledge')
+    .select('title, participants, project_code, action_items')
+    .eq('knowledge_type', 'action')
+    .eq('action_required', true)
+    .gte('recorded_at', weekStart);
+
+  // 9. Xero spend — this week + last week for comparison
   const [{ data: xeroThisWeek }, { data: xeroLastWeek }] = await Promise.all([
     supabase.from('xero_transactions').select('total').gte('date', daysAgo(7).split('T')[0]),
     supabase.from('xero_transactions').select('total').gte('date', daysAgo(14).split('T')[0]).lt('date', daysAgo(7).split('T')[0]),
@@ -197,6 +221,9 @@ async function collectWeekData() {
     xeroThisWeek: xeroThisWeek || [],
     xeroLastWeek: xeroLastWeek || [],
     prevKnowledgeCount: prevKnowledgeCount || 0,
+    pastMeetings: pastMeetings || [],
+    meetingNotes: meetingNotes || [],
+    meetingActions: meetingActions || [],
     newGrants: newGrants || [],
     activeApps: activeApps || [],
     totalOpenGrants: totalOpen || 0,
@@ -324,6 +351,28 @@ async function generateDigest(data) {
     sections.push(`GRANTS PIPELINE:\n${grantLines.join('\n')}`);
   }
 
+  // Key meetings this week
+  if (data.pastMeetings?.length > 0) {
+    const multiAttendee = data.pastMeetings.filter(m => {
+      const att = Array.isArray(m.attendees) ? m.attendees : [];
+      return att.length >= 2;
+    });
+    const noteSet = new Set((data.meetingNotes || []).map(n => n.title?.toLowerCase()));
+    const meetingLines = [`${multiAttendee.length} meetings held, ${data.meetingNotes?.length || 0} captured`];
+    for (const m of multiAttendee.slice(0, 8)) {
+      const names = (Array.isArray(m.attendees) ? m.attendees : [])
+        .map(a => a.displayName || a.email?.split('@')[0])
+        .filter(n => n && !n.endsWith('@act.place'))
+        .slice(0, 3).join(', ');
+      const hasNotes = Array.from(noteSet).some(t => m.title.toLowerCase().includes(t) || t.includes(m.title.toLowerCase()));
+      meetingLines.push(`  ${m.title} (${names})${hasNotes ? '' : ' [NO NOTES]'}`);
+    }
+    if (data.meetingActions?.length > 0) {
+      meetingLines.push(`  Open actions: ${data.meetingActions.length}`);
+    }
+    sections.push(`KEY MEETINGS:\n${meetingLines.join('\n')}`);
+  }
+
   // Upcoming
   if (data.upcomingEvents.length > 0) {
     const eventLines = data.upcomingEvents.slice(0, 8).map(e => {
@@ -350,6 +399,7 @@ Write a 5-6 paragraph retrospective covering:
 3. Grants & Pipeline — new opportunities, deadlines, applications status, what needs action
 4. Decisions & Actions — key decisions made, what's pending
 5. Looking Ahead — upcoming events, priorities for next week
+6. Meetings — who you met, what was captured, what's missing notes
 
 Be specific, warm but professional. Use names and numbers. No markdown — plain text paragraphs.
 Max 500 words.`,
@@ -383,6 +433,9 @@ Max 500 words.`,
       pipelineMovement: data.opportunities.length,
       spendThisWeek: Math.round(spendThisWeek),
       transactionCount: data.xeroThisWeek.length,
+      meetingsHeld: data.pastMeetings?.filter(m => (Array.isArray(m.attendees) ? m.attendees : []).length >= 2).length || 0,
+      meetingNotesCaptured: data.meetingNotes?.length || 0,
+      meetingActions: data.meetingActions?.length || 0,
       newGrants: data.newGrants.length,
       activeGrantApps: data.activeApps.length,
       totalOpenGrants: data.totalOpenGrants,

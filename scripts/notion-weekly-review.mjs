@@ -284,13 +284,74 @@ function generateActions(financial, invoiceAging, receiptGap, rdSpend) {
   return actions.length > 0 ? actions.join('\n') : '✅ No urgent actions this week';
 }
 
+async function getMeetingsSummary() {
+  const since = daysAgo(7);
+
+  const [{ data: events }, { data: notes }, { data: actions }] = await Promise.all([
+    supabase.from('calendar_events')
+      .select('title, start_time, attendees, detected_project_code')
+      .lte('end_time', new Date().toISOString())
+      .gte('start_time', since)
+      .order('start_time', { ascending: true }),
+    supabase.from('project_knowledge')
+      .select('title, summary, ai_summary, participants, project_code')
+      .eq('knowledge_type', 'meeting')
+      .gte('recorded_at', since)
+      .order('recorded_at', { ascending: false }),
+    supabase.from('project_knowledge')
+      .select('title, participants, project_code')
+      .eq('knowledge_type', 'action')
+      .eq('action_required', true)
+      .gte('recorded_at', since),
+  ]);
+
+  if (!events?.length) return 'No meetings this week.';
+
+  const multiAttendee = events.filter(e => {
+    const att = Array.isArray(e.attendees) ? e.attendees : [];
+    return att.length >= 2;
+  });
+
+  const noteSet = new Set((notes || []).map(n => n.title?.toLowerCase()));
+  const lines = [];
+  lines.push(`${multiAttendee.length} meetings held, ${notes?.length || 0} with notes captured`);
+  lines.push('');
+
+  for (const e of multiAttendee.slice(0, 10)) {
+    const names = (Array.isArray(e.attendees) ? e.attendees : [])
+      .map(a => a.displayName || a.email?.split('@')[0])
+      .filter(n => n && !n.endsWith('@act.place'))
+      .slice(0, 4).join(', ');
+    const hasNotes = Array.from(noteSet).some(t =>
+      e.title.toLowerCase().includes(t) || t.includes(e.title.toLowerCase()));
+    const project = e.detected_project_code ? ` [${e.detected_project_code}]` : '';
+    lines.push(`• ${e.title}${project} — ${names}${hasNotes ? '' : ' ⚠ no notes'}`);
+
+    if (hasNotes) {
+      const note = notes.find(n => e.title.toLowerCase().includes(n.title?.toLowerCase()));
+      const summary = note?.ai_summary || note?.summary;
+      if (summary) lines.push(`  → ${summary.substring(0, 150)}`);
+    }
+  }
+
+  if (actions?.length > 0) {
+    lines.push('');
+    lines.push(`Open actions from meetings: ${actions.length}`);
+    for (const a of actions.slice(0, 5)) {
+      lines.push(`  → ${a.title}${a.project_code ? ` [${a.project_code}]` : ''}`);
+    }
+  }
+
+  return lines.join('\n');
+}
+
 async function main() {
   const start = Date.now();
   const title = weekLabel();
 
   console.log(`Creating weekly review: ${title}`);
 
-  const [financial, health, relationships, grants, emails, invoiceAging, receiptGap, rdSpend] = await Promise.all([
+  const [financial, health, relationships, grants, emails, invoiceAging, receiptGap, rdSpend, meetings] = await Promise.all([
     getFinancialSummary(),
     getProjectHealth(),
     getRelationshipChanges(),
@@ -299,6 +360,7 @@ async function main() {
     getInvoiceAging(),
     getReceiptGap(),
     getRdSpend(),
+    getMeetingsSummary(),
   ]);
 
   const actions = generateActions(financial, invoiceAging, receiptGap, rdSpend);
@@ -311,6 +373,7 @@ async function main() {
   verbose('\n--- Invoice Aging ---\n' + invoiceAging);
   verbose('\n--- Receipt Gap ---\n' + receiptGap);
   verbose('\n--- R&D Spend ---\n' + rdSpend);
+  verbose('\n--- Meetings ---\n' + meetings);
   verbose('\n--- Actions ---\n' + actions);
 
   if (DRY_RUN) {
@@ -340,6 +403,8 @@ async function main() {
     paragraph(relationships),
     heading('Grant Pipeline'),
     paragraph(grants),
+    heading('Meetings'),
+    paragraph(meetings),
     heading('Email Activity'),
     paragraph(emails),
   ];

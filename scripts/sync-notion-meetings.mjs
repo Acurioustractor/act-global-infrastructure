@@ -191,7 +191,7 @@ function extractPageTitle(page) {
  */
 function extractMeetingMetadata(page) {
   const props = page.properties || {};
-  const meta = { title: null, date: null, attendees: [], location: null, status: null, followUpRequired: false };
+  const meta = { title: null, date: null, attendees: [], location: null, status: null, followUpRequired: false, project: null };
 
   // Title: always the title property
   meta.title = extractPageTitle(page);
@@ -206,7 +206,7 @@ function extractMeetingMetadata(page) {
   if (!meta.date) meta.date = page.created_time;
 
   // Attendees: try people type, multi_select, and title parsing
-  for (const name of ['Attendees', 'attendees', 'People', 'people', 'Participants']) {
+  for (const name of ['Attendees', 'attendees', 'People', 'people', 'Participants', 'Assigned to', 'assigned_to']) {
     const prop = props[name];
     if (prop?.people?.length) {
       meta.attendees = prop.people.map(p => ({ name: p.name, email: p.person?.email }));
@@ -235,6 +235,20 @@ function extractMeetingMetadata(page) {
     const prop = props[name];
     if (prop?.status?.name) { meta.status = prop.status.name; break; }
     if (prop?.select?.name) { meta.status = prop.select.name; break; }
+  }
+
+  // Project: try select, multi_select, or relation properties
+  for (const name of ['Project', 'project', 'Project Code', 'project_code']) {
+    const prop = props[name];
+    if (prop?.select?.name) { meta.project = prop.select.name; break; }
+    if (prop?.multi_select?.length) { meta.project = prop.multi_select[0].name; break; }
+    if (prop?.rich_text?.[0]?.plain_text) { meta.project = prop.rich_text[0].plain_text; break; }
+    // Relation type — has an array of page references
+    if (prop?.relation?.length) {
+      // Store the relation page ID; we'll resolve it later if needed
+      meta.projectRelationId = prop.relation[0].id;
+      break;
+    }
   }
 
   // Follow-up
@@ -735,8 +749,31 @@ async function syncMeetings(options) {
             // Extract transcription data (if this is a recorded meeting)
             const transcription = await extractTranscriptionContent(notion, page.id, pageBlocks);
 
-            // Detect project code
-            let projectCode = db.project?.code || null;
+            // Detect project code — priority: page property > database parent > content detection
+            let projectCode = null;
+
+            // 1. From page "Project" property (select, multi_select, text, or relation)
+            if (meta.project) {
+              projectCode = meta.project.startsWith('ACT-') ? meta.project : matchProjectCode(meta.project, projectCodes);
+            }
+
+            // 2. If project is a relation, resolve the linked page title
+            if (!projectCode && meta.projectRelationId) {
+              try {
+                const relPage = await notion.pages.retrieve({ page_id: meta.projectRelationId });
+                const relTitle = extractPageTitle(relPage);
+                if (relTitle) {
+                  projectCode = relTitle.startsWith('ACT-') ? relTitle : matchProjectCode(relTitle, projectCodes);
+                }
+              } catch { /* relation page not accessible */ }
+            }
+
+            // 3. From database parent page
+            if (!projectCode) {
+              projectCode = db.project?.code || null;
+            }
+
+            // 4. From content keywords
             if (!projectCode) {
               projectCode = detectProjectFromContent(meta.title, content, projectCodes);
             }
@@ -757,6 +794,36 @@ async function syncMeetings(options) {
                 if (transcription.aiSummary) console.log(`       AI Summary: ${transcription.aiSummary.length} chars`);
                 if (transcription.aiActionItems?.length) console.log(`       AI Actions: ${transcription.aiActionItems.length}`);
                 if (transcription.durationMinutes) console.log(`       Duration: ${transcription.durationMinutes} min`);
+              }
+            }
+
+            // Fix title: if page title is a timestamp (Notion meeting notes use Date as title),
+            // prefer the transcription title or derive from AI summary
+            if (meta.title && /^\d{4}-\d{2}-\d{2}T/.test(meta.title)) {
+              if (transcription?.title) {
+                meta.title = transcription.title;
+              } else if (transcription?.aiSummary) {
+                // Use first heading from AI summary as title
+                const firstHeading = transcription.aiSummary.match(/^###?\s+(.+)/m);
+                if (firstHeading) meta.title = firstHeading[1].trim();
+              }
+            }
+
+            // Fix participants: if no attendees from page properties, try transcription attendees
+            if (meta.attendees.length === 0 && transcription?.attendeeUserIds?.length) {
+              for (const userId of transcription.attendeeUserIds) {
+                try {
+                  const user = await notion.users.retrieve({ user_id: userId });
+                  if (user?.name) {
+                    meta.attendees.push({ name: user.name, email: user.person?.email || null });
+                  }
+                } catch { /* user not accessible */ }
+              }
+              // Re-match the new attendees to GHL contacts
+              if (meta.attendees.length > 0) {
+                const reMatched = await matchAttendeesToContacts(supabase, meta.attendees);
+                matchedAttendees.length = 0;
+                matchedAttendees.push(...reMatched);
               }
             }
 

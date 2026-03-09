@@ -19,7 +19,7 @@ import { createClient } from '@supabase/supabase-js';
 import { createGHLService } from './lib/ghl-api-service.mjs';
 import dotenv from 'dotenv';
 
-dotenv.config({ path: '.env.local' });
+dotenv.config({ path: '.env.local', override: true });
 dotenv.config({ path: '.env' });
 
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL;
@@ -48,6 +48,10 @@ const GHL_STAGES = {
   'Grant Opportunity Identified': '8124c61a-1175-461e-be5d-1fa64ef6dd65',
   'Application In Progress':      '3eb617e6-5635-4091-bd04-acc72d2ae5b0',
   'Grant Submitted':              '8b0818ce-3fe8-4aae-97ab-905366fdd5ee',
+  // TODO: Add these stage IDs after creating stages in GHL UI
+  // 'Grant Awarded':             '<stage-id-from-ghl>',
+  // 'Grant Declined':            '<stage-id-from-ghl>',
+  // 'Acquittal Due':             '<stage-id-from-ghl>',
 };
 
 // Status mapping: grant_opportunities.application_status <-> GHL stage
@@ -58,6 +62,8 @@ const STATUS_TO_GHL_STAGE = {
   'in_progress':   'Application In Progress',
   'applied':       'Grant Submitted',
   'submitted':     'Grant Submitted',
+  'successful':    'Grant Awarded',
+  'unsuccessful':  'Grant Declined',
   'not_relevant':  null,  // Don't push to GHL
   'next_round':    null,  // Don't push to GHL
 };
@@ -66,6 +72,9 @@ const GHL_STAGE_TO_STATUS = {
   'Grant Opportunity Identified': 'not_applied',
   'Application In Progress':      'in_progress',
   'Grant Submitted':              'submitted',
+  'Grant Awarded':                'successful',
+  'Grant Declined':               'unsuccessful',
+  'Acquittal Due':                'successful',  // Still successful, just in acquittal phase
 };
 
 // Name similarity matching (reused from link-grants-to-ghl.mjs)
@@ -295,13 +304,31 @@ async function syncGrantsToGHL() {
     return;
   }
 
-  // Get grants without GHL link that have decent fit scores
-  const { data: unlinkedGrants, error } = await supabase
+  // Get grants without GHL link that have decent fit scores OR are aligned to a project
+  const { data: fitGrants, error: fitErr } = await supabase
     .from('grant_opportunities')
     .select('*')
     .is('ghl_opportunity_id', null)
-    .gte('fit_score', 50) // Only push grants with >50% fit
+    .gte('fit_score', 50)
     .order('fit_score', { ascending: false });
+
+  const { data: alignedGrants, error: alignErr } = await supabase
+    .from('grant_opportunities')
+    .select('*')
+    .is('ghl_opportunity_id', null)
+    .not('aligned_projects', 'eq', '{}')
+    .not('aligned_projects', 'is', null);
+
+  // Merge and dedupe by id
+  const seenIds = new Set();
+  const unlinkedGrants = [];
+  for (const g of [...(fitGrants || []), ...(alignedGrants || [])]) {
+    if (!seenIds.has(g.id)) {
+      seenIds.add(g.id);
+      unlinkedGrants.push(g);
+    }
+  }
+  const error = fitErr || alignErr;
 
   if (error) {
     console.error('Error fetching unlinked grants:', error.message);
@@ -482,8 +509,15 @@ async function autoAdvanceGHLStages() {
       targetStage = 'Application In Progress';
     }
 
+    // Determine outcome stages
+    if (['successful'].includes(grant.application_status) && !targetStage) {
+      targetStage = 'Grant Awarded';
+    } else if (['unsuccessful'].includes(grant.application_status) && !targetStage) {
+      targetStage = 'Grant Declined';
+    }
+
     // Only advance forward, never backward
-    const stageOrder = ['Grant Opportunity Identified', 'Application In Progress', 'Grant Submitted'];
+    const stageOrder = ['Grant Opportunity Identified', 'Application In Progress', 'Grant Submitted', 'Grant Awarded', 'Grant Declined', 'Acquittal Due'];
     const currentIdx = stageOrder.indexOf(currentGhlStage);
     const targetIdx = targetStage ? stageOrder.indexOf(targetStage) : -1;
 

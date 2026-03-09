@@ -198,6 +198,11 @@ const cronScripts = [
     cron_restart: '0 11 * * *', // Daily 11am AEST (after GHL align + health)
   },
   {
+    name: 'weekly-project-pulse',
+    script: 'scripts/weekly-project-pulse.mjs',
+    cron_restart: '30 5 * * 1', // Monday 5:30am AEST (before daily-briefing at 7am)
+  },
+  {
     name: 'weekly-digest',
     script: 'scripts/weekly-digest.mjs',
     cron_restart: '0 18 * * 0', // Sunday 6pm AEST
@@ -259,12 +264,8 @@ const cronScripts = [
     args: '--batch-size 20',
     cron_restart: '0 7 * * *', // Daily 7am AEST (after discover-grants at 6am)
   },
-  {
-    name: 'check-grant-deadlines',
-    script: 'scripts/check-grant-deadlines.mjs',
-    cron_restart: '0 7 * * *', // Daily 7am AEST (reduced from 6h — reactor handles alerts)
-  },
-  {
+  // check-grant-deadlines removed — covered by daily briefing grant section + event reactor
+{
     name: 'sprint-suggestions',
     script: 'scripts/generate-sprint-suggestions.mjs',
     args: '--verbose',
@@ -285,6 +286,18 @@ const cronScripts = [
     script: 'scripts/forward-receipts-to-dext.mjs',
     args: '--days 3',
     cron_restart: '0 */6 * * *', // Every 6 hours — catch new billing emails promptly
+  },
+  {
+    name: 'receipt-pipeline-correlate',
+    script: 'scripts/correlate-dext-xero.mjs',
+    args: '--days 90',
+    cron_restart: '0 11 * * *', // Daily 11am AEST (after Xero sync + Dext forwarding)
+  },
+  {
+    name: 'receipt-pipeline-monitor',
+    script: 'scripts/monitor-receipt-pipeline.mjs',
+    args: '--verbose',
+    cron_restart: '30 11 * * *', // Daily 11:30am AEST (after correlation at 11am)
   },
 ];
 

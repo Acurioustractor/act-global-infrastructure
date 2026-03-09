@@ -1269,7 +1269,9 @@ export async function searchReceipts(params: {
   })
 }
 
-export async function getReceiptCalendarContext(txDate: string, days = 7) {
+export async function getReceiptCalendarContext(txDate: string, days = 7, vendor?: string) {
+  const params = new URLSearchParams({ days: String(days) })
+  if (vendor) params.set('vendor', vendor)
   return fetchApi<{
     success: boolean
     events: Array<{
@@ -1278,9 +1280,25 @@ export async function getReceiptCalendarContext(txDate: string, days = 7) {
       start_time: string
       end_time?: string
       location?: string
+      relevance?: number
+    }>
+    vendor_matched: Array<{
+      id: string
+      title: string
+      start_time: string
+      location?: string
+      relevance: number
+    }>
+    contextual: Array<{
+      id: string
+      title: string
+      start_time: string
+      location?: string
+      relevance: number
     }>
     count: number
-  }>(`/api/receipts/calendar-context/${txDate}?days=${days}`)
+    hint: string | null
+  }>(`/api/receipts/calendar-context/${txDate}?${params.toString()}`)
 }
 
 // ==========================================
@@ -3552,4 +3570,51 @@ export interface ProjectIntelligence {
 
 export async function getProjectIntelligence(code: string) {
   return fetchApi<ProjectIntelligence>(`/api/projects/${encodeURIComponent(code)}/intelligence`)
+}
+
+// Receipt Pipeline
+
+export interface PipelineFunnelStage {
+  stage: string
+  label: string
+  count: number
+  total_amount: number
+  stuck_count: number
+}
+
+export interface PipelineItem {
+  id: string
+  xero_transaction_id: string
+  dext_forwarded_email_id: number | null
+  gmail_message_id: string | null
+  calendar_event_id: string | null
+  stage: string
+  vendor_name: string | null
+  amount: number | null
+  transaction_date: string | null
+  matched_at: string | null
+  notes: string | null
+  created_at: string
+  updated_at: string
+}
+
+export interface PipelineSummary {
+  total_records: number
+  total_unreconciled_amount: number
+  reconciliation_rate: number
+  oldest_pending: string | null
+  stuck_count: number
+}
+
+export async function getReceiptPipeline(params?: { stage?: string; limit?: number }) {
+  const searchParams = new URLSearchParams()
+  if (params?.stage) searchParams.set('stage', params.stage)
+  if (params?.limit) searchParams.set('limit', String(params.limit))
+  const query = searchParams.toString() ? `?${searchParams.toString()}` : ''
+  return fetchApi<{
+    success: boolean
+    funnel: PipelineFunnelStage[]
+    items: PipelineItem[]
+    summary: PipelineSummary
+  }>(`/api/receipts/pipeline${query}`)
 }
