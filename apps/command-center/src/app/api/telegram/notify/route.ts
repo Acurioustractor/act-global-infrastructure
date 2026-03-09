@@ -5,9 +5,15 @@ export const maxDuration = 30
 import {
   sendDailyBriefing,
   checkGrantAlerts,
+  checkGrantDeadlineAlerts,
   checkFinanceAlerts,
   checkAndSendReminders,
   sendReflectionPrompt,
+  sendPreMeetingBriefings,
+  sendPostMeetingPrompts,
+  sendPostMeetingFallback,
+  checkRelationshipNudges,
+  sendWeeklyFinanceSummary,
 } from '@/lib/telegram/notifications'
 
 // Cron-triggered notification endpoint
@@ -26,16 +32,24 @@ export async function GET(req: NextRequest) {
   const results: Record<string, unknown> = {}
 
   try {
+    // Daily briefing now includes grants + finance sections inline
     if (type === 'daily' || type === 'all') {
       results.daily = await sendDailyBriefing()
     }
 
-    if (type === 'grants' || type === 'all') {
+    // Grants and finance are still callable independently for manual triggers,
+    // but NOT included in type=all (daily briefing covers them)
+    if (type === 'grants') {
       results.grants = await checkGrantAlerts()
     }
 
-    if (type === 'finance' || type === 'all') {
+    if (type === 'finance') {
       results.finance = await checkFinanceAlerts()
+    }
+
+    // Proactive grant deadline alerts (daily 6am)
+    if (type === 'grant_deadlines') {
+      results.grantDeadlines = await checkGrantDeadlineAlerts()
     }
 
     if (type === 'reminders' || type === 'all') {
@@ -45,6 +59,31 @@ export async function GET(req: NextRequest) {
     // Reflection runs on its own schedule — NOT included in type=all
     if (type === 'reflection') {
       results.reflection = await sendReflectionPrompt()
+    }
+
+    // Pre-meeting briefings (every 30 min)
+    if (type === 'pre-meeting') {
+      results.preMeeting = await sendPreMeetingBriefings()
+    }
+
+    // Post-meeting capture prompts (every 15 min)
+    if (type === 'post-meeting') {
+      results.postMeeting = await sendPostMeetingPrompts()
+    }
+
+    // Post-meeting fallback (daily 9pm — auto-create minimal records)
+    if (type === 'post-meeting-fallback') {
+      results.fallback = await sendPostMeetingFallback()
+    }
+
+    // Relationship nudges (part of daily, or standalone)
+    if (type === 'relationship-nudges') {
+      results.nudges = await checkRelationshipNudges()
+    }
+
+    // Weekly finance summary (Sunday evening)
+    if (type === 'weekly-finance') {
+      results.weeklyFinance = await sendWeeklyFinanceSummary()
     }
 
     return NextResponse.json({

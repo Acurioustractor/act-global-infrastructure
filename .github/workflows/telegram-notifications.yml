@@ -4,10 +4,22 @@ on:
   schedule:
     # Daily briefing at 8:00 AM AEST (22:00 UTC previous day)
     - cron: '0 22 * * *'
+    # Grant deadline alerts at 6:00 AM AEST (20:00 UTC previous day)
+    - cron: '0 20 * * *'
     # Reminder check every 5 minutes
     - cron: '*/5 * * * *'
     # Evening reflection prompt at 6:00 PM AEST (08:00 UTC)
     - cron: '0 8 * * *'
+    # Pre-meeting briefings every 30 minutes (7am-9pm AEST = 21:00-11:00 UTC)
+    - cron: '*/30 * * * *'
+    # Post-meeting capture every 15 minutes
+    - cron: '*/15 * * * *'
+    # Post-meeting fallback — 9pm AEST daily (11:00 UTC)
+    - cron: '0 11 * * *'
+    # Weekly finance summary — Sunday 6pm AEST (08:00 UTC Sunday)
+    - cron: '0 8 * * 0'
+    # Weekly project pulse — Monday 5:30am AEST (Sunday 19:30 UTC)
+    - cron: '30 19 * * 0'
 
   workflow_dispatch:
     inputs:
@@ -23,6 +35,13 @@ on:
           - finance
           - reminders
           - reflection
+          - pre-meeting
+          - post-meeting
+          - relationship-nudges
+          - post-meeting-fallback
+          - weekly-finance
+          - weekly-pulse
+          - grant_deadlines
 
 jobs:
   # Daily briefing + grants + finance (runs at 8am AEST only)
@@ -40,9 +59,9 @@ jobs:
         run: |
           TYPE="${{ github.event.inputs.type || 'daily' }}"
 
-          # For scheduled 8am run, send daily + grants + finance
+          # For scheduled 8am run, send daily briefing (includes grants + finance)
           if [ "${{ github.event_name }}" = "schedule" ]; then
-            TYPE="all"
+            TYPE="daily"
           fi
 
           RESPONSE=$(curl -sf -w "\n%{http_code}" \
@@ -58,6 +77,33 @@ jobs:
           if [ "$HTTP_CODE" != "200" ]; then
             echo "Notification request failed with status ${HTTP_CODE}"
             exit 1
+          fi
+
+  # Grant deadline alerts (runs at 6am AEST daily)
+  grant-deadline-alerts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 1
+    if: >-
+      (github.event_name == 'schedule' && github.event.schedule == '0 20 * * *') ||
+      (github.event_name == 'workflow_dispatch' && github.event.inputs.type == 'grant_deadlines')
+
+    steps:
+      - name: Send grant deadline alerts
+        env:
+          COMMAND_CENTER_URL: ${{ secrets.COMMAND_CENTER_URL }}
+          CRON_SECRET: ${{ secrets.CRON_SECRET }}
+        run: |
+          RESPONSE=$(curl -sf -w "\n%{http_code}" \
+            -H "Authorization: Bearer ${CRON_SECRET}" \
+            "${COMMAND_CENTER_URL}/api/telegram/notify?type=grant_deadlines")
+
+          HTTP_CODE=$(echo "$RESPONSE" | tail -n1)
+          BODY=$(echo "$RESPONSE" | head -n -1)
+
+          if echo "$BODY" | grep -q '"sent":0'; then
+            echo "No grant deadlines to alert"
+          else
+            echo "Response: ${BODY}"
           fi
 
   # Reminder check (runs every 5 minutes)
@@ -87,6 +133,145 @@ jobs:
             echo "No reminders due"
           else
             echo "Response: ${BODY}"
+          fi
+
+  # Pre-meeting briefings (every 30 min)
+  pre-meeting-briefings:
+    runs-on: ubuntu-latest
+    timeout-minutes: 1
+    if: >-
+      (github.event_name == 'schedule' && github.event.schedule == '*/30 * * * *') ||
+      (github.event_name == 'workflow_dispatch' && github.event.inputs.type == 'pre-meeting')
+
+    steps:
+      - name: Send pre-meeting briefings
+        env:
+          COMMAND_CENTER_URL: ${{ secrets.COMMAND_CENTER_URL }}
+          CRON_SECRET: ${{ secrets.CRON_SECRET }}
+        run: |
+          RESPONSE=$(curl -sf -w "\n%{http_code}" \
+            -H "Authorization: Bearer ${CRON_SECRET}" \
+            "${COMMAND_CENTER_URL}/api/telegram/notify?type=pre-meeting")
+
+          HTTP_CODE=$(echo "$RESPONSE" | tail -n1)
+          BODY=$(echo "$RESPONSE" | head -n -1)
+
+          if echo "$BODY" | grep -q '"sent":0'; then
+            echo "No upcoming meetings"
+          else
+            echo "Response: ${BODY}"
+          fi
+
+  # Post-meeting capture prompts (every 15 min)
+  post-meeting-capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 1
+    if: >-
+      (github.event_name == 'schedule' && github.event.schedule == '*/15 * * * *') ||
+      (github.event_name == 'workflow_dispatch' && github.event.inputs.type == 'post-meeting')
+
+    steps:
+      - name: Send post-meeting prompts
+        env:
+          COMMAND_CENTER_URL: ${{ secrets.COMMAND_CENTER_URL }}
+          CRON_SECRET: ${{ secrets.CRON_SECRET }}
+        run: |
+          RESPONSE=$(curl -sf -w "\n%{http_code}" \
+            -H "Authorization: Bearer ${CRON_SECRET}" \
+            "${COMMAND_CENTER_URL}/api/telegram/notify?type=post-meeting")
+
+          HTTP_CODE=$(echo "$RESPONSE" | tail -n1)
+          BODY=$(echo "$RESPONSE" | head -n -1)
+
+          if echo "$BODY" | grep -q '"sent":0'; then
+            echo "No recent meetings"
+          else
+            echo "Response: ${BODY}"
+          fi
+
+  # Post-meeting fallback (daily 9pm AEST — auto-create minimal meeting records)
+  post-meeting-fallback:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    if: >-
+      (github.event_name == 'schedule' && github.event.schedule == '0 11 * * *') ||
+      (github.event_name == 'workflow_dispatch' && github.event.inputs.type == 'post-meeting-fallback')
+
+    steps:
+      - name: Run post-meeting fallback
+        env:
+          COMMAND_CENTER_URL: ${{ secrets.COMMAND_CENTER_URL }}
+          CRON_SECRET: ${{ secrets.CRON_SECRET }}
+        run: |
+          RESPONSE=$(curl -sf -w "\n%{http_code}" \
+            -H "Authorization: Bearer ${CRON_SECRET}" \
+            "${COMMAND_CENTER_URL}/api/telegram/notify?type=post-meeting-fallback")
+
+          HTTP_CODE=$(echo "$RESPONSE" | tail -n1)
+          BODY=$(echo "$RESPONSE" | head -n -1)
+
+          if echo "$BODY" | grep -q '"created":0'; then
+            echo "No meetings to auto-log"
+          else
+            echo "Response: ${BODY}"
+          fi
+
+  # Weekly finance summary (Sunday 6pm AEST)
+  weekly-finance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    if: >-
+      (github.event_name == 'schedule' && github.event.schedule == '0 8 * * 0') ||
+      (github.event_name == 'workflow_dispatch' && github.event.inputs.type == 'weekly-finance')
+
+    steps:
+      - name: Send weekly finance summary
+        env:
+          COMMAND_CENTER_URL: ${{ secrets.COMMAND_CENTER_URL }}
+          CRON_SECRET: ${{ secrets.CRON_SECRET }}
+        run: |
+          RESPONSE=$(curl -sf -w "\n%{http_code}" \
+            -H "Authorization: Bearer ${CRON_SECRET}" \
+            "${COMMAND_CENTER_URL}/api/telegram/notify?type=weekly-finance")
+
+          HTTP_CODE=$(echo "$RESPONSE" | tail -n1)
+          BODY=$(echo "$RESPONSE" | head -n -1)
+
+          echo "Status: ${HTTP_CODE}"
+          echo "Response: ${BODY}"
+
+          if [ "$HTTP_CODE" != "200" ]; then
+            echo "Weekly finance summary failed"
+            exit 1
+          fi
+
+  # Weekly project pulse (Monday 5:30am AEST)
+  weekly-pulse:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    if: >-
+      (github.event_name == 'schedule' && github.event.schedule == '30 19 * * 0') ||
+      (github.event_name == 'workflow_dispatch' && github.event.inputs.type == 'weekly-pulse')
+
+    steps:
+      - name: Send weekly project pulse
+        env:
+          COMMAND_CENTER_URL: ${{ secrets.COMMAND_CENTER_URL }}
+          CRON_SECRET: ${{ secrets.CRON_SECRET }}
+        run: |
+          RESPONSE=$(curl -sf -w "\n%{http_code}" \
+            -H "Authorization: Bearer ${CRON_SECRET}" \
+            "${COMMAND_CENTER_URL}/api/telegram/notify?type=weekly-pulse")
+
+          HTTP_CODE=$(echo "$RESPONSE" | tail -n1)
+          BODY=$(echo "$RESPONSE" | head -n -1)
+
+          echo "Status: ${HTTP_CODE}"
+          echo "Response: ${BODY}"
+
+          if [ "$HTTP_CODE" != "200" ]; then
+            echo "Weekly pulse failed"
+            exit 1
           fi
 
   # Evening reflection prompt (runs at 6pm AEST)

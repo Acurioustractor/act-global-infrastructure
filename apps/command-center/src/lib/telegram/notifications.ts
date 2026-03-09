@@ -76,8 +76,13 @@ async function buildDailyBriefing(): Promise<string> {
   const today = getBrisbaneDate()
   const weekFromNow = getBrisbaneDateOffset(7)
   const fourteenDaysAgo = new Date(now.getTime() - 14 * 86400000).toISOString()
+  const yesterday = new Date(now.getTime() - 24 * 60 * 60 * 1000).toISOString()
+  const sevenDaysAgo = new Date(now.getTime() - 7 * 86400000).toISOString()
 
-  const [calendar, overdue, followUps, staleContacts, grants] = await Promise.all([
+  const [
+    calendar, overdue, followUps, staleContacts, grantsClosing,
+    newGrants, grantApps, overdueInvoices, pendingReceipts, snapshots,
+  ] = await Promise.all([
     // Today's calendar — all sources
     supabase
       .from('calendar_events')
@@ -105,14 +110,14 @@ async function buildDailyBriefing(): Promise<string> {
       .order('follow_up_date', { ascending: true })
       .limit(10),
 
-    // Contacts needing follow-up
+    // Contacts needing follow-up (capped at 3)
     supabase
       .from('ghl_contacts')
       .select('full_name, company_name, last_contact_date')
       .in('engagement_status', ['active', 'prospect'])
       .lt('last_contact_date', fourteenDaysAgo)
       .order('last_contact_date', { ascending: true })
-      .limit(5),
+      .limit(3),
 
     // Grants closing within 7 days
     supabase
@@ -123,21 +128,78 @@ async function buildDailyBriefing(): Promise<string> {
       .gte('closes_at', today)
       .order('closes_at', { ascending: true })
       .limit(5),
+
+    // New grants discovered in last 24h (for consolidated grant alerts)
+    supabase
+      .from('grant_opportunities')
+      .select('name, provider, amount_max, closes_at, fit_score, aligned_projects')
+      .gte('discovered_at', yesterday)
+      .order('fit_score', { ascending: false })
+      .limit(5),
+
+    // Grant application status changes in last 24h
+    supabase
+      .from('grant_applications')
+      .select('application_name, status, updated_at')
+      .gte('updated_at', yesterday)
+      .order('updated_at', { ascending: false })
+      .limit(5),
+
+    // Overdue invoices (for consolidated finance alerts)
+    supabase
+      .from('xero_invoices')
+      .select('invoice_number, contact_name, amount_due, due_date')
+      .eq('type', 'ACCREC')
+      .in('status', ['AUTHORISED', 'SUBMITTED'])
+      .gt('amount_due', 0)
+      .lt('due_date', today)
+      .order('due_date', { ascending: true })
+      .limit(10),
+
+    // Pending receipts older than 7 days
+    supabase
+      .from('receipt_matches')
+      .select('vendor_name, amount, transaction_date')
+      .eq('status', 'pending')
+      .lt('created_at', sevenDaysAgo)
+      .order('transaction_date', { ascending: true })
+      .limit(10),
+
+    // Cashflow snapshots
+    supabase
+      .from('financial_snapshots')
+      .select('income, expenses, closing_balance')
+      .order('month', { ascending: false })
+      .limit(6),
   ])
 
-  const lines: string[] = []
+  const sections: string[] = []
+
+  // Collect summary counts for header
+  const events = calendar.data || []
+  const overdueItems = overdue.data || []
+  const grantItems = grantsClosing.data || []
+  const newGrantItems = newGrants.data || []
+  const invoiceItems = overdueInvoices.data || []
+
+  // Summary header
   const dayName = now.toLocaleDateString('en-AU', { weekday: 'long', day: 'numeric', month: 'long' })
-  lines.push(`Good morning! Here's your briefing for ${dayName}.\n`)
+  const summaryParts: string[] = []
+  if (events.length > 0) summaryParts.push(`${events.length} events`)
+  if (overdueItems.length > 0) summaryParts.push(`${overdueItems.length} overdue`)
+  if (grantItems.length > 0) summaryParts.push(`${grantItems.length} grant${grantItems.length === 1 ? '' : 's'} closing`)
+  if (invoiceItems.length > 0) summaryParts.push(`${invoiceItems.length} overdue invoice${invoiceItems.length === 1 ? '' : 's'}`)
+
+  const summaryLine = summaryParts.length > 0 ? summaryParts.join(' | ') : 'All clear'
+  sections.push(`Good morning! ${dayName}\n${summaryLine}`)
 
   // Calendar — grouped by time blocks with source badges
-  const events = calendar.data || []
   if (events.length > 0) {
-    lines.push(`YOUR SCHEDULE (${events.length} events)`)
+    const calLines: string[] = [`YOUR SCHEDULE (${events.length})`]
 
     const allDay = events.filter((e: { is_all_day?: boolean }) => e.is_all_day)
     const timed = events.filter((e: { is_all_day?: boolean }) => !e.is_all_day)
 
-    // Group timed events by time block
     const morning: typeof timed = []
     const afternoon: typeof timed = []
     const evening: typeof timed = []
@@ -153,7 +215,6 @@ async function buildDailyBriefing(): Promise<string> {
       const endTime = e.end_time ? new Date(e.end_time).toLocaleTimeString('en-AU', { hour: '2-digit', minute: '2-digit', hour12: false }) : ''
       const timeStr = endTime && endTime !== time ? `${time}–${endTime}` : time
       const source = e.sync_source === 'notion' ? ' [Notion]' : (e.calendar_name && e.calendar_name !== 'Primary' ? ` [${e.calendar_name}]` : '')
-      // Extract conference link from metadata
       let confLink = ''
       try {
         const meta = typeof e.metadata === 'string' ? JSON.parse(e.metadata) : e.metadata
@@ -164,95 +225,168 @@ async function buildDailyBriefing(): Promise<string> {
       return `  ${timeStr}  ${e.title}${confLink}${e.location ? ` (${e.location})` : ''}${source}`
     }
 
-    if (morning.length > 0) {
-      lines.push('MORNING')
-      for (const e of morning) lines.push(formatEvent(e))
-    }
-    if (afternoon.length > 0) {
-      lines.push('AFTERNOON')
-      for (const e of afternoon) lines.push(formatEvent(e))
-    }
-    if (evening.length > 0) {
-      lines.push('EVENING')
-      for (const e of evening) lines.push(formatEvent(e))
-    }
+    if (morning.length > 0) { calLines.push('MORNING'); for (const e of morning) calLines.push(formatEvent(e)) }
+    if (afternoon.length > 0) { calLines.push('AFTERNOON'); for (const e of afternoon) calLines.push(formatEvent(e)) }
+    if (evening.length > 0) { calLines.push('EVENING'); for (const e of evening) calLines.push(formatEvent(e)) }
     if (allDay.length > 0) {
-      lines.push('ALL DAY')
+      calLines.push('ALL DAY')
       for (const e of allDay) {
         const source = e.sync_source === 'notion' ? ' [Notion]' : ''
-        lines.push(`  ${e.title}${e.location ? ` — ${e.location}` : ''}${source}`)
+        calLines.push(`  ${e.title}${e.location ? ` — ${e.location}` : ''}${source}`)
       }
     }
-    lines.push('')
-  } else {
-    lines.push('CALENDAR: No events today.\n')
+    sections.push(calLines.join('\n'))
   }
 
   // Overdue actions
-  const overdueItems = overdue.data || []
   if (overdueItems.length > 0) {
-    lines.push(`OVERDUE ACTIONS (${overdueItems.length})`)
+    const lines = [`OVERDUE ACTIONS (${overdueItems.length})`]
     for (const item of overdueItems) {
       lines.push(`  [${item.project_code}] ${item.title} (due ${item.follow_up_date})`)
     }
-    lines.push('')
+    sections.push(lines.join('\n'))
   }
 
   // Upcoming follow-ups
   const upcomingItems = followUps.data || []
   if (upcomingItems.length > 0) {
-    lines.push(`UPCOMING THIS WEEK (${upcomingItems.length})`)
+    const lines = [`UPCOMING THIS WEEK (${upcomingItems.length})`]
     for (const item of upcomingItems) {
       lines.push(`  [${item.project_code}] ${item.title} (${item.follow_up_date})`)
     }
-    lines.push('')
+    sections.push(lines.join('\n'))
   }
 
-  // Contacts needing attention
+  // Contacts needing attention (capped at 3)
   const contacts = staleContacts.data || []
   if (contacts.length > 0) {
-    lines.push(`CONTACTS NEEDING FOLLOW-UP (${contacts.length})`)
+    const lines = [`CONTACTS NEEDING FOLLOW-UP (${contacts.length})`]
     for (const c of contacts) {
       const days = Math.floor((now.getTime() - new Date(c.last_contact_date).getTime()) / 86400000)
       lines.push(`  ${c.full_name}${c.company_name ? ` (${c.company_name})` : ''} — ${days} days`)
     }
-    lines.push('')
+    sections.push(lines.join('\n'))
   }
 
+  // --- Consolidated Grant Alerts ---
   // Grants closing soon
-  const grantItems = grants.data || []
   if (grantItems.length > 0) {
-    lines.push(`GRANTS CLOSING SOON (${grantItems.length})`)
+    const lines = [`GRANTS CLOSING SOON (${grantItems.length})`]
     for (const g of grantItems) {
       const amount = g.amount_max ? ` ($${Number(g.amount_max).toLocaleString()})` : ''
       lines.push(`  ${g.name} — ${g.provider}${amount} — closes ${g.closes_at}`)
     }
-    lines.push('')
+    sections.push(lines.join('\n'))
   }
 
-  // Intelligence insights
+  // New grants discovered
+  if (newGrantItems.length > 0) {
+    const lines = [`NEW GRANTS DISCOVERED (${newGrantItems.length})`]
+    for (const g of newGrantItems) {
+      const amount = g.amount_max ? ` ($${Number(g.amount_max).toLocaleString()})` : ''
+      const fit = g.fit_score ? ` — fit: ${g.fit_score}%` : ''
+      const projects = (g.aligned_projects as string[] | null)?.length
+        ? ` — ${(g.aligned_projects as string[]).join(', ')}`
+        : ''
+      const closes = g.closes_at ? ` — closes ${g.closes_at}` : ''
+      lines.push(`  ${g.name} — ${g.provider}${amount}${fit}${projects}${closes}`)
+    }
+    sections.push(lines.join('\n'))
+  }
+
+  // Grant application updates
+  const recentApps = grantApps.data || []
+  if (recentApps.length > 0) {
+    const lines = [`GRANT APPLICATION UPDATES (${recentApps.length})`]
+    for (const a of recentApps) {
+      lines.push(`  ${a.application_name} — ${a.status}`)
+    }
+    sections.push(lines.join('\n'))
+  }
+
+  // --- Consolidated Finance Alerts ---
+  if (invoiceItems.length > 0) {
+    const totalOverdue = invoiceItems.reduce((sum, inv) => sum + (parseFloat(String(inv.amount_due)) || 0), 0)
+    const lines = [`OVERDUE INVOICES (${invoiceItems.length}, $${totalOverdue.toLocaleString('en-AU', { minimumFractionDigits: 2 })})`]
+    for (const inv of invoiceItems) {
+      const daysOverdue = Math.floor((now.getTime() - new Date(inv.due_date).getTime()) / 86400000)
+      lines.push(`  ${inv.contact_name || 'Unknown'} — $${Number(inv.amount_due).toLocaleString('en-AU', { minimumFractionDigits: 2 })} — ${daysOverdue}d overdue (${inv.invoice_number || ''})`)
+    }
+    sections.push(lines.join('\n'))
+  }
+
+  const receiptItems = pendingReceipts.data || []
+  if (receiptItems.length > 0) {
+    const total = receiptItems.reduce((sum, r) => sum + (parseFloat(String(r.amount)) || 0), 0)
+    const lines = [`RECEIPTS PENDING > 7 DAYS (${receiptItems.length}, $${total.toFixed(2)})`]
+    for (const r of receiptItems) {
+      lines.push(`  ${r.vendor_name || 'Unknown'} — $${Number(r.amount).toFixed(2)} (${r.transaction_date})`)
+    }
+    sections.push(lines.join('\n'))
+  }
+
+  // Receipt pipeline stuck items
+  const { data: stuckPipeline } = await supabase
+    .from('receipt_pipeline_status')
+    .select('vendor_name, amount, stage')
+    .not('stage', 'eq', 'reconciled')
+    .lt('updated_at', new Date(now.getTime() - 14 * 86400000).toISOString())
+    .limit(5)
+
+  if (stuckPipeline && stuckPipeline.length > 0) {
+    const lines = [`RECEIPT PIPELINE — ${stuckPipeline.length} STUCK >14 DAYS`]
+    for (const item of stuckPipeline) {
+      lines.push(`  ${item.vendor_name || 'Unknown'} — $${Number(item.amount).toFixed(2)} — ${item.stage}`)
+    }
+    sections.push(lines.join('\n'))
+  }
+
+  // Cashflow runway warning
+  const snapshotItems = snapshots.data || []
+  if (snapshotItems.length >= 3) {
+    const currentBalance = snapshotItems[0]?.closing_balance || 0
+    let totalBurn = 0
+    for (const s of snapshotItems) {
+      const burn = (s.expenses || 0) - (s.income || 0)
+      totalBurn += Math.max(0, burn)
+    }
+    const avgBurn = totalBurn / snapshotItems.length
+    const runwayMonths = avgBurn > 0 ? currentBalance / avgBurn : Infinity
+
+    if (runwayMonths < 3 && runwayMonths > 0) {
+      const lines = [`CASHFLOW WARNING — ${runwayMonths.toFixed(1)} MONTHS RUNWAY`]
+      lines.push(`  Balance: $${Number(currentBalance).toLocaleString('en-AU', { minimumFractionDigits: 2 })}`)
+      lines.push(`  Avg monthly burn: $${Math.round(avgBurn).toLocaleString('en-AU')}`)
+      if (runwayMonths < 1) {
+        lines.push(`  CRITICAL: Less than 1 month of runway remaining`)
+      }
+      sections.push(lines.join('\n'))
+    }
+  }
+
+  // Intelligence insights (capped at 3)
   const insightsSummary = await getInsightsSummary()
   if (insightsSummary) {
-    lines.push(insightsSummary)
+    sections.push(insightsSummary)
   }
 
   // Relationship decay alerts
   const relationshipAlerts = await getRelationshipAlerts()
   if (relationshipAlerts) {
-    lines.push(relationshipAlerts)
+    sections.push(relationshipAlerts)
   }
 
-  // Sync health
+  // Sync health — only critical issues
   const syncHealth = await getSyncHealthSummary()
   if (syncHealth) {
-    lines.push(syncHealth)
+    sections.push(syncHealth)
   }
 
-  if (lines.length <= 2) {
-    lines.push('All clear — nothing urgent today.')
+  if (sections.length <= 1) {
+    sections.push('All clear — nothing urgent today.')
   }
 
-  return lines.join('\n')
+  return sections.join('\n\n')
 }
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -333,6 +467,86 @@ export async function checkGrantAlerts(): Promise<{ sent: number; alerts: string
     } catch (err) {
       console.error(`Grant alert to ${chatId}:`, (err as Error).message)
     }
+  }
+
+  return { sent, alerts }
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// PROACTIVE GRANT DEADLINE ALERTS
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+export async function checkGrantDeadlineAlerts(): Promise<{ sent: number; alerts: string[] }> {
+  const chatIds = getNotifyChatIds()
+  const alerts: string[] = []
+  const now = getBrisbaneNow()
+  const today = getBrisbaneDate()
+  const weekFromNow = getBrisbaneDateOffset(7)
+
+  // Get grants closing within 7 days that haven't been alerted today
+  const { data: closingGrants } = await supabase
+    .from('grant_opportunities')
+    .select('id, name, provider, closes_at, amount_max, application_status, aligned_projects, last_deadline_alert_at')
+    .not('application_status', 'in', '("not_relevant","next_round")')
+    .lte('closes_at', weekFromNow)
+    .gte('closes_at', today)
+    .order('closes_at', { ascending: true })
+
+  if (!closingGrants || closingGrants.length === 0) return { sent: 0, alerts: [] }
+
+  const grantLines: string[] = []
+  const grantIdsToUpdate: string[] = []
+
+  for (const g of closingGrants) {
+    // Skip if already alerted today
+    if (g.last_deadline_alert_at) {
+      const lastAlert = new Date(g.last_deadline_alert_at).toISOString().split('T')[0]
+      if (lastAlert === today) continue
+    }
+
+    const daysLeft = Math.ceil(
+      (new Date(g.closes_at).getTime() - now.getTime()) / (1000 * 60 * 60 * 24)
+    )
+    const amount = g.amount_max ? ` ($${Number(g.amount_max).toLocaleString()})` : ''
+    const projects = (g.aligned_projects as string[] | null)?.length
+      ? ` [${(g.aligned_projects as string[]).join(', ')}]`
+      : ''
+
+    let prefix: string
+    if (daysLeft <= 1) {
+      prefix = 'URGENT'
+    } else if (daysLeft <= 3) {
+      prefix = 'SOON'
+    } else {
+      prefix = 'UPCOMING'
+    }
+
+    const deadlineLabel = daysLeft <= 1 ? 'closes TOMORROW' : `closes in ${daysLeft} days`
+    grantLines.push(`  [${prefix}] ${g.name} — ${deadlineLabel}${amount}${projects}`)
+    grantIdsToUpdate.push(g.id)
+  }
+
+  if (grantLines.length === 0) return { sent: 0, alerts: [] }
+
+  const message = `GRANT DEADLINE ALERTS (${grantLines.length})\n\n${grantLines.join('\n')}`
+  alerts.push(message)
+
+  let sent = 0
+  for (const chatId of chatIds) {
+    try {
+      await sendNotification(chatId, message)
+      sent++
+    } catch (err) {
+      console.error(`Grant deadline alert to ${chatId}:`, (err as Error).message)
+    }
+  }
+
+  // Update last_deadline_alert_at for all alerted grants
+  if (sent > 0 && grantIdsToUpdate.length > 0) {
+    await supabase
+      .from('grant_opportunities')
+      .update({ last_deadline_alert_at: now.toISOString() })
+      .in('id', grantIdsToUpdate)
   }
 
   return { sent, alerts }
@@ -528,30 +742,14 @@ export async function getInsightsSummary(): Promise<string> {
     .in('priority', ['high', 'medium'])
     .order('priority', { ascending: true })
     .order('created_at', { ascending: false })
-    .limit(8)
+    .limit(3)
 
   if (!insights || insights.length === 0) return ''
 
-  const highPriority = insights.filter((i) => i.priority === 'high')
-  const medPriority = insights.filter((i) => i.priority === 'medium')
-
-  const lines: string[] = []
-
-  if (highPriority.length > 0) {
-    lines.push(`INTELLIGENCE — HIGH PRIORITY (${highPriority.length})`)
-    for (const i of highPriority) {
-      lines.push(`  ${i.title}`)
-      if (i.description) lines.push(`    ${i.description.substring(0, 100)}`)
-    }
-    lines.push('')
-  }
-
-  if (medPriority.length > 0) {
-    lines.push(`INTELLIGENCE — INSIGHTS (${medPriority.length})`)
-    for (const i of medPriority.slice(0, 5)) {
-      lines.push(`  ${i.title}`)
-    }
-    lines.push('')
+  const lines: string[] = [`INTELLIGENCE (${insights.length})`]
+  for (const i of insights) {
+    const tag = i.priority === 'high' ? '[!] ' : ''
+    lines.push(`  ${tag}${i.title}`)
   }
 
   return lines.join('\n')
@@ -659,19 +857,11 @@ export async function getSyncHealthSummary(): Promise<string> {
     }
   }
 
-  if (critical.length === 0 && stale.length === 0) return ''
+  // Only report critical issues in daily briefing (stale warnings are noise)
+  if (critical.length === 0) return ''
 
-  const lines: string[] = []
-  if (critical.length > 0) {
-    lines.push(`DATA SYNC — CRITICAL`)
-    for (const c of critical) lines.push(`  ${c}`)
-    lines.push('')
-  }
-  if (stale.length > 0) {
-    lines.push(`DATA SYNC — STALE`)
-    for (const s of stale) lines.push(`  ${s}`)
-    lines.push('')
-  }
+  const lines: string[] = [`DATA SYNC — CRITICAL`]
+  for (const c of critical) lines.push(`  ${c}`)
 
   return lines.join('\n')
 }
@@ -719,6 +909,416 @@ export async function sendReactiveNotification(
           await api.sendMessage(chatId, chunks[i])
         }
       }
+      sent++
+    } catch (err) {
+      errors.push(`Chat ${chatId}: ${(err as Error).message}`)
+    }
+  }
+
+  return { sent, errors }
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// PRE-MEETING BRIEFINGS
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+export async function sendPreMeetingBriefings(): Promise<{ sent: number; errors: string[] }> {
+  const chatIds = getNotifyChatIds()
+  const errors: string[] = []
+  let sent = 0
+  const now = getBrisbaneNow()
+
+  // Quiet hours check (10pm-7am Brisbane)
+  const hour = now.getHours()
+  if (hour >= 22 || hour < 7) return { sent: 0, errors: [] }
+
+  // Find events starting in 25-35 minutes
+  const from = new Date(now.getTime() + 25 * 60000).toISOString()
+  const to = new Date(now.getTime() + 35 * 60000).toISOString()
+
+  const { data: events } = await supabase
+    .from('calendar_events')
+    .select('title, start_time, attendees, location')
+    .gte('start_time', from)
+    .lte('start_time', to)
+
+  if (!events || events.length === 0) return { sent: 0, errors: [] }
+
+  for (const event of events) {
+    const attendees: Array<{ email?: string; displayName?: string }> = Array.isArray(event.attendees)
+      ? event.attendees
+      : []
+    const externalAttendees = attendees.filter(
+      (a) => a.email && !a.email.includes('calendar.google.com') && !a.email.endsWith('@act.place')
+    )
+    if (externalAttendees.length === 0) continue
+
+    // Build contact context for each attendee
+    const contactLines: string[] = []
+    for (const att of externalAttendees.slice(0, 5)) {
+      const { data: contact } = await supabase
+        .from('ghl_contacts')
+        .select('full_name, company_name, last_contact_date, tags')
+        .eq('email', att.email!)
+        .maybeSingle()
+
+      if (contact) {
+        const daysSince = contact.last_contact_date
+          ? Math.floor((now.getTime() - new Date(contact.last_contact_date).getTime()) / 86400000)
+          : null
+
+        // Get last communication topic
+        const { data: lastComm } = await supabase
+          .from('communications_history')
+          .select('subject')
+          .or(`contact_id.eq.${att.email}`)
+          .order('communication_date', { ascending: false })
+          .limit(1)
+          .maybeSingle()
+
+        const parts = [contact.full_name || att.displayName || att.email]
+        if (contact.company_name) parts[0] += ` (${contact.company_name})`
+        if (daysSince !== null) parts.push(`last spoke ${daysSince}d ago`)
+        if (lastComm?.subject) parts.push(`re: ${lastComm.subject.substring(0, 40)}`)
+        contactLines.push(`  ${parts.join(' — ')}`)
+      } else {
+        contactLines.push(`  ${att.displayName || att.email} — new contact`)
+      }
+    }
+
+    const time = new Date(event.start_time).toLocaleTimeString('en-AU', {
+      hour: '2-digit', minute: '2-digit', hour12: false,
+    })
+    const message = [
+      `MEETING IN 30 MIN — ${time}`,
+      event.title,
+      event.location ? `Location: ${event.location}` : '',
+      '',
+      ...contactLines,
+    ].filter(Boolean).join('\n')
+
+    for (const chatId of chatIds) {
+      try {
+        await sendNotification(chatId, message)
+        sent++
+      } catch (err) {
+        errors.push(`Chat ${chatId}: ${(err as Error).message}`)
+      }
+    }
+  }
+
+  return { sent, errors }
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// POST-MEETING KNOWLEDGE CAPTURE
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+export async function sendPostMeetingPrompts(): Promise<{ sent: number; errors: string[] }> {
+  const chatIds = getNotifyChatIds()
+  const errors: string[] = []
+  let sent = 0
+  const now = getBrisbaneNow()
+
+  // Quiet hours check
+  const hour = now.getHours()
+  if (hour >= 22 || hour < 7) return { sent: 0, errors: [] }
+
+  // Find events that ended 5-15 minutes ago
+  const from = new Date(now.getTime() - 15 * 60000).toISOString()
+  const to = new Date(now.getTime() - 5 * 60000).toISOString()
+
+  const { data: events } = await supabase
+    .from('calendar_events')
+    .select('title, start_time, end_time, attendees')
+    .gte('end_time', from)
+    .lte('end_time', to)
+
+  if (!events || events.length === 0) return { sent: 0, errors: [] }
+
+  for (const event of events) {
+    // Skip solo/focus blocks — need 2+ attendees
+    const attendees: Array<{ email?: string; displayName?: string }> = Array.isArray(event.attendees)
+      ? event.attendees
+      : []
+    if (attendees.length < 2) continue
+
+    // Check if notes already exist for this event
+    const { data: existing } = await supabase
+      .from('project_knowledge')
+      .select('id')
+      .eq('knowledge_type', 'meeting')
+      .ilike('title', `%${event.title}%`)
+      .gte('recorded_at', new Date(now.getTime() - 4 * 3600000).toISOString())
+      .maybeSingle()
+
+    if (existing) continue // Already captured
+
+    const names = attendees
+      .map((a) => a.displayName || a.email?.split('@')[0])
+      .filter((n) => n && !n?.endsWith('@act.place'))
+      .slice(0, 4)
+      .join(', ')
+
+    const message = `You just finished "${event.title}"${names ? ` with ${names}` : ''}. Send a voice note with takeaways and I'll save them.`
+
+    for (const chatId of chatIds) {
+      try {
+        await sendNotification(chatId, message)
+        sent++
+      } catch (err) {
+        errors.push(`Chat ${chatId}: ${(err as Error).message}`)
+      }
+    }
+  }
+
+  return { sent, errors }
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// POST-MEETING FALLBACK (auto-create minimal records)
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+export async function sendPostMeetingFallback(): Promise<{ created: number; errors: string[] }> {
+  const chatIds = getNotifyChatIds()
+  const errors: string[] = []
+  let created = 0
+  const now = getBrisbaneNow()
+
+  // Find events that ended today (run at 9pm, catch everything from today)
+  const todayStart = `${getBrisbaneDate()}T00:00:00.000Z`
+
+  const { data: events } = await supabase
+    .from('calendar_events')
+    .select('title, start_time, end_time, attendees, google_event_id, detected_project_code, ghl_contact_ids')
+    .gte('end_time', todayStart)
+    .lte('end_time', now.toISOString())
+
+  if (!events || events.length === 0) return { created: 0, errors: [] }
+
+  for (const event of events) {
+    // Skip solo/focus blocks — need 2+ attendees
+    const attendees: Array<{ email?: string; displayName?: string }> = Array.isArray(event.attendees)
+      ? event.attendees
+      : []
+    if (attendees.length < 2) continue
+
+    // Check if notes already exist for this event
+    const { data: existing } = await supabase
+      .from('project_knowledge')
+      .select('id')
+      .eq('knowledge_type', 'meeting')
+      .ilike('title', `%${event.title}%`)
+      .gte('recorded_at', todayStart)
+      .maybeSingle()
+
+    if (existing) continue // Already captured
+
+    // Also check by source_ref to avoid duplicates from previous fallback runs
+    if (event.google_event_id) {
+      const { data: byRef } = await supabase
+        .from('project_knowledge')
+        .select('id')
+        .eq('source_ref', event.google_event_id)
+        .maybeSingle()
+
+      if (byRef) continue
+    }
+
+    const names = attendees
+      .map((a) => a.displayName || a.email?.split('@')[0])
+      .filter((n) => n && !n?.endsWith('@act.place'))
+      .slice(0, 6)
+      .join(', ')
+
+    // Auto-create minimal record
+    const { error: insertError } = await supabase
+      .from('project_knowledge')
+      .insert({
+        knowledge_type: 'meeting',
+        title: event.title,
+        content: `Calendar meeting — no notes captured. Attendees: ${names || 'unknown'}`,
+        source_type: 'calendar_fallback',
+        source_ref: event.google_event_id || null,
+        participants: names ? names.split(', ') : [],
+        contact_ids: event.ghl_contact_ids || [],
+        project_code: event.detected_project_code || null,
+        importance: 'low',
+        recorded_at: event.start_time,
+      })
+
+    if (insertError) {
+      errors.push(`${event.title}: ${insertError.message}`)
+      continue
+    }
+
+    created++
+
+    // Send brief notification
+    for (const chatId of chatIds) {
+      try {
+        await sendNotification(chatId, `Auto-logged "${event.title}" — send notes anytime to enrich it.`)
+      } catch (err) {
+        errors.push(`Chat ${chatId}: ${(err as Error).message}`)
+      }
+    }
+  }
+
+  return { created, errors }
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// RELATIONSHIP NUDGES
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+export async function checkRelationshipNudges(): Promise<{ sent: number; nudges: string[] }> {
+  const chatIds = getNotifyChatIds()
+  const nudges: string[] = []
+  const now = getBrisbaneNow()
+  const fourteenDaysAgo = new Date(now.getTime() - 14 * 86400000).toISOString()
+
+  // Find important contacts not contacted in 14+ days
+  const { data: staleContacts } = await supabase
+    .from('ghl_contacts')
+    .select('id, ghl_id, full_name, company_name, last_contact_date, tags')
+    .in('engagement_status', ['active', 'prospect'])
+    .lt('last_contact_date', fourteenDaysAgo)
+    .or('tags.cs.{"partner"},tags.cs.{"funder"},tags.cs.{"key-relationship"},tags.cs.{"responsive"}')
+    .not('full_name', 'is', null)
+    .order('last_contact_date', { ascending: true })
+    .limit(3)
+
+  if (!staleContacts || staleContacts.length === 0) return { sent: 0, nudges: [] }
+
+  for (const contact of staleContacts) {
+    const daysSince = Math.floor((now.getTime() - new Date(contact.last_contact_date).getTime()) / 86400000)
+
+    // Get last communication topic
+    const { data: lastComm } = await supabase
+      .from('communications_history')
+      .select('subject, communication_date')
+      .eq('contact_id', contact.id)
+      .order('communication_date', { ascending: false })
+      .limit(1)
+      .maybeSingle()
+
+    // Get open pipeline value
+    const { data: deals } = await supabase
+      .from('ghl_opportunities')
+      .select('monetary_value')
+      .eq('contact_id', contact.ghl_id)
+      .eq('status', 'open')
+
+    const pipelineValue = (deals || []).reduce((sum, d) => sum + (d.monetary_value || 0), 0)
+
+    const parts = [`Haven't spoken with ${contact.full_name} in ${daysSince} days.`]
+    if (lastComm?.subject) parts.push(`Last topic: ${lastComm.subject.substring(0, 50)}`)
+    if (pipelineValue > 0) parts.push(`Open pipeline: $${pipelineValue.toLocaleString('en-AU')}`)
+
+    nudges.push(parts.join(' '))
+  }
+
+  if (nudges.length === 0) return { sent: 0, nudges: [] }
+
+  const message = `RELATIONSHIP NUDGES\n\n${nudges.map((n, i) => `${i + 1}. ${n}`).join('\n')}`
+  let sent = 0
+
+  for (const chatId of chatIds) {
+    try {
+      await sendNotification(chatId, message)
+      sent++
+    } catch (err) {
+      console.error(`Nudge to ${chatId}:`, (err as Error).message)
+    }
+  }
+
+  return { sent, nudges }
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// WEEKLY FINANCE SUMMARY
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+export async function sendWeeklyFinanceSummary(): Promise<{ sent: number; errors: string[] }> {
+  const chatIds = getNotifyChatIds()
+  const errors: string[] = []
+  let sent = 0
+  const now = getBrisbaneNow()
+  const sevenDaysAgo = new Date(now.getTime() - 7 * 86400000).toISOString()
+  const today = getBrisbaneDate()
+
+  const [transactions, snapshots, overdueInvoices, upcomingBills] = await Promise.all([
+    supabase
+      .from('xero_transactions')
+      .select('amount, type')
+      .gte('date', sevenDaysAgo.split('T')[0])
+      .lte('date', today),
+    supabase
+      .from('financial_snapshots')
+      .select('closing_balance')
+      .order('month', { ascending: false })
+      .limit(1),
+    supabase
+      .from('xero_invoices')
+      .select('contact_name, amount_due, due_date')
+      .eq('type', 'ACCREC')
+      .in('status', ['AUTHORISED', 'SUBMITTED'])
+      .gt('amount_due', 0)
+      .lt('due_date', today)
+      .order('due_date', { ascending: true })
+      .limit(5),
+    supabase
+      .from('xero_invoices')
+      .select('contact_name, amount_due, due_date')
+      .eq('type', 'ACCPAY')
+      .in('status', ['AUTHORISED', 'SUBMITTED'])
+      .gt('amount_due', 0)
+      .gte('due_date', today)
+      .lte('due_date', getBrisbaneDateOffset(14))
+      .order('due_date', { ascending: true })
+      .limit(5),
+  ])
+
+  const txns = transactions.data || []
+  const income = txns.filter((t) => t.type === 'RECEIVE').reduce((sum, t) => sum + Math.abs(t.amount || 0), 0)
+  const spend = txns.filter((t) => t.type === 'SPEND').reduce((sum, t) => sum + Math.abs(t.amount || 0), 0)
+  const net = income - spend
+  const balance = snapshots.data?.[0]?.closing_balance || 0
+  const overdueItems = overdueInvoices.data || []
+  const overdueTotal = overdueItems.reduce((sum, inv) => sum + (parseFloat(String(inv.amount_due)) || 0), 0)
+  const upcomingItems = upcomingBills.data || []
+  const upcomingTotal = upcomingItems.reduce((sum, inv) => sum + (parseFloat(String(inv.amount_due)) || 0), 0)
+
+  const fmt = (n: number) => `$${Number(n).toLocaleString('en-AU', { minimumFractionDigits: 2 })}`
+  const sections: string[] = [
+    'WEEKLY FINANCE SUMMARY',
+    '',
+    `Income: ${fmt(income)}`,
+    `Expenses: ${fmt(spend)}`,
+    `Net: ${fmt(net)}`,
+    `Balance: ${fmt(balance)}`,
+  ]
+
+  if (overdueItems.length > 0) {
+    sections.push('', `OVERDUE INVOICES (${overdueItems.length}, ${fmt(overdueTotal)})`)
+    for (const inv of overdueItems) {
+      const days = Math.floor((now.getTime() - new Date(inv.due_date).getTime()) / 86400000)
+      sections.push(`  ${inv.contact_name} — ${fmt(parseFloat(String(inv.amount_due)))} — ${days}d overdue`)
+    }
+  }
+
+  if (upcomingItems.length > 0) {
+    sections.push('', `UPCOMING BILLS (${upcomingItems.length}, ${fmt(upcomingTotal)})`)
+    for (const inv of upcomingItems) {
+      sections.push(`  ${inv.contact_name} — ${fmt(parseFloat(String(inv.amount_due)))} — due ${inv.due_date}`)
+    }
+  }
+
+  const message = sections.join('\n')
+
+  for (const chatId of chatIds) {
+    try {
+      await sendNotification(chatId, message)
       sent++
     } catch (err) {
       errors.push(`Chat ${chatId}: ${(err as Error).message}`)
