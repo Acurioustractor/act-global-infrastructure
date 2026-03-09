@@ -1,7 +1,7 @@
 import { supabase } from '@/lib/supabase'
 
 export interface SerializablePendingAction {
-  type: 'draft_email' | 'create_calendar_event'
+  type: 'draft_email' | 'create_calendar_event' | 'draft_grant_response'
   params: Record<string, unknown>
 }
 

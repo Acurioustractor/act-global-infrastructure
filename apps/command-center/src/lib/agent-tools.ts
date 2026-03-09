@@ -69,6 +69,11 @@ export const AGENT_TOOLS: Anthropic.Tool[] = [
           enum: ['summary', 'full'],
           description: 'Level of detail: "summary" returns counts and headlines only (fewer tokens), "full" returns all items. Default "full".',
         },
+        format: {
+          type: 'string',
+          enum: ['text', 'voice'],
+          description: 'Output format. "voice" returns concise natural sentences optimised for TTS (~800 chars max).',
+        },
       },
       required: [],
     },
@@ -1020,6 +1025,158 @@ export const AGENT_TOOLS: Anthropic.Tool[] = [
       required: [],
     },
   },
+
+  // ── RECEIPT PIPELINE ─────────────────────────────────────────────────
+
+  {
+    name: 'get_receipt_pipeline_status',
+    description:
+      'Get receipt pipeline funnel status — counts and totals per stage (missing_receipt → forwarded_to_dext → dext_processed → xero_bill_created → reconciled). Shows stuck items. Use when the user asks about receipt pipeline, Dext status, or reconciliation progress.',
+    input_schema: {
+      type: 'object' as const,
+      properties: {
+        include_stuck: {
+          type: 'boolean',
+          description: 'Include items stuck >14 days. Default true.',
+        },
+      },
+      required: [],
+    },
+  },
+
+  // ── MEETING PREP ─────────────────────────────────────────────────────
+
+  {
+    name: 'get_meeting_prep',
+    description:
+      'Get pre-meeting briefing with attendee context — contact details, last interaction, open deals, relationship health. Use when the user asks to "prep for a meeting", "who am I meeting", or "meeting brief".',
+    input_schema: {
+      type: 'object' as const,
+      properties: {
+        event_title: {
+          type: 'string',
+          description: 'Title or partial title of the calendar event to prep for.',
+        },
+        date: {
+          type: 'string',
+          description: 'Date in YYYY-MM-DD format. Default today.',
+        },
+      },
+      required: [],
+    },
+  },
+
+  // ── MEETING NOTES CAPTURE ────────────────────────────────────────────
+
+  {
+    name: 'capture_meeting_notes',
+    description:
+      'Save meeting notes/takeaways from a voice note or text. Auto-matches to today\'s calendar event and links attendee contacts. Use when the user sends meeting takeaways, action items, or "notes from the meeting".',
+    input_schema: {
+      type: 'object' as const,
+      properties: {
+        notes: {
+          type: 'string',
+          description: 'The meeting notes, takeaways, or transcript to save.',
+        },
+        event_title: {
+          type: 'string',
+          description: 'Calendar event title to link to. Auto-matched if omitted.',
+        },
+        project_code: {
+          type: 'string',
+          description: 'Project code (e.g. ACT-JH). Auto-detected from event if omitted.',
+        },
+      },
+      required: ['notes'],
+    },
+  },
+
+  // ── WEEKLY FINANCE SUMMARY ───────────────────────────────────────────
+
+  {
+    name: 'get_weekly_finance_summary',
+    description:
+      'Get weekly financial summary — income vs spend, overdue receivables, upcoming payables, cash position. Supports voice format for TTS. Use when the user asks for "weekly finances", "financial update", or "money this week".',
+    input_schema: {
+      type: 'object' as const,
+      properties: {
+        format: {
+          type: 'string',
+          enum: ['text', 'voice'],
+          description: 'Output format. "voice" returns natural sentences for TTS. Default "text".',
+        },
+      },
+      required: [],
+    },
+  },
+
+  // ── GRANT READINESS ──────────────────────────────────────────────────
+
+  {
+    name: 'get_grant_readiness',
+    description:
+      'Get grant application readiness — requirement completion %, missing documents, available reusable assets, days until close. Use when the user asks "are we ready for [grant]", "grant checklist", or "what do we need for [application]".',
+    input_schema: {
+      type: 'object' as const,
+      properties: {
+        application_id: {
+          type: 'string',
+          description: 'Grant application UUID.',
+        },
+        grant_name: {
+          type: 'string',
+          description: 'Grant or application name to search for.',
+        },
+      },
+      required: [],
+    },
+  },
+
+  // ── GRANT DRAFT ──────────────────────────────────────────────────────
+
+  {
+    name: 'draft_grant_response',
+    description:
+      'Draft a grant EOI or application response using project context, reusable assets, and recent knowledge. Requires confirmation before saving. Use when the user says "draft a response for [grant]", "write grant application", or "help with [grant] submission".',
+    input_schema: {
+      type: 'object' as const,
+      properties: {
+        opportunity_id: {
+          type: 'string',
+          description: 'Grant opportunity UUID (required).',
+        },
+        project_code: {
+          type: 'string',
+          description: 'Project code to frame the response around.',
+        },
+        sections: {
+          type: 'array',
+          items: { type: 'string' },
+          description: 'Specific sections to draft (e.g. ["project_description", "budget_justification"]). Drafts full EOI if omitted.',
+        },
+        tone: {
+          type: 'string',
+          enum: ['formal', 'conversational', 'community-led'],
+          description: 'Writing tone. Default "community-led" (ACT voice).',
+        },
+      },
+      required: ['opportunity_id'],
+    },
+  },
+
+  // ── REVENUE SCOREBOARD ────────────────────────────────────────────
+
+  {
+    name: 'get_revenue_scoreboard',
+    description:
+      'Get the revenue scoreboard — all commercial decision-making data in one call. Includes revenue streams vs targets, fundraising pipeline by status with weighted values, outstanding receivables, revenue scenarios, and active project counts. Use when the user asks about revenue, targets, pipeline value, commercial overview, or "how are we tracking against targets".',
+    input_schema: {
+      type: 'object' as const,
+      properties: {},
+      required: [],
+    },
+  },
 ]
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -1035,7 +1192,7 @@ export async function executeTool(
     case 'query_supabase':
       return await executeQuerySupabase(input as { sql: string; description: string })
     case 'get_daily_briefing':
-      return await executeGetDailyBriefing(input as { lookback_days?: number; detail_level?: string })
+      return await executeGetDailyBriefing(input as { lookback_days?: number; detail_level?: string; format?: string })
     case 'get_financial_summary':
       return await executeGetFinancialSummary(input as { days?: number })
     case 'search_contacts':
@@ -1171,6 +1328,24 @@ export async function executeTool(
       return await executeGetUntaggedSummary()
     case 'trigger_auto_tag':
       return await executeTriggerAutoTag(input as { dry_run?: boolean })
+    // Bot intelligence tools
+    case 'get_receipt_pipeline_status':
+      return await executeGetReceiptPipelineStatus(input as { include_stuck?: boolean })
+    case 'get_meeting_prep':
+      return await executeGetMeetingPrep(input as { event_title?: string; date?: string })
+    case 'capture_meeting_notes':
+      return await executeCaptureMeetingNotes(input as { notes: string; event_title?: string; project_code?: string }, chatId)
+    case 'get_weekly_finance_summary':
+      return await executeGetWeeklyFinanceSummary(input as { format?: string })
+    case 'get_grant_readiness':
+      return await executeGetGrantReadiness(input as { application_id?: string; grant_name?: string })
+    case 'draft_grant_response':
+      return await executeDraftGrantResponse(
+        input as { opportunity_id: string; project_code?: string; sections?: string[]; tone?: string },
+        chatId
+      )
+    case 'get_revenue_scoreboard':
+      return await executeGetRevenueScoreboard()
     default:
       return JSON.stringify({ error: `Unknown tool: ${name}` })
   }
@@ -1268,6 +1443,7 @@ async function fallbackQuery(sql: string, description: string): Promise<string> 
 async function executeGetDailyBriefing(input: {
   lookback_days?: number
   detail_level?: string
+  format?: string
 }): Promise<string> {
   const days = input.lookback_days || 7
   const now = getBrisbaneNow()
@@ -1326,6 +1502,49 @@ async function executeGetDailyBriefing(input: {
   for (const row of projects.data || []) {
     const code = row.project_code
     projectCounts[code] = (projectCounts[code] || 0) + 1
+  }
+
+  // Voice format: concise natural sentences for TTS (~800 chars)
+  if (input.format === 'voice') {
+    const overdueCount = (overdue.data || []).length
+    const upcomingCount = (upcoming.data || []).length
+    const meetingCount = (meetings.data || []).length
+    const staleCount = (relationships.data || []).length
+
+    const parts: string[] = []
+
+    // Schedule
+    if (meetingCount === 0) {
+      parts.push('No meetings on the calendar today.')
+    } else {
+      const firstFew = (meetings.data || []).slice(0, 3)
+      const eventDescs = firstFew.map((m) => m.title).join(', ')
+      parts.push(`You have ${meetingCount} meeting${meetingCount === 1 ? '' : 's'} today. ${meetingCount <= 3 ? eventDescs + '.' : 'Including ' + eventDescs + '.'}`)
+    }
+
+    // Overdue
+    if (overdueCount > 0) {
+      parts.push(`${overdueCount} overdue action${overdueCount === 1 ? '' : 's'} need${overdueCount === 1 ? 's' : ''} attention.`)
+    }
+
+    // Upcoming
+    if (upcomingCount > 0) {
+      parts.push(`${upcomingCount} follow-up${upcomingCount === 1 ? '' : 's'} coming this week.`)
+    }
+
+    // Relationships
+    if (staleCount > 0) {
+      const topStale = (relationships.data || [])[0]
+      parts.push(`${staleCount} contact${staleCount === 1 ? '' : 's'} going quiet${topStale ? ', including ' + (topStale.full_name || 'someone') : ''}.`)
+    }
+
+    // Active projects
+    const projectCount = Object.keys(projectCounts).length
+    if (projectCount > 0) {
+      parts.push(`${projectCount} project${projectCount === 1 ? '' : 's'} active this month.`)
+    }
+
+    return parts.join(' ')
   }
 
   const isSummary = input.detail_level === 'summary'
@@ -1485,21 +1704,58 @@ async function executeSearchContacts(input: {
     }
 
     const now = new Date()
-    const contacts = (data || []).map((c) => ({
-      id: c.id,
-      ghl_id: c.ghl_id,
-      name: c.full_name || 'Unknown',
-      email: c.email,
-      phone: c.phone,
-      company: c.company_name,
-      status: c.engagement_status,
-      tags: c.tags || [],
-      projects: c.projects || [],
-      last_contact: c.last_contact_date,
-      days_since_contact: c.last_contact_date
-        ? Math.floor((now.getTime() - new Date(c.last_contact_date).getTime()) / 86400000)
-        : null,
-    }))
+
+    // Enrich with last interaction and pipeline value
+    const contacts = await Promise.all(
+      (data || []).map(async (c) => {
+        const base = {
+          id: c.id,
+          ghl_id: c.ghl_id,
+          name: c.full_name || 'Unknown',
+          email: c.email,
+          phone: c.phone,
+          company: c.company_name,
+          status: c.engagement_status,
+          tags: c.tags || [],
+          projects: c.projects || [],
+          last_contact: c.last_contact_date,
+          days_since_contact: c.last_contact_date
+            ? Math.floor((now.getTime() - new Date(c.last_contact_date).getTime()) / 86400000)
+            : null,
+          last_interaction_topic: null as string | null,
+          last_interaction_date: null as string | null,
+          open_pipeline_value: null as number | null,
+        }
+
+        // Get last communication
+        const { data: lastComm } = await supabase
+          .from('communications_history')
+          .select('subject, communication_date')
+          .eq('contact_id', c.id)
+          .order('communication_date', { ascending: false })
+          .limit(1)
+          .maybeSingle()
+
+        if (lastComm) {
+          base.last_interaction_topic = lastComm.subject
+          base.last_interaction_date = lastComm.communication_date
+        }
+
+        // Get open pipeline value
+        if (c.ghl_id) {
+          const { data: deals } = await supabase
+            .from('ghl_opportunities')
+            .select('monetary_value')
+            .eq('contact_id', c.ghl_id)
+            .eq('status', 'open')
+
+          const total = (deals || []).reduce((sum, d) => sum + (d.monetary_value || 0), 0)
+          if (total > 0) base.open_pipeline_value = total
+        }
+
+        return base
+      })
+    )
 
     return JSON.stringify({
       query,
@@ -5450,6 +5706,734 @@ async function executeTriggerAutoTag(input: { dry_run?: boolean }): Promise<stri
       mode: 'applied',
       tagged: applied,
       untagged_remaining: (untagged?.length || 0) - applied,
+    })
+  } catch (err) {
+    return JSON.stringify({ error: (err as Error).message })
+  }
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// TOOL: get_receipt_pipeline_status
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+async function executeGetReceiptPipelineStatus(input: {
+  include_stuck?: boolean
+}): Promise<string> {
+  const includeStuck = input.include_stuck !== false
+
+  try {
+    // Get funnel summary from the view
+    const { data: funnel, error: funnelError } = await supabase
+      .from('v_receipt_pipeline_funnel')
+      .select('*')
+
+    if (funnelError) {
+      return JSON.stringify({ error: funnelError.message })
+    }
+
+    const stages = (funnel || []).map((s) => ({
+      stage: s.stage,
+      count: s.count,
+      total: `$${Number(s.total_amount).toFixed(2)}`,
+      oldest: s.oldest_date,
+      newest: s.newest_date,
+      stuck_count: s.stuck_count,
+    }))
+
+    const totalItems = stages.reduce((sum, s) => sum + (s.count || 0), 0)
+    const result: Record<string, unknown> = {
+      total_items: totalItems,
+      stages,
+    }
+
+    // Get stuck items (>14 days in non-terminal stages)
+    if (includeStuck) {
+      const { data: stuckItems } = await supabase
+        .from('receipt_pipeline_status')
+        .select('vendor_name, amount, transaction_date, stage, updated_at')
+        .not('stage', 'eq', 'reconciled')
+        .lt('updated_at', new Date(Date.now() - 14 * 86400000).toISOString())
+        .order('transaction_date', { ascending: true })
+        .limit(15)
+
+      if (stuckItems && stuckItems.length > 0) {
+        result.stuck_items = stuckItems.map((item) => ({
+          vendor: item.vendor_name || 'Unknown',
+          amount: `$${Number(item.amount).toFixed(2)}`,
+          date: item.transaction_date,
+          stage: item.stage,
+          days_stuck: Math.floor((Date.now() - new Date(item.updated_at).getTime()) / 86400000),
+        }))
+      }
+    }
+
+    return JSON.stringify(result)
+  } catch (err) {
+    return JSON.stringify({ error: (err as Error).message })
+  }
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// TOOL: get_meeting_prep
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+async function executeGetMeetingPrep(input: {
+  event_title?: string
+  date?: string
+}): Promise<string> {
+  const date = input.date || getBrisbaneDate()
+  const now = getBrisbaneNow()
+
+  try {
+    // Find the target event
+    let eventQuery = supabase
+      .from('calendar_events')
+      .select('id, title, start_time, end_time, attendees, location, metadata')
+      .gte('start_time', `${date}T00:00:00.000Z`)
+      .lte('start_time', `${date}T23:59:59.999Z`)
+      .order('start_time', { ascending: true })
+
+    const { data: events, error: evError } = await eventQuery
+
+    if (evError) return JSON.stringify({ error: evError.message })
+    if (!events || events.length === 0) return JSON.stringify({ message: 'No events found for this date.' })
+
+    // Find target event — match by title or pick next upcoming
+    let event = events[0]
+    if (input.event_title) {
+      const search = input.event_title.toLowerCase()
+      const match = events.find((e) => e.title?.toLowerCase().includes(search))
+      if (match) event = match
+    } else {
+      // Pick next upcoming event
+      const upcoming = events.find((e) => new Date(e.start_time) > now)
+      if (upcoming) event = upcoming
+    }
+
+    // Extract attendee emails from JSONB
+    const attendees: Array<{ email?: string; displayName?: string }> = Array.isArray(event.attendees)
+      ? event.attendees
+      : []
+    const attendeeEmails = attendees
+      .map((a) => a.email)
+      .filter((e): e is string => !!e && !e.includes('calendar.google.com'))
+
+    // Cross-reference with contacts
+    const attendeeDetails: Array<Record<string, unknown>> = []
+
+    for (const email of attendeeEmails.slice(0, 10)) {
+      const { data: contact } = await supabase
+        .from('ghl_contacts')
+        .select('id, ghl_id, full_name, company_name, engagement_status, tags, last_contact_date')
+        .eq('email', email)
+        .maybeSingle()
+
+      if (contact) {
+        // Get last communication
+        const { data: lastComm } = await supabase
+          .from('communications_history')
+          .select('subject, communication_date, direction')
+          .eq('contact_id', contact.id)
+          .order('communication_date', { ascending: false })
+          .limit(1)
+          .maybeSingle()
+
+        // Get open pipeline value
+        const { data: deals } = await supabase
+          .from('ghl_opportunities')
+          .select('monetary_value')
+          .eq('contact_id', contact.ghl_id)
+          .eq('status', 'open')
+
+        const pipelineValue = (deals || []).reduce((sum, d) => sum + (d.monetary_value || 0), 0)
+
+        attendeeDetails.push({
+          name: contact.full_name,
+          email,
+          company: contact.company_name,
+          status: contact.engagement_status,
+          tags: contact.tags || [],
+          last_contact: contact.last_contact_date,
+          days_since_contact: contact.last_contact_date
+            ? Math.floor((now.getTime() - new Date(contact.last_contact_date).getTime()) / 86400000)
+            : null,
+          last_topic: lastComm?.subject || null,
+          last_direction: lastComm?.direction || null,
+          open_pipeline_value: pipelineValue || null,
+        })
+      } else {
+        const displayName = attendees.find((a) => a.email === email)?.displayName
+        attendeeDetails.push({ name: displayName || email, email, known: false })
+      }
+    }
+
+    return JSON.stringify({
+      event: {
+        title: event.title,
+        start_time: event.start_time,
+        end_time: event.end_time,
+        location: event.location,
+      },
+      attendee_count: attendeeEmails.length,
+      attendees: attendeeDetails,
+    })
+  } catch (err) {
+    return JSON.stringify({ error: (err as Error).message })
+  }
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// TOOL: capture_meeting_notes
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+async function executeCaptureMeetingNotes(
+  input: { notes: string; event_title?: string; project_code?: string },
+  chatId?: number
+): Promise<string> {
+  const now = getBrisbaneNow()
+  const today = getBrisbaneDate()
+
+  try {
+    // Find matching calendar event from today
+    const { data: events } = await supabase
+      .from('calendar_events')
+      .select('id, title, start_time, end_time, attendees, metadata')
+      .gte('start_time', `${today}T00:00:00.000Z`)
+      .lte('start_time', `${today}T23:59:59.999Z`)
+      .order('start_time', { ascending: true })
+
+    let matchedEvent: typeof events extends (infer T)[] | null ? T | null : never = null
+    if (input.event_title && events) {
+      const search = input.event_title.toLowerCase()
+      matchedEvent = events.find((e) => e.title?.toLowerCase().includes(search)) || null
+    } else if (events && events.length > 0) {
+      // Pick the most recent past event
+      const pastEvents = events.filter((e) => new Date(e.end_time || e.start_time) <= now)
+      matchedEvent = pastEvents.length > 0 ? pastEvents[pastEvents.length - 1] : null
+    }
+
+    // Extract attendee contact IDs
+    const contactIds: string[] = []
+    if (matchedEvent?.attendees) {
+      const attendees: Array<{ email?: string }> = Array.isArray(matchedEvent.attendees)
+        ? matchedEvent.attendees
+        : []
+      for (const a of attendees.slice(0, 10)) {
+        if (a.email && !a.email.includes('calendar.google.com')) {
+          const { data: contact } = await supabase
+            .from('ghl_contacts')
+            .select('id')
+            .eq('email', a.email)
+            .maybeSingle()
+          if (contact) contactIds.push(contact.id)
+        }
+      }
+    }
+
+    // Detect project code from event metadata or input
+    const projectCode = input.project_code ||
+      (matchedEvent?.metadata as Record<string, unknown>)?.detected_project_code as string ||
+      null
+
+    // Save to project_knowledge
+    const { data: saved, error } = await supabase
+      .from('project_knowledge')
+      .insert({
+        title: matchedEvent ? `Meeting notes: ${matchedEvent.title}` : 'Meeting notes',
+        content: input.notes,
+        knowledge_type: 'meeting',
+        source_type: 'voice_note',
+        project_code: projectCode,
+        contact_ids: contactIds.length > 0 ? contactIds : null,
+        recorded_at: now.toISOString(),
+        participants: matchedEvent?.attendees
+          ? (matchedEvent.attendees as Array<{ email?: string; displayName?: string }>)
+              .map((a) => a.displayName || a.email)
+              .filter(Boolean)
+          : null,
+      })
+      .select('id')
+      .single()
+
+    if (error) {
+      return JSON.stringify({ error: error.message })
+    }
+
+    return JSON.stringify({
+      saved: true,
+      knowledge_id: saved?.id,
+      matched_event: matchedEvent?.title || null,
+      project_code: projectCode,
+      contacts_linked: contactIds.length,
+    })
+  } catch (err) {
+    return JSON.stringify({ error: (err as Error).message })
+  }
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// TOOL: get_weekly_finance_summary
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+async function executeGetWeeklyFinanceSummary(input: {
+  format?: string
+}): Promise<string> {
+  const now = getBrisbaneNow()
+  const sevenDaysAgo = new Date(now.getTime() - 7 * 86400000).toISOString()
+  const today = getBrisbaneDate()
+
+  try {
+    const [transactions, snapshots, overdueInvoices, upcomingBills] = await Promise.all([
+      // Last 7 days transactions
+      supabase
+        .from('xero_transactions')
+        .select('amount, type, contact_name')
+        .gte('date', sevenDaysAgo.split('T')[0])
+        .lte('date', today),
+
+      // Latest balance
+      supabase
+        .from('financial_snapshots')
+        .select('closing_balance, income, expenses, month')
+        .order('month', { ascending: false })
+        .limit(1),
+
+      // Overdue receivables
+      supabase
+        .from('xero_invoices')
+        .select('invoice_number, contact_name, amount_due, due_date')
+        .eq('type', 'ACCREC')
+        .in('status', ['AUTHORISED', 'SUBMITTED'])
+        .gt('amount_due', 0)
+        .lt('due_date', today)
+        .order('due_date', { ascending: true })
+        .limit(10),
+
+      // Upcoming payables (next 14 days)
+      supabase
+        .from('xero_invoices')
+        .select('invoice_number, contact_name, amount_due, due_date')
+        .eq('type', 'ACCPAY')
+        .in('status', ['AUTHORISED', 'SUBMITTED'])
+        .gt('amount_due', 0)
+        .gte('due_date', today)
+        .lte('due_date', getBrisbaneDateOffset(14))
+        .order('due_date', { ascending: true })
+        .limit(10),
+    ])
+
+    const txns = transactions.data || []
+    const income = txns.filter((t) => t.type === 'RECEIVE').reduce((sum, t) => sum + Math.abs(t.amount || 0), 0)
+    const spend = txns.filter((t) => t.type === 'SPEND').reduce((sum, t) => sum + Math.abs(t.amount || 0), 0)
+    const net = income - spend
+    const balance = snapshots.data?.[0]?.closing_balance || 0
+    const overdueItems = overdueInvoices.data || []
+    const overdueTotal = overdueItems.reduce((sum, inv) => sum + (parseFloat(String(inv.amount_due)) || 0), 0)
+    const upcomingItems = upcomingBills.data || []
+    const upcomingTotal = upcomingItems.reduce((sum, inv) => sum + (parseFloat(String(inv.amount_due)) || 0), 0)
+
+    if (input.format === 'voice') {
+      const parts: string[] = []
+
+      const fmtAmount = (n: number) => {
+        if (n >= 1000) return `${Math.round(n / 100) / 10} thousand`
+        return `${Math.round(n)} dollars`
+      }
+
+      parts.push(`This week you received ${fmtAmount(income)} and spent ${fmtAmount(spend)}.`)
+      if (net >= 0) {
+        parts.push(`Net positive ${fmtAmount(net)}.`)
+      } else {
+        parts.push(`Net negative ${fmtAmount(Math.abs(net))}.`)
+      }
+
+      if (overdueItems.length > 0) {
+        parts.push(`${overdueItems.length} overdue invoice${overdueItems.length === 1 ? '' : 's'} totaling ${fmtAmount(overdueTotal)}.`)
+      }
+
+      if (upcomingItems.length > 0) {
+        parts.push(`${upcomingItems.length} bill${upcomingItems.length === 1 ? '' : 's'} due in the next two weeks, totaling ${fmtAmount(upcomingTotal)}.`)
+      }
+
+      parts.push(`Current balance is ${fmtAmount(balance)}.`)
+
+      return parts.join(' ')
+    }
+
+    return JSON.stringify({
+      period: `${sevenDaysAgo.split('T')[0]} to ${today}`,
+      income: `$${income.toFixed(2)}`,
+      spend: `$${spend.toFixed(2)}`,
+      net: `$${net.toFixed(2)}`,
+      cash_position: `$${Number(balance).toFixed(2)}`,
+      overdue_receivables: {
+        count: overdueItems.length,
+        total: `$${overdueTotal.toFixed(2)}`,
+        items: overdueItems.map((inv) => ({
+          contact: inv.contact_name,
+          amount: `$${Number(inv.amount_due).toFixed(2)}`,
+          due: inv.due_date,
+          days_overdue: Math.floor((now.getTime() - new Date(inv.due_date).getTime()) / 86400000),
+        })),
+      },
+      upcoming_payables: {
+        count: upcomingItems.length,
+        total: `$${upcomingTotal.toFixed(2)}`,
+        items: upcomingItems.map((inv) => ({
+          contact: inv.contact_name,
+          amount: `$${Number(inv.amount_due).toFixed(2)}`,
+          due: inv.due_date,
+        })),
+      },
+    })
+  } catch (err) {
+    return JSON.stringify({ error: (err as Error).message })
+  }
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// TOOL: get_grant_readiness
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+async function executeGetGrantReadiness(input: {
+  application_id?: string
+  grant_name?: string
+}): Promise<string> {
+  try {
+    let query = supabase
+      .from('v_grant_readiness')
+      .select('*')
+
+    if (input.application_id) {
+      query = query.eq('application_id', input.application_id)
+    } else if (input.grant_name) {
+      query = query.ilike('grant_name', `%${input.grant_name}%`)
+    }
+
+    const { data: readiness, error } = await query.limit(5)
+
+    if (error) return JSON.stringify({ error: error.message })
+    if (!readiness || readiness.length === 0) {
+      return JSON.stringify({ message: 'No matching grant applications found.' })
+    }
+
+    // For each application, get available reusable assets
+    const results = await Promise.all(
+      readiness.map(async (app) => {
+        // Get missing requirement types
+        const { data: requirements } = await supabase
+          .from('grant_application_requirements')
+          .select('requirement_type, status, notes')
+          .eq('application_id', app.application_id)
+
+        const missing = (requirements || []).filter((r) => r.status === 'needed')
+        const ready = (requirements || []).filter((r) => r.status === 'ready' || r.status === 'submitted')
+
+        // Get reusable assets that could fill gaps
+        const { data: assets } = await supabase
+          .from('grant_assets')
+          .select('name, category, asset_type, is_current, expires_at')
+          .eq('is_current', true)
+          .limit(20)
+
+        const daysUntilClose = app.closes_at
+          ? Math.floor((new Date(app.closes_at).getTime() - Date.now()) / 86400000)
+          : null
+
+        return {
+          grant_name: app.grant_name,
+          provider: app.provider,
+          status: app.application_status,
+          readiness_pct: app.readiness_pct,
+          days_until_close: daysUntilClose,
+          closes_at: app.closes_at,
+          total_requirements: app.total_requirements,
+          ready_count: app.ready_count,
+          missing_docs: missing.map((m) => ({
+            type: m.requirement_type,
+            notes: m.notes,
+          })),
+          ready_docs: ready.map((r) => r.requirement_type),
+          available_assets: (assets || []).map((a) => ({
+            name: a.name,
+            category: a.category,
+            type: a.asset_type,
+            expires: a.expires_at,
+          })),
+          milestones: {
+            total: app.total_milestones,
+            completed: app.completed_milestones,
+          },
+        }
+      })
+    )
+
+    return JSON.stringify({ applications: results })
+  } catch (err) {
+    return JSON.stringify({ error: (err as Error).message })
+  }
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// TOOL: draft_grant_response
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+async function executeDraftGrantResponse(
+  input: { opportunity_id: string; project_code?: string; sections?: string[]; tone?: string },
+  chatId?: number
+): Promise<string> {
+  const tone = input.tone || 'community-led'
+
+  try {
+    // 1. Get opportunity details
+    const { data: opportunity, error: oppError } = await supabase
+      .from('grant_opportunities')
+      .select('*')
+      .eq('id', input.opportunity_id)
+      .maybeSingle()
+
+    if (oppError || !opportunity) {
+      return JSON.stringify({ error: oppError?.message || 'Grant opportunity not found.' })
+    }
+
+    // 2. Get project context
+    let projectContext = ''
+    if (input.project_code) {
+      const { data: snapshot } = await supabase
+        .from('project_intelligence_snapshots')
+        .select('*')
+        .eq('project_code', input.project_code)
+        .order('created_at', { ascending: false })
+        .limit(1)
+        .maybeSingle()
+
+      if (snapshot) {
+        projectContext = `Project: ${input.project_code}\nSnapshot: ${JSON.stringify(snapshot)}\n`
+      }
+    }
+
+    // 3. Get reusable grant assets
+    const { data: assets } = await supabase
+      .from('grant_assets')
+      .select('name, category, asset_type, content_text')
+      .eq('is_current', true)
+      .not('content_text', 'is', null)
+      .limit(10)
+
+    const assetContext = (assets || [])
+      .map((a) => `[${a.category}/${a.asset_type}] ${a.name}: ${a.content_text}`)
+      .join('\n')
+
+    // 4. Get recent project knowledge
+    const { data: knowledge } = await supabase
+      .from('project_knowledge')
+      .select('title, content, knowledge_type')
+      .in('knowledge_type', ['decision', 'meeting'])
+      .order('recorded_at', { ascending: false })
+      .limit(5)
+
+    const knowledgeContext = (knowledge || [])
+      .map((k) => `[${k.knowledge_type}] ${k.title}: ${k.content?.slice(0, 200)}`)
+      .join('\n')
+
+    // 5. Call Claude to draft
+    const anthropic = new Anthropic()
+    const sectionsList = input.sections?.length
+      ? `Focus on these sections: ${input.sections.join(', ')}`
+      : 'Draft a complete EOI covering: project description, alignment with grant objectives, community benefit, methodology, and budget justification'
+
+    const response = await anthropic.messages.create({
+      model: 'claude-3-5-haiku-20241022',
+      max_tokens: 2048,
+      messages: [
+        {
+          role: 'user',
+          content: `Draft a grant response for the following opportunity. Write in a ${tone} tone that reflects ACT's values — community-led design, First Nations partnership, regenerative innovation.
+
+GRANT OPPORTUNITY:
+Name: ${opportunity.name}
+Provider: ${opportunity.provider}
+Amount: up to $${opportunity.amount_max || 'unspecified'}
+Requirements: ${opportunity.requirements_summary || 'Not specified'}
+Description: ${opportunity.description || 'Not provided'}
+
+${projectContext}
+
+REUSABLE ASSETS:
+${assetContext || 'None available'}
+
+RECENT CONTEXT:
+${knowledgeContext || 'None'}
+
+${sectionsList}
+
+Write the draft as ready-to-submit content. Be specific, use real details from the context provided. Keep it concise but compelling.`,
+        },
+      ],
+    })
+
+    const draft = response.content[0].type === 'text' ? response.content[0].text : ''
+
+    // Use confirmation flow for saving
+    if (chatId) {
+      const preview = draft.length > 500 ? draft.slice(0, 500) + '...' : draft
+      savePendingAction(
+        chatId,
+        `Save grant draft for "${opportunity.name}"\n\nDRAFT FOR: ${opportunity.name}\n\n${preview}`,
+        {
+          type: 'draft_grant_response',
+          params: {
+            opportunity_id: input.opportunity_id,
+            opportunity_name: opportunity.name,
+            project_code: input.project_code,
+            draft,
+          },
+        }
+      )
+
+      return JSON.stringify({
+        status: 'pending_confirmation',
+        message: `Draft ready for "${opportunity.name}". Please confirm to save.`,
+        preview: preview,
+        opportunity: opportunity.name,
+        word_count: draft.split(/\s+/).length,
+      })
+    }
+
+    return JSON.stringify({
+      draft,
+      opportunity: opportunity.name,
+      word_count: draft.split(/\s+/).length,
+    })
+  } catch (err) {
+    return JSON.stringify({ error: (err as Error).message })
+  }
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// TOOL: get_revenue_scoreboard
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+async function executeGetRevenueScoreboard(): Promise<string> {
+  try {
+    const [streamsResult, pipelineResult, scenariosResult, projectsResult] = await Promise.all([
+      supabase.from('revenue_streams').select('*').eq('status', 'active'),
+      supabase.from('fundraising_pipeline').select('*'),
+      supabase.from('revenue_scenarios').select('*'),
+      supabase.from('projects').select('name, code, status'),
+    ])
+
+    const streams = streamsResult.data || []
+    const pipeline = pipelineResult.data || []
+    const scenarios = scenariosResult.data || []
+    const projects = projectsResult.data || []
+
+    // Revenue streams summary
+    const totalMonthlyTarget = streams.reduce(
+      (sum: number, s: { target_monthly: string }) => sum + parseFloat(s.target_monthly || '0'),
+      0,
+    )
+
+    // Pipeline analysis
+    let totalPipelineValue = 0
+    let totalWeightedValue = 0
+    let totalReceivables = 0
+    const pipelineByStatus: Record<string, { count: number; totalValue: number; weightedValue: number }> = {}
+
+    for (const item of pipeline) {
+      const amount = parseFloat(item.amount || '0')
+      const probability = parseFloat(item.probability || '0')
+      const weighted = amount * probability
+      const status = item.status || 'unknown'
+
+      if (!pipelineByStatus[status]) {
+        pipelineByStatus[status] = { count: 0, totalValue: 0, weightedValue: 0 }
+      }
+      pipelineByStatus[status].count++
+      pipelineByStatus[status].totalValue += amount
+      pipelineByStatus[status].weightedValue += weighted
+
+      if (item.type === 'receivable') {
+        totalReceivables += amount
+      } else {
+        totalPipelineValue += amount
+        totalWeightedValue += weighted
+      }
+    }
+
+    // Top opportunities (non-receivables, sorted by weighted value)
+    const topOpportunities = pipeline
+      .filter((p: { type: string }) => p.type !== 'receivable')
+      .map((p: { name: string; funder: string; amount: string; probability: string; status: string; expected_date: string; project_codes: string[] }) => ({
+        name: p.name,
+        funder: p.funder,
+        amount: parseFloat(p.amount || '0'),
+        probability: parseFloat(p.probability || '0'),
+        weighted: parseFloat(p.amount || '0') * parseFloat(p.probability || '0'),
+        status: p.status,
+        expectedDate: p.expected_date,
+        projects: p.project_codes,
+      }))
+      .sort((a: { weighted: number }, b: { weighted: number }) => b.weighted - a.weighted)
+      .slice(0, 10)
+
+    // Receivables
+    const receivables = pipeline
+      .filter((p: { type: string }) => p.type === 'receivable')
+      .map((p: { name: string; funder: string; amount: string; notes: string }) => ({
+        name: p.name,
+        funder: p.funder,
+        amount: parseFloat(p.amount || '0'),
+        notes: p.notes,
+      }))
+
+    // Revenue scenarios
+    const scenarioSummary = scenarios.map(
+      (s: { name: string; description: string; annual_targets: Record<string, number> }) => ({
+        name: s.name,
+        description: s.description,
+        targets: s.annual_targets,
+      }),
+    )
+
+    const activeProjects = projects.filter((p: { status: string }) => p.status === 'active')
+
+    return JSON.stringify({
+      timestamp: new Date().toISOString(),
+      streams: {
+        items: streams.map((s: { name: string; code: string; category: string; target_monthly: string }) => ({
+          name: s.name,
+          code: s.code,
+          category: s.category,
+          monthlyTarget: parseFloat(s.target_monthly || '0'),
+        })),
+        totalMonthlyTarget,
+        totalAnnualTarget: totalMonthlyTarget * 12,
+      },
+      pipeline: {
+        byStatus: pipelineByStatus,
+        totalValue: totalPipelineValue,
+        weightedValue: totalWeightedValue,
+        topOpportunities,
+        count: pipeline.filter((p: { type: string }) => p.type !== 'receivable').length,
+      },
+      receivables: {
+        total: totalReceivables,
+        items: receivables,
+      },
+      scenarios: scenarioSummary,
+      projects: {
+        active: activeProjects.length,
+        total: projects.length,
+      },
+      summary: {
+        monthlyTarget: totalMonthlyTarget,
+        annualTarget: totalMonthlyTarget * 12,
+        pipelineWeighted: totalWeightedValue,
+        receivablesOutstanding: totalReceivables,
+        pipelineCount: pipeline.filter((p: { type: string }) => p.type !== 'receivable').length,
+        activeProjects: activeProjects.length,
+      },
     })
   } catch (err) {
     return JSON.stringify({ error: (err as Error).message })

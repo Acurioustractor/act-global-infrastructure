@@ -14,7 +14,7 @@ const MAX_TOOL_ROUNDS = 10
 const ESCALATION_ROUND = 4
 
 // Write tools that require sequential execution (confirmation flow)
-export const WRITE_TOOLS = new Set(['draft_email', 'create_calendar_event', 'set_reminder'])
+export const WRITE_TOOLS = new Set(['draft_email', 'create_calendar_event', 'set_reminder', 'draft_grant_response'])
 
 // Patterns that should start with Sonnet instead of Haiku
 export const SONNET_PATTERNS = [
