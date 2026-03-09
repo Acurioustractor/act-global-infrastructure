@@ -46,6 +46,21 @@
  *  23. query_meeting_notes          — Search meetings by project, participant, date, keyword
  *  24. get_meeting_actions           — Open action items extracted from meetings
  *
+ * Tools (Wave 10 — Receipt Pipeline):
+ *  25. get_receipt_pipeline          — Pipeline status: missing → Dext → processed → reconciled
+ *
+ * Tools (Wave 11 — Grants Agent):
+ *  26. update_grant_status           — Update grant application status from chat
+ *  27. get_grant_requirements        — Show eligibility, criteria, documents, readiness
+ *  28. set_grant_reminder            — Create Telegram reminder linked to grant deadline
+ *  29. get_grants_summary            — Pipeline dashboard: counts, deadlines, value
+ *  30. get_revenue_scoreboard        — Revenue targets, pipeline, receivables, scenarios
+ *
+ * Tools (Wave 12 — Weekly Pulse & Close-Off):
+ *  31. get_weekly_project_pulse      — Monday morning overview: actions, meetings, grants, contacts per project
+ *  32. get_project_closeoff          — Close-off checklist: invoices, actions, contacts, decisions, grants
+ *  33. get_daily_grant_report        — Daily grant landscape: urgency-grouped, milestones, new opps, writing tasks
+ *
  * Secrets required (set via `ntn workers env set`):
  *   SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY
  *
@@ -299,6 +314,60 @@ worker.tool("get_daily_briefing", {
         return `  - ${name} (temp: ${a.temperature}/100, trend: falling)`;
       });
       sections.push(`RELATIONSHIP ALERTS (${alerts.length}):\n${items.join("\n")}`);
+    }
+
+    // 5. Grants pipeline summary
+    const today = todayStr();
+    const twoWeeksOut = daysFromNow(14);
+
+    const [closingSoon, pipelineStats] = await Promise.all([
+      supabase
+        .from("grant_opportunities")
+        .select("name, closes_at, amount_max, aligned_projects, application_status")
+        .not("application_status", "in", '("not_relevant","next_round","unsuccessful")')
+        .gte("closes_at", today)
+        .lte("closes_at", twoWeeksOut)
+        .order("closes_at", { ascending: true })
+        .limit(5),
+      supabase
+        .from("grant_opportunities")
+        .select("application_status, amount_max")
+        .not("application_status", "in", '("not_relevant","next_round")'),
+    ]);
+
+    const closingGrants = closingSoon.data || [];
+    const allGrants = pipelineStats.data || [];
+
+    if (closingGrants.length > 0 || allGrants.length > 0) {
+      const grantLines: string[] = ["GRANTS PIPELINE"];
+      grantLines.push("─".repeat(20));
+
+      if (closingGrants.length > 0) {
+        grantLines.push("Closing soon:");
+        for (const g of closingGrants as any[]) {
+          const daysLeft = Math.ceil((new Date(g.closes_at).getTime() - Date.now()) / 86400000);
+          const amount = g.amount_max ? ` ($${Number(g.amount_max).toLocaleString()})` : "";
+          const projects = g.aligned_projects?.length ? ` [${g.aligned_projects.join(", ")}]` : "";
+          grantLines.push(`  - ${g.name} — ${daysLeft}d${amount}${projects}`);
+        }
+      }
+
+      // Summary stats
+      const statusCounts: Record<string, number> = {};
+      let pipelineValue = 0;
+      for (const g of allGrants as any[]) {
+        const s = g.application_status || "not_applied";
+        statusCounts[s] = (statusCounts[s] || 0) + 1;
+        pipelineValue += Number(g.amount_max) || 0;
+      }
+
+      const statusParts = Object.entries(statusCounts)
+        .map(([s, c]) => `${c} ${s}`)
+        .join(", ");
+      grantLines.push(`Status: ${statusParts}`);
+      grantLines.push(`Pipeline value: $${pipelineValue.toLocaleString()} across ${allGrants.length} opportunities`);
+
+      sections.push(grantLines.join("\n"));
     }
 
     if (!sections.length) return "All clear — no overdue items, upcoming follow-ups, or alerts.";
@@ -2147,7 +2216,7 @@ worker.tool("query_meeting_notes", {
 
     let query = supabase
       .from("project_knowledge")
-      .select("id, title, recorded_at, project_code, project_name, participants, content, summary, ai_summary, ai_action_items, transcript, meeting_duration_minutes, transcription_status, topics, action_required, metadata")
+      .select("id, title, recorded_at, project_code, project_name, participants, content, summary, ai_summary, ai_action_items, transcript, meeting_duration_minutes, transcription_status, topics, action_required, metadata, source_url")
       .eq("knowledge_type", "meeting")
       .gte("recorded_at", cutoff)
       .order("recorded_at", { ascending: false })
@@ -2178,6 +2247,9 @@ worker.tool("query_meeting_notes", {
 
       lines.push(`━━━ ${m.title || "Untitled"} ━━━`);
       lines.push(`Date: ${date}${duration} | Project: ${m.project_code || "unassigned"}`);
+      if (m.source_url) {
+        lines.push(`Notion: ${m.source_url}`);
+      }
       lines.push(`Participants: ${participants}`);
 
       // Prefer AI summary, fall back to LLM-extracted summary
@@ -2248,7 +2320,7 @@ worker.tool("get_meeting_actions", {
     // 1. Get meetings with AI action items
     let meetingQuery = supabase
       .from("project_knowledge")
-      .select("id, title, recorded_at, project_code, ai_action_items, participants")
+      .select("id, title, recorded_at, project_code, ai_action_items, participants, source_url")
       .eq("knowledge_type", "meeting")
       .not("ai_action_items", "is", null)
       .gte("recorded_at", cutoff)
@@ -2292,6 +2364,9 @@ worker.tool("get_meeting_actions", {
 
         const date = new Date(m.recorded_at).toISOString().split("T")[0];
         lines.push(`\n${m.title} (${date}) [${m.project_code}]`);
+        if (m.source_url) {
+          lines.push(`  Notion: ${m.source_url}`);
+        }
         for (const item of items) {
           const check = item.completed ? "x" : " ";
           lines.push(`  [${check}] ${item.action}`);
@@ -2321,6 +2396,1278 @@ worker.tool("get_meeting_actions", {
 
     const total = aiActionCount + (extractedActions?.length || 0);
     lines.push(`Total: ${total} action items`);
+
+    return lines.join("\n");
+  },
+});
+
+// ─────────────────────────────────────────────────────────────────────────
+// TOOL 25: Receipt Pipeline Status
+// ─────────────────────────────────────────────────────────────────────────
+
+worker.tool("get_receipt_pipeline", {
+  title: "Receipt Pipeline Status",
+  description:
+    "Returns the current state of the receipt-to-reconciliation pipeline. Shows how many transactions are at each stage (missing receipt, forwarded to Dext, Dext processed, Xero bill created, reconciled), stuck items (> 14 days), high-value unreconciled transactions, and reconciliation rate. Use when asked about: receipt status, missing receipts, reconciliation progress, Dext forwarding, bookkeeping gaps. Data source: receipt_pipeline_status + xero_transactions tables.",
+  schema: {
+    type: "object" as const,
+    properties: {
+      stage: {
+        anyOf: [{ type: "string" as const }, { type: "null" as const }],
+        description: "Filter to specific stage: missing_receipt, forwarded_to_dext, dext_processed, xero_bill_created, reconciled. Pass null for full summary.",
+      },
+    },
+    required: ["stage"] as const,
+    additionalProperties: false,
+  },
+  execute: async (params: { stage: string | null }) => {
+    const stage = params.stage;
+    const sb = getSupabase();
+    const lines: string[] = ["═══ Receipt Pipeline Status ═══", ""];
+
+    // Funnel counts
+    let query = sb.from("receipt_pipeline_status").select("stage, amount, transaction_date, vendor_name");
+    if (stage) query = query.eq("stage", stage);
+    const { data: pipeline, error } = await query;
+    if (error) return `Error: ${error.message}`;
+    if (!pipeline?.length) return "No receipt pipeline data yet. Run the correlation script first.";
+
+    const stages = ["missing_receipt", "forwarded_to_dext", "dext_processed", "xero_bill_created", "reconciled"];
+    const stageLabels: Record<string, string> = {
+      missing_receipt: "Missing Receipt",
+      forwarded_to_dext: "Forwarded to Dext",
+      dext_processed: "Dext Processed",
+      xero_bill_created: "Xero Bill Created",
+      reconciled: "Reconciled",
+    };
+
+    const now = Date.now();
+    const stuckThreshold = 14 * 24 * 60 * 60 * 1000;
+
+    const stageCounts: Record<string, { count: number; amount: number; stuck: number; items: any[] }> = {};
+    for (const s of stages) {
+      stageCounts[s] = { count: 0, amount: 0, stuck: 0, items: [] };
+    }
+
+    for (const row of pipeline) {
+      const s = row.stage;
+      if (!stageCounts[s]) stageCounts[s] = { count: 0, amount: 0, stuck: 0, items: [] };
+      stageCounts[s].count++;
+      stageCounts[s].amount += Math.abs(parseFloat(row.amount) || 0);
+      if (row.transaction_date && now - new Date(row.transaction_date).getTime() > stuckThreshold) {
+        stageCounts[s].stuck++;
+      }
+      stageCounts[s].items.push(row);
+    }
+
+    // Funnel summary
+    lines.push("── Pipeline Funnel ──");
+    let totalCount = 0;
+    for (const s of stages) {
+      const sc = stageCounts[s];
+      totalCount += sc.count;
+      const stuckLabel = sc.stuck > 0 ? ` ⚠️ ${sc.stuck} stuck` : "";
+      lines.push(`  ${stageLabels[s]}: ${sc.count} ($${sc.amount.toLocaleString()})${stuckLabel}`);
+    }
+    lines.push("");
+
+    // Summary stats
+    const reconciledCount = stageCounts.reconciled?.count || 0;
+    const rate = totalCount > 0 ? Math.round((reconciledCount / totalCount) * 100) : 0;
+    lines.push("── Summary ──");
+    lines.push(`  Total tracked: ${totalCount}`);
+    lines.push(`  Reconciliation rate: ${rate}%`);
+    lines.push(`  Reconciled: ${reconciledCount}`);
+    lines.push("");
+
+    // Alerts
+    const alerts: string[] = [];
+    if (stageCounts.missing_receipt.stuck > 0) {
+      alerts.push(`${stageCounts.missing_receipt.stuck} receipts stuck > 14 days`);
+    }
+    if (stageCounts.forwarded_to_dext.stuck > 0) {
+      alerts.push(`${stageCounts.forwarded_to_dext.stuck} Dext forwarding may have failed (> 14 days)`);
+    }
+
+    // High-value unreconciled
+    const highValue = pipeline
+      .filter(r => r.stage !== "reconciled" && Math.abs(parseFloat(r.amount) || 0) > 500)
+      .sort((a, b) => Math.abs(parseFloat(b.amount) || 0) - Math.abs(parseFloat(a.amount) || 0));
+    if (highValue.length > 0) {
+      alerts.push(`${highValue.length} unreconciled transactions > $500`);
+    }
+
+    if (alerts.length > 0) {
+      lines.push("── Alerts ──");
+      for (const a of alerts) {
+        lines.push(`  ⚠️ ${a}`);
+      }
+      lines.push("");
+    }
+
+    // Show items for specific stage
+    if (stage && stageCounts[stage]) {
+      const items = stageCounts[stage].items
+        .sort((a: any, b: any) => Math.abs(parseFloat(b.amount) || 0) - Math.abs(parseFloat(a.amount) || 0))
+        .slice(0, 20);
+      lines.push(`── ${stageLabels[stage]} Items (top ${items.length}) ──`);
+      for (const item of items) {
+        const date = item.transaction_date ? new Date(item.transaction_date).toISOString().split("T")[0] : "?";
+        lines.push(`  ${item.vendor_name || "Unknown"}: $${Math.abs(parseFloat(item.amount) || 0)} (${date})`);
+      }
+    }
+
+    return lines.join("\n");
+  },
+});
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// Wave 11 — Grants Agent Tools
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+// ─────────────────────────────────────────────────────────────────────────
+// TOOL 26: Update Grant Status
+// ─────────────────────────────────────────────────────────────────────────
+
+worker.tool("update_grant_status", {
+  title: "Update Grant Status",
+  description:
+    "Update the application status of a grant opportunity from Notion chat. Fuzzy-matches the grant name and updates the status. Use when the user says things like 'mark SCC grant as submitted', 'we got the Ian Potter grant', 'decline the Perpetual grant'. Valid statuses: reviewing, in_progress, submitted, successful, unsuccessful. Data source: grant_opportunities table.",
+  schema: {
+    type: "object" as const,
+    properties: {
+      grant_name: {
+        type: "string" as const,
+        description: "Name or partial name of the grant to update",
+      },
+      new_status: {
+        type: "string" as const,
+        description: "New application status: reviewing, in_progress, submitted, successful, unsuccessful",
+      },
+    },
+    required: ["grant_name", "new_status"] as const,
+    additionalProperties: false,
+  },
+  execute: async (params: { grant_name: string; new_status: string }) => {
+    const validStatuses = ["reviewing", "in_progress", "submitted", "successful", "unsuccessful"];
+    if (!validStatuses.includes(params.new_status)) {
+      return `Invalid status "${params.new_status}". Must be one of: ${validStatuses.join(", ")}`;
+    }
+
+    const supabase = getSupabase();
+
+    // Fuzzy match: search by ilike
+    const { data: grants, error } = await supabase
+      .from("grant_opportunities")
+      .select("id, name, application_status, provider")
+      .ilike("name", `%${params.grant_name}%`)
+      .limit(5);
+
+    if (error) return `Error: ${error.message}`;
+    if (!grants?.length) return `No grants found matching "${params.grant_name}".`;
+
+    if (grants.length > 1) {
+      const list = grants.map((g: any) => `  - ${g.name} (${g.provider || "unknown provider"}) — currently: ${g.application_status}`).join("\n");
+      return `Multiple matches found. Please be more specific:\n${list}`;
+    }
+
+    const grant = grants[0] as any;
+    const oldStatus = grant.application_status;
+
+    const { error: updateErr } = await supabase
+      .from("grant_opportunities")
+      .update({
+        application_status: params.new_status,
+        updated_at: new Date().toISOString(),
+      })
+      .eq("id", grant.id);
+
+    if (updateErr) return `Error updating: ${updateErr.message}`;
+
+    return `Updated "${grant.name}" status: ${oldStatus} → ${params.new_status}`;
+  },
+});
+
+// ─────────────────────────────────────────────────────────────────────────
+// TOOL 27: Get Grant Requirements
+// ─────────────────────────────────────────────────────────────────────────
+
+worker.tool("get_grant_requirements", {
+  title: "Get Grant Requirements",
+  description:
+    "Show what's needed for a specific grant application — eligibility criteria, assessment criteria, required documents, readiness score, and gaps. Use when the user asks 'what do I need for the SCC grant', 'show requirements for Ian Potter', 'am I ready to apply for [grant]'. Data source: grant_opportunities + grant_application_requirements tables.",
+  schema: {
+    type: "object" as const,
+    properties: {
+      grant_name: {
+        type: "string" as const,
+        description: "Name or partial name of the grant to look up",
+      },
+    },
+    required: ["grant_name"] as const,
+    additionalProperties: false,
+  },
+  execute: async (params: { grant_name: string }) => {
+    const supabase = getSupabase();
+
+    const { data: grants, error } = await supabase
+      .from("grant_opportunities")
+      .select("id, name, provider, closes_at, amount_max, application_status, url, act_readiness, aligned_projects")
+      .ilike("name", `%${params.grant_name}%`)
+      .limit(3);
+
+    if (error) return `Error: ${error.message}`;
+    if (!grants?.length) return `No grants found matching "${params.grant_name}".`;
+
+    const results: string[] = [];
+
+    for (const grant of grants as any[]) {
+      const lines: string[] = [
+        `━━━ ${grant.name} ━━━`,
+        `Provider: ${grant.provider || "Unknown"}`,
+        `Status: ${grant.application_status || "not_applied"}`,
+        grant.closes_at ? `Deadline: ${grant.closes_at}` : null,
+        grant.amount_max ? `Amount: up to $${Number(grant.amount_max).toLocaleString()}` : null,
+        grant.url ? `URL: ${grant.url}` : null,
+        grant.aligned_projects?.length ? `Projects: ${grant.aligned_projects.join(", ")}` : null,
+      ].filter(Boolean) as string[];
+
+      // Get requirements from enrichment
+      const { data: reqs } = await supabase
+        .from("grant_application_requirements")
+        .select("requirement_type, description, is_met")
+        .eq("opportunity_id", grant.id)
+        .order("requirement_type");
+
+      if (reqs?.length) {
+        const eligibility = reqs.filter((r: any) => r.requirement_type === "eligibility");
+        const assessment = reqs.filter((r: any) => r.requirement_type === "assessment");
+        const documents = reqs.filter((r: any) => r.requirement_type === "document");
+
+        if (eligibility.length) {
+          lines.push("", "ELIGIBILITY CRITERIA:");
+          for (const r of eligibility) {
+            const check = (r as any).is_met ? "x" : " ";
+            lines.push(`  [${check}] ${(r as any).description}`);
+          }
+        }
+
+        if (assessment.length) {
+          lines.push("", "ASSESSMENT CRITERIA:");
+          for (const r of assessment) {
+            lines.push(`  - ${(r as any).description}`);
+          }
+        }
+
+        if (documents.length) {
+          lines.push("", "REQUIRED DOCUMENTS:");
+          for (const r of documents) {
+            const check = (r as any).is_met ? "x" : " ";
+            lines.push(`  [${check}] ${(r as any).description}`);
+          }
+        }
+
+        const totalReqs = reqs.length;
+        const metReqs = reqs.filter((r: any) => r.is_met).length;
+        const readiness = totalReqs > 0 ? Math.round((metReqs / totalReqs) * 100) : 0;
+        lines.push("", `READINESS: ${readiness}% (${metReqs}/${totalReqs} requirements met)`);
+      }
+
+      // Check act_readiness JSONB for additional context
+      if (grant.act_readiness && typeof grant.act_readiness === "object") {
+        const readiness = grant.act_readiness as any;
+        if (readiness.score != null) {
+          lines.push(`ACT Fit Score: ${readiness.score}%`);
+        }
+        if (readiness.gaps?.length) {
+          lines.push("", "GAPS:");
+          for (const gap of readiness.gaps) {
+            lines.push(`  - ${gap}`);
+          }
+        }
+      }
+
+      if (!reqs?.length && !grant.act_readiness) {
+        lines.push("", "No detailed requirements extracted yet. Run the grant enrichment script to populate.");
+      }
+
+      results.push(lines.join("\n"));
+    }
+
+    return results.join("\n\n");
+  },
+});
+
+// ─────────────────────────────────────────────────────────────────────────
+// TOOL 28: Set Grant Reminder
+// ─────────────────────────────────────────────────────────────────────────
+
+worker.tool("set_grant_reminder", {
+  title: "Set Grant Reminder",
+  description:
+    "Create a Telegram reminder linked to a specific grant. Defaults to 3 days before the deadline. Use when the user says 'remind me about the SCC grant', 'set a reminder for Ian Potter deadline'. Data source: grant_opportunities + reminders tables.",
+  schema: {
+    type: "object" as const,
+    properties: {
+      grant_name: {
+        type: "string" as const,
+        description: "Name or partial name of the grant",
+      },
+      days_before: {
+        anyOf: [{ type: "number" as const }, { type: "null" as const }],
+        description: "Days before deadline to trigger reminder. Default 3. Pass null for default.",
+      },
+      message: {
+        anyOf: [{ type: "string" as const }, { type: "null" as const }],
+        description: "Custom reminder message. Pass null for auto-generated message.",
+      },
+    },
+    required: ["grant_name", "days_before", "message"] as const,
+    additionalProperties: false,
+  },
+  execute: async (params: { grant_name: string; days_before: number | null; message: string | null }) => {
+    const supabase = getSupabase();
+    const daysBefore = params.days_before ?? 3;
+
+    // Find the grant
+    const { data: grants, error } = await supabase
+      .from("grant_opportunities")
+      .select("id, name, closes_at, provider")
+      .ilike("name", `%${params.grant_name}%`)
+      .limit(3);
+
+    if (error) return `Error: ${error.message}`;
+    if (!grants?.length) return `No grants found matching "${params.grant_name}".`;
+
+    if (grants.length > 1) {
+      const list = grants.map((g: any) => `  - ${g.name} (closes ${g.closes_at || "unknown"})`).join("\n");
+      return `Multiple matches found. Please be more specific:\n${list}`;
+    }
+
+    const grant = grants[0] as any;
+
+    if (!grant.closes_at) {
+      return `"${grant.name}" has no deadline set. Can't create a deadline reminder without a closing date.`;
+    }
+
+    const deadline = new Date(grant.closes_at);
+    const triggerAt = new Date(deadline.getTime() - daysBefore * 24 * 60 * 60 * 1000);
+
+    // Don't set reminders in the past
+    if (triggerAt.getTime() < Date.now()) {
+      const daysLeft = Math.ceil((deadline.getTime() - Date.now()) / (1000 * 60 * 60 * 24));
+      if (daysLeft <= 0) {
+        return `"${grant.name}" deadline has already passed (${grant.closes_at}).`;
+      }
+      return `"${grant.name}" closes in ${daysLeft} day(s) — that's less than ${daysBefore} days away. The deadline is ${grant.closes_at}.`;
+    }
+
+    // Set reminder at 8am Brisbane time on the trigger day
+    triggerAt.setUTCHours(22, 0, 0, 0); // 8am AEST = 22:00 UTC previous day
+    if (triggerAt.getTime() < Date.now()) {
+      triggerAt.setDate(triggerAt.getDate() + 1);
+    }
+
+    const reminderMessage = params.message || `Grant deadline: "${grant.name}" closes in ${daysBefore} days (${grant.closes_at})`;
+
+    // Get a chat_id for the reminder — use first authorized user
+    const chatIdStr = process.env.TELEGRAM_AUTHORIZED_USERS || "";
+    const chatId = parseInt(chatIdStr.split(",")[0]?.trim() || "0", 10);
+
+    if (!chatId) {
+      return "No Telegram chat ID configured. Set TELEGRAM_AUTHORIZED_USERS env var.";
+    }
+
+    const { error: insertErr } = await supabase.from("reminders").insert({
+      chat_id: chatId,
+      message: reminderMessage,
+      trigger_at: triggerAt.toISOString(),
+      active: true,
+      recurring: null,
+    });
+
+    if (insertErr) return `Error creating reminder: ${insertErr.message}`;
+
+    const triggerDate = triggerAt.toISOString().split("T")[0];
+    return `Reminder set for ${triggerDate} (${daysBefore} days before deadline): "${grant.name}" — ${grant.closes_at}`;
+  },
+});
+
+// ─────────────────────────────────────────────────────────────────────────
+// TOOL 29: Grants Summary Dashboard
+// ─────────────────────────────────────────────────────────────────────────
+
+worker.tool("get_grants_summary", {
+  title: "Grants Summary",
+  description:
+    "Dashboard view of the grants pipeline: counts by status, urgent deadlines (next 14 days), recent status changes, and total pipeline value. Use when the user asks 'grants overview', 'how's the pipeline', 'grant summary', 'how many grants do we have'. Data source: grant_opportunities table.",
+  schema: {
+    type: "object" as const,
+    properties: {
+      project_code: {
+        anyOf: [{ type: "string" as const }, { type: "null" as const }],
+        description: "Filter by project code (e.g. ACT-HV). Pass null for all projects.",
+      },
+    },
+    required: ["project_code"] as const,
+    additionalProperties: false,
+  },
+  execute: async (params: { project_code: string | null }) => {
+    const supabase = getSupabase();
+
+    let query = supabase
+      .from("grant_opportunities")
+      .select("id, name, provider, closes_at, amount_max, application_status, aligned_projects, updated_at");
+
+    if (params.project_code) {
+      query = query.contains("aligned_projects", [params.project_code]);
+    }
+
+    const { data: grants, error } = await query;
+    if (error) return `Error: ${error.message}`;
+    if (!grants?.length) return "No grant opportunities found.";
+
+    // Count by status
+    const statusCounts: Record<string, number> = {};
+    let totalPipelineValue = 0;
+
+    for (const g of grants as any[]) {
+      const status = g.application_status || "not_applied";
+      statusCounts[status] = (statusCounts[status] || 0) + 1;
+      if (g.amount_max && !["not_relevant", "next_round", "unsuccessful"].includes(status)) {
+        totalPipelineValue += Number(g.amount_max) || 0;
+      }
+    }
+
+    const lines: string[] = [
+      `GRANTS PIPELINE SUMMARY`,
+      `${"─".repeat(40)}`,
+      "",
+      `Total: ${grants.length} opportunities | Pipeline value: $${totalPipelineValue.toLocaleString()}`,
+      "",
+      "BY STATUS:",
+    ];
+
+    const statusOrder = ["not_applied", "reviewing", "in_progress", "submitted", "successful", "unsuccessful", "not_relevant", "next_round"];
+    for (const s of statusOrder) {
+      if (statusCounts[s]) {
+        lines.push(`  ${s}: ${statusCounts[s]}`);
+      }
+    }
+
+    // Urgent deadlines (next 14 days)
+    const now = new Date();
+    const twoWeeks = new Date(now.getTime() + 14 * 86400000);
+    const urgent = (grants as any[])
+      .filter((g) => g.closes_at && new Date(g.closes_at) >= now && new Date(g.closes_at) <= twoWeeks)
+      .sort((a, b) => new Date(a.closes_at).getTime() - new Date(b.closes_at).getTime());
+
+    if (urgent.length > 0) {
+      lines.push("", "CLOSING SOON (next 14 days):");
+      for (const g of urgent.slice(0, 10)) {
+        const daysLeft = Math.ceil((new Date(g.closes_at).getTime() - now.getTime()) / 86400000);
+        const amount = g.amount_max ? ` ($${Number(g.amount_max).toLocaleString()})` : "";
+        const projects = g.aligned_projects?.length ? ` [${g.aligned_projects.join(", ")}]` : "";
+        lines.push(`  ${g.name} — ${daysLeft}d${amount}${projects}`);
+      }
+    }
+
+    // Recent status changes (last 7 days)
+    const weekAgo = new Date(now.getTime() - 7 * 86400000);
+    const recent = (grants as any[])
+      .filter((g) => g.updated_at && new Date(g.updated_at) >= weekAgo)
+      .sort((a, b) => new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime())
+      .slice(0, 5);
+
+    if (recent.length > 0) {
+      lines.push("", "RECENTLY UPDATED:");
+      for (const g of recent) {
+        const date = new Date(g.updated_at).toISOString().split("T")[0];
+        lines.push(`  ${g.name} — ${g.application_status} (${date})`);
+      }
+    }
+
+    // Group by project
+    const byProject: Record<string, number> = {};
+    for (const g of grants as any[]) {
+      for (const p of g.aligned_projects || []) {
+        byProject[p] = (byProject[p] || 0) + 1;
+      }
+    }
+
+    if (Object.keys(byProject).length > 0) {
+      lines.push("", "BY PROJECT:");
+      for (const [proj, count] of Object.entries(byProject).sort(([, a], [, b]) => b - a)) {
+        lines.push(`  ${proj}: ${count}`);
+      }
+    }
+
+    return lines.join("\n");
+  },
+});
+
+// ─────────────────────────────────────────────────────────────────────────
+// TOOL 30: Revenue Scoreboard
+// ─────────────────────────────────────────────────────────────────────────
+
+worker.tool("get_revenue_scoreboard", {
+  title: "Revenue Scoreboard",
+  description:
+    "Get the ACT revenue scoreboard — all commercial decision-making data in one call. Returns revenue streams vs monthly/annual targets, fundraising pipeline by status with weighted values, outstanding receivables, revenue scenarios (conservative/moderate/aggressive), and active project counts. ALWAYS use this tool when the user asks about: revenue targets, pipeline value, commercial overview, how we're tracking, fundraising progress, or business performance. Data source: revenue_streams, fundraising_pipeline, revenue_scenarios, projects tables.",
+  schema: {
+    type: "object" as const,
+    properties: {
+      format: {
+        anyOf: [{ type: "string" as const }, { type: "null" as const }],
+        description: "Output format: 'summary' for key numbers only, null for full detail.",
+      },
+    },
+    required: ["format"] as const,
+    additionalProperties: false,
+  },
+  execute: async (_params: { format: string | null }) => {
+    const supabase = getSupabase();
+
+    const [streamsResult, pipelineResult, scenariosResult, projectsResult] = await Promise.all([
+      supabase.from("revenue_streams").select("*").eq("status", "active"),
+      supabase.from("fundraising_pipeline").select("*"),
+      supabase.from("revenue_scenarios").select("*"),
+      supabase.from("projects").select("name, code, status"),
+    ]);
+
+    const streams = streamsResult.data || [];
+    const pipeline = pipelineResult.data || [];
+    const scenarios = scenariosResult.data || [];
+    const projects = projectsResult.data || [];
+
+    const totalMonthlyTarget = streams.reduce(
+      (sum: number, s: any) => sum + parseFloat(s.target_monthly || "0"), 0
+    );
+
+    let totalPipelineValue = 0;
+    let totalWeightedValue = 0;
+    let totalReceivables = 0;
+
+    for (const item of pipeline) {
+      const amount = parseFloat(item.amount || "0");
+      const probability = parseFloat(item.probability || "0");
+      if (item.type === "receivable") {
+        totalReceivables += amount;
+      } else {
+        totalPipelineValue += amount;
+        totalWeightedValue += amount * probability;
+      }
+    }
+
+    const topOps = pipeline
+      .filter((p: any) => p.type !== "receivable")
+      .map((p: any) => ({
+        name: p.name,
+        funder: p.funder,
+        amount: parseFloat(p.amount || "0"),
+        probability: parseFloat(p.probability || "0"),
+        weighted: parseFloat(p.amount || "0") * parseFloat(p.probability || "0"),
+        status: p.status,
+        expected: p.expected_date,
+        projects: p.project_codes,
+      }))
+      .sort((a: any, b: any) => b.weighted - a.weighted)
+      .slice(0, 10);
+
+    const receivables = pipeline
+      .filter((p: any) => p.type === "receivable")
+      .map((p: any) => ({
+        name: p.name,
+        funder: p.funder,
+        amount: parseFloat(p.amount || "0"),
+      }));
+
+    const activeProjects = projects.filter((p: any) => p.status === "active");
+
+    const lines: string[] = [
+      "REVENUE SCOREBOARD",
+      `Generated: ${new Date().toISOString().split("T")[0]}`,
+      "",
+      "TARGETS:",
+      `  Monthly: $${totalMonthlyTarget.toLocaleString()}`,
+      `  Annual: $${(totalMonthlyTarget * 12).toLocaleString()}`,
+      "",
+      "STREAMS:",
+    ];
+
+    for (const s of streams) {
+      lines.push(`  ${s.name} (${s.code}): $${parseFloat(s.target_monthly || "0").toLocaleString()}/mo [${s.category}]`);
+    }
+
+    lines.push("", "PIPELINE:", `  Total value: $${totalPipelineValue.toLocaleString()}`, `  Weighted value: $${totalWeightedValue.toLocaleString()}`, `  Opportunities: ${pipeline.filter((p: any) => p.type !== "receivable").length}`, "", "TOP OPPORTUNITIES:");
+
+    for (const op of topOps) {
+      lines.push(`  ${op.name} — $${op.amount.toLocaleString()} × ${(op.probability * 100).toFixed(0)}% = $${op.weighted.toLocaleString()} [${op.status}] (${op.projects?.join(", ") || "no project"})`);
+    }
+
+    lines.push("", "RECEIVABLES:", `  Outstanding: $${totalReceivables.toLocaleString()}`);
+    for (const r of receivables) {
+      lines.push(`  ${r.name} (${r.funder}): $${r.amount.toLocaleString()}`);
+    }
+
+    if (scenarios.length > 0) {
+      lines.push("", "SCENARIOS:");
+      for (const s of scenarios) {
+        lines.push(`  ${(s as any).name}: ${(s as any).description}`);
+      }
+    }
+
+    lines.push("", `PROJECTS: ${activeProjects.length} active / ${projects.length} total`);
+
+    return lines.join("\n");
+  },
+});
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// Wave 12 — Weekly Project Pulse + Close-Off + Daily Grant Report
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+// ─────────────────────────────────────────────────────────────────────────
+// TOOL 31: Weekly Project Pulse
+// ─────────────────────────────────────────────────────────────────────────
+
+worker.tool("get_weekly_project_pulse", {
+  title: "Weekly Project Pulse",
+  description:
+    "Monday morning overview: for each active project, shows open/overdue actions, pending decisions, last meeting date, outstanding invoices, active grants + next deadline, key contacts with relationship health, and days since last activity. " +
+    "ALWAYS use this tool when the user asks: 'what needs my attention this week', 'weekly pulse', 'project overview', 'what's happening across projects', 'Monday morning briefing'. " +
+    "Data sources: project_knowledge, grant_applications, grant_opportunities, xero_invoices, ghl_contacts, project_health, calendar_events.",
+  schema: {
+    type: "object" as const,
+    properties: {
+      project_code: {
+        anyOf: [{ type: "string" as const }, { type: "null" as const }],
+        description: "Filter to a single project code (e.g. ACT-HV). Pass null for all active projects.",
+      },
+      include_financials: {
+        anyOf: [{ type: "boolean" as const }, { type: "null" as const }],
+        description: "Include invoice/financial data per project. Default true. Pass false to skip.",
+      },
+    },
+    required: ["project_code", "include_financials"] as const,
+    additionalProperties: false,
+  },
+  execute: async (params: { project_code: string | null; include_financials: boolean | null }) => {
+    const supabase = getSupabase();
+    const now = new Date();
+    const today = todayStr();
+    const weekFromNow = daysFromNow(7);
+    const includeFinancials = params.include_financials !== false;
+
+    // Known archived/non-project codes to exclude from pulse
+    const ARCHIVED_OR_META_CODES = new Set([
+      "ACT-DG", "ACT-MR", "ACT-MN", "ACT-FN", "ACT-SS", "ACT-ER",
+      "ACT-TN", "ACT-10", "ACT-SH", "ACT-SE", "ACT-QF", "ACT-DD",
+      "ACT-BM", "ACT-AI", "ACT-BV", "ACT-WJ", "ACT-YC", "ACT-TW",
+      "ACT-HS", "ACT-DH", "ACT-MM", "ACT-MU", "ACT-BR", "ACT-CC",
+      "ACT-FP", "ACT-FA", "ACT-SF", "ACT-SX", "ACT-WE", "ACT-RP",
+      "ACT-OE", "ACT-OS", "ACT-GCC", "ACT-EFI", "ACT-APO", "ACT-AMT",
+      "ACT-MISC", "_WEEKLY",
+    ]);
+
+    // Determine which projects to report on
+    let projectCodes: string[];
+    if (params.project_code) {
+      projectCodes = [params.project_code];
+    } else {
+      // Get active projects that have recent activity (last 60 days)
+      const cutoff60 = daysAgo(60);
+      const { data: recentKnowledge } = await supabase
+        .from("project_knowledge")
+        .select("project_code")
+        .gte("recorded_at", cutoff60)
+        .not("project_code", "is", null);
+
+      const { data: recentGrants } = await supabase
+        .from("grant_applications")
+        .select("project_code")
+        .in("status", ["draft", "in_progress", "submitted", "under_review", "successful"])
+        .not("project_code", "is", null);
+
+      const codes = new Set<string>();
+      for (const k of recentKnowledge || []) if (k.project_code && !ARCHIVED_OR_META_CODES.has(k.project_code)) codes.add(k.project_code);
+      for (const g of recentGrants || []) if (g.project_code && !ARCHIVED_OR_META_CODES.has(g.project_code)) codes.add(g.project_code);
+      projectCodes = [...codes].sort();
+    }
+
+    if (projectCodes.length === 0) return "No active projects with recent activity found.";
+
+    // Parallel data fetch for all projects
+    const [
+      { data: allActions },
+      { data: allDecisions },
+      { data: allMeetings },
+      { data: allGrants },
+      { data: allInvoices },
+      { data: allContacts },
+      { data: allHealth },
+    ] = await Promise.all([
+      // Open actions (overdue + upcoming)
+      supabase
+        .from("project_knowledge")
+        .select("project_code, title, recorded_at, importance, action_required")
+        .eq("action_required", true)
+        .in("project_code", projectCodes)
+        .order("recorded_at", { ascending: false })
+        .limit(200),
+      // Pending decisions
+      supabase
+        .from("project_knowledge")
+        .select("project_code, title, recorded_at, decision_status")
+        .eq("knowledge_type", "decision")
+        .in("decision_status", ["pending", "proposed"])
+        .in("project_code", projectCodes)
+        .limit(100),
+      // Last meetings per project
+      supabase
+        .from("project_knowledge")
+        .select("project_code, title, recorded_at")
+        .eq("knowledge_type", "meeting")
+        .in("project_code", projectCodes)
+        .order("recorded_at", { ascending: false })
+        .limit(200),
+      // Active grants
+      supabase
+        .from("grant_applications")
+        .select("project_code, application_name, status, amount_requested, milestones")
+        .in("status", ["draft", "in_progress", "submitted", "under_review", "successful"])
+        .in("project_code", projectCodes),
+      // Outstanding invoices (only if financials requested)
+      includeFinancials
+        ? supabase
+            .from("xero_invoices")
+            .select("contact_name, amount_due, due_date, status, tracking_category")
+            .in("status", ["AUTHORISED", "SENT"])
+            .gt("amount_due", 0)
+        : Promise.resolve({ data: [] }),
+      // Key contacts with relationship health
+      supabase
+        .from("ghl_contacts")
+        .select("full_name, temperature, temperature_trend, engagement_status, projects")
+        .not("full_name", "is", null)
+        .not("projects", "is", null)
+        .limit(200),
+      // Project health scores
+      supabase
+        .from("project_health")
+        .select("project_code, health_score, computed_at")
+        .in("project_code", projectCodes)
+        .order("computed_at", { ascending: false })
+        .limit(100),
+    ]);
+
+    // Build per-project pulse
+    const sections: string[] = [
+      `WEEKLY PROJECT PULSE — ${new Date().toLocaleDateString("en-AU", { weekday: "long", day: "numeric", month: "long", year: "numeric" })}`,
+      "═".repeat(50),
+      "",
+    ];
+
+    for (const code of projectCodes) {
+      // Actions
+      const actions = (allActions || []).filter((a: any) => a.project_code === code);
+      const overdueActions = actions.filter((a: any) => a.recorded_at && new Date(a.recorded_at) < new Date(daysAgo(7)));
+      const upcomingActions = actions.filter((a: any) => !overdueActions.includes(a));
+
+      // Decisions
+      const decisions = (allDecisions || []).filter((d: any) => d.project_code === code);
+
+      // Last meeting
+      const meetings = (allMeetings || []).filter((m: any) => m.project_code === code);
+      const lastMeeting = meetings[0];
+      const daysSinceMeeting = lastMeeting
+        ? Math.floor((now.getTime() - new Date(lastMeeting.recorded_at).getTime()) / 86400000)
+        : null;
+
+      // Grants
+      const grants = (allGrants || []).filter((g: any) => g.project_code === code);
+      const grantPipelineValue = grants.reduce((s: number, g: any) => s + (g.amount_requested || 0), 0);
+      let nextGrantDeadline: string | null = null;
+      for (const g of grants as any[]) {
+        for (const m of g.milestones || []) {
+          if (m.due && m.due >= today && !m.completed) {
+            if (!nextGrantDeadline || m.due < nextGrantDeadline) nextGrantDeadline = m.due;
+          }
+        }
+      }
+
+      // Invoices (match by xero_tracking pattern)
+      const invoices = includeFinancials
+        ? (allInvoices || []).filter((inv: any) => inv.tracking_category?.includes(code))
+        : [];
+      const totalOutstanding = invoices.reduce((s: number, inv: any) => s + (Number(inv.amount_due) || 0), 0);
+
+      // Contacts
+      const contacts = (allContacts || []).filter((c: any) => {
+        const projs = Array.isArray(c.projects) ? c.projects : [];
+        return projs.some((p: string) => p.includes(code));
+      });
+      const warmContacts = contacts.filter((c: any) => c.temperature_trend === "warming" || (c.temperature && c.temperature >= 70));
+      const coolingContacts = contacts.filter((c: any) => c.temperature_trend === "cooling");
+
+      // Health
+      const healthEntries = (allHealth || []).filter((h: any) => h.project_code === code);
+      const latestHealth = healthEntries[0];
+
+      // Last activity signal
+      const allDates = [
+        ...(actions.map((a: any) => a.recorded_at)),
+        ...(decisions.map((d: any) => d.recorded_at)),
+        ...(meetings.map((m: any) => m.recorded_at)),
+      ].filter(Boolean).map((d: string) => new Date(d).getTime());
+      const lastActivityMs = allDates.length > 0 ? Math.max(...allDates) : 0;
+      const daysSinceActivity = lastActivityMs > 0 ? Math.floor((now.getTime() - lastActivityMs) / 86400000) : null;
+
+      // Format
+      const statusLabel = daysSinceActivity !== null && daysSinceActivity <= 7 ? "ACTIVE" : daysSinceActivity !== null && daysSinceActivity <= 30 ? "QUIET" : "STALE";
+      sections.push(`${code}`);
+      sections.push(`  Status: ${statusLabel}${daysSinceActivity !== null ? ` | Last activity: ${daysSinceActivity}d ago` : ""}${latestHealth ? ` | Health: ${latestHealth.health_score}/100` : ""}`);
+      sections.push(`  Actions: ${overdueActions.length} overdue, ${upcomingActions.length} open`);
+      if (decisions.length > 0) sections.push(`  Decisions: ${decisions.length} pending`);
+      if (lastMeeting) sections.push(`  Last meeting: ${new Date(lastMeeting.recorded_at).toISOString().split("T")[0]} (${daysSinceMeeting}d ago)`);
+      if (grants.length > 0) {
+        let grantLine = `  Grants: ${grants.length} active ($${grantPipelineValue.toLocaleString()} pipeline)`;
+        if (nextGrantDeadline) {
+          const daysUntil = Math.ceil((new Date(nextGrantDeadline).getTime() - now.getTime()) / 86400000);
+          grantLine += `, next deadline ${nextGrantDeadline} (${daysUntil}d)`;
+        }
+        sections.push(grantLine);
+      }
+      if (includeFinancials && invoices.length > 0) {
+        sections.push(`  Invoices: ${invoices.length} outstanding ($${totalOutstanding.toLocaleString()})`);
+      }
+      if (contacts.length > 0) {
+        const contactParts: string[] = [];
+        for (const c of warmContacts.slice(0, 2)) contactParts.push(`${c.full_name} (warm${c.temperature ? `, ${c.temperature}/100` : ""})`);
+        for (const c of coolingContacts.slice(0, 2)) contactParts.push(`${c.full_name} (cooling${c.temperature ? `, ${c.temperature}/100` : ""})`);
+        if (contactParts.length > 0) sections.push(`  Key contacts: ${contactParts.join(", ")}`);
+      }
+      sections.push("");
+    }
+
+    // Check for untagged/misc actions (not part of any real project)
+    if (!params.project_code) {
+      const { count: untaggedCount } = await supabase
+        .from("project_knowledge")
+        .select("id", { count: "exact", head: true })
+        .eq("action_required", true)
+        .or("project_code.is.null,project_code.eq.ACT-MISC");
+
+      if (untaggedCount && untaggedCount > 0) {
+        sections.push("DATA QUALITY");
+        sections.push(`  ${untaggedCount} action items have no project code — need triaging`);
+        sections.push("");
+      }
+    }
+
+    // Summary footer
+    const totalActions = (allActions || []).length;
+    const totalDecisions = (allDecisions || []).length;
+    const totalGrants = (allGrants || []).length;
+    sections.push("─".repeat(50));
+    sections.push(`${projectCodes.length} projects | ${totalActions} open actions | ${totalDecisions} pending decisions | ${totalGrants} active grants`);
+
+    return sections.join("\n");
+  },
+});
+
+// ─────────────────────────────────────────────────────────────────────────
+// TOOL 32: Project Close-Off Checklist
+// ─────────────────────────────────────────────────────────────────────────
+
+worker.tool("get_project_closeoff", {
+  title: "Project Close-Off Checklist",
+  description:
+    "Generates a close-off checklist for a project: unpaid invoices, open actions, key contacts needing follow-up/thanks, recent decisions to document, and related projects/next phases. " +
+    "Use when the user says 'close off the retreat', 'what do we need to wrap up for [project]', 'close-off checklist for ACT-HV'. " +
+    "Data sources: xero_invoices, project_knowledge, ghl_contacts, grant_applications.",
+  schema: {
+    type: "object" as const,
+    properties: {
+      project_code: {
+        type: "string" as const,
+        description: "The project code to generate close-off for (e.g. ACT-HV).",
+      },
+    },
+    required: ["project_code"] as const,
+    additionalProperties: false,
+  },
+  execute: async (params: { project_code: string }) => {
+    const supabase = getSupabase();
+    const code = params.project_code;
+
+    // Parallel data fetch
+    const [
+      { data: invoices },
+      { data: openActions },
+      { data: contacts },
+      { data: recentDecisions },
+      { data: grants },
+      { data: recentKnowledge },
+    ] = await Promise.all([
+      // Unpaid invoices
+      supabase
+        .from("xero_invoices")
+        .select("invoice_number, contact_name, amount_due, due_date, status, type")
+        .in("status", ["AUTHORISED", "SENT", "DRAFT"])
+        .gt("amount_due", 0),
+      // Open action items
+      supabase
+        .from("project_knowledge")
+        .select("title, recorded_at, importance, action_items, participants")
+        .eq("project_code", code)
+        .eq("action_required", true)
+        .order("recorded_at", { ascending: false })
+        .limit(30),
+      // Contacts linked to project
+      supabase
+        .from("ghl_contacts")
+        .select("full_name, email, temperature, temperature_trend, engagement_status, projects, last_contacted_at")
+        .not("full_name", "is", null)
+        .not("projects", "is", null)
+        .limit(200),
+      // Recent decisions
+      supabase
+        .from("project_knowledge")
+        .select("title, content, decision_status, recorded_at")
+        .eq("project_code", code)
+        .eq("knowledge_type", "decision")
+        .gte("recorded_at", daysAgo(90))
+        .order("recorded_at", { ascending: false })
+        .limit(20),
+      // Grants linked to project
+      supabase
+        .from("grant_applications")
+        .select("application_name, status, amount_requested, milestones")
+        .eq("project_code", code),
+      // Recent knowledge (artifacts, research, etc.)
+      supabase
+        .from("project_knowledge")
+        .select("title, knowledge_type, recorded_at")
+        .eq("project_code", code)
+        .gte("recorded_at", daysAgo(90))
+        .order("recorded_at", { ascending: false })
+        .limit(50),
+    ]);
+
+    const lines: string[] = [
+      `PROJECT CLOSE-OFF CHECKLIST: ${code}`,
+      "═".repeat(50),
+      "",
+    ];
+
+    // 1. FINANCIAL
+    lines.push("1. FINANCIAL");
+    const projectInvoices = (invoices || []).filter((inv: any) =>
+      inv.tracking_category?.includes(code) ||
+      inv.contact_name?.includes(code)
+    );
+    const unpaidReceivable = projectInvoices.filter((inv: any) => inv.type === "ACCREC");
+    const unpaidPayable = projectInvoices.filter((inv: any) => inv.type === "ACCPAY");
+
+    if (unpaidReceivable.length > 0) {
+      for (const inv of unpaidReceivable) {
+        lines.push(`  [ ] Chase invoice ${inv.invoice_number} — ${inv.contact_name} $${Number(inv.amount_due).toLocaleString()} (due ${inv.due_date || "unknown"})`);
+      }
+    }
+    if (unpaidPayable.length > 0) {
+      for (const inv of unpaidPayable) {
+        lines.push(`  [ ] Pay invoice ${inv.invoice_number} — ${inv.contact_name} $${Number(inv.amount_due).toLocaleString()} (due ${inv.due_date || "unknown"})`);
+      }
+    }
+    if (projectInvoices.length === 0) {
+      lines.push("  [x] No outstanding invoices");
+    }
+    lines.push("");
+
+    // 2. ACTIONS
+    lines.push("2. OPEN ACTIONS");
+    if (openActions && openActions.length > 0) {
+      for (const a of openActions as any[]) {
+        const age = Math.floor((Date.now() - new Date(a.recorded_at).getTime()) / 86400000);
+        const priority = a.importance === "high" ? " [HIGH]" : "";
+        lines.push(`  [ ]${priority} ${a.title} (${age}d old)`);
+      }
+    } else {
+      lines.push("  [x] No open action items");
+    }
+    lines.push("");
+
+    // 3. RELATIONSHIPS
+    lines.push("3. RELATIONSHIPS — Thank/Follow-up");
+    const projectContacts = (contacts || []).filter((c: any) => {
+      const projs = Array.isArray(c.projects) ? c.projects : [];
+      return projs.some((p: string) => p.includes(code));
+    });
+    if (projectContacts.length > 0) {
+      for (const c of projectContacts as any[]) {
+        const lastContact = c.last_contacted_at
+          ? `last: ${new Date(c.last_contacted_at).toISOString().split("T")[0]}`
+          : "no recent contact";
+        const trend = c.temperature_trend ? ` (${c.temperature_trend})` : "";
+        lines.push(`  [ ] ${c.full_name}${trend} — ${lastContact}`);
+      }
+    } else {
+      lines.push("  [x] No contacts linked to this project");
+    }
+    lines.push("");
+
+    // 4. KNOWLEDGE
+    lines.push("4. DECISIONS TO DOCUMENT");
+    if (recentDecisions && recentDecisions.length > 0) {
+      for (const d of recentDecisions as any[]) {
+        const status = d.decision_status || "unknown";
+        const date = new Date(d.recorded_at).toISOString().split("T")[0];
+        lines.push(`  [ ] ${d.title} — ${status} (${date})`);
+      }
+    } else {
+      lines.push("  [x] No recent decisions needing documentation");
+    }
+    lines.push("");
+
+    // 5. ARTIFACTS
+    lines.push("5. KNOWLEDGE ARTIFACTS (last 90 days)");
+    const knowledgeByType: Record<string, number> = {};
+    for (const k of recentKnowledge || []) {
+      const t = (k as any).knowledge_type || "other";
+      knowledgeByType[t] = (knowledgeByType[t] || 0) + 1;
+    }
+    if (Object.keys(knowledgeByType).length > 0) {
+      for (const [type, count] of Object.entries(knowledgeByType)) {
+        lines.push(`  ${count} ${type}(s)`);
+      }
+    } else {
+      lines.push("  No knowledge items recorded");
+    }
+    lines.push("");
+
+    // 6. GRANTS
+    lines.push("6. GRANTS");
+    if (grants && grants.length > 0) {
+      for (const g of grants as any[]) {
+        const amount = g.amount_requested ? ` ($${Number(g.amount_requested).toLocaleString()})` : "";
+        lines.push(`  [ ] ${g.application_name} — ${g.status}${amount}`);
+        // Check for open milestones
+        for (const m of g.milestones || []) {
+          if (!m.completed) {
+            lines.push(`      [ ] ${m.name || "Milestone"}${m.due ? ` (due ${m.due})` : ""}`);
+          }
+        }
+      }
+    } else {
+      lines.push("  [x] No active grants");
+    }
+    lines.push("");
+
+    // Summary
+    const totalItems =
+      (unpaidReceivable.length + unpaidPayable.length) +
+      (openActions?.length || 0) +
+      projectContacts.length +
+      (recentDecisions?.length || 0) +
+      (grants?.length || 0);
+    lines.push("─".repeat(50));
+    lines.push(`${totalItems} items to close off`);
+
+    return lines.join("\n");
+  },
+});
+
+// ─────────────────────────────────────────────────────────────────────────
+// TOOL 33: Daily Grant Report
+// ─────────────────────────────────────────────────────────────────────────
+
+worker.tool("get_daily_grant_report", {
+  title: "Daily Grant Report",
+  description:
+    "Comprehensive daily grant landscape: active applications grouped by urgency (closing this week / this month / pipeline), per-grant progress with next milestone and days until deadline, newly discovered opportunities with fit scores, writing tasks needed, and total pipeline value. " +
+    "ALWAYS use this tool when the user asks: 'daily grant report', 'what grants need attention today', 'grant landscape', 'what's due this week'. " +
+    "Data sources: grant_applications, grant_opportunities.",
+  schema: {
+    type: "object" as const,
+    properties: {
+      project_code: {
+        anyOf: [{ type: "string" as const }, { type: "null" as const }],
+        description: "Filter by project code. Pass null for all projects.",
+      },
+    },
+    required: ["project_code"] as const,
+    additionalProperties: false,
+  },
+  execute: async (params: { project_code: string | null }) => {
+    const supabase = getSupabase();
+    const now = new Date();
+    const today = todayStr();
+    const weekEnd = daysFromNow(7);
+    const monthEnd = daysFromNow(30);
+
+    // Fetch applications + opportunities in parallel
+    let appQuery = supabase
+      .from("grant_applications")
+      .select("id, application_name, project_code, status, amount_requested, milestones, created_at, updated_at")
+      .in("status", ["draft", "in_progress", "submitted", "under_review", "successful"]);
+
+    if (params.project_code) {
+      appQuery = appQuery.eq("project_code", params.project_code);
+    }
+
+    let oppQuery = supabase
+      .from("grant_opportunities")
+      .select("id, name, provider, closes_at, amount_max, fit_score, relevance_score, application_status, aligned_projects, created_at")
+      .not("application_status", "in", "(not_relevant,unsuccessful)");
+
+    if (params.project_code) {
+      oppQuery = oppQuery.contains("aligned_projects", [params.project_code]);
+    }
+
+    const [{ data: applications }, { data: opportunities }] = await Promise.all([appQuery, oppQuery]);
+
+    const lines: string[] = [
+      `DAILY GRANT REPORT — ${new Date().toLocaleDateString("en-AU", { weekday: "long", day: "numeric", month: "long", year: "numeric" })}`,
+      "═".repeat(50),
+      "",
+    ];
+
+    // ── URGENT: Closing this week ──
+    const closingThisWeek = (opportunities || [])
+      .filter((o: any) => o.closes_at && o.closes_at >= today && o.closes_at <= weekEnd)
+      .sort((a: any, b: any) => a.closes_at.localeCompare(b.closes_at));
+
+    lines.push("THIS WEEK (urgent):");
+    if (closingThisWeek.length > 0) {
+      for (const o of closingThisWeek as any[]) {
+        const daysLeft = Math.ceil((new Date(o.closes_at).getTime() - now.getTime()) / 86400000);
+        const amount = o.amount_max ? ` ($${Number(o.amount_max).toLocaleString()})` : "";
+        const fit = o.fit_score ? ` | Fit: ${o.fit_score}%` : "";
+        const projects = o.aligned_projects?.length ? ` [${o.aligned_projects.join(", ")}]` : "";
+        const status = o.application_status || "not_applied";
+        lines.push(`  ⚠ ${o.name} — ${daysLeft}d left${amount}${fit} — ${status}${projects}`);
+      }
+    } else {
+      lines.push("  No grants closing this week");
+    }
+    lines.push("");
+
+    // ── THIS MONTH ──
+    const closingThisMonth = (opportunities || [])
+      .filter((o: any) => o.closes_at && o.closes_at > weekEnd && o.closes_at <= monthEnd)
+      .sort((a: any, b: any) => a.closes_at.localeCompare(b.closes_at));
+
+    lines.push("THIS MONTH:");
+    if (closingThisMonth.length > 0) {
+      for (const o of closingThisMonth as any[]) {
+        const daysLeft = Math.ceil((new Date(o.closes_at).getTime() - now.getTime()) / 86400000);
+        const amount = o.amount_max ? ` ($${Number(o.amount_max).toLocaleString()})` : "";
+        const fit = o.fit_score ? ` | Fit: ${o.fit_score}%` : "";
+        const status = o.application_status || "not_applied";
+        lines.push(`  ${o.name} — ${daysLeft}d${amount}${fit} — ${status}`);
+      }
+    } else {
+      lines.push("  No grants closing this month");
+    }
+    lines.push("");
+
+    // ── ACTIVE APPLICATIONS ──
+    lines.push("ACTIVE APPLICATIONS:");
+    if (applications && applications.length > 0) {
+      let totalPipelineValue = 0;
+
+      for (const app of applications as any[]) {
+        const amount = app.amount_requested ? ` ($${Number(app.amount_requested).toLocaleString()})` : "";
+        totalPipelineValue += app.amount_requested || 0;
+
+        // Find next incomplete milestone
+        let nextMilestone: string | null = null;
+        let milestoneDue: string | null = null;
+        for (const m of app.milestones || []) {
+          if (!m.completed && m.due) {
+            if (!milestoneDue || m.due < milestoneDue) {
+              nextMilestone = m.name || "Milestone";
+              milestoneDue = m.due;
+            }
+          }
+        }
+
+        // Completion %
+        const totalMilestones = (app.milestones || []).length;
+        const completedMilestones = (app.milestones || []).filter((m: any) => m.completed).length;
+        const pct = totalMilestones > 0 ? Math.round((completedMilestones / totalMilestones) * 100) : 0;
+
+        let line = `  ${app.application_name} — ${app.status}${amount}`;
+        if (totalMilestones > 0) line += ` | ${pct}% complete`;
+        if (nextMilestone && milestoneDue) {
+          const daysUntil = Math.ceil((new Date(milestoneDue).getTime() - now.getTime()) / 86400000);
+          line += ` | Next: ${nextMilestone} (${daysUntil}d)`;
+        }
+        lines.push(line);
+      }
+
+      lines.push("");
+      lines.push(`  Pipeline value: $${totalPipelineValue.toLocaleString()}`);
+    } else {
+      lines.push("  No active applications");
+    }
+    lines.push("");
+
+    // ── NEWLY DISCOVERED (last 24h) ──
+    const yesterday = daysAgo(1);
+    const newOpps = (opportunities || [])
+      .filter((o: any) => o.created_at && o.created_at >= yesterday)
+      .sort((a: any, b: any) => (b.fit_score || 0) - (a.fit_score || 0));
+
+    lines.push("DISCOVERED (last 24h):");
+    if (newOpps.length > 0) {
+      for (const o of newOpps.slice(0, 10) as any[]) {
+        const amount = o.amount_max ? ` ($${Number(o.amount_max).toLocaleString()})` : "";
+        const fit = o.fit_score ? ` Fit: ${o.fit_score}%` : "";
+        const closes = o.closes_at ? ` | Closes: ${o.closes_at}` : "";
+        lines.push(`  + ${o.name} (${o.provider || "unknown"})${amount}${fit}${closes}`);
+      }
+    } else {
+      lines.push("  No new opportunities in last 24h");
+    }
+    lines.push("");
+
+    // ── WRITING TASKS ──
+    const draftApps = (applications || []).filter((a: any) => a.status === "draft" || a.status === "in_progress");
+    if (draftApps.length > 0) {
+      lines.push("WRITING TASKS:");
+      for (const app of draftApps as any[]) {
+        const incompleteMilestones = (app.milestones || []).filter((m: any) => !m.completed && m.name?.toLowerCase().includes("writ"));
+        if (incompleteMilestones.length > 0) {
+          for (const m of incompleteMilestones) {
+            lines.push(`  [ ] ${app.application_name}: ${m.name}${m.due ? ` (due ${m.due})` : ""}`);
+          }
+        } else {
+          lines.push(`  [ ] ${app.application_name} — ${app.status}`);
+        }
+      }
+      lines.push("");
+    }
+
+    // ── AWARDED PENDING PAYMENT ──
+    const awarded = (applications || []).filter((a: any) => a.status === "successful");
+    if (awarded.length > 0) {
+      const awardedValue = awarded.reduce((s: number, a: any) => s + (a.amount_requested || 0), 0);
+      lines.push("AWARDED (pending payment):");
+      for (const a of awarded as any[]) {
+        const amount = a.amount_requested ? ` $${Number(a.amount_requested).toLocaleString()}` : "";
+        lines.push(`  ${a.application_name}${amount}`);
+      }
+      lines.push(`  Total awarded: $${awardedValue.toLocaleString()}`);
+      lines.push("");
+    }
+
+    // Summary
+    lines.push("─".repeat(50));
+    const totalApps = (applications || []).length;
+    const totalOpps = (opportunities || []).length;
+    lines.push(`${totalApps} active applications | ${totalOpps} opportunities tracked | ${closingThisWeek.length} closing this week`);
 
     return lines.join("\n");
   },

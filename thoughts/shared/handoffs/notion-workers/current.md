@@ -9,36 +9,61 @@ status: active
 
 ## Ledger
 <!-- This section is extracted by SessionStart hook for quick resume -->
-**Updated:** 2026-03-04T05:45:00Z
-**Goal:** Full ACT Intelligence System — all 4 phases deployed. 21 Notion Worker tools live. Subscription management + Dext receipt forwarding automated.
+**Updated:** 2026-03-09T01:30:00Z
+**Goal:** Phase 1 revenue infrastructure — Stripe billing on EL + JH, self-serve signup, usage metering, GrantScope org model. First paying customers.
 **Branch:** main
-**Test:** `cd packages/notion-workers && npx tsc --noEmit && cd ../../apps/command-center && npx tsc --noEmit`
+**Test:** `cd /Users/benknight/Code/empathy-ledger-v2 && npx next build --no-lint`
 
 ### Now
-[->] Manually cancel 3 still-charging subs (CodeGuide, LinkedIn, X/Twitter) + begin manual migration of 30 subs to accounts@act.place
+[->] MCP Supabase repointed to shared project. Restart Claude Code to activate. GrantScope Power Page data pipeline complete.
 
 ### This Session
-- [x] Committed 4 logical commits + pushed to remote
-  - `313f7ae` Dext receipt forwarding script + migration
-  - `7e90a9d` Subscription management API + UI (discover, CRUD, summary)
-  - `5cf7091` Finance enhancements (weekly review, Stripe webhook, Xero sync)
-  - `85868c5` Handoff ledger + research docs
-- [x] Marked CodeGuide ($41/mo), LinkedIn ($75/mo), X/Twitter ($62/mo) as cancelled with action notes — $178/mo savings
-- [x] Deleted 3 duplicate subscription records (CodeGuide dup, old Dialpad AUD, duplicate Linktree)
-- [x] Annotated remaining duplicates: HighLevel (2 records — sub + API), Webflow (2 — multiple sites), Mighty Networks (2 — different plans)
-- [x] Set all 30 unmigrated subs to `pending_migration` with per-service instructions and login URLs
-- [x] Grouped migration by actor: Ben (7 subs), Nick (6 subs), hi@ admin (4 subs), personal email (5 subs), unknown login (4 subs)
+- [x] **Bitwarden:** Created "GrantScope Supabase (tednluwflfhxyucgwigh)" secure note with all credentials
+- [x] **MCP fix:** Discovered MCP was pointing at EL v2 (`uaxhjzqrdotoahjnxmbj`), NOT shared ACT/GS project (`tednluwflfhxyucgwigh`)
+  - Updated plugin URL in `~/.claude/plugins/.../supabase/.mcp.json`
+  - Updated cached credential in `~/.claude/.credentials.json`
+  - **REQUIRES CLAUDE CODE RESTART** to take effect
+- [x] **Migration history cleanup:** Truncated corrupted history (259+ zombie entries), rebuilt with 88 clean entries
+  - Renamed 11 duplicate migration files to have unique timestamps
+  - `db pull` still blocked by Docker not running (needs shadow DB) — not needed now that MCP is repointed
+- [x] **Supabase audit:** 571 tables across 38 categories, ~200+ likely dead/unused
+  - Top data: asic_companies (2.2M), acnc_charities (64K), gs_entities (92K), political_donations (189K)
+  - Recommended schemas over separate projects for future cleanup
+- [x] **Memory updated:** Documented 3 Supabase projects, MCP connection truth, gsql patterns
+
+### Previous Sessions
+- [x] GrantScope Power Page built (`/power`) — choropleth map + Sankey + network graph
+- [x] Data coverage improved: 32% → 56% SA2 regions, 67% → 84% entity postcodes
+- [x] `gsql.mjs` + `gsql-health.mjs` created — stable GrantScope query tools
+- [x] ABN Bulk Extract: 10.98M records parsed, 15K entities enriched with postcodes
+- [x] PostgREST `pgrst_watch` event trigger installed for auto-reload
+- [x] Phase 1 revenue sprints 1.3-1.7 COMPLETE (EL + GS)
+
+### Previous Sessions (Carried Forward)
+- [x] Stripe account wired up (ACT Ventures Pty Ltd) — both EL + JH
+- [x] Stripe products + prices created (7 for EL, 3 for JH) including founding partner rates
+- [x] Pricing pages built for both EL and JH with cross-subsidy messaging
+- [x] Billing API routes: checkout, webhook, portal for both platforms
+- [x] DB migrations: stripe_customer_id on both platforms
+- [x] Vercel env vars set for EL production
+- [x] JusticeHub revenue strategy created (`thoughts/shared/plans/justicehub-revenue-strategy.md`)
+- [x] Phase 1 sprint plan created (`thoughts/shared/plans/phase1-sprint-plan.md`)
 
 ### Next
-- [ ] **MANUAL: Cancel CodeGuide** — card ending 1656, no billing emails found. Check card provider.
-- [ ] **MANUAL: Cancel LinkedIn Premium** — login benjamin@act.place → linkedin.com/premium/cancel
-- [ ] **MANUAL: Cancel X Premium** — find which account at x.com/settings/premium
-- [ ] **MANUAL: Migrate 30 subs to accounts@act.place** — instructions in DB per service
-- [ ] **Verify Webflow charges** — 10+ charges/mo at varying amounts, are all site plans needed?
-- [ ] Create remaining 4 Custom Agents in Notion (Finance, Grants, Project Intel, Comms)
-- [ ] Give Morning Briefing agent edit access to Morning Briefings page
-- [ ] Phase 2b: Gmail push via GCP Pub/Sub (requires GCP console setup)
-- [ ] Drop ~50 dead DB tables (cleanup migration)
+- [ ] **Sprint 1.5: First 3 paying customers** (MANUAL — Ben + Nick outreach)
+  - PICC, Oonchiumpa, SNAICC warm leads
+  - 50% founding partner pricing (locked while subscribed)
+  - Create 1-page "EL for Organisations" pitch doc
+- [ ] **Sprint 1.8: R&D time tracking** (ongoing)
+  - Git commit tagging with `[R&D]` prefix
+  - Monthly activity logs
+  - Engage R&D tax advisor by end of March
+- [ ] **MANUAL: Cancel CodeGuide, LinkedIn, X/Twitter** ($178/mo savings)
+- [ ] **MANUAL: Migrate 30 subs to accounts@act.place**
+- [ ] JusticeHub Vercel env vars (Stripe keys not yet added to JH Vercel)
+- [ ] GrantScope team invitation UI (API built, no frontend yet)
+- [ ] Create remaining 4 Custom Agents in Notion
+- [ ] Phase 2b: Gmail push via GCP Pub/Sub
 
 ### Decisions
 - **Package location:** `packages/notion-workers/` (mono-repo workspace pattern)
@@ -61,6 +86,11 @@ status: active
 - **Health script v2.0:** `compute-project-health.mjs --apply` (v2.0.0) is canonical — old v1.0 creates ghost codes
 - **Xero auth:** OAuth PKCE flow via `scripts/xero-auth.mjs` — refresh tokens expire, need periodic re-auth
 - **LLM scripts use Claude:** financial_variance_notes + extract_impact_metrics use Anthropic, NOT OpenAI
+- **Supabase MCP project mismatch (FIXED Mar 9):** MCP was connected to EL v2 (`uaxhjzqrdotoahjnxmbj`, 153 tables), NOT shared ACT/GS project (`tednluwflfhxyucgwigh`, 571 tables). Fixed by updating plugin URL + credential cache. Restart required.
+- **3 Supabase projects:** Shared ACT/GS (`tednluwflfhxyucgwigh`), EL v2 (`uaxhjzqrdotoahjnxmbj`), EL original (`yvnuayzslukamizrlhwb`)
+- **GrantScope DB access:** Use `gsql.mjs` (stable service role key), NOT psql (password rotation pain). DDL routes to psql with stable `DATABASE_PASSWORD` from `.env`
+- **DB password:** Stable, set via Dashboard > Settings > Database. Stored in Bitwarden + `.env`. NEVER use CLI session tokens from `npx supabase db dump --dry-run`
+- **Schema reorganization:** 571 tables, ~200+ dead. Recommended: use Postgres schemas (grantscope, empathy_ledger, finance, ops) rather than separate projects. Future cleanup task.
 - **Dext forwarding:** RFC822 MIME wrapping (original email as attachment), not inline forward
 - **Gmail from: search:** Doesn't match subdomains — `from:openai.com` won't find `email.openai.com`. Must list each subdomain.
 - **Subscription emails:** Can only verify @act.place mailboxes via Gmail API. Personal emails (ben@benjamink.com.au) must be manually confirmed by user.
