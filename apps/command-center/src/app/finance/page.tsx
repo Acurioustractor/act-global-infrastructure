@@ -681,6 +681,45 @@ export default function FinancePage() {
           </div>
 
           {/* Quick Links */}
+          <Link href="/finance/flow">
+            <div className="glass-card p-5 hover:border-cyan-500/50 border border-cyan-500/20 transition-colors cursor-pointer group">
+              <div className="flex items-center justify-between mb-3">
+                <h3 className="font-semibold text-white flex items-center gap-2">
+                  <TrendingUp className="h-5 w-5 text-cyan-400" />
+                  Money Flow
+                </h3>
+                <ChevronRight className="h-4 w-4 text-white/40 group-hover:text-white/70 transition-colors" />
+              </div>
+              <p className="text-sm text-white/50 mb-2">Card → Dext → Xero → Tagged → Reconciled</p>
+            </div>
+          </Link>
+
+          <Link href="/finance/health">
+            <div className="glass-card p-5 hover:border-emerald-500/50 border border-emerald-500/20 transition-colors cursor-pointer group">
+              <div className="flex items-center justify-between mb-3">
+                <h3 className="font-semibold text-white flex items-center gap-2">
+                  <CheckCircle2 className="h-5 w-5 text-emerald-400" />
+                  Finance Health
+                </h3>
+                <ChevronRight className="h-4 w-4 text-white/40 group-hover:text-white/70 transition-colors" />
+              </div>
+              <p className="text-sm text-white/50 mb-2">System health, compliance, action queue</p>
+            </div>
+          </Link>
+
+          <Link href="/finance/reconciliation">
+            <div className="glass-card p-5 hover:border-blue-500/50 border border-blue-500/20 transition-colors cursor-pointer group">
+              <div className="flex items-center justify-between mb-3">
+                <h3 className="font-semibold text-white flex items-center gap-2">
+                  <FileText className="h-5 w-5 text-blue-400" />
+                  Reconciliation
+                </h3>
+                <ChevronRight className="h-4 w-4 text-white/40 group-hover:text-white/70 transition-colors" />
+              </div>
+              <p className="text-sm text-white/50 mb-2">Tag, review & reconcile transactions</p>
+            </div>
+          </Link>
+
           <Link href="/finance/reports">
             <div className="glass-card p-5 hover:border-indigo-500/50 transition-colors cursor-pointer group">
               <div className="flex items-center justify-between mb-3">
