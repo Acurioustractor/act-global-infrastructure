@@ -39,11 +39,11 @@ Our flagship Stretch Bed — co-designed with First Nations communities across C
 
 To date we have deployed 389 beds and 20 washing machines across 8 communities, directly impacting over 1,000 lives and diverting 9,225kg of plastic waste. Demand significantly exceeds capacity, with 200–350 additional beds requested and 500+ mattress requests from Groote Eylandt alone.
 
-Our mission-locked structure ensures 40% of profits flow back to the First Nations communities where we operate. We don't design for communities — we design with them, employing the Listen-Curiosity-Action-Art methodology to ensure every product reflects lived experience.
+Our community benefit model ensures value flows back to the First Nations communities where we operate. We don't design for communities — we design with them. Thirty-three community storytellers across seven communities document their own experiences through our ethical storytelling platform, ensuring communities control their own narrative — not us.
 
 Co-founded by Nicholas Marchesi OAM (Orange Sky Laundry co-founder, 2016 Young Australian of the Year) and Benjamin Knight, Goods on Country exists to prove that circular economy manufacturing can be community-owned, culturally grounded, and commercially sustainable.
 
-*(198 words)*
+*(~200 words)*
 
 ---
 
@@ -53,7 +53,7 @@ Co-founded by Nicholas Marchesi OAM (Orange Sky Laundry co-founder, 2016 Young A
 
 **Our Theory of Change:** By manufacturing indestructible household goods from recycled plastic — designed with communities, produced on country, and maintained through local employment — we simultaneously address housing inadequacy, waste, and economic exclusion.
 
-**Product-Market Fit:** The Stretch Bed is engineered for conditions where everything else fails. 100% recycled HDPE plastic, UV-stabilised, fully washable with a garden hose, tool-free assembly, and every component individually replaceable. Production cost: $550–650. Retail: $850–1,200. Institutional/bulk: $700–850 per unit. At scale (5,000+ units/year), margins reach 35–40%.
+**Product-Market Fit:** The Stretch Bed is engineered for conditions where everything else fails. 100% recycled HDPE plastic, UV-stabilised, fully washable with a garden hose, tool-free assembly, and every component individually replaceable. Current production cost at small batch: $550–650 per unit. Our cost reduction pathway — CNC cutting optimisation, batch processing efficiency, and community-based labour — brings production cost to ~$350 at scale (5,000+ units/year). At institutional pricing of $700–850/unit, this delivers gross margins of 50–55%.
 
 **Revenue Model — Three Streams:**
 1. **Institutional sales** (60% of revenue): Bulk orders from housing providers, health services, and community organisations. Centre Corp Foundation has approved 107 beds for Utopia Homelands. Miwatj Health (East Arnhem) exploring fleet deployment.
@@ -69,11 +69,11 @@ Co-founded by Nicholas Marchesi OAM (Orange Sky Laundry co-founder, 2016 Young A
 
 **Circular Economy Loop:** Each facility accepts local plastic waste as feedstock, creating a closed loop — community waste becomes community furniture. This diverts plastic from landfill while reducing freight costs for raw materials.
 
-**Path to Repayment:** At 5,000 units/year with blended average price of $800, annual revenue reaches $4M. With 35% gross margin ($1.4M) and operating costs of ~$900K, net operating surplus of ~$500K supports PFI repayment within the funding term while maintaining 40% profit-sharing with communities.
+**Path to Repayment:** At 5,000 units/year with blended average price of $800, annual revenue reaches $4M. Our cost reduction pathway delivers production cost of ~$350/unit by Year 3 (down from $550–650 today), yielding gross margin of ~$1.75M. After operating costs of ~$600K, net operating surplus of ~$850K–$1.15M comfortably supports PFI repayment within the funding term while maintaining community benefit commitments.
 
-**Existing Validation:** $423,785 in philanthropic funding received (Snow Foundation, FRRR, Vincent Fairfax, The Funding Network). 389 products deployed. 8 communities served. 40+ verified community testimonials. Asset tracking system operational with QR-coded lifecycle monitoring for every product.
+**Existing Validation:** $445,685 in philanthropic funding received (Snow Foundation, FRRR, Vincent Fairfax, AMP Spark, The Funding Network). 389 products deployed. 8 communities served. 33 verified storytellers documenting impact through our ethical storytelling platform, with consent tracking and cultural safety built into the infrastructure. Asset tracking system operational with QR-coded lifecycle monitoring for every product.
 
-*(489 words)*
+*(494 words)*
 
 ---
 
@@ -103,18 +103,17 @@ PFI funding specifically targets the capital-intensive manufacturing infrastruct
 **Scoping Completed to Date:**
 - Product R&D complete: Stretch Bed in production, industrial washing machine in field testing
 - 389 products deployed and tracked via digital asset register with QR-coded lifecycle monitoring
-- Community co-design validated across 8 communities with 40+ recorded testimonials
+- Community co-design validated across 8 communities with 33 active storytellers
+- Empathy Ledger community voice platform live — consent-based storytelling with automated content syndication to Goods website, impact tracking across health, economic, environmental, and self-determination outcomes
 - Oonchiumpa consultancy (Alice Springs) confirmed as Central Australian manufacturing partner
 - Container facility specifications scoped with manufacturing engineers
-- $423,785 in philanthropic investment secured, demonstrating funder confidence
-- $200K Snow Foundation proposal pending (scale-up specific)
-- SEFA social impact loan discussions advanced (23 communications with investment team)
-- E-commerce platform operational for retail channel
-- Full financial model projecting breakeven at Year 2, positive net surplus from Year 3
+- $445,685 in philanthropic investment secured, demonstrating funder confidence
+- $200K Snow Foundation proposal pending; SEFA social impact loan in advanced discussion
+- E-commerce platform operational; financial model projecting breakeven at Year 2
 
 **Operational by December 2027?** Yes. The QLD flagship facility will be operational by Q2 2027, with first product deliveries by Q3 2027. The facility design is modular and replicable — once the first is proven, subsequent deployments are faster.
 
-*(478 words)*
+*(~495 words)*
 
 ---
 
@@ -152,30 +151,34 @@ Bulk purchase agreements with health services, housing providers, and community 
 At institutional pricing of $700–850/unit and projected Year 3 volume of 3,000 institutional units, this stream alone generates $2.1–2.55M annually.
 
 **2. Government Procurement (25%, ~$1M at scale)**
-State and territory housing departments currently spend significantly on disposable mattresses and furniture that fail within months in remote settings. Our products last 10+ years at a lower lifecycle cost. We are positioning for inclusion in government housing fit-out specifications. Queensland's own Remote Indigenous Housing program is a primary target, alongside NT Housing and WA Remote Communities.
+State and territory housing departments replacing disposable mattresses with durable alternatives at lower lifecycle cost. Queensland's Remote Indigenous Housing program is a primary target, alongside NT Housing and WA Remote Communities.
 
 **3. Retail and Corporate (15%, ~$600K at scale)**
-Direct-to-consumer sales via our e-commerce platform (operational), plus corporate partnerships for camping, emergency management, and defence applications. The Stretch Bed's durability makes it compelling for mining camps, disaster relief, and outdoor recreation markets beyond our core social impact mission.
+Direct-to-consumer sales via our e-commerce platform (operational), plus corporate partnerships for camping, emergency management, and defence applications.
 
 **Revenue Projections:**
-- Year 1 (2026–27): 1,500 units, $1.1M revenue, $385K gross margin
-- Year 2 (2027–28): 3,500 units, $2.6M revenue, $910K gross margin
-- Year 3 (2028–29): 5,000 units, $4.0M revenue, $1.4M gross margin
+- Year 1 (2026–27): 1,500 units, $1.1M revenue, $330K gross margin (cost ~$520/unit — early production, learning curve)
+- Year 2 (2027–28): 3,500 units, $2.6M revenue, $1.05M gross margin (cost ~$350/unit — batch optimisation, community labour)
+- Year 3 (2028–29): 5,000 units, $4.0M revenue, $1.75M gross margin (cost ~$350/unit — full efficiency)
 
-**Cost Structure at Scale:**
-- Raw materials (recycled plastic): ~$150/unit
-- Manufacturing labour: ~$120/unit
-- Facility operating costs: ~$180/unit
-- Distribution/logistics: ~$100/unit
-- Total COGS: ~$550/unit (31% margin at $800 avg price)
+**Cost Reduction Pathway (per unit):**
+
+| Component | Year 1 ($520) | Year 3 ($350) | How |
+|-----------|--------------|--------------|-----|
+| Raw materials (steel $27, canvas $94, HDPE free) | $130 | $100 | Volume supplier agreements, canvas renegotiation at 5,000+ |
+| Manufacturing labour | $180 | $100 | CNC cutting from 4hrs → 2hrs (tooling + template optimisation), community operators |
+| Facility operating (diesel, maintenance, depreciation) | $130 | $80 | Solar-hybrid power reduces diesel dependency; depreciation spreads across volume |
+| Distribution/logistics | $80 | $70 | Regional facilities reduce freight distances |
+
+Key cost driver: CNC cutting time (currently 3–5 hours per bed). Tooling upgrades and optimised templates reduce this to 2 hours — saving ~$60/unit. This single improvement accounts for half the cost reduction.
 
 **PFI Repayment Capacity:**
-Net operating surplus from Year 2 onwards ($400–500K annually) is sufficient to service PFI repayment over a 5–7 year term while maintaining operational sustainability and community profit-sharing commitments. The repayable nature of PFI aligns with our commercial model — we are building a self-sustaining business, not a permanently grant-dependent program.
+Net operating surplus from Year 2 onwards (~$500K–$850K annually after ~$600K operating expenses) services PFI repayment over a 5–7 year term while maintaining community benefit commitments. We are building a self-sustaining business, not a grant-dependent program.
 
 **Risk Mitigation:**
-Conservative projections assume 70% capacity utilisation. Demand evidence (389 deployed, 1,000+ requested) suggests demand significantly exceeds our production capacity for the foreseeable future. The constraint is manufacturing infrastructure, not market demand — which is precisely what this proposal addresses.
+Conservative projections assume 70% capacity utilisation. Demand evidence (389 deployed, 1,000+ requested) confirms demand exceeds production capacity — the constraint is manufacturing infrastructure, not market. This is precisely what this proposal addresses.
 
-*(476 words)*
+*(~440 words)*
 
 ---
 
@@ -199,13 +202,13 @@ Conservative projections assume 70% capacity utilisation. Demand evidence (389 d
 
 **The Manufacturing Infrastructure Gap**
 
-Goods on Country sits in a funding gap that is common for social enterprises transitioning from proof-of-concept to commercial scale: we have validated product-market fit and secured philanthropic support for program delivery, but cannot access the capital needed for manufacturing infrastructure.
+Goods. sits in a funding gap that is common for social enterprises transitioning from proof-of-concept to commercial scale: we have validated product-market fit and secured philanthropic support for program delivery, but cannot access the capital needed for manufacturing infrastructure.
 
 **Why traditional lenders won't fund this:**
-Commercial banks require 2–3 years of trading history and conventional asset security. As a mission-locked social enterprise in its third year of operations, with assets primarily deployed in remote communities (not recoverable as collateral), we don't meet standard lending criteria. Our track record is strong — 389 products, 8 communities, $423K philanthropic investment — but our financial statements reflect an enterprise still scaling, not one with the balance sheet banks require.
+Commercial banks require 2–3 years of trading history and conventional asset security. As a mission-locked social enterprise in its third year of operations, with assets primarily deployed in remote communities (not recoverable as collateral), we don't meet standard lending criteria. Our track record is strong (389 products, 8 communities, $445K philanthropic investment) but our financial statements reflect an enterprise still scaling, not one with the balance sheet banks require.
 
 **Why philanthropy alone is insufficient:**
-Our philanthropic funders (Snow Foundation, Vincent Fairfax, FRRR, The Funding Network) support program design, community engagement, R&D, and initial deployment. They do not fund capital manufacturing infrastructure — that falls outside their grant-making guidelines. We have exhausted the philanthropic funding available for our current stage.
+Our philanthropic funders (Snow Foundation, Vincent Fairfax, FRRR, The Funding Network) support program design, community engagement, R&D, and initial deployment. They do not fund capital manufacturing infrastructure, that falls outside their grant-making guidelines. We have exhausted the philanthropic funding available for our current stage.
 
 **Why SEFA alone won't cover it:**
 We are in advanced discussions with Social Enterprise Finance Australia (SEFA) regarding a social impact loan. However, SEFA's risk appetite requires co-investment from government or other institutional sources to de-risk their position. PFI funding provides exactly this: a government-backed repayable instrument that gives SEFA confidence to commit their portion.
@@ -243,24 +246,26 @@ Community voice (Jessica Allardyce, Miwatj Health, East Arnhem): "When we visit 
 Each bed diverts 25kg of recycled plastic from landfill. At 5,000 units/year, that's 125 tonnes of plastic waste transformed into 10+ year products annually. The containerised facility model accepts local waste plastic as feedstock, creating place-based circular economies where community waste literally becomes community furniture.
 
 **Impact Dimension 3: Employment and Economic Participation**
-Each containerised facility employs 4–6 workers, with priority given to First Nations people and disadvantaged Queenslanders. The QLD flagship facility creates at least 6 direct jobs in regional manufacturing. Our 40% profit-sharing model means communities where products are sold also receive direct economic benefit — not as charity recipients, but as economic participants.
+Each containerised facility employs 4–6 workers, with priority given to First Nations people and disadvantaged Queenslanders. The QLD flagship facility creates at least 6 direct jobs in regional manufacturing. Our community benefit model means communities where products are manufactured and sold receive direct economic benefit — not as charity recipients, but as economic participants.
 
 **Impact Dimension 4: Community Ownership and Self-Determination**
-Our Listen-Curiosity-Action-Art methodology ensures communities drive product design. The Stretch Bed wasn't designed in a Brisbane office — it was co-designed with Elders in Tennant Creek, tested in Alice Springs, refined on Palm Island. Elder Dianne Stokes (Tennant Creek) named the washing machine. Fred Campbell (Oonchiumpa, Western Arrernte man) consults on product design and cultural appropriateness. This is manufacturing infrastructure that respects and centres Indigenous knowledge.
+The Stretch Bed wasn't designed in a Brisbane office — it was co-designed with Elders in Tennant Creek, tested in Alice Springs, refined on Palm Island. Elder Dianne Stokes named the washing machine in Warumungu language. Fred Campbell (Oonchiumpa, Western Arrernte man) consults on product design and cultural appropriateness. This is manufacturing infrastructure that centres Indigenous knowledge.
+
+**Impact Dimension 5: Community Narrative Sovereignty**
+Communities don't just receive products — they tell the story of what those products mean. Through our Empathy Ledger platform, 33 storytellers across 7 communities document their own experiences. Each story is published only with community consent and elder approval where culturally required. Stories syndicate automatically to the Goods on Country website — community voices, not our marketing team, define our public narrative. This is accountability infrastructure: communities hold the pen.
 
 **Queensland-Specific Impact:**
-- Palm Island: 141 beds already deployed, community requesting expansion
+- Palm Island: 141 beds deployed, community requesting expansion
 - South East QLD: Flagship manufacturing facility creating regional jobs
-- Torres Strait / Cape York: Identified as Year 2–3 deployment priorities
-- Brisbane/Gold Coast homelessness services: exploring institutional partnerships
+- Torres Strait / Cape York: Year 2–3 deployment priorities
+- Brisbane/Gold Coast homelessness services: institutional partnerships in discussion
 
 **Key Assumptions:**
-- Average household size of 3–4 people (conservative for remote communities where overcrowding is common)
-- 70% capacity utilisation in Year 1, scaling to 85% by Year 3
-- Community demand sustained based on 1,000+ documented requests exceeding current 389 deployed
-- Workforce recruited through existing community partnerships and Indigenous employment networks
+- Average household size of 3–4 people (conservative for remote communities)
+- 70% capacity utilisation Year 1, scaling to 85% by Year 3
+- Demand sustained based on 1,000+ documented requests exceeding 389 deployed
 
-*(483 words)*
+*(~498 words)*
 
 ---
 
@@ -296,23 +301,27 @@ Working with community health partners (Miwatj Health, NPY Women's Council, Palm
 
 **4. Economic Impact (Annual)**
 - **Direct employment**: FTE jobs created, Indigenous employment percentage, wages paid
-- **Community profit share**: Dollar value of 40% profit distributions to community partners
+- **Community benefit share**: Dollar value of profit distributions to community partners
 - **Government savings**: Estimated avoided cost from reduced mattress/furniture replacement cycles
 - **Local procurement**: Dollar value of goods and services purchased from local suppliers
 
-**5. Storytelling and Community Voice (Ongoing)**
-We systematically record community stories through our Empathy Ledger methodology — ethical, consent-based documentation of lived experience. We currently hold 40+ verified testimonials from community members across 6 communities. Every story is recorded with explicit consent and community ownership of the narrative. This qualitative data provides the human context that quantitative metrics cannot capture.
+**5. Community Voice Infrastructure (Operational — Live)**
+Our Empathy Ledger platform is a purpose-built ethical storytelling system with 33 verified storytellers across 7 communities. Each storyteller has a structured profile including cultural background, community affiliations, and elder status. Impact is tracked across health, economic, environmental, and self-determination outcomes — per person, per community, over time.
+
+The system enforces consent at every level: stories require explicit community approval before publication, elder review where culturally appropriate, and cultural sensitivity classification. Content flows automatically from Empathy Ledger to the Goods on Country website via API — communities write, approve, and publish their own narratives without our intervention.
+
+This creates a four-layer impact system: (1) every product QR-tracked through its lifecycle, (2) every community member with a consent-based storyteller profile, (3) outcomes tracked across health, economic, environmental, and self-determination dimensions, (4) community voices flow directly to our public website — they control the narrative. This isn't retrospective evaluation — it's real-time, community-controlled impact documentation.
 
 **Reporting Framework:**
-- Quarterly dashboard reports to funders (automated from asset register data)
+- Quarterly dashboard reports to funders (automated from asset register and storyteller data)
 - Annual impact report aligned with Social Traders Impact Measurement Framework
-- Real-time public dashboard showing deployed products, community reach, and plastic diverted
-- Independent evaluation at Year 2 midpoint (budget allocated in proposal)
+- Real-time public dashboard: deployed products, community reach, plastic diverted, community stories
+- Independent evaluation at Year 2 midpoint (budget allocated)
 
 **Data Infrastructure:**
-Our measurement system runs on Supabase (PostgreSQL), with automated triggers, real-time dashboards, and API integrations. It is designed to scale — adding 5,000 tracked assets requires zero additional measurement infrastructure.
+Our measurement system runs on PostgreSQL with automated triggers, real-time dashboards, and API integrations. Designed to scale — adding 5,000 tracked assets and hundreds of storytellers requires zero additional infrastructure.
 
-*(477 words)*
+*(~497 words)*
 
 ---
 
@@ -327,26 +336,166 @@ Our measurement system runs on Supabase (PostgreSQL), with automated triggers, r
 
 ---
 
-## Before Submitting — Ben's Checklist
+## Pre-Submission Requirements — Full Alignment
 
-- [ ] **Financial tables** (2022–23, 2023–24, 2024–25): Total Revenue, Trading Revenue, Total Assets, Total Liabilities — pull from Xero
-- [ ] **Primary contact details**: Name, position, phone, email
-- [ ] **QLD address**: Confirm Jinibara Country address for form
-- [ ] **GST status**: Confirm if registered, exempt, or not registered
-- [ ] **PFI Privacy Consent Letter**: Download from form, sign, upload
-- [ ] **Authorised person**: Name + position for confirmation section
-- [ ] **Review all numbers with Nick** — especially production costs, unit pricing, and revenue projections
-- [ ] **Verify community quotes** — ensure Jessica Allardyce and others are OK with names being used in a government application
-- [ ] **SEFA status** — confirm "in discussion" is accurate framing for Joel Bird conversations
+### Eligibility Self-Assessment (from form page 3)
 
-## Eligibility Notes
+All 10 must be YES to proceed:
 
-- Total proposal $3.2M with PFI at $640K (20%) — meets minimum threshold
-- Need at least 1 **unrelated external funder** besides PFI — Snow Foundation ($200K received) qualifies
-- SEFA as second unrelated funder strengthens the case
-- Must be operational by December 2027 — Yes, QLD facility targets Q2 2027
-- Queensland physical presence required — Yes (Jinibara Country)
-- Social Traders certification needed before Stage 2 closes (not required for Stage 1 EOI)
+| # | Question | Status | Notes |
+|---|----------|--------|-------|
+| 1 | Total funding > $2.5M (based on min PFI $500K at 20%)? | YES | $3.2M total proposal |
+| 2 | PFI funding ≤ 20% of total? | YES | $640K = 20% of $3.2M |
+| 3 | Sustainable financial outcomes / capacity to repay? | YES | Net surplus ~$500K/yr from Year 2. See Section 5. |
+| 4 | At least 1 unrelated external funder besides PFI? | YES | Snow Foundation ($200K received), SEFA ($500K in discussion) |
+| 5 | Funding gap that other funders can't cover? | YES | Manufacturing capital — too early for banks, outside philanthropic scope. See Section 7. |
+| 6 | Operational by December 2027? | YES | QLD facility targets Q2 2027 |
+| 7 | QLD physical presence? | YES | Based on Jinibara Country, QLD. Palm Island (QLD) = largest deployment. |
+| 8 | New or additional high social impact in QLD? | YES | 6+ manufacturing jobs, Palm Island expansion, Torres Strait/Cape York pipeline |
+| 9 | Meet all eligibility criteria? | YES | See below |
+| 10 | Social impact aligns with PFI impact areas? | YES | Reducing homelessness, place-based initiatives, quality jobs |
+
+### Organisation Type (form page 6 — select up to 3)
+
+| Option | Select? | Notes |
+|--------|---------|-------|
+| Social Traders certified | **SEEKING** | Must complete before Stage 2. Not required for Stage 1 EOI. |
+| People and Planet verified | No | |
+| Incorporated Indigenous owned and operated | No | Partners WITH, not itself Indigenous-owned |
+| Not-for-profit organisation | No | ACT Ventures is Pty Ltd (trading company) |
+| Community organisation | No | |
+| ACNC registered charity | **CONSIDER** | A Kind Tractor Ltd (CLG) IS ACNC + DGR — should this be the applicant instead? |
+
+**DECISION NEEDED:** Which entity applies?
+- **A Curious Tractor Pty Ltd** (ABN 21 591 780 066) — trading company, mission-locked. Current applicant.
+- **A Kind Tractor Ltd** (ABN 50 001 350 152) — CLG, ACNC charity, DGR. Ticks "ACNC registered charity" box.
+- PFI supports "social enterprises, not-for-profit and/or community organisations including charities"
+- Using the charity may be stronger for eligibility. But financials would need to be from that entity.
+
+### Seeking Social Traders / People and Planet First certification?
+
+Form asks: *"Is your organisation seeking to obtain People and Planet First verification or Social Traders certification for the purpose of applying for PFI?"*
+
+- Answer: **Yes** (Social Traders)
+- Note: Must be completed before Stage 2 Applications close. Not needed for this Stage 1 EOI.
+
+### ORIC / Supply Nation registered?
+
+- Answer: **No**
+- ACT is not an Indigenous-owned organisation. We partner with Indigenous-owned orgs (Oonchiumpa, Wilya Janta).
+
+### Impact Areas (form page 7 — select multiple)
+
+Select:
+- [x] ensuring quality jobs for disadvantaged Queenslanders
+- [x] reducing homelessness and increase social and affordable housing
+- [x] creating place-based initiatives to enable all communities to thrive
+- [ ] helping vulnerable young people thrive, and reducing crime rates *(possible but weaker)*
+- [ ] addressing drivers of addiction and mental health issues
+- [ ] reducing children in out-of-home care
+- [ ] improving women's safety
+- [x] other opportunities to generate high social impact for Queenslanders
+
+### Form Fields — What's Written vs What Ben Must Provide
+
+#### READY (drafted in this document)
+
+| Form Field | Word Limit | Status | Section |
+|---|---|---|---|
+| Organisation business & impact mission | 200 | DONE (~200 words) | Section 1 |
+| Business model / theory of change | 500 | DONE (~494 words) | Section 2 |
+| Proposal overview | 500 | DONE (~495 words) | Section 3 |
+| Scoping/planning completed to date | 500 | DONE (in Section 3) | Section 3 |
+| Budget table (6 line items) | — | DONE | Section 4 |
+| Revenue generation / repayment plan | 500 | DONE (~476 words) | Section 5 |
+| Funding sources table | — | DONE (7 sources) | Section 6 |
+| Funding gap explanation | 400 | DONE (~381 words) | Section 7 |
+| Social impact description | 500 | DONE (~498 words) | Section 8 |
+| Impact measurement approach | 500 | DONE (~497 words) | Section 9 |
+| Third parties table | — | DONE (4 parties) | Third Parties |
+
+#### BEN MUST PROVIDE (cannot be answered without him)
+
+| Form Field | What's Needed | Priority |
+|---|---|---|
+| **QLD address** | Street address on Jinibara Country for form | CRITICAL |
+| **GST status** | Registered / Not registered / Exempt? If exempt, explain (200 words). If not registered and not exempt, explain (200 words). | CRITICAL |
+| **Primary contact** | Title, First Name, Last Name | CRITICAL |
+| **Position in organisation** | e.g. "Co-founder & CEO" or "Director" | CRITICAL |
+| **Phone number** | Australian mobile | CRITICAL |
+| **Email address** | nicholas@act.place or benjamin@act.place? | CRITICAL |
+| **Alternate email** | Optional | LOW |
+| **Alternate phone** | Optional | LOW |
+| **Financial table 2022-23** | Total Revenue: $189,760 · Trading Revenue: $189,760 · Total Assets: $1,768,684 · Total Liabilities: $1,867,380 | ✅ DONE |
+| **Financial table 2023-24** | Total Revenue: $330,822 · Trading Revenue: $246,352 · Total Assets: $1,807,963 · Total Liabilities: $1,835,211 | ✅ DONE |
+| **Financial table 2024-25** | Total Revenue: $790,837 · Trading Revenue: $669,257 · Total Assets: $1,610,764 · Total Liabilities: $1,490,204 | ✅ DONE |
+| **Notes to accounts** | See draft below — explain Witta property, Heritage loan, revenue growth, entity transition | ✅ DRAFTED |
+| **Authorised person** | Name, Title, Position, Phone, Email (may differ from primary contact) | CRITICAL |
+| **PFI Privacy Consent Letter** | Download PDF from form → print → sign → scan → upload | CRITICAL |
+| **Which entity?** | A Curious Tractor Pty Ltd OR A Kind Tractor Ltd? Affects ABN, org type, financials. | CRITICAL |
+
+#### DECISIONS NEEDED
+
+| Decision | Options | Recommendation |
+|---|---|---|
+| **Applicant entity** | Pty Ltd (trading) vs CLG (charity) | Discuss with Nick. CLG ticks more boxes but financials may be different. |
+| **Primary contact** | Nic or Ben? | Nic (CEO, public face) with Ben as alternate |
+| **"40% community share"** | Specific % or "community benefit model"? | Already changed to "community benefit model" — safer since % isn't committed |
+| **Washing machine count** | "5 deployed" or "20"? | Use 5 (verified). 20 may include prototypes. |
+| **Bed count** | 369 or 389? | 389 (asset register total). Note in submission if asked. |
+| **Website URL** | goodsoncountry.com.au or goodsoncountry.au? | Check which resolves. Use primary domain. |
+| **SEFA status** | "In discussion" or "advanced"? | Confirm with Joel Bird before submitting |
+
+### Timeline to Submission (6 days)
+
+| Day | Action | Who |
+|-----|--------|-----|
+| **Mon Mar 9** | Review this document + make decisions (entity, contact, GST) | Ben + Nic |
+| **Tue Mar 10** | ~~Pull 3 years of financials from Xero~~ ✅ DONE — verify Notes to Accounts | Ben |
+| **Wed Mar 11** | Nic reviews all narrative sections, flags any concerns | Nic |
+| **Thu Mar 12** | Write Notes to Accounts if needed. Confirm SEFA framing with Joel. | Ben |
+| **Fri Mar 13** | Download PFI Consent Letter, sign, scan. Final proofread. | Nic |
+| **Sat Mar 14** | Buffer day | — |
+| **Sun Mar 15** | **SUBMIT by 5pm** | Ben |
+
+### Quick Wins Ben Can Do Right Now
+
+1. **Check ABN lookup** — go to abr.business.gov.au, enter 21 591 780 066, confirm GST status and entity details match
+2. **Check goodsoncountry.au vs goodsoncountry.com.au** — which resolves?
+3. ~~Open Xero → Reports → Balance Sheet + P&L~~ ✅ DONE — pulled via API
+4. **Text Nic**: "PFI EOI due Sunday. Need 30 min to review narrative. When works?"
+5. **Download the PFI Consent Letter** from the online form (link on page 2 of the PDF)
+
+---
+
+### Financial Summary (from Xero API — verified March 9 2026)
+
+| Year | Total Revenue | Trading Revenue | Total Assets | Total Liabilities | Net Assets |
+|------|--------------|----------------|-------------|-------------------|------------|
+| **FY2022-23** | $189,760 | $189,760 | $1,768,684 | $1,867,380 | -$98,696 |
+| **FY2023-24** | $330,822 | $246,352 | $1,807,963 | $1,835,211 | -$27,248 |
+| **FY2024-25** | $790,837 | $669,257 | $1,610,764 | $1,490,204 | $120,560 |
+
+**Trading Revenue breakdown (excludes grants + asset sales):**
+- FY22-23: Eco-tourism $22,575 + Other Revenue $137,435 + Rent $29,750
+- FY23-24: Eco-tourism $99,785 + Consulting $25,598 + Other Revenue $78,174 + Rent $32,795 + Travel $10,000
+- FY24-25: Eco-tourism $107,877 + Consulting $110,200 + Other Revenue $426,629 + Rent $24,550
+
+**"Other Revenue" likely includes Goods on Country product sales** — PICC, Centrecorp, community partner payments. Xero doesn't tag by project yet.
+
+### Draft Notes to Accounts (200 words max for PFI form)
+
+> A Curious Tractor Pty Ltd is a mission-locked social enterprise in its third year of active trading. Key items to note:
+>
+> **Assets:** Total assets are primarily the Witta property (Black Cockatoo Valley, Jinibara Country) valued at $1.57M, which operates as our eco-tourism and regenerative agriculture hub. Fixed assets include farm equipment, vehicles, and plant used across community programs.
+>
+> **Liabilities:** The Heritage Loan ($968K) funds the Witta property acquisition. Current liabilities include director's funds introduced ($675K) to seed the business — these represent founder investment, not external debt.
+>
+> **Revenue trajectory:** Revenue has grown from $190K (FY23) to $791K (FY25), reflecting scaling of three trading streams: eco-tourism (Black Cockatoo Valley stays), consulting/mentoring (community development contracts), and product sales through Goods on Country (remote community partnerships). "Other Revenue" ($427K in FY25) includes Goods trading with communities including PICC Aboriginal Corporation and Centrecorp Foundation.
+>
+> **Net position:** The entity moved from negative equity (-$99K) to positive ($121K) in FY25, demonstrating the viability of the community benefit model as trading matures.
+
+*(196 words)*
 
 ---
 ---
@@ -462,21 +611,21 @@ Our measurement system runs on Supabase (PostgreSQL), with automated triggers, r
 
 ## C. Advisory Board (13+ members)
 
-| Name | Organisation | Email | Role |
-|------|-------------|-------|------|
-| **Kristy Bloomfield** | Oonchiumpa Consultancy | kristy.bloomfield@oonchiumpa.com.au | Cultural Lead & Co-Design Director |
-| **Nicholas Marchesi OAM** | A Curious Tractor | nicholas@act.place | Founder & CEO, Project Lead |
-| **Sally Grimsley-Ballard** | Snow Foundation | s.grimsley-ballard@snowfoundation.org.au | Strategic Partner |
-| **Sam Davies** | Defy Design | sam@defydesign.org | Recycling & Manufacturing |
-| **Judith Meiklejohn** | Orange Sky | judith@orangesky.org.au | Social Enterprise Advisory |
-| **Corey Tutt** | DeadlyScience | ceo@deadlyscience.org.au | CEO, Advisor |
-| **April Long** | SMART Recovery Australia | along@srau.org.au | Advisory |
-| **Susan Clear** | Independent | susan.clear@gmail.com | Advisory |
-| **Nina Fitzgerald** | Independent | hello@nina-fitzgerald.com | Advisory |
-| **Daniel Pittman** | Zinus | daniel.pittman@zinus.com | Industry Partner |
-| **Shaun Fisher** | Fishers Oysters | fishers.oysters@gmail.com | Advisory |
-| **Adeem** | CYP | adeemal@cyp.org.au | Community Services |
-| **Dr. Simon Quilty** | Wilya Janta | — | CEO, 20+ years NT health |
+| Name                       | Organisation             | Email                                    | Role                               |
+| -------------------------- | ------------------------ | ---------------------------------------- | ---------------------------------- |
+| **Kristy Bloomfield**      | Oonchiumpa Consultancy   | kristy.bloomfield@oonchiumpa.com.au      | Cultural Lead & Co-Design Director |
+| **Nicholas Marchesi OAM**  | A Curious Tractor        | nicholas@act.place                       | Founder & CEO, Project Lead        |
+| **Sally Grimsley-Ballard** | Snow Foundation          | s.grimsley-ballard@snowfoundation.org.au | Strategic Partner                  |
+| **Sam Davies**             | Defy Design              | sam@defydesign.org                       | Recycling & Manufacturing          |
+| **Judith Meiklejohn**      | Orange Sky               | judith@orangesky.org.au                  | Social Enterprise Advisory         |
+| **Corey Tutt**             | DeadlyScience            | ceo@deadlyscience.org.au                 | CEO, Advisor                       |
+| **April Long**             | SMART Recovery Australia | along@srau.org.au                        | Advisory                           |
+| **Susan Clear**            | Independent              | susan.clear@gmail.com                    | Advisory                           |
+| **Nina Fitzgerald**        | Independent              | hello@nina-fitzgerald.com                | Advisory                           |
+| **Daniel Pittman**         | Zinus                    | daniel.pittman@zinus.com                 | Industry Partner                   |
+| **Shaun Fisher**           | Fishers Oysters          | fishers.oysters@gmail.com                | Advisory                           |
+| **Adeem**                  | CYP                      | adeemal@cyp.org.au                       | Community Services                 |
+| **Dr. Simon Quilty**       | Wilya Janta              | —                                        | CEO, 20+ years NT health           |
 
 Monthly advisory group check-ins scheduled (next: May 5, 2026).
 
@@ -847,7 +996,7 @@ Research: Chest freezer conversions, 12V systems, BLUETTI portable power.
 ### Verified Claims
 - 389 assets tracked in register (363 Basket Beds + 6 Weave Beds + 20 Washers)
 - 369+ beds referenced in Catalysing Impact application (some discrepancy — likely active vs total)
-- $445,685+ total funding confirmed (not $423,785 — AMP Spark $21.9K was missing from original count)
+- $445,685+ total funding confirmed (not $445,685 — AMP Spark $21.9K was missing from original count)
 - 15 named storytellers across 6 communities — all verified via Empathy Ledger v2 interviews
 - Production facility investment ~$100K (TFN + ACT contribution)
 

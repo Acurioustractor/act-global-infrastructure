@@ -299,6 +299,12 @@ const cronScripts = [
     args: '--verbose',
     cron_restart: '30 11 * * *', // Daily 11:30am AEST (after correlation at 11am)
   },
+  {
+    name: 'financial-snapshots',
+    script: 'scripts/populate-financial-snapshots.mjs',
+    args: '--current',
+    cron_restart: '0 9 1 * *', // 1st of month at 9am AEST (after Xero sync at 8:30am)
+  },
 ];
 
 module.exports = {

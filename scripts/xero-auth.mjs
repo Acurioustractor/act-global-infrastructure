@@ -26,7 +26,7 @@ const supabase = SUPABASE_KEY ? createClient(SUPABASE_URL, SUPABASE_KEY) : null;
 const TOKEN_FILE = path.join(process.cwd(), '.xero-tokens.json');
 const REDIRECT_URI = 'http://localhost:5678/callback';
 
-const SCOPES = 'email profile openid accounting.contacts accounting.contacts.read accounting.settings accounting.settings.read accounting.reports.read accounting.transactions accounting.transactions.read accounting.budgets.read offline_access';
+const SCOPES = 'openid profile email offline_access accounting.transactions accounting.transactions.read accounting.contacts.read accounting.settings.read accounting.reports.read';
 
 // PKCE helpers
 function generateCodeVerifier() {

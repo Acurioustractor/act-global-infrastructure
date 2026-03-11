@@ -61,6 +61,13 @@
  *  32. get_project_closeoff          — Close-off checklist: invoices, actions, contacts, decisions, grants
  *  33. get_daily_grant_report        — Daily grant landscape: urgency-grouped, milestones, new opps, writing tasks
  *
+ * Tools (Wave 13 — Reconciliation):
+ *  34. get_reconciliation_status      — Tagged %, reconciled %, receipt coverage, stuck items
+ *  35. get_untagged_summary           — Untagged transactions grouped by vendor with suggested codes
+ *
+ * Tools (Wave 14 — Overdue Actions):
+ *  36. get_overdue_actions             — Aggregated overdue items: untagged, missing receipts, invoices, grants, stuck pipeline
+ *
  * Secrets required (set via `ntn workers env set`):
  *   SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY
  *
@@ -3668,6 +3675,405 @@ worker.tool("get_daily_grant_report", {
     const totalApps = (applications || []).length;
     const totalOpps = (opportunities || []).length;
     lines.push(`${totalApps} active applications | ${totalOpps} opportunities tracked | ${closingThisWeek.length} closing this week`);
+
+    return lines.join("\n");
+  },
+});
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// WAVE 13 — RECONCILIATION
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+worker.tool("get_reconciliation_status", {
+  title: "Get Reconciliation Status",
+  description:
+    "Returns reconciliation overview: total transactions, % tagged with project codes, " +
+    "% reconciled in Xero, % with receipts from Dext, top untagged vendors, and stuck items " +
+    "(untagged for >14 days). Use when asked about reconciliation status, financial data quality, " +
+    "or how clean the books are.",
+  schema: {
+    type: "object" as const,
+    properties: {
+      days_back: {
+        anyOf: [{ type: "number" as const }, { type: "null" as const }],
+        description: "Look back N days (default: 90). Pass null for default.",
+      },
+    },
+    required: ["days_back"] as const,
+    additionalProperties: false,
+  },
+  execute: async (params: { days_back: number | null }) => {
+    const supabase = getSupabase();
+    const lookback = params.days_back ?? 90;
+    const since = daysAgo(lookback).split("T")[0];
+    const lines: string[] = ["RECONCILIATION STATUS", "─".repeat(40)];
+
+    // Total counts
+    const { count: totalCount } = await supabase
+      .from("xero_transactions")
+      .select("*", { count: "exact", head: true })
+      .gte("date", since);
+
+    const { count: taggedCount } = await supabase
+      .from("xero_transactions")
+      .select("*", { count: "exact", head: true })
+      .gte("date", since)
+      .not("project_code", "is", null);
+
+    const { count: reconciledCount } = await supabase
+      .from("xero_transactions")
+      .select("*", { count: "exact", head: true })
+      .gte("date", since)
+      .eq("is_reconciled", true);
+
+    const { count: withReceiptCount } = await supabase
+      .from("xero_transactions")
+      .select("*", { count: "exact", head: true })
+      .gte("date", since)
+      .not("dext_document_id", "is", null);
+
+    const total = totalCount || 0;
+    const tagged = taggedCount || 0;
+    const reconciled = reconciledCount || 0;
+    const withReceipt = withReceiptCount || 0;
+
+    lines.push(`Period: last ${lookback} days (since ${since})`);
+    lines.push("");
+    lines.push(`Total transactions: ${total}`);
+    lines.push(`Tagged:       ${tagged}/${total} (${total > 0 ? Math.round((tagged / total) * 100) : 0}%)`);
+    lines.push(`Reconciled:   ${reconciled}/${total} (${total > 0 ? Math.round((reconciled / total) * 100) : 0}%)`);
+    lines.push(`Has receipt:  ${withReceipt}/${total} (${total > 0 ? Math.round((withReceipt / total) * 100) : 0}%)`);
+
+    // Top untagged vendors
+    const { data: untagged } = await supabase
+      .from("xero_transactions")
+      .select("contact_name, total, type")
+      .gte("date", since)
+      .is("project_code", null)
+      .not("type", "in", '("SPEND-TRANSFER","RECEIVE-TRANSFER")');
+
+    if (untagged && untagged.length > 0) {
+      const vendorTotals = new Map<string, { count: number; total: number }>();
+      for (const tx of untagged) {
+        const name = tx.contact_name || "(No contact)";
+        const existing = vendorTotals.get(name) || { count: 0, total: 0 };
+        existing.count++;
+        existing.total += Math.abs(Number(tx.total) || 0);
+        vendorTotals.set(name, existing);
+      }
+
+      const sorted = [...vendorTotals.entries()]
+        .sort((a, b) => b[1].total - a[1].total)
+        .slice(0, 10);
+
+      lines.push("");
+      lines.push(`TOP UNTAGGED VENDORS (${untagged.length} transactions, excl. transfers):`);
+      for (const [name, info] of sorted) {
+        lines.push(`  ${name}: ${info.count} txns, $${Math.round(info.total).toLocaleString()}`);
+      }
+    }
+
+    // Stuck items (>14 days untagged)
+    const stuckSince = daysAgo(14).split("T")[0];
+    const { data: stuck } = await supabase
+      .from("xero_transactions")
+      .select("contact_name, total, date")
+      .is("project_code", null)
+      .lt("date", stuckSince)
+      .gte("date", since)
+      .not("type", "in", '("SPEND-TRANSFER","RECEIVE-TRANSFER")')
+      .order("total", { ascending: true })
+      .limit(10);
+
+    if (stuck && stuck.length > 0) {
+      lines.push("");
+      lines.push(`STUCK ITEMS (untagged >14 days, top ${stuck.length}):`);
+      for (const s of stuck as any[]) {
+        lines.push(`  ${s.date} | ${s.contact_name || "?"} | $${Math.abs(Number(s.total)).toLocaleString()}`);
+      }
+    }
+
+    return lines.join("\n");
+  },
+});
+
+worker.tool("get_untagged_summary", {
+  title: "Get Untagged Summary",
+  description:
+    "Returns untagged transactions grouped by vendor with suggested project codes. " +
+    "Excludes inter-account transfers (already handled as ACT-IN). " +
+    "Shows top vendors by dollar value for human review. " +
+    "Use when asked about untagged transactions, what needs tagging, or financial cleanup priorities.",
+  schema: {
+    type: "object" as const,
+    properties: {
+      limit: {
+        anyOf: [{ type: "number" as const }, { type: "null" as const }],
+        description: "Max vendor groups to return (default: 20). Pass null for default.",
+      },
+    },
+    required: ["limit"] as const,
+    additionalProperties: false,
+  },
+  execute: async (params: { limit: number | null }) => {
+    const supabase = getSupabase();
+    const maxItems = params.limit ?? 20;
+    const lines: string[] = ["UNTAGGED TRANSACTIONS SUMMARY", "─".repeat(40)];
+
+    // Fetch untagged, excluding transfers
+    const { data: untagged } = await supabase
+      .from("xero_transactions")
+      .select("contact_name, total, type, date, bank_account")
+      .is("project_code", null)
+      .not("type", "in", '("SPEND-TRANSFER","RECEIVE-TRANSFER")')
+      .order("date", { ascending: false });
+
+    if (!untagged || untagged.length === 0) {
+      lines.push("No untagged transactions (excluding transfers). All caught up!");
+      return lines.join("\n");
+    }
+
+    // Group by vendor
+    const vendorMap = new Map<string, { count: number; total: number; dates: string[]; types: Set<string> }>();
+    for (const tx of untagged) {
+      const name = tx.contact_name || "(No contact)";
+      const existing = vendorMap.get(name) || { count: 0, total: 0, dates: [], types: new Set() };
+      existing.count++;
+      existing.total += Math.abs(Number(tx.total) || 0);
+      if (tx.date) existing.dates.push(tx.date);
+      if (tx.type) existing.types.add(tx.type);
+      vendorMap.set(name, existing);
+    }
+
+    // Load vendor rules for suggestions
+    const { data: rules } = await supabase
+      .from("vendor_project_rules")
+      .select("vendor_name, aliases, project_code");
+
+    function suggestCode(contactName: string): string | null {
+      if (!rules) return null;
+      const lower = contactName.toLowerCase();
+      for (const rule of rules) {
+        if (lower.includes(rule.vendor_name.toLowerCase())) return rule.project_code;
+        for (const alias of rule.aliases || []) {
+          if (lower.includes(alias.toLowerCase())) return rule.project_code;
+        }
+      }
+      return null;
+    }
+
+    const sorted = [...vendorMap.entries()]
+      .sort((a, b) => b[1].total - a[1].total)
+      .slice(0, maxItems);
+
+    const totalUntaggedValue = [...vendorMap.values()].reduce((s, v) => s + v.total, 0);
+
+    lines.push(`${untagged.length} untagged transactions across ${vendorMap.size} vendors`);
+    lines.push(`Total untagged value: $${Math.round(totalUntaggedValue).toLocaleString()}`);
+    lines.push("");
+    lines.push(`TOP ${sorted.length} BY VALUE:`);
+
+    for (const [name, info] of sorted) {
+      const suggestion = suggestCode(name);
+      const suggestionStr = suggestion ? ` → suggested: ${suggestion}` : "";
+      const dateRange = info.dates.length > 0
+        ? ` (${info.dates[info.dates.length - 1].substring(0, 10)}..${info.dates[0].substring(0, 10)})`
+        : "";
+      lines.push(
+        `  ${name}: ${info.count} txns, $${Math.round(info.total).toLocaleString()}${dateRange}${suggestionStr}`
+      );
+    }
+
+    if (vendorMap.size > maxItems) {
+      lines.push(`  ... and ${vendorMap.size - maxItems} more vendors`);
+    }
+
+    return lines.join("\n");
+  },
+});
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// WAVE 14 — Overdue Actions
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+worker.tool("get_overdue_actions", {
+  title: "Get Overdue Actions",
+  description:
+    "Aggregates ALL overdue finance items across 5 sources: untagged transactions (>7 days), " +
+    "missing receipts (SPEND with no attachments, >7 days), overdue invoices (ACCREC past due date), " +
+    "grant deadlines passed (not submitted/awarded/rejected), and stuck receipt pipeline items (>14 days). " +
+    "Returns prioritized action list grouped by urgency with estimated time. " +
+    "Use when asked: what's overdue, what needs attention, daily finance check, morning actions, what's stuck.",
+  schema: {
+    type: "object" as const,
+    properties: {
+      include_urls: {
+        anyOf: [{ type: "boolean" as const }, { type: "null" as const }],
+        description: "Include dashboard URLs for each action. Default true.",
+      },
+    },
+    required: ["include_urls"] as const,
+    additionalProperties: false,
+  },
+  execute: async (params: { include_urls: boolean | null }) => {
+    const supabase = getSupabase();
+    const includeUrls = params.include_urls ?? true;
+    const today = todayStr();
+    const sevenDaysAgo = daysAgo(7);
+    const fourteenDaysAgo = daysAgo(14);
+    const baseUrl = "https://act-command-center.vercel.app";
+
+    type ActionItem = {
+      type: string;
+      priority: "critical" | "high" | "medium";
+      title: string;
+      description: string;
+      url?: string;
+      estimatedMinutes: number;
+    };
+
+    const actions: ActionItem[] = [];
+
+    // 1. Untagged transactions (>7 days, excl transfers)
+    const { data: untagged, count: untaggedCount } = await supabase
+      .from("xero_transactions")
+      .select("contact_name, total, date", { count: "exact" })
+      .is("project_code", null)
+      .not("type", "in", '("SPEND-TRANSFER","RECEIVE-TRANSFER")')
+      .lt("date", sevenDaysAgo)
+      .order("total", { ascending: true })
+      .limit(5);
+
+    if ((untaggedCount || 0) > 0) {
+      const topVendors = (untagged || [])
+        .map((t: any) => `${t.contact_name || "?"} ($${Math.abs(Number(t.total)).toLocaleString()})`)
+        .join(", ");
+      actions.push({
+        type: "untagged_transactions",
+        priority: (untaggedCount || 0) > 50 ? "critical" : "high",
+        title: `${untaggedCount} untagged transactions (>7 days old)`,
+        description: `Top: ${topVendors}`,
+        url: includeUrls ? `${baseUrl}/finance/tagger` : undefined,
+        estimatedMinutes: Math.ceil((untaggedCount || 0) / 10),
+      });
+    }
+
+    // 2. Missing receipts (SPEND, no attachments, >7 days)
+    const { count: missingReceiptCount } = await supabase
+      .from("xero_transactions")
+      .select("*", { count: "exact", head: true })
+      .in("type", ["SPEND", "ACCPAY"])
+      .or("has_attachments.is.null,has_attachments.eq.false")
+      .lt("date", sevenDaysAgo);
+
+    if ((missingReceiptCount || 0) > 0) {
+      actions.push({
+        type: "missing_receipts",
+        priority: (missingReceiptCount || 0) > 100 ? "critical" : "high",
+        title: `${missingReceiptCount} spend transactions missing receipts`,
+        description: "ATO requires receipt retention for 5 years. Forward to Dext or mark as no-receipt-needed.",
+        url: includeUrls ? `${baseUrl}/finance/receipt-pipeline` : undefined,
+        estimatedMinutes: Math.ceil((missingReceiptCount || 0) / 5),
+      });
+    }
+
+    // 3. Overdue invoices (ACCREC past due_date, still AUTHORISED/SENT)
+    const { data: overdueInvoices, count: overdueCount } = await supabase
+      .from("xero_invoices")
+      .select("invoice_number, contact_name, amount_due, due_date", { count: "exact" })
+      .eq("type", "ACCREC")
+      .in("status", ["AUTHORISED", "SENT"])
+      .lt("due_date", today)
+      .order("due_date", { ascending: true })
+      .limit(5);
+
+    if ((overdueCount || 0) > 0) {
+      const totalOverdue = (overdueInvoices || []).reduce(
+        (s: number, i: any) => s + Math.abs(Number(i.amount_due) || 0), 0
+      );
+      const invoiceList = (overdueInvoices || [])
+        .map((i: any) => `${i.contact_name} #${i.invoice_number} ($${Math.abs(Number(i.amount_due)).toLocaleString()})`)
+        .join(", ");
+      actions.push({
+        type: "overdue_invoices",
+        priority: "critical",
+        title: `${overdueCount} overdue invoices ($${Math.round(totalOverdue).toLocaleString()})`,
+        description: invoiceList,
+        url: includeUrls ? `${baseUrl}/finance/revenue` : undefined,
+        estimatedMinutes: (overdueCount || 0) * 5,
+      });
+    }
+
+    // 4. Grant deadlines passed
+    const { data: passedGrants, count: grantCount } = await supabase
+      .from("grant_applications")
+      .select("funder_name, deadline, status", { count: "exact" })
+      .lt("deadline", today)
+      .not("status", "in", '("submitted","awarded","rejected","expired","lost")')
+      .order("deadline", { ascending: true })
+      .limit(5);
+
+    if ((grantCount || 0) > 0) {
+      const grantList = (passedGrants || [])
+        .map((g: any) => `${g.funder_name} (deadline ${g.deadline}, status: ${g.status})`)
+        .join(", ");
+      actions.push({
+        type: "grant_deadlines",
+        priority: "high",
+        title: `${grantCount} grant deadlines passed without submission`,
+        description: grantList,
+        url: includeUrls ? `${baseUrl}/grants` : undefined,
+        estimatedMinutes: (grantCount || 0) * 10,
+      });
+    }
+
+    // 5. Stuck pipeline items (>14 days in same stage, not reconciled)
+    const { count: stuckCount } = await supabase
+      .from("receipt_pipeline_status")
+      .select("*", { count: "exact", head: true })
+      .not("stage", "eq", "reconciled")
+      .lt("transaction_date", fourteenDaysAgo);
+
+    if ((stuckCount || 0) > 0) {
+      actions.push({
+        type: "stuck_pipeline",
+        priority: "medium",
+        title: `${stuckCount} receipt pipeline items stuck >14 days`,
+        description: "Items not progressing through receipt → Dext → Xero → reconciled pipeline.",
+        url: includeUrls ? `${baseUrl}/finance/receipt-pipeline` : undefined,
+        estimatedMinutes: (stuckCount || 0) * 3,
+      });
+    }
+
+    // Build output
+    if (actions.length === 0) {
+      return "OVERDUE ACTIONS\n" + "─".repeat(40) + "\n\nAll clear — no overdue finance items. Well done!";
+    }
+
+    // Sort by priority
+    const priorityOrder: Record<string, number> = { critical: 0, high: 1, medium: 2 };
+    actions.sort((a, b) => priorityOrder[a.priority] - priorityOrder[b.priority]);
+
+    const totalMinutes = actions.reduce((s, a) => s + a.estimatedMinutes, 0);
+    const lines: string[] = [
+      "OVERDUE FINANCE ACTIONS",
+      "─".repeat(40),
+      `${actions.length} items | ~${totalMinutes} min estimated`,
+      "",
+    ];
+
+    let currentPriority = "";
+    for (const action of actions) {
+      if (action.priority !== currentPriority) {
+        currentPriority = action.priority;
+        lines.push(`── ${currentPriority.toUpperCase()} ──`);
+      }
+      lines.push(`  ${action.title}`);
+      lines.push(`    ${action.description}`);
+      if (action.url) lines.push(`    → ${action.url}`);
+      lines.push(`    (~${action.estimatedMinutes} min)`);
+      lines.push("");
+    }
 
     return lines.join("\n");
   },

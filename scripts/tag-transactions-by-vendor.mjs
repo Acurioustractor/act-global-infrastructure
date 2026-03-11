@@ -259,19 +259,29 @@ async function tagTransactions() {
 
   console.log(`\nUntagged transactions: ${allUntagged.length}`);
 
-  const stats = { tier1: 0, tier2: 0, tier3: 0, unmatched: 0 };
+  const stats = { tier0: 0, tier1: 0, tier2: 0, tier3: 0, unmatched: 0 };
   const matches = []; // { id, projectCode, source, tier }
 
   for (const tx of allUntagged) {
     let projectCode = null;
     let source = null;
 
+    // Tier 0: Auto-tag inter-account transfers as ACT-IN
+    const txType = (tx.type || '').toUpperCase();
+    if (txType === 'SPEND-TRANSFER' || txType === 'RECEIVE-TRANSFER') {
+      projectCode = 'ACT-IN';
+      source = 'transfer_default';
+      stats.tier0++;
+    }
+
     // Tier 1: Vendor match (direct project code from DB rules)
-    const vendorMatch = matchVendor(tx.contact_name, vendorMap);
-    if (vendorMatch) {
-      projectCode = vendorMatch.projectCode;
-      source = 'vendor_rule';
-      stats.tier1++;
+    if (!projectCode) {
+      const vendorMatch = matchVendor(tx.contact_name, vendorMap);
+      if (vendorMatch) {
+        projectCode = vendorMatch.projectCode;
+        source = 'vendor_rule';
+        stats.tier1++;
+      }
     }
 
     // Tier 2: Line items tracking
@@ -308,14 +318,15 @@ async function tagTransactions() {
 
   console.log('\n📊 Matching Results');
   console.log('─'.repeat(40));
+  console.log(`Tier 0 (Transfer):  ${stats.tier0}`);
   console.log(`Tier 1 (Vendor):    ${stats.tier1}`);
   console.log(`Tier 2 (Tracking):  ${stats.tier2}`);
   console.log(`Tier 3 (Keyword):   ${stats.tier3}`);
-  console.log(`Total matched:      ${stats.tier1 + stats.tier2 + stats.tier3}`);
+  console.log(`Total matched:      ${stats.tier0 + stats.tier1 + stats.tier2 + stats.tier3}`);
   console.log(`Unmatched:          ${stats.unmatched}`);
 
   const totalTx = allUntagged.length;
-  const matchedCount = stats.tier1 + stats.tier2 + stats.tier3;
+  const matchedCount = stats.tier0 + stats.tier1 + stats.tier2 + stats.tier3;
   const newCoverage = totalTx > 0 ? (matchedCount / totalTx * 100).toFixed(1) : '0';
   console.log(`\nNew coverage of untagged: ${newCoverage}%`);
 
