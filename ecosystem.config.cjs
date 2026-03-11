@@ -282,10 +282,16 @@ const cronScripts = [
     cron_restart: '* * * * *', // Every minute (lightweight — just reads pm2 jlist + upserts)
   },
   {
+    name: 'xero-sync',
+    script: 'scripts/sync-xero-to-supabase.mjs',
+    args: 'full',
+    cron_restart: '0 */6 * * *', // Every 6 hours — keep Xero data fresh for all finance scripts
+  },
+  {
     name: 'dext-receipt-forward',
     script: 'scripts/forward-receipts-to-dext.mjs',
     args: '--days 3',
-    cron_restart: '0 */6 * * *', // Every 6 hours — catch new billing emails promptly
+    cron_restart: '30 */6 * * *', // Every 6 hours +30min (after xero-sync at :00)
   },
   {
     name: 'receipt-pipeline-correlate',
