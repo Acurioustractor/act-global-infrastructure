@@ -265,6 +265,23 @@ const cronScripts = [
     cron_restart: '0 7 * * *', // Daily 7am AEST (after discover-grants at 6am)
   },
   // check-grant-deadlines removed — covered by daily briefing grant section + event reactor
+  {
+    name: 'daily-priorities',
+    script: 'scripts/generate-daily-priorities.mjs',
+    args: '--verbose',
+    cron_restart: '30 6 * * *', // Daily 6:30am AEST (before 7am briefing — scored priority engine)
+  },
+  {
+    name: 'sync-priorities-to-notion',
+    script: 'scripts/sync-priorities-to-notion.mjs',
+    args: '--verbose',
+    cron_restart: '45 6 * * *', // Daily 6:45am AEST (after priorities at 6:30, before briefing at 7)
+  },
+  {
+    name: 'sync-grantscope-matches',
+    script: 'scripts/sync-grantscope-matches.mjs',
+    cron_restart: '0 5 * * *', // Daily 5am AEST (before priority generation at 6:30am)
+  },
 {
     name: 'sprint-suggestions',
     script: 'scripts/generate-sprint-suggestions.mjs',
@@ -315,6 +332,18 @@ const cronScripts = [
     name: 'finance-daily-briefing',
     script: 'scripts/finance-daily-briefing.mjs',
     cron_restart: '0 7 * * 1-5', // Weekdays 7am AEST (alongside general daily-briefing)
+  },
+  {
+    name: 'grantscope-to-notion',
+    script: 'scripts/sync-grantscope-to-notion.mjs',
+    args: '--verbose',
+    cron_restart: '0 */3 * * *', // Every 3 hours (new grants don't need 15-min freshness)
+  },
+  {
+    name: 'notion-to-grantscope',
+    script: 'scripts/sync-notion-stages-to-grantscope.mjs',
+    args: '--verbose',
+    cron_restart: '7 */3 * * *', // Every 3 hours +7min (offset from grantscope-to-notion)
   },
 ];
 
