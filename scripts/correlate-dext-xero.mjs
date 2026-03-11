@@ -172,12 +172,11 @@ async function main() {
 
   log(`  Found ${transactions.length} SPEND/ACCPAY transactions (${page + 1} pages)`);
 
-  // 2. Fetch Dext forwarded emails in same window
+  // 2. Fetch ALL Dext forwarded emails (not filtered by window — receipts may have been forwarded at any time)
   log('Fetching Dext forwarded emails...');
   const { data: dextEmails, error: dextError } = await supabase
     .from('dext_forwarded_emails')
-    .select('id, gmail_message_id, vendor, subject, original_date, forwarded_at')
-    .gte('forwarded_at', new Date(Date.now() - daysBack * 24 * 60 * 60 * 1000).toISOString());
+    .select('id, gmail_message_id, vendor, subject, original_date, forwarded_at');
 
   if (dextError) throw new Error(`Failed to fetch Dext emails: ${dextError.message}`);
   log(`  Found ${dextEmails.length} Dext forwarded emails`);
@@ -241,18 +240,28 @@ async function main() {
     // Stage: forwarded_to_dext (found matching Dext email)
     else {
       // Try to match against Dext forwarded emails
+      // Use wide date window (30 days) since backfilled receipts may be months apart
+      // Fall back to vendor-only match if no date match (receipt exists, just can't pin exact date)
+      let bestMatch = null;
       for (const dext of dextEmails) {
         const vendorOk = vendorsMatch(txn.contact_name, dext.vendor);
-        const dateOk = datesWithinDays(txn.date, dext.original_date || dext.forwarded_at, 5);
+        if (!vendorOk) continue;
 
-        if (vendorOk && dateOk) {
-          stage = 'forwarded_to_dext';
-          dextEmailId = dext.id;
-          gmailMessageId = dext.gmail_message_id;
-          matchedAt = new Date().toISOString();
-          verbose(`  Matched: ${txn.contact_name} $${txn.total} → Dext email "${dext.subject}"`);
-          break;
+        const dateOk = datesWithinDays(txn.date, dext.original_date || dext.forwarded_at, 30);
+        if (dateOk) {
+          bestMatch = dext;
+          break; // Exact vendor + date match — use it
         }
+        // Vendor matches but date doesn't — keep as fallback
+        if (!bestMatch) bestMatch = dext;
+      }
+
+      if (bestMatch) {
+        stage = 'forwarded_to_dext';
+        dextEmailId = bestMatch.id;
+        gmailMessageId = bestMatch.gmail_message_id;
+        matchedAt = new Date().toISOString();
+        verbose(`  Matched: ${txn.contact_name} $${txn.total} → Dext email "${bestMatch.subject}"`);
       }
     }
 

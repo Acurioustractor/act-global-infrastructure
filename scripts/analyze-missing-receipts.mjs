@@ -215,12 +215,12 @@ async function main() {
       categories.has_attachment.push(txn);
       continue;
     }
-    if (dextMatchedIds.has(id)) {
-      categories.dext_matched.push(txn);
-      continue;
-    }
     if (pipelineStage === 'forwarded_to_dext') {
       categories.in_pipeline.push(txn);
+      continue;
+    }
+    if (dextMatchedIds.has(id)) {
+      categories.dext_matched.push(txn);
       continue;
     }
 
