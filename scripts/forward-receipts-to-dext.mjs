@@ -222,6 +222,26 @@ function loadVendorPatterns() {
 
     // === X/Twitter ===
     { name: 'X Global LLC', from: ['x.com', 'twitter.com'] },
+
+    // === Health & Subscriptions ===
+    { name: 'AHM', from: ['ahm.com.au'] },
+    { name: 'HelloFresh', from: ['hellofresh.com', 'hellofresh.com.au'] },
+    { name: 'Spotify', from: ['spotify.com'] },
+    { name: 'Midjourney', from: ['midjourney.com'] },
+    { name: 'Mighty Networks', from: ['mightynetworks.com'] },
+    { name: 'Cursor AI', from: ['cursor.sh', 'cursor.com'] },
+    { name: 'DocPlay', from: ['docplay.com'] },
+    { name: 'Firecrawl', from: ['firecrawl.dev'] },
+    { name: 'Linktree', from: ['linktr.ee', 'linktree.com'] },
+    { name: 'GoGet', from: ['goget.com.au'] },
+    { name: 'Vidzflow', from: ['vidzflow.com'] },
+    { name: 'Only Domains', from: ['onlydomains.com'] },
+    { name: 'Ticketmaster', from: ['ticketmaster.com', 'ticketmaster.com.au'] },
+
+    // === Accommodation ===
+    { name: 'Wotif', from: ['wotif.com'] },
+    { name: 'Expedia', from: ['expedia.com', 'expedia.com.au'] },
+    { name: 'Agoda', from: ['agoda.com'] },
   ];
 
   return vendors;

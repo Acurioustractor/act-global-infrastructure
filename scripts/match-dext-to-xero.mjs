@@ -74,7 +74,8 @@ function vendorMatch(dextVendor, xeroContact, aliasMap) {
   return sim >= 0.5 ? sim : 0;
 }
 
-// Date proximity score (1.0 = same day, 0 = >7 days)
+// Date proximity score (1.0 = same day, 0 = >30 days)
+// Wider window because receipts may be scanned days/weeks after purchase
 function dateScore(dextDate, xeroDate) {
   if (!dextDate || !xeroDate) return 0;
   const d1 = new Date(dextDate);
@@ -84,7 +85,8 @@ function dateScore(dextDate, xeroDate) {
   if (diffDays <= 1) return 0.95;
   if (diffDays <= 3) return 0.8;
   if (diffDays <= 7) return 0.6;
-  if (diffDays <= 14) return 0.3;
+  if (diffDays <= 14) return 0.4;
+  if (diffDays <= 30) return 0.2;
   return 0;
 }
 
@@ -114,7 +116,7 @@ async function main() {
   while (true) {
     const { data, error } = await supabase
       .from('xero_transactions')
-      .select('id, contact_name, total, date, type, has_attachments, project_code')
+      .select('id, xero_transaction_id, contact_name, total, date, type, has_attachments, project_code')
       .in('type', ['SPEND', 'ACCPAY', 'SPEND-TRANSFER'])
       .gte('date', cutoffStr)
       .order('date', { ascending: false })
@@ -142,7 +144,35 @@ async function main() {
       if (!aliasMap.has(alias)) aliasMap.set(alias, [key, ...aliases]);
     }
   }
-  console.log(`Vendor alias rules: ${rules?.length || 0}\n`);
+
+  // Manual alias map for known Dext↔Xero name mismatches
+  const manualAliases = {
+    'bunnings warehouse': ['bunnings'],
+    'bunnings': ['bunnings warehouse'],
+    'budget car and truck rental (nt)': ['budget'],
+    'budget': ['budget car and truck rental', 'budget car and truck rental (nt)'],
+    'greyhound australia': ['greyhound'],
+    'greyhound': ['greyhound australia'],
+    'sunshine coast council': ['sunshine coast regional council', 'scc'],
+    'alibaba cloud (singapore) private': ['alibaba cloud'],
+    'bionic self storage': ['bionic storage'],
+    'hermit park - good morning coffee': ['good morning coffee', 'hermit park'],
+    'f v snowdon and j r rowden': ['snowdon', 'rowden'],
+    'maleny hardware and rural supplies': ['maleny hardware'],
+    'edmonds landscaping supplies': ['edmonds landscaping'],
+    'carbatec brisbane': ['carbatec'],
+    'sunset snack bar': ['sunset snack'],
+    'daylesford lavender farm & events pty ltd': ['daylesford lavender', 'daylesford'],
+    'stradbroke flyer gold cats': ['stradbroke flyer', 'gold cats'],
+    'southern providore': ['southern providore'],
+    'taxi receipt': ['taxi', '13cabs', 'silver top'],
+  };
+  for (const [key, aliases] of Object.entries(manualAliases)) {
+    const existing = aliasMap.get(key) || [];
+    aliasMap.set(key, [...new Set([...existing, ...aliases])]);
+  }
+
+  console.log(`Vendor alias rules: ${rules?.length || 0} + ${Object.keys(manualAliases).length} manual\n`);
 
   // Match each receipt
   const matches = [];
@@ -218,7 +248,7 @@ async function main() {
       const { error } = await supabase
         .from('dext_receipts')
         .update({
-          xero_transaction_id: match.tx.id,
+          xero_transaction_id: match.tx.xero_transaction_id,
           match_confidence: match.score,
           match_method: 'vendor_date',
           matched_at: new Date().toISOString(),
