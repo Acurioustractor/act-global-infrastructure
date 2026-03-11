@@ -1,40 +1,37 @@
 #!/usr/bin/env node
 
 /**
- * Forward Billing Receipts to Dext via Gmail API
+ * Backfill Historical Receipts to Dext
  *
- * Scans all delegated mailboxes for billing/receipt emails from known vendors,
- * forwards them to Dext for automated bookkeeping. Uses the same service account
- * + domain-wide delegation as sync-gmail-to-supabase.mjs.
- *
- * Tracked in integration_health via sync_status table.
+ * Searches Gmail for receipt emails going back 12 months (vs the normal 3-day window)
+ * and forwards them to Dext for processing. Uses the same vendor patterns and
+ * forwarding logic as forward-receipts-to-dext.mjs.
  *
  * Usage:
- *   node scripts/forward-receipts-to-dext.mjs              # Default: last 3 days
- *   node scripts/forward-receipts-to-dext.mjs --days 7     # Last 7 days
- *   node scripts/forward-receipts-to-dext.mjs --dry-run    # Preview without forwarding
- *   node scripts/forward-receipts-to-dext.mjs --verbose    # Detailed output
+ *   node scripts/backfill-receipts-to-dext.mjs                    # Dry run (default)
+ *   node scripts/backfill-receipts-to-dext.mjs --apply            # Forward emails
+ *   node scripts/backfill-receipts-to-dext.mjs --apply --batch 50 # Limit per run
+ *   node scripts/backfill-receipts-to-dext.mjs --months 6         # Look back 6 months
+ *   node scripts/backfill-receipts-to-dext.mjs --verbose          # Detailed output
  */
 
 import { execSync } from 'child_process';
 import { google } from 'googleapis';
 import { createClient } from '@supabase/supabase-js';
 import { recordSyncStatus } from './lib/sync-status.mjs';
-import { readFileSync } from 'fs';
-import { fileURLToPath } from 'url';
-import { dirname, join } from 'path';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
 
 const DEXT_EMAIL = 'nicmarchesi@dext.cc';
 
 const args = process.argv.slice(2);
-const DRY_RUN = args.includes('--dry-run');
+const APPLY = args.includes('--apply');
 const VERBOSE = args.includes('--verbose');
-const daysBack = (() => {
-  const idx = args.indexOf('--days');
-  return idx !== -1 ? parseInt(args[idx + 1], 10) : 3;
+const monthsBack = (() => {
+  const idx = args.indexOf('--months');
+  return idx !== -1 ? parseInt(args[idx + 1], 10) : 12;
+})();
+const batchLimit = (() => {
+  const idx = args.indexOf('--batch');
+  return idx !== -1 ? parseInt(args[idx + 1], 10) : Infinity;
 })();
 
 function log(msg) {
@@ -46,7 +43,7 @@ function verbose(msg) {
 }
 
 // ============================================
-// Secrets & Auth (same pattern as gmail sync)
+// Secrets & Auth (same pattern as forward script)
 // ============================================
 
 let secretCache = null;
@@ -113,13 +110,11 @@ function getSupabase() {
 }
 
 // ============================================
-// Vendor patterns (from dext-supplier-rules.json + apps-scripts patterns)
+// Vendor patterns (same as forward-receipts-to-dext.mjs)
 // ============================================
 
 function loadVendorPatterns() {
-  // Vendor → Gmail from: patterns (email domains / sender addresses)
-  // Expanded from Dext export (383 receipts, 181 vendors) + known billing domains
-  const vendors = [
+  return [
     // === Software & AI ===
     { name: 'Notion', from: ['notion.so', 'notionhq.com'] },
     { name: 'OpenAI', from: ['openai.com', 'email.openai.com', 'tm.openai.com'] },
@@ -150,19 +145,16 @@ function loadVendorPatterns() {
     { name: 'Easel Software', from: ['easel.tv', 'easelsoftware.com'] },
     { name: 'WizBang', from: ['wizbang.com.au'] },
     { name: 'Alibaba Cloud', from: ['alibabacloud.com', 'alibaba-inc.com'] },
-
     // === Payment processors ===
     { name: 'Stripe', from: ['stripe.com'] },
     { name: 'PayPal', from: ['paypal.com', 'paypal.com.au'] },
     { name: 'Paddle', from: ['paddle.com'] },
-
     // === Google / Apple / Amazon ===
     { name: 'Google', from: ['payments-noreply@google.com', 'google.com'] },
     { name: 'Apple', from: ['apple.com', 'email.apple.com'] },
     { name: 'Amazon', from: ['amazon.com', 'amazon.com.au'] },
     { name: 'AWS', from: ['amazonaws.com', 'aws.amazon.com'] },
     { name: 'Audible', from: ['audible.com', 'audible.com.au'] },
-
     // === Utilities & Insurance ===
     { name: 'Telstra', from: ['telstra.com', 'telstra.com.au'] },
     { name: 'AGL', from: ['agl.com.au'] },
@@ -175,7 +167,6 @@ function loadVendorPatterns() {
     { name: 'MetLife', from: ['metlife.com', 'metlife.com.au'] },
     { name: 'Sunshine Coast Council', from: ['sunshinecoast.qld.gov.au'] },
     { name: 'Prio Energy', from: ['prioenergy.com.au'] },
-
     // === Travel & Transport ===
     { name: 'Qantas', from: ['qantas.com', 'qantas.com.au'] },
     { name: 'Virgin Australia', from: ['virginaustralia.com'] },
@@ -189,7 +180,6 @@ function loadVendorPatterns() {
     { name: 'SeaLink', from: ['sealink.com.au'] },
     { name: 'Tripsim', from: ['tripsim.com'] },
     { name: 'Garmin', from: ['garmin.com'] },
-
     // === Retail & Supplies ===
     { name: 'Bunnings', from: ['bunnings.com.au'] },
     { name: 'Woolworths', from: ['woolworths.com.au'] },
@@ -203,42 +193,35 @@ function loadVendorPatterns() {
     { name: 'Clark Rubber', from: ['clarkrubber.com.au'] },
     { name: 'New Aim', from: ['newaim.com.au'] },
     { name: 'Wild Earth', from: ['wildearth.com.au'] },
-
     // === Government ===
     { name: 'ATO', from: ['ato.gov.au'] },
     { name: 'Queensland Government', from: ['qld.gov.au'] },
     { name: 'NT Government', from: ['nt.gov.au'] },
     { name: 'Dept Transport QLD', from: ['tmr.qld.gov.au'] },
-
     // === Events & Orgs ===
     { name: 'Humanitix', from: ['humanitix.com'] },
     { name: 'The Funding Network', from: ['thefundingnetwork.com.au'] },
     { name: 'Woodford Folk Festival', from: ['woodfordfolkfestival.com'] },
-
     // === Storage & Equipment ===
     { name: 'Bionic Self Storage', from: ['bionicstorage.com.au'] },
     { name: 'Diggermate', from: ['diggermate.com.au'] },
     { name: 'Container Options', from: ['containeroptions.com.au'] },
-
     // === X/Twitter ===
     { name: 'X Global LLC', from: ['x.com', 'twitter.com'] },
   ];
-
-  return vendors;
 }
 
 // ============================================
-// Gmail search & forward
+// Gmail helpers (same logic as forward script)
 // ============================================
 
-function buildGmailQuery(vendorPatterns, daysBack) {
-  const afterDate = new Date(Date.now() - daysBack * 24 * 60 * 60 * 1000);
+function buildGmailQuery(vendorPatterns, monthsBack) {
+  const afterDate = new Date();
+  afterDate.setMonth(afterDate.getMonth() - monthsBack);
   const afterStr = `${afterDate.getFullYear()}/${afterDate.getMonth() + 1}/${afterDate.getDate()}`;
 
-  // Gmail search: match billing emails from known vendor domains
   const billingKeywords = 'receipt OR invoice OR payment OR billing OR subscription OR charge OR "order confirmation" OR statement';
 
-  // Collect all unique from patterns (email domains)
   const fromClauses = [];
   for (const vendor of vendorPatterns) {
     for (const domain of vendor.from) {
@@ -254,12 +237,10 @@ function getHeader(headers, name) {
   return h?.value || '';
 }
 
-// Filter: is this actually a receipt/invoice, not marketing?
 function isLikelyReceipt(subject, from) {
   const subjectLower = (subject || '').toLowerCase();
   const fromLower = (from || '').toLowerCase();
 
-  // Strong receipt indicators — if any match, it's a receipt
   const receiptSignals = [
     'receipt', 'invoice', 'tax invoice', 'your payment', 'payment confirmed',
     'order confirmation', 'e-ticket', 'booking confirmation', 'your trip with',
@@ -270,7 +251,6 @@ function isLikelyReceipt(subject, from) {
   );
   if (hasReceiptSignal) return true;
 
-  // Strong marketing indicators — reject these
   const marketingSignals = [
     'earn up to', 'bonus points', 'don\'t miss', 'last chance',
     'off return flights', 'double points', 'new era of', 'love highlevel',
@@ -281,7 +261,6 @@ function isLikelyReceipt(subject, from) {
   const hasMarketingSignal = marketingSignals.some(s => subjectLower.includes(s));
   if (hasMarketingSignal) return false;
 
-  // Receipts from noreply/billing/payments addresses are likely real
   const billingFromPatterns = [
     'noreply@', 'no-reply@', 'no_reply@', 'receipts@', 'receipt@',
     'billing@', 'payments@', 'invoice@', 'invoices@', 'documents@',
@@ -289,254 +268,7 @@ function isLikelyReceipt(subject, from) {
   ];
   if (billingFromPatterns.some(p => fromLower.includes(p))) return true;
 
-  // Default: reject (better to miss a few than flood Dext with spam)
   return false;
-}
-
-async function searchBillingEmails(gmail, query) {
-  const messages = [];
-  let pageToken;
-
-  do {
-    const res = await gmail.users.messages.list({
-      userId: 'me',
-      q: query,
-      maxResults: 100,
-      pageToken,
-    });
-    if (res.data.messages) {
-      messages.push(...res.data.messages);
-    }
-    pageToken = res.data.nextPageToken;
-  } while (pageToken);
-
-  return messages;
-}
-
-async function getMessageMetadata(gmail, messageId) {
-  const res = await gmail.users.messages.get({
-    userId: 'me',
-    id: messageId,
-    format: 'metadata',
-    metadataHeaders: ['From', 'To', 'Subject', 'Date', 'Message-ID'],
-  });
-  return res.data;
-}
-
-async function getRawMessage(gmail, messageId) {
-  const res = await gmail.users.messages.get({
-    userId: 'me',
-    id: messageId,
-    format: 'raw',
-  });
-  return res.data.raw; // base64url encoded
-}
-
-function buildForwardMessage(fromEmail, toEmail, subject, rawBase64) {
-  // Decode the raw message
-  const rawBuffer = Buffer.from(rawBase64, 'base64url');
-
-  // Build a new MIME message that wraps the original as an attachment
-  const boundary = `----=_Part_${Date.now()}_${Math.random().toString(36).slice(2)}`;
-  const fwdSubject = subject.startsWith('Fwd:') ? subject : `Fwd: ${subject}`;
-
-  const mimeMessage = [
-    `From: ${fromEmail}`,
-    `To: ${toEmail}`,
-    `Subject: ${fwdSubject}`,
-    `MIME-Version: 1.0`,
-    `Content-Type: multipart/mixed; boundary="${boundary}"`,
-    ``,
-    `--${boundary}`,
-    `Content-Type: text/plain; charset="UTF-8"`,
-    ``,
-    `Forwarded receipt for Dext processing.`,
-    ``,
-    `--${boundary}`,
-    `Content-Type: message/rfc822`,
-    `Content-Disposition: attachment; filename="original-receipt.eml"`,
-    ``,
-    rawBuffer.toString('utf-8'),
-    ``,
-    `--${boundary}--`,
-  ].join('\r\n');
-
-  // Encode as base64url for Gmail API
-  return Buffer.from(mimeMessage).toString('base64url');
-}
-
-async function forwardMessage(gmail, fromEmail, messageId, subject, rawBase64) {
-  const encoded = buildForwardMessage(fromEmail, DEXT_EMAIL, subject, rawBase64);
-
-  const res = await gmail.users.messages.send({
-    userId: 'me',
-    requestBody: {
-      raw: encoded,
-    },
-  });
-
-  return res.data.id;
-}
-
-// ============================================
-// Deduplication via Supabase
-// ============================================
-
-async function getAlreadyForwarded(supabase) {
-  const { data, error } = await supabase
-    .from('dext_forwarded_emails')
-    .select('gmail_message_id');
-
-  if (error) {
-    // Table might not exist yet — that's OK
-    if (error.code === '42P01') {
-      log('dext_forwarded_emails table not found — will create via migration');
-      return new Set();
-    }
-    console.warn('Warning: Could not fetch forwarded emails:', error.message);
-    return new Set();
-  }
-
-  return new Set((data || []).map(r => r.gmail_message_id));
-}
-
-async function recordForwarded(supabase, records) {
-  if (records.length === 0) return;
-
-  const { error } = await supabase
-    .from('dext_forwarded_emails')
-    .upsert(records, { onConflict: 'gmail_message_id' });
-
-  if (error) {
-    console.warn('Warning: Could not record forwarded emails:', error.message);
-  }
-}
-
-// ============================================
-// Main
-// ============================================
-
-async function main() {
-  const startTime = Date.now();
-  log('=== Dext Receipt Forwarding ===');
-  log(`Scanning last ${daysBack} days across all mailboxes`);
-  if (DRY_RUN) log('DRY RUN MODE — no emails will be forwarded');
-
-  const supabase = getSupabase();
-  const users = getDelegatedUsers();
-  const vendorPatterns = loadVendorPatterns();
-  log(`Loaded ${vendorPatterns.length} vendor patterns`);
-  verbose(`Vendors: ${vendorPatterns.map(v => v.name).join(', ')}`);
-
-  const alreadyForwarded = await getAlreadyForwarded(supabase);
-  log(`${alreadyForwarded.size} emails already forwarded (skipping)`);
-
-  const query = buildGmailQuery(vendorPatterns, daysBack);
-  verbose(`Gmail query: ${query}`);
-
-  const totals = { scanned: 0, forwarded: 0, skipped: 0, errors: 0 };
-
-  for (const userEmail of users) {
-    log(`\nScanning ${userEmail}...`);
-
-    let gmail;
-    try {
-      gmail = await getGmailForUser(userEmail);
-    } catch (err) {
-      log(`  ERROR: Could not authenticate for ${userEmail}: ${err.message}`);
-      totals.errors++;
-      continue;
-    }
-
-    let messages;
-    try {
-      messages = await searchBillingEmails(gmail, query);
-    } catch (err) {
-      log(`  ERROR: Search failed for ${userEmail}: ${err.message}`);
-      totals.errors++;
-      continue;
-    }
-
-    log(`  Found ${messages.length} billing emails`);
-    totals.scanned += messages.length;
-
-    const forwardBatch = [];
-
-    for (const msg of messages) {
-      if (alreadyForwarded.has(msg.id)) {
-        verbose(`  SKIP (already forwarded): ${msg.id}`);
-        totals.skipped++;
-        continue;
-      }
-
-      try {
-        const metadata = await getMessageMetadata(gmail, msg.id);
-        const headers = metadata.payload?.headers || [];
-        const subject = getHeader(headers, 'Subject');
-        const from = getHeader(headers, 'From');
-        const date = getHeader(headers, 'Date');
-
-        verbose(`  Processing: "${subject}" from ${from} (${date})`);
-
-        if (!isLikelyReceipt(subject, from)) {
-          verbose(`  SKIP (marketing/promo): "${subject}"`);
-          totals.skipped++;
-          continue;
-        }
-
-        if (DRY_RUN) {
-          log(`  WOULD FORWARD: "${subject}" from ${from}`);
-          totals.forwarded++;
-          continue;
-        }
-
-        // Get raw message and forward it
-        const raw = await getRawMessage(gmail, msg.id);
-        const sentId = await forwardMessage(gmail, userEmail, msg.id, subject, raw);
-
-        verbose(`  FORWARDED → ${DEXT_EMAIL} (sent ID: ${sentId})`);
-
-        forwardBatch.push({
-          gmail_message_id: msg.id,
-          mailbox: userEmail,
-          vendor: identifyVendor(from, vendorPatterns),
-          subject: subject?.slice(0, 500),
-          original_date: date,
-          forwarded_at: new Date().toISOString(),
-        });
-
-        totals.forwarded++;
-
-        // Rate limit: Gmail API allows 250 quota units/sec for sending
-        await new Promise(r => setTimeout(r, 500));
-      } catch (err) {
-        log(`  ERROR forwarding ${msg.id}: ${err.message}`);
-        totals.errors++;
-      }
-    }
-
-    // Record forwarded emails in batch
-    if (forwardBatch.length > 0) {
-      await recordForwarded(supabase, forwardBatch);
-    }
-  }
-
-  // Summary
-  const durationMs = Date.now() - startTime;
-  log('\n=== Summary ===');
-  log(`Scanned: ${totals.scanned} | Forwarded: ${totals.forwarded} | Skipped: ${totals.skipped} | Errors: ${totals.errors}`);
-  log(`Duration: ${(durationMs / 1000).toFixed(1)}s`);
-
-  // Record to integration health
-  if (!DRY_RUN) {
-    await recordSyncStatus(supabase, 'dext_receipt_forwarding', {
-      success: totals.errors === 0,
-      recordCount: totals.forwarded,
-      durationMs,
-      error: totals.errors > 0 ? `${totals.errors} forwarding errors` : undefined,
-    });
-    log('Integration health updated');
-  }
 }
 
 function identifyVendor(fromHeader, vendorPatterns) {
@@ -550,7 +282,207 @@ function identifyVendor(fromHeader, vendorPatterns) {
   return 'unknown';
 }
 
+function buildForwardMessage(fromEmail, toEmail, subject, rawBase64) {
+  const rawBuffer = Buffer.from(rawBase64, 'base64url');
+  const boundary = `----=_Part_${Date.now()}_${Math.random().toString(36).slice(2)}`;
+  const fwdSubject = subject.startsWith('Fwd:') ? subject : `Fwd: ${subject}`;
+
+  const mimeMessage = [
+    `From: ${fromEmail}`,
+    `To: ${toEmail}`,
+    `Subject: ${fwdSubject}`,
+    `MIME-Version: 1.0`,
+    `Content-Type: multipart/mixed; boundary="${boundary}"`,
+    ``,
+    `--${boundary}`,
+    `Content-Type: text/plain; charset="UTF-8"`,
+    ``,
+    `Forwarded receipt for Dext processing (backfill).`,
+    ``,
+    `--${boundary}`,
+    `Content-Type: message/rfc822`,
+    `Content-Disposition: attachment; filename="original-receipt.eml"`,
+    ``,
+    rawBuffer.toString('utf-8'),
+    ``,
+    `--${boundary}--`,
+  ].join('\r\n');
+
+  return Buffer.from(mimeMessage).toString('base64url');
+}
+
+// ============================================
+// Main
+// ============================================
+
+async function main() {
+  log('=== Receipt Backfill to Dext ===');
+  log(`Searching ${monthsBack} months of email history`);
+  log(APPLY ? `MODE: APPLY (batch limit: ${batchLimit === Infinity ? 'unlimited' : batchLimit})` : 'MODE: DRY RUN');
+
+  const supabase = getSupabase();
+  const users = getDelegatedUsers();
+  const vendorPatterns = loadVendorPatterns();
+
+  // Load already-forwarded message IDs for dedup
+  const { data: forwarded } = await supabase
+    .from('dext_forwarded_emails')
+    .select('gmail_message_id');
+
+  const alreadyForwarded = new Set((forwarded || []).map(r => r.gmail_message_id));
+  log(`${alreadyForwarded.size} emails already forwarded (will skip)`);
+
+  const query = buildGmailQuery(vendorPatterns, monthsBack);
+  verbose(`Gmail query length: ${query.length} chars`);
+
+  const totals = { found: 0, receipts: 0, forwarded: 0, skipped: 0, errors: 0 };
+  const vendorCounts = {};
+  let totalForwarded = 0;
+
+  for (const userEmail of users) {
+    if (totalForwarded >= batchLimit) break;
+
+    log(`\nScanning ${userEmail}...`);
+
+    let gmail;
+    try {
+      gmail = await getGmailForUser(userEmail);
+    } catch (err) {
+      log(`  ERROR auth: ${err.message}`);
+      totals.errors++;
+      continue;
+    }
+
+    // Search all billing emails
+    let messages = [];
+    let pageToken;
+    try {
+      do {
+        const res = await gmail.users.messages.list({
+          userId: 'me',
+          q: query,
+          maxResults: 100,
+          pageToken,
+        });
+        if (res.data.messages) messages.push(...res.data.messages);
+        pageToken = res.data.nextPageToken;
+      } while (pageToken);
+    } catch (err) {
+      log(`  ERROR search: ${err.message}`);
+      totals.errors++;
+      continue;
+    }
+
+    log(`  Found ${messages.length} billing emails`);
+    totals.found += messages.length;
+
+    const forwardBatch = [];
+
+    for (const msg of messages) {
+      if (totalForwarded >= batchLimit) break;
+
+      if (alreadyForwarded.has(msg.id)) {
+        totals.skipped++;
+        continue;
+      }
+
+      try {
+        const res = await gmail.users.messages.get({
+          userId: 'me',
+          id: msg.id,
+          format: 'metadata',
+          metadataHeaders: ['From', 'To', 'Subject', 'Date', 'Message-ID'],
+        });
+
+        const headers = res.data.payload?.headers || [];
+        const subject = getHeader(headers, 'Subject');
+        const from = getHeader(headers, 'From');
+        const date = getHeader(headers, 'Date');
+
+        if (!isLikelyReceipt(subject, from)) {
+          totals.skipped++;
+          continue;
+        }
+
+        totals.receipts++;
+        const vendor = identifyVendor(from, vendorPatterns);
+        vendorCounts[vendor] = (vendorCounts[vendor] || 0) + 1;
+
+        if (!APPLY) {
+          verbose(`  ${vendor}: "${subject}" (${date})`);
+          continue;
+        }
+
+        // Get raw and forward
+        const rawRes = await gmail.users.messages.get({
+          userId: 'me',
+          id: msg.id,
+          format: 'raw',
+        });
+
+        const encoded = buildForwardMessage(userEmail, DEXT_EMAIL, subject, rawRes.data.raw);
+        await gmail.users.messages.send({
+          userId: 'me',
+          requestBody: { raw: encoded },
+        });
+
+        forwardBatch.push({
+          gmail_message_id: msg.id,
+          mailbox: userEmail,
+          vendor,
+          subject: subject?.slice(0, 500),
+          original_date: date,
+          forwarded_at: new Date().toISOString(),
+        });
+
+        totalForwarded++;
+        totals.forwarded++;
+        alreadyForwarded.add(msg.id);
+        verbose(`  FORWARDED: ${vendor} — "${subject}"`);
+
+        // Rate limit: 1 email/second
+        await new Promise(r => setTimeout(r, 1000));
+      } catch (err) {
+        log(`  ERROR ${msg.id}: ${err.message}`);
+        totals.errors++;
+      }
+    }
+
+    // Record forwarded batch
+    if (forwardBatch.length > 0) {
+      const { error } = await supabase
+        .from('dext_forwarded_emails')
+        .upsert(forwardBatch, { onConflict: 'gmail_message_id' });
+
+      if (error) log(`  DB error: ${error.message}`);
+    }
+  }
+
+  // Summary
+  log('\n=== Summary ===');
+  log(`Emails found:     ${totals.found}`);
+  log(`Likely receipts:  ${totals.receipts}`);
+  log(`Forwarded:        ${totals.forwarded}`);
+  log(`Already done:     ${totals.skipped}`);
+  log(`Errors:           ${totals.errors}`);
+
+  log('\nBy vendor:');
+  const sorted = Object.entries(vendorCounts).sort((a, b) => b[1] - a[1]);
+  for (const [vendor, count] of sorted) {
+    log(`  ${vendor}: ${count}`);
+  }
+
+  if (APPLY) {
+    await recordSyncStatus(supabase, 'dext_receipt_backfill', {
+      success: totals.errors === 0,
+      recordCount: totals.forwarded,
+    });
+  } else {
+    log('\nDRY RUN — use --apply to forward emails');
+  }
+}
+
 main().catch(err => {
-  console.error('Fatal error:', err);
+  console.error('FATAL:', err.message);
   process.exit(1);
 });

@@ -148,18 +148,29 @@ async function main() {
   const cutoffDate = new Date(Date.now() - daysBack * 24 * 60 * 60 * 1000)
     .toISOString().split('T')[0];
 
-  // 1. Fetch all SPEND transactions in the window
-  log('Fetching Xero SPEND transactions...');
-  const { data: transactions, error: txError } = await supabase
-    .from('xero_transactions')
-    .select('xero_transaction_id, contact_name, total, date, has_attachments, is_reconciled, status')
-    .eq('type', 'SPEND')
-    .gte('date', cutoffDate)
-    .eq('status', 'AUTHORISED')
-    .order('date', { ascending: false });
+  // 1. Fetch all SPEND/ACCPAY transactions in the window (paginated for >1000)
+  log('Fetching Xero SPEND/ACCPAY transactions...');
+  const transactions = [];
+  let page = 0;
+  const PAGE_SIZE = 1000;
 
-  if (txError) throw new Error(`Failed to fetch transactions: ${txError.message}`);
-  log(`  Found ${transactions.length} SPEND transactions`);
+  while (true) {
+    const { data, error: txError } = await supabase
+      .from('xero_transactions')
+      .select('xero_transaction_id, contact_name, total, date, has_attachments, is_reconciled, status')
+      .in('type', ['SPEND', 'ACCPAY', 'SPEND-TRANSFER'])
+      .gte('date', cutoffDate)
+      .eq('status', 'AUTHORISED')
+      .order('date', { ascending: false })
+      .range(page * PAGE_SIZE, (page + 1) * PAGE_SIZE - 1);
+
+    if (txError) throw new Error(`Failed to fetch transactions: ${txError.message}`);
+    transactions.push(...(data || []));
+    if (!data || data.length < PAGE_SIZE) break;
+    page++;
+  }
+
+  log(`  Found ${transactions.length} SPEND/ACCPAY transactions (${page + 1} pages)`);
 
   // 2. Fetch Dext forwarded emails in same window
   log('Fetching Dext forwarded emails...');
@@ -170,6 +181,25 @@ async function main() {
 
   if (dextError) throw new Error(`Failed to fetch Dext emails: ${dextError.message}`);
   log(`  Found ${dextEmails.length} Dext forwarded emails`);
+
+  // 2b. Fetch receipt_matches exemptions (no_receipt_needed)
+  log('Fetching receipt exemptions...');
+  const exemptSet = new Set();
+  let exemptPage = 0;
+  while (true) {
+    const { data: exemptions, error: exemptError } = await supabase
+      .from('receipt_matches')
+      .select('source_id')
+      .eq('source_type', 'transaction')
+      .eq('status', 'no_receipt_needed')
+      .range(exemptPage * PAGE_SIZE, (exemptPage + 1) * PAGE_SIZE - 1);
+
+    if (exemptError) { log(`  Warning: Could not fetch exemptions: ${exemptError.message}`); break; }
+    for (const e of (exemptions || [])) exemptSet.add(e.source_id);
+    if (!exemptions || exemptions.length < PAGE_SIZE) break;
+    exemptPage++;
+  }
+  log(`  Found ${exemptSet.size} exempt transactions (no_receipt_needed)`);
 
   // 3. Fetch existing pipeline records to avoid re-processing
   const { data: existingPipeline } = await supabase
@@ -200,8 +230,8 @@ async function main() {
     let gmailMessageId = null;
     let matchedAt = null;
 
-    // Stage: reconciled (highest priority)
-    if (txn.is_reconciled) {
+    // Stage: reconciled (highest priority — includes exemptions)
+    if (txn.is_reconciled || exemptSet.has(txnId)) {
       stage = 'reconciled';
     }
     // Stage: dext_processed (attachment appeared in Xero)

@@ -305,6 +305,11 @@ const cronScripts = [
     args: '--current',
     cron_restart: '0 9 1 * *', // 1st of month at 9am AEST (after Xero sync at 8:30am)
   },
+  {
+    name: 'finance-daily-briefing',
+    script: 'scripts/finance-daily-briefing.mjs',
+    cron_restart: '0 7 * * 1-5', // Weekdays 7am AEST (alongside general daily-briefing)
+  },
 ];
 
 module.exports = {
