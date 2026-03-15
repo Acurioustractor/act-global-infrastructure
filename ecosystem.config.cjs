@@ -345,6 +345,12 @@ const cronScripts = [
     args: '--verbose',
     cron_restart: '7 */3 * * *', // Every 3 hours +7min (offset from grantscope-to-notion)
   },
+  {
+    name: 'contact-enrichment',
+    script: 'scripts/enrich-contacts-external.mjs',
+    args: '--limit 50 --verbose',
+    cron_restart: '0 4 * * *', // Daily 4am AEST (before daily briefing at 7am)
+  },
 ];
 
 module.exports = {
