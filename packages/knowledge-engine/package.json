@@ -1,0 +1,29 @@
+{
+  "name": "@act/knowledge-engine",
+  "version": "0.1.0",
+  "description": "Unified knowledge management engine for ACT ecosystem - graph, extraction, alignment, and memory systems",
+  "type": "module",
+  "main": "src/index.mjs",
+  "exports": {
+    ".": "./src/index.mjs",
+    "./graph": "./src/graph.mjs",
+    "./extractor": "./src/extractor.mjs",
+    "./memory": "./src/memory.mjs",
+    "./search": "./src/search.mjs"
+  },
+  "scripts": {
+    "test": "node --test src/**/*.test.mjs"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.47.0"
+  },
+  "keywords": [
+    "act",
+    "knowledge",
+    "graph",
+    "memory",
+    "extraction"
+  ],
+  "author": "A Curious Tractor",
+  "license": "MIT"
+}

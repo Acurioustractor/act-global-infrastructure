@@ -2,7 +2,7 @@
 # ACT Command Center - Dev Server & Cron Control
 # Usage: ./dev [start|stop|restart|status|logs|cron|stop-cron|all]
 
-cd /Users/benknight/Code/act-global-infrastructure
+cd "$(dirname "$0")"
 
 SERVERS="act-api act-frontend"
 CRON_SCRIPTS="imessage-sync embed-imessages detect-episodes daily-briefing storyteller-sync storyteller-link notion-sync agent-learning meeting-sync knowledge-pipeline data-freshness gmail-sync"
