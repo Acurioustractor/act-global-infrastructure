@@ -1,0 +1,38 @@
+{
+  "name": "@act/contacts",
+  "version": "0.1.0",
+  "description": "Unified contact management, matching, enrichment, and relationship tracking for the ACT ecosystem",
+  "type": "module",
+  "main": "src/index.mjs",
+  "exports": {
+    ".": "./src/index.mjs",
+    "./matching": "./src/matching/index.mjs",
+    "./enrichment": "./src/enrichment/index.mjs",
+    "./repository": "./src/repository/index.mjs",
+    "./relationships": "./src/relationships/index.mjs",
+    "./types": "./src/types.mjs"
+  },
+  "files": [
+    "src/"
+  ],
+  "keywords": [
+    "act",
+    "contacts",
+    "enrichment",
+    "crm",
+    "matching"
+  ],
+  "license": "UNLICENSED",
+  "private": false,
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "peerDependencies": {
+    "@supabase/supabase-js": ">=2.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@supabase/supabase-js": {
+      "optional": true
+    }
+  }
+}

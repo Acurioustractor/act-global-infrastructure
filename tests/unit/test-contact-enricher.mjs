@@ -86,11 +86,11 @@ describe('ContactEnricher', () => {
     assert.equal(result.reason, 'recently_enriched')
   })
 
-  it('_buildExtractionContext formats correctly', async () => {
+  it('_buildContext formats correctly', async () => {
     const { ContactEnricher } = await import('../../scripts/lib/contact-enricher.mjs')
     const enricher = new ContactEnricher({ supabase: {} })
 
-    const context = enricher._buildExtractionContext(
+    const context = enricher._buildContext(
       { full_name: 'Test User', email: 'test@example.com', tags: ['partner'] },
       {
         tavily: { answer: 'Test answer', results: [{ title: 'Result', url: 'https://example.com', content: 'Content' }] },
