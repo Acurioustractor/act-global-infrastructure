@@ -13,14 +13,12 @@
  *   node scripts/generate-rd-activity-log.mjs --json             # JSON output
  */
 
+import '../lib/load-env.mjs';
 import { execSync } from 'child_process';
 import { createClient } from '@supabase/supabase-js';
 import { readFileSync, writeFileSync } from 'fs';
 import { loadProjectsConfig } from './lib/project-loader.mjs';
-import dotenv from 'dotenv';
 import path from 'path';
-
-dotenv.config({ path: '.env.local' });
 
 const SUPABASE_URL = process.env.SUPABASE_SHARED_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
 const SUPABASE_KEY = process.env.SUPABASE_SHARED_SERVICE_ROLE_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY;
@@ -34,6 +32,7 @@ const fromIdx = args.indexOf('--from');
 const FROM_DATE = fromIdx >= 0 ? args[fromIdx + 1] : '2025-07-01';
 const TO_DATE = new Date().toISOString().split('T')[0];
 const JSON_OUTPUT = args.includes('--json');
+const MD_OUTPUT = args.includes('--markdown') || args.includes('--md');
 
 // R&D eligible projects and their classification
 const RD_PROJECTS = {
@@ -234,8 +233,17 @@ async function main() {
     };
   }
 
-  // 5. Print report
-  if (JSON_OUTPUT) {
+  // 5. Fetch financial data for evidence pack
+  let financialData = null;
+  if (MD_OUTPUT && supabase) {
+    console.log('Fetching R&D financial data...');
+    financialData = await fetchRdFinancials();
+  }
+
+  // 6. Print report
+  if (MD_OUTPUT) {
+    generateMarkdownPack(rdLog, financialData);
+  } else if (JSON_OUTPUT) {
     const output = {
       period: { from: FROM_DATE, to: TO_DATE },
       generatedAt: new Date().toISOString(),
@@ -349,6 +357,270 @@ function printReport(rdLog) {
   console.log('    2. Contemporaneous documentation of R&D activities');
   console.log('    3. Clear distinction between core and supporting R&D');
   console.log('    4. Payroll setup (wages must be actual employee wages, not distributions)');
+}
+
+// ============================================================================
+// FINANCIAL DATA (for evidence pack)
+// ============================================================================
+
+async function fetchRdFinancials() {
+  if (!supabase) return null;
+
+  try {
+    // Get R&D-eligible spend from vendor_project_rules
+    const { data: vendorRules } = await supabase
+      .from('vendor_project_rules')
+      .select('vendor_name, category, project_code, rd_eligible')
+      .eq('rd_eligible', true);
+
+    const rdVendors = new Set((vendorRules || []).map(v => v.vendor_name));
+
+    // Get transactions matching R&D vendors in period
+    const { data: txns } = await supabase
+      .from('xero_transactions')
+      .select('contact_name, total, date, project_code, has_attachments')
+      .lt('total', 0)
+      .gte('date', FROM_DATE)
+      .lte('date', TO_DATE);
+
+    const rdTxns = (txns || []).filter(t => rdVendors.has(t.contact_name));
+
+    // Aggregate by project and category
+    const byProject = {};
+    const byMonth = {};
+    let totalSpend = 0;
+    let withReceipts = 0;
+
+    for (const tx of rdTxns) {
+      const amt = Math.abs(tx.total);
+      const code = tx.project_code || 'Untagged';
+      const month = tx.date?.substring(0, 7);
+
+      byProject[code] = (byProject[code] || 0) + amt;
+      byMonth[month] = (byMonth[month] || 0) + amt;
+      totalSpend += amt;
+      if (tx.has_attachments) withReceipts++;
+    }
+
+    // Get vendor breakdown
+    const vendorSpend = {};
+    for (const tx of rdTxns) {
+      const vendor = tx.contact_name;
+      vendorSpend[vendor] = (vendorSpend[vendor] || 0) + Math.abs(tx.total);
+    }
+    const topVendors = Object.entries(vendorSpend)
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 15);
+
+    // Map vendor to category
+    const vendorCategoryMap = {};
+    for (const v of vendorRules || []) {
+      vendorCategoryMap[v.vendor_name] = v.category;
+    }
+
+    return {
+      totalSpend,
+      transactionCount: rdTxns.length,
+      receiptCoverage: rdTxns.length > 0 ? Math.round((withReceipts / rdTxns.length) * 100) : 0,
+      offset435: Math.round(totalSpend * 0.435),
+      byProject,
+      byMonth,
+      topVendors: topVendors.map(([vendor, spend]) => ({
+        vendor,
+        spend,
+        category: vendorCategoryMap[vendor] || 'Unknown',
+      })),
+    };
+  } catch (err) {
+    console.error('Warning: could not fetch financial data:', err.message);
+    return null;
+  }
+}
+
+// ============================================================================
+// MARKDOWN EVIDENCE PACK
+// ============================================================================
+
+function generateMarkdownPack(rdLog, financialData) {
+  const totals = calculateTotals(rdLog);
+  const fmt = (n) => `$${Math.round(n).toLocaleString()}`;
+
+  let md = `# R&D Tax Incentive — Evidence Pack
+
+**Entity:** ACT Foundation (ABN 21 591 780 066)
+**Period:** ${FROM_DATE} to ${TO_DATE}
+**Generated:** ${new Date().toISOString().split('T')[0]}
+**Prepared for:** AusIndustry R&D Tax Incentive registration
+
+---
+
+## Executive Summary
+
+| Metric | Value |
+|--------|-------|
+| Total R&D hours (estimated) | ${totals.totalHours} hrs |
+| Development hours | ${totals.devHours} hrs |
+| Meeting hours | ${totals.meetingHours} hrs |
+| R&D work days | ${totals.workDays} |
+| Total commits | ${totals.commits} |
+| R&D % of full-time | ${totals.rdPercentage}% |
+`;
+
+  if (financialData) {
+    md += `| R&D-eligible spend | ${fmt(financialData.totalSpend)} |
+| 43.5% refundable offset | ${fmt(financialData.offset435)} |
+| Receipt coverage | ${financialData.receiptCoverage}% |
+| R&D transactions | ${financialData.transactionCount} |
+`;
+  }
+
+  md += `
+---
+
+## R&D Activities by Project
+
+`;
+
+  for (const [code, data] of Object.entries(rdLog).sort((a, b) => b[1].totalEstimatedHours - a[1].totalEstimatedHours)) {
+    if (data.commits === 0 && data.calendarMeetingHours === 0) continue;
+
+    md += `### ${code} — ${data.name}
+
+**Classification:** ${data.category}
+**Description:** ${data.description}
+
+| Metric | Value |
+|--------|-------|
+| Commits | ${data.commits} |
+| Work days | ${data.workDays} |
+| Development hours | ${data.estimatedDevHours} |
+| Meeting hours | ${data.calendarMeetingHours} |
+| **Total hours** | **${data.totalEstimatedHours}** |
+`;
+
+    if (financialData?.byProject[code]) {
+      md += `| R&D spend | ${fmt(financialData.byProject[code])} |
+`;
+    }
+
+    // Monthly breakdown
+    const months = Object.entries(data.monthlySummary).sort();
+    if (months.length > 0) {
+      md += `
+#### Monthly Breakdown
+
+| Month | Days | Hours | Commits |
+|-------|------|-------|---------|
+`;
+      for (const [month, m] of months) {
+        md += `| ${month} | ${m.days} | ${m.hours} | ${m.commits} |
+`;
+      }
+    }
+
+    // Sample activities as evidence
+    if (data.sampleActivities.length > 0) {
+      md += `
+#### Sample Activities (Contemporaneous Evidence)
+
+| Date | Author | Activity |
+|------|--------|----------|
+`;
+      for (const a of data.sampleActivities) {
+        md += `| ${a.date} | ${a.author} | ${a.description.replace(/\|/g, '/')} |
+`;
+      }
+    }
+
+    md += '\n';
+  }
+
+  // Financial breakdown
+  if (financialData) {
+    md += `---
+
+## Financial Breakdown
+
+### R&D Spend by Month
+
+| Month | Spend |
+|-------|-------|
+`;
+    for (const [month, spend] of Object.entries(financialData.byMonth).sort()) {
+      md += `| ${month} | ${fmt(spend)} |
+`;
+    }
+
+    md += `
+### Top R&D Vendors
+
+| Vendor | Category | Spend |
+|--------|----------|-------|
+`;
+    for (const v of financialData.topVendors) {
+      md += `| ${v.vendor} | ${v.category} | ${fmt(v.spend)} |
+`;
+    }
+
+    md += `
+### R&D Spend by Project
+
+| Project | Spend |
+|---------|-------|
+`;
+    for (const [code, spend] of Object.entries(financialData.byProject).sort((a, b) => b[1] - a[1])) {
+      md += `| ${code} | ${fmt(spend)} |
+`;
+    }
+  }
+
+  // Salary calculation
+  md += `
+---
+
+## Salary R&D Allocation
+
+| Item | Per Person | x2 Founders |
+|------|-----------|-------------|
+| Assumed salary | $120,000 | $240,000 |
+| R&D allocation | ${totals.rdPercentage}% | ${totals.rdPercentage}% |
+| R&D eligible wages | ${fmt(120000 * totals.rdPercentage / 100)} | ${fmt(240000 * totals.rdPercentage / 100)} |
+| 43.5% offset | ${fmt(120000 * totals.rdPercentage / 100 * 0.435)} | ${fmt(240000 * totals.rdPercentage / 100 * 0.435)} |
+
+---
+
+## Notes & Disclaimers
+
+1. Hour estimates are derived from git commit patterns (1 commit = 2hrs, 2-3 = 4hrs, 4+ = 6hrs per day)
+2. Calendar meeting hours are from actual calendar event durations
+3. All financial data from Xero via Supabase sync
+4. This evidence pack supports but does not replace formal R&D registration with AusIndustry
+5. Activities must be registered before or during the financial year
+6. Actual claims require payroll setup (wages must be employee wages, not distributions)
+7. Records retained for 5 years as required by ATO
+
+---
+
+*Generated by ACT Finance Engine — R&D Evidence Pack Generator*
+`;
+
+  // Write to file
+  const outPath = path.join(process.cwd(), `scripts/output/rd-evidence-pack-${FROM_DATE.substring(0, 4)}.md`);
+  try {
+    execSync(`mkdir -p ${path.dirname(outPath)}`);
+    writeFileSync(outPath, md);
+    console.log(`\nR&D Evidence Pack written to: ${outPath}`);
+    console.log(`  Period: ${FROM_DATE} → ${TO_DATE}`);
+    console.log(`  Projects: ${Object.keys(rdLog).filter(k => rdLog[k].commits > 0).length}`);
+    console.log(`  Total hours: ${totals.totalHours}`);
+    if (financialData) {
+      console.log(`  R&D spend: ${fmt(financialData.totalSpend)}`);
+      console.log(`  43.5% offset: ${fmt(financialData.offset435)}`);
+    }
+  } catch (e) {
+    // Fallback: print to stdout
+    console.log(md);
+  }
 }
 
 main().catch(err => {

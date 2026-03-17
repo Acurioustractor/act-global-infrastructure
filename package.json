@@ -7,7 +7,8 @@
     "doc": "docs"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "node --test scripts/tests/*.test.mjs",
+    "test:finance": "node scripts/finance-engine.mjs --self-test",
     "ask": "node scripts/ask-act.mjs",
     "sync:ghl": "node scripts/sync-ghl-to-notion.mjs",
     "sync:ghl:supabase": "node scripts/sync-ghl-to-supabase.mjs",
@@ -138,6 +139,7 @@
     "express": "^5.2.1",
     "googleapis": "^170.0.0",
     "openai": "^6.15.0",
+    "pdf-parse": "^2.4.5",
     "xero-node": "^13.3.1"
   }
 }
