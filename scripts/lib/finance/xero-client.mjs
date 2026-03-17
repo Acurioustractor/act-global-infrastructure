@@ -66,7 +66,10 @@ export async function createXeroClient(supabase, opts = {}) {
         return { access_token: data.access_token, refresh_token: data.refresh_token, valid: true };
       }
       return { refresh_token: data.refresh_token, valid: false };
-    } catch { return null; }
+    } catch (e) {
+      console.warn(`[xero-client] Failed to load tokens from Supabase: ${e.message}`);
+      return null;
+    }
   }
 
   function loadFromFile() {
@@ -80,7 +83,9 @@ export async function createXeroClient(supabase, opts = {}) {
           return { refresh_token: tokens.refresh_token, valid: false };
         }
       }
-    } catch { /* ignore */ }
+    } catch (e) {
+      console.warn(`[xero-client] Failed to load tokens from file: ${e.message}`);
+    }
     return null;
   }
 
@@ -89,13 +94,17 @@ export async function createXeroClient(supabase, opts = {}) {
     refreshToken = newRefreshToken;
 
     // Save to file (local backup)
+    let fileSaved = false;
     try {
       writeFileSync(tokenFile, JSON.stringify({
         access_token: newAccessToken,
         refresh_token: newRefreshToken,
         expires_at: Date.now() + (expiresIn * 1000) - 60000,
       }, null, 2));
-    } catch { /* ignore */ }
+      fileSaved = true;
+    } catch (e) {
+      console.warn(`[xero-client] Failed to save tokens to file: ${e.message}`);
+    }
 
     // Save to Supabase (shared/primary)
     if (supabase) {
@@ -109,7 +118,12 @@ export async function createXeroClient(supabase, opts = {}) {
           updated_at: new Date().toISOString(),
           updated_by: process.env.GITHUB_ACTIONS ? 'github-actions' : 'local',
         }, { onConflict: 'id' });
-      } catch { /* ignore */ }
+      } catch (e) {
+        console.warn(`[xero-client] CRITICAL: Failed to save tokens to Supabase: ${e.message}`);
+        if (!fileSaved) {
+          throw new Error(`Xero token rotation failed to persist — both file and Supabase save failed. Next run will use a revoked refresh token.`);
+        }
+      }
     }
   }
 
@@ -129,7 +143,10 @@ export async function createXeroClient(supabase, opts = {}) {
       const tokens = await response.json();
       await saveTokens(tokens.access_token, tokens.refresh_token, tokens.expires_in);
       return true;
-    } catch { return false; }
+    } catch (e) {
+      console.warn(`[xero-client] Token refresh failed: ${e.message}`);
+      return false;
+    }
   }
 
   // --- Initialize: resolve a valid access token ---

@@ -14,13 +14,7 @@
  *   const result = await generateRdEvidencePack({ fy: 'FY26' });
  */
 
-import { execSync } from 'child_process';
-import { join, dirname } from 'path';
-import { fileURLToPath } from 'url';
-import { log, warn, getAustralianFY, getCurrentBASQuarter } from './common.mjs';
-
-const __dirname = dirname(fileURLToPath(import.meta.url));
-const scriptsDir = join(__dirname, '..', '..');
+import { log, runScript, getAustralianFY, getCurrentBASQuarter } from './common.mjs';
 
 const MODULE = 'comply';
 
@@ -40,7 +34,7 @@ const MODULE = 'comply';
 export async function generateRdEvidencePack(opts = {}) {
   const fy = opts.fy || getAustralianFY();
   log(MODULE, `Generating R&D evidence pack for ${fy}`);
-  return runScript('generate-rd-activity-log.mjs', ['--markdown']);
+  return runScript(MODULE, 'generate-rd-activity-log.mjs', ['--markdown']);
 }
 
 /**
@@ -57,7 +51,7 @@ export async function generateRdEvidencePack(opts = {}) {
 export async function prepareBas(opts = {}) {
   const quarter = opts.quarter || getCurrentBASQuarter().quarter;
   log(MODULE, `Preparing BAS for ${quarter}`);
-  return runScript('xero-bas-analysis.mjs', []);
+  return runScript(MODULE, 'xero-bas-analysis.mjs', []);
 }
 
 /**
@@ -104,33 +98,4 @@ export async function checkEntityReadiness(opts = {}) {
     entities: entities || [],
     gaps,
   };
-}
-
-// Internal: run a script and capture results
-async function runScript(name, args = []) {
-  const scriptPath = join(scriptsDir, name);
-  const cmd = `node "${scriptPath}" ${args.join(' ')}`.trim();
-  const startTime = Date.now();
-
-  log(MODULE, `Running ${name} ${args.join(' ')}`);
-
-  try {
-    const output = execSync(cmd, {
-      timeout: 300000,
-      encoding: 'utf8',
-      env: { ...process.env, PIPELINE_RUN_ID: process.env.PIPELINE_RUN_ID || '' },
-    });
-    const elapsed = (Date.now() - startTime) / 1000;
-    log(MODULE, `${name} completed in ${elapsed.toFixed(1)}s`);
-    return { ok: true, output, elapsed };
-  } catch (err) {
-    const elapsed = (Date.now() - startTime) / 1000;
-    warn(MODULE, `${name} failed after ${elapsed.toFixed(1)}s: ${err.message?.slice(0, 200)}`);
-    return {
-      ok: false,
-      output: (err.stdout || '') + (err.stderr || ''),
-      elapsed,
-      error: err.message,
-    };
-  }
 }

@@ -17,7 +17,13 @@
  */
 
 import { createClient } from '@supabase/supabase-js';
+import { execSync } from 'child_process';
+import { join, dirname } from 'path';
+import { fileURLToPath } from 'url';
 import { sendTelegram } from '../telegram.mjs';
+
+const __common_dirname = dirname(fileURLToPath(import.meta.url));
+const scriptsDir = join(__common_dirname, '..', '..');
 
 // ============================================================================
 // SUPABASE CLIENT
@@ -170,6 +176,48 @@ export function parseArgs(argv = process.argv.slice(2)) {
       return null;
     })(),
   };
+}
+
+// ============================================================================
+// SCRIPT RUNNER (shared by all facade modules)
+// ============================================================================
+
+/**
+ * Run a script in the scripts/ directory and capture results.
+ * Used by facade modules (capture, classify, reconcile, report, comply)
+ * to wrap existing standalone scripts as importable async functions.
+ *
+ * @param {string} module - Module name for logging (e.g. 'capture', 'classify')
+ * @param {string} name - Script filename (e.g. 'capture-receipts.mjs')
+ * @param {string[]} [args=[]] - CLI arguments to pass
+ * @returns {Promise<{ ok: boolean, output: string, elapsed: number, error?: string }>}
+ */
+export async function runScript(module, name, args = []) {
+  const scriptPath = join(scriptsDir, name);
+  const cmd = `node "${scriptPath}" ${args.join(' ')}`.trim();
+  const startTime = Date.now();
+
+  log(module, `Running ${name} ${args.join(' ')}`);
+
+  try {
+    const output = execSync(cmd, {
+      timeout: 300000,
+      encoding: 'utf8',
+      env: { ...process.env, PIPELINE_RUN_ID: process.env.PIPELINE_RUN_ID || '' },
+    });
+    const elapsed = (Date.now() - startTime) / 1000;
+    log(module, `${name} completed in ${elapsed.toFixed(1)}s`);
+    return { ok: true, output, elapsed };
+  } catch (err) {
+    const elapsed = (Date.now() - startTime) / 1000;
+    warn(module, `${name} failed after ${elapsed.toFixed(1)}s: ${err.message?.slice(0, 200)}`);
+    return {
+      ok: false,
+      output: (err.stdout || '') + (err.stderr || ''),
+      elapsed,
+      error: err.message,
+    };
+  }
 }
 
 // ============================================================================

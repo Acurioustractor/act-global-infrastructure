@@ -9,13 +9,7 @@
  *   const result = await matchReceipts({ apply: true, ai: true });
  */
 
-import { execSync } from 'child_process';
-import { join, dirname } from 'path';
-import { fileURLToPath } from 'url';
-import { log, warn } from './common.mjs';
-
-const __dirname = dirname(fileURLToPath(import.meta.url));
-const scriptsDir = join(__dirname, '..', '..');
+import { runScript } from './common.mjs';
 
 const MODULE = 'classify';
 
@@ -39,7 +33,7 @@ export async function matchReceipts(opts = {}) {
   if (ai) args.push('--ai');
   if (limit) args.push('--limit', String(limit));
 
-  return runScript('match-receipts-to-xero.mjs', args);
+  return runScript(MODULE, 'match-receipts-to-xero.mjs', args);
 }
 
 /**
@@ -60,34 +54,5 @@ export async function tagTransactions(opts = {}) {
   if (apply) args.push('--apply');
   if (dryRun) args.push('--dry-run');
 
-  return runScript('tag-xero-transactions.mjs', args);
-}
-
-// Internal: run a script and capture results
-async function runScript(name, args = []) {
-  const scriptPath = join(scriptsDir, name);
-  const cmd = `node "${scriptPath}" ${args.join(' ')}`.trim();
-  const startTime = Date.now();
-
-  log(MODULE, `Running ${name} ${args.join(' ')}`);
-
-  try {
-    const output = execSync(cmd, {
-      timeout: 300000,
-      encoding: 'utf8',
-      env: { ...process.env, PIPELINE_RUN_ID: process.env.PIPELINE_RUN_ID || '' },
-    });
-    const elapsed = (Date.now() - startTime) / 1000;
-    log(MODULE, `${name} completed in ${elapsed.toFixed(1)}s`);
-    return { ok: true, output, elapsed };
-  } catch (err) {
-    const elapsed = (Date.now() - startTime) / 1000;
-    warn(MODULE, `${name} failed after ${elapsed.toFixed(1)}s: ${err.message?.slice(0, 200)}`);
-    return {
-      ok: false,
-      output: (err.stdout || '') + (err.stderr || ''),
-      elapsed,
-      error: err.message,
-    };
-  }
+  return runScript(MODULE, 'tag-xero-transactions.mjs', args);
 }
