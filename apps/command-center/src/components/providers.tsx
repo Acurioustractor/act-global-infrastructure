@@ -2,6 +2,8 @@
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { useState } from 'react'
+import { RoleProvider } from '@/lib/role-context'
+import { RoleSelector } from '@/components/role-selector'
 
 export function Providers({ children }: { children: React.ReactNode }) {
   const [queryClient] = useState(
@@ -19,7 +21,10 @@ export function Providers({ children }: { children: React.ReactNode }) {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {children}
+      <RoleProvider>
+        {children}
+        <RoleSelector />
+      </RoleProvider>
     </QueryClientProvider>
   )
 }

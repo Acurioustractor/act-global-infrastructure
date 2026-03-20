@@ -1,5 +1,6 @@
 'use client'
 
+import { useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import Link from 'next/link'
 import {
@@ -16,6 +17,9 @@ import {
   ShieldCheck,
   DollarSign,
   PieChart,
+  Share2,
+  Check,
+  Loader2,
 } from 'lucide-react'
 import { DonutChart, BarChart, AreaChart } from '@tremor/react'
 import {
@@ -26,6 +30,7 @@ import {
   getCashflowExplained,
   getSpendingByProject,
 } from '@/lib/api'
+import { FolderKanban, ChevronRight } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 function formatMoney(n: number) {
@@ -42,6 +47,21 @@ function runwayColor(months: number) {
 }
 
 export default function BoardReportPage() {
+  const [shareState, setShareState] = useState<'idle' | 'loading' | 'copied'>('idle')
+
+  async function handleShare() {
+    setShareState('loading')
+    try {
+      const res = await fetch('/api/finance/board-token', { method: 'POST' })
+      const data = await res.json()
+      await navigator.clipboard.writeText(data.url)
+      setShareState('copied')
+      setTimeout(() => setShareState('idle'), 3000)
+    } catch {
+      setShareState('idle')
+    }
+  }
+
   const { data: runway } = useQuery({
     queryKey: ['board', 'runway'],
     queryFn: getRunwayData,
@@ -70,6 +90,11 @@ export default function BoardReportPage() {
   const { data: projectSpending } = useQuery({
     queryKey: ['board', 'spending', 12],
     queryFn: () => getSpendingByProject(12),
+  })
+
+  const { data: studioData } = useQuery({
+    queryKey: ['board', 'studio-economics'],
+    queryFn: () => fetch('/api/finance/projects').then(r => r.json()),
   })
 
   const summary = progress?.summary
@@ -116,6 +141,20 @@ export default function BoardReportPage() {
             </div>
           </div>
           <div className="flex gap-3">
+            <button
+              onClick={handleShare}
+              disabled={shareState === 'loading'}
+              className="btn-glass flex items-center gap-2 border-indigo-500/30"
+            >
+              {shareState === 'loading' ? (
+                <Loader2 className="h-4 w-4 animate-spin" />
+              ) : shareState === 'copied' ? (
+                <Check className="h-4 w-4 text-green-400" />
+              ) : (
+                <Share2 className="h-4 w-4" />
+              )}
+              {shareState === 'copied' ? 'Link Copied' : 'Share'}
+            </button>
             <Link href="/finance" className="btn-glass flex items-center gap-2">
               <BarChart3 className="h-4 w-4" />
               Operator View
@@ -491,6 +530,122 @@ export default function BoardReportPage() {
             </div>
           )}
         </div>
+      </div>
+
+      {/* Row 5: Studio Economics — Project Contribution Margins */}
+      <div className="glass-card p-6 mb-8">
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-lg font-semibold text-white flex items-center gap-2">
+            <FolderKanban className="h-5 w-5 text-green-400" />
+            Studio Economics — FY26 YTD
+          </h2>
+          <Link href="/finance/projects" className="text-xs text-blue-400 hover:text-blue-300 flex items-center gap-1 transition-colors">
+            View all projects <ChevronRight className="h-3 w-3" />
+          </Link>
+        </div>
+
+        {studioData?.projects ? (
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b border-white/10">
+                  <th className="text-left py-2 px-3 text-white/50 font-medium">Project</th>
+                  <th className="text-left py-2 px-2 text-white/50 font-medium">Tier</th>
+                  <th className="text-right py-2 px-3 text-white/50 font-medium">Revenue</th>
+                  <th className="text-right py-2 px-3 text-white/50 font-medium">Cost</th>
+                  <th className="text-right py-2 px-3 text-white/50 font-medium">Net</th>
+                  <th className="text-right py-2 px-3 text-white/50 font-medium">Margin</th>
+                  <th className="text-right py-2 px-3 text-white/50 font-medium">R&D Offset</th>
+                  <th className="text-right py-2 px-3 text-white/50 font-medium">Net + R&D</th>
+                </tr>
+              </thead>
+              <tbody>
+                {(studioData.projects as any[]).slice(0, 10).map((p: any) => {
+                  const rdOffset = Math.round((p.rdSpend || 0) * 0.435)
+                  const netWithRd = p.net + rdOffset
+                  return (
+                    <tr key={p.code} className="border-b border-white/5 hover:bg-white/5 transition-colors">
+                      <td className="py-2 px-3">
+                        <Link href={`/finance/projects/${p.code}`} className="text-white hover:text-blue-400 transition-colors font-medium">
+                          {p.code}
+                        </Link>
+                        <span className="text-white/30 text-xs ml-2">{p.name}</span>
+                      </td>
+                      <td className="py-2 px-2">
+                        <span className={cn('text-xs px-1.5 py-0.5 rounded',
+                          p.tier === 'ecosystem' ? 'text-purple-400 bg-purple-500/20' :
+                          p.tier === 'studio' ? 'text-blue-400 bg-blue-500/20' :
+                          'text-white/40 bg-white/10'
+                        )}>
+                          {p.tier}
+                        </span>
+                      </td>
+                      <td className="py-2 px-3 text-right tabular-nums text-green-400">
+                        {p.revenue > 0 ? formatMoney(p.revenue) : <span className="text-white/20">—</span>}
+                      </td>
+                      <td className="py-2 px-3 text-right tabular-nums text-red-400">
+                        {formatMoney(Math.abs(p.expenses))}
+                      </td>
+                      <td className={cn('py-2 px-3 text-right tabular-nums font-medium', p.net >= 0 ? 'text-emerald-400' : 'text-red-400')}>
+                        {p.net >= 0 ? '+' : ''}{formatMoney(p.net)}
+                      </td>
+                      <td className="py-2 px-3 text-right tabular-nums">
+                        {p.revenue > 0 ? (
+                          <span className={cn('text-xs font-medium',
+                            p.net >= 0 ? 'text-emerald-400' : p.net > -p.revenue ? 'text-amber-400' : 'text-red-400'
+                          )}>
+                            {Math.round((p.net / p.revenue) * 100)}%
+                          </span>
+                        ) : <span className="text-white/20">—</span>}
+                      </td>
+                      <td className="py-2 px-3 text-right tabular-nums text-lime-400/70">
+                        {rdOffset > 0 ? `+${formatMoney(rdOffset)}` : <span className="text-white/20">—</span>}
+                      </td>
+                      <td className={cn('py-2 px-3 text-right tabular-nums font-semibold', netWithRd >= 0 ? 'text-emerald-400' : 'text-red-400')}>
+                        {netWithRd >= 0 ? '+' : ''}{formatMoney(netWithRd)}
+                      </td>
+                    </tr>
+                  )
+                })}
+              </tbody>
+              <tfoot>
+                <tr className="border-t border-white/20 bg-white/5">
+                  <td className="py-2 px-3 font-semibold text-white" colSpan={2}>TOTALS</td>
+                  <td className="py-2 px-3 text-right tabular-nums font-semibold text-green-400">
+                    {formatMoney(studioData.totals?.revenue || 0)}
+                  </td>
+                  <td className="py-2 px-3 text-right tabular-nums font-semibold text-red-400">
+                    {formatMoney(Math.abs(studioData.totals?.expenses || 0))}
+                  </td>
+                  <td className={cn('py-2 px-3 text-right tabular-nums font-semibold',
+                    (studioData.totals?.net || 0) >= 0 ? 'text-emerald-400' : 'text-red-400'
+                  )}>
+                    {(studioData.totals?.net || 0) >= 0 ? '+' : ''}{formatMoney(studioData.totals?.net || 0)}
+                  </td>
+                  <td className="py-2 px-3 text-right tabular-nums text-xs font-medium">
+                    {(studioData.totals?.revenue || 0) > 0 ? (
+                      <span className={(studioData.totals?.net || 0) >= 0 ? 'text-emerald-400' : 'text-red-400'}>
+                        {Math.round(((studioData.totals?.net || 0) / (studioData.totals?.revenue || 1)) * 100)}%
+                      </span>
+                    ) : '—'}
+                  </td>
+                  <td className="py-2 px-3 text-right tabular-nums font-semibold text-lime-400/70">
+                    +{formatMoney(Math.round((studioData.totals?.rdSpend || 0) * 0.435))}
+                  </td>
+                  <td className={cn('py-2 px-3 text-right tabular-nums font-bold', {
+                    'text-emerald-400': (studioData.totals?.net || 0) + Math.round((studioData.totals?.rdSpend || 0) * 0.435) >= 0,
+                    'text-red-400': (studioData.totals?.net || 0) + Math.round((studioData.totals?.rdSpend || 0) * 0.435) < 0,
+                  })}>
+                    {((studioData.totals?.net || 0) + Math.round((studioData.totals?.rdSpend || 0) * 0.435)) >= 0 ? '+' : ''}
+                    {formatMoney((studioData.totals?.net || 0) + Math.round((studioData.totals?.rdSpend || 0) * 0.435))}
+                  </td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        ) : (
+          <div className="animate-pulse h-48 bg-white/5 rounded-lg" />
+        )}
       </div>
 
       {/* Footer: Report Generated */}

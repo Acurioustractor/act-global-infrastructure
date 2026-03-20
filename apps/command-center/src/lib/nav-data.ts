@@ -127,6 +127,38 @@ export const navStructure: SidebarNavGroup[] = [
   },
 ]
 
+// --- Role-based filtering ---
+
+import type { Role } from '@/lib/role-context'
+
+const roleGroupAccess: Record<Role, string[]> = {
+  founder: ['dashboard', 'relationships', 'projects', 'finance', 'knowledge', 'tools'],
+  accountant: ['dashboard', 'finance'],
+  board: ['finance'],
+  team: ['dashboard', 'relationships', 'projects', 'knowledge'],
+}
+
+// Board members only see overview + board report within finance
+const boardFinanceHrefs = new Set(['/finance', '/finance/overview', '/finance/board'])
+
+export function filterNavForRole(role: Role): SidebarNavGroup[] {
+  const allowedGroups = roleGroupAccess[role]
+  return navStructure
+    .filter(group => allowedGroups.includes(group.id))
+    .map(group => {
+      if (role === 'board' && group.id === 'finance') {
+        return {
+          ...group,
+          items: group.items.map(item => ({
+            ...item,
+            children: item.children?.filter(child => boardFinanceHrefs.has(child.href)),
+          })),
+        }
+      }
+      return group
+    })
+}
+
 // Helper: find which group contains a given pathname
 export function findGroupForPath(pathname: string): string | null {
   for (const group of navStructure) {
