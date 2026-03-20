@@ -1,8 +1,5 @@
 import { NextResponse } from 'next/server'
-import { createClient } from '@supabase/supabase-js'
-
-const supabaseUrl = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL || ''
-const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || ''
+import { supabase } from '@/lib/supabase'
 
 interface CronRow {
   name: string
@@ -17,8 +14,6 @@ interface CronRow {
 
 export async function GET() {
   try {
-    const supabase = createClient(supabaseUrl, supabaseKey)
-
     const { data, error } = await supabase
       .from('pm2_cron_status')
       .select('*')

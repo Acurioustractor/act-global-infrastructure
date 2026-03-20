@@ -863,7 +863,7 @@ function RdTaxSection({ data }: { data: BusinessData }) {
 
         <ActionLinks links={[
           { label: 'AusIndustry R&D Tax Incentive', url: 'https://business.gov.au/grants-and-programs/research-and-development-tax-incentive' },
-          { label: 'Transaction Tagger (R&D view)', url: '/finance/tagger' },
+          { label: 'Board Report (R&D section)', url: '/finance/board' },
         ]} />
 
         <div className="mb-5">

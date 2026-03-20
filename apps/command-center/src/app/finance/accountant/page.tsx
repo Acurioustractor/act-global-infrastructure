@@ -14,6 +14,7 @@ import {
   TrendingDown,
   BarChart3,
   ShieldCheck,
+  Download,
 } from 'lucide-react'
 import { ProgressBar, BarChart } from '@tremor/react'
 import {
@@ -132,6 +133,10 @@ export default function AccountantPortalPage() {
             </div>
           </div>
           <div className="flex gap-3">
+            <a href="/api/finance/accountant-pack" className="btn-glass flex items-center gap-2 text-emerald-400 hover:text-emerald-300">
+              <Download className="h-4 w-4" />
+              Download Pack
+            </a>
             <Link href="/finance" className="btn-glass flex items-center gap-2">
               <BarChart3 className="h-4 w-4" />
               Operator View
@@ -469,9 +474,9 @@ export default function AccountantPortalPage() {
                     </div>
                   ))}
                   {needsTag.length > 10 && (
-                    <Link href="/finance/reconciliation?status=needs_tag" className="text-xs text-blue-400 hover:underline">
+                    <span className="text-xs text-blue-400">
                       +{needsTag.length - 10} more...
-                    </Link>
+                    </span>
                   )}
                 </div>
               )}
@@ -493,9 +498,9 @@ export default function AccountantPortalPage() {
                     </div>
                   ))}
                   {needsReceipt.length > 10 && (
-                    <Link href="/finance/reconciliation?status=needs_receipt" className="text-xs text-blue-400 hover:underline">
+                    <span className="text-xs text-blue-400">
                       +{needsReceipt.length - 10} more...
-                    </Link>
+                    </span>
                   )}
                 </div>
               )}
@@ -542,26 +547,26 @@ export default function AccountantPortalPage() {
         </div>
       )}
 
-      {/* Quick Links */}
+      {/* Quick Actions */}
       <div className="glass-card p-6">
         <h2 className="text-lg font-semibold text-white mb-4">Quick Actions</h2>
         <div className="grid grid-cols-4 gap-3">
-          <Link href="/finance/reconciliation" className="btn-glass flex items-center gap-2 justify-center py-3">
-            <CheckCircle2 className="h-4 w-4" />
-            Reconciliation
-          </Link>
-          <Link href="/finance/tagger" className="btn-glass flex items-center gap-2 justify-center py-3">
-            <Tag className="h-4 w-4" />
-            Tag Transactions
-          </Link>
-          <Link href="/finance/rd-tracking" className="btn-glass flex items-center gap-2 justify-center py-3">
+          <Link href="/finance/board" className="btn-glass flex items-center gap-2 justify-center py-3">
             <FileText className="h-4 w-4" />
-            R&D Tracking
+            Board Report
           </Link>
-          <Link href="/finance/tax" className="btn-glass flex items-center gap-2 justify-center py-3">
+          <Link href="/finance/overview" className="btn-glass flex items-center gap-2 justify-center py-3">
+            <CheckCircle2 className="h-4 w-4" />
+            Unified Overview
+          </Link>
+          <Link href="/finance/projects" className="btn-glass flex items-center gap-2 justify-center py-3">
+            <Tag className="h-4 w-4" />
+            Projects P&L
+          </Link>
+          <a href="https://go.xero.com" target="_blank" rel="noopener noreferrer" className="btn-glass flex items-center gap-2 justify-center py-3">
             <Calculator className="h-4 w-4" />
-            Tax / BAS
-          </Link>
+            Open Xero
+          </a>
         </div>
       </div>
     </div>

@@ -22,8 +22,8 @@ import {
   FolderKanban,
   Building2,
   Landmark,
+  Layers,
   Users,
-  Tag,
 } from 'lucide-react'
 import { DonutChart, ProgressBar, BarChart } from '@tremor/react'
 import {
@@ -111,11 +111,11 @@ export default function FinancePage() {
               Board Report
             </Link>
             <Link
-              href="/finance/tagger"
+              href="/finance/overview"
               className="btn-glass flex items-center gap-2"
             >
-              <Tag className="h-4 w-4" />
-              Tag Transactions
+              <Layers className="h-4 w-4" />
+              Overview
             </Link>
             <a
               href="https://go.xero.com"
@@ -243,7 +243,7 @@ export default function FinancePage() {
               )}
             </div>
             {projectSpending && (projectSpending as any).unmappedCount > 0 && (
-              <Link href="/finance/tagger" className="glass-card p-5 border border-amber-500/20 hover:bg-white/5 transition-colors">
+              <div className="glass-card p-5 border border-amber-500/20">
                 <h3 className="text-sm font-medium text-amber-400 uppercase tracking-wider mb-3 flex items-center gap-2">
                   <AlertTriangle className="h-4 w-4" />
                   Unmapped Transactions
@@ -251,9 +251,9 @@ export default function FinancePage() {
                 <p className="text-2xl font-bold text-amber-400">{(projectSpending as any).unmappedCount}</p>
                 <p className="text-sm text-white/40 mt-1">transactions need project codes</p>
                 <p className="text-xs text-white/30 mt-2 flex items-center gap-1">
-                  Go to tagger <ChevronRight className="h-3 w-3" />
+                  Needs project codes
                 </p>
-              </Link>
+              </div>
             )}
           </div>
         )
@@ -516,14 +516,13 @@ export default function FinancePage() {
         {/* Right Column - Widgets & Alerts */}
         <div className="col-span-4 space-y-6">
           {/* Subscriptions Widget */}
-          <Link href="/finance/subscriptions">
-            <div className="glass-card p-5 hover:border-purple-500/50 transition-colors cursor-pointer group">
+          <div>
+            <div className="glass-card p-5">
               <div className="flex items-center justify-between mb-3">
                 <h3 className="font-semibold text-white flex items-center gap-2">
                   <CreditCard className="h-5 w-5 text-purple-400" />
                   Subscriptions
                 </h3>
-                <ChevronRight className="h-4 w-4 text-white/40 group-hover:text-white/70 transition-colors" />
               </div>
 
               {subscriptionsSummary ? (
@@ -563,17 +562,16 @@ export default function FinancePage() {
                 </div>
               )}
             </div>
-          </Link>
+          </div>
 
           {/* Receipt Score Widget */}
-          <Link href="/finance/receipts">
-            <div className="glass-card p-5 hover:border-green-500/50 transition-colors cursor-pointer group">
+          <div>
+            <div className="glass-card p-5">
               <div className="flex items-center justify-between mb-3">
                 <h3 className="font-semibold text-white flex items-center gap-2">
                   <Receipt className="h-5 w-5 text-green-400" />
                   Receipt Score
                 </h3>
-                <ChevronRight className="h-4 w-4 text-white/40 group-hover:text-white/70 transition-colors" />
               </div>
 
               {receiptScore ? (
@@ -616,7 +614,7 @@ export default function FinancePage() {
                 <div className="py-4 text-center text-white/40 text-sm">Loading receipt score...</div>
               )}
             </div>
-          </Link>
+          </div>
 
           {/* Needs Attention Widget */}
           <div className="glass-card p-5">
@@ -639,17 +637,15 @@ export default function FinancePage() {
               )}
 
               {(receiptScore?.pending || 0) > 0 && (
-                <Link href="/finance/receipts">
-                  <button className="w-full text-left p-3 rounded-lg bg-yellow-500/10 hover:bg-yellow-500/20 transition-colors">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="text-sm font-medium text-yellow-400">{receiptScore?.pending} Missing Receipts</p>
-                        <p className="text-xs text-white/50">Match or skip</p>
-                      </div>
-                      <span className="text-xs text-yellow-400 bg-yellow-500/20 px-2 py-1 rounded">Find</span>
+                <div className="w-full text-left p-3 rounded-lg bg-yellow-500/10">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-sm font-medium text-yellow-400">{receiptScore?.pending} Missing Receipts</p>
+                      <p className="text-xs text-white/50">Match or skip in Xero</p>
                     </div>
-                  </button>
-                </Link>
+                    <a href="https://go.xero.com" target="_blank" rel="noopener noreferrer" className="text-xs text-yellow-400 bg-yellow-500/20 px-2 py-1 rounded hover:bg-yellow-500/30">Open Xero</a>
+                  </div>
+                </div>
               )}
 
               {(overdueInvoices?.count || 0) === 0 && (receiptScore?.pending || 0) === 0 && (
@@ -680,110 +676,36 @@ export default function FinancePage() {
             </div>
           </div>
 
-          {/* Quick Links */}
-          <Link href="/finance/flow">
-            <div className="glass-card p-5 hover:border-cyan-500/50 border border-cyan-500/20 transition-colors cursor-pointer group">
-              <div className="flex items-center justify-between mb-3">
-                <h3 className="font-semibold text-white flex items-center gap-2">
-                  <TrendingUp className="h-5 w-5 text-cyan-400" />
-                  Money Flow
-                </h3>
-                <ChevronRight className="h-4 w-4 text-white/40 group-hover:text-white/70 transition-colors" />
-              </div>
-              <p className="text-sm text-white/50 mb-2">Card → Dext → Xero → Tagged → Reconciled</p>
+          {/* Quick Navigation */}
+          <div className="glass-card p-5">
+            <h3 className="font-semibold text-white mb-3">Quick Navigation</h3>
+            <div className="space-y-2">
+              <Link href="/finance/overview" className="flex items-center justify-between py-2 px-2 rounded-lg hover:bg-white/5 transition-colors">
+                <span className="text-sm text-white/70 flex items-center gap-2"><Layers className="h-4 w-4 text-emerald-400" /> Unified Overview</span>
+                <ChevronRight className="h-3 w-3 text-white/30" />
+              </Link>
+              <Link href="/finance/projects" className="flex items-center justify-between py-2 px-2 rounded-lg hover:bg-white/5 transition-colors">
+                <span className="text-sm text-white/70 flex items-center gap-2"><FolderKanban className="h-4 w-4 text-purple-400" /> Projects P&L</span>
+                <ChevronRight className="h-3 w-3 text-white/30" />
+              </Link>
+              <Link href="/finance/pipeline-kanban" className="flex items-center justify-between py-2 px-2 rounded-lg hover:bg-white/5 transition-colors">
+                <span className="text-sm text-white/70 flex items-center gap-2"><BarChart3 className="h-4 w-4 text-indigo-400" /> Pipeline Kanban</span>
+                <ChevronRight className="h-3 w-3 text-white/30" />
+              </Link>
+              <Link href="/finance/revenue-planning" className="flex items-center justify-between py-2 px-2 rounded-lg hover:bg-white/5 transition-colors">
+                <span className="text-sm text-white/70 flex items-center gap-2"><TrendingUp className="h-4 w-4 text-cyan-400" /> Revenue Planning</span>
+                <ChevronRight className="h-3 w-3 text-white/30" />
+              </Link>
+              <Link href="/finance/board" className="flex items-center justify-between py-2 px-2 rounded-lg hover:bg-white/5 transition-colors">
+                <span className="text-sm text-white/70 flex items-center gap-2"><Building2 className="h-4 w-4 text-blue-400" /> Board Report</span>
+                <ChevronRight className="h-3 w-3 text-white/30" />
+              </Link>
+              <Link href="/finance/accountant" className="flex items-center justify-between py-2 px-2 rounded-lg hover:bg-white/5 transition-colors">
+                <span className="text-sm text-white/70 flex items-center gap-2"><Landmark className="h-4 w-4 text-amber-400" /> Accountant</span>
+                <ChevronRight className="h-3 w-3 text-white/30" />
+              </Link>
             </div>
-          </Link>
-
-          <Link href="/finance/health">
-            <div className="glass-card p-5 hover:border-emerald-500/50 border border-emerald-500/20 transition-colors cursor-pointer group">
-              <div className="flex items-center justify-between mb-3">
-                <h3 className="font-semibold text-white flex items-center gap-2">
-                  <CheckCircle2 className="h-5 w-5 text-emerald-400" />
-                  Finance Health
-                </h3>
-                <ChevronRight className="h-4 w-4 text-white/40 group-hover:text-white/70 transition-colors" />
-              </div>
-              <p className="text-sm text-white/50 mb-2">System health, compliance, action queue</p>
-            </div>
-          </Link>
-
-          <Link href="/finance/reconciliation">
-            <div className="glass-card p-5 hover:border-blue-500/50 border border-blue-500/20 transition-colors cursor-pointer group">
-              <div className="flex items-center justify-between mb-3">
-                <h3 className="font-semibold text-white flex items-center gap-2">
-                  <FileText className="h-5 w-5 text-blue-400" />
-                  Reconciliation
-                </h3>
-                <ChevronRight className="h-4 w-4 text-white/40 group-hover:text-white/70 transition-colors" />
-              </div>
-              <p className="text-sm text-white/50 mb-2">Tag, review & reconcile transactions</p>
-            </div>
-          </Link>
-
-          <Link href="/finance/reports">
-            <div className="glass-card p-5 hover:border-indigo-500/50 transition-colors cursor-pointer group">
-              <div className="flex items-center justify-between mb-3">
-                <h3 className="font-semibold text-white flex items-center gap-2">
-                  <BarChart3 className="h-5 w-5 text-indigo-400" />
-                  Financial Reports
-                </h3>
-                <ChevronRight className="h-4 w-4 text-white/40 group-hover:text-white/70 transition-colors" />
-              </div>
-              <p className="text-sm text-white/50 mb-2">P&L statement, cash flow forecast</p>
-            </div>
-          </Link>
-
-          <Link href="/finance/cashflow">
-            <div className="glass-card p-5 hover:border-emerald-500/50 transition-colors cursor-pointer group">
-              <div className="flex items-center justify-between mb-3">
-                <h3 className="font-semibold text-white flex items-center gap-2">
-                  <Wallet className="h-5 w-5 text-emerald-400" />
-                  Cash Flow Forecast
-                </h3>
-                <ChevronRight className="h-4 w-4 text-white/40 group-hover:text-white/70 transition-colors" />
-              </div>
-              <p className="text-sm text-white/50 mb-2">Burn rate, runway & projections</p>
-            </div>
-          </Link>
-
-          <Link href="/finance/revenue">
-            <div className="glass-card p-5 hover:border-blue-500/50 transition-colors cursor-pointer group">
-              <div className="flex items-center justify-between mb-3">
-                <h3 className="font-semibold text-white flex items-center gap-2">
-                  <BarChart3 className="h-5 w-5 text-blue-400" />
-                  Revenue Streams
-                </h3>
-                <ChevronRight className="h-4 w-4 text-white/40 group-hover:text-white/70 transition-colors" />
-              </div>
-              <p className="text-sm text-white/50 mb-2">Income by project & pipeline</p>
-            </div>
-          </Link>
-
-          <Link href="/finance/debt">
-            <div className="glass-card p-5 hover:border-amber-500/50 transition-colors cursor-pointer group">
-              <div className="flex items-center justify-between mb-3">
-                <h3 className="font-semibold text-white flex items-center gap-2">
-                  <Landmark className="h-5 w-5 text-amber-400" />
-                  Property Payoff
-                </h3>
-                <ChevronRight className="h-4 w-4 text-white/40 group-hover:text-white/70 transition-colors" />
-              </div>
-              <p className="text-sm text-white/50 mb-2">Mortgage tracking & scenarios</p>
-            </div>
-          </Link>
-
-          <Link href="/business">
-            <div className="glass-card p-5 hover:border-blue-500/50 transition-colors cursor-pointer group">
-              <div className="flex items-center justify-between mb-3">
-                <h3 className="font-semibold text-white flex items-center gap-2">
-                  <Building2 className="h-5 w-5 text-blue-400" />
-                  Business
-                </h3>
-                <ChevronRight className="h-4 w-4 text-white/40 group-hover:text-white/70 transition-colors" />
-              </div>
-              <p className="text-sm text-white/50 mb-2">Entity structure, R&D tax credits, compliance</p>
-            </div>
-          </Link>
+          </div>
 
           {/* Cash Distribution Donut */}
           <div className="glass-card p-5">

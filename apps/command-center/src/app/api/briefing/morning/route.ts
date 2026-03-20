@@ -1,15 +1,7 @@
 import { NextResponse } from 'next/server'
-import { createClient } from '@supabase/supabase-js'
-
-// Initialize Supabase clients
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
-const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY!
-const supabase = createClient(supabaseUrl, supabaseKey)
-
-// EL database for storyteller data
-const elUrl = process.env.SUPABASE_SHARED_URL || supabaseUrl
-const elKey = process.env.SUPABASE_SHARED_SERVICE_ROLE_KEY || supabaseKey
-const elSupabase = createClient(elUrl, elKey)
+import { supabase, elSupabase } from '@/lib/supabase'
+import { fetchDailyBriefing } from '@act/intel'
+import type { SupabaseQueryClient } from '@act/intel'
 
 // Regenerative thoughts
 const REGENERATIVE_THOUGHTS = [
@@ -24,23 +16,6 @@ const REGENERATIVE_THOUGHTS = [
   "Regeneration begins with attention.",
   "We don't drive the tractor—we hand over the keys.",
 ]
-
-// Helper functions
-function daysAgo(n: number): string {
-  const d = new Date()
-  d.setDate(d.getDate() - n)
-  return d.toISOString()
-}
-
-function todayStr(): string {
-  return new Date().toISOString().split('T')[0]
-}
-
-function futureDate(n: number): string {
-  const d = new Date()
-  d.setDate(d.getDate() + n)
-  return d.toISOString().split('T')[0]
-}
 
 function getMoonPhase(date: Date): { phase: string; energy: string } {
   const knownNewMoon = new Date(2000, 0, 6)
@@ -58,14 +33,30 @@ function getMoonPhase(date: Date): { phase: string; energy: string } {
   return { phase: 'Waning Crescent', energy: 'Rest, integrate learnings, prepare for renewal' }
 }
 
-// Data fetchers
+function daysAgo(n: number): string {
+  const d = new Date()
+  d.setDate(d.getDate() - n)
+  return d.toISOString()
+}
+
+function todayStr(): string {
+  return new Date().toISOString().split('T')[0]
+}
+
+function futureDate(n: number): string {
+  const d = new Date()
+  d.setDate(d.getDate() + n)
+  return d.toISOString().split('T')[0]
+}
+
+// --- Unique fetchers (not in @act/intel) ---
+
 async function fetchCalendarToday() {
   const today = new Date()
   today.setHours(0, 0, 0, 0)
   const tomorrow = new Date(today)
   tomorrow.setDate(tomorrow.getDate() + 1)
 
-  // Only fetch events from Ben's calendars
   const BEN_CALENDARS = ['benjamin@act.place', 'bk@aimementoring.com']
   const { data } = await supabase
     .from('calendar_events')
@@ -84,50 +75,8 @@ async function fetchCalendarToday() {
   }))
 }
 
-async function fetchOverdueActions() {
-  const { data } = await supabase
-    .from('project_knowledge')
-    .select('id, project_code, title, content, follow_up_date, importance')
-    .eq('action_required', true)
-    .eq('status', 'open')
-    .lt('follow_up_date', todayStr())
-    .order('follow_up_date', { ascending: true })
-    .limit(10)
-
-  return (data || []).map(row => ({
-    id: row.id,
-    project: row.project_code,
-    title: row.title || '(untitled)',
-    content: row.content?.substring(0, 200) || '',
-    followUpDate: row.follow_up_date,
-    importance: row.importance || 'normal',
-    daysOverdue: Math.floor((Date.now() - new Date(row.follow_up_date).getTime()) / 86400000),
-  }))
-}
-
-async function fetchUpcomingFollowups() {
-  const { data } = await supabase
-    .from('project_knowledge')
-    .select('id, project_code, title, follow_up_date, importance')
-    .eq('action_required', true)
-    .eq('status', 'open')
-    .gte('follow_up_date', todayStr())
-    .lte('follow_up_date', futureDate(7))
-    .order('follow_up_date', { ascending: true })
-    .limit(10)
-
-  return (data || []).map(row => ({
-    id: row.id,
-    project: row.project_code,
-    title: row.title || '(untitled)',
-    followUpDate: row.follow_up_date,
-    importance: row.importance || 'normal',
-  }))
-}
-
 async function fetchNeedToRespond() {
   const threeDaysAgo = daysAgo(3)
-
   const { data } = await supabase
     .from('communications_history')
     .select('id, contact_name, contact_email, subject, channel, received_at, ai_summary')
@@ -146,134 +95,6 @@ async function fetchNeedToRespond() {
     receivedAt: row.received_at,
     summary: row.ai_summary,
   }))
-}
-
-async function fetchRelationshipAlerts() {
-  const staleThreshold = daysAgo(30)
-
-  const { data } = await supabase
-    .from('ghl_contacts')
-    .select('id, full_name, first_name, last_name, email, company_name, engagement_status, last_contact_date, projects')
-    .in('engagement_status', ['active', 'prospect'])
-    .lt('last_contact_date', staleThreshold)
-    .order('last_contact_date', { ascending: true })
-    .limit(10)
-
-  return (data || []).map(row => {
-    const name = row.full_name?.trim() || `${row.first_name || ''} ${row.last_name || ''}`.trim() || row.email || 'Unknown'
-    return {
-      id: row.id,
-      name,
-      email: row.email,
-      company: row.company_name,
-      engagementStatus: row.engagement_status,
-      lastContactDate: row.last_contact_date,
-      daysSinceContact: row.last_contact_date
-        ? Math.floor((Date.now() - new Date(row.last_contact_date).getTime()) / 86400000)
-        : null,
-      projects: row.projects || [],
-    }
-  })
-}
-
-async function fetchFinancialSummary() {
-  const { data } = await supabase
-    .from('ghl_opportunities')
-    .select('status, monetary_value, pipeline_name, stage_name')
-
-  const rows = data || []
-  let openValue = 0, wonValue = 0, lostValue = 0
-  const byStage: Record<string, { value: number; count: number }> = {}
-
-  for (const row of rows) {
-    const val = parseFloat(row.monetary_value) || 0
-    if (row.status === 'open') openValue += val
-    else if (row.status === 'won') wonValue += val
-    else if (row.status === 'lost') lostValue += val
-
-    const sName = row.stage_name || 'Unknown'
-    if (!byStage[sName]) byStage[sName] = { value: 0, count: 0 }
-    byStage[sName].value += val
-    byStage[sName].count += 1
-  }
-
-  return {
-    totalPipeline: openValue + wonValue + lostValue,
-    openValue,
-    wonValue,
-    lostValue,
-    opportunityCount: rows.length,
-    byStage,
-  }
-}
-
-async function fetchProjectActivity() {
-  const sevenDaysAgo = daysAgo(7)
-
-  const { data } = await supabase
-    .from('project_knowledge')
-    .select('project_code, knowledge_type, recorded_at')
-    .gte('recorded_at', sevenDaysAgo)
-
-  const byProject: Record<string, { code: string; meetings: number; actions: number; decisions: number; total: number }> = {}
-
-  for (const row of (data || [])) {
-    const code = row.project_code
-    if (!byProject[code]) {
-      byProject[code] = { code, meetings: 0, actions: 0, decisions: 0, total: 0 }
-    }
-    byProject[code].total += 1
-    if (row.knowledge_type === 'meeting') byProject[code].meetings += 1
-    else if (row.knowledge_type === 'decision') byProject[code].decisions += 1
-    else byProject[code].actions += 1
-  }
-
-  return Object.values(byProject).sort((a, b) => b.total - a.total).slice(0, 5)
-}
-
-async function fetchStorytellerHighlights() {
-  // Recent storyteller activity
-  const { data: recentAnalysis } = await elSupabase
-    .from('storyteller_master_analysis')
-    .select('storyteller_id, themes, created_at')
-    .order('created_at', { ascending: false })
-    .limit(5)
-
-  // Get storyteller names
-  const stIds = (recentAnalysis || []).map(a => a.storyteller_id)
-  const { data: storytellers } = await elSupabase
-    .from('storytellers')
-    .select('id, display_name')
-    .in('id', stIds)
-
-  const nameMap = new Map((storytellers || []).map(s => [s.id, s.display_name]))
-
-  // Get quote count
-  const { count: quoteCount } = await elSupabase
-    .from('storyteller_master_analysis')
-    .select('id', { count: 'exact', head: true })
-
-  // Theme summary
-  const themeCounts: Record<string, number> = {}
-  for (const a of (recentAnalysis || [])) {
-    for (const t of (a.themes || [])) {
-      themeCounts[t] = (themeCounts[t] || 0) + 1
-    }
-  }
-  const topThemes = Object.entries(themeCounts)
-    .sort((a, b) => b[1] - a[1])
-    .slice(0, 5)
-    .map(([theme]) => theme)
-
-  return {
-    recentAnalyses: (recentAnalysis || []).map(a => ({
-      storyteller: nameMap.get(a.storyteller_id) || 'Unknown',
-      themes: a.themes || [],
-      date: a.created_at,
-    })),
-    totalQuotes: quoteCount || 0,
-    topThemes,
-  }
 }
 
 async function fetchCommunicationStats() {
@@ -300,11 +121,123 @@ async function fetchCommunicationStats() {
   }
 }
 
+async function fetchStorytellerHighlights() {
+  const { data: recentAnalysis } = await elSupabase
+    .from('storyteller_master_analysis')
+    .select('storyteller_id, themes, created_at')
+    .order('created_at', { ascending: false })
+    .limit(5)
+
+  const stIds = (recentAnalysis || []).map(a => a.storyteller_id)
+  const { data: storytellers } = await elSupabase
+    .from('storytellers')
+    .select('id, display_name')
+    .in('id', stIds)
+
+  const nameMap = new Map((storytellers || []).map(s => [s.id, s.display_name]))
+
+  const { count: quoteCount } = await elSupabase
+    .from('storyteller_master_analysis')
+    .select('id', { count: 'exact', head: true })
+
+  const themeCounts: Record<string, number> = {}
+  for (const a of (recentAnalysis || [])) {
+    for (const t of (a.themes || [])) {
+      themeCounts[t] = (themeCounts[t] || 0) + 1
+    }
+  }
+  const topThemes = Object.entries(themeCounts)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 5)
+    .map(([theme]) => theme)
+
+  return {
+    recentAnalyses: (recentAnalysis || []).map(a => ({
+      storyteller: nameMap.get(a.storyteller_id) || 'Unknown',
+      themes: a.themes || [],
+      date: a.created_at,
+    })),
+    totalQuotes: quoteCount || 0,
+    topThemes,
+  }
+}
+
+async function fetchDailyPriorities() {
+  const { data } = await supabase
+    .from('sprint_suggestions')
+    .select('id, title, stream, priority, notes, source_type, source_ref, due_date, project_code, owner, created_at')
+    .eq('dismissed', false)
+    .is('promoted_to', null)
+    .or(`expires_at.is.null,expires_at.gt.${new Date().toISOString()}`)
+    .order('priority', { ascending: false })
+    .order('created_at', { ascending: false })
+    .limit(20)
+
+  return (data || []).map(row => {
+    let context = null
+    try { context = row.notes ? JSON.parse(row.notes) : null } catch { context = { raw: row.notes } }
+    return {
+      id: row.id,
+      title: row.title,
+      priority: row.priority,
+      sourceType: row.source_type,
+      projectCode: row.project_code,
+      dueDate: row.due_date,
+      score: context?.score ?? null,
+      action: context?.action ?? null,
+      value: context?.amount ?? context?.value ?? null,
+      context,
+    }
+  })
+}
+
+async function fetchPipelineSnapshot() {
+  const { data } = await supabase
+    .from('opportunities_unified')
+    .select('id, title, stage, value_mid, probability, project_codes, opportunity_type, source_system, expected_close')
+    .not('stage', 'in', '("won","lost","dismissed")')
+
+  const rows = data || []
+  let totalWeighted = 0
+  const byStage: Record<string, { count: number; value: number; weighted: number }> = {}
+
+  for (const row of rows) {
+    const val = Number(row.value_mid) || 0
+    const prob = Number(row.probability) || 0.5
+    const weighted = val * prob
+    totalWeighted += weighted
+
+    const stage = row.stage || 'unknown'
+    if (!byStage[stage]) byStage[stage] = { count: 0, value: 0, weighted: 0 }
+    byStage[stage].count += 1
+    byStage[stage].value += val
+    byStage[stage].weighted += weighted
+  }
+
+  return {
+    totalOpportunities: rows.length,
+    totalValue: rows.reduce((s, r) => s + (Number(r.value_mid) || 0), 0),
+    totalWeighted,
+    byStage,
+    topDeals: rows
+      .sort((a, b) => (Number(b.value_mid) || 0) - (Number(a.value_mid) || 0))
+      .slice(0, 5)
+      .map(r => ({
+        title: r.title,
+        stage: r.stage,
+        value: Number(r.value_mid) || 0,
+        type: r.opportunity_type,
+        source: r.source_system,
+        expectedClose: r.expected_close,
+        projects: r.project_codes || [],
+      })),
+  }
+}
+
 async function fetchGrantsSection() {
   const yesterday = daysAgo(1)
   const nextWeek = futureDate(7)
 
-  // New discoveries (last 24h) — column is created_at, not discovered_at; application_status not status
   const { data: newGrants } = await supabase
     .from('grant_opportunities')
     .select('id, name, provider, fit_score, relevance_score, aligned_projects, amount_max, closes_at')
@@ -312,23 +245,25 @@ async function fetchGrantsSection() {
     .order('relevance_score', { ascending: false })
     .limit(5)
 
-  // Upcoming deadlines (next 7 days)
-  const { data: upcomingDeadlines } = await supabase
+  const { data: upcomingDeadlinesRaw } = await supabase
     .from('grant_opportunities')
     .select('id, name, provider, closes_at, fit_score, relevance_score, aligned_projects')
     .not('closes_at', 'is', null)
     .gte('closes_at', todayStr())
     .lte('closes_at', nextWeek)
     .order('closes_at', { ascending: true })
-    .limit(5)
+    .limit(20)
+  const upcomingDeadlines = (upcomingDeadlinesRaw || []).filter(g => {
+    if (g.fit_score && g.fit_score >= 60) return true
+    if (Array.isArray(g.aligned_projects) && g.aligned_projects.length > 0) return true
+    return false
+  }).slice(0, 10)
 
-  // Active applications count
   const { count: activeApps } = await supabase
     .from('grant_applications')
     .select('id', { count: 'exact', head: true })
     .in('status', ['draft', 'in_progress', 'submitted', 'under_review'])
 
-  // Pipeline value
   const { data: pipelineData } = await supabase
     .from('grant_applications')
     .select('amount_requested')
@@ -358,6 +293,34 @@ async function fetchGrantsSection() {
   }
 }
 
+// --- Financial summary (inline — @act/intel's version has different shape) ---
+
+async function fetchFinancialSummary() {
+  const { data } = await supabase
+    .from('ghl_opportunities')
+    .select('status, monetary_value, pipeline_name, stage_name')
+
+  const rows = data || []
+  let openValue = 0, wonValue = 0, lostValue = 0
+  const byStage: Record<string, { value: number; count: number }> = {}
+
+  for (const row of rows) {
+    const val = parseFloat(row.monetary_value) || 0
+    if (row.status === 'open') openValue += val
+    else if (row.status === 'won') wonValue += val
+    else if (row.status === 'lost') lostValue += val
+
+    const sName = row.stage_name || 'Unknown'
+    if (!byStage[sName]) byStage[sName] = { value: 0, count: 0 }
+    byStage[sName].value += val
+    byStage[sName].count += 1
+  }
+
+  return { totalPipeline: openValue + wonValue + lostValue, openValue, wonValue, lostValue, opportunityCount: rows.length, byStage }
+}
+
+// --- Main handler ---
+
 export async function GET() {
   try {
     const now = new Date()
@@ -368,30 +331,61 @@ export async function GET() {
       day: 'numeric',
     })
 
-    // Fetch all data in parallel
+    // Use @act/intel for core briefing data (overdue, upcoming, relationships, projects)
+    const coreBriefing = await fetchDailyBriefing(supabase as unknown as SupabaseQueryClient)
+
+    // Fetch remaining data in parallel
     const [
       calendar,
-      overdueActions,
-      upcomingFollowups,
       needToRespond,
-      relationshipAlerts,
       financialSummary,
-      projectActivity,
       storytellerHighlights,
       communicationStats,
       grantsSection,
+      dailyPriorities,
+      pipelineSnapshot,
     ] = await Promise.all([
       fetchCalendarToday(),
-      fetchOverdueActions(),
-      fetchUpcomingFollowups(),
       fetchNeedToRespond(),
-      fetchRelationshipAlerts(),
       fetchFinancialSummary(),
-      fetchProjectActivity(),
       fetchStorytellerHighlights(),
       fetchCommunicationStats(),
       fetchGrantsSection(),
+      fetchDailyPriorities(),
+      fetchPipelineSnapshot(),
     ])
+
+    // Map @act/intel data to existing API shape
+    const overdueActions = coreBriefing.overdue_actions.map(a => ({
+      project: a.project_code,
+      title: a.title,
+      followUpDate: a.follow_up_date,
+      importance: a.importance || 'normal',
+      daysOverdue: Math.floor((Date.now() - new Date(a.follow_up_date).getTime()) / 86400000),
+    }))
+
+    const upcomingFollowups = coreBriefing.upcoming_followups.map(a => ({
+      project: a.project_code,
+      title: a.title,
+      followUpDate: a.follow_up_date,
+      importance: a.importance || 'normal',
+    }))
+
+    const relationshipAlerts = coreBriefing.stale_relationships.map(r => ({
+      name: r.full_name || r.email || 'Unknown',
+      email: r.email,
+      company: r.company_name,
+      engagementStatus: r.engagement_status,
+      lastContactDate: r.last_contact_date,
+      daysSinceContact: r.last_contact_date
+        ? Math.floor((Date.now() - new Date(r.last_contact_date).getTime()) / 86400000)
+        : null,
+    }))
+
+    const projectActivity = coreBriefing.active_projects.slice(0, 5).map(p => ({
+      code: p.code,
+      total: p.activity_count,
+    }))
 
     const briefing = {
       success: true,
@@ -400,13 +394,11 @@ export async function GET() {
       moonPhase: getMoonPhase(now),
       thought: REGENERATIVE_THOUGHTS[Math.floor(Math.random() * REGENERATIVE_THOUGHTS.length)],
 
-      // Today's schedule
       calendar: {
         events: calendar,
         meetingCount: calendar.filter(e => e.type === 'meeting').length,
       },
 
-      // Actions & follow-ups
       actions: {
         overdue: overdueActions,
         upcoming: upcomingFollowups,
@@ -414,35 +406,36 @@ export async function GET() {
         upcomingCount: upcomingFollowups.length,
       },
 
-      // Communications
       communications: {
         stats: communicationStats,
         needToRespond,
         needToRespondCount: needToRespond.length,
       },
 
-      // Relationships
       relationships: {
         alerts: relationshipAlerts,
         alertCount: relationshipAlerts.length,
       },
 
-      // Financial
       financial: financialSummary,
 
-      // Projects
       projects: {
         activity: projectActivity,
         activeCount: projectActivity.length,
       },
 
-      // Storytellers
       storytellers: storytellerHighlights,
-
-      // Grants
       grants: grantsSection,
 
-      // Summary for quick glance
+      priorities: {
+        items: dailyPriorities,
+        nowCount: dailyPriorities.filter((p: any) => p.priority === 'now').length,
+        nextCount: dailyPriorities.filter((p: any) => p.priority === 'next').length,
+        totalCount: dailyPriorities.length,
+      },
+
+      pipeline: pipelineSnapshot,
+
       summary: {
         urgentItems: overdueActions.length + needToRespond.length,
         meetingsToday: calendar.filter(e => e.type === 'meeting').length,

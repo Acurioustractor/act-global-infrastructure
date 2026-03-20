@@ -12,6 +12,9 @@ import {
   BarChart3,
   FileText,
   ChevronRight,
+  FlaskConical,
+  Target,
+  Users,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
@@ -45,12 +48,59 @@ interface VarianceRow {
   topDrivers: any[] | null
 }
 
+interface BudgetVsActual {
+  annualBudget: number
+  ytdBudget: number
+  ytdActual: number
+  variance: number
+  utilisationPct: number | null
+}
+
+interface RdVendor {
+  vendor: string
+  category: string
+  spend: number
+  txCount: number
+}
+
+interface RdSummary {
+  totalSpend: number
+  pctOfExpenses: number
+  potentialOffset: number
+  topVendors: RdVendor[]
+}
+
+interface SalaryAllocation {
+  personName: string
+  role: string
+  allocationPct: number
+  monthlyCost: number
+  annualCost: number
+  rdEligible: boolean
+}
+
+interface SalaryAllocations {
+  allocations: SalaryAllocation[]
+  totalAnnualCost: number
+  rdEligibleCost: number
+}
+
 interface ProjectFinancialsData {
   projectCode: string
   monthly: MonthlyRow[]
   totals: { revenue: number; expenses: number; net: number }
   expenseCategories: Record<string, number>
   revenueCategories: Record<string, number>
+  budgetVsActual: BudgetVsActual | null
+  rdSummary: RdSummary
+  salaryAllocations: SalaryAllocations
+  revenueStreams: Array<{
+    id: string
+    name: string
+    category: string
+    targetMonthly: number
+    status: string
+  }>
   variances: VarianceRow[]
   recentTransactions: Array<{
     id: string
@@ -114,8 +164,8 @@ export default function ProjectFinancialsPage({
 
   return (
     <div className="min-h-screen p-4 md:p-8">
-      <Link href="/finance" className="inline-flex items-center gap-2 text-white/50 hover:text-white mb-6 transition-colors">
-        <ArrowLeft className="h-4 w-4" /> Back to Finance
+      <Link href="/finance/projects" className="inline-flex items-center gap-2 text-white/50 hover:text-white mb-6 transition-colors">
+        <ArrowLeft className="h-4 w-4" /> All Projects
       </Link>
 
       <header className="mb-8">
@@ -150,6 +200,112 @@ export default function ProjectFinancialsPage({
             {formatMoney(Math.abs(totals.expenses) / Math.max(monthly.length, 1))}
           </p>
           <p className="text-sm text-white/40 mt-1">Avg Monthly Spend</p>
+        </div>
+      </div>
+
+      {/* Budget vs Actual + R&D Eligibility */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+        {/* Budget vs Actual */}
+        {data.budgetVsActual ? (
+          <div className="glass-card p-5">
+            <h3 className="font-semibold text-white mb-3 flex items-center gap-2">
+              <Target className="h-5 w-5 text-blue-400" />
+              Budget vs Actual — FY26
+            </h3>
+            <div className="space-y-3">
+              <div className="flex justify-between text-sm">
+                <span className="text-white/40">Annual Budget</span>
+                <span className="text-white font-medium tabular-nums">{formatMoney(data.budgetVsActual.annualBudget)}</span>
+              </div>
+              <div className="flex justify-between text-sm">
+                <span className="text-white/40">YTD Actual</span>
+                <span className="text-red-400 font-medium tabular-nums">{formatMoney(data.budgetVsActual.ytdActual)}</span>
+              </div>
+              <div className="h-3 bg-white/10 rounded-full overflow-hidden">
+                <div
+                  className={cn(
+                    'h-full rounded-full transition-all',
+                    (data.budgetVsActual.utilisationPct ?? 0) > 100 ? 'bg-red-500' :
+                    (data.budgetVsActual.utilisationPct ?? 0) > 80 ? 'bg-amber-500' : 'bg-blue-500'
+                  )}
+                  style={{ width: `${Math.min(data.budgetVsActual.utilisationPct ?? 0, 100)}%` }}
+                />
+              </div>
+              <div className="flex justify-between text-sm">
+                <span className="text-white/40">Utilisation</span>
+                <span className={cn(
+                  'font-medium tabular-nums',
+                  (data.budgetVsActual.utilisationPct ?? 0) > 100 ? 'text-red-400' :
+                  (data.budgetVsActual.utilisationPct ?? 0) > 80 ? 'text-amber-400' : 'text-blue-400'
+                )}>
+                  {data.budgetVsActual.utilisationPct ?? 0}%
+                </span>
+              </div>
+              <div className="flex justify-between text-sm pt-2 border-t border-white/10">
+                <span className="text-white/40">Variance</span>
+                <span className={cn(
+                  'font-medium tabular-nums',
+                  data.budgetVsActual.variance >= 0 ? 'text-emerald-400' : 'text-red-400'
+                )}>
+                  {data.budgetVsActual.variance >= 0 ? '+' : '-'}{formatMoney(data.budgetVsActual.variance)} {data.budgetVsActual.variance >= 0 ? 'under' : 'over'}
+                </span>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div className="glass-card p-5">
+            <h3 className="font-semibold text-white mb-3 flex items-center gap-2">
+              <Target className="h-5 w-5 text-white/20" />
+              Budget vs Actual
+            </h3>
+            <p className="text-sm text-white/30">No budget set for this project. Add a row to <code className="text-xs">project_budgets</code> to enable tracking.</p>
+          </div>
+        )}
+
+        {/* R&D Eligibility */}
+        <div className="glass-card p-5">
+          <h3 className="font-semibold text-white mb-3 flex items-center gap-2">
+            <FlaskConical className="h-5 w-5 text-lime-400" />
+            R&D Eligibility
+          </h3>
+          {data.rdSummary.totalSpend > 0 ? (
+            <div className="space-y-3">
+              <div className="flex justify-between text-sm">
+                <span className="text-white/40">R&D Eligible Spend</span>
+                <span className="text-lime-400 font-medium tabular-nums">{formatMoney(data.rdSummary.totalSpend)}</span>
+              </div>
+              <div className="flex justify-between text-sm">
+                <span className="text-white/40">% of Expenses</span>
+                <span className="text-lime-400 font-medium tabular-nums">{data.rdSummary.pctOfExpenses}%</span>
+              </div>
+              <div className="h-3 bg-white/10 rounded-full overflow-hidden">
+                <div className="h-full bg-lime-500/60 rounded-full" style={{ width: `${Math.min(data.rdSummary.pctOfExpenses, 100)}%` }} />
+              </div>
+              <div className="flex justify-between text-sm pt-2 border-t border-white/10">
+                <span className="text-white/40">43.5% Offset</span>
+                <span className="text-emerald-400 font-medium tabular-nums">{formatMoney(data.rdSummary.potentialOffset)}</span>
+              </div>
+              {data.rdSummary.topVendors.length > 0 && (
+                <div className="pt-2 border-t border-white/10 space-y-1">
+                  <p className="text-xs text-white/30 mb-1">Top R&D vendors</p>
+                  {data.rdSummary.topVendors.slice(0, 5).map(v => (
+                    <div key={v.vendor} className="flex justify-between text-xs">
+                      <span className="text-white/50 truncate mr-2">{v.vendor}</span>
+                      <span className="text-lime-400/70 tabular-nums">{formatMoney(v.spend)}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
+              <Link
+                href="/finance/board"
+                className="block text-xs text-blue-400 hover:text-blue-300 pt-1 transition-colors"
+              >
+                View full R&D tracking →
+              </Link>
+            </div>
+          ) : (
+            <p className="text-sm text-white/30">No R&D-eligible spend detected for this project.</p>
+          )}
         </div>
       </div>
 
@@ -311,6 +467,72 @@ export default function ProjectFinancialsPage({
                   )
                 })}
               </div>
+            </div>
+          )}
+
+          {/* Salary Allocations */}
+          {data.salaryAllocations.allocations.length > 0 && (
+            <div className="glass-card p-5">
+              <h3 className="font-semibold text-white mb-3 flex items-center gap-2">
+                <Users className="h-5 w-5 text-cyan-400" />
+                Team Cost Allocation
+              </h3>
+              <div className="space-y-2">
+                {data.salaryAllocations.allocations.map(a => (
+                  <div key={`${a.personName}-${a.role}`} className="flex items-center justify-between text-sm">
+                    <div>
+                      <span className="text-white">{a.personName}</span>
+                      {a.role && <span className="text-white/30 text-xs ml-1">({a.role})</span>}
+                      {a.rdEligible && <span className="text-lime-400/60 text-xs ml-1">R&D</span>}
+                    </div>
+                    <div className="text-right">
+                      <span className="text-white/60 tabular-nums">{Math.round(a.allocationPct * 100)}%</span>
+                      <span className="text-white/30 text-xs ml-2 tabular-nums">{formatMoney(a.monthlyCost)}/mo</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className="mt-3 pt-2 border-t border-white/10 space-y-1">
+                <div className="flex justify-between text-sm">
+                  <span className="text-white/40">Annual Cost</span>
+                  <span className="text-white font-medium tabular-nums">{formatMoney(data.salaryAllocations.totalAnnualCost)}</span>
+                </div>
+                {data.salaryAllocations.rdEligibleCost > 0 && (
+                  <div className="flex justify-between text-sm">
+                    <span className="text-white/40">R&D Salary</span>
+                    <span className="text-lime-400 font-medium tabular-nums">{formatMoney(data.salaryAllocations.rdEligibleCost)}</span>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+
+          {/* Revenue Streams */}
+          {data.revenueStreams.length > 0 && (
+            <div className="glass-card p-5">
+              <h3 className="font-semibold text-white mb-3 flex items-center gap-2">
+                <TrendingUp className="h-5 w-5 text-purple-400" />
+                Revenue Streams
+              </h3>
+              <div className="space-y-2">
+                {data.revenueStreams.map(s => (
+                  <div key={s.id} className="flex items-center justify-between text-sm">
+                    <div>
+                      <span className="text-white">{s.name}</span>
+                      <span className="text-white/20 text-xs ml-1">{s.category}</span>
+                    </div>
+                    {s.targetMonthly > 0 && (
+                      <span className="text-purple-400/70 tabular-nums text-xs">{formatMoney(s.targetMonthly)}/mo</span>
+                    )}
+                  </div>
+                ))}
+              </div>
+              <Link
+                href="/finance/overview"
+                className="block text-xs text-blue-400 hover:text-blue-300 pt-2 mt-2 border-t border-white/10 transition-colors"
+              >
+                View all revenue streams →
+              </Link>
             </div>
           )}
 

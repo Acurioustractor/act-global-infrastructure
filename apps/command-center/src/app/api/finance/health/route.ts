@@ -498,7 +498,7 @@ async function fetchActionQueue(today: string) {
       priority: (untaggedRes.count || 0) > 50 ? 'critical' : 'high',
       title: `${untaggedRes.count} untagged transactions (>7 days)`,
       count: untaggedRes.count || 0,
-      actionUrl: '/finance/tagger',
+      actionUrl: '/finance',
       actionLabel: 'Open Tagger',
       estimatedMinutes: Math.ceil((untaggedRes.count || 0) / 10),
     })
@@ -510,7 +510,7 @@ async function fetchActionQueue(today: string) {
       priority: (missingReceiptRes.count || 0) > 100 ? 'critical' : 'high',
       title: `${missingReceiptRes.count} spend transactions missing receipts`,
       count: missingReceiptRes.count || 0,
-      actionUrl: '/finance/receipt-pipeline',
+      actionUrl: '/finance',
       actionLabel: 'View Pipeline',
       estimatedMinutes: Math.ceil((missingReceiptRes.count || 0) / 5),
     })
@@ -522,7 +522,7 @@ async function fetchActionQueue(today: string) {
       priority: 'critical',
       title: `${overdueInvRes.count} overdue invoices`,
       count: overdueInvRes.count || 0,
-      actionUrl: '/finance/revenue',
+      actionUrl: '/finance/overview',
       actionLabel: 'Chase Payments',
       estimatedMinutes: (overdueInvRes.count || 0) * 5,
     })
@@ -546,7 +546,7 @@ async function fetchActionQueue(today: string) {
       priority: 'medium',
       title: `${stuckRes.count} receipt pipeline items stuck >14 days`,
       count: stuckRes.count || 0,
-      actionUrl: '/finance/receipt-pipeline',
+      actionUrl: '/finance',
       actionLabel: 'Unstick Pipeline',
       estimatedMinutes: (stuckRes.count || 0) * 3,
     })

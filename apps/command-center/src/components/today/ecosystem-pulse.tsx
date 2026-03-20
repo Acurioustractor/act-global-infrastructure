@@ -222,7 +222,7 @@ export function EcosystemPulse() {
               </div>
             ))}
             {data.overdueReceivables.length > 5 && (
-              <Link href="/finance/revenue" className="block text-center text-xs text-white/30 hover:text-white/50 pt-1">
+              <Link href="/finance/overview" className="block text-center text-xs text-white/30 hover:text-white/50 pt-1">
                 +{data.overdueReceivables.length - 5} more
               </Link>
             )}
