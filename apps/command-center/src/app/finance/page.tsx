@@ -35,6 +35,7 @@ import {
   getCashflowExplained,
 } from '@/lib/api'
 import { cn } from '@/lib/utils'
+import { AskAboutThis } from '@/components/ask-about-this'
 
 function formatMoney(n: number) {
   if (Math.abs(n) >= 1_000_000) return `$${(n / 1_000_000).toFixed(1)}M`
@@ -739,6 +740,32 @@ export default function FinancePage() {
           </div>
         </div>
       </div>
+
+      <AskAboutThis
+        pageTitle="Finance Dashboard"
+        getContext={() => {
+          const parts: string[] = []
+          if (summary) {
+            parts.push(`Total Income: $${summary.totalIncome?.toLocaleString()}`)
+            parts.push(`Total Expenses: $${summary.totalExpenses?.toLocaleString()}`)
+            parts.push(`Net Position: $${summary.netPosition?.toLocaleString()}`)
+            parts.push(`Receivable: $${summary.receivables?.total?.toLocaleString()} (${summary.receivables?.count} invoices)`)
+            parts.push(`Payable: $${summary.payables?.total?.toLocaleString()} (${summary.payables?.count} bills)`)
+            parts.push(`Monthly Income: $${summary.monthlyIncome?.toLocaleString()}`)
+            parts.push(`Monthly Expenses: $${summary.monthlyExpenses?.toLocaleString()}`)
+          }
+          if (subscriptionsSummary) {
+            parts.push(`Subscriptions: ${subscriptionsSummary.count} active, $${subscriptionsSummary.total_monthly_aud}/mo AUD`)
+          }
+          if (receiptScore) {
+            parts.push(`Receipt Score: ${receiptScore.score}%, ${receiptScore.pending} missing`)
+          }
+          if (projectSpending?.projects) {
+            parts.push(`Project Spending (${projectSpending.period}): ${projectSpending.projects.map((p: any) => `${p.name}: $${p.total.toLocaleString()}`).join(', ')}`)
+          }
+          return parts.join('\n')
+        }}
+      />
     </div>
   )
 }

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import Link from 'next/link'
 import {
@@ -58,6 +58,28 @@ export default function TransactionTaggerPage() {
   const [showRules, setShowRules] = useState(false)
   const [pendingTags, setPendingTags] = useState<Record<string, string>>({})
   const [newRule, setNewRule] = useState({ vendor_name: '', project_code: '' })
+  const [aiSuggestions, setAiSuggestions] = useState<Record<string, { code: string | null; loading: boolean }>>({})
+
+  const requestAiSuggestion = useCallback(async (group: UntaggedGroup) => {
+    const key = `${group.contactName}::${group.type}`
+    setAiSuggestions(prev => ({ ...prev, [key]: { code: null, loading: true } }))
+    try {
+      const res = await fetch('/api/transactions/suggest', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          vendorName: group.contactName,
+          type: group.type,
+          total: group.total,
+          count: group.count,
+        }),
+      })
+      const data = await res.json()
+      setAiSuggestions(prev => ({ ...prev, [key]: { code: data.suggestion, loading: false } }))
+    } catch {
+      setAiSuggestions(prev => ({ ...prev, [key]: { code: null, loading: false } }))
+    }
+  }, [])
 
   const { data, isLoading } = useQuery({
     queryKey: ['transactions', 'untagged'],
@@ -353,18 +375,45 @@ export default function TransactionTaggerPage() {
                             ))}
                           </select>
                         </div>
-                      ) : (
-                        <select
-                          value={selectedCode}
-                          onChange={e => setPendingTags(prev => ({ ...prev, [key]: e.target.value }))}
-                          className="w-full px-2 py-1.5 bg-white/5 border border-white/10 rounded-lg text-xs text-white focus:outline-none focus:border-white/20"
-                        >
-                          <option value="">Select project...</option>
-                          {projectCodes.map(p => (
-                            <option key={p.code} value={p.code}>{p.code} — {p.name}</option>
-                          ))}
-                        </select>
-                      )}
+                      ) : (() => {
+                        const ai = aiSuggestions[key]
+                        return (
+                          <div className="flex items-center gap-2">
+                            {ai?.code ? (
+                              <>
+                                <button
+                                  onClick={() => handleTag(group, ai.code!, true)}
+                                  disabled={tagMutation.isPending}
+                                  className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-violet-500/10 border border-violet-500/20 text-violet-400 text-xs hover:bg-violet-500/20 transition-colors disabled:opacity-50"
+                                >
+                                  <Sparkles className="h-3 w-3" />
+                                  {ai.code}
+                                </button>
+                                <span className="text-xs text-white/20">or</span>
+                              </>
+                            ) : (
+                              <button
+                                onClick={() => requestAiSuggestion(group)}
+                                disabled={ai?.loading}
+                                className="flex items-center gap-1.5 px-2 py-1.5 rounded-lg bg-white/5 border border-white/10 text-white/40 text-xs hover:text-violet-400 hover:border-violet-500/20 transition-colors disabled:opacity-50"
+                              >
+                                <Sparkles className={cn('h-3 w-3', ai?.loading && 'animate-spin')} />
+                                {ai?.loading ? 'Thinking...' : 'AI Suggest'}
+                              </button>
+                            )}
+                            <select
+                              value={selectedCode}
+                              onChange={e => setPendingTags(prev => ({ ...prev, [key]: e.target.value }))}
+                              className="flex-1 px-2 py-1.5 bg-white/5 border border-white/10 rounded-lg text-xs text-white focus:outline-none focus:border-white/20"
+                            >
+                              <option value="">{ai?.code ? 'Other...' : 'Select project...'}</option>
+                              {projectCodes.map(p => (
+                                <option key={p.code} value={p.code}>{p.code} — {p.name}</option>
+                              ))}
+                            </select>
+                          </div>
+                        )
+                      })()}
                     </td>
                     <td className="py-3 px-2 text-center">
                       {selectedCode && (

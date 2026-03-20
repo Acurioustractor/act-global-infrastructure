@@ -32,6 +32,7 @@ import {
 } from '@/lib/api'
 import { FolderKanban, ChevronRight } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { AskAboutThis } from '@/components/ask-about-this'
 
 function formatMoney(n: number) {
   if (Math.abs(n) >= 1_000_000) return `$${(n / 1_000_000).toFixed(1)}M`
@@ -653,6 +654,34 @@ export default function BoardReportPage() {
         Report generated {new Date().toLocaleDateString('en-AU', { day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit' })}
         {' '}— Data from Xero, Supabase, and pipeline tracking
       </div>
+
+      <AskAboutThis
+        pageTitle="Board Report"
+        getContext={() => {
+          const parts: string[] = []
+          if (runway) {
+            parts.push(`Cash Runway: ${runway.runwayMonths?.toFixed(1)} months`)
+            parts.push(`Monthly Burn: $${runway.burnRate?.toLocaleString()}`)
+            parts.push(`Cash on Hand: $${runway.currentBalance?.toLocaleString()}`)
+          }
+          if (rdData) {
+            const currentFY = Object.keys(rdData.spendByFY || {}).pop()
+            const fySpend = currentFY ? rdData.spendByFY[currentFY] : null
+            if (fySpend) {
+              parts.push(`R&D Eligible Spend: $${fySpend.total?.toLocaleString()}`)
+              parts.push(`R&D Refund (43.5%): $${Math.round((fySpend.total || 0) * 0.435).toLocaleString()}`)
+            }
+          }
+          if (summary) {
+            parts.push(`Net Position: $${summary.netPosition?.toLocaleString()}`)
+            parts.push(`Receivable: $${summary.receivables?.total?.toLocaleString()}`)
+          }
+          if (subscriptions) {
+            parts.push(`Subscriptions: $${subscriptions.total_monthly_aud}/mo (${subscriptions.count} active)`)
+          }
+          return parts.join('\n')
+        }}
+      />
     </div>
   )
 }

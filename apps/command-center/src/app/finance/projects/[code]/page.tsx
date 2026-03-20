@@ -17,6 +17,8 @@ import {
   Users,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { AskAboutThis } from '@/components/ask-about-this'
+import { searchKnowledge, type KnowledgeSearchHit } from '@/lib/api'
 
 function formatMoney(n: number) {
   if (Math.abs(n) >= 1_000_000) return `$${(n / 1_000_000).toFixed(1)}M`
@@ -123,6 +125,14 @@ export default function ProjectFinancialsPage({
     queryFn: () =>
       fetch(`/api/finance/projects/${encodeURIComponent(code)}`).then((r) => r.json()),
   })
+
+  const { data: knowledgeData } = useQuery({
+    queryKey: ['knowledge', 'project', code],
+    queryFn: () => searchKnowledge(code, { project: code }),
+    enabled: !!code,
+  })
+
+  const knowledgeHits: KnowledgeSearchHit[] = knowledgeData?.results?.slice(0, 5) || []
 
   if (isLoading) {
     return (
@@ -565,6 +575,47 @@ export default function ProjectFinancialsPage({
             </div>
           )}
 
+          {/* Knowledge Surfacing */}
+          {knowledgeHits.length > 0 && (
+            <div className="glass-card p-5">
+              <h3 className="font-semibold text-white mb-3 flex items-center gap-2">
+                <FileText className="h-5 w-5 text-amber-400" />
+                Related Knowledge
+              </h3>
+              <div className="space-y-2">
+                {knowledgeHits.map((hit) => (
+                  <div key={hit.id} className="p-2 rounded-lg bg-white/5 hover:bg-white/10 transition-colors">
+                    <div className="flex items-start gap-2">
+                      <span className={cn(
+                        'text-[10px] font-medium px-1.5 py-0.5 rounded uppercase shrink-0 mt-0.5',
+                        hit.knowledge_type === 'meeting_note' ? 'bg-blue-500/20 text-blue-400' :
+                        hit.knowledge_type === 'decision' ? 'bg-amber-500/20 text-amber-400' :
+                        hit.knowledge_type === 'action_item' ? 'bg-green-500/20 text-green-400' :
+                        'bg-white/10 text-white/50'
+                      )}>
+                        {hit.knowledge_type?.replace('_', ' ') || 'note'}
+                      </span>
+                      <div className="min-w-0">
+                        <p className="text-sm text-white/80 truncate">{hit.title}</p>
+                        {hit.recorded_at && (
+                          <p className="text-[10px] text-white/30 mt-0.5">
+                            {new Date(hit.recorded_at).toLocaleDateString('en-AU', { day: 'numeric', month: 'short', year: 'numeric' })}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <Link
+                href={`/knowledge?project=${data.projectCode}`}
+                className="block text-xs text-blue-400 hover:text-blue-300 pt-2 mt-2 border-t border-white/10 transition-colors"
+              >
+                View all knowledge →
+              </Link>
+            </div>
+          )}
+
           {/* Link to project page */}
           <Link
             href={`/projects/${data.projectCode}`}
@@ -575,6 +626,29 @@ export default function ProjectFinancialsPage({
           </Link>
         </div>
       </div>
+
+      <AskAboutThis
+        pageTitle={`Project ${data.projectCode}`}
+        getContext={() => {
+          const latest = data.monthly[data.monthly.length - 1]
+          const parts: string[] = [
+            `Project: ${data.projectCode}`,
+            `FY YTD Revenue: $${latest?.fyYtdRevenue?.toLocaleString()}`,
+            `FY YTD Expenses: $${latest?.fyYtdExpenses?.toLocaleString()}`,
+            `FY YTD Net: $${latest?.fyYtdNet?.toLocaleString()}`,
+            `Total Revenue: $${data.totals.revenue?.toLocaleString()}`,
+            `Total Expenses: $${data.totals.expenses?.toLocaleString()}`,
+          ]
+          if (data.rdSummary?.totalSpend) {
+            parts.push(`R&D Spend: $${data.rdSummary.totalSpend.toLocaleString()} (${data.rdSummary.pctOfExpenses}% of expenses)`)
+            parts.push(`R&D Offset: $${data.rdSummary.potentialOffset?.toLocaleString()}`)
+          }
+          if (data.rdSummary?.topVendors?.length) {
+            parts.push(`Top R&D Vendors: ${data.rdSummary.topVendors.map(v => `${v.vendor} ($${v.spend?.toLocaleString()})`).join(', ')}`)
+          }
+          return parts.join('\n')
+        }}
+      />
     </div>
   )
 }
