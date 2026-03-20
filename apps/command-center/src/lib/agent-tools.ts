@@ -1,3 +1,11 @@
+// Re-export from extracted modules for backward compatibility
+export { AGENT_TOOLS } from './tool-definitions'
+export { calculateCost, logAgentUsage } from './tool-helpers'
+
+// Import shared helpers used by handler functions
+import { loadProjectCodes } from './tool-helpers'
+import { getGoogleAccessToken } from './tool-helpers'
+
 import Anthropic from '@anthropic-ai/sdk'
 import { google } from 'googleapis'
 import { Client as NotionClient } from '@notionhq/client'
@@ -6,1178 +14,28 @@ import { readFileSync } from 'fs'
 import { join } from 'path'
 import { savePendingAction, type SerializablePendingAction } from './telegram/pending-action-state'
 import { getBrisbaneDate, getBrisbaneNow, getBrisbaneDateOffset } from './timezone'
+import {
+  fetchDailyBriefing,
+  fetchProjectHealth,
+  fetchFinancialSummary,
+  fetchCashflow,
+  fetchRevenueScoreboard,
+  fetchProjectFinancials,
+  fetchReceiptPipeline,
+  searchContacts,
+  fetchContactDetails,
+  fetchContactsNeedingAttention,
+  fetchGrantOpportunities,
+  fetchGrantPipeline,
+  fetchGrantReadiness,
+  searchKnowledge,
+  fetchProjectSummary,
+  fetchProjectIntelligence,
+} from '@act/intel'
+import type { DailyBriefingResult } from '@act/intel'
 
-// Helper: load project codes from the projects table
-let _projectCodesCache: Record<string, any> | null = null
-async function loadProjectCodes(): Promise<Record<string, any>> {
-  if (_projectCodesCache) return _projectCodesCache
-
-  try {
-    const { data } = await supabase
-      .from('projects')
-      .select('*')
-
-    const projects: Record<string, any> = {}
-    for (const row of data || []) {
-      projects[row.code] = row
-    }
-    _projectCodesCache = projects
-    return projects
-  } catch {
-    _projectCodesCache = {}
-    return {}
-  }
-}
-
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// TOOL DEFINITIONS (Anthropic tool_use format)
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-export const AGENT_TOOLS: Anthropic.Tool[] = [
-  {
-    name: 'query_supabase',
-    description:
-      'Run a read-only SQL query against the ACT database. Use this to answer questions about contacts, projects, communications, knowledge, subscriptions, and other data. Only SELECT queries are allowed.',
-    input_schema: {
-      type: 'object' as const,
-      properties: {
-        sql: {
-          type: 'string',
-          description: 'A SELECT SQL query to run against the database.',
-        },
-        description: {
-          type: 'string',
-          description: 'Brief description of what this query is looking for.',
-        },
-      },
-      required: ['sql', 'description'],
-    },
-  },
-  {
-    name: 'get_daily_briefing',
-    description:
-      'Get the daily briefing summary including overdue actions, upcoming follow-ups, relationship alerts, financial pipeline, and active project summaries. Use this when the user asks about what needs attention, priorities, or a general status update.',
-    input_schema: {
-      type: 'object' as const,
-      properties: {
-        lookback_days: {
-          type: 'number',
-          description: 'Number of days to look back for recent activity. Default 7.',
-        },
-        detail_level: {
-          type: 'string',
-          enum: ['summary', 'full'],
-          description: 'Level of detail: "summary" returns counts and headlines only (fewer tokens), "full" returns all items. Default "full".',
-        },
-        format: {
-          type: 'string',
-          enum: ['text', 'voice'],
-          description: 'Output format. "voice" returns concise natural sentences optimised for TTS (~800 chars max).',
-        },
-      },
-      required: [],
-    },
-  },
-  {
-    name: 'get_financial_summary',
-    description:
-      'Get financial summary including pipeline totals, recent transactions, pending receipts, and subscription costs. Use this when the user asks about money, spending, cash flow, receipts, or subscriptions.',
-    input_schema: {
-      type: 'object' as const,
-      properties: {
-        days: {
-          type: 'number',
-          description: 'Number of days to look back for transactions. Default 30.',
-        },
-      },
-      required: [],
-    },
-  },
-  {
-    name: 'search_contacts',
-    description:
-      'Search for contacts by name, organisation, tag, or project. Use this when the user asks about a person, who works at a company, or contacts related to a project.',
-    input_schema: {
-      type: 'object' as const,
-      properties: {
-        query: {
-          type: 'string',
-          description: 'Name, company, tag, or keyword to search for.',
-        },
-        limit: {
-          type: 'number',
-          description: 'Max results to return. Default 10.',
-        },
-      },
-      required: ['query'],
-    },
-  },
-  {
-    name: 'get_contact_details',
-    description:
-      'Get full contact card including relationship health (temperature 0-100, trend, risk flags, signal scores), open pipeline value, next meeting, and recent communications. Use this after finding a contact via search, or when the user asks for details about a known person.',
-    input_schema: {
-      type: 'object' as const,
-      properties: {
-        contact_id: {
-          type: 'string',
-          description: 'The contact ID (UUID or GHL ID).',
-        },
-      },
-      required: ['contact_id'],
-    },
-  },
-  {
-    name: 'get_calendar_events',
-    description:
-      "Get calendar events for today or a date range. Use this when the user asks about today's schedule, upcoming meetings, or what's on the calendar.",
-    input_schema: {
-      type: 'object' as const,
-      properties: {
-        start_date: {
-          type: 'string',
-          description: 'Start date in YYYY-MM-DD format. Defaults to today.',
-        },
-        end_date: {
-          type: 'string',
-          description: 'End date in YYYY-MM-DD format. Defaults to same as start_date.',
-        },
-      },
-      required: [],
-    },
-  },
-  {
-    name: 'search_knowledge',
-    description:
-      'Search project knowledge including meetings, decisions, actions, and notes. Use this when the user asks about what was discussed, decided, or planned for a project.',
-    input_schema: {
-      type: 'object' as const,
-      properties: {
-        query: {
-          type: 'string',
-          description: 'Search terms — topic, project name, person name, or keyword.',
-        },
-        project_code: {
-          type: 'string',
-          description: 'Optional project code to filter by (e.g. ACT-JH, ACT-GD).',
-        },
-        limit: {
-          type: 'number',
-          description: 'Max results. Default 10.',
-        },
-      },
-      required: ['query'],
-    },
-  },
-  {
-    name: 'get_project_summary',
-    description:
-      'Get the AI-generated narrative summary for a specific project. Use this when the user asks for a project update or "what\'s happening with X".',
-    input_schema: {
-      type: 'object' as const,
-      properties: {
-        project_code: {
-          type: 'string',
-          description: 'The project code (e.g. ACT-JH, ACT-GD, ACT-HV, ACT-EL). Case-insensitive.',
-        },
-      },
-      required: ['project_code'],
-    },
-  },
-  {
-    name: 'get_contacts_needing_attention',
-    description:
-      'Get contacts who need follow-up — prioritized by relationship signals (falling temperature, risk flags like going_cold, awaiting_response, high_value_inactive). Use this when the user asks "who should I reach out to", "who needs follow-up", or "who needs attention". Includes recommended actions.',
-    input_schema: {
-      type: 'object' as const,
-      properties: {
-        limit: {
-          type: 'number',
-          description: 'Max contacts to return. Default 10.',
-        },
-        project: {
-          type: 'string',
-          description: 'Optional project tag to filter by (e.g. "goods", "the-harvest"). Only returns contacts with this tag.',
-        },
-      },
-      required: [],
-    },
-  },
-
-  {
-    name: 'get_deal_risks',
-    description:
-      'Get at-risk deals — open opportunities where the contact relationship is cooling, inactive, or awaiting response. Use this when the user asks "any deal risks?", "which deals are at risk?", or "pipeline health".',
-    input_schema: {
-      type: 'object' as const,
-      properties: {
-        limit: {
-          type: 'number',
-          description: 'Max deals to return. Default 10.',
-        },
-      },
-      required: [],
-    },
-  },
-
-  // ── WRITE ACTIONS (require confirmation via Telegram) ──────────────
-
-  {
-    name: 'draft_email',
-    description:
-      'Draft an email to a contact. The bot will show a preview and ask for confirmation before sending. Use this when the user says "email [name] about [topic]" or "draft an email to...".',
-    input_schema: {
-      type: 'object' as const,
-      properties: {
-        to: {
-          type: 'string',
-          description: 'Recipient — contact name or email address. Will be resolved to email via contacts database.',
-        },
-        subject: {
-          type: 'string',
-          description: 'Email subject line.',
-        },
-        body: {
-          type: 'string',
-          description: 'Email body text.',
-        },
-      },
-      required: ['to', 'subject', 'body'],
-    },
-  },
-  {
-    name: 'create_calendar_event',
-    description:
-      'Create a calendar event. The bot will show a preview and ask for confirmation before creating. Use this when the user says "schedule a meeting" or "add an event".',
-    input_schema: {
-      type: 'object' as const,
-      properties: {
-        title: {
-          type: 'string',
-          description: 'Event title.',
-        },
-        date: {
-          type: 'string',
-          description: 'Date in YYYY-MM-DD format.',
-        },
-        time: {
-          type: 'string',
-          description: 'Start time in HH:MM format (24h).',
-        },
-        duration_minutes: {
-          type: 'number',
-          description: 'Duration in minutes. Default 60.',
-        },
-        attendees: {
-          type: 'array',
-          items: { type: 'string' },
-          description: 'Attendee names or emails.',
-        },
-        location: {
-          type: 'string',
-          description: 'Event location.',
-        },
-      },
-      required: ['title', 'date', 'time'],
-    },
-  },
-  {
-    name: 'set_reminder',
-    description:
-      'Set a personal reminder. Use this when the user says "remind me to...", "set a reminder for...", or asks for recurring reminders like "remind me every day at 6am to exercise".',
-    input_schema: {
-      type: 'object' as const,
-      properties: {
-        message: {
-          type: 'string',
-          description: 'The reminder message.',
-        },
-        time: {
-          type: 'string',
-          description: 'When to trigger — ISO datetime (e.g. "2026-02-05T06:00:00+10:00") or relative (e.g. "tomorrow 6am"). Always include timezone offset for AEST (+10:00).',
-        },
-        recurring: {
-          type: 'string',
-          description: 'Recurrence: "daily", "weekday" (Mon-Fri), "weekly", or omit for one-off.',
-        },
-      },
-      required: ['message', 'time'],
-    },
-  },
-  {
-    name: 'add_receipt',
-    description:
-      'Log a receipt/expense. Use this when the user describes a purchase (voice or text) like "I spent $45 at Bunnings today" or after a receipt photo is processed.',
-    input_schema: {
-      type: 'object' as const,
-      properties: {
-        vendor: {
-          type: 'string',
-          description: 'Store or company name.',
-        },
-        amount: {
-          type: 'number',
-          description: 'Amount in AUD.',
-        },
-        date: {
-          type: 'string',
-          description: 'Transaction date in YYYY-MM-DD format.',
-        },
-        category: {
-          type: 'string',
-          description: 'Category: travel, supplies, food, subscription, utilities, other.',
-        },
-        notes: {
-          type: 'string',
-          description: 'Additional notes about the purchase.',
-        },
-      },
-      required: ['vendor', 'amount', 'date'],
-    },
-  },
-
-  // ── GRANT & PIPELINE TOOLS (read-only) ─────────────────────────────
-
-  {
-    name: 'get_grant_opportunities',
-    description:
-      'Get open/upcoming grant opportunities with closing dates and fit scores. Use when the user asks about available grants, funding opportunities, or "what grants can we apply for".',
-    input_schema: {
-      type: 'object' as const,
-      properties: {
-        status: {
-          type: 'string',
-          description: 'Filter by status: open, upcoming, closed, applied. Default: open.',
-        },
-        limit: {
-          type: 'number',
-          description: 'Max results. Default 10.',
-        },
-      },
-      required: [],
-    },
-  },
-  {
-    name: 'get_grant_pipeline',
-    description:
-      'Get active grant applications and their status. Use when the user asks about grant applications in progress, submitted grants, or "how are our grant applications going".',
-    input_schema: {
-      type: 'object' as const,
-      properties: {
-        status: {
-          type: 'string',
-          description: 'Filter by status: draft, in_progress, submitted, under_review, successful, unsuccessful. Default: all active.',
-        },
-      },
-      required: [],
-    },
-  },
-  {
-    name: 'get_pending_receipts',
-    description:
-      'Get receipts/expenses that need attention — pending matches, unresolved items. Use when the user asks about pending receipts, expenses needing action, or "what receipts are outstanding".',
-    input_schema: {
-      type: 'object' as const,
-      properties: {
-        limit: {
-          type: 'number',
-          description: 'Max results. Default 10.',
-        },
-      },
-      required: [],
-    },
-  },
-
-  // ── FINANCIAL REVIEW TOOLS ──────────────────────────────────────────
-
-  {
-    name: 'get_quarterly_review',
-    description:
-      'Get a comprehensive quarterly financial review including income/expenses, BAS summary (GST), outstanding invoices with aging, project spending, subscription costs, pending receipts, cashflow trends, and flagged issues. Use when the user wants to review finances, prepare for BAS, or do a quarterly check-in.',
-    input_schema: {
-      type: 'object' as const,
-      properties: {
-        quarter: {
-          type: 'string',
-          description:
-            'Quarter in format "YYYY-Q1" through "YYYY-Q4". Q1=Jul-Sep (Australian FY), Q2=Oct-Dec, Q3=Jan-Mar, Q4=Apr-Jun. Default: current quarter.',
-        },
-        detail_level: {
-          type: 'string',
-          enum: ['summary', 'full'],
-          description: 'Level of detail: "summary" returns headline numbers and issues only (fewer tokens), "full" returns all breakdowns. Default "full".',
-        },
-      },
-      required: [],
-    },
-  },
-  {
-    name: 'get_xero_transactions',
-    description:
-      'Browse Xero bank transactions with filters. Use to drill into specific spending, find transactions by vendor, review a date range, or investigate issues found in the quarterly review.',
-    input_schema: {
-      type: 'object' as const,
-      properties: {
-        type: {
-          type: 'string',
-          description: 'Filter by type: RECEIVE, SPEND, TRANSFER. Default: all.',
-        },
-        vendor: {
-          type: 'string',
-          description: 'Filter by contact/vendor name (partial match).',
-        },
-        project_code: {
-          type: 'string',
-          description: 'Filter by project code (e.g. ACT-JH).',
-        },
-        start_date: {
-          type: 'string',
-          description: 'Start date YYYY-MM-DD. Default: 90 days ago.',
-        },
-        end_date: {
-          type: 'string',
-          description: 'End date YYYY-MM-DD. Default: today.',
-        },
-        min_amount: {
-          type: 'number',
-          description: 'Minimum transaction amount.',
-        },
-        limit: {
-          type: 'number',
-          description: 'Max results. Default 25.',
-        },
-      },
-      required: [],
-    },
-  },
-
-  // ── REFLECTION TOOLS ──────────────────────────────────────────────────
-
-  {
-    name: 'get_day_context',
-    description:
-      "Get a summary of today's activity for reflection — calendar events, communications, project activity, decisions, and contacts engaged with. Use this before generating a daily reflection to enrich the user's voice input with data.",
-    input_schema: {
-      type: 'object' as const,
-      properties: {
-        date: {
-          type: 'string',
-          description: 'Date in YYYY-MM-DD. Default: today.',
-        },
-      },
-      required: [],
-    },
-  },
-  {
-    name: 'save_daily_reflection',
-    description:
-      "Save a daily LCAA reflection. Use when the user has shared their thoughts about the day and you've synthesized it through the LCAA framework. Pass the complete reflection with all sections.",
-    input_schema: {
-      type: 'object' as const,
-      properties: {
-        voice_transcript: {
-          type: 'string',
-          description: 'Raw user voice/text input.',
-        },
-        lcaa_listen: {
-          type: 'string',
-          description: 'Listen section — who/what was listened to.',
-        },
-        lcaa_curiosity: {
-          type: 'string',
-          description: 'Curiosity section — questions explored, surprises.',
-        },
-        lcaa_action: {
-          type: 'string',
-          description: 'Action section — what was built, delivered, moved.',
-        },
-        lcaa_art: {
-          type: 'string',
-          description: 'Art section — stories told, meaning made.',
-        },
-        loop_to_tomorrow: {
-          type: 'string',
-          description: 'How today returns to Listen tomorrow.',
-        },
-        gratitude: {
-          type: 'array',
-          items: { type: 'string' },
-          description: 'Things grateful for.',
-        },
-        challenges: {
-          type: 'array',
-          items: { type: 'string' },
-          description: 'What was hard.',
-        },
-        learnings: {
-          type: 'array',
-          items: { type: 'string' },
-          description: 'What was learned.',
-        },
-        intentions: {
-          type: 'array',
-          items: { type: 'string' },
-          description: 'Intentions for tomorrow.',
-        },
-      },
-      required: ['voice_transcript', 'lcaa_listen', 'lcaa_curiosity', 'lcaa_action', 'lcaa_art'],
-    },
-  },
-  {
-    name: 'search_past_reflections',
-    description:
-      'Search past daily reflections by keyword or date range. Use when the user asks "what did I reflect on last week" or "when did I last think about X".',
-    input_schema: {
-      type: 'object' as const,
-      properties: {
-        query: {
-          type: 'string',
-          description:
-            'Search text (searches across all LCAA sections, gratitude, challenges, learnings).',
-        },
-        days: {
-          type: 'number',
-          description: 'Look back N days. Default 30.',
-        },
-        limit: {
-          type: 'number',
-          description: 'Max results. Default 7.',
-        },
-      },
-      required: [],
-    },
-  },
-
-  // ── WRITING TOOLS ───────────────────────────────────────────────────
-
-  {
-    name: 'save_writing_draft',
-    description:
-      'Save a writing draft to the Obsidian vault (thoughts/writing/drafts/). Use when the user is writing, brainstorming, or composing text they want to continue editing on their laptop. The draft is committed to git and pushed so it syncs immediately. Supports creating new drafts or appending to existing ones.',
-    input_schema: {
-      type: 'object' as const,
-      properties: {
-        title: {
-          type: 'string',
-          description: 'Title for the draft. Used as filename (kebab-cased) and markdown heading.',
-        },
-        content: {
-          type: 'string',
-          description: 'The draft content in markdown format.',
-        },
-        append: {
-          type: 'boolean',
-          description: 'If true, append to existing draft with this title instead of creating new. Default false.',
-        },
-        project: {
-          type: 'string',
-          description: 'ACT ecosystem project this writing relates to (e.g. "JusticeHub", "Empathy Ledger", "The Harvest", "Goods on Country", "PICC", "Diagrama", "Double Disadvantage"). Ask the user which project if the writing is clearly project-related.',
-        },
-        tags: {
-          type: 'array',
-          items: { type: 'string' },
-          description: 'Optional tags for the draft (e.g. ["essay", "act-philosophy", "lcaa"]).',
-        },
-      },
-      required: ['title', 'content'],
-    },
-  },
-
-  // ── PLANNING TOOLS ─────────────────────────────────────────────────
-
-  {
-    name: 'save_planning_doc',
-    description:
-      'Save a planning document at the right time horizon — daily tasks, weekly plans, yearly goals, or decade visions. Use when the user talks about plans, goals, intentions, priorities, reviews, or retrospectives at any time scale. The document is committed to git and syncs to Obsidian.',
-    input_schema: {
-      type: 'object' as const,
-      properties: {
-        horizon: {
-          type: 'string',
-          enum: ['daily', 'weekly', 'yearly', 'decade'],
-          description: 'Planning horizon: "daily" for today\'s tasks/focus, "weekly" for this week\'s plan/retro, "yearly" for annual goals/themes, "decade" for 10-year vision.',
-        },
-        title: {
-          type: 'string',
-          description: 'Title for the document. For daily: include the date. For weekly: include week number or date range. For yearly: include the year. For decade: a vision theme.',
-        },
-        content: {
-          type: 'string',
-          description: 'The planning content in markdown format.',
-        },
-        append: {
-          type: 'boolean',
-          description: 'If true, append to existing document with this title slug instead of creating new. Useful for updating daily plans throughout the day. Default false.',
-        },
-        project: {
-          type: 'string',
-          description: 'ACT ecosystem project this planning relates to, if specific to one project.',
-        },
-      },
-      required: ['horizon', 'title', 'content'],
-    },
-  },
-
-  // ── WRITING STAGE MANAGEMENT ────────────────────────────────────────
-
-  {
-    name: 'move_writing',
-    description:
-      'Move a writing piece between stages: drafts → in-progress → published. Use when the user says "I\'m working on this now", "this is done", "publish this", "move to in-progress", or when promoting a draft. Lists available pieces if no title given.',
-    input_schema: {
-      type: 'object' as const,
-      properties: {
-        title_search: {
-          type: 'string',
-          description: 'Partial title to match (case-insensitive). If omitted, lists all pieces in the source stage.',
-        },
-        from_stage: {
-          type: 'string',
-          enum: ['drafts', 'in-progress', 'published'],
-          description: 'Current stage of the piece. Default "drafts".',
-        },
-        to_stage: {
-          type: 'string',
-          enum: ['drafts', 'in-progress', 'published'],
-          description: 'Target stage to move to.',
-        },
-      },
-      required: ['to_stage'],
-    },
-  },
-
-  // ── PLANNING ROLLUP ───────────────────────────────────────────────
-
-  {
-    name: 'review_planning_period',
-    description:
-      'Review and synthesize planning documents for a time period. Reads all plans from a horizon and produces a rollup summary. Use for: weekly review (reads dailies), monthly review (reads weeklies), yearly review (reads monthlies/weeklies). Also use when the user says "review the week", "how did the week go", "monthly check-in".',
-    input_schema: {
-      type: 'object' as const,
-      properties: {
-        period: {
-          type: 'string',
-          enum: ['week', 'month', 'year'],
-          description: 'Period to review: "week" reads daily plans, "month" reads weekly plans, "year" reads monthly reviews.',
-        },
-        date: {
-          type: 'string',
-          description: 'Reference date in YYYY-MM-DD. Reviews the period containing this date. Default: today.',
-        },
-      },
-      required: ['period'],
-    },
-  },
-
-  // ── MOON CYCLE REVIEW ─────────────────────────────────────────────
-
-  {
-    name: 'moon_cycle_review',
-    description:
-      'Generate a monthly organisational health review aligned to the moon cycle. Pulls financial data, project status, relationship health, planning docs, and reflections to produce a comprehensive written review piece. Use when the user says "moon review", "monthly review", "how is the organisation going", "write the monthly piece".',
-    input_schema: {
-      type: 'object' as const,
-      properties: {
-        month: {
-          type: 'string',
-          description: 'Month to review in YYYY-MM format. Default: current month.',
-        },
-        focus: {
-          type: 'string',
-          enum: ['full', 'financial', 'relationships', 'projects', 'wellbeing'],
-          description: 'Focus area for the review. "full" covers everything. Default "full".',
-        },
-      },
-      required: [],
-    },
-  },
-
-  // ── GOODS INTELLIGENCE ──────────────────────────────────────────────
-
-  {
-    name: 'get_goods_intelligence',
-    description:
-      'Get Goods on Country intelligence — newsletter planning, outreach recommendations, content strategy, or an overview. Use when the user asks about Goods newsletter, who to reach out to for Goods, content ideas, or a Goods overview.',
-    input_schema: {
-      type: 'object' as const,
-      properties: {
-        focus: {
-          type: 'string',
-          enum: ['newsletter_plan', 'outreach', 'content_ideas', 'overview'],
-          description: 'What intelligence to focus on. newsletter_plan = content picks + audience breakdown. outreach = who to contact + suggested content. content_ideas = gaps and angles. overview = full summary.',
-        },
-      },
-      required: ['focus'],
-    },
-  },
-
-  // ── EMAIL SEARCH ──────────────────────────────────────────────────
-
-  {
-    name: 'search_emails',
-    description:
-      'Search emails across ACT mailboxes using Gmail API. Use when the user asks to find an email, check what someone sent, or look up a conversation. Searches benjamin@act.place by default.',
-    input_schema: {
-      type: 'object' as const,
-      properties: {
-        query: {
-          type: 'string',
-          description: 'Gmail search query — supports from:, to:, subject:, has:attachment, after:, before:, and free text. Examples: "from:jane subject:invoice", "to:hi@act.place grant".',
-        },
-        mailbox: {
-          type: 'string',
-          description: 'Which mailbox to search: benjamin@act.place, nicholas@act.place, hi@act.place, accounts@act.place. Default: benjamin@act.place.',
-        },
-        limit: {
-          type: 'number',
-          description: 'Max results. Default 10.',
-        },
-      },
-      required: ['query'],
-    },
-  },
-
-  // ── CASHFLOW FORECAST ─────────────────────────────────────────────
-
-  {
-    name: 'get_cashflow_forecast',
-    description:
-      'Get a cash flow forecast including historical snapshots, current month actuals, projections, and key metrics (burn rate, runway). Use when the user asks about cash flow, financial outlook, burn rate, or "how long will our money last".',
-    input_schema: {
-      type: 'object' as const,
-      properties: {
-        months_ahead: {
-          type: 'number',
-          description: 'How many months to project forward. Default 6.',
-        },
-      },
-      required: [],
-    },
-  },
-
-  // ── PROJECT HEALTH ────────────────────────────────────────────────
-
-  {
-    name: 'get_project_health',
-    description:
-      'Get health overview for one or all ACT projects — last activity, open actions, financial position, team engagement. Use when the user asks "how is project X going", "which projects need attention", or "project health check".',
-    input_schema: {
-      type: 'object' as const,
-      properties: {
-        project_code: {
-          type: 'string',
-          description: 'Specific project code (e.g. ACT-JH). Omit for all projects overview.',
-        },
-      },
-      required: [],
-    },
-  },
-
-  // ── UPCOMING DEADLINES ────────────────────────────────────────────
-
-  {
-    name: 'get_upcoming_deadlines',
-    description:
-      'Get upcoming deadlines across grants, compliance, projects, and calendar. Use when the user asks "what deadlines are coming up", "what\'s due soon", or "upcoming compliance dates".',
-    input_schema: {
-      type: 'object' as const,
-      properties: {
-        days_ahead: {
-          type: 'number',
-          description: 'How many days ahead to look. Default 30.',
-        },
-        category: {
-          type: 'string',
-          description: 'Filter by category: grants, compliance, calendar, all. Default: all.',
-        },
-      },
-      required: [],
-    },
-  },
-
-  // ── MEETING NOTES ─────────────────────────────────────────────────
-
-  {
-    name: 'create_meeting_notes',
-    description:
-      'Save meeting notes to the knowledge base. Use when the user describes a meeting they had, or dictates meeting notes via voice. Links to project codes and participants automatically.',
-    input_schema: {
-      type: 'object' as const,
-      properties: {
-        title: {
-          type: 'string',
-          description: 'Meeting title.',
-        },
-        summary: {
-          type: 'string',
-          description: 'Brief summary of the meeting.',
-        },
-        content: {
-          type: 'string',
-          description: 'Full meeting notes in markdown.',
-        },
-        project_code: {
-          type: 'string',
-          description: 'Project code this meeting relates to (e.g. ACT-JH).',
-        },
-        participants: {
-          type: 'array',
-          items: { type: 'string' },
-          description: 'Names of people in the meeting.',
-        },
-        action_items: {
-          type: 'array',
-          items: { type: 'string' },
-          description: 'Action items from the meeting.',
-        },
-        date: {
-          type: 'string',
-          description: 'Meeting date in YYYY-MM-DD. Default: today.',
-        },
-      },
-      required: ['title', 'summary', 'content'],
-    },
-  },
-  {
-    name: 'get_project_360',
-    description:
-      'Get a comprehensive 360-degree view of a project: financial summary, key contacts, recent activity, health score, and pipeline. Use when the user asks "what\'s happening with X?" or wants a full project overview.',
-    input_schema: {
-      type: 'object' as const,
-      properties: {
-        project_code: {
-          type: 'string',
-          description: 'The project code (e.g. ACT-JH, ACT-HV, ACT-EL).',
-        },
-      },
-      required: ['project_code'],
-    },
-  },
-  {
-    name: 'get_ecosystem_pulse',
-    description:
-      'Get a pulse check on the entire ACT ecosystem: projects by health status, total pipeline value, cash position, contacts needing attention, and recent highlights. Use when the user asks "how\'s the ecosystem?" or wants an overall status.',
-    input_schema: {
-      type: 'object' as const,
-      properties: {},
-      required: [],
-    },
-  },
-
-  // ── NOTION WRITE TOOLS ────────────────────────────────────────────
-
-  {
-    name: 'add_meeting_to_notion',
-    description:
-      'Add a meeting record to the unified Notion Meetings database. Use when the user says "record meeting with..." or "log meeting about...". Also saves to Supabase project_knowledge. Requires confirmation before writing.',
-    input_schema: {
-      type: 'object' as const,
-      properties: {
-        title: {
-          type: 'string',
-          description: 'Meeting title.',
-        },
-        date: {
-          type: 'string',
-          description: 'Meeting date in YYYY-MM-DD format. Default: today.',
-        },
-        project_code: {
-          type: 'string',
-          description: 'Project code (e.g. ACT-JH). Auto-detected from title if not provided.',
-        },
-        attendees: {
-          type: 'array',
-          items: { type: 'string' },
-          description: 'Names of attendees.',
-        },
-        notes: {
-          type: 'string',
-          description: 'Meeting notes in markdown.',
-        },
-        decisions: {
-          type: 'array',
-          items: { type: 'string' },
-          description: 'Key decisions made during the meeting.',
-        },
-        action_items: {
-          type: 'array',
-          items: { type: 'string' },
-          description: 'Action items from the meeting.',
-        },
-        meeting_type: {
-          type: 'string',
-          enum: ['internal', 'external', 'workshop', 'standup', 'review', 'other'],
-          description: 'Type of meeting. Default: "external".',
-        },
-      },
-      required: ['title', 'notes'],
-    },
-  },
-  {
-    name: 'add_action_item',
-    description:
-      'Add an action item to the Notion Actions database and Supabase project_knowledge. Use when the user says "add action..." or "I need to..." or dictates a task. Requires confirmation.',
-    input_schema: {
-      type: 'object' as const,
-      properties: {
-        title: {
-          type: 'string',
-          description: 'Action item title.',
-        },
-        project_code: {
-          type: 'string',
-          description: 'Project code (e.g. ACT-JH).',
-        },
-        due_date: {
-          type: 'string',
-          description: 'Due date in YYYY-MM-DD format.',
-        },
-        priority: {
-          type: 'string',
-          enum: ['high', 'normal', 'low'],
-          description: 'Priority level. Default: "normal".',
-        },
-        details: {
-          type: 'string',
-          description: 'Additional context or details.',
-        },
-        assignee: {
-          type: 'string',
-          description: 'Who is responsible (e.g. "Ben", "Nic").',
-        },
-      },
-      required: ['title'],
-    },
-  },
-  {
-    name: 'add_decision',
-    description:
-      'Record a decision in the Notion Decisions database and Supabase project_knowledge. Use when the user says "we decided..." or "decision: ..." or describes a choice that was made. Requires confirmation.',
-    input_schema: {
-      type: 'object' as const,
-      properties: {
-        title: {
-          type: 'string',
-          description: 'Decision title — what was decided.',
-        },
-        project_code: {
-          type: 'string',
-          description: 'Project code (e.g. ACT-JH).',
-        },
-        rationale: {
-          type: 'string',
-          description: 'Why this decision was made.',
-        },
-        alternatives_considered: {
-          type: 'array',
-          items: { type: 'string' },
-          description: 'Other options that were considered.',
-        },
-        status: {
-          type: 'string',
-          enum: ['active', 'superseded', 'revisit'],
-          description: 'Decision status. Default: "active".',
-        },
-      },
-      required: ['title'],
-    },
-  },
-
-  // ── PROJECT FINANCIALS ─────────────────────────────────────────────
-
-  {
-    name: 'get_project_financials',
-    description:
-      'Get per-project financial summary — FY income, expenses, net position, pipeline, grants, subscriptions. Use when the user asks "how is X doing financially", "project finances", or "financial overview".',
-    input_schema: {
-      type: 'object' as const,
-      properties: {
-        project_code: {
-          type: 'string',
-          description: 'Specific project code (e.g. ACT-JH). Omit for all projects.',
-        },
-      },
-      required: [],
-    },
-  },
-  {
-    name: 'get_untagged_summary',
-    description:
-      'Get count of untagged transactions and top vendors needing project tags. Use when the user asks about transaction tagging coverage or "how many transactions need tagging".',
-    input_schema: {
-      type: 'object' as const,
-      properties: {},
-      required: [],
-    },
-  },
-  {
-    name: 'trigger_auto_tag',
-    description:
-      'Trigger auto-tagging of untagged transactions using vendor rules and keyword matching. Use when the user says "tag transactions", "run auto-tagger", or "fix untagged transactions". Requires confirmation.',
-    input_schema: {
-      type: 'object' as const,
-      properties: {
-        dry_run: {
-          type: 'boolean',
-          description: 'If true, preview matches without applying. Default false.',
-        },
-      },
-      required: [],
-    },
-  },
-
-  // ── RECEIPT PIPELINE ─────────────────────────────────────────────────
-
-  {
-    name: 'get_receipt_pipeline_status',
-    description:
-      'Get receipt pipeline funnel status — counts and totals per stage (missing_receipt → forwarded_to_dext → dext_processed → xero_bill_created → reconciled). Shows stuck items. Use when the user asks about receipt pipeline, Dext status, or reconciliation progress.',
-    input_schema: {
-      type: 'object' as const,
-      properties: {
-        include_stuck: {
-          type: 'boolean',
-          description: 'Include items stuck >14 days. Default true.',
-        },
-      },
-      required: [],
-    },
-  },
-
-  // ── MEETING PREP ─────────────────────────────────────────────────────
-
-  {
-    name: 'get_meeting_prep',
-    description:
-      'Get pre-meeting briefing with attendee context — contact details, last interaction, open deals, relationship health. Use when the user asks to "prep for a meeting", "who am I meeting", or "meeting brief".',
-    input_schema: {
-      type: 'object' as const,
-      properties: {
-        event_title: {
-          type: 'string',
-          description: 'Title or partial title of the calendar event to prep for.',
-        },
-        date: {
-          type: 'string',
-          description: 'Date in YYYY-MM-DD format. Default today.',
-        },
-      },
-      required: [],
-    },
-  },
-
-  // ── MEETING NOTES CAPTURE ────────────────────────────────────────────
-
-  {
-    name: 'capture_meeting_notes',
-    description:
-      'Save meeting notes/takeaways from a voice note or text. Auto-matches to today\'s calendar event and links attendee contacts. Use when the user sends meeting takeaways, action items, or "notes from the meeting".',
-    input_schema: {
-      type: 'object' as const,
-      properties: {
-        notes: {
-          type: 'string',
-          description: 'The meeting notes, takeaways, or transcript to save.',
-        },
-        event_title: {
-          type: 'string',
-          description: 'Calendar event title to link to. Auto-matched if omitted.',
-        },
-        project_code: {
-          type: 'string',
-          description: 'Project code (e.g. ACT-JH). Auto-detected from event if omitted.',
-        },
-      },
-      required: ['notes'],
-    },
-  },
-
-  // ── WEEKLY FINANCE SUMMARY ───────────────────────────────────────────
-
-  {
-    name: 'get_weekly_finance_summary',
-    description:
-      'Get weekly financial summary — income vs spend, overdue receivables, upcoming payables, cash position. Supports voice format for TTS. Use when the user asks for "weekly finances", "financial update", or "money this week".',
-    input_schema: {
-      type: 'object' as const,
-      properties: {
-        format: {
-          type: 'string',
-          enum: ['text', 'voice'],
-          description: 'Output format. "voice" returns natural sentences for TTS. Default "text".',
-        },
-      },
-      required: [],
-    },
-  },
-
-  // ── GRANT READINESS ──────────────────────────────────────────────────
-
-  {
-    name: 'get_grant_readiness',
-    description:
-      'Get grant application readiness — requirement completion %, missing documents, available reusable assets, days until close. Use when the user asks "are we ready for [grant]", "grant checklist", or "what do we need for [application]".',
-    input_schema: {
-      type: 'object' as const,
-      properties: {
-        application_id: {
-          type: 'string',
-          description: 'Grant application UUID.',
-        },
-        grant_name: {
-          type: 'string',
-          description: 'Grant or application name to search for.',
-        },
-      },
-      required: [],
-    },
-  },
-
-  // ── GRANT DRAFT ──────────────────────────────────────────────────────
-
-  {
-    name: 'draft_grant_response',
-    description:
-      'Draft a grant EOI or application response using project context, reusable assets, and recent knowledge. Requires confirmation before saving. Use when the user says "draft a response for [grant]", "write grant application", or "help with [grant] submission".',
-    input_schema: {
-      type: 'object' as const,
-      properties: {
-        opportunity_id: {
-          type: 'string',
-          description: 'Grant opportunity UUID (required).',
-        },
-        project_code: {
-          type: 'string',
-          description: 'Project code to frame the response around.',
-        },
-        sections: {
-          type: 'array',
-          items: { type: 'string' },
-          description: 'Specific sections to draft (e.g. ["project_description", "budget_justification"]). Drafts full EOI if omitted.',
-        },
-        tone: {
-          type: 'string',
-          enum: ['formal', 'conversational', 'community-led'],
-          description: 'Writing tone. Default "community-led" (ACT voice).',
-        },
-      },
-      required: ['opportunity_id'],
-    },
-  },
-
-  // ── REVENUE SCOREBOARD ────────────────────────────────────────────
-
-  {
-    name: 'get_revenue_scoreboard',
-    description:
-      'Get the revenue scoreboard — all commercial decision-making data in one call. Includes revenue streams vs targets, fundraising pipeline by status with weighted values, outstanding receivables, revenue scenarios, and active project counts. Use when the user asks about revenue, targets, pipeline value, commercial overview, or "how are we tracking against targets".',
-    input_schema: {
-      type: 'object' as const,
-      properties: {},
-      required: [],
-    },
-  },
-]
+// AGENT_TOOLS array has been extracted to ./tool-definitions.ts
+// (see re-export above)
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // TOOL EXECUTION
@@ -1281,6 +139,14 @@ export async function executeTool(
       return await executeMoonCycleReview(
         input as { month?: string; focus?: string }
       )
+    // Dream journal
+    case 'save_dream':
+      return await executeSaveDream(
+        input as { content: string; title?: string; category?: string; tags?: string[]; media_url?: string; media_type?: string },
+        chatId
+      )
+    case 'search_dreams':
+      return await executeSearchDreams(input as { query?: string; category?: string; limit?: number })
     // Goods intelligence
     case 'get_goods_intelligence':
       return await executeGetGoodsIntelligence(input as { focus: string })
@@ -1306,6 +172,8 @@ export async function executeTool(
       return await executeGetProject360(input as { project_code: string })
     case 'get_ecosystem_pulse':
       return await executeGetEcosystemPulse()
+    case 'get_daily_priorities':
+      return await executeGetDailyPriorities(input as { limit?: number })
     // Notion write tools
     case 'add_meeting_to_notion':
       return await executeAddMeetingToNotion(input as {
@@ -1361,7 +229,7 @@ async function executeQuerySupabase(input: {
 }): Promise<string> {
   const { sql, description } = input
 
-  // Read-only guard
+  // Client-side guard (defense in depth — the DB function also enforces this)
   const normalised = sql.trim().toUpperCase()
   if (!normalised.startsWith('SELECT') && !normalised.startsWith('WITH')) {
     return JSON.stringify({
@@ -1369,25 +237,23 @@ async function executeQuerySupabase(input: {
     })
   }
 
-  // Block dangerous patterns
-  const blocked = ['DROP', 'TRUNCATE', 'ALTER', 'CREATE', 'INSERT', 'UPDATE', 'DELETE', 'GRANT', 'REVOKE']
-  for (const keyword of blocked) {
-    // Check for keyword as a standalone word (not part of column names)
-    const regex = new RegExp(`\\b${keyword}\\b`, 'i')
-    if (regex.test(sql) && !normalised.startsWith('SELECT') && !normalised.startsWith('WITH')) {
-      return JSON.stringify({ error: `Blocked keyword detected: ${keyword}` })
-    }
+  // Block multiple statements (defense in depth)
+  const trimmedSql = sql.trim().replace(/;+$/, '')
+  if (trimmedSql.includes(';')) {
+    return JSON.stringify({
+      error: 'Multiple SQL statements are not allowed. Send one SELECT query at a time.',
+    })
   }
 
   try {
-    // Use Supabase's rpc to execute raw SQL via a database function
-    // If the function doesn't exist, fall back to a simpler approach
-    const { data, error } = await supabase.rpc('exec_read_only_sql', {
+    // Execute via exec_agent_sql which drops privileges to agent_readonly role.
+    // Even if the SQL contains destructive statements, the DB role prevents mutations.
+    const { data, error } = await supabase.rpc('exec_agent_sql', {
       query_text: sql,
     })
 
     if (error) {
-      // If the RPC function doesn't exist, try common table queries
+      // If the secure function doesn't exist yet, fall back to table queries
       if (error.message.includes('function') && error.message.includes('does not exist')) {
         return await fallbackQuery(sql, description)
       }
@@ -1445,154 +311,91 @@ async function executeGetDailyBriefing(input: {
   detail_level?: string
   format?: string
 }): Promise<string> {
-  const days = input.lookback_days || 7
-  const now = getBrisbaneNow()
-  const lookback = new Date(now.getTime() - days * 86400000).toISOString()
-  const today = getBrisbaneDate()
-  const futureDate = getBrisbaneDateOffset(days)
-
-  // Run all queries in parallel
-  const [overdue, upcoming, meetings, relationships, projects] = await Promise.all([
-    // Overdue actions
-    supabase
-      .from('project_knowledge')
-      .select('project_code, title, follow_up_date, importance')
-      .eq('action_required', true)
-      .lt('follow_up_date', today)
-      .order('follow_up_date', { ascending: true })
-      .limit(20),
-
-    // Upcoming follow-ups
-    supabase
-      .from('project_knowledge')
-      .select('project_code, title, follow_up_date, importance')
-      .eq('action_required', true)
-      .gte('follow_up_date', today)
-      .lte('follow_up_date', futureDate)
-      .order('follow_up_date', { ascending: true })
-      .limit(20),
-
-    // Recent meetings
-    supabase
-      .from('project_knowledge')
-      .select('project_code, title, summary, recorded_at, participants')
-      .eq('knowledge_type', 'meeting')
-      .gte('recorded_at', lookback)
-      .order('recorded_at', { ascending: false })
-      .limit(10),
-
-    // Stale relationships (active/prospect contacts not contacted in 30+ days)
-    supabase
-      .from('ghl_contacts')
-      .select('full_name, email, company_name, engagement_status, last_contact_date')
-      .in('engagement_status', ['active', 'prospect'])
-      .lt('last_contact_date', new Date(now.getTime() - 30 * 86400000).toISOString())
-      .order('last_contact_date', { ascending: true })
-      .limit(10),
-
-    // Active projects (last 30 days activity count)
-    supabase
-      .from('project_knowledge')
-      .select('project_code')
-      .gte('recorded_at', new Date(now.getTime() - 30 * 86400000).toISOString()),
-  ])
-
-  // Count project activity
-  const projectCounts: Record<string, number> = {}
-  for (const row of projects.data || []) {
-    const code = row.project_code
-    projectCounts[code] = (projectCounts[code] || 0) + 1
-  }
+  const result = await fetchDailyBriefing(supabase, {
+    lookbackDays: input.lookback_days || 7,
+  })
 
   // Voice format: concise natural sentences for TTS (~800 chars)
   if (input.format === 'voice') {
-    const overdueCount = (overdue.data || []).length
-    const upcomingCount = (upcoming.data || []).length
-    const meetingCount = (meetings.data || []).length
-    const staleCount = (relationships.data || []).length
-
-    const parts: string[] = []
-
-    // Schedule
-    if (meetingCount === 0) {
-      parts.push('No meetings on the calendar today.')
-    } else {
-      const firstFew = (meetings.data || []).slice(0, 3)
-      const eventDescs = firstFew.map((m) => m.title).join(', ')
-      parts.push(`You have ${meetingCount} meeting${meetingCount === 1 ? '' : 's'} today. ${meetingCount <= 3 ? eventDescs + '.' : 'Including ' + eventDescs + '.'}`)
-    }
-
-    // Overdue
-    if (overdueCount > 0) {
-      parts.push(`${overdueCount} overdue action${overdueCount === 1 ? '' : 's'} need${overdueCount === 1 ? 's' : ''} attention.`)
-    }
-
-    // Upcoming
-    if (upcomingCount > 0) {
-      parts.push(`${upcomingCount} follow-up${upcomingCount === 1 ? '' : 's'} coming this week.`)
-    }
-
-    // Relationships
-    if (staleCount > 0) {
-      const topStale = (relationships.data || [])[0]
-      parts.push(`${staleCount} contact${staleCount === 1 ? '' : 's'} going quiet${topStale ? ', including ' + (topStale.full_name || 'someone') : ''}.`)
-    }
-
-    // Active projects
-    const projectCount = Object.keys(projectCounts).length
-    if (projectCount > 0) {
-      parts.push(`${projectCount} project${projectCount === 1 ? '' : 's'} active this month.`)
-    }
-
-    return parts.join(' ')
+    return formatDailyBriefingVoice(result)
   }
 
-  const isSummary = input.detail_level === 'summary'
-
-  if (isSummary) {
+  if (input.detail_level === 'summary') {
     return JSON.stringify({
-      generated_at: now.toISOString(),
-      overdue_actions: (overdue.data || []).length,
-      upcoming_followups: (upcoming.data || []).length,
-      recent_meetings: (meetings.data || []).length,
-      stale_relationships: (relationships.data || []).length,
-      active_projects: Object.keys(projectCounts).length,
-      top_projects: Object.entries(projectCounts)
-        .sort(([, a], [, b]) => b - a)
+      generated_at: result.generated_at,
+      overdue_actions: result.overdue_actions.length,
+      upcoming_followups: result.upcoming_followups.length,
+      recent_meetings: result.recent_meetings.length,
+      stale_relationships: result.stale_relationships.length,
+      active_projects: result.active_projects.length,
+      top_projects: result.active_projects
         .slice(0, 5)
-        .map(([code, count]) => `${code}(${count})`).join(', '),
+        .map(p => `${p.code}(${p.activity_count})`).join(', '),
     })
   }
 
   return JSON.stringify({
-    generated_at: now.toISOString(),
-    lookback_days: days,
+    generated_at: result.generated_at,
+    lookback_days: result.lookback_days,
     overdue_actions: {
-      count: (overdue.data || []).length,
-      items: overdue.data || [],
+      count: result.overdue_actions.length,
+      items: result.overdue_actions,
     },
     upcoming_followups: {
-      count: (upcoming.data || []).length,
-      items: upcoming.data || [],
+      count: result.upcoming_followups.length,
+      items: result.upcoming_followups,
     },
     recent_meetings: {
-      count: (meetings.data || []).length,
-      items: meetings.data || [],
+      count: result.recent_meetings.length,
+      items: result.recent_meetings,
     },
     stale_relationships: {
-      count: (relationships.data || []).length,
-      items: (relationships.data || []).map((r) => ({
+      count: result.stale_relationships.length,
+      items: result.stale_relationships.map((r) => ({
         name: r.full_name || r.email || 'Unknown',
         company: r.company_name,
         status: r.engagement_status,
         last_contact: r.last_contact_date,
       })),
     },
-    active_projects: Object.entries(projectCounts)
-      .sort(([, a], [, b]) => b - a)
-      .slice(0, 15)
-      .map(([code, count]) => ({ code, activity_count: count })),
+    active_projects: result.active_projects.slice(0, 15),
   })
+}
+
+function formatDailyBriefingVoice(result: DailyBriefingResult): string {
+  const parts: string[] = []
+
+  const meetingCount = result.recent_meetings.length
+  if (meetingCount === 0) {
+    parts.push('No meetings on the calendar today.')
+  } else {
+    const firstFew = result.recent_meetings.slice(0, 3)
+    const eventDescs = firstFew.map((m) => m.title).join(', ')
+    parts.push(`You have ${meetingCount} meeting${meetingCount === 1 ? '' : 's'} today. ${meetingCount <= 3 ? eventDescs + '.' : 'Including ' + eventDescs + '.'}`)
+  }
+
+  const overdueCount = result.overdue_actions.length
+  if (overdueCount > 0) {
+    parts.push(`${overdueCount} overdue action${overdueCount === 1 ? '' : 's'} need${overdueCount === 1 ? 's' : ''} attention.`)
+  }
+
+  const upcomingCount = result.upcoming_followups.length
+  if (upcomingCount > 0) {
+    parts.push(`${upcomingCount} follow-up${upcomingCount === 1 ? '' : 's'} coming this week.`)
+  }
+
+  const staleCount = result.stale_relationships.length
+  if (staleCount > 0) {
+    const topStale = result.stale_relationships[0]
+    parts.push(`${staleCount} contact${staleCount === 1 ? '' : 's'} going quiet${topStale ? ', including ' + (topStale.full_name || 'someone') : ''}.`)
+  }
+
+  const projectCount = result.active_projects.length
+  if (projectCount > 0) {
+    parts.push(`${projectCount} project${projectCount === 1 ? '' : 's'} active this month.`)
+  }
+
+  return parts.join(' ')
 }
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -1602,80 +405,12 @@ async function executeGetDailyBriefing(input: {
 async function executeGetFinancialSummary(input: {
   days?: number
 }): Promise<string> {
-  const days = input.days || 30
-
-  const [pipeline, apiCosts, subscriptions] = await Promise.all([
-    // Pipeline totals from opportunities
-    supabase
-      .from('ghl_opportunities')
-      .select('status, monetary_value, pipeline_name, stage_name'),
-
-    // API costs (last N days)
-    supabase
-      .from('api_usage')
-      .select('provider, model, estimated_cost, created_at')
-      .gte('created_at', new Date(Date.now() - days * 86400000).toISOString())
-      .order('created_at', { ascending: false })
-      .limit(100),
-
-    // Active subscriptions
-    supabase
-      .from('subscriptions')
-      .select('vendor, amount_aud, billing_cycle, category, status')
-      .eq('status', 'active')
-      .order('amount_aud', { ascending: false })
-      .limit(30),
-  ])
-
-  // Aggregate pipeline
-  let openValue = 0
-  let wonValue = 0
-  let lostValue = 0
-  const pipelineData = pipeline.data || []
-  for (const row of pipelineData) {
-    const val = parseFloat(row.monetary_value) || 0
-    if (row.status === 'open') openValue += val
-    else if (row.status === 'won') wonValue += val
-    else if (row.status === 'lost') lostValue += val
-  }
-
-  // Aggregate API costs
-  let totalApiCost = 0
-  const costsByModel: Record<string, number> = {}
-  for (const row of apiCosts.data || []) {
-    const cost = parseFloat(row.estimated_cost) || 0
-    totalApiCost += cost
-    const key = `${row.provider}/${row.model}`
-    costsByModel[key] = (costsByModel[key] || 0) + cost
-  }
-
-  // Aggregate subscriptions
-  let monthlySubscriptionTotal = 0
-  for (const sub of subscriptions.data || []) {
-    const amount = parseFloat(sub.amount_aud) || 0
-    if (sub.billing_cycle === 'monthly') monthlySubscriptionTotal += amount
-    else if (sub.billing_cycle === 'yearly') monthlySubscriptionTotal += amount / 12
-  }
-
+  const result = await fetchFinancialSummary(supabase, { days: input.days })
   return JSON.stringify({
-    period_days: days,
-    pipeline: {
-      total_opportunities: pipelineData.length,
-      open_value: openValue,
-      won_value: wonValue,
-      lost_value: lostValue,
-      total_value: openValue + wonValue + lostValue,
-    },
-    api_costs: {
-      total_usd: Math.round(totalApiCost * 100) / 100,
-      by_model: costsByModel,
-      call_count: (apiCosts.data || []).length,
-    },
-    subscriptions: {
-      active_count: (subscriptions.data || []).length,
-      monthly_total_aud: Math.round(monthlySubscriptionTotal * 100) / 100,
-      items: (subscriptions.data || []).slice(0, 15),
-    },
+    period_days: result.period_days,
+    pipeline: result.pipeline,
+    api_costs: result.api_costs,
+    subscriptions: result.subscriptions,
   })
 }
 
@@ -1687,81 +422,9 @@ async function executeSearchContacts(input: {
   query: string
   limit?: number
 }): Promise<string> {
-  const { query, limit = 10 } = input
-  const searchTerm = `%${query}%`
-
   try {
-    // Search across name, email, company, and tags
-    const { data, error } = await supabase
-      .from('ghl_contacts')
-      .select('id, ghl_id, full_name, email, phone, company_name, engagement_status, tags, projects, last_contact_date')
-      .or(`full_name.ilike.${searchTerm},email.ilike.${searchTerm},company_name.ilike.${searchTerm}`)
-      .order('last_contact_date', { ascending: false })
-      .limit(limit)
-
-    if (error) {
-      return JSON.stringify({ error: error.message })
-    }
-
-    const now = new Date()
-
-    // Enrich with last interaction and pipeline value
-    const contacts = await Promise.all(
-      (data || []).map(async (c) => {
-        const base = {
-          id: c.id,
-          ghl_id: c.ghl_id,
-          name: c.full_name || 'Unknown',
-          email: c.email,
-          phone: c.phone,
-          company: c.company_name,
-          status: c.engagement_status,
-          tags: c.tags || [],
-          projects: c.projects || [],
-          last_contact: c.last_contact_date,
-          days_since_contact: c.last_contact_date
-            ? Math.floor((now.getTime() - new Date(c.last_contact_date).getTime()) / 86400000)
-            : null,
-          last_interaction_topic: null as string | null,
-          last_interaction_date: null as string | null,
-          open_pipeline_value: null as number | null,
-        }
-
-        // Get last communication
-        const { data: lastComm } = await supabase
-          .from('communications_history')
-          .select('subject, communication_date')
-          .eq('contact_id', c.id)
-          .order('communication_date', { ascending: false })
-          .limit(1)
-          .maybeSingle()
-
-        if (lastComm) {
-          base.last_interaction_topic = lastComm.subject
-          base.last_interaction_date = lastComm.communication_date
-        }
-
-        // Get open pipeline value
-        if (c.ghl_id) {
-          const { data: deals } = await supabase
-            .from('ghl_opportunities')
-            .select('monetary_value')
-            .eq('contact_id', c.ghl_id)
-            .eq('status', 'open')
-
-          const total = (deals || []).reduce((sum, d) => sum + (d.monetary_value || 0), 0)
-          if (total > 0) base.open_pipeline_value = total
-        }
-
-        return base
-      })
-    )
-
-    return JSON.stringify({
-      query,
-      count: contacts.length,
-      contacts,
-    })
+    const result = await searchContacts(supabase, { query: input.query, limit: input.limit })
+    return JSON.stringify(result)
   } catch (err) {
     return JSON.stringify({ error: (err as Error).message })
   }
@@ -1774,121 +437,10 @@ async function executeSearchContacts(input: {
 async function executeGetContactDetails(input: {
   contact_id: string
 }): Promise<string> {
-  const { contact_id } = input
-
   try {
-    // Try by UUID first, then by GHL ID
-    let query = supabase
-      .from('ghl_contacts')
-      .select('*')
-
-    // UUID format check
-    if (contact_id.match(/^[0-9a-f]{8}-[0-9a-f]{4}-/i)) {
-      query = query.eq('id', contact_id)
-    } else {
-      query = query.eq('ghl_id', contact_id)
-    }
-
-    const { data: contact, error } = await query.maybeSingle()
-
-    if (error) {
-      return JSON.stringify({ error: error.message })
-    }
-    if (!contact) {
-      return JSON.stringify({ error: 'Contact not found', contact_id })
-    }
-
-    // Fetch comms + relationship health + next meeting + open pipeline in parallel
-    const [commsResult, healthResult, nextMeetingResult, pipelineResult] = await Promise.all([
-      supabase
-        .from('communications_history')
-        .select('direction, channel, subject, summary, communication_date')
-        .eq('contact_id', contact.id)
-        .order('communication_date', { ascending: false })
-        .limit(5),
-      supabase
-        .from('relationship_health')
-        .select('temperature, temperature_trend, last_temperature_change, lcaa_stage, risk_flags, email_score, calendar_score, financial_score, pipeline_score, knowledge_score, signal_breakdown, next_meeting_date, open_invoice_amount')
-        .eq('ghl_contact_id', contact.ghl_id)
-        .maybeSingle(),
-      supabase
-        .from('calendar_events')
-        .select('title, start_time, attendees')
-        .gte('start_time', new Date().toISOString())
-        .order('start_time', { ascending: true })
-        .limit(10),
-      supabase
-        .from('ghl_opportunities')
-        .select('name, monetary_value, stage_name, status')
-        .eq('contact_id', contact.ghl_id)
-        .eq('status', 'open'),
-    ])
-
-    const comms = commsResult.data
-    const health = healthResult.data
-    const pipeline = pipelineResult.data
-
-    // Find next meeting involving this contact
-    const contactName = (contact.full_name || '').toLowerCase()
-    const contactEmail = (contact.email || '').toLowerCase()
-    const nextMeeting = (nextMeetingResult.data || []).find((e) => {
-      const attendees = JSON.stringify(e.attendees || []).toLowerCase()
-      const title = (e.title || '').toLowerCase()
-      return (contactEmail && attendees.includes(contactEmail)) || (contactName && title.includes(contactName))
-    })
-
-    const now = new Date()
-    const openPipelineValue = (pipeline || []).reduce((sum: number, o: { monetary_value?: number }) => sum + (o.monetary_value || 0), 0)
-
-    return JSON.stringify({
-      id: contact.id,
-      ghl_id: contact.ghl_id,
-      name: contact.full_name,
-      email: contact.email,
-      phone: contact.phone,
-      company: contact.company_name,
-      status: contact.engagement_status,
-      tags: contact.tags || [],
-      projects: contact.projects || [],
-      last_contact: contact.last_contact_date,
-      days_since_contact: contact.last_contact_date
-        ? Math.floor((now.getTime() - new Date(contact.last_contact_date).getTime()) / 86400000)
-        : null,
-      // Relationship health signals
-      relationship: health ? {
-        temperature: health.temperature,
-        trend: health.temperature_trend,
-        last_change: health.last_temperature_change,
-        lcaa_stage: health.lcaa_stage,
-        risk_flags: health.risk_flags || [],
-        signals: {
-          email: health.email_score,
-          calendar: health.calendar_score,
-          financial: health.financial_score,
-          pipeline: health.pipeline_score,
-          knowledge: health.knowledge_score,
-        },
-      } : null,
-      // Pipeline
-      open_pipeline: {
-        count: (pipeline || []).length,
-        total_value: openPipelineValue,
-        opportunities: (pipeline || []).map((o: { name: string; monetary_value?: number; stage_name?: string }) => ({
-          name: o.name,
-          value: o.monetary_value,
-          stage: o.stage_name,
-        })),
-      },
-      // Next meeting
-      next_meeting: nextMeeting ? { title: nextMeeting.title, date: nextMeeting.start_time } : null,
-      recent_communications: (comms || []).map((c) => ({
-        direction: c.direction,
-        channel: c.channel,
-        subject: c.subject,
-        summary: c.summary,
-        date: c.communication_date,
-      })),
-    })
+    const result = await fetchContactDetails(supabase, { contact_id: input.contact_id })
+    if (!result) return JSON.stringify({ error: 'Contact not found', contact_id: input.contact_id })
+    return JSON.stringify(result)
   } catch (err) {
     return JSON.stringify({ error: (err as Error).message })
   }
@@ -1952,47 +504,13 @@ async function executeSearchKnowledge(input: {
   project_code?: string
   limit?: number
 }): Promise<string> {
-  const { query, project_code, limit = 10 } = input
-  const searchTerm = `%${query}%`
-
   try {
-    let dbQuery = supabase
-      .from('project_knowledge')
-      .select('id, project_code, knowledge_type, title, summary, key_points, participants, action_required, follow_up_date, importance, recorded_at')
-      .or(`title.ilike.${searchTerm},summary.ilike.${searchTerm},key_points.ilike.${searchTerm}`)
-      .order('recorded_at', { ascending: false })
-      .limit(limit)
-
-    if (project_code) {
-      dbQuery = dbQuery.eq('project_code', project_code.toUpperCase())
-    }
-
-    const { data, error } = await dbQuery
-
-    if (error) {
-      return JSON.stringify({ error: error.message })
-    }
-
-    const items = (data || []).map((k) => ({
-      id: k.id,
-      project_code: k.project_code,
-      type: k.knowledge_type,
-      title: k.title,
-      summary: k.summary,
-      key_points: k.key_points,
-      participants: k.participants,
-      action_required: k.action_required,
-      follow_up_date: k.follow_up_date,
-      importance: k.importance,
-      recorded_at: k.recorded_at,
-    }))
-
-    return JSON.stringify({
-      query,
-      project_code: project_code || 'all',
-      count: items.length,
-      items,
+    const result = await searchKnowledge(supabase, {
+      query: input.query,
+      project_code: input.project_code,
+      limit: input.limit,
     })
+    return JSON.stringify(result)
   } catch (err) {
     return JSON.stringify({ error: (err as Error).message })
   }
@@ -2005,35 +523,15 @@ async function executeSearchKnowledge(input: {
 async function executeGetProjectSummary(input: {
   project_code: string
 }): Promise<string> {
-  const projectCode = input.project_code.toUpperCase()
-
   try {
-    const { data: summary, error } = await supabase
-      .from('project_summaries')
-      .select('*')
-      .eq('project_code', projectCode)
-      .order('generated_at', { ascending: false })
-      .limit(1)
-      .maybeSingle()
-
-    if (error) {
-      return JSON.stringify({ error: error.message })
-    }
-
-    if (!summary) {
+    const result = await fetchProjectSummary(supabase, { project_code: input.project_code })
+    if (!result) {
       return JSON.stringify({
-        project_code: projectCode,
+        project_code: input.project_code.toUpperCase(),
         error: 'No summary available yet for this project. Summaries are generated daily.',
       })
     }
-
-    return JSON.stringify({
-      project_code: summary.project_code,
-      summary: summary.summary_text,
-      data_sources: summary.data_sources_used,
-      stats: summary.stats,
-      generated_at: summary.generated_at,
-    })
+    return JSON.stringify(result)
   } catch (err) {
     return JSON.stringify({ error: (err as Error).message })
   }
@@ -2047,114 +545,9 @@ async function executeGetContactsNeedingAttention(input: {
   limit?: number
   project?: string
 }): Promise<string> {
-  const limit = input.limit || 10
-
   try {
-    // Primary: use relationship_health signals (falling temperature or risk flags)
-    const { data: healthData, error: healthError } = await supabase
-      .from('relationship_health')
-      .select('ghl_contact_id, temperature, temperature_trend, last_temperature_change, risk_flags, email_score, calendar_score, next_meeting_date')
-      .or('temperature_trend.eq.falling,risk_flags.not.is.null')
-      .order('temperature', { ascending: true })
-      .limit(limit * 2)
-
-    // Get contact details for matched health records
-    const ghlIds = (healthData || []).map((h) => h.ghl_contact_id)
-
-    let contactQuery = supabase
-      .from('ghl_contacts')
-      .select('id, ghl_id, full_name, email, phone, company_name, engagement_status, tags, projects, last_contact_date')
-      .in('ghl_id', ghlIds.length > 0 ? ghlIds : ['__none__'])
-
-    if (input.project) {
-      contactQuery = contactQuery.contains('tags', [input.project.toLowerCase()])
-    }
-
-    const { data: contactData } = await contactQuery
-
-    // Build health lookup
-    const healthMap: Record<string, (typeof healthData extends (infer T)[] | null ? T : never)> = {}
-    for (const h of (healthData || [])) {
-      healthMap[h.ghl_contact_id] = h
-    }
-
-    const now = new Date()
-    const contacts = (contactData || [])
-      .map((c) => {
-        const health = healthMap[c.ghl_id]
-        const riskFlags = health?.risk_flags || []
-        return {
-          id: c.id,
-          name: c.full_name || 'Unknown',
-          email: c.email,
-          phone: c.phone,
-          company: c.company_name,
-          status: c.engagement_status,
-          tags: c.tags || [],
-          projects: c.projects || [],
-          last_contact: c.last_contact_date,
-          days_since_contact: c.last_contact_date
-            ? Math.floor((now.getTime() - new Date(c.last_contact_date).getTime()) / 86400000)
-            : null,
-          temperature: health?.temperature,
-          trend: health?.temperature_trend,
-          temperature_change: health?.last_temperature_change,
-          risk_flags: riskFlags,
-          recommended_action: suggestAction(riskFlags, health),
-        }
-      })
-      .sort((a, b) => (a.temperature ?? 999) - (b.temperature ?? 999))
-      .slice(0, limit)
-
-    // Fallback: if no signal-based results, use the simple date threshold
-    if (contacts.length === 0) {
-      const fourteenDaysAgo = getBrisbaneNow()
-      fourteenDaysAgo.setDate(fourteenDaysAgo.getDate() - 14)
-      const sixtyDaysAgo = getBrisbaneNow()
-      sixtyDaysAgo.setDate(sixtyDaysAgo.getDate() - 60)
-
-      let fallbackQuery = supabase
-        .from('ghl_contacts')
-        .select('id, ghl_id, full_name, email, phone, company_name, engagement_status, tags, projects, last_contact_date')
-        .lt('last_contact_date', fourteenDaysAgo.toISOString())
-        .gt('last_contact_date', sixtyDaysAgo.toISOString())
-        .order('last_contact_date', { ascending: true })
-        .limit(limit)
-
-      if (input.project) {
-        fallbackQuery = fallbackQuery.contains('tags', [input.project.toLowerCase()])
-      }
-
-      const { data: fallbackData } = await fallbackQuery
-
-      const fallbackContacts = (fallbackData || []).map((c) => ({
-        id: c.id,
-        name: c.full_name || 'Unknown',
-        email: c.email,
-        phone: c.phone,
-        company: c.company_name,
-        status: c.engagement_status,
-        tags: c.tags || [],
-        projects: c.projects || [],
-        last_contact: c.last_contact_date,
-        days_since_contact: c.last_contact_date
-          ? Math.floor((now.getTime() - new Date(c.last_contact_date).getTime()) / 86400000)
-          : null,
-        recommended_action: 'Reach out — no recent contact',
-      }))
-
-      return JSON.stringify({
-        description: 'Contacts who need follow-up (14-60 days since last contact, no signal data available yet)',
-        count: fallbackContacts.length,
-        contacts: fallbackContacts,
-      })
-    }
-
-    return JSON.stringify({
-      description: 'Contacts with falling relationship temperature or active risk flags, prioritized by urgency',
-      count: contacts.length,
-      contacts,
-    })
+    const result = await fetchContactsNeedingAttention(supabase, { limit: input.limit, project: input.project })
+    return JSON.stringify(result)
   } catch (err) {
     return JSON.stringify({ error: (err as Error).message })
   }
@@ -2598,50 +991,9 @@ async function executeGetGrantOpportunities(input: {
   status?: string
   limit?: number
 }): Promise<string> {
-  const status = input.status || 'open'
-  const limit = input.limit || 10
-
   try {
-    const { data, error } = await supabase
-      .from('grant_opportunities')
-      .select('id, name, provider, program, amount_min, amount_max, opens_at, closes_at, status, fit_score, fit_notes, aligned_projects, categories, url')
-      .eq('status', status)
-      .order('closes_at', { ascending: true })
-      .limit(limit)
-
-    if (error) {
-      return JSON.stringify({ error: error.message })
-    }
-
-    const now = new Date()
-    const grants = (data || []).map((g) => ({
-      id: g.id,
-      name: g.name,
-      provider: g.provider,
-      program: g.program,
-      amount_range: g.amount_min && g.amount_max
-        ? `$${Number(g.amount_min).toLocaleString()} - $${Number(g.amount_max).toLocaleString()}`
-        : g.amount_max
-          ? `Up to $${Number(g.amount_max).toLocaleString()}`
-          : 'Not specified',
-      opens_at: g.opens_at,
-      closes_at: g.closes_at,
-      days_until_close: g.closes_at
-        ? Math.ceil((new Date(g.closes_at).getTime() - now.getTime()) / 86400000)
-        : null,
-      status: g.status,
-      fit_score: g.fit_score,
-      fit_notes: g.fit_notes,
-      aligned_projects: g.aligned_projects || [],
-      categories: g.categories || [],
-      url: g.url,
-    }))
-
-    return JSON.stringify({
-      status_filter: status,
-      count: grants.length,
-      grants,
-    })
+    const result = await fetchGrantOpportunities(supabase, { status: input.status, limit: input.limit })
+    return JSON.stringify(result)
   } catch (err) {
     return JSON.stringify({ error: (err as Error).message })
   }
@@ -2655,44 +1007,8 @@ async function executeGetGrantPipeline(input: {
   status?: string
 }): Promise<string> {
   try {
-    let query = supabase
-      .from('grant_applications')
-      .select('id, application_name, amount_requested, status, started_at, submitted_at, outcome_at, milestones, lead_contact, team_members, project_code, outcome_amount, outcome_notes, opportunity_id')
-      .order('started_at', { ascending: false })
-
-    if (input.status) {
-      query = query.eq('status', input.status)
-    } else {
-      // Default: active applications
-      query = query.in('status', ['draft', 'in_progress', 'submitted', 'under_review'])
-    }
-
-    const { data, error } = await query.limit(20)
-
-    if (error) {
-      return JSON.stringify({ error: error.message })
-    }
-
-    const applications = (data || []).map((a) => ({
-      id: a.id,
-      name: a.application_name,
-      amount_requested: a.amount_requested ? `$${Number(a.amount_requested).toLocaleString()}` : 'Not specified',
-      status: a.status,
-      started_at: a.started_at,
-      submitted_at: a.submitted_at,
-      outcome_at: a.outcome_at,
-      lead_contact: a.lead_contact,
-      team: a.team_members || [],
-      project_code: a.project_code,
-      outcome_amount: a.outcome_amount ? `$${Number(a.outcome_amount).toLocaleString()}` : null,
-      outcome_notes: a.outcome_notes,
-    }))
-
-    return JSON.stringify({
-      status_filter: input.status || 'active',
-      count: applications.length,
-      applications,
-    })
+    const result = await fetchGrantPipeline(supabase, { status: input.status })
+    return JSON.stringify(result)
   } catch (err) {
     return JSON.stringify({ error: (err as Error).message })
   }
@@ -3505,109 +1821,7 @@ async function executeSearchPastReflections(input: {
   }
 }
 
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// SHARED: Google Service Account Auth
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-async function getGoogleAccessToken(
-  credentials: { client_email: string; private_key: string },
-  subject: string,
-  scopes: string[]
-): Promise<string> {
-  const now = Math.floor(Date.now() / 1000)
-  const header = Buffer.from(JSON.stringify({ alg: 'RS256', typ: 'JWT' })).toString('base64url')
-  const payload = Buffer.from(JSON.stringify({
-    iss: credentials.client_email,
-    sub: subject,
-    scope: scopes.join(' '),
-    aud: 'https://oauth2.googleapis.com/token',
-    iat: now,
-    exp: now + 3600,
-  })).toString('base64url')
-
-  const signInput = `${header}.${payload}`
-
-  const crypto = await import('crypto')
-  const sign = crypto.createSign('RSA-SHA256')
-  sign.update(signInput)
-  const signature = sign.sign(credentials.private_key, 'base64url')
-
-  const jwt = `${signInput}.${signature}`
-
-  const tokenResponse = await fetch('https://oauth2.googleapis.com/token', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: `grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer&assertion=${jwt}`,
-  })
-
-  if (!tokenResponse.ok) {
-    throw new Error(`Google auth error: ${tokenResponse.status}`)
-  }
-
-  const tokenData = await tokenResponse.json()
-  return tokenData.access_token
-}
-
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// COST TRACKING
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-const PRICING: Record<string, { input: number; output: number }> = {
-  'claude-3-5-haiku-20241022': { input: 0.80, output: 4.00 },
-  'claude-sonnet-4-5-20250929': { input: 3.00, output: 15.00 },
-  'claude-sonnet-4-20250514': { input: 3.00, output: 15.00 },
-  'claude-opus-4-5-20251101': { input: 15.00, output: 75.00 },
-}
-
-export function calculateCost(
-  model: string,
-  inputTokens: number,
-  outputTokens: number
-): number {
-  const pricing = PRICING[model]
-  if (!pricing) return 0
-  return (
-    (inputTokens * pricing.input) / 1_000_000 +
-    (outputTokens * pricing.output) / 1_000_000
-  )
-}
-
-export async function logAgentUsage(params: {
-  model: string
-  inputTokens: number
-  outputTokens: number
-  latencyMs: number
-  toolCalls: number
-}) {
-  const cost = calculateCost(params.model, params.inputTokens, params.outputTokens)
-  const pricing = PRICING[params.model]
-
-  try {
-    await supabase.from('api_usage').insert({
-      provider: 'anthropic',
-      model: params.model,
-      endpoint: 'chat',
-      input_tokens: params.inputTokens,
-      output_tokens: params.outputTokens,
-      estimated_cost: cost,
-      input_cost: pricing
-        ? (params.inputTokens * pricing.input) / 1_000_000
-        : 0,
-      output_cost: pricing
-        ? (params.outputTokens * pricing.output) / 1_000_000
-        : 0,
-      script_name: 'agent-chat',
-      agent_id: 'agent-chat',
-      operation: 'chat',
-      latency_ms: params.latencyMs,
-      response_status: 200,
-    })
-  } catch (err) {
-    console.error('Failed to log agent usage:', (err as Error).message)
-  }
-
-  return cost
-}
+// Google auth + cost tracking extracted to ./tool-helpers.ts
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -4636,106 +2850,15 @@ async function executeSearchEmails(input: {
 async function executeGetCashflowForecast(input: {
   months_ahead?: number
 }): Promise<string> {
-  const monthsAhead = input.months_ahead || 6
-
   try {
-    // Fetch historical snapshots, current month transactions, and upcoming invoices in parallel
-    const now = getBrisbaneNow()
-    const monthStart = new Date(now.getFullYear(), now.getMonth(), 1).toISOString().split('T')[0]
-    const monthEnd = new Date(now.getFullYear(), now.getMonth() + 1, 0).toISOString().split('T')[0]
-
-    const [snapshotsRes, txRes, invoicesRes, scenariosRes] = await Promise.all([
-      supabase
-        .from('financial_snapshots')
-        .select('month, income, expenses, net, closing_balance, is_projection, confidence')
-        .eq('is_projection', false)
-        .order('month', { ascending: true })
-        .limit(24),
-      supabase
-        .from('xero_transactions')
-        .select('total, type')
-        .gte('date', monthStart)
-        .lte('date', monthEnd),
-      supabase
-        .from('xero_invoices')
-        .select('total, amount_due, type, due_date')
-        .gt('amount_due', 0)
-        .in('status', ['AUTHORISED', 'SUBMITTED']),
-      supabase
-        .from('cashflow_scenarios')
-        .select('name, description, adjustments')
-        .eq('is_active', true),
-    ])
-
-    const snapshots = snapshotsRes.data || []
-    const transactions = txRes.data || []
-    const invoices = invoicesRes.data || []
-
-    // Current month actuals
-    let monthIncome = 0
-    let monthExpenses = 0
-    for (const tx of transactions) {
-      if (tx.type === 'RECEIVE') monthIncome += Math.abs(tx.total || 0)
-      else if (tx.type === 'SPEND') monthExpenses += Math.abs(tx.total || 0)
-    }
-
-    // Outstanding invoices
-    let receivables = 0
-    let payables = 0
-    for (const inv of invoices) {
-      const amt = Math.abs(inv.amount_due || 0)
-      if (inv.type === 'ACCREC') receivables += amt
-      else if (inv.type === 'ACCPAY') payables += amt
-    }
-
-    // Calculate averages from last 6 months of snapshots
-    const recent = snapshots.slice(-6)
-    const avgIncome = recent.length > 0 ? recent.reduce((s, r) => s + Number(r.income || 0), 0) / recent.length : 0
-    const avgExpenses = recent.length > 0 ? recent.reduce((s, r) => s + Number(r.expenses || 0), 0) / recent.length : 0
-    const lastBalance = snapshots.length > 0 ? Number(snapshots[snapshots.length - 1].closing_balance || 0) : 0
-
-    // Generate projection
-    const projections: Array<{ month: string; income: number; expenses: number; balance: number; confidence: number }> = []
-    let balance = lastBalance + (monthIncome - monthExpenses)
-    for (let i = 1; i <= monthsAhead; i++) {
-      const d = new Date(now.getFullYear(), now.getMonth() + i, 1)
-      const monthNet = avgIncome - avgExpenses
-      balance += monthNet
-      projections.push({
-        month: d.toISOString().slice(0, 7),
-        income: Math.round(avgIncome),
-        expenses: Math.round(avgExpenses),
-        balance: Math.round(balance),
-        confidence: Math.max(0.5, 1 - i * 0.08),
-      })
-    }
-
-    // Metrics
-    const burnRate = Math.max(0, Math.round(avgExpenses - avgIncome))
-    const runway = burnRate > 0 ? Math.round((balance / burnRate) * 10) / 10 : null
-
+    const result = await fetchCashflow(supabase, { monthsAhead: input.months_ahead })
     return JSON.stringify({
-      current_month: {
-        period: now.toISOString().slice(0, 7),
-        income: Math.round(monthIncome),
-        expenses: Math.round(monthExpenses),
-        net: Math.round(monthIncome - monthExpenses),
-      },
-      outstanding: {
-        receivables: Math.round(receivables),
-        payables: Math.round(payables),
-        net: Math.round(receivables - payables),
-      },
-      metrics: {
-        avg_monthly_income: Math.round(avgIncome),
-        avg_monthly_expenses: Math.round(avgExpenses),
-        burn_rate: burnRate,
-        estimated_balance: Math.round(balance),
-        runway_months: runway,
-      },
-      projections,
-      scenarios: scenariosRes.data || [],
-      history_months: snapshots.length,
+      current_month: result.current_month,
+      outstanding: result.outstanding,
+      metrics: result.metrics,
+      projections: result.projections,
+      scenarios: result.scenarios,
+      history_months: result.history.length,
     })
   } catch (err) {
     return JSON.stringify({ error: (err as Error).message })
@@ -4749,104 +2872,11 @@ async function executeGetCashflowForecast(input: {
 async function executeGetProjectHealth(input: {
   project_code?: string
 }): Promise<string> {
-  const { project_code } = input
-
   try {
-    // Load project codes config
-    const allProjects: Record<string, any> = await loadProjectCodes()
-
-    const codes = project_code
-      ? [project_code.toUpperCase()]
-      : Object.keys(allProjects).filter(k => allProjects[k]?.status === 'active')
-
-    // Fetch data across all dimensions in parallel
-    const [knowledgeRes, financialsRes, commsRes, actionsRes] = await Promise.all([
-      supabase
-        .from('project_knowledge')
-        .select('project_code, recorded_at, knowledge_type')
-        .in('project_code', codes)
-        .order('recorded_at', { ascending: false })
-        .limit(500),
-      supabase
-        .from('v_project_financials')
-        .select('*')
-        .in('project_code', codes),
-      supabase
-        .from('communications_history')
-        .select('project_codes, created_at')
-        .gte('created_at', new Date(Date.now() - 30 * 86400000).toISOString())
-        .limit(1000),
-      supabase
-        .from('project_knowledge')
-        .select('project_code, title, recorded_at')
-        .in('project_code', codes)
-        .eq('knowledge_type', 'action')
-        .eq('action_required', true)
-        .limit(200),
-    ])
-
-    const knowledge = knowledgeRes.data || []
-    const financials = financialsRes.data || []
-    const comms = commsRes.data || []
-    const actions = actionsRes.data || []
-
-    // Build per-project health
-    const results = codes.map(code => {
-      const proj = allProjects[code]
-      const projKnowledge = knowledge.filter(k => k.project_code === code)
-      const projFinancials = financials.find(f => f.project_code === code)
-      const projComms = comms.filter(c => c.project_codes?.includes(code))
-      const projActions = actions.filter(a => a.project_code === code)
-
-      const lastActivity = projKnowledge.length > 0
-        ? projKnowledge[0].recorded_at
-        : null
-      const daysSinceActivity = lastActivity
-        ? Math.round((Date.now() - new Date(lastActivity).getTime()) / 86400000)
-        : null
-
-      return {
-        code,
-        name: proj?.name || code,
-        category: proj?.category || 'unknown',
-        priority: proj?.priority || 'normal',
-        last_activity: lastActivity,
-        days_since_activity: daysSinceActivity,
-        knowledge_entries: projKnowledge.length,
-        comms_last_30_days: projComms.length,
-        open_actions: projActions.length,
-        financials: projFinancials ? {
-          total_receivables: projFinancials.total_receivables,
-          total_payables: projFinancials.total_payables,
-          outstanding_receivables: projFinancials.outstanding_receivables,
-          net_position: projFinancials.net_position,
-        } : null,
-        health: daysSinceActivity === null ? 'unknown'
-          : daysSinceActivity <= 7 ? 'active'
-          : daysSinceActivity <= 30 ? 'steady'
-          : daysSinceActivity <= 90 ? 'stale'
-          : 'dormant',
-      }
+    const result = await fetchProjectHealth(supabase, {
+      projectCode: input.project_code,
     })
-
-    // Sort: active first, then by days since activity
-    results.sort((a, b) => {
-      const order = { active: 0, steady: 1, stale: 2, dormant: 3, unknown: 4 }
-      const aOrder = order[a.health as keyof typeof order] ?? 4
-      const bOrder = order[b.health as keyof typeof order] ?? 4
-      return aOrder - bOrder || (a.days_since_activity || 999) - (b.days_since_activity || 999)
-    })
-
-    return JSON.stringify({
-      total_projects: results.length,
-      summary: {
-        active: results.filter(r => r.health === 'active').length,
-        steady: results.filter(r => r.health === 'steady').length,
-        stale: results.filter(r => r.health === 'stale').length,
-        dormant: results.filter(r => r.health === 'dormant').length,
-      },
-      projects: project_code ? results : results.slice(0, 20),
-    })
+    return JSON.stringify(result)
   } catch (err) {
     return JSON.stringify({ error: (err as Error).message })
   }
@@ -5046,68 +3076,37 @@ async function executeCreateMeetingNotes(input: {
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 async function executeGetProject360(input: { project_code: string }): Promise<string> {
-  const { project_code } = input
   try {
-    const [summaryRes, activityRes, contactsRes] = await Promise.all([
-      supabase.from('v_project_summary').select('*').eq('project_code', project_code).single(),
-      supabase.from('v_activity_stream').select('*').eq('project_code', project_code).order('activity_date', { ascending: false }).limit(10),
-      supabase.from('ghl_contacts').select('full_name, email, company_name, engagement_status, last_contact_date').contains('tags', [project_code]).limit(5),
-    ])
-
-    const summary = summaryRes.data
-    const activities = activityRes.data || []
-    const contacts = contactsRes.data || []
-
-    // Also try to get contacts via project tag matching from config
-    let tagContacts = contacts
-    if (contacts.length === 0) {
-      try {
-        const codes = await loadProjectCodes()
-        const project = codes[project_code]
-        if (project?.ghl_tags?.[0]) {
-          const { data } = await supabase
-            .from('ghl_contacts')
-            .select('full_name, email, company_name, engagement_status, last_contact_date')
-            .contains('tags', [project.ghl_tags[0]])
-            .limit(5)
-          tagContacts = data || []
-        }
-      } catch { /* ignore */ }
-    }
-
+    const result = await fetchProjectIntelligence(supabase, { project_code: input.project_code })
     return JSON.stringify({
-      project_code,
-      financial: summary ? {
-        revenue: summary.total_income,
-        expenses: summary.total_expenses,
-        net: summary.net,
-        pipeline_value: summary.pipeline_value,
-        open_opportunities: summary.open_opportunities,
-        outstanding_invoices: summary.outstanding_amount,
-        grants_won: summary.grants_won,
-        grants_pending: summary.grants_pending,
-        subscription_monthly_cost: summary.subscription_monthly_cost,
+      project_code: result.project_code,
+      financial: result.financials ? {
+        revenue: result.financials.fy_revenue,
+        expenses: result.financials.fy_expenses,
+        net: result.financials.fy_net,
+        pipeline_value: result.financials.pipeline_value,
+        outstanding_invoices: result.financials.outstanding_amount,
+        grants_won: result.financials.grants_won,
+        grants_pending: result.financials.grants_pending,
       } : null,
-      health: summary ? {
-        score: summary.health_score,
-        status: summary.health_status,
-        momentum: summary.momentum_score,
-        engagement: summary.engagement_score,
-        financial: summary.financial_score,
+      health: result.health ? {
+        score: result.health.health_score,
+        momentum: result.health.momentum_score,
+        engagement: result.health.engagement_score,
+        financial: result.health.financial_score,
       } : null,
-      key_contacts: tagContacts.map((c: any) => ({
-        name: c.full_name,
-        email: c.email,
-        company: c.company_name,
-        engagement: c.engagement_status,
-        last_contact: c.last_contact_date,
+      key_contacts: result.relationships.map((r) => ({
+        name: r.contact_name,
+        company: r.company_name,
+        temperature: r.temperature,
+        trend: r.temperature_trend,
+        last_contact: r.last_contact_at,
       })),
-      recent_activity: activities.map((a: any) => ({
-        type: a.activity_type,
-        title: a.title,
-        date: a.activity_date,
-        amount: a.amount,
-      })),
+      focus_areas: result.focus_areas,
+      grants: result.grants,
+      recent_knowledge: result.recent_knowledge.slice(0, 5),
+      recent_wins: result.recent_wins,
+      blockers: result.blockers,
     })
   } catch (err) {
     return JSON.stringify({ error: (err as Error).message })
@@ -5178,6 +3177,72 @@ async function executeGetEcosystemPulse(): Promise<string> {
     })
   } catch (err) {
     return JSON.stringify({ error: (err as Error).message })
+  }
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// TOOL: get_daily_priorities
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+async function executeGetDailyPriorities(input: { limit?: number }): Promise<string> {
+  try {
+    const limit = input.limit || 10
+
+    const { data, error } = await supabase
+      .from('sprint_suggestions')
+      .select('id, title, stream, priority, notes, source_type, source_ref, due_date, project_code, owner, created_at')
+      .eq('dismissed', false)
+      .is('promoted_to', null)
+      .order('priority', { ascending: true })
+      .order('created_at', { ascending: false })
+      .limit(limit)
+
+    if (error) return `Error fetching priorities: ${error.message}`
+
+    const items = data || []
+
+    if (items.length === 0) {
+      return '✅ All clear — no urgent priorities right now. Everything is on track.'
+    }
+
+    const nowItems = items.filter(i => i.priority === 'now')
+    const nextItems = items.filter(i => i.priority === 'next')
+
+    const lines: string[] = []
+    lines.push(`🎯 **Daily Priorities** (${nowItems.length} NOW, ${nextItems.length} NEXT)\n`)
+
+    let rank = 1
+    for (const item of nowItems) {
+      let context: any = null
+      try { context = item.notes ? JSON.parse(item.notes) : null } catch { context = null }
+
+      const valuePart = context?.amount || context?.value ? ` — $${Number(context.amount || context.value).toLocaleString()}` : ''
+      const projectPart = item.project_code ? ` [${item.project_code}]` : ''
+      const actionPart = context?.action ? `\n   → ${context.action}` : ''
+
+      lines.push(`${rank}. 🔴 **${item.title}**${valuePart}${projectPart}${actionPart}`)
+      rank++
+    }
+
+    if (nextItems.length > 0 && nowItems.length > 0) {
+      lines.push('')
+    }
+
+    for (const item of nextItems) {
+      let context: any = null
+      try { context = item.notes ? JSON.parse(item.notes) : null } catch { context = null }
+
+      const valuePart = context?.amount || context?.value ? ` — $${Number(context.amount || context.value).toLocaleString()}` : ''
+      const projectPart = item.project_code ? ` [${item.project_code}]` : ''
+      const actionPart = context?.action ? `\n   → ${context.action}` : ''
+
+      lines.push(`${rank}. 🟡 ${item.title}${valuePart}${projectPart}${actionPart}`)
+      rank++
+    }
+
+    return lines.join('\n')
+  } catch (err: any) {
+    return `Error: ${err.message}`
   }
 }
 
@@ -5572,30 +3637,9 @@ async function executeAddDecision(input: {
 
 async function executeGetProjectFinancials(input: { project_code?: string }): Promise<string> {
   try {
-    let query = supabase.from('v_project_financials').select('*')
-    if (input.project_code) {
-      query = query.eq('code', input.project_code)
-    }
-    const { data, error } = await query
-
-    if (error) return JSON.stringify({ error: error.message })
-    if (!data || data.length === 0) return JSON.stringify({ message: 'No financial data found' })
-
-    const projects = data.map((p: Record<string, unknown>) => ({
-      code: p.code,
-      name: p.name,
-      tier: p.tier,
-      fy_income: Math.round(Number(p.fy_income || 0)),
-      fy_expenses: Math.round(Number(p.fy_expenses || 0)),
-      net_position: Math.round(Number(p.net_position || 0)),
-      receivable: Math.round(Number(p.receivable || 0)),
-      pipeline_value: Math.round(Number(p.pipeline_value || 0)),
-      grant_funding: Math.round(Number(p.grant_funding || 0)),
-      monthly_subscriptions: Math.round(Number(p.monthly_subscriptions || 0)),
-      transaction_count: Number(p.transaction_count || 0),
-    }))
-
-    return JSON.stringify({ projects, count: projects.length })
+    const result = await fetchProjectFinancials(supabase, { projectCode: input.project_code })
+    if (result.count === 0) return JSON.stringify({ message: 'No financial data found' })
+    return JSON.stringify(result)
   } catch (err) {
     return JSON.stringify({ error: (err as Error).message })
   }
@@ -5719,54 +3763,8 @@ async function executeTriggerAutoTag(input: { dry_run?: boolean }): Promise<stri
 async function executeGetReceiptPipelineStatus(input: {
   include_stuck?: boolean
 }): Promise<string> {
-  const includeStuck = input.include_stuck !== false
-
   try {
-    // Get funnel summary from the view
-    const { data: funnel, error: funnelError } = await supabase
-      .from('v_receipt_pipeline_funnel')
-      .select('*')
-
-    if (funnelError) {
-      return JSON.stringify({ error: funnelError.message })
-    }
-
-    const stages = (funnel || []).map((s) => ({
-      stage: s.stage,
-      count: s.count,
-      total: `$${Number(s.total_amount).toFixed(2)}`,
-      oldest: s.oldest_date,
-      newest: s.newest_date,
-      stuck_count: s.stuck_count,
-    }))
-
-    const totalItems = stages.reduce((sum, s) => sum + (s.count || 0), 0)
-    const result: Record<string, unknown> = {
-      total_items: totalItems,
-      stages,
-    }
-
-    // Get stuck items (>14 days in non-terminal stages)
-    if (includeStuck) {
-      const { data: stuckItems } = await supabase
-        .from('receipt_pipeline_status')
-        .select('vendor_name, amount, transaction_date, stage, updated_at')
-        .not('stage', 'eq', 'reconciled')
-        .lt('updated_at', new Date(Date.now() - 14 * 86400000).toISOString())
-        .order('transaction_date', { ascending: true })
-        .limit(15)
-
-      if (stuckItems && stuckItems.length > 0) {
-        result.stuck_items = stuckItems.map((item) => ({
-          vendor: item.vendor_name || 'Unknown',
-          amount: `$${Number(item.amount).toFixed(2)}`,
-          date: item.transaction_date,
-          stage: item.stage,
-          days_stuck: Math.floor((Date.now() - new Date(item.updated_at).getTime()) / 86400000),
-        }))
-      }
-    }
-
+    const result = await fetchReceiptPipeline(supabase, { includeStuck: input.include_stuck })
     return JSON.stringify(result)
   } catch (err) {
     return JSON.stringify({ error: (err as Error).message })
@@ -6100,75 +4098,12 @@ async function executeGetGrantReadiness(input: {
   grant_name?: string
 }): Promise<string> {
   try {
-    let query = supabase
-      .from('v_grant_readiness')
-      .select('*')
-
-    if (input.application_id) {
-      query = query.eq('application_id', input.application_id)
-    } else if (input.grant_name) {
-      query = query.ilike('grant_name', `%${input.grant_name}%`)
-    }
-
-    const { data: readiness, error } = await query.limit(5)
-
-    if (error) return JSON.stringify({ error: error.message })
-    if (!readiness || readiness.length === 0) {
-      return JSON.stringify({ message: 'No matching grant applications found.' })
-    }
-
-    // For each application, get available reusable assets
-    const results = await Promise.all(
-      readiness.map(async (app) => {
-        // Get missing requirement types
-        const { data: requirements } = await supabase
-          .from('grant_application_requirements')
-          .select('requirement_type, status, notes')
-          .eq('application_id', app.application_id)
-
-        const missing = (requirements || []).filter((r) => r.status === 'needed')
-        const ready = (requirements || []).filter((r) => r.status === 'ready' || r.status === 'submitted')
-
-        // Get reusable assets that could fill gaps
-        const { data: assets } = await supabase
-          .from('grant_assets')
-          .select('name, category, asset_type, is_current, expires_at')
-          .eq('is_current', true)
-          .limit(20)
-
-        const daysUntilClose = app.closes_at
-          ? Math.floor((new Date(app.closes_at).getTime() - Date.now()) / 86400000)
-          : null
-
-        return {
-          grant_name: app.grant_name,
-          provider: app.provider,
-          status: app.application_status,
-          readiness_pct: app.readiness_pct,
-          days_until_close: daysUntilClose,
-          closes_at: app.closes_at,
-          total_requirements: app.total_requirements,
-          ready_count: app.ready_count,
-          missing_docs: missing.map((m) => ({
-            type: m.requirement_type,
-            notes: m.notes,
-          })),
-          ready_docs: ready.map((r) => r.requirement_type),
-          available_assets: (assets || []).map((a) => ({
-            name: a.name,
-            category: a.category,
-            type: a.asset_type,
-            expires: a.expires_at,
-          })),
-          milestones: {
-            total: app.total_milestones,
-            completed: app.completed_milestones,
-          },
-        }
-      })
-    )
-
-    return JSON.stringify({ applications: results })
+    const result = await fetchGrantReadiness(supabase, {
+      application_id: input.application_id,
+      grant_name: input.grant_name,
+    })
+    if (result.count === 0) return JSON.stringify({ message: 'No matching grant applications found.' })
+    return JSON.stringify({ applications: result.applications })
   } catch (err) {
     return JSON.stringify({ error: (err as Error).message })
   }
@@ -6316,124 +4251,200 @@ Write the draft as ready-to-submit content. Be specific, use real details from t
 
 async function executeGetRevenueScoreboard(): Promise<string> {
   try {
-    const [streamsResult, pipelineResult, scenariosResult, projectsResult] = await Promise.all([
-      supabase.from('revenue_streams').select('*').eq('status', 'active'),
-      supabase.from('fundraising_pipeline').select('*'),
-      supabase.from('revenue_scenarios').select('*'),
-      supabase.from('projects').select('name, code, status'),
-    ])
+    const result = await fetchRevenueScoreboard(supabase)
+    return JSON.stringify({
+      ...result,
+      summary: {
+        monthlyTarget: result.streams.totalMonthlyTarget,
+        annualTarget: result.streams.totalAnnualTarget,
+        pipelineWeighted: result.pipeline.weightedValue,
+        receivablesOutstanding: result.receivables.total,
+        pipelineCount: result.pipeline.count,
+        activeProjects: result.projects.active,
+      },
+    })
+  } catch (err) {
+    return JSON.stringify({ error: (err as Error).message })
+  }
+}
 
-    const streams = streamsResult.data || []
-    const pipeline = pipelineResult.data || []
-    const scenarios = scenariosResult.data || []
-    const projects = projectsResult.data || []
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// TOOL: save_dream
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-    // Revenue streams summary
-    const totalMonthlyTarget = streams.reduce(
-      (sum: number, s: { target_monthly: string }) => sum + parseFloat(s.target_monthly || '0'),
-      0,
-    )
+// Auto-categorise based on content keywords
+function autoCategorizeDream(content: string): string {
+  const lower = content.toLowerCase()
+  if (/\b(imagine|vision|future|could be|one day|picture this|what if)\b/.test(lower)) return 'vision'
+  if (/\b(dream|dreamt|dreaming|asleep|woke up)\b/.test(lower)) return 'dream'
+  if (/\b(story|told me|remember when|once upon|narrative)\b/.test(lower)) return 'story'
+  if (/\b(grateful|thankful|love|beautiful|heart|moved|tears)\b/.test(lower)) return 'love'
+  if (/\b(excited|amazing|incredible|can't wait|pumped|stoked|fuck yeah)\b/.test(lower)) return 'excitement'
+  if (/\b(idea|what if we|we could|concept|proposal|pitch)\b/.test(lower)) return 'idea'
+  if (/\b(learned|realised|realized|reflect|thinking about|insight)\b/.test(lower)) return 'reflection'
+  if (/\b(visited|went to|saw|experienced|felt|heard|tasted)\b/.test(lower)) return 'experience'
+  return 'dream'
+}
 
-    // Pipeline analysis
-    let totalPipelineValue = 0
-    let totalWeightedValue = 0
-    let totalReceivables = 0
-    const pipelineByStatus: Record<string, { count: number; totalValue: number; weightedValue: number }> = {}
+// Auto-tag based on content
+function autoTagDream(content: string): string[] {
+  const lower = content.toLowerCase()
+  const tags: string[] = []
+  const tagMap: Record<string, string[]> = {
+    'the-harvest': ['harvest', 'witta', 'maleny', 'gumland', 'cafe', 'garden centre', 'market'],
+    'black-cockatoo-valley': ['black cockatoo', 'cockatoo valley', 'bunya', 'farm', '40 acres', 'paddock', 'bush', 'regenerative land', 'glamping'],
+    'palm-island': ['palm island', 'picc', 'elders', 'uncle allan', 'torres strait', 'first nations'],
+    'goods': ['goods on country', 'orange sky', 'laundry', 'washing machine', 'fleet'],
+    'empathy-ledger': ['empathy ledger', 'storytelling', 'narrative', 'stories'],
+    'justicehub': ['justice', 'incarceration', 'legal', 'prison', 'contained'],
+    'art': ['art', 'installation', 'sculpture', 'exhibition', 'gallery', 'projection'],
+    'community': ['community', 'gathering', 'together', 'people', 'connection'],
+    'nature': ['nature', 'trees', 'bush', 'creek', 'birds', 'wildlife', 'regenerative'],
+    'technology': ['tech', 'iot', 'sensor', 'dashboard', 'spatial', 'ar', 'vr', 'ai'],
+    'revenue': ['revenue', 'business model', 'income', 'funding', 'grant', 'commercial'],
+  }
+  for (const [tag, keywords] of Object.entries(tagMap)) {
+    if (keywords.some(kw => lower.includes(kw))) tags.push(tag)
+  }
+  return tags
+}
 
-    for (const item of pipeline) {
-      const amount = parseFloat(item.amount || '0')
-      const probability = parseFloat(item.probability || '0')
-      const weighted = amount * probability
-      const status = item.status || 'unknown'
+// Generate a title from content
+function generateDreamTitle(content: string): string {
+  // Take first meaningful sentence, clean and truncate
+  const firstLine = content.split(/[.!?\n]/)[0].trim()
+  if (firstLine.length <= 60) return firstLine
+  return firstLine.slice(0, 57) + '...'
+}
 
-      if (!pipelineByStatus[status]) {
-        pipelineByStatus[status] = { count: 0, totalValue: 0, weightedValue: 0 }
-      }
-      pipelineByStatus[status].count++
-      pipelineByStatus[status].totalValue += amount
-      pipelineByStatus[status].weightedValue += weighted
+// Find linked projects from content
+function findLinkedProjects(content: string): string[] {
+  const lower = content.toLowerCase()
+  const projects: string[] = []
+  const projectKeywords: Record<string, string[]> = {
+    'ACT-HV': ['harvest', 'witta', 'maleny', 'gumland', 'cafe'],
+    'ACT-FM': ['black cockatoo', 'cockatoo valley', 'bunya', 'farm', '40 acres', 'paddock', 'glamping', 'art trail'],
+    'ACT-PI': ['palm island', 'picc', 'elders', 'uncle allan'],
+    'ACT-GD': ['goods on country', 'orange sky', 'laundry', 'washing'],
+    'ACT-EL': ['empathy ledger', 'storytelling platform'],
+    'ACT-JH': ['justicehub', 'justice hub', 'contained', 'incarceration'],
+    'ACT-AR': ['art', 'installation', 'sculpture', 'studio practice'],
+    'ACT-IN': ['bot', 'intelligence', 'alma', 'agent', 'telegram'],
+  }
+  for (const [code, keywords] of Object.entries(projectKeywords)) {
+    if (keywords.some(kw => lower.includes(kw))) projects.push(code)
+  }
+  return projects
+}
 
-      if (item.type === 'receivable') {
-        totalReceivables += amount
-      } else {
-        totalPipelineValue += amount
-        totalWeightedValue += weighted
-      }
+async function executeSaveDream(
+  input: { content: string; title?: string; category?: string; tags?: string[]; media_url?: string; media_type?: string },
+  chatId?: number
+): Promise<string> {
+  try {
+    const content = input.content
+    const category = input.category || autoCategorizeDream(content)
+    const autoTags = autoTagDream(content)
+    const tags = [...new Set([...(input.tags || []), ...autoTags])]
+    const title = input.title || generateDreamTitle(content)
+    const linkedProjects = findLinkedProjects(content)
+
+    // Save to Supabase
+    const entry = {
+      title,
+      content,
+      category,
+      tags,
+      source: chatId ? 'telegram' : 'api',
+      author: 'benjamin',
+      telegram_chat_id: chatId || null,
+      media_url: input.media_url || null,
+      media_type: input.media_type || null,
+      ai_linked_projects: linkedProjects,
+      ai_themes: tags.slice(0, 5),
     }
 
-    // Top opportunities (non-receivables, sorted by weighted value)
-    const topOpportunities = pipeline
-      .filter((p: { type: string }) => p.type !== 'receivable')
-      .map((p: { name: string; funder: string; amount: string; probability: string; status: string; expected_date: string; project_codes: string[] }) => ({
-        name: p.name,
-        funder: p.funder,
-        amount: parseFloat(p.amount || '0'),
-        probability: parseFloat(p.probability || '0'),
-        weighted: parseFloat(p.amount || '0') * parseFloat(p.probability || '0'),
-        status: p.status,
-        expectedDate: p.expected_date,
-        projects: p.project_codes,
-      }))
-      .sort((a: { weighted: number }, b: { weighted: number }) => b.weighted - a.weighted)
-      .slice(0, 10)
+    const { data, error } = await supabase
+      .from('dream_journal')
+      .insert(entry)
+      .select('id, title, category, tags, ai_linked_projects')
+      .single()
 
-    // Receivables
-    const receivables = pipeline
-      .filter((p: { type: string }) => p.type === 'receivable')
-      .map((p: { name: string; funder: string; amount: string; notes: string }) => ({
-        name: p.name,
-        funder: p.funder,
-        amount: parseFloat(p.amount || '0'),
-        notes: p.notes,
-      }))
+    if (error) {
+      return JSON.stringify({ error: error.message })
+    }
 
-    // Revenue scenarios
-    const scenarioSummary = scenarios.map(
-      (s: { name: string; description: string; annual_targets: Record<string, number> }) => ({
-        name: s.name,
-        description: s.description,
-        targets: s.annual_targets,
-      }),
-    )
+    // Find related entries
+    const { data: related } = await supabase
+      .from('dream_journal')
+      .select('id, title, category, tags')
+      .neq('id', data.id)
+      .overlaps('tags', tags.slice(0, 3))
+      .order('created_at', { ascending: false })
+      .limit(3)
 
-    const activeProjects = projects.filter((p: { status: string }) => p.status === 'active')
+    const emoji: Record<string, string> = {
+      dream: '🌙', story: '📖', reflection: '🪞', excitement: '🔥',
+      idea: '💡', experience: '🌿', love: '❤️', vision: '🔮',
+    }
 
     return JSON.stringify({
-      timestamp: new Date().toISOString(),
-      streams: {
-        items: streams.map((s: { name: string; code: string; category: string; target_monthly: string }) => ({
-          name: s.name,
-          code: s.code,
-          category: s.category,
-          monthlyTarget: parseFloat(s.target_monthly || '0'),
-        })),
-        totalMonthlyTarget,
-        totalAnnualTarget: totalMonthlyTarget * 12,
-      },
-      pipeline: {
-        byStatus: pipelineByStatus,
-        totalValue: totalPipelineValue,
-        weightedValue: totalWeightedValue,
-        topOpportunities,
-        count: pipeline.filter((p: { type: string }) => p.type !== 'receivable').length,
-      },
-      receivables: {
-        total: totalReceivables,
-        items: receivables,
-      },
-      scenarios: scenarioSummary,
-      projects: {
-        active: activeProjects.length,
-        total: projects.length,
-      },
-      summary: {
-        monthlyTarget: totalMonthlyTarget,
-        annualTarget: totalMonthlyTarget * 12,
-        pipelineWeighted: totalWeightedValue,
-        receivablesOutstanding: totalReceivables,
-        pipelineCount: pipeline.filter((p: { type: string }) => p.type !== 'receivable').length,
-        activeProjects: activeProjects.length,
-      },
+      saved: true,
+      id: data.id,
+      title: data.title,
+      category: data.category,
+      tags: data.tags,
+      linkedProjects: data.ai_linked_projects,
+      relatedEntries: related?.map(r => ({ id: r.id, title: r.title, category: r.category })) || [],
+      message: `${emoji[category] || '✨'} Saved to Dream Journal as "${title}" [${category}]${tags.length ? ` — tagged: ${tags.join(', ')}` : ''}${linkedProjects.length ? ` — linked to: ${linkedProjects.join(', ')}` : ''}${related?.length ? `\n\n🔗 Related dreams: ${related.map(r => `"${r.title}"`).join(', ')}` : ''}`,
+    })
+  } catch (err) {
+    return JSON.stringify({ error: (err as Error).message })
+  }
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// TOOL: search_dreams
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+async function executeSearchDreams(
+  input: { query?: string; category?: string; limit?: number }
+): Promise<string> {
+  try {
+    const limit = input.limit || 10
+
+    let query = supabase
+      .from('dream_journal')
+      .select('id, title, content, category, tags, ai_linked_projects, ai_themes, source, created_at')
+      .order('created_at', { ascending: false })
+      .limit(limit)
+
+    if (input.category) {
+      query = query.eq('category', input.category)
+    }
+
+    if (input.query) {
+      query = query.or(`content.ilike.%${input.query}%,title.ilike.%${input.query}%`)
+    }
+
+    const { data, error } = await query
+
+    if (error) {
+      return JSON.stringify({ error: error.message })
+    }
+
+    return JSON.stringify({
+      count: data?.length || 0,
+      entries: data?.map(e => ({
+        id: e.id,
+        title: e.title,
+        category: e.category,
+        tags: e.tags,
+        linkedProjects: e.ai_linked_projects,
+        source: e.source,
+        preview: e.content?.slice(0, 200),
+        created: e.created_at,
+      })),
     })
   } catch (err) {
     return JSON.stringify({ error: (err as Error).message })

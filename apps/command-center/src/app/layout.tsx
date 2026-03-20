@@ -5,6 +5,7 @@ import { TopNav } from '@/components/top-nav'
 import { Sidebar } from '@/components/sidebar/sidebar'
 import { SidebarProvider } from '@/components/sidebar/sidebar-context'
 import { Providers } from '@/components/providers'
+import { ErrorBoundary } from '@/components/error-boundary'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 
@@ -36,7 +37,9 @@ export default function RootLayout({
             <div className="flex">
               <Sidebar />
               <main className="flex-1 min-h-[calc(100vh-3.5rem)] overflow-x-hidden">
-                {children}
+                <ErrorBoundary>
+                  {children}
+                </ErrorBoundary>
               </main>
             </div>
           </SidebarProvider>
