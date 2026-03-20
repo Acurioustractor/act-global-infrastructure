@@ -41,7 +41,7 @@ export function FinanceSummary() {
 
       {finance ? (
         <div className="space-y-3">
-          <Link href="/finance" className="glass-card-sm p-3 block hover:border-green-500/30 transition-all">
+          <Link href="/finance/overview" className="glass-card-sm p-3 block hover:border-green-500/30 transition-all">
             <div className="flex items-center justify-between">
               <span className="text-xs text-white/50">Net Position</span>
               <span className="text-lg font-bold text-green-400">
@@ -51,13 +51,13 @@ export function FinanceSummary() {
           </Link>
 
           <div className="grid grid-cols-2 gap-2">
-            <Link href="/finance" className="glass-card-sm p-2 text-center hover:border-emerald-500/30 transition-all">
+            <Link href="/finance/overview" className="glass-card-sm p-2 text-center hover:border-emerald-500/30 transition-all">
               <p className="text-sm font-semibold text-emerald-400">
                 ${(finance.receivables?.total || 0).toLocaleString()}
               </p>
               <p className="text-xs text-white/40">Receivable</p>
             </Link>
-            <Link href="/finance" className="glass-card-sm p-2 text-center hover:border-orange-500/30 transition-all">
+            <Link href="/finance/accountant" className="glass-card-sm p-2 text-center hover:border-orange-500/30 transition-all">
               <p className="text-sm font-semibold text-orange-400">
                 ${(finance.payables?.total || 0).toLocaleString()}
               </p>
@@ -66,7 +66,7 @@ export function FinanceSummary() {
           </div>
 
           {overdueInvoices.count > 0 && (
-            <Link href="/finance" className="glass-card-sm p-2 bg-red-500/10 border-red-500/20 block hover:bg-red-500/20 transition-all">
+            <Link href="/finance/accountant" className="glass-card-sm p-2 bg-red-500/10 border-red-500/20 block hover:bg-red-500/20 transition-all">
               <div className="flex items-center gap-2">
                 <Receipt className="h-4 w-4 text-red-400" />
                 <span className="text-xs text-red-400">

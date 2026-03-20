@@ -9,6 +9,8 @@ const labelMap: Record<string, string> = {
   overview: 'Unified Overview',
   projects: 'Projects P&L',
   board: 'Board Report',
+  tagger: 'Transaction Tagger',
+  reconciliation: 'Reconciliation',
   accountant: 'Accountant',
   'revenue-planning': 'Revenue Planning',
   'pipeline-kanban': 'Pipeline Kanban',

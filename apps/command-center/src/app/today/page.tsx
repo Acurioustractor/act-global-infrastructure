@@ -44,6 +44,8 @@ import { PriorityInbox } from '@/components/today/priority-inbox'
 import { WeeklyDigestCard } from '@/components/today/weekly-digest'
 import { EcosystemPulse } from '@/components/today/ecosystem-pulse'
 import { PartnerTouchpoints } from '@/components/today/partner-touchpoints'
+import { DailyPriorities } from '@/components/today/daily-priorities'
+import { PipelineSnapshot } from '@/components/today/pipeline-snapshot'
 
 const REFRESH_INTERVAL = 30 * 1000
 
@@ -224,30 +226,44 @@ export default function TodayPage() {
           <PartnerTouchpoints />
         </div>
 
-        {/* CENTER COLUMN: Ecosystem Pulse + Project Pulse + Priority Inbox */}
+        {/* CENTER COLUMN: Priorities + Ecosystem Pulse + Project Pulse + Priority Inbox */}
         <div className="order-2 lg:col-span-4 space-y-4 md:space-y-6">
+          <DailyPriorities />
           <EcosystemPulse />
           <ProjectPulseGrid />
           <PriorityInbox />
 
-          {/* Wiki Quick Access */}
-          <Link href="/wiki" className="glass-card p-5 block hover:border-indigo-500/30 transition-all group">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500/20 to-purple-500/20 flex items-center justify-center">
-                <BookOpen className="h-5 w-5 text-indigo-400" />
+          {/* Wiki & Dream Journal Quick Access */}
+          <div className="grid grid-cols-2 gap-3">
+            <Link href="/wiki" className="glass-card p-4 block hover:border-indigo-500/30 transition-all group">
+              <div className="flex items-center gap-3">
+                <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-500/20 to-purple-500/20 flex items-center justify-center">
+                  <BookOpen className="h-4 w-4 text-indigo-400" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <h2 className="font-semibold text-sm text-white group-hover:text-indigo-300 transition-colors">ACT Wiki</h2>
+                  <p className="text-[11px] text-white/50 truncate">Mission & stories</p>
+                </div>
               </div>
-              <div className="flex-1">
-                <h2 className="font-semibold text-white group-hover:text-indigo-300 transition-colors">ACT Wiki</h2>
-                <p className="text-xs text-white/50">Mission, methodology & stories</p>
+            </Link>
+            <Link href="/dreams" className="glass-card p-4 block hover:border-purple-500/30 transition-all group">
+              <div className="flex items-center gap-3">
+                <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-purple-500/20 to-pink-500/20 flex items-center justify-center">
+                  <Edit3 className="h-4 w-4 text-purple-400" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <h2 className="font-semibold text-sm text-white group-hover:text-purple-300 transition-colors">Dream Journal</h2>
+                  <p className="text-[11px] text-white/50 truncate">Love & future wiki</p>
+                </div>
               </div>
-              <ChevronRight className="h-4 w-4 text-white/30 group-hover:text-indigo-400 transition-colors" />
-            </div>
-          </Link>
+            </Link>
+          </div>
         </div>
 
-        {/* RIGHT COLUMN: Finance + Pipeline + Deadlines + Business */}
+        {/* RIGHT COLUMN: Finance + Pipeline Snapshot + Grants + Deadlines + Business */}
         <div className="order-3 lg:col-span-4 space-y-4 md:space-y-6">
           <FinanceSummary />
+          <PipelineSnapshot />
           <GrantsPipeline />
           <UpcomingDeadlines />
           <WeeklyDigestCard />
@@ -257,13 +273,13 @@ export default function TodayPage() {
           <div className="glass-card p-5">
             <h2 className="font-semibold text-white mb-4">Quick Links</h2>
             <div className="space-y-2">
-              <Link href="/opportunities" className="flex items-center gap-3 py-2 px-2 rounded-lg hover:bg-white/5 transition-colors">
+              <Link href="/pipeline" className="flex items-center gap-3 py-2 px-2 rounded-lg hover:bg-white/5 transition-colors">
                 <FolderKanban className="h-4 w-4 text-indigo-400" />
                 <span className="text-sm text-white">Pipeline Board</span>
               </Link>
-              <Link href="/reports" className="flex items-center gap-3 py-2 px-2 rounded-lg hover:bg-white/5 transition-colors">
+              <Link href="/finance/reconciliation" className="flex items-center gap-3 py-2 px-2 rounded-lg hover:bg-white/5 transition-colors">
                 <ListChecks className="h-4 w-4 text-emerald-400" />
-                <span className="text-sm text-white">Weekly Report</span>
+                <span className="text-sm text-white">Reconciliation</span>
               </Link>
               <Link href="/knowledge" className="flex items-center gap-3 py-2 px-2 rounded-lg hover:bg-white/5 transition-colors">
                 <Brain className="h-4 w-4 text-violet-400" />

@@ -66,7 +66,7 @@ export function QuickStats() {
       icon: FolderKanban,
       color: 'text-indigo-400',
       bg: 'bg-indigo-500/20',
-      href: '/compendium',
+      href: '/projects',
     },
     {
       label: 'Pipeline',

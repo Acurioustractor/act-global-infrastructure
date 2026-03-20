@@ -1,11 +1,13 @@
 'use client'
 
 import { useQuery } from '@tanstack/react-query'
+import Link from 'next/link'
 import {
   Sparkles,
   AlertTriangle,
   TrendingUp,
   Calendar,
+  ChevronRight,
 } from 'lucide-react'
 import { getMorningBriefing } from '@/lib/api'
 
@@ -54,48 +56,52 @@ export function MorningBriefing() {
 
       {/* Quick Summary Stats */}
       <div className="grid grid-cols-3 gap-3">
-        <div className="glass-card-sm p-3 text-center">
+        <Link href="/knowledge/actions" className="glass-card-sm p-3 text-center hover:border-orange-500/30 transition-all">
           <div className="flex items-center justify-center gap-1.5 mb-1">
             <AlertTriangle className="h-3.5 w-3.5 text-orange-400" />
             <span className="text-lg font-bold text-white">{summary.urgentItems}</span>
           </div>
           <p className="text-xs text-white/50">Urgent</p>
-        </div>
-        <div className="glass-card-sm p-3 text-center">
+        </Link>
+        <Link href="/calendar" className="glass-card-sm p-3 text-center hover:border-blue-500/30 transition-all">
           <div className="flex items-center justify-center gap-1.5 mb-1">
             <Calendar className="h-3.5 w-3.5 text-blue-400" />
             <span className="text-lg font-bold text-white">{summary.meetingsToday}</span>
           </div>
           <p className="text-xs text-white/50">Meetings</p>
-        </div>
-        <div className="glass-card-sm p-3 text-center">
+        </Link>
+        <Link href="/pipeline" className="glass-card-sm p-3 text-center hover:border-green-500/30 transition-all">
           <div className="flex items-center justify-center gap-1.5 mb-1">
             <TrendingUp className="h-3.5 w-3.5 text-green-400" />
             <span className="text-lg font-bold text-white">{formatCurrency(summary.pipelineValue)}</span>
           </div>
           <p className="text-xs text-white/50">Pipeline</p>
-        </div>
+        </Link>
       </div>
 
       {/* Overdue Actions Preview */}
       {actions.overdueCount > 0 && (
         <div>
-          <p className="text-xs text-white/40 uppercase tracking-wide mb-2">Overdue Actions</p>
-          <div className="space-y-1.5">
+          <Link href="/knowledge/actions" className="text-xs text-white/40 uppercase tracking-wide mb-2 flex items-center gap-1 hover:text-white/60 transition-colors">
+            Overdue Actions
+            <ChevronRight className="h-3 w-3" />
+          </Link>
+          <div className="space-y-1.5 mt-2">
             {actions.overdue.slice(0, 3).map((action) => (
-              <div
+              <Link
                 key={action.id}
-                className="glass-card-sm p-2.5 flex items-center gap-2"
+                href="/knowledge/actions"
+                className="glass-card-sm p-2.5 flex items-center gap-2 hover:border-orange-500/30 transition-all"
               >
                 <div className="w-1.5 h-1.5 rounded-full bg-orange-400 flex-shrink-0" />
                 <p className="text-sm text-white/70 truncate flex-1">{action.title}</p>
                 <span className="text-xs text-orange-400/70">{action.daysOverdue}d</span>
-              </div>
+              </Link>
             ))}
             {actions.overdueCount > 3 && (
-              <p className="text-xs text-white/40 text-center pt-1">
-                +{actions.overdueCount - 3} more overdue
-              </p>
+              <Link href="/knowledge/actions" className="text-xs text-orange-400/50 text-center pt-1 block hover:text-orange-400 transition-colors">
+                +{actions.overdueCount - 3} more overdue →
+              </Link>
             )}
           </div>
         </div>
