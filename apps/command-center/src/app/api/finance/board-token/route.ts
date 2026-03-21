@@ -15,7 +15,7 @@ function generateToken(): { token: string; expires: number } {
   return { token, expires }
 }
 
-export function verifyBoardToken(token: string): boolean {
+function verifyBoardToken(token: string): boolean {
   try {
     const decoded = Buffer.from(token, 'base64url').toString()
     const parts = decoded.split(':')
