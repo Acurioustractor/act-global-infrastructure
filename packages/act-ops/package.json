@@ -1,0 +1,19 @@
+{
+  "name": "@act/ops",
+  "version": "0.1.0",
+  "description": "ACT operational SDK — health monitoring, clients, and automation utilities",
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/*.test.mjs"
+  },
+  "exports": {
+    "./health": "./src/health/index.mjs",
+    "./clients/supabase": "./src/clients/supabase.mjs"
+  },
+  "files": [
+    "src"
+  ],
+  "dependencies": {
+    "@supabase/supabase-js": "^2.89.0"
+  }
+}
