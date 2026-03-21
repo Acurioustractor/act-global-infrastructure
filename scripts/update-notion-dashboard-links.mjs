@@ -16,18 +16,16 @@
  *   DASHBOARD_BASE_URL             - Dashboard URL (default: https://act-command-center.vercel.app)
  */
 
+import '../lib/load-env.mjs';
 import { Client } from '@notionhq/client';
 import { loadProjectsConfig } from './lib/project-loader.mjs';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
-import dotenv from 'dotenv';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 // Load env (override: true so .env.local wins over stale shell env vars from direnv)
-dotenv.config({ path: join(__dirname, '..', 'apps', 'command-center', '.env.local'), override: true });
-dotenv.config({ path: join(__dirname, '..', '.env.local'), override: true });
 
 const args = process.argv.slice(2);
 const DRY_RUN = args.includes('--dry-run');

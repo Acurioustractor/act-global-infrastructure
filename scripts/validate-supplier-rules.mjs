@@ -11,15 +11,14 @@
  *   node scripts/validate-supplier-rules.mjs missing   # Show only missing vendors
  */
 
+import '../lib/load-env.mjs';
 import { createClient } from '@supabase/supabase-js';
-import dotenv from 'dotenv';
 import { readFileSync } from 'fs';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-dotenv.config({ path: join(__dirname, '../.env.local') });
 
 // Load supplier rules
 const rulesPath = join(__dirname, '../config/dext-supplier-rules.json');

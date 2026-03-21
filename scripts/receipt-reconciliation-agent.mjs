@@ -28,10 +28,8 @@
  * Created: 2026-01-24
  */
 
+import '../lib/load-env.mjs';
 import { createClient } from '@supabase/supabase-js';
-import dotenv from 'dotenv';
-
-dotenv.config({ path: '.env.local' });
 
 // Import modules
 import {

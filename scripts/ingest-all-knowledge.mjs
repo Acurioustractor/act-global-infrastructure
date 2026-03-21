@@ -14,11 +14,9 @@
  *   - SUPABASE_SERVICE_ROLE_KEY
  */
 
+import '../lib/load-env.mjs';
 import { fileURLToPath } from 'url';
 import { dirname, resolve } from 'path';
-import dotenv from 'dotenv';
-
-dotenv.config({ path: '.env.local' });
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);

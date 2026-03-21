@@ -14,16 +14,15 @@
  *   node scripts/lib/transaction-pattern-detector.mjs --days=365
  */
 
+import '../../lib/load-env.mjs';
 import { createClient } from '@supabase/supabase-js';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
-import dotenv from 'dotenv';
 import { readFileSync } from 'fs';
 
 // Load environment
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-dotenv.config({ path: join(__dirname, '../../.env.local') });
 
 // Load supplier rules for vendor matching
 let SUPPLIER_RULES = {};

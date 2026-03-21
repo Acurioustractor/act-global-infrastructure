@@ -11,15 +11,14 @@
  * Run via cron: 0,15,30,45 * * * * node /path/to/agent-heartbeat.mjs
  */
 
+import '../lib/load-env.mjs';
 import { createClient } from '@supabase/supabase-js';
-import dotenv from 'dotenv';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 
 // Load env vars before anything else
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-dotenv.config({ path: join(__dirname, '../.env.local') });
 
 const STALE_THRESHOLD_MINUTES = 60; // Agent is stale after 1 hour
 const CRITICAL_AGENTS = ['dispatcher', 'cultivator', 'shepherd']; // These should always be active

@@ -15,10 +15,8 @@
  *   node scripts/embed-communications.mjs --limit 50     # Only process first 50
  */
 
-import dotenv from 'dotenv';
+import '../lib/load-env.mjs';
 import { join } from 'path';
-
-dotenv.config({ path: join(import.meta.dirname, '..', '.env.local'), override: true });
 
 import { createClient } from '@supabase/supabase-js';
 import { trackedBatchEmbedding } from './lib/llm-client.mjs';

@@ -18,17 +18,15 @@
  *   NOTION_TOKEN - Notion API token
  */
 
+import '../lib/load-env.mjs';
 import { Client } from '@notionhq/client';
 import { readFileSync, existsSync, writeFileSync } from 'fs';
 import { loadProjectsConfig } from './lib/project-loader.mjs';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
-import dotenv from 'dotenv';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-
-dotenv.config({ path: join(__dirname, '..', '.env.local'), override: true });
 
 function parseArgs() {
   const args = process.argv.slice(2);

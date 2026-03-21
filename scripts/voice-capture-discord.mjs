@@ -30,13 +30,11 @@
  *   DISCORD_WEBHOOK_VOICE - Webhook for voice note channel
  */
 
+import '../lib/load-env.mjs';
 import { createClient } from '@supabase/supabase-js';
 import { readFileSync, writeFileSync, existsSync } from 'fs';
 import { loadProjectsConfig } from './lib/project-loader.mjs';
 import { createServer } from 'http';
-import dotenv from 'dotenv';
-
-dotenv.config({ path: '.env.local' });
 
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://tednluwflfhxyucgwigh.supabase.co';

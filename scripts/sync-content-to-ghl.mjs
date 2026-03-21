@@ -28,13 +28,12 @@
  *   CONTENT_HUB_API_KEY - Empathy Ledger Content Hub API key (optional)
  */
 
-import dotenv from 'dotenv';
+import '../lib/load-env.mjs';
 import { createGHLSocialService, ralphToGHLPost } from './lib/ghl-social-service.mjs';
 import { createEmpathyLedgerService } from './lib/empathy-ledger-content.mjs';
 import databaseIds from '../config/notion-database-ids.json' with { type: 'json' };
 
 // Load environment variables from .env.local
-dotenv.config({ path: '.env.local' });
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // CONFIGURATION

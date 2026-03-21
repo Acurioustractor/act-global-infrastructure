@@ -15,14 +15,13 @@
  *   --verbose     Show detailed output
  */
 
+import '../lib/load-env.mjs';
 import { createClient } from '@supabase/supabase-js';
-import dotenv from 'dotenv';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-dotenv.config({ path: join(__dirname, '..', '.env.local'), override: true });
 
 async function main() {
   console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');

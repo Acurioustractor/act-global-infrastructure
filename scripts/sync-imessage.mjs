@@ -27,14 +27,13 @@
  *   node scripts/sync-imessage.mjs --describe-images # Re-run AI descriptions
  */
 
-import dotenv from 'dotenv';
+import '../lib/load-env.mjs';
 import { join, basename, extname } from 'path';
 import { existsSync, readFileSync, copyFileSync, mkdirSync } from 'fs';
 import { homedir } from 'os';
 import { execSync } from 'child_process';
 
 // Load env before other imports
-dotenv.config({ path: join(import.meta.dirname, '..', '.env.local'), override: true });
 
 import { createClient } from '@supabase/supabase-js';
 import { trackedBatchEmbedding, trackedCompletion } from './lib/llm-client.mjs';

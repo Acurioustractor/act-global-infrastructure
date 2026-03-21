@@ -10,13 +10,11 @@
  *   import { sendWeeklySummary, sendAchievementNotification } from './lib/receipt-notifications.mjs';
  */
 
+import '../../lib/load-env.mjs';
 import { sendDiscordMessage, sendEmbed, templates } from '../discord-notify.mjs';
 import { getStats, formatStatsForDisplay, generateStatsSummary } from './receipt-gamification.mjs';
 import { getReconciliationStats, getPendingReceipts } from './receipt-detector.mjs';
 import { createClient } from '@supabase/supabase-js';
-import dotenv from 'dotenv';
-
-dotenv.config({ path: '.env.local' });
 
 // Supabase client
 const supabaseUrl = process.env.SUPABASE_SHARED_URL || process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://tednluwflfhxyucgwigh.supabase.co';

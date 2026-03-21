@@ -15,11 +15,9 @@
  *   SUPABASE_SERVICE_ROLE_KEY / SUPABASE_SHARED_SERVICE_ROLE_KEY
  */
 
+import '../lib/load-env.mjs';
 import { createClient } from '@supabase/supabase-js';
-import dotenv from 'dotenv';
 import { execSync } from 'child_process';
-
-dotenv.config({ path: '.env.local' });
 
 // ============================================================================
 // CONFIGURATION

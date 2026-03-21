@@ -25,13 +25,11 @@
  * Created: 2026-01-23
  */
 
+import '../lib/load-env.mjs';
 import { createClient } from '@supabase/supabase-js';
 import { readFileSync, writeFileSync, existsSync } from 'fs';
 import { loadProjectsConfig } from './lib/project-loader.mjs';
-import dotenv from 'dotenv';
 import path from 'path';
-
-dotenv.config({ path: '.env.local' });
 
 // ============================================================================
 // CONFIGURATION
@@ -765,12 +763,13 @@ async function syncTransactions(options = {}) {
       };
 
       // Build record matching schema
+      // Only include project_code if Xero has tracking — never overwrite tagger-set codes with null
       const record = {
         xero_transaction_id: txn.BankTransactionID,
         type: txn.Type, // RECEIVE, SPEND, TRANSFER
         contact_name: txn.Contact?.Name,
         bank_account: txn.BankAccount?.Name,
-        project_code: projectCode,
+        ...(projectCode ? { project_code: projectCode, project_code_source: 'xero_tracking' } : {}),
         total: parseFloat(txn.Total) || 0,
         status: txn.Status || 'ACTIVE',
         date: parseXeroDate(txn.Date),

@@ -157,6 +157,68 @@ async function fetchSubscriptionAlerts() {
   return data || [];
 }
 
+async function fetchBudgetVsActual() {
+  // Get FY26 budgets (row-per-type)
+  const { data: budgets } = await supabase
+    .from('project_budgets')
+    .select('project_code, budget_type, budget_amount')
+    .eq('fy_year', 'FY26')
+    .limit(500);
+
+  // Get FY26 actuals
+  const { data: actuals } = await supabase
+    .from('project_monthly_financials')
+    .select('project_code, revenue, expenses')
+    .gte('month', '2025-07-01')
+    .limit(1000);
+
+  // Aggregate budgets by project
+  const budgetMap = {};
+  for (const b of (budgets || [])) {
+    if (!budgetMap[b.project_code]) budgetMap[b.project_code] = { expense: 0, revenue: 0 };
+    if (b.budget_type === 'expense') budgetMap[b.project_code].expense += Number(b.budget_amount || 0);
+    if (b.budget_type === 'revenue' || b.budget_type === 'grant') budgetMap[b.project_code].revenue += Number(b.budget_amount || 0);
+  }
+
+  // Aggregate actuals by project
+  const actualMap = {};
+  for (const a of (actuals || [])) {
+    if (!actualMap[a.project_code]) actualMap[a.project_code] = { revenue: 0, expenses: 0 };
+    actualMap[a.project_code].revenue += Number(a.revenue || 0);
+    actualMap[a.project_code].expenses += Number(a.expenses || 0);
+  }
+
+  // Merge
+  const projects = new Set([...Object.keys(budgetMap), ...Object.keys(actualMap)]);
+  const result = [];
+  for (const code of projects) {
+    const bud = budgetMap[code] || { expense: 0, revenue: 0 };
+    const act = actualMap[code] || { revenue: 0, expenses: 0 };
+    const expPct = bud.expense > 0 ? Math.round((Math.abs(act.expenses) / bud.expense) * 100) : null;
+    const revPct = bud.revenue > 0 ? Math.round((act.revenue / bud.revenue) * 100) : null;
+    result.push({
+      code,
+      budgetExpense: bud.expense,
+      budgetRevenue: bud.revenue,
+      actualRevenue: act.revenue,
+      actualExpense: Math.abs(act.expenses),
+      expPct,
+      revPct,
+      overBudget: expPct != null && expPct > 80,
+    });
+  }
+  return result.sort((a, b) => b.actualExpense - a.actualExpense);
+}
+
+async function fetchGrantTracking() {
+  const { data } = await supabase
+    .from('grant_financial_tracking')
+    .select('grant_name, project_code, monetary_value, status, xero_invoice_number')
+    .order('monetary_value', { ascending: false })
+    .limit(50);
+  return data || [];
+}
+
 // ============================================
 // Section Builders
 // ============================================
@@ -322,6 +384,80 @@ function buildSubscriptionAlertsSection(alerts) {
   return blocks;
 }
 
+function buildBudgetSection(budgetData) {
+  const blocks = [];
+  if (budgetData.length === 0) return blocks;
+
+  blocks.push(heading3('\u{1F4CA} Budget vs Actual (FY26)'));
+
+  const overBudget = budgetData.filter(b => b.overBudget);
+  if (overBudget.length > 0) {
+    blocks.push(calloutBlock([
+      richText(`\u26A0\uFE0F ${overBudget.length} project${overBudget.length > 1 ? 's' : ''} over 80% of expense budget`, { bold: true }),
+    ], '\u26A0\uFE0F', 'red_background'));
+  }
+
+  for (const proj of budgetData) {
+    if (proj.budgetExpense === 0 && proj.budgetRevenue === 0) continue;
+    const parts = [richText(proj.code, { bold: true })];
+
+    if (proj.budgetExpense > 0) {
+      const expColor = proj.expPct > 80 ? 'red' : proj.expPct > 60 ? 'orange' : 'green';
+      parts.push(richText(`: Spend ${formatCurrency(proj.actualExpense)}/${formatCurrency(proj.budgetExpense)}`, {}));
+      parts.push(richText(` (${proj.expPct}%)`, { color: expColor, bold: proj.overBudget }));
+    }
+
+    if (proj.budgetRevenue > 0) {
+      parts.push(richText(` | Rev ${formatCurrency(proj.actualRevenue)}/${formatCurrency(proj.budgetRevenue)}`, {}));
+      parts.push(richText(` (${proj.revPct || 0}%)`, { color: proj.revPct > 50 ? 'green' : 'orange' }));
+    }
+
+    blocks.push(bulletItem(parts));
+  }
+
+  return blocks;
+}
+
+function buildGrantTrackingSection(grants) {
+  const blocks = [];
+  if (grants.length === 0) return blocks;
+
+  blocks.push(heading3('\u{1F3AF} Grants \u2192 P&L Tracking'));
+
+  const linked = grants.filter(g => g.xero_invoice_number);
+  const unlinked = grants.filter(g => !g.xero_invoice_number);
+  const totalValue = grants.reduce((s, g) => s + (Number(g.monetary_value) || 0), 0);
+  const linkedValue = linked.reduce((s, g) => s + (Number(g.monetary_value) || 0), 0);
+
+  blocks.push(calloutBlock([
+    richText(`${formatCurrency(linkedValue)}`, { bold: true }),
+    richText(` of ${formatCurrency(totalValue)} linked to Xero`),
+    richText(` (${linked.length}/${grants.length} grants)`, { color: 'gray' }),
+  ], '\u{1F3AF}', 'green_background'));
+
+  for (const grant of linked) {
+    blocks.push(bulletItem([
+      richText(`\u2705 ${grant.grant_name}`, { bold: true }),
+      richText(` — ${formatCurrency(grant.monetary_value)}`),
+      richText(` [${grant.project_code}]`, { color: 'blue' }),
+      richText(` \u2192 ${grant.xero_invoice_number}`, { color: 'gray' }),
+    ]));
+  }
+
+  if (unlinked.length > 0) {
+    blocks.push(paragraph([richText('Needs invoicing:', { bold: true, color: 'orange' })]));
+    for (const grant of unlinked) {
+      blocks.push(bulletItem([
+        richText(`\u{1F534} ${grant.grant_name}`, {}),
+        richText(` — ${formatCurrency(grant.monetary_value)}`),
+        richText(` [${grant.project_code}]`, { color: 'blue' }),
+      ]));
+    }
+  }
+
+  return blocks;
+}
+
 function buildFooter() {
   const now = new Date().toLocaleDateString('en-AU', {
     day: 'numeric', month: 'short', year: 'numeric',
@@ -369,7 +505,7 @@ async function findSectionRange(pageId) {
   if (markerIndex === -1) return { blockIdsToDelete: [], insertAfterId: null };
 
   const blockIdsToDelete = [allBlocks[markerIndex].id];
-  const ourHeadings = ['Cashflow', 'Receivables', 'Payables', 'Pipeline', 'Revenue', 'Subscription'];
+  const ourHeadings = ['Cashflow', 'Receivables', 'Payables', 'Pipeline', 'Revenue', 'Subscription', 'Budget', 'Grants'];
 
   for (let i = markerIndex + 1; i < allBlocks.length; i++) {
     const block = allBlocks[i];
@@ -388,12 +524,14 @@ async function findSectionRange(pageId) {
 async function updatePage(pageId) {
   log('Fetching financial data...');
 
-  const [cashflow, invoices, projectFinancials, pipeline, subscriptionAlerts] = await Promise.all([
+  const [cashflow, invoices, projectFinancials, pipeline, subscriptionAlerts, budgetData, grantTracking] = await Promise.all([
     fetchCashflow(),
     fetchOutstandingInvoices(),
     fetchProjectFinancials(),
     fetchPipeline(),
     fetchSubscriptionAlerts(),
+    fetchBudgetVsActual(),
+    fetchGrantTracking(),
   ]);
 
   verbose(`  Cashflow months: ${cashflow.length}`);
@@ -401,6 +539,8 @@ async function updatePage(pageId) {
   verbose(`  Project financials: ${projectFinancials.length}`);
   verbose(`  Pipeline: ${pipeline.length}`);
   verbose(`  Subscription alerts: ${subscriptionAlerts.length}`);
+  verbose(`  Budget vs Actual projects: ${budgetData.length}`);
+  verbose(`  Grant tracking: ${grantTracking.length}`);
 
   const blocks = [];
   blocks.push(heading2(SECTION_MARKER));
@@ -420,6 +560,18 @@ async function updatePage(pageId) {
   if (subAlertBlocks.length > 0) {
     blocks.push(divider());
     blocks.push(...subAlertBlocks);
+  }
+
+  const budgetBlocks = buildBudgetSection(budgetData);
+  if (budgetBlocks.length > 0) {
+    blocks.push(divider());
+    blocks.push(...budgetBlocks);
+  }
+
+  const grantBlocks = buildGrantTrackingSection(grantTracking);
+  if (grantBlocks.length > 0) {
+    blocks.push(divider());
+    blocks.push(...grantBlocks);
   }
 
   blocks.push(divider());

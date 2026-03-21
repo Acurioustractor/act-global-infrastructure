@@ -10,10 +10,8 @@
  *   const missing = await detectMissingReceipts({ daysBack: 90 });
  */
 
+import '../../lib/load-env.mjs';
 import { createClient } from '@supabase/supabase-js';
-import dotenv from 'dotenv';
-
-dotenv.config({ path: '.env.local' });
 
 // Supabase client
 const supabaseUrl = process.env.SUPABASE_SHARED_URL || process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://tednluwflfhxyucgwigh.supabase.co';

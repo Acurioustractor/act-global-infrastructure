@@ -8,8 +8,8 @@
  *   npm run errors:report   # Generate error report
  */
 
+import '../lib/load-env.mjs';
 import { createClient } from '@supabase/supabase-js';
-import 'dotenv/config';
 
 const supabase = createClient(
   process.env.SUPABASE_URL,

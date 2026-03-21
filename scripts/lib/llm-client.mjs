@@ -32,7 +32,7 @@ const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// PRICING (per 1M tokens, January 2026)
+// PRICING (per 1M tokens, March 2026)
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 const PRICING = {
@@ -45,12 +45,54 @@ const PRICING = {
     'text-embedding-ada-002': { input: 0.10, output: 0 }
   },
   anthropic: {
-    'claude-opus-4-5-20251101': { input: 15.00, output: 75.00 },
+    'claude-opus-4-6': { input: 5.00, output: 25.00 },
+    'claude-opus-4-5-20251101': { input: 5.00, output: 25.00 },
+    'claude-sonnet-4-5-20250929': { input: 3.00, output: 15.00 },
     'claude-sonnet-4-20250514': { input: 3.00, output: 15.00 },
+    'claude-haiku-4-5-20251001': { input: 1.00, output: 5.00 },
     'claude-3-5-haiku-20241022': { input: 0.80, output: 4.00 },
-    'claude-haiku-4-5-20251001': { input: 0.80, output: 4.00 }
+    'claude-3-haiku-20240307': { input: 0.25, output: 1.25 }
   }
 };
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// MODEL ROUTING — select cheapest model for task complexity
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+/**
+ * Select the right model for the task complexity.
+ *
+ * Usage:
+ *   import { selectModel } from './lib/llm-client.mjs';
+ *   const model = selectModel('classify');  // -> haiku
+ *   const model = selectModel('generate');  // -> sonnet
+ *   const model = selectModel('architect'); // -> opus
+ *
+ * @param {'classify'|'extract'|'tag'|'summarize'|'generate'|'draft'|'analyze'|'architect'|'plan'} task
+ * @param {'openai'|'anthropic'} provider
+ * @returns {string} model ID
+ */
+export function selectModel(task, provider = 'anthropic') {
+  const TASK_TO_TIER = {
+    // Tier 1: Haiku/gpt-4o-mini — classification, extraction, tagging
+    classify: 'cheap', extract: 'cheap', tag: 'cheap', embed: 'cheap',
+    match: 'cheap', score: 'cheap', filter: 'cheap', validate: 'cheap',
+    // Tier 2: Sonnet/gpt-4o — generation, drafting, analysis
+    summarize: 'mid', generate: 'mid', draft: 'mid', analyze: 'mid',
+    enrich: 'mid', review: 'mid', explain: 'mid',
+    // Tier 3: Opus — architecture, complex planning
+    architect: 'expensive', plan: 'expensive', reason: 'expensive',
+  };
+
+  const tier = TASK_TO_TIER[task] || 'cheap';
+
+  const MODELS = {
+    anthropic: { cheap: 'claude-haiku-4-5-20251001', mid: 'claude-sonnet-4-5-20250929', expensive: 'claude-opus-4-6' },
+    openai: { cheap: 'gpt-4o-mini', mid: 'gpt-4o', expensive: 'gpt-4o' },
+  };
+
+  return MODELS[provider]?.[tier] || MODELS.anthropic[tier];
+}
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // COST CALCULATION

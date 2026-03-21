@@ -26,6 +26,7 @@
 import '../lib/load-env.mjs';
 import { createClient } from '@supabase/supabase-js';
 import { recordSyncStatus } from './lib/sync-status.mjs';
+import { sendTelegram } from './lib/telegram.mjs';
 
 const supabaseUrl = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
@@ -123,9 +124,11 @@ async function main() {
     durationMs: Date.now() - start,
   });
 
-  // Fire integration_event for stale integrations (triggers Telegram via event reactor)
+  // Alert on critical staleness
   if (stale.length > 0) {
     const staleNames = stale.map(r => r.label).join(', ');
+
+    // Fire integration_event for audit trail
     await supabase.from('integration_events').insert({
       source: 'data-freshness-monitor',
       event_type: 'staleness_alert',
@@ -139,6 +142,18 @@ async function main() {
       triggered_by: SCRIPT_NAME,
       latency_ms: Date.now() - start,
     });
+
+    // Send Telegram alert
+    const lines = stale.map(r => `  - ${r.label}: ${r.age_hours}h ago`);
+    if (warning.length > 0) {
+      lines.push('');
+      lines.push(`Plus ${warning.length} warning(s): ${warning.map(r => r.label).join(', ')}`);
+    }
+    await sendTelegram(
+      `*Data Freshness Alert*\n\n` +
+      `${stale.length} source(s) critically stale:\n` +
+      lines.join('\n')
+    );
 
     process.exit(1); // Non-zero exit for alerting
   }

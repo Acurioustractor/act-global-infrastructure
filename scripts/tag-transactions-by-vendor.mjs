@@ -13,15 +13,15 @@
  *   node scripts/tag-transactions-by-vendor.mjs --stats    # Show current coverage stats
  */
 
+import '../lib/load-env.mjs';
 import { createClient } from '@supabase/supabase-js';
-import dotenv from 'dotenv';
 import { loadProjectsConfig } from './lib/project-loader.mjs';
+import { sendTelegram } from './lib/telegram.mjs';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-dotenv.config({ path: join(__dirname, '../.env.local') });
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
@@ -266,10 +266,10 @@ async function tagTransactions() {
     let projectCode = null;
     let source = null;
 
-    // Tier 0: Auto-tag inter-account transfers as ACT-IN
+    // Tier 0: Auto-tag inter-account transfers as ACT-HQ (overhead)
     const txType = (tx.type || '').toUpperCase();
     if (txType === 'SPEND-TRANSFER' || txType === 'RECEIVE-TRANSFER') {
-      projectCode = 'ACT-IN';
+      projectCode = 'ACT-HQ';
       source = 'transfer_default';
       stats.tier0++;
     }
@@ -485,6 +485,30 @@ async function tagTransactions() {
 
   if (!applyMode) {
     console.log('\n💡 Run with --apply to save changes');
+  }
+
+  // Alert on unmatched FY26 transactions (new vendors needing rules)
+  if (applyMode && stats.unmatched > 0) {
+    const fy26Start = '2025-07-01';
+    const unmatchedFY26 = allUntagged.filter(tx => {
+      const matched = matches.some(m => m.id === tx.id);
+      return !matched && tx.date >= fy26Start;
+    });
+
+    if (unmatchedFY26.length > 0) {
+      const vendorList = [...new Set(unmatchedFY26.map(tx => tx.contact_name || 'NO CONTACT'))];
+      const totalValue = unmatchedFY26.reduce((sum, tx) => sum + Math.abs(tx.total || 0), 0);
+      const msg = [
+        `🏷️ *Transaction Tagger*`,
+        `Tagged ${matchedCount} transactions (${newCoverage}% of untagged)`,
+        ``,
+        `⚠️ *${unmatchedFY26.length} FY26 transactions need rules:*`,
+        ...vendorList.slice(0, 10).map(v => `• ${v}`),
+        vendorList.length > 10 ? `• ...and ${vendorList.length - 10} more` : '',
+        `Total: $${totalValue.toFixed(0)}`,
+      ].filter(Boolean).join('\n');
+      await sendTelegram(msg);
+    }
   }
 }
 

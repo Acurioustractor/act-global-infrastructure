@@ -18,12 +18,9 @@
  *   node scripts/generate-sprint-suggestions.mjs --dry-run
  */
 
+import '../lib/load-env.mjs';
 import { createClient } from '@supabase/supabase-js';
 import { loadProjects } from './lib/project-loader.mjs';
-import dotenv from 'dotenv';
-
-dotenv.config({ path: '.env.local' });
-dotenv.config({ path: '.env' });
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,

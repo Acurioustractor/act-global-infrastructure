@@ -13,15 +13,14 @@
  *   node scripts/calculate-project-monthly-financials.mjs --months 24
  */
 
+import '../lib/load-env.mjs';
 import { createClient } from '@supabase/supabase-js';
 import { recordSyncStatus } from './lib/sync-status.mjs';
-import dotenv from 'dotenv';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-dotenv.config({ path: join(__dirname, '../.env.local') });
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
@@ -43,19 +42,83 @@ function getFYStart(date) {
 
 console.log(`Calculating monthly financials from ${sinceStr}...`);
 
-// Fetch all transactions in range
-const { data: transactions, error } = await supabase
-  .from('xero_transactions')
-  .select('id, date, contact_name, total, type, project_code')
-  .gte('date', sinceStr)
-  .order('date');
+// Fetch all transactions in range (paginate past Supabase 1,000-row default)
+let transactions = [];
+let page = 0;
+const pageSize = 1000;
+while (true) {
+  const { data, error } = await supabase
+    .from('xero_transactions')
+    .select('id, date, contact_name, total, type, project_code')
+    .gte('date', sinceStr)
+    .order('date')
+    .range(page * pageSize, (page + 1) * pageSize - 1);
 
-if (error) {
-  console.error('Failed to fetch transactions:', error.message);
-  process.exit(1);
+  if (error) {
+    console.error('Failed to fetch transactions:', error.message);
+    process.exit(1);
+  }
+  transactions = transactions.concat(data);
+  if (data.length < pageSize) break;
+  page++;
 }
 
 console.log(`Processing ${transactions.length} transactions...`);
+
+// Also fetch paid invoices (ACCREC) — these represent revenue that may not appear as RECEIVE transactions
+// when reconciled directly against invoices in Xero
+let paidInvoices = [];
+page = 0;
+while (true) {
+  const { data, error } = await supabase
+    .from('xero_invoices')
+    .select('id, date, contact_name, total, amount_paid, type, project_code, status, fully_paid_date')
+    .eq('type', 'ACCREC')
+    .eq('status', 'PAID')
+    .gte('date', sinceStr)
+    .order('date')
+    .range(page * pageSize, (page + 1) * pageSize - 1);
+
+  if (error) {
+    console.error('Failed to fetch paid invoices:', error.message);
+    break; // Non-fatal — continue with transactions only
+  }
+  paidInvoices = paidInvoices.concat(data);
+  if (data.length < pageSize) break;
+  page++;
+}
+
+// Build a set of transaction-based revenue by project+month+contact to avoid double-counting
+// If a RECEIVE transaction already covers a paid invoice, skip the invoice
+const txRevByKey = new Map(); // "PROJECT|2025-07|Contact Name" -> amount
+for (const tx of transactions) {
+  if (tx.type !== 'RECEIVE' || !tx.project_code) continue;
+  const month = tx.date?.substring(0, 7);
+  if (!month) continue;
+  const key = `${tx.project_code}|${month}|${(tx.contact_name || '').toLowerCase()}`;
+  txRevByKey.set(key, (txRevByKey.get(key) || 0) + Math.abs(tx.total || 0));
+}
+
+// Filter to invoices with no matching RECEIVE transaction
+const invoiceRevenue = [];
+for (const inv of paidInvoices) {
+  if (!inv.project_code) continue;
+  const month = inv.date?.substring(0, 7);
+  if (!month) continue;
+  const key = `${inv.project_code}|${month}|${(inv.contact_name || '').toLowerCase()}`;
+  const txAmount = txRevByKey.get(key) || 0;
+  const invAmount = Math.abs(Number(inv.amount_paid || inv.total || 0));
+  // If transaction revenue already covers this invoice (within 10%), skip it
+  if (txAmount >= invAmount * 0.9) continue;
+  invoiceRevenue.push({
+    project_code: inv.project_code,
+    month: `${month}-01`,
+    contact_name: inv.contact_name || 'Unknown',
+    amount: invAmount,
+  });
+}
+
+console.log(`Found ${paidInvoices.length} paid invoices, ${invoiceRevenue.length} not already in transactions.`);
 
 // Group by project_code + month
 const buckets = new Map(); // key: "PROJECT_CODE|2026-01" => { revenue, expenses, revBreakdown, expBreakdown, count, unmapped }
@@ -95,6 +158,27 @@ for (const tx of transactions) {
   if (!tx.project_code) {
     b.unmapped++;
   }
+}
+
+// Add invoice-based revenue (paid invoices not already covered by RECEIVE transactions)
+for (const inv of invoiceRevenue) {
+  const key = `${inv.project_code}|${inv.month.substring(0, 7)}`;
+  if (!buckets.has(key)) {
+    buckets.set(key, {
+      project_code: inv.project_code,
+      month: inv.month,
+      revenue: 0,
+      expenses: 0,
+      revenue_breakdown: {},
+      expense_breakdown: {},
+      count: 0,
+      unmapped: 0,
+    });
+  }
+  const b = buckets.get(key);
+  b.revenue += inv.amount;
+  b.revenue_breakdown[inv.contact_name] = (b.revenue_breakdown[inv.contact_name] || 0) + inv.amount;
+  b.count++;
 }
 
 // Now upsert each bucket

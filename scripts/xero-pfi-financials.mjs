@@ -11,11 +11,9 @@
  *   node scripts/xero-pfi-financials.mjs
  */
 
+import '../lib/load-env.mjs';
 import { readFileSync, writeFileSync, existsSync } from 'fs';
-import dotenv from 'dotenv';
 import path from 'path';
-
-dotenv.config({ path: '.env.local' });
 
 const XERO_CLIENT_ID = process.env.XERO_CLIENT_ID;
 const XERO_CLIENT_SECRET = process.env.XERO_CLIENT_SECRET;

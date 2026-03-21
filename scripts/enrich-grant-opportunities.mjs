@@ -14,13 +14,10 @@
  *   node scripts/enrich-grant-opportunities.mjs --id <uuid>        # Enrich a specific grant
  */
 
+import '../lib/load-env.mjs';
 import { createClient } from '@supabase/supabase-js';
 import { trackedClaudeCompletion } from './lib/llm-client.mjs';
 import { loadProjects } from './lib/project-loader.mjs';
-import dotenv from 'dotenv';
-
-dotenv.config({ path: '.env.local' });
-dotenv.config({ path: '.env' });
 
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL;
 const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;

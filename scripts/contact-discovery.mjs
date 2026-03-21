@@ -23,13 +23,11 @@
  *   brief     - Generate brief summary for morning report
  */
 
+import '../lib/load-env.mjs';
 import { createClient } from '@supabase/supabase-js';
-import dotenv from 'dotenv';
 import readline from 'readline';
 
 // Load environment
-dotenv.config({ path: '.env.local' });
-dotenv.config({ path: '../.env.local' });
 
 // Database configuration
 const MAIN_URL = 'https://tednluwflfhxyucgwigh.supabase.co';

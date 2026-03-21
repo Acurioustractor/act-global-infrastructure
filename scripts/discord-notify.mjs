@@ -26,11 +26,8 @@
  *   DISCORD_WEBHOOK_GENERAL=https://discord.com/api/webhooks/...
  */
 
-import dotenv from 'dotenv';
+import '../lib/load-env.mjs';
 import { fileURLToPath } from 'url';
-
-dotenv.config({ path: '.env.local' });
-dotenv.config({ path: '../.env.local' });
 
 // Channel webhook mappings
 const CHANNELS = {

@@ -6,15 +6,13 @@
  *   node scripts/xero-auth.mjs         - Start auth flow (opens browser)
  */
 
+import '../lib/load-env.mjs';
 import { createClient } from '@supabase/supabase-js';
 import { writeFileSync } from 'fs';
 import { randomBytes, createHash } from 'crypto';
-import dotenv from 'dotenv';
 import path from 'path';
 import http from 'http';
 import { URL } from 'url';
-
-dotenv.config({ path: '.env.local' });
 
 const XERO_CLIENT_ID = process.env.XERO_CLIENT_ID;
 const XERO_CLIENT_SECRET = process.env.XERO_CLIENT_SECRET;
@@ -26,7 +24,27 @@ const supabase = SUPABASE_KEY ? createClient(SUPABASE_URL, SUPABASE_KEY) : null;
 const TOKEN_FILE = path.join(process.cwd(), '.xero-tokens.json');
 const REDIRECT_URI = 'http://localhost:5678/callback';
 
-const SCOPES = 'openid profile email offline_access accounting.transactions accounting.transactions.read accounting.contacts.read accounting.settings.read accounting.reports.read';
+// Full scope set for receipt automation suite:
+// - transactions: read+write bank transactions, create bills, payments
+// - contacts: read+write suppliers (auto-create from receipts)
+// - attachments: upload receipt files to transactions/invoices
+// - settings: read+write tracking categories (project tagging)
+// - reports: P&L, balance sheet, budget reports
+// - budgets: read budget data
+// - journals: read manual journals (R&D allocations)
+const SCOPES = [
+  'openid', 'profile', 'email', 'offline_access',
+  'accounting.transactions',
+  'accounting.transactions.read',
+  'accounting.contacts',
+  'accounting.contacts.read',
+  'accounting.attachments',
+  'accounting.settings',
+  'accounting.settings.read',
+  'accounting.reports.read',
+  'accounting.budgets.read',
+  'accounting.journals.read',
+].join(' ');
 
 // PKCE helpers
 function generateCodeVerifier() {

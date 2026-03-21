@@ -8,9 +8,9 @@
  *   npm run followups:send     # Send reminder notifications
  */
 
+import '../lib/load-env.mjs';
 import { createClient } from '@supabase/supabase-js';
 import { Client } from '@notionhq/client';
-import 'dotenv/config';
 import { queryDatabase } from './lib/notion-datasource.mjs';
 
 const supabase = createClient(

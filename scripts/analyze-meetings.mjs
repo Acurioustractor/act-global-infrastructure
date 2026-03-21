@@ -1,4 +1,4 @@
-import dotenv from 'dotenv';
+import '../lib/load-env.mjs';
 import { Client } from '@notionhq/client';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -6,9 +6,6 @@ import { queryDatabase } from './lib/notion-datasource.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.resolve(__dirname, '..');
-
-dotenv.config({ path: path.join(rootDir, '.env.local'), override: true });
-dotenv.config({ path: path.join(rootDir, '.env'), override: true });
 
 const notion = new Client({ auth: process.env.NOTION_TOKEN });
 

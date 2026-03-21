@@ -24,6 +24,7 @@
  *   OPENAI_API_KEY                 - For generating embeddings (optional)
  */
 
+import '../lib/load-env.mjs';
 import { Client } from '@notionhq/client';
 import { createClient } from '@supabase/supabase-js';
 import { readFileSync, existsSync } from 'fs';
@@ -32,13 +33,11 @@ import { queryDatabase } from './lib/notion-datasource.mjs';
 import { recordSyncStatus } from './lib/sync-status.mjs';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
-import dotenv from 'dotenv';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 // Load environment from project root
-dotenv.config({ path: join(__dirname, '..', '.env.local'), override: true });
 
 // Stats tracking
 const stats = {

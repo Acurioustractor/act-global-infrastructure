@@ -17,10 +17,10 @@
  *   node scripts/lib/subscription-discovery.mjs
  */
 
+import '../../lib/load-env.mjs';
 import { createClient } from '@supabase/supabase-js';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
-import dotenv from 'dotenv';
 
 import { getXeroSubscriptionCandidates } from './xero-repeating-invoices.mjs';
 import { getTransactionSubscriptionCandidates, detectPriceChanges } from './transaction-pattern-detector.mjs';
@@ -28,7 +28,6 @@ import { getTransactionSubscriptionCandidates, detectPriceChanges } from './tran
 // Load environment
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-dotenv.config({ path: join(__dirname, '../../.env.local') });
 
 // ============================================================================
 // CONFIGURATION

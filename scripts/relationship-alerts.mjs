@@ -16,12 +16,10 @@
  *   weekly    - Full weekly relationship report
  */
 
+import '../lib/load-env.mjs';
 import { createClient } from '@supabase/supabase-js';
-import dotenv from 'dotenv';
 
 // Load environment
-dotenv.config({ path: '.env.local' });
-dotenv.config({ path: '../.env.local' });
 
 // Database configuration
 const MAIN_URL = 'https://tednluwflfhxyucgwigh.supabase.co';

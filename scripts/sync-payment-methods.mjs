@@ -6,7 +6,7 @@
  * is used to pay for it, then updates the subscription's payment_method field.
  */
 
-import 'dotenv/config'
+import '../lib/load-env.mjs';
 import { createClient } from '@supabase/supabase-js'
 
 const supabase = createClient(

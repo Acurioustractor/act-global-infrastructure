@@ -13,11 +13,9 @@
  *   node scripts/project-notifications.mjs recent   # Show recent project comms
  */
 
+import '../lib/load-env.mjs';
 import { createClient } from '@supabase/supabase-js';
-import dotenv from 'dotenv';
 import { sendDiscordMessage, sendEmbed, templates } from './discord-notify.mjs';
-
-dotenv.config({ path: '.env.local' });
 
 const MAIN_URL = 'https://tednluwflfhxyucgwigh.supabase.co';
 const MAIN_KEY = process.env.SUPABASE_SHARED_SERVICE_ROLE_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY;

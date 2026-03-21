@@ -2,14 +2,13 @@
 /**
  * Push local-only Goods contacts to GHL + cleanup junk
  */
+import '../lib/load-env.mjs';
 import { createClient } from '@supabase/supabase-js';
 import { createGHLService } from './lib/ghl-api-service.mjs';
-import dotenv from 'dotenv';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-dotenv.config({ path: join(__dirname, '..', '.env.local'), override: true });
 
 const supabase = createClient(
   process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL,

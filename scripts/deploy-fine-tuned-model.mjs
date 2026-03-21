@@ -16,13 +16,11 @@
  *   npm run knowledge:deploy-model
  */
 
+import '../lib/load-env.mjs';
 import OpenAI from 'openai';
 import { createClient } from '@supabase/supabase-js';
-import dotenv from 'dotenv';
 import fs from 'fs/promises';
 import path from 'path';
-
-dotenv.config({ path: '.env.local' });
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 

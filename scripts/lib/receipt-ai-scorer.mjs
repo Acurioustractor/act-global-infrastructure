@@ -10,11 +10,9 @@
  *   const result = await scoreMatchWithAI(receipt, emailMatch);
  */
 
+import '../../lib/load-env.mjs';
 import { trackedCompletion } from './llm-client.mjs';
 import { createClient } from '@supabase/supabase-js';
-import dotenv from 'dotenv';
-
-dotenv.config({ path: '.env.local' });
 
 // Supabase client
 const supabaseUrl = process.env.SUPABASE_SHARED_URL || process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://tednluwflfhxyucgwigh.supabase.co';

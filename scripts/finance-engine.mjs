@@ -16,6 +16,7 @@
  *   node scripts/finance-engine.mjs status             # Pipeline health
  *   node scripts/finance-engine.mjs --self-test        # Run all tests
  *   node scripts/finance-engine.mjs health             # Full system health check
+ *   node scripts/finance-engine.mjs health --notify    # Health check + send to Telegram
  */
 
 import '../lib/load-env.mjs';
@@ -30,6 +31,7 @@ const scriptsDir = __dirname;
 const args = process.argv.slice(2);
 const command = args.find(a => !a.startsWith('-')) || 'full';
 const isSelfTest = args.includes('--self-test');
+const shouldNotify = args.includes('--notify');
 
 function log(msg) {
   console.log(`[${new Date().toISOString().slice(11, 19)}] ${msg}`);
@@ -40,11 +42,17 @@ function log(msg) {
 // ============================================================================
 
 async function selfTest() {
-  console.log('');
-  console.log('╔══════════════════════════════════════════════════════════════╗');
-  console.log('║         ACT Finance Engine — Self-Test                      ║');
-  console.log('╚══════════════════════════════════════════════════════════════╝');
-  console.log('');
+  const healthLines = []; // Collect output for Telegram notification
+  const addLine = (line) => {
+    console.log(line);
+    if (shouldNotify) healthLines.push(line);
+  };
+
+  addLine('');
+  addLine('╔══════════════════════════════════════════════════════════════╗');
+  addLine('║         ACT Finance Engine — Self-Test                      ║');
+  addLine('╚══════════════════════════════════════════════════════════════╝');
+  addLine('');
 
   const testFiles = [
     'scripts/tests/receipt-matcher.test.mjs',
@@ -57,7 +65,8 @@ async function selfTest() {
 
   for (const testFile of testFiles) {
     const label = testFile.replace('scripts/tests/', '').replace('.test.mjs', '');
-    process.stdout.write(`  ${label.padEnd(30)}`);
+    const linePrefix = `  ${label.padEnd(30)}`;
+    process.stdout.write(linePrefix);
     const startTime = Date.now();
 
     try {
@@ -77,7 +86,9 @@ async function selfTest() {
       const fail = failMatch ? parseInt(failMatch[1]) : 0;
 
       results.push({ label, pass, fail, elapsed, ok: fail === 0 });
-      console.log(`✓ ${pass} passed  (${elapsed}s)`);
+      const resultLine = `✓ ${pass} passed  (${elapsed}s)`;
+      console.log(resultLine);
+      if (shouldNotify) healthLines.push(linePrefix + resultLine);
     } catch (err) {
       const elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
       const output = (err.stdout || '') + (err.stderr || '');
@@ -87,7 +98,9 @@ async function selfTest() {
       const fail = failMatch ? parseInt(failMatch[1]) : '?';
 
       results.push({ label, pass, fail, elapsed, ok: false });
-      console.log(`✗ FAILED  ${pass} passed, ${fail} failed  (${elapsed}s)`);
+      const resultLine = `✗ FAILED  ${pass} passed, ${fail} failed  (${elapsed}s)`;
+      console.log(resultLine);
+      if (shouldNotify) healthLines.push(linePrefix + resultLine);
     }
   }
 
@@ -96,14 +109,14 @@ async function selfTest() {
   const totalFail = results.reduce((sum, r) => sum + (typeof r.fail === 'number' ? r.fail : 1), 0);
   const allPassed = results.every(r => r.ok);
 
-  console.log('');
-  console.log('─'.repeat(60));
-  console.log(`  ${allPassed ? '✓ ALL PASSED' : '✗ FAILURES DETECTED'}  ${totalPass} passed, ${totalFail} failed`);
-  console.log('─'.repeat(60));
-  console.log('');
+  addLine('');
+  addLine('─'.repeat(60));
+  addLine(`  ${allPassed ? '✓ ALL PASSED' : '✗ FAILURES DETECTED'}  ${totalPass} passed, ${totalFail} failed`);
+  addLine('─'.repeat(60));
+  addLine('');
 
   // Module health checks
-  console.log('  Module health:');
+  addLine('  Module health:');
   const modules = [
     ['finance/common', './lib/finance/common.mjs', ['createSupabase', 'log', 'retry', 'parseArgs']],
     ['finance/xero-client', './lib/finance/xero-client.mjs', ['createXeroClient']],
@@ -121,18 +134,18 @@ async function selfTest() {
       const mod = await import(join(__dirname, path));
       const missing = exports.filter(e => !mod[e]);
       if (missing.length === 0) {
-        console.log(`    ${name.padEnd(30)} ✓ ${exports.length} exports`);
+        addLine(`    ${name.padEnd(30)} ✓ ${exports.length} exports`);
       } else {
-        console.log(`    ${name.padEnd(30)} ✗ missing: ${missing.join(', ')}`);
+        addLine(`    ${name.padEnd(30)} ✗ missing: ${missing.join(', ')}`);
       }
     } catch (err) {
-      console.log(`    ${name.padEnd(30)} ✗ import failed: ${err.message}`);
+      addLine(`    ${name.padEnd(30)} ✗ import failed: ${err.message}`);
     }
   }
 
   // Database connectivity
-  console.log('');
-  console.log('  Database:');
+  addLine('');
+  addLine('  Database:');
   try {
     const { createSupabase } = await import('./lib/finance/common.mjs');
     const supabase = createSupabase();
@@ -142,46 +155,48 @@ async function selfTest() {
       .select('code')
       .eq('code', 'ACT-ST')
       .single();
-    console.log(`    act_entities              ✓ (${entity?.code || 'found'})`);
+    addLine(`    act_entities              ✓ (${entity?.code || 'found'})`);
 
     const { error: prError } = await supabase
       .from('pipeline_runs')
       .select('id')
       .limit(1);
-    console.log(`    pipeline_runs             ${prError ? '✗ ' + prError.message : '✓'}`);
+    addLine(`    pipeline_runs             ${prError ? '✗ ' + prError.message : '✓'}`);
 
     const { data: cols } = await supabase.rpc('exec_sql', {
       query: `SELECT count(*)::int as cnt FROM information_schema.columns
         WHERE table_name IN ('xero_transactions','xero_invoices','receipt_emails')
         AND column_name = 'entity_code'`
     });
-    console.log(`    entity_code columns       ✓ (${cols?.[0]?.cnt || 0}/3 tables)`);
+    addLine(`    entity_code columns       ✓ (${cols?.[0]?.cnt || 0}/3 tables)`);
   } catch (err) {
-    console.log(`    Supabase connection       ✗ ${err.message}`);
+    addLine(`    Supabase connection       ✗ ${err.message}`);
   }
 
   // Xero
-  console.log('');
-  console.log('  Xero:');
+  addLine('');
+  addLine('  Xero:');
   if (process.env.XERO_CLIENT_ID) {
     try {
       const { createXeroClient } = await import('./lib/finance/xero-client.mjs');
       const { createSupabase } = await import('./lib/finance/common.mjs');
       const xero = await createXeroClient(createSupabase());
       const token = xero.getAccessToken();
-      console.log(`    OAuth2 token              ✓ (${token ? 'valid' : 'needs refresh'})`);
+      addLine(`    OAuth2 token              ✓ (${token ? 'valid' : 'needs refresh'})`);
       const org = await xero.get('Organisation');
-      console.log(`    API connectivity          ✓ (${org.Organisations?.[0]?.Name || 'connected'})`);
+      addLine(`    API connectivity          ✓ (${org.Organisations?.[0]?.Name || 'connected'})`);
     } catch (err) {
-      console.log(`    API connectivity          ✗ ${err.message}`);
+      addLine(`    API connectivity          ✗ ${err.message}`);
     }
   } else {
-    console.log('    OAuth2 credentials        - not configured (XERO_CLIENT_ID missing)');
+    addLine('    OAuth2 credentials        - not configured (XERO_CLIENT_ID missing)');
   }
 
   // Operational health dashboard
-  console.log('');
-  console.log('  Operational health:');
+  addLine('');
+  addLine('  Operational health:');
+  const healthChecks = { passed: 0, total: 0 };
+
   try {
     const { createSupabase } = await import('./lib/finance/common.mjs');
     const supabase = createSupabase();
@@ -197,13 +212,15 @@ async function selfTest() {
       ? Math.round((Date.now() - new Date(lastSync.updated_at).getTime()) / (1000 * 60 * 60))
       : null;
     const syncOk = syncAge !== null && syncAge < 24;
-    console.log(`    Xero sync                 ${syncOk ? '✓' : '⚠'} ${syncAge !== null ? syncAge + 'h ago' : 'no data'}`);
+    healthChecks.total++;
+    if (syncOk) healthChecks.passed++;
+    addLine(`    Xero sync                 ${syncOk ? '✓' : '⚠'} ${syncAge !== null ? syncAge + 'h ago' : 'no data'}`);
 
     // Transaction counts
     const { count: txCount } = await supabase
       .from('xero_transactions')
       .select('*', { count: 'exact', head: true });
-    console.log(`    Transactions              ✓ ${(txCount || 0).toLocaleString()} total`);
+    addLine(`    Transactions              ✓ ${(txCount || 0).toLocaleString()} total`);
 
     // Receipt matching
     const { count: withReceipts } = await supabase
@@ -211,7 +228,10 @@ async function selfTest() {
       .select('*', { count: 'exact', head: true })
       .eq('has_attachments', true);
     const receiptPct = txCount ? Math.round(((withReceipts || 0) / txCount) * 100) : 0;
-    console.log(`    Receipt coverage          ${receiptPct >= 60 ? '✓' : '⚠'} ${receiptPct}% (${withReceipts || 0} with attachments)`);
+    const receiptOk = receiptPct >= 60;
+    healthChecks.total++;
+    if (receiptOk) healthChecks.passed++;
+    addLine(`    Receipt coverage          ${receiptOk ? '✓' : '⚠'} ${receiptPct}% (${withReceipts || 0} with attachments)`);
 
     // Project tagging
     const { count: taggedCount } = await supabase
@@ -219,21 +239,26 @@ async function selfTest() {
       .select('*', { count: 'exact', head: true })
       .not('project_code', 'is', null);
     const tagPct = txCount ? Math.round(((taggedCount || 0) / txCount) * 100) : 0;
-    console.log(`    Project tagging           ${tagPct >= 90 ? '✓' : '⚠'} ${tagPct}% coverage`);
+    const tagOk = tagPct >= 90;
+    healthChecks.total++;
+    if (tagOk) healthChecks.passed++;
+    addLine(`    Project tagging           ${tagOk ? '✓' : '⚠'} ${tagPct}% coverage`);
 
     // Subscriptions
     const { count: subCount } = await supabase
       .from('subscriptions')
       .select('*', { count: 'exact', head: true })
       .eq('account_status', 'active');
-    console.log(`    Subscriptions             ✓ ${subCount || 0} active`);
+    addLine(`    Subscriptions             ✓ ${subCount || 0} active`);
 
     // BAS readiness (current quarter)
     const now = new Date();
     const qEnd = new Date(now.getFullYear(), Math.ceil((now.getMonth() + 1) / 3) * 3, 0);
     const daysUntilBAS = Math.ceil((new Date(qEnd.getFullYear(), qEnd.getMonth() + 1, 28) - now) / (1000 * 60 * 60 * 24));
     const basReady = tagPct >= 95 && receiptPct >= 60;
-    console.log(`    BAS due                   ${basReady ? '✓' : '⚠'} ${daysUntilBAS}d — ${tagPct}% tagged, ${receiptPct}% receipted`);
+    healthChecks.total++;
+    if (basReady) healthChecks.passed++;
+    addLine(`    BAS due                   ${basReady ? '✓' : '⚠'} ${daysUntilBAS}d — ${tagPct}% tagged, ${receiptPct}% receipted`);
 
     // Cash runway (from financial_snapshots)
     const { data: latestSnapshot } = await supabase
@@ -246,7 +271,9 @@ async function selfTest() {
       const avgBurn = latestSnapshot.reduce((sum, s) => sum + Math.max(0, (s.expenses || 0) - (s.income || 0)), 0) / latestSnapshot.length;
       const runway = avgBurn > 0 ? (balance / avgBurn).toFixed(1) : '∞';
       const runwayOk = parseFloat(runway) >= 6 || runway === '∞';
-      console.log(`    Cash runway               ${runwayOk ? '✓' : '← ATTENTION'} ${runway} months`);
+      healthChecks.total++;
+      if (runwayOk) healthChecks.passed++;
+      addLine(`    Cash runway               ${runwayOk ? '✓' : '← ATTENTION'} ${runway} months`);
     }
 
     // Recent pipeline runs
@@ -261,11 +288,13 @@ async function selfTest() {
         ? Math.round((Date.now() - new Date(lastRun.finished_at).getTime()) / (1000 * 60 * 60))
         : null;
       const runOk = lastRun.status === 'success';
-      console.log(`    Last pipeline run         ${runOk ? '✓' : '✗'} ${lastRun.status} ${runAge !== null ? runAge + 'h ago' : ''} (${lastRun.duration_s?.toFixed(0) || '?'}s)`);
+      healthChecks.total++;
+      if (runOk) healthChecks.passed++;
+      addLine(`    Last pipeline run         ${runOk ? '✓' : '✗'} ${lastRun.status} ${runAge !== null ? runAge + 'h ago' : ''} (${lastRun.duration_s?.toFixed(0) || '?'}s)`);
       if (!runOk && lastRun.failed_phases) {
         try {
           const failed = JSON.parse(lastRun.failed_phases);
-          if (failed.length > 0) console.log(`      Failed: ${failed.join(', ')}`);
+          if (failed.length > 0) addLine(`      Failed: ${failed.join(', ')}`);
         } catch {}
       }
     }
@@ -282,18 +311,69 @@ async function selfTest() {
       for (const e of recentErrors) {
         grouped[e.event_type] = (grouped[e.event_type] || 0) + 1;
       }
-      console.log(`    Errors (7d)               ⚠ ${recentErrors.length} total`);
+      const errorOk = recentErrors.length === 0;
+      healthChecks.total++;
+      if (errorOk) healthChecks.passed++;
+      addLine(`    Errors (7d)               ⚠ ${recentErrors.length} total`);
       for (const [type, count] of Object.entries(grouped).sort((a, b) => b[1] - a[1]).slice(0, 5)) {
-        console.log(`      ${type}: ${count}`);
+        addLine(`      ${type}: ${count}`);
       }
     } else {
-      console.log(`    Errors (7d)               ✓ none`);
+      healthChecks.total++;
+      healthChecks.passed++;
+      addLine(`    Errors (7d)               ✓ none`);
     }
   } catch (err) {
-    console.log(`    Operational health        ✗ ${err.message}`);
+    addLine(`    Operational health        ✗ ${err.message}`);
   }
 
-  console.log('');
+  addLine('');
+
+  // Send to Telegram if --notify flag is present
+  if (shouldNotify) {
+    try {
+      const { sendTelegram } = await import('./lib/telegram.mjs');
+      const now = new Date();
+      const dateStr = now.toISOString().split('T')[0];
+
+      // Format as HTML for Telegram
+      const htmlLines = [
+        `🏥 <b>Finance Engine Health</b>`,
+        `<i>Generated: ${dateStr}</i>`,
+        '',
+      ];
+
+      // Convert console output to Telegram format
+      for (const line of healthLines) {
+        // Skip the box drawing
+        if (line.includes('╔') || line.includes('╚') || line.includes('═')) continue;
+
+        // Format section headers
+        if (line.trim().match(/^(Module health|Database|Xero|Operational health):/)) {
+          htmlLines.push('');
+          htmlLines.push(`<b>${line.trim()}</b>`);
+          continue;
+        }
+
+        // Convert status symbols and format
+        let formatted = line
+          .replace(/✓/g, '✅')
+          .replace(/✗/g, '❌')
+          .replace(/⚠/g, '⚠️')
+          .replace(/← ATTENTION/g, '⚠️ ATTENTION');
+
+        htmlLines.push(formatted);
+      }
+
+      htmlLines.push('');
+      htmlLines.push(`<b>Summary:</b> ${healthChecks.passed}/${healthChecks.total} operational checks passed`);
+
+      await sendTelegram(htmlLines.join('\n'), { parseMode: 'HTML' });
+    } catch (err) {
+      console.error('Failed to send Telegram notification:', err.message);
+    }
+  }
+
   process.exit(allPassed ? 0 : 1);
 }
 
@@ -489,6 +569,7 @@ async function main() {
   console.error('  health       Full system health check');
   console.error('  status       Pipeline status dashboard');
   console.error('  --self-test  Run test suite + health checks');
+  console.error('  --notify     Send health report to Telegram (use with health command)');
   process.exit(1);
 }
 

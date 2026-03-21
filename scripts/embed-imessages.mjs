@@ -12,10 +12,8 @@
  *   node scripts/embed-imessages.mjs --stats      # Show stats only
  */
 
-import dotenv from 'dotenv';
+import '../lib/load-env.mjs';
 import { join } from 'path';
-
-dotenv.config({ path: join(import.meta.dirname, '..', '.env.local'), override: true });
 
 import { createClient } from '@supabase/supabase-js';
 import { trackedBatchEmbedding } from './lib/llm-client.mjs';

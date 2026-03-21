@@ -18,14 +18,11 @@
  *   node scripts/discover-grants.mjs --sources grantconnect,web-search  # Specific sources
  */
 
+import '../lib/load-env.mjs';
 import { createClient } from '@supabase/supabase-js';
 import { loadProjects } from './lib/project-loader.mjs';
 import { scoreGrantBatch } from './lib/grant-scorer.mjs';
 import { GrantEngine } from '../packages/grant-engine/src/index.ts';
-import dotenv from 'dotenv';
-
-dotenv.config({ path: '.env.local' });
-dotenv.config({ path: '.env' });
 
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL;
 const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;

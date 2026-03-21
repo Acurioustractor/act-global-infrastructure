@@ -11,13 +11,11 @@
  * Run by Master Automation daily at 5 AM UTC
  */
 
+import '../lib/load-env.mjs';
 import { fileURLToPath } from 'url';
 import { dirname, resolve } from 'path';
 import { createClient } from '@supabase/supabase-js';
-import dotenv from 'dotenv';
 import fs from 'fs/promises';
-
-dotenv.config({ path: '.env.local' });
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);

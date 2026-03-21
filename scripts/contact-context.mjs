@@ -22,11 +22,9 @@
  *   SUPABASE_SERVICE_ROLE_KEY - Supabase access
  */
 
+import '../lib/load-env.mjs';
 import { createClient } from '@supabase/supabase-js';
 import { loadProjectsConfig } from './lib/project-loader.mjs';
-import dotenv from 'dotenv';
-
-dotenv.config({ path: '.env.local' });
 
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://tednluwflfhxyucgwigh.supabase.co';
 const SUPABASE_KEY = process.env.SUPABASE_SHARED_SERVICE_ROLE_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY;

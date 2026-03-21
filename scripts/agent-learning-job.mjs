@@ -23,13 +23,11 @@
  *   --days <n>      Analysis time window (default: 30)
  */
 
+import '../lib/load-env.mjs';
 import { createClient } from '@supabase/supabase-js';
 import { AgentLearning } from './lib/agent-learning.mjs';
 import { sendEmbed, sendDiscordMessage } from './discord-notify.mjs';
 import { createAuditor } from './lib/audit.mjs';
-import dotenv from 'dotenv';
-
-dotenv.config({ path: '.env.local' });
 
 // Configuration
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL;

@@ -1,9 +1,7 @@
 #!/usr/bin/env node
+import '../lib/load-env.mjs';
 import { createClient } from '@supabase/supabase-js';
 import { readFileSync } from 'fs';
-import dotenv from 'dotenv';
-
-dotenv.config({ path: '.env.local' });
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,

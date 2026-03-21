@@ -12,10 +12,8 @@
  *   node scripts/project-updates.mjs setup  # Create table if needed
  */
 
+import '../lib/load-env.mjs';
 import { createClient } from '@supabase/supabase-js';
-import dotenv from 'dotenv';
-
-dotenv.config({ path: '.env.local' });
 
 const MAIN_URL = 'https://tednluwflfhxyucgwigh.supabase.co';
 const MAIN_KEY = process.env.SUPABASE_SHARED_SERVICE_ROLE_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY;

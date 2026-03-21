@@ -25,13 +25,11 @@
  *   SIGNAL_CLI_PATH      - Path to signal-cli (default: signal-cli)
  */
 
+import '../lib/load-env.mjs';
 import { createClient } from '@supabase/supabase-js';
 import { spawn, execSync } from 'child_process';
 import { readFileSync, existsSync, mkdirSync, writeFileSync } from 'fs';
 import { join } from 'path';
-import dotenv from 'dotenv';
-
-dotenv.config({ path: '.env.local' });
 
 const SIGNAL_PHONE = process.env.SIGNAL_PHONE;
 const SIGNAL_CLI = process.env.SIGNAL_CLI_PATH || 'signal-cli';

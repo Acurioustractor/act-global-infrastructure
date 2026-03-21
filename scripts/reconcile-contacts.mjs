@@ -25,19 +25,18 @@
  *   GHL_API_KEY / GHL_LOCATION_ID (for contact creation)
  */
 
+import '../lib/load-env.mjs';
 import { createClient } from '@supabase/supabase-js';
 import { google } from 'googleapis';
 import { execSync } from 'child_process';
 import { createGHLService } from './lib/ghl-api-service.mjs';
 import { isNoReplyEmail, isOwnDomainEmail, shouldProcessEmail } from './lib/cultural-guard.mjs';
 import { matchOrCreateContact } from './lib/contact-intelligence.mjs';
-import dotenv from 'dotenv';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-dotenv.config({ path: join(__dirname, '..', '.env.local'), override: true });
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // HELPERS

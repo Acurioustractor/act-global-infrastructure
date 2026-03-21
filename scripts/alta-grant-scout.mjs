@@ -20,18 +20,16 @@
  *   node alta-grant-scout.mjs upcoming --days 30
  */
 
+import '../lib/load-env.mjs';
 import { createClient } from '@supabase/supabase-js';
 import { loadProjectsConfig } from './lib/project-loader.mjs';
 import { dirname, join } from 'path';
 import { fileURLToPath } from 'url';
 import { execSync } from 'child_process';
-import dotenv from 'dotenv';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 // Load environment variables
-dotenv.config({ path: '.env.local' });
-dotenv.config({ path: '.env' });
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // SETUP

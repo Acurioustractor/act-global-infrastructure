@@ -18,13 +18,11 @@
  *   node scripts/year-start-review.mjs reset         # Reset review progress
  */
 
+import '../lib/load-env.mjs';
 import { createClient } from '@supabase/supabase-js';
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'fs';
 import { loadProjects } from './lib/project-loader.mjs';
 import { sendDiscordMessage, sendEmbed } from './discord-notify.mjs';
-import dotenv from 'dotenv';
-
-dotenv.config({ path: '.env.local' });
 
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL;
 const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_SHARED_SERVICE_ROLE_KEY;

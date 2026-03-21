@@ -12,11 +12,9 @@
  *   node scripts/auto-tag-fy26-transactions.mjs --report     # Generate report only
  */
 
+import '../lib/load-env.mjs';
 import { createClient } from '@supabase/supabase-js';
 import { loadProjectsConfig } from './lib/project-loader.mjs';
-import dotenv from 'dotenv';
-
-dotenv.config({ path: '.env.local' });
 
 // ============================================================================
 // CONFIGURATION
