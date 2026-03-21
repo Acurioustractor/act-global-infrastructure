@@ -179,7 +179,7 @@ export default function TaggerV2Page() {
   // Fetch calendar context for the active item's date
   const { data: calData } = useQuery<CalendarContext>({
     queryKey: ['calendar-context', activeItem?.date, activeItem?.vendor],
-    queryFn: () => fetch(`/api/receipts/calendar-context/${activeItem!.date}?days=0&vendor=${encodeURIComponent(activeItem!.vendor)}`).then(r => r.json()),
+    queryFn: () => fetch(`/api/receipts/calendar-context/${activeItem!.date}?days=1&vendor=${encodeURIComponent(activeItem!.vendor)}`).then(r => r.json()),
     enabled: !!activeItem?.date,
     staleTime: 60_000,
   })
@@ -582,8 +582,27 @@ export default function TaggerV2Page() {
       ) : (
         <p className="text-xs text-white/20 py-3 text-center">No calendar events this day</p>
       )}
-      {calData?.hint && (
-        <p className="text-xs text-emerald-400/60 mt-2 px-1">{calData.hint}</p>
+      {/* Show contextual events (nearby, relevant) that aren't already in the main list */}
+      {calData?.contextual && calData.contextual.length > 0 && (
+        <div className="mt-3 pt-3 border-t border-white/5">
+          <p className="text-[10px] uppercase tracking-wider text-white/20 mb-1.5">Nearby context</p>
+          <div className="space-y-1.5">
+            {calData.contextual.slice(0, 5).map(ev => (
+              <div key={ev.id} className="px-3 py-2 rounded-lg text-xs bg-amber-500/5 border border-amber-500/10">
+                <div className="flex items-center gap-1.5">
+                  <span className="text-white/30 tabular-nums shrink-0">{formatTime(ev.start_time)}</span>
+                  <span className="text-white/70 truncate">{ev.title}</span>
+                </div>
+                {ev.location && (
+                  <div className="flex items-center gap-1 mt-0.5 ml-[3.5rem]">
+                    <MapPin className="h-2.5 w-2.5 text-white/20" />
+                    <span className="text-white/30 truncate">{ev.location}</span>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
       )}
     </div>
   )

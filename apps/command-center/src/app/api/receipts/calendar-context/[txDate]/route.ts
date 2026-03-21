@@ -11,9 +11,9 @@ export async function GET(
     const days = parseInt(searchParams.get('days') || '7')
     const vendor = searchParams.get('vendor') || ''
 
-    const startDate = new Date(txDate)
+    const startDate = new Date(txDate + 'T00:00:00+10:00') // AEST start of day
     startDate.setDate(startDate.getDate() - days)
-    const endDate = new Date(txDate)
+    const endDate = new Date(txDate + 'T23:59:59+10:00') // AEST end of day
     endDate.setDate(endDate.getDate() + days)
 
     const { data: events, error } = await supabase
