@@ -18,6 +18,7 @@ import {
   Handshake,
   MessageSquare,
   Settings,
+  BarChart,
   KanbanSquare,
   TrendingUp,
   Tag,
@@ -124,6 +125,7 @@ export const navStructure: SidebarNavGroup[] = [
     items: [
       { href: '/chat', label: 'Chat', icon: MessageSquare, color: 'text-indigo-400', bg: 'bg-indigo-500/20' },
       { href: '/system', label: 'System', icon: Settings },
+      { href: '/system/usage', label: 'AI Usage', icon: BarChart, color: 'text-emerald-400', bg: 'bg-emerald-500/20' },
     ],
     defaultExpanded: false,
   },
