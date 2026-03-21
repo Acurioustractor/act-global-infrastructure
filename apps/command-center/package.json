@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@act/intel": "workspace:*",
+    "@act/intel": "file:../../packages/act-intel",
     "@anthropic-ai/sdk": "^0.72.1",
     "@hello-pangea/dnd": "^18.0.1",
     "@notionhq/client": "^5.9.0",

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "installCommand": "corepack enable && corepack prepare pnpm@10.12.1 --activate && pnpm install --no-frozen-lockfile",
+  "installCommand": "npm install --legacy-peer-deps",
   "functions": {
     "api/**/*.mjs": {
       "runtime": "@vercel/node@3.0.0"
