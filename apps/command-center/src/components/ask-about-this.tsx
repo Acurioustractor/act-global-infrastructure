@@ -9,6 +9,10 @@ interface AskAboutThisProps {
   pageTitle: string
   /** Function that returns current page data as a string for AI context */
   getContext: () => string
+  /** Custom API endpoint. Defaults to /api/finance/ask */
+  apiEndpoint?: string
+  /** Suggested quick questions for this page */
+  suggestions?: string[]
 }
 
 interface Message {
@@ -16,7 +20,7 @@ interface Message {
   content: string
 }
 
-export function AskAboutThis({ pageTitle, getContext }: AskAboutThisProps) {
+export function AskAboutThis({ pageTitle, getContext, apiEndpoint = '/api/finance/ask', suggestions }: AskAboutThisProps) {
   const [isOpen, setIsOpen] = useState(false)
   const [input, setInput] = useState('')
   const [messages, setMessages] = useState<Message[]>([])
@@ -34,7 +38,7 @@ export function AskAboutThis({ pageTitle, getContext }: AskAboutThisProps) {
 
     try {
       const context = getContext()
-      const res = await fetch('/api/finance/ask', {
+      const res = await fetch(apiEndpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ question, context, pageTitle }),
@@ -111,7 +115,7 @@ export function AskAboutThis({ pageTitle, getContext }: AskAboutThisProps) {
             Ask anything about the data on this page
           </p>
           <div className="mt-3 flex flex-wrap gap-1.5 justify-center">
-            {['What stands out?', 'Any concerns?', 'Summarise this'].map(q => (
+            {(suggestions || ['What stands out?', 'Any concerns?', 'Summarise this']).map(q => (
               <button
                 key={q}
                 onClick={() => {

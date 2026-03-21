@@ -109,5 +109,64 @@ export async function POST(request: NextRequest) {
     }
   }
 
+  // 5. Send proactive Telegram alerts for significant events
+  for (const event of result.events) {
+    try {
+      if (event.eventCategory === 'INVOICE' && event.eventType === 'UPDATE') {
+        await sendFinancialAlert('invoice_update', event.resourceId);
+      } else if (event.eventCategory === 'BANK_TRANSACTION' && event.eventType === 'CREATE') {
+        await sendFinancialAlert('new_transaction', event.resourceId);
+      }
+    } catch (err) {
+      // Don't fail webhook on notification errors
+      console.error(`Failed to send alert for ${event.resourceId}:`, err);
+    }
+  }
+
   return NextResponse.json({ ok: true });
+}
+
+/**
+ * Send proactive financial alerts to Telegram for significant events.
+ * Only sends for high-value or noteworthy changes to avoid noise.
+ */
+async function sendFinancialAlert(eventType: string, resourceId: string) {
+  const botToken = process.env.TELEGRAM_BOT_TOKEN;
+  const chatId = process.env.TELEGRAM_AUTHORIZED_USERS;
+  if (!botToken || !chatId) return;
+
+  let message = '';
+
+  if (eventType === 'invoice_update') {
+    // Check if invoice was paid
+    const { data: invoice } = await supabase
+      .from('xero_invoices')
+      .select('contact_name, total, status, type, project_code')
+      .eq('xero_id', resourceId)
+      .single();
+
+    if (invoice?.status === 'PAID' && invoice.type === 'ACCREC' && invoice.total >= 1000) {
+      message = `💰 Payment received: $${invoice.total.toLocaleString()} from ${invoice.contact_name}${invoice.project_code ? ` [${invoice.project_code}]` : ''}`
+    }
+  } else if (eventType === 'new_transaction') {
+    // Alert on large transactions
+    const { data: tx } = await supabase
+      .from('xero_transactions')
+      .select('contact_name, total, type, project_code')
+      .eq('xero_id', resourceId)
+      .single();
+
+    if (tx && Math.abs(tx.total) >= 5000) {
+      const direction = tx.total > 0 ? '📥' : '📤';
+      message = `${direction} Large transaction: $${Math.abs(tx.total).toLocaleString()} ${tx.total > 0 ? 'from' : 'to'} ${tx.contact_name || 'Unknown'}${tx.project_code ? ` [${tx.project_code}]` : ''}`;
+    }
+  }
+
+  if (message) {
+    await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ chat_id: chatId, text: message, parse_mode: 'HTML' }),
+    });
+  }
 }

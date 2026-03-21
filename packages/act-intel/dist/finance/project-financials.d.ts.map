@@ -1,0 +1,1 @@
+{"version":3,"file":"project-financials.d.ts","sourceRoot":"","sources":["../../src/finance/project-financials.ts"],"names":[],"mappings":"AAAA;;GAEG;AAEH,OAAO,KAAK,EAAE,mBAAmB,EAAE,uBAAuB,EAAE,MAAM,aAAa,CAAA;AAE/E,MAAM,WAAW,wBAAwB;IACvC,WAAW,CAAC,EAAE,MAAM,CAAA;CACrB;AAED,wBAAsB,sBAAsB,CAC1C,QAAQ,EAAE,mBAAmB,EAC7B,IAAI,GAAE,wBAA6B,GAClC,OAAO,CAAC,uBAAuB,CAAC,CAyBlC"}

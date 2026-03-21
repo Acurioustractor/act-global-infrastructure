@@ -49,6 +49,7 @@ export function getBot(): Bot {
     await ctx.reply(
       "G'day! I'm the ACT Business Agent. Send me a voice message or text to query contacts, projects, calendar, financials — anything in the system.\n\n" +
         'Commands:\n' +
+        '/dream — save to Dream Journal\n' +
         '/voice — cycle TTS voice\n' +
         '/clear — reset conversation\n\n' +
         'Try:\n' +
@@ -57,7 +58,9 @@ export function getBot(): Bot {
         '- "Give me a JusticeHub update"\n' +
         '- "Draft an email to [name] about [topic]"\n' +
         '- "Remind me to exercise at 6am every day"\n' +
-        '- Send a photo of a receipt to log it'
+        '- Send a photo of a receipt to log it\n' +
+        '- /dream I had this wild idea about The Harvest...\n' +
+        '- Send a photo with #dream to save a vision'
     )
   })
 
@@ -66,6 +69,35 @@ export function getBot(): Bot {
     if (!ctx.from || !isAuthorized(ctx.from.id)) return
     await clearConversation(ctx.chat.id)
     await ctx.reply('Conversation cleared. Fresh start.')
+  })
+
+  // /dream command — quick-save to dream journal
+  _bot.command('dream', async (ctx) => {
+    if (!ctx.from || !isAuthorized(ctx.from.id)) return
+    const text = ctx.message?.text?.replace(/^\/dream\s*/i, '').trim()
+    if (!text) {
+      await ctx.reply(
+        '🌙 *Dream Journal*\n\n' +
+          'Send me dreams, visions, stories, ideas — anything that excites you about the future.\n\n' +
+          '• `/dream Your thought here` — quick save\n' +
+          '• Send a voice message starting with "dream:" — transcribed & saved\n' +
+          '• Send a photo with caption starting with `#dream` — saved with image\n' +
+          '• Or just tell me naturally — I\'ll know when it\'s a dream',
+        { parse_mode: 'Markdown' }
+      )
+      return
+    }
+    await ctx.replyWithChatAction('typing')
+    try {
+      const agentResult = await processAgentMessage(
+        ctx.chat.id,
+        `Save this to the dream journal: ${text}`
+      )
+      await sendResponse(ctx, agentResult.text, false)
+    } catch (err) {
+      console.error('Dream command error:', err)
+      await ctx.reply(`Error: ${(err as Error).message}`)
+    }
   })
 
   // /voice command — cycle TTS voice
@@ -114,7 +146,7 @@ export function getBot(): Bot {
     }
   })
 
-  // Photo messages — receipt capture
+  // Photo messages — dream journal or receipt capture
   _bot.on('message:photo', async (ctx) => {
     if (!ctx.from || !isAuthorized(ctx.from.id)) {
       await ctx.reply('Unauthorised.')
@@ -122,6 +154,7 @@ export function getBot(): Bot {
     }
 
     await ctx.replyWithChatAction('typing')
+    const caption = ctx.message.caption || ''
 
     try {
       // Get the largest photo (last in array)
@@ -130,13 +163,23 @@ export function getBot(): Bot {
       const file = await ctx.api.getFile(largest.file_id)
       const fileUrl = `https://api.telegram.org/file/bot${process.env.TELEGRAM_BOT_TOKEN}/${file.file_path}`
 
-      // Download the photo
+      // Check if this is a dream journal photo (#dream tag or /dream prefix)
+      const isDream = /^#dream|^\/dream|^dream:/i.test(caption.trim())
+      if (isDream) {
+        const dreamText = caption.replace(/^#dream\s*|^\/dream\s*|^dream:\s*/i, '').trim()
+        const agentResult = await processAgentMessage(
+          ctx.chat.id,
+          `Save this to the dream journal with an attached photo. The photo URL is: ${fileUrl}\nCaption/thought: ${dreamText || 'A visual dream — no caption provided'}`
+        )
+        await sendResponse(ctx, agentResult.text, false)
+        return
+      }
+
+      // Otherwise, treat as receipt capture
       const response = await fetch(fileUrl)
       const buffer = Buffer.from(await response.arrayBuffer())
       const base64Image = buffer.toString('base64')
 
-      // Extract receipt details with GPT-4o vision
-      const caption = ctx.message.caption || ''
       const extracted = await extractReceiptFromPhoto(base64Image, caption)
 
       if (!extracted) {
@@ -144,7 +187,6 @@ export function getBot(): Bot {
         return
       }
 
-      // Ask agent to add the receipt
       const prompt = `Add a receipt: vendor="${extracted.vendor}", amount=${extracted.amount}, date="${extracted.date}"${extracted.category ? `, category="${extracted.category}"` : ''}${caption ? `, notes="${caption}"` : ''}`
       const agentResult = await processAgentMessage(ctx.chat.id, prompt)
       await sendResponse(ctx, agentResult.text, false)
