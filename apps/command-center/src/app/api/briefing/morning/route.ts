@@ -3,8 +3,7 @@ import { supabase, elSupabase } from '@/lib/supabase'
 import { fetchDailyBriefing } from '@act/intel'
 import type { SupabaseQueryClient } from '@act/intel'
 
-// Cache for 5 minutes — avoids hammering Supabase on every page load
-export const revalidate = 300
+export const dynamic = 'force-dynamic'
 
 // Regenerative thoughts
 const REGENERATIVE_THOUGHTS = [
