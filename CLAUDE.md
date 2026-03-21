@@ -102,9 +102,29 @@ Before implementing ANY external service integration, **STOP and audit first**:
 ## Database (Schema-First Rule)
 
 Before writing ANY code that touches the database:
-1. **Query the actual schema first** — use `mcp__supabase__execute_sql` with `SELECT column_name, data_type FROM information_schema.columns WHERE table_name = '<table>'` or read the relevant migration file
-2. **Never assume column names** from context, grep results, or memory — verify them
+1. **Run `/db-check` first** — or manually query `information_schema.columns` for every table you'll touch
+2. **Never assume column names** from context, grep results, or memory — verify them. Known traps: `type` not `invoice_type`, `public_avatar_url` not `avatar_url`
 3. **Check for existing views** (`v_` prefix) before writing complex joins — there may already be a view for what you need
+4. **Check NOT NULL columns without defaults** — these cause silent insert failures
+5. **Check unique constraints before upserts** — wrong `onConflict` columns cause data loss or duplicates
+
+### Supabase Query Patterns
+
+- Use `LEFT JOIN` instead of `NOT IN` for large datasets
+- Batch inserts via SQL `COPY` instead of per-row inserts when > 100 rows
+- **Always paginate past the 1,000-row default limit** — use `.range()` for bulk operations
+- Handle RPC timeouts gracefully — fall back to direct `psql` if needed
+
+## Debugging Principles
+
+- **Root cause first.** When something doesn't render or returns unexpected results, investigate the actual root cause before applying surface-level fixes. Don't blame missing data — verify the query, column names, and data pipeline first.
+- **Never apply workarounds** for schema mismatches — fix the actual column name or type.
+- **Trace the full path:** query → API → component → render. Don't guess where it breaks.
+
+## Error Handling
+
+- **401/auth errors:** Implement exponential backoff with max 3 retries. Never create infinite retry loops on auth failures.
+- **Silent failures are bugs.** All insert/upsert operations must compare attempted vs actual count. Log discrepancies.
 
 ## Testing & Deployment
 
@@ -127,7 +147,34 @@ When using the Task tool with sub-agents:
 For multi-phase plans, feed one phase at a time rather than the full plan upfront:
 - Each phase should have specific files + acceptance criteria
 - Run `npx tsc --noEmit` between phases
+- **Commit working code at each phase boundary** — don't wait until all phases are done
 - Report phase status before proceeding to next
+
+## Supabase MCP (CRITICAL)
+
+- **ALWAYS verify which Supabase project MCP is connected to** before running any queries. Run `mcp__supabase__get_project_url` and confirm the URL matches the expected project.
+- **If MCP cannot see tables**, fall back to `psql` directly — do NOT spend time debugging MCP configuration.
+- **Use psql for DDL** (migrations, materialized view refreshes, index creation) — the `exec_sql` RPC does not support DDL.
+- **Use `execSync` sequentially** (not `Promise.all`) for shell-spawned database commands.
+- **Cross-reference project URL with documentation** before any database operation — never connect to or run migrations against the wrong project.
+
+## Implementation Rules
+
+- **Do NOT enter planning mode** unless the user explicitly asks for a plan. Default to implementing immediately.
+- **If a plan is needed**, keep it to <20 lines and get user approval before writing more. Never autonomously write multi-page plans.
+- **Never write plan files** without being asked. Start building.
+- **When user says "open" or "show"**, they want a browser opened or actual result displayed — not more code explanation.
+
+## Database Operations
+
+- **Always verify column names and primary keys** against the actual schema before writing migrations or insert statements — do not assume schema from memory.
+- **After applying any migration**, re-query the schema to confirm it took effect.
+- **If a migration fails**, read the error, fix the SQL, and retry (up to 3 times) before asking the user.
+
+## Data Display
+
+- **Query ALL matching records** for maps/tables — never limit to a single pagination page unless the user explicitly asks for pagination. Watch for Supabase's default 1,000 row limit.
+- **Ensure visualization relationships are meaningful** — don't create links based on shallow shared attributes like "same sector." Think through whether the data relationship produces useful insight.
 
 ## Bias Towards Action
 

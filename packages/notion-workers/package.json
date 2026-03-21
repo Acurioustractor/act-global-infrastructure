@@ -5,7 +5,7 @@
   "description": "Notion Workers — custom agent tools powered by ACT ecosystem data",
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc --noEmit && node esbuild.config.mjs",
     "check": "tsc --noEmit",
     "dev": "tsc --watch"
   },
@@ -18,7 +18,9 @@
     "@supabase/supabase-js": "^2.49.1"
   },
   "devDependencies": {
+    "@act/intel": "workspace:*",
     "@types/node": "^22.9.0",
+    "esbuild": "^0.25.0",
     "tsx": "^4.21.0",
     "typescript": "^5.8.0"
   }

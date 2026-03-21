@@ -24,6 +24,10 @@
       "env": {
         "SUPABASE_ACCESS_TOKEN": "${SUPABASE_ACCESS_TOKEN}"
       }
+    },
+    "xero": {
+      "command": "bash",
+      "args": ["/Users/benknight/Code/act-global-infrastructure/scripts/xero-mcp-wrapper.sh"]
     }
   }
 }

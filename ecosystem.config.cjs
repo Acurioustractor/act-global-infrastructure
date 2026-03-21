@@ -159,7 +159,7 @@ const cronScripts = [
     name: 'auto-tag-transactions',
     script: 'scripts/tag-transactions-by-vendor.mjs',
     args: '--apply',
-    cron_restart: '30 9 * * *', // Daily 9:30am AEST (after finance-sync at 8:30am)
+    cron_restart: '15 */6 * * *', // Every 6 hours +15min (after xero-sync at :00)
   },
   {
     name: 'enrich-communications',
@@ -305,22 +305,50 @@ const cronScripts = [
     cron_restart: '0 */6 * * *', // Every 6 hours — keep Xero data fresh for all finance scripts
   },
   {
-    name: 'dext-receipt-forward',
-    script: 'scripts/forward-receipts-to-dext.mjs',
+    name: 'receipt-capture',
+    script: 'scripts/capture-receipts.mjs',
     args: '--days 3',
     cron_restart: '30 */6 * * *', // Every 6 hours +30min (after xero-sync at :00)
   },
   {
-    name: 'receipt-pipeline-correlate',
-    script: 'scripts/correlate-dext-xero.mjs',
-    args: '--days 90',
-    cron_restart: '0 11 * * *', // Daily 11am AEST (after Xero sync + Dext forwarding)
+    name: 'receipt-match',
+    script: 'scripts/match-receipts-to-xero.mjs',
+    args: '--apply --ai',
+    cron_restart: '0 7 * * *', // Daily 7am AEST (after Xero sync)
   },
   {
-    name: 'receipt-pipeline-monitor',
-    script: 'scripts/monitor-receipt-pipeline.mjs',
-    args: '--verbose',
-    cron_restart: '30 11 * * *', // Daily 11:30am AEST (after correlation at 11am)
+    name: 'receipt-upload',
+    script: 'scripts/upload-receipts-to-xero.mjs',
+    cron_restart: '0 8 * * *', // Daily 8am AEST (after matching at 7am)
+  },
+  {
+    name: 'xero-project-tag',
+    script: 'scripts/tag-xero-transactions.mjs',
+    args: '--apply',
+    cron_restart: '0 9 * * *', // Daily 9am AEST (after uploads at 8am)
+  },
+  {
+    name: 'receipt-calendar-suggest',
+    script: 'scripts/suggest-receipts-from-calendar.mjs',
+    args: '--notify',
+    cron_restart: '0 10 * * 1', // Weekly Monday 10am AEST
+  },
+  {
+    name: 'reconciliation-checklist',
+    script: 'scripts/generate-reconciliation-checklist.mjs',
+    args: '--notify',
+    cron_restart: '0 7 1 * *', // 1st of month at 7am AEST
+  },
+  {
+    name: 'collections-autopilot',
+    script: 'scripts/chase-overdue-invoices.mjs',
+    cron_restart: '0 10 * * 1-5', // Weekdays 10am AEST (after Xero sync + morning briefing)
+  },
+  {
+    name: 'financial-advisor',
+    script: 'scripts/financial-advisor-agent.mjs',
+    args: '--notify',
+    cron_restart: '0 8 * * 1', // Weekly Monday 8am AEST
   },
   {
     name: 'financial-snapshots',
@@ -332,6 +360,12 @@ const cronScripts = [
     name: 'finance-daily-briefing',
     script: 'scripts/finance-daily-briefing.mjs',
     cron_restart: '0 7 * * 1-5', // Weekdays 7am AEST (alongside general daily-briefing)
+  },
+  {
+    name: 'finance-health-digest',
+    script: 'scripts/finance-engine.mjs',
+    args: 'health --notify',
+    cron_restart: '0 22 * * 6', // Sunday 8am AEST (Saturday 22:00 UTC)
   },
   {
     name: 'grantscope-to-notion',

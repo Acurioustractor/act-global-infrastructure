@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'apps/command-center/**'
+      - 'packages/**'
+      - 'pnpm-lock.yaml'
+  pull_request:
+    paths:
+      - 'apps/command-center/**'
+      - 'packages/**'
+      - 'pnpm-lock.yaml'
+
+jobs:
+  typecheck-and-lint:
+    name: Type Check & Lint
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Type check
+        run: pnpm --filter @act/command-center exec tsc --noEmit
+
+      - name: Lint
+        run: pnpm --filter @act/command-center lint
