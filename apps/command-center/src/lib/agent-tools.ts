@@ -51,8 +51,6 @@ export async function executeTool(
       return await executeQuerySupabase(input as { sql: string; description: string })
     case 'get_daily_briefing':
       return await executeGetDailyBriefing(input as { lookback_days?: number; detail_level?: string; format?: string })
-    case 'get_financial_summary':
-      return await executeGetFinancialSummary(input as { days?: number })
     case 'search_contacts':
       return await executeSearchContacts(input as { query: string; limit?: number })
     case 'get_contact_details':
@@ -61,8 +59,6 @@ export async function executeTool(
       return await executeGetCalendarEvents(input as { start_date?: string; end_date?: string })
     case 'search_knowledge':
       return await executeSearchKnowledge(input as { query: string; project_code?: string; limit?: number })
-    case 'get_project_summary':
-      return await executeGetProjectSummary(input as { project_code: string })
     case 'get_contacts_needing_attention':
       return await executeGetContactsNeedingAttention(input as { limit?: number; project?: string })
     case 'get_deal_risks':
@@ -84,18 +80,11 @@ export async function executeTool(
       return await executeGetGrantOpportunities(input as { status?: string; limit?: number })
     case 'get_grant_pipeline':
       return await executeGetGrantPipeline(input as { status?: string })
-    case 'get_pending_receipts':
-      return await executeGetPendingReceipts(input as { limit?: number })
-    // Financial review tools
-    case 'get_quarterly_review':
-      return await executeGetQuarterlyReview(input as { quarter?: string; detail_level?: string })
     case 'get_xero_transactions':
       return await executeGetXeroTransactions(
         input as { type?: string; vendor?: string; project_code?: string; start_date?: string; end_date?: string; min_amount?: number; limit?: number }
       )
     // Reflection tools
-    case 'get_day_context':
-      return await executeGetDayContext(input as { date?: string })
     case 'save_daily_reflection':
       return await executeSaveDailyReflection(
         input as {
@@ -153,27 +142,19 @@ export async function executeTool(
     // Email search
     case 'search_emails':
       return await executeSearchEmails(input as { query: string; mailbox?: string; limit?: number })
+    // Receipt finder
+    case 'find_receipt':
+      return await executeFindReceipt(input as { vendor?: string; amount?: number; date?: string; project_code?: string })
     // Cashflow forecast
     case 'get_cashflow_forecast':
       return await executeGetCashflowForecast(input as { months_ahead?: number })
     // Project health
-    case 'get_project_health':
-      return await executeGetProjectHealth(input as { project_code?: string })
     // Upcoming deadlines
     case 'get_upcoming_deadlines':
       return await executeGetUpcomingDeadlines(input as { days_ahead?: number; category?: string })
     // Meeting notes
-    case 'create_meeting_notes':
-      return await executeCreateMeetingNotes(input as {
-        title: string; summary: string; content: string;
-        project_code?: string; participants?: string[]; action_items?: string[]; date?: string
-      })
     case 'get_project_360':
       return await executeGetProject360(input as { project_code: string })
-    case 'get_ecosystem_pulse':
-      return await executeGetEcosystemPulse()
-    case 'get_daily_priorities':
-      return await executeGetDailyPriorities(input as { limit?: number })
     // Notion write tools
     case 'add_meeting_to_notion':
       return await executeAddMeetingToNotion(input as {
@@ -201,10 +182,6 @@ export async function executeTool(
       return await executeGetReceiptPipelineStatus(input as { include_stuck?: boolean })
     case 'get_meeting_prep':
       return await executeGetMeetingPrep(input as { event_title?: string; date?: string })
-    case 'capture_meeting_notes':
-      return await executeCaptureMeetingNotes(input as { notes: string; event_title?: string; project_code?: string }, chatId)
-    case 'get_weekly_finance_summary':
-      return await executeGetWeeklyFinanceSummary(input as { format?: string })
     case 'get_grant_readiness':
       return await executeGetGrantReadiness(input as { application_id?: string; grant_name?: string })
     case 'draft_grant_response':
@@ -320,45 +297,51 @@ async function executeGetDailyBriefing(input: {
     return formatDailyBriefingVoice(result)
   }
 
-  if (input.detail_level === 'summary') {
-    return JSON.stringify({
-      generated_at: result.generated_at,
-      overdue_actions: result.overdue_actions.length,
-      upcoming_followups: result.upcoming_followups.length,
-      recent_meetings: result.recent_meetings.length,
-      stale_relationships: result.stale_relationships.length,
-      active_projects: result.active_projects.length,
-      top_projects: result.active_projects
-        .slice(0, 5)
-        .map(p => `${p.code}(${p.activity_count})`).join(', '),
-    })
+  // Build action items — the most important part
+  const actions: string[] = []
+  if (result.overdue_actions.length > 0) {
+    actions.push(`${result.overdue_actions.length} overdue action${result.overdue_actions.length > 1 ? 's' : ''} — chase these first`)
+  }
+  if (result.upcoming_followups.length > 0) {
+    actions.push(`${result.upcoming_followups.length} follow-up${result.upcoming_followups.length > 1 ? 's' : ''} due this week`)
+  }
+  if (result.stale_relationships.length > 0) {
+    const top = result.stale_relationships[0]
+    actions.push(`${result.stale_relationships.length} contact${result.stale_relationships.length > 1 ? 's' : ''} going quiet — ${top?.full_name || 'check list'}`)
   }
 
-  return JSON.stringify({
-    generated_at: result.generated_at,
-    lookback_days: result.lookback_days,
-    overdue_actions: {
-      count: result.overdue_actions.length,
-      items: result.overdue_actions,
-    },
-    upcoming_followups: {
-      count: result.upcoming_followups.length,
-      items: result.upcoming_followups,
-    },
-    recent_meetings: {
-      count: result.recent_meetings.length,
-      items: result.recent_meetings,
-    },
-    stale_relationships: {
-      count: result.stale_relationships.length,
-      items: result.stale_relationships.map((r) => ({
+  // Default: concise actionable output (not full data dump)
+  // Only expand to full if explicitly requested
+  if (input.detail_level === 'full') {
+    return JSON.stringify({
+      actions,
+      generated_at: result.generated_at,
+      overdue_actions: result.overdue_actions,
+      upcoming_followups: result.upcoming_followups,
+      recent_meetings: result.recent_meetings,
+      stale_relationships: result.stale_relationships.map((r) => ({
         name: r.full_name || r.email || 'Unknown',
         company: r.company_name,
         status: r.engagement_status,
         last_contact: r.last_contact_date,
       })),
-    },
-    active_projects: result.active_projects.slice(0, 15),
+      active_projects: result.active_projects.slice(0, 10),
+    })
+  }
+
+  return JSON.stringify({
+    actions,
+    meetings_today: result.recent_meetings.length,
+    meetings: result.recent_meetings.slice(0, 5).map(m => ({
+      title: m.title, date: m.recorded_at,
+    })),
+    overdue: result.overdue_actions.slice(0, 5).map((a) => ({
+      title: a.title, due: a.follow_up_date,
+    })),
+    followups_due: result.upcoming_followups.slice(0, 5).map((f) => ({
+      title: f.title, due: f.follow_up_date,
+    })),
+    active_projects: result.active_projects.length,
   })
 }
 
@@ -440,7 +423,37 @@ async function executeGetContactDetails(input: {
   try {
     const result = await fetchContactDetails(supabase, { contact_id: input.contact_id })
     if (!result) return JSON.stringify({ error: 'Contact not found', contact_id: input.contact_id })
-    return JSON.stringify(result)
+
+    // Slim down communications — truncate summaries, keep only key fields
+    const comms = (result.recent_communications || []).slice(0, 5).map((c) => ({
+      direction: c.direction,
+      channel: c.channel,
+      date: c.date,
+      subject: c.subject,
+      summary: c.summary ? c.summary.slice(0, 120) + (c.summary.length > 120 ? '...' : '') : null,
+    }))
+
+    return JSON.stringify({
+      id: result.id,
+      name: result.name,
+      email: result.email,
+      phone: result.phone,
+      company: result.company,
+      status: result.status,
+      projects: result.projects,
+      relationship: result.relationship ? {
+        temperature: result.relationship.temperature,
+        trend: result.relationship.trend,
+        lcaa_stage: result.relationship.lcaa_stage,
+        risk_flags: result.relationship.risk_flags,
+      } : null,
+      last_contact: result.last_contact,
+      days_since_contact: result.days_since_contact,
+      tags: result.tags,
+      pipeline: result.open_pipeline,
+      next_meeting: result.next_meeting,
+      recent_communications: comms,
+    })
   } catch (err) {
     return JSON.stringify({ error: (err as Error).message })
   }
@@ -1054,6 +1067,151 @@ async function executeGetPendingReceipts(input: {
       total_pending: `$${totalAmount.toFixed(2)}`,
       receipts,
     })
+  } catch (err) {
+    return JSON.stringify({ error: (err as Error).message })
+  }
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// TOOL: find_receipt
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+async function executeFindReceipt(input: {
+  vendor?: string
+  amount?: number
+  date?: string
+  project_code?: string
+}): Promise<string> {
+  try {
+    // Query all sources directly (same logic as receipt-finder API route)
+    const dateRange = input.date ? (() => {
+      const d = new Date(input.date!)
+      const from = new Date(d); from.setDate(from.getDate() - 7)
+      const to = new Date(d); to.setDate(to.getDate() + 7)
+      return { from: from.toISOString().split('T')[0], to: to.toISOString().split('T')[0] }
+    })() : null
+
+    const results: string[] = []
+    let totalMatches = 0
+
+    // Search Gmail
+    if (input.vendor) {
+      let gmailQuery = supabase
+        .from('communications')
+        .select('subject, from_address, date, snippet, project_code')
+        .or(`subject.ilike.%${input.vendor}%,from_address.ilike.%${input.vendor}%,snippet.ilike.%${input.vendor}%`)
+        .order('date', { ascending: false })
+        .limit(5)
+      if (dateRange) gmailQuery = gmailQuery.gte('date', dateRange.from).lte('date', dateRange.to)
+      const { data: emails } = await gmailQuery
+      if (emails?.length) {
+        results.push(`**Gmail (${emails.length}):**`)
+        for (const e of emails) {
+          const isReceipt = /receipt|invoice|order|confirm|payment|tax.invoice/i.test(e.subject || '')
+          results.push(`  [${isReceipt ? 'high' : 'low'}] "${e.subject}" from ${e.from_address} (${e.date})`)
+        }
+        totalMatches += emails.length
+      }
+    }
+
+    // Search calendar
+    if (dateRange) {
+      const { data: events } = await supabase
+        .from('calendar_events')
+        .select('title, start_time, location')
+        .gte('start_time', dateRange.from)
+        .lte('start_time', dateRange.to)
+        .limit(10)
+      const travelKeywords = /flight|hotel|travel|airport|qantas|virgin|uber|palm island|darwin|cairns|brisbane|sydney/i
+      const relevant = (events || []).filter(e => {
+        const text = `${e.title} ${e.location || ''}`
+        return (input.vendor && text.toLowerCase().includes(input.vendor.toLowerCase())) || travelKeywords.test(text)
+      })
+      if (relevant.length) {
+        results.push(`**Calendar (${relevant.length}):**`)
+        for (const e of relevant.slice(0, 5)) {
+          results.push(`  "${e.title}"${e.location ? ` at ${e.location}` : ''} on ${new Date(e.start_time).toLocaleDateString('en-AU')}`)
+        }
+        totalMatches += relevant.length
+      }
+    }
+
+    // Search Xero bills (ACCPAY = receipts/invoices FROM suppliers)
+    {
+      let billQuery = supabase
+        .from('xero_invoices')
+        .select('invoice_number, contact_name, total, date, status, has_attachments')
+        .eq('type', 'ACCPAY')
+        .order('date', { ascending: false })
+        .limit(10)
+      if (input.vendor) billQuery = billQuery.ilike('contact_name', `%${input.vendor}%`)
+      if (input.amount) {
+        const tol = Math.abs(input.amount) * 0.1
+        billQuery = billQuery.gte('total', Math.abs(input.amount) - tol).lte('total', Math.abs(input.amount) + tol)
+      }
+      if (dateRange) billQuery = billQuery.gte('date', dateRange.from).lte('date', dateRange.to)
+      const { data: bills } = await billQuery
+      if (bills?.length) {
+        results.push(`**Xero Bills (${bills.length}):**`)
+        for (const b of bills) {
+          results.push(`  [${b.has_attachments ? 'has attachment' : 'NO attachment'}] ${b.invoice_number}: $${b.total.toFixed(2)} from ${b.contact_name} [${b.status}]`)
+        }
+        totalMatches += bills.length
+      }
+    }
+
+    // Search bank transactions
+    {
+      let txQuery = supabase
+        .from('xero_transactions')
+        .select('contact_name, total, date, project_code, type')
+        .order('date', { ascending: false })
+        .limit(10)
+      if (input.vendor) txQuery = txQuery.ilike('contact_name', `%${input.vendor}%`)
+      if (input.amount) {
+        const tol = Math.abs(input.amount) * 0.1
+        const abs = Math.abs(input.amount)
+        txQuery = txQuery.gte('total', -(abs + tol)).lte('total', abs + tol)
+      }
+      if (dateRange) txQuery = txQuery.gte('date', dateRange.from).lte('date', dateRange.to)
+      if (input.project_code) txQuery = txQuery.eq('project_code', input.project_code)
+      const { data: txns } = await txQuery
+      if (txns?.length) {
+        results.push(`**Bank Transactions (${txns.length}):**`)
+        for (const t of txns) {
+          results.push(`  ${t.type} $${Math.abs(t.total).toFixed(2)} — ${t.contact_name || 'Unknown'} on ${t.date} [${t.project_code || 'untagged'}]`)
+        }
+        totalMatches += txns.length
+      }
+    }
+
+    // Search receipt pipeline
+    {
+      let rmQuery = supabase
+        .from('receipt_matches')
+        .select('vendor_name, amount, transaction_date, status, project_code')
+        .order('transaction_date', { ascending: false })
+        .limit(5)
+      if (input.vendor) rmQuery = rmQuery.ilike('vendor_name', `%${input.vendor}%`)
+      if (input.amount) {
+        const tol = Math.abs(input.amount) * 0.1
+        rmQuery = rmQuery.gte('amount', Math.abs(input.amount) - tol).lte('amount', Math.abs(input.amount) + tol)
+      }
+      const { data: rms } = await rmQuery
+      if (rms?.length) {
+        results.push(`**Receipt Pipeline (${rms.length}):**`)
+        for (const r of rms) {
+          results.push(`  $${r.amount?.toFixed(2)} ${r.vendor_name} [${r.status}] ${r.project_code || ''}`)
+        }
+        totalMatches += rms.length
+      }
+    }
+
+    if (totalMatches === 0) {
+      return `No matches found for ${[input.vendor, input.amount && `$${input.amount}`, input.date].filter(Boolean).join(', ')}. Try broadening the search (remove date or amount).`
+    }
+
+    return `Found ${totalMatches} matches:\n\n${results.join('\n')}`
   } catch (err) {
     return JSON.stringify({ error: (err as Error).message })
   }
@@ -4252,16 +4410,38 @@ Write the draft as ready-to-submit content. Be specific, use real details from t
 async function executeGetRevenueScoreboard(): Promise<string> {
   try {
     const result = await fetchRevenueScoreboard(supabase)
+
+    // Build action items from the data
+    const actions: string[] = []
+    if (result.receivables.total > 0) {
+      actions.push(`Chase $${Math.round(result.receivables.total).toLocaleString()} in outstanding receivables`)
+    }
+    if (result.receivables.items.length > 0) {
+      const top = result.receivables.items[0]
+      actions.push(`Top receivable: ${top.name} — $${Math.round(top.amount).toLocaleString()}`)
+    }
+
+    // Concise output — summary + actions, not full data dump
     return JSON.stringify({
-      ...result,
-      summary: {
-        monthlyTarget: result.streams.totalMonthlyTarget,
-        annualTarget: result.streams.totalAnnualTarget,
-        pipelineWeighted: result.pipeline.weightedValue,
-        receivablesOutstanding: result.receivables.total,
-        pipelineCount: result.pipeline.count,
-        activeProjects: result.projects.active,
+      monthly_target: result.streams.totalMonthlyTarget,
+      annual_target: result.streams.totalAnnualTarget,
+      pipeline: {
+        weighted_value: result.pipeline.weightedValue,
+        total_value: result.pipeline.totalValue,
+        count: result.pipeline.count,
+        top_deals: result.pipeline.topOpportunities.slice(0, 3).map((d) => ({
+          name: d.name, funder: d.funder, value: d.amount, weighted: d.weighted, stage: d.status,
+        })),
       },
+      receivables: {
+        total: result.receivables.total,
+        items: result.receivables.items.slice(0, 5),
+      },
+      streams: result.streams.items.map((s) => ({
+        name: s.name, code: s.code, monthly: s.monthlyTarget,
+      })),
+      active_projects: result.projects.active,
+      actions,
     })
   } catch (err) {
     return JSON.stringify({ error: (err as Error).message })

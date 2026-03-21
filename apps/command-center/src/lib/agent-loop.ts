@@ -1,6 +1,7 @@
 import Anthropic from '@anthropic-ai/sdk'
 import { AGENT_SYSTEM_PROMPT } from '@/lib/agent-system-prompt'
-import { AGENT_TOOLS, executeTool, logAgentUsage } from '@/lib/agent-tools'
+import { executeTool, logAgentUsage } from '@/lib/agent-tools'
+import { getToolsForMode, detectMode, type ToolMode } from '@/lib/tool-definitions'
 import { loadConversation, saveConversation } from './telegram/conversation-state'
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -78,6 +79,13 @@ export async function processAgentMessage(
   let toolCallCount = 0
   const modelsUsed = new Set<string>()
 
+  // Mode-based tool selection — auto-detect from user message
+  let currentMode: ToolMode = detectMode(userMessage)
+  let activeTools = getToolsForMode(currentMode)
+  if (currentMode !== 'core') {
+    console.log(`[agent] Auto-detected mode: ${currentMode} for chat ${chatId}`)
+  }
+
   for (let round = 0; round < MAX_TOOL_ROUNDS; round++) {
     // Mid-loop escalation: if Haiku hasn't resolved by ESCALATION_ROUND, switch to Sonnet
     if (round === ESCALATION_ROUND && currentModel === HAIKU_MODEL) {
@@ -91,7 +99,7 @@ export async function processAgentMessage(
       model: currentModel,
       max_tokens: MAX_TOKENS,
       system: [{ type: 'text', text: AGENT_SYSTEM_PROMPT, cache_control: { type: 'ephemeral' } }],
-      tools: AGENT_TOOLS,
+      tools: activeTools,
       messages,
     })
 
@@ -141,50 +149,102 @@ export async function processAgentMessage(
     // Add assistant response with tool_use blocks
     messages.push({ role: 'assistant', content: response.content })
 
-    // Execute tools — parallel for read-only, sequential if any write tool present
-    const hasWriteTool = toolUseBlocks.some((t) => WRITE_TOOLS.has(t.name))
-
-    let toolResults: Anthropic.ToolResultBlockParam[]
-    if (hasWriteTool) {
-      toolResults = []
-      for (const toolUse of toolUseBlocks) {
-        toolCallCount++
-        const result = await executeTool(
-          toolUse.name,
-          toolUse.input as Record<string, unknown>,
-          chatId
-        )
-        toolResults.push({
-          type: 'tool_result',
-          tool_use_id: toolUse.id,
-          content: result,
-        })
+    // Handle route_to_mode meta-tool FIRST — switch active tool set before executing other tools
+    const validModes: ToolMode[] = ['core', 'finance', 'projects', 'writing', 'actions']
+    const modeSwitch = toolUseBlocks.find(t => t.name === 'route_to_mode')
+    if (modeSwitch) {
+      const input = modeSwitch.input as { mode: string; reason?: string }
+      if (validModes.includes(input.mode as ToolMode)) {
+        currentMode = input.mode as ToolMode
+        activeTools = getToolsForMode(currentMode)
+        console.log(`[agent] Mode switched to: ${currentMode} (${input.reason || 'no reason'}) for chat ${chatId}`)
+      } else {
+        console.error(`[agent] Invalid mode requested: ${input.mode} for chat ${chatId}`)
       }
-    } else {
-      toolCallCount += toolUseBlocks.length
-      toolResults = await Promise.all(
-        toolUseBlocks.map(async (toolUse) => {
+      toolCallCount++
+    }
+
+    // Separate real tools from the mode switch
+    const realTools = toolUseBlocks.filter(t => t.name !== 'route_to_mode')
+
+    // If mode switch was the only tool, return its result and continue to next round
+    if (realTools.length === 0 && modeSwitch) {
+      messages.push({ role: 'user', content: [{
+        type: 'tool_result',
+        tool_use_id: modeSwitch.id,
+        content: validModes.includes((modeSwitch.input as { mode: string }).mode as ToolMode)
+          ? `Switched to ${currentMode} mode. You now have ${activeTools.length} tools available.`
+          : `Invalid mode. Valid modes: ${validModes.join(', ')}`,
+      }] })
+      continue
+    }
+
+    // Build tool results — mode switch result first (if present), then real tools
+    const toolResults: Anthropic.ToolResultBlockParam[] = []
+
+    if (modeSwitch) {
+      toolResults.push({
+        type: 'tool_result',
+        tool_use_id: modeSwitch.id,
+        content: `Switched to ${currentMode} mode. You now have ${activeTools.length} tools available.`,
+      })
+    }
+
+    // Execute real tools — parallel for read-only, sequential if any write tool present
+    const hasWriteTool = realTools.some((t) => WRITE_TOOLS.has(t.name))
+
+    if (hasWriteTool) {
+      for (const toolUse of realTools) {
+        toolCallCount++
+        try {
           const result = await executeTool(
             toolUse.name,
             toolUse.input as Record<string, unknown>,
             chatId
           )
-          return {
-            type: 'tool_result' as const,
+          toolResults.push({ type: 'tool_result', tool_use_id: toolUse.id, content: result })
+        } catch (error) {
+          console.error(`[agent] Tool ${toolUse.name} failed for chat ${chatId}:`, error)
+          toolResults.push({
+            type: 'tool_result',
             tool_use_id: toolUse.id,
-            content: result,
+            content: `Error: ${error instanceof Error ? error.message : String(error)}`,
+          })
+        }
+      }
+    } else {
+      toolCallCount += realTools.length
+      const parallelResults = await Promise.all(
+        realTools.map(async (toolUse) => {
+          try {
+            const result = await executeTool(
+              toolUse.name,
+              toolUse.input as Record<string, unknown>,
+              chatId
+            )
+            return { type: 'tool_result' as const, tool_use_id: toolUse.id, content: result }
+          } catch (error) {
+            console.error(`[agent] Tool ${toolUse.name} failed for chat ${chatId}:`, error)
+            return {
+              type: 'tool_result' as const,
+              tool_use_id: toolUse.id,
+              content: `Error: ${error instanceof Error ? error.message : String(error)}`,
+            }
           }
         })
       )
+      toolResults.push(...parallelResults)
     }
     messages.push({ role: 'user', content: toolResults })
   }
 
-  // Save conversation even on exhaustion
+  // Save conversation even on exhaustion — include the failure message
+  const exhaustionText = 'I ran into some complexity. Could you try rephrasing?'
+  messages.push({ role: 'assistant', content: [{ type: 'text', text: exhaustionText }] })
   await saveConversation(chatId, messages)
 
   return {
-    text: 'I ran into some complexity. Could you try rephrasing?',
+    text: exhaustionText,
     usage: {
       model: modelsUsed.size > 1 ? `${HAIKU_MODEL}+${SONNET_MODEL}` : HAIKU_MODEL,
       inputTokens: totalInputTokens,

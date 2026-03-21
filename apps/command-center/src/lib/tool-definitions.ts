@@ -49,21 +49,7 @@ export const AGENT_TOOLS: Anthropic.Tool[] = [
       required: [],
     },
   },
-  {
-    name: 'get_financial_summary',
-    description:
-      'Get financial summary including pipeline totals, recent transactions, pending receipts, and subscription costs. Use this when the user asks about money, spending, cash flow, receipts, or subscriptions.',
-    input_schema: {
-      type: 'object' as const,
-      properties: {
-        days: {
-          type: 'number',
-          description: 'Number of days to look back for transactions. Default 30.',
-        },
-      },
-      required: [],
-    },
-  },
+  // get_financial_summary — REMOVED: subsumed by get_revenue_scoreboard
   {
     name: 'search_contacts',
     description:
@@ -140,21 +126,7 @@ export const AGENT_TOOLS: Anthropic.Tool[] = [
       required: ['query'],
     },
   },
-  {
-    name: 'get_project_summary',
-    description:
-      'Get the AI-generated narrative summary for a specific project. Use this when the user asks for a project update or "what\'s happening with X".',
-    input_schema: {
-      type: 'object' as const,
-      properties: {
-        project_code: {
-          type: 'string',
-          description: 'The project code (e.g. ACT-JH, ACT-GD, ACT-HV, ACT-EL). Case-insensitive.',
-        },
-      },
-      required: ['project_code'],
-    },
-  },
+  // get_project_summary — REMOVED: subsumed by get_project_360
   {
     name: 'get_contacts_needing_attention',
     description:
@@ -343,45 +315,37 @@ export const AGENT_TOOLS: Anthropic.Tool[] = [
       required: [],
     },
   },
+  // get_pending_receipts — REMOVED: subsumed by get_receipt_pipeline_status
+
   {
-    name: 'get_pending_receipts',
+    name: 'find_receipt',
     description:
-      'Get receipts/expenses that need attention — pending matches, unresolved items. Use when the user asks about pending receipts, expenses needing action, or "what receipts are outstanding".',
+      'Cross-source receipt finder. Searches Gmail, calendar, bank transactions, Xero bills, and receipt pipeline simultaneously to find evidence of a purchase. Use when the user says "find receipt", "where\'s the receipt for", "I need the invoice for", or when investigating missing R&D receipts.',
     input_schema: {
       type: 'object' as const,
       properties: {
-        limit: {
+        vendor: {
+          type: 'string',
+          description: 'Vendor/supplier name to search for (e.g. "Qantas", "AWS", "Adobe")',
+        },
+        amount: {
           type: 'number',
-          description: 'Max results. Default 10.',
+          description: 'Approximate transaction amount in AUD',
+        },
+        date: {
+          type: 'string',
+          description: 'Approximate date (YYYY-MM-DD). Will search ±7 days around this date.',
+        },
+        project_code: {
+          type: 'string',
+          description: 'Filter by project code (e.g. "ACT-EL", "ACT-IN")',
         },
       },
       required: [],
     },
   },
 
-  // ── FINANCIAL REVIEW TOOLS ──────────────────────────────────────────
-
-  {
-    name: 'get_quarterly_review',
-    description:
-      'Get a comprehensive quarterly financial review including income/expenses, BAS summary (GST), outstanding invoices with aging, project spending, subscription costs, pending receipts, cashflow trends, and flagged issues. Use when the user wants to review finances, prepare for BAS, or do a quarterly check-in.',
-    input_schema: {
-      type: 'object' as const,
-      properties: {
-        quarter: {
-          type: 'string',
-          description:
-            'Quarter in format "YYYY-Q1" through "YYYY-Q4". Q1=Jul-Sep (Australian FY), Q2=Oct-Dec, Q3=Jan-Mar, Q4=Apr-Jun. Default: current quarter.',
-        },
-        detail_level: {
-          type: 'string',
-          enum: ['summary', 'full'],
-          description: 'Level of detail: "summary" returns headline numbers and issues only (fewer tokens), "full" returns all breakdowns. Default "full".',
-        },
-      },
-      required: [],
-    },
-  },
+  // get_quarterly_review — REMOVED: subsumed by get_revenue_scoreboard
   {
     name: 'get_xero_transactions',
     description:
@@ -422,23 +386,9 @@ export const AGENT_TOOLS: Anthropic.Tool[] = [
     },
   },
 
-  // ── REFLECTION TOOLS ──────────────────────────────────────────────────
+  // get_day_context — REMOVED: subsumed by get_daily_briefing + get_calendar_events
 
-  {
-    name: 'get_day_context',
-    description:
-      "Get a summary of today's activity for reflection — calendar events, communications, project activity, decisions, and contacts engaged with. Use this before generating a daily reflection to enrich the user's voice input with data.",
-    input_schema: {
-      type: 'object' as const,
-      properties: {
-        date: {
-          type: 'string',
-          description: 'Date in YYYY-MM-DD. Default: today.',
-        },
-      },
-      required: [],
-    },
-  },
+  // ── REFLECTION TOOLS ──────────────────────────────────────────────────
   {
     name: 'save_daily_reflection',
     description:
@@ -792,23 +742,7 @@ export const AGENT_TOOLS: Anthropic.Tool[] = [
     },
   },
 
-  // ── PROJECT HEALTH ────────────────────────────────────────────────
-
-  {
-    name: 'get_project_health',
-    description:
-      'Get health overview for one or all ACT projects — last activity, open actions, financial position, team engagement. Use when the user asks "how is project X going", "which projects need attention", or "project health check".',
-    input_schema: {
-      type: 'object' as const,
-      properties: {
-        project_code: {
-          type: 'string',
-          description: 'Specific project code (e.g. ACT-JH). Omit for all projects overview.',
-        },
-      },
-      required: [],
-    },
-  },
+  // get_project_health — REMOVED: subsumed by get_project_360
 
   // ── UPCOMING DEADLINES ────────────────────────────────────────────
 
@@ -832,49 +766,7 @@ export const AGENT_TOOLS: Anthropic.Tool[] = [
     },
   },
 
-  // ── MEETING NOTES ─────────────────────────────────────────────────
-
-  {
-    name: 'create_meeting_notes',
-    description:
-      'Save meeting notes to the knowledge base. Use when the user describes a meeting they had, or dictates meeting notes via voice. Links to project codes and participants automatically.',
-    input_schema: {
-      type: 'object' as const,
-      properties: {
-        title: {
-          type: 'string',
-          description: 'Meeting title.',
-        },
-        summary: {
-          type: 'string',
-          description: 'Brief summary of the meeting.',
-        },
-        content: {
-          type: 'string',
-          description: 'Full meeting notes in markdown.',
-        },
-        project_code: {
-          type: 'string',
-          description: 'Project code this meeting relates to (e.g. ACT-JH).',
-        },
-        participants: {
-          type: 'array',
-          items: { type: 'string' },
-          description: 'Names of people in the meeting.',
-        },
-        action_items: {
-          type: 'array',
-          items: { type: 'string' },
-          description: 'Action items from the meeting.',
-        },
-        date: {
-          type: 'string',
-          description: 'Meeting date in YYYY-MM-DD. Default: today.',
-        },
-      },
-      required: ['title', 'summary', 'content'],
-    },
-  },
+  // create_meeting_notes — REMOVED: subsumed by add_meeting_to_notion
   {
     name: 'get_project_360',
     description:
@@ -890,32 +782,9 @@ export const AGENT_TOOLS: Anthropic.Tool[] = [
       required: ['project_code'],
     },
   },
-  {
-    name: 'get_ecosystem_pulse',
-    description:
-      'Get a pulse check on the entire ACT ecosystem: projects by health status, total pipeline value, cash position, contacts needing attention, and recent highlights. Use when the user asks "how\'s the ecosystem?" or wants an overall status.',
-    input_schema: {
-      type: 'object' as const,
-      properties: {},
-      required: [],
-    },
-  },
+  // get_ecosystem_pulse — REMOVED: subsumed by get_daily_briefing
 
-  {
-    name: 'get_daily_priorities',
-    description:
-      'Get today\'s ranked priority actions from the daily priorities engine. Returns scored, ranked items covering overdue invoices, grant deadlines, at-risk deals, unanswered emails, overdue actions, and stale pipeline opportunities. Use when the user asks "what should I focus on today?", "daily priorities", "what\'s urgent?", or "top things to do".',
-    input_schema: {
-      type: 'object' as const,
-      properties: {
-        limit: {
-          type: 'number',
-          description: 'Maximum number of priorities to return. Default: 10.',
-        },
-      },
-      required: [],
-    },
-  },
+  // get_daily_priorities — REMOVED: subsumed by get_daily_briefing
 
   // ── NOTION WRITE TOOLS ────────────────────────────────────────────
 
@@ -1119,50 +988,9 @@ export const AGENT_TOOLS: Anthropic.Tool[] = [
     },
   },
 
-  // ── MEETING NOTES CAPTURE ────────────────────────────────────────────
+  // capture_meeting_notes — REMOVED: subsumed by add_meeting_to_notion
 
-  {
-    name: 'capture_meeting_notes',
-    description:
-      'Save meeting notes/takeaways from a voice note or text. Auto-matches to today\'s calendar event and links attendee contacts. Use when the user sends meeting takeaways, action items, or "notes from the meeting".',
-    input_schema: {
-      type: 'object' as const,
-      properties: {
-        notes: {
-          type: 'string',
-          description: 'The meeting notes, takeaways, or transcript to save.',
-        },
-        event_title: {
-          type: 'string',
-          description: 'Calendar event title to link to. Auto-matched if omitted.',
-        },
-        project_code: {
-          type: 'string',
-          description: 'Project code (e.g. ACT-JH). Auto-detected from event if omitted.',
-        },
-      },
-      required: ['notes'],
-    },
-  },
-
-  // ── WEEKLY FINANCE SUMMARY ───────────────────────────────────────────
-
-  {
-    name: 'get_weekly_finance_summary',
-    description:
-      'Get weekly financial summary — income vs spend, overdue receivables, upcoming payables, cash position. Supports voice format for TTS. Use when the user asks for "weekly finances", "financial update", or "money this week".',
-    input_schema: {
-      type: 'object' as const,
-      properties: {
-        format: {
-          type: 'string',
-          enum: ['text', 'voice'],
-          description: 'Output format. "voice" returns natural sentences for TTS. Default "text".',
-        },
-      },
-      required: [],
-    },
-  },
+  // get_weekly_finance_summary — REMOVED: subsumed by get_revenue_scoreboard
 
   // ── GRANT READINESS ──────────────────────────────────────────────────
 
@@ -1231,3 +1059,173 @@ export const AGENT_TOOLS: Anthropic.Tool[] = [
     },
   },
 ]
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// TOOL GROUPING — Mode-based tool selection
+//
+// Instead of sending 41 tools every call, we group them into modes.
+// The bot starts with CORE tools (~14) + a route_to_mode meta-tool.
+// When the user asks about finance, the model calls route_to_mode("finance")
+// and the tool set switches to CORE + FINANCE tools for that conversation.
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+export type ToolMode = 'core' | 'finance' | 'projects' | 'writing' | 'actions'
+
+/** Tools always available regardless of mode — kept tight for Haiku (10 tools) */
+const CORE_TOOL_NAMES = new Set([
+  'query_supabase',
+  'get_daily_briefing',
+  'search_contacts',
+  'get_contact_details',
+  'get_calendar_events',
+  'search_knowledge',
+  'draft_email',
+  'set_reminder',
+  'search_emails',
+  'get_upcoming_deadlines',
+])
+
+/** Finance-specific tools */
+const FINANCE_TOOL_NAMES = new Set([
+  'get_revenue_scoreboard',
+  'get_cashflow_forecast',
+  'get_project_financials',
+  'get_xero_transactions',
+  'find_receipt',
+  'get_receipt_pipeline_status',
+  'get_untagged_summary',
+  'trigger_auto_tag',
+  'add_receipt',
+])
+
+/** Project & grant tools */
+const PROJECT_TOOL_NAMES = new Set([
+  'get_project_360',
+  'get_grant_opportunities',
+  'get_grant_pipeline',
+  'get_grant_readiness',
+  'draft_grant_response',
+  'get_meeting_prep',
+  'get_contacts_needing_attention',
+  'get_deal_risks',
+  'get_goods_intelligence',
+])
+
+/** Writing, reflection, dreams, planning */
+const WRITING_TOOL_NAMES = new Set([
+  'save_daily_reflection',
+  'search_past_reflections',
+  'save_writing_draft',
+  'save_planning_doc',
+  'move_writing',
+  'review_planning_period',
+  'moon_cycle_review',
+  'save_dream',
+  'search_dreams',
+])
+
+/** Write actions (Notion, meetings, calendar) */
+const ACTION_TOOL_NAMES = new Set([
+  'add_meeting_to_notion',
+  'add_action_item',
+  'add_decision',
+  'create_calendar_event',
+])
+
+const MODE_TOOL_MAP: Record<ToolMode, Set<string>> = {
+  core: CORE_TOOL_NAMES,
+  finance: FINANCE_TOOL_NAMES,
+  projects: PROJECT_TOOL_NAMES,
+  writing: WRITING_TOOL_NAMES,
+  actions: ACTION_TOOL_NAMES,
+}
+
+/** The route_to_mode meta-tool — added to every tool set */
+export const ROUTE_TO_MODE_TOOL: Anthropic.Tool = {
+  name: 'route_to_mode',
+  description:
+    'Switch the active tool set to a specialised mode. Call this BEFORE answering when the user\'s question needs tools from a specific domain. Modes: "finance" (Xero, receipts, invoicing, cashflow, R&D), "projects" (project 360, grants, pipeline, meeting prep), "writing" (reflections, dreams, drafts, planning), "actions" (Notion writes, calendar events, action items). You start in "core" mode with general tools. After switching, you\'ll have the specialised tools available on the next turn.',
+  input_schema: {
+    type: 'object' as const,
+    properties: {
+      mode: {
+        type: 'string',
+        enum: ['finance', 'projects', 'writing', 'actions'],
+        description: 'The mode to switch to.',
+      },
+      reason: {
+        type: 'string',
+        description: 'Brief reason for switching (e.g. "user asked about receipts").',
+      },
+    },
+    required: ['mode'],
+  },
+}
+
+/**
+ * Get the tool set for a given mode.
+ * Always includes CORE tools + the requested mode's tools + route_to_mode.
+ */
+export function getToolsForMode(mode: ToolMode): Anthropic.Tool[] {
+  const allowedNames = new Set([...CORE_TOOL_NAMES])
+
+  if (mode !== 'core') {
+    const modeTools = MODE_TOOL_MAP[mode]
+    if (modeTools) {
+      for (const name of modeTools) allowedNames.add(name)
+    }
+  }
+
+  const tools = AGENT_TOOLS.filter(t => allowedNames.has(t.name))
+  tools.push(ROUTE_TO_MODE_TOOL)
+  return tools
+}
+
+/**
+ * Auto-detect the best mode from a user message using scoring.
+ * Each keyword match adds to a mode's score. Highest score wins.
+ * Project codes (ACT-XX) boost projects mode. Ties go to core.
+ */
+export function detectMode(message: string): ToolMode {
+  if (!message || message.trim().length === 0) return 'core'
+  const lower = message.toLowerCase()
+
+  const scores: Record<Exclude<ToolMode, 'core'>, number> = {
+    finance: 0, projects: 0, writing: 0, actions: 0,
+  }
+
+  // Finance signals
+  const financeTerms = lower.match(/\b(invoice|receipt|xero|cashflow|cash flow|revenue|spend|expenses?|budget|bas|gst|r&d|tax|financ|money|billing|reconcil|untagged|scoreboard|overdue|arrears)\b/g)
+  if (financeTerms) scores.finance += financeTerms.length
+
+  // Project/grant signals
+  const projectTerms = lower.match(/\b(grant|pipeline|application|milestone|fund(ing|ed)?)\b/g)
+  if (projectTerms) scores.projects += projectTerms.length
+  if (/project\s+(health|360|status|update)/i.test(lower)) scores.projects += 2
+
+  // Project code detection (ACT-XX) — strong signal for projects mode
+  if (/\bact-[a-z]{2}\b/i.test(lower) || /\b(justicehub|empathy ledger|goods on country|picc|harvest|diagrama)\b/i.test(lower)) {
+    scores.projects += 2
+  }
+
+  // Writing/reflection signals — but "write a grant" should NOT trigger writing mode
+  const writingTerms = lower.match(/\b(reflect|dream|journal|lcaa|gratitude|intention|moon cycle)\b/g)
+  if (writingTerms) scores.writing += writingTerms.length
+  if (/\bwrit(e|ing)\b/.test(lower) && !/\bgrant\b/.test(lower)) scores.writing += 1
+  if (/\bplan(ning)?\b/.test(lower) && !/\bgrant\b/.test(lower)) scores.writing += 1
+
+  // Action signals
+  if (/\b(add|record|log)\s+(action|decision|meeting)\b/.test(lower)) scores.actions += 2
+  if (/\bschedule\s+(event|meeting)\b/.test(lower)) scores.actions += 2
+
+  // Find highest scoring mode
+  const maxScore = Math.max(scores.finance, scores.projects, scores.writing, scores.actions)
+  if (maxScore === 0) return 'core'
+
+  // Return first mode with max score (finance > projects > writing > actions priority)
+  for (const mode of ['finance', 'projects', 'writing', 'actions'] as const) {
+    if (scores[mode] === maxScore) return mode
+  }
+
+  return 'core'
+}
