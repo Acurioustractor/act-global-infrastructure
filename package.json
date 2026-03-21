@@ -126,8 +126,10 @@
   "author": "",
   "license": "ISC",
   "type": "module",
+  "packageManager": "pnpm@10.12.1",
   "dependencies": {
     "@anthropic-ai/sdk": "^0.71.2",
+    "@google/genai": "^1.45.0",
     "@notionhq/client": "^5.11.0",
     "@octokit/graphql": "^9.0.3",
     "@supabase/supabase-js": "^2.89.0",
