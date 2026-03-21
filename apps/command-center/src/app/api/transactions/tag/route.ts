@@ -17,7 +17,8 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'projectCode is required' }, { status: 400 })
     }
 
-    let updated = 0
+    let updatedTransactions = 0
+    let updatedInvoices = 0
 
     if (ids && ids.length > 0) {
       // Tag specific transactions by ID
@@ -28,9 +29,17 @@ export async function POST(request: NextRequest) {
         .select('id')
 
       if (error) throw error
-      updated = data?.length || 0
+      updatedTransactions = data?.length || 0
+
+      // Also try tagging invoices with same IDs
+      const { data: invData } = await supabase
+        .from('xero_invoices')
+        .update({ project_code: projectCode, project_code_source: 'manual' })
+        .in('id', ids)
+        .select('id')
+      updatedInvoices = invData?.length || 0
     } else if (contactName) {
-      // Tag all transactions matching contact_name + type
+      // Tag all transactions matching contact_name
       let query = supabase
         .from('xero_transactions')
         .update({ project_code: projectCode, project_code_source: 'manual' })
@@ -43,13 +52,24 @@ export async function POST(request: NextRequest) {
 
       const { data, error } = await query.select('id')
       if (error) throw error
-      updated = data?.length || 0
+      updatedTransactions = data?.length || 0
+
+      // Also tag matching invoices by contact_name
+      const { data: invData } = await supabase
+        .from('xero_invoices')
+        .update({ project_code: projectCode, project_code_source: 'manual' })
+        .eq('contact_name', contactName)
+        .or('project_code.is.null,project_code.eq.')
+        .select('id')
+      updatedInvoices = invData?.length || 0
     } else {
       return NextResponse.json(
         { error: 'Either contactName or ids must be provided' },
         { status: 400 }
       )
     }
+
+    const updated = updatedTransactions + updatedInvoices
 
     // Optionally save as a vendor rule for future auto-tagging
     if (saveAsRule && contactName && updated > 0) {
@@ -65,7 +85,13 @@ export async function POST(request: NextRequest) {
         }, { onConflict: 'vendor_name' })
     }
 
-    return NextResponse.json({ success: true, updated, ruleSaved: saveAsRule && !!contactName })
+    return NextResponse.json({
+      success: true,
+      updated,
+      updatedTransactions,
+      updatedInvoices,
+      ruleSaved: saveAsRule && !!contactName,
+    })
   } catch (e) {
     console.error('Tag transactions error:', e)
     return NextResponse.json(

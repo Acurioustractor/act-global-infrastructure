@@ -25,6 +25,7 @@ import {
   ClipboardCheck,
   Compass,
   Sparkles,
+  Target,
 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 
@@ -98,12 +99,13 @@ export const navStructure: SidebarNavGroup[] = [
         label: 'Finance',
         icon: DollarSign,
         children: [
-          { href: '/finance/overview', label: 'Unified Overview', icon: Layers, color: 'text-emerald-400', bg: 'bg-emerald-500/20' },
+          { href: '/finance/overview', label: 'Overview', icon: Layers, color: 'text-emerald-400', bg: 'bg-emerald-500/20' },
+          { href: '/finance/project-plan', label: 'Project Plans', icon: Target, color: 'text-indigo-400', bg: 'bg-indigo-500/20' },
           { href: '/finance/projects', label: 'Projects P&L', icon: BarChart3, color: 'text-green-400', bg: 'bg-green-500/20' },
           { href: '/finance/pipeline-kanban', label: 'Pipeline Kanban', icon: KanbanSquare, color: 'text-indigo-400', bg: 'bg-indigo-500/20' },
           { href: '/finance/board', label: 'Board Report', icon: Landmark, color: 'text-blue-400', bg: 'bg-blue-500/20' },
-          { href: '/finance/tagger', label: 'Transaction Tagger', icon: Tag, color: 'text-amber-400', bg: 'bg-amber-500/20' },
-          { href: '/finance/reconciliation', label: 'Reconciliation', icon: ClipboardCheck, color: 'text-cyan-400', bg: 'bg-cyan-500/20' },
+          { href: '/finance/tagger-v2', label: 'Rapid Tagger', icon: Tag, color: 'text-amber-400', bg: 'bg-amber-500/20' },
+          { href: '/finance/reconciliation', label: 'Receipt Intelligence', icon: ClipboardCheck, color: 'text-cyan-400', bg: 'bg-cyan-500/20' },
           { href: '/finance/accountant', label: 'Accountant', icon: Calculator, color: 'text-orange-400', bg: 'bg-orange-500/20' },
           { href: '/finance/revenue-planning', label: 'Revenue Planning', icon: TrendingUp, color: 'text-purple-400', bg: 'bg-purple-500/20' },
         ],
