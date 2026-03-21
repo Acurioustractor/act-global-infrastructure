@@ -66,6 +66,13 @@ jobs:
         run: |
           node scripts/sync-xero-to-supabase.mjs ${{ steps.params.outputs.sync_type }} --days=${{ steps.params.outputs.days }}
 
+      - name: Refresh overview cache
+        if: success() && env.COMMAND_CENTER_URL != ''
+        env:
+          COMMAND_CENTER_URL: ${{ secrets.COMMAND_CENTER_URL }}
+        run: |
+          curl -s --max-time 30 "${COMMAND_CENTER_URL}/api/finance/overview?live=true" > /dev/null 2>&1 || echo "Cache refresh skipped (endpoint unreachable)"
+
       - name: Generate summary
         if: always()
         run: |

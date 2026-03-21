@@ -1,7 +1,7 @@
 'use client'
 
-import { useState, useMemo } from 'react'
-import { useQuery } from '@tanstack/react-query'
+import { useState, useMemo, useCallback } from 'react'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
 import Link from 'next/link'
 import {
   DollarSign,
@@ -24,6 +24,7 @@ import {
   Activity,
   Wallet,
   Sliders,
+  RefreshCw,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { formatMoney, formatMoneyCompact } from '@/lib/finance/format'
@@ -90,6 +91,12 @@ interface OverviewData {
   fy: string
   lastSyncAt: string | null
   generatedAt: string
+  _meta?: {
+    from_cache: boolean
+    computed_at: string
+    computation_ms: number
+    cache_age_ms: number
+  }
 }
 
 // ── Sparkline SVG Component ──────────────────────────────────────────
@@ -390,11 +397,24 @@ function ScenarioBuilder({ data }: { data: OverviewData }) {
 // ── Main Page ────────────────────────────────────────────────────────
 
 export default function FinanceOverview() {
+  const queryClient = useQueryClient()
+  const [isRefreshing, setIsRefreshing] = useState(false)
+
   const { data, isLoading, error } = useQuery<OverviewData>({
     queryKey: ['finance', 'overview'],
     queryFn: () => fetch('/api/finance/overview').then(r => r.json()),
-    staleTime: 5 * 60 * 1000, // match server cache
+    staleTime: 30 * 60 * 1000, // 30min — cache handles freshness
   })
+
+  const handleRefresh = useCallback(async () => {
+    setIsRefreshing(true)
+    try {
+      const fresh = await fetch('/api/finance/overview?live=true').then(r => r.json())
+      queryClient.setQueryData(['finance', 'overview'], fresh)
+    } finally {
+      setIsRefreshing(false)
+    }
+  }, [queryClient])
 
   if (isLoading) {
     return (
@@ -966,11 +986,33 @@ export default function FinanceOverview() {
       </section>
 
       {/* ═══ DATA FRESHNESS ═══ */}
-      <footer className="text-center text-xs text-white/20 pb-4">
-        Data as of {new Date(data.generatedAt).toLocaleString('en-AU', { dateStyle: 'medium', timeStyle: 'short' })}
-        {data.lastSyncAt && (
-          <> · Last Xero sync: {new Date(data.lastSyncAt).toLocaleString('en-AU', { dateStyle: 'medium', timeStyle: 'short' })}</>
-        )}
+      <footer className="text-center text-xs text-white/20 pb-4 flex items-center justify-center gap-3">
+        <span>
+          {data._meta?.from_cache ? (
+            <>Snapshot from {new Date(data._meta.computed_at).toLocaleString('en-AU', { dateStyle: 'medium', timeStyle: 'short' })}
+              <span className="text-white/15 ml-1">
+                ({Math.round((data._meta.cache_age_ms || 0) / 60000)}min ago, {data._meta.computation_ms}ms to compute)
+              </span>
+            </>
+          ) : (
+            <>Computed live {new Date(data.generatedAt).toLocaleString('en-AU', { dateStyle: 'medium', timeStyle: 'short' })}
+              {data._meta?.computation_ms != null && (
+                <span className="text-white/15 ml-1">({data._meta.computation_ms}ms)</span>
+              )}
+            </>
+          )}
+          {data.lastSyncAt && (
+            <> · Xero sync: {new Date(data.lastSyncAt).toLocaleString('en-AU', { dateStyle: 'medium', timeStyle: 'short' })}</>
+          )}
+        </span>
+        <button
+          onClick={handleRefresh}
+          disabled={isRefreshing}
+          className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-white/5 hover:bg-white/10 text-white/40 hover:text-white/60 transition-colors disabled:opacity-50"
+        >
+          <RefreshCw className={cn('h-3 w-3', isRefreshing && 'animate-spin')} />
+          {isRefreshing ? 'Refreshing...' : 'Refresh'}
+        </button>
       </footer>
     </div>
   )
