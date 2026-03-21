@@ -214,6 +214,8 @@ function loadVendorPatterns() {
     { name: 'Spotify', from: ['spotify.com'] },
     { name: 'Midjourney', from: ['midjourney.com'] },
     { name: 'Mighty Networks', from: ['mightynetworks.com'] },
+    { name: 'Claude.AI', from: ['anthropic.com'] },
+    { name: 'ChatGPT', from: ['openai.com'] },
     { name: 'Cursor AI', from: ['cursor.sh', 'cursor.com'] },
     { name: 'DocPlay', from: ['docplay.com'] },
     { name: 'Firecrawl', from: ['firecrawl.dev'] },

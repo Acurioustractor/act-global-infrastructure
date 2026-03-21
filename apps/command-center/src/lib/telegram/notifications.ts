@@ -1246,18 +1246,29 @@ export async function sendWeeklyFinanceSummary(): Promise<{ sent: number; errors
   const now = getBrisbaneNow()
   const sevenDaysAgo = new Date(now.getTime() - 7 * 86400000).toISOString()
   const today = getBrisbaneDate()
+  const fyStart = '2025-07-01'
 
-  const [transactions, snapshots, overdueInvoices, upcomingBills] = await Promise.all([
+  const [
+    transactions,
+    bankAccounts,
+    overdueInvoices,
+    upcomingBills,
+    billsTotal,
+    billsWithReceipt,
+    billsUntagged,
+    pendingReceipts,
+  ] = await Promise.all([
     supabase
       .from('xero_transactions')
       .select('amount, type')
       .gte('date', sevenDaysAgo.split('T')[0])
       .lte('date', today),
+    // Real bank balance from Xero
     supabase
-      .from('financial_snapshots')
-      .select('closing_balance')
-      .order('month', { ascending: false })
-      .limit(1),
+      .from('xero_bank_accounts')
+      .select('name, current_balance')
+      .eq('status', 'ACTIVE')
+      .not('current_balance', 'is', null),
     supabase
       .from('xero_invoices')
       .select('contact_name, amount_due, due_date')
@@ -1277,41 +1288,113 @@ export async function sendWeeklyFinanceSummary(): Promise<{ sent: number; errors
       .lte('due_date', getBrisbaneDateOffset(14))
       .order('due_date', { ascending: true })
       .limit(5),
+    // FY26 bill receipt coverage
+    supabase
+      .from('xero_invoices')
+      .select('*', { count: 'exact', head: true })
+      .eq('type', 'ACCPAY')
+      .gte('date', fyStart),
+    supabase
+      .from('xero_invoices')
+      .select('*', { count: 'exact', head: true })
+      .eq('type', 'ACCPAY')
+      .gte('date', fyStart)
+      .eq('has_attachments', true),
+    supabase
+      .from('xero_invoices')
+      .select('*', { count: 'exact', head: true })
+      .eq('type', 'ACCPAY')
+      .gte('date', fyStart)
+      .is('project_code', null),
+    // Pending receipt matches
+    supabase
+      .from('receipt_matches')
+      .select('*', { count: 'exact', head: true })
+      .eq('status', 'pending'),
   ])
 
   const txns = transactions.data || []
   const income = txns.filter((t) => t.type === 'RECEIVE').reduce((sum, t) => sum + Math.abs(t.amount || 0), 0)
   const spend = txns.filter((t) => t.type === 'SPEND').reduce((sum, t) => sum + Math.abs(t.amount || 0), 0)
   const net = income - spend
-  const balance = snapshots.data?.[0]?.closing_balance || 0
+
+  // Real cash from bank accounts
+  const accounts = bankAccounts.data || []
+  const cashInBank = accounts.reduce((sum, a) => sum + (Number(a.current_balance) || 0), 0)
+
   const overdueItems = overdueInvoices.data || []
   const overdueTotal = overdueItems.reduce((sum, inv) => sum + (parseFloat(String(inv.amount_due)) || 0), 0)
   const upcomingItems = upcomingBills.data || []
   const upcomingTotal = upcomingItems.reduce((sum, inv) => sum + (parseFloat(String(inv.amount_due)) || 0), 0)
 
-  const fmt = (n: number) => `$${Number(n).toLocaleString('en-AU', { minimumFractionDigits: 2 })}`
+  // Receipt coverage
+  const totalBills = billsTotal.count || 0
+  const withReceipt = billsWithReceipt.count || 0
+  const receiptPct = totalBills > 0 ? Math.round((withReceipt / totalBills) * 100) : 0
+  const missingReceipts = totalBills - withReceipt
+  const untaggedBills = billsUntagged.count || 0
+  const pendingCount = pendingReceipts.count || 0
+
+  // BAS deadline check (Australian quarters)
+  const basDeadlines = [
+    { label: 'Q1 (Jul-Sep)', due: new Date(2025, 9, 28) },   // Oct 28 2025
+    { label: 'Q2 (Oct-Dec)', due: new Date(2026, 1, 28) },   // Feb 28 2026
+    { label: 'Q3 (Jan-Mar)', due: new Date(2026, 3, 28) },   // Apr 28 2026
+    { label: 'Q4 (Apr-Jun)', due: new Date(2026, 6, 28) },   // Jul 28 2026
+  ]
+  const nextBas = basDeadlines.find(b => b.due.getTime() > now.getTime())
+  const basWeeksAway = nextBas
+    ? Math.ceil((nextBas.due.getTime() - now.getTime()) / (7 * 86400000))
+    : null
+
+  const fmt = (n: number) => `$${Number(n).toLocaleString('en-AU', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`
+
+  // Build message — nuanced, only flag what needs attention
   const sections: string[] = [
-    'WEEKLY FINANCE SUMMARY',
+    '\u{1F4B0} WEEKLY FINANCE DIGEST',
     '',
-    `Income: ${fmt(income)}`,
-    `Expenses: ${fmt(spend)}`,
-    `Net: ${fmt(net)}`,
-    `Balance: ${fmt(balance)}`,
+    `This week: ${fmt(income)} in \u{2022} ${fmt(spend)} out \u{2022} net ${net >= 0 ? '+' : ''}${fmt(net)}`,
+    `Cash in bank: ${fmt(cashInBank)}`,
   ]
 
-  if (overdueItems.length > 0) {
-    sections.push('', `OVERDUE INVOICES (${overdueItems.length}, ${fmt(overdueTotal)})`)
-    for (const inv of overdueItems) {
-      const days = Math.floor((now.getTime() - new Date(inv.due_date).getTime()) / 86400000)
-      sections.push(`  ${inv.contact_name} — ${fmt(parseFloat(String(inv.amount_due)))} — ${days}d overdue`)
+  // Receipt coverage — celebrate good coverage, flag gaps
+  if (receiptPct >= 99 && untaggedBills === 0) {
+    sections.push('', `\u{2705} Receipts: ${receiptPct}% coverage (${withReceipt}/${totalBills} bills)`)
+  } else {
+    sections.push('', `\u{1F4CB} RECEIPTS`)
+    sections.push(`  Coverage: ${receiptPct}% (${withReceipt}/${totalBills} FY26 bills)`)
+    if (missingReceipts > 0) {
+      sections.push(`  \u{26A0}\u{FE0F} ${missingReceipts} bills missing receipts`)
+    }
+    if (untaggedBills > 0) {
+      sections.push(`  \u{1F3F7}\u{FE0F} ${untaggedBills} bills need project tags`)
+    }
+    if (pendingCount > 0) {
+      sections.push(`  \u{1F50D} ${pendingCount} receipt matches pending review`)
     }
   }
 
-  if (upcomingItems.length > 0) {
-    sections.push('', `UPCOMING BILLS (${upcomingItems.length}, ${fmt(upcomingTotal)})`)
-    for (const inv of upcomingItems) {
-      sections.push(`  ${inv.contact_name} — ${fmt(parseFloat(String(inv.amount_due)))} — due ${inv.due_date}`)
+  // Overdue invoices — only if there are any
+  if (overdueItems.length > 0) {
+    sections.push('', `\u{1F6A8} OVERDUE (${overdueItems.length} invoices, ${fmt(overdueTotal)})`)
+    for (const inv of overdueItems.slice(0, 3)) {
+      const days = Math.floor((now.getTime() - new Date(inv.due_date).getTime()) / 86400000)
+      sections.push(`  ${inv.contact_name} \u{2014} ${fmt(parseFloat(String(inv.amount_due)))} \u{2014} ${days}d`)
     }
+  }
+
+  // Upcoming bills — only if significant
+  if (upcomingItems.length > 0) {
+    sections.push('', `\u{1F4C5} DUE NEXT 2 WEEKS (${fmt(upcomingTotal)})`)
+    for (const inv of upcomingItems.slice(0, 3)) {
+      sections.push(`  ${inv.contact_name} \u{2014} ${fmt(parseFloat(String(inv.amount_due)))} \u{2014} ${inv.due_date}`)
+    }
+  }
+
+  // BAS deadline — only if < 8 weeks away
+  if (nextBas && basWeeksAway !== null && basWeeksAway <= 8) {
+    const urgency = basWeeksAway <= 2 ? '\u{1F534}' : basWeeksAway <= 4 ? '\u{1F7E1}' : '\u{1F7E2}'
+    sections.push('', `${urgency} BAS ${nextBas.label} due in ${basWeeksAway} weeks (${nextBas.due.toLocaleDateString('en-AU', { day: 'numeric', month: 'short' })})`)
   }
 
   const message = sections.join('\n')
