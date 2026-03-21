@@ -169,21 +169,13 @@ const worker = new Worker();
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 const CURATED_TOOLS = new Set([
-  "get_daily_review",           // Morning orchestration — replaces daily_briefing + overdue_actions
-  "lookup_contact",             // Contact search + relationship health
-  "get_project_intelligence",   // Full project 360 view
-  "get_financial_summary",      // Quick financial overview
-  "explain_cashflow",           // Cash flow with variance explanations
-  "get_outstanding_invoices",   // Receivables and aging
-  "get_receipt_pipeline",       // Receipt funnel status
-  "get_missing_receipts_impact",// R&D receipt gaps with dollar impact
-  "get_rd_evidence_strength",   // R&D evidence coverage per project
-  "get_grants_summary",         // Grant pipeline dashboard
-  "get_grant_requirements",     // Grant details + readiness checklist
-  "suggest_grants",             // Match projects to grant opportunities
-  "get_meeting_context",        // Pre-meeting prep with talking points
-  "search_knowledge_graph",     // Semantic knowledge search
-  "get_weekly_project_pulse",   // Weekly overview per project
+  "lookup_contact",             // "Who is X?" — contact search + relationship health
+  "get_daily_review",           // "What needs attention?" — comprehensive morning digest
+  "get_project_intelligence",   // "How is project X?" — full project 360 view
+  "get_financial_summary",      // "How are finances?" — spend, pipeline, runway
+  "get_grants_summary",         // "What grants?" — pipeline dashboard with deadlines
+  "search_knowledge_graph",     // "What do we know about X?" — semantic search
+  "get_outstanding_invoices",   // "Who owes us?" — receivables and aging
 ]);
 
 const ENABLE_ALL = !!process.env.ENABLE_ALL_NOTION_TOOLS;
@@ -846,14 +838,15 @@ worker.tool("get_project_intelligence", {
     type: "object" as const,
     properties: {
       project_code: {
-        type: "string" as const,
-        description: "ACT project code (e.g. ACT-EL, ACT-HV, ACT-JH, ACT-GD, ACT-FM, ACT-HQ)",
+        anyOf: [{ type: "string" as const }, { type: "null" as const }],
+        description: "ACT project code (e.g. ACT-EL, ACT-HV, ACT-JH, ACT-GD, ACT-FM, ACT-HQ). Pass null to list available projects.",
       },
     },
     required: ["project_code"] as const,
     additionalProperties: false,
   },
-  execute: async (params: { project_code: string }) => {
+  execute: async (params: { project_code: string | null }) => {
+    if (!params.project_code) return "Available projects: ACT-EL (Empathy Ledger), ACT-GD (Goods on Country), ACT-HV (The Harvest), ACT-JH (JusticeHub), ACT-FM (ACT Farm), ACT-HQ (Operations), ACT-AR (Art). Ask about a specific project by code.";
     const supabase = getSupabase();
     const result = await fetchProjectIntelligence(supabase, { project_code: params.project_code });
 
