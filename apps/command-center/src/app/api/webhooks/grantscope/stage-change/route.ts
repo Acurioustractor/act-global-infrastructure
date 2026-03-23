@@ -83,7 +83,7 @@ interface StageChangePayload {
 export async function POST(req: NextRequest) {
   // Auth check
   const authHeader = req.headers.get('authorization')
-  const expectedSecret = process.env.CRON_SECRET || process.env.TELEGRAM_WEBHOOK_SECRET
+  const expectedSecret = (process.env.CRON_SECRET || process.env.TELEGRAM_WEBHOOK_SECRET || '').trim()
   if (expectedSecret && authHeader !== `Bearer ${expectedSecret}`) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
