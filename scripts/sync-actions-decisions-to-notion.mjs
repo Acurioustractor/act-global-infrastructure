@@ -124,13 +124,20 @@ async function getExistingNotionIds(databaseId) {
 
 async function upsertAction(action, databaseId, existingMap, projectPageMap) {
   const notionPageId = existingMap.get(action.id);
+
+  // CREATE-ONLY: if this action already exists in Notion, skip it entirely.
+  // Notion is the source of truth for status/edits — never overwrite manual changes.
+  if (notionPageId) {
+    verbose(`  Skipped (already in Notion): ${action.title || action.id}`);
+    return 'skipped';
+  }
+
   const title = action.title || action.content?.split('\n')[0]?.slice(0, 100) || 'Untitled action';
   const isComplete = !action.action_required;
 
-  // Existing Actions DB uses: 'Action Item' (title), 'Status' (status type), 'Projects' (relation)
   const properties = {
     'Action Item': { title: [{ text: { content: title } }] },
-    'Status': { status: { name: isComplete ? 'Done' : 'In progress' } },
+    'Status': { status: { name: isComplete ? 'Done' : 'Not started' } },
     'Supabase ID': { rich_text: [{ text: { content: action.id } }] },
   };
 
@@ -143,47 +150,43 @@ async function upsertAction(action, databaseId, existingMap, projectPageMap) {
     properties['Due Date'] = { date: { start: action.follow_up_date } };
   }
 
-  if (notionPageId) {
-    // Update existing
-    verbose(`  Updating action: ${title}`);
-    if (!DRY_RUN) {
-      await notion.pages.update({ page_id: notionPageId, properties });
-      await sleep(350);
-    }
-    return 'updated';
-  } else {
-    // Create new
-    verbose(`  Creating action: ${title}`);
-    if (!DRY_RUN) {
-      const children = [];
-      if (action.content) {
-        children.push({
-          object: 'block',
-          type: 'paragraph',
-          paragraph: { rich_text: [{ text: { content: action.content.slice(0, 2000) } }] },
-        });
-      }
-      if (action.source_url) {
-        children.push({
-          object: 'block',
-          type: 'paragraph',
-          paragraph: { rich_text: [{ text: { content: 'Source: ' } }, { text: { content: action.source_url, link: { url: action.source_url } } }] },
-        });
-      }
-
-      await notion.pages.create({
-        parent: { database_id: databaseId },
-        properties,
-        children,
+  verbose(`  Creating action: ${title}`);
+  if (!DRY_RUN) {
+    const children = [];
+    if (action.content) {
+      children.push({
+        object: 'block',
+        type: 'paragraph',
+        paragraph: { rich_text: [{ text: { content: action.content.slice(0, 2000) } }] },
       });
-      await sleep(350);
     }
-    return 'created';
+    if (action.source_url) {
+      children.push({
+        object: 'block',
+        type: 'paragraph',
+        paragraph: { rich_text: [{ text: { content: 'Source: ' } }, { text: { content: action.source_url, link: { url: action.source_url } } }] },
+      });
+    }
+
+    await notion.pages.create({
+      parent: { database_id: databaseId },
+      properties,
+      children,
+    });
+    await sleep(350);
   }
+  return 'created';
 }
 
 async function upsertDecision(decision, databaseId, existingMap, projectPageMap) {
   const notionPageId = existingMap.get(decision.id);
+
+  // CREATE-ONLY: if this decision already exists in Notion, skip it entirely.
+  if (notionPageId) {
+    verbose(`  Skipped (already in Notion): ${decision.title || decision.id}`);
+    return 'skipped';
+  }
+
   const title = decision.title || decision.content?.split('\n')[0]?.slice(0, 100) || 'Untitled decision';
 
   const properties = {
@@ -194,61 +197,50 @@ async function upsertDecision(decision, databaseId, existingMap, projectPageMap)
     'Supabase ID': { rich_text: [{ text: { content: decision.id } }] },
   };
 
-  // Link to project via relation if we can resolve it
   if (decision.project_code && projectPageMap.has(decision.project_code)) {
     properties['Project'] = { relation: [{ id: projectPageMap.get(decision.project_code) }] };
   }
 
-  // Store rationale in dedicated property
   if (decision.decision_rationale) {
     properties['Rationale'] = { rich_text: [{ text: { content: decision.decision_rationale.slice(0, 2000) } }] };
   }
 
-  if (notionPageId) {
-    verbose(`  Updating decision: ${title}`);
-    if (!DRY_RUN) {
-      await notion.pages.update({ page_id: notionPageId, properties });
-      await sleep(350);
-    }
-    return 'updated';
-  } else {
-    verbose(`  Creating decision: ${title}`);
-    if (!DRY_RUN) {
-      const children = [];
-      if (decision.content) {
-        children.push({
-          object: 'block',
-          type: 'paragraph',
-          paragraph: { rich_text: [{ text: { content: decision.content.slice(0, 2000) } }] },
-        });
-      }
-      if (decision.decision_rationale) {
-        children.push({
-          object: 'block',
-          type: 'callout',
-          callout: {
-            rich_text: [{ text: { content: `Rationale: ${decision.decision_rationale.slice(0, 1000)}` } }],
-            icon: { type: 'emoji', emoji: '\u{1F4AD}' },
-          },
-        });
-      }
-      if (decision.source_url) {
-        children.push({
-          object: 'block',
-          type: 'paragraph',
-          paragraph: { rich_text: [{ text: { content: 'Source: ' } }, { text: { content: decision.source_url, link: { url: decision.source_url } } }] },
-        });
-      }
-
-      await notion.pages.create({
-        parent: { database_id: databaseId },
-        properties,
-        children,
+  verbose(`  Creating decision: ${title}`);
+  if (!DRY_RUN) {
+    const children = [];
+    if (decision.content) {
+      children.push({
+        object: 'block',
+        type: 'paragraph',
+        paragraph: { rich_text: [{ text: { content: decision.content.slice(0, 2000) } }] },
       });
-      await sleep(350);
     }
-    return 'created';
+    if (decision.decision_rationale) {
+      children.push({
+        object: 'block',
+        type: 'callout',
+        callout: {
+          rich_text: [{ text: { content: `Rationale: ${decision.decision_rationale.slice(0, 1000)}` } }],
+          icon: { type: 'emoji', emoji: '\u{1F4AD}' },
+        },
+      });
+    }
+    if (decision.source_url) {
+      children.push({
+        object: 'block',
+        type: 'paragraph',
+        paragraph: { rich_text: [{ text: { content: 'Source: ' } }, { text: { content: decision.source_url, link: { url: decision.source_url } } }] },
+      });
+    }
+
+    await notion.pages.create({
+      parent: { database_id: databaseId },
+      properties,
+      children,
+    });
+    await sleep(350);
   }
+  return 'created';
 }
 
 // ============================================
@@ -313,7 +305,7 @@ async function main() {
     const existingActions = await getExistingNotionIds(actionsDbId);
     verbose(`  ${existingActions.size} existing actions in Notion`);
 
-    const stats = { created: 0, updated: 0, errors: 0 };
+    const stats = { created: 0, skipped: 0, errors: 0 };
     for (const action of actions) {
       try {
         const result = await upsertAction(action, actionsDbId, existingActions, projectPageMap);
@@ -323,7 +315,7 @@ async function main() {
         stats.errors++;
       }
     }
-    log(`Actions: ${stats.created} created, ${stats.updated} updated, ${stats.errors} errors`);
+    log(`Actions: ${stats.created} created, ${stats.skipped} skipped (already in Notion), ${stats.errors} errors`);
   } else if (!actionsDbId) {
     log('Skipping actions — no DB ID configured');
   }
@@ -334,7 +326,7 @@ async function main() {
     const existingDecisions = await getExistingNotionIds(decisionsDbId);
     verbose(`  ${existingDecisions.size} existing decisions in Notion`);
 
-    const stats = { created: 0, updated: 0, errors: 0 };
+    const stats = { created: 0, skipped: 0, errors: 0 };
     for (const decision of decisions) {
       try {
         const result = await upsertDecision(decision, decisionsDbId, existingDecisions, projectPageMap);
@@ -344,7 +336,7 @@ async function main() {
         stats.errors++;
       }
     }
-    log(`Decisions: ${stats.created} created, ${stats.updated} updated, ${stats.errors} errors`);
+    log(`Decisions: ${stats.created} created, ${stats.skipped} skipped (already in Notion), ${stats.errors} errors`);
   } else if (!decisionsDbId) {
     log('Skipping decisions — no DB ID configured');
   }
@@ -368,10 +360,18 @@ async function main() {
       const existingAlerts = await getExistingNotionIds(liveAlertsDbId);
       verbose(`  ${existingAlerts.size} existing alerts in Notion`);
 
-      const stats = { created: 0, updated: 0, errors: 0 };
+      const stats = { created: 0, skipped: 0, errors: 0 };
       for (const action of urgentActions) {
         try {
           const notionPageId = existingAlerts.get(action.id);
+
+          // CREATE-ONLY: skip if already in Notion
+          if (notionPageId) {
+            verbose(`  Skipped alert (already in Notion): ${action.title || action.id}`);
+            stats.skipped++;
+            continue;
+          }
+
           const title = action.title || 'Untitled follow-up';
           const isOverdue = action.follow_up_date < today;
 
@@ -384,39 +384,30 @@ async function main() {
             'Supabase ID': { rich_text: [{ text: { content: action.id } }] },
           };
 
-          if (notionPageId) {
-            verbose(`  Updating alert: ${title}`);
-            if (!DRY_RUN) {
-              await notion.pages.update({ page_id: notionPageId, properties });
-              await sleep(350);
-            }
-            stats.updated++;
-          } else {
-            verbose(`  Creating alert: ${title}`);
-            if (!DRY_RUN) {
-              const children = [];
-              if (action.content) {
-                children.push({
-                  object: 'block',
-                  type: 'paragraph',
-                  paragraph: { rich_text: [{ text: { content: action.content.slice(0, 2000) } }] },
-                });
-              }
-              await notion.pages.create({
-                parent: { database_id: liveAlertsDbId },
-                properties,
-                children,
+          verbose(`  Creating alert: ${title}`);
+          if (!DRY_RUN) {
+            const children = [];
+            if (action.content) {
+              children.push({
+                object: 'block',
+                type: 'paragraph',
+                paragraph: { rich_text: [{ text: { content: action.content.slice(0, 2000) } }] },
               });
-              await sleep(350);
             }
-            stats.created++;
+            await notion.pages.create({
+              parent: { database_id: liveAlertsDbId },
+              properties,
+              children,
+            });
+            await sleep(350);
           }
+          stats.created++;
         } catch (err) {
           log(`  Error syncing alert "${action.title}": ${err.message}`);
           stats.errors++;
         }
       }
-      log(`Live Alerts: ${stats.created} created, ${stats.updated} updated, ${stats.errors} errors`);
+      log(`Live Alerts: ${stats.created} created, ${stats.skipped} skipped, ${stats.errors} errors`);
     }
   } else if (!liveAlertsDbId) {
     log('Skipping live alerts — no DB ID configured');

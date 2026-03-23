@@ -53,6 +53,7 @@ const dbIds = JSON.parse(readFileSync(configPath, 'utf8'));
 const GRANT_PIPELINE_DB = dbIds.grantPipeline;
 const ACTIONS_DB = dbIds.actions;
 const PLANNING_CALENDAR_DB = dbIds.planningCalendar;
+const PROJECTS_DB = dbIds.actProjects;
 
 // ── Clients ──────────────────────────────────────────────────────────
 
@@ -401,6 +402,181 @@ async function syncGrantPages(grants, existingMap) {
   return newGrantIds;
 }
 
+// ── Fetch Notion project pages for relation linking ──────────────────
+
+async function fetchNotionProjects() {
+  log('  Fetching Notion project pages for relation linking...');
+
+  const pages = await queryAllPages(PROJECTS_DB);
+
+  // Build map: project name (lowercase) → Notion page ID
+  // Also map common project codes to Notion page IDs
+  const nameMap = new Map();
+  for (const page of pages) {
+    const name = getRichText(page, 'Name');
+    if (name) {
+      nameMap.set(name.toLowerCase(), page.id);
+      // Also map common short codes
+      // e.g. "Empathy Ledger" → also findable as "ACT-EL"
+    }
+  }
+
+  verbose(`  ${nameMap.size} Notion project pages mapped`);
+  return nameMap;
+}
+
+// Match aligned_projects codes to Notion project page IDs
+function resolveProjectRelations(alignedProjects, projectNameMap) {
+  if (!alignedProjects || !Array.isArray(alignedProjects) || alignedProjects.length === 0) {
+    return [];
+  }
+
+  // Map of GrantScope project codes → Notion project name substrings (lowercase)
+  // These match actual Notion project page names
+  const CODE_TO_SEARCH = {
+    'ACT-EL': ['empathy ledger'],
+    'ACT-JH': ['justicehub'],
+    'ACT-GD': ['goods.', 'goods on country'],
+    'ACT-BCV': ['black cockatoo', 'bcv'],
+    'ACT-HV': ['the harvest'],
+    'ACT-FM': ['the farm', 'act farm'],
+    'ACT-ART': ['art'],
+    'ACT-HQ': ['act hq', 'act operations'],
+    'ACT-IN': ['alma'],
+    'ACT-OC': ['oochiumpa', 'oonchiumpa'],
+    'ACT-PC': ['palm island', 'palm community'],
+    'ACT-OS': ['orange sky'],
+  };
+
+  const relations = [];
+  const usedIds = new Set();
+  for (const code of alignedProjects) {
+    let found = false;
+    // Try mapped search terms first
+    const searchTerms = CODE_TO_SEARCH[code];
+    if (searchTerms) {
+      for (const term of searchTerms) {
+        // Try exact match first
+        const exactId = projectNameMap.get(term);
+        if (exactId && !usedIds.has(exactId)) {
+          relations.push({ id: exactId });
+          usedIds.add(exactId);
+          found = true;
+          break;
+        }
+        // Try substring match
+        if (!found) {
+          for (const [name, pageId] of projectNameMap) {
+            if (name.includes(term) && !usedIds.has(pageId)) {
+              relations.push({ id: pageId });
+              usedIds.add(pageId);
+              found = true;
+              break;
+            }
+          }
+        }
+        if (found) break;
+      }
+    }
+    // Fallback: search project names containing the code suffix
+    if (!found) {
+      const suffix = code.replace('ACT-', '').toLowerCase();
+      for (const [name, pageId] of projectNameMap) {
+        if (name.includes(suffix) && !usedIds.has(pageId)) {
+          relations.push({ id: pageId });
+          usedIds.add(pageId);
+          break;
+        }
+      }
+    }
+  }
+  return relations;
+}
+
+// Build page content blocks for a grant action item
+function buildActionContent(grant, gate, gateNum) {
+  const amount = grant.amount_max
+    ? `$${Number(grant.amount_max).toLocaleString()}`
+    : grant.amount_min
+      ? `$${Number(grant.amount_min).toLocaleString()}`
+      : 'Not specified';
+  const deadline = grant.closes_at || grant.deadline || 'No deadline';
+  const funder = grant.provider || 'Unknown funder';
+  const program = grant.program || '';
+  const projects = Array.isArray(grant.aligned_projects)
+    ? grant.aligned_projects.join(', ')
+    : (grant.aligned_projects || '—');
+
+  const children = [
+    // Summary block
+    {
+      object: 'block',
+      type: 'callout',
+      callout: {
+        icon: { emoji: '💰' },
+        rich_text: [{ text: { content: `${funder}${program ? ` — ${program}` : ''} | ${amount} | Closes ${deadline}` } }],
+      },
+    },
+    // Details
+    {
+      object: 'block',
+      type: 'heading_3',
+      heading_3: {
+        rich_text: [{ text: { content: `Gate ${gateNum}: ${gate.name}` } }],
+      },
+    },
+  ];
+
+  // Add description if available
+  if (grant.description) {
+    children.push({
+      object: 'block',
+      type: 'paragraph',
+      paragraph: {
+        rich_text: [{ text: { content: grant.description.slice(0, 1500) } }],
+      },
+    });
+  }
+
+  // Key details as bullet list
+  const bullets = [
+    `Funder: ${funder}`,
+    `Amount: ${amount}`,
+    `Deadline: ${deadline}`,
+    `Aligned Projects: ${projects}`,
+  ];
+  if (grant.eligibility_criteria) {
+    bullets.push(`Eligibility: ${String(grant.eligibility_criteria).slice(0, 300)}`);
+  }
+  if (grant.geography) {
+    bullets.push(`Geography: ${Array.isArray(grant.geography) ? grant.geography.join(', ') : grant.geography}`);
+  }
+  if (grant.target_recipients) {
+    bullets.push(`Target: ${Array.isArray(grant.target_recipients) ? grant.target_recipients.join(', ') : grant.target_recipients}`);
+  }
+
+  for (const text of bullets) {
+    children.push({
+      object: 'block',
+      type: 'bulleted_list_item',
+      bulleted_list_item: {
+        rich_text: [{ text: { content: text.slice(0, 2000) } }],
+      },
+    });
+  }
+
+  // Link to grant URL if available
+  if (grant.url) {
+    children.push({
+      object: 'block',
+      type: 'bookmark',
+      bookmark: { url: grant.url },
+    });
+  }
+
+  return children;
+}
+
 // ── Phase 4: Auto-create Actions (Playbook 6 Gates) ─────────────────
 
 function calculateGates(deadline) {
@@ -444,7 +620,7 @@ function calculateGates(deadline) {
   }
 }
 
-async function createActions(grants, newGrantIds, existingActionTitles) {
+async function createActions(grants, newGrantIds, existingActionTitles, projectNameMap) {
   if (SKIP_ACTIONS) {
     log('Phase 4: Skipped (--skip-actions)');
     return;
@@ -461,6 +637,7 @@ async function createActions(grants, newGrantIds, existingActionTitles) {
 
   let created = 0;
   let skipped = 0;
+  let linked = 0;
 
   for (const grant of newGrants) {
     const deadline = grant.closes_at || grant.deadline;
@@ -471,9 +648,8 @@ async function createActions(grants, newGrantIds, existingActionTitles) {
       continue;
     }
 
-    const project = Array.isArray(grant.aligned_projects)
-      ? grant.aligned_projects[0]
-      : (grant.aligned_projects || 'Grants');
+    // Resolve project relations for this grant
+    const projectRelations = resolveProjectRelations(grant.aligned_projects, projectNameMap);
 
     for (let i = 0; i < gates.length; i++) {
       const gate = gates[i];
@@ -488,7 +664,7 @@ async function createActions(grants, newGrantIds, existingActionTitles) {
       }
 
       if (DRY_RUN) {
-        verbose(`  Would create action: ${actionTitle} (due: ${gate.due})`);
+        verbose(`  Would create action: ${actionTitle} (due: ${gate.due}, projects: ${projectRelations.length})`);
         created++;
         continue;
       }
@@ -509,12 +685,22 @@ async function createActions(grants, newGrantIds, existingActionTitles) {
           },
         };
 
+        // Link to ACT projects if we resolved any
+        if (projectRelations.length > 0) {
+          props['Projects'] = { relation: projectRelations };
+          linked++;
+        }
+
+        // Build rich page content with grant details
+        const children = buildActionContent(grant, gate, gateNum);
+
         await notion.pages.create({
           parent: { database_id: ACTIONS_DB },
           properties: props,
+          children,
         });
         created++;
-        verbose(`  Created action: ${actionTitle}`);
+        verbose(`  Created action: ${actionTitle} (${projectRelations.length} projects linked)`);
       } catch (err) {
         log(`  Warning: failed to create action "${actionTitle}": ${err.message}`);
       }
@@ -523,7 +709,7 @@ async function createActions(grants, newGrantIds, existingActionTitles) {
     }
   }
 
-  log(`  Actions: ${created} created, ${skipped} skipped (dedup)`);
+  log(`  Actions: ${created} created, ${skipped} skipped, ${linked} project links set`);
 }
 
 // ── Phase 5: Create Planning Calendar entries ────────────────────────
@@ -608,20 +794,22 @@ async function main() {
   // Phase 2
   const existingMap = await fetchExistingPages();
 
-  // Fetch action/calendar dedup data in parallel-ish (sequential for rate limiting)
+  // Fetch action/calendar dedup data and project map (sequential for rate limiting)
   let existingActionTitles = new Set();
   let existingCalendarTitles = new Set();
+  let projectNameMap = new Map();
 
   if (!SKIP_ACTIONS) {
     existingActionTitles = await fetchExistingActions();
     existingCalendarTitles = await fetchExistingCalendarEntries();
+    projectNameMap = await fetchNotionProjects();
   }
 
   // Phase 3
   const newGrantIds = await syncGrantPages(grants, existingMap);
 
   // Phase 4
-  await createActions(grants, newGrantIds, existingActionTitles);
+  await createActions(grants, newGrantIds, existingActionTitles, projectNameMap);
 
   // Phase 5
   await createCalendarEntries(grants, newGrantIds, existingCalendarTitles);

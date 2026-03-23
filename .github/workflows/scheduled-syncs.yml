@@ -180,16 +180,14 @@ jobs:
       - name: Install dependencies
         run: npm install --production
 
-      - name: Run Grant Scout
+      - name: Sync GrantScope Pipeline to Notion
         env:
           SUPABASE_SHARED_URL: ${{ secrets.SUPABASE_SHARED_URL }}
           SUPABASE_SHARED_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SHARED_SERVICE_ROLE_KEY }}
-        run: |
-          if [ -f "scripts/grants-pipeline.mjs" ]; then
-            node scripts/grants-pipeline.mjs
-          else
-            echo "ALTA grant scout script not yet implemented"
-          fi
+          GRANTSCOPE_SUPABASE_URL: ${{ secrets.GRANTSCOPE_SUPABASE_URL }}
+          GRANTSCOPE_SUPABASE_KEY: ${{ secrets.GRANTSCOPE_SUPABASE_KEY }}
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+        run: node scripts/sync-grantscope-to-notion.mjs
         continue-on-error: true
 
   # ========================================
