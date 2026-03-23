@@ -74,6 +74,7 @@ const gsSupabase = createClient(gsUrl, gsKey);
 const STAGE_MAP = {
   discovered: 'Discovered',
   researching: 'Researching',
+  pursuing: 'Pursuing',
   drafting: 'Drafting',
   submitted: 'Submitted',
   awarded: 'Awarded',
@@ -82,7 +83,7 @@ const STAGE_MAP = {
 };
 
 // Stages that trigger sync to Notion (skip discovered/archived/declined)
-const ACTIVE_STAGES = ['researching', 'drafting', 'submitted'];
+const ACTIVE_STAGES = ['researching', 'pursuing', 'drafting', 'submitted'];
 
 // ── Notion helpers ───────────────────────────────────────────────────
 
@@ -200,11 +201,8 @@ async function fetchExistingCalendarEntries() {
 
 // ── Phase 3: Create/update Grant Pipeline Tracker pages ──────────────
 
-function buildGrantProperties(grant) {
+function buildGrantProperties(grant, projectNameMap) {
   const deadline = grant.closes_at || grant.deadline;
-  const projects = Array.isArray(grant.aligned_projects)
-    ? grant.aligned_projects.join(', ')
-    : (grant.aligned_projects || '');
 
   const props = {
     'Grant Name': {
@@ -237,10 +235,12 @@ function buildGrantProperties(grant) {
     props['Readiness Score'] = { number: grant.fit_score };
   }
 
-  if (projects) {
-    props['Project'] = {
-      rich_text: [{ text: { content: projects.slice(0, 2000) } }],
-    };
+  // Link to Notion project pages via existing "Project Link" relation
+  if (projectNameMap) {
+    const projectRelations = resolveProjectRelations(grant.aligned_projects, projectNameMap);
+    if (projectRelations.length > 0) {
+      props['Project Link'] = { relation: projectRelations };
+    }
   }
 
   const keyReqs = grant.requirements_summary || grant.eligibility_criteria || '';
@@ -341,7 +341,7 @@ function buildGrantContent(grant) {
   return blocks;
 }
 
-async function syncGrantPages(grants, existingMap) {
+async function syncGrantPages(grants, existingMap, projectNameMap) {
   log('Phase 3: Syncing Grant Pipeline Tracker pages...');
 
   let created = 0;
@@ -363,7 +363,7 @@ async function syncGrantPages(grants, existingMap) {
       try {
         await notion.pages.update({
           page_id: existingPage.id,
-          properties: buildGrantProperties(grant),
+          properties: buildGrantProperties(grant, projectNameMap),
         });
         updated++;
         verbose(`  Updated: ${grant.name}`);
@@ -383,7 +383,7 @@ async function syncGrantPages(grants, existingMap) {
       try {
         await notion.pages.create({
           parent: { database_id: GRANT_PIPELINE_DB },
-          properties: buildGrantProperties(grant),
+          properties: buildGrantProperties(grant, projectNameMap),
           children: buildGrantContent(grant),
         });
         created++;
@@ -399,7 +399,51 @@ async function syncGrantPages(grants, existingMap) {
   }
 
   log(`  Grant pages: ${created} created, ${updated} updated, ${skipped} skipped`);
+
+  // Notify Telegram about newly synced grants
+  if (newGrantIds.size > 0 && !DRY_RUN) {
+    await notifyNewGrants(grants.filter(g => newGrantIds.has(g.id)));
+  }
+
   return newGrantIds;
+}
+
+// ── Telegram notification for new pipeline grants ────────────────────
+
+async function notifyNewGrants(newGrants) {
+  const token = process.env.TELEGRAM_BOT_TOKEN;
+  const chatIds = (process.env.TELEGRAM_AUTHORIZED_USERS || '')
+    .split(',')
+    .map(s => s.trim())
+    .filter(Boolean);
+
+  if (!token || chatIds.length === 0) {
+    verbose('  Telegram not configured — skipping notification');
+    return;
+  }
+
+  const lines = newGrants.map(g => {
+    const amt = g.amount_max ? `$${Number(g.amount_max).toLocaleString()}` : '';
+    const deadline = g.closes_at || g.deadline || 'no deadline';
+    const stage = STAGE_MAP[g.pipeline_stage] || g.pipeline_stage;
+    return `  • ${g.name} — ${g.provider || 'Unknown'} ${amt} (${deadline}) [${stage}]`;
+  });
+
+  const msg = `🎯 NEW IN GRANT PIPELINE (${newGrants.length})\n\n${lines.join('\n')}`;
+
+  for (const chatId of chatIds) {
+    try {
+      await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ chat_id: chatId, text: msg }),
+      });
+    } catch (err) {
+      log(`  Warning: Telegram notification failed for chat ${chatId}: ${err.message}`);
+    }
+  }
+
+  log(`  Sent Telegram notification for ${newGrants.length} new grant(s)`);
 }
 
 // ── Fetch Notion project pages for relation linking ──────────────────
@@ -794,19 +838,20 @@ async function main() {
   // Phase 2
   const existingMap = await fetchExistingPages();
 
-  // Fetch action/calendar dedup data and project map (sequential for rate limiting)
+  // Fetch project map (needed for grant page relations + action linking)
+  const projectNameMap = await fetchNotionProjects();
+
+  // Fetch action/calendar dedup data (sequential for rate limiting)
   let existingActionTitles = new Set();
   let existingCalendarTitles = new Set();
-  let projectNameMap = new Map();
 
   if (!SKIP_ACTIONS) {
     existingActionTitles = await fetchExistingActions();
     existingCalendarTitles = await fetchExistingCalendarEntries();
-    projectNameMap = await fetchNotionProjects();
   }
 
   // Phase 3
-  const newGrantIds = await syncGrantPages(grants, existingMap);
+  const newGrantIds = await syncGrantPages(grants, existingMap, projectNameMap);
 
   // Phase 4
   await createActions(grants, newGrantIds, existingActionTitles, projectNameMap);

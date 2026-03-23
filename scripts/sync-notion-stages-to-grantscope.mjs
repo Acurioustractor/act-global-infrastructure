@@ -74,7 +74,7 @@ const gsSupabase = createClient(gsUrl, gsKey);
 const NOTION_TO_GS_STAGE = {
   'Identified':   'discovered',
   'Researching':  'researching',
-  'Pursuing':     'researching',   // No 'pursuing' in GS constraint — map to researching
+  'Pursuing':     'pursuing',
   'Drafting':     'drafting',
   'Submitted':    'submitted',
   'Negotiating':  'submitted',     // Post-submission — keep as submitted in GS
