@@ -272,13 +272,13 @@ worker.tool("get_daily_briefing", {
 
     const sections: string[] = [];
 
-    // 1. Overdue actions
+    // 1. Overdue actions (from Notion Actions)
     if (result.overdue_actions.length) {
       const items = result.overdue_actions.map((r) => {
         const daysOver = Math.floor(
-          (Date.now() - new Date(r.follow_up_date).getTime()) / 86400000
+          (Date.now() - new Date(r.due_date).getTime()) / 86400000
         );
-        return `  - [${r.project_code}] ${r.title} (${daysOver}d overdue, ${r.importance})`;
+        return `  - ${r.title} (${daysOver}d overdue, assigned: ${r.assigned_to || 'unassigned'})`;
       });
       sections.push(`OVERDUE ACTIONS (${result.overdue_actions.length}):\n${items.join("\n")}`);
     }
@@ -286,15 +286,15 @@ worker.tool("get_daily_briefing", {
     // 2. Upcoming follow-ups
     if (result.upcoming_followups.length) {
       const items = result.upcoming_followups.map(
-        (r) => `  - [${r.project_code}] ${r.title} (due ${r.follow_up_date})`
+        (r) => `  - ${r.title} (due ${r.due_date}, assigned: ${r.assigned_to || 'unassigned'})`
       );
       sections.push(`UPCOMING FOLLOW-UPS (${result.upcoming_followups.length}):\n${items.join("\n")}`);
     }
 
-    // 3. Recent decisions
+    // 3. Recent decisions (from Notion Decisions)
     if (result.recent_decisions.length) {
       const items = result.recent_decisions.map(
-        (r) => `  - [${r.project_code}] ${r.title} (${r.decision_status || "pending"})`
+        (r) => `  - ${r.title} (${r.status || "pending"})`
       );
       sections.push(`RECENT DECISIONS (${result.recent_decisions.length}):\n${items.join("\n")}`);
     }
