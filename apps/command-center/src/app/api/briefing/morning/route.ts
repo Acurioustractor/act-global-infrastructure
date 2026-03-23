@@ -239,42 +239,73 @@ async function fetchPipelineSnapshot() {
 async function fetchGrantsSection() {
   const yesterday = daysAgo(1)
   const nextWeek = futureDate(7)
+  const today = todayStr()
 
-  const { data: newGrants } = await supabase
-    .from('grant_opportunities')
-    .select('id, name, provider, fit_score, relevance_score, aligned_projects, amount_max, closes_at')
-    .gte('created_at', yesterday)
-    .order('relevance_score', { ascending: false })
-    .limit(5)
+  const [
+    newGrantsRes,
+    upcomingDeadlinesRes,
+    activeAppsRes,
+    pipelineDataRes,
+    grantActionsRes,
+  ] = await Promise.all([
+    supabase
+      .from('grant_opportunities')
+      .select('id, name, provider, fit_score, relevance_score, aligned_projects, amount_max, closes_at')
+      .gte('created_at', yesterday)
+      .order('relevance_score', { ascending: false })
+      .limit(5),
 
-  const { data: upcomingDeadlinesRaw } = await supabase
-    .from('grant_opportunities')
-    .select('id, name, provider, closes_at, fit_score, relevance_score, aligned_projects')
-    .not('closes_at', 'is', null)
-    .gte('closes_at', todayStr())
-    .lte('closes_at', nextWeek)
-    .order('closes_at', { ascending: true })
-    .limit(20)
-  const upcomingDeadlines = (upcomingDeadlinesRaw || []).filter(g => {
+    supabase
+      .from('grant_opportunities')
+      .select('id, name, provider, closes_at, fit_score, relevance_score, aligned_projects')
+      .not('closes_at', 'is', null)
+      .gte('closes_at', today)
+      .lte('closes_at', nextWeek)
+      .order('closes_at', { ascending: true })
+      .limit(20),
+
+    supabase
+      .from('grant_applications')
+      .select('id', { count: 'exact', head: true })
+      .in('status', ['draft', 'in_progress', 'submitted', 'under_review']),
+
+    supabase
+      .from('grant_applications')
+      .select('amount_requested')
+      .in('status', ['draft', 'in_progress', 'submitted', 'under_review']),
+
+    // Grant action items due this week from Notion
+    supabase
+      .from('notion_actions')
+      .select('title, status, due_date, action_type, assigned_to')
+      .not('status', 'eq', 'Done')
+      .not('due_date', 'is', null)
+      .lte('due_date', nextWeek)
+      .eq('action_type', 'Grant')
+      .order('due_date', { ascending: true })
+      .limit(15),
+  ])
+
+  const newGrants = newGrantsRes.data || []
+  const upcomingDeadlines = (upcomingDeadlinesRes.data || []).filter(g => {
     if (g.fit_score && g.fit_score >= 60) return true
     if (Array.isArray(g.aligned_projects) && g.aligned_projects.length > 0) return true
     return false
   }).slice(0, 10)
+  const pipelineValue = (pipelineDataRes.data || []).reduce((sum: number, a: { amount_requested: number }) => sum + (a.amount_requested || 0), 0)
+  const grantActions = grantActionsRes.data || []
 
-  const { count: activeApps } = await supabase
-    .from('grant_applications')
-    .select('id', { count: 'exact', head: true })
-    .in('status', ['draft', 'in_progress', 'submitted', 'under_review'])
+  // Split grant actions into overdue vs upcoming
+  const overdueGrantActions = grantActions.filter(a => a.due_date < today)
+  const upcomingGrantActions = grantActions.filter(a => a.due_date >= today)
 
-  const { data: pipelineData } = await supabase
-    .from('grant_applications')
-    .select('amount_requested')
-    .in('status', ['draft', 'in_progress', 'submitted', 'under_review'])
-
-  const pipelineValue = (pipelineData || []).reduce((sum, a) => sum + (a.amount_requested || 0), 0)
+  // Identify Go/No-Go decisions needed
+  const goNoGoActions = grantActions.filter(a =>
+    a.title.toLowerCase().includes('go/no-go') || a.title.toLowerCase().includes('go-no-go')
+  )
 
   return {
-    newDiscoveries: (newGrants || []).map(g => ({
+    newDiscoveries: newGrants.map(g => ({
       name: g.name,
       provider: g.provider,
       fitScore: g.fit_score ?? g.relevance_score,
@@ -282,16 +313,32 @@ async function fetchGrantsSection() {
       amount: g.amount_max,
       closesAt: g.closes_at,
     })),
-    newCount: (newGrants || []).length,
-    upcomingDeadlines: (upcomingDeadlines || []).map(d => ({
+    newCount: newGrants.length,
+    upcomingDeadlines: upcomingDeadlines.map(d => ({
       name: d.name,
       provider: d.provider,
       closesAt: d.closes_at,
       fitScore: d.fit_score ?? d.relevance_score,
       daysRemaining: d.closes_at ? Math.ceil((new Date(d.closes_at).getTime() - Date.now()) / (1000 * 60 * 60 * 24)) : 0,
     })),
-    activeApplications: activeApps || 0,
+    activeApplications: activeAppsRes.count || 0,
     pipelineValue,
+    // New: grant action items due this week
+    grantActionsThisWeek: upcomingGrantActions.map(a => ({
+      title: a.title,
+      dueDate: a.due_date,
+      status: a.status,
+      assignedTo: a.assigned_to,
+      daysRemaining: Math.ceil((new Date(a.due_date).getTime() - Date.now()) / (1000 * 60 * 60 * 24)),
+      isGoNoGo: a.title.toLowerCase().includes('go/no-go'),
+    })),
+    overdueGrantActions: overdueGrantActions.map(a => ({
+      title: a.title,
+      dueDate: a.due_date,
+      status: a.status,
+      daysOverdue: Math.floor((Date.now() - new Date(a.due_date).getTime()) / (1000 * 60 * 60 * 24)),
+    })),
+    goNoGoDecisionsNeeded: goNoGoActions.length,
   }
 }
 
@@ -359,18 +406,20 @@ export async function GET() {
 
     // Map @act/intel data to existing API shape
     const overdueActions = coreBriefing.overdue_actions.map(a => ({
-      project: a.project_code,
+      project: a.project_code || null,
       title: a.title,
-      followUpDate: a.follow_up_date,
-      importance: a.importance || 'normal',
-      daysOverdue: Math.floor((Date.now() - new Date(a.follow_up_date).getTime()) / 86400000),
+      followUpDate: a.due_date,
+      status: a.status,
+      assignedTo: a.assigned_to,
+      daysOverdue: Math.floor((Date.now() - new Date(a.due_date).getTime()) / 86400000),
     }))
 
     const upcomingFollowups = coreBriefing.upcoming_followups.map(a => ({
-      project: a.project_code,
+      project: a.project_code || null,
       title: a.title,
-      followUpDate: a.follow_up_date,
-      importance: a.importance || 'normal',
+      followUpDate: a.due_date,
+      status: a.status,
+      assignedTo: a.assigned_to,
     }))
 
     const relationshipAlerts = coreBriefing.stale_relationships.map(r => ({

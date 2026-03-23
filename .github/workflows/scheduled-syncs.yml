@@ -191,11 +191,38 @@ jobs:
         continue-on-error: true
 
   # ========================================
+  # Grant Hygiene (auto-archive expired)
+  # ========================================
+  grant-hygiene:
+    if: ${{ github.event.inputs.sync_target == 'all' || github.event_name == 'schedule' }}
+    runs-on: ubuntu-latest
+    needs: [run-alta]  # Run after grant sync
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install --production
+
+      - name: Auto-archive expired grant actions
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+        run: node scripts/auto-archive-expired-grants.mjs
+        continue-on-error: true
+
+  # ========================================
   # Summary Report
   # ========================================
   summary:
     runs-on: ubuntu-latest
-    needs: [sync-ghl, sync-calendar, sync-xero, run-bunya, run-alta]
+    needs: [sync-ghl, sync-calendar, sync-xero, run-bunya, run-alta, grant-hygiene]
     if: always()
 
     steps:
@@ -213,6 +240,7 @@ jobs:
           echo "| Xero | ${{ needs.sync-xero.result == 'success' && 'Synced' || needs.sync-xero.result == 'skipped' && 'Skipped' || 'Warning' }} |" >> $GITHUB_STEP_SUMMARY
           echo "| BUNYA (Health) | ${{ needs.run-bunya.result == 'success' && 'Calculated' || needs.run-bunya.result == 'skipped' && 'Skipped' || 'Warning' }} |" >> $GITHUB_STEP_SUMMARY
           echo "| ALTA (Grants) | ${{ needs.run-alta.result == 'success' && 'Scanned' || needs.run-alta.result == 'skipped' && 'Skipped' || 'Warning' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Grant Hygiene | ${{ needs.grant-hygiene.result == 'success' && 'Cleaned' || needs.grant-hygiene.result == 'skipped' && 'Skipped' || 'Warning' }} |" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "---" >> $GITHUB_STEP_SUMMARY
           echo "*Next scheduled run: 6 AM AEST tomorrow*" >> $GITHUB_STEP_SUMMARY
