@@ -112,7 +112,7 @@ export async function fetchDailyReview(
       category: 'action',
       urgency: 'high',
       title: `Overdue: ${a.title}`,
-      detail: `${a.project_code} — due ${a.follow_up_date}`,
+      detail: `${a.assigned_to || 'unassigned'} — due ${a.due_date}`,
     })
   }
 

@@ -18,23 +18,26 @@ export interface SupabaseQueryClient {
     };
 }
 export interface OverdueAction {
-    project_code: string;
     title: string;
-    follow_up_date: string;
-    importance: string;
+    status: string;
+    due_date: string;
+    assigned_to: string | null;
+    project_code?: string;
 }
 export interface UpcomingFollowup {
-    project_code: string;
     title: string;
-    follow_up_date: string;
-    importance: string;
+    status: string;
+    due_date: string;
+    assigned_to: string | null;
+    project_code?: string;
 }
 export interface RecentMeeting {
-    project_code: string;
     title: string;
-    summary: string | null;
-    recorded_at: string;
-    participants: string[] | null;
+    meeting_date: string | null;
+    updated_at: string;
+    ai_summary: string | null;
+    task_status: string | null;
+    assigned_to: string | null;
 }
 export interface StaleRelationship {
     full_name: string | null;
@@ -44,10 +47,24 @@ export interface StaleRelationship {
     last_contact_date: string;
 }
 export interface RecentDecision {
-    project_code: string;
     title: string;
-    decision_status: string | null;
-    recorded_at: string;
+    status: string | null;
+    decision_date: string | null;
+    rationale: string | null;
+}
+export interface UpcomingGrantDeadline {
+    title: string;
+    funder: string | null;
+    amount: number | null;
+    stage: string | null;
+    deadline: string | null;
+    project_code: string | null;
+}
+export interface UpcomingCalendarEvent {
+    title: string;
+    event_date: string;
+    event_type: string | null;
+    status: string | null;
 }
 export interface RelationshipAlert {
     contact_name: string;
@@ -67,8 +84,11 @@ export interface DailyBriefingResult {
     relationship_alerts: RelationshipAlert[];
     active_projects: Array<{
         code: string;
+        status: string;
         activity_count: number;
     }>;
+    upcoming_calendar: UpcomingCalendarEvent[];
+    grant_deadlines: UpcomingGrantDeadline[];
 }
 export type HealthStatus = 'active' | 'steady' | 'stale' | 'dormant' | 'unknown';
 export interface ProjectHealthEntry {

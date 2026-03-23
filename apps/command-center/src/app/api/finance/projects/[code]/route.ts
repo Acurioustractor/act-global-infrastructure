@@ -9,8 +9,8 @@ export async function GET(
     const { code } = await params
     const projectCode = decodeURIComponent(code).toUpperCase()
 
-    // Parallel fetch monthly financials, variance notes, transactions, budgets, R&D vendors
-    const [monthly, variances, transactions, budgets, rdVendors, salaryAllocs, revenueStreams] = await Promise.all([
+    // Parallel fetch monthly financials, variance notes, transactions, budgets, R&D vendors, invoices, pipeline
+    const [monthly, variances, transactions, budgets, rdVendors, salaryAllocs, revenueStreams, invoiceMappings, expenseInvoices, pipeline] = await Promise.all([
       supabase
         .from('project_monthly_financials')
         .select('*')
@@ -67,6 +67,61 @@ export async function GET(
         .from('revenue_streams')
         .select('*')
         .contains('project_codes', [projectCode]),
+
+      // Invoices mapped to this project via invoice_project_map
+      supabase.rpc('exec_sql', {
+        sql: `
+          SELECT
+            m.income_type,
+            m.milestone,
+            m.notes as mapping_notes,
+            i.id as invoice_id,
+            i.invoice_number,
+            i.contact_name,
+            i.total,
+            i.status,
+            i.type,
+            i.date,
+            i.due_date,
+            i.line_items->0->>'description' as description
+          FROM invoice_project_map m
+          JOIN xero_invoices i ON i.id = m.invoice_id
+          WHERE m.project_code = '${projectCode.replace(/'/g, "''")}'
+          ORDER BY i.date DESC
+        `
+      }),
+
+      // Expense invoices (ACCPAY) mapped via vendor_project_rules
+      supabase.rpc('exec_sql', {
+        sql: `
+          SELECT
+            i.id as invoice_id,
+            i.invoice_number,
+            i.contact_name,
+            i.total,
+            i.status,
+            i.date,
+            i.due_date,
+            v.category,
+            v.rd_eligible,
+            i.line_items->0->>'description' as description
+          FROM xero_invoices i
+          JOIN vendor_project_rules v ON i.contact_name = v.vendor_name
+          WHERE i.type = 'ACCPAY'
+            AND v.project_code = '${projectCode.replace(/'/g, "''")}'
+            AND i.status NOT IN ('DELETED', 'VOIDED')
+            AND i.date >= '2024-07-01'
+          ORDER BY i.date DESC
+          LIMIT 100
+        `
+      }),
+
+      // Grant pipeline for this project
+      supabase
+        .from('grant_opportunities')
+        .select('id, name, provider, program, amount_min, amount_max, status, pipeline_stage, closes_at, metadata')
+        .contains('aligned_projects', [projectCode])
+        .neq('status', 'closed'),
     ])
 
     const monthlyData = (monthly.data || []).map((m: any) => ({
@@ -161,6 +216,100 @@ export async function GET(
       status: s.status,
     }))
 
+    // Process invoice mappings
+    const invoiceData = (invoiceMappings?.data || []).map((inv: any) => ({
+      invoiceId: inv.invoice_id,
+      invoiceNumber: inv.invoice_number,
+      contact: inv.contact_name,
+      total: Number(inv.total),
+      status: inv.status,
+      type: inv.type,
+      date: inv.date,
+      dueDate: inv.due_date,
+      incomeType: inv.income_type,
+      milestone: inv.milestone,
+      notes: inv.mapping_notes,
+      description: inv.description,
+    }))
+
+    // Group invoices by status for summary
+    const invoicesByStatus = {
+      paid: invoiceData.filter((i: any) => i.status === 'PAID'),
+      authorised: invoiceData.filter((i: any) => i.status === 'AUTHORISED'),
+      draft: invoiceData.filter((i: any) => i.status === 'DRAFT'),
+    }
+    const invoiceSummary = {
+      totalReceived: invoicesByStatus.paid.reduce((s: number, i: any) => s + i.total, 0),
+      totalPending: invoicesByStatus.authorised.reduce((s: number, i: any) => s + i.total, 0),
+      totalDraft: invoicesByStatus.draft.reduce((s: number, i: any) => s + i.total, 0),
+      count: invoiceData.length,
+    }
+
+    // Group by income type
+    const incomeByType: Record<string, { received: number; pending: number; items: any[] }> = {}
+    for (const inv of invoiceData) {
+      const t = inv.incomeType || 'other'
+      if (!incomeByType[t]) incomeByType[t] = { received: 0, pending: 0, items: [] }
+      if (inv.status === 'PAID') incomeByType[t].received += inv.total
+      else incomeByType[t].pending += inv.total
+      incomeByType[t].items.push(inv)
+    }
+
+    // Process expense invoices
+    const expenseData = (expenseInvoices?.data || []).map((inv: any) => ({
+      invoiceId: inv.invoice_id,
+      invoiceNumber: inv.invoice_number,
+      contact: inv.contact_name,
+      total: Number(inv.total),
+      status: inv.status,
+      date: inv.date,
+      dueDate: inv.due_date,
+      category: inv.category || 'Uncategorised',
+      rdEligible: inv.rd_eligible || false,
+      description: inv.description,
+    }))
+
+    // Group expenses by category
+    const expensesByCategory: Record<string, { total: number; rdEligible: boolean; vendors: Record<string, number>; items: any[] }> = {}
+    for (const exp of expenseData) {
+      const cat = exp.category
+      if (!expensesByCategory[cat]) expensesByCategory[cat] = { total: 0, rdEligible: exp.rdEligible, vendors: {}, items: [] }
+      expensesByCategory[cat].total += exp.total
+      expensesByCategory[cat].vendors[exp.contact] = (expensesByCategory[cat].vendors[exp.contact] || 0) + exp.total
+      expensesByCategory[cat].items.push(exp)
+    }
+
+    // Top vendors by spend
+    const vendorSpend: Record<string, number> = {}
+    for (const exp of expenseData) {
+      vendorSpend[exp.contact] = (vendorSpend[exp.contact] || 0) + exp.total
+    }
+    const topVendors = Object.entries(vendorSpend)
+      .sort(([, a], [, b]) => b - a)
+      .slice(0, 10)
+      .map(([vendor, total]) => ({ vendor, total }))
+
+    const totalExpenseInvoices = expenseData.reduce((s: number, e: any) => s + e.total, 0)
+
+    // Pipeline data
+    const pipelineData = (pipeline.data || []).map((g: any) => ({
+      id: g.id,
+      name: g.name,
+      provider: g.provider,
+      program: g.program,
+      amountMin: g.amount_min ? Number(g.amount_min) : null,
+      amountMax: g.amount_max ? Number(g.amount_max) : null,
+      status: g.status,
+      stage: g.pipeline_stage,
+      closesAt: g.closes_at,
+      probability: g.metadata?.probability ? Number(g.metadata.probability) : null,
+    }))
+    const pipelineWeightedTotal = pipelineData.reduce((s: number, g: any) => {
+      const amt = g.amountMax || g.amountMin || 0
+      const prob = g.probability || 0.1
+      return s + amt * prob
+    }, 0)
+
     return NextResponse.json({
       projectCode,
       monthly: monthlyData,
@@ -191,6 +340,18 @@ export async function GET(
         amount: tx.total,
         type: tx.type,
       })),
+      // NEW: Invoice-level data
+      invoices: invoiceData,
+      invoiceSummary,
+      incomeByType,
+      // NEW: Grant pipeline
+      pipeline: pipelineData,
+      pipelineWeightedTotal,
+      // NEW: Expense invoices
+      expenses: expenseData,
+      expensesByCategory,
+      topVendors,
+      totalExpenseInvoices,
     })
   } catch (error) {
     console.error('Error in project monthly financials:', error)

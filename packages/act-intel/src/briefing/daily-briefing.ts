@@ -1,7 +1,10 @@
 /**
  * Daily briefing — unified query logic for morning digest.
  *
- * Returns typed data. Consumers (Telegram bot, Notion Workers) format for their interface.
+ * Now powered by synced Notion tables (actions, meetings, decisions, calendar, grants)
+ * plus GHL contacts for relationship tracking and Notion projects for project health.
+ *
+ * Returns typed data. Consumers (Telegram bot, Notion Workers, API routes) format for their interface.
  */
 
 import type { SupabaseQueryClient } from '../types.js'
@@ -14,6 +17,8 @@ import type {
   RecentDecision,
   StaleRelationship,
   RelationshipAlert,
+  UpcomingCalendarEvent,
+  UpcomingGrantDeadline,
 } from '../types.js'
 
 export interface DailyBriefingOptions {
@@ -30,83 +35,98 @@ export async function fetchDailyBriefing(
   const today = getBrisbaneDate()
   const futureDate = getBrisbaneDateOffset(days)
   const lookback = daysAgoISO(days)
-  const pc = opts.projectCode
-
-  // 1. Overdue actions
-  let overdueQ = supabase
-    .from('project_knowledge')
-    .select('project_code, title, follow_up_date, importance')
-    .eq('action_required', true)
-    .lt('follow_up_date', today)
-    .order('follow_up_date', { ascending: true })
-    .limit(20)
-  if (pc) overdueQ = overdueQ.eq('project_code', pc)
-
-  // 2. Upcoming follow-ups
-  let upcomingQ = supabase
-    .from('project_knowledge')
-    .select('project_code, title, follow_up_date, importance')
-    .eq('action_required', true)
-    .gte('follow_up_date', today)
-    .lte('follow_up_date', futureDate)
-    .order('follow_up_date', { ascending: true })
-    .limit(20)
-  if (pc) upcomingQ = upcomingQ.eq('project_code', pc)
-
-  // 3. Recent meetings
-  let meetingsQ = supabase
-    .from('project_knowledge')
-    .select('project_code, title, summary, recorded_at, participants')
-    .eq('knowledge_type', 'meeting')
-    .gte('recorded_at', lookback)
-    .order('recorded_at', { ascending: false })
-    .limit(10)
-  if (pc) meetingsQ = meetingsQ.eq('project_code', pc)
-
-  // 4. Recent decisions
-  let decisionsQ = supabase
-    .from('project_knowledge')
-    .select('project_code, title, decision_status, recorded_at')
-    .eq('knowledge_type', 'decision')
-    .gte('recorded_at', lookback)
-    .order('recorded_at', { ascending: false })
-    .limit(10)
-  if (pc) decisionsQ = decisionsQ.eq('project_code', pc)
-
-  // 7. Active projects (last 30 days activity count)
-  let projectActivityQ = supabase
-    .from('project_knowledge')
-    .select('project_code')
-    .gte('recorded_at', new Date(now.getTime() - 30 * 86400000).toISOString())
-  if (pc) projectActivityQ = projectActivityQ.eq('project_code', pc)
 
   // Run all queries in parallel
-  const [overdueRes, upcomingRes, meetingsRes, decisionsRes, relationshipsRes, alertsRes, projectActivityRes] =
-    await Promise.all([
-      overdueQ,
-      upcomingQ,
-      meetingsQ,
-      decisionsQ,
+  const [
+    overdueRes,
+    upcomingRes,
+    meetingsRes,
+    decisionsRes,
+    relationshipsRes,
+    alertsRes,
+    projectsRes,
+    calendarRes,
+    grantsRes,
+  ] = await Promise.all([
+    // 1. Overdue actions from Notion (status not Done, due_date < today)
+    supabase
+      .from('notion_actions')
+      .select('title, status, due_date, assigned_to')
+      .not('status', 'eq', 'Done')
+      .not('due_date', 'is', null)
+      .lt('due_date', today)
+      .order('due_date', { ascending: true })
+      .limit(20),
 
-      // 5. Stale relationships (active/prospect not contacted in 30+ days)
-      supabase
-        .from('ghl_contacts')
-        .select('full_name, email, company_name, engagement_status, last_contact_date')
-        .in('engagement_status', ['active', 'prospect'])
-        .lt('last_contact_date', new Date(now.getTime() - 30 * 86400000).toISOString())
-        .order('last_contact_date', { ascending: true })
-        .limit(10),
+    // 2. Upcoming actions from Notion (due within lookback window)
+    supabase
+      .from('notion_actions')
+      .select('title, status, due_date, assigned_to')
+      .not('status', 'eq', 'Done')
+      .not('due_date', 'is', null)
+      .gte('due_date', today)
+      .lte('due_date', futureDate)
+      .order('due_date', { ascending: true })
+      .limit(20),
 
-      // 6. Relationship alerts (falling temperature)
-      supabase
-        .from('relationship_health')
-        .select('ghl_contact_id, temperature, temperature_trend, risk_flags')
-        .eq('temperature_trend', 'falling')
-        .order('temperature', { ascending: true })
-        .limit(10),
+    // 3. Recent meetings from Notion
+    supabase
+      .from('notion_meetings')
+      .select('title, meeting_date, updated_at, ai_summary, task_status, assigned_to')
+      .gte('updated_at', lookback)
+      .order('updated_at', { ascending: false })
+      .limit(10),
 
-      projectActivityQ,
-    ])
+    // 4. Recent decisions from Notion
+    supabase
+      .from('notion_decisions')
+      .select('title, status, decision_date, rationale')
+      .gte('updated_at', lookback)
+      .order('decision_date', { ascending: false })
+      .limit(10),
+
+    // 5. Stale relationships (active/prospect not contacted in 30+ days)
+    supabase
+      .from('ghl_contacts')
+      .select('full_name, email, company_name, engagement_status, last_contact_date')
+      .in('engagement_status', ['active', 'prospect'])
+      .lt('last_contact_date', new Date(now.getTime() - 30 * 86400000).toISOString())
+      .order('last_contact_date', { ascending: true })
+      .limit(10),
+
+    // 6. Relationship alerts (falling temperature)
+    supabase
+      .from('relationship_health')
+      .select('ghl_contact_id, temperature, temperature_trend, risk_flags')
+      .eq('temperature_trend', 'falling')
+      .order('temperature', { ascending: true })
+      .limit(10),
+
+    // 7. Active projects from Notion (with status)
+    supabase
+      .from('notion_projects')
+      .select('title, status, data')
+      .in('status', ['Active 🔥', 'Active', 'Ideation 🌀', 'Ideation'])
+      .order('updated_at', { ascending: false })
+      .limit(20),
+
+    // 8. Upcoming calendar events from Notion planning calendar
+    supabase
+      .from('notion_calendar')
+      .select('title, event_date, event_type, status')
+      .gte('event_date', today)
+      .lte('event_date', futureDate)
+      .order('event_date', { ascending: true })
+      .limit(10),
+
+    // 9. Grant pipeline deadlines
+    supabase
+      .from('notion_grants')
+      .select('title, funder, amount, stage, deadline, project_code')
+      .not('stage', 'in', '("Won","Lost","Abandoned")')
+      .order('deadline', { ascending: true })
+      .limit(15),
+  ])
 
   // Resolve contact names for relationship alerts
   let relationshipAlerts: RelationshipAlert[] = []
@@ -134,12 +154,12 @@ export async function fetchDailyBriefing(
     })
   }
 
-  // Count project activity
-  const projectCounts: Record<string, number> = {}
-  for (const row of projectActivityRes.data || []) {
-    const code = (row as Record<string, unknown>).project_code as string
-    projectCounts[code] = (projectCounts[code] || 0) + 1
-  }
+  // Map projects with status and activity (use title as code proxy)
+  const activeProjects = (projectsRes.data || []).map((p: Record<string, unknown>) => ({
+    code: (p.title as string) || 'Unknown',
+    status: (p.status as string) || 'unknown',
+    activity_count: 1,
+  }))
 
   return {
     generated_at: now.toISOString(),
@@ -150,8 +170,8 @@ export async function fetchDailyBriefing(
     recent_decisions: (decisionsRes.data || []) as RecentDecision[],
     stale_relationships: (relationshipsRes.data || []) as StaleRelationship[],
     relationship_alerts: relationshipAlerts,
-    active_projects: Object.entries(projectCounts)
-      .sort(([, a], [, b]) => b - a)
-      .map(([code, count]) => ({ code, activity_count: count })),
+    active_projects: activeProjects,
+    upcoming_calendar: (calendarRes.data || []) as UpcomingCalendarEvent[],
+    grant_deadlines: (grantsRes.data || []) as UpcomingGrantDeadline[],
   }
 }

@@ -15,6 +15,16 @@ import {
   FlaskConical,
   Target,
   Users,
+  Gift,
+  Heart,
+  ShoppingBag,
+  Briefcase,
+  Palette,
+  Landmark,
+  Clock,
+  CheckCircle2,
+  Circle,
+  ExternalLink,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { AskAboutThis } from '@/components/ask-about-this'
@@ -87,6 +97,60 @@ interface SalaryAllocations {
   rdEligibleCost: number
 }
 
+interface InvoiceItem {
+  invoiceId: string
+  invoiceNumber: string
+  contact: string
+  total: number
+  status: string
+  type: string
+  date: string
+  dueDate: string | null
+  incomeType: string
+  milestone: string | null
+  notes: string | null
+  description: string | null
+}
+
+interface PipelineItem {
+  id: string
+  name: string
+  provider: string | null
+  program: string | null
+  amountMin: number | null
+  amountMax: number | null
+  status: string
+  stage: string | null
+  closesAt: string | null
+  probability: number | null
+}
+
+interface IncomeTypeGroup {
+  received: number
+  pending: number
+  items: InvoiceItem[]
+}
+
+interface ExpenseItem {
+  invoiceId: string
+  invoiceNumber: string
+  contact: string
+  total: number
+  status: string
+  date: string
+  dueDate: string | null
+  category: string
+  rdEligible: boolean
+  description: string | null
+}
+
+interface ExpenseCategoryGroup {
+  total: number
+  rdEligible: boolean
+  vendors: Record<string, number>
+  items: ExpenseItem[]
+}
+
 interface ProjectFinancialsData {
   projectCode: string
   monthly: MonthlyRow[]
@@ -111,6 +175,30 @@ interface ProjectFinancialsData {
     amount: number
     type: string
   }>
+  invoices: InvoiceItem[]
+  invoiceSummary: {
+    totalReceived: number
+    totalPending: number
+    totalDraft: number
+    count: number
+  }
+  incomeByType: Record<string, IncomeTypeGroup>
+  pipeline: PipelineItem[]
+  pipelineWeightedTotal: number
+  expenses: ExpenseItem[]
+  expensesByCategory: Record<string, ExpenseCategoryGroup>
+  topVendors: Array<{ vendor: string; total: number }>
+  totalExpenseInvoices: number
+}
+
+const INCOME_TYPE_CONFIG: Record<string, { label: string; icon: any; color: string }> = {
+  grant: { label: 'Grants', icon: Gift, color: 'text-amber-400' },
+  philanthropy: { label: 'Philanthropy', icon: Heart, color: 'text-pink-400' },
+  commercial: { label: 'Commercial', icon: ShoppingBag, color: 'text-blue-400' },
+  fee_for_service: { label: 'Fee for Service', icon: Briefcase, color: 'text-cyan-400' },
+  arts: { label: 'Arts & Cultural', icon: Palette, color: 'text-purple-400' },
+  loan: { label: 'Loans & Investment', icon: Landmark, color: 'text-orange-400' },
+  other: { label: 'Other', icon: DollarSign, color: 'text-white/50' },
 }
 
 export default function ProjectFinancialsPage({
@@ -142,7 +230,11 @@ export default function ProjectFinancialsPage({
     )
   }
 
-  if (!data || !data.monthly?.length) {
+  const hasMonthly = (data?.monthly?.length ?? 0) > 0
+  const hasInvoices = (data?.invoices?.length ?? 0) > 0
+  const hasPipeline = (data?.pipeline?.length ?? 0) > 0
+
+  if (!data || (!hasMonthly && !hasInvoices && !hasPipeline)) {
     return (
       <div className="min-h-screen p-8">
         <Link href="/finance" className="inline-flex items-center gap-2 text-white/50 hover:text-white mb-6 transition-colors">
@@ -150,16 +242,16 @@ export default function ProjectFinancialsPage({
         </Link>
         <div className="glass-card p-12 text-center">
           <BarChart3 className="h-12 w-12 text-white/20 mx-auto mb-4" />
-          <h2 className="text-xl font-semibold text-white/60 mb-2">No monthly data yet</h2>
-          <p className="text-white/40">Run the monthly financials calculation to populate this page.</p>
+          <h2 className="text-xl font-semibold text-white/60 mb-2">No data yet</h2>
+          <p className="text-white/40">No invoices, transactions, or pipeline entries for this project.</p>
         </div>
       </div>
     )
   }
 
-  const monthly = data.monthly
-  const totals = data.totals
-  const maxMonthly = Math.max(...monthly.map((m) => Math.max(m.revenue, m.expenses, 1)))
+  const monthly = data.monthly || []
+  const totals = data.totals || { revenue: 0, expenses: 0, net: 0 }
+  const maxMonthly = monthly.length > 0 ? Math.max(...monthly.map((m) => Math.max(m.revenue, m.expenses, 1))) : 1
 
   // Sort categories by total
   const topExpenses = Object.entries(data.expenseCategories)
@@ -191,27 +283,293 @@ export default function ProjectFinancialsPage({
 
       {/* Summary Cards */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-        <div className="glass-card p-5 text-center">
-          <p className="text-2xl font-bold text-green-400 tabular-nums">{formatMoney(totals.revenue)}</p>
-          <p className="text-sm text-white/40 mt-1">Total Revenue</p>
-        </div>
-        <div className="glass-card p-5 text-center">
-          <p className="text-2xl font-bold text-red-400 tabular-nums">{formatMoney(totals.expenses)}</p>
-          <p className="text-sm text-white/40 mt-1">Total Expenses</p>
-        </div>
-        <div className="glass-card p-5 text-center">
-          <p className={cn('text-2xl font-bold tabular-nums', totals.net >= 0 ? 'text-emerald-400' : 'text-red-400')}>
-            {totals.net >= 0 ? '' : '-'}{formatMoney(totals.net)}
-          </p>
-          <p className="text-sm text-white/40 mt-1">Net</p>
-        </div>
-        <div className="glass-card p-5 text-center">
-          <p className="text-2xl font-bold text-white tabular-nums">
-            {formatMoney(Math.abs(totals.expenses) / Math.max(monthly.length, 1))}
-          </p>
-          <p className="text-sm text-white/40 mt-1">Avg Monthly Spend</p>
-        </div>
+        {hasInvoices ? (
+          <>
+            <div className="glass-card p-5 text-center">
+              <p className="text-2xl font-bold text-green-400 tabular-nums">{formatMoney(data.invoiceSummary.totalReceived)}</p>
+              <p className="text-sm text-white/40 mt-1">Received</p>
+            </div>
+            <div className="glass-card p-5 text-center">
+              <p className="text-2xl font-bold text-amber-400 tabular-nums">{formatMoney(data.invoiceSummary.totalPending)}</p>
+              <p className="text-sm text-white/40 mt-1">Pending</p>
+            </div>
+            <div className="glass-card p-5 text-center">
+              <p className="text-2xl font-bold text-red-400 tabular-nums">{formatMoney(data.totalExpenseInvoices)}</p>
+              <p className="text-sm text-white/40 mt-1">Spent</p>
+            </div>
+            <div className="glass-card p-5 text-center">
+              <p className={cn(
+                'text-2xl font-bold tabular-nums',
+                (data.invoiceSummary.totalReceived - data.totalExpenseInvoices) >= 0 ? 'text-emerald-400' : 'text-red-400'
+              )}>
+                {(data.invoiceSummary.totalReceived - data.totalExpenseInvoices) >= 0 ? '' : '-'}
+                {formatMoney(data.invoiceSummary.totalReceived - data.totalExpenseInvoices)}
+              </p>
+              <p className="text-sm text-white/40 mt-1">Net Position</p>
+            </div>
+          </>
+        ) : (
+          <>
+            <div className="glass-card p-5 text-center">
+              <p className="text-2xl font-bold text-green-400 tabular-nums">{formatMoney(totals.revenue)}</p>
+              <p className="text-sm text-white/40 mt-1">Total Revenue</p>
+            </div>
+            <div className="glass-card p-5 text-center">
+              <p className="text-2xl font-bold text-red-400 tabular-nums">{formatMoney(totals.expenses)}</p>
+              <p className="text-sm text-white/40 mt-1">Total Expenses</p>
+            </div>
+            <div className="glass-card p-5 text-center">
+              <p className={cn('text-2xl font-bold tabular-nums', totals.net >= 0 ? 'text-emerald-400' : 'text-red-400')}>
+                {totals.net >= 0 ? '' : '-'}{formatMoney(totals.net)}
+              </p>
+              <p className="text-sm text-white/40 mt-1">Net</p>
+            </div>
+            <div className="glass-card p-5 text-center">
+              <p className="text-2xl font-bold text-white tabular-nums">
+                {formatMoney(Math.abs(totals.expenses) / Math.max(monthly.length, 1))}
+              </p>
+              <p className="text-sm text-white/40 mt-1">Avg Monthly Spend</p>
+            </div>
+          </>
+        )}
       </div>
+
+      {/* Income Streams by Type */}
+      {hasInvoices && data.incomeByType && (
+        <div className="glass-card p-6 mb-8">
+          <h2 className="text-lg font-semibold text-white flex items-center gap-2 mb-1">
+            <DollarSign className="h-5 w-5 text-green-400" />
+            Income Streams
+          </h2>
+          <p className="text-sm text-white/40 mb-4">
+            {formatMoney(data.invoiceSummary.totalReceived)} received
+            {data.invoiceSummary.totalPending > 0 && <> &middot; {formatMoney(data.invoiceSummary.totalPending)} pending</>}
+            {data.invoiceSummary.totalDraft > 0 && <> &middot; {formatMoney(data.invoiceSummary.totalDraft)} draft</>}
+          </p>
+
+          <div className="space-y-6">
+            {Object.entries(data.incomeByType).map(([typeKey, group]) => {
+              const config = INCOME_TYPE_CONFIG[typeKey] || INCOME_TYPE_CONFIG.other
+              const Icon = config.icon
+              const typeTotal = group.received + group.pending
+              return (
+                <div key={typeKey}>
+                  <div className="flex items-center gap-2 mb-3">
+                    <Icon className={cn('h-4 w-4', config.color)} />
+                    <span className="text-sm font-medium text-white">{config.label}</span>
+                    <span className="text-xs text-white/30 ml-auto tabular-nums">{formatMoney(typeTotal)}</span>
+                  </div>
+                  <div className="space-y-1">
+                    {group.items.map((inv: InvoiceItem) => (
+                      <div
+                        key={inv.invoiceId}
+                        className="flex items-center gap-3 py-2 px-3 rounded-lg hover:bg-white/5 transition-colors"
+                      >
+                        {inv.status === 'PAID' ? (
+                          <CheckCircle2 className="h-4 w-4 text-green-500 shrink-0" />
+                        ) : inv.status === 'AUTHORISED' ? (
+                          <Clock className="h-4 w-4 text-amber-400 shrink-0" />
+                        ) : (
+                          <Circle className="h-4 w-4 text-white/20 shrink-0" />
+                        )}
+                        <div className="min-w-0 flex-1">
+                          <div className="flex items-baseline gap-2">
+                            <span className="text-sm text-white truncate">{inv.contact}</span>
+                            {inv.milestone && (
+                              <span className="text-[10px] font-medium px-1.5 py-0.5 rounded bg-white/10 text-white/50 shrink-0">
+                                {inv.milestone}
+                              </span>
+                            )}
+                          </div>
+                          {inv.notes && (
+                            <p className="text-xs text-white/30 truncate mt-0.5">{inv.notes}</p>
+                          )}
+                        </div>
+                        <div className="text-right shrink-0">
+                          <span className={cn(
+                            'text-sm font-medium tabular-nums',
+                            inv.status === 'PAID' ? 'text-green-400' : 'text-amber-400'
+                          )}>
+                            {formatMoney(inv.total)}
+                          </span>
+                          <div className="text-[10px] text-white/30">
+                            {inv.invoiceNumber}
+                            {inv.dueDate && inv.status !== 'PAID' && (
+                              <> &middot; due {new Date(inv.dueDate).toLocaleDateString('en-AU', { day: 'numeric', month: 'short' })}</>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+        </div>
+      )}
+
+      {/* Milestone Timeline */}
+      {hasInvoices && data.invoices.some((i: InvoiceItem) => i.milestone) && (
+        <div className="glass-card p-6 mb-8">
+          <h2 className="text-lg font-semibold text-white flex items-center gap-2 mb-4">
+            <Target className="h-5 w-5 text-blue-400" />
+            Milestones
+          </h2>
+          <div className="relative">
+            <div className="absolute left-4 top-2 bottom-2 w-px bg-white/10" />
+            <div className="space-y-4">
+              {data.invoices
+                .filter((i: InvoiceItem) => i.milestone)
+                .sort((a: InvoiceItem, b: InvoiceItem) => new Date(a.date).getTime() - new Date(b.date).getTime())
+                .map((inv: InvoiceItem) => (
+                  <div key={inv.invoiceId} className="flex items-start gap-4 relative">
+                    <div className={cn(
+                      'w-8 h-8 rounded-full flex items-center justify-center shrink-0 z-10',
+                      inv.status === 'PAID' ? 'bg-green-500/20' : 'bg-amber-500/20'
+                    )}>
+                      {inv.status === 'PAID' ? (
+                        <CheckCircle2 className="h-4 w-4 text-green-400" />
+                      ) : (
+                        <Clock className="h-4 w-4 text-amber-400" />
+                      )}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-baseline justify-between gap-2">
+                        <span className="text-sm font-medium text-white">{inv.milestone}</span>
+                        <span className={cn(
+                          'text-sm font-medium tabular-nums shrink-0',
+                          inv.status === 'PAID' ? 'text-green-400' : 'text-amber-400'
+                        )}>
+                          {formatMoney(inv.total)}
+                        </span>
+                      </div>
+                      <p className="text-xs text-white/40 mt-0.5">{inv.contact}</p>
+                      <div className="flex items-center gap-2 mt-1 text-[10px] text-white/30">
+                        <span>{new Date(inv.date).toLocaleDateString('en-AU', { day: 'numeric', month: 'short', year: 'numeric' })}</span>
+                        <span className={cn(
+                          'px-1.5 py-0.5 rounded font-medium',
+                          inv.status === 'PAID' ? 'bg-green-500/10 text-green-400' : 'bg-amber-500/10 text-amber-400'
+                        )}>
+                          {inv.status}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Grant Pipeline */}
+      {hasPipeline && (
+        <div className="glass-card p-6 mb-8">
+          <h2 className="text-lg font-semibold text-white flex items-center gap-2 mb-1">
+            <ExternalLink className="h-5 w-5 text-indigo-400" />
+            Grant Pipeline
+          </h2>
+          <p className="text-sm text-white/40 mb-4">
+            {data.pipeline.length} opportunities &middot; {formatMoney(data.pipelineWeightedTotal)} weighted value
+          </p>
+          <div className="space-y-2">
+            {data.pipeline.map((g: PipelineItem) => {
+              const amt = g.amountMax || g.amountMin || 0
+              return (
+                <div key={g.id} className="flex items-center gap-3 py-2 px-3 rounded-lg hover:bg-white/5 transition-colors">
+                  <div className="min-w-0 flex-1">
+                    <span className="text-sm text-white">{g.name}</span>
+                    {g.stage && (
+                      <span className={cn(
+                        'text-[10px] font-medium px-1.5 py-0.5 rounded ml-2',
+                        g.stage === 'realized' ? 'bg-green-500/20 text-green-400' :
+                        g.stage === 'submitted' ? 'bg-blue-500/20 text-blue-400' :
+                        g.stage === 'pursuing' ? 'bg-amber-500/20 text-amber-400' :
+                        'bg-white/10 text-white/50'
+                      )}>
+                        {g.stage}
+                      </span>
+                    )}
+                  </div>
+                  <div className="text-right shrink-0">
+                    {amt > 0 && (
+                      <span className="text-sm font-medium text-white/70 tabular-nums">{formatMoney(amt)}</span>
+                    )}
+                    {g.probability != null && (
+                      <div className="text-[10px] text-white/30">{Math.round(g.probability * 100)}% probability</div>
+                    )}
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+          <Link
+            href="/finance/pipeline"
+            className="block text-xs text-blue-400 hover:text-blue-300 pt-2 mt-3 border-t border-white/10 transition-colors"
+          >
+            View full pipeline →
+          </Link>
+        </div>
+      )}
+
+      {/* Outgoing — Expense Invoices by Category */}
+      {data?.expenses && data.expenses.length > 0 && (
+        <div className="glass-card p-6 mb-8">
+          <h2 className="text-lg font-semibold text-white flex items-center gap-2 mb-1">
+            <TrendingDown className="h-5 w-5 text-red-400" />
+            Outgoing
+          </h2>
+          <p className="text-sm text-white/40 mb-4">
+            {formatMoney(data.totalExpenseInvoices)} across {data.expenses.length} invoices
+          </p>
+
+          {/* Top Vendors */}
+          {data.topVendors.length > 0 && (
+            <div className="mb-6">
+              <h3 className="text-xs font-medium text-white/50 uppercase tracking-wider mb-3">Top Vendors</h3>
+              <div className="space-y-2">
+                {data.topVendors.slice(0, 8).map((v) => {
+                  const pct = data.totalExpenseInvoices > 0 ? (v.total / data.totalExpenseInvoices) * 100 : 0
+                  return (
+                    <div key={v.vendor}>
+                      <div className="flex justify-between text-xs mb-1">
+                        <span className="text-white/60 truncate mr-2">{v.vendor}</span>
+                        <span className="text-white/40 tabular-nums shrink-0">{formatMoney(v.total)}</span>
+                      </div>
+                      <div className="h-1.5 bg-white/10 rounded-full overflow-hidden">
+                        <div className="h-full bg-red-500/40 rounded-full" style={{ width: `${pct}%` }} />
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
+            </div>
+          )}
+
+          {/* By Category */}
+          {data.expensesByCategory && Object.keys(data.expensesByCategory).length > 0 && (
+            <div>
+              <h3 className="text-xs font-medium text-white/50 uppercase tracking-wider mb-3">By Category</h3>
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                {Object.entries(data.expensesByCategory)
+                  .sort(([, a], [, b]) => b.total - a.total)
+                  .map(([cat, group]) => (
+                    <div key={cat} className="p-3 rounded-lg bg-white/5">
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="text-sm text-white">{cat}</span>
+                        {group.rdEligible && (
+                          <span className="text-[9px] font-medium px-1 py-0.5 rounded bg-lime-500/20 text-lime-400">R&D</span>
+                        )}
+                      </div>
+                      <p className="text-lg font-bold text-red-400 tabular-nums">{formatMoney(group.total)}</p>
+                      <p className="text-[10px] text-white/30">{group.items.length} invoices</p>
+                    </div>
+                  ))}
+              </div>
+            </div>
+          )}
+        </div>
+      )}
 
       {/* Budget vs Actual + R&D Eligibility */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
@@ -322,7 +680,7 @@ export default function ProjectFinancialsPage({
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         <div className="lg:col-span-8 space-y-6">
           {/* Monthly Trend Chart */}
-          <div className="glass-card p-6">
+          {hasMonthly && <div className="glass-card p-6">
             <h2 className="text-lg font-semibold text-white flex items-center gap-2 mb-4">
               <BarChart3 className="h-5 w-5 text-blue-400" />
               Monthly Trend
@@ -361,7 +719,7 @@ export default function ProjectFinancialsPage({
               <span className="flex items-center gap-1"><span className="w-3 h-3 rounded bg-emerald-500/60" /> Revenue</span>
               <span className="flex items-center gap-1"><span className="w-3 h-3 rounded bg-red-500/60" /> Expenses</span>
             </div>
-          </div>
+          </div>}
 
           {/* Variance Explanations */}
           {data.variances.length > 0 && (

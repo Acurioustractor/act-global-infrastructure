@@ -122,6 +122,12 @@ export async function executeGetDailyBriefing(input: {
     const top = result.stale_relationships[0]
     actions.push(`${result.stale_relationships.length} contact${result.stale_relationships.length > 1 ? 's' : ''} going quiet — ${top?.full_name || 'check list'}`)
   }
+  if (result.grant_deadlines.length > 0) {
+    const upcoming = result.grant_deadlines.filter(g => g.deadline)
+    if (upcoming.length > 0) {
+      actions.push(`${upcoming.length} grant${upcoming.length > 1 ? 's' : ''} in pipeline`)
+    }
+  }
 
   // Default: concise actionable output (not full data dump)
   // Only expand to full if explicitly requested
@@ -132,6 +138,7 @@ export async function executeGetDailyBriefing(input: {
       overdue_actions: result.overdue_actions,
       upcoming_followups: result.upcoming_followups,
       recent_meetings: result.recent_meetings,
+      recent_decisions: result.recent_decisions,
       stale_relationships: result.stale_relationships.map((r) => ({
         name: r.full_name || r.email || 'Unknown',
         company: r.company_name,
@@ -139,6 +146,8 @@ export async function executeGetDailyBriefing(input: {
         last_contact: r.last_contact_date,
       })),
       active_projects: result.active_projects.slice(0, 10),
+      upcoming_calendar: result.upcoming_calendar,
+      grant_deadlines: result.grant_deadlines,
     })
   }
 
@@ -146,28 +155,31 @@ export async function executeGetDailyBriefing(input: {
     actions,
     meetings_today: result.recent_meetings.length,
     meetings: result.recent_meetings.slice(0, 5).map(m => ({
-      title: m.title, date: m.recorded_at,
+      title: m.title, date: m.updated_at,
+      summary: m.ai_summary?.slice(0, 100),
     })),
     overdue: result.overdue_actions.slice(0, 5).map((a) => ({
-      title: a.title, due: a.follow_up_date,
+      title: a.title, due: a.due_date, assigned: a.assigned_to,
     })),
     followups_due: result.upcoming_followups.slice(0, 5).map((f) => ({
-      title: f.title, due: f.follow_up_date,
+      title: f.title, due: f.due_date, assigned: f.assigned_to,
     })),
     active_projects: result.active_projects.length,
+    calendar_upcoming: result.upcoming_calendar.length,
+    grants_in_pipeline: result.grant_deadlines.length,
   })
 }
 
 export function formatDailyBriefingVoice(result: DailyBriefingResult): string {
   const parts: string[] = []
 
-  const meetingCount = result.recent_meetings.length
-  if (meetingCount === 0) {
-    parts.push('No meetings on the calendar today.')
+  const calendarCount = result.upcoming_calendar.length
+  if (calendarCount === 0) {
+    parts.push('No upcoming events on the planning calendar.')
   } else {
-    const firstFew = result.recent_meetings.slice(0, 3)
-    const eventDescs = firstFew.map((m) => m.title).join(', ')
-    parts.push(`You have ${meetingCount} meeting${meetingCount === 1 ? '' : 's'} today. ${meetingCount <= 3 ? eventDescs + '.' : 'Including ' + eventDescs + '.'}`)
+    const firstFew = result.upcoming_calendar.slice(0, 3)
+    const eventDescs = firstFew.map((e) => e.title).join(', ')
+    parts.push(`${calendarCount} upcoming event${calendarCount === 1 ? '' : 's'}. ${calendarCount <= 3 ? eventDescs + '.' : 'Including ' + eventDescs + '.'}`)
   }
 
   const overdueCount = result.overdue_actions.length
@@ -188,7 +200,12 @@ export function formatDailyBriefingVoice(result: DailyBriefingResult): string {
 
   const projectCount = result.active_projects.length
   if (projectCount > 0) {
-    parts.push(`${projectCount} project${projectCount === 1 ? '' : 's'} active this month.`)
+    parts.push(`${projectCount} project${projectCount === 1 ? '' : 's'} active.`)
+  }
+
+  const grantCount = result.grant_deadlines.length
+  if (grantCount > 0) {
+    parts.push(`${grantCount} grant${grantCount === 1 ? '' : 's'} in the pipeline.`)
   }
 
   return parts.join(' ')

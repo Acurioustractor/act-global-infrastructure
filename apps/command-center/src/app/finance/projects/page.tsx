@@ -12,6 +12,9 @@ import {
   FlaskConical,
   ChevronRight,
   Filter,
+  CheckCircle2,
+  Clock,
+  Target,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
@@ -33,11 +36,19 @@ interface ProjectRow {
   rdPct: number
   budgetPct: number | null
   annualBudget: number | null
+  received: number
+  pending: number
+  invoiceCount: number
+  weightedPipeline: number
+  pipelineCount: number
 }
 
 interface ProjectsHubData {
   projects: ProjectRow[]
-  totals: { revenue: number; expenses: number; net: number; rdSpend: number }
+  totals: {
+    revenue: number; expenses: number; net: number; rdSpend: number
+    received: number; pending: number; weightedPipeline: number
+  }
   fy: string
 }
 
@@ -96,8 +107,11 @@ export default function ProjectsFinancialHub() {
       expenses: acc.expenses + p.expenses,
       net: acc.net + p.net,
       rdSpend: acc.rdSpend + p.rdSpend,
+      received: acc.received + p.received,
+      pending: acc.pending + p.pending,
+      weightedPipeline: acc.weightedPipeline + p.weightedPipeline,
     }),
-    { revenue: 0, expenses: 0, net: 0, rdSpend: 0 }
+    { revenue: 0, expenses: 0, net: 0, rdSpend: 0, received: 0, pending: 0, weightedPipeline: 0 }
   )
 
   return (
@@ -145,28 +159,38 @@ export default function ProjectsFinancialHub() {
       </header>
 
       {/* Summary Cards */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-        <div className="glass-card p-5 text-center">
-          <TrendingUp className="h-5 w-5 text-green-400 mx-auto mb-2" />
-          <p className="text-2xl font-bold text-green-400 tabular-nums">{formatMoney(filteredTotals.revenue)}</p>
-          <p className="text-sm text-white/40 mt-1">Total Revenue</p>
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-6">
+        <div className="glass-card p-4 text-center">
+          <CheckCircle2 className="h-5 w-5 text-green-400 mx-auto mb-2" />
+          <p className="text-xl font-bold text-green-400 tabular-nums">{formatMoney(filteredTotals.received)}</p>
+          <p className="text-xs text-white/40 mt-1">Received</p>
         </div>
-        <div className="glass-card p-5 text-center">
+        <div className="glass-card p-4 text-center">
+          <Clock className="h-5 w-5 text-amber-400 mx-auto mb-2" />
+          <p className="text-xl font-bold text-amber-400 tabular-nums">{formatMoney(filteredTotals.pending)}</p>
+          <p className="text-xs text-white/40 mt-1">Pending</p>
+        </div>
+        <div className="glass-card p-4 text-center">
           <TrendingDown className="h-5 w-5 text-red-400 mx-auto mb-2" />
-          <p className="text-2xl font-bold text-red-400 tabular-nums">{formatMoney(Math.abs(filteredTotals.expenses))}</p>
-          <p className="text-sm text-white/40 mt-1">Total Expenses</p>
+          <p className="text-xl font-bold text-red-400 tabular-nums">{formatMoney(Math.abs(filteredTotals.expenses))}</p>
+          <p className="text-xs text-white/40 mt-1">Expenses</p>
         </div>
-        <div className="glass-card p-5 text-center">
+        <div className="glass-card p-4 text-center">
           <BarChart3 className="h-5 w-5 text-blue-400 mx-auto mb-2" />
-          <p className={cn('text-2xl font-bold tabular-nums', filteredTotals.net >= 0 ? 'text-emerald-400' : 'text-red-400')}>
+          <p className={cn('text-xl font-bold tabular-nums', filteredTotals.net >= 0 ? 'text-emerald-400' : 'text-red-400')}>
             {filteredTotals.net >= 0 ? '' : '-'}{formatMoney(filteredTotals.net)}
           </p>
-          <p className="text-sm text-white/40 mt-1">Net Position</p>
+          <p className="text-xs text-white/40 mt-1">Net Position</p>
         </div>
-        <div className="glass-card p-5 text-center">
+        <div className="glass-card p-4 text-center">
+          <Target className="h-5 w-5 text-purple-400 mx-auto mb-2" />
+          <p className="text-xl font-bold text-purple-400 tabular-nums">{formatMoney(filteredTotals.weightedPipeline)}</p>
+          <p className="text-xs text-white/40 mt-1">Pipeline (wtd)</p>
+        </div>
+        <div className="glass-card p-4 text-center">
           <FlaskConical className="h-5 w-5 text-lime-400 mx-auto mb-2" />
-          <p className="text-2xl font-bold text-lime-400 tabular-nums">{formatMoney(filteredTotals.rdSpend)}</p>
-          <p className="text-sm text-white/40 mt-1">R&D Eligible Spend</p>
+          <p className="text-xl font-bold text-lime-400 tabular-nums">{formatMoney(filteredTotals.rdSpend)}</p>
+          <p className="text-xs text-white/40 mt-1">R&D Eligible</p>
         </div>
       </div>
 
@@ -178,12 +202,12 @@ export default function ProjectsFinancialHub() {
               <tr className="border-b border-white/10">
                 <th className="text-left py-3 px-4 text-white/50 font-medium">Project</th>
                 <th className="text-left py-3 px-2 text-white/50 font-medium">Tier</th>
-                <th className="text-right py-3 px-4 text-white/50 font-medium">Revenue</th>
+                <th className="text-right py-3 px-4 text-white/50 font-medium">Received</th>
+                <th className="text-right py-3 px-4 text-white/50 font-medium">Pending</th>
                 <th className="text-right py-3 px-4 text-white/50 font-medium">Expenses</th>
                 <th className="text-right py-3 px-4 text-white/50 font-medium">Net</th>
-                <th className="text-right py-3 px-4 text-white/50 font-medium">Margin</th>
+                <th className="text-right py-3 px-4 text-white/50 font-medium">Pipeline</th>
                 <th className="text-right py-3 px-4 text-white/50 font-medium">R&D %</th>
-                <th className="text-right py-3 px-4 text-white/50 font-medium">Budget</th>
                 <th className="text-center py-3 px-2 text-white/50 font-medium"></th>
               </tr>
             </thead>
@@ -202,7 +226,10 @@ export default function ProjectsFinancialHub() {
                     </span>
                   </td>
                   <td className="py-3 px-4 text-right tabular-nums text-green-400">
-                    {project.revenue > 0 ? formatMoney(project.revenue) : <span className="text-white/20">—</span>}
+                    {project.received > 0 ? formatMoney(project.received) : <span className="text-white/20">—</span>}
+                  </td>
+                  <td className="py-3 px-4 text-right tabular-nums text-amber-400">
+                    {project.pending > 0 ? formatMoney(project.pending) : <span className="text-white/20">—</span>}
                   </td>
                   <td className="py-3 px-4 text-right tabular-nums text-red-400">
                     {formatMoney(Math.abs(project.expenses))}
@@ -210,16 +237,14 @@ export default function ProjectsFinancialHub() {
                   <td className={cn('py-3 px-4 text-right tabular-nums font-medium', project.net >= 0 ? 'text-emerald-400' : 'text-red-400')}>
                     {project.net >= 0 ? '+' : '-'}{formatMoney(project.net)}
                   </td>
-                  <td className="py-3 px-4 text-right">
-                    {project.revenue > 0 ? (
-                      <span className={cn(
-                        'text-xs tabular-nums font-medium',
-                        project.net >= 0 ? 'text-emerald-400' : project.net > -project.revenue ? 'text-amber-400' : 'text-red-400'
-                      )}>
-                        {Math.round((project.net / project.revenue) * 100)}%
-                      </span>
+                  <td className="py-3 px-4 text-right tabular-nums">
+                    {project.weightedPipeline > 0 ? (
+                      <div>
+                        <span className="text-purple-400">{formatMoney(project.weightedPipeline)}</span>
+                        <span className="text-white/30 text-xs ml-1">({project.pipelineCount})</span>
+                      </div>
                     ) : (
-                      <span className="text-white/20 text-xs">—</span>
+                      <span className="text-white/20">—</span>
                     )}
                   </td>
                   <td className="py-3 px-4 text-right">
@@ -229,29 +254,6 @@ export default function ProjectsFinancialHub() {
                           <div className="h-full bg-lime-500/60 rounded-full" style={{ width: `${Math.min(project.rdPct, 100)}%` }} />
                         </div>
                         <span className="text-xs text-lime-400 tabular-nums">{project.rdPct}%</span>
-                      </div>
-                    ) : (
-                      <span className="text-white/20 text-xs">—</span>
-                    )}
-                  </td>
-                  <td className="py-3 px-4 text-right">
-                    {project.budgetPct !== null ? (
-                      <div className="flex items-center justify-end gap-2">
-                        <div className="w-12 h-1.5 bg-white/10 rounded-full overflow-hidden">
-                          <div
-                            className={cn(
-                              'h-full rounded-full',
-                              project.budgetPct > 100 ? 'bg-red-500/60' : project.budgetPct > 80 ? 'bg-amber-500/60' : 'bg-blue-500/60'
-                            )}
-                            style={{ width: `${Math.min(project.budgetPct, 100)}%` }}
-                          />
-                        </div>
-                        <span className={cn(
-                          'text-xs tabular-nums',
-                          project.budgetPct > 100 ? 'text-red-400' : project.budgetPct > 80 ? 'text-amber-400' : 'text-blue-400'
-                        )}>
-                          {project.budgetPct}%
-                        </span>
                       </div>
                     ) : (
                       <span className="text-white/20 text-xs">—</span>
@@ -268,24 +270,20 @@ export default function ProjectsFinancialHub() {
             <tfoot>
               <tr className="border-t border-white/20 bg-white/5">
                 <td className="py-3 px-4 font-semibold text-white" colSpan={2}>TOTALS</td>
-                <td className="py-3 px-4 text-right tabular-nums font-semibold text-green-400">{formatMoney(filteredTotals.revenue)}</td>
+                <td className="py-3 px-4 text-right tabular-nums font-semibold text-green-400">{formatMoney(filteredTotals.received)}</td>
+                <td className="py-3 px-4 text-right tabular-nums font-semibold text-amber-400">{formatMoney(filteredTotals.pending)}</td>
                 <td className="py-3 px-4 text-right tabular-nums font-semibold text-red-400">{formatMoney(Math.abs(filteredTotals.expenses))}</td>
                 <td className={cn('py-3 px-4 text-right tabular-nums font-semibold', filteredTotals.net >= 0 ? 'text-emerald-400' : 'text-red-400')}>
                   {filteredTotals.net >= 0 ? '+' : '-'}{formatMoney(filteredTotals.net)}
                 </td>
-                <td className="py-3 px-4 text-right tabular-nums text-xs font-medium">
-                  {filteredTotals.revenue > 0 ? (
-                    <span className={filteredTotals.net >= 0 ? 'text-emerald-400' : 'text-red-400'}>
-                      {Math.round((filteredTotals.net / filteredTotals.revenue) * 100)}%
-                    </span>
-                  ) : '—'}
+                <td className="py-3 px-4 text-right tabular-nums font-semibold text-purple-400">
+                  {formatMoney(filteredTotals.weightedPipeline)}
                 </td>
                 <td className="py-3 px-4 text-right tabular-nums text-lime-400 text-xs font-medium">
                   {Math.abs(filteredTotals.expenses) > 0
                     ? `${Math.round((filteredTotals.rdSpend / Math.abs(filteredTotals.expenses)) * 100)}%`
                     : '—'}
                 </td>
-                <td className="py-3 px-4"></td>
                 <td className="py-3 px-2"></td>
               </tr>
             </tfoot>
