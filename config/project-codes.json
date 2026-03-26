@@ -1,9 +1,9 @@
 {
   "_meta": {
     "description": "ACT Unified Project Codes - Use these codes across ALL systems",
-    "version": "1.3.0",
-    "updated": "2026-03-03",
-    "systems": ["notion", "supabase", "ghl", "xero", "dext", "empathy-ledger", "alma"],
+    "version": "1.4.0",
+    "updated": "2026-03-26",
+    "systems": ["notion", "supabase", "ghl", "xero", "dext", "empathy-ledger", "alma", "syndication"],
     "status_values": ["active", "ideation", "sunsetting", "archived", "transferred"],
     "tier_values": ["ecosystem", "studio", "satellite"],
     "tier_descriptions": {
@@ -29,7 +29,9 @@
       "xero_tracking_aliases": ["JusticeHub", "Confit"],
       "dext_category": "Justice Projects",
       "alma_program": "justice-reform",
-      "lcaa_themes": ["Listen", "Connect", "Act", "Amplify"]
+      "lcaa_themes": ["Listen", "Connect", "Act", "Amplify"],
+      "syndication_slug": "act_jh",
+      "production_url": "https://www.justicehub.com.au"
     },
     "ACT-DG": {
       "name": "Diagrama",
@@ -61,7 +63,9 @@
       "xero_tracking": "ACT-GD — Goods",
       "xero_tracking_aliases": ["Goods", "Goods."],
       "dext_category": "Social Enterprise",
-      "alma_program": "economic-empowerment"
+      "alma_program": "economic-empowerment",
+      "syndication_slug": "act_gd",
+      "production_url": "https://www.goodsoncountry.com"
     },
     "ACT-EL": {
       "name": "Empathy Ledger",
@@ -79,7 +83,9 @@
       "xero_tracking_aliases": ["Empathy Ledger"],
       "dext_category": "Technology",
       "alma_program": "storytelling",
-      "lcaa_themes": ["Listen", "Amplify"]
+      "lcaa_themes": ["Listen", "Amplify"],
+      "syndication_slug": "act_el",
+      "production_url": "https://www.empathyledger.com"
     },
     "ACT-PI": {
       "name": "PICC",
@@ -100,7 +106,9 @@
       "dext_category": "Indigenous Projects",
       "alma_program": "first-nations",
       "cultural_protocols": true,
-      "sub_projects": ["ACT-PS", "ACT-SS", "ACT-UA", "ACT-ER"]
+      "sub_projects": ["ACT-PS", "ACT-SS", "ACT-UA", "ACT-ER"],
+      "syndication_slug": "act_pi",
+      "production_url": "https://picc.studio"
     },
     "ACT-ER": {
       "name": "PICC Elders Room",
@@ -268,7 +276,8 @@
       "dext_category": "Regenerative",
       "alma_program": "food-systems",
       "github_repo": "Acurioustractor/harvest-community-hub",
-      "production_url": "https://harvest-community.vercel.app",
+      "production_url": "https://www.theharvestwitta.com.au",
+      "syndication_slug": "act_hv",
       "location": "9 Gumland Dr, Maleny QLD (601 Maleny Kenilworth Rd, Witta QLD 4552)",
       "place": "Gubbi Gubbi Country",
       "lead": "Nicholas Marchesi",
@@ -307,7 +316,9 @@
       "ghl_tags": ["fishers-oysters", "fishers"],
       "xero_tracking": "ACT-FO — Fishers Oysters",
       "dext_category": "Regenerative",
-      "alma_program": "aquaculture"
+      "alma_program": "aquaculture",
+      "syndication_slug": "act_fo",
+      "production_url": "https://www.fishersoysters.com"
     },
     "ACT-SM": {
       "name": "SMART",
@@ -455,7 +466,26 @@
       "xero_tracking": "ACT-BG — BG Fit",
       "xero_tracking_aliases": ["BG Fit"],
       "dext_category": "Health",
-      "alma_program": "fitness"
+      "alma_program": "fitness",
+      "syndication_slug": "act_bg",
+      "production_url": "https://campfire-website-amber.vercel.app"
+    },
+    "ACT-CS": {
+      "name": "Civic Scope",
+      "code": "ACT-CS",
+      "category": "enterprise",
+      "tier": "satellite",
+      "priority": "high",
+      "status": "active",
+      "description": "Grant pipeline and civic engagement platform",
+      "leads": ["Ben Knight"],
+      "notion_pages": ["Civic Scope"],
+      "ghl_tags": ["civic-scope", "grantscope"],
+      "xero_tracking": "ACT-CS — Civic Scope",
+      "dext_category": "Technology",
+      "alma_program": "civic-engagement",
+      "syndication_slug": "act_cs",
+      "production_url": "https://civicgraph.app"
     },
     "ACT-BV": {
       "name": "Black Cockatoo Valley",
@@ -716,7 +746,9 @@
       "xero_tracking": "ACT-OO — Oonchiumpa",
       "dext_category": "Indigenous Projects",
       "alma_program": "first-nations",
-      "cultural_protocols": true
+      "cultural_protocols": true,
+      "syndication_slug": "act_oo",
+      "production_url": "https://oonchiumpa-app.vercel.app"
     },
     "ACT-CA": {
       "name": "Caring for those who care",
