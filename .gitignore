@@ -85,3 +85,7 @@ archive/intelligence-platform/
 # Duplicate nested app dirs (build artifact)
 apps/command-center/apps/
 .superdesign
+
+# External skill/tool configs (managed outside repo)
+skills/
+.claude/skills/
