@@ -6,8 +6,8 @@ This is a pnpm workspace mono-repo containing the entire ACT ecosystem.
 
 ```
 apps/
-  command-center/     # Main dashboard (Next.js, port 3001)
-  website/            # Public website (Next.js, port 3002)
+  command-center/     # Main dashboard (Next.js, port 3002)
+  website/            # Public website (Next.js)
 packages/
   act-ui/             # Shared UI components
 scripts/              # 110+ operational scripts
