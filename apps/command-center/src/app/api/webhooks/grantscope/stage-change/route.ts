@@ -129,7 +129,6 @@ export async function POST(req: NextRequest) {
         results.notion = 'updated'
       } else {
         // Create new page (minimal — full sync will enrich later)
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const props: Record<string, any> = {
           'Grant Name': {
             title: [{ text: { content: (grant_name || 'Untitled Grant').slice(0, 2000) } }],

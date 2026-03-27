@@ -53,7 +53,6 @@ export async function GET() {
         result.status = 'warn'
         result.note = 'empty'
       } else {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const lastDate = new Date((data[0] as any)[config.column])
         const ageHours = Math.round((now.getTime() - lastDate.getTime()) / (1000 * 60 * 60))
         result.age_hours = ageHours

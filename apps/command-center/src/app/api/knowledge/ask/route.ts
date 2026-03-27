@@ -4,7 +4,6 @@ import { generateEmbedding } from '@/lib/embeddings'
 
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY || ''
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type KnowledgeRow = Record<string, any>
 
 /** Fire-and-forget: record that results were accessed (feeds into decay scoring) */

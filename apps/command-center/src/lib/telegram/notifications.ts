@@ -846,8 +846,7 @@ export async function getSyncHealthSummary(): Promise<string> {
       continue
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const lastUpdate = new Date((data as any)[check.column])
+    const lastUpdate = new Date((data as any)[check.column]) // eslint-disable-line
     const hoursAgo = (Date.now() - lastUpdate.getTime()) / (1000 * 60 * 60)
 
     if (hoursAgo >= check.criticalHours) {
