@@ -46,16 +46,21 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          fetch-depth: 100  # Need git history for activity analysis
+          fetch-depth: 100
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'npm'
+          cache: 'pnpm'
 
       - name: Install dependencies
-        run: npm install --production
+        run: pnpm install --frozen-lockfile
 
       - name: Generate content
         id: generate
@@ -81,30 +86,30 @@ jobs:
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "**Time:** $(date -u '+%Y-%m-%d %H:%M UTC')" >> $GITHUB_STEP_SUMMARY
           echo "**Status:** ${{ steps.generate.outcome == 'success' && 'Success' || 'Failed' }}" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "Content drafts created in Notion Content Hub." >> $GITHUB_STEP_SUMMARY
-          echo "Review at: https://notion.so" >> $GITHUB_STEP_SUMMARY
 
   # Job 2: Sync approved content to GHL
   sync:
-    if: github.event_name == 'workflow_dispatch' && (inputs.action == 'sync' || inputs.action == 'full-pipeline') || github.event.schedule == '0 */4 * * *'
-    needs: [generate]
-    # Run sync even if generate was skipped
     if: always() && (github.event_name == 'workflow_dispatch' && (inputs.action == 'sync' || inputs.action == 'full-pipeline') || github.event.schedule == '0 */4 * * *')
+    needs: [generate]
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'npm'
+          cache: 'pnpm'
 
       - name: Install dependencies
-        run: npm install --production
+        run: pnpm install --frozen-lockfile
 
       - name: Sync to GHL
         id: sync
@@ -128,28 +133,3 @@ jobs:
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "**Time:** $(date -u '+%Y-%m-%d %H:%M UTC')" >> $GITHUB_STEP_SUMMARY
           echo "**Status:** ${{ steps.sync.outcome == 'success' && 'Success' || 'Failed' }}" >> $GITHUB_STEP_SUMMARY
-
-  # Job 3: Check pipeline status
-  status:
-    if: github.event_name == 'workflow_dispatch' && inputs.action == 'sync'
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: 'npm'
-
-      - name: Install dependencies
-        run: npm install --production
-
-      - name: Check status
-        env:
-          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
-          GHL_API_KEY: ${{ secrets.GHL_API_KEY }}
-          GHL_LOCATION_ID: ${{ secrets.GHL_LOCATION_ID }}
-        run: node scripts/sync-content-to-ghl.mjs --status
