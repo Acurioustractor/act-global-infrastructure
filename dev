@@ -1,48 +1,37 @@
 #!/bin/bash
-# ACT Command Center - Dev Server & Cron Control
+# ACT Ecosystem - Dev Server & Cron Control
 # Usage: ./dev [start|stop|restart|status|logs|cron|stop-cron|all]
 
 cd /Users/benknight/Code/act-global-infrastructure
 
-SERVERS="act-api act-frontend"
-CRON_SCRIPTS="imessage-sync embed-imessages detect-episodes daily-briefing storyteller-sync storyteller-link notion-sync agent-learning meeting-sync knowledge-pipeline data-freshness gmail-sync"
-
 case "$1" in
   start)
-    pm2 start ecosystem.config.cjs --only "act-api,act-frontend"
+    pm2 start ecosystem.config.cjs --only "act-frontend"
     sleep 3
     pm2 status
     echo ""
-    echo "Frontend: http://localhost:3002"
-    echo "Backend:  http://localhost:3456"
+    echo "Command Center: http://localhost:3002"
     ;;
   stop)
-    pm2 stop $SERVERS 2>/dev/null
+    pm2 stop act-frontend 2>/dev/null
     ;;
   restart)
-    pm2 restart $SERVERS 2>/dev/null
+    pm2 restart act-frontend 2>/dev/null
     ;;
   cron)
-    pm2 start ecosystem.config.cjs --only "imessage-sync,embed-imessages,detect-episodes,daily-briefing,storyteller-sync,storyteller-link,notion-sync,agent-learning,meeting-sync,knowledge-pipeline,data-freshness,gmail-sync"
+    # Start all cron scripts (everything except act-frontend)
+    pm2 start ecosystem.config.cjs
+    pm2 stop act-frontend 2>/dev/null
     sleep 2
     pm2 status
     echo ""
-    echo "Scheduled scripts started. Logs in /tmp/<name>-out.log"
-    echo "  agent-learning:    daily 2am AEST"
-    echo "  storyteller-sync:  daily 4:30am AEST"
-    echo "  storyteller-link:  daily 4:45am AEST"
-    echo "  imessage-sync:     every 15 min"
-    echo "  notion-sync:       every 5 min"
-    echo "  embed-imessages:   daily 5am AEST"
-    echo "  meeting-sync:      daily 5:30am AEST"
-    echo "  detect-episodes:   daily 6am AEST"
-    echo "  daily-briefing:    daily 7am AEST"
-    echo "  knowledge-pipeline: daily 8am AEST"
-    echo "  data-freshness:    every 6 hours"
-    echo "  gmail-sync:        every 6 hours (4 mailboxes)"
+    echo "All cron scripts started. Logs in /tmp/<name>-{out,error}.log"
     ;;
   stop-cron)
-    pm2 stop $CRON_SCRIPTS 2>/dev/null
+    # Stop everything except act-frontend
+    pm2 list --no-color | grep -v act-frontend | grep -oP '│\s+\K[\w-]+(?=\s+│)' | while read name; do
+      pm2 stop "$name" 2>/dev/null
+    done
     echo "Cron scripts stopped."
     ;;
   all)
@@ -50,16 +39,22 @@ case "$1" in
     sleep 3
     pm2 status
     echo ""
-    echo "Frontend: http://localhost:3002/finance/subscriptions"
-    echo "Backend:  http://localhost:3456"
+    echo "Command Center: http://localhost:3002"
     echo ""
-    echo "Cron scripts also running (imessage-sync, embed, episodes, briefing)"
+    echo "All cron scripts also running."
     ;;
   status)
     pm2 status
     echo ""
-    echo "API:      $(curl -s http://localhost:3456/api/health 2>/dev/null | jq -r '.status // "offline"')"
-    echo "Frontend: $(curl -s http://localhost:3002 -o /dev/null -w '%{http_code}' 2>/dev/null || echo 'offline')"
+    # Check dev server health
+    code=$(curl -s http://localhost:3002 -o /dev/null -w '%{http_code}' 2>/dev/null || echo 'offline')
+    echo "Command Center: $code (http://localhost:3002)"
+    echo ""
+    # Summary counts
+    total=$(pm2 jlist 2>/dev/null | python3 -c "import json,sys; data=json.load(sys.stdin); print(len(data))" 2>/dev/null || echo 0)
+    online=$(pm2 jlist 2>/dev/null | python3 -c "import json,sys; data=json.load(sys.stdin); print(sum(1 for p in data if p['pm2_env']['status']=='online'))" 2>/dev/null || echo 0)
+    errored=$(pm2 jlist 2>/dev/null | python3 -c "import json,sys; data=json.load(sys.stdin); print(sum(1 for p in data if p['pm2_env']['status']=='errored'))" 2>/dev/null || echo 0)
+    echo "Processes: $online online, $errored errored, $total total"
     ;;
   logs)
     if [ -n "$2" ]; then
@@ -72,19 +67,19 @@ case "$1" in
     echo "Usage: ./dev [command]"
     echo ""
     echo "  Servers:"
-    echo "    start   - Start API and frontend servers"
-    echo "    stop    - Stop servers"
-    echo "    restart - Restart servers"
+    echo "    start   - Start Command Center (port 3002)"
+    echo "    stop    - Stop Command Center"
+    echo "    restart - Restart Command Center"
     echo ""
     echo "  Scheduled Scripts:"
-    echo "    cron      - Start memory system cron scripts"
-    echo "    stop-cron - Stop cron scripts"
+    echo "    cron      - Start all cron scripts"
+    echo "    stop-cron - Stop all cron scripts"
     echo ""
     echo "  Combined:"
-    echo "    all     - Start servers + cron scripts"
+    echo "    all     - Start Command Center + all cron scripts"
     echo ""
     echo "  Info:"
-    echo "    status  - Show process status"
+    echo "    status  - Show process status + health"
     echo "    logs    - Tail logs (optional: ./dev logs <name>)"
     ;;
 esac
