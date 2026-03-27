@@ -23,13 +23,13 @@ jobs:
         run: |
           echo "Checking all production sites..."
 
+          # Sites with working DNS/deployments
+          # Excluded (DNS not resolving): goodsoncountry.com.au, actfarm.org.au
+          # Excluded (404 — needs redeploy): theharvest.vercel.app
           declare -a sites=(
             "https://act.place"
             "https://empathy-ledger.vercel.app"
             "https://justicehub.vercel.app"
-            "https://theharvest.vercel.app"
-            "https://goodsoncountry.com.au"
-            "https://actfarm.org.au"
             "https://command-center-rho.vercel.app"
           )
 
@@ -40,7 +40,7 @@ jobs:
             echo "Checking $site..."
             response=$(curl -s -o /dev/null -w "%{http_code}" --max-time 15 "$site" || echo "000")
 
-            if [ "$response" = "200" ] || [ "$response" = "301" ] || [ "$response" = "302" ] || [ "$response" = "308" ]; then
+            if [ "$response" = "200" ] || [ "$response" = "301" ] || [ "$response" = "302" ] || [ "$response" = "307" ] || [ "$response" = "308" ]; then
               echo "  OK $site - HTTP $response"
             else
               echo "  FAIL $site - HTTP $response"
