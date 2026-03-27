@@ -22,9 +22,24 @@ node_modules/
 .vscode/settings.json
 .vscode/launch.json
 
+# AI editor/agent configs (local tooling, not project code)
+.agent/
+.agents/
+.gstack/
+.junie/
+.kiro/
+.pi/
+.qwen/
+.trae/
+.windsurf/
+.DS_Store
+
 # Build artifacts
 .next/
 .vercel
+packages/*/bundle/
+packages/*/dist/
+generated-images/
 
 # TLDR cache
 .tldr/
@@ -43,6 +58,11 @@ apps/command-center/.tldrignore
 # Logs
 deployment/logs/*.log
 *.log
+
+# Root playground/experiment files (not project code)
+act-*.html
+act-*.js
+workers.json
 
 # Legacy / one-off
 act-personal-ai/.venv311/
