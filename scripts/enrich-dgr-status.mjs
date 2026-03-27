@@ -16,7 +16,7 @@ import { createClient } from '@supabase/supabase-js'
 
 const SUPABASE_URL = process.env.SUPABASE_SHARED_URL || process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL
 const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY
-const ABR_GUID = process.env.ABR_GUID
+const ABR_GUID = process.env.ABN_LOOKUP_GUID || process.env.ABR_GUID
 
 if (!SUPABASE_URL || !SUPABASE_KEY) {
   console.error('Missing SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY')
@@ -24,8 +24,8 @@ if (!SUPABASE_URL || !SUPABASE_KEY) {
 }
 
 if (!ABR_GUID) {
-  console.error('Missing ABR_GUID — register free at https://abr.business.gov.au/Tools/WebServices')
-  console.error('Set ABR_GUID in .env.local')
+  console.error('Missing ABN_LOOKUP_GUID — register free at https://abr.business.gov.au/Tools/WebServices')
+  console.error('Set ABN_LOOKUP_GUID in .env.local')
   process.exit(1)
 }
 
