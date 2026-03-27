@@ -23,13 +23,13 @@ jobs:
         run: |
           echo "Checking all production sites..."
 
-          # Sites with working DNS/deployments
-          # Excluded (DNS not resolving): goodsoncountry.com.au, actfarm.org.au
-          # Excluded (404 — needs redeploy): theharvest.vercel.app
           declare -a sites=(
             "https://act.place"
-            "https://empathy-ledger.vercel.app"
-            "https://justicehub.vercel.app"
+            "https://www.empathyledger.com"
+            "https://www.justicehub.com.au"
+            "https://www.theharvestwitta.com.au"
+            "https://www.goodsoncountry.com"
+            "https://act-farm.vercel.app"
             "https://command-center-rho.vercel.app"
           )
 
