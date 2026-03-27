@@ -65,6 +65,7 @@ import {
   executeGetGrantReadiness,
   executeGetGrantOpportunities,
   executeGetGrantPipeline,
+  executeSearchGrantsForProject,
 } from './tools/actions'
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -110,6 +111,8 @@ export async function executeTool(
       return await executeGetGrantOpportunities(input as { status?: string; limit?: number })
     case 'get_grant_pipeline':
       return await executeGetGrantPipeline(input as { status?: string })
+    case 'search_grants_for_project':
+      return await executeSearchGrantsForProject(input as { project_code: string; min_score?: number; limit?: number })
     case 'get_xero_transactions':
       return await executeGetXeroTransactions(
         input as { type?: string; vendor?: string; project_code?: string; start_date?: string; end_date?: string; min_amount?: number; limit?: number }

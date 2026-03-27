@@ -1014,6 +1014,32 @@ export const AGENT_TOOLS: Anthropic.Tool[] = [
     },
   },
 
+  // ── SEARCH GRANTS FOR PROJECT ─────────────────────────────────────────
+
+  {
+    name: 'search_grants_for_project',
+    description:
+      'Find matching grants for a specific ACT project using AI vector similarity. Returns top grants ranked by fit score with deadline and amount info. Use when the user asks "what grants match Goods on Country", "find funding for Empathy Ledger", "grants for ACT-GD", or "what should [project] apply for".',
+    input_schema: {
+      type: 'object' as const,
+      properties: {
+        project_code: {
+          type: 'string',
+          description: 'ACT project code: ACT-HV (The Harvest), ACT-FM (Black Cockatoo Valley), ACT-EL (Empathy Ledger), ACT-JH (JusticeHub), ACT-GD (Goods on Country), ACT-PI (Palm Island), ACT-CA (ACT Art)',
+        },
+        min_score: {
+          type: 'number',
+          description: 'Minimum fit score threshold (0-100). Default 65.',
+        },
+        limit: {
+          type: 'number',
+          description: 'Max results. Default 10.',
+        },
+      },
+      required: ['project_code'],
+    },
+  },
+
   // ── GRANT DRAFT ──────────────────────────────────────────────────────
 
   {

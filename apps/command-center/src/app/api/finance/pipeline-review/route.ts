@@ -30,9 +30,9 @@ export async function GET() {
       supabase
         .from('opportunities_unified')
         .select('id, title, contact_name, value_mid, stage, probability, project_codes, expected_close, opportunity_type, updated_at')
-        .not('stage', 'in', '(lost,expired)')
+        .in('stage', STAGE_ORDER)
         .order('value_mid', { ascending: false })
-        .limit(500),
+        .limit(1000),
       supabase
         .from('projects')
         .select('code, name, tier, status')

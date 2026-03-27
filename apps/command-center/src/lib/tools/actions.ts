@@ -896,6 +896,114 @@ export async function executeGetGrantPipeline(input: {
 }
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// TOOL: search_grants_for_project
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+export async function executeSearchGrantsForProject(input: {
+  project_code: string
+  min_score?: number
+  limit?: number
+}): Promise<string> {
+  try {
+    const threshold = (input.min_score || 65) / 100
+    const matchLimit = input.limit || 10
+
+    // Get project embedding
+    const { data: projectProfile, error: profileError } = await supabase
+      .from('project_profiles')
+      .select('id, name, embedding, domains, geographic_focus')
+      .eq('project_code', input.project_code)
+      .maybeSingle()
+
+    if (profileError || !projectProfile) {
+      return JSON.stringify({ error: `Project ${input.project_code} not found. Valid codes: ACT-HV, ACT-FM, ACT-EL, ACT-JH, ACT-GD, ACT-PI, ACT-CA` })
+    }
+
+    if (!projectProfile.embedding) {
+      return JSON.stringify({ error: `Project ${input.project_code} has no embedding. Save the org profile to generate one.` })
+    }
+
+    // Vector similarity search using project embedding
+    const { data: matches, error: matchError } = await supabase
+      .rpc('match_grants_for_org', {
+        org_embedding: projectProfile.embedding,
+        threshold,
+        match_limit: matchLimit,
+      })
+
+    if (matchError) {
+      return JSON.stringify({ error: matchError.message })
+    }
+
+    const projectDomains = new Set<string>((projectProfile.domains || []).map((d: string) => d.toLowerCase()))
+    const projectGeo = new Set<string>((projectProfile.geographic_focus || []).map((g: string) => g.toLowerCase()))
+
+    // Score and format results
+    const scored = (matches || []).map((grant: {
+      id: string; name: string; provider: string; description: string;
+      amount_max: number | null; closes_at: string | null; categories: string[];
+      geography: string | null; similarity: number; focus_areas: string[];
+    }) => {
+      let score = grant.similarity
+
+      // Domain overlap boost
+      if (grant.categories?.length && projectDomains.size > 0) {
+        const overlap = grant.categories.filter((c: string) => projectDomains.has(c.toLowerCase())).length
+        score += Math.min(overlap * 0.025, 0.05)
+      }
+      if (grant.focus_areas?.length && projectDomains.size > 0) {
+        const overlap = grant.focus_areas.filter((f: string) => projectDomains.has(f.toLowerCase())).length
+        score += Math.min(overlap * 0.025, 0.05)
+      }
+
+      // Geographic boost
+      if (grant.geography && projectGeo.size > 0) {
+        const geoLower = grant.geography.toLowerCase()
+        for (const g of projectGeo) {
+          if (geoLower.includes(g) || g.includes(geoLower)) {
+            score += 0.03
+            break
+          }
+        }
+      }
+
+      // Stale grant penalty
+      if (grant.closes_at) {
+        const yearsAgo = (Date.now() - new Date(grant.closes_at).getTime()) / (365.25 * 24 * 60 * 60 * 1000)
+        if (yearsAgo >= 5) score -= 0.20
+        else if (yearsAgo >= 2) score -= 0.10
+      }
+
+      const fitScore = Math.max(0, Math.min(Math.round(score * 100), 100))
+
+      return {
+        id: grant.id,
+        name: grant.name,
+        provider: grant.provider,
+        fit_score: fitScore,
+        amount: grant.amount_max ? `$${grant.amount_max.toLocaleString()}` : 'Not specified',
+        deadline: grant.closes_at
+          ? new Date(grant.closes_at).toLocaleDateString('en-AU', { day: 'numeric', month: 'short', year: 'numeric' })
+          : 'Ongoing',
+        categories: grant.categories?.slice(0, 4) || [],
+        geography: grant.geography,
+      }
+    })
+
+    scored.sort((a: { fit_score: number }, b: { fit_score: number }) => b.fit_score - a.fit_score)
+
+    return JSON.stringify({
+      project: projectProfile.name,
+      project_code: input.project_code,
+      match_count: scored.length,
+      matches: scored,
+    })
+  } catch (err) {
+    return JSON.stringify({ error: (err as Error).message })
+  }
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // TOOL: draft_grant_response
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
