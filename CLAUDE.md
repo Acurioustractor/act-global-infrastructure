@@ -132,7 +132,26 @@ Before writing ANY code that touches the database:
 - After making changes, verify: TypeScript compiles clean → build passes → deployment completed → env vars set → THEN report ready to test
 - For Vercel deployments, check `vercel ls` or the deployment URL before declaring success
 
-## Model Routing (Token Efficiency)
+## Agent Delegation (Scale Decision Matrix)
+
+Match effort to complexity — don't over-delegate simple work:
+
+| Task Type | Approach | Example |
+|-----------|----------|---------|
+| Single fact / quick lookup | Do it directly, no sub-agents (< 5 tool calls) | "What's the Xero balance?" |
+| Focused single-source task | 1 agent or do it yourself | "Summarise this file" |
+| Multi-source comparison | 2-3 parallel agents | "Compare grant pipeline vs Xero actuals" |
+| Complex multi-domain analysis | 3-5 parallel agents with file-based handoffs | "Full financial cockpit review" |
+
+### File-Based Handoffs
+
+For multi-step operations, **write intermediate results to files** instead of returning everything inline:
+- Agent writes output to `thoughts/shared/handoffs/<slug>/<step>.md`
+- Returns a 1-2 line summary to parent context, not the full content
+- Parent reads the file only when it needs to synthesise
+- This prevents context bloat and survives compaction
+
+### Model Routing (Token Efficiency)
 
 When using the Task tool with sub-agents:
 - Use `model: "haiku"` for exploration, file finding, pattern matching (10-20x cheaper)
@@ -175,6 +194,41 @@ For multi-phase plans, feed one phase at a time rather than the full plan upfron
 
 - **Query ALL matching records** for maps/tables — never limit to a single pagination page unless the user explicitly asks for pagination. Watch for Supabase's default 1,000 row limit.
 - **Ensure visualization relationships are meaningful** — don't create links based on shallow shared attributes like "same sector." Think through whether the data relationship produces useful insight.
+
+## Verification Honesty
+
+- **Never say "verified", "confirmed", or "checked"** unless you actually performed the verification
+- **Distinguish fact from inference.** If a number came from a query, say so. If it's calculated or estimated, say that.
+- **Flag uncertainty.** Use: "verified (queried Xero API)" vs "inferred (based on last 3 months)" vs "unverified (no data source)"
+- **Every dollar figure needs a source.** Don't generate financial numbers without citing the table/API they came from
+- This matters because ACT uses generated reports for R&D tax claims, grant applications, and board reporting — unsupported claims have real consequences
+
+## Provenance for Generated Reports
+
+When generating financial summaries, grant analyses, project health reports, or any data-driven artifact:
+
+1. **Create the report** at the appropriate location
+2. **Create a provenance sidecar** at `<report-path>.provenance.md` documenting:
+   - Which data sources were queried (tables, APIs, date ranges)
+   - What was cross-verified vs inferred vs unverified
+   - Known gaps or assumptions
+   - How to reproduce the report
+3. **Use the template** at `thoughts/shared/templates/provenance-template.md`
+
+This is especially critical for:
+- R&D tax incentive evidence (43.5% refund depends on documentation quality)
+- Grant applications (funders verify claims)
+- Board/stakeholder reporting (trust requires transparency)
+
+## Plan Artifacts
+
+When creating plans (at user's request), use the structured template at `thoughts/shared/templates/plan-template.md`:
+- **Task ledger** — trackable checklist that survives context compaction
+- **Decision log** — why choices were made (invaluable when resuming after weeks)
+- **Verification log** — what's confirmed vs assumed
+- **Structured changelog** — objective/changed/verified/failed/blockers/next per round
+
+Plans go in `thoughts/shared/plans/<slug>.md` with consistent slug-based naming.
 
 ## Bias Towards Action
 
