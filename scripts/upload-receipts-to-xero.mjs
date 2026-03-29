@@ -249,11 +249,14 @@ async function getExistingAttachments(entityId, entityType = 'BankTransactions',
 async function downloadFromStorage(attachmentUrl) {
   if (!attachmentUrl) return null;
 
-  // If it's a Supabase Storage URL, download via the client
-  if (attachmentUrl.startsWith('receipt-attachments/')) {
+  // If it's a Supabase Storage path in the receipt-attachments bucket
+  if (attachmentUrl.startsWith('receipt-attachments/') || attachmentUrl.startsWith('dext-import/')) {
+    const storagePath = attachmentUrl.startsWith('receipt-attachments/')
+      ? attachmentUrl.replace('receipt-attachments/', '')
+      : attachmentUrl; // dext-import/ paths are folders inside the bucket
     const { data, error } = await supabase.storage
       .from('receipt-attachments')
-      .download(attachmentUrl.replace('receipt-attachments/', ''));
+      .download(storagePath);
     if (error) throw new Error(`Storage download failed: ${error.message}`);
     return { buffer: Buffer.from(await data.arrayBuffer()), contentType: null, fileName: null };
   }
