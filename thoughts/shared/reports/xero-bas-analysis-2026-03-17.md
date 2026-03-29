@@ -1,6 +1,6 @@
 🔍 ACT Xero Financial Analysis - BAS Preparation
 
-Generated: 2026-03-16T20:44:19.833Z
+Generated: 2026-03-29T19:43:55.463Z
 ================================================================================
 
 📊 Q2 FY26 (Oct-Dec 2025) SUMMARY
@@ -26,8 +26,8 @@ SPEND:
   Count: 574
   Total: $122,086.83
   GST: $4,282.16
-  Tagged with projects: 567 (98.8%)
-  With receipts: 57 (9.9%)
+  Tagged with projects: 574 (100.0%)
+  With receipts: 58 (10.1%)
 
 SPEND-TRANSFER:
   Count: 24
@@ -40,7 +40,7 @@ SPEND-TRANSFER:
 💰 Q2 FY26 - TOP 10 VENDORS BY SPEND
 --------------------------------------------------------------------------------
 1. Nicholas Marchesi: $51,000.00 (GST: $0.00) | 2 transactions, 0 with receipts
-2. Qantas: $32,238.11 (GST: $3,223.81) | 55 transactions, 0 with receipts
+2. Qantas: $32,238.11 (GST: $3,223.81) | 55 transactions, 1 with receipts
 3. Nicholas: $21,419.00 (GST: $0.00) | 3 transactions, 0 with receipts
 4. Uber: $6,914.50 (GST: $691.45) | 186 transactions, 0 with receipts
 5. Webflow: $1,743.18 (GST: $0.00) | 32 transactions, 17 with receipts
@@ -57,46 +57,46 @@ SPEND-TRANSFER:
 Transaction Summary:
 
 RECEIVE:
-  Count: 1
-  Total: $1.08
+  Count: 2
+  Total: $6.14
   GST: $0.00
-  Tagged with projects: 0 (0.0%)
+  Tagged with projects: 2 (100.0%)
   With receipts: 0 (0.0%)
 
 RECEIVE-TRANSFER:
-  Count: 14
-  Total: $102,136.56
+  Count: 17
+  Total: $123,736.56
   GST: $0.00
-  Tagged with projects: 0 (0.0%)
+  Tagged with projects: 17 (100.0%)
   With receipts: 0 (0.0%)
 
 SPEND:
-  Count: 293
-  Total: $51,373.63
-  GST: $3,130.11
-  Tagged with projects: 172 (58.7%)
-  With receipts: 83 (28.3%)
+  Count: 341
+  Total: $56,911.51
+  GST: $3,660.05
+  Tagged with projects: 341 (100.0%)
+  With receipts: 87 (25.5%)
 
 SPEND-TRANSFER:
-  Count: 14
-  Total: $102,136.56
+  Count: 17
+  Total: $123,736.56
   GST: $0.00
-  Tagged with projects: 0 (0.0%)
+  Tagged with projects: 17 (100.0%)
   With receipts: 0 (0.0%)
 
 
 💰 Q3 FY26 - TOP 10 VENDORS BY SPEND
 --------------------------------------------------------------------------------
-1. Qantas: $20,010.85 (GST: $2,001.09) | 22 transactions, 1 with receipts
+1. Qantas: $24,617.87 (GST: $2,461.79) | 26 transactions, 2 with receipts
 2. Elders Insurance: $8,361.21 (GST: $0.00) | 1 transactions, 1 with receipts
 3. Longara: $3,155.00 (GST: $60.50) | 1 transactions, 1 with receipts
 4. Fisher's Oysters: $2,240.00 (GST: $0.00) | 2 transactions, 2 with receipts
-5. RW Pacific Traders: $2,000.00 (GST: $200.00) | 1 transactions, 1 with receipts
-6. Uber: $1,730.71 (GST: $173.07) | 48 transactions, 0 with receipts
+5. Uber: $2,144.16 (GST: $214.42) | 58 transactions, 0 with receipts
+6. RW Pacific Traders: $2,000.00 (GST: $200.00) | 1 transactions, 1 with receipts
 7. Northern Territory Government: $1,459.25 (GST: $60.72) | 1 transactions, 1 with receipts
 8. Department of Transport and Main Roads: $1,058.20 (GST: $0.00) | 1 transactions, 1 with receipts
 9. Thrifty: $866.42 (GST: $86.64) | 1 transactions, 1 with receipts
-10. Webflow: $593.31 (GST: $36.52) | 11 transactions, 4 with receipts
+10. Webflow: $677.27 (GST: $44.92) | 13 transactions, 4 with receipts
 
 
 🧾 GST ANALYSIS
@@ -114,8 +114,8 @@ Q2 FY26 - RECEIVE-TRANSFER:
 
 Q2 FY26 - SPEND:
   Total GST: $4,282.16
-  Transactions without receipts: 517
-  GST at risk (missing receipts): $4,032.73
+  Transactions without receipts: 516
+  GST at risk (missing receipts): $4,003.83
 
 Q2 FY26 - SPEND-TRANSFER:
   Total GST: $0.00
@@ -124,22 +124,22 @@ Q2 FY26 - SPEND-TRANSFER:
 
 Q3 FY26 - RECEIVE:
   Total GST: $0.00
-  Transactions without receipts: 1
+  Transactions without receipts: 2
   GST at risk (missing receipts): $0.00
 
 Q3 FY26 - RECEIVE-TRANSFER:
   Total GST: $0.00
-  Transactions without receipts: 14
+  Transactions without receipts: 17
   GST at risk (missing receipts): $0.00
 
 Q3 FY26 - SPEND:
-  Total GST: $3,130.11
-  Transactions without receipts: 210
-  GST at risk (missing receipts): $2,353.72
+  Total GST: $3,660.05
+  Transactions without receipts: 254
+  GST at risk (missing receipts): $2,850.00
 
 Q3 FY26 - SPEND-TRANSFER:
   Total GST: $0.00
-  Transactions without receipts: 14
+  Transactions without receipts: 17
   GST at risk (missing receipts): $0.00
 
 
@@ -149,21 +149,26 @@ Q3 FY26 - SPEND-TRANSFER:
 Transactions > $82.50 without receipts (GST threshold):
 
 Q2 FY26:
-  Missing receipts: 76
-  Total spend: $107,875.56
-  GST credits at risk: $3,319.14
+  Missing receipts: 75
+  Total spend: $107,586.56
+  GST credits at risk: $3,290.24
 
 Q3 FY26:
-  Missing receipts: 32
-  Total spend: $21,693.84
-  GST credits at risk: $2,089.72
+  Missing receipts: 37
+  Total spend: $26,271.47
+  GST credits at risk: $2,533.77
 
 
 R&D Project Transactions (missing receipts):
-  ACT-IN: 637 transactions, $138,336.78 (GST: $6,210.07)
-  ACT-HV: 3 transactions, $731.49 (GST: $5.15)
+  ACT-HQ: 124 transactions, $72,970.23 (GST: $0.00)
+  ACT-IN: 637 transactions, $72,514.13 (GST: $6,803.49)
+  ACT-HV: 2 transactions, $679.95 (GST: $0.00)
   ACT-FM: 1 transactions, $319.09 (GST: $31.91)
   ACT-GD: 1 transactions, $161.90 (GST: $16.19)
+  DISPUTED: 2 transactions, $89.37 (GST: $0.00)
+  ACT-UA: 1 transactions, $28.49 (GST: $0.00)
+  ACT-DO: 1 transactions, $17.40 (GST: $1.74)
+  ACT-SM: 1 transactions, $5.00 (GST: $0.50)
 
 
 🔍 PATTERNS & ANOMALIES
@@ -177,27 +182,27 @@ Largest single transactions (Q2 + Q3):
 5. 2025-11-11 - null: $23,875.00 (RECEIVE-TRANSFER) GST: $0.00 ❌
 6. 2025-11-11 - null: $23,875.00 (SPEND-TRANSFER) GST: $0.00 ❌
 7. 2025-11-11 - Nicholas Marchesi: $20,000.00 (RECEIVE) GST: $0.00 ❌
-8. 2026-03-02 - null: $20,000.00 (SPEND-TRANSFER) GST: $0.00 ❌
+8. 2026-03-02 - null: $20,000.00 (RECEIVE-TRANSFER) GST: $0.00 ❌
 9. 2025-11-11 - Nicholas Marchesi: $20,000.00 (RECEIVE) GST: $0.00 ❌
-10. 2026-03-02 - null: $20,000.00 (RECEIVE-TRANSFER) GST: $0.00 ❌
+10. 2026-03-02 - null: $20,000.00 (SPEND-TRANSFER) GST: $0.00 ❌
 
 
 Recurring subscriptions (vendors appearing 2+ times):
-1. Uber: 234× payments, $8,645.21 total (avg $36.95)
+1. Uber: 244× payments, $9,058.66 total (avg $37.13)
 2. NAB Fee: 143× payments, $353.62 total (avg $2.47)
-3. NAB: 94× payments, $340.99 total (avg $3.63)
-4. Qantas: 77× payments, $52,248.96 total (avg $678.56)
-5. Webflow: 43× payments, $2,336.49 total (avg $54.34)
+3. NAB: 119× payments, $551.23 total (avg $4.63)
+4. Qantas: 81× payments, $56,855.98 total (avg $701.93)
+5. Webflow: 45× payments, $2,420.45 total (avg $53.79)
 6. NAB International Fee: 38× payments, $97.08 total (avg $2.55)
 7. GoPayID: 12× payments, $15.72 total (avg $1.31)
 8. OpenAI: 11× payments, $592.96 total (avg $53.91)
-9. HighLevel: 9× payments, $512.86 total (avg $56.98)
+9. HighLevel: 10× payments, $651.37 total (avg $65.14)
 10. Anthropic: 8× payments, $132.26 total (avg $16.53)
 11. Mighty Networks: 6× payments, $875.29 total (avg $145.88)
 12. Cabcharge: 6× payments, $280.15 total (avg $46.69)
-13. Firecrawl: 6× payments, $94.22 total (avg $15.70)
-14. Telstra: 5× payments, $500.00 total (avg $100.00)
-15. Supabase: 5× payments, $458.17 total (avg $91.63)
+13. Vercel: 6× payments, $141.30 total (avg $23.55)
+14. Audible: 6× payments, $98.70 total (avg $16.45)
+15. Firecrawl: 6× payments, $94.22 total (avg $15.70)
 
 
 New vendors (first transaction in Q2/Q3 FY26):
@@ -209,30 +214,30 @@ New vendors (first transaction in Q2/Q3 FY26):
 6. Northern Territory Government (first: 2026-02-03): $1,459.25 (1 transactions)
 7. Department of Transport and Main Roads (first: 2026-02-13): $1,058.20 (1 transactions)
 8. Cactus Jacks Bar and Grill (first: 2025-12-03): $708.85 (1 transactions)
-9. Qantas Group Accommodation (first: 2026-01-30): $550.00 (4 transactions)
-10. Complete Entertainment eXchange (first: 2026-01-25): $540.00 (1 transactions)
+9. HighLevel (first: 2026-01-05): $651.37 (10 transactions)
+10. Qantas Group Accommodation (first: 2026-01-30): $550.00 (4 transactions)
 
 
 📄 INVOICES ANALYSIS
 --------------------------------------------------------------------------------
 
 Outstanding Receivables (ACCREC):
-  AUTHORISED: 37 invoices, $227,180.00 total (GST: $19,548.18), $216,200.00 outstanding
+  AUTHORISED: 17 invoices, $391,170.00 total (GST: $35,438.18), $380,190.00 outstanding
   DELETED: 4 invoices, $86,900.00 total (GST: $7,900.00), $0.00 outstanding
   DRAFT: 2 invoices, $84,700.00 total (GST: $7,700.00), $84,700.00 outstanding
-  VOIDED: 18 invoices, $450,992.11 total (GST: $40,617.46), $0.00 outstanding
+  VOIDED: 42 invoices, $461,792.11 total (GST: $40,617.46), $10,800.00 outstanding
 
   ⚠️  Overdue receivables:
-    Social Impact Hub Foundation - #INV-0289: $10,800.00 (383 days overdue, due 2025-02-26)
-    Rotary Eclub Outback Australia, Division 9560, - #INV-0222: $82,500.00 (326 days overdue, due 2025-04-24)
-    Aleisha J Keating - #INV-0238: $450.00 (255 days overdue, due 2025-07-04)
-    Aleisha J Keating - #INV-0242: $450.00 (248 days overdue, due 2025-07-11)
-    Aleisha J Keating - #INV-0250: $450.00 (241 days overdue, due 2025-07-18)
-    Aleisha J Keating - #INV-0254: $450.00 (234 days overdue, due 2025-07-25)
-    Aleisha J Keating - #INV-0256: $450.00 (227 days overdue, due 2025-08-01)
-    Aleisha J Keating - #INV-0257: $450.00 (220 days overdue, due 2025-08-08)
-    Aleisha J Keating - #INV-0265: $450.00 (213 days overdue, due 2025-08-15)
-    Aleisha J Keating - #INV-0266: $450.00 (206 days overdue, due 2025-08-22)
+    Social Impact Hub Foundation - #INV-0289: $10,800.00 (396 days overdue, due 2025-02-26)
+    Rotary Eclub Outback Australia, Division 9560, - #INV-0222: $82,500.00 (339 days overdue, due 2025-04-24)
+    GREEN FOX TRAINING STUDIO LIMITED - #INV-0246: $9,000.00 (146 days overdue, due 2025-11-03)
+    Just Reinvest - #INV-0296: $9,900.00 (108 days overdue, due 2025-12-11)
+    Just Reinvest - #INV-0297: $7,700.00 (108 days overdue, due 2025-12-11)
+    Just Reinvest - #INV-0295: $9,900.00 (101 days overdue, due 2025-12-18)
+    Aleisha J Keating - #INV-0305: $450.00 (100 days overdue, due 2025-12-19)
+    Aleisha J Keating - #INV-0306: $450.00 (93 days overdue, due 2025-12-26)
+    Aleisha J Keating - #INV-0307: $450.00 (86 days overdue, due 2026-01-02)
+    Homeland School Company - #INV-0303: $4,950.00 (38 days overdue, due 2026-02-19)
 
 
 Outstanding Payables (ACCPAY):
@@ -242,16 +247,16 @@ Outstanding Payables (ACCPAY):
   VOIDED: 1 invoices, $247.50 total (GST: $22.50), $0.00 outstanding
 
   ⚠️  Overdue payables:
-    Virgin Australia - #7952106716287: $1,675.06 (412 days overdue, due 2025-01-28)
-    Virgin Australia - #7952106716284: $2,242.86 (412 days overdue, due 2025-01-28)
-    Virgin Australia - #7952106716285: $2,162.06 (412 days overdue, due 2025-01-28)
-    Virgin Australia - #7952106716286: $2,162.06 (412 days overdue, due 2025-01-28)
-    Virgin Australia - #7952107056526: $189.68 (402 days overdue, due 2025-02-07)
-    Virgin Australia - #7952107528546: $180.78 (389 days overdue, due 2025-02-20)
-    Booking.com - #RB16121843280: $776.87 (381 days overdue, due 2025-02-28)
-    Booking.com - #AZSJ-2EJU-INS: $95.02 (380 days overdue, due 2025-03-01)
-    Square AU Pty. Ltd - #xYo4: $20.00 (376 days overdue, due 2025-03-05)
-    Booking.com - #XKK5-XFXY-INS: $111.54 (374 days overdue, due 2025-03-07)
+    Virgin Australia - #7952106716287: $1,675.06 (425 days overdue, due 2025-01-28)
+    Virgin Australia - #7952106716284: $2,242.86 (425 days overdue, due 2025-01-28)
+    Virgin Australia - #7952106716285: $2,162.06 (425 days overdue, due 2025-01-28)
+    Virgin Australia - #7952106716286: $2,162.06 (425 days overdue, due 2025-01-28)
+    Virgin Australia - #7952107056526: $189.68 (415 days overdue, due 2025-02-07)
+    Virgin Australia - #7952107528546: $180.78 (402 days overdue, due 2025-02-20)
+    Booking.com - #RB16121843280: $776.87 (394 days overdue, due 2025-02-28)
+    Booking.com - #AZSJ-2EJU-INS: $95.02 (393 days overdue, due 2025-03-01)
+    Square AU Pty. Ltd - #xYo4: $20.00 (389 days overdue, due 2025-03-05)
+    Booking.com - #XKK5-XFXY-INS: $111.54 (387 days overdue, due 2025-03-07)
 
 ================================================================================
 ✅ Analysis complete

@@ -141,6 +141,74 @@ jobs:
         continue-on-error: true
 
   # ========================================
+  # Receipt Pipeline (Capture → Match → Tag → Upload)
+  # ========================================
+  receipt-pipeline:
+    if: ${{ github.event.inputs.sync_target == 'all' || github.event.inputs.sync_target == 'xero' || github.event_name == 'schedule' }}
+    runs-on: ubuntu-latest
+    needs: [sync-xero]  # Run after Xero sync so data is fresh
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Capture receipts from Gmail
+        env:
+          GOOGLE_SERVICE_ACCOUNT_KEY: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY }}
+          GOOGLE_DELEGATED_USERS: ${{ secrets.GOOGLE_DELEGATED_USERS }}
+          SUPABASE_SHARED_URL: ${{ secrets.SUPABASE_SHARED_URL }}
+          SUPABASE_SHARED_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SHARED_SERVICE_ROLE_KEY }}
+        run: |
+          echo "📧 Capturing receipts from Gmail (last 7 days)..."
+          node scripts/capture-receipts.mjs --days 7
+        continue-on-error: true
+
+      - name: Match receipts to Xero transactions
+        env:
+          SUPABASE_SHARED_URL: ${{ secrets.SUPABASE_SHARED_URL }}
+          SUPABASE_SHARED_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SHARED_SERVICE_ROLE_KEY }}
+        run: |
+          echo "🔗 Matching receipts to Xero transactions..."
+          node scripts/match-receipts-to-xero.mjs --apply
+        continue-on-error: true
+
+      - name: Tag transactions with project codes
+        env:
+          XERO_CLIENT_ID: ${{ secrets.XERO_CLIENT_ID }}
+          XERO_CLIENT_SECRET: ${{ secrets.XERO_CLIENT_SECRET }}
+          XERO_TENANT_ID: ${{ secrets.XERO_TENANT_ID }}
+          SUPABASE_SHARED_URL: ${{ secrets.SUPABASE_SHARED_URL }}
+          SUPABASE_SHARED_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SHARED_SERVICE_ROLE_KEY }}
+        run: |
+          echo "🏷️ Tagging transactions with project codes..."
+          node scripts/tag-xero-transactions.mjs
+        continue-on-error: true
+
+      - name: Upload matched receipts to Xero
+        env:
+          XERO_CLIENT_ID: ${{ secrets.XERO_CLIENT_ID }}
+          XERO_CLIENT_SECRET: ${{ secrets.XERO_CLIENT_SECRET }}
+          XERO_TENANT_ID: ${{ secrets.XERO_TENANT_ID }}
+          SUPABASE_SHARED_URL: ${{ secrets.SUPABASE_SHARED_URL }}
+          SUPABASE_SHARED_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SHARED_SERVICE_ROLE_KEY }}
+        run: |
+          echo "📎 Uploading receipts to Xero..."
+          node scripts/upload-receipts-to-xero.mjs
+        continue-on-error: true
+
+  # ========================================
   # BUNYA Project Health Calculation
   # ========================================
   run-bunya:
@@ -240,7 +308,7 @@ jobs:
   # ========================================
   summary:
     runs-on: ubuntu-latest
-    needs: [sync-ghl, sync-calendar, sync-xero, run-bunya, run-alta, grant-hygiene]
+    needs: [sync-ghl, sync-calendar, sync-xero, receipt-pipeline, run-bunya, run-alta, grant-hygiene]
     if: always()
 
     steps:
@@ -257,6 +325,7 @@ jobs:
           echo "| Calendar | ${{ needs.sync-calendar.result == 'success' && 'Synced' || needs.sync-calendar.result == 'skipped' && 'Skipped' || 'Warning' }} |" >> $GITHUB_STEP_SUMMARY
           echo "| Xero | ${{ needs.sync-xero.result == 'success' && 'Synced' || needs.sync-xero.result == 'skipped' && 'Skipped' || 'Warning' }} |" >> $GITHUB_STEP_SUMMARY
           echo "| BUNYA (Health) | ${{ needs.run-bunya.result == 'success' && 'Calculated' || needs.run-bunya.result == 'skipped' && 'Skipped' || 'Warning' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Receipt Pipeline | ${{ needs.receipt-pipeline.result == 'success' && 'Processed' || needs.receipt-pipeline.result == 'skipped' && 'Skipped' || 'Warning' }} |" >> $GITHUB_STEP_SUMMARY
           echo "| ALTA (Grants) | ${{ needs.run-alta.result == 'success' && 'Scanned' || needs.run-alta.result == 'skipped' && 'Skipped' || 'Warning' }} |" >> $GITHUB_STEP_SUMMARY
           echo "| Grant Hygiene | ${{ needs.grant-hygiene.result == 'success' && 'Cleaned' || needs.grant-hygiene.result == 'skipped' && 'Skipped' || 'Warning' }} |" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY

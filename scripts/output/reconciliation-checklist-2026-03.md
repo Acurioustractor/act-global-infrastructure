@@ -1,25 +1,25 @@
 # Reconciliation Checklist — March 2026
-Generated: 2026-03-27T03:06
+Generated: 2026-03-29T19:43
 
 ## Summary
 
 | Metric | Value |
 |--------|-------|
-| Total transactions | 153 |
-| Total spend | $98,995.45 |
+| Total transactions | 160 |
+| Total spend | $99,114.2 |
 | Total income | $6.14 |
-| Receipt coverage | 7% (10/153) |
-| Project tag coverage | 91% |
-| Spend missing receipts | 130 transactions |
+| Receipt coverage | 6% (10/160) |
+| Project tag coverage | 100% |
+| Spend missing receipts | 137 transactions |
 
 ## Receipt Pipeline
 
 | Status | Count | Amount |
 |--------|-------|--------|
 | uploaded | 956 | $570,003.93 |
-| review | 380 | $116,318.37 |
-| matched | 182 | $20,620.1 |
-| captured | 116 | $317,680.56 |
+| review | 373 | $116,311.88 |
+| matched | 201 | $20,778.14 |
+| captured | 126 | $317,686.6 |
 | failed | 3 | $1,761.08 |
 
 ## Top Missing Receipts (action required)
@@ -29,7 +29,7 @@ Generated: 2026-03-27T03:06
 | ? | $20000.00 | 2026-03-02 | ACT-HQ |
 | ? | $12000.00 | 2026-03-02 | ACT-HQ |
 | ? | $10800.00 | 2026-03-17 | ACT-HQ |
-| ? | $10000.00 | 2026-03-25 | - |
+| ? | $10000.00 | 2026-03-25 | ACT-HQ |
 | ? | $7000.00 | 2026-03-05 | ACT-HQ |
 | ? | $6000.00 | 2026-03-16 | ACT-HQ |
 | ? | $2302.19 | 2026-03-13 | ACT-HQ |
@@ -47,21 +47,6 @@ Generated: 2026-03-27T03:06
 | Qantas | $854.82 | 2026-03-03 | ACT-IN |
 | Qantas | $838.74 | 2026-03-03 | ACT-IN |
 
-## Untagged Transactions (needs project code)
-
-| Vendor | Amount | Date | Type |
-|--------|--------|------|------|
-| ? | $10000.00 | 2026-03-25 | SPEND-TRANSFER |
-| ? | $10000.00 | 2026-03-25 | RECEIVE-TRANSFER |
-| NAB | $4.85 | 2026-03-24 | SPEND |
-| NAB | $4.59 | 2026-03-25 | SPEND |
-| NAB | $4.25 | 2026-03-25 | SPEND |
-| NAB | $3.47 | 2026-03-25 | SPEND |
-| NAB | $2.48 | 2026-03-25 | SPEND |
-| NAB | $2.19 | 2026-03-24 | SPEND |
-| NAB | $0.78 | 2026-03-25 | SPEND |
-| NAB | $0.25 | 2026-03-24 | SPEND |
-
 ## Outstanding Invoices
 
 | Type | Status | Count | Amount Due |
@@ -76,8 +61,8 @@ Generated: 2026-03-27T03:06
 
 | Project | Txns | Spend | Income | Missing Receipts |
 |---------|------|-------|--------|-----------------|
-| ACT-HQ | 63 | $60,431.45 | $6.14 | 50 |
-| ACT-IN | 80 | $26,762.16 | $0 | 73 |
+| ACT-HQ | 72 | $70,446.97 | $6.14 | 59 |
+| ACT-IN | 84 | $26,878.63 | $0 | 77 |
 | ACT-HV | 1 | $1,120 | $0 | 0 |
 | ACT-GD | 1 | $483.6 | $0 | 0 |
 | ACT-GP | 1 | $180 | $0 | 0 |
@@ -93,8 +78,8 @@ Generated: 2026-03-27T03:06
 | Woolworths | $112.47 | 3 | 2026-02-09 |
 | Supabase | $98.74 | 3 | 2026-01-21 |
 | HighLevel | $65.14 | 10 | 2026-03-24 |
-| Webflow | $53.24 | 12 | 2026-03-23 |
-| Uber | $37.57 | 55 | 2026-03-26 |
+| Webflow | $52.1 | 13 | 2026-03-27 |
+| Uber | $36.97 | 58 | 2026-03-27 |
 | Squarespace | $28.85 | 4 | 2026-03-23 |
 | Vercel | $23.55 | 6 | 2026-03-23 |
 | OpenAI | $21.29 | 4 | 2026-03-11 |
@@ -103,13 +88,12 @@ Generated: 2026-03-27T03:06
 | Firecrawl | $15.7 | 6 | 2026-03-13 |
 | Anthropic | $14.96 | 6 | 2026-03-10 |
 | Railway Corporation | $6.67 | 4 | 2026-03-24 |
-| NAB | $5.74 | 75 | 2026-03-26 |
+| NAB | $5.55 | 78 | 2026-03-27 |
 | NAB Fee | $2.35 | 34 | 2026-01-30 |
 
 ## Accountant Action Items
 
-- [ ] Review 130 transactions missing receipts
-- [ ] Tag 14 transactions with project codes
+- [ ] Review 137 transactions missing receipts
 - [ ] Review and approve outstanding payable invoices
 - [ ] Reconcile bank statement in Xero (requires Xero UI)
 - [ ] Review subscription costs for potential savings
