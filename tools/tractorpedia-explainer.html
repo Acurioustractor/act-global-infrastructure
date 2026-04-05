@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tractorpedia — How It Works</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', -apple-system, sans-serif;
+  background: #faf9f7;
+  color: #1a1a1a;
+  -webkit-font-smoothing: antialiased;
+}
+
+.page { max-width: 960px; margin: 0 auto; padding: 60px 40px 80px; }
+
+/* === HEADER === */
+.header-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #c0392b;
+  margin-bottom: 12px;
+}
+
+h1 {
+  font-size: 42px;
+  font-weight: 800;
+  line-height: 1.15;
+  margin-bottom: 16px;
+  color: #1a1a1a;
+}
+
+h1 .highlight { color: #c0392b; }
+
+.subtitle {
+  font-size: 17px;
+  color: #666;
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+
+.header-rule {
+  width: 60px;
+  height: 4px;
+  background: #c0392b;
+  border: none;
+  border-radius: 2px;
+  margin: 24px 0 48px;
+}
+
+/* === CORE INSIGHT BOX === */
+.insight-box {
+  border: 2px solid #e8e4df;
+  border-left: 4px solid #c0392b;
+  border-radius: 6px;
+  padding: 24px 28px;
+  margin-bottom: 56px;
+  background: #fff;
+}
+
+.insight-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: #c0392b;
+  margin-bottom: 10px;
+}
+
+.insight-text {
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: #1a1a1a;
+}
+
+/* === SECTION HEADERS === */
+.section-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #999;
+  margin-bottom: 20px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #e8e4df;
+}
+
+/* === PIPELINE STEPS === */
+.pipeline-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 16px;
+}
+
+.pipeline-row-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 56px;
+}
+
+.step-card {
+  border: 2px solid #e8e4df;
+  border-radius: 8px;
+  padding: 20px 22px 22px;
+  background: #fff;
+  position: relative;
+}
+
+.step-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  border-radius: 8px 8px 0 0;
+}
+
+.step-card.red::before { background: #c0392b; }
+.step-card.blue::before { background: #2980b9; }
+.step-card.green::before { background: #27ae60; }
+.step-card.purple::before { background: #8e44ad; }
+.step-card.orange::before { background: #d35400; }
+
+.step-number {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #999;
+  margin-bottom: 8px;
+}
+
+.step-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.step-emoji { font-size: 20px; }
+
+.step-desc {
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: #555;
+  margin-bottom: 14px;
+}
+
+.step-bullets {
+  list-style: none;
+  padding: 0;
+}
+
+.step-bullets li {
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: #444;
+  padding: 2px 0 2px 16px;
+  position: relative;
+}
+
+.step-bullets li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 9px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+}
+
+.step-card.red .step-bullets li::before { background: #c0392b; }
+.step-card.blue .step-bullets li::before { background: #2980b9; }
+.step-card.green .step-bullets li::before { background: #27ae60; }
+.step-card.purple .step-bullets li::before { background: #8e44ad; }
+.step-card.orange .step-bullets li::before { background: #d35400; }
+
+/* Arrow connectors between steps */
+.arrow-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 16px;
+  padding: 0 40px;
+}
+
+.arrow-label {
+  text-align: center;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #bbb;
+  position: relative;
+}
+
+.arrow-label::after {
+  content: '→';
+  font-size: 16px;
+  display: block;
+  color: #ccc;
+}
+
+/* === FILED BACK CALLOUT === */
+.filed-back {
+  border: 2px dashed #c0392b;
+  border-radius: 8px;
+  padding: 20px 24px;
+  margin-bottom: 56px;
+  background: #fef9f8;
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.filed-back-icon {
+  font-size: 22px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.filed-back-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #c0392b;
+  margin-bottom: 4px;
+}
+
+.filed-back-text {
+  font-size: 13.5px;
+  color: #555;
+  line-height: 1.55;
+}
+
+/* === SUPPORT LAYER === */
+.support-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 56px;
+}
+
+.support-card {
+  border-left: 3px solid #2980b9;
+  padding: 16px 18px;
+  background: #fff;
+}
+
+.support-icon { font-size: 22px; margin-bottom: 8px; }
+
+.support-title {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.support-desc {
+  font-size: 12.5px;
+  color: #666;
+  line-height: 1.5;
+}
+
+/* === ACT ECOSYSTEM SECTION === */
+.act-section {
+  margin-bottom: 56px;
+}
+
+.platform-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.platform-card {
+  border: 2px solid #e8e4df;
+  border-radius: 8px;
+  padding: 20px 22px;
+  background: #fff;
+}
+
+.platform-card .platform-name {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.platform-card .platform-role {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #999;
+  margin-bottom: 10px;
+}
+
+.platform-card .platform-desc {
+  font-size: 13px;
+  color: #555;
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+
+.platform-card .platform-stat {
+  font-size: 12px;
+  color: #888;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.platform-card.ecosystem { border-left: 4px solid #27ae60; }
+.platform-card.narrative { border-left: 4px solid #8e44ad; }
+.platform-card.evidence { border-left: 4px solid #2980b9; }
+.platform-card.knowledge { border-left: 4px solid #c0392b; }
+
+/* === ARCHITECTURE DIAGRAM (dark) === */
+.arch-section {
+  background: #1a1a2e;
+  border-radius: 12px;
+  padding: 48px 40px;
+  margin-bottom: 56px;
+  color: #e0e0e0;
+}
+
+.arch-title {
+  text-align: center;
+  font-size: 28px;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 6px;
+}
+
+.arch-subtitle {
+  text-align: center;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #888;
+  margin-bottom: 40px;
+}
+
+.arch-layer-label {
+  text-align: center;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #666;
+  margin-bottom: 16px;
+  margin-top: 32px;
+}
+
+.arch-layer-label:first-of-type { margin-top: 0; }
+
+.arch-row {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+
+.arch-node {
+  border: 2px solid;
+  border-radius: 10px;
+  padding: 16px 24px;
+  text-align: center;
+  min-width: 180px;
+  background: rgba(255,255,255,0.03);
+}
+
+.arch-node.raw { border-color: #e74c3c; }
+.arch-node.wiki { border-color: #f39c12; }
+.arch-node.schema { border-color: #9b59b6; }
+.arch-node.ingest { border-color: #e91e8a; }
+.arch-node.query { border-color: #e91e8a; }
+.arch-node.lint { border-color: #e91e8a; }
+.arch-node.human { border-color: #3498db; }
+.arch-node.llm { border-color: #2ecc71; }
+
+.arch-node-title {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.arch-node.raw .arch-node-title { color: #e74c3c; }
+.arch-node.wiki .arch-node-title { color: #f39c12; }
+.arch-node.schema .arch-node-title { color: #9b59b6; }
+.arch-node.ingest .arch-node-title { color: #e91e8a; }
+.arch-node.query .arch-node-title { color: #e91e8a; }
+.arch-node.lint .arch-node-title { color: #e91e8a; }
+.arch-node.human .arch-node-title { color: #3498db; }
+.arch-node.llm .arch-node-title { color: #2ecc71; }
+
+.arch-node-desc {
+  font-size: 11px;
+  color: #888;
+}
+
+.arch-arrows {
+  text-align: center;
+  color: #555;
+  font-size: 11px;
+  letter-spacing: 1px;
+  padding: 8px 0;
+}
+
+.arch-sub-row {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+
+.arch-sub-node {
+  background: rgba(233, 30, 138, 0.1);
+  border: 1px solid rgba(233, 30, 138, 0.3);
+  border-radius: 6px;
+  padding: 6px 14px;
+  font-size: 11px;
+  color: #e91e8a;
+  font-weight: 500;
+}
+
+/* === LOOKING AHEAD === */
+.ahead-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 56px;
+}
+
+.ahead-card {
+  border: 2px solid #e8e4df;
+  border-radius: 8px;
+  padding: 22px 24px;
+  background: #fff;
+}
+
+.ahead-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.ahead-card:first-child .ahead-label { color: #d35400; }
+.ahead-card:last-child .ahead-label { color: #c0392b; }
+
+.ahead-title {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.ahead-desc {
+  font-size: 13px;
+  color: #555;
+  line-height: 1.55;
+  margin-bottom: 12px;
+}
+
+.ahead-code {
+  background: #f5f3f0;
+  border-radius: 6px;
+  padding: 14px 16px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  line-height: 1.6;
+  color: #555;
+}
+
+/* === FOOTER === */
+.footer {
+  text-align: center;
+  font-size: 11.5px;
+  color: #999;
+  padding-top: 20px;
+  border-top: 1px solid #e8e4df;
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="header-label">A Curious Tractor</div>
+<h1>How LLMs Turn Raw Research<br>Into a <span class="highlight">Living Knowledge Base</span></h1>
+<p class="subtitle">Collect sources. Let the LLM organize them. Ask questions. Every answer makes the wiki smarter.</p>
+<hr class="header-rule">
+
+<!-- CORE INSIGHT -->
+<div class="insight-box">
+  <div class="insight-label">Core Insight</div>
+  <div class="insight-text">You never write the wiki. The LLM writes everything. You just steer — and every answer compounds.</div>
+</div>
+
+<!-- MAIN PIPELINE -->
+<div class="section-label">Main Pipeline</div>
+
+<div class="pipeline-row">
+  <div class="step-card red">
+    <div class="step-number">Step 01</div>
+    <div class="step-title"><span class="step-emoji">📥</span> Collect Sources</div>
+    <div class="step-desc">Dump articles, papers, websites, conversations, Notion pages, and images into a raw folder. Use Obsidian Web Clipper for articles.</div>
+    <ul class="step-bullets">
+      <li>Website scrapes (JusticeHub, PICC, etc.)</li>
+      <li>Notion databases and pages</li>
+      <li>Gemini/Claude research conversations</li>
+      <li>Government data (AusTender, ACNC)</li>
+    </ul>
+  </div>
+
+  <div class="step-card blue">
+    <div class="step-number">Step 02</div>
+    <div class="step-title"><span class="step-emoji">🤖</span> LLM Compiles Wiki</div>
+    <div class="step-desc">The LLM reads everything in raw/ and builds a structured wiki of .md files — summaries, concept articles, and links between related ideas across all sources.</div>
+    <ul class="step-bullets">
+      <li>Auto-generated index file</li>
+      <li>38+ articles across 5 domains</li>
+      <li>[[Wikilinks]] between related topics</li>
+      <li>Backlinks for reverse navigation</li>
+    </ul>
+  </div>
+
+  <div class="step-card green">
+    <div class="step-number">Step 03</div>
+    <div class="step-title"><span class="step-emoji">🔍</span> Ask Questions</div>
+    <div class="step-desc">Query the wiki with complex questions. The LLM reads its own index files and finds answers across your entire collection. No complex retrieval system needed.</div>
+    <ul class="step-bullets">
+      <li>~40 articles / ~100K words</li>
+      <li>LLM maintains its own index</li>
+      <li>Multi-step research queries</li>
+      <li>/wiki query "what connects PICC to Third Reality?"</li>
+    </ul>
+  </div>
+</div>
+
+<div class="arrow-row">
+  <div class="arrow-label">Index</div>
+  <div class="arrow-label">Organize</div>
+  <div class="arrow-label">Query · Render · File Back</div>
+</div>
+
+<div class="pipeline-row-2">
+  <div class="step-card purple">
+    <div class="step-number">Step 04</div>
+    <div class="step-title"><span class="step-emoji">📊</span> Render Outputs</div>
+    <div class="step-desc">Outputs go beyond text — the LLM renders markdown files, Marp slide decks, data visualizations, and Tractorpedia pages. All viewable in Obsidian or browser.</div>
+    <ul class="step-bullets">
+      <li>Tractorpedia (Wikipedia-style viewer)</li>
+      <li>Markdown articles for Obsidian</li>
+      <li>Grant narratives and reports</li>
+      <li>R&D tax evidence packages</li>
+    </ul>
+  </div>
+
+  <div class="step-card orange">
+    <div class="step-number">Step 05</div>
+    <div class="step-title"><span class="step-emoji">🔄</span> File Back to Wiki</div>
+    <div class="step-desc">Every output gets filed back into the wiki. Every question you ask makes the knowledge base smarter. The loop compounds — your research builds on itself.</div>
+    <ul class="step-bullets">
+      <li>Outputs go back to wiki/</li>
+      <li>Knowledge compounds over time</li>
+      <li>Grant work enriches project articles</li>
+      <li>The loop never stops</li>
+    </ul>
+  </div>
+</div>
+
+<!-- FILED BACK CALLOUT -->
+<div class="filed-back">
+  <div class="filed-back-icon">🔁</div>
+  <div>
+    <div class="filed-back-title">Filed Back — Knowledge Compounds</div>
+    <div class="filed-back-text">This is the real insight. The wiki grows from both sides: what you save AND what you ask. Every interaction makes the system smarter. This is a second brain that builds itself.</div>
+  </div>
+</div>
+
+<!-- SUPPORT LAYER -->
+<div class="section-label">Support Layer</div>
+
+<div class="support-grid">
+  <div class="support-card">
+    <div class="support-icon">📓</div>
+    <div class="support-title">Obsidian (Backend)</div>
+    <div class="support-desc">View raw data, the compiled wiki, and visualizations all in one place. The human reads here. The LLM writes here. Graph view shows all connections.</div>
+  </div>
+  <div class="support-card">
+    <div class="support-icon">🏛️</div>
+    <div class="support-title">Tractorpedia (Frontend)</div>
+    <div class="support-desc">Wikipedia-style visual browser for the wiki. Navigate articles, search, explore backlinks. Shareable — anyone can browse the knowledge base.</div>
+  </div>
+  <div class="support-card">
+    <div class="support-icon">🔧</div>
+    <div class="support-title">Lint + Heal</div>
+    <div class="support-desc">The LLM runs "health checks" — finds bad data, fills gaps via web search, suggests new connections and articles. The wiki cleans and improves itself.</div>
+  </div>
+</div>
+
+<!-- ARCHITECTURE DIAGRAM (DARK) -->
+<div class="arch-section">
+  <div class="arch-title">Tractorpedia Architecture</div>
+  <div class="arch-subtitle">ACT's Knowledge Compilation Pattern</div>
+
+  <div class="arch-layer-label">Architecture</div>
+  <div class="arch-row">
+    <div class="arch-node raw">
+      <div class="arch-node-title">📄 Raw Sources</div>
+      <div class="arch-node-desc">immutable · read-only</div>
+    </div>
+    <div class="arch-node wiki">
+      <div class="arch-node-title">📚 The Wiki</div>
+      <div class="arch-node-desc">LLM-owned markdown</div>
+    </div>
+    <div class="arch-node schema">
+      <div class="arch-node-title">⚙️ Schema</div>
+      <div class="arch-node-desc">CLAUDE.md / SKILL.md</div>
+    </div>
+  </div>
+
+  <div class="arch-arrows">reads → &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ← guides</div>
+
+  <div class="arch-layer-label">Operations</div>
+  <div class="arch-row">
+    <div class="arch-node ingest">
+      <div class="arch-node-title">📥 Ingest</div>
+      <div class="arch-node-desc">source → wiki updates</div>
+    </div>
+    <div class="arch-node query">
+      <div class="arch-node-title">💬 Query</div>
+      <div class="arch-node-desc">question → synthesized answer</div>
+    </div>
+    <div class="arch-node lint">
+      <div class="arch-node-title">🔬 Lint</div>
+      <div class="arch-node-desc">health-check · consistency</div>
+    </div>
+  </div>
+
+  <div class="arch-sub-row">
+    <div class="arch-sub-node">read src</div>
+    <div class="arch-sub-node">write summary</div>
+    <div class="arch-sub-node">search idx</div>
+    <div class="arch-sub-node">synthesize</div>
+    <div class="arch-sub-node">find issues</div>
+    <div class="arch-sub-node">fix & patch</div>
+  </div>
+  <div class="arch-sub-row" style="margin-top: 6px;">
+    <div class="arch-sub-node">update idx</div>
+    <div class="arch-sub-node">cross-link</div>
+    <div class="arch-sub-node">→ file back to wiki</div>
+    <div class="arch-sub-node">suggest sources</div>
+  </div>
+
+  <div class="arch-layer-label">Actors</div>
+  <div class="arch-row">
+    <div class="arch-node human">
+      <div class="arch-node-title">👤 Human</div>
+      <div class="arch-node-desc">curate · question · think</div>
+    </div>
+    <div class="arch-node llm">
+      <div class="arch-node-title">🤖 LLM Agent</div>
+      <div class="arch-node-desc">summarize · cross-ref · maintain</div>
+    </div>
+  </div>
+</div>
+
+<!-- ACT ECOSYSTEM PLATFORMS -->
+<div class="section-label">How This Maps to the ACT Ecosystem</div>
+
+<div class="act-section">
+  <div class="platform-grid">
+    <div class="platform-card ecosystem">
+      <div class="platform-name">CivicGraph</div>
+      <div class="platform-role">Systemic Data Layer</div>
+      <div class="platform-desc">587K entities, $74B in contracts, 1.5M relationships. The verified data that makes government spending visible.</div>
+      <div class="platform-stat">587,390 entities · 21 data sources</div>
+    </div>
+    <div class="platform-card narrative">
+      <div class="platform-name">Empathy Ledger</div>
+      <div class="platform-role">Narrative Sovereignty Layer</div>
+      <div class="platform-desc">Sovereign storytelling — communities own their narratives. Photos, stories, and media linked to every project.</div>
+      <div class="platform-stat">Stories · Storytellers · Atlas · Galleries</div>
+    </div>
+    <div class="platform-card evidence">
+      <div class="platform-name">JusticeHub</div>
+      <div class="platform-role">Evidence Layer</div>
+      <div class="platform-desc">1,000+ verified community alternatives to detention. 97x cheaper. Proving what works with data.</div>
+      <div class="platform-stat">1,000 models · $94.6B tracked · 98K orgs</div>
+    </div>
+    <div class="platform-card knowledge">
+      <div class="platform-name">Tractorpedia</div>
+      <div class="platform-role">Knowledge Compilation Layer</div>
+      <div class="platform-desc">The living wiki that ties it all together. 40+ articles compiling knowledge across every platform, project, and community.</div>
+      <div class="platform-stat">40 articles · 5 domains · wiki/ directory</div>
+    </div>
+  </div>
+</div>
+
+<!-- THE THIRD REALITY -->
+<div class="insight-box" style="border-left-color: #8e44ad;">
+  <div class="insight-label" style="color: #8e44ad;">The Third Reality</div>
+  <div class="insight-text">Systemic Data (CivicGraph) + Narrative Sovereignty (Empathy Ledger) = an undeniable shared truth that changes minds and moves capital to community.</div>
+</div>
+
+<!-- LOOKING AHEAD -->
+<div class="section-label">Looking Ahead</div>
+
+<div class="ahead-grid">
+  <div class="ahead-card">
+    <div class="ahead-label">Sovereign AI</div>
+    <div class="ahead-title">Local Models on Community Hardware</div>
+    <div class="ahead-desc">PICC's 20-year history compiled into a sovereign knowledge base. Gemma 4 running on local hardware. Data never leaves the island. Mukurtu CMS + TK Labels enforce cultural protocols.</div>
+  </div>
+  <div class="ahead-card">
+    <div class="ahead-label" style="color: #c0392b;">Starter Prompt — Paste Into Any Agent</div>
+    <div class="ahead-title">Try This Workflow Yourself</div>
+    <div class="ahead-desc">Point at any folder of research:</div>
+    <div class="ahead-code">
+# Read everything in /raw and organize<br>
+# into a wiki of .md files in /wiki.<br><br>
+Create an index.md with summaries<br>
+and links between related concepts.<br><br>
+When I ask questions, use the wiki<br>
+to answer. File responses back so<br>
+it grows with every query.<br><br>
+Run a health check: find gaps,<br>
+fix errors, suggest new links.
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  Architecture based on @karpathy's workflow · Applied to the ACT ecosystem · Tractorpedia · April 2026
+</div>
+
+</div>
+</body>
+</html>

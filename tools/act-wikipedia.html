@@ -1,0 +1,3834 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tractorpedia</title>
+<style>
+/* === Wikipedia Vector Skin CSS === */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Linux Libertine', 'Georgia', 'Times', 'Source Serif Pro', serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #202122;
+  background: #f6f6f6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+a { color: #0645ad; text-decoration: none; }
+a:hover { text-decoration: underline; }
+a:visited { color: #0b0080; }
+a.new, a.redlink { color: #d33; }
+a.new:visited { color: #a55858; }
+
+/* Page base gradients */
+#mw-page-base {
+  height: 5em;
+  background: linear-gradient(to bottom, #ffffff 50%, #f6f6f6 100%);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 0;
+}
+
+#mw-head-base {
+  margin-top: 5em;
+  height: 2.5em;
+  background: #f6f6f6;
+  border-bottom: 1px solid #a7d7f9;
+  position: fixed;
+  top: 0;
+  left: 11.5em;
+  right: 0;
+  z-index: 1;
+}
+
+/* Left sidebar panel */
+#mw-panel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 11em;
+  padding-top: 1em;
+  z-index: 10;
+  font-size: 12px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 100vh;
+}
+
+#mw-panel #p-logo {
+  text-align: center;
+  padding: 0.5em 0.5em 0.75em;
+  margin-bottom: 0;
+}
+
+#mw-panel #p-logo .mw-wiki-logo-text {
+  font-family: 'Linux Libertine', 'Georgia', 'Times', serif;
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 0.3px;
+  color: #000;
+  line-height: 1.2;
+  display: block;
+}
+
+#mw-panel #p-logo .mw-wiki-logo-tagline {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 9.5px;
+  color: #54595d;
+  display: block;
+  margin-top: 2px;
+  font-style: italic;
+}
+
+/* Sidebar portal blocks */
+.portal {
+  margin: 0 0.6em 0 0.7em;
+  padding: 0;
+}
+
+.portal h3 {
+  font-size: 12px;
+  font-weight: 600;
+  color: #54595d;
+  padding: 0.25em 0 0.25em 0.25em;
+  margin: 0.5em 0 0;
+  border-top: 1px solid #c8ccd1;
+  cursor: default;
+}
+
+.portal .body {
+  padding-left: 0.25em;
+  margin: 0;
+}
+
+.portal .body ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.portal .body ul li {
+  padding: 0.2em 0.25em;
+  line-height: 1.3;
+  font-size: 11.5px;
+  word-wrap: break-word;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.portal .body ul li a {
+  color: #0645ad;
+  font-size: 11.5px;
+}
+
+.portal .body ul li a {
+  cursor: pointer;
+  transition: background 0.1s;
+}
+
+.portal .body ul li a:hover {
+  text-decoration: underline;
+  background: #eaecf0;
+}
+
+/* Head (top bar with tabs) */
+#mw-head {
+  position: fixed;
+  top: 0;
+  left: 11.5em;
+  right: 0;
+  height: 7.5em;
+  z-index: 100;
+  pointer-events: none;
+}
+#mw-head > * {
+  pointer-events: auto;
+}
+
+/* Personal tools (top-right) */
+#p-personal {
+  position: absolute;
+  top: 0;
+  right: 0.75em;
+  z-index: 100;
+  font-size: 12px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+#p-personal ul {
+  list-style: none;
+  display: flex;
+  gap: 0;
+}
+
+#p-personal ul li {
+  padding: 0 0.5em;
+  line-height: 2.5em;
+  color: #54595d;
+}
+
+/* Search */
+#p-search {
+  position: absolute;
+  top: 0.5em;
+  right: 1em;
+  z-index: 101;
+}
+
+#p-search form {
+  display: flex;
+  align-items: center;
+}
+
+#searchInput {
+  width: 220px;
+  padding: 4px 8px;
+  border: 1px solid #a2a9b1;
+  border-radius: 2px;
+  font-size: 13px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  outline: none;
+  background: #fff;
+}
+
+#searchInput:focus {
+  border-color: #36c;
+  box-shadow: inset 0 0 0 1px #36c;
+}
+
+#searchButton {
+  padding: 4px 10px;
+  margin-left: 2px;
+  border: 1px solid #a2a9b1;
+  border-radius: 2px;
+  background: linear-gradient(to bottom, #fff 0%, #e6e6e6 100%);
+  font-size: 13px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  cursor: pointer;
+  color: #202122;
+}
+
+#searchButton:hover {
+  background: linear-gradient(to bottom, #fff 0%, #ddd 100%);
+  border-color: #888;
+}
+
+/* Namespace tabs (Article / Talk) */
+#left-navigation {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+#p-namespaces {
+  float: left;
+  margin: 0;
+  padding: 0;
+  height: 2.5em;
+}
+
+#p-namespaces ul {
+  list-style: none;
+  display: flex;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#p-namespaces ul li {
+  display: flex;
+  margin: 0 1px 0 0;
+}
+
+#p-namespaces ul li a {
+  display: flex;
+  align-items: center;
+  padding: 0 0.8em;
+  font-size: 12.8px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: #0645ad;
+  text-decoration: none;
+  background: #e8e8e8;
+  border: 1px solid #a7d7f9;
+  border-bottom: none;
+  border-radius: 2px 2px 0 0;
+  height: 2.5em;
+  line-height: 2.5em;
+}
+
+#p-namespaces ul li.selected a {
+  background: #fff;
+  border-bottom: 1px solid #fff;
+  color: #202122;
+  font-weight: normal;
+  margin-bottom: -1px;
+  padding-bottom: 1px;
+}
+
+/* Views tabs (Read / View source) */
+#right-navigation {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+#p-views {
+  float: right;
+  margin: 0;
+  padding: 0;
+  height: 2.5em;
+}
+
+#p-views ul {
+  list-style: none;
+  display: flex;
+  height: 100%;
+  margin: 0;
+  padding: 0 0.75em 0 0;
+}
+
+#p-views ul li {
+  display: flex;
+  margin: 0 0 0 1px;
+}
+
+#p-views ul li a {
+  display: flex;
+  align-items: center;
+  padding: 0 0.8em;
+  font-size: 12px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: #0645ad;
+  text-decoration: none;
+  height: 2.5em;
+  line-height: 2.5em;
+}
+
+#p-views ul li.selected a {
+  color: #202122;
+}
+
+#p-views ul li a:hover {
+  text-decoration: underline;
+}
+
+/* Content area */
+#content {
+  margin-left: 11.5em;
+  margin-top: 7.5em;
+  padding: 1.25em 1.5em 1.5em 1.5em;
+  background: #fff;
+  border: 1px solid #a7d7f9;
+  border-right: none;
+  border-bottom: none;
+  min-height: calc(100vh - 7.5em);
+  position: relative;
+  z-index: 0;
+}
+
+/* Sitesub (article subtitle) */
+#siteSub {
+  font-size: 12px;
+  color: #54595d;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  display: block;
+  margin-bottom: 0.25em;
+}
+
+/* Category breadcrumb */
+.mw-category-breadcrumb {
+  font-size: 12px;
+  color: #72777d;
+  font-style: italic;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  margin-bottom: 0.5em;
+}
+
+/* First heading (article title) */
+#firstHeading {
+  font-family: 'Linux Libertine', 'Georgia', 'Times', serif;
+  font-size: 2em;
+  font-weight: normal;
+  line-height: 1.2;
+  color: #000;
+  margin: 0 0 0.5em 0;
+  padding: 0 0 0.1em 0;
+  border-bottom: 1px solid #a2a9b1;
+  overflow: visible;
+}
+
+/* Body content */
+#bodyContent {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+#bodyContent p {
+  margin: 0.5em 0;
+}
+
+#bodyContent > .mw-parser-output > p:first-child {
+  margin-top: 0.4em;
+}
+
+/* Block quote / hatnote */
+.hatnote, .dablink {
+  font-style: italic;
+  padding-left: 1.6em;
+  margin: 0.5em 0;
+  color: #54595d;
+  font-size: 13px;
+}
+
+/* Section headings */
+.mw-headline-wrapper {
+  margin: 1em 0 0.25em 0;
+  padding: 0 0 0.3em 0;
+  border-bottom: 1px solid #a2a9b1;
+}
+
+h2 .mw-headline {
+  font-family: 'Linux Libertine', 'Georgia', 'Times', serif;
+  font-size: 1.5em;
+  font-weight: normal;
+  line-height: 1.3;
+}
+
+h3 .mw-headline {
+  font-family: 'Linux Libertine', 'Georgia', 'Times', serif;
+  font-size: 17px;
+  font-weight: bold;
+  line-height: 1.3;
+}
+
+h4 .mw-headline {
+  font-family: 'Linux Libertine', 'Georgia', 'Times', serif;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 1.3;
+}
+
+h2, h3, h4 {
+  overflow: hidden;
+}
+
+.mw-editsection {
+  font-size: 12px;
+  font-weight: normal;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  margin-left: 0.5em;
+  vertical-align: baseline;
+}
+
+.mw-editsection a {
+  color: #0645ad;
+}
+
+.mw-editsection-bracket {
+  color: #54595d;
+}
+
+/* Table of Contents */
+.toc {
+  display: table;
+  padding: 7px;
+  border: 1px solid #a2a9b1;
+  background: #f8f9fa;
+  font-size: 13px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  margin: 0.5em 0 1em 0;
+}
+
+.toc .toctitle {
+  font-weight: bold;
+  text-align: center;
+  font-size: 13px;
+  padding-bottom: 4px;
+}
+
+.toc .toctoggle {
+  font-size: 12px;
+  font-weight: normal;
+}
+
+.toc ul {
+  list-style: none;
+  margin: 0.3em 0 0 0;
+  padding: 0;
+}
+
+.toc ul ul {
+  margin: 0 0 0 1.5em;
+}
+
+.toc li {
+  margin: 0.15em 0;
+  line-height: 1.4;
+}
+
+.tocnumber {
+  color: #202122;
+}
+
+.toctext {
+  color: #0645ad;
+}
+
+/* Wikipedia-style tables */
+table.wikitable {
+  margin: 1em 0;
+  border-collapse: collapse;
+  border: 1px solid #a2a9b1;
+  font-size: 14px;
+}
+
+table.wikitable th {
+  background: #eaecf0;
+  border: 1px solid #a2a9b1;
+  padding: 0.2em 0.4em;
+  font-weight: bold;
+  text-align: left;
+}
+
+table.wikitable td {
+  border: 1px solid #a2a9b1;
+  padding: 0.2em 0.4em;
+  vertical-align: top;
+}
+
+table.wikitable tr:nth-child(even) {
+  background: #f8f9fa;
+}
+
+/* Wikilinks */
+a.wikilink {
+  color: #0645ad;
+  text-decoration: none;
+}
+a.wikilink:hover {
+  text-decoration: underline;
+}
+a.wikilink:visited {
+  color: #0b0080;
+}
+
+/* Lists */
+#bodyContent ul {
+  margin: 0.3em 0 0.3em 1.6em;
+}
+
+#bodyContent ol {
+  margin: 0.3em 0 0.3em 2em;
+}
+
+#bodyContent li {
+  margin-bottom: 0.15em;
+}
+
+/* Blockquote */
+#bodyContent blockquote {
+  border-left: 3px solid #c8ccd1;
+  padding: 0.25em 0 0.25em 1em;
+  margin: 0.5em 0;
+  color: #54595d;
+}
+
+/* Code */
+#bodyContent code {
+  font-family: 'Menlo', 'Consolas', 'Liberation Mono', monospace;
+  font-size: 13px;
+  background: #f8f9fa;
+  padding: 1px 4px;
+  border: 1px solid #eaecf0;
+  border-radius: 2px;
+}
+
+#bodyContent pre {
+  font-family: 'Menlo', 'Consolas', 'Liberation Mono', monospace;
+  font-size: 13px;
+  background: #f8f9fa;
+  border: 1px solid #eaecf0;
+  padding: 1em;
+  overflow-x: auto;
+  margin: 0.5em 0;
+  white-space: pre-wrap;
+}
+
+/* Bold */
+#bodyContent strong, #bodyContent b {
+  font-weight: bold;
+}
+
+/* Categories footer */
+.catlinks {
+  border: 1px solid #a2a9b1;
+  background: #f8f9fa;
+  padding: 5px 10px;
+  margin-top: 1em;
+  font-size: 12px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  clear: both;
+}
+
+.catlinks a {
+  color: #0645ad;
+}
+
+/* Backlinks */
+.mw-backlinks {
+  margin-top: 1.5em;
+  padding-top: 0.5em;
+  border-top: 1px solid #eaecf0;
+}
+
+.mw-backlinks h2 {
+  font-size: 18px;
+  font-weight: normal;
+  border-bottom: 1px solid #a2a9b1;
+  margin-bottom: 0.4em;
+}
+
+/* Search results */
+.mw-search-results {
+  list-style: none;
+  padding: 0;
+  margin: 1em 0;
+}
+
+.mw-search-result {
+  margin-bottom: 1.25em;
+}
+
+.mw-search-result-heading {
+  font-size: 16px;
+  margin-bottom: 0.1em;
+}
+
+.mw-search-result-heading a {
+  font-weight: bold;
+  color: #0645ad;
+}
+
+.searchresult {
+  font-size: 13px;
+  color: #202122;
+  line-height: 1.5;
+  max-width: 48em;
+}
+
+.searchresult .searchmatch {
+  font-weight: bold;
+}
+
+.mw-search-result-data {
+  color: #72777d;
+  font-size: 12px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Main page styles */
+.mp-welcome {
+  text-align: center;
+  border-bottom: 1px solid #a2a9b1;
+  padding-bottom: 0.5em;
+  margin-bottom: 1em;
+}
+
+.mp-welcome h1 {
+  font-family: 'Linux Libertine', 'Georgia', 'Times', serif;
+  font-size: 26px;
+  font-weight: normal;
+  margin: 0 0 0.25em 0;
+}
+
+.mp-welcome p {
+  font-size: 13px;
+  color: #54595d;
+}
+
+.mp-banner {
+  background: #f8f9fa;
+  border: 1px solid #a2a9b1;
+  padding: 1em 1.25em;
+  margin: 1em 0;
+}
+
+.mp-banner h2 {
+  font-size: 16px;
+  font-weight: normal;
+  font-family: 'Linux Libertine', 'Georgia', 'Times', serif;
+  margin: 0 0 0.5em 0;
+  border-bottom: none;
+}
+
+.mp-section {
+  margin-bottom: 1.5em;
+}
+
+.mp-section h2 {
+  font-family: 'Linux Libertine', 'Georgia', 'Times', serif;
+  font-size: 17px;
+  font-weight: normal;
+  background: #cef2e0;
+  border: 1px solid #a3bfb1;
+  padding: 0.2em 0.4em;
+  margin: 0 0 0.5em 0;
+  text-align: center;
+}
+
+.mp-section.concepts h2 { background: #cedff2; border-color: #a3b1bf; }
+.mp-section.communities h2 { background: #f2e6ce; border-color: #bfb1a3; }
+.mp-section.research h2 { background: #f2cedb; border-color: #bfa3b1; }
+.mp-section.technical h2 { background: #e6cef2; border-color: #b1a3bf; }
+
+.mp-section ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.mp-section li {
+  padding: 0.15em 0;
+  margin: 0;
+}
+
+.mp-section li::before {
+  content: none;
+}
+
+.mp-columns {
+  display: flex;
+  gap: 1em;
+  flex-wrap: wrap;
+}
+
+.mp-columns > .mp-section {
+  flex: 1;
+  min-width: 200px;
+}
+
+.mp-stats {
+  font-size: 12px;
+  color: #54595d;
+  text-align: center;
+  margin-top: 1em;
+  padding-top: 0.5em;
+  border-top: 1px solid #eaecf0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Footer */
+#footer {
+  margin-left: 11.5em;
+  padding: 0.75em 1.5em;
+  font-size: 12px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: #202122;
+}
+
+/* Search autocomplete dropdown */
+#search-suggestions {
+  position: absolute;
+  top: 2em;
+  right: 0;
+  width: 220px;
+  background: #fff;
+  border: 1px solid #a2a9b1;
+  border-top: none;
+  z-index: 200;
+  display: none;
+  max-height: 300px;
+  overflow-y: auto;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+#search-suggestions .suggestion {
+  padding: 4px 8px;
+  cursor: pointer;
+  font-size: 13px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+#search-suggestions .suggestion:hover,
+#search-suggestions .suggestion.active {
+  background: #eaf3ff;
+}
+
+#search-suggestions .suggestion .sg-title {
+  color: #0645ad;
+  font-weight: bold;
+}
+
+#search-suggestions .suggestion .sg-domain {
+  color: #72777d;
+  font-size: 11px;
+  margin-left: 0.5em;
+}
+
+/* Infobox */
+.infobox {
+  float: right;
+  clear: right;
+  margin: 0 0 1em 1.5em;
+  width: 280px;
+  border: 1px solid #a2a9b1;
+  border-spacing: 3px;
+  background: #f8f9fa;
+  font-size: 13px;
+  line-height: 1.5;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+.infobox-title {
+  text-align: center;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 8px 10px;
+  background: #ddd;
+  border-bottom: 1px solid #a2a9b1;
+}
+.infobox-image {
+  text-align: center;
+  padding: 8px;
+  background: #eee;
+}
+.infobox-image img {
+  max-width: 100%;
+  height: auto;
+}
+.infobox-image .placeholder {
+  width: 100%;
+  height: 160px;
+  background: #d5d5d5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #888;
+  font-size: 12px;
+  border-radius: 2px;
+}
+.infobox-row {
+  display: flex;
+  border-bottom: 1px solid #e8e8e8;
+}
+.infobox-label {
+  width: 90px;
+  flex-shrink: 0;
+  padding: 5px 8px;
+  font-weight: 600;
+  background: #eaecf0;
+  font-size: 12px;
+  color: #444;
+}
+.infobox-value {
+  padding: 5px 8px;
+  flex: 1;
+  font-size: 12px;
+}
+.infobox-section {
+  padding: 5px 8px;
+  font-weight: 600;
+  font-size: 12px;
+  background: #e0e0e0;
+  text-align: center;
+  border-bottom: 1px solid #a2a9b1;
+}
+</style>
+</head>
+<body>
+
+<!-- Page background layers -->
+<div id="mw-page-base"></div>
+<div id="mw-head-base"></div>
+
+<!-- Left sidebar -->
+<div id="mw-panel">
+  <div id="p-logo">
+    <a href="#" onclick="navigateTo(''); return false;">
+      <span class="mw-wiki-logo-text">TRACTORPEDIA</span>
+      <span class="mw-wiki-logo-tagline">The ACT Ecosystem Encyclopedia</span>
+    </a>
+  </div>
+
+  <div class="portal" id="p-navigation">
+    <h3>Navigation</h3>
+    <div class="body">
+      <ul>
+        <li><a href="#" onclick="navigateTo(''); return false;">Main page</a></li>
+        <li><a href="#" onclick="randomArticle(); return false;">Random article</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id="p-ecosystem">
+    <h3>Ecosystem Projects</h3>
+    <div class="body">
+      <ul>
+        <li><a href="#" onclick="navigateTo('justicehub'); return false;">JusticeHub</a></li>
+        <li><a href="#" onclick="navigateTo('goods-on-country'); return false;">Goods on Country</a></li>
+        <li><a href="#" onclick="navigateTo('empathy-ledger'); return false;">Empathy Ledger</a></li>
+        <li><a href="#" onclick="navigateTo('the-harvest'); return false;">The Harvest</a></li>
+        <li><a href="#" onclick="navigateTo('act-farm'); return false;">ACT Farm</a></li>
+        <li><a href="#" onclick="navigateTo('civicgraph'); return false;">CivicGraph</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id="p-studio">
+    <h3>Studio Projects</h3>
+    <div class="body">
+      <ul>
+        <li><a href="#" onclick="navigateTo('picc'); return false;">PICC</a></li>
+        <li><a href="#" onclick="navigateTo('caring-for-those-who-care'); return false;">Caring for Those Who Care</a></li>
+        <li><a href="#" onclick="navigateTo('regional-arts-fellowship'); return false;">Regional Arts Fellowship</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id="p-art">
+    <h3>Art Portfolio</h3>
+    <div class="body">
+      <ul>
+        <li><a href="#" onclick="navigateTo('uncle-allan-palm-island-art'); return false;">Uncle Allan Art</a></li>
+        <li><a href="#" onclick="navigateTo('contained'); return false;">CONTAINED</a></li>
+        <li><a href="#" onclick="navigateTo('the-confessional'); return false;">The Confessional</a></li>
+        <li><a href="#" onclick="navigateTo('gold-phone'); return false;">Gold.Phone</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id="p-satellite">
+    <h3>Satellite Projects</h3>
+    <div class="body">
+      <ul>
+        <li><a href="#" onclick="navigateTo('oonchiumpa'); return false;">Oonchiumpa</a></li>
+        <li><a href="#" onclick="navigateTo('bg-fit'); return false;">BG Fit</a></li>
+        <li><a href="#" onclick="navigateTo('contained'); return false;">CONTAINED</a></li>
+        <li><a href="#" onclick="navigateTo('diagrama'); return false;">Diagrama</a></li>
+        <li><a href="#" onclick="navigateTo('mounty-yarns'); return false;">Mounty Yarns</a></li>
+        <li><a href="#" onclick="navigateTo('dad-lab-25'); return false;">Dad.Lab.25</a></li>
+        <li><a href="#" onclick="navigateTo('smart-connect'); return false;">SMART Connect</a></li>
+        <li><a href="#" onclick="navigateTo('junes-patch'); return false;">June's Patch</a></li>
+        <li><a href="#" onclick="navigateTo('fishers-oysters'); return false;">Fishers Oysters</a></li>
+        <li><a href="#" onclick="navigateTo('tomnet'); return false;">TOMNET</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id="p-concepts">
+    <h3>Concepts</h3>
+    <div class="body">
+      <ul>
+        <li><a href="#" onclick="navigateTo('third-reality'); return false;">The Third Reality</a></li>
+        <li><a href="#" onclick="navigateTo('lcaa-method'); return false;">LCAA Method</a></li>
+        <li><a href="#" onclick="navigateTo('civic-world-model'); return false;">Civic World Model</a></li>
+        <li><a href="#" onclick="navigateTo('indigenous-data-sovereignty'); return false;">Indigenous Data Sovereignty</a></li>
+        <li><a href="#" onclick="navigateTo('llm-knowledge-base'); return false;">LLM Knowledge Base</a></li>
+        <li><a href="#" onclick="navigateTo('designing-for-obsolescence'); return false;">Designing for Obsolescence</a></li>
+        <li><a href="#" onclick="navigateTo('how-tractorpedia-works'); return false;">How Tractorpedia Works</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id="p-communities">
+    <h3>Communities</h3>
+    <div class="body">
+      <ul>
+        <li><a href="#" onclick="navigateTo('palm-island'); return false;">Palm Island</a></li>
+        <li><a href="#" onclick="navigateTo('quandamooka-justice-strategy'); return false;">Quandamooka</a></li>
+        <li><a href="#" onclick="navigateTo('oonchiumpa'); return false;">Mparntwe (Alice Springs)</a></li>
+        <li><a href="#" onclick="navigateTo('bg-fit'); return false;">Mount Isa</a></li>
+        <li><a href="#" onclick="navigateTo('the-harvest'); return false;">Witta (Sunshine Coast)</a></li>
+        <li><a href="#" onclick="navigateTo('goods-on-country'); return false;">Tennant Creek</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="portal" id="p-research">
+    <h3>Research</h3>
+    <div class="body">
+      <ul>
+        <li><a href="#" onclick="navigateTo('acco-sector-analysis'); return false;">ACCO Sector Analysis</a></li>
+        <li><a href="#" onclick="navigateTo('global-precedents'); return false;">Global Precedents</a></li>
+        <li><a href="#" onclick="navigateTo('local-ai-architecture'); return false;">Local AI Architecture</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Top head bar -->
+<div id="mw-head">
+  <div id="p-search">
+    <form onsubmit="doSearch(); return false;">
+      <input type="text" id="searchInput" placeholder="Search Tractorpedia" autocomplete="off">
+      <button type="submit" id="searchButton">Search</button>
+    </form>
+    <div id="search-suggestions"></div>
+  </div>
+
+  <div id="left-navigation">
+    <div id="p-namespaces">
+      <ul>
+        <li class="selected" id="tab-home"><a href="#" onclick="showMainPage(); return false;">Home</a></li>
+        <li id="tab-about"><a href="#" onclick="navigateTo('how-tractorpedia-works'); return false;">About</a></li>
+        <li><a href="#" onclick="showArtPortfolio(); return false;">Art Portfolio</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div id="right-navigation">
+    <div id="p-views">
+      <ul>
+        <li class="selected"><a href="#">Read</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Main content area -->
+<div id="content">
+  <div id="siteSub">From Tractorpedia, the ACT ecosystem encyclopedia</div>
+  <div id="mw-category-breadcrumb" class="mw-category-breadcrumb"></div>
+  <h1 id="firstHeading"></h1>
+  <div id="bodyContent">
+    <div class="mw-parser-output" id="mw-content-text"></div>
+  </div>
+</div>
+
+<div id="footer">
+  <ul style="list-style:none; display:flex; gap:1em; flex-wrap:wrap; color:#72777d;">
+    <li>Content is compiled by LLM from raw sources</li>
+    <li>Powered by the <a href="#" onclick="navigateTo('llm-knowledge-base'); return false;">LLM Knowledge Base</a> pattern</li>
+    <li>Last compiled: 2026-04-06</li>
+  </ul>
+</div>
+
+<script>
+// ============================================================
+// EMPATHY LEDGER API CONFIG
+// ============================================================
+// Empathy Ledger API Config
+const EL_CONFIG = {
+  supabaseUrl: 'https://yvnuayzslukamizrlhwb.supabase.co',
+  supabaseAnonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl2bnVheXpzbHVrYW1penJsaHdiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTYyNDQ4NTAsImV4cCI6MjA3MTgyMDg1MH0.UV8JOXSwANMl72lRjw-9d4CKniHSlDk9hHZpKHYN6Bs',
+  // Map wiki project slugs to EL organization slugs and IDs
+  projectOrgMap: {
+    'picc': { orgId: '084f851c-72e0-41fb-b5ba-f3088f44862d', orgSlug: 'palm-island-community-company', name: 'PICC', count: 2611 },
+    'justicehub': { orgId: '0e878fa2-0b44-49b7-86d7-ecf169345582', orgSlug: 'justicehub', name: 'JusticeHub', count: 301 },
+    'civicgraph': { orgId: 'db0de7bd-eb10-446b-99e9-0f3b7c199b8a', orgSlug: 'a-curious-tractor', name: 'ACT', count: 1036 },
+    'empathy-ledger': { orgId: 'db0de7bd-eb10-446b-99e9-0f3b7c199b8a', orgSlug: 'a-curious-tractor', name: 'ACT', count: 1036 },
+    'oonchiumpa': { orgId: 'c53077e1-98de-4216-9149-6268891ff62e', orgSlug: 'oonchiumpa', name: 'Oonchiumpa', count: 276 },
+    'contained': { orgId: '0e878fa2-0b44-49b7-86d7-ecf169345582', orgSlug: 'justicehub', name: 'JusticeHub', count: 301 },
+    'bg-fit': { orgId: 'cb749bd5-1658-4fb1-a1f1-0bb173a8e8f4', orgSlug: 'bg-fit', name: 'BG Fit', count: 0 },
+    'goods-on-country': { orgId: 'db0de7bd-eb10-446b-99e9-0f3b7c199b8a', orgSlug: 'a-curious-tractor', name: 'ACT', count: 1036 },
+    'the-harvest': { orgId: 'db0de7bd-eb10-446b-99e9-0f3b7c199b8a', orgSlug: 'a-curious-tractor', name: 'ACT', count: 1036 },
+    'mounty-yarns': { orgId: 'e08b256c-0adf-41ce-b641-e373024c3927', orgSlug: 'mounty-yarns', name: 'Mounty Yarns', count: 0 },
+    'gold-phone': { orgId: 'db0de7bd-eb10-446b-99e9-0f3b7c199b8a', orgSlug: 'a-curious-tractor', name: 'ACT', count: 1036 },
+    'the-confessional': { orgId: 'db0de7bd-eb10-446b-99e9-0f3b7c199b8a', orgSlug: 'a-curious-tractor', name: 'ACT', count: 1036 },
+    'uncle-allan-palm-island-art': { orgId: '084f851c-72e0-41fb-b5ba-f3088f44862d', orgSlug: 'palm-island-community-company', name: 'PICC', count: 2611 },
+    'palm-island': { orgId: '084f851c-72e0-41fb-b5ba-f3088f44862d', orgSlug: 'palm-island-community-company', name: 'PICC', count: 2611 },
+    'diagrama': { orgId: 'fbe80fa6-8f25-413b-b1b5-43e132341732', orgSlug: 'diagrama', name: 'Diagrama', count: 20 },
+    'smart-connect': { orgId: '57046635-d996-43bc-b290-da886fa049c7', orgSlug: 'smart-recovery', name: 'SMART', count: 425 },
+    'smart-recovery-gp-kits': { orgId: '57046635-d996-43bc-b290-da886fa049c7', orgSlug: 'smart-recovery', name: 'SMART', count: 425 },
+    'smart-hcp-gp-uplift': { orgId: '57046635-d996-43bc-b290-da886fa049c7', orgSlug: 'smart-recovery', name: 'SMART', count: 425 },
+    'fishers-oysters': { orgId: 'd44703a8-78c7-47d9-bac9-b4714bb183c0', orgSlug: 'fishers-oysters', name: 'Fishers Oysters', count: 0 },
+    'act-farm': { orgId: 'db0de7bd-eb10-446b-99e9-0f3b7c199b8a', orgSlug: 'a-curious-tractor', name: 'ACT', count: 1036 },
+    'regional-arts-fellowship': { orgId: 'db0de7bd-eb10-446b-99e9-0f3b7c199b8a', orgSlug: 'a-curious-tractor', name: 'ACT', count: 1036 },
+    'caring-for-those-who-care': { orgId: 'db0de7bd-eb10-446b-99e9-0f3b7c199b8a', orgSlug: 'a-curious-tractor', name: 'ACT', count: 1036 },
+    'dad-lab-25': { orgId: 'db0de7bd-eb10-446b-99e9-0f3b7c199b8a', orgSlug: 'a-curious-tractor', name: 'ACT', count: 1036 },
+    'junes-patch': { orgId: 'db0de7bd-eb10-446b-99e9-0f3b7c199b8a', orgSlug: 'a-curious-tractor', name: 'ACT', count: 1036 },
+    'tomnet': { orgId: '087e9e7e-40c0-4b11-8054-5b4ccfa647c5', orgSlug: 'tomnet', name: 'TOMNET', count: 0 },
+    'quandamooka-justice-strategy': { orgId: '220e657b-a1e5-41ff-8781-4bd9cf7468da', orgSlug: 'mmeic', name: 'MMEIC', count: 0 }
+  }
+};
+
+async function fetchELMedia(orgId, limit) {
+  limit = limit || 6;
+  try {
+    let url = EL_CONFIG.supabaseUrl + '/rest/v1/media_assets?select=id,title,cdn_url,thumbnail_url,file_type,storage_path&organization_id=eq.' + orgId + '&file_type=eq.image/jpeg&limit=' + limit + '&order=created_at.desc';
+    let resp = await fetch(url, {
+      headers: {
+        'apikey': EL_CONFIG.supabaseAnonKey,
+        'Authorization': 'Bearer ' + EL_CONFIG.supabaseAnonKey
+      }
+    });
+    if (!resp.ok) return [];
+    let data = await resp.json();
+    return data.map(function(m) {
+      return { id: m.id, title: m.title || '', url: m.cdn_url || m.thumbnail_url || '', type: m.file_type };
+    }).filter(function(m) { return m.url; });
+  } catch(e) {
+    console.error('EL API error:', e);
+    return [];
+  }
+}
+
+// ============================================================
+// ARTICLE DATA — all wiki content embedded as JavaScript
+// ============================================================
+const articles = {
+"index": {
+  slug: "index",
+  title: "Tractorpedia",
+  domain: "index",
+  content: `# Tractorpedia
+
+> A living knowledge base for A Curious Tractor -- maintained by LLM, owned by community.
+
+**Last compiled:** 2026-04-06 | **Articles:** 39 | **Domains:** projects, concepts, communities, research, technical
+
+## How This Works
+
+This wiki follows the [[llm-knowledge-base|Karpathy LLM Knowledge Base pattern]]:
+- **Raw sources** go into raw/ -- articles, transcripts, research, scraped data
+- **Articles** are compiled by LLM into domain directories -- never edited manually
+- **Backlinks** connect articles across domains
+- **Linting** runs periodically to find gaps, contradictions, and new article candidates
+
+## Core Concepts
+
+- [[third-reality|The Third Reality]] -- ACT's proprietary methodology for social impact measurement
+- [[civic-world-model|Civic World Model]] -- CivicGraph as living civic intelligence
+- [[indigenous-data-sovereignty|Indigenous Data Sovereignty]] -- Mukurtu, CARE principles, TK Labels
+- [[llm-knowledge-base|LLM Knowledge Base]] -- the architecture pattern powering this wiki
+- [[lcaa-method|LCAA Method]] -- Listen, Curiosity, Action, Art
+- [[designing-for-obsolescence|Designing for Obsolescence]] -- making ourselves unnecessary
+- [[how-tractorpedia-works|How Tractorpedia Works]] -- the living knowledge compilation pattern
+
+## Ecosystem Projects
+
+- [[civicgraph|CivicGraph]] -- 587K entities, 1.5M relationships, civic transparency platform
+- [[empathy-ledger|Empathy Ledger]] -- sovereign storytelling, the connective tissue
+- [[justicehub|JusticeHub]] -- evidence-based justice alternatives
+- [[goods-on-country|Goods on Country]] -- durable goods for remote communities
+- [[the-harvest|The Harvest]] -- regenerative agriculture and creative practice
+
+## Studio & Satellite Projects
+
+- [[picc|Palm Island Community Company]] -- 20 years of community control
+- [[contained|CONTAINED]] -- experiential justice advocacy
+- [[oonchiumpa|Oonchiumpa]] -- Aboriginal-led youth programs
+- [[bg-fit|BG Fit]] -- fitness and mentorship for Indigenous youth
+- [[diagrama|Diagrama]] -- therapeutic detention from Spain
+- [[the-confessional|The Confessional]] -- mobile art therapy
+- [[gold-phone|Gold.Phone]] -- random voice connection
+- [[uncle-allan-palm-island-art|Uncle Allan Art]] -- Indigenous art sovereignty
+
+## Communities
+
+- [[palm-island|Palm Island (Bwgcolman)]] -- relationship history, projects, sovereignty journey
+
+## Research
+
+- [[acco-sector-analysis|ACCO Sector Analysis]] -- community-controlled organizations landscape
+- [[global-precedents|Global Precedents]] -- Spain, Holland, Sweden, Kenya, Tanzania
+- [[local-ai-architecture|Local AI Architecture]] -- edge computing, Gemma 4, sovereign models`,
+  links: ["llm-knowledge-base","third-reality","civic-world-model","indigenous-data-sovereignty","lcaa-method","designing-for-obsolescence","how-tractorpedia-works","civicgraph","empathy-ledger","justicehub","goods-on-country","the-harvest","picc","contained","oonchiumpa","bg-fit","diagrama","the-confessional","gold-phone","uncle-allan-palm-island-art","palm-island","acco-sector-analysis","global-precedents","local-ai-architecture"]
+},
+
+"third-reality": {
+  slug: "third-reality",
+  title: "The Third Reality",
+  domain: "concepts",
+  content: `# The Third Reality
+
+> "Not your story... not my story... but a third reality we can only discover together."
+> -- Empathy Ledger foundational philosophy
+
+## Definition
+
+The Third Reality is ACT's proprietary methodology and brand for measuring social impact. It is the synthesis that emerges when **verified systemic data** ([[civicgraph|CivicGraph]], [[justicehub|JusticeHub]]) intersects with **sovereign human narrative** ([[empathy-ledger|Empathy Ledger]]).
+
+A spreadsheet of justice statistics alone won't change a policymaker's mind. A singular tragic story can be dismissed as an anomaly. But when you mathematically link an immutable, sovereign human story to verified systemic data, you create an undeniable, shared truth. That is the Third Reality.
+
+**Formula:** Systemic Data (CivicGraph/JusticeHub) + Narrative Sovereignty (Empathy Ledger) = The Third Reality
+
+## Why It Matters
+
+The existing category for social impact reporting is broken:
+- **The Old Way:** Funders receive an "Impact Report" -- aggregate data + a few anonymous quotes
+- **The ACT Way:** Funders receive a "Third Reality Assessment" -- verified data linked to sovereign stories
+
+If you're only looking at data, or only looking at stories, your understanding is fundamentally incomplete.
+
+## Psychological Foundation
+
+Aligns with **Shared Reality Theory** -- humans have a fundamental need to align beliefs and feelings with others. When people successfully create a shared reality, it dissipates uncertainty, builds trust, and forms unified group identity. The Third Reality uses the [[empathy-ledger|Empathy Ledger]] to bridge the gap between a marginalized youth and a disconnected policymaker.
+
+## Category Design Strategy
+
+This is not a product feature -- it's a new standard. ACT is executing **Category Design**:
+
+1. **Reframe the problem:** Impact measurement isn't broken because of bad tools -- it's broken because it separates data from humanity
+2. **Coin the shorthand:** "The Third Reality" = Verified Systemic Data + Sovereign Human Narrative
+3. **Certification:** Other NGOs and government departments submit data through ACT's engine to receive a "Third Reality Certified" score
+4. **Force the vocabulary:** Competitors can no longer submit dry, unassured impact reports -- they must play by ACT's rules
+
+## How It's Built (Technical)
+
+The Third Reality is produced by three existing platform layers:
+
+| Layer | Platform | Function |
+|-------|----------|----------|
+| Systemic Data | CivicGraph | 566K entities, $94B+ tracked, deterministic pattern matching |
+| Evidence Base | JusticeHub/ALMA | 1,004 programs, 570 evidence items, outcome scoring |
+| Narrative Sovereignty | Empathy Ledger | Cryptographic story ownership, TK Labels, consent protocols |
+
+## Backlinks
+
+- [[civicgraph|CivicGraph]] -- the systemic data layer
+- [[empathy-ledger|Empathy Ledger]] -- the narrative sovereignty layer
+- [[justicehub|JusticeHub]] -- the evidence layer
+- [[indigenous-data-sovereignty|Indigenous Data Sovereignty]] -- governance framework
+- [[civic-world-model|Civic World Model]] -- architectural vision
+- [[global-precedents|Global Precedents]] -- international validation`,
+  links: ["civicgraph","justicehub","empathy-ledger","indigenous-data-sovereignty","civic-world-model","global-precedents"]
+},
+
+"lcaa-method": {
+  slug: "lcaa-method",
+  title: "LCAA Method",
+  domain: "concepts",
+  content: `# LCAA Method
+
+> Listen. Curiosity. Action. Art.
+
+## Definition
+
+LCAA is A Curious Tractor's foundational methodology -- the operating system for how ACT approaches every project, community, and challenge.
+
+## The Four Phases
+
+### Listen
+Start by deeply listening to community. Not surveying, not consulting -- listening. Understanding what already exists, what's working, what hurts, what matters. Reject the impulse to arrive with solutions.
+
+### Curiosity
+Follow the threads that emerge from listening with genuine curiosity. Ask better questions. Explore unexpected connections. Resist premature closure. This is where innovation lives -- in the space between what is and what could be.
+
+### Action
+Move from understanding to doing. Build, prototype, test, iterate. Action is collaborative -- done with community, not to community. Bias toward making things real, not just planning.
+
+### Art
+The final transformation -- where action becomes something beautiful, meaningful, and lasting. Art is how impact is communicated, how culture is preserved, how stories change the world. Art is not decoration -- it's the highest expression of the work.
+
+## How LCAA Maps to the Ecosystem
+
+| Phase | Primary Platforms | Expression |
+|-------|------------------|------------|
+| Listen | Empathy Ledger, field research | Sovereign storytelling, community voice capture |
+| Curiosity | CivicGraph, JusticeHub, ALMA | Data exploration, evidence review, pattern discovery |
+| Action | Goods on Country, PICC, BG Fit | Place-based design, service delivery, enterprise |
+| Art | Empathy Ledger, Uncle Allan, CONTAINED | Photography, installation, exhibition, narrative |
+
+## LCAA as Taxonomy
+
+Every project, every piece of art, every community relationship can be tagged with where it sits in LCAA:
+- Some projects span all four (e.g., PICC work: listen to Elders -> curiosity about what works -> action through services -> art through Photo Kiosk)
+- Some live primarily in one phase (e.g., [[civicgraph|CivicGraph]] is deep Curiosity infrastructure)
+- The wiki uses LCAA tags to surface connections between projects
+
+## Backlinks
+
+- [[empathy-ledger|Empathy Ledger]] -- Listen + Art
+- [[civicgraph|CivicGraph]] -- Curiosity
+- [[picc|PICC]] -- spans all four phases
+- [[third-reality|The Third Reality]] -- the synthesis LCAA produces`,
+  links: ["civicgraph","empathy-ledger","picc","third-reality"]
+},
+
+"civic-world-model": {
+  slug: "civic-world-model",
+  title: "Civic World Model",
+  domain: "concepts",
+  content: `# Civic World Model
+
+> Replacing the "middle management" of the state and philanthropy with an interconnected intelligence layer.
+
+## Origin
+
+Inspired by Block's "From Hierarchy to Intelligence" thesis, which describes replacing traditional corporate hierarchies (where middle management routes information slowly) with AI-coordinated systems.
+
+[[civicgraph|CivicGraph]] is building the **Civic World Model** -- the social sector equivalent. Instead of relying on government bureaucrats, grant managers, and delayed annual reports to route information, CivicGraph deterministically maps entities, capital flows, and social outcomes in real time.
+
+## Four Architectural Principles (from Block)
+
+### 1. The "Honest Signal"
+Block views transaction data as the most honest signal. In social impact, traditional signals are subjective grant applications and marketing spin. CivicGraph redefines the honest signal by tracking actual money flows (procurement, donations, grants) cross-referenced with verified outcome data from ALMA.
+
+### 2. Humans at the Edge
+The system handles intelligence and coordination. Human roles shift to the "edge" -- community leaders running diversion programs, storytellers on [[empathy-ledger|Empathy Ledger]], designers of [[goods-on-country|Goods on Country]]. Administrative burden removed from grassroots organizations.
+
+### 3. Capabilities vs. Interfaces
+CivicGraph is the underlying **Capability and Intelligence Layer** -- the atomic data primitive. [[justicehub|JusticeHub]], [[empathy-ledger|Empathy Ledger]], and government dashboards are **Interfaces** that surface this civic intelligence to different audiences.
+
+### 4. Building the "Company World Model"
+A machine-readable state of operations, priorities, and roadblocks in real time. CivicGraph does this for the public sector -- 566,522 entities connected by 1,536,626 relationships across 254 tables and 29.5M records.
+
+## CivicGraph Platform Stats (Live)
+
+| Domain | Tables | Records |
+|--------|--------|---------|
+| Registries | 9 | 23.5M |
+| Entity Graph | 9 | 3.4M |
+| Procurement | 12 | 1.1M |
+| People & Governance | 4 | 357K |
+| Influence & Accountability | 10 | 340K |
+| Funding & Grants | 25 | 248K |
+| Evidence & Outcomes | 35 | 127K |
+| **Total** | **254** | **29.5M** |
+
+## The Product Vision
+
+CivicGraph is not a data dashboard -- it's a **replacement for the archaic, top-down hierarchy** of traditional grant-making and policy-creation. Transitioning social impact from bureaucratic hierarchy to decentralized, verifiable intelligence.
+
+## Backlinks
+
+- [[third-reality|The Third Reality]] -- the methodology this model enables
+- [[civicgraph|CivicGraph]] -- the platform
+- [[acco-sector-analysis|ACCO Sector Analysis]] -- who the model serves`,
+  links: ["civicgraph","empathy-ledger","goods-on-country","justicehub","third-reality","acco-sector-analysis"]
+},
+
+"indigenous-data-sovereignty": {
+  slug: "indigenous-data-sovereignty",
+  title: "Indigenous Data Sovereignty",
+  domain: "concepts",
+  content: `# Indigenous Data Sovereignty
+
+> The right of Indigenous peoples to govern the collection, ownership, and application of data about their communities, lands, and cultures.
+
+## CARE Principles
+
+The foundational framework, developed by the Global Indigenous Data Alliance (GIDA):
+
+- **Collective benefit** -- data ecosystems designed for Indigenous innovation and self-determination
+- **Authority to control** -- Indigenous peoples' rights to control and govern their data
+- **Responsibility** -- those working with Indigenous data have a responsibility to nurture respectful relationships
+- **Ethics** -- Indigenous peoples' rights and wellbeing must be the primary concern
+
+## Mukurtu CMS
+
+**Mukurtu** is a Warumungu word meaning "dilly bag" -- a safe keeping place for sacred materials.
+
+Created in 2007 as a grassroots project, Mukurtu supports Indigenous communities worldwide to safeguard cultural knowledge while respecting traditional protocols. Built on **Drupal**, which has recently integrated the **Model Context Protocol (MCP)** -- enabling AI agents to securely connect while respecting access controls.
+
+### Why Mukurtu Matters for ACT
+
+- **TK Labels** embedded directly in metadata -- restrictions based on gender, seasonal conditions, sacredness
+- **Drupal + MCP** = AI agents can query the archive while mathematically obeying cultural protocols
+- **Jumbunna Institute (UTS)** partnership for digitizing significant Aboriginal political history
+- Perfect fit for [[picc|PICC]]'s 20-year archive and [[empathy-ledger|Empathy Ledger]] content
+
+### Integration with ACT Stack
+
+Mukurtu provides the **governance layer** for the [[local-ai-architecture|Local AI Architecture]]:
+1. Raw cultural materials stored in Mukurtu with TK Labels
+2. YAML frontmatter on every markdown file carries protocol metadata
+3. AI agents read TK Labels before processing -- cannot synthesize restricted content
+4. Community retains absolute ownership of both data and intelligence
+
+## Traditional Knowledge (TK) Labels
+
+Digital tags from the Local Contexts Hub that identify place-based knowledge carrying cultural rights:
+
+- **TK Attribution** -- credit to the community
+- **TK Non-Commercial** -- not for commercial use without consent
+- **TK Culturally Sensitive** -- contains sensitive material
+- **TK Community Voice** -- only community can speak to meaning
+- **TK Seasonal** -- access restricted to certain times
+- **TK Men/Women Restricted** -- gender-specific protocols
+
+## Free, Prior, and Informed Consent (FPIC)
+
+For [[empathy-ledger|Empathy Ledger]] narratives especially -- consent must be:
+- **Ongoing** (not one-time sign-off)
+- **Revocable** (community can withdraw data at any stage)
+- **Granular** (different levels for different uses)
+- **Culturally appropriate** (consent processes designed with community)
+
+## Sami Precedent (Sweden)
+
+The Sami people (Sapmi region across Sweden, Norway, Finland) are pushing institutions to adopt CARE principles as a mandatory global standard through the GIDA-Sapmi network. Demonstrates that sovereign storytelling can be formalized into national policy.
+
+## Backlinks
+
+- [[third-reality|The Third Reality]] -- the methodology requiring sovereign data
+- [[picc|Palm Island Community Company]] -- primary implementation site
+- [[empathy-ledger|Empathy Ledger]] -- narrative sovereignty platform
+- [[local-ai-architecture|Local AI Architecture]] -- technical implementation
+- [[global-precedents|Global Precedents]] -- Sweden, Spain, Holland examples`,
+  links: ["picc","empathy-ledger","local-ai-architecture","third-reality","global-precedents"]
+},
+
+"llm-knowledge-base": {
+  slug: "llm-knowledge-base",
+  title: "LLM Knowledge Base",
+  domain: "concepts",
+  content: `# LLM Knowledge Base
+
+> Raw data compiled by LLM into a .md wiki, operated on by agents to do Q&A and incrementally enhance. You rarely edit the wiki manually -- it's the domain of the LLM.
+> -- Andrej Karpathy, April 2026
+
+## The Pattern
+
+A three-layer architecture where LLMs incrementally build and maintain a persistent wiki -- sitting between raw sources and the user. Unlike RAG, which re-derives knowledge each query, the wiki compounds over time.
+
+### Layer 1: Raw Sources (Immutable)
+Articles, papers, repos, datasets, images the LLM reads but never modifies. Stored in raw/.
+
+### Layer 2: The Wiki (LLM-Generated)
+Markdown files the system owns entirely -- summaries, entity pages, cross-references. The LLM keeps these current. Organized by domain, not chronology.
+
+### Layer 3: The Schema
+Convention documents (like CLAUDE.md) that tell the LLM how to maintain structure and consistency.
+
+## Key Operations
+
+| Operation | What Happens |
+|-----------|-------------|
+| **Ingest** | New source -> LLM reads, writes summary, updates indices, revises related pages, logs activity |
+| **Query** | Search relevant pages, synthesize answer, file valuable results back as new pages |
+| **Lint** | Health-check for contradictions, stale claims, orphaned pages, missing cross-references |
+| **Output** | Render markdown, slideshows (Marp), visualizations -- all viewable in Obsidian |
+
+## Why It Works
+
+"The tedious part of maintaining a knowledge base is the bookkeeping." LLMs don't abandon wikis due to maintenance burden. They handle updates across many files simultaneously. Humans curate sources and direct analysis; LLMs manage consistency.
+
+## Token Efficiency
+
+The @jshph/digest agent + Enzyme compile-time index demonstrates radical efficiency:
+- First turn: 2,351 tokens in, 806 out
+- Second turn with semantic search: 5,662 in, 1,527 out
+- Compare: explore-mode agents burn 60-90K tokens to orient
+
+8ms semantic lookup, pre-computed before session starts.
+
+## How ACT Uses This Pattern
+
+This wiki (wiki/) is itself an implementation of this pattern. Additionally:
+
+### For CivicGraph / CivicScope
+- Raw government data (AusTender, ACNC, AEC, AIHW) -> compiled into civic wiki articles
+- Autonomous agents continuously lint for contradictions between government claims and lived experience
+
+### For [[picc|PICC]] / Community Archives
+- Local hardware + Gemma 4 E4B = sovereign, offline knowledge base
+- Mukurtu CMS + TK Labels = culturally governed AI
+- 20 years of community history compiled into queryable intelligence
+
+### For [[empathy-ledger|Empathy Ledger]]
+- Stories compiled with consent protocols as frontmatter
+- Thematic analysis surfaces patterns across narratives
+
+## Backlinks
+
+- [[third-reality|The Third Reality]] -- the methodology this architecture enables
+- [[local-ai-architecture|Local AI Architecture]] -- technical implementation
+- [[picc|Palm Island Community Company]] -- sovereign knowledge base build`,
+  links: ["picc","empathy-ledger","third-reality","local-ai-architecture"]
+},
+
+"designing-for-obsolescence": {
+  slug: "designing-for-obsolescence",
+  title: "Designing for Obsolescence",
+  domain: "concepts",
+  content: `# Designing for Obsolescence
+
+> A core ACT philosophy and manifesto: the most successful social innovation is one that makes the social entrepreneur unnecessary -- designing systems that hand power back to communities and then get out of the way.
+
+**Status:** Sunsetting | **Code:** ACT-DO | **Tier:** Satellite
+
+## Overview
+
+Designing for Obsolescence is not a program but a governing intellectual framework at the heart of ACT's approach. It argues that the dominant model of social innovation -- scaling organisations, building dependency, and measuring success by headcount or revenue -- is itself part of the problem. True success means the communities ACT works with no longer need ACT.
+
+## Key Principles
+
+### Success Means We Become Unnecessary
+Every [[lcaa-method|LCAA]] cycle should increase community capacity and reduce dependence on ACT as an intermediary.
+
+### Depth Over Reach
+Conventional social innovation mythology prizes scale. Designing for Obsolescence prioritises depth -- how fundamentally has one community's capacity changed?
+
+### Knowledge Transfer as Core Deliverable
+Expertise should flow toward communities, not remain held by ACT.
+
+### Community Ownership Development
+The goal is not for communities to participate in ACT-designed systems but to own, adapt, and eventually supersede them.
+
+### Critique of Scaling Mythology
+Growth for its own sake is treated with suspicion. ACT's scale ambition is the spread of a model, not the growth of an organisation.
+
+## Relationship to ACT's Work
+
+This philosophy shapes every active project:
+- [[justicehub|JusticeHub]] is designed so that communities eventually run their own justice-alternatives without needing ACT facilitation
+- [[junes-patch|June's Patch]] is explicitly structured as phased community ownership of garden sites
+- [[quandamooka-justice-strategy|Quandamooka Justice and Healing Strategy]] centres Indigenous leadership as the long-term authority
+- [[goods-on-country|Goods on Country]] prioritises First Nations-owned supply chains over ACT-mediated distribution
+- [[empathy-ledger|Empathy Ledger]] builds storyteller agency into the platform architecture
+
+## Backlinks
+
+- [[lcaa-method|LCAA Method]]
+- [[empathy-ledger|Empathy Ledger]]
+- [[justicehub|JusticeHub]]
+- [[junes-patch|June's Patch]]
+- [[goods-on-country|Goods on Country]]`,
+  links: ["lcaa-method","justicehub","junes-patch","quandamooka-justice-strategy","goods-on-country","empathy-ledger"]
+},
+
+"civicgraph": {
+  slug: "civicgraph",
+  title: "CivicGraph",
+  domain: "projects",
+  content: `# CivicGraph
+
+> 587,390 entities connected by 1,535,772 relationships across 254 tables and 29.5M records. Making government spending, influence, and outcomes visible.
+
+**Status:** Active | **Code:** ACT-CS | **Tier:** Satellite (CivicScope)
+
+## What It Is
+
+CivicGraph is ACT's civic transparency platform. It connects public data to make government spending, influence, and outcomes visible. Every claim is traceable to data.
+
+It is the **systemic data layer** of [[third-reality|The Third Reality]] and the practical implementation of the [[civic-world-model|Civic World Model]].
+
+## Scale (April 2026)
+
+| Metric | Count |
+|--------|-------|
+| Entities | 587,390 |
+| Relationships | 1,535,772 |
+| Government contracts | 796,701 |
+| Annual contract value | $74 billion |
+| Donations tracked | 301,803 |
+| Grants indexed | 30,724 |
+| Foundations profiled | 10,837 |
+| Charities cataloged | 359,678 |
+| Integrated data sources | 21 |
+
+### Database Domain Breakdown
+
+| Domain | Tables | Records |
+|--------|--------|---------|
+| Registries | 9 | 23.5M |
+| Entity Graph | 9 | 3.4M |
+| Procurement | 12 | 1.1M |
+| Social & Disability | 14 | 479K |
+| People & Governance | 4 | 357K |
+| Influence & Accountability | 10 | 340K |
+| Funding & Grants | 25 | 248K |
+| Evidence & Outcomes | 35 | 127K |
+
+## How It Connects
+
+**Universal join key:** Australian Business Number (ABN)
+**Resolution method:** ABN matching + normalized name fuzzy-matching against ASIC + ACNC registers
+**Topic classification:** Database triggers auto-classify into 9 domains via deterministic keyword matching (auditable, no ML)
+
+### Entity Linkage Rates
+
+- Justice Funding: 86% (125K of 146K records linked)
+- Federal Contracts: 85% (791K records)
+- Foundations: 100% (10.8K records)
+- Political Donations: 59% (313K records)
+- ALMA Interventions: 56% (1.4K records)
+
+## Open Data Sources
+
+All from public government sources -- no proprietary data, fully reproducible:
+- AusTender (federal contracts)
+- AEC (political donations)
+- ACNC (charities)
+- ATO (tax transparency)
+- ROGS (government outcomes reporting)
+- AIHW (health and welfare)
+- State grant portals (QLD most granular)
+- Parliamentary Hansard
+- Lobbying registers
+
+## Key Findings
+
+1. 873 LGAs identified as **funding deserts** (high disadvantage + low per-capita funding)
+2. Only QLD has granular org-level grant data -- all other states have aggregate budget lines only
+3. 94,162 funding records still unclassified by topic
+4. 9 topic domains tracked across 38 state-topic combinations
+
+## CivicScope Vision
+
+CivicGraph evolves into **CivicScope** -- the ability to not just map data but actively surface insights:
+- **Active accountability:** Continuous monitoring, not just point-in-time reporting
+- **Funding desert detection:** Algorithmic identification of underserved communities
+- **Evidence-to-funding matching:** Which programs work -> which programs get funded -> gap analysis
+- **Third Reality assessments:** Systemic data + [[empathy-ledger|Empathy Ledger]] stories = verified impact reports
+
+## Products
+
+| Product | Status | Description |
+|---------|--------|-------------|
+| Procurement Intelligence | Available | Government contract tracking and analysis |
+| Allocation Intelligence | Available | Grants and funding allocation insights |
+| Governed Proof | Coming soon | Verified impact reporting and certification |
+
+**Domain:** civicgraph.app
+
+## Backlinks
+
+- [[third-reality|The Third Reality]] -- the methodology
+- [[civic-world-model|Civic World Model]] -- the architectural vision
+- [[justicehub|JusticeHub]] -- the evidence layer
+- [[empathy-ledger|Empathy Ledger]] -- the narrative layer
+- [[acco-sector-analysis|ACCO Sector Analysis]] -- who it serves`,
+  links: ["third-reality","civic-world-model","justicehub","empathy-ledger","acco-sector-analysis"]
+},
+
+"empathy-ledger": {
+  slug: "empathy-ledger",
+  title: "Empathy Ledger",
+  domain: "projects",
+  content: `# Empathy Ledger
+
+> Not your story... not my story... but a third reality we can only discover together.
+
+**Status:** Active | **Code:** ACT-EL | **Tier:** Ecosystem
+
+## What It Is
+
+The Empathy Ledger is ACT's sovereign storytelling platform -- the **narrative sovereignty layer** of [[third-reality|The Third Reality]]. It gives marginalized and Indigenous communities cryptographic ownership of their narratives, ensuring stories are never extracted but always owned.
+
+## Core Principles
+
+1. **Storyteller as Sovereign** -- absolute control and agency over how narrative is used
+2. **Blockchain-secured ownership** -- transparent, fair compensation flows back to storyteller
+3. **Do no harm** -- community members are active co-creators, not subjects
+4. **Reject extractive metrics** -- focus on agency, resilience, and truth, not passive victimhood
+
+## The Central Role
+
+Empathy Ledger is the **connective tissue** that ties all impact together across the ACT ecosystem:
+
+| Platform | What It Provides | What Empathy Ledger Adds |
+|----------|-----------------|-------------------------|
+| [[civicgraph|CivicGraph]] | Systemic data (entities, funding, procurement) | Human faces behind the numbers |
+| [[justicehub|JusticeHub]] | Evidence base (what interventions work) | Stories of transformation |
+| [[goods-on-country|Goods on Country]] | Place-based design outcomes | Community voice in design process |
+| [[picc|PICC]] | Service delivery data | Lived experience of services |
+
+Without Empathy Ledger, you have data. With it, you have **The Third Reality**.
+
+## How Stories Drive Capital
+
+When individual narratives intersect with systemic data:
+1. **AI-powered thematic analysis** safely pulls themes, trends, and quotes from narratives
+2. **Funding applications** backed by undeniable weight of real-life impact
+3. **Policy shifts** advocated using verified lived experience
+4. **Identity always protected** -- individual ownership and consent at every stage
+
+## Technical Architecture
+
+### Current (Supabase Instance)
+- **EL v2:** dedicated Supabase instance
+- **EL original:** legacy, read-only
+
+### Future (Sovereign)
+- Stories compiled into [[local-ai-architecture|Local AI Architecture]] vaults
+- TK Labels as YAML frontmatter on every narrative
+- Mukurtu CMS integration for institutional-grade cultural governance
+- Federated learning across community models -- share insights, never raw stories
+
+## Platform Sections (empathyledger.com)
+
+- **Stories** -- individual narratives with community attribution
+- **Storytellers** -- profiles and consent management
+- **Atlas / Map** -- geographic view of stories
+- **Projects** -- contextual collections
+- **Galleries** -- curated visual collections
+- **World Tour** -- global story journey
+
+## Vision: Changing the Face of the World
+
+The Empathy Ledger becomes pervasive when:
+- Stories **change minds** -- policymakers can't dismiss what they've felt
+- Ownership **creates agency** -- communities control their narrative, not NGOs
+- Resources **follow stories** -- [[third-reality|Third Reality]] assessments direct funding to ground truth
+- Impact compounds -- every story adds to the knowledge base, strengthening all future advocacy
+
+## Backlinks
+
+- [[third-reality|The Third Reality]] -- the methodology EL enables
+- [[civicgraph|CivicGraph]] -- the systemic data layer EL completes
+- [[justicehub|JusticeHub]] -- evidence layer EL humanizes
+- [[picc|PICC]] -- primary community implementation
+- [[indigenous-data-sovereignty|Indigenous Data Sovereignty]] -- governance framework
+- [[local-ai-architecture|Local AI Architecture]] -- sovereign hosting`,
+  links: ["third-reality","civicgraph","justicehub","goods-on-country","picc","local-ai-architecture","indigenous-data-sovereignty"]
+},
+
+"justicehub": {
+  slug: "justicehub",
+  title: "JusticeHub",
+  domain: "projects",
+  content: `# JusticeHub
+
+> Evidence-based justice alternatives -- proving what works, routing capital to what heals.
+
+**Status:** Active | **Code:** ACT-JH | **Tier:** Ecosystem
+
+## What It Is
+
+JusticeHub is ACT's evidence platform for justice alternatives. It catalogs community-led programs, tracks their outcomes, and provides the fiduciary evidence needed to divert funds from detention to healing.
+
+It is the **evidence layer** of [[third-reality|The Third Reality]].
+
+## Scale (April 2026)
+
+- **1,000+** verified alternative models mapped
+- **430** models with evidence data
+- **$94.6B** in funding tracked
+- **98,418** organizations mapped
+- **85%** recidivism rate for youth detention
+- Indigenous young people face **24x** higher incarceration rates
+
+## The Economic Case
+
+| Approach | Annual Cost per Child | Success Rate |
+|----------|--------------------|-------------|
+| Youth detention | $1.3M/year ($3,634.90/day national average) | 15% (85% recidivism) |
+| Community-led alternatives | ~$14,000 | 97x cheaper |
+
+This isn't just better for communities -- it's better economics.
+
+## Three Pathways
+
+| Audience | Entry Point | Tool |
+|---------|-------------|------|
+| Youth | "I need help" | Youth Scout |
+| Organizations | ALMA Network | Directory + evidence tools |
+| Policymakers | Evidence dashboards | Cost Calculator, System Map, Impact Dashboard |
+
+## Key Features
+
+- **ALMA AI Chat** -- conversational interface to the evidence base
+- **Cost Calculator** -- real-time cost comparison of detention vs community alternatives
+- **System Map** -- visual mapping of the justice ecosystem
+- **Impact Dashboard** -- outcome data across programs
+- **Learning Trips** -- international study visits (e.g. Spain [[diagrama|Diagrama]] model)
+
+## Local Proof Points
+
+### [[bg-fit|BG Fit]] (Mount Isa)
+- Reduced youth police contact from average of 5 incidents to less than 1
+
+### [[oonchiumpa|Oonchiumpa]] (Alice Springs)
+- 95% reduction in anti-social behavior
+
+### Confit Pathways (Sydney)
+- 60% reduction in recidivism
+
+## Capital Routing Vision
+
+### Impact-Weighted Quadratic Funding (ImpactQF)
+- Integrating Gitcoin's open-source Allo Protocol for programmable capital allocation
+- Matching funds distributed based on verified community outcomes, not popularity
+
+### Catalytic Capital Framing
+Following [[global-precedents|East African precedents]], JusticeHub funding is positioned as "catalytic capital" -- high-leverage investment unlocking massive downstream savings.
+
+## Connection to CivicGraph
+
+JusticeHub evidence sits within the broader [[civicgraph|CivicGraph]] data model:
+- justice_funding table: 145,242 records (86% linked to entities)
+- alma_interventions: 1,357 records (56% linked)
+- crime_stats_lga: 57,435 records
+- outcomes_metrics: 8,962 records across all states
+
+## Backlinks
+
+- [[third-reality|The Third Reality]] -- the methodology
+- [[civicgraph|CivicGraph]] -- the data layer
+- [[empathy-ledger|Empathy Ledger]] -- the narrative layer
+- [[acco-sector-analysis|ACCO Sector Analysis]] -- who it serves
+- [[global-precedents|Global Precedents]] -- capital routing models`,
+  links: ["third-reality","civicgraph","empathy-ledger","diagrama","bg-fit","oonchiumpa","global-precedents","acco-sector-analysis"]
+},
+
+"goods-on-country": {
+  slug: "goods-on-country",
+  title: "Goods on Country",
+  domain: "projects",
+  content: `# Goods on Country
+
+> Manufacturing durable household goods from 100% recycled plastic for remote and marginalised Australian communities -- where conventional products fail within weeks.
+
+**Status:** Active | **Code:** ACT-GD | **Tier:** Ecosystem
+
+## What It Is
+
+Goods on Country is ACT's circular economy social enterprise. It designs, manufactures, and deploys indestructible household goods for remote Aboriginal and marginalised communities across Australia, where extreme heat, overcrowding, dust, and limited repair infrastructure destroy standard products in weeks rather than years.
+
+The enterprise operates through A Curious Tractor Pty Ltd (ABN: 21 591 780 066) and trades at goodsoncountry.com.au. Communities are co-designers, not recipients.
+
+## Products
+
+### Stretch Bed
+The flagship product -- co-designed with Elders across Central Australia, the Top End, Palm Island, and Kalgoorlie:
+- **Material:** 100% recycled HDPE plastic, UV-stabilised
+- **Weight:** 26kg
+- **Load capacity:** 200kg
+- **Assembly:** Five minutes, tool-free
+- **Cleaning:** Fully washable with a garden hose
+- **Lifespan:** Built to last 10+ years
+- **Plastic diverted per unit:** 25kg from landfill
+
+### Industrial Washing Machine
+A fleet of community-deployed industrial washing machines, IoT-instrumented for remote telemetry. Elder Dianne Stokes (Warumungu) named the washing machine in language.
+
+## Scale to Date
+
+- **389 products** deployed
+- **8 communities** served
+- **1,000+ lives** directly impacted
+- **9,225kg of plastic waste** diverted from landfill
+- **33 community storytellers** documenting experiences through [[empathy-ledger|Empathy Ledger]]
+- **$445,685** in philanthropic funding received
+- **$537,595** total revenue recorded
+
+## Manufacturing Model: Containerised On-Country
+
+Each containerised facility:
+- Housed in shipping containers, transportable to regional centres
+- Produces 1,000-1,500 durable goods annually
+- Employs 4-6 local workers
+- Processes locally-sourced recycled plastic as feedstock
+
+**Scale plan:**
+- **Year 1 (2026-27):** First facility on Jinibara Country (QLD), 1,500 beds, 6 FTE
+- **Year 2 (2027-28):** Second facility at [[oonchiumpa|Oonchiumpa]] partnership (Alice Springs)
+- **Year 3 (2028-29):** Third facility (Top End or Torres Strait). 5,000+ units/year
+
+## Community Partnerships
+
+### [[palm-island|Palm Island]] (PICC)
+141 beds deployed. Palm Island Housing in active expansion discussions.
+
+### Tennant Creek
+Centrecorp approved 107 beds for Utopia Homelands; applications submitted for 100 beds across 4 communities.
+
+### Central Australia
+[[oonchiumpa|Oonchiumpa]] Consultancy (Alice Springs) -- 100% Aboriginal-staffed, confirmed manufacturing partner.
+
+## LCAA Connection
+
+Goods on Country sits in the **Action** phase of [[lcaa-method|LCAA]] -- making things that embody place and cultural knowledge. Also ACT's most direct test case for [[designing-for-obsolescence|Designing for Obsolescence]].
+
+## Backlinks
+
+- [[lcaa-method|LCAA Method]] -- Action phase anchor project
+- [[civicgraph|CivicGraph]] -- procurement intelligence via Goods Workspace
+- [[empathy-ledger|Empathy Ledger]] -- community narrative and accountability layer
+- [[picc|PICC]] -- Palm Island Community Company, key deployment partner
+- [[designing-for-obsolescence|Designing for Obsolescence]] -- organisational model
+- [[third-reality|The Third Reality]] -- Goods as circular economy evidence layer`,
+  links: ["empathy-ledger","oonchiumpa","palm-island","lcaa-method","designing-for-obsolescence","civicgraph","picc","third-reality"]
+},
+
+"picc": {
+  slug: "picc",
+  title: "Palm Island Community Company (PICC)",
+  domain: "projects",
+  content: `# Palm Island Community Company (PICC)
+
+> A pioneering case study in community control -- from state-managed settlement to 100% Aboriginal Community Controlled Organisation.
+
+**Status:** Active | **Code:** ACT-PI | **Tier:** Studio
+
+## Overview
+
+**Established:** 2007
+**Location:** [[palm-island|Palm Island (Bwgcolman)]], QLD
+**Structure:** Public company limited by shares -> transitioned to 100% community-controlled (October 2021)
+**Chair:** Luella Bligh
+**CEO:** Rachel Atkinson (also Chairperson of QATSICPP)
+**Workforce:** 176 staff, 85% Aboriginal/Torres Strait Islander, 78% local Palm Islanders
+**20th Anniversary:** 2027
+
+## Genesis
+
+Born from a tri-partisan initiative involving the QLD Government, Palm Island Aboriginal Shire Council, and local community. For 14 years, operated as a hybrid model.
+
+**Major milestone (2021):** QLD Government and Shire Council transferred all shares to community. PICC became 100% Aboriginal Community Controlled.
+
+## Integrated Service Delivery
+
+PICC operates a "whole-of-life" approach -- health, justice, housing, and economic status are inextricably linked.
+
+| Service | Programs | Detail |
+|---------|----------|--------|
+| Healing & Wellbeing | Bwgcolman Healing Service, SEWB | Multidisciplinary primary healthcare |
+| Family & Children | Children and Family Centre, Safe House | Early childhood + short-term residential care on country |
+| Justice & Diversion | Community Justice Group | Sentencing submissions, mediation |
+| Women's Services | DFV Service, Women's Service | Crisis accommodation, counselling |
+| Social Enterprise | Palm Automotive, Fuel Station, Community Shop | Only mechanic and fuel on island |
+| Employment | Telstra Call Centre | Local jobs servicing Telstra's First Nations customers nationwide |
+| Disability | NDIS Community Connectors | Navigating plans, eligibility |
+
+## Key Innovations
+
+### The "Homely" Safe House
+Replaced mainland "dormitory-style" out-of-home care with a homely environment for up to 4 children, keeping them **on country**. Preserves four pillars of identity: family, culture, language, and country.
+
+### Workforce Localism
+85% Indigenous workforce, 78% local. Staff possess "local Indigenous knowledge" -- families don't need to repeatedly explain genealogies to outsiders.
+
+### Social Enterprise Sustainability
+Automotive, fuel, and call centre diversify revenue beyond government grants. Telstra partnership proves remote communities can participate in the digital economy.
+
+## The PICC Knowledge Base (Next Build)
+
+Following the [[llm-knowledge-base|Karpathy LLM Knowledge Base pattern]], PICC is building a **sovereign, local AI archive**:
+
+| Layer | Technology | Purpose |
+|-------|-----------|---------|
+| Hardware | Mac Studio / local edge compute | Data never leaves community hardware |
+| Model | Gemma 4 E4B (4B params, runs offline) | Sovereign intelligence |
+| Governance | Mukurtu CMS + TK Labels | Cultural protocols enforced at data level |
+| Agent | @jshph/digest | Autonomous librarian |
+
+## Backlinks
+
+- [[palm-island|Palm Island (Bwgcolman)]] -- community article
+- [[third-reality|The Third Reality]] -- methodology PICC exemplifies
+- [[indigenous-data-sovereignty|Indigenous Data Sovereignty]] -- governance framework
+- [[local-ai-architecture|Local AI Architecture]] -- technical build plan
+- [[acco-sector-analysis|ACCO Sector Analysis]] -- sector context
+- [[llm-knowledge-base|LLM Knowledge Base]] -- the pattern`,
+  links: ["palm-island","third-reality","indigenous-data-sovereignty","local-ai-architecture","acco-sector-analysis","llm-knowledge-base"]
+},
+
+"the-harvest": {
+  slug: "the-harvest",
+  title: "The Harvest / Witta Harvest HQ",
+  domain: "projects",
+  content: `# The Harvest / Witta Harvest HQ
+
+> A regenerative community hub in Witta, QLD -- seasonal kitchen, garden centre, workshops, and venue hire on the former Green Harvest site.
+
+**Status:** Active | **Code:** ACT-HV | **Tier:** Ecosystem
+
+## Overview
+
+The Harvest is a regenerative community hub located in Witta, Queensland, operating from the former Green Harvest site. It brings together a seasonal kitchen, a garden centre focused on native and productive plants, artisan workshops, and a flexible venue space.
+
+The physical site sits on Witta Farm, leased to ACT for retreats, R&D, and community programs.
+
+## Key Details
+
+- **Location:** Witta, QLD 4552
+- **Website:** theharvestwitta.com.au
+- **Trading hours:** Saturday-Sunday, 8am-2pm
+
+## What's On Site
+
+### Seasonal Kitchen
+Breakfast and brunch using local produce, operating weekends.
+
+### Garden Centre
+Native and productive plants suited to the Sunshine Coast region.
+
+### Workshops
+Hands-on programs including pottery, food preserving, and gardening.
+
+### Venue Hire
+Indoor-outdoor event space for community gatherings and events.
+
+## LCAA Phase
+
+**Action** -- the hub is active, trading, and demonstrating regenerative practice. Workshop and education programs extend into **Curiosity** and **Art** phases.
+
+## Backlinks
+
+- [[lcaa-method|LCAA Method]]
+- [[act-farm|ACT Farm]]`,
+  links: ["lcaa-method","act-farm"]
+},
+
+"contained": {
+  slug: "contained",
+  title: "CONTAINED",
+  domain: "projects",
+  content: `# CONTAINED
+
+> An experiential design campaign about youth detention -- placing people inside the question of what we're actually paying for, and what we could choose instead.
+
+**Status:** Active | **Code:** ACT-CN | **Tier:** Satellite
+
+## What It Is
+
+CONTAINED is ACT's immersive advocacy campaign at the intersection of experiential design and youth justice reform. It takes the evidence from [[justicehub|JusticeHub]] and transforms it into a felt experience.
+
+The central provocation: **what if we spent $1.55M on keeping a child connected to family, culture, and community instead of locking them away?**
+
+## The Evidence Behind It
+
+| Approach | Annual Cost per Child | Success Rate |
+|----------|-----------------------|-------------|
+| Youth detention | $1.1-1.3 million ($3,320/day) | 15.5% |
+| Community-led alternatives | ~$58,000 ($150/day) | 78% |
+
+Drawn from 145,242 justice funding records and 570 evidence items in ALMA tracked in [[civicgraph|CivicGraph]].
+
+## The Form
+
+CONTAINED takes a **touring exhibition format** -- a physical installation that can be licensed and deployed by partner organisations.
+
+The signature element is a **chalk question wall**: visitors write their own answer to "What could $1.55M do instead?"
+
+## Touring and Revenue
+
+- **Dusseldorp Forum** -- $16,500
+- **[[mounty-yarns|Mounty Yarns]]** -- $15,000
+
+Revenue to date: $31,500
+
+## Connection to JusticeHub
+
+CONTAINED is the **campaign layer** of JusticeHub -- the Art phase to JusticeHub's evidence-building.
+
+Programs cited:
+- [[bg-fit|BG Fit]] (Mount Isa) reduced youth police contact from 5 to under 1
+- [[oonchiumpa|Oonchiumpa]] (Alice Springs) achieved 95% reduction in anti-social behaviour
+- Confit Pathways (Sydney) delivered 60% reduction in recidivism
+
+## LCAA Phase: Art
+
+In the [[lcaa-method|LCAA Method]], CONTAINED sits squarely in the **Art** phase -- where evidence becomes experience.
+
+## Backlinks
+
+- [[lcaa-method|LCAA Method]] -- CONTAINED is the canonical Art phase example
+- [[justicehub|JusticeHub]] -- the evidence platform
+- [[empathy-ledger|Empathy Ledger]] -- the storytelling layer
+- [[civicgraph|CivicGraph]] -- the data infrastructure
+- [[third-reality|The Third Reality]] -- the methodology CONTAINED demonstrates`,
+  links: ["justicehub","civicgraph","mounty-yarns","bg-fit","oonchiumpa","lcaa-method","empathy-ledger","third-reality"]
+},
+
+"oonchiumpa": {
+  slug: "oonchiumpa",
+  title: "Oonchiumpa",
+  domain: "projects",
+  content: `# Oonchiumpa
+
+> Aboriginal-led youth program in Mparntwe (Alice Springs) -- grounding young people in culture, Country, and identity across seven language groups of Central Australia.
+
+**Status:** Active | **Code:** ACT-OO | **Tier:** Satellite
+
+## Overview
+
+Oonchiumpa is a 100% Aboriginal-led youth civic agency based in Mparntwe (Alice Springs, NT), working across homeland communities within a 150km radius. The program serves young people from seven language groups -- including Arrernte, Alyawarra, Luritja, and Warlpiri.
+
+The name and program operate under the cultural authority of Aunty Bev and Uncle Terry. The central site is Atnarpa homestead on Loves Creek Station.
+
+## Leadership
+
+| Role | Person |
+|------|--------|
+| Co-Director | Kristy Bloomfield -- Central Arrernte, Eastern Arrernte & Alyawarra Traditional Owner |
+| Co-Director | Tanya Turner |
+| Elder authority | Aunty Bev and Uncle Terry |
+| Cultural lead | Fred Campbell |
+
+## Outcomes
+
+| Metric | Result |
+|--------|--------|
+| Anti-social behavior reduction | **95%** |
+| Youth retention in programs | **90%** |
+| School re-engagement | **95%** |
+| Active young people in programs | 21 |
+| Language groups served | 7 |
+
+## Programs
+
+### Cultural Camps at Atnarpa
+On-Country healing at the Bloomfield family's homestead on Loves Creek Station.
+
+### True Justice (with ANU)
+Partnership with Australian National University transforming law students through deep listening on Country.
+
+### Youth Mentorship
+21 active young people in programs designed by community. Mentorship is intergenerational and culturally grounded.
+
+## ACT's Role
+
+- [[empathy-ledger|Empathy Ledger]] deployment for community storytelling
+- [[justicehub|JusticeHub]] evidence -- cited as proof point for community-led alternatives
+- [[goods-on-country|Goods on Country]] manufacturing partnership in Alice Springs
+- R&D Tax supporting activities
+
+## Connection to [[third-reality|The Third Reality]]
+
+The 95% reduction in anti-social behavior makes the economic and moral case simultaneously: Oonchiumpa achieves outcomes that the $1.3M-per-year youth detention system cannot, at a fraction of the cost.
+
+## Backlinks
+
+- [[lcaa-method|LCAA Method]]
+- [[justicehub|JusticeHub]] -- cites 95% ASB reduction as proof point
+- [[third-reality|The Third Reality]] -- Oonchiumpa as evidence case
+- [[empathy-ledger|Empathy Ledger]] -- deployed at Oonchiumpa
+- [[goods-on-country|Goods on Country]] -- Alice Springs manufacturing partnership
+- [[picc|Palm Island Community Company]] -- cross-community exchange partner`,
+  links: ["empathy-ledger","justicehub","goods-on-country","third-reality","lcaa-method","picc"]
+},
+
+"bg-fit": {
+  slug: "bg-fit",
+  title: "BG Fit",
+  domain: "projects",
+  content: `# BG Fit
+
+> A culturally grounded fitness, healing, and mentorship program addressing the overrepresentation of Indigenous youth in the justice system.
+
+**Status:** Active | **Code:** ACT-BG | **Tier:** Satellite
+
+## Overview
+
+BG Fit operates in Mount Isa and Doomadgee, communities where Indigenous youth face disproportionate contact with the justice system. The program works from a premise that physical fitness, cultural connection, and Elder mentorship -- not punishment -- are the most effective interventions.
+
+The results are striking: participating youth have reduced their average police contact from approximately 5 incidents per year to less than 1.
+
+## Key Details
+
+- **Locations:** Mount Isa and Doomadgee, Queensland
+- **Target:** Full community ownership by 2027
+- **Current need:** Sustained funding, strengthened Elder partnerships
+
+## Program Structure
+
+1. **Pre-camp fitness** -- structured physical training building readiness and trust
+2. **On-country cultural camps** -- annual camps with Elders integrating cultural knowledge
+3. **Post-camp recovery and integration** -- follow-up support maintaining gains
+
+## Proof Points
+
+- Youth police contact reduced from average 5 incidents per year to less than 1
+- Annual on-country camps demonstrating measurable behaviour change
+- Elder-led partnerships sustaining cultural credibility
+
+## LCAA Phase
+
+**Action** -- direct programming through fitness, camps, and mentorship -- with deep roots in **Listen**.
+
+## Backlinks
+
+- [[goods-on-country|Goods on Country]]
+- [[empathy-ledger|Empathy Ledger]]
+- [[lcaa-method|LCAA Method]]
+- [[justicehub|JusticeHub]]`,
+  links: ["goods-on-country","empathy-ledger","lcaa-method","justicehub"]
+},
+
+"diagrama": {
+  slug: "diagrama",
+  title: "Diagrama",
+  domain: "projects",
+  content: `# Diagrama
+
+> Spain's leading therapeutic detention model as an alternative to Australia's punitive justice system.
+
+**Status:** Active | **Code:** ACT-DG | **Tier:** Satellite
+
+## Overview
+
+Diagrama refers to ACT's engagement with **Fundacion Diagrama**, a Spanish organisation that has developed one of the world's most respected therapeutic detention models for young people in conflict with the law.
+
+ACT's interest in Diagrama sits within [[justicehub|JusticeHub]]'s broader mission: identifying and adapting justice alternatives that could reduce Australia's catastrophic rates of Indigenous incarceration.
+
+## Why Diagrama Matters for Australia
+
+Diagrama demonstrates that a fundamentally different model is possible:
+- Treats the young person as a full human being, not a risk to be managed
+- Centres therapeutic relationships as the primary mechanism of change
+- Focuses on reintegration and community connection
+- Produces measurably better outcomes across all indicators
+
+## The Transfer Challenge
+
+The goal is not wholesale adoption but **ethical, culturally appropriate transfer**:
+- **Culturally Appropriate Adaptation** -- grounded in Indigenous knowledge, not applied from a European framework
+- **Indigenous-Led Implementation** -- Indigenous-led by 2027
+- **JusticeHub Learning Trips** -- visits to Diagrama centres in Spain
+
+## LCAA Phase
+
+**Curiosity + Action** -- deep curiosity about what works, driving active work toward implementation.
+
+## Backlinks
+
+- [[lcaa-method|LCAA Method]]
+- [[justicehub|JusticeHub]]
+- [[quandamooka-justice-strategy|Quandamooka Justice and Healing Strategy]]`,
+  links: ["justicehub","lcaa-method","quandamooka-justice-strategy"]
+},
+
+"palm-island": {
+  slug: "palm-island",
+  title: "Palm Island (Bwgcolman)",
+  domain: "communities",
+  content: `# Palm Island (Bwgcolman)
+
+> From penal settlement to self-determined community -- a story of survival, sovereignty, and innovation.
+
+## Overview
+
+Palm Island is a remote Aboriginal community in the Hinchinbrook Shire, North Queensland. Home to the Bwgcolman and Manbarra peoples, with a population of approximately 2,500.
+
+## History
+
+Palm Island was established as a **penal settlement** and site of intense departmental control under the "Protection Era." Aboriginal people from across Queensland were forcibly relocated here.
+
+Despite this history, Palm Island has become a **beacon of community self-determination**.
+
+## The Sovereignty Journey
+
+| Year | Milestone |
+|------|-----------|
+| 2007 | [[picc|PICC]] established (tri-partisan: QLD Government + Shire Council + community) |
+| 2007-2021 | Hybrid model -- state/council shareholders, capacity building phase |
+| 2021 | **Full community control** -- all shares transferred to community members |
+| 2027 | 20th anniversary of PICC |
+
+## ACT Projects on Palm Island
+
+| Project | Focus |
+|---------|-------|
+| [[picc|PICC (core)]] | Whole-of-life integrated service delivery |
+| PICC Annual Report | Documenting impact and progress |
+| PICC Photo Kiosk | Community photography and storytelling |
+| [[uncle-allan-palm-island-art|Uncle Allan Art]] | Art, culture, and creative practice |
+
+## Community Leadership
+
+- **Mayor:** Alf Lacey (signatory to Indigenous Leaders Accord, QLD)
+- **PICC Chair:** Luella Bligh
+- **PICC CEO:** Rachel Atkinson (also Chair of QATSICPP)
+
+## Cultural Significance
+
+Palm Island's four pillars of identity:
+1. **Family** -- kinship connections maintained through local workforce
+2. **Culture** -- cultural authority embedded in service delivery
+3. **Language** -- Manbarra language preservation
+4. **Country** -- children remain on country, not sent to mainland institutions
+
+## The Knowledge Base Build
+
+Palm Island is the **primary deployment site** for ACT's [[local-ai-architecture|Local AI Architecture]]:
+- 20 years of PICC history scraped and being compiled
+- Local hardware + Gemma 4 E4B for sovereign, offline operation
+- Mukurtu CMS + TK Labels for cultural governance
+
+## Why Palm Island Matters for [[third-reality|The Third Reality]]
+
+Palm Island is the **proof case** for The Third Reality:
+- Systemic data: [[civicgraph|CivicGraph]] tracks funding flows, government spending, service outcomes
+- Narrative sovereignty: [[empathy-ledger|Empathy Ledger]] captures community stories with full ownership
+- Evidence: PICC's 85% Indigenous workforce, Safe House innovation, Telstra partnership
+
+## Backlinks
+
+- [[picc|PICC]] -- the organization
+- [[acco-sector-analysis|ACCO Sector Analysis]] -- sector context
+- [[indigenous-data-sovereignty|Indigenous Data Sovereignty]] -- data governance
+- [[third-reality|The Third Reality]] -- the methodology`,
+  links: ["picc","uncle-allan-palm-island-art","local-ai-architecture","third-reality","civicgraph","empathy-ledger","acco-sector-analysis","indigenous-data-sovereignty"]
+},
+
+"acco-sector-analysis": {
+  slug: "acco-sector-analysis",
+  title: "ACCO Sector Analysis",
+  domain: "research",
+  content: `# ACCO Sector Analysis
+
+> The trajectory of Aboriginal Community Controlled Organizations represents a fundamental shift from state-mandated paternalism to institutionalized Indigenous self-determination.
+
+## Scale of the Sector
+
+- **800+** Aboriginal Community Controlled Organizations nationally
+- **148** NACCHO member organizations operating **550+** clinics
+- **3.6 million** episodes of care annually to **410,000+** clients
+- **80+** ACCO peak bodies in the Coalition of Peaks (formed 2018)
+
+## Historical Timeline
+
+| Year | Event | Significance |
+|------|-------|-------------|
+| 1967 | Constitutional Referendum | Commonwealth empowered to legislate |
+| 1971 | Aboriginal Medical Service (Redfern) | Launched community-controlled health model |
+| 1990 | ATSIC Established | Integrated policy under Indigenous-led commission |
+| 2005 | ATSIC Abolished | Shift to "mainstreaming" |
+| 2018 | Coalition of Peaks Formed | 50+ ACCO peaks to negotiate Closing the Gap |
+| 2020 | National Agreement on Closing the Gap | "Building the Sector" as core priority |
+| 2021 | [[picc|PICC]] Shareholder Transition | Palm Island -> 100% community control |
+
+## ACCO vs. Mainstream: Comparative Evidence
+
+| Metric | ACCO | Mainstream |
+|--------|------|-----------|
+| Trust/Access | 23% more effective | Avoided due to institutional racism |
+| Clinical Efficiency | 13 contacts/year | Lower continuity, crisis-driven |
+| Economic Impact | $1.19 benefit per $1 spent | Profit-taking or high admin |
+| Workforce | 80%+ Indigenous employment | Low Indigenous representation |
+| Scope | CPHC addressing social determinants | Narrow biomedical focus |
+
+## Structural Challenges
+
+1. **Fragmented, short-term funding** -- most contracts 12 months
+2. **No baseline operational funding**
+3. **High reporting burden** -- overlapping state/federal requirements
+4. **Lack of data sovereignty**
+5. **Lateral violence** -- organizations "caught in the middle"
+
+## Relevance to ACT
+
+This analysis directly informs:
+- [[civicgraph|CivicGraph]] data priorities (funding coverage gaps)
+- [[justicehub|JusticeHub]] evidence base (which interventions work)
+- [[third-reality|The Third Reality]] methodology
+- [[picc|PICC]] as a case study of the model working
+
+## Backlinks
+
+- [[picc|Palm Island Community Company]] -- deep case study
+- [[civicgraph|CivicGraph]] -- where this data lives
+- [[global-precedents|Global Precedents]] -- international comparisons`,
+  links: ["picc","civicgraph","justicehub","third-reality","global-precedents"]
+},
+
+"global-precedents": {
+  slug: "global-precedents",
+  title: "Global Precedents",
+  domain: "research",
+  content: `# Global Precedents
+
+> International models that validate and inform [[third-reality|The Third Reality]], [[civicgraph|CivicGraph]], and ACT's approach to community-led civic intelligence.
+
+## Spain & Holland: Data Commons and Digital Democracy
+
+### Barcelona -- DECODE Project & Decidim
+- **DECODE:** Massive decentralized data infrastructure -- citizens possess absolute data sovereignty
+- **Decidim** ("we decide" in Catalan): Digital democracy platform for direct citizen participation
+
+### Amsterdam -- Commons Network
+- Civil society think-tank promoting "the commons" -- communities collaboratively stewarding resources
+
+## Sweden: Indigenous Data Sovereignty (Sapmi Region)
+
+### Sami Parliament & GIDA-Sapmi Network
+- Pushing institutions to adopt CARE Principles as mandatory global standard
+- Sami Parliament actively formalizing data rights into national policy
+
+## Kenya & Tanzania: Catalytic Capital
+
+### Miamba Yetu Program (Kenya-Tanzania Coast)
+- "Blended finance" model deploying capital directly into local, environmentally positive businesses
+
+### East Africa M-Pesa Precedent
+- Leapfrogged traditional banking infrastructure
+- Proves communities can bypass slow-moving bureaucracies to route capital directly
+
+## Existing ACT Infrastructure That Maps to These Models
+
+| Global Model | ACT Equivalent | Status |
+|-------------|---------------|--------|
+| Barcelona's Decidim | [[civicgraph|CivicGraph]] transparency dashboard | Live (566K entities) |
+| DECODE data commons | [[justicehub|JusticeHub]] open evidence base | Live (1,004 programs) |
+| Sami data sovereignty | Mukurtu + TK Labels integration | Planned |
+| Miamba Yetu blended finance | ImpactQF via Allo Protocol | Conceptual |
+| Commons Network advocacy | [[third-reality|Third Reality]] certification | Branding phase |
+
+## Backlinks
+
+- [[third-reality|The Third Reality]] -- the standard these precedents validate
+- [[indigenous-data-sovereignty|Indigenous Data Sovereignty]] -- Sweden/Sami connection
+- [[civicgraph|CivicGraph]] -- the platform
+- [[acco-sector-analysis|ACCO Sector Analysis]] -- Australian context`,
+  links: ["third-reality","civicgraph","justicehub","indigenous-data-sovereignty","acco-sector-analysis"]
+},
+
+"local-ai-architecture": {
+  slug: "local-ai-architecture",
+  title: "Local AI Architecture",
+  domain: "technical",
+  content: `# Local AI Architecture
+
+> Edge computing + sovereign models = community-owned intelligence that never leaves country.
+
+## The Problem
+
+Cloud-based AI requires uploading sensitive cultural knowledge to corporate servers. This is incompatible with [[indigenous-data-sovereignty|Indigenous data sovereignty]], CARE principles, and community trust.
+
+## The Solution: Sovereign Edge AI
+
+Run AI entirely on local hardware. Data never leaves the community's physical control.
+
+## Architecture Layers
+
+### 1. Hardware Layer
+
+| Option | RAM | Use Case |
+|--------|-----|----------|
+| Mac Studio (M-series) | 64-128GB | Primary recommendation for [[picc|PICC]] |
+| NVIDIA RTX 5090 PC | 32GB VRAM | Alternative for GPU-intensive work |
+| Laptop (M3/M4 Pro) | 36-48GB | Mobile/portable deployment |
+
+### 2. Model Layer
+**Primary model:** Google Gemma 4 E4B (4.5B effective parameters)
+- Runs offline on consumer hardware
+- No API keys required at query time
+
+### 3. Ingestion Layer (Obsidian Vault)
+Raw sources -> standardized Markdown in Obsidian vault, following the [[llm-knowledge-base|LLM Knowledge Base]] pattern.
+
+### 4. Governance Layer (TK Labels as Code)
+Every markdown file carries YAML frontmatter with cultural protocols:
+\`\`\`yaml
+tk_labels:
+  - TK-Community-Voice
+  - TK-Culturally-Sensitive
+access: elders-only
+consent: ongoing
+\`\`\`
+
+Integration with Mukurtu CMS via Drupal MCP provides institutional-grade governance.
+
+### 5. Agent Layer
+**Primary agent:** @jshph/digest (2,400 lines, open source)
+
+### 6. Index Layer
+**Tool:** Enzyme -- 8ms lookup time, pre-computed before session starts.
+
+## Token Economics
+
+| Approach | Tokens per query | Cost |
+|----------|-----------------|------|
+| Cloud explore-mode agent | 60,000-90,000 | $0.30-0.90 |
+| @jshph/digest + Enzyme | 2,300-5,700 | $0 (local) |
+| **Saving** | **90-97%** | **100%** |
+
+## Implementation Priority
+
+1. **Now:** Set up Mac Studio + Ollama + Gemma 4 E4B for [[picc|PICC]]
+2. **Now:** Convert PICC's scraped history to Obsidian vault with TK frontmatter
+3. **Month 1:** Deploy @jshph/digest agent, build initial wiki
+4. **Month 2:** Connect Enzyme index, enable fast Q&A
+5. **Month 3:** Generate 20th anniversary materials from compiled wiki
+
+## Backlinks
+
+- [[llm-knowledge-base|LLM Knowledge Base]] -- the pattern
+- [[indigenous-data-sovereignty|Indigenous Data Sovereignty]] -- governance framework
+- [[picc|Palm Island Community Company]] -- primary deployment site
+- [[empathy-ledger|Empathy Ledger]] -- narrative content source`,
+  links: ["indigenous-data-sovereignty","picc","llm-knowledge-base","empathy-ledger"]
+},
+
+"act-farm": {
+  slug: "act-farm",
+  title: "ACT Farm",
+  domain: "projects",
+  content: `# ACT Farm
+
+> A regenerative agriculture and creative practice project grounded in therapeutic landscapes -- growing food, community, and connection to country.
+
+## Status
+Stub -- needs enrichment from Notion, Supabase, and team knowledge.
+
+## Themes
+- Regenerative Agriculture
+- Creative Practice
+- Therapeutic Landscapes
+
+## LCAA Phase
+Action -- hands-on cultivation and place-based practice.
+
+## Backlinks
+
+- [[lcaa-method|LCAA Method]]
+- [[the-harvest|The Harvest]]`,
+  links: ["lcaa-method","the-harvest"]
+},
+
+"the-confessional": {
+  slug: "the-confessional",
+  title: "The Confessional",
+  domain: "projects",
+  content: `# The Confessional
+
+> A horse trailer converted into a sacred healing space -- a mobile art therapy installation making mental health support accessible in remote and underserved communities.
+
+## Overview
+
+The Confessional is a mobile therapeutic installation built inside a converted horse trailer. It travels to remote and underserved communities where traditional mental health infrastructure is absent or inaccessible.
+
+The design is intentional: a horse trailer is familiar in rural and remote contexts, carries no clinical or institutional associations. Inside, participants engage with art-making as a route to self-expression and emotional processing.
+
+## Key Details
+
+- **Format:** Mobile installation -- horse trailer converted to therapeutic space
+- **Primary modality:** Art therapy, creative expression
+- **Website:** act.place/project/the-confessional
+- **Core values:** Anonymity, safety, accessibility, non-clinical framing
+
+## How It Works
+
+- Bringing the space to where people are
+- Using art-making as the primary therapeutic modality
+- Providing anonymity as a structural guarantee
+- Embedding crisis support access within the experience
+
+## LCAA Phase
+
+**Art** -- creative practice becomes the vehicle for healing, transformation, and community care.
+
+## Backlinks
+
+- [[dad-lab-25|Dad.Lab.25]]
+- [[gold-phone|Gold.Phone]]
+- [[empathy-ledger|Empathy Ledger]]
+- [[lcaa-method|LCAA Method]]`,
+  links: ["dad-lab-25","gold-phone","empathy-ledger","lcaa-method"]
+},
+
+"gold-phone": {
+  slug: "gold-phone",
+  title: "Gold.Phone",
+  domain: "projects",
+  content: `# Gold.Phone
+
+> A random connection voice platform and community installation tackling social isolation through authentic, unscripted human conversation.
+
+## Overview
+
+Gold.Phone addresses the social isolation crisis with a deceptively simple intervention: connect two strangers by voice, at random, with no social media profile, no metrics, and no agenda.
+
+The project operates as both a digital platform and a physical community installation. Its open-source foundation means any community can replicate and own their own version.
+
+## Key Details
+
+- **Format:** Voice platform + community installations
+- **Technology:** Open-source, designed for local community replication
+- **Core values:** Privacy-first, accessible, community ownership, no tracking or profiling
+
+## How It Works
+
+- **Random connection** -- participants are connected by voice with a stranger
+- **Community installations** -- physical installations in public spaces
+- **Open-source** -- freely available for communities to deploy
+- **Privacy by design** -- no profiles, no recordings, no data retained
+
+## LCAA Phase
+
+**Art** -- the act of connection is the art form. Human contact, stripped of performance, is itself transformative.
+
+## Backlinks
+
+- [[the-confessional|The Confessional]]
+- [[empathy-ledger|Empathy Ledger]]
+- [[lcaa-method|LCAA Method]]`,
+  links: ["the-confessional","empathy-ledger","lcaa-method"]
+},
+
+"uncle-allan-palm-island-art": {
+  slug: "uncle-allan-palm-island-art",
+  title: "Uncle Allan Palm Island Art",
+  domain: "projects",
+  content: `# Uncle Allan Palm Island Art
+
+> A digital platform preserving and sharing Uncle Allan's paintings -- works inspired by reef life and Dreaming stories -- as an act of cultural sovereignty and economic empowerment.
+
+**Status:** Active | **Code:** ACT-UA | **Tier:** Studio
+
+## Overview
+
+Uncle Allan Palm Island Art is a digital platform showcasing the paintings of Uncle Allan, an Aboriginal artist from [[palm-island|Palm Island]] whose work draws on reef life, Dreaming stories, and deep cultural knowledge.
+
+The project serves a dual purpose: preserving cultural knowledge and creating economic opportunity for Aboriginal artists.
+
+## Key Details
+
+- **Artist:** Uncle Allan -- Palm Island, Queensland
+- **Subject matter:** Reef life, Dreaming stories
+- **Website:** burrgumanbarraart.com
+
+## What the Platform Does
+
+- **Digital exhibition** -- makes Uncle Allan's work accessible globally
+- **Cultural storytelling** -- each work carries Dreaming knowledge
+- **Economic pathway** -- direct economic opportunity for the artist
+- **Cultural sovereignty in practice** -- the artist and community control how the work is presented
+
+## LCAA Phase
+
+**Art** -- creative practice as the primary vehicle for cultural sovereignty, economic empowerment, and intergenerational knowledge transmission.
+
+## Backlinks
+
+- [[empathy-ledger|Empathy Ledger]]
+- [[goods-on-country|Goods on Country]]
+- [[palm-island|Palm Island]]
+- [[lcaa-method|LCAA Method]]`,
+  links: ["palm-island","empathy-ledger","goods-on-country","lcaa-method"]
+},
+
+"dad-lab-25": {
+  slug: "dad-lab-25",
+  title: "Dad.Lab.25",
+  domain: "projects",
+  content: `# Dad.Lab.25
+
+> A community-led men's health initiative supporting fathers through peer connection, culturally appropriate wellbeing programs, and honest inquiry into what it means to be a dad today.
+
+## Overview
+
+Dad.Lab.25 responds to a recognised gap: men's health challenges -- particularly for fathers -- are poorly served by mainstream health and community services. The "25" signals a contemporary, forward-looking orientation.
+
+## Program Elements
+
+- **Peer support networks** -- building connections between fathers, reducing isolation
+- **Health and wellbeing programs** -- addressing physical, mental, and relational health
+- **Culturally appropriate interventions** -- designed for communities, not transplanted
+
+## LCAA Phase
+
+**Listen + Action** -- genuine inquiry into what fathers need, with direct delivery of programs and peer networks.
+
+## Backlinks
+
+- [[the-confessional|The Confessional]]
+- [[bg-fit|BG Fit]]
+- [[lcaa-method|LCAA Method]]`,
+  links: ["the-confessional","bg-fit","lcaa-method"]
+},
+
+"smart-connect": {
+  slug: "smart-connect",
+  title: "SMART Connect",
+  domain: "projects",
+  content: `# SMART Connect
+
+> A digital connection platform integrating peer support, digital access, and community connection.
+
+**Status:** Active | **Code:** ACT-SM | **Tier:** Satellite
+
+## Overview
+
+SMART Connect brings together three strands: the operational infrastructure, peer support relationships, and storytelling that builds community and reduces stigma.
+
+## Key Areas
+
+- **Peer Support** -- connecting people in recovery with trained peer supporters
+- **Digital Access** -- addressing digital exclusion
+- **Community Connection** -- fostering broader community belonging
+
+## SMART Recovery Ecosystem
+
+- [[smart-recovery-gp-kits|SMART Recovery GP Kits]] -- equipping GPs with tools
+- [[smart-hcp-gp-uplift|SMART HCP GP Uplift]] -- upskilling healthcare providers
+
+## LCAA Phase
+
+**Action** -- building the platform, connecting the people, closing the gaps.
+
+## Backlinks
+
+- [[lcaa-method|LCAA Method]]
+- [[smart-recovery-gp-kits|SMART Recovery GP Kits]]
+- [[smart-hcp-gp-uplift|SMART HCP GP Uplift]]`,
+  links: ["smart-recovery-gp-kits","smart-hcp-gp-uplift","lcaa-method"]
+},
+
+"smart-recovery-gp-kits": {
+  slug: "smart-recovery-gp-kits",
+  title: "SMART Recovery GP Kits",
+  domain: "projects",
+  content: `# SMART Recovery GP Kits
+
+> Practical toolkits for GPs to introduce SMART Recovery to patients in primary care settings.
+
+**Status:** Active | **Code:** ACT-SM | **Tier:** Satellite
+
+## Overview
+
+SMART Recovery GP Kits equip general practitioners with accessible, ready-to-use resources that open the conversation about SMART Recovery.
+
+## Key Features
+
+- **Primary Care Optimised** -- designed for GP time constraints
+- **Practical and Ready-to-Use** -- materials GPs can hand to patients
+- **Healthcare Integration** -- works within existing Medicare structures
+
+## SMART Recovery Ecosystem
+
+- [[smart-connect|SMART Connect]] -- digital peer support platform
+- [[smart-hcp-gp-uplift|SMART HCP GP Uplift]] -- workforce capability development
+
+## LCAA Phase
+
+**Action** -- kits in hand, referrals made, recovery conversations happening.
+
+## Backlinks
+
+- [[lcaa-method|LCAA Method]]
+- [[smart-connect|SMART Connect]]
+- [[smart-hcp-gp-uplift|SMART HCP GP Uplift]]`,
+  links: ["smart-connect","smart-hcp-gp-uplift","lcaa-method"]
+},
+
+"smart-hcp-gp-uplift": {
+  slug: "smart-hcp-gp-uplift",
+  title: "SMART HCP GP Uplift",
+  domain: "projects",
+  content: `# SMART HCP GP Uplift
+
+> A healthcare provider education initiative -- building GP and allied health confidence in supporting patients through addiction recovery.
+
+**Status:** Active | **Code:** ACT-SM | **Tier:** Satellite
+
+## Overview
+
+SMART HCP GP Uplift builds the knowledge, skills, and confidence GPs and healthcare providers need for effective addiction support conversations.
+
+## Key Focus Areas
+
+- **Provider Education** -- training in the SMART Recovery model
+- **Addiction Support Capability** -- clinical skills for non-judgmental conversations
+- **Healthcare System Integration** -- embedding within CPD structures
+
+## Complementary to GP Kits
+
+- [[smart-recovery-gp-kits|GP Kits]] give clinicians the practical resources
+- HCP Uplift builds the capability to use them well
+
+## LCAA Phase
+
+**Action** -- training delivered, providers upskilled, system-level capability built.
+
+## Backlinks
+
+- [[lcaa-method|LCAA Method]]
+- [[smart-connect|SMART Connect]]
+- [[smart-recovery-gp-kits|SMART Recovery GP Kits]]`,
+  links: ["smart-recovery-gp-kits","smart-connect","lcaa-method"]
+},
+
+"junes-patch": {
+  slug: "junes-patch",
+  title: "June's Patch",
+  domain: "projects",
+  content: `# June's Patch
+
+> A network of therapeutic gardens providing nature prescriptions for Queensland healthcare workers.
+
+## Overview
+
+June's Patch addresses a hidden crisis: the mental health of the people who care for everyone else. The project creates therapeutic gardens specifically designed as nature prescription sites for healthcare workers.
+
+## Model
+
+### Therapeutic Gardens
+Nature-based environments designed according to evidence from therapeutic landscape research.
+
+### Nature Prescriptions for Healthcare Workers
+Partnerships enable formal referral pathways -- a GP can write a "nature prescription."
+
+### Evidence-Based Research
+Building evidence for therapeutic horticulture as a mental health intervention.
+
+### Phased Community Ownership
+In line with [[designing-for-obsolescence|Designing for Obsolescence]], structured for phased community ownership.
+
+## LCAA Phase
+
+**Listen + Action** -- deep listening to healthcare workers shapes the building of gardens and prescribing pathways.
+
+## Backlinks
+
+- [[lcaa-method|LCAA Method]]
+- [[designing-for-obsolescence|Designing for Obsolescence]]
+- [[caring-for-those-who-care|Caring for Those Who Care]]`,
+  links: ["designing-for-obsolescence","lcaa-method","caring-for-those-who-care"]
+},
+
+"fishers-oysters": {
+  slug: "fishers-oysters",
+  title: "Fishers Oysters",
+  domain: "projects",
+  content: `# Fishers Oysters
+
+> A cultural-first aquaculture enterprise reclaiming and restoring Moreton Bay's oyster industry through Indigenous knowledge, community ownership, and regenerative practice.
+
+**Status:** Transferred | **Code:** ACT-FO
+
+## Overview
+
+Fishers Oysters is restoring the oyster industry of Moreton Bay through Indigenous knowledge and community ownership.
+
+## Key Details
+
+- **Location:** Moreton Bay, Queensland
+- **Website:** fishersoysters.com
+- **Core model:** Cultural-first aquaculture with community ownership
+
+## What Makes It Different
+
+- Indigenous knowledge drives the ecological model
+- Community ownership structure
+- Regenerative practice -- ecological restoration
+- Intergenerational sovereignty
+
+## LCAA Phase
+
+**Action** -- boats on water, reefs being seeded, knowledge being practised.
+
+## Backlinks
+
+- [[goods-on-country|Goods on Country]]
+- [[the-harvest|The Harvest]]
+- [[lcaa-method|LCAA Method]]`,
+  links: ["goods-on-country","the-harvest","lcaa-method"]
+},
+
+"global-laundry-alliance": {
+  slug: "global-laundry-alliance",
+  title: "Global Laundry Alliance",
+  domain: "projects",
+  content: `# Global Laundry Alliance
+
+> A dignity-centred international network connecting community laundry hubs -- advocating for policy change that recognises clean clothing as a matter of human dignity.
+
+**Status:** Transferred | **Code:** ACT-GL
+
+## Overview
+
+The Global Laundry Alliance grows from Orange Sky Laundry, co-founded by ACT co-founder Nicholas Marchesi OAM. Orange Sky demonstrated that a mobile laundry service was not primarily about clean clothes -- it was about dignity, belonging, and the five-minute conversation.
+
+## The Alliance Model
+
+- **Community Hubs** -- not just a utility but a community gathering point
+- **Global Network** -- connecting organisations worldwide
+- **Policy Change** -- pushing toward recognition of hygiene as a right
+- **Dignity as the Frame** -- every element oriented by dignity
+
+## LCAA Phase
+
+**Action** -- network-building, hub-connecting, and policy-advocating.
+
+## Backlinks
+
+- [[lcaa-method|LCAA Method]]
+- [[designing-for-obsolescence|Designing for Obsolescence]]`,
+  links: ["lcaa-method","designing-for-obsolescence"]
+},
+
+"tomnet": {
+  slug: "tomnet",
+  title: "TOMNET",
+  domain: "projects",
+  content: `# TOMNET
+
+> A community network dedicated to elder support -- connecting older people to each other, to services, and to the social fabric that sustains wellbeing in later life.
+
+## Overview
+
+TOMNET is a community network for older Australians addressing social isolation.
+
+## What the Network Does
+
+- **Elder-to-Elder Connection** -- peer relationships between older people
+- **Community Infrastructure** -- regular touchpoints, social gatherings, phone trees
+- **Service Navigation** -- helping elders navigate aged care services
+- **Listening as Foundation** -- attending to what elders actually need and value
+
+## LCAA Phase
+
+**Listen** -- attentive community presence: being there, paying attention, building trust.
+
+## Backlinks
+
+- [[lcaa-method|LCAA Method]]
+- [[caring-for-those-who-care|Caring for Those Who Care]]`,
+  links: ["lcaa-method","caring-for-those-who-care"]
+},
+
+"mounty-yarns": {
+  slug: "mounty-yarns",
+  title: "Mounty Yarns",
+  domain: "projects",
+  content: `# Mounty Yarns
+
+> A community storytelling project in Mount Gravatt -- gathering and preserving local knowledge through yarning, oral history, and cultural exhibition.
+
+## Overview
+
+Mounty Yarns operates in the Mount Gravatt area of Brisbane, using yarning circles, oral history methods, and community gathering to capture stories.
+
+## Key Activity
+
+### Yarning Circles
+A form of conversation that values every voice and treats story as knowledge.
+
+### Oral History Collection
+Stories gathered, documented, and preserved in community-owned forms.
+
+### Cultural Exhibition
+The [[contained|CONTAINED]] exhibition was shown at Mounty Yarns for $15,000.
+
+## LCAA Phase
+
+**Listen + Art** -- deep listening as primary methodology, with exhibition and cultural display.
+
+## Backlinks
+
+- [[contained|CONTAINED]]
+- [[empathy-ledger|Empathy Ledger]]
+- [[lcaa-method|LCAA Method]]`,
+  links: ["contained","empathy-ledger","lcaa-method"]
+},
+
+"caring-for-those-who-care": {
+  slug: "caring-for-those-who-care",
+  title: "Caring for Those Who Care",
+  domain: "projects",
+  content: `# Caring for Those Who Care
+
+> A sector sustainability initiative identifying and filling the wellbeing gaps for NFP leaders and workers.
+
+## Overview
+
+Caring for Those Who Care addresses a structural blind spot: the people who dedicate their working lives to holding communities together are themselves underserved and under-supported.
+
+## NFP Leaders Interview Project
+
+Conducted in partnership with **Bond University**:
+1. **Research Design** -- frameworks surfacing the real experience of NFP leaders
+2. **Data Collection** -- in-depth interviews across the sector
+3. **Analysis** -- systematic analysis of themes and patterns
+4. **Recommendations** -- actionable recommendations for funders and government
+
+## Relationship to [[junes-patch|June's Patch]]
+
+June's Patch is a natural companion: where this project identifies the problem, June's Patch delivers a direct nature-based response.
+
+## LCAA Phase
+
+**Listen** -- research and storytelling as forms of deep, structured listening.
+
+## Backlinks
+
+- [[empathy-ledger|Empathy Ledger]]
+- [[junes-patch|June's Patch]]
+- [[tomnet|TOMNET]]
+- [[lcaa-method|LCAA Method]]`,
+  links: ["junes-patch","empathy-ledger","tomnet","lcaa-method"]
+},
+
+"quandamooka-justice-strategy": {
+  slug: "quandamooka-justice-strategy",
+  title: "Quandamooka Justice and Healing Strategy",
+  domain: "projects",
+  content: `# Quandamooka Justice and Healing Strategy
+
+> A justice reinvestment and community healing initiative grounded in Quandamooka Country -- led by the Quandamooka people.
+
+## Overview
+
+The Quandamooka Justice and Healing Strategy is a place-specific, Indigenous-led response to justice and wellbeing challenges facing the Quandamooka people of Moreton Bay and North Stradbroke Island (Minjerribah).
+
+## Approach
+
+- **Justice Reinvestment** -- redirecting resources from incarceration toward upstream investment
+- **Indigenous Leadership** -- every element is led by Quandamooka community members
+- **Community Healing** -- justice and healing cannot be separated
+- **Self-Determination** -- the measure of success
+
+## LCAA Phase
+
+**Listen + Action** -- deep listening to Quandamooka community priorities, then strategy development and advocacy.
+
+## Backlinks
+
+- [[justicehub|JusticeHub]]
+- [[designing-for-obsolescence|Designing for Obsolescence]]
+- [[place-based-policy-lab|Place-Based Policy Lab]]
+- [[lcaa-method|LCAA Method]]`,
+  links: ["justicehub","designing-for-obsolescence","place-based-policy-lab","lcaa-method"]
+},
+
+"place-based-policy-lab": {
+  slug: "place-based-policy-lab",
+  title: "Place-Based Policy Lab",
+  domain: "projects",
+  content: `# Place-Based Policy Lab
+
+> An evidence-based, participatory research initiative co-designing community-led policy from the ground up.
+
+## Overview
+
+The Place-Based Policy Lab inverts traditional policy-making -- starting with community-held knowledge and building evidence bases that communities own and can deploy.
+
+## Methodology
+
+- **Participatory Research** -- community members are co-researchers, not research subjects
+- **Evidence-Based Practice** -- rigorous evidence bases for institutional environments
+- **Community-Led Policy** -- communities author and own the policy
+
+## Related
+
+- [[quandamooka-justice-strategy|Quandamooka Justice and Healing Strategy]]
+- [[designing-for-obsolescence|Designing for Obsolescence]]
+- [[justicehub|JusticeHub]]
+- [[empathy-ledger|Empathy Ledger]]
+
+## LCAA Phase
+
+**Curiosity** -- systematic inquiry into what communities know and what evidence says.
+
+## Backlinks
+
+- [[lcaa-method|LCAA Method]]
+- [[quandamooka-justice-strategy|Quandamooka Justice and Healing Strategy]]
+- [[justicehub|JusticeHub]]`,
+  links: ["quandamooka-justice-strategy","designing-for-obsolescence","justicehub","empathy-ledger","lcaa-method"]
+},
+
+"regional-arts-fellowship": {
+  slug: "regional-arts-fellowship",
+  title: "Regional Arts Fellowship",
+  domain: "projects",
+  content: `# Regional Arts Fellowship
+
+> A fellowship for practitioners working at the intersection of art, technology, and agriculture -- supporting the creative innovators regenerating regional Australia.
+
+## Overview
+
+The Regional Arts Fellowship recognises the artist-farmer, the technologist-land-steward, the creative practitioner whose work is inseparable from the particular landscape they inhabit.
+
+## The Intersection
+
+- **Art** -- creative practice as a primary mode of inquiry and transformation
+- **Technology** -- digital tools deployed in service of land and community
+- **Agriculture** -- the land as the primary context and stakeholder
+
+## LCAA Phase
+
+**Art** -- creative practice is the primary mode of work.
+
+## Backlinks
+
+- [[the-harvest|The Harvest]]
+- [[act-farm|ACT Farm]]
+- [[goods-on-country|Goods on Country]]
+- [[lcaa-method|LCAA Method]]`,
+  links: ["the-harvest","act-farm","goods-on-country","lcaa-method"]
+},
+
+"how-tractorpedia-works": {
+  slug: "how-tractorpedia-works",
+  title: "How Tractorpedia Works",
+  domain: "concepts",
+  content: `# How Tractorpedia Works
+
+> The living knowledge compilation pattern -- how raw research becomes a compounding knowledge base.
+
+**Status:** Active | **Code:** -- | **Tier:** Ecosystem
+
+## Core Insight
+
+You never write the wiki. The LLM writes everything. You just steer -- and every answer compounds.
+
+## The Five-Step Pipeline
+
+### Step 1: Collect Sources
+Raw documents, websites, conversations, Notion pages, and research go into wiki/raw/. Sources are immutable -- never modified after ingestion.
+
+### Step 2: LLM Compiles Wiki
+The LLM reads everything in raw/ and builds structured articles -- summaries, concept pages, and [[llm-knowledge-base|wikilinks]] between related ideas. Currently 40+ articles across 5 domains.
+
+### Step 3: Ask Questions
+Query the wiki with /wiki query. The LLM reads its own index files and finds answers across the entire collection. No complex RAG system needed.
+
+### Step 4: Render Outputs
+Outputs go beyond text -- Tractorpedia (this Wikipedia-style viewer), markdown articles, grant narratives, R&D evidence packages, slide decks.
+
+### Step 5: File Back to Wiki
+Every output gets filed back. Every question makes the knowledge base smarter. The loop compounds.
+
+## Architecture
+
+Three layers:
+- **Raw Sources** (wiki/raw/) -- immutable, read-only source documents
+- **The Wiki** (wiki/) -- LLM-owned markdown articles with cross-references
+- **Schema** (CLAUDE.md, SKILL.md) -- guides the LLM on structure and conventions
+
+Three operations:
+- **Ingest** -- /wiki ingest: source -> wiki updates
+- **Query** -- /wiki query: question -> synthesized answer -> filed back
+- **Lint** -- /wiki lint: health-check, find gaps, fix inconsistencies
+
+Two actors:
+- **Human** -- curate sources, ask questions, think
+- **LLM Agent** -- summarize, cross-reference, maintain
+
+## How This Maps to ACT
+
+| Platform | Role | What It Provides |
+|----------|------|-----------------|
+| [[civicgraph|CivicGraph]] | Systemic Data | 587K entities, $74B contracts |
+| [[empathy-ledger|Empathy Ledger]] | Narrative Sovereignty | Stories, photos, community voice |
+| [[justicehub|JusticeHub]] | Evidence | 1,000+ verified alternatives |
+| Tractorpedia | Knowledge Compilation | 40+ articles tying it all together |
+
+## The Third Reality
+
+When CivicGraph data + Empathy Ledger stories are compiled through Tractorpedia, the result is [[third-reality|The Third Reality]] -- an undeniable shared truth that changes minds and moves capital to community.
+
+## Backlinks
+
+- [[llm-knowledge-base|LLM Knowledge Base]]
+- [[third-reality|The Third Reality]]
+- [[civicgraph|CivicGraph]]
+- [[empathy-ledger|Empathy Ledger]]`,
+  links: ["llm-knowledge-base","third-reality","civicgraph","empathy-ledger","justicehub"]
+}
+};
+
+// ============================================================
+// MARKDOWN TO HTML CONVERTER
+// ============================================================
+function mdToHtml(md, articleSlug) {
+  if (!md) return '';
+  let html = md;
+
+  // Remove H1 (we render it separately as firstHeading)
+  html = html.replace(/^# .+\n*/m, '');
+
+  // Blockquotes (must be before other processing)
+  html = html.replace(/^> (.+)$/gm, '<blockquote>$1</blockquote>');
+  // Merge adjacent blockquotes
+  html = html.replace(/<\/blockquote>\n<blockquote>/g, '<br>');
+
+  // Code blocks
+  html = html.replace(/```(\w*)\n([\s\S]*?)```/g, function(m, lang, code) {
+    return '<pre><code>' + code.replace(/</g, '&lt;').replace(/>/g, '&gt;').trim() + '</code></pre>';
+  });
+
+  // Inline code
+  html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
+
+  // Tables
+  html = html.replace(/(\|.+\|)\n(\|[-| :]+\|)\n((?:\|.+\|\n?)*)/g, function(m, header, sep, body) {
+    let ths = header.split('|').filter(c => c.trim()).map(c => '<th>' + c.trim() + '</th>').join('');
+    let rows = body.trim().split('\n').map(row => {
+      let tds = row.split('|').filter(c => c.trim()).map(c => '<td>' + c.trim() + '</td>').join('');
+      return '<tr>' + tds + '</tr>';
+    }).join('');
+    return '<table class="wikitable"><thead><tr>' + ths + '</tr></thead><tbody>' + rows + '</tbody></table>';
+  });
+
+  // Wikilinks [[slug|text]] or [[slug]]
+  html = html.replace(/\[\[([^\]|]+)\|([^\]]+)\]\]/g, function(m, slug, text) {
+    if (articles[slug]) {
+      return '<a href="#' + slug + '" class="wikilink" onclick="navigateTo(\'' + slug + '\'); return false;">' + text + '</a>';
+    }
+    return '<a href="#' + slug + '" class="wikilink new" onclick="navigateTo(\'' + slug + '\'); return false;">' + text + '</a>';
+  });
+  html = html.replace(/\[\[([^\]]+)\]\]/g, function(m, slug) {
+    if (articles[slug]) {
+      return '<a href="#' + slug + '" class="wikilink" onclick="navigateTo(\'' + slug + '\'); return false;">' + articles[slug].title + '</a>';
+    }
+    return '<a href="#' + slug + '" class="wikilink new" onclick="return false;">' + slug + '</a>';
+  });
+
+  // Headers (h2, h3, h4)
+  html = html.replace(/^#### (.+)$/gm, function(m, text) {
+    let id = text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/-+$/, '');
+    return '<h4 id="' + id + '"><span class="mw-headline">' + text + '</span></h4>';
+  });
+  html = html.replace(/^### (.+)$/gm, function(m, text) {
+    let id = text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/-+$/, '');
+    return '<h3 id="' + id + '"><span class="mw-headline">' + text + '</span> <span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="#" onclick="return false;">edit</a><span class="mw-editsection-bracket">]</span></span></h3>';
+  });
+  html = html.replace(/^## (.+)$/gm, function(m, text) {
+    let id = text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/-+$/, '');
+    return '<div class="mw-headline-wrapper"><h2 id="' + id + '"><span class="mw-headline">' + text + '</span> <span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="#" onclick="return false;">edit</a><span class="mw-editsection-bracket">]</span></span></h2></div>';
+  });
+
+  // Bold and italic
+  html = html.replace(/\*\*\*(.+?)\*\*\*/g, '<strong><em>$1</em></strong>');
+  html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+  html = html.replace(/\*(.+?)\*/g, '<em>$1</em>');
+
+  // Unordered lists
+  html = html.replace(/^(\s*)- (.+)$/gm, function(m, indent, text) {
+    return '<li data-indent="' + indent.length + '">' + text + '</li>';
+  });
+
+  // Ordered lists
+  html = html.replace(/^(\s*)\d+\. (.+)$/gm, function(m, indent, text) {
+    return '<oli data-indent="' + indent.length + '">' + text + '</oli>';
+  });
+
+  // Wrap consecutive <li> in <ul>
+  html = html.replace(/((?:<li[^>]*>.+<\/li>\n?)+)/g, '<ul>$1</ul>');
+  html = html.replace(/((?:<oli[^>]*>.+<\/oli>\n?)+)/g, function(m, items) {
+    return '<ol>' + items.replace(/<\/?oli/g, function(t) { return t.replace('oli', 'li'); }) + '</ol>';
+  });
+
+  // Horizontal rules
+  html = html.replace(/^---+$/gm, '<hr>');
+
+  // Wrap remaining bare lines in <p>
+  let lines = html.split('\n');
+  let result = [];
+  let inBlock = false;
+  for (let i = 0; i < lines.length; i++) {
+    let line = lines[i];
+    if (line.match(/^<(div|h[2-4]|table|ul|ol|pre|blockquote|hr|li)/)) {
+      inBlock = false;
+      result.push(line);
+    } else if (line.match(/^<\/(div|table|ul|ol|pre|blockquote)/)) {
+      result.push(line);
+      inBlock = false;
+    } else if (line.trim() === '') {
+      result.push('');
+    } else if (!line.match(/^</) && line.trim().length > 0) {
+      result.push('<p>' + line + '</p>');
+    } else {
+      result.push(line);
+    }
+  }
+  html = result.join('\n');
+
+  // Clean up empty paragraphs
+  html = html.replace(/<p>\s*<\/p>/g, '');
+
+  return html;
+}
+
+// ============================================================
+// TABLE OF CONTENTS GENERATOR
+// ============================================================
+function generateToc(html) {
+  let headings = [];
+  let re = /<h([23]) id="([^"]+)"><span class="mw-headline">(.+?)<\/span>/g;
+  let match;
+  while ((match = re.exec(html)) !== null) {
+    headings.push({ level: parseInt(match[1]), id: match[2], text: match[3].replace(/<[^>]+>/g, '') });
+  }
+  if (headings.length < 3) return '';
+
+  let toc = '<div class="toc" id="toc"><div class="toctitle"><span>Contents</span></div>';
+  toc += '<ul>';
+  let h2num = 0;
+  let h3num = 0;
+  for (let h of headings) {
+    if (h.level === 2) {
+      h2num++;
+      h3num = 0;
+      toc += '<li><a href="#' + h.id + '"><span class="tocnumber">' + h2num + '</span> <span class="toctext">' + h.text + '</span></a>';
+      // Check if next is h3
+      let nextIdx = headings.indexOf(h) + 1;
+      let hasChildren = nextIdx < headings.length && headings[nextIdx].level === 3;
+      if (hasChildren) {
+        toc += '<ul>';
+        while (nextIdx < headings.length && headings[nextIdx].level === 3) {
+          h3num++;
+          toc += '<li><a href="#' + headings[nextIdx].id + '"><span class="tocnumber">' + h2num + '.' + h3num + '</span> <span class="toctext">' + headings[nextIdx].text + '</span></a></li>';
+          nextIdx++;
+        }
+        toc += '</ul>';
+      }
+      toc += '</li>';
+    }
+  }
+  toc += '</ul></div>';
+  return toc;
+}
+
+// ============================================================
+// DOMAIN LABELS
+// ============================================================
+const domainLabels = {
+  concepts: 'concepts',
+  projects: 'projects',
+  communities: 'communities',
+  research: 'research',
+  technical: 'technical',
+  index: 'encyclopedia'
+};
+
+const domainColors = {
+  concepts: '#cedff2',
+  projects: '#cef2e0',
+  communities: '#f2e6ce',
+  research: '#f2cedb',
+  technical: '#e6cef2',
+  index: '#f8f9fa'
+};
+
+// ============================================================
+// NAVIGATION
+// ============================================================
+function navigateTo(slug) {
+  if (!slug) {
+    showMainPage();
+    history.pushState(null, '', '#');
+    return;
+  }
+  let article = articles[slug];
+  if (!article) {
+    showNotFound(slug);
+    history.pushState(null, '', '#' + slug);
+    return;
+  }
+  showArticle(article);
+  history.pushState(null, '', '#' + slug);
+  window.scrollTo(0, 0);
+  document.getElementById('searchInput').value = '';
+  document.getElementById('search-suggestions').style.display = 'none';
+}
+
+function showArticle(article) {
+  document.title = article.title + ' - Tractorpedia';
+
+  // Category breadcrumb
+  let breadcrumb = document.getElementById('mw-category-breadcrumb');
+  if (article.domain !== 'index') {
+    breadcrumb.innerHTML = domainLabels[article.domain] || article.domain;
+    breadcrumb.style.display = 'block';
+  } else {
+    breadcrumb.style.display = 'none';
+  }
+
+  // Title
+  document.getElementById('firstHeading').textContent = article.title;
+  document.getElementById('firstHeading').style.display = 'block';
+  document.getElementById('siteSub').style.display = 'block';
+
+  // Extract infobox metadata from content and strip the status line
+  let infoboxHtml = '';
+  let contentForRender = article.content;
+  let statusMatch = article.content.match(/^\*\*Status:\*\*\s*(.+)$/m);
+  if (statusMatch && article.domain !== 'index') {
+    let statusLine = statusMatch[1];
+    // Remove the status line from content so it's not shown twice
+    contentForRender = contentForRender.replace(/^\*\*Status:\*\*\s*.+$/m, '');
+
+    // Parse fields from the status line (e.g. "Active | **Code:** ACT-JH | **Tier:** Ecosystem")
+    let status = statusLine.split('|')[0].trim();
+    let codeMatch = statusLine.match(/\*\*Code:\*\*\s*([^|]+)/);
+    let tierMatch = statusLine.match(/\*\*Tier:\*\*\s*([^|]+)/);
+    let code = codeMatch ? codeMatch[1].trim() : '';
+    let tier = tierMatch ? tierMatch[1].trim() : '';
+    let domain = domainLabels[article.domain] || article.domain;
+
+    // Status badge color
+    let badgeColor = '#00af89';
+    if (status.toLowerCase().includes('stub')) badgeColor = '#f0ad4e';
+    else if (status.toLowerCase().includes('sunset')) badgeColor = '#d9534f';
+    else if (status.toLowerCase().includes('transfer')) badgeColor = '#5bc0de';
+
+    infoboxHtml = '<div class="infobox">';
+    infoboxHtml += '<div class="infobox-title">' + article.title + '</div>';
+    // Infobox image - try to load from Empathy Ledger
+    let elMapping = EL_CONFIG.projectOrgMap[article.slug];
+    if (elMapping && elMapping.count > 0) {
+      infoboxHtml += '<div class="infobox-image" id="infobox-img-' + article.slug + '"><div class="placeholder" style="font-size:11px;">Loading from Empathy Ledger...</div></div>';
+      // Async load the thumbnail
+      setTimeout(function() {
+        fetchELMedia(elMapping.orgId, 1).then(function(media) {
+          let imgEl = document.getElementById('infobox-img-' + article.slug);
+          if (imgEl && media.length > 0) {
+            imgEl.innerHTML = '<img src="' + media[0].url + '" alt="' + article.title + '" style="max-width:100%;height:auto;display:block;">';
+          } else if (imgEl) {
+            imgEl.innerHTML = '<div class="placeholder">No photos yet</div>';
+          }
+        });
+      }, 100);
+    } else {
+      infoboxHtml += '<div class="infobox-image"><div class="placeholder">No photos yet</div></div>';
+    }
+    infoboxHtml += '<div class="infobox-row"><div class="infobox-label">Status</div><div class="infobox-value"><span style="display:inline-block;padding:1px 8px;border-radius:3px;background:' + badgeColor + ';color:#fff;font-size:11px;font-weight:600;">' + status + '</span></div></div>';
+    if (code) {
+      infoboxHtml += '<div class="infobox-row"><div class="infobox-label">Code</div><div class="infobox-value"><code>' + code + '</code></div></div>';
+    }
+    if (tier) {
+      infoboxHtml += '<div class="infobox-row"><div class="infobox-label">Tier</div><div class="infobox-value">' + tier + '</div></div>';
+    }
+    infoboxHtml += '<div class="infobox-row"><div class="infobox-label">Category</div><div class="infobox-value">' + domain.charAt(0).toUpperCase() + domain.slice(1) + '</div></div>';
+
+    // Extract website URL from content
+    let websiteMap = {
+      'ACT-JH': 'justicehub.com.au',
+      'ACT-GD': 'goodsoncountry.com',
+      'ACT-EL': 'empathyledger.com',
+      'ACT-HV': 'theharvestwitta.com.au',
+      'ACT-CS': 'civicgraph.app',
+      'ACT-PI': 'picc.studio',
+      'ACT-UA': 'burrgumanbarraart.com',
+      'ACT-FO': 'fishersoysters.com',
+      'ACT-CF': 'act.place/project/the-confessional',
+      'ACT-OO': 'oonchiumpa-app.vercel.app',
+      'ACT-BG': 'act.place/project/bg-fit'
+    };
+    let website = websiteMap[code] || '';
+    if (website) {
+      infoboxHtml += '<div class="infobox-row"><div class="infobox-label">Website</div><div class="infobox-value"><a href="https://' + website + '" target="_blank">' + website + '</a></div></div>';
+    }
+
+    // Gallery - live from Empathy Ledger
+    if (elMapping && elMapping.count > 0) {
+      infoboxHtml += '<div class="infobox-section">Gallery (' + elMapping.count + ' photos)</div>';
+      infoboxHtml += '<div id="infobox-gallery-' + article.slug + '" style="padding:6px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:3px;"></div>';
+      // Async load gallery thumbnails
+      setTimeout(function() {
+        fetchELMedia(elMapping.orgId, 6).then(function(media) {
+          let galEl = document.getElementById('infobox-gallery-' + article.slug);
+          if (galEl && media.length > 0) {
+            galEl.innerHTML = media.map(function(m) {
+              return '<img src="' + m.url + '" style="width:100%;height:60px;object-fit:cover;border-radius:2px;cursor:pointer;" title="' + (m.title || '') + '">';
+            }).join('');
+          }
+        });
+      }, 200);
+      infoboxHtml += '<div style="text-align:center;padding:4px 8px;"><a href="https://www.empathyledger.com" target="_blank" style="font-size:11px;">View all on Empathy Ledger →</a></div>';
+    } else {
+      infoboxHtml += '<div class="infobox-section">Gallery</div>';
+      infoboxHtml += '<div style="text-align:center;color:#888;font-size:11px;padding:8px;">No photos yet · <a href="https://www.empathyledger.com" target="_blank" style="font-size:11px;">Upload to Empathy Ledger</a></div>';
+    }
+
+    infoboxHtml += '</div>';
+  }
+
+  // Content
+  let html = mdToHtml(contentForRender, article.slug);
+  let toc = generateToc(html);
+
+  // Insert TOC after first paragraph
+  let firstPEnd = html.indexOf('</p>');
+  if (toc && firstPEnd > -1) {
+    html = html.substring(0, firstPEnd + 4) + toc + html.substring(firstPEnd + 4);
+  } else if (toc) {
+    html = toc + html;
+  }
+
+  // Categories footer
+  let categories = '<div class="catlinks">Categories: ';
+  categories += '<a href="#" onclick="return false;">' + (domainLabels[article.domain] || article.domain) + '</a>';
+  if (article.links && article.links.length > 0) {
+    // Add linked domains as extra categories
+    let domains = new Set();
+    article.links.forEach(l => {
+      if (articles[l]) domains.add(articles[l].domain);
+    });
+    domains.forEach(d => {
+      if (d !== article.domain) {
+        categories += ' | <a href="#" onclick="return false;">' + (domainLabels[d] || d) + '</a>';
+      }
+    });
+  }
+  categories += '</div>';
+
+  document.getElementById('mw-content-text').innerHTML = infoboxHtml + html + categories;
+}
+
+function showNotFound(slug) {
+  document.title = slug + ' - Tractorpedia';
+  document.getElementById('mw-category-breadcrumb').style.display = 'none';
+  document.getElementById('firstHeading').textContent = slug;
+  document.getElementById('firstHeading').style.display = 'block';
+  document.getElementById('siteSub').style.display = 'block';
+
+  let html = '<p>Tractorpedia does not have an article with this exact name.</p>';
+  html += '<p>You may want to <a href="#" onclick="doSearchFor(\'' + slug.replace(/'/g, "\\'") + '\'); return false;">search for "' + slug + '"</a> in existing articles.</p>';
+  html += '<ul>';
+  // Find articles that link to this slug
+  for (let key in articles) {
+    if (articles[key].links && articles[key].links.includes(slug)) {
+      html += '<li><a href="#' + key + '" class="wikilink" onclick="navigateTo(\'' + key + '\'); return false;">' + articles[key].title + '</a> links here</li>';
+    }
+  }
+  html += '</ul>';
+  document.getElementById('mw-content-text').innerHTML = html;
+}
+
+function showMainPage() {
+  document.title = 'Tractorpedia';
+  document.getElementById('mw-category-breadcrumb').style.display = 'none';
+  document.getElementById('firstHeading').style.display = 'none';
+  document.getElementById('siteSub').style.display = 'none';
+
+  let articleCount = Object.keys(articles).filter(k => k !== 'index').length;
+
+  let html = '';
+
+  // Hero section
+  html += '<div style="text-align:center; padding: 1.5em 0 1em; border-bottom: 1px solid #a2a9b1; margin-bottom: 1.5em;">';
+  html += '<h1 style="font-family: \'Linux Libertine\', Georgia, Times, serif; font-size: 2.2em; font-weight: normal; margin: 0 0 0.2em 0;">Welcome to Tractorpedia</h1>';
+  html += '<p style="font-size: 15px; color: #202122; margin: 0 0 0.3em 0;">The living knowledge base for <strong>A Curious Tractor</strong> &mdash; ' + articleCount + ' articles across the ACT ecosystem</p>';
+  html += '<p style="font-size: 13px; color: #72777d; font-style: italic; margin: 0;">Maintained by LLM. Curated by humans. Knowledge that compounds.</p>';
+  html += '</div>';
+
+  // How This Works
+  html += '<div style="margin-bottom: 1.5em;">';
+  html += '<h2 style="font-family: \'Linux Libertine\', Georgia, Times, serif; font-size: 1.3em; font-weight: normal; text-align: center; margin: 0 0 0.75em 0; border: none;">How This Works</h2>';
+  html += '<div style="display: flex; gap: 1em; flex-wrap: wrap;">';
+
+  html += '<div style="flex: 1; min-width: 180px; background: #f8f9fa; border: 1px solid #eaecf0; border-radius: 4px; padding: 1em; text-align: center;">';
+  html += '<div style="font-size: 1.5em; margin-bottom: 0.3em;">&#128229;</div>';
+  html += '<div style="font-weight: bold; font-size: 14px; margin-bottom: 0.3em; font-family: -apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif;">Collect Sources</div>';
+  html += '<div style="font-size: 12.5px; color: #54595d; font-family: -apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif;">Raw documents, websites, conversations, and research go into the wiki</div>';
+  html += '</div>';
+
+  html += '<div style="flex: 1; min-width: 180px; background: #f8f9fa; border: 1px solid #eaecf0; border-radius: 4px; padding: 1em; text-align: center;">';
+  html += '<div style="font-size: 1.5em; margin-bottom: 0.3em;">&#129302;</div>';
+  html += '<div style="font-weight: bold; font-size: 14px; margin-bottom: 0.3em; font-family: -apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif;">LLM Compiles</div>';
+  html += '<div style="font-size: 12.5px; color: #54595d; font-family: -apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif;">AI reads sources, writes articles, maintains cross-references and links</div>';
+  html += '</div>';
+
+  html += '<div style="flex: 1; min-width: 180px; background: #f8f9fa; border: 1px solid #eaecf0; border-radius: 4px; padding: 1em; text-align: center;">';
+  html += '<div style="font-size: 1.5em; margin-bottom: 0.3em;">&#128269;</div>';
+  html += '<div style="font-weight: bold; font-size: 14px; margin-bottom: 0.3em; font-family: -apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif;">Query &amp; Grow</div>';
+  html += '<div style="font-size: 12.5px; color: #54595d; font-family: -apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif;">Ask questions, get answers, file insights back. The wiki gets smarter.</div>';
+  html += '</div>';
+
+  html += '</div></div>';
+
+  // Explore by Category - 2x2 portal grid
+  html += '<h2 style="font-family: \'Linux Libertine\', Georgia, Times, serif; font-size: 1.3em; font-weight: normal; text-align: center; margin: 0 0 0.75em 0; border: none;">Explore by Category</h2>';
+  html += '<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1em; margin-bottom: 1.5em;">';
+
+  // Ecosystem Projects portal (green)
+  html += '<div style="background: #fff; border: 1px solid #c8ccd1; border-radius: 4px; overflow: hidden;">';
+  html += '<div style="border-left: 4px solid #00af89; padding: 0.5em 0.75em; background: #f8f9fa; font-weight: bold; font-family: -apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif; font-size: 14px;">Ecosystem Projects</div>';
+  html += '<ul style="list-style: disc; margin: 0.5em 0.5em 0.75em 1.75em; font-size: 13px;">';
+  html += '<li><a href="#justicehub" class="wikilink" onclick="navigateTo(\'justicehub\'); return false;">JusticeHub</a></li>';
+  html += '<li><a href="#goods-on-country" class="wikilink" onclick="navigateTo(\'goods-on-country\'); return false;">Goods on Country</a></li>';
+  html += '<li><a href="#empathy-ledger" class="wikilink" onclick="navigateTo(\'empathy-ledger\'); return false;">Empathy Ledger</a></li>';
+  html += '<li><a href="#the-harvest" class="wikilink" onclick="navigateTo(\'the-harvest\'); return false;">The Harvest</a></li>';
+  html += '<li><a href="#act-farm" class="wikilink" onclick="navigateTo(\'act-farm\'); return false;">The Farm</a></li>';
+  html += '</ul></div>';
+
+  // Community & Justice portal (blue)
+  html += '<div style="background: #fff; border: 1px solid #c8ccd1; border-radius: 4px; overflow: hidden;">';
+  html += '<div style="border-left: 4px solid #3366cc; padding: 0.5em 0.75em; background: #f8f9fa; font-weight: bold; font-family: -apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif; font-size: 14px;">Community &amp; Justice</div>';
+  html += '<ul style="list-style: disc; margin: 0.5em 0.5em 0.75em 1.75em; font-size: 13px;">';
+  html += '<li><a href="#picc" class="wikilink" onclick="navigateTo(\'picc\'); return false;">PICC</a></li>';
+  html += '<li><a href="#oonchiumpa" class="wikilink" onclick="navigateTo(\'oonchiumpa\'); return false;">Oonchiumpa</a></li>';
+  html += '<li><a href="#bg-fit" class="wikilink" onclick="navigateTo(\'bg-fit\'); return false;">BG Fit</a></li>';
+  html += '<li><a href="#contained" class="wikilink" onclick="navigateTo(\'contained\'); return false;">CONTAINED</a></li>';
+  html += '<li><a href="#diagrama" class="wikilink" onclick="navigateTo(\'diagrama\'); return false;">Diagrama</a></li>';
+  html += '</ul></div>';
+
+  // Core Concepts portal (purple)
+  html += '<div style="background: #fff; border: 1px solid #c8ccd1; border-radius: 4px; overflow: hidden;">';
+  html += '<div style="border-left: 4px solid #7b68ee; padding: 0.5em 0.75em; background: #f8f9fa; font-weight: bold; font-family: -apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif; font-size: 14px;">Core Concepts</div>';
+  html += '<ul style="list-style: disc; margin: 0.5em 0.5em 0.75em 1.75em; font-size: 13px;">';
+  html += '<li><a href="#third-reality" class="wikilink" onclick="navigateTo(\'third-reality\'); return false;">The Third Reality</a></li>';
+  html += '<li><a href="#lcaa-method" class="wikilink" onclick="navigateTo(\'lcaa-method\'); return false;">LCAA Method</a></li>';
+  html += '<li><a href="#civic-world-model" class="wikilink" onclick="navigateTo(\'civic-world-model\'); return false;">Civic World Model</a></li>';
+  html += '<li><a href="#indigenous-data-sovereignty" class="wikilink" onclick="navigateTo(\'indigenous-data-sovereignty\'); return false;">Indigenous Data Sovereignty</a></li>';
+  html += '<li><a href="#how-tractorpedia-works" class="wikilink" onclick="navigateTo(\'how-tractorpedia-works\'); return false;">How Tractorpedia Works</a></li>';
+  html += '</ul></div>';
+
+  // Research & Technical portal (orange)
+  html += '<div style="background: #fff; border: 1px solid #c8ccd1; border-radius: 4px; overflow: hidden;">';
+  html += '<div style="border-left: 4px solid #e67e22; padding: 0.5em 0.75em; background: #f8f9fa; font-weight: bold; font-family: -apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, sans-serif; font-size: 14px;">Research &amp; Technical</div>';
+  html += '<ul style="list-style: disc; margin: 0.5em 0.5em 0.75em 1.75em; font-size: 13px;">';
+  html += '<li><a href="#acco-sector-analysis" class="wikilink" onclick="navigateTo(\'acco-sector-analysis\'); return false;">ACCO Sector Analysis</a></li>';
+  html += '<li><a href="#global-precedents" class="wikilink" onclick="navigateTo(\'global-precedents\'); return false;">Global Precedents</a></li>';
+  html += '<li><a href="#local-ai-architecture" class="wikilink" onclick="navigateTo(\'local-ai-architecture\'); return false;">Local AI Architecture</a></li>';
+  html += '</ul></div>';
+
+  html += '</div>';
+
+  // Featured Article
+  html += '<div style="background: #f8f9fa; border: 1px solid #a2a9b1; padding: 1em 1.25em; margin-bottom: 1.5em;">';
+  html += '<h2 style="font-size: 16px; font-weight: normal; font-family: \'Linux Libertine\', Georgia, Times, serif; margin: 0 0 0.5em 0; border-bottom: none;">Featured Article: <a href="#third-reality" class="wikilink" onclick="navigateTo(\'third-reality\'); return false;">The Third Reality</a></h2>';
+  html += '<p style="font-size: 13.5px; line-height: 1.6;"><strong>The Third Reality</strong> is ACT\'s proprietary methodology for measuring social impact. It is the synthesis that emerges when verified systemic data (CivicGraph, JusticeHub) intersects with sovereign human narrative (Empathy Ledger). A spreadsheet alone won\'t change a policymaker\'s mind. A singular tragic story can be dismissed as an anomaly. But when you mathematically link an immutable, sovereign human story to verified systemic data, you create an undeniable, shared truth. <a href="#third-reality" class="wikilink" onclick="navigateTo(\'third-reality\'); return false;">Read more...</a></p>';
+  html += '</div>';
+
+  // Recently Updated
+  html += '<div style="margin-bottom: 1em;">';
+  html += '<h2 style="font-family: \'Linux Libertine\', Georgia, Times, serif; font-size: 1.2em; font-weight: normal; border-bottom: 1px solid #a2a9b1; padding-bottom: 0.2em; margin: 0 0 0.5em 0;">Recently Updated</h2>';
+  html += '<ul style="list-style: disc; margin: 0 0 0 1.6em; font-size: 13.5px;">';
+  let recentSlugs = Object.keys(articles).filter(k => k !== 'index').slice(0, 5);
+  recentSlugs.forEach(slug => {
+    html += '<li><a href="#' + slug + '" class="wikilink" onclick="navigateTo(\'' + slug + '\'); return false;">' + articles[slug].title + '</a> &mdash; <span style="color: #72777d; font-size: 12px;">' + (domainLabels[articles[slug].domain] || articles[slug].domain) + '</span></li>';
+  });
+  html += '</ul></div>';
+
+  html += '<div class="mp-stats">Tractorpedia is maintained using the <a href="#llm-knowledge-base" class="wikilink" onclick="navigateTo(\'llm-knowledge-base\'); return false;">LLM Knowledge Base</a> pattern. Last compiled: 2026-04-06.</div>';
+
+  document.getElementById('mw-content-text').innerHTML = html;
+}
+
+// ============================================================
+// SEARCH
+// ============================================================
+function doSearch() {
+  let query = document.getElementById('searchInput').value.trim();
+  if (!query) return;
+  document.getElementById('search-suggestions').style.display = 'none';
+
+  // Exact match?
+  let exactSlug = query.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/-+$/, '');
+  if (articles[exactSlug]) {
+    navigateTo(exactSlug);
+    return;
+  }
+
+  // Search results
+  showSearchResults(query);
+  history.pushState(null, '', '#search=' + encodeURIComponent(query));
+}
+
+function doSearchFor(query) {
+  document.getElementById('searchInput').value = query;
+  showSearchResults(query);
+  history.pushState(null, '', '#search=' + encodeURIComponent(query));
+}
+
+function showSearchResults(query) {
+  document.title = 'Search results - Tractorpedia';
+  document.getElementById('mw-category-breadcrumb').style.display = 'none';
+  document.getElementById('firstHeading').textContent = 'Search results';
+  document.getElementById('firstHeading').style.display = 'block';
+  document.getElementById('siteSub').style.display = 'block';
+
+  let q = query.toLowerCase();
+  let results = [];
+
+  for (let slug in articles) {
+    if (slug === 'index') continue;
+    let a = articles[slug];
+    let titleMatch = a.title.toLowerCase().includes(q);
+    let contentMatch = a.content.toLowerCase().includes(q);
+    if (titleMatch || contentMatch) {
+      let score = titleMatch ? 10 : 0;
+      // Count content occurrences
+      let idx = 0;
+      let count = 0;
+      let contentLower = a.content.toLowerCase();
+      while ((idx = contentLower.indexOf(q, idx)) !== -1) {
+        count++;
+        idx += q.length;
+      }
+      score += count;
+      // Get snippet
+      let snippet = '';
+      if (contentMatch) {
+        let pos = contentLower.indexOf(q);
+        let start = Math.max(0, pos - 80);
+        let end = Math.min(a.content.length, pos + q.length + 120);
+        snippet = a.content.substring(start, end)
+          .replace(/[#*\[\]|>]/g, '')
+          .replace(/\n/g, ' ')
+          .trim();
+        // Highlight match
+        let re = new RegExp('(' + query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi');
+        snippet = snippet.replace(re, '<span class="searchmatch">$1</span>');
+        if (start > 0) snippet = '...' + snippet;
+        if (end < a.content.length) snippet = snippet + '...';
+      }
+      results.push({ slug, title: a.title, domain: a.domain, score, snippet });
+    }
+  }
+
+  results.sort((a, b) => b.score - a.score);
+
+  let html = '';
+  if (results.length === 0) {
+    html = '<p>There were no results matching the query.</p>';
+    html += '<p>You can try different search terms or browse the <a href="#" onclick="navigateTo(\'\'); return false;">main page</a>.</p>';
+  } else {
+    html = '<p>Showing ' + results.length + ' result' + (results.length > 1 ? 's' : '') + ' for <strong>' + query + '</strong></p>';
+    html += '<ul class="mw-search-results">';
+    for (let r of results) {
+      html += '<li class="mw-search-result">';
+      html += '<div class="mw-search-result-heading"><a href="#' + r.slug + '" onclick="navigateTo(\'' + r.slug + '\'); return false;">' + r.title + '</a></div>';
+      if (r.snippet) {
+        html += '<div class="searchresult">' + r.snippet + '</div>';
+      }
+      html += '<div class="mw-search-result-data">' + (domainLabels[r.domain] || r.domain) + '</div>';
+      html += '</li>';
+    }
+    html += '</ul>';
+  }
+
+  document.getElementById('mw-content-text').innerHTML = html;
+}
+
+// ============================================================
+// SEARCH AUTOCOMPLETE
+// ============================================================
+document.getElementById('searchInput').addEventListener('input', function() {
+  let q = this.value.trim().toLowerCase();
+  let suggestions = document.getElementById('search-suggestions');
+  if (q.length < 2) {
+    suggestions.style.display = 'none';
+    return;
+  }
+
+  let matches = [];
+  for (let slug in articles) {
+    if (slug === 'index') continue;
+    let a = articles[slug];
+    if (a.title.toLowerCase().includes(q)) {
+      matches.push({ slug, title: a.title, domain: a.domain });
+    }
+  }
+  // Also search content for title-less matches
+  if (matches.length < 5) {
+    for (let slug in articles) {
+      if (slug === 'index') continue;
+      let a = articles[slug];
+      if (!a.title.toLowerCase().includes(q) && a.content.toLowerCase().includes(q)) {
+        matches.push({ slug, title: a.title, domain: a.domain });
+        if (matches.length >= 8) break;
+      }
+    }
+  }
+
+  matches = matches.slice(0, 8);
+
+  if (matches.length === 0) {
+    suggestions.style.display = 'none';
+    return;
+  }
+
+  suggestions.innerHTML = matches.map(m =>
+    '<div class="suggestion" onclick="navigateTo(\'' + m.slug + '\')">' +
+    '<span class="sg-title">' + m.title + '</span>' +
+    '<span class="sg-domain">' + (domainLabels[m.domain] || m.domain) + '</span>' +
+    '</div>'
+  ).join('');
+  suggestions.style.display = 'block';
+});
+
+// Close suggestions on click outside
+document.addEventListener('click', function(e) {
+  if (!e.target.closest('#p-search')) {
+    document.getElementById('search-suggestions').style.display = 'none';
+  }
+});
+
+// ============================================================
+// RANDOM ARTICLE
+// ============================================================
+function randomArticle() {
+  let slugs = Object.keys(articles).filter(k => k !== 'index');
+  let slug = slugs[Math.floor(Math.random() * slugs.length)];
+  navigateTo(slug);
+}
+
+function showArtPortfolio() {
+  window.location.hash = 'art-portfolio';
+  document.getElementById('firstHeading').textContent = 'Art Portfolio';
+  document.getElementById('siteSub').style.display = 'block';
+  document.getElementById('mw-category-breadcrumb').textContent = 'art · studio · creative practice';
+  document.title = 'Art Portfolio — Tractorpedia';
+
+  let artProjects = [
+    { slug: 'uncle-allan-palm-island-art', name: 'Uncle Allan Palm Island Art', desc: 'Digital platform showcasing paintings inspired by reef life and Dreaming stories. Cultural sovereignty in practice.', color: '#8e44ad', emoji: '🎨' },
+    { slug: 'contained', name: 'CONTAINED', desc: 'Immersive shipping container experience exploring youth justice — themes of isolation and liberation.', color: '#c0392b', emoji: '📦' },
+    { slug: 'the-confessional', name: 'The Confessional', desc: 'Horse trailer converted to sacred healing space. Mobile art therapy for remote communities.', color: '#2c3e50', emoji: '🚐' },
+    { slug: 'gold-phone', name: 'Gold.Phone', desc: 'Random voice connection platform. Community installations fighting social isolation through technology.', color: '#d4a017', emoji: '📞' },
+    { slug: 'regional-arts-fellowship', name: 'Regional Arts Fellowship', desc: 'Art meets technology meets agriculture. Supporting underserved regional practitioners.', color: '#27ae60', emoji: '🌾' },
+    { slug: 'mounty-yarns', name: 'Mounty Yarns', desc: 'Community yarning circles preserving local stories and oral history. CONTAINED exhibited here.', color: '#2980b9', emoji: '🧶' },
+    { slug: 'picc', name: 'PICC Photo Studio', desc: 'On-country professional photography. 2,491 photos documenting community life on Palm Island.', color: '#e67e22', emoji: '📸' },
+    { slug: 'caring-for-those-who-care', name: 'Caring for Those Who Care', desc: 'NFP leader wellbeing research with Bond University. Stories of sector sustainability.', color: '#1abc9c', emoji: '💚' },
+    { slug: 'dad-lab-25', name: 'Dad.Lab.25', desc: 'Supporting fathers through community-led health and wellbeing programs.', color: '#3498db', emoji: '👨‍👧' },
+    { slug: 'designing-for-obsolescence', name: 'Designing for Obsolescence', desc: 'The manifesto: success means we become unnecessary. A philosophy in creative practice.', color: '#95a5a6', emoji: '📝' }
+  ];
+
+  let html = '<div style="font-size:15px;line-height:1.6;max-width:800px;margin-bottom:1.5em;">';
+  html += 'A Curious Tractor\'s art practice spans immersive experiences, community storytelling, digital platforms, and mobile installations. ';
+  html += 'Art is the final phase of the <a href="#" onclick="navigateTo(\'lcaa-method\');return false;">LCAA Method</a> — where action becomes something beautiful, meaningful, and lasting.';
+  html += '</div>';
+
+  html += '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px;margin-bottom:2em;">';
+
+  for (let p of artProjects) {
+    html += '<div style="border:1px solid #ddd;border-radius:6px;overflow:hidden;background:#fff;cursor:pointer;" onclick="navigateTo(\'' + p.slug + '\')">';
+    html += '<div id="art-thumb-' + p.slug + '" style="height:160px;background:' + p.color + ';display:flex;align-items:center;justify-content:center;font-size:48px;overflow:hidden;">' + p.emoji + '</div>';
+    html += '<div style="padding:14px 16px;">';
+    html += '<div style="font-size:15px;font-weight:700;margin-bottom:4px;">' + p.name + '</div>';
+    html += '<div style="font-size:12.5px;color:#666;line-height:1.45;">' + p.desc + '</div>';
+    html += '</div></div>';
+  }
+
+  html += '</div>';
+
+  // Load real thumbnails from EL
+  setTimeout(function() {
+    artProjects.forEach(function(p) {
+      let mapping = EL_CONFIG.projectOrgMap[p.slug];
+      if (mapping && mapping.count > 0) {
+        fetchELMedia(mapping.orgId, 1).then(function(media) {
+          let el = document.getElementById('art-thumb-' + p.slug);
+          if (el && media.length > 0) {
+            el.innerHTML = '<img src="' + media[0].url + '" style="width:100%;height:100%;object-fit:cover;">';
+          }
+        });
+      }
+    });
+  }, 100);
+
+  html += '<div style="font-size:13px;color:#888;border-top:1px solid #eee;padding-top:12px;">';
+  html += 'Photos loaded live from <a href="https://www.empathyledger.com" target="_blank">Empathy Ledger</a>. Each project displays media tagged by organization.';
+  html += '</div>';
+
+  document.getElementById('mw-content-text').innerHTML = html;
+}
+
+// ============================================================
+// HASH ROUTING
+// ============================================================
+function handleHash() {
+  let hash = window.location.hash.substring(1);
+  if (!hash) {
+    showMainPage();
+    return;
+  }
+  if (hash.startsWith('search=')) {
+    let query = decodeURIComponent(hash.substring(7));
+    document.getElementById('searchInput').value = query;
+    showSearchResults(query);
+    return;
+  }
+  let article = articles[hash];
+  if (article) {
+    showArticle(article);
+  } else {
+    showNotFound(hash);
+  }
+}
+
+window.addEventListener('hashchange', handleHash);
+window.addEventListener('popstate', handleHash);
+
+// Initial load
+handleHash();
+</script>
+</body>
+</html>

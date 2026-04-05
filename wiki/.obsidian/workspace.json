@@ -1,0 +1,215 @@
+{
+  "main": {
+    "id": "475a204ae6b7f859",
+    "type": "split",
+    "children": [
+      {
+        "id": "9add99dda331f9b4",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "5e77a96e65a9bda3",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "projects/mounty-yarns.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "mounty-yarns"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "1ff093bc598a398e",
+    "type": "split",
+    "children": [
+      {
+        "id": "dcc6f482bd5e4c4e",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "cd18dd650777edef",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "8f1bd6e779167f39",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "7adbd0c70351c533",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "fb9e6cb688b7d781",
+    "type": "split",
+    "children": [
+      {
+        "id": "900d3c1d248df2fb",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "1e61508d469ed4f7",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "projects/mounty-yarns.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for mounty-yarns"
+            }
+          },
+          {
+            "id": "eebbd0ea04515cb7",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "projects/mounty-yarns.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from mounty-yarns"
+            }
+          },
+          {
+            "id": "efb80d427eb68844",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "6e38aac3f3d37c6d",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "e72db68b9d6d70fc",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "projects/mounty-yarns.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of mounty-yarns"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false
+    }
+  },
+  "active": "5e77a96e65a9bda3",
+  "lastOpenFiles": [
+    "raw/2026-04-06-empathy-ledger-audit.md",
+    "research/civic-transparency-movement.md",
+    "concepts/tractorpedia.md",
+    "raw/2026-04-06-project-alignment-audit.md",
+    "projects/green-harvest-witta.md",
+    "projects/goods-on-country.md",
+    "projects/gold-phone.md",
+    "projects/diagrama.md",
+    "raw/2026-04-06-notion-active-projects.md",
+    "raw/2026-04-06-website-scrapes.md",
+    "projects/goods.md",
+    "projects/dad-lab-25.md",
+    "projects/contained.md",
+    "projects/civicgraph.md",
+    "projects/mounty-yarns.md",
+    "projects/oonchiumpa.md",
+    "projects/picc.md",
+    "projects/place-based-policy-lab.md",
+    "projects/quandamooka-justice-strategy.md",
+    "projects/regional-arts-fellowship.md",
+    "projects/smart-connect.md",
+    "projects/smart-hcp-gp-uplift.md",
+    "projects/smart-recovery-gp-kits.md",
+    "projects/the-confessional.md",
+    "projects/junes-patch.md",
+    "projects/caring-for-those-who-care.md"
+  ]
+}
