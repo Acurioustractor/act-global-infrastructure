@@ -36,10 +36,11 @@ const MD_OUTPUT = args.includes('--markdown') || args.includes('--md');
 
 // R&D eligible projects and their classification
 const RD_PROJECTS = {
-  'ACT-EL': { name: 'Empathy Ledger', category: 'Core R&D', description: 'Novel AI-powered story collection and analysis platform' },
-  'ACT-IN': { name: 'ALMA / Bot Intelligence', category: 'Core R&D', description: 'Experimental knowledge graph, episodic memory, AI agent with tool_use' },
-  'ACT-JH': { name: 'JusticeHub Tech', category: 'Supporting R&D', description: 'Technology platform for justice reform network' },
-  'ACT-GD': { name: 'Goods Marketplace', category: 'Supporting R&D', description: 'Social enterprise marketplace technology' },
+  'ACT-CG': { name: 'CivicGraph (CivicScope)', category: 'Core R&D', description: 'Cross-government entity resolution, power scoring, graph analytics, cryptographic attestation' },
+  'ACT-EL': { name: 'Empathy Ledger', category: 'Core R&D', description: 'Novel AI-powered story collection and analysis platform with OCAP data sovereignty' },
+  'ACT-IN': { name: 'Infrastructure / Agent Orchestration', category: 'Core R&D', description: 'Multi-agent orchestration, finance attribution engine, autonomous data pipeline coordination' },
+  'ACT-JH': { name: 'JusticeHub / ALMA', category: 'Core R&D', description: 'Justice evidence database, intervention linkage, multi-strategy entity resolution' },
+  'ACT-GD': { name: 'Goods Procurement Intelligence', category: 'Supporting R&D', description: 'Community demand matching, procurement signals, multi-mode search' },
   'ACT-PS': { name: 'PICC Photo Studio', category: 'Supporting R&D', description: 'Experimental community storytelling technology' },
   'ACT-CF': { name: 'The Confessional', category: 'Supporting R&D', description: 'Novel story capture technology' },
 };

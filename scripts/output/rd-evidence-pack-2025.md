@@ -1,8 +1,8 @@
 # R&D Tax Incentive — Evidence Pack
 
 **Entity:** ACT Foundation (ABN 21 591 780 066)
-**Period:** 2025-07-01 to 2026-03-17
-**Generated:** 2026-03-17
+**Period:** 2025-07-01 to 2026-03-29
+**Generated:** 2026-03-29
 **Prepared for:** AusIndustry R&D Tax Incentive registration
 
 ---
@@ -11,12 +11,12 @@
 
 | Metric | Value |
 |--------|-------|
-| Total R&D hours (estimated) | 341.7 hrs |
-| Development hours | 194 hrs |
-| Meeting hours | 147.7 hrs |
-| R&D work days | 42 |
-| Total commits | 228 |
-| R&D % of full-time | 16% |
+| Total R&D hours (estimated) | 409.9 hrs |
+| Development hours | 230 hrs |
+| Meeting hours | 179.89999999999998 hrs |
+| R&D work days | 49 |
+| Total commits | 286 |
+| R&D % of full-time | 20% |
 | R&D-eligible spend | $0 |
 | 43.5% refundable offset | $0 |
 | Receipt coverage | 0% |
@@ -26,18 +26,18 @@
 
 ## R&D Activities by Project
 
-### ACT-IN — ALMA / Bot Intelligence
+### ACT-IN — Infrastructure / Agent Orchestration
 
 **Classification:** Core R&D
-**Description:** Experimental knowledge graph, episodic memory, AI agent with tool_use
+**Description:** Multi-agent orchestration, finance attribution engine, autonomous data pipeline coordination
 
 | Metric | Value |
 |--------|-------|
-| Commits | 222 |
-| Work days | 36 |
-| Development hours | 162 |
-| Meeting hours | 67.79999999999998 |
-| **Total hours** | **229.79999999999998** |
+| Commits | 280 |
+| Work days | 43 |
+| Development hours | 198 |
+| Meeting hours | 68.19999999999999 |
+| **Total hours** | **266.2** |
 
 #### Monthly Breakdown
 
@@ -46,48 +46,35 @@
 | 2025-12 | 2 | 12 | 22 |
 | 2026-01 | 9 | 32 | 20 |
 | 2026-02 | 18 | 82 | 103 |
-| 2026-03 | 7 | 36 | 34 |
+| 2026-03 | 14 | 72 | 92 |
 
 #### Sample Activities (Contemporaneous Evidence)
 
 | Date | Author | Activity |
 |------|--------|----------|
-| 2026-03-12 | Ben | feat: GrantScope ↔ Notion bidirectional pipeline sync |
-| 2026-03-11 | Ben | feat: finance intelligence system research + add Xero sync to PM2 cron |
-| 2026-03-11 | Ben | fix: expand vendor matching and forwarding for receipt coverage gap closure |
-| 2026-03-11 | Ben | fix: improve receipt correlation matching — fetch all forwarded emails, widen date window |
-| 2026-03-11 | Ben | feat: internal transfer exemptions + missing receipt analysis |
-| 2026-03-11 | Ben | feat: receipt coverage gap closure — bank fee exemptions, backfill, daily briefing |
-| 2026-03-11 | Ben | feat: finance money flow dashboard — Dext import, Xero matching, end-to-end visibility |
-| 2026-03-11 | Ben | feat: finance health dashboard, reconciliation review, vendor rules, and PFI financials |
-| 2026-03-09 | Ben | docs: add grant applications, EL pitch, and Notion agent instructions |
-| 2026-03-09 | Ben | feat: receipt pipeline, business scoreboard, and operational improvements |
+| 2026-03-27 | Ben | fix: use ABN_LOOKUP_GUID env var for DGR enrichment (matches GrantScope) |
+| 2026-03-27 | Ben | feat: GrantScope API layer + DGR enrichment for foundation research |
+| 2026-03-27 | Ben | feat: adopt Feynman patterns — provenance, structured plans, delegation matrix |
+| 2026-03-27 | Ben | fix: create missing load-env.mjs — imported by 192 scripts |
+| 2026-03-27 | Ben | fix: add ESLint config and fix CI lint — zero errors |
+| 2026-03-27 | Ben | chore: update pnpm lockfile for notion-workers package changes |
+| 2026-03-27 | Ben | fix: remove pnpm version override — let packageManager field control |
+| 2026-03-27 | Ben | fix: migrate remaining 13 workflows from npm to pnpm |
+| 2026-03-27 | Ben | fix: migrate 15 GitHub Actions workflows from npm ci to pnpm |
+| 2026-03-27 | Ben | fix: health check uses correct production URLs for all 7 sites |
 
-### ACT-PS — PICC Photo Studio
-
-**Classification:** Supporting R&D
-**Description:** Experimental community storytelling technology
-
-| Metric | Value |
-|--------|-------|
-| Commits | 0 |
-| Work days | 0 |
-| Development hours | 0 |
-| Meeting hours | 37.8 |
-| **Total hours** | **37.8** |
-
-### ACT-GD — Goods Marketplace
+### ACT-GD — Goods Procurement Intelligence
 
 **Classification:** Supporting R&D
-**Description:** Social enterprise marketplace technology
+**Description:** Community demand matching, procurement signals, multi-mode search
 
 | Metric | Value |
 |--------|-------|
 | Commits | 2 |
 | Work days | 2 |
 | Development hours | 12 |
-| Meeting hours | 25.4 |
-| **Total hours** | **37.4** |
+| Meeting hours | 53.39999999999999 |
+| **Total hours** | **65.39999999999999** |
 
 #### Monthly Breakdown
 
@@ -102,18 +89,31 @@
 | 2026-02-06 | Acurioustractor | feat: Goods dashboard — org display, inline editing, bidirectional GHL sync |
 | 2026-02-05 | A Curious Tractor | writing: new draft "On Country Goods - Community Manufacturing Model" |
 
+### ACT-PS — PICC Photo Studio
+
+**Classification:** Supporting R&D
+**Description:** Experimental community storytelling technology
+
+| Metric | Value |
+|--------|-------|
+| Commits | 0 |
+| Work days | 0 |
+| Development hours | 0 |
+| Meeting hours | 38.8 |
+| **Total hours** | **38.8** |
+
 ### ACT-EL — Empathy Ledger
 
 **Classification:** Core R&D
-**Description:** Novel AI-powered story collection and analysis platform
+**Description:** Novel AI-powered story collection and analysis platform with OCAP data sovereignty
 
 | Metric | Value |
 |--------|-------|
 | Commits | 3 |
 | Work days | 3 |
 | Development hours | 18 |
-| Meeting hours | 6.8 |
-| **Total hours** | **24.8** |
+| Meeting hours | 7.3 |
+| **Total hours** | **25.3** |
 
 #### Monthly Breakdown
 
@@ -130,18 +130,18 @@
 | 2026-02-04 | Acurioustractor | fix: Update storyteller scripts for EL v2 schema changes |
 | 2025-12-30 | Acurioustractor | docs: update Empathy Ledger path references |
 
-### ACT-JH — JusticeHub Tech
+### ACT-JH — JusticeHub / ALMA
 
-**Classification:** Supporting R&D
-**Description:** Technology platform for justice reform network
+**Classification:** Core R&D
+**Description:** Justice evidence database, intervention linkage, multi-strategy entity resolution
 
 | Metric | Value |
 |--------|-------|
 | Commits | 1 |
 | Work days | 1 |
 | Development hours | 2 |
-| Meeting hours | 8.899999999999999 |
-| **Total hours** | **10.899999999999999** |
+| Meeting hours | 9.399999999999999 |
+| **Total hours** | **11.399999999999999** |
 
 #### Monthly Breakdown
 
@@ -165,8 +165,8 @@
 | Commits | 0 |
 | Work days | 0 |
 | Development hours | 0 |
-| Meeting hours | 1 |
-| **Total hours** | **1** |
+| Meeting hours | 2.8 |
+| **Total hours** | **2.8** |
 
 ---
 
@@ -194,9 +194,9 @@
 | Item | Per Person | x2 Founders |
 |------|-----------|-------------|
 | Assumed salary | $120,000 | $240,000 |
-| R&D allocation | 16% | 16% |
-| R&D eligible wages | $19,200 | $38,400 |
-| 43.5% offset | $8,352 | $16,704 |
+| R&D allocation | 20% | 20% |
+| R&D eligible wages | $24,000 | $48,000 |
+| 43.5% offset | $10,440 | $20,880 |
 
 ---
 

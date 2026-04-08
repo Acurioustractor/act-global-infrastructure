@@ -1,0 +1,85 @@
+---
+session: general
+date: 2026-04-06
+status: complete
+outcome: PARTIAL_PLUS
+---
+
+goal: EL v2 projects page — ecosystem taxonomy, cover images, list/grid toggle, data isolation
+now: Commit EL v2 changes, then tackle RLS migration for projects table
+
+done_this_session:
+  - task: Tagged all 43 EL projects with act_project_code + tier/category metadata
+    files: []
+    details: >
+      Used PostgREST API to set act_project_code and external_references.act_infrastructure
+      on all projects. Tiers: ecosystem(7), studio(4), partner(23), client(5), test(1).
+      ACT org id: db0de7bd-eb10-446b-99e9-0f3b7c199b8a, slug: a-curious-tractor.
+  - task: Created 3 new ecosystem projects (Black Cockatoo Valley, ACT Farm, CivicGraph)
+    files: []
+    details: Created via PostgREST INSERT into EL v2 Supabase (yvnuayzslukamizrlhwb)
+  - task: Moved JusticeHub from separate org to ACT org
+    files: []
+    details: Updated organization_id on project 2e774118-471c-450b-a6bc-41467a43c0cf
+  - task: Rebuilt projects page with server/client split, tier grouping, partner org cards
+    files:
+      - /Users/benknight/Code/empathy-ledger-v2/src/app/organisations/[id]/projects/page.tsx
+      - /Users/benknight/Code/empathy-ledger-v2/src/app/organisations/[id]/projects/ProjectsClient.tsx
+    details: >
+      Server component fetches all data (projects, cover images from media_assets,
+      gallery counts, partner org aggregations). Client component handles list/grid
+      toggle, search, and rendering. Only ACT org sees partner network section.
+  - task: Cover images from media_assets (no schema change needed)
+    files:
+      - /Users/benknight/Code/empathy-ledger-v2/src/app/organisations/[id]/projects/page.tsx
+    details: >
+      Queries media_assets WHERE project_id IN (...) AND media_type='image' AND
+      thumbnail_url IS NOT NULL, picks first per project. Uses medium_url or
+      thumbnail_url. Next.js images config already allows *.supabase.co.
+  - task: Data isolation fix — partner network only visible on ACT org
+    files:
+      - /Users/benknight/Code/empathy-ledger-v2/src/app/organisations/[id]/projects/page.tsx
+    details: >
+      Checks org.slug === 'a-curious-tractor' before fetching linked projects.
+      Other orgs only see their own projects. First version leaked cross-org data.
+
+blockers: []
+
+questions:
+  - RLS on projects table is wide open (anon key reads all orgs). Needs Supabase migration.
+  - Galleries link to organization_id not project_id — no direct project-gallery FK exists.
+  - User mentioned wanting galleries linked to projects — may need a project_id FK on galleries table.
+
+decisions:
+  - tier_taxonomy: "ecosystem/studio/partner/client matches Tractorpedia. Stored in external_references JSONB, no schema change."
+  - data_isolation: "Hardcoded ACT org slug check rather than a generic hub flag — simpler, fits current single-hub architecture."
+  - cover_images: "Reused media_assets table rather than adding cover_image_url column to projects — avoids migration."
+  - partner_display: "Show one card per partner org (not individual projects) to avoid overwhelming the page."
+
+findings:
+  - el_v2_db: "EL v2 app actually uses yvnuayzslukamizrlhwb (was mislabeled as 'legacy' in memory). Updated memory."
+  - rls_open: "projects table has no RLS — anon key reads all orgs. Security concern."
+  - no_project_gallery_fk: "galleries.organization_id exists but no galleries.project_id — galleries are org-level only."
+
+worked:
+  - "PostgREST API for bulk data updates (faster than individual Supabase client calls)"
+  - "Server/client split matching galleries page pattern (page.tsx server + Client.tsx)"
+  - "media_assets as cover image source without schema changes"
+
+failed:
+  - "First linked projects implementation leaked data to all orgs (fixed by adding isACT check)"
+  - "Movember project had slug mismatch (picc-movember vs movember) — needed name-based patch"
+
+next:
+  - Commit EL v2 changes (2 files in empathy-ledger-v2 repo)
+  - Add RLS policies to projects table scoped by organization_id
+  - Consider adding project_id FK to galleries table for project-level gallery linking
+  - User review of the new page UI and feedback on tier assignments
+  - Wiki articles needed for Black Cockatoo Valley and ACT Farm (stubs only in Tractorpedia)
+
+files:
+  created:
+    - /Users/benknight/Code/empathy-ledger-v2/src/app/organisations/[id]/projects/ProjectsClient.tsx
+  modified:
+    - /Users/benknight/Code/empathy-ledger-v2/src/app/organisations/[id]/projects/page.tsx
+test: "cd /Users/benknight/Code/empathy-ledger-v2 && npx tsc --noEmit"

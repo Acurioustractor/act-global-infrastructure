@@ -1,0 +1,91 @@
+---
+session: projects-alignment
+date: 2026-04-06
+status: partial
+outcome: PARTIAL_PLUS
+---
+
+goal: Fix gallery system, cover photos, photo upload, and project alignment for ACT ecosystem
+now: Fix tier assignments, hide empty projects, add partner org badges on ACT projects page
+
+done_this_session:
+  - task: Fixed cover image bug - media_type (always null) replaced with file_type, then removed filter entirely (file_type values inconsistent - "image", "image/jpeg", "jpg")
+    files: [empathy-ledger-v2/src/app/organisations/[id]/projects/page.tsx]
+  - task: Fixed photo count on manage page - was querying media_assets.project_id (always null), now uses gallery chain
+    files: [empathy-ledger-v2/src/app/organisations/[id]/projects/[projectId]/manage/page.tsx]
+  - task: Removed duplicate PROJECT tag section from photo manager sidebar (was showing both PROJECTS from gallery chain and PROJECT from tags table)
+    files: [empathy-ledger-v2/src/app/admin/photos/page.tsx]
+  - task: Added all ecosystem projects (act_project_code != null) to photo manager sidebar, not just org's own
+    files: [empathy-ledger-v2/src/app/api/admin/media/route.ts]
+  - task: Built photo upload with project tagging - drag-drop modal, project selector, sequential upload with progress
+    files: [empathy-ledger-v2/src/app/admin/photos/page.tsx]
+  - task: Created galleries for 10 ACT projects that had none, linked via project_galleries
+  - task: Merged ACT Farm into Black Cockatoo Valley (same project) - gallery moved, ACT Farm set to completed status
+  - task: Corrected ACT org ID in memory (db0de7bd not 88f84b66)
+  - task: Verified gallery system fully operational (91 galleries, 3793 media associations, 44 project links, 5039 media assets)
+
+blockers: []
+
+questions:
+  - Should tiers be reassigned? Current mapping puts CFTC/Dad.Lab.25/Junes Patch/RAF as "partner" but they're ACT's own projects
+  - Should empty projects (0 people + 0 media + 0 stories) be hidden from the projects page?
+  - What's the right grouping for partner org projects (PICC, SMART, Oonchiumpa etc) - by org or flat list?
+
+decisions:
+  - drop_file_type_filter: file_type values are inconsistent across assets ("image", "jpg", "image/jpeg"). Since gallery-linked assets are already known media, no filter needed for cover images
+  - ecosystem_projects_in_sidebar: Photo manager shows ALL projects with act_project_code, not just org-owned, so ACT can tag photos to any ecosystem project
+  - merge_farm_bcv: ACT Farm and Black Cockatoo Valley are the same project. BCV kept as primary name, ACT Farm archived (status=completed)
+  - gallery_auto_create: The batch project API auto-creates galleries when tagging photos to a project that has none
+
+findings:
+  - act_org_id_corrected: "ACT org is db0de7bd-eb10-446b-99e9-0f3b7c199b8a (slug: a-curious-tractor), NOT 88f84b66 as previous handoff stated"
+  - file_type_inconsistency: "media_assets.file_type has 3+ formats: 'image', 'image/jpeg', 'jpg'. media_assets.media_type is always null. Never filter by either for gallery-linked assets"
+  - gallery_system_exists: "Previous handoff said galleries/gallery_media_associations/project_galleries don't exist - WRONG. All exist with rich data"
+  - project_storytellers_populated: "412 rows, not just 2 founders. Full CRUD API at /api/projects/[id]/storytellers"
+  - two_project_systems: "PROJECTS section uses gallery chain (correct), PROJECT tag category uses tags table (legacy, now hidden in sidebar)"
+  - upload_api_exists: "/api/media/upload accepts FormData with file, organizationId, projectId. Batch project API at /api/media/batch/project links to gallery chain"
+  - status_constraint: "projects.status check constraint allows: active, completed, draft, paused (not archived/inactive)"
+
+worked:
+  - Gallery chain queries (project_galleries -> gallery_media_associations -> media_assets) work reliably for counts and cover images
+  - Batch project API auto-creates galleries and handles dedup
+  - Cross-org gallery links work (a project in one org can link to a gallery in another)
+
+failed:
+  - file_type filtering for cover images - values too inconsistent, just drop the filter
+  - Tried media_type column first (always null), then file_type with ilike 'image%' (misses 'jpg'), finally removed filter entirely
+
+next:
+  - Fix tier assignments in external_references for ACT projects - CFTC/Dad.Lab.25/Junes Patch/RAF should probably not be "partner"
+  - Hide empty project cards (0 people + 0 media + 0 stories) from projects page
+  - Add partner org name badge on cards for cross-org projects (e.g. "with PICC")
+  - Consider flattening the projects page to show all ecosystem projects without tier sections
+  - Tractorpedia sync - 15 projects still missing wiki articles
+  - Push EL v2 changes to deploy (5 commits uncommitted to remote)
+
+files:
+  modified:
+    - empathy-ledger-v2/src/app/organisations/[id]/projects/page.tsx
+    - empathy-ledger-v2/src/app/organisations/[id]/projects/[projectId]/manage/page.tsx
+    - empathy-ledger-v2/src/app/admin/photos/page.tsx
+    - empathy-ledger-v2/src/app/api/admin/media/route.ts
+
+el_v2_commits:
+  - "5ff78d64 fix: cover images + photo counts on projects pages"
+  - "5f38752d fix: hide duplicate PROJECT tag section in photo manager sidebar"
+  - "1caec812 feat: show all ACT ecosystem projects in photo manager sidebar"
+  - "c1e5bd3a feat: add photo upload with project tagging to photo manager"
+  - "8675590a fix: drop file_type filter on cover image query"
+
+db_changes:
+  - "10 galleries created for ACT projects (ACT Farm, BCV, CFTC, CivicGraph, Dad.Lab.25, DFO, Gold.Phone, Junes Patch, RAF, The Confessional)"
+  - "10 project_galleries links created"
+  - "ACT Farm gallery moved to BCV, ACT Farm status set to completed"
+  - "ACT Farm gallery renamed to 'Black Cockatoo Valley - Farm'"
+
+key_ids:
+  act_org: db0de7bd-eb10-446b-99e9-0f3b7c199b8a
+  act_slug: a-curious-tractor
+  ben_profile: d0a162d2-282e-4653-9d12-aa934c9dfa4e
+  bcv_project: f2f111a8-9f3d-4ae0-8f86-6d01fe4e0d90
+  farm_project_archived: 452a776e-6854-4b00-a958-d3ae9c70ec96

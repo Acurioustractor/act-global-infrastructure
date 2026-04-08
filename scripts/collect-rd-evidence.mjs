@@ -28,17 +28,19 @@ const supabase = createClient(
 )
 
 const RD_PROJECTS = [
-  { code: 'ACT-EL', name: 'Empathy Ledger', type: 'core', description: 'Novel community narrative platform — experimental NLP, consent-based storytelling' },
-  { code: 'ACT-IN', name: 'Infrastructure / ALMA', type: 'core', description: 'AI agent orchestration, multi-provider LLM routing, agentic tool systems' },
-  { code: 'ACT-JH', name: 'JusticeHub', type: 'supporting', description: 'Justice system data platform — data integration, outcome tracking' },
-  { code: 'ACT-GD', name: 'Goods on Country', type: 'supporting', description: 'IoT fleet telemetry, social enterprise marketplace — Particle.io integration' },
+  { code: 'ACT-CG', name: 'CivicGraph (CivicScope)', type: 'core', description: 'Cross-government entity resolution, power scoring, graph analytics, cryptographic attestation' },
+  { code: 'ACT-EL', name: 'Empathy Ledger', type: 'core', description: 'Novel community narrative platform — experimental NLP, consent-based storytelling, OCAP data sovereignty' },
+  { code: 'ACT-IN', name: 'Infrastructure / Agent Orchestration', type: 'core', description: 'Multi-agent orchestration, finance attribution engine, autonomous data pipeline coordination' },
+  { code: 'ACT-JH', name: 'JusticeHub / ALMA', type: 'core', description: 'Justice evidence database, intervention linkage, multi-strategy entity resolution' },
+  { code: 'ACT-GD', name: 'Goods Procurement Intelligence', type: 'supporting', description: 'Community demand matching, procurement signals, multi-mode search' },
 ]
 
 const GIT_KEYWORDS = {
-  'ACT-EL': ['empathy', 'ledger', 'storytell', 'narrative', 'consent', 'el-', 'empathy-ledger'],
-  'ACT-IN': ['agent', 'bot', 'alma', 'llm', 'ai', 'intelligence', 'embedding', 'vector', 'tool-use', 'rag'],
-  'ACT-JH': ['justice', 'hub', 'justicehub', 'jh-', 'youth', 'diversion'],
-  'ACT-GD': ['goods', 'fleet', 'wash', 'telemetry', 'particle', 'iot', 'asset'],
+  'ACT-CG': ['civicgraph', 'grantscope', 'entity-resolution', 'power-index', 'dedup', 'linker', 'mega-link', 'graph', 'attestation', 'tlsnotary', 'bittensor', 'sn13', 'power_score', 'revolving', 'interlock', 'abr', 'austender', 'procurement'],
+  'ACT-EL': ['empathy', 'ledger', 'storytell', 'narrative', 'consent', 'el-', 'empathy-ledger', 'cultural-sensitivity', 'indigenous-impact'],
+  'ACT-IN': ['agent', 'bot', 'orchestrat', 'llm', 'intelligence', 'embedding', 'vector', 'tool-use', 'rag', 'finance-engine', 'scheduler', 'watcher'],
+  'ACT-JH': ['justice', 'hub', 'justicehub', 'jh-', 'youth', 'diversion', 'alma', 'intervention', 'evidence-pack'],
+  'ACT-GD': ['goods', 'fleet', 'wash', 'telemetry', 'particle', 'iot', 'asset', 'procurement-intel', 'buyer-led'],
 }
 
 // Parse args

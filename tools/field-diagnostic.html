@@ -1,0 +1,1191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Field Diagnostic — A Curious Tractor</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@300;400;500&display=swap');
+
+  :root {
+    --bg: #FDFBF7;
+    --text: #2F3E2E;
+    --text-secondary: #5A4A3A;
+    --tan: #6B5A45;
+    --border: #E3D4BA;
+    --border-dark: #D7C4A2;
+    --green: #4CAF50;
+    --green-dark: #2E7D32;
+    --parchment: #F6F1E7;
+    --soil-dark: #3E2723;
+    --soil-mid: #5D4037;
+    --soil-light: #8D6E63;
+    --seed-gold: #F9A825;
+    --sprout-green: #66BB6A;
+    --spiral-indigo: #5C6BC0;
+    --furrow-amber: #FF8F00;
+    --red: #C62828;
+    --red-light: #FFEBEE;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Space Grotesk', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+
+  /* ── Shared ── */
+  .eyebrow {
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    color: var(--tan);
+  }
+
+  .section-label {
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    color: var(--tan);
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  textarea, input[type="text"] {
+    font-family: 'Space Grotesk', sans-serif;
+    color: var(--text);
+    background: transparent;
+    border: none;
+    outline: none;
+    resize: none;
+  }
+
+  textarea:focus, input[type="text"]:focus {
+    background: rgba(76, 175, 80, 0.04);
+  }
+
+  /* ── Header ── */
+  .header {
+    padding: 2rem 2rem 1rem;
+    border-bottom: 2px dashed var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .header h1 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  .header .subtitle {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    margin-top: 0.25rem;
+  }
+
+  .header-right {
+    text-align: right;
+  }
+
+  .header-right input {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.85rem;
+    border-bottom: 1px dashed var(--border) !important;
+    width: 220px;
+    text-align: right;
+    padding: 0.25rem 0;
+  }
+
+  /* ── Section wrappers ── */
+  .section {
+    padding: 1.25rem 2rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-dark {
+    background: linear-gradient(135deg, var(--parchment), var(--bg));
+  }
+
+  /* ── Mission + Values row ── */
+  .mission-values {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .mission-block textarea {
+    width: 100%;
+    font-size: 0.95rem;
+    font-weight: 500;
+    line-height: 1.6;
+    height: 4.5rem;
+  }
+
+  .values-gap-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .values-gap-table th {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--tan);
+    text-align: left;
+    padding: 0.25rem 0.5rem 0.4rem;
+    border-bottom: 1px solid var(--border);
+    font-weight: 500;
+  }
+
+  .values-gap-table td {
+    padding: 0.3rem 0.5rem;
+    border-bottom: 1px dashed var(--border);
+    vertical-align: top;
+  }
+
+  .values-gap-table td:first-child {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--tan);
+    width: 30px;
+  }
+
+  .values-gap-table textarea {
+    font-size: 0.75rem;
+    width: 100%;
+    height: 2.5rem;
+    line-height: 1.4;
+  }
+
+  /* ── 5P Org Scan ── */
+  .fiveP-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .fiveP-table th {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--tan);
+    text-align: left;
+    padding: 0.3rem 0.6rem 0.4rem;
+    border-bottom: 1px solid var(--border);
+    font-weight: 500;
+  }
+
+  .fiveP-table td {
+    padding: 0.35rem 0.6rem;
+    border-bottom: 1px dashed var(--border);
+    vertical-align: top;
+  }
+
+  .fiveP-table td:first-child {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--tan);
+    font-weight: 500;
+    width: 90px;
+  }
+
+  .fiveP-table textarea {
+    font-size: 0.72rem;
+    width: 100%;
+    height: 2.2rem;
+    line-height: 1.4;
+  }
+
+  /* ── Project Portfolio Map ── */
+  .portfolio-section {
+    padding: 1.25rem 2rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+  }
+
+  .portfolio-lane {
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .portfolio-lane-header {
+    padding: 0.5rem 0.75rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .lane-drive .portfolio-lane-header { background: var(--sprout-green); color: white; }
+  .lane-field .portfolio-lane-header { background: var(--seed-gold); color: var(--soil-dark); }
+  .lane-shed .portfolio-lane-header  { background: var(--soil-light); color: white; }
+
+  .portfolio-lane-body {
+    padding: 0.5rem 0.75rem;
+    min-height: 140px;
+  }
+
+  .project-chip {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.35rem 0.5rem;
+    margin-bottom: 0.35rem;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: white;
+    cursor: grab;
+  }
+
+  .project-chip .chip-icon { font-size: 1rem; }
+
+  .project-chip .chip-code {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.55rem;
+    color: var(--tan);
+    letter-spacing: 0.1em;
+  }
+
+  .project-chip .chip-name {
+    font-size: 0.72rem;
+    font-weight: 500;
+  }
+
+  .project-chip .chip-revenue {
+    margin-left: auto;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--green-dark);
+    font-weight: 500;
+  }
+
+  .project-chip .chip-metric {
+    margin-left: auto;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.55rem;
+    color: var(--tan);
+  }
+
+  .lane-add {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--tan);
+    padding: 0.3rem 0.5rem;
+    cursor: pointer;
+    opacity: 0.5;
+  }
+
+  .lane-add:hover { opacity: 1; }
+
+  /* ── Energy Map (2x2) ── */
+  .energy-map {
+    display: grid;
+    grid-template-columns: 40px 1fr 1fr;
+    grid-template-rows: auto 1fr 1fr;
+    gap: 0;
+    border: 1px solid var(--border-dark);
+    border-radius: 8px;
+    overflow: hidden;
+    background: white;
+    margin-top: 0.5rem;
+  }
+
+  .energy-map .axis-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--tan);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.3rem;
+    text-align: center;
+  }
+
+  .energy-map .axis-label-y {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    border-right: 1px solid var(--border-dark);
+  }
+
+  .energy-map .corner { background: var(--parchment); border-right: 1px solid var(--border-dark); border-bottom: 1px solid var(--border-dark); }
+
+  .energy-map .quadrant {
+    padding: 0.6rem;
+    min-height: 100px;
+    border-bottom: 1px solid var(--border-dark);
+    border-right: 1px solid var(--border-dark);
+  }
+
+  .energy-map .quadrant:nth-child(even) { border-right: none; }
+
+  .energy-map .quadrant textarea {
+    font-size: 0.7rem;
+    width: 100%;
+    height: 4rem;
+    line-height: 1.4;
+  }
+
+  .quadrant-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.5rem;
+    color: var(--tan);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.3rem;
+  }
+
+  .q-star { background: rgba(76, 175, 80, 0.06); }
+  .q-trap { background: rgba(198, 40, 40, 0.04); }
+  .q-question { background: rgba(249, 168, 37, 0.06); }
+  .q-park { background: rgba(0,0,0,0.02); }
+
+  /* ── Field Cross Section ── */
+  .sky-zone {
+    background: linear-gradient(180deg, #F0F7FF 0%, var(--bg) 100%);
+    padding: 1.25rem 2rem;
+    position: relative;
+  }
+
+  .sky-zone .zone-label {
+    font-size: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    color: var(--spiral-indigo);
+    opacity: 0.5;
+    position: absolute;
+    right: 2rem;
+    top: 0.5rem;
+  }
+
+  .ground-line {
+    height: 4px;
+    background: linear-gradient(90deg, var(--soil-light), var(--soil-mid), var(--soil-light));
+    position: relative;
+  }
+
+  .ground-line::after {
+    content: '▼ VISIBLE SYSTEM  ·  SOCIAL SOIL ▼';
+    position: absolute;
+    left: 50%;
+    top: -10px;
+    transform: translateX(-50%);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.5rem;
+    letter-spacing: 0.2em;
+    color: var(--soil-mid);
+    white-space: nowrap;
+    background: var(--bg);
+    padding: 0 0.75rem;
+  }
+
+  .soil-zone {
+    background: linear-gradient(180deg, #F5EDE0 0%, #EDE2D0 40%, #E5D5BF 100%);
+    padding: 1.25rem 2rem;
+  }
+
+  .soil-grid {
+    display: grid;
+    grid-template-columns: 110px 1fr 1fr 1fr;
+    gap: 0;
+    border: 1px solid var(--border-dark);
+    border-radius: 8px;
+    overflow: hidden;
+    background: rgba(255,255,255,0.4);
+  }
+
+  .soil-grid .grid-header {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.55rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--tan);
+    padding: 0.5rem 0.6rem;
+    background: rgba(255,255,255,0.5);
+    border-bottom: 1px solid var(--border-dark);
+    font-weight: 500;
+    text-align: center;
+  }
+
+  .soil-grid .grid-header:first-child { text-align: left; }
+
+  .soil-grid .row-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.62rem;
+    font-weight: 600;
+    padding: 0.6rem;
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    border-bottom: 1px dashed var(--border-dark);
+    border-right: 1px solid var(--border-dark);
+  }
+
+  .soil-grid .row-label .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .soil-grid .grid-cell {
+    padding: 0.4rem 0.6rem;
+    border-bottom: 1px dashed var(--border-dark);
+    border-right: 1px dashed var(--border-dark);
+  }
+
+  .soil-grid .grid-cell:last-child { border-right: none; }
+
+  .soil-grid .grid-cell textarea {
+    font-size: 0.7rem;
+    width: 100%;
+    height: 3.5rem;
+    line-height: 1.4;
+  }
+
+  /* ── Roots ── */
+  .roots-section {
+    background: linear-gradient(180deg, #EDE2D0 0%, #E0D2BC 100%);
+    padding: 1rem 2rem;
+    border-top: 1px dashed var(--border-dark);
+  }
+
+  .roots-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.75rem;
+  }
+
+  .root-card {
+    background: rgba(255,255,255,0.35);
+    border: 1px dashed var(--border-dark);
+    border-radius: 8px;
+    padding: 0.6rem 0.75rem;
+  }
+
+  .root-card .root-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.55rem;
+    color: var(--soil-mid);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 0.3rem;
+  }
+
+  .root-card textarea {
+    font-size: 0.7rem;
+    width: 100%;
+    height: 3rem;
+    line-height: 1.4;
+  }
+
+  /* ── 6 Tracks ── */
+  .tracks-section {
+    padding: 1.5rem 2rem;
+    border-top: 2px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .tracks-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-top: 0.75rem;
+  }
+
+  .track-card {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    background: white;
+  }
+
+  .track-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    border-bottom: 1px solid var(--border);
+    background: var(--parchment);
+  }
+
+  .track-header .track-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 600;
+    width: 1.4rem;
+    height: 1.4rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    flex-shrink: 0;
+  }
+
+  .track-header .track-title {
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+
+  .track-header .track-symbol { margin-left: auto; font-size: 0.9rem; }
+
+  .track-body { padding: 0.5rem 0.75rem; }
+
+  .track-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.4rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .track-row .track-action {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.55rem;
+    color: var(--tan);
+    text-transform: uppercase;
+    width: 50px;
+    flex-shrink: 0;
+    padding-top: 0.15rem;
+  }
+
+  .track-row input {
+    font-size: 0.72rem;
+    border-bottom: 1px dashed var(--border) !important;
+    width: 100%;
+    padding: 0.15rem 0;
+  }
+
+  .track-row input:focus { border-bottom-color: var(--green) !important; }
+
+  /* ── Future Org Note ── */
+  .future-org {
+    padding: 1.5rem 2rem;
+    background: linear-gradient(135deg, var(--parchment), var(--bg));
+    border-top: 2px dashed var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .future-org textarea {
+    font-size: 0.85rem;
+    font-style: italic;
+    color: var(--text-secondary);
+    width: 100%;
+    height: 5rem;
+    line-height: 1.7;
+  }
+
+  /* ── Co-founder Overlay ── */
+  .cofounder-section {
+    padding: 1.25rem 2rem;
+    border-bottom: 1px solid var(--border);
+    background: linear-gradient(135deg, #F0F7FF, var(--bg));
+  }
+
+  .cofounder-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+    margin-top: 0.5rem;
+  }
+
+  .cofounder-card {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.75rem;
+    background: white;
+  }
+
+  .cofounder-card .cf-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--tan);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 0.4rem;
+  }
+
+  .cofounder-card textarea {
+    font-size: 0.72rem;
+    width: 100%;
+    height: 3rem;
+    line-height: 1.4;
+  }
+
+  /* ── Symbol Legend ── */
+  .symbol-legend {
+    padding: 0.75rem 2rem;
+    border-bottom: 1px dashed var(--border);
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.55rem;
+    color: var(--tan);
+  }
+
+  .legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* ── Quotes ── */
+  .seed-quotes {
+    padding: 1rem 2rem 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .quote-chip {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.55rem;
+    color: var(--tan);
+    background: var(--parchment);
+    padding: 0.25rem 0.6rem;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    cursor: default;
+    transition: all 0.2s;
+  }
+
+  .quote-chip:hover { background: var(--green); color: white; border-color: var(--green); }
+
+  /* ── Footer ── */
+  .footer {
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-left {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--tan);
+  }
+
+  .footer-actions { display: flex; gap: 0.5rem; }
+
+  .btn {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    padding: 0.4rem 1rem;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background: white;
+    color: var(--text);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .btn:hover { background: var(--parchment); }
+  .btn-primary { background: var(--green); color: white; border-color: var(--green); }
+  .btn-primary:hover { background: var(--green-dark); }
+
+  @media print {
+    .footer-actions { display: none; }
+    textarea, input { border: none !important; }
+  }
+
+  @media (max-width: 900px) {
+    .mission-values { grid-template-columns: 1fr; }
+    .portfolio-grid { grid-template-columns: 1fr; }
+    .tracks-grid { grid-template-columns: 1fr; }
+    .roots-grid { grid-template-columns: 1fr 1fr; }
+    .cofounder-grid { grid-template-columns: 1fr; }
+    .energy-map { grid-template-columns: 30px 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════ HEADER ═══════════ -->
+<div class="header">
+  <div>
+    <div class="eyebrow">Regenerative Systems Practice · A Curious Tractor</div>
+    <h1>Field Diagnostic</h1>
+    <div class="subtitle">Organisational Canvas — ACT Ecosystem</div>
+  </div>
+  <div class="header-right">
+    <div class="eyebrow">Diagnostic Date</div>
+    <input type="text" id="diagnostic-date" value="April 2026" />
+    <br/>
+    <div class="eyebrow" style="margin-top:0.5rem;">Facilitators</div>
+    <input type="text" id="facilitators" value="Benjamin Knight + Nicholas Marchesi" />
+  </div>
+</div>
+
+<!-- ═══════════ MISSION + VALUES GAP ═══════════ -->
+<div class="section section-dark">
+  <div class="mission-values">
+    <div class="mission-block">
+      <div class="section-label">🚜 Mission — Why does this organisation exist?</div>
+      <textarea id="mission" placeholder="Not the website version. The real one.">A regenerative innovation ecosystem that transfers institutional power to community-led initiatives — then designs itself out. Communities own their narratives, land, and economic futures.</textarea>
+      <div class="section-label" style="margin-top:1rem;">⚡ Presenting Tension — What outcome is the org producing that nobody wants?</div>
+      <textarea id="tension" placeholder="Name the thing everyone feels but nobody says." style="height:2.5rem;">20+ projects, 2 co-founders, $0 salary for the systems builder. Spreading energy across everything, finishing almost nothing. Revenue concentrated in 2 projects while 5 platforms sit pre-launch.</textarea>
+    </div>
+    <div>
+      <div class="section-label">⛤ Values — Stated vs Lived Gap</div>
+      <table class="values-gap-table">
+        <thead>
+          <tr><th>#</th><th>Stated Value</th><th>Lived Reality</th><th>Gap Signal</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td><textarea>Design for our own obsolescence</textarea></td>
+            <td><textarea>We keep adding, never sunset</textarea></td>
+            <td><textarea>20+ active projects, zero parked</textarea></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td><textarea>40% profits to community</textarea></td>
+            <td><textarea>No profit yet to share</textarea></td>
+            <td><textarea>Revenue exists but no margin</textarea></td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td><textarea>Relationships as infrastructure</textarea></td>
+            <td><textarea>Co-founder roles implicit</textarea></td>
+            <td><textarea>Pay gap unspoken, boundaries unclear</textarea></td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td><textarea>Hand over the keys</textarea></td>
+            <td><textarea>PICC is the only PTO success</textarea></td>
+            <td><textarea>Other projects still ACT-dependent</textarea></td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td><textarea>Radical humility</textarea></td>
+            <td><textarea>Overcommit then scramble</textarea></td>
+            <td><textarea>Promise more than capacity allows</textarea></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ 5P ORG SCAN ═══════════ -->
+<div class="section">
+  <div class="section-label">📋 5P Organisational Scan</div>
+  <table class="fiveP-table">
+    <thead>
+      <tr><th>Domain</th><th>Current State</th><th>Hidden Pattern</th><th>Desired Shift</th><th>90-Day Milestone</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Projects</td>
+        <td><textarea>7 ecosystem + 8 studio + 5 satellite = 20+ active. Top earners: Goods $585K, PICC $402K, Harvest $150K.</textarea></td>
+        <td><textarea>Revenue comes from field delivery (Goods, PICC). Tech platforms (EL, CG, JH) generate $0 despite being 80% built.</textarea></td>
+        <td><textarea>3 Drive + 5 Field + rest in Shed. Close the revenue gap on tech platforms.</textarea></td>
+        <td><textarea>EL Stripe billing live. CivicGraph 10 beta users. JH strategy decided.</textarea></td>
+      </tr>
+      <tr>
+        <td>People</td>
+        <td><textarea>2 co-founders. Maddi (Goods), community partners (PICC). No other paid team. Ben $0 salary.</textarea></td>
+        <td><textarea>Ben builds everything, Nic delivers on Country. Implicit deal: Ben invests time, Nic draws salary. Never formalised.</textarea></td>
+        <td><textarea>Ben on payroll $200K. Explicit decision rights. First non-founder hire scoped.</textarea></td>
+        <td><textarea>Co-founder operating doc signed. Payroll contract executed. R&D allocation documented.</textarea></td>
+      </tr>
+      <tr>
+        <td>Pulses</td>
+        <td><textarea>No shared operating rhythm. Reactive calendar. Work driven by grant deadlines and community requests.</textarea></td>
+        <td><textarea>Urgency drives priority, not strategy. Best work happens in sprints around deadlines, then energy collapses.</textarea></td>
+        <td><textarea>Weekly co-founder sync. Monthly field review. Quarterly diagnostic (this canvas).</textarea></td>
+        <td><textarea>4 weekly syncs completed. 1 monthly review completed. Rhythm feels natural.</textarea></td>
+      </tr>
+      <tr>
+        <td>Process</td>
+        <td><textarea>High insight generation, low closure rate. Plans created but not executed to completion. 379 unreconciled Xero transactions.</textarea></td>
+        <td><textarea>Starting is easy, finishing is hard. Novelty preference. New ideas interrupt work-in-progress constantly.</textarea></td>
+        <td><textarea>WIP limit: 3 active projects per person. Finish before starting. Ship then improve.</textarea></td>
+        <td><textarea>100% Xero reconciliation. 2 products shipped (EL billing + CG beta). Zero new projects started.</textarea></td>
+      </tr>
+      <tr>
+        <td>Products</td>
+        <td><textarea>Powerful platforms with no packaging. EL, CG, JH are production-ready but have no pricing, onboarding, or go-to-market.</textarea></td>
+        <td><textarea>Builder identity: the work is building, not selling. Packaging feels like compromise. "If we build it well enough, they'll come."</textarea></td>
+        <td><textarea>3 priced offers: EL institutional subscription, CG SaaS, Diagnostic practice service.</textarea></td>
+        <td><textarea>1-page offer sheet for each. First paying customer for at least one.</textarea></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ═══════════ PROJECT PORTFOLIO — DRIVE / FIELD / SHED ═══════════ -->
+<div class="portfolio-section">
+  <div class="section-label">🚜 PTO Decision — The tractor powers one implement at a time</div>
+  <div class="portfolio-grid">
+    <div class="portfolio-lane lane-drive">
+      <div class="portfolio-lane-header">⚡ Drive — Connect PTO now</div>
+      <div class="portfolio-lane-body" id="lane-drive">
+        <div class="project-chip"><span class="chip-icon">🌱</span><span class="chip-code">EL</span><span class="chip-name">Empathy Ledger</span><span class="chip-revenue">$0 → billing</span></div>
+        <div class="project-chip"><span class="chip-icon">🔍</span><span class="chip-code">CS</span><span class="chip-name">CivicGraph</span><span class="chip-revenue">$0 → beta</span></div>
+        <div class="project-chip"><span class="chip-icon">🔄</span><span class="chip-code">GD</span><span class="chip-name">Goods on Country</span><span class="chip-revenue">$585K</span></div>
+      </div>
+    </div>
+    <div class="portfolio-lane lane-field">
+      <div class="portfolio-lane-header">🌱 Field — Plant, don't power yet</div>
+      <div class="portfolio-lane-body" id="lane-field">
+        <div class="project-chip"><span class="chip-icon">⚖️</span><span class="chip-code">JH</span><span class="chip-name">JusticeHub</span><span class="chip-metric">strategy first</span></div>
+        <div class="project-chip"><span class="chip-icon">🌿</span><span class="chip-code">HV</span><span class="chip-name">The Harvest</span><span class="chip-revenue">$150K</span></div>
+        <div class="project-chip"><span class="chip-icon">📸</span><span class="chip-code">PI</span><span class="chip-name">PICC</span><span class="chip-revenue">$402K</span></div>
+        <div class="project-chip"><span class="chip-icon">🏡</span><span class="chip-code">FM</span><span class="chip-name">The Farm / BCV</span><span class="chip-metric">early stage</span></div>
+      </div>
+    </div>
+    <div class="portfolio-lane lane-shed">
+      <div class="portfolio-lane-header">🔧 Shed — Park or hand over</div>
+      <div class="portfolio-lane-body" id="lane-shed">
+        <div class="project-chip"><span class="chip-icon">📞</span><span class="chip-code">GP</span><span class="chip-name">Gold Phone</span><span class="chip-metric">pause</span></div>
+        <div class="project-chip"><span class="chip-icon">🎤</span><span class="chip-code">CF</span><span class="chip-name">The Confessional</span><span class="chip-metric">pause</span></div>
+        <div class="project-chip"><span class="chip-icon">🧶</span><span class="chip-code">MY</span><span class="chip-name">Mounty Yarns</span><span class="chip-metric">$25K — hand over</span></div>
+        <div class="project-chip"><span class="chip-icon">💪</span><span class="chip-code">BG</span><span class="chip-name">BG Fit</span><span class="chip-metric">pause</span></div>
+        <div class="project-chip"><span class="chip-icon">👨‍👧</span><span class="chip-code">DL</span><span class="chip-name">DadLab</span><span class="chip-metric">pause</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ FIELD CROSS-SECTION ═══════════ -->
+<div class="section-label" style="padding: 1.25rem 2rem 0.5rem;">🌾 The Field — What grows above is a function of the soil below</div>
+
+<div class="sky-zone">
+  <div class="zone-label">Visible System · What outsiders see</div>
+  <div style="display:flex; gap:1rem; flex-wrap:wrap; justify-content:center; font-size:0.7rem;">
+    <div style="background:white; border:1px solid var(--border); border-radius:8px; padding:0.5rem 0.75rem; text-align:center; width:170px;">
+      <div style="font-size:1.2rem;">💰</div>
+      <div style="font-weight:600;">Revenue</div>
+      <textarea style="font-size:0.65rem; height:3.5rem; text-align:center; width:100%;">$1.22M FY26 (Goods + PICC + Harvest + Mounty)</textarea>
+    </div>
+    <div style="background:white; border:1px solid var(--border); border-radius:8px; padding:0.5rem 0.75rem; text-align:center; width:170px;">
+      <div style="font-size:1.2rem;">🏗️</div>
+      <div style="font-weight:600;">Platforms</div>
+      <textarea style="font-size:0.65rem; height:3.5rem; text-align:center; width:100%;">4 production apps. 571 tables. 6 Supabase instances.</textarea>
+    </div>
+    <div style="background:white; border:1px solid var(--border); border-radius:8px; padding:0.5rem 0.75rem; text-align:center; width:170px;">
+      <div style="font-size:1.2rem;">🤝</div>
+      <div style="font-weight:600;">Community</div>
+      <textarea style="font-size:0.65rem; height:3.5rem; text-align:center; width:100%;">226 storytellers. 200+ beds. 10 machines. Palm Island Elders Room.</textarea>
+    </div>
+    <div style="background:white; border:1px solid var(--border); border-radius:8px; padding:0.5rem 0.75rem; text-align:center; width:170px;">
+      <div style="font-size:1.2rem;">📊</div>
+      <div style="font-weight:600;">Data</div>
+      <textarea style="font-size:0.65rem; height:3.5rem; text-align:center; width:100%;">4.2M CivicGraph records. 1,100 ALMA interventions. 14K grants.</textarea>
+    </div>
+    <div style="background:white; border:1px solid var(--border); border-radius:8px; padding:0.5rem 0.75rem; text-align:center; width:170px;">
+      <div style="font-size:1.2rem;">🏆</div>
+      <div style="font-weight:600;">Proof</div>
+      <textarea style="font-size:0.65rem; height:3.5rem; text-align:center; width:100%;">PICC = PTO model working. Goods = circular economy live. Harvest = community hub open.</textarea>
+    </div>
+  </div>
+</div>
+
+<div class="ground-line"></div>
+
+<div class="soil-zone">
+  <div class="section-label">Social Soil — What sustains or undermines everything above</div>
+  <div class="soil-grid">
+    <div class="grid-header"></div>
+    <div class="grid-header">Culture</div>
+    <div class="grid-header">Operations</div>
+    <div class="grid-header">Market</div>
+
+    <div class="row-label"><div class="dot" style="background:var(--soil-dark);"></div>Darkness</div>
+    <div class="grid-cell"><textarea>Builder identity = worth tied to output. Can't stop. "Resting feels like failing." Nic and Ben never discuss the pay gap.</textarea></div>
+    <div class="grid-cell"><textarea>379 unreconciled transactions. No shared calendar. Grant deadlines drive all work. R&D registration due Apr 30 — not started.</textarea></div>
+    <div class="grid-cell"><textarea>Tech platforms have zero users despite being built. "If we build it they will come" hasn't worked. No go-to-market muscle.</textarea></div>
+
+    <div class="row-label"><div class="dot" style="background:var(--seed-gold);"></div>Compost</div>
+    <div class="grid-cell"><textarea>LCAA methodology works in practice. PICC proved PTO model. Nicholas excels at Listen+Art, Ben at Curiosity+Action. Complementary when explicit.</textarea></div>
+    <div class="grid-cell"><textarea>Infrastructure is excellent (monorepo, shared DB, CRM, Xero, bots). Operational backbone exists — just needs rhythm and closure discipline.</textarea></div>
+    <div class="grid-cell"><textarea>Australia has no 360Giving. $23B grants market unserved. OCAP storytelling demand growing. Orgs stuck at 2.0 need 4.0 tools.</textarea></div>
+
+    <div class="row-label"><div class="dot" style="background:var(--sprout-green);"></div>Rebirth</div>
+    <div class="grid-cell"><textarea>From "build everything" to "finish 3 things." From implicit partnership to signed operating agreement. From $0 to payroll.</textarea></div>
+    <div class="grid-cell"><textarea>Weekly sync + monthly review + quarterly diagnostic. WIP limits. Ship EL billing + CG beta in 90 days. Zero new starts.</textarea></div>
+    <div class="grid-cell"><textarea>Package the practice: Diagnostic + Sprint + Growing Season. First client = ACT itself. Second client = a friendly foundation.</textarea></div>
+  </div>
+</div>
+
+<!-- ═══════════ ROOTS ═══════════ -->
+<div class="roots-section">
+  <div class="section-label">🌿 Root System — What connects everything underground</div>
+  <div class="roots-grid">
+    <div class="root-card">
+      <div class="root-title">Shared Infrastructure</div>
+      <textarea>Supabase shared instance. ABN as universal join. pnpm monorepo. GoHighLevel CRM. Xero. GitHub Actions. Vercel deploys.</textarea>
+    </div>
+    <div class="root-card">
+      <div class="root-title">Key Relationships</div>
+      <textarea>Snow Foundation. QBE / Jay Boolkin. Centrecorp. Maddi (Goods). Uncle Allan + PICC community. Stephen Pozzi (IoT).</textarea>
+    </div>
+    <div class="root-card">
+      <div class="root-title">Philosophy</div>
+      <textarea>PTO: hand over the keys. LCAA cycle. 40% to community. Forkable IP. Sunset clauses. "The only failure is becoming indispensable."</textarea>
+    </div>
+    <div class="root-card">
+      <div class="root-title">Financial Spine</div>
+      <textarea>R&D tax incentive: ~$204K refund on ~$468K eligible. FY26 revenue $1.22M. Catalysing Impact pool $300K target. Runway: tight.</textarea>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ SYMBOL LEGEND ═══════════ -->
+<div class="symbol-legend">
+  <div class="legend-item"><div class="legend-dot" style="background:var(--soil-dark);"></div> SOIL — hidden conditions</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--seed-gold);"></div> SEED — emerging possibility</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--furrow-amber);"></div> FURROW — concrete action</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--spiral-indigo);"></div> SPIRAL — learning loop</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--sprout-green);"></div> SPROUT — visible proof</div>
+</div>
+
+<!-- ═══════════ CO-FOUNDER OVERLAY ═══════════ -->
+<div class="cofounder-section">
+  <div class="section-label">👥 Co-Founder Alignment — The conversation that needs to happen</div>
+  <div class="cofounder-grid">
+    <div class="cofounder-card">
+      <div class="cf-title">Benjamin sees...</div>
+      <textarea>Systems that need finishing. Revenue potential trapped in unpackaged platforms. A pay gap that undermines R&D claims and personal sustainability.</textarea>
+    </div>
+    <div class="cofounder-card">
+      <div class="cf-title">Nicholas sees...</div>
+      <textarea>(Fill during diagnostic — this is Nicholas's voice, not Benjamin's guess)</textarea>
+    </div>
+    <div class="cofounder-card">
+      <div class="cf-title">The gap between them</div>
+      <textarea>(Name after both have filled their views — where do they diverge? That's the diagnostic gold.)</textarea>
+    </div>
+  </div>
+  <div class="cofounder-grid" style="margin-top:0.75rem;">
+    <div class="cofounder-card">
+      <div class="cf-title">One ask from Ben → Nic</div>
+      <textarea placeholder="What do you need from your co-founder?"></textarea>
+    </div>
+    <div class="cofounder-card">
+      <div class="cf-title">One ask from Nic → Ben</div>
+      <textarea placeholder="What does your co-founder need from you?"></textarea>
+    </div>
+    <div class="cofounder-card">
+      <div class="cf-title">One decision to make together</div>
+      <textarea placeholder="What can only be resolved face to face?">Which 3 projects get the PTO for the next 90 days — and what happens to the rest?</textarea>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ 6 TRACKS ═══════════ -->
+<div class="tracks-section">
+  <div class="section-label">🔲 90-Day Furrow Plan — 6 Tracks</div>
+  <div class="tracks-grid">
+    <div class="track-card">
+      <div class="track-header">
+        <div class="track-num" style="background:var(--green-dark);">1</div>
+        <div class="track-title">Mission</div>
+        <div class="track-symbol">🚜</div>
+      </div>
+      <div class="track-body">
+        <div class="track-row"><span class="track-action">Clarify</span><input type="text" value="One sentence: what are we building?" /></div>
+        <div class="track-row"><span class="track-action">Decide</span><input type="text" value="Pty Ltd structure before June 30." /></div>
+        <div class="track-row"><span class="track-action">Proof</span><input type="text" value="Operating agreement signed. Structure resolved." /></div>
+      </div>
+    </div>
+
+    <div class="track-card">
+      <div class="track-header">
+        <div class="track-num" style="background:var(--sprout-green);">2</div>
+        <div class="track-title">Revenue</div>
+        <div class="track-symbol">💰</div>
+      </div>
+      <div class="track-body">
+        <div class="track-row"><span class="track-action">Ship</span><input type="text" value="EL Stripe billing → first institutional customer." /></div>
+        <div class="track-row"><span class="track-action">Launch</span><input type="text" value="CivicGraph beta → 10 users." /></div>
+        <div class="track-row"><span class="track-action">Proof</span><input type="text" value="≥ $1 in tech platform revenue." /></div>
+      </div>
+    </div>
+
+    <div class="track-card">
+      <div class="track-header">
+        <div class="track-num" style="background:var(--furrow-amber);">3</div>
+        <div class="track-title">People</div>
+        <div class="track-symbol">👥</div>
+      </div>
+      <div class="track-body">
+        <div class="track-row"><span class="track-action">Fix</span><input type="text" value="Ben on payroll. $200K, 85% R&D." /></div>
+        <div class="track-row"><span class="track-action">Define</span><input type="text" value="Decision rights: who owns what." /></div>
+        <div class="track-row"><span class="track-action">Proof</span><input type="text" value="First payslip processed. Operating doc signed." /></div>
+      </div>
+    </div>
+
+    <div class="track-card">
+      <div class="track-header">
+        <div class="track-num" style="background:var(--spiral-indigo);">4</div>
+        <div class="track-title">Product</div>
+        <div class="track-symbol">📦</div>
+      </div>
+      <div class="track-body">
+        <div class="track-row"><span class="track-action">Package</span><input type="text" value="1-page offer for EL, CG, Diagnostic." /></div>
+        <div class="track-row"><span class="track-action">Price</span><input type="text" value="Set pricing for all three." /></div>
+        <div class="track-row"><span class="track-action">Proof</span><input type="text" value="3 offer sheets. 1 proposal sent." /></div>
+      </div>
+    </div>
+
+    <div class="track-card">
+      <div class="track-header">
+        <div class="track-num" style="background:var(--seed-gold); color:var(--soil-dark);">5</div>
+        <div class="track-title">Partnerships</div>
+        <div class="track-symbol">🤝</div>
+      </div>
+      <div class="track-body">
+        <div class="track-row"><span class="track-action">Submit</span><input type="text" value="R&D registration by Apr 30." /></div>
+        <div class="track-row"><span class="track-action">Close</span><input type="text" value="Catalysing Impact pool application." /></div>
+        <div class="track-row"><span class="track-action">Proof</span><input type="text" value="AusIndustry submitted. Pool outcome known." /></div>
+      </div>
+    </div>
+
+    <div class="track-card">
+      <div class="track-header">
+        <div class="track-num" style="background:var(--soil-dark);">6</div>
+        <div class="track-title">90-Day Rhythm</div>
+        <div class="track-symbol">🔄</div>
+      </div>
+      <div class="track-body">
+        <div class="track-row"><span class="track-action">Weekly</span><input type="text" value="30-min co-founder sync (Mon AM)." /></div>
+        <div class="track-row"><span class="track-action">Monthly</span><input type="text" value="Field review — update this canvas." /></div>
+        <div class="track-row"><span class="track-action">Quarter</span><input type="text" value="Full diagnostic. Re-sort Drive/Field/Shed." /></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ FUTURE ORG NOTE ═══════════ -->
+<div class="future-org">
+  <div class="section-label">✉️ What does ACT look like in 3 years if we get this right?</div>
+  <textarea id="future-org-note">Three platforms generating cross-subsidy revenue. Communities owning their own instances. Ben and Nic paid fairly. The Diagnostic practice running quarterly with 4-6 partner orgs. PICC fully community-led. Goods self-sustaining. The Farm hosting residencies. ACT starting to become unnecessary — which is the whole point.</textarea>
+</div>
+
+<!-- ═══════════ QUOTES ═══════════ -->
+<div class="seed-quotes">
+  <span class="quote-chip">"We hand over the keys."</span>
+  <span class="quote-chip">"Plant seeds today for forests tomorrow."</span>
+  <span class="quote-chip">"Action without listening is extraction."</span>
+  <span class="quote-chip">"The only failure is becoming indispensable."</span>
+  <span class="quote-chip">"Design for our own obsolescence."</span>
+  <span class="quote-chip">"Quality above ground = quality of soil."</span>
+  <span class="quote-chip">"The tractor powers one implement at a time."</span>
+  <span class="quote-chip">"Art is how change travels."</span>
+</div>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<div class="footer">
+  <div class="footer-left">
+    Regenerative Systems Practice · A Curious Tractor · Jinibara Country, 2026
+  </div>
+  <div class="footer-actions">
+    <button class="btn" onclick="saveToLocalStorage()">Save Draft</button>
+    <button class="btn" onclick="loadFromLocalStorage()">Load Draft</button>
+    <button class="btn" onclick="exportJSON()">Export JSON</button>
+    <button class="btn btn-primary" onclick="window.print()">Print / PDF</button>
+  </div>
+</div>
+
+<script>
+  const STORAGE_KEY = 'act-field-diagnostic';
+
+  function getAllInputs() {
+    const data = {};
+    document.querySelectorAll('input[type="text"], textarea').forEach((el, i) => {
+      const id = el.id || `field-${i}`;
+      data[id] = el.value;
+    });
+    return data;
+  }
+
+  function setAllInputs(data) {
+    document.querySelectorAll('input[type="text"], textarea').forEach((el, i) => {
+      const id = el.id || `field-${i}`;
+      if (data[id] !== undefined) el.value = data[id];
+    });
+  }
+
+  function saveToLocalStorage() {
+    const data = getAllInputs();
+    data._savedAt = new Date().toISOString();
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    showToast('Draft saved');
+  }
+
+  function loadFromLocalStorage() {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) {
+      const data = JSON.parse(raw);
+      setAllInputs(data);
+      showToast('Loaded — saved ' + new Date(data._savedAt).toLocaleDateString());
+    } else {
+      showToast('No saved draft');
+    }
+  }
+
+  function exportJSON() {
+    const data = getAllInputs();
+    data._exportedAt = new Date().toISOString();
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `field-diagnostic-${document.getElementById('diagnostic-date').value.replace(/\s+/g,'-').toLowerCase()}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+    showToast('Exported');
+  }
+
+  function showToast(msg) {
+    const t = document.createElement('div');
+    t.textContent = msg;
+    t.style.cssText = `position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);background:#2F3E2E;color:white;padding:0.5rem 1.5rem;border-radius:8px;font-family:'IBM Plex Mono',monospace;font-size:0.75rem;z-index:9999;opacity:0;transition:opacity 0.3s;`;
+    document.body.appendChild(t);
+    requestAnimationFrame(() => t.style.opacity = '1');
+    setTimeout(() => { t.style.opacity = '0'; setTimeout(() => t.remove(), 300); }, 2000);
+  }
+
+  setInterval(saveToLocalStorage, 30000);
+</script>
+
+</body>
+</html>

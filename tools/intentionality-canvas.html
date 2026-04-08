@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cultivating Intentionality — Benjamin Knight, A Curious Tractor</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@300;400;500&display=swap');
+
+  :root {
+    --bg: #FDFBF7;
+    --text: #2F3E2E;
+    --text-secondary: #5A4A3A;
+    --tan: #6B5A45;
+    --border: #E3D4BA;
+    --border-dark: #D7C4A2;
+    --green: #4CAF50;
+    --green-dark: #2E7D32;
+    --parchment: #F6F1E7;
+    --soil-dark: #3E2723;
+    --soil-mid: #5D4037;
+    --soil-light: #8D6E63;
+    --seed-gold: #F9A825;
+    --sprout-green: #66BB6A;
+    --spiral-indigo: #5C6BC0;
+    --furrow-amber: #FF8F00;
+    --sky: #E3F2FD;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Space Grotesk', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+
+  /* ── Header ── */
+  .header {
+    padding: 2rem 2rem 1rem;
+    border-bottom: 2px dashed var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .header-left h1 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.02em;
+  }
+
+  .header-left .eyebrow {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    color: var(--tan);
+    margin-bottom: 0.25rem;
+  }
+
+  .header-left .subtitle {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    margin-top: 0.25rem;
+  }
+
+  .header-right {
+    text-align: right;
+  }
+
+  .header-right .cycle-label {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    color: var(--tan);
+  }
+
+  .header-right input[type="text"] {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.85rem;
+    border: none;
+    border-bottom: 1px dashed var(--border);
+    background: transparent;
+    color: var(--text);
+    width: 180px;
+    text-align: right;
+    padding: 0.25rem 0;
+    outline: none;
+  }
+
+  /* ── North Star ── */
+  .north-star {
+    padding: 1.25rem 2rem;
+    background: linear-gradient(135deg, var(--parchment), var(--bg));
+    border-bottom: 1px solid var(--border);
+  }
+
+  .north-star .label {
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    color: var(--tan);
+    margin-bottom: 0.35rem;
+  }
+
+  .north-star textarea {
+    width: 100%;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text);
+    background: transparent;
+    border: none;
+    resize: none;
+    outline: none;
+    line-height: 1.6;
+    height: 3.5rem;
+  }
+
+  /* ── Top Row: Values + 5Ps ── */
+  .top-row {
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .values-section, .fiveP-section {
+    padding: 1.25rem 2rem;
+  }
+
+  .values-section {
+    border-bottom: 1px solid var(--border);
+  }
+
+  .values-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 2rem;
+  }
+
+  .section-label {
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    color: var(--tan);
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .section-label .symbol {
+    font-size: 1rem;
+  }
+
+  .value-item {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+
+  .value-item .num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--tan);
+    flex-shrink: 0;
+  }
+
+  .value-item input {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.82rem;
+    border: none;
+    border-bottom: 1px dashed var(--border);
+    background: transparent;
+    color: var(--text);
+    width: 280px;
+    padding: 0.2rem 0;
+    outline: none;
+  }
+
+  .value-item input:focus {
+    border-bottom-color: var(--green);
+  }
+
+  /* ── 5P Table ── */
+  .fiveP-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .fiveP-table th {
+    font-size: 0.55rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--tan);
+    text-align: left;
+    padding: 0.25rem 0.5rem 0.4rem;
+    border-bottom: 1px solid var(--border);
+    font-weight: 500;
+  }
+
+  .fiveP-table td {
+    padding: 0.3rem 0.5rem;
+    vertical-align: top;
+    border-bottom: 1px dashed var(--border);
+  }
+
+  .fiveP-table td:first-child {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--tan);
+    width: 70px;
+    font-weight: 500;
+  }
+
+  .fiveP-table td textarea {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.72rem;
+    border: none;
+    background: transparent;
+    color: var(--text);
+    width: 100%;
+    padding: 0.15rem 0;
+    outline: none;
+    resize: none;
+    height: 2.4rem;
+    line-height: 1.4;
+  }
+
+  .fiveP-table td textarea:focus {
+    background: rgba(76, 175, 80, 0.05);
+  }
+
+  /* ── Field Cross-Section (The Canvas) ── */
+  .field-section {
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .field-section .section-label {
+    padding: 1.25rem 2rem 0.5rem;
+  }
+
+  /* Sky zone */
+  .sky-zone {
+    background: linear-gradient(180deg, #F0F7FF 0%, var(--bg) 100%);
+    padding: 1rem 2rem;
+    min-height: 120px;
+    position: relative;
+  }
+
+  .sky-zone .zone-label {
+    font-size: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    color: var(--spiral-indigo);
+    opacity: 0.5;
+    position: absolute;
+    right: 2rem;
+    top: 0.5rem;
+  }
+
+  .sprouts-row {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 0.5rem;
+  }
+
+  .sprout-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 0.6rem 0.75rem;
+    width: 155px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+
+  .sprout-card .sprout-icon {
+    font-size: 1.4rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .sprout-card .sprout-code {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.55rem;
+    color: var(--tan);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .sprout-card .sprout-name {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text);
+    margin: 0.15rem 0;
+  }
+
+  .sprout-card textarea {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.65rem;
+    color: var(--text-secondary);
+    border: none;
+    background: transparent;
+    width: 100%;
+    resize: none;
+    outline: none;
+    text-align: center;
+    height: 3.5rem;
+    line-height: 1.3;
+  }
+
+  .sprout-card .phase-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.5rem;
+    padding: 0.1rem 0.4rem;
+    border-radius: 4px;
+    display: inline-block;
+    margin-top: 0.2rem;
+  }
+
+  .phase-soil { background: var(--soil-dark); color: white; }
+  .phase-seed { background: var(--seed-gold); color: var(--soil-dark); }
+  .phase-furrow { background: var(--furrow-amber); color: white; }
+  .phase-spiral { background: var(--spiral-indigo); color: white; }
+  .phase-sprout { background: var(--sprout-green); color: white; }
+
+  /* Ground line */
+  .ground-line {
+    height: 4px;
+    background: linear-gradient(90deg, var(--soil-light), var(--soil-mid), var(--soil-light));
+    position: relative;
+  }
+
+  .ground-line::after {
+    content: '▼ VISIBLE ABOVE  ·  HIDDEN BELOW ▼';
+    position: absolute;
+    left: 50%;
+    top: -10px;
+    transform: translateX(-50%);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.5rem;
+    letter-spacing: 0.2em;
+    color: var(--soil-mid);
+    white-space: nowrap;
+    background: var(--bg);
+    padding: 0 0.75rem;
+  }
+
+  /* Soil zone */
+  .soil-zone {
+    background: linear-gradient(180deg, #F5EDE0 0%, #EDE2D0 40%, #E5D5BF 100%);
+    padding: 1.25rem 2rem;
+    position: relative;
+  }
+
+  .soil-zone .zone-label {
+    font-size: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    color: var(--soil-mid);
+    opacity: 0.6;
+    position: absolute;
+    right: 2rem;
+    top: 0.5rem;
+  }
+
+  /* Soil grid */
+  .soil-grid {
+    display: grid;
+    grid-template-columns: 100px 1fr 1fr 1fr;
+    gap: 0;
+    border: 1px solid var(--border-dark);
+    border-radius: 8px;
+    overflow: hidden;
+    background: rgba(255,255,255,0.4);
+  }
+
+  .soil-grid .grid-header {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.55rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--tan);
+    padding: 0.5rem 0.6rem;
+    background: rgba(255,255,255,0.5);
+    border-bottom: 1px solid var(--border-dark);
+    font-weight: 500;
+    text-align: center;
+  }
+
+  .soil-grid .grid-header:first-child {
+    text-align: left;
+  }
+
+  .soil-grid .row-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    font-weight: 600;
+    padding: 0.6rem;
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    border-bottom: 1px dashed var(--border-dark);
+    border-right: 1px solid var(--border-dark);
+  }
+
+  .soil-grid .row-label .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .soil-grid .grid-cell {
+    padding: 0.4rem 0.6rem;
+    border-bottom: 1px dashed var(--border-dark);
+    border-right: 1px dashed var(--border-dark);
+  }
+
+  .soil-grid .grid-cell:last-child {
+    border-right: none;
+  }
+
+  .soil-grid .grid-cell textarea {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.7rem;
+    color: var(--text);
+    border: none;
+    background: transparent;
+    width: 100%;
+    resize: none;
+    outline: none;
+    height: 3rem;
+    line-height: 1.4;
+  }
+
+  .soil-grid .grid-cell textarea:focus {
+    background: rgba(76, 175, 80, 0.04);
+  }
+
+  /* ── Root System (connections) ── */
+  .roots-section {
+    background: linear-gradient(180deg, #EDE2D0 0%, #E0D2BC 100%);
+    padding: 1rem 2rem;
+    border-top: 1px dashed var(--border-dark);
+  }
+
+  .roots-label {
+    font-size: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    color: var(--soil-mid);
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .roots-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+  }
+
+  .root-card {
+    background: rgba(255,255,255,0.35);
+    border: 1px dashed var(--border-dark);
+    border-radius: 8px;
+    padding: 0.6rem 0.75rem;
+  }
+
+  .root-card .root-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--soil-mid);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 0.3rem;
+  }
+
+  .root-card textarea {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.7rem;
+    color: var(--text);
+    border: none;
+    background: transparent;
+    width: 100%;
+    resize: none;
+    outline: none;
+    height: 2.5rem;
+    line-height: 1.4;
+  }
+
+  /* ── 6 Tracks ── */
+  .tracks-section {
+    padding: 1.5rem 2rem;
+    border-top: 2px solid var(--border);
+  }
+
+  .tracks-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-top: 0.75rem;
+  }
+
+  .track-card {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    background: white;
+  }
+
+  .track-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    border-bottom: 1px solid var(--border);
+    background: var(--parchment);
+  }
+
+  .track-header .track-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 600;
+    width: 1.4rem;
+    height: 1.4rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    flex-shrink: 0;
+  }
+
+  .track-header .track-title {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .track-header .track-symbol {
+    margin-left: auto;
+    font-size: 0.9rem;
+  }
+
+  .track-body {
+    padding: 0.5rem 0.75rem;
+  }
+
+  .track-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.4rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .track-row .track-action {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.55rem;
+    color: var(--tan);
+    text-transform: uppercase;
+    width: 38px;
+    flex-shrink: 0;
+    padding-top: 0.15rem;
+  }
+
+  .track-row input {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.72rem;
+    border: none;
+    border-bottom: 1px dashed var(--border);
+    background: transparent;
+    color: var(--text);
+    width: 100%;
+    padding: 0.15rem 0;
+    outline: none;
+  }
+
+  .track-row input:focus {
+    border-bottom-color: var(--green);
+  }
+
+  /* ── Future Self Note ── */
+  .future-self {
+    padding: 1.5rem 2rem;
+    background: linear-gradient(135deg, var(--parchment), var(--bg));
+    border-top: 2px dashed var(--border);
+  }
+
+  .future-self textarea {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.85rem;
+    font-style: italic;
+    color: var(--text-secondary);
+    border: none;
+    background: transparent;
+    width: 100%;
+    resize: none;
+    outline: none;
+    height: 5rem;
+    line-height: 1.7;
+  }
+
+  /* ── Quotes ── */
+  .seed-quotes {
+    padding: 1rem 2rem 1.5rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+  }
+
+  .quote-chip {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.55rem;
+    color: var(--tan);
+    background: var(--parchment);
+    padding: 0.25rem 0.6rem;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    cursor: default;
+    transition: all 0.2s;
+  }
+
+  .quote-chip:hover {
+    background: var(--green);
+    color: white;
+    border-color: var(--green);
+  }
+
+  /* ── Footer ── */
+  .footer {
+    padding: 1rem 2rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-left {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--tan);
+  }
+
+  .footer-actions {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .btn {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    padding: 0.4rem 1rem;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background: white;
+    color: var(--text);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .btn:hover {
+    background: var(--parchment);
+  }
+
+  .btn-primary {
+    background: var(--green);
+    color: white;
+    border-color: var(--green);
+  }
+
+  .btn-primary:hover {
+    background: var(--green-dark);
+  }
+
+  /* ── Symbol Legend ── */
+  .symbol-legend {
+    padding: 0.75rem 2rem;
+    border-top: 1px dashed var(--border);
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.55rem;
+    color: var(--tan);
+  }
+
+  .legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* ── Print styles ── */
+  @media print {
+    body { font-size: 0.9rem; }
+    .footer-actions { display: none; }
+    .btn { display: none; }
+    textarea, input { border: none !important; }
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 900px) {
+    .top-row { grid-template-columns: 1fr; }
+    .values-section { border-right: none; border-bottom: 1px solid var(--border); }
+    .tracks-grid { grid-template-columns: 1fr; }
+    .roots-grid { grid-template-columns: 1fr; }
+    .sprouts-row { gap: 0.5rem; }
+    .sprout-card { width: 110px; }
+    .soil-grid { grid-template-columns: 80px 1fr 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════ HEADER ═══════════ -->
+<div class="header">
+  <div class="header-left">
+    <div class="eyebrow">A Curious Tractor · Jinibara Country</div>
+    <h1>Cultivating Intentionality</h1>
+    <div class="subtitle">Benjamin Knight — Co-Founder Canvas</div>
+  </div>
+  <div class="header-right">
+    <div class="cycle-label">Cycle</div>
+    <input type="text" id="cycle-date" value="April–June 2026" />
+  </div>
+</div>
+
+<!-- ═══════════ NORTH STAR ═══════════ -->
+<div class="north-star">
+  <div class="label">☀ North Star — What is the assignment of this season?</div>
+  <textarea id="north-star" placeholder="What are you trying to build, become, or protect in this chapter?">Build Curious Tractor into a regenerative systems practice that turns complexity into usable field tools for teams and communities. Design for our own obsolescence.</textarea>
+</div>
+
+<!-- ═══════════ VALUES + 5Ps ═══════════ -->
+<div class="top-row">
+  <div class="values-section">
+    <div class="section-label"><span class="symbol">⛤</span> Values — Spirit over matter</div>
+    <div class="values-list">
+      <div class="value-item"><span class="num">1.</span><input type="text" value="Truth before performance" /></div>
+      <div class="value-item"><span class="num">2.</span><input type="text" value="Regeneration over extraction" /></div>
+      <div class="value-item"><span class="num">3.</span><input type="text" value="Relationships as infrastructure" /></div>
+      <div class="value-item"><span class="num">4.</span><input type="text" value="Small prototypes over abstract plans" /></div>
+      <div class="value-item"><span class="num">5.</span><input type="text" value="Courageous clarity" /></div>
+    </div>
+  </div>
+
+  <div class="fiveP-section">
+    <div class="section-label">5P Scan</div>
+    <table class="fiveP-table">
+      <thead>
+        <tr>
+          <th>Domain</th>
+          <th>Current Reality</th>
+          <th>Desired Shift</th>
+          <th>Next Move (96h)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Projects</td>
+          <td><textarea>20+ projects, low completion rate</textarea></td>
+          <td><textarea>2 flagship pilots with clear outcomes</textarea></td>
+          <td><textarea>Decide 2 pilots with Nicholas</textarea></td>
+        </tr>
+        <tr>
+          <td>People</td>
+          <td><textarea>Strong trust, unclear role boundaries</textarea></td>
+          <td><textarea>Explicit co-founder decision rights</textarea></td>
+          <td><textarea>Role + decision map session</textarea></td>
+        </tr>
+        <tr>
+          <td>Pulses</td>
+          <td><textarea>Calendar reactive and fragmented</textarea></td>
+          <td><textarea>Weekly rhythm: reflect + build + outreach</textarea></td>
+          <td><textarea>Remove 2 low-value meetings</textarea></td>
+        </tr>
+        <tr>
+          <td>Process</td>
+          <td><textarea>Insight-heavy, closure-light</textarea></td>
+          <td><textarea>Cadence: sense → prototype → review → ship</textarea></td>
+          <td><textarea>Define 'done' for each pilot</textarea></td>
+        </tr>
+        <tr>
+          <td>Products</td>
+          <td><textarea>Powerful narrative, weak packaging</textarea></td>
+          <td><textarea>3 concrete offers (diagnostic, sprint, lab)</textarea></td>
+          <td><textarea>Draft one-page offer sheet</textarea></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ═══════════ FIELD CROSS-SECTION ═══════════ -->
+<div class="field-section">
+  <div class="section-label" style="padding: 1.25rem 2rem 0.5rem;">🌾 The Field — What grows above is a function of the soil below</div>
+
+  <!-- Sky / Sprout Zone -->
+  <div class="sky-zone">
+    <div class="zone-label">Visible · Outcomes · Proof</div>
+    <div class="sprouts-row">
+      <div class="sprout-card">
+        <div class="sprout-icon">🌱</div>
+        <div class="sprout-code">ACT-EL</div>
+        <div class="sprout-name">Empathy Ledger</div>
+        <textarea placeholder="What's visible?">v2 live. 226 storytellers. Needs Stripe billing for first revenue.</textarea>
+        <span class="phase-tag phase-sprout">sprout</span>
+      </div>
+      <div class="sprout-card">
+        <div class="sprout-icon">⚖️</div>
+        <div class="sprout-code">ACT-JH</div>
+        <div class="sprout-name">JusticeHub</div>
+        <textarea placeholder="What's visible?">ALMA: 1,100 interventions mapped. Needs strategy rebuild on EL codebase.</textarea>
+        <span class="phase-tag phase-spiral">spiral</span>
+      </div>
+      <div class="sprout-card">
+        <div class="sprout-icon">🔄</div>
+        <div class="sprout-code">ACT-GD</div>
+        <div class="sprout-name">Goods on Country</div>
+        <textarea placeholder="What's visible?">$585K FY26. 10 machines live. REAL Fund $1.2M EOI submitted.</textarea>
+        <span class="phase-tag phase-furrow">furrow</span>
+      </div>
+      <div class="sprout-card">
+        <div class="sprout-icon">🌿</div>
+        <div class="sprout-code">ACT-HV</div>
+        <div class="sprout-name">The Harvest</div>
+        <textarea placeholder="What's visible?">$150K FY26. Community hub active. Snow Building $240K pending.</textarea>
+        <span class="phase-tag phase-seed">seed</span>
+      </div>
+      <div class="sprout-card">
+        <div class="sprout-icon">🏡</div>
+        <div class="sprout-code">ACT-FM</div>
+        <div class="sprout-name">The Farm / BCV</div>
+        <textarea placeholder="What's visible?">Website live. R&D residencies designed. Physical development early.</textarea>
+        <span class="phase-tag phase-soil">soil</span>
+      </div>
+      <div class="sprout-card">
+        <div class="sprout-icon">🔍</div>
+        <div class="sprout-code">ACT-CS</div>
+        <div class="sprout-name">CivicGraph</div>
+        <textarea placeholder="What's visible?">4.2M records, 94.1% match. Zero users. Need 10 beta testers.</textarea>
+        <span class="phase-tag phase-furrow">furrow</span>
+      </div>
+      <div class="sprout-card">
+        <div class="sprout-icon">📸</div>
+        <div class="sprout-code">ACT-PI</div>
+        <div class="sprout-name">PICC</div>
+        <textarea placeholder="What's visible?">$402K FY26. Elders Room live. The PTO template in action.</textarea>
+        <span class="phase-tag phase-sprout">sprout</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ground Line -->
+  <div class="ground-line"></div>
+
+  <!-- Soil Zone -->
+  <div class="soil-zone">
+    <div class="zone-label">Hidden · Conditions · Root Causes</div>
+
+    <div class="soil-grid">
+      <div class="grid-header"></div>
+      <div class="grid-header">Self</div>
+      <div class="grid-header">Team</div>
+      <div class="grid-header">Ecosystem</div>
+
+      <div class="row-label">
+        <div class="dot" style="background: var(--soil-dark);"></div>
+        Darkness
+      </div>
+      <div class="grid-cell"><textarea placeholder="What's hidden in you?">Over-commitment. Identity tied to being needed. $0 salary unsustainable — erodes R&D claims and personal health.</textarea></div>
+      <div class="grid-cell"><textarea placeholder="What's hidden in the team?">Hard conversations delayed. Role boundaries implicit. Nicholas draws $323K, Ben draws $0 — this gap is unspoken.</textarea></div>
+      <div class="grid-cell"><textarea placeholder="What's hidden in the ecosystem?">Strong demand, low institutional trust. 379 unreconciled transactions. Pty Ltd structure unresolved before June 30.</textarea></div>
+
+      <div class="row-label">
+        <div class="dot" style="background: var(--seed-gold);"></div>
+        Compost
+      </div>
+      <div class="grid-cell"><textarea placeholder="What are you learning?">Energy rises when I write, facilitate live, build systems. My best work is making invisible things visible.</textarea></div>
+      <div class="grid-cell"><textarea placeholder="What is the team learning?">We work best with explicit constraints. PICC proved the PTO model works. Nicholas excels at Listen + Art, Ben at Curiosity + Action.</textarea></div>
+      <div class="grid-cell"><textarea placeholder="What is the ecosystem learning?">Cross-sector actors want practical 4.0 tools, not theory. ABN is the universal join key. Australia has no 360Giving.</textarea></div>
+
+      <div class="row-label">
+        <div class="dot" style="background: var(--sprout-green);"></div>
+        Rebirth
+      </div>
+      <div class="grid-cell"><textarea placeholder="What new pattern?">Fewer commitments, deeper execution. Publish learning-in-public. Get on payroll ($200K, 85% R&D).</textarea></div>
+      <div class="grid-cell"><textarea placeholder="What new pattern?">Weekly co-founder operating ritual. Explicit decision rights. Co-signed operating doc.</textarea></div>
+      <div class="grid-cell"><textarea placeholder="What new pattern?">Pilot-based partnerships. Cross-subsidy SaaS model. Communities own, ACT sunsets. April 30 R&D registration.</textarea></div>
+    </div>
+  </div>
+
+  <!-- Root System -->
+  <div class="roots-section">
+    <div class="roots-label">🌿 Root System — Shared values, relationships, infrastructure connecting everything</div>
+    <div class="roots-grid">
+      <div class="root-card">
+        <div class="root-title">Shared Infrastructure</div>
+        <textarea placeholder="What connects?">Supabase shared instance (571 tables). ABN as universal join. pnpm monorepo. GoHighLevel CRM. Xero financial spine.</textarea>
+      </div>
+      <div class="root-card">
+        <div class="root-title">Key Relationships</div>
+        <textarea placeholder="Who sustains?">Jay Boolkin (QBE). Snow Foundation (Sally, Maree). Maddi (Goods). Centrecorp (Randle, Jodie). Uncle Allan. Stephen Pozzi (IoT).</textarea>
+      </div>
+      <div class="root-card">
+        <div class="root-title">Shared Philosophy</div>
+        <textarea placeholder="What beliefs?">PTO: we hand over the keys. LCAA cycle. 40% to community. Forkable IP. Sunset clauses. Design for obsolescence.</textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ SYMBOL LEGEND ═══════════ -->
+<div class="symbol-legend">
+  <div class="legend-item"><div class="legend-dot" style="background: var(--soil-dark);"></div> SOIL — hidden conditions</div>
+  <div class="legend-item"><div class="legend-dot" style="background: var(--seed-gold);"></div> SEED — emerging possibility</div>
+  <div class="legend-item"><div class="legend-dot" style="background: var(--furrow-amber);"></div> FURROW — concrete action</div>
+  <div class="legend-item"><div class="legend-dot" style="background: var(--spiral-indigo);"></div> SPIRAL — learning loop</div>
+  <div class="legend-item"><div class="legend-dot" style="background: var(--sprout-green);"></div> SPROUT — visible proof</div>
+</div>
+
+<!-- ═══════════ 6 TRACKS ═══════════ -->
+<div class="tracks-section">
+  <div class="section-label">🔲 6 Tracks — Stop · Start · Proof</div>
+  <div class="tracks-grid">
+
+    <div class="track-card">
+      <div class="track-header">
+        <div class="track-num" style="background: var(--soil-dark);">1</div>
+        <div class="track-title">Identity</div>
+        <div class="track-symbol">⛤</div>
+      </div>
+      <div class="track-body">
+        <div class="track-row"><span class="track-action">Stop</span><input type="text" value="Performing certainty. Working for $0." /></div>
+        <div class="track-row"><span class="track-action">Start</span><input type="text" value="Publishing learning-in-public. Getting on payroll." /></div>
+        <div class="track-row"><span class="track-action">Proof</span><input type="text" value="1 weekly field memo. Payroll contract signed." /></div>
+      </div>
+    </div>
+
+    <div class="track-card">
+      <div class="track-header">
+        <div class="track-num" style="background: var(--seed-gold);">2</div>
+        <div class="track-title">Co-founder</div>
+        <div class="track-symbol">🌱</div>
+      </div>
+      <div class="track-body">
+        <div class="track-row"><span class="track-action">Stop</span><input type="text" value="Implicit expectations. Unspoken pay gap." /></div>
+        <div class="track-row"><span class="track-action">Start</span><input type="text" value="Explicit role split + escalation rules." /></div>
+        <div class="track-row"><span class="track-action">Proof</span><input type="text" value="Co-founder operating doc v1 signed." /></div>
+      </div>
+    </div>
+
+    <div class="track-card">
+      <div class="track-header">
+        <div class="track-num" style="background: var(--furrow-amber);">3</div>
+        <div class="track-title">Core Venture</div>
+        <div class="track-symbol">🚜</div>
+      </div>
+      <div class="track-body">
+        <div class="track-row"><span class="track-action">Stop</span><input type="text" value="Custom everything. 20+ active projects." /></div>
+        <div class="track-row"><span class="track-action">Start</span><input type="text" value="Productised offers. 2 flagship pilots." /></div>
+        <div class="track-row"><span class="track-action">Proof</span><input type="text" value="EL Stripe billing live. CivicGraph 10 beta users." /></div>
+      </div>
+    </div>
+
+    <div class="track-card">
+      <div class="track-header">
+        <div class="track-num" style="background: var(--spiral-indigo);">4</div>
+        <div class="track-title">Ecosystem</div>
+        <div class="track-symbol">🌀</div>
+      </div>
+      <div class="track-body">
+        <div class="track-row"><span class="track-action">Stop</span><input type="text" value="Broad networking without follow-through." /></div>
+        <div class="track-row"><span class="track-action">Start</span><input type="text" value="Focused alliance building. 3 active collaborators." /></div>
+        <div class="track-row"><span class="track-action">Proof</span><input type="text" value="Catalysing Impact submission. R&D registration Apr 30." /></div>
+      </div>
+    </div>
+
+    <div class="track-card">
+      <div class="track-header">
+        <div class="track-num" style="background: var(--sprout-green);">5</div>
+        <div class="track-title">Community</div>
+        <div class="track-symbol">🐦‍⬛</div>
+      </div>
+      <div class="track-body">
+        <div class="track-row"><span class="track-action">Stop</span><input type="text" value="Talking to everyone, building with no one." /></div>
+        <div class="track-row"><span class="track-action">Start</span><input type="text" value="Curated working circle (6-10 people)." /></div>
+        <div class="track-row"><span class="track-action">Proof</span><input type="text" value="Monthly circle call + notes + actions." /></div>
+      </div>
+    </div>
+
+    <div class="track-card">
+      <div class="track-header">
+        <div class="track-num" style="background: var(--text);">6</div>
+        <div class="track-title">Next 96 Hours</div>
+        <div class="track-symbol">⏱</div>
+      </div>
+      <div class="track-body">
+        <div class="track-row"><span class="track-action">Do</span><input type="text" value="Book co-founder architecture session." /></div>
+        <div class="track-row"><span class="track-action">Do</span><input type="text" value="Run 2-hour prototype sprint (EL billing)." /></div>
+        <div class="track-row"><span class="track-action">Do</span><input type="text" value="Remove 1 recurring calendar drag." /></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════ FUTURE SELF NOTE ═══════════ -->
+<div class="future-self">
+  <div class="section-label">✉️ Note from Future Self</div>
+  <textarea id="future-self-note">Benjamin, keep choosing depth over noise. Your work lands when you simplify it into tools people can use tomorrow. Protect your energy like a strategic asset. Say no faster. Build fewer things, finish more things, and let results speak. The only failure is becoming indispensable — and you're dangerously close. Hand over the keys.</textarea>
+</div>
+
+<!-- ═══════════ SEED QUOTES ═══════════ -->
+<div class="seed-quotes">
+  <span class="quote-chip">"We hand over the keys."</span>
+  <span class="quote-chip">"Plant seeds today for forests tomorrow."</span>
+  <span class="quote-chip">"Action without listening is extraction."</span>
+  <span class="quote-chip">"Art is how change travels."</span>
+  <span class="quote-chip">"The only failure is becoming indispensable."</span>
+  <span class="quote-chip">"Country caring for people, people caring for Country."</span>
+  <span class="quote-chip">"Design for our own obsolescence."</span>
+  <span class="quote-chip">"The soil is alive."</span>
+  <span class="quote-chip">"From extraction to connection."</span>
+  <span class="quote-chip">"A perpetual becoming."</span>
+</div>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<div class="footer">
+  <div class="footer-left">
+    A Curious Tractor · Benjamin Knight & Nicholas Marchesi OAM · Jinibara Country, 2026
+  </div>
+  <div class="footer-actions">
+    <button class="btn" onclick="saveToLocalStorage()">Save Draft</button>
+    <button class="btn" onclick="loadFromLocalStorage()">Load Draft</button>
+    <button class="btn" onclick="exportJSON()">Export JSON</button>
+    <button class="btn btn-primary" onclick="window.print()">Print / PDF</button>
+  </div>
+</div>
+
+<script>
+  // ── Persistence ──
+  const STORAGE_KEY = 'act-intentionality-canvas';
+
+  function getAllInputs() {
+    const data = {};
+    document.querySelectorAll('input[type="text"], textarea').forEach((el, i) => {
+      const id = el.id || `field-${i}`;
+      data[id] = el.value;
+    });
+    return data;
+  }
+
+  function setAllInputs(data) {
+    document.querySelectorAll('input[type="text"], textarea').forEach((el, i) => {
+      const id = el.id || `field-${i}`;
+      if (data[id] !== undefined) {
+        el.value = data[id];
+      }
+    });
+  }
+
+  function saveToLocalStorage() {
+    const data = getAllInputs();
+    data._savedAt = new Date().toISOString();
+    data._cycle = document.getElementById('cycle-date').value;
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    showToast('Draft saved');
+  }
+
+  function loadFromLocalStorage() {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) {
+      const data = JSON.parse(raw);
+      setAllInputs(data);
+      showToast('Draft loaded — saved ' + new Date(data._savedAt).toLocaleDateString());
+    } else {
+      showToast('No saved draft found');
+    }
+  }
+
+  function exportJSON() {
+    const data = getAllInputs();
+    data._exportedAt = new Date().toISOString();
+    data._cycle = document.getElementById('cycle-date').value;
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `intentionality-canvas-${data._cycle.replace(/\s+/g, '-').toLowerCase()}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+    showToast('Exported as JSON');
+  }
+
+  function showToast(msg) {
+    const toast = document.createElement('div');
+    toast.textContent = msg;
+    toast.style.cssText = `
+      position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%);
+      background: #2F3E2E; color: white; padding: 0.5rem 1.5rem;
+      border-radius: 8px; font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.75rem; z-index: 9999; opacity: 0;
+      transition: opacity 0.3s;
+    `;
+    document.body.appendChild(toast);
+    requestAnimationFrame(() => toast.style.opacity = '1');
+    setTimeout(() => {
+      toast.style.opacity = '0';
+      setTimeout(() => toast.remove(), 300);
+    }, 2000);
+  }
+
+  // Auto-save every 30 seconds
+  setInterval(saveToLocalStorage, 30000);
+
+  // Load on startup if saved
+  window.addEventListener('DOMContentLoaded', () => {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) {
+      // Don't auto-load — let the defaults show first time
+    }
+  });
+</script>
+
+</body>
+</html>

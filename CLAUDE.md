@@ -1,5 +1,26 @@
 # ACT Ecosystem - Claude Rules
 
+## Debugging Discipline (read first)
+
+- **Do NOT claim a fix works without verifying it.** Run the actual code path, query the DB, check the UI, capture the output. If you cannot verify, say "unverified" and tell the user how to test.
+- **2-strike rule.** If the same surface bug recurs twice, STOP patching. Write a root-cause analysis covering data model, env/config, caching layers, and RLS. Propose ONE architectural fix and wait for approval.
+- **Suspect environment before suspecting code.** On persistent bugs, check env vars, direnv, caches (.next), MCP read-vs-write, and connection targets BEFORE rewriting code. The 43-minute direnv spiral happened because Claude rewrote code instead of checking which Supabase instance was actually connected.
+- **Prefer one architectural fix over multiple incremental patches.** Patches that compound become rebuilds.
+
+## Database & Environment
+
+- **ALWAYS verify which Supabase instance is connected** before debugging connection issues. Check direnv, .env files, and shell env vars for conflicts. Run `mcp__supabase__get_project_url` and confirm it matches the expected project ref.
+- **Use the WRITE Supabase MCP for mutations**, not the read-only one. Confirm at session start when doing data work.
+- **Check for trailing newlines in env vars** when seeing 400 errors from Supabase — they cause silent auth failures.
+- **Supabase queries default to a 1,000-row limit.** Use `.range()` or pagination for any bulk operation. Watch for silent truncation.
+- **Clear `.next` cache** when stale data symptoms appear in dev — the framework caches more aggressively than the data layer changes.
+
+## Data Model
+
+- **Services vs Projects vs Organizations have distinct meanings** — confirm the user's intended entity before writing data. The wrong choice creates junk data that cascades into rebuilds.
+- **Always scope queries by `org_id`** when working in multi-tenant code. Never leak cross-org data by default. Cross-org leak in the Civic World Model session required a full rebuild plan.
+- On data-heavy tasks, **confirm the schema first** (one query to `information_schema.columns`) before writing inserts or migrations.
+
 ## Mono-Repo Structure
 
 This is a pnpm workspace mono-repo containing the entire ACT ecosystem.
