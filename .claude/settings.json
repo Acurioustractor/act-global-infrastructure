@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "_comment": "ACT ecosystem Claude Code settings. Hooks enforce verification discipline so Claude can't claim 'fixed' without evidence. See .claude/skills/verify-fix/SKILL.md.",
+
+  "hooks": {
+    "PostToolUse": [
+      {
+        "_comment": "After every TypeScript edit in command-center, run tsc --noEmit on just that app. Only fires when a .ts/.tsx/.mts file under apps/command-center/ is touched. Output is truncated to 30 lines so it doesn't blow context.",
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "FILE=\"$CLAUDE_TOOL_INPUT_file_path\"; case \"$FILE\" in *apps/command-center/*.ts|*apps/command-center/*.tsx|*apps/command-center/*.mts) cd apps/command-center && npx tsc --noEmit 2>&1 | head -30 || true ;; *apps/website/*.ts|*apps/website/*.tsx|*apps/website/*.mts) cd apps/website && npx tsc --noEmit 2>&1 | head -30 || true ;; *) : ;; esac"
+          }
+        ]
+      }
+    ]
+  }
+}
