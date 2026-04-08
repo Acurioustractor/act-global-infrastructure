@@ -1,0 +1,1573 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>STAY., A Travel Journal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Homemade+Apple&family=Architects+Daughter&family=Kalam:wght@300;400;700&family=Shadows+Into+Light+Two&family=Special+Elite&family=IM+Fell+English:ital@0;1&family=IM+Fell+DW+Pica:ital@0;1&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.js"></script>
+<style>
+  :root{
+    --paper:#F0E6D2;
+    --paper-light:#F4ECD8;
+    --paper-shadow:#E0D4B8;
+    --ink:#1F1A14;
+    --ink-soft:#3a2f1f;
+    --ink-faded:#6b5a3f;
+    --ochre:#B85C38;
+    --ochre-deep:#9a4a2c;
+    --sage:#7A8C5C;
+    --sage-deep:#5c6e42;
+    --tape:#C9B07A;
+
+    /* === FONTS ===
+       --heading-font → chapter titles + subtitles (book-style serif italic)
+       --hand-font    → margin notes / annotations only (true handwriting)
+       --body-font    → body paragraphs (worn letterpress serif)
+
+       Heading options: 'Cormorant Garamond' italic (book chapter, current),
+                        'IM Fell English' italic (more worn),
+                        or use --hand-font for handwritten headings
+       Hand options:    'Architects Daughter', 'Kalam', 'Shadows Into Light Two',
+                        'Special Elite' (typewriter)
+       Body options:    'IM Fell English' (worn letterpress, current)
+    */
+    --heading-font:'Cormorant Garamond', Georgia, serif;
+    --hand-font:'Kalam', cursive;
+    --body-font:'IM Fell English', Georgia, serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{
+    height:100%;
+    background:#1a1410;
+    overflow:hidden;
+    font-family:'Cormorant Garamond',Georgia,serif;
+    color:var(--ink);
+  }
+  body{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    background:radial-gradient(ellipse at center,#3a2a1c 0%,#1a1208 70%,#0a0604 100%);
+    padding:20px;
+  }
+  /* === BOOK === */
+  #book{
+    margin:0 auto;
+    box-shadow:
+      0 60px 100px rgba(0,0,0,.7),
+      0 30px 60px rgba(0,0,0,.5);
+  }
+  /* StPageFlip pages, direct children of #book */
+  .page{
+    background:var(--paper);
+    background-image:
+      radial-gradient(ellipse at 12% 18%,rgba(31,26,20,.07) 0,transparent 35%),
+      radial-gradient(ellipse at 88% 75%,rgba(31,26,20,.09) 0,transparent 40%),
+      radial-gradient(circle at 30% 80%,rgba(184,92,56,.05) 0,transparent 25%),
+      radial-gradient(circle at 70% 25%,rgba(31,26,20,.04) 0,transparent 30%);
+    overflow:hidden;
+    color:var(--ink);
+    position:relative;
+  }
+  .page::after{
+    content:"";
+    position:absolute;inset:0;
+    background-image:
+      repeating-linear-gradient(13deg,transparent 0,transparent 2px,rgba(31,26,20,.012) 2px,rgba(31,26,20,.012) 4px),
+      repeating-linear-gradient(-7deg,transparent 0,transparent 3px,rgba(31,26,20,.008) 3px,rgba(31,26,20,.008) 5px);
+    pointer-events:none;
+  }
+  .page-inner{
+    position:relative;
+    z-index:1;
+    padding:7% 8%;
+    height:100%;
+    display:flex;
+    flex-direction:column;
+  }
+
+  /* === COVER PAGE === */
+  .page.cover-front{background:#1a1208}
+  .page.cover-front::after{display:none}
+  .page.cover-front .page-inner{padding:0}
+
+  /* === BLEED IMAGE WRAPPER (real <img> tags for reliable loading) === */
+  .bleed-img-wrap{
+    position:absolute;
+    inset:0;
+    overflow:hidden;
+    background:var(--paper);
+  }
+  .bleed-img-wrap img{
+    display:block;
+    position:absolute;
+    top:0;left:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+  }
+  /* split-left = LEFT half of a 3:2 source: img is 200% wide, anchored to LEFT */
+  .bleed-img-wrap.split-left img{width:200%;left:0}
+  /* split-right = RIGHT half of a 3:2 source: img is 200% wide, anchored to RIGHT */
+  .bleed-img-wrap.split-right img{width:200%;left:-100%}
+  /* contain = whole image fits inside a single page */
+  .bleed-img-wrap.contain img{object-fit:contain}
+  /* cover-img = real cover photo */
+  .bleed-img-wrap.cover-img img{object-fit:cover}
+  .page.cover-back{
+    background:#3a2412;
+    background-image:
+      radial-gradient(ellipse at center,#5a3520 0%,#2a180c 80%);
+  }
+  .page.cover-back::after{display:none}
+  .back-cover-inner{
+    position:relative;
+    width:100%;height:100%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:1.4em;
+  }
+  .back-colophon{
+    width:14%;
+    max-width:90px;
+    opacity:.55;
+    filter:sepia(.4) brightness(1.4) saturate(.7);
+  }
+  .back-mark{
+    font-family:var(--heading-font);
+    font-style:italic;
+    font-size:.75em;
+    color:rgba(240,230,210,.4);
+    letter-spacing:.18em;
+    text-transform:uppercase;
+  }
+
+  /* page edge subtle dark on left/right edges to suggest binding */
+  .page.left-page{box-shadow:inset -8px 0 14px -10px rgba(31,26,20,.5)}
+  .page.right-page{box-shadow:inset 8px 0 14px -10px rgba(31,26,20,.5)}
+
+  /* === TYPOGRAPHY (sized via CSS variables set by JS) ===
+     .hand is now BODY (worn serif), name kept for compatibility.
+     Real handwriting lives on headings and the .scrawl class. */
+  .hand{
+    font-family:var(--body-font);
+    font-weight:400;
+    font-size:calc(var(--fs-body) * .68);
+    line-height:1.55;
+    color:var(--ink-soft);
+    letter-spacing:.005em;
+  }
+  .hand-tight{line-height:1.35}
+  .hand+.hand{margin-top:.85em}
+  .hand strong{font-weight:700}
+  .hand em{font-style:italic}
+  /* true handwriting for margin notes / annotations */
+  .scrawl{
+    font-family:var(--hand-font);
+    font-size:calc(var(--fs-body) * .9);
+    line-height:1.3;
+    color:var(--ink-soft);
+  }
+  .serif-body{
+    font-family:'Cormorant Garamond',Georgia,serif;
+    font-weight:400;
+    font-size:calc(var(--fs-body) * .72);
+    line-height:1.55;
+    color:var(--ink-soft);
+    letter-spacing:.01em;
+  }
+  .serif-body+.serif-body{margin-top:.85em}
+  .serif-body strong{font-weight:600}
+  .ink{color:var(--ink)}
+  .ochre{color:var(--ochre-deep)}
+  .sage{color:var(--sage-deep)}
+  .faded{color:var(--ink-faded)}
+  em{font-style:italic;color:var(--ochre-deep)}
+  strong{font-weight:700;color:var(--ink)}
+  .underline{
+    background-image:linear-gradient(180deg,transparent 0,transparent calc(100% - 2px),rgba(184,92,56,.55) calc(100% - 2px),rgba(184,92,56,.55) 100%);
+    background-repeat:no-repeat;
+    padding-bottom:1px;
+  }
+
+  h1.title{
+    font-family:var(--heading-font);
+    font-weight:600;
+    font-style:italic;
+    font-size:calc(var(--fs-title) * .82);
+    line-height:1;
+    color:var(--ink);
+    margin-bottom:.5em;
+    letter-spacing:.005em;
+  }
+  h2.title{
+    font-family:var(--heading-font);
+    font-weight:600;
+    font-style:italic;
+    font-size:calc(var(--fs-h2) * .85);
+    line-height:1.05;
+    color:var(--ink);
+    margin-bottom:.6em;
+    letter-spacing:.005em;
+  }
+  h3.subtitle{
+    font-family:var(--heading-font);
+    font-weight:500;
+    font-size:calc(var(--fs-h3) * .92);
+    line-height:1.15;
+    color:var(--ink-soft);
+    font-style:italic;
+    margin-bottom:.7em;
+    letter-spacing:.01em;
+  }
+
+  .bignum{
+    font-family:var(--heading-font);
+    font-weight:600;
+    font-style:italic;
+    font-size:calc(var(--fs-bignum) * .92);
+    line-height:.95;
+    letter-spacing:.005em;
+    color:var(--ochre-deep);
+    text-shadow:0 1px 0 rgba(255,255,255,.4);
+  }
+  .bignum-label{
+    font-family:var(--body-font);
+    font-style:italic;
+    font-size:calc(var(--fs-body) * .7);
+    color:var(--ink-soft);
+    margin-top:.6em;
+    line-height:1.4;
+    letter-spacing:.01em;
+  }
+
+  .quote{
+    font-family:'Homemade Apple',cursive;
+    font-size:var(--fs-quote);
+    line-height:1.5;
+    color:var(--ink);
+    transform:rotate(-1deg);
+  }
+  .quote-attrib{
+    font-family:var(--hand-font);
+    font-size:var(--fs-body);
+    color:var(--ink-faded);
+    text-align:right;
+    transform:rotate(.5deg);
+    margin-top:.8em;
+  }
+
+  /* === TITLE PAGE === */
+  .title-page{justify-content:center;align-items:center;text-align:center}
+  .title-page .big{font-size:var(--fs-cover);transform:rotate(-1deg);color:var(--ink)}
+  .title-page .sub{font-size:var(--fs-h3);color:var(--ink-soft);font-style:italic;margin-top:1em;line-height:1.2;transform:rotate(-.5deg)}
+  .title-page .by{font-size:var(--fs-small);color:var(--ink-faded);margin-top:3em;font-family:var(--heading-font);font-style:italic;line-height:1.5;letter-spacing:.01em}
+
+  /* === LAYOUT HELPERS === */
+  .center{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;text-align:center}
+  .stack{display:flex;flex-direction:column;gap:.5em}
+  .pad-top{margin-top:.8em}
+
+  /* === SCRAPBOOK ELEMENTS — taped photos, index cards, stamps === */
+  .extras-area{
+    position:relative;
+    margin-top:2em;
+    min-height:11em;
+  }
+  /* Loose, scattered layout — no rigid row, items wrap with generous gap */
+  .extras-row{
+    display:flex;
+    gap:2.2em 1.8em;
+    align-items:flex-start;
+    flex-wrap:wrap;
+    justify-content:flex-start;
+    padding:.6em .2em 1.4em .2em;
+  }
+  /* Polaroid: white-bordered square with sepia photo placeholder + brown tape */
+  .polaroid{
+    position:relative;
+    background:#f6efd8;
+    padding:.55em .55em 2.6em .55em;
+    box-shadow:
+      0 8px 18px rgba(31,26,20,.32),
+      0 2px 4px rgba(0,0,0,.22),
+      inset 0 0 0 1px rgba(31,26,20,.06);
+    transform:rotate(var(--rot,-2.5deg));
+    width:9.5em;
+    z-index:1;
+  }
+  .polaroid .img-slot{
+    display:block;
+    width:100%;
+    aspect-ratio:1/1;
+    background:
+      radial-gradient(ellipse at 35% 30%, rgba(255,240,210,.35) 0%, transparent 55%),
+      radial-gradient(ellipse at 70% 75%, rgba(60,30,10,.45) 0%, transparent 60%),
+      linear-gradient(135deg, #6b4a2a 0%, #4a2f18 100%);
+    border:1px solid rgba(31,26,20,.4);
+    box-shadow:inset 0 0 12px rgba(0,0,0,.4);
+  }
+  .polaroid .img-slot.has-img{background:#3a2f1f}
+  .polaroid .img-slot img{width:100%;height:100%;object-fit:cover;filter:sepia(.5) contrast(.92) brightness(.92)}
+  .polaroid .caption{
+    position:absolute;
+    left:.55em;right:.55em;
+    bottom:.55em;
+    font-family:'Cormorant Garamond',Georgia,serif;
+    font-style:italic;
+    font-size:.9em;
+    color:var(--ink-soft);
+    text-align:center;
+    line-height:1.2;
+  }
+  .polaroid::before,
+  .polaroid::after{
+    content:"";
+    position:absolute;
+    width:3.4em;height:.85em;
+    background:linear-gradient(180deg,rgba(208,182,128,.92),rgba(172,148,98,.92));
+    box-shadow:0 1px 3px rgba(31,26,20,.35);
+    z-index:2;
+    border-left:1px solid rgba(255,250,235,.18);
+    border-right:1px solid rgba(255,250,235,.18);
+  }
+  .polaroid::before{top:-.4em;left:-.7em;transform:rotate(-32deg)}
+  .polaroid::after{top:-.4em;right:-.7em;transform:rotate(30deg)}
+
+  /* Index card: small library catalogue card with ruled lines + serif quote */
+  .index-card{
+    position:relative;
+    background:
+      linear-gradient(180deg, transparent 0, transparent calc(1.6em - 1px), rgba(120,90,50,.18) calc(1.6em - 1px), rgba(120,90,50,.18) 1.6em, transparent 1.6em),
+      repeating-linear-gradient(180deg,
+        transparent 0,
+        transparent 1.55em,
+        rgba(120,90,50,.13) 1.55em,
+        rgba(120,90,50,.13) 1.6em),
+      #fbf5e0;
+    background-size:100% 100%, 100% 1.6em, 100% 100%;
+    padding:1.2em 1.3em 1em 1.3em;
+    width:16em;
+    box-shadow:
+      0 5px 12px rgba(31,26,20,.22),
+      0 1px 3px rgba(0,0,0,.18),
+      inset 0 0 0 1px rgba(120,90,50,.18);
+    transform:rotate(var(--rot,1.2deg));
+    z-index:1;
+  }
+  .index-card .quote-text{
+    font-family:'Cormorant Garamond',Georgia,serif;
+    font-style:italic;
+    font-weight:500;
+    font-size:1.1em;
+    color:var(--ink);
+    line-height:1.6em;
+    margin-bottom:.8em;
+  }
+  .index-card .quote-text::before{content:"\201C";color:var(--ochre-deep);font-size:1.4em;line-height:0;margin-right:.05em;vertical-align:-.15em}
+  .index-card .quote-text::after{content:"\201D";color:var(--ochre-deep);font-size:1.4em;line-height:0;margin-left:.05em;vertical-align:-.15em}
+  .index-card .meta{
+    font-family:'Cormorant Garamond',Georgia,serif;
+    font-size:.78em;
+    color:var(--ink-faded);
+    text-transform:uppercase;
+    letter-spacing:.12em;
+    border-top:1px solid rgba(120,90,50,.32);
+    padding-top:.6em;
+    line-height:1.45;
+    font-variant:small-caps;
+  }
+
+  /* Library stamp: ink rubber-stamp impression — sepia, slightly rough */
+  .library-stamp{
+    display:inline-block;
+    border:2.5px solid var(--ochre-deep);
+    padding:.55em 1.1em .5em 1.1em;
+    font-family:'Cormorant Garamond',Georgia,serif;
+    font-size:.78em;
+    font-weight:600;
+    color:var(--ochre-deep);
+    text-transform:uppercase;
+    letter-spacing:.18em;
+    line-height:1.35;
+    text-align:center;
+    transform:rotate(var(--rot,-3deg));
+    background:rgba(184,92,56,.06);
+    box-shadow:
+      0 1px 0 rgba(184,92,56,.18),
+      inset 0 0 6px rgba(184,92,56,.08);
+    /* slightly imperfect edges, faded ink */
+    opacity:.92;
+    position:relative;
+    z-index:1;
+  }
+  .library-stamp .stamp-line{display:block}
+  .library-stamp .stamp-line.big{font-size:1.35em;font-weight:700;letter-spacing:.22em;margin:.05em 0}
+
+  /* Margin scrawl: handwritten note with a connector arrow */
+  .margin-note{
+    font-family:var(--hand-font);
+    font-size:1.05em;
+    color:var(--ochre-deep);
+    line-height:1.3;
+    transform:rotate(var(--rot,-2deg));
+    max-width:14em;
+    padding:.4em .6em;
+    align-self:flex-end;
+  }
+  .margin-note .arrow{display:inline-block;margin-right:.3em;font-size:1.2em;vertical-align:-.05em}
+
+  /* Diagram frame: image sits inside the paper page, blends into it */
+  .diagram-frame{
+    flex:1;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+    position:relative;
+  }
+  .diagram-frame img{
+    max-width:100%;
+    max-height:100%;
+    object-fit:contain;
+    /* Multiply onto the cream paper so the diagram lives on it, not over it */
+    mix-blend-mode:multiply;
+    filter:sepia(.15) contrast(.96) brightness(.99);
+  }
+
+  /* === FULL-BLEED PAGES (background image only) === */
+  /* For 3:2 source images split across two journal pages: each page shows half of the source. */
+  .full-bleed{padding:0}
+  .full-bleed-img{background-size:cover;background-position:center}
+  /* Splitting a single 3:2 source across L+R: stretch image to 200% of page-width and offset */
+  .full-bleed-img.split-left{background-size:200% 100%;background-position:left center}
+  .full-bleed-img.split-right{background-size:200% 100%;background-position:right center}
+  /* Centered diagram (whole image fits on one page, scaled down) */
+  .full-bleed-img.contain{background-size:contain;background-repeat:no-repeat;background-position:center;background-color:var(--paper)}
+
+  /* === VIDEO SLOTS === */
+  .video-slot{
+    display:inline-block;
+    position:relative;
+    background:#1a1410;
+    box-shadow:0 4px 14px rgba(31,26,20,.5),0 1px 3px rgba(0,0,0,.3);
+    padding:.5em .5em 2em .5em;
+    transform:rotate(var(--rot,-1.8deg));
+    cursor:pointer;
+  }
+  .video-slot video,
+  .video-slot .video-poster{
+    display:block;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    background:#0a0604;
+    filter:sepia(.25) contrast(.95) brightness(.92);
+  }
+  .video-slot .video-poster{
+    display:flex;align-items:center;justify-content:center;
+    background:
+      radial-gradient(circle at center,#3a2a1c 0%,#1a1208 70%),
+      var(--paper);
+    color:rgba(240,230,210,.7);
+    font-family:var(--hand-font);
+    font-size:calc(var(--fs-body) * .85);
+    text-align:center;
+    line-height:1.2;
+    padding:1em;
+  }
+  .video-slot .play-overlay{
+    position:absolute;
+    top:50%;left:50%;
+    width:3em;height:3em;
+    margin-left:-1.5em;margin-top:-1.5em;
+    background:rgba(240,230,210,.92);
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-size:1.4em;color:var(--ink);
+    pointer-events:none;
+    box-shadow:0 4px 12px rgba(0,0,0,.4);
+  }
+  .video-slot .play-overlay::before{
+    content:"";
+    border-style:solid;
+    border-width:.55em 0 .55em .9em;
+    border-color:transparent transparent transparent var(--ink);
+    margin-left:.2em;
+  }
+  .video-slot.empty{
+    background:rgba(31,26,20,.05);
+    border:2px dashed rgba(31,26,20,.25);
+    box-shadow:none;
+    padding:0;
+  }
+  .video-slot.empty .video-poster{
+    background:transparent;
+    color:var(--ink-faded);
+  }
+  .video-slot.empty .play-overlay{display:none}
+  .video-slot::before,.video-slot::after{
+    content:"";
+    position:absolute;
+    width:3.2em;height:.9em;
+    background:linear-gradient(180deg,rgba(201,176,122,.85),rgba(168,144,96,.85));
+    box-shadow:0 1px 3px rgba(31,26,20,.3);
+    z-index:2;
+  }
+  .video-slot::before{top:-.4em;left:-.7em;transform:rotate(-32deg)}
+  .video-slot::after{bottom:-.4em;right:-.7em;transform:rotate(-32deg)}
+
+  /* === PHOTO SLOTS === */
+  .photo{
+    display:inline-block;
+    background:#3a2f1f;
+    box-shadow:0 4px 12px rgba(31,26,20,.4),0 1px 3px rgba(0,0,0,.3);
+    padding:.5em .5em 2em .5em;
+    position:relative;
+    transform:rotate(var(--rot,-2deg));
+  }
+  .photo img{display:block;width:100%;height:100%;object-fit:cover;filter:sepia(.4) contrast(.9) brightness(.95)}
+  .photo.empty{
+    background:rgba(31,26,20,.05);
+    border:2px dashed rgba(31,26,20,.25);
+    box-shadow:none;
+    padding:0;
+    display:flex;align-items:center;justify-content:center;
+    font-family:var(--hand-font);
+    color:var(--ink-faded);
+    font-size:calc(var(--fs-body) * .8);
+    text-align:center;
+    line-height:1.2;
+    padding:.5em;
+  }
+  .photo::before,.photo::after{
+    content:"";
+    position:absolute;
+    width:3.2em;height:.9em;
+    background:linear-gradient(180deg,rgba(201,176,122,.85),rgba(168,144,96,.85));
+    box-shadow:0 1px 3px rgba(31,26,20,.3);
+  }
+  .photo::before{top:-.4em;left:-.7em;transform:rotate(-32deg)}
+  .photo::after{bottom:-.4em;right:-.7em;transform:rotate(-32deg)}
+  .photo.tilt-r{--rot:1.8deg}
+  .photo.tilt-l2{--rot:-4deg}
+  .photo.tilt-r2{--rot:3deg}
+  .photo.straight{--rot:0deg}
+
+  /* ledger style budget */
+  .ledger-row{
+    display:flex;justify-content:space-between;align-items:baseline;
+    border-bottom:1px solid rgba(31,26,20,.18);
+    padding:.4em 0;
+    font-family:var(--hand-font);
+    font-size:var(--fs-body);
+  }
+  .ledger-row.total{
+    border-bottom:3px double var(--ink);
+    border-top:1px solid var(--ink);
+    margin-top:.4em;
+    font-weight:700;
+    color:var(--ochre-deep);
+    font-size:calc(var(--fs-body) * 1.18);
+  }
+
+  /* === COVER (front) === */
+  .cover-tag{
+    position:absolute;
+    bottom:7%;
+    left:0;right:0;
+    text-align:center;
+    font-family:var(--hand-font);
+    color:rgba(240,230,210,.85);
+    font-size:var(--fs-small);
+    text-shadow:1px 1px 3px rgba(0,0,0,.6);
+    z-index:2;
+  }
+  .cover-tag .top{font-size:calc(var(--fs-small) * .85);letter-spacing:.15em;margin-bottom:.3em;opacity:.7}
+  .cover-stay{
+    position:absolute;
+    top:42%;left:0;right:0;
+    text-align:center;
+    z-index:2;
+    pointer-events:none;
+  }
+  .cover-stay .word{
+    font-family:'Homemade Apple',cursive;
+    font-size:calc(var(--fs-cover) * 1.4);
+    color:rgba(240,230,210,.96);
+    text-shadow:
+      3px 3px 6px rgba(0,0,0,.85),
+      0 0 24px rgba(0,0,0,.5);
+    letter-spacing:.04em;
+    transform:rotate(-3deg);
+    display:inline-block;
+  }
+  .cover-stay .by{
+    display:block;
+    margin-top:.6em;
+    font-family:var(--hand-font);
+    font-size:calc(var(--fs-small) * 1.05);
+    color:rgba(240,230,210,.75);
+    text-shadow:1px 1px 3px rgba(0,0,0,.7);
+    font-style:italic;
+    transform:rotate(-1deg);
+  }
+
+  /* foxing flecks */
+  .foxing{position:absolute;border-radius:50%;background:radial-gradient(circle,rgba(184,92,56,.18) 0%,transparent 70%);pointer-events:none}
+
+  /* === NAV BAR === */
+  .topbar{
+    position:fixed;top:0;left:0;right:0;
+    height:48px;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:0 22px;
+    background:linear-gradient(180deg,rgba(0,0,0,.5),transparent);
+    z-index:1000;
+    pointer-events:none;
+    color:#f0e6d2;
+    font-family:var(--heading-font);
+    font-style:italic;
+    font-size:19px;
+    letter-spacing:.02em;
+  }
+  .topbar .title{font-size:19px}
+  .topbar .help{opacity:.6;font-size:14px;font-style:normal}
+
+  .nav{
+    position:fixed;
+    bottom:18px;left:0;right:0;
+    display:flex;justify-content:center;align-items:center;
+    gap:18px;
+    z-index:1000;
+    pointer-events:none;
+  }
+  .nav button{
+    pointer-events:auto;
+    background:rgba(240,230,210,.92);
+    color:var(--ink);
+    border:1px solid rgba(31,26,20,.3);
+    padding:9px 20px;
+    font-family:var(--heading-font);
+    font-style:italic;
+    font-size:16px;
+    letter-spacing:.02em;
+    cursor:pointer;
+    border-radius:2px;
+    box-shadow:0 4px 12px rgba(0,0,0,.4);
+    transition:transform .15s,background .15s;
+  }
+  .nav button:hover{background:#fff5e0;transform:translateY(-1px)}
+  .nav button:disabled{opacity:.4;cursor:not-allowed}
+  .nav .indicator{
+    pointer-events:auto;
+    color:#f0e6d2;
+    font-family:var(--heading-font);
+    font-style:italic;
+    font-size:16px;
+    letter-spacing:.02em;
+    background:rgba(0,0,0,.4);
+    padding:7px 16px;
+    border-radius:2px;
+  }
+
+  .loading{
+    position:fixed;inset:0;
+    display:flex;align-items:center;justify-content:center;
+    background:#1a1410;color:#f0e6d2;
+    font-family:var(--heading-font);font-style:italic;font-size:28px;letter-spacing:.02em;
+    z-index:9999;
+    transition:opacity 1s;
+  }
+  .loading.gone{opacity:0;pointer-events:none}
+</style>
+</head>
+<body>
+
+<div class="loading" id="loading">opening the journal…</div>
+
+<div class="topbar">
+  <div class="title">STAY., a travel journal</div>
+  <div class="help">← → to turn the pages · or click the page edges</div>
+</div>
+
+<div id="book"></div>
+
+<div class="nav">
+  <button id="prev">← previous page</button>
+  <span class="indicator" id="indicator">cover</span>
+  <button id="next">next page →</button>
+</div>
+
+<script>
+//================================================================
+// CONTENT, every spread of the journal lives here as data.
+// Edit this array to change the journal. No HTML editing needed.
+// Each entry becomes ONE page (not a spread).
+// Pages render in pairs (left+right) when the book is open.
+//================================================================
+
+const PAGES = [
+
+  // ----- PAGES 1+2: COVER spread (embossed STAY journal, full bleed across both pages) -----
+  { kind:'full-bleed', image:'../wiki/output/journal-cover-stay-B-embossed.png', side:'left' },
+  { kind:'full-bleed', image:'../wiki/output/journal-cover-stay-B-embossed.png', side:'right' },
+
+  // ----- PAGE 3: Inside front cover (blank, slightly stained) -----
+  { kind:'blank-inside-cover' },
+
+  // ----- PAGE 3: Title page (right side of first opening) -----
+  { kind:'title-page',
+    title:'STAY.',
+    sub:'a community-led<br>infrastructure for<br>youth justice in Australia',
+    by:'for Lucy Stronach<br><span class="faded">Minderoo Foundation</span><br><br>Benjamin Knight + Nicholas Marchesi<br><span class="faded">A Curious Tractor · April 2026</span>',
+  },
+
+  // ----- SPREAD: STAY., three meanings -----
+  { kind:'text', side:'left',
+    body:[
+      '<div style="font-family:\'Cormorant Garamond\',Georgia,serif;font-weight:600;font-size:7.2em;color:var(--ink);text-align:center;line-height:1;margin-top:1.4em;letter-spacing:.18em;text-indent:.18em;text-shadow:0 1px 0 rgba(255,255,255,.55), 0 2px 4px rgba(60,30,10,.18);">STAY.</div>',
+      '<div style="width:42%;height:1px;background:var(--ink-faded);margin:1.6em auto 0;opacity:.45"></div>',
+      '<p style="font-family:\'Cormorant Garamond\',Georgia,serif;font-style:italic;font-size:1.15em;text-align:center;margin-top:1.2em;color:var(--ink);letter-spacing:.04em">one word.<br>three meanings.</p>',
+      '<p style="font-family:\'Cormorant Garamond\',Georgia,serif;font-style:italic;font-size:.95em;text-align:center;margin-top:1.6em;color:var(--ink-faded)">a refusal, a promise,<br>and a practice.</p>',
+    ],
+  },
+  { kind:'text', side:'right',
+    h3:'three meanings.',
+    serif:true,
+    body:[
+      '<strong class="ochre">I.  STAY where you are.</strong>',
+      '<span class="faded">no child should be moved off country, away from family, language and community to be punished. <em>STAY is the refusal of that move.</em> the work is keeping kids where they belong.</span>',
+      '<strong class="ochre">II.  STAY connected.</strong>',
+      '<span class="faded">no program should parachute into a community and leave. <em>STAY is what we do</em>, show up, return, hold the relationship for years. ten communities. three years. low reporting. high relationship.</span>',
+      '<strong class="ochre">III.  STAY in the work.</strong>',
+      '<span class="faded">no journal, framework or evaluation should be filed and forgotten. <em>this artefact stays alive</em>, added to, returned to, the reference that drives community care for the next decade.</span>',
+    ],
+  },
+
+  // ----- SPREAD: Why we are writing this -----
+  { kind:'text', side:'left',
+    h2:'Why we are<br>writing this.',
+    body:[
+      'australian youth justice has more reports, frameworks, evaluations, peak bodies, lived-experience panels and government strategies than at any point in its history.',
+      'it also has more children in detention, more recidivism, and more lateral violence in the sector than at any point in recent memory.',
+      '<span class="ink"><strong>the problem is not absence of evidence.</strong></span>',
+    ],
+  },
+  { kind:'text-and-photo', side:'right',
+    body:[
+      'it is that <em>the evidence, the relationships, and the stories</em> are all held in different rooms, and the rooms don\'t talk to each other.',
+      'frameworks live in consultancy decks.<br>stories live in unfunded community organisations.<br>funding flows live in spreadsheets nobody reads.',
+      'indigenous knowledge lives where it has always lived, <span class="ochre">in country, in elders, in Tuesday afternoon check-ins that no funder has ever counted as governance.</span>',
+    ],
+    photo:{slot:'country', caption:'a photo of country'},
+  },
+
+  // ----- SPREAD: The number -----
+  { kind:'big-number', side:'left',
+    number:'$1.33M',
+    label:'the cost of detaining<br>one Australian child<br>for one year<br><span class="faded small">(ROGS 2024–25)</span>',
+  },
+  { kind:'big-number', side:'right',
+    number:'24.6',
+    label:'per 10,000, projected detention rate<br>for Aboriginal &amp; Torres Strait Islander<br>children by 2030–31<br><span class="faded small">(Closing the Gap)</span>',
+    footer:'we are not here to argue<br>these numbers. we are here<br>to <span class="underline">answer</span> them.',
+  },
+
+  // ----- SPREAD: The proposition -----
+  { kind:'text', side:'left',
+    h2:'The proposition,<br>in one paragraph.',
+    body:[
+      'minderoo funds a <strong>three-year program</strong> that does three things at once.',
+      '→ builds the <span class="ochre">data spine</span><br>→ backs <span class="ochre">ten anchor communities</span><br>→ convenes them &amp; their <span class="ochre">international peers</span>',
+      'into one national framework that replaces detention-default with evidence the public, magistrates and Treasury <em>can\'t ignore.</em>',
+    ],
+  },
+  { kind:'text', side:'right',
+    h2:'Three rings.<br>One program.',
+    body:[
+      '<strong class="ochre">◉ Ring One</strong>, the living brain<br><span class="faded">a real-time system that knows what is happening on the ground in Australian youth justice. open to anyone.</span>',
+      '<strong class="ochre">◉ Ring Two</strong>, the ten<br><span class="faded">ten anchor communities held with depth, not breadth.</span>',
+      '<strong class="ochre">◉ Ring Three</strong>, the outer ring<br><span class="faded">where frameworks, JRI, philanthropy, magistrates and international peers <em>plug in</em>.</span>',
+      '<em>they are not parallel. they feed each other.</em>',
+    ],
+  },
+
+  // ----- SPREAD: THE MODEL, three circles diagram + explanation -----
+  { kind:'diagram-page', image:'../wiki/output/three-circles-journal-spread.png', side:'left' },
+  { kind:'text', side:'right',
+    h3:'the model.<br>the three circles.',
+    body:[
+      'a community-led methodology for working with people the system has failed.',
+      '<strong>① the edge</strong> · the people the system has failed hardest. <span class="faded">first. always.</span>',
+      '<strong>② the next</strong> · the kin, workers, advocates immediately around them. <span class="faded">second. they get strengthened by what comes from the centre.</span>',
+      '<strong>③ the rest</strong> · funders, government, sector. <span class="faded">last. they get changed by what travels outward.</span>',
+      '<em class="ochre">"authority sits with the people closest to the consequence." Tyson Yunkaporta, after 65,000 years.</em>',
+      'most programs do the opposite. most programs fail.',
+    ],
+  },
+
+  // ----- SPREAD: What is already built -----
+  { kind:'text', side:'left',
+    h2:'What is already<br>built.',
+    sub:'(minderoo would not be funding from zero. only the <span class="underline">next layer</span>.)',
+    body:[
+      '<span class="ochre big-inline">1,775</span> &nbsp;community models in the <strong>Australian Living Map of Alternatives</strong>',
+      '<span class="ochre big-inline">100K</span> &nbsp;entities resolved across the sector · 94.1% match accuracy',
+      '<span class="ochre big-inline">199K</span> &nbsp;relationships between people, programs, and funders',
+      '<span class="ochre big-inline">71K</span> &nbsp;rows of justice funding tracked over a decade',
+      '<span class="ochre big-inline">96%</span> &nbsp;postcode coverage of Australia',
+    ],
+  },
+  { kind:'text-and-photo', side:'right',
+    body:[
+      'all live today at <span class="underline">justicehub.com.au</span> and <span class="underline">civicgraph.app</span>.',
+      '<strong>six live AI agents</strong> that find what you need. who is doing the work. where the funding is going. who keeps moving between government and contractor. ask in plain language. get an answer.',
+      '<strong>a Queensland Hansard reader</strong> that follows every parliamentary sitting and flags youth justice mentions.',
+      '<strong>Empathy Ledger</strong>, the consent layer that lets storytellers keep sovereignty over their words for life.',
+      '<strong>CONTAINED</strong>, a shipping container on the road that brings the work to community. currently at Mountie Yarns.',
+    ],
+    photo:{slot:'justicehub-screenshot', caption:'JusticeHub dashboard', size:'wide'},
+  },
+
+  // ----- SPREAD: The Living Map Loop, how the library grows -----
+  { kind:'diagram-page', image:'../wiki/output/alma-loop-journal.png', side:'left' },
+  { kind:'text', side:'right',
+    h3:'the loop.<br>the living map.',
+    body:[
+      'how communities grow the <strong>Australian Living Map of Alternatives</strong>, from <strong>1,775</strong> models, and growing.',
+      '<strong>WITNESS</strong> · someone notices a working model the formal system has never recognised, a kinship-based diversion program, an Aunty\'s pre-court intervention, an outstation healing model.',
+      '<strong>DOCUMENT</strong> · the model gets captured properly, story, mechanism, conditions, outcomes, in the witness\'s own voice.',
+      '<strong>VERIFY</strong> · community sovereignty over what counts as proof. Elder, kin, and place-led validation. <em>not academic peer review. not government audit.</em>',
+      '<strong>PUBLISH</strong> · the entry joins the Map. now searchable, citable, fundable.',
+      '<em class="ochre">every entry attracts the next witness. the library grows by recognition, not by extraction.</em>',
+    ],
+  },
+
+  // ----- SPREAD: METHODS INTRO, names the four ACT methods that follow -----
+  { kind:'text', side:'left',
+    h2:'The methods<br>we bring.',
+    sub:'before the four spreads that follow, a quick word on what they are.',
+    body:[
+      'a program like this is held together by <em>methods</em>, not slides.',
+      'the next four spreads are the four methods ACT carries into every community we work with. they are not invented for Minderoo. they are how we have worked since day one.',
+      '<span class="ochre">we are sharing them in the order we use them.</span>',
+    ],
+    extras:[
+      { type:'polaroid', caption:'Aunty Bev,<br>Mparntwe', rot:-3 },
+      { type:'card',
+        quote:'These kids aren\'t broken. The system around them is.',
+        meta:'Aunty Bev Angeles<br>Oonchiumpa · Mparntwe (NT)',
+        rot:1.4 },
+      { type:'stamp',
+        lines:['Verified', 'JusticeHub', '2025'],
+        rot:-4 },
+    ],
+  },
+  { kind:'text', side:'right',
+    h3:'four ways<br>of holding<br>the work.',
+    body:[
+      '<strong class="ochre">①  Three Ripples</strong> &nbsp;<span class="faded">the infrastructure that makes the edge legible to capital. CivicGraph + funding that finds you.</span>',
+      '<strong class="ochre">②  I Have · I Am · I Can</strong> &nbsp;<span class="faded">nine resources every child draws on to face adversity. after Edith Grotberg, Lima.</span>',
+      '<strong class="ochre">③  The Field Canvas</strong> &nbsp;<span class="faded">look honestly at the whole field. above the soil and below. before you change anything.</span>',
+      '<strong class="ochre">④  Listen · Curiosity · Action · Art</strong> &nbsp;<span class="faded">the four-beat loop underneath all of it. our operating system.</span>',
+      '<em>each one gets a page. then we keep moving.</em>',
+    ],
+    extras:[
+      { type:'polaroid', caption:'Brodie Germaine,<br>Kalkadoon (Mt Isa)', rot:2.5 },
+      { type:'card',
+        quote:'Country, day three. Boys talking again.',
+        meta:'Field note · CAMPFIRE<br>Kalkadoon (QLD)',
+        rot:-2 },
+      { type:'note',
+        text:'photos + quotes pulled from Empathy Ledger. names + ages with consent.',
+        rot:-1.5 },
+    ],
+  },
+
+  // ----- SPREAD: THREE RIPPLES, the infrastructure of the edge -----
+  { kind:'diagram-page', image:'../wiki/output/three-ripples-journal-spread.png', side:'left' },
+  { kind:'text', side:'right',
+    h3:'the infrastructure.<br>three ripples.',
+    body:[
+      'the architecture that makes the edge legible to capital.',
+      '<strong>① the edge</strong> · country, kin, the relationship, <em>where the healing is.</em>',
+      '<strong>② the world model</strong> · CivicGraph. <span class="faded">100,036 entities · 199,001 relationships · 94.1% match accuracy · daily syncs.</span>',
+      '<strong>③ funding that finds you</strong> · grants and contracts routed by the world model <em>today</em>; outcome-linked capital <em>tomorrow</em>.',
+      '<span class="faded">and the dashed fourth ring: <em>the state, eventually.</em></span>',
+      '<em class="ochre">funding that finds you, instead of you having to find it.</em>',
+    ],
+  },
+
+  // ----- SPREAD: I HAVE · I AM · I CAN, nine resources for resilience -----
+  { kind:'diagram-page', image:'../wiki/output/intentionality-canvas-journal-spread.png', side:'left' },
+  { kind:'text', side:'right',
+    h3:'nine resources.<br>i have. i am. i can.',
+    body:[
+      '<strong>I HAVE</strong> · external supports, trusting relationships, role models, people who hold the line.',
+      '<strong>I AM</strong> · inner strengths, self-respect, confidence, empathy.',
+      '<strong>I CAN</strong> · skills, problem-solving, perseverance, knowing when to ask for help.',
+      'three categories. three items each. <strong>nine resources.</strong>',
+      '<em class="ochre">design for the nine, not the deficit.</em>',
+      '<span class="faded">Edith Grotberg studied street children in Lima, kids who\'d lived on the streets, used drugs, been beaten by police. The kids who made it drew on these nine. The hardest finding from the displaced families: <em>resilience is contagious. its absence is also contagious.</em></span>',
+    ],
+  },
+
+  // ----- SPREAD: THE FIELD CANVAS, look honestly at the whole field -----
+  { kind:'diagram-page', image:'../wiki/output/field-diagnostic-journal-spread.png', side:'left' },
+  { kind:'text', side:'right',
+    h3:'the whole field.<br>above and below.',
+    body:[
+      'most strategic plans describe the field above the ground and ignore the soil below. the Field Canvas makes you look at both.',
+      '<strong>above ground</strong> · what outsiders see, revenue, platforms, community, proof.',
+      '<strong>the soil</strong> · culture, operations, market, what sustains or undermines everything above.',
+      '<strong>the roots</strong> · infrastructure, relationships, philosophy, financial spine, what holds it all.',
+      'scan with five domains: <span class="ochre">Projects · People · Pulses · Process · Products.</span>',
+      'sort every project: <span class="ochre">Drive (powered now) · Field (planted, not yet) · Shed (parked or handed over).</span>',
+      '<em class="ochre">what grows above is a function of the soil below.</em>',
+    ],
+  },
+
+  // ----- SPREAD: Listen · Curiosity · Action · Art -----
+  { kind:'diagram-page', image:'../wiki/output/lcaa-loop-journal.png', side:'left' },
+  { kind:'text', side:'right',
+    h3:'the operating system.<br>listen · curiosity ·<br>action · art.',
+    body:[
+      '<strong>LISTEN</strong> · country, traditional owners, community, elders, youth, the silenced. physical presence over time. story over data points. <em>don\'t arrive with solutions.</em>',
+      '<strong>CURIOSITY</strong> · follow the threads. <em>what if? who says it has to be this way?</em> resist premature closure.',
+      '<strong>ACTION</strong> · build, prototype, test, iterate. ship early. document for handover. <em class="ochre">if you can\'t hand it over, you\'re still in Curiosity.</em>',
+      '<strong>ART</strong> · the work made beautiful, meaningful, lasting. <em>the journal you are holding is art. the CONTAINED tour is art.</em>',
+      '<em class="ochre">art returns us to listen. the cycle continues.</em>',
+    ],
+  },
+
+  // ----- SPREAD: Map of the Ten (full bleed) -----
+  { kind:'full-bleed', image:'../wiki/output/journal-test-C-scrapbook-map.png', side:'left' },
+  { kind:'full-bleed', image:'../wiki/output/journal-test-C-scrapbook-map.png', side:'right' },
+
+  // ----- SPREAD: The Travel Diary, the journey both ways -----
+  { kind:'text', side:'left',
+    h2:'The Travel<br>Diary.',
+    sub:'one diary. two directions. the journey both ways.',
+    body:[
+      'every anchor community gets a hand-stitched travel diary that walks <em>two ways</em>. one half is filled by the workers and young people on country. the other half is filled by an international peer who visits, sits, and listens.',
+      '<strong class="ochre">Mparntwe → Murcia. Murcia → Mparntwe.</strong>',
+      'when the books come home, the two halves face each other. that is the artefact. that is the proof that depth travelled.',
+    ],
+    extras:[
+      { type:'card',
+        quote:'For the meeting. The half that came back from Spain is the half I keep returning to.',
+        meta:'Note in the back of Diary No. 03<br>Kalkadoon ↔ Diagrama',
+        rot:-2 },
+    ],
+  },
+  { kind:'text', side:'right',
+    h3:'one diary.<br>two halves.<br>seven crossings.',
+    body:[
+      '<strong>one</strong>, hand-stitched A5, aged cream cover, JusticeHub colophon at the foot. luggage tag attached.',
+      '<strong>two halves</strong>, one filled on country, one filled abroad. the binding stitches them together.',
+      '<strong>seven crossings</strong>, each anchor community paired with an international peer. Diagrama. Solonia. Maori courts. the Inuit healing camps. wherever the work is alive.',
+      '<em class="ochre">at the end of Year 2 the diaries come home. they form the spine of the Year 3 artefact.</em>',
+    ],
+    extras:[
+      { type:'polaroid', caption:'Diary No. 03,<br>Kalkadoon ↔ Diagrama', rot:2.5 },
+      { type:'stamp', lines:['MPARNTWE', '↔', 'MURCIA'], rot:-3 },
+      { type:'stamp', lines:['BWGCOLMAN', '↔', 'AOTEAROA'], rot:1.5 },
+      { type:'stamp', lines:['KALKADOON', '↔', 'DIAGRAMA'], rot:-1 },
+    ],
+  },
+
+  // ----- SPREAD: The ten anchor list -----
+  { kind:'text', side:'left',
+    h2:'The ten anchor<br>communities.',
+    sub:'always Indigenous place names. always the people who hold the work. final selection through in-community visits in Q1 2026, the only verification that works.',
+    body:[
+      '<em class="ochre">five locked, five in conversation.</em>',
+    ],
+    extras:[
+      { type:'stamp', lines:['No. 01', 'MPARNTWE', 'Aunty Bev · Oonchiumpa · NT'], rot:-2 },
+      { type:'stamp', lines:['No. 02', 'BWGCOLMAN', 'Richard Cassidy · PICC · QLD'], rot:1.5 },
+      { type:'stamp', lines:['No. 03', 'KALKADOON', 'Brodie Germaine · CAMPFIRE · QLD'], rot:-1 },
+      { type:'stamp', lines:['No. 04', 'WARUMUNGU', 'William Junta · Tennant Creek · NT'], rot:2 },
+      { type:'stamp', lines:['No. 05', 'DARUG', 'Mountie Yarns · Mt Druitt · NSW'], rot:-3 },
+    ],
+  },
+  { kind:'text', side:'right',
+    body:[
+      '<em>this is not ten grants. it is <span class="underline">ten long-term relationships</span> the centre learns from, the international tour celebrates, and the artefact in Year 3 is built around.</em>',
+    ],
+    extras:[
+      { type:'stamp', lines:['No. 06', 'MINJERRIBAH', 'Quandamooka · QLD'], rot:1 },
+      { type:'stamp', lines:['No. 07', 'NIPALUNA', 'TAS partner · via JRI / Diagrama'], rot:-2 },
+      { type:'stamp', lines:['No. 08', 'NGUNNAWAL', 'ACT partner · two children in detention'], rot:2 },
+      { type:'stamp', lines:['No. 09', 'NOONGAR', 'WA partner · via Hailey, UWA'], rot:-1.5 },
+      { type:'stamp', lines:['No. 10', 'KAURNA', 'SA / Flinders-linked'], rot:1.8 },
+    ],
+  },
+
+  // ----- SPREAD: Cross-community / collage (full bleed) -----
+  { kind:'full-bleed', image:'../wiki/output/journal-test-B-beard-collage.png', side:'left' },
+  { kind:'full-bleed', image:'../wiki/output/journal-test-B-beard-collage.png', side:'right' },
+
+  // ----- SPREAD: Voices from country -----
+  { kind:'text', side:'left',
+    h2:'Voices from<br>country.',
+    body:[
+      'every entry in the Australian Living Map of Alternatives begins with a <em>real voice</em>.',
+      'not aggregated strangers. the actual words of young people, elders, and workers, captured on country, on their own terms, with consent travelling with the story for life.',
+      '<span class="ochre">these are the voices Lucy will be funding to be heard.</span>',
+    ],
+    extras:[
+      { type:'card',
+        quote:'When I take them out bush and they come back changed, that\'s the only measurement that matters.',
+        meta:'Brodie Germaine, 34<br>CAMPFIRE · Kalkadoon (QLD)',
+        rot:-1.5 },
+      { type:'polaroid', caption:'on country,<br>day three', rot:2.5 },
+    ],
+  },
+  { kind:'text', side:'right',
+    h3:'four voices.<br>four communities.',
+    extras:[
+      { type:'card',
+        quote:'The kids aren\'t broken. The system around them is.',
+        meta:'Aunty Bev Angeles<br>Oonchiumpa · Mparntwe (NT)',
+        rot:1.4 },
+      { type:'polaroid', caption:'Aunty Bev,<br>Mparntwe', rot:-3 },
+      { type:'card',
+        quote:'My daughter was the first one in our family not to go inside. That\'s the line we hold.',
+        meta:'Storyteller, 41<br>PICC · Bwgcolman (Palm Island, QLD)',
+        rot:-2 },
+      { type:'card',
+        quote:'I was thirteen the first time. Eighteen the last. The thing that broke the cycle was someone showing up the next week.',
+        meta:'Anonymous, 22<br>Mountie Yarns · Darug (Mt Druitt, NSW)',
+        rot:1.8 },
+      { type:'note',
+        text:'placeholders for now. the live versions come from Empathy Ledger when each storyteller has signed off.',
+        rot:-1.5 },
+    ],
+  },
+
+  // ----- SPREAD: The artefact -----
+  { kind:'text', side:'left',
+    h2:'The artefact.<br><em>The Country<br>We\'re Building.</em>',
+    body:[
+      'every three-year program needs something the people inside it are working <em>toward.</em>',
+      'not a final report. not an acquittal. <span class="ochre">something with weight.</span>',
+      'something a young person in Tennant Creek can <span class="underline">hold</span>',
+      '+ a magistrate in Hobart can <span class="underline">read</span>',
+      '+ a Minister in Canberra has to <span class="underline">respond to.</span>',
+    ],
+  },
+  { kind:'text', side:'right',
+    h3:'one artefact.<br>four forms.',
+    body:[
+      '① a <strong class="ochre">documentary</strong> · 90 minutes, co-directed with each community.',
+      '② a <strong class="ochre">book</strong> · long-form, photography-rich, published Year 3.',
+      '③ a <strong class="ochre">living platform</strong> · the centre, opened to the public.',
+      '④ the <strong class="ochre">Journals</strong> · one bound book per young person, owned by them, their portrait + their words + their hand.',
+    ],
+    extras:[
+      { type:'polaroid', caption:'documentary,<br>co-directed', rot:-3 },
+      { type:'polaroid', caption:'the book,<br>published Year 3', rot:1.5 },
+      { type:'polaroid', caption:'the living<br>platform', rot:-1 },
+      { type:'polaroid', caption:'the Journals,<br>one per young person', rot:2.8 },
+    ],
+  },
+
+  // ----- SPREAD: Lineage, the shoulders we stand on -----
+  { kind:'text', side:'left',
+    h2:'The shoulders<br>we stand on.',
+    sub:'none of this is new. we are reading from the same library, in the same direction.',
+    body:[
+      'four people, four decades, four continents. each one figured out a piece of the same answer. nothing in this proposal was invented in a meeting. it was inherited.',
+      '<em class="ochre">our job is to put the pieces in one room and let them argue.</em>',
+    ],
+  },
+  { kind:'text', side:'right',
+    h3:'four readings.<br>one library.',
+    extras:[
+      { type:'stamp',
+        lines:['Tyson Yunkaporta', 'Sand Talk', '2019'],
+        rot:-2 },
+      { type:'card',
+        quote:'Authority sits with the people closest to the consequence.',
+        meta:'Tyson Yunkaporta · Apalech<br>after 65,000 years',
+        rot:1.5 },
+      { type:'stamp',
+        lines:['Edith Grotberg', 'Lima', '1996'],
+        rot:1 },
+      { type:'card',
+        quote:'I have. I am. I can. The kids who made it drew on these nine.',
+        meta:'Edith Grotberg<br>street children, Lima',
+        rot:-1.8 },
+      { type:'stamp',
+        lines:['Diagrama', 'Murcia, Spain', '1991'],
+        rot:-3 },
+      { type:'stamp',
+        lines:['Elinor Ostrom', 'Nobel Prize', '2009'],
+        rot:2.5 },
+    ],
+  },
+
+  // ----- SPREAD: FIRE CRESCENDO, on building things slowly -----
+  { kind:'diagram-page', image:'../wiki/output/fire-crescendo-journal.png', side:'left' },
+  { kind:'text', side:'right',
+    h3:'building slowly.<br>the fire crescendo.',
+    body:[
+      '<strong>year 1, ember &amp; tinder.</strong> <span class="faded">quiet, almost invisible. relationships, listening, showing up. if you\'re trying to measure this with a KPI, you\'re killing it.</span>',
+      '<strong>year 2, kindling &amp; campfire.</strong> <span class="faded">the work catches. kin notice. funders ask how. one community leads to two.</span>',
+      '<strong>year 3, roaring fire &amp; bonfire.</strong> <span class="faded">undeniable. holding warmth for people who weren\'t there at the start.</span>',
+      '<em class="ochre">fire does not arrive at bonfire stage. you build it, slowly, with attention.</em>',
+      '<span class="faded">most programs fail because someone tries to light the bonfire in year one. fire crescendo is the diagram that gives funders the language to fund year one properly, and gives the team the language to say <em>"no, not yet."</em></span>',
+    ],
+  },
+
+  // ----- SPREAD: CAMPFIRE, the worked example -----
+  { kind:'text', side:'left',
+    h2:'CAMPFIRE,<br>the worked example.',
+    sub:'Brodie Germaine, Pitta Pitta + Wakka Wakka. Kalkadoon country (Mt Isa). one of the ten.',
+    body:[
+      'CAMPFIRE is what fire crescendo looks like when a real person carries it. Brodie grew up in housing commission Mt Isa with family cycling through the system. rugby league lifted him out. drugs put him back. a men\'s camp on country with Ernie Dingo turned it again.',
+      'today CAMPFIRE runs three pillars in Kalkadoon country.',
+      '<strong class="ochre">cultural immersion. physical empowerment. relational mentorship.</strong>',
+      '<em>seven-day camps on country, no phones. a community gym in town. matched mentors who walk with kids for years, not weeks.</em>',
+      '<span class="faded">last year alone Brodie\'s gym kept three young people out of the watchhouse the local police had marked as inevitable.</span>',
+    ],
+  },
+  { kind:'text', side:'right',
+    h3:'three pillars.<br>one fire.',
+    extras:[
+      { type:'polaroid', caption:'Brodie Germaine,<br>Mt Isa', rot:-2.5 },
+      { type:'card',
+        quote:'When I take them out bush and they come back changed, that\'s the only measurement that matters.',
+        meta:'Brodie Germaine<br>CAMPFIRE founder',
+        rot:1.5 },
+      { type:'stamp',
+        lines:['I.', 'CULTURAL', 'IMMERSION'],
+        rot:-3 },
+      { type:'stamp',
+        lines:['II.', 'PHYSICAL', 'EMPOWERMENT'],
+        rot:1.8 },
+      { type:'stamp',
+        lines:['III.', 'RELATIONAL', 'MENTORSHIP'],
+        rot:-1.5 },
+      { type:'note',
+        text:'CAMPFIRE is in the JusticeHub Making Safer Bill submission as a program worth replicating, alongside Oonchiumpa and Diagrama.',
+        rot:1 },
+    ],
+  },
+
+  // ----- SPREAD: The costed ask -----
+  { kind:'ledger', side:'left',
+    h2:'The costed ask.',
+    rows:[
+      ['Year 1, FY2026 (foundation)','$780,000'],
+      ['Year 2, FY2027 (deepening)','$960,000'],
+      ['Year 3, FY2028 (the artefact)','$1,160,000'],
+    ],
+    total:['three-year total','$2,900,000'],
+    footer:'an average of $967K/year.<br><span class="underline">less per year than detaining one child.</span>',
+  },
+  { kind:'text', side:'right',
+    h3:'Year 1 buys',
+    body:[
+      '→ centre hardening + local AI agents · $180K',
+      '→ ten anchor partnerships @ $35K untied · $350K',
+      '→ embedded storytelling team (2 FTE) · $180K',
+      '→ first domestic exchanges (3 trips) · $30K',
+      '→ Africa + Europe learning tour · $40K',
+      '→ backbone (in-kind, ACT) · $0',
+      '<em>no acquittals. quarterly relationship visits instead.</em>',
+      '<strong class="ink">this is what it costs to hold things together long enough for the work to be seen.</strong>',
+    ],
+  },
+
+  // ----- SPREAD: What changed + why Minderoo -----
+  { kind:'text', side:'left',
+    h2:'What changed,<br>since last time.',
+    body:[
+      'you told us the previous shape was too big.',
+      '<strong>we listened.</strong>',
+      'the previous proposal was on its way to ~$8M+. <span class="underline">this one is $2.9M.</span>',
+      '<em>nothing was diluted to get here.</em> we changed the architecture, not the ambition.',
+      '<em>ten</em> communities held with depth (not twelve held thinly)',
+      '<em>one</em> program with three feeding circles (not three parallel workstreams)',
+      '<em>one</em> artefact in four forms',
+    ],
+  },
+  { kind:'text', side:'right',
+    h3:'Why Minderoo,<br>specifically.',
+    body:[
+      '→ Walk Free + Generation One alignment, a settled view that the system needs <em>replacing,</em> not optimising',
+      '→ capacity for 3-year catalytic capital',
+      '→ international ambition, the Year 1 Africa + Europe tour is legible to Minderoo in a way it isn\'t to a domestic-only funder',
+      '→ a live conversation, you already asked us to come back smaller. <span class="underline">this is us coming back smaller.</span>',
+    ],
+    quote:'"the Minderoo Australian Justice Cohort sent ten communities into deep relationship and brought Europe back."',
+  },
+
+  // ----- SPREAD: Three options + signature -----
+  { kind:'text', side:'left',
+    h2:'What you<br>could choose.',
+    sub:'we want this to be the easiest possible <span class="underline">yes</span> internally.',
+    body:[
+      '<strong class="ochre">①</strong> &nbsp;<strong>Anchor funder, full program</strong><br><span class="faded">$2.9M over three years.<br>your name on the artefact.</span>',
+      '<strong class="ochre">②</strong> &nbsp;<strong>Lead Year 1 only</strong><br><span class="faded">$780K now, with right of first refusal on Y2 + Y3.<br>PRF, Snow, Dusseldorp, Ritchie co-fund.</span>',
+      '<strong class="ochre">③</strong> &nbsp;<strong>Fund a single circle</strong><br><span class="faded">most likely <em>the Centre</em>, $520K over three years.</span>',
+    ],
+  },
+  { kind:'closing', side:'right',
+    body:[
+      'our preference is option ①, because the three circles only work as one program.',
+      'but we will make any of these work.',
+      'what we need from you to move forward,',
+      '→ indication of fit<br>→ co-selection of communities<br>→ a first conversation timeline',
+      '<em>when does this become a meeting, not a journal?</em>',
+    ],
+    sig:'Ben &amp; Nick',
+    sigsub:'A Curious Tractor · April 2026<br>benjamin@act.place',
+  },
+
+  // ----- BACK INSIDE -----
+  { kind:'blank-inside-cover' },
+  // ----- BACK COVER -----
+  { kind:'cover-back' },
+];
+
+//================================================================
+// PAGE TEMPLATES, turn data into HTML
+//================================================================
+
+// Render scrapbook extras: taped polaroids, index-card quotes, library stamps, margin notes.
+// Each extra is { type: 'polaroid'|'card'|'stamp'|'note', ...fields }
+function renderExtras(extras){
+  const items = extras.map(x => {
+    const rot = x.rot !== undefined ? `style="--rot:${x.rot}deg"` : '';
+    if(x.type === 'polaroid'){
+      const imgEl = x.src
+        ? `<span class="img-slot has-img"><img src="${x.src}" alt=""></span>`
+        : `<span class="img-slot"></span>`;
+      return `<div class="polaroid" ${rot}>${imgEl}<span class="caption">${x.caption || 'photo'}</span></div>`;
+    }
+    if(x.type === 'card'){
+      const meta = x.meta ? `<div class="meta">${x.meta}</div>` : '';
+      return `<div class="index-card" ${rot}><div class="quote-text">${x.quote}</div>${meta}</div>`;
+    }
+    if(x.type === 'stamp'){
+      const lines = (x.lines || []).map((l,i) => {
+        const cls = i === 0 ? 'stamp-line big' : 'stamp-line';
+        return `<span class="${cls}">${l}</span>`;
+      }).join('');
+      return `<div class="library-stamp" ${rot}>${lines}</div>`;
+    }
+    if(x.type === 'note'){
+      return `<div class="margin-note" ${rot}><span class="arrow">↳</span>${x.text}</div>`;
+    }
+    return '';
+  }).join('');
+  return `<div class="extras-area"><div class="extras-row">${items}</div></div>`;
+}
+
+function renderPage(p, idx){
+  let inner = '';
+  let cls = ['page'];
+  if(p.kind === 'cover-front'){
+    cls.push('cover-front');
+    inner = `<div class="bleed-img-wrap cover-img"><img src="../wiki/output/journal-cover-closed.png" alt="STAY., a travel journal"></div><div class="cover-stay"><span class="word">STAY.</span><span class="by">a travel journal · for Lucy Stronach</span></div><div class="cover-tag"><div class="top">A CURIOUS TRACTOR · 2026</div></div>`;
+  }
+  else if(p.kind === 'cover-back'){
+    cls.push('cover-back');
+    inner = `
+      <div class="back-cover-inner">
+        <img class="back-colophon" src="../wiki/output/justicehub-logo.png" alt="JusticeHub colophon">
+        <div class="back-mark">A Curious Tractor &middot; 2026</div>
+      </div>`;
+  }
+  else if(p.kind === 'blank-inside-cover'){
+    inner = `<div class="page-inner"><div class="foxing" style="top:18%;left:30%;width:60px;height:60px"></div><div class="foxing" style="bottom:25%;right:25%;width:40px;height:40px"></div></div>`;
+  }
+  else if(p.kind === 'title-page'){
+    inner = `
+      <div class="page-inner title-page">
+        <div class="foxing" style="top:8%;right:12%;width:50px;height:50px"></div>
+        <div class="foxing" style="bottom:18%;left:14%;width:70px;height:70px"></div>
+        <h1 class="title big">${p.title}</h1>
+        <div class="sub">${p.sub}</div>
+        <div class="by">${p.by}</div>
+      </div>`;
+  }
+  else if(p.kind === 'big-number'){
+    cls.push(p.side === 'left' ? 'left-page' : 'right-page');
+    const footer = p.footer ? `<p class="hand ink" style="margin-top:1.4em;font-style:italic">${p.footer}</p>` : '';
+    inner = `
+      <div class="page-inner center">
+        <div class="foxing" style="top:14%;left:18%;width:50px;height:50px"></div>
+        <div class="bignum">${p.number}</div>
+        <div class="bignum-label">${p.label}</div>
+        ${footer}
+      </div>`;
+  }
+  else if(p.kind === 'text'){
+    cls.push(p.side === 'left' ? 'left-page' : 'right-page');
+    const bodyClass = p.serif ? 'serif-body' : 'hand';
+    let parts = '';
+    if(p.h2) parts += `<h2 class="title">${p.h2}</h2>`;
+    if(p.h3) parts += `<h3 class="subtitle">${p.h3}</h3>`;
+    if(p.sub) parts += `<p class="${bodyClass} faded" style="font-style:italic;margin-bottom:.5em">${p.sub}</p>`;
+    if(p.body) parts += p.body.map(b=>`<p class="${bodyClass}">${b}</p>`).join('');
+    if(p.list) parts += `<div class="stack">` + p.list.map(b=>`<p class="${bodyClass}">${b}</p>`).join('') + `</div>`;
+    if(p.extras) parts += renderExtras(p.extras);
+    inner = `<div class="page-inner"><div class="foxing" style="top:7%;right:8%;width:35px;height:35px"></div>${parts}</div>`;
+  }
+  else if(p.kind === 'text-and-photo'){
+    cls.push(p.side === 'left' ? 'left-page' : 'right-page');
+    let parts = '';
+    if(p.h2) parts += `<h2 class="title">${p.h2}</h2>`;
+    if(p.body) parts += p.body.map(b=>`<p class="hand">${b}</p>`).join('');
+    if(p.list) parts += `<div class="stack">` + p.list.map(b=>`<p class="hand">${b}</p>`).join('') + `</div>`;
+    if(p.quote) parts += `<p class="hand ochre pad-top" style="text-align:center;font-style:italic">${p.quote}</p>`;
+    const photoSize = p.photo.size || 'square';
+    const sizeStyle = photoSize === 'wide' ? 'width:75%;aspect-ratio:2/1' : 'width:50%;aspect-ratio:1/1';
+    const photoEl = p.photo.src
+      ? `<div class="photo tilt-r2" style="${sizeStyle};margin:1em auto 0"><img src="${p.photo.src}" alt=""></div>`
+      : `<div class="photo empty tilt-r2" style="${sizeStyle};margin:1em auto 0">${p.photo.caption || 'drop a photo here'}</div>`;
+    inner = `<div class="page-inner">${parts}${photoEl}</div>`;
+  }
+  else if(p.kind === 'quote'){
+    cls.push(p.side === 'left' ? 'left-page' : 'right-page');
+    const footer = p.footer ? `<p class="hand pad-top">${p.footer}</p>` : '';
+    inner = `
+      <div class="page-inner">
+        <div style="font-family:'Caveat',cursive;font-size:5em;color:var(--ochre-deep);line-height:0;height:.6em">"</div>
+        <p class="quote">${p.quoteText}</p>
+        <p class="quote-attrib">${p.attrib}</p>
+        ${footer}
+      </div>`;
+  }
+  else if(p.kind === 'ledger'){
+    cls.push(p.side === 'left' ? 'left-page' : 'right-page');
+    const rows = p.rows.map(r=>`<div class="ledger-row"><span>${r[0]}</span><span class="ochre">${r[1]}</span></div>`).join('');
+    const tot = p.total ? `<div class="ledger-row total"><span>${p.total[0]}</span><span>${p.total[1]}</span></div>` : '';
+    const foot = p.footer ? `<p class="hand pad-top" style="font-style:italic">${p.footer}</p>` : '';
+    inner = `
+      <div class="page-inner">
+        <h2 class="title">${p.h2}</h2>
+        <div class="stack pad-top">${rows}${tot}</div>
+        ${foot}
+      </div>`;
+  }
+  else if(p.kind === 'closing'){
+    cls.push(p.side === 'left' ? 'left-page' : 'right-page');
+    const body = p.body.map(b=>`<p class="hand">${b}</p>`).join('');
+    inner = `
+      <div class="page-inner">
+        ${body}
+        <div style="margin-top:auto;padding-top:1.5em">
+          <p class="hand ochre" style="font-size:calc(var(--fs-h2));transform:rotate(-2deg)">${p.sig}</p>
+          <p class="hand faded" style="font-size:calc(var(--fs-small));margin-top:.3em">${p.sigsub}</p>
+        </div>
+      </div>`;
+  }
+  else if(p.kind === 'full-bleed'){
+    // Split a single 3:2 source image across the L+R pages of an open spread.
+    // Real <img> tag wrapped in .bleed-img-wrap, bulletproof for any environment.
+    cls.push('full-bleed');
+    cls.push(p.side === 'left' ? 'left-page' : 'right-page');
+    const sideCls = p.side === 'left' ? 'split-left' : 'split-right';
+    return `<div class="${cls.join(' ')}"><div class="bleed-img-wrap ${sideCls}"><img src="${p.image}" alt=""></div></div>`;
+  }
+  else if(p.kind === 'diagram-page'){
+    // Diagram inside the book, not pasted on top of it.
+    // Inherits .page paper texture + foxing, image multiplied onto it.
+    cls.push(p.side === 'left' ? 'left-page' : 'right-page');
+    return `<div class="${cls.join(' ')}">
+      <div class="page-inner" style="padding:5% 4%">
+        <div class="foxing" style="top:6%;right:7%;width:38px;height:38px"></div>
+        <div class="foxing" style="bottom:9%;left:6%;width:32px;height:32px"></div>
+        <div class="diagram-frame"><img src="${p.image}" alt=""></div>
+      </div>
+    </div>`;
+  }
+  else if(p.kind === 'text-and-video'){
+    cls.push(p.side === 'left' ? 'left-page' : 'right-page');
+    let parts = '';
+    if(p.h2) parts += `<h2 class="title">${p.h2}</h2>`;
+    if(p.body) parts += p.body.map(b=>`<p class="hand">${b}</p>`).join('');
+    const videoSize = p.video.size || 'square';
+    const sizeStyle = videoSize === 'wide'
+      ? 'width:80%;aspect-ratio:16/9'
+      : videoSize === 'tall'
+        ? 'width:55%;aspect-ratio:9/16'
+        : 'width:65%;aspect-ratio:4/3';
+    const videoEl = p.video.src
+      ? `<div class="video-slot" style="${sizeStyle};margin:1em auto 0">
+           <video src="${p.video.src}" ${p.video.poster ? `poster="${p.video.poster}"` : ''} controls preload="metadata" playsinline></video>
+           <div class="play-overlay"></div>
+         </div>`
+      : `<div class="video-slot empty" style="${sizeStyle};margin:1em auto 0">
+           <div class="video-poster">drop a video here<br><span style="opacity:.5;font-size:.8em">${p.video.caption || ''}</span></div>
+         </div>`;
+    inner = `<div class="page-inner">${parts}${videoEl}</div>`;
+  }
+  return `<div class="${cls.join(' ')}">${inner}</div>`;
+}
+
+//================================================================
+// BUILD + INIT
+//================================================================
+
+const book = document.getElementById('book');
+
+// Try to load real scrapbook content from journal-extras.json (built by
+// scripts/journal-fetch-extras.mjs). Falls back to placeholder extras
+// already declared on PAGES if the file isn't there.
+async function loadExtrasAndRender(){
+  try {
+    const res = await fetch('./journal-extras.json', { cache: 'no-store' });
+    if(res.ok){
+      const data = await res.json();
+      mergeExtrasIntoPages(data);
+      console.log('STAY journal: merged extras for', Object.keys(data.extras_by_community || {}).length, 'communities');
+    }
+  } catch(e){
+    // No extras file = use placeholders. Not an error.
+  }
+  PAGES.forEach((p,i) => { book.insertAdjacentHTML('beforeend', renderPage(p,i)); });
+}
+
+// For each PAGES entry tagged with `community: '<key>'`, append the matching
+// real extras after any placeholders. PAGES entries with extras but no
+// community tag are left alone (placeholder mode).
+function mergeExtrasIntoPages(data){
+  const idx = data.extras_by_community || {};
+  for(const p of PAGES){
+    if(p.community && idx[p.community] && idx[p.community].length){
+      p.extras = (p.extras || []).concat(idx[p.community]);
+    }
+  }
+}
+
+loadExtrasAndRender();
+
+function calcDims(){
+  const vw = window.innerWidth;
+  const vh = window.innerHeight;
+  const maxW = Math.min(vw * 0.94, 1500);
+  const maxH = Math.min(vh * 0.82, 900);
+  // each page is portrait, 2:3 ratio. Two pages side by side = 4:3 spread.
+  const aspectSpread = 1.4; // width / height for the open spread
+  let w, h;
+  if(maxW / maxH > aspectSpread){
+    h = maxH; w = h * aspectSpread;
+  } else {
+    w = maxW; h = w / aspectSpread;
+  }
+  return { width: Math.round(w/2), height: Math.round(h) };
+}
+
+function setFontVars(pageW){
+  const r = document.documentElement.style;
+  r.setProperty('--fs-cover', (pageW * 0.14) + 'px');
+  r.setProperty('--fs-title', (pageW * 0.10) + 'px');
+  r.setProperty('--fs-h2', (pageW * 0.085) + 'px');
+  r.setProperty('--fs-h3', (pageW * 0.055) + 'px');
+  r.setProperty('--fs-bignum', (pageW * 0.22) + 'px');
+  r.setProperty('--fs-quote', (pageW * 0.055) + 'px');
+  r.setProperty('--fs-body', (pageW * 0.038) + 'px');
+  r.setProperty('--fs-small', (pageW * 0.028) + 'px');
+}
+
+let pageFlip;
+function init(){
+  const dims = calcDims();
+  setFontVars(dims.width);
+  if(pageFlip){
+    pageFlip.update();
+    return;
+  }
+  pageFlip = new St.PageFlip(book, {
+    width: dims.width,
+    height: dims.height,
+    size: 'fixed',
+    drawShadow: true,
+    flippingTime: 900,
+    usePortrait: false,
+    startZIndex: 0,
+    autoSize: false,
+    maxShadowOpacity: 0.5,
+    showCover: false,
+    mobileScrollSupport: false,
+    swipeDistance: 30,
+  });
+  pageFlip.loadFromHTML(document.querySelectorAll('#book .page'));
+
+  const indicator = document.getElementById('indicator');
+  const prev = document.getElementById('prev');
+  const next = document.getElementById('next');
+  function updateNav(){
+    const i = pageFlip.getCurrentPageIndex();
+    const total = pageFlip.getPageCount();
+    if(i === 0) indicator.textContent = 'cover';
+    else if(i >= total - 1) indicator.textContent = 'back cover';
+    else indicator.textContent = 'page ' + i + ' of ' + (total - 2);
+    prev.disabled = i === 0;
+    next.disabled = i >= total - 1;
+  }
+  pageFlip.on('flip', updateNav);
+  prev.addEventListener('click', () => pageFlip.flipPrev('top'));
+  next.addEventListener('click', () => pageFlip.flipNext('top'));
+  document.addEventListener('keydown', e => {
+    if(e.key === 'ArrowLeft') pageFlip.flipPrev('top');
+    if(e.key === 'ArrowRight' || e.key === ' ') pageFlip.flipNext('top');
+  });
+  updateNav();
+  document.getElementById('loading').classList.add('gone');
+}
+
+// init when StPageFlip is loaded AND PAGES have been rendered into the DOM
+function ready(){
+  const stReady = typeof St !== 'undefined' && St.PageFlip;
+  const pagesRendered = document.querySelectorAll('#book .page').length > 0;
+  if(stReady && pagesRendered){
+    init();
+  } else {
+    setTimeout(ready, 80);
+  }
+}
+ready();
+
+window.addEventListener('resize', () => {
+  if(!pageFlip) return;
+  const dims = calcDims();
+  setFontVars(dims.width);
+  // Re-init by destroying and recreating (StPageFlip's update() doesn't resize cleanly)
+  pageFlip.destroy();
+  pageFlip = null;
+  document.querySelectorAll('#book > *').forEach(el => el.remove());
+  PAGES.forEach((p,i) => { book.insertAdjacentHTML('beforeend', renderPage(p,i)); });
+  init();
+});
+
+//================================================================
+// HOW TO ADD REAL PHOTOS
+//================================================================
+// 1. Drop your photo file into:  wiki/output/people/
+// 2. Find the page in PAGES above where you want it (search for `slot:`)
+// 3. Replace:    photo:{slot:'country', caption:'a photo of country'}
+//    With:       photo:{src:'../wiki/output/people/your-photo.jpg', caption:'Mparntwe, March'}
+// 4. Save, refresh, the photo gets the brown-tape + sepia treatment automatically.
+//
+// HOW TO ADD A NEW SPREAD
+// 1. Add two new objects to the PAGES array (one for left page, one for right)
+// 2. Use kind: 'text' / 'text-and-photo' / 'big-number' / 'quote' / 'ledger' / 'full-bleed'
+// 3. Save, refresh.
+//================================================================
+</script>
+</body>
+</html>
