@@ -29,7 +29,7 @@ Raw Sources → LLM Compilation → Articles → Query & Grow → Knowledge Comp
 
 **1. Raw sources** go into `wiki/raw/` — immutable. These are the ground truth: transcripts, meeting notes, scraped research, financial summaries, field reports. They are never edited once ingested.
 
-**2. LLM compiles articles** from raw sources into domain directories (`concepts/`, `projects/`, `research/`, etc.). Articles are written in plain Markdown with `[[wikilink]]` cross-references. The LLM synthesises, never fabricates — every claim traces back to a raw source.
+**2. LLM compiles articles** from raw sources into domain directories (`concepts/`, `projects/`, `research/`, etc.). Articles are written in plain Markdown with `[[wikilink-style]]` cross-references. The LLM synthesises, never fabricates — every claim traces back to a raw source.
 
 **3. Query and grow** — the `/wiki` skill allows agents and humans to query the knowledge base, ingest new sources, find gaps, and enrich articles with new data.
 

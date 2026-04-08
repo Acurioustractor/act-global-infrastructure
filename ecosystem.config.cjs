@@ -63,6 +63,27 @@ const cronScripts = [
     cron_restart: '0 6 * * *', // Daily 6am AEST (after meeting-sync at 5:30am)
   },
   {
+    name: 'wiki-watch-meetings',
+    script: 'scripts/wiki-watch-meetings.mjs',
+    cron_restart: '30 6 * * *', // Daily 6:30am AEST — pulls new meeting records into wiki/raw/
+  },
+  {
+    name: 'wiki-lint',
+    script: 'scripts/wiki-lint.mjs',
+    args: '--write-report',
+    cron_restart: '0 9 * * 1', // Weekly Monday 9am AEST — wiki health report
+  },
+  {
+    name: 'wiki-verify-urls',
+    script: 'scripts/wiki-verify-urls.mjs',
+    cron_restart: '5 9 * * 1', // Weekly Monday 9:05am AEST — verify GitHub repos + Vercel deploy URLs (before viewer build)
+  },
+  {
+    name: 'wiki-build-viewer',
+    script: 'scripts/wiki-build-viewer.mjs',
+    cron_restart: '15 9 * * 1', // Weekly Monday 9:15am AEST — regenerate the Wikipedia viewer (after lint + verify-urls)
+  },
+  {
     name: 'knowledge-pipeline',
     script: 'scripts/knowledge-pipeline.mjs',
     args: '--verbose',

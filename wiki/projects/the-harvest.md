@@ -40,6 +40,63 @@ Indoor-outdoor event space available for community gatherings, private events, a
 
 **Action** — the hub is active, trading, and demonstrating regenerative practice in daily operation. The workshop and education programs extend into **Curiosity** and **Art** phases through hands-on learning and creative practice.
 
+## Programs
+
+### CSA (Community Supported Agriculture)
+Seasonal produce shares, member subscriptions, and local farmer partnerships — reflecting the Jinibara Country land rhythms.
+
+### Events
+Seasonal gatherings, workshops, community markets, and venue hire running through the year.
+
+### Enterprise Hub
+Local business directory (businesses can claim and manage their profiles), maker pathways, and a business owner portal.
+
+### Content Hub
+The Harvest blog is served from the [[empathy-ledger|Empathy Ledger]] Content Hub via the EL syndication API — community stories and seasonal content flowing from EL into the Harvest website automatically.
+
+## Infrastructure & Operations
+
+### Digital Platform
+
+| Detail | Value |
+|--------|-------|
+| **Live URL** | [theharvestwitta.com.au](https://theharvestwitta.com.au) |
+| **Alternate** | harvest.act.place |
+| **GitHub** | [act-now-coalition/theharvest](https://github.com/act-now-coalition/theharvest) |
+| **Hosting** | Vercel (frontend) |
+| **Framework** | Vite + React 19, TypeScript — unique in ecosystem (not Next.js) |
+| **API layer** | tRPC + Express |
+| **ORM** | Drizzle |
+| **Router** | Wouter (lightweight) |
+| **Storage** | AWS S3 (presigned URLs for media) |
+| **Local dev** | `pnpm dev` → http://localhost:3004 |
+
+The Harvest uses a deliberate lightweight stack — Vite rather than Next.js, Wouter rather than React Router — reflecting its role as a community-facing site rather than a complex application platform.
+
+### Supabase Edge Functions
+
+Five edge functions run on the custom Supabase instance:
+- `app-user-sync` — user synchronisation across systems
+- `admin-events` — event CRUD for admin panel
+- `admin-businesses` — business directory management
+- `business-claim` — business ownership claim workflow
+- `newsletter-subscribe` — newsletter signups
+
+### External Integrations
+
+- **GHL CRM:** Pipeline "Harvest", tags: `harvest`, `witta`, `csa`, `events`. Location tracking enabled for Witta/Maleny contacts.
+- **Xero:** Tracking category `HARVEST`, project codes `HARVEST-CSA`, `HARVEST-VENUE`, `HARVEST-EVENTS`.
+
+### Community Management
+
+Platform routes cover both public visitors and community members:
+
+| Section | Routes | Purpose |
+|---------|--------|---------|
+| Public | `/`, `/visit`, `/whats-on`, `/venue-hire` | Visitor information |
+| Community | `/stories`, `/witta`, `/enterprises` | Place-based content |
+| Admin | `/admin`, `/admin/photos`, `/my-business` | Operator management |
+
 ## See Also
 
 - [[green-harvest-witta|Green Harvest Witta]]
@@ -52,3 +109,4 @@ Indoor-outdoor event space available for community gatherings, private events, a
 - [[index|ACT Wikipedia]]
 - [[lcaa-method|LCAA Method]]
 - [[green-harvest-witta|Green Harvest Witta]]
+- [[empathy-ledger|Empathy Ledger]] — content syndication source

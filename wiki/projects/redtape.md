@@ -1,0 +1,42 @@
+---
+title: Redtape
+status: Active
+cluster: art
+tier: studio
+---
+
+# Redtape
+
+> Bureaucratic friction made visible. Art that takes the invisible labour of compliance and makes it impossible to ignore.
+
+## Overview
+
+Redtape is an ACT studio art project that turns government and grant-application paperwork into a physical object — the literal red tape that the metaphor came from. The work sits in the same lineage as [[contained|CONTAINED]] (youth detention as installation), [[the-confessional|The Confessional]] (institutional space made intimate), and [[gold-phone|Gold.Phone]] (bureaucracy as creative material) — pieces that take an everyday system most people don't see and make it stand in the room with them.
+
+The project asks the audience to **feel** what an ACCO has to wade through to receive funding. Not as a chart. Not as a complaint. As a thing you walk through.
+
+## Why It Matters
+
+The case ACT keeps making — that small First Nations organisations carry the heaviest reporting burden for the smallest grants — is hard to land in a slide deck. The numbers are abstract. **The physical experience of standing inside the paperwork is not.**
+
+Redtape is one of the [[ai-community-engagement|"AI eats the paperwork"]] arguments in physical form: when you can show people how much time, language, and cultural translation labour goes into a $50K acquittal, the conversation about who designs grant systems changes.
+
+## Status
+
+Evidence sparse — Redtape is part of ACT's Studio art line. Specific exhibition history, materials, dimensions, and partner credits await deeper source ingestion. The wiki should grow this article as new context lands.
+
+## Connections
+
+- Sits inside ACT's [[act-ecosystem|Studio cluster]] alongside CONTAINED, The Confessional, Gold.Phone, Treacher, Uncle Allan's work
+- Speaks directly to [[funding-transparency|funding transparency]] and [[power-dynamics-philanthropy|power dynamics in philanthropy]]
+- Shares conceptual DNA with [[beautiful-obsolescence|beautiful obsolescence]] — the work hopes to stop being needed
+
+## Backlinks
+
+- [[contained|CONTAINED]] — sister piece, youth detention as installation
+- [[the-confessional|The Confessional]] — sister piece, institutional space made intimate
+- [[gold-phone|Gold.Phone]] — sister piece, communication infrastructure as art
+- [[treacher|Treacher]] — sister piece, sound installation
+- [[funding-transparency|Funding Transparency]] — what Redtape makes visible
+- [[ai-community-engagement|AI and Community Engagement]] — the policy argument the art carries
+- [[lcaa-method|LCAA Method]] — Listen → Curiosity → Action → Art (this is the Art)

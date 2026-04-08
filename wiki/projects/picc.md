@@ -52,6 +52,12 @@ PICC operates a "whole-of-life" approach — health, justice, housing, and econo
 | Annual Report System | AI-powered annual reporting from community-owned data |
 | The Centre / The Station | Circular economy hub + youth pathways program |
 
+### PICC Centre (ACT-PC)
+The physical community centre on Palm Island — the hub for PICC's integrated service delivery. Covers fit-out, maintenance, utilities, and operational costs. The building itself is infrastructure for community control: a place where health, family services, employment, and cultural programs operate under one roof, managed by community rather than external agencies.
+
+### On Country Photo Studio (ACT-PS)
+A mobile photography studio for community-controlled storytelling on Palm Island. Connected to [[empathy-ledger|Empathy Ledger]] deployment, the studio provides affordable portrait and documentary photography services while keeping cultural content under community ownership. Part of ACT's sovereign storytelling infrastructure — ensuring images of community are captured, stored, and shared on community terms.
+
 ### Digital Platform
 PICC operates a digital platform featuring AI chat, a story archive, and voice-sharing — enabling community members to contribute and access knowledge without leaving country.
 
@@ -113,6 +119,8 @@ ACT works closely with PICC across multiple projects:
 
 ## Backlinks
 
+- [[three-circles|The Three Circles]] — **anchor community #2** in the canonical 3-year, $2.9M Minderoo pitch. Richard Cassidy and the Bwgcolman families. **PICC is the program's strongest community proof point**: $29M annual turnover, 208 FTE, $38.9M of tracked funding 2021–25, 78% diversion rate, Young Offender Support Service growing 3× since 2021. Already in ALMA evidence base.
+- [[staying|Staying — Country & Council]] — methodology layer of Three Circles' Circle Two
 - [[palm-island|Palm Island (Bwgcolman)]] — community article
 - [[third-reality|The Third Reality]] — methodology PICC exemplifies
 - [[indigenous-data-sovereignty|Indigenous Data Sovereignty]] — governance framework

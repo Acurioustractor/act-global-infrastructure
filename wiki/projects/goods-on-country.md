@@ -238,6 +238,50 @@ Goods on Country rejects the model of designing products in offices and shipping
 4. **Community controlled** — the arc bends toward community ownership of facilities, data, and relationships
 5. **Circular by default** — local waste becomes local goods; nothing leaves the loop unnecessarily
 
+## Infrastructure & Operations
+
+### Asset Register Platform
+
+The digital asset register is a two-version system:
+
+| Component | Detail |
+|-----------|--------|
+| **V1 (Python)** | CLI scripts for QR generation, CSV processing, SQL seeding |
+| **V2 (Next.js)** | Next.js 16.1.4, React 19, TypeScript, Stripe payments |
+| **Hosting** | Netlify (goodsoncountry.au + goodsoncountry.netlify.app) |
+| **GitHub** | [act-now-coalition/goods-asset-tracker](https://github.com/act-now-coalition/goods-asset-tracker) |
+| **Local path** | `/Users/benknight/Code/Goods Asset Register/` |
+| **Local dev (v2)** | `npm run dev` in `/v2` → http://localhost:3005 |
+
+### Alert System
+
+The asset register runs automated alerts across four types:
+
+| Alert | Trigger |
+|-------|---------|
+| Overuse | High usage detected |
+| Maintenance | Scheduled check due |
+| No Check-in | 6+ months since last QR scan |
+| High Priority | Critical ticket submitted via QR |
+
+Severity levels: Low → Medium → High → Critical.
+
+### External Integrations
+
+- **GHL CRM:** Pipeline "Goods", tags: `goods`, `beds`, `washers`, `assets`.
+- **Xero:** Tracking category `GOODS`, project codes `GOODS-BEDS`, `GOODS-WASHERS`, `GOODS-MAINT`.
+
+### Development Status
+
+| Phase | Status |
+|-------|--------|
+| Data Foundation | Complete |
+| Database Architecture | Complete |
+| QR Code Generation | Complete |
+| Frontend V2 (Next.js) | In progress |
+| IoT Integration | Planned |
+| Community Dashboard | Planned |
+
 ## Backlinks
 
 - [[index|ACT Wikipedia]]

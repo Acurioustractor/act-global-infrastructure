@@ -4,6 +4,12 @@
 
 **Status:** Active | **Code:** ACT-CN | **Tier:** Satellite
 
+## The Build
+
+CONTAINED was built by hand. Nicholas Marchesi personally constructed the majority of the rooms, wired the electronics that make fluorescent despair tangible, and embedded the technology that bridges experience to action. Benjamin Knight followed paper trails that lead to kids in cages, transforming data into moral urgency.
+
+The container format is not incidental — it is the argument. Young people in Australia's justice system are literally contained: in cells, in systems, in cycles of harm. By creating physical spaces that embody this containment, visitors are invited to step inside the experience, to feel what has been learned, to understand what must change.
+
 ## What It Is
 
 CONTAINED is ACT's immersive advocacy campaign at the intersection of experiential design and youth justice reform. It takes the evidence that sits inside [[justicehub|JusticeHub]] — the dry cost comparisons, the recidivism rates, the funding breakdowns — and transforms it into a felt experience. Something people walk through, not just read about.
@@ -27,6 +33,13 @@ This isn't abstracted — it's drawn from 145,242 justice funding records and 57
 
 CONTAINED takes a **touring exhibition format** — a physical installation that can be licensed and deployed by partner organisations. Venues rent the installation; it arrives, gets set up, runs for a season, and moves on.
 
+The installation comprises four rooms:
+
+- **Room 1 — The Numbers Room**: Walk into a space filled with the data we can't ignore. Feel the weight of $1.1 million being spent per child while communities solve the problem for $58,000.
+- **Room 2 — The Voices Room**: Hear directly from young people who've lived through the system. Unfiltered, powerful, unforgettable. Isaiah, who helped build the first version of this room, watched visitors' faces as they entered. "I was just watching your face and you're like, 'What the f---?'" That recognition is the point — not sympathy, but recognition.
+- **Room 3 — The Solutions Room**: Discover the 150+ community programs already working across Australia. At each tour stop, local organisations fill this room with their story and their proof — [[campfire|CAMPFIRE]] in Mount Isa, [[oonchiumpa|Oonchiumpa]] in Alice Springs, [[confit-pathways|ConFit Pathways]], [[resoleution|ReSOLEution]].
+- **Room 4 — The Action Room**: Connect with programs, support solutions, join the movement.
+
 The signature element is a **chalk question wall**: visitors are prompted with the incarceration cost figure, then invited to write their own answer to the question *"What could $1.55M do instead?"* The wall photographs — communities writing their own futures — become some of the most shared content the campaign generates.
 
 At [[the-harvest|The Harvest Witta]], a permanent installation (the "Contained Wall") is planned as a standing fixture: a recurring provocation in a community space that changes and breathes.
@@ -41,6 +54,65 @@ CONTAINED operates as a **revenue-generating exhibition asset**. Confirmed place
 The touring model means each venue rental covers production costs and generates income that funds the broader [[justicehub|JusticeHub]] campaign. In the ACT revenue ledger it is tracked under project code **ACT-CN**.
 
 The revenue model positions CONTAINED not as a cost centre but as a self-sustaining advocacy tool: the exhibition pays its own way while shifting the conversation in rooms that matter.
+
+## National Tour — Demand & Intelligence
+
+### Launch Date
+CONTAINED launches **April 20, 2026** and tours nationally. Each stop takes approximately 30 minutes to walk through.
+
+### Tour Schedule (as of March 2026)
+
+| # | City | State | Date | Partner | Status | Budget |
+|---|------|-------|------|---------|--------|--------|
+| 1 | **Mount Druitt** | NSW | Apr 2026 | [[mounty-yarns|Mounty Yarns]] | Planning | $25K |
+| 2 | **Adelaide** | SA | Jun 24–25 | Reintegration Puzzle Conference @ Tandanya | Confirmed | $50K |
+| 3 | **Perth** | WA | May 2026 | UWA School of Social Sciences | Exploring | $50K |
+| 4 | **Tennant Creek** | NT | Jun 2026 | Community-controlled | Exploring | $75K |
+
+Strong demand for additional stops: Brisbane (QLD), Tasmania, Melbourne (VIC), Canberra (ACT). Full national tour budget: $200K unfunded as of March 2026.
+
+### Demand Mapping
+
+**29 people/organisations reached out** after the October 2025 LinkedIn launch and **136 unique commenters** engaged across two LinkedIn posts. Combined demand signals by state:
+
+| State | Combined Signals | Key Contacts |
+|-------|-----------------|--------------|
+| **QLD** | 15 (strongest) | Jonty Bush MP (*"Where is it touring in QLD?"*), Katherine Hayes YAC (*"We would love to host!"*), Megan Argent (Dept of Youth Justice: *"Townsville absolutely needs to see this"*) |
+| **NSW** | 10 | Emma Maiden (Uniting), Natalie Chiappazzo (Western Sydney), Rohan Lulham (USyd — research partnership offer) |
+| **VIC** | 8 | Nadja Kostich (CEO St Martins Youth Arts — venue offer), Melbourne Design Week interest |
+| **SA** | 7 | Hannah March (JRI — conference confirmed), Mayor Sophie Bretag (City of Onkaparinga) |
+| **WA** | 6 | Megan McCormack (CEO Reconciliation WA), Michael Haji-Ali (MIM Foundation, Broome) |
+| **ACT** | 4 | Rebecca Minty (Inspector of Custodial Services), *"Lawns of Parliament House?"* — ACT recently committed to new model of care |
+| **TAS** | 4 | Loic Fery (Prevention Not Detention coalition), Jacqueline Dortmans (DarkLab/MONA), Lewina Schrale (DECYP) |
+| **NT** | 1 | [[oonchiumpa|Oonchiumpa]] Alice Springs |
+
+International signals: Ludmila Andrade (Young Perspectives, Amsterdam), Samantha Burns (National Association of Youth Justice, UK).
+
+### Venue Strategy
+
+Room 3 changes at every stop — filled by local organisations already doing the work. Their expertise determines what decision-makers in that community need to see. Content flywheel: each stop generates photos, reactions, decision-maker quotes, and partner spotlights that feed the next stop's outreach.
+
+### Key Political Contacts
+
+| Contact | Role | State | Signal |
+|---------|------|-------|--------|
+| Jonty Bush | MP, QLD Parliament | QLD | *"Where is it touring in Queensland?"* |
+| Robert Tickner | Former federal Minister for Aboriginal Affairs | Federal | *"End this discredited billion dollar failed system"* |
+| Rebecca Minty | Inspector of Custodial Services | ACT | *"It would be amazing to bring to ACT"* |
+| Sophie Bretag | Mayor, City of Onkaparinga | SA | Elected official openly supporting |
+| Scott McDougall | Former Human Rights Commissioner | QLD | *"Keep going Ben"* |
+
+### Funding the Tour
+
+| Amount | Funds |
+|--------|-------|
+| $5K | Documentation + professional photography at one stop |
+| $15K | Full video documentation |
+| $25K | Container build — custom 3-room fit-out |
+| $50K | One complete tour stop (transport, setup, facilitation, documentation) |
+| $75K | Tennant Creek — cultural safety, local facilitation, community authority |
+
+Top scored funders (from campaign intelligence, as of March 2026): The Smith Family (score 90), Beyond Blue (81), Legal Aid Queensland (81), Barnardos Australia (77), Amnesty International Australia (77), UNICEF Australia (76), Aboriginal Health Council of WA (75). 6,470 scored funders total in the system.
 
 ## Connection to JusticeHub
 
@@ -98,18 +170,26 @@ The Art phase is not the final step — it's the re-entry point. People who walk
 
 ## Key People
 
-- **Joe Kwon** — collaborator, noted in planning records (Feb 2026) for CONTAINED development
-- **Baz Dreisinger** — collaborator, noted in same planning window; Baz Dreisinger is a justice reform author and educator (*Incarceration Nations*, NYU Prison Education Program)
-- **Ben Knight / Nicholas Marchesi OAM** — ACT founders holding the campaign strategy
+- **Nicholas Marchesi OAM** — built the physical installation; constructed rooms, wired electronics, embedded technology that bridges experience to action
+- **Benjamin Knight** — campaign strategy and evidence layer; followed paper trails from funding records to human cost
+- **Joe Kwon** — collaborator, noted in planning records (Feb 2026) for CONTAINED development; [[confit-pathways|ConFit Pathways]] founder with lived incarceration experience
+- **Baz Dreisinger** — collaborator, noted in same planning window; justice reform author and educator (*Incarceration Nations*, NYU Prison Education Program)
+- **Isaiah** — young man who survived the system and helped build the first version of the Voices Room; now works at Interlace Advisory, having gone from surviving the system to redesigning it
 
 ## Status
 
 - **Project code:** ACT-CN
 - **Tier:** Satellite (studio category — art/advocacy)
 - **Status:** Active
+- **Launch:** April 20, 2026 (national touring schedule)
 - **Xero tracking:** ACT-CN — Contained
 - **ALMA program:** community-spaces
 - **Revenue to date:** $31,500 (Dusseldorp $16.5K + Mounty Yarns $15K)
+
+## Published Writing
+
+- "Building Revolution in Shipping Containers: The Story of CONTAINED" (2025-10-24) — the making of CONTAINED; Ben and Nick's roles; the four-room structure; the campaign as infrastructure for transformation
+- "The Cure Already Exists" (2026-03-12) — launch essay; CONTAINED as the vehicle for the evidence that communities already have the answers; Oonchiumpa, PICC, Mounty Yarns, Goods on Country
 
 ## Backlinks
 
@@ -121,3 +201,8 @@ The Art phase is not the final step — it's the re-entry point. People who walk
 - [[third-reality|The Third Reality]] — the methodology CONTAINED demonstrates
 - [[the-harvest|The Harvest Witta]] — permanent Contained Wall installation planned
 - [[acco-sector-analysis|ACCO Sector Analysis]] — sector context for who CONTAINED serves
+- [[youth-justice-reform|Youth Justice Reform]] — the broader reform thesis CONTAINED campaigns for
+- [[campfire|CAMPFIRE]] — Mount Isa program featured in the Solutions Room
+- [[confit-pathways|ConFit Pathways]] — featured in the Solutions Room; Joe Kwon is a CONTAINED collaborator
+- [[resoleution|ReSOLEution]] — featured in the Solutions Room
+- [[oonchiumpa|Oonchiumpa]] — Alice Springs, featured in the Solutions Room

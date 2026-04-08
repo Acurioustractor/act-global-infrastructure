@@ -5,7 +5,27 @@ description: ACT Wikipedia — ingest sources, query knowledge, lint for gaps, a
 
 # ACT Wikipedia Skill
 
-LLM-managed knowledge base at `wiki/` following the Karpathy pattern. The wiki is the domain of the LLM — humans curate sources, the LLM compiles and maintains articles.
+LLM-managed knowledge base at `wiki/` following the Karpathy second-brain pattern. The wiki is the domain of the LLM — humans curate sources, the LLM compiles and maintains articles. **Questions feed back as synthesis articles**, so curiosity literally makes the system smarter.
+
+## Folder layout (second-brain pattern)
+
+```
+wiki/
+  raw/          ← immutable source documents (never edit)
+  sources/      ← one summary per ingested raw file
+  concepts/     ← frameworks, methodologies, theories
+  projects/, people/, communities/, art/, finance/, technical/, decisions/, research/, stories/
+  synthesis/    ← THE COMPOUNDING LAYER — answers built by /wiki query
+  output/       ← reports, audits, lint results (not part of the article graph)
+  log.md        ← append-only timeline of every wiki operation
+  index.md      ← master catalog
+```
+
+The four layers that compound:
+- **Sources** — what was ingested (one summary per raw file in `sources/`)
+- **Entities & concepts** — the things sources are *about*
+- **Synthesis** — the answers to your *questions*, saved permanently so the next query builds on them
+- **Output** — reports the wiki *generated*, not part of the curated graph
 
 ## Commands
 
@@ -14,11 +34,15 @@ Parse the user's intent and route to the appropriate operation:
 | Trigger | Operation | Example |
 |---------|-----------|---------|
 | `/wiki ingest <path-or-url>` | Ingest | "ingest this article into the wiki" |
-| `/wiki query <question>` | Query | "what do we know about PICC?" |
+| `/wiki query <question>` | Query (read-only) | "what do we know about PICC?" |
+| `/wiki synthesize <question>` | Query + auto-save synthesis | "synthesize Diagrama vs Oonchiumpa" |
 | `/wiki lint` | Lint | "health check the wiki" |
 | `/wiki status` | Status | "how big is the wiki?" |
 | `/wiki enrich <slug>` | Enrich | "flesh out the goods-on-country article" |
+| `/wiki log [n]` | Recent activity | "what's been happening in the wiki?" |
 | `/wiki` (no args) | Status | Show current wiki stats |
+
+After **every** ingest, lint, synthesis, viewer-build or url-audit operation, append a one-line entry to `wiki/log.md` via `node scripts/wiki-log.mjs <op> "<summary>" [files...]`. The log is the second-brain timeline — without it the system can't answer "what changed and when?".
 
 ---
 
@@ -34,6 +58,8 @@ Add a new source to the wiki and update affected articles.
    - If pasted content: save to `wiki/raw/YYYY-MM-DD-<slug>.md`
 
 2. **Read the source.** Extract key entities, concepts, facts, and relationships.
+
+2a. **Write a source summary to `wiki/sources/<slug>.md`.** Always create one summary per ingested raw file. The summary captures: 1-line description, key facts (3-7 bullets), entities mentioned (linked), concepts touched (linked), and a backlink to the raw file. This is the bridge between immutable `raw/` and the curated entity/concept layer.
 
 3. **Check existing articles.** Read `wiki/index.md` to understand current wiki state. For each entity/concept found in the source, check if an article already exists.
 
@@ -91,11 +117,14 @@ Details, data, evidence.
 
 ## Operation: Query
 
-Research a question using the wiki as the knowledge base.
+Research a question using the wiki as the knowledge base. Two modes:
+
+- `/wiki query <question>` — read-only, present the answer in chat
+- `/wiki synthesize <question>` — same as query, then **automatically save the answer as a synthesis article** (no confirmation needed). This is the compounding loop — use it for any non-trivial question.
 
 ### Steps
 
-1. **Read the index.** Start at `wiki/index.md` to understand what's available.
+1. **Read the index.** Start at `wiki/index.md` to understand what's available. Also check `wiki/synthesis/index.md` — the answer may already exist.
 
 2. **Identify relevant articles.** Based on the question, determine which articles to read. Use the index and backlinks to navigate.
 
@@ -103,13 +132,26 @@ Research a question using the wiki as the knowledge base.
 
 4. **Synthesize an answer.** Combine information across articles into a coherent response. Cite which articles informed the answer.
 
-5. **Optionally file the answer.** If the query produced a valuable synthesis, offer to save it as a new article or append it to an existing one. Explorations should compound.
+5. **Save back to synthesis (the compounding step).**
+   - If the user invoked `/wiki synthesize`, immediately call:
+     ```bash
+     node scripts/wiki-save-synthesis.mjs "<question>" "<answer markdown>" <citation1.md> <citation2.md> ...
+     ```
+     Or for long answers, pipe via stdin:
+     ```bash
+     cat answer.md | node scripts/wiki-save-synthesis.mjs "<question>" --stdin <citations...>
+     ```
+   - If the user invoked `/wiki query` and the answer is non-trivial (multiple citations, real synthesis, not just a fact lookup), **proactively offer to save it**: "Want me to save this as a synthesis article so future queries can build on it?"
+   - The script writes to `wiki/synthesis/<slug>.md`, updates `wiki/synthesis/index.md`, and appends a `synthesis` entry to `wiki/log.md` automatically.
+
+6. **Report.** Tell the user what was answered, which articles were cited, and (if saved) the path to the synthesis article.
 
 ### Rules for Queries
 
-- **Always cite sources.** Reference which wiki articles informed your answer.
-- **Flag gaps.** If the wiki doesn't have enough information, say so and suggest what to ingest.
-- **Offer to file.** After answering, ask if the user wants the answer saved back to the wiki.
+- **Always cite sources.** Reference which wiki articles informed your answer. The save-synthesis script preserves citations as wikilinks.
+- **Flag gaps.** If the wiki doesn't have enough information, say so and suggest what to ingest into `raw/`.
+- **Synthesize, don't just retrieve.** A query that returns the contents of one article isn't a synthesis. A query that combines facts from 3+ articles to produce a new claim is — and that's worth saving.
+- **Don't save trivial answers.** Single-fact lookups ("what year was PICC founded?") don't need a synthesis page. Multi-source comparisons, contradictions, gap analyses, and "what's the trend across X" do.
 
 ---
 

@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "projects/mounty-yarns.md",
+                "file": "projects/the-full-idea.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "mounty-yarns"
+              "title": "the-full-idea"
             }
           }
         ]
@@ -94,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "projects/mounty-yarns.md",
+                "file": "projects/the-full-idea.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for mounty-yarns"
+              "title": "Backlinks for the-full-idea"
             }
           },
           {
@@ -113,12 +113,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "projects/mounty-yarns.md",
+                "file": "projects/the-full-idea.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from mounty-yarns"
+              "title": "Outgoing links from the-full-idea"
             }
           },
           {
@@ -156,13 +156,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "projects/mounty-yarns.md",
+                "file": "projects/the-full-idea.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of mounty-yarns"
+              "title": "Outline of the-full-idea"
             }
           }
         ]
@@ -185,31 +185,51 @@
   },
   "active": "5e77a96e65a9bda3",
   "lastOpenFiles": [
-    "raw/2026-04-06-empathy-ledger-audit.md",
-    "research/civic-transparency-movement.md",
-    "concepts/tractorpedia.md",
-    "raw/2026-04-06-project-alignment-audit.md",
-    "projects/green-harvest-witta.md",
-    "projects/goods-on-country.md",
-    "projects/gold-phone.md",
-    "projects/diagrama.md",
-    "raw/2026-04-06-notion-active-projects.md",
-    "raw/2026-04-06-website-scrapes.md",
-    "projects/goods.md",
-    "projects/dad-lab-25.md",
-    "projects/contained.md",
-    "projects/civicgraph.md",
-    "projects/mounty-yarns.md",
-    "projects/oonchiumpa.md",
-    "projects/picc.md",
-    "projects/place-based-policy-lab.md",
-    "projects/quandamooka-justice-strategy.md",
-    "projects/regional-arts-fellowship.md",
-    "projects/smart-connect.md",
-    "projects/smart-hcp-gp-uplift.md",
-    "projects/smart-recovery-gp-kits.md",
+    "output/stay-series-covers/justicehub-logo.png",
+    "output/justicehub-logo.png",
+    "output/justicehub-logo-source.png",
+    "output/stay-series-covers/jh-colophon-LOCKED.png",
+    "output/stay-series-covers/jh-colophon-D-stamp.png",
+    "output/stay-series-covers/jh-colophon-C-waxseal.png",
+    "output/stay-series-covers/jh-colophon-B-letterpress.png",
+    "output/stay-series-covers/jh-colophon-A-linocut.png",
+    "output/stay-series-covers/_prompts.md",
+    "output/stay-series-covers/00-travel-diary.png",
+    "output/stay-series-covers/00-library-slipcase.png",
+    "output/stay-series-covers/00-library-shelf.png",
+    "output/stay-series-covers",
+    "output/library-hero/library-hero-prompts.md",
+    "output/library-hero",
+    "output/library-hero-prompts.md",
     "projects/the-confessional.md",
-    "projects/junes-patch.md",
-    "projects/caring-for-those-who-care.md"
+    "projects/the-full-idea.md",
+    "output/_archive/ai-slop-round",
+    "output/_archive",
+    "output/people",
+    "projects/grantscope.md",
+    "projects/three-circles.md",
+    "raw/2026-04-07-jh-minderoo-image-prompts.md",
+    "raw/2026-04-07-jh-lucy-minderoo-3year-pitch.md",
+    "raw/2026-04-07-jh-minderoo-executive-summary.md",
+    "raw/2026-04-07-jh-three-circles-proposal.md",
+    "projects/staying.md",
+    "projects/the-brave-ones.md",
+    "synthesis/the-edge-is-where-the-healing-is-justicehub-as-the-world-model-for-community-led.md",
+    "synthesis/how-does-the-tractorpedia-second-brain-pattern-compound-knowledge-over-time.md",
+    "log.md",
+    "output/index.md",
+    "sources/index.md",
+    "synthesis/index.md",
+    "output",
+    "sources",
+    "synthesis",
+    "decisions/url-audit-2026-04-07.md",
+    "decisions/url-audit-latest.json",
+    "art/art-projects.md",
+    "projects/the-caravan.md",
+    "projects/the-vagina.md",
+    "projects/redtape.md",
+    "raw/2026-03-27-meeting-nm-bk-sync-space.md",
+    "stories"
   ]
 }
