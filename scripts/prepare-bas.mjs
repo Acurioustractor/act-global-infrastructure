@@ -141,8 +141,9 @@ async function main() {
   `);
 
   // Also get RECEIVE bank transactions (direct sales income)
+  // NOTE: xero_transactions has no `reference` column — that's on xero_invoices.
   const directIncome = await q(`
-    SELECT contact_name, total::numeric(12,2), date, reference
+    SELECT contact_name, total::numeric(12,2), date
     FROM xero_transactions
     WHERE type = 'RECEIVE' AND date >= '${quarter.start}' AND date <= '${quarter.end}'
     ORDER BY total DESC
@@ -166,7 +167,7 @@ async function main() {
     push('  Direct income (bank receives):');
     push('  ' + '-'.repeat(68));
     for (const tx of directIncome) {
-      push(`  ${(tx.contact_name || '?').padEnd(30)} ${(tx.reference || '').padEnd(12)} ${fmt(tx.total).padStart(12)}`);
+      push(`  ${(tx.contact_name || '?').padEnd(30)} ${''.padEnd(12)} ${fmt(tx.total).padStart(12)}`);
       totalSales += Number(tx.total) || 0;
       // Estimate GST as 1/11 of total for GST-inclusive income
     }

@@ -1,0 +1,374 @@
+date,contact_name,total,project_code,entity_code,bank_account,has_attachments,is_reconciled,rd_eligible,rd_category,status
+2026-03-31,Uber,54.46,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-31,Uber,37.4,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-30,Dialpad,56,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-30,Uber,55.38,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-30,Uber,49.65,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-30,Uber,41.55,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-30,Uber,29.91,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-30,NAB,24.05,,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-30,Uber,18.31,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-30,Uber,17.57,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-30,Uber,16.53,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-30,Uber,16.05,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-30,Uber,15.79,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-30,Uber,14.79,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-30,Uber,13.44,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-30,Uber,12.39,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-30,Uber,7.57,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-30,NAB,4.68,,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-30,NAB,4.54,,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-30,NAB,1.96,,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-30,NAB,1.94,,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-30,NAB,1.74,,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-30,NAB,0.64,,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-30,NAB,0.61,,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-30,NAB,0.58,,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-30,NAB,0.56,,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-30,NAB,0.55,,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-30,NAB,0.52,,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-30,NAB,0.47,,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-30,NAB,0.43,,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-30,NAB,0.26,,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-30,NAB,0.03,,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-27,Uber,51.05,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-27,Webflow,38.41,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-27,Uber,17.84,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-27,Uber,9.17,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-27,NAB,1.34,ACT-HQ,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-27,NAB,0.62,ACT-HQ,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-27,NAB,0.32,ACT-HQ,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-26,NAB,17.5,ACT-HQ,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-26,Audible,16.45,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-26,Uber,9,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-26,NAB,0.32,ACT-HQ,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-25,Uber,49.96,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-25,NAB,4.59,ACT-HQ,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-25,NAB,4.25,ACT-HQ,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-25,NAB,3.47,ACT-HQ,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-25,NAB,2.48,ACT-HQ,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-25,NAB,0.78,ACT-HQ,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-24,Qantas,325.97,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-24,HighLevel,138.51,ACT-IN,ACT-ST,NAB Visa ACT #8815,true,true,false,,AUTHORISED
+2026-03-24,Uber,70.06,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-24,Railway Corporation,7.24,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-24,Smarte Carte,5,ACT-SM,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-24,NAB,4.85,ACT-HQ,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-24,NAB,2.19,ACT-HQ,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-24,NAB,0.25,ACT-HQ,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-23,Qantas,449.03,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-23,NAB,137.15,ACT-HQ,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-23,Webflow,45.55,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-23,Vercel,21.42,ACT-IN,ACT-ST,NAB Visa ACT #8815,true,true,false,,AUTHORISED
+2026-03-23,Squarespace,11.8,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-23,NAB,6.77,ACT-HQ,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-23,NAB,5.08,ACT-HQ,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-23,NAB,5.08,ACT-HQ,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-23,NAB,4.36,ACT-HQ,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-23,NAB,3.58,ACT-HQ,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-23,NAB,1.59,ACT-HQ,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-23,NAB,1,ACT-HQ,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-23,NAB,0.75,ACT-HQ,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-23,NAB,0.41,ACT-HQ,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-19,Budget,22.79,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-03-19,NAB,0.52,ACT-HQ,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-18,Uber,62.68,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-03-18,Uber,57.77,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-03-18,Uber,41.36,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-03-18,NAB,0.99,ACT-HQ,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-17,Qantas,1916.01,ACT-IN,ACT-ST,NAB Visa ACT #8815,true,true,true,core,AUTHORISED
+2026-03-17,Qantas,1916.01,ACT-IN,ACT-ST,NAB Visa ACT #8815,true,true,true,core,AUTHORISED
+2026-03-17,Uber,44.56,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-03-16,Qantas,305.05,ACT-IN,ACT-ST,NAB Visa ACT #8815,true,true,true,core,AUTHORISED
+2026-03-16,Qantas,305.05,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-03-16,Xero,75,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-03-16,Webflow,66.22,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-03-16,Uber,34.53,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-03-16,Vercel,31.52,ACT-IN,ACT-ST,NAB Visa ACT #8815,true,true,true,core,AUTHORISED
+2026-03-16,NAB,2.32,ACT-HQ,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-16,NAB,1.1,ACT-HQ,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-16,NAB,0.25,ACT-HQ,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-13,Uber,42.38,ACT-IN,ACT-ST,NAB Visa ACT #8815,true,true,true,core,AUTHORISED
+2026-03-13,Codeguide,40.78,ACT-IN,ACT-ST,NAB Visa ACT #8815,true,true,true,core,AUTHORISED
+2026-03-13,Firecrawl,13.36,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-03-13,NAB,1.43,ACT-HQ,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-13,NAB,0.47,ACT-HQ,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-11,Avis,483.6,ACT-GD,ACT-ST,NAB Visa ACT #8815,true,false,true,supporting,AUTHORISED
+2026-03-11,Telstra,180,ACT-GP,ACT-ST,NAB Visa ACT #8815,true,false,false,,AUTHORISED
+2026-03-11,OpenAI,10,ACT-IN,ACT-ST,NAB Visa ACT #8815,true,false,true,core,AUTHORISED
+2026-03-10,Fisher's Oysters,1120,ACT-IN,ACT-ST,NAB Visa ACT #8815,true,true,true,core,AUTHORISED
+2026-03-10,Anthropic,9.46,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-03-10,NAB,2.66,ACT-HQ,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-10,NAB,2.43,ACT-HQ,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-10,NAB,0.33,ACT-HQ,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-09,Paddle.com Market,69.36,ACT-IN,ACT-ST,NAB Visa ACT #8815,true,false,true,core,AUTHORISED
+2026-03-09,Anthropic,15.77,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-03-09,Uber,9.99,ACT-IN,ACT-ST,NAB Visa ACT #8815,true,true,true,core,AUTHORISED
+2026-03-09,NAB,0.6,ACT-HQ,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-09,NAB,0.55,ACT-HQ,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-06,Claude.AI,286.45,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-03-06,LinkedIn Singapore,74.99,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-03-06,HighLevel,35.81,ACT-IN,ACT-ST,NAB Visa ACT #8815,true,true,true,core,AUTHORISED
+2026-03-06,OpenAI,30,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-03-06,Apple Pty Ltd,14.99,ACT-IN,ACT-ST,NAB Visa ACT #8815,true,false,true,core,AUTHORISED
+2026-03-06,Uber,13.06,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-03-06,NAB,10.03,ACT-HQ,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-06,NAB,1.25,ACT-HQ,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-06,NAB,1.05,ACT-HQ,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-06,NAB,1.04,ACT-HQ,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-05,Fisher's Oysters,1120,ACT-HV,ACT-ST,NAB Visa ACT #8815,true,false,false,,AUTHORISED
+2026-03-04,Qantas,1366.51,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-03-04,Qantas,432.52,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-03-04,Qantas,329.22,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-03-04,Uber,56.87,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-03-04,Uber,43.28,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-03-04,Uber,31.01,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-03-03,Qantas,2178.08,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-03-03,Qantas,2001.71,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-03-03,Qantas,2001.71,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-03-03,Qantas,2001.71,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-03-03,Qantas,2001.71,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-03-03,Qantas,1236.97,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-03-03,Qantas,1112.89,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-03-03,Qantas,854.82,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-03-03,Qantas,838.74,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-03-03,Qantas,676.38,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-03-03,Qantas,452.38,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-03-03,Qantas,415.9,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-03-03,Qantas,236.16,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-03-03,Qantas,179.88,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-03-03,Uber,30.28,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-03-03,Uber,29.23,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-03-03,Uber,25.32,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-03-03,Uber,24.95,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-03-03,Uber,24.61,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-03-03,Uber,24.35,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-03-03,Uber,12.35,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-03-03,DocPlay,9.99,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-03-02,Dialpad,56,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-03-02,Webflow,37.36,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-03-02,Uber,32.43,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-03-02,OpenAI,31.05,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-03-02,Uber,29.51,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-03-02,Uber,26.41,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-03-02,Uber,25.59,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-03-02,Uber,18.98,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-03-02,OpenAI,14.11,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-03-02,Firecrawl,13.15,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-03-02,Firecrawl,12.7,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-03-02,Firecrawl,12.7,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-03-02,Firecrawl,12.7,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-03-02,NAB,2.4,ACT-HQ,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-02,NAB,1.96,ACT-HQ,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-02,NAB,1.31,ACT-HQ,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-02,NAB,1.09,ACT-HQ,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-02,NAB,0.49,ACT-HQ,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-02,NAB,0.46,ACT-HQ,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-02,NAB,0.44,ACT-HQ,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-02,NAB,0.44,ACT-HQ,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-03-02,NAB,0.44,ACT-HQ,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-02-26,Bunnings,571.1,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-02-26,Audible,16.45,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-02-25,NAB,2.43,ACT-HQ,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-02-24,HighLevel,138.31,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-02-24,Railway Corporation,7.13,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-02-24,NAB,4.84,ACT-HQ,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-02-24,NAB,0.25,ACT-HQ,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-02-23,Longara,3155,ACT-HV,ACT-ST,NAB Visa ACT #8815,true,false,false,,AUTHORISED
+2026-02-23,NAB,134.16,ACT-HQ,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-02-23,Webflow,45.49,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-02-23,Uber,22.62,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-02-23,Only Domains,19.79,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-02-23,Squarespace,11.8,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-02-23,NAB,4.36,ACT-HQ,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-02-23,NAB,1.59,ACT-HQ,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-02-23,NAB,0.69,ACT-HQ,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-02-23,NAB,0.41,ACT-HQ,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-02-19,NAB,0.52,ACT-HQ,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-02-18,Uber,66.1,ACT-IN,ACT-ST,NAB Visa ACT #8815,true,true,true,core,AUTHORISED
+2026-02-18,Vercel,28.36,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-02-18,Uber,26.41,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-02-18,NAB,1,ACT-HQ,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-02-18,NAB,0.99,ACT-HQ,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-02-17,Hinterland Aviation,187.68,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-02-17,Uber,96.69,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-02-17,Uber,58.51,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-02-16,Webflow,65.62,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-02-16,Webflow,65.62,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-02-16,Codeguide,41.09,ACT-IN,ACT-ST,NAB Visa ACT #8815,true,true,true,core,AUTHORISED
+2026-02-16,Firecrawl,29.61,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-02-16,Squarespace,18.9,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-02-16,Anthropic,15.76,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-02-16,NAB,2.3,ACT-HQ,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-02-16,NAB,2.3,ACT-HQ,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-02-16,NAB,1.44,ACT-HQ,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-02-16,NAB,1.04,ACT-HQ,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-02-16,NAB,0.66,ACT-HQ,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-02-16,NAB,0.55,ACT-HQ,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-02-13,Department of Transport and Main Roads,1058.2,ACT-IN,ACT-ST,NAB Visa ACT #8815,true,false,true,core,AUTHORISED
+2026-02-13,Xero,75,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-02-13,Uber,21.71,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-02-13,NAB,0.25,ACT-HQ,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-02-11,Uber,56.83,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-02-10,Bitwarden,17.4,ACT-DO,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-02-10,NAB,2.64,ACT-HQ,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-02-10,NAB,0.61,ACT-HQ,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-02-09,Elders Insurance,8361.21,ACT-FM,ACT-ST,NAB Visa ACT #8815,true,false,false,,AUTHORISED
+2026-02-09,Woolworths,124.1,ACT-JP,ACT-ST,NAB Visa ACT #8815,true,true,false,,AUTHORISED
+2026-02-09,Uber,42.96,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-02-09,Uber,34.25,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-02-09,Uber,34.2,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-02-09,Uber,30.81,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-02-09,Uber,26.31,ACT-IN,ACT-ST,NAB Visa ACT #8815,true,true,true,core,AUTHORISED
+2026-02-09,Uber,13.82,ACT-IN,ACT-ST,NAB Visa ACT #8815,true,true,true,core,AUTHORISED
+2026-02-09,Uber,9.99,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-02-09,NAB,5.03,ACT-HQ,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-02-08,Geebung Treasure Trove,121.92,ACT-UA,ACT-ST,NAB Visa ACT #8815,true,true,false,,AUTHORISED
+2026-02-08,The Banhmi House,33.5,ACT-EL,ACT-ST,NAB Visa ACT #8815,true,false,true,core,AUTHORISED
+2026-02-07,F V Snowdon And J R Rowden,39.8,ACT-GD,ACT-ST,NAB Visa ACT #8815,true,false,true,supporting,AUTHORISED
+2026-02-07,F V Snowdon And J R Rowden,20.5,ACT-IN,ACT-ST,NAB Visa ACT #8815,true,false,true,core,AUTHORISED
+2026-02-07,Bitwarden,17.11,ACT-DO,ACT-ST,NAB Visa ACT #8815,true,false,true,core,AUTHORISED
+2026-02-06,Esmay,306,ACT-GD,ACT-ST,NAB Visa ACT #8815,true,false,true,supporting,AUTHORISED
+2026-02-06,Montes Reef Resort,300,ACT-IN,ACT-ST,NAB Visa ACT #8815,true,false,true,core,AUTHORISED
+2026-02-06,Claude.AI,287.07,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-02-06,BP,161.9,ACT-GD,ACT-ST,NAB Visa ACT #8815,false,true,true,supporting,AUTHORISED
+2026-02-06,LinkedIn Singapore,74.99,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-02-06,HighLevel,35.88,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-02-06,Figma,31.58,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-02-06,NAB,10.05,ACT-HQ,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-02-06,NAB,1.26,ACT-HQ,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-02-06,NAB,1.11,ACT-HQ,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-02-05,Flight Bar Witta,88.95,ACT-HV,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-02-05,Southern Providore,76.09,ACT-JP,ACT-ST,NAB Visa ACT #8815,true,true,false,,AUTHORISED
+2026-02-05,Taxi Receipt,51.44,ACT-GD,ACT-ST,NAB Visa ACT #8815,true,true,true,supporting,AUTHORISED
+2026-02-05,HighLevel,35.85,ACT-IN,ACT-ST,NAB Visa ACT #8815,true,false,true,core,AUTHORISED
+2026-02-05,HighLevel,35.85,ACT-IN,ACT-ST,NAB Visa ACT #8815,true,false,true,core,AUTHORISED
+2026-02-05,Uber,32.37,ACT-IN,ACT-ST,NAB Visa ACT #8815,true,true,true,core,AUTHORISED
+2026-02-04,Thrifty,866.42,ACT-GD,ACT-ST,NAB Visa ACT #8815,true,false,true,supporting,AUTHORISED
+2026-02-04,Tennant Creek Retreat,220,ACT-10,ACT-ST,NAB Visa ACT #8815,true,true,false,,AUTHORISED
+2026-02-04,BP,161.9,ACT-GD,ACT-ST,NAB Visa ACT #8815,true,false,true,supporting,AUTHORISED
+2026-02-04,BP,125.7,ACT-GD,ACT-ST,NAB Visa ACT #8815,true,true,true,supporting,AUTHORISED
+2026-02-03,Northern Territory Government,1459.25,ACT-GD,ACT-ST,NAB Visa ACT #8815,true,false,true,supporting,AUTHORISED
+2026-02-03,Qantas Group Accommodation,140,ACT-IN,ACT-ST,NAB Visa ACT #8815,true,true,true,core,AUTHORISED
+2026-02-03,Ti Tree Farm Garden,103.76,ACT-GD,ACT-ST,NAB Visa ACT #8815,true,true,true,supporting,AUTHORISED
+2026-02-03,Devils Marbles Hotel,87.94,ACT-GD,ACT-ST,NAB Visa ACT #8815,true,false,true,supporting,AUTHORISED
+2026-02-03,DocPlay,9.99,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-02-02,Woolworths,88.43,ACT-IN,ACT-ST,NAB Visa ACT #8815,true,true,true,core,AUTHORISED
+2026-02-02,Uber,46.41,ACT-IN,ACT-ST,NAB Visa ACT #8815,true,true,true,core,AUTHORISED
+2026-02-02,Anthropic,15.85,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-02-02,Linktree,15.78,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-02-02,NAB,2.17,ACT-HQ,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-02-02,Exa Labs,0.79,ACT-IN,ACT-ST,NAB Visa ACT #8815,true,false,true,core,AUTHORISED
+2026-02-02,NAB,0.55,ACT-HQ,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-02-01,X Global LLC,62,ACT-DO,ACT-ST,NAB Visa ACT #8815,true,true,true,core,AUTHORISED
+2026-01-31,Shell,106.49,ACT-GD,ACT-ST,NAB Visa ACT #8815,true,true,true,supporting,AUTHORISED
+2026-01-30,Qantas Group Accommodation,145,ACT-IN,ACT-ST,NAB Visa ACT #8815,true,true,true,core,AUTHORISED
+2026-01-30,Qantas Group Accommodation,135,ACT-IN,ACT-ST,NAB Visa ACT #8815,true,true,true,core,AUTHORISED
+2026-01-30,Qantas Group Accommodation,130,ACT-IN,ACT-ST,NAB Visa ACT #8815,true,true,true,core,AUTHORISED
+2026-01-30,The Roastery Cafe,82.98,ACT-IN,ACT-ST,NAB Visa ACT #8815,true,true,true,core,AUTHORISED
+2026-01-30,Squarespace,72.9,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-01-30,Garmin Australasia,25,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-01-30,NAB Fee,2.55,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-01-30,NAB,1.96,ACT-HQ,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-01-30,NAB,1.1,ACT-HQ,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-01-29,Dialpad,56,ACT-IN,ACT-ST,NAB Visa ACT #8815,true,true,true,core,AUTHORISED
+2026-01-28,Nest In Witta,44.88,ACT-HV,ACT-ST,NAB Visa ACT #8815,true,true,false,,AUTHORISED
+2026-01-28,Uber,28.47,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-01-28,Uber,12.75,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-01-27,Qantas,431.73,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-01-27,Easel Software,312.71,ACT-DO,ACT-ST,NAB Visa ACT #8815,true,false,true,core,AUTHORISED
+2026-01-27,HighLevel,143.68,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-01-27,Qantas,110,ACT-IN,ACT-ST,NAB Visa ACT #8815,true,true,true,core,AUTHORISED
+2026-01-27,Mighty Networks,71.72,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-01-27,Webflow,46.69,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-01-27,Webflow,38.23,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-01-27,Audible,16.45,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-01-27,NAB Fee,10.95,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-01-27,Railway Corporation,7.32,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-01-27,NAB Fee,5.03,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-01-27,NAB Fee,2.51,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-01-27,NAB,1.63,ACT-HQ,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-01-27,NAB Fee,1.34,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-01-27,NAB,0.26,ACT-HQ,ACT-ST,NAB Visa ACT #8815,false,true,false,,AUTHORISED
+2026-01-26,IGA,366.58,ACT-GD,ACT-ST,NAB Visa ACT #8815,true,false,true,supporting,AUTHORISED
+2026-01-26,Woolworths,124.89,ACT-GD,ACT-ST,NAB Visa ACT #8815,true,true,true,supporting,AUTHORISED
+2026-01-26,Apple Pty Ltd,29.99,ACT-IN,ACT-ST,NAB Visa ACT #8815,true,true,true,core,AUTHORISED
+2026-01-26,Stradbroke Flyer Gold Cats,22,ACT-JH,ACT-ST,NAB Visa ACT #8815,true,true,true,core,AUTHORISED
+2026-01-26,7-Eleven,11.5,ACT-EL,ACT-ST,NAB Visa ACT #8815,true,true,true,core,AUTHORISED
+2026-01-26,Perrys Seafood,5.77,ACT-JH,ACT-ST,NAB Visa ACT #8815,true,true,true,core,AUTHORISED
+2026-01-25,Complete Entertainment eXchange,540,ACT-EL,ACT-ST,NAB Visa ACT #8815,true,true,true,core,AUTHORISED
+2026-01-25,Canva,17.99,ACT-IN,ACT-ST,NM Personal ,true,false,true,core,AUTHORISED
+2026-01-24,Liberty Maleny,323.67,ACT-GD,ACT-ST,NAB Visa ACT #8815,true,true,true,supporting,AUTHORISED
+2026-01-23,Ampol,95.66,ACT-RA,ACT-ST,NAB Visa ACT #8815,true,true,false,,AUTHORISED
+2026-01-23,Dept of Transport & Main Roads,78.18,ACT-IN,ACT-ST,NAB Visa ACT #8815,true,true,true,core,AUTHORISED
+2026-01-23,Railway Corporation,5,ACT-IN,ACT-ST,NAB Visa ACT #8815,true,false,true,core,AUTHORISED
+2026-01-23,NAB Fee,4.44,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-01-23,NAB Fee,3.18,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-01-23,NAB Fee,1.66,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-01-23,NAB Fee,0.41,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-01-22,Qantas,541.73,ACT-IN,ACT-ST,NAB Visa ACT #8815,true,false,true,core,AUTHORISED
+2026-01-22,Landingfolio,59,ACT-IN,ACT-ST,NAB Visa ACT #8815,true,false,true,core,AUTHORISED
+2026-01-22,Webflow,46.87,ACT-IN,ACT-ST,NAB Visa ACT #8815,true,true,true,core,AUTHORISED
+2026-01-22,Unknown Supplier,43.1,ACT-JH,ACT-ST,NAB Visa ACT #8815,true,true,true,core,AUTHORISED
+2026-01-22,Bornga - Sydney,25.38,ACT-JH,ACT-ST,NAB Visa ACT #8815,true,true,true,core,AUTHORISED
+2026-01-22,Fat Thaiger,5.58,ACT-IN,ACT-ST,NAB Visa ACT #8815,true,false,true,core,AUTHORISED
+2026-01-21,Supabase,126.22,ACT-IN,ACT-ST,NAB Visa ACT #8815,true,true,true,core,AUTHORISED
+2026-01-21,Supabase,85,ACT-IN,ACT-ST,NAB Visa ACT #8815,true,false,true,core,DELETED
+2026-01-21,Supabase,85,ACT-IN,ACT-ST,NAB Visa ACT #8815,true,false,true,core,DELETED
+2026-01-21,Nest In Witta,35.7,ACT-HV,ACT-ST,NAB Visa ACT #8815,true,true,false,,AUTHORISED
+2026-01-21,NAB Fee,1.08,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-01-20,NAB Fee,0.52,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-01-19,Uber,59.21,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-01-19,Uber,41.2,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-01-19,Updoc,39.95,ACT-IN,ACT-ST,NAB Visa ACT #8815,true,true,true,core,AUTHORISED
+2026-01-19,Uber,13.04,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-01-19,NAB Fee,2.43,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-01-19,NAB Fee,1.19,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-01-19,NAB Fee,1.08,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-01-19,NAB Fee,1.05,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-01-17,Cognition AI,30.91,ACT-DO,ACT-ST,NAB Visa ACT #8815,true,false,true,core,AUTHORISED
+2026-01-17,Vercel,20,ACT-IN,ACT-ST,NAB Visa ACT #8815,true,false,true,core,AUTHORISED
+2026-01-17,Vercel,20,ACT-IN,ACT-ST,NAB Visa ACT #8815,true,false,true,core,AUTHORISED
+2026-01-17,Vercel,20,ACT-IN,ACT-ST,NAB Visa ACT #8815,true,false,true,core,DELETED
+2026-01-16,Webflow,68.93,ACT-IN,ACT-ST,NAB Visa ACT #8815,true,true,true,core,AUTHORISED
+2026-01-15,Telstra,80,ACT-IN,ACT-ST,NAB Visa ACT #8815,true,true,true,core,AUTHORISED
+2026-01-15,NAB Fee,2.42,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-01-14,RW Pacific Traders,2000,ACT-GD,ACT-ST,NAB Visa ACT #8815,true,false,true,supporting,AUTHORISED
+2026-01-14,Webflow,68.98,ACT-IN,ACT-ST,NAB Visa ACT #8815,true,true,true,core,AUTHORISED
+2026-01-14,NAB Fee,1.52,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-01-14,NAB Fee,1.1,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-01-14,NAB Fee,0.26,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-01-13,Uber,54.97,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-01-13,Uber,48.31,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-01-12,Obsidian,5,ACT-IN,ACT-ST,NAB Visa ACT #8815,true,false,true,core,AUTHORISED
+2026-01-12,NAB Fee,2.77,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-01-12,NAB Fee,1.52,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-01-12,NAB Fee,0.58,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-01-12,NAB Fee,0.58,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-01-11,Wifi Onboard,19.95,ACT-IN,ACT-ST,NAB Visa ACT #8815,true,true,true,core,AUTHORISED
+2026-01-11,Anthropic,16.41,ACT-IN,ACT-ST,NAB Visa ACT #8815,true,true,true,core,AUTHORISED
+2026-01-09,Webflow,43.3,ACT-IN,ACT-ST,NAB Visa ACT #8815,true,true,true,core,AUTHORISED
+2026-01-09,NAB Fee,9.63,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-01-09,NAB Fee,1.04,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-01-09,NAB Fee,0.63,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-01-08,Uber,128.73,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-01-08,Uber,9.99,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-01-07,Uber,38.58,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-01-07,Bitwarden,17.75,ACT-DO,ACT-ST,NAB Visa ACT #8815,true,false,true,core,AUTHORISED
+2026-01-07,NAB Fee,1.31,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-01-06,Uber,66.07,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-01-06,NAB Fee,5.59,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-01-05,Uber,54.51,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-01-05,HighLevel,37.48,ACT-IN,ACT-ST,NAB Visa ACT #8815,true,true,true,core,AUTHORISED
+2026-01-05,HighLevel,25,ACT-IN,ACT-ST,NAB Visa ACT #8815,true,false,true,core,DELETED
+2026-01-05,HighLevel,25,ACT-IN,ACT-ST,NAB Visa ACT #8815,true,false,true,core,DELETED
+2026-01-05,Uber,19.76,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-01-05,NAB Fee,5.25,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-01-05,NAB Fee,2.17,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-01-05,NAB Fee,1.73,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-01-05,NAB Fee,0.63,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-01-05,NAB Fee,0.58,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-01-03,Zapier,49.29,ACT-IN,ACT-ST,NAB Visa ACT #8815,true,true,true,core,AUTHORISED
+2026-01-02,STARLINK INTERNET SERVICES,150,ACT-IN,ACT-ST,NAB Visa ACT #8815,true,true,true,core,AUTHORISED
+2026-01-02,NAB Fee,1.15,ACT-IN,ACT-ST,NAB Visa ACT #8815,false,true,true,core,AUTHORISED
+2026-01-01,Anthropic,16.49,ACT-IN,ACT-ST,NAB Visa ACT #8815,true,true,true,core,AUTHORISED

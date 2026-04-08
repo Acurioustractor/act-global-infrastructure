@@ -1,0 +1,8 @@
+paid_date,contact_name,invoice_number,reference,total,total_tax,project_code,income_type,status
+2026-03-20,Sonas Properties Pty Ltd,INV-0323,,37290,3390,ACT-HV,commercial,PAID
+2026-03-17,UFGC GmbH Grillparzerstraße 26 8010 Graz | Austria,INV-0320,,3267.48,300,ACT-HQ,commercial,PAID
+2026-03-14,Blue Gum Station,INV-0319,,6000,545.45,ACT-HV,commercial,PAID
+2026-02-16,Sonas Properties Pty Ltd,INV-0316,,44000,4000,ACT-HV,commercial,PAID
+2026-02-10,Berry Obsession PTY LTD,INV-0309,,13000,1181.82,ACT-HV,commercial,PAID
+2026-02-09,SMART Recovery Australia,INV-0304,,30000,2782,ACT-SM,commercial,PAID
+2026-01-20,Our Community Shed Incorporated,INV-0308,,6765,615,ACT-GD,commercial,PAID

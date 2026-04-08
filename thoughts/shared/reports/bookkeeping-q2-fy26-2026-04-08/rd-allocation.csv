@@ -1,0 +1,513 @@
+project_code,date,contact_name,total,has_attachments,rd_category,bank_account
+ACT-GD,2025-12-26,Piggyback,158.7,true,supporting,NAB Visa ACT #8815
+ACT-GD,2025-12-12,Crowne Plaza Alice Springs Lasseters,147.25,true,supporting,NAB Visa ACT #8815
+ACT-IN,2025-12-30,Qantas,1242.84,false,core,NAB Visa ACT #8815
+ACT-IN,2025-12-29,Dialpad,56,true,core,NAB Visa ACT #8815
+ACT-IN,2025-12-29,Qantas,289,true,core,NAB Visa ACT #8815
+ACT-IN,2025-12-29,NAB Fee,1.15,false,core,NAB Visa ACT #8815
+ACT-IN,2025-12-29,NAB Fee,2.58,false,core,NAB Visa ACT #8815
+ACT-IN,2025-12-29,NAB Fee,1.53,false,core,NAB Visa ACT #8815
+ACT-IN,2025-12-29,NAB Fee,5.14,false,core,NAB Visa ACT #8815
+ACT-IN,2025-12-29,NAB Fee,1.96,false,core,NAB Visa ACT #8815
+ACT-IN,2025-12-29,NAB Fee,1.38,false,core,NAB Visa ACT #8815
+ACT-IN,2025-12-29,NAB Fee,0.52,false,core,NAB Visa ACT #8815
+ACT-IN,2025-12-29,NAB Fee,0.26,false,core,NAB Visa ACT #8815
+ACT-IN,2025-12-29,NAB Fee,1.68,false,core,NAB Visa ACT #8815
+ACT-IN,2025-12-28,Dialpad,56,true,core,NAB Visa ACT #8815
+ACT-IN,2025-12-26,Webflow,39.37,true,core,NAB Visa ACT #8815
+ACT-IN,2025-12-25,OpenAI,14.91,true,core,NAB Visa ACT #8815
+ACT-IN,2025-12-24,Webflow,43.22,true,core,NAB Visa ACT #8815
+ACT-IN,2025-12-24,Webflow,47.54,true,core,NAB Visa ACT #8815
+ACT-IN,2025-12-23,Railway Corporation,5,true,core,NAB Visa ACT #8815
+ACT-IN,2025-12-22,NAB Fee,0.41,false,core,NAB Visa ACT #8815
+ACT-IN,2025-12-22,NAB Fee,4.19,false,core,NAB Visa ACT #8815
+ACT-IN,2025-12-22,NAB Fee,3.12,false,core,NAB Visa ACT #8815
+ACT-IN,2025-12-22,NAB Fee,0.52,false,core,NAB Visa ACT #8815
+ACT-IN,2025-12-22,NAB Fee,7.7,false,core,NAB Visa ACT #8815
+ACT-IN,2025-12-22,Webflow,48.14,true,core,NAB Visa ACT #8815
+ACT-IN,2025-12-22,NAB Fee,1.69,false,core,NAB Visa ACT #8815
+ACT-IN,2025-12-21,Supabase,79.01,true,core,NAB Visa ACT #8815
+ACT-IN,2025-12-19,Qantas,56.37,false,core,NAB Visa ACT #8815
+ACT-IN,2025-12-19,Qantas,242.23,false,core,NAB Visa ACT #8815
+ACT-IN,2025-12-19,NAB Fee,1.06,false,core,NAB Visa ACT #8815
+ACT-IN,2025-12-19,Qantas,259.16,false,core,NAB Visa ACT #8815
+ACT-IN,2025-12-19,Updoc,39.95,true,core,NAB Visa ACT #8815
+ACT-IN,2025-12-19,Yianis Greek Restaurant,137,true,core,NAB Visa ACT #8815
+ACT-IN,2025-12-18,Qantas,130,false,core,NAB Visa ACT #8815
+ACT-IN,2025-12-18,Qantas,65,false,core,NAB Visa ACT #8815
+ACT-IN,2025-12-18,Telstra,80,false,core,NAB Visa ACT #8815
+ACT-IN,2025-12-17,NAB Fee,2.44,false,core,NAB Visa ACT #8815
+ACT-IN,2025-12-16,Telstra,80,true,core,NAB Visa ACT #8815
+ACT-IN,2025-12-16,Webflow,69.61,true,core,NAB Visa ACT #8815
+ACT-IN,2025-12-16,Qantas,114.33,false,core,NAB Visa ACT #8815
+ACT-IN,2025-12-15,Qantas,171,false,core,NAB Visa ACT #8815
+ACT-IN,2025-12-15,NAB Fee,6.28,false,core,NAB Visa ACT #8815
+ACT-IN,2025-12-15,NAB Fee,2.44,false,core,NAB Visa ACT #8815
+ACT-IN,2025-12-15,NAB Fee,3.17,false,core,NAB Visa ACT #8815
+ACT-IN,2025-12-15,Qantas,135,false,core,NAB Visa ACT #8815
+ACT-IN,2025-12-15,NAB Fee,1.53,false,core,NAB Visa ACT #8815
+ACT-IN,2025-12-14,Mighty Networks,178.76,true,core,NAB Visa ACT #8815
+ACT-IN,2025-12-14,Webflow,69.4,true,core,NAB Visa ACT #8815
+ACT-IN,2025-12-11,NAB Fee,1.53,false,core,NAB Visa ACT #8815
+ACT-IN,2025-12-11,OpenAI,90.39,true,core,NAB Visa ACT #8815
+ACT-IN,2025-12-11,NAB Fee,2.8,false,core,NAB Visa ACT #8815
+ACT-IN,2025-12-10,Uber,46.22,false,core,NAB Visa ACT #8815
+ACT-IN,2025-12-10,Uber,74.48,false,core,NAB Visa ACT #8815
+ACT-IN,2025-12-10,Uber,16.1,false,core,NAB Visa ACT #8815
+ACT-IN,2025-12-10,Uber,17.77,false,core,NAB Visa ACT #8815
+ACT-IN,2025-12-09,Uber,177.48,false,core,NAB Visa ACT #8815
+ACT-IN,2025-12-09,Uber,26.62,false,core,NAB Visa ACT #8815
+ACT-IN,2025-12-09,Uber,46.25,false,core,NAB Visa ACT #8815
+ACT-IN,2025-12-09,Uber,32.07,false,core,NAB Visa ACT #8815
+ACT-IN,2025-12-09,Uber,39.37,false,core,NAB Visa ACT #8815
+ACT-IN,2025-12-09,Webflow,43.66,true,core,NAB Visa ACT #8815
+ACT-IN,2025-12-09,Uber,47.44,false,core,NAB Visa ACT #8815
+ACT-IN,2025-12-09,Uber,3.94,false,core,NAB Visa ACT #8815
+ACT-IN,2025-12-09,Uber,58.63,false,core,NAB Visa ACT #8815
+ACT-IN,2025-12-08,Uber,67.5,false,core,NAB Visa ACT #8815
+ACT-IN,2025-12-08,Uber,91.83,false,core,NAB Visa ACT #8815
+ACT-IN,2025-12-08,Uber,12.69,false,core,NAB Visa ACT #8815
+ACT-IN,2025-12-08,Uber,15.5,false,core,NAB Visa ACT #8815
+ACT-IN,2025-12-08,Uber,68.55,false,core,NAB Visa ACT #8815
+ACT-IN,2025-12-08,Uber,9.99,false,core,NAB Visa ACT #8815
+ACT-IN,2025-12-06,Amazon,16.45,true,core,NAB Visa ACT #8815
+ACT-IN,2025-12-05,Uber,24.85,false,core,NAB Visa ACT #8815
+ACT-IN,2025-12-05,NAB Fee,1.77,false,core,NAB Visa ACT #8815
+ACT-IN,2025-12-04,NAB Fee,0.64,false,core,NAB Visa ACT #8815
+ACT-IN,2025-12-04,NAB Fee,5.36,false,core,NAB Visa ACT #8815
+ACT-IN,2025-12-03,NAB Fee,0.53,false,core,NAB Visa ACT #8815
+ACT-IN,2025-12-03,Uber,55.61,false,core,NAB Visa ACT #8815
+ACT-IN,2025-12-02,Uber,24.11,false,core,NAB Visa ACT #8815
+ACT-IN,2025-12-02,Uber,27.27,false,core,NAB Visa ACT #8815
+ACT-IN,2025-12-02,Bunnings Warehouse,49.98,true,core,NAB Visa ACT #8815
+ACT-IN,2025-12-02,Uber,26.08,false,core,NAB Visa ACT #8815
+ACT-IN,2025-12-02,Qantas,975.23,false,core,NAB Visa ACT #8815
+ACT-IN,2025-12-01,NAB Fee,1.96,false,core,NAB Visa ACT #8815
+ACT-IN,2025-12-01,Uber,81.6,false,core,NAB Visa ACT #8815
+ACT-IN,2025-12-01,Uber,24.54,false,core,NAB Visa ACT #8815
+ACT-IN,2025-12-01,Uber,45.07,false,core,NAB Visa ACT #8815
+ACT-IN,2025-12-01,Uber,47.51,false,core,NAB Visa ACT #8815
+ACT-IN,2025-12-01,NAB Fee,1.18,false,core,NAB Visa ACT #8815
+ACT-IN,2025-12-01,Uber,56.98,false,core,NAB Visa ACT #8815
+ACT-IN,2025-12-01,Uber,42.66,false,core,NAB Visa ACT #8815
+ACT-IN,2025-12-01,Uber,8.28,false,core,NAB Visa ACT #8815
+ACT-IN,2025-12-01,NAB Fee,1.18,false,core,NAB Visa ACT #8815
+ACT-IN,2025-12-01,Uber,32.84,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-28,NAB Fee,1.43,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-26,Uber,17.03,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-26,NAB Fee,2.67,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-26,Webflow,40.6,true,core,NAB Visa ACT #8815
+ACT-IN,2025-11-25,Uber,41.63,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-25,Qantas,593.2,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-25,Qantas,1636.08,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-25,Uber,19.33,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-24,GoPayID,1.39,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-24,NAB Fee,0.05,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-24,NAB Fee,12.21,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-24,NAB Fee,1.58,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-24,GoPayID,1.2,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-24,NAB Fee,2.55,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-24,NAB Fee,1.74,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-24,GoPayID,1.39,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-24,NAB Fee,1.48,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-24,Uber,63.05,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-24,NAB Fee,0.04,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-24,NAB Fee,5.82,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-24,NAB Fee,0.05,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-24,NAB Fee,0.05,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-24,NAB Fee,0.05,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-24,Webflow,49.38,true,core,NAB Visa ACT #8815
+ACT-IN,2025-11-24,NAB Fee,3.41,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-24,Webflow,45.18,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-24,NAB Fee,0.41,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-24,Webflow,44.89,true,core,NAB Visa ACT #8815
+ACT-IN,2025-11-24,NAB Fee,0.05,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-24,GoPayID,1.39,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-24,NAB Fee,15.67,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-24,GoPayID,1.39,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-24,Webflow,42.2,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-24,NAB Fee,0.06,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-24,NAB Fee,6.2,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-24,Webflow,49.7,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-24,GoPayID,1.44,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-24,GoPayID,1.57,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-24,Descript,447.62,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-24,Webflow,49.38,true,core,NAB Visa ACT #8815
+ACT-IN,2025-11-24,NAB Fee,0.04,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-24,Uber,63.05,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-24,NAB Fee,0.05,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-22,Webflow,49.47,true,core,NAB Visa ACT #8815
+ACT-IN,2025-11-21,Qantas,281.7,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-21,Qantas,443.3,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-21,Descript,446.46,true,core,NAB Visa ACT #8815
+ACT-IN,2025-11-21,GoPayID,1.48,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-21,NAB Fee,0.05,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-21,GoPayID,1.48,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-21,NAB Fee,0.05,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-21,NAB Fee,6.97,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-21,NAB Fee,2.43,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-21,NAB Fee,0.05,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-21,Qantas,443.3,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-21,GoPayID,1.29,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-21,NAB Fee,4.85,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-21,Qantas,281.7,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-21,NAB Fee,1.93,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-20,Cursor AI,30.86,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-20,NAB Fee,1.08,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-20,Qantas,766.65,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-20,Qantas,868.14,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-20,NAB Fee,0.52,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-20,Qantas,508.18,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-20,Qantas,766.65,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-20,Qantas,766.65,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-20,Updoc,39.95,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-20,NAB Fee,0.03,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-20,NAB Fee,0.45,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-20,Qantas,508.18,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-20,Qantas,868.14,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-19,GoPayID,1.06,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-19,NAB Fee,0.04,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-19,Updoc,39.95,true,core,NAB Visa ACT #8815
+ACT-IN,2025-11-19,NAB Fee,0.02,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-19,GoPayID,0.64,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-18,Qantas,1199.29,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-18,Qantas,1199.29,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-17,Apple Pty Ltd,11.99,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-17,Uber,57.04,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-17,NAB Fee,2.48,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-17,Webflow,70.84,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-17,Uber,65.17,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-17,Qantas,718.5,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-17,Qantas,275,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-17,NAB Fee,7.16,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-17,Qantas,135,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-17,Amazon Prime,9.99,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-17,NAB Fee,13.78,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-17,NAB Fee,6.39,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-17,Webflow,71.05,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-17,Uber,57.04,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-17,Qantas,176.38,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-17,NAB Fee,2.49,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-16,Webflow,70.89,true,core,NAB Visa ACT #8815
+ACT-IN,2025-11-15,Telstra,80,true,core,NAB Visa ACT #8815
+ACT-IN,2025-11-14,Mighty Networks,182.12,true,core,NAB Visa ACT #8815
+ACT-IN,2025-11-13,NAB Fee,1.02,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-13,Xero,75,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-13,NAB Fee,1.56,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-12,OpenAI,92.14,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-12,Uber,90.45,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-12,NAB International Fee,3.22,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-12,Uber,90.45,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-12,Uber,40.99,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-12,NAB Fee,3.22,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-12,Uber,40.99,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-11,Uber,5,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-11,Uber,5,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-11,Uber,13.3,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-11,Qantas,249,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-11,Uber,65.52,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-11,Uber,65.52,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-11,Uber,75.07,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-11,OpenAI,92.01,true,core,NAB Visa ACT #8815
+ACT-IN,2025-11-11,Uber,13.3,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-11,Uber,75.07,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-11,Qantas,1913.31,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-10,Webflow,44.86,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-10,NAB International Fee,5.72,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-10,Uber,9.99,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-10,Webflow,49.34,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-10,NAB Fee,0.6,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-10,Notion Labs,163.34,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-10,Qantas,348.41,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-10,NAB Fee,5.72,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-10,Apple Pty Ltd,14.99,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-10,NAB International Fee,1.57,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-10,NAB Fee,1.57,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-10,Anthropic,17.01,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-10,Uber,9.99,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-10,NAB International Fee,1.73,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-10,NAB International Fee,0.6,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-10,NAB Fee,1.73,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-09,Webflow,44.68,true,core,NAB Visa ACT #8815
+ACT-IN,2025-11-07,Audible,16.45,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-06,LinkedIn Singapore,74.99,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-05,NAB Fee,1.77,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-05,NAB International Fee,1.77,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-04,Uber,60.43,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-04,Uber,60.43,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-04,Belong,35,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-04,Qantas,260,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-04,Qantas,65,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-03,Claude.AI,153.12,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-03,NAB International Fee,2.63,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-03,Uber,99.76,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-03,NAB International Fee,5.36,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-03,DocPlay,9.99,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-03,Zapier,50.33,true,core,NAB Visa ACT #8815
+ACT-IN,2025-11-03,Uber,99.76,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-03,NAB International Fee,0.64,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-03,Linktree,8.05,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-03,Google,51.54,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-03,NAB Fee,5.36,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-03,NAB Fee,2.63,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-03,NAB Fee,0.64,false,core,NAB Visa ACT #8815
+ACT-IN,2025-11-01,Zapier,50.42,true,core,NAB Visa ACT #8815
+ACT-IN,2025-10-31,Goget,12.25,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-31,Uber,102.54,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-31,Uber,9.44,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-31,Uber,102.54,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-31,Uber,9.44,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-31,NAB International Fee,1.18,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-31,Uber,18.67,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-31,Uber,29.38,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-31,Goget,12.25,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-31,Uber,29.38,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-31,NAB Fee,1.18,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-31,Uber,18.67,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-30,Qantas,746.71,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-30,Uber,23.48,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-30,GoGet Carshare,12.25,true,core,NAB Visa ACT #8815
+ACT-IN,2025-10-30,Garmin Australasia,33,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-30,Uber,36.99,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-30,Qantas,746.71,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-30,GoGet Carshare,12.25,true,core,NAB Visa ACT #8815
+ACT-IN,2025-10-30,Uber,36.99,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-30,Uber,23.48,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-29,NAB Fee,1.18,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-29,Uber,46,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-29,NAB International Fee,1.96,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-29,NAB Fee,1.96,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-29,Dialpad,56,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-29,Uber,46,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-29,Qantas,438.97,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-29,NAB International Fee,1.18,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-29,Qantas,598.18,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-29,Qantas,110,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-29,OpenAI,33.63,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-28,Qantas,1418.45,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-28,Qantas,1418.45,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-28,Qantas,1549.09,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-28,Uber,42.48,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-28,Qantas,629.1,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-28,Qantas,1549.09,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-28,Qantas,1549.09,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-28,Uber,42.48,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-28,Qantas,629.1,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-27,Uber,14.95,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-27,Cabcharge,37.46,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-27,Uber,42.79,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-27,Cabcharge,47.94,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-27,Uber,44.08,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-27,Cabcharge,52.88,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-27,Uber,16.12,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-27,Uber,31.87,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-27,Cabcharge,57.6,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-27,Audible,16.45,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-27,Uber,31.87,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-27,NAB International Fee,2.65,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-27,Uber,42.79,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-27,Uber Eats,42.2,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-27,Uber,64.72,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-27,Uber,64.72,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-27,NAB Fee,2.65,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-27,Uber,44.08,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-27,Uber,42.2,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-27,Uber,46.31,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-27,NAB International Fee,4.09,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-27,Uber Eats,46.31,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-27,NAB Fee,4.09,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-27,Uber,16.12,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-27,Webflow,116.93,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-27,Cabcharge,65.16,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-27,Mighty Networks,75.66,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-24,NAB Fee,1.57,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-24,NAB Fee,0.27,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-24,Uber,20.22,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-24,Uber,21.9,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-24,NAB International Fee,1.57,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-24,Uber,22.5,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-24,NAB International Fee,1.72,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-24,Webflow,49.26,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-24,Uber,42.55,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-24,Uber,29.05,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-24,Goget,78.96,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-24,Uber,21.9,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-24,Uber,29.05,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-24,NAB Fee,1.72,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-24,Uber,20.22,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-24,Webflow,44.78,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-24,NAB International Fee,0.27,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-24,Goget,55.76,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-24,Uber,42.55,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-24,Uber,22.5,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-23,Uber,17.83,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-23,Only Domains,21.44,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-23,Uber,17.83,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-23,GoGet Carshare,78.96,true,core,NAB Visa ACT #8815
+ACT-IN,2025-10-23,NAB Fee,0.75,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-23,GoGet Carshare,55.76,true,core,NAB Visa ACT #8815
+ACT-IN,2025-10-23,Uber,30.62,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-23,Uber,30.62,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-23,Uber,19.73,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-23,NAB International Fee,0.75,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-23,Uber,19.73,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-22,NAB International Fee,1.73,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-22,Uber,25.79,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-22,Uber,21.1,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-22,Webflow,49.3,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-22,NAB International Fee,2.9,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-22,NAB Fee,2.9,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-22,Uber,25.79,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-22,Supabase,82.94,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-22,NAB Fee,0.41,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-22,Uber,30.62,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-22,NAB Fee,1.73,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-22,Uber,22.99,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-22,Uber,21.1,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-22,Uber,20.35,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-22,Uber,21.42,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-22,Uber,30.62,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-22,NAB International Fee,0.41,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-22,Uber,20.35,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-22,Uber,22.99,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-21,Uber,64.37,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-21,Uber,24,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-21,Uber,26.59,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-21,Uber,24,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-21,Uber,78.48,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-21,Uber,26.17,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-21,Uber,78.48,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-21,Uber,26.17,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-21,Uber,64.37,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-21,Uber,28.8,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-21,Uber,28.8,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-21,Uber,26.59,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-20,Uber,19.81,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-20,Uber,19.76,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-20,Uber,19.81,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-20,Cursor AI,31.05,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-20,Uber,19.76,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-20,Uber,11.45,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-20,NAB International Fee,1.09,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-20,Uber,31.56,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-20,Uber,31.56,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-20,NAB Fee,1.09,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-20,Uber,28.17,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-20,Uber,28.17,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-20,Uber,11.45,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-19,Updoc,39.95,true,core,NAB Visa ACT #8815
+ACT-IN,2025-10-16,Uber,37.92,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-16,Uber,32.95,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-16,NAB Fee,2.5,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-16,Webflow,71.35,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-16,Uber,48.99,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-16,NAB International Fee,2.5,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-16,Uber,48.99,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-16,Uber,18.47,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-16,Uber,32.95,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-16,Amazon Prime,9.99,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-16,Uber,18.47,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-16,Uber,37.92,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-15,Qantas,113.02,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-15,Uber,30.97,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-15,Qantas,110,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-15,Qantas,110,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-15,Uber Eats,17.36,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-15,Qantas,289.27,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-15,Uber,30.97,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-15,Uber,17.36,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-15,Qantas,34.21,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-15,Qantas,110,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-14,Mighty Networks,183.39,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-14,NAB International Fee,8.37,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-14,NAB Fee,2.49,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-14,Uber,69.33,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-14,NAB International Fee,5.47,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-14,NAB Fee,6.42,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-14,Uber,69.33,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-14,Webflow,71.3,true,core,NAB Visa ACT #8815
+ACT-IN,2025-10-14,Uber,37.43,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-14,NAB Fee,5.47,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-14,NAB Fee,8.37,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-14,NAB International Fee,6.42,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-14,Mighty Networks,183.64,true,core,NAB Visa ACT #8815
+ACT-IN,2025-10-14,Webflow,71.2,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-14,NAB International Fee,2.49,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-14,Uber,37.43,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-13,Uber,9.94,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-13,NAB Fee,1.57,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-13,NAB International Fee,1.57,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-13,Uber,30.73,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-13,NAB Fee,0.89,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-13,NAB International Fee,1.57,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-13,Uber,9.94,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-13,NAB Fee,1.57,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-13,OpenAI,92.78,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-13,Webflow,44.84,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-13,Xero,75,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-13,NAB Fee,3.25,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-13,Anthropic,25.51,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-13,NAB International Fee,3.25,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-13,NAB International Fee,0.89,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-13,Uber,25.71,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-13,Uber,30.73,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-11,OpenAI,91.94,true,core,NAB Visa ACT #8815
+ACT-IN,2025-10-10,Cabcharge,19.11,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-10,NAB Fee,6.64,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-10,Notion Labs,189.78,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-10,NAB International Fee,6.64,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-09,NAB Fee,1.7,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-09,Webflow,48.27,true,core,NAB Visa ACT #8815
+ACT-IN,2025-10-09,Webflow,48.67,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-09,NAB International Fee,1.7,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-09,Webflow,43.88,true,core,NAB Visa ACT #8815
+ACT-IN,2025-10-07,NAB Fee,0.82,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-07,NAB International Fee,0.82,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-07,Uber,35.99,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-07,Uber,25,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-07,Audible,16.45,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-07,Uber,25,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-07,Uber,35.99,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-06,LinkedIn Singapore,74.99,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-06,Belong,35,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-06,NAB International Fee,1.76,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-06,NAB Fee,0.96,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-06,NAB Fee,1.76,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-06,NAB International Fee,0.96,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-03,Uber,42.29,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-03,Uber,36.28,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-03,Uber,42.29,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-03,Uber,14.32,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-03,NAB Fee,5.32,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-03,Uber,36.28,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-03,Claude.AI,152.09,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-03,Uber,14.32,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-03,NAB International Fee,5.32,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-03,Uber,48.2,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-03,Uber,48.2,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-03,Zapier,50.05,true,core,NAB Visa ACT #8815
+ACT-IN,2025-10-02,Qantas,688.2,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-02,Uber,23.06,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-02,NAB Fee,2.61,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-02,Uber,23.06,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-02,NAB International Fee,2.61,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-02,Uber,21.64,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-02,DocPlay,9.99,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-02,Uber,16.81,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-02,Uber,26.43,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-02,Uber,21.64,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-02,Uber,26.43,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-02,Uber,16.81,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-01,Uber,51.24,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-01,Uber,22.4,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-01,Uber,26.19,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-01,Uber,26.19,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-01,Uber,57.88,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-01,Uber,51.24,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-01,Uber,35,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-01,Uber,57.88,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-01,Linktree,8.2,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-01,Uber,71.25,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-01,Uber,71.25,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-01,Uber,22.4,false,core,NAB Visa ACT #8815
+ACT-IN,2025-10-01,Qantas,449.26,false,core,NAB Visa ACT #8815
