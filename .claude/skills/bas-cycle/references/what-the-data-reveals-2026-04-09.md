@@ -263,54 +263,151 @@ The current state is a one-time heroic cleanup. The goal is for the system to st
 
 ---
 
-## Specific next 90-day steps (in priority order)
+## Specific next 90-day steps (CEO-reviewed 2026-04-09)
 
-### 1. Lock in the Q2 BAS lodgement (days 1-7)
-- Nic runs the reconciliation runbook (60 min)
-- Send accountant the Q2 + Q3 BAS package
-- Lodge Q2 before penalty accrual; lodge Q3 before 28 April deadline
-- **Outcome:** no more overdue BAS, penalty clock stops
+This roadmap was reviewed via `/plan-ceo-review` and restructured. The original sequence buried the highest-dollar item (R&D eligibility tagger) at position #5, risking the FY26 R&D refund window. The critical insight: **the R&D tax refund is ~$36-48k, which is an order of magnitude larger than anything else on the plan.** It has a June 30 deadline. Everything that follows reflects that priority.
 
-### 2. Run the cron (day 8)
-- Add weekly `gmail-to-xero-pipeline.mjs` to PM2
-- Add weekly `sync-xero-to-supabase.mjs` to PM2
-- Add weekly `bas-completeness.mjs` to PM2 with a Slack/email alert if coverage drops below 90%
+**Mode:** Approach B — "Protect the flank, then expand." Front-load the urgent high-$ items. Defer speculative work (dashboards, trip analysis) until real operational data shows they're needed.
+
+### Phase 1 — Protect the urgent stuff (days 1-14)
+
+**Step 1 — Lock in Q2+Q3 BAS lodgement (days 1-7)**
+- Nic runs `nic-reconciliation-runbook.md` (~60 min in Xero UI)
+- Send accountant the BAS package
+- Lodge Q2 before penalty accrual; lodge Q3 before 28 April
+- **Dollar stakes:** unknown but material penalty clock + accountant fees
+- **Outcome:** no more overdue BAS
+
+**Step 2 — R&D eligibility tagger (days 8-10)** ⭐ **promoted from item #5**
+- Extend existing `tag-transactions` skill with an R&D-eligible classifier
+- Tag every DIRECT receipt across FY26 (Q1+Q2+Q3 + partial Q4) as R&D-eligible / not / uncertain
+- Generate R&D spend report per project code
+- **Dollar stakes:** $36-48k refund at 43.5% on an estimated $85-110k R&D-eligible spend
+- **Outcome:** R&D tax claim is defensible, refund window protected
+- **Why now, not later:** AusIndustry registration for FY26 has to happen before 30 June. Burning days 1-20 on operational hygiene before starting R&D tagging cuts the buffer unacceptably.
+
+**Step 3 — Weekly cron setup (day 11)**
+- PM2 entries for `gmail-to-xero-pipeline.mjs --apply` (Sunday night)
+- PM2 entry for `sync-xero-to-supabase.mjs` (daily morning)
+- PM2 entry for `bas-completeness.mjs` (Monday morning, alert if coverage < 90%)
 - **Outcome:** system is self-maintaining from here
 
-### 3. Cancel Dext (day 9)
-- Verify last 30 days of receipts came from other sources
-- Cancel subscription
-- **Outcome:** $50-100/month saved
+**Step 4 — Project code backfill (days 12-14)**
+- Run existing `tag-transactions` skill in bulk mode on FY26 SPEND
+- Use Xero tracking categories + vendor rules + calendar events
+- **Outcome:** per-project P&L becomes possible (feeds R&D report quality)
+- **Reuses:** existing skill, not a new script
 
-### 4. Backfill project codes (days 10-14)
-- Run `tag-transactions` skill in bulk mode on FY26 SPEND
-- Use Xero's tracking categories + vendor rules + calendar events
-- **Outcome:** per-project P&L becomes possible
+### Phase 2 — Verify then streamline (days 15-30)
 
-### 5. Build R&D eligibility tagger (days 15-20)
-- Similar to tag-transactions but with R&D-specific rules
-- Tag SaaS + contractor + eligible travel as R&D-eligible
-- **Outcome:** R&D tax claim shape is clear
+**Step 5 — Dext cancellation (day 15)** ⬇ **deferred from item #3**
+- **Why deferred:** we don't yet have 2 full weekly cron runs proving the replacement captures everything Dext was catching. Cancel too early and we go blind on whatever we forgot to vendor-map in `gmail-vendor-queries.mjs`.
+- Prerequisite: two consecutive weekly cron runs must complete cleanly, and Q2+Q3 coverage must stay at 94%+ with no new unreceipted vendors showing up
+- **Dollar stakes:** ~$50-100/month saved after cancellation
+- **Outcome:** Dext subscription cancelled, replacement verified
 
-### 6. Q3 retrospective + lodgement (day 21 onwards)
-- Run `bas-retrospective.mjs Q3` after lodgement
-- Extract learnings
-- **Outcome:** the skill knows one more quarter's worth
+**Step 6 — Q3 retrospective + lodgement (day 21+)**
+- Run `bas-retrospective.mjs Q3` after Q3 is lodged
+- Extract any new learnings into `quarterly-learnings.md`
+- Update `vendor-patterns.md` with any new vendor quirks discovered
+- **Outcome:** skill knowledge compounds by one more quarter
 
-### 7. Generate the first trip-level analysis (day 30)
-- Cross-reference Qantas bookings with calendar events
-- Output cost-per-trip report grouped by project code
-- **Outcome:** real data for the "is our travel pattern right?" question
+**Step 7 — Evaluation gate (day 30)**
+- Review the last two weeks of weekly cron output
+- Answer honestly: is the system self-maintaining? Is coverage staying ≥ 94%?
+- Answer honestly: what's the ACTUAL decision we need finance data for in the next 30 days?
+- **Decision point:** only proceed to Phase 3 with items that have a concrete decision the data would support
 
-### 8. Monthly dashboard (days 30-45)
-- Build `bas-dashboard.mjs` — HTML output, by month + project
-- Include sparklines, vendor breakdown, YoY comparison once we have more data
-- **Outcome:** finance becomes a signal source, not a chore
+### Phase 3 — Evidence-based expansion (days 30-90, conditional)
 
-### 9. Begin Q4 FY26 cycle (day 90)
-- Q4 starts 1 April. Should run mostly on autopilot via the cron.
-- First true test of the self-maintaining system
-- **Outcome:** a quarter that closes with <3 hours of human work
+**Each item below is opt-in based on what Phase 2's evaluation reveals.** Do not build these on speculation. Build them when a real decision needs them.
+
+**Step 8 (conditional) — Trip-level analysis**
+- Trigger: if Phase 2 evaluation finds we're making a travel-pattern decision (reducing trips? changing destinations? grant-reporting question?)
+- Cross-reference Qantas + Qantas Group Accommodation bills with calendar events to produce cost-per-trip breakdown
+- **Dollar stakes:** unknown — depends on whether the data changes a decision
+- **Otherwise:** skip. The data will still be there when needed.
+
+**Step 9 (conditional) — Monthly email dashboard (NOT a new web app)**
+- Trigger: if there's a specific person (accountant, board, funder) who would benefit from a monthly PDF/email report
+- Implementation: 30-line script that runs `bas-completeness` + 3 SQL queries and emails an HTML digest
+- **Warning:** do NOT build a sparkline-heavy HTML dashboard on spec. Start with plain email. Upgrade only if the email is being read and asks for more.
+- **Otherwise:** skip. "Finance as a signal source" is aspirational language that often precedes feature bloat.
+
+**Step 10 — Q4 FY26 closes on autopilot (day 90, the actual test)**
+- Q4 starts 1 April. Should run mostly on autopilot via cron + weekly hygiene + quarterly retrospective
+- This isn't a step to execute. It's a validation that Phase 1+2 succeeded.
+- **Outcome:** < 3 hours of human work for Q4 close
+
+### What the review removed from the plan (or deferred conditionally)
+
+| Original item | Status | Why |
+|---|---|---|
+| Cancel Dext (day 9) | Deferred to day 15 + verification gate | Cancelling before 2 weeks of replacement proof could leave us blind |
+| Trip-level analysis (day 30) | Made conditional | Speculative until a real travel decision needs the data |
+| Monthly dashboard (day 30-45) | Made conditional + scope-cut | "Dashboard" was turning into a web app. Plain email digest is sufficient until proven otherwise. |
+
+### Effort comparison
+
+| Approach | Hours (human) | CC+gstack | R&D refund protected | Speculative risk |
+|---|---:|---:|---|---|
+| Original (Maximalist) | 30-45 | 8-12 | Item #5 (late) | High — 2 speculative items |
+| **Approach B (this revision)** | **15-20** | **6-8** | **Item #2 (early)** | **Low — speculative items gated** |
+| Minimal viable | 10 | 4 | Missed | None |
+
+---
+
+## Review-generated TODOs (CEO review 2026-04-09)
+
+These were surfaced by the `/plan-ceo-review` pass. Each has concrete scope, effort, and priority. Add to `TODOS.md` when you create one, or pick them off directly during Phase 1.
+
+### TODO 1 — Cron coverage alerting (P1)
+- **What:** Wrap the weekly `bas-completeness.mjs` cron in a check that emails/Slacks if coverage drops below 90%
+- **Why:** Without this, cron runs silently and a broken pipeline goes undetected until quarter-end (which is exactly what this whole plan is trying to prevent)
+- **How:** 20-line wrapper script that parses the completeness output, checks the `% by value` number, POSTs to a Slack webhook or sends an email if below threshold
+- **Effort:** S (human: ~30 min / CC: ~10 min)
+- **Priority:** P1 — blocks the "self-maintaining" promise
+- **Depends on:** Step 3 (cron setup) being done first
+
+### TODO 2 — Weekly Xero token health check (P1)
+- **What:** Add `node scripts/sync-xero-tokens.mjs --dry-run` to the weekly cron and alert on failure
+- **Why:** The 3-store token drift problem is documented — if refresh tokens get invalidated, the entire pipeline goes dark until someone notices at the next quarter
+- **How:** Chain it into the existing weekly cron script; if it returns non-zero, email Nic
+- **Effort:** S (human: ~15 min / CC: ~5 min)
+- **Priority:** P1 — same silent-failure risk as TODO 1
+- **Depends on:** Step 3 (cron setup)
+
+### TODO 3 — R&D tagger sampling workflow (P1)
+- **What:** Before running the R&D tagger on the full dataset, manually verify 20 random classifications and adjust rules. After running, sample another 20 and spot-check.
+- **Why:** R&D classification is the input to a $36-48k tax refund. A 10% classification error could materially affect the claim. Sampling is the only way to catch rule bugs before they hit AusIndustry.
+- **How:** Add a `--sample 20` mode to the tagger that pulls random classified txns and writes them to a markdown file for human review
+- **Effort:** M (human: 2 hours / CC: 30 min)
+- **Priority:** P1 — part of Step 2's delivery, not a separate item
+- **Depends on:** Step 2 (R&D tagger build)
+
+### TODO 4 — Document "how to add a new vendor" in bas-cycle skill (P2)
+- **What:** Add a workflow doc to `.claude/skills/bas-cycle/workflows/adding-a-new-vendor.md` explaining how to extend `gmail-vendor-queries.mjs` when a new vendor shows up
+- **Why:** The vendor query logic currently lives in Ben's head. If Nic (or a future Claude session) needs to add a vendor, the knowledge transfer is incomplete.
+- **How:** 1-page doc with a worked example (e.g., adding a fictional "Example Corp" vendor with from-domain variants)
+- **Effort:** S (human: 20 min / CC: 5 min)
+- **Priority:** P2 — knowledge concentration fix, not urgent
+- **Depends on:** none
+
+### TODO 5 — Pty Ltd migration check (P3, for `business-research` skill)
+- **What:** Revisit whether the Pty Ltd migration (already on the business-research skill roadmap) should be accelerated based on the $137k of owner-drawings transfers revealed this session
+- **Why:** Large blurring of business/personal cash flow through NJ Marchesi Everyday ↔ NM Personal transfers suggests the current sole-trader structure is being strained. A Pty Ltd would clarify the line.
+- **How:** Not a code change — a conversation with the accountant and the `business-research` skill
+- **Effort:** unknown (human process, not code)
+- **Priority:** P3 — important but not blocked on this 90-day plan
+- **Depends on:** external (accountant, legal)
+
+### TODO 6 — Grant-cycle skill prototype (P3)
+- **What:** Apply the bas-cycle skill pattern to a grant-reporting cycle as a second proof of pattern
+- **Why:** The synthesis claims the bas-cycle pattern generalises. A grant-cycle skill would prove it.
+- **How:** Identify one grant with upcoming reporting, build a minimal skill (SKILL.md + 2-3 scripts + retro template), run one cycle
+- **Effort:** L (human: ~10 hours / CC: ~2 hours)
+- **Priority:** P3 — exciting but not urgent
+- **Depends on:** Phase 1+2 of this plan completing successfully first
 
 ---
 
