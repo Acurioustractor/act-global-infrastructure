@@ -389,6 +389,38 @@ async function uploadMatchedReceipts() {
     }
 
     try {
+      // Pre-flight: confirm the Xero entity is not DELETED/VOIDED.
+      // Xero returns 500 (not 4xx) on PUT to deleted entities, which used to
+      // surface as opaque "Xero Attachments API 500" errors. Check Status first.
+      const entityResp = await fetch(
+        `https://api.xero.com/api.xro/2.0/${entityType}/${entityId}`,
+        { headers: { 'Authorization': `Bearer ${XERO_ACCESS_TOKEN}`, 'xero-tenant-id': XERO_TENANT_ID, 'Accept': 'application/json' } }
+      );
+      if (entityResp.ok) {
+        const entityData = await entityResp.json();
+        const entity = entityData.BankTransactions?.[0] || entityData.Invoices?.[0];
+        const xStatus = entity?.Status;
+        if (xStatus === 'DELETED' || xStatus === 'VOIDED') {
+          log(`  SKIP: Xero entity is ${xStatus} — cannot attach. Resetting to captured.`);
+          await supabase.from('receipt_emails').update({
+            status: 'captured',
+            xero_bank_transaction_id: null,
+            xero_invoice_id: null,
+            xero_transaction_id: null,
+            error_message: `Xero entity ${entityId} is ${xStatus} — match invalidated`,
+          }).eq('id', receipt.id);
+          // Also fix the mirror so the matcher stops re-matching to this entity
+          if (entityType === 'BankTransactions') {
+            await supabase.from('xero_transactions')
+              .update({ has_attachments: true })
+              .eq('xero_transaction_id', entityId);
+          }
+          skipped++;
+          await sleep(XERO_DELAY_MS);
+          continue;
+        }
+      }
+
       // Check for existing attachments (don't duplicate)
       const existing = await getExistingAttachments(entityId, entityType);
       if (existing && existing.length > 0) {

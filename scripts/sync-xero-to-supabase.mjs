@@ -764,6 +764,11 @@ async function syncTransactions(options = {}) {
 
       // Build record matching schema
       // Only include project_code if Xero has tracking — never overwrite tagger-set codes with null
+      // ZOMBIE GUARD: when Xero status is DELETED or VOIDED, force has_attachments=true so
+      // downstream consumers (BAS gap sweep, matcher, bill-to-txn sync) treat them as already handled.
+      // Without this, deleted shadows re-introduce themselves on every sync and pollute every report.
+      const status = txn.Status || 'ACTIVE';
+      const isZombie = status === 'DELETED' || status === 'VOIDED';
       const record = {
         xero_transaction_id: txn.BankTransactionID,
         type: txn.Type, // RECEIVE, SPEND, TRANSFER
@@ -771,9 +776,9 @@ async function syncTransactions(options = {}) {
         bank_account: txn.BankAccount?.Name,
         ...(projectCode ? { project_code: projectCode, project_code_source: 'xero_tracking' } : {}),
         total: parseFloat(txn.Total) || 0,
-        status: txn.Status || 'ACTIVE',
+        status,
         date: parseXeroDate(txn.Date),
-        has_attachments: txn.HasAttachments || false,  // For receipt reconciliation
+        has_attachments: isZombie ? true : (txn.HasAttachments || false),
         is_reconciled: txn.IsReconciled || false,
         line_items: (txn.LineItems || []).map(li => ({
           description: li.Description,

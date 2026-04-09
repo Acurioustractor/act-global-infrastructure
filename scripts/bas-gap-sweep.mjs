@@ -134,12 +134,23 @@ async function main() {
   console.log(`\nBAS Gap Sweep — ${quarter.label}\n`);
 
   // 1. Fetch unreceipted SPEND transactions in quarter
+  // Exclude rows where every line_item is BASEXCLUDED (owner drawings have zero
+  // BAS/GST impact and shouldn't appear as "missing receipts").
   const txns = await q(`
     SELECT xero_transaction_id, date, contact_name, project_code, entity_code,
            total::numeric(12,2), bank_account, is_reconciled, rd_eligible
     FROM xero_transactions
     WHERE type = 'SPEND' AND has_attachments = false
+      AND status NOT IN ('DELETED', 'VOIDED')
       AND date >= '${quarter.start}' AND date <= '${quarter.end}'
+      AND (
+        line_items IS NULL
+        OR jsonb_array_length(line_items) = 0
+        OR EXISTS (
+          SELECT 1 FROM jsonb_array_elements(line_items) li
+          WHERE (li->>'tax_type') IS DISTINCT FROM 'BASEXCLUDED'
+        )
+      )
     ORDER BY abs(total) DESC
   `);
   console.log(`Unreceipted SPEND transactions: ${txns.length}`);

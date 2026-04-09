@@ -176,6 +176,8 @@ async function main() {
         OR lower(tx.contact_name) LIKE '%' || lower(split_part(inv.contact_name, ' ', 1)) || '%'
       )
     WHERE tx.type = 'SPEND'
+      AND tx.status = 'AUTHORISED'
+      AND inv.status NOT IN ('DELETED', 'VOIDED')
       AND tx.has_attachments = false
       AND (${rangeClause})
     ORDER BY tx.xero_transaction_id, abs(tx.date - inv.date)

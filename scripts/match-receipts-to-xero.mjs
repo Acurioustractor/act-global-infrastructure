@@ -305,8 +305,10 @@ async function main() {
   while (true) {
     const { data, error } = await supabase
       .from('xero_transactions')
-      .select('id, xero_transaction_id, contact_name, total, date, type, has_attachments, project_code')
+      .select('id, xero_transaction_id, contact_name, total, date, type, has_attachments, project_code, status')
       .in('type', ['SPEND', 'ACCPAY', 'SPEND-TRANSFER'])
+      .neq('status', 'DELETED')
+      .neq('status', 'VOIDED')
       .gte('date', cutoffStr)
       .order('date', { ascending: false })
       .range(page * PAGE_SIZE, (page + 1) * PAGE_SIZE - 1);
@@ -324,8 +326,11 @@ async function main() {
   while (true) {
     const { data, error } = await supabase
       .from('xero_invoices')
-      .select('id, xero_id, contact_name, total, date, type, has_attachments')
+      .select('id, xero_id, contact_name, total, date, type, has_attachments, status')
       .eq('type', 'ACCPAY')
+      .neq('status', 'VOIDED')
+      .neq('status', 'DELETED')
+      .neq('status', 'DRAFT')
       .gte('date', cutoffStr)
       .order('date', { ascending: false })
       .range(page * PAGE_SIZE, (page + 1) * PAGE_SIZE - 1);
@@ -366,6 +371,10 @@ async function main() {
     let bestMatch = null;
     let bestScore = 0;
 
+    // Match against ALL targets, attached or not. Attached targets confirm
+    // backfill coverage (mark as matched, skip upload). Unattached targets
+    // are upload candidates. The downstream upload script must check the
+    // existing attachment list before pushing — see Phase E idempotency.
     for (const tx of allTargets) {
       const vScore = vendorMatch(receipt.vendor_name, tx.contact_name, aliasMap);
       if (vScore === 0) continue;
@@ -375,25 +384,47 @@ async function main() {
 
       const aScore = amountScore(receipt.amount_detected, tx.total);
 
-      // Weighted scoring:
-      // - With amount: vendor 40%, date 30%, amount 30%
-      // - Without amount: vendor 55%, date 45%
-      // - Strong vendor+date boost: if vendor >=0.85 AND date >=0.8, add 10% bonus
-      let score;
-      if (receipt.amount_detected && aScore > 0) {
-        score = Math.round((vScore * 0.40 + dScore * 0.30 + aScore * 0.30) * 100);
-      } else {
-        score = Math.round((vScore * 0.55 + dScore * 0.45) * 100);
-        // Boost when vendor is very confident and date is close — amount isn't always available
-        if (vScore >= 0.85 && dScore >= 0.8) {
-          score = Math.min(score + 10, 95);
-        }
-      }
+      // HARD DISQUALIFIER 1: amount mismatch when both sides have real amounts.
+      // (aScore=0 from amountScore means >20% off.) Vendor + date alone are
+      // not enough when amount contradicts.
+      const rAmt = parseFloat(receipt.amount_detected);
+      const tAmt = parseFloat(tx.total);
+      const receiptHasAmount = !isNaN(rAmt) && rAmt !== 0;
+      const txHasAmount = !isNaN(tAmt) && tAmt !== 0;
+      if (receiptHasAmount && txHasAmount && aScore === 0) continue;
 
-      // Prefer transactions that already have the receipt (has_attachments = false)
-      // Slight penalty for transactions that already have attachments
-      if (tx.has_attachments) {
-        score = Math.max(score - 5, 0);
+      // HARD DISQUALIFIER 2: sign mismatch. A negative receipt (refund/credit)
+      // should never match a positive charge or vice versa. The dataset has
+      // many Bunnings refunds being mistakenly matched to charges.
+      if (receiptHasAmount && txHasAmount && Math.sign(rAmt) !== Math.sign(tAmt)) continue;
+
+      // Weighted scoring:
+      // - With amount (both present, aScore > 0): vendor 40%, date 30%, amount 30%
+      // - Exact bonus: vendor=1.0 AND amount=1.0 (exact) → auto-match regardless
+      //   of date drift (within 60 days). Reasoning: subscription/invoice receipts
+      //   often arrive 2-4 weeks after the bank charge; same vendor + same exact
+      //   amount within 2 months is essentially always the same transaction.
+      // - Without amount (receipt amount missing/zero): vendor 55%, date 45%, capped at 75
+      let score;
+      if (receiptHasAmount && aScore > 0) {
+        score = Math.round((vScore * 0.40 + dScore * 0.30 + aScore * 0.30) * 100);
+        // Strong vendor+date+amount → small boost
+        if (vScore >= 0.85 && dScore >= 0.8 && aScore >= 0.95) {
+          score = Math.min(score + 5, 100);
+        }
+        // EXACT MATCH PROMOTION: strong vendor (≥0.9), tight amount (within
+        // max($1, 1% of receipt)), date within 60 days → promote to 90.
+        // Bypasses the date penalty for receipts arriving weeks after the charge.
+        // Threshold of 0.9 catches alias matches like "Apple" → "Apple Pty Ltd".
+        const amtTolerance = Math.max(1.0, Math.abs(rAmt) * 0.01);
+        if (vScore >= 0.9 && Math.abs(Math.abs(rAmt) - Math.abs(tAmt)) <= amtTolerance && dScore > 0) {
+          score = Math.max(score, 90);
+        }
+      } else {
+        // No-amount path: cap at 75 so these never auto-match without human review.
+        // Prevents OCR-junk receipts from racing through on vendor+date alone.
+        score = Math.round((vScore * 0.55 + dScore * 0.45) * 100);
+        score = Math.min(score, 75);
       }
 
       if (score > bestScore) {
@@ -500,8 +531,10 @@ async function main() {
       }
     }
     log(`Applied: ${applied}/${matches.length}`);
+  }
 
-    // Mark remaining ambiguous as 'review'
+  // Mark remaining ambiguous as 'review' + write human-review report
+  if (APPLY) {
     const remainingAmbiguous = ambiguous.filter(a => a.match.score < 80);
     if (remainingAmbiguous.length > 0) {
       log(`Marking ${remainingAmbiguous.length} ambiguous as 'review'...`);
@@ -513,6 +546,27 @@ async function main() {
           new_match_method: 'needs_review',
         });
       }
+
+      // Write human-review markdown report
+      const fs = await import('fs');
+      const reportPath = `thoughts/shared/reports/ambiguous-matches-${new Date().toISOString().slice(0, 10)}.md`;
+      const sorted = [...remainingAmbiguous].sort((a, b) => b.match.score - a.match.score);
+      const lines = [
+        `# Ambiguous Receipt Matches — Human Review`,
+        `**Generated:** ${new Date().toISOString()}`,
+        `**Count:** ${sorted.length} receipts at 40-79% confidence`,
+        ``,
+        `For each row: if the candidate looks correct, run the SQL fragment to confirm. Higher score = more likely correct.`,
+        ``,
+        `| Score | Receipt vendor | Receipt amt | Receipt date | Candidate vendor | Candidate amt | Candidate date | Receipt ID | Candidate Tx ID |`,
+        `|---:|---|---:|---|---|---:|---|---|---|`,
+        ...sorted.map(({ receipt, match }) => {
+          const tx = match.tx;
+          return `| ${match.score} | ${(receipt.vendor_name || '').slice(0,30)} | $${(receipt.amount_detected || 0).toFixed(2)} | ${(receipt.received_at || '').slice(0,10)} | ${(tx.contact_name || '').slice(0,30)} | $${Math.abs(tx.total || 0).toFixed(2)} | ${(tx.date || '').slice(0,10)} | \`${receipt.id}\` | \`${tx.xero_transaction_id || tx.id}\` |`;
+        }),
+      ];
+      fs.writeFileSync(reportPath, lines.join('\n'));
+      log(`Review report: ${reportPath}`);
     }
   }
 }

@@ -145,7 +145,7 @@ async function main() {
   const directIncome = await q(`
     SELECT contact_name, total::numeric(12,2), date
     FROM xero_transactions
-    WHERE type = 'RECEIVE' AND date >= '${quarter.start}' AND date <= '${quarter.end}'
+    WHERE status NOT IN ('DELETED','VOIDED') AND type = 'RECEIVE' AND date >= '${quarter.start}' AND date <= '${quarter.end}'
     ORDER BY total DESC
   `);
 
@@ -190,7 +190,7 @@ async function main() {
     SELECT COALESCE(project_code, 'UNTAGGED') as proj, count(*)::int as cnt,
            sum(abs(total))::numeric(12,2) as total
     FROM xero_transactions
-    WHERE date >= '${quarter.start}' AND date <= '${quarter.end}' AND type = 'SPEND'
+    WHERE status NOT IN ('DELETED','VOIDED') AND date >= '${quarter.start}' AND date <= '${quarter.end}' AND type = 'SPEND'
     GROUP BY 1 ORDER BY total DESC
   `);
 
@@ -292,7 +292,7 @@ async function main() {
   const receiptCoverage = await q(`
     SELECT has_attachments, count(*)::int as cnt, sum(abs(total))::numeric(12,2) as total
     FROM xero_transactions
-    WHERE date >= '${quarter.start}' AND date <= '${quarter.end}' AND type = 'SPEND'
+    WHERE status NOT IN ('DELETED','VOIDED') AND date >= '${quarter.start}' AND date <= '${quarter.end}' AND type = 'SPEND'
     GROUP BY 1
   `);
 
@@ -312,7 +312,7 @@ async function main() {
       count(*) FILTER (WHERE project_code IS NOT NULL)::int as tagged,
       count(*)::int as total
     FROM xero_transactions
-    WHERE date >= '${quarter.start}' AND date <= '${quarter.end}' AND type = 'SPEND'
+    WHERE status NOT IN ('DELETED','VOIDED') AND date >= '${quarter.start}' AND date <= '${quarter.end}' AND type = 'SPEND'
   `);
 
   const tagged = tagCoverage[0]?.tagged || 0;
@@ -323,7 +323,7 @@ async function main() {
   const reconData = await q(`
     SELECT is_reconciled, count(*)::int as cnt
     FROM xero_transactions
-    WHERE date >= '${quarter.start}' AND date <= '${quarter.end}'
+    WHERE status NOT IN ('DELETED','VOIDED') AND date >= '${quarter.start}' AND date <= '${quarter.end}'
     GROUP BY 1
   `);
 
@@ -362,7 +362,7 @@ async function main() {
   const missingReceipts = await q(`
     SELECT contact_name, count(*)::int as cnt, sum(abs(total))::numeric(12,2) as total
     FROM xero_transactions
-    WHERE date >= '${quarter.start}' AND date <= '${quarter.end}'
+    WHERE status NOT IN ('DELETED','VOIDED') AND date >= '${quarter.start}' AND date <= '${quarter.end}'
     AND type = 'SPEND' AND has_attachments = false
     GROUP BY 1 ORDER BY total DESC LIMIT 10
   `);
@@ -381,7 +381,7 @@ async function main() {
   const untagged = await q(`
     SELECT contact_name, count(*)::int as cnt, sum(abs(total))::numeric(12,2) as total
     FROM xero_transactions
-    WHERE date >= '${quarter.start}' AND date <= '${quarter.end}'
+    WHERE status NOT IN ('DELETED','VOIDED') AND date >= '${quarter.start}' AND date <= '${quarter.end}'
     AND type = 'SPEND' AND project_code IS NULL
     GROUP BY 1 ORDER BY total DESC LIMIT 10
   `);
@@ -441,7 +441,7 @@ async function main() {
     SELECT project_code, count(*)::int as cnt, sum(abs(total))::numeric(12,2) as total,
            count(*) FILTER (WHERE has_attachments = true)::int as with_receipts
     FROM xero_transactions
-    WHERE date >= '${quarter.start}' AND date <= '${quarter.end}'
+    WHERE status NOT IN ('DELETED','VOIDED') AND date >= '${quarter.start}' AND date <= '${quarter.end}'
     AND type = 'SPEND' AND project_code IN ('ACT-EL', 'ACT-IN', 'ACT-JH', 'ACT-GD')
     GROUP BY project_code ORDER BY total DESC
   `);

@@ -72,11 +72,9 @@ The script queried a `reference` column on `xero_transactions` that doesn't exis
 
 ### 9. Mirror drift between `xero_transactions.has_attachments` and actual Xero state
 
-Confirmed twice in this session:
-- 105 transactions had `has_attachments=false` in mirror but TRUE in Xero (fixed by `_tmp-refresh-mirror.mjs` equivalent)
-- 43 `xero_invoices` rows had `has_attachments=true` in mirror but the Xero Attachments API returned empty
+Confirmed once: 105 `xero_transactions` had `has_attachments=false` in mirror but TRUE in Xero (fixed via mirror refresh).
 
-**Root cause TBD.** Possibly `IncludeOnline` flag vs real attachments, or `sync-xero-to-supabase.mjs` pulls the `HasAttachments` field but not the actual attachment list. **Open investigation for next session.**
+**`xero_invoices` mirror drift hypothesis CLOSED 2026-04-08 — was wrong.** Probed all 573 Q2+Q3 ACCPAY bills with `has_attachments=true` via the live Attachments API using `scripts/test-xero-attachment-reality.mjs`. Result: **573/573 confirmed real, 0 drift**. The "43 drifted bills" claim was based on incomplete data. There is no $5-6K of hidden recoverable receipts in mirror desync. Skip this from the 10/10 finish list.
 
 ### 10. Persistent Xero 500 errors on specific transactions
 
@@ -218,11 +216,7 @@ All in `thoughts/shared/reports/`:
 
 ### High-value but non-blocking
 
-4. **Investigate the mirror-drift issue**
-   - 43 `xero_invoices` rows say `has_attachments=true` but Xero Attachments API returns empty
-   - Could be `IncludeOnline` flag, stale sync, or `sync-xero-to-supabase.mjs` not pulling the attachment list
-   - Worth ~$5-6K of additional Q2+Q3 receipt recovery if fixed
-   - **Action:** add a `test-xero-attachment-reality.mjs` that GETs the actual attachments API on 20 random bills with `has_attachments=true` and compares to expected. If miscounts, fix `sync-xero-to-supabase.mjs`.
+4. ~~**Investigate the mirror-drift issue**~~ **CLOSED 2026-04-08** — probed all 573 bills, zero drift. No recovery possible here. Script: `scripts/test-xero-attachment-reality.mjs`. Report: `thoughts/shared/reports/xero-attachment-drift-2026-04-08.md`.
 
 5. **Investigate persistent Xero 500s**
    - Specific transactions (Apple Pty Ltd `2501da87...` and ~10 others) return 500 on every attachment PUT
@@ -242,9 +236,9 @@ All in `thoughts/shared/reports/`:
 
 ### Systemic improvements (deferred)
 
-8. **Fix `bas-gap-sweep.mjs` to exclude BASEXCLUDED** — Nicholas owner drawings shouldn't appear as missing receipts
+8. ~~**Fix `bas-gap-sweep.mjs` to exclude BASEXCLUDED**~~ **DONE 2026-04-08** — line_items JSONB filter added. Q2 dropped 516→461, Q3 273→236.
 9. **Consolidate Xero auth** — 4 scripts duplicate the auth code. Refactor into `scripts/lib/xero-auth.mjs`
-10. **Lower `link-stuck-receipts.mjs` threshold** with a `--review` output mode — catch the 50-79% matches and output a human-review report
+10. ~~**Lower threshold + review output**~~ **DONE 2026-04-08** — `match-receipts-to-xero.mjs --apply` now writes `thoughts/shared/reports/ambiguous-matches-YYYY-MM-DD.md` with all 154 candidates at 40-79%. **Quality issue surfaced:** OCR junk receipts ($0.00 marketing emails) inflate the candidate pool — scorer needs harder amount-mismatch penalty.
 11. **Build Playwright bank reconciliation automation** — only if transfer reconciliation becomes recurring work (for one-off, manual is faster)
 12. **Enrich vendor contacts with ABN + email** — from March 17 plan, still open
 13. **Add `metadata` JSONB column to `receipt_emails`** — `sync-xero-me-receipts.mjs` tried to store EXIF + suggestion metadata but was silently dropped because the column doesn't exist
