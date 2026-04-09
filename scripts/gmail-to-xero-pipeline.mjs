@@ -1,24 +1,15 @@
 #!/usr/bin/env node
 /**
  * Gmail → Xero Pipeline — for each unreceipted SPEND txn, search Gmail,
- * pick the best candidate message, download its PDF attachment, upload to
- * Supabase Storage, create a receipt_emails row linked to the Xero txn,
- * and push the PDF to Xero via the Attachments API.
+ * pick the best candidate message, download its PDF attachment (or raw
+ * .eml fallback), upload to Supabase Storage, create a receipt_emails row
+ * linked to the Xero txn, and push to Xero via the Attachments API.
  *
  * Full closed loop from "Gmail has a receipt Dext missed" to "receipt
- * attached in Xero". Idempotent: re-running is safe.
+ * attached in Xero". Idempotent: re-running is safe (checks gmail_message_id
+ * before creating rows, skips oversized EMLs, pre-flights Xero entity status).
  *
- * Strategy:
- *   1. Load unreceipted txns for the quarter (same filter as bas-completeness)
- *   2. For each, run the same Gmail query as gmail-deep-search.mjs
- *   3. Of the hits, pick the "best" — prefer messages with a real PDF
- *      attachment ≥ 10KB, closest to txn date
- *   4. If a best hit exists and the PDF isn't already in receipt_emails
- *      (by gmail_message_id), download the PDF, upload to Supabase Storage,
- *      create receipt_emails row, push to Xero
- *
- * Safe: --dry-run by default. --apply to execute.
- * Idempotent: checks for existing receipt_emails row by gmail_message_id.
+ * Safe: --dry-run by default. --apply to execute. Always has idempotency.
  *
  * Usage:
  *   node scripts/gmail-to-xero-pipeline.mjs Q3                 # dry run
@@ -31,6 +22,7 @@ import { createClient } from '@supabase/supabase-js';
 import { google } from 'googleapis';
 import { execSync } from 'child_process';
 import { readFileSync, writeFileSync, existsSync } from 'fs';
+import { buildGmailQuery } from './lib/gmail-vendor-queries.mjs';
 
 const SUPABASE_URL = process.env.SUPABASE_SHARED_URL || 'https://tednluwflfhxyucgwigh.supabase.co';
 const SUPABASE_KEY = process.env.SUPABASE_SHARED_SERVICE_ROLE_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY;
@@ -48,6 +40,9 @@ const LIMIT = args.includes('--limit') ? parseInt(args[args.indexOf('--limit') +
 const VENDOR_FILTER = args.includes('--vendors') ? args[args.indexOf('--vendors') + 1].split(',').map(s => s.toLowerCase().trim()) : null;
 const FY = args.includes('--fy') ? parseInt(args[args.indexOf('--fy') + 1]) : 26;
 
+// Xero attachment size limit — the API returns 413 on anything larger
+const XERO_MAX_ATTACHMENT_BYTES = 3 * 1024 * 1024;
+
 const QUARTERS = (() => {
   const y1 = 2000 + FY - 1, y2 = 2000 + FY;
   return {
@@ -59,7 +54,7 @@ const QUARTERS = (() => {
 })();
 
 // ============================================================================
-// BWS SECRET LOADER (same pattern as gmail-deep-search.mjs)
+// BWS SECRET LOADER
 // ============================================================================
 let _secretCache = null;
 function loadSecrets() {
@@ -140,59 +135,7 @@ async function xeroFetch(endpoint, method = 'GET', body = null, contentType = nu
 }
 
 // ============================================================================
-// VENDOR → QUERY (same mapping as gmail-deep-search.mjs)
-// ============================================================================
-const VENDOR_QUERY_MAP = {
-  'apple': '(from:apple.com OR from:itunes.com) (receipt OR invoice)',
-  'apple pty ltd': '(from:apple.com OR from:itunes.com) (receipt OR invoice)',
-  'qantas': 'from:qantas.com (receipt OR invoice OR itinerary OR tax invoice)',
-  'uber': 'from:uber.com receipt',
-  'webflow': 'from:webflow.com (receipt OR invoice)',
-  'stripe': 'from:stripe.com (receipt OR invoice)',
-  'anthropic': 'from:anthropic.com (receipt OR invoice)',
-  'openai': 'from:openai.com (receipt OR invoice)',
-  'claude.ai': 'from:anthropic.com (receipt OR invoice)',
-  'google': '(from:google.com OR from:googlepayments.com) (receipt OR invoice OR charge)',
-  'google australia': '(from:google.com) (receipt OR invoice)',
-  'google workspace': 'from:google.com (workspace OR g suite) (invoice OR receipt)',
-  'chatgpt': 'from:openai.com (receipt OR subscription)',
-  'notion labs': 'from:notion.so (receipt OR invoice)',
-  'figma': 'from:figma.com (receipt OR invoice)',
-  'vercel': 'from:vercel.com (receipt OR invoice)',
-  'bitwarden': 'from:bitwarden.com (receipt OR invoice)',
-  'firecrawl': 'from:firecrawl.dev (receipt OR invoice)',
-  'cursor ai': 'from:cursor.sh (receipt OR invoice)',
-  'dialpad': 'from:dialpad.com (receipt OR invoice)',
-  'linkedin singapore': 'from:linkedin.com (receipt OR invoice)',
-  'mighty networks': 'from:mightynetworks.com (receipt OR invoice)',
-  'squarespace': 'from:squarespace.com (receipt OR invoice)',
-  'highlevel': 'from:gohighlevel.com (receipt OR invoice)',
-  'telstra': 'from:telstra.com.au (bill OR invoice)',
-  'agl': 'from:agl.com.au (bill OR invoice)',
-  'booking.com': 'from:booking.com (confirmation OR receipt)',
-  'amazon': 'from:amazon (receipt OR invoice OR order)',
-  'bunnings': 'from:bunnings.com.au receipt',
-  'xero': 'from:xero.com (invoice OR receipt)',
-  'nab': '', 'nab fee': '',
-};
-function buildQuery(vendor, txDate) {
-  const key = (vendor || '').toLowerCase().trim();
-  let base = VENDOR_QUERY_MAP[key];
-  if (base === '') return null;
-  if (!base) {
-    const safe = key.replace(/[^a-z0-9 ]/g, '').trim();
-    if (!safe) return null;
-    const firstToken = safe.split(' ')[0];
-    base = `(from:${firstToken} OR "${safe}") (receipt OR invoice OR tax)`;
-  }
-  const d = new Date(txDate);
-  const after = new Date(d.getTime() - 7*86400000).toISOString().slice(0,10).replace(/-/g,'/');
-  const before = new Date(d.getTime() + 7*86400000).toISOString().slice(0,10).replace(/-/g,'/');
-  return `${base} after:${after} before:${before}`;
-}
-
-// ============================================================================
-// MESSAGE WALKING — find the best PDF attachment
+// MESSAGE WALKING
 // ============================================================================
 function findPdfPart(part) {
   if (!part) return null;
@@ -235,7 +178,7 @@ async function loadMissingTxns(quarter) {
 }
 
 async function findBestMessage(gmailClients, tx) {
-  const query = buildQuery(tx.contact_name, tx.date);
+  const query = buildGmailQuery(tx.contact_name, tx.date);
   if (!query) return null;
 
   const candidates = [];
@@ -243,14 +186,13 @@ async function findBestMessage(gmailClients, tx) {
     try {
       const { data } = await client.users.messages.list({ userId: 'me', q: query, maxResults: 5 });
       for (const m of data.messages || []) {
-        // Check if we already have this gmail_message_id linked in receipt_emails
+        // Idempotency: if this gmail_message_id is already in receipt_emails, skip
         const { data: existing } = await sb.from('receipt_emails')
           .select('id, status')
           .eq('gmail_message_id', m.id)
           .limit(1);
         if (existing && existing.length > 0) continue;
 
-        // Get full message to inspect attachments
         const full = await client.users.messages.get({ userId: 'me', id: m.id, format: 'full' });
         const pdf = findPdfPart(full.data.payload);
 
@@ -260,8 +202,7 @@ async function findBestMessage(gmailClients, tx) {
         const daysDiff = Math.abs(msgDate - txDate) / 86400000;
 
         candidates.push({
-          mailbox,
-          client,
+          mailbox, client,
           messageId: m.id,
           threadId: full.data.threadId,
           from: getHeader(headers, 'From'),
@@ -271,13 +212,14 @@ async function findBestMessage(gmailClients, tx) {
           kind: pdf ? 'pdf' : 'eml',
           pdfPart: pdf,
           pdfSize: pdf ? pdf.body.size : 0,
+          estEmlSize: parseInt(full.data.sizeEstimate || 0),
         });
       }
-    } catch (e) { /* per-mailbox errors silent */ }
+    } catch { /* per-mailbox errors silent */ }
   }
 
   if (candidates.length === 0) return null;
-  // Prefer PDF over EML, then smaller date diff, then larger PDF
+  // Prefer PDF > EML; then smaller date diff; then larger PDF (heuristic)
   candidates.sort((a, b) => {
     if (a.kind !== b.kind) return a.kind === 'pdf' ? -1 : 1;
     if (a.daysDiff !== b.daysDiff) return a.daysDiff - b.daysDiff;
@@ -286,18 +228,15 @@ async function findBestMessage(gmailClients, tx) {
   return candidates[0];
 }
 
-// Download the raw RFC 822 message as a Buffer (used for .eml fallback when
-// no PDF attachment is present — preserves full email for Xero upload).
-async function downloadEml(client, messageId) {
-  const { data } = await client.users.messages.get({ userId: 'me', id: messageId, format: 'raw' });
-  const b64 = data.raw.replace(/-/g, '+').replace(/_/g, '/');
+async function downloadPdf(client, messageId, attachmentId) {
+  const { data } = await client.users.messages.attachments.get({ userId: 'me', messageId, id: attachmentId });
+  const b64 = data.data.replace(/-/g, '+').replace(/_/g, '/');
   return Buffer.from(b64, 'base64');
 }
 
-async function downloadPdf(client, messageId, attachmentId) {
-  const { data } = await client.users.messages.attachments.get({ userId: 'me', messageId, id: attachmentId });
-  // Gmail returns base64url
-  const b64 = data.data.replace(/-/g, '+').replace(/_/g, '/');
+async function downloadEml(client, messageId) {
+  const { data } = await client.users.messages.get({ userId: 'me', id: messageId, format: 'raw' });
+  const b64 = data.raw.replace(/-/g, '+').replace(/_/g, '/');
   return Buffer.from(b64, 'base64');
 }
 
@@ -364,7 +303,6 @@ async function main() {
   console.log('Mode:', APPLY ? 'APPLY' : 'DRY RUN');
   console.log('Quarters:', quarterArgs.join(', '));
 
-  // Auth Gmail
   const users = getDelegatedUsers();
   const gmailClients = new Map();
   for (const u of users) {
@@ -372,14 +310,13 @@ async function main() {
   }
   console.log(`Gmail mailboxes: ${gmailClients.size}/${users.length}`);
 
-  // Load candidates
   const missing = [];
   for (const q of quarterArgs) {
     const txns = await loadMissingTxns(QUARTERS[q]);
     missing.push(...txns.map(t => ({ ...t, _q: q })));
   }
   let candidates = missing;
-  if (VENDOR_FILTER) candidates = candidates.filter(t => VENDOR_FILTER.some(v => (t.contact_name||'').toLowerCase().includes(v)));
+  if (VENDOR_FILTER) candidates = candidates.filter(t => VENDOR_FILTER.some(v => (t.contact_name || '').toLowerCase().includes(v)));
   if (LIMIT) candidates = candidates.slice(0, LIMIT);
   console.log(`Txns to process: ${candidates.length}\n`);
 
@@ -389,14 +326,14 @@ async function main() {
   for (let i = 0; i < candidates.length; i++) {
     const tx = candidates[i];
     stats.probed++;
-    const label = `[${i+1}/${candidates.length}] ${(tx.contact_name||'?').slice(0,22).padEnd(22)} $${tx.total} ${tx.date}`;
+    const label = `[${i + 1}/${candidates.length}] ${(tx.contact_name || '?').slice(0, 22).padEnd(22)} $${tx.total} ${tx.date}`;
 
     try {
       const best = await findBestMessage(gmailClients, tx);
       if (!best) { stats.noMatch++; console.log(`  ⚪ ${label} — no Gmail candidate`); continue; }
 
-      const kindLabel = best.kind === 'pdf' ? `PDF ${(best.pdfSize/1024).toFixed(0)}KB` : 'EML fallback';
-      console.log(`  🟢 ${label} — ${best.mailbox} "${best.subject.slice(0,40)}" (${kindLabel}, ${Math.round(best.daysDiff)}d)`);
+      const kindLabel = best.kind === 'pdf' ? `PDF ${(best.pdfSize / 1024).toFixed(0)}KB` : `EML fallback (~${(best.estEmlSize / 1024).toFixed(0)}KB)`;
+      console.log(`  🟢 ${label} — ${best.mailbox} "${best.subject.slice(0, 40)}" (${kindLabel}, ${Math.round(best.daysDiff)}d)`);
 
       if (!APPLY) {
         stats.matched++;
@@ -408,49 +345,50 @@ async function main() {
       let buffer, filename, contentType;
       if (best.kind === 'pdf') {
         buffer = await downloadPdf(best.client, best.messageId, best.pdfPart.body.attachmentId);
-        filename = best.pdfPart.filename || `receipt-${tx.xero_transaction_id.slice(0,8)}.pdf`;
+        filename = best.pdfPart.filename || `receipt-${tx.xero_transaction_id.slice(0, 8)}.pdf`;
         contentType = 'application/pdf';
       } else {
         buffer = await downloadEml(best.client, best.messageId);
+        if (buffer.length > XERO_MAX_ATTACHMENT_BYTES) {
+          stats.skipped++;
+          console.log(`      ⚠ skipped — EML too large (${(buffer.length / 1024 / 1024).toFixed(1)}MB > 3MB Xero limit)`);
+          await new Promise(rs => setTimeout(rs, 1200));
+          continue;
+        }
         const safeSubject = (best.subject || 'receipt').replace(/[^a-zA-Z0-9 -]/g, '').slice(0, 50).trim();
-        filename = `${safeSubject || 'receipt'}-${tx.xero_transaction_id.slice(0,8)}.eml`;
+        filename = `${safeSubject || 'receipt'}-${tx.xero_transaction_id.slice(0, 8)}.eml`;
         contentType = 'message/rfc822';
       }
 
-      // Upload to storage
       const storagePath = await uploadToStorage(buffer, filename);
-
-      // Create receipt_emails row
       const receiptId = await createReceiptRow(tx, best, storagePath, buffer, filename);
-
-      // Push to Xero (via the existing Attachments API)
       await pushToXero(tx.xero_transaction_id, filename, buffer, contentType);
-
-      // Mark as uploaded in DB
       await sb.from('receipt_emails').update({ status: 'uploaded' }).eq('id', receiptId);
+      // Also update mirror so bas-completeness sees the new state
+      await sb.from('xero_transactions').update({ has_attachments: true }).eq('xero_transaction_id', tx.xero_transaction_id);
 
       stats.matched++;
       stats.pushed++;
-      console.log(`      → pushed ${best.kind.toUpperCase()} to Xero txn ${tx.xero_transaction_id.slice(0,8)}`);
+      console.log(`      → pushed ${best.kind.toUpperCase()} to Xero txn ${tx.xero_transaction_id.slice(0, 8)}`);
     } catch (e) {
       stats.failed++;
       failures.push({ tx, err: e.message });
       console.log(`  ❌ ${label} — ${e.message.slice(0, 100)}`);
     }
 
-    // Xero rate limit: ~54/min. We're doing ~1 per iteration + extra reads. Sleep 1.2s.
     await new Promise(rs => setTimeout(rs, 1200));
   }
 
   console.log('\n=== Summary ===');
   console.log(`  Probed: ${stats.probed}`);
-  console.log(`  Matched (has PDF): ${stats.matched}`);
-  console.log(`  No match: ${stats.noMatch}`);
+  console.log(`  Matched (Gmail found): ${stats.matched}`);
+  console.log(`  No Gmail match: ${stats.noMatch}`);
   console.log(`  Pushed to Xero: ${stats.pushed}`);
+  console.log(`  Skipped (oversized EML): ${stats.skipped}`);
   console.log(`  Failed: ${stats.failed}`);
   if (failures.length > 0) {
     console.log('\nFailures:');
-    failures.slice(0, 10).forEach(f => console.log(`  ${f.tx.contact_name} $${f.tx.total}: ${f.err.slice(0,100)}`));
+    failures.slice(0, 10).forEach(f => console.log(`  ${f.tx.contact_name} $${f.tx.total}: ${f.err.slice(0, 100)}`));
   }
 }
 

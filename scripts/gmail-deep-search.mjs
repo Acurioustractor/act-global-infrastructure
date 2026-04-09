@@ -25,6 +25,7 @@ import { createClient } from '@supabase/supabase-js';
 import { google } from 'googleapis';
 import { readFileSync, writeFileSync, existsSync } from 'fs';
 import { execSync } from 'child_process';
+import { buildGmailQuery } from './lib/gmail-vendor-queries.mjs';
 
 const SUPABASE_URL = process.env.SUPABASE_SHARED_URL || 'https://tednluwflfhxyucgwigh.supabase.co';
 const SUPABASE_KEY = process.env.SUPABASE_SHARED_SERVICE_ROLE_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY;
@@ -99,64 +100,8 @@ function getDelegatedUsers() {
   throw new Error('GOOGLE_DELEGATED_USERS not configured');
 }
 
-// ============================================================================
-// VENDOR → GMAIL QUERY MAPPING
-// ============================================================================
-
-// Map vendor names to Gmail search terms. Some vendors use different "from"
-// addresses than the Xero contact name (e.g. "Apple" → noreply@apple.com).
-const VENDOR_QUERY_MAP = {
-  'apple': '(from:apple.com OR from:itunes.com) (receipt OR invoice)',
-  'apple pty ltd': '(from:apple.com OR from:itunes.com) (receipt OR invoice)',
-  'qantas': 'from:qantas.com (receipt OR invoice OR itinerary OR tax invoice)',
-  'uber': 'from:uber.com receipt',
-  'webflow': 'from:webflow.com (receipt OR invoice)',
-  'stripe': 'from:stripe.com (receipt OR invoice)',
-  'anthropic': 'from:anthropic.com (receipt OR invoice)',
-  'openai': 'from:openai.com (receipt OR invoice)',
-  'claude.ai': 'from:anthropic.com (receipt OR invoice)',
-  'google': '(from:google.com OR from:googlepayments.com) (receipt OR invoice OR charge)',
-  'google australia': '(from:google.com) (receipt OR invoice)',
-  'google workspace': 'from:google.com (workspace OR g suite) (invoice OR receipt)',
-  'chatgpt': 'from:openai.com (receipt OR subscription)',
-  'notion labs': 'from:notion.so (receipt OR invoice)',
-  'figma': 'from:figma.com (receipt OR invoice)',
-  'vercel': 'from:vercel.com (receipt OR invoice)',
-  'bitwarden': 'from:bitwarden.com (receipt OR invoice)',
-  'firecrawl': 'from:firecrawl.dev (receipt OR invoice)',
-  'cursor ai': 'from:cursor.sh (receipt OR invoice)',
-  'dialpad': 'from:dialpad.com (receipt OR invoice)',
-  'linkedin singapore': 'from:linkedin.com (receipt OR invoice)',
-  'mighty networks': 'from:mightynetworks.com (receipt OR invoice)',
-  'squarespace': 'from:squarespace.com (receipt OR invoice)',
-  'highlevel': 'from:gohighlevel.com (receipt OR invoice)',
-  'telstra': 'from:telstra.com.au (bill OR invoice)',
-  'agl': 'from:agl.com.au (bill OR invoice)',
-  'booking.com': 'from:booking.com (confirmation OR receipt)',
-  'amazon': 'from:amazon (receipt OR invoice OR order)',
-  'bunnings': 'from:bunnings.com.au receipt',
-  'xero': 'from:xero.com (invoice OR receipt)',
-  'nab': '', // skip bank
-  'nab fee': '',
-};
-
-function buildGmailQuery(vendor, txDate) {
-  const key = (vendor || '').toLowerCase().trim();
-  let base = VENDOR_QUERY_MAP[key];
-  if (base === '') return null; // skip
-  if (!base) {
-    // Fallback: use vendor name as a fuzzy from/subject match
-    const safe = key.replace(/[^a-z0-9 ]/g, '').trim();
-    if (!safe) return null;
-    const firstToken = safe.split(' ')[0];
-    base = `(from:${firstToken} OR "${safe}") (receipt OR invoice OR tax)`;
-  }
-  // Date window: ±7 days around the bank txn date
-  const d = new Date(txDate);
-  const after = new Date(d.getTime() - 7 * 86400000).toISOString().slice(0, 10).replace(/-/g, '/');
-  const before = new Date(d.getTime() + 7 * 86400000).toISOString().slice(0, 10).replace(/-/g, '/');
-  return `${base} after:${after} before:${before}`;
-}
+// VENDOR → GMAIL QUERY mapping lives in scripts/lib/gmail-vendor-queries.mjs
+// (imported at top of file). Shared with gmail-to-xero-pipeline.mjs.
 
 // ============================================================================
 // SEARCH
