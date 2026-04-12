@@ -19,6 +19,9 @@ on:
       - 'wiki/AGENTS.md'
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   rebuild:
     name: Rebuild Tractorpedia Viewer
@@ -57,9 +60,11 @@ jobs:
           fi
 
       - name: Dispatch to act-regenerative-studio
-        if: ${{ secrets.CROSS_REPO_TOKEN != '' }}
+        if: ${{ env.HAS_TOKEN == 'true' }}
         uses: peter-evans/repository-dispatch@v3
         with:
           token: ${{ secrets.CROSS_REPO_TOKEN }}
           repository: Acurioustractor/act-regenerative-studio
           event-type: wiki-content-updated
+        env:
+          HAS_TOKEN: ${{ secrets.CROSS_REPO_TOKEN != '' }}
