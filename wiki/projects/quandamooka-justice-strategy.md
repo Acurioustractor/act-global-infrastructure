@@ -2,6 +2,8 @@
 
 > A justice reinvestment and community healing initiative grounded in Quandamooka Country — led by the Quandamooka people, focused on self-determination, and built on the understanding that healing and justice are inseparable.
 
+**Status:** Active | **Code:** ACT-QD | **Tier:** Satellite
+
 ## Overview
 
 The Quandamooka Justice and Healing Strategy is a place-specific, Indigenous-led response to the justice and wellbeing challenges facing the Quandamooka people of Moreton Bay and North Stradbroke Island (Minjerribah). It operates within the justice reinvestment framework — the evidence-based approach that redirects resources from incarceration toward early intervention, community support, and healing — but grounds that framework in Quandamooka knowledge, relationships, and self-determined priorities.
