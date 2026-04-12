@@ -1,10 +1,10 @@
 # ACT Wikipedia
 
-> A living knowledge base for A Curious Tractor — maintained by LLM, owned by community.
-> Raw data is compiled into articles. Explorations compound. The wiki never goes stale.
+> A living knowledge base for A Curious Tractor — maintained through human steering, LLM compilation, and community accountability.
+> Raw data is compiled into articles. Good questions compound. The wiki stays alive when the loop stays honest.
 
-**Last compiled:** 2026-04-07
-\*\*Articles:\*\* 124
+**Last compiled:** See `wiki/output/status-latest.json` after the latest lint run
+**Article count:** generated from the canonical graph, not hard-coded here
 **Domains:** projects, concepts, communities, people, stories, art, finance, technical, decisions, research
 
 ---
@@ -13,7 +13,7 @@
 
 This wiki follows the [[llm-knowledge-base|Karpathy LLM Knowledge Base pattern]]:
 - **Raw sources** go into `raw/` — articles, transcripts, research, scraped data
-- **Articles** are compiled by LLM into domain directories — never edited manually
+- **Articles** are primarily compiled by LLM into domain directories — humans can still edit load-bearing pages when the method, structure, or strategy changes
 - **Index files** in each directory summarize contents for fast agent navigation
 - **Backlinks** connect articles across domains
 - **Linting** runs periodically to find gaps, contradictions, and new article candidates
@@ -40,6 +40,11 @@ This wiki follows the [[llm-knowledge-base|Karpathy LLM Knowledge Base pattern]]
 - [[ai-ethics|AI Ethics]] — non-negotiables, ALMA as gatekeeper, agent roles
 - [[alma|ALMA]] — six-signal evidence framework, Story → Signal → Shift → Scope
 - [[ways-of-working|Ways of Working]] — daily practice, meeting rhythms, infrastructure philosophy
+- [[living-website-operating-system|Living Website Operating System]] — the workflow linking Tractorpedia, Empathy Ledger, and the public shell
+- [[project-identity-and-tagging-system|Project Identity & Tagging System]] — which wiki pages get their own code, which roll up, and how retagging works
+- [[wiki-project-and-work-sync-contract|Wiki Project & Work Sync Contract]] — the canonical frontmatter and sync fields the website, EL, and Supabase should trust
+- [[act-knowledge-ops-loop|ACT Knowledge Ops Loop]] — the concrete capture -> compile -> lint -> sync -> publish -> learn rhythm for running the whole system
+- [[social-soil-canvas|Social Soil Canvas]] — founder-facing field diagnostic linking live reflection to durable wiki knowledge
 - [[voice-guide|Voice Guide]] — four voice characteristics, farm metaphor bank
 - [[place-land-practice|Place & Land Practice]] — BCV, Harvest, Farm as the Place cluster
 - [[visual-system|Visual System]] — diagram vocabulary, palette, photography guidelines
@@ -48,10 +53,31 @@ This wiki follows the [[llm-knowledge-base|Karpathy LLM Knowledge Base pattern]]
 
 ## People
 
+People pages are **curated, not exhaustive**. The wider voice population lives in [[empathy-ledger|Empathy Ledger]] and related live story surfaces; `wiki/people/` is reserved for load-bearing, named people whose role materially helps explain the ecosystem.
+
+- [[people/README|People Index]] — the curation rule and current major-project roster for durable people pages
+
 - [[benjamin-knight|Benjamin Knight]] — co-founder of ACT, photographer, technologist
 - [[nicholas-marchesi|Nicholas Marchesi OAM]] — co-founder of ACT, Orange Sky co-founder, The Harvest
 - [[richard-cassidy|Richard Cassidy]] — Manbarra Operations, Palm Island, "Our Story" philosophy
 - [[brodie-germaine|Brodie Germaine]] — BG Fit, CAMPFIRE, BAIL, Mount Isa
+- [[allan-palm-island|Allan Palm Island]] — Palm Island Elder and artist, cultural sovereignty through studio and Elders work
+- [[dianne-stokes|Dianne Stokes]] — Tennant Creek Elder, language and co-design in Goods on Country
+- [[aunty-ethel-robertson|Aunty Ethel Robertson]] — Palm Island Elder in the Elders Hull River work
+- [[uncle-frank-daniel-landers|Uncle Frank Daniel Landers]] — Palm Island Elder in the Elders Hull River work
+- [[aunty-iris-may-whitey|Aunty Iris May Whitey]] — Palm Island Elder in the Elders Hull River work
+- [[barry-rodgerig|Barry Rodgerig]] — Witta memory holder and the archaeology of The Harvest site
+- [[cyndel-louise-pryor|Cyndel Louise Pryor]] — Palm Island Elder in the Elders Hull River work
+- [[elsa-mortoa|Elsa Mortoa]] — Palm Island Elder in the Elders Hull River work
+- [[gurtrude-grace-richardson|Gurtrude Grace Richardson]] — Palm Island Elder in the Elders Hull River work
+- [[irene-nleallajar|Irene Nleallajar]] — Bwgcolman public storyteller linked to the Palm Island Elders work
+- [[kristy-bloomfield|Kristy Bloomfield]] — Oonchiumpa co-director and cultural authority in Mparntwe
+- [[marjoyie-burns|Marjoyie Burns]] — Palm Island Elder in the Elders Hull River work
+- [[rachel-atkinson|Rachel Atkinson]] — PICC CEO and executive lead on Palm Island
+- [[ruby-sibley|Ruby Sibley]] — Palm Island public storyteller linked to the Elders Hull River work
+- [[shaun-fisher|Shaun Fisher]] — Fishers Oysters and the shell-return loop in The Harvest
+- [[winifred-obah|Winifred Obah]] — Palm Island Elder in the Elders Hull River work
+- [[uncle-george|Uncle George]] — Kalkadoon Elder, Mount Isa schools and re-engagement
 - [[vic|Vic]] — addiction to inspiration, transformation narrative
 
 ## Projects
@@ -66,6 +92,19 @@ This wiki follows the [[llm-knowledge-base|Karpathy LLM Knowledge Base pattern]]
 - [[goods-on-country|Goods on Country]] — place-based design and procurement
 - [[the-harvest|The Harvest]] — regenerative agriculture and creative practice
 - [[act-public-voice|ACT Public Voice]] — how ACT describes itself to the world (act.place)
+
+### Cluster Overviews
+
+- [[projects/justicehub/README|JusticeHub Cluster]] — folder-level overview of the platform, methodology, pitch, walkthrough, and art companion
+- [[projects/act-farm/README|ACT Farm Cluster]] — program/place overview for ACT Farm and Black Cockatoo Valley
+- [[projects/the-harvest/README|The Harvest Cluster]] — program/place overview for The Harvest and Green Harvest Witta
+- [[projects/picc/README|PICC Cluster]] — Palm Island cluster overview across company, reports, precinct, elders, and kiosk
+- [[projects/smart-recovery/README|SMART Recovery Cluster]] — SMART context and GP kit family in one place
+- [[projects/act-studio/README|ACT Studio Cluster]] — studio-side project overview across art, fellowship, and research outputs
+
+### Live Packages
+
+- [[minderoo-pitch-package|Minderoo Pitch Package]] — operational STAY / Three Circles package: budget, contact protocol, MOU outline, covering email
 
 ## Communities
 
@@ -93,6 +132,10 @@ This wiki follows the [[llm-knowledge-base|Karpathy LLM Knowledge Base pattern]]
 
 The fourth letter of [[lcaa-method|LCAA]] — physical, sensory work that makes ACT's arguments walkable. See [[art-projects|ACT Art Projects]] for the canonical index.
 
+- [[art/README|ACT Art Domain]] — the structure and purpose of the art field inside Tractorpedia
+- [[art/philosophy/art-as-infrastructure|Art as Infrastructure]] — why art is a core ACT field, not a side portfolio
+- [[art/innovation/studio-innovation-flow|Studio Innovation Flow]] — how the Studio creates strategic movement, not just cultural output
+- [[art/business/studio-business-model|Studio Business Model]] — how the Studio earns, sustains itself, and funds the commons
 - [[uncle-allan-palm-island-art|Uncle Allan Art]] — Manbarra culture on Palm Island (the elder of the studio line)
 - [[contained|CONTAINED]] — youth detention as a room you walk into (touring 2026)
 - [[the-confessional|The Confessional]] — institutional space made intimate
@@ -119,14 +162,51 @@ The fourth letter of [[lcaa-method|LCAA]] — physical, sensory work that makes 
 
 - [[local-ai-architecture|Local AI Architecture]] — edge computing, Gemma 4, sovereign models
 - [[act-architecture|ACT Architecture]] — three Supabase instances, RLS, mono-repo
+- [[act-knowledge-ops-loop|ACT Knowledge Ops Loop]] — where Obsidian, wiki compilation, EL sync, Supabase mirroring, and website publishing fit together
+- [[wiki-project-and-work-sync-contract|Wiki Project & Work Sync Contract]] — how canonical wiki identity becomes website, EL, and Supabase sync state
 - [[transcription-workflow|Transcription Workflow]] — four-layer pipeline, ALMA analysis
 - [[vignette-workflows|Vignette Workflows]] — create, consent, cultural review
+
+## Synthesis
+
+- [[the-edge-is-where-the-healing-is-justicehub-as-the-world-model-for-community-led|The Edge Is Where the Healing Is]] — JusticeHub as the world model for community-led justice
+- [[the-kettle|The Kettle]] — STAY reflection anchored in Oonchiumpa, Diagrama, and the four-layer infrastructure
+- [[how-does-the-tractorpedia-second-brain-pattern-compound-knowledge-over-time|How the Tractorpedia second-brain compounds knowledge]] — compounding pattern behind the wiki itself
+
+## Narrative (claims store — what we have already said)
+
+A Rowboat-style typed-entity store of every public argument the ecosystem has made — *not* a topic wiki, but a claim registry. One file per claim, with frame, deployment count, channel, audience, sources, audience reactions, and an explicit "what we haven't said yet" gap section. Use this when drafting any new post or op-ed: open `INDEX.md`, scan the under-deployed claims, draft against the gap. See `wiki/narrative/README.md`.
+
+- **CONTAINED** — [`wiki/narrative/contained/INDEX.md`](narrative/contained/INDEX.md) — 18 claims, 6 frames, [stat conflicts](narrative/contained/STAT-CONFLICTS.md) tracker
+- **JusticeHub** — [`wiki/narrative/justicehub/INDEX.md`](narrative/justicehub/INDEX.md) — 12 claims spanning the platform + STAY program + Three Circles pitch + Staying methodology + The Brave Ones photographic series. **Constellation:** [[the-full-idea|The Full Idea]] · [[three-circles|Three Circles]] · [[staying|Staying]] · [[the-brave-ones|The Brave Ones]] · [[justicehub|JusticeHub platform]].
+- **Empathy Ledger / World Tour** — [`wiki/narrative/empathy-ledger/INDEX.md`](narrative/empathy-ledger/INDEX.md) — 12 claims, the LISTEN→BUILD→MEASURE loop, story-as-OS, the corpus as procurement weapon, $1.75M-not-pre-revenue. **Source:** [strategy synthesis 2026-04-09](raw/2026-04-09-empathy-ledger-strategy-synthesis.md). **Open decisions:** [tour questions 2026-04-09](decisions/2026-04-09-empathy-ledger-tour-questions.md).
+- **Goods on Country** — [`wiki/narrative/goods-on-country/INDEX.md`](narrative/goods-on-country/INDEX.md) — 4 claims, cross-linked to CONTAINED + Empathy Ledger via `related_claims`
+- *(future seeds: Black Cockatoo Valley, The Harvest)*
+
+**Sources connected** — see [`wiki/narrative/sources.json`](narrative/sources.json):
+- ✅ wiki/raw essays · JusticeHub compendium + output + linkedin engagement · Goods on Country output · CONTAINED site content
+- ⏳ Supabase articles · Empathy Ledger stories · GHL contact responses · act.place + justicehub.com.au scrapes
+
+**Operations:**
+- `node scripts/narrative-refresh.mjs [project]` — regenerate INDEX, sort by recency, flag stale
+- `node scripts/narrative-draft.mjs <project> --frame <frame> --channel <channel>` — assemble draft brief
+- `node scripts/narrative-log-deployment.mjs <claim-id> <channel> --source ... --variant "..."` — record a deployment
+- `node scripts/narrative-ingest.mjs <path> --project <slug>` — extract candidate claims from a folder/file
+- `node scripts/narrative-watch.mjs` — run all configured sources, drop digests in the inbox
+- `/wiki narrative status` · `/wiki narrative draft` · `/wiki narrative oped` · `/wiki narrative log` · `/wiki narrative ingest` · `/wiki narrative watch` · `/wiki narrative process` (see `.agents/skills/wiki/SKILL.md`)
 
 ## Decisions
 
 - [[roadmap-2026|Roadmap 2026]] — quarterly plan, focus areas, named risks
 - [[strategic-decisions-log|Strategic Decisions Log]] — load-bearing strategic decisions distilled from 58 records
+- [[2026-04-founder-lanes-and-top-two-bets|Founder Lanes and Top Two Bets]] — current founder split, active drive lane, and what moves to field or shed
+- [[2026-04-five-year-plan|Five-Year Plan — Voice, Flow, Ground]] — 5-year revenue arc, three commitments (founder invoicing, CivicGraph trading arm, EL bespoke), Daft Punk communication rule, 6-months-ahead rhythm, Witta land deposit path
 - [[continuous-pipeline|Continuous Pipeline Architecture]] — how Tractorpedia stays alive: lint, watch-meetings, what's manual vs automated
+- `wiki/output/el-people-candidates-latest.md` — curated queue for who should get a durable `wiki/people/` page next
+- [[2026-04-09-empathy-ledger-tour-questions|Empathy Ledger World Tour Questions]] — open tour and positioning questions resolved on 2026-04-09
+- [[2026-04-09-lesotho-data-needs|Lesotho Data Needs]] — named contacts, timing, and the data gap resolved on 2026-04-09
+- [[url-audit-2026-04-07|URL Audit — 2026-04-07]] — live/dead/known-issue URL sweep across the ecosystem
+- [[wiki-health-2026-04-07|Wiki Health Report — 2026-04-07]] — earlier canonical health checkpoint for Tractorpedia
 
 ---
 
@@ -142,9 +222,11 @@ wiki/
   stories/              ← vignettes from Empathy Ledger (with consent metadata)
   art/                  ← artworks, installations, exhibitions
   finance/              ← funding, grants, R&D, financial strategy
+    five-year-cashflow-model.md  ← revenue projections, R&D tax, founder deposit path
   technical/            ← architecture, infrastructure, builds
   decisions/            ← key decisions and their reasoning
   research/             ← compiled research and analysis
+  narrative/            ← claims store — every public argument by project
   raw/                  ← source documents (immutable, never edited)
 ```
 
