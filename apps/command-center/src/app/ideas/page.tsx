@@ -53,7 +53,7 @@ const STAGES = [
   { id: 'done', label: 'Done', icon: '✅', color: 'border-emerald-500/30', desc: 'Completed' },
 ] as const
 
-const PROJECT_CODES = ['EL', 'JH', 'GOC', 'BCV', 'HARVEST', 'FARM', 'ART', 'ACT-HQ', 'ACT-EL', 'ACT-JH', 'ACT-GD', 'ACT-HV'] as const
+const PROJECT_CODES = ['EL', 'JH', 'GOC', 'BCV', 'HARVEST', 'FARM', 'ART', 'ACT-CORE', 'ACT-EL', 'ACT-JH', 'ACT-GD', 'ACT-HV'] as const
 
 // ---- API ----
 
@@ -404,7 +404,7 @@ export default function IdeasPage() {
 
             {/* Project quick-select */}
             <div className="flex gap-1 flex-wrap">
-              {(['ACT-HQ', 'ACT-EL', 'ACT-JH', 'ACT-GD', 'ACT-HV', 'FARM', 'BCV', 'ART'] as const).map(pc => (
+              {(['ACT-CORE', 'ACT-EL', 'ACT-JH', 'ACT-GD', 'ACT-HV', 'FARM', 'BCV', 'ART'] as const).map(pc => (
                 <button
                   key={pc}
                   type="button"

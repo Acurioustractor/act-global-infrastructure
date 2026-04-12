@@ -158,10 +158,10 @@ const CODE_TO_SEARCH = {
   'ACT-HV': ['the harvest'],
   'ACT-FM': ['the farm', 'act farm'],
   'ACT-ART': ['art'],
-  'ACT-HQ': ['act hq', 'act operations'],
+  'ACT-CORE': ['act hq', 'act operations', 'act core', 'act studio', 'act regenerative studio'],
   'ACT-IN': ['alma'],
   'ACT-OC': ['oochiumpa', 'oonchiumpa'],
-  'ACT-PC': ['palm island', 'palm community'],
+  'ACT-PI': ['palm island', 'palm community', 'picc centre', 'picc center'],
   'ACT-OS': ['orange sky'],
 };
 

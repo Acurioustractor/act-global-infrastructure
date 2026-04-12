@@ -34,6 +34,12 @@ function getSupabase() {
   );
 }
 
+function readJsonProjects() {
+  const filePath = join(__dirname, '../../config/project-codes.json');
+  const raw = JSON.parse(readFileSync(filePath, 'utf8'));
+  return raw.projects || {};
+}
+
 /**
  * Load all projects from Supabase projects table.
  * Returns an object keyed by project code, matching the old JSON config format.
@@ -84,9 +90,20 @@ export async function loadProjects(options = {}) {
       };
     }
 
-    _cache = projects;
+    let mergedProjects = projects;
+
+    try {
+      const jsonProjects = readJsonProjects();
+      // The JSON registry is the human-curated canonical layer. Overlay it so
+      // newly assigned codes and aliases stay live even before the DB is resynced.
+      mergedProjects = { ...projects, ...jsonProjects };
+    } catch (jsonErr) {
+      console.warn('[ProjectLoader] JSON overlay unavailable:', jsonErr.message);
+    }
+
+    _cache = mergedProjects;
     _cacheTime = now;
-    return projects;
+    return mergedProjects;
   } catch (err) {
     console.warn('[ProjectLoader] DB load failed, falling back to JSON config:', err.message);
     return loadFromJson();
@@ -98,11 +115,9 @@ export async function loadProjects(options = {}) {
  */
 function loadFromJson() {
   try {
-    const filePath = join(__dirname, '../../config/project-codes.json');
-    const raw = JSON.parse(readFileSync(filePath, 'utf8'));
-    _cache = raw.projects;
+    _cache = readJsonProjects();
     _cacheTime = Date.now();
-    return raw.projects;
+    return _cache;
   } catch (err) {
     console.error('[ProjectLoader] JSON fallback also failed:', err.message);
     return {};

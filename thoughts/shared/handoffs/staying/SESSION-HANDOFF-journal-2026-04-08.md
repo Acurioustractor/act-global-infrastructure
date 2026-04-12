@@ -129,7 +129,7 @@ node scripts/journal-fetch-extras.mjs
 6. **VIC and SA community candidates still open** — placeholders for No. 09 (WA) and No. 10 (SA / Flinders) only
 
 ### Other open work from earlier today
-- §2, §3, §5, §6, §11 of `wiki/projects/the-full-idea.md` may still need passes (the comprehensive doc the journal mirrors)
+- §2, §3, §5, §6, §11 of `wiki/projects/justicehub/the-full-idea.md` may still need passes (the comprehensive doc the journal mirrors)
 - The 7 individual standalone STAY Series cover re-spins still need JH colophon update (separate task per `wiki/output/library-hero-prompts.md`)
 
 ## Key file pointers
@@ -139,7 +139,7 @@ node scripts/journal-fetch-extras.mjs
 | The journal HTML | `tools/three-circles-journal.html` |
 | Data fetch script | `scripts/journal-fetch-extras.mjs` |
 | Existing EL client lib | `scripts/lib/empathy-ledger-content.mjs` |
-| The comprehensive doc | `wiki/projects/the-full-idea.md` |
+| The comprehensive doc | `wiki/projects/justicehub/the-full-idea.md` |
 | Locked visual language brief | `wiki/output/library-hero-prompts.md` |
 | 7 STAY model copy locked | `thoughts/shared/handoffs/staying/models-locked.md` |
 | Journal page review (older) | `thoughts/shared/handoffs/staying/journal-page-review.md` |

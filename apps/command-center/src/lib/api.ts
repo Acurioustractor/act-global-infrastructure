@@ -832,6 +832,79 @@ export interface WikiSearchResult {
   section: string
 }
 
+export interface WikiStatus {
+  generated_at: string
+  scope: string
+  domains: Record<string, number>
+  summary: {
+    date: string
+    total_articles: number
+    total_links: number
+    orphans: number
+    broken_links: number
+    stubs: number
+    missing_from_index: number
+    missing_backlinks: number
+    advisory_backlinks?: number
+  }
+  repair_queue: {
+    broken_links: Array<{
+      stem: string
+      title: string
+      relative_path: string
+      page_path: string
+      missing_target: string
+    }>
+    missing_from_index: Array<{
+      stem: string
+      title: string
+      relative_path: string
+      page_path: string
+    }>
+    missing_backlinks?: Array<{
+      stem: string
+      title: string
+      relative_path: string
+      page_path: string
+      target: {
+        stem: string
+        title: string
+        relative_path: string
+        page_path: string
+      }
+    }>
+    orphan_pages: Array<{
+      stem: string
+      title: string
+      relative_path: string
+      page_path: string
+    }>
+    stubs: Array<{
+      stem: string
+      title: string
+      relative_path: string
+      page_path: string
+      lines: number
+    }>
+    advisory_backlinks?: Array<{
+      stem: string
+      title: string
+      relative_path: string
+      page_path: string
+      target: {
+        stem: string
+        title: string
+        relative_path: string
+        page_path: string
+      }
+    }>
+  }
+  backlink_policy?: {
+    missing_backlinks?: string
+    advisory_backlinks?: string
+  }
+}
+
 export async function getWikiStructure() {
   return fetchApi<{ sections: WikiSection[] }>('/api/wiki/structure')
 }
@@ -842,6 +915,10 @@ export async function getWikiPage(path: string) {
 
 export async function searchWiki(query: string) {
   return fetchApi<{ results: WikiSearchResult[] }>(`/api/wiki/search?q=${encodeURIComponent(query)}`)
+}
+
+export async function getWikiStatus() {
+  return fetchApi<WikiStatus>('/api/wiki/status')
 }
 
 // Ecosystem - Sites and Platform Health

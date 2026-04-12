@@ -102,7 +102,7 @@ function formatDate(d: string) {
 // Prioritized project order for number keys (ecosystem first, then common)
 const PROJECT_ORDER = [
   'ACT-HV', 'ACT-GD', 'ACT-JH', 'ACT-IN', 'ACT-EL', 'ACT-FM',
-  'ACT-PI', 'ACT-HQ', 'ACT-CP',
+  'ACT-PI', 'ACT-CORE', 'ACT-CP',
 ]
 
 type ViewMode = 'tag' | 'review'

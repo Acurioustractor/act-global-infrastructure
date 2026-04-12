@@ -4,6 +4,7 @@
       "name": "ACT Studio",
       "path": "/Users/benknight/Code/act-regenerative-studio",
       "github": "Acurioustractor/act-regenerative-studio",
+      "github_url": "https://github.com/Acurioustractor/act-regenerative-studio",
       "description": "Multi-project orchestrator and operations hub",
       "stack": "Next.js 15, Supabase, Tailwind",
       "deployment": "Vercel",
@@ -14,6 +15,7 @@
       "name": "Empathy Ledger",
       "path": "/Users/benknight/Code/empathy-ledger-v2",
       "github": "Acurioustractor/empathy-ledger-v2",
+      "github_url": "https://github.com/Acurioustractor/empathy-ledger-v2",
       "description": "Ethical storytelling platform",
       "stack": "Next.js 14, Supabase, Tailwind",
       "deployment": "Vercel",
@@ -24,6 +26,7 @@
       "name": "JusticeHub",
       "path": "/Users/benknight/Code/JusticeHub",
       "github": "Acurioustractor/justicehub-platform",
+      "github_url": "https://github.com/Acurioustractor/justicehub-platform",
       "description": "Youth justice and community services",
       "stack": "Next.js 14, Supabase, Tailwind",
       "deployment": "Vercel",
@@ -33,7 +36,8 @@
     {
       "name": "The Harvest",
       "path": "/Users/benknight/Code/The Harvest Website",
-      "github": "Acurioustractor/harvest-community-hub",
+      "github": "Acurioustractor/theharvest",
+      "github_url": "https://github.com/Acurioustractor/theharvest",
       "description": "Community hub and CSA programs",
       "stack": "Next.js, Supabase, Tailwind",
       "deployment": "Vercel",
@@ -44,6 +48,7 @@
       "name": "Goods",
       "path": "/Users/benknight/Code/Goods Asset Register",
       "github": "Acurioustractor/goods-asset-tracker",
+      "github_url": "https://github.com/Acurioustractor/goods-asset-tracker",
       "description": "Circular economy asset management",
       "stack": "Next.js, Supabase, Tailwind",
       "deployment": "Vercel",
@@ -51,9 +56,32 @@
       "skills": ["act-sprint-workflow", "act-brand-alignment", "ghl-crm-advisor"]
     },
     {
+      "name": "GrantScope",
+      "path": "/Users/benknight/Code/grantscope",
+      "github": "Acurioustractor/grantscope",
+      "github_url": "https://github.com/Acurioustractor/grantscope",
+      "description": "CivicGraph, grants intelligence, and procurement discovery substrate",
+      "stack": "Next.js, Supabase, MCP, Tailwind",
+      "deployment": "Vercel",
+      "workflows": ["snapshot-sprint", "auto-tag"],
+      "skills": ["act-sprint-workflow", "act-brand-alignment", "ghl-crm-advisor"]
+    },
+    {
+      "name": "Palm Island Repository",
+      "path": "/Users/benknight/Code/Palm Island Reposistory",
+      "github": "Acurioustractor/palm-island-repository",
+      "github_url": "https://github.com/Acurioustractor/palm-island-repository",
+      "description": "PICC-linked community archive, reporting, and web-platform workspace",
+      "stack": "Mixed repo (web-platform, templates, research, scripts)",
+      "deployment": "Vercel",
+      "workflows": ["snapshot-sprint"],
+      "skills": ["act-brand-alignment", "content-publisher"]
+    },
+    {
       "name": "ACT Farm",
       "path": "/Users/benknight/Code/act-farm",
       "github": "Acurioustractor/act-farm",
+      "github_url": "https://github.com/Acurioustractor/act-farm",
       "description": "Black Cockatoo Valley regeneration estate",
       "stack": "Next.js, Supabase, Tailwind",
       "deployment": "Vercel",
@@ -63,7 +91,22 @@
     {
       "name": "ACT Intelligence Platform",
       "path": "/Users/benknight/Code/act-intelligence-platform",
-      "github": "Acurioustractor/act-intelligence-platform",
+      "github": "Acurioustractor/act-placemat",
+      "github_url": "https://github.com/Acurioustractor/act-placemat",
+      "github_remotes": [
+        {
+          "name": "origin",
+          "github": "Acurioustractor/act-placemat",
+          "github_url": "https://github.com/Acurioustractor/act-placemat",
+          "role": "Primary origin remote for the current local clone."
+        },
+        {
+          "name": "intelligence",
+          "github": "Acurioustractor/act-intelligence-platform",
+          "github_url": "https://github.com/Acurioustractor/act-intelligence-platform",
+          "role": "Secondary dedicated intelligence-platform remote."
+        }
+      ],
       "description": "Intelligence layer and ecosystem dashboard",
       "stack": "Next.js, Supabase, Tailwind",
       "deployment": "Vercel",

@@ -64,7 +64,7 @@ function normalizeProjectCode(code) {
     'goods': 'ACT-GD', 'gd': 'ACT-GD',
     'farm': 'ACT-FM', 'fm': 'ACT-FM',
     'el': 'ACT-EL', 'empathy': 'ACT-EL',
-    'picc': 'ACT-PC', 'pc': 'ACT-PC'
+    'picc': 'ACT-PI', 'pc': 'ACT-PI'
   };
 
   const lower = code.toLowerCase();

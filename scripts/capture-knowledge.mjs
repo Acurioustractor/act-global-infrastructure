@@ -106,8 +106,8 @@ function normalizeProjectCode(code) {
     'fm': 'ACT-FM',
     'el': 'ACT-EL',
     'empathy': 'ACT-EL',
-    'picc': 'ACT-PC',
-    'pc': 'ACT-PC'
+    'picc': 'ACT-PI',
+    'pc': 'ACT-PI'
   };
 
   const lower = code.toLowerCase();
@@ -608,7 +608,7 @@ Project Shortcuts:
   goods, gd    → ACT-GD (Goods)
   farm, fm     → ACT-FM (ACT Farm)
   el, empathy  → ACT-EL (Empathy Ledger)
-  picc, pc     → ACT-PC (PICC)
+  picc, pc     → ACT-PI (PICC)
 `);
     return;
   }

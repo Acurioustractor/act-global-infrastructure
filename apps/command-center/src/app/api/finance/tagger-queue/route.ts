@@ -55,13 +55,16 @@ export async function GET(request: NextRequest) {
       invQuery.order('date', { ascending: false }).limit(limit),
       txQuery.order('date', { ascending: false }).limit(limit),
       supabase.from('vendor_project_rules').select('vendor_name, project_code, aliases'),
-      supabase.from('projects').select('code, name, tier').eq('status', 'active').order('tier').order('name'),
+      supabase.from('projects').select('code, name, tier, metadata').eq('status', 'active').order('tier').order('name'),
     ])
 
     const invoices = invResult.data || []
     const transactions = txResult.data || []
     const rules = rulesResult.data || []
-    const projects = projectsResult.data || []
+    const allProjects = projectsResult.data || []
+    const projects = mode === 'untagged'
+      ? allProjects.filter((project: { metadata?: { legacy_wrapper?: boolean } | null }) => !project.metadata?.legacy_wrapper)
+      : allProjects
 
     // Build rules lookup
     const rulesMap = new Map<string, string>()

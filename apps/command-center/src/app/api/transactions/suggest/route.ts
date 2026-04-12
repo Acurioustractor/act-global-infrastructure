@@ -19,11 +19,12 @@ export async function POST(request: NextRequest) {
 
     // Load existing project codes and vendor rules for context
     const [{ data: projects }, { data: rules }] = await Promise.all([
-      supabase.from('projects').select('code, name, category'),
+      supabase.from('projects').select('code, name, category, metadata'),
       supabase.from('vendor_project_rules').select('vendor_name, project_code').limit(50),
     ])
 
-    const projectList = (projects || []).map(p => `${p.code}: ${p.name} (${p.category})`).join('\n')
+    const activeProjects = (projects || []).filter((p: { metadata?: { legacy_wrapper?: boolean } | null }) => !p.metadata?.legacy_wrapper)
+    const projectList = activeProjects.map(p => `${p.code}: ${p.name} (${p.category})`).join('\n')
     const ruleExamples = (rules || []).slice(0, 20).map(r => `${r.vendor_name} → ${r.project_code}`).join('\n')
 
     const response = await anthropic.messages.create({
@@ -38,12 +39,14 @@ Example vendor→project mappings:
 ${ruleExamples}
 
 Rules:
-- Respond with ONLY the project code (e.g. "ACT-HQ") or "UNKNOWN" if you can't determine it
-- ACT-HQ is for general operations, admin, office supplies
+- Respond with ONLY the project code (e.g. "ACT-CORE") or "UNKNOWN" if you can't determine it
+- Prefer canonical project codes for new work. Do NOT suggest legacy wrapper codes like ACT-HQ or ACT-PC.
+- ACT-CORE is for general studio operations, admin, and shared ecosystem overhead
 - ACT-EL is Empathy Ledger (tech platform)
 - ACT-IN is Intelligence/AI/Bot
 - ACT-GD is Goods on Country (laundry/community services)
 - ACT-JH is JusticeHub (justice/legal tech)
+- ACT-PI is PICC / Palm Island work
 - Software/SaaS vendors are usually ACT-IN or ACT-EL
 - Travel to Palm Island/Darwin is usually ACT-GD or ACT-PS`,
       messages: [
@@ -60,7 +63,7 @@ Rules:
       .join('')
 
     // Validate the suggestion is a real project code
-    const validCodes = new Set((projects || []).map(p => p.code))
+    const validCodes = new Set(activeProjects.map(p => p.code))
     const suggestedCode = validCodes.has(text) ? text : null
 
     return NextResponse.json({

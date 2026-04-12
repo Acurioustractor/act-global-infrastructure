@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cultivating Intentionality — Benjamin Knight, A Curious Tractor</title>
+<title>Benjamin Social Soil Canvas — A Curious Tractor</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@300;400;500&display=swap');
 
@@ -121,6 +121,38 @@
     outline: none;
     line-height: 1.6;
     height: 3.5rem;
+  }
+
+  .field-note {
+    padding: 1rem 2rem 1.1rem;
+    border-bottom: 1px solid var(--border);
+    background: rgba(246, 241, 231, 0.55);
+  }
+
+  .field-note-copy {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.7rem;
+    max-width: 960px;
+  }
+
+  .field-note-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+  }
+
+  .field-note-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.3rem 0.55rem;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--bg);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.62rem;
+    color: var(--tan);
   }
 
   /* ── Top Row: Values + 5Ps ── */
@@ -741,8 +773,8 @@
 <div class="header">
   <div class="header-left">
     <div class="eyebrow">A Curious Tractor · Jinibara Country</div>
-    <h1>Cultivating Intentionality</h1>
-    <div class="subtitle">Benjamin Knight — Co-Founder Canvas</div>
+    <h1>Social Soil Canvas</h1>
+    <div class="subtitle">Benjamin Knight — Field Conditions for the Next Phase</div>
   </div>
   <div class="header-right">
     <div class="cycle-label">Cycle</div>
@@ -752,14 +784,25 @@
 
 <!-- ═══════════ NORTH STAR ═══════════ -->
 <div class="north-star">
-  <div class="label">☀ North Star — What is the assignment of this season?</div>
+  <div class="label">☀ North Star — What field are you trying to cultivate this season?</div>
   <textarea id="north-star" placeholder="What are you trying to build, become, or protect in this chapter?">Build Curious Tractor into a regenerative systems practice that turns complexity into usable field tools for teams and communities. Design for our own obsolescence.</textarea>
+</div>
+
+<div class="field-note">
+  <div class="field-note-copy">Use this canvas to separate symptoms from soil. Start with what is visible above ground, trace it back to the hidden field conditions beneath it, and choose the smallest weekly action that improves the whole system.</div>
+  <div class="field-note-tags">
+    <span class="field-note-chip">SOIL · hidden conditions</span>
+    <span class="field-note-chip">SEED · emerging possibility</span>
+    <span class="field-note-chip">FURROW · next action</span>
+    <span class="field-note-chip">SPIRAL · recurring pattern</span>
+    <span class="field-note-chip">SPROUT · visible proof</span>
+  </div>
 </div>
 
 <!-- ═══════════ VALUES + 5Ps ═══════════ -->
 <div class="top-row">
   <div class="values-section">
-    <div class="section-label"><span class="symbol">⛤</span> Values — Spirit over matter</div>
+    <div class="section-label"><span class="symbol">🌾</span> Values — what governs the work</div>
     <div class="values-list">
       <div class="value-item"><span class="num">1.</span><input type="text" value="Truth before performance" /></div>
       <div class="value-item"><span class="num">2.</span><input type="text" value="Regeneration over extraction" /></div>
@@ -770,7 +813,7 @@
   </div>
 
   <div class="fiveP-section">
-    <div class="section-label">5P Scan</div>
+    <div class="section-label">5P Field Scan</div>
     <table class="fiveP-table">
       <thead>
         <tr>
@@ -818,7 +861,7 @@
 
 <!-- ═══════════ FIELD CROSS-SECTION ═══════════ -->
 <div class="field-section">
-  <div class="section-label" style="padding: 1.25rem 2rem 0.5rem;">🌾 The Field — What grows above is a function of the soil below</div>
+  <div class="section-label" style="padding: 1.25rem 2rem 0.5rem;">🌾 The Field — what grows above ground is a function of the soil below</div>
 
   <!-- Sky / Sprout Zone -->
   <div class="sky-zone">
@@ -881,7 +924,7 @@
 
   <!-- Soil Zone -->
   <div class="soil-zone">
-    <div class="zone-label">Hidden · Conditions · Root Causes</div>
+    <div class="zone-label">Hidden · Conditions · Relationships · Social Soil</div>
 
     <div class="soil-grid">
       <div class="grid-header"></div>
@@ -891,7 +934,7 @@
 
       <div class="row-label">
         <div class="dot" style="background: var(--soil-dark);"></div>
-        Darkness
+        Darkness / Friction
       </div>
       <div class="grid-cell"><textarea placeholder="What's hidden in you?">Over-commitment. Identity tied to being needed. $0 salary unsustainable — erodes R&D claims and personal health.</textarea></div>
       <div class="grid-cell"><textarea placeholder="What's hidden in the team?">Hard conversations delayed. Role boundaries implicit. Nicholas draws $323K, Ben draws $0 — this gap is unspoken.</textarea></div>
@@ -899,7 +942,7 @@
 
       <div class="row-label">
         <div class="dot" style="background: var(--seed-gold);"></div>
-        Compost
+        Compost / Learning
       </div>
       <div class="grid-cell"><textarea placeholder="What are you learning?">Energy rises when I write, facilitate live, build systems. My best work is making invisible things visible.</textarea></div>
       <div class="grid-cell"><textarea placeholder="What is the team learning?">We work best with explicit constraints. PICC proved the PTO model works. Nicholas excels at Listen + Art, Ben at Curiosity + Action.</textarea></div>
@@ -907,7 +950,7 @@
 
       <div class="row-label">
         <div class="dot" style="background: var(--sprout-green);"></div>
-        Rebirth
+        Rebirth / Repatterning
       </div>
       <div class="grid-cell"><textarea placeholder="What new pattern?">Fewer commitments, deeper execution. Publish learning-in-public. Get on payroll ($200K, 85% R&D).</textarea></div>
       <div class="grid-cell"><textarea placeholder="What new pattern?">Weekly co-founder operating ritual. Explicit decision rights. Co-signed operating doc.</textarea></div>
@@ -917,7 +960,7 @@
 
   <!-- Root System -->
   <div class="roots-section">
-    <div class="roots-label">🌿 Root System — Shared values, relationships, infrastructure connecting everything</div>
+    <div class="roots-label">🌿 Root System — relationships, infrastructure, and shared philosophy holding the field together</div>
     <div class="roots-grid">
       <div class="root-card">
         <div class="root-title">Shared Infrastructure</div>
@@ -953,7 +996,7 @@
       <div class="track-header">
         <div class="track-num" style="background: var(--soil-dark);">1</div>
         <div class="track-title">Identity</div>
-        <div class="track-symbol">⛤</div>
+        <div class="track-symbol">🧭</div>
       </div>
       <div class="track-body">
         <div class="track-row"><span class="track-action">Stop</span><input type="text" value="Performing certainty. Working for $0." /></div>
@@ -1033,7 +1076,7 @@
 <!-- ═══════════ FUTURE SELF NOTE ═══════════ -->
 <div class="future-self">
   <div class="section-label">✉️ Note from Future Self</div>
-  <textarea id="future-self-note">Benjamin, keep choosing depth over noise. Your work lands when you simplify it into tools people can use tomorrow. Protect your energy like a strategic asset. Say no faster. Build fewer things, finish more things, and let results speak. The only failure is becoming indispensable — and you're dangerously close. Hand over the keys.</textarea>
+  <textarea id="future-self-note">Benjamin, keep choosing depth over noise. Your work lands when you simplify complexity into tools people can use tomorrow. Protect your energy like a strategic asset. Say no faster. Work the roots, not just the symptoms. Build fewer things, finish more things, and keep handing over the keys.</textarea>
 </div>
 
 <!-- ═══════════ SEED QUOTES ═══════════ -->
@@ -1042,12 +1085,12 @@
   <span class="quote-chip">"Plant seeds today for forests tomorrow."</span>
   <span class="quote-chip">"Action without listening is extraction."</span>
   <span class="quote-chip">"Art is how change travels."</span>
-  <span class="quote-chip">"The only failure is becoming indispensable."</span>
+  <span class="quote-chip">"Work the roots, not just the symptoms."</span>
   <span class="quote-chip">"Country caring for people, people caring for Country."</span>
   <span class="quote-chip">"Design for our own obsolescence."</span>
   <span class="quote-chip">"The soil is alive."</span>
-  <span class="quote-chip">"From extraction to connection."</span>
-  <span class="quote-chip">"A perpetual becoming."</span>
+  <span class="quote-chip">"From extraction to regeneration."</span>
+  <span class="quote-chip">"What grows above ground is a function of the soil below."</span>
 </div>
 
 <!-- ═══════════ FOOTER ═══════════ -->
@@ -1065,7 +1108,7 @@
 
 <script>
   // ── Persistence ──
-  const STORAGE_KEY = 'act-intentionality-canvas';
+  const STORAGE_KEY = 'act-social-soil-canvas';
 
   function getAllInputs() {
     const data = {};
@@ -1112,7 +1155,7 @@
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `intentionality-canvas-${data._cycle.replace(/\s+/g, '-').toLowerCase()}.json`;
+    a.download = `social-soil-canvas-${data._cycle.replace(/\s+/g, '-').toLowerCase()}.json`;
     a.click();
     URL.revokeObjectURL(url);
     showToast('Exported as JSON');

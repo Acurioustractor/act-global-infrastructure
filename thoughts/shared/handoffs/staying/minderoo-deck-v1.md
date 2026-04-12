@@ -4,7 +4,7 @@ date: 2026-04-08
 audience: Lucy Stronach, Minderoo Foundation
 status: ⚠️ SUPERSEDED — wrong shape, wrong numbers
 length: 10 slides
-related: wiki/projects/staying.md
+related: wiki/projects/justicehub/staying.md
 superseded_by: minderoo-deck-v2.md
 ---
 
@@ -23,7 +23,7 @@ superseded_by: minderoo-deck-v2.md
 
 **A pitch deck for Minderoo Foundation. 10 slides. Markdown first, design later.**
 
-> ⚠️ **SUPERSEDED — see banner above.** This is the first artefact derived from `wiki/projects/staying.md` (which itself has been reframed as the methodology layer of Three Circles). Numbers, communities, structure, and decisions in this draft were locked against the wrong shape and have all been replaced in `minderoo-deck-v2.md`.
+> ⚠️ **SUPERSEDED — see banner above.** This is the first artefact derived from `wiki/projects/justicehub/staying.md` (which itself has been reframed as the methodology layer of Three Circles). Numbers, communities, structure, and decisions in this draft were locked against the wrong shape and have all been replaced in `minderoo-deck-v2.md`.
 
 ---
 

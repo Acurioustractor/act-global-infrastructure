@@ -41,7 +41,9 @@ const PIPELINE_MAP = {
   'radical scoops': 'ACT-RA',
   'picc': 'ACT-PI',
   'the harvest': 'ACT-HV',
-  'confit': 'ACT-CF',
+  'campfire': 'ACT-CM',
+  'community capital': 'ACT-CP',
+  'confit': 'ACT-CT',
   'smart stories': 'ACT-SM',
   'marriage celebrant': 'ACT-MC',
 };

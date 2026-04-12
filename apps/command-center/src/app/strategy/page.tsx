@@ -23,6 +23,7 @@ import {
   ChevronDown,
   ChevronRight,
   Shield,
+  ClipboardCheck,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
@@ -143,6 +144,67 @@ interface StrategyData {
   scenarios: Record<string, { fy26: number; fy27: number; fy28: number; description: string }>
   flywheel: Array<{ segment: string; projects: string[]; objectiveCount: number }>
   synergy: Array<{ from: string; to: string; type: string }>
+  operatingHistory: {
+    monthsTracked: number
+    cumulativeIncome: number
+    cumulativeExpenses: number
+    cumulativeNet: number
+    bestMonthNet: number
+    worstMonthNet: number
+  }
+  founderOperatingModel: {
+    mode: 'stabilize' | 'build' | 'accelerate'
+    reserveTargetMonths: number
+    reserveTargetAmount: number
+    reserveGap: number
+    runwayMonths: number
+    pipelineCoverageMonths: number
+    receivableCoverageMonths: number
+    timeSplit: {
+      revenueCapture: number
+      productBuild: number
+      relationships: number
+      compliance: number
+      makerTime: number
+    }
+    capitalSplit: {
+      reserve: number
+      growth: number
+      redistribution: number
+      founderFreedom: number
+    }
+    focusOrder: Array<{
+      title: string
+      actionType: string
+      dollarValue: number
+      urgency: 'critical' | 'urgent' | 'important'
+    }>
+  }
+  nicReview: {
+    basDueDate: string
+    receiptCoverageValuePct: number
+    projectCodeCoveragePct: number
+    rdTagCoveragePct: number
+    currentRdEligible: number
+    currentRdRefund: number
+    rdReviewBaseline: {
+      reportDate: string
+      conservativeEligible: number
+      conservativeRefund: number
+      reviewPile: number
+      reviewTxCount: number
+      upside30pct: number
+    }
+    syncHealthy: boolean
+    lastDextForwardAt: string | null
+    dextRecentlyActive: boolean
+    steps: Array<{
+      id: string
+      title: string
+      status: 'ready' | 'in_progress' | 'blocked'
+      detail: string
+    }>
+  }
   fy: string
 }
 
@@ -206,6 +268,24 @@ const FLYWHEEL_SEGMENTS: Record<string, { label: string; color: string; icon: ty
   rd_refund: { label: 'R&D Refund', color: 'text-amber-400', icon: Zap },
 }
 
+const MODE_LABELS: Record<'stabilize' | 'build' | 'accelerate', { title: string; color: string; summary: string }> = {
+  stabilize: {
+    title: 'Stabilize Cash',
+    color: 'text-red-400',
+    summary: 'Protect runway first. Cash capture and discipline beat new expansion.',
+  },
+  build: {
+    title: 'Build Core Engine',
+    color: 'text-amber-400',
+    summary: 'Balance revenue capture and product compounding with clear weekly focus.',
+  },
+  accelerate: {
+    title: 'Accelerate Growth',
+    color: 'text-emerald-400',
+    summary: 'Runway and pipeline are healthy. Push growth while preserving safeguards.',
+  },
+}
+
 // ── Component ──────────────────────────────────────────────
 
 export default function StrategyPage() {
@@ -237,7 +317,8 @@ export default function StrategyPage() {
     )
   }
 
-  const { needleMovers, projects, objectives, financialPosition: fin, pipeline, grantTracking, scenarios, flywheel, synergy } = data
+  const { needleMovers, projects, objectives, financialPosition: fin, pipeline, grantTracking, scenarios, flywheel, synergy, operatingHistory, founderOperatingModel, nicReview } = data
+  const modeMeta = MODE_LABELS[founderOperatingModel.mode]
 
   const ecosystemProjects = projects.filter((p) => p.tier === 'ecosystem')
   const otherProjects = projects.filter((p) => p.tier !== 'ecosystem' && p.oneLiner)
@@ -302,6 +383,210 @@ export default function StrategyPage() {
           <span className="absolute right-0 -top-5 text-[10px] text-white/30 tabular-nums">{data.fy} — {fyProgressPct}% elapsed</span>
         </div>
       </header>
+
+      {/* ═══════════ SECTION 0: OPERATING MODEL ═══════════ */}
+      <section>
+        <h2 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+          <Shield className="h-5 w-5 text-cyan-400" />
+          Founder Operating Model
+          <span className="text-xs text-white/30 font-normal ml-2">money + time + focus</span>
+        </h2>
+
+        <div className="grid lg:grid-cols-3 gap-4">
+          <div className="glass-card p-5 space-y-4">
+            <div>
+              <p className="text-[10px] uppercase tracking-wide text-white/40 mb-1">Current Mode</p>
+              <p className={cn('text-lg font-semibold', modeMeta.color)}>{modeMeta.title}</p>
+              <p className="text-xs text-white/35 mt-1">{modeMeta.summary}</p>
+            </div>
+            <div className="grid grid-cols-2 gap-3 text-xs">
+              <MetricBlock label="Runway" value={`${founderOperatingModel.runwayMonths} mo`} />
+              <MetricBlock label="Pipeline Cover" value={`${founderOperatingModel.pipelineCoverageMonths} mo`} />
+              <MetricBlock label="Receivable Cover" value={`${founderOperatingModel.receivableCoverageMonths} mo`} />
+              <MetricBlock label="Reserve Gap" value={founderOperatingModel.reserveGap > 0 ? $full(founderOperatingModel.reserveGap) : 'Covered'} />
+            </div>
+            <div className="pt-2 border-t border-white/10">
+              <p className="text-[10px] uppercase tracking-wide text-white/35">Operating History</p>
+              <p className="text-xs text-white/60 mt-1">{operatingHistory.monthsTracked} months tracked</p>
+              <div className="mt-2 space-y-1 text-xs">
+                <div className="flex justify-between">
+                  <span className="text-white/35">Income</span>
+                  <span className="text-green-400 tabular-nums">{$full(operatingHistory.cumulativeIncome)}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-white/35">Expenses</span>
+                  <span className="text-red-400 tabular-nums">{$full(operatingHistory.cumulativeExpenses)}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-white/35">Net</span>
+                  <span className={cn('tabular-nums', operatingHistory.cumulativeNet >= 0 ? 'text-emerald-400' : 'text-red-400')}>
+                    {operatingHistory.cumulativeNet >= 0 ? '+' : '-'}{$full(operatingHistory.cumulativeNet)}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="glass-card p-5">
+            <p className="text-[10px] uppercase tracking-wide text-white/40 mb-3">Weekly Time Allocation</p>
+            <div className="space-y-3">
+              {[
+                { label: 'Revenue capture', pct: founderOperatingModel.timeSplit.revenueCapture, color: 'bg-red-500/70' },
+                { label: 'Product build', pct: founderOperatingModel.timeSplit.productBuild, color: 'bg-indigo-500/70' },
+                { label: 'Relationships', pct: founderOperatingModel.timeSplit.relationships, color: 'bg-blue-500/70' },
+                { label: 'Compliance', pct: founderOperatingModel.timeSplit.compliance, color: 'bg-amber-500/70' },
+                { label: 'Maker time', pct: founderOperatingModel.timeSplit.makerTime, color: 'bg-emerald-500/70' },
+              ].map((row) => (
+                <SplitBar key={row.label} label={row.label} pct={row.pct} colorClass={row.color} />
+              ))}
+            </div>
+            <p className="text-[11px] text-white/35 mt-4">
+              Use this as the default weekly calendar split. Only override with an explicit decision.
+            </p>
+          </div>
+
+          <div className="glass-card p-5">
+            <p className="text-[10px] uppercase tracking-wide text-white/40 mb-3">Capital Flow Guardrails</p>
+            <div className="space-y-3">
+              {[
+                { label: 'Reserve', pct: founderOperatingModel.capitalSplit.reserve, color: 'bg-cyan-500/70' },
+                { label: 'Growth & build', pct: founderOperatingModel.capitalSplit.growth, color: 'bg-purple-500/70' },
+                { label: 'Redistribution', pct: founderOperatingModel.capitalSplit.redistribution, color: 'bg-green-500/70' },
+                { label: 'Founder freedom', pct: founderOperatingModel.capitalSplit.founderFreedom, color: 'bg-pink-500/70' },
+              ].map((row) => (
+                <SplitBar key={row.label} label={row.label} pct={row.pct} colorClass={row.color} />
+              ))}
+            </div>
+            <div className="mt-4 pt-3 border-t border-white/10">
+              <p className="text-[10px] uppercase tracking-wide text-white/35 mb-2">Top Focus This Week</p>
+              <div className="space-y-2">
+                {founderOperatingModel.focusOrder.slice(0, 3).map((focus, idx) => (
+                  <div key={`${focus.title}-${idx}`} className="flex items-start gap-2 text-xs">
+                    <span className="text-white/30 mt-0.5">{idx + 1}.</span>
+                    <div className="min-w-0">
+                      <p className="text-white/75 truncate">{focus.title}</p>
+                      <p className="text-white/35">
+                        {focus.actionType} · {$full(focus.dollarValue)} · {focus.urgency}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════ SECTION 0b: NIC CRITICAL PATH ═══════════ */}
+      <section>
+        <h2 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+          <ClipboardCheck className="h-5 w-5 text-amber-400" />
+          Nic Critical Path (90-day execution)
+          <span className="text-xs text-white/30 font-normal ml-2">BAS + R&D protection lane</span>
+        </h2>
+
+        <div className="grid lg:grid-cols-3 gap-4 mb-4">
+          <div className="glass-card p-5">
+            <p className="text-[10px] uppercase tracking-wide text-white/35">BAS + Coverage</p>
+            <div className="mt-2 space-y-2 text-xs">
+              <div className="flex justify-between">
+                <span className="text-white/35">BAS due</span>
+                <span className="text-white/70 tabular-nums">
+                  {new Date(nicReview.basDueDate).toLocaleDateString('en-AU', { day: 'numeric', month: 'short', year: 'numeric' })}
+                </span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-white/35">Receipt value coverage</span>
+                <span className={cn('tabular-nums', nicReview.receiptCoverageValuePct >= 94 ? 'text-emerald-400' : 'text-amber-400')}>
+                  {nicReview.receiptCoverageValuePct}%
+                </span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-white/35">Project code coverage</span>
+                <span className={cn('tabular-nums', nicReview.projectCodeCoveragePct >= 85 ? 'text-emerald-400' : 'text-amber-400')}>
+                  {nicReview.projectCodeCoveragePct}%
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div className="glass-card p-5">
+            <p className="text-[10px] uppercase tracking-wide text-white/35">FY26 R&D Position (Live)</p>
+            <div className="mt-2 space-y-2 text-xs">
+              <div className="flex justify-between">
+                <span className="text-white/35">R&D tag coverage</span>
+                <span className={cn('tabular-nums', nicReview.rdTagCoveragePct >= 90 ? 'text-emerald-400' : 'text-amber-400')}>
+                  {nicReview.rdTagCoveragePct}%
+                </span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-white/35">Eligible spend</span>
+                <span className="text-blue-400 tabular-nums">{$full(nicReview.currentRdEligible)}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-white/35">Refund estimate (43.5%)</span>
+                <span className="text-emerald-400 tabular-nums">{$full(nicReview.currentRdRefund)}</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="glass-card p-5">
+            <p className="text-[10px] uppercase tracking-wide text-white/35">Nic Report Baseline (9 Apr 2026)</p>
+            <div className="mt-2 space-y-2 text-xs">
+              <div className="flex justify-between">
+                <span className="text-white/35">Conservative refund</span>
+                <span className="text-emerald-400 tabular-nums">{$full(nicReview.rdReviewBaseline.conservativeRefund)}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-white/35">Review pile</span>
+                <span className="text-amber-400 tabular-nums">{$full(nicReview.rdReviewBaseline.reviewPile)}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-white/35">30% review upside</span>
+                <span className="text-purple-400 tabular-nums">+{$full(nicReview.rdReviewBaseline.upside30pct)}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="glass-card p-4 md:p-5">
+          <div className="flex items-center justify-between mb-3">
+            <p className="text-xs text-white/35 uppercase tracking-wide">Execution sequence</p>
+            <div className="flex items-center gap-2 text-xs">
+              <span className={cn('px-2 py-0.5 rounded-full', nicReview.syncHealthy ? 'text-emerald-400 bg-emerald-500/10' : 'text-amber-400 bg-amber-500/10')}>
+                Sync health: {nicReview.syncHealthy ? 'healthy' : 'needs work'}
+              </span>
+              <span className={cn('px-2 py-0.5 rounded-full', nicReview.dextRecentlyActive ? 'text-blue-400 bg-blue-500/10' : 'text-white/40 bg-white/5')}>
+                Dext activity: {nicReview.dextRecentlyActive ? 'active <24h' : 'stale'}
+              </span>
+            </div>
+          </div>
+          <div className="space-y-2">
+            {nicReview.steps.map((step, index) => (
+              <div key={step.id} className="border border-white/10 rounded-lg p-3">
+                <div className="flex items-center justify-between gap-3">
+                  <div className="min-w-0">
+                    <p className="text-xs text-white/75 font-medium">
+                      {index + 1}. {step.title}
+                    </p>
+                    <p className="text-[11px] text-white/35 mt-1">{step.detail}</p>
+                  </div>
+                  <span
+                    className={cn(
+                      'text-[10px] uppercase tracking-wide px-2 py-0.5 rounded-full whitespace-nowrap',
+                      step.status === 'ready' ? 'text-emerald-400 bg-emerald-500/10' :
+                      step.status === 'in_progress' ? 'text-blue-400 bg-blue-500/10' :
+                      'text-red-400 bg-red-500/10'
+                    )}
+                  >
+                    {step.status.replace('_', ' ')}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* ═══════════ SECTION 1: NEEDLE MOVERS ═══════════ */}
       <section>
@@ -886,6 +1171,29 @@ export default function StrategyPage() {
 }
 
 // ── Sub-components ─────────────────────────────────────────
+
+function MetricBlock({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="rounded-lg border border-white/10 bg-white/[0.02] p-2.5">
+      <p className="text-[10px] text-white/35 uppercase tracking-wide">{label}</p>
+      <p className="text-sm text-white/75 tabular-nums mt-1">{value}</p>
+    </div>
+  )
+}
+
+function SplitBar({ label, pct, colorClass }: { label: string; pct: number; colorClass: string }) {
+  return (
+    <div>
+      <div className="flex items-center justify-between text-xs mb-1">
+        <span className="text-white/60">{label}</span>
+        <span className="text-white/40 tabular-nums">{pct}%</span>
+      </div>
+      <div className="h-1.5 bg-white/10 rounded-full overflow-hidden">
+        <div className={cn('h-full rounded-full', colorClass)} style={{ width: `${pct}%` }} />
+      </div>
+    </div>
+  )
+}
 
 function ProjectCard({ project: p, compact }: { project: StrategicProject; compact?: boolean }) {
   const modelConfig = REVENUE_MODEL_LABELS[p.revenueModel] || REVENUE_MODEL_LABELS.internal

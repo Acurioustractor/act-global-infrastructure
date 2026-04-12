@@ -10,9 +10,9 @@ status: Active — resume next session
 
 ## Where to start the next session
 
-**Read this file first.** Then read `wiki/synthesis/the-edge-is-where-the-healing-is-justicehub-as-the-world-model-for-community-led.md` for the conceptual frame, and `wiki/projects/the-brave-ones.md` for the Studio piece.
+**Read this file first.** Then read `wiki/synthesis/the-edge-is-where-the-healing-is-justicehub-as-the-world-model-for-community-led.md` for the conceptual frame, and `wiki/projects/justicehub/the-brave-ones.md` for the Studio piece.
 
-The **single most important next move** is to write the full project page for **Staying** at `wiki/projects/staying.md` — the design is in this handoff and is mostly locked.
+The **single most important next move** is to write the full project page for **Staying** at `wiki/projects/justicehub/staying.md` — the design is in this handoff and is mostly locked.
 
 ---
 
@@ -53,7 +53,7 @@ The **single most important next move** is to write the full project page for **
 - **TODO next session:** save full blog + LinkedIn versions to `thoughts/writing/drafts/edge-holds-blog.md` and `.../edge-holds-linkedin.md`
 
 ### The Brave Ones — DONE (project filed)
-- `wiki/projects/the-brave-ones.md` — full project sketch, ideation status
+- `wiki/projects/justicehub/the-brave-ones.md` — full project sketch, ideation status
 - Studio cluster, sits alongside CONTAINED
 - Counter-mugshot photographic series, Brian Duffy / Bowie 1976 register
 - Phase 0–4 cost plan, cultural protocol non-negotiables, seed cohort identified (Xavier, MS, CB, Jackqwann, A, M, L from Oonchiumpa)
@@ -184,7 +184,7 @@ Lucy Stronach is at score 79 in the JusticeHub pipeline. Is the Staying pitch re
 ## NEXT-SESSION CHECKLIST (concrete, ordered)
 
 1. **Read this handoff file end to end** — and the synthesis article + the Brave Ones project page
-2. **Write `wiki/projects/staying.md`** — full project page using everything in this handoff
+2. **Write `wiki/projects/justicehub/staying.md`** — full project page using everything in this handoff
 3. **Save the blog + LinkedIn drafts** to `thoughts/writing/drafts/edge-holds-blog.md` and `thoughts/writing/drafts/edge-holds-linkedin.md` (the full text is in the prior conversation but should be re-pasted into files)
 4. **Cross-link** Staying ↔ Brave Ones ↔ JusticeHub ↔ Diagrama ↔ Empathy Ledger in their respective wiki articles
 5. **Run the wiki-build-viewer regen** so Staying and the synthesis article appear in `tools/act-wikipedia.html`
@@ -223,7 +223,7 @@ The user has had several important framing breakthroughs that the next session m
 - `wiki/output/index.md`
 - `wiki/log.md`
 - `wiki/synthesis/the-edge-is-where-the-healing-is-justicehub-as-the-world-model-for-community-led.md`
-- `wiki/projects/the-brave-ones.md`
+- `wiki/projects/justicehub/the-brave-ones.md`
 - `scripts/wiki-log.mjs`
 - `scripts/wiki-save-synthesis.mjs`
 - `scripts/wiki-verify-urls.mjs`
@@ -246,7 +246,7 @@ The user has had several important framing breakthroughs that the next session m
 - `scripts/wiki-build-viewer.mjs` — urlAudit injection + infobox renderer
 - `scripts/wiki-lint.mjs` — log integration + output path
 - `ecosystem.config.cjs` — wiki-verify-urls cron entry
-- `wiki/projects/justicehub.md` — homepage + URL corrections (via gh repo edit, not the file directly)
+- `wiki/projects/justicehub/justicehub.md` — homepage + URL corrections (via gh repo edit, not the file directly)
 
 ### Cleared (gh repo homepage edits)
 - justicehub-platform → https://www.justicehub.com.au
@@ -258,7 +258,7 @@ The user has had several important framing breakthroughs that the next session m
 
 ## RESUME INSTRUCTION FOR NEXT SESSION
 
-> Read `thoughts/shared/handoffs/staying/SESSION-HANDOFF.md` first. Then answer Q11–Q15 with me, then write `wiki/projects/staying.md` using everything in the handoff. Don't restart the architecture — it's locked. The next session is execution, not re-thinking.
+> Read `thoughts/shared/handoffs/staying/SESSION-HANDOFF.md` first. Then answer Q11–Q15 with me, then write `wiki/projects/justicehub/staying.md` using everything in the handoff. Don't restart the architecture — it's locked. The next session is execution, not re-thinking.
 
 The thing has a name now. **Staying.** It exists.
 

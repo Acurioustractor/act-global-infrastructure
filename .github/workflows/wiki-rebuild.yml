@@ -38,8 +38,20 @@ jobs:
         with:
           node-version: '20'
 
+      - name: Install dependencies
+        run: npm install --ignore-scripts 2>/dev/null || true
+
       - name: Lint wiki
         run: node scripts/wiki-lint.mjs || true
+
+      - name: Update search index
+        if: ${{ env.HAS_OPENAI == 'true' }}
+        run: node scripts/wiki-index-search.mjs --full || true
+        env:
+          HAS_OPENAI: ${{ secrets.OPENAI_API_KEY != '' }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
 
       - name: Rebuild viewer + snapshot
         run: node scripts/wiki-build-viewer.mjs

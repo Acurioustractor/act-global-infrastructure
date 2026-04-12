@@ -76,7 +76,7 @@ const opportunities = [
     value_type: 'cash',
     stage: 'pursuing',
     probability: 0.7,
-    project_codes: ['ACT-HQ'],
+    project_codes: ['ACT-CORE'],
     expected_close: '2026-04-01',
     metadata: { tier: 1, source: SOURCE_TAG }
   },
@@ -162,7 +162,7 @@ const opportunities = [
     value_type: 'cash',
     stage: 'identified',
     probability: 0.3,
-    project_codes: ['ACT-HQ'],
+    project_codes: ['ACT-CORE'],
     expected_close: '2026-06-30',
     metadata: { tier: 2, source: SOURCE_TAG }
   },
@@ -192,7 +192,7 @@ const opportunities = [
     value_type: 'cash',
     stage: 'identified',
     probability: 0.5,
-    project_codes: ['ACT-HQ'],
+    project_codes: ['ACT-CS'],
     expected_close: '2026-09-01',
     metadata: { tier: 3, source: SOURCE_TAG }
   },
@@ -292,7 +292,7 @@ const opportunities = [
     value_type: 'cash',
     stage: 'identified',
     probability: 0.3,
-    project_codes: ['ACT-HQ'],
+    project_codes: ['ACT-CS'],
     expected_close: '2027-03-01',
     metadata: { tier: 4, source: SOURCE_TAG }
   },
@@ -306,7 +306,7 @@ const opportunities = [
     value_type: 'cash',
     stage: 'researching',
     probability: 0.6,
-    project_codes: ['ACT-HQ'],
+    project_codes: ['ACT-CORE'],
     expected_close: '2026-10-01',
     metadata: { tier: 4, source: SOURCE_TAG }
   },
@@ -320,7 +320,7 @@ const opportunities = [
     value_type: 'cash',
     stage: 'identified',
     probability: 0.1,
-    project_codes: ['ACT-HQ'],
+    project_codes: ['ACT-CORE'],
     expected_close: '2027-03-01',
     metadata: { tier: 4, source: SOURCE_TAG }
   },
@@ -334,7 +334,7 @@ const opportunities = [
     value_type: 'cash',
     stage: 'identified',
     probability: 0.25,
-    project_codes: ['ACT-HQ'],
+    project_codes: ['ACT-CORE'],
     expected_close: '2027-03-01',
     metadata: { tier: 4, source: SOURCE_TAG }
   }

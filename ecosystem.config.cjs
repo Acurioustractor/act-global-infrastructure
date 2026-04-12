@@ -81,7 +81,7 @@ const cronScripts = [
   {
     name: 'wiki-build-viewer',
     script: 'scripts/wiki-build-viewer.mjs',
-    cron_restart: '15 9 * * 1', // Weekly Monday 9:15am AEST — regenerate the Wikipedia viewer (after lint + verify-urls)
+    cron_restart: '15 9 * * 1', // Weekly Monday 9:15am AEST — regenerate the viewer and sync the command-center wiki mirror
   },
   {
     name: 'knowledge-pipeline',

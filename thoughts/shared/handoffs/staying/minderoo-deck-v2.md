@@ -4,7 +4,7 @@ date: 2026-04-08
 audience: Lucy Stronach, Minderoo Foundation
 status: Draft 2 — markdown only, design pass to follow
 length: 10 slides
-related: wiki/projects/three-circles.md
+related: wiki/projects/justicehub/three-circles.md
 supersedes: minderoo-deck-v1.md (which pitched the wrong shape — Staying as standalone $3.43M)
 canonical_source: wiki/raw/2026-04-07-jh-three-circles-proposal.md
 ---
@@ -13,7 +13,7 @@ canonical_source: wiki/raw/2026-04-07-jh-three-circles-proposal.md
 
 **A pitch deck for Minderoo Foundation. 10 slides. $2.9M / 3 years. Lucy-warm.**
 
-> Built from `wiki/projects/three-circles.md` with verified numbers from the GrantScope review (2026-04-08). Every figure here has been reconciled against the actual data layer in `/Users/benknight/Code/grantscope`. The earlier deck (v1) pitched a different shape called "Staying" at $3.43M; this deck supersedes it. Staying remains the *methodology name* for the Circle Two embedded storytelling work.
+> Built from `wiki/projects/justicehub/three-circles.md` with verified numbers from the GrantScope review (2026-04-08). Every figure here has been reconciled against the actual data layer in `/Users/benknight/Code/grantscope`. The earlier deck (v1) pitched a different shape called "Staying" at $3.43M; this deck supersedes it. Staying remains the *methodology name* for the Circle Two embedded storytelling work.
 
 ---
 

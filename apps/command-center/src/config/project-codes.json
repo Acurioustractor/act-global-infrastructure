@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "ACT Unified Project Codes - Use these codes across ALL systems",
-    "version": "1.2.0",
+    "version": "1.2.1",
     "updated": "2026-01-23",
     "systems": ["notion", "supabase", "ghl", "xero", "dext", "empathy-ledger", "alma"],
     "status_values": ["active", "ideation", "sunsetting", "archived", "transferred"]
@@ -20,7 +20,8 @@
       "ghl_tags": ["justicehub", "justice", "youth justice", "youth-justice"],
       "xero_tracking": "JusticeHub",
       "dext_category": "Justice Projects",
-      "alma_program": "justice-reform",
+  "alma_program": "justice-reform",
+  "github_repo": "Acurioustractor/justicehub-platform",
       "lcaa_themes": ["Listen", "Connect", "Act", "Amplify"]
     },
     "ACT-DG": {
@@ -51,7 +52,8 @@
       "ghl_tags": ["goods"],
       "xero_tracking": "Goods",
       "dext_category": "Social Enterprise",
-      "alma_program": "economic-empowerment"
+  "alma_program": "economic-empowerment",
+  "github_repo": "Acurioustractor/goods-asset-tracker"
     },
     "ACT-EL": {
       "name": "Empathy Ledger",
@@ -66,12 +68,30 @@
       "ghl_tags": ["empathy-ledger", "empathy ledger", "empathy", "storytelling", "storyteller"],
       "xero_tracking": "Empathy Ledger",
       "dext_category": "Technology",
-      "alma_program": "storytelling",
+  "alma_program": "storytelling",
+  "github_repo": "Acurioustractor/empathy-ledger-v2",
       "lcaa_themes": ["Listen", "Amplify"]
+    },
+    "ACT-CORE": {
+      "name": "ACT Regenerative Studio",
+      "code": "ACT-CORE",
+      "canonical_slug": "act-studio",
+      "category": "ecosystem",
+      "priority": "high",
+      "status": "active",
+      "description": "Public hub, living wiki, and coordination layer for the ACT ecosystem",
+      "notion_pages": ["ACT Regenerative Studio"],
+      "ghl_tags": ["act", "studio", "act-studio"],
+      "xero_tracking": "ACT-CORE — ACT Regenerative Studio",
+      "dext_category": "Operations",
+  "alma_program": "ecosystem-infrastructure",
+  "github_repo": "Acurioustractor/act-regenerative-studio",
+      "lcaa_themes": ["Connect", "Act", "Amplify"]
     },
     "ACT-PI": {
       "name": "PICC",
       "code": "ACT-PI",
+      "canonical_slug": "picc",
       "category": "indigenous",
       "priority": "high",
       "status": "active",
@@ -84,9 +104,24 @@
       "ghl_tags": ["picc", "palm-island"],
       "xero_tracking": "PICC",
       "dext_category": "Indigenous Projects",
-      "alma_program": "first-nations",
+  "alma_program": "first-nations",
+  "github_repo": "Acurioustractor/palm-island-repository",
       "cultural_protocols": true,
       "sub_projects": ["ACT-PS", "ACT-SS", "ACT-UA", "ACT-ER"]
+    },
+    "ACT-CS": {
+      "name": "Civic Scope",
+      "code": "ACT-CS",
+      "canonical_slug": "civicgraph",
+      "category": "enterprise",
+      "priority": "high",
+      "status": "active",
+      "description": "Grant pipeline and civic engagement platform",
+      "ghl_tags": ["civic-scope", "grantscope"],
+      "xero_tracking": "ACT-CS — Civic Scope",
+      "dext_category": "Technology",
+  "alma_program": "civic-engagement",
+  "github_repo": "Acurioustractor/grantscope"
     },
     "ACT-ER": {
       "name": "PICC Elders Room",
@@ -226,7 +261,7 @@
       "xero_tracking": "The Harvest",
       "dext_category": "Regenerative",
       "alma_program": "food-systems",
-      "github_repo": "Acurioustractor/harvest-community-hub",
+      "github_repo": "Acurioustractor/theharvest",
       "production_url": "https://harvest-community.vercel.app",
       "location": "601 Maleny Kenilworth Rd, Witta QLD 4552",
       "place": "Gubbi Gubbi Country",
@@ -286,6 +321,21 @@
       "dext_category": "Stories",
       "alma_program": "storytelling",
       "lcaa_themes": ["Listen"]
+    },
+    "ACT-CM": {
+      "name": "CAMPFIRE",
+      "code": "ACT-CM",
+      "canonical_slug": "campfire",
+      "category": "justice",
+      "priority": "medium",
+      "status": "active",
+      "description": "Cultural immersion, fitness, and mentorship program for Indigenous youth in Mount Isa",
+      "notion_pages": ["CAMPFIRE"],
+      "ghl_tags": ["campfire", "mount-isa"],
+      "xero_tracking": "ACT-CM — CAMPFIRE",
+      "dext_category": "Justice Projects",
+      "alma_program": "youth-justice",
+      "lcaa_themes": ["Listen", "Act"]
     },
     "ACT-GP": {
       "name": "Gold Phone",
@@ -447,6 +497,35 @@
       "xero_tracking": "10x10 Retreat",
       "dext_category": "Events",
       "alma_program": "leadership"
+    },
+    "ACT-CP": {
+      "name": "Community Capital",
+      "code": "ACT-CP",
+      "canonical_slug": "community-capital",
+      "category": "funding",
+      "priority": "medium",
+      "status": "active",
+      "description": "Leadership retreat linking community leaders with capital holders",
+      "notion_pages": ["Community Capital", "10x10 Community Capital Leadership Retreat"],
+      "ghl_tags": ["community-capital", "10x10", "community capital"],
+      "xero_tracking": "ACT-CP — Community Capital",
+      "dext_category": "Funding",
+      "alma_program": "leadership"
+    },
+    "ACT-CT": {
+      "name": "ConFit Pathways",
+      "code": "ACT-CT",
+      "canonical_slug": "confit-pathways",
+      "category": "justice",
+      "priority": "medium",
+      "status": "active",
+      "description": "Lived-experience boxing and mentorship program for young people in or leaving the justice system",
+      "notion_pages": ["ConFit Pathways"],
+      "ghl_tags": ["confit", "confit-pathways", "joe-kwon"],
+      "xero_tracking": "ACT-CT — ConFit Pathways",
+      "dext_category": "Justice Projects",
+      "alma_program": "youth-justice",
+      "lcaa_themes": ["Act"]
     },
     "ACT-DL": {
       "name": "DadLab",

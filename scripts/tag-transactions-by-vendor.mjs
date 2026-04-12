@@ -266,10 +266,10 @@ async function tagTransactions() {
     let projectCode = null;
     let source = null;
 
-    // Tier 0: Auto-tag inter-account transfers as ACT-HQ (overhead)
+    // Tier 0: Auto-tag inter-account transfers as ACT-CORE (canonical studio/ops hub)
     const txType = (tx.type || '').toUpperCase();
     if (txType === 'SPEND-TRANSFER' || txType === 'RECEIVE-TRANSFER') {
-      projectCode = 'ACT-HQ';
+      projectCode = 'ACT-CORE';
       source = 'transfer_default';
       stats.tier0++;
     }

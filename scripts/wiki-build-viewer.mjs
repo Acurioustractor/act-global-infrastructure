@@ -3,7 +3,8 @@
  * Wiki Build Viewer — regenerates tools/act-wikipedia.html from the current wiki/ directory.
  *
  * The viewer is a single-file HTML app with article content embedded as a JS object.
- * This script walks wiki/, extracts every article, rebuilds the `articles` object,
+ * This script walks the canonical Tractorpedia graph, extracts each article, and rebuilds
+ * the `articles` object.
  * patches the `projectOrgMap` against current EL organizations, and broadens the
  * media_assets file_type filter so videos and non-jpeg images become visible.
  *
@@ -16,20 +17,20 @@
 
 import { readFileSync, writeFileSync, readdirSync, statSync, existsSync } from 'fs'
 import { join, basename, relative, dirname } from 'path'
+import { execFileSync } from 'child_process'
 import { logWikiEvent } from './wiki-log.mjs'
+import { WALK_SKIP_DIRS, isCanonicalGraphFile } from './lib/wiki-scope.mjs'
 
 const ROOT = process.cwd()
 const WIKI = join(ROOT, 'wiki')
 const VIEWER = join(ROOT, 'tools', 'act-wikipedia.html')
-const SKIP_DIRS = new Set(['raw', '.obsidian'])
-
 const dryRun = process.argv.includes('--dry-run')
 
 // ---- Walk wiki/ ----------------------------------------------------
 
 function walkMarkdown(dir, files = []) {
   for (const entry of readdirSync(dir)) {
-    if (SKIP_DIRS.has(entry)) continue
+    if (WALK_SKIP_DIRS.has(entry)) continue
     const full = join(dir, entry)
     const st = statSync(full)
     if (st.isDirectory()) walkMarkdown(full, files)
@@ -52,6 +53,17 @@ function parseFrontmatter(content) {
   return { meta, body }
 }
 
+function normalizeRelativePath(relPath) {
+  return relPath.replaceAll('\\', '/')
+}
+
+function relativePathToPagePath(relativePath) {
+  const normalized = normalizeRelativePath(relativePath)
+  if (normalized === 'index.md') return 'index'
+  if (normalized.endsWith('/index.md')) return normalized.slice(0, -'/index.md'.length)
+  return normalized.replace(/\.md$/, '')
+}
+
 function extractTitle(meta, body, slug) {
   if (meta.title) return meta.title
   const h1 = body.match(/^#\s+(.+?)$/m)
@@ -68,27 +80,39 @@ function extractLinks(body) {
   const regex = /\[\[([^\]|#]+)(?:[#|][^\]]*)?\]\]/g
   let m
   while ((m = regex.exec(stripped)) !== null) {
-    const target = m[1].trim().split('/').pop()
+    const target = m[1].trim().replaceAll('\\', '/')
     links.add(target)
   }
   return [...links]
 }
 
 const allFiles = walkMarkdown(WIKI)
+const graphFiles = allFiles.filter((file) => isCanonicalGraphFile(relative(WIKI, file)))
 const MAIN_INDEX = join(WIKI, 'index.md')
 const articles = {}
+const stemCounts = new Map()
 
-for (const file of allFiles) {
+for (const file of graphFiles) {
   const stem = basename(file, '.md')
-  const rel = relative(WIKI, file)
+  if (stem === 'index' && file !== MAIN_INDEX) continue
+  stemCounts.set(stem, (stemCounts.get(stem) || 0) + 1)
+}
+
+for (const file of graphFiles) {
+  const stem = basename(file, '.md')
+  const rel = normalizeRelativePath(relative(WIKI, file))
   const dir = dirname(rel) // 'concepts', 'projects', 'stories', or '.' for index.md
   const domain = dir === '.' ? 'index' : dir.split('/')[0]
 
-  // Disambiguate stories/<x>.md from possible projects/<x>.md by prefixing stories
-  const key = domain === 'stories' && stem !== 'index' ? `stories/${stem}` : stem
-
   // Skip subdirectory index.md files in main lookup; keep main index.md as 'index'
   if (stem === 'index' && file !== MAIN_INDEX && domain !== 'stories') continue
+
+  let key = stem
+  if (domain === 'stories' && stem !== 'index') {
+    key = `stories/${stem}`
+  } else if ((stemCounts.get(stem) || 0) > 1) {
+    key = relativePathToPagePath(rel)
+  }
 
   const raw = readFileSync(file, 'utf8')
   const { meta, body } = parseFrontmatter(raw)
@@ -105,12 +129,22 @@ for (const file of allFiles) {
 }
 
 const articleCount = Object.keys(articles).filter((k) => k !== 'index').length
-console.error(`Walked wiki/: ${articleCount} articles + 1 index`)
+console.error(`Walked canonical wiki graph: ${articleCount} articles + 1 index`)
 
 // ---- Fetch EL organizations to rebuild projectOrgMap --------------
 
-const EL_URL = 'https://yvnuayzslukamizrlhwb.supabase.co'
-const EL_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl2bnVheXpzbHVrYW1penJsaHdiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTYyNDQ4NTAsImV4cCI6MjA3MTgyMDg1MH0.UV8JOXSwANMl72lRjw-9d4CKniHSlDk9hHZpKHYN6Bs'
+const DEFAULT_EL_URL = 'https://yvnuayzslukamizrlhwb.supabase.co'
+const DEFAULT_EL_ANON_KEY =
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl2bnVheXpzbHVrYW1penJsaHdiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTYyNDQ4NTAsImV4cCI6MjA3MTgyMDg1MH0.UV8JOXSwANMl72lRjw-9d4CKniHSlDk9hHZpKHYN6Bs'
+const EL_URL = process.env.EL_SUPABASE_URL || DEFAULT_EL_URL
+const EL_KEY =
+  process.env.EL_SUPABASE_ANON_KEY ||
+  process.env.NEXT_PUBLIC_EL_SUPABASE_ANON_KEY ||
+  DEFAULT_EL_ANON_KEY
+
+if (EL_URL === DEFAULT_EL_URL || EL_KEY === DEFAULT_EL_ANON_KEY) {
+  console.error('⚠ Using built-in Empathy Ledger public config fallback. Prefer EL_SUPABASE_URL + EL_SUPABASE_ANON_KEY.')
+}
 
 async function fetchELOrgs() {
   const r = await fetch(`${EL_URL}/rest/v1/organizations?select=id,slug,name&limit=200`, {
@@ -594,13 +628,16 @@ async function main() {
   if (!articlesRegex.test(html)) throw new Error('Could not find articles object in viewer')
   html = html.replace(articlesRegex, newArticles)
 
-  // 4. Update the article count in the index article body
-  // The index article displays "Articles: 39" — replace with current count
+  // 4. Update index metadata in the embedded homepage article
+  const today = new Date().toISOString().split('T')[0]
+  html = html.replace(
+    /\*\*Article count:\*\*[^\n]*/g,
+    `**Article count:** ${articleCount} canonical articles`,
+  )
   html = html.replace(/\*\*Articles:\*\*\s*\d+/g, `**Articles:** ${articleCount}`)
-  html = html.replace(/Last compiled:\*\*\s*[0-9-]+/g, `Last compiled:** ${new Date().toISOString().split('T')[0]}`)
+  html = html.replace(/\*\*Last compiled:\*\*[^\n]*/g, `**Last compiled:** ${today}`)
 
   // 5. Update hardcoded "Last compiled: YYYY-MM-DD" in the homepage render function AND in <li> footer
-  const today = new Date().toISOString().split('T')[0]
   html = html.replace(/Last compiled: [0-9]{4}-[0-9]{2}-[0-9]{2}/g, `Last compiled: ${today}`)
 
   // 6. Update the homepage "129 articles across the ACT ecosystem" line
@@ -1535,6 +1572,14 @@ function showAllArticles() {`
   console.error(`  Articles embedded: ${articleCount}`)
   console.error(`  Photo map entries: ${Object.keys(map).length}`)
   console.error(`  Media filter: now includes images, videos, audio (all known EL file_types)`)
+
+  if (!dryRun) {
+    console.error('  Syncing command-center wiki snapshot…')
+    execFileSync('node', ['scripts/wiki-sync-command-center-snapshot.mjs'], {
+      cwd: ROOT,
+      stdio: 'inherit',
+    })
+  }
 
   try {
     logWikiEvent(

@@ -9,7 +9,7 @@
  *   import { logWikiEvent } from './wiki-log.mjs'
  *   logWikiEvent('lint', '0 errors, 3 warnings', ['wiki/decisions/lint-2026-04-07.md'])
  *
- * Ops: ingest | lint | query | synthesis | viewer-build | url-audit | enrich | bootstrap
+ * Ops: ingest | lint | query | synthesis | viewer-build | snapshot-sync | url-audit | enrich | bootstrap
  *
  * The log is append-only, most-recent at the top within each year section.
  * Format: `- YYYY-MM-DD HH:MM | <op> | <summary> | <files-touched>`
@@ -21,7 +21,7 @@ const ROOT = process.cwd()
 const LOG_PATH = join(ROOT, 'wiki', 'log.md')
 
 const VALID_OPS = new Set([
-  'ingest', 'lint', 'query', 'synthesis', 'viewer-build', 'url-audit',
+  'ingest', 'lint', 'query', 'synthesis', 'viewer-build', 'snapshot-sync', 'url-audit',
   'enrich', 'bootstrap', 'meeting-watch', 'manual',
 ])
 

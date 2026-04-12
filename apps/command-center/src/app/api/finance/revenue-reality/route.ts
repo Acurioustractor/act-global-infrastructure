@@ -4,6 +4,8 @@ import { execSql } from '@/lib/finance/query'
 
 export const dynamic = 'force-dynamic'
 
+const OVERHEAD_CODES = new Set(['ACT-HQ', 'ACT-CORE'])
+
 type MonthRow = { month: string; income: number; spend: number }
 type ProjectRow = { project_code: string; income: number; spend: number; tx_count: number }
 type TotalsRow = { fy: string; income: number; spend: number }
@@ -102,7 +104,9 @@ export async function GET() {
     }))
 
     // Computed metrics
-    const hqIncome = byProject.find(p => p.code === 'ACT-HQ')?.income || 0
+    const hqIncome = byProject
+      .filter(p => OVERHEAD_CODES.has(p.code))
+      .reduce((sum, p) => sum + p.income, 0)
     const hqConcentrationPct = currentIncome > 0 ? Math.round((hqIncome / currentIncome) * 100) : 0
 
     const grantTypeTotal = byType

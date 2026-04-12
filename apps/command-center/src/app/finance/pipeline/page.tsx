@@ -158,7 +158,7 @@ interface RevenueRealityResponse {
 
 type FilterKey = 'all' | string
 
-const ENGINE_PROJECTS = new Set(['ACT-GD', 'ACT-HV', 'ACT-FM', 'ACT-EL', 'ACT-JH', 'ACT-PI', 'ACT-PC', 'ACT-HQ', 'ACT-IN'])
+const ENGINE_PROJECTS = new Set(['ACT-GD', 'ACT-HV', 'ACT-FM', 'ACT-EL', 'ACT-JH', 'ACT-PI', 'ACT-PC', 'ACT-CORE', 'ACT-HQ', 'ACT-IN'])
 
 const STAGE_CONFIG: Record<string, { label: string; color: string; bg: string }> = {
   researching: { label: 'Researching', color: 'text-slate-400', bg: 'bg-slate-500/20' },
@@ -458,7 +458,7 @@ export default function PipelineReviewPage() {
             <div className={cn('glass-card p-4', revenue.computed.hqConcentrationPct > 80 ? 'border-red-500/20' : '')}>
               <div className="flex items-center gap-2 mb-1">
                 <AlertTriangle className="h-4 w-4 text-red-400" />
-                <span className="text-xs text-white/40 uppercase tracking-wider">HQ Tagged</span>
+                <span className="text-xs text-white/40 uppercase tracking-wider">Studio / Ops Tagged</span>
               </div>
               <p className={cn(
                 'text-2xl font-bold tabular-nums',
@@ -467,7 +467,7 @@ export default function PipelineReviewPage() {
                 {revenue.computed.hqConcentrationPct}%
               </p>
               <p className="text-xs text-white/30">
-                {revenue.computed.hqConcentrationPct > 80 ? 'Needs project re-tagging' : 'Tagged to ACT-HQ'}
+                {revenue.computed.hqConcentrationPct > 80 ? 'Needs project re-tagging' : 'Tagged to ACT-CORE / legacy ACT-HQ'}
               </p>
             </div>
           </div>

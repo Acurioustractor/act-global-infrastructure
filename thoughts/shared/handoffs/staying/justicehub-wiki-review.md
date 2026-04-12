@@ -4,7 +4,7 @@ date: 2026-04-08
 source: https://justicehub-vert.vercel.app/wiki
 context: Reviewing the prior Minderoo pitch + JusticeHub knowledge base before finalising Staying
 status: ⚠️ SUPERSEDED — based on broken vercel scrape with wrong numbers
-superseded_by: grantscope-review.md + wiki/projects/three-circles.md
+superseded_by: grantscope-review.md + wiki/projects/justicehub/three-circles.md
 ---
 
 > ⚠️ **SUPERSEDED 2026-04-08.** This review was written from a broken vercel deploy scrape (`justicehub-vert.vercel.app/wiki`) which served partial / wrong / aspirational numbers. Specifically: it cited a $10.5M BASE / $5.9M LEAN / $17.6M UPPER tier structure with 6 CORE + 20 NETWORK communities at $180K/community/year — **none of which are in the canonical proposal**.
@@ -119,7 +119,7 @@ This makes the pitch coherent with what Lucy already knows AND smaller than what
 6. **Indigenous leadership — who?** If we flip the team description from "1 FTE lead + 1 support" to "Indigenous-led", we need at least one named lead candidate to be credible. Who?
 7. **Sovereignty Flywheel — is the visual still live? If yes, where? If no, do we adopt the Three Ripples Ledger as the visual language for Staying?**
 8. **The 25K-word JusticeHub planning doc** — do you want me to ingest the full content into this wiki at `wiki/raw/2026-04-08-justicehub-mindaroo-pitch.md` for permanent reference?
-9. **Should Staying live as `wiki/projects/staying.md` (a discrete project) OR be merged into `wiki/projects/justicehub.md` as a section?** The clean answer is discrete + heavily cross-linked — which is what we have — but worth a yes/no.
+9. **Should Staying live as `wiki/projects/justicehub/staying.md` (a discrete project) OR be merged into `wiki/projects/justicehub/justicehub.md` as a section?** The clean answer is discrete + heavily cross-linked — which is what we have — but worth a yes/no.
 
 ---
 

@@ -17,6 +17,7 @@ import {
 export const dynamic = 'force-dynamic'
 
 const CACHE_MAX_AGE_MS = 6 * 60 * 60 * 1000 // 6 hours
+const OVERHEAD_CODES = new Set(['ACT-HQ', 'ACT-CORE'])
 
 // ── Compute the full overview (expensive: ~111 queries) ────────────
 async function computeOverview() {
@@ -331,12 +332,21 @@ async function computeOverview() {
     }),
   )
 
-  const hqFinancials = financials.get('ACT-HQ')
-  const hqExpenses = Math.abs(hqFinancials?.expenses || 0)
-  const hqRevenue = hqFinancials?.revenue || 0
+  const hqFinancials = [...financials.entries()]
+    .filter(([code]) => OVERHEAD_CODES.has(code))
+    .reduce(
+      (acc, [, value]) => ({
+        revenue: acc.revenue + (value?.revenue || 0),
+        expenses: acc.expenses + (value?.expenses || 0),
+        net: acc.net + (value?.net || 0),
+      }),
+      { revenue: 0, expenses: 0, net: 0 }
+    )
+  const hqExpenses = Math.abs(hqFinancials.expenses || 0)
+  const hqRevenue = hqFinancials.revenue || 0
 
   const nonHqProjects = [...financials.entries()]
-    .filter(([code]) => code !== 'ACT-HQ' && code !== 'DISPUTED')
+    .filter(([code]) => !OVERHEAD_CODES.has(code) && code !== 'DISPUTED')
     .map(([code, v]) => ({
       code,
       name: projectMap.get(code)?.name || code,

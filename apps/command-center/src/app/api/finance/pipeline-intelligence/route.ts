@@ -4,6 +4,8 @@ import { execSql } from '@/lib/finance/query'
 
 export const dynamic = 'force-dynamic'
 
+const OVERHEAD_CODES = new Set(['ACT-HQ', 'ACT-CORE'])
+
 type TaggingRow = { total: number; tagged: number }
 type StaleOppRow = { id: string; title: string; stage: string; opportunity_type: string; value_mid: number; project_codes: string[]; updated_at: string }
 type UntaggedRow = { count: number; total_value: number }
@@ -218,14 +220,16 @@ export async function GET() {
 
     // HQ concentration insight
     const totalRevenue = revenueByProject.reduce((s, r) => s + Number(r.income), 0)
-    const hqRevenue = Number(revenueByProject.find(r => r.project_code === 'ACT-HQ')?.income || 0)
+    const hqRevenue = revenueByProject
+      .filter(r => OVERHEAD_CODES.has(r.project_code))
+      .reduce((sum, row) => sum + Number(row.income || 0), 0)
     const hqPct = totalRevenue > 0 ? Math.round((hqRevenue / totalRevenue) * 100) : 0
     if (hqPct > 80) {
       insights.push({
         type: 'risk',
         icon: '🏢',
-        title: `${hqPct}% of income tagged to ACT-HQ`,
-        detail: `$${Math.round(hqRevenue / 1000)}K of $${Math.round(totalRevenue / 1000)}K goes to HQ instead of projects. Re-tag to improve project-level visibility.`,
+        title: `${hqPct}% of income tagged to studio / ops`,
+        detail: `$${Math.round(hqRevenue / 1000)}K of $${Math.round(totalRevenue / 1000)}K is still landing on ACT-CORE / legacy ACT-HQ instead of project-specific codes. Re-tag to improve project-level visibility.`,
         priority: 1,
       })
     }
