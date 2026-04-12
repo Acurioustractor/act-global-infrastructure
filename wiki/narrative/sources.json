@@ -1,0 +1,151 @@
+{
+  "$schema": "wiki/narrative/sources.schema.json",
+  "description": "Sources the narrative system watches. Each entry is a place that produces public-facing or pitch-shaped content. The watch script reads new content from each source and produces ingest digests for review.",
+  "version": 1,
+  "updated": "2026-04-09",
+  "sources": [
+    {
+      "id": "act-wiki-raw-essays",
+      "project": "contained",
+      "type": "folder",
+      "path": "wiki/raw",
+      "filter": "*-article-*.md",
+      "source-type": "essay",
+      "description": "Long-form essays ingested into Tractorpedia raw — Building Revolution, Cure Already Exists, etc.",
+      "schedule": "weekly"
+    },
+    {
+      "id": "justicehub-constellation-projects",
+      "project": "justicehub",
+      "type": "folder",
+      "path": "wiki/projects/justicehub",
+      "source-type": "pitch",
+      "description": "The five constellation files that make up the JusticeHub program, now grouped under wiki/projects/justicehub/: justicehub (platform), the-full-idea (STAY comprehensive), three-circles (Minderoo pitch), staying (methodology layer), the-brave-ones (photographic art). These are LIVE strategic documents — re-ingest weekly so claim files stay aligned with edits.",
+      "schedule": "weekly",
+      "wired": true
+    },
+    {
+      "id": "justicehub-staying-handoffs",
+      "project": "justicehub",
+      "type": "folder",
+      "path": "thoughts/shared/handoffs/staying",
+      "source-type": "pitch",
+      "description": "Working handoffs for the STAY journal and program — locked models, visual language, session handoffs. Internal-only, never public.",
+      "schedule": "weekly",
+      "wired": true
+    },
+    {
+      "id": "justicehub-compendium",
+      "project": "contained",
+      "type": "folder",
+      "path": "../JusticeHub/compendium",
+      "source-type": "pitch",
+      "description": "Locked CONTAINED campaign material — campaign bible, identity, launch posts, partner outreach, oped drafts.",
+      "schedule": "weekly"
+    },
+    {
+      "id": "justicehub-output-emails",
+      "project": "contained",
+      "type": "folder",
+      "path": "../JusticeHub/output",
+      "filter": "*email*.md",
+      "source-type": "email",
+      "description": "Personal and broadcast email drafts — funder, ally, decision-maker outreach.",
+      "schedule": "weekly"
+    },
+    {
+      "id": "justicehub-linkedin-engagement",
+      "project": "contained",
+      "type": "folder",
+      "path": "../JusticeHub/output",
+      "filter": "linkedin-engagement-*.json",
+      "source-type": "linkedin",
+      "description": "LinkedIn comments + reactions on CONTAINED posts. Each entry becomes a candidate audience reaction.",
+      "schedule": "daily"
+    },
+    {
+      "id": "justicehub-output-goods",
+      "project": "goods-on-country",
+      "type": "folder",
+      "path": "../JusticeHub/output/goods-on-country",
+      "source-type": "pitch",
+      "description": "Goods on Country strategic docs — unit cost reports, community ownership checkpoints, buyer pipeline.",
+      "schedule": "weekly"
+    },
+    {
+      "id": "contained-site-content",
+      "project": "contained",
+      "type": "folder",
+      "path": "../Contained/contained-site/src/content",
+      "source-type": "website",
+      "description": "Source content for the live CONTAINED site (justicehub.com.au/contained).",
+      "schedule": "weekly"
+    },
+    {
+      "id": "supabase-articles",
+      "project": "auto",
+      "type": "supabase",
+      "schema": "tednluwflfhxyucgwigh",
+      "table": "articles",
+      "columns": ["id", "title", "slug", "body", "published_at", "project_code"],
+      "source-type": "website",
+      "description": "Articles published on the JusticeHub website + ACT website. Use Supabase MCP to query. Rows tagged by project_code map to the project field automatically.",
+      "schedule": "daily",
+      "wired": true
+    },
+    {
+      "id": "empathy-ledger-stories",
+      "project": "auto",
+      "type": "supabase",
+      "schema": "yvnuayzslukamizrlhwb",
+      "table": "stories",
+      "columns": ["id", "title", "transcript", "storyteller_id", "project_id", "consent_scope", "created_at"],
+      "source-type": "el-story",
+      "description": "Empathy Ledger stories. Storyteller quotes become candidate audience reactions or testimonial variants. Respect consent_scope before promoting any quote into a public claim.",
+      "schedule": "daily",
+      "wired": true
+    },
+    {
+      "id": "ghl-contact-responses",
+      "project": "auto",
+      "type": "ghl",
+      "endpoint": "/contacts/notes",
+      "filter": "tag:contained-responded OR tag:contained-personal-outreach",
+      "source-type": "email-response",
+      "description": "Email responses to outreach in GHL CRM — these are first-party audience reactions to deployed claims. Match by date + recipient against the corresponding claim.",
+      "schedule": "daily",
+      "wired": true
+    },
+    {
+      "id": "act-place-website",
+      "project": "auto",
+      "type": "url",
+      "url": "https://act.place",
+      "source-type": "website",
+      "description": "Public website for A Curious Tractor. Scrape periodically to detect new pages, copy changes, and project descriptions.",
+      "schedule": "weekly",
+      "wired": true
+    },
+    {
+      "id": "justicehub-public-site",
+      "project": "contained",
+      "type": "url",
+      "url": "https://justicehub.com.au",
+      "source-type": "website",
+      "description": "Live JusticeHub site. The /contained subroute is the CONTAINED public surface.",
+      "schedule": "weekly",
+      "wired": true
+    }
+  ],
+  "schedules": {
+    "daily": "Run via cron at 06:00 AEST",
+    "weekly": "Run via cron at 06:00 AEST every Monday",
+    "manual": "Run only when triggered by /wiki narrative ingest <source-id>"
+  },
+  "notes": [
+    "Sources marked `wired: false` are configured but not yet implemented in narrative-watch.mjs. The local-folder sources work today; the API/scrape sources need adapters.",
+    "Project: 'auto' means the source contains content for multiple projects — the ingest script will use the file content (project_code, slug, tags) to route into the right narrative folder.",
+    "Source type hints are passed to narrative-ingest.mjs so the digest can frame each finding correctly (a LinkedIn comment is treated as an audience reaction by default; a pitch document is treated as candidate claims; an EL story is treated as a testimonial variant).",
+    "Add new sources here. The watch script reads this file at every run."
+  ]
+}

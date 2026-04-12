@@ -22,7 +22,7 @@ Mount Isa's youth justice approach demonstrates the "presence over surveillance"
 - **[[../people/brodie-germaine|Brodie Germaine]]** — BG Fit, CAMPFIRE, BAIL programs
 - **Uncle Warren King** — Kalkadoon Elder, cultural authority
 - **Danielle Germaine** — intergenerational leadership, Brodie's mother
-- **Uncle George** — Elder working in schools, getting kids re-engaged through presence
+- **[[uncle-george|Uncle George]]** — Elder working in schools, getting kids re-engaged through presence
 - **Rashad Germaine** — Kalkadoon Sundowners dance troupe
 
 ### Programs Active
@@ -35,7 +35,7 @@ Mount Isa's youth justice approach demonstrates the "presence over surveillance"
 
 ## The Pattern
 
-Person after person in Mount Isa speaks not just of individual programs but of how they fit into a larger ecosystem of care. Uncle George's methodology in schools mirrors Brodie's in the gym: "Pull 'em up and have a chat... We've got some kids back there that haven't been to school for years and now they're enjoying it... because the thing is I get 'em together."
+Person after person in Mount Isa speaks not just of individual programs but of how they fit into a larger ecosystem of care. [[uncle-george|Uncle George]]'s methodology in schools mirrors Brodie's in the gym: "Pull 'em up and have a chat... We've got some kids back there that haven't been to school for years and now they're enjoying it... because the thing is I get 'em together."
 
 The common thread: presence creates engagement. Surveillance creates avoidance.
 
@@ -43,7 +43,15 @@ The common thread: presence creates engagement. Surveillance creates avoidance.
 
 Mount Isa field work is documented through [[../projects/justicehub|JusticeHub]] and the [[../projects/empathy-ledger|Empathy Ledger]]. The community's approach to youth justice was a key catalyst for [[../people/benjamin-knight|Benjamin Knight]]'s conviction that "the answers live in community already."
 
+It is also a practical proof case for [[ai-community-engagement|AI and Community Engagement]]: when administration is compressed, more time returns to face-to-face presence, cultural authority, and relationship.
+
 ## Sources
 
 - Raw: `wiki/raw/2025-10-11-article-where-fire-meets-country-a-journey-through-mount-isas-naidoc-week.md`
 - Raw: `wiki/raw/2025-10-11-article-spotlight-on-changemaker-brodie-germaine.md`
+
+## Backlinks
+
+- [[brodie-germaine|Brodie Germaine]] — parallel presence-based youth work
+- [[uncle-george|Uncle George]] — Elder working in schools and re-engagement
+- [[bg-fit|BG Fit]] — youth mentoring and justice alternative infrastructure

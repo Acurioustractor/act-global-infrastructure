@@ -45,9 +45,9 @@ The richest document in ACT's founding record for The Harvest isn't a business p
 The Compendium opens with "The Silence" — Witta has no gathering place. Two thousand cars pass through every weekend. The hinterland is hollowing out. This is not a market gap analysis; it is a listening exercise made visible.
 
 Key movements:
-- **The Shed** — Barry Rodgerig, 80 years old, whose shed full of working machines is archaeology of what the hinterland was
+- **The Shed** — [[barry-rodgerig|Barry Rodgerig]], 80 years old, whose shed full of working machines is archaeology of what the hinterland was
 - **The Seed** — four beliefs, not services: *Eat. Gather. Make. Grow.*
-- **The Cycle** — Shaun Fisher's oyster shells, which become benchtops at The Harvest in a cycle NM explicitly names as "LCAA made physical"
+- **The Cycle** — [[shaun-fisher|Shaun Fisher]]'s oyster shells, which become benchtops at The Harvest in a cycle NM explicitly names as "LCAA made physical"
 - **The Handover** — "Maybe it's ACT in Year 4. Maybe it's not." Beautiful Obsolescence written into the founding document, eight days before the lease was signed
 
 > "You're not coming to something finished — you're coming to something you can be part of."
@@ -66,9 +66,20 @@ Their practice together follows the [[../concepts/lcaa-method|LCAA method]]: the
 
 Orange Sky's model has influenced a growing international network: the [[global-laundry-alliance|Global Laundry Alliance]], which connects community laundry hubs worldwide and advocates for policy recognition of hygiene as a dimension of human dignity. Nic's founding work at Orange Sky is the seed from which the Alliance grows.
 
+That same mobile-dignity logic also carries into [[feel-good-project|Feel Good Project]], where ACT helped build the caravan infrastructure for mobile hair and beauty care rather than expecting women in crisis to come to a fixed service.
+
 ## Working Style
 
 Nic brings a particular quality of hospitality to ACT's work — the kind that comes from years of setting up a van in a park and waiting for trust to form. His Compendium shows a writer who listens first and describes what he finds before proposing what to build. The Harvest is the result: a hub designed around four verbs (*eat, gather, make, grow*), not around four services.
+
+## System Position in ACT
+
+Nicholas is in the wiki because he explains ACT's place, invitation, and handover logic:
+
+- [[the-harvest|The Harvest]] — the clearest public expression of his place-based lane
+- [[act-farm|ACT Farm]] — the broader field where place, experimentation, and hospitality meet
+- Beautiful obsolescence — the discipline of building for handover rather than institutional permanence
+- [[benjamin-knight|Benjamin Knight]] — the complementary founder lane holding the technology and story infrastructure
 
 ## Backlinks
 
@@ -77,4 +88,6 @@ Nic brings a particular quality of hospitality to ACT's work — the kind that c
 - [[the-harvest|The Harvest]] — his primary place-based project
 - [[../research/harvest-property-arc|Harvest Property Arc]] — the founding vision and lease story
 - [[act-farm|ACT Farm]] — ACT's broader regenerative land practice
+- [[barry-rodgerig|Barry Rodgerig]] — hinterland memory holder in Nic's Witta inheritance story
+- [[shaun-fisher|Shaun Fisher]] — shell-return loop and ecological practice that help make the Harvest tangible
 - [[global-laundry-alliance|Global Laundry Alliance]] — Orange Sky's international legacy

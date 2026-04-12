@@ -16,13 +16,13 @@ Oonchiumpa is one of ACT's two primary community partnerships alongside [[picc|P
 
 | Role | Person |
 |------|--------|
-| Co-Director | Kristy Bloomfield — Central Arrernte, Eastern Arrernte & Alyawarra Traditional Owner |
+| Co-Director | [[kristy-bloomfield|Kristy Bloomfield]] — Central Arrernte, Eastern Arrernte & Alyawarra Traditional Owner |
 | Co-Director | Tanya Turner — Eastern Arrernte; former associate, Supreme Court of Victoria |
 | Elder authority | Aunty Bev and Uncle Terry |
 | Youth case worker | Fred Campbell — married into the Bloomfield family |
 | Cultural lead (Goods partnership) | Fred Campbell |
 
-### Kristy Bloomfield
+### [[kristy-bloomfield|Kristy Bloomfield]]
 
 Kristy Bloomfield is a Central Arrernte, Eastern Arrernte and Alyawarra woman and a Traditional Owner of Mparntwe. She grew up in Alice Springs and carries, in her own words, the stories of sacred sites and burial grounds that only her family would know. Her grandfather — a Stolen Generations man taken from his parents to the Bungalow in Alice Springs — went to extraordinary lengths to keep his children from the same fate, marrying Kristy's grandmother in a church in Tennant Creek after police threatened to take the children away. The history she carries is not abstract. It is personal and living.
 
@@ -207,6 +207,14 @@ The 95% diversion rate makes the economic and moral case simultaneously: Oonchiu
 - ANU / Professor Helen Milroy — True Justice program; law student training on Country
 - Yipirinya School — partnership on holiday programs and cultural exchange
 
+## Curated People Layer
+
+For the wiki, the load-bearing people in this field are currently:
+
+- [[kristy-bloomfield|Kristy Bloomfield]] — cultural authority and co-director
+
+Tanya Turner, Fred Campbell, Aunty Bev, and Uncle Terry are all clearly important, but they do not yet need standalone wiki people pages unless they become structurally necessary across more than one major ACT page or source cluster. Until then, Oonchiumpa itself and the source bridge should carry that context.
+
 ## Published Writing
 
 Articles drawn from Oonchiumpa's work and published through the ACT content platform:
@@ -226,6 +234,7 @@ Articles drawn from Oonchiumpa's work and published through the ACT content plat
 
 - [[three-circles|The Three Circles]] — **anchor community #1** in the canonical 3-year, $2.9M Minderoo pitch. Aunty Bev, Tanya Turner, Kristy Bloomfield as cultural authority anchors. Also referenced historically as "Ntumba" / Christine/Chrissy's group in earlier drafts. The 95% diversion rate (cited from Oonchiumpa's own programmatic reporting) is one of the program's most defensible proof points.
 - [[staying|Staying — Country & Council]] — methodology layer of Three Circles' Circle Two
+- [[kristy-bloomfield|Kristy Bloomfield]] — co-director and cultural authority anchor
 - [[index|ACT Wikipedia]]
 - [[lcaa-method|LCAA Method]]
 - [[justicehub|JusticeHub]] — cites 95% diversion rate and Operation Luna as proof points
@@ -233,3 +242,4 @@ Articles drawn from Oonchiumpa's work and published through the ACT content plat
 - [[empathy-ledger|Empathy Ledger]] — deployed at Oonchiumpa
 - [[goods-on-country|Goods on Country]] — Alice Springs manufacturing partnership
 - [[picc|Palm Island Community Company]] — cross-community exchange partner
+- [[youth-justice-reform|Youth Justice Reform]] — one of the clearest community-led proof points in ACT's reform argument

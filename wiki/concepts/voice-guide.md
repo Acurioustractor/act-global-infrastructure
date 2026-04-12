@@ -141,6 +141,7 @@ The methodology makes a natural story arc for longer pieces:
 
 ## Backlinks
 
+- [[act-public-voice|ACT Public Voice]] — how the voice system actually lands on the public ACT site
 - [[ways-of-working|Ways of Working]] — how voice guidelines apply to daily practice
 - [[beautiful-obsolescence|Beautiful Obsolescence]] — key concept expressed through voice
 - [[lcaa-method|LCAA Method]] — the methodology that structures ACT storytelling

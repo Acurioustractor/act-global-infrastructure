@@ -2,6 +2,8 @@
 
 > A community-led men's health initiative supporting fathers through peer connection, culturally appropriate wellbeing programs, and honest inquiry into what it means to be a dad today.
 
+**Status:** Active | **Code:** ACT-DL | **Tier:** Satellite
+
 ## Overview
 
 Dad.Lab.25 responds to a recognised gap: men's health challenges — particularly for fathers — are poorly served by mainstream health and community services. The program takes a community-led approach, building peer support networks and culturally appropriate interventions that meet fathers where they are, rather than expecting them to fit into clinical or institutional frameworks.
@@ -26,11 +28,10 @@ The "25" signals a contemporary, forward-looking orientation — this is not a n
 
 ## See Also
 
-- [[the-confessional|The Confessional]] — mobile art therapy for remote communities, complementary mental health approach
-- [[bg-fit|BG Fit]] — community fitness and mentorship for youth
-- [[lcaa-method|LCAA Method]]
+- The Confessional — mobile art therapy for remote communities, complementary mental health approach
+- BG Fit — community fitness and mentorship for youth
+- LCAA Method
 
 ## Backlinks
 
 - [[index|ACT Wikipedia]]
-- [[lcaa-method|LCAA Method]]

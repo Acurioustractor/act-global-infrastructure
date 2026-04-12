@@ -1,28 +1,16 @@
 ---
 title: "Atnarpa Station Cultural Learning - Boys Trip"
-slug: atnarpa-boys-trip
-empathy_ledger_id: "26ae2e63-c151-4399-8f71-c75249a313bf"
-project_slugs:
-  - oonchiumpa
-  - land-practice
-consent_scope: "EXTERNAL-LITE"
-cultural_sensitivity: medium
-lcaa_stage: curiosity
-place: "Atnarpa (Loves Creek Station)"
-voice_owner: "Young men with cultural mentors"
-media_needs:
-  - on-Country photo
-  - bush medicine detail
-  - quote card
-status: approved
-last_updated: 2026-02-04
+status: External-Lite
+projects: oonchiumpa, land-practice
 ---
+
+> Generated legacy mirror for command-center.
+> Source of truth: `wiki/stories/atnarpa-boys-trip.md`.
+> Regenerated: `2026-04-11T02:58:52.891Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # Atnarpa Station Cultural Learning - Boys Trip
 
 > Young men learn bush medicines, family lineage, and storytelling on Country, strengthening identity and responsibility.
-
----
 
 ## Context
 
@@ -30,9 +18,7 @@ last_updated: 2026-02-04
 **Voice Owner:** Young men with cultural mentors
 **Consent Status:** EXTERNAL-LITE
 
----
-
-## Story Summary
+## Story
 
 Young men on an Oonchiumpa on-Country trip to Atnarpa Station learned more than they might in any classroom. Walking Country with Elders and cultural mentors, they learned:
 
@@ -43,8 +29,6 @@ Young men on an Oonchiumpa on-Country trip to Atnarpa Station learned more than 
 **Storytelling** — Not as entertainment, but as the way knowledge travels across generations.
 
 The learning shifted from abstract to embodied. Young men returned with not just knowledge, but identity — a clearer sense of who they are and what they carry.
-
----
 
 ## ALMA Signals
 
@@ -57,28 +41,15 @@ The learning shifted from abstract to embodied. Young men returned with not just
 | **Option Value** | High | Replicable cultural learning |
 | **Community Value Return** | High | Knowledge transmitted |
 
----
+## Connections
 
-## LCAA Shift
-
-**From:** Listen (creating space for cultural teaching)
-**To:** Curiosity (knowledge becomes responsibility)
-**What changed:** Learning on Country connected knowledge to identity
-
----
-
-## Media Needs
-
-- [ ] On-Country photo (consent, no identifiable features)
-- [ ] Bush medicine detail (can capture)
-- [ ] Quote card (can create)
-
----
-
-## Related
-
-- **Other Vignettes:** [Returning Home to Atnarpa](/wiki/stories/returning-home-atnarpa), [Healing Journey to Country](/wiki/stories/healing-journey-country)
-
----
+**LCAA Shift:** Listen (creating space for cultural teaching) → Curiosity (knowledge becomes responsibility). Learning on Country connected knowledge to identity.
 
 *Consent reviewed: 2025-12 | Next review: 2026-06*
+
+## Backlinks
+
+- [[empathy-ledger|Empathy Ledger]] — storytelling platform
+- [[oonchiumpa|Oonchiumpa]] — youth program hosting the trip
+- [[returning-home-atnarpa|Returning Home to Atnarpa]] — the station and its Traditional Owners
+- [[healing-journey-country|Healing Journey to Country]] — related on-Country story

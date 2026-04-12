@@ -1,0 +1,490 @@
+{
+  "summary": {
+    "generated_at": "2026-04-10T02:08:05.167Z",
+    "active_storytellers_scanned": 293,
+    "deduped_people_considered": 282,
+    "public_story_records_scanned": 110,
+    "storytellers_with_public_stories": 55,
+    "storytellers_linked_to_canonical_projects": 21,
+    "already_covered": 20,
+    "recommended_now": 0,
+    "watchlist": 0,
+    "suppressed_summary": {
+      "generic_name": 75,
+      "no_public_story": 226,
+      "no_canonical_project_link": 31,
+      "low_signal_after_filters": 0
+    }
+  },
+  "recommended_now": [],
+  "watchlist": [],
+  "already_covered": [
+    {
+      "displayName": "Allan Palm Island",
+      "score": 16,
+      "existingPage": {
+        "title": "Allan Palm Island",
+        "relativePath": "people/allan-palm-island.md",
+        "stem": "allan-palm-island"
+      },
+      "publicStoryCount": 8,
+      "canonicalProjects": [
+        {
+          "stem": "picc-elders-hull-river",
+          "title": "PICC Elders Hull River Trip",
+          "relativePath": "projects/picc/picc-elders-hull-river.md",
+          "pagePath": "projects/picc/picc-elders-hull-river"
+        },
+        {
+          "stem": "uncle-allan-palm-island-art",
+          "title": "Uncle Allan Palm Island Art",
+          "relativePath": "projects/act-studio/uncle-allan-palm-island-art.md",
+          "pagePath": "projects/act-studio/uncle-allan-palm-island-art"
+        }
+      ],
+      "reasons": [
+        "Elder",
+        "8 public stories",
+        "2 canonical project links",
+        "17 wiki mentions",
+        "bio present"
+      ]
+    },
+    {
+      "displayName": "Dianne Stokes",
+      "score": 16,
+      "existingPage": {
+        "title": "Dianne Stokes",
+        "relativePath": "people/dianne-stokes.md",
+        "stem": "dianne-stokes"
+      },
+      "publicStoryCount": 2,
+      "canonicalProjects": [
+        {
+          "stem": "goods-on-country",
+          "title": "Goods on Country",
+          "relativePath": "projects/goods-on-country.md",
+          "pagePath": "projects/goods-on-country"
+        }
+      ],
+      "reasons": [
+        "Elder",
+        "Featured storyteller",
+        "2 public stories",
+        "1 canonical project link",
+        "4 wiki mentions",
+        "bio present"
+      ]
+    },
+    {
+      "displayName": "Aunty Ethel Robertson",
+      "score": 15,
+      "existingPage": {
+        "title": "Aunty Ethel Robertson",
+        "relativePath": "people/aunty-ethel-robertson.md",
+        "stem": "aunty-ethel-robertson"
+      },
+      "publicStoryCount": 5,
+      "canonicalProjects": [
+        {
+          "stem": "picc-elders-hull-river",
+          "title": "PICC Elders Hull River Trip",
+          "relativePath": "projects/picc/picc-elders-hull-river.md",
+          "pagePath": "projects/picc/picc-elders-hull-river"
+        }
+      ],
+      "reasons": [
+        "Elder",
+        "5 public stories",
+        "1 canonical project link",
+        "6 wiki mentions",
+        "bio present"
+      ]
+    },
+    {
+      "displayName": "Uncle Frank Daniel Landers",
+      "score": 15,
+      "existingPage": {
+        "title": "Uncle Frank Daniel Landers",
+        "relativePath": "people/uncle-frank-daniel-landers.md",
+        "stem": "uncle-frank-daniel-landers"
+      },
+      "publicStoryCount": 4,
+      "canonicalProjects": [
+        {
+          "stem": "picc-elders-hull-river",
+          "title": "PICC Elders Hull River Trip",
+          "relativePath": "projects/picc/picc-elders-hull-river.md",
+          "pagePath": "projects/picc/picc-elders-hull-river"
+        }
+      ],
+      "reasons": [
+        "Elder",
+        "4 public stories",
+        "1 canonical project link",
+        "6 wiki mentions",
+        "bio present"
+      ]
+    },
+    {
+      "displayName": "Aunty Iris May Whitey",
+      "score": 13,
+      "existingPage": {
+        "title": "Aunty Iris May Whitey",
+        "relativePath": "people/aunty-iris-may-whitey.md",
+        "stem": "aunty-iris-may-whitey"
+      },
+      "publicStoryCount": 1,
+      "canonicalProjects": [
+        {
+          "stem": "picc-elders-hull-river",
+          "title": "PICC Elders Hull River Trip",
+          "relativePath": "projects/picc/picc-elders-hull-river.md",
+          "pagePath": "projects/picc/picc-elders-hull-river"
+        }
+      ],
+      "reasons": [
+        "Elder",
+        "1 public story",
+        "1 canonical project link",
+        "6 wiki mentions",
+        "bio present"
+      ]
+    },
+    {
+      "displayName": "Cyndel Louise Pryor",
+      "score": 13,
+      "existingPage": {
+        "title": "Cyndel Louise Pryor",
+        "relativePath": "people/cyndel-louise-pryor.md",
+        "stem": "cyndel-louise-pryor"
+      },
+      "publicStoryCount": 1,
+      "canonicalProjects": [
+        {
+          "stem": "picc-elders-hull-river",
+          "title": "PICC Elders Hull River Trip",
+          "relativePath": "projects/picc/picc-elders-hull-river.md",
+          "pagePath": "projects/picc/picc-elders-hull-river"
+        }
+      ],
+      "reasons": [
+        "Elder",
+        "1 public story",
+        "1 canonical project link",
+        "6 wiki mentions",
+        "bio present"
+      ]
+    },
+    {
+      "displayName": "Elsa Mortoa",
+      "score": 13,
+      "existingPage": {
+        "title": "Elsa Mortoa",
+        "relativePath": "people/elsa-mortoa.md",
+        "stem": "elsa-mortoa"
+      },
+      "publicStoryCount": 1,
+      "canonicalProjects": [
+        {
+          "stem": "picc-elders-hull-river",
+          "title": "PICC Elders Hull River Trip",
+          "relativePath": "projects/picc/picc-elders-hull-river.md",
+          "pagePath": "projects/picc/picc-elders-hull-river"
+        }
+      ],
+      "reasons": [
+        "Elder",
+        "1 public story",
+        "1 canonical project link",
+        "6 wiki mentions",
+        "bio present"
+      ]
+    },
+    {
+      "displayName": "Gurtrude Grace Richardson",
+      "score": 13,
+      "existingPage": {
+        "title": "Gurtrude Grace Richardson",
+        "relativePath": "people/gurtrude-grace-richardson.md",
+        "stem": "gurtrude-grace-richardson"
+      },
+      "publicStoryCount": 1,
+      "canonicalProjects": [
+        {
+          "stem": "picc-elders-hull-river",
+          "title": "PICC Elders Hull River Trip",
+          "relativePath": "projects/picc/picc-elders-hull-river.md",
+          "pagePath": "projects/picc/picc-elders-hull-river"
+        }
+      ],
+      "reasons": [
+        "Elder",
+        "1 public story",
+        "1 canonical project link",
+        "6 wiki mentions",
+        "bio present"
+      ]
+    },
+    {
+      "displayName": "Marjoyie Burns",
+      "score": 13,
+      "existingPage": {
+        "title": "Marjoyie Burns",
+        "relativePath": "people/marjoyie-burns.md",
+        "stem": "marjoyie-burns"
+      },
+      "publicStoryCount": 1,
+      "canonicalProjects": [
+        {
+          "stem": "picc-elders-hull-river",
+          "title": "PICC Elders Hull River Trip",
+          "relativePath": "projects/picc/picc-elders-hull-river.md",
+          "pagePath": "projects/picc/picc-elders-hull-river"
+        }
+      ],
+      "reasons": [
+        "Elder",
+        "1 public story",
+        "1 canonical project link",
+        "6 wiki mentions",
+        "bio present"
+      ]
+    },
+    {
+      "displayName": "Uncle George",
+      "score": 13,
+      "existingPage": {
+        "title": "Uncle George",
+        "relativePath": "people/uncle-george.md",
+        "stem": "uncle-george"
+      },
+      "publicStoryCount": 1,
+      "canonicalProjects": [
+        {
+          "stem": "bg-fit",
+          "title": "BG Fit",
+          "relativePath": "projects/bg-fit.md",
+          "pagePath": "projects/bg-fit"
+        }
+      ],
+      "reasons": [
+        "Elder",
+        "1 public story",
+        "1 canonical project link",
+        "6 wiki mentions",
+        "bio present"
+      ]
+    },
+    {
+      "displayName": "Winifred Obah",
+      "score": 13,
+      "existingPage": {
+        "title": "Winifred Obah",
+        "relativePath": "people/winifred-obah.md",
+        "stem": "winifred-obah"
+      },
+      "publicStoryCount": 2,
+      "canonicalProjects": [
+        {
+          "stem": "picc-elders-hull-river",
+          "title": "PICC Elders Hull River Trip",
+          "relativePath": "projects/picc/picc-elders-hull-river.md",
+          "pagePath": "projects/picc/picc-elders-hull-river"
+        }
+      ],
+      "reasons": [
+        "Elder",
+        "2 public stories",
+        "1 canonical project link",
+        "6 wiki mentions",
+        "bio present"
+      ]
+    },
+    {
+      "displayName": "Brodie Germaine",
+      "score": 12,
+      "existingPage": {
+        "title": "Brodie Germaine",
+        "relativePath": "people/brodie-germaine.md",
+        "stem": "brodie-germaine"
+      },
+      "publicStoryCount": 2,
+      "canonicalProjects": [
+        {
+          "stem": "bg-fit",
+          "title": "BG Fit",
+          "relativePath": "projects/bg-fit.md",
+          "pagePath": "projects/bg-fit"
+        }
+      ],
+      "reasons": [
+        "Featured storyteller",
+        "2 public stories",
+        "1 canonical project link",
+        "18 wiki mentions",
+        "bio present"
+      ]
+    },
+    {
+      "displayName": "Irene Nleallajar",
+      "score": 12,
+      "existingPage": {
+        "title": "Irene Nleallajar",
+        "relativePath": "people/irene-nleallajar.md",
+        "stem": "irene-nleallajar"
+      },
+      "publicStoryCount": 1,
+      "canonicalProjects": [
+        {
+          "stem": "picc-elders-hull-river",
+          "title": "PICC Elders Hull River Trip",
+          "relativePath": "projects/picc/picc-elders-hull-river.md",
+          "pagePath": "projects/picc/picc-elders-hull-river"
+        }
+      ],
+      "reasons": [
+        "Featured storyteller",
+        "1 public story",
+        "1 canonical project link",
+        "3 wiki mentions",
+        "bio present"
+      ]
+    },
+    {
+      "displayName": "Shaun Fisher",
+      "score": 11,
+      "existingPage": {
+        "title": "Shaun Fisher",
+        "relativePath": "people/shaun-fisher.md",
+        "stem": "shaun-fisher"
+      },
+      "publicStoryCount": 3,
+      "canonicalProjects": [
+        {
+          "stem": "fishers-oysters",
+          "title": "Fishers Oysters",
+          "relativePath": "projects/fishers-oysters.md",
+          "pagePath": "projects/fishers-oysters"
+        }
+      ],
+      "reasons": [
+        "3 public stories",
+        "1 canonical project link",
+        "6 wiki mentions",
+        "bio present"
+      ]
+    },
+    {
+      "displayName": "Barry Rodgerig",
+      "score": 10,
+      "existingPage": {
+        "title": "Barry Rodgerig",
+        "relativePath": "people/barry-rodgerig.md",
+        "stem": "barry-rodgerig"
+      },
+      "publicStoryCount": 1,
+      "canonicalProjects": [],
+      "reasons": [
+        "Featured storyteller",
+        "1 public story",
+        "10 wiki mentions",
+        "bio present"
+      ]
+    },
+    {
+      "displayName": "Rachel Atkinson",
+      "score": 9,
+      "existingPage": {
+        "title": "Rachel Atkinson",
+        "relativePath": "people/rachel-atkinson.md",
+        "stem": "rachel-atkinson"
+      },
+      "publicStoryCount": 8,
+      "canonicalProjects": [],
+      "reasons": [
+        "8 public stories",
+        "8 wiki mentions",
+        "bio present"
+      ]
+    },
+    {
+      "displayName": "Ruby Sibley",
+      "score": 9,
+      "existingPage": {
+        "title": "Ruby Sibley",
+        "relativePath": "people/ruby-sibley.md",
+        "stem": "ruby-sibley"
+      },
+      "publicStoryCount": 1,
+      "canonicalProjects": [
+        {
+          "stem": "picc-elders-hull-river",
+          "title": "PICC Elders Hull River Trip",
+          "relativePath": "projects/picc/picc-elders-hull-river.md",
+          "pagePath": "projects/picc/picc-elders-hull-river"
+        }
+      ],
+      "reasons": [
+        "1 public story",
+        "1 canonical project link",
+        "3 wiki mentions",
+        "bio present"
+      ]
+    },
+    {
+      "displayName": "Benjamin Knight",
+      "score": 8,
+      "existingPage": {
+        "title": "Benjamin Knight",
+        "relativePath": "people/benjamin-knight.md",
+        "stem": "benjamin-knight"
+      },
+      "publicStoryCount": 2,
+      "canonicalProjects": [
+        {
+          "stem": "contained",
+          "title": "CONTAINED",
+          "relativePath": "projects/contained.md",
+          "pagePath": "projects/contained"
+        }
+      ],
+      "reasons": [
+        "2 public stories",
+        "1 canonical project link",
+        "20 wiki mentions"
+      ]
+    },
+    {
+      "displayName": "Kristy Bloomfield",
+      "score": 7,
+      "existingPage": {
+        "title": "Kristy Bloomfield",
+        "relativePath": "people/kristy-bloomfield.md",
+        "stem": "kristy-bloomfield"
+      },
+      "publicStoryCount": 1,
+      "canonicalProjects": [],
+      "reasons": [
+        "1 public story",
+        "13 wiki mentions",
+        "bio present"
+      ]
+    },
+    {
+      "displayName": "Richard Cassidy",
+      "score": 6,
+      "existingPage": {
+        "title": "Richard Cassidy",
+        "relativePath": "people/richard-cassidy.md",
+        "stem": "richard-cassidy"
+      },
+      "publicStoryCount": 0,
+      "canonicalProjects": [],
+      "reasons": [
+        "7 wiki mentions",
+        "bio present"
+      ]
+    }
+  ]
+}

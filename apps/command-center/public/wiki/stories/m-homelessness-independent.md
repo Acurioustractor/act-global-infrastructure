@@ -1,26 +1,16 @@
 ---
 title: "M: From Homelessness to Independent Living"
-slug: m-homelessness-independent
-empathy_ledger_id: "48e2ad56-c8d5-447e-83dd-83a606920b8e"
-project_slugs:
-  - oonchiumpa
-consent_scope: "EXTERNAL-LITE"
-cultural_sensitivity: medium
-lcaa_stage: art
-place: "Central Australia"
-voice_owner: "Participant and family (identity protected)"
-media_needs:
-  - consent-safe portrait
-  - program moment image
-status: approved
-last_updated: 2026-02-04
+status: External-Lite
+projects: oonchiumpa
 ---
+
+> Generated legacy mirror for command-center.
+> Source of truth: `wiki/stories/m-homelessness-independent.md`.
+> Regenerated: `2026-04-11T02:58:52.891Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # M: From Homelessness to Independent Living
 
 > With Oonchiumpa support, M and her mother secured stable housing and M gained her own income.
-
----
 
 ## Context
 
@@ -28,9 +18,7 @@ last_updated: 2026-02-04
 **Voice Owner:** Participant and family (identity protected)
 **Consent Status:** EXTERNAL-LITE — identity protected
 
----
-
-## Story Summary
+## Story
 
 M's story demonstrates what sustained, culturally-grounded support can achieve. When Oonchiumpa began working with M and her family, they were experiencing homelessness — a situation that compounds every other challenge.
 
@@ -41,8 +29,6 @@ Through consistent relationship and practical support, the situation transformed
 - Family stability improved
 
 The path wasn't linear. It required persistence, flexibility, and trust built over time. The outcome wasn't just housing — it was M's own sense of agency and future.
-
----
 
 ## ALMA Signals
 
@@ -55,27 +41,14 @@ The path wasn't linear. It required persistence, flexibility, and trust built ov
 | **Option Value** | High | Replicable approach |
 | **Community Value Return** | High | Family stability achieved |
 
----
+## Connections
 
-## LCAA Shift
-
-**From:** Action (sustained support and relationship)
-**To:** Art (support becomes pathway model)
-**What changed:** Individual outcome demonstrates program effectiveness
-
----
-
-## Media Needs
-
-- [ ] Consent-safe portrait (no identifiable features)
-- [ ] Program moment image (consent required)
-
----
-
-## Related
-
-- **Other Vignettes:** [Educational Transformation](/wiki/stories/educational-transformation)
-
----
+**LCAA Shift:** Action (sustained support and relationship) → Art (support becomes pathway model). Individual outcome demonstrates program effectiveness.
 
 *Consent reviewed: 2025-12 | Next review: 2026-06*
+
+## Backlinks
+
+- [[empathy-ledger|Empathy Ledger]] — storytelling platform
+- [[oonchiumpa|Oonchiumpa]] — youth support program
+- [[educational-transformation|Educational Transformation: 72% Return to School]] — related outcome story

@@ -188,7 +188,5 @@ The following articles have been published through ACT's engagement with Diagram
 - [[three-circles|The Three Circles]] — the canonical 3-year, $2.9M Minderoo pitch. Diagrama is the **Spain leg** of the Year 1 Africa + Europe international tour; Ben + 3 community leaders visit Murcia, with Year 3 return visits from 2–3 international peers to Australian anchor sites. Cited in the pitch as the international precedent: 13.6% recidivism, 5.64:1 cost-benefit ratio over 30 years.
 - [[staying|Staying — Country & Council]] — methodology layer; the journal-as-artefact and ledger visual register that the Circle Two storytelling team uses
 - [[index|ACT Wikipedia]]
-- [[lcaa-method|LCAA Method]]
 - [[justicehub|JusticeHub]]
-- [[quandamooka-justice-strategy|Quandamooka Justice and Healing Strategy]]
-- [[place-based-policy-lab|Place-Based Policy Lab]]
+- [[youth-justice-reform|Youth Justice Reform]] — the broader reform thesis that cites Diagrama as proof that therapeutic detention can outperform punishment

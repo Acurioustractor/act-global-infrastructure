@@ -1,27 +1,16 @@
 ---
 title: "Building Empathy Ledger: A Journey of Connection"
-slug: building-empathy-ledger
-empathy_ledger_id: "9ca0cbbd-e0e3-432b-9890-fee278a4ebde"
-project_slugs:
-  - empathy-ledger
-consent_scope: "INTERNAL ONLY"
-cultural_sensitivity: low
-lcaa_stage: action
-place: "Platform-wide, multiple communities"
-voice_owner: "Platform founder and community collaborators"
-media_needs:
-  - founder portrait
-  - product UI
-  - community image (consent required)
-status: review
-last_updated: 2026-02-04
+status: Internal Only
+projects: empathy-ledger
 ---
+
+> Generated legacy mirror for command-center.
+> Source of truth: `wiki/stories/building-empathy-ledger.md`.
+> Regenerated: `2026-04-11T02:58:52.891Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # Building Empathy Ledger: A Journey of Connection
 
 > Why Empathy Ledger exists and how consent, cultural protocols, and data sovereignty shape the platform.
-
----
 
 ## Context
 
@@ -29,9 +18,7 @@ last_updated: 2026-02-04
 **Voice Owner:** Platform founder and community collaborators (consented internal)
 **Consent Status:** INTERNAL ONLY — review required for external use
 
----
-
-## Story Summary
+## Story
 
 Empathy Ledger began with a question: how do we create infrastructure for storytelling that respects community sovereignty? The platform was built through deep listening with communities who had experienced extractive research and media practices.
 
@@ -42,8 +29,6 @@ The design centres on:
 - **40% value return** — If stories generate value, communities share in it
 
 Every feature reflects what communities told us they needed: control, visibility, and the ability to change their minds.
-
----
 
 ## ALMA Signals
 
@@ -56,29 +41,15 @@ Every feature reflects what communities told us they needed: control, visibility
 | **Option Value** | High | Foundation for all storytelling work |
 | **Community Value Return** | High | 40% sharing model in place |
 
----
+## Connections
 
-## LCAA Shift
+**LCAA Shift:** Curiosity (what would consent-first storytelling look like?) → Action (build the infrastructure). Philosophy became working platform with consent architecture.
 
-**From:** Curiosity (what would consent-first storytelling look like?)
-**To:** Action (build the infrastructure)
-**What changed:** Philosophy became working platform with consent architecture
-
----
-
-## Media Needs
-
-- [ ] Founder portrait (consent in place)
-- [ ] Product UI screenshots (internal use OK)
-- [ ] Community collaboration image (requires review)
-
----
-
-## Related
-
-- **Projects:** [Empathy Ledger](/wiki/empathy-ledger)
-- **Framework:** [ALMA](/wiki/act/alma), [Governance & Consent](/wiki/act/governance)
-
----
+See also: [[origin-curious-tractor|The Origin of A Curious Tractor]] — the founding philosophy that shapes this work.
 
 *Consent reviewed: 2026-01 | Status: Review needed for external*
+
+## Backlinks
+
+- [[empathy-ledger|Empathy Ledger]] — the platform this story is about
+- [[storytelling-data-sovereignty|Storytelling, Data Sovereignty, and Community Recovery]] — the platform in action

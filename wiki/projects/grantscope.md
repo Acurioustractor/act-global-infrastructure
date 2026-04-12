@@ -1,5 +1,6 @@
 ---
 title: GrantScope (CivicGraph)
+code: ACT-CS
 subtitle: Decision infrastructure for Australian government and social sector
 status: Active — Circle One technical reference for [[three-circles|The Three Circles]]
 cluster: data-infrastructure
@@ -13,7 +14,7 @@ upstream_repo: /Users/benknight/Code/grantscope
 > *Decision infrastructure connecting supplier intelligence, place-based funding data, and outcome evidence.*
 > *The agentic insight layer underneath JusticeHub. The Living Brain that makes [[three-circles|Circle One]] real.*
 
-**Status:** Active, partly deployed | **Stack:** Next.js 15 · TypeScript · Tailwind 4 · Supabase Postgres · MCP server · vector embeddings | **Repo:** `/Users/benknight/Code/grantscope` (separate codebase from this wiki) | **Canonical review:** [[../../thoughts/shared/handoffs/staying/grantscope-review|grantscope-review]] (2026-04-08, agent-verified)
+**Status:** Active, partly deployed | **Stack:** Next.js 15 · TypeScript · Tailwind 4 · Supabase Postgres · MCP server · vector embeddings | **Repo:** `/Users/benknight/Code/grantscope` (separate codebase from this wiki) | **Canonical review:** `thoughts/shared/handoffs/staying/grantscope-review.md` (2026-04-08, agent-verified)
 
 ## What it is
 
@@ -57,8 +58,8 @@ The shared Supabase database is the **same instance** as JusticeHub and Empathy 
 
 ## Named programs in GrantScope's funding data
 
-- **[[oonchiumpa|Oonchiumpa]]** (Alice Springs) — *95% diversion* (cited from Oonchiumpa's own programmatic reporting)
-- **[[picc|Palm Island Community Company]]** — **78% diversion · $29M annual turnover · 208 FTE**
+- **Oonchiumpa** (Alice Springs) — *95% diversion* (cited from Oonchiumpa's own programmatic reporting)
+- **Palm Island Community Company** — **78% diversion · $29M annual turnover · 208 FTE**
 - **Mountie Yarns** (Mt Druitt)
 - **Young Offender Support Service** (QLD DCYJMA)
 - **Operation Luna** (NT Police)
@@ -67,7 +68,7 @@ The shared Supabase database is the **same instance** as JusticeHub and Empathy 
 
 | Model | Coverage | Status |
 |---|---|---|
-| **[[diagrama\|Diagrama]] (Spain)** | 13.6% recidivism · €31K/year cost · 5.64:1 cost-benefit ratio. Featured in `/thoughts/outreach/the-cure-already-exists-v2.md` (foundational piece). Appears in PICC dashboard as international partner. | **Narrative + numerical proof points; no schema** |
+| **Diagrama (Spain)** | 13.6% recidivism · €31K/year cost · 5.64:1 cost-benefit ratio. Featured in `/thoughts/outreach/the-cure-already-exists-v2.md` (foundational piece). Appears in PICC dashboard as international partner. | **Narrative + numerical proof points; no schema** |
 | **Halt (Holland)** | Referenced in narrative | Narrative only — not in structured data |
 | **Norwegian restorative justice** | Mentioned as tour stop | Narrative only |
 | **Portuguese diversion** | Mentioned as tour stop | Narrative only |
@@ -158,19 +159,15 @@ See [[three-circles#Data verification status|Three Circles → Data verification
 
 - [[three-circles|The Three Circles]] — GrantScope IS Circle One; the canonical 3-year, $2.9M Minderoo pitch funds the next layer of work on top of GrantScope's existing data substrate
 - [[justicehub|JusticeHub]] — the youth-justice-facing application that sits on top of GrantScope's shared Supabase
-- [[empathy-ledger|Empathy Ledger]] — the third application sharing the Supabase substrate; provides the story sovereignty layer
+- Empathy Ledger — the third application sharing the Supabase substrate; provides the story sovereignty layer
 - [[civicgraph|CivicGraph]] — the public product brand for GrantScope's data layer (codebase name = GrantScope, public name = CivicGraph)
-- [[diagrama|Diagrama]] — the international precedent numbers (13.6% recidivism, 5.64:1 cost-benefit) live in GrantScope narrative + PICC dashboard
-- [[oonchiumpa|Oonchiumpa]] — anchor community whose 95% diversion proof point lives in the data layer
-- [[picc|Palm Island Community Company]] — the strongest community proof point in GrantScope; full dashboard at `/output/picc-comprehensive-dashboard.md`
+- Diagrama — the international precedent numbers (13.6% recidivism, 5.64:1 cost-benefit) live in GrantScope narrative + PICC dashboard
+- Oonchiumpa — anchor community whose 95% diversion proof point lives in the data layer
+- Palm Island Community Company — the strongest community proof point in GrantScope; full dashboard at `/output/picc-comprehensive-dashboard.md`
 
 ## Backlinks
 
 - [[three-circles|The Three Circles]] — GrantScope is Circle One technical reference
 - [[justicehub|JusticeHub]] — youth-justice-facing application on shared Supabase
-- [[empathy-ledger|Empathy Ledger]] — story sovereignty layer on shared Supabase
 - [[civicgraph|CivicGraph]] — public product brand
-- [[diagrama|Diagrama]] — international precedent numbers held here
-- [[oonchiumpa|Oonchiumpa]] — anchor community proof point
-- [[picc|Palm Island Community Company]] — strongest community proof point dashboard
-- [[../../thoughts/shared/handoffs/staying/grantscope-review|GrantScope review (2026-04-08)]] — the agent-verified canonical review of what's actually in the repo
+- `thoughts/shared/handoffs/staying/grantscope-review.md` — the agent-verified canonical review of what's actually in the repo

@@ -1,168 +1,85 @@
 ---
-title: "Story Vignettes"
-slug: stories
-status: published
-last_updated: 2026-02-04
-shareability: INTERNAL ONLY
+title: "Stories"
+status: Internal
 ---
 
-# Story Vignettes
+> Generated legacy mirror for command-center.
+> Source of truth: `wiki/stories/index.md`.
+> Regenerated: `2026-04-11T02:58:52.891Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
-We weave story vignettes and community voice through this compendium. Each vignette comes from Empathy Ledger with explicit consent and a clear usage scope. The goal is to foreground lived experience and authority, not decorate the work.
+# Stories
 
----
+Story vignettes from ACT's ecosystem — compiled from the Command Center storytelling archive. Each story carries consent metadata indicating who can see it and under what conditions. Treat these as culturally sensitive material.
 
-## Consent Scopes
-
-| Scope | Meaning | Can Share |
-|-------|---------|-----------|
-| **INTERNAL ONLY** | Working notes, sensitive detail, identity at risk | Team only |
-| **EXTERNAL-LITE** | System-level learnings, identity protected | With care |
-| **EXTERNAL** | Explicit consent, cultural review complete | Public |
+> Two stories are marked **Internal Only** — do not share externally without conversion review. All **External-Lite** stories require identity protection to be confirmed before external distribution.
 
 ---
 
-## Vignettes by Project
+## External-Lite
 
-### Empathy Ledger
-- [Building Empathy Ledger](/wiki/stories/building-empathy-ledger) — Platform origin story
-- [Storytelling, Data Sovereignty, and Community Recovery](/wiki/stories/storytelling-data-sovereignty) — Palm Island voices
-- [Peggy Palm Island's Story](/wiki/stories/peggy-palm-island) — Community storyteller
-
-### JusticeHub
-- [Building a Healing Path: Uncle Dale's Vision](/wiki/stories/uncle-dale-healing-path) — Cultural healing centres
-- [Jesús Teruel](/wiki/stories/jesus-teruel-diagrama) — Diagrama practice leader
-- [Young People Murcia](/wiki/stories/young-people-murcia) — Youth detention insights
-- [Operation Luna Success](/wiki/stories/operation-luna-success) — Youth offending reduction
-
-### Goods on Country
-- [Community Innovation: Beds, Washing Machines](/wiki/stories/community-innovation-goods) — Prototype to production
-- [Ellen Friday: Still Waiting for a Fridge](/wiki/stories/ellen-friday-fridge) — Health and dignity
-
-### Oonchiumpa (Central Australia)
-- [Young person returns to school](/wiki/stories/young-person-returns-school) — Cultural healing
-- [Returning Home to Atnarpa](/wiki/stories/returning-home-atnarpa) — Bloomfield family journey
-- [Healing Journey to Country](/wiki/stories/healing-journey-country) — Young men at Atnarpa
-- [M: From Homelessness to Independent Living](/wiki/stories/m-homelessness-independent) — Housing pathway
-- [Community Recognition and External Referrals](/wiki/stories/community-recognition-referrals) — Trust signal
-- [School Partnership Success](/wiki/stories/school-partnership-success) — Cultural mentorship
-- [Girls Day Out: Standley Chasm](/wiki/stories/girls-day-out-standley-chasm) — Cultural empowerment
-- [Atnarpa Homestead Girls Trip](/wiki/stories/atnarpa-girls-trip) — Cultural tourism learning
-- [Atnarpa Station Boys Trip](/wiki/stories/atnarpa-boys-trip) — Cultural learning
-- [Finke Desert Race Experience](/wiki/stories/finke-desert-race) — On-Country connection
-- [Educational Transformation: 72% Return to School](/wiki/stories/educational-transformation) — Outcome evidence
-- [A: From Guarded to Self-Advocate](/wiki/stories/a-guarded-to-self-advocate) — Youth development
-- [CB: Cultural Responsibility and Leadership](/wiki/stories/cb-cultural-leadership) — Youth growth
-- [MS: Future Tourism Entrepreneur](/wiki/stories/ms-future-entrepreneur) — Enterprise pathway
-- [Young Fellas at Standley Chasm](/wiki/stories/young-fellas-standley-chasm) — Cultural connection
-
-### Palm Island (PICC)
-- [Elders Speak: "We Should Have Been Consulted"](/wiki/stories/elders-speak-consulted) — Governance voice
-- [Uncle Alan Palm Island](/wiki/stories/uncle-alan-palm-island) — Art and cultural knowledge
-
-### BG Fit (Mount Isa)
-- [Proud Pita Pita Wayaka Man](/wiki/stories/proud-pita-pita-wayaka-man) — Heritage and identity
+Stories cleared for external use with identity protections in place. Confirm consent status before any public use.
 
 ### ACT Origin
-- [The Origin of A Curious Tractor](/wiki/stories/origin-curious-tractor) — Founding philosophy
+- [[origin-curious-tractor|The Origin of A Curious Tractor]] — The founding philosophy: technology should cultivate community growth, not extract value
+
+### Oonchiumpa — Youth Program, Central Australia
+- [[a-guarded-to-self-advocate|A: From Guarded and Disengaged to Articulate Self-Advocate]] — A young person develops agency through sustained relationship
+- [[cb-cultural-leadership|CB: Understanding Cultural Responsibility and Leadership]] — Identity becomes leadership; remorse emerges from understanding
+- [[m-homelessness-independent|M: From Homelessness to Independent Living]] — Stable housing, income, and agency through culturally-grounded support
+- [[ms-future-entrepreneur|MS: From Disconnected Youth to Future Tourism Entrepreneur]] — On-Country experience sparks a cultural enterprise vision
+- [[educational-transformation|Educational Transformation: 72% Return to School]] — The aggregate outcome of sustained cultural mentorship
+- [[young-person-returns-school|Young Person Returns to School After Cultural Healing]] — Individual story: healing → return → mentoring others
+- [[community-recognition-referrals|Community Recognition and External Referral Requests]] — 10 external referrals signal program trust and demand
+- [[school-partnership-success|School Partnership Success Stories]] — Schools actively request cultural mentorship support
+- [[operation-luna-success|Operation Luna Success: Dramatic Reduction in Youth Offending]] — Community-led response delivers measurable justice outcomes
+
+### On-Country Cultural Programs
+- [[returning-home-atnarpa|Returning Home to Atnarpa: The Bloomfield Family's Journey]] — Traditional Owners reclaim and restore Loves Creek Station
+- [[atnarpa-boys-trip|Atnarpa Station Cultural Learning - Boys Trip]] — Bush medicines, lineage, and storytelling on Country
+- [[atnarpa-girls-trip|Atnarpa Homestead Cultural Exchange - Girls Trip]] — Young Luritja women welcomed onto Country, learning cultural tourism
+- [[healing-journey-country|Healing Journey to Country]] — *(Internal Only — see below)*
+- [[finke-desert-race|Finke Desert Race Country Experience]] — Sporting event becomes vehicle for cultural connection
+- [[young-fellas-standley-chasm|Young Fellas Experience Cultural Connection at Standley Chasm]] — Cultural transmission through place and Elders
+- [[girls-day-out-standley-chasm|Girls Day Out: Cultural Empowerment at Standley Chasm]] — Belonging becomes confidence for young women leaders
+
+### Palm Island — PICC and Goods
+- [[elders-speak-consulted|Elders Speak: "We Should Have Been Consulted"]] — Storm recovery planning without Elders; the shift to inclusion
+- [[storytelling-data-sovereignty|Storytelling, Data Sovereignty, and Community Recovery]] — Elders guide what is shared; community owns the recovery story
+- [[community-innovation-goods|Community Innovation: Beds, Washing Machines, and Orange Sky]] — Community-led prototyping of essential goods
+- [[ellen-friday-fridge|Ellen Friday: Still Waiting for a Fridge]] — *(Internal Only — see below)*
+- [[peggy-palm-island|Peggy Palm Island's Story]] — Community archive: story in the storyteller's own voice
+- [[uncle-alan-palm-island|Uncle Alan Palm Island]] — Craft knowledge transmitted from Elder to learner
+
+### JusticeHub — Youth Justice Reform
+- [[uncle-dale-healing-path|Building a Healing Path: Uncle Dale's Vision for Youth Justice Reform]] — Cultural healing centres as an alternative to detention
+- [[jesus-teruel-diagrama|Jesús Teruel — Diagrama Key Story]] — Live evidence from Spain that humane youth justice works
+- [[young-people-murcia|Young People Murcia]] — Young people describe what helps and harms, directly
+
+### Other Communities
+- [[proud-pita-pita-wayaka-man|Proud Pita Pita Wayaka Man: My Roots]] — Heritage as the foundation for mentorship in Mount Isa
 
 ---
 
-## Vignettes by Consent Scope
+## Internal Only
 
-### EXTERNAL (7)
-*Explicit consent, cultural review complete, safe to share*
+These stories require consent conversion before any external use. Personal details must be removed or reviewed.
 
-| Vignette | Projects |
-|----------|----------|
-| Community Recognition and Referrals | oonchiumpa |
-| School Partnership Success | oonchiumpa |
-| Girls Day Out: Standley Chasm | oonchiumpa |
-| Atnarpa Homestead Girls Trip | oonchiumpa |
-| Finke Desert Race Experience | oonchiumpa |
-| Educational Transformation | oonchiumpa |
-| Young Fellas at Standley Chasm | oonchiumpa |
-
-### EXTERNAL-LITE (16)
-*System-level learnings, identity protected where noted*
-
-| Vignette | Projects | Notes |
-|----------|----------|-------|
-| Storytelling, Data Sovereignty | picc-storm-stories, empathy-ledger | Elders review |
-| Elders Speak | picc-storm-stories | Elders review |
-| Community Innovation | goods, picc-storm-stories | Review commercial |
-| Young person returns to school | oonchiumpa | Identity protected |
-| Returning Home to Atnarpa | oonchiumpa | Community approval |
-| Uncle Dale's Vision | justicehub | TO review |
-| Jesús Teruel | diagrama, justicehub | |
-| Young People Murcia | diagrama, justicehub | Identity protected |
-| M: Homelessness to Independent | oonchiumpa | Identity protected |
-| Proud Pita Pita Wayaka Man | bg-fit | |
-| Peggy Palm Island | picc-photo-kiosk | Cultural review |
-| Uncle Alan Palm Island | uncle-allan-art | Cultural review |
-| Atnarpa Boys Trip | oonchiumpa | |
-| Operation Luna Success | oonchiumpa, justicehub | |
-| A: Guarded to Self-Advocate | oonchiumpa | Identity protected |
-| CB: Cultural Leadership | oonchiumpa | Identity protected |
-| MS: Future Entrepreneur | oonchiumpa | Identity protected |
-
-### INTERNAL ONLY (5)
-*Team only, do not share without conversion*
-
-| Vignette | Projects | Reason |
-|----------|----------|--------|
-| Building Empathy Ledger | empathy-ledger | Review for external |
-| Ellen Friday: Fridge | goods, picc-storm-stories | Personal details |
-| Healing Journey to Country | oonchiumpa | Community level |
-| The Origin of A Curious Tractor | a-curious-tractor | Confirm before use |
+- [[healing-journey-country|Healing Journey to Country: Young Men Find Connection at Atnarpa Station]] — Community-level consent only; identity work with young men
+- [[ellen-friday-fridge|Ellen Friday: Still Waiting for a Fridge]] — Personal details present; conversion required for external use
+- [[building-empathy-ledger|Building Empathy Ledger: A Journey of Connection]] — Platform origin story; review required before external sharing
 
 ---
 
-## Using Vignettes
+## By Project
 
-### Before Sharing
-
-1. **Check consent scope** — Is this shareable at your intended level?
-2. **Confirm currency** — Has consent expired or been revoked?
-3. **Cultural review** — Does this need Elder review before external use?
-4. **Purpose alignment** — Is your use consistent with consent given?
-
-### In Reporting
-
-Use ALMA format:
-- **Story**: Brief summary or quote
-- **Signal**: What this teaches us at system level
-- **Shift**: What we changed or will change
-- **Scope**: Current shareability
-
-### Adding New Vignettes
-
-Use the [vignette template](/wiki/stories/vignette-template) and ensure:
-- Empathy Ledger record ID linked
-- Consent scope explicit
-- Cultural sensitivity flagged
-- Project slugs assigned
-- ALMA signals tagged
-
----
-
-## Story Tagging Schema
-
-Minimum fields for any story record:
-
-| Field | Values |
-|-------|--------|
-| **Project slug(s)** | empathy-ledger, justicehub, goods, etc. |
-| **Place / Country** | Location name |
-| **Role** | storyteller, contributor, elder, partner, team |
-| **Consent scope** | INTERNAL ONLY, EXTERNAL-LITE, EXTERNAL |
-| **Cultural sensitivity** | low, medium, high |
-| **Authority marker** | community, practitioner, partner |
-| **ALMA signals** | authority, evidence, harm_risk, capability, option_value, value_return |
-| **LCAA stage** | listen, curiosity, action, art |
-| **Media assets** | photo, video, audio |
-| **Review status** | pending, approved, restricted |
-
----
-
-*See also: [Empathy Ledger](/wiki/empathy-ledger) | [ALMA Framework](/wiki/act/alma) | [Governance & Consent](/wiki/act/governance)*
+| Project | Stories |
+|---------|---------|
+| Oonchiumpa | A, CB, M, MS, Educational Transformation, Young Person Returns, Community Recognition, School Partnerships, Operation Luna, Healing Journey |
+| Empathy Ledger | Building EL, Storytelling & Data Sovereignty, Peggy, Uncle Alan, Origin ACT |
+| JusticeHub | Uncle Dale, Operation Luna, Jesús Teruel, Young People Murcia, Young Person Returns |
+| PICC / Palm Island | Elders Speak, Storytelling & Data Sovereignty, Community Innovation, Ellen Friday, Peggy, Uncle Alan |
+| Land Practice / Atnarpa | Returning Home, Boys Trip, Girls Trip, Finke Desert Race, Healing Journey |
+| Goods | Community Innovation, Ellen Friday |
+| Diagrama | Jesús Teruel, Young People Murcia |
+| BG Fit | Proud Pita Pita Wayaka Man |
+| ACT Origin | The Origin of A Curious Tractor |

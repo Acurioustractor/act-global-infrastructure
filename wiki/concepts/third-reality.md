@@ -50,11 +50,20 @@ The Third Reality is produced by three existing platform layers:
 | Evidence Base | JusticeHub/ALMA | 1,004 programs, 570 evidence items, outcome scoring |
 | Narrative Sovereignty | Empathy Ledger | Cryptographic story ownership, TK Labels, consent protocols |
 
+One of the clearest non-justice examples in the ACT ecosystem is [[goods-on-country|Goods on Country]]: community narrative, deployment data, and procurement intelligence combine to show not just that goods were delivered, but what they changed and why that matters.
+
 ## Backlinks
 
 - [[civicgraph|CivicGraph]] — the systemic data layer
 - [[empathy-ledger|Empathy Ledger]] — the narrative sovereignty layer
 - [[justicehub|JusticeHub]] — the evidence layer
+- [[goods-on-country|Goods on Country]] — non-justice proof that story, evidence, and delivery can be held together
 - [[indigenous-data-sovereignty|Indigenous Data Sovereignty]] — governance framework
+- [[ocap-principles|OCAP Principles]] — rights-based foundation that keeps narrative and community data from becoming extractive
+- [[consent-as-infrastructure|Consent as Infrastructure]] — the consent model that makes narrative sovereignty technically real
+- [[act-identity|A Curious Tractor (ACT)]] — the ecosystem identity that frames The Third Reality as a new impact standard
+- [[palm-island|Palm Island]] — place-based proof that data, evidence, and sovereignty can converge under community control
+- [[lcaa-method|LCAA Method]] — the practice loop that turns Third Reality insight into action and art
+- [[llm-knowledge-base|LLM Knowledge Base]] — the compounding wiki/agent architecture used to synthesize Third Reality assessments over time
 - [[civic-world-model|Civic World Model]] — architectural vision
 - [[global-precedents|Global Precedents]] — international validation

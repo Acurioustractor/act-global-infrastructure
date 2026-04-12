@@ -4,7 +4,7 @@
 
 ## Definition
 
-LCAA is A Curious Tractor's foundational methodology — the operating system for how ACT approaches every project, community, and challenge. It is not a linear checklist. It is a loop: Art returns us to Listen, and the cycle continues.
+LCAA is [[act-identity|A Curious Tractor (ACT)]]'s foundational methodology — the operating system for how ACT approaches every project, community, and challenge. It is not a linear checklist. It is a loop: Art returns us to Listen, and the cycle continues.
 
 ## The Four Phases
 
@@ -34,14 +34,14 @@ Questions we ask: What if? How might we? Who says it has to be this way? What ar
 
 How we explore: design thinking with communities as designers, rapid prototyping to test assumptions early, iteration through build-measure-learn cycles, systems mapping.
 
-*Example — Goods on Country:* Curiosity asked "Can waste become community wealth?" This led to exploring circular manufacturing, material science, and community ownership models. Prototyping 100 beds tested the hypothesis before scaling.
+*Example — [[goods-on-country|Goods on Country]]:* Curiosity asked "Can waste become community wealth?" This led to exploring circular manufacturing, material science, and community ownership models. Prototyping 100 beds tested the hypothesis before scaling.
 
 ### Action
 Move from understanding to doing. Build, prototype, test, iterate. Action is collaborative — done with community, not to community. Bias toward making things real, not just planning.
 
 **"We are makers who play and take chances."**
 
-What we build: platforms for sovereignty (Empathy Ledger, JusticeHub), physical goods designed with communities (Goods on Country), spaces for healing and gathering (BCV, The Harvest), governance structures and business models.
+What we build: platforms for sovereignty (Empathy Ledger, JusticeHub), physical goods designed with communities ([[goods-on-country|Goods on Country]]), spaces for healing and gathering (BCV, The Harvest), governance structures and business models.
 
 How we build: co-creation with communities as designers and builders, open source (forkable, transparent), iterative (ship early, gather feedback), documented for handover, sustainable revenue models.
 
@@ -54,7 +54,7 @@ The final transformation — where action becomes something beautiful, meaningfu
 
 **"We recognize art as the first form of revolution."**
 
-Forms of art: installations (The Gold.Phone, The Confessional, The Treacher), storytelling, visual identity, performance, land art, writing.
+Forms of art: installations ([[gold-phone|The Gold.Phone]], [[the-confessional|The Confessional]], [[treacher|Treacher]]), cultural-surface works ([[uncle-allan-palm-island-art|Uncle Allan Palm Island Art]]), storytelling, visual identity, performance, land art, writing.
 
 How art functions: consciousness-shifting, truth-telling, making invisible visible, revealing futures not yet possible, celebrating community and culture, bearing witness to transformation.
 
@@ -107,8 +107,22 @@ When reviewing a project or planning a meeting, note which LCAA phase it sits in
 |-------|------------------|------------|
 | Listen | Empathy Ledger, field research | Sovereign storytelling, community voice capture |
 | Curiosity | CivicGraph, JusticeHub, ALMA | Data exploration, evidence review, pattern discovery |
-| Action | Goods on Country, PICC, BG Fit | Place-based design, service delivery, enterprise |
+| Action | [[goods-on-country|Goods on Country]], PICC, [[bg-fit|BG Fit]] | Place-based design, service delivery, enterprise |
 | Art | Empathy Ledger, Uncle Allan, CONTAINED | Photography, installation, exhibition, narrative |
+
+## Field Anchors
+
+LCAA is most useful when it stays attached to real people and places rather than floating as a generic framework.
+
+- [[benjamin-knight|Benjamin Knight]] — founder lane where listening, justice proof, and story infrastructure hold together
+- [[nicholas-marchesi|Nicholas Marchesi OAM]] — founder lane where hospitality, land, and handover become practice
+- [[richard-cassidy|Richard Cassidy]] — shared-story philosophy as a listening discipline in Palm Island governance
+- [[shaun-fisher|Shaun Fisher]] — ecological material practice that makes LCAA tangible in the place layer
+- [[the-harvest|The Harvest]] — one of the clearest place-based expressions of Listen, Curiosity, Action, and Art moving together
+- [[uncle-allan-palm-island-art|Uncle Allan Palm Island Art]] — Art phase held as cultural sovereignty on community terms
+- [[gold-phone|Gold.Phone]] — Art phase example where the medium of connection is the work itself
+- [[the-confessional|The Confessional]] — Art phase example where care becomes a spatial public encounter
+- [[treacher|Treacher]] — Art phase question around place-memory and displacement
 
 ## LCAA as Taxonomy
 
@@ -127,10 +141,26 @@ Every project, every piece of art, every community relationship can be tagged wi
 
 ## Backlinks
 
+- [[benjamin-knight|Benjamin Knight]] — founder lane for justice, story, and systems practice
+- [[nicholas-marchesi|Nicholas Marchesi OAM]] — founder lane for place, invitation, and handover
+- [[richard-cassidy|Richard Cassidy]] — shared-story framing as listening practice
+- [[shaun-fisher|Shaun Fisher]] — shell-return loop and ecological materiality in the place layer
 - [[empathy-ledger|Empathy Ledger]] — Listen + Art
 - [[civicgraph|CivicGraph]] — Curiosity
 - [[picc|PICC]] — spans all four phases
 - [[third-reality|The Third Reality]] — the synthesis LCAA produces
 - [[alma|ALMA]] — evidence model that feeds all LCAA phases
+- [[ai-community-engagement|AI and Community Engagement]] — administrative compression that protects time for relational work
 - [[beautiful-obsolescence|Beautiful Obsolescence]] — the Action phase discipline
+- [[place-land-practice|Place & Land Practice]] — Country and land practice as the pace-setting context for the whole method
+- [[the-harvest|The Harvest]] — place-based public front where all four phases are legible at once
+- [[bg-fit|BG Fit]] — action-phase youth justice proof through fitness, culture, and mentoring
+- [[goods-on-country|Goods on Country]] — curiosity and action held together through circular manufacturing on Country
+- [[uncle-allan-palm-island-art|Uncle Allan Palm Island Art]] — cultural sovereignty made public through the Art phase
+- [[gold-phone|Gold.Phone]] — Art phase made public through voice and encounter
+- [[the-confessional|The Confessional]] — Art phase made public through mobile care infrastructure
+- [[treacher|Treacher]] — Art phase held as place-memory and displacement inquiry
 - [[ways-of-working|Ways of Working]] — LCAA applied to daily operations
+- [[voice-guide|ACT Voice Guide]] — the narrative register that translates LCAA into public storytelling
+- [[visual-system|ACT Visual System]] — the shared art grammar for expressing the Art phase across decks, diagrams, and artefacts
+- [[roadmap-2026|2026 Roadmap]] — the annual prioritization layer that sequences work through ACT's method

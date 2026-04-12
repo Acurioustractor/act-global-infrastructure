@@ -1,23 +1,21 @@
 ---
-title: "AI Agent Strategy"
-slug: ai-ethics
-status: published
-last_updated: 2026-02-04
+title: AI Ethics & Agent Strategy
+status: Active
 ---
 
-# AI Agent Strategy (Aligned to ALMA)
+> Generated legacy mirror for command-center.
+> Source of truth: `wiki/concepts/ai-ethics.md`.
+> Regenerated: `2026-04-11T02:58:52.891Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
-AI agents must align with ALMA and Empathy Ledger consent. The point is not automation at all costs, but ethical intelligence that protects community sovereignty.
-
----
-
-## Core Principle
+# AI Ethics & Agent Strategy
 
 > The best AI output is the one that gets out of the way and lets the right voice be heard.
 
-AI serves community voice. It never replaces it.
+## Overview
 
----
+ACT's approach to AI is built on a single principle: AI serves community voice, it never replaces it. Every AI capability in the ecosystem is gated by consent, aligned to [[alma|ALMA]], and subject to community override. Efficiency is never a sufficient reason to bypass these constraints.
+
+This article covers the ethical framework, the internal agent roles, and what AI can and cannot do within ACT systems.
 
 ## Non-Negotiables
 
@@ -29,11 +27,9 @@ AI serves community voice. It never replaces it.
 | **Community authority highest weight** | Overrides efficiency in decision paths |
 | **Consent before analysis** | No opt-out model, explicit opt-in only |
 
----
-
 ## ALMA as Gatekeeper
 
-ALMA gatekeeps all AI learning and ethics checks:
+All AI learning and ethics checks pass through [[alma|ALMA]]:
 
 ```
 User/Community Input
@@ -55,19 +51,15 @@ User/Community Input
    Output
 ```
 
----
-
 ## What AI Can Do
 
-| Task | Permitted | Conditions |
-|------|-----------|------------|
-| Summarize meetings | Yes | Consent from participants |
-| Map relationships between projects | Yes | System-level only |
-| Check consent scope before release | Yes | Automated gatekeeping |
-| Draft content for review | Yes | Human review required |
-| Assist with research synthesis | Yes | Attribution maintained |
-
----
+| Task | Conditions |
+|------|------------|
+| Summarize meetings | Consent from participants |
+| Map relationships between projects | System-level only |
+| Check consent scope before release | Automated gatekeeping |
+| Draft content for review | Human review required |
+| Assist with research synthesis | Attribution maintained |
 
 ## What AI Cannot Do
 
@@ -80,9 +72,9 @@ User/Community Input
 | Make consent decisions | Community authority only |
 | Analyze without explicit opt-in | Consent violation |
 
----
+## Internal Agent Roles
 
-## Agent Roles (Internal)
+ACT uses named agent roles to make AI responsibilities explicit:
 
 | Agent | Role | Guardrails |
 |-------|------|------------|
@@ -92,68 +84,52 @@ User/Community Input
 | **Studio Assistant** | Supports drafting and editing | Never owns the narrative |
 | **Farmhand** | Orchestrates tasks, turns messy inputs into actions | ALMA checks on all outputs |
 
----
+### The Farmhand Role
 
-## AI Assistance Boundaries
+Farmhand is ACT's primary AI layer — the infrastructure that reduces admin and holds context. It turns messy inputs into clear next actions across the Knowledge Hub.
 
-### Synthesis and Diagrams
-- AI can assist with early exploration
-- Draft diagrams and summaries permitted
-- Final outputs require human and community review
-
-### Voice and Content
-- ACT Voice tools must pass alignment checks
-- Cannot override lived experience
-- Support, not replace, community storytelling
-
----
-
-## Farmhand Role
-
-Farmhand turns messy inputs into clear next actions across the Knowledge Hub:
-
-**Farmhand Can:**
+**Farmhand can:**
 - Turn messy inputs into clear tasks
 - Protect consent and cultural boundaries in summaries
 - Connect LCAA steps to real work
 - Keep ALMA signals visible
 
-**Farmhand Cannot:**
+**Farmhand cannot:**
 - Profile individuals
 - Override community voice
 - Inflate claims or certainty
 - Process without consent
 
-> Field note: Intelligence without consent is just extraction. We would rather be slower than wrong.
-
----
+> Intelligence without consent is just extraction. We would rather be slower than wrong.
 
 ## Implementation Checklist
 
-For any AI feature:
+For any new AI feature:
 
-| Check | Status |
-|-------|--------|
-| OCAP principles respected? | ☐ |
-| ALMA gatekeeper integrated? | ☐ |
-| Individual profiling prevented? | ☐ |
-| Sacred content hard-blocked? | ☐ |
-| Community authority preserved? | ☐ |
-| Opt-in consent required? | ☐ |
-| Human review on outputs? | ☐ |
+| Check | Required |
+|-------|----------|
+| OCAP principles respected? | Yes |
+| ALMA gatekeeper integrated? | Yes |
+| Individual profiling prevented? | Yes |
+| Sacred content hard-blocked? | Yes |
+| Community authority preserved? | Yes |
+| Opt-in consent required? | Yes |
+| Human review on outputs? | Yes |
 
----
+## Future Development Principles
 
-## Future Development
+As AI capabilities grow, ACT maintains:
 
-As AI capabilities grow, we maintain:
-
-1. **Community veto** — Any AI use can be blocked
-2. **Transparency** — What AI does is visible
+1. **Community veto** — Any AI use can be blocked by community decision
+2. **Transparency** — What AI does is visible, not hidden
 3. **Accountability** — Humans answer for AI outputs
 4. **Reversibility** — AI decisions can be undone
 5. **Locality** — Prefer local/open models where possible
 
----
+## Backlinks
 
-*See also: [ALMA Framework](/wiki/act/alma) | [Governance & Consent](/wiki/act/governance) | [Empathy Ledger](/wiki/empathy-ledger)*
+- [[alma|ALMA Framework]] — the impact and ethics model that gates all AI
+- [[governance-consent|Governance & Consent]] — consent architecture AI must respect
+- [[empathy-ledger|Empathy Ledger]] — the platform where AI consent settings live
+- [[ai-community-engagement|AI Community Engagement]] — broader AI use in community contexts
+- [[transcript-analysis-method|Transcript Analysis Method]] — the concrete guardrail set for AI transcription and theme extraction

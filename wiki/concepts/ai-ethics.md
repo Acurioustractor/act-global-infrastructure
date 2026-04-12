@@ -128,3 +128,4 @@ As AI capabilities grow, ACT maintains:
 - [[governance-consent|Governance & Consent]] — consent architecture AI must respect
 - [[empathy-ledger|Empathy Ledger]] — the platform where AI consent settings live
 - [[ai-community-engagement|AI Community Engagement]] — broader AI use in community contexts
+- [[transcript-analysis-method|Transcript Analysis Method]] — the concrete guardrail set for AI transcription and theme extraction

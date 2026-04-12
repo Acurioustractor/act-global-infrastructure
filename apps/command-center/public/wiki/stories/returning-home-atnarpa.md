@@ -1,28 +1,16 @@
 ---
 title: "Returning Home to Atnarpa: The Bloomfield Family's Journey"
-slug: returning-home-atnarpa
-empathy_ledger_id: "eee28c15-fba7-4a5c-bd06-290f0df4cb46"
-project_slugs:
-  - oonchiumpa
-  - land-practice
-consent_scope: "EXTERNAL-LITE"
-cultural_sensitivity: medium
-lcaa_stage: art
-place: "Atnarpa (Loves Creek Station)"
-voice_owner: "Bloomfield/Wiltshire family (Traditional Owners)"
-media_needs:
-  - homestead photo
-  - family archive images
-  - land map
-status: approved
-last_updated: 2026-02-04
+status: External-Lite
+projects: oonchiumpa, land-practice
 ---
+
+> Generated legacy mirror for command-center.
+> Source of truth: `wiki/stories/returning-home-atnarpa.md`.
+> Regenerated: `2026-04-11T02:58:52.891Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # Returning Home to Atnarpa: The Bloomfield Family's Journey
 
 > Reclaiming country and restoring the homestead becomes a foundation for cultural tourism and intergenerational knowledge.
-
----
 
 ## Context
 
@@ -30,9 +18,7 @@ last_updated: 2026-02-04
 **Voice Owner:** Bloomfield/Wiltshire family (Traditional Owners)
 **Consent Status:** EXTERNAL-LITE — community approval required for external use
 
----
-
-## Story Summary
+## Story
 
 The Bloomfield and Wiltshire families' journey to reclaim Loves Creek Station — Atnarpa — represents something larger than property rights. It's the restoration of connection between people and Country, and the creation of a foundation for intergenerational knowledge transfer.
 
@@ -43,8 +29,6 @@ The homestead restoration isn't just about buildings. It's about creating a plac
 - Healing can happen through connection to land
 
 Atnarpa has become a key site for Oonchiumpa programs, hosting boys' and girls' trips that connect young people to culture, land, and future possibilities.
-
----
 
 ## ALMA Signals
 
@@ -57,29 +41,15 @@ Atnarpa has become a key site for Oonchiumpa programs, hosting boys' and girls' 
 | **Option Value** | High | Foundation for multiple programs |
 | **Community Value Return** | High | Family and community benefit |
 
----
+## Connections
 
-## LCAA Shift
-
-**From:** Listen (understanding heritage and aspiration)
-**To:** Art (heritage story shapes future enterprise)
-**What changed:** Land reclamation became foundation for cultural tourism and youth programs
-
----
-
-## Media Needs
-
-- [ ] Homestead photo (consent from family)
-- [ ] Family archive images (consent required)
-- [ ] Land map (can create)
-
----
-
-## Related
-
-- **Other Vignettes:** [Atnarpa Boys Trip](/wiki/stories/atnarpa-boys-trip), [Atnarpa Girls Trip](/wiki/stories/atnarpa-girls-trip)
-- **Framework:** [Black Cockatoo Valley](/wiki/place/black-cockatoo-valley)
-
----
+**LCAA Shift:** Listen (understanding heritage and aspiration) → Art (heritage story shapes future enterprise). Land reclamation became foundation for cultural tourism and youth programs.
 
 *Consent reviewed: 2025-12 | Next review: 2026-06*
+
+## Backlinks
+
+- [[empathy-ledger|Empathy Ledger]] — storytelling platform
+- [[oonchiumpa|Oonchiumpa]] — programs hosted at Atnarpa
+- [[atnarpa-boys-trip|Atnarpa Boys Trip]] — one of those programs
+- [[atnarpa-girls-trip|Atnarpa Girls Trip]] — one of those programs

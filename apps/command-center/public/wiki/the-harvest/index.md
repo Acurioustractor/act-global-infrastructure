@@ -1,344 +1,172 @@
 ---
-title: "The Harvest"
-slug: "the-harvest"
-website_path: /projects/the-harvest
-excerpt: "Community hub for CSA programs and seasonal gatherings on Jinibara Country"
-category: "core-platform"
-status: "active"
-last_updated: "2026-01-26"
-shareability: "PUBLIC"
-
-# Infrastructure
-infrastructure:
-  local_path: "/Users/benknight/Code/The Harvest Website"
-  github_repo: "act-now-coalition/theharvest"
-  deployed_url: "https://theharvestwitta.com.au"
-  alt_urls:
-    - "https://harvest.act.place"
-  tech_stack:
-    framework: "Vite + React"
-    language: "TypeScript"
-    runtime: "React 19.2.1"
-    backend: "tRPC + Express"
-    database: "Drizzle ORM + Supabase"
-    storage: "AWS S3"
-    hosting: "Vercel (frontend)"
-  supabase_project: "custom-instance"
-
-# Data Connections
-data_connections:
-  key_tables:
-    - app_users
-    - events
-    - businesses
-  edge_functions:
-    - app-user-sync
-    - admin-events
-    - admin-businesses
-    - business-claim
-    - newsletter-subscribe
-
-# GHL Integration
-ghl_integration:
-  pipeline: "Harvest"
-  tags: ["harvest", "witta", "csa", "events"]
-  location_tracking: true
-
-# Xero Integration
-xero_integration:
-  tracking_category: "HARVEST"
-  project_codes: ["HARVEST-CSA", "HARVEST-VENUE", "HARVEST-EVENTS"]
-
-# Health Monitoring
-health:
-  status: "healthy"
-  last_check: "2026-01-26"
-
-# Linked Vignettes
-linked_vignettes: []
-
-# ALMA Aggregate
-alma_aggregate:
-  avg_evidence: 0
-  avg_authority: 0
-  total_vignettes: 0
-
-# Authority Check
-authority:
-  who_holds: "ACT + Witta Community"
-  how_we_know: "Land stewardship on Jinibara Country, community participation agreements"
-  consent_status: "In place"
-  handover_plan: "Community commons model - shared governance in development"
+title: The Harvest / Witta Harvest HQ
+status: Active
+date: 2026-04-11
+entity_type: project
+tagging_mode: own-code
+canonical_slug: the-harvest
+canonical_code: ACT-HV
+website_slug: the-harvest
+website_path: /harvest
+public_surface: project
+cluster: the-harvest
+empathy_ledger_key: the-harvest
 ---
 
-# The Harvest
+> Generated legacy mirror for command-center.
+> Source of truth: `wiki/projects/the-harvest/the-harvest.md`.
+> Regenerated: `2026-04-11T02:58:52.891Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
-**Local enterprise hub for makers, markets, and community connection in Witta, Queensland.**
+# The Harvest / Witta Harvest HQ
 
-An old nursery in Witta, now a small enterprise hub. Not just a venue — it is belonging tested in markets, meals, and shared work.
+> A regenerative community hub in Witta, QLD — seasonal kitchen, garden centre, workshops, and venue hire on the former Green Harvest site, bringing together local produce, native plants, and hands-on learning.
 
----
+**Status:** Active | **Code:** ACT-HV | **Tier:** Ecosystem
 
-## Philosophy Alignment
+## Overview
 
-The Harvest embodies these ACT principles:
+The Harvest (also known as Witta Harvest HQ) is a regenerative community hub located in Witta, Queensland (postcode 4552), operating from the former [[green-harvest-witta|Green Harvest]] site. It brings together a seasonal kitchen, a garden centre focused on native and productive plants for the Sunshine Coast, artisan workshops, and a flexible venue space — all grounded in regenerative land practice and local food culture.
 
-| Principle | How The Harvest Embodies It |
-|-----------|----------------------------|
-| **Identity Before Product** | The Harvest is belonging, not just a venue |
-| **Enterprise Funds the Commons** | Revenue supports land care and community value |
-| **Country Sets the Pace** | Activity scaled to land capacity and season |
-| **Make with Lived Experience** | Maker pathways for local enterprise |
+The physical site sits on Witta Farm, which remains in Nic's trust and is leased to [[act-ecosystem|ACT]] for retreats, R&D, and community programs. This arrangement makes The Harvest both a public-facing community business and a core piece of ACT's operational infrastructure.
 
----
+## Cluster Context
 
-## LCAA in Practice
+The Harvest should be read through the wider cluster in [[projects/the-harvest/README|The Harvest Cluster]]. The wiki holds the durable program and place logic, [[empathy-ledger|Empathy Ledger]] should hold the live seasonal stories and media, and the websites should compose that into `/harvest`, articles, and event/community pathways.
 
-| Phase | Harvest Application |
-|-------|---------------------|
-| **Listen** | Community conversations about what Witta needs |
-| **Curiosity** | Testing market formats, workshop models, venue use |
-| **Action** | Regular markets, workshops, venue hire operating |
-| **Art** | Seasonal gatherings, community storytelling, shared meals |
+## Key People
 
----
+The Harvest should hold only the people needed to explain the site's place logic, inheritance, and operating rhythm.
 
-## 2026 Focus
+- [[nicholas-marchesi|Nicholas Marchesi OAM]] — land partner, co-founder, and the person whose Compendium turns the site into a place proposition rather than a venue brief
+- [[barry-rodgerig|Barry Rodgerig]] — hinterland memory holder whose shed anchors the inheritance story of the place
+- [[shaun-fisher|Shaun Fisher]] — ecological cycle and shell-return practice that makes LCAA tangible in the material build
 
-From the ACT Compendium:
+The broader staff, supplier, and visitor network should remain on project, source, and EL layers until those figures become structurally important to multiple canonical pages.
 
-1. **Support micro-enterprise** — Maker pathways and local business support in Witta
-2. **Build repeatable operations** — Workshops, markets, venue use patterns established
-3. **Testing ground** — Use enterprise as testing ground for sustainable practice
-4. **Community connection** — Build relationships through practical enterprise and shared learning
+## Key Details
 
-> Field note: The Harvest is not just a venue; it is belonging tested in markets, meals, and shared work.
+- **Location:** Witta, QLD 4552 (former Green Harvest site)
+- **Website:** [theharvestwitta.com.au](https://theharvestwitta.com.au)
+- **Contact:** hello@theharvest.community
+- **Trading hours:** Saturday–Sunday, 8am–2pm
+- **Land arrangement:** Witta Farm held in Nic's trust, leased to ACT
 
----
+## What's On Site
 
-## Quick Links
+### Seasonal Kitchen
+Breakfast and brunch service using local produce, operating within the weekend trading hours. The menu follows seasonal availability and reflects the surrounding food landscape of the Sunshine Coast hinterland.
 
-| Resource | Link |
-|----------|------|
-| **Live Site** | [theharvestwitta.com.au](https://theharvestwitta.com.au) |
-| **GitHub** | [theharvest](https://github.com/act-now-coalition/theharvest) |
-| **Vercel** | [Deployment](https://vercel.com/act-now-coalition/theharvest) |
+### Garden Centre
+Native and productive plants suited to the Sunshine Coast region — sourced and curated for home growers, community gardens, and regenerative smallholders.
 
----
+### Workshops
+Hands-on programs including pottery, food preserving, and gardening. These sit within ACT's broader R&D and community education mission.
 
-## Infrastructure Overview
+### Venue Hire
+Indoor-outdoor event space available for community gatherings, private events, and program delivery.
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│ THE HARVEST                                                 │
-├─────────────────────────────────────────────────────────────┤
-│                                                             │
-│  Frontend (Vercel)          Backend (Supabase)              │
-│  ┌───────────────┐          ┌──────────────────────┐       │
-│  │ Vite + React  │          │ Supabase + Drizzle   │       │
-│  │ React 19      │◄────────►│ Edge Functions       │       │
-│  │ TypeScript    │  tRPC    │ PostgreSQL           │       │
-│  │ Wouter Router │          │ Realtime             │       │
-│  └───────────────┘          └──────────────────────┘       │
-│                                                             │
-│  External Services                                          │
-│  ┌─────────┐  ┌─────────┐  ┌─────────┐  ┌─────────┐       │
-│  │ AWS S3  │  │ GHL CRM │  │ Empathy │  │ Stripe  │       │
-│  │ Media   │  │ Contacts│  │ Ledger  │  │ Payments│       │
-│  └─────────┘  └─────────┘  └─────────┘  └─────────┘       │
-│                                                             │
-└─────────────────────────────────────────────────────────────┘
-```
+## Relationship to Green Harvest Witta
 
-**Note:** The Harvest uses Vite + tRPC, not Next.js. Unique architecture in the ecosystem.
+[[green-harvest-witta|Green Harvest Witta]] is part of the same location and project family. The Harvest builds on the legacy of Green Harvest — the original organic seed and gardening business that operated from this site — evolving it into a broader regenerative community hub.
 
----
+The current ACT graph also makes two people particularly important to understanding that inheritance: [[barry-rodgerig|Barry Rodgerig]], whose shed holds the memory of the hinterland as working country, and [[shaun-fisher|Shaun Fisher]], whose oyster-shell cycle in the founding Compendium turns LCAA into a material return loop.
 
-## Data Sources
+## LCAA Phase
 
-### Database (Supabase)
-
-**Tables:**
-- `app_users` - User management with RLS
-- `events` - Event calendar
-- `businesses` - Local business directory
-
-**Edge Functions:**
-- `app-user-sync` - User synchronization
-- `admin-events` - Event CRUD
-- `admin-businesses` - Business CRUD
-- `business-claim` - Business ownership claims
-- `newsletter-subscribe` - Newsletter signups
-
-### GHL (Contacts)
-
-| Field | Value |
-|-------|-------|
-| Pipeline | Harvest |
-| Tags | harvest, witta, csa, events |
-| Location | Witta/Maleny |
-
-### Xero (Finance)
-
-| Tracking | Code |
-|----------|------|
-| Category | HARVEST |
-| Projects | HARVEST-CSA, HARVEST-VENUE, HARVEST-EVENTS |
-
-### Content (Empathy Ledger)
-
-Blog content is served from Empathy Ledger Content Hub:
-- `/blog/[slug]` pulls from EL syndication API
-
----
-
-## Health Status
-
-| Check | Status |
-|-------|--------|
-| Site | ✅ Live |
-| Domain | theharvestwitta.com.au |
-| SSL | Valid |
-
----
-
-## Key Features
-
-### Public Pages
-| Route | Purpose |
-|-------|---------|
-| `/` | Homepage |
-| `/visit` | Visitor info |
-| `/whats-on` | Events calendar |
-| `/venue-hire` | Venue booking |
-| `/about` | About |
-
-### Community
-| Route | Purpose |
-|-------|---------|
-| `/journey` | Experience journey |
-| `/explore` | Exploration hub |
-| `/stories` | Community stories |
-| `/witta` | Area info |
-| `/enterprises` | Local businesses |
-
-### Admin
-| Route | Purpose |
-|-------|---------|
-| `/admin` | Dashboard |
-| `/admin/photos` | Photo management |
-| `/my-business` | Business owner portal |
-
----
+**Action** — the hub is active, trading, and demonstrating regenerative practice in daily operation. The workshop and education programs extend into **Curiosity** and **Art** phases through hands-on learning and creative practice.
 
 ## Programs
 
 ### CSA (Community Supported Agriculture)
-- Seasonal produce shares
-- Member subscriptions
-- Local farmer partnerships
+Seasonal produce shares, member subscriptions, and local farmer partnerships — reflecting the Jinibara Country land rhythms.
 
 ### Events
-- Seasonal gatherings
-- Workshops
-- Community markets
-- Venue hire
+Seasonal gatherings, workshops, community markets, and venue hire running through the year.
 
 ### Enterprise Hub
-- Local business directory
-- Maker pathways
-- Business owner portal
+Local business directory (businesses can claim and manage their profiles), maker pathways, and a business owner portal.
 
----
+### Content Hub
+The Harvest blog is served from the [[empathy-ledger|Empathy Ledger]] Content Hub via the EL syndication API — community stories and seasonal content flowing from EL into the Harvest website automatically.
 
-## Impact Evidence (ALMA Signals)
+## Infrastructure & Operations
 
-| Signal | Notes |
+### Digital Platform
+
+| Detail | Value |
 |--------|-------|
-| **Evidence Strength** | Operational data — events, market attendance, venue bookings |
-| **Community Authority** | ACT + Witta community governance in development |
-| **Harm Risk** | Low (positive enterprise) |
-| **Implementation Capability** | Venue operational, programs running |
-| **Option Value** | Model for community enterprise hub |
-| **Community Value Return** | Local makers supported, community gathering space |
+| **Live URL** | [theharvestwitta.com.au](https://theharvestwitta.com.au) |
+| **Alternate** | harvest.act.place |
+| **GitHub** | [act-now-coalition/theharvest](https://github.com/act-now-coalition/theharvest) |
+| **Hosting** | Vercel (frontend) |
+| **Framework** | Vite + React 19, TypeScript — unique in ecosystem (not Next.js) |
+| **API layer** | tRPC + Express |
+| **ORM** | Drizzle |
+| **Router** | Wouter (lightweight) |
+| **Storage** | AWS S3 (presigned URLs for media) |
+| **Local dev** | `pnpm dev` → http://localhost:3004 |
 
-## Story Opportunities
+The Harvest uses a deliberate lightweight stack — Vite rather than Next.js, Wouter rather than React Router — reflecting its role as a community-facing site rather than a complex application platform.
 
-**Priority storytelling:**
-- Monthly dinner conversations
-- Farm working bee reflections
-- Market stallholder experiences
-- Visiting partner impressions
+### Supabase Edge Functions
 
----
+Five edge functions run on the custom Supabase instance:
+- `app-user-sync` — user synchronisation across systems
+- `admin-events` — event CRUD for admin panel
+- `admin-businesses` — business directory management
+- `business-claim` — business ownership claim workflow
+- `newsletter-subscribe` — newsletter signups
 
-## Development
+### External Integrations
 
-```bash
-# Clone
-git clone git@github.com:act-now-coalition/theharvest.git
-cd "The Harvest Website"
+- **GHL CRM:** Pipeline "Harvest", tags: `harvest`, `witta`, `csa`, `events`. Location tracking enabled for Witta/Maleny contacts.
+- **Xero:** Tracking category `HARVEST`, project codes `HARVEST-CSA`, `HARVEST-VENUE`, `HARVEST-EVENTS`.
 
-# Install (uses pnpm)
-pnpm install
+### Community Management
 
-# Environment
-cp .env.example .env.local
-# Add Supabase, AWS, GHL keys
+Platform routes cover both public visitors and community members:
 
-# Run
-pnpm dev
-# → http://localhost:3004
-```
+| Section | Routes | Purpose |
+|---------|--------|---------|
+| Public | `/`, `/visit`, `/whats-on`, `/venue-hire` | Visitor information |
+| Community | `/stories`, `/witta`, `/enterprises` | Place-based content |
+| Admin | `/admin`, `/admin/photos`, `/my-business` | Operator management |
 
----
+## System Position
 
-## Unique Architecture
+The Harvest is not only a venue or cafe concept. It is one of the public fronts where ACT's place, enterprise, and story systems meet:
 
-| Tech | Choice | Why |
-|------|--------|-----|
-| Framework | Vite (not Next.js) | Lightweight |
-| API | tRPC | Type-safe |
-| ORM | Drizzle | Modern |
-| Router | Wouter | Lightweight |
-| Storage | AWS S3 | Presigned URLs |
-| Theming | Seasonal system | Custom |
+- the wiki holds the durable place logic, operating frame, and relationship to [[act-farm|ACT Farm]]
+- [[empathy-ledger|Empathy Ledger]] should carry the live seasonal stories, photos, and community voice
+- the Harvest website should stay a focused spoke surface, not a second place where strategic truth gets rewritten by hand
 
----
+That is why The Harvest needs to stay linked to [[living-website-operating-system|Living Website Operating System]] and to the Studio's wider economic logic in [[art/business/studio-business-model|Studio Business Model]].
 
-## The Land
+## Key Source Bridges
 
-The Harvest sits on **Jinibara Country** in the Sunshine Coast Hinterland.
+- [Source Summary — The Harvest Index](../../sources/2026-04-07-cc-the-harvest-index.md)
+- [Source Summary — ACT Farm Index](../../sources/2026-04-07-cc-the-farm-index.md)
+- [Source Summary — Ways of Working](../../sources/2026-04-07-cc-act-ways-of-working.md)
 
-The site includes:
-- Pasture under regenerative grazing
-- Food forest and orchard
-- Native corridor restoration
-- Water catchment systems
-- Studio and gathering buildings
+## See Also
 
----
+- [[green-harvest-witta|Green Harvest Witta]]
+- [[act-farm|ACT Farm]]
+- [[black-cockatoo-valley|Black Cockatoo Valley]]
+- [[lcaa-method|LCAA Method]]
 
-## Authority Check
+## Backlinks
 
-| Question | Answer |
-|----------|--------|
-| **Who holds authority?** | ACT as steward, community governance board in development |
-| **How do we know?** | Land title and partnership agreements |
-| **Consent in place?** | Jinibara acknowledgment, community participation agreements |
-| **Handover plan?** | Commons model with community land trust structure |
-
----
-
-## Partners
-
-| Partner | Role |
-|---------|------|
-| Jinibara People | Traditional Custodians |
-| Local producers | Market and supply network |
-| Goods. team | Product development |
-| ACT Dinner community | Regular gathering participants |
-
----
-
-*See also: [ACT Farm](../../02-place/act-farm.md) | [Black Cockatoo Valley](../../02-place/black-cockatoo-valley.md) | [Goods](./goods.md)*
+- [[index|ACT Wikipedia]]
+- [[nicholas-marchesi|Nicholas Marchesi OAM]] — co-founder, land partner, and founding Compendium author
+- [[barry-rodgerig|Barry Rodgerig]] — Witta memory holder in the founding story
+- [[lcaa-method|LCAA Method]]
+- [[green-harvest-witta|Green Harvest Witta]]
+- [[empathy-ledger|Empathy Ledger]] — content syndication source
+- [[consent-as-infrastructure|Consent as Infrastructure]] — consent model for syndicated community stories and partner content
+- [[place-land-practice|Place & Land Practice]] — land-based operating frame for the Witta site and its enterprise rhythm
+- [[shaun-fisher|Shaun Fisher]] — shell-return loop and ecological practice carried into The Harvest
+- [[projects/the-harvest/README|The Harvest Cluster]]
+- [[wiki-project-and-work-sync-contract|Wiki Project & Work Sync Contract]]
+- [[living-website-operating-system|Living Website Operating System]]
+- [[art/business/studio-business-model|Studio Business Model]] — why the place layer must be legible as enterprise, invitation, and field support

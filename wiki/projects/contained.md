@@ -1,8 +1,26 @@
+---
+title: CONTAINED
+status: Active
+date: 2026-04-11
+entity_type: work
+tagging_mode: own-code
+canonical_slug: contained
+canonical_code: ACT-CN
+website_slug: contained
+website_path: /projects/contained
+public_surface: work
+cluster: justicehub
+parent_project: justicehub
+empathy_ledger_key: contained
+---
+
 # CONTAINED
 
 > An experiential design campaign about youth detention — placing people inside the question of what we're actually paying for, and what we could choose instead.
 
 **Status:** Active | **Code:** ACT-CN | **Tier:** Satellite
+
+> 📣 **Narrative claims store:** [`wiki/narrative/contained/`](../narrative/contained/INDEX.md) — every public argument we have made about CONTAINED, what we have already said, and what we have not yet said. Read this before drafting any new post or op-ed. Run `node scripts/narrative-draft.mjs contained` to assemble a draft brief from the under-deployed claims.
 
 ## The Build
 
@@ -166,6 +184,10 @@ LCAA arc for CONTAINED:
 - **Action** — Divert funding; fund community programs; policy advocacy
 - **Art** — CONTAINED installation; the chalk wall; the exhibition that travels
 
+## Studio Context
+
+CONTAINED is one of the clearest places where ACT's art philosophy, justice strategy, and business model meet in a single object. It is not only an artwork. It is also a touring argument, a revenue pathway, and a public proof surface for the wider ecosystem. Read it alongside [[art-projects|ACT Art Projects]], [[art/philosophy/art-as-infrastructure|Art as Infrastructure]], [[art/innovation/studio-innovation-flow|Studio Innovation Flow]], and [[art/business/studio-business-model|Studio Business Model]].
+
 The Art phase is not the final step — it's the re-entry point. People who walk through CONTAINED are re-primed for Listen. The cycle continues.
 
 ## Key People
@@ -191,6 +213,17 @@ The Art phase is not the final step — it's the re-entry point. People who walk
 - "Building Revolution in Shipping Containers: The Story of CONTAINED" (2025-10-24) — the making of CONTAINED; Ben and Nick's roles; the four-room structure; the campaign as infrastructure for transformation
 - "The Cure Already Exists" (2026-03-12) — launch essay; CONTAINED as the vehicle for the evidence that communities already have the answers; Oonchiumpa, PICC, Mounty Yarns, Goods on Country
 
+## Narrative Claims (18)
+
+Every public argument CONTAINED has made, with deployment history and gap analysis. Auto-indexed at [`wiki/narrative/contained/INDEX.md`](../narrative/contained/INDEX.md). See also [`STAT-CONFLICTS.md`](../narrative/contained/STAT-CONFLICTS.md) for unreconciled numbers.
+
+**Evidentiary** — `claim-cost-comparison`, `claim-detention-doesnt-work`, `claim-economic-multiplier`
+**Constructive** — `claim-spain-diagrama-works`, `claim-room-3-community-already-doing-it`, `claim-spain-is-not-exotic-its-translated`
+**Invitational** — `claim-the-container-as-method`, `claim-30-minutes-changes-how-you-see`, `claim-tour-as-content-flywheel`, `claim-not-waiting-for-permission`
+**Testimonial** — `claim-young-people-as-experts`, `claim-built-by-hand`, `claim-they-looked-like-children`
+**Structural** — `claim-this-is-not-charity-its-infrastructure`, `claim-platform-stack`, `claim-indigenous-overrepresentation`, `claim-goods-on-country-bed-pipeline`
+**Confrontational** — `claim-evidence-is-settled-question-is-political-will`
+
 ## Backlinks
 
 - [[index|ACT Wikipedia]]
@@ -206,3 +239,8 @@ The Art phase is not the final step — it's the re-entry point. People who walk
 - [[confit-pathways|ConFit Pathways]] — featured in the Solutions Room; Joe Kwon is a CONTAINED collaborator
 - [[resoleution|ReSOLEution]] — featured in the Solutions Room
 - [[oonchiumpa|Oonchiumpa]] — Alice Springs, featured in the Solutions Room
+- [[2026-04-founder-lanes-and-top-two-bets|Founder Lanes and Top Two Bets]] — the operating decision that keeps CONTAINED as the campaign front door, not a separate flagship
+- [[art-projects|ACT Art Projects]] — curatorial context for the Studio line
+- [[art/philosophy/art-as-infrastructure|Art as Infrastructure]] — why CONTAINED is part of ACT's core argument
+- [[art/innovation/studio-innovation-flow|Studio Innovation Flow]] — how a work like CONTAINED feeds strategy back into the ecosystem
+- [[art/business/studio-business-model|Studio Business Model]] — how touring, hosting, and commissions make the work economically legible

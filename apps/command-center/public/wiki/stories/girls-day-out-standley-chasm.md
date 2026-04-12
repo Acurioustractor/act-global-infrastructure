@@ -1,28 +1,16 @@
 ---
 title: "Girls Day Out: Cultural Empowerment at Standley Chasm"
-slug: girls-day-out-standley-chasm
-empathy_ledger_id: "084fcde5-0941-4f6e-9966-ec9c4b7116b3"
-project_slugs:
-  - oonchiumpa
-  - land-practice
-consent_scope: "EXTERNAL-LITE"
-cultural_sensitivity: medium
-lcaa_stage: art
-place: "Standley Chasm (on-Country visit with Traditional Owners)"
-voice_owner: "Young people and cultural mentors"
-media_needs:
-  - on-Country photo
-  - group moment (consent)
-  - quote card
-status: approved
-last_updated: 2026-02-04
+status: External-Lite
+projects: oonchiumpa, land-practice
 ---
+
+> Generated legacy mirror for command-center.
+> Source of truth: `wiki/stories/girls-day-out-standley-chasm.md`.
+> Regenerated: `2026-04-11T02:58:52.891Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # Girls Day Out: Cultural Empowerment at Standley Chasm
 
 > A day on Country with Traditional Owners builds confidence, cultural authority, and the belief that young women can lead.
-
----
 
 ## Context
 
@@ -30,9 +18,7 @@ last_updated: 2026-02-04
 **Voice Owner:** Young people and cultural mentors
 **Consent Status:** EXTERNAL-LITE
 
----
-
-## Story Summary
+## Story
 
 A group of young women visited Standley Chasm with Traditional Owners and cultural mentors through Oonchiumpa. What might look like a simple outing was actually something deeper: a day of cultural empowerment.
 
@@ -43,8 +29,6 @@ On Country, with Elders who welcomed them:
 - They experienced belonging
 
 The confidence built on days like this carries forward. Young women who might have doubted their place in leadership conversations began to see themselves differently.
-
----
 
 ## ALMA Signals
 
@@ -57,28 +41,15 @@ The confidence built on days like this carries forward. Young women who might ha
 | **Option Value** | High | Model for cultural experiences |
 | **Community Value Return** | High | Young women empowered |
 
----
+## Connections
 
-## LCAA Shift
-
-**From:** Listen (understanding what young women need)
-**To:** Art (belonging becomes confidence)
-**What changed:** Cultural connection became empowerment infrastructure
-
----
-
-## Media Needs
-
-- [ ] On-Country photo (consent from participants)
-- [ ] Group moment image (consent required)
-- [ ] Quote card (can create)
-
----
-
-## Related
-
-- **Other Vignettes:** [Atnarpa Girls Trip](/wiki/stories/atnarpa-girls-trip)
-
----
+**LCAA Shift:** Listen (understanding what young women need) → Art (belonging becomes confidence). Cultural connection became empowerment infrastructure.
 
 *Consent reviewed: 2025-12 | Next review: 2026-06*
+
+## Backlinks
+
+- [[empathy-ledger|Empathy Ledger]] — storytelling platform
+- [[oonchiumpa|Oonchiumpa]] — youth program
+- [[atnarpa-girls-trip|Atnarpa Girls Trip]] — related story
+- [[young-fellas-standley-chasm|Young Fellas at Standley Chasm]] — the same place, the boys' story

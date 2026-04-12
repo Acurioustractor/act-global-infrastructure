@@ -1,28 +1,16 @@
 ---
 title: "Finke Desert Race Country Experience"
-slug: finke-desert-race
-empathy_ledger_id: "c3f466db-9026-4393-9229-c242a1678d7f"
-project_slugs:
-  - oonchiumpa
-  - land-practice
-consent_scope: "EXTERNAL-LITE"
-cultural_sensitivity: medium
-lcaa_stage: art
-place: "Alice Springs to Finke (on-Country journey)"
-voice_owner: "Young men with cultural mentors"
-media_needs:
-  - on-Country photo
-  - camp moment (consent)
-  - route sketch
-status: approved
-last_updated: 2026-02-04
+status: External-Lite
+projects: oonchiumpa, land-practice
 ---
+
+> Generated legacy mirror for command-center.
+> Source of truth: `wiki/stories/finke-desert-race.md`.
+> Regenerated: `2026-04-11T02:58:52.891Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # Finke Desert Race Country Experience
 
 > Camping on Country during the Finke Desert Race creates connection to place and community pride.
-
----
 
 ## Context
 
@@ -30,9 +18,7 @@ last_updated: 2026-02-04
 **Voice Owner:** Young men with cultural mentors
 **Consent Status:** EXTERNAL-LITE
 
----
-
-## Story Summary
+## Story
 
 The Finke Desert Race is one of Australia's iconic off-road races, running from Alice Springs to Finke. For young men in Oonchiumpa's program, attending the race became more than spectating — it became an on-Country experience.
 
@@ -43,8 +29,6 @@ Camping along the route, connecting with the event's energy, and being part of s
 - **Positive identity** — Belonging to something exciting and legitimate
 
 The race created a hook for deeper learning — an event young men wanted to attend that became a vehicle for cultural connection.
-
----
 
 ## ALMA Signals
 
@@ -57,28 +41,14 @@ The race created a hook for deeper learning — an event young men wanted to att
 | **Option Value** | High | Repeatable positive experience |
 | **Community Value Return** | High | Community connection built |
 
----
+## Connections
 
-## LCAA Shift
-
-**From:** Listen (understanding what engages young men)
-**To:** Art (place becomes pride)
-**What changed:** Sporting event became vehicle for cultural connection
-
----
-
-## Media Needs
-
-- [ ] On-Country photo (consent, landscape focus)
-- [ ] Camp moment image (consent from participants)
-- [ ] Route sketch (can create)
-
----
-
-## Related
-
-- **Other Vignettes:** [Atnarpa Boys Trip](/wiki/stories/atnarpa-boys-trip)
-
----
+**LCAA Shift:** Listen (understanding what engages young men) → Art (place becomes pride). Sporting event became vehicle for cultural connection.
 
 *Consent reviewed: 2025-12 | Next review: 2026-06*
+
+## Backlinks
+
+- [[empathy-ledger|Empathy Ledger]] — storytelling platform
+- [[oonchiumpa|Oonchiumpa]] — youth program
+- [[atnarpa-boys-trip|Atnarpa Boys Trip]] — related on-Country story

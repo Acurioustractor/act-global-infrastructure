@@ -61,4 +61,5 @@ CivicGraph is not a data dashboard — it's a **replacement for the archaic, top
 
 - [[third-reality|The Third Reality]] — the methodology this model enables
 - [[civicgraph|CivicGraph]] — the platform
+- [[funding-transparency|Funding Transparency]] — public-money legibility problem this architecture is designed to solve
 - [[acco-sector-analysis|ACCO Sector Analysis]] — who the model serves

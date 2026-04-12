@@ -2,7 +2,7 @@
 
 > A cultural immersion, fitness, and mentorship program for Indigenous youth in Mount Isa and surrounding communities, founded by Brodie Germaine.
 
-**Status:** Active | **Code:** ACT-CF | **Tier:** Satellite
+**Status:** Active | **Code:** ACT-CM | **Tier:** Satellite
 
 ## Overview
 
@@ -68,7 +68,7 @@ CAMPFIRE is also one of the programs that [[justicehub|JusticeHub]] tracks as an
 ## Backlinks
 
 - [[index|ACT Wikipedia]]
+- [[brodie-germaine|Brodie Germaine]] — founder and primary carrier of the program logic
 - [[justicehub|JusticeHub]] — CAMPFIRE is tracked as a verified intervention
 - [[contained|CONTAINED]] — CAMPFIRE fills the Solutions Room as living proof
-- [[oonchiumpa|Oonchiumpa]] — peer Aboriginal-led program, Alice Springs
 - [[youth-justice-reform|Youth Justice Reform]] — ACT's broader reform thesis

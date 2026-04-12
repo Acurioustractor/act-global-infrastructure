@@ -90,10 +90,12 @@ This analysis directly informs:
 - [[civicgraph|CivicGraph]] data priorities (funding coverage gaps)
 - [[justicehub|JusticeHub]] evidence base (which interventions work)
 - [[third-reality|The Third Reality]] methodology (combining this systemic data with stories)
+- [[palm-island|Palm Island]] — place-based proof that community control can scale when governance transfers
 - [[picc|PICC]] as a case study of the model working
 
 ## Backlinks
 
 - [[picc|Palm Island Community Company]] — deep case study
 - [[civicgraph|CivicGraph]] — where this data lives
+- [[civic-world-model|Civic World Model]] — architectural frame for turning sector data into live civic intelligence
 - [[global-precedents|Global Precedents]] — international comparisons

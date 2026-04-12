@@ -1,3 +1,18 @@
+---
+title: Empathy Ledger
+status: Active
+date: 2026-04-11
+entity_type: project
+tagging_mode: own-code
+canonical_slug: empathy-ledger
+canonical_code: ACT-EL
+website_slug: empathy-ledger
+website_path: /empathy-ledger
+public_surface: project
+cluster: empathy-ledger
+empathy_ledger_key: empathy-ledger
+---
+
 # Empathy Ledger
 
 > Not your story... not my story... but a third reality we can only discover together.
@@ -7,6 +22,25 @@
 ## What It Is
 
 The Empathy Ledger is ACT's sovereign storytelling platform — the **narrative sovereignty layer** of [[third-reality|The Third Reality]]. It gives marginalized and Indigenous communities cryptographic ownership of their narratives, ensuring stories are never extracted but always owned.
+
+## Key People
+
+Empathy Ledger should only carry the people who are explanatory to the sovereign-story layer itself, not every storyteller moving through the platform.
+
+- [[benjamin-knight|Benjamin Knight]] — co-founder and field practitioner shaping the story, media, and product infrastructure
+- [[richard-cassidy|Richard Cassidy]] — Palm Island governance and "Our Story" framing that directly informs ACT's story-sovereignty practice
+- [[rachel-atkinson|Rachel Atkinson]] — executive partner context for one of the clearest community-controlled implementations
+
+The wider storyteller corpus should live in the platform, in EL exports, and in source-bridge notes until a person becomes structurally load-bearing in the canonical wiki.
+
+## Primary Community Implementations
+
+The clearest current community-controlled implementations in the ACT ecosystem are:
+
+- [[picc|Palm Island Community Company (PICC)]] — community-controlled service, governance, and storytelling infrastructure on Palm Island
+- [[oonchiumpa|Oonchiumpa]] — community-led youth, culture, and justice storytelling on Country in Mparntwe
+
+These are named here because they explain how Empathy Ledger works in real places, not because EL needs to become a mirror of every deployment.
 
 ## Core Principles
 
@@ -23,7 +57,7 @@ Empathy Ledger is the **connective tissue** that ties all impact together across
 |----------|-----------------|-------------------------|
 | CivicGraph | Systemic data (entities, funding, procurement) | Human faces behind the numbers |
 | JusticeHub | Evidence base (what interventions work) | Stories of transformation |
-| Goods on Country | Place-based design outcomes | Community voice in design process |
+| [[goods-on-country|Goods on Country]] | Place-based design outcomes | Community voice in design process |
 | PICC | Service delivery data | Lived experience of services |
 
 Without Empathy Ledger, you have data. With it, you have **The Third Reality**.
@@ -155,6 +189,26 @@ Platform-wide benchmarks:
 - 10,000+ concurrent users supported
 - 99.9% uptime with global CDN
 
+## System Position
+
+Empathy Ledger is not only a product. It is one of ACT's load-bearing stack layers:
+
+- the wiki holds the durable framing for story sovereignty, consent, and identity
+- Empathy Ledger holds the live story, photo, video, and editorial layer
+- the websites compose EL material into project pages, journals, and partner surfaces
+
+That architecture is the point, not an implementation detail. See [[living-website-operating-system|Living Website Operating System]] for the full operating model and [[art/business/studio-business-model|Studio Business Model]] for how EL strengthens ACT's public surface, media quality, and ecosystem earning power.
+
+## Key Source Bridges
+
+These are the strongest current source-bridge notes for keeping the canonical page tied to real material rather than memory:
+
+- [Source Summary — ACT Project Page / Empathy Ledger](../sources/2026-04-07-scrape-act-place-empathy-ledger.md)
+- [Source Summary — Empathy Ledger Strategy Synthesis](../sources/2026-04-09-empathy-ledger-strategy-synthesis.md)
+- [Source Summary — EL Consent as Infrastructure](../sources/2026-04-07-el-consent-as-infrastructure.md)
+- [Source Summary — EL Platform Prospectus](../sources/2026-04-07-el-platform-prospectus.md)
+- [Source Summary — EL Unified Storyteller Analysis](../sources/2026-04-07-el-unified-storyteller-analysis.md)
+
 ## Implementation Approach
 
 Deployments follow four phases:
@@ -236,13 +290,29 @@ The public act.place page does not mention: blockchain ownership, TK Labels, Muk
 
 ## Backlinks
 
+- [[benjamin-knight|Benjamin Knight]] — co-founder and primary field practitioner for the sovereign-story stack
+- [[richard-cassidy|Richard Cassidy]] — "Our Story" philosophy and Palm Island governance context
+- [[rachel-atkinson|Rachel Atkinson]] — executive context for PICC as a major implementation partner
 - [[three-circles|The Three Circles]] — the canonical 3-year, $2.9M Minderoo pitch. Empathy Ledger v2 is the **story sovereignty layer** running underneath Circle One; every consented narrative across the ten anchor communities and the international tour carries an Empathy Ledger consent envelope.
 - [[staying|Staying — Country & Council]] — methodology layer; the per-young-person Journals draw their voice transcripts and consent flows from EL
+- [[mount-isa|Mount Isa]] — field context where story sovereignty and justice evidence began converging in practice
+- [[lcaa-method|LCAA Method]] — Listen and Art are most visible here, with story work feeding back into the full ACT practice loop
 - [[third-reality|The Third Reality]] — the methodology EL enables
 - [[civicgraph|CivicGraph]] — the systemic data layer EL completes
 - [[justicehub|JusticeHub]] — evidence layer EL humanizes
+- [[ai-ethics|AI Ethics & Agent Strategy]] — consent and guardrail model for any AI touching stories
+- [[alma|ALMA Framework]] — the shared signal model reading consented stories at system level
+- [[beautiful-obsolescence|Beautiful Obsolescence]] — platform design discipline for exportability, handover, and community control
+- [[governance-consent|Governance & Consent (Operational)]] — the operational shareability and review model applied around stories and syndication
+- [[place-land-practice|Place & Land Practice]] — stories are grounded in Country, place, and community-held context
 - [[picc|PICC]] — primary community implementation
 - [[indigenous-data-sovereignty|Indigenous Data Sovereignty]] — governance framework
 - [[local-ai-architecture|Local AI Architecture]] — sovereign hosting
 - [[consent-as-infrastructure|Consent as Infrastructure]] — the technical essay behind the consent model
 - [[ocap-principles|OCAP Principles]] — Ownership, Control, Access, Possession
+- [[transcript-analysis-method|Transcript Analysis Method]] — the story-to-signal method that governs transcript analysis without collapsing storyteller voice
+- [[visual-system|ACT Visual System]] — the shared visual language that frames EL stories, journals, and public-facing artefacts
+- [[2026-04-founder-lanes-and-top-two-bets|Founder Lanes and Top Two Bets]] — the founder decision that keeps Empathy Ledger in ACT's drive lane as the most productizable stack layer
+- [[continuous-pipeline|Continuous Pipeline Architecture]] — the maintenance layer that keeps EL-linked people, story, and wiki surfaces refreshed without mirroring the full platform
+- [[living-website-operating-system|Living Website Operating System]] — where EL sits as the live editorial and media layer
+- [[art/business/studio-business-model|Studio Business Model]] — why EL media and story quality matter economically as well as ethically

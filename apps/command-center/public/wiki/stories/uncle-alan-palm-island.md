@@ -1,28 +1,16 @@
 ---
 title: "Uncle Alan Palm Island — Key Story"
-slug: uncle-alan-palm-island
-empathy_ledger_id: "a74fdca2-ede8-4185-9516-ac3ae34e6b4a"
-project_slugs:
-  - uncle-allan-palm-island-art
-  - empathy-ledger
-consent_scope: "EXTERNAL-LITE"
-cultural_sensitivity: medium
-lcaa_stage: art
-place: "Palm Island"
-voice_owner: "Elder and artist (Uncle Alan)"
-media_needs:
-  - artwork image
-  - portrait (consent)
-  - audio snippet
-status: approved
-last_updated: 2026-02-04
+status: External-Lite
+projects: uncle-allan-palm-island-art, empathy-ledger
 ---
+
+> Generated legacy mirror for command-center.
+> Source of truth: `wiki/stories/uncle-alan-palm-island.md`.
+> Regenerated: `2026-04-11T02:58:52.891Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # Uncle Alan Palm Island — Key Story
 
 > A short recorded exchange that carries craft knowledge and continuity.
-
----
 
 ## Context
 
@@ -30,9 +18,7 @@ last_updated: 2026-02-04
 **Voice Owner:** Elder and artist (Uncle Alan)
 **Consent Status:** EXTERNAL-LITE — confirm cultural review for external use
 
----
-
-## Story Summary
+## Story
 
 Uncle Alan's story captures something precious: the transmission of craft knowledge from Elder to learner. In a short recorded exchange, decades of practice and cultural continuity are visible.
 
@@ -43,8 +29,6 @@ This isn't about preserving static tradition. It's about:
 - Art as evidence of cultural vitality
 
 The recording preserves not just what Uncle Alan knows, but how he teaches — the patience, the connection, the generosity of sharing.
-
----
 
 ## ALMA Signals
 
@@ -57,29 +41,13 @@ The recording preserves not just what Uncle Alan knows, but how he teaches — t
 | **Option Value** | High | Model for cultural preservation |
 | **Community Value Return** | High | Knowledge stays with community |
 
----
+## Connections
 
-## LCAA Shift
-
-**From:** Listen (recording Elder knowledge)
-**To:** Art (craft becomes cultural memory)
-**What changed:** Living practice becomes preserved transmission
-
----
-
-## Media Needs
-
-- [ ] Artwork image (consent from Uncle Alan)
-- [ ] Portrait (consent required)
-- [ ] Audio snippet (consent required)
-
----
-
-## Related
-
-- **Projects:** [Empathy Ledger](/wiki/empathy-ledger)
-- **Other Vignettes:** [Peggy Palm Island](/wiki/stories/peggy-palm-island)
-
----
+**LCAA Shift:** Listen (recording Elder knowledge) → Art (craft becomes cultural memory). Living practice becomes preserved transmission.
 
 *Consent reviewed: 2025-12 | Next review: 2026-06*
+
+## Backlinks
+
+- [[empathy-ledger|Empathy Ledger]] — the platform preserving this story
+- [[peggy-palm-island|Peggy Palm Island's Story]] — related Palm Island Elder story

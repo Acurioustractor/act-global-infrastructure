@@ -1,0 +1,240 @@
+{
+  "generatedAt": "2026-04-11T21:01:22.587Z",
+  "sourcePath": "/Users/benknight/Code/act-global-infrastructure/config/living-ecosystem-canon.json",
+  "counts": {
+    "systems": 6,
+    "surfaces": 6,
+    "openHumanDecisions": 3
+  },
+  "ownershipRules": {
+    "canonical_knowledge": {
+      "owner_id": "act-wiki",
+      "mirror_targets": [
+        "act-regenerative-studio",
+        "command-center"
+      ],
+      "rule": "Meaning is authored in the wiki first, then regenerated downstream."
+    },
+    "runtime_state": {
+      "owner_id": "act-supabase-ledger",
+      "mirror_targets": [
+        "empathy-ledger",
+        "command-center",
+        "act-regenerative-studio"
+      ],
+      "rule": "Permissions, IDs, sync state, and release state must be led by Supabase-backed runtime state."
+    },
+    "public_hub": {
+      "owner_id": "act-regenerative-studio",
+      "rule": "The umbrella public front door lives in ACT Regenerative Studio."
+    },
+    "story_and_media_packets": {
+      "owner_id": "empathy-ledger",
+      "rule": "Approved source packets originate in the story/media layer, then syndicate outward."
+    },
+    "public_work_copy": {
+      "default_owner_id": "act-regenerative-studio",
+      "exceptions": {
+        "empathy-ledger": "empathy-ledger"
+      },
+      "human_decision_required": true,
+      "rule": "Cross-surface works should default to the hub unless the work is structurally part of a spoke's native product or community interface."
+    }
+  },
+  "humanDecisions": [
+    {
+      "id": "confirm-empathy-ledger-classification",
+      "status": "open",
+      "prompt": "Confirm whether Empathy Ledger is a primary public surface or an elevated spoke."
+    },
+    {
+      "id": "confirm-spoke-roster",
+      "status": "open",
+      "prompt": "Confirm the live spoke roster for JusticeHub, Goods on Country, Black Cockatoo Valley, and The Harvest."
+    },
+    {
+      "id": "confirm-public-work-copy-policy",
+      "status": "open",
+      "prompt": "Confirm which site owns canonical public work copy when a work appears on more than one surface."
+    }
+  ],
+  "rows": [
+    {
+      "id": "command-center",
+      "lane": "system",
+      "display_name": "ACT Command Center",
+      "kind": "internal-app",
+      "classification": "supporting",
+      "surface_role": "ops-admin",
+      "verification_status": "verified",
+      "human_decision_required": false,
+      "repo_path": "/Users/benknight/Code/act-global-infrastructure",
+      "canonical_note_path": "apps/command-center/public/wiki/the-studio/index.md",
+      "notes": "Operational and admin surface. It is not the public umbrella hub."
+    },
+    {
+      "id": "act-automation-repo",
+      "lane": "system",
+      "display_name": "ACT Global Infrastructure",
+      "kind": "automation-repo",
+      "classification": "supporting",
+      "surface_role": "automation",
+      "verification_status": "verified",
+      "human_decision_required": false,
+      "repo_path": "/Users/benknight/Code/act-global-infrastructure",
+      "canonical_note_path": "wiki/technical/act-knowledge-ops-loop.md",
+      "notes": "Holds the knowledge/sync/build tooling and the current wiki canon."
+    },
+    {
+      "id": "act-regenerative-studio",
+      "lane": "surface",
+      "display_name": "ACT Regenerative Studio",
+      "kind": "public-site",
+      "classification": "primary",
+      "surface_role": "hub",
+      "verification_status": "verified",
+      "human_decision_required": false,
+      "repo_path": "/Users/benknight/Code/act-regenerative-studio",
+      "site_url": "https://act.place",
+      "canonical_note_path": "wiki/projects/act-studio/act-studio.md",
+      "public_copy_owner_for": [
+        "ecosystem hub",
+        "project index",
+        "works index",
+        "flagship project packs"
+      ],
+      "generated_inputs": [
+        "wiki pages snapshot",
+        "wiki projects snapshot",
+        "flagship project packs",
+        "Empathy Ledger featured media",
+        "Empathy Ledger editorial snapshot"
+      ],
+      "notes": "Verified live umbrella front door and public composition layer."
+    },
+    {
+      "id": "act-supabase-ledger",
+      "lane": "system",
+      "display_name": "ACT Supabase Operational Ledger",
+      "kind": "runtime-ledger",
+      "classification": "primary",
+      "surface_role": "runtime",
+      "verification_status": "verified",
+      "human_decision_required": false,
+      "project_refs": [
+        "tednluwflfhxyucgwigh",
+        "yvnuayzslukamizrlhwb"
+      ],
+      "notes": "Runtime state, identity resolution, auditability, and automation queues live here. Narrative meaning does not."
+    },
+    {
+      "id": "act-wiki",
+      "lane": "system",
+      "display_name": "ACT Wiki / Obsidian Knowledge Graph",
+      "kind": "knowledge-repo",
+      "classification": "primary",
+      "surface_role": "knowledge",
+      "verification_status": "verified",
+      "human_decision_required": false,
+      "repo_path": "/Users/benknight/Code/act-global-infrastructure",
+      "canonical_root": "wiki",
+      "canonical_note_path": "wiki/concepts/tractorpedia.md",
+      "notes": "Durable memory layer. Canonical meaning lives here before downstream mirrors are regenerated."
+    },
+    {
+      "id": "black-cockatoo-valley",
+      "lane": "surface",
+      "display_name": "Black Cockatoo Valley",
+      "kind": "public-site",
+      "classification": "spoke",
+      "surface_role": "project-spoke",
+      "verification_status": "inferred",
+      "human_decision_required": true,
+      "repo_path": "/Users/benknight/Code/act-farm",
+      "canonical_note_path": "wiki/projects/act-farm/black-cockatoo-valley.md",
+      "notes": "Best-fit current reading is spoke. Human confirmation still required."
+    },
+    {
+      "id": "empathy-ledger",
+      "lane": "surface",
+      "display_name": "Empathy Ledger",
+      "kind": "public-site",
+      "classification": "primary",
+      "surface_role": "content-spoke",
+      "verification_status": "inferred",
+      "human_decision_required": true,
+      "repo_path": "/Users/benknight/Code/empathy-ledger-v2",
+      "site_url": "https://empathyledger.com",
+      "canonical_note_path": "wiki/projects/empathy-ledger.md",
+      "public_copy_owner_for": [
+        "story packets",
+        "storyteller-facing media and consented narratives",
+        "syndication-ready story outputs"
+      ],
+      "notes": "Verified live content surface. Its final classification as a primary surface versus an elevated spoke still needs human confirmation."
+    },
+    {
+      "id": "experimental-output-zone",
+      "lane": "system",
+      "display_name": "Experimental Outputs and Handoffs",
+      "kind": "sandbox-zone",
+      "classification": "sandbox",
+      "surface_role": "sandbox",
+      "verification_status": "verified",
+      "human_decision_required": false,
+      "local_path": "/Users/benknight/Code/act-global-infrastructure/thoughts/shared",
+      "notes": "Useful for exploration and handoffs. Nothing here should auto-promote into canon."
+    },
+    {
+      "id": "goods-on-country",
+      "lane": "surface",
+      "display_name": "Goods on Country",
+      "kind": "public-site",
+      "classification": "spoke",
+      "surface_role": "project-spoke",
+      "verification_status": "inferred",
+      "human_decision_required": true,
+      "repo_path": "/Users/benknight/Code/Goods Asset Register",
+      "canonical_note_path": "wiki/projects/goods-on-country.md",
+      "notes": "Best-fit current reading is spoke. Human confirmation still required."
+    },
+    {
+      "id": "justicehub",
+      "lane": "surface",
+      "display_name": "JusticeHub",
+      "kind": "public-site",
+      "classification": "spoke",
+      "surface_role": "project-spoke",
+      "verification_status": "inferred",
+      "human_decision_required": true,
+      "repo_path": "/Users/benknight/Code/JusticeHub",
+      "canonical_note_path": "wiki/projects/justicehub/justicehub.md",
+      "notes": "Best-fit current reading is spoke. Human confirmation still required."
+    },
+    {
+      "id": "legacy-dashboard-zone",
+      "lane": "system",
+      "display_name": "Legacy Dashboard Archive",
+      "kind": "archive-zone",
+      "classification": "legacy",
+      "surface_role": "archive",
+      "verification_status": "verified",
+      "human_decision_required": false,
+      "local_path": "/Users/benknight/Code/act-global-infrastructure/archive/act-dashboard",
+      "notes": "Historical reference only. Not a write target."
+    },
+    {
+      "id": "the-harvest",
+      "lane": "surface",
+      "display_name": "The Harvest",
+      "kind": "public-site",
+      "classification": "spoke",
+      "surface_role": "project-spoke",
+      "verification_status": "inferred",
+      "human_decision_required": true,
+      "repo_path": "/Users/benknight/Code/The Harvest Website",
+      "canonical_note_path": "wiki/projects/the-harvest/the-harvest.md",
+      "notes": "Best-fit current reading is spoke. Human confirmation still required."
+    }
+  ]
+}

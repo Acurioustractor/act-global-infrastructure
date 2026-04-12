@@ -42,11 +42,11 @@ The Feel Good Project carries Orange Sky's DNA: a vehicle, a service, dignity as
 
 ### Global Laundry Alliance
 
-The [[global-laundry-alliance|Global Laundry Alliance]] is ACT's network of Orange Sky-model organisations operating in other countries — bringing the mobile laundry concept to new geographies. The Feel Good Project exists in the same conceptual family: mobile dignity infrastructure, designed around the reality of people's lives rather than the convenience of service delivery.
+The Global Laundry Alliance is ACT's network of Orange Sky-model organisations operating in other countries — bringing the mobile laundry concept to new geographies. The Feel Good Project exists in the same conceptual family: mobile dignity infrastructure, designed around the reality of people's lives rather than the convenience of service delivery.
 
 ### The Confessional
 
-[[the-confessional|The Confessional]] is an ACT project that converted a horse trailer into a mobile healing space — a place where people can come, sit, and be listened to. It and the Feel Good Project share the same physical grammar: a vehicle that becomes a sanctuary.
+The Confessional is an ACT project that converted a horse trailer into a mobile healing space — a place where people can come, sit, and be listened to. It and the Feel Good Project share the same physical grammar: a vehicle that becomes a sanctuary.
 
 ### Caring for Those Who Care
 
@@ -56,7 +56,7 @@ The [[global-laundry-alliance|Global Laundry Alliance]] is ACT's network of Oran
 
 ACT's direct contribution to the Feel Good Project was practical: helping build out the caravan as a mobile service delivery platform. This fits ACT's pattern of providing physical infrastructure — vehicles, spaces, technology — that amplifies the work community organisations are already doing.
 
-The caravan is not a metaphor. It is a specific piece of built infrastructure that allows a service to exist that couldn't otherwise exist in the same form. ACT's role here is the same as its role in [[goods-on-country|Goods on Country]] manufacturing: building the physical thing that makes the community impact possible.
+The caravan is not a metaphor. It is a specific piece of built infrastructure that allows a service to exist that couldn't otherwise exist in the same form. ACT's role here is the same as its role in Goods on Country manufacturing: building the physical thing that makes the community impact possible.
 
 ## Evidence Note
 
@@ -74,7 +74,4 @@ No project_knowledge records exist in Supabase for ACT-FG. The wiki has not yet 
 ## Backlinks
 
 - [[nicholas-marchesi|Nicholas Marchesi OAM]] — Orange Sky co-founder; the mobile-dignity pattern that informs this project
-- [[global-laundry-alliance|Global Laundry Alliance]] — same conceptual family: mobile dignity infrastructure
-- [[the-confessional|The Confessional]] — horse trailer as mobile healing space; same physical grammar
 - [[caring-for-those-who-care|Caring for Those Who Care]] — complement: supporting the workers who deliver care
-- [[goods-on-country|Goods on Country]] — ACT building physical infrastructure for community impact

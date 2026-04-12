@@ -20,11 +20,11 @@ image_model: gemini-3-pro-image-preview via mcp__gemini-image__create_asset
 Until now, ACT has had two competing visual aesthetics circulating in parallel:
 
 1. A **warm earth-toned web brand** (Earth Brown / Leaf Green / Sky Blue / Warm White) used for the website, dashboards, and consent UI — clean, professional, accessible
-2. A **velvet-black + bone-white + ochre register** that emerged in the [[the-brave-ones|Brave Ones]] portrait discipline and the [[../../tools/three-ripples-ledger.html|Three Ripples Ledger]] mockup — ceremonial, hand-made, lived-in
+2. A **velvet-black + bone-white + ochre register** that emerged in the [[the-brave-ones|Brave Ones]] portrait discipline and the `tools/three-ripples-ledger.html` mockup — ceremonial, hand-made, lived-in
 
 Both worked for their context. Neither was the **shared spine** for model images, simple graphs, and proposal artwork going forward. This page locks that spine.
 
-The locked spine draws from the [[../raw/2026-04-07-jh-minderoo-image-prompts|image prompts library]] developed for the Three Circles Minderoo proposal. It is **already proven in the Three Circles deck**, and it is now the canonical system across every project — not just the pitch.
+The locked spine draws from the `wiki/raw/2026-04-07-jh-minderoo-image-prompts.md` image prompts library developed for the Three Circles Minderoo proposal. It is **already proven in the Three Circles deck**, and it is now the canonical system across every project — not just the pitch.
 
 ## The locked palette — Red Centre
 
@@ -121,11 +121,11 @@ These are the canonical model diagrams maintained across ACT documentation. Each
 
 | Diagram | Default metaphor | What it shows |
 |---|---|---|
-| **The Three Circles** ([[three-circles\|three-circles.md]]) | **Variant A — Tree trunk** | Centre / The Ten / The Outer Ring → *The Country We're Building* artefact |
+| **The Three Circles** ([[three-circles|Three Circles]]) | **Variant A — Tree trunk** | Centre / The Ten / The Outer Ring → *The Country We're Building* artefact |
 | **ACT Core Model** | Variant D — Ripples (smaller scale) | LAND PRACTICE → ENTERPRISE / LCAA / IMPACT → COMMUNITY (Ownership) |
 | **LCAA Loop** | Variant B — Basket coil (cycle, not arrow) | Listen → Curiosity → Action → Art → Listen (Art returns us to Listen) |
 | **ALMA Reporting Loop** | Variant D — Ripples | STORY → SIGNAL → SHIFT → SCOPE → (feedback) → STORY |
-| **Consent and Data Flow** ([[empathy-ledger\|Empathy Ledger]]) | Custom — concentric envelopes | Empathy Ledger as source of truth, internal/external paths determined by consent scope |
+| **Consent and Data Flow** ([[empathy-ledger|Empathy Ledger]]) | Custom — concentric envelopes | Empathy Ledger as source of truth, internal/external paths determined by consent scope |
 | **Enterprise Pathway Loops** | Variant A — Tree rings (slow, accumulating) | Goods on Country: Need → Design → Manufacture → Distribute → Maintain → 40% Returns. The Harvest: Land Care → Grow/Make → Community Enterprise → Revenue → Reinvest. |
 | **Map of the Ten** (Three Circles companion) | Stylised hand-drawn map of Australia | Ten anchor communities marked as glowing accent-color fires; constellation web connecting them |
 | **Three-Year Timeline (Fire Crescendo)** | Three campfires across a horizon | Year 1 small flame → Year 2 confident blaze → Year 3 roaring bonfire with sparks rising into a constellation |
@@ -185,10 +185,10 @@ These are the places the locked system already lives or is locked to land next:
 
 | Where | Status | Notes |
 |---|---|---|
-| [[three-circles\|Three Circles]] deck (`thoughts/shared/handoffs/staying/minderoo-deck-v2.md`) | Locked to this system | All 10 slides reference Red Centre + woodcut grammar |
-| [[the-brave-ones\|Brave Ones]] portrait series | Locked B&W within this system | Brave Ones portraits use bone white / velvet black / blood ochre as a *photographic sub-system* — high-contrast B&W photographs, the ochre accent mapping to Red Centre's accent 1 |
-| [[../../tools/three-ripples-ledger.html\|Three Ripples Ledger]] mockup | Adopt this system on next refresh | Currently uses an alternate ledger-page register; should migrate to Red Centre + woodcut |
-| [[../../tools/three-ripples-poster.html\|Three Ripples Poster]] | Adopt this system on next refresh | Same as above |
+| [[three-circles|Three Circles]] deck (`thoughts/shared/handoffs/staying/minderoo-deck-v2.md`) | Locked to this system | All 10 slides reference Red Centre + woodcut grammar |
+| [[the-brave-ones|Brave Ones]] portrait series | Locked B&W within this system | Brave Ones portraits use bone white / velvet black / blood ochre as a *photographic sub-system* — high-contrast B&W photographs, the ochre accent mapping to Red Centre's accent 1 |
+| `tools/three-ripples-ledger.html` mockup | Adopt this system on next refresh | Currently uses an alternate ledger-page register; should migrate to Red Centre + woodcut |
+| `tools/three-ripples-poster.html` | Adopt this system on next refresh | Same as above |
 | Three Circles model diagram | **Build next** using **Variant A — tree-trunk cross-section** with Red Centre + woodcut grammar |
 | Map of the Ten | **Build next** as the Three Circles companion artwork |
 | Three-Year Timeline (Fire Crescendo) | **Build next** for Slide 5 of the Three Circles deck |
@@ -247,7 +247,7 @@ If Gemini 3 Pro Image is unavailable or rate-limited, swap `model: "gemini-2.5-f
 
 ### Earlier prompt-template library (still useful as a library of metaphors)
 
-The full prompt templates from the original Three Circles image library live in [[../raw/2026-04-07-jh-minderoo-image-prompts|2026-04-07-jh-minderoo-image-prompts.md]]. Those describe the *encoding* (what each diagram should show); the recipe above is how to *render* them in Gemini.
+The full prompt templates from the original Three Circles image library live in `wiki/raw/2026-04-07-jh-minderoo-image-prompts.md`. Those describe the *encoding* (what each diagram should show); the recipe above is how to *render* them in Gemini.
 
 ## Asset management
 
@@ -288,4 +288,4 @@ Every asset must carry: Empathy Ledger ID (where applicable), consent scope nota
 - [[voice-guide|ACT Voice Guide]] — companion language system; same two-surface logic (UI vs artwork) applies to language too
 - [[governance-consent|Governance & Consent]] — consent requirements for visual assets
 - [[lcaa-method|LCAA Method]] — the methodology this system serves
-- [[../raw/2026-04-07-jh-minderoo-image-prompts|Image prompt library]] — the canonical source for all model image prompts; this page is the compiled article on top of it
+- `wiki/raw/2026-04-07-jh-minderoo-image-prompts.md` — the canonical source for all model image prompts; this page is the compiled article on top of it

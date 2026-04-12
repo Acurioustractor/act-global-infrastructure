@@ -16,8 +16,8 @@ Tennant Creek (Jurnkurakurr) is the largest town in the Barkly region, with a po
 
 Key facts grounding the concept:
 - The Barkly is in the SPSP (Stronger Places Stronger People) network — confirmed in ACT project_knowledge (March 2026), which notes Tennant Creek as a SPSP site
-- PLACE ($38.6M backbone fund, First Nations-majority board) specifically identifies Tennant Creek in its network — and has no data platform, a gap [[justicehub|JusticeHub]] is positioned to fill
-- [[contained|CONTAINED]]'s national touring schedule includes a planned Tennant Creek stop (June 2026, $75K budget) — the highest per-stop budget, reflecting the cost of cultural safety and local facilitation in remote settings
+- PLACE ($38.6M backbone fund, First Nations-majority board) specifically identifies Tennant Creek in its network — and has no data platform, a gap ACT's justice evidence infrastructure is positioned to fill
+- CONTAINED's national touring schedule includes a planned Tennant Creek stop (June 2026, $75K budget) — the highest per-stop budget, reflecting the cost of cultural safety and local facilitation in remote settings
 
 ## The Problem Barkly Backbone Is Designed to Solve
 
@@ -36,16 +36,16 @@ A backbone organisation in the Barkly would provide:
 Barkly Backbone connects to several ACT workstreams in ideation:
 
 ### JusticeHub
-[[justicehub|JusticeHub]] is the ACT platform built to document and surface what community programs actually achieve. In the Barkly, JusticeHub would function as the evidence layer for a backbone — helping local organisations prove their outcomes without building their own reporting infrastructure. The PLACE governance research (March 2026) explicitly identifies the Barkly as a target geography where JusticeHub fills a genuine gap.
+JusticeHub is the ACT platform built to document and surface what community programs actually achieve. In the Barkly, JusticeHub would function as the evidence layer for a backbone — helping local organisations prove their outcomes without building their own reporting infrastructure. The PLACE governance research (March 2026) explicitly identifies the Barkly as a target geography where that kind of evidence layer fills a genuine gap.
 
 ### Oonchiumpa
-[[oonchiumpa|Oonchiumpa]] operates across Central Australia from its base in Mparntwe (Alice Springs), with some reach toward the Barkly. Its model — community-led, Elder-governed, outcome-documented — is the type of organisation a backbone would serve. The Oonchiumpa evidence base (95% diversion, Operation Luna) shows what becomes visible when organisations get the support to document their work.
+Oonchiumpa operates across Central Australia from its base in Mparntwe (Alice Springs), with some reach toward the Barkly. Its model — community-led, Elder-governed, outcome-documented — is the type of organisation a backbone would serve. The Oonchiumpa evidence base (95% diversion, Operation Luna) shows what becomes visible when organisations get the support to document their work.
 
 ### Goods on Country
-[[goods-on-country|Goods on Country]] has identified Tennant Creek as a potential manufacturing site for containerised production. A backbone organisation in the Barkly could provide the local anchoring infrastructure that makes a Goods on Country node viable — shared admin, local relationships, governance capacity.
+Goods on Country has identified Tennant Creek as a potential manufacturing site for containerised production. A backbone organisation in the Barkly could provide the local anchoring infrastructure that makes a Goods on Country node viable — shared admin, local relationships, governance capacity.
 
 ### CivicGraph
-[[civicgraph|CivicGraph]] maps funding flows and organisational relationships across the Australian social sector. The Barkly, as a named geography in PLACE's SPSP network, is already embedded in the data layer. Barkly Backbone would be the field-level complement to that intelligence.
+CivicGraph maps funding flows and organisational relationships across the Australian social sector. The Barkly, as a named geography in PLACE's SPSP network, is already embedded in the data layer. Barkly Backbone would be the field-level complement to that intelligence.
 
 ## The Backbone Model
 
@@ -77,8 +77,4 @@ The project requires:
 
 ## Backlinks
 
-- [[oonchiumpa|Oonchiumpa]] — community-led model in Central Australia; Barkly-adjacent geography
-- [[justicehub|JusticeHub]] — evidence platform that backbone organisations would feed into
-- [[goods-on-country|Goods on Country]] — Tennant Creek identified as potential manufacturing node
-- [[civicgraph|CivicGraph]] — data layer; Barkly in SPSP network already mapped
-- [[contained|CONTAINED]] — Tennant Creek stop on national tour (June 2026); highest per-stop budget
+- [[index|ACT Wikipedia]]

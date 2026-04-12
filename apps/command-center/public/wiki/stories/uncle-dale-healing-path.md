@@ -1,27 +1,16 @@
 ---
 title: "Building a Healing Path: Uncle Dale's Vision for Youth Justice Reform"
-slug: uncle-dale-healing-path
-empathy_ledger_id: "de3f0fae-c4d4-4f19-8197-97a1ab8e56b1"
-project_slugs:
-  - justicehub
-consent_scope: "EXTERNAL-LITE"
-cultural_sensitivity: medium
-lcaa_stage: action
-place: "Traditional Owner-led vision for cultural healing centres"
-voice_owner: "Traditional Owner and community leader (Uncle Dale)"
-media_needs:
-  - portrait (consent)
-  - concept sketch
-  - on-Country image
-status: approved
-last_updated: 2026-02-04
+status: External-Lite
+projects: justicehub
 ---
+
+> Generated legacy mirror for command-center.
+> Source of truth: `wiki/stories/uncle-dale-healing-path.md`.
+> Regenerated: `2026-04-11T02:58:52.891Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # Building a Healing Path: Uncle Dale's Vision for Youth Justice Reform
 
 > A vision for cultural healing centres that transform youth justice through Country, culture, and care.
-
----
 
 ## Context
 
@@ -29,9 +18,7 @@ last_updated: 2026-02-04
 **Voice Owner:** Traditional Owner and community leader (Uncle Dale)
 **Consent Status:** EXTERNAL-LITE — Traditional Owner review required
 
----
-
-## Story Summary
+## Story
 
 Uncle Dale's vision for youth justice reform doesn't start with detention facilities or court processes. It starts with Country, culture, and care.
 
@@ -45,8 +32,6 @@ Key elements of the vision:
 
 This vision shapes JusticeHub's direction: documenting and connecting community-led alternatives, not just reforming existing systems.
 
----
-
 ## ALMA Signals
 
 | Signal | Level | Notes |
@@ -58,29 +43,14 @@ This vision shapes JusticeHub's direction: documenting and connecting community-
 | **Option Value** | High | Foundation for alternatives |
 | **Community Value Return** | High | Community-led from conception |
 
----
+## Connections
 
-## LCAA Shift
-
-**From:** Listen (hearing Elder vision for alternatives)
-**To:** Action (designing alternatives to detention)
-**What changed:** Traditional Owner vision became foundation for justice innovation
-
----
-
-## Media Needs
-
-- [ ] Portrait (consent from Uncle Dale)
-- [ ] Concept sketch (can create)
-- [ ] On-Country image (consent required)
-
----
-
-## Related
-
-- **Projects:** [JusticeHub](/wiki/justicehub)
-- **Other Vignettes:** [Operation Luna Success](/wiki/stories/operation-luna-success)
-
----
+**LCAA Shift:** Listen (hearing Elder vision for alternatives) → Action (designing alternatives to detention). Traditional Owner vision became foundation for justice innovation.
 
 *Consent reviewed: 2025-12 | Next review: 2026-06*
+
+## Backlinks
+
+- [[empathy-ledger|Empathy Ledger]] — storytelling platform
+- [[justicehub|JusticeHub]] — the project shaped by this vision
+- [[operation-luna-success|Operation Luna Success]] — community-led justice in practice

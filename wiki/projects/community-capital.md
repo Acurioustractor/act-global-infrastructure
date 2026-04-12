@@ -22,7 +22,7 @@ The "10x10" framing suggests the retreat may operate at scale: potentially 10 or
 
 ACT does not hold the capital in Community Capital. It holds the room. This is a deliberate choice that reflects one of ACT's core operating principles: the organisation's job is to remove friction between people who have something and communities that need it, without extracting value in either direction.
 
-This is the same logic that drives [[civicgraph|CivicGraph]] — mapping funding flows so community organisations understand the sector they're trying to navigate — and [[justicehub|JusticeHub]] — making the evidence base legible to funders who want proof before they commit. Community Capital is the relational complement to those platforms. CivicGraph provides the data. JusticeHub provides the evidence. Community Capital provides the room.
+This is the same logic that drives [[civicgraph|CivicGraph]] — mapping funding flows so community organisations understand the sector they're trying to navigate — and ACT's evidence infrastructure more broadly — making the evidence base legible to funders who want proof before they commit. Community Capital is the relational complement to those systems. CivicGraph provides the data. The evidence layer provides the proof. Community Capital provides the room.
 
 ## Why This Matters: The Capital Access Problem
 
@@ -41,7 +41,7 @@ The Social Impact Hub Foundation's focus on not-for-profits receiving approximat
 [[funding-transparency|Funding Transparency]] as a concept addresses the opacity of philanthropic capital — who has it, how it moves, what it's looking for, and what it avoids. Community Capital as a convening operates on the premise that transparency produces better capital allocation: when community leaders and funders are in the same room talking honestly, the matching is better than when grants are decided at a distance.
 
 ### PICC
-[[picc|Palm Island Community Company]] is ACT's clearest example of community-controlled finance at scale — a 200+ person workforce in health, family services, and employment, entirely controlled by the Palm Island community. PICC demonstrates what becomes possible when a community has real capital under its own governance. Community Capital is one of the mechanisms through which ACT tries to build more PICC-like situations.
+Palm Island Community Company (PICC) is ACT's clearest example of community-controlled finance at scale — a 200+ person workforce in health, family services, and employment, entirely controlled by the Palm Island community. PICC demonstrates what becomes possible when a community has real capital under its own governance. Community Capital is one of the mechanisms through which ACT tries to build more PICC-like situations.
 
 ### The TYSON Bank / Community Finance Thread
 
@@ -65,6 +65,3 @@ Active, with at least one retreat completed (the Bowral convening referenced in 
 
 - [[civicgraph|CivicGraph]] — data layer mapping funding flows that Community Capital navigates
 - [[funding-transparency|Funding Transparency]] — the concept Community Capital enacts in practice
-- [[picc|Palm Island Community Company]] — precedent for community-controlled capital at scale
-- [[justicehub|JusticeHub]] — evidence platform that makes community programs legible to funders
-- [[the-harvest|The Harvest Witta]] — ACT's physical convening infrastructure; community space as context

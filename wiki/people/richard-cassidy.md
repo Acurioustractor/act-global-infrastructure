@@ -54,6 +54,15 @@ For the land where he works, Richard envisions restoration: "We're planning to m
 
 Richard's storytelling and governance practice was documented through [[empathy-ledger|Empathy Ledger]] field work on Palm Island. His "Our Story" philosophy directly informed ACT's approach to sovereign storytelling and the principle that communities already hold the knowledge — the role of technology is to amplify, not replace.
 
+He is also one of the clearest figures explaining why [[picc|PICC]] matters beyond service delivery numbers. Richard makes visible the governance argument underneath community control: story, authority, and accountability have to be held together. That is why he appears in ACT's wider justice and sovereign-story field as more than a local voice. He helps explain the program logic.
+
 ## Sources
 
 - Raw: `wiki/raw/2025-10-11-article-richard-cassidy---our-story.md`
+
+## Backlinks
+
+- [[picc|PICC]] — Palm Island community-control field where Richard's governance framing matters most
+- [[palm-island|Palm Island (Bwgcolman)]] — Country, governance, and local context
+- [[empathy-ledger|Empathy Ledger]] — field documentation and sovereign-story context
+- [[lcaa-method|LCAA Method]] — shared-story approach as a listening discipline

@@ -92,3 +92,4 @@ Naming risk early is part of stewardship. We do not hide it in the margins.
 - [[lcaa-method|LCAA Method]] — methodology that shapes how work moves through the year
 - [[beautiful-obsolescence|Beautiful Obsolescence]] — Q4 focus on handover documentation
 - [[ways-of-working|Ways of Working]] — the daily practice that makes the roadmap real
+- [[continuous-pipeline|Continuous Pipeline Architecture]] — the standing wiki and knowledge-system maintenance work that sits underneath the 2026 plan

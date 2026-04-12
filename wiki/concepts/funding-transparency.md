@@ -82,6 +82,8 @@ Funding transparency is not the same as a grants database. Grants databases show
 
 This is the distinction between a **reactive tool** (find grants to apply for) and **civic intelligence infrastructure** (understand and hold accountable the system that allocates public resources).
 
+ACT's [[community-capital|Community Capital]] retreat sits on the other side of the same problem. Funding transparency makes money flows legible; the convening layer creates the relationship space where better capital allocation can actually happen.
+
 ---
 
 ## International Context
@@ -104,6 +106,7 @@ CivicGraph's response to this is the **cross-subsidy model**: institutional user
 - **[[civic-world-model|Civic World Model]]** — the architectural vision for how civic data should be structured
 - **[[power-dynamics-philanthropy|Power Dynamics in Australian Philanthropy]]** — empirical findings about money concentration
 - **[[civicgraph|CivicGraph]]** — the platform implementing funding transparency for Australia
+- **[[community-capital|Community Capital]]** — relational convening layer that turns transparency into better matching
 
 ---
 

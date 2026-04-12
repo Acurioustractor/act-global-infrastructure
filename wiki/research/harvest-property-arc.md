@@ -15,11 +15,11 @@ The richest document in the Harvest meeting record isn't a meeting in the tradit
 
 **The Silence** — Witta has no gathering place. Two thousand cars pass through every weekend. One cafe. The hinterland is hollowing out; people drive through but never stop. The silence isn't peace — it's absence.
 
-**The Shed** — Barry Rodgerig is 80 years old. He has been on this land since 1972. Before that, Peachester — 25 years of dairy, timber, and red soil. He drove tractors before he could see over the steering wheel. His shed is full of machines that built the Sunshine Coast hinterland: an AB184 log truck from 1963, ex-army Blitz trucks, a little Italian Valpadana with a Lombardini diesel, a 1957 Land Rover he'd like to restore "if I live long enough." He starts them up sometimes, just to hear them run. *"Rust is a terrible thing. It's just like cancer in humans."* Barry watched the hippies shut down the logging at Crystal Waters. He watched the government finish the job. He watched the hinterland turn from working country into scenic drive. His shed is archaeology — the living memory of what this place was.
+**The Shed** — [[barry-rodgerig|Barry Rodgerig]] is 80 years old. He has been on this land since 1972. Before that, Peachester — 25 years of dairy, timber, and red soil. He drove tractors before he could see over the steering wheel. His shed is full of machines that built the Sunshine Coast hinterland: an AB184 log truck from 1963, ex-army Blitz trucks, a little Italian Valpadana with a Lombardini diesel, a 1957 Land Rover he'd like to restore "if I live long enough." He starts them up sometimes, just to hear them run. *"Rust is a terrible thing. It's just like cancer in humans."* Barry watched the hippies shut down the logging at Crystal Waters. He watched the government finish the job. He watched the hinterland turn from working country into scenic drive. His shed is archaeology — the living memory of what this place was.
 
 **The Seed** — Four beliefs, not services: Eat. Gather. Make. Grow. A cafe is not a business; it's a daily act of showing up. A workshop is not a product; it's an invitation to make something together. A garden is not decoration; it's time made visible.
 
-**The Cycle** — Shaun Fisher is a Goenpul man, one of the three clans of the Quandamooka People (Traditional Owners of Minjerribah/North Stradbroke Island). When colonisers arrived in Brisbane, they blew up the Quandamooka oyster leases for limestone — the Treasury building, the banks, the city's foundations. At The Harvest, Shaun sells oysters direct to community. The shells are collected and worked into benchtops and surfaces. Everything returnable. This is LCAA made physical: Listen → Curiosity → Action → Art → Listen.
+**The Cycle** — [[shaun-fisher|Shaun Fisher]] is a Goenpul man, one of the three clans of the Quandamooka People (Traditional Owners of Minjerribah/North Stradbroke Island). When colonisers arrived in Brisbane, they blew up the Quandamooka oyster leases for limestone — the Treasury building, the banks, the city's foundations. At The Harvest, Shaun sells oysters direct to community. The shells are collected and worked into benchtops and surfaces. Everything returnable. This is LCAA made physical: Listen → Curiosity → Action → Art → Listen.
 
 **The Canvas** — Gallery, not museum. Nothing permanent. Pop-ups before capital. Oyster nights before a restaurant. Pizza from a trailer before a kitchen. The scaffold pavilion before the permanent structure. *You're not coming to something finished — you're coming to something you can be part of.*
 
@@ -82,9 +82,9 @@ The Harvest property arc runs from a visionary brainstorm to a signed lease in e
 
 **The financial model is relational.** A standard commercial lease with Grant would have been simpler. ACT proposed revenue share precisely because it creates shared skin in the game. If The Harvest thrives, Grant benefits. This is the ACT commons model applied to a lease negotiation.
 
-**Barry Rodgerig is not background.** In "The Shed" section of The Compendium, NM spends significant time with Barry — 80 years old, full of machines, full of stories. The decision to document Barry before the first shovel is moved reflects ACT's LCAA practice: listen before you build, every place has a story already being told.
+**[[barry-rodgerig|Barry Rodgerig]] is not background.** In "The Shed" section of The Compendium, NM spends significant time with Barry — 80 years old, full of machines, full of stories. The decision to document Barry before the first shovel is moved reflects ACT's LCAA practice: listen before you build, every place has a story already being told.
 
-**Shaun Fisher's oysters are the LCAA loop made physical.** The Quandamooka shell cycle at The Harvest — eaten, collected, worked into benchtops, returned to the land — is described in the Compendium as *"LCAA made physical."* This is not decoration. It is ACT's methodology manifested in food and material.
+**[[shaun-fisher|Shaun Fisher]]'s oysters are the LCAA loop made physical.** The Quandamooka shell cycle at The Harvest — eaten, collected, worked into benchtops, returned to the land — is described in the Compendium as *"LCAA made physical."* This is not decoration. It is ACT's methodology manifested in food and material.
 
 **The homeschooling fact is load-bearing.** Witta has the highest homeschooling rate in Australia. There is no learning infrastructure. The Harvest's garden-as-classroom is a direct response to a real gap — not a feature added for brand appeal.
 
@@ -106,6 +106,8 @@ The Harvest property arc runs from a visionary brainstorm to a signed lease in e
 ## Backlinks
 
 - [[the-harvest|The Harvest]] — the project this arc produced
+- [[barry-rodgerig|Barry Rodgerig]] — Witta memory and archaeology of the shed
+- [[shaun-fisher|Shaun Fisher]] — shell-cycle and Quandamooka return loop
 - [[place-land-practice|Place & Land Practice]] — the broader framework
 - [[beautiful-obsolescence|Beautiful Obsolescence]] — The Handover section of the Compendium
 - [[lcaa-method|LCAA Method]] — Shaun's oysters as LCAA made physical

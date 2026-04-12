@@ -15,7 +15,7 @@ This is not a brand line. It is a delivery discipline that shapes architecture d
 
 ## The Tractor Metaphor
 
-The name A Curious Tractor comes from the Power Take-Off (PTO) mechanism — the connection point that transfers engine power to implements like balers, augers, and pumps. The tractor provides power; the farmer directs it.
+The name [[act-identity|A Curious Tractor (ACT)]] comes from the Power Take-Off (PTO) mechanism — the connection point that transfers engine power to implements like balers, augers, and pumps. The tractor provides power; the farmer directs it.
 
 Applied to ACT's work:
 
@@ -104,9 +104,37 @@ Local manufacturing capability built into program design, maintenance training i
 ### JusticeHub
 Research accessible without ACT intermediaries, community governance structures from day one, local coordination capacity built in, knowledge that stays local by design.
 
+## Field Anchors
+
+Beautiful Obsolescence is only real when it can be seen in actual founder and place decisions.
+
+- [[nicholas-marchesi|Nicholas Marchesi OAM]] — handover logic written directly into the Harvest founding vision
+- [[the-harvest|The Harvest]] — public place layer that should be able to outgrow ACT's direct control
+- [[act-farm|ACT Farm]] — program hub where the tractor metaphor becomes operating discipline
+- [[empathy-ledger|Empathy Ledger]] — exportability and community-owned consent as real handover design, not rhetoric
+
+## Public System Implication
+
+Beautiful Obsolescence also applies to ACT's publishing and knowledge systems:
+
+- the wiki should keep durable truth exportable and editable as plain markdown
+- [[living-website-operating-system|Living Website Operating System]] should keep websites thin enough to be replaced without losing the memory
+- project sites and partner surfaces should receive the right fragments, not become irreplaceable containers for the only copy of the truth
+
+If ACT cannot hand over the knowledge and public framing layer, it has not actually designed for obsolescence.
+
 ## Backlinks
 
 - [[lcaa-method|LCAA Method]] — Action phase is where handover planning lives
+- [[nicholas-marchesi|Nicholas Marchesi OAM]] — founder lane where handover is treated as a practical design choice
 - [[governance-consent|Governance & Consent]] — governance as handover discipline
 - [[alma|ALMA Framework]] — learning model that feeds capacity transfer
 - [[empathy-ledger|Empathy Ledger]] — primary platform designed for obsolescence
+- [[the-harvest|The Harvest]] — public place layer that should become community-held rather than ACT-dependent
+- [[act-farm|ACT Farm]] — tractor logic and field discipline made operational
+- [[glossary|Glossary]] — shared language entry for beautiful obsolescence across the ecosystem
+- [[voice-guide|ACT Voice Guide]] — the language discipline that keeps handover framing non-extractive and community-centered
+- [[2026-04-founder-lanes-and-top-two-bets|Founder Lanes and Top Two Bets]] — founder-level portfolio cut where handover logic becomes a practical filtering discipline
+- [[continuous-pipeline|Continuous Pipeline Architecture]] — the decision to keep wiki infrastructure light, forkable, and low-dependency
+- [[roadmap-2026|2026 Roadmap]] — annual handover and readiness logic expressed at the planning layer
+- [[living-website-operating-system|Living Website Operating System]] — the public-shell architecture that keeps ACT's sites replaceable and forkable

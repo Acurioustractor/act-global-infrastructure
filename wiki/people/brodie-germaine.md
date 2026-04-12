@@ -45,9 +45,17 @@ Brodie envisions a comprehensive wellness centre integrating fitness, cultural e
 
 Brodie is a key figure in [[justicehub|JusticeHub]] storytelling and a proof point for community-led youth justice alternatives. His work is referenced in the [[ai-community-engagement|Eating the Paperwork]] thesis as an example of what becomes possible when practitioners are freed from administrative burden to focus on relational work.
 
-**Project code:** ACT-CF (CAMPFIRE)
+**Project code:** ACT-CM (CAMPFIRE)
 
 ## Sources
 
 - Raw: `wiki/raw/2025-10-11-article-spotlight-on-changemaker-brodie-germaine.md`
 - Raw: `wiki/raw/2025-10-11-article-where-fire-meets-country-a-journey-through-mount-isas-naidoc-week.md`
+
+## Backlinks
+
+- [[justicehub|JusticeHub]] — lived-experience proof that alternatives work when relationships are resourced
+- [[mount-isa|Mount Isa]] — place context for BG Fit, CAMPFIRE, and BAIL
+- [[benjamin-knight|Benjamin Knight]] — field encounter that helped sharpen ACT's justice lane
+- [[campfire|CAMPFIRE]] — Brodie's cultural and mentoring program
+- [[ai-community-engagement|Eating the Paperwork]] — thesis framing his work as relational intelligence, not service admin

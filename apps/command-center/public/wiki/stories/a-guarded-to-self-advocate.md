@@ -1,26 +1,16 @@
 ---
 title: "A: From Guarded and Disengaged to Articulate Self-Advocate"
-slug: a-guarded-to-self-advocate
-empathy_ledger_id: "46b4862f-b6cf-4b4c-80f0-aab4edb26778"
-project_slugs:
-  - oonchiumpa
-consent_scope: "EXTERNAL-LITE"
-cultural_sensitivity: medium
-lcaa_stage: action
-place: "Central Australia"
-voice_owner: "Young person (identity protected)"
-media_needs:
-  - consent-safe portrait
-  - quote card
-status: approved
-last_updated: 2026-02-04
+status: External-Lite
+projects: oonchiumpa
 ---
+
+> Generated legacy mirror for command-center.
+> Source of truth: `wiki/stories/a-guarded-to-self-advocate.md`.
+> Regenerated: `2026-04-11T02:58:52.891Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # A: From Guarded and Disengaged to Articulate Self-Advocate
 
 > A young person moved from guarded disengagement to naming needs and seeking support.
-
----
 
 ## Context
 
@@ -28,9 +18,7 @@ last_updated: 2026-02-04
 **Voice Owner:** Young person (identity protected)
 **Consent Status:** EXTERNAL-LITE — identity protected
 
----
-
-## Story Summary
+## Story
 
 When Oonchiumpa first connected with A, they encountered a young person who was guarded and disengaged. This is a common protective response — young people who have been let down learn not to expect much, and not to reveal much.
 
@@ -41,8 +29,6 @@ Through sustained, patient relationship-building, something shifted. A began to:
 - **Advocate for themselves** — Speaking up in meetings and decisions
 
 The transformation isn't about compliance or being "easier to work with." It's about a young person developing agency — the ability to shape their own situation.
-
----
 
 ## ALMA Signals
 
@@ -55,27 +41,14 @@ The transformation isn't about compliance or being "easier to work with." It's a
 | **Option Value** | High | Demonstrates approach effectiveness |
 | **Community Value Return** | High | Young person empowered |
 
----
+## Connections
 
-## LCAA Shift
-
-**From:** Listen (building trust with guarded young person)
-**To:** Action (support becomes self-advocacy)
-**What changed:** Protection through disengagement became protection through voice
-
----
-
-## Media Needs
-
-- [ ] Consent-safe portrait (no identifiable features)
-- [ ] Quote card (can create)
-
----
-
-## Related
-
-- **Other Vignettes:** [CB: Cultural Leadership](/wiki/stories/cb-cultural-leadership)
-
----
+**LCAA Shift:** Listen (building trust with guarded young person) → Action (support becomes self-advocacy). Protection through disengagement became protection through voice.
 
 *Consent reviewed: 2025-12 | Next review: 2026-06*
+
+## Backlinks
+
+- [[empathy-ledger|Empathy Ledger]] — storytelling platform
+- [[oonchiumpa|Oonchiumpa]] — youth support program
+- [[cb-cultural-leadership|CB: Cultural Leadership]] — related story

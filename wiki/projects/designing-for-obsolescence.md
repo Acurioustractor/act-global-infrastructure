@@ -13,7 +13,7 @@ This framework is a direct critique of what it calls the **social innovation ind
 ## Key Principles
 
 ### Success Means We Become Unnecessary
-The clearest expression of this philosophy. Every [[lcaa-method|LCAA]] cycle should increase community capacity and reduce dependence on ACT as an intermediary. When a community can run the thing itself — the program, the platform, the policy — the work is done.
+The clearest expression of this philosophy. Every ACT cycle should increase community capacity and reduce dependence on ACT as an intermediary. When a community can run the thing itself — the program, the platform, the policy — the work is done.
 
 ### Depth Over Reach
 Conventional social innovation mythology prizes scale: how many people did you reach, how many cities are you in, what's the growth curve? Designing for Obsolescence prioritises depth — how fundamentally has one community's capacity changed? A thousand shallow interventions creates a thousand dependencies. One deep intervention creates a replicable model of self-determination.
@@ -22,7 +22,7 @@ Conventional social innovation mythology prizes scale: how many people did you r
 Expertise should flow toward communities, not remain held by ACT. Documentation, co-design, open-source systems, and training are not supporting activities — they are the primary outputs.
 
 ### Community Ownership Development
-The goal is not for communities to participate in ACT-designed systems but to own, adapt, and eventually supersede them. This shapes everything from how [[empathy-ledger|Empathy Ledger]] is governed to how [[junes-patch|June's Patch]] is built toward phased community handover.
+The goal is not for communities to participate in ACT-designed systems but to own, adapt, and eventually supersede them. This shapes everything from how Empathy Ledger is governed to how [[junes-patch|June's Patch]] is built toward phased community handover.
 
 ### Critique of Scaling Mythology
 Growth for its own sake — more sites, more users, more funding — is treated with suspicion. ACT's scale ambition is the spread of a model, not the growth of an organisation. If others replicate the approach without ACT, that is the goal.
@@ -31,11 +31,11 @@ Growth for its own sake — more sites, more users, more funding — is treated 
 
 This philosophy shapes every active project:
 
-- [[justicehub|JusticeHub]] is designed so that communities eventually run their own justice-alternatives without needing ACT facilitation
+- JusticeHub is designed so that communities eventually run their own justice-alternatives without needing ACT facilitation
 - [[junes-patch|June's Patch]] is explicitly structured as phased community ownership of garden sites
 - [[quandamooka-justice-strategy|Quandamooka Justice and Healing Strategy]] centres Indigenous leadership as the long-term authority, with ACT in a supporting role
 - [[goods-on-country|Goods on Country]] prioritises First Nations-owned supply chains over ACT-mediated distribution
-- [[empathy-ledger|Empathy Ledger]] builds storyteller agency into the platform architecture
+- Empathy Ledger builds storyteller agency into the platform architecture
 
 ## LCAA Phase
 
@@ -44,9 +44,6 @@ This philosophy shapes every active project:
 ## Backlinks
 
 - [[index|ACT Wikipedia]]
-- [[lcaa-method|LCAA Method]]
-- [[empathy-ledger|Empathy Ledger]]
-- [[justicehub|JusticeHub]]
 - [[junes-patch|June's Patch]]
 - [[quandamooka-justice-strategy|Quandamooka Justice and Healing Strategy]]
 - [[goods-on-country|Goods on Country]]

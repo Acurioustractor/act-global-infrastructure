@@ -1,26 +1,16 @@
 ---
 title: "Educational Transformation: 72% Return to School"
-slug: educational-transformation
-empathy_ledger_id: "07870666-a3e1-49f4-a61f-77967a607837"
-project_slugs:
-  - oonchiumpa
-consent_scope: "EXTERNAL-LITE"
-cultural_sensitivity: low
-lcaa_stage: art
-place: "Central Australia"
-voice_owner: "Community program team and young people"
-media_needs:
-  - classroom or mentoring moment (consent)
-  - simple outcome graphic
-status: approved
-last_updated: 2026-02-04
+status: External-Lite
+projects: oonchiumpa
 ---
+
+> Generated legacy mirror for command-center.
+> Source of truth: `wiki/stories/educational-transformation.md`.
+> Regenerated: `2026-04-11T02:58:52.891Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # Educational Transformation: 72% Return to School
 
 > Most disengaged participants returned to school or alternative pathways through sustained support and cultural mentorship.
-
----
 
 ## Context
 
@@ -28,9 +18,7 @@ last_updated: 2026-02-04
 **Voice Owner:** Community program team and young people
 **Consent Status:** EXTERNAL-LITE
 
----
-
-## Story Summary
+## Story
 
 The number speaks clearly: 72% of disengaged young people supported by Oonchiumpa returned to school or alternative educational pathways.
 
@@ -41,8 +29,6 @@ This isn't about forcing compliance. The pathway works because:
 - **Family involvement** — Working with whole families, not just individuals
 
 The 72% represents individual stories of reconnection. Each percentage point is someone who found their way back to learning — not because they were pressured, but because someone walked alongside them until education made sense again.
-
----
 
 ## ALMA Signals
 
@@ -55,27 +41,15 @@ The 72% represents individual stories of reconnection. Each percentage point is 
 | **Option Value** | High | Scalable approach |
 | **Community Value Return** | High | Young people in education |
 
----
+## Connections
 
-## LCAA Shift
-
-**From:** Action (sustained support programs)
-**To:** Art (support becomes pathway evidence)
-**What changed:** Individual support became documented outcome model
-
----
-
-## Media Needs
-
-- [ ] Classroom or mentoring moment (consent from school/participants)
-- [ ] Simple outcome graphic (can create)
-
----
-
-## Related
-
-- **Other Vignettes:** [School Partnership Success](/wiki/stories/school-partnership-success), [Young Person Returns to School](/wiki/stories/young-person-returns-school)
-
----
+**LCAA Shift:** Action (sustained support programs) → Art (support becomes pathway evidence). Individual support became documented outcome model.
 
 *Consent reviewed: 2025-12 | Next review: 2026-06*
+
+## Backlinks
+
+- [[empathy-ledger|Empathy Ledger]] — storytelling platform
+- [[oonchiumpa|Oonchiumpa]] — program delivering these outcomes
+- [[school-partnership-success|School Partnership Success Stories]] — related evidence
+- [[young-person-returns-school|Young Person Returns to School After Cultural Healing]] — an individual story behind this number

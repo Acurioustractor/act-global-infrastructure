@@ -138,3 +138,4 @@ npx tsx scripts/backfill-storyteller-analysis.ts
 - [[vignette-workflows|Vignette Workflows]] — how analyzed stories become compendium content
 - [[governance-consent|Governance & Consent]] — consent must be verified before analysis runs
 - [[act-architecture|ACT Technical Architecture]] — database tables and Supabase instances
+- [[transcript-analysis-method|Transcript Analysis Method]] — the governing method that defines what this workflow can and cannot do

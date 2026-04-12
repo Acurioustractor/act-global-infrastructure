@@ -1,0 +1,689 @@
+{
+  "generatedAt": "2026-04-11T03:29:46.030Z",
+  "sourceRoot": "/Users/benknight/Code/act-global-infrastructure/wiki",
+  "packCount": 5,
+  "packs": [
+    {
+      "slug": "justicehub",
+      "title": "JusticeHub",
+      "status": "Active",
+      "canonicalSlug": "justicehub",
+      "canonicalCode": "ACT-JH",
+      "entityType": "project-hub",
+      "taggingMode": "own-code",
+      "cluster": "justicehub",
+      "parentProject": null,
+      "empathyLedgerKey": "justicehub",
+      "websiteSlug": "justicehub",
+      "summary": "Evidence-based justice alternatives — proving what works, routing capital to what heals.",
+      "overview": "JusticeHub is ACT's evidence platform for justice alternatives. It catalogs community-led programs, tracks their outcomes, and provides the fiduciary evidence needed to divert funds from detention to healing. It is the evidence layer of The Third Reality.",
+      "whatItIs": "JusticeHub is ACT's evidence platform for justice alternatives. It catalogs community-led programs, tracks their outcomes, and provides the fiduciary evidence needed to divert funds from detention to healing. It is the evidence layer of The Third Reality.",
+      "clusterContext": "JusticeHub should be read as a constellation, not a lone product page. The durable cluster logic lives in JusticeHub Cluster, while the live proof layer should come through Empathy Ledger and the public sites. That is how the platform, pitch, methodology, and art companion stay aligned instead of drifting into separate truths.",
+      "systemPosition": "JusticeHub is one of ACT's flagship public fields, but it is not supposed to carry the whole system alone: - the wiki holds the durable platform framing, reform logic, cluster structure, and argument spine - Empathy Ledger should carry the live story, portrait, and documentation layer - the JusticeHub website should stay the spoke surface for evidence, proof, and entry points without becoming the only place where the truth lives This is why JusticeHub needs to stay attached to Living Website Operating System and to the Studio's wider economic and cultural logic in Studio Business Model. CONTAINED, the proof wall, and the reform surface are all part of one field.",
+      "sourcePage": {
+        "relativePath": "projects/justicehub/justicehub.md",
+        "wikiPath": "projects/justicehub",
+        "modifiedAt": "2026-04-11T02:58:29.662Z"
+      },
+      "downstream": {
+        "website": {
+          "primaryPath": "/justicehub",
+          "projectPath": "/projects/justicehub"
+        },
+        "empathyLedger": {
+          "projectKey": "justicehub"
+        }
+      },
+      "implementation": {
+        "primaryRepo": {
+          "name": "JusticeHub",
+          "localPath": "/Users/benknight/Code/JusticeHub",
+          "github": "Acurioustractor/justicehub-platform",
+          "githubUrl": "https://github.com/Acurioustractor/justicehub-platform",
+          "description": "Youth justice and community services",
+          "stack": "Next.js 14, Supabase, Tailwind",
+          "deployment": "Vercel",
+          "role": "Primary public product surface and evidence platform codebase."
+        },
+        "supportingRepos": [
+          {
+            "name": "GrantScope",
+            "localPath": "/Users/benknight/Code/grantscope",
+            "github": "Acurioustractor/grantscope",
+            "githubUrl": "https://github.com/Acurioustractor/grantscope",
+            "description": "CivicGraph, grants intelligence, and procurement discovery substrate",
+            "stack": "Next.js, Supabase, MCP, Tailwind",
+            "deployment": "Vercel",
+            "role": "CivicGraph, procurement, and capital-intelligence substrate feeding JusticeHub discovery and scoring."
+          }
+        ]
+      },
+      "keyPeople": [
+        {
+          "title": "Benjamin Knight",
+          "role": "— ACT co-founder and the main systems builder connecting JusticeHub to the wider ACT stack",
+          "stem": "benjamin-knight",
+          "wikiPath": "benjamin-knight"
+        },
+        {
+          "title": "Brodie Germaine",
+          "role": "— lived-experience justice practitioner whose work makes the alternatives legible on the ground",
+          "stem": "brodie-germaine",
+          "wikiPath": "brodie-germaine"
+        },
+        {
+          "title": "Kristy Bloomfield",
+          "role": "— Oonchiumpa cultural authority and one of the clearest community anchors in the JusticeHub proof layer",
+          "stem": "kristy-bloomfield",
+          "wikiPath": "kristy-bloomfield"
+        },
+        {
+          "title": "Vic",
+          "role": "— public transformation-to-service narrative that helps the evidence read as human truth, not only platform logic",
+          "stem": "vic",
+          "wikiPath": "vic"
+        }
+      ],
+      "sourceBridges": [
+        {
+          "title": "Source Summary — JusticeHub Proof Wall",
+          "href": "../../sources/2026-04-07-scrape-justicehub-proof.md",
+          "relativePath": "sources/2026-04-07-scrape-justicehub-proof.md",
+          "wikiPath": "sources/2026-04-07-scrape-justicehub-proof",
+          "stem": "2026-04-07-scrape-justicehub-proof"
+        },
+        {
+          "title": "Source Summary — The Cure Already Exists",
+          "href": "../../sources/2026-04-07-jh-first-nations-oped.md",
+          "relativePath": "sources/2026-04-07-jh-first-nations-oped.md",
+          "wikiPath": "sources/2026-04-07-jh-first-nations-oped",
+          "stem": "2026-04-07-jh-first-nations-oped"
+        },
+        {
+          "title": "Source Summary — CONTAINED Tour Intelligence Model",
+          "href": "../../sources/2026-04-07-jh-contained-tour-intelligence.md",
+          "relativePath": "sources/2026-04-07-jh-contained-tour-intelligence.md",
+          "wikiPath": "sources/2026-04-07-jh-contained-tour-intelligence",
+          "stem": "2026-04-07-jh-contained-tour-intelligence"
+        },
+        {
+          "title": "Source Summary — JusticeHub Three Circles Proposal",
+          "href": "../../sources/2026-04-07-jh-three-circles-proposal.md",
+          "relativePath": "sources/2026-04-07-jh-three-circles-proposal.md",
+          "wikiPath": "sources/2026-04-07-jh-three-circles-proposal",
+          "stem": "2026-04-07-jh-three-circles-proposal"
+        },
+        {
+          "title": "Source Summary — JusticeHub Minderoo Executive Summary",
+          "href": "../../sources/2026-04-07-jh-minderoo-executive-summary.md",
+          "relativePath": "sources/2026-04-07-jh-minderoo-executive-summary.md",
+          "wikiPath": "sources/2026-04-07-jh-minderoo-executive-summary",
+          "stem": "2026-04-07-jh-minderoo-executive-summary"
+        }
+      ],
+      "packSections": [
+        {
+          "id": "what-it-is",
+          "title": "What It Is",
+          "body": "JusticeHub is ACT's evidence platform for justice alternatives. It catalogs community-led programs, tracks their outcomes, and provides the fiduciary evidence needed to divert funds from detention to healing. It is the evidence layer of The Third Reality."
+        },
+        {
+          "id": "cluster-context",
+          "title": "Cluster Context",
+          "body": "JusticeHub should be read as a constellation, not a lone product page. The durable cluster logic lives in JusticeHub Cluster, while the live proof layer should come through Empathy Ledger and the public sites. That is how the platform, pitch, methodology, and art companion stay aligned instead of drifting into separate truths."
+        },
+        {
+          "id": "system-position",
+          "title": "System Position",
+          "body": "JusticeHub is one of ACT's flagship public fields, but it is not supposed to carry the whole system alone: - the wiki holds the durable platform framing, reform logic, cluster structure, and argument spine - Empathy Ledger should carry the live story, portrait, and documentation layer - the JusticeHub website should stay the spoke surface for evidence, proof, and entry points without becoming the only place where the truth lives This is why JusticeHub needs to stay attached to Living Website Operating System and to the Studio's wider economic and cultural logic in Studio Business Model. CONTAINED, the proof wall, and the reform surface are all part of one field."
+        },
+        {
+          "id": "key-people",
+          "title": "Key People",
+          "body": "JusticeHub should keep a curated people layer, not a full stakeholder mirror. The load-bearing figures are the ones who explain how the field holds together across system design, lived experience, and community authority. - Benjamin Knight — ACT co-founder and the main systems builder connecting JusticeHub to the wider ACT stack - Brodie Germaine — lived-experience justice practitioner whose work makes the alternatives legible on the ground - Kristy Bloomfield — Oonchiumpa cultural authority and one of the clearest community anchors in the JusticeHub proof layer - Vic — public transformation-to-service narrative that helps the evidence read as human truth, not only platform logic The broader storyteller, partner, and mentor network should remain primarily in Empathy Ledger and in the source-bridge layer unless a person becomes structurally necessary across multiple canonical pages."
+        },
+        {
+          "id": "scale-april-2026",
+          "title": "Scale (April 2026)",
+          "body": "- 1,000+ verified alternative models mapped - 430 models with evidence data - $94.6B in funding tracked - 98,418 organizations mapped - 85% recidivism rate for youth detention - Indigenous young people face 24x higher incarceration rates"
+        },
+        {
+          "id": "key-source-bridges",
+          "title": "Key Source Bridges",
+          "body": "- Source Summary — JusticeHub Proof Wall - Source Summary — The Cure Already Exists - Source Summary — CONTAINED Tour Intelligence Model - Source Summary — JusticeHub Three Circles Proposal - Source Summary — JusticeHub Minderoo Executive Summary"
+        }
+      ]
+    },
+    {
+      "slug": "goods-on-country",
+      "title": "Goods on Country",
+      "status": "Active",
+      "canonicalSlug": "goods-on-country",
+      "canonicalCode": "ACT-GD",
+      "entityType": "project",
+      "taggingMode": "own-code",
+      "cluster": "goods-on-country",
+      "parentProject": null,
+      "empathyLedgerKey": "goods-on-country",
+      "websiteSlug": "goods-on-country",
+      "summary": "Manufacturing durable household goods from 100% recycled plastic for remote and marginalised Australian communities — where conventional products fail within weeks.",
+      "overview": "Goods on Country is ACT's circular economy social enterprise. It designs, manufactures, and deploys indestructible household goods for remote Aboriginal and marginalised communities across Australia, where extreme heat, overcrowding, dust, and limited repair infrastructure destroy standard products in weeks rather than years. The enterprise operates through A Curious Tractor Pty Ltd (ABN: 21 591 780 066) and trades at goodsoncountry.com.au. It is not an Indigenous-owned organisation — it partners deeply with Indigenous-owned organisations (Oonchiumpa, Wilya Janta) and community bodies. Communities are co-designers, not recipients. Internal project code: ACT-GD",
+      "whatItIs": "Goods on Country is ACT's circular economy social enterprise. It designs, manufactures, and deploys indestructible household goods for remote Aboriginal and marginalised communities across Australia, where extreme heat, overcrowding, dust, and limited repair infrastructure destroy standard products in weeks rather than years. The enterprise operates through A Curious Tractor Pty Ltd (ABN: 21 591 780 066) and trades at goodsoncountry.com.au. It is not an Indigenous-owned organisation — it partners deeply with Indigenous-owned organisations (Oonchiumpa, Wilya Janta) and community bodies. Communities are co-designers, not recipients. Internal project code: ACT-GD",
+      "clusterContext": null,
+      "systemPosition": "Goods on Country is one of ACT's flagship public fields, but its truth is distributed across layers: - the wiki holds the durable product logic, partnership model, capital stack, and handover arc - Empathy Ledger should hold the live community voice, photos, video, and consented deployment stories - the Goods Asset Register, GrantScope Goods Workspace, and related project codebases hold the operational implementation truth - the public websites should compose those layers without becoming a second place where product or partnership truth gets rewritten by hand That is why Goods on Country needs to stay linked to Living Website Operating System, Designing for Obsolescence, and the partner ecology around Oonchiumpa and PICC.",
+      "sourcePage": {
+        "relativePath": "projects/goods-on-country.md",
+        "wikiPath": "projects/goods-on-country",
+        "modifiedAt": "2026-04-11T03:15:29.642Z"
+      },
+      "downstream": {
+        "website": {
+          "primaryPath": "/goods",
+          "projectPath": "/projects/goods-on-country"
+        },
+        "empathyLedger": {
+          "projectKey": "goods-on-country"
+        }
+      },
+      "implementation": {
+        "primaryRepo": {
+          "name": "Goods",
+          "localPath": "/Users/benknight/Code/Goods Asset Register",
+          "github": "Acurioustractor/goods-asset-tracker",
+          "githubUrl": "https://github.com/Acurioustractor/goods-asset-tracker",
+          "description": "Circular economy asset management",
+          "stack": "Next.js, Supabase, Tailwind",
+          "deployment": "Vercel",
+          "role": "Asset register, delivery workflow, and operational product infrastructure."
+        },
+        "supportingRepos": [
+          {
+            "name": "GrantScope",
+            "localPath": "/Users/benknight/Code/grantscope",
+            "github": "Acurioustractor/grantscope",
+            "githubUrl": "https://github.com/Acurioustractor/grantscope",
+            "description": "CivicGraph, grants intelligence, and procurement discovery substrate",
+            "stack": "Next.js, Supabase, MCP, Tailwind",
+            "deployment": "Vercel",
+            "role": "Goods Workspace procurement and capital discovery layer."
+          },
+          {
+            "name": "Palm Island Repository",
+            "localPath": "/Users/benknight/Code/Palm Island Reposistory",
+            "github": "Acurioustractor/palm-island-repository",
+            "githubUrl": "https://github.com/Acurioustractor/palm-island-repository",
+            "description": "PICC-linked community archive, reporting, and web-platform workspace",
+            "stack": "Mixed repo (web-platform, templates, research, scripts)",
+            "deployment": "Vercel",
+            "role": "Community deployment, reporting, and media archive connected to Palm Island delivery proof."
+          }
+        ]
+      },
+      "keyPeople": [
+        {
+          "title": "Dianne Stokes",
+          "role": "— Elder whose naming and cultural grounding make the washing machine line legible as co-authored, not just engineered",
+          "stem": "dianne-stokes",
+          "wikiPath": "dianne-stokes"
+        },
+        {
+          "title": "Kristy Bloomfield",
+          "role": "— not a Goods operator, but one of the strongest community anchors in the wider Oonchiumpa partnership ecology around manufacturing and justice-prevention logic",
+          "stem": "kristy-bloomfield",
+          "wikiPath": "kristy-bloomfield"
+        }
+      ],
+      "sourceBridges": [
+        {
+          "title": "Source Summary — Goods on Country",
+          "href": "../sources/2026-04-07-cc-goods-index.md",
+          "relativePath": "sources/2026-04-07-cc-goods-index.md",
+          "wikiPath": "sources/2026-04-07-cc-goods-index",
+          "stem": "2026-04-07-cc-goods-index"
+        },
+        {
+          "title": "Source Summary — Community Innovation: Beds, Washing Machines, and Orange Sky",
+          "href": "../sources/2026-04-07-cc-stories-community-innovation-goods.md",
+          "relativePath": "sources/2026-04-07-cc-stories-community-innovation-goods.md",
+          "wikiPath": "sources/2026-04-07-cc-stories-community-innovation-goods",
+          "stem": "2026-04-07-cc-stories-community-innovation-goods"
+        },
+        {
+          "title": "Source Summary — The Cure Already Exists",
+          "href": "../sources/2026-03-12-article-the-cure-already-exists.md",
+          "relativePath": "sources/2026-03-12-article-the-cure-already-exists.md",
+          "wikiPath": "sources/2026-03-12-article-the-cure-already-exists",
+          "stem": "2026-03-12-article-the-cure-already-exists"
+        }
+      ],
+      "packSections": [
+        {
+          "id": "what-it-is",
+          "title": "What It Is",
+          "body": "Goods on Country is ACT's circular economy social enterprise. It designs, manufactures, and deploys indestructible household goods for remote Aboriginal and marginalised communities across Australia, where extreme heat, overcrowding, dust, and limited repair infrastructure destroy standard products in weeks rather than years. The enterprise operates through A Curious Tractor Pty Ltd (ABN: 21 591 780 066) and trades at goodsoncountry.com.au. It is not an Indigenous-owned organisation — it partners deeply with Indigenous-owned organisations (Oonchiumpa, Wilya Janta) and community bodies. Communities are co-designers, not recipients. Internal project code: ACT-GD"
+        },
+        {
+          "id": "system-position",
+          "title": "System Position",
+          "body": "Goods on Country is one of ACT's flagship public fields, but its truth is distributed across layers: - the wiki holds the durable product logic, partnership model, capital stack, and handover arc - Empathy Ledger should hold the live community voice, photos, video, and consented deployment stories - the Goods Asset Register, GrantScope Goods Workspace, and related project codebases hold the operational implementation truth - the public websites should compose those layers without becoming a second place where product or partnership truth gets rewritten by hand That is why Goods on Country needs to stay linked to Living Website Operating System, Designing for Obsolescence, and the partner ecology around Oonchiumpa and PICC."
+        },
+        {
+          "id": "key-people",
+          "title": "Key People",
+          "body": "The wiki should keep the Goods people layer selective and load-bearing: - Dianne Stokes — Elder whose naming and cultural grounding make the washing machine line legible as co-authored, not just engineered - Kristy Bloomfield — not a Goods operator, but one of the strongest community anchors in the wider Oonchiumpa partnership ecology around manufacturing and justice-prevention logic Additional Goods people should only be promoted into wiki/people/ when they become necessary to explain the project across more than one source. The broader live participant/storyteller layer belongs in Empathy Ledger."
+        },
+        {
+          "id": "scale-to-date",
+          "title": "Scale to Date",
+          "body": "As of early 2026: - 389 products deployed - 8 communities served - 1,000+ lives directly impacted - 9,225kg of plastic waste diverted from landfill - 33 community storytellers documenting experiences through Empathy Ledger - $445,685 in philanthropic funding received (Snow Foundation, FRRR, Vincent Fairfax, AMP Spark, The Funding Network) - $537,595 total revenue recorded (Xero, ACT-GD code)"
+        },
+        {
+          "id": "the-problem-it-solves",
+          "title": "The Problem It Solves",
+          "body": "In remote communities, families sleep on floors. Beds last weeks, not years. Appliances corrode, break, and go unreplaced. Standard consumer goods are not engineered for: - Extreme heat and UV exposure - High-density occupancy - Dust and limited sealed flooring - Lack of repair services or spare parts infrastructure The resulting housing inadequacy causes exhaustion in children (affecting school outcomes), deteriorating health outcomes, and constant wasteful replacement cycles that drain community resources."
+        },
+        {
+          "id": "products",
+          "title": "Products",
+          "body": "### Stretch Bed The flagship product — co-designed with Elders across Central Australia, the Top End, Palm Island, and Kalgoorlie. Specifications: - Material: 100% recycled HDPE plastic, UV-stabilised - Weight: 26kg - Load capacity: 200kg - Assembly: Five minutes, tool-free - Cleaning: Fully washable with a garden hose - Repairability: Every component individually replaceable - Lifespan: Built to last 10+ years - Plastic diverted per unit: 25kg from landfill The bed was not designed in an office — it was co-designed with Elders in Tennant Creek, tested in Alice Springs, and refined on Palm Island. Fred Campbell (Oonchiumpa, Western Arrernte man) consults on product design and cultural appropriateness. Current economics: Production cost $550–650/unit at small batch; cost reduction pathway to ~$350/unit at scale (5,000+/year). Institutional pricing $700–850/unit yields gross margins of 50–55% at scale. ### Industrial Washing Machine A fleet of community-deployed industrial washing machines, IoT-instrumented for remote telemetry. Elder Dianne Stokes (Warumungu) named the washing machine in language. 20 machines deployed across communities to date. The washing machine fleet serves a dual purpose: providing clean laundry infrastructure to communities, and generating IoT telemetry data that feeds ACT's R&D program (fleet management, remote asset monitoring, anomaly detection)."
+        },
+        {
+          "id": "community-partnerships",
+          "title": "Community Partnerships",
+          "body": "### Palm Island (PICC) Palm Island Community Company has been a key deployment partner. 141 beds deployed on Palm Island. Palm Island Housing is in active expansion discussions. PICC is also a consortium partner in the REAL Innovation Fund (DEWR) application alongside Oonchiumpa and ACT. See also: PICC ### Tennant Creek Multiple Tennant Creek community organisations engaged: - Centrecorp — approved 107 beds for Utopia Homelands; applications submitted for 100 beds across 4 communities - Anyinginyi Health — requested washing machine fleet; specs in negotiation - Julalikari — introduced ACT to Anyinginyi Health 200 v1 beds were delivered to Tennant Creek communities in early 2025, but were unfunded (~$36K outstanding), creating a cashflow gap that has constrained R&D capacity. ### Central Australia - Oonchiumpa Consultancy (Alice Springs) — 100% Aboriginal-staffed, confirmed manufacturing partner for the Central Australian containerised facility. Two years of co-design collaboration. Fred Campbell (Western Arrernte man) leads cultural consultation. - NPY Women's Council — ongoing relationship; 200–350 beds requested, \"always looking for beds\" - Wilya Janta (Simon Quilty) — fridges requested for Norm's community; engaged but progressing slowly ### East Arnhem / Top End - Miwatj Health — exploring fleet deployment across 8 clinics; 500+ mattress and 300 washer requests from Groote Eylandt communities documented - Groote Eylandt communities — significant documented demand; Groote Eylandt Aboriginal Trust identified as a capital target - Maningrida — $1.1M demand identified in GHL pipeline - Wadeye, Galiwinku, Milingimbi — high-value demand signals in community pipeline ### Kalgoorlie / WA Co-design consultations conducted with Kalgoorlie communities during product development."
+        },
+        {
+          "id": "key-source-bridges",
+          "title": "Key Source Bridges",
+          "body": "- Source Summary — Goods on Country - Source Summary — Community Innovation: Beds, Washing Machines, and Orange Sky - Source Summary — The Cure Already Exists"
+        },
+        {
+          "id": "lcaa-connection",
+          "title": "LCAA Connection",
+          "body": "Goods on Country sits in the Action phase of LCAA — making things that embody place and cultural knowledge. But the project spans all four phases: - Listen — Elders in Tennant Creek, Alice Springs, Palm Island shaped every design decision - Curiosity — IoT data and community feedback loops drive ongoing product iteration - Action — manufacturing, deploying, maintaining the fleet - Art — Elder Dianne Stokes naming the washing machine in Warumungu language; community storytellers defining the narrative It is also ACT's most direct test case for the Designing for Obsolescence methodology — the long-term goal is community-owned and operated manufacturing, with ACT's role progressively diminishing."
+        }
+      ]
+    },
+    {
+      "slug": "the-harvest",
+      "title": "The Harvest / Witta Harvest HQ",
+      "status": "Active",
+      "canonicalSlug": "the-harvest",
+      "canonicalCode": "ACT-HV",
+      "entityType": "project",
+      "taggingMode": "own-code",
+      "cluster": "the-harvest",
+      "parentProject": null,
+      "empathyLedgerKey": "the-harvest",
+      "websiteSlug": "the-harvest",
+      "summary": "A regenerative community hub in Witta, QLD — seasonal kitchen, garden centre, workshops, and venue hire on the former Green Harvest site, bringing together local produce, native plants, and hands-on learning.",
+      "overview": "The Harvest (also known as Witta Harvest HQ) is a regenerative community hub located in Witta, Queensland (postcode 4552), operating from the former Green Harvest site. It brings together a seasonal kitchen, a garden centre focused on native and productive plants for the Sunshine Coast, artisan workshops, and a flexible venue space — all grounded in regenerative land practice and local food culture. The physical site sits on Witta Farm, which remains in Nic's trust and is leased to ACT for retreats, R&D, and community programs. This arrangement makes The Harvest both a public-facing community business and a core piece of ACT's operational infrastructure.",
+      "whatItIs": null,
+      "clusterContext": "The Harvest should be read through the wider cluster in The Harvest Cluster. The wiki holds the durable program and place logic, Empathy Ledger should hold the live seasonal stories and media, and the websites should compose that into /harvest, articles, and event/community pathways.",
+      "systemPosition": "The Harvest is not only a venue or cafe concept. It is one of the public fronts where ACT's place, enterprise, and story systems meet: - the wiki holds the durable place logic, operating frame, and relationship to ACT Farm - Empathy Ledger should carry the live seasonal stories, photos, and community voice - the Harvest website should stay a focused spoke surface, not a second place where strategic truth gets rewritten by hand That is why The Harvest needs to stay linked to Living Website Operating System and to the Studio's wider economic logic in Studio Business Model.",
+      "sourcePage": {
+        "relativePath": "projects/the-harvest/the-harvest.md",
+        "wikiPath": "projects/the-harvest",
+        "modifiedAt": "2026-04-11T01:42:48.796Z"
+      },
+      "downstream": {
+        "website": {
+          "primaryPath": "/harvest",
+          "projectPath": "/projects/the-harvest"
+        },
+        "empathyLedger": {
+          "projectKey": "the-harvest"
+        }
+      },
+      "implementation": {
+        "primaryRepo": {
+          "name": "The Harvest",
+          "localPath": "/Users/benknight/Code/The Harvest Website",
+          "github": "Acurioustractor/theharvest",
+          "githubUrl": "https://github.com/Acurioustractor/theharvest",
+          "description": "Community hub and CSA programs",
+          "stack": "Next.js, Supabase, Tailwind",
+          "deployment": "Vercel",
+          "role": "Primary public community hub surface and local program website."
+        },
+        "supportingRepos": [
+          {
+            "name": "ACT Farm",
+            "localPath": "/Users/benknight/Code/act-farm",
+            "github": "Acurioustractor/act-farm",
+            "githubUrl": "https://github.com/Acurioustractor/act-farm",
+            "description": "Black Cockatoo Valley regeneration estate",
+            "stack": "Next.js, Supabase, Tailwind",
+            "deployment": "Vercel",
+            "role": "Sibling place and land-practice surface connected to Harvest and Black Cockatoo Valley."
+          }
+        ]
+      },
+      "keyPeople": [
+        {
+          "title": "Nicholas Marchesi OAM",
+          "role": "— land partner, co-founder, and the person whose Compendium turns the site into a place proposition rather than a venue brief",
+          "stem": "nicholas-marchesi",
+          "wikiPath": "nicholas-marchesi"
+        },
+        {
+          "title": "Barry Rodgerig",
+          "role": "— hinterland memory holder whose shed anchors the inheritance story of the place",
+          "stem": "barry-rodgerig",
+          "wikiPath": "barry-rodgerig"
+        },
+        {
+          "title": "Shaun Fisher",
+          "role": "— ecological cycle and shell-return practice that makes LCAA tangible in the material build",
+          "stem": "shaun-fisher",
+          "wikiPath": "shaun-fisher"
+        }
+      ],
+      "sourceBridges": [
+        {
+          "title": "Source Summary — The Harvest Index",
+          "href": "../../sources/2026-04-07-cc-the-harvest-index.md",
+          "relativePath": "sources/2026-04-07-cc-the-harvest-index.md",
+          "wikiPath": "sources/2026-04-07-cc-the-harvest-index",
+          "stem": "2026-04-07-cc-the-harvest-index"
+        },
+        {
+          "title": "Source Summary — ACT Farm Index",
+          "href": "../../sources/2026-04-07-cc-the-farm-index.md",
+          "relativePath": "sources/2026-04-07-cc-the-farm-index.md",
+          "wikiPath": "sources/2026-04-07-cc-the-farm-index",
+          "stem": "2026-04-07-cc-the-farm-index"
+        },
+        {
+          "title": "Source Summary — Ways of Working",
+          "href": "../../sources/2026-04-07-cc-act-ways-of-working.md",
+          "relativePath": "sources/2026-04-07-cc-act-ways-of-working.md",
+          "wikiPath": "sources/2026-04-07-cc-act-ways-of-working",
+          "stem": "2026-04-07-cc-act-ways-of-working"
+        }
+      ],
+      "packSections": [
+        {
+          "id": "overview",
+          "title": "Overview",
+          "body": "The Harvest (also known as Witta Harvest HQ) is a regenerative community hub located in Witta, Queensland (postcode 4552), operating from the former Green Harvest site. It brings together a seasonal kitchen, a garden centre focused on native and productive plants for the Sunshine Coast, artisan workshops, and a flexible venue space — all grounded in regenerative land practice and local food culture. The physical site sits on Witta Farm, which remains in Nic's trust and is leased to ACT for retreats, R&D, and community programs. This arrangement makes The Harvest both a public-facing community business and a core piece of ACT's operational infrastructure."
+        },
+        {
+          "id": "cluster-context",
+          "title": "Cluster Context",
+          "body": "The Harvest should be read through the wider cluster in The Harvest Cluster. The wiki holds the durable program and place logic, Empathy Ledger should hold the live seasonal stories and media, and the websites should compose that into /harvest, articles, and event/community pathways."
+        },
+        {
+          "id": "system-position",
+          "title": "System Position",
+          "body": "The Harvest is not only a venue or cafe concept. It is one of the public fronts where ACT's place, enterprise, and story systems meet: - the wiki holds the durable place logic, operating frame, and relationship to ACT Farm - Empathy Ledger should carry the live seasonal stories, photos, and community voice - the Harvest website should stay a focused spoke surface, not a second place where strategic truth gets rewritten by hand That is why The Harvest needs to stay linked to Living Website Operating System and to the Studio's wider economic logic in Studio Business Model."
+        },
+        {
+          "id": "key-people",
+          "title": "Key People",
+          "body": "The Harvest should hold only the people needed to explain the site's place logic, inheritance, and operating rhythm. - Nicholas Marchesi OAM — land partner, co-founder, and the person whose Compendium turns the site into a place proposition rather than a venue brief - Barry Rodgerig — hinterland memory holder whose shed anchors the inheritance story of the place - Shaun Fisher — ecological cycle and shell-return practice that makes LCAA tangible in the material build The broader staff, supplier, and visitor network should remain on project, source, and EL layers until those figures become structurally important to multiple canonical pages."
+        },
+        {
+          "id": "key-details",
+          "title": "Key Details",
+          "body": "- Location: Witta, QLD 4552 (former Green Harvest site) - Website: theharvestwitta.com.au - Contact: hello@theharvest.community - Trading hours: Saturday–Sunday, 8am–2pm - Land arrangement: Witta Farm held in Nic's trust, leased to ACT"
+        },
+        {
+          "id": "what-s-on-site",
+          "title": "What's On Site",
+          "body": "### Seasonal Kitchen Breakfast and brunch service using local produce, operating within the weekend trading hours. The menu follows seasonal availability and reflects the surrounding food landscape of the Sunshine Coast hinterland. ### Garden Centre Native and productive plants suited to the Sunshine Coast region — sourced and curated for home growers, community gardens, and regenerative smallholders. ### Workshops Hands-on programs including pottery, food preserving, and gardening. These sit within ACT's broader R&D and community education mission. ### Venue Hire Indoor-outdoor event space available for community gatherings, private events, and program delivery."
+        },
+        {
+          "id": "key-source-bridges",
+          "title": "Key Source Bridges",
+          "body": "- Source Summary — The Harvest Index - Source Summary — ACT Farm Index - Source Summary — Ways of Working"
+        },
+        {
+          "id": "lcaa-phase",
+          "title": "LCAA Phase",
+          "body": "Action — the hub is active, trading, and demonstrating regenerative practice in daily operation. The workshop and education programs extend into Curiosity and Art phases through hands-on learning and creative practice."
+        }
+      ]
+    },
+    {
+      "slug": "empathy-ledger",
+      "title": "Empathy Ledger",
+      "status": "Active",
+      "canonicalSlug": "empathy-ledger",
+      "canonicalCode": "ACT-EL",
+      "entityType": "project",
+      "taggingMode": "own-code",
+      "cluster": "empathy-ledger",
+      "parentProject": null,
+      "empathyLedgerKey": "empathy-ledger",
+      "websiteSlug": "empathy-ledger",
+      "summary": "Not your story... not my story... but a third reality we can only discover together.",
+      "overview": "The Empathy Ledger is ACT's sovereign storytelling platform — the narrative sovereignty layer of The Third Reality. It gives marginalized and Indigenous communities cryptographic ownership of their narratives, ensuring stories are never extracted but always owned.",
+      "whatItIs": "The Empathy Ledger is ACT's sovereign storytelling platform — the narrative sovereignty layer of The Third Reality. It gives marginalized and Indigenous communities cryptographic ownership of their narratives, ensuring stories are never extracted but always owned.",
+      "clusterContext": null,
+      "systemPosition": "Empathy Ledger is not only a product. It is one of ACT's load-bearing stack layers: - the wiki holds the durable framing for story sovereignty, consent, and identity - Empathy Ledger holds the live story, photo, video, and editorial layer - the websites compose EL material into project pages, journals, and partner surfaces That architecture is the point, not an implementation detail. See Living Website Operating System for the full operating model and Studio Business Model for how EL strengthens ACT's public surface, media quality, and ecosystem earning power.",
+      "sourcePage": {
+        "relativePath": "projects/empathy-ledger.md",
+        "wikiPath": "projects/empathy-ledger",
+        "modifiedAt": "2026-04-11T02:58:29.663Z"
+      },
+      "downstream": {
+        "website": {
+          "primaryPath": "/empathy-ledger",
+          "projectPath": "/projects/empathy-ledger"
+        },
+        "empathyLedger": {
+          "projectKey": "empathy-ledger"
+        }
+      },
+      "implementation": {
+        "primaryRepo": {
+          "name": "Empathy Ledger",
+          "localPath": "/Users/benknight/Code/empathy-ledger-v2",
+          "github": "Acurioustractor/empathy-ledger-v2",
+          "githubUrl": "https://github.com/Acurioustractor/empathy-ledger-v2",
+          "description": "Ethical storytelling platform",
+          "stack": "Next.js 14, Supabase, Tailwind",
+          "deployment": "Vercel",
+          "role": "Story, media, consent, and editorial platform."
+        },
+        "supportingRepos": []
+      },
+      "keyPeople": [
+        {
+          "title": "Benjamin Knight",
+          "role": "— co-founder and field practitioner shaping the story, media, and product infrastructure",
+          "stem": "benjamin-knight",
+          "wikiPath": "benjamin-knight"
+        },
+        {
+          "title": "Richard Cassidy",
+          "role": "— Palm Island governance and \"Our Story\" framing that directly informs ACT's story-sovereignty practice",
+          "stem": "richard-cassidy",
+          "wikiPath": "richard-cassidy"
+        },
+        {
+          "title": "Rachel Atkinson",
+          "role": "— executive partner context for one of the clearest community-controlled implementations",
+          "stem": "rachel-atkinson",
+          "wikiPath": "rachel-atkinson"
+        }
+      ],
+      "sourceBridges": [
+        {
+          "title": "Source Summary — ACT Project Page / Empathy Ledger",
+          "href": "../sources/2026-04-07-scrape-act-place-empathy-ledger.md",
+          "relativePath": "sources/2026-04-07-scrape-act-place-empathy-ledger.md",
+          "wikiPath": "sources/2026-04-07-scrape-act-place-empathy-ledger",
+          "stem": "2026-04-07-scrape-act-place-empathy-ledger"
+        },
+        {
+          "title": "Source Summary — Empathy Ledger Strategy Synthesis",
+          "href": "../sources/2026-04-09-empathy-ledger-strategy-synthesis.md",
+          "relativePath": "sources/2026-04-09-empathy-ledger-strategy-synthesis.md",
+          "wikiPath": "sources/2026-04-09-empathy-ledger-strategy-synthesis",
+          "stem": "2026-04-09-empathy-ledger-strategy-synthesis"
+        },
+        {
+          "title": "Source Summary — EL Consent as Infrastructure",
+          "href": "../sources/2026-04-07-el-consent-as-infrastructure.md",
+          "relativePath": "sources/2026-04-07-el-consent-as-infrastructure.md",
+          "wikiPath": "sources/2026-04-07-el-consent-as-infrastructure",
+          "stem": "2026-04-07-el-consent-as-infrastructure"
+        },
+        {
+          "title": "Source Summary — EL Platform Prospectus",
+          "href": "../sources/2026-04-07-el-platform-prospectus.md",
+          "relativePath": "sources/2026-04-07-el-platform-prospectus.md",
+          "wikiPath": "sources/2026-04-07-el-platform-prospectus",
+          "stem": "2026-04-07-el-platform-prospectus"
+        },
+        {
+          "title": "Source Summary — EL Unified Storyteller Analysis",
+          "href": "../sources/2026-04-07-el-unified-storyteller-analysis.md",
+          "relativePath": "sources/2026-04-07-el-unified-storyteller-analysis.md",
+          "wikiPath": "sources/2026-04-07-el-unified-storyteller-analysis",
+          "stem": "2026-04-07-el-unified-storyteller-analysis"
+        }
+      ],
+      "packSections": [
+        {
+          "id": "what-it-is",
+          "title": "What It Is",
+          "body": "The Empathy Ledger is ACT's sovereign storytelling platform — the narrative sovereignty layer of The Third Reality. It gives marginalized and Indigenous communities cryptographic ownership of their narratives, ensuring stories are never extracted but always owned."
+        },
+        {
+          "id": "system-position",
+          "title": "System Position",
+          "body": "Empathy Ledger is not only a product. It is one of ACT's load-bearing stack layers: - the wiki holds the durable framing for story sovereignty, consent, and identity - Empathy Ledger holds the live story, photo, video, and editorial layer - the websites compose EL material into project pages, journals, and partner surfaces That architecture is the point, not an implementation detail. See Living Website Operating System for the full operating model and Studio Business Model for how EL strengthens ACT's public surface, media quality, and ecosystem earning power."
+        },
+        {
+          "id": "key-people",
+          "title": "Key People",
+          "body": "Empathy Ledger should only carry the people who are explanatory to the sovereign-story layer itself, not every storyteller moving through the platform. - Benjamin Knight — co-founder and field practitioner shaping the story, media, and product infrastructure - Richard Cassidy — Palm Island governance and \"Our Story\" framing that directly informs ACT's story-sovereignty practice - Rachel Atkinson — executive partner context for one of the clearest community-controlled implementations The wider storyteller corpus should live in the platform, in EL exports, and in source-bridge notes until a person becomes structurally load-bearing in the canonical wiki."
+        },
+        {
+          "id": "primary-community-implementations",
+          "title": "Primary Community Implementations",
+          "body": "The clearest current community-controlled implementations in the ACT ecosystem are: - Palm Island Community Company (PICC) — community-controlled service, governance, and storytelling infrastructure on Palm Island - Oonchiumpa — community-led youth, culture, and justice storytelling on Country in Mparntwe These are named here because they explain how Empathy Ledger works in real places, not because EL needs to become a mirror of every deployment."
+        },
+        {
+          "id": "the-central-role",
+          "title": "The Central Role",
+          "body": "Empathy Ledger is the connective tissue that ties all impact together across the ACT ecosystem: | Platform | What It Provides | What Empathy Ledger Adds | |----------|-----------------|-------------------------| | CivicGraph | Systemic data (entities, funding, procurement) | Human faces behind the numbers | | JusticeHub | Evidence base (what interventions work) | Stories of transformation | | Goods on Country | Place-based design outcomes | Community voice in design process | | PICC | Service delivery data | Lived experience of services | Without Empathy Ledger, you have data. With it, you have The Third Reality."
+        },
+        {
+          "id": "current-needs",
+          "title": "Current Needs",
+          "body": "To demonstrate the model at scale: - Beta platform with 10+ community participants - Published ethical framework - Measurable policy impact demonstrated"
+        },
+        {
+          "id": "content-hub",
+          "title": "Content Hub",
+          "body": "Photography, videography, and storytelling with AI-powered tagging and ecosystem syndication: - Photographer/videographer metadata - Community attribution - TK Labels for cultural protocols - Syndication to CivicGraph, JusticeHub, project articles"
+        },
+        {
+          "id": "key-source-bridges",
+          "title": "Key Source Bridges",
+          "body": "These are the strongest current source-bridge notes for keeping the canonical page tied to real material rather than memory: - Source Summary — ACT Project Page / Empathy Ledger - Source Summary — Empathy Ledger Strategy Synthesis - Source Summary — EL Consent as Infrastructure - Source Summary — EL Platform Prospectus - Source Summary — EL Unified Storyteller Analysis"
+        }
+      ]
+    },
+    {
+      "slug": "black-cockatoo-valley",
+      "title": "Black Cockatoo Valley",
+      "status": "Active",
+      "canonicalSlug": "black-cockatoo-valley",
+      "canonicalCode": "ACT-BV",
+      "entityType": "project",
+      "taggingMode": "own-code",
+      "cluster": "act-farm",
+      "parentProject": "act-farm",
+      "empathyLedgerKey": "black-cockatoo-valley",
+      "websiteSlug": "black-cockatoo-valley",
+      "summary": "Conservation-first. We work with Country, not on it. The land sets the pace; we do not scale beyond what the land and community can carry.",
+      "overview": "Black Cockatoo Valley is a 150-acre property on Jinibara Country near Witta, Queensland. It is the land holding that grounds ACT's entire physical practice — the site where residencies, R&D, habitat restoration, and community programs take place. Together with The Harvest (the former nursery in Witta town), Black Cockatoo Valley forms ACT's \"Place\" cluster — the land base that makes all the digital and social enterprise work legible.",
+      "whatItIs": "Black Cockatoo Valley is a 150-acre property on Jinibara Country near Witta, Queensland. It is the land holding that grounds ACT's entire physical practice — the site where residencies, R&D, habitat restoration, and community programs take place. Together with The Harvest (the former nursery in Witta town), Black Cockatoo Valley forms ACT's \"Place\" cluster — the land base that makes all the digital and social enterprise work legible.",
+      "clusterContext": null,
+      "systemPosition": "Black Cockatoo Valley is the place anchor for the whole ACT field: - the wiki holds the durable land practice, stewardship logic, and conservation boundaries - Empathy Ledger should hold the live field photos, video, and place stories - the websites should compose that into the ACT hub and farm-facing public surfaces without turning either one into the canonical memory This matters because the land layer is not backdrop. It is part of the same operating system described in Living Website Operating System, and it is part of the same Studio business logic described in Studio Business Model.",
+      "sourcePage": {
+        "relativePath": "projects/act-farm/black-cockatoo-valley.md",
+        "wikiPath": "projects/act-farm/black-cockatoo-valley",
+        "modifiedAt": "2026-04-11T01:32:18.027Z"
+      },
+      "downstream": {
+        "website": {
+          "primaryPath": "/farm",
+          "projectPath": "/projects/black-cockatoo-valley"
+        },
+        "empathyLedger": {
+          "projectKey": "black-cockatoo-valley"
+        }
+      },
+      "implementation": {
+        "primaryRepo": {
+          "name": "ACT Farm",
+          "localPath": "/Users/benknight/Code/act-farm",
+          "github": "Acurioustractor/act-farm",
+          "githubUrl": "https://github.com/Acurioustractor/act-farm",
+          "description": "Black Cockatoo Valley regeneration estate",
+          "stack": "Next.js, Supabase, Tailwind",
+          "deployment": "Vercel",
+          "role": "Primary place, land practice, and Black Cockatoo Valley public surface."
+        },
+        "supportingRepos": []
+      },
+      "keyPeople": [],
+      "sourceBridges": [
+        {
+          "title": "Source Summary — Black Cockatoo Valley Place Page",
+          "href": "../../sources/2026-04-07-cc-place-black-cockatoo-valley.md",
+          "relativePath": "sources/2026-04-07-cc-place-black-cockatoo-valley.md",
+          "wikiPath": "sources/2026-04-07-cc-place-black-cockatoo-valley",
+          "stem": "2026-04-07-cc-place-black-cockatoo-valley"
+        },
+        {
+          "title": "Source Summary — ACT Farm Index",
+          "href": "../../sources/2026-04-07-cc-the-farm-index.md",
+          "relativePath": "sources/2026-04-07-cc-the-farm-index.md",
+          "wikiPath": "sources/2026-04-07-cc-the-farm-index",
+          "stem": "2026-04-07-cc-the-farm-index"
+        },
+        {
+          "title": "Source Summary — Ways of Working",
+          "href": "../../sources/2026-04-07-cc-act-ways-of-working.md",
+          "relativePath": "sources/2026-04-07-cc-act-ways-of-working.md",
+          "wikiPath": "sources/2026-04-07-cc-act-ways-of-working",
+          "stem": "2026-04-07-cc-act-ways-of-working"
+        }
+      ],
+      "packSections": [
+        {
+          "id": "what-it-is",
+          "title": "What It Is",
+          "body": "Black Cockatoo Valley is a 150-acre property on Jinibara Country near Witta, Queensland. It is the land holding that grounds ACT's entire physical practice — the site where residencies, R&D, habitat restoration, and community programs take place. Together with The Harvest (the former nursery in Witta town), Black Cockatoo Valley forms ACT's \"Place\" cluster — the land base that makes all the digital and social enterprise work legible."
+        },
+        {
+          "id": "system-position",
+          "title": "System Position",
+          "body": "Black Cockatoo Valley is the place anchor for the whole ACT field: - the wiki holds the durable land practice, stewardship logic, and conservation boundaries - Empathy Ledger should hold the live field photos, video, and place stories - the websites should compose that into the ACT hub and farm-facing public surfaces without turning either one into the canonical memory This matters because the land layer is not backdrop. It is part of the same operating system described in Living Website Operating System, and it is part of the same Studio business logic described in Studio Business Model."
+        },
+        {
+          "id": "land-practice-philosophy",
+          "title": "Land Practice Philosophy",
+          "body": "### Conservation-First The land is the teacher and the limiter. Conservation-first is the baseline, always. Field note: When the creek is low or the grass is tired, we slow down. Capacity is a land decision before it is a calendar decision. ### Key Commitments | Commitment | Implementation | |------------|----------------| | Low-impact activity | No extractive tourism, limited-volume operations | | Revenue reinvested | Residencies and workshops fund restoration, weed management, monitoring | | Long-term stewardship | Community co-stewardship and beautiful obsolescence as the goal | | Conservation boundaries | Scale to land capacity and community readiness, not demand |"
+        },
+        {
+          "id": "activities",
+          "title": "Activities",
+          "body": "### What We Do | Activity | Purpose | Frequency | |----------|---------|-----------| | Residencies | Creative practice on Country | Seasonal | | Workshops | Skills, making, land practice | Regular | | Restoration | Weed management, habitat care | Ongoing | | R&D | Regenerative practice research | Continuous | | Community programs | Retreats, learning | By capacity | ### What We Don't Do - Extractive tourism - High-volume events - Activities beyond land capacity - Operations that harm habitat"
+        },
+        {
+          "id": "key-source-bridges",
+          "title": "Key Source Bridges",
+          "body": "- Source Summary — Black Cockatoo Valley Place Page - Source Summary — ACT Farm Index - Source Summary — Ways of Working"
+        }
+      ]
+    }
+  ]
+}

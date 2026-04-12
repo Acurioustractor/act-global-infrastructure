@@ -2,6 +2,8 @@
 
 > A community storytelling project in Mount Gravatt — gathering and preserving local knowledge through yarning, oral history, and cultural exhibition.
 
+**Status:** Active | **Code:** ACT-MY | **Tier:** Studio
+
 ## Overview
 
 Mounty Yarns is rooted in a simple conviction: that communities hold extraordinary knowledge about themselves, and that preserving and sharing that knowledge is both an act of dignity and a source of community strength. Operating in the Mount Gravatt area of Brisbane, the project uses yarning circles, oral history methods, and community gathering to capture stories that would otherwise be lost.
@@ -24,9 +26,21 @@ The **CONTAINED** exhibition — a significant ACT art project — was shown at 
 
 Mounty Yarns connects directly to ACT's investments in community-led storytelling across the ecosystem:
 
-- [[empathy-ledger|Empathy Ledger]] — the platform for ethical, dignity-first storytelling at scale
-- [[caring-for-those-who-care|Caring for Those Who Care]] — storytelling as a tool for NFP sector sustainability
-- [[uncle-allan-palm-island-art|Uncle Allan Palm Island Art]] — another site of local knowledge and cultural practice
+- Empathy Ledger — the platform for ethical, dignity-first storytelling at scale
+- Caring for Those Who Care — storytelling as a tool for NFP sector sustainability
+- Uncle Allan Palm Island Art — another site of local knowledge and cultural practice
+
+## People Curation Status
+
+Mounty Yarns should remain selective at the people layer.
+
+At the moment, the project itself carries most of the meaning. The wiki does not yet need a large Mounty Yarns cast list. If named anchors such as Shayle, Leah, or other community leads become load-bearing across multiple sources, project pages, or pitches, they should be promoted into the People Index.
+
+Until then:
+
+- keep live participants and portraits in Empathy Ledger
+- keep project-specific details in `wiki/sources/`
+- keep the canonical explanation here on the project page
 
 ## LCAA Phase
 
@@ -35,7 +49,4 @@ Mounty Yarns connects directly to ACT's investments in community-led storytellin
 ## Backlinks
 
 - [[index|ACT Wikipedia]]
-- [[lcaa-method|LCAA Method]]
 - [[contained|CONTAINED]]
-- [[empathy-ledger|Empathy Ledger]]
-- [[caring-for-those-who-care|Caring for Those Who Care]]

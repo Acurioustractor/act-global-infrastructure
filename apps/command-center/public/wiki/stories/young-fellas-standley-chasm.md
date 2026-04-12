@@ -1,27 +1,16 @@
 ---
 title: "Young Fellas Experience Cultural Connection at Standley Chasm"
-slug: young-fellas-standley-chasm
-empathy_ledger_id: "e6cade16-1143-4b85-a0b3-08ecb49676cc"
-project_slugs:
-  - oonchiumpa
-  - land-practice
-consent_scope: "EXTERNAL-LITE"
-cultural_sensitivity: medium
-lcaa_stage: art
-place: "Standley Chasm (on-Country visit)"
-voice_owner: "Young men with cultural mentors"
-media_needs:
-  - on-Country photo
-  - group moment (consent)
-status: approved
-last_updated: 2026-02-04
+status: External-Lite
+projects: oonchiumpa, land-practice
 ---
+
+> Generated legacy mirror for command-center.
+> Source of truth: `wiki/stories/young-fellas-standley-chasm.md`.
+> Regenerated: `2026-04-11T02:58:52.891Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # Young Fellas Experience Cultural Connection at Standley Chasm
 
 > A cultural journey on Country strengthens connection, pride, and respect.
-
----
 
 ## Context
 
@@ -29,9 +18,7 @@ last_updated: 2026-02-04
 **Voice Owner:** Young men with cultural mentors
 **Consent Status:** EXTERNAL-LITE
 
----
-
-## Story Summary
+## Story
 
 Young men on an Oonchiumpa cultural journey to Standley Chasm experienced something that changes how they carry themselves: genuine cultural connection.
 
@@ -44,8 +31,6 @@ The visit wasn't tourism. It was cultural transmission — knowledge passing to 
 
 Young men returned walking differently, carrying something that classroom learning can't provide.
 
----
-
 ## ALMA Signals
 
 | Signal | Level | Notes |
@@ -57,27 +42,15 @@ Young men returned walking differently, carrying something that classroom learni
 | **Option Value** | High | Foundation for cultural identity |
 | **Community Value Return** | High | Cultural continuity strengthened |
 
----
+## Connections
 
-## LCAA Shift
-
-**From:** Listen (creating space for cultural experience)
-**To:** Art (place becomes responsibility)
-**What changed:** Visit to Country became identity formation
-
----
-
-## Media Needs
-
-- [ ] On-Country photo (consent, landscape focus)
-- [ ] Group moment image (consent from participants)
-
----
-
-## Related
-
-- **Other Vignettes:** [Girls Day Out](/wiki/stories/girls-day-out-standley-chasm), [Atnarpa Boys Trip](/wiki/stories/atnarpa-boys-trip)
-
----
+**LCAA Shift:** Listen (creating space for cultural experience) → Art (place becomes responsibility). Visit to Country became identity formation.
 
 *Consent reviewed: 2025-12 | Next review: 2026-06*
+
+## Backlinks
+
+- [[empathy-ledger|Empathy Ledger]] — storytelling platform
+- [[oonchiumpa|Oonchiumpa]] — youth program
+- [[girls-day-out-standley-chasm|Girls Day Out at Standley Chasm]] — the same place, the girls' story
+- [[atnarpa-boys-trip|Atnarpa Boys Trip]] — related on-Country story

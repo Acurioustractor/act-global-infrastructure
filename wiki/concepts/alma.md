@@ -120,4 +120,9 @@ Every ALMA record should link to:
 - [[empathy-ledger|Empathy Ledger]] — the platform that holds consented stories ALMA reads
 - [[governance-consent|Governance & Consent]] — consent architecture ALMA operates within
 - [[ai-ethics|AI Ethics & Agent Strategy]] — ALMA as gatekeeper for AI analysis
+- [[beautiful-obsolescence|Beautiful Obsolescence]] — learning model that supports handover instead of dependency
+- [[glossary|Glossary]] — shared language entry for ALMA across the ecosystem
 - [[vignette-workflows|Vignette Workflows]] — operational use of ALMA signals in story vignettes
+- [[transcript-analysis-method|Transcript Analysis Method]] — the story-to-signal pipeline that maps transcripts into ALMA
+- [[ways-of-working|Ways of Working]] — daily operating rhythm for applying ALMA in planning, meetings, and review
+- [[roadmap-2026|2026 Roadmap]] — the annual plan that explicitly anchors story and evidence work in ALMA

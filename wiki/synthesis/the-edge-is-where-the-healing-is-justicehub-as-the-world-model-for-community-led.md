@@ -65,7 +65,7 @@ This is the compounding loop in practice — one synthesis becomes the seed for 
 
 ## Citations
 
-- wiki/projects/justicehub.md (the platform, scale, partners, Minderoo prospect notes)
+- wiki/projects/justicehub/justicehub.md (the platform, scale, partners, Minderoo prospect notes)
 - wiki/projects/oonchiumpa.md (MS story, Tanya Turner quote, 95%/97.6% outcomes)
 - wiki/projects/diagrama.md (Spanish model, ACT visit, 30-year track record)
 - wiki/concepts/third-reality.md (the methodology this synthesis sits inside)

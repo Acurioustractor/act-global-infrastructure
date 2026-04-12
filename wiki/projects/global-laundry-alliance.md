@@ -37,6 +37,4 @@ Every element of the Alliance's work is oriented by dignity — not gratitude, n
 ## Backlinks
 
 - [[index|ACT Wikipedia]]
-- [[lcaa-method|LCAA Method]]
 - [[nicholas-marchesi|Nicholas Marchesi]]
-- [[designing-for-obsolescence|Designing for Obsolescence]]

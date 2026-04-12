@@ -1,0 +1,969 @@
+{
+  "generatedAt": "2026-04-12T02:00:53.249Z",
+  "sourcePath": "/Users/benknight/Code/act-global-infrastructure/config/living-ecosystem-canon.json",
+  "surfaces": [
+    {
+      "id": "act-regenerative-studio",
+      "displayName": "ACT Regenerative Studio",
+      "noteInfo": {
+        "exists": true,
+        "canonicalSlug": "act-studio"
+      },
+      "repoInfo": {
+        "repoPath": "/Users/benknight/Code/act-regenerative-studio",
+        "repoExists": true,
+        "originSlug": "Acurioustractor/act-regenerative-studio"
+      },
+      "projectCodeMatches": [
+        {
+          "code": "ACT-CORE",
+          "name": "ACT Regenerative Studio",
+          "canonicalSlug": "act-studio",
+          "githubRepo": "Acurioustractor/act-regenerative-studio",
+          "productionUrl": "https://act.place",
+          "reasons": [
+            "canonical_slug",
+            "slug_alias",
+            "github_repo",
+            "production_url"
+          ]
+        }
+      ],
+      "generatedInputs": [
+        {
+          "label": "wiki pages snapshot",
+          "relativePath": "src/data/wiki-pages.generated.json",
+          "absolutePath": "/Users/benknight/Code/act-regenerative-studio/src/data/wiki-pages.generated.json",
+          "exists": true
+        },
+        {
+          "label": "wiki projects snapshot",
+          "relativePath": "src/data/wiki-projects.generated.json",
+          "absolutePath": "/Users/benknight/Code/act-regenerative-studio/src/data/wiki-projects.generated.json",
+          "exists": true
+        },
+        {
+          "label": "flagship project packs",
+          "relativePath": "src/data/wiki-flagship-project-packs.generated.json",
+          "absolutePath": "/Users/benknight/Code/act-regenerative-studio/src/data/wiki-flagship-project-packs.generated.json",
+          "exists": true
+        },
+        {
+          "label": "Empathy Ledger featured media",
+          "relativePath": "src/data/empathy-ledger-featured.generated.json",
+          "absolutePath": "/Users/benknight/Code/act-regenerative-studio/src/data/empathy-ledger-featured.generated.json",
+          "exists": true
+        },
+        {
+          "label": "Empathy Ledger editorial snapshot",
+          "relativePath": "src/data/empathy-ledger-editorial.generated.json",
+          "absolutePath": "/Users/benknight/Code/act-regenerative-studio/src/data/empathy-ledger-editorial.generated.json",
+          "exists": true
+        },
+        {
+          "label": "Empathy Ledger source packets",
+          "relativePath": "src/data/empathy-ledger-source-packets.generated.json",
+          "absolutePath": "/Users/benknight/Code/act-regenerative-studio/src/data/empathy-ledger-source-packets.generated.json",
+          "exists": true
+        },
+        {
+          "label": "living ecosystem canon snapshot",
+          "relativePath": "src/data/living-ecosystem-canon.generated.json",
+          "absolutePath": "/Users/benknight/Code/act-regenerative-studio/src/data/living-ecosystem-canon.generated.json",
+          "exists": true
+        }
+      ],
+      "site": {
+        "url": "https://act.place",
+        "source": "canon.site_url"
+      },
+      "routeChecks": [
+        {
+          "path": "/",
+          "status": "pass",
+          "httpStatus": 200,
+          "message": "site answered"
+        },
+        {
+          "path": "/",
+          "status": "pass",
+          "httpStatus": 200,
+          "message": "marker \"A Curious Tractor\" found"
+        },
+        {
+          "path": "/projects",
+          "status": "fail",
+          "httpStatus": 404,
+          "message": "route returned 404"
+        },
+        {
+          "path": "/ecosystem",
+          "status": "fail",
+          "httpStatus": 404,
+          "message": "route returned 404"
+        },
+        {
+          "path": "/wiki",
+          "status": "fail",
+          "httpStatus": 404,
+          "message": "route returned 404"
+        },
+        {
+          "path": "/wiki/source-packets",
+          "status": "fail",
+          "httpStatus": 404,
+          "message": "route returned 404"
+        },
+        {
+          "path": "/wiki/source-bridges",
+          "status": "fail",
+          "httpStatus": 404,
+          "message": "route returned 404"
+        }
+      ],
+      "findings": [
+        {
+          "status": "pass",
+          "subject": "act-regenerative-studio",
+          "message": "canonical note slug is act-studio",
+          "data": null
+        },
+        {
+          "status": "pass",
+          "subject": "act-regenerative-studio",
+          "message": "repo origin is Acurioustractor/act-regenerative-studio",
+          "data": null
+        },
+        {
+          "status": "pass",
+          "subject": "act-regenerative-studio",
+          "message": "project code aligned to ACT-CORE",
+          "data": null
+        },
+        {
+          "status": "pass",
+          "subject": "act-regenerative-studio:wiki pages snapshot",
+          "message": "generated input present at src/data/wiki-pages.generated.json",
+          "data": null
+        },
+        {
+          "status": "pass",
+          "subject": "act-regenerative-studio:wiki projects snapshot",
+          "message": "generated input present at src/data/wiki-projects.generated.json",
+          "data": null
+        },
+        {
+          "status": "pass",
+          "subject": "act-regenerative-studio:flagship project packs",
+          "message": "generated input present at src/data/wiki-flagship-project-packs.generated.json",
+          "data": null
+        },
+        {
+          "status": "pass",
+          "subject": "act-regenerative-studio:Empathy Ledger featured media",
+          "message": "generated input present at src/data/empathy-ledger-featured.generated.json",
+          "data": null
+        },
+        {
+          "status": "pass",
+          "subject": "act-regenerative-studio:Empathy Ledger editorial snapshot",
+          "message": "generated input present at src/data/empathy-ledger-editorial.generated.json",
+          "data": null
+        },
+        {
+          "status": "pass",
+          "subject": "act-regenerative-studio:Empathy Ledger source packets",
+          "message": "generated input present at src/data/empathy-ledger-source-packets.generated.json",
+          "data": null
+        },
+        {
+          "status": "pass",
+          "subject": "act-regenerative-studio:living ecosystem canon snapshot",
+          "message": "generated input present at src/data/living-ecosystem-canon.generated.json",
+          "data": null
+        },
+        {
+          "status": "pass",
+          "subject": "act-regenerative-studio:/",
+          "message": "site answered at https://act.place",
+          "data": null
+        },
+        {
+          "status": "pass",
+          "subject": "act-regenerative-studio:/",
+          "message": "marker \"A Curious Tractor\" found",
+          "data": null
+        },
+        {
+          "status": "fail",
+          "subject": "act-regenerative-studio:/projects",
+          "message": "route returned 404",
+          "data": null
+        },
+        {
+          "status": "fail",
+          "subject": "act-regenerative-studio:/ecosystem",
+          "message": "route returned 404",
+          "data": null
+        },
+        {
+          "status": "fail",
+          "subject": "act-regenerative-studio:/wiki",
+          "message": "route returned 404",
+          "data": null
+        },
+        {
+          "status": "fail",
+          "subject": "act-regenerative-studio:/wiki/source-packets",
+          "message": "route returned 404",
+          "data": null
+        },
+        {
+          "status": "fail",
+          "subject": "act-regenerative-studio:/wiki/source-bridges",
+          "message": "route returned 404",
+          "data": null
+        }
+      ],
+      "summary": {
+        "pass": 12,
+        "warn": 0,
+        "fail": 5
+      }
+    },
+    {
+      "id": "empathy-ledger",
+      "displayName": "Empathy Ledger",
+      "noteInfo": {
+        "exists": true,
+        "canonicalSlug": "empathy-ledger"
+      },
+      "repoInfo": {
+        "repoPath": "/Users/benknight/Code/empathy-ledger-v2",
+        "repoExists": true,
+        "originSlug": "Acurioustractor/empathy-ledger-v2"
+      },
+      "projectCodeMatches": [
+        {
+          "code": "ACT-EL",
+          "name": "Empathy Ledger",
+          "canonicalSlug": "empathy-ledger",
+          "githubRepo": "Acurioustractor/empathy-ledger-v2",
+          "productionUrl": "https://www.empathyledger.com",
+          "reasons": [
+            "canonical_slug",
+            "github_repo",
+            "production_url"
+          ]
+        }
+      ],
+      "generatedInputs": [
+        {
+          "label": "flagship project packs",
+          "relativePath": "src/data/editorial/flagship-project-packs.generated.json",
+          "absolutePath": "/Users/benknight/Code/empathy-ledger-v2/src/data/editorial/flagship-project-packs.generated.json",
+          "exists": true
+        }
+      ],
+      "site": {
+        "url": "https://empathyledger.com",
+        "source": "canon.site_url"
+      },
+      "routeChecks": [
+        {
+          "path": "/",
+          "status": "pass",
+          "httpStatus": 200,
+          "message": "site answered"
+        },
+        {
+          "path": "/",
+          "status": "pass",
+          "httpStatus": 200,
+          "message": "route answered"
+        },
+        {
+          "path": "/api/v1/content-hub/source-packets?project=empathy-ledger",
+          "status": "pass",
+          "httpStatus": 200,
+          "message": "packet JSON for empathy-ledger verified"
+        }
+      ],
+      "findings": [
+        {
+          "status": "pass",
+          "subject": "empathy-ledger",
+          "message": "canonical note slug is empathy-ledger",
+          "data": null
+        },
+        {
+          "status": "pass",
+          "subject": "empathy-ledger",
+          "message": "repo origin is Acurioustractor/empathy-ledger-v2",
+          "data": null
+        },
+        {
+          "status": "pass",
+          "subject": "empathy-ledger",
+          "message": "project code aligned to ACT-EL",
+          "data": null
+        },
+        {
+          "status": "pass",
+          "subject": "empathy-ledger:flagship project packs",
+          "message": "generated input present at src/data/editorial/flagship-project-packs.generated.json",
+          "data": null
+        },
+        {
+          "status": "pass",
+          "subject": "empathy-ledger:/",
+          "message": "site answered at https://empathyledger.com",
+          "data": null
+        },
+        {
+          "status": "pass",
+          "subject": "empathy-ledger:/",
+          "message": "route answered",
+          "data": null
+        },
+        {
+          "status": "pass",
+          "subject": "empathy-ledger:/api/v1/content-hub/source-packets?project=empathy-ledger",
+          "message": "packet JSON for empathy-ledger verified",
+          "data": null
+        }
+      ],
+      "summary": {
+        "pass": 7,
+        "warn": 0,
+        "fail": 0
+      }
+    },
+    {
+      "id": "justicehub",
+      "displayName": "JusticeHub",
+      "noteInfo": {
+        "exists": true,
+        "canonicalSlug": "justicehub"
+      },
+      "repoInfo": {
+        "repoPath": "/Users/benknight/Code/JusticeHub",
+        "repoExists": true,
+        "originSlug": "Acurioustractor/justicehub-platform"
+      },
+      "projectCodeMatches": [
+        {
+          "code": "ACT-JH",
+          "name": "JusticeHub",
+          "canonicalSlug": "justicehub",
+          "githubRepo": "Acurioustractor/justicehub-platform",
+          "productionUrl": "https://www.justicehub.com.au",
+          "reasons": [
+            "canonical_slug",
+            "github_repo",
+            "production_url"
+          ]
+        }
+      ],
+      "generatedInputs": [],
+      "site": {
+        "url": "https://www.justicehub.com.au",
+        "source": "canon.site_url"
+      },
+      "routeChecks": [
+        {
+          "path": "/",
+          "status": "pass",
+          "httpStatus": 200,
+          "message": "site answered"
+        },
+        {
+          "path": "/",
+          "status": "pass",
+          "httpStatus": 200,
+          "message": "route answered"
+        }
+      ],
+      "findings": [
+        {
+          "status": "pass",
+          "subject": "justicehub",
+          "message": "canonical note slug is justicehub",
+          "data": null
+        },
+        {
+          "status": "pass",
+          "subject": "justicehub",
+          "message": "repo origin is Acurioustractor/justicehub-platform",
+          "data": null
+        },
+        {
+          "status": "pass",
+          "subject": "justicehub",
+          "message": "project code aligned to ACT-JH",
+          "data": null
+        },
+        {
+          "status": "pass",
+          "subject": "justicehub:/",
+          "message": "site answered at https://www.justicehub.com.au",
+          "data": null
+        },
+        {
+          "status": "pass",
+          "subject": "justicehub:/",
+          "message": "route answered",
+          "data": null
+        }
+      ],
+      "summary": {
+        "pass": 5,
+        "warn": 0,
+        "fail": 0
+      }
+    },
+    {
+      "id": "goods-on-country",
+      "displayName": "Goods on Country",
+      "noteInfo": {
+        "exists": true,
+        "canonicalSlug": "goods-on-country"
+      },
+      "repoInfo": {
+        "repoPath": "/Users/benknight/Code/Goods Asset Register",
+        "repoExists": true,
+        "originSlug": "Acurioustractor/goods-asset-tracker"
+      },
+      "projectCodeMatches": [
+        {
+          "code": "ACT-GD",
+          "name": "Goods",
+          "canonicalSlug": "goods-on-country",
+          "githubRepo": "Acurioustractor/goods-asset-tracker",
+          "productionUrl": "https://www.goodsoncountry.com",
+          "reasons": [
+            "canonical_slug",
+            "github_repo",
+            "production_url"
+          ]
+        }
+      ],
+      "generatedInputs": [],
+      "site": {
+        "url": "https://www.goodsoncountry.com",
+        "source": "canon.site_url"
+      },
+      "routeChecks": [
+        {
+          "path": "/",
+          "status": "pass",
+          "httpStatus": 200,
+          "message": "site answered"
+        },
+        {
+          "path": "/",
+          "status": "pass",
+          "httpStatus": 200,
+          "message": "route answered"
+        }
+      ],
+      "findings": [
+        {
+          "status": "pass",
+          "subject": "goods-on-country",
+          "message": "canonical note slug is goods-on-country",
+          "data": null
+        },
+        {
+          "status": "pass",
+          "subject": "goods-on-country",
+          "message": "repo origin is Acurioustractor/goods-asset-tracker",
+          "data": null
+        },
+        {
+          "status": "pass",
+          "subject": "goods-on-country",
+          "message": "project code aligned to ACT-GD",
+          "data": null
+        },
+        {
+          "status": "pass",
+          "subject": "goods-on-country:/",
+          "message": "site answered at https://www.goodsoncountry.com",
+          "data": null
+        },
+        {
+          "status": "pass",
+          "subject": "goods-on-country:/",
+          "message": "route answered",
+          "data": null
+        }
+      ],
+      "summary": {
+        "pass": 5,
+        "warn": 0,
+        "fail": 0
+      }
+    },
+    {
+      "id": "black-cockatoo-valley",
+      "displayName": "Black Cockatoo Valley",
+      "noteInfo": {
+        "exists": true,
+        "canonicalSlug": "black-cockatoo-valley"
+      },
+      "repoInfo": {
+        "repoPath": "/Users/benknight/Code/act-farm",
+        "repoExists": true,
+        "originSlug": "Acurioustractor/act-farm"
+      },
+      "projectCodeMatches": [
+        {
+          "code": "ACT-FM",
+          "name": "The Farm",
+          "canonicalSlug": "act-farm",
+          "githubRepo": "Acurioustractor/act-farm",
+          "productionUrl": "https://act-farm.vercel.app",
+          "reasons": [
+            "github_repo"
+          ]
+        },
+        {
+          "code": "ACT-BV",
+          "name": "Black Cockatoo Valley",
+          "canonicalSlug": "black-cockatoo-valley",
+          "githubRepo": null,
+          "productionUrl": null,
+          "reasons": [
+            "canonical_slug"
+          ]
+        }
+      ],
+      "generatedInputs": [],
+      "site": {
+        "url": "https://act-farm.vercel.app",
+        "source": "project-codes.production_url"
+      },
+      "routeChecks": [
+        {
+          "path": "/",
+          "status": "pass",
+          "httpStatus": 200,
+          "message": "site answered"
+        },
+        {
+          "path": "/",
+          "status": "pass",
+          "httpStatus": 200,
+          "message": "route answered"
+        }
+      ],
+      "findings": [
+        {
+          "status": "pass",
+          "subject": "black-cockatoo-valley",
+          "message": "canonical note slug is black-cockatoo-valley",
+          "data": null
+        },
+        {
+          "status": "pass",
+          "subject": "black-cockatoo-valley",
+          "message": "repo origin is Acurioustractor/act-farm",
+          "data": null
+        },
+        {
+          "status": "warn",
+          "subject": "black-cockatoo-valley",
+          "message": "multiple project-code matches: ACT-FM, ACT-BV",
+          "data": null
+        },
+        {
+          "status": "warn",
+          "subject": "black-cockatoo-valley",
+          "message": "canon is missing site_url; project codes suggest https://act-farm.vercel.app",
+          "data": null
+        },
+        {
+          "status": "pass",
+          "subject": "black-cockatoo-valley:/",
+          "message": "site answered at https://act-farm.vercel.app",
+          "data": null
+        },
+        {
+          "status": "pass",
+          "subject": "black-cockatoo-valley:/",
+          "message": "route answered",
+          "data": null
+        }
+      ],
+      "summary": {
+        "pass": 4,
+        "warn": 2,
+        "fail": 0
+      }
+    },
+    {
+      "id": "the-harvest",
+      "displayName": "The Harvest",
+      "noteInfo": {
+        "exists": true,
+        "canonicalSlug": "the-harvest"
+      },
+      "repoInfo": {
+        "repoPath": "/Users/benknight/Code/The Harvest Website",
+        "repoExists": true,
+        "originSlug": "Acurioustractor/theharvest"
+      },
+      "projectCodeMatches": [
+        {
+          "code": "ACT-HV",
+          "name": "The Harvest Witta",
+          "canonicalSlug": "the-harvest",
+          "githubRepo": "Acurioustractor/theharvest",
+          "productionUrl": "https://www.theharvestwitta.com.au",
+          "reasons": [
+            "canonical_slug",
+            "github_repo",
+            "production_url"
+          ]
+        }
+      ],
+      "generatedInputs": [],
+      "site": {
+        "url": "https://www.theharvestwitta.com.au",
+        "source": "canon.site_url"
+      },
+      "routeChecks": [
+        {
+          "path": "/",
+          "status": "pass",
+          "httpStatus": 200,
+          "message": "site answered"
+        },
+        {
+          "path": "/",
+          "status": "pass",
+          "httpStatus": 200,
+          "message": "route answered"
+        }
+      ],
+      "findings": [
+        {
+          "status": "pass",
+          "subject": "the-harvest",
+          "message": "canonical note slug is the-harvest",
+          "data": null
+        },
+        {
+          "status": "pass",
+          "subject": "the-harvest",
+          "message": "repo origin is Acurioustractor/theharvest",
+          "data": null
+        },
+        {
+          "status": "pass",
+          "subject": "the-harvest",
+          "message": "project code aligned to ACT-HV",
+          "data": null
+        },
+        {
+          "status": "pass",
+          "subject": "the-harvest:/",
+          "message": "site answered at https://www.theharvestwitta.com.au",
+          "data": null
+        },
+        {
+          "status": "pass",
+          "subject": "the-harvest:/",
+          "message": "route answered",
+          "data": null
+        }
+      ],
+      "summary": {
+        "pass": 5,
+        "warn": 0,
+        "fail": 0
+      }
+    }
+  ],
+  "findings": [
+    {
+      "status": "pass",
+      "subject": "act-regenerative-studio",
+      "message": "canonical note slug is act-studio",
+      "data": null
+    },
+    {
+      "status": "pass",
+      "subject": "act-regenerative-studio",
+      "message": "repo origin is Acurioustractor/act-regenerative-studio",
+      "data": null
+    },
+    {
+      "status": "pass",
+      "subject": "act-regenerative-studio",
+      "message": "project code aligned to ACT-CORE",
+      "data": null
+    },
+    {
+      "status": "pass",
+      "subject": "act-regenerative-studio:wiki pages snapshot",
+      "message": "generated input present at src/data/wiki-pages.generated.json",
+      "data": null
+    },
+    {
+      "status": "pass",
+      "subject": "act-regenerative-studio:wiki projects snapshot",
+      "message": "generated input present at src/data/wiki-projects.generated.json",
+      "data": null
+    },
+    {
+      "status": "pass",
+      "subject": "act-regenerative-studio:flagship project packs",
+      "message": "generated input present at src/data/wiki-flagship-project-packs.generated.json",
+      "data": null
+    },
+    {
+      "status": "pass",
+      "subject": "act-regenerative-studio:Empathy Ledger featured media",
+      "message": "generated input present at src/data/empathy-ledger-featured.generated.json",
+      "data": null
+    },
+    {
+      "status": "pass",
+      "subject": "act-regenerative-studio:Empathy Ledger editorial snapshot",
+      "message": "generated input present at src/data/empathy-ledger-editorial.generated.json",
+      "data": null
+    },
+    {
+      "status": "pass",
+      "subject": "act-regenerative-studio:Empathy Ledger source packets",
+      "message": "generated input present at src/data/empathy-ledger-source-packets.generated.json",
+      "data": null
+    },
+    {
+      "status": "pass",
+      "subject": "act-regenerative-studio:living ecosystem canon snapshot",
+      "message": "generated input present at src/data/living-ecosystem-canon.generated.json",
+      "data": null
+    },
+    {
+      "status": "pass",
+      "subject": "act-regenerative-studio:/",
+      "message": "site answered at https://act.place",
+      "data": null
+    },
+    {
+      "status": "pass",
+      "subject": "act-regenerative-studio:/",
+      "message": "marker \"A Curious Tractor\" found",
+      "data": null
+    },
+    {
+      "status": "fail",
+      "subject": "act-regenerative-studio:/projects",
+      "message": "route returned 404",
+      "data": null
+    },
+    {
+      "status": "fail",
+      "subject": "act-regenerative-studio:/ecosystem",
+      "message": "route returned 404",
+      "data": null
+    },
+    {
+      "status": "fail",
+      "subject": "act-regenerative-studio:/wiki",
+      "message": "route returned 404",
+      "data": null
+    },
+    {
+      "status": "fail",
+      "subject": "act-regenerative-studio:/wiki/source-packets",
+      "message": "route returned 404",
+      "data": null
+    },
+    {
+      "status": "fail",
+      "subject": "act-regenerative-studio:/wiki/source-bridges",
+      "message": "route returned 404",
+      "data": null
+    },
+    {
+      "status": "pass",
+      "subject": "empathy-ledger",
+      "message": "canonical note slug is empathy-ledger",
+      "data": null
+    },
+    {
+      "status": "pass",
+      "subject": "empathy-ledger",
+      "message": "repo origin is Acurioustractor/empathy-ledger-v2",
+      "data": null
+    },
+    {
+      "status": "pass",
+      "subject": "empathy-ledger",
+      "message": "project code aligned to ACT-EL",
+      "data": null
+    },
+    {
+      "status": "pass",
+      "subject": "empathy-ledger:flagship project packs",
+      "message": "generated input present at src/data/editorial/flagship-project-packs.generated.json",
+      "data": null
+    },
+    {
+      "status": "pass",
+      "subject": "empathy-ledger:/",
+      "message": "site answered at https://empathyledger.com",
+      "data": null
+    },
+    {
+      "status": "pass",
+      "subject": "empathy-ledger:/",
+      "message": "route answered",
+      "data": null
+    },
+    {
+      "status": "pass",
+      "subject": "empathy-ledger:/api/v1/content-hub/source-packets?project=empathy-ledger",
+      "message": "packet JSON for empathy-ledger verified",
+      "data": null
+    },
+    {
+      "status": "pass",
+      "subject": "justicehub",
+      "message": "canonical note slug is justicehub",
+      "data": null
+    },
+    {
+      "status": "pass",
+      "subject": "justicehub",
+      "message": "repo origin is Acurioustractor/justicehub-platform",
+      "data": null
+    },
+    {
+      "status": "pass",
+      "subject": "justicehub",
+      "message": "project code aligned to ACT-JH",
+      "data": null
+    },
+    {
+      "status": "pass",
+      "subject": "justicehub:/",
+      "message": "site answered at https://www.justicehub.com.au",
+      "data": null
+    },
+    {
+      "status": "pass",
+      "subject": "justicehub:/",
+      "message": "route answered",
+      "data": null
+    },
+    {
+      "status": "pass",
+      "subject": "goods-on-country",
+      "message": "canonical note slug is goods-on-country",
+      "data": null
+    },
+    {
+      "status": "pass",
+      "subject": "goods-on-country",
+      "message": "repo origin is Acurioustractor/goods-asset-tracker",
+      "data": null
+    },
+    {
+      "status": "pass",
+      "subject": "goods-on-country",
+      "message": "project code aligned to ACT-GD",
+      "data": null
+    },
+    {
+      "status": "pass",
+      "subject": "goods-on-country:/",
+      "message": "site answered at https://www.goodsoncountry.com",
+      "data": null
+    },
+    {
+      "status": "pass",
+      "subject": "goods-on-country:/",
+      "message": "route answered",
+      "data": null
+    },
+    {
+      "status": "pass",
+      "subject": "black-cockatoo-valley",
+      "message": "canonical note slug is black-cockatoo-valley",
+      "data": null
+    },
+    {
+      "status": "pass",
+      "subject": "black-cockatoo-valley",
+      "message": "repo origin is Acurioustractor/act-farm",
+      "data": null
+    },
+    {
+      "status": "warn",
+      "subject": "black-cockatoo-valley",
+      "message": "multiple project-code matches: ACT-FM, ACT-BV",
+      "data": null
+    },
+    {
+      "status": "warn",
+      "subject": "black-cockatoo-valley",
+      "message": "canon is missing site_url; project codes suggest https://act-farm.vercel.app",
+      "data": null
+    },
+    {
+      "status": "pass",
+      "subject": "black-cockatoo-valley:/",
+      "message": "site answered at https://act-farm.vercel.app",
+      "data": null
+    },
+    {
+      "status": "pass",
+      "subject": "black-cockatoo-valley:/",
+      "message": "route answered",
+      "data": null
+    },
+    {
+      "status": "pass",
+      "subject": "the-harvest",
+      "message": "canonical note slug is the-harvest",
+      "data": null
+    },
+    {
+      "status": "pass",
+      "subject": "the-harvest",
+      "message": "repo origin is Acurioustractor/theharvest",
+      "data": null
+    },
+    {
+      "status": "pass",
+      "subject": "the-harvest",
+      "message": "project code aligned to ACT-HV",
+      "data": null
+    },
+    {
+      "status": "pass",
+      "subject": "the-harvest:/",
+      "message": "site answered at https://www.theharvestwitta.com.au",
+      "data": null
+    },
+    {
+      "status": "pass",
+      "subject": "the-harvest:/",
+      "message": "route answered",
+      "data": null
+    }
+  ],
+  "summary": {
+    "generatedAt": "2026-04-12T02:00:53.249Z",
+    "surfaceCount": 6,
+    "routeCount": 18,
+    "pass": 38,
+    "warn": 2,
+    "fail": 5
+  }
+}

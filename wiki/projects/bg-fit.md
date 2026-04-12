@@ -6,7 +6,7 @@
 
 ## Overview
 
-BG Fit operates in Mount Isa and Doomadgee, communities where Indigenous youth face disproportionate contact with the justice system. The program works from a premise that physical fitness, cultural connection, and Elder mentorship — not punishment — are the most effective interventions. By grounding health and wellbeing in culture and country, BG Fit creates conditions for young people to build identity, purpose, and community belonging.
+BG Fit operates in [[mount-isa|Mount Isa]] and Doomadgee, communities where Indigenous youth face disproportionate contact with the justice system. The program works from a premise that physical fitness, cultural connection, and Elder mentorship — not punishment — are the most effective interventions. By grounding health and wellbeing in culture and country, BG Fit creates conditions for young people to build identity, purpose, and community belonging.
 
 The results are striking: participating youth have reduced their average police contact from approximately 5 incidents per year to less than 1.
 
@@ -14,7 +14,7 @@ The results are striking: participating youth have reduced their average police 
 
 - **Locations:** Mount Isa and Doomadgee, Queensland
 - **Target cohort:** Indigenous youth at risk of or with prior justice system involvement
-- **Key partners:** Local Elders, community organisations, local police
+- **Key partners:** Local Elders including [[uncle-george|Uncle George]], community organisations, local police
 - **Target:** Full community ownership by 2027
 - **Current need:** Sustained funding, strengthened Elder partnerships
 
@@ -38,11 +38,10 @@ The BG Fit model runs across three connected phases:
 
 ## See Also
 
-- [[goods-on-country|Goods on Country]] — another ACT initiative working with remote Indigenous communities
-- [[empathy-ledger|Empathy Ledger]] — capturing stories of change like those generated through BG Fit
 - [[lcaa-method|LCAA Method]]
 
 ## Backlinks
 
 - [[index|ACT Wikipedia]]
+- [[uncle-george|Uncle George]] — Elder presence in the Mount Isa ecosystem
 - [[lcaa-method|LCAA Method]]

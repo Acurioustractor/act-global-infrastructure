@@ -1,0 +1,285 @@
+{
+  "generated_at": "2026-04-11T03:17:57.017Z",
+  "scope": "canonical-graph",
+  "domains": {
+    "art": 5,
+    "communities": 2,
+    "concepts": 26,
+    "decisions": 8,
+    "people": 23,
+    "projects": 60,
+    "research": 14,
+    "stories": 29,
+    "synthesis": 4,
+    "technical": 6
+  },
+  "summary": {
+    "date": "2026-04-11",
+    "total_articles": 175,
+    "total_links": 1464,
+    "orphans": 0,
+    "broken_links": 0,
+    "stubs": 1,
+    "missing_from_index": 0,
+    "missing_backlinks": 188,
+    "advisory_backlinks": 364
+  },
+  "source_bridge": {
+    "raw_sources": 151,
+    "source_summaries": 151,
+    "covered_raw_sources": 151,
+    "missing_source_summaries": 0,
+    "orphan_source_summaries": 0,
+    "by_kind": {
+      "published_article_capture": {
+        "raw_sources": 49,
+        "covered_raw_sources": 49,
+        "missing_raw_sources": 0
+      },
+      "database_export": {
+        "raw_sources": 2,
+        "covered_raw_sources": 2,
+        "missing_raw_sources": 0
+      },
+      "raw_capture": {
+        "raw_sources": 80,
+        "covered_raw_sources": 80,
+        "missing_raw_sources": 0
+      },
+      "transcript_capture": {
+        "raw_sources": 2,
+        "covered_raw_sources": 2,
+        "missing_raw_sources": 0
+      },
+      "website_scrape": {
+        "raw_sources": 12,
+        "covered_raw_sources": 12,
+        "missing_raw_sources": 0
+      },
+      "database_snapshot": {
+        "raw_sources": 6,
+        "covered_raw_sources": 6,
+        "missing_raw_sources": 0
+      }
+    },
+    "coverage_pct": 100
+  },
+  "repair_queue": {
+    "broken_links": [],
+    "missing_from_index": [],
+    "missing_backlinks": [
+      {
+        "stem": "kristy-bloomfield",
+        "title": "Kristy Bloomfield",
+        "relative_path": "people/kristy-bloomfield.md",
+        "page_path": "people/kristy-bloomfield",
+        "target": {
+          "stem": "three-circles",
+          "title": "The Three Circles",
+          "relative_path": "projects/justicehub/three-circles.md",
+          "page_path": "projects/justicehub/three-circles"
+        }
+      },
+      {
+        "stem": "kristy-bloomfield",
+        "title": "Kristy Bloomfield",
+        "relative_path": "people/kristy-bloomfield.md",
+        "page_path": "people/kristy-bloomfield",
+        "target": {
+          "stem": "indigenous-justice-oped",
+          "title": "The Cure Already Exists",
+          "relative_path": "research/indigenous-justice-oped.md",
+          "page_path": "research/indigenous-justice-oped"
+        }
+      },
+      {
+        "stem": "nicholas-marchesi",
+        "title": "Nicholas Marchesi OAM",
+        "relative_path": "people/nicholas-marchesi.md",
+        "page_path": "people/nicholas-marchesi",
+        "target": {
+          "stem": "harvest-property-arc",
+          "title": "The Harvest: Property Arc and Founding Vision",
+          "relative_path": "research/harvest-property-arc.md",
+          "page_path": "research/harvest-property-arc"
+        }
+      },
+      {
+        "stem": "regional-arts-fellowship",
+        "title": "Regional Arts Fellowship",
+        "relative_path": "projects/act-studio/regional-arts-fellowship.md",
+        "page_path": "projects/act-studio/regional-arts-fellowship",
+        "target": {
+          "stem": "art-as-infrastructure",
+          "title": "Art as Infrastructure",
+          "relative_path": "art/philosophy/art-as-infrastructure.md",
+          "page_path": "art/philosophy/art-as-infrastructure"
+        }
+      },
+      {
+        "stem": "regional-arts-fellowship",
+        "title": "Regional Arts Fellowship",
+        "relative_path": "projects/act-studio/regional-arts-fellowship.md",
+        "page_path": "projects/act-studio/regional-arts-fellowship",
+        "target": {
+          "stem": "lcaa-method",
+          "title": "LCAA Method",
+          "relative_path": "concepts/lcaa-method.md",
+          "page_path": "concepts/lcaa-method"
+        }
+      },
+      {
+        "stem": "confit-pathways",
+        "title": "ConFit Pathways",
+        "relative_path": "projects/confit-pathways.md",
+        "page_path": "projects/confit-pathways",
+        "target": {
+          "stem": "justicehub",
+          "title": "JusticeHub",
+          "relative_path": "projects/justicehub/justicehub.md",
+          "page_path": "projects/justicehub/justicehub"
+        }
+      },
+      {
+        "stem": "deadlylabs",
+        "title": "DeadlyLabs",
+        "relative_path": "projects/deadlylabs.md",
+        "page_path": "projects/deadlylabs",
+        "target": {
+          "stem": "ai-community-engagement",
+          "title": "AI and Community Engagement",
+          "relative_path": "concepts/ai-community-engagement.md",
+          "page_path": "concepts/ai-community-engagement"
+        }
+      },
+      {
+        "stem": "deadlylabs",
+        "title": "DeadlyLabs",
+        "relative_path": "projects/deadlylabs.md",
+        "page_path": "projects/deadlylabs",
+        "target": {
+          "stem": "justicehub",
+          "title": "JusticeHub",
+          "relative_path": "projects/justicehub/justicehub.md",
+          "page_path": "projects/justicehub/justicehub"
+        }
+      }
+    ],
+    "orphan_pages": [],
+    "stubs": [
+      {
+        "stem": "how-does-the-tractorpedia-second-brain-pattern-compound-knowledge-over-time",
+        "title": "How does the Tractorpedia second-brain pattern compound knowledge over time?",
+        "relative_path": "synthesis/how-does-the-tractorpedia-second-brain-pattern-compound-knowledge-over-time.md",
+        "page_path": "synthesis/how-does-the-tractorpedia-second-brain-pattern-compound-knowledge-over-time",
+        "lines": 16
+      }
+    ],
+    "advisory_backlinks": [
+      {
+        "stem": "art-projects",
+        "title": "ACT Art Projects",
+        "relative_path": "art/art-projects.md",
+        "page_path": "art/art-projects",
+        "target": {
+          "stem": "act-ecosystem",
+          "title": "ACT Ecosystem",
+          "relative_path": "concepts/act-ecosystem.md",
+          "page_path": "concepts/act-ecosystem"
+        }
+      },
+      {
+        "stem": "art-projects",
+        "title": "ACT Art Projects",
+        "relative_path": "art/art-projects.md",
+        "page_path": "art/art-projects",
+        "target": {
+          "stem": "act-identity",
+          "title": "A Curious Tractor (ACT)",
+          "relative_path": "concepts/act-identity.md",
+          "page_path": "concepts/act-identity"
+        }
+      },
+      {
+        "stem": "art-projects",
+        "title": "ACT Art Projects",
+        "relative_path": "art/art-projects.md",
+        "page_path": "art/art-projects",
+        "target": {
+          "stem": "beautiful-obsolescence",
+          "title": "Beautiful Obsolescence",
+          "relative_path": "concepts/beautiful-obsolescence.md",
+          "page_path": "concepts/beautiful-obsolescence"
+        }
+      },
+      {
+        "stem": "art-projects",
+        "title": "ACT Art Projects",
+        "relative_path": "art/art-projects.md",
+        "page_path": "art/art-projects",
+        "target": {
+          "stem": "lcaa-method",
+          "title": "LCAA Method",
+          "relative_path": "concepts/lcaa-method.md",
+          "page_path": "concepts/lcaa-method"
+        }
+      },
+      {
+        "stem": "art-projects",
+        "title": "ACT Art Projects",
+        "relative_path": "art/art-projects.md",
+        "page_path": "art/art-projects",
+        "target": {
+          "stem": "third-reality",
+          "title": "The Third Reality",
+          "relative_path": "concepts/third-reality.md",
+          "page_path": "concepts/third-reality"
+        }
+      },
+      {
+        "stem": "art-projects",
+        "title": "ACT Art Projects",
+        "relative_path": "art/art-projects.md",
+        "page_path": "art/art-projects",
+        "target": {
+          "stem": "benjamin-knight",
+          "title": "Benjamin Knight",
+          "relative_path": "people/benjamin-knight.md",
+          "page_path": "people/benjamin-knight"
+        }
+      },
+      {
+        "stem": "art-projects",
+        "title": "ACT Art Projects",
+        "relative_path": "art/art-projects.md",
+        "page_path": "art/art-projects",
+        "target": {
+          "stem": "civicgraph",
+          "title": "CivicGraph",
+          "relative_path": "projects/civicgraph.md",
+          "page_path": "projects/civicgraph"
+        }
+      },
+      {
+        "stem": "art-projects",
+        "title": "ACT Art Projects",
+        "relative_path": "art/art-projects.md",
+        "page_path": "art/art-projects",
+        "target": {
+          "stem": "community-capital",
+          "title": "Community Capital",
+          "relative_path": "projects/community-capital.md",
+          "page_path": "projects/community-capital"
+        }
+      }
+    ],
+    "frontmatter_contract_violations": [],
+    "missing_source_summaries": [],
+    "orphan_source_summaries": []
+  },
+  "frontmatter_contract_violations": [],
+  "backlink_policy": {
+    "missing_backlinks": "Reciprocal links expected for non-hub articles only.",
+    "advisory_backlinks": "Cluster pages, portfolios, and broad overview pages are reported separately as navigational references."
+  }
+}

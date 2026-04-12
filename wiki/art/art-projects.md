@@ -8,6 +8,15 @@ cluster: art
 
 > Art is the fourth letter of [[lcaa-method|LCAA]] — the Art that follows Listening, Curiosity, and Action. It's not decoration on top of the work. It is the work, made into a thing you can stand in front of.
 
+## Read This Domain
+
+If you are trying to understand ACT's art field properly, start here:
+
+- [[art/README|ACT Art Domain]] — what the `wiki/art/` domain is for
+- [[art/philosophy/art-as-infrastructure|Art as Infrastructure]] — how ACT thinks through art
+- [[art/innovation/studio-innovation-flow|Studio Innovation Flow]] — how works create strategic and ecosystem movement
+- [[art/business/studio-business-model|Studio Business Model]] — how the Studio earns, sustains itself, and funds the commons
+
 ## The Studio Line
 
 ACT's Studio cluster is **nine pieces** that take an ACT argument and put it into a physical, sensory, walkable form. Some are installations. Some are objects. Some are phones, sheds, vehicles, or rooms. All of them exist because some things are easier to feel than to read.
@@ -25,6 +34,17 @@ The order matters less than the lineage: each piece teaches the next.
 | [[regional-arts-fellowship|Regional Arts Fellowship]] | Active | Art × technology × agriculture as a regional innovation form |
 | [[the-vagina|The Vagina]] | Coming Soon | In development — placeholder for the next piece |
 | [[the-caravan|The Caravan]] | Active | Mobile leadership infrastructure, born at the [[community-capital|Community Capital]] retreat |
+
+## Canonical Homes
+
+This page is the **curatorial index**, not the duplicate home of every work.
+
+- the conceptual Studio-line index lives here in `wiki/art/`
+- the load-bearing wiki pages for works can still live in `wiki/projects/` when they need project codes, website routes, or operational sync
+- live photos, video, galleries, and hero selections belong in [[empathy-ledger|Empathy Ledger]]
+- the websites compose those layers together
+
+That is deliberate. One durable article per work, one live media layer, one public composition layer.
 
 ## Why nine, why these
 
@@ -58,6 +78,10 @@ If a piece's photos look thin, it's because the consent layer in EL hasn't been 
 
 ## Backlinks
 
+- [[art/README|ACT Art Domain]] — structure for the whole domain
+- [[art/philosophy/art-as-infrastructure|Art as Infrastructure]] — philosophy layer
+- [[art/innovation/studio-innovation-flow|Studio Innovation Flow]] — strategic layer
+- [[art/business/studio-business-model|Studio Business Model]] — business layer
 - [[lcaa-method|LCAA Method]] — the philosophy these pieces complete
 - [[act-ecosystem|ACT Ecosystem]] — where the Studio sits in the wider map
 - [[act-identity|ACT Identity]] — Art as one of the four pillars

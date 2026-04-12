@@ -104,7 +104,3 @@ The most significant gap: **CivicGraph is not mentioned on act.place**. The orga
 
 - [[ways-of-working|Ways of Working]] — the internal operating system act.place makes public
 - [[voice-guide|Voice Guide]] — the writing style behind the public voice
-- [[lcaa-method|LCAA Method]] — the internal methodology that doesn't appear by name publicly
-- [[civicgraph|CivicGraph]] — not on the public site; notable absence
-- [[empathy-ledger|Empathy Ledger]] — public project page at act.place/act-projects/empathy-ledger
-- [[justicehub|JusticeHub]] — public project page at act.place/act-projects/justicehub

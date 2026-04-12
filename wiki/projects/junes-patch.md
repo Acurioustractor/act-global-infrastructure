@@ -2,6 +2,8 @@
 
 > A network of therapeutic gardens providing nature prescriptions for Queensland healthcare workers — responding to a mental health crisis in the caring professions through land, community, and evidence-based social prescribing.
 
+**Status:** Active | **Code:** ACT-JP | **Tier:** Satellite
+
 ## Overview
 
 June's Patch addresses a hidden crisis: the mental health of the people who care for everyone else. Healthcare workers — nurses, doctors, paramedics, allied health staff — face some of the highest rates of burnout, compassion fatigue, and psychological injury of any workforce. June's Patch responds not with clinical programs or EAP services but with something more fundamental: soil, plants, community, and time.

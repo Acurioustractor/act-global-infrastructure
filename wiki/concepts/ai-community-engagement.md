@@ -55,3 +55,9 @@ This thesis maps directly to ACT's methodology:
 ## Sources
 
 - Raw: `wiki/raw/2026-02-18-article-eating-the-paperwork-ai-community-engagement-renaissance.md`
+
+## Backlinks
+
+- [[mount-isa|Mount Isa]] — concrete example of reclaimed admin time returning to relationship work
+- [[lcaa-method|LCAA Method]] — the thesis protects Listen and Action from administrative drag
+- [[ai-ethics|AI Ethics & Agent Strategy]] — ethical guardrails for community-facing AI use

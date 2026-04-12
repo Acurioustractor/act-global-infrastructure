@@ -135,7 +135,11 @@ Every project should be able to answer:
 ## Backlinks
 
 - [[consent-as-infrastructure|Consent as Infrastructure]] — the architectural and philosophical argument
+- [[ocap-principles|OCAP Principles]] — the rights framework this operational model implements in daily work
 - [[alma|ALMA Framework]] — impact model that respects consent boundaries
 - [[empathy-ledger|Empathy Ledger]] — the platform where consent architecture lives
 - [[ai-ethics|AI Ethics & Agent Strategy]] — AI-specific consent rules
 - [[beautiful-obsolescence|Beautiful Obsolescence]] — governance as handover discipline
+- [[transcript-analysis-method|Transcript Analysis Method]] — the concrete analysis pipeline that applies these consent gates to story processing
+- [[visual-system|ACT Visual System]] — the visual discipline that makes consent and attribution legible across media use
+- [[ways-of-working|Ways of Working]] — daily operational practice for applying review, shareability, and authority checks

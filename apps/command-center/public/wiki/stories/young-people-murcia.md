@@ -1,27 +1,16 @@
 ---
 title: "Young People Murcia — Key Story"
-slug: young-people-murcia
-empathy_ledger_id: "e325b772-cdb9-4a1f-918f-ad376f7479d7"
-project_slugs:
-  - diagrama
-  - justicehub
-consent_scope: "EXTERNAL-LITE"
-cultural_sensitivity: medium
-lcaa_stage: curiosity
-place: "Murcia, Spain"
-voice_owner: "Young people (identity protected)"
-media_needs:
-  - anonymised quote card
-  - alternatives diagram
-status: approved
-last_updated: 2026-02-04
+status: External-Lite
+projects: diagrama, justicehub
 ---
+
+> Generated legacy mirror for command-center.
+> Source of truth: `wiki/stories/young-people-murcia.md`.
+> Regenerated: `2026-04-11T02:58:52.891Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # Young People Murcia — Key Story
 
 > Young people describe the detention environment, offering clear insight into what needs to change.
-
----
 
 ## Context
 
@@ -29,9 +18,7 @@ last_updated: 2026-02-04
 **Voice Owner:** Young people in Diagrama programs (identity protected)
 **Consent Status:** EXTERNAL-LITE — identity protected
 
----
-
-## Story Summary
+## Story
 
 During ACT's learning journey to Diagrama in Spain, young people in the youth justice system shared their experiences directly. Their insights cut through policy debates to reveal what actually matters:
 
@@ -51,8 +38,6 @@ During ACT's learning journey to Diagrama in Spain, young people in the youth ju
 
 These aren't policy recommendations — they're lived experience. They inform JusticeHub's approach to documenting what alternatives need to include.
 
----
-
 ## ALMA Signals
 
 | Signal | Level | Notes |
@@ -64,28 +49,14 @@ These aren't policy recommendations — they're lived experience. They inform Ju
 | **Option Value** | High | Shapes design principles |
 | **Community Value Return** | Medium | Informs better systems |
 
----
+## Connections
 
-## LCAA Shift
-
-**From:** Listen (hearing from young people directly)
-**To:** Curiosity (insight shapes design)
-**What changed:** Youth voice became design input for alternatives
-
----
-
-## Media Needs
-
-- [ ] Anonymised quote card (can create)
-- [ ] Alternatives diagram (can create)
-
----
-
-## Related
-
-- **Projects:** [JusticeHub](/wiki/justicehub)
-- **Other Vignettes:** [Jesús Teruel](/wiki/stories/jesus-teruel-diagrama)
-
----
+**LCAA Shift:** Listen (hearing from young people directly) → Curiosity (insight shapes design). Youth voice became design input for alternatives.
 
 *Consent reviewed: 2025-12 | Next review: 2026-06*
+
+## Backlinks
+
+- [[empathy-ledger|Empathy Ledger]] — storytelling platform
+- [[justicehub|JusticeHub]] — the project shaped by this evidence
+- [[jesus-teruel-diagrama|Jesús Teruel — Diagrama Key Story]] — the practitioner's perspective on the same work

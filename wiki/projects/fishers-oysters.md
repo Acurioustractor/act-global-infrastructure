@@ -13,6 +13,7 @@ The name "Fishers" signals both the people (fishing families and custodians) and
 ## Key Details
 
 - **Location:** Moreton Bay, Queensland
+- **Key person surfaced in the current ACT graph:** [[shaun-fisher|Shaun Fisher]]
 - **Website:** [fishersoysters.com](https://fishersoysters.com)
 - **Core model:** Cultural-first aquaculture with community ownership structure
 - **Focus:** Ecological justice, economic sovereignty, intergenerational knowledge transfer
@@ -40,4 +41,5 @@ Most aquaculture operates as extractive industry. Fishers Oysters inverts this:
 ## Backlinks
 
 - [[index|ACT Wikipedia]]
+- [[shaun-fisher|Shaun Fisher]] — public storyteller and shell-cycle link into The Harvest
 - [[lcaa-method|LCAA Method]]

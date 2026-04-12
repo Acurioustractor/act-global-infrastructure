@@ -34,13 +34,15 @@ Despite this history, Palm Island has become a **beacon of community self-determ
 | PICC Centre Precinct | `picc-centre-precinct` | Physical infrastructure development |
 | PICC Elders Hull River Trip | `picc-elders-hull-river` | Cultural reconnection and Elder knowledge |
 | PICC Photo Kiosk | `picc-photo-kiosk` | Community photography and storytelling |
-| Uncle Allan Palm Island Art | `uncle-allan-palm-island-art` | Art, culture, and creative practice |
+| [[uncle-allan-palm-island-art|Uncle Allan Palm Island Art]] | `ACT-UA` | Art, culture, and creative practice |
+
+Palm Island's ACT field is also carried by named Elders, artists, and public storytellers, not just projects. The current canonical and Empathy Ledger curation layers make this visible through [[allan-palm-island|Allan Palm Island]], [[richard-cassidy|Richard Cassidy]], [[aunty-ethel-robertson|Aunty Ethel Robertson]], [[uncle-frank-daniel-landers|Uncle Frank Daniel Landers]], [[aunty-iris-may-whitey|Aunty Iris May Whitey]], [[cyndel-louise-pryor|Cyndel Louise Pryor]], [[elsa-mortoa|Elsa Mortoa]], [[gurtrude-grace-richardson|Gurtrude Grace Richardson]], [[marjoyie-burns|Marjoyie Burns]], [[winifred-obah|Winifred Obah]], [[irene-nleallajar|Irene Nleallajar]], and [[ruby-sibley|Ruby Sibley]].
 
 ## Community Leadership
 
 - **Mayor:** Alf Lacey (signatory to Indigenous Leaders Accord, QLD)
 - **PICC Chair:** Luella Bligh
-- **PICC CEO:** Rachel Atkinson (also Chair of QATSICPP)
+- **PICC CEO:** [[rachel-atkinson|Rachel Atkinson]] (also Chair of QATSICPP)
 
 ## Cultural Significance
 
@@ -69,6 +71,20 @@ Palm Island is the **proof case** for [[third-reality|The Third Reality]]:
 ## Backlinks
 
 - [[picc|PICC]] — the organization
+- [[allan-palm-island|Allan Palm Island]] — Palm Island Elder and artist
+- [[aunty-ethel-robertson|Aunty Ethel Robertson]] — Palm Island Elder in the Elders work
+- [[uncle-frank-daniel-landers|Uncle Frank Daniel Landers]] — Palm Island Elder in the Elders work
+- [[aunty-iris-may-whitey|Aunty Iris May Whitey]] — Palm Island Elder in the Elders work
+- [[cyndel-louise-pryor|Cyndel Louise Pryor]] — Palm Island Elder in the Elders work
+- [[elsa-mortoa|Elsa Mortoa]] — Palm Island Elder in the Elders work
+- [[gurtrude-grace-richardson|Gurtrude Grace Richardson]] — Palm Island Elder in the Elders work
+- [[marjoyie-burns|Marjoyie Burns]] — Palm Island Elder in the Elders work
+- [[winifred-obah|Winifred Obah]] — Palm Island Elder in the Elders work
+- [[rachel-atkinson|Rachel Atkinson]] — PICC leadership and executive context
+- [[richard-cassidy|Richard Cassidy]] — governance philosophy and story-led Palm Island practice
+- [[irene-nleallajar|Irene Nleallajar]] — public storyteller in the Elders / Hull River field
+- [[ruby-sibley|Ruby Sibley]] — public storyteller in the Elders / Hull River field
+- [[uncle-allan-palm-island-art|Uncle Allan Palm Island Art]] — Palm Island art and cultural sovereignty work
 - [[acco-sector-analysis|ACCO Sector Analysis]] — sector context
 - [[indigenous-data-sovereignty|Indigenous Data Sovereignty]] — data governance
 - [[third-reality|The Third Reality]] — the methodology

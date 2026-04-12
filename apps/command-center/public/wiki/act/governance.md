@@ -1,15 +1,21 @@
 ---
-title: "Governance & Consent"
-slug: governance
-status: published
-last_updated: 2026-02-04
+title: Governance & Consent (Operational)
+status: Active
 ---
 
-# Governance & Consent
+> Generated legacy mirror for command-center.
+> Source of truth: `wiki/concepts/governance-consent.md`.
+> Regenerated: `2026-04-11T02:58:52.891Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
-Consent is not a compliance box; it is part of the work and the product. Community authority is the default, not the exception.
+# Governance & Consent (Operational)
 
----
+> Consent is a relationship, not a checkbox. Community authority is the default, not the exception.
+
+## Overview
+
+This article covers ACT's operational governance practices — how consent commitments are implemented in daily work, the shareability matrix teams use to make decisions, and the OCAP-aligned systems embedded in Empathy Ledger. For the conceptual and architectural argument for consent as infrastructure, see [[consent-as-infrastructure|Consent as Infrastructure]].
+
+The two articles are complementary: consent-as-infrastructure asks "what must be built?" — this article asks "how do we work within it?"
 
 ## Core Commitments
 
@@ -22,11 +28,9 @@ Consent is not a compliance box; it is part of the work and the product. Communi
 | **Sacred knowledge protected** | Hard blocks, not warnings |
 | **Partner nuance internal** | Sensitive detail stays private until reviewed |
 
----
+## OCAP in Practice
 
-## OCAP: Indigenous Data Sovereignty
-
-We implement OCAP principles in code and practice:
+ACT implements [OCAP principles](https://fnigc.ca/ocap-training/) in code and practice across all platforms:
 
 | Principle | Implementation |
 |-----------|----------------|
@@ -35,17 +39,11 @@ We implement OCAP principles in code and practice:
 | **Access** | Communities can access their own data anytime |
 | **Possession** | Data stays under community custody |
 
-### In Practice
-
-- Elder Review Systems for sacred content
-- Ongoing Consent with renewable expiry (6-12 months)
-- Cultural Protocols customizable per organization
-- AI analysis only with explicit opt-in
-- Full data export available anytime
-
----
+In daily work this means: Elder Review Systems for sacred content, ongoing consent with renewable expiry (6–12 months), cultural protocols configurable per organization, AI analysis only with explicit opt-in, and full data export available at any time.
 
 ## Shareability Matrix
+
+Every document, story, or piece of content belongs in one of three categories. When in doubt, default to the more conservative tier.
 
 | Level | Meaning | Examples |
 |-------|---------|----------|
@@ -62,8 +60,6 @@ Ask:
 - Is the purpose clear and appropriate?
 - Who benefits from this sharing?
 
----
-
 ## Community Authority
 
 **Community authority carries the highest weight, even when it complicates delivery.**
@@ -74,8 +70,6 @@ Ask:
 | Partner wants speed over safety | We slow down |
 | Community questions approach | We revisit |
 | Cultural protocol unclear | We ask, not assume |
-
----
 
 ## Consent Architecture in Empathy Ledger
 
@@ -97,8 +91,6 @@ Every story tracks:
 - Cultural sensitivity level
 - Revocation history
 
----
-
 ## Elder Review Workflow
 
 When cultural protocols require Elder review:
@@ -112,11 +104,9 @@ When cultural protocols require Elder review:
 
 Elder decisions are final on cultural matters.
 
----
-
 ## AI and Consent
 
-AI analysis requires explicit opt-in:
+AI analysis requires explicit opt-in. The default is **No AI**.
 
 | Setting | What It Means |
 |---------|---------------|
@@ -124,43 +114,17 @@ AI analysis requires explicit opt-in:
 | **Internal AI Only** | ACT tools only, no external services |
 | **AI Permitted** | Includes external AI services |
 
-Default is **No AI**. Consent must be explicit.
-
----
+See [[ai-ethics|AI Ethics & Agent Strategy]] for the full AI consent framework.
 
 ## Partner Protocols
-
-### With Partners
 
 - Governance agreements before data sharing
 - Clear boundaries on use
 - Mutual accountability
 - Regular review cycles
+- Partner-specific nuance marked `[INTERNAL ONLY]`, not shared without partner review
 
-### Partner-Specific Nuance
-
-- Marked `[INTERNAL ONLY]` in documents
-- Not shared without partner review
-- Respected in all communications
-- Deleted on request
-
----
-
-## Consent as Relationship
-
-> Field note: Consent is a relationship, not a checkbox. We keep listening after we share.
-
-Consent isn't a gate we pass through once. It's an ongoing conversation:
-
-- Check in regularly
-- Notice discomfort
-- Offer withdrawal without penalty
-- Celebrate boundary-setting
-- Update as relationships evolve
-
----
-
-## Questions to Ask
+## Project Governance Checklist
 
 Every project should be able to answer:
 
@@ -172,6 +136,14 @@ Every project should be able to answer:
 | What's the handover plan? | Documented |
 | What stays internal? | Listed |
 
----
+## Backlinks
 
-*See also: [ALMA Framework](/wiki/act/alma) | [Empathy Ledger](/wiki/empathy-ledger) | [Principles of Practice](/wiki/act/identity/principles)*
+- [[consent-as-infrastructure|Consent as Infrastructure]] — the architectural and philosophical argument
+- [[ocap-principles|OCAP Principles]] — the rights framework this operational model implements in daily work
+- [[alma|ALMA Framework]] — impact model that respects consent boundaries
+- [[empathy-ledger|Empathy Ledger]] — the platform where consent architecture lives
+- [[ai-ethics|AI Ethics & Agent Strategy]] — AI-specific consent rules
+- [[beautiful-obsolescence|Beautiful Obsolescence]] — governance as handover discipline
+- [[transcript-analysis-method|Transcript Analysis Method]] — the concrete analysis pipeline that applies these consent gates to story processing
+- [[visual-system|ACT Visual System]] — the visual discipline that makes consent and attribution legible across media use
+- [[ways-of-working|Ways of Working]] — daily operational practice for applying review, shareability, and authority checks

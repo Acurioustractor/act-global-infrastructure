@@ -124,7 +124,7 @@ Indigenous languages can be embedded into localized models:
 
 ## Implementation Priority
 
-1. **Now:** Set up Mac Studio + Ollama + Gemma 4 E4B for PICC
+1. **Now:** Set up Mac Studio + Ollama + Gemma 4 E4B for [[palm-island|Palm Island]] / PICC
 2. **Now:** Convert PICC's scraped history to Obsidian vault with TK frontmatter
 3. **Month 1:** Deploy @jshph/digest agent, build initial wiki from 20 years of documents
 4. **Month 2:** Connect Enzyme index, enable fast Q&A
@@ -134,6 +134,7 @@ Indigenous languages can be embedded into localized models:
 ## Backlinks
 
 - [[llm-knowledge-base|LLM Knowledge Base]] — the pattern
+- [[ocap-principles|OCAP Principles]] — possession and control made real through local hardware, exportability, and offline operation
 - [[indigenous-data-sovereignty|Indigenous Data Sovereignty]] — governance framework
 - [[picc|Palm Island Community Company]] — primary deployment site
 - [[empathy-ledger|Empathy Ledger]] — narrative content source

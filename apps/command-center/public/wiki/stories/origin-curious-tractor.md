@@ -1,29 +1,16 @@
 ---
 title: "The Origin of A Curious Tractor"
-slug: origin-curious-tractor
-empathy_ledger_id: "01d78ec5-5601-4ed4-9574-9b53cc086938"
-project_slugs:
-  - a-curious-tractor
-  - empathy-ledger
-  - justicehub
-consent_scope: "EXTERNAL-LITE"
-cultural_sensitivity: low
-lcaa_stage: action
-place: "ACT origin story across youth justice and platform work"
-voice_owner: "Founding team and community collaborators"
-media_needs:
-  - early sketches
-  - platform timeline
-  - founder portrait (consent)
-status: review
-last_updated: 2026-02-04
+status: External-Lite
+projects: a-curious-tractor, empathy-ledger, justicehub
 ---
+
+> Generated legacy mirror for command-center.
+> Source of truth: `wiki/stories/origin-curious-tractor.md`.
+> Regenerated: `2026-04-11T02:58:52.891Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # The Origin of A Curious Tractor
 
 > The founding philosophy that technology should cultivate community growth, not extract value.
-
----
 
 ## Context
 
@@ -31,9 +18,7 @@ last_updated: 2026-02-04
 **Voice Owner:** Founding team and community collaborators
 **Consent Status:** EXTERNAL-LITE — confirm before external use
 
----
-
-## Story Summary
+## Story
 
 A Curious Tractor began with a simple observation: most technology extracts value from communities. Data flows out, insights flow out, decisions are made elsewhere. Communities become the subject of technology, not the owners of it.
 
@@ -42,8 +27,6 @@ The tractor metaphor came from agricultural machinery: a tractor's Power Take-Of
 This became ACT's design principle: build technology that transfers power to communities, can be owned and modified locally, and is designed for eventual obsolescence. Youth Justice work and the Empathy Ledger platform both emerged from this philosophy.
 
 The question isn't "what can we build?" but "what can communities own when we're gone?"
-
----
 
 ## ALMA Signals
 
@@ -56,29 +39,16 @@ The question isn't "what can we build?" but "what can communities own when we're
 | **Option Value** | High | Foundation for all work |
 | **Community Value Return** | High | Ownership-first model |
 
----
+## Connections
 
-## LCAA Shift
+**LCAA Shift:** Curiosity (what would non-extractive tech look like?) → Action (philosophy becomes platform). Founding insight became operational methodology.
 
-**From:** Curiosity (what would non-extractive tech look like?)
-**To:** Action (philosophy becomes platform)
-**What changed:** Founding insight became operational methodology
-
----
-
-## Media Needs
-
-- [ ] Early sketches (internal archives)
-- [ ] Platform timeline (can create)
-- [ ] Founder portrait (consent in place)
-
----
-
-## Related
-
-- **Framework:** [Beautiful Obsolescence](/wiki/act/beautiful-obsolescence)
-- **Projects:** [Empathy Ledger](/wiki/empathy-ledger), [JusticeHub](/wiki/justicehub)
-
----
+See also: Beautiful Obsolescence — the design principle of building for communities to own.
 
 *Consent reviewed: 2026-01 | Status: Confirm before external*
+
+## Backlinks
+
+- [[empathy-ledger|Empathy Ledger]] — the platform that emerged from this philosophy
+- [[justicehub|JusticeHub]] — the justice work grounded in this thinking
+- [[building-empathy-ledger|Building Empathy Ledger]] — the implementation story

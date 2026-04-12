@@ -22,7 +22,7 @@ Created in 2007 as a grassroots project, Mukurtu supports Indigenous communities
 - **TK Labels** embedded directly in metadata — restrictions based on gender, seasonal conditions, sacredness
 - **Drupal + MCP** = AI agents can query the archive while mathematically obeying cultural protocols
 - **Jumbunna Institute (UTS)** partnership for digitizing significant Aboriginal political history
-- Perfect fit for PICC's 20-year archive and Empathy Ledger content
+- Perfect fit for [[palm-island|Palm Island]]'s PICC 20-year archive and Empathy Ledger content
 
 ### Integration with ACT Stack
 
@@ -69,5 +69,8 @@ The Sami people (Sapmi region across Sweden, Norway, Finland) are pushing instit
 - [[third-reality|The Third Reality]] — the methodology requiring sovereign data
 - [[picc|Palm Island Community Company]] — primary implementation site
 - [[empathy-ledger|Empathy Ledger]] — narrative sovereignty platform
+- [[ocap-principles|OCAP Principles]] — rights-based foundation underneath Indigenous data sovereignty practice
+- [[consent-as-infrastructure|Consent as Infrastructure]] — concrete consent model that operationalizes sovereignty in product architecture
 - [[local-ai-architecture|Local AI Architecture]] — technical implementation
 - [[global-precedents|Global Precedents]] — Sweden, Spain, Holland examples
+- [[transcript-analysis-method|Transcript Analysis Method]] — one concrete pipeline where sovereignty constraints shape AI use, review, and publication

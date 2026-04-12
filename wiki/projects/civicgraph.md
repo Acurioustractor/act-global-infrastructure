@@ -121,6 +121,10 @@ Yet no single system connects them. A government procurement officer cannot easi
 
 The data exists — scattered across AusTender, ACNC returns, AEC disclosures, ATO statistics, state grant portals, and foundation annual reports — but was never assembled into a coherent decision layer. See [[funding-transparency|Funding Transparency]] for the structural case.
 
+ACT's [[community-capital|Community Capital]] retreat is the relational complement to this data layer. CivicGraph makes capital flows legible; Community Capital creates the room where new funder-community matches can actually happen.
+
+One of the clearest current ACT uses of this intelligence layer is [[goods-on-country|Goods on Country]], where procurement and capital discovery are used to identify plausible buyers, community demand, and funder fit rather than leaving that work to manual relationship memory.
+
 ## The $107B Transparency Gap
 
 Key structural findings from the data:
@@ -237,10 +241,15 @@ The "Updated daily" trust signal is underused in internal comms and should appea
 
 ## Backlinks
 
+- [[lcaa-method|LCAA Method]] — CivicGraph is the Curiosity infrastructure layer inside the ACT ecosystem
 - [[third-reality|The Third Reality]] — the methodology
 - [[civic-world-model|Civic World Model]] — the architectural vision
 - [[justicehub|JusticeHub]] — the evidence layer
 - [[empathy-ledger|Empathy Ledger]] — the narrative layer
+- [[ocap-principles|OCAP Principles]] — governance baseline for any Indigenous community context appearing in CivicGraph’s community layer
 - [[acco-sector-analysis|ACCO Sector Analysis]] — who it serves
 - [[funding-transparency|Funding Transparency]] — the structural case for the platform
+- [[community-capital|Community Capital]] — relational convening complement to CivicGraph's funding intelligence
+- [[goods-on-country|Goods on Country]] — current procurement-intelligence use case through the Goods Workspace
 - [[power-dynamics-philanthropy|Power Dynamics in Australian Philanthropy]] — the data audit behind the thesis
+- [[2026-04-founder-lanes-and-top-two-bets|Founder Lanes and Top Two Bets]] — the founder decision that treats CivicGraph and JusticeHub as one flagship stack

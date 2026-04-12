@@ -197,3 +197,4 @@ New features: UI goes in `apps/command-center/`, API routes in `apps/command-cen
 - [[vignette-workflows|Vignette Workflows]] — how stories connect to the compendium
 - [[consent-as-infrastructure|Consent as Infrastructure]] — architectural argument behind the consent design
 - [[alma|ALMA]] — the impact model that reads from this data
+- [[ways-of-working|Ways of Working]] — the operational discipline this architecture is meant to support quietly and reliably

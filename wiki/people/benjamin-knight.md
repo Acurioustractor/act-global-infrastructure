@@ -17,16 +17,16 @@ Three years as photographer with Orange Sky Australia, sitting with people exper
 An encounter inside a prison in Bolivia, listening to men talk about hope. "That encounter didn't flatter me with the feeling of helping; it humbled me with the responsibility to keep learning."
 
 ### Mount Isa — Ground Truthing
-NAIDOC week in Mount Isa crystallised the case for JusticeHub. Walking alongside families, Elders, and young people — meeting [[brodie-germaine|Brodie Germaine]] and witnessing the web of relationships, gyms, camping trips, and cultural practices that already change trajectories. The insight: "The answers live in community already. Our job is not to arrive as saviours but to remove friction, fund the intelligence that's there, and help it circulate."
+NAIDOC week in [[mount-isa|Mount Isa]] crystallised the case for JusticeHub. Walking alongside families, Elders, and young people — meeting [[brodie-germaine|Brodie Germaine]] and witnessing the web of relationships, gyms, camping trips, and cultural practices that already change trajectories. The insight: "The answers live in community already. Our job is not to arrive as saviours but to remove friction, fund the intelligence that's there, and help it circulate."
 
 ### Minjerribah / North Stradbroke Island
 The Minjerribah Moorgumpin Elders-in-Council modelled governance that holds culture at the centre, not the edge. "When Elders lead, young people feel the ground under their feet."
 
 ### Palm Island
-[[../communities/palm-island|PICC]] demonstrated community control at scale — 200+ workforce spanning health, family services, and more. Evidence that "when you invest in capacity where people live, the system gets smarter and trust deepens."
+PICC on Palm Island demonstrated community control at scale — 200+ workforce spanning health, family services, and more. Evidence that "when you invest in capacity where people live, the system gets smarter and trust deepens."
 
 ### Spain — Diagrama
-Visiting [[diagrama|Diagrama]]'s youth justice centres to learn what parts of that ecosystem might translate to Australia — and what must be adapted by, with, and for First Nations communities.
+Visiting Diagrama's youth justice centres to learn what parts of that ecosystem might translate to Australia — and what must be adapted by, with, and for First Nations communities.
 
 ## Core Beliefs
 
@@ -40,6 +40,24 @@ Visiting [[diagrama|Diagrama]]'s youth justice centres to learn what parts of th
 
 > "JusticeHub sits at the intersection of everything I've learned: that stories move resources; that community wisdom gets lost without lightweight infrastructure; that innovation is social before it's technical; that change sticks when it's owned locally."
 
+## System Position in ACT
+
+Benjamin matters in the wiki not as a biography shelf entry, but because he explains one of ACT's core operating lanes. He is one of the clearest links between:
+
+- [[justicehub|JusticeHub]] — the evidence and reform field
+- [[empathy-ledger|Empathy Ledger]] — the sovereign story and media field
+- [[../concepts/act-identity|ACT Identity]] — the wider ecosystem logic held with [[nicholas-marchesi|Nicholas Marchesi OAM]]
+
+That is the useful shape for this page: enough to explain the ecosystem, not a full personal archive.
+
 ## Sources
 
 - Raw: `wiki/raw/2025-11-05-article-walking-toward-justice-a-personal-journey-267823.md`
+
+## Backlinks
+
+- [[social-soil-canvas|Social Soil Canvas]] — founder-facing field diagnostic used to turn Benjamin's strategic reflections into decisions, patterns, and proof
+- [[nicholas-marchesi|Nicholas Marchesi OAM]] — co-founder holding the place, hospitality, and handover lane alongside Benjamin
+- [[brodie-germaine|Brodie Germaine]] — Mount Isa proof point that sharpened Benjamin's justice field practice
+- [[justicehub|JusticeHub]] — core platform Benjamin architects
+- [[empathy-ledger|Empathy Ledger]] — sovereign story infrastructure Benjamin helps build

@@ -1,28 +1,16 @@
 ---
 title: "Atnarpa Homestead Cultural Exchange - Girls Trip"
-slug: atnarpa-girls-trip
-empathy_ledger_id: "975acf2d-9b96-4a36-a8cc-cd622224c98b"
-project_slugs:
-  - oonchiumpa
-  - land-practice
-consent_scope: "EXTERNAL-LITE"
-cultural_sensitivity: medium
-lcaa_stage: action
-place: "Atnarpa (Loves Creek Station)"
-voice_owner: "Young women with cultural mentors"
-media_needs:
-  - on-Country photo
-  - homestead image
-  - learning moment (consent)
-status: approved
-last_updated: 2026-02-04
+status: External-Lite
+projects: oonchiumpa, land-practice
 ---
+
+> Generated legacy mirror for command-center.
+> Source of truth: `wiki/stories/atnarpa-girls-trip.md`.
+> Regenerated: `2026-04-11T02:58:52.891Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # Atnarpa Homestead Cultural Exchange - Girls Trip
 
 > Young Luritja girls learn cultural tourism and land management while being welcomed onto Country.
-
----
 
 ## Context
 
@@ -30,9 +18,7 @@ last_updated: 2026-02-04
 **Voice Owner:** Young women with cultural mentors
 **Consent Status:** EXTERNAL-LITE
 
----
-
-## Story Summary
+## Story
 
 Young Luritja women visited Atnarpa Station through Oonchiumpa's cultural exchange program. They were welcomed onto Country by the Bloomfield/Wiltshire family who are developing cultural tourism there.
 
@@ -43,8 +29,6 @@ The experience combined:
 - **Future visioning** — Young women seeing pathways they might pursue
 
 This wasn't a one-way visit. The exchange built relationships across communities, shared knowledge in both directions, and planted seeds for future collaboration.
-
----
 
 ## ALMA Signals
 
@@ -57,28 +41,15 @@ This wasn't a one-way visit. The exchange built relationships across communities
 | **Option Value** | High | Foundation for ongoing exchange |
 | **Community Value Return** | High | Both communities benefit |
 
----
+## Connections
 
-## LCAA Shift
-
-**From:** Curiosity (what can young women learn from cultural tourism?)
-**To:** Action (learning becomes practice)
-**What changed:** One-off visit became model for ongoing exchange
-
----
-
-## Media Needs
-
-- [ ] On-Country photo (consent from participants)
-- [ ] Homestead image (consent from family)
-- [ ] Learning moment image (consent required)
-
----
-
-## Related
-
-- **Other Vignettes:** [Returning Home to Atnarpa](/wiki/stories/returning-home-atnarpa), [Girls Day Out](/wiki/stories/girls-day-out-standley-chasm)
-
----
+**LCAA Shift:** Curiosity (what can young women learn from cultural tourism?) → Action (learning becomes practice). One-off visit became model for ongoing exchange.
 
 *Consent reviewed: 2025-12 | Next review: 2026-06*
+
+## Backlinks
+
+- [[empathy-ledger|Empathy Ledger]] — storytelling platform
+- [[oonchiumpa|Oonchiumpa]] — youth program
+- [[returning-home-atnarpa|Returning Home to Atnarpa]] — the station and its Traditional Owners
+- [[girls-day-out-standley-chasm|Girls Day Out at Standley Chasm]] — related story

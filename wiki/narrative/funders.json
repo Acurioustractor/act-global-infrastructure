@@ -1,0 +1,253 @@
+{
+  "$schema": "wiki/narrative/funders.schema.json",
+  "description": "Active and prospect funders, with the narrative claims that should lead any pitch to them. Used by narrative-draft.mjs --funder <slug> to assemble pitch briefs targeted to the right thesis.",
+  "version": 1,
+  "updated": "2026-04-09",
+  "funders": {
+    "minderoo": {
+      "name": "Minderoo Foundation",
+      "stage": "ask-pending",
+      "ask_amount_aud": 3430000,
+      "deadline": "2026-05-15",
+      "primary_contact": "Lucy Stronach",
+      "themes": ["systems-change", "indigenous-led", "evidence-based", "place-based", "youth-justice", "library-as-artefact"],
+      "tone": "evidence-rich, ambitious, structurally honest, story-rich, library-led",
+      "canonical_pitch_doc": "wiki/projects/justicehub/three-circles.md",
+      "comprehensive_walkthrough": "wiki/projects/justicehub/the-full-idea.md",
+      "claims_to_lead_with": [
+        "justicehub:claim-the-library-is-the-destination",
+        "justicehub:claim-three-circles-start-at-the-edge",
+        "justicehub:claim-staying-is-the-move",
+        "justicehub:claim-tier-pricing-against-detention-cost",
+        "justicehub:claim-authority-at-the-edge-lineage",
+        "justicehub:claim-ten-anchor-communities-filter-is-relationship",
+        "justicehub:claim-fire-crescendo-build-slowly",
+        "empathy-ledger:claim-the-loop-is-the-product"
+      ],
+      "claims_to_avoid": [
+        "contained:claim-evidence-is-settled-question-is-political-will"
+      ],
+      "framing_notes": "Minderoo wants infrastructure stories at scale AND Indigenous-led work AND something Lucy can take to the board. The Three Circles + STAY pitch is the canonical Lucy-warm document. Total ask: $3.43M (Crescendo tier — the default). Lead with 'the library is the destination' as the conceptual hook, then move to the methodology (Three Circles), then the cost arithmetic (STAY runs the entire program for less than detaining one child for three years), then the authority lineage (Yunkaporta + Ostrom + Diagrama + Grotberg), then the fire metaphor for the budget tiers. Lucy has been warm since Oct 2025 — this is a relationship pitch, not a cold ask. Crescendo is the default tier ($3.43M). Foundation ($1.8M) is the fallback. Bonfire ($6M) is the dream. Avoid the confrontational frame — they fund builders, not critics. Source docs: three-circles.md (canonical pitch) and the-full-idea.md (comprehensive walkthrough)."
+    },
+    "qbe-catalysing-impact": {
+      "name": "QBE Catalysing Impact",
+      "stage": "term-sheet-pending",
+      "ask_amount_aud": null,
+      "deadline": null,
+      "primary_contact": null,
+      "themes": ["enterprise", "unit-economics", "scalable", "social-investment"],
+      "tone": "investor-grade, cost-honest, no hand-waving",
+      "claims_to_lead_with": [
+        "goods-on-country:claim-unit-economics-must-be-real",
+        "goods-on-country:claim-handover-is-the-test",
+        "goods-on-country:claim-not-charity-its-enterprise"
+      ],
+      "claims_to_avoid": [],
+      "framing_notes": "Investor language. Lead with the delivered cost number, the decision band, the handover binary. Do NOT pitch this as a charity case. Do NOT show up without the actual cost report — the whole point of the cost report doc is that QBE will not move without it."
+    },
+    "dusseldorp-forum": {
+      "name": "Dusseldorp Forum",
+      "stage": "active-partner",
+      "ask_amount_aud": 16500,
+      "deadline": null,
+      "primary_contact": "Rachel Fyfe / Jessica Duffy",
+      "themes": ["education", "youth-voice", "community-led"],
+      "tone": "education-led, community-respectful, evidence-grounded",
+      "claims_to_lead_with": [
+        "contained:claim-young-people-as-experts",
+        "contained:claim-room-3-community-already-doing-it",
+        "contained:claim-detention-doesnt-work"
+      ],
+      "claims_to_avoid": [],
+      "framing_notes": "Dusseldorp already funds — this is a deepening relationship, not a new ask. Lead with the education angle (18% of detained kids complete education), then young-people-as-experts. They have the education frame in their DNA."
+    },
+    "paul-ramsay-foundation": {
+      "name": "Paul Ramsay Foundation",
+      "stage": "cold",
+      "ask_amount_aud": null,
+      "deadline": null,
+      "primary_contact": "William Frazer",
+      "themes": ["systems-change", "evidence-based", "institutional-reform"],
+      "tone": "rigorous, system-thinking, evidence-first",
+      "claims_to_lead_with": [
+        "contained:claim-cost-comparison",
+        "contained:claim-room-3-community-already-doing-it",
+        "contained:claim-platform-stack"
+      ],
+      "claims_to_avoid": [
+        "contained:claim-built-by-hand"
+      ],
+      "framing_notes": "PRF thinks deeply about systems change. Lead with the cost evidence, then the verified-intervention engine (ALMA), then the platform stack as the system-change lever. PRF will be skeptical of 'two people built it with hands' — for them, lead with infrastructure, not artisanship."
+    },
+    "tim-fairfax": {
+      "name": "Tim Fairfax Family Foundation",
+      "stage": "warm-cold",
+      "ask_amount_aud": null,
+      "deadline": null,
+      "primary_contact": "Katie Norman",
+      "themes": ["regional", "community-led", "creative-practice"],
+      "tone": "warm, place-based, story-rich",
+      "claims_to_lead_with": [
+        "contained:claim-room-3-community-already-doing-it",
+        "contained:claim-the-container-as-method",
+        "contained:claim-young-people-as-experts"
+      ],
+      "claims_to_avoid": [],
+      "framing_notes": "Tim Fairfax loves regional and community-led. Lead with Room 3 (Mounty Yarns, PICC, Oonchiumpa) and the touring model. The container-as-method is a creative-practice claim that lands well here."
+    },
+    "smith-family": {
+      "name": "The Smith Family",
+      "stage": "cold",
+      "ask_amount_aud": null,
+      "deadline": null,
+      "primary_contact": null,
+      "themes": ["education", "youth-pathways", "evidence"],
+      "tone": "evidence-led, educational outcomes",
+      "claims_to_lead_with": [
+        "contained:claim-detention-doesnt-work",
+        "contained:claim-young-people-as-experts"
+      ],
+      "claims_to_avoid": [],
+      "framing_notes": "Highest-scoring funder in our system. Frame around educational outcomes — 18% of detained kids complete education vs the alternatives' completion rates."
+    },
+    "amnesty-australia": {
+      "name": "Amnesty International Australia",
+      "stage": "cold",
+      "themes": ["human-rights", "first-nations", "institutional-accountability"],
+      "tone": "rights-based, structurally honest, willing to confront",
+      "claims_to_lead_with": [
+        "contained:claim-indigenous-overrepresentation",
+        "contained:claim-evidence-is-settled-question-is-political-will",
+        "contained:claim-detention-doesnt-work"
+      ],
+      "claims_to_avoid": [],
+      "framing_notes": "Amnesty is one of the few funders for whom the confrontational frame is the right pitch. Lead with 21x overrepresentation, then the political-will claim, then the failure rate. They want partners who will name it."
+    },
+    "niaa": {
+      "name": "National Indigenous Australians Agency",
+      "stage": "procurement-prospect",
+      "themes": ["indigenous-procurement", "community-led-enterprise"],
+      "tone": "procurement-ready, IPP-compliant, enterprise",
+      "claims_to_lead_with": [
+        "goods-on-country:claim-not-charity-its-enterprise",
+        "goods-on-country:claim-handover-is-the-test",
+        "goods-on-country:claim-unit-economics-must-be-real"
+      ],
+      "claims_to_avoid": [],
+      "framing_notes": "Procurement audience under the Indigenous Procurement Policy. Lead with the enterprise framing — Goods on Country is an IPP-eligible community-owned enterprise, not a social program."
+    },
+    "jcf": {
+      "name": "June Canavan Foundation",
+      "stage": "active-partner",
+      "ask_amount_aud": 60000,
+      "deadline": null,
+      "primary_contact": null,
+      "themes": ["impact-storytelling", "wind-down-legacy", "africa-australia", "philanthropic-spine"],
+      "tone": "warm, story-rich, legacy-conscious",
+      "claims_to_lead_with": [
+        "empathy-ledger:claim-story-is-the-spine",
+        "empathy-ledger:claim-stories-from-inside",
+        "empathy-ledger:claim-corpus-is-the-procurement-weapon",
+        "empathy-ledger:claim-the-loop-is-the-product"
+      ],
+      "claims_to_avoid": [],
+      "framing_notes": "JCF has 5 years remaining in their mandate ('15 Down — 5 To Go'). They want impact storytelling for fundraising / wind-down. The Tanzania + Rwanda Africa visit (Sep 2025) is the entry point. Pitch as a multi-year retainer ($40-80K/yr) — not a project grant. We deliver the platform, the editorial pipeline, the annual reports, and the consent-respecting story library across all JCF beneficiaries. The world tour visits the African beneficiaries directly — fieldwork at no marginal cost."
+    },
+    "atlassian-foundation": {
+      "name": "Atlassian Foundation",
+      "stage": "cold",
+      "ask_amount_aud": 200000,
+      "deadline": null,
+      "primary_contact": null,
+      "themes": ["software-for-good", "platform-thinking", "open-source", "developer-led-impact"],
+      "tone": "engineering-credible, platform-native, scale-aware",
+      "claims_to_lead_with": [
+        "empathy-ledger:claim-the-ecosystem-is-one-database",
+        "empathy-ledger:claim-the-loop-is-the-product",
+        "empathy-ledger:claim-platform-stress-test",
+        "empathy-ledger:claim-paid-org-tier-is-the-unlock"
+      ],
+      "claims_to_avoid": [],
+      "framing_notes": "Atlassian Foundation funds platform-shaped impact work. Lead with the technical architecture (one database, four layers, 100K+ entities) and the R&D claim of the world tour as a 12-context sovereignty stress test. They will recognise the patterns. World tour funder sponsorship pitch ($150-400K) belongs here."
+    },
+    "snow-foundation": {
+      "name": "Snow Foundation",
+      "stage": "warm",
+      "ask_amount_aud": 200000,
+      "deadline": null,
+      "primary_contact": null,
+      "themes": ["systems-change", "indigenous-led", "rural-regional"],
+      "tone": "values-driven, community-respectful",
+      "claims_to_lead_with": [
+        "empathy-ledger:claim-the-loop-is-the-product",
+        "contained:claim-room-3-community-already-doing-it",
+        "goods-on-country:claim-not-charity-its-enterprise"
+      ],
+      "claims_to_avoid": [],
+      "framing_notes": "Snow already in network per ACT global infra contacts. Warm intro available. Tour funder sponsorship candidate. Lead with the closed-loop framing and the regional / Indigenous-led work."
+    },
+    "patagonia": {
+      "name": "Patagonia Environmental + Social Initiatives",
+      "stage": "cold",
+      "ask_amount_aud": 150000,
+      "deadline": null,
+      "primary_contact": null,
+      "themes": ["environmental-justice", "regenerative-systems", "indigenous-rights", "anti-corporate-power"],
+      "tone": "earned-credibility, climate-honest, no-greenwash",
+      "claims_to_lead_with": [
+        "goods-on-country:claim-not-charity-its-enterprise",
+        "goods-on-country:claim-bed-to-courtroom",
+        "empathy-ledger:claim-each-chapter-is-a-question"
+      ],
+      "claims_to_avoid": [],
+      "framing_notes": "Patagonia funds environmental-justice work that names corporate power. Goods on Country — recycled plastic, on-Country manufacturing, community-owned enterprise — is a fit. The world tour's regen-ag chapters (Witta, Black Cockatoo, Rwanda coffee) extend the fit. Pitch as field research for a global dignified-essential-goods category."
+    },
+    "allbirds": {
+      "name": "Allbirds",
+      "stage": "cold",
+      "ask_amount_aud": 100000,
+      "deadline": null,
+      "primary_contact": null,
+      "themes": ["sustainable-materials", "supply-chain-transparency", "B-corp"],
+      "tone": "supply-chain-honest, materials-curious",
+      "claims_to_lead_with": [
+        "goods-on-country:claim-not-charity-its-enterprise",
+        "goods-on-country:claim-unit-economics-must-be-real"
+      ],
+      "claims_to_avoid": [],
+      "framing_notes": "B-Corp with materials-science DNA. Stretch Bed material story (HDPE, canvas, galvanised steel) is a natural conversation. Smaller funder, but a credible co-sponsor for the tour."
+    },
+    "who-gives-a-crap": {
+      "name": "Who Gives A Crap",
+      "stage": "cold",
+      "ask_amount_aud": 100000,
+      "deadline": null,
+      "primary_contact": null,
+      "themes": ["dignified-essentials", "sanitation", "community-investment"],
+      "tone": "playful, dignified-essentials, anti-charity",
+      "claims_to_lead_with": [
+        "goods-on-country:claim-not-charity-its-enterprise",
+        "goods-on-country:claim-bed-to-courtroom"
+      ],
+      "claims_to_avoid": [],
+      "framing_notes": "Australian B-Corp that built a business out of dignified essentials. Goods on Country is a sister category. Tour co-sponsor candidate. Their 50% donation model maps to the Goods enterprise model conceptually."
+    }
+  },
+  "stages": {
+    "cold": "No prior contact. First touch needed.",
+    "warm-cold": "Prior contact, gone cold. Re-engagement pitch.",
+    "warm": "Active conversation, no ask on the table yet.",
+    "ask-pending": "Pitch sent, awaiting response.",
+    "term-sheet-pending": "In due diligence / term sheet drafting.",
+    "active-partner": "Funded, relationship live.",
+    "lapsed": "Was an active partner, now silent.",
+    "procurement-prospect": "Not a grant funder — a buyer under procurement programs."
+  },
+  "themes_glossary": [
+    "systems-change", "indigenous-led", "evidence-based", "place-based",
+    "enterprise", "unit-economics", "scalable", "social-investment",
+    "education", "youth-voice", "community-led", "institutional-reform",
+    "regional", "creative-practice", "youth-pathways", "human-rights",
+    "first-nations", "institutional-accountability", "indigenous-procurement"
+  ]
+}

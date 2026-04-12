@@ -1,3 +1,18 @@
+---
+title: Goods on Country
+status: Active
+date: 2026-04-11
+entity_type: project
+tagging_mode: own-code
+canonical_slug: goods-on-country
+canonical_code: ACT-GD
+website_slug: goods-on-country
+website_path: /goods
+public_surface: project
+cluster: goods-on-country
+empathy_ledger_key: goods-on-country
+---
+
 # Goods on Country
 
 > Manufacturing durable household goods from 100% recycled plastic for remote and marginalised Australian communities — where conventional products fail within weeks.
@@ -43,7 +58,7 @@ The bed was not designed in an office — it was co-designed with Elders in Tenn
 
 ### Industrial Washing Machine
 
-A fleet of community-deployed industrial washing machines, IoT-instrumented for remote telemetry. Elder Dianne Stokes (Warumungu) named the washing machine in language. 20 machines deployed across communities to date.
+A fleet of community-deployed industrial washing machines, IoT-instrumented for remote telemetry. Elder [[dianne-stokes|Dianne Stokes]] (Warumungu) named the washing machine in language. 20 machines deployed across communities to date.
 
 The washing machine fleet serves a dual purpose: providing clean laundry infrastructure to communities, and generating IoT telemetry data that feeds ACT's R&D program (fleet management, remote asset monitoring, anomaly detection).
 
@@ -92,6 +107,15 @@ Multiple Tennant Creek community organisations engaged:
 ### Kalgoorlie / WA
 
 Co-design consultations conducted with Kalgoorlie communities during product development.
+
+## Key People
+
+The wiki should keep the Goods people layer selective and load-bearing:
+
+- [[dianne-stokes|Dianne Stokes]] — Elder whose naming and cultural grounding make the washing machine line legible as co-authored, not just engineered
+- [[kristy-bloomfield|Kristy Bloomfield]] — not a Goods operator, but one of the strongest community anchors in the wider Oonchiumpa partnership ecology around manufacturing and justice-prevention logic
+
+Additional Goods people should only be promoted into `wiki/people/` when they become necessary to explain the project across more than one source. The broader live participant/storyteller layer belongs in [[empathy-ledger|Empathy Ledger]].
 
 ## Manufacturing Model: Containerised On-Country
 
@@ -224,7 +248,7 @@ But the project spans all four phases:
 - **Listen** — Elders in Tennant Creek, Alice Springs, Palm Island shaped every design decision
 - **Curiosity** — IoT data and community feedback loops drive ongoing product iteration
 - **Action** — manufacturing, deploying, maintaining the fleet
-- **Art** — Elder Dianne Stokes naming the washing machine in Warumungu language; community storytellers defining the narrative
+- **Art** — Elder [[dianne-stokes|Dianne Stokes]] naming the washing machine in Warumungu language; community storytellers defining the narrative
 
 It is also ACT's most direct test case for the [[designing-for-obsolescence|Designing for Obsolescence]] methodology — the long-term goal is community-owned and operated manufacturing, with ACT's role progressively diminishing.
 
@@ -237,6 +261,23 @@ Goods on Country rejects the model of designing products in offices and shipping
 3. **Culturally grounded** — naming, design aesthetics, and protocols shaped by community knowledge holders
 4. **Community controlled** — the arc bends toward community ownership of facilities, data, and relationships
 5. **Circular by default** — local waste becomes local goods; nothing leaves the loop unnecessarily
+
+## System Position
+
+Goods on Country is one of ACT's flagship public fields, but its truth is distributed across layers:
+
+- the wiki holds the durable product logic, partnership model, capital stack, and handover arc
+- [[empathy-ledger|Empathy Ledger]] should hold the live community voice, photos, video, and consented deployment stories
+- the Goods Asset Register, [[grantscope|GrantScope]] Goods Workspace, and related project codebases hold the operational implementation truth
+- the public websites should compose those layers without becoming a second place where product or partnership truth gets rewritten by hand
+
+That is why Goods on Country needs to stay linked to [[living-website-operating-system|Living Website Operating System]], [[designing-for-obsolescence|Designing for Obsolescence]], and the partner ecology around [[oonchiumpa|Oonchiumpa]] and [[picc|PICC]].
+
+## Key Source Bridges
+
+- [Source Summary — Goods on Country](../sources/2026-04-07-cc-goods-index.md)
+- [Source Summary — Community Innovation: Beds, Washing Machines, and Orange Sky](../sources/2026-04-07-cc-stories-community-innovation-goods.md)
+- [Source Summary — The Cure Already Exists](../sources/2026-03-12-article-the-cure-already-exists.md)
 
 ## Infrastructure & Operations
 
@@ -286,8 +327,10 @@ Severity levels: Low → Medium → High → Critical.
 
 - [[index|ACT Wikipedia]]
 - [[lcaa-method|LCAA Method]] — Action phase anchor project
+- [[place-land-practice|Place & Land Practice]] — manufacturing framed by Country, material stewardship, and local maintenance capacity
 - [[civicgraph|CivicGraph]] — procurement intelligence via Goods Workspace
 - [[empathy-ledger|Empathy Ledger]] — community narrative and accountability layer
 - [[picc|PICC]] — Palm Island Community Company, key deployment partner
 - [[designing-for-obsolescence|Designing for Obsolescence]] — organisational model being tested through community handover
 - [[third-reality|The Third Reality]] — Goods as circular economy evidence layer
+- [[youth-justice-reform|Youth Justice Reform]] — housing, beds, and durable household infrastructure as upstream justice intervention, not separate from reform

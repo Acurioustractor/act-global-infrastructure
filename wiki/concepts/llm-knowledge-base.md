@@ -68,6 +68,16 @@ Farza's implementation uses diary entries, Apple Notes, and iMessage conversatio
 
 Key difference from ACT: personal vs. organizational. ACT's wiki is multi-stakeholder, multi-project, and has compliance/financial dimensions.
 
+## Why It Matters To ACT's Public System
+
+For ACT this pattern is not about a personal "brain clone." It is the memory discipline underneath the public ecosystem:
+
+- the raw capture layer holds clipped articles, exports, transcripts, and operational snapshots
+- the wiki compiles those into durable project, concept, story, and decision pages
+- [[living-website-operating-system|Living Website Operating System]] then lets the websites compose that memory with live EL media and stories
+
+That means the wiki is not separate from the website system. It is the thing that stops the sites from becoming fragmented second CMSs.
+
 ## Tools & Extensions
 
 - **Obsidian** — frontend for viewing wiki, raw data, visualizations
@@ -82,3 +92,6 @@ Key difference from ACT: personal vs. organizational. ACT's wiki is multi-stakeh
 - [[third-reality|The Third Reality]] — the methodology this architecture enables
 - [[local-ai-architecture|Local AI Architecture]] — technical implementation
 - [[picc|Palm Island Community Company]] — sovereign knowledge base build
+- [[continuous-pipeline|Continuous Pipeline Architecture]] — ACT's concrete operating decision for keeping this pattern alive over time
+- [[living-website-operating-system|Living Website Operating System]] — how ACT turns this knowledge-base pattern into a public publishing system
+- [[act-knowledge-ops-loop|ACT Knowledge Ops Loop]] — the repeatable ACT workflow for capture, compile, lint, sync, publish, and learn

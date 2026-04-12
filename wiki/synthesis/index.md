@@ -28,4 +28,6 @@ This folder is the **second-brain compounding loop**. Per the [Karpathy LLM know
 
 - [[the-edge-is-where-the-healing-is-justicehub-as-the-world-model-for-community-led|The Edge Is Where the Healing Is — JusticeHub as the world model for community-led justice]] — 2026-04-07
 
+- [[the-kettle|The Kettle]] — flagship reflection for STAY: the room at Oonchiumpa, Diagrama, and the four-layer infrastructure that makes the kettle legible — 2026-04-09
+
 _(This index is auto-maintained. New synthesis articles will appear here as they are created.)_

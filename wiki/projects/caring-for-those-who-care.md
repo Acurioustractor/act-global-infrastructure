@@ -1,3 +1,8 @@
+---
+title: Caring for Those Who Care
+code: ACT-CA
+---
+
 # Caring for Those Who Care
 
 > A sector sustainability initiative identifying and filling the wellbeing gaps for NFP leaders and workers — research-led, storytelling-powered, and grounded in the conviction that sustaining the carers is inseparable from sustaining the communities they serve.
@@ -23,7 +28,7 @@ The Bond University partnership brings academic rigour and credibility to findin
 
 Beyond the formal research, Caring for Those Who Care uses storytelling to communicate findings in ways that build empathy and shift the conditions for change. Stories from NFP leaders — told with care and appropriate consent — make visible the human cost of sector underinvestment in worker wellbeing.
 
-This connects the project to ACT's broader storytelling infrastructure, particularly [[empathy-ledger|Empathy Ledger]].
+This connects the project to ACT's broader storytelling infrastructure, particularly the sovereign-story and consent practices carried through the wider ecosystem.
 
 ## Relationship to Junes Patch
 
@@ -36,7 +41,6 @@ This connects the project to ACT's broader storytelling infrastructure, particul
 ## Backlinks
 
 - [[index|ACT Wikipedia]]
-- [[lcaa-method|LCAA Method]]
-- [[empathy-ledger|Empathy Ledger]]
 - [[junes-patch|June's Patch]]
+- [[feel-good-project|Feel Good Project]] — companion care logic: one page for the carers, one for the people receiving care
 - [[tomnet|TOMNET]]

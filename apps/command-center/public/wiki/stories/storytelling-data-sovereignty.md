@@ -1,28 +1,16 @@
 ---
 title: "Storytelling, Data Sovereignty, and Community Recovery"
-slug: storytelling-data-sovereignty
-empathy_ledger_id: "72415e12-3041-473c-a96e-a3bff2e5080b"
-project_slugs:
-  - picc-storm-stories
-  - empathy-ledger
-consent_scope: "EXTERNAL-LITE"
-cultural_sensitivity: medium
-lcaa_stage: art
-place: "Palm Island community"
-voice_owner: "Community storytellers and Elders group"
-media_needs:
-  - group photo (consent)
-  - audio snippet (consent)
-  - consent flow diagram
-status: approved
-last_updated: 2026-02-04
+status: External-Lite
+projects: picc-storm-stories, empathy-ledger
 ---
+
+> Generated legacy mirror for command-center.
+> Source of truth: `wiki/stories/storytelling-data-sovereignty.md`.
+> Regenerated: `2026-04-11T02:58:52.891Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # Storytelling, Data Sovereignty, and Community Recovery
 
 > Storytelling and data sovereignty anchor recovery work, with Elders guiding what is shared and why.
-
----
 
 ## Context
 
@@ -30,17 +18,13 @@ last_updated: 2026-02-04
 **Voice Owner:** Community storytellers and Elders group (consented)
 **Consent Status:** EXTERNAL-LITE — Elders review required for external use
 
----
-
-## Story Summary
+## Story
 
 In the aftermath of devastating storms, Palm Island community faced not just physical recovery but the challenge of telling their own story. Previous disaster responses had seen external media and researchers arrive, extract stories, and leave — sometimes misrepresenting the community or exposing sensitive information.
 
 Through Empathy Ledger, the community established a different model. Elders guide what is shared and why. Storytellers maintain control over their narratives. Data sovereignty means the community owns their recovery story.
 
 The result: recovery documentation that serves the community first, respects cultural protocols, and provides evidence for future planning — on the community's terms.
-
----
 
 ## ALMA Signals
 
@@ -53,30 +37,14 @@ The result: recovery documentation that serves the community first, respects cul
 | **Option Value** | High | Model for future recovery |
 | **Community Value Return** | High | Community owns the narrative |
 
----
+## Connections
 
-## LCAA Shift
-
-**From:** Listen (gathering storm impact stories)
-**To:** Art (story becomes shared recovery practice)
-**What changed:** Storytelling became infrastructure for community-led recovery, not external extraction
-
----
-
-## Media Needs
-
-- [ ] Group photo (consent required from participants)
-- [ ] Audio snippet of storytelling (consent required)
-- [ ] Consent flow diagram (can create)
-
----
-
-## Related
-
-- **Projects:** [Empathy Ledger](/wiki/empathy-ledger)
-- **Other Vignettes:** [Elders Speak](/wiki/stories/elders-speak-consulted)
-- **Framework:** [OCAP Principles](/wiki/act/appendices/glossary#ocap-principles)
-
----
+**LCAA Shift:** Listen (gathering storm impact stories) → Art (story becomes shared recovery practice). Storytelling became infrastructure for community-led recovery, not external extraction.
 
 *Consent reviewed: 2025-12 | Next review: 2026-06*
+
+## Backlinks
+
+- [[empathy-ledger|Empathy Ledger]] — the platform enabling this sovereignty
+- [[elders-speak-consulted|Elders Speak: We Should Have Been Consulted]] — the consultation gap this work addresses
+- [[building-empathy-ledger|Building Empathy Ledger]] — how consent infrastructure was built

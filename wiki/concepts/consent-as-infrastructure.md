@@ -154,5 +154,7 @@ The consent model in Empathy Ledger is described by its own authors as still inc
 
 - [[empathy-ledger|Empathy Ledger]] — the platform where this model was built and tested
 - [[indigenous-data-sovereignty|Indigenous Data Sovereignty]] — broader governance framework
+- [[governance-consent|Governance & Consent (Operational)]] — day-to-day operating practices that apply the architecture in real work
 - [[ocap-principles|OCAP Principles]] — Ownership, Control, Access, Possession
 - [[third-reality|The Third Reality]] — the methodology consent infrastructure enables
+- [[transcript-analysis-method|Transcript Analysis Method]] — the transcript pipeline that checks these consent boundaries before analysis and publication

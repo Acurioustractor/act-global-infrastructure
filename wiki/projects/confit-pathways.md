@@ -2,7 +2,7 @@
 
 > A fitness and boxing-based youth transformation program using mentors with lived incarceration experience to build pathways out of the justice system.
 
-**Status:** Active | **Code:** ACT-CP | **Tier:** Satellite
+**Status:** Active | **Code:** ACT-CT | **Tier:** Satellite
 
 ## Overview
 

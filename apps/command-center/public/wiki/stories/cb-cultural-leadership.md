@@ -1,26 +1,16 @@
 ---
 title: "CB: Understanding Cultural Responsibility and Leadership"
-slug: cb-cultural-leadership
-empathy_ledger_id: "c8f08707-c7da-4d04-80d1-8d0b8a0109a6"
-project_slugs:
-  - oonchiumpa
-consent_scope: "EXTERNAL-LITE"
-cultural_sensitivity: medium
-lcaa_stage: art
-place: "Central Australia"
-voice_owner: "Young person with cultural mentors (identity protected)"
-media_needs:
-  - consent-safe portrait
-  - mentorship moment image
-status: approved
-last_updated: 2026-02-04
+status: External-Lite
+projects: oonchiumpa
 ---
+
+> Generated legacy mirror for command-center.
+> Source of truth: `wiki/stories/cb-cultural-leadership.md`.
+> Regenerated: `2026-04-11T02:58:52.891Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # CB: Understanding Cultural Responsibility and Leadership
 
 > A young man embraces cultural responsibility and leadership, showing remorse and growth.
-
----
 
 ## Context
 
@@ -28,9 +18,7 @@ last_updated: 2026-02-04
 **Voice Owner:** Young person with cultural mentors (identity protected)
 **Consent Status:** EXTERNAL-LITE — identity protected
 
----
-
-## Story Summary
+## Story
 
 CB's journey through Oonchiumpa's program demonstrates something often missing in mainstream justice responses: the development of genuine cultural responsibility.
 
@@ -44,8 +32,6 @@ The remorse isn't performed compliance. It emerges from understanding — when y
 
 CB is now seen as a young leader, someone who might guide others through similar journeys.
 
----
-
 ## ALMA Signals
 
 | Signal | Level | Notes |
@@ -57,27 +43,14 @@ CB is now seen as a young leader, someone who might guide others through similar
 | **Option Value** | High | Shows transformation pathway |
 | **Community Value Return** | High | Future leader developing |
 
----
+## Connections
 
-## LCAA Shift
-
-**From:** Listen (understanding young person's situation)
-**To:** Art (identity becomes leadership)
-**What changed:** Young person at risk became emerging community leader
-
----
-
-## Media Needs
-
-- [ ] Consent-safe portrait (no identifiable features)
-- [ ] Mentorship moment image (consent required)
-
----
-
-## Related
-
-- **Other Vignettes:** [A: Guarded to Self-Advocate](/wiki/stories/a-guarded-to-self-advocate)
-
----
+**LCAA Shift:** Listen (understanding young person's situation) → Art (identity becomes leadership). Young person at risk became emerging community leader.
 
 *Consent reviewed: 2025-12 | Next review: 2026-06*
+
+## Backlinks
+
+- [[empathy-ledger|Empathy Ledger]] — storytelling platform
+- [[oonchiumpa|Oonchiumpa]] — youth support program
+- [[a-guarded-to-self-advocate|A: From Guarded to Self-Advocate]] — related story

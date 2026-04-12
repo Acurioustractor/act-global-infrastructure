@@ -14,6 +14,12 @@ Of the 58 decisions stored in Supabase, most are routine student-team meeting ch
 
 ## 2026
 
+### Founder Lanes + Top Two Bets (2026-04-10, ACT-HQ)
+
+**Decision:** Benjamin focuses on product, infrastructure, positioning, and paid pilots. Nicholas focuses on relationships, field practice, art, and place-based pull. ACT narrows its drive lane to two flagship bets: [[empathy-ledger|Empathy Ledger]] and [[justicehub|JusticeHub]] + [[civicgraph|CivicGraph]] treated as one stack. [[contained|CONTAINED]] remains the campaign front door, not a separate third flagship.
+
+**Why it matters:** This is the first explicit founder-level portfolio cut made against ACT's own PTO discipline. It addresses three recurring problems at once: too many active projects, Benjamin as technical bottleneck, and a drift toward bespoke support work that does not compound. The full rationale and proof lines live in [[2026-04-founder-lanes-and-top-two-bets|the dated decision note]].
+
 ### PRF Power Analysis: 61/22/17 Split (2026-03-26, ACT-HQ)
 
 Of ~$90M in traceable Paul Ramsay Foundation grants:
