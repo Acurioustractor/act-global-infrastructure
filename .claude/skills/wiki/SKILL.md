@@ -40,9 +40,33 @@ Parse the user's intent and route to the appropriate operation:
 | `/wiki status` | Status | "how big is the wiki?" |
 | `/wiki enrich <slug>` | Enrich | "flesh out the goods-on-country article" |
 | `/wiki log [n]` | Recent activity | "what's been happening in the wiki?" |
+| `/wiki narrative status [project]` | Narrative — frame distribution + gaps | "what claims have we made about CONTAINED?" |
+| `/wiki narrative draft <project> [--frame ... --channel ...]` | Narrative — assemble draft brief | "draft a moral-frame LinkedIn post for CONTAINED" |
+| `/wiki narrative oped <project>` | Narrative — long-form draft brief | "write an op-ed for CONTAINED" |
+| `/wiki narrative log <claim> <channel>` | Narrative — record a deployment | "log that we shipped claim-cost-comparison on LinkedIn today" |
+| `/wiki narrative refresh [project]` | Narrative — regenerate INDEX | "refresh the narrative index" |
+| `/wiki narrative ingest <path>` | Narrative — extract from a file/folder | "ingest the goods-on-country folder into the narrative store" |
+| `/wiki narrative watch [--schedule daily\|weekly]` | Narrative — run all configured sources | "watch the narrative sources" |
+| `/wiki narrative process <digest>` | Narrative — apply an ingest digest | "process today's digest" |
+| `/wiki narrative funder <slug>` | Narrative — assemble funder pitch brief | "draft a Minderoo pitch" |
+| `/wiki narrative cycle <phase>` | Narrative — filter draft by campaign cycle | "draft for budget-week" |
+| `/wiki narrative review [project]` | Narrative — weekly strategy review | "what's the campaign retro saying" |
 | `/wiki` (no args) | Status | Show current wiki stats |
 
 After **every** ingest, lint, synthesis, viewer-build or url-audit operation, append a one-line entry to `wiki/log.md` via `node scripts/wiki-log.mjs <op> "<summary>" [files...]`. The log is the second-brain timeline — without it the system can't answer "what changed and when?".
+
+### Auto-rebuild pipeline
+
+When wiki content is pushed to `main`, the `wiki-rebuild.yml` GitHub Action automatically:
+1. Lints the wiki
+2. Rebuilds the Tractorpedia HTML viewer (`tools/act-wikipedia.html`)
+3. Syncs the command-center snapshot (`apps/command-center/public/wiki/`)
+4. Copies the viewer to `apps/command-center/public/tractorpedia.html`
+5. Dispatches to `act-regenerative-studio` to sync its wiki JSON snapshots
+
+**You do NOT need to manually run `wiki-build-viewer.mjs` after every edit** — just commit and push. The pipeline handles the rest. Run it manually only if you want to preview locally before pushing.
+
+See also: `wiki/AGENTS.md` for agent-agnostic wiki conventions.
 
 ---
 
@@ -279,3 +303,218 @@ When adding information from specific sources, note it inline: `(Source: raw/202
 
 ### Cultural Sensitivity
 Articles about communities, Indigenous knowledge, or cultural practices should note where Elder/community review is needed. Never present cultural information as definitive without community validation.
+
+---
+
+## Operation: Narrative
+
+The narrative store is a Rowboat-style typed-entity layer that lives at `wiki/narrative/<project>/`. Each file is a **claim** — one public argument the project has made — with frontmatter (frame, channels, deployment count, audiences, sources) and a body that lists variants used, audience reactions, and an explicit `## What we haven't said yet` section.
+
+**Read first:** `wiki/narrative/README.md` — the schema, frame taxonomy, and lint rules.
+
+The narrative layer answers a different question than the rest of the wiki. The wiki tells you what something **is**. The narrative store tells you what we have already **said about it** — so the next post builds on the last one instead of repeating it.
+
+### Subcommands
+
+#### `/wiki narrative status [project]`
+
+Read the project's `INDEX.md` and report:
+- Frame distribution (which frames are overused, which are starved)
+- Top 7 under-deployed claims (highest leverage)
+- Recently-deployed claims (what's hot)
+- Stat conflicts blocking publication
+
+If no project is given, list all projects with claim counts.
+
+#### `/wiki narrative draft <project>`
+
+Run `node scripts/narrative-draft.mjs <project> [--frame ...] [--channel ...] [--length ...] [--news-hook "..."]`.
+
+The script reads the claim files, picks the right ones for the requested frame and channel, and writes a **brief** to `wiki/output/narrative-drafts/<date>-<slug>.md`. The brief is not the final post — it shows you (or the LLM writing the next post) which claims to build on, what we have already said (so we don't repeat), and what the gaps are (so we build something new).
+
+Default behaviour:
+- If no `--frame` is given, picks the most starved frame automatically
+- Default `--length` is `medium` (3 claims)
+- Default `--channel` is `oped`
+- Selection mode is "gap" (least-deployed first); pass `--recent` to build on momentum instead
+
+After drafting the actual post against the brief, **always** call `/wiki narrative log` to record the deployment.
+
+#### `/wiki narrative oped <project>`
+
+Equivalent to `/wiki narrative draft <project> --channel oped --length long`. Pulls 5 claims, prefers under-deployed across multiple frames, and structures the brief for a long-form piece.
+
+#### `/wiki narrative log <claim-id> <channel>`
+
+Run `node scripts/narrative-log-deployment.mjs <claim> <channel> [--source ...] [--variant "..."] [--audience ...] [--date ...]`.
+
+Updates the claim file's frontmatter:
+- `times_deployed` += 1
+- `last_used` = today (or `--date`)
+- `channels` += channel if new
+- `status` flips back to `live` if it was `needs-refresh`
+- New entry in `sources:` with the URL/path
+- Optional new row in the `## Variants used` table
+
+Then auto-runs `narrative-refresh` for the project so `INDEX.md` re-sorts.
+
+**Always log every public deployment.** This is what keeps the system live.
+
+#### `/wiki narrative refresh [project]`
+
+Run `node scripts/narrative-refresh.mjs [project]`.
+
+Reads every claim file and regenerates `INDEX.md`:
+- Most-recently-used claims at the top
+- Frame distribution recomputed from frontmatter
+- Top under-deployed claims surfaced
+- Claims untouched > 90 days flipped to `status: needs-refresh`
+
+Run after every deployment (the log command does this automatically) or on a weekly cron.
+
+### Drafting an op-ed — the canonical workflow
+
+1. `/wiki narrative status contained` — see the gap landscape
+2. Pick a frame the campaign has not been leading with (usually `moral`, `confrontational`, or `testimonial` for CONTAINED right now)
+3. `/wiki narrative draft contained --frame moral --channel oped --news-hook "..."` — generates a brief
+4. Read the brief — confirm the picked claims are the right ones; if not, re-run with `--claim` to target a specific one
+5. Write the op-ed against the **What we haven't said yet** sections, not from memory
+6. **Verify every stat against `STAT-CONFLICTS.md` before publishing.** A hostile journalist will check the math.
+7. After publishing: `/wiki narrative log <each-claim-id> <channel> --source <url> --variant "<the actual line>"` for each claim used
+8. The system now knows the claim has been used, the next draft will skip it, and the index updates automatically
+
+### Rules for narrative ops
+
+- **Never edit `INDEX.md` by hand.** It's auto-regenerated by `narrative-refresh.mjs` from the claim file frontmatter. Edit individual claim files instead.
+- **Never invent stats.** Every number must trace to a `sources:` entry in a claim file. If it isn't sourced there, it doesn't go in a draft.
+- **Always log deployments.** A claim that was used but not logged looks "starved" to the next draft and gets recommended again — producing the exact "we've said this so many times" loop the system exists to prevent.
+- **The brief is not the post.** The brief tells you which claims to build on. You (or the model) still write the post. Then you log it.
+- **Cross-project pollination.** A claim in one project (e.g. `claim-built-by-hand` for CONTAINED) can be referenced via `related_claims` in another project's claim file. The narrative store is a graph, not a folder.
+
+### Ingestion — how the system learns from new content
+
+The narrative store does not depend on humans hand-extracting every claim. It has a one-command ingestion pipeline that reads new content from any source — local files, JSON exports, scraped pages, database queries — and produces a structured **digest** that proposes which claims to update or create.
+
+#### `/wiki narrative ingest <path>`
+
+Run `node scripts/narrative-ingest.mjs <path> --project <slug> --source-type <type>`.
+
+The script walks the path (file or folder), extracts:
+- **Stats** — every dollar figure, percentage, and unit count via regex
+- **Named quotes** — `"..." — Name` patterns
+- **Argument paragraphs** — paragraphs containing trigger phrases (`The argument is`, `The decision rule`, `The point is`, etc.)
+- **Headings** — section structure for context
+- **Likely matches** — keyword overlap against every existing claim file
+
+It writes a digest to `wiki/output/narrative-ingest/<date>-<source>.md` that lists each finding with a suggested action: *log as a variant of claim-X*, *file as new claim*, *log as audience reaction*, or *file in `wiki/decisions/` instead because this is operational not narrative*.
+
+The script does **not** call an LLM API. It's heuristic. The point is to give Claude (you) a structured handoff so that processing the digest is one command, not a multi-hour read.
+
+#### `/wiki narrative process <digest>`
+
+Open the digest, walk through each finding, and apply the suggested actions:
+1. For "log as variant" findings → `node scripts/narrative-log-deployment.mjs <claim-id> <channel> --source <path> --variant "<line>"`
+2. For "new claim" findings → write a new `claim-*.md` file using the template
+3. For "audience reaction" findings → edit the matched claim file's `## Audience reactions logged` section directly
+4. For "file in decisions" findings → write to `wiki/decisions/` instead, do not pollute the narrative store
+
+After processing, run `narrative-refresh` (or wait — the log command auto-refreshes).
+
+#### `/wiki narrative watch [--schedule daily|weekly]`
+
+Run `node scripts/narrative-watch.mjs [--schedule <s>] [--source <id>]`.
+
+Reads `wiki/narrative/sources.json` — a config of every source the system watches — and ingests anything new since the last run. Tracks last-seen via `wiki/narrative/.seen.json`. Drop into a cron / launchd loop and the inbox fills automatically with digests for review.
+
+### Sources — what the system can learn from
+
+`wiki/narrative/sources.json` lists every connected source. Edit that file to add new ones. Currently configured:
+
+| Source | Type | Project | Wired |
+|---|---|---|---|
+| `act-wiki-raw-essays` | folder (`wiki/raw/`) | contained | ✅ |
+| `justicehub-compendium` | folder (JusticeHub) | contained | ✅ |
+| `justicehub-output-emails` | folder | contained | ✅ |
+| `justicehub-linkedin-engagement` | folder (JSON) | contained | ✅ (basic) |
+| `justicehub-output-goods` | folder | goods-on-country | ✅ |
+| `contained-site-content` | folder (Astro src) | contained | ✅ |
+| `supabase-articles` | Supabase MCP query | auto | ⏳ adapter needed |
+| `empathy-ledger-stories` | EL v2 Supabase | auto | ⏳ adapter needed |
+| `ghl-contact-responses` | GHL API | auto | ⏳ adapter needed |
+| `act-place-website` | URL scrape | auto | ⏳ adapter needed |
+
+To wire a new source:
+
+1. Add it to `sources.json` with `wired: true` if it's a local folder, or `wired: false` if it needs an adapter
+2. For local folders, no code needed — `narrative-watch.mjs` picks it up automatically
+3. For Supabase / GHL / EL APIs, add an adapter case in `narrative-watch.mjs` that fetches the data, writes it to a temp `.md` file, then calls `narrative-ingest.mjs` on that file
+4. For URL scrapes, use `firecrawl_scrape` (MCP) and pipe the result through ingest
+
+### Cross-project linking
+
+Claim files can reference claims in other projects via `related_claims: [project:claim-id, ...]`. Example: `goods-on-country/claim-bed-to-courtroom.md` references `contained:claim-goods-on-country-bed-pipeline`. The same argument can live in multiple projects with different framings, and the relationship is explicit.
+
+This is how the strategy compounds across the ecosystem — a Goods on Country pitch can pull a CONTAINED claim, a CONTAINED essay can pull a Goods claim, and the deployment-logging flows in both directions.
+
+### Funder targeting (`--funder <slug>`)
+
+`wiki/narrative/funders.json` lists every active funder with their thesis tags, stage, deadline, primary contact, and the specific claims that should lead any pitch to them. The draft script reads this file when invoked with `--funder`:
+
+```bash
+node scripts/narrative-draft.mjs contained \
+  --funder qbe-catalysing-impact \
+  --channel pitch --length long
+```
+
+The script:
+1. Loads claims from **all** projects (so cross-project picks work — a QBE pitch can pull both `contained:` and `goods-on-country:` claims)
+2. Pulls exactly the claims listed in `funders[slug].claims_to_lead_with`
+3. Refuses to include any claim in `claims_to_avoid`
+4. Includes the funder's framing notes, tone, and deadline at the top of the brief
+5. Logs the pitch via the same deployment workflow
+
+When you add a new funder to the pipeline, add them to `funders.json`. When a funder's thesis shifts, update their `claims_to_lead_with`. The system does not infer the right pitch — you tell it once, then it applies the same logic forever.
+
+### Campaign cycle filtering (`--cycle <phase>`)
+
+Claim files can carry a `cycle:` array in frontmatter — `pre-launch`, `launch`, `tour-stop`, `budget-week`, `funder-pitch`, `term-sheet`, `election-cycle`, `always`, etc. The draft script filters by cycle:
+
+```bash
+node scripts/narrative-draft.mjs contained --cycle budget-week --frame confrontational
+```
+
+Pick the cycle when the campaign moment changes — launch week, budget week, parliament sitting, election, term sheet pending. Claims that don't carry the matching cycle tag are excluded from the pool, so the brief only shows what's appropriate for the moment.
+
+### Weekly strategy review (`/wiki narrative review`)
+
+Run `node scripts/narrative-strategy-review.mjs [project]` weekly. It writes `wiki/narrative/<project>/STRATEGY-REVIEW.md` containing:
+
+- **Frame budget** — actual vs recommended distribution, with `over` / `starved` flags. The "what frame should I lead with this week" answer in one table.
+- **Audience coverage** — under-served audiences flagged
+- **Channel freshness** — when each channel was last touched, color-coded by recency
+- **Cold claims** — anything untouched 30+ days, ranked
+- **Funder pipeline** — funders with open asks whose lead-with claims have gone cold (14+ days). Names the specific funder and the specific claim.
+- **Cycle coverage** — how many claims tagged for each cycle phase
+- **This week's recommended actions** — 3-4 concrete commands to run
+
+The strategy review file IS the campaign retro. No meeting required — open the file Monday morning, run the recommended commands, ship the post.
+
+### Wired sources
+
+Every adapter is built and wired in `narrative-watch.mjs`:
+
+- **Local folders** — JusticeHub compendium, output, contained-site content, wiki/raw, Goods folder
+- **`scripts/narrative-adapters/supabase-articles.mjs`** — pulls published articles from the shared Supabase, routes by tag/category to the right project, ingests
+- **`scripts/narrative-adapters/el-stories.mjs`** — pulls Empathy Ledger v2 stories with **default-deny consent enforcement** (`internal-only` is refused at the adapter layer; `with-care` is tagged in the digest so downstream draft scripts respect the constraint)
+- **`scripts/narrative-adapters/ghl-responses.mjs`** — pulls contact notes for `contained-*` and `goods-*` tagged contacts via the existing `GHLService`
+- **`scripts/narrative-adapters/url-scrape.mjs`** — fetches a URL, converts to text, diffs against last snapshot at `wiki/narrative/.url-snapshots/`, only ingests if changed. Falls back to plain `fetch` + HTML→text; uses Firecrawl if `USE_FIRECRAWL=1` and `FIRECRAWL_API_KEY` are set.
+
+Run all of them at once:
+
+```bash
+node scripts/narrative-watch.mjs                  # daily + weekly sources
+node scripts/narrative-watch.mjs --schedule daily
+node scripts/narrative-watch.mjs --source supabase-articles  # single source
+```
+
+`narrative-watch.mjs` dispatches by `source.type` to the right adapter, deduplicates against `wiki/narrative/.seen.json`, and leaves digests in the inbox for `/wiki narrative process`.
