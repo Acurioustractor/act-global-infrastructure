@@ -18,6 +18,9 @@ Helper: `node scripts/wiki-log.mjs <op> "<summary>" [files...]`
 
 ## 2026
 
+- 2026-04-13 09:23 | manual | The Aesthetics of Asymmetry — campaign hub + ep01 wiki + narrative claim + app scaffold | wiki/art/aesthetics-of-asymmetry/, wiki/narrative/civicgraph/
+- 2026-04-13 09:23 | viewer-build | 212 articles · 63 photo maps · 1519KB | tools/act-wikipedia.html
+- 2026-04-13 09:23 | snapshot-sync | 23 direct mirrors · 36 stories · 4 wrappers | apps/command-center/public/wiki/README.md, apps/command-center/public/wiki/snapshot-meta.json
 - 2026-04-13 08:10 | viewer-build | 210 articles · 63 photo maps · 1509KB | tools/act-wikipedia.html
 - 2026-04-13 08:10 | snapshot-sync | 23 direct mirrors · 36 stories · 4 wrappers | apps/command-center/public/wiki/README.md, apps/command-center/public/wiki/snapshot-meta.json
 - 2026-04-13 08:09 | synthesis | "How does Empathy Ledger v2 integrate with CivicGraph and JusticeHub to add the human layer to the ar" → 6 citations | wiki/synthesis/how-does-empathy-ledger-v2-integrate-with-civicgraph-and-justicehub-to-add-the-h.md

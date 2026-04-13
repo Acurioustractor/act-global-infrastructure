@@ -256,3 +256,4 @@ The "Updated daily" trust signal is underused in internal comms and should appea
 - [[five-year-cashflow-model|Five-Year Cashflow Model]] — CivicGraph revenue assumptions in the five-year projection
 - [[rdti-claim-strategy|R&D Tax Incentive Claim Strategy]] — CivicGraph development as eligible R&D activity
 - [[grantscope|GrantScope (CivicGraph)]] — the technical implementation and codebase behind CivicGraph's data platform
+- [[aesthetics-of-asymmetry|The Aesthetics of Asymmetry]] — 6-month data art campaign built on CivicGraph's public API; marketing, R&D evidence, and commercial-arm demand generator in one

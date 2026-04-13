@@ -6,7 +6,7 @@ projects: uncle-allan-palm-island-art, empathy-ledger
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/stories/uncle-alan-palm-island.md`.
-> Regenerated: `2026-04-13T22:40:00.900Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerated: `2026-04-13T23:53:26.796Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # Uncle Alan Palm Island — Key Story
 

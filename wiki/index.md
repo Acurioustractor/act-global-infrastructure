@@ -155,6 +155,8 @@ The fourth letter of [[lcaa-method|LCAA]] — physical, sensory work that makes 
 - [[the-vagina|The Vagina]] — coming soon
 - [[the-caravan|The Caravan]] — mobile leadership infrastructure (born at Community Capital)
 - [[art/y1-release-program|Y1 Art Release Program]] — eight art projects across 2026/27, Daft Punk release cadence
+- [[art/aesthetics-of-asymmetry/aesthetics-of-asymmetry|The Aesthetics of Asymmetry]] — 6-month data art campaign (CivicGraph + JusticeHub + Empathy Ledger), Month 1 live
+- [[art/aesthetics-of-asymmetry/episode-01-keyhole|Episode 01 — The Keyhole]] — what the applicant sees vs what the funder sees
 
 ## Stories
 
@@ -226,6 +228,7 @@ A Rowboat-style typed-entity store of every public argument the ecosystem has ma
 - **JusticeHub** — [`wiki/narrative/justicehub/INDEX.md`](narrative/justicehub/INDEX.md) — 12 claims spanning the platform + STAY program + Three Circles pitch + Staying methodology + The Brave Ones photographic series. **Constellation:** [[the-full-idea|The Full Idea]] · [[three-circles|Three Circles]] · [[staying|Staying]] · [[the-brave-ones|The Brave Ones]] · [[justicehub|JusticeHub platform]].
 - **Empathy Ledger / World Tour** — [`wiki/narrative/empathy-ledger/INDEX.md`](narrative/empathy-ledger/INDEX.md) — 12 claims, the LISTEN→BUILD→MEASURE loop, story-as-OS, the corpus as procurement weapon, $1.75M-not-pre-revenue. **Source:** [strategy synthesis 2026-04-09](raw/2026-04-09-empathy-ledger-strategy-synthesis.md). **Open decisions:** [tour questions 2026-04-09](decisions/2026-04-09-empathy-ledger-tour-questions.md).
 - **Goods on Country** — [`wiki/narrative/goods-on-country/INDEX.md`](narrative/goods-on-country/INDEX.md) — 4 claims, cross-linked to CONTAINED + Empathy Ledger via `related_claims`
+- **CivicGraph / Aesthetics of Asymmetry** — [`wiki/narrative/civicgraph/INDEX.md`](narrative/civicgraph/INDEX.md) — 1 claim (information-asymmetry-is-the-system), drives the 6-month art campaign
 - *(future seeds: Black Cockatoo Valley, The Harvest)*
 
 **Sources connected** — see [`wiki/narrative/sources.json`](narrative/sources.json):

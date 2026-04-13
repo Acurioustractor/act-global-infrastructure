@@ -3272,6 +3272,93 @@ These source notes now hold the strongest current bridge between raw capture and
 - [[living-website-operating-system|Living Website Operating System]] — the public-shell rule for hub, spokes, wiki, and EL
 - [[llm-knowledge-base|LLM Knowledge Base]] — the durable memory pattern the Compendium is intentionally following`
   },
+  "aesthetics-of-asymmetry": {
+    slug: "aesthetics-of-asymmetry",
+    title: "The Aesthetics of Asymmetry",
+    domain: "art",
+    links: ["civicgraph","justicehub","empathy-ledger","episode-01-keyhole","what-is-the-living-organism-the-visual-system-for-the-aesthetics-of-asymmetry","visual-system","third-reality","civic-world-model","funding-transparency","how-does-empathy-ledger-v2-integrate-with-civicgraph-and-justicehub-to-add-the-h","how-does-act-grow-without-fanfare-through-word-of-mouth-incredible-experiences-a","wiki/index"],
+    content: `# The Aesthetics of Asymmetry
+
+> *An art project about what happens when public systems become visible. Six episodes, one living data organism. April–September 2026.*
+
+## What it is
+
+A six-episode public art campaign that turns ACT's three platforms ([[civicgraph|CivicGraph]], [[justicehub|JusticeHub]], [[empathy-ledger|Empathy Ledger]]) into a living data organism people can stand inside, argue with, and carry away as physical objects. Each episode sits in the lineage of institutional critique (Hans Haacke, Mark Lombardi, Forensic Architecture), digital-age visibility politics (Hito Steyerl, Hasan Elahi, Mimi Onuoha), and Indigenous data sovereignty (Maiam nayri Wingara, CARE principles).
+
+It is also quietly the marketing layer for a real commercial arm: CivicGraph subscriptions, JusticeHub evidence queries, and Empathy Ledger syndication all sit one click below the art. The campaign's thesis is that the art is the marketing — and the marketing is honest because the platforms already do what they claim.
+
+## The six episodes
+
+| # | Slug | Status | After | One-line |
+|---|---|---|---|---|
+| 01 | [[episode-01-keyhole|The Keyhole]] | LIVE · April 2026 | James C. Scott | What the applicant sees, what the funder sees, the distance between them |
+| 02 | Resolution | Building · May 2026 | Hito Steyerl | Clarity can be care. Clarity can be capture. The pixel decides. |
+| 03 | The Missing Folder | Scheduled · June 2026 | Mimi Onuoha | 873 postcodes where absence is the subject |
+| 04 | The Promise and the Purchase Order | Scheduled · July 2026 | — | Hansard vs the money trail |
+| 05 | The Alibi | Scheduled · August 2026 | Hasan Elahi | Total transparency as concealment |
+| 06 | CARE | Scheduled · September 2026 | Maiam nayri Wingara | Consent is the only honest transparency |
+
+## How it connects to the ecosystem
+
+- **[[civicgraph|CivicGraph]]** — the systemic data layer. Public records joined by ABN: 587K entities, 1.5M relationships, $74B in contracts, 301K political donations, 30K grants. The art pulls live from GrantScope's public \`/api/data/*\` endpoints.
+- **[[justicehub|JusticeHub]]** — the evidence layer. 1,775 community-led programs, 128 verified top-tier. The art links to JusticeHub's program search wherever a viewer wants to know "what works, where?"
+- **[[empathy-ledger|Empathy Ledger]]** — the narrative sovereignty layer. 226 consent-governed storytellers. The campaign registers a new \`syndication_site\` in EL v2 and pulls consented content (quotes, portraits, transcripts) via the public \`/api/syndication/justicehub/*\` pattern. Registration steps live in \`act-aesthetics-of-asymmetry/OPERATOR_NOTES.md\`.
+
+## Technical architecture
+
+A separate Next.js 15 app at \`aesthetics.act.place\` (currently developed at \`/Users/benknight/Code/act-aesthetics-of-asymmetry\`). Consumes GrantScope public APIs and a new EL v2 site-scoped API. Uses:
+
+- \`@cosmos.gl/graph\` — GPU force graph at 500K+ nodes
+- \`sigma\` + \`graphology\` — curated sub-views
+- \`deck.gl\` + \`mapbox-gl\` — funding deserts, flows by geography
+- \`p5\` + \`three\` — organic motion, GLSL aesthetics
+- \`scrollama\` + \`gsap\` — scrollytelling
+
+See [[what-is-the-living-organism-the-visual-system-for-the-aesthetics-of-asymmetry|the Living Organism synthesis]] for the full spec.
+
+## Brand system
+
+Austere / confrontational. Bauhaus reference points: font-black uppercase display, monospace data, 4px heavy borders. Palette locked to near-black \`#0A0A0A\`, bone cream \`#F5F5F0\`, urgent red \`#DC2626\`, deep navy \`#0A1628\`. Typography: Archivo Black (display), Inter (body), JetBrains Mono (data).
+
+This diverges deliberately from the [[visual-system|Red Centre]] paperback aesthetic that anchors ACT's other outputs. The campaign is asymmetric to the rest of the ecosystem in appearance — that is the point.
+
+A fresh Pencil (\`.pen\`) design file will be created to house the emblem (filing-cabinet-with-glowing-empty-folder — Onuoha homage), poster templates, and social assets.
+
+## Physical artifacts
+
+Every episode ships with a printable artifact. Plotter-compatible SVG exports via p5-svg → AxiDraw. Riso colour separation for posters. QR codes on the back link to parameterised URLs (\`/episode/keyhole?entity=<id>\`) so a physical postcard opens a specific live view.
+
+| Episode | Artifact |
+|---|---|
+| 01 Keyhole | A2 poster, keyhole die-cut, 2-colour Riso |
+| 02 Resolution | AxiDraw 6-panel gradient print |
+| 03 Missing Folder | Screen-printed manila-folder set |
+| 04 Promise / Purchase Order | A1 broadsheet foldout |
+| 05 Alibi | Personalised foldout poster |
+| 06 CARE | QR postcard to EL storyteller audio |
+
+## Narrative store
+
+Campaign claims live in [wiki/narrative/civicgraph/](../../narrative/civicgraph/INDEX.md). Each LinkedIn post, pitch, or press piece deploys a specific claim and is logged via \`narrative-log-deployment.mjs\`. Frames in rotation: structural, confrontational, evidentiary, testimonial, invitational, constructive, art.
+
+## Related
+
+- [[civicgraph|CivicGraph]]
+- [[justicehub|JusticeHub]]
+- [[empathy-ledger|Empathy Ledger]]
+- [[third-reality|The Third Reality]]
+- [[civic-world-model|Civic World Model]]
+- [[funding-transparency|Funding Transparency]]
+- [[what-is-the-living-organism-the-visual-system-for-the-aesthetics-of-asymmetry|The Living Organism — visual system synthesis]]
+- [[how-does-empathy-ledger-v2-integrate-with-civicgraph-and-justicehub-to-add-the-h|The Human Layer — EL integration synthesis]]
+- [[how-does-act-grow-without-fanfare-through-word-of-mouth-incredible-experiences-a|Growing Without Fanfare — campaign philosophy]]
+
+## Backlinks
+
+- [[wiki/index|Tractorpedia Index]]
+- [[civicgraph|CivicGraph]]
+- [CivicGraph Narrative Index](../../narrative/civicgraph/INDEX.md)`
+  },
   "ai-community-engagement": {
     slug: "ai-community-engagement",
     title: "AI and Community Engagement",
@@ -5282,7 +5369,7 @@ CivicGraph is not a data dashboard — it's a **replacement for the archaic, top
     slug: "civicgraph",
     title: "CivicGraph",
     domain: "projects",
-    links: ["third-reality","civic-world-model","funding-transparency","community-capital","goods-on-country","power-dynamics-philanthropy","empathy-ledger","lcaa-method","justicehub","ocap-principles","acco-sector-analysis","2026-04-founder-lanes-and-top-two-bets","five-year-cashflow-model","rdti-claim-strategy","grantscope"],
+    links: ["third-reality","civic-world-model","funding-transparency","community-capital","goods-on-country","power-dynamics-philanthropy","empathy-ledger","lcaa-method","justicehub","ocap-principles","acco-sector-analysis","2026-04-founder-lanes-and-top-two-bets","five-year-cashflow-model","rdti-claim-strategy","grantscope","aesthetics-of-asymmetry"],
     content: `# CivicGraph
 
 > 587,390 entities connected by 1,535,772 relationships across 254 tables and 29.5M records. Making government spending, influence, and outcomes visible.
@@ -5540,7 +5627,8 @@ The "Updated daily" trust signal is underused in internal comms and should appea
 - [[2026-04-founder-lanes-and-top-two-bets|Founder Lanes and Top Two Bets]] — the founder decision that treats CivicGraph and JusticeHub as one flagship stack
 - [[five-year-cashflow-model|Five-Year Cashflow Model]] — CivicGraph revenue assumptions in the five-year projection
 - [[rdti-claim-strategy|R&D Tax Incentive Claim Strategy]] — CivicGraph development as eligible R&D activity
-- [[grantscope|GrantScope (CivicGraph)]] — the technical implementation and codebase behind CivicGraph's data platform`
+- [[grantscope|GrantScope (CivicGraph)]] — the technical implementation and codebase behind CivicGraph's data platform
+- [[aesthetics-of-asymmetry|The Aesthetics of Asymmetry]] — 6-month data art campaign built on CivicGraph's public API; marketing, R&D evidence, and commercial-arm demand generator in one`
   },
   "civicgraph-uk-market-entry": {
     slug: "civicgraph-uk-market-entry",
@@ -7412,6 +7500,58 @@ The ACT-EL project code being attached to this operational synthesis reflects EL
 - [[goods-on-country|Goods on Country]] — EL provides the narrative layer for Goods storytelling
 - [[oonchiumpa|Oonchiumpa]] — EL methodology used for station storytelling
 - [[transcript-analysis-method|Transcript Analysis Method]] — the four-layer pipeline that emerged from this relational foundation`
+  },
+  "episode-01-keyhole": {
+    slug: "episode-01-keyhole",
+    title: "Episode 01 — The Keyhole",
+    domain: "art",
+    links: ["aesthetics-of-asymmetry","civicgraph"],
+    content: `# Episode 01 — The Keyhole
+
+> *What the applicant sees. What the funder sees. The distance between them.*
+
+**After** James C. Scott, *Seeing Like a State* (1998) — the observation that states simplify human complexity into administratively useful categories, making life legible to the centre and illegible to the periphery.
+
+## Thesis
+
+Information asymmetry isn't a side-effect of the grant system. It is the system. The funder sees the whole pool. The applicant sees a form.
+
+## The work
+
+A split-screen scrollytelling installation at \`aesthetics.act.place/episode/keyhole\`. The left half renders a grant application form, confined to a circular mask. The right half renders the full CivicGraph network — 6,000 public entities drawn by GPU force layout (Cosmos.gl). As the viewer scrolls, the keyhole on the left widens, the form recedes, and the galaxy of entities fills the screen. Clicking any node reveals the *human layer* — a storyteller's portrait and quote pulled from Empathy Ledger (with consent).
+
+## Data source
+
+- \`GET /api/graph/keyhole\` — proxies GrantScope's public \`/api/data/graph?mode=power&limit=6000\`
+- \`GET /api/human-layer/[entityId]\` — stubbed against 6 Oonchiumpa storytellers until EL v2 syndication site key is issued
+
+## Physical artifact
+
+An A2 poster with a literal keyhole die-cut. 2-colour Riso: bone cream + urgent red. QR code opens the live episode at \`aesthetics.act.place/episode/keyhole?from=print\`. Edition: 100.
+
+## Copy assets
+
+- Long-form LinkedIn post: [LinkedIn post v3 draft](../../output/narrative-drafts/2026-04-14-civicgraph-art-project-linkedin-v3.md) — rewrite pending voice review
+- Claim file: [Claim: information-asymmetry-is-the-system](../../narrative/civicgraph/claim-information-asymmetry-is-the-system.md)
+- Wall text (for gallery / print):
+
+> The funder sees the pool.
+>
+> The applicant sees the form.
+>
+> $107 billion a year moves between them, through 21 databases that were never introduced. This is what happens when we introduce them.
+
+## References
+
+- Hans Haacke, *Shapolsky et al. Manhattan Real Estate Holdings* (1971) — public records as institutional critique
+- Forensic Architecture (2010–) — counter-forensics methodology
+- James C. Scott, *Seeing Like a State* (1998) — legibility politics
+
+## Backlinks
+
+- [[aesthetics-of-asymmetry|The Aesthetics of Asymmetry]]
+- [Claim: information asymmetry is the system](../../narrative/civicgraph/claim-information-asymmetry-is-the-system.md)
+- [[civicgraph|CivicGraph]]`
   },
   "feel-good-project": {
     slug: "feel-good-project",
@@ -22365,7 +22505,7 @@ That is what Nigel's postcard does in a judge's hand. That is what the entire AC
     links: [],
     content: `# Wiki Health Report — 2026-04-07
 
-**Articles:** 210
+**Articles:** 212
 **Wikilinks:** 753
 
 ## Summary
@@ -24325,6 +24465,18 @@ function showArtPortfolio() {
       }
     });
   });
+  // Now async-load real photos for each card. fetchELMedia(slug) handles project_id + filename fallback.
+  artProjects.forEach(function(p) {
+    fetchELMedia(p.slug, 1).then(function(media) {
+      let el = document.getElementById('art-thumb-' + p.slug);
+      if (!el) return;
+      if (media && media.length > 0) {
+        el.innerHTML = '<img src="' + media[0].url + '" style="width:100%;height:100%;object-fit:cover;" alt="' + (media[0].title || p.name) + '">';
+      } else {
+        el.innerHTML = '<div style="text-align:center;padding:20px;"><div style="font-size:11px;text-transform:uppercase;letter-spacing:0.05em;color:#aaa;">photos coming soon</div><div style="font-size:11px;color:#bbb;margin-top:4px;">tag in Empathy Ledger</div></div>';
+      }
+    });
+  });
 <<<<<<< Updated upstream
 =======
   // Now async-load real photos for each card. fetchELMedia(slug) handles project_id + filename fallback.
@@ -25021,6 +25173,10 @@ function handleHash() {
   let hash = window.location.hash.substring(1);
   if (!hash) {
     showMainPage();
+    return;
+  }
+  if (hash === 'art-portfolio') {
+    showArtPortfolio();
     return;
   }
   if (hash === 'art-portfolio') {
