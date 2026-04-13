@@ -18,6 +18,10 @@ Helper: `node scripts/wiki-log.mjs <op> "<summary>" [files...]`
 
 ## 2026
 
+- 2026-04-13 22:57 | synthesis | Third Reality deep synthesis — CivicGraph + JusticeHub + EL, what the broken room looks like, how postcards are the Third Reality in action | wiki/synthesis/
+- 2026-04-13 22:57 | viewer-build | 204 articles · 62 photo maps · 1444KB | tools/act-wikipedia.html
+- 2026-04-13 22:57 | snapshot-sync | 23 direct mirrors · 36 stories · 4 wrappers | apps/command-center/public/wiki/README.md, apps/command-center/public/wiki/snapshot-meta.json
+- 2026-04-13 22:55 | synthesis | "What is the Third Reality actually solving and how do CivicGraph, JusticeHub, and Empathy Ledger wor" → 6 citations | wiki/synthesis/what-is-the-third-reality-actually-solving-and-how-do-civicgraph-justicehub-and-.md
 - 2026-04-13 22:51 | manual | 16 existing stories linked to judges-on-country series + storyteller table added — 22 stories connected | wiki/stories/, wiki/projects/justicehub/judges-on-country.md
 - 2026-04-13 22:51 | viewer-build | 203 articles · 61 photo maps · 1434KB | tools/act-wikipedia.html
 - 2026-04-13 22:51 | snapshot-sync | 23 direct mirrors · 36 stories · 4 wrappers | apps/command-center/public/wiki/README.md, apps/command-center/public/wiki/snapshot-meta.json

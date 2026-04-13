@@ -210,6 +210,7 @@ The fourth letter of [[lcaa-method|LCAA]] — physical, sensory work that makes 
 - [[how-does-the-judges-on-country-experience-feed-back-into-the-act-ecosystem|Judges on Country Feedback Loop]] — how the 30-minute experience feeds stories, signals, claims, and R&D evidence back into every system
 - [[how-should-act-engage-judges-after-the-on-country-experience-and-what-systems-ca|Engaging Judges After the Experience]] — three layers of engagement, what each captures, connection to revenue thesis
 - [[how-does-justicehub-program-search-connect-postcards-to-real-services-across-aus|Postcards to Programs]] — QR to JusticeHub, 1,775 community models, gap signals, the compounding search engine
+- [[what-is-the-third-reality-actually-solving-and-how-do-civicgraph-justicehub-and-|What the Third Reality Is Actually Solving]] — CivicGraph + JusticeHub + Empathy Ledger: how three layers produce what none can alone
 
 ## Narrative (claims store — what we have already said)
 
