@@ -16,7 +16,7 @@ empathy_ledger_key: black-cockatoo-valley
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/projects/act-farm/black-cockatoo-valley.md`.
-> Regenerated: `2026-04-13T13:08:22.637Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerated: `2026-04-13T13:20:03.635Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # Black Cockatoo Valley
 
@@ -160,3 +160,5 @@ This matters because the land layer is not backdrop. It is part of the same oper
 - [[living-website-operating-system|Living Website Operating System]] — the place layer inside the wider ACT web/publishing system
 - [[art/business/studio-business-model|Studio Business Model]] — why place, residencies, and field evidence are part of Studio economics rather than side context
 - [[2026-04-act-farm-repositioning|Act-Farm Repositioning]] — BCV role in the farm repositioning decision
+- [[custodian-economy|Custodian Economy]] — the stewardship-over-ownership model BCV's co-stewardship vision embodies
+- [[fishers-oysters|Fishers Oysters]] — parallel regenerative enterprise grounded in place, material cycle, and custodian practice

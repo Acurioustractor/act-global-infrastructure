@@ -18,6 +18,10 @@ Helper: `node scripts/wiki-log.mjs <op> "<summary>" [files...]`
 
 ## 2026
 
+- 2026-04-13 23:20 | lint | 206 articles · 0 broken · 0 orphans · 0 stubs · 0 missing index — CLEAN SWEEP | wiki/output/
+- 2026-04-13 23:20 | viewer-build | 206 articles · 62 photo maps · 1470KB | tools/act-wikipedia.html
+- 2026-04-13 23:20 | snapshot-sync | 23 direct mirrors · 36 stories · 4 wrappers | apps/command-center/public/wiki/README.md, apps/command-center/public/wiki/snapshot-meta.json
+- 2026-04-13 23:18 | synthesis | "What are ACT's seven flagship experiences and how does each one convert into ecosystem growth?" → 6 citations | wiki/synthesis/what-are-acts-seven-flagship-experiences-and-how-does-each-one-convert-into-ecos.md
 - 2026-04-13 23:08 | synthesis | Growing without fanfare — art as strategy, experiences as growth engine, 40/30/20/10 time split | wiki/synthesis/
 - 2026-04-13 23:08 | viewer-build | 205 articles · 62 photo maps · 1454KB | tools/act-wikipedia.html
 - 2026-04-13 23:08 | snapshot-sync | 23 direct mirrors · 36 stories · 4 wrappers | apps/command-center/public/wiki/README.md, apps/command-center/public/wiki/snapshot-meta.json

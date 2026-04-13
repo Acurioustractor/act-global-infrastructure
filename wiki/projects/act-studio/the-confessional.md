@@ -71,3 +71,5 @@ The Confessional is part of ACT's core Studio line: works that make institutiona
 - [[art/philosophy/art-as-infrastructure|Art as Infrastructure]]
 - [[art/innovation/studio-innovation-flow|Studio Innovation Flow]]
 - [[art/business/studio-business-model|Studio Business Model]]
+- [[act-monthly-dinners|ACT Monthly Dinners]] — community gathering format that shares The Confessional's ethic of creating safe relational space
+- [[feel-good-project|Feel Good Project]] — complementary care-as-art practice making dignity and wellbeing accessible in underserved settings

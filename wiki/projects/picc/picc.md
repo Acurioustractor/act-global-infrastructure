@@ -166,3 +166,5 @@ ACT works closely with PICC across multiple projects:
 - [[projects/picc/README|PICC Cluster]]
 - [[wiki-project-and-work-sync-contract|Wiki Project & Work Sync Contract]]
 - [[living-website-operating-system|Living Website Operating System]]
+- [[communities/the-buttery|The Buttery]] — fellow Y1 bespoke customer for Empathy Ledger's Annual Field Service
+- [[empathy-ledger/annual-field-service|EL Annual Field Service]] — the bespoke engagement model through which PICC's storytelling services are delivered

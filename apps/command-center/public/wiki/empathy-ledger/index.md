@@ -15,7 +15,7 @@ empathy_ledger_key: empathy-ledger
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/projects/empathy-ledger.md`.
-> Regenerated: `2026-04-13T13:08:22.637Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerated: `2026-04-13T13:20:03.635Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # Empathy Ledger
 
@@ -324,3 +324,6 @@ The public act.place page does not mention: blockchain ownership, TK Labels, Muk
 - [[2026-04-act-farm-repositioning|Act-Farm Repositioning]] — EL referenced in the regenerative capital pivot
 - [[five-year-cashflow-model|Five-Year Cashflow Model]] — EL revenue assumptions in the five-year projection
 - [[rdti-claim-strategy|R&D Tax Incentive Claim Strategy]] — EL development as eligible R&D activity
+- [[communities/the-buttery|The Buttery]] — Y1 bespoke customer for consent-governed recovery storytelling
+- [[empathy-ledger/annual-field-service|EL Annual Field Service]] — the operational bespoke engagement model for Y1 customers
+- [[confit-pathways|ConFit Pathways]] — justice diversion program whose participants' stories flow through EL's consent layer

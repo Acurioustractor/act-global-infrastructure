@@ -156,3 +156,5 @@ This matters because the land layer is not backdrop. It is part of the same oper
 - [[living-website-operating-system|Living Website Operating System]] — the place layer inside the wider ACT web/publishing system
 - [[art/business/studio-business-model|Studio Business Model]] — why place, residencies, and field evidence are part of Studio economics rather than side context
 - [[2026-04-act-farm-repositioning|Act-Farm Repositioning]] — BCV role in the farm repositioning decision
+- [[custodian-economy|Custodian Economy]] — the stewardship-over-ownership model BCV's co-stewardship vision embodies
+- [[fishers-oysters|Fishers Oysters]] — parallel regenerative enterprise grounded in place, material cycle, and custodian practice

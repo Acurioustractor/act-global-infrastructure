@@ -320,3 +320,6 @@ The public act.place page does not mention: blockchain ownership, TK Labels, Muk
 - [[2026-04-act-farm-repositioning|Act-Farm Repositioning]] — EL referenced in the regenerative capital pivot
 - [[five-year-cashflow-model|Five-Year Cashflow Model]] — EL revenue assumptions in the five-year projection
 - [[rdti-claim-strategy|R&D Tax Incentive Claim Strategy]] — EL development as eligible R&D activity
+- [[communities/the-buttery|The Buttery]] — Y1 bespoke customer for consent-governed recovery storytelling
+- [[empathy-ledger/annual-field-service|EL Annual Field Service]] — the operational bespoke engagement model for Y1 customers
+- [[confit-pathways|ConFit Pathways]] — justice diversion program whose participants' stories flow through EL's consent layer

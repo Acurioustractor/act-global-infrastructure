@@ -65,3 +65,4 @@ Active, with at least one retreat completed (the Bowral convening referenced in 
 
 - [[civicgraph|CivicGraph]] — data layer mapping funding flows that Community Capital navigates
 - [[funding-transparency|Funding Transparency]] — the concept Community Capital enacts in practice
+- [[custodian-economy|Custodian Economy]] — the stewardship economic model that Community Capital's convening helps fund and legitimise

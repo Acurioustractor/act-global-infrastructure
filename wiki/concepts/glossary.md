@@ -195,3 +195,4 @@ Terms like "harvesting data," "capturing value," "mining insights" that treat pe
 - [[consent-as-infrastructure|Consent as Infrastructure]] — OCAP architecture
 - [[beautiful-obsolescence|Beautiful Obsolescence]] — handover design principle
 - [[voice-guide|ACT Voice Guide]] — language system
+- [[custodian-economy|Custodian Economy]] — economic model referenced in co-stewardship and governance terms

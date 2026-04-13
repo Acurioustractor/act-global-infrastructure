@@ -153,7 +153,7 @@ ACT doesn't need more people to know about it. ACT needs the right people to hav
 - [[judges-on-country]]
 - [[the-brave-ones]]
 - [[empathy-ledger]]
-- [[act-operational-thesis]]
+- [[act-ecosystem|ACT Ecosystem]]
 
 ## Backlinks
 

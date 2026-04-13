@@ -11,7 +11,7 @@ tags: [oonchiumpa, court, young-people, mparntwe, judges-on-country]
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/stories/oonchiumpa-nigel-court.md`.
-> Regenerated: `2026-04-13T13:08:22.637Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerated: `2026-04-13T13:20:03.635Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # When I'm talking to the judge, I feel like I'm panicking
 

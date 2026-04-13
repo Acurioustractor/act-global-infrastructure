@@ -240,3 +240,5 @@ This phase is only sketched. It earns detail once the Y1–Y5 base is proven.
 - [[2026-04-act-farm-repositioning|Act-Farm Repositioning]] — farm pivot decision flowing from this plan
 - [[five-year-cashflow-model|Five-Year Cashflow Model]] — the financial model behind this plan
 - [[rdti-claim-strategy|R&D Tax Incentive Claim Strategy]] — R&D refund strategy supporting the plan
+- [[art/y1-release-program|Y1 Art Release Program]] — the Year 1 art release schedule flowing from this plan's eight art projects
+- [[empathy-ledger/annual-field-service|EL Annual Field Service]] — the bespoke engagement model operationalising the Voice layer's $200K Y1 revenue

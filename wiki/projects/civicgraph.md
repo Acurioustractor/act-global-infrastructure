@@ -255,3 +255,4 @@ The "Updated daily" trust signal is underused in internal comms and should appea
 - [[2026-04-founder-lanes-and-top-two-bets|Founder Lanes and Top Two Bets]] — the founder decision that treats CivicGraph and JusticeHub as one flagship stack
 - [[five-year-cashflow-model|Five-Year Cashflow Model]] — CivicGraph revenue assumptions in the five-year projection
 - [[rdti-claim-strategy|R&D Tax Incentive Claim Strategy]] — CivicGraph development as eligible R&D activity
+- [[grantscope|GrantScope (CivicGraph)]] — the technical implementation and codebase behind CivicGraph's data platform

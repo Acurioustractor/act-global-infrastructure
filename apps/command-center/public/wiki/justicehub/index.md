@@ -15,7 +15,7 @@ empathy_ledger_key: justicehub
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/projects/justicehub/justicehub.md`.
-> Regenerated: `2026-04-13T13:08:22.637Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerated: `2026-04-13T13:20:03.635Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # JusticeHub
 
@@ -326,3 +326,6 @@ This is why JusticeHub needs to stay attached to [[living-website-operating-syst
 - [[art/business/studio-business-model|Studio Business Model]] — how proof, touring, and public justice infrastructure support the wider Studio field
 - [[2026-04-act-farm-repositioning|Act-Farm Repositioning]] — JusticeHub referenced in the capital engine pivot
 - [[rdti-claim-strategy|R&D Tax Incentive Claim Strategy]] — JusticeHub development as eligible R&D activity
+- [[confit-pathways|ConFit Pathways]] — diversionary justice program with 60% recidivism reduction, a key local proof point
+- [[deadlylabs|DeadlyLabs]] — STEM education in detention settings, complementing JusticeHub's evidence base for alternatives
+- [[grantscope|GrantScope (CivicGraph)]] — the technical substrate powering JusticeHub's evidence and query layer

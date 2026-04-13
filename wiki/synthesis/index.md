@@ -48,4 +48,6 @@ This folder is the **second-brain compounding loop**. Per the [Karpathy LLM know
 
 - [[how-does-act-grow-without-fanfare-through-word-of-mouth-incredible-experiences-a|How does ACT grow without fanfare — through word of mouth, incredible experiences, and art instead o]] — 2026-04-13
 
+- [[what-are-acts-seven-flagship-experiences-and-how-does-each-one-convert-into-ecos|What are ACT's seven flagship experiences and how does each one convert into ecosystem growth?]] — 2026-04-13
+
 _(This index is auto-maintained. New synthesis articles will appear here as they are created.)_

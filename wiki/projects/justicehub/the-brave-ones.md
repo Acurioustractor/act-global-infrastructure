@@ -146,3 +146,5 @@ The placeholder is explicitly labelled as a stand-in everywhere it appears, and 
 - [[visual-system|ACT Visual System]] — the locked portrait and proposal-art grammar this series helped establish
 - [[../../technical/wiki-project-and-work-sync-contract|Wiki Project and Work Sync Contract]] — the cross-system identity rules for this work-series
 - [[../../concepts/living-website-operating-system|Living Website Operating System]] — how this series should flow into EL and the public sites
+- [[art/y1-release-program|Y1 Art Release Program]] — Brave Ones Phase 1 as the first of eight Y1 art releases
+- [[empathy-ledger/annual-field-service|EL Annual Field Service]] — bespoke engagement model through which portrait subjects' consent and stories are managed

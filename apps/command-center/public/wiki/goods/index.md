@@ -15,7 +15,7 @@ empathy_ledger_key: goods-on-country
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/projects/goods-on-country.md`.
-> Regenerated: `2026-04-13T13:08:22.637Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerated: `2026-04-13T13:20:03.635Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # Goods on Country
 
@@ -340,3 +340,5 @@ Severity levels: Low → Medium → High → Critical.
 - [[youth-justice-reform|Youth Justice Reform]] — housing, beds, and durable household infrastructure as upstream justice intervention, not separate from reform
 - [[2026-04-act-farm-repositioning|Act-Farm Repositioning]] — Goods referenced in the regenerative capital pivot
 - [[rdti-claim-strategy|R&D Tax Incentive Claim Strategy]] — Goods manufacturing as eligible R&D activity
+- [[custodian-economy|Custodian Economy]] — the economic model Goods on Country enacts through community-owned manufacturing and stewardship
+- [[fishers-oysters|Fishers Oysters]] — fellow regenerative enterprise applying custodian economics and circular practice to aquaculture on Country

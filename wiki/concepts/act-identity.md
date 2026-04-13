@@ -81,3 +81,5 @@ ACT is headquartered in Queensland, with active work across:
 - [[act-ecosystem|ACT Ecosystem]] — the project map
 - [[act-studio|ACT Regenerative Studio]] — public-facing hub at act.place
 - [[third-reality|The Third Reality]] — the impact methodology
+- [[act-monthly-dinners|ACT Monthly Dinners]] — regular community gatherings that embody ACT's relational practice
+- [[custodian-economy|Custodian Economy]] — the economic model expressing ACT's stewardship-over-ownership identity

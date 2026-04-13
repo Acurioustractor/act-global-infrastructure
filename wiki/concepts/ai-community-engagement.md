@@ -61,3 +61,4 @@ This thesis maps directly to ACT's methodology:
 - [[mount-isa|Mount Isa]] — concrete example of reclaimed admin time returning to relationship work
 - [[lcaa-method|LCAA Method]] — the thesis protects Listen and Action from administrative drag
 - [[ai-ethics|AI Ethics & Agent Strategy]] — ethical guardrails for community-facing AI use
+- [[deadlylabs|DeadlyLabs]] — STEM education in detention as a concrete example of technology meeting community engagement in justice settings

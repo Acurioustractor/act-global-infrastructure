@@ -5,7 +5,7 @@ status: Active
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/concepts/act-identity.md`.
-> Regenerated: `2026-04-13T13:08:22.637Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerated: `2026-04-13T13:20:03.635Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # A Curious Tractor (ACT)
 
@@ -85,3 +85,5 @@ ACT is headquartered in Queensland, with active work across:
 - [[act-ecosystem|ACT Ecosystem]] — the project map
 - [[act-studio|ACT Regenerative Studio]] — public-facing hub at act.place
 - [[third-reality|The Third Reality]] — the impact methodology
+- [[act-monthly-dinners|ACT Monthly Dinners]] — regular community gatherings that embody ACT's relational practice
+- [[custodian-economy|Custodian Economy]] — the economic model expressing ACT's stewardship-over-ownership identity

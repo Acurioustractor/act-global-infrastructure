@@ -168,3 +168,4 @@ That is why The Harvest needs to stay linked to [[living-website-operating-syste
 - [[art/business/studio-business-model|Studio Business Model]] — why the place layer must be legible as enterprise, invitation, and field support
 - [[2026-04-act-farm-repositioning|Act-Farm Repositioning]] — The Harvest role in the farm repositioning
 - [[five-year-cashflow-model|Five-Year Cashflow Model]] — Harvest revenue in the five-year projection
+- [[fishers-oysters|Fishers Oysters]] — Shaun Fisher's oyster-shell return practice connecting The Harvest's founding story to regenerative aquaculture on Country
