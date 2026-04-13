@@ -2,11 +2,12 @@
 title: "A: From Guarded and Disengaged to Articulate Self-Advocate"
 status: External-Lite
 projects: oonchiumpa
+series: judges-on-country-postcards
 ---
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/stories/a-guarded-to-self-advocate.md`.
-> Regenerated: `2026-04-13T12:34:42.747Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerated: `2026-04-13T12:51:34.627Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # A: From Guarded and Disengaged to Articulate Self-Advocate
 
@@ -51,4 +52,5 @@ The transformation isn't about compliance or being "easier to work with." It's a
 
 - [[empathy-ledger|Empathy Ledger]] — storytelling platform
 - [[oonchiumpa|Oonchiumpa]] — youth support program
+- [[projects/justicehub/judges-on-country|Judges on Country]] — postcard series
 - [[cb-cultural-leadership|CB: Cultural Leadership]] — related story

@@ -2,6 +2,7 @@
 title: "CB: Understanding Cultural Responsibility and Leadership"
 status: External-Lite
 projects: oonchiumpa
+series: judges-on-country-postcards
 ---
 
 # CB: Understanding Cultural Responsibility and Leadership
@@ -49,4 +50,5 @@ CB is now seen as a young leader, someone who might guide others through similar
 
 - [[empathy-ledger|Empathy Ledger]] — storytelling platform
 - [[oonchiumpa|Oonchiumpa]] — youth support program
+- [[projects/justicehub/judges-on-country|Judges on Country]] — postcard series
 - [[a-guarded-to-self-advocate|A: From Guarded to Self-Advocate]] — related story

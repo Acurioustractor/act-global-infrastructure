@@ -2,6 +2,7 @@
 title: "Healing Journey to Country: Young Men Find Connection at Atnarpa Station"
 status: Internal Only
 projects: oonchiumpa
+series: judges-on-country-postcards
 ---
 
 # Healing Journey to Country: Young Men Find Connection at Atnarpa Station
@@ -48,4 +49,5 @@ These aren't questions that can be answered in a classroom or office. They requi
 - [[empathy-ledger|Empathy Ledger]] — storytelling platform
 - [[oonchiumpa|Oonchiumpa]] — youth program
 - [[atnarpa-boys-trip|Atnarpa Boys Trip]] — related on-Country story
+- [[projects/justicehub/judges-on-country|Judges on Country]] — postcard series
 - [[justicehub|JusticeHub]] — policy context

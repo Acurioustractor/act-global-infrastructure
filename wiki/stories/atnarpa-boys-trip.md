@@ -2,6 +2,7 @@
 title: "Atnarpa Station Cultural Learning - Boys Trip"
 status: External-Lite
 projects: oonchiumpa, land-practice
+series: judges-on-country-postcards
 ---
 
 # Atnarpa Station Cultural Learning - Boys Trip
@@ -47,5 +48,6 @@ The learning shifted from abstract to embodied. Young men returned with not just
 
 - [[empathy-ledger|Empathy Ledger]] — storytelling platform
 - [[oonchiumpa|Oonchiumpa]] — youth program hosting the trip
+- [[projects/justicehub/judges-on-country|Judges on Country]] — postcard series
 - [[returning-home-atnarpa|Returning Home to Atnarpa]] — the station and its Traditional Owners
 - [[healing-journey-country|Healing Journey to Country]] — related on-Country story

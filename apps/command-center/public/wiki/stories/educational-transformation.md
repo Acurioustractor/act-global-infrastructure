@@ -2,11 +2,12 @@
 title: "Educational Transformation: 72% Return to School"
 status: External-Lite
 projects: oonchiumpa
+series: judges-on-country-postcards
 ---
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/stories/educational-transformation.md`.
-> Regenerated: `2026-04-13T12:34:42.747Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerated: `2026-04-13T12:51:34.627Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # Educational Transformation: 72% Return to School
 
@@ -51,5 +52,6 @@ The 72% represents individual stories of reconnection. Each percentage point is 
 
 - [[empathy-ledger|Empathy Ledger]] — storytelling platform
 - [[oonchiumpa|Oonchiumpa]] — program delivering these outcomes
+- [[projects/justicehub/judges-on-country|Judges on Country]] — postcard series
 - [[school-partnership-success|School Partnership Success Stories]] — related evidence
 - [[young-person-returns-school|Young Person Returns to School After Cultural Healing]] — an individual story behind this number

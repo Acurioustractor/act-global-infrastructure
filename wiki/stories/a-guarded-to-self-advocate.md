@@ -2,6 +2,7 @@
 title: "A: From Guarded and Disengaged to Articulate Self-Advocate"
 status: External-Lite
 projects: oonchiumpa
+series: judges-on-country-postcards
 ---
 
 # A: From Guarded and Disengaged to Articulate Self-Advocate
@@ -47,4 +48,5 @@ The transformation isn't about compliance or being "easier to work with." It's a
 
 - [[empathy-ledger|Empathy Ledger]] — storytelling platform
 - [[oonchiumpa|Oonchiumpa]] — youth support program
+- [[projects/justicehub/judges-on-country|Judges on Country]] — postcard series
 - [[cb-cultural-leadership|CB: Cultural Leadership]] — related story

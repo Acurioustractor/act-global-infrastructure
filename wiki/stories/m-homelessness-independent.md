@@ -2,6 +2,7 @@
 title: "M: From Homelessness to Independent Living"
 status: External-Lite
 projects: oonchiumpa
+series: judges-on-country-postcards
 ---
 
 # M: From Homelessness to Independent Living
@@ -47,4 +48,5 @@ The path wasn't linear. It required persistence, flexibility, and trust built ov
 
 - [[empathy-ledger|Empathy Ledger]] — storytelling platform
 - [[oonchiumpa|Oonchiumpa]] — youth support program
+- [[projects/justicehub/judges-on-country|Judges on Country]] — postcard series
 - [[educational-transformation|Educational Transformation: 72% Return to School]] — related outcome story

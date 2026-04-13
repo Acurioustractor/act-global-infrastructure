@@ -2,11 +2,12 @@
 title: "CB: Understanding Cultural Responsibility and Leadership"
 status: External-Lite
 projects: oonchiumpa
+series: judges-on-country-postcards
 ---
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/stories/cb-cultural-leadership.md`.
-> Regenerated: `2026-04-13T12:34:42.747Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerated: `2026-04-13T12:51:34.627Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # CB: Understanding Cultural Responsibility and Leadership
 
@@ -53,4 +54,5 @@ CB is now seen as a young leader, someone who might guide others through similar
 
 - [[empathy-ledger|Empathy Ledger]] — storytelling platform
 - [[oonchiumpa|Oonchiumpa]] — youth support program
+- [[projects/justicehub/judges-on-country|Judges on Country]] — postcard series
 - [[a-guarded-to-self-advocate|A: From Guarded to Self-Advocate]] — related story

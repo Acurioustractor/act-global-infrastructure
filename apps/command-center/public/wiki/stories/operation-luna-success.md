@@ -2,11 +2,12 @@
 title: "Operation Luna Success: Dramatic Reduction in Youth Offending"
 status: External-Lite
 projects: oonchiumpa, justicehub
+series: judges-on-country-postcards
 ---
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/stories/operation-luna-success.md`.
-> Regenerated: `2026-04-13T12:34:42.747Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerated: `2026-04-13T12:51:34.627Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # Operation Luna Success: Dramatic Reduction in Youth Offending
 
@@ -52,5 +53,6 @@ The reduction in offending also reduced the burden on case workers, police, and 
 - [[empathy-ledger|Empathy Ledger]] — storytelling platform
 - [[oonchiumpa|Oonchiumpa]] — community program
 - [[justicehub|JusticeHub]] — policy and advocacy context
+- [[projects/justicehub/judges-on-country|Judges on Country]] — postcard series
 - [[educational-transformation|Educational Transformation]] — related outcome evidence
 - [[uncle-dale-healing-path|Uncle Dale's Vision for Youth Justice Reform]] — the underlying philosophy

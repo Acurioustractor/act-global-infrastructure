@@ -2,6 +2,7 @@
 title: "Community Recognition and External Referral Requests"
 status: External-Lite
 projects: oonchiumpa
+series: judges-on-country-postcards
 ---
 
 # Community Recognition and External Referral Requests
@@ -47,4 +48,5 @@ The referrals also reveal a challenge: demand exceeds capacity. This story docum
 
 - [[empathy-ledger|Empathy Ledger]] — storytelling platform
 - [[oonchiumpa|Oonchiumpa]] — the program being recognized
+- [[projects/justicehub/judges-on-country|Judges on Country]] — postcard series
 - [[school-partnership-success|School Partnership Success Stories]] — related recognition story

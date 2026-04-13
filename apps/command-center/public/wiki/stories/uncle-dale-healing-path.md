@@ -6,7 +6,7 @@ projects: justicehub
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/stories/uncle-dale-healing-path.md`.
-> Regenerated: `2026-04-13T12:34:42.747Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerated: `2026-04-13T12:51:34.627Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # Building a Healing Path: Uncle Dale's Vision for Youth Justice Reform
 

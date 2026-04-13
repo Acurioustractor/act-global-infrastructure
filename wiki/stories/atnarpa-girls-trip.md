@@ -2,6 +2,7 @@
 title: "Atnarpa Homestead Cultural Exchange - Girls Trip"
 status: External-Lite
 projects: oonchiumpa, land-practice
+series: judges-on-country-postcards
 ---
 
 # Atnarpa Homestead Cultural Exchange - Girls Trip
@@ -47,5 +48,6 @@ This wasn't a one-way visit. The exchange built relationships across communities
 
 - [[empathy-ledger|Empathy Ledger]] — storytelling platform
 - [[oonchiumpa|Oonchiumpa]] — youth program
+- [[projects/justicehub/judges-on-country|Judges on Country]] — postcard series
 - [[returning-home-atnarpa|Returning Home to Atnarpa]] — the station and its Traditional Owners
 - [[girls-day-out-standley-chasm|Girls Day Out at Standley Chasm]] — related story

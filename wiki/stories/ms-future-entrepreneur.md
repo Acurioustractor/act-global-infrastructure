@@ -2,6 +2,7 @@
 title: "MS: From Disconnected Youth to Future Tourism Entrepreneur"
 status: External-Lite
 projects: oonchiumpa, land-practice
+series: judges-on-country-postcards
 ---
 
 # MS: From Disconnected Youth to Future Tourism Entrepreneur
@@ -47,4 +48,5 @@ MS now speaks about wanting to develop cultural tourism on family Country — no
 
 - [[empathy-ledger|Empathy Ledger]] — storytelling platform
 - [[oonchiumpa|Oonchiumpa]] — youth program
+- [[projects/justicehub/judges-on-country|Judges on Country]] — postcard series
 - [[returning-home-atnarpa|Returning Home to Atnarpa]] — the kind of enterprise MS is envisioning

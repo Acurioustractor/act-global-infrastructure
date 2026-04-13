@@ -2,11 +2,12 @@
 title: "Returning Home to Atnarpa: The Bloomfield Family's Journey"
 status: External-Lite
 projects: oonchiumpa, land-practice
+series: judges-on-country-postcards
 ---
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/stories/returning-home-atnarpa.md`.
-> Regenerated: `2026-04-13T12:34:42.747Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerated: `2026-04-13T12:51:34.627Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # Returning Home to Atnarpa: The Bloomfield Family's Journey
 
@@ -51,5 +52,6 @@ Atnarpa has become a key site for Oonchiumpa programs, hosting boys' and girls' 
 
 - [[empathy-ledger|Empathy Ledger]] — storytelling platform
 - [[oonchiumpa|Oonchiumpa]] — programs hosted at Atnarpa
+- [[projects/justicehub/judges-on-country|Judges on Country]] — postcard series
 - [[atnarpa-boys-trip|Atnarpa Boys Trip]] — one of those programs
 - [[atnarpa-girls-trip|Atnarpa Girls Trip]] — one of those programs

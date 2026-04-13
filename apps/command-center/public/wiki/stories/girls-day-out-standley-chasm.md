@@ -2,11 +2,12 @@
 title: "Girls Day Out: Cultural Empowerment at Standley Chasm"
 status: External-Lite
 projects: oonchiumpa, land-practice
+series: judges-on-country-postcards
 ---
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/stories/girls-day-out-standley-chasm.md`.
-> Regenerated: `2026-04-13T12:34:42.747Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerated: `2026-04-13T12:51:34.627Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # Girls Day Out: Cultural Empowerment at Standley Chasm
 
@@ -51,5 +52,6 @@ The confidence built on days like this carries forward. Young women who might ha
 
 - [[empathy-ledger|Empathy Ledger]] — storytelling platform
 - [[oonchiumpa|Oonchiumpa]] — youth program
+- [[projects/justicehub/judges-on-country|Judges on Country]] — postcard series
 - [[atnarpa-girls-trip|Atnarpa Girls Trip]] — related story
 - [[young-fellas-standley-chasm|Young Fellas at Standley Chasm]] — the same place, the boys' story

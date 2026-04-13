@@ -172,6 +172,68 @@ All cultural protocol for Judges on Country follows the same non-negotiable fram
 4. **Traditional Owners are compensated** as the expert facilitators they are, not as cultural consultants on a day rate
 5. **The experience does not happen without community leadership present** — if Kristy and Tanya are not available, the session does not run with substitutes
 
+## Connected Stories
+
+Twenty-two stories from the Mparntwe community are held in the wiki. These are the evidence base for Judges on Country — what judges read before, during, and after the experience.
+
+### Postcard Stories (the 6 cards)
+
+The physical cards judges hold in their hands. Each one is a first-person account from the community.
+
+- [[stories/oonchiumpa-kristy-tanya-founders|Kristy & Tanya — "Our young people are just collateral"]]
+- [[stories/oonchiumpa-jackquann-nigel-programs|Jackquann & Nigel — "Programs." "Go to school every day."]]
+- [[stories/oonchiumpa-jackquann-detention|Jackquann — "Detention. That's not my home."]]
+- [[stories/oonchiumpa-nigel-court|Nigel — "When I'm talking to the judge, I feel like I'm panicking."]]
+- [[stories/oonchiumpa-laquisha-darwin|Laquisha — "Court is scary because you don't know whether you're getting out or not."]]
+- [[stories/oonchiumpa-fred-xavier-trust|Fred on Xavier — "He trusts us. We earned that trust."]]
+
+### Young People's Journeys (evidence the alternative works)
+
+Outcome stories that show what happens when young people are diverted into community-led programs instead of detention.
+
+- [[stories/cb-cultural-leadership|CB: Cultural Responsibility and Leadership]]
+- [[stories/ms-future-entrepreneur|MS: Disconnected Youth to Tourism Entrepreneur]]
+- [[stories/m-homelessness-independent|M: Homelessness to Independent Living]]
+- [[stories/a-guarded-to-self-advocate|A: Guarded to Self-Advocate]]
+- [[stories/young-person-returns-school|Young Person Returns to School]]
+- [[stories/educational-transformation|Educational Transformation: 72% Return to School]]
+- [[stories/operation-luna-success|Operation Luna: 20 of 21 Off the List]]
+
+### On Country Experiences (what judges would witness)
+
+What the on-country program looks like in practice. These are the moments a visiting judge would see.
+
+- [[stories/atnarpa-boys-trip|Atnarpa Boys Trip]]
+- [[stories/atnarpa-girls-trip|Atnarpa Girls Trip]]
+- [[stories/healing-journey-country|Healing Journey to Country]]
+- [[stories/young-fellas-standley-chasm|Young Fellas at Standley Chasm]]
+- [[stories/girls-day-out-standley-chasm|Girls Day Out at Standley Chasm]]
+- [[stories/finke-desert-race|Finke Desert Race]]
+- [[stories/returning-home-atnarpa|Returning Home to Atnarpa]]
+- [[stories/school-partnership-success|School Partnership Success]]
+- [[stories/community-recognition-referrals|Community Recognition and Referrals]]
+
+## Storytellers
+
+Twelve Empathy Ledger storytellers from the Mparntwe community whose voices anchor Judges on Country.
+
+| Storyteller | EL ID | Role | Postcard |
+|------------|-------|------|----------|
+| Kristy Bloomfield | b59a1f4c | Co-Director, Traditional Owner | #1 |
+| Tanya Turner | dc85700d | Co-Director, Eastern Arrernte | #1 |
+| Nigel | f0be3aca | Young person, 14 | #2, #4 |
+| Laquisha | 7a0cd28a | Young person, 16 | #5 |
+| Patricia Ann Miller | 1971d21d | Community Elder, AO | Potential peer voice |
+| Aunty Bev & Uncle Terry | 2a263da7 | Elders, cultural authority | Grounding voice |
+| Henry Bloomfield | fd30e477 | Elder, Bloomfield family | Homestead story |
+| Kylie Bloomfield | d007b2f8 | Bloomfield family | Data sovereignty voice |
+| Shayne Bloomfield | d463259d | Bloomfield family | Returning to Country |
+| Yani Bloomfield | 27c99ad0 | Younger generation | Family reunification |
+| Braydon Dema | 754b892b | Young storyteller | Ambition + family |
+| Kirsty Bloomfield | 784c663a | Bloomfield family | Generational wealth |
+
+**Not yet in Empathy Ledger:** Jackquann (6a86acf2), Fred Campbell (4b35b1af), and Xavier need creating as EL storytellers.
+
 ## Backlinks
 
 - [[justicehub|JusticeHub]] — the platform the card deck connects to

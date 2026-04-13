@@ -2,11 +2,12 @@
 title: "Young Person Returns to School After Cultural Healing"
 status: External-Lite
 projects: oonchiumpa
+series: judges-on-country-postcards
 ---
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/stories/young-person-returns-school.md`.
-> Regenerated: `2026-04-13T12:34:42.747Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerated: `2026-04-13T12:51:34.627Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # Young Person Returns to School After Cultural Healing
 
@@ -47,5 +48,6 @@ This is the LCAA loop in practice: listening led to curiosity about what healing
 
 - [[empathy-ledger|Empathy Ledger]] — storytelling platform
 - [[oonchiumpa|Oonchiumpa]] — the program behind the healing
+- [[projects/justicehub/judges-on-country|Judges on Country]] — postcard series
 - [[justicehub|JusticeHub]] — policy context
 - [[educational-transformation|Educational Transformation: 72% Return to School]] — the aggregate story this is part of

@@ -2,11 +2,12 @@
 title: "Healing Journey to Country: Young Men Find Connection at Atnarpa Station"
 status: Internal Only
 projects: oonchiumpa
+series: judges-on-country-postcards
 ---
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/stories/healing-journey-country.md`.
-> Regenerated: `2026-04-13T12:34:42.747Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerated: `2026-04-13T12:51:34.627Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # Healing Journey to Country: Young Men Find Connection at Atnarpa Station
 
@@ -52,4 +53,5 @@ These aren't questions that can be answered in a classroom or office. They requi
 - [[empathy-ledger|Empathy Ledger]] — storytelling platform
 - [[oonchiumpa|Oonchiumpa]] — youth program
 - [[atnarpa-boys-trip|Atnarpa Boys Trip]] — related on-Country story
+- [[projects/justicehub/judges-on-country|Judges on Country]] — postcard series
 - [[justicehub|JusticeHub]] — policy context

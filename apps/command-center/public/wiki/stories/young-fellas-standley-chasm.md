@@ -2,11 +2,12 @@
 title: "Young Fellas Experience Cultural Connection at Standley Chasm"
 status: External-Lite
 projects: oonchiumpa, land-practice
+series: judges-on-country-postcards
 ---
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/stories/young-fellas-standley-chasm.md`.
-> Regenerated: `2026-04-13T12:34:42.747Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerated: `2026-04-13T12:51:34.627Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # Young Fellas Experience Cultural Connection at Standley Chasm
 
@@ -52,5 +53,6 @@ Young men returned walking differently, carrying something that classroom learni
 
 - [[empathy-ledger|Empathy Ledger]] — storytelling platform
 - [[oonchiumpa|Oonchiumpa]] — youth program
+- [[projects/justicehub/judges-on-country|Judges on Country]] — postcard series
 - [[girls-day-out-standley-chasm|Girls Day Out at Standley Chasm]] — the same place, the girls' story
 - [[atnarpa-boys-trip|Atnarpa Boys Trip]] — related on-Country story

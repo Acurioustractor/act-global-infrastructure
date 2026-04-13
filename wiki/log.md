@@ -18,6 +18,9 @@ Helper: `node scripts/wiki-log.mjs <op> "<summary>" [files...]`
 
 ## 2026
 
+- 2026-04-13 22:51 | manual | 16 existing stories linked to judges-on-country series + storyteller table added — 22 stories connected | wiki/stories/, wiki/projects/justicehub/judges-on-country.md
+- 2026-04-13 22:51 | viewer-build | 203 articles · 61 photo maps · 1434KB | tools/act-wikipedia.html
+- 2026-04-13 22:51 | snapshot-sync | 23 direct mirrors · 36 stories · 4 wrappers | apps/command-center/public/wiki/README.md, apps/command-center/public/wiki/snapshot-meta.json
 - 2026-04-13 22:34 | synthesis | 3 synthesis articles: judges feedback loop, judge engagement, postcards-to-programs — 203 articles | wiki/synthesis/
 - 2026-04-13 22:34 | viewer-build | 203 articles · 61 photo maps · 1427KB | tools/act-wikipedia.html
 - 2026-04-13 22:34 | snapshot-sync | 23 direct mirrors · 36 stories · 4 wrappers | apps/command-center/public/wiki/README.md, apps/command-center/public/wiki/snapshot-meta.json

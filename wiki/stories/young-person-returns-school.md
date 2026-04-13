@@ -2,6 +2,7 @@
 title: "Young Person Returns to School After Cultural Healing"
 status: External-Lite
 projects: oonchiumpa
+series: judges-on-country-postcards
 ---
 
 # Young Person Returns to School After Cultural Healing
@@ -43,5 +44,6 @@ This is the LCAA loop in practice: listening led to curiosity about what healing
 
 - [[empathy-ledger|Empathy Ledger]] — storytelling platform
 - [[oonchiumpa|Oonchiumpa]] — the program behind the healing
+- [[projects/justicehub/judges-on-country|Judges on Country]] — postcard series
 - [[justicehub|JusticeHub]] — policy context
 - [[educational-transformation|Educational Transformation: 72% Return to School]] — the aggregate story this is part of

@@ -2,6 +2,7 @@
 title: "Finke Desert Race Country Experience"
 status: External-Lite
 projects: oonchiumpa, land-practice
+series: judges-on-country-postcards
 ---
 
 # Finke Desert Race Country Experience
@@ -47,4 +48,5 @@ The race created a hook for deeper learning — an event young men wanted to att
 
 - [[empathy-ledger|Empathy Ledger]] — storytelling platform
 - [[oonchiumpa|Oonchiumpa]] — youth program
+- [[projects/justicehub/judges-on-country|Judges on Country]] — postcard series
 - [[atnarpa-boys-trip|Atnarpa Boys Trip]] — related on-Country story

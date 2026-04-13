@@ -2,11 +2,12 @@
 title: "School Partnership Success Stories"
 status: External-Lite
 projects: oonchiumpa
+series: judges-on-country-postcards
 ---
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/stories/school-partnership-success.md`.
-> Regenerated: `2026-04-13T12:34:42.747Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerated: `2026-04-13T12:51:34.627Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # School Partnership Success Stories
 
@@ -51,5 +52,6 @@ The partnership model doesn't replace education — it supplements it with cultu
 
 - [[empathy-ledger|Empathy Ledger]] — storytelling platform
 - [[oonchiumpa|Oonchiumpa]] — program providing mentors
+- [[projects/justicehub/judges-on-country|Judges on Country]] — postcard series
 - [[educational-transformation|Educational Transformation: 72% Return to School]] — the outcome this partnership contributes to
 - [[community-recognition-referrals|Community Recognition and External Referrals]] — related recognition story
