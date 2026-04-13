@@ -6,7 +6,7 @@ projects: oonchiumpa
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/stories/community-recognition-referrals.md`.
-> Regenerated: `2026-04-13T12:18:15.129Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerated: `2026-04-13T12:34:42.747Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # Community Recognition and External Referral Requests
 

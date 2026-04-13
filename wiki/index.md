@@ -207,6 +207,9 @@ The fourth letter of [[lcaa-method|LCAA]] — physical, sensory work that makes 
 - [[how-does-a-dollar-flow-through-the-act-ecosystem-from-bank-transaction-to-rd-tax|Dollar Flow: Bank → R&D Offset]] — the full path from NAB bank feed to 43.5% ATO refund
 - [[what-is-the-narrative-store-and-how-does-it-drive-editorial-output|Narrative Store & Editorial Output]] — claims database that turns editorial from blank-page to assembly
 - [[how-do-the-77-project-codes-connect-across-financial-storytelling-knowledge-and-|Project Codes as Universal Key]] — how 77 codes connect financial, storytelling, knowledge, and compliance systems
+- [[how-does-the-judges-on-country-experience-feed-back-into-the-act-ecosystem|Judges on Country Feedback Loop]] — how the 30-minute experience feeds stories, signals, claims, and R&D evidence back into every system
+- [[how-should-act-engage-judges-after-the-on-country-experience-and-what-systems-ca|Engaging Judges After the Experience]] — three layers of engagement, what each captures, connection to revenue thesis
+- [[how-does-justicehub-program-search-connect-postcards-to-real-services-across-aus|Postcards to Programs]] — QR to JusticeHub, 1,775 community models, gap signals, the compounding search engine
 
 ## Narrative (claims store — what we have already said)
 

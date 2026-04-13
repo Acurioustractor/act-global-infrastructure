@@ -6,7 +6,7 @@ projects: oonchiumpa, land-practice
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/stories/returning-home-atnarpa.md`.
-> Regenerated: `2026-04-13T12:18:15.129Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerated: `2026-04-13T12:34:42.747Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # Returning Home to Atnarpa: The Bloomfield Family's Journey
 

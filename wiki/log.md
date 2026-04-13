@@ -18,6 +18,12 @@ Helper: `node scripts/wiki-log.mjs <op> "<summary>" [files...]`
 
 ## 2026
 
+- 2026-04-13 22:34 | synthesis | 3 synthesis articles: judges feedback loop, judge engagement, postcards-to-programs — 203 articles | wiki/synthesis/
+- 2026-04-13 22:34 | viewer-build | 203 articles · 61 photo maps · 1427KB | tools/act-wikipedia.html
+- 2026-04-13 22:34 | snapshot-sync | 23 direct mirrors · 36 stories · 4 wrappers | apps/command-center/public/wiki/README.md, apps/command-center/public/wiki/snapshot-meta.json
+- 2026-04-13 22:32 | synthesis | "How does JusticeHub program search connect postcards to real services across Australia?" → 4 citations | wiki/synthesis/how-does-justicehub-program-search-connect-postcards-to-real-services-across-aus.md
+- 2026-04-13 22:31 | synthesis | "How should ACT engage judges after the on-Country experience and what systems capture the learning?" → 4 citations | wiki/synthesis/how-should-act-engage-judges-after-the-on-country-experience-and-what-systems-ca.md
+- 2026-04-13 22:30 | synthesis | "How does the Judges on Country experience feed back into the ACT ecosystem?" → 4 citations | wiki/synthesis/how-does-the-judges-on-country-experience-feed-back-into-the-act-ecosystem.md
 - 2026-04-13 22:22 | manual | narrative-refresh — 1 project(s) · 15 claims · 0 status changes | wiki/narrative/justicehub/INDEX.md
 - 2026-04-13 22:18 | ingest | 6 Oonchiumpa postcard stories + Judges on Country article + judges-have-never-met-them claim — 200 articles | wiki/stories/, wiki/projects/justicehub/judges-on-country.md
 - 2026-04-13 22:18 | viewer-build | 200 articles · 60 photo maps · 1409KB | tools/act-wikipedia.html

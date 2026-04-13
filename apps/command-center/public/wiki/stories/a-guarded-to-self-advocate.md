@@ -6,7 +6,7 @@ projects: oonchiumpa
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/stories/a-guarded-to-self-advocate.md`.
-> Regenerated: `2026-04-13T12:18:15.129Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerated: `2026-04-13T12:34:42.747Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # A: From Guarded and Disengaged to Articulate Self-Advocate
 

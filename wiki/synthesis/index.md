@@ -38,4 +38,10 @@ This folder is the **second-brain compounding loop**. Per the [Karpathy LLM know
 
 - [[how-do-the-77-project-codes-connect-across-financial-storytelling-knowledge-and-|How do the 77 project codes connect across financial, storytelling, knowledge, and compliance system]] — 2026-04-13
 
+- [[how-does-the-judges-on-country-experience-feed-back-into-the-act-ecosystem|How does the Judges on Country experience feed back into the ACT ecosystem?]] — 2026-04-13
+
+- [[how-should-act-engage-judges-after-the-on-country-experience-and-what-systems-ca|How should ACT engage judges after the on-Country experience and what systems capture the learning?]] — 2026-04-13
+
+- [[how-does-justicehub-program-search-connect-postcards-to-real-services-across-aus|How does JusticeHub program search connect postcards to real services across Australia?]] — 2026-04-13
+
 _(This index is auto-maintained. New synthesis articles will appear here as they are created.)_
