@@ -5,7 +5,7 @@ status: Active
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/technical/vignette-workflows.md`.
-> Regenerated: `2026-04-13T11:58:00.951Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerated: `2026-04-13T12:18:15.129Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # Vignette & Media Workflows
 

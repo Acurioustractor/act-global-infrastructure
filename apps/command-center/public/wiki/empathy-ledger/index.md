@@ -15,7 +15,7 @@ empathy_ledger_key: empathy-ledger
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/projects/empathy-ledger.md`.
-> Regenerated: `2026-04-13T11:58:00.951Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerated: `2026-04-13T12:18:15.129Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # Empathy Ledger
 
