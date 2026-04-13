@@ -56,4 +56,6 @@ This folder is the **second-brain compounding loop**. Per the [Karpathy LLM know
 
 - [[what-is-the-living-organism-the-visual-system-for-the-aesthetics-of-asymmetry|What is the living organism — the visual system for The Aesthetics of Asymmetry?]] — 2026-04-13
 
+- [[how-does-empathy-ledger-v2-integrate-with-civicgraph-and-justicehub-to-add-the-h|How does Empathy Ledger v2 integrate with CivicGraph and JusticeHub to add the human layer to the ar]] — 2026-04-13
+
 _(This index is auto-maintained. New synthesis articles will appear here as they are created.)_

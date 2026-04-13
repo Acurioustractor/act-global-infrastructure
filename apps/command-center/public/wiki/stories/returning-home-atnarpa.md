@@ -7,7 +7,7 @@ series: judges-on-country-postcards
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/stories/returning-home-atnarpa.md`.
-> Regenerated: `2026-04-13T22:30:25.620Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerated: `2026-04-13T22:40:00.900Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # Returning Home to Atnarpa: The Bloomfield Family's Journey
 
