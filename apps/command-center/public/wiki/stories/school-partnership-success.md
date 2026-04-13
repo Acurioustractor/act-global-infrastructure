@@ -6,7 +6,7 @@ projects: oonchiumpa
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/stories/school-partnership-success.md`.
-> Regenerated: `2026-04-13T11:45:09.000Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerated: `2026-04-13T11:58:00.951Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # School Partnership Success Stories
 

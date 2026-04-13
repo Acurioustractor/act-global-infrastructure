@@ -18,6 +18,14 @@ Helper: `node scripts/wiki-log.mjs <op> "<summary>" [files...]`
 
 ## 2026
 
+- 2026-04-13 21:58 | lint | 193 articles · 0 broken · 0 orphans · 0 missing index — clean after synthesis round | wiki/output/
+- 2026-04-13 21:58 | synthesis | 4 synthesis articles: wiki surfaces, dollar flow, narrative store, project codes as universal key | wiki/synthesis/
+- 2026-04-13 21:58 | viewer-build | 193 articles · 60 photo maps · 1384KB | tools/act-wikipedia.html
+- 2026-04-13 21:58 | snapshot-sync | 23 direct mirrors · 30 stories · 4 wrappers | apps/command-center/public/wiki/README.md, apps/command-center/public/wiki/snapshot-meta.json
+- 2026-04-13 21:55 | synthesis | "How do the 77 project codes connect across financial, storytelling, knowledge, and compliance system" → 3 citations | wiki/synthesis/how-do-the-77-project-codes-connect-across-financial-storytelling-knowledge-and-.md
+- 2026-04-13 21:54 | synthesis | "What is the narrative store and how does it drive editorial output?" → 2 citations | wiki/synthesis/what-is-the-narrative-store-and-how-does-it-drive-editorial-output.md
+- 2026-04-13 21:54 | synthesis | "How does a dollar flow through the ACT ecosystem from bank transaction to R&D tax offset?" → 2 citations | wiki/synthesis/how-does-a-dollar-flow-through-the-act-ecosystem-from-bank-transaction-to-rd-tax.md
+- 2026-04-13 21:53 | synthesis | "What are the wiki output surfaces and how do they differ?" → 3 citations | wiki/synthesis/what-are-the-wiki-output-surfaces-and-how-do-they-differ.md
 - 2026-04-13 21:45 | viewer-build | 189 articles · viewer rebuilt after ops loop | tools/act-wikipedia.html
 - 2026-04-13 21:45 | lint | 189 articles · 0 broken links · 0 orphans · 0 missing index · 1 stub · 100% bridge coverage — full ops loop round | wiki/output/lint-2026-04-13.md
 - 2026-04-13 21:45 | viewer-build | 189 articles · 60 photo maps · 1368KB | tools/act-wikipedia.html

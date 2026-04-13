@@ -191,6 +191,10 @@ The fourth letter of [[lcaa-method|LCAA]] — physical, sensory work that makes 
 - [[the-edge-is-where-the-healing-is-justicehub-as-the-world-model-for-community-led|The Edge Is Where the Healing Is]] — JusticeHub as the world model for community-led justice
 - [[the-kettle|The Kettle]] — STAY reflection anchored in Oonchiumpa, Diagrama, and the four-layer infrastructure
 - [[how-does-the-tractorpedia-second-brain-pattern-compound-knowledge-over-time|How the Tractorpedia second-brain compounds knowledge]] — compounding pattern behind the wiki itself
+- [[what-are-the-wiki-output-surfaces-and-how-do-they-differ|Wiki Output Surfaces]] — four downstream surfaces: Regen Studio (329 pages), Tractorpedia (189), Command Center, snapshot
+- [[how-does-a-dollar-flow-through-the-act-ecosystem-from-bank-transaction-to-rd-tax|Dollar Flow: Bank → R&D Offset]] — the full path from NAB bank feed to 43.5% ATO refund
+- [[what-is-the-narrative-store-and-how-does-it-drive-editorial-output|Narrative Store & Editorial Output]] — claims database that turns editorial from blank-page to assembly
+- [[how-do-the-77-project-codes-connect-across-financial-storytelling-knowledge-and-|Project Codes as Universal Key]] — how 77 codes connect financial, storytelling, knowledge, and compliance systems
 
 ## Narrative (claims store — what we have already said)
 

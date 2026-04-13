@@ -6,7 +6,7 @@ projects: oonchiumpa, land-practice
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/stories/young-fellas-standley-chasm.md`.
-> Regenerated: `2026-04-13T11:45:09.000Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerated: `2026-04-13T11:58:00.951Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # Young Fellas Experience Cultural Connection at Standley Chasm
 

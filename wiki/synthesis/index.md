@@ -30,4 +30,12 @@ This folder is the **second-brain compounding loop**. Per the [Karpathy LLM know
 
 - [[the-kettle|The Kettle]] — flagship reflection for STAY: the room at Oonchiumpa, Diagrama, and the four-layer infrastructure that makes the kettle legible — 2026-04-09
 
+- [[what-are-the-wiki-output-surfaces-and-how-do-they-differ|What are the wiki output surfaces and how do they differ?]] — 2026-04-13
+
+- [[how-does-a-dollar-flow-through-the-act-ecosystem-from-bank-transaction-to-rd-tax|How does a dollar flow through the ACT ecosystem from bank transaction to R&D tax offset?]] — 2026-04-13
+
+- [[what-is-the-narrative-store-and-how-does-it-drive-editorial-output|What is the narrative store and how does it drive editorial output?]] — 2026-04-13
+
+- [[how-do-the-77-project-codes-connect-across-financial-storytelling-knowledge-and-|How do the 77 project codes connect across financial, storytelling, knowledge, and compliance system]] — 2026-04-13
+
 _(This index is auto-maintained. New synthesis articles will appear here as they are created.)_
