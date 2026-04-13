@@ -18,6 +18,7 @@ Helper: `node scripts/wiki-log.mjs <op> "<summary>" [files...]`
 
 ## 2026
 
+- 2026-04-13 22:22 | manual | narrative-refresh — 1 project(s) · 15 claims · 0 status changes | wiki/narrative/justicehub/INDEX.md
 - 2026-04-13 22:18 | ingest | 6 Oonchiumpa postcard stories + Judges on Country article + judges-have-never-met-them claim — 200 articles | wiki/stories/, wiki/projects/justicehub/judges-on-country.md
 - 2026-04-13 22:18 | viewer-build | 200 articles · 60 photo maps · 1409KB | tools/act-wikipedia.html
 - 2026-04-13 22:18 | snapshot-sync | 23 direct mirrors · 36 stories · 4 wrappers | apps/command-center/public/wiki/README.md, apps/command-center/public/wiki/snapshot-meta.json
