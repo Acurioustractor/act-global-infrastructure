@@ -16,7 +16,7 @@ empathy_ledger_key: black-cockatoo-valley
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/projects/act-farm/black-cockatoo-valley.md`.
-> Regenerated: `2026-04-13T12:57:52.115Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerated: `2026-04-13T13:08:22.637Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # Black Cockatoo Valley
 

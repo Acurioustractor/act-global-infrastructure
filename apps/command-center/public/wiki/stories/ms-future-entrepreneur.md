@@ -7,7 +7,7 @@ series: judges-on-country-postcards
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/stories/ms-future-entrepreneur.md`.
-> Regenerated: `2026-04-13T12:57:52.115Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerated: `2026-04-13T13:08:22.637Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # MS: From Disconnected Youth to Future Tourism Entrepreneur
 

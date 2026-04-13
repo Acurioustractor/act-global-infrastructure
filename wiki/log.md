@@ -18,6 +18,10 @@ Helper: `node scripts/wiki-log.mjs <op> "<summary>" [files...]`
 
 ## 2026
 
+- 2026-04-13 23:08 | synthesis | Growing without fanfare — art as strategy, experiences as growth engine, 40/30/20/10 time split | wiki/synthesis/
+- 2026-04-13 23:08 | viewer-build | 205 articles · 62 photo maps · 1454KB | tools/act-wikipedia.html
+- 2026-04-13 23:08 | snapshot-sync | 23 direct mirrors · 36 stories · 4 wrappers | apps/command-center/public/wiki/README.md, apps/command-center/public/wiki/snapshot-meta.json
+- 2026-04-13 23:06 | synthesis | "How does ACT grow without fanfare — through word of mouth, incredible experiences, and art instead o" → 7 citations | wiki/synthesis/how-does-act-grow-without-fanfare-through-word-of-mouth-incredible-experiences-a.md
 - 2026-04-13 22:57 | synthesis | Third Reality deep synthesis — CivicGraph + JusticeHub + EL, what the broken room looks like, how postcards are the Third Reality in action | wiki/synthesis/
 - 2026-04-13 22:57 | viewer-build | 204 articles · 62 photo maps · 1444KB | tools/act-wikipedia.html
 - 2026-04-13 22:57 | snapshot-sync | 23 direct mirrors · 36 stories · 4 wrappers | apps/command-center/public/wiki/README.md, apps/command-center/public/wiki/snapshot-meta.json
