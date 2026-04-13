@@ -213,6 +213,8 @@ The fourth letter of [[lcaa-method|LCAA]] — physical, sensory work that makes 
 - [[what-is-the-third-reality-actually-solving-and-how-do-civicgraph-justicehub-and-|What the Third Reality Is Actually Solving]] — CivicGraph + JusticeHub + Empathy Ledger: how three layers produce what none can alone
 - [[how-does-act-grow-without-fanfare-through-word-of-mouth-incredible-experiences-a|Growing Without Fanfare]] — no galas, no content calendars, no parliament visits — word of mouth from experiences so good people can't stop talking
 - [[what-are-acts-seven-flagship-experiences-and-how-does-each-one-convert-into-ecos|Seven Flagship Experiences]] — CONTAINED, Judges on Country, Brave Ones, Harvest, Goods, EL stories, Tractorpedia — how each converts into growth
+- [[how-does-the-third-reality-become-acts-operating-system-not-just-a-concept-but-t|Third Reality as Operating System]] — not a concept to explain but a daily practice: every hour produces data, evidence, or sovereign narrative
+- [[what-are-the-specific-opportunities-to-deploy-the-third-reality-in-the-next-12-m|12-Month Opportunity Map]] — 10 specific opportunities across 3 tiers, from judges nationally to CivicGraph UK pilot
 
 ## Narrative (claims store — what we have already said)
 

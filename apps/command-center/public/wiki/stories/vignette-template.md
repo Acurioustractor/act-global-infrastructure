@@ -1,6 +1,6 @@
 ---
 status: generated
-generated_at: 2026-04-13T13:20:03.635Z
+generated_at: 2026-04-13T13:28:02.496Z
 canonical_source: wiki/technical/vignette-workflows.md
 ---
 

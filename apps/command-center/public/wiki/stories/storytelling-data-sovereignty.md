@@ -6,7 +6,7 @@ projects: picc-storm-stories, empathy-ledger
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/stories/storytelling-data-sovereignty.md`.
-> Regenerated: `2026-04-13T13:20:03.635Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerated: `2026-04-13T13:28:02.496Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # Storytelling, Data Sovereignty, and Community Recovery
 

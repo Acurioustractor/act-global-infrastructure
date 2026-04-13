@@ -18,6 +18,11 @@ Helper: `node scripts/wiki-log.mjs <op> "<summary>" [files...]`
 
 ## 2026
 
+- 2026-04-13 23:28 | synthesis | Third Reality as operating system + 12-month opportunity map — 207 articles, 19 synthesis | wiki/synthesis/
+- 2026-04-13 23:28 | viewer-build | 208 articles · 62 photo maps · 1489KB | tools/act-wikipedia.html
+- 2026-04-13 23:28 | snapshot-sync | 23 direct mirrors · 36 stories · 4 wrappers | apps/command-center/public/wiki/README.md, apps/command-center/public/wiki/snapshot-meta.json
+- 2026-04-13 23:26 | synthesis | "What are the specific opportunities to deploy the Third Reality in the next 12 months?" → 6 citations | wiki/synthesis/what-are-the-specific-opportunities-to-deploy-the-third-reality-in-the-next-12-m.md
+- 2026-04-13 23:25 | synthesis | "How does the Third Reality become ACT's operating system — not just a concept but the way every hour" → 8 citations | wiki/synthesis/how-does-the-third-reality-become-acts-operating-system-not-just-a-concept-but-t.md
 - 2026-04-13 23:20 | lint | 206 articles · 0 broken · 0 orphans · 0 stubs · 0 missing index — CLEAN SWEEP | wiki/output/
 - 2026-04-13 23:20 | viewer-build | 206 articles · 62 photo maps · 1470KB | tools/act-wikipedia.html
 - 2026-04-13 23:20 | snapshot-sync | 23 direct mirrors · 36 stories · 4 wrappers | apps/command-center/public/wiki/README.md, apps/command-center/public/wiki/snapshot-meta.json

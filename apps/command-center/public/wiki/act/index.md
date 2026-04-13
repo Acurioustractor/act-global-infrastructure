@@ -5,7 +5,7 @@ status: Active
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/concepts/act-identity.md`.
-> Regenerated: `2026-04-13T13:20:03.635Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerated: `2026-04-13T13:28:02.496Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # A Curious Tractor (ACT)
 
