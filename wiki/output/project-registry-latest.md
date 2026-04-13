@@ -4,10 +4,10 @@
 
 ## Summary
 
-- Wiki project pages: **54**
-- Own-code operational pages: **36**
+- Wiki project pages: **58**
+- Own-code operational pages: **39**
 - Parent/alias/proof pages: **18**
-- Pages still needing a decision: **0**
+- Pages still needing a decision: **1**
 - Wiki pages with missing or stale own-code metadata: **0**
 - Real own-code collisions still needing cleanup: **0**
 
@@ -24,6 +24,7 @@
 | Title | Slug | Wiki Code | Tag With | Type | Mode | Action |
 |---|---|---|---|---|---|---|
 | ACT Farm | `act-farm` | `ACT-FM` | `ACT-FM` | project-hub | own-code | Keep as coded project. |
+| ACT Monthly Dinners | `act-monthly-dinners` | `ACT-MD` | `ACT-MD` | project | own-code | Keep as coded project. |
 | ACT Public Voice | `act-public-voice` | `ACT-MISC` | `ACT-MISC` | project | own-code | Keep as coded project. |
 | ACT Regenerative Studio | `act-studio` | `ACT-CORE` | `ACT-CORE` | cluster-hub | own-code | Keep as a named hub page. Treat as the studio cluster, not as a normal funded project. |
 | Barkly Backbone | `barkly-backbone` | `ACT-BB` | `ACT-BB` | project | own-code | Keep as coded project. |
@@ -36,6 +37,7 @@
 | Community Capital | `community-capital` | `ACT-CP` | `ACT-CP` | project | own-code | Keep as coded project. |
 | ConFit Pathways | `confit-pathways` | `ACT-CT` | `ACT-CT` | project | own-code | Keep as coded project. |
 | CONTAINED | `contained` | `ACT-CN` | `ACT-CN` | project | own-code | Keep as coded project. |
+| Custodian Economy | `custodian-economy` | `ACT-CE` | `ACT-CE` | project | own-code | Keep as coded project. |
 | Dad.Lab.25 | `dad-lab-25` | `ACT-DL` | `ACT-DL` | project | own-code | Keep as coded project. |
 | Designing for Obsolescence | `designing-for-obsolescence` | `ACT-DO` | `ACT-DO` | project | own-code | Keep as coded project. |
 | Diagrama | `diagrama` | `ACT-DG` | `ACT-DG` | project | own-code | Keep as coded project. |
@@ -47,6 +49,7 @@
 | Goods on Country | `goods-on-country` | `ACT-GD` | `ACT-GD` | project-hub | own-code | Keep as coded project. |
 | June's Patch | `junes-patch` | `ACT-JP` | `ACT-JP` | project | own-code | Keep as coded project. |
 | JusticeHub | `justicehub` | `ACT-JH` | `ACT-JH` | project-hub | own-code | Keep as coded project. |
+| Marriage Celebrant | `marriage-celebrant` | `ACT-CB` | `ACT-CB` | project | own-code | Keep as coded project. |
 | Mounty Yarns | `mounty-yarns` | `ACT-MY` | `ACT-MY` | project | own-code | Keep as coded project. |
 | Oonchiumpa | `oonchiumpa` | `ACT-OO` | `ACT-OO` | project | own-code | Keep as coded project. |
 | Palm Island Community Company (PICC) | `picc` | `ACT-PI` | `ACT-PI` | project | own-code | Keep as coded project. |
@@ -69,10 +72,10 @@
 | Green Harvest Witta | `green-harvest-witta` | `ACT-HV` | `ACT-HV` | sub-project | parent-code | Keep the wiki page, but treat this as a Harvest node rather than a separate cross-system project code. |
 | Minderoo Pitch Package — STAY (Crescendo tier) | `minderoo-pitch-package` | `NO-CODE` | `ACT-JH` | pitch-package | parent-code | Operational package only. Never tag as a standalone project. |
 | PICC Annual Report | `picc-annual-report` | `picc-annual-report` | `ACT-PI` | deliverable | parent-code | Treat as a deliverable under PICC unless it later receives a dedicated budget line and code. |
-| PICC Centre Precinct | `picc-centre-precinct` | `picc-centre-precinct` | `ACT-PI` | sub-project | parent-code | Keep as a distinct wiki page and operational stream under PICC. |
-| PICC Photo Kiosk | `picc-photo-kiosk` | `picc-photo-kiosk` | `ACT-PI` | sub-project | parent-code | Keep as a wiki page and tag to ACT-PI until/unless a dedicated kiosk code is introduced. |
+| PICC Centre Precinct | `picc-centre-precinct` | `NO-CODE` | `ACT-PI` | sub-project | parent-code | Keep as a distinct wiki page and operational stream under PICC. |
+| PICC Photo Kiosk | `picc-photo-kiosk` | `NO-CODE` | `ACT-PI` | sub-project | parent-code | Keep as a wiki page and tag to ACT-PI until/unless a dedicated kiosk code is introduced. |
 | Place-Based Policy Lab | `place-based-policy-lab` | `NO-CODE` | `ACT-JH` | method-lab | parent-code | Keep as a conceptual/method page unless it gets a funded operational line of its own. |
-| Quandamooka Justice and Healing Strategy | `quandamooka-justice-strategy` | `NO-CODE` | `ACT-JH` | community-strategy | parent-code | Keep as a place-specific strategy page. Use ACT-JH until it becomes a separately budgeted operational project. |
+| Quandamooka Justice and Healing Strategy | `quandamooka-justice-strategy` | `ACT-QD` | `ACT-JH` | community-strategy | parent-code | Keep as a place-specific strategy page. Use ACT-JH until it becomes a separately budgeted operational project. |
 | SMART Connect | `smart-connect` | `ACT-SM` | `ACT-SM` | sub-project | parent-code | Treat SMART Connect as the umbrella code and roll SMART variants into it. |
 | SMART HCP GP Uplift | `smart-hcp-gp-uplift` | `ACT-SM` | `ACT-SM` | sub-project | parent-code | Keep page-level distinction, but use the SMART umbrella code for cross-system tagging. |
 | SMART Recovery GP Kits | `smart-recovery-gp-kits` | `ACT-SM` | `ACT-SM` | sub-project | parent-code | Keep page-level distinction, but use the SMART umbrella code for cross-system tagging. |
@@ -89,7 +92,9 @@ _None._
 
 ## Pages Still Requiring A Decision
 
-_None._
+| Title | Slug | Wiki Code | Tag With | Type | Mode | Action |
+|---|---|---|---|---|---|---|
+| Empathy Ledger Annual Field Service | `annual-field-service` | `NO-CODE` | `NO-CODE` | project | no-tag-yet | Decision needed. |
 
 ## Real Own-Code Collisions Still To Resolve
 

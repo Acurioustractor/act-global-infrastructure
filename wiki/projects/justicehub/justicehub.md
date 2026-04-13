@@ -320,3 +320,5 @@ This is why JusticeHub needs to stay attached to [[living-website-operating-syst
 - [[wiki-project-and-work-sync-contract|Wiki Project & Work Sync Contract]]
 - [[living-website-operating-system|Living Website Operating System]]
 - [[art/business/studio-business-model|Studio Business Model]] — how proof, touring, and public justice infrastructure support the wider Studio field
+- [[2026-04-act-farm-repositioning|Act-Farm Repositioning]] — JusticeHub referenced in the capital engine pivot
+- [[rdti-claim-strategy|R&D Tax Incentive Claim Strategy]] — JusticeHub development as eligible R&D activity

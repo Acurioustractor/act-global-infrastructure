@@ -164,3 +164,4 @@ Every project, every piece of art, every community relationship can be tagged wi
 - [[voice-guide|ACT Voice Guide]] — the narrative register that translates LCAA into public storytelling
 - [[visual-system|ACT Visual System]] — the shared art grammar for expressing the Art phase across decks, diagrams, and artefacts
 - [[roadmap-2026|2026 Roadmap]] — the annual prioritization layer that sequences work through ACT's method
+- [[y1-release-program|Y1 Art Release Program]] — LCAA phases expressed in the Year 1 art schedule

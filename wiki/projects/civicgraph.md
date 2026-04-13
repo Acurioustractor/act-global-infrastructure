@@ -253,3 +253,5 @@ The "Updated daily" trust signal is underused in internal comms and should appea
 - [[goods-on-country|Goods on Country]] — current procurement-intelligence use case through the Goods Workspace
 - [[power-dynamics-philanthropy|Power Dynamics in Australian Philanthropy]] — the data audit behind the thesis
 - [[2026-04-founder-lanes-and-top-two-bets|Founder Lanes and Top Two Bets]] — the founder decision that treats CivicGraph and JusticeHub as one flagship stack
+- [[five-year-cashflow-model|Five-Year Cashflow Model]] — CivicGraph revenue assumptions in the five-year projection
+- [[rdti-claim-strategy|R&D Tax Incentive Claim Strategy]] — CivicGraph development as eligible R&D activity

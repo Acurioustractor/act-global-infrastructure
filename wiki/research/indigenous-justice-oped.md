@@ -122,3 +122,7 @@ Four asks:
 - Raw: `wiki/raw/2026-04-07-jh-first-nations-oped.md`
 - Author: Benjamin Knight (co-founder, A Curious Tractor)
 - Published: 2026 (launch essay for CONTAINED April 20 tour)
+
+## Backlinks
+
+- [[kristy-bloomfield|Kristy Bloomfield]] — quoted in the essay on Oonchiumpa's work

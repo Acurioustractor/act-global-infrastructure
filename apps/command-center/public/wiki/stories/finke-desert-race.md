@@ -6,7 +6,7 @@ projects: oonchiumpa, land-practice
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/stories/finke-desert-race.md`.
-> Regenerated: `2026-04-11T02:58:52.891Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerated: `2026-04-13T11:45:09.000Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # Finke Desert Race Country Experience
 

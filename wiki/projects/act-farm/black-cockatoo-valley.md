@@ -155,3 +155,4 @@ This matters because the land layer is not backdrop. It is part of the same oper
 - [[designing-for-obsolescence|Designing for Obsolescence]] — the long-term stewardship model
 - [[living-website-operating-system|Living Website Operating System]] — the place layer inside the wider ACT web/publishing system
 - [[art/business/studio-business-model|Studio Business Model]] — why place, residencies, and field evidence are part of Studio economics rather than side context
+- [[2026-04-act-farm-repositioning|Act-Farm Repositioning]] — BCV role in the farm repositioning decision

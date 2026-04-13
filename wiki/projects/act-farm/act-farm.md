@@ -142,3 +142,5 @@ Studio revenue funds land care, community wages, and long-term repair. Enterpris
 - [[projects/act-farm/README|ACT Farm Cluster]]
 - [[wiki-project-and-work-sync-contract|Wiki Project & Work Sync Contract]]
 - [[living-website-operating-system|Living Website Operating System]]
+- [[2026-04-act-farm-repositioning|Act-Farm Repositioning]] — the decision to reposition ACT Farm as capital engine
+- [[five-year-cashflow-model|Five-Year Cashflow Model]] — farm revenue in the five-year projection

@@ -316,3 +316,7 @@ The public act.place page does not mention: blockchain ownership, TK Labels, Muk
 - [[continuous-pipeline|Continuous Pipeline Architecture]] — the maintenance layer that keeps EL-linked people, story, and wiki surfaces refreshed without mirroring the full platform
 - [[living-website-operating-system|Living Website Operating System]] — where EL sits as the live editorial and media layer
 - [[art/business/studio-business-model|Studio Business Model]] — why EL media and story quality matter economically as well as ethically
+- [[y1-release-program|Y1 Art Release Program]] — EL as media source for the Year 1 art release schedule
+- [[2026-04-act-farm-repositioning|Act-Farm Repositioning]] — EL referenced in the regenerative capital pivot
+- [[five-year-cashflow-model|Five-Year Cashflow Model]] — EL revenue assumptions in the five-year projection
+- [[rdti-claim-strategy|R&D Tax Incentive Claim Strategy]] — EL development as eligible R&D activity

@@ -112,3 +112,4 @@ The Harvest property arc runs from a visionary brainstorm to a signed lease in e
 - [[beautiful-obsolescence|Beautiful Obsolescence]] — The Handover section of the Compendium
 - [[lcaa-method|LCAA Method]] — Shaun's oysters as LCAA made physical
 - [[smart-recovery-context|SMART Recovery Context]] — Sally's farm burnout epiphany connects ACT Farm to healing practice
+- [[nicholas-marchesi|Nicholas Marchesi OAM]] — co-founder and land partner in the property arc

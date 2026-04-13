@@ -1,15 +1,15 @@
 {
-  "generatedAt": "2026-04-10T22:37:44.485Z",
+  "generatedAt": "2026-04-13T11:38:02.692Z",
   "sourcePaths": {
     "wikiProjects": "/Users/benknight/Code/act-regenerative-studio/src/data/wiki-projects.generated.json",
     "projectCodes": "/Users/benknight/Code/act-global-infrastructure/config/project-codes.json",
     "identityRules": "/Users/benknight/Code/act-global-infrastructure/config/project-identity-rules.json"
   },
   "counts": {
-    "total": 54,
-    "ownCode": 36,
+    "total": 58,
+    "ownCode": 39,
     "parentOrAlias": 18,
-    "needsDecision": 0,
+    "needsDecision": 1,
     "wikiBackfillReady": 0,
     "collisions": 0
   },
@@ -25,6 +25,20 @@
       "taggingMode": "own-code",
       "canonicalSlug": "act-farm",
       "productionUrl": "https://act-farm.vercel.app",
+      "needsWikiCodeBackfill": false,
+      "recommendedAction": "Keep as coded project."
+    },
+    {
+      "title": "ACT Monthly Dinners",
+      "slug": "act-monthly-dinners",
+      "wikiCode": "ACT-MD",
+      "registryCode": "ACT-MD",
+      "tagWithCode": "ACT-MD",
+      "tier": "Satellite",
+      "entityType": "project",
+      "taggingMode": "own-code",
+      "canonicalSlug": "act-monthly-dinners",
+      "productionUrl": null,
       "needsWikiCodeBackfill": false,
       "recommendedAction": "Keep as coded project."
     },
@@ -197,6 +211,20 @@
       "recommendedAction": "Keep as coded project."
     },
     {
+      "title": "Custodian Economy",
+      "slug": "custodian-economy",
+      "wikiCode": "ACT-CE",
+      "registryCode": "ACT-CE",
+      "tagWithCode": "ACT-CE",
+      "tier": "Satellite",
+      "entityType": "project",
+      "taggingMode": "own-code",
+      "canonicalSlug": "custodian-economy",
+      "productionUrl": null,
+      "needsWikiCodeBackfill": false,
+      "recommendedAction": "Keep as coded project."
+    },
+    {
       "title": "Dad.Lab.25",
       "slug": "dad-lab-25",
       "wikiCode": "ACT-DL",
@@ -265,6 +293,20 @@
       "productionUrl": "https://www.empathyledger.com",
       "needsWikiCodeBackfill": false,
       "recommendedAction": "Keep as coded project."
+    },
+    {
+      "title": "Empathy Ledger Annual Field Service",
+      "slug": "annual-field-service",
+      "wikiCode": "NO-CODE",
+      "registryCode": null,
+      "tagWithCode": null,
+      "tier": "NO-TIER",
+      "entityType": "project",
+      "taggingMode": "no-tag-yet",
+      "canonicalSlug": "annual-field-service",
+      "productionUrl": null,
+      "needsWikiCodeBackfill": false,
+      "recommendedAction": "Decision needed."
     },
     {
       "title": "Feel Good Project",
@@ -393,6 +435,20 @@
       "recommendedAction": "Keep as coded project."
     },
     {
+      "title": "Marriage Celebrant",
+      "slug": "marriage-celebrant",
+      "wikiCode": "ACT-CB",
+      "registryCode": "ACT-CB",
+      "tagWithCode": "ACT-CB",
+      "tier": "Satellite",
+      "entityType": "project",
+      "taggingMode": "own-code",
+      "canonicalSlug": "marriage-celebrant",
+      "productionUrl": null,
+      "needsWikiCodeBackfill": false,
+      "recommendedAction": "Keep as coded project."
+    },
+    {
       "title": "Minderoo Pitch Package — STAY (Crescendo tier)",
       "slug": "minderoo-pitch-package",
       "wikiCode": "NO-CODE",
@@ -465,7 +521,7 @@
     {
       "title": "PICC Centre Precinct",
       "slug": "picc-centre-precinct",
-      "wikiCode": "picc-centre-precinct",
+      "wikiCode": "NO-CODE",
       "registryCode": "ACT-PI",
       "tagWithCode": "ACT-PI",
       "tier": "NO-TIER",
@@ -493,10 +549,10 @@
     {
       "title": "PICC Photo Kiosk",
       "slug": "picc-photo-kiosk",
-      "wikiCode": "picc-photo-kiosk",
+      "wikiCode": "NO-CODE",
       "registryCode": "ACT-PI",
       "tagWithCode": "ACT-PI",
-      "tier": "Studio",
+      "tier": "NO-TIER",
       "entityType": "sub-project",
       "taggingMode": "parent-code",
       "canonicalSlug": "picc",
@@ -521,10 +577,10 @@
     {
       "title": "Quandamooka Justice and Healing Strategy",
       "slug": "quandamooka-justice-strategy",
-      "wikiCode": "NO-CODE",
+      "wikiCode": "ACT-QD",
       "registryCode": "ACT-JH",
       "tagWithCode": "ACT-JH",
-      "tier": "NO-TIER",
+      "tier": "Satellite",
       "entityType": "community-strategy",
       "taggingMode": "parent-code",
       "canonicalSlug": "justicehub",
@@ -650,7 +706,7 @@
       "wikiCode": "NO-CODE",
       "registryCode": "ACT-CP",
       "tagWithCode": "ACT-CP",
-      "tier": "studio",
+      "tier": "NO-TIER",
       "entityType": "work",
       "taggingMode": "parent-code",
       "canonicalSlug": "community-capital",
@@ -720,7 +776,7 @@
       "wikiCode": "NO-CODE",
       "registryCode": "ACT-CORE",
       "tagWithCode": "ACT-CORE",
-      "tier": "studio",
+      "tier": "NO-TIER",
       "entityType": "work-placeholder",
       "taggingMode": "parent-code",
       "canonicalSlug": "act-studio",

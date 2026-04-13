@@ -15,7 +15,7 @@ empathy_ledger_key: justicehub
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/projects/justicehub/justicehub.md`.
-> Regenerated: `2026-04-11T02:58:52.891Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerated: `2026-04-13T11:45:09.000Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # JusticeHub
 
@@ -324,3 +324,5 @@ This is why JusticeHub needs to stay attached to [[living-website-operating-syst
 - [[wiki-project-and-work-sync-contract|Wiki Project & Work Sync Contract]]
 - [[living-website-operating-system|Living Website Operating System]]
 - [[art/business/studio-business-model|Studio Business Model]] — how proof, touring, and public justice infrastructure support the wider Studio field
+- [[2026-04-act-farm-repositioning|Act-Farm Repositioning]] — JusticeHub referenced in the capital engine pivot
+- [[rdti-claim-strategy|R&D Tax Incentive Claim Strategy]] — JusticeHub development as eligible R&D activity

@@ -258,3 +258,4 @@ Q11–Q15 resolved in session:
 - [[the-edge-is-where-the-healing-is-justicehub-as-the-world-model-for-community-led|The Edge Is Where the Healing Is]] — the synthesis this program operationalises
 - [[../../technical/wiki-project-and-work-sync-contract|Wiki Project and Work Sync Contract]] — the cross-system identity rules for this methodology page
 - [[../../concepts/living-website-operating-system|Living Website Operating System]] — how this page should flow into EL and the public sites
+- [[y1-release-program|Y1 Art Release Program]] — Staying in the Year 1 art release schedule

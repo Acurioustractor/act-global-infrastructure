@@ -92,6 +92,12 @@ People pages are **curated, not exhaustive**. The wider voice population lives i
 - [[goods-on-country|Goods on Country]] — place-based design and procurement
 - [[the-harvest|The Harvest]] — regenerative agriculture and creative practice
 - [[act-public-voice|ACT Public Voice]] — how ACT describes itself to the world (act.place)
+- [[projects/empathy-ledger/annual-field-service|EL Annual Field Service]] — bespoke engagement scope, $50K/year per org, Y1 model
+- [[projects/justicehub/justicehub-centre-of-excellence|JusticeHub Centre of Excellence]] — JusticeHub CoE (ideation)
+- [[projects/smart-recovery/smart-recovery|SMART Recovery]] — addiction peer support, GP integration
+- [[projects/act-monthly-dinners|ACT Monthly Dinners]] — regular community gatherings over shared meals
+- [[projects/custodian-economy|Custodian Economy]] — economic models grounded in custodianship
+- [[projects/marriage-celebrant|Marriage Celebrant]] — Ben's civil marriage celebrant practice
 
 ### Cluster Overviews
 
@@ -110,6 +116,7 @@ People pages are **curated, not exhaustive**. The wider voice population lives i
 
 - [[palm-island|Palm Island (Bwgcolman)]] — relationship history, projects, sovereignty journey
 - [[mount-isa|Mount Isa (Kalkadoon Country)]] — community-led youth justice, BG Fit, NAIDOC
+- [[communities/the-buttery|The Buttery]] — drug and alcohol rehabilitation, 50-year history, EL bespoke customer
 
 ## Research
 
@@ -127,6 +134,7 @@ People pages are **curated, not exhaustive**. The wider voice population lives i
 - [[diagrama-spain-context|Diagrama Spain Context]] — Olga meeting (NT context), May 2024 political strategy
 - [[smart-recovery-context|SMART Recovery Context]] — Chris Gimpel design interview, Sally/April pilot launch, GP campaign
 - [[meeting-intelligence-synthesis|Meeting Intelligence Synthesis]] — 7 cross-cutting patterns across 77 meetings, 2023–2026
+- [[research/civicgraph-uk-market-entry|CivicGraph UK Market Entry]] — deep research on UK expansion, decision pending
 
 ## Art Projects
 
@@ -145,6 +153,7 @@ The fourth letter of [[lcaa-method|LCAA]] — physical, sensory work that makes 
 - [[regional-arts-fellowship|Regional Arts Fellowship]] — art × tech × agriculture
 - [[the-vagina|The Vagina]] — coming soon
 - [[the-caravan|The Caravan]] — mobile leadership infrastructure (born at Community Capital)
+- [[art/y1-release-program|Y1 Art Release Program]] — eight art projects across 2026/27, Daft Punk release cadence
 
 ## Stories
 
@@ -166,6 +175,16 @@ The fourth letter of [[lcaa-method|LCAA]] — physical, sensory work that makes 
 - [[wiki-project-and-work-sync-contract|Wiki Project & Work Sync Contract]] — how canonical wiki identity becomes website, EL, and Supabase sync state
 - [[transcription-workflow|Transcription Workflow]] — four-layer pipeline, ALMA analysis
 - [[vignette-workflows|Vignette Workflows]] — create, consent, cultural review
+
+## Finance
+
+- [[finance/five-year-cashflow-model|Five-Year Cashflow Model]] — revenue projections, R&D tax, founder deposit path
+- [[finance/rdti-claim-strategy|R&D Tax Incentive Claim Strategy]] — FY26 founder invoicing, CPA booking, $200K+ refundable offset
+
+## Operations
+
+- [ACT Operational Thesis](operations/act-operational-thesis.md) — how we run money, time, intelligence, and art
+- [ACT Ecosystem Map](operations/act-ecosystem-map.md) — how 77 projects, 7 financial buckets, and 6 systems connect
 
 ## Synthesis
 
@@ -207,6 +226,8 @@ A Rowboat-style typed-entity store of every public argument the ecosystem has ma
 - [[2026-04-09-lesotho-data-needs|Lesotho Data Needs]] — named contacts, timing, and the data gap resolved on 2026-04-09
 - [[url-audit-2026-04-07|URL Audit — 2026-04-07]] — live/dead/known-issue URL sweep across the ecosystem
 - [[wiki-health-2026-04-07|Wiki Health Report — 2026-04-07]] — earlier canonical health checkpoint for Tractorpedia
+- [[2026-04-act-farm-repositioning|ACT Farm Repositioning]] — from obsolescence to regenerative capital engine
+- [[2026-04-the-work|The Work]] — art is the destination, everything else is how we get there
 
 ---
 
@@ -226,6 +247,7 @@ wiki/
   technical/            ← architecture, infrastructure, builds
   decisions/            ← key decisions and their reasoning
   research/             ← compiled research and analysis
+  operations/           ← operational thesis, ecosystem map, how ACT runs
   narrative/            ← claims store — every public argument by project
   raw/                  ← source documents (immutable, never edited)
 ```

@@ -318,3 +318,4 @@ The earlier JusticeHub pitch numbers were partly aspirational. Reviewed against 
 - [[visual-system|ACT Visual System]] — the locked Red Centre and woodcut grammar used across the pitch deck and companion artefacts
 - [[../../technical/wiki-project-and-work-sync-contract|Wiki Project and Work Sync Contract]] — the cross-system identity rules for this flagship page
 - [[../../concepts/living-website-operating-system|Living Website Operating System]] — how this page should flow into EL and the public sites
+- [[kristy-bloomfield|Kristy Bloomfield]] — cultural authority anchoring the Three Circles pitch

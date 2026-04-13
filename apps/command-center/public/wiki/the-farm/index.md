@@ -15,7 +15,7 @@ empathy_ledger_key: act-farm
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/projects/act-farm/act-farm.md`.
-> Regenerated: `2026-04-11T02:58:52.891Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerated: `2026-04-13T11:45:09.000Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # ACT Farm
 
@@ -146,3 +146,5 @@ Studio revenue funds land care, community wages, and long-term repair. Enterpris
 - [[projects/act-farm/README|ACT Farm Cluster]]
 - [[wiki-project-and-work-sync-contract|Wiki Project & Work Sync Contract]]
 - [[living-website-operating-system|Living Website Operating System]]
+- [[2026-04-act-farm-repositioning|Act-Farm Repositioning]] — the decision to reposition ACT Farm as capital engine
+- [[five-year-cashflow-model|Five-Year Cashflow Model]] — farm revenue in the five-year projection

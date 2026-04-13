@@ -334,3 +334,5 @@ Severity levels: Low → Medium → High → Critical.
 - [[designing-for-obsolescence|Designing for Obsolescence]] — organisational model being tested through community handover
 - [[third-reality|The Third Reality]] — Goods as circular economy evidence layer
 - [[youth-justice-reform|Youth Justice Reform]] — housing, beds, and durable household infrastructure as upstream justice intervention, not separate from reform
+- [[2026-04-act-farm-repositioning|Act-Farm Repositioning]] — Goods referenced in the regenerative capital pivot
+- [[rdti-claim-strategy|R&D Tax Incentive Claim Strategy]] — Goods manufacturing as eligible R&D activity

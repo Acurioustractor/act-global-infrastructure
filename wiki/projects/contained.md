@@ -244,3 +244,4 @@ Every public argument CONTAINED has made, with deployment history and gap analys
 - [[art/philosophy/art-as-infrastructure|Art as Infrastructure]] — why CONTAINED is part of ACT's core argument
 - [[art/innovation/studio-innovation-flow|Studio Innovation Flow]] — how a work like CONTAINED feeds strategy back into the ecosystem
 - [[art/business/studio-business-model|Studio Business Model]] — how touring, hosting, and commissions make the work economically legible
+- [[y1-release-program|Y1 Art Release Program]] — CONTAINED in the Year 1 art release schedule

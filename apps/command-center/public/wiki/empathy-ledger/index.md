@@ -15,7 +15,7 @@ empathy_ledger_key: empathy-ledger
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/projects/empathy-ledger.md`.
-> Regenerated: `2026-04-11T02:58:52.891Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerated: `2026-04-13T11:45:09.000Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # Empathy Ledger
 
@@ -320,3 +320,7 @@ The public act.place page does not mention: blockchain ownership, TK Labels, Muk
 - [[continuous-pipeline|Continuous Pipeline Architecture]] — the maintenance layer that keeps EL-linked people, story, and wiki surfaces refreshed without mirroring the full platform
 - [[living-website-operating-system|Living Website Operating System]] — where EL sits as the live editorial and media layer
 - [[art/business/studio-business-model|Studio Business Model]] — why EL media and story quality matter economically as well as ethically
+- [[y1-release-program|Y1 Art Release Program]] — EL as media source for the Year 1 art release schedule
+- [[2026-04-act-farm-repositioning|Act-Farm Repositioning]] — EL referenced in the regenerative capital pivot
+- [[five-year-cashflow-model|Five-Year Cashflow Model]] — EL revenue assumptions in the five-year projection
+- [[rdti-claim-strategy|R&D Tax Incentive Claim Strategy]] — EL development as eligible R&D activity

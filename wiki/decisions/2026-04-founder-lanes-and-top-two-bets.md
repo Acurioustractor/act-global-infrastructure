@@ -171,3 +171,5 @@ Review this decision if any of the following happen:
 - [[civicgraph|CivicGraph]] — flagship bet two, legibility layer
 - [[contained|CONTAINED]] — campaign front door for the stack
 - [[beautiful-obsolescence|Beautiful Obsolescence]] — the reason the cut matters
+- [[2026-04-act-farm-repositioning|Act-Farm Repositioning]] — farm lane repositioned by this decision
+- [[five-year-cashflow-model|Five-Year Cashflow Model]] — financial model shaped by founder lane choices

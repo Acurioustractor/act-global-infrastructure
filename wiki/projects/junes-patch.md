@@ -42,3 +42,4 @@ In line with ACT's [[designing-for-obsolescence|Designing for Obsolescence]] phi
 - [[lcaa-method|LCAA Method]]
 - [[designing-for-obsolescence|Designing for Obsolescence]]
 - [[caring-for-those-who-care|Caring for Those Who Care]]
+- [[2026-04-act-farm-repositioning|Act-Farm Repositioning]] — June's Patch referenced in the farm pivot

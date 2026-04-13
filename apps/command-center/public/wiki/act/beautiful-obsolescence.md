@@ -5,7 +5,7 @@ status: Active
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/concepts/beautiful-obsolescence.md`.
-> Regenerated: `2026-04-11T02:58:52.891Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerated: `2026-04-13T11:45:09.000Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # Beautiful Obsolescence
 
@@ -142,3 +142,4 @@ If ACT cannot hand over the knowledge and public framing layer, it has not actua
 - [[continuous-pipeline|Continuous Pipeline Architecture]] — the decision to keep wiki infrastructure light, forkable, and low-dependency
 - [[roadmap-2026|2026 Roadmap]] — annual handover and readiness logic expressed at the planning layer
 - [[living-website-operating-system|Living Website Operating System]] — the public-shell architecture that keeps ACT's sites replaceable and forkable
+- [[2026-04-act-farm-repositioning|Act-Farm Repositioning]] — obsolescence logic applied to the farm pivot

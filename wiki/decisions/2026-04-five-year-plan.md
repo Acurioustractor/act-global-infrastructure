@@ -49,7 +49,7 @@ The [[beautiful-obsolescence|Beautiful Obsolescence]] language stays on [[empath
 
 ### 3. Empathy Ledger stays bespoke in Y1
 
-Four existing customers — [[picc|PICC]], JCF, [[the-buttery|The Buttery]], [[smart-connect|SMART Recovery]] — at roughly $50K each annual bespoke engagement. That is $200K recurring from work already in flight, formalised into scoped annual commitments and invoiced on a schedule.
+Four existing customers — [[picc|PICC]], JCF, [[communities/the-buttery|The Buttery]], [[smart-connect|SMART Recovery]] — at roughly $50K each annual bespoke engagement. That is $200K recurring from work already in flight, formalised into scoped annual commitments and invoiced on a schedule.
 
 We do not productise into a three-tier SaaS yet. We learn from the actual bespoke work first. Productised version designed in Y2 once we know what the customers actually buy.
 
@@ -237,3 +237,6 @@ This phase is only sketched. It earns detail once the Y1–Y5 base is proven.
 - [[the-brave-ones|The Brave Ones]]
 - [[contained|CONTAINED]]
 - [[picc|Palm Island Community Company]]
+- [[2026-04-act-farm-repositioning|Act-Farm Repositioning]] — farm pivot decision flowing from this plan
+- [[five-year-cashflow-model|Five-Year Cashflow Model]] — the financial model behind this plan
+- [[rdti-claim-strategy|R&D Tax Incentive Claim Strategy]] — R&D refund strategy supporting the plan

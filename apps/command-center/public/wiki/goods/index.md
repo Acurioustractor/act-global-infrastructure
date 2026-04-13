@@ -15,7 +15,7 @@ empathy_ledger_key: goods-on-country
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/projects/goods-on-country.md`.
-> Regenerated: `2026-04-11T02:58:52.891Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerated: `2026-04-13T11:45:09.000Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # Goods on Country
 
@@ -266,6 +266,23 @@ Goods on Country rejects the model of designing products in offices and shipping
 4. **Community controlled** — the arc bends toward community ownership of facilities, data, and relationships
 5. **Circular by default** — local waste becomes local goods; nothing leaves the loop unnecessarily
 
+## System Position
+
+Goods on Country is one of ACT's flagship public fields, but its truth is distributed across layers:
+
+- the wiki holds the durable product logic, partnership model, capital stack, and handover arc
+- [[empathy-ledger|Empathy Ledger]] should hold the live community voice, photos, video, and consented deployment stories
+- the Goods Asset Register, [[grantscope|GrantScope]] Goods Workspace, and related project codebases hold the operational implementation truth
+- the public websites should compose those layers without becoming a second place where product or partnership truth gets rewritten by hand
+
+That is why Goods on Country needs to stay linked to [[living-website-operating-system|Living Website Operating System]], [[designing-for-obsolescence|Designing for Obsolescence]], and the partner ecology around [[oonchiumpa|Oonchiumpa]] and [[picc|PICC]].
+
+## Key Source Bridges
+
+- [Source Summary — Goods on Country](../sources/2026-04-07-cc-goods-index.md)
+- [Source Summary — Community Innovation: Beds, Washing Machines, and Orange Sky](../sources/2026-04-07-cc-stories-community-innovation-goods.md)
+- [Source Summary — The Cure Already Exists](../sources/2026-03-12-article-the-cure-already-exists.md)
+
 ## Infrastructure & Operations
 
 ### Asset Register Platform
@@ -321,3 +338,5 @@ Severity levels: Low → Medium → High → Critical.
 - [[designing-for-obsolescence|Designing for Obsolescence]] — organisational model being tested through community handover
 - [[third-reality|The Third Reality]] — Goods as circular economy evidence layer
 - [[youth-justice-reform|Youth Justice Reform]] — housing, beds, and durable household infrastructure as upstream justice intervention, not separate from reform
+- [[2026-04-act-farm-repositioning|Act-Farm Repositioning]] — Goods referenced in the regenerative capital pivot
+- [[rdti-claim-strategy|R&D Tax Incentive Claim Strategy]] — Goods manufacturing as eligible R&D activity

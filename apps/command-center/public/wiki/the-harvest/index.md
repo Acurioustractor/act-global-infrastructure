@@ -15,7 +15,7 @@ empathy_ledger_key: the-harvest
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/projects/the-harvest/the-harvest.md`.
-> Regenerated: `2026-04-11T02:58:52.891Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerated: `2026-04-13T11:45:09.000Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # The Harvest / Witta Harvest HQ
 
@@ -170,3 +170,5 @@ That is why The Harvest needs to stay linked to [[living-website-operating-syste
 - [[wiki-project-and-work-sync-contract|Wiki Project & Work Sync Contract]]
 - [[living-website-operating-system|Living Website Operating System]]
 - [[art/business/studio-business-model|Studio Business Model]] — why the place layer must be legible as enterprise, invitation, and field support
+- [[2026-04-act-farm-repositioning|Act-Farm Repositioning]] — The Harvest role in the farm repositioning
+- [[five-year-cashflow-model|Five-Year Cashflow Model]] — Harvest revenue in the five-year projection
