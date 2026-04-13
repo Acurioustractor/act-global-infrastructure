@@ -68,7 +68,7 @@ Every community organisation in Australia knows what it feels like.
 
 You write a grant application. You frame your work in someone else's language. You report against someone else's KPIs. You reshape your mission to fit a funding round that was designed for a problem the funder defined, not the one your community is living.
 
-You are not applying for funding. You are negotiating for permission to do the work you already know needs doing.
+You are negotiating for permission to do the work you already know needs doing.
 
 And the information asymmetry is the weapon.
 
@@ -81,23 +81,35 @@ Meanwhile: $107 billion a year flows from government to the charitable sector. $
 
 Until now.
 
-We built a system that maps every public dollar we can find. 587,000 entities. 1.5 million relationships. Contracts, donations, grants, charities, foundations, government agencies — connected into one searchable graph.
+We built a system that maps every public dollar we can find. 587,000 entities. 1.5 million relationships. Contracts, donations, grants, charities, foundations, government agencies connected into one searchable graph.
 
 We track what politicians say in Hansard and whether the money follows.
 
-We identify 873 local government areas where disadvantage is high and funding is low — the deserts where community orgs work hardest and get the least.
+We identify 873 local government areas where disadvantage is high and funding is low, the deserts where community orgs work hardest and get the least.
 
 We map which organisations donate to both major parties AND hold government contracts. 140 of them. $80 million donated. $4.7 billion received. A 58x return.
 
-This isn't about exposing corruption. It's about levelling the information playing field.
+This is about levelling the information playing field.
 
-Because here's the thing most grant-makers don't want to say out loud: the reason community organisations are so good at writing grant applications is not that they've been trained to. It's that the system has trained them to perform compliance instead of doing their actual work.
+The reason community organisations are so good at writing grant applications is not that they've been trained to. It's that the system has trained them to perform compliance instead of doing their actual work.
 
-What if community organisations could see the full picture? What if they could identify the right funder before writing the application? What if they could track whether promised funding arrived? What if they could show a funder: "here's the gap in your portfolio, and here's the evidence that our approach works"?
+What if community organisations could see the full picture? 
 
-That's not a grant application. That's a proposition. And it shifts the power dynamic entirely.
+What if they could identify the right funder before writing the application? 
 
-The system is called CivicGraph. The evidence layer is called JusticeHub. The storytelling layer is called Empathy Ledger. Together they form what we call the Third Reality — where systemic data meets sovereign human narrative and produces a shared truth the system can't ignore.
+What if they could track whether promised funding arrived? 
+
+What if they could show a funder: "here's the gap in your portfolio, and here's the evidence that our approach works"?
+
+A proposition. Shifting the power dynamic entirely.
+
+The system is called CivicGraph. 
+
+The Justice evidence layer is called JusticeHub. 
+
+The storytelling layer is called Empathy Ledger. 
+
+Together they form what we call the Third Reality. Where systemic data meets sovereign human narrative and produces a shared truth the system can't ignore.
 
 We're not asking for permission anymore. We're building the infrastructure so nobody has to.
 

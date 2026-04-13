@@ -16,9 +16,17 @@ I spent two years scraping government databases from a farmhouse in the Sunshine
 
 AusTender. ACNC. The AEC donations register. Every state grant portal I could find. Hansard transcripts going back years. Foundation annual reports. Charity financials.
 
-Not because I wanted to. Because I was trying to help a community organisation in Alice Springs understand why they kept getting passed over for funding while the same five consulting firms won every contract.
+Not because I wanted to. 
 
-Turns out, nobody had ever connected the datasets. Not the government. Not the universities. Not the big four firms who charge $500 an hour to navigate what should be public knowledge.
+Because I was trying to help a community organisation in Alice Springs understand why they kept getting passed over for funding while the same five consulting firms won every contract.
+
+Turns out, nobody had ever connected the datasets. 
+
+Not the government. 
+
+Not the universities. 
+
+Not the big four firms who charge $500 an hour to navigate what should be public knowledge.
 
 So we did it ourselves.
 
@@ -28,7 +36,9 @@ Some of what we found was predictable. 87.5% of federal procurement value goes t
 
 Some of it was less comfortable. 140 organisations donate to both major parties AND hold government contracts. $80 million donated. $4.7 billion received back. That's a 58x return. I don't know what to call that, but it's not a coincidence.
 
-873 local government areas in Australia have high disadvantage and low per-capita funding. Nobody knew that number before because nobody had joined the data up. The communities in those 873 places know it in their bones. They just didn't have the spreadsheet to prove it.
+873 local government areas in Australia have high disadvantage and low per-capita funding.
+
+Nobody knew that number before because nobody had joined the data up. The communities in those 873 places know it in their bones. They just didn't have the spreadsheet to prove it.
 
 We also started tracking Hansard. What ministers promise in parliament about youth justice, mental health, housing, Indigenous affairs. Then we check whether the money follows. Sometimes it does. Often it doesn't. The gap between a press release and a purchase order is where a lot of trust goes to die.
 
@@ -40,7 +50,7 @@ They're not applying for money. They're asking permission. And the information a
 
 We built CivicGraph to blow the door open. Not to expose anyone. Just to make the information available to the people it's supposed to serve.
 
-If you run a community org and you've ever wondered who else got funded in your space, what your state government actually spent on the thing they announced, or whether there's a single funded program within 200km of your community that does what you do — this is for you.
+If you run a community org and you've ever wondered who else got funded in your space, what your state government actually spent on the thing they announced, or whether there's a single funded program within 200km of your community that does what you do this is for you.
 
 If you're a journalist and you've ever tried to trace where public money actually ends up — this is for you.
 

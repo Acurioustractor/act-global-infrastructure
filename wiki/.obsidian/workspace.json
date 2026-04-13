@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "technical/vignette-workflows.md",
+                "file": "output/narrative-drafts/2026-04-14-civicgraph-agitation-linkedin-v2.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "vignette-workflows"
+              "title": "2026-04-14-civicgraph-agitation-linkedin-v2"
             }
           }
         ]
@@ -53,7 +53,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "2026-04-the-work.md",
+                "query": "2026-04-14-civicgraph-agitation-linkedin-v2.md",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -74,7 +74,8 @@
               "title": "Bookmarks"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
@@ -185,6 +186,16 @@
   },
   "active": "5e77a96e65a9bda3",
   "lastOpenFiles": [
+    "synthesis/what-is-the-living-organism-the-visual-system-for-the-aesthetics-of-asymmetry.md",
+    "output/narrative-drafts/2026-04-14-civicgraph-art-project-linkedin-v3.md",
+    "raw/2026-04-14-civicgraph-art-framing-report.md",
+    "raw/2026-04-14-civicgraph-art-project-deep-research.md",
+    "output/narrative-drafts/2026-04-14-civicgraph-agitation-linkedin.md",
+    "output/narrative-drafts/2026-04-14-civicgraph-agitation-linkedin-v2.md",
+    "output/narrative-drafts/2026-04-14-the-third-reality.md",
+    "technical/vignette-workflows.md",
+    "synthesis/what-are-the-specific-opportunities-to-deploy-the-third-reality-in-the-next-12-m.md",
+    "synthesis/how-does-the-third-reality-become-acts-operating-system-not-just-a-concept-but-t.md",
     "synthesis/what-are-acts-seven-flagship-experiences-and-how-does-each-one-convert-into-ecos.md",
     "synthesis/how-does-act-grow-without-fanfare-through-word-of-mouth-incredible-experiences-a.md",
     "synthesis/what-is-the-third-reality-actually-solving-and-how-do-civicgraph-justicehub-and-.md",
@@ -201,17 +212,7 @@
     "stories/oonchiumpa-jackquann-nigel-programs.md",
     "stories/oonchiumpa-kristy-tanya-founders.md",
     "synthesis/how-do-the-77-project-codes-connect-across-financial-storytelling-knowledge-and-.md",
-    "synthesis/what-is-the-narrative-store-and-how-does-it-drive-editorial-output.md",
-    "synthesis/how-does-a-dollar-flow-through-the-act-ecosystem-from-bank-transaction-to-rd-tax.md",
-    "synthesis/what-are-the-wiki-output-surfaces-and-how-do-they-differ.md",
-    "communities/the-buttery.md",
-    "operations/act-ecosystem-map.md",
-    "operations/act-operational-thesis.md",
     "operations",
-    "projects/justicehub/justicehub-centre-of-excellence.md",
-    "projects/smart-recovery/smart-recovery.md",
-    "projects/marriage-celebrant.md",
-    "projects/custodian-economy.md",
     "output/the-kettle/the-kettle.pdf",
     "output/living-ecosystem-alignment-latest.json",
     "projects/empathy-ledger",

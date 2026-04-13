@@ -18,6 +18,9 @@ Helper: `node scripts/wiki-log.mjs <op> "<summary>" [files...]`
 
 ## 2026
 
+- 2026-04-13 08:00 | viewer-build | 209 articles · 62 photo maps · 1499KB | tools/act-wikipedia.html
+- 2026-04-13 08:00 | snapshot-sync | 23 direct mirrors · 36 stories · 4 wrappers | apps/command-center/public/wiki/README.md, apps/command-center/public/wiki/snapshot-meta.json
+- 2026-04-13 07:59 | synthesis | "What is the living organism — the visual system for The Aesthetics of Asymmetry?" → 4 citations | wiki/synthesis/what-is-the-living-organism-the-visual-system-for-the-aesthetics-of-asymmetry.md
 - 2026-04-13 23:28 | synthesis | Third Reality as operating system + 12-month opportunity map — 207 articles, 19 synthesis | wiki/synthesis/
 - 2026-04-13 23:28 | viewer-build | 208 articles · 62 photo maps · 1489KB | tools/act-wikipedia.html
 - 2026-04-13 23:28 | snapshot-sync | 23 direct mirrors · 36 stories · 4 wrappers | apps/command-center/public/wiki/README.md, apps/command-center/public/wiki/snapshot-meta.json

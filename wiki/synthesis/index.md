@@ -54,4 +54,6 @@ This folder is the **second-brain compounding loop**. Per the [Karpathy LLM know
 
 - [[what-are-the-specific-opportunities-to-deploy-the-third-reality-in-the-next-12-m|What are the specific opportunities to deploy the Third Reality in the next 12 months?]] — 2026-04-13
 
+- [[what-is-the-living-organism-the-visual-system-for-the-aesthetics-of-asymmetry|What is the living organism — the visual system for The Aesthetics of Asymmetry?]] — 2026-04-13
+
 _(This index is auto-maintained. New synthesis articles will appear here as they are created.)_
