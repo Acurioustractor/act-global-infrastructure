@@ -60,7 +60,7 @@ The design principle: do less than a traditional retreat. The land does the work
 
 ## Related case studies
 
-- <Placeholder — only draft when real retreat cases exist to document>
+- [[case-studies/junes-patch-year-one-2025|June's Patch Year One — the JCF partnership, 2024–2025]] — first year of the multi-year June Canavan Foundation partnership. Evidence that healthcare-worker wellbeing responds to nature + community + purpose, and the justification for the Year Two Planting Projects pivot.
 
 ## How to inquire
 
