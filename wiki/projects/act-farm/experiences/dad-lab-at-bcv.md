@@ -59,7 +59,7 @@ The design principle is Dad.Lab.25's: community-led, culturally appropriate, non
 
 ## Related case studies
 
-- <Placeholder — DAD.LAB case study planned for Phase 4c>
+- [[case-studies/dad-lab-bcv-2025|DAD.LAB — the inaugural cohort at BCV, 2025]] — 20 dads, one weekend, 100% return signal. The format this experience is scaling.
 
 ## How to inquire
 
