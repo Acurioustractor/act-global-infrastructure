@@ -66,7 +66,8 @@ Conservation-first is the baseline. If the creek is low or the season demands qu
 
 ## Related case studies
 
-- <Placeholder — "First placed artist" case study to be drafted in Phase 4c>
+- [[case-studies/radical-scoops-at-the-harvest|Radical Scoops at The Harvest — the RAA Industry Residency]] — sibling residency shape at our Witta site. Industry residency is not the same as artist residency, but the governance, documentation discipline, and ecosystem integration patterns translate.
+- <Placeholder — first *placed artist* at BCV case study still to be drafted>
 
 ## How to inquire
 

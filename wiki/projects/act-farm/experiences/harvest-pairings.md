@@ -64,7 +64,8 @@ Groups booking BCV retreats or [[experiences/the-space-at-bcv|The Space at BCV]]
 
 ## Related case studies
 
-- <Placeholder — document monthly dinners as a longitudinal case study once the first year is complete>
+- [[case-studies/radical-scoops-at-the-harvest|Radical Scoops at The Harvest — the RAA Industry Residency]] — the thickest evidence yet that BCV and The Harvest operate as one ecosystem, not two venues. Shows what "pairing" looks like when it's an operating principle, not a calendar item.
+- <Placeholder — longitudinal case study of monthly dinners once the first year is complete>
 
 ## How to inquire
 
