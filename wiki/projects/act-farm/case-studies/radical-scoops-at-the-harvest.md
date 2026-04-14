@@ -23,7 +23,7 @@ last_updated: 2026-04-14
 | **Partners** | [[the-harvest|The Harvest]] · Regional Arts Australia · ANAT (Australian Network for Art & Technology) · agriculture sector · local First Nations collaborators |
 | **Led by** | [[team/ben|Benjamin Knight]] & [[team/nic|Nicholas Marchesi]] (ACT) with embedded artist/industry collaborators |
 | **Funding** | RAA residency delivery 2025–26 (3× milestone invoices); QLD Gives Capacity Lab application (sought $40K of $54K total) |
-| **Related experiences** | [[experiences/harvest-pairings|Harvest Pairings]] · [[experiences/artist-residency|Artist Residency at BCV]] |
+| **Related experiences** | [[experiences/industry-residency-at-the-harvest|Industry Residency at The Harvest]] (primary) · [[experiences/harvest-pairings|Harvest Pairings]] · [[experiences/artist-residency|Artist Residency at BCV]] |
 | **Connects to** | [[case-studies/the-caravan-at-bcv|The Caravan at BCV]] · [[junes-patch|June's Patch]] · [[empathy-ledger|Empathy Ledger]] |
 
 ## What happened
@@ -88,7 +88,7 @@ The residency uses **food as connective tissue** — specifically ice cream, bec
 
 Radical Scoops is the most developed **Industry Residency** ACT has run. Three implications for the experience catalog:
 
-1. **A new experience slot** — *Industry Residency at The Harvest* (or the BCV↔Harvest ecosystem) is not currently in [[experiences/README|the experience catalog]]. Radical Scoops is the case study that earns it. Next time we revise the catalog, this is the addition to make.
+1. **A new experience slot** — *[[experiences/industry-residency-at-the-harvest|Industry Residency at The Harvest]]* is now in [[experiences/README|the experience catalog]]. Radical Scoops is the case study that earned it, and the canonical example of the shape.
 2. **Harvest Pairings is proven thicker than "monthly dinners."** [[experiences/harvest-pairings|Harvest Pairings]] should be read in light of Radical Scoops: the pairing is not just programming across two sites, it's operational integration.
 3. **The Capacity Lab belongs in the wiki, not just on the farm site.** The Toolkit that comes out of the Capacity Lab phase is an ACT studio artefact — an exportable pattern other regions can take. When it lands, it lives in the wiki first.
 

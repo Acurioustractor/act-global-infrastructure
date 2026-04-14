@@ -32,6 +32,7 @@ Accommodation on Country with light-touch hosting.
 Longer placements for artists, practitioners, and researchers working on regenerative, creative, and storytelling practice.
 
 - [[artist-residency|Artist Residency at BCV]] — artists placed on Country for extended creative practice, with ACT as host and curatorial partner.
+- [[industry-residency-at-the-harvest|Industry Residency at The Harvest]] — extended placements where artists, designers and ACT work alongside a regional industry and its people. Sibling to the artist residency, at the Witta site.
 - [[empathy-ledger-storytelling-residency|Empathy Ledger Storytelling Residency]] — embedded storytelling practice feeding the [[empathy-ledger|Empathy Ledger]].
 
 ### Retreats
