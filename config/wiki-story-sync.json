@@ -1,0 +1,114 @@
+{
+  "schema_version": 2,
+  "description": "Allow-list and OCAP policy for syncing Empathy Ledger v2 stories into wiki/stories/. Only stories matching an allow-list entry AND passing every gate in policy.ocap_gates flow to the wiki. Hand-edited; each entry is an intentional opt-in. Every new entry requires the community's consent to having the story surface inside ACT's knowledge base and be read by ACT's pitch-writing agents.",
+  "maintainers": ["Ben Knight", "Nick Marchesi"],
+
+  "policy": {
+    "ocap_gates": {
+      "require_community_status_in": ["published", "pending_review"],
+      "require_status_in": ["published"],
+      "require_not_archived": true,
+      "require_not_deleted": true,
+      "require_consent_not_withdrawn": true,
+      "require_has_explicit_consent": true,
+      "require_ai_processing_consent_verified": true,
+      "require_enable_ai_processing": true,
+      "require_syndication_enabled": true,
+      "allowed_privacy_levels": ["public", "anonymous", "community"],
+      "note_on_community_privacy_level": "Community privacy_level is allowed only in combination with cross_tenant_visibility including act-wiki. The cross-tenant gate is the real access control for non-public stories — privacy_level=community alone does not flow.",
+      "require_elder_approval_when_sensitivity_in": ["medium", "high", "sacred"],
+      "block_when_cultural_warnings_include": ["sacred", "sorry business", "ceremony"],
+      "require_cross_tenant_visibility_to_wiki_or_public": true
+    },
+    "defaults": {
+      "consent_tier_map": {
+        "public": "public",
+        "anonymous": "public",
+        "community": "internal-only",
+        "organization": "internal-only",
+        "mentors_only": "internal-only",
+        "private": "internal-only"
+      }
+    },
+    "on_withdrawal": "rename-with-withdrawn-prefix",
+    "withdrawal_retention_days": 365,
+    "wiki_tenant_slug_for_visibility_check": "act-wiki"
+  },
+
+  "allow": {
+    "projects": [
+      { "act_project_code": "ACT-JH", "note": "JusticeHub — all stories linked to this project code in EL v2 projects table" }
+    ],
+    "organizations": [
+      {
+        "slug": "oonchiumpa",
+        "note": "Oonchiumpa is a separate org in EL v2 (not a project under ACT org). This org-level entry is how ACT-OO stories flow.",
+        "approval": {
+          "status": "active",
+          "given_by": ["Kristy Bloomfield (Oonchiumpa co-director)", "Tanya Turner (Oonchiumpa co-director)"],
+          "given_week_of": "2026-04-13",
+          "channel": "verbal-in-conversation",
+          "consent_mode_note": "Verbal consent in conversation with community leaders is a first-class consent mode for ACT's work — see wiki/decisions/2026-04-18-oonchiumpa-story-approval.md for the governance pattern this establishes.",
+          "parental_consent_flow": "For stories involving young people, parent/guardian consent stands behind storyteller consent and flows through to ACT's agreed uses within the approved scope.",
+          "scope_as_reported": "all Oonchiumpa stories (current and future under this org slug), for ACT wiki + Brave Ones + Minderoo envelope + Judges on Country",
+          "recorded_on": "2026-04-18",
+          "recorded_by": "Ben Knight (witness)",
+          "decision_record": "wiki/decisions/2026-04-18-oonchiumpa-story-approval.md"
+        }
+      },
+      { "slug": "palm-island-community-company", "note": "PICC — also a separate org. Covers what would otherwise be ACT-PI. No org-level approval (deliberate — see wiki/decisions/2026-04-18-picc-selective-youth-voice.md). Stories flow only via individual per-story allow-listing once PICC leadership confirms each pick." },
+      {
+        "slug": "bg-fit",
+        "note": "BG Fit (Mount Isa) — separate org. Richest Brave Ones feedstock after Oonchiumpa: bush camps, residential programs, young-police interviews, named young storytellers.",
+        "approval": {
+          "status": "active-pending-apply",
+          "given_by": ["Brodie (BG Fit)"],
+          "given_week_of": "2026-04-13",
+          "channel": "verbal-in-conversation",
+          "consent_mode_note": "Verbal consent in conversation — same pattern as Oonchiumpa. See wiki/decisions/2026-04-18-bg-fit-story-approval.md.",
+          "elder_review_note": "Brodie's approval does NOT extend the Traditional-Owner-authority-satisfies-elder-review precedent. Two BG Fit stories with cultural_sensitivity=sensitive remain blocked pending separate elder review.",
+          "scope_as_reported": "all BG Fit stories (minus test data) — ACT wiki + Brave Ones + Minderoo + campaign materials",
+          "recorded_on": "2026-04-18",
+          "recorded_by": "Ben Knight (witness)",
+          "decision_record": "wiki/decisions/2026-04-18-bg-fit-story-approval.md"
+        }
+      },
+      {
+        "slug": "mounty-yarns",
+        "note": "Mounty Yarns (Mt Druitt, Sydney) — separate org. 13 storyteller profiles in EL v2; 9 tagged young-person. Content lives in a single compilation story 'In Their Own Words'.",
+        "approval": {
+          "status": "active",
+          "given_by": ["Daniel Daylight (CEO, Mounty Yarns)"],
+          "given_on": "2026-04-18",
+          "channel": "verbal-in-conversation",
+          "consent_mode_note": "Same verbal-consent-in-conversation pattern as Oonchiumpa and BG Fit. Daniel's CEO authority satisfies elder review for Mounty's own documentary compilation (precedent matches Brodie's per-story approvals for BG Fit's own program stories).",
+          "scope_as_reported": "all Mounty Yarns stories, including the 'In Their Own Words' compilation containing 9 named young-people voices",
+          "recorded_on": "2026-04-18",
+          "recorded_by": "Ben Knight (witness)",
+          "decision_record": "wiki/decisions/2026-04-18-mounty-yarns-story-approval.md"
+        }
+      }
+    ],
+    "storytellers": [],
+    "tags": [
+      { "tag": "judges-on-country", "note": "Cross-cutting series — 21 April 2026 trip material regardless of org. Stories with this tag in story.tags/themes/cultural_themes flow even if their org is not allow-listed." },
+      { "tag": "brave-ones", "note": "Brave Ones portrait series" }
+    ]
+  },
+
+  "deny": {
+    "storytellers": [],
+    "story_ids": [
+      { "id": "8db530c5", "org": "bg-fit", "reason": "test data — 'Codex Theme Repro 1775942093598', not real content", "flagged_on": "2026-04-18" },
+      { "id": "72b5bca8", "org": "bg-fit", "reason": "test data — 'Codex Theme Repro 1775942032774', not real content", "flagged_on": "2026-04-18" }
+    ],
+    "note": "Use this list to explicitly block a story that would otherwise match allow — e.g. if a storyteller withdraws consent informally before EL v2 is updated, or if the row is test data. Git-visible override."
+  },
+
+  "open_questions_for_ben": [
+    "Gate strictness: `syndication_enabled = true` is a hard gate. Storytellers have to explicitly opt stories in for downstream distribution in EL v2. This matches OCAP intent but may mean zero stories flow initially until storytellers update the flag. Check with Kristy + Tanya before first ACT-OO sync run.",
+    "`require_status_in: ['published']` means drafts never flow. Correct for pitch feedstock, but confirm.",
+    "Tags allow-list lets specific cross-cutting series flow regardless of project_code. Is that precedent or should every story require project membership?",
+    "Withdrawal retention: 365 days before the withdrawn-prefixed file is actually deleted — safe default, but adjust as needed."
+  ]
+}
