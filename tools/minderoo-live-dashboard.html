@@ -349,14 +349,14 @@
   <div class="mt-6 bg-white border border-stone-200 rounded-md p-4">
     <div class="flex items-baseline justify-between mb-2">
       <div>
-        <div class="text-xs uppercase tracking-widest text-[var(--earth)]">Deep pool · 20+ candidates per state/territory</div>
-        <div class="text-sm text-stone-700 mt-1">235 organisations across 8 states + territories. Expanded 2026-04-20 from ALMA scored + CivicGraph community-controlled Indigenous corps.</div>
+        <div class="text-xs uppercase tracking-widest text-[var(--earth)]">Deep pool · community-led orgs per state/territory</div>
+        <div class="text-sm text-stone-700 mt-1">Anchor candidates are community-led only. Government services, NGOs, foundations, and private companies are shown in separate tiers for system-mapping context — not anchor material.</div>
       </div>
       <div id="state-pool-count" class="text-xs text-stone-500"></div>
     </div>
     <div class="flex flex-wrap gap-2 my-3 text-sm">
-      <span class="text-xs uppercase tracking-widest text-stone-500 mr-2">Drill down:</span>
-      <button class="state-btn chip chip-active" data-state="all">All 235</button>
+      <span class="text-xs uppercase tracking-widest text-stone-500 mr-2">State:</span>
+      <button class="state-btn chip chip-active" data-state="all">All</button>
       <button class="state-btn chip" data-state="QLD">QLD</button>
       <button class="state-btn chip" data-state="NSW">NSW</button>
       <button class="state-btn chip" data-state="VIC">VIC</button>
@@ -366,8 +366,18 @@
       <button class="state-btn chip" data-state="NT">NT</button>
       <button class="state-btn chip" data-state="ACT">ACT</button>
     </div>
+    <div class="flex flex-wrap gap-2 my-3 text-sm">
+      <span class="text-xs uppercase tracking-widest text-stone-500 mr-2">Category:</span>
+      <button class="cat-btn chip chip-active" data-cat="community_led"><span style="color:#3d5830">●</span> Community-led (anchor candidates)</button>
+      <button class="cat-btn chip" data-cat="government_service"><span style="color:#7a3e1a">●</span> Government service</button>
+      <button class="cat-btn chip" data-cat="ngo_or_charity"><span style="color:#5a3d65">●</span> NGO / charity</button>
+      <button class="cat-btn chip" data-cat="foundation_or_funder"><span style="color:#c89a3c">●</span> Foundation / funder</button>
+      <button class="cat-btn chip" data-cat="private_company"><span style="color:#666">●</span> Private company</button>
+      <button class="cat-btn chip" data-cat="social_enterprise"><span style="color:#c89a3c">●</span> Social enterprise</button>
+      <button class="cat-btn chip" data-cat="indigenous_corp_unverified"><span style="color:#7a3e1a">●</span> Indigenous corp (unverified community-controlled)</button>
+    </div>
     <div class="text-xs text-stone-500 serif-italic mb-3">
-      Sources: <strong>alma_scored</strong> — existing portfolio_score · <strong>cc_youth_focused</strong> — Indigenous corp with explicit youth signal · <strong>cc_research_candidate</strong> — Indigenous corp (small-state supplement; youth-justice fit to verify with community before inclusion).
+      The pitch's thesis is community-led youth justice. Government depts, courts, police, and statutory authorities appear in the <em>government service</em> tier because they operate programs scored by ALMA, but they are not anchor candidates. Switch category chip above to see each tier.
     </div>
     <div class="bg-[var(--cream)] rounded overflow-hidden max-h-[600px] overflow-y-auto">
       <table class="w-full text-xs">
@@ -1119,7 +1129,7 @@
     }).join('');
   })();
 
-  // Deep state-pool loader
+  // Deep state-pool loader — categorised
   (async () => {
     const tbody = document.getElementById('state-pool-tbody');
     const countEl = document.getElementById('state-pool-count');
@@ -1133,11 +1143,7 @@
       return;
     }
     const anchorIds = new Set((data.known_anchors || []).map(a => a.gs_entity_id));
-    const byState = data.candidates_by_state;
-    const allRows = [];
-    for (const state of Object.keys(byState)) {
-      for (const row of byState[state]) allRows.push(row);
-    }
+    const byStateCat = data.candidates_by_state_and_category || {};
 
     function sourceChip(src) {
       if (src === 'alma_scored') return '<span class="chip chip-active" style="font-size:9px">alma</span>';
@@ -1145,22 +1151,33 @@
       return '<span class="chip" style="font-size:9px;background:#eee;color:#666">research</span>';
     }
 
-    function render(state) {
-      const rows = state === 'all' ? allRows : (byState[state] || []);
-      countEl.textContent = rows.length + ' orgs' + (state !== 'all' ? ' in ' + state : '');
+    let currentState = 'all';
+    let currentCat = 'community_led';
+
+    function render() {
+      let rows = [];
+      const states = currentState === 'all' ? Object.keys(byStateCat) : [currentState];
+      for (const s of states) {
+        const bucket = (byStateCat[s] && byStateCat[s][currentCat]) || [];
+        rows = rows.concat(bucket);
+      }
+      // sort by score desc then name
+      rows.sort((a,b) => (parseFloat(b.portfolio_score)||0) - (parseFloat(a.portfolio_score)||0) || a.org_name.localeCompare(b.org_name));
+      countEl.textContent = rows.length + ' ' + currentCat.replace(/_/g,' ') + (currentState !== 'all' ? ' in ' + currentState : '');
       if (!rows.length) {
-        tbody.innerHTML = '<tr><td colspan="5" class="text-center py-6 text-stone-500">No candidates.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="5" class="text-center py-6 text-stone-500 italic">No organisations in this category ' + (currentState !== 'all' ? 'for ' + currentState : '') + '.</td></tr>';
         return;
       }
-      tbody.innerHTML = rows.map(r => {
+      tbody.innerHTML = rows.map((r, i) => {
         const isAnchor = anchorIds.has(r.gs_entity_id);
         const anchorBadge = isAnchor ? ' <span class="chip chip-live" style="font-size:9px">★ ANCHOR</span>' : '';
-        const score = r.portfolio_score && r.portfolio_score > 0 ? r.portfolio_score : '';
+        const score = r.portfolio_score && parseFloat(r.portfolio_score) > 0 ? r.portfolio_score : '';
         return '<tr class="ledger-row border-t border-stone-100">' +
-          '<td class="px-2 py-2 font-mono text-[10px] text-stone-500">' + r.rank + '</td>' +
+          '<td class="px-2 py-2 font-mono text-[10px] text-stone-500">' + (i+1) + '</td>' +
           '<td class="px-2 py-2">' +
-            '<div class="font-medium">' + (r.org_name || '').slice(0,70) + anchorBadge + '</div>' +
+            '<div class="font-medium">' + (r.org_name || '').slice(0,90) + anchorBadge + '</div>' +
             (r.lga_name && r.lga_name !== '-' ? '<div class="text-[10px] text-stone-500">' + r.lga_name + '</div>' : '') +
+            (r.years_operating ? '<div class="text-[10px] text-stone-500">' + r.years_operating + ' years</div>' : '') +
           '</td>' +
           '<td class="px-2 py-2 text-[10px]">' + (r.state_norm || '') + '</td>' +
           '<td class="px-2 py-2">' + sourceChip(r.source) + '</td>' +
@@ -1169,12 +1186,21 @@
       }).join('');
     }
 
-    render('all');
+    render();
     document.querySelectorAll('.state-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         document.querySelectorAll('.state-btn').forEach(b => b.classList.remove('chip-active'));
         btn.classList.add('chip-active');
-        render(btn.dataset.state);
+        currentState = btn.dataset.state;
+        render();
+      });
+    });
+    document.querySelectorAll('.cat-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('chip-active'));
+        btn.classList.add('chip-active');
+        currentCat = btn.dataset.cat;
+        render();
       });
     });
   })();
