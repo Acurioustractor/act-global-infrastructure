@@ -1,138 +1,149 @@
 ---
-title: The Ten Anchor Communities — contact sheet for Minderoo envelope
-status: draft-for-ben-verification-before-print
+title: Anchor Communities — confirmed + Session 1 candidates for workshop
+status: draft-for-envelope
 date: 2026-04-20
-print_format: A4 single-sided, designed to face the Three Circles proposal in the envelope
-consent_basis: content drawn from wiki/campaigns/minderoo-pitch/brief.md + session's decision records
-notes_to_ben: |
-  Four of the anchors have named contacts now (Oonchiumpa, PICC, BG Fit, Mounty Yarns).
-  Five are still in-formation or selection-pending. This sheet communicates that
-  honestly — "here's the relational depth of each anchor" — rather than fabricating
-  names to fill boxes. Honesty is what makes this sheet functionally distinctive to
-  Lucy; every other pitch she receives inflates relationships.
-
-  Gaps Ben should fill before print:
-  - Confirm Rachael vs "Rachal" spelling at PICC (brief flags this)
-  - Fill Mounty leader name if wanted (Daniel Daylight is CEO per 2026-04-18 approval)
-  - Confirm MMEIC elder leaders
-  - Decide: keep "Tennant Creek partner — in development" OR add "William Junta" if
-    Ben confirms spelling + org name. Ten vs nine is an envelope-level decision.
+supersedes: earlier version titled "The Ten Anchor Communities — contact sheet for Minderoo envelope"
+print_format: A4 double-sided, designed to face the Three Circles proposal + workshop proposal in the envelope
+consent_basis:
+  - wiki/decisions/2026-04-18-oonchiumpa-story-approval.md
+  - wiki/decisions/2026-04-18-bg-fit-story-approval.md
+  - wiki/decisions/2026-04-18-mounty-yarns-story-approval.md
+  - wiki/decisions/2026-04-18-picc-selective-youth-voice.md
+  - wiki/projects/justicehub/three-circles.md (reframed 2026-04-20)
 ---
 
-# The Ten Anchor Communities
+# Anchor Communities
 
 *For The Three Circles · Minderoo Foundation · $2.9M over three years · FY2026–FY2028*
 
 ---
 
-> Each anchor is a relationship, not a slot. This sheet is honest about the relational depth of each. Three communities (¹ ² ³) have given verbal approval for their young people's stories to flow into ACT's ecosystem as of 2026-04-18, recorded with named authority in the governance ledger. The rest are in active relationship-building or selection.
+> Five anchors already confirmed. Two to three more selected together in Session 1 + Session 2 with Minderoo. The final set reaches 7–8 — one per state and territory. This sheet names what is real today and shows honestly what the workshop narrows from.
 
 ---
 
-## Active — verbal approval given, stories flowing
+## Page 1 — The Five Confirmed Anchors
 
-### 1. Oonchiumpa · Mparntwe (Alice Springs), NT
+*Verbal consent captured. Governance recorded. Stories flowing through Empathy Ledger v2 with named-storyteller provenance. ALMA interventions scored. All five rank in the top 30 of the 235-candidate pool.*
+
+### 1. Oonchiumpa Consultancy & Services · Mparntwe (Alice Springs), NT
 **Country:** Arrernte, Alyawarra, Luritja, Warlpiri (7 language groups served)
 **Leadership:** **Kristy Bloomfield** + **Tanya Turner** (co-directors). **Aunty Bev** + **Uncle Terry** (elder authority). **Fred Campbell** (youth case worker).
-**Status:** Active. 95% diversion rate. 72% school re-engagement. 97.6% less cost than detention. Host of the 21 April 2026 Judges on Country trip for 55 judges and magistrates.
-**Contact:** via Ben Knight, benjamin@act.place
-**Consent provenance:** verbal approval from Kristy + Tanya, week of 2026-04-13
-**Anchor since:** foundational community for the Three Circles concept
+**Consent given:** verbal, week of 2026-04-13 · Ben Knight as witness
+**Status:** Active · 95% diversion · 72% school re-engagement · 97.6% less cost than detention · host of 21 April 2026 Judges on Country trip for 55 judges + magistrates
+**Data spine:** 9 ALMA interventions · top score 0.772 · 6 wiki stories flowing
+**Contact:** via Ben Knight (benjamin@act.place)
+**Governance record:** `wiki/decisions/2026-04-18-oonchiumpa-story-approval.md`
 
 ### 2. Palm Island Community Company (PICC) · Palm Island, QLD
 **Country:** Manbarra / Bwgcolman
-**Leadership:** **Rachael Atkinson** — CEO
-**Status:** Active relationship. $29M annual turnover. 208 FTE. Youth Offender Support Service grown 3× since 2021. 236 story records in Empathy Ledger v2 (mostly elder testimony on Palm Island history; selective youth-voice pursuit in progress).
-**Contact:** via Ben Knight. Selective per-story approval pursued; see `wiki/decisions/2026-04-18-picc-selective-youth-voice.md` for current candidate list.
-**Anchor since:** long-standing ACT ecosystem partner
-
-### 3. BG Fit · Mount Isa, QLD
-**Country:** Kalkadoon (Mount Isa base); satellite work 500km remote at Doomadgee
-**Leadership:** **Brodie Germaine** — founder, proud Pita Pita Wayaka man from Mount Isa
-**Status:** Active. Tuesday gym sessions at Mount Isa PCYC with 15–20 young regulars. Monthly on-Country bush camps. Quarterly remote trips to Doomadgee. Spinifex Residential partnership in place. Cross-service collaboration with Gracie Ryder at Mount Isa Police Liaison.
+**Leadership:** **Rachael Atkinson** (CEO)
+**Consent given:** long-standing ACT ecosystem relationship (pre-2026)
+**Status:** Active · $29M annual turnover · 208 FTE · Youth Offender Support Service grown 3× since 2021
+**Data spine:** 21 ALMA interventions (11 youth-justice) · top score 0.793 after 2026-04-20 scoring pipeline fix · largest youth-justice portfolio of any confirmed anchor
 **Contact:** via Ben Knight
-**Consent provenance:** verbal approval from Brodie, week of 2026-04-13; three per-story elder extensions given for Jay, Mount Isa Bush Camp, Doomadgee Camp
+**Note:** Selective per-story approval on individual stories pending Rachael conversation (`wiki/decisions/2026-04-18-picc-selective-youth-voice.md`)
 
-### 4. Mounty Aboriginal Youth & Community Services (Mounty Yarns) · Mt Druitt / Sydney, NSW
-**Country:** Darug
-**Leadership:** **Daniel Daylight** — CEO
-**Status:** Active. Youth-led advocacy movement. 13 storyteller profiles in Empathy Ledger v2 (9 tagged as young people). Currently the CONTAINED mobile container's base camp.
-**Contact:** via Ben Knight
-**Consent provenance:** verbal approval from Daniel Daylight, 2026-04-18; one compilation story now flowing carrying 9 named young voices
-
----
-
-## Active relationship — in formation
-
-### 5. MMEIC (Minjerribah Moorgumpin Elders-in-Council Aboriginal Corporation) · Minjerribah (North Stradbroke Island), QLD
+### 3. Minjerribah Moorgumpin Elders-in-Council (MMEIC) · Minjerribah (North Stradbroke Island), QLD
 **Country:** Quandamooka
-**Leadership:** elder council (specific leaders to be named in envelope after Ben confirms)
-**Status:** Active. Founded 1993. Oyster industry + elder governance partnership explored. Earlier ACT documents confused this with a separate "Minjerra Bastow Burke" entry — MMEIC is the actual organisation. Consolidated into single row 2026-04-15.
+**Leadership:** Elders-in-Council governance (founded 7 June 1994)
+**Consent given:** long-standing relationship; 3 draft ALMA interventions pending elder confirmation on intervention wording
+**Status:** Active · 32 years operating · ABN 87836925264 · Dunwich QLD 4183 · manager@mmeic.org · mmeicac.com.au
+**Data spine:** top score **0.815** — highest of all anchors after 2026-04-20 ALMA authoring
+**Contact:** via Ben Knight; MMEIC direct contacts above
+**Governance record:** `thoughts/shared/drafts/mmeic-alma-draft-interventions.md`
+
+### 4. Brodie Germaine Fitness Aboriginal Corporation (BG Fit) · Mount Isa, QLD
+**Country:** Pita Pita Wayaka + Kalkadoon (Mount Isa base); satellite work at Doomadgee (500km remote)
+**Leadership:** **Brodie Germaine** (founder, Pita Pita Wayaka man from Mount Isa)
+**Consent given:** verbal, week of 2026-04-13 · Ben Knight as witness · three per-story elder extensions for Jay, Mount Isa Bush Camp, Doomadgee Camp
+**Status:** Active · ORIC ICN 10049 · ABN 94770726134 · Tuesday gym at PCYC with 15–20 regulars · monthly on-Country bush camps · quarterly Doomadgee trips · Spinifex Residential partnership
+**Data spine:** 3 ALMA draft interventions (Tuesday Gym, Bush Camps, Remote Outreach) · top score 0.749 · 12 wiki stories flowing
 **Contact:** via Ben Knight
+**Governance record:** `wiki/decisions/2026-04-18-bg-fit-story-approval.md`
 
----
-
-## In development — named contacts, relationships building
-
-### 6. Tennant Creek partner · Tennant Creek, NT
-**Country:** Warumungu
-**Leadership:** *William Junta*  — name spelling and organisation confirmation pending Ben's next conversation
-**Status:** In development. Relationship initiated through ACT's Goods on Country work with Warumungu Traditional Owners (Aunty Dianne Stokes, Norman Frank Jupurrurla).
-**Contact:** via Ben Knight — confirm before print
-
-### 7. WA partner · Western Australia
-**Country:** to confirm once anchor organisation named
-**Leadership:** introduction via **Hailey** (UWA criminology) — surname and whether she is facilitator or anchor contact to confirm
-**Status:** In conversation. Facilitated through Tanya Turner's UWA law school alumni network.
+### 5. Mounty Aboriginal Youth & Community Services (Mounty Yarns) · Mt Druitt, NSW
+**Country:** Darug
+**Leadership:** **Daniel Daylight** (CEO); **Adam** + **Leah** (Youth Peak co-runners); **Shayle McKellar** (lived-experience consultant, Wangkamarra, completed HSC in custody)
+**Consent given:** verbal, 2026-04-18 · Ben Knight as witness
+**Status:** Active · youth-led movement · ABN 30674998577 · 13 storytellers in EL v2 (9 young people at the table) · CONTAINED mobile container base camp
+**Data spine:** 2 ALMA draft interventions · top score 0.740 · compilation story with 9 named young voices flowing to wiki
 **Contact:** via Ben Knight
+**Governance record:** `wiki/decisions/2026-04-18-mounty-yarns-story-approval.md`
 
 ---
 
-## Selection pending — Q1 2026
+## Page 2 — Session 1 Candidates for the Remaining Seats
 
-### 8. ACT (Ngambri-Ngunnawal country)
-**Country:** Ngambri-Ngunnawal
-**Leadership:** to be confirmed
-**Status:** Selection process underway for the Australian Capital Territory anchor. Pitch ready to name once the community relationship is confirmed.
+*Evidence-ranked community-led Aboriginal Community Controlled organisations from ACT's data spine. Not yet contacted. No community has agreed to participate. Session 1 narrows this list with Minderoo; Session 2 confirms after each community's own consent.*
 
-### 9. Lutruwita (Tasmania) partner
-**Country:** multiple First Nations across Lutruwita
-**Leadership:** to be confirmed via Just Reinvest Initiative (JRI) and Diagrama network
-**Status:** Selection pending. Diagrama-linked relational pathway being explored.
+### VIC (0 confirmed; one seat)
 
-### 10. SA partner
-**Country:** Kaurna or other — to confirm with named community
-**Leadership:** to be confirmed; Flinders University linkage in place
-**Status:** Selection pending.
+**Recommended:** Rumbalara Aboriginal Co-Operative Limited · Greater Shepparton · 46 years operating · top score **0.803** · broad service spine (health + youth + football/netball).
+
+**Alternatives:**
+- Victorian Aboriginal Child and Community Agency (VACCA) · Darebin · 48 years · Indigenous-led evidence tier · top score 0.743
+- Wathaurong Aboriginal Co-Operative Ltd · Greater Geelong · 46 years · top score 0.743
+- Victorian Aboriginal Health Service (VAHS) · Yarra · 52 years · top score 0.743
+
+### WA (0 confirmed; one seat)
+
+**Recommended:** Kullarri Regional Communities Indigenous Corporation · Derby-West Kimberley · 9 years · top score 0.708 · FASD-specific programs · most geographically remote WA option (complements BG Fit's Doomadgee reach).
+
+**Alternatives:**
+- Dumbartung Aboriginal Corporation · South Perth · 38 years · Indigenous-led evidence tier · top score 0.653
+- Yorgum Healing Services Aboriginal Corporation · Vincent (Perth metro) · 32 years · top score 0.653
+- Potential Hailey / UWA criminology-facilitated introduction if Minderoo prefers a metro option
+
+### SA (0 confirmed; one seat)
+
+**Recommended:** Aboriginal Drug and Alcohol Council (SA) Aboriginal Corporation · West Torrens · 9 years · top score 0.743 · only strong community-led SA candidate in the data spine's top tier.
+
+**Research-candidate pool:** 107 community-controlled Indigenous corps in SA awaiting deeper research. Session 1 flags SA as the state where outreach timeline may extend beyond Session 2.
+
+### TAS (0 confirmed; one seat)
+
+**Recommended:** Aboriginal and Torres Strait Islander Legal Service Tasmania (ATSILS) · top score 0.713 · strongest community-led TAS option.
+
+**Alternative:** Tasmanian Aboriginal Corporation (Tasmanian Aboriginal Centre) · Hobart · 9 years · top score 0.653
+
+**Research-candidate pool:** 20 additional community-controlled Indigenous corps in TAS. TAS is the thinnest state overall; extended consent timeline likely.
+
+### ACT (0 confirmed; one seat)
+
+**Recommended:** Gugan Gulwan Youth Aboriginal Corporation · 33 years operating · top score 0.653 · **the only explicitly youth-dedicated Aboriginal Community Controlled org in the ACT**.
+
+**Decision needed in Session 1:** does ACT territory get its own anchor seat (reaches 8 total) or does its young people get served via Mounty Yarns' NSW network (stays at 7)?
 
 ---
 
-## The honest frame for Lucy
+## Page 3 — Decisions for Session 1 with Lucy Stronach
 
-Four anchors have active relationships today with named community leaders who have given verbal consent to ACT using their voices in the envelope. That's the basis of this proposal.
+1. **Final anchor count.** 7 (one per state, ACT via NSW's Mounty network) or 8 (ACT seat separate).
+2. **QLD treatment.** Three QLD anchors already confirmed (PICC + MMEIC + BG Fit) by circumstance — each reached via a different community-relationship pathway. Keep all three as full anchors, or consolidate to one with two becoming affiliated network?
+3. **Shortlist narrowing.** From this ~20-candidate shortlist, which 12–15 does ACT approach between sessions? Minderoo flags any Session 1 candidates they have existing relationships with so outreach is pre-warmed.
 
-One more anchor (MMEIC) is in active relationship with elder leaders to be named before print.
+## The Honest Frame for Minderoo
 
-Two are in development with known introductions — names pending confirmation.
+**Five anchors have active relationships today** with named community leaders and verbal consent captured.
 
-Three are in formal selection. The pitch commits to confirming each with the community's cultural authority before any public naming. We would rather hold a slot open honestly than name a community that hasn't consented.
+**Three-to-four remain** — ACT proposes candidates from a 235-community data-spine pool. Minderoo workshops with ACT to narrow. Community consent is the final word on any anchor.
 
-This is what *ten anchor communities over three years* actually looks like: four already running, one close, two in named introductions, three in patient selection. The $2.9M held over three years is what turns that structure into a working ten-community network.
+**This is what "ten anchor communities over three years" actually looks like as it is being built**: five already running, 2–3 in named Session 1 proposal, community consent as the binding decision. The pitch commits to never naming a community as an anchor that hasn't consented.
 
 ---
 
-*Every named person and organisation on this sheet is reachable. Any Minderoo reviewer can verify a relationship by contacting Ben Knight at benjamin@act.place. No anchor is imaginary.*
+*Every named person on this sheet is reachable. Any Minderoo reviewer can verify a relationship by contacting Ben Knight at benjamin@act.place. No anchor is imaginary.*
 
 ---
 
 ## Pre-print checklist for Ben
 
-- [ ] Confirm Rachael Atkinson spelling at PICC (brief flags "Rachal" vs "Rachael")
-- [ ] Confirm Mounty leadership naming on the sheet (Daniel Daylight CEO — already named here; check if additional leaders to include)
-- [ ] MMEIC elder leaders — fill names if confirmed, keep "to be named before print" if not
-- [ ] Tennant Creek — confirm William Junta spelling + organisation name, or keep as "name pending" and flag in pitch
-- [ ] WA — Hailey's surname + whether she is facilitator or anchor contact
-- [ ] Rows 6, 7, 8, 9 — keep as "in formation / pending" OR add specific candidate names if confirmed this week
-- [ ] Number — decide whether the envelope says *"Ten"* (with one slot honestly flagged as pending) or *"Nine"* (match reality). Current brief.md flags this unresolved.
-- [ ] Visual design — one-page A4, matte stock, ideally with small photos alongside each named community leader where consent is explicitly given. Placeholder [PHOTO] markers in layout where photos will go.
-- [ ] Print + bind into envelope
+- [ ] Confirm Rachael Atkinson spelling at PICC (brief earlier flagged "Rachal" vs "Rachael")
+- [ ] MMEIC elder leaders — obtain named permission to include specific elders on this printed sheet, or keep as "Elders-in-Council governance"
+- [ ] BG Fit — verify Brodie is comfortable being named as the confirmation contact on a funder-facing document (not just a story source)
+- [ ] Mounty Yarns — Daniel Daylight named; verify he is comfortable being the public-facing contact or prefers "contact via Ben Knight" routing
+- [ ] Session 1 candidates (page 2) — none contacted yet; label clearly as such in any Minderoo conversation to avoid premature "anchor" claims
+- [ ] Number — decide whether the envelope + this sheet say "7-8" consistently or commit to one
+- [ ] Visual design — A4 double-sided, matte stock, ideally with small photos alongside each named community leader where they have given explicit permission. Placeholder [PHOTO] markers in layout where photos would go.
+- [ ] Print + bind into envelope after Session 1 if Minderoo's workshop changes the Session 1 candidates
