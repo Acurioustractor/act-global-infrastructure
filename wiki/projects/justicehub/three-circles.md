@@ -1,7 +1,7 @@
 ---
 title: The Three Circles
 subtitle: A community-led advocacy infrastructure for youth justice in Australia
-status: Canonical pitch — Lucy-warm, refresh in progress (2026-04-08)
+status: Canonical pitch — refreshed 2026-04-20 with 50-to-7/8 workshopped selection reframe + 5 confirmed anchors
 date: 2026-04-11
 entity_type: flagship-program
 tagging_mode: parent-code
@@ -24,7 +24,7 @@ canonical_source: wiki/raw/2026-04-07-jh-three-circles-proposal.md
 # The Three Circles
 
 > *A community-led advocacy infrastructure for youth justice in Australia.*
-> *FY2026–FY2028. $2.9M. 10 anchor communities. One artefact.*
+> *FY2026–FY2028. $2.9M. 7–8 anchor communities, one per state and territory, co-selected with Minderoo from a 235-candidate pool. One artefact.*
 
 **Status:** Canonical pitch — Lucy-warm, refreshed 2026-04-08 with the [[#methodology-layer-staying|Staying]] methodology and ledger artefact register | **Lead funder:** Minderoo Foundation | **Contact:** Lucy Stronach | **Total ask:** $2.9M / 3 years ($780K + $960K + $1.16M)
 
@@ -57,7 +57,7 @@ The data spine is already live at [[justicehub|justicehub.com.au]] and [[civicgr
 | **CivicGraph MCP server** | **6 live agent tools** — `civicgraph_search`, `civicgraph_entity`, `civicgraph_power_index`, `civicgraph_funding_deserts`, `civicgraph_revolving_door`, `civicgraph_ask` (natural language across all datasets). Deployed and accessible. | **Live (verified)** |
 | **QLD Hansard scraper** | Scrapes Queensland Parliamentary Hansard PDFs from sitting calendar, filters for justice-relevant keywords, ingests speeches tagged by relevance. Other jurisdictions next. | **Live, expanding** |
 | **[[empathy-ledger|Empathy Ledger v2]]** | Story sovereignty layer — OCAP/CARE protocols, selective consent envelopes, full audit trail. Currently **9 live storytellers** (target 226). | **Live, scaling** |
-| **[[contained|CONTAINED]]** | Physical shipping container surfacing local funding/evidence data, currently at Mountie Yarns, touring 8 confirmed locations. | **Live, on tour** |
+| **[[contained|CONTAINED]]** | Physical shipping container surfacing local funding/evidence data, currently at Mounty (Mounty Aboriginal Youth & Community Services, Mt Druitt), touring 8 confirmed locations. | **Live, on tour** |
 
 **Concrete proof points [[grantscope|GrantScope]] can defend in front of a funder:**
 
@@ -109,24 +109,52 @@ For each of the ten, the program funds:
 5. **Cross-community exchange** — each org hosts and visits two other anchor communities over three years, building relational impact that no conference produces
 6. **A seat at the table in Year 3** — these are the orgs that speak at the convening, write the framework, and meet the international visitors
 
-#### The proposed ten anchor communities
+#### How the anchor communities are selected — the 50-to-7/8 workshop
 
-Final selection in Q1 2026 through assertive in-community visits — the only verification that works.
+Every other funding application Minderoo receives asserts *"we have ten anchor communities"* as established fact. Most are inflated. ACT's honest answer:
 
-| # | Community / Org | State | Why | Status |
+- **Five anchors confirmed today** with verbal community consent, stories flowing through Empathy Ledger v2, and ALMA interventions scored
+- **235-candidate pool** queryable from ACT's data spine — 20+ community-led Aboriginal organisations per state/territory, drawn from 1,155 ALMA-verified youth-justice interventions + 100,036 CivicGraph-resolved entities
+- **Final 7–8 anchors selected together** with Minderoo via two 90-minute workshop sessions — one to narrow from 235 to ~20, one to confirm the final set after each community's own consent
+
+This is not a fudge. It's the method of the program operating *in front of Minderoo, before funding*. If the method holds, Session 2 produces a national anchor network selected with both evidence and community consent. If the method fails, the workshop is where that becomes visible — before any community is publicly named.
+
+**Working surfaces** (all live):
+- Live dashboard: `act-global-infrastructure.vercel.app/minderoo-live-dashboard.html` — candidate pool, selection funnel, anchor-ground-truth health check, confirmed anchor cards
+- Session 1 recommended shortlist: `thoughts/shared/drafts/minderoo-session-1-recommended-shortlist.md`
+- Workshop proposal (one-pager in envelope): `thoughts/shared/drafts/minderoo-workshop-proposal.md`
+
+#### Five anchors already in relationship
+
+Verbal consent captured, governance recorded, stories flowing through ACT's wiki with per-storyteller provenance:
+
+| # | Community / Org | Country / Place | Leadership | Confirmation |
 |---|---|---|---|---|
-| 1 | **[[oonchiumpa|Oonchiumpa]]** (Christine/Chrissy — also referenced as Ntumba in earlier drafts) | NT — Mparntwe (Alice Springs) | 100% Indigenous, 12-family network, hub-and-spoke model on traditional owner country | **Locked** |
-| 2 | **[[picc|Palm Island Community Company]]** | QLD — Palm Island | Community-owned, leading lateral violence work, deep cultural authority | **Locked** |
-| 3 | **Mountie Yarns** | NSW — Mt Druitt / Sydney | [[contained|CONTAINED]] base camp partner, NSW peak body convening, advocacy infrastructure | Pipeline strong |
-| 4 | **Tennant Creek (William Junta + community shed)** | NT — Barkly | Housing + enterprise crossover, under-resourced and under-seen | Pipeline |
-| 5 | **Minjerra Bastow Burke** | NSW — Mid North Coast | Powerful, supported, completely disconnected from the sector — exactly the gap | Pipeline |
-| 6 | **Stradbroke Island (Quandamooka — oyster + elder governance)** | QLD — Minjerribah | Real governance hidden by admin gap — model for *what governance actually looks like* | Pipeline |
-| 7 | **Tasmanian community partner** (TBC via JRI / [[diagrama|Diagrama]] network) | TAS | The *"we don't need detention"* proof site | TBC |
-| 8 | **ACT community partner** (TBC) | ACT | Two children in detention — closest jurisdiction to abolition | TBC |
-| 9 | **WA partner** (via Hailey, UWA criminology school) | WA | Largest detention crisis, weakest community-led visibility | TBC |
-| 10 | **SA / Flinders-linked partner** | SA | Frontline of the next reform wave | TBC |
+| 1 | **[[oonchiumpa\|Oonchiumpa Consultancy & Services]]** | Mparntwe (Alice Springs), NT — Arrernte, Alyawarra, Luritja, Warlpiri | Kristy Bloomfield + Tanya Turner co-directors; Aunty Bev + Uncle Terry elder authority; Fred Campbell youth worker | **Confirmed** (verbal, 2026-04-13) |
+| 2 | **[[picc\|Palm Island Community Company (PICC)]]** | Palm Island, QLD — Manbarra / Bwgcolman | Rachael Atkinson (CEO) | **Confirmed** — 21 ALMA interventions, $29M annual turnover |
+| 3 | **Minjerribah Moorgumpin Elders-in-Council Aboriginal Corporation (MMEIC)** | Minjerribah (North Stradbroke Island), QLD — Quandamooka | Elders-in-Council governance (founded 1994) | **Confirmed** — highest-scoring anchor (0.815) after 2026-04-20 ALMA authoring |
+| 4 | **Brodie Germaine Fitness Aboriginal Corporation (BG Fit)** | Mount Isa, QLD — Pita Pita Wayaka + Kalkadoon | Brodie Germaine (founder) | **Confirmed** (verbal, 2026-04-13) — Tuesday gym + on-Country bush camps + Doomadgee quarterly remote |
+| 5 | **Mounty Aboriginal Youth & Community Services (Mounty Yarns)** | Mt Druitt, NSW — Darug | Daniel Daylight (CEO); youth-led structure (Adam + Leah co-run Youth Peak) | **Confirmed** (verbal, 2026-04-18) — 13 storytellers, 9 young people at the table |
 
-**This is not 10 grants.** It is 10 long-term relationships that *the centre learns from, the international tour celebrates, and the artefact in Year 3 is built around*.
+#### Remaining 2–3 anchor seats — one per state/territory, selected in workshop
+
+ACT's recommended Session 1 candidates (evidence-ranked community-led Aboriginal Community Controlled organisations from the data spine):
+
+| State / Territory | Strongest data-spine candidate | Years | Score | Alternative |
+|---|---|---|---|---|
+| **VIC** | Rumbalara Aboriginal Co-Operative (Greater Shepparton) | 46 | 0.803 | VACCA (Darebin), Wathaurong (Geelong), VAHS (Yarra) |
+| **WA** | Kullarri Regional Communities IC (Derby-West Kimberley) | 9 | 0.708 | Dumbartung (Perth), Yorgum Healing (Vincent) |
+| **SA** | Aboriginal Drug and Alcohol Council (SA) | 9 | 0.743 | Research candidates from 107 CC Indigenous corps pool |
+| **TAS** | ATSILS Tasmania | — | 0.713 | Tasmanian Aboriginal Corporation (Hobart) |
+| **ACT** | Gugan Gulwan Youth Aboriginal Corporation | 33 | 0.653 | Aboriginal Advancement Alliance |
+| (NT) | Oonchiumpa confirmed | | | Bawinanga, Tangentyere (if a second NT seat) |
+
+Selection decisions for Session 1 with Lucy Stronach:
+1. **Final anchor count** — 7 or 8. ACT gets its own seat or affiliates with Mounty Yarns' NSW network?
+2. **QLD treatment** — three QLD anchors already confirmed (PICC + MMEIC + BG Fit) from community relationships ACT has built. Keep all three or consolidate with two moving to affiliated network?
+3. **Shortlist narrowing** — from ~20 in the session-1 shortlist to ~15 communities ACT approaches for consent between sessions.
+
+**This is not a preselected list of grants.** It is a set of long-term relationships co-selected by Minderoo and ACT from a transparent, queryable pool. Every confirmed anchor's consent is recorded. Every shortlist candidate's community has the final say on participation. The centre learns from these communities, the international tour celebrates them, and the artefact in Year 3 is built around them.
 
 ### ◉ Circle Three — The Outer Ring: The Ecosystem & The World
 
@@ -227,9 +255,9 @@ The full Staying methodology page (drafted as an alternative shape of the same w
 - [[empathy-ledger|Empathy Ledger]] — the story sovereignty layer; consent flows for every story and journal entry
 - [[civicgraph|CivicGraph]] — the funding and relationship intelligence underneath the centre
 - [[diagrama|Diagrama]] — Year 1 international tour partner; Spain leg
-- [[contained|CONTAINED]] — physical proof tour, currently at Mountie Yarns, distributing the platform into community
+- [[contained|CONTAINED]] — physical proof tour, currently at Mounty (Mounty Aboriginal Youth & Community Services, Mt Druitt), distributing the platform into community
 - [[the-brave-ones|The Brave Ones]] — visual discipline for the per-young-person Journals
-- [[oonchiumpa|Oonchiumpa]] — anchor #1 (also referenced historically as Ntumba)
+- [[oonchiumpa|Oonchiumpa]] — anchor #1
 - [[picc|PICC — Palm Island Community Company]] — anchor #2
 - [[lcaa-method|LCAA Method]] — Listen / Curiosity / Action / Art mapped onto the three-year arc
 - [[the-edge-is-where-the-healing-is-justicehub-as-the-world-model-for-community-led|The Edge Is Where the Healing Is]] — the synthesis this program operationalises
@@ -250,7 +278,7 @@ This page is the **canonical project page** for the Three Circles pitch. It supe
 
 **What's pending:**
 - Pitch deck refresh (the previous Staying-only deck at `thoughts/shared/handoffs/staying/minderoo-deck-v1.md` is being replaced — wrong shape, wrong numbers)
-- Final consent on Oonchiumpa naming convention for funder-facing material (Oonchiumpa is canonical; *also referenced historically as Ntumba — Christine/Chrissy's group*)
+- ~~Final consent on Oonchiumpa naming convention for funder-facing material~~ **Resolved 2026-04-15:** Oonchiumpa is canonical (not "Ntumba"). Co-directors are Kristy Bloomfield + Tanya Turner (not "Christine"). All pitch documents corrected.
 - Frameworks Institute / Andrea Davidson integration into Circle Three — **scoped as Year 1 deliverable** (2026-04-08); the Y1 Centre hardening line funds this integration. No longer a precondition.
 - International tour data structuring — Norway, Portugal, South Africa, Canadian First Nations sentencing circles are narrative-only in GrantScope; needs at least a thin schema before Year 1
 - Ingestion of `2026-04-07-jh-minderoo-executive-summary.md` and `2026-04-07-jh-minderoo-image-prompts.md` into a wiki research article
@@ -309,7 +337,7 @@ The earlier JusticeHub pitch numbers were partly aspirational. Reviewed against 
 - [[civicgraph|CivicGraph]] — funding and relationship intelligence layer
 - [[staying|Staying — Country & Council]] — the methodology layer; sits inside Circle Two
 - [[the-brave-ones|The Brave Ones]] — visual discipline for the Journals
-- [[contained|CONTAINED]] — physical companion artefact, currently at Mountie Yarns
+- [[contained|CONTAINED]] — physical companion artefact, currently at Mounty (Mounty Aboriginal Youth & Community Services, Mt Druitt)
 - [[diagrama|Diagrama]] — international tour partner (Spain leg)
 - [[oonchiumpa|Oonchiumpa]] — anchor community #1
 - [[picc|Palm Island Community Company]] — anchor community #2
