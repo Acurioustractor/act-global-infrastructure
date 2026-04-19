@@ -1,0 +1,82 @@
+{
+  "generated_at": "2026-04-19T20:14:47.955Z",
+  "supabase": "https://tednluwflfhxyucgwigh.supabase.co",
+  "verdict": "degraded",
+  "summary": {
+    "healthy_anchors": 1,
+    "trackable_anchors": 3,
+    "total_known_anchors": 5
+  },
+  "coverage": {
+    "total_interventions": 1000,
+    "youth_justice_interventions": 739,
+    "community_controlled_entities": 1000
+  },
+  "signal_completeness": {
+    "sampled": 739,
+    "null_score": 58,
+    "null_evidence": 58,
+    "null_authority": 107,
+    "null_risk": 107,
+    "null_implementation": 107,
+    "null_option": 107,
+    "evidence_stuck_01": 339,
+    "evidence_level_vs_signal_mismatch": 14
+  },
+  "anchor_ground_truth": {
+    "ranked_orgs_total": 266,
+    "anchors": [
+      {
+        "label": "Oonchiumpa",
+        "gs_entity_id": "16cadc21-083d-4d5e-8b9f-7dc6dca33b38",
+        "expected_state": "NT",
+        "status": "confirmed",
+        "rank": 7,
+        "top_score": 0.772,
+        "status_note": "healthy"
+      },
+      {
+        "label": "PICC",
+        "gs_entity_id": "18fc2705-463c-4b27-8dbd-0ca79c640582",
+        "expected_state": "QLD",
+        "status": "confirmed",
+        "rank": 252,
+        "top_score": 0.38,
+        "status_note": "below top 200 — scoring drift alert"
+      },
+      {
+        "label": "MMEIC",
+        "gs_entity_id": "e7267f3a-e466-416f-aebf-d6bf52c7dde7",
+        "expected_state": "QLD",
+        "status": "confirmed",
+        "rank": null,
+        "top_score": null,
+        "status_note": "entity exists, zero interventions authored"
+      },
+      {
+        "label": "BG Fit",
+        "gs_entity_id": null,
+        "expected_state": "QLD",
+        "status": "entity_pending",
+        "rank": null,
+        "top_score": null,
+        "status_note": "entity not yet created"
+      },
+      {
+        "label": "Mounty Yarns",
+        "gs_entity_id": null,
+        "expected_state": "NSW",
+        "status": "entity_pending",
+        "rank": null,
+        "top_score": null,
+        "status_note": "entity not yet created"
+      }
+    ]
+  },
+  "orphan_community_orgs": {
+    "sampled_entities": 500,
+    "orphans_in_sample": 498,
+    "orphan_percentage": 100,
+    "note": "Community-controlled Indigenous corps in CivicGraph with zero ALMA interventions. Potential authoring gaps."
+  }
+}
