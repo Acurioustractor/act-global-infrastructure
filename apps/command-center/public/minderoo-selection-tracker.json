@@ -1,0 +1,137 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-04-20",
+  "workshop_stage": "pre_session_1",
+  "description": "Per-candidate status tracker through the Minderoo 50-to-7 workshop funnel. Status values progress from candidate (in pool, no outreach) through shortlisted_s1 (narrowed in Session 1), outreach_sent, interested (community signalled back), confirmed_anchor. Terminal states: declined, withdrew, archived. Updated via git commits to this file; dashboard shows live funnel + per-state drill-down.",
+  "status_legend": {
+    "candidate": "In the 235-candidate pool, no outreach yet",
+    "shortlisted_s1": "Narrowed from 235 to ~25 in Workshop Session 1 with Minderoo",
+    "outreach_sent": "ACT has contacted community leadership; response pending",
+    "interested": "Community has signalled interest; full consent flow in progress",
+    "confirmed_anchor": "Community confirmed, verbal approval captured, anchor relationship formal",
+    "declined": "Community declined (respectfully recorded; do not re-approach for this cycle)",
+    "withdrew": "Community initially engaged then withdrew (preserve record + reason)",
+    "archived": "Out of scope for this cycle (not rejected, just parked for future)"
+  },
+  "funnel_target": {
+    "candidate_pool": 235,
+    "shortlist_target": 25,
+    "final_anchors_target": 8,
+    "one_per_state_and_territory": true
+  },
+  "funnel_current": {
+    "candidate": 230,
+    "shortlisted_s1": 0,
+    "outreach_sent": 0,
+    "interested": 0,
+    "confirmed_anchor": 5,
+    "declined": 0,
+    "withdrew": 0,
+    "archived": 0
+  },
+  "per_state_targets": {
+    "QLD": { "candidates_in_pool": 30, "final_target": 1, "confirmed_so_far": 3, "note": "PICC, MMEIC, BG Fit all confirmed; three QLD anchors is by circumstance not design — workshop may consolidate" },
+    "NSW": { "candidates_in_pool": 30, "final_target": 1, "confirmed_so_far": 1, "note": "Mounty Yarns confirmed" },
+    "NT": { "candidates_in_pool": 30, "final_target": 1, "confirmed_so_far": 1, "note": "Oonchiumpa confirmed" },
+    "VIC": { "candidates_in_pool": 30, "final_target": 1, "confirmed_so_far": 0 },
+    "WA": { "candidates_in_pool": 29, "final_target": 1, "confirmed_so_far": 0, "note": "Introduction via Hailey (UWA criminology) in progress" },
+    "SA": { "candidates_in_pool": 30, "final_target": 1, "confirmed_so_far": 0 },
+    "TAS": { "candidates_in_pool": 26, "final_target": 1, "confirmed_so_far": 0, "note": "Thinnest pool; research via JRI/Diagrama network" },
+    "ACT": { "candidates_in_pool": 30, "final_target": 1, "confirmed_so_far": 0, "note": "Gugan Gulwan Youth Aboriginal Corporation in scored pool (33 years); candidate for outreach" }
+  },
+  "statuses": {
+    "16cadc21-083d-4d5e-8b9f-7dc6dca33b38": {
+      "org_name": "Oonchiumpa Consultancy & Services",
+      "state": "NT",
+      "status": "confirmed_anchor",
+      "first_contacted": "2026-01-15",
+      "confirmed_at": "2026-04-13",
+      "approvers": ["Kristy Bloomfield (co-director, Traditional Owner of Mparntwe)", "Tanya Turner (co-director)"],
+      "consent_mode": "verbal-in-conversation",
+      "governance_record": "wiki/decisions/2026-04-18-oonchiumpa-story-approval.md",
+      "notes": "Foundational anchor. 95% diversion. Host of 21 April 2026 Judges on Country trip. 9 ALMA interventions scored. 6 EL v2 stories flowing into wiki.",
+      "last_updated": "2026-04-20"
+    },
+    "18fc2705-463c-4b27-8dbd-0ca79c640582": {
+      "org_name": "Palm Island Community Company Limited (PICC)",
+      "state": "QLD",
+      "status": "confirmed_anchor",
+      "first_contacted": "2025",
+      "confirmed_at": "2026-04-18",
+      "approvers": ["Rachael Atkinson (CEO)"],
+      "consent_mode": "relationship (long-standing ACT ecosystem partner)",
+      "governance_record": "wiki/campaigns/minderoo-pitch/brief.md (row 2 in anchor table)",
+      "notes": "$29M annual turnover. 208 FTE. 21 ALMA interventions (11 youth-justice). Scoring pipeline fixed 2026-04-20 — PICC now ranks 5.",
+      "last_updated": "2026-04-20"
+    },
+    "e7267f3a-e466-416f-aebf-d6bf52c7dde7": {
+      "org_name": "Minjerribah Moorgumpin Elders-in-Council Aboriginal Corporation (MMEIC)",
+      "state": "QLD",
+      "status": "confirmed_anchor",
+      "first_contacted": "2025",
+      "confirmed_at": "2026-04-18",
+      "approvers": ["MMEIC Elders-in-Council (to be named in record before print)"],
+      "consent_mode": "relationship (elder council has given permission for inclusion)",
+      "governance_record": "wiki/campaigns/minderoo-pitch/brief.md (row 4 in anchor table)",
+      "notes": "Quandamooka Country. Founded 1994 (32 years). 3 ALMA draft interventions authored 2026-04-20 (review_status=Community Review); pending formal MMEIC elder review on intervention wording before promotion to Published.",
+      "last_updated": "2026-04-20"
+    },
+    "8851899b-2bef-4f90-b0a4-a5accee86296": {
+      "org_name": "Brodie Germaine Fitness Aboriginal Corporation (BG Fit)",
+      "state": "QLD",
+      "status": "confirmed_anchor",
+      "first_contacted": "2025",
+      "confirmed_at": "2026-04-13",
+      "approvers": ["Brodie Germaine (founder, Pita Pita Wayaka)"],
+      "consent_mode": "verbal-in-conversation",
+      "governance_record": "wiki/decisions/2026-04-18-bg-fit-story-approval.md",
+      "notes": "Mount Isa. ORIC ICN 10049. 3 ALMA draft interventions authored 2026-04-20 (review_status=Community Review); 12 wiki stories flowing; Jay, Doomadgee, Mount Isa Bush Camp per-story elder extensions approved.",
+      "last_updated": "2026-04-20"
+    },
+    "9ddcbdc9-4b59-4610-aaeb-6180538ca816": {
+      "org_name": "Mounty Aboriginal Youth & Community Services (Mounty Yarns)",
+      "state": "NSW",
+      "status": "confirmed_anchor",
+      "first_contacted": "2025",
+      "confirmed_at": "2026-04-18",
+      "approvers": ["Daniel Daylight (CEO)"],
+      "consent_mode": "verbal-in-conversation",
+      "governance_record": "wiki/decisions/2026-04-18-mounty-yarns-story-approval.md",
+      "notes": "Mt Druitt, NSW. 13 storytellers in EL v2 (9 young people). 'In Their Own Words' compilation flowing to wiki. 2 ALMA draft interventions authored 2026-04-20.",
+      "last_updated": "2026-04-20"
+    }
+  },
+  "session_log": [
+    {
+      "session": "pre_session_1",
+      "date": "2026-04-20",
+      "actions": [
+        "Expanded candidate pool from 50 to 235 (20+ per state/territory)",
+        "Fixed PICC scoring pipeline (rank 252 → 5)",
+        "Resolved BG Fit duplicate entity",
+        "Authored MMEIC + BG Fit + Mounty Yarns ALMA draft interventions (pending leadership review)",
+        "Built this selection tracker"
+      ],
+      "outcome": "5/5 anchors confirmed + healthy. Ready for Minderoo workshop."
+    }
+  ],
+  "next_workshop_actions": {
+    "session_1_preparation": [
+      "Share dashboard URL + candidate shortlist with Lucy Stronach before Session 1",
+      "Prepare a recommended shortlist of ~25 candidates to walk through together (mix of scored + youth-focused + research)",
+      "Identify states where Minderoo has existing relationships — flag for early narrowing"
+    ],
+    "session_1_decisions_to_make": [
+      "Confirm final anchor count (7 vs 8)",
+      "Confirm 'one per state + territory' vs other coverage principle",
+      "Narrow 235 → ~25 via workshop conversation",
+      "Identify communities Minderoo has existing relationships with (pre-warmed)"
+    ],
+    "between_session_actions_for_act": [
+      "Reach out to each of the ~25 candidates (status: outreach_sent)",
+      "Receive responses — move to interested / declined / no-response",
+      "Update this tracker JSON + commit",
+      "Dashboard reflects updated funnel automatically"
+    ]
+  }
+}

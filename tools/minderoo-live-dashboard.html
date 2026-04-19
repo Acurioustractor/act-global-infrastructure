@@ -66,7 +66,7 @@
   </div>
   <nav class="max-w-7xl mx-auto px-6 pb-3 flex flex-wrap gap-6 text-sm">
     <a href="#live">Live ledger</a>
-    <a href="#candidates">50 candidates → 7 anchors</a>
+    <a href="#candidates">Selection tracker · 50→7 pool</a>
     <a href="#map">Communities map</a>
     <a href="#agency">What young people get</a>
     <a href="#books">Books + journals</a>
@@ -307,6 +307,43 @@
   <p class="text-xs text-stone-500 mt-3 serif-italic">
     Generated from 1,155 ALMA interventions + 100K CivicGraph entities. Oonchiumpa rank 5, PICC rank 21 (21-intervention portfolio), MMEIC rank 1, BG Fit rank 6, Mounty Yarns rank 14 — all five anchors in top 30 after 2026-04-20 Phase 1 + Phase 2 fixes.
   </p>
+
+  <!-- Workshop Selection Tracker -->
+  <div class="mt-6 bg-white border border-stone-200 rounded-md p-4">
+    <div class="flex items-baseline justify-between mb-3">
+      <div>
+        <div class="text-xs uppercase tracking-widest text-[var(--country)] font-semibold">Workshop Selection Tracker</div>
+        <div class="text-lg font-semibold text-stone-800 mt-1" id="tracker-stage">Loading…</div>
+        <div class="text-sm text-stone-600 serif-italic mt-1">Every candidate's position in the funnel, live. Committed changes to <code>minderoo-selection-tracker.json</code> move candidates through; dashboard reflects immediately.</div>
+      </div>
+      <div id="tracker-updated" class="text-xs text-stone-500"></div>
+    </div>
+
+    <!-- Funnel visualisation -->
+    <div class="grid grid-cols-4 md:grid-cols-8 gap-2 my-4 text-xs" id="funnel-viz">
+      <div class="text-center py-4 text-stone-400 italic col-span-8">Loading funnel…</div>
+    </div>
+
+    <!-- Per-state summary -->
+    <div class="bg-[var(--cream)] rounded p-3 mb-3">
+      <div class="text-xs uppercase tracking-widest text-[var(--earth)] mb-2">Per-state progress toward 8 anchors</div>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-xs" id="per-state-progress">
+        <div class="text-stone-400 italic">Loading…</div>
+      </div>
+    </div>
+
+    <!-- Confirmed anchor cards -->
+    <div class="mt-4">
+      <div class="text-xs uppercase tracking-widest text-[var(--earth)] mb-2">Confirmed anchors (<span id="anchor-count">0</span>)</div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs" id="anchor-cards">
+        <div class="text-stone-400 italic">Loading…</div>
+      </div>
+    </div>
+
+    <p class="text-xs text-stone-500 mt-3 serif-italic">
+      Source of truth: <code>apps/command-center/public/minderoo-selection-tracker.json</code> in git. Status values: candidate → shortlisted_s1 → outreach_sent → interested → confirmed_anchor. Terminal: declined, withdrew, archived. Every status change is a git commit — full audit trail to any Minderoo reviewer.
+    </p>
+  </div>
 
   <!-- State-by-state deep pool -->
   <div class="mt-6 bg-white border border-stone-200 rounded-md p-4">
@@ -995,6 +1032,91 @@
         render(btn.dataset.filter);
       });
     });
+  })();
+
+  // Workshop Selection Tracker loader
+  (async () => {
+    const stageEl = document.getElementById('tracker-stage');
+    const updatedEl = document.getElementById('tracker-updated');
+    const funnelEl = document.getElementById('funnel-viz');
+    const perStateEl = document.getElementById('per-state-progress');
+    const anchorCardsEl = document.getElementById('anchor-cards');
+    const anchorCountEl = document.getElementById('anchor-count');
+    if (!stageEl) return;
+    let t;
+    try {
+      const r = await fetch('/minderoo-selection-tracker.json?v=' + Date.now());
+      t = await r.json();
+    } catch (err) {
+      stageEl.textContent = 'Tracker not loaded';
+      return;
+    }
+
+    const stageLabel = {
+      pre_session_1: 'Stage · Pre-Session 1 (pool built, anchors confirmed, awaiting workshop)',
+      session_1_done: 'Stage · Post-Session 1 (narrowed to shortlist with Minderoo)',
+      session_2_done: 'Stage · Post-Session 2 (final anchors selected)',
+      anchors_confirmed: 'Stage · All anchors confirmed'
+    };
+    stageEl.textContent = stageLabel[t.workshop_stage] || t.workshop_stage;
+    updatedEl.textContent = 'Last committed: ' + (t.generated_at || '-');
+
+    const funnelSteps = [
+      { key: 'candidate', label: 'Candidate pool', colour: '#ebe4d4' },
+      { key: 'shortlisted_s1', label: 'Shortlisted S1', colour: '#efe4c9' },
+      { key: 'outreach_sent', label: 'Outreach sent', colour: '#e8d5c4' },
+      { key: 'interested', label: 'Interested', colour: '#c9d9e3' },
+      { key: 'confirmed_anchor', label: 'Confirmed anchor', colour: '#dfe8d4' },
+      { key: 'declined', label: 'Declined', colour: '#eee' },
+      { key: 'withdrew', label: 'Withdrew', colour: '#eee' },
+      { key: 'archived', label: 'Archived', colour: '#eee' }
+    ];
+    funnelEl.innerHTML = funnelSteps.map(s => {
+      const n = (t.funnel_current && t.funnel_current[s.key]) || 0;
+      const target = (s.key === 'candidate' && t.funnel_target) ? t.funnel_target.candidate_pool
+                   : (s.key === 'shortlisted_s1' && t.funnel_target) ? t.funnel_target.shortlist_target
+                   : (s.key === 'confirmed_anchor' && t.funnel_target) ? t.funnel_target.final_anchors_target
+                   : null;
+      return '<div style="background:' + s.colour + '" class="rounded p-2 text-center">' +
+        '<div class="text-lg font-semibold text-stone-800">' + n + (target ? '<span class="text-stone-500 text-xs"> / ' + target + '</span>' : '') + '</div>' +
+        '<div class="text-[10px] uppercase tracking-widest text-stone-600 mt-1">' + s.label + '</div>' +
+      '</div>';
+    }).join('');
+
+    // Per-state progress
+    if (t.per_state_targets) {
+      const stateOrder = ['QLD','NSW','VIC','WA','SA','TAS','NT','ACT'];
+      perStateEl.innerHTML = stateOrder.map(s => {
+        const p = t.per_state_targets[s];
+        if (!p) return '';
+        const pct = p.final_target ? Math.min(100, 100 * p.confirmed_so_far / p.final_target) : 0;
+        const done = p.confirmed_so_far >= p.final_target;
+        return '<div class="bg-white rounded p-2 border border-stone-200">' +
+          '<div class="flex items-baseline justify-between">' +
+            '<span class="font-semibold">' + s + '</span>' +
+            '<span style="color:' + (done ? '#3d5830' : '#7a5a20') + '" class="text-[11px] font-semibold">' + p.confirmed_so_far + '/' + p.final_target + '</span>' +
+          '</div>' +
+          '<div class="w-full bg-stone-200 rounded h-1 mt-1"><div style="width:' + pct + '%;background:' + (done ? '#4a6b3a' : '#c89a3c') + '" class="h-1 rounded"></div></div>' +
+          '<div class="text-[10px] text-stone-500 mt-1">' + p.candidates_in_pool + ' in pool</div>' +
+          (p.note ? '<div class="text-[10px] text-stone-500 italic mt-1">' + p.note + '</div>' : '') +
+        '</div>';
+      }).join('');
+    }
+
+    // Confirmed anchor cards
+    const anchors = Object.entries(t.statuses || {}).filter(([,v]) => v.status === 'confirmed_anchor');
+    anchorCountEl.textContent = anchors.length;
+    anchorCardsEl.innerHTML = anchors.map(([id, v]) => {
+      return '<div class="bg-[var(--cream)] border border-stone-200 rounded p-3">' +
+        '<div class="flex items-baseline justify-between">' +
+          '<div class="font-semibold text-sm">' + v.org_name + '</div>' +
+          '<span class="chip chip-live" style="font-size:9px">' + v.state + '</span>' +
+        '</div>' +
+        '<div class="mt-2 text-[11px] text-stone-700"><strong>Approvers:</strong> ' + (v.approvers || []).join(', ') + '</div>' +
+        '<div class="text-[11px] text-stone-600 mt-1"><strong>Confirmed:</strong> ' + (v.confirmed_at || 'pending') + ' · <strong>Mode:</strong> ' + (v.consent_mode || '—') + '</div>' +
+        (v.notes ? '<div class="text-[11px] text-stone-500 italic mt-2">' + v.notes + '</div>' : '') +
+      '</div>';
+    }).join('');
   })();
 
   // Deep state-pool loader
