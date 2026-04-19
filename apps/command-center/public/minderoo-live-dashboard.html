@@ -305,8 +305,50 @@
   </div>
 
   <p class="text-xs text-stone-500 mt-3 serif-italic">
-    Generated from <code>mv_youth_justice_entities</code> joining 1,155 ALMA interventions + 100K CivicGraph entities. Refreshes with every sync. Four confirmed anchors (Oonchiumpa, BG Fit, Mounty Yarns, PICC) include manual augments where ALMA ingestion is pending. Data source: <code>apps/command-center/public/minderoo-candidate-shortlist.json</code>
+    Generated from 1,155 ALMA interventions + 100K CivicGraph entities. Oonchiumpa rank 5, PICC rank 21 (21-intervention portfolio), MMEIC rank 1, BG Fit rank 6, Mounty Yarns rank 14 — all five anchors in top 30 after 2026-04-20 Phase 1 + Phase 2 fixes.
   </p>
+
+  <!-- State-by-state deep pool -->
+  <div class="mt-6 bg-white border border-stone-200 rounded-md p-4">
+    <div class="flex items-baseline justify-between mb-2">
+      <div>
+        <div class="text-xs uppercase tracking-widest text-[var(--earth)]">Deep pool · 20+ candidates per state/territory</div>
+        <div class="text-sm text-stone-700 mt-1">235 organisations across 8 states + territories. Expanded 2026-04-20 from ALMA scored + CivicGraph community-controlled Indigenous corps.</div>
+      </div>
+      <div id="state-pool-count" class="text-xs text-stone-500"></div>
+    </div>
+    <div class="flex flex-wrap gap-2 my-3 text-sm">
+      <span class="text-xs uppercase tracking-widest text-stone-500 mr-2">Drill down:</span>
+      <button class="state-btn chip chip-active" data-state="all">All 235</button>
+      <button class="state-btn chip" data-state="QLD">QLD</button>
+      <button class="state-btn chip" data-state="NSW">NSW</button>
+      <button class="state-btn chip" data-state="VIC">VIC</button>
+      <button class="state-btn chip" data-state="WA">WA</button>
+      <button class="state-btn chip" data-state="SA">SA</button>
+      <button class="state-btn chip" data-state="TAS">TAS</button>
+      <button class="state-btn chip" data-state="NT">NT</button>
+      <button class="state-btn chip" data-state="ACT">ACT</button>
+    </div>
+    <div class="text-xs text-stone-500 serif-italic mb-3">
+      Sources: <strong>alma_scored</strong> — existing portfolio_score · <strong>cc_youth_focused</strong> — Indigenous corp with explicit youth signal · <strong>cc_research_candidate</strong> — Indigenous corp (small-state supplement; youth-justice fit to verify with community before inclusion).
+    </div>
+    <div class="bg-[var(--cream)] rounded overflow-hidden max-h-[600px] overflow-y-auto">
+      <table class="w-full text-xs">
+        <thead class="bg-stone-100 text-[10px] uppercase tracking-widest text-stone-600 sticky top-0">
+          <tr>
+            <th class="text-left px-2 py-2">#</th>
+            <th class="text-left px-2 py-2">Organisation</th>
+            <th class="text-left px-2 py-2">State</th>
+            <th class="text-left px-2 py-2">Source</th>
+            <th class="text-right px-2 py-2">Score</th>
+          </tr>
+        </thead>
+        <tbody id="state-pool-tbody">
+          <tr><td colspan="5" class="text-center py-6 text-stone-500 serif-italic">Loading deep pool…</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 
   <!-- ALMA health sub-card -->
   <div id="alma-health-card" class="mt-5 bg-white border border-stone-200 rounded-md p-4">
@@ -951,6 +993,66 @@
         document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('chip-active'));
         btn.classList.add('chip-active');
         render(btn.dataset.filter);
+      });
+    });
+  })();
+
+  // Deep state-pool loader
+  (async () => {
+    const tbody = document.getElementById('state-pool-tbody');
+    const countEl = document.getElementById('state-pool-count');
+    if (!tbody) return;
+    let data;
+    try {
+      const r = await fetch('/minderoo-state-candidates.json?v=' + Date.now());
+      data = await r.json();
+    } catch (err) {
+      tbody.innerHTML = '<tr><td colspan="5" class="text-center py-6 text-stone-500">Deep pool not loaded.</td></tr>';
+      return;
+    }
+    const anchorIds = new Set((data.known_anchors || []).map(a => a.gs_entity_id));
+    const byState = data.candidates_by_state;
+    const allRows = [];
+    for (const state of Object.keys(byState)) {
+      for (const row of byState[state]) allRows.push(row);
+    }
+
+    function sourceChip(src) {
+      if (src === 'alma_scored') return '<span class="chip chip-active" style="font-size:9px">alma</span>';
+      if (src === 'cc_youth_focused') return '<span class="chip chip-emerging" style="font-size:9px">youth-cc</span>';
+      return '<span class="chip" style="font-size:9px;background:#eee;color:#666">research</span>';
+    }
+
+    function render(state) {
+      const rows = state === 'all' ? allRows : (byState[state] || []);
+      countEl.textContent = rows.length + ' orgs' + (state !== 'all' ? ' in ' + state : '');
+      if (!rows.length) {
+        tbody.innerHTML = '<tr><td colspan="5" class="text-center py-6 text-stone-500">No candidates.</td></tr>';
+        return;
+      }
+      tbody.innerHTML = rows.map(r => {
+        const isAnchor = anchorIds.has(r.gs_entity_id);
+        const anchorBadge = isAnchor ? ' <span class="chip chip-live" style="font-size:9px">★ ANCHOR</span>' : '';
+        const score = r.portfolio_score && r.portfolio_score > 0 ? r.portfolio_score : '';
+        return '<tr class="ledger-row border-t border-stone-100">' +
+          '<td class="px-2 py-2 font-mono text-[10px] text-stone-500">' + r.rank + '</td>' +
+          '<td class="px-2 py-2">' +
+            '<div class="font-medium">' + (r.org_name || '').slice(0,70) + anchorBadge + '</div>' +
+            (r.lga_name && r.lga_name !== '-' ? '<div class="text-[10px] text-stone-500">' + r.lga_name + '</div>' : '') +
+          '</td>' +
+          '<td class="px-2 py-2 text-[10px]">' + (r.state_norm || '') + '</td>' +
+          '<td class="px-2 py-2">' + sourceChip(r.source) + '</td>' +
+          '<td class="px-2 py-2 text-right font-mono text-[11px]">' + score + '</td>' +
+        '</tr>';
+      }).join('');
+    }
+
+    render('all');
+    document.querySelectorAll('.state-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.state-btn').forEach(b => b.classList.remove('chip-active'));
+        btn.classList.add('chip-active');
+        render(btn.dataset.state);
       });
     });
   })();
