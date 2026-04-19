@@ -66,6 +66,7 @@
   </div>
   <nav class="max-w-7xl mx-auto px-6 pb-3 flex flex-wrap gap-6 text-sm">
     <a href="#live">Live ledger</a>
+    <a href="#candidates">50 candidates → 7 anchors</a>
     <a href="#map">Communities map</a>
     <a href="#agency">What young people get</a>
     <a href="#books">Books + journals</a>
@@ -207,10 +208,111 @@
   <p class="text-xs text-stone-500 mt-3 serif-italic">Every row links to a decision record at <code>wiki/decisions/</code> and an audit file at <code>wiki/output/el-*</code>. No consent is un-sourced. No storyteller is un-named.</p>
 </section>
 
+<!-- Candidate pool — 50 to 7 -->
+<section id="candidates" class="max-w-7xl mx-auto px-6 py-8 border-t border-stone-300" style="background: linear-gradient(180deg, var(--cream-2) 0%, var(--cream) 100%);">
+  <div class="flex items-baseline justify-between mb-4">
+    <div>
+      <div class="text-xs uppercase tracking-widest text-[var(--country)] font-semibold">50 candidates → 7 anchors</div>
+      <h2 class="text-2xl font-semibold mt-1 mb-1">The shortlist we workshop with you</h2>
+      <p class="text-sm text-stone-600 serif-italic max-w-3xl">
+        Every other grant application says <em>"we have ten anchor communities"</em> — most are inflated. The honest answer: <strong>four anchors confirmed with consent in place, 50 shortlisted from a queryable data spine, 7 selected together with Minderoo (one per state and territory, workshopped).</strong>
+      </p>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-5">
+    <div class="bg-white rounded-md border border-stone-200 p-3 text-center">
+      <div class="text-2xl font-semibold text-[var(--country)]">1,155</div>
+      <div class="text-xs uppercase tracking-widest text-stone-500 mt-1">ALMA interventions scored</div>
+    </div>
+    <div class="bg-white rounded-md border border-stone-200 p-3 text-center">
+      <div class="text-2xl font-semibold text-[var(--country)]">100K</div>
+      <div class="text-xs uppercase tracking-widest text-stone-500 mt-1">CivicGraph entities resolved</div>
+    </div>
+    <div class="bg-white rounded-md border border-stone-200 p-3 text-center">
+      <div class="text-2xl font-semibold text-[var(--country)]">50</div>
+      <div class="text-xs uppercase tracking-widest text-stone-500 mt-1">Candidates after filter</div>
+    </div>
+    <div class="bg-white rounded-md border border-stone-200 p-3 text-center">
+      <div class="text-2xl font-semibold text-[var(--country)]">7–8</div>
+      <div class="text-xs uppercase tracking-widest text-stone-500 mt-1">Final anchors · one per state/territory</div>
+    </div>
+  </div>
+
+  <div class="bg-white rounded-md border border-stone-200 p-4 mb-4">
+    <div class="text-xs uppercase tracking-widest text-[var(--earth)] mb-2">How the portfolio score is built</div>
+    <div class="grid grid-cols-2 md:grid-cols-5 gap-3 text-xs">
+      <div><div class="font-semibold">30%</div><div class="text-stone-600">Evidence strength</div><div class="text-stone-500 mt-1">RCT · Effective · Indigenous-led · Promising · Untested</div></div>
+      <div><div class="font-semibold">25%</div><div class="text-stone-600">Community authority</div><div class="text-stone-500 mt-1">Cultural authority + community-controlled + contributors</div></div>
+      <div><div class="font-semibold">15%</div><div class="text-stone-600">Harm risk</div></div>
+      <div><div class="font-semibold">15%</div><div class="text-stone-600">Implementation capability</div><div class="text-stone-500 mt-1">Years operating, website, entity linkage</div></div>
+      <div><div class="font-semibold">15%</div><div class="text-stone-600">Option value</div><div class="text-stone-500 mt-1">Scalability, replication, cost per young person</div></div>
+    </div>
+  </div>
+
+  <div class="bg-white rounded-md border border-stone-200 p-4 mb-4">
+    <div class="text-xs uppercase tracking-widest text-[var(--earth)] mb-2">Workshop track</div>
+    <div class="flex flex-col md:flex-row gap-3 items-stretch md:items-center text-sm">
+      <div class="flex-1 bg-[var(--cream)] p-3 rounded border-l-4 border-[var(--grass)]">
+        <div class="font-semibold">Stage 1 · Shortlist of 50</div>
+        <div class="text-xs text-stone-600 mt-1">Today · ALMA + CivicGraph queryable pool</div>
+      </div>
+      <div class="text-stone-400 text-center">→</div>
+      <div class="flex-1 bg-[var(--cream)] p-3 rounded border-l-4 border-[var(--gold)]">
+        <div class="font-semibold">Stage 2 · Narrowed to ~25</div>
+        <div class="text-xs text-stone-600 mt-1">Session 1 with Minderoo · 90 min · state coverage + evidence + fit</div>
+      </div>
+      <div class="text-stone-400 text-center">→</div>
+      <div class="flex-1 bg-[var(--cream)] p-3 rounded border-l-4 border-[var(--country)]">
+        <div class="font-semibold">Stage 3 · Final 7 (or 8)</div>
+        <div class="text-xs text-stone-600 mt-1">Session 2 · community consent confirmed · anchors named</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Filters -->
+  <div class="flex flex-wrap gap-2 items-center mb-4 text-sm">
+    <span class="text-xs uppercase tracking-widest text-stone-500 mr-2">Filter by state:</span>
+    <button class="filter-btn chip chip-active" data-filter="all">All</button>
+    <button class="filter-btn chip" data-filter="NSW">NSW</button>
+    <button class="filter-btn chip" data-filter="VIC">VIC</button>
+    <button class="filter-btn chip" data-filter="QLD">QLD</button>
+    <button class="filter-btn chip" data-filter="WA">WA</button>
+    <button class="filter-btn chip" data-filter="SA">SA</button>
+    <button class="filter-btn chip" data-filter="TAS">TAS</button>
+    <button class="filter-btn chip" data-filter="NT">NT</button>
+    <button class="filter-btn chip" data-filter="ACT">ACT</button>
+    <span class="text-xs text-stone-500 ml-auto" id="candidate-count">(loading…)</span>
+  </div>
+
+  <!-- Candidate table -->
+  <div class="bg-white rounded-md border border-stone-200 overflow-hidden">
+    <table class="w-full text-sm">
+      <thead class="bg-stone-100 text-xs uppercase tracking-widest text-stone-600">
+        <tr>
+          <th class="text-left px-3 py-3 w-10">#</th>
+          <th class="text-left px-3 py-3">Organisation</th>
+          <th class="text-left px-3 py-3">State</th>
+          <th class="text-left px-3 py-3">Evidence</th>
+          <th class="text-right px-3 py-3">Score</th>
+          <th class="text-right px-3 py-3">Years</th>
+        </tr>
+      </thead>
+      <tbody id="candidate-tbody">
+        <tr><td colspan="6" class="text-center py-8 text-stone-500 serif-italic">Loading candidate pool from data spine…</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="text-xs text-stone-500 mt-3 serif-italic">
+    Generated from <code>mv_youth_justice_entities</code> joining 1,155 ALMA interventions + 100K CivicGraph entities. Refreshes with every sync. Four confirmed anchors (Oonchiumpa, BG Fit, Mounty Yarns, PICC) include manual augments where ALMA ingestion is pending. Data source: <code>apps/command-center/public/minderoo-candidate-shortlist.json</code>
+  </p>
+</section>
+
 <!-- Communities map -->
 <section id="map" class="max-w-7xl mx-auto px-6 py-8 border-t border-stone-300">
   <h2 class="text-2xl font-semibold mb-1">Communities map — where the method is already running</h2>
-  <p class="text-sm text-stone-600 serif-italic mb-5">Three sites active. Seven more in formation. Every anchor is a relationship, not a slot.</p>
+  <p class="text-sm text-stone-600 serif-italic mb-5">Four anchors confirmed today. Three to four more workshopped to final from the 50-candidate pool above. Every anchor is a relationship, not a slot.</p>
 
   <div class="aus-map relative rounded-md" style="padding-bottom: 62%; background-image: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1000 620%22><path fill=%22%23d4c4a5%22 stroke=%22%238a7856%22 stroke-width=%222%22 d=%22M180,300 Q140,240 170,190 Q210,140 280,130 L380,110 Q480,95 560,130 Q640,150 720,200 L820,250 Q860,310 830,360 Q810,420 770,450 Q700,490 620,500 Q540,510 460,490 Q380,470 320,450 Q240,420 200,380 Q170,340 180,300 Z%22/></svg>'); background-size: cover; background-position: center;">
     <!-- Approx relative positions -->
@@ -742,6 +844,67 @@
       if (t) t.scrollIntoView({ behavior: 'smooth' });
     });
   });
+
+  // Candidate pool loader + filter
+  (async () => {
+    const tbody = document.getElementById('candidate-tbody');
+    const countEl = document.getElementById('candidate-count');
+    if (!tbody) return;
+    let data;
+    try {
+      const res = await fetch('/minderoo-candidate-shortlist.json?v=' + Date.now());
+      data = await res.json();
+    } catch (err) {
+      tbody.innerHTML = '<tr><td colspan="6" class="text-center py-8 text-stone-500">Unable to load candidate pool.</td></tr>';
+      return;
+    }
+    const all = data.shortlist || [];
+    const stateColor = { NSW: '#2d5f7f', VIC: '#5a3d65', QLD: '#b7410e', WA: '#c89a3c', SA: '#8a5a2a', TAS: '#4a6b3a', NT: '#a94442', ACT: '#1e4662', '-': '#888' };
+
+    function evidenceChip(level) {
+      if (!level) return '';
+      if (level.includes('Effective')) return '<span class="chip chip-active" style="font-size:10px">Effective</span>';
+      if (level.includes('Indigenous-led')) return '<span class="chip" style="font-size:10px;background:#efe4c9;color:#7a5a20">Indigenous-led</span>';
+      if (level.includes('Promising')) return '<span class="chip" style="font-size:10px;background:#e8d9ec;color:#5a3d65">Promising</span>';
+      if (level.includes('Untested')) return '<span class="chip" style="font-size:10px;background:#eee;color:#666">Untested</span>';
+      return '<span class="chip" style="font-size:10px">' + level.split(' ')[0] + '</span>';
+    }
+
+    function render(filter) {
+      const rows = filter === 'all' ? all : all.filter(r => (r.state || '').includes(filter));
+      countEl.textContent = '(' + rows.length + ' of ' + all.length + ' shown)';
+      if (rows.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6" class="text-center py-8 text-stone-500 serif-italic">No candidates in this state from the current scored pool. The full pool includes ' + (data.state_distribution_full_pool && data.state_distribution_full_pool[filter] || '0') + ' in this state.</td></tr>';
+        return;
+      }
+      tbody.innerHTML = rows.map(r => {
+        const stateColorDot = stateColor[r.state] || '#999';
+        const anchorBadge = r.confirmed_anchor ? ' <span class="chip chip-live" style="font-size:9px;margin-left:6px">ANCHOR</span>' : '';
+        const evidenceBadge = r.high_evidence ? ' <span class="chip chip-live" style="font-size:9px;margin-left:4px">★ EVIDENCE</span>' : '';
+        return '<tr class="ledger-row border-t border-stone-100">' +
+          '<td class="px-3 py-3 text-stone-500 font-mono text-xs">' + r.rank + '</td>' +
+          '<td class="px-3 py-3"><div class="font-medium">' + r.org_name + anchorBadge + evidenceBadge + '</div>' +
+            '<div class="text-xs text-stone-500 mt-0.5">' + (r.cultural_authority || '').slice(0, 90) + (r.cultural_authority && r.cultural_authority.length > 90 ? '…' : '') + '</div>' +
+            '<div class="text-xs text-stone-500 mt-0.5">' + (r.lga && r.lga !== '-' ? r.lga : '') + '</div>' +
+          '</td>' +
+          '<td class="px-3 py-3"><span class="inline-block w-2 h-2 rounded-full mr-2" style="background:' + stateColorDot + '"></span>' + r.state + '</td>' +
+          '<td class="px-3 py-3">' + evidenceChip(r.evidence_level) + '</td>' +
+          '<td class="px-3 py-3 text-right font-mono text-sm">' + r.portfolio_score + '</td>' +
+          '<td class="px-3 py-3 text-right text-xs text-stone-500">' + (r.years_operating || '—') + '</td>' +
+        '</tr>';
+      }).join('');
+    }
+
+    render('all');
+
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('chip-active'));
+        btn.classList.add('chip-active');
+        render(btn.dataset.filter);
+      });
+    });
+  })();
 </script>
 </body>
 </html>
