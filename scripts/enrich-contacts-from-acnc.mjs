@@ -41,7 +41,10 @@ const REPO_ROOT = join(dirname(__filename), '..')
 const AUDIT_DIR = join(REPO_ROOT, 'wiki', 'output', 'contact-enrichment')
 const CACHE_DIR = join(REPO_ROOT, 'data', 'acnc-cache')
 
-const ACNC_CSV_URL = 'https://data.gov.au/data/dataset/b050b242-4487-4306-abf5-07ca073e5594/resource/8dc2ad29-2d95-44c6-930b-92b7e3d5ec12/download/datadotgov_main.csv'
+// data.gov.au's ACNC-register download URLs rotate frequently and CKAN API
+// discovery is flaky. Default path is manual download + --csv-path, or
+// pre-cached at data/acnc-cache/acnc-register.csv.
+// Override with --csv-url for one-off testing.
 
 // ---- Args ------------------------------------------------------------------
 
@@ -51,7 +54,7 @@ const FORCE = args.includes('--force')
 const VERBOSE = args.includes('--verbose')
 const LIMIT = (() => { const i = args.indexOf('--limit'); return i >= 0 ? parseInt(args[i + 1], 10) : null })()
 const CSV_PATH = (() => { const i = args.indexOf('--csv-path'); return i >= 0 ? args[i + 1] : null })()
-const CSV_URL = (() => { const i = args.indexOf('--csv-url'); return i >= 0 ? args[i + 1] : ACNC_CSV_URL })()
+const CSV_URL_OVERRIDE = (() => { const i = args.indexOf('--csv-url'); return i >= 0 ? args[i + 1] : null })()
 
 // ---- Env -------------------------------------------------------------------
 
@@ -92,6 +95,22 @@ async function patch(path, body) {
 
 // ---- ACNC CSV fetch + parse ------------------------------------------------
 
+const MANUAL_DOWNLOAD_INSTRUCTIONS = `
+MANUAL DOWNLOAD required for this run.
+
+data.gov.au's direct-download URLs rotate frequently; auto-discovery is
+unreliable. One-time manual step:
+
+1. Visit https://www.acnc.gov.au/about/transparency/open-data
+2. Download the "ACNC Charity Register" CSV (usually called
+   datadotgov_main.csv, ~60MB, ~60K rows)
+3. Save to: data/acnc-cache/acnc-register.csv
+   OR run with: node scripts/enrich-contacts-from-acnc.mjs --csv-path /path/to/file.csv
+
+After the initial download, the script caches for 24h and auto-reuses.
+Quarterly re-download as the ACNC publishes updates.
+`
+
 async function fetchAcncCsv() {
   if (CSV_PATH) {
     console.log(`→ Reading ACNC CSV from local path: ${CSV_PATH}`)
@@ -99,7 +118,6 @@ async function fetchAcncCsv() {
   }
   if (!existsSync(CACHE_DIR)) mkdirSync(CACHE_DIR, { recursive: true })
   const cachePath = join(CACHE_DIR, 'acnc-register.csv')
-  // Use cache if < 24 hours old
   if (existsSync(cachePath)) {
     const age = Date.now() - statSync(cachePath).mtimeMs
     if (age < 24 * 60 * 60 * 1000) {
@@ -107,13 +125,28 @@ async function fetchAcncCsv() {
       return readFileSync(cachePath, 'utf8')
     }
   }
-  console.log(`→ Downloading ACNC CSV from ${CSV_URL}`)
-  const res = await fetch(CSV_URL)
-  if (!res.ok) throw new Error(`ACNC download failed: ${res.status}`)
-  const csv = await res.text()
-  writeFileSync(cachePath, csv)
-  console.log(`  cached to ${cachePath} (${(csv.length / 1024 / 1024).toFixed(1)} MB)`)
-  return csv
+  // Attempt auto-download with a known-stable URL pattern. If it fails,
+  // fall through to the manual-download instructions.
+  if (CSV_URL_OVERRIDE) {
+    console.log(`→ Auto-downloading from: ${CSV_URL_OVERRIDE}`)
+    try {
+      const res = await fetch(CSV_URL_OVERRIDE, {
+        redirect: 'follow',
+        headers: { 'User-Agent': 'ACT-contact-enrichment/1.0 (benjamin@act.place)', Accept: 'text/csv,*/*' },
+      })
+      if (res.ok) {
+        const csv = await res.text()
+        writeFileSync(cachePath, csv)
+        console.log(`  cached to ${cachePath} (${(csv.length / 1024 / 1024).toFixed(1)} MB)`)
+        return csv
+      }
+      console.error(`  auto-download failed (${res.status} after redirects to ${res.url})`)
+    } catch (err) {
+      console.error(`  auto-download threw: ${err.message}`)
+    }
+  }
+  console.error(MANUAL_DOWNLOAD_INSTRUCTIONS)
+  process.exit(2)
 }
 
 function parseCsvLine(line) {
