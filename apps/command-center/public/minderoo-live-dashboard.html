@@ -1,0 +1,747 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Three Circles — Live · Minderoo View</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  :root {
+    --ink: #0f1111;
+    --ink-2: #2a2f2f;
+    --cream: #f5f0e6;
+    --cream-2: #ebe4d4;
+    --earth: #8a5a2a;
+    --country: #b7410e;
+    --sky: #2d5f7f;
+    --grass: #4a6b3a;
+    --gold: #c89a3c;
+  }
+  html, body { background: var(--cream); color: var(--ink); font-family: 'IM Fell English', Georgia, serif; }
+  h1, h2, h3, h4 { font-family: 'Cormorant Garamond', Georgia, serif; letter-spacing: -0.01em; }
+  .serif-italic { font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; }
+  .handwritten { font-family: 'Architects Daughter', cursive; }
+  .ledger-row { transition: background-color 0.15s; }
+  .ledger-row:hover { background: rgba(138, 90, 42, 0.06); }
+  .chip { display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: 11px; letter-spacing: 0.04em; text-transform: uppercase; font-weight: 500; }
+  .chip-active { background: #dfe8d4; color: #3d5830; }
+  .chip-emerging { background: #efe4c9; color: #7a5a20; }
+  .chip-pending { background: #e8d5c4; color: #7a3e1a; }
+  .chip-live { background: #c9d9e3; color: #1e4662; }
+  .chip-international { background: #e8d9ec; color: #5a3d65; }
+  .hero-dot { width: 14px; height: 14px; border-radius: 50%; display: inline-block; margin-right: 8px; animation: pulse 2.2s infinite; }
+  @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.45; transform: scale(1.18); } }
+  .map-pin { position: absolute; transform: translate(-50%, -100%); text-align: center; }
+  .map-pin .dot { width: 16px; height: 16px; border-radius: 50%; margin: 0 auto 4px; border: 2px solid white; box-shadow: 0 2px 6px rgba(0,0,0,0.25); }
+  .map-pin .label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; background: white; padding: 2px 6px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.15); white-space: nowrap; }
+  .aus-map { background: linear-gradient(135deg, #e8dbc1 0%, #d4c4a5 100%); border: 1px solid #c8b794; }
+  .world-map { background: linear-gradient(135deg, #c9d9e3 0%, #a9bfd1 100%); border: 1px solid #8fa5b8; }
+  .circle-ring { border-radius: 50%; border: 2px solid var(--earth); padding: 16px; text-align: center; background: rgba(245, 240, 230, 0.8); }
+  .story-card { background: white; border: 1px solid #e0d6c0; border-radius: 6px; padding: 14px 16px; }
+  .quote-block { border-left: 3px solid var(--country); padding-left: 14px; font-style: italic; color: var(--ink-2); }
+  nav a { color: var(--ink); border-bottom: 1px solid transparent; transition: border-color 0.15s; }
+  nav a:hover { border-bottom-color: var(--country); }
+  details > summary { cursor: pointer; list-style: none; }
+  details > summary::-webkit-details-marker { display: none; }
+  .arrow { transition: transform 0.2s; }
+  details[open] .arrow { transform: rotate(90deg); }
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=IM+Fell+English:ital@0;1&family=Architects+Daughter&display=swap" rel="stylesheet">
+</head>
+<body class="min-h-screen">
+
+<!-- Header -->
+<header class="border-b border-stone-300 bg-[var(--cream)]">
+  <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+    <div>
+      <div class="text-xs uppercase tracking-widest text-stone-500 mb-1">A Curious Tractor · JusticeHub</div>
+      <h1 class="text-3xl md:text-4xl font-semibold">The Three Circles — Live</h1>
+      <div class="text-sm text-stone-600 mt-1 serif-italic">A private view for Minderoo Foundation</div>
+    </div>
+    <div class="text-right">
+      <div class="text-xs uppercase tracking-widest text-stone-500">Envelope ships</div>
+      <div class="text-2xl font-semibold text-[var(--country)]">1 May 2026</div>
+      <div class="text-xs text-stone-500 mt-1">13 days from today</div>
+    </div>
+  </div>
+  <nav class="max-w-7xl mx-auto px-6 pb-3 flex flex-wrap gap-6 text-sm">
+    <a href="#live">Live ledger</a>
+    <a href="#map">Communities map</a>
+    <a href="#agency">What young people get</a>
+    <a href="#books">Books + journals</a>
+    <a href="#travel">National + international travel</a>
+    <a href="#diagrama">Diagrama + YOPE</a>
+    <a href="#jutes">Judges on Country</a>
+    <a href="#missing">What's missing</a>
+  </nav>
+</header>
+
+<!-- Hero stats -->
+<section class="max-w-7xl mx-auto px-6 py-6 grid grid-cols-2 md:grid-cols-4 gap-4">
+  <div class="bg-white rounded-md border border-stone-200 p-4">
+    <div class="text-xs uppercase tracking-widest text-stone-500">Stories flowing today</div>
+    <div class="text-3xl font-semibold mt-1">25</div>
+    <div class="text-xs text-stone-500 mt-1">Was 6 two days ago</div>
+  </div>
+  <div class="bg-white rounded-md border border-stone-200 p-4">
+    <div class="text-xs uppercase tracking-widest text-stone-500">Named young-voice anchors</div>
+    <div class="text-3xl font-semibold mt-1">16</div>
+    <div class="text-xs text-stone-500 mt-1">Across three Countries</div>
+  </div>
+  <div class="bg-white rounded-md border border-stone-200 p-4">
+    <div class="text-xs uppercase tracking-widest text-stone-500">Communities with active approval</div>
+    <div class="text-3xl font-semibold mt-1">3 / 10</div>
+    <div class="text-xs text-stone-500 mt-1">Oonchiumpa · BG Fit · Mounty Yarns</div>
+  </div>
+  <div class="bg-white rounded-md border border-stone-200 p-4">
+    <div class="text-xs uppercase tracking-widest text-stone-500">Three-year ask</div>
+    <div class="text-3xl font-semibold mt-1">$2.9M</div>
+    <div class="text-xs text-stone-500 mt-1">FY26 · FY27 · FY28</div>
+  </div>
+</section>
+
+<!-- The three circles visualisation -->
+<section class="max-w-7xl mx-auto px-6 py-6">
+  <h2 class="text-2xl font-semibold mb-1">The Three Circles</h2>
+  <p class="text-sm text-stone-600 serif-italic mb-5">Each circle feeds the next. None is the product; the holding of all three for three years is.</p>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div class="circle-ring">
+      <div class="text-xs uppercase tracking-widest text-stone-500">Circle One · The Centre</div>
+      <h3 class="text-xl font-semibold my-2">The Living Brain</h3>
+      <p class="text-sm text-stone-700">Everything on Australian youth justice, queryable, updating. ALMA + CivicGraph + wiki + EL.</p>
+      <div class="text-xs text-stone-500 mt-3">1,155 ALMA interventions · 100K CivicGraph entities · 25 consented stories (growing)</div>
+    </div>
+    <div class="circle-ring">
+      <div class="text-xs uppercase tracking-widest text-stone-500">Circle Two · The Ring</div>
+      <h3 class="text-xl font-semibold my-2">Staying — Country &amp; Council</h3>
+      <p class="text-sm text-stone-700">The relational ring: anchor communities practising the method, held in each other's company.</p>
+      <div class="text-xs text-stone-500 mt-3">3 anchors active + 7 in formation · The Brave Ones is the daily practice inside this ring</div>
+    </div>
+    <div class="circle-ring">
+      <div class="text-xs uppercase tracking-widest text-stone-500">Circle Three · The Edge</div>
+      <h3 class="text-xl font-semibold my-2">The Country We're Building</h3>
+      <p class="text-sm text-stone-700">Artefact released in Year 3 — documentary + book + platform + per-young-person journals.</p>
+      <div class="text-xs text-stone-500 mt-3">Artefact 001 (Murri Watch) ships 1 May · 002 queued · national collection Year 3</div>
+    </div>
+  </div>
+</section>
+
+<!-- Live ledger -->
+<section id="live" class="max-w-7xl mx-auto px-6 py-8 border-t border-stone-300 mt-4">
+  <div class="flex items-baseline justify-between mb-4">
+    <div>
+      <h2 class="text-2xl font-semibold">Live ledger</h2>
+      <p class="text-sm text-stone-600 serif-italic">Every consent flip, every story flow, every approval — recorded with named authority.</p>
+    </div>
+    <div class="text-xs text-stone-500"><span class="hero-dot" style="background: #4a6b3a"></span>Updated on every sync run</div>
+  </div>
+
+  <div class="bg-white border border-stone-200 rounded-md overflow-hidden">
+    <table class="w-full text-sm">
+      <thead class="bg-stone-100 text-xs uppercase tracking-widest text-stone-600">
+        <tr>
+          <th class="text-left px-4 py-3">Date</th>
+          <th class="text-left px-4 py-3">Event</th>
+          <th class="text-left px-4 py-3">Named authority</th>
+          <th class="text-left px-4 py-3">Result</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="ledger-row border-t border-stone-100">
+          <td class="px-4 py-3 font-mono text-xs text-stone-500">2026-04-18 00:57</td>
+          <td class="px-4 py-3">Elder review — <em>Mounty Yarns: In Their Own Words</em></td>
+          <td class="px-4 py-3">Daniel Daylight, CEO, Mounty Yarns</td>
+          <td class="px-4 py-3"><span class="chip chip-live">9 young voices live</span></td>
+        </tr>
+        <tr class="ledger-row border-t border-stone-100">
+          <td class="px-4 py-3 font-mono text-xs text-stone-500">2026-04-18 00:46</td>
+          <td class="px-4 py-3">Per-story elder review — Mount Isa Bush Camp (first on Country)</td>
+          <td class="px-4 py-3">Brodie Germaine, BG Fit founder (Pita Pita Wayaka)</td>
+          <td class="px-4 py-3"><span class="chip chip-live">Story flowing</span></td>
+        </tr>
+        <tr class="ledger-row border-t border-stone-100">
+          <td class="px-4 py-3 font-mono text-xs text-stone-500">2026-04-18 00:46</td>
+          <td class="px-4 py-3">Per-story elder review — Doomadgee Camp (500km remote)</td>
+          <td class="px-4 py-3">Brodie Germaine</td>
+          <td class="px-4 py-3"><span class="chip chip-live">Story flowing</span></td>
+        </tr>
+        <tr class="ledger-row border-t border-stone-100">
+          <td class="px-4 py-3 font-mono text-xs text-stone-500">2026-04-18 00:20</td>
+          <td class="px-4 py-3">Content update — Benji's real transcript replaces summary-only ingest</td>
+          <td class="px-4 py-3">Ben Knight (witness)</td>
+          <td class="px-4 py-3"><span class="chip chip-live">Direct quote available</span></td>
+        </tr>
+        <tr class="ledger-row border-t border-stone-100">
+          <td class="px-4 py-3 font-mono text-xs text-stone-500">2026-04-18 00:16</td>
+          <td class="px-4 py-3">Per-story elder review — Jay (Young Person interview)</td>
+          <td class="px-4 py-3">Brodie Germaine</td>
+          <td class="px-4 py-3"><span class="chip chip-live">Story flowing</span></td>
+        </tr>
+        <tr class="ledger-row border-t border-stone-100">
+          <td class="px-4 py-3 font-mono text-xs text-stone-500">2026-04-17 22:28</td>
+          <td class="px-4 py-3">Org-level consent — Mounty Yarns (all stories)</td>
+          <td class="px-4 py-3">Daniel Daylight, CEO</td>
+          <td class="px-4 py-3"><span class="chip chip-emerging">Primed; 1 story</span></td>
+        </tr>
+        <tr class="ledger-row border-t border-stone-100">
+          <td class="px-4 py-3 font-mono text-xs text-stone-500">2026-04-17 22:27</td>
+          <td class="px-4 py-3">Org-level consent — BG Fit (all 18 stories, 2 test-data deny-listed)</td>
+          <td class="px-4 py-3">Brodie Germaine</td>
+          <td class="px-4 py-3"><span class="chip chip-active">12 flowing · 4 pending elder</span></td>
+        </tr>
+        <tr class="ledger-row border-t border-stone-100">
+          <td class="px-4 py-3 font-mono text-xs text-stone-500">2026-04-17 22:08</td>
+          <td class="px-4 py-3">Extended scope — Oonchiumpa (privacy + elder approval)</td>
+          <td class="px-4 py-3">Kristy Bloomfield (TO Mparntwe) + Tanya Turner</td>
+          <td class="px-4 py-3"><span class="chip chip-active">6 stories flowing</span></td>
+        </tr>
+        <tr class="ledger-row border-t border-stone-100">
+          <td class="px-4 py-3 font-mono text-xs text-stone-500">2026-04-17 21:58</td>
+          <td class="px-4 py-3">First org-level consent — Oonchiumpa</td>
+          <td class="px-4 py-3">Kristy Bloomfield + Tanya Turner</td>
+          <td class="px-4 py-3"><span class="chip chip-live">Pipeline live</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="text-xs text-stone-500 mt-3 serif-italic">Every row links to a decision record at <code>wiki/decisions/</code> and an audit file at <code>wiki/output/el-*</code>. No consent is un-sourced. No storyteller is un-named.</p>
+</section>
+
+<!-- Communities map -->
+<section id="map" class="max-w-7xl mx-auto px-6 py-8 border-t border-stone-300">
+  <h2 class="text-2xl font-semibold mb-1">Communities map — where the method is already running</h2>
+  <p class="text-sm text-stone-600 serif-italic mb-5">Three sites active. Seven more in formation. Every anchor is a relationship, not a slot.</p>
+
+  <div class="aus-map relative rounded-md" style="padding-bottom: 62%; background-image: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1000 620%22><path fill=%22%23d4c4a5%22 stroke=%22%238a7856%22 stroke-width=%222%22 d=%22M180,300 Q140,240 170,190 Q210,140 280,130 L380,110 Q480,95 560,130 Q640,150 720,200 L820,250 Q860,310 830,360 Q810,420 770,450 Q700,490 620,500 Q540,510 460,490 Q380,470 320,450 Q240,420 200,380 Q170,340 180,300 Z%22/></svg>'); background-size: cover; background-position: center;">
+    <!-- Approx relative positions -->
+    <div class="map-pin" style="left: 45%; top: 52%;" title="Oonchiumpa — Mparntwe (Alice Springs), NT">
+      <div class="dot" style="background: #4a6b3a"></div>
+      <div class="label">Oonchiumpa</div>
+    </div>
+    <div class="map-pin" style="left: 53%; top: 36%;" title="BG Fit — Mount Isa, QLD">
+      <div class="dot" style="background: #4a6b3a"></div>
+      <div class="label">BG Fit · Mt Isa</div>
+    </div>
+    <div class="map-pin" style="left: 44%; top: 30%;" title="Doomadgee — BG Fit satellite (500km)">
+      <div class="dot" style="background: #c89a3c"></div>
+      <div class="label">Doomadgee</div>
+    </div>
+    <div class="map-pin" style="left: 78%; top: 70%;" title="Mounty Yarns — Mt Druitt NSW">
+      <div class="dot" style="background: #4a6b3a"></div>
+      <div class="label">Mounty Yarns · Mt Druitt</div>
+    </div>
+    <div class="map-pin" style="left: 74%; top: 30%;" title="PICC — Palm Island QLD (selective per-story pending)">
+      <div class="dot" style="background: #c89a3c"></div>
+      <div class="label">PICC · Palm Is</div>
+    </div>
+    <div class="map-pin" style="left: 79%; top: 65%;" title="MMEIC — Minjerribah QLD (in formation)">
+      <div class="dot" style="background: #b7410e"></div>
+      <div class="label">MMEIC · Minjerribah</div>
+    </div>
+    <div class="map-pin" style="left: 49%; top: 44%;" title="Tennant Creek — NT (in development)">
+      <div class="dot" style="background: #b7410e"></div>
+      <div class="label">Tennant Ck</div>
+    </div>
+    <div class="map-pin" style="left: 74%; top: 74%;" title="ACT partner (Ngambri-Ngunnawal, selection Q1 2026)">
+      <div class="dot" style="background: #b7410e"></div>
+      <div class="label">ACT (Ngunnawal)</div>
+    </div>
+    <div class="map-pin" style="left: 68%; top: 88%;" title="Lutruwita (Tasmania partner, selection Q1)">
+      <div class="dot" style="background: #b7410e"></div>
+      <div class="label">Lutruwita</div>
+    </div>
+    <div class="map-pin" style="left: 18%; top: 56%;" title="WA partner (UWA criminology)">
+      <div class="dot" style="background: #b7410e"></div>
+      <div class="label">WA partner</div>
+    </div>
+    <div class="map-pin" style="left: 63%; top: 80%;" title="SA partner (selection Q1)">
+      <div class="dot" style="background: #b7410e"></div>
+      <div class="label">SA partner</div>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-3 gap-3 mt-4 text-xs">
+    <div class="flex items-center gap-2"><span class="inline-block w-3 h-3 rounded-full" style="background: #4a6b3a"></span>Active · stories flowing</div>
+    <div class="flex items-center gap-2"><span class="inline-block w-3 h-3 rounded-full" style="background: #c89a3c"></span>In formation · relationship building</div>
+    <div class="flex items-center gap-2"><span class="inline-block w-3 h-3 rounded-full" style="background: #b7410e"></span>Selection Q1 · TBC</div>
+  </div>
+</section>
+
+<!-- What young people get -->
+<section id="agency" class="max-w-7xl mx-auto px-6 py-8 border-t border-stone-300" style="background: linear-gradient(180deg, var(--cream) 0%, var(--cream-2) 100%);">
+  <div class="max-w-3xl mb-6">
+    <div class="text-xs uppercase tracking-widest text-[var(--country)] font-semibold">The heart of the program</div>
+    <h2 class="text-3xl font-semibold mt-2 mb-2">What young people get from this</h2>
+    <p class="serif-italic text-stone-700">
+      The Minderoo ask is for a national change. But the people inside the program are not changing the country for the country's sake.
+      They are changing <em>something for themselves</em> — their future, their agency, the daily feeling that an adult showed up
+      and kept showing up. The national outcome is what happens when you take care of the smaller one first.
+    </p>
+  </div>
+
+  <!-- Per-storyteller agency cards -->
+  <h3 class="text-lg font-semibold mt-2 mb-3">Named young people in the program today</h3>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+
+    <!-- Jackquann -->
+    <article class="story-card">
+      <div class="flex items-baseline justify-between">
+        <h4 class="text-lg font-semibold">Jackquann</h4>
+        <span class="text-xs text-stone-500">14 · Upper Camp, Mparntwe</span>
+      </div>
+      <div class="quote-block my-3 text-sm">"At six o'clock you get locked down. You wait till tomorrow."<br><br>"Looking after my family."</div>
+      <details class="mt-2">
+        <summary class="text-xs uppercase tracking-widest text-[var(--earth)]"><span class="arrow inline-block mr-1">›</span>What his voice is doing</summary>
+        <ul class="text-xs text-stone-700 mt-2 space-y-1 list-disc pl-5">
+          <li>Quoted in Brave Ones Minderoo insert (draft v3)</li>
+          <li>Anchors the "force-a-trap" opener: $1.3M to lock him in vs $31K to hold him at home</li>
+          <li>Material for Brave Ones Phase 1 release (Apr–May 2026)</li>
+          <li>Will appear in the Year 1 Oonchiumpa zine</li>
+        </ul>
+      </details>
+      <details class="mt-2">
+        <summary class="text-xs uppercase tracking-widest text-[var(--earth)]"><span class="arrow inline-block mr-1">›</span>What Jackquann gets back</summary>
+        <ul class="text-xs text-stone-700 mt-2 space-y-1 list-disc pl-5">
+          <li>His words become the evidence others cite — he stops being <em>spoken about</em></li>
+          <li>Eligible for Brisbane exchange (8–13 June) if journal kept</li>
+          <li>Year 2: eligible for Diagrama Spain or YOPE Amsterdam — his first aeroplane</li>
+          <li>Year 3: his voice is one of the voices the national collection launches on</li>
+        </ul>
+      </details>
+    </article>
+
+    <!-- Laquisha -->
+    <article class="story-card">
+      <div class="flex items-baseline justify-between">
+        <h4 class="text-lg font-semibold">Laquisha</h4>
+        <span class="text-xs text-stone-500">16 · Mparntwe</span>
+      </div>
+      <div class="quote-block my-3 text-sm">"I don't like going to Darwin because I have no family there."<br><br><strong>On the root cause:</strong> "Oppression."</div>
+      <details class="mt-2">
+        <summary class="text-xs uppercase tracking-widest text-[var(--earth)]"><span class="arrow inline-block mr-1">›</span>What her voice is doing</summary>
+        <ul class="text-xs text-stone-700 mt-2 space-y-1 list-disc pl-5">
+          <li>Named the systemic analysis that most policy papers hedge around</li>
+          <li>Candidate for one of three Brave Ones portraits in Minderoo envelope</li>
+          <li>Anchor for the "1,500km from home" data point in the advocacy layer</li>
+        </ul>
+      </details>
+      <details class="mt-2">
+        <summary class="text-xs uppercase tracking-widest text-[var(--earth)]"><span class="arrow inline-block mr-1">›</span>What Laquisha gets back</summary>
+        <ul class="text-xs text-stone-700 mt-2 space-y-1 list-disc pl-5">
+          <li>She doesn't have to go to Darwin again</li>
+          <li>She has a path — journal, portrait, travel, book</li>
+          <li>Year 2 alumni track: peer-mentor role for younger kids in Oonchiumpa</li>
+          <li>A name beyond her charges. A record that says she named what the system is</li>
+        </ul>
+      </details>
+    </article>
+
+    <!-- Polly -->
+    <article class="story-card">
+      <div class="flex items-baseline justify-between">
+        <h4 class="text-lg font-semibold">Polly</h4>
+        <span class="text-xs text-stone-500">13 · Blacktown · Mounty Yarns</span>
+      </div>
+      <div class="quote-block my-3 text-sm">"I like this area a lot because I can express myself, I can be myself around these people. I don't have to hide my personality."</div>
+      <details class="mt-2">
+        <summary class="text-xs uppercase tracking-widest text-[var(--earth)]"><span class="arrow inline-block mr-1">›</span>What her voice is doing</summary>
+        <ul class="text-xs text-stone-700 mt-2 space-y-1 list-disc pl-5">
+          <li>Primary anchor for the Mount Druitt section of Brave Ones v3</li>
+          <li>Shows the method works in youth-led urban context, not just rural / on-Country</li>
+          <li>One of the simplest, most un-deniable lines in the corpus</li>
+        </ul>
+      </details>
+      <details class="mt-2">
+        <summary class="text-xs uppercase tracking-widest text-[var(--earth)]"><span class="arrow inline-block mr-1">›</span>What Polly gets back</summary>
+        <ul class="text-xs text-stone-700 mt-2 space-y-1 list-disc pl-5">
+          <li>A journal that travels with her across schools</li>
+          <li>Mounty Yarns peer network she's already inside</li>
+          <li>Year 2 exchange: Mt Druitt → Alice Springs (first time on Country possibly ever)</li>
+          <li>Year 3: her voice in a book that a minister reads</li>
+        </ul>
+      </details>
+    </article>
+
+    <!-- Isabella -->
+    <article class="story-card">
+      <div class="flex items-baseline justify-between">
+        <h4 class="text-lg font-semibold">Isabella</h4>
+        <span class="text-xs text-stone-500">14 · Seven Hills · Mounty Yarns</span>
+      </div>
+      <div class="quote-block my-3 text-sm">"I like the fact that the mentors and the youth workers, they're easy to talk to. There's no pressure. It's more fun and you don't feel judged."</div>
+      <details class="mt-2">
+        <summary class="text-xs uppercase tracking-widest text-[var(--earth)]"><span class="arrow inline-block mr-1">›</span>What Isabella gets back</summary>
+        <ul class="text-xs text-stone-700 mt-2 space-y-1 list-disc pl-5">
+          <li>Mitchell High School + Mounty Yarns twin-track support</li>
+          <li>Art + sport + music programs inside the Brave Ones model</li>
+          <li>Journal stays with her; book placement Year 1</li>
+          <li>Potential Youth Peak cohort role alongside Adam + Leah</li>
+        </ul>
+      </details>
+    </article>
+
+    <!-- Benji -->
+    <article class="story-card">
+      <div class="flex items-baseline justify-between">
+        <h4 class="text-lg font-semibold">Benji</h4>
+        <span class="text-xs text-stone-500">Mt Isa · BG Fit</span>
+      </div>
+      <div class="quote-block my-3 text-sm">"He right. That big fell. He know half of the black people. That's why."<br><br><em>(On why he trusts Brodie.)</em></div>
+      <details class="mt-2">
+        <summary class="text-xs uppercase tracking-widest text-[var(--earth)]"><span class="arrow inline-block mr-1">›</span>What Benji gets back</summary>
+        <ul class="text-xs text-stone-700 mt-2 space-y-1 list-disc pl-5">
+          <li>Trust network through Brodie's kin web: fishing, hunting, bush</li>
+          <li>Tuesday gym: 15–20 peer regulars</li>
+          <li>Real transcript preserved in the ledger — his words, not summarised</li>
+          <li>Year 2 exchange: Mt Isa → Alice Springs → Sydney</li>
+        </ul>
+      </details>
+    </article>
+
+    <!-- Rashad -->
+    <article class="story-card">
+      <div class="flex items-baseline justify-between">
+        <h4 class="text-lg font-semibold">Rashad Gavin Isaacson</h4>
+        <span class="text-xs text-stone-500">young Kalkadoon · Sundowners dance crew</span>
+      </div>
+      <div class="quote-block my-3 text-sm">NAIDOC and culture are <strong>"everything"</strong> to him.</div>
+      <details class="mt-2">
+        <summary class="text-xs uppercase tracking-widest text-[var(--earth)]"><span class="arrow inline-block mr-1">›</span>What Rashad gets back</summary>
+        <ul class="text-xs text-stone-700 mt-2 space-y-1 list-disc pl-5">
+          <li>Cultural-practice-as-prevention acknowledged, funded, documented</li>
+          <li>Sundowners dance travel + cultural exchanges (national Year 1, international Year 2)</li>
+          <li>Potential cultural-leader role in next cohort</li>
+        </ul>
+      </details>
+    </article>
+
+    <!-- Taleigha -->
+    <article class="story-card">
+      <div class="flex items-baseline justify-between">
+        <h4 class="text-lg font-semibold">Taleigha</h4>
+        <span class="text-xs text-stone-500">Biripi · Glebe · Mounty Yarns</span>
+      </div>
+      <div class="quote-block my-3 text-sm">"Because young people are going through all of this stuff, why are the older fellas making choices for the younger fellas when they're the ones going through it?"</div>
+      <details class="mt-2">
+        <summary class="text-xs uppercase tracking-widest text-[var(--earth)]"><span class="arrow inline-block mr-1">›</span>What Taleigha gets back</summary>
+        <ul class="text-xs text-stone-700 mt-2 space-y-1 list-disc pl-5">
+          <li>Youth-ambassador role already inside Mounty Yarns</li>
+          <li>Her foster-care experience becomes a qualification, not a marker</li>
+          <li>Year 2 alumni: peer-mentor for Kempsey / Biripi young people</li>
+          <li>Year 3: her question as chapter-opener in the national collection</li>
+        </ul>
+      </details>
+    </article>
+
+    <!-- Jay -->
+    <article class="story-card">
+      <div class="flex items-baseline justify-between">
+        <h4 class="text-lg font-semibold">Jay</h4>
+        <span class="text-xs text-stone-500">Young Person · Mt Isa · BG Fit</span>
+      </div>
+      <div class="quote-block my-3 text-sm">On bush / hunting / Country as what keeps him out of trouble in town. (Full transcript behind per-story approval.)</div>
+      <details class="mt-2">
+        <summary class="text-xs uppercase tracking-widest text-[var(--earth)]"><span class="arrow inline-block mr-1">›</span>What Jay gets back</summary>
+        <ul class="text-xs text-stone-700 mt-2 space-y-1 list-disc pl-5">
+          <li>His self-awareness about what protects him becomes the program's design principle</li>
+          <li>Bush camps scale around his identified protective factor</li>
+          <li>Continuous BG Fit Tuesday sessions + Monthly Bush Camps</li>
+        </ul>
+      </details>
+    </article>
+
+    <!-- Xavier -->
+    <article class="story-card">
+      <div class="flex items-baseline justify-between">
+        <h4 class="text-lg font-semibold">Xavier</h4>
+        <span class="text-xs text-stone-500">Oonchiumpa · Stretch Bed builder</span>
+      </div>
+      <div class="quote-block my-3 text-sm">Told by the system he had "limited ability to understand." Built a Stretch Bed used for ceremonies and bush trips.<br><br><em>Fred: "He trusts us. We earned that trust."</em></div>
+      <details class="mt-2">
+        <summary class="text-xs uppercase tracking-widest text-[var(--earth)]"><span class="arrow inline-block mr-1">›</span>What Xavier gets back</summary>
+        <ul class="text-xs text-stone-700 mt-2 space-y-1 list-disc pl-5">
+          <li>Tangible: a bed the community uses. A thing that exists</li>
+          <li>A record replacing the "limited ability" assessment</li>
+          <li>Skill pathway via Fred's consistent case work</li>
+          <li>Potential object-in-the-envelope: a Stretch Bed offcut travels to Lucy</li>
+        </ul>
+      </details>
+    </article>
+
+  </div>
+
+  <!-- What ALL of them get, regardless -->
+  <div class="mt-8 bg-white border-l-4 border-[var(--country)] p-5 rounded-r-md">
+    <h3 class="text-lg font-semibold mb-2">What every young person in the program gets — regardless</h3>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-stone-700">
+      <div>
+        <div class="serif-italic text-[var(--country)] mb-1">Daily agency</div>
+        A journal that's theirs. An iPad loaded with Procreate and Voice Memos. A physical A5 hardcover book no one else opens without permission. Family can write in it. Workers can. The young person decides what is shared.
+      </div>
+      <div>
+        <div class="serif-italic text-[var(--country)] mb-1">Being listened to, not assessed</div>
+        The program is designed around the young person's own theory of change. Their explanation of what works for them is the design principle, not an aftermath.
+      </div>
+      <div>
+        <div class="serif-italic text-[var(--country)] mb-1">Tangible rewards</div>
+        Journal practice unlocks travel. Domestic trips Year 1. International Year 2. Paid peer-mentor roles Year 2 onward for alumni. First aeroplane. First stamp on a passport.
+      </div>
+      <div>
+        <div class="serif-italic text-[var(--country)] mb-1">Long-run record</div>
+        Their voice sits in a consented, withdrawable wiki that a national book draws on in Year 3. They are cited by name. They are the evidence. They are the authors.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Books + journals -->
+<section id="books" class="max-w-7xl mx-auto px-6 py-8 border-t border-stone-300">
+  <h2 class="text-2xl font-semibold mb-1">Books + journals — how the corpus becomes national evidence</h2>
+  <p class="text-sm text-stone-600 serif-italic mb-5">Every book is built from what the young people have already recorded, with their consent, in their words.</p>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div class="story-card">
+      <div class="text-xs uppercase tracking-widest text-[var(--earth)] mb-1">Year 1 · The zines</div>
+      <h3 class="text-xl font-semibold">Per-community books</h3>
+      <p class="text-sm text-stone-700 mt-2">One printed book per anchor community. Oonchiumpa, BG Fit, Mounty Yarns launch first. Each carries the community's young people's drawings, writing, photos, audio transcripts. Distributed to the community first. Then to local magistrates + state ministers.</p>
+      <div class="text-xs text-stone-500 mt-3 serif-italic">First zine target: September 2026. Budget allowance in Three Circles Year 1.</div>
+    </div>
+    <div class="story-card">
+      <div class="text-xs uppercase tracking-widest text-[var(--earth)] mb-1">Year 2 · Cross-community volumes</div>
+      <h3 class="text-xl font-semibold">Paired chapters</h3>
+      <p class="text-sm text-stone-700 mt-2">Documentary-quality compilations. Mparntwe paired with Mount Druitt. Mount Isa paired with Palm Island. Young people from each community travel to the other as part of the Brave Ones exchange and co-write the chapter together.</p>
+      <div class="text-xs text-stone-500 mt-3 serif-italic">Target: 4 cross-community volumes across FY27.</div>
+    </div>
+    <div class="story-card">
+      <div class="text-xs uppercase tracking-widest text-[var(--earth)] mb-1">Year 3 · National collection</div>
+      <h3 class="text-xl font-semibold">The Country We're Building</h3>
+      <p class="text-sm text-stone-700 mt-2">One 400-page bound volume. Launches at a national event. Every magistrate, every state attorney-general, every First Nations MP receives a copy. Every young person who contributed is named, credited, paid an authorship fee.</p>
+      <div class="text-xs text-stone-500 mt-3 serif-italic">Launch target: FY28. Minderoo Year 3 deliverable.</div>
+    </div>
+  </div>
+
+  <div class="mt-6 story-card">
+    <div class="text-xs uppercase tracking-widest text-[var(--earth)] mb-1">The individual journal — what each young person keeps</div>
+    <h3 class="text-xl font-semibold mb-2">A5 hardcover. Theirs. Forever.</h3>
+    <p class="text-sm text-stone-700">The journal isn't just an input to the books — it's the thing the young person takes home at the end of the program. Family writes in it. Workers write in it. The young person paints, pastes, records voice memos linked by QR code. Worth nothing to the system. Worth everything to them. The goal state is simple: a young person walks in and says, <em>"Can I grab my journal?"</em></p>
+  </div>
+</section>
+
+<!-- Travel -->
+<section id="travel" class="max-w-7xl mx-auto px-6 py-8 border-t border-stone-300">
+  <h2 class="text-2xl font-semibold mb-1">National + international travel — how stories earn movement</h2>
+  <p class="text-sm text-stone-600 serif-italic mb-5">Journal kept → exchange eligible. The travel is both a reward and a capture — young people come back with footage and writing that becomes the next year's book material.</p>
+
+  <!-- Year 1 national -->
+  <div class="mb-5">
+    <div class="text-xs uppercase tracking-widest text-[var(--earth)] mb-2">Year 1 · National exchanges</div>
+    <div class="flex flex-wrap gap-2 items-center text-sm">
+      <span class="chip chip-active">Alice Springs</span>
+      <span class="text-stone-500">→</span>
+      <span class="chip chip-active">Brisbane (8–13 June 2026)</span>
+      <span class="text-stone-500">→</span>
+      <span class="chip chip-live">Mt Isa</span>
+      <span class="text-stone-500">→</span>
+      <span class="chip chip-live">Sydney / Mt Druitt</span>
+      <span class="text-stone-500">→</span>
+      <span class="chip chip-emerging">Palm Island</span>
+    </div>
+    <p class="text-sm text-stone-600 mt-2 serif-italic">Four kids, two workers, three days per exchange. First stamp on a passport — for many, first aeroplane.</p>
+  </div>
+
+  <!-- Year 2+ international -->
+  <div>
+    <div class="text-xs uppercase tracking-widest text-[var(--earth)] mb-2">Year 2 + Year 3 · International</div>
+    <div class="flex flex-wrap gap-2 items-center text-sm">
+      <span class="chip chip-international">Diagrama · Murcia, Spain</span>
+      <span class="chip chip-international">YOPE · Amsterdam, Netherlands</span>
+      <span class="chip chip-pending">+ partners in New Zealand &amp; Canada (exploratory)</span>
+    </div>
+    <p class="text-sm text-stone-600 mt-2 serif-italic">Each international trip returns with footage, field journals, and cross-context evidence that feeds the Year 3 national collection.</p>
+  </div>
+</section>
+
+<!-- Diagrama + YOPE deep dive -->
+<section id="diagrama" class="max-w-7xl mx-auto px-6 py-8 border-t border-stone-300">
+  <h2 class="text-2xl font-semibold mb-1">Diagrama + YOPE — what the young people encounter overseas</h2>
+  <p class="text-sm text-stone-600 serif-italic mb-5">The international leg is not tourism. It is evidence-gathering in communities running a cousin of the method at a different scale of recognition.</p>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div class="bg-white border border-stone-200 rounded-md p-5">
+      <div class="text-xs uppercase tracking-widest text-[var(--earth)]">Spain</div>
+      <h3 class="text-2xl font-semibold mt-1">Diagrama · Murcia</h3>
+      <div class="my-3 grid grid-cols-3 gap-3 text-center">
+        <div><div class="text-2xl font-semibold text-[var(--country)]">13.6%</div><div class="text-xs text-stone-500 uppercase tracking-widest">Recidivism · 30 yrs</div></div>
+        <div><div class="text-2xl font-semibold text-[var(--country)]">5.64:1</div><div class="text-xs text-stone-500 uppercase tracking-widest">Cost-benefit</div></div>
+        <div><div class="text-2xl font-semibold text-[var(--country)]">€31K</div><div class="text-xs text-stone-500 uppercase tracking-widest">Per young person / yr</div></div>
+      </div>
+      <p class="text-sm text-stone-700 mt-3">Diagrama runs a community-led educational model for young people in the justice system in Spain. Over thirty years of operation. Thirty years of better outcomes at a fraction of detention cost. Every Australian state that has looked at Diagrama has found a reason not to replicate it.</p>
+      <div class="mt-4">
+        <div class="text-xs uppercase tracking-widest text-[var(--earth)] mb-1">What a young person does there</div>
+        <ul class="text-sm text-stone-700 list-disc pl-5 space-y-1">
+          <li>Week-long residential with their worker. Shadow a Diagrama practitioner</li>
+          <li>Sit alongside Spanish young people in the same shoes — literally same age, same story arcs</li>
+          <li>Visit 2–3 Diagrama sites, see the everyday-ness of the method</li>
+          <li>Keep filming. Keep journaling. Co-write a chapter of the Year 2 cross-context book</li>
+        </ul>
+      </div>
+      <div class="mt-4 text-xs text-stone-600 serif-italic">
+        Why it matters: the Australian policy argument that <em>"community-led models don't scale"</em> breaks when a young person comes home and says <em>"I met Spanish kids doing exactly what we're doing — for thirty years."</em>
+      </div>
+    </div>
+
+    <div class="bg-white border border-stone-200 rounded-md p-5">
+      <div class="text-xs uppercase tracking-widest text-[var(--earth)]">Netherlands</div>
+      <h3 class="text-2xl font-semibold mt-1">YOPE · Amsterdam</h3>
+      <div class="my-3 text-sm text-stone-700">
+        <strong>Youth Organised Policy Engagement.</strong> A Dutch framework where young people affected by policy design the policy. Young people sit at tables that in Australia are still closed to them. The mayor of Amsterdam convenes them. They set agendas. They measure outcomes. The policy is legitimately co-authored.
+      </div>
+      <div class="mt-4">
+        <div class="text-xs uppercase tracking-widest text-[var(--earth)] mb-1">What a young person does there</div>
+        <ul class="text-sm text-stone-700 list-disc pl-5 space-y-1">
+          <li>Attend a YOPE policy workshop. Observe. Ask.</li>
+          <li>Co-author a short position paper with Dutch peers on a shared issue (youth sentencing, foster-care churn, policing)</li>
+          <li>Meet Dutch city councillors. Watch what "young people at the table" looks like when it is normal, not performative</li>
+          <li>Come home with a practice model Australian youth can adapt for local council or state parliamentary engagement</li>
+        </ul>
+      </div>
+      <div class="mt-4 text-xs text-stone-600 serif-italic">
+        Why it matters: Taleigha's question — <em>"why are the older fellas making choices for the younger fellas?"</em> — is the exact question YOPE answers in practice every week in Amsterdam. Her trip becomes the blueprint for the ACT version.
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-6 bg-[var(--cream-2)] border-l-4 border-[var(--gold)] p-5 rounded-r-md text-sm text-stone-700">
+    <strong>Budget frame:</strong> Each international leg costs roughly $25K for 4 young people + 2 workers including flights, accommodation, program fees, filming costs. Per Year 2, the Three Circles envelope supports 3–4 international trips (Diagrama + YOPE + one exploratory). Paid for out of Circle Three's media + book production line, because each trip is primary research for the artefact.
+  </div>
+</section>
+
+<!-- Judges on Country tracker -->
+<section id="jutes" class="max-w-7xl mx-auto px-6 py-8 border-t border-stone-300">
+  <h2 class="text-2xl font-semibold mb-1">Judges on Country · Tuesday 21 April 2026</h2>
+  <p class="text-sm text-stone-600 serif-italic mb-5">55 judges + magistrates on Eastern Arrernte Country. This section populates the night of the trip.</p>
+
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+    <div class="bg-white rounded-md border border-stone-200 p-4">
+      <div class="text-xs uppercase tracking-widest text-stone-500">Judges + magistrates attending</div>
+      <div class="text-3xl font-semibold mt-1">55</div>
+      <div class="text-xs text-stone-500 mt-1">Incl. at least one High Court judge</div>
+    </div>
+    <div class="bg-white rounded-md border border-stone-200 p-4">
+      <div class="text-xs uppercase tracking-widest text-stone-500">Hosted by</div>
+      <div class="text-base font-semibold mt-1">Oonchiumpa</div>
+      <div class="text-xs text-stone-500 mt-1">Kristy Bloomfield + Tanya Turner. Under authority of Aunty Bev + Uncle Terry.</div>
+    </div>
+    <div class="bg-white rounded-md border border-stone-200 p-4">
+      <div class="text-xs uppercase tracking-widest text-stone-500">Location</div>
+      <div class="text-base font-semibold mt-1">Atnarpa</div>
+      <div class="text-xs text-stone-500 mt-1">Loves Creek Station, 80km east of Mparntwe</div>
+    </div>
+    <div class="bg-white rounded-md border border-stone-200 p-4">
+      <div class="text-xs uppercase tracking-widest text-stone-500">90-second film</div>
+      <div class="text-base font-semibold mt-1">Captured live</div>
+      <div class="text-xs text-stone-500 mt-1">Kristy + Tanya + 2–3 judges + young person. Ends on Tanya's "collateral" line.</div>
+    </div>
+  </div>
+
+  <div class="mt-5 bg-white rounded-md border border-stone-200 p-5">
+    <div class="text-xs uppercase tracking-widest text-[var(--earth)] mb-1">What we're asking the bench to do next</div>
+    <ol class="list-decimal pl-5 text-sm text-stone-700 space-y-1 mt-2">
+      <li>Before sentencing an Indigenous young person, ask what community-led programs exist within their kinship and Country. Oonchiumpa can help identify them.</li>
+      <li>Open a public conversation about community-led alternatives. One judge, one magistrate, within 60 days.</li>
+      <li>Shape the JusticeHub magistrate-facing service-directory prototype. The bench's questions from Tuesday define what it has to answer.</li>
+    </ol>
+  </div>
+</section>
+
+<!-- JusticeHub platform integration -->
+<section class="max-w-7xl mx-auto px-6 py-8 border-t border-stone-300">
+  <h2 class="text-2xl font-semibold mb-1">JusticeHub — the central platform</h2>
+  <p class="text-sm text-stone-600 serif-italic mb-5">Already live. The story layer this pitch adds is the missing piece.</p>
+
+  <div class="grid grid-cols-2 md:grid-cols-5 gap-3">
+    <div class="story-card text-center">
+      <div class="text-2xl font-semibold text-[var(--country)]">1,155</div>
+      <div class="text-xs uppercase tracking-widest text-stone-500 mt-1">ALMA interventions</div>
+    </div>
+    <div class="story-card text-center">
+      <div class="text-2xl font-semibold text-[var(--country)]">100K</div>
+      <div class="text-xs uppercase tracking-widest text-stone-500 mt-1">CivicGraph entities</div>
+    </div>
+    <div class="story-card text-center">
+      <div class="text-2xl font-semibold text-[var(--country)]">199K</div>
+      <div class="text-xs uppercase tracking-widest text-stone-500 mt-1">Relationships mapped</div>
+    </div>
+    <div class="story-card text-center">
+      <div class="text-2xl font-semibold text-[var(--country)]">71K</div>
+      <div class="text-xs uppercase tracking-widest text-stone-500 mt-1">Justice funding rows</div>
+    </div>
+    <div class="story-card text-center">
+      <div class="text-2xl font-semibold text-[var(--country)]">10,779</div>
+      <div class="text-xs uppercase tracking-widest text-stone-500 mt-1">Foundations indexed</div>
+    </div>
+  </div>
+
+  <p class="text-sm text-stone-700 mt-4 serif-italic">
+    Minderoo's $2.9M does not fund the platform. It funds the <strong>editorial and relational work</strong> that makes the platform into a national advocacy artefact. Every ALMA record gains a community-voice layer. Every funding analysis carries the counter-narrative. Every magistrate query surfaces the evidence <em>and</em> the voices.
+  </p>
+</section>
+
+<!-- What's missing -->
+<section id="missing" class="max-w-7xl mx-auto px-6 py-8 border-t border-stone-300" style="background: #f2e9d7;">
+  <h2 class="text-2xl font-semibold mb-1">What's missing — without the hold</h2>
+  <p class="text-sm text-stone-600 serif-italic mb-5">The gaps the $2.9M closes. Named honestly. Not guilt; shape.</p>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div class="bg-white border border-stone-200 rounded-md p-5">
+      <h3 class="text-lg font-semibold mb-2">Stories that stay in EL v2 without the editorial work</h3>
+      <p class="text-sm text-stone-700">440+ stories already in Empathy Ledger v2 across communities ACT is in relationship with. Without sustained editorial staffing, most stay raw ingest — voice captured, but never compiled into anything the country sees.</p>
+    </div>
+    <div class="bg-white border border-stone-200 rounded-md p-5">
+      <h3 class="text-lg font-semibold mb-2">Magistrates who don't receive the tool</h3>
+      <p class="text-sm text-stone-700">The JusticeHub magistrate-facing service directory is prototyped. Without the relational work to put it in front of every sentencing magistrate in the country, it sits live but unseen.</p>
+    </div>
+    <div class="bg-white border border-stone-200 rounded-md p-5">
+      <h3 class="text-lg font-semibold mb-2">Young people who don't get on the plane</h3>
+      <p class="text-sm text-stone-700">The Brave Ones exchange requires per-trip funding. Without Year 1 travel budget, 12+ young people don't see Brisbane, Sydney, or Palm Island. Year 2: no one sees Spain or Amsterdam.</p>
+    </div>
+    <div class="bg-white border border-stone-200 rounded-md p-5">
+      <h3 class="text-lg font-semibold mb-2">Communities who stay at "in conversation"</h3>
+      <p class="text-sm text-stone-700">Three anchors are active today. Seven more are in relationship-building or selection-pending status. Without Year 2 convening and relational work, those seven stay at 2026-04-18 state for the next three years.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="max-w-7xl mx-auto px-6 py-10 border-t border-stone-300 mt-8 text-sm text-stone-600">
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div>
+      <div class="text-xs uppercase tracking-widest text-stone-500 mb-2">Provenance</div>
+      <p>Every quote sources to <code>wiki/stories/*.md</code>. Every approval to <code>wiki/decisions/*.md</code>. Every sync action to <code>wiki/output/*</code>. No line in this dashboard is unprovenanced.</p>
+    </div>
+    <div>
+      <div class="text-xs uppercase tracking-widest text-stone-500 mb-2">Governance</div>
+      <p>Verbal-consent-in-conversation is a first-class OCAP mode. Ben-as-witness is the audit trail. Withdrawal is symmetric with opt-in. No storyteller is used without named, dated, channel-recorded approval.</p>
+    </div>
+    <div>
+      <div class="text-xs uppercase tracking-widest text-stone-500 mb-2">Contact</div>
+      <p>Benjamin Knight · <a href="mailto:benjamin@act.place" class="underline">benjamin@act.place</a><br>Nicholas Marchesi OAM · A Curious Tractor</p>
+    </div>
+  </div>
+  <div class="text-xs text-stone-500 serif-italic mt-8 text-center">
+    Refreshed on every sync run. Last updated 2026-04-18. The program is visible <em>as it runs</em>, not <em>as it was sold</em>.
+  </div>
+</footer>
+
+<script>
+  // Smooth scroll for nav links
+  document.querySelectorAll('nav a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const t = document.querySelector(a.getAttribute('href'));
+      if (t) t.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+</script>
+</body>
+</html>
