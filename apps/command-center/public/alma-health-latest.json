@@ -1,37 +1,37 @@
 {
-  "generated_at": "2026-04-19T20:14:47.955Z",
+  "generated_at": "2026-04-19T20:43:09.139Z",
   "supabase": "https://tednluwflfhxyucgwigh.supabase.co",
   "verdict": "degraded",
   "summary": {
-    "healthy_anchors": 1,
-    "trackable_anchors": 3,
+    "healthy_anchors": 5,
+    "trackable_anchors": 5,
     "total_known_anchors": 5
   },
   "coverage": {
     "total_interventions": 1000,
-    "youth_justice_interventions": 739,
+    "youth_justice_interventions": 747,
     "community_controlled_entities": 1000
   },
   "signal_completeness": {
-    "sampled": 739,
+    "sampled": 747,
     "null_score": 58,
     "null_evidence": 58,
-    "null_authority": 107,
-    "null_risk": 107,
-    "null_implementation": 107,
-    "null_option": 107,
-    "evidence_stuck_01": 339,
+    "null_authority": 96,
+    "null_risk": 96,
+    "null_implementation": 96,
+    "null_option": 96,
+    "evidence_stuck_01": 328,
     "evidence_level_vs_signal_mismatch": 14
   },
   "anchor_ground_truth": {
-    "ranked_orgs_total": 266,
+    "ranked_orgs_total": 269,
     "anchors": [
       {
         "label": "Oonchiumpa",
         "gs_entity_id": "16cadc21-083d-4d5e-8b9f-7dc6dca33b38",
         "expected_state": "NT",
         "status": "confirmed",
-        "rank": 7,
+        "rank": 9,
         "top_score": 0.772,
         "status_note": "healthy"
       },
@@ -40,36 +40,36 @@
         "gs_entity_id": "18fc2705-463c-4b27-8dbd-0ca79c640582",
         "expected_state": "QLD",
         "status": "confirmed",
-        "rank": 252,
-        "top_score": 0.38,
-        "status_note": "below top 200 — scoring drift alert"
+        "rank": 5,
+        "top_score": 0.7925,
+        "status_note": "healthy"
       },
       {
         "label": "MMEIC",
         "gs_entity_id": "e7267f3a-e466-416f-aebf-d6bf52c7dde7",
         "expected_state": "QLD",
         "status": "confirmed",
-        "rank": null,
-        "top_score": null,
-        "status_note": "entity exists, zero interventions authored"
+        "rank": 3,
+        "top_score": 0.815,
+        "status_note": "healthy"
       },
       {
         "label": "BG Fit",
-        "gs_entity_id": null,
+        "gs_entity_id": "8851899b-2bef-4f90-b0a4-a5accee86296",
         "expected_state": "QLD",
-        "status": "entity_pending",
-        "rank": null,
-        "top_score": null,
-        "status_note": "entity not yet created"
+        "status": "confirmed",
+        "rank": 18,
+        "top_score": 0.749,
+        "status_note": "healthy"
       },
       {
         "label": "Mounty Yarns",
-        "gs_entity_id": null,
+        "gs_entity_id": "9ddcbdc9-4b59-4610-aaeb-6180538ca816",
         "expected_state": "NSW",
-        "status": "entity_pending",
-        "rank": null,
-        "top_score": null,
-        "status_note": "entity not yet created"
+        "status": "confirmed",
+        "rank": 27,
+        "top_score": 0.74,
+        "status_note": "healthy"
       }
     ]
   },

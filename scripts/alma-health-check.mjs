@@ -82,8 +82,8 @@ const ANCHORS = [
   { label: 'Oonchiumpa', gs_entity_id: '16cadc21-083d-4d5e-8b9f-7dc6dca33b38', expected_state: 'NT', status: 'confirmed' },
   { label: 'PICC', gs_entity_id: '18fc2705-463c-4b27-8dbd-0ca79c640582', expected_state: 'QLD', status: 'confirmed' },
   { label: 'MMEIC', gs_entity_id: 'e7267f3a-e466-416f-aebf-d6bf52c7dde7', expected_state: 'QLD', status: 'confirmed' },
-  { label: 'BG Fit', gs_entity_id: null, expected_state: 'QLD', status: 'entity_pending' },
-  { label: 'Mounty Yarns', gs_entity_id: null, expected_state: 'NSW', status: 'entity_pending' },
+  { label: 'BG Fit', gs_entity_id: '8851899b-2bef-4f90-b0a4-a5accee86296', expected_state: 'QLD', status: 'confirmed' },
+  { label: 'Mounty Yarns', gs_entity_id: '9ddcbdc9-4b59-4610-aaeb-6180538ca816', expected_state: 'NSW', status: 'confirmed' },
 ]
 
 // ---- Checks ---------------------------------------------------------------
