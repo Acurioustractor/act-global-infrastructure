@@ -87,5 +87,35 @@ apps/command-center/apps/
 .superdesign
 
 # External skill/tool configs (managed outside repo)
-skills/
-.claude/skills/
+/skills/
+
+# Ignore all project-local skill dirs by default; explicitly allow the
+# ACT project skills that are tracked in this repo. New/personal skills
+# dropped into .claude/skills/ will be silently ignored. To commit a new
+# project skill, add `!.claude/skills/<name>/` below and force-add once.
+.claude/skills/*
+!.claude/skills/act-brand-alignment
+!.claude/skills/act-sprint-workflow
+!.claude/skills/agent-kanban
+!.claude/skills/align-ghl
+!.claude/skills/bas-cycle
+!.claude/skills/business-research
+!.claude/skills/content-publisher
+!.claude/skills/db-check
+!.claude/skills/deploy
+!.claude/skills/dev
+!.claude/skills/ecosystem-health
+!.claude/skills/enrich
+!.claude/skills/enrich-project
+!.claude/skills/env-secrets-manager
+!.claude/skills/find-receipt
+!.claude/skills/ghl-crm-advisor
+!.claude/skills/implement
+!.claude/skills/obsidian
+!.claude/skills/preflight
+!.claude/skills/query
+!.claude/skills/ralph-agent
+!.claude/skills/scan-subscriptions
+!.claude/skills/sync-storytellers
+!.claude/skills/tag-transactions
+!.claude/skills/wiki
