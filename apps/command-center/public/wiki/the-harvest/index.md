@@ -15,7 +15,7 @@ empathy_ledger_key: the-harvest
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/projects/the-harvest/the-harvest.md`.
-> Regenerated: `2026-04-20T19:41:39.283Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerated: `2026-04-20T20:55:40.355Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # The Harvest / Witta Harvest HQ
 

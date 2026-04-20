@@ -189,13 +189,15 @@ async function fetchStorytellers(storytellerIds) {
 function autoMatchProject(wikiSlug, elProjects) {
   const norm = (s) => (s || '').toLowerCase().replace(/[^a-z0-9]/g, '')
   const wikiNorm = norm(wikiSlug)
-  // Manual override table — for cases where fuzzy match would be wrong or miss
+  // Manual override table — for cases where fuzzy match would be wrong or miss.
+  // Audited 2026-04-21 against live EL (yvnuayzslukamizrlhwb).
   const manualOverrides = {
     'goods-on-country': 'Goods',
-    'redtape': 'Red Tape',
-    'treacher': 'The Treacher',
-    'the-caravan': 'Community Capital Retreat',
-    'community-capital': 'Community Capital Retreat',
+    'redtape': 'Redtape',                         // renamed in EL (was 'Red Tape')
+    'treacher': 'Treacher',                       // renamed in EL (was 'The Treacher')
+    'community-capital': 'Community Capital',     // renamed in EL (was 'Community Capital Retreat')
+    // 'the-caravan' removed 2026-04-21: no matching EL project exists yet. The Caravan is a
+    // spin-off of Community Capital — consider creating an EL project for it or mapping here.
     // Oonchiumpa has its own EL org (276 photos) but no specific project — handled via org fallback
     // Don't map to "Elders Trips and Storytelling" — that's a different cross-community archive
     'picc': 'PICC Centre Precinct',
@@ -207,9 +209,14 @@ function autoMatchProject(wikiSlug, elProjects) {
     'goods': 'Goods',
     'quandamooka-justice-strategy': 'MMEIC Cultural Initiative',
   }
+  // Manual override takes priority, but if target doesn't exist in EL, warn and fall through
+  // to fuzzy matching rather than returning null. Prevents stale override names from silently
+  // orphaning projects when EL renames occur.
   if (manualOverrides[wikiSlug]) {
     const target = manualOverrides[wikiSlug]
-    return elProjects.find((p) => p.name === target) || null
+    const overrideMatch = elProjects.find((p) => p.name === target)
+    if (overrideMatch) return overrideMatch
+    console.warn(`[autoMatch] '${wikiSlug}' → '${target}' missed; falling through to fuzzy match`)
   }
   // Exact normalized match
   let match = elProjects.find((p) => norm(p.name) === wikiNorm || norm(p.slug) === wikiNorm)

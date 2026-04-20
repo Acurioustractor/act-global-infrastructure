@@ -1,6 +1,6 @@
 ---
 status: generated
-generated_at: 2026-04-20T19:41:39.283Z
+generated_at: 2026-04-20T20:55:40.355Z
 canonical_source: wiki/concepts/act-identity.md
 ---
 
