@@ -516,6 +516,7 @@
       const current = targetSlot.getAttribute('data-el-story');
       const orgs = [{slug:'all',name:'All organisations'}, ...(gal.organisations || [])];
       const variant = targetSlot.getAttribute('data-el-variant') || 'hero';
+      const stats = gal.stats || {};
 
       const backdrop = document.createElement('div');
       backdrop.className = 'gal-backdrop';
@@ -524,18 +525,22 @@
           <div class="gal-head">
             <div class="gal-row-1">
               <div>
-                <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.15em;color:var(--m-stone-soft);font-weight:600;margin-bottom:4px">Empathy Ledger v2 · storyteller gallery</div>
+                <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.15em;color:var(--m-stone-soft);font-weight:600;margin-bottom:4px">Empathy Ledger v2 · media gallery</div>
                 <h3 style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:500;margin:0">Pick a photo or video for this slot</h3>
-                <div class="gal-slot-info" style="margin-top:4px">Variant: <strong>${variant}</strong> · current: <strong>${(current||'').slice(0,8)}</strong> · ${gal.total_entries} total stories · ${gal.with_media} with media</div>
+                <div class="gal-slot-info" style="margin-top:4px">Variant: <strong>${variant}</strong> · ${gal.total_items} items · ${stats.portraits||0} portraits · ${stats.story_heroes||0} story heroes · ${stats.media_assets||0} media assets · ${(stats.story_videos||0)+(stats.media_assets?0:0)} videos</div>
               </div>
               <button class="gal-close" aria-label="Close">✕</button>
             </div>
-            <input class="gal-search" placeholder="Search titles, storytellers, tags…" autocomplete="off">
+            <input class="gal-search" placeholder="Search storyteller, title, caption, organisation…" autocomplete="off">
             <div class="gal-filters">
-              ${orgs.map(o => `<button class="gal-chip" data-org="${o.slug}">${o.name}</button>`).join('')}
-              <div style="margin-left:auto;display:flex;align-items:center;gap:8px;font-size:11px;color:var(--m-stone-soft)">
-                <label style="display:inline-flex;align-items:center;gap:5px;cursor:pointer"><input type="checkbox" class="gal-media-only" checked>only with media</label>
-              </div>
+              <span style="font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:var(--m-stone-soft);font-weight:600;margin-right:4px">Type:</span>
+              <button class="gal-chip gal-type-chip active" data-type="all">All</button>
+              <button class="gal-chip gal-type-chip" data-type="portrait">Portraits</button>
+              <button class="gal-chip gal-type-chip" data-type="image">Photos</button>
+              <button class="gal-chip gal-type-chip" data-type="video">Videos</button>
+              <span style="width:1px;background:var(--m-divider);height:20px;margin:0 8px"></span>
+              <span style="font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:var(--m-stone-soft);font-weight:600;margin-right:4px">Org:</span>
+              ${orgs.map(o => `<button class="gal-chip gal-org-chip${o.slug==='all'?' active':''}" data-org="${o.slug}">${o.name}</button>`).join('')}
             </div>
           </div>
           <div class="gal-body"><div class="gal-grid"></div></div>
@@ -543,69 +548,98 @@
       document.body.appendChild(backdrop);
       const searchEl = backdrop.querySelector('.gal-search');
       const gridEl = backdrop.querySelector('.gal-grid');
-      const mediaOnlyEl = backdrop.querySelector('.gal-media-only');
       let filterOrg = 'all';
+      let filterType = 'all';
 
       function render() {
         const q = searchEl.value.trim().toLowerCase();
-        const onlyMedia = mediaOnlyEl.checked;
-        const items = (gal.entries || []).filter(e => {
-          if (filterOrg !== 'all' && e.organisation_slug !== filterOrg) return false;
-          if (onlyMedia && !e.has_media) return false;
+        const items = (gal.items || []).filter(it => {
+          if (filterOrg !== 'all' && it.organisation_slug !== filterOrg) return false;
+          if (filterType !== 'all' && it.type !== filterType) return false;
           if (q) {
-            const hay = (e.title + ' ' + (e.storyteller||'') + ' ' + e.organisation + ' ' + (e.tags||[]).join(' ')).toLowerCase();
+            const hay = [(it.title||''), (it.storyteller||''), (it.caption||''), (it.organisation||''), (it.source||'')].join(' ').toLowerCase();
             if (!hay.includes(q)) return false;
           }
           return true;
         });
-        if (!items.length) { gridEl.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:60px 20px;color:var(--m-stone-soft);font-style:italic;font-family:Cormorant Garamond,serif;font-size:16px">No storyteller posts match these filters.</div>'; return; }
-        gridEl.innerHTML = items.map(e => {
-          const video = e.media.find(m => m.type === 'video');
-          const img = e.media.find(m => m.type === 'image');
-          const mediaHtml = video
-            ? `<div class="gal-tile-media placeholder" style="background:linear-gradient(135deg,#2e1540,#4a2560);color:white;font-size:11px"><div><div style="font-size:18px;margin-bottom:4px">▶</div>Video · ${video.url.includes('descript') ? 'Descript' : 'embed'}</div><span class="gal-tile-video-badge">Video</span></div>`
-            : img
-            ? `<div class="gal-tile-media"><img src="${img.url}" alt="" loading="lazy"></div>`
-            : `<div class="gal-tile-media placeholder">Text-only</div>`;
-          const state = e.consent_status === 'active'
+        if (!items.length) { gridEl.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:60px 20px;color:var(--m-stone-soft);font-style:italic;font-family:Cormorant Garamond,serif;font-size:16px">No items match these filters.</div>'; return; }
+        gridEl.innerHTML = items.slice(0, 300).map(it => {
+          let mediaHtml;
+          if (it.type === 'video') {
+            mediaHtml = `<div class="gal-tile-media placeholder" style="background:linear-gradient(135deg,#2e1540,#4a2560);color:white;font-size:11px"><div><div style="font-size:22px;margin-bottom:4px">▶</div>${it.url.includes('descript') ? 'Descript · ' : ''}Video</div><span class="gal-tile-video-badge">Video</span></div>`;
+          } else {
+            const badge = it.type === 'portrait' ? '<span class="gal-tile-video-badge" style="background:var(--m-gold);color:var(--m-stone)">Portrait</span>' : '';
+            mediaHtml = `<div class="gal-tile-media"><img src="${it.url}" alt="" loading="lazy" onerror="this.parentNode.classList.add('placeholder');this.parentNode.innerHTML='Image unavailable'">${badge}</div>`;
+          }
+          const state = it.consent_status === 'active'
             ? '<span class="st-active">● Active</span>'
-            : '<span class="st-awaiting">◌ Awaiting</span>';
-          return `<div class="gal-tile" data-story-id="${e.story_id}" data-has-media="${e.has_media}">
+            : it.consent_status === 'awaiting_elder' ? '<span class="st-awaiting">◌ Awaiting</span>'
+            : '<span style="color:var(--earth-country);font-style:italic">✕ Withdrawn</span>';
+          const captionBit = it.caption ? `<div class="gal-tile-storyteller" style="opacity:0.8;font-style:italic">${it.caption.slice(0,60)}${it.caption.length>60?'…':''}</div>` : '';
+          return `<div class="gal-tile" data-item-id="${it.id}" data-story-id="${it.story_id||''}" data-type="${it.type}">
             ${mediaHtml}
             <div class="gal-tile-meta">
-              <span class="gal-tile-org">${e.organisation_slug}</span>
-              <div class="gal-tile-title">${e.title}</div>
-              ${e.storyteller ? `<div class="gal-tile-storyteller">${e.storyteller}${e.storyteller_is_elder?' · elder':''}</div>` : ''}
+              <span class="gal-tile-org">${it.organisation_slug || 'unknown'}</span>
+              <div class="gal-tile-title">${it.title || 'untitled'}</div>
+              ${it.storyteller ? `<div class="gal-tile-storyteller">${it.storyteller}${it.storyteller_is_elder?' · elder':''}</div>` : ''}
+              ${captionBit}
               <div class="gal-tile-state">${state}</div>
             </div>
           </div>`;
-        }).join('');
+        }).join('') + (items.length > 300 ? `<div style="grid-column:1/-1;text-align:center;padding:20px;color:var(--m-stone-soft);font-size:12px;font-style:italic">Showing 300 of ${items.length} — refine the search to narrow.</div>` : '');
       }
 
-      // Initial render + wire interactions
       render();
       searchEl.addEventListener('input', render);
-      mediaOnlyEl.addEventListener('change', render);
-      backdrop.querySelectorAll('.gal-chip').forEach(btn => {
-        if (btn.dataset.org === filterOrg) btn.classList.add('active');
+      backdrop.querySelectorAll('.gal-org-chip').forEach(btn => {
         btn.addEventListener('click', () => {
           filterOrg = btn.dataset.org;
-          backdrop.querySelectorAll('.gal-chip').forEach(b => b.classList.toggle('active', b.dataset.org === filterOrg));
+          backdrop.querySelectorAll('.gal-org-chip').forEach(b => b.classList.toggle('active', b.dataset.org === filterOrg));
+          render();
+        });
+      });
+      backdrop.querySelectorAll('.gal-type-chip').forEach(btn => {
+        btn.addEventListener('click', () => {
+          filterType = btn.dataset.type;
+          backdrop.querySelectorAll('.gal-type-chip').forEach(b => b.classList.toggle('active', b.dataset.type === filterType));
           render();
         });
       });
       backdrop.querySelector('.gal-close').addEventListener('click', () => backdrop.remove());
       backdrop.addEventListener('click', (e) => { if (e.target === backdrop) backdrop.remove(); });
+      document.addEventListener('keydown', function esc(e) { if (e.key === 'Escape') { backdrop.remove(); document.removeEventListener('keydown', esc); } });
 
-      // Delegate tile clicks
       gridEl.addEventListener('click', (e) => {
         const tile = e.target.closest('.gal-tile');
         if (!tile) return;
-        const newId = tile.getAttribute('data-story-id');
-        applyStoryToSlot(targetSlot, newId, gal);
+        const itemId = tile.getAttribute('data-item-id');
+        const item = (gal.items || []).find(it => it.id === itemId);
+        if (!item) return;
+        applyItemToSlot(targetSlot, item, gal);
         backdrop.remove();
       });
     });
+  }
+
+  function applyItemToSlot(el, item, gal) {
+    const variant = el.getAttribute('data-el-variant') || 'hero';
+    // Build a story-shaped object from the item so the existing renderers work
+    const isVideo = item.type === 'video';
+    const story = {
+      el_v2_story_id: item.story_id || item.id,
+      title: item.title,
+      quote: item.caption || '',
+      organisation: item.organisation,
+      storyteller: {
+        name: item.storyteller,
+        role: item.storyteller_is_elder ? 'elder' : (item.source === 'storyteller_portrait' ? 'storyteller profile' : null)
+      },
+      elder: { name: item.storyteller_is_elder ? item.storyteller : null, mode: null, mode_label: item.source.replace(/_/g, ' '), approved_at: null },
+      media: { hero: isVideo ? null : item.url, video_embed: isVideo ? item.url : null },
+      consent: { status: item.consent_status, last_verified: (item.created_at||item.updated_at||'').slice(0,10) || '—', sensitivity: item.sensitivity }
+    };
+    el.setAttribute('data-el-story', story.el_v2_story_id);
+    el.innerHTML = elMediaHtml(story, variant) + elConsentStrip(story, false) + elEditHint(story, el);
   }
 
   function applyStoryToSlot(el, storyId, gal) {
