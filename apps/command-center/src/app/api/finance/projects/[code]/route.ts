@@ -10,7 +10,7 @@ export async function GET(
     const projectCode = decodeURIComponent(code).toUpperCase()
 
     // Parallel fetch monthly financials, variance notes, transactions, budgets, R&D vendors, invoices, pipeline
-    const [monthly, variances, transactions, budgets, rdVendors, salaryAllocs, revenueStreams, invoiceMappings, expenseInvoices, pipeline] = await Promise.all([
+    const [monthly, variances, transactions, budgets, rdVendors, salaryAllocs, revenueStreams, invoiceMappings, expenseInvoices, pipeline, cardSpendResult] = await Promise.all([
       supabase
         .from('project_monthly_financials')
         .select('*')
@@ -122,6 +122,25 @@ export async function GET(
         .select('id, name, provider, program, amount_min, amount_max, status, pipeline_stage, closes_at, metadata')
         .contains('aligned_projects', [projectCode])
         .neq('status', 'closed'),
+
+      // Card spend from bank_statement_lines
+      supabase.rpc('exec_sql', {
+        query: `
+          SELECT
+            count(*)::int as total_lines,
+            round(sum(abs(amount))::numeric, 2) as total_spend,
+            count(*) FILTER (WHERE receipt_match_status = 'matched')::int as matched_count,
+            round(sum(abs(amount)) FILTER (WHERE receipt_match_status = 'matched')::numeric, 2) as matched_value,
+            count(*) FILTER (WHERE receipt_match_status = 'no_receipt_needed')::int as no_receipt_count,
+            count(*) FILTER (WHERE receipt_match_status = 'unmatched')::int as unmatched_count,
+            round(sum(abs(amount)) FILTER (WHERE receipt_match_status = 'unmatched')::numeric, 2) as unmatched_value,
+            bool_or(rd_eligible) as rd_eligible
+          FROM bank_statement_lines
+          WHERE direction = 'debit'
+            AND project_code = '${projectCode.replace(/'/g, "''")}'
+            AND date >= '2025-07-01'
+        `
+      }),
     ])
 
     const monthlyData = (monthly.data || []).map((m: any) => ({
@@ -352,6 +371,27 @@ export async function GET(
       expensesByCategory,
       topVendors,
       totalExpenseInvoices,
+      // Card spend from bank statement lines
+      cardSpend: (() => {
+        const row = (cardSpendResult?.data || [])[0] || {}
+        const totalSpend = Number(row.total_spend || 0)
+        const matchedValue = Number(row.matched_value || 0)
+        const unmatchedValue = Number(row.unmatched_value || 0)
+        const coveredCount = Number(row.matched_count || 0) + Number(row.no_receipt_count || 0)
+        const totalLines = Number(row.total_lines || 0)
+        return {
+          totalLines,
+          totalSpend: Math.round(totalSpend),
+          matchedCount: Number(row.matched_count || 0),
+          matchedValue: Math.round(matchedValue),
+          noReceiptCount: Number(row.no_receipt_count || 0),
+          unmatchedCount: Number(row.unmatched_count || 0),
+          unmatchedValue: Math.round(unmatchedValue),
+          coveragePct: totalLines > 0 ? Math.round((coveredCount / totalLines) * 100) : 0,
+          rdEligible: row.rd_eligible || false,
+          rdOffset: row.rd_eligible ? Math.round(totalSpend * 0.435) : 0,
+        }
+      })(),
     })
   } catch (error) {
     console.error('Error in project monthly financials:', error)

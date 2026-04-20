@@ -31,11 +31,11 @@ We propose a three-year program that holds these things together — long enough
 
 One per state and territory, plus three stretch sites — chosen for Indigenous leadership, demonstrated community governance (including the informal governance funders typically miss), and geographic spread.
 
-1. **Ntumba** · NT — Alice Springs · 100% Indigenous, hub-and-spoke model on traditional owner country
+1. **Oonchiumpa** · NT — Alice Springs · 100% Indigenous, hub-and-spoke model on traditional owner country
 2. **Palm Island Community Company** · QLD — community-owned, lateral violence work
 3. **Mountie Yarns** · NSW — Mt Druitt / Sydney · Contained base camp partner
 4. **Tennant Creek (William Junta + community shed)** · NT
-5. **Minjerra Bastow Burke** · NSW — disconnected from sector, exactly the gap
+5. **Minjerribah Moorgumpin Elders-in-Council Aboriginal Corporation (MMEIC)** · Minjerribah (North Stradbroke Island), QLD — Quandamooka country · cultural org founded 1993, real elder governance hidden by admin gap *(consolidates former rows 5 + 6)*
 6. **Stradbroke Island** · QLD — real elder governance hidden by admin gap
 7. **Tasmanian partner** · TAS — the "we don't need detention" proof site
 8. **ACT partner** · ACT — closest jurisdiction to abolition
@@ -109,7 +109,7 @@ The data for this example exists today. What is missing is the surfacing layer a
 
 ## Example 2 — A magistrate in Alice Springs, before sentencing
 
-**Tuesday next week:** 55 judges and magistrates including a High Court judge and Indigenous magistrates are coming to Alice Springs with Ntumba. I'll be there filming and using JusticeHub to demonstrate how a community-led service directory could change sentencing.
+**Tuesday next week:** 55 judges and magistrates including a High Court judge and Indigenous magistrates are coming to Alice Springs with Oonchiumpa. I'll be there filming and using JusticeHub to demonstrate how a community-led service directory could change sentencing.
 
 **What we want a magistrate to be able to do, by FY2028:**
 
@@ -118,7 +118,7 @@ A 16-year-old appears before her on a property offence in Alice Springs. Before 
 In ten seconds she sees:
 
 - **Available community-led programs within 200km**, with verification status (real programs only — the 279 AI-generated and unverified entries are filtered out automatically by the `.neq('verification_status', 'ai_generated')` rule)
-- **Evidence ratings** for each, drawn from the Evidence Scatter — so she can see that Ntumba's hub model has a stronger evidence base than a more expensive non-Indigenous alternative
+- **Evidence ratings** for each, drawn from the Evidence Scatter — so she can see that Oonchiumpa's hub model has a stronger evidence base than a more expensive non-Indigenous alternative
 - **Cost per young person per year** for each option, alongside the $1.33M annual detention cost (ROGS 2024–25)
 - **Cultural authority** — whether the program is Indigenous-led, who the elders are, and the consent status for the young person's mob
 - **Real outcome stories** with consent — anonymised but specific — from young people who have been through similar programs
@@ -142,7 +142,7 @@ She is not making a guess. She is making a decision against the same evidence ba
 
 3. **Centre integration.** The story enters the Centre as a structured record — connected to Mountie Yarns the organisation, to the funding flows that support the program, to the LGA, to the relevant Hansard mentions, to the evidence rating of the program model. It is **searchable but consent-bound** — anyone querying it sees only what the envelope permits, and any usage is logged.
 
-4. **Cross-community resonance.** When a worker at Ntumba is documenting their own model in Year 2, the Centre surfaces the Mountie Yarns story as a relevant pattern — *"this trajectory matches three others in your network"*. Workers can learn from each other without extracting from each other.
+4. **Cross-community resonance.** When a worker at Oonchiumpa is documenting their own model in Year 2, the Centre surfaces the Mountie Yarns story as a relevant pattern — *"this trajectory matches three others in your network"*. Workers can learn from each other without extracting from each other.
 
 5. **Artifact use.** In Year 3, the documentary director and the book editor each request use of the story. The young person — now 18 — reviews each request. They approve the documentary use (they want their mum to see it on a cinema screen) and decline the book use (they don't want it sitting on a shelf in a library forever). Both requests are honoured automatically by the system. The decline is not a problem. The story finds its right home.
 
@@ -154,35 +154,35 @@ The Empathy Ledger v2 sovereignty layer already exists and is in production. **Y
 
 ---
 
-## Example 4 — Three years inside one community: Ntumba, Alice Springs
+## Example 4 — Three years inside one community: Oonchiumpa, Alice Springs
 
-The most concrete way to see the program is to walk through what happens for one of the ten over three years. Ntumba is the right example because the relationship is the deepest, the model is the clearest, and Tuesday next week is Day Zero.
+The most concrete way to see the program is to walk through what happens for one of the ten over three years. Oonchiumpa is the right example because the relationship is the deepest, the model is the clearest, and Tuesday next week is Day Zero.
 
 ### Year 1 — Foundation (FY2026)
 
-- **Q2 2026:** $35,000 untied transfer to Ntumba. No project plan required. Quarterly relationship visit replaces acquittal.
-- **Q2 2026:** Embedded storyteller (North-based) begins six-month placement. First documentation: the visit by 55 judges and magistrates. Cultural protocols set with Christine Tanya and the elders.
-- **Q3 2026:** Ntumba's hub-and-spoke youth justice model is documented inside the Centre — the formal structure *and* the daily elder governance that funders typically miss. Communication infrastructure built: a JusticeHub presence, a simple media kit, a referral page that magistrates can find.
+- **Q2 2026:** $35,000 untied transfer to Oonchiumpa. No project plan required. Quarterly relationship visit replaces acquittal.
+- **Q2 2026:** Embedded storyteller (North-based) begins six-month placement. First documentation: the visit by 55 judges and magistrates. Cultural protocols set with Kristy Bloomfield, Tanya Turner and the elders (Aunty Bev, Uncle Terry).
+- **Q3 2026:** Oonchiumpa's hub-and-spoke youth justice model is documented inside the Centre — the formal structure *and* the daily elder governance that funders typically miss. Communication infrastructure built: a JusticeHub presence, a simple media kit, a referral page that magistrates can find.
 - **Q3 2026:** First story batch consented and entered into the Empathy Ledger with full sovereignty envelopes. Three young people. Trajectories begin to be tracked through the workers, not through interviews.
 - **Q4 2026:** Ben + 3 community leaders from across the ten travel to Norway and Portugal on the international learning tour. Christine joins for the Portugal leg. Returns with first international peer correspondence in place.
-- **Year 1 outcome:** Ntumba is visible nationally for the first time. Their model exists in writing on their own terms. Three young people's trajectories are being held longitudinally. They have relationships with two other anchor communities. The magistrate visit is on film.
+- **Year 1 outcome:** Oonchiumpa is visible nationally for the first time. Their model exists in writing on their own terms. Three young people's trajectories are being held longitudinally. They have relationships with two other anchor communities. The magistrate visit is on film.
 
 ### Year 2 — Deepening (FY2027)
 
-- **Q1 2027:** Operational support steps up to $50,000. Ntumba uses part of it to bring in a part-time finance officer — the kind of unsexy capacity that makes the difference between an organisation that can grow and one that can't.
-- **Q2 2027:** **First cross-community exchange.** Eight Ntumba staff travel to Palm Island Community Company for a week. Lateral violence work is shared in both directions. Documented in the Centre as a relational impact case study. (This is the South East Queensland tour Christine and I have already discussed.)
-- **Q3 2027:** Ntumba's model is tested against the Frameworks Institute language work being developed with the Victorian VRU. Christine and Andrea Davidson are introduced through the program. The framework starts being *contextualised* to Indigenous experience rather than imported.
-- **Q4 2027:** Ntumba is invited to speak at three sector forums where they would not previously have been on the program. Their communication infrastructure (built in Year 1) means they have media assets ready. Their story is no longer being told *about* them.
-- **Year 2 outcome:** Ntumba is in active relationship with two other anchor communities. They are being cited in Victorian framework work. Their longitudinal story tracking now covers eight young people across two years. They have a finance officer and a website that does their model justice.
+- **Q1 2027:** Operational support steps up to $50,000. Oonchiumpa uses part of it to bring in a part-time finance officer — the kind of unsexy capacity that makes the difference between an organisation that can grow and one that can't.
+- **Q2 2027:** **First cross-community exchange.** Eight Oonchiumpa staff travel to Palm Island Community Company for a week. Lateral violence work is shared in both directions. Documented in the Centre as a relational impact case study. (This is the South East Queensland tour Christine and I have already discussed.)
+- **Q3 2027:** Oonchiumpa's model is tested against the Frameworks Institute language work being developed with the Victorian VRU. Christine and Andrea Davidson are introduced through the program. The framework starts being *contextualised* to Indigenous experience rather than imported.
+- **Q4 2027:** Oonchiumpa is invited to speak at three sector forums where they would not previously have been on the program. Their communication infrastructure (built in Year 1) means they have media assets ready. Their story is no longer being told *about* them.
+- **Year 2 outcome:** Oonchiumpa is in active relationship with two other anchor communities. They are being cited in Victorian framework work. Their longitudinal story tracking now covers eight young people across two years. They have a finance officer and a website that does their model justice.
 
 ### Year 3 — Crescendo (FY2028)
 
-- **Q1 2028:** Ntumba hosts an international peer (Portuguese youth diversion practitioner) for two weeks. Documented in the Centre, filmed for the documentary.
+- **Q1 2028:** Oonchiumpa hosts an international peer (Portuguese youth diversion practitioner) for two weeks. Documented in the Centre, filmed for the documentary.
 - **Q2 2028:** Christine speaks at the Doing Convening — not as a panellist, as a convening lead. She runs a workshop on hub-and-spoke models for 40 other community organisations. No keynotes. Nick and I are in the back of the room.
-- **Q3 2028:** Ntumba is one of ten chapters in *The Country We Are Building*. The chapter is co-written with Christine and the elders. They retain rights and a royalty share.
+- **Q3 2028:** Oonchiumpa is one of ten chapters in *The Country We Are Building*. The chapter is co-written with Christine and the elders. They retain rights and a royalty share.
 - **Q3 2028:** The eight tracked young people, now followed across three years, become the most concrete trajectory evidence in the documentary. With consent envelopes preserved throughout. Their stories carry weight because they are not snapshots — they are arcs.
-- **Q4 2028:** The framework, now contextualised, is published with Ntumba's model named as one of the three proof points. The Victorian VRU adopts it. The Justice Reform Initiative uses it in its advocacy. The political cover for detention default in the NT narrows by a measurable amount.
-- **Year 3 outcome:** Ntumba is a national voice. The model is documented, tested, framework-named, internationally connected, on film and in print. The eight young people have been held in trust through three years of trajectory and their stories are the most powerful evidence the program has produced. **The relationship continues after the program ends, because it was never structured as a project.**
+- **Q4 2028:** The framework, now contextualised, is published with Oonchiumpa's model named as one of the three proof points. The Victorian VRU adopts it. The Justice Reform Initiative uses it in its advocacy. The political cover for detention default in the NT narrows by a measurable amount.
+- **Year 3 outcome:** Oonchiumpa is a national voice. The model is documented, tested, framework-named, internationally connected, on film and in print. The eight young people have been held in trust through three years of trajectory and their stories are the most powerful evidence the program has produced. **The relationship continues after the program ends, because it was never structured as a project.**
 
 ---
 

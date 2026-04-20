@@ -110,11 +110,11 @@ These numbers are **verified against the actual data layer** today:
 
 | # | Community | State | Status |
 |---|---|---|---|
-| 1 | **[[oonchiumpa]]** (Christine/Chrissy) — *95% diversion rate, 97.6% cheaper than detention* | NT — Mparntwe | **Locked** |
+| 1 | **[[oonchiumpa]]** (Kristy Bloomfield + Tanya Turner) — *95% diversion rate, 97.6% cheaper than detention* | Mparntwe (Alice Springs), NT | **Locked** |
 | 2 | **Palm Island Community Company** — *$29M turnover, 208 FTE, $38.9M tracked funding* | QLD — Palm Island | **Locked** |
 | 3 | Mountie Yarns | NSW — Mt Druitt | Pipeline (CONTAINED base camp) |
 | 4 | Tennant Creek (William Junta + community shed) | NT — Barkly | Pipeline |
-| 5 | Minjerra Bastow Burke | NSW — Mid North Coast | Pipeline |
+| 5 | Minjerribah Moorgumpin Elders-in-Council Aboriginal Corporation (MMEIC) | Minjerribah (North Stradbroke Island), QLD — Quandamooka country | Pipeline *(consolidates old rows 5 + 6)* |
 | 6 | Stradbroke Island (Quandamooka) | QLD — Minjerribah | Pipeline |
 | 7 | Tasmanian community partner (TBC via JRI / Diagrama network) | TAS | TBC |
 | 8 | ACT community partner (TBC) | ACT | TBC |

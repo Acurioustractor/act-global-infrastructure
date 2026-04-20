@@ -53,12 +53,12 @@ For Empathy Ledger narratives especially — consent must be:
 
 ## Key Organizations
 
-| Organization | Role |
-|-------------|------|
-| Maiam nayri Wingara Collective | Aboriginal & Torres Strait Islander Data Sovereignty authority |
-| Jumbunna Institute (UTS) | Digitizing Aboriginal political history via Mukurtu |
-| GIDA (Global Indigenous Data Alliance) | International CARE principles framework |
-| Local Contexts Hub | TK and Biocultural Labels system |
+| Organization                           | Role                                                           |
+| -------------------------------------- | -------------------------------------------------------------- |
+| Maiam nayri Wingara Collective         | Aboriginal & Torres Strait Islander Data Sovereignty authority |
+| Jumbunna Institute (UTS)               | Digitizing Aboriginal political history via Mukurtu            |
+| GIDA (Global Indigenous Data Alliance) | International CARE principles framework                        |
+| Local Contexts Hub                     | TK and Biocultural Labels system                               |
 
 ## Sami Precedent (Sweden)
 

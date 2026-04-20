@@ -79,6 +79,12 @@ const cronScripts = [
     cron_restart: '5 9 * * 1', // Weekly Monday 9:05am AEST — verify GitHub repos + Vercel deploy URLs (before viewer build)
   },
   {
+    name: 'weekly-reconciliation',
+    script: 'scripts/weekly-reconciliation.mjs',
+    args: '',  // auto-detects current quarter
+    cron_restart: '0 8 * * 1', // Weekly Monday 8am AEST — reconciliation report + Telegram
+  },
+  {
     name: 'wiki-build-viewer',
     script: 'scripts/wiki-build-viewer.mjs',
     cron_restart: '15 9 * * 1', // Weekly Monday 9:15am AEST — regenerate the viewer and sync the command-center wiki mirror

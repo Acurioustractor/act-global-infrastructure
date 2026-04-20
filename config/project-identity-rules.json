@@ -1,0 +1,223 @@
+{
+  "_meta": {
+    "description": "Canonical identity and tagging decisions for wiki pages that are not straightforward standalone operational projects.",
+    "version": "1.0.0",
+    "updated": "2026-04-11",
+    "entity_type_values": [
+      "project",
+      "project-hub",
+      "cluster-hub",
+      "sub-project",
+      "deliverable",
+      "work",
+      "work-series",
+      "work-placeholder",
+      "methodology",
+      "flagship-program",
+      "pitch-package",
+      "working-draft",
+      "partner-proof",
+      "alias-brand",
+      "community-strategy",
+      "method-lab"
+    ],
+    "tagging_mode_values": [
+      "own-code",
+      "parent-code",
+      "alias-of",
+      "related-proof",
+      "no-tag-yet"
+    ],
+    "legacy_wrapper_type_values": [
+      "legacy-engine-alias",
+      "legacy-ops-bucket",
+      "legacy-internal-subproject"
+    ]
+  },
+  "entities": {
+    "act-studio": {
+      "entity_type": "cluster-hub",
+      "tagging_mode": "own-code",
+      "canonical_slug": "act-studio",
+      "canonical_code": "ACT-CORE",
+      "recommended_action": "Keep as a named hub page. Treat as the studio cluster, not as a normal funded project."
+    },
+    "black-cockatoo-valley": {
+      "entity_type": "project",
+      "tagging_mode": "own-code",
+      "canonical_slug": "black-cockatoo-valley",
+      "canonical_code": "ACT-BV",
+      "recommended_action": "Normalise legacy ACT-BCV references to ACT-BV over time. Keep wiki page and public name as Black Cockatoo Valley."
+    },
+    "green-harvest-witta": {
+      "entity_type": "sub-project",
+      "tagging_mode": "parent-code",
+      "canonical_slug": "the-harvest",
+      "canonical_code": "ACT-HV",
+      "recommended_action": "Keep the wiki page, but treat this as a Harvest node rather than a separate cross-system project code."
+    },
+    "grantscope": {
+      "entity_type": "alias-brand",
+      "tagging_mode": "alias-of",
+      "canonical_slug": "civicgraph",
+      "canonical_code": "ACT-CS",
+      "recommended_action": "Keep GrantScope as a wiki page because the codebase name matters, but tag/sync it as CivicGraph."
+    },
+    "picc-centre-precinct": {
+      "entity_type": "sub-project",
+      "tagging_mode": "parent-code",
+      "canonical_slug": "picc",
+      "canonical_code": "ACT-PI",
+      "recommended_action": "Keep as a distinct wiki page and operational stream under PICC."
+    },
+    "picc-annual-report": {
+      "entity_type": "deliverable",
+      "tagging_mode": "parent-code",
+      "canonical_slug": "picc",
+      "canonical_code": "ACT-PI",
+      "recommended_action": "Treat as a deliverable under PICC unless it later receives a dedicated budget line and code."
+    },
+    "picc-elders-hull-river": {
+      "entity_type": "sub-project",
+      "tagging_mode": "own-code",
+      "canonical_slug": "picc-elders-hull-river",
+      "canonical_code": "ACT-ER",
+      "recommended_action": "Use the existing ACT-ER sub-project code."
+    },
+    "picc-photo-kiosk": {
+      "entity_type": "sub-project",
+      "tagging_mode": "parent-code",
+      "canonical_slug": "picc",
+      "canonical_code": "ACT-PI",
+      "recommended_action": "Keep as a wiki page and tag to ACT-PI until/unless a dedicated kiosk code is introduced."
+    },
+    "smart-connect": {
+      "entity_type": "sub-project",
+      "tagging_mode": "parent-code",
+      "canonical_slug": "smart-connect",
+      "canonical_code": "ACT-SM",
+      "recommended_action": "Treat SMART Connect as the umbrella code and roll SMART variants into it."
+    },
+    "smart-hcp-gp-uplift": {
+      "entity_type": "sub-project",
+      "tagging_mode": "parent-code",
+      "canonical_slug": "smart-connect",
+      "canonical_code": "ACT-SM",
+      "recommended_action": "Keep page-level distinction, but use the SMART umbrella code for cross-system tagging."
+    },
+    "smart-recovery-gp-kits": {
+      "entity_type": "sub-project",
+      "tagging_mode": "parent-code",
+      "canonical_slug": "smart-connect",
+      "canonical_code": "ACT-SM",
+      "recommended_action": "Keep page-level distinction, but use the SMART umbrella code for cross-system tagging."
+    },
+    "caring-for-those-who-care": {
+      "entity_type": "project",
+      "tagging_mode": "own-code",
+      "canonical_slug": "caring-for-those-who-care",
+      "canonical_code": "ACT-CA",
+      "recommended_action": "Backfill the wiki page with ACT-CA and use it directly across systems."
+    },
+    "tomnet": {
+      "entity_type": "project",
+      "tagging_mode": "own-code",
+      "canonical_slug": "tomnet",
+      "canonical_code": "ACT-TN",
+      "recommended_action": "Backfill the wiki page with ACT-TN and use it directly across systems."
+    },
+    "deadlylabs": {
+      "entity_type": "partner-proof",
+      "tagging_mode": "related-proof",
+      "canonical_slug": "justicehub",
+      "canonical_code": "ACT-JH",
+      "recommended_action": "Keep as a proof/precedent page. Do not create an ACT project code unless the partnership becomes operationally load-bearing."
+    },
+    "place-based-policy-lab": {
+      "entity_type": "method-lab",
+      "tagging_mode": "parent-code",
+      "canonical_slug": "justicehub",
+      "canonical_code": "ACT-JH",
+      "recommended_action": "Keep as a conceptual/method page unless it gets a funded operational line of its own."
+    },
+    "quandamooka-justice-strategy": {
+      "entity_type": "community-strategy",
+      "tagging_mode": "parent-code",
+      "canonical_slug": "justicehub",
+      "canonical_code": "ACT-JH",
+      "recommended_action": "Keep as a place-specific strategy page. Use ACT-JH until it becomes a separately budgeted operational project."
+    },
+    "staying": {
+      "entity_type": "methodology",
+      "tagging_mode": "parent-code",
+      "canonical_slug": "justicehub",
+      "canonical_code": "ACT-JH",
+      "recommended_action": "Keep as a methodology page. Do not assign a separate operational code."
+    },
+    "three-circles": {
+      "entity_type": "flagship-program",
+      "tagging_mode": "parent-code",
+      "canonical_slug": "justicehub",
+      "canonical_code": "ACT-JH",
+      "recommended_action": "Keep as the canonical flagship program page. Tag to JusticeHub until it becomes a funded standalone program entity."
+    },
+    "minderoo-pitch-package": {
+      "entity_type": "pitch-package",
+      "tagging_mode": "parent-code",
+      "canonical_slug": "justicehub",
+      "canonical_code": "ACT-JH",
+      "recommended_action": "Operational package only. Never tag as a standalone project."
+    },
+    "the-full-idea": {
+      "entity_type": "working-draft",
+      "tagging_mode": "parent-code",
+      "canonical_slug": "justicehub",
+      "canonical_code": "ACT-JH",
+      "recommended_action": "Working-draft artefact only. Never tag as a standalone project."
+    },
+    "the-brave-ones": {
+      "entity_type": "work-series",
+      "tagging_mode": "parent-code",
+      "canonical_slug": "justicehub",
+      "canonical_code": "ACT-JH",
+      "recommended_action": "Keep as a studio/JusticeHub work series. Promote to its own code only if it gains an independent budget or production stream."
+    },
+    "the-caravan": {
+      "entity_type": "work",
+      "tagging_mode": "parent-code",
+      "canonical_slug": "community-capital",
+      "canonical_code": "ACT-CP",
+      "recommended_action": "Treat as a work/prototype under Community Capital until a cleaner Community Capital code split is done."
+    },
+    "the-vagina": {
+      "entity_type": "work-placeholder",
+      "tagging_mode": "parent-code",
+      "canonical_slug": "act-studio",
+      "canonical_code": "ACT-CORE",
+      "recommended_action": "Keep as a placeholder wiki page, not a coded operational project, until the work becomes real enough to budget and publish."
+    }
+  },
+  "legacy_wrappers": {
+    "ACT-CG": {
+      "wrapper_type": "legacy-engine-alias",
+      "tagging_mode": "alias-of",
+      "canonical_slug": "civicgraph",
+      "canonical_code": "ACT-CS",
+      "recommended_action": "Keep this row for historical R&D and engine references, but treat ACT-CS / CivicGraph as the canonical project everywhere new."
+    },
+    "ACT-HQ": {
+      "wrapper_type": "legacy-ops-bucket",
+      "tagging_mode": "parent-code",
+      "canonical_slug": "act-studio",
+      "canonical_code": "ACT-CORE",
+      "recommended_action": "Keep this row for historical overhead and operations tagging, but roll new cross-system references toward ACT-CORE / ACT Regenerative Studio."
+    },
+    "ACT-PC": {
+      "wrapper_type": "legacy-internal-subproject",
+      "tagging_mode": "parent-code",
+      "canonical_slug": "picc",
+      "canonical_code": "ACT-PI",
+      "recommended_action": "Keep this row for historical PICC Centre bookkeeping, but roll new cross-system references toward ACT-PI / PICC unless a dedicated centre code is reintroduced."
+    }
+  }
+}

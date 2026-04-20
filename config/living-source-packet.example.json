@@ -1,0 +1,122 @@
+{
+  "packet_id": "pkt_2026_04_12_empathy-ledger_flagship-refresh",
+  "schema_version": "1.0.0",
+  "packet_type": "project",
+  "status": "approved",
+  "canonical_entity": {
+    "entity_type": "project",
+    "canonical_slug": "empathy-ledger",
+    "canonical_note_path": "wiki/projects/empathy-ledger.md",
+    "project_code": "ACT-EL",
+    "public_copy_owner": "empathy-ledger"
+  },
+  "source_refs": [
+    {
+      "source_id": "wiki-project-empathy-ledger",
+      "source_system": "act-wiki",
+      "source_kind": "canonical-note",
+      "uri_or_path": "wiki/projects/empathy-ledger.md",
+      "captured_at": "2026-04-12T08:00:00Z",
+      "verification_status": "verified",
+      "notes": "Canonical meaning and ecosystem role."
+    },
+    {
+      "source_id": "el-flagship-pack",
+      "source_system": "empathy-ledger-v2",
+      "source_kind": "generated-pack",
+      "uri_or_path": "/Users/benknight/Code/empathy-ledger-v2/src/data/editorial/flagship-project-packs.generated.json",
+      "captured_at": "2026-04-12T08:00:00Z",
+      "verification_status": "verified",
+      "notes": "Current public-facing flagship summary and surface references."
+    }
+  ],
+  "narrative": {
+    "headline": "Empathy Ledger is ACT's sovereign storytelling layer.",
+    "summary": "One approved packet should be enough to refresh the hub, the spoke, and any share-ready explanatory assets without rewriting the story by hand.",
+    "body_markdown": "Empathy Ledger holds the living story, media, and consent layer for the ACT ecosystem. It should publish its native narrative once, then syndicate approved derivatives to the hub and supporting channels.",
+    "themes": [
+      "narrative sovereignty",
+      "community ownership",
+      "syndication with consent"
+    ],
+    "approved_quotes": [
+      {
+        "quote": "Not your story... not my story... but a third reality we can only discover together.",
+        "speaker": "Empathy Ledger canon",
+        "source_ref_id": "wiki-project-empathy-ledger"
+      }
+    ]
+  },
+  "media_assets": [
+    {
+      "asset_id": "el-home-hero",
+      "kind": "image",
+      "uri_or_path": "https://empathyledger.com/opengraph-image",
+      "caption": "Empathy Ledger hero image",
+      "alt_text": "Empathy Ledger public surface hero image",
+      "usage_rights": "approved"
+    }
+  ],
+  "review": {
+    "editorial": {
+      "status": "approved",
+      "owner": "brand-editor",
+      "decided_at": "2026-04-12T08:15:00Z",
+      "notes": "Approved for public refresh."
+    },
+    "cultural": {
+      "status": "pending",
+      "owner": "cultural-reviewer",
+      "decided_at": null,
+      "notes": "Required before any sensitive story variants publish."
+    },
+    "consent": {
+      "status": "approved",
+      "owner": "story-ops",
+      "decided_at": "2026-04-12T08:17:00Z",
+      "notes": "Packet only references already-consented public material."
+    },
+    "release": {
+      "status": "pending",
+      "owner": "release-captain",
+      "decided_at": null,
+      "notes": "Preview QA still required."
+    }
+  },
+  "outputs": [
+    {
+      "target_surface": "empathy-ledger",
+      "output_type": "homepage-feature",
+      "status": "approved",
+      "destination": "https://empathyledger.com",
+      "notes": "Native spoke update."
+    },
+    {
+      "target_surface": "act-regenerative-studio",
+      "output_type": "project-card",
+      "status": "approved",
+      "destination": "https://act.place/projects/empathy-ledger",
+      "notes": "Hub mirror of the approved packet."
+    },
+    {
+      "target_surface": "social",
+      "output_type": "explainer-image-brief",
+      "status": "review",
+      "destination": null,
+      "notes": "Awaiting cultural gate before generation."
+    },
+    {
+      "target_surface": "video",
+      "output_type": "explainer-video-brief",
+      "status": "queued",
+      "destination": null,
+      "notes": "Can be generated only after all review gates are green."
+    }
+  ],
+  "provenance": {
+    "generated_at": "2026-04-12T08:20:00Z",
+    "generated_by": "living-ecosystem-phase-1",
+    "provenance_note_path": "thoughts/shared/templates/provenance-template.md",
+    "notes": "Example packet showing how one approved source bundle should drive multiple outputs."
+  }
+}

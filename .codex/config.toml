@@ -1,0 +1,26 @@
+# Repo-local Codex defaults for ACT infrastructure work.
+# Keep this narrow: only settings that materially help this workspace.
+
+web_search = "live"
+plan_mode_reasoning_effort = "high"
+review_model = "gpt-5.4"
+
+[tools.web_search]
+context_size = "medium"
+location = { city = "Brisbane", region = "Queensland", country = "Australia", timezone = "Australia/Brisbane" }
+
+[profiles.act-quick]
+model_reasoning_effort = "medium"
+model_verbosity = "low"
+
+[profiles.act-db]
+model_reasoning_effort = "high"
+model_verbosity = "low"
+web_search = "live"
+plan_mode_reasoning_effort = "high"
+
+[profiles.act-review]
+model_reasoning_effort = "xhigh"
+model_verbosity = "low"
+web_search = "live"
+plan_mode_reasoning_effort = "high"

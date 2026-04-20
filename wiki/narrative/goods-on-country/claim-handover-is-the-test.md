@@ -27,25 +27,25 @@ backlinks_to_concepts: [ntumba, alice-springs, community-control, partial-counts
 
 | Variant | Where |
 |---|---|
-| "Four checkpoints, signed off by community partner, reviewed at month 3 and month 6" | Ntumba checkpoint doc (2026-04-08) |
+| "Four checkpoints, signed off by community partner, reviewed at month 3 and month 6" | Oonchiumpa checkpoint doc (2026-04-08) |
 | "Yes / no, no weasel 'partial'" | Internal framing |
-| "PARTIAL counts as NO unless there is a written, dated path to full YES within 30 days" | Ntumba checkpoint doc — the critical rule |
-| "This document is the difference between 'we hope handover happens' and 'we have dated tests for whether it is happening.'" | Ntumba checkpoint doc — closing line |
-| "4/4 = scale, 3/4 = fix, 2/4 = stop, ≤1/4 = redesign" | Ntumba checkpoint doc — decision rule |
+| "PARTIAL counts as NO unless there is a written, dated path to full YES within 30 days" | Oonchiumpa checkpoint doc — the critical rule |
+| "This document is the difference between 'we hope handover happens' and 'we have dated tests for whether it is happening.'" | Oonchiumpa checkpoint doc — closing line |
+| "4/4 = scale, 3/4 = fix, 2/4 = stop, ≤1/4 = redesign" | Oonchiumpa checkpoint doc — decision rule |
 
 ## What we haven't said yet
 
 - **Never said publicly.** Lives entirely in the internal pitch document. Has never appeared on a website, in an essay, in a funder deck.
 - Never used as the **funder challenge** — *"Most enterprises you have funded called themselves community-led. Here is the four-checkpoint test ours has signed. Ask theirs to do the same."*
 - Never connected to the **measurement honesty** frame — most "Indigenous-led" claims fail this test and no one is asking
-- Never said in Christine ("Chrissy") / Ntumba elders' voices — currently this is a Ben + Nick framing, signed *by* community but spoken *to* community
+- Never said in Kristy, Tanya or Oonchiumpa elders' (Aunty Bev + Uncle Terry) voices — currently this is a Ben + Nick framing, signed *by* community but spoken *to* community
 - Never used at a sector convening — *"This is what community ownership looks like when it is actually measured."*
 - Never connected back to **OCAP principles** (Ownership, Control, Access, Possession) — the four checkpoints are essentially a procurement-readable OCAP test, never said that way
 
 ## Sources
 
 - Internal: `JusticeHub/output/goods-on-country/community-ownership-checkpoints.md`
-- Worked example: Ntumba (Alice Springs), Christine + Ntumba elders, agreement date TBC
+- Worked example: Oonchiumpa, Mparntwe (Alice Springs); Kristy Bloomfield + Tanya Turner + Aunty Bev + Uncle Terry; agreement date TBC
 
 ## Adjacencies
 

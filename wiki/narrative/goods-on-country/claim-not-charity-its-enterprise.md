@@ -35,7 +35,7 @@ backlinks_to_concepts: [community-authority, community-enterprise, ntumba, palm-
 ## Audience reactions logged
 
 - Pending — has been said in essays but never logged as a public post yet
-- The Ntumba checkpoint document is a *signed*-for-community version of this argument
+- The Oonchiumpa checkpoint document is a *signed*-for-community version of this argument
 
 ## What we haven't said yet
 

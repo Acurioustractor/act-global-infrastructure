@@ -155,7 +155,7 @@ node scripts/narrative-log-deployment.mjs claim-handover-is-the-test <channel> \
 
 <details><summary>Headings (for context)</summary>
 
-- Goods on Country · Anchor site template (worked example: Ntumba, Alice Springs)
+- Goods on Country · Anchor site template (worked example: Oonchiumpa, Alice Springs)
 - How to use this document
 - Anchor site
 - The four checkpoints

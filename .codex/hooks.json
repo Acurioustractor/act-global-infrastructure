@@ -1,0 +1,30 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|resume|clear",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 /Users/benknight/Code/act-global-infrastructure/.codex/hooks/session_start_act_context.py",
+            "timeout_sec": 5,
+            "status_message": "Loading ACT workspace guardrails"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "^Bash$",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 /Users/benknight/Code/act-global-infrastructure/.codex/hooks/pre_tool_use_act_guard.py",
+            "timeout_sec": 5,
+            "status_message": "Checking ACT repo guardrails"
+          }
+        ]
+      }
+    ]
+  }
+}

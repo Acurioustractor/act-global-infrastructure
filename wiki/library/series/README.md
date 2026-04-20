@@ -15,15 +15,15 @@ The series mark on every spine: **THE STAY SERIES · NO. 01** through **NO. 07**
 
 ## The seven books
 
-| No. | Title | Subtitle | Status | Source chapter |
-|---|---|---|---|---|
-| **01** | THE THREE CIRCLES | *Start at the edge. Work outward.* | sketched | [Chapter 04](../chapters/README.md) |
-| **02** | THE LIVING MAP LOOP | *1,775 community models, and growing.* | sketched | [Chapter 05](../chapters/README.md) |
-| **03** | THREE RIPPLES | *The infrastructure of the edge.* | sketched | [Chapter 06](../chapters/README.md) |
-| **04** | I HAVE · I AM · I CAN | *Nine resources for resilience.* | sketched | [Chapter 07](../chapters/README.md) |
-| **05** | THE FIELD CANVAS | *Look at the whole field. Above and below.* | sketched | [Chapter 08](../chapters/README.md) |
-| **06** | LISTEN · CURIOSITY · ACTION · ART | *Four phases. One loop.* | sketched | [Chapter 09](../chapters/README.md) |
-| **07** | FIRE CRESCENDO | *On building things slowly.* | sketched | [Chapter 10](../chapters/README.md) |
+| No.    | Title                             | Subtitle                                    | Status   | Source chapter                      |
+| ------ | --------------------------------- | ------------------------------------------- | -------- | ----------------------------------- |
+| **01** | THE THREE CIRCLES                 | *Start at the edge. Work outward.*          | sketched | [Chapter 04](../chapters/README.md) |
+| **02** | THE LIVING MAP LOOP               | *1,775 community models, and growing.*      | sketched | [Chapter 05](../chapters/README.md) |
+| **03** | THREE RIPPLES                     | *The infrastructure of the edge.*           | sketched | [Chapter 06](../chapters/README.md) |
+| **04** | I HAVE · I AM · I CAN             | *Nine resources for resilience.*            | sketched | [Chapter 07](../chapters/README.md) |
+| **05** | THE FIELD CANVAS                  | *Look at the whole field. Above and below.* | sketched | [Chapter 08](../chapters/README.md) |
+| **06** | LISTEN · CURIOSITY · ACTION · ART | *Four phases. One loop.*                    | sketched | [Chapter 09](../chapters/README.md) |
+| **07** | FIRE CRESCENDO                    | *On building things slowly.*                | sketched | [Chapter 10](../chapters/README.md) |
 
 ## How a series book gets built
 

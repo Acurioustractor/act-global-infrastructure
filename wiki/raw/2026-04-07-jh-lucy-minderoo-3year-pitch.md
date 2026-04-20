@@ -22,7 +22,7 @@ This is not 10 grants and a website. It is one program with three loops that fee
 A single, local-AI-powered system that contains every framework, every funding flow, every program, every Hansard mention, every ABN, every evaluation, every story consented for sharing. Magistrates, funders, communities and journalists query it directly. No more $250k consultancies producing PDFs that go nowhere. The infrastructure exists today (1,081 programs, 587k entities, 1.5M relationships, $114.9B in flows already mapped) — this funding hardens it, opens it, and embeds local AI agents per region so a community in Tennant Creek doesn't need a data team to know its own context.
 
 **Circle 2 — 10 Anchor Communities (Dunbar's number, applied)**
-Ten places where we go deep for two years. Untied support, minimised reporting, maximised relationship. Longitudinal storytelling with young people (tracked through trust, not interviews). Model documentation so what works is legible to other communities and to funders. **Cross-community exchanges** so Ntumba spends a week at Palm Island, Mountie Yarns spends a week in Tennant Creek — relational impact that no conference produces.
+Ten places where we go deep for two years. Untied support, minimised reporting, maximised relationship. Longitudinal storytelling with young people (tracked through trust, not interviews). Model documentation so what works is legible to other communities and to funders. **Cross-community exchanges** so Oonchiumpa spends a week at Palm Island, Mountie Yarns spends a week in Tennant Creek — relational impact that no conference produces.
 
 **Circle 3 — National Crescendo (Year 3)**
 A doing-focused convening — no keynote speakers, no panels — where the 10 anchor communities become the voices the sector hears. Paired with international learning (the Africa/Europe storytelling tour as a precursor), a published national framework for community-led oversight, and a public-facing campaign built on the stories and data accumulated across years 1 and 2. Builds the case that ACT, Tasmania and South Australia don't need detention — and that the alternative is already running, just hidden.
@@ -35,11 +35,11 @@ Selected for geographic spread (one per state/territory + 3 stretch sites), Indi
 
 | # | Community / Org | State | Why |
 |---|---|---|---|
-| 1 | **Ntumba** (Christine/Chrissy) | NT — Alice Springs | 100% Indigenous, 12-family network, hub-and-spoke youth justice model, traditional owner land base |
+| 1 | **Oonchiumpa** (Kristy Bloomfield + Tanya Turner co-directors; Aunty Bev + Uncle Terry elder authority) | Mparntwe (Alice Springs), NT | 100% Indigenous, 12-family network, hub-and-spoke youth justice model, traditional owner land base |
 | 2 | **Palm Island Community Company (PICC)** | QLD — Palm Island | Community-owned, lateral violence forum work, deep cultural authority |
 | 3 | **Mountie Yarns** | NSW — Sydney/Mt Druitt | Contained base camp partner, NSW peak body convening work, advocacy infrastructure |
 | 4 | **Tennant Creek (William Junta + community shed)** | NT — Barkly | Housing + enterprise crossover, under-resourced, no current peak attention |
-| 5 | **Minjerra Bastow Burke** | NSW — Mid North Coast | Powerful, supported, but disconnected from sector — exactly the gap |
+| 5 | **Minjerribah Moorgumpin Elders-in-Council Aboriginal Corporation (MMEIC)** | Minjerribah (North Stradbroke Island), QLD — Quandamooka country | Cultural organisation founded 1993. Real elder governance hidden by admin gap. *(Consolidates old rows 5 + 6 — same organisation.)* |
 | 6 | **Stradbroke Island (oyster farming + elder governance)** | QLD — Quandamooka | Real governance hidden by admin gap — model for "what governance actually looks like" |
 | 7 | **Tasmanian community partner** (TBC via JRI network) | TAS | The "we don't need detention" proof site |
 | 8 | **ACT community partner** (TBC via Diagrama / JRI) | ACT | Two kids in detention — the closest jurisdiction to abolition |

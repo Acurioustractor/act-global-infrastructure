@@ -1,0 +1,549 @@
+    20 Nov 2025	Debit		DEFYDESIGN.ORG SYDNEY		XXXXXXXXXXXXXXX1656	Credit Card Purchase	2,785.66		Bank Feed	Unreconciled
+    20 Nov 2025	Debit		QANTAS AIRW MASCOT		XXXXXXXXXXXXXXX1656	Credit Card Purchase	508.18		Bank Feed	Reconciled
+    20 Nov 2025	Debit		QANTAS AIRW MASCOT		XXXXXXXXXXXXXXX1656	Credit Card Purchase	868.14		Bank Feed	Reconciled
+    20 Nov 2025	Debit		NAB INTNL TRAN FEE - (MC)			Fee - Charged	1.08		Bank Feed	Reconciled
+    20 Nov 2025	Debit		NAB INTNL TRAN FEE - (MC)			Fee - Charged	0.03		Bank Feed	Reconciled
+    20 Nov 2025	Debit		GOJEK RECURRING NON3DS JAKARTA SELAT		XXXXXXXXXXXXXXX1656	Credit Card Purchase	0.83		Bank Feed	Unreconciled
+    20 Nov 2025	Debit		CURSOR, AI POWERED IDE CURSOR.COM NY		XXXXXXXXXXXXXXX1656	Credit Card Purchase	30.86		Bank Feed	Reconciled
+    20 Nov 2025	Debit		UPDOC.COM.AU -REWMZOMC SURRY HILLS		XXXXXXXXXXXXXXX1656	Credit Card Purchase	39.95		Bank Feed	Reconciled
+    20 Nov 2025	Debit		URBAN BITES Badung (Kab)		XXXXXXXXXXXXXXX1656	Credit Card Purchase	12.86		Bank Feed	Reconciled
+    20 Nov 2025	Debit		DEFYDESIGN.ORG SYDNEY		XXXXXXXXXXXXXXX1656	Credit Card Purchase	16,813.50		Bank Feed	Unreconciled
+    20 Nov 2025	Debit		QANTAS AIRW MASCOT		XXXXXXXXXXXXXXX1656	Credit Card Purchase	766.65		Bank Feed	Reconciled
+    20 Nov 2025	Debit		QANTAS AIRW MASCOT		XXXXXXXXXXXXXXX1656	Credit Card Purchase	766.65		Bank Feed	Reconciled
+    20 Nov 2025	Debit		QANTAS AIRW MASCOT		XXXXXXXXXXXXXXX1656	Credit Card Purchase	868.14		Bank Feed	Reconciled
+    20 Nov 2025	Debit		NAB INTNL TRAN FEE - (MC)			Fee - Charged	0.45		Bank Feed	Reconciled
+    20 Nov 2025	Debit		EZVIZ INTERNATIONAL LI WAN CHAI		XXXXXXXXXXXXXXX1656	Credit Card Purchase	14.99		Bank Feed	Unreconciled
+    20 Nov 2025	Debit		QANTAS AIRW MASCOT		XXXXXXXXXXXXXXX1656	Credit Card Purchase	766.65		Bank Feed	Reconciled
+    19 Nov 2025	Credit		INTERNET PAYMENT Linked Acc Trns		XXXXXXXXXXXXXXX1656	Credit Card Payment		6,000.00	Bank Feed	Unreconciled
+    19 Nov 2025	Credit		INTERNET PAYMENT Linked Acc Trns		XXXXXXXXXXXXXXX1656	Credit Card Payment		5,000.00	Bank Feed	Unreconciled
+    19 Nov 2025	Debit		GoPayID DKI Jakarta		XXXXXXXXXXXXXXX1656	Credit Card Purchase	0.64		Bank Feed	Unreconciled
+    19 Nov 2025	Debit		NAB INTNL TRAN FEE - (MC)			Fee - Charged	0.02		Bank Feed	Reconciled
+    19 Nov 2025	Debit		BRISBANE POWERHOUSE NEW FARM		XXXXXXXXXXXXXXX1656	Credit Card Purchase	137.50		Bank Feed	Unreconciled
+    19 Nov 2025	Debit		GoPayID DKI Jakarta		XXXXXXXXXXXXXXX1656	Credit Card Purchase	1.06		Bank Feed	Unreconciled
+    19 Nov 2025	Credit		INTERNET PAYMENT Linked Acc Trns		XXXXXXXXXXXXXXX1656	Credit Card Payment		10,000.00	Bank Feed	Unreconciled
+    19 Nov 2025	Credit		INTERNET PAYMENT Linked Acc Trns		XXXXXXXXXXXXXXX1656	Credit Card Payment		6,295.93	Bank Feed	Unreconciled
+    19 Nov 2025	Debit		NAB INTNL TRAN FEE - (MC)			Fee - Charged	0.04		Bank Feed	Reconciled
+    18 Nov 2025	Debit		QANTAS AIRW MASCOT		XXXXXXXXXXXXXXX1656	Credit Card Purchase	1,199.29		Bank Feed	Reconciled
+    18 Nov 2025	Debit		CARLA FURNISHERS P/L CICCONE		XXXXXXXXXXXXXXX1656	Credit Card Purchase	5,590.00		Bank Feed	Unreconciled
+    18 Nov 2025	Debit		QANTAS AIRW MASCOT		XXXXXXXXXXXXXXX1656	Credit Card Purchase	1,199.29		Bank Feed	Reconciled
+    18 Nov 2025	Debit		TICKETS*FARM MY SC 0404900312		XXXXXXXXXXXXXXX1656	Credit Card Purchase	103.00		Bank Feed	Unreconciled
+    18 Nov 2025	Debit		BUDGET RENT A CAR MASCOT		XXXXXXXXXXXXXXX1656	Credit Card Purchase	518.18		Bank Feed	Unreconciled
+    18 Nov 2025	Debit		CARLA FURNISHERS P/L CICCONE		XXXXXXXXXXXXXXX1656	Credit Card Purchase	5,590.00		Bank Feed	Unreconciled
+    18 Nov 2025	Debit		BP EXP THE TULLA 1684 MELBOURNE AIR		XXXXXXXXXXXXXXX1656	Credit Card Purchase	44.23		Bank Feed	Unreconciled
+    17 Nov 2025	Debit		AMZNPRIMEAU MEMBERSHIP SYDNEY SOUTH		XXXXXXXXXXXXXXX1656	Credit Card Purchase	9.99		Bank Feed	Unreconciled
+    17 Nov 2025	Debit		UBER *BUSINESS HELP.UBER.Sydney		XXXXXXXXXXXXXXX1656	Credit Card Purchase	57.04		Bank Feed	Reconciled
+    17 Nov 2025	Debit		SP TRIPSIM BY SYD MASCOT		XXXXXXXXXXXXXXX1656	Credit Card Purchase	44.99		Bank Feed	Reconciled
+    17 Nov 2025	Debit		Scopri Olo Bar Carlton		XXXXXXXXXXXXXXX1656	Credit Card Purchase	180.00		Bank Feed	Unreconciled
+    17 Nov 2025	Debit		AIG Australia -		XXXXXXXXXXXXXXX1656	Credit Card Purchase	34.00		Bank Feed	Unreconciled
+    17 Nov 2025	Debit		NAB INTNL TRAN FEE - (MC)			Fee - Charged	13.78		Bank Feed	Reconciled
+    17 Nov 2025	Debit		LOTTE TRAVEL RETAIL MELBOURNE AIR		XXXXXXXXXXXXXXX1656	Credit Card Purchase	131.69		Bank Feed	Unreconciled
+    17 Nov 2025	Debit		QANTAS AIR 081HQB423VQKCMASCOT		XXXXXXXXXXXXXXX1656	Credit Card Purchase	275.00		Bank Feed	Reconciled
+    17 Nov 2025	Debit		Indonesia Arrival ROTTERDAM		XXXXXXXXXXXXXXX1656	Credit Card Purchase	393.72		Bank Feed	Unreconciled
+    17 Nov 2025	Debit		SP TRIPSIM BY SYD MASCOT		XXXXXXXXXXXXXXX1656	Credit Card Purchase	44.99		Bank Feed	Unreconciled
+    17 Nov 2025	Debit		APPLE.COM/BILL SYDNEY		XXXXXXXXXXXXXXX1656	Credit Card Purchase	11.99		Bank Feed	Reconciled
+    17 Nov 2025	Debit		FLYPARKS MARCOOLA		XXXXXXXXXXXXXXX1656	Credit Card Purchase	119.00		Bank Feed	Unreconciled
+    17 Nov 2025	Debit		Adobe Sydney		XXXXXXXXXXXXXXX1656	Credit Card Purchase	56.73		Bank Feed	Reconciled
+    17 Nov 2025	Debit		NAB INTNL TRAN FEE - (MC)			Fee - Charged	7.16		Bank Feed	Reconciled
+    17 Nov 2025	Credit		INTERNET PAYMENT Linked Acc Trns		XXXXXXXXXXXXXXX1656	Credit Card Payment		15,000.00	Bank Feed	Unreconciled
+    17 Nov 2025	Debit		NAB INTNL TRAN FEE - (MC)			Fee - Charged	2.48		Bank Feed	Reconciled
+    17 Nov 2025	Debit		THE COFFEE CLUB MT ISA MOUNT ISA		XXXXXXXXXXXXXXX1656	Credit Card Purchase	5.64		Bank Feed	Reconciled
+    17 Nov 2025	Debit		UBER *TRIP HELP.UBER.COM Sydney		XXXXXXXXXXXXXXX1656	Credit Card Purchase	65.17		Bank Feed	Reconciled
+    17 Nov 2025	Debit		MIGHTY NETWORKS MIGHTYNETWORKCA		XXXXXXXXXXXXXXX1656	Credit Card Purchase	182.46		Bank Feed	Reconciled
+    17 Nov 2025	Debit		QANTAS AIR 081HQBC247MNDMASCOT		XXXXXXXXXXXXXXX1656	Credit Card Purchase	135.00		Bank Feed	Reconciled
+    17 Nov 2025	Debit		OFFICEWORKS 0404 WOOLLOONGABBA		XXXXXXXXXXXXXXX1656	Credit Card Purchase	47.98		Bank Feed	Reconciled
+    17 Nov 2025	Debit		Kogan.com 3BUDH9QW Melbourne		XXXXXXXXXXXXXXX1656	Credit Card Purchase	291.98		Bank Feed	Unreconciled
+    17 Nov 2025	Debit		Indonesia Arrival ROTTERDAM		XXXXXXXXXXXXXXX1656	Credit Card Purchase	204.55		Bank Feed	Unreconciled
+    17 Nov 2025	Debit		WEBFLOW.COM WEBFLOW.COM CA		XXXXXXXXXXXXXXX1656	Credit Card Purchase	70.84		Bank Feed	Reconciled
+    17 Nov 2025	Debit		WEBFLOW.COM WEBFLOW.COM CA		XXXXXXXXXXXXXXX1656	Credit Card Purchase	71.05		Bank Feed	Reconciled
+    17 Nov 2025	Debit		GRAYZA.COM BRISBANE CITY		XXXXXXXXXXXXXXX1656	Credit Card Purchase	105.10		Bank Feed	Reconciled
+    17 Nov 2025	Debit		NAB INTNL TRAN FEE - (MC)			Fee - Charged	2.49		Bank Feed	Reconciled
+    17 Nov 2025	Debit		QANTAS AIR 081HQBTFHDVZ6MASCOT		XXXXXXXXXXXXXXX1656	Credit Card Purchase	176.38		Bank Feed	Reconciled
+    17 Nov 2025	Debit		QANTAS AIR 081HQBG3V7EFCMASCOT		XXXXXXXXXXXXXXX1656	Credit Card Purchase	718.50		Bank Feed	Reconciled
+    17 Nov 2025	Debit		TELSTRA SERVICES MELBOURNE		XXXXXXXXXXXXXXX1656	Credit Card Purchase	80.00		Bank Feed	Reconciled
+    17 Nov 2025	Debit		NAB INTNL TRAN FEE - (MC)			Fee - Charged	6.39		Bank Feed	Reconciled
+    17 Nov 2025	Credit		INTERNET PAYMENT Linked Acc Trns		XXXXXXXXXXXXXXX1656	Credit Card Payment		6,000.00	Bank Feed	Unreconciled
+    14 Nov 2025	Debit		WOOLWORTHS/CNR ISA & MILEMOUNT ISA		XXXXXXXXXXXXXXX1656	Credit Card Purchase	200.00		Bank Feed	Reconciled
+    14 Nov 2025	Debit		MOUNT ISA ENT TOURISM MOUNT ISA		XXXXXXXXXXXXXXX1656	Credit Card Purchase	9.10		Bank Feed	Reconciled
+    14 Nov 2025	Debit		ZLR*ISACLOV Mount Isa Cit		XXXXXXXXXXXXXXX1656	Credit Card Purchase	27.28		Bank Feed	Reconciled
+    14 Nov 2025	Debit		Live Payments Barangaroo		XXXXXXXXXXXXXXX1656	Credit Card Purchase	26.77		Bank Feed	Reconciled
+    14 Nov 2025	Debit		KNIGHT BUSINESS PTY LT MOUNT ISA		XXXXXXXXXXXXXXX1656	Credit Card Purchase	100.22		Bank Feed	Reconciled
+    13 Nov 2025	Debit		SQ *BAMBINO ESPRESSO Mount Isa Cit		XXXXXXXXXXXXXXX1656	Credit Card Purchase	7.08		Bank Feed	Reconciled
+    13 Nov 2025	Debit		Reddy Express 1869 Mount Isa		XXXXXXXXXXXXXXX1656	Credit Card Purchase	104.29		Bank Feed	Reconciled
+    13 Nov 2025	Debit		NAB INTNL TRAN FEE - (MC)			Fee - Charged	1.56		Bank Feed	Reconciled
+    13 Nov 2025	Debit		ASM MONSURUL HUQ MOUNT ISA CIT		XXXXXXXXXXXXXXX1656	Credit Card Purchase	26.40		Bank Feed	Reconciled
+    13 Nov 2025	Debit		AIRBNB * HMNFDHSXP9 SURRY HILLS		XXXXXXXXXXXXXXX1656	Credit Card Purchase	2,475.91		Bank Feed	Unreconciled
+    13 Nov 2025	Debit		SMP*EzyMart Grey St f3 South Brisban		XXXXXXXXXXXXXXX1656	Credit Card Purchase	20.61		Bank Feed	Unreconciled
+    13 Nov 2025	Debit		CODEGUIDE.DEV WWW.CODEGUIDEDE		XXXXXXXXXXXXXXX1656	Credit Card Purchase	44.53		Bank Feed	Unreconciled
+    13 Nov 2025	Debit		FIRECRAWL.DEV WWW.FIRECRAWLDE		XXXXXXXXXXXXXXX1656	Credit Card Purchase	29.18		Bank Feed	Reconciled
+    13 Nov 2025	Debit		ZAMBRERO MT ISA MOUNT ISA		XXXXXXXXXXXXXXX1656	Credit Card Purchase	42.20		Bank Feed	Reconciled
+    13 Nov 2025	Debit		WOOLWORTHS/CNR ISA & MILEMOUNT ISA		XXXXXXXXXXXXXXX1656	Credit Card Purchase	55.80		Bank Feed	Reconciled
+    13 Nov 2025	Debit		NAB INTNL TRAN FEE - (MC)			Fee - Charged	1.02		Bank Feed	Reconciled
+    13 Nov 2025	Debit		XERO AU INV-47874856 HAWTHORN		XXXXXXXXXXXXXXX1656	Credit Card Purchase	75.00		Bank Feed	Unreconciled
+    12 Nov 2025	Debit		HATCH ELECTRICAL ZILLMERE		XXXXXXXXXXXXXXX1656	Credit Card Purchase	20,244.64		Bank Feed	Unreconciled
+    12 Nov 2025	Debit		UNITED CAB 4749 9999 MOUNT ISA		XXXXXXXXXXXXXXX1656	Credit Card Purchase	31.40		Bank Feed	Reconciled
+    12 Nov 2025	Debit		NAB INTNL TRAN FEE - (MC)			Fee - Charged	3.22		Bank Feed	Reconciled
+    12 Nov 2025	Credit		BUNNINGS 396000 ALICE SPRINGS		XXXXXXXXXXXXXXX1656	Credit Card Refund		135.70	Bank Feed	Unreconciled
+    12 Nov 2025	Credit		KENNARDS HIRE HO WA SEVEN HILLS		XXXXXXXXXXXXXXX1656	Credit Card Refund		71.50	Bank Feed	Unreconciled
+    12 Nov 2025	Debit		KMART 1025 MOUNT ISA		XXXXXXXXXXXXXXX1656	Credit Card Purchase	59.00		Bank Feed	Reconciled
+    12 Nov 2025	Debit		AGL SALES PTY LTD SYDNEY		XXXXXXXXXXXXXXX1656	Credit Card Purchase	319.09		Bank Feed	Unreconciled
+    12 Nov 2025	Debit		WOOLWORTHS/CNR ISA & MILEMT ISA		XXXXXXXXXXXXXXX1656	Credit Card Purchase	50.95		Bank Feed	Reconciled
+    12 Nov 2025	Debit		SQ *BAMBINO ESPRESSO Mount Isa Cit		XXXXXXXXXXXXXXX1656	Credit Card Purchase	24.29		Bank Feed	Reconciled
+    12 Nov 2025	Debit		SQ *BAMBINO ESPRESSO Mount Isa Cit		XXXXXXXXXXXXXXX1656	Credit Card Purchase	7.08		Bank Feed	Reconciled
+    12 Nov 2025	Debit		ALICE SPRINGS CASINO O ALICE SPRINGS		XXXXXXXXXXXXXXX1656	Credit Card Purchase	4.57		Bank Feed	Reconciled
+    12 Nov 2025	Debit		UBER *TRIP HELP.UBER.COM Sydney		XXXXXXXXXXXXXXX1656	Credit Card Purchase	40.99		Bank Feed	Reconciled
+    12 Nov 2025	Debit		OPENAI *CHATGPT SUBSCR OPENAI.COM CA		XXXXXXXXXXXXXXX1656	Credit Card Purchase	92.14		Bank Feed	Reconciled
+    12 Nov 2025	Debit		UBER *BUSINESS HELP.UBER.Sydney		XXXXXXXXXXXXXXX1656	Credit Card Purchase	90.45		Bank Feed	Reconciled
+    12 Nov 2025	Debit		AVIS AUSTRALIA MASCOT		XXXXXXXXXXXXXXX1656	Credit Card Purchase	1,247.62		Bank Feed	Unreconciled
+    11 Nov 2025	Debit		PAGE 27 CAFE ALICE SPRINGS		XXXXXXXXXXXXXXX1656	Credit Card Purchase	6.92		Bank Feed	Reconciled
+    11 Nov 2025	Debit		BUNNINGS 396000 ALICE SPRINGS		XXXXXXXXXXXXXXX1656	Credit Card Purchase	1,468.28		Bank Feed	Unreconciled
+    11 Nov 2025	Debit		UBER *BUSINESS HELP.UBER.Sydney		XXXXXXXXXXXXXXX1656	Credit Card Purchase	13.30		Bank Feed	Reconciled
+    11 Nov 2025	Credit		INTERNET PAYMENT Linked Acc Trns		XXXXXXXXXXXXXXX1656	Credit Card Payment		1,497.50	Bank Feed	Unreconciled
+    11 Nov 2025	Credit		INTERNET PAYMENT Linked Acc Trns		XXXXXXXXXXXXXXX1656	Credit Card Payment		23,875.00	Bank Feed	Unreconciled
+    11 Nov 2025	Debit		QANTAS AIR 081HQAKYNAPFCMASCOT		XXXXXXXXXXXXXXX1656	Credit Card Purchase	249.00		Bank Feed	Reconciled
+    11 Nov 2025	Debit		EPILOGUE ENTERPRISES ALICE SPRINGS		XXXXXXXXXXXXXXX1656	Credit Card Purchase	249.79		Bank Feed	Unreconciled
+    11 Nov 2025	Debit		ALICE SPRINGS CASINO O ALICE SPRINGS		XXXXXXXXXXXXXXX1656	Credit Card Purchase	135.00		Bank Feed	Unreconciled
+    11 Nov 2025	Credit		B & S HARDWARE PTY LTD ALICE SPRINGS		XXXXXXXXXXXXXXX1656	Credit Card Refund		131.59	Bank Feed	Unreconciled
+    11 Nov 2025	Debit		AIRBNB * HMTA5FKNNW SURRY HILLS		XXXXXXXXXXXXXXX1656	Credit Card Purchase	383.00		Bank Feed	Unreconciled
+    11 Nov 2025	Debit		UBER *TRIP HELP.UBER.COM Sydney		XXXXXXXXXXXXXXX1656	Credit Card Purchase	65.52		Bank Feed	Reconciled
+    11 Nov 2025	Debit		EPILOGUE ENTERPRISES ALICE SPRINGS		XXXXXXXXXXXXXXX1656	Credit Card Purchase	5.08		Bank Feed	Reconciled
+    11 Nov 2025	Debit		BP ALICE SPRINGS 1104 ALICE SPRINGS		XXXXXXXXXXXXXXX1656	Credit Card Purchase	110.94		Bank Feed	Unreconciled
+    11 Nov 2025	Debit		ALICE SPRINGS CASINO O ALICE SPRINGS		XXXXXXXXXXXXXXX1656	Credit Card Purchase	1,012.56		Bank Feed	Unreconciled
+    11 Nov 2025	Credit		BUNNINGS 396000 ALICE SPRINGS		XXXXXXXXXXXXXXX1656	Credit Card Refund		1,494.92	Bank Feed	Unreconciled
+    11 Nov 2025	Debit		QANTAS AIRW MASCOT		XXXXXXXXXXXXXXX1656	Credit Card Purchase	260.00		Bank Feed	Reconciled
+    11 Nov 2025	Debit		QANTAS AIRW MASCOT		XXXXXXXXXXXXXXX1656	Credit Card Purchase	1,913.31		Bank Feed	Reconciled
+    11 Nov 2025	Debit		UBER *TRIP HELP.UBER.COM Sydney		XXXXXXXXXXXXXXX1656	Credit Card Purchase	75.07		Bank Feed	Reconciled
+    11 Nov 2025	Debit		UBER *TRIP HELP.UBER.COM Sydney		XXXXXXXXXXXXXXX1656	Credit Card Purchase	5.00		Bank Feed	Reconciled
+    10 Nov 2025	Debit		UBER *ONE SYDNEY		XXXXXXXXXXXXXXX1656	Credit Card Purchase	9.99		Bank Feed	Reconciled
+    10 Nov 2025	Debit		APPLE.COM/BILL SYDNEY		XXXXXXXXXXXXXXX1656	Credit Card Purchase	14.99		Bank Feed	Reconciled
+    10 Nov 2025	Debit		WEBFLOW.COM WEBFLOW.COM CA		XXXXXXXXXXXXXXX1656	Credit Card Purchase	49.34		Bank Feed	Reconciled
+    10 Nov 2025	Debit		WEBFLOW.COM WEBFLOW.COM CA		XXXXXXXXXXXXXXX1656	Credit Card Purchase	44.86		Bank Feed	Reconciled
+    10 Nov 2025	Debit		NAB INTNL TRAN FEE - (MC)			Fee - Charged	5.72		Bank Feed	Reconciled
+    10 Nov 2025	Debit		NEWS PTY LIMITED SURRY HILLS		XXXXXXXXXXXXXXX1656	Credit Card Purchase	24.00		Bank Feed	Unreconciled
+    10 Nov 2025	Debit		BRALINDA INVESTMENTS P ALICE SPRINGS		XXXXXXXXXXXXXXX1656	Credit Card Purchase	1,213.20		Bank Feed	Unreconciled
+    10 Nov 2025	Debit		NAB INTNL TRAN FEE - (MC)			Fee - Charged	0.60		Bank Feed	Reconciled
+    10 Nov 2025	Debit		NAB INTNL TRAN FEE - (MC)			Fee - Charged	1.73		Bank Feed	Reconciled
+    10 Nov 2025	Debit		ANTHROPIC ANTHROPIC.COMCA		XXXXXXXXXXXXXXX1656	Credit Card Purchase	17.01		Bank Feed	Reconciled
+    10 Nov 2025	Debit		QANTAS AIR 081HQAZ4P76EGMASCOT		XXXXXXXXXXXXXXX1656	Credit Card Purchase	348.41		Bank Feed	Reconciled
+    10 Nov 2025	Debit		EG GROUP/WILLS TCE & RAILALICE SPRINGS		XXXXXXXXXXXXXXX1656	Credit Card Purchase	141.63		Bank Feed	Unreconciled
+    10 Nov 2025	Debit		NAB INTNL TRAN FEE - (MC)			Fee - Charged	1.57		Bank Feed	Reconciled
+    10 Nov 2025	Debit		CabFare Payments Melbourne		XXXXXXXXXXXXXXX1656	Credit Card Purchase	45.15		Bank Feed	Reconciled
+    10 Nov 2025	Debit		NOTION LABS, INC. NOTION.SO CA		XXXXXXXXXXXXXXX1656	Credit Card Purchase	163.34		Bank Feed	Reconciled
+    10 Nov 2025	Debit		WOOLWORTHS/40 HARTLEY ST ALICE SPRINGS		XXXXXXXXXXXXXXX1656	Credit Card Purchase	14.95		Bank Feed	Reconciled
+    7 Nov 2025	Debit		Audible Limited AU MELBOURNE		XXXXXXXXXXXXXXX1656	Credit Card Purchase	16.45		Bank Feed	Reconciled
+    6 Nov 2025	Debit		BUNNINGS 396000 ALICE SPRINGS		XXXXXXXXXXXXXXX1656	Credit Card Purchase	1,845.51		Bank Feed	Reconciled
+    6 Nov 2025	Debit		BUNNINGS 396000 ALICE SPRINGS		XXXXXXXXXXXXXXX1656	Credit Card Purchase	2,797.38		Bank Feed	Reconciled
+    6 Nov 2025	Debit		LinkedInPreC *13557984 16506873555		XXXXXXXXXXXXXXX1656	Credit Card Purchase	74.99		Bank Feed	Unreconciled
+    5 Nov 2025	Debit		MALENY HARDWARE AND RURALMALENY		XXXXXXXXXXXXXXX1656	Credit Card Purchase	285.20		Bank Feed	Reconciled
+    5 Nov 2025	Debit		KENNARDS HIRE HO WA SEVEN HILLS		XXXXXXXXXXXXXXX1656	Credit Card Purchase	1,308.00		Bank Feed	Reconciled
+    5 Nov 2025	Debit		PAGE 27 CAFE ALICE SPRINGS		XXXXXXXXXXXXXXX1656	Credit Card Purchase	82.72		Bank Feed	Reconciled
+    5 Nov 2025	Debit		NAB INTNL TRAN FEE - (MC)			Fee - Charged	1.77		Bank Feed	Reconciled
+    5 Nov 2025	Debit		ZAPIER.COM/CHARGE ZAPIER.COM CA		XXXXXXXXXXXXXXX1656	Credit Card Purchase	50.51		Bank Feed	Reconciled
+    4 Nov 2025	Debit		BANH MI EXPRESS PTY L Alice Springs		XXXXXXXXXXXXXXX1656	Credit Card Purchase	131.88		Bank Feed	Reconciled
+    4 Nov 2025	Debit		WOOLWORTHS/40 HARTLEY ST ALICE SPRINGS		XXXXXXXXXXXXXXX1656	Credit Card Purchase	72.00		Bank Feed	Unreconciled
+    4 Nov 2025	Debit		UNITED HEAVITREE GAP ALICE SPRINGS		XXXXXXXXXXXXXXX1656	Credit Card Purchase	219.99		Bank Feed	Reconciled
+    4 Nov 2025	Debit		LS tanakas pty ltd Alice Springs		XXXXXXXXXXXXXXX1656	Credit Card Purchase	14.00		Bank Feed	Unreconciled
+    4 Nov 2025	Debit		QANTAS AIRW MASCOT		XXXXXXXXXXXXXXX1656	Credit Card Purchase	260.00		Bank Feed	Reconciled
+    4 Nov 2025	Debit		BELONG MELBOURNE		XXXXXXXXXXXXXXX1656	Credit Card Purchase	35.00		Bank Feed	Unreconciled
+    4 Nov 2025	Debit		INTERNET BANKING TRANSFERMELBOURNE		XXXXXXXXXXXXXXX1656	Credit Card Cash Advance	152.59		Bank Feed	Unreconciled
+    4 Nov 2025	Debit		INTERNET BANKING TRANSFERMELBOURNE		XXXXXXXXXXXXXXX1656	Credit Card Cash Advance	202.16		Bank Feed	Unreconciled
+    4 Nov 2025	Credit		INTERNET PAYMENT Linked Acc Trns		XXXXXXXXXXXXXXX1656	Credit Card Payment		9,800.00	Bank Feed	Unreconciled
+    4 Nov 2025	Debit		WOOLWORTHS/40 HARTLEY ST ALICE SPRINGS		XXXXXXXXXXXXXXX1656	Credit Card Purchase	165.99		Bank Feed	Unreconciled
+    4 Nov 2025	Debit		UNITED HEAVITREE GAP ALICE SPRINGS		XXXXXXXXXXXXXXX1656	Credit Card Purchase	185.05		Bank Feed	Reconciled
+    4 Nov 2025	Debit		UBER *BUSINESS HELP.UBER.Sydney		XXXXXXXXXXXXXXX1656	Credit Card Purchase	60.43		Bank Feed	Reconciled
+    4 Nov 2025	Debit		BP BOWENBRIDGE1410 HERSTONQLD		XXXXXXXXXXXXXXX1656	Credit Card Purchase	165.02		Bank Feed	Reconciled
+    4 Nov 2025	Interest		INTEREST ON CASH ADV(S)			Interest	0.84		Bank Feed	Unreconciled
+    4 Nov 2025	Debit		INTERNET BANKING TRANSFERMELBOURNE		XXXXXXXXXXXXXXX1656	Credit Card Cash Advance	45.80		Bank Feed	Unreconciled
+    4 Nov 2025	Debit		CabFare Payments Melbourne		XXXXXXXXXXXXXXX1656	Credit Card Purchase	53.23		Bank Feed	Reconciled
+    4 Nov 2025	Debit		THRIDAY ACCOUNTING CARLTON		XXXXXXXXXXXXXXX1656	Credit Card Purchase	440.00		Bank Feed	Reconciled
+    4 Nov 2025	Debit		QANTAS AIRW MASCOT		XXXXXXXXXXXXXXX1656	Credit Card Purchase	65.00		Bank Feed	Reconciled
+    3 Nov 2025	Debit		UBER *BUSINESS HELP.UBER.Sydney		XXXXXXXXXXXXXXX1656	Credit Card Purchase	99.76		Bank Feed	Reconciled
+    3 Nov 2025	Debit		MAPLE STREET MEAT MERC MALENY		XXXXXXXXXXXXXXX1656	Credit Card Purchase	203.23		Bank Feed	Unreconciled
+    3 Nov 2025	Debit		DOCPLAY*PREMIUM docplay.com		XXXXXXXXXXXXXXX1656	Credit Card Purchase	9.99		Bank Feed	Unreconciled
+    3 Nov 2025	Debit		NAB INTNL TRAN FEE - (MC)			Fee - Charged	0.64		Bank Feed	Reconciled
+    3 Nov 2025	Debit		CLAUDE.AI SUBSCRIPTION ANTHROPIC.COMCA		XXXXXXXXXXXXXXX1656	Credit Card Purchase	153.12		Bank Feed	Reconciled
+    3 Nov 2025	Debit		Google GSUITE_theharvestwSydney		XXXXXXXXXXXXXXX1656	Credit Card Purchase	51.54		Bank Feed	Unreconciled
+    3 Nov 2025	Debit		SEASONS SUPERMARKET 10 MALENY		XXXXXXXXXXXXXXX1656	Credit Card Purchase	104.99		Bank Feed	Reconciled
+    3 Nov 2025	Debit		JETBOOST.IO JETBOOST.IO HI		XXXXXXXXXXXXXXX1656	Credit Card Purchase	75.03		Bank Feed	Reconciled
+    3 Nov 2025	Debit		Brouhaha Brewery Baringa		XXXXXXXXXXXXXXX1656	Credit Card Purchase	210.00		Bank Feed	Reconciled
+    3 Nov 2025	Debit		LINKTREE COLLINGWOOD		XXXXXXXXXXXXXXX1656	Credit Card Purchase	8.05		Bank Feed	Unreconciled
+    3 Nov 2025	Debit		NAB INTNL TRAN FEE - (MC)			Fee - Charged	2.63		Bank Feed	Reconciled
+    3 Nov 2025	Debit		IGA MOOLOOLAH SUPER MOOLOOLAH VAL		XXXXXXXXXXXXXXX1656	Credit Card Purchase	21.00		Bank Feed	Reconciled
+    3 Nov 2025	Debit		Maleny Hot Bread Bake Maleny		XXXXXXXXXXXXXXX1656	Credit Card Purchase	25.05		Bank Feed	Unreconciled
+    3 Nov 2025	Debit		NAPKIN AI NAPKIN.AI CA		XXXXXXXXXXXXXXX1656	Credit Card Purchase	18.37		Bank Feed	Reconciled
+    3 Nov 2025	Debit		Brouhaha Maleny Maleny		XXXXXXXXXXXXXXX1656	Credit Card Purchase	184.73		Bank Feed	Reconciled
+    3 Nov 2025	Credit		INTERNET PAYMENT Linked Acc Trns		XXXXXXXXXXXXXXX1656	Credit Card Payment		6,015.00	Bank Feed	Unreconciled
+    3 Nov 2025	Debit		Maleny Hot Bread Bake Maleny		XXXXXXXXXXXXXXX1656	Credit Card Purchase	31.43		Bank Feed	Unreconciled
+    3 Nov 2025	Debit		WOOLWORTHS/2 BUNYA ST MALENY		XXXXXXXXXXXXXXX1656	Credit Card Purchase	102.40		Bank Feed	Unreconciled
+    3 Nov 2025	Debit		NAB INTNL TRAN FEE - (MC)			Fee - Charged	5.36		Bank Feed	Reconciled
+    3 Nov 2025	Debit		SQ *ROSEBEDANDFINCH Eudlo		XXXXXXXXXXXXXXX1656	Credit Card Purchase	60.00		Bank Feed	Unreconciled
+    31 Oct 2025	Debit		UBER *BUSINESS HELP.UBER.Sydney		XXXXXXXXXXXXXXX1656	Credit Card Purchase	18.67		Bank Feed	Reconciled
+    31 Oct 2025	Debit		SQ *THE MALENY PIE GUY HQmaleny		XXXXXXXXXXXXXXX1656	Credit Card Purchase	45.50		Bank Feed	Unreconciled
+    31 Oct 2025	Debit		TRANSPORTMAINRDS BRISBANE		XXXXXXXXXXXXXXX1656	Credit Card Purchase	78.18		Bank Feed	Reconciled
+    31 Oct 2025	Debit		NAB INTNL TRAN FEE - (MC)			Fee - Charged	1.18		Bank Feed	Reconciled
+    31 Oct 2025	Debit		WOOLWORTHS/2 BUNYA ST MALENY		XXXXXXXXXXXXXXX1656	Credit Card Purchase	483.33		Bank Feed	Unreconciled
+    31 Oct 2025	Debit		The Source Bulk Foods Maleny		XXXXXXXXXXXXXXX1656	Credit Card Purchase	12.07		Bank Feed	Unreconciled
+    31 Oct 2025	Debit		ZLR*S3POPU1 Mascot		XXXXXXXXXXXXXXX1656	Credit Card Purchase	34.48		Bank Feed	Reconciled
+    31 Oct 2025	Debit		GOGET SYDNEY		XXXXXXXXXXXXXXX1656	Credit Card Purchase	12.25		Bank Feed	Reconciled
+    31 Oct 2025	Debit		FIGMA FIGMA.COM CA		XXXXXXXXXXXXXXX1656	Credit Card Purchase	33.69		Bank Feed	Reconciled
+    31 Oct 2025	Debit		ALDI STORES CALOUNDRA		XXXXXXXXXXXXXXX1656	Credit Card Purchase	245.28		Bank Feed	Unreconciled
+    31 Oct 2025	Debit		LIBERTY MALENY Maleny		XXXXXXXXXXXXXXX1656	Credit Card Purchase	100.00		Bank Feed	Unreconciled
+    31 Oct 2025	Debit		UBER *BUSINESS HELP.UBER.Sydney		XXXXXXXXXXXXXXX1656	Credit Card Purchase	9.44		Bank Feed	Reconciled
+    31 Oct 2025	Debit		UBER *BUSINESS HELP.UBER.Sydney		XXXXXXXXXXXXXXX1656	Credit Card Purchase	29.38		Bank Feed	Reconciled
+    31 Oct 2025	Debit		UBER *TRIP HELP.UBER.COM Sydney		XXXXXXXXXXXXXXX1656	Credit Card Purchase	102.54		Bank Feed	Reconciled
+    31 Oct 2025	Debit		GOGET SYDNEY		XXXXXXXXXXXXXXX1656	Credit Card Purchase	12.25		Bank Feed	Reconciled
+    30 Oct 2025	Debit		UBER *BUSINESS HELP.UBER.Sydney		XXXXXXXXXXXXXXX1656	Credit Card Purchase	36.99		Bank Feed	Reconciled
+    30 Oct 2025	Debit		QANTAS AIRW MASCOT		XXXXXXXXXXXXXXX1656	Credit Card Purchase	746.71		Bank Feed	Reconciled
+    30 Oct 2025	Debit		QANTAS AIRW MASCOT		XXXXXXXXXXXXXXX1656	Credit Card Purchase	415.90		Bank Feed	Reconciled
+    30 Oct 2025	Debit		Garmin Eastern Creek		XXXXXXXXXXXXXXX1656	Credit Card Purchase	33.00		Bank Feed	Unreconciled
+    30 Oct 2025	Debit		C ADV INTERNET TFR FEE			Adjustment	12.60		Bank Feed	Unreconciled
+    30 Oct 2025	Debit		SQ *GOLOSA Surry Hills		XXXXXXXXXXXXXXX1656	Credit Card Purchase	4.50		Bank Feed	Reconciled
+    30 Oct 2025	Debit		INTERNET TRANSFER Linked Acc Trns		XXXXXXXXXXXXXXX1656	Credit Card Cash Advance	360.00		Bank Feed	Unreconciled
+    30 Oct 2025	Debit		SQ *VALLEY SLICE PTY LTD Mooloolah Val		XXXXXXXXXXXXXXX1656	Credit Card Purchase	352.22		Bank Feed	Unreconciled
+    30 Oct 2025	Debit		QANTAS AIRW MASCOT		XXXXXXXXXXXXXXX1656	Credit Card Purchase	746.71		Bank Feed	Reconciled
+    30 Oct 2025	Debit		TARGET 5125 MOUNT DRUITT		XXXXXXXXXXXXXXX1656	Credit Card Purchase	30.00		Bank Feed	Reconciled
+    30 Oct 2025	Debit		UBER *BUSINESS HELP.UBER.Sydney		XXXXXXXXXXXXXXX1656	Credit Card Purchase	23.48		Bank Feed	Reconciled
+    30 Oct 2025	Debit		Cup of Eden Cafe Mount Druitt		XXXXXXXXXXXXXXX1656	Credit Card Purchase	17.32		Bank Feed	Reconciled
+    29 Oct 2025	Debit		MALENY HOTEL MALENY		XXXXXXXXXXXXXXX1656	Credit Card Purchase	81.81		Bank Feed	Reconciled
+    29 Oct 2025	Debit		QANTAS AIRW MASCOT		XXXXXXXXXXXXXXX1656	Credit Card Purchase	110.00		Bank Feed	Reconciled
+    29 Oct 2025	Debit		GUZMAN Y GOMEZ SURRY HILLS		XXXXXXXXXXXXXXX1656	Credit Card Purchase	28.10		Bank Feed	Unreconciled
+    29 Oct 2025	Debit		NAB INTNL TRAN FEE - (MC)			Fee - Charged	1.18		Bank Feed	Reconciled
+    29 Oct 2025	Debit		OPENAI *CHATGPT SUBSCR OPENAI.COM CA		XXXXXXXXXXXXXXX1656	Credit Card Purchase	33.63		Bank Feed	Unreconciled
+    29 Oct 2025	Debit		UBER *BUSINESS HELP.UBER.Sydney		XXXXXXXXXXXXXXX1656	Credit Card Purchase	46.00		Bank Feed	Reconciled
+    29 Oct 2025	Debit		SP DTF DIRECT NEWSTEAD		XXXXXXXXXXXXXXX1656	Credit Card Purchase	227.70		Bank Feed	Reconciled
+    29 Oct 2025	Debit		QANTAS AIRW MASCOT		XXXXXXXXXXXXXXX1656	Credit Card Purchase	438.97		Bank Feed	Reconciled
+    29 Oct 2025	Debit		QANTAS AIRW MASCOT		XXXXXXXXXXXXXXX1656	Credit Card Purchase	598.18		Bank Feed	Reconciled
+    29 Oct 2025	Debit		DIALPAD INC 4158429989 CA		XXXXXXXXXXXXXXX1656	Credit Card Purchase	56.00		Bank Feed	Reconciled
+    29 Oct 2025	Debit		SMP*Gone Bonkers Disc72 Maleny		XXXXXXXXXXXXXXX1656	Credit Card Purchase	37.93		Bank Feed	Unreconciled
+    29 Oct 2025	Debit		NAB INTNL TRAN FEE - (SC)			Fee - Charged	1.96		Bank Feed	Reconciled
+    29 Oct 2025	Debit		Hotel at Booking.com Sydney		XXXXXXXXXXXXXXX1656	Credit Card Purchase	217.72		Bank Feed	Reconciled
+    28 Oct 2025	Debit		QANTAS AIRW MASCOT		XXXXXXXXXXXXXXX1656	Credit Card Purchase	629.10		Bank Feed	Reconciled
+    28 Oct 2025	Debit		QANTAS AIRW MASCOT		XXXXXXXXXXXXXXX1656	Credit Card Purchase	1,549.09		Bank Feed	Reconciled
+    28 Oct 2025	Debit		LIBERTY MALENY Maleny		XXXXXXXXXXXXXXX1656	Credit Card Purchase	226.35		Bank Feed	Reconciled
+    28 Oct 2025	Debit		SP TRADEMUTT BRISBANE		XXXXXXXXXXXXXXX1656	Credit Card Purchase	3,270.26		Bank Feed	Reconciled
+    28 Oct 2025	Debit		DINKUM DUNNIES CABOOLTURE		XXXXXXXXXXXXXXX1656	Credit Card Purchase	534.19		Bank Feed	Unreconciled
+    28 Oct 2025	Debit		SQ *THE MALENY PIE GUY HQmaleny		XXXXXXXXXXXXXXX1656	Credit Card Purchase	28.20		Bank Feed	Reconciled
+    28 Oct 2025	Debit		UBER *TRIP HELP.UBER.COM Sydney		XXXXXXXXXXXXXXX1656	Credit Card Purchase	42.48		Bank Feed	Reconciled
+    28 Oct 2025	Debit		QANTAS AIRW MASCOT		XXXXXXXXXXXXXXX1656	Credit Card Purchase	1,549.09		Bank Feed	Reconciled
+    28 Oct 2025	Debit		JMC No2 Pty Ltd TS Ken Kenilworth		XXXXXXXXXXXXXXX1656	Credit Card Purchase	314.20		Bank Feed	Unreconciled
+    28 Oct 2025	Debit		The Source Bulk Foods Maleny		XXXXXXXXXXXXXXX1656	Credit Card Purchase	15.66		Bank Feed	Reconciled
+    28 Oct 2025	Debit		QANTAS AIRW MASCOT		XXXXXXXXXXXXXXX1656	Credit Card Purchase	1,418.45		Bank Feed	Reconciled
+    28 Oct 2025	Debit		QANTAS AIRW MASCOT		XXXXXXXXXXXXXXX1656	Credit Card Purchase	1,418.45		Bank Feed	Reconciled
+    28 Oct 2025	Debit		QANTAS AIRW MASCOT		XXXXXXXXXXXXXXX1656	Credit Card Purchase	1,549.09		Bank Feed	Reconciled
+    28 Oct 2025	Debit		QANTAS AIRW MASCOT		XXXXXXXXXXXXXXX1656	Credit Card Purchase	629.10		Bank Feed	Reconciled
+    28 Oct 2025	Debit		VIBE SYDNEY SYDNEY		XXXXXXXXXXXXXXX1656	Credit Card Purchase	4.05		Bank Feed	Reconciled
+    27 Oct 2025	Debit		SQ *GOLOSA Surry Hills		XXXXXXXXXXXXXXX1656	Credit Card Purchase	4.50		Bank Feed	Reconciled
+    27 Oct 2025	Debit		QANTAS AIR 081HQARXZ234NMASCOT		XXXXXXXXXXXXXXX1656	Credit Card Purchase	135.00		Bank Feed	Reconciled
+    27 Oct 2025	Debit		INTERNET TRANSFER Linked Acc Trns		XXXXXXXXXXXXXXX1656	Credit Card Cash Advance	1,100.00		Bank Feed	Unreconciled
+    27 Oct 2025	Debit		WEBFLOW.COM WEBFLOW.COM CA		XXXXXXXXXXXXXXX1656	Credit Card Purchase	116.93		Bank Feed	Reconciled
+    27 Oct 2025	Debit		CABCHARGE *13CABS ALEXANDRIA		XXXXXXXXXXXXXXX1656	Credit Card Purchase	52.88		Bank Feed	Unreconciled
+    27 Oct 2025	Debit		CABCHARGE *13CABS ALEXANDRIA		XXXXXXXXXXXXXXX1656	Credit Card Purchase	47.94		Bank Feed	Unreconciled
+    27 Oct 2025	Debit		UBER *BUSINESS HELP.UBER.Sydney		XXXXXXXXXXXXXXX1656	Credit Card Purchase	14.95		Bank Feed	Reconciled
+    27 Oct 2025	Debit		UBER *EATS HELP.UBER.COM Sydney		XXXXXXXXXXXXXXX1656	Credit Card Purchase	42.20		Bank Feed	Reconciled
+    27 Oct 2025	Debit		NAB INTNL TRAN FEE - (MC)			Fee - Charged	4.09		Bank Feed	Reconciled
+    27 Oct 2025	Debit		ZLR*SWEET SPELLS Haymarket		XXXXXXXXXXXXXXX1656	Credit Card Purchase	79.09		Bank Feed	Reconciled
+    27 Oct 2025	Debit		CABCHARGE *13CABS ALEXANDRIA		XXXXXXXXXXXXXXX1656	Credit Card Purchase	65.16		Bank Feed	Unreconciled
+    27 Oct 2025	Debit		CABCHARGE *13CABS ALEXANDRIA		XXXXXXXXXXXXXXX1656	Credit Card Purchase	57.60		Bank Feed	Unreconciled
+    27 Oct 2025	Debit		QANTAS AIR 081HQAMQGNPZDMASCOT		XXXXXXXXXXXXXXX1656	Credit Card Purchase	135.00		Bank Feed	Reconciled
+    27 Oct 2025	Debit		QANTAS AIR 081HQANA7JFDGMASCOT		XXXXXXXXXXXXXXX1656	Credit Card Purchase	135.00		Bank Feed	Reconciled
+    27 Oct 2025	Debit		UBER *BUSINESS HELP.UBER.Sydney		XXXXXXXXXXXXXXX1656	Credit Card Purchase	16.12		Bank Feed	Reconciled
+    27 Oct 2025	Debit		BUTCHERS BUFFET CHINAT HAYMARKET		XXXXXXXXXXXXXXX1656	Credit Card Purchase	3.96		Bank Feed	Unreconciled
+    27 Oct 2025	Debit		BUTCHERS BUFFET CHINAT HAYMARKET		XXXXXXXXXXXXXXX1656	Credit Card Purchase	125.83		Bank Feed	Reconciled
+    27 Oct 2025	Credit		INTERNET PAYMENT Linked Acc Trns		XXXXXXXXXXXXXXX1656	Credit Card Payment		10,000.00	Bank Feed	Unreconciled
+    27 Oct 2025	Debit		Audible Limited AU MELBOURNE		XXXXXXXXXXXXXXX1656	Credit Card Purchase	16.45		Bank Feed	Unreconciled
+    27 Oct 2025	Debit		CABCHARGE *13CABS ALEXANDRIA		XXXXXXXXXXXXXXX1656	Credit Card Purchase	37.46		Bank Feed	Unreconciled
+    27 Oct 2025	Debit		MIGHTY NETWORKS MIGHTYNETWORKCA		XXXXXXXXXXXXXXX1656	Credit Card Purchase	75.66		Bank Feed	Reconciled
+    27 Oct 2025	Debit		UBER *BUSINESS HELP.UBER.Sydney		XXXXXXXXXXXXXXX1656	Credit Card Purchase	44.08		Bank Feed	Reconciled
+    27 Oct 2025	Debit		UBER *BUSINESS HELP.UBER.Sydney		XXXXXXXXXXXXXXX1656	Credit Card Purchase	42.79		Bank Feed	Reconciled
+    27 Oct 2025	Debit		UBER *EATS HELP.UBER.COM Sydney		XXXXXXXXXXXXXXX1656	Credit Card Purchase	46.31		Bank Feed	Reconciled
+    27 Oct 2025	Debit		UBER *TRIP HELP.UBER.COM Sydney		XXXXXXXXXXXXXXX1656	Credit Card Purchase	64.72		Bank Feed	Reconciled
+    27 Oct 2025	Debit		UBER *TRIP HELP.UBER.COM Sydney		XXXXXXXXXXXXXXX1656	Credit Card Purchase	31.87		Bank Feed	Reconciled
+    27 Oct 2025	Debit		NAB INTNL TRAN FEE - (MC)			Fee - Charged	2.65		Bank Feed	Reconciled
+    27 Oct 2025	Debit		QANTAS AIRW MASCOT		XXXXXXXXXXXXXXX1656	Credit Card Purchase	1,409.64		Bank Feed	Reconciled
+    24 Oct 2025	Debit		ALDI STORES DARLINGHURST		XXXXXXXXXXXXXXX1656	Credit Card Purchase	22.05		Bank Feed	Reconciled
+    24 Oct 2025	Debit		NAB INTNL TRAN FEE - (MC)			Fee - Charged	0.27		Bank Feed	Reconciled
+    24 Oct 2025	Debit		INTERNET TRANSFER Linked Acc Trns		XXXXXXXXXXXXXXX1656	Credit Card Cash Advance	2,000.00		Bank Feed	Unreconciled
+    24 Oct 2025	Debit		GOGET SYDNEY		XXXXXXXXXXXXXXX1656	Credit Card Purchase	78.96		Bank Feed	Reconciled
+    24 Oct 2025	Debit		SQ *GOLOSA Surry Hills		XXXXXXXXXXXXXXX1656	Credit Card Purchase	4.50		Bank Feed	Reconciled
+    24 Oct 2025	Debit		INTERNET TRANSFER Linked Acc Trns		XXXXXXXXXXXXXXX1656	Credit Card Cash Advance	3,500.00		Bank Feed	Unreconciled
+    24 Oct 2025	Debit		WEBFLOW.COM WEBFLOW.COM CA		XXXXXXXXXXXXXXX1656	Credit Card Purchase	49.26		Bank Feed	Reconciled
+    24 Oct 2025	Debit		NAB INTNL TRAN FEE - (MC)			Fee - Charged	1.72		Bank Feed	Reconciled
+    24 Oct 2025	Debit		OVARIAN CANCER AUSTRAL MELBOURNE		XXXXXXXXXXXXXXX1656	Credit Card Purchase	200.00		Bank Feed	Reconciled
+    24 Oct 2025	Debit		UBER *TRIP HELP.UBER.COM Sydney		XXXXXXXXXXXXXXX1656	Credit Card Purchase	29.05		Bank Feed	Reconciled
+    24 Oct 2025	Debit		UBER *TRIP HELP.UBER.COM Sydney		XXXXXXXXXXXXXXX1656	Credit Card Purchase	42.55		Bank Feed	Reconciled
+    24 Oct 2025	Debit		UBER *BUSINESS HELP.UBER.Sydney		XXXXXXXXXXXXXXX1656	Credit Card Purchase	20.22		Bank Feed	Reconciled
+    24 Oct 2025	Debit		UBER *BUSINESS HELP.UBER.Sydney		XXXXXXXXXXXXXXX1656	Credit Card Purchase	22.50		Bank Feed	Reconciled
+    24 Oct 2025	Debit		QANTAS AIR 081HQBYK3J4VNMASCOT		XXXXXXXXXXXXXXX1656	Credit Card Purchase	135.00		Bank Feed	Reconciled
+    24 Oct 2025	Debit		QANTAS AIR 081HQAJQYT4NGMASCOT		XXXXXXXXXXXXXXX1656	Credit Card Purchase	135.00		Bank Feed	Reconciled
+    24 Oct 2025	Debit		RAILWAY RAILWAY.COM CA		XXXXXXXXXXXXXXX1656	Credit Card Purchase	7.72		Bank Feed	Unreconciled
+    24 Oct 2025	Debit		GOGET SYDNEY		XXXXXXXXXXXXXXX1656	Credit Card Purchase	55.76		Bank Feed	Reconciled
+    24 Oct 2025	Debit		UBER *TRIP HELP.UBER.COM Sydney		XXXXXXXXXXXXXXX1656	Credit Card Purchase	21.90		Bank Feed	Reconciled
+    24 Oct 2025	Debit		QANTAS AIR 081HQAZKCX4DEMASCOT		XXXXXXXXXXXXXXX1656	Credit Card Purchase	145.00		Bank Feed	Reconciled
+    24 Oct 2025	Debit		WEBFLOW.COM WEBFLOW.COM CA		XXXXXXXXXXXXXXX1656	Credit Card Purchase	44.78		Bank Feed	Reconciled
+    24 Oct 2025	Debit		NAB INTNL TRAN FEE - (MC)			Fee - Charged	1.57		Bank Feed	Reconciled
+    23 Oct 2025	Debit		INTERNET TRANSFER Linked Acc Trns		XXXXXXXXXXXXXXX1656	Credit Card Cash Advance	623.70		Bank Feed	Unreconciled
+    23 Oct 2025	Debit		SQ *GOLOSA Surry Hills		XXXXXXXXXXXXXXX1656	Credit Card Purchase	4.50		Bank Feed	Reconciled
+    23 Oct 2025	Debit		SQ *GOLOSA Surry Hills		XXXXXXXXXXXXXXX1656	Credit Card Purchase	4.50		Bank Feed	Reconciled
+    23 Oct 2025	Debit		TAXIPAY AUSTRALIA MASCOT		XXXXXXXXXXXXXXX1656	Credit Card Purchase	70.98		Bank Feed	Reconciled
+    23 Oct 2025	Debit		TAXIPAY AUSTRALIA MASCOT		XXXXXXXXXXXXXXX1656	Credit Card Purchase	47.25		Bank Feed	Reconciled
+    23 Oct 2025	Debit		OFFICEWORKS 0202 ALEXANDRIA		XXXXXXXXXXXXXXX1656	Credit Card Purchase	176.11		Bank Feed	Reconciled
+    23 Oct 2025	Debit		ONLYDOMAINS.COM 649-925-0327		XXXXXXXXXXXXXXX1656	Credit Card Purchase	21.44		Bank Feed	Reconciled
+    23 Oct 2025	Debit		UBER *BUSINESS HELP.UBER.Sydney		XXXXXXXXXXXXXXX1656	Credit Card Purchase	30.62		Bank Feed	Reconciled
+    23 Oct 2025	Debit		WW METRO/1 LAWSON SQUARE REDFERN		XXXXXXXXXXXXXXX1656	Credit Card Purchase	173.83		Bank Feed	Reconciled
+    23 Oct 2025	Debit		SQ *GEORGE ST DELI Redfern		XXXXXXXXXXXXXXX1656	Credit Card Purchase	77.30		Bank Feed	Reconciled
+    23 Oct 2025	Debit		TAXIPAY AUSTRALIA MASCOT		XXXXXXXXXXXXXXX1656	Credit Card Purchase	63.00		Bank Feed	Reconciled
+    23 Oct 2025	Debit		NAB INTNL TRAN FEE - (SC)			Fee - Charged	0.75		Bank Feed	Reconciled
+    23 Oct 2025	Debit		SQ *MOOLOOLAH VALLEY COMMMooloolah Val		XXXXXXXXXXXXXXX1656	Credit Card Purchase	42.00		Bank Feed	Reconciled
+    23 Oct 2025	Debit		TAXIPAY AUSTRALIA MASCOT		XXXXXXXXXXXXXXX1656	Credit Card Purchase	52.50		Bank Feed	Reconciled
+    23 Oct 2025	Debit		UBER *TRIP HELP.UBER.COM Sydney		XXXXXXXXXXXXXXX1656	Credit Card Purchase	19.73		Bank Feed	Reconciled
+    23 Oct 2025	Debit		UBER *BUSINESS HELP.UBER.Sydney		XXXXXXXXXXXXXXX1656	Credit Card Purchase	17.83		Bank Feed	Reconciled
+    22 Oct 2025	Debit		BUNNINGS 370000 ALEXANDRIA		XXXXXXXXXXXXXXX1656	Credit Card Purchase	208.81		Bank Feed	Reconciled
+    22 Oct 2025	Debit		BUNNINGS 370000 ALEXANDRIA		XXXXXXXXXXXXXXX1656	Credit Card Purchase	276.99		Bank Feed	Reconciled
+    22 Oct 2025	Debit		VIRGIN AUSTRALIA BRISBANE		XXXXXXXXXXXXXXX1656	Credit Card Purchase	385.79		Bank Feed	Unreconciled
+    22 Oct 2025	Debit		TRANSPORTMAINRDS BRISBANE		XXXXXXXXXXXXXXX1656	Credit Card Purchase	273.63		Bank Feed	Reconciled
+    22 Oct 2025	Debit		REDBALLOON THE ROCKS		XXXXXXXXXXXXXXX1656	Credit Card Purchase	1,008.90		Bank Feed	Reconciled
+    22 Oct 2025	Debit		NAB INTNL TRAN FEE - (MC)			Fee - Charged	1.73		Bank Feed	Reconciled
+    22 Oct 2025	Debit		SQ *GOLOSA Surry Hills		XXXXXXXXXXXXXXX1656	Credit Card Purchase	4.50		Bank Feed	Reconciled
+    22 Oct 2025	Debit		SQ *GOLOSA Surry Hills		XXXXXXXXXXXXXXX1656	Credit Card Purchase	25.50		Bank Feed	Reconciled
+    22 Oct 2025	Debit		SQ *GOLOSA Surry Hills		XXXXXXXXXXXXXXX1656	Credit Card Purchase	4.00		Bank Feed	Reconciled
+    22 Oct 2025	Debit		SUPABASE SINGAPORE		XXXXXXXXXXXXXXX1656	Credit Card Purchase	82.94		Bank Feed	Reconciled
+    22 Oct 2025	Debit		UBER *BUSINESS HELP.UBER.Sydney		XXXXXXXXXXXXXXX1656	Credit Card Purchase	21.10		Bank Feed	Reconciled
+    22 Oct 2025	Debit		UBER *TRIP HELP.UBER.COM Sydney		XXXXXXXXXXXXXXX1656	Credit Card Purchase	25.79		Bank Feed	Reconciled
+    22 Oct 2025	Debit		UBER *BUSINESS HELP.UBER.Sydney		XXXXXXXXXXXXXXX1656	Credit Card Purchase	20.35		Bank Feed	Reconciled
+    22 Oct 2025	Debit		BUNNINGS 370000 ALEXANDRIA		XXXXXXXXXXXXXXX1656	Credit Card Purchase	340.13		Bank Feed	Reconciled
+    22 Oct 2025	Debit		CAFE MIA EDGECLIFF		XXXXXXXXXXXXXXX1656	Credit Card Purchase	23.58		Bank Feed	Unreconciled
+    22 Oct 2025	Debit		NAB INTNL TRAN FEE - (SC)			Fee - Charged	0.41		Bank Feed	Reconciled
+    22 Oct 2025	Debit		UBER *TRIP HELP.UBER.COM Sydney		XXXXXXXXXXXXXXX1656	Credit Card Purchase	21.42		Bank Feed	Reconciled
+    22 Oct 2025	Debit		UBER *TRIP HELP.UBER.COM Sydney		XXXXXXXXXXXXXXX1656	Credit Card Purchase	22.99		Bank Feed	Reconciled
+    22 Oct 2025	Debit		UBER *TRIP HELP.UBER.COM Sydney		XXXXXXXXXXXXXXX1656	Credit Card Purchase	30.62		Bank Feed	Reconciled
+    22 Oct 2025	Debit		NAB INTNL TRAN FEE - (MC)			Fee - Charged	2.90		Bank Feed	Reconciled
+    22 Oct 2025	Debit		SQSP* WORKSP#206228379 SQUARESPACE.CNY		XXXXXXXXXXXXXXX1656	Credit Card Purchase	11.80		Bank Feed	Unreconciled
+    22 Oct 2025	Debit		ZLR*The Sandwich Stop Northcote		XXXXXXXXXXXXXXX1656	Credit Card Purchase	17.24		Bank Feed	Reconciled
+    22 Oct 2025	Debit		SUKHOTHAI MALENY		XXXXXXXXXXXXXXX1656	Credit Card Purchase	96.10		Bank Feed	Reconciled
+    22 Oct 2025	Debit		WEBFLOW.COM WEBFLOW.COM CA		XXXXXXXXXXXXXXX1656	Credit Card Purchase	49.30		Bank Feed	Reconciled
+    21 Oct 2025	Debit		UBER *TRIP HELP.UBER.COM Sydney		XXXXXXXXXXXXXXX1656	Credit Card Purchase	64.37		Bank Feed	Reconciled
+    21 Oct 2025	Debit		STRATCO ASP ALICE SPRINGS		XXXXXXXXXXXXXXX1656	Credit Card Purchase	170.00		Bank Feed	Reconciled
+    21 Oct 2025	Debit		RELAY GARBUTT		XXXXXXXXXXXXXXX1656	Credit Card Purchase	102.49		Bank Feed	Reconciled
+    21 Oct 2025	Debit		LOADSHIFT SYDNEY		XXXXXXXXXXXXXXX1656	Credit Card Purchase	1,243.59		Bank Feed	Unreconciled
+    21 Oct 2025	Debit		OFFICEWORKS 0251 SYDNEY		XXXXXXXXXXXXXXX1656	Credit Card Purchase	182.22		Bank Feed	Reconciled
+    21 Oct 2025	Debit		SP FORESTRY TOOLS ROSEVILLE		XXXXXXXXXXXXXXX1656	Credit Card Purchase	610.00		Bank Feed	Reconciled
+    21 Oct 2025	Debit		WWW.ECOFLO.COM.AU VIRGINIA		XXXXXXXXXXXXXXX1656	Credit Card Purchase	89.69		Bank Feed	Unreconciled
+    21 Oct 2025	Debit		UBER *BUSINESS HELP.UBER.Sydney		XXXXXXXXXXXXXXX1656	Credit Card Purchase	78.48		Bank Feed	Reconciled
+    21 Oct 2025	Debit		UBER *BUSINESS HELP.UBER.Sydney		XXXXXXXXXXXXXXX1656	Credit Card Purchase	26.59		Bank Feed	Reconciled
+    21 Oct 2025	Debit		UBER *TRIP HELP.UBER.COM Sydney		XXXXXXXXXXXXXXX1656	Credit Card Purchase	28.80		Bank Feed	Reconciled
+    21 Oct 2025	Debit		UBER *TRIP HELP.UBER.COM Sydney		XXXXXXXXXXXXXXX1656	Credit Card Purchase	24.00		Bank Feed	Reconciled
+    21 Oct 2025	Debit		BIG W/CRN OF GEORGE & PARSYDNEY		XXXXXXXXXXXXXXX1656	Credit Card Purchase	167.75		Bank Feed	Unreconciled
+    21 Oct 2025	Debit		OFFICEWORKS 0251 SYDNEY		XXXXXXXXXXXXXXX1656	Credit Card Purchase	5.32		Bank Feed	Reconciled
+    21 Oct 2025	Debit		UBER *TRIP HELP.UBER.COM Sydney		XXXXXXXXXXXXXXX1656	Credit Card Purchase	26.17		Bank Feed	Reconciled
+    21 Oct 2025	Debit		Sushi Train Oxford St Darlinghurst		XXXXXXXXXXXXXXX1656	Credit Card Purchase	17.20		Bank Feed	Reconciled
+    21 Oct 2025	Credit		INTERNET PAYMENT Linked Acc Trns		XXXXXXXXXXXXXXX1656	Credit Card Payment		15,060.00	Bank Feed	Unreconciled
+    21 Oct 2025	Credit		INTERNET PAYMENT Linked Acc Trns		XXXXXXXXXXXXXXX1656	Credit Card Payment		10,000.00	Bank Feed	Unreconciled
+    21 Oct 2025	Debit		WOOLWORTHS/CNR 540 GEORGESYDNEY		XXXXXXXXXXXXXXX1656	Credit Card Purchase	73.10		Bank Feed	Unreconciled
+    21 Oct 2025	Debit		CHEMIST WAREHOUSE GARBUTT		XXXXXXXXXXXXXXX1656	Credit Card Purchase	46.36		Bank Feed	Reconciled
+    20 Oct 2025	Debit		POLOLA TOWNSVILLE TOWNSVILLE		XXXXXXXXXXXXXXX1656	Credit Card Purchase	60.78		Bank Feed	Reconciled
+    20 Oct 2025	Debit		Qantas Mascot		XXXXXXXXXXXXXXX1656	Credit Card Purchase	351.80		Bank Feed	Reconciled
+    20 Oct 2025	Debit		UBER *TRIP HELP.UBER.COM Sydney		XXXXXXXXXXXXXXX1656	Credit Card Purchase	19.81		Bank Feed	Reconciled
+    20 Oct 2025	Debit		CURSOR, AI POWERED IDE CURSOR.COM NY		XXXXXXXXXXXXXXX1656	Credit Card Purchase	31.05		Bank Feed	Reconciled
+    20 Oct 2025	Debit		SQ *NEST IN WITTA Witta		XXXXXXXXXXXXXXX1656	Credit Card Purchase	7.14		Bank Feed	Reconciled
+    20 Oct 2025	Credit		INTERNET PAYMENT Linked Acc Trns		XXXXXXXXXXXXXXX1656	Credit Card Payment		5,409.00	Bank Feed	Unreconciled
+    20 Oct 2025	Debit		TEITZEL'S IGA/20 MORRIS STULLY		XXXXXXXXXXXXXXX1656	Credit Card Purchase	49.68		Bank Feed	Unreconciled
+    20 Oct 2025	Debit		Tully Bakery TULLY		XXXXXXXXXXXXXXX1656	Credit Card Purchase	8.90		Bank Feed	Reconciled
+    20 Oct 2025	Debit		NAB INTNL TRAN FEE - (MC)			Fee - Charged	1.09		Bank Feed	Reconciled
+    20 Oct 2025	Debit		UPDOC.COM.AU -REWMZOMC SURRY HILLS		XXXXXXXXXXXXXXX1656	Credit Card Purchase	39.95		Bank Feed	Reconciled
+    20 Oct 2025	Debit		UBER *TRIP HELP.UBER.COM Sydney		XXXXXXXXXXXXXXX1656	Credit Card Purchase	31.56		Bank Feed	Reconciled
+    20 Oct 2025	Debit		UBER *BUSINESS HELP.UBER.Sydney		XXXXXXXXXXXXXXX1656	Credit Card Purchase	11.45		Bank Feed	Reconciled
+    20 Oct 2025	Debit		UBER *BUSINESS HELP.UBER.Sydney		XXXXXXXXXXXXXXX1656	Credit Card Purchase	28.17		Bank Feed	Reconciled
+    20 Oct 2025	Debit		THRIDAY ACCOUNTING CARLTON		XXXXXXXXXXXXXXX1656	Credit Card Purchase	1,190.00		Bank Feed	Reconciled
+    20 Oct 2025	Debit		VIRGIN AUSTRALIA BRISBANE		XXXXXXXXXXXXXXX1656	Credit Card Purchase	759.45		Bank Feed	Unreconciled
+    20 Oct 2025	Debit		SQ *GOLOSA Surry Hills		XXXXXXXXXXXXXXX1656	Credit Card Purchase	27.00		Bank Feed	Reconciled
+    20 Oct 2025	Debit		APPLE.COM/BILL SYDNEY		XXXXXXXXXXXXXXX1656	Credit Card Purchase	29.99		Bank Feed	Reconciled
+    20 Oct 2025	Debit		AVIS AUSTRALIA MASCOT		XXXXXXXXXXXXXXX1656	Credit Card Purchase	1,032.90		Bank Feed	Unreconciled
+    20 Oct 2025	Debit		STRATCO ASP ALICE SPRINGS		XXXXXXXXXXXXXXX1656	Credit Card Purchase	99.00		Bank Feed	Reconciled
+    20 Oct 2025	Debit		NEWS PTY LIMITED SURRY HILLS		XXXXXXXXXXXXXXX1656	Credit Card Purchase	24.00		Bank Feed	Unreconciled
+    20 Oct 2025	Debit		SQ *NEST IN WITTA Witta		XXXXXXXXXXXXXXX1656	Credit Card Purchase	65.28		Bank Feed	Reconciled
+    20 Oct 2025	Debit		UBER *BUSINESS HELP.UBER.Sydney		XXXXXXXXXXXXXXX1656	Credit Card Purchase	19.76		Bank Feed	Reconciled
+    17 Oct 2025	Debit		TELSTRA SERVICES MELBOURNE		XXXXXXXXXXXXXXX1656	Credit Card Purchase	80.00		Bank Feed	Reconciled
+    16 Oct 2025	Debit		NAB INTNL TRAN FEE - (MC)			Fee - Charged	2.50		Bank Feed	Reconciled
+    16 Oct 2025	Debit		APPLE.COM/BILL SYDNEY		XXXXXXXXXXXXXXX1656	Credit Card Purchase	11.99		Bank Feed	Reconciled
+    16 Oct 2025	Debit		PALM ISLAND COUNCIL PALM ISLAND		XXXXXXXXXXXXXXX1656	Credit Card Purchase	217.00		Bank Feed	Reconciled
+    16 Oct 2025	Debit		RELAY GARBUTT		XXXXXXXXXXXXXXX1656	Credit Card Purchase	15.20		Bank Feed	Reconciled
+    16 Oct 2025	Debit		SQ *LUCINDA STORE Lucinda		XXXXXXXXXXXXXXX1656	Credit Card Purchase	26.37		Bank Feed	Reconciled
+    16 Oct 2025	Debit		WEBFLOW.COM WEBFLOW.COM CA		XXXXXXXXXXXXXXX1656	Credit Card Purchase	71.35		Bank Feed	Reconciled
+    16 Oct 2025	Debit		UBER *BUSINESS HELP.UBER.Sydney		XXXXXXXXXXXXXXX1656	Credit Card Purchase	18.47		Bank Feed	Reconciled
+    16 Oct 2025	Debit		BARLMARRK SUPERMARKET MANINGRIDA		XXXXXXXXXXXXXXX1656	Credit Card Purchase	204.62		Bank Feed	Unreconciled
+    16 Oct 2025	Debit		AMZNPRIMEAU MEMBERSHIP SYDNEY SOUTH		XXXXXXXXXXXXXXX1656	Credit Card Purchase	9.99		Bank Feed	Unreconciled
+    16 Oct 2025	Debit		SUNSET SNACK FOODS PTY LTPALM ISLAND		XXXXXXXXXXXXXXX1656	Credit Card Purchase	12.00		Bank Feed	Reconciled
+    16 Oct 2025	Debit		ZLR*TSVMAGG Garbutt		XXXXXXXXXXXXXXX1656	Credit Card Purchase	8.50		Bank Feed	Reconciled
+    16 Oct 2025	Debit		UBER *BUSINESS HELP.UBER.Sydney		XXXXXXXXXXXXXXX1656	Credit Card Purchase	32.95		Bank Feed	Reconciled
+    16 Oct 2025	Debit		BP COCONUT GROVE 9054 COCONUT GROVE		XXXXXXXXXXXXXXX1656	Credit Card Purchase	125.54		Bank Feed	Reconciled
+    16 Oct 2025	Debit		UBER *TRIP HELP.UBER.COM Sydney		XXXXXXXXXXXXXXX1656	Credit Card Purchase	48.99		Bank Feed	Reconciled
+    16 Oct 2025	Debit		UBER *BUSINESS HELP.UBER.Sydney		XXXXXXXXXXXXXXX1656	Credit Card Purchase	37.92		Bank Feed	Reconciled
+    15 Oct 2025	Debit		QANTAS AIRW MASCOT		XXXXXXXXXXXXXXX1656	Credit Card Purchase	110.00		Bank Feed	Reconciled
+    15 Oct 2025	Debit		AZUCAR CAFE PTY LTD MASCOT		XXXXXXXXXXXXXXX1656	Credit Card Purchase	6.60		Bank Feed	Reconciled
+    15 Oct 2025	Debit		IGA ROOTY HILL NORTH ROOTY HILL		XXXXXXXXXXXXXXX1656	Credit Card Purchase	39.62		Bank Feed	Reconciled
+    15 Oct 2025	Debit		UBER *BUSINESS HELP.UBER.Sydney		XXXXXXXXXXXXXXX1656	Credit Card Purchase	30.97		Bank Feed	Reconciled
+    15 Oct 2025	Debit		QANTAS AIRW MASCOT		XXXXXXXXXXXXXXX1656	Credit Card Purchase	34.21		Bank Feed	Reconciled
+    15 Oct 2025	Debit		Lolas Pergola Darwin CULLEN BAY		XXXXXXXXXXXXXXX1656	Credit Card Purchase	147.10		Bank Feed	Reconciled
+    15 Oct 2025	Debit		QANTAS AIRW MASCOT		XXXXXXXXXXXXXXX1656	Credit Card Purchase	113.02		Bank Feed	Reconciled
+    15 Oct 2025	Debit		QANTAS AIRW MASCOT		XXXXXXXXXXXXXXX1656	Credit Card Purchase	589.42		Bank Feed	Reconciled
+    15 Oct 2025	Debit		QANTAS AIRW MASCOT		XXXXXXXXXXXXXXX1656	Credit Card Purchase	110.00		Bank Feed	Reconciled
+    15 Oct 2025	Debit		QANTAS AIRW MASCOT		XXXXXXXXXXXXXXX1656	Credit Card Purchase	289.27		Bank Feed	Reconciled
+    15 Oct 2025	Debit		QANTAS AIRW MASCOT		XXXXXXXXXXXXXXX1656	Credit Card Purchase	110.00		Bank Feed	Reconciled
+    15 Oct 2025	Debit		Hotel at Booking.com Sydney		XXXXXXXXXXXXXXX1656	Credit Card Purchase	194.75		Bank Feed	Unreconciled
+    15 Oct 2025	Debit		NOVOTEL SYDNEY WEST HQ ROOTY HILL		XXXXXXXXXXXXXXX1656	Credit Card Purchase	239.00		Bank Feed	Unreconciled
+    15 Oct 2025	Debit		UBER *EATS HELP.UBER.COM Sydney		XXXXXXXXXXXXXXX1656	Credit Card Purchase	17.36		Bank Feed	Reconciled
+    14 Oct 2025	Debit		QANTAS AIR 081HQA3NWDMPFMASCOT		XXXXXXXXXXXXXXX1656	Credit Card Purchase	1,116.00		Bank Feed	Reconciled
+    14 Oct 2025	Debit		QANTAS AIR 081HQAZN2HKEDMASCOT		XXXXXXXXXXXXXXX1656	Credit Card Purchase	517.00		Bank Feed	Reconciled
+    14 Oct 2025	Debit		UBER *BUSINESS HELP.UBER.Sydney		XXXXXXXXXXXXXXX1656	Credit Card Purchase	69.33		Bank Feed	Reconciled
+    14 Oct 2025	Debit		UBER *BUSINESS HELP.UBER.Sydney		XXXXXXXXXXXXXXX1656	Credit Card Purchase	37.43		Bank Feed	Reconciled
+    14 Oct 2025	Debit		WILD FOOD CAFE BERRIMAH		XXXXXXXXXXXXXXX1656	Credit Card Purchase	25.34		Bank Feed	Unreconciled
+    14 Oct 2025	Debit		BEARPEP PTY LTD LARRAKEYAH		XXXXXXXXXXXXXXX1656	Credit Card Purchase	64.99		Bank Feed	Unreconciled
+    14 Oct 2025	Debit		BEARPEP PTY LTD LARRAKEYAH		XXXXXXXXXXXXXXX1656	Credit Card Purchase	323.30		Bank Feed	Unreconciled
+    14 Oct 2025	Debit		WEBFLOW.COM WEBFLOW.COM CA		XXXXXXXXXXXXXXX1656	Credit Card Purchase	71.20		Bank Feed	Reconciled
+    14 Oct 2025	Debit		Hotel at Booking.com Amsterdam		XXXXXXXXXXXXXXX1656	Credit Card Purchase	239.00		Bank Feed	Unreconciled
+    14 Oct 2025	Debit		QANTAS AIR 081HQAK6VGFZQMASCOT		XXXXXXXXXXXXXXX1656	Credit Card Purchase	1,735.00		Bank Feed	Reconciled
+    14 Oct 2025	Debit		MIGHTY NETWORKS MIGHTYNETWORKCA		XXXXXXXXXXXXXXX1656	Credit Card Purchase	183.39		Bank Feed	Reconciled
+    14 Oct 2025	Debit		NAB INTNL TRAN FEE - (SC)			Fee - Charged	5.47		Bank Feed	Reconciled
+    14 Oct 2025	Credit		INTERNET PAYMENT Linked Acc Trns		XXXXXXXXXXXXXXX1656	Credit Card Payment		5,000.00	Bank Feed	Unreconciled
+    14 Oct 2025	Debit		APPLE.COM/BILL SYDNEY		XXXXXXXXXXXXXXX1656	Credit Card Purchase	99.99		Bank Feed	Reconciled
+    14 Oct 2025	Debit		Smarte Carte 0393383111		XXXXXXXXXXXXXXX1656	Credit Card Purchase	30.00		Bank Feed	Reconciled
+    14 Oct 2025	Debit		BP GAP ROAD 6231 THE GAP		XXXXXXXXXXXXXXX1656	Credit Card Purchase	135.01		Bank Feed	Reconciled
+    14 Oct 2025	Debit		HATCH ELECTRICAL ZILLMERE		XXXXXXXXXXXXXXX1656	Credit Card Purchase	1,820.69		Bank Feed	Unreconciled
+    14 Oct 2025	Debit		BARLMARRK SUPERMARKT BERRIMAH		XXXXXXXXXXXXXXX1656	Credit Card Purchase	240.86		Bank Feed	Reconciled
+    14 Oct 2025	Debit		ZLR*The Cheesecake Shop Mount Druitt		XXXXXXXXXXXXXXX1656	Credit Card Purchase	4.50		Bank Feed	Reconciled
+    14 Oct 2025	Debit		NAB INTNL TRAN FEE - (MC)			Fee - Charged	6.42		Bank Feed	Reconciled
+    14 Oct 2025	Debit		NAB INTNL TRAN FEE - (SC)			Fee - Charged	8.37		Bank Feed	Reconciled
+    14 Oct 2025	Debit		DAYUSE Paris		XXXXXXXXXXXXXXX1656	Credit Card Purchase	156.20		Bank Feed	Unreconciled
+    14 Oct 2025	Debit		NAB INTNL TRAN FEE - (MC)			Fee - Charged	2.49		Bank Feed	Reconciled
+    14 Oct 2025	Debit		ONE68 GENERAL S& TA MANINGRIDA		XXXXXXXXXXXXXXX1656	Credit Card Purchase	111.95		Bank Feed	Reconciled
+    13 Oct 2025	Debit		UBER *BUSINESS HELP.UBER.Sydney		XXXXXXXXXXXXXXX1656	Credit Card Purchase	25.71		Bank Feed	Unreconciled
+    13 Oct 2025	Debit		UBER *BUSINESS HELP.UBER.Sydney		XXXXXXXXXXXXXXX1656	Credit Card Purchase	9.94		Bank Feed	Reconciled
+    13 Oct 2025	Debit		ALICE SPRINGS CASINO O ALICE SPRINGS		XXXXXXXXXXXXXXX1656	Credit Card Purchase	188.18		Bank Feed	Reconciled
+    13 Oct 2025	Debit		ZLR*Uncle Don West End South Brisban		XXXXXXXXXXXXXXX1656	Credit Card Purchase	89.34		Bank Feed	Reconciled
+    13 Oct 2025	Debit		ZLR*Uncle Don West End South Brisban		XXXXXXXXXXXXXXX1656	Credit Card Purchase	12.18		Bank Feed	Unreconciled
+    13 Oct 2025	Debit		NAB INTNL TRAN FEE - (MC)			Fee - Charged	3.25		Bank Feed	Reconciled
+    13 Oct 2025	Debit		QANTAS AIRW MASCOT		XXXXXXXXXXXXXXX1656	Credit Card Purchase	792.01		Bank Feed	Reconciled
+    13 Oct 2025	Debit		COLES 0486 COOLALINGA		XXXXXXXXXXXXXXX1656	Credit Card Purchase	294.55		Bank Feed	Reconciled
+    13 Oct 2025	Debit		ANTHROPIC ANTHROPIC.COMCA		XXXXXXXXXXXXXXX1656	Credit Card Purchase	25.51		Bank Feed	Reconciled
+    13 Oct 2025	Debit		BUNNINGS 629000 MORAYFIELD		XXXXXXXXXXXXXXX1656	Credit Card Purchase	68.84		Bank Feed	Reconciled
+    13 Oct 2025	Debit		HUMAN.KIND STUDIOS ADELAIDE		XXXXXXXXXXXXXXX1656	Credit Card Purchase	159.00		Bank Feed	Reconciled
+    13 Oct 2025	Debit		XERO AU INV-47121513 HAWTHORN		XXXXXXXXXXXXXXX1656	Credit Card Purchase	75.00		Bank Feed	Unreconciled
+    13 Oct 2025	Debit		OFFICEWORKS 0404 WOOLLOONGABBA		XXXXXXXXXXXXXXX1656	Credit Card Purchase	82.57		Bank Feed	Reconciled
+    13 Oct 2025	Debit		SP RED KANGAROO BOOKS ALICE SPRINGS		XXXXXXXXXXXXXXX1656	Credit Card Purchase	300.00		Bank Feed	Reconciled
+    13 Oct 2025	Debit		CODEGUIDE.DEV WWW.CODEGUIDEDE		XXXXXXXXXXXXXXX1656	Credit Card Purchase	44.84		Bank Feed	Unreconciled
+    13 Oct 2025	Debit		OFFICEWORKS 0404 WOOLLOONGABBA		XXXXXXXXXXXXXXX1656	Credit Card Purchase	38.86		Bank Feed	Reconciled
+    13 Oct 2025	Debit		QANTAS AIR 081HQADZJPX4HMASCOT		XXXXXXXXXXXXXXX1656	Credit Card Purchase	185.00		Bank Feed	Reconciled
+    13 Oct 2025	Debit		UBER *BUSINESS HELP.UBER.Sydney		XXXXXXXXXXXXXXX1656	Credit Card Purchase	30.73		Bank Feed	Reconciled
+    13 Oct 2025	Debit		TANGENTYERE ARTISTS ALICE SPRINGS		XXXXXXXXXXXXXXX1656	Credit Card Purchase	145.00		Bank Feed	Reconciled
+    13 Oct 2025	Debit		BOJANGLES SALOON&DININ ALICE SPRINGS		XXXXXXXXXXXXXXX1656	Credit Card Purchase	31.75		Bank Feed	Unreconciled
+    13 Oct 2025	Debit		Hanuman Restaurant Ali Alice Springs		XXXXXXXXXXXXXXX1656	Credit Card Purchase	203.71		Bank Feed	Reconciled
+    13 Oct 2025	Debit		NAB INTNL TRAN FEE - (MC)			Fee - Charged	1.57		Bank Feed	Reconciled
+    13 Oct 2025	Credit		INTERNET PAYMENT Linked Acc Trns		XXXXXXXXXXXXXXX1656	Credit Card Payment		6,000.00	Bank Feed	Unreconciled
+    13 Oct 2025	Credit		INTERNET PAYMENT Linked Acc Trns		XXXXXXXXXXXXXXX1656	Credit Card Payment		1,709.35	Bank Feed	Unreconciled
+    13 Oct 2025	Debit		SQ *DUYU COFFEE ROASTERS Ciccone		XXXXXXXXXXXXXXX1656	Credit Card Purchase	88.34		Bank Feed	Unreconciled
+    13 Oct 2025	Debit		CULTURAL CENTRE CAR PA SOUTH BRISBAN		XXXXXXXXXXXXXXX1656	Credit Card Purchase	18.00		Bank Feed	Reconciled
+    13 Oct 2025	Debit		OPENAI *CHATGPT SUBSCR OPENAI.COM CA		XXXXXXXXXXXXXXX1656	Credit Card Purchase	92.78		Bank Feed	Reconciled
+    13 Oct 2025	Debit		NAB INTNL TRAN FEE - (MC)			Fee - Charged	0.89		Bank Feed	Reconciled
+    13 Oct 2025	Debit		NAB INTNL TRAN FEE - (MC)			Fee - Charged	1.57		Bank Feed	Reconciled
+    13 Oct 2025	Debit		WEBFLOW.COM WEBFLOW.COM CA		XXXXXXXXXXXXXXX1656	Credit Card Purchase	44.84		Bank Feed	Reconciled
+    10 Oct 2025	Debit		NOTION LABS, INC. NOTION.SO CA		XXXXXXXXXXXXXXX1656	Credit Card Purchase	189.78		Bank Feed	Reconciled
+    10 Oct 2025	Debit		AIRNORTH MARRARA		XXXXXXXXXXXXXXX1656	Credit Card Purchase	749.35		Bank Feed	Reconciled
+    10 Oct 2025	Debit		AUSTRAL*JUNCTION PARK 1300889272		XXXXXXXXXXXXXXX1656	Credit Card Purchase	50.00		Bank Feed	Reconciled
+    10 Oct 2025	Debit		AHERRENGE COMMUNITY ST AMPILATWATJA		XXXXXXXXXXXXXXX1656	Credit Card Purchase	181.39		Bank Feed	Unreconciled
+    10 Oct 2025	Debit		CabFare Payments Melbourne		XXXXXXXXXXXXXXX1656	Credit Card Purchase	19.11		Bank Feed	Unreconciled
+    10 Oct 2025	Debit		QANTAS AIR 081HQAVQAW72FMASCOT		XXXXXXXXXXXXXXX1656	Credit Card Purchase	209.00		Bank Feed	Reconciled
+    10 Oct 2025	Debit		AHERRENGE COMMUNITY ST AMPILATWATJA		XXXXXXXXXXXXXXX1656	Credit Card Purchase	175.67		Bank Feed	Unreconciled
+    10 Oct 2025	Debit		NAB INTNL TRAN FEE - (MC)			Fee - Charged	6.64		Bank Feed	Reconciled
+    10 Oct 2025	Debit		ARLPARRA ABORIGINAL ALICE SPRINGS		XXXXXXXXXXXXXXX1656	Credit Card Purchase	42.00		Bank Feed	Reconciled
+    9 Oct 2025	Debit		AHERRENGE COMMUNITY AMPILATWATJA		XXXXXXXXXXXXXXX1656	Credit Card Purchase	69.00		Bank Feed	Reconciled
+    9 Oct 2025	Debit		WEBFLOW.COM WEBFLOW.COM CA		XXXXXXXXXXXXXXX1656	Credit Card Purchase	48.67		Bank Feed	Reconciled
+    9 Oct 2025	Debit		NAB INTNL TRAN FEE - (MC)			Fee - Charged	1.70		Bank Feed	Reconciled
+    9 Oct 2025	Debit		BUNNINGS 396000 ALICE SPRINGS		XXXXXXXXXXXXXXX1656	Credit Card Purchase	371.57		Bank Feed	Reconciled
+    8 Oct 2025	Debit		Hanuman Restaurant Ali Alice Springs		XXXXXXXXXXXXXXX1656	Credit Card Purchase	65.53		Bank Feed	Reconciled
+    8 Oct 2025	Debit		SUSHI GOSU PTY LTD Braitling		XXXXXXXXXXXXXXX1656	Credit Card Purchase	7.11		Bank Feed	Unreconciled
+    8 Oct 2025	Debit		KENNARDS HIRE HO WA SEVEN HILLS		XXXXXXXXXXXXXXX1656	Credit Card Purchase	244.00		Bank Feed	Reconciled
+    8 Oct 2025	Debit		COLES 0418 ALICE SPRINGS		XXXXXXXXXXXXXXX1656	Credit Card Purchase	296.50		Bank Feed	Unreconciled
+    8 Oct 2025	Debit		Reddy Express 1903 Alice Springs		XXXXXXXXXXXXXXX1656	Credit Card Purchase	29.75		Bank Feed	Reconciled
+    8 Oct 2025	Debit		WOOLWORTHS/2 BUNYA ST MALENY		XXXXXXXXXXXXXXX1656	Credit Card Purchase	56.70		Bank Feed	Unreconciled
+    8 Oct 2025	Debit		SUSHI GOSU PTY LTD Braitling		XXXXXXXXXXXXXXX1656	Credit Card Purchase	112.16		Bank Feed	Unreconciled
+    8 Oct 2025	Debit		AMAZON AU SYDNEY SOUTH		XXXXXXXXXXXXXXX1656	Credit Card Purchase	28.49		Bank Feed	Reconciled
+    8 Oct 2025	Debit		APPLE.COM/BILL SYDNEY		XXXXXXXXXXXXXXX1656	Credit Card Purchase	14.99		Bank Feed	Reconciled
+    8 Oct 2025	Debit		FOODBANK OF SOUTH AUSTRALMOUNT GAMBIER		XXXXXXXXXXXXXXX1656	Credit Card Purchase	490.00		Bank Feed	Reconciled
+    8 Oct 2025	Debit		Reddy Express 1903 Alice Springs		XXXXXXXXXXXXXXX1656	Credit Card Purchase	78.45		Bank Feed	Reconciled
+    7 Oct 2025	Debit		QANTAS AIR 081HQARJ79EVCMASCOT		XXXXXXXXXXXXXXX1656	Credit Card Purchase	196.00		Bank Feed	Reconciled
+    7 Oct 2025	Debit		RICEBOI MOOLOOLABA		XXXXXXXXXXXXXXX1656	Credit Card Purchase	94.00		Bank Feed	Unreconciled
+    7 Oct 2025	Debit		NAB INTNL TRAN FEE - (SC)			Fee - Charged	0.82		Bank Feed	Reconciled
+    7 Oct 2025	Debit		Audible Limited AU MELBOURNE		XXXXXXXXXXXXXXX1656	Credit Card Purchase	16.45		Bank Feed	Reconciled
+    7 Oct 2025	Debit		TAXIPAY AUSTRALIA MASCOT		XXXXXXXXXXXXXXX1656	Credit Card Purchase	62.79		Bank Feed	Reconciled
+    7 Oct 2025	Debit		PAGE 27 CAFE ALICE SPRINGS		XXXXXXXXXXXXXXX1656	Credit Card Purchase	31.06		Bank Feed	Reconciled
+    7 Oct 2025	Debit		PAGE 27 CAFE ALICE SPRINGS		XXXXXXXXXXXXXXX1656	Credit Card Purchase	15.23		Bank Feed	Reconciled
+    7 Oct 2025	Debit		UBER *BUSINESS HELP.UBER.Sydney		XXXXXXXXXXXXXXX1656	Credit Card Purchase	35.99		Bank Feed	Reconciled
+    7 Oct 2025	Debit		UBER *TRIP HELP.UBER.COM Sydney		XXXXXXXXXXXXXXX1656	Credit Card Purchase	25.00		Bank Feed	Reconciled
+    7 Oct 2025	Debit		AGL SALES PTY LTD SYDNEY		XXXXXXXXXXXXXXX1656	Credit Card Purchase	275.44		Bank Feed	Unreconciled
+    7 Oct 2025	Credit		UBER *TRIP HELP.UBER.COM Sydney		XXXXXXXXXXXXXXX1656	Credit Card Refund		25.00	Bank Feed	Unreconciled
+    7 Oct 2025	Debit		A W M ELECTRICAL WHO ALICE SPRINGS		XXXXXXXXXXXXXXX1656	Credit Card Purchase	395.77		Bank Feed	Unreconciled
+    7 Oct 2025	Debit		About Time Bathhouse Torquay		XXXXXXXXXXXXXXX1656	Credit Card Purchase	100.00		Bank Feed	Unreconciled
+    7 Oct 2025	Debit		CENTRE TRAILER SALES CICCONE		XXXXXXXXXXXXXXX1656	Credit Card Purchase	424.91		Bank Feed	Unreconciled
+    7 Oct 2025	Debit		IGA NORTHSIDE BRAITLING		XXXXXXXXXXXXXXX1656	Credit Card Purchase	214.61		Bank Feed	Reconciled
+    7 Oct 2025	Debit		SQSP* DOMAIN#204276426 SQUARESPACE.CNY		XXXXXXXXXXXXXXX1656	Credit Card Purchase	23.50		Bank Feed	Unreconciled
+    6 Oct 2025	Debit		SQ *GREMLIN GROUNDS Maleny		XXXXXXXXXXXXXXX1656	Credit Card Purchase	6.86		Bank Feed	Unreconciled
+    6 Oct 2025	Debit		UMART ONLINE MILTON		XXXXXXXXXXXXXXX1656	Credit Card Purchase	333.30		Bank Feed	Reconciled
+    6 Oct 2025	Debit		ZAPIER.COM/CHARGE ZAPIER.COM CA		XXXXXXXXXXXXXXX1656	Credit Card Purchase	50.17		Bank Feed	Reconciled
+    6 Oct 2025	Debit		NAB INTNL TRAN FEE - (MC)			Fee - Charged	0.96		Bank Feed	Reconciled
+    6 Oct 2025	Debit		NAB INTNL TRAN FEE - (MC)			Fee - Charged	1.76		Bank Feed	Reconciled
+    6 Oct 2025	Credit		INTERNET PAYMENT Up		XXXXXXXXXXXXXXX1656	Credit Card Payment		9,883.63	Bank Feed	Unreconciled
+    6 Oct 2025	Debit		INTERNET TRANSFER Linked Acc Trns		XXXXXXXXXXXXXXX1656	Credit Card Cash Advance	260.00		Bank Feed	Unreconciled
+    6 Oct 2025	Debit		LinkedInPreC *52161414 16506873555		XXXXXXXXXXXXXXX1656	Credit Card Purchase	74.99		Bank Feed	Unreconciled
+    6 Oct 2025	Debit		SQ *NEST IN WITTA Witta		XXXXXXXXXXXXXXX1656	Credit Card Purchase	21.42		Bank Feed	Reconciled
+    6 Oct 2025	Debit		PIGGYBACK PALMWOODS		XXXXXXXXXXXXXXX1656	Credit Card Purchase	100.00		Bank Feed	Reconciled
+    6 Oct 2025	Debit		UPTON GROUP AUSTRALIA BEERWAH		XXXXXXXXXXXXXXX1656	Credit Card Purchase	447.84		Bank Feed	Reconciled
+    6 Oct 2025	Debit		WARP PRO SUBSCRIPTION WARP.DEV NY		XXXXXXXXXXXXXXX1656	Credit Card Purchase	27.38		Bank Feed	Reconciled
+    6 Oct 2025	Debit		The Source Bulk Foods Maleny		XXXXXXXXXXXXXXX1656	Credit Card Purchase	40.30		Bank Feed	Reconciled
+    6 Oct 2025	Debit		BELONG MELBOURNE		XXXXXXXXXXXXXXX1656	Credit Card Purchase	35.00		Bank Feed	Unreconciled
+    6 Oct 2025	Debit		SP DRNKS MASLIN BEACH		XXXXXXXXXXXXXXX1656	Credit Card Purchase	300.00		Bank Feed	Reconciled
+    6 Oct 2025	Debit		SQ *NEST IN WITTA Witta		XXXXXXXXXXXXXXX1656	Credit Card Purchase	86.19		Bank Feed	Unreconciled
+    6 Oct 2025	Debit		LIBERTY MALENY Maleny		XXXXXXXXXXXXXXX1656	Credit Card Purchase	267.89		Bank Feed	Reconciled
+    6 Oct 2025	Debit		MALENY HARDWARE AND RURALMALENY		XXXXXXXXXXXXXXX1656	Credit Card Purchase	497.48		Bank Feed	Reconciled
+    3 Oct 2025	Debit		The Pocket Espresso Moffat Beach		XXXXXXXXXXXXXXX1656	Credit Card Purchase	14.25		Bank Feed	Reconciled
+    3 Oct 2025	Debit		SQ *THE SHACK FISH & CHIPMoffat Beach		XXXXXXXXXXXXXXX1656	Credit Card Purchase	48.50		Bank Feed	Reconciled
+    3 Oct 2025	Debit		CLAUDE.AI SUBSCRIPTION ANTHROPIC.COMCA		XXXXXXXXXXXXXXX1656	Credit Card Purchase	152.09		Bank Feed	Reconciled
+    3 Oct 2025	Debit		The Pocket Espresso Moffat Beach		XXXXXXXXXXXXXXX1656	Credit Card Purchase	152.63		Bank Feed	Reconciled
+    3 Oct 2025	Debit		UBER *TRIP HELP.UBER.COM Sydney		XXXXXXXXXXXXXXX1656	Credit Card Purchase	14.32		Bank Feed	Reconciled
+    3 Oct 2025	Debit		STRATCO ASP ALICE SPRINGS		XXXXXXXXXXXXXXX1656	Credit Card Purchase	2,240.82		Bank Feed	Reconciled
+    3 Oct 2025	Debit		NAB INTNL TRAN FEE - (MC)			Fee - Charged	5.32		Bank Feed	Reconciled
+    3 Oct 2025	Debit		UBER *BUSINESS HELP.UBER.Sydney		XXXXXXXXXXXXXXX1656	Credit Card Purchase	36.28		Bank Feed	Reconciled
+    3 Oct 2025	Debit		PIGGYBACK251002NB PALMWOODS		XXXXXXXXXXXXXXX1656	Credit Card Purchase	305.97		Bank Feed	Reconciled
+    3 Oct 2025	Debit		BWC BRISBANE 133222 HAMILTON		XXXXXXXXXXXXXXX1656	Credit Card Purchase	88.19		Bank Feed	Reconciled
+    3 Oct 2025	Debit		UBER *TRIP HELP.UBER.COM Sydney		XXXXXXXXXXXXXXX1656	Credit Card Purchase	42.29		Bank Feed	Reconciled
+    3 Oct 2025	Debit		MOFFAT BEACH BREWING CALOUNDRA WES		XXXXXXXXXXXXXXX1656	Credit Card Purchase	155.34		Bank Feed	Reconciled
+    3 Oct 2025	Debit		Google GSUITE_theharvestwSydney		XXXXXXXXXXXXXXX1656	Credit Card Purchase	50.99		Bank Feed	Reconciled
+    3 Oct 2025	Debit		UBER *BUSINESS HELP.UBER.Sydney		XXXXXXXXXXXXXXX1656	Credit Card Purchase	48.20		Bank Feed	Reconciled
+    2 Oct 2025	Debit		BRIDGECLIMB SYDNEY THE ROCKS		XXXXXXXXXXXXXXX1656	Credit Card Purchase	13.50		Bank Feed	Reconciled
+    2 Oct 2025	Debit		Rivareno Gelato Darlin Darlinghurst		XXXXXXXXXXXXXXX1656	Credit Card Purchase	7.07		Bank Feed	Reconciled
+    2 Oct 2025	Debit		Mr Wong Sydney		XXXXXXXXXXXXXXX1656	Credit Card Purchase	159.16		Bank Feed	Reconciled
+    2 Oct 2025	Debit		GARRICKS CAMERA HOUSE GARBUTT		XXXXXXXXXXXXXXX1656	Credit Card Purchase	677.00		Bank Feed	Reconciled
+    2 Oct 2025	Debit		UBER *BUSINESS HELP.UBER.Sydney		XXXXXXXXXXXXXXX1656	Credit Card Purchase	26.43		Bank Feed	Reconciled
+    2 Oct 2025	Debit		UBER *BUSINESS HELP.UBER.Sydney		XXXXXXXXXXXXXXX1656	Credit Card Purchase	16.81		Bank Feed	Reconciled
+    2 Oct 2025	Debit		NAB INTNL TRAN FEE - (MC)			Fee - Charged	2.61		Bank Feed	Reconciled
+    2 Oct 2025	Debit		UBER *BUSINESS HELP.UBER.Sydney		XXXXXXXXXXXXXXX1656	Credit Card Purchase	23.06		Bank Feed	Reconciled
+    2 Oct 2025	Debit		The Rusty Rabbit Darlinghurst		XXXXXXXXXXXXXXX1656	Credit Card Purchase	5.07		Bank Feed	Reconciled
+    2 Oct 2025	Debit		DOCPLAY*PREMIUM docplay.com		XXXXXXXXXXXXXXX1656	Credit Card Purchase	9.99		Bank Feed	Unreconciled
+    2 Oct 2025	Debit		UBER *BUSINESS HELP.UBER.Sydney		XXXXXXXXXXXXXXX1656	Credit Card Purchase	21.64		Bank Feed	Reconciled
+    2 Oct 2025	Debit		JETBOOST.IO JETBOOST.IO HI		XXXXXXXXXXXXXXX1656	Credit Card Purchase	74.59		Bank Feed	Reconciled
+    2 Oct 2025	Debit		SQ *GOLOSA Surry Hills		XXXXXXXXXXXXXXX1656	Credit Card Purchase	5.00		Bank Feed	Reconciled
+    2 Oct 2025	Debit		QANTAS AIR NEW SOUTH WAL		XXXXXXXXXXXXXXX1656	Credit Card Purchase	688.20		Bank Feed	Reconciled
+    1 Oct 2025	Debit		QANTAS AIRW MASCOT		XXXXXXXXXXXXXXX1656	Credit Card Purchase	518.90		Bank Feed	Reconciled
+    1 Oct 2025	Debit		QANTAS AIRW MASCOT		XXXXXXXXXXXXXXX1656	Credit Card Purchase	449.26		Bank Feed	Reconciled
+    1 Oct 2025	Debit		LINKTREE COLLINGWOOD		XXXXXXXXXXXXXXX1656	Credit Card Purchase	8.20		Bank Feed	Unreconciled
+    1 Oct 2025	Debit		DNPPHOTO.COM.AU PORT MELBOURN		XXXXXXXXXXXXXXX1656	Credit Card Purchase	693.00		Bank Feed	Reconciled
+    1 Oct 2025	Debit		B- SEA SWIFT PTY. LT PORTSMITH		XXXXXXXXXXXXXXX1656	Credit Card Purchase	2,554.39		Bank Feed	Reconciled
+    1 Oct 2025	Debit		UBER *BUSINESS HELP.UBER.Sydney		XXXXXXXXXXXXXXX1656	Credit Card Purchase	57.88		Bank Feed	Reconciled
+    1 Oct 2025	Debit		UBER *BUSINESS HELP.UBER.Sydney		XXXXXXXXXXXXXXX1656	Credit Card Purchase	25.99		Bank Feed	Reconciled
+    1 Oct 2025	Debit		UBER *TRIP HELP.UBER.COM Sydney		XXXXXXXXXXXXXXX1656	Credit Card Purchase	71.25		Bank Feed	Reconciled
+    1 Oct 2025	Debit		UBER *TRIP HELP.UBER.COM Sydney		XXXXXXXXXXXXXXX1656	Credit Card Purchase	26.19		Bank Feed	Reconciled
+    1 Oct 2025	Debit		UBER *TRIP HELP.UBER.COM Sydney		XXXXXXXXXXXXXXX1656	Credit Card Purchase	22.40		Bank Feed	Reconciled
+    1 Oct 2025	Debit		HARVEY NORMAN AV/IT GARBUTT		XXXXXXXXXXXXXXX1656	Credit Card Purchase	4,735.00		Bank Feed	Reconciled
+    1 Oct 2025	Debit		SQ *FISHBOWL DARLINGHURSTHaymarket		XXXXXXXXXXXXXXX1656	Credit Card Purchase	64.20		Bank Feed	Reconciled
+    1 Oct 2025	Debit		UBER *BUSINESS HELP.UBER.Sydney		XXXXXXXXXXXXXXX1656	Credit Card Purchase	23.01		Bank Feed	Reconciled
+    1 Oct 2025	Debit		UBER *BUSINESS HELP.UBER.Sydney		XXXXXXXXXXXXXXX1656	Credit Card Purchase	51.24		Bank Feed	Reconciled
+    1 Oct 2025	Debit		UBER *TRIP HELP.UBER.COM Sydney		XXXXXXXXXXXXXXX1656	Credit Card Purchase	35.00		Bank Feed	Reconciled
+    1 Oct 2025	Debit		SUSHI SUSHI BDA BRISBANE		XXXXXXXXXXXXXXX1656	Credit Card Purchase	16.60		Bank Feed	Reconciled

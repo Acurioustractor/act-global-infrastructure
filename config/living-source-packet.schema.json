@@ -1,0 +1,399 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://act.place/schemas/living-source-packet.schema.json",
+  "title": "ACT Living Source Packet",
+  "description": "Canonical packet for turning one approved source bundle into governed story, media, portfolio, and syndication outputs.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "packet_id",
+    "schema_version",
+    "packet_type",
+    "status",
+    "canonical_entity",
+    "source_refs",
+    "narrative",
+    "review",
+    "outputs",
+    "provenance"
+  ],
+  "properties": {
+    "packet_id": {
+      "type": "string",
+      "minLength": 8
+    },
+    "schema_version": {
+      "type": "string",
+      "minLength": 3
+    },
+    "packet_type": {
+      "type": "string",
+      "enum": [
+        "story",
+        "project",
+        "work",
+        "portfolio-entry",
+        "campaign"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "review",
+        "approved",
+        "scheduled",
+        "published",
+        "revoked",
+        "archived"
+      ]
+    },
+    "canonical_entity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "entity_type",
+        "canonical_slug",
+        "canonical_note_path",
+        "public_copy_owner"
+      ],
+      "properties": {
+        "entity_type": {
+          "type": "string",
+          "enum": [
+            "project",
+            "work",
+            "person",
+            "story",
+            "campaign"
+          ]
+        },
+        "canonical_slug": {
+          "type": "string",
+          "minLength": 2
+        },
+        "canonical_note_path": {
+          "type": "string",
+          "minLength": 3
+        },
+        "project_code": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "public_copy_owner": {
+          "type": "string",
+          "enum": [
+            "act-regenerative-studio",
+            "empathy-ledger",
+            "justicehub",
+            "goods-on-country",
+            "black-cockatoo-valley",
+            "the-harvest"
+          ]
+        }
+      }
+    },
+    "source_refs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "source_id",
+          "source_system",
+          "source_kind",
+          "uri_or_path",
+          "captured_at",
+          "verification_status"
+        ],
+        "properties": {
+          "source_id": {
+            "type": "string",
+            "minLength": 3
+          },
+          "source_system": {
+            "type": "string",
+            "minLength": 2
+          },
+          "source_kind": {
+            "type": "string",
+            "minLength": 2
+          },
+          "uri_or_path": {
+            "type": "string",
+            "minLength": 3
+          },
+          "captured_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "verification_status": {
+            "type": "string",
+            "enum": [
+              "verified",
+              "inferred",
+              "unverified"
+            ]
+          },
+          "notes": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "narrative": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "headline",
+        "summary",
+        "body_markdown",
+        "themes"
+      ],
+      "properties": {
+        "headline": {
+          "type": "string",
+          "minLength": 3
+        },
+        "summary": {
+          "type": "string",
+          "minLength": 10
+        },
+        "body_markdown": {
+          "type": "string",
+          "minLength": 20
+        },
+        "themes": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 2
+          }
+        },
+        "approved_quotes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "quote",
+              "speaker"
+            ],
+            "properties": {
+              "quote": {
+                "type": "string",
+                "minLength": 3
+              },
+              "speaker": {
+                "type": "string",
+                "minLength": 2
+              },
+              "source_ref_id": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "media_assets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "asset_id",
+          "kind",
+          "uri_or_path",
+          "usage_rights"
+        ],
+        "properties": {
+          "asset_id": {
+            "type": "string",
+            "minLength": 3
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "image",
+              "video",
+              "audio",
+              "document"
+            ]
+          },
+          "uri_or_path": {
+            "type": "string",
+            "minLength": 3
+          },
+          "caption": {
+            "type": "string"
+          },
+          "alt_text": {
+            "type": "string"
+          },
+          "usage_rights": {
+            "type": "string",
+            "enum": [
+              "approved",
+              "restricted",
+              "internal-only",
+              "revoked"
+            ]
+          }
+        }
+      }
+    },
+    "review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "editorial",
+        "cultural",
+        "consent",
+        "release"
+      ],
+      "properties": {
+        "editorial": {
+          "$ref": "#/$defs/reviewGate"
+        },
+        "cultural": {
+          "$ref": "#/$defs/reviewGate"
+        },
+        "consent": {
+          "$ref": "#/$defs/reviewGate"
+        },
+        "release": {
+          "$ref": "#/$defs/reviewGate"
+        }
+      }
+    },
+    "outputs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "target_surface",
+          "output_type",
+          "status"
+        ],
+        "properties": {
+          "target_surface": {
+            "type": "string",
+            "enum": [
+              "act-regenerative-studio",
+              "empathy-ledger",
+              "justicehub",
+              "goods-on-country",
+              "black-cockatoo-valley",
+              "the-harvest",
+              "social",
+              "video",
+              "newsletter"
+            ]
+          },
+          "output_type": {
+            "type": "string",
+            "enum": [
+              "homepage-feature",
+              "project-card",
+              "portfolio-entry",
+              "article",
+              "social-caption",
+              "explainer-image-brief",
+              "explainer-video-brief",
+              "syndication-payload"
+            ]
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "queued",
+              "generated",
+              "review",
+              "approved",
+              "published",
+              "revoked"
+            ]
+          },
+          "destination": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "notes": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "generated_at",
+        "generated_by",
+        "provenance_note_path"
+      ],
+      "properties": {
+        "generated_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "generated_by": {
+          "type": "string",
+          "minLength": 2
+        },
+        "provenance_note_path": {
+          "type": "string",
+          "minLength": 3
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "reviewGate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status"
+      ],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "pending",
+            "approved",
+            "rejected",
+            "not-required"
+          ]
+        },
+        "owner": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "decided_at": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

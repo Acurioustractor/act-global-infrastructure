@@ -18,6 +18,10 @@ Helper: `node scripts/wiki-log.mjs <op> "<summary>" [files...]`
 
 ## 2026
 
+- 2026-04-19 09:15 | viewer-build | 257 articles · 88 photo maps · 1774KB | tools/act-wikipedia.html
+- 2026-04-19 09:15 | snapshot-sync | 23 direct mirrors · 55 stories · 4 wrappers | apps/command-center/public/wiki/README.md, apps/command-center/public/wiki/snapshot-meta.json
+- 2026-04-19 09:00 | lint | 257 canonical articles · 34 broken links · 26 orphans · 99% source-bridge coverage | wiki/output/lint-2026-04-19.md, wiki/output/status-latest.json
+- 2026-04-19 08:59 | lint | 257 canonical articles · 34 broken links · 26 orphans · 99% source-bridge coverage | wiki/output/lint-2026-04-19.md, wiki/output/status-latest.json
 - 2026-04-13 09:23 | manual | The Aesthetics of Asymmetry — campaign hub + ep01 wiki + narrative claim + app scaffold | wiki/art/aesthetics-of-asymmetry/, wiki/narrative/civicgraph/
 - 2026-04-13 09:23 | viewer-build | 212 articles · 63 photo maps · 1519KB | tools/act-wikipedia.html
 - 2026-04-13 09:23 | snapshot-sync | 23 direct mirrors · 36 stories · 4 wrappers | apps/command-center/public/wiki/README.md, apps/command-center/public/wiki/snapshot-meta.json

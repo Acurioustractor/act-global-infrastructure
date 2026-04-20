@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "output/narrative-drafts/2026-04-14-civicgraph-agitation-linkedin-v2.md",
+                "file": "campaigns/aesthetics-of-asymmetry/brief.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2026-04-14-civicgraph-agitation-linkedin-v2"
+              "title": "brief"
             }
           }
         ]
@@ -53,7 +53,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "2026-04-14-civicgraph-agitation-linkedin-v2.md",
+                "query": "",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -74,8 +74,7 @@
               "title": "Bookmarks"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "horizontal",
@@ -184,53 +183,53 @@
       "bases:Create new base": false
     }
   },
-  "active": "5e77a96e65a9bda3",
+  "active": "cd18dd650777edef",
   "lastOpenFiles": [
-    "synthesis/how-does-empathy-ledger-v2-integrate-with-civicgraph-and-justicehub-to-add-the-h.md",
-    "synthesis/what-is-the-living-organism-the-visual-system-for-the-aesthetics-of-asymmetry.md",
-    "output/narrative-drafts/2026-04-14-civicgraph-art-project-linkedin-v3.md",
-    "raw/2026-04-14-civicgraph-art-framing-report.md",
-    "raw/2026-04-14-civicgraph-art-project-deep-research.md",
-    "output/narrative-drafts/2026-04-14-civicgraph-agitation-linkedin.md",
-    "output/narrative-drafts/2026-04-14-civicgraph-agitation-linkedin-v2.md",
-    "output/narrative-drafts/2026-04-14-the-third-reality.md",
-    "technical/vignette-workflows.md",
-    "synthesis/what-are-the-specific-opportunities-to-deploy-the-third-reality-in-the-next-12-m.md",
-    "synthesis/how-does-the-third-reality-become-acts-operating-system-not-just-a-concept-but-t.md",
-    "synthesis/what-are-acts-seven-flagship-experiences-and-how-does-each-one-convert-into-ecos.md",
-    "synthesis/how-does-act-grow-without-fanfare-through-word-of-mouth-incredible-experiences-a.md",
-    "synthesis/what-is-the-third-reality-actually-solving-and-how-do-civicgraph-justicehub-and-.md",
-    "synthesis/how-does-justicehub-program-search-connect-postcards-to-real-services-across-aus.md",
-    "synthesis/how-should-act-engage-judges-after-the-on-country-experience-and-what-systems-ca.md",
-    "synthesis/how-does-the-judges-on-country-experience-feed-back-into-the-act-ecosystem.md",
-    "output/narrative-drafts/2026-04-13-judges-on-country-linkedin.md",
-    "narrative/justicehub/claim-judges-have-never-met-them.md",
-    "projects/justicehub/judges-on-country.md",
-    "stories/oonchiumpa-fred-xavier-trust.md",
-    "stories/oonchiumpa-laquisha-darwin.md",
-    "stories/oonchiumpa-nigel-court.md",
-    "stories/oonchiumpa-jackquann-detention.md",
-    "stories/oonchiumpa-jackquann-nigel-programs.md",
-    "stories/oonchiumpa-kristy-tanya-founders.md",
-    "operations",
-    "output/the-kettle/the-kettle.pdf",
-    "output/living-ecosystem-alignment-latest.json",
-    "projects/empathy-ledger",
-    "output/fire-crescendo-journal.png",
-    "output/field-diagnostic-journal-spread.png",
-    "output/brave-ones-placeholder-03-centre.png",
-    "output/brave-ones-placeholder-01.png",
-    "output/living-ecosystem-canon-latest.json",
-    "output/flagship-project-packs.json",
-    "art/business",
-    "art/innovation",
-    "art/philosophy",
-    "output/project-registry-latest.json",
-    "output/alma-loop-penguin.png",
-    "output/alma-loop-journal.png",
+    "output/data-quality/2026-04-20T00-59-abn-backfill.md",
+    "output/data-quality/2026-04-20T00-58-abn-backfill.md",
+    "output/data-quality/2026-04-20T00-55-dq-sweep.md",
+    "output/data-quality/2026-04-20T00-50-dq-sweep.md",
+    "output/data-quality/2026-04-20T00-45-dq-sweep.md",
+    "output/data-quality",
+    "output/contact-enrichment/research-results/e47c8221-fc50-421b-a179-79dd4d249a7b.md",
+    "output/contact-enrichment/research-results/fb9e311e-cfd8-4455-bd44-bcaf4407cdbd.md",
+    "output/contact-enrichment/research-results/bc34ecbe-13d9-49c0-83d3-bfe7e6de8280.md",
+    "output/contact-enrichment/research-results/d745e59d-099c-4941-b67f-faaa2193d56d.md",
+    "output/contact-enrichment/research-results/88f4c25b-7253-463f-a9f1-53bacb2c6995.md",
+    "output/contact-enrichment/research-results/0de96f4a-c41d-4a80-bdb8-c15c12bf52cf.md",
+    "output/contact-enrichment/research-results/c51cf761-1cce-4b06-aee5-e1fc8cd7e928.md",
+    "output/contact-enrichment/research-results/7364ee48-d6c6-4549-aa0c-526856011f54.md",
+    "output/contact-enrichment/research-results/7852abd0-63e3-4209-ac6b-9f97e9366680.md",
+    "output/contact-enrichment/research-results/61d774b1-3d38-4f02-8d3d-ca50e7a70597.md",
+    "output/contact-enrichment/research-results/093ec48b-7d33-4363-9c82-6bc820117992.md",
+    "output/contact-enrichment/research-results/90936584-2e2e-41ce-919d-420df06d08f6.md",
+    "output/contact-enrichment/research-results/55b4144f-8261-4f68-8f68-4314c7eab8d6.md",
+    "output/contact-enrichment/research-results/07ce1b20-5ea7-4205-a7f3-8eaa586393ad.md",
+    "output/contact-enrichment/research-results/34c8f705-a5af-4f20-8fe6-6b8eb60135f6.md",
+    "output/contact-enrichment/research-results/7f1b3735-2c50-402c-a8f7-213db80b5a28.md",
+    "output/contact-enrichment/research-results/f296e266-a461-4ca1-934a-b8d057e46565.md",
+    "output/contact-enrichment/research-results/d01da843-db02-4b01-8a14-c2d7e228da33.md",
+    "output/contact-enrichment/research-results/be9a4c10-58a4-49c3-a611-29133a97c061.md",
+    "output/contact-enrichment/research-results/eeb722b8-9b0a-454d-ae26-f0882a6381ad.md",
+    "output/contact-enrichment/research-results/8851899b-2bef-4f90-b0a4-a5accee86296.md",
+    "output/contact-enrichment/research-results",
+    "output/contact-enrichment/research-briefs",
+    "output/contact-enrichment",
+    "output/alma-health",
+    "output/el-content-updates",
+    "output/el-elder-approvals",
+    "output/el-consent-bulk",
+    "output/pitch-sync",
+    "output/story-sync",
     "output/three-ripples-ledger-mockup.png",
-    "output/three-ripples-poster-mockup.png",
-    "output/model-diagram-three-circles-v1.png",
-    "output/model-diagram-three-circles-v2.png"
+    "output/three-ripples-journal-spread.png",
+    "output/three-circles-test-A-haugomat.png",
+    "output/three-circles-penguin-v3-clean.png",
+    "output/three-circles-penguin-v2-constellation.png",
+    "output/three-circles-penguin-v1-marks.png",
+    "output/three-circles-journal-spread.png",
+    "output/three-circles-test-B-penguin.png",
+    "output/three-circles-test-C-niemann.png",
+    "output/three-circles-tree-trunk-v1.png"
   ]
 }

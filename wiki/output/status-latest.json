@@ -1,34 +1,35 @@
 {
-  "generated_at": "2026-04-11T03:17:57.017Z",
+  "generated_at": "2026-04-19T23:00:00.232Z",
   "scope": "canonical-graph",
   "domains": {
-    "art": 5,
-    "communities": 2,
+    "art": 8,
+    "communities": 3,
     "concepts": 26,
-    "decisions": 8,
+    "decisions": 15,
+    "finance": 2,
     "people": 23,
-    "projects": 60,
-    "research": 14,
-    "stories": 29,
-    "synthesis": 4,
+    "projects": 89,
+    "research": 15,
+    "stories": 54,
+    "synthesis": 18,
     "technical": 6
   },
   "summary": {
-    "date": "2026-04-11",
-    "total_articles": 175,
-    "total_links": 1464,
-    "orphans": 0,
-    "broken_links": 0,
-    "stubs": 1,
-    "missing_from_index": 0,
-    "missing_backlinks": 188,
-    "advisory_backlinks": 364
+    "date": "2026-04-19",
+    "total_articles": 257,
+    "total_links": 2071,
+    "orphans": 26,
+    "broken_links": 34,
+    "stubs": 0,
+    "missing_from_index": 45,
+    "missing_backlinks": 464,
+    "advisory_backlinks": 449
   },
   "source_bridge": {
-    "raw_sources": 151,
+    "raw_sources": 153,
     "source_summaries": 151,
     "covered_raw_sources": 151,
-    "missing_source_summaries": 0,
+    "missing_source_summaries": 2,
     "orphan_source_summaries": 0,
     "by_kind": {
       "published_article_capture": {
@@ -42,9 +43,9 @@
         "missing_raw_sources": 0
       },
       "raw_capture": {
-        "raw_sources": 80,
+        "raw_sources": 82,
         "covered_raw_sources": 80,
-        "missing_raw_sources": 0
+        "missing_raw_sources": 2
       },
       "transcript_capture": {
         "raw_sources": 2,
@@ -62,197 +63,123 @@
         "missing_raw_sources": 0
       }
     },
-    "coverage_pct": 100
+    "coverage_pct": 99
   },
   "repair_queue": {
-    "broken_links": [],
-    "missing_from_index": [],
+    "broken_links": [
+      {
+        "stem": "2026-04-18-mounty-yarns-story-approval",
+        "title": "Mounty Yarns org-level story approval",
+        "relative_path": "decisions/2026-04-18-mounty-yarns-story-approval.md",
+        "page_path": "decisions/2026-04-18-mounty-yarns-story-approval",
+        "missing_target": "mounty-aboriginal-youth-community-services"
+      },
+      {
+        "stem": "2026-04-18-oonchiumpa-story-approval",
+        "title": "Oonchiumpa org-level story approval — and the verbal-consent governance pattern",
+        "relative_path": "decisions/2026-04-18-oonchiumpa-story-approval.md",
+        "page_path": "decisions/2026-04-18-oonchiumpa-story-approval",
+        "missing_target": "../concepts/ocap-framework"
+      },
+      {
+        "stem": "_template",
+        "title": "<Case Study Title>",
+        "relative_path": "projects/act-farm/case-studies/_template.md",
+        "page_path": "projects/act-farm/case-studies/_template",
+        "missing_target": "case-studies/README"
+      },
+      {
+        "stem": "_template",
+        "title": "<Case Study Title>",
+        "relative_path": "projects/act-farm/case-studies/_template.md",
+        "page_path": "projects/act-farm/case-studies/_template",
+        "missing_target": "experiences/<slug>"
+      },
+      {
+        "stem": "_template",
+        "title": "<Case Study Title>",
+        "relative_path": "projects/act-farm/case-studies/_template.md",
+        "page_path": "projects/act-farm/case-studies/_template",
+        "missing_target": "experiences/<slug>"
+      },
+      {
+        "stem": "dad-lab-bcv-2025",
+        "title": "DAD.LAB — the inaugural cohort at BCV, 2025",
+        "relative_path": "projects/act-farm/case-studies/dad-lab-bcv-2025.md",
+        "page_path": "projects/act-farm/case-studies/dad-lab-bcv-2025",
+        "missing_target": "case-studies/README"
+      },
+      {
+        "stem": "dad-lab-bcv-2025",
+        "title": "DAD.LAB — the inaugural cohort at BCV, 2025",
+        "relative_path": "projects/act-farm/case-studies/dad-lab-bcv-2025.md",
+        "page_path": "projects/act-farm/case-studies/dad-lab-bcv-2025",
+        "missing_target": "team/ben"
+      },
+      {
+        "stem": "dad-lab-bcv-2025",
+        "title": "DAD.LAB — the inaugural cohort at BCV, 2025",
+        "relative_path": "projects/act-farm/case-studies/dad-lab-bcv-2025.md",
+        "page_path": "projects/act-farm/case-studies/dad-lab-bcv-2025",
+        "missing_target": "team/nic"
+      }
+    ],
+    "missing_from_index": [
+      {
+        "stem": "2026-04-18-bg-fit-story-approval",
+        "title": "BG Fit org-level story approval",
+        "relative_path": "decisions/2026-04-18-bg-fit-story-approval.md",
+        "page_path": "decisions/2026-04-18-bg-fit-story-approval"
+      },
+      {
+        "stem": "2026-04-18-mounty-yarns-story-approval",
+        "title": "Mounty Yarns org-level story approval",
+        "relative_path": "decisions/2026-04-18-mounty-yarns-story-approval.md",
+        "page_path": "decisions/2026-04-18-mounty-yarns-story-approval"
+      },
+      {
+        "stem": "2026-04-18-oonchiumpa-story-approval",
+        "title": "Oonchiumpa org-level story approval — and the verbal-consent governance pattern",
+        "relative_path": "decisions/2026-04-18-oonchiumpa-story-approval.md",
+        "page_path": "decisions/2026-04-18-oonchiumpa-story-approval"
+      },
+      {
+        "stem": "2026-04-18-picc-selective-youth-voice",
+        "title": "PICC — selective youth-voice approval",
+        "relative_path": "decisions/2026-04-18-picc-selective-youth-voice.md",
+        "page_path": "decisions/2026-04-18-picc-selective-youth-voice"
+      },
+      {
+        "stem": "_template",
+        "title": "<Case Study Title>",
+        "relative_path": "projects/act-farm/case-studies/_template.md",
+        "page_path": "projects/act-farm/case-studies/_template"
+      },
+      {
+        "stem": "community-capital-at-bcv",
+        "title": "Community Capital at BCV — a year in the valley",
+        "relative_path": "projects/act-farm/case-studies/community-capital-at-bcv.md",
+        "page_path": "projects/act-farm/case-studies/community-capital-at-bcv"
+      },
+      {
+        "stem": "community-capital-bowral-2025",
+        "title": "Community Capital — Bowral, 23–25 Feb 2025",
+        "relative_path": "projects/act-farm/case-studies/community-capital-bowral-2025.md",
+        "page_path": "projects/act-farm/case-studies/community-capital-bowral-2025"
+      },
+      {
+        "stem": "dad-lab-bcv-2025",
+        "title": "DAD.LAB — the inaugural cohort at BCV, 2025",
+        "relative_path": "projects/act-farm/case-studies/dad-lab-bcv-2025.md",
+        "page_path": "projects/act-farm/case-studies/dad-lab-bcv-2025"
+      }
+    ],
     "missing_backlinks": [
       {
-        "stem": "kristy-bloomfield",
-        "title": "Kristy Bloomfield",
-        "relative_path": "people/kristy-bloomfield.md",
-        "page_path": "people/kristy-bloomfield",
-        "target": {
-          "stem": "three-circles",
-          "title": "The Three Circles",
-          "relative_path": "projects/justicehub/three-circles.md",
-          "page_path": "projects/justicehub/three-circles"
-        }
-      },
-      {
-        "stem": "kristy-bloomfield",
-        "title": "Kristy Bloomfield",
-        "relative_path": "people/kristy-bloomfield.md",
-        "page_path": "people/kristy-bloomfield",
-        "target": {
-          "stem": "indigenous-justice-oped",
-          "title": "The Cure Already Exists",
-          "relative_path": "research/indigenous-justice-oped.md",
-          "page_path": "research/indigenous-justice-oped"
-        }
-      },
-      {
-        "stem": "nicholas-marchesi",
-        "title": "Nicholas Marchesi OAM",
-        "relative_path": "people/nicholas-marchesi.md",
-        "page_path": "people/nicholas-marchesi",
-        "target": {
-          "stem": "harvest-property-arc",
-          "title": "The Harvest: Property Arc and Founding Vision",
-          "relative_path": "research/harvest-property-arc.md",
-          "page_path": "research/harvest-property-arc"
-        }
-      },
-      {
-        "stem": "regional-arts-fellowship",
-        "title": "Regional Arts Fellowship",
-        "relative_path": "projects/act-studio/regional-arts-fellowship.md",
-        "page_path": "projects/act-studio/regional-arts-fellowship",
-        "target": {
-          "stem": "art-as-infrastructure",
-          "title": "Art as Infrastructure",
-          "relative_path": "art/philosophy/art-as-infrastructure.md",
-          "page_path": "art/philosophy/art-as-infrastructure"
-        }
-      },
-      {
-        "stem": "regional-arts-fellowship",
-        "title": "Regional Arts Fellowship",
-        "relative_path": "projects/act-studio/regional-arts-fellowship.md",
-        "page_path": "projects/act-studio/regional-arts-fellowship",
-        "target": {
-          "stem": "lcaa-method",
-          "title": "LCAA Method",
-          "relative_path": "concepts/lcaa-method.md",
-          "page_path": "concepts/lcaa-method"
-        }
-      },
-      {
-        "stem": "confit-pathways",
-        "title": "ConFit Pathways",
-        "relative_path": "projects/confit-pathways.md",
-        "page_path": "projects/confit-pathways",
-        "target": {
-          "stem": "justicehub",
-          "title": "JusticeHub",
-          "relative_path": "projects/justicehub/justicehub.md",
-          "page_path": "projects/justicehub/justicehub"
-        }
-      },
-      {
-        "stem": "deadlylabs",
-        "title": "DeadlyLabs",
-        "relative_path": "projects/deadlylabs.md",
-        "page_path": "projects/deadlylabs",
-        "target": {
-          "stem": "ai-community-engagement",
-          "title": "AI and Community Engagement",
-          "relative_path": "concepts/ai-community-engagement.md",
-          "page_path": "concepts/ai-community-engagement"
-        }
-      },
-      {
-        "stem": "deadlylabs",
-        "title": "DeadlyLabs",
-        "relative_path": "projects/deadlylabs.md",
-        "page_path": "projects/deadlylabs",
-        "target": {
-          "stem": "justicehub",
-          "title": "JusticeHub",
-          "relative_path": "projects/justicehub/justicehub.md",
-          "page_path": "projects/justicehub/justicehub"
-        }
-      }
-    ],
-    "orphan_pages": [],
-    "stubs": [
-      {
-        "stem": "how-does-the-tractorpedia-second-brain-pattern-compound-knowledge-over-time",
-        "title": "How does the Tractorpedia second-brain pattern compound knowledge over time?",
-        "relative_path": "synthesis/how-does-the-tractorpedia-second-brain-pattern-compound-knowledge-over-time.md",
-        "page_path": "synthesis/how-does-the-tractorpedia-second-brain-pattern-compound-knowledge-over-time",
-        "lines": 16
-      }
-    ],
-    "advisory_backlinks": [
-      {
-        "stem": "art-projects",
-        "title": "ACT Art Projects",
-        "relative_path": "art/art-projects.md",
-        "page_path": "art/art-projects",
-        "target": {
-          "stem": "act-ecosystem",
-          "title": "ACT Ecosystem",
-          "relative_path": "concepts/act-ecosystem.md",
-          "page_path": "concepts/act-ecosystem"
-        }
-      },
-      {
-        "stem": "art-projects",
-        "title": "ACT Art Projects",
-        "relative_path": "art/art-projects.md",
-        "page_path": "art/art-projects",
-        "target": {
-          "stem": "act-identity",
-          "title": "A Curious Tractor (ACT)",
-          "relative_path": "concepts/act-identity.md",
-          "page_path": "concepts/act-identity"
-        }
-      },
-      {
-        "stem": "art-projects",
-        "title": "ACT Art Projects",
-        "relative_path": "art/art-projects.md",
-        "page_path": "art/art-projects",
-        "target": {
-          "stem": "beautiful-obsolescence",
-          "title": "Beautiful Obsolescence",
-          "relative_path": "concepts/beautiful-obsolescence.md",
-          "page_path": "concepts/beautiful-obsolescence"
-        }
-      },
-      {
-        "stem": "art-projects",
-        "title": "ACT Art Projects",
-        "relative_path": "art/art-projects.md",
-        "page_path": "art/art-projects",
-        "target": {
-          "stem": "lcaa-method",
-          "title": "LCAA Method",
-          "relative_path": "concepts/lcaa-method.md",
-          "page_path": "concepts/lcaa-method"
-        }
-      },
-      {
-        "stem": "art-projects",
-        "title": "ACT Art Projects",
-        "relative_path": "art/art-projects.md",
-        "page_path": "art/art-projects",
-        "target": {
-          "stem": "third-reality",
-          "title": "The Third Reality",
-          "relative_path": "concepts/third-reality.md",
-          "page_path": "concepts/third-reality"
-        }
-      },
-      {
-        "stem": "art-projects",
-        "title": "ACT Art Projects",
-        "relative_path": "art/art-projects.md",
-        "page_path": "art/art-projects",
-        "target": {
-          "stem": "benjamin-knight",
-          "title": "Benjamin Knight",
-          "relative_path": "people/benjamin-knight.md",
-          "page_path": "people/benjamin-knight"
-        }
-      },
-      {
-        "stem": "art-projects",
-        "title": "ACT Art Projects",
-        "relative_path": "art/art-projects.md",
-        "page_path": "art/art-projects",
+        "stem": "episode-01-keyhole",
+        "title": "Episode 01 — The Keyhole",
+        "relative_path": "art/aesthetics-of-asymmetry/episode-01-keyhole.md",
+        "page_path": "art/aesthetics-of-asymmetry/episode-01-keyhole",
         "target": {
           "stem": "civicgraph",
           "title": "CivicGraph",
@@ -261,20 +188,262 @@
         }
       },
       {
-        "stem": "art-projects",
-        "title": "ACT Art Projects",
-        "relative_path": "art/art-projects.md",
-        "page_path": "art/art-projects",
+        "stem": "the-buttery",
+        "title": "The Buttery",
+        "relative_path": "communities/the-buttery.md",
+        "page_path": "communities/the-buttery",
         "target": {
-          "stem": "community-capital",
-          "title": "Community Capital",
-          "relative_path": "projects/community-capital.md",
-          "page_path": "projects/community-capital"
+          "stem": "y1-release-program",
+          "title": "Y1 Art Release Program — 2026/27",
+          "relative_path": "art/y1-release-program.md",
+          "page_path": "art/y1-release-program"
+        }
+      },
+      {
+        "stem": "the-buttery",
+        "title": "The Buttery",
+        "relative_path": "communities/the-buttery.md",
+        "page_path": "communities/the-buttery",
+        "target": {
+          "stem": "annual-field-service",
+          "title": "Empathy Ledger Annual Field Service",
+          "relative_path": "projects/empathy-ledger/annual-field-service.md",
+          "page_path": "projects/empathy-ledger/annual-field-service"
+        }
+      },
+      {
+        "stem": "the-buttery",
+        "title": "The Buttery",
+        "relative_path": "communities/the-buttery.md",
+        "page_path": "communities/the-buttery",
+        "target": {
+          "stem": "justicehub",
+          "title": "JusticeHub",
+          "relative_path": "projects/justicehub/justicehub.md",
+          "page_path": "projects/justicehub/justicehub"
+        }
+      },
+      {
+        "stem": "the-buttery",
+        "title": "The Buttery",
+        "relative_path": "communities/the-buttery.md",
+        "page_path": "communities/the-buttery",
+        "target": {
+          "stem": "smart-recovery",
+          "title": "SMART Recovery",
+          "relative_path": "projects/smart-recovery/smart-recovery.md",
+          "page_path": "projects/smart-recovery/smart-recovery"
+        }
+      },
+      {
+        "stem": "2026-04-18-bg-fit-story-approval",
+        "title": "BG Fit org-level story approval",
+        "relative_path": "decisions/2026-04-18-bg-fit-story-approval.md",
+        "page_path": "decisions/2026-04-18-bg-fit-story-approval",
+        "target": {
+          "stem": "bg-fit",
+          "title": "BG Fit",
+          "relative_path": "projects/bg-fit.md",
+          "page_path": "projects/bg-fit"
+        }
+      },
+      {
+        "stem": "2026-04-18-bg-fit-story-approval",
+        "title": "BG Fit org-level story approval",
+        "relative_path": "decisions/2026-04-18-bg-fit-story-approval.md",
+        "page_path": "decisions/2026-04-18-bg-fit-story-approval",
+        "target": {
+          "stem": "the-brave-ones",
+          "title": "The Brave Ones",
+          "relative_path": "projects/justicehub/the-brave-ones.md",
+          "page_path": "projects/justicehub/the-brave-ones"
+        }
+      },
+      {
+        "stem": "2026-04-18-mounty-yarns-story-approval",
+        "title": "Mounty Yarns org-level story approval",
+        "relative_path": "decisions/2026-04-18-mounty-yarns-story-approval.md",
+        "page_path": "decisions/2026-04-18-mounty-yarns-story-approval",
+        "target": {
+          "stem": "the-brave-ones",
+          "title": "The Brave Ones",
+          "relative_path": "projects/justicehub/the-brave-ones.md",
+          "page_path": "projects/justicehub/the-brave-ones"
+        }
+      }
+    ],
+    "orphan_pages": [
+      {
+        "stem": "2026-04-18-bg-fit-story-approval",
+        "title": "BG Fit org-level story approval",
+        "relative_path": "decisions/2026-04-18-bg-fit-story-approval.md",
+        "page_path": "decisions/2026-04-18-bg-fit-story-approval"
+      },
+      {
+        "stem": "2026-04-18-mounty-yarns-story-approval",
+        "title": "Mounty Yarns org-level story approval",
+        "relative_path": "decisions/2026-04-18-mounty-yarns-story-approval.md",
+        "page_path": "decisions/2026-04-18-mounty-yarns-story-approval"
+      },
+      {
+        "stem": "2026-04-18-oonchiumpa-story-approval",
+        "title": "Oonchiumpa org-level story approval — and the verbal-consent governance pattern",
+        "relative_path": "decisions/2026-04-18-oonchiumpa-story-approval.md",
+        "page_path": "decisions/2026-04-18-oonchiumpa-story-approval"
+      },
+      {
+        "stem": "2026-04-18-picc-selective-youth-voice",
+        "title": "PICC — selective youth-voice approval",
+        "relative_path": "decisions/2026-04-18-picc-selective-youth-voice.md",
+        "page_path": "decisions/2026-04-18-picc-selective-youth-voice"
+      },
+      {
+        "stem": "_template",
+        "title": "<Case Study Title>",
+        "relative_path": "projects/act-farm/case-studies/_template.md",
+        "page_path": "projects/act-farm/case-studies/_template"
+      },
+      {
+        "stem": "_template",
+        "title": "<Experience Name>",
+        "relative_path": "projects/act-farm/experiences/_template.md",
+        "page_path": "projects/act-farm/experiences/_template"
+      },
+      {
+        "stem": "README",
+        "title": "ACT Farm Experiences",
+        "relative_path": "projects/act-farm/experiences/README.md",
+        "page_path": "projects/act-farm/experiences/README"
+      },
+      {
+        "stem": "bg-fit-ben-recording",
+        "title": "Ben - Recording",
+        "relative_path": "stories/bg-fit-ben-recording.md",
+        "page_path": "stories/bg-fit-ben-recording"
+      }
+    ],
+    "stubs": [],
+    "advisory_backlinks": [
+      {
+        "stem": "aesthetics-of-asymmetry",
+        "title": "The Aesthetics of Asymmetry",
+        "relative_path": "art/aesthetics-of-asymmetry/aesthetics-of-asymmetry.md",
+        "page_path": "art/aesthetics-of-asymmetry/aesthetics-of-asymmetry",
+        "target": {
+          "stem": "civic-world-model",
+          "title": "Civic World Model",
+          "relative_path": "concepts/civic-world-model.md",
+          "page_path": "concepts/civic-world-model"
+        }
+      },
+      {
+        "stem": "aesthetics-of-asymmetry",
+        "title": "The Aesthetics of Asymmetry",
+        "relative_path": "art/aesthetics-of-asymmetry/aesthetics-of-asymmetry.md",
+        "page_path": "art/aesthetics-of-asymmetry/aesthetics-of-asymmetry",
+        "target": {
+          "stem": "funding-transparency",
+          "title": "Funding Transparency",
+          "relative_path": "concepts/funding-transparency.md",
+          "page_path": "concepts/funding-transparency"
+        }
+      },
+      {
+        "stem": "aesthetics-of-asymmetry",
+        "title": "The Aesthetics of Asymmetry",
+        "relative_path": "art/aesthetics-of-asymmetry/aesthetics-of-asymmetry.md",
+        "page_path": "art/aesthetics-of-asymmetry/aesthetics-of-asymmetry",
+        "target": {
+          "stem": "third-reality",
+          "title": "The Third Reality",
+          "relative_path": "concepts/third-reality.md",
+          "page_path": "concepts/third-reality"
+        }
+      },
+      {
+        "stem": "aesthetics-of-asymmetry",
+        "title": "The Aesthetics of Asymmetry",
+        "relative_path": "art/aesthetics-of-asymmetry/aesthetics-of-asymmetry.md",
+        "page_path": "art/aesthetics-of-asymmetry/aesthetics-of-asymmetry",
+        "target": {
+          "stem": "visual-system",
+          "title": "ACT Visual System",
+          "relative_path": "concepts/visual-system.md",
+          "page_path": "concepts/visual-system"
+        }
+      },
+      {
+        "stem": "aesthetics-of-asymmetry",
+        "title": "The Aesthetics of Asymmetry",
+        "relative_path": "art/aesthetics-of-asymmetry/aesthetics-of-asymmetry.md",
+        "page_path": "art/aesthetics-of-asymmetry/aesthetics-of-asymmetry",
+        "target": {
+          "stem": "empathy-ledger",
+          "title": "Empathy Ledger",
+          "relative_path": "projects/empathy-ledger.md",
+          "page_path": "projects/empathy-ledger"
+        }
+      },
+      {
+        "stem": "aesthetics-of-asymmetry",
+        "title": "The Aesthetics of Asymmetry",
+        "relative_path": "art/aesthetics-of-asymmetry/aesthetics-of-asymmetry.md",
+        "page_path": "art/aesthetics-of-asymmetry/aesthetics-of-asymmetry",
+        "target": {
+          "stem": "justicehub",
+          "title": "JusticeHub",
+          "relative_path": "projects/justicehub/justicehub.md",
+          "page_path": "projects/justicehub/justicehub"
+        }
+      },
+      {
+        "stem": "aesthetics-of-asymmetry",
+        "title": "The Aesthetics of Asymmetry",
+        "relative_path": "art/aesthetics-of-asymmetry/aesthetics-of-asymmetry.md",
+        "page_path": "art/aesthetics-of-asymmetry/aesthetics-of-asymmetry",
+        "target": {
+          "stem": "how-does-act-grow-without-fanfare-through-word-of-mouth-incredible-experiences-a",
+          "title": "How does ACT grow without fanfare — through word of mouth, incredible experiences, and art instead of traditional philanthropy and social media?",
+          "relative_path": "synthesis/how-does-act-grow-without-fanfare-through-word-of-mouth-incredible-experiences-a.md",
+          "page_path": "synthesis/how-does-act-grow-without-fanfare-through-word-of-mouth-incredible-experiences-a"
+        }
+      },
+      {
+        "stem": "aesthetics-of-asymmetry",
+        "title": "The Aesthetics of Asymmetry",
+        "relative_path": "art/aesthetics-of-asymmetry/aesthetics-of-asymmetry.md",
+        "page_path": "art/aesthetics-of-asymmetry/aesthetics-of-asymmetry",
+        "target": {
+          "stem": "how-does-empathy-ledger-v2-integrate-with-civicgraph-and-justicehub-to-add-the-h",
+          "title": "How does Empathy Ledger v2 integrate with CivicGraph and JusticeHub to add the human layer to the art project?",
+          "relative_path": "synthesis/how-does-empathy-ledger-v2-integrate-with-civicgraph-and-justicehub-to-add-the-h.md",
+          "page_path": "synthesis/how-does-empathy-ledger-v2-integrate-with-civicgraph-and-justicehub-to-add-the-h"
         }
       }
     ],
     "frontmatter_contract_violations": [],
-    "missing_source_summaries": [],
+    "missing_source_summaries": [
+      {
+        "raw_source": "raw/2026-04-14-civicgraph-art-framing-report.md",
+        "suggested_summary": "sources/2026-04-14-civicgraph-art-framing-report.md",
+        "kind": "raw_capture",
+        "priority": "medium",
+        "focus": [
+          "Empathy Ledger",
+          "ACT Regenerative Studio"
+        ]
+      },
+      {
+        "raw_source": "raw/2026-04-14-civicgraph-art-project-deep-research.md",
+        "suggested_summary": "sources/2026-04-14-civicgraph-art-project-deep-research.md",
+        "kind": "raw_capture",
+        "priority": "medium",
+        "focus": [
+          "Empathy Ledger",
+          "ACT Regenerative Studio"
+        ]
+      }
+    ],
     "orphan_source_summaries": []
   },
   "frontmatter_contract_violations": [],

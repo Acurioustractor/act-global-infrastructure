@@ -1,0 +1,278 @@
+{
+  "generatedAt": "2026-04-11T03:30:23.491Z",
+  "githubProject": {
+    "id": "PVT_kwHOCOopjs4BLVik",
+    "name": "ACT Ecosystem Development",
+    "org": "Acurioustractor",
+    "url": "https://github.com/orgs/Acurioustractor/projects/1"
+  },
+  "repoCount": 9,
+  "summary": {
+    "pathExists": 9,
+    "gitRepoExists": 9,
+    "originMatches": 9,
+    "anyRemoteMatches": 9
+  },
+  "repos": [
+    {
+      "name": "ACT Studio",
+      "localPath": "/Users/benknight/Code/act-regenerative-studio",
+      "pathExists": true,
+      "gitRepoExists": true,
+      "configuredGitHubSlugs": [
+        "Acurioustractor/act-regenerative-studio"
+      ],
+      "gitRemotes": [
+        {
+          "name": "origin",
+          "url": "https://github.com/Acurioustractor/act-regenerative-studio.git",
+          "slug": "Acurioustractor/act-regenerative-studio"
+        }
+      ],
+      "originRemote": "https://github.com/Acurioustractor/act-regenerative-studio.git",
+      "originSlug": "Acurioustractor/act-regenerative-studio",
+      "originMatches": true,
+      "anyRemoteMatches": true,
+      "deployment": "Vercel",
+      "linkedProjects": [
+        {
+          "code": "ACT-CORE",
+          "name": "ACT Regenerative Studio",
+          "canonicalSlug": "act-studio",
+          "productionUrl": "https://act.place"
+        }
+      ]
+    },
+    {
+      "name": "Empathy Ledger",
+      "localPath": "/Users/benknight/Code/empathy-ledger-v2",
+      "pathExists": true,
+      "gitRepoExists": true,
+      "configuredGitHubSlugs": [
+        "Acurioustractor/empathy-ledger-v2"
+      ],
+      "gitRemotes": [
+        {
+          "name": "origin",
+          "url": "git@github.com:Acurioustractor/empathy-ledger-v2.git",
+          "slug": "Acurioustractor/empathy-ledger-v2"
+        }
+      ],
+      "originRemote": "git@github.com:Acurioustractor/empathy-ledger-v2.git",
+      "originSlug": "Acurioustractor/empathy-ledger-v2",
+      "originMatches": true,
+      "anyRemoteMatches": true,
+      "deployment": "Vercel",
+      "linkedProjects": [
+        {
+          "code": "ACT-EL",
+          "name": "Empathy Ledger",
+          "canonicalSlug": "empathy-ledger",
+          "productionUrl": "https://www.empathyledger.com"
+        }
+      ]
+    },
+    {
+      "name": "JusticeHub",
+      "localPath": "/Users/benknight/Code/JusticeHub",
+      "pathExists": true,
+      "gitRepoExists": true,
+      "configuredGitHubSlugs": [
+        "Acurioustractor/justicehub-platform"
+      ],
+      "gitRemotes": [
+        {
+          "name": "origin",
+          "url": "https://github.com/Acurioustractor/justicehub-platform.git",
+          "slug": "Acurioustractor/justicehub-platform"
+        }
+      ],
+      "originRemote": "https://github.com/Acurioustractor/justicehub-platform.git",
+      "originSlug": "Acurioustractor/justicehub-platform",
+      "originMatches": true,
+      "anyRemoteMatches": true,
+      "deployment": "Vercel",
+      "linkedProjects": [
+        {
+          "code": "ACT-JH",
+          "name": "JusticeHub",
+          "canonicalSlug": "justicehub",
+          "productionUrl": "https://www.justicehub.com.au"
+        }
+      ]
+    },
+    {
+      "name": "The Harvest",
+      "localPath": "/Users/benknight/Code/The Harvest Website",
+      "pathExists": true,
+      "gitRepoExists": true,
+      "configuredGitHubSlugs": [
+        "Acurioustractor/theharvest"
+      ],
+      "gitRemotes": [
+        {
+          "name": "origin",
+          "url": "https://github.com/Acurioustractor/theharvest.git",
+          "slug": "Acurioustractor/theharvest"
+        }
+      ],
+      "originRemote": "https://github.com/Acurioustractor/theharvest.git",
+      "originSlug": "Acurioustractor/theharvest",
+      "originMatches": true,
+      "anyRemoteMatches": true,
+      "deployment": "Vercel",
+      "linkedProjects": [
+        {
+          "code": "ACT-HV",
+          "name": "The Harvest Witta",
+          "canonicalSlug": "the-harvest",
+          "productionUrl": "https://www.theharvestwitta.com.au"
+        }
+      ]
+    },
+    {
+      "name": "Goods",
+      "localPath": "/Users/benknight/Code/Goods Asset Register",
+      "pathExists": true,
+      "gitRepoExists": true,
+      "configuredGitHubSlugs": [
+        "Acurioustractor/goods-asset-tracker"
+      ],
+      "gitRemotes": [
+        {
+          "name": "origin",
+          "url": "https://github.com/Acurioustractor/goods-asset-tracker.git",
+          "slug": "Acurioustractor/goods-asset-tracker"
+        }
+      ],
+      "originRemote": "https://github.com/Acurioustractor/goods-asset-tracker.git",
+      "originSlug": "Acurioustractor/goods-asset-tracker",
+      "originMatches": true,
+      "anyRemoteMatches": true,
+      "deployment": "Vercel",
+      "linkedProjects": [
+        {
+          "code": "ACT-GD",
+          "name": "Goods",
+          "canonicalSlug": "goods-on-country",
+          "productionUrl": "https://www.goodsoncountry.com"
+        }
+      ]
+    },
+    {
+      "name": "GrantScope",
+      "localPath": "/Users/benknight/Code/grantscope",
+      "pathExists": true,
+      "gitRepoExists": true,
+      "configuredGitHubSlugs": [
+        "Acurioustractor/grantscope"
+      ],
+      "gitRemotes": [
+        {
+          "name": "origin",
+          "url": "git@github.com:Acurioustractor/grantscope.git",
+          "slug": "Acurioustractor/grantscope"
+        }
+      ],
+      "originRemote": "git@github.com:Acurioustractor/grantscope.git",
+      "originSlug": "Acurioustractor/grantscope",
+      "originMatches": true,
+      "anyRemoteMatches": true,
+      "deployment": "Vercel",
+      "linkedProjects": [
+        {
+          "code": "ACT-CS",
+          "name": "Civic Scope",
+          "canonicalSlug": "civicgraph",
+          "productionUrl": "https://civicgraph.app"
+        }
+      ]
+    },
+    {
+      "name": "Palm Island Repository",
+      "localPath": "/Users/benknight/Code/Palm Island Reposistory",
+      "pathExists": true,
+      "gitRepoExists": true,
+      "configuredGitHubSlugs": [
+        "Acurioustractor/palm-island-repository"
+      ],
+      "gitRemotes": [
+        {
+          "name": "origin",
+          "url": "https://github.com/Acurioustractor/palm-island-repository.git",
+          "slug": "Acurioustractor/palm-island-repository"
+        }
+      ],
+      "originRemote": "https://github.com/Acurioustractor/palm-island-repository.git",
+      "originSlug": "Acurioustractor/palm-island-repository",
+      "originMatches": true,
+      "anyRemoteMatches": true,
+      "deployment": "Vercel",
+      "linkedProjects": [
+        {
+          "code": "ACT-PI",
+          "name": "PICC",
+          "canonicalSlug": "picc",
+          "productionUrl": "https://picc.studio"
+        }
+      ]
+    },
+    {
+      "name": "ACT Farm",
+      "localPath": "/Users/benknight/Code/act-farm",
+      "pathExists": true,
+      "gitRepoExists": true,
+      "configuredGitHubSlugs": [
+        "Acurioustractor/act-farm"
+      ],
+      "gitRemotes": [
+        {
+          "name": "origin",
+          "url": "https://github.com/Acurioustractor/act-farm.git",
+          "slug": "Acurioustractor/act-farm"
+        }
+      ],
+      "originRemote": "https://github.com/Acurioustractor/act-farm.git",
+      "originSlug": "Acurioustractor/act-farm",
+      "originMatches": true,
+      "anyRemoteMatches": true,
+      "deployment": "Vercel",
+      "linkedProjects": [
+        {
+          "code": "ACT-FM",
+          "name": "The Farm",
+          "canonicalSlug": "act-farm",
+          "productionUrl": "https://act-farm.vercel.app"
+        }
+      ]
+    },
+    {
+      "name": "ACT Intelligence Platform",
+      "localPath": "/Users/benknight/Code/act-intelligence-platform",
+      "pathExists": true,
+      "gitRepoExists": true,
+      "configuredGitHubSlugs": [
+        "Acurioustractor/act-placemat",
+        "Acurioustractor/act-intelligence-platform"
+      ],
+      "gitRemotes": [
+        {
+          "name": "intelligence",
+          "url": "https://github.com/Acurioustractor/act-intelligence-platform.git",
+          "slug": "Acurioustractor/act-intelligence-platform"
+        },
+        {
+          "name": "origin",
+          "url": "https://github.com/Acurioustractor/act-placemat.git",
+          "slug": "Acurioustractor/act-placemat"
+        }
+      ],
+      "originRemote": "https://github.com/Acurioustractor/act-placemat.git",
+      "originSlug": "Acurioustractor/act-placemat",
+      "originMatches": true,
+      "anyRemoteMatches": true,
+      "deployment": "Vercel",
+      "linkedProjects": []
+    }
+  ]
+}

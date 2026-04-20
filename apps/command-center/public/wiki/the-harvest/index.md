@@ -15,7 +15,7 @@ empathy_ledger_key: the-harvest
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/projects/the-harvest/the-harvest.md`.
-> Regenerated: `2026-04-13T23:53:26.796Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerated: `2026-04-19T23:15:13.420Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # The Harvest / Witta Harvest HQ
 
@@ -131,6 +131,14 @@ Platform routes cover both public visitors and community members:
 | Public | `/`, `/visit`, `/whats-on`, `/venue-hire` | Visitor information |
 | Community | `/stories`, `/witta`, `/enterprises` | Place-based content |
 | Admin | `/admin`, `/admin/photos`, `/my-business` | Operator management |
+
+## Pairings with BCV
+
+The Harvest and [[black-cockatoo-valley|Black Cockatoo Valley]] — 150 acres up the road on Jinibara Country — are a pair, not two venues. Programs run across both sites deliberately, using the Witta kitchen and public hours here and the land, residency, and retreat infrastructure there.
+
+The pairings we run include **monthly dinners at BCV** (Harvest kitchen, BCV table), **paired workshops** that split across the two sites (a preserving workshop growing food at BCV and preserving it in the Harvest kitchen is a canonical example), the **CSA program** using produce from BCV, Witta Farm, and partner farms, and **retreat meal extensions** for groups booked into BCV who want catered meals, a kitchen day, or a workshop series that uses both sites.
+
+Canonical writeup: [[experiences/harvest-pairings|Harvest Pairings]] in the ACT Farm experiences catalog. The pairings strand is how the two sites hold each other up — The Harvest is the public-facing, trading-hours side; BCV is the residential, quiet-hours side; neither one alone is the full program.
 
 ## System Position
 

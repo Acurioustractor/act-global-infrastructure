@@ -59,7 +59,7 @@
 | Workforce | 80%+ Indigenous employment; cultural safety embedded | Low Indigenous representation; high turnover |
 | Scope | CPHC addressing social determinants | Narrow biomedical focus; siloed responses |
 
-Primary success mechanism: **cultural safety** — beyond awareness to a state where the recipient feels respected and safe. For communities with transgenerational trauma, knowing the service is "ours" is a prerequisite for engagement.
+Primary success mechanism: **cultural safety** beyond awareness to a state where the recipient feels respected and safe. For communities with transgenerational trauma, knowing the service is "ours" is a prerequisite for engagement.
 
 ## Structural Challenges
 

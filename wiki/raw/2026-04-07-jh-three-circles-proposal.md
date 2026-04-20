@@ -13,7 +13,7 @@ Australian youth justice has more reports, frameworks, evaluations, peak bodies,
 
 The problem is not absence of evidence. It is that **the evidence, the relationships, and the stories are all held in different rooms**, and the rooms don't talk to each other. Frameworks live in consultancy decks. Stories live in unfunded community organisations. Funding flows live in spreadsheets nobody reads. International models live in academic journals. Indigenous knowledge lives where it has always lived — in country, in elders, in Tuesday afternoon check-ins that no funder has ever counted as governance.
 
-The Justice Reform Initiative is doing important work bringing the establishment voices together. The Frameworks Institute work that excites people in Victoria is doing important work shaping public language. Place-based organisations like Mountie Yarns, Palm Island Community Company and Ntumba are doing the actual work of changing young people's lives.
+The Justice Reform Initiative is doing important work bringing the establishment voices together. The Frameworks Institute work that excites people in Victoria is doing important work shaping public language. Place-based organisations like Mountie Yarns, Palm Island Community Company and Oonchiumpa are doing the actual work of changing young people's lives.
 
 **None of these are connected.** And until they are connected — held in one place, told as one story, building toward one artifact the country can't ignore — youth justice reform in Australia will keep producing the same seesaw: a wave of community work, then a tough-on-crime backlash, then a wave of new strategies, then nothing.
 
@@ -92,11 +92,11 @@ For each of the ten, the program funds:
 
 | # | Community / Org | State | Why |
 |---|---|---|---|
-| 1 | **Ntumba** (Christine/Chrissy) | NT — Alice Springs | 100% Indigenous, 12-family network, hub-and-spoke model on traditional owner country |
+| 1 | **Oonchiumpa** (Kristy Bloomfield + Tanya Turner co-directors; Aunty Bev + Uncle Terry elder authority; Fred Campbell youth worker) | Mparntwe (Alice Springs), NT | 100% Indigenous, 12-family network, hub-and-spoke model on traditional owner country |
 | 2 | **Palm Island Community Company** | QLD — Palm Island | Community-owned, leading lateral violence work, deep cultural authority |
 | 3 | **Mountie Yarns** | NSW — Mt Druitt / Sydney | Contained base camp partner, NSW peak body convening, advocacy infrastructure |
 | 4 | **Tennant Creek (William Junta + community shed)** | NT — Barkly | Housing + enterprise crossover, under-resourced and under-seen |
-| 5 | **Minjerra Bastow Burke** | NSW — Mid North Coast | Powerful, supported, completely disconnected from the sector — exactly the gap |
+| 5 | **Minjerribah Moorgumpin Elders-in-Council Aboriginal Corporation (MMEIC)** | Minjerribah (North Stradbroke Island), QLD — Quandamooka country | Cultural organisation founded 1993. Real elder governance hidden by admin gap. *(Consolidates old rows 5 + 6 — same organisation, previously listed separately in error.)* |
 | 6 | **Stradbroke Island (oyster + elder governance partner)** | QLD — Quandamooka | Real governance hidden by admin gap — model for "what governance actually looks like" |
 | 7 | **Tasmanian community partner** (TBC via JRI / Diagrama network) | TAS | The "we don't need detention" proof site |
 | 8 | **ACT community partner** (TBC) | ACT | Two children in detention — closest jurisdiction to abolition |

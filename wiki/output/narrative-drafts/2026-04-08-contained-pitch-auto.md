@@ -66,7 +66,7 @@ Investor language. Lead with the delivered cost number, the decision band, the h
 - **Never said publicly.** Lives entirely in the internal pitch document. Has never appeared on a website, in an essay, in a funder deck.
 - Never used as the **funder challenge** — *"Most enterprises you have funded called themselves community-led. Here is the four-checkpoint test ours has signed. Ask theirs to do the same."*
 - Never connected to the **measurement honesty** frame — most "Indigenous-led" claims fail this test and no one is asking
-- Never said in Christine ("Chrissy") / Ntumba elders' voices — currently this is a Ben + Nick framing, signed *by* community but spoken *to* community
+- Never said in Christine ("Chrissy") / Oonchiumpa elders' voices — currently this is a Ben + Nick framing, signed *by* community but spoken *to* community
 - Never used at a sector convening — *"This is what community ownership looks like when it is actually measured."*
 - Never connected back to **OCAP principles** (Ownership, Control, Access, Possession) — the four checkpoints are essentially a procurement-readable OCAP test, never said that way
 
@@ -94,7 +94,7 @@ Investor language. Lead with the delivered cost number, the decision band, the h
 **Audience reactions on file (use as social proof if relevant):**
 
 - Pending — has been said in essays but never logged as a public post yet
-- The Ntumba checkpoint document is a *signed*-for-community version of this argument
+- The Oonchiumpa checkpoint document is a *signed*-for-community version of this argument
 
 ## Drafting instructions
 
