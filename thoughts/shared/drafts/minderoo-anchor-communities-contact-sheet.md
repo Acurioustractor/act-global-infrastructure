@@ -80,38 +80,51 @@ consent_basis:
 ### VIC (0 confirmed; one seat)
 
 **Recommended:** Rumbalara Aboriginal Co-Operative Limited · Greater Shepparton · 46 years operating · top score **0.803** · broad service spine (health + youth + football/netball).
+· *Contact:* contact@raclimited.com.au · (03) 5820 0000
 
 **Alternatives:**
-- Victorian Aboriginal Child and Community Agency (VACCA) · Darebin · 48 years · Indigenous-led evidence tier · top score 0.743
-- Wathaurong Aboriginal Co-Operative Ltd · Greater Geelong · 46 years · top score 0.743
-- Victorian Aboriginal Health Service (VAHS) · Yarra · 52 years · top score 0.743
+- Wurundjeri Woi-wurrung Cultural Heritage Aboriginal Corporation · Registered Aboriginal Party under Vic Heritage Act · *reception@wurundjeri.com.au · (03) 9416 2905*
+- Ramahyuck District Aboriginal Corporation · Gippsland · broad community services · *reception@ramahyuck.org · (03) 5143 1644*
+- Victorian Aboriginal Health Service (VAHS) · Yarra · 52 years · top score 0.743 · *info@vahs.org.au*
+- Koorie Youth Council · youth-led statewide · *admin@koorieyouth.org.au · (03) 9267 3724*
 
 ### WA (0 confirmed; one seat)
 
-**Recommended:** Kullarri Regional Communities Indigenous Corporation · Derby-West Kimberley · 9 years · top score 0.708 · FASD-specific programs · most geographically remote WA option (complements BG Fit's Doomadgee reach).
+**Recommended:** Olabud Doogethu Aboriginal Corporation · Halls Creek · **justice reinvestment anchor** (model ACT has referenced); complements BG Fit's Doomadgee remote reach.
+· *Contact:* via Shire of Halls Creek · 03 9215 6862
 
 **Alternatives:**
-- Dumbartung Aboriginal Corporation · South Perth · 38 years · Indigenous-led evidence tier · top score 0.653
-- Yorgum Healing Services Aboriginal Corporation · Vincent (Perth metro) · 32 years · top score 0.653
-- Potential Hailey / UWA criminology-facilitated introduction if Minderoo prefers a metro option
+- Marra Worra Worra Aboriginal Corporation · Fitzroy Crossing · largest Kimberley resource agency · *feedback@mww.org.au · (08) 9193 0600*
+- Kullarri Regional Communities Indigenous Corporation · Derby-West Kimberley · 9 years · FASD-specific · *enquiries@krci.org.au · (08) 9194 1900*
+- Dumbartung Aboriginal Corporation · South Perth · 38 years · Indigenous-led · *kyana1@dumbartung.org.au · (08) 9451 4977*
+- Yorgum Healing Services Aboriginal Corporation · Perth metro · 32 years · *lsellers@yorgum.org.au · (08) 9218 9477*
+- Geraldton Sporting Aboriginal Corporation · Mid-West WA · *(08) 9964 5113*
 
 ### SA (0 confirmed; one seat)
 
-**Recommended:** Aboriginal Drug and Alcohol Council (SA) Aboriginal Corporation · West Torrens · 9 years · top score 0.743 · only strong community-led SA candidate in the data spine's top tier.
+**Recommended:** Scotdesco Aboriginal Corporation · Far West Coast SA · ORIC-active community-controlled corp.
+· *Contact:* office@scotdesco.com.au · (08) 8625 6222
 
-**Research-candidate pool:** 107 community-controlled Indigenous corps in SA awaiting deeper research. Session 1 flags SA as the state where outreach timeline may extend beyond Session 2.
+**Alternatives:**
+- Yalata Anangu Aboriginal Corporation · Far West Coast SA · remote community · *contact@yalata.com.au · (08) 8625 6040*
+- Koonibba Community Aboriginal Corporation · Far West Coast SA (Ceduna) · *(contact via agent-research brief)*
+- Aboriginal Drug and Alcohol Council (SA) Aboriginal Corporation · West Torrens · 9 years · ALMA top score 0.743
 
 ### TAS (0 confirmed; one seat)
 
 **Recommended:** Aboriginal and Torres Strait Islander Legal Service Tasmania (ATSILS) · top score 0.713 · strongest community-led TAS option.
+· *Contact:* tals@tals.net.au · 1800 595 162
 
-**Alternative:** Tasmanian Aboriginal Corporation (Tasmanian Aboriginal Centre) · Hobart · 9 years · top score 0.653
-
-**Research-candidate pool:** 20 additional community-controlled Indigenous corps in TAS. TAS is the thinnest state overall; extended consent timeline likely.
+**Alternatives:**
+- Tasmanian Aboriginal Corporation (Tasmanian Aboriginal Centre) · Hobart · *heather.s@tacinc.com.au · 1800 132 260*
+- Circular Head Aboriginal Corporation · North-West TAS · *(see research brief)*
+- First Tasmanians Aboriginal Corporation (FTAC) · *(see research brief — ABN 89371379452)*
+- Ballawinne Aboriginal Corporation · *(see research brief — ABN 55131350525)*
 
 ### ACT (0 confirmed; one seat)
 
 **Recommended:** Gugan Gulwan Youth Aboriginal Corporation · 33 years operating · top score 0.653 · **the only explicitly youth-dedicated Aboriginal Community Controlled org in the ACT**.
+· *Contact:* aliesha@gugan-gulwan.com.au · (02) 6296 8900
 
 **Decision needed in Session 1:** does ACT territory get its own anchor seat (reaches 8 total) or does its young people get served via Mounty Yarns' NSW network (stays at 7)?
 
