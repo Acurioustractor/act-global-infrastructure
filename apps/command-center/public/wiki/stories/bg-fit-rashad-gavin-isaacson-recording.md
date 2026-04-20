@@ -15,7 +15,7 @@ el_v2_match_via: "org:bg-fit"
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/stories/bg-fit-rashad-gavin-isaacson-recording.md`.
-> Regenerated: `2026-04-20T04:24:58.547Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerated: `2026-04-20T19:41:39.283Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 # Rashad Gavin Isaacson - Recording
 
 > Rashad Gavin Isaacson

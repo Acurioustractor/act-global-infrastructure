@@ -7,7 +7,7 @@ series: judges-on-country-postcards
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/stories/atnarpa-boys-trip.md`.
-> Regenerated: `2026-04-20T04:24:58.547Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerated: `2026-04-20T19:41:39.283Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # Atnarpa Station Cultural Learning - Boys Trip
 

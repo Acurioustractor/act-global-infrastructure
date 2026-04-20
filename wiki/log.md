@@ -18,6 +18,8 @@ Helper: `node scripts/wiki-log.mjs <op> "<summary>" [files...]`
 
 ## 2026
 
+- 2026-04-20 05:41 | viewer-build | 257 articles · 89 photo maps · 1836KB | tools/act-wikipedia.html
+- 2026-04-20 05:41 | snapshot-sync | 23 direct mirrors · 55 stories · 4 wrappers | apps/command-center/public/wiki/README.md, apps/command-center/public/wiki/snapshot-meta.json
 - 2026-04-19 09:15 | viewer-build | 257 articles · 88 photo maps · 1774KB | tools/act-wikipedia.html
 - 2026-04-19 09:15 | snapshot-sync | 23 direct mirrors · 55 stories · 4 wrappers | apps/command-center/public/wiki/README.md, apps/command-center/public/wiki/snapshot-meta.json
 - 2026-04-19 09:00 | lint | 257 canonical articles · 34 broken links · 26 orphans · 99% source-bridge coverage | wiki/output/lint-2026-04-19.md, wiki/output/status-latest.json
