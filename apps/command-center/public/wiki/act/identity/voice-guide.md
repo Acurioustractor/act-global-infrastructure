@@ -5,7 +5,7 @@ status: Active
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/concepts/voice-guide.md`.
-> Regenerated: `2026-04-20T04:13:12.976Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerated: `2026-04-20T04:24:58.547Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # ACT Voice Guide
 

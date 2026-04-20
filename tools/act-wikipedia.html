@@ -18397,7 +18397,7 @@ If those three things do not emerge, the cycle stays in reflection and has not y
     links: ["../../synthesis/the-kettle","three-circles","diagrama","projects/justicehub/README","justicehub","empathy-ledger","../../technical/wiki-project-and-work-sync-contract","../../concepts/living-website-operating-system","the-brave-ones","contained","the-edge-is-where-the-healing-is-justicehub-as-the-world-model-for-community-led","oonchiumpa","picc","lcaa-method","third-reality","y1-release-program"],
     content: `# Staying — Country & Council
 
-> 📖 **The flagship reflection for STAY lives at [[../../synthesis/the-kettle|The Kettle]].** Read that first if you want the *why* in Ben's voice — the room at Oonchiumpa, Diagrama, and the four-layer infrastructure that makes the kettle legible.
+> **The flagship reflection for STAY lives at [[../../synthesis/the-kettle|The Kettle]].** Read that first if you want the *why* in Ben's voice — the room at Oonchiumpa, Diagrama, and the four-layer infrastructure that makes the kettle legible.
 
 > ⚠️ **2026-04-08 framing change.** This page was originally drafted as a standalone Minderoo pitch. After review of the canonical Three Circles proposal (\`wiki/raw/2026-04-07-jh-three-circles-proposal.md\`) — which Lucy Stronach is already warm on at $2.9M / 3 years with 10 anchor communities — **Staying has been reframed as the *methodology layer* inside Three Circles, not a competing pitch.**
 >
@@ -22168,8 +22168,8 @@ These are the seven methods the program runs on. Each one has its own page in th
 
 | Lane | Meaning |
 |---|---|
-| ⚡ **Drive** | Connect the PTO now. Maximum 3 projects. |
-| 🌱 **Field** | Planted. Not powered yet. Hold the line. |
+| **Drive** | Connect the PTO now. Maximum 3 projects. |
+| **Field** | Planted. Not powered yet. Hold the line. |
 | 🔧 **Shed** | Park, sunset, or hand over. |
 
 **The 90-day Furrow Plan** — six tracks every diagnostic ends in: Mission, Revenue, People, Product, Partnerships, Rhythm. Each one with an action verb, a target, and the proof it landed.
@@ -27871,6 +27871,18 @@ function showArtPortfolio() {
       }
     });
   });
+  // Now async-load real photos for each card. fetchELMedia(slug) handles project_id + filename fallback.
+  artProjects.forEach(function(p) {
+    fetchELMedia(p.slug, 1).then(function(media) {
+      let el = document.getElementById('art-thumb-' + p.slug);
+      if (!el) return;
+      if (media && media.length > 0) {
+        el.innerHTML = '<img src="' + media[0].url + '" style="width:100%;height:100%;object-fit:cover;" alt="' + (media[0].title || p.name) + '">';
+      } else {
+        el.innerHTML = '<div style="text-align:center;padding:20px;"><div style="font-size:11px;text-transform:uppercase;letter-spacing:0.05em;color:#aaa;">photos coming soon</div><div style="font-size:11px;color:#bbb;margin-top:4px;">tag in Empathy Ledger</div></div>';
+      }
+    });
+  });
 <<<<<<< Updated upstream
 =======
   // Now async-load real photos for each card. fetchELMedia(slug) handles project_id + filename fallback.
@@ -28567,6 +28579,10 @@ function handleHash() {
   let hash = window.location.hash.substring(1);
   if (!hash) {
     showMainPage();
+    return;
+  }
+  if (hash === 'art-portfolio') {
+    showArtPortfolio();
     return;
   }
   if (hash === 'art-portfolio') {
