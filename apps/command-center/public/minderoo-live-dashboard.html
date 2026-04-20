@@ -1172,12 +1172,19 @@
         const isAnchor = anchorIds.has(r.gs_entity_id);
         const anchorBadge = isAnchor ? ' <span class="chip chip-live" style="font-size:9px">★ ANCHOR</span>' : '';
         const score = r.portfolio_score && parseFloat(r.portfolio_score) > 0 ? r.portfolio_score : '';
+        const contactBits = [];
+        if (r.contact_email) contactBits.push('<a href="mailto:' + r.contact_email + '" class="text-emerald-700 hover:underline">✉ ' + r.contact_email + '</a>');
+        if (r.contact_phone) contactBits.push('<span class="text-stone-600">☎ ' + r.contact_phone + '</span>');
+        if (r.contact_website) contactBits.push('<a href="' + r.contact_website + '" target="_blank" class="text-sky-700 hover:underline">↗ site</a>');
+        const sizeBadge = r.oric_size ? ' <span class="text-[9px] text-stone-500 ml-1">[' + r.oric_size + ']</span>' : '';
+        const contactLine = contactBits.length ? '<div class="text-[10px] text-stone-600 mt-0.5">' + contactBits.join(' · ') + '</div>' : '';
         return '<tr class="ledger-row border-t border-stone-100">' +
           '<td class="px-2 py-2 font-mono text-[10px] text-stone-500">' + (i+1) + '</td>' +
           '<td class="px-2 py-2">' +
-            '<div class="font-medium">' + (r.org_name || '').slice(0,90) + anchorBadge + '</div>' +
+            '<div class="font-medium">' + (r.org_name || '').slice(0,90) + anchorBadge + sizeBadge + '</div>' +
             (r.lga_name && r.lga_name !== '-' ? '<div class="text-[10px] text-stone-500">' + r.lga_name + '</div>' : '') +
             (r.years_operating ? '<div class="text-[10px] text-stone-500">' + r.years_operating + ' years</div>' : '') +
+            contactLine +
           '</td>' +
           '<td class="px-2 py-2 text-[10px]">' + (r.state_norm || '') + '</td>' +
           '<td class="px-2 py-2">' + sourceChip(r.source) + '</td>' +
