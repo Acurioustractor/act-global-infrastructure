@@ -69,6 +69,35 @@
     body { background: white; }
     .section { padding: 40px 0; page-break-inside: avoid; }
   }
+  /* Empathy Ledger embed — consent markers attached to every media block */
+  .el-embed { position: relative; }
+  .el-embed-media { border-radius: 12px; overflow: hidden; background: var(--m-cream-2); display: block; }
+  .el-embed-media img, .el-embed-media iframe { display: block; width: 100%; }
+  .el-consent-strip {
+    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+    background: white; border: 1px solid var(--m-divider); border-top: 0;
+    border-radius: 0 0 12px 12px;
+    padding: 10px 14px;
+    font-size: 11px; color: var(--m-stone-soft);
+    margin-top: -1px;
+  }
+  .el-embed-media { border-radius: 12px 12px 0 0; }
+  .el-consent-strip.standalone { border-radius: 0 0 12px 12px; }
+  .el-consent-name { color: var(--m-stone); font-weight: 600; }
+  .el-consent-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; }
+  .el-consent-chip { display: inline-flex; align-items: center; gap: 5px; padding: 2px 8px; border-radius: 999px; font-size: 10px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; }
+  .el-consent-chip.active { background: rgba(74,107,58,0.1); color: var(--earth-grass); }
+  .el-consent-chip.awaiting { background: rgba(240,185,58,0.15); color: #8a6f20; }
+  .el-consent-chip.withdrawn { background: rgba(138,84,40,0.1); color: var(--earth-country); font-style: italic; }
+  .el-edit-hint {
+    position: absolute; top: 8px; right: 8px;
+    background: rgba(0,0,0,0.6); color: white; font-family: ui-monospace, monospace;
+    font-size: 10px; padding: 3px 8px; border-radius: 4px;
+    opacity: 0; transition: opacity 0.2s;
+    pointer-events: none;
+  }
+  body.edit-mode .el-embed:hover .el-edit-hint { opacity: 1; pointer-events: auto; }
+  body.edit-mode .el-embed { outline: 2px dashed var(--m-purple-lite); outline-offset: 2px; }
 </style>
 </head>
 <body>
@@ -117,10 +146,8 @@
 <!-- OPENING IMAGE ====================================================== -->
 <section class="section-sm">
   <div class="container">
-    <div class="image-frame">
-      <img class="hero-photo" src="https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/media/d0a162d2-282e-4653-9d12-aa934c9dfa4e/1770667725446_20251103-1E5A5101.jpg" alt="Young people on Country at Atnarpa, under Oonchiumpa's leadership" loading="lazy">
-    </div>
-    <p class="caption text-center mt-4">Atnarpa · Eastern Arrernte Country · young people on Country with Oonchiumpa · Empathy Ledger v2 · consent current, revocable, held by community.</p>
+    <!-- Swap the photo here: change data-el-story to any story UUID in minderoo-consent-snapshot.json -->
+    <div class="el-embed" data-el-story="128e7ad5-b0c7-4b0d-8ada-878e0d8f0a03" data-el-variant="hero"></div>
   </div>
 </section>
 
@@ -274,10 +301,15 @@
   </div>
 </section>
 
-<!-- EL STORY WIDGET — reusable vanilla JS that reads minderoo-consent-snapshot.json -->
+<!-- EL STORY WIDGET — reusable vanilla JS that reads minderoo-consent-snapshot.json
+     Two render modes:
+     1. Grid cards section:       document.getElementById('el-stories-grid') driven by EL_STORY_IDS
+     2. Declarative inline media: any [data-el-story="<uuid>" data-el-variant="hero|portrait|video"] renders as photo/video + consent strip
+
+     Edit mode: append ?edit=1 to the URL to show dashed outlines + hover labels
+     revealing each slot's UUID. Click any slot in edit mode to open a UUID picker. -->
 <script>
-  // Which stories to feature — edit this list to change the embed.
-  // UUIDs map to entries in /minderoo-consent-snapshot.json (curated from EL v2).
+  // Which stories to feature in the 6-card grid section.
   const EL_STORY_IDS = [
     "6ac1fc12-f6fa-4dd6-930b-9159f692b04d", // Oonchiumpa · Kristy · What happens when community leads
     "2005424d-3969-41b2-8bb7-163ea6a46ec8", // Oonchiumpa · Aunty Bev & Uncle Tony
@@ -287,29 +319,91 @@
     "b3dfcec7-ee70-477f-83af-58cc870c199a"  // Mounty Yarns · video
   ];
 
+  const MODE_COLOUR = {
+    'to-authority': 'var(--earth-grass)',
+    'selective': 'var(--m-orange)',
+    'elders-in-council': 'var(--m-purple)',
+    'ceo-as-elder': 'var(--earth-sky)',
+    'non-to-per-story': 'var(--m-gold)'
+  };
+
+  function elStatusChip(status) {
+    if (status === 'active') return '<span class="el-consent-chip active">Active</span>';
+    if (status === 'awaiting_elder') return '<span class="el-consent-chip awaiting">Awaiting elder</span>';
+    if (status === 'withdrawn') return '<span class="el-consent-chip withdrawn">Withdrawn</span>';
+    return '';
+  }
+
+  function elConsentStrip(story, standalone) {
+    if (!story) return '';
+    const modeColor = (story.elder && story.elder.mode) ? (MODE_COLOUR[story.elder.mode] || 'var(--m-purple)') : 'var(--m-purple)';
+    const name = (story.storyteller && story.storyteller.name) || '—';
+    const mode = (story.elder && story.elder.mode_label) || (story.elder && story.elder.mode) || '';
+    const date = (story.elder && story.elder.approved_at) || (story.consent && story.consent.last_verified) || '';
+    const status = (story.consent && story.consent.status) || 'active';
+    return `
+      <div class="el-consent-strip ${standalone ? 'standalone' : ''}" title="Held in Empathy Ledger v2 · 12-gate OCAP chain · revocable within 24 hours">
+        <span class="el-consent-dot" style="background:${modeColor}"></span>
+        <span class="el-consent-name">${name}</span>
+        ${story.organisation ? `<span>· ${story.organisation}</span>` : ''}
+        ${mode ? `<span>· <span style="color:${modeColor};font-weight:500">${mode}</span></span>` : ''}
+        ${date ? `<span>· ${date}</span>` : ''}
+        ${elStatusChip(status)}
+        <span style="margin-left:auto;font-size:10px;color:var(--m-stone-soft);text-transform:uppercase;letter-spacing:0.1em">EL v2 · revocable</span>
+      </div>
+    `;
+  }
+
+  function elMediaHtml(story, variant) {
+    if (!story) return '';
+    if (variant === 'video' || (story.media && story.media.video_embed)) {
+      const url = (story.media && story.media.video_embed) || '';
+      const embed = url.replace('/view/', '/embed/');
+      return `<div class="el-embed-media" style="aspect-ratio:16/9;background:var(--m-stone)"><iframe src="${embed}" allowfullscreen style="width:100%;height:100%;border:0"></iframe></div>`;
+    }
+    const ratio = variant === 'portrait' ? '4/5' : variant === 'square' ? '1/1' : '16/9';
+    if (story.media && story.media.hero) {
+      return `<div class="el-embed-media" style="aspect-ratio:${ratio}"><img src="${story.media.hero}" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover"></div>`;
+    }
+    const note = (story.storyteller && story.storyteller.portrait_note) || 'Photo consent pending for print · text-only card';
+    return `<div class="el-embed-media" style="aspect-ratio:${ratio};display:flex;align-items:center;justify-content:center;color:var(--m-stone-soft);font-size:12px;font-style:italic;padding:20px;text-align:center">${note}</div>`;
+  }
+
+  function elEditHint(story, el) {
+    const id = el.getAttribute('data-el-story') || '';
+    const short = id.slice(0, 8);
+    return `<div class="el-edit-hint">UUID ${short} · ${(story && story.title) || 'unknown'}</div>`;
+  }
+
   async function loadEmpathyLedgerStories() {
-    const grid = document.getElementById('el-stories-grid');
-    if (!grid) return;
     let data;
     try {
       const r = await fetch('/minderoo-consent-snapshot.json?v=' + Date.now());
       if (!r.ok) throw new Error('snapshot load failed');
       data = await r.json();
     } catch (err) {
-      grid.innerHTML = '<div class="col-span-full text-center py-10 text-sm text-stone-500 italic">Stories temporarily unavailable — content owned by community, returning shortly.</div>';
+      const grid = document.getElementById('el-stories-grid');
+      if (grid) grid.innerHTML = '<div class="col-span-full text-center py-10 text-sm text-stone-500 italic">Stories temporarily unavailable — content owned by community, returning shortly.</div>';
       return;
     }
-
-    // Map id → story
     const byId = Object.fromEntries((data.stories || []).map(s => [s.el_v2_story_id, s]));
-    const MODE_COLOUR = {
-      'to-authority': 'var(--earth-grass)',
-      'selective': 'var(--m-orange)',
-      'elders-in-council': 'var(--m-purple)',
-      'ceo-as-elder': 'var(--earth-sky)',
-      'non-to-per-story': 'var(--m-gold)'
-    };
+    window.__EL_SNAPSHOT__ = { byId, stories: data.stories || [] };
 
+    // --- Pattern 2: populate any [data-el-story] slots anywhere on the page ---
+    document.querySelectorAll('.el-embed[data-el-story]').forEach(el => {
+      const id = el.getAttribute('data-el-story');
+      const variant = el.getAttribute('data-el-variant') || 'hero';
+      const story = byId[id];
+      if (!story) {
+        el.innerHTML = `<div class="el-embed-media" style="aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;color:var(--m-stone-soft);font-size:11px;font-style:italic">Story ${id.slice(0,8)} not in current snapshot</div>`;
+        return;
+      }
+      el.innerHTML = elMediaHtml(story, variant) + elConsentStrip(story, false) + elEditHint(story, el);
+    });
+
+    // --- Pattern 1: populate the 6-card grid section ---
+    const grid = document.getElementById('el-stories-grid');
+    if (!grid) return;
     const cards = EL_STORY_IDS.map(id => {
       const s = byId[id];
       if (!s) return '';
@@ -371,10 +465,43 @@
     grid.innerHTML = cards || '<div class="col-span-full text-center py-10 text-sm text-stone-500 italic">No storyteller posts matched the IDs in this page.</div>';
   }
 
+  // --- Edit mode: append ?edit=1 to URL for dashed outlines + swap dropdowns on every slot ---
+  function enableEditMode() {
+    document.body.classList.add('edit-mode');
+    const snap = window.__EL_SNAPSHOT__;
+    if (!snap || !snap.stories.length) return;
+    const opts = snap.stories.map(s => `<option value="${s.el_v2_story_id}">${(s.storyteller && s.storyteller.name) || '—'} · ${(s.title || '').slice(0, 40)}</option>`).join('');
+    document.querySelectorAll('.el-embed[data-el-story]').forEach(el => {
+      const current = el.getAttribute('data-el-story');
+      const picker = document.createElement('div');
+      picker.style.cssText = 'position:absolute;top:8px;left:8px;z-index:10;background:white;border:1px solid var(--m-purple-lite);border-radius:6px;padding:4px;display:flex;gap:4px;align-items:center;font-family:ui-monospace,monospace;font-size:10px;box-shadow:0 2px 8px rgba(0,0,0,0.15)';
+      picker.innerHTML = `<select style="font-size:10px;padding:2px 4px;border:0;background:transparent;max-width:220px">${opts}</select>`;
+      const sel = picker.querySelector('select');
+      sel.value = current;
+      sel.addEventListener('change', (e) => {
+        el.setAttribute('data-el-story', e.target.value);
+        const story = snap.byId[e.target.value];
+        const variant = el.getAttribute('data-el-variant') || 'hero';
+        el.innerHTML = elMediaHtml(story, variant) + elConsentStrip(story, false) + elEditHint(story, el);
+        el.appendChild(picker);
+      });
+      el.appendChild(picker);
+    });
+    const banner = document.createElement('div');
+    banner.style.cssText = 'position:fixed;bottom:20px;right:20px;background:var(--m-purple);color:white;padding:10px 16px;border-radius:8px;font-size:12px;font-family:ui-sans-serif,system-ui,sans-serif;box-shadow:0 4px 16px rgba(74,37,96,0.3);z-index:100;max-width:260px';
+    banner.innerHTML = '<div style="font-weight:600;margin-bottom:4px">Edit mode · live</div><div style="font-size:11px;opacity:0.8">Every photo/video slot is a dropdown. Pick a different storyteller post from the snapshot.</div>';
+    document.body.appendChild(banner);
+  }
+
+  async function bootELWidget() {
+    await loadEmpathyLedgerStories();
+    if (new URLSearchParams(window.location.search).get('edit') === '1') enableEditMode();
+  }
+
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', loadEmpathyLedgerStories);
+    document.addEventListener('DOMContentLoaded', bootELWidget);
   } else {
-    loadEmpathyLedgerStories();
+    bootELWidget();
   }
 </script>
 
@@ -433,10 +560,8 @@
   <div class="container">
     <div class="grid grid-cols-1 md:grid-cols-5 gap-10 items-start">
       <div class="md:col-span-2">
-        <div class="image-frame mb-4">
-          <img class="portrait-photo" src="https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/profile-images/storytellers/kristy_bloomfield.jpg" alt="Kristy Bloomfield" loading="lazy">
-        </div>
-        <p class="caption">Kristy Bloomfield · Central Arrernte / Eastern Arrernte / Alyawarra · Traditional Owner of Mparntwe · co-founder Oonchiumpa.</p>
+        <!-- Circle One hero portrait — swap by changing data-el-story -->
+        <div class="el-embed" data-el-story="6ac1fc12-f6fa-4dd6-930b-9159f692b04d" data-el-variant="portrait"></div>
       </div>
       <div class="md:col-span-3">
         <div class="circle-pill pill-1 mb-5">Circle One · The Centre</div>
@@ -478,10 +603,8 @@
   <div class="container">
     <div class="grid grid-cols-1 md:grid-cols-5 gap-10 items-start">
       <div class="md:col-span-3 md:order-2">
-        <div class="image-frame mb-4">
-          <img class="hero-photo" src="https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/media/d0a162d2-282e-4653-9d12-aa934c9dfa4e/1774178027815_1E5A2170.jpg" alt="Oonchiumpa at Atnarpa" loading="lazy">
-        </div>
-        <p class="caption">Atnarpa Outstation · Loves Creek Station · 80km east of Mparntwe · where the National Judicial College made the on-Country day foundational.</p>
+        <!-- Circle Two hero landscape — swap by changing data-el-story -->
+        <div class="el-embed" data-el-story="128e7ad5-b0c7-4b0d-8ada-878e0d8f0a03" data-el-variant="hero"></div>
       </div>
       <div class="md:col-span-2 md:order-1">
         <div class="circle-pill pill-2 mb-5">Circle Two · The Ring</div>
@@ -524,10 +647,8 @@
   <div class="container">
     <div class="grid grid-cols-1 md:grid-cols-5 gap-10 items-start">
       <div class="md:col-span-2">
-        <div class="image-frame mb-4">
-          <img class="portrait-photo" src="https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/media/d0a162d2-282e-4653-9d12-aa934c9dfa4e/1770938042769_20250409-IMG_3838.jpg" alt="Benji · young person · Mount Isa" loading="lazy">
-        </div>
-        <p class="caption">Benji · young person · Mount Isa · on why he trusts Brodie Germaine at BG Fit: "He right. That big fell. He know half of the black people. That's why."</p>
+        <!-- Circle Three hero portrait — swap by changing data-el-story -->
+        <div class="el-embed" data-el-story="b68e2760-648c-4c07-b2b0-b6f6d46f6bfc" data-el-variant="portrait"></div>
       </div>
       <div class="md:col-span-3">
         <div class="circle-pill pill-3 mb-5">Circle Three · The Edge</div>
@@ -1010,6 +1131,9 @@
         <div class="eyebrow mb-3" style="color:var(--m-gold)">The working dashboard</div>
         <p class="text-sm mb-4 leading-relaxed" style="color:rgba(255,255,255,0.85)">Every piece of proof in this pitch — the five anchor communities, the story corpus under 12-gate OCAP consent, the Australian Living Map of Alternatives, the judicial endorsement, the live consent markers — is visible at the working dashboard. Updates between Sessions 1 and 2.</p>
         <a href="/minderoo-live-dashboard.html" class="inline-flex items-center gap-2 text-sm font-medium px-5 py-3 rounded-lg" style="background:var(--m-gold);color:var(--m-stone)">Open the working dashboard →</a>
+        <div class="mt-6 text-xs" style="color:rgba(255,255,255,0.55)">
+          <a href="?edit=1#top" style="color:rgba(255,255,255,0.7);text-decoration:underline;text-underline-offset:3px">Enter edit mode</a> to swap any photo or video on this page — every media slot reveals a dropdown showing all storyteller posts from Empathy Ledger v2.
+        </div>
       </div>
       <div>
         <div class="eyebrow mb-3" style="color:var(--m-gold)">Contact + authorship</div>
