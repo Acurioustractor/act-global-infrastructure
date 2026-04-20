@@ -83,7 +83,13 @@
         "recent_qld_funding": 0,
         "funded_program_count": 0,
         "linkage_strength": "strong_linkage",
-        "verification_score": 3
+        "verification_score": 3,
+        "contact_email": "aliesha@gugan-gulwan.com.au",
+        "contact_phone": "(02) 6296 8900",
+        "contact_website": null,
+        "oric_size": "Medium",
+        "oric_status": "Registered",
+        "oric_url": null
       },
       {
         "state": "ACT",
@@ -102,7 +108,10 @@
         "recent_qld_funding": 0,
         "funded_program_count": 0,
         "linkage_strength": "strong_linkage",
-        "verification_score": 4
+        "verification_score": 4,
+        "contact_email": null,
+        "contact_phone": "(03) 9480 7777",
+        "contact_website": "https://www.aal.org.au"
       },
       {
         "state": "ACT",
@@ -121,7 +130,10 @@
         "recent_qld_funding": 680704.54,
         "funded_program_count": 3,
         "linkage_strength": "funded_no_alma",
-        "verification_score": 2
+        "verification_score": 2,
+        "contact_email": "hello@calleoindigenous.com.au",
+        "contact_phone": "02 6223 2002",
+        "contact_website": null
       },
       {
         "state": "ACT",
@@ -140,7 +152,10 @@
         "recent_qld_funding": 277308,
         "funded_program_count": 1,
         "linkage_strength": "funded_no_alma",
-        "verification_score": 2
+        "verification_score": 2,
+        "contact_email": "info@callida-indigenous.com.au",
+        "contact_phone": "02 6162 3339",
+        "contact_website": null
       },
       {
         "state": "ACT",
@@ -159,7 +174,10 @@
         "recent_qld_funding": 95000,
         "funded_program_count": 1,
         "linkage_strength": "funded_no_alma",
-        "verification_score": 2
+        "verification_score": 2,
+        "contact_email": null,
+        "contact_phone": null,
+        "contact_website": null
       },
       {
         "state": "ACT",
@@ -178,7 +196,10 @@
         "recent_qld_funding": 72916.8,
         "funded_program_count": 2,
         "linkage_strength": "funded_no_alma",
-        "verification_score": 2
+        "verification_score": 2,
+        "contact_email": null,
+        "contact_phone": null,
+        "contact_website": null
       },
       {
         "state": "ACT",
@@ -197,7 +218,10 @@
         "recent_qld_funding": 31214.04,
         "funded_program_count": 1,
         "linkage_strength": "funded_no_alma",
-        "verification_score": 2
+        "verification_score": 2,
+        "contact_email": null,
+        "contact_phone": null,
+        "contact_website": null
       },
       {
         "state": "ACT",
@@ -216,7 +240,10 @@
         "recent_qld_funding": 11000,
         "funded_program_count": 1,
         "linkage_strength": "funded_no_alma",
-        "verification_score": 2
+        "verification_score": 2,
+        "contact_email": null,
+        "contact_phone": null,
+        "contact_website": null
       },
       {
         "state": "ACT",
@@ -235,7 +262,13 @@
         "recent_qld_funding": 0,
         "funded_program_count": 0,
         "linkage_strength": "weak_linkage_with_website",
-        "verification_score": 2
+        "verification_score": 2,
+        "contact_email": "ceo@atsiva.au",
+        "contact_phone": "(02) 6110 2017",
+        "contact_website": "atsiva.au",
+        "oric_size": "Small",
+        "oric_status": "Registered",
+        "oric_url": null
       },
       {
         "state": "ACT",
@@ -254,7 +287,11 @@
         "recent_qld_funding": 0,
         "funded_program_count": 0,
         "linkage_strength": "weak_linkage_with_website",
-        "verification_score": 2
+        "verification_score": 2,
+        "contact_email": "vrishal.raj@ahl.gov.au",
+        "contact_phone": null,
+        "contact_website": "https://www.ahl.gov.au",
+        "acnc_size": "Large"
       },
       {
         "state": "ACT",
@@ -273,7 +310,11 @@
         "recent_qld_funding": 0,
         "funded_program_count": 0,
         "linkage_strength": "weak_linkage_with_website",
-        "verification_score": 2
+        "verification_score": 2,
+        "contact_email": "aida@aida.org.au",
+        "contact_phone": "0313371127",
+        "contact_website": "www.aida.org.au",
+        "acnc_size": "Large"
       },
       {
         "state": "ACT",
@@ -292,7 +333,11 @@
         "recent_qld_funding": 0,
         "funded_program_count": 0,
         "linkage_strength": "weak_linkage_with_website",
-        "verification_score": 2
+        "verification_score": 2,
+        "contact_email": "enquiries@ailc.org.au",
+        "contact_phone": "02 6280 7596",
+        "contact_website": "www.ailc.org.au",
+        "acnc_size": "Medium"
       },
       {
         "state": "ACT",
@@ -311,7 +356,11 @@
         "recent_qld_funding": 0,
         "funded_program_count": 0,
         "linkage_strength": "weak_linkage_with_website",
-        "verification_score": 2
+        "verification_score": 2,
+        "contact_email": "admin@ebonyinstitute.com.au",
+        "contact_phone": "0707995670",
+        "contact_website": "www.ebonyinstitute.com.au",
+        "acnc_size": "Small"
       },
       {
         "state": "ACT",
@@ -330,7 +379,10 @@
         "recent_qld_funding": 0,
         "funded_program_count": 0,
         "linkage_strength": "weak_linkage_with_website",
-        "verification_score": 2
+        "verification_score": 2,
+        "contact_email": "benny@aakither.com.au",
+        "contact_phone": "0435812774",
+        "contact_website": "https://mycorp.oric.gov.au/public-register/public-register-details/?id=ef46dccc-b605-f011-bae2-7c1e522a88ba"
       },
       {
         "state": "ACT",
@@ -349,7 +401,10 @@
         "recent_qld_funding": 0,
         "funded_program_count": 0,
         "linkage_strength": "weak_linkage_with_website",
-        "verification_score": 2
+        "verification_score": 2,
+        "contact_email": null,
+        "contact_phone": null,
+        "contact_website": "https://modernslaveryregister.gov.au/statements/9984/"
       },
       {
         "state": "ACT",
@@ -368,7 +423,10 @@
         "recent_qld_funding": 0,
         "funded_program_count": 0,
         "linkage_strength": "weak_linkage_with_website",
-        "verification_score": 2
+        "verification_score": 2,
+        "contact_email": null,
+        "contact_phone": null,
+        "contact_website": "https://modernslaveryregister.gov.au/statements/9984/"
       }
     ],
     "NSW": [
@@ -389,7 +447,11 @@
         "recent_qld_funding": 0,
         "funded_program_count": 0,
         "linkage_strength": "strong_linkage",
-        "verification_score": 3
+        "verification_score": 3,
+        "contact_email": "mtdruittinfo@justreinvest.org.au",
+        "contact_phone": null,
+        "contact_website": null,
+        "acnc_size": null
       },
       {
         "state": "NSW",
@@ -408,7 +470,11 @@
         "recent_qld_funding": 586300,
         "funded_program_count": 1,
         "linkage_strength": "strong_linkage",
-        "verification_score": 5
+        "verification_score": 5,
+        "contact_email": "poonam.bajpai@alsnswact.org.au",
+        "contact_phone": "1800765767",
+        "contact_website": "https://www.alsnswact.org.au/",
+        "acnc_size": "Large"
       },
       {
         "state": "NSW",
@@ -427,7 +493,10 @@
         "recent_qld_funding": 0,
         "funded_program_count": 0,
         "linkage_strength": "strong_linkage",
-        "verification_score": 2
+        "verification_score": 2,
+        "contact_email": null,
+        "contact_phone": null,
+        "contact_website": null
       },
       {
         "state": "NSW",
@@ -446,7 +515,13 @@
         "recent_qld_funding": 608171.72,
         "funded_program_count": 1,
         "linkage_strength": "strong_linkage",
-        "verification_score": 4
+        "verification_score": 4,
+        "contact_email": "info@bmnac.org.au",
+        "contact_phone": "(02) 6652 5080",
+        "contact_website": null,
+        "oric_size": "Large",
+        "oric_status": "Registered",
+        "oric_url": null
       },
       {
         "state": "NSW",
@@ -465,7 +540,11 @@
         "recent_qld_funding": 0,
         "funded_program_count": 0,
         "linkage_strength": "strong_linkage",
-        "verification_score": 4
+        "verification_score": 4,
+        "contact_email": "info@wirringabaiya.org.au",
+        "contact_phone": "1800686587",
+        "contact_website": "https://www.wirringabaiya.org.au",
+        "acnc_size": "Medium"
       },
       {
         "state": "NSW",
@@ -484,7 +563,15 @@
         "recent_qld_funding": 0,
         "funded_program_count": 0,
         "linkage_strength": "strong_linkage",
-        "verification_score": 3
+        "verification_score": 3,
+        "contact_email": "jacqueline.hodges@det.nsw.edu.au",
+        "contact_phone": "0403927212",
+        "contact_website": null,
+        "oric_size": "Small",
+        "oric_status": "Registered",
+        "oric_url": "https://mycorp.oric.gov.au/public-register/public-register-details/?id=1642a2cb-b605-f011-bae2-000d3acae1bb",
+        "oric_income_2024": "<$100k",
+        "oric_employees_2024": "0"
       },
       {
         "state": "NSW",
@@ -503,7 +590,15 @@
         "recent_qld_funding": 0,
         "funded_program_count": 0,
         "linkage_strength": "strong_linkage",
-        "verification_score": 4
+        "verification_score": 4,
+        "contact_email": "reception@tharawal.com.au",
+        "contact_phone": "(02) 4681 0059",
+        "contact_website": "https://www.tharawal.com.au",
+        "oric_size": "Large",
+        "oric_status": "Registered",
+        "oric_url": "https://mycorp.oric.gov.au/public-register/public-register-details/?id=954605cc-b605-f011-bae2-002248113fed",
+        "oric_income_2024": " >=$5m",
+        "oric_employees_2024": " >24"
       },
       {
         "state": "NSW",
@@ -522,7 +617,15 @@
         "recent_qld_funding": 306921.4,
         "funded_program_count": 1,
         "linkage_strength": "strong_linkage",
-        "verification_score": 5
+        "verification_score": 5,
+        "contact_email": "secretariat@katungul.org.au",
+        "contact_phone": "610399014156",
+        "contact_website": "https://www.katungul.org.au",
+        "oric_size": "Large",
+        "oric_status": "Registered",
+        "oric_url": "https://mycorp.oric.gov.au/public-register/public-register-details/?id=e6a56ecb-b605-f011-bae2-00224894b00e",
+        "oric_income_2024": " >=$5m",
+        "oric_employees_2024": " >24"
       },
       {
         "state": "NSW",
@@ -541,7 +644,11 @@
         "recent_qld_funding": 2916500,
         "funded_program_count": 2,
         "linkage_strength": "funded_no_alma",
-        "verification_score": 3
+        "verification_score": 3,
+        "contact_email": "reception@supplynation.org.au",
+        "contact_phone": "0728433969",
+        "contact_website": "www.supplynation.org.au",
+        "acnc_size": "Large"
       },
       {
         "state": "NSW",
@@ -560,7 +667,15 @@
         "recent_qld_funding": 2872589.44,
         "funded_program_count": 1,
         "linkage_strength": "funded_no_alma",
-        "verification_score": 3
+        "verification_score": 3,
+        "contact_email": "damionb@tams.org.au",
+        "contact_phone": "0761421319",
+        "contact_website": "http://tams.org.au",
+        "oric_size": "Large",
+        "oric_status": "Registered",
+        "oric_url": "https://mycorp.oric.gov.au/public-register/public-register-details/?id=262124cf-b605-f011-bae2-6045bdc36a7d",
+        "oric_income_2024": " >=$5m",
+        "oric_employees_2024": " >24"
       },
       {
         "state": "NSW",
@@ -579,7 +694,11 @@
         "recent_qld_funding": 1610483.06,
         "funded_program_count": 1,
         "linkage_strength": "funded_no_alma",
-        "verification_score": 3
+        "verification_score": 3,
+        "contact_email": "reception@walgettams.com.au",
+        "contact_phone": "(02) 6820 3777",
+        "contact_website": "www.walgettams.com.au",
+        "acnc_size": "Large"
       },
       {
         "state": "NSW",
@@ -598,7 +717,11 @@
         "recent_qld_funding": 1594675,
         "funded_program_count": 1,
         "linkage_strength": "funded_no_alma",
-        "verification_score": 2
+        "verification_score": 2,
+        "contact_email": "jjho@exemail.com.au",
+        "contact_phone": "(02) 6779 1803",
+        "contact_website": null,
+        "acnc_size": "Medium"
       },
       {
         "state": "NSW",
@@ -617,7 +740,13 @@
         "recent_qld_funding": 1034036.62,
         "funded_program_count": 1,
         "linkage_strength": "funded_no_alma",
-        "verification_score": 2
+        "verification_score": 2,
+        "contact_email": "admin@bnmac.com.au",
+        "contact_phone": "0266443500",
+        "contact_website": null,
+        "oric_size": "Large",
+        "oric_status": "Registered",
+        "oric_url": null
       },
       {
         "state": "NSW",
@@ -636,7 +765,13 @@
         "recent_qld_funding": 895582.11,
         "funded_program_count": 1,
         "linkage_strength": "funded_no_alma",
-        "verification_score": 2
+        "verification_score": 2,
+        "contact_email": "tgordon@oranahaven.com.au",
+        "contact_phone": "0268744886",
+        "contact_website": null,
+        "oric_size": "Medium",
+        "oric_status": "Registered",
+        "oric_url": null
       },
       {
         "state": "NSW",
@@ -655,7 +790,13 @@
         "recent_qld_funding": 778500,
         "funded_program_count": 1,
         "linkage_strength": "funded_no_alma",
-        "verification_score": 2
+        "verification_score": 2,
+        "contact_email": "karen.murphy2tlpradio@hotmail.com",
+        "contact_phone": "0425402161",
+        "contact_website": null,
+        "oric_size": "Small",
+        "oric_status": "Registered",
+        "oric_url": null
       },
       {
         "state": "NSW",
@@ -674,7 +815,11 @@
         "recent_qld_funding": 758694.96,
         "funded_program_count": 1,
         "linkage_strength": "funded_no_alma",
-        "verification_score": 3
+        "verification_score": 3,
+        "contact_email": "admin@ctgservices.com.au",
+        "contact_phone": "02 6822 0000",
+        "contact_website": "www.cahs.net.au",
+        "acnc_size": "Large"
       },
       {
         "state": "NSW",
@@ -693,7 +838,10 @@
         "recent_qld_funding": 741915.15,
         "funded_program_count": 2,
         "linkage_strength": "funded_no_alma",
-        "verification_score": 2
+        "verification_score": 2,
+        "contact_email": null,
+        "contact_phone": null,
+        "contact_website": null
       },
       {
         "state": "NSW",
@@ -712,7 +860,15 @@
         "recent_qld_funding": 597178.84,
         "funded_program_count": 1,
         "linkage_strength": "funded_no_alma",
-        "verification_score": 2
+        "verification_score": 2,
+        "contact_email": "info@biripi.au",
+        "contact_phone": "02 6591 2400",
+        "contact_website": null,
+        "oric_size": "Large",
+        "oric_status": "Registered",
+        "oric_url": "https://mycorp.oric.gov.au/public-register/public-register-details/?id=a9b1e7ca-b605-f011-bae2-0022489595e9",
+        "oric_income_2024": " >=$5m",
+        "oric_employees_2024": " >24"
       },
       {
         "state": "NSW",
@@ -731,7 +887,15 @@
         "recent_qld_funding": 591174.56,
         "funded_program_count": 1,
         "linkage_strength": "funded_no_alma",
-        "verification_score": 2
+        "verification_score": 2,
+        "contact_email": "richard.weston@maarima.com.au",
+        "contact_phone": "08 8082 9888",
+        "contact_website": null,
+        "oric_size": "Large",
+        "oric_status": "Registered",
+        "oric_url": "https://mycorp.oric.gov.au/public-register/public-register-details/?id=2c3f93cb-b605-f011-bae2-6045bdc355ec",
+        "oric_income_2024": " >=$5m",
+        "oric_employees_2024": " >24"
       }
     ],
     "NT": [
@@ -752,7 +916,10 @@
         "recent_qld_funding": 0,
         "funded_program_count": 0,
         "linkage_strength": "strong_linkage",
-        "verification_score": 4
+        "verification_score": 4,
+        "contact_email": null,
+        "contact_phone": null,
+        "contact_website": "https://oonchiumpa.com.au"
       },
       {
         "state": "NT",
@@ -771,7 +938,13 @@
         "recent_qld_funding": 3411454.73,
         "funded_program_count": 1,
         "linkage_strength": "strong_linkage",
-        "verification_score": 4
+        "verification_score": 4,
+        "contact_email": "executive.officer@bawinanga.org.au",
+        "contact_phone": "(08) 8979 6555",
+        "contact_website": null,
+        "oric_size": "Large",
+        "oric_status": "Registered",
+        "oric_url": null
       },
       {
         "state": "NT",
@@ -790,7 +963,13 @@
         "recent_qld_funding": 0,
         "funded_program_count": 0,
         "linkage_strength": "strong_linkage",
-        "verification_score": 3
+        "verification_score": 3,
+        "contact_email": "admin@kurdiji.org.au",
+        "contact_phone": null,
+        "contact_website": null,
+        "oric_size": "Medium",
+        "oric_status": "Registered",
+        "oric_url": null
       },
       {
         "state": "NT",
@@ -809,7 +988,13 @@
         "recent_qld_funding": 11116351.04,
         "funded_program_count": 2,
         "linkage_strength": "strong_linkage",
-        "verification_score": 4
+        "verification_score": 4,
+        "contact_email": "reception@tangentyere.org.au",
+        "contact_phone": "(08) 8951 4222",
+        "contact_website": null,
+        "oric_size": "Large",
+        "oric_status": "Registered",
+        "oric_url": null
       },
       {
         "state": "NT",
@@ -828,7 +1013,15 @@
         "recent_qld_funding": 2538038.68,
         "funded_program_count": 1,
         "linkage_strength": "strong_linkage",
-        "verification_score": 4
+        "verification_score": 4,
+        "contact_email": "cameron.miller@ngur.com.au",
+        "contact_phone": "0889511911",
+        "contact_website": null,
+        "oric_size": "Large",
+        "oric_status": "Registered",
+        "oric_url": "https://mycorp.oric.gov.au/public-register/public-register-details/?id=3742a2cb-b605-f011-bae2-000d3acae1bb",
+        "oric_income_2024": " >=$5m",
+        "oric_employees_2024": " >24"
       },
       {
         "state": "NT",
@@ -847,7 +1040,13 @@
         "recent_qld_funding": 0,
         "funded_program_count": 0,
         "linkage_strength": "strong_linkage",
-        "verification_score": 3
+        "verification_score": 3,
+        "contact_email": "accounts@urapuntja.com.au",
+        "contact_phone": "0789369670",
+        "contact_website": null,
+        "oric_size": "Large",
+        "oric_status": "Registered",
+        "oric_url": null
       },
       {
         "state": "NT",
@@ -866,7 +1065,13 @@
         "recent_qld_funding": 4721994.84,
         "funded_program_count": 1,
         "linkage_strength": "moderate_linkage",
-        "verification_score": 2
+        "verification_score": 2,
+        "contact_email": "ceo@bushmob.com.au",
+        "contact_phone": "0889533798",
+        "contact_website": null,
+        "oric_size": "Large",
+        "oric_status": "Registered",
+        "oric_url": null
       },
       {
         "state": "NT",
@@ -885,7 +1090,11 @@
         "recent_qld_funding": 2064099.9,
         "funded_program_count": 1,
         "linkage_strength": "moderate_linkage",
-        "verification_score": 3
+        "verification_score": 3,
+        "contact_email": "reception@naaja.org.au",
+        "contact_phone": "1800898251",
+        "contact_website": "naaja.org.au",
+        "acnc_size": "Large"
       },
       {
         "state": "NT",
@@ -904,7 +1113,15 @@
         "recent_qld_funding": 0,
         "funded_program_count": 0,
         "linkage_strength": "moderate_linkage",
-        "verification_score": 2
+        "verification_score": 2,
+        "contact_email": "reception@gyc.org.au",
+        "contact_phone": "0486681676",
+        "contact_website": "www.gyc.org.au",
+        "oric_size": "Medium",
+        "oric_status": "Registered",
+        "oric_url": "https://mycorp.oric.gov.au/public-register/public-register-details/?id=dd82ffca-b605-f011-bae1-6045bdc300f5",
+        "oric_income_2024": " $100k-<$5m",
+        "oric_employees_2024": " >24"
       },
       {
         "state": "NT",
@@ -923,7 +1140,15 @@
         "recent_qld_funding": 21604528.73,
         "funded_program_count": 2,
         "linkage_strength": "funded_no_alma",
-        "verification_score": 2
+        "verification_score": 2,
+        "contact_email": "alastair.king@alpa.asn.au",
+        "contact_phone": "0889446444",
+        "contact_website": null,
+        "oric_size": "Large",
+        "oric_status": "Registered",
+        "oric_url": "https://mycorp.oric.gov.au/public-register/public-register-details/?id=21a67fcc-b605-f011-bae2-000d3acb33a1",
+        "oric_income_2024": " >=$5m",
+        "oric_employees_2024": " >24"
       },
       {
         "state": "NT",
@@ -942,7 +1167,15 @@
         "recent_qld_funding": 7763442.74,
         "funded_program_count": 1,
         "linkage_strength": "funded_no_alma",
-        "verification_score": 2
+        "verification_score": 2,
+        "contact_email": "craig.turnour@rasac.com.au",
+        "contact_phone": "0889505400",
+        "contact_website": null,
+        "oric_size": "Large",
+        "oric_status": "Registered",
+        "oric_url": "https://mycorp.oric.gov.au/public-register/public-register-details/?id=c74196cb-b605-f011-bae2-7c1e528a6a5b",
+        "oric_income_2024": " >=$5m",
+        "oric_employees_2024": " >24"
       },
       {
         "state": "NT",
@@ -961,7 +1194,11 @@
         "recent_qld_funding": 5100567,
         "funded_program_count": 1,
         "linkage_strength": "funded_no_alma",
-        "verification_score": 3
+        "verification_score": 3,
+        "contact_email": "enquiries@batchelor.edu.au",
+        "contact_phone": "1800677095",
+        "contact_website": "http://www.batchelor.edu.au",
+        "acnc_size": "Large"
       },
       {
         "state": "NT",
@@ -980,7 +1217,15 @@
         "recent_qld_funding": 4601818.09,
         "funded_program_count": 1,
         "linkage_strength": "funded_no_alma",
-        "verification_score": 2
+        "verification_score": 2,
+        "contact_email": "wurli@wurli.org.au",
+        "contact_phone": "0889729100",
+        "contact_website": null,
+        "oric_size": "Large",
+        "oric_status": "Registered",
+        "oric_url": "https://mycorp.oric.gov.au/public-register/public-register-details/?id=9b9c0ec6-b605-f011-bae2-6045bde5c437",
+        "oric_income_2024": " >=$5m",
+        "oric_employees_2024": " >24"
       },
       {
         "state": "NT",
@@ -999,7 +1244,13 @@
         "recent_qld_funding": 3837032.66,
         "funded_program_count": 1,
         "linkage_strength": "funded_no_alma",
-        "verification_score": 2
+        "verification_score": 2,
+        "contact_email": "reception@gebie.com.au",
+        "contact_phone": "0740412222",
+        "contact_website": null,
+        "oric_size": "Large",
+        "oric_status": "Registered",
+        "oric_url": null
       },
       {
         "state": "NT",
@@ -1018,7 +1269,15 @@
         "recent_qld_funding": 3796261.47,
         "funded_program_count": 1,
         "linkage_strength": "funded_no_alma",
-        "verification_score": 2
+        "verification_score": 2,
+        "contact_email": "ceo@ironbark.org.au",
+        "contact_phone": "0889316600",
+        "contact_website": null,
+        "oric_size": "Large",
+        "oric_status": "Registered",
+        "oric_url": "https://mycorp.oric.gov.au/public-register/public-register-details/?id=03a66ecb-b605-f011-bae2-00224894b00e",
+        "oric_income_2024": " >=$5m",
+        "oric_employees_2024": " >24"
       },
       {
         "state": "NT",
@@ -1037,7 +1296,15 @@
         "recent_qld_funding": 2783749.76,
         "funded_program_count": 1,
         "linkage_strength": "funded_no_alma",
-        "verification_score": 2
+        "verification_score": 2,
+        "contact_email": "governance@caac.org.au",
+        "contact_phone": "08 8951 4400",
+        "contact_website": null,
+        "oric_size": "Large",
+        "oric_status": "Registered",
+        "oric_url": "https://mycorp.oric.gov.au/public-register/public-register-details/?id=5c4296cb-b605-f011-bae2-7c1e528a6a5b",
+        "oric_income_2024": " >=$5m",
+        "oric_employees_2024": " >24"
       },
       {
         "state": "NT",
@@ -1056,7 +1323,13 @@
         "recent_qld_funding": 2552378.28,
         "funded_program_count": 1,
         "linkage_strength": "funded_no_alma",
-        "verification_score": 2
+        "verification_score": 2,
+        "contact_email": "generalmanager@pawmedia.com.au",
+        "contact_phone": "0889937500",
+        "contact_website": null,
+        "oric_size": "Medium",
+        "oric_status": "Registered",
+        "oric_url": null
       },
       {
         "state": "NT",
@@ -1075,7 +1348,15 @@
         "recent_qld_funding": 2548201.68,
         "funded_program_count": 1,
         "linkage_strength": "funded_no_alma",
-        "verification_score": 2
+        "verification_score": 2,
+        "contact_email": "Janelle.collins@anyinginyi.com.au",
+        "contact_phone": "08 8962 2633",
+        "contact_website": null,
+        "oric_size": "Large",
+        "oric_status": "Registered",
+        "oric_url": "https://mycorp.oric.gov.au/public-register/public-register-details/?id=54dabecd-b605-f011-bae2-6045bde4c058",
+        "oric_income_2024": " >=$5m",
+        "oric_employees_2024": " >24"
       },
       {
         "state": "NT",
@@ -1094,7 +1375,13 @@
         "recent_qld_funding": 2193182.2,
         "funded_program_count": 2,
         "linkage_strength": "funded_no_alma",
-        "verification_score": 2
+        "verification_score": 2,
+        "contact_email": "manager@pymedia.org.au",
+        "contact_phone": "0889548177",
+        "contact_website": null,
+        "oric_size": "Medium",
+        "oric_status": "Registered",
+        "oric_url": null
       }
     ],
     "QLD": [
@@ -1115,7 +1402,13 @@
         "recent_qld_funding": 0,
         "funded_program_count": 0,
         "linkage_strength": "strong_linkage",
-        "verification_score": 4
+        "verification_score": 4,
+        "contact_email": "admin@mmeic.org",
+        "contact_phone": "0818030539",
+        "contact_website": "https://mmeicac.com.au",
+        "oric_size": "Medium",
+        "oric_status": "Registered",
+        "oric_url": null
       },
       {
         "state": "QLD",
@@ -1134,7 +1427,13 @@
         "recent_qld_funding": 280000,
         "funded_program_count": 1,
         "linkage_strength": "strong_linkage",
-        "verification_score": 4
+        "verification_score": 4,
+        "contact_email": "brodiegermainefitness@gmail.com",
+        "contact_phone": "0411 388 526",
+        "contact_website": null,
+        "oric_size": "Medium",
+        "oric_status": "Registered",
+        "oric_url": null
       },
       {
         "state": "QLD",
@@ -1153,7 +1452,15 @@
         "recent_qld_funding": 6937167,
         "funded_program_count": 6,
         "linkage_strength": "strong_linkage",
-        "verification_score": 5
+        "verification_score": 5,
+        "contact_email": "reception@jabalbina.com.au",
+        "contact_phone": "(07) 4098 3552",
+        "contact_website": "https://www.jabalbina.com.au",
+        "oric_size": "Large",
+        "oric_status": "Registered",
+        "oric_url": "https://mycorp.oric.gov.au/public-register/public-register-details/?id=cf2597cb-b605-f011-bae1-000d3acae33b",
+        "oric_income_2024": " >=$5m",
+        "oric_employees_2024": " >24"
       },
       {
         "state": "QLD",
@@ -1172,7 +1479,13 @@
         "recent_qld_funding": 7371715,
         "funded_program_count": 5,
         "linkage_strength": "strong_linkage",
-        "verification_score": 4
+        "verification_score": 4,
+        "contact_email": "everyone@gindaja.org",
+        "contact_phone": "(07) 4056 9000",
+        "contact_website": null,
+        "oric_size": "Large",
+        "oric_status": "Registered",
+        "oric_url": null
       },
       {
         "state": "QLD",
@@ -1191,7 +1504,15 @@
         "recent_qld_funding": 8635651.04,
         "funded_program_count": 9,
         "linkage_strength": "strong_linkage",
-        "verification_score": 4
+        "verification_score": 4,
+        "contact_email": "ceo@taihs.net.au",
+        "contact_phone": "0747594000",
+        "contact_website": null,
+        "oric_size": "Large",
+        "oric_status": "Registered",
+        "oric_url": "https://mycorp.oric.gov.au/public-register/public-register-details/?id=9442a2cb-b605-f011-bae2-000d3acae1bb",
+        "oric_income_2024": " >=$5m",
+        "oric_employees_2024": " >24"
       },
       {
         "state": "QLD",
@@ -1210,7 +1531,13 @@
         "recent_qld_funding": 8500,
         "funded_program_count": 1,
         "linkage_strength": "strong_linkage",
-        "verification_score": 5
+        "verification_score": 5,
+        "contact_email": "sheryl@yiliyapinya.org.au",
+        "contact_phone": "0413484276",
+        "contact_website": "https://www.yiliyapinya.org.au/",
+        "oric_size": "Medium",
+        "oric_status": "Registered",
+        "oric_url": null
       },
       {
         "state": "QLD",
@@ -1229,7 +1556,10 @@
         "recent_qld_funding": 0,
         "funded_program_count": 0,
         "linkage_strength": "strong_linkage",
-        "verification_score": 3
+        "verification_score": 3,
+        "contact_email": "admin.reception@atsichsbrisbane.org.au",
+        "contact_phone": null,
+        "contact_website": null
       },
       {
         "state": "QLD",
@@ -1248,7 +1578,10 @@
         "recent_qld_funding": 0,
         "funded_program_count": 0,
         "linkage_strength": "strong_linkage",
-        "verification_score": 2
+        "verification_score": 2,
+        "contact_email": null,
+        "contact_phone": null,
+        "contact_website": null
       },
       {
         "state": "QLD",
@@ -1267,7 +1600,10 @@
         "recent_qld_funding": 2291982,
         "funded_program_count": 4,
         "linkage_strength": "strong_linkage",
-        "verification_score": 4
+        "verification_score": 4,
+        "contact_email": null,
+        "contact_phone": null,
+        "contact_website": null
       },
       {
         "state": "QLD",
@@ -1286,7 +1622,11 @@
         "recent_qld_funding": 5344704,
         "funded_program_count": 4,
         "linkage_strength": "strong_linkage",
-        "verification_score": 5
+        "verification_score": 5,
+        "contact_email": "reception@cqid.com.au",
+        "contact_phone": "1800 000 307",
+        "contact_website": "https://cqid.com.au",
+        "acnc_size": "Large"
       },
       {
         "state": "QLD",
@@ -1305,7 +1645,15 @@
         "recent_qld_funding": 1177405,
         "funded_program_count": 5,
         "linkage_strength": "strong_linkage",
-        "verification_score": 5
+        "verification_score": 5,
+        "contact_email": "dave@lab6.com",
+        "contact_phone": "0233210144",
+        "contact_website": "https://www.diydg.org.au",
+        "oric_size": "Medium",
+        "oric_status": "Registered",
+        "oric_url": "https://mycorp.oric.gov.au/public-register/public-register-details/?id=4d83ffca-b605-f011-bae1-6045bdc300f5",
+        "oric_income_2024": " $100k-<$5m",
+        "oric_employees_2024": "5 - 24"
       },
       {
         "state": "QLD",
@@ -1324,7 +1672,11 @@
         "recent_qld_funding": 1204504.36,
         "funded_program_count": 3,
         "linkage_strength": "strong_linkage",
-        "verification_score": 5
+        "verification_score": 5,
+        "contact_email": "administration@qatsicpp.com.au",
+        "contact_phone": "07 3102 4119",
+        "contact_website": "www.qatsicpp.com.au",
+        "acnc_size": "Large"
       },
       {
         "state": "QLD",
@@ -1343,7 +1695,11 @@
         "recent_qld_funding": 50766212,
         "funded_program_count": 30,
         "linkage_strength": "strong_linkage",
-        "verification_score": 5
+        "verification_score": 5,
+        "contact_email": "corporategovernance@iuih.org.au",
+        "contact_phone": "(07) 3828 3600",
+        "contact_website": "www.iuih.org.au",
+        "acnc_size": "Large"
       },
       {
         "state": "QLD",
@@ -1362,7 +1718,15 @@
         "recent_qld_funding": 415440,
         "funded_program_count": 2,
         "linkage_strength": "strong_linkage",
-        "verification_score": 4
+        "verification_score": 4,
+        "contact_email": "admin@cherbourgwellbeing.org.au",
+        "contact_phone": "07 4169 8660",
+        "contact_website": null,
+        "oric_size": "Small",
+        "oric_status": "Registered",
+        "oric_url": "https://mycorp.oric.gov.au/public-register/public-register-details/?id=5b08ebcb-b605-f011-bae2-000d3a6b43ef",
+        "oric_income_2024": "<$100k",
+        "oric_employees_2024": "0"
       },
       {
         "state": "QLD",
@@ -1381,7 +1745,15 @@
         "recent_qld_funding": 0,
         "funded_program_count": 0,
         "linkage_strength": "strong_linkage",
-        "verification_score": 3
+        "verification_score": 3,
+        "contact_email": null,
+        "contact_phone": null,
+        "contact_website": null,
+        "oric_size": "Medium",
+        "oric_status": "Registered",
+        "oric_url": "https://mycorp.oric.gov.au/public-register/public-register-details/?id=d9deb4cb-b605-f011-bae2-7c1e522a8ae7",
+        "oric_income_2024": " $100k-<$5m",
+        "oric_employees_2024": "5 - 24"
       },
       {
         "state": "QLD",
@@ -1400,7 +1772,13 @@
         "recent_qld_funding": 0,
         "funded_program_count": 0,
         "linkage_strength": "strong_linkage",
-        "verification_score": 4
+        "verification_score": 4,
+        "contact_email": "Linkup@nsw.link-up.org.au",
+        "contact_phone": "0272271443",
+        "contact_website": "https://www.linkupnsw.org.au",
+        "oric_size": "Medium",
+        "oric_status": "Registered",
+        "oric_url": null
       },
       {
         "state": "QLD",
@@ -1419,7 +1797,15 @@
         "recent_qld_funding": 95000,
         "funded_program_count": 1,
         "linkage_strength": "strong_linkage",
-        "verification_score": 5
+        "verification_score": 5,
+        "contact_email": "manager@facess.org.au",
+        "contact_phone": "0770370389",
+        "contact_website": "https://www.facebook.com/people/Family-and-Childrens-Emerging-Support-Services/61550770370389/",
+        "oric_size": "Medium",
+        "oric_status": "Registered",
+        "oric_url": "https://mycorp.oric.gov.au/public-register/public-register-details/?id=b64711cc-b605-f011-bae1-00224811ab9d",
+        "oric_income_2024": " $100k-<$5m",
+        "oric_employees_2024": "5 - 24"
       },
       {
         "state": "QLD",
@@ -1438,7 +1824,14 @@
         "recent_qld_funding": 0,
         "funded_program_count": 0,
         "linkage_strength": "strong_linkage",
-        "verification_score": 3
+        "verification_score": 3,
+        "contact_email": null,
+        "contact_phone": null,
+        "contact_website": null,
+        "oric_size": "Small",
+        "oric_status": "Registered",
+        "oric_url": "https://mycorp.oric.gov.au/public-register/public-register-details/?id=b79d7fcc-b605-f011-bae2-000d3a6a6ec1",
+        "oric_employees_2024": "<5"
       },
       {
         "state": "QLD",
@@ -1457,7 +1850,10 @@
         "recent_qld_funding": 1474499.01,
         "funded_program_count": 6,
         "linkage_strength": "strong_linkage",
-        "verification_score": 4
+        "verification_score": 4,
+        "contact_email": null,
+        "contact_phone": null,
+        "contact_website": null
       }
     ],
     "SA": [
@@ -1478,7 +1874,13 @@
         "recent_qld_funding": 3445578.2,
         "funded_program_count": 2,
         "linkage_strength": "strong_linkage",
-        "verification_score": 5
+        "verification_score": 5,
+        "contact_email": "adac@adac.org.au",
+        "contact_phone": "0883519031",
+        "contact_website": "https://www.adac.org.au",
+        "oric_size": "Large",
+        "oric_status": "Registered",
+        "oric_url": null
       },
       {
         "state": "SA",
@@ -1497,7 +1899,11 @@
         "recent_qld_funding": 1124575.83,
         "funded_program_count": 1,
         "linkage_strength": "funded_no_alma",
-        "verification_score": 3
+        "verification_score": 3,
+        "contact_email": "radio@umeewarramedia.com",
+        "contact_phone": "0833333333",
+        "contact_website": "https://www.umeewarramedia.com/",
+        "acnc_size": "Medium"
       },
       {
         "state": "SA",
@@ -1516,7 +1922,15 @@
         "recent_qld_funding": 673558.2,
         "funded_program_count": 1,
         "linkage_strength": "funded_no_alma",
-        "verification_score": 2
+        "verification_score": 2,
+        "contact_email": "contact@yalata.com.au",
+        "contact_phone": "(08) 8625 6040",
+        "contact_website": null,
+        "oric_size": "Large",
+        "oric_status": "Registered",
+        "oric_url": "https://mycorp.oric.gov.au/public-register/public-register-details/?id=3e844acc-b605-f011-bae2-6045bdc35c95",
+        "oric_income_2024": " >=$5m",
+        "oric_employees_2024": " >24"
       },
       {
         "state": "SA",
@@ -1535,7 +1949,13 @@
         "recent_qld_funding": 609409.8,
         "funded_program_count": 2,
         "linkage_strength": "funded_no_alma",
-        "verification_score": 2
+        "verification_score": 2,
+        "contact_email": "reception@maralinga.com.au",
+        "contact_phone": "(08) 8625 2946",
+        "contact_website": null,
+        "oric_size": "Large",
+        "oric_status": "Registered",
+        "oric_url": null
       },
       {
         "state": "SA",
@@ -1554,7 +1974,15 @@
         "recent_qld_funding": 577025.1,
         "funded_program_count": 1,
         "linkage_strength": "funded_no_alma",
-        "verification_score": 2
+        "verification_score": 2,
+        "contact_email": "reception@kcac.net.au",
+        "contact_phone": "(08) 8625 0007",
+        "contact_website": null,
+        "oric_size": "Large",
+        "oric_status": "Registered",
+        "oric_url": "https://mycorp.oric.gov.au/public-register/public-register-details/?id=0e4103ca-b605-f011-bae2-7c1e526359c2",
+        "oric_income_2024": " >=$5m",
+        "oric_employees_2024": " >24"
       },
       {
         "state": "SA",
@@ -1573,7 +2001,11 @@
         "recent_qld_funding": 473864.24,
         "funded_program_count": 1,
         "linkage_strength": "funded_no_alma",
-        "verification_score": 3
+        "verification_score": 3,
+        "contact_email": "reception@plahs.org.au",
+        "contact_phone": "08 8683 0162",
+        "contact_website": "www.plahs.org.au",
+        "acnc_size": "Large"
       },
       {
         "state": "SA",
@@ -1592,7 +2024,11 @@
         "recent_qld_funding": 466183.52,
         "funded_program_count": 1,
         "linkage_strength": "funded_no_alma",
-        "verification_score": 3
+        "verification_score": 3,
+        "contact_email": "afss@afss.com.au",
+        "contact_phone": "(08) 8205 1500",
+        "contact_website": "www.afss.com.au",
+        "acnc_size": "Large"
       },
       {
         "state": "SA",
@@ -1611,7 +2047,14 @@
         "recent_qld_funding": 416964.6,
         "funded_program_count": 1,
         "linkage_strength": "funded_no_alma",
-        "verification_score": 2
+        "verification_score": 2,
+        "contact_email": null,
+        "contact_phone": null,
+        "contact_website": null,
+        "oric_size": "Medium",
+        "oric_status": "Registered",
+        "oric_url": "https://mycorp.oric.gov.au/public-register/public-register-details/?id=6f4296cb-b605-f011-bae2-7c1e528a6a5b",
+        "oric_employees_2024": "5 - 24"
       },
       {
         "state": "SA",
@@ -1630,7 +2073,11 @@
         "recent_qld_funding": 403225.02,
         "funded_program_count": 2,
         "linkage_strength": "funded_no_alma",
-        "verification_score": 3
+        "verification_score": 3,
+        "contact_email": "admin@macchs.org.au",
+        "contact_phone": "1800 023 846",
+        "contact_website": "www.moorundi.org.au",
+        "acnc_size": "Large"
       },
       {
         "state": "SA",
@@ -1649,7 +2096,15 @@
         "recent_qld_funding": 384890.4,
         "funded_program_count": 1,
         "linkage_strength": "funded_no_alma",
-        "verification_score": 3
+        "verification_score": 3,
+        "contact_email": "admin@cac.asn.au",
+        "contact_phone": null,
+        "contact_website": "https://cac.asn.au/",
+        "oric_size": "Large",
+        "oric_status": "Registered",
+        "oric_url": "https://mycorp.oric.gov.au/public-register/public-register-details/?id=8a5220d0-b605-f011-bae2-0022489439b1",
+        "oric_income_2024": " >=$5m",
+        "oric_employees_2024": " >24"
       },
       {
         "state": "SA",
@@ -1668,7 +2123,15 @@
         "recent_qld_funding": 246934.24,
         "funded_program_count": 1,
         "linkage_strength": "funded_no_alma",
-        "verification_score": 2
+        "verification_score": 2,
+        "contact_email": "dperera@uths.com.au",
+        "contact_phone": "0886725255",
+        "contact_website": null,
+        "oric_size": "Large",
+        "oric_status": "Registered",
+        "oric_url": "https://mycorp.oric.gov.au/public-register/public-register-details/?id=f8a3adcb-b605-f011-bae2-6045bdc233fb",
+        "oric_income_2024": " >=$5m",
+        "oric_employees_2024": " >24"
       },
       {
         "state": "SA",
@@ -1687,7 +2150,15 @@
         "recent_qld_funding": 236936.4,
         "funded_program_count": 1,
         "linkage_strength": "funded_no_alma",
-        "verification_score": 2
+        "verification_score": 2,
+        "contact_email": "helena.marich@pikawiyahealth.org.au",
+        "contact_phone": "08 8642 9910",
+        "contact_website": null,
+        "oric_size": "Large",
+        "oric_status": "Registered",
+        "oric_url": "https://mycorp.oric.gov.au/public-register/public-register-details/?id=504296cb-b605-f011-bae2-7c1e528a6a5b",
+        "oric_income_2024": " >=$5m",
+        "oric_employees_2024": "0"
       },
       {
         "state": "SA",
@@ -1706,7 +2177,11 @@
         "recent_qld_funding": 50000,
         "funded_program_count": 1,
         "linkage_strength": "funded_no_alma",
-        "verification_score": 3
+        "verification_score": 3,
+        "contact_email": "info@nini.au",
+        "contact_phone": "0432801822",
+        "contact_website": "www.nini.au",
+        "acnc_size": "Small"
       },
       {
         "state": "SA",
@@ -1725,7 +2200,11 @@
         "recent_qld_funding": 0,
         "funded_program_count": 0,
         "linkage_strength": "weak_linkage_with_website",
-        "verification_score": 2
+        "verification_score": 2,
+        "contact_email": "enquiries@atsima.org",
+        "contact_phone": "0414 322 372",
+        "contact_website": "www.atsima.com",
+        "acnc_size": "Medium"
       },
       {
         "state": "SA",
@@ -1744,7 +2223,11 @@
         "recent_qld_funding": 0,
         "funded_program_count": 0,
         "linkage_strength": "weak_linkage_with_website",
-        "verification_score": 2
+        "verification_score": 2,
+        "contact_email": "Aboriginalbasketballacademy@outlook.com.au",
+        "contact_phone": "0416850910",
+        "contact_website": "https://aboriginalbasketballacademy.com.au/",
+        "acnc_size": null
       },
       {
         "state": "SA",
@@ -1763,7 +2246,11 @@
         "recent_qld_funding": 0,
         "funded_program_count": 0,
         "linkage_strength": "weak_linkage_with_website",
-        "verification_score": 2
+        "verification_score": 2,
+        "contact_email": "segaran.murugeson@aboriginalcs.org.au",
+        "contact_phone": null,
+        "contact_website": "www.aboriginalcs.org.au",
+        "acnc_size": "Large"
       },
       {
         "state": "SA",
@@ -1782,7 +2269,11 @@
         "recent_qld_funding": 0,
         "funded_program_count": 0,
         "linkage_strength": "weak_linkage_with_website",
-        "verification_score": 2
+        "verification_score": 2,
+        "contact_email": "ahcsa@ahcsa.org.au",
+        "contact_phone": "(08) 8273 7200",
+        "contact_website": "http://www.ahcsa.org.au",
+        "acnc_size": "Large"
       },
       {
         "state": "SA",
@@ -1801,7 +2292,11 @@
         "recent_qld_funding": 0,
         "funded_program_count": 0,
         "linkage_strength": "weak_linkage_with_website",
-        "verification_score": 2
+        "verification_score": 2,
+        "contact_email": "GM@anangu.com.au",
+        "contact_phone": null,
+        "contact_website": "www.anangu.com.au",
+        "acnc_size": "Large"
       },
       {
         "state": "SA",
@@ -1820,7 +2315,13 @@
         "recent_qld_funding": 0,
         "funded_program_count": 0,
         "linkage_strength": "weak_linkage_with_website",
-        "verification_score": 2
+        "verification_score": 2,
+        "contact_email": "admin@arabana.com.au",
+        "contact_phone": "(08) 8641 1583",
+        "contact_website": "www.arabana.com.au",
+        "oric_size": "Medium",
+        "oric_status": "Registered",
+        "oric_url": null
       },
       {
         "state": "SA",
@@ -1839,7 +2340,13 @@
         "recent_qld_funding": 0,
         "funded_program_count": 0,
         "linkage_strength": "weak_linkage_with_website",
-        "verification_score": 2
+        "verification_score": 2,
+        "contact_email": "barngarlacontact@gmail.com",
+        "contact_phone": null,
+        "contact_website": "https://www.barngarlarntbc.com.au/",
+        "oric_size": "Medium",
+        "oric_status": "Registered",
+        "oric_url": null
       }
     ],
     "TAS": [
@@ -1860,7 +2367,10 @@
         "recent_qld_funding": 0,
         "funded_program_count": 0,
         "linkage_strength": "strong_linkage",
-        "verification_score": 2
+        "verification_score": 2,
+        "contact_email": "tals@tals.net.au",
+        "contact_phone": "1800 595 162",
+        "contact_website": null
       },
       {
         "state": "TAS",
@@ -1879,7 +2389,15 @@
         "recent_qld_funding": 1496860.16,
         "funded_program_count": 1,
         "linkage_strength": "strong_linkage",
-        "verification_score": 5
+        "verification_score": 5,
+        "contact_email": "heather.s@tacinc.com.au",
+        "contact_phone": "1800132260",
+        "contact_website": "https://tacinc.com.au",
+        "oric_size": "Large",
+        "oric_status": "Registered",
+        "oric_url": "https://mycorp.oric.gov.au/public-register/public-register-details/?id=b7d21dd0-b605-f011-bae2-000d3acbc922",
+        "oric_income_2024": " >=$5m",
+        "oric_employees_2024": " >24"
       },
       {
         "state": "TAS",
@@ -1898,7 +2416,13 @@
         "recent_qld_funding": 1649709.36,
         "funded_program_count": 1,
         "linkage_strength": "funded_no_alma",
-        "verification_score": 2
+        "verification_score": 2,
+        "contact_email": "health@chac.com.au",
+        "contact_phone": "(03) 6452 1287",
+        "contact_website": null,
+        "oric_size": "Large",
+        "oric_status": "Registered",
+        "oric_url": null
       },
       {
         "state": "TAS",
@@ -1917,7 +2441,13 @@
         "recent_qld_funding": 131942.5,
         "funded_program_count": 1,
         "linkage_strength": "funded_no_alma",
-        "verification_score": 3
+        "verification_score": 3,
+        "contact_email": "tals@tals.net.au",
+        "contact_phone": "0372989216",
+        "contact_website": "www.tals.net.au",
+        "oric_size": "Large",
+        "oric_status": "Registered",
+        "oric_url": null
       },
       {
         "state": "TAS",
@@ -1936,7 +2466,13 @@
         "recent_qld_funding": 1829.02,
         "funded_program_count": 1,
         "linkage_strength": "funded_no_alma",
-        "verification_score": 2
+        "verification_score": 2,
+        "contact_email": "graeme.heald@brumbyhill.com.au",
+        "contact_phone": "(03) 6724 3107",
+        "contact_website": null,
+        "oric_size": "Small",
+        "oric_status": "Registered",
+        "oric_url": null
       },
       {
         "state": "TAS",
@@ -1955,7 +2491,11 @@
         "recent_qld_funding": 0,
         "funded_program_count": 0,
         "linkage_strength": "weak_linkage_with_website",
-        "verification_score": 2
+        "verification_score": 2,
+        "contact_email": "support@alct.org.au",
+        "contact_phone": "0418 335 111",
+        "contact_website": "https://alctas.org.au/",
+        "acnc_size": "Medium"
       },
       {
         "state": "TAS",
@@ -1974,7 +2514,11 @@
         "recent_qld_funding": 0,
         "funded_program_count": 0,
         "linkage_strength": "weak_linkage_with_website",
-        "verification_score": 2
+        "verification_score": 2,
+        "contact_email": "Peter_Rowe@bigpond.com",
+        "contact_phone": "0417 476 067",
+        "contact_website": "22/104 St Georges Road",
+        "acnc_size": null
       },
       {
         "state": "TAS",
@@ -1993,7 +2537,11 @@
         "recent_qld_funding": 0,
         "funded_program_count": 0,
         "linkage_strength": "weak_linkage_with_website",
-        "verification_score": 2
+        "verification_score": 2,
+        "contact_email": "reception@fiaai.org.au",
+        "contact_phone": "(03) 6359 3532",
+        "contact_website": "www.fiaai.org.au",
+        "acnc_size": "Large"
       },
       {
         "state": "TAS",
@@ -2012,7 +2560,10 @@
         "recent_qld_funding": 0,
         "funded_program_count": 0,
         "linkage_strength": "weak_linkage_with_website",
-        "verification_score": 2
+        "verification_score": 2,
+        "contact_email": "Cody@wukalinawalk.com.au",
+        "contact_phone": "0449772131",
+        "contact_website": "https://mycorp.oric.gov.au/public-register/public-register-details/?id=33a67fcc-b605-f011-bae2-000d3acb33a1"
       },
       {
         "state": "TAS",
@@ -2031,7 +2582,13 @@
         "recent_qld_funding": 0,
         "funded_program_count": 0,
         "linkage_strength": "weak_linkage_with_website",
-        "verification_score": 2
+        "verification_score": 2,
+        "contact_email": "admin@mtwac.org.au",
+        "contact_phone": "0492 987 144",
+        "contact_website": "mtwac.org.au",
+        "oric_size": "Medium",
+        "oric_status": "Registered",
+        "oric_url": null
       },
       {
         "state": "TAS",
@@ -2050,7 +2607,13 @@
         "recent_qld_funding": 0,
         "funded_program_count": 0,
         "linkage_strength": "weak_linkage_with_website",
-        "verification_score": 2
+        "verification_score": 2,
+        "contact_email": "scostelloe@ruralhealthtas.com.au",
+        "contact_phone": "0364521266",
+        "contact_website": "www.tahsic.org.au",
+        "oric_size": "Small",
+        "oric_status": "Registered",
+        "oric_url": "https://mycorp.oric.gov.au/public-register/public-register-details/?id=a7acc6c5-b605-f011-bae1-6045bde4aabd"
       },
       {
         "state": "TAS",
@@ -2069,7 +2632,10 @@
         "recent_qld_funding": 0,
         "funded_program_count": 0,
         "linkage_strength": "weak_linkage_with_website",
-        "verification_score": 2
+        "verification_score": 2,
+        "contact_email": "stoneycreekaboriginalcorp@gmail.com",
+        "contact_phone": "1800 622 431",
+        "contact_website": "https://mycorp.oric.gov.au/public-register/public-register-details/?id=0544e1cb-b605-f011-bae2-6045bde553dd"
       },
       {
         "state": "TAS",
@@ -2088,7 +2654,15 @@
         "recent_qld_funding": 0,
         "funded_program_count": 0,
         "linkage_strength": "weak_linkage_no_contact",
-        "verification_score": 1
+        "verification_score": 1,
+        "contact_email": null,
+        "contact_phone": null,
+        "contact_website": null,
+        "oric_size": "Small",
+        "oric_status": "Registered",
+        "oric_url": "https://mycorp.oric.gov.au/public-register/public-register-details/?id=ce46dccc-b605-f011-bae2-7c1e522a88ba",
+        "oric_income_2024": "<$100k",
+        "oric_employees_2024": "0"
       },
       {
         "state": "TAS",
@@ -2107,7 +2681,11 @@
         "recent_qld_funding": 0,
         "funded_program_count": 0,
         "linkage_strength": "weak_linkage_no_contact",
-        "verification_score": 1
+        "verification_score": 1,
+        "contact_email": "denise.g@cbiaa.org.au",
+        "contact_phone": null,
+        "contact_website": null,
+        "acnc_size": "Large"
       },
       {
         "state": "TAS",
@@ -2126,7 +2704,15 @@
         "recent_qld_funding": 0,
         "funded_program_count": 0,
         "linkage_strength": "weak_linkage_no_contact",
-        "verification_score": 1
+        "verification_score": 1,
+        "contact_email": "taselder@intas.net.au",
+        "contact_phone": "0363343138",
+        "contact_website": null,
+        "oric_size": "Medium",
+        "oric_status": "Registered",
+        "oric_url": "https://mycorp.oric.gov.au/public-register/public-register-details/?id=6ebceac8-b605-f011-bae2-6045bde71c32",
+        "oric_income_2024": " $100k-<$5m",
+        "oric_employees_2024": "<5"
       },
       {
         "state": "TAS",
@@ -2145,7 +2731,13 @@
         "recent_qld_funding": 0,
         "funded_program_count": 0,
         "linkage_strength": "weak_linkage_no_contact",
-        "verification_score": 1
+        "verification_score": 1,
+        "contact_email": null,
+        "contact_phone": null,
+        "contact_website": null,
+        "oric_size": "Small",
+        "oric_status": "Registered",
+        "oric_url": "https://mycorp.oric.gov.au/public-register/public-register-details/?id=2ca66ecb-b605-f011-bae2-00224894b00e"
       },
       {
         "state": "TAS",
@@ -2164,7 +2756,13 @@
         "recent_qld_funding": 0,
         "funded_program_count": 0,
         "linkage_strength": "weak_linkage_no_contact",
-        "verification_score": 1
+        "verification_score": 1,
+        "contact_email": "info@itachousing.org.au",
+        "contact_phone": "0362284644",
+        "contact_website": null,
+        "oric_size": "Medium",
+        "oric_status": "Registered",
+        "oric_url": null
       }
     ],
     "VIC": [
@@ -2185,7 +2783,11 @@
         "recent_qld_funding": 236927.84,
         "funded_program_count": 1,
         "linkage_strength": "strong_linkage",
-        "verification_score": 5
+        "verification_score": 5,
+        "contact_email": "contact@raclimited.com.au",
+        "contact_phone": "(03) 5820 0000",
+        "contact_website": "https://www.rumbalara.org.au",
+        "acnc_size": "Large"
       },
       {
         "state": "VIC",
@@ -2204,7 +2806,11 @@
         "recent_qld_funding": 236927.84,
         "funded_program_count": 1,
         "linkage_strength": "strong_linkage",
-        "verification_score": 5
+        "verification_score": 5,
+        "contact_email": "info@vahs.org.au",
+        "contact_phone": "0420829637",
+        "contact_website": "https://www.vahs.org.au",
+        "acnc_size": "Large"
       },
       {
         "state": "VIC",
@@ -2223,7 +2829,11 @@
         "recent_qld_funding": 0,
         "funded_program_count": 0,
         "linkage_strength": "strong_linkage",
-        "verification_score": 4
+        "verification_score": 4,
+        "contact_email": "vacca@vacca.org",
+        "contact_phone": null,
+        "contact_website": "https://www.vacca.org",
+        "acnc_size": "Large"
       },
       {
         "state": "VIC",
@@ -2242,7 +2852,11 @@
         "recent_qld_funding": 0,
         "funded_program_count": 0,
         "linkage_strength": "strong_linkage",
-        "verification_score": 4
+        "verification_score": 4,
+        "contact_email": "admin@wathaurong.org.au",
+        "contact_phone": "03 5277 0044",
+        "contact_website": "https://www.wathaurong.org.au",
+        "acnc_size": "Large"
       },
       {
         "state": "VIC",
@@ -2261,7 +2875,10 @@
         "recent_qld_funding": 0,
         "funded_program_count": 0,
         "linkage_strength": "strong_linkage",
-        "verification_score": 2
+        "verification_score": 2,
+        "contact_email": "admin@koorieyouth.org.au",
+        "contact_phone": "(03) 9267 3724",
+        "contact_website": null
       },
       {
         "state": "VIC",
@@ -2280,7 +2897,13 @@
         "recent_qld_funding": 2091206,
         "funded_program_count": 1,
         "linkage_strength": "funded_no_alma",
-        "verification_score": 2
+        "verification_score": 2,
+        "contact_email": "reception@wurundjeri.com.au",
+        "contact_phone": "(03) 9416 2905",
+        "contact_website": null,
+        "oric_size": "Large",
+        "oric_status": "Registered",
+        "oric_url": null
       },
       {
         "state": "VIC",
@@ -2299,7 +2922,13 @@
         "recent_qld_funding": 902230.12,
         "funded_program_count": 1,
         "linkage_strength": "funded_no_alma",
-        "verification_score": 2
+        "verification_score": 2,
+        "contact_email": "reception@ramahyuck.org",
+        "contact_phone": "(03) 5143 1644",
+        "contact_website": null,
+        "oric_size": "Large",
+        "oric_status": "Registered",
+        "oric_url": null
       },
       {
         "state": "VIC",
@@ -2318,7 +2947,11 @@
         "recent_qld_funding": 498009.68,
         "funded_program_count": 1,
         "linkage_strength": "funded_no_alma",
-        "verification_score": 3
+        "verification_score": 3,
+        "contact_email": "admin@worngundidj.org.au",
+        "contact_phone": "(03) 5561 5315",
+        "contact_website": "www.worngundidj.org.au",
+        "acnc_size": "Medium"
       },
       {
         "state": "VIC",
@@ -2337,7 +2970,11 @@
         "recent_qld_funding": 473870.64,
         "funded_program_count": 1,
         "linkage_strength": "funded_no_alma",
-        "verification_score": 3
+        "verification_score": 3,
+        "contact_email": "reception@bdac.com.au",
+        "contact_phone": "0457295377",
+        "contact_website": "https://www.bdac.com.au",
+        "acnc_size": "Large"
       },
       {
         "state": "VIC",
@@ -2356,7 +2993,15 @@
         "recent_qld_funding": 413696.16,
         "funded_program_count": 1,
         "linkage_strength": "funded_no_alma",
-        "verification_score": 2
+        "verification_score": 2,
+        "contact_email": "secretary@gunditjmirring.com",
+        "contact_phone": "0355271427",
+        "contact_website": null,
+        "oric_size": "Large",
+        "oric_status": "Registered",
+        "oric_url": "https://mycorp.oric.gov.au/public-register/public-register-details/?id=d94605cc-b605-f011-bae2-002248113fed",
+        "oric_income_2024": " >=$5m",
+        "oric_employees_2024": " >24"
       },
       {
         "state": "VIC",
@@ -2375,7 +3020,11 @@
         "recent_qld_funding": 334563.84,
         "funded_program_count": 1,
         "linkage_strength": "funded_no_alma",
-        "verification_score": 3
+        "verification_score": 3,
+        "contact_email": "comms@gegac.org.au",
+        "contact_phone": "1800 844 945",
+        "contact_website": "www.gegac.org.au",
+        "acnc_size": "Large"
       },
       {
         "state": "VIC",
@@ -2394,7 +3043,13 @@
         "recent_qld_funding": 300000,
         "funded_program_count": 1,
         "linkage_strength": "funded_no_alma",
-        "verification_score": 3
+        "verification_score": 3,
+        "contact_email": "J.Pepe@ngwala.org.au",
+        "contact_phone": "0395103233",
+        "contact_website": "https://www.ngwala.org.au/",
+        "oric_size": "Large",
+        "oric_status": "Registered",
+        "oric_url": null
       },
       {
         "state": "VIC",
@@ -2413,7 +3068,11 @@
         "recent_qld_funding": 236934.24,
         "funded_program_count": 1,
         "linkage_strength": "funded_no_alma",
-        "verification_score": 3
+        "verification_score": 3,
+        "contact_email": "kheap@badac.net.au",
+        "contact_phone": "03 5331 5344",
+        "contact_website": "www.badac.net.au",
+        "acnc_size": "Large"
       },
       {
         "state": "VIC",
@@ -2432,7 +3091,11 @@
         "recent_qld_funding": 236929.96,
         "funded_program_count": 1,
         "linkage_strength": "funded_no_alma",
-        "verification_score": 3
+        "verification_score": 3,
+        "contact_email": "reception@goolumgoolum.org.au",
+        "contact_phone": "(03) 5381 6333",
+        "contact_website": "http://www.goolumgoolum.org.au",
+        "acnc_size": "Large"
       },
       {
         "state": "VIC",
@@ -2451,7 +3114,13 @@
         "recent_qld_funding": 236927.84,
         "funded_program_count": 1,
         "linkage_strength": "funded_no_alma",
-        "verification_score": 2
+        "verification_score": 2,
+        "contact_email": "johnm@njernda.com.au",
+        "contact_phone": "0354806252",
+        "contact_website": null,
+        "oric_size": "Large",
+        "oric_status": "Registered",
+        "oric_url": null
       },
       {
         "state": "VIC",
@@ -2470,7 +3139,11 @@
         "recent_qld_funding": 123810.68,
         "funded_program_count": 1,
         "linkage_strength": "funded_no_alma",
-        "verification_score": 3
+        "verification_score": 3,
+        "contact_email": "health@gunditjmara.org.au",
+        "contact_phone": "0223337494",
+        "contact_website": "https://www.gunditjmara.org.au",
+        "acnc_size": "Large"
       },
       {
         "state": "VIC",
@@ -2489,7 +3162,11 @@
         "recent_qld_funding": 106914,
         "funded_program_count": 1,
         "linkage_strength": "funded_no_alma",
-        "verification_score": 3
+        "verification_score": 3,
+        "contact_email": "healingservice@ywahs.org.au",
+        "contact_phone": "0835584907",
+        "contact_website": "https://ywahs.org.au",
+        "acnc_size": "Large"
       },
       {
         "state": "VIC",
@@ -2508,7 +3185,11 @@
         "recent_qld_funding": 70500,
         "funded_program_count": 1,
         "linkage_strength": "funded_no_alma",
-        "verification_score": 3
+        "verification_score": 3,
+        "contact_email": "paypal@vacsal.org.au",
+        "contact_phone": "0784313725",
+        "contact_website": "vacsal.org.au",
+        "acnc_size": "Large"
       },
       {
         "state": "VIC",
@@ -2527,7 +3208,15 @@
         "recent_qld_funding": 50000,
         "funded_program_count": 1,
         "linkage_strength": "funded_no_alma",
-        "verification_score": 3
+        "verification_score": 3,
+        "contact_email": "info@djadjawurrung.com.au",
+        "contact_phone": "03 5444 2888",
+        "contact_website": "www.djadjawurrung.com.au/",
+        "oric_size": "Large",
+        "oric_status": "Registered",
+        "oric_url": "https://mycorp.oric.gov.au/public-register/public-register-details/?id=95746ecd-b605-f011-bae2-7c1e5289d9e2",
+        "oric_income_2024": " >=$5m",
+        "oric_employees_2024": " >24"
       }
     ],
     "WA": [
@@ -2548,7 +3237,13 @@
         "recent_qld_funding": 0,
         "funded_program_count": 0,
         "linkage_strength": "strong_linkage",
-        "verification_score": 4
+        "verification_score": 4,
+        "contact_email": null,
+        "contact_phone": "0392156862",
+        "contact_website": "https://olabuddoogethu.org.au",
+        "oric_size": "Small",
+        "oric_status": "Registered",
+        "oric_url": null
       },
       {
         "state": "WA",
@@ -2567,7 +3262,13 @@
         "recent_qld_funding": 2329110.99,
         "funded_program_count": 1,
         "linkage_strength": "strong_linkage",
-        "verification_score": 4
+        "verification_score": 4,
+        "contact_email": "enquiries@krci.org.au",
+        "contact_phone": "(08) 9194 1900",
+        "contact_website": null,
+        "oric_size": "Large",
+        "oric_status": "Registered",
+        "oric_url": null
       },
       {
         "state": "WA",
@@ -2586,7 +3287,15 @@
         "recent_qld_funding": 6230708.74,
         "funded_program_count": 2,
         "linkage_strength": "strong_linkage",
-        "verification_score": 4
+        "verification_score": 4,
+        "contact_email": "feedback@mww.org.au",
+        "contact_phone": "(08) 9193 0600",
+        "contact_website": null,
+        "oric_size": "Large",
+        "oric_status": "Registered",
+        "oric_url": "https://mycorp.oric.gov.au/public-register/public-register-details/?id=517c03cc-b605-f011-bae2-000d3acc425c",
+        "oric_income_2024": " >=$5m",
+        "oric_employees_2024": " >24"
       },
       {
         "state": "WA",
@@ -2605,7 +3314,13 @@
         "recent_qld_funding": 194583.48,
         "funded_program_count": 1,
         "linkage_strength": "strong_linkage",
-        "verification_score": 5
+        "verification_score": 5,
+        "contact_email": "kyana1@dumbartung.org.au",
+        "contact_phone": "(08) 9451 4977",
+        "contact_website": "https://www.dumbartung.org.au",
+        "oric_size": "Medium",
+        "oric_status": "Registered",
+        "oric_url": "https://mycorp.oric.gov.au/public-register/public-register-details/?id=2880d9cb-b605-f011-bae1-6045bdc494a9"
       },
       {
         "state": "WA",
@@ -2624,7 +3339,15 @@
         "recent_qld_funding": 0,
         "funded_program_count": 0,
         "linkage_strength": "strong_linkage",
-        "verification_score": 3
+        "verification_score": 3,
+        "contact_email": "binalup5@outlook.com",
+        "contact_phone": "0498 229 474",
+        "contact_website": null,
+        "oric_size": "Medium",
+        "oric_status": "Registered",
+        "oric_url": "https://mycorp.oric.gov.au/public-register/public-register-details/?id=604711cc-b605-f011-bae1-00224811ab9d",
+        "oric_income_2024": " $100k-<$5m",
+        "oric_employees_2024": "0"
       },
       {
         "state": "WA",
@@ -2643,7 +3366,13 @@
         "recent_qld_funding": 0,
         "funded_program_count": 0,
         "linkage_strength": "strong_linkage",
-        "verification_score": 3
+        "verification_score": 3,
+        "contact_email": "lsellers@yorgum.org.au",
+        "contact_phone": "0892189477",
+        "contact_website": null,
+        "oric_size": "Large",
+        "oric_status": "Registered",
+        "oric_url": null
       },
       {
         "state": "WA",
@@ -2662,7 +3391,15 @@
         "recent_qld_funding": 300000,
         "funded_program_count": 1,
         "linkage_strength": "strong_linkage",
-        "verification_score": 4
+        "verification_score": 4,
+        "contact_email": "m.williams@ngnowar.org.au",
+        "contact_phone": "08 9161 1514",
+        "contact_website": null,
+        "oric_size": "Large",
+        "oric_status": "Registered",
+        "oric_url": "https://mycorp.oric.gov.au/public-register/public-register-details/?id=7446dccc-b605-f011-bae2-7c1e522a88ba",
+        "oric_income_2024": " >=$5m",
+        "oric_employees_2024": " >24"
       },
       {
         "state": "WA",
@@ -2681,7 +3418,13 @@
         "recent_qld_funding": 0,
         "funded_program_count": 0,
         "linkage_strength": "strong_linkage",
-        "verification_score": 3
+        "verification_score": 3,
+        "contact_email": "governance@yued.org.au",
+        "contact_phone": "08 9420 7253",
+        "contact_website": null,
+        "oric_size": "Medium",
+        "oric_status": "Registered",
+        "oric_url": null
       },
       {
         "state": "WA",
@@ -2700,7 +3443,15 @@
         "recent_qld_funding": 14719402.94,
         "funded_program_count": 1,
         "linkage_strength": "funded_no_alma",
-        "verification_score": 2
+        "verification_score": 2,
+        "contact_email": "ceo@ashburton.net.au",
+        "contact_phone": "0891891758",
+        "contact_website": null,
+        "oric_size": "Large",
+        "oric_status": "Registered",
+        "oric_url": "https://mycorp.oric.gov.au/public-register/public-register-details/?id=ab8205cd-b605-f011-bae2-6045bde6fb1f",
+        "oric_income_2024": " >=$5m",
+        "oric_employees_2024": " >24"
       },
       {
         "state": "WA",
@@ -2719,7 +3470,15 @@
         "recent_qld_funding": 5490289.53,
         "funded_program_count": 1,
         "linkage_strength": "funded_no_alma",
-        "verification_score": 2
+        "verification_score": 2,
+        "contact_email": "holly.tideswell@ngcouncil.org.au",
+        "contact_phone": "0436319746",
+        "contact_website": null,
+        "oric_size": "Large",
+        "oric_status": "Registered",
+        "oric_url": "https://mycorp.oric.gov.au/public-register/public-register-details/?id=1de7d6c4-b605-f011-bae1-00224811ab9d",
+        "oric_income_2024": " >=$5m",
+        "oric_employees_2024": " >24"
       },
       {
         "state": "WA",
@@ -2738,7 +3497,13 @@
         "recent_qld_funding": 4932456.94,
         "funded_program_count": 1,
         "linkage_strength": "funded_no_alma",
-        "verification_score": 2
+        "verification_score": 2,
+        "contact_email": "andrew@maximbusiness.com.au",
+        "contact_phone": "0736299893",
+        "contact_website": null,
+        "oric_size": "Large",
+        "oric_status": "Registered",
+        "oric_url": null
       },
       {
         "state": "WA",
@@ -2757,7 +3522,15 @@
         "recent_qld_funding": 3273297.21,
         "funded_program_count": 1,
         "linkage_strength": "funded_no_alma",
-        "verification_score": 3
+        "verification_score": 3,
+        "contact_email": "benjamin@act.place",
+        "contact_phone": "0392156862",
+        "contact_website": "https://pakam.com.au/",
+        "oric_size": "Medium",
+        "oric_status": "Registered",
+        "oric_url": "https://mycorp.oric.gov.au/public-register/public-register-details/?id=014711cc-b605-f011-bae1-00224811ab9d",
+        "oric_income_2024": " $100k-<$5m",
+        "oric_employees_2024": "5 - 24"
       },
       {
         "state": "WA",
@@ -2776,7 +3549,15 @@
         "recent_qld_funding": 2486135.79,
         "funded_program_count": 1,
         "linkage_strength": "funded_no_alma",
-        "verification_score": 2
+        "verification_score": 2,
+        "contact_email": "osm@enac.net.au",
+        "contact_phone": "0891931600",
+        "contact_website": null,
+        "oric_size": "Large",
+        "oric_status": "Registered",
+        "oric_url": "https://mycorp.oric.gov.au/public-register/public-register-details/?id=5a46dccc-b605-f011-bae2-7c1e522a88ba",
+        "oric_income_2024": " >=$5m",
+        "oric_employees_2024": " >24"
       },
       {
         "state": "WA",
@@ -2795,7 +3576,15 @@
         "recent_qld_funding": 1649704.4,
         "funded_program_count": 1,
         "linkage_strength": "funded_no_alma",
-        "verification_score": 2
+        "verification_score": 2,
+        "contact_email": null,
+        "contact_phone": null,
+        "contact_website": null,
+        "oric_size": "Medium",
+        "oric_status": "Registered",
+        "oric_url": "https://mycorp.oric.gov.au/public-register/public-register-details/?id=935cb7cc-b605-f011-bae2-7c1e52626451",
+        "oric_income_2024": " $100k-<$5m",
+        "oric_employees_2024": "5 - 24"
       },
       {
         "state": "WA",
@@ -2814,7 +3603,15 @@
         "recent_qld_funding": 1312055.53,
         "funded_program_count": 1,
         "linkage_strength": "funded_no_alma",
-        "verification_score": 2
+        "verification_score": 2,
+        "contact_email": "richard@nahs.org.au",
+        "contact_phone": "0899818600",
+        "contact_website": null,
+        "oric_size": "Large",
+        "oric_status": "Registered",
+        "oric_url": "https://mycorp.oric.gov.au/public-register/public-register-details/?id=627fd9cb-b605-f011-bae1-6045bdc494a9",
+        "oric_income_2024": " >=$5m",
+        "oric_employees_2024": " >24"
       },
       {
         "state": "WA",
@@ -2833,7 +3630,14 @@
         "recent_qld_funding": 1302132.8,
         "funded_program_count": 2,
         "linkage_strength": "funded_no_alma",
-        "verification_score": 2
+        "verification_score": 2,
+        "contact_email": "ceo@yulella.org.au",
+        "contact_phone": "0899801339",
+        "contact_website": null,
+        "oric_size": "Large",
+        "oric_status": "Registered",
+        "oric_url": "https://mycorp.oric.gov.au/public-register/public-register-details/?id=3d5c46cb-b605-f011-bae1-0022489473b7",
+        "oric_employees_2024": " >24"
       },
       {
         "state": "WA",
@@ -2852,7 +3656,11 @@
         "recent_qld_funding": 1226120,
         "funded_program_count": 1,
         "linkage_strength": "funded_no_alma",
-        "verification_score": 3
+        "verification_score": 3,
+        "contact_email": "dss@dss.org.au",
+        "contact_phone": "0221543366",
+        "contact_website": "http://www.centraldesert.org.au",
+        "acnc_size": "Large"
       },
       {
         "state": "WA",
@@ -2871,7 +3679,13 @@
         "recent_qld_funding": 1137495.48,
         "funded_program_count": 1,
         "linkage_strength": "funded_no_alma",
-        "verification_score": 2
+        "verification_score": 2,
+        "contact_email": "coo@ngaardamedia.com.au",
+        "contact_phone": "1300 989 505",
+        "contact_website": null,
+        "oric_size": "Medium",
+        "oric_status": "Registered",
+        "oric_url": null
       },
       {
         "state": "WA",
@@ -2890,7 +3704,14 @@
         "recent_qld_funding": 949014.6,
         "funded_program_count": 1,
         "linkage_strength": "funded_no_alma",
-        "verification_score": 2
+        "verification_score": 2,
+        "contact_email": "reception@gme.com.au",
+        "contact_phone": "0891949999",
+        "contact_website": null,
+        "oric_size": "Large",
+        "oric_status": "Registered",
+        "oric_url": "https://mycorp.oric.gov.au/public-register/public-register-details/?id=2d7d03cc-b605-f011-bae2-000d3acc425c",
+        "oric_employees_2024": "5 - 24"
       },
       {
         "state": "WA",
@@ -2909,9 +3730,22 @@
         "recent_qld_funding": 759730.88,
         "funded_program_count": 1,
         "linkage_strength": "funded_no_alma",
-        "verification_score": 3
+        "verification_score": 3,
+        "contact_email": "corporatesecretary@iiwswa.org.au",
+        "contact_phone": "0412392518",
+        "contact_website": "www.nyoongarsports.com.au",
+        "oric_size": "Medium",
+        "oric_status": "Registered",
+        "oric_url": null
       }
     ]
   },
-  "cleanup_notes": "Removed 11 rows marked not-community-controlled after 2026-04-20 DQ sweep (dereg ORIC, gov dept, duplicate, etc.)"
+  "cleanup_notes": "Removed 11 rows marked not-community-controlled after 2026-04-20 DQ sweep (dereg ORIC, gov dept, duplicate, etc.)",
+  "refreshed_at": "2026-04-20T02:45:59.867Z",
+  "coverage_snapshot": {
+    "with_email": 129,
+    "with_phone": 121,
+    "with_oric_size": 85,
+    "with_2024_financials": 39
+  }
 }
