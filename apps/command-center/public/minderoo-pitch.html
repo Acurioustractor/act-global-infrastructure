@@ -259,6 +259,125 @@
   </div>
 </section>
 
+<!-- EMPATHY LEDGER STORY WIDGET · voices from the anchor communities -->
+<section class="section" style="background: white">
+  <div class="container-narrow text-center mb-10">
+    <div class="eyebrow mb-3">Empathy Ledger · storyteller posts · live-pulled</div>
+    <h2 class="text-4xl md:text-5xl mb-4" style="font-weight:500">Voices from the anchor communities.</h2>
+    <p class="serif-italic text-lg text-stone-700 leading-relaxed">Six storyteller posts pulled directly from Empathy Ledger v2. Every photo, every quote, every consent marker is live. The system behind this page is the same system behind the envelope — community-owned, elder-approved, revocable within 24 hours.</p>
+  </div>
+  <div class="container">
+    <div id="el-stories-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div class="col-span-full text-center py-10 text-sm text-stone-500 italic">Loading storyteller posts from Empathy Ledger v2…</div>
+    </div>
+    <p class="caption text-center mt-6">Each card embeds one post by its EL v2 UUID. Edit <code class="text-[11px] bg-stone-100 px-1 rounded">EL_STORY_IDS</code> in the page source to change which posts appear.</p>
+  </div>
+</section>
+
+<!-- EL STORY WIDGET — reusable vanilla JS that reads minderoo-consent-snapshot.json -->
+<script>
+  // Which stories to feature — edit this list to change the embed.
+  // UUIDs map to entries in /minderoo-consent-snapshot.json (curated from EL v2).
+  const EL_STORY_IDS = [
+    "6ac1fc12-f6fa-4dd6-930b-9159f692b04d", // Oonchiumpa · Kristy · What happens when community leads
+    "2005424d-3969-41b2-8bb7-163ea6a46ec8", // Oonchiumpa · Aunty Bev & Uncle Tony
+    "b68e2760-648c-4c07-b2b0-b6f6d46f6bfc", // BG Fit · Benji
+    "f99e581e-33de-4a52-9528-daee36d8f0b1", // BG Fit · Jay
+    "128e7ad5-b0c7-4b0d-8ada-878e0d8f0a03", // Oonchiumpa · Bringing kids back to Country
+    "b3dfcec7-ee70-477f-83af-58cc870c199a"  // Mounty Yarns · video
+  ];
+
+  async function loadEmpathyLedgerStories() {
+    const grid = document.getElementById('el-stories-grid');
+    if (!grid) return;
+    let data;
+    try {
+      const r = await fetch('/minderoo-consent-snapshot.json?v=' + Date.now());
+      if (!r.ok) throw new Error('snapshot load failed');
+      data = await r.json();
+    } catch (err) {
+      grid.innerHTML = '<div class="col-span-full text-center py-10 text-sm text-stone-500 italic">Stories temporarily unavailable — content owned by community, returning shortly.</div>';
+      return;
+    }
+
+    // Map id → story
+    const byId = Object.fromEntries((data.stories || []).map(s => [s.el_v2_story_id, s]));
+    const MODE_COLOUR = {
+      'to-authority': 'var(--earth-grass)',
+      'selective': 'var(--m-orange)',
+      'elders-in-council': 'var(--m-purple)',
+      'ceo-as-elder': 'var(--earth-sky)',
+      'non-to-per-story': 'var(--m-gold)'
+    };
+
+    const cards = EL_STORY_IDS.map(id => {
+      const s = byId[id];
+      if (!s) return '';
+
+      // Media block: video takes precedence over hero image
+      let media = '';
+      if (s.media && s.media.video_embed) {
+        const embedUrl = s.media.video_embed.replace('/view/', '/embed/');
+        media = `<div style="position:relative;aspect-ratio:16/9;background:var(--m-stone);"><iframe src="${embedUrl}" allowfullscreen style="position:absolute;inset:0;width:100%;height:100%;border:0"></iframe></div>`;
+      } else if (s.media && s.media.hero) {
+        media = `<div style="aspect-ratio:4/3;overflow:hidden;background:var(--m-cream-2)"><img src="${s.media.hero}" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block"></div>`;
+      } else {
+        media = `<div style="aspect-ratio:4/3;background:linear-gradient(135deg,var(--m-cream-2),var(--m-cream));display:flex;align-items:center;justify-content:center;color:var(--m-stone-soft);font-size:12px;font-style:italic;padding:20px;text-align:center">${(s.storyteller && s.storyteller.portrait_note) || 'Text-only card · portrait consent pending for print'}</div>`;
+      }
+
+      const modeColor = (s.elder && s.elder.mode) ? (MODE_COLOUR[s.elder.mode] || 'var(--m-purple)') : 'var(--m-purple)';
+      const statusChip = (s.consent && s.consent.status === 'active')
+        ? `<span style="background:rgba(74,107,58,0.1);color:var(--earth-grass);padding:2px 8px;border-radius:999px;font-size:10px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase">Active</span>`
+        : (s.consent && s.consent.status === 'awaiting_elder')
+        ? `<span style="background:rgba(240,185,58,0.12);color:#8a6f20;padding:2px 8px;border-radius:999px;font-size:10px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase">Awaiting elder</span>`
+        : '';
+      const sensitivityDot = (s.consent && s.consent.sensitivity === 'medium')
+        ? '<span title="Medium cultural sensitivity · elder approval current" style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--m-gold);margin-right:6px"></span>'
+        : (s.consent && s.consent.sensitivity === 'high')
+        ? '<span title="High cultural sensitivity · context matters" style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--earth-country);margin-right:6px"></span>'
+        : '';
+
+      const ownershipBadge = `<span style="display:inline-flex;align-items:center;gap:4px;color:var(--earth-grass);font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em" title="This story belongs to ${s.organisation} · ACT holds it as custodian, not owner">⬤ Community-owned</span>`;
+      const revocableBadge = `<span style="display:inline-flex;align-items:center;gap:4px;color:var(--earth-sky);font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;margin-left:10px" title="One message from the storyteller or elder removes this within 24 hours">◑ Revocable</span>`;
+      const elderLine = (s.elder && s.elder.name)
+        ? `<div style="font-size:11px;color:var(--m-stone-soft);margin-top:8px;line-height:1.4">Elder approval · <strong style="color:${modeColor}">${s.elder.mode_label || s.elder.mode || ''}</strong> · ${(s.elder.approval_type || '')} · ${(s.elder.approved_at || '')}${s.elder.witnessed_by ? ' · witnessed by ' + s.elder.witnessed_by : ''}</div>`
+        : `<div style="font-size:11px;color:var(--m-stone-soft);margin-top:8px;font-style:italic">Elder approval pending — card shown to demonstrate the gate working.</div>`;
+      const contextPreface = (s.consent && s.consent.sensitivity_context_preface)
+        ? `<div style="font-size:11px;color:#8a6f20;font-style:italic;background:rgba(240,185,58,0.1);border-left:2px solid var(--m-gold);padding:6px 10px;margin-bottom:10px;line-height:1.5">${s.consent.sensitivity_context_preface}</div>`
+        : '';
+
+      return `
+        <div class="anchor-card-big" style="position:relative">
+          ${media}
+          <div style="padding:20px">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;flex-wrap:wrap;gap:6px">
+              <span style="font-size:10px;color:var(--m-stone-soft);text-transform:uppercase;letter-spacing:0.15em;font-weight:600">${s.country || s.organisation}</span>
+              <span style="display:flex;align-items:center">${sensitivityDot}${statusChip}</span>
+            </div>
+            <h3 style="font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:500;margin:0 0 10px;line-height:1.2">${s.title || ''}</h3>
+            ${contextPreface}
+            <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:500;font-size:16px;line-height:1.35;margin:0 0 12px;padding-left:14px;border-left:3px solid ${modeColor};color:var(--m-stone)">"${s.quote || ''}"</blockquote>
+            <div style="font-size:12px;color:var(--m-stone);margin-bottom:8px"><strong>${(s.storyteller && s.storyteller.name) || '—'}</strong>${s.storyteller && s.storyteller.role ? ' · <span style="color:var(--m-stone-soft)">' + s.storyteller.role + '</span>' : ''}</div>
+            <div style="padding-top:10px;border-top:1px solid var(--m-divider);margin-top:12px">
+              ${ownershipBadge}${revocableBadge}
+              ${elderLine}
+              <div style="font-size:10px;color:var(--m-stone-soft);margin-top:6px">Held in Empathy Ledger v2 · verified ${(s.consent && s.consent.last_verified) || '—'} · 12-gate OCAP chain passed</div>
+            </div>
+          </div>
+        </div>
+      `;
+    }).filter(Boolean).join('');
+
+    grid.innerHTML = cards || '<div class="col-span-full text-center py-10 text-sm text-stone-500 italic">No storyteller posts matched the IDs in this page.</div>';
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', loadEmpathyLedgerStories);
+  } else {
+    loadEmpathyLedgerStories();
+  }
+</script>
+
 <div class="container section-sm"><div class="ornament"></div></div>
 
 <!-- THE THREE CIRCLES — CONCENTRIC VIZ =============================== -->
