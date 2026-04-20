@@ -229,8 +229,8 @@ These are the seven methods the program runs on. Each one has its own page in th
 
 | Lane | Meaning |
 |---|---|
-| ⚡ **Drive** | Connect the PTO now. Maximum 3 projects. |
-| 🌱 **Field** | Planted. Not powered yet. Hold the line. |
+| **Drive** | Connect the PTO now. Maximum 3 projects. |
+| **Field** | Planted. Not powered yet. Hold the line. |
 | 🔧 **Shed** | Park, sunset, or hand over. |
 
 **The 90-day Furrow Plan** — six tracks every diagnostic ends in: Mission, Revenue, People, Product, Partnerships, Rhythm. Each one with an action verb, a target, and the proof it landed.

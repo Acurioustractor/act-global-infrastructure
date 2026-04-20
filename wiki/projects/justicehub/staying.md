@@ -19,7 +19,7 @@ canonical_pitch_doc: wiki/projects/three-circles.md
 
 # Staying — Country & Council
 
-> 📖 **The flagship reflection for STAY lives at [[../../synthesis/the-kettle|The Kettle]].** Read that first if you want the *why* in Ben's voice — the room at Oonchiumpa, Diagrama, and the four-layer infrastructure that makes the kettle legible.
+> **The flagship reflection for STAY lives at [[../../synthesis/the-kettle|The Kettle]].** Read that first if you want the *why* in Ben's voice — the room at Oonchiumpa, Diagrama, and the four-layer infrastructure that makes the kettle legible.
 
 > ⚠️ **2026-04-08 framing change.** This page was originally drafted as a standalone Minderoo pitch. After review of the canonical Three Circles proposal (`wiki/raw/2026-04-07-jh-three-circles-proposal.md`) — which Lucy Stronach is already warm on at $2.9M / 3 years with 10 anchor communities — **Staying has been reframed as the *methodology layer* inside Three Circles, not a competing pitch.**
 >
