@@ -43,12 +43,15 @@ Listen → Curiosity → Action → Art
 
 ## Voice Guardrails
 
+**Writing voice (load `references/writing-voice.md` for ANY public-facing writing).** ACT voice uses Ian Curtis's method of compression: name the room, name the body, load the abstract noun, stop the line before the explanation. Forbidden AI tells (delve, crucial, pivotal, tapestry, underscore, em dashes, negative parallelisms, superficial -ing tails, "challenges and future prospects" formulas) are listed in that file and must be rejected on sight.
+
 **DO:**
 - Farm metaphor: seeds, harvest, cultivating, soil, seasons, fields
 - Community ownership, co-stewardship, Indigenous sovereignty
 - "Designing for obsolescence" / "handing over the keys"
 - Name Jinibara Country when referencing the land
 - 40% profit-sharing commitment
+- Concrete rooms. Concrete bodies. Stopped lines.
 
 **DON'T:**
 - Overclaim ("world-leading," "revolutionary")
@@ -56,6 +59,7 @@ Listen → Curiosity → Action → Art
 - Frame communities as beneficiaries (they are co-owners)
 - Corporate jargon or glossy marketing speak
 - Imply permanence (we design for obsolescence)
+- AI register (puffery, rule of three, elegant variation, em dashes, significance claims)
 
 ## Visual Language
 - Palette: Stone 50-900 + Emerald accents
@@ -67,6 +71,7 @@ Listen → Curiosity → Action → Art
 | Need | Reference |
 |------|-----------|
 | Identity, LCAA, values, voice | `references/brand-core.md` |
+| **Writing voice (Curtis method + AI tells to avoid)** | **`references/writing-voice.md`** |
 | Land details, conservation | `references/land-practice.md` |
 | All projects/seeds, revenue | `references/projects-ecosystem.md` |
 | Page patterns, IA | `references/content-structure.md` |

@@ -276,3 +276,4 @@ Key routing rules:
 - Architecture review → invoke plan-eng-review
 - Save progress, checkpoint, resume → invoke checkpoint
 - Code quality, health check → invoke health
+- **ANY ACT-facing writing** (pitches, grants, web copy, campaign posts, journal spreads, board reports, donor letters, press, captions, artefact prose) → invoke act-brand-alignment and load `references/writing-voice.md`. Apply Curtis method (name the room, name the body, load the abstract noun, stop the line) and reject AI tells on sight (delve, crucial, pivotal, tapestry, underscore, em dashes, "not just X but Y", rule-of-three adjectives, "challenges and future prospects", superficial -ing tails).
