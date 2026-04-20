@@ -10,407 +10,899 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    /* Minderoo-aligned palette */
     --m-purple: #4a2560;
     --m-purple-deep: #2e1540;
+    --m-purple-lite: #7a5a8f;
     --m-orange: #e8843a;
     --m-gold: #f0b93a;
     --m-cream: #faf5ec;
+    --m-cream-2: #f2ead9;
     --m-stone: #2b2530;
     --m-stone-soft: #605468;
     --m-divider: #e6dfcf;
-    /* ACT earth accents */
     --earth-grass: #4a6b3a;
     --earth-country: #b7410e;
     --earth-sky: #2d5f7f;
   }
-  body { font-family: 'Inter', system-ui, sans-serif; background: var(--m-cream); color: var(--m-stone); -webkit-font-smoothing: antialiased; }
+  body { font-family: 'Inter', system-ui, sans-serif; background: var(--m-cream); color: var(--m-stone); -webkit-font-smoothing: antialiased; line-height: 1.6; }
   h1, h2, h3, .serif { font-family: 'Cormorant Garamond', Georgia, serif; letter-spacing: -0.01em; }
   .serif-italic { font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; }
-  .mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: 0.02em; }
   .eyebrow { font-size: 10px; text-transform: uppercase; letter-spacing: 3px; font-weight: 600; color: var(--m-stone-soft); }
   .hero-gradient { background: linear-gradient(135deg, var(--m-purple-deep) 0%, var(--m-purple) 60%, #6a3580 100%); }
-  .circle-card { background: white; border: 1px solid var(--m-divider); border-radius: 12px; padding: 28px; display: flex; flex-direction: column; position: relative; overflow: hidden; transition: transform 0.2s ease; }
-  .circle-card:hover { transform: translateY(-2px); box-shadow: 0 10px 40px rgba(46,21,64,0.08); }
-  .circle-mark { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond'; font-style: italic; font-size: 24px; color: white; margin-bottom: 20px; }
-  .circle-mark-1 { background: linear-gradient(135deg, var(--earth-grass), #6a8c5a); }
-  .circle-mark-2 { background: linear-gradient(135deg, var(--m-gold), var(--m-orange)); }
-  .circle-mark-3 { background: linear-gradient(135deg, var(--earth-country), #d05a26); }
-  .pullquote { font-family: 'Cormorant Garamond'; font-style: italic; font-weight: 500; line-height: 1.3; }
-  .divider-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--m-stone-soft); display: inline-block; margin: 0 10px; vertical-align: middle; }
-  .stat-number { font-family: 'Cormorant Garamond'; font-weight: 500; font-size: 56px; line-height: 1; color: var(--m-purple); }
-  .ratio-bar { height: 10px; background: linear-gradient(90deg, var(--m-purple-deep), var(--m-purple)); border-radius: 5px; position: relative; overflow: hidden; }
-  .ratio-bar-fill { position: absolute; left: 0; top: 0; bottom: 0; width: 0.013%; background: var(--m-gold); box-shadow: 0 0 0 4px rgba(240, 185, 58, 0.3); }
-  .badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px; font-size: 11px; font-weight: 500; letter-spacing: 0.02em; }
-  .badge-outcome { background: rgba(74, 37, 96, 0.08); color: var(--m-purple); }
-  .minderoo-logo-stroke { stroke: var(--m-gold); }
-  .ornament { font-family: 'Cormorant Garamond'; color: var(--m-stone-soft); font-size: 20px; text-align: center; margin: 40px 0 30px; }
+  .section { padding: 80px 0; }
+  .section-sm { padding: 50px 0; }
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 32px; }
+  .container-narrow { max-width: 780px; margin: 0 auto; padding: 0 32px; }
+  .pullquote { font-family: 'Cormorant Garamond'; font-style: italic; font-weight: 500; line-height: 1.25; }
+  .stat-num { font-family: 'Cormorant Garamond'; font-weight: 500; line-height: 1; color: var(--m-purple); }
+  .ornament { font-family: 'Cormorant Garamond'; color: var(--m-stone-soft); font-size: 20px; text-align: center; margin: 10px 0; letter-spacing: 8px; }
+  .ornament::before { content: "·  ·  ·"; }
+  .image-frame { border-radius: 12px; overflow: hidden; background: var(--m-cream-2); }
+  .hero-photo { width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block; }
+  .portrait-photo { width: 100%; aspect-ratio: 4/5; object-fit: cover; display: block; }
+  .square-photo { width: 100%; aspect-ratio: 1/1; object-fit: cover; display: block; }
+  .caption { font-size: 12px; color: var(--m-stone-soft); font-style: italic; margin-top: 10px; line-height: 1.5; }
+  .circle-pill { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border-radius: 999px; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; font-weight: 600; }
+  .pill-1 { background: rgba(74,107,58,0.1); color: var(--earth-grass); }
+  .pill-2 { background: rgba(232,132,58,0.12); color: var(--m-orange); }
+  .pill-3 { background: rgba(183,65,14,0.1); color: var(--earth-country); }
+  .ratio-track { height: 14px; background: linear-gradient(90deg, var(--m-purple-deep), var(--m-purple)); border-radius: 7px; position: relative; overflow: hidden; box-shadow: inset 0 1px 3px rgba(0,0,0,0.3); }
+  .ratio-marker { position: absolute; left: 0; top: -6px; bottom: -6px; width: 3px; background: var(--m-gold); box-shadow: 0 0 0 5px rgba(240, 185, 58, 0.4); }
+  .trend-bar { display: flex; align-items: flex-end; gap: 3%; height: 200px; padding: 0 4%; }
+  .trend-year { flex: 1; display: flex; flex-direction: column; align-items: center; }
+  .trend-col { width: 100%; background: linear-gradient(180deg, var(--m-purple-lite), var(--m-purple)); border-radius: 6px 6px 0 0; position: relative; transition: height 0.3s; }
+  .trend-col-projection { background: repeating-linear-gradient(135deg, var(--m-cream-2), var(--m-cream-2) 6px, var(--m-purple-lite) 6px, var(--m-purple-lite) 12px); opacity: 0.7; }
+  .trend-label { font-size: 11px; color: var(--m-stone-soft); margin-top: 8px; font-weight: 500; }
+  .trend-val { font-size: 12px; color: var(--m-purple); font-weight: 600; margin-top: -18px; background: var(--m-cream); padding: 2px 6px; border-radius: 4px; }
+  .breakdown-row { display: grid; grid-template-columns: 140px 1fr 80px; gap: 14px; align-items: center; margin-bottom: 10px; font-size: 14px; }
+  .breakdown-bar { height: 10px; border-radius: 5px; }
+  .concentric-svg { width: 100%; max-width: 520px; height: auto; }
+  .anchor-card-big { background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 2px 8px rgba(46,21,64,0.04); }
+  .number-tile { background: white; border: 1px solid var(--m-divider); border-radius: 12px; padding: 26px 22px; }
+  .timeline-year { display: flex; gap: 24px; padding: 26px 0; border-bottom: 1px solid var(--m-divider); }
+  .timeline-year:last-child { border-bottom: none; }
+  .timeline-year-label { flex: 0 0 140px; font-family: 'Cormorant Garamond'; font-size: 30px; color: var(--m-purple); font-weight: 500; font-style: italic; }
+  .video-frame { position: relative; width: 100%; aspect-ratio: 16/9; border-radius: 14px; overflow: hidden; background: var(--m-stone); box-shadow: 0 20px 60px rgba(46,21,64,0.18); }
+  .video-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .nav-spacer { height: 1px; background: var(--m-divider); }
   @media print {
-    .no-print { display: none; }
     body { background: white; }
+    .section { padding: 40px 0; page-break-inside: avoid; }
   }
 </style>
 </head>
 <body>
 
-<!-- Header band -->
-<header class="hero-gradient text-white">
-  <div class="max-w-5xl mx-auto px-8 py-14">
+<!-- HERO ======================================================= -->
+<header class="hero-gradient text-white relative overflow-hidden">
+  <!-- Subtle Country pattern overlay -->
+  <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle at 20% 30%, white 1px, transparent 1px), radial-gradient(circle at 70% 60%, white 1px, transparent 1px); background-size: 40px 40px, 60px 60px;"></div>
+  <div class="container relative z-10 py-20">
     <div class="flex items-center gap-3 mb-8">
-      <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-        <circle cx="18" cy="18" r="16" stroke="white" stroke-width="1.5" opacity="0.6"/>
-        <path d="M6 18 A 12 12 0 0 1 30 18" stroke="var(--m-gold)" stroke-width="2" fill="none"/>
-        <path d="M6 18 A 12 12 0 0 0 30 18" stroke="var(--m-orange)" stroke-width="2" fill="none"/>
+      <svg width="44" height="44" viewBox="0 0 44 44" fill="none">
+        <circle cx="22" cy="22" r="20" stroke="white" stroke-width="1.5" opacity="0.5"/>
+        <path d="M6 22 A 16 16 0 0 1 38 22" stroke="var(--m-gold)" stroke-width="2.5" fill="none"/>
+        <path d="M6 22 A 16 16 0 0 0 38 22" stroke="var(--m-orange)" stroke-width="2.5" fill="none"/>
       </svg>
-      <div class="eyebrow text-white/70" style="color:rgba(255,255,255,0.7)">For Minderoo Foundation · Envelope ships 1 May 2026</div>
+      <div class="eyebrow" style="color:rgba(255,255,255,0.8)">For Minderoo Foundation · Envelope ships 1 May 2026</div>
     </div>
-    <h1 class="text-5xl md:text-6xl mb-4" style="font-weight:500;">The Three Circles</h1>
-    <p class="serif-italic text-xl md:text-2xl text-white/80 max-w-2xl leading-snug">A three-year partnership to hold the Aboriginal Community-Controlled anchor communities that intercept Australia's $22.3 billion late-intervention trajectory — before it becomes detention.</p>
-    <div class="mt-10 flex flex-wrap gap-8 items-baseline">
+    <h1 class="text-5xl md:text-7xl mb-6" style="font-weight:500;line-height:1.02">The Three Circles</h1>
+    <p class="serif-italic text-xl md:text-2xl text-white/85 max-w-2xl leading-snug mb-12" style="color:rgba(255,255,255,0.85)">A three-year partnership to hold the Aboriginal Community-Controlled anchor communities that intercept Australia's $22.3 billion late-intervention trajectory — before it becomes detention.</p>
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8 border-t border-white/20 pt-10" style="border-color:rgba(255,255,255,0.2)">
       <div>
-        <div class="eyebrow text-white/60 mb-1" style="color:rgba(255,255,255,0.6)">Three-year ask</div>
-        <div class="text-4xl" style="font-family:'Cormorant Garamond';font-weight:500">$2.9 million</div>
+        <div class="eyebrow mb-2" style="color:rgba(255,255,255,0.6)">Three-year ask</div>
+        <div class="stat-num text-5xl text-white">$2.9M</div>
+        <div class="text-xs mt-1" style="color:rgba(255,255,255,0.7)">FY26 · FY27 · FY28</div>
       </div>
       <div>
-        <div class="eyebrow text-white/60 mb-1" style="color:rgba(255,255,255,0.6)">Against late-intervention cost</div>
-        <div class="text-4xl" style="font-family:'Cormorant Garamond';font-weight:500">0.013%</div>
-        <div class="text-xs text-white/70" style="color:rgba(255,255,255,0.7)">of one year of $22.3B (COLI24)</div>
+        <div class="eyebrow mb-2" style="color:rgba(255,255,255,0.6)">Of one year of COLI24</div>
+        <div class="stat-num text-5xl text-white">0.013%</div>
+        <div class="text-xs mt-1" style="color:rgba(255,255,255,0.7)">1 dollar per 7,700 of the problem</div>
       </div>
       <div>
-        <div class="eyebrow text-white/60 mb-1" style="color:rgba(255,255,255,0.6)">Anchor communities</div>
-        <div class="text-4xl" style="font-family:'Cormorant Garamond';font-weight:500">5 → 7–8</div>
-        <div class="text-xs text-white/70" style="color:rgba(255,255,255,0.7)">confirmed, plus co-selection with Minderoo</div>
+        <div class="eyebrow mb-2" style="color:rgba(255,255,255,0.6)">Anchor communities</div>
+        <div class="stat-num text-5xl text-white">5 → 7–8</div>
+        <div class="text-xs mt-1" style="color:rgba(255,255,255,0.7)">Confirmed + co-selected</div>
+      </div>
+      <div>
+        <div class="eyebrow mb-2" style="color:rgba(255,255,255,0.6)">Published ROI</div>
+        <div class="stat-num text-5xl text-white">$2:$1</div>
+        <div class="text-xs mt-1" style="color:rgba(255,255,255,0.7)">Minimum $5.8M forward saving</div>
       </div>
     </div>
-    <div class="mt-8 text-xs text-white/60" style="color:rgba(255,255,255,0.6)">We acknowledge the Traditional Custodians of the Country on which this work happens. Their sovereignty has never been ceded. This envelope was shaped under their cultural authority.</div>
+    <div class="mt-12 text-xs max-w-3xl" style="color:rgba(255,255,255,0.6)">We acknowledge the Traditional Custodians of the Country on which this work happens. Sovereignty has never been ceded. This envelope was shaped under their cultural authority — Oonchiumpa, PICC, MMEIC, BG Fit, Mounty Yarns — all Aboriginal Community-Controlled.</div>
   </div>
 </header>
 
-<!-- The problem — COLI24 frame -->
-<section class="max-w-5xl mx-auto px-8 py-14">
-  <div class="eyebrow mb-3">The opportunity cost Minderoo has already named</div>
-  <h2 class="text-3xl md:text-4xl mb-5 max-w-3xl" style="font-weight:500">Australia spent $22.3 billion last year on children and young people in crisis.</h2>
-  <p class="serif-italic text-lg text-stone-700 mb-8 max-w-3xl leading-relaxed">A 47% real-terms rise since 2019. Child protection is the largest line ($10.2B, 43%). Youth crime is the second ($3.4B, 14%). Over half of children in Victoria's youth detention came via child protection. They are not two problems. They are one trajectory — the same children, five years apart.</p>
-
-  <div class="bg-white border border-stone-200 rounded-xl p-8 mb-8">
-    <div class="flex items-center justify-between mb-4">
-      <div class="eyebrow">$22.3 billion · one year of late intervention</div>
-      <div class="eyebrow">The Three Circles · 3 years</div>
+<!-- OPENING IMAGE ====================================================== -->
+<section class="section-sm">
+  <div class="container">
+    <div class="image-frame">
+      <img class="hero-photo" src="https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/media/d0a162d2-282e-4653-9d12-aa934c9dfa4e/1770667725446_20251103-1E5A5101.jpg" alt="Young people on Country at Atnarpa, under Oonchiumpa's leadership" loading="lazy">
     </div>
-    <div class="ratio-bar mb-3">
-      <div class="ratio-bar-fill"></div>
-    </div>
-    <div class="flex items-center justify-between text-sm text-stone-600">
-      <span>Minderoo's own 2025 Cost of Late Intervention figure</span>
-      <span class="font-semibold" style="color:var(--m-purple)">$2.9M · 0.013%</span>
-    </div>
+    <p class="caption text-center mt-4">Atnarpa · Eastern Arrernte Country · young people on Country with Oonchiumpa · Empathy Ledger v2 · consent current, revocable, held by community.</p>
   </div>
-
-  <blockquote class="pullquote text-xl md:text-2xl border-l-4 pl-6 py-2 mb-3 max-w-3xl" style="border-color:var(--m-gold);color:var(--m-stone)">
-    "This is a clear case of opportunity cost. By failing to intervene early, we miss the chance to achieve better outcomes for children and young people — and a better return on investment for society."
-  </blockquote>
-  <div class="text-sm text-stone-600 ml-6">— Nicola Forrest AO, launching COLI24 · August 2025</div>
 </section>
 
-<div class="ornament">·  ·  ·</div>
+<!-- THE PROBLEM ====================================================== -->
+<section class="section" style="background: white;">
+  <div class="container-narrow">
+    <div class="eyebrow mb-4">The opportunity cost Minderoo already named</div>
+    <h2 class="text-4xl md:text-5xl mb-6" style="font-weight:500;line-height:1.1">Australia spent $22.3 billion last year on children and young people in crisis.</h2>
+    <p class="serif-italic text-lg text-stone-700 mb-2 leading-relaxed">A 47% real-terms rise since 2019.</p>
+    <p class="serif-italic text-lg text-stone-700 leading-relaxed">Child protection is the largest line. Youth crime is the second. Over half the kids in Victoria's youth detention came via child protection. These are not two problems — they are one trajectory. The same children, five years apart.</p>
+  </div>
 
-<!-- The Three Circles — three cards -->
-<section class="max-w-6xl mx-auto px-8 pb-6">
-  <div class="eyebrow mb-3 text-center">The partnership, in three movements</div>
-  <h2 class="text-3xl md:text-4xl mb-3 text-center" style="font-weight:500">The Three Circles</h2>
-  <p class="serif-italic text-center text-stone-600 mb-12 max-w-2xl mx-auto">Each circle feeds the next. None is the product. The holding of all three for three years is.</p>
-
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-    <!-- Circle One -->
-    <div class="circle-card">
-      <div class="circle-mark circle-mark-1">I</div>
-      <div class="eyebrow mb-2" style="color:var(--earth-grass)">Circle One · The Centre</div>
-      <h3 class="text-2xl mb-3" style="font-weight:500">The Living Brain</h3>
-      <p class="text-stone-700 mb-5 leading-relaxed">Everything on Australian youth justice — queryable, updating, community-governed. The national evidence backbone of community-led alternatives.</p>
-      <div class="mb-5">
-        <div class="flex items-baseline justify-between mb-1">
-          <div class="eyebrow">3-year investment</div>
-          <div class="text-sm text-stone-500">28%</div>
+  <div class="container mt-16">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+      <!-- Trend viz -->
+      <div class="bg-[var(--m-cream-2)] rounded-xl p-8">
+        <div class="eyebrow mb-3">Late-intervention spend · six-year trend</div>
+        <div class="trend-bar">
+          <div class="trend-year">
+            <div class="trend-val">$15.2B</div>
+            <div class="trend-col" style="height: 55%"></div>
+            <div class="trend-label">2019</div>
+          </div>
+          <div class="trend-year">
+            <div class="trend-col" style="height: 60%; opacity: 0.6"></div>
+            <div class="trend-label">2020</div>
+          </div>
+          <div class="trend-year">
+            <div class="trend-col" style="height: 67%; opacity: 0.6"></div>
+            <div class="trend-label">2021</div>
+          </div>
+          <div class="trend-year">
+            <div class="trend-col" style="height: 74%; opacity: 0.6"></div>
+            <div class="trend-label">2022</div>
+          </div>
+          <div class="trend-year">
+            <div class="trend-col" style="height: 84%; opacity: 0.6"></div>
+            <div class="trend-label">2023</div>
+          </div>
+          <div class="trend-year">
+            <div class="trend-val">$22.3B</div>
+            <div class="trend-col" style="height: 94%"></div>
+            <div class="trend-label">2024</div>
+          </div>
+          <div class="trend-year">
+            <div class="trend-col trend-col-projection" style="height: 100%"></div>
+            <div class="trend-label">2029?</div>
+          </div>
         </div>
-        <div class="text-3xl mb-1" style="font-family:'Cormorant Garamond';font-weight:500;color:var(--m-purple)">$800K</div>
-        <div class="text-xs text-stone-500">Editorial lead · Research + curation · Integration tech</div>
+        <p class="caption text-center">Source: The Front Project / Minderoo Foundation · Cost of Late Intervention 2024 · published August 2025. <br>The Three Circles is what bends the 47% curve.</p>
       </div>
-      <div class="border-t border-stone-100 pt-5 mb-4">
-        <div class="eyebrow mb-2">Impact by Year 3</div>
-        <ul class="text-sm text-stone-700 space-y-1 pl-4 list-disc marker:text-stone-400">
-          <li>Every community-led youth-justice intervention in Australia discoverable from a single platform</li>
-          <li>Every anchor's story corpus compounds monthly under community authority</li>
-          <li>Each anchor cited in ≥1 national policy submission per year</li>
-        </ul>
-      </div>
-      <div class="mt-auto pt-5 border-t border-stone-100">
-        <blockquote class="pullquote text-base leading-snug mb-3">"Our Alternative Service Response is not an add-on to the justice system. It's a cultural foundation that justice should stand on in this region."</blockquote>
-        <div class="text-xs text-stone-500">— Tanya Turner · Eastern Arrernte · co-founder, Oonchiumpa · to 55 judges, 16 April 2026</div>
-      </div>
-    </div>
 
-    <!-- Circle Two -->
-    <div class="circle-card">
-      <div class="circle-mark circle-mark-2">II</div>
-      <div class="eyebrow mb-2" style="color:var(--m-orange)">Circle Two · The Ring</div>
-      <h3 class="text-2xl mb-3" style="font-weight:500">Staying — Country &amp; Council</h3>
-      <p class="text-stone-700 mb-5 leading-relaxed">The relational hold. Five Aboriginal Community-Controlled anchor communities practising the method, held in each other's company. Two to three more co-selected with Minderoo.</p>
-      <div class="mb-5">
-        <div class="flex items-baseline justify-between mb-1">
-          <div class="eyebrow">3-year investment</div>
-          <div class="text-sm text-stone-500">48%</div>
+      <!-- Breakdown viz -->
+      <div class="bg-[var(--m-cream-2)] rounded-xl p-8">
+        <div class="eyebrow mb-4">$22.3B broken down by domain</div>
+        <div class="breakdown-row">
+          <div class="text-sm"><strong>Child protection</strong></div>
+          <div class="breakdown-bar" style="width: 100%; background: var(--earth-country)"></div>
+          <div class="text-right text-sm font-semibold" style="color:var(--m-purple)">$10.2B</div>
         </div>
-        <div class="text-3xl mb-1" style="font-family:'Cormorant Garamond';font-weight:500;color:var(--m-purple)">$1.4M</div>
-        <div class="text-xs text-stone-500">Anchor community hold · Brave Ones exchanges · International (Diagrama · YOPE) · Judges on Country</div>
-      </div>
-      <div class="border-t border-stone-100 pt-5 mb-4">
-        <div class="eyebrow mb-2">Impact by Year 3</div>
-        <ul class="text-sm text-stone-700 space-y-1 pl-4 list-disc marker:text-stone-400">
-          <li>7–8 anchor communities each holding an enduring narrative practice</li>
-          <li>~500+ young people walked through the method</li>
-          <li>12+ Brave Ones domestic exchanges, 5–6 international trips (Diagrama Spain, YOPE Amsterdam)</li>
-          <li>165+ judge touchpoints via annual Judges on Country</li>
-        </ul>
-      </div>
-      <div class="mt-auto pt-5 border-t border-stone-100">
-        <blockquote class="pullquote text-base leading-snug mb-3">"He right. That big fell. He know half of the black people. That's why."</blockquote>
-        <div class="text-xs text-stone-500">— Benji, young person, Mount Isa · on why he trusts Brodie Germaine at BG Fit</div>
-      </div>
-    </div>
-
-    <!-- Circle Three -->
-    <div class="circle-card">
-      <div class="circle-mark circle-mark-3">III</div>
-      <div class="eyebrow mb-2" style="color:var(--earth-country)">Circle Three · The Edge</div>
-      <h3 class="text-2xl mb-3" style="font-weight:500">The Country We're Building</h3>
-      <p class="text-stone-700 mb-5 leading-relaxed">The artefact the community releases. A documentary, a book, per-young-person journals, a national collection — all led by the young people themselves.</p>
-      <div class="mb-5">
-        <div class="flex items-baseline justify-between mb-1">
-          <div class="eyebrow">3-year investment</div>
-          <div class="text-sm text-stone-500">24%</div>
+        <div class="breakdown-row">
+          <div class="text-sm"><strong>Youth crime</strong></div>
+          <div class="breakdown-bar" style="width: 33%; background: var(--m-orange)"></div>
+          <div class="text-right text-sm font-semibold" style="color:var(--m-purple)">$3.4B</div>
         </div>
-        <div class="text-3xl mb-1" style="font-family:'Cormorant Garamond';font-weight:500;color:var(--m-purple)">$700K</div>
-        <div class="text-xs text-stone-500">Case-study artefacts · Per-youth journals · Documentary (Yr 2-3) · National book + launch</div>
-      </div>
-      <div class="border-t border-stone-100 pt-5 mb-4">
-        <div class="eyebrow mb-2">Impact by Year 3</div>
-        <ul class="text-sm text-stone-700 space-y-1 pl-4 list-disc marker:text-stone-400">
-          <li>Documentary released (Year 3 Q4) — co-directed by young people</li>
-          <li>Published national book — ~120 consented stories, young-person editorial board</li>
-          <li>25+ per-young-person journals — durable records they keep</li>
-          <li>National launch event on Country with anchor-community permission</li>
-        </ul>
-      </div>
-      <div class="mt-auto pt-5 border-t border-stone-100">
-        <blockquote class="pullquote text-base leading-snug mb-3">"Because young people are going through all of this stuff, why are the older fellas making choices for the younger fellas when they're the ones going through it?"</blockquote>
-        <div class="text-xs text-stone-500">— Taleigha Glover · young Biripi woman · Mt Druitt</div>
+        <div class="breakdown-row">
+          <div class="text-sm">Youth unemployment</div>
+          <div class="breakdown-bar" style="width: 25%; background: var(--m-gold)"></div>
+          <div class="text-right text-sm">$2.5B</div>
+        </div>
+        <div class="breakdown-row">
+          <div class="text-sm">Youth + adult justice</div>
+          <div class="breakdown-bar" style="width: 22%; background: var(--earth-sky)"></div>
+          <div class="text-right text-sm">$2.2B</div>
+        </div>
+        <div class="breakdown-row">
+          <div class="text-sm">Youth homelessness</div>
+          <div class="breakdown-bar" style="width: 18%; background: var(--m-purple-lite)"></div>
+          <div class="text-right text-sm">$1.8B</div>
+        </div>
+        <div class="breakdown-row">
+          <div class="text-sm">Mental health</div>
+          <div class="breakdown-bar" style="width: 16%; background: var(--earth-grass)"></div>
+          <div class="text-right text-sm">$1.6B</div>
+        </div>
+        <div class="breakdown-row">
+          <div class="text-sm">Physical health</div>
+          <div class="breakdown-bar" style="width: 12%; background: var(--m-stone-soft); opacity: 0.5"></div>
+          <div class="text-right text-sm">$1.2B</div>
+        </div>
+        <div class="breakdown-row">
+          <div class="text-sm">Family violence</div>
+          <div class="breakdown-bar" style="width: 6%; background: var(--m-stone-soft); opacity: 0.5"></div>
+          <div class="text-right text-sm">$0.6B</div>
+        </div>
+        <p class="caption mt-4">#1 and #2 are the same children, five years apart. The anchor communities intercept that transition.</p>
       </div>
     </div>
+
+    <!-- Ratio bar -->
+    <div class="mt-12 bg-white border border-stone-200 rounded-xl p-8">
+      <div class="flex items-baseline justify-between mb-4">
+        <div class="eyebrow">$22.3 billion · one year</div>
+        <div class="eyebrow" style="color:var(--m-purple)">The Three Circles · 3 years</div>
+      </div>
+      <div class="ratio-track mb-4">
+        <div class="ratio-marker"></div>
+      </div>
+      <div class="flex items-center justify-between">
+        <div class="text-sm text-stone-600">One tenth of one percent of one year of the problem…</div>
+        <div class="serif-italic text-lg" style="color:var(--m-purple)">…for three years of what bends the curve.</div>
+      </div>
+    </div>
+
+    <blockquote class="pullquote text-2xl md:text-3xl border-l-4 pl-8 py-4 mt-16 max-w-3xl" style="border-color:var(--m-gold);color:var(--m-stone)">
+      "This is a clear case of opportunity cost. By failing to intervene early, we miss the chance to achieve better outcomes for children and young people — and a better return on investment for society."
+    </blockquote>
+    <div class="text-sm text-stone-600 ml-9 mt-3">— Nicola Forrest AO · launching COLI24 · August 2025</div>
+  </div>
+</section>
+
+<div class="container section-sm"><div class="ornament"></div></div>
+
+<!-- VIDEO · MOUNTY YARNS ============================================= -->
+<section class="section" style="background: var(--m-cream-2)">
+  <div class="container-narrow">
+    <div class="eyebrow mb-3 text-center">In the storytellers' own words</div>
+    <h2 class="text-4xl md:text-5xl mb-4 text-center" style="font-weight:500">Mt Druitt. Darug Country. Mounty Yarns.</h2>
+    <p class="serif-italic text-lg text-stone-700 mb-10 text-center leading-relaxed">Nine young people. Thirteen storytellers. Lived-experience of police violence, child removal, and a justice system that costs seventeen hundred dollars a day to lock them up. Building the hub that was missing.</p>
+  </div>
+  <div class="container">
+    <div class="video-frame">
+      <iframe src="https://share.descript.com/embed/dPmy7yWRQj7" allowfullscreen title="Mounty Yarns: In Their Own Words"></iframe>
+    </div>
+    <p class="caption text-center mt-6">Mounty Yarns: In Their Own Words · Mt Druitt, NSW · CEO Daniel Daylight stands as elder for this compilation · consent captured 2026-04-18 · held in Empathy Ledger v2, revocable at any time.</p>
+  </div>
+</section>
+
+<div class="container section-sm"><div class="ornament"></div></div>
+
+<!-- THE THREE CIRCLES — CONCENTRIC VIZ =============================== -->
+<section class="section" style="background: white">
+  <div class="container-narrow text-center mb-14">
+    <div class="eyebrow mb-3">The partnership, in three movements</div>
+    <h2 class="text-4xl md:text-5xl mb-4" style="font-weight:500">The Three Circles</h2>
+    <p class="serif-italic text-lg text-stone-700 leading-relaxed">Each circle feeds the next. None is the product. The holding of all three for three years is.</p>
   </div>
 
-  <div class="mt-8 bg-white border border-stone-200 rounded-xl p-6 flex flex-wrap items-baseline justify-between gap-6">
-    <div>
-      <div class="eyebrow mb-1">Total three-year partnership</div>
-      <div class="text-4xl" style="font-family:'Cormorant Garamond';font-weight:500;color:var(--m-purple)">$2.9 million</div>
+  <div class="container">
+    <div class="flex justify-center mb-4">
+      <svg class="concentric-svg" viewBox="0 0 520 520">
+        <defs>
+          <radialGradient id="p-outer" cx="50%" cy="50%" r="50%">
+            <stop offset="60%" stop-color="#faf5ec" stop-opacity="0"/>
+            <stop offset="100%" stop-color="#b7410e" stop-opacity="0.18"/>
+          </radialGradient>
+          <radialGradient id="p-mid" cx="50%" cy="50%" r="50%">
+            <stop offset="40%" stop-color="#f5e9c9" stop-opacity="0.05"/>
+            <stop offset="100%" stop-color="#e8843a" stop-opacity="0.22"/>
+          </radialGradient>
+          <radialGradient id="p-inner" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#a6c296" stop-opacity="0.4"/>
+            <stop offset="100%" stop-color="#4a6b3a" stop-opacity="0.35"/>
+          </radialGradient>
+          <filter id="p-shadow" x="-30%" y="-30%" width="160%" height="160%">
+            <feGaussianBlur in="SourceAlpha" stdDeviation="5"/>
+            <feOffset dx="0" dy="3"/>
+            <feComponentTransfer><feFuncA type="linear" slope="0.25"/></feComponentTransfer>
+            <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+        <circle cx="260" cy="260" r="240" fill="url(#p-outer)" stroke="#b7410e" stroke-width="1" filter="url(#p-shadow)"/>
+        <circle cx="260" cy="260" r="175" fill="url(#p-mid)" stroke="#e8843a" stroke-width="1" filter="url(#p-shadow)"/>
+        <circle cx="260" cy="260" r="95" fill="url(#p-inner)" stroke="#4a6b3a" stroke-width="1.25" filter="url(#p-shadow)"/>
+        <circle cx="260" cy="260" r="210" fill="none" stroke="#e8843a" stroke-opacity="0.25" stroke-width="0.5" stroke-dasharray="2 6"/>
+        <circle cx="260" cy="260" r="135" fill="none" stroke="#4a6b3a" stroke-opacity="0.25" stroke-width="0.5" stroke-dasharray="2 6"/>
+        <text x="260" y="254" text-anchor="middle" font-size="11" fill="#4a6b3a" letter-spacing="3" style="font-family:ui-sans-serif,system-ui,sans-serif;text-transform:uppercase;font-weight:600">Circle One</text>
+        <text x="260" y="278" text-anchor="middle" font-size="19" fill="#2b2530" style="font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:500">The Living Brain</text>
+        <text x="260" y="380" text-anchor="middle" font-size="11" fill="#e8843a" letter-spacing="3" style="font-family:ui-sans-serif,system-ui,sans-serif;text-transform:uppercase;font-weight:600">Circle Two · The Ring</text>
+        <text x="260" y="404" text-anchor="middle" font-size="19" fill="#2b2530" style="font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:500">Staying — Country &amp; Council</text>
+        <text x="260" y="476" text-anchor="middle" font-size="11" fill="#b7410e" letter-spacing="3" style="font-family:ui-sans-serif,system-ui,sans-serif;text-transform:uppercase;font-weight:600">Circle Three · The Edge</text>
+        <text x="260" y="500" text-anchor="middle" font-size="19" fill="#2b2530" style="font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:500">The Country We're Building</text>
+      </svg>
     </div>
-    <div>
-      <div class="eyebrow mb-1">Shape across years</div>
-      <div class="text-sm text-stone-700">FY26 $804K · FY27 $1.01M · FY28 $1.08M</div>
-      <div class="text-xs text-stone-500 italic">Peak in Year 2 — international exchanges begin, documentary shoots</div>
-    </div>
-    <div>
-      <div class="eyebrow mb-1">Published ROI benchmark</div>
-      <div class="text-sm text-stone-700">$2 for $1</div>
-      <div class="text-xs text-stone-500 italic">Minimum $5.8M avoided cost (COLI24 p.5 · PwC 2019)</div>
+    <p class="caption text-center max-w-lg mx-auto">Concentric, not sequential. The centre is the evidence. The ring is the practice. The edge is the artefact. Remove one and the method collapses.</p>
+  </div>
+</section>
+
+<!-- CIRCLE ONE · THE LIVING BRAIN ============================= -->
+<section class="section" style="background: var(--m-cream-2)">
+  <div class="container">
+    <div class="grid grid-cols-1 md:grid-cols-5 gap-10 items-start">
+      <div class="md:col-span-2">
+        <div class="image-frame mb-4">
+          <img class="portrait-photo" src="https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/profile-images/storytellers/kristy_bloomfield.jpg" alt="Kristy Bloomfield" loading="lazy">
+        </div>
+        <p class="caption">Kristy Bloomfield · Central Arrernte / Eastern Arrernte / Alyawarra · Traditional Owner of Mparntwe · co-founder Oonchiumpa.</p>
+      </div>
+      <div class="md:col-span-3">
+        <div class="circle-pill pill-1 mb-5">Circle One · The Centre</div>
+        <h2 class="text-4xl md:text-5xl mb-5" style="font-weight:500">The Living Brain</h2>
+        <p class="text-lg text-stone-700 mb-6 leading-relaxed">Everything on Australian youth justice — queryable, updating, community-governed. The national evidence backbone of community-led alternatives, held under Indigenous data sovereignty with a 12-gate consent chain.</p>
+
+        <div class="grid grid-cols-2 gap-6 mb-8">
+          <div>
+            <div class="eyebrow mb-2">3-year investment</div>
+            <div class="stat-num text-4xl">$800K</div>
+            <div class="text-xs text-stone-500 mt-1">28% of partnership</div>
+          </div>
+          <div>
+            <div class="eyebrow mb-2">Per year</div>
+            <div class="stat-num text-4xl">~$267K</div>
+            <div class="text-xs text-stone-500 mt-1">Editorial 0.8 FTE + Research 0.5 FTE</div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-lg p-5 mb-8">
+          <div class="eyebrow mb-3">Impact by 2029</div>
+          <ul class="text-sm text-stone-700 space-y-2 pl-5 list-disc marker:text-[var(--m-purple)]">
+            <li>Every community-led youth-justice intervention in Australia discoverable from a single platform</li>
+            <li>Each anchor's story corpus compounds monthly under community authority</li>
+            <li>Each anchor cited in ≥1 national policy submission per year</li>
+            <li>OCAP 12-gate chain enforced on every record · revocation honoured within 24 hours</li>
+          </ul>
+        </div>
+
+        <blockquote class="pullquote text-xl leading-snug border-l-4 pl-6 py-2" style="border-color:var(--earth-grass)">"Our Alternative Service Response is not an add-on to the justice system. It's a cultural foundation that justice should stand on in this region."</blockquote>
+        <div class="text-sm text-stone-600 mt-3 ml-6">— Tanya Turner · co-founder Oonchiumpa · to 55 judges, 16 April 2026</div>
+      </div>
     </div>
   </div>
 </section>
 
-<div class="ornament">·  ·  ·</div>
-
-<!-- Alignment with Minderoo -->
-<section class="max-w-5xl mx-auto px-8 py-10">
-  <div class="eyebrow mb-3">Aligned to Minderoo's 2030 Strategy · Communities focus area</div>
-  <h2 class="text-3xl md:text-4xl mb-5 max-w-3xl" style="font-weight:500">Five outcomes Minderoo already names — delivered here by the people closest to the challenge.</h2>
-
-  <div class="grid grid-cols-1 md:grid-cols-5 gap-3 mb-10">
-    <div class="bg-white border border-stone-200 rounded-lg p-4">
-      <div class="eyebrow mb-2" style="color:var(--m-purple)">Outcome 1</div>
-      <div class="serif-italic text-base leading-snug mb-2">Young children developmentally on track, strong wellbeing</div>
-      <div class="text-xs text-stone-600">BG Fit Tuesday gyms · Oonchiumpa on-Country · per-youth journals</div>
-    </div>
-    <div class="bg-white border border-stone-200 rounded-lg p-4">
-      <div class="eyebrow mb-2" style="color:var(--m-purple)">Outcome 2</div>
-      <div class="serif-italic text-base leading-snug mb-2">Families + caregivers empowered</div>
-      <div class="text-xs text-stone-600">MMEIC Elders-in-Council governance · PICC family engagement · Mounty Yarns Mt Druitt base</div>
-    </div>
-    <div class="bg-white border border-stone-200 rounded-lg p-4">
-      <div class="eyebrow mb-2" style="color:var(--m-purple)">Outcome 3</div>
-      <div class="serif-italic text-base leading-snug mb-2">Families achieve economic dignity</div>
-      <div class="text-xs text-stone-600">Anchor ACCOs as employers (PICC 208 FTE) · Brave Ones pathways to work on Country</div>
-    </div>
-    <div class="bg-white border border-stone-200 rounded-lg p-4">
-      <div class="eyebrow mb-2" style="color:var(--m-purple)">Outcome 4</div>
-      <div class="serif-italic text-base leading-snug mb-2">Communities accelerate what matters to them</div>
-      <div class="text-xs text-stone-600">Co-selection process itself · authority sits inside each community</div>
-    </div>
-    <div class="bg-white border border-stone-200 rounded-lg p-4">
-      <div class="eyebrow mb-2" style="color:var(--m-purple)">Outcome 5</div>
-      <div class="serif-italic text-base leading-snug mb-2">Communities vibrant + socially cohesive</div>
-      <div class="text-xs text-stone-600">Judges on Country convenings · Brave Ones reciprocal exchanges · international connection</div>
-    </div>
-  </div>
-
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
-    <div class="bg-white border border-stone-200 rounded-lg p-6">
-      <div class="eyebrow mb-2">Four bodies of work — Communities focus area</div>
-      <div class="space-y-3 text-sm text-stone-700">
-        <div class="flex items-start gap-3"><span class="text-xl leading-none" style="color:var(--m-gold)">◆</span><div><strong>Place-based Engagement</strong> — 7–8 anchors in 7–8 places. Minderoo's "scaling deep" language in practice.</div></div>
-        <div class="flex items-start gap-3"><span class="text-xl leading-none" style="color:var(--m-gold)">◆</span><div><strong>Valuing the Early Years</strong> — upstream of every youth-justice touchpoint we intercept.</div></div>
-        <div class="flex items-start gap-3"><span class="text-xl leading-none" style="color:var(--m-gold)">◆</span><div><strong>Improving Child &amp; Family Supports</strong> — JusticeHub magistrate service directory makes the ecosystem legible.</div></div>
-        <div class="flex items-start gap-3"><span class="text-xl leading-none" style="color:var(--m-gold)">◆</span><div><strong>Vibrant &amp; Connected Communities</strong> — the anchor network is a connected community.</div></div>
+<!-- CIRCLE TWO · THE RING ====================================== -->
+<section class="section" style="background: white">
+  <div class="container">
+    <div class="grid grid-cols-1 md:grid-cols-5 gap-10 items-start">
+      <div class="md:col-span-3 md:order-2">
+        <div class="image-frame mb-4">
+          <img class="hero-photo" src="https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/media/d0a162d2-282e-4653-9d12-aa934c9dfa4e/1774178027815_1E5A2170.jpg" alt="Oonchiumpa at Atnarpa" loading="lazy">
+        </div>
+        <p class="caption">Atnarpa Outstation · Loves Creek Station · 80km east of Mparntwe · where the National Judicial College made the on-Country day foundational.</p>
       </div>
-    </div>
-    <div class="bg-white border border-stone-200 rounded-lg p-6">
-      <div class="eyebrow mb-2">Three lenses applied to all work</div>
-      <div class="space-y-3 text-sm text-stone-700">
-        <div class="flex items-start gap-3"><span class="text-xl leading-none" style="color:var(--m-orange)">▲</span><div><strong>First Nations</strong> — every anchor is an Aboriginal Community-Controlled Organisation.</div></div>
-        <div class="flex items-start gap-3"><span class="text-xl leading-none" style="color:var(--m-orange)">▲</span><div><strong>Gender equality</strong> — Oonchiumpa women-led (Kristy + Tanya + Aunty Bev); MMEIC Elders-in-Council includes women; Mounty Yarns Leah + Amelia women-led.</div></div>
-        <div class="flex items-start gap-3"><span class="text-xl leading-none" style="color:var(--m-orange)">▲</span><div><strong>Climate</strong> — on-Country practice is climate-connected practice. Country as the environment shaping youth development.</div></div>
+      <div class="md:col-span-2 md:order-1">
+        <div class="circle-pill pill-2 mb-5">Circle Two · The Ring</div>
+        <h2 class="text-4xl md:text-5xl mb-5" style="font-weight:500">Staying — Country &amp; Council</h2>
+        <p class="text-lg text-stone-700 mb-6 leading-relaxed">The relational hold. Five anchor communities already practising the method. Two to three more co-selected with Minderoo. The Brave Ones is the daily practice inside this ring.</p>
+
+        <div class="grid grid-cols-2 gap-6 mb-8">
+          <div>
+            <div class="eyebrow mb-2">3-year investment</div>
+            <div class="stat-num text-4xl">$1.4M</div>
+            <div class="text-xs text-stone-500 mt-1">48% — the largest line</div>
+          </div>
+          <div>
+            <div class="eyebrow mb-2">Anchors held</div>
+            <div class="stat-num text-4xl">5 → 7–8</div>
+            <div class="text-xs text-stone-500 mt-1">Co-selected Session 1 + 2</div>
+          </div>
+        </div>
+
+        <div class="bg-[var(--m-cream-2)] rounded-lg p-5 mb-8">
+          <div class="eyebrow mb-3">Impact by 2029</div>
+          <ul class="text-sm text-stone-700 space-y-2 pl-5 list-disc marker:text-[var(--m-orange)]">
+            <li>7–8 anchors holding enduring narrative practice</li>
+            <li>~500+ young people walked through the method</li>
+            <li>12+ Brave Ones domestic exchanges</li>
+            <li>5–6 international trips · Diagrama (Spain) · YOPE (Amsterdam)</li>
+            <li>165+ judge touchpoints via Judges on Country</li>
+          </ul>
+        </div>
+
+        <blockquote class="pullquote text-xl leading-snug border-l-4 pl-6 py-2" style="border-color:var(--m-orange)">"Last month we took eight young people out to Atnarpa for three days on Country. You could see it in their faces — something shifted."</blockquote>
+        <div class="text-sm text-stone-600 mt-3 ml-6">— Kristy Bloomfield · Oonchiumpa</div>
       </div>
     </div>
   </div>
+</section>
 
-  <div class="bg-white border border-stone-200 rounded-lg p-6 text-center">
-    <div class="eyebrow mb-2">Precedent shape</div>
-    <p class="serif-italic text-lg text-stone-700 max-w-3xl mx-auto leading-relaxed">This ask has the same shape as Minderoo's March 2025 Ngangk Yira Institute partnership — a 3-year, $3M infrastructure investment that flows through to First Nations–led delivery partners.</p>
+<!-- CIRCLE THREE · THE EDGE ==================================== -->
+<section class="section" style="background: var(--m-cream-2)">
+  <div class="container">
+    <div class="grid grid-cols-1 md:grid-cols-5 gap-10 items-start">
+      <div class="md:col-span-2">
+        <div class="image-frame mb-4">
+          <img class="portrait-photo" src="https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/media/d0a162d2-282e-4653-9d12-aa934c9dfa4e/1770938042769_20250409-IMG_3838.jpg" alt="Benji · young person · Mount Isa" loading="lazy">
+        </div>
+        <p class="caption">Benji · young person · Mount Isa · on why he trusts Brodie Germaine at BG Fit: "He right. That big fell. He know half of the black people. That's why."</p>
+      </div>
+      <div class="md:col-span-3">
+        <div class="circle-pill pill-3 mb-5">Circle Three · The Edge</div>
+        <h2 class="text-4xl md:text-5xl mb-5" style="font-weight:500">The Country We're Building</h2>
+        <p class="text-lg text-stone-700 mb-6 leading-relaxed">The artefact the community releases. A documentary, a book, per-young-person journals, a national collection — all led by the young people themselves.</p>
+
+        <div class="grid grid-cols-2 gap-6 mb-8">
+          <div>
+            <div class="eyebrow mb-2">3-year investment</div>
+            <div class="stat-num text-4xl">$700K</div>
+            <div class="text-xs text-stone-500 mt-1">24% — peaks in Year 3</div>
+          </div>
+          <div>
+            <div class="eyebrow mb-2">Artefacts released</div>
+            <div class="stat-num text-4xl">8+</div>
+            <div class="text-xs text-stone-500 mt-1">Documentary · book · journals · launch</div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-lg p-5 mb-8">
+          <div class="eyebrow mb-3">Impact by 2029</div>
+          <ul class="text-sm text-stone-700 space-y-2 pl-5 list-disc marker:text-[var(--earth-country)]">
+            <li>Documentary released Year 3 Q4 — co-directed by young people</li>
+            <li>Published national book · ~120 consented stories · young-person editorial board</li>
+            <li>25+ per-young-person journals · durable records they keep</li>
+            <li>National launch event on Country with anchor-community permission</li>
+            <li>Archive that outlives the funding — EL v2 corpus remains community-held</li>
+          </ul>
+        </div>
+
+        <blockquote class="pullquote text-xl leading-snug border-l-4 pl-6 py-2" style="border-color:var(--earth-country)">"Because young people are going through all of this stuff, why are the older fellas making choices for the younger fellas when they're the ones going through it?"</blockquote>
+        <div class="text-sm text-stone-600 mt-3 ml-6">— Taleigha Glover · young Biripi woman · Mt Druitt</div>
+      </div>
+    </div>
   </div>
 </section>
 
-<div class="ornament">·  ·  ·</div>
+<!-- BUDGET VIZ ======================================================= -->
+<section class="section" style="background: white">
+  <div class="container-narrow">
+    <div class="eyebrow mb-3">$2.9 million · mapped to Minderoo-native functions</div>
+    <h2 class="text-4xl md:text-5xl mb-10" style="font-weight:500">Where the money goes.</h2>
+  </div>
+  <div class="container">
+    <div class="bg-[var(--m-cream-2)] rounded-xl p-8">
+      <div class="breakdown-row" style="grid-template-columns:220px 1fr 100px">
+        <div class="text-sm"><strong>Partnership infrastructure</strong><br><span class="text-xs text-stone-500">Partner-led scaling deep</span></div>
+        <div class="breakdown-bar" style="width: 100%; background: var(--m-purple)"></div>
+        <div class="text-right text-sm font-semibold" style="color:var(--m-purple)">$1,050K · 36%</div>
+      </div>
+      <div class="breakdown-row" style="grid-template-columns:220px 1fr 100px">
+        <div class="text-sm"><strong>Narrative + evidence production</strong><br><span class="text-xs text-stone-500">Advocacy and Engagement</span></div>
+        <div class="breakdown-bar" style="width: 67%; background: var(--m-purple-lite)"></div>
+        <div class="text-right text-sm">$700K · 24%</div>
+      </div>
+      <div class="breakdown-row" style="grid-template-columns:220px 1fr 100px">
+        <div class="text-sm"><strong>The Brave Ones + international</strong><br><span class="text-xs text-stone-500">Generation One × Thrive by Five</span></div>
+        <div class="breakdown-bar" style="width: 57%; background: var(--m-orange)"></div>
+        <div class="text-right text-sm">$600K · 21%</div>
+      </div>
+      <div class="breakdown-row" style="grid-template-columns:220px 1fr 100px">
+        <div class="text-sm"><strong>National evidence backbone</strong><br><span class="text-xs text-stone-500">Systemic infrastructure</span></div>
+        <div class="breakdown-bar" style="width: 38%; background: var(--m-gold)"></div>
+        <div class="text-right text-sm">$400K · 14%</div>
+      </div>
+      <div class="breakdown-row" style="grid-template-columns:220px 1fr 100px">
+        <div class="text-sm"><strong>Judges on Country</strong><br><span class="text-xs text-stone-500">Policy influence</span></div>
+        <div class="breakdown-bar" style="width: 14%; background: var(--earth-sky)"></div>
+        <div class="text-right text-sm">$150K · 5%</div>
+      </div>
+    </div>
 
-<!-- Proof — the story spine -->
-<section class="max-w-5xl mx-auto px-8 py-10">
-  <div class="eyebrow mb-3">Proof — four sentences, four positions</div>
-  <h2 class="text-3xl md:text-4xl mb-8 max-w-3xl" style="font-weight:500">The method is not claimed. It is already operating, already endorsed, already holding young people.</h2>
-
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-    <div class="bg-white border border-stone-200 rounded-lg p-6">
-      <div class="eyebrow mb-3" style="color:var(--earth-grass)">Cultural authority · Traditional Owner</div>
-      <blockquote class="pullquote text-xl leading-snug mb-3">"No Aboriginal person in this region is born dangerous or hopeless or broken. They're born into layers of history that most Australians never have to face."</blockquote>
-      <div class="text-sm text-stone-600">Tanya Turner · Eastern Arrernte · co-founder, Oonchiumpa · welcoming 55 judges to Mparntwe, 16 April 2026</div>
-    </div>
-    <div class="bg-white border border-stone-200 rounded-lg p-6">
-      <div class="eyebrow mb-3" style="color:var(--earth-sky)">Institutional endorsement · Supreme Court bench</div>
-      <blockquote class="pullquote text-xl leading-snug mb-3">"Kristy and Tanya really exemplify what's possible when we are given the space to lead things for ourselves. The potential for their work to have relevance for so many Australians is immeasurable."</blockquote>
-      <div class="text-sm text-stone-600">Hon. Louise Taylor · Judge, ACT Supreme Court · Kamilaroi woman · Co-chair, National Judicial College Indigenous Justice Program · 17 April 2026</div>
-    </div>
-    <div class="bg-white border border-stone-200 rounded-lg p-6">
-      <div class="eyebrow mb-3" style="color:var(--earth-country)">Young people's voice</div>
-      <blockquote class="pullquote text-xl leading-snug mb-3">"At six o'clock you get locked down. You wait till tomorrow."</blockquote>
-      <blockquote class="pullquote text-xl leading-snug mb-3">"Looking after my family."</blockquote>
-      <div class="text-sm text-stone-600">Jackquann, 14 · Upper Camp, Mparntwe · on detention, and on what keeps him out</div>
-    </div>
-    <div class="bg-white border border-stone-200 rounded-lg p-6">
-      <div class="eyebrow mb-3" style="color:var(--m-purple)">Data sovereignty · in practice</div>
-      <blockquote class="pullquote text-xl leading-snug mb-3">"This is my story. I consent. I can take it back. Nothing changes for me if I do."</blockquote>
-      <div class="text-sm text-stone-600">Storyteller voice repeated across every story in this envelope — under the 12-gate OCAP chain enforced in Empathy Ledger v2. Revocation honoured within 24 hours.</div>
+    <!-- Year shape -->
+    <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div class="number-tile text-center">
+        <div class="eyebrow mb-2">FY26 · setup year</div>
+        <div class="stat-num text-4xl">$804K</div>
+        <div class="text-xs text-stone-500 mt-2">Relationships + editorial layer</div>
+      </div>
+      <div class="number-tile text-center" style="border-color:var(--m-purple);box-shadow:0 0 0 2px rgba(74,37,96,0.1)">
+        <div class="eyebrow mb-2" style="color:var(--m-purple)">FY27 · peak year</div>
+        <div class="stat-num text-4xl">$1.01M</div>
+        <div class="text-xs text-stone-500 mt-2">International begins · documentary shoots</div>
+      </div>
+      <div class="number-tile text-center">
+        <div class="eyebrow mb-2">FY28 · release year</div>
+        <div class="stat-num text-4xl">$1.08M</div>
+        <div class="text-xs text-stone-500 mt-2">Artefacts ship · national launch</div>
+      </div>
     </div>
   </div>
 </section>
 
-<div class="ornament">·  ·  ·</div>
+<div class="container section-sm"><div class="ornament"></div></div>
 
-<!-- The anchors -->
-<section class="max-w-5xl mx-auto px-8 py-10">
-  <div class="eyebrow mb-3">Five anchor communities already operating</div>
-  <h2 class="text-3xl md:text-4xl mb-8 max-w-3xl" style="font-weight:500">Every anchor is a wrap-around hub — the model COLI24 itself recommends (p. ii, rec #3).</h2>
-
-  <div class="grid grid-cols-1 md:grid-cols-5 gap-3">
-    <div class="bg-white border border-stone-200 rounded-lg p-4">
-      <div class="eyebrow mb-1" style="color:var(--earth-grass)">NT</div>
-      <h3 class="text-lg mb-2" style="font-weight:500">Oonchiumpa</h3>
-      <div class="text-xs text-stone-600 mb-2">Mparntwe · Central Arrernte</div>
-      <div class="text-xs text-stone-700 leading-relaxed">95% diversion · 72% school re-engagement · 97.6% less cost than detention. Hosts National Judicial College on-Country day.</div>
-    </div>
-    <div class="bg-white border border-stone-200 rounded-lg p-4">
-      <div class="eyebrow mb-1" style="color:var(--earth-grass)">QLD</div>
-      <h3 class="text-lg mb-2" style="font-weight:500">PICC</h3>
-      <div class="text-xs text-stone-600 mb-2">Palm Island · Manbarra / Bwgcolman</div>
-      <div class="text-xs text-stone-700 leading-relaxed">$29M turnover · 208 FTE · Youth Offender Support Service grown 3× since 2021.</div>
-    </div>
-    <div class="bg-white border border-stone-200 rounded-lg p-4">
-      <div class="eyebrow mb-1" style="color:var(--earth-grass)">QLD</div>
-      <h3 class="text-lg mb-2" style="font-weight:500">MMEIC</h3>
-      <div class="text-xs text-stone-600 mb-2">Minjerribah · Quandamooka</div>
-      <div class="text-xs text-stone-700 leading-relaxed">32 years of Elders-in-Council cultural governance. Holds children before the system touches them.</div>
-    </div>
-    <div class="bg-white border border-stone-200 rounded-lg p-4">
-      <div class="eyebrow mb-1" style="color:var(--earth-grass)">QLD</div>
-      <h3 class="text-lg mb-2" style="font-weight:500">BG Fit</h3>
-      <div class="text-xs text-stone-600 mb-2">Mount Isa · Kalkadoon</div>
-      <div class="text-xs text-stone-700 leading-relaxed">Tuesday gyms (15–20 regulars) · monthly on-Country bush camps · Doomadgee remote outreach (500km).</div>
-    </div>
-    <div class="bg-white border border-stone-200 rounded-lg p-4">
-      <div class="eyebrow mb-1" style="color:var(--earth-grass)">NSW</div>
-      <h3 class="text-lg mb-2" style="font-weight:500">Mounty Yarns</h3>
-      <div class="text-xs text-stone-600 mb-2">Mt Druitt · Darug</div>
-      <div class="text-xs text-stone-700 leading-relaxed">Youth-led hub · 13 storytellers (9 young people) · CONTAINED mobile base camp.</div>
-    </div>
+<!-- PROOF · 4 VOICES ================================================= -->
+<section class="section" style="background: var(--m-purple); color: white">
+  <div class="container-narrow text-center mb-12">
+    <div class="eyebrow mb-3" style="color:rgba(255,255,255,0.7)">Proof — four sentences, four positions</div>
+    <h2 class="text-4xl md:text-5xl mb-4 text-white" style="font-weight:500;color:white">The method is already operating.</h2>
+    <p class="serif-italic text-lg max-w-2xl mx-auto" style="color:rgba(255,255,255,0.9)">Already endorsed. Already holding young people. This envelope asks Minderoo to join a coalition the Australian judiciary has already formed.</p>
   </div>
-
-  <div class="mt-6 text-center">
-    <p class="serif-italic text-base text-stone-600 max-w-2xl mx-auto">Two to three additional anchors co-selected with Minderoo in Sessions 1 &amp; 2 from a verified 50-candidate shortlist across every state and territory.</p>
+  <div class="container">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- Tanya -->
+      <div class="rounded-xl p-8" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15)">
+        <div class="eyebrow mb-4" style="color:var(--m-gold)">Cultural authority · Traditional Owner</div>
+        <blockquote class="pullquote text-2xl leading-snug mb-4 text-white" style="color:white">"No Aboriginal person in this region is born dangerous or hopeless or broken. They're born into layers of history that most Australians never have to face."</blockquote>
+        <div class="text-sm" style="color:rgba(255,255,255,0.75)">Tanya Turner · Eastern Arrernte · co-founder, Oonchiumpa · welcoming 55 judges to Mparntwe, 16 April 2026</div>
+      </div>
+      <!-- Louise -->
+      <div class="rounded-xl p-8" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15)">
+        <div class="eyebrow mb-4" style="color:var(--m-gold)">Institutional endorsement · Supreme Court</div>
+        <blockquote class="pullquote text-2xl leading-snug mb-4 text-white" style="color:white">"Kristy and Tanya really exemplify what's possible when we are given the space to lead things for ourselves. The potential for their work to have relevance for so many Australians is immeasurable."</blockquote>
+        <div class="text-sm" style="color:rgba(255,255,255,0.75)">Hon. Louise Taylor · Judge, ACT Supreme Court · Kamilaroi · Co-chair, National Judicial College Indigenous Justice Program · 17 April 2026</div>
+      </div>
+      <!-- Jackquann -->
+      <div class="rounded-xl p-8" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15)">
+        <div class="eyebrow mb-4" style="color:var(--m-gold)">Young person's voice</div>
+        <blockquote class="pullquote text-2xl leading-snug mb-2 text-white" style="color:white">"At six o'clock you get locked down. You wait till tomorrow."</blockquote>
+        <blockquote class="pullquote text-2xl leading-snug mb-4 text-white" style="color:white">"Looking after my family."</blockquote>
+        <div class="text-sm" style="color:rgba(255,255,255,0.75)">Jackquann, 14 · Upper Camp, Mparntwe · on detention, and on what keeps him out</div>
+      </div>
+      <!-- Storyteller voice -->
+      <div class="rounded-xl p-8" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15)">
+        <div class="eyebrow mb-4" style="color:var(--m-gold)">Data sovereignty · in practice</div>
+        <blockquote class="pullquote text-2xl leading-snug mb-4 text-white" style="color:white">"This is my story. I consent. I can take it back. Nothing changes for me if I do."</blockquote>
+        <div class="text-sm" style="color:rgba(255,255,255,0.75)">Storyteller voice repeated across every story in this envelope — under the 12-gate OCAP chain enforced in Empathy Ledger v2. Revocation honoured within 24 hours.</div>
+      </div>
+    </div>
   </div>
 </section>
 
-<div class="ornament">·  ·  ·</div>
+<!-- IMPACT BY THE NUMBERS ====================================== -->
+<section class="section" style="background: white">
+  <div class="container-narrow text-center mb-12">
+    <div class="eyebrow mb-3">Oonchiumpa's operational numbers today</div>
+    <h2 class="text-4xl md:text-5xl" style="font-weight:500">The method is not theoretical. It is measurable.</h2>
+  </div>
+  <div class="container">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div class="number-tile text-center">
+        <div class="stat-num text-5xl md:text-6xl" style="color:var(--earth-grass)">95%</div>
+        <div class="text-sm text-stone-700 mt-3 font-semibold">Diversion rate</div>
+        <div class="text-xs text-stone-500 mt-1">Young people kept out of the statutory pipeline</div>
+      </div>
+      <div class="number-tile text-center">
+        <div class="stat-num text-5xl md:text-6xl" style="color:var(--earth-grass)">72%</div>
+        <div class="text-sm text-stone-700 mt-3 font-semibold">School re-engagement</div>
+        <div class="text-xs text-stone-500 mt-1">After Oonchiumpa case work</div>
+      </div>
+      <div class="number-tile text-center">
+        <div class="stat-num text-5xl md:text-6xl" style="color:var(--m-purple)">97.6%</div>
+        <div class="text-sm text-stone-700 mt-3 font-semibold">Less cost than detention</div>
+        <div class="text-xs text-stone-500 mt-1">Oonchiumpa vs Vic detention bed</div>
+      </div>
+      <div class="number-tile text-center">
+        <div class="stat-num text-5xl md:text-6xl" style="color:var(--earth-country)">$7,775</div>
+        <div class="text-sm text-stone-700 mt-3 font-semibold">Per day</div>
+        <div class="text-xs text-stone-500 mt-1">Victoria youth detention bed · COLI24 p.22</div>
+      </div>
+    </div>
+  </div>
+</section>
 
-<!-- The ask -->
+<!-- THE FIVE ANCHORS ================================================= -->
+<section class="section" style="background: var(--m-cream-2)">
+  <div class="container-narrow text-center mb-12">
+    <div class="eyebrow mb-3">Five anchor communities already operating</div>
+    <h2 class="text-4xl md:text-5xl mb-4" style="font-weight:500">Every anchor is a wrap-around hub.</h2>
+    <p class="serif-italic text-lg text-stone-700 leading-relaxed">The model COLI24 itself recommends (p. ii, rec #3). Already in place, before the funding.</p>
+  </div>
+  <div class="container">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-6">
+
+      <!-- Oonchiumpa -->
+      <div class="anchor-card-big">
+        <div class="image-frame" style="border-radius:0">
+          <img class="hero-photo" src="https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/media/d0a162d2-282e-4653-9d12-aa934c9dfa4e/1771380122051_image002.jpg" alt="Aunty Barb and Uncle Tony" loading="lazy">
+        </div>
+        <div class="p-6">
+          <div class="eyebrow mb-1" style="color:var(--earth-grass)">NT · Eastern Arrernte</div>
+          <h3 class="text-2xl mb-2" style="font-weight:500">Oonchiumpa</h3>
+          <p class="text-sm text-stone-700 leading-relaxed mb-4">Kristy Bloomfield + Tanya Turner. Under Elders Aunty Bev + Uncle Terry. Hosts the National Judicial College on-Country day.</p>
+          <div class="grid grid-cols-3 gap-2 text-center border-t border-stone-100 pt-4">
+            <div>
+              <div class="text-xl font-semibold" style="color:var(--earth-grass);font-family:'Cormorant Garamond'">95%</div>
+              <div class="text-[10px] text-stone-500 uppercase tracking-wider">Diversion</div>
+            </div>
+            <div>
+              <div class="text-xl font-semibold" style="color:var(--earth-grass);font-family:'Cormorant Garamond'">7</div>
+              <div class="text-[10px] text-stone-500 uppercase tracking-wider">Lang. groups</div>
+            </div>
+            <div>
+              <div class="text-xl font-semibold" style="color:var(--earth-grass);font-family:'Cormorant Garamond'">55</div>
+              <div class="text-[10px] text-stone-500 uppercase tracking-wider">Judges hosted</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PICC -->
+      <div class="anchor-card-big">
+        <div class="p-6 pt-8" style="background:linear-gradient(135deg,#f2ead9,#faf5ec);min-height:240px;border-radius:16px 16px 0 0;display:flex;align-items:center;justify-content:center">
+          <div class="text-center">
+            <svg width="80" height="80" viewBox="0 0 80 80" fill="none" style="margin:0 auto;opacity:0.7">
+              <circle cx="40" cy="40" r="35" stroke="var(--m-purple)" stroke-width="1.5"/>
+              <path d="M20 40 Q40 20 60 40" stroke="var(--earth-country)" stroke-width="2" fill="none"/>
+              <path d="M20 40 Q40 60 60 40" stroke="var(--earth-grass)" stroke-width="2" fill="none"/>
+              <circle cx="40" cy="40" r="4" fill="var(--m-purple)"/>
+            </svg>
+          </div>
+        </div>
+        <div class="p-6">
+          <div class="eyebrow mb-1" style="color:var(--earth-grass)">QLD · Manbarra / Bwgcolman</div>
+          <h3 class="text-2xl mb-2" style="font-weight:500">Palm Island Community Company</h3>
+          <p class="text-sm text-stone-700 leading-relaxed mb-4">Rachael Atkinson CEO. Selective per-storyteller consent. Youth Offender Support Service grown 3× since 2021.</p>
+          <div class="grid grid-cols-3 gap-2 text-center border-t border-stone-100 pt-4">
+            <div>
+              <div class="text-xl font-semibold" style="color:var(--m-purple);font-family:'Cormorant Garamond'">$29M</div>
+              <div class="text-[10px] text-stone-500 uppercase tracking-wider">Turnover</div>
+            </div>
+            <div>
+              <div class="text-xl font-semibold" style="color:var(--m-purple);font-family:'Cormorant Garamond'">208</div>
+              <div class="text-[10px] text-stone-500 uppercase tracking-wider">FTE</div>
+            </div>
+            <div>
+              <div class="text-xl font-semibold" style="color:var(--m-purple);font-family:'Cormorant Garamond'">3×</div>
+              <div class="text-[10px] text-stone-500 uppercase tracking-wider">YOSS growth</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MMEIC -->
+      <div class="anchor-card-big">
+        <div class="p-6 pt-8" style="background:linear-gradient(135deg,#e9e0cc,#f5ecd8);min-height:240px;border-radius:16px 16px 0 0;display:flex;align-items:center;justify-content:center">
+          <svg width="100" height="100" viewBox="0 0 100 100" fill="none" style="opacity:0.8">
+            <circle cx="50" cy="50" r="8" fill="var(--m-purple)"/>
+            <circle cx="50" cy="20" r="5" fill="var(--earth-country)"/>
+            <circle cx="78" cy="38" r="5" fill="var(--earth-country)"/>
+            <circle cx="70" cy="75" r="5" fill="var(--earth-country)"/>
+            <circle cx="30" cy="75" r="5" fill="var(--earth-country)"/>
+            <circle cx="22" cy="38" r="5" fill="var(--earth-country)"/>
+          </svg>
+        </div>
+        <div class="p-6">
+          <div class="eyebrow mb-1" style="color:var(--earth-grass)">QLD · Quandamooka</div>
+          <h3 class="text-2xl mb-2" style="font-weight:500">MMEIC</h3>
+          <p class="text-sm text-stone-700 leading-relaxed mb-4">Minjerribah Moorgumpin Elders-in-Council. Collective cultural governance. Holds children before the system touches them.</p>
+          <div class="grid grid-cols-3 gap-2 text-center border-t border-stone-100 pt-4">
+            <div>
+              <div class="text-xl font-semibold" style="color:var(--m-orange);font-family:'Cormorant Garamond'">32</div>
+              <div class="text-[10px] text-stone-500 uppercase tracking-wider">Years</div>
+            </div>
+            <div>
+              <div class="text-xl font-semibold" style="color:var(--m-orange);font-family:'Cormorant Garamond'">0.815</div>
+              <div class="text-[10px] text-stone-500 uppercase tracking-wider">ALMA top score</div>
+            </div>
+            <div>
+              <div class="text-xl font-semibold" style="color:var(--m-orange);font-family:'Cormorant Garamond'">✓</div>
+              <div class="text-[10px] text-stone-500 uppercase tracking-wider">EIC governance</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BG Fit -->
+      <div class="anchor-card-big">
+        <div class="image-frame" style="border-radius:0">
+          <img class="hero-photo" src="https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/media/d0a162d2-282e-4653-9d12-aa934c9dfa4e/1770940113065_20250409-IMG_3844.jpg" alt="Jay · young person · Mount Isa" loading="lazy">
+        </div>
+        <div class="p-6">
+          <div class="eyebrow mb-1" style="color:var(--earth-grass)">QLD · Kalkadoon</div>
+          <h3 class="text-2xl mb-2" style="font-weight:500">BG Fit</h3>
+          <p class="text-sm text-stone-700 leading-relaxed mb-4">Brodie Germaine · Pita Pita Wayaka. Tuesday gyms at PCYC Mount Isa. Monthly on-Country bush camps. Doomadgee remote outreach (500km).</p>
+          <div class="grid grid-cols-3 gap-2 text-center border-t border-stone-100 pt-4">
+            <div>
+              <div class="text-xl font-semibold" style="color:var(--earth-country);font-family:'Cormorant Garamond'">15-20</div>
+              <div class="text-[10px] text-stone-500 uppercase tracking-wider">Tues gym</div>
+            </div>
+            <div>
+              <div class="text-xl font-semibold" style="color:var(--earth-country);font-family:'Cormorant Garamond'">12</div>
+              <div class="text-[10px] text-stone-500 uppercase tracking-wider">Wiki stories</div>
+            </div>
+            <div>
+              <div class="text-xl font-semibold" style="color:var(--earth-country);font-family:'Cormorant Garamond'">500km</div>
+              <div class="text-[10px] text-stone-500 uppercase tracking-wider">Doomadgee</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mounty -->
+      <div class="anchor-card-big">
+        <div class="p-6 pt-8" style="background:linear-gradient(135deg,#efdbc8,#faedd8);min-height:240px;border-radius:16px 16px 0 0;display:flex;align-items:center;justify-content:center">
+          <svg width="100" height="80" viewBox="0 0 100 80" fill="none" style="opacity:0.85">
+            <rect x="10" y="30" width="80" height="40" rx="6" stroke="var(--m-purple)" stroke-width="1.5" fill="none"/>
+            <rect x="10" y="30" width="80" height="10" rx="6" fill="var(--earth-country)" opacity="0.7"/>
+            <path d="M25 30 L25 12 L75 12 L75 30" stroke="var(--m-purple)" stroke-width="1.5" fill="none"/>
+            <circle cx="50" cy="52" r="6" fill="var(--m-gold)"/>
+          </svg>
+        </div>
+        <div class="p-6">
+          <div class="eyebrow mb-1" style="color:var(--earth-grass)">NSW · Darug</div>
+          <h3 class="text-2xl mb-2" style="font-weight:500">Mounty Yarns</h3>
+          <p class="text-sm text-stone-700 leading-relaxed mb-4">Daniel Daylight CEO. Youth-led hub. CONTAINED mobile base camp. 9 young people at the table.</p>
+          <div class="grid grid-cols-3 gap-2 text-center border-t border-stone-100 pt-4">
+            <div>
+              <div class="text-xl font-semibold" style="color:var(--earth-sky);font-family:'Cormorant Garamond'">13</div>
+              <div class="text-[10px] text-stone-500 uppercase tracking-wider">Storytellers</div>
+            </div>
+            <div>
+              <div class="text-xl font-semibold" style="color:var(--earth-sky);font-family:'Cormorant Garamond'">9</div>
+              <div class="text-[10px] text-stone-500 uppercase tracking-wider">Young voices</div>
+            </div>
+            <div>
+              <div class="text-xl font-semibold" style="color:var(--earth-sky);font-family:'Cormorant Garamond'">✓</div>
+              <div class="text-[10px] text-stone-500 uppercase tracking-wider">Youth-led</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Co-selection placeholder -->
+      <div class="rounded-xl p-8 flex flex-col items-center justify-center text-center" style="background:rgba(74,37,96,0.06);border:2px dashed var(--m-purple-lite);min-height:420px">
+        <div class="eyebrow mb-3" style="color:var(--m-purple)">Co-selection</div>
+        <h3 class="text-2xl mb-3" style="font-weight:500;color:var(--m-purple)">2–3 more seats</h3>
+        <p class="text-sm text-stone-700 leading-relaxed mb-4">Co-selected with Minderoo in Sessions 1 + 2. From a verified 50-candidate shortlist across every state and territory. Session 1 is the co-selection — not a pitch.</p>
+        <div class="text-xs text-stone-600 serif-italic">Community consent is the binding decision, not ACT's.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- MINDEROO ALIGNMENT =============================================== -->
+<section class="section" style="background: white">
+  <div class="container-narrow mb-12">
+    <div class="eyebrow mb-3">Aligned to Minderoo's 2030 Strategy · Communities focus area</div>
+    <h2 class="text-4xl md:text-5xl mb-4" style="font-weight:500">Five outcomes Minderoo already names. Delivered by the people closest to the challenge.</h2>
+  </div>
+
+  <div class="container">
+    <div class="grid grid-cols-1 md:grid-cols-5 gap-3 mb-12">
+      <div class="bg-[var(--m-cream-2)] rounded-lg p-5">
+        <div class="stat-num text-3xl mb-2" style="color:var(--m-purple)">1</div>
+        <div class="serif-italic text-base leading-snug mb-2">Developmentally on track, strong wellbeing</div>
+        <div class="text-xs text-stone-600">BG Fit Tuesday gyms · per-youth journals · Oonchiumpa on-Country</div>
+      </div>
+      <div class="bg-[var(--m-cream-2)] rounded-lg p-5">
+        <div class="stat-num text-3xl mb-2" style="color:var(--m-purple)">2</div>
+        <div class="serif-italic text-base leading-snug mb-2">Families empowered</div>
+        <div class="text-xs text-stone-600">MMEIC Elders-in-Council · PICC family engagement · Mounty Mt Druitt</div>
+      </div>
+      <div class="bg-[var(--m-cream-2)] rounded-lg p-5">
+        <div class="stat-num text-3xl mb-2" style="color:var(--m-purple)">3</div>
+        <div class="serif-italic text-base leading-snug mb-2">Economic dignity</div>
+        <div class="text-xs text-stone-600">Anchors as employers (PICC 208 FTE) · Brave Ones pathways</div>
+      </div>
+      <div class="bg-[var(--m-cream-2)] rounded-lg p-5">
+        <div class="stat-num text-3xl mb-2" style="color:var(--m-purple)">4</div>
+        <div class="serif-italic text-base leading-snug mb-2">Communities accelerate</div>
+        <div class="text-xs text-stone-600">Co-selection process · authority sits inside each community</div>
+      </div>
+      <div class="bg-[var(--m-cream-2)] rounded-lg p-5">
+        <div class="stat-num text-3xl mb-2" style="color:var(--m-purple)">5</div>
+        <div class="serif-italic text-base leading-snug mb-2">Vibrant + cohesive</div>
+        <div class="text-xs text-stone-600">Judges on Country · reciprocal exchanges · international</div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="bg-[var(--m-cream-2)] rounded-lg p-6">
+        <div class="eyebrow mb-3">Four bodies of work</div>
+        <div class="space-y-3 text-sm text-stone-700">
+          <div class="flex items-start gap-3"><span class="text-xl leading-none mt-1" style="color:var(--m-gold)">◆</span><div><strong>Place-based Engagement</strong> — 7–8 anchors in 7–8 places. Minderoo's "scaling deep" in practice.</div></div>
+          <div class="flex items-start gap-3"><span class="text-xl leading-none mt-1" style="color:var(--m-gold)">◆</span><div><strong>Valuing the Early Years</strong> — upstream of every youth-justice touchpoint we intercept.</div></div>
+          <div class="flex items-start gap-3"><span class="text-xl leading-none mt-1" style="color:var(--m-gold)">◆</span><div><strong>Improving Child &amp; Family Supports</strong> — JusticeHub magistrate service directory makes the ecosystem legible.</div></div>
+          <div class="flex items-start gap-3"><span class="text-xl leading-none mt-1" style="color:var(--m-gold)">◆</span><div><strong>Vibrant &amp; Connected Communities</strong> — the anchor network is a connected community.</div></div>
+        </div>
+      </div>
+      <div class="bg-[var(--m-cream-2)] rounded-lg p-6">
+        <div class="eyebrow mb-3">Three lenses applied to all work</div>
+        <div class="space-y-3 text-sm text-stone-700">
+          <div class="flex items-start gap-3"><span class="text-xl leading-none mt-1" style="color:var(--m-orange)">▲</span><div><strong>First Nations</strong> — every anchor is an Aboriginal Community-Controlled Organisation.</div></div>
+          <div class="flex items-start gap-3"><span class="text-xl leading-none mt-1" style="color:var(--m-orange)">▲</span><div><strong>Gender equality</strong> — Oonchiumpa women-led (Kristy + Tanya + Aunty Bev); MMEIC includes women elders; Mounty Leah + Amelia.</div></div>
+          <div class="flex items-start gap-3"><span class="text-xl leading-none mt-1" style="color:var(--m-orange)">▲</span><div><strong>Climate</strong> — on-Country practice is climate-connected practice.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-8 bg-white border border-stone-200 rounded-lg p-6 text-center">
+      <div class="eyebrow mb-2">Precedent shape</div>
+      <p class="serif-italic text-lg text-stone-700 max-w-3xl mx-auto leading-relaxed">This ask has the same shape as Minderoo's March 2025 Ngangk Yira Institute partnership — a 3-year, $3M infrastructure investment that flows through to First Nations–led delivery partners.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE ========================================================= -->
+<section class="section" style="background: var(--m-cream-2)">
+  <div class="container-narrow mb-10">
+    <div class="eyebrow mb-3">Three years · what ships when</div>
+    <h2 class="text-4xl md:text-5xl" style="font-weight:500">The timeline.</h2>
+  </div>
+  <div class="container">
+    <div class="bg-white rounded-xl p-8">
+      <div class="timeline-year">
+        <div class="timeline-year-label">FY26</div>
+        <div class="flex-1">
+          <div class="eyebrow mb-2" style="color:var(--earth-grass)">Year 1 · setup</div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="text-sm text-stone-700">Envelope + Session 1 + 2 · anchors confirmed · editorial layer built</div>
+            <div class="text-sm text-stone-700">Artefact 001 Murri Watch ships 1 May 2026 · 002 queued</div>
+            <div class="text-sm text-stone-700">4 domestic Brave Ones exchanges · 1 Judges on Country cycle</div>
+          </div>
+        </div>
+      </div>
+      <div class="timeline-year">
+        <div class="timeline-year-label">FY27</div>
+        <div class="flex-1">
+          <div class="eyebrow mb-2" style="color:var(--m-orange)">Year 2 · peak</div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="text-sm text-stone-700">International exchanges begin · Diagrama (Spain) · YOPE (Amsterdam)</div>
+            <div class="text-sm text-stone-700">Documentary shoots across all 5–8 anchor communities</div>
+            <div class="text-sm text-stone-700">Per-young-person journal production begins · book editorial board forms</div>
+          </div>
+        </div>
+      </div>
+      <div class="timeline-year">
+        <div class="timeline-year-label">FY28</div>
+        <div class="flex-1">
+          <div class="eyebrow mb-2" style="color:var(--earth-country)">Year 3 · release</div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="text-sm text-stone-700">Documentary release · co-directed by young people · national distribution</div>
+            <div class="text-sm text-stone-700">National book publishes · ~120 consented stories · every MP + magistrate receives</div>
+            <div class="text-sm text-stone-700">Launch event on Country · Diagrama + YOPE delegates attend</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THE ASK / CLOSING ================================================ -->
 <section class="hero-gradient text-white">
-  <div class="max-w-4xl mx-auto px-8 py-14 text-center">
-    <div class="eyebrow mb-4 text-white/70" style="color:rgba(255,255,255,0.7)">The ask, made simple</div>
-    <h2 class="text-3xl md:text-4xl mb-6 max-w-3xl mx-auto" style="font-weight:500">Join the coalition the Australian judiciary has already formed.</h2>
-    <p class="serif-italic text-xl text-white/90 leading-relaxed mb-8 max-w-2xl mx-auto" style="color:rgba(255,255,255,0.9)">This envelope does not ask Minderoo to fund something speculative. It asks Minderoo to fund what Minderoo's own report says works — what the National Judicial College has already centred — what Aboriginal Community-Controlled Organisations have already built.</p>
+  <div class="container py-24 text-center">
+    <div class="eyebrow mb-4" style="color:rgba(255,255,255,0.7)">The ask, made simple</div>
+    <h2 class="text-4xl md:text-6xl mb-8 max-w-3xl mx-auto" style="font-weight:500;line-height:1.1;color:white">Join the coalition the Australian judiciary has already formed.</h2>
+    <p class="serif-italic text-xl md:text-2xl leading-relaxed mb-12 max-w-3xl mx-auto" style="color:rgba(255,255,255,0.9)">This envelope does not ask Minderoo to fund something speculative. It asks Minderoo to fund what Minderoo's own report says works — what the National Judicial College has already centred — what the Aboriginal Community-Controlled anchors have already built.</p>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10 text-left">
-      <div class="bg-white/10 rounded-lg p-5" style="background:rgba(255,255,255,0.08)">
-        <div class="eyebrow mb-2 text-white/70" style="color:rgba(255,255,255,0.7)">Session 1 — mid-May</div>
-        <div class="serif-italic text-lg text-white/95" style="color:rgba(255,255,255,0.95)">Confirm five anchors, co-select the remaining 2–3 seats, lock budget shape.</div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-16 text-left max-w-4xl mx-auto">
+      <div class="rounded-lg p-6" style="background:rgba(255,255,255,0.08);backdrop-filter:blur(6px)">
+        <div class="eyebrow mb-2" style="color:rgba(255,255,255,0.7)">Session 1</div>
+        <div class="text-lg serif-italic mb-2" style="color:rgba(255,255,255,0.95)">Mid-May 2026</div>
+        <div class="text-sm" style="color:rgba(255,255,255,0.8)">Confirm 5 anchors · co-select remaining 2–3 · lock budget shape</div>
       </div>
-      <div class="bg-white/10 rounded-lg p-5" style="background:rgba(255,255,255,0.08)">
-        <div class="eyebrow mb-2 text-white/70" style="color:rgba(255,255,255,0.7)">Session 2 — June</div>
-        <div class="serif-italic text-lg text-white/95" style="color:rgba(255,255,255,0.95)">Community consent confirmed. Budget locked. Year 1 commences 1 July.</div>
+      <div class="rounded-lg p-6" style="background:rgba(255,255,255,0.08);backdrop-filter:blur(6px)">
+        <div class="eyebrow mb-2" style="color:rgba(255,255,255,0.7)">Session 2</div>
+        <div class="text-lg serif-italic mb-2" style="color:rgba(255,255,255,0.95)">June 2026</div>
+        <div class="text-sm" style="color:rgba(255,255,255,0.8)">Community consent confirmed · budget locked · Year 1 commences 1 July</div>
       </div>
-      <div class="bg-white/10 rounded-lg p-5" style="background:rgba(255,255,255,0.08)">
-        <div class="eyebrow mb-2 text-white/70" style="color:rgba(255,255,255,0.7)">Three years — by 2029</div>
-        <div class="serif-italic text-lg text-white/95" style="color:rgba(255,255,255,0.95)">Documentary. Book. Per-young-person journals. National launch on Country.</div>
+      <div class="rounded-lg p-6" style="background:rgba(255,255,255,0.08);backdrop-filter:blur(6px)">
+        <div class="eyebrow mb-2" style="color:rgba(255,255,255,0.7)">Three years later</div>
+        <div class="text-lg serif-italic mb-2" style="color:rgba(255,255,255,0.95)">By 2029</div>
+        <div class="text-sm" style="color:rgba(255,255,255,0.8)">Documentary · book · per-young-person journals · national launch on Country</div>
       </div>
     </div>
 
-    <blockquote class="pullquote text-2xl md:text-3xl text-white/95 max-w-3xl mx-auto leading-snug" style="color:rgba(255,255,255,0.95)">"Two cultures, one world working together."</blockquote>
-    <div class="text-sm text-white/70 mt-3" style="color:rgba(255,255,255,0.7)">— Oonchiumpa's operating philosophy · more precise than "partner-led"</div>
+    <blockquote class="pullquote text-3xl md:text-5xl leading-tight max-w-3xl mx-auto" style="color:rgba(255,255,255,0.98)">"Two cultures, one world working together."</blockquote>
+    <div class="text-sm mt-5" style="color:rgba(255,255,255,0.7)">— Oonchiumpa's operating philosophy · more precise than "partner-led"</div>
   </div>
 </section>
 
-<!-- Footer / back cover -->
-<footer class="max-w-5xl mx-auto px-8 py-10">
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
-    <div>
-      <div class="eyebrow mb-2">The working dashboard</div>
-      <p class="text-sm text-stone-700 mb-3 leading-relaxed">The five anchor communities, the story corpus, the Australian Living Map of Alternatives, the 12-gate OCAP chain, the judicial endorsement, and the live consent markers are all visible at the working dashboard. Updates between Sessions 1 and 2.</p>
-      <a href="/minderoo-live-dashboard.html" class="inline-flex items-center gap-2 text-sm font-medium" style="color:var(--m-purple)">Open the working dashboard →</a>
+<!-- FOOTER =========================================================== -->
+<footer class="section-sm" style="background: var(--m-stone); color:white">
+  <div class="container">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+      <div>
+        <div class="eyebrow mb-3" style="color:var(--m-gold)">The working dashboard</div>
+        <p class="text-sm mb-4 leading-relaxed" style="color:rgba(255,255,255,0.85)">Every piece of proof in this pitch — the five anchor communities, the story corpus under 12-gate OCAP consent, the Australian Living Map of Alternatives, the judicial endorsement, the live consent markers — is visible at the working dashboard. Updates between Sessions 1 and 2.</p>
+        <a href="/minderoo-live-dashboard.html" class="inline-flex items-center gap-2 text-sm font-medium px-5 py-3 rounded-lg" style="background:var(--m-gold);color:var(--m-stone)">Open the working dashboard →</a>
+      </div>
+      <div>
+        <div class="eyebrow mb-3" style="color:var(--m-gold)">Contact + authorship</div>
+        <p class="text-sm mb-2 leading-relaxed" style="color:rgba(255,255,255,0.9)"><strong>Benjamin Knight</strong> · Co-founder, A Curious Tractor</p>
+        <p class="text-sm mb-2 leading-relaxed" style="color:rgba(255,255,255,0.9)"><strong>Nicholas Marchesi OAM</strong> · Co-founder (Orange Sky)</p>
+        <p class="text-sm mb-5 leading-relaxed" style="color:rgba(255,255,255,0.9)">benjamin@act.place</p>
+        <p class="text-xs italic leading-relaxed" style="color:rgba(255,255,255,0.6)">Prepared under the cultural authority of Oonchiumpa (Kristy Bloomfield + Tanya Turner, under Aunty Bev + Uncle Terry), Palm Island Community Company (Rachael Atkinson), Minjerribah Moorgumpin Elders-in-Council, BG Fit (Brodie Germaine), and Mounty Yarns (Daniel Daylight).</p>
+      </div>
     </div>
-    <div>
-      <div class="eyebrow mb-2">Contact + authorship</div>
-      <p class="text-sm text-stone-700 mb-2 leading-relaxed"><strong>Benjamin Knight</strong> · Co-founder, A Curious Tractor</p>
-      <p class="text-sm text-stone-700 mb-2 leading-relaxed"><strong>Nicholas Marchesi OAM</strong> · Co-founder (Orange Sky)</p>
-      <p class="text-sm text-stone-700 mb-3 leading-relaxed">benjamin@act.place</p>
-      <p class="text-xs text-stone-500 italic leading-relaxed">Prepared under the cultural authority of Oonchiumpa (Kristy Bloomfield + Tanya Turner, under Aunty Bev + Uncle Terry), Palm Island Community Company (Rachael Atkinson), Minjerribah Moorgumpin Elders-in-Council, BG Fit (Brodie Germaine), and Mounty Yarns (Daniel Daylight).</p>
+    <div class="mt-10 pt-8 border-t text-center text-xs" style="border-color:rgba(255,255,255,0.15);color:rgba(255,255,255,0.5)">
+      The Three Circles · A Curious Tractor × JusticeHub · For Minderoo Foundation · Envelope ships 1 May 2026
     </div>
-  </div>
-  <div class="mt-10 pt-8 border-t border-stone-200 text-center text-xs text-stone-500">
-    The Three Circles · A Curious Tractor × JusticeHub · For Minderoo Foundation · Envelope ships 1 May 2026
   </div>
 </footer>
 
