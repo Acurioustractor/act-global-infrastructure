@@ -15,47 +15,58 @@ minderoo_portfolio_lead: Lucy Stronach (Youth Justice + Early Years)
 
 ---
 
-## Page 1 — The Frame
+## Page 1 — Begin on Country
 
-> *"Over half of children in custody in Victoria have been subject to a child protection order."*
-> — Cost of Late Intervention 2024 (Minderoo Foundation / The Front Project, 2025, p. 3)
+> *"When you stand here in Mparntwe, you are not just standing in a town. You're standing in one of the oldest cultural landscapes in the world. And the Arrernte word for this place isn't just a name — it's a story, it's a responsibility."*
+> — Tanya Turner, Eastern Arrernte woman, welcoming 55 judges and magistrates to Mparntwe, 20 April 2026
 
-Australia spent $22.3 billion in 2024 on what Minderoo's own report names **late intervention** — responding to children and young people when they are already in crisis.
+This envelope begins where the program begins — on Country, with permission, under cultural authority.
 
-That figure is up 47% in real terms since 2019. Child protection is the single largest line ($10.2B, 43%). Youth crime is the second ($3.4B, 14%). Family violence has *doubled*.
+On 20 April 2026, Kristy Bloomfield — Central Arrernte, Eastern Arrernte and Alyawarra Traditional Owner of Mparntwe — opened the National Judicial College of Australia's first-ever Indigenous Justice Program, welcoming 55 judges and magistrates onto her Country. The next morning, those 55 judges walked onto Eastern Arrernte Country at Atnarpa under the leadership of Oonchiumpa Consultancy and Services.
 
-And the sentence at the top of this page says the $10.2B and the $3.4B are the same ledger. Over half of the children sitting in youth detention cells today walked there through the child-protection system. They are not two problems. They are one trajectory. The same children, five years apart.
+That the institution which trains every Australian judge chose **Oonchiumpa's on-Country day as the foundation of the program** is not incidental to this envelope. It is the envelope's thesis. *The community-led method is already carrying Australia's youth-justice capability — it just hasn't been resourced to keep doing so.*
 
-**The Three Circles is the three-year partnership that funds the Aboriginal Community-Controlled anchors who intercept that trajectory. Five are already operating. Two to three more will be co-selected with Minderoo in Sessions 1 and 2.**
+The Three Circles is a three-year, $2.9 million partnership to hold five Aboriginal Community-Controlled anchor communities that are already running the method, and to co-select 2–3 more with Minderoo in Sessions 1 and 2.
 
-The ask is $2.9 million over three years. That is **0.013% of a single year of the $22.3 billion**. One dollar for every ten thousand dollars of the problem, to hold the upstream method for three years.
+$2.9 million over three years is **0.013% of a single year** of the $22.3 billion Australia spends on late intervention. One dollar per ten-thousand dollars of the problem, to resource the cultural foundation that already exists.
 
 ---
 
-## Page 2 — Where this begins: Oonchiumpa, Mparntwe
+## Page 2 — The method, named from source
 
-> *"Our young people are just collateral in a bigger issue. It sits on a much broader level and with adults, not with children."*
-> — Kristy Bloomfield & Tanya Turner, Oonchiumpa founders
+> *"Our Alternative Service Response is not an add-on to the justice system. It's a cultural foundation that justice should stand on in this region."*
+> — Tanya Turner, Oonchiumpa
 
-Kristy Bloomfield is Central Arrernte, Eastern Arrernte and Alyawarra Traditional Owner of Mparntwe. Tanya Turner is Eastern Arrernte. They built Oonchiumpa not from a grant, but from cultural authority — from knowing what was needed and refusing to wait for permission.
+Oonchiumpa's **Alternative Service Response (ASR)** is what Minderoo's 2024 Cost of Late Intervention report calls a **wrap-around model** (CoLI24 p. ii, recommendation #3). ACT didn't translate COLI24 back into community language. Oonchiumpa named the pillars from cultural logic, years before the report was written.
 
-Under their authority sit Elders **Aunty Bev** and **Uncle Terry**, who remember an Alice Springs where Aboriginal people returned to their communities regularly, where kinship networks held young people. They speak about what has been lost. They also speak about what is being rebuilt.
+**Four pillars, in Tanya's words:**
+
+**1. Cultural reconnection.** *"Young people need identity and belonging. We take them back to culture, back to Elders, back to story, back to the law of kinship that teach responsibility and respect long before any Western law does."*
+
+**2. Intensive family support.** *"Families in Central Australia navigate overcrowded housing, poverty, intergenerational trauma, and constant crisis. We walk alongside them — not judging, not lecturing — strengthening the whole system around the young person."*
+
+**3. Realistic flexible case management.** *"Our team doesn't sit behind a desk. We are Country, in the community, in the late-night spaces where young people actually move. We respond to crises early and prevent escalation — because if you meet a young person at a time that works for them, you prevent half the things that bring them to court in the first place."*
+
+**4. Bridging two worlds.** *"We translate between systems — the court, police, schools, child protection — and cultural norms that operate on completely different logic."*
+
+Every confirmed anchor practises some version of these four pillars, in their own place, in their own language, on their own Country:
+
+- **Oonchiumpa (Mparntwe, NT)** — 95% diversion, 72% school re-engagement, 97.6% less cost than detention
+- **Palm Island Community Company (Palm Island, QLD)** — $29M turnover, 208 FTE, YOSS grown 3× since 2021
+- **Minjerribah Moorgumpin (Minjerribah, QLD)** — 32 years of Quandamooka Elders-in-Council governance
+- **Brodie Germaine Fitness (Mount Isa, QLD)** — Tuesday gyms + monthly bush camps + Doomadgee remote outreach
+- **Mounty Yarns (Mt Druitt, NSW)** — youth-led hub, 13 storytellers, CONTAINED mobile base camp
+
+*Two cultures, one world working together.* That is Oonchiumpa's operating philosophy. It is also, more precisely than "partner-led", what Minderoo's 2030 Strategy is asking for.
 
 > *"We still tell the past, but we also going to tell the future now. Our most important thing is our kids and their kids being connected. To protect this place."*
 > — Kylie Bloomfield
 
-What Oonchiumpa runs is, in Minderoo's own 2024 report language, **a wrap-around hub** (CoLI24 p. ii). Minderoo's recommendation #3 is to invest in these models. Oonchiumpa was already one.
+The founders' authority travels through Elders Aunty Bev and Uncle Terry, through the young people, and through the work. Fred Campbell, Oonchiumpa's youth case worker, names what the method actually produces:
 
-- **95% diversion rate**
-- **72% school re-engagement**
-- **97.6% less cost than detention**
-- Operates inside the NT's $2,808 per-capita late-intervention spend — nearly 3× South Australia's. Every Oonchiumpa dollar is direct substitution.
+> *"He trusts us. We earned that trust."*
 
-Fred Campbell, Oonchiumpa's youth case worker, names what the method actually is:
-
-> *"He just was so proud showing them that he can build it. He's quite capable of building that on his own and sharing that onto other kids. He trusts us. We earned that trust."*
-
-This is the practice. Not a program. Not a service. Trust, earned. Country, held. Kids, kept inside their own kin.
+Not a program. Trust, earned. Country, held. Kids, kept inside their own kin.
 
 ---
 
@@ -122,6 +133,49 @@ Five hubs, five kinds of wrap-around, all First Nations governed. All already op
 **The Three Circles holds them for three years and extends the method to two or three more.**
 
 The choice of the additional anchors is made *with* Minderoo in Session 1 and Session 2. Not ACT imposing a list. Sessions walk through the 50-candidate pool — per-state verified ACCOs from our data spine — and narrow to 7 or 8 with Minderoo in the room. Community consent is the final word.
+
+---
+
+## Page 4b — Endorsed by the bench
+
+**The Australian judiciary has already chosen Oonchiumpa as the foundation.**
+
+On 21 April 2026, the National Judicial College of Australia — the institution that trains every Australian judge — ran its first-ever Indigenous Justice Program. The on-Country day at the heart of that program was hosted by Oonchiumpa Consultancy and Services at Atnarpa Outstation, 80km east of Mparntwe.
+
+> *"This is the National Judicial College of Australia Indigenous Justice Program. It's a first for the National Judicial College, and perhaps long overdue. It's led by an on-Country day that sets the foundation for the conversation that happens over the rest of the course. And that on-Country Day is here — at the Atnarpa Outstation, under Oonchiumpa consultancy and the leadership of Tanya and Kristy."*
+> — Anthony Hopkins, Alice Springs Judge
+
+**Two members of the bench spoke on camera, on the record, that day:**
+
+**Louise Taylor** — Judge of the ACT Supreme Court · Kamilaroi woman · Co-chair of the National Judicial College organising committee:
+
+> *"Kristy and Tanya really exemplify what's possible when we are given the space to lead things for ourselves. The potential for their work to have relevance for so many Australians is immeasurable."*
+
+**Anthony Hopkins** — Alice Springs Judge · long connection with Kristy Bloomfield through the Aboriginal Legal Service:
+
+> *"Country is central, but that is because it's inseparable from the people that are of country. Being here on our under country at Atnarpa is a place where they can hear from people speaking from country that they are part of, that they are inseparable from — and that just brings a change of power."*
+
+### The four-column endorsement — unique in Australian youth-justice philanthropy
+
+| Column | Evidence |
+|---|---|
+| 1. Minderoo's own evidence | COLI24: $22.3B / 47% / NT $2,808 per capita |
+| 2. ACCO community leadership | 5 anchors, 16 young voices, 440+ stories |
+| 3. **Australian judiciary** | **National Judicial College centred Oonchiumpa as foundation** |
+| 4. International (Yr 2–3) | Diagrama (Spain) + YOPE (Amsterdam) reciprocal exchange |
+
+**The Three Circles is the first Australian youth-justice philanthropic ask to carry all four columns.** Lucy Stronach takes this to the Minderoo Board with cultural authority, institutional endorsement, national evidence, and international legitimacy already in place.
+
+### The ripple — how Communities spend reshapes Justice
+
+Judge Hopkins named the structural mechanism. Minderoo's Communities investment in Oonchiumpa reshapes Australian Justice from the inside — two-for-one portfolio value:
+
+> *Judges experience Country → Judicial practice shifts → Court structure reshapes → Employment within courts → Stakeholder engagement → Sentencing + policy → **Young people no longer the collateral***
+
+> *"The ripple effect of change, of personal change, leading out to being able to influence the way your courts operate, but also the court structure, employment within courts, and the stakeholders that are engaging within court."*
+> — Anthony Hopkins
+
+Minderoo's $2.9M, spent on the method already centred by the Australian judiciary, moves in four directions at once: Communities portfolio delivery · Justice portfolio delivery · First Nations lens · Early Years lens (the COLI24 trajectory).
 
 ---
 
@@ -362,20 +416,34 @@ Minderoo's own Cost of Late Intervention launch playbook was a physical report p
 
 ---
 
-## Page 16 — Cover
+## Page 16 — Cover letter
 
-*Kia ora Lucy,*
+*Dear Lucy,*
 
-*The Three Circles is a three-year, $2.9 million partnership to fund the Aboriginal Community-Controlled anchor communities that intercept Australia's $22.3 billion late-intervention trajectory before it becomes detention. Five anchors already operate. Two to three more will be co-selected with you in Sessions 1 and 2.*
+*On 20 April 2026, Tanya Turner — Eastern Arrernte woman, co-founder of Oonchiumpa Consultancy and Services — welcomed 55 judges and magistrates to Mparntwe. They came for the National Judicial College of Australia's first-ever Indigenous Justice Program. The institution that trains every Australian judge made Oonchiumpa's on-Country day the foundation of that program.*
 
-*Every page inside is drawn from Minderoo Foundation's own 2024 Cost of Late Intervention report and 2030 Strategy. We are not asking Minderoo to fund something new. We are asking Minderoo to fund what Minderoo already says works.*
+*Tanya said this to the 55 judges:*
 
-*The five anchor communities are already waiting. I would love to walk this with you.*
+> *"No Aboriginal person in this region is born dangerous or hopeless or broken. They're born into layers of history that most Australians never have to face."*
+
+*And this:*
+
+> *"Our Alternative Service Response is not an add-on to the justice system. It's a cultural foundation that justice should stand on in this region."*
+
+*That sentence is the envelope.*
+
+*The Three Circles is a three-year, $2.9 million partnership. It does not initiate a program. It resources the cultural foundation that is already holding Australia's youth-justice capability — that has been holding it unacknowledged and unfunded for generations. Five Aboriginal Community-Controlled anchor communities already run the method. Two to three more will be co-selected with you in Sessions 1 and 2.*
+
+*Every page inside this envelope is drawn from Minderoo's own 2024 Cost of Late Intervention report and 2030 Strategy. We are not asking Minderoo to fund something speculative. We are asking Minderoo to fund what Minderoo's own report says works — and to join the coalition the Australian judiciary has already formed.*
+
+*$2.9 million over three years is 0.013% of a single year of the $22.3 billion. One dollar per ten-thousand dollars of the problem, for three years, to bend the 47% curve.*
+
+*The five anchor communities are already waiting. The live dashboard at the URL on the back cover updates every day between today and our first conversation.*
+
+*Two cultures, one world working together. I would love to walk this with you.*
 
 *Benjamin Knight*
 *A Curious Tractor · benjamin@act.place*
-
-*Live proof at the URL on the back cover. The dashboard updates every day between now and our first conversation.*
 
 ---
 
