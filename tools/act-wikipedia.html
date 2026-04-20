@@ -1014,9 +1014,9 @@ a.wikilink:visited {
     <li>Content is compiled by LLM from raw sources</li>
     <li>Powered by the <a href="#" onclick="navigateTo('llm-knowledge-base'); return false;">LLM Knowledge Base</a> pattern</li>
 <<<<<<< Updated upstream
-    <li>Last compiled: 2026-04-19</li>
+    <li>Last compiled: 2026-04-20</li>
 =======
-    <li>Last compiled: 2026-04-19</li>
+    <li>Last compiled: 2026-04-20</li>
 >>>>>>> Stashed changes
   </ul>
 </div>
@@ -26530,7 +26530,7 @@ function showMainPage() {
   // ── FOOTER ────────────────────────────────────────
   html += '<div class="mp-stats" style="text-align:center;font-size:12px;color:#888;border-top:1px solid #e5e5e5;padding-top:1em;margin-top:1em;">';
   html += 'Tractorpedia is maintained using the <a href="#llm-knowledge-base" class="wikilink" onclick="navigateTo(\'llm-knowledge-base\'); return false;">LLM Knowledge Base</a> pattern. ';
-  html += 'Photos live from <a href="https://www.empathyledger.com" target="_blank">Empathy Ledger</a>. Last compiled: 2026-04-19.';
+  html += 'Photos live from <a href="https://www.empathyledger.com" target="_blank">Empathy Ledger</a>. Last compiled: 2026-04-20.';
   html += '</div>';
 
   document.getElementById('mw-content-text').innerHTML = html;
@@ -26952,6 +26952,18 @@ function showArtPortfolio() {
   html += 'Photos loaded live from <a href="https://www.empathyledger.com" target="_blank">Empathy Ledger</a>, scoped to each project via project_id (or filename pattern as fallback).';
   html += '</div>';
   document.getElementById('mw-content-text').innerHTML = html;
+  // Now async-load real photos for each card. fetchELMedia(slug) handles project_id + filename fallback.
+  artProjects.forEach(function(p) {
+    fetchELMedia(p.slug, 1).then(function(media) {
+      let el = document.getElementById('art-thumb-' + p.slug);
+      if (!el) return;
+      if (media && media.length > 0) {
+        el.innerHTML = '<img src="' + media[0].url + '" style="width:100%;height:100%;object-fit:cover;" alt="' + (media[0].title || p.name) + '">';
+      } else {
+        el.innerHTML = '<div style="text-align:center;padding:20px;"><div style="font-size:11px;text-transform:uppercase;letter-spacing:0.05em;color:#aaa;">photos coming soon</div><div style="font-size:11px;color:#bbb;margin-top:4px;">tag in Empathy Ledger</div></div>';
+      }
+    });
+  });
   // Now async-load real photos for each card. fetchELMedia(slug) handles project_id + filename fallback.
   artProjects.forEach(function(p) {
     fetchELMedia(p.slug, 1).then(function(media) {
@@ -28032,6 +28044,10 @@ function handleHash() {
   let hash = window.location.hash.substring(1);
   if (!hash) {
     showMainPage();
+    return;
+  }
+  if (hash === 'art-portfolio') {
+    showArtPortfolio();
     return;
   }
   if (hash === 'art-portfolio') {

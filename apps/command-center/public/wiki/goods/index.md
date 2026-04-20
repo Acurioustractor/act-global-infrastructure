@@ -15,7 +15,7 @@ empathy_ledger_key: goods-on-country
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/projects/goods-on-country.md`.
-> Regenerated: `2026-04-19T23:15:13.420Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerated: `2026-04-20T03:03:10.720Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # Goods on Country
 

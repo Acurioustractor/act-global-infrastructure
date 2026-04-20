@@ -15,7 +15,7 @@ el_v2_match_via: "org:bg-fit"
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/stories/bg-fit-spinifex-residential-getting-through-to-the-hard-cases.md`.
-> Regenerated: `2026-04-19T23:15:13.420Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerated: `2026-04-20T03:03:10.720Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 # Spinifex Residential — Getting Through to the Hard Cases
 
 > Spinifex Res Youth
