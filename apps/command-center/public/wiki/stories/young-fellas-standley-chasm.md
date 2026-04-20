@@ -7,7 +7,7 @@ series: judges-on-country-postcards
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/stories/young-fellas-standley-chasm.md`.
-> Regenerated: `2026-04-20T03:03:10.720Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerated: `2026-04-20T04:13:12.976Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # Young Fellas Experience Cultural Connection at Standley Chasm
 

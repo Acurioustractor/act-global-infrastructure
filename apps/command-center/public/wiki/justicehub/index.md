@@ -15,7 +15,7 @@ empathy_ledger_key: justicehub
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/projects/justicehub/justicehub.md`.
-> Regenerated: `2026-04-20T03:03:10.720Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerated: `2026-04-20T04:13:12.976Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # JusticeHub
 
@@ -283,6 +283,18 @@ Tour dates (2026): Mount Druitt (May), Brisbane (May), Adelaide (June), Townsvil
 ### Number Divergence: Platform Name vs Mission
 
 The site's SEO title is "JusticeHub — Empowering Youth Through Storytelling" but the live experience is evidence-based reform infrastructure at scale. The SEO title undersells the platform for any funder who googles before a meeting.
+
+## LCAA Phase
+
+In the [[lcaa-method|LCAA Method]], JusticeHub is the **evidence layer** of [[third-reality|The Third Reality]] — the **Curiosity** infrastructure that catalogs what works, surfaces it for funders and policymakers, and connects young people, communities, and decision-makers to community-led alternatives to detention.
+
+LCAA arc for JusticeHub:
+- **Listen** — three doors named by role rather than urgency (*"I need help"*, *"I do the work"*, *"I fund or shape policy"*); ALMA AI chat surfacing community voice alongside policy evidence; service directory built from community knowledge
+- **Curiosity** — 1,387 verified models, 430 with evidence data, 98K orgs mapped, $94.6B funding tracked; international comparisons ([[diagrama|Diagrama]], Spain); the cost case (community-led ~$15K/year vs detention ~$1.3M/year, 86x cheaper)
+- **Action** — Cost Calculator, System Map, Impact Dashboard, Learning Trips; capital routing via Allo Protocol and Hypercerts; service directory connecting youth to support; on-the-ground proof from BG Fit, [[oonchiumpa|Oonchiumpa]], and [[confit-pathways|ConFit Pathways]]
+- **Art** — [[contained|CONTAINED]] — the touring shipping container exhibition that brings justice reform into public consciousness and makes system change felt, not abstract; portraits from [[the-brave-ones|The Brave Ones]] live on its inside walls
+
+The platform is built for the communities the system impacts, not for the system itself.
 
 ## System Position
 

@@ -15,7 +15,7 @@ empathy_ledger_key: act-studio
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/projects/act-studio/act-studio.md`.
-> Regenerated: `2026-04-20T03:03:10.720Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerated: `2026-04-20T04:13:12.976Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # ACT Regenerative Studio
 
@@ -188,4 +188,4 @@ These source notes now hold the strongest current bridge between raw capture and
 - [[art/innovation/studio-innovation-flow|Studio Innovation Flow]] — how Studio work feeds the wider ecosystem
 - [[art/business/studio-business-model|Studio Business Model]] — how the Studio sustains itself and funds the commons
 - [[living-website-operating-system|Living Website Operating System]] — the public-shell rule for hub, spokes, wiki, and EL
-- [[llm-knowledge-base|LLM Knowledge Base]] — the durable memory pattern the Compendium is intentionally following
+- [[llm-knowledge-base|LLM Knowledge Base]] — the long-form reference pattern the Compendium is intentionally following

@@ -15,7 +15,7 @@ empathy_ledger_key: empathy-ledger
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/projects/empathy-ledger.md`.
-> Regenerated: `2026-04-20T03:03:10.720Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerated: `2026-04-20T04:13:12.976Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # Empathy Ledger
 
@@ -202,6 +202,18 @@ Empathy Ledger is not only a product. It is one of ACT's load-bearing stack laye
 - the websites compose EL material into project pages, journals, and partner surfaces
 
 That architecture is the point, not an implementation detail. See [[living-website-operating-system|Living Website Operating System]] for the full operating model and [[art/business/studio-business-model|Studio Business Model]] for how EL strengthens ACT's public surface, media quality, and ecosystem earning power.
+
+## LCAA Phase
+
+In the [[lcaa-method|LCAA Method]], Empathy Ledger sits across **Listen** and **Art** — it is the platform that makes deep listening structural, and the layer that turns lived narrative into ecosystem-wide voice. It is not a single phase project; it is the consent-governed channel that the other phases run through.
+
+LCAA arc for Empathy Ledger:
+- **Listen** — five consent types as a listening protocol (Collection, Processing, Sharing, Attribution, Syndication); two years of community work in Central Australia and Queensland; 226 active storytellers and 550+ stories at Snow Foundation; story collection at PICC, Oonchiumpa, and partner communities under elder review
+- **Curiosity** — the Third Reality methodology; AI-powered theme extraction without collapsing storyteller voice (Transcript Analysis Method); federated learning experiments that share insights but never raw stories; TK Labels and Mukurtu integration for institutional cultural governance
+- **Action** — live multi-tenant platform at empathyledger.com (Vercel + Supabase + pgvector); 95% elder approval rate; 40% increase in grant success for partnered organisations; direct compensation flowing back to storytellers when their narrative drives funding
+- **Art** — the Atlas, World Tour, and Galleries surfaces; story material composed into project pages, journals, and partner sites; the public framing that lets policymakers feel what they could otherwise dismiss
+
+Empathy Ledger is also the re-entry point for the cycle: every consented narrative published becomes new material for the next round of Listen, sharpens the next Curiosity question, and grounds the next Action in real voice.
 
 ## Key Source Bridges
 
