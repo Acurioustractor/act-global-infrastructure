@@ -104,25 +104,49 @@
 <!-- The three circles visualisation -->
 <section class="max-w-7xl mx-auto px-6 py-6">
   <h2 class="text-2xl font-semibold mb-1">The Three Circles</h2>
-  <p class="text-sm text-stone-600 serif-italic mb-5">Each circle feeds the next. None is the product; the holding of all three for three years is.</p>
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-    <div class="circle-ring">
-      <div class="text-xs uppercase tracking-widest text-stone-500">Circle One · The Centre</div>
-      <h3 class="text-xl font-semibold my-2">The Living Brain</h3>
-      <p class="text-sm text-stone-700">Everything on Australian youth justice, queryable, updating. ALMA + CivicGraph + wiki + EL.</p>
-      <div class="text-xs text-stone-500 mt-3">1,155 ALMA interventions · 100K CivicGraph entities · 25 consented stories (growing)</div>
+  <p class="text-sm text-stone-600 serif-italic mb-6">Each circle feeds the next. None is the product; the holding of all three for three years is.</p>
+
+  <div class="flex justify-center mb-8">
+    <svg viewBox="0 0 600 600" class="w-full max-w-lg" style="font-family: 'Cormorant Garamond', serif;">
+      <!-- Outer ring · Circle Three · The Edge -->
+      <circle cx="300" cy="300" r="280" fill="rgba(183, 65, 14, 0.08)" stroke="#b7410e" stroke-width="1.5" opacity="0.9"/>
+      <!-- Middle ring · Circle Two · The Ring -->
+      <circle cx="300" cy="300" r="190" fill="rgba(200, 154, 60, 0.12)" stroke="#c89a3c" stroke-width="1.5" opacity="0.95"/>
+      <!-- Inner circle · Circle One · The Centre -->
+      <circle cx="300" cy="300" r="100" fill="rgba(74, 107, 58, 0.18)" stroke="#4a6b3a" stroke-width="1.5"/>
+
+      <!-- Inner label -->
+      <text x="300" y="290" text-anchor="middle" font-size="13" fill="#4a6b3a" letter-spacing="2" style="font-family: ui-sans-serif, system-ui, sans-serif; text-transform: uppercase;">Circle One</text>
+      <text x="300" y="312" text-anchor="middle" font-size="22" fill="#1c1c1c" font-weight="500">The Living Brain</text>
+
+      <!-- Middle ring label (top arc-ish area) -->
+      <text x="300" y="142" text-anchor="middle" font-size="13" fill="#c89a3c" letter-spacing="2" style="font-family: ui-sans-serif, system-ui, sans-serif; text-transform: uppercase;">Circle Two · The Ring</text>
+      <text x="300" y="166" text-anchor="middle" font-size="22" fill="#1c1c1c" font-weight="500">Staying — Country &amp; Council</text>
+
+      <!-- Outer ring label (bottom) -->
+      <text x="300" y="492" text-anchor="middle" font-size="13" fill="#b7410e" letter-spacing="2" style="font-family: ui-sans-serif, system-ui, sans-serif; text-transform: uppercase;">Circle Three · The Edge</text>
+      <text x="300" y="516" text-anchor="middle" font-size="22" fill="#1c1c1c" font-weight="500">The Country We're Building</text>
+    </svg>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto text-sm">
+    <div>
+      <div class="flex items-center gap-2 text-xs uppercase tracking-widest" style="color:#4a6b3a"><span class="inline-block w-3 h-3 rounded-full" style="background:#4a6b3a"></span>Circle One · The Centre</div>
+      <h3 class="text-lg font-semibold my-1">The Living Brain</h3>
+      <p class="text-stone-700">Everything on Australian youth justice, queryable, updating. ALMA + CivicGraph + wiki + EL.</p>
+      <div class="text-xs text-stone-500 mt-2">1,155 ALMA interventions · 100K CivicGraph entities · 25 consented stories (growing)</div>
     </div>
-    <div class="circle-ring">
-      <div class="text-xs uppercase tracking-widest text-stone-500">Circle Two · The Ring</div>
-      <h3 class="text-xl font-semibold my-2">Staying — Country &amp; Council</h3>
-      <p class="text-sm text-stone-700">The relational ring: anchor communities practising the method, held in each other's company.</p>
-      <div class="text-xs text-stone-500 mt-3">3 anchors active + 7 in formation · The Brave Ones is the daily practice inside this ring</div>
+    <div>
+      <div class="flex items-center gap-2 text-xs uppercase tracking-widest" style="color:#c89a3c"><span class="inline-block w-3 h-3 rounded-full" style="background:#c89a3c"></span>Circle Two · The Ring</div>
+      <h3 class="text-lg font-semibold my-1">Staying — Country &amp; Council</h3>
+      <p class="text-stone-700">The relational ring: anchor communities practising the method, held in each other's company.</p>
+      <div class="text-xs text-stone-500 mt-2">5 anchors active + 2–3 in formation · The Brave Ones is the daily practice inside this ring</div>
     </div>
-    <div class="circle-ring">
-      <div class="text-xs uppercase tracking-widest text-stone-500">Circle Three · The Edge</div>
-      <h3 class="text-xl font-semibold my-2">The Country We're Building</h3>
-      <p class="text-sm text-stone-700">Artefact released in Year 3 — documentary + book + platform + per-young-person journals.</p>
-      <div class="text-xs text-stone-500 mt-3">Artefact 001 (Murri Watch) ships 1 May · 002 queued · national collection Year 3</div>
+    <div>
+      <div class="flex items-center gap-2 text-xs uppercase tracking-widest" style="color:#b7410e"><span class="inline-block w-3 h-3 rounded-full" style="background:#b7410e"></span>Circle Three · The Edge</div>
+      <h3 class="text-lg font-semibold my-1">The Country We're Building</h3>
+      <p class="text-stone-700">Artefact released in Year 3 — documentary + book + platform + per-young-person journals.</p>
+      <div class="text-xs text-stone-500 mt-2">Artefact 001 (Murri Watch) ships 1 May · 002 queued · national collection Year 3</div>
     </div>
   </div>
 </section>
