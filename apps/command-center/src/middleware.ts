@@ -10,7 +10,7 @@ const PUBLIC_API_PREFIXES = [
 
 // Host aliases that front specific app paths
 const WIKI_HOST = 'wiki.act.place'
-const WIKI_PASSTHROUGH_PREFIXES = ['/wiki', '/api', '/_next', '/icons', '/fonts']
+const WIKI_PASSTHROUGH_PREFIXES = ['/wiki', '/knowledge', '/api', '/_next', '/icons', '/fonts']
 const WIKI_PASSTHROUGH_FILES = new Set(['/tractorpedia-manifest.json', '/manifest.json', '/favicon.ico', '/robots.txt', '/sitemap.xml'])
 
 function isPublicRoute(pathname: string): boolean {
