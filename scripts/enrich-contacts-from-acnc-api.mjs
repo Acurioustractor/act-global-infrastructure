@@ -136,15 +136,19 @@ async function main() {
   console.log('')
 
   const stateFilter = STATE ? `&state=eq.${STATE}` : ''
-  // Restrict to rows that have evidence of ACNC registration:
-  // - entity_type='charity' OR entity_type='foundation', OR
-  // - indigenous_corp with metadata.acnc.is_oric_corporation = true
-  const acncFilter = `or=(entity_type.eq.charity,entity_type.eq.foundation,metadata->acnc->>is_oric_corporation.eq.true)`
-  console.log('→ Fetching CC orgs with ACNC evidence, ABN, + missing email…')
+  // Cast wide: anything with ABN + no email. The search-by-ABN endpoint is
+  // cheap (one call per org), so probing non-ACNC ABNs only costs 1 req each
+  // (detail call is skipped on miss). Worst case: lots of "ABN not found".
+  console.log('→ Fetching CC orgs with ABN + missing email…')
   const allRows = await sbGet(
-    `gs_entities?select=id,canonical_name,state,abn,email,phone,metadata,entity_type&is_community_controlled=eq.true&abn=not.is.null&email=is.null&${acncFilter}${stateFilter}`,
+    `gs_entities?select=id,canonical_name,state,abn,email,phone,metadata,entity_type&is_community_controlled=eq.true&abn=not.is.null&email=is.null${stateFilter}`,
   )
-  const rows = LIMIT ? allRows.slice(0, LIMIT) : allRows
+  // Skip orgs we already probed in a previous run (idempotent re-run)
+  const freshRows = allRows.filter((r) => !r.metadata?.contact_enrichment?.last_acnc_api_lookup)
+  if (freshRows.length !== allRows.length) {
+    console.log(`  ${allRows.length - freshRows.length} already probed — skipping`)
+  }
+  const rows = LIMIT ? freshRows.slice(0, LIMIT) : freshRows
   console.log(`  ${rows.length} candidates\n`)
 
   const enriched = []
