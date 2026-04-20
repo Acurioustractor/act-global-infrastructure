@@ -16,6 +16,7 @@ import {
   executeGetContactDetails,
   executeGetCalendarEvents,
   executeSearchKnowledge,
+  executeSearchWiki,
   executeSearchEmails,
 } from './tools/core'
 
@@ -90,6 +91,8 @@ export async function executeTool(
       return await executeGetCalendarEvents(input as { start_date?: string; end_date?: string })
     case 'search_knowledge':
       return await executeSearchKnowledge(input as { query: string; project_code?: string; limit?: number })
+    case 'search_wiki':
+      return await executeSearchWiki(input as { query: string; limit?: number })
     case 'get_contacts_needing_attention':
       return await executeGetContactsNeedingAttention(input as { limit?: number; project?: string })
     case 'get_deal_risks':

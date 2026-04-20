@@ -126,6 +126,25 @@ export const AGENT_TOOLS: Anthropic.Tool[] = [
       required: ['query'],
     },
   },
+  {
+    name: 'search_wiki',
+    description:
+      'Search Tractorpedia — the ACT ecosystem encyclopedia at wiki.act.place. Returns articles from projects, people, communities, concepts, stories, decisions, and research. Use when the user asks for canonical facts about an ACT project, community, method, or concept (e.g. "what is PICC", "who is Kristy Bloomfield", "what is LCAA", "where does Goods on Country operate"). Each result includes a direct link to the article on wiki.act.place.',
+    input_schema: {
+      type: 'object' as const,
+      properties: {
+        query: {
+          type: 'string',
+          description: 'Search terms — project slug, person name, community, or concept.',
+        },
+        limit: {
+          type: 'number',
+          description: 'Max results. Default 5, max 15.',
+        },
+      },
+      required: ['query'],
+    },
+  },
   // get_project_summary — REMOVED: subsumed by get_project_360
   {
     name: 'get_contacts_needing_attention',
@@ -1105,6 +1124,7 @@ const CORE_TOOL_NAMES = new Set([
   'get_contact_details',
   'get_calendar_events',
   'search_knowledge',
+  'search_wiki',
   'draft_email',
   'set_reminder',
   'search_emails',

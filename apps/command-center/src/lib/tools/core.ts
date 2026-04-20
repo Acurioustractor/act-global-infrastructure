@@ -8,6 +8,8 @@ import {
   searchKnowledge,
 } from '@act/intel'
 import type { DailyBriefingResult } from '@act/intel'
+import { hybridSearch } from '../wiki-search'
+import { searchCanonicalWiki } from '../wiki-files'
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // TOOL: query_supabase
@@ -601,6 +603,61 @@ export async function executeGetEcosystemPulse(): Promise<string> {
           revenue: p.total_income,
           pipeline: p.pipeline_value,
         })),
+    })
+  } catch (err) {
+    return JSON.stringify({ error: (err as Error).message })
+  }
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// TOOL: search_wiki
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+export async function executeSearchWiki(input: {
+  query: string
+  limit?: number
+}): Promise<string> {
+  const query = (input.query ?? '').trim()
+  const limit = Math.max(1, Math.min(input.limit ?? 5, 15))
+  if (query.length < 2) {
+    return JSON.stringify({ error: 'query must be at least 2 characters' })
+  }
+
+  const wikiBase = 'https://wiki.act.place'
+  const buildUrl = (path: string) => `${wikiBase}/?page=${encodeURIComponent(path)}`
+
+  try {
+    try {
+      const hybrid = await hybridSearch(query, limit)
+      if (hybrid.length > 0) {
+        return JSON.stringify({
+          source: 'hybrid',
+          query,
+          results: hybrid.slice(0, limit).map(r => ({
+            title: r.title,
+            path: r.path,
+            section: r.section,
+            snippet: r.snippet,
+            url: buildUrl(r.path),
+            score: r.score,
+          })),
+        })
+      }
+    } catch (err) {
+      console.warn('[search_wiki] hybrid failed, falling back:', (err as Error).message)
+    }
+
+    const fallback = searchCanonicalWiki(query)
+    return JSON.stringify({
+      source: 'substring',
+      query,
+      results: fallback.slice(0, limit).map(r => ({
+        title: r.title,
+        path: r.path,
+        section: r.section,
+        snippet: r.snippet,
+        url: buildUrl(r.path),
+      })),
     })
   } catch (err) {
     return JSON.stringify({ error: (err as Error).message })

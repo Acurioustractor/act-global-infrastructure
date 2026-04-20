@@ -8,11 +8,42 @@ const PUBLIC_API_PREFIXES = [
   '/api/health',
 ]
 
+// Host aliases that front specific app paths
+const WIKI_HOST = 'wiki.act.place'
+const WIKI_PASSTHROUGH_PREFIXES = ['/wiki', '/api', '/_next', '/icons', '/fonts']
+const WIKI_PASSTHROUGH_FILES = new Set(['/tractorpedia-manifest.json', '/manifest.json', '/favicon.ico', '/robots.txt', '/sitemap.xml'])
+
 function isPublicRoute(pathname: string): boolean {
   return PUBLIC_API_PREFIXES.some(prefix => pathname.startsWith(prefix))
 }
 
+function rewriteForWikiHost(request: NextRequest): NextResponse | null {
+  const host = request.headers.get('host') ?? ''
+  const isWikiHost = host === WIKI_HOST || host.startsWith(`${WIKI_HOST}:`)
+  if (!isWikiHost) return null
+
+  const url = request.nextUrl
+  if (url.pathname === '/' || url.pathname === '') {
+    const rewritten = url.clone()
+    rewritten.pathname = '/wiki'
+    return NextResponse.rewrite(rewritten)
+  }
+  if (WIKI_PASSTHROUGH_PREFIXES.some(p => url.pathname.startsWith(p))) return null
+  if (WIKI_PASSTHROUGH_FILES.has(url.pathname)) return null
+
+  // Treat any other top-level path as a wiki slug: /picc → /wiki?page=picc
+  const rewritten = url.clone()
+  const slug = url.pathname.replace(/^\/+/, '')
+  rewritten.pathname = '/wiki'
+  if (slug) rewritten.searchParams.set('page', slug)
+  return NextResponse.rewrite(rewritten)
+}
+
 export function middleware(request: NextRequest) {
+  // Host-alias rewrite runs before auth so wiki.act.place landing works without a key
+  const hostRewrite = rewriteForWikiHost(request)
+  if (hostRewrite) return hostRewrite
+
   const { pathname } = request.nextUrl
 
   // Only gate /api routes — pages are public (no user auth system yet)
@@ -57,5 +88,7 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: '/api/:path*',
+  // Run on everything except static assets — needed so the wiki.act.place host
+  // rewrite catches root requests. The /api auth gate still only fires on /api.
+  matcher: ['/((?!_next/static|_next/image|icons/|fonts/|favicon.ico|.*\\.[a-zA-Z0-9]+$).*)', '/api/:path*'],
 }

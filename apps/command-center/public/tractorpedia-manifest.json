@@ -1,0 +1,26 @@
+{
+  "name": "Tractorpedia",
+  "short_name": "Tractorpedia",
+  "description": "The living knowledge base for A Curious Tractor",
+  "start_url": "/wiki",
+  "scope": "/wiki",
+  "display": "standalone",
+  "background_color": "#f6f6f6",
+  "theme_color": "#0645ad",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["productivity", "education", "reference"]
+}
