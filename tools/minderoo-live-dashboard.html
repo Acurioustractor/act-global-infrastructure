@@ -107,25 +107,72 @@
   <p class="text-sm text-stone-600 serif-italic mb-6">Each circle feeds the next. None is the product; the holding of all three for three years is.</p>
 
   <div class="flex justify-center mb-8">
-    <svg viewBox="0 0 600 600" class="w-full max-w-lg" style="font-family: 'Cormorant Garamond', serif;">
+    <svg viewBox="0 0 640 640" class="w-full max-w-xl" style="font-family: 'Cormorant Garamond', serif;">
+      <defs>
+        <radialGradient id="g-outer" cx="50%" cy="50%" r="50%">
+          <stop offset="60%" stop-color="#f4e5d5" stop-opacity="0"/>
+          <stop offset="100%" stop-color="#b7410e" stop-opacity="0.15"/>
+        </radialGradient>
+        <radialGradient id="g-mid" cx="50%" cy="50%" r="50%">
+          <stop offset="40%" stop-color="#e9dcbe" stop-opacity="0.05"/>
+          <stop offset="100%" stop-color="#c89a3c" stop-opacity="0.22"/>
+        </radialGradient>
+        <radialGradient id="g-inner" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#a6c296" stop-opacity="0.35"/>
+          <stop offset="100%" stop-color="#4a6b3a" stop-opacity="0.35"/>
+        </radialGradient>
+        <filter id="softshadow" x="-30%" y="-30%" width="160%" height="160%">
+          <feGaussianBlur in="SourceAlpha" stdDeviation="4"/>
+          <feOffset dx="0" dy="2" result="offsetblur"/>
+          <feComponentTransfer><feFuncA type="linear" slope="0.22"/></feComponentTransfer>
+          <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <!-- Arc paths for curved labels -->
+        <path id="arc-mid-top" d="M 320,160 A 140,140 0 0 1 320,160" fill="none"/>
+        <path id="arc-outer-bottom" d="M 40,320 A 280,280 0 0 0 600,320" fill="none"/>
+        <path id="arc-mid-top-curve" d="M 170,320 A 150,150 0 0 1 470,320" fill="none"/>
+      </defs>
+
+      <!-- decorative tick marks around outer ring (compass-y) -->
+      <g stroke="#b7410e" stroke-opacity="0.35" stroke-width="1">
+        <line x1="320" y1="18" x2="320" y2="30"/>
+        <line x1="320" y1="610" x2="320" y2="622"/>
+        <line x1="18" y1="320" x2="30" y2="320"/>
+        <line x1="610" y1="320" x2="622" y2="320"/>
+        <line x1="108" y1="108" x2="116" y2="116"/>
+        <line x1="524" y1="524" x2="532" y2="532"/>
+        <line x1="108" y1="532" x2="116" y2="524"/>
+        <line x1="524" y1="108" x2="532" y2="116"/>
+      </g>
+
       <!-- Outer ring · Circle Three · The Edge -->
-      <circle cx="300" cy="300" r="280" fill="rgba(183, 65, 14, 0.08)" stroke="#b7410e" stroke-width="1.5" opacity="0.9"/>
+      <circle cx="320" cy="320" r="295" fill="url(#g-outer)" stroke="#b7410e" stroke-width="1" opacity="0.95" filter="url(#softshadow)"/>
       <!-- Middle ring · Circle Two · The Ring -->
-      <circle cx="300" cy="300" r="190" fill="rgba(200, 154, 60, 0.12)" stroke="#c89a3c" stroke-width="1.5" opacity="0.95"/>
+      <circle cx="320" cy="320" r="215" fill="url(#g-mid)" stroke="#c89a3c" stroke-width="1" opacity="0.95" filter="url(#softshadow)"/>
       <!-- Inner circle · Circle One · The Centre -->
-      <circle cx="300" cy="300" r="100" fill="rgba(74, 107, 58, 0.18)" stroke="#4a6b3a" stroke-width="1.5"/>
+      <circle cx="320" cy="320" r="120" fill="url(#g-inner)" stroke="#4a6b3a" stroke-width="1.25" filter="url(#softshadow)"/>
 
-      <!-- Inner label -->
-      <text x="300" y="290" text-anchor="middle" font-size="13" fill="#4a6b3a" letter-spacing="2" style="font-family: ui-sans-serif, system-ui, sans-serif; text-transform: uppercase;">Circle One</text>
-      <text x="300" y="312" text-anchor="middle" font-size="22" fill="#1c1c1c" font-weight="500">The Living Brain</text>
+      <!-- dashed whisper rings between layers (topo feel) -->
+      <circle cx="320" cy="320" r="255" fill="none" stroke="#c89a3c" stroke-opacity="0.2" stroke-width="0.5" stroke-dasharray="2 6"/>
+      <circle cx="320" cy="320" r="170" fill="none" stroke="#4a6b3a" stroke-opacity="0.2" stroke-width="0.5" stroke-dasharray="2 6"/>
 
-      <!-- Middle ring label (top arc-ish area) -->
-      <text x="300" y="142" text-anchor="middle" font-size="13" fill="#c89a3c" letter-spacing="2" style="font-family: ui-sans-serif, system-ui, sans-serif; text-transform: uppercase;">Circle Two · The Ring</text>
-      <text x="300" y="166" text-anchor="middle" font-size="22" fill="#1c1c1c" font-weight="500">Staying — Country &amp; Council</text>
+      <!-- OUTER ring label (curved across bottom, hugging outer ring interior) -->
+      <path id="outer-curve" d="M 60,340 A 260,260 0 0 0 580,340" fill="none"/>
+      <text font-size="11" fill="#b7410e" letter-spacing="4" style="font-family: ui-sans-serif, system-ui, sans-serif; text-transform: uppercase;">
+        <textPath href="#outer-curve" startOffset="50%" text-anchor="middle">Circle Three · The Edge</textPath>
+      </text>
+      <text x="320" y="560" text-anchor="middle" font-size="24" fill="#1c1c1c" font-weight="500" style="font-style: italic;">The Country We're Building</text>
 
-      <!-- Outer ring label (bottom) -->
-      <text x="300" y="492" text-anchor="middle" font-size="13" fill="#b7410e" letter-spacing="2" style="font-family: ui-sans-serif, system-ui, sans-serif; text-transform: uppercase;">Circle Three · The Edge</text>
-      <text x="300" y="516" text-anchor="middle" font-size="22" fill="#1c1c1c" font-weight="500">The Country We're Building</text>
+      <!-- MIDDLE ring label (curved across top, inside outer, above inner) -->
+      <path id="mid-curve" d="M 180,245 A 160,160 0 0 1 460,245" fill="none"/>
+      <text font-size="11" fill="#c89a3c" letter-spacing="4" style="font-family: ui-sans-serif, system-ui, sans-serif; text-transform: uppercase;">
+        <textPath href="#mid-curve" startOffset="50%" text-anchor="middle">Circle Two · The Ring</textPath>
+      </text>
+      <text x="320" y="182" text-anchor="middle" font-size="22" fill="#1c1c1c" font-weight="500" style="font-style: italic;">Staying — Country &amp; Council</text>
+
+      <!-- INNER circle label (centred) -->
+      <text x="320" y="310" text-anchor="middle" font-size="11" fill="#4a6b3a" letter-spacing="4" style="font-family: ui-sans-serif, system-ui, sans-serif; text-transform: uppercase;">Circle One · The Centre</text>
+      <text x="320" y="340" text-anchor="middle" font-size="22" fill="#1c1c1c" font-weight="500" style="font-style: italic;">The Living Brain</text>
     </svg>
   </div>
 
