@@ -139,6 +139,18 @@ Black Cockatoo Valley is the place anchor for the whole ACT field:
 
 This matters because the land layer is not backdrop. It is part of the same operating system described in [[living-website-operating-system|Living Website Operating System]], and it is part of the same Studio business logic described in [[art/business/studio-business-model|Studio Business Model]].
 
+## LCAA Phase
+
+In the [[lcaa-method|LCAA Method]], Black Cockatoo Valley sits primarily in the **Listen** phase — the 150 acres on Jinibara Country are the land that grounds ACT's entire physical practice, and the conservation-first principle is *the land sets the pace*. Listening to Country is not metaphor here; capacity is a land decision before it is a calendar decision.
+
+LCAA arc for Black Cockatoo Valley:
+- **Listen** — *"The creek tells us more than the calendar."* When the creek is low or the grass is tired, work slows; activities are scaled to land capacity and community readiness, not to demand
+- **Curiosity** — regenerative grazing, food forest, native corridor restoration, water catchment systems treated as continuous R&D in regenerative practice
+- **Action** — residencies, workshops, restoration, R&D, and community programs running through the seasons; revenue from residencies and workshops reinvested into restoration, weed management, and monitoring
+- **Art** — the visible artefacts of stewardship — studio and gathering buildings, the field, the corridor; the place-memory that other ACT projects ([[goods-on-country|Goods]], [[empathy-ledger|Empathy Ledger]], [[justicehub|JusticeHub]] stories) carry into their own work
+
+The long-term shape is community co-stewardship and beautiful obsolescence — preparing the governance to hand the land back when the relationships and capability are ready.
+
 ## Key Source Bridges
 
 - [Source Summary — Black Cockatoo Valley Place Page](../../sources/2026-04-07-cc-place-black-cockatoo-valley.md)

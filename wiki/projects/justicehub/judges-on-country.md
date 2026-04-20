@@ -172,6 +172,18 @@ All cultural protocol for Judges on Country follows the same non-negotiable fram
 4. **Traditional Owners are compensated** as the expert facilitators they are, not as cultural consultants on a day rate
 5. **The experience does not happen without community leadership present** — if Kristy and Tanya are not available, the session does not run with substitutes
 
+## LCAA Phase
+
+In the [[lcaa-method|LCAA Method]], Judges on Country sits in the **Action** phase — it is a controlled moment of moral uncertainty inside a judge's own professional role, designed to change the way 55 judges from across Australia understand what happens after they hand down a decision. The card deck is the persistent **Art** that follows the experience back into chambers.
+
+LCAA arc for Judges on Country:
+- **Listen** — Traditional Owners ([[kristy-bloomfield|Kristy Bloomfield]] and Tanya Turner from [[oonchiumpa|Oonchiumpa]]) lead the Grounding (0–5 min); a Story Card carrying a young person's photo, name, age, and quote — *"like a court file snapshot, except this time the file has a face looking back"*
+- **Curiosity** — three lenses on the Decision Point Card (offence-first, risk-first, person-and-context-first); new information arriving one piece at a time after the decision is made — *"would you make the same decision now?"*
+- **Action** — Pathway Cards showing what happens next under each choice (standard pathway versus supported pathway); Program/Place Cards opening live [[justicehub|JusticeHub]] entries via QR code, filtered to the young person's region — the alternative exists, but only if you know it's there
+- **Art** — the card deck itself as the persistent artefact; portraits drawn from [[the-brave-ones|The Brave Ones]] discipline; the discomfort as the deliverable — *"a judge who leaves this room certain has missed the point"*
+
+Judges on Country operationalises the [[three-circles|Three Circles]] methodology at the judicial education layer, with [[staying|Staying]] as the discipline that keeps it from being a one-off conference handout.
+
 ## Connected Stories
 
 Twenty-two stories from the Mparntwe community are held in the wiki. These are the evidence base for Judges on Country — what judges read before, during, and after the experience.

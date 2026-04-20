@@ -60,6 +60,18 @@ CAMPFIRE features in [[contained|CONTAINED]] as one of the community-led program
 
 CAMPFIRE is also one of the programs that [[justicehub|JusticeHub]] tracks as an evidence-based intervention, with documented reductions in youth police contact in the Mount Isa region.
 
+## LCAA Phase
+
+In the [[lcaa-method|LCAA Method]], CAMPFIRE sits squarely in the **Action** phase — the program is itself the methodology. Cultural immersion on Country, fitness as discipline, and mentorship from someone who has walked the path are not a service delivered to young people; they are a living practice of belonging.
+
+LCAA arc for CAMPFIRE:
+- **Listen** — Camping on Country expeditions led under proper protocol, with Elders from the Country being visited; yarning circles where young people find their voice; *"Where are you from? Who are your mob? Who's your totem?"* as the natural shape of consultation
+- **Curiosity** — the question Brodie holds: how do you measure healing on paper? The program tests whether identity, Country, and discipline can do what enforcement and incarceration cannot
+- **Action** — seven-day on-Country immersions; a community gym in Mount Isa as both fitness infrastructure and sanctuary; mentoring relationships that often become lifelines; a proposed 24-hour Wellness Centre as the five-year vision
+- **Art** — the campfire itself as form — a gathering place where stories are shared, wisdom is passed, and communities remember who they are; the counter-narrative to the ~$1M-per-young-person detention default
+
+CAMPFIRE is one of the programs [[contained|CONTAINED]] holds up as living proof that the system can be different.
+
 ## Published Writing
 
 - "From Trouble to Transformation: The CAMPFIRE Journey" (2025-10-11) — narrative account of Brodie Germaine's founding story and the CAMPFIRE model

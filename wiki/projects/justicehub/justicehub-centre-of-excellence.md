@@ -43,3 +43,15 @@ Systematic documentation of what works in community-led justice approaches, buil
 ## Current Status
 
 In ideation. The concept builds on JusticeHub's existing network and the evidence being generated through projects like [[campfire|CAMPFIRE]], [[confit-pathways|ConFit Pathways]], and [[contained|CONTAINED]]. The Centre of Excellence would formalise the knowledge-sharing that already happens informally across these projects.
+
+## LCAA Phase
+
+In the [[lcaa-method|LCAA Method]], the JusticeHub Centre of Excellence sits in the **Curiosity** phase — research, training, and knowledge-sharing infrastructure that translates lived experience, academic research, and practice wisdom into usable resources for practitioners, policymakers, and community organisations.
+
+LCAA arc for the JusticeHub Centre of Excellence:
+- **Listen** — to lived experience and community voice; to what frontline workers actually need from research, not what researchers want to publish
+- **Curiosity** — translating evidence into actionable resources; documenting what works in community-led approaches; bridging the gap between what evaluations say and what practitioners can use
+- **Action** — professional development and capability building; a shared repository of case studies, practice frameworks, program evaluations; systematic evidence building drawn from the JusticeHub network
+- **Art** — making knowledge legible to funders and policymakers in formats that respect community authority while satisfying institutional requirements
+
+The Centre of Excellence would formalise the knowledge-sharing that already happens informally across [[campfire|CAMPFIRE]], [[confit-pathways|ConFit Pathways]], and [[contained|CONTAINED]].

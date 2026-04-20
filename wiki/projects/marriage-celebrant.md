@@ -31,6 +31,18 @@ Weddings also generate stories. With consent, ceremony moments and reflections c
 
 The practice also reinforces ACT's revenue diversity. As a satellite project with its own Xero tracking code, it contributes to the ecosystem's financial sustainability without drawing on grant or philanthropic funding.
 
+## LCAA Phase
+
+In the [[lcaa-method|LCAA Method]], the Marriage Celebrant practice sits across **Listen** and **Art** — extended conversations with each couple to understand the shape of their relationship, then a ceremony that sounds like the couple rather than the celebrant. The same listening-before-composing discipline that drives ACT's broader work.
+
+LCAA arc for the Marriage Celebrant practice:
+- **Listen** — extended conversations to understand the couple's own language, culture, context, and the people who matter to them, before any drafting begins
+- **Curiosity** — what would this ceremony sound like if it actually belonged to these two people, not to a templated script?
+- **Action** — Commonwealth-registered civil marriage celebrant work delivered as a satellite project with its own Xero tracking; revenue diversity for the wider ecosystem without drawing on grants or philanthropy
+- **Art** — a ceremony as a story worth telling well; with consent, ceremony moments and reflections can flow back into [[empathy-ledger|Empathy Ledger]] as examples of human connection at its most deliberate
+
+A couple explaining why they chose each other is, at its core, the same act as a community member explaining why a place matters to them.
+
 ## See Also
 
 - [[act-monthly-dinners|ACT Monthly Dinners]] — another community gathering format

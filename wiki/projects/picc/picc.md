@@ -149,6 +149,18 @@ ACT works closely with PICC across multiple projects:
 - [[picc-photo-kiosk|PICC Photo Kiosk]] (project code: `picc-photo-kiosk`)
 - [[uncle-allan-palm-island-art|Uncle Allan Palm Island Art]] (project code: `uncle-allan-palm-island-art`)
 
+## LCAA Phase
+
+In the [[lcaa-method|LCAA Method]], PICC sits across all four phases — the wiki backlink names it directly: *"PICC is one of the clearest places where Listen, Curiosity, Action, and Art operate together in practice."* It is the strongest community proof point in ACT's stack: $29M annual turnover, 208 FTE, 78% diversion rate, 100% Aboriginal Community Controlled since October 2021.
+
+LCAA arc for PICC:
+- **Listen** — 20 years of community-controlled service delivery; 2,491 photos and 74+ stories documented; Storm Stories from the February 2025 flood response (60+); the Bwgcolman Healing Service integrating SEWB pathways into primary healthcare
+- **Curiosity** — what does *whole-of-life* community control look like across health, family, justice, employment, and cultural programs? The "Homely" Safe House replacing dormitory-style out-of-home care so children stay on Country
+- **Action** — 25 services delivered; 176 staff (85% Indigenous, 78% local); social enterprise (Palm Automotive, fuel station, Telstra Call Centre) diversifying revenue beyond government grants; integrated clinical + social care via the 19(2) Medicare exemption
+- **Art** — the digital platform with AI chat, story archive, and voice-sharing; the planned sovereign local AI architecture (Mac Studio + Gemma 4 + Mukurtu CMS + TK Labels); [[allan-palm-island|Uncle Allan]]'s art carrying Palm Island memory into ACT's public layer
+
+PICC is anchor community #2 in the canonical [[three-circles|Three Circles]] Minderoo pitch, and the Y1 bespoke customer for the [[empathy-ledger/annual-field-service|Empathy Ledger Annual Field Service]] (~$50–75K/year, the highest-touch customer in the bespoke cohort).
+
 ## Backlinks
 
 - [[lcaa-method|LCAA Method]] — PICC is one of the clearest places where Listen, Curiosity, Action, and Art operate together in practice

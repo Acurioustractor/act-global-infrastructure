@@ -46,6 +46,18 @@ Evidence sparse — Redtape is part of ACT's Studio art line. Specific exhibitio
 
 Redtape is one of the clearest examples of ACT using art to make structural violence tactile. It belongs in the Studio line alongside [[contained|CONTAINED]], [[the-confessional|The Confessional]], and [[gold-phone|Gold.Phone]], and it should be read through [[art/philosophy/art-as-infrastructure|Art as Infrastructure]], [[art/innovation/studio-innovation-flow|Studio Innovation Flow]], and [[art/business/studio-business-model|Studio Business Model]] as part of ACT's wider philosophy, innovation engine, and economic model.
 
+## LCAA Phase
+
+In the [[lcaa-method|LCAA Method]], Redtape sits squarely in the **Art** phase — the wiki backlink already names it: *"Listen → Curiosity → Action → Art (this is the Art)."* The work takes the invisible labour of compliance and makes it impossible to ignore as a thing you walk through.
+
+LCAA arc for Redtape:
+- **Listen** — to ACCOs and small First Nations organisations carrying the heaviest reporting burden for the smallest grants; to the time, language, and cultural translation labour that goes into a $50K acquittal
+- **Curiosity** — what would happen if the paperwork was no longer abstract? Could a physical encounter with the labour of compliance change who designs grant systems?
+- **Action** — turn the documentation into a physical object, the literal red tape; install it where funders, policymakers, and the public have to move through it
+- **Art** — the installation itself — bureaucratic friction made tactile, structural violence rendered as something the body recognises
+
+Redtape sits beside [[contained|CONTAINED]], [[the-confessional|The Confessional]], and [[gold-phone|Gold.Phone]] in ACT's Studio line — pieces that take an everyday system most people don't see and make it stand in the room with them. It hopes, like all of them, to stop being needed.
+
 ## Backlinks
 
 - [[contained|CONTAINED]] — sister piece, youth detention as installation

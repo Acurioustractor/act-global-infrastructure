@@ -65,6 +65,17 @@ The design principle is Dad.Lab.25's: community-led, culturally appropriate, non
 
 Inquiry-based. Tell us whether you're coming individually, as a peer group, or on behalf of an organisation. We'll reply and set up a call. Inquiries go through `/experiences/dad-lab-at-bcv` on the ACT Farm site.
 
+## LCAA Phase
+
+In the [[lcaa-method|LCAA Method]], DAD.LAB at BCV is built to do what clinical and institutional frameworks keep failing to do: hold men in honest peer connection on Country. Here's how the four phases show up across a 2–3 day intensive:
+
+- **Listen** — the fire that first evening; the kind of conversation that only shows up once you stop trying to have it
+- **Curiosity** — peer sessions in the afternoons, structured enough to go somewhere, open enough to breathe
+- **Action** — mornings on the land — physical, shared, simple; the work itself as the intervention
+- **Art** — the closing on the last morning — what each man is taking back; the durable register of having been heard
+
+The design principle is [[dad-lab-25|Dad.Lab.25]]'s: community-led, culturally appropriate, non-clinical. ACT hosts; the men do the work.
+
 ## Cross-links
 
 - [[act-farm|ACT Farm]]

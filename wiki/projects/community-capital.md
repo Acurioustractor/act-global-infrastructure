@@ -87,6 +87,18 @@ Active. Phase 1 retreat completed (Bowral, 23–25 Feb 2025). Phase 2 Catalysing
 | Funder | Social Impact Hub Foundation (~$10M distributed annually) |
 | Format | Leadership retreat, Bowral NSW |
 
+## LCAA Phase
+
+In the [[lcaa-method|LCAA Method]], Community Capital sits across **Listen** and **Action** — it is a relational convening designed to put community leaders and capital holders in the same room without a pitch posture, then follow the relationships into actual capital deployment a year later. ACT does not hold the capital; it holds the room.
+
+LCAA arc for Community Capital:
+- **Listen** — Phase 1 retreat in Bowral (23–25 Feb 2025) with ten community leaders meeting capital holders in a setting that signals their work is worth real attention; candle-making as the lateral frame that lets hands-occupied talk loosen what heads-only talk cannot
+- **Curiosity** — testing whether relational capital (not transactional grant-application capital) produces better matches; the year-long gap between Phase 1 and Phase 2 as a deliberate experiment in trust as precondition
+- **Action** — Phase 2 *Catalysing Impact* signed 17 March 2026, deploying up to $400K from a $1M QBE / Social Impact Hub pool; year of accommodation funded at [[black-cockatoo-valley|Black Cockatoo Valley]]; [[the-caravan|The Caravan]] resident at BCV; future convenings hosted on the same land
+- **Art** — the format itself as art: a fancy wedding venue, a candle, a year-long arc; treating community organisations as serious enough to host in a serious environment
+
+[[civicgraph|CivicGraph]] maps the funding flows; Community Capital makes the rooms where new funder–community matches can actually happen.
+
 ## Backlinks
 
 - [[civicgraph|CivicGraph]] — data layer mapping funding flows that Community Capital navigates

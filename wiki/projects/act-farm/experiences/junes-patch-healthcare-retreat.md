@@ -66,6 +66,17 @@ The design principle: do less than a traditional retreat. The land does the work
 
 Referral and self-inquiry both welcome. Tell us whether you're referring via a healthcare partner or coming individually, and the rough window you're looking at. Inquiries go through `/experiences/junes-patch-healthcare-retreat` on the ACT Farm site.
 
+## LCAA Phase
+
+In the [[lcaa-method|LCAA Method]], the [[junes-patch|June's Patch]] Healthcare Retreat is the Listen phase made residential — nature prescription extended from day-visit gardens to 2–5 nights on Country. The design principle is *do less than a traditional retreat; the land does the work if we get out of its way*. Here's how the four phases show up:
+
+- **Listen** — early arrival, light meal, an early night; the slowness itself as the intervention
+- **Curiosity** — opt-in (not opt-out) peer circles, optional practice sessions; the inquiry the participant chooses, when they're ready
+- **Action** — garden time, walks, food preserving, quiet making; a shared evening meal using produce from BCV and [[the-harvest|The Harvest]]
+- **Art** — departure with no homework; the durable register of having been somewhere that wasn't a clinical environment
+
+Not a medical intervention. The work is the rest.
+
 ## Cross-links
 
 - [[act-farm|ACT Farm]]

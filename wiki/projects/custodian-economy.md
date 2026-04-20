@@ -40,6 +40,18 @@ Custodian Economy provides the theoretical underpinning for several ACT initiati
 - [[community-capital|Community Capital]] — alternative capital structures for community-led enterprise
 - [[designing-for-obsolescence|Designing for Obsolescence]] — building organisations that hand over power rather than accumulate it
 
+## LCAA Phase
+
+In the [[lcaa-method|LCAA Method]], Custodian Economy sits primarily in the **Curiosity** phase — it is the conceptual layer that asks what an economy looks like when participants see themselves as temporary stewards rather than extractive owners. It does not deliver a program directly; it shapes how ACT designs the programs it does deliver.
+
+LCAA arc for Custodian Economy:
+- **Listen** — to First Nations practice of custodianship of Country as a living, tens-of-thousands-of-years-old counter-model to extractive capitalism; learning in partnership rather than appropriating
+- **Curiosity** — the central question: what does an economy look like when land is held in trust, knowledge is commons, enterprise generates surplus for community benefit, and success is measured by what you leave behind?
+- **Action** — informs ACT's dual-entity architecture (Foundation for charitable purpose, Ventures for mission-locked trading); shapes [[black-cockatoo-valley|Black Cockatoo Valley]] as conservation-first land holding; underpins [[goods-on-country|Goods on Country]]'s place-based supply chains and [[community-capital|Community Capital]]'s alternative capital structures
+- **Art** — frames [[designing-for-obsolescence|Designing for Obsolescence]] as cultural practice — building organisations that hand power over rather than accumulate it
+
+Custodian Economy is the principle that other ACT projects then enact in specific places.
+
 ## See Also
 
 - [[act-identity|A Curious Tractor]] — the ecosystem this thinking shapes

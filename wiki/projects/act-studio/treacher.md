@@ -58,11 +58,17 @@ Treacher sits within ACT's Studio tier alongside three other art installations t
 
 Treacher's logic is consistent with this family: an object from a specific place, carrying its origin through a different medium (sound instead of visual representation), asking visitors to hold the relationship between thing and ground.
 
-## The LCAA Phase: Art
+## LCAA Phase: Art
 
-In the LCAA method, Art is the final phase — the moment where action becomes something that lasts. Art in ACT's framework is not decoration. It is the phase where evidence becomes experience, where understanding becomes feeling, where change becomes something a person carries with them out of the installation.
+In the [[lcaa-method|LCAA Method]], Treacher sits in the **Art** phase — the moment where action becomes something that lasts. Art in ACT's framework is not decoration; it is the phase where evidence becomes experience, where understanding becomes feeling, where change becomes something a person carries with them out of the installation.
 
-Treacher fits this exactly. It is not an explanatory work. It doesn't describe displacement — it enacts it. The visitor encounters a living thing that has been separated from its ground, still trying to communicate with the place that formed it.
+LCAA arc for Treacher:
+- **Listen** — to a specific tree on a specific 150 acres of Jinibara Country at [[black-cockatoo-valley|Black Cockatoo Valley]]; to the field recordings of its origin plot — wind, insects, birdsong, rainfall — captured as the displacement happens
+- **Curiosity** — can sound carry what soil cannot, across displacement? Can a tree that has been uprooted still be heard as belonging somewhere?
+- **Action** — the tree removed, placed at a new site, speakers embedded in or around it; the recordings playing as the installation
+- **Art** — the visitor encounters a living thing that has been separated from its ground, still trying to communicate with the place that formed it; Treacher does not describe displacement, it enacts it
+
+Treacher's logic is consistent with the family of ACT studio installations ([[contained|CONTAINED]], [[the-confessional|The Confessional]], [[redtape|Redtape]], Uncle Allan's Palm Island art): an object from a specific place, carrying its origin through a different medium, asking visitors to hold the relationship between thing and ground.
 
 ## Connection to The Harvest Witta
 

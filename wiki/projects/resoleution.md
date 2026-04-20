@@ -60,6 +60,18 @@ ReSOLEution is tracked within the [[justicehub|JusticeHub]] ecosystem as a commu
 
 The program also demonstrates the ACT methodology in action: meeting people where they are (sneaker culture, identity, pride), building trust through genuine engagement, and creating real pathways rather than instructional ones.
 
+## LCAA Phase
+
+In the [[lcaa-method|LCAA Method]], ReSOLEution sits in the **Art** phase — a creative intervention inside detention that turns young people from sneaker consumers into sneaker creators. The program's design choice is to start with what young people already care about (sneakers, identity, pride) and let creativity become a legitimate pathway to identity, skills, and commercial possibility.
+
+LCAA arc for ReSOLEution:
+- **Listen** — the founding observation that in facilities where uniformity is enforced, shoes remain how young people express individuality and connection to life beyond the walls; conversations about the personal stories, interests, and themes participants want to express
+- **Curiosity** — what if pride became a skill, stories became designs, creativity had real commercial value? Four 40-minute sessions designed to build progressively from sketch to prototype to presentation
+- **Action** — fully developed designs and prototypes delivered by every participant; the partnership with Butter (Sydney's sneaker culture hub) where designs are showcased; a financial-empowerment model where shoe sales generate revenue for designers upon release
+- **Art** — the program *is* the artwork — sneaker design as legitimate creative practice grounded in cultural pride; the double meaning of the name itself (resolution / sole) as the program's invitation: craft your future, one sole at a time
+
+ReSOLEution and [[confit-pathways|ConFit Pathways]] alternate days at Bimberi by design — ConFit holds the internal work (values, discipline, identity), ReSOLEution holds the external expression (creativity, story, commercial possibility). Together they offer a more complete intervention.
+
 ## Published Writing
 
 - "ReSOLEution" (2025-10-11) — program overview, workshop structure, and design outcomes

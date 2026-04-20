@@ -63,6 +63,17 @@ Workshops typically run 3–6 hours with a shared meal. Some are single sessions
 
 Individual workshops are ticketed — the current calendar is on the ACT Farm site at `/experiences/workshops-at-bcv`. For custom workshops for a group or organisation, inquire via the same page.
 
+## LCAA Phase
+
+In the [[lcaa-method|LCAA Method]], Workshops at BCV are the porous-edge version of the method — half-day and full-day sessions where people who aren't yet in a residency, retreat, or cohort can still meet the land practice. Here's how the four phases show up across a typical workshop:
+
+- **Listen** — orientation to the land and the day; teachers introducing themselves through what they make
+- **Curiosity** — short inputs followed by working time; the kind of question that only surfaces once your hands are doing something
+- **Action** — land practice, making, writing, or systems work — depending on the workshop; a shared meal with the cohort
+- **Art** — what the participant takes home (the pot, the jar, the sentence, the practice); a frame for why the workshop work connects to the wider [[lcaa-method|LCAA Method]]
+
+Workshops are how ACT keeps a porous edge to the farm — places where you can try the gate before you decide whether to walk through it.
+
 ## Cross-links
 
 - [[act-farm|ACT Farm]]

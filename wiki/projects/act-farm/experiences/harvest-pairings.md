@@ -71,6 +71,17 @@ Groups booking BCV retreats or [[experiences/the-space-at-bcv|The Space at BCV]]
 
 Monthly dinners and workshops are ticketed via the ACT Farm site and The Harvest site. CSA via The Harvest. Retreat pairings through inquiry at `/experiences/harvest-pairings`.
 
+## LCAA Phase
+
+In the [[lcaa-method|LCAA Method]], Harvest Pairings is the daily, seasonal version of the method — Listen → Curiosity → Action → Art expressed through food, gathering, and crossing back and forth between two sites on the same Country. Here's how the four phases show up across the program:
+
+- **Listen** — the two sites in conversation: BCV's land tells [[the-harvest|The Harvest]] what to cook; Witta's kitchen tells BCV what's possible to host
+- **Curiosity** — what wants to happen across both sites this season? Which workshop splits naturally, which dinner deserves the longer table?
+- **Action** — monthly dinners at BCV with Harvest produce; paired workshops fired in Witta and glazed at BCV; CSA shares; retreat meal extensions
+- **Art** — the table itself; the artefacts of pairing — a preserved jar, a fired bowl, a meal that uses both sites; a porous edge to the farm
+
+[[the-harvest|The Harvest]] in Witta and [[black-cockatoo-valley|BCV]] up the hill are a pair, not two venues.
+
 ## Cross-links
 
 - [[act-farm|ACT Farm]]

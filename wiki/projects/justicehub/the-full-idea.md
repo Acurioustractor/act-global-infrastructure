@@ -577,6 +577,18 @@ This document is the **starting point for review**, not the final shape. The wal
 
 ---
 
+## LCAA Phase
+
+In the [[lcaa-method|LCAA Method]], The Full Idea is the architecture document for **STAY** — the program that operationalises LCAA across three years and ten communities to leave a library. The arc is the program's three-act structure (Listen / Compare / Tell) extended to the full LCAA frame, with the artefacts (seven method books, ten community volumes, ~50 hand-stitched young-person Journals, the national edition) as the durable Art layer.
+
+LCAA arc for The Full Idea / STAY:
+- **Listen — Year 1** — small team rotates through ten Indigenous-led anchor communities; deep accompaniment without arrival-and-departure; the team that *stays* through the season the program is ostensibly about
+- **Curiosity — Year 2 European exchange** — distributed travel to [[diagrama|Diagrama]] (Spain), Halt (Holland), and the Children's Hearings system (Scotland); each anchor community sends a focused pair, comes home with a chapter; reciprocal European visits to Australia in the same year
+- **Action — Year 3 community-led launches** — ten launches in ten places; The STAY Series (seven method books) + ten community volumes published; a national edition delivered to every electorate office
+- **Art** — the per-young-person Journals as the centre artefact; the library itself as the proof; the artefacts the rest of the world flies in to read
+
+STAY's bet: in a sector with more reports, frameworks, and panels than ever — and more children in detention than ever — the missing infrastructure is *holding*, not scaling. The library is the form that holds.
+
 ## Source documents
 
 - `thoughts/shared/handoffs/staying/models-locked.md` — locked copy for all 7 models

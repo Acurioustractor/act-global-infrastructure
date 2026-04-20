@@ -62,6 +62,17 @@ Direct-book. Available on the ACT Farm site at `/stay` with per-cabin pages at `
 
 We're designing additional eco-cottages to come online as land capacity allows. They'll be listed here when ready.
 
+## LCAA Phase
+
+In the [[lcaa-method|LCAA Method]], a Stay at BCV is the lightest-touch version of the method — Listen made bookable, with everything else optional. Here's how the four phases can show up across a 2-night stay:
+
+- **Listen** — arrival, brief walk-around, then the cabin is yours; the place has space to do its own work
+- **Curiosity** — what wants to happen with the time? Writing, scoping a longer engagement, sitting on Country, noticing
+- **Action** — whatever the guest brings — work, rest, family, conversation; ACT is light-touch, not absent
+- **Art** — what the guest carries back; a [[the-harvest|Harvest]] breakfast in Witta on the weekend if the timing lines up
+
+Stays are deliberately simple. You're not signing up for a program. You're renting a cabin on a working land-practice and spending time with the place.
+
 ## Cross-links
 
 - [[act-farm|ACT Farm]]

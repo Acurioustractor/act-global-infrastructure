@@ -48,6 +48,18 @@ ConFit Pathways is tracked in [[justicehub|JusticeHub]] as a verified community 
 
 Joe Kwon is also noted as a collaborator in CONTAINED development planning (February 2026), bringing the lived-experience perspective directly into the campaign's design.
 
+## LCAA Phase
+
+In the [[lcaa-method|LCAA Method]], ConFit Pathways sits in the **Action** phase — boxing-based youth transformation delivered by mentors with lived incarceration experience. The program's core design choice is that lived experience is the fastest way to build the trust that has to precede change.
+
+LCAA arc for ConFit Pathways:
+- **Listen** — recognising that young people who distrust institutions will engage with someone who has walked their exact path; G-Code grounding (Gratitude, Grounding, Goals) as trained responses rather than abstract concepts
+- **Curiosity** — testing whether the same discipline that builds a fighter can rebuild a life; whether a criminal record needs to define a future
+- **Action** — boxing and fitness as structure that can't be faked; mentoring relationships that hold over time; the partnership with [[resoleution|ReSOLEution]] at Bimberi on alternating days, pairing ConFit's internal work with ReSOLEution's external expression; a documented 60% reduction in recidivism among participants
+- **Art** — Joe Kwon's transformation from inside the system to founding the bridge for others; participant stories like Hamilton's that turn lived journeys into public proof; named in [[contained|CONTAINED]] as one of the 150+ programs already proving the system can work differently
+
+ConFit's lived-experience model and ReSOLEution's creative model run in deliberate complement at Bimberi — together a more complete intervention than either could deliver alone.
+
 ## Published Writing
 
 - "Confit Pathways" (2025-10-11) — overview of the programme's lived-experience mentorship model

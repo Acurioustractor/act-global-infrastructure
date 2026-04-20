@@ -72,6 +72,17 @@ Groups typically use the space for 2–5 nights. We block other activity on the 
 
 This is an inquiry-based offer. Tell us about the group, the purpose of the convening, rough dates, and how much or little you want us to hold. We reply within a few working days and run a short call before confirming. Inquiries go through `/experiences/the-space-at-bcv` on the ACT Farm site.
 
+## LCAA Phase
+
+In the [[lcaa-method|LCAA Method]], The Space at BCV is the convening-infrastructure version of Listen → Curiosity → Action → Art — the room held conservation-first, relational, unhurried, so other organisations can do their own serious work in it. Here's how the four phases show up across a typical convening:
+
+- **Listen** — Country orientation and land-practice time on arrival; the signal the environment sends to the room about what kind of conversation is possible here
+- **Curiosity** — gathering spaces inside, outside, around fire, at table; the format encourages the harder question the group came here to ask
+- **Action** — accommodation across cabins, rooms, and supported overflow; shared meals with [[the-harvest|Harvest]] pairings where the season allows; ACT facilitation optional
+- **Art** — the durable register of having met somewhere that signals weight; for [[community-capital|Community Capital]], the pattern that turned a Bowral retreat into a year of relationship and a $400K capital deployment
+
+Not venue hire. ACT holds the space the ACT way — and groups that come here know they're convening on Jinibara Country, inside an active land-practice, not in a generic retreat centre.
+
 ## Cross-links
 
 - [[act-farm|ACT Farm]] — the program this space operates inside

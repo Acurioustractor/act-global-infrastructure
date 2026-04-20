@@ -54,6 +54,18 @@ PICC Chair Luella Bligh and CEO Rachel Atkinson have been explicit: the organisa
 
 The Centre Precinct houses (or is connected to) PICC's digital infrastructure — the digital platform featuring AI chat, story archive, and voice-sharing that enables community members to contribute and access knowledge without leaving country. The physical and digital reinforce each other: the Centre is where community members come to tell stories, and the platform ensures those stories remain under community control.
 
+## LCAA Phase
+
+In the [[lcaa-method|LCAA Method]], the PICC Centre Precinct sits in the **Action** phase — physical, community-controlled infrastructure as sovereignty made tangible. The argument the building carries is that a community-controlled service delivery model needs a community-controlled physical space to deliver it from; same walls under different governance produces a different organisation entirely.
+
+LCAA arc for the PICC Centre Precinct:
+- **Listen** — to families who shouldn't have to navigate to five different buildings to access five different services; to staff who are 78% local Palm Islanders and don't need to ask families to repeat their genealogies
+- **Curiosity** — what does *whole-of-life* service delivery actually require physically? Health, family services, employment, and cultural programs under one roof, integrated not co-located
+- **Action** — fit-out, maintenance, utilities, and operational costs for the Centre as ongoing community infrastructure; the digital platform (AI chat, story archive, voice-sharing) housed alongside or connected to it
+- **Art** — the building as the visible, daily artefact of the transition from state-managed settlement to 100% community-controlled organisation
+
+PICC Chair Luella Bligh and CEO [[rachel-atkinson|Rachel Atkinson]] have been explicit: the organisation cannot credibly lead health and family services if its physical home is in disrepair. The Centre Precinct budget is mission-critical, not overhead.
+
 ## Backlinks
 
 - [[projects/picc/README|PICC Cluster]] — the cluster this infrastructure stream belongs to

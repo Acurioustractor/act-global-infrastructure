@@ -131,6 +131,18 @@ Use a **placeholder portrait** for the Three Ripples poster — pulled from Empa
 
 The placeholder is explicitly labelled as a stand-in everywhere it appears, and is replaced the moment Phase 1 portraits are shot.
 
+## LCAA Phase
+
+In the [[lcaa-method|LCAA Method]], The Brave Ones sits squarely in the **Art** phase — the wiki backlink already names it: *"Art (the fourth letter); the form that completes Listen → Curiosity → Action."* Where [[contained|CONTAINED]] puts you inside the *room* youth detention is, The Brave Ones puts you in front of the *people* who walked out the other side.
+
+LCAA arc for The Brave Ones:
+- **Listen** — every portrait is paired with the young person's own words, captured via [[empathy-ledger|Empathy Ledger]] and transcribed verbatim; cultural protocol co-designed with Aunty Bev, Uncle Terry, Tanya Turner, and Kristy Bloomfield at [[oonchiumpa|Oonchiumpa]] before any sitting
+- **Curiosity** — the inversion the title performs in three words: *they are not the problem. They are the proof. And they are braver than anyone in the system that failed them.*
+- **Action** — Phase 1 pilot (5 portraits) → Launch (25 portraits + first gallery exhibition) → National tour with [[contained|CONTAINED]] (100 portraits + book) → Annual fixture (20–30/year ongoing); each portrait becomes a node in ALMA on [[justicehub|JusticeHub]]
+- **Art** — studio-quality B&W portraits in the Brian Duffy / *Station to Station* register: bone white and velvet black, devotional close framing, the dignity register that policing and media have refused these young people for two centuries
+
+A diagram is read once and filed; a portrait is stood in front of. The Brave Ones is the move that has broken funders, judges, and ministers in a CONTAINED room — at scale and on repeat.
+
 ## Backlinks
 
 - [[projects/justicehub/README|JusticeHub Cluster]] — the cluster this work-series belongs to

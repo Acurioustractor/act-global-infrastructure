@@ -73,6 +73,17 @@ Conservation-first is the baseline. If the creek is low or the season demands qu
 
 Residency is by inquiry and conversation, not open application rounds. Tell us about your practice, what you're working on, roughly when you're looking to come, and what support you'd need. We reply within a few working days and typically run a short call before confirming. Inquiries go through `/experiences/artist-residency` on the ACT Farm site.
 
+## LCAA Phase
+
+In the [[lcaa-method|LCAA Method]], the Artist Residency at BCV is the place where the **Art** phase has to be grounded somewhere — and for ACT, that somewhere is here. Here's how the four phases show up across a residency:
+
+- **Listen** — arrival walk with someone who knows the land; honest time with Country before any work begins
+- **Curiosity** — the residency placement as inquiry: what wants to be made here, that couldn't be made anywhere else?
+- **Action** — studio practice in Pink Cabin, Train Carriage, or studio-adjacent space; optional conversations with [[empathy-ledger|Empathy Ledger]] storytellers, [[goods-on-country|Goods on Country]] makers, regional collaborators
+- **Art** — the work itself, on the artist's terms; a closing conversation about what emerged and what wants to happen next
+
+The land is the commission. ACT is the host, not the curator-in-chief.
+
 ## Cross-links
 
 - [[act-farm|ACT Farm]] — the program hub

@@ -63,6 +63,17 @@ A typical weekend:
 
 Limited places per weekend; runs as a seasonal program. Current dates on `/experiences/makers-weekend`. For cohort bookings (design schools, partner organisations), inquire directly.
 
+## LCAA Phase
+
+In the [[lcaa-method|LCAA Method]], the [[goods-on-country|Goods on Country]] Makers' Weekend is the material-practice version of Listen → Curiosity → Action → Art — making grounded in the same questions Goods asks daily. Here's how the four phases show up across a 2–3 day weekend:
+
+- **Listen** — orientation on the Goods practice; honest exposure to what holds up in remote communities and what breaks
+- **Curiosity** — what do we owe the people the object is for? The harder questions about ethics and manufacture, surfacing around the fire on Saturday night
+- **Action** — Saturday's making sessions — material, prototyping, co-design methods from the Goods practice; Sunday's finishing and critique
+- **Art** — work the makers leave with, plus a frame for why that work matters; optional Monday visit to Goods' manufacturing context to see the line in operation
+
+Not a craft weekend. Material practice grounded in [[custodian-economy|custodian-economy]] thinking and [[designing-for-obsolescence|designing-for-obsolescence]] discipline.
+
 ## Cross-links
 
 - [[act-farm|ACT Farm]]

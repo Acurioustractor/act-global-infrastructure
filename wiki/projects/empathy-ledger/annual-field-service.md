@@ -74,6 +74,18 @@ Track these patterns across all four engagements:
 
 Answers to these six questions define the Y2 productised tiers.
 
+## LCAA Phase
+
+In the [[lcaa-method|LCAA Method]], the [[empathy-ledger|Empathy Ledger]] Annual Field Service sits in the **Action** phase — it is the productisation pathway that turns Empathy Ledger from a platform into an annual operating relationship with each customer. Y1 is bespoke (~$50K/year × 4 customers = ~$200K ARR); Y2 productises whatever patterns emerge from Y1 delivery.
+
+LCAA arc for the Annual Field Service:
+- **Listen** — to what each customer (JCF, PICC, Buttery, SMART Recovery) actually buys, in their own language and tone; per-customer flex is the mechanism for honouring that
+- **Curiosity** — six tracking questions across all four engagements: which backbone elements get used vs ignored, real editorial workload, what artefact format funders/boards respond to, real cultural review overhead, what would a customer pay 2x for, what would make a customer refer
+- **Action** — common backbone (Live Resonance Field, monthly editorial pass, Annual Impact Atlas, storytelling infrastructure, cultural review gate) delivered against bespoke per-customer scopes
+- **Art** — the artefacts themselves: the org's `/observatory` page, the Annual Impact Atlas, the printed anthology by Year 3 (JCF), the cinematic documentary (Buttery), the facilitator portrait library (SMART)
+
+The Annual Field Service is the [[empathy-ledger|Empathy Ledger]] platform's first sustained revenue surface and the proving ground for what Y2 productised tiers should look like.
+
 ## Backlinks
 
 - [[2026-04-five-year-plan|Five-Year Plan — Voice, Flow, Ground]]

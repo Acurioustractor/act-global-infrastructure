@@ -36,6 +36,18 @@ DeadlyLabs represents a model that ACT advocates for in [[justicehub|JusticeHub]
 
 DeadlyLabs is featured in ACT storytelling as evidence that creative, culturally-grounded programming in detention settings produces engagement and transformation that compliance-based approaches cannot. The program aligns with the [[../concepts/ai-community-engagement|AI and community engagement]] thesis — freeing practitioners from admin to focus on the relational and creative work that drives real change.
 
+## LCAA Phase
+
+In the [[lcaa-method|LCAA Method]], DeadlyLabs sits in the **Action** phase — STEM education delivered inside youth detention, with detained young people positioned as co-creators of the kits rather than recipients of them. It is a partner program, not an ACT-led one; ACT holds it up as an example of the model JusticeHub advocates for.
+
+LCAA arc for DeadlyLabs:
+- **Listen** — to what young people in Acmena Youth Justice Centre already care about (sport, identity, peer status); to Indigenous scientific heritage as a foundation, not an afterthought
+- **Curiosity** — Corey Tutt's question: what happens when Indigenous children are given pathways into their own scientific legacy? The Kickin' It program tests the answer with biomechanics, sports nutrition, and game-strategy mathematics
+- **Action** — co-created STEM kits delivered inside detention; participants positioned as innovators infusing their perspectives into the kits themselves; engagement and excitement reported by participants who previously saw no value in education
+- **Art** — kits and program design that celebrate the scientific legacy of Aboriginal and Torres Strait Islander peoples; flipping the storyline from compliance-based learning to creative cultural transmission
+
+DeadlyLabs is one of the partner programs ACT cites as evidence that culturally-grounded creative programming in detention produces transformation that compliance-based approaches cannot.
+
 ## Sources
 
 - Raw: `wiki/raw/2025-10-11-article-kickin-it-with-deadlylabs-igniting-stem-passions-in-youth-detention.md`

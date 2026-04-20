@@ -45,6 +45,18 @@ Evidence sparse on specifics — exact build details, current location, future t
 
 The Caravan matters because it shows the Studio line is not only about gallery objects. It is also about mobile infrastructure, hosted presence, and practical dignity that can move between communities. It belongs with [[art-projects|ACT Art Projects]], [[art/innovation/studio-innovation-flow|Studio Innovation Flow]], and [[art/business/studio-business-model|Studio Business Model]] as one of the works where ACT's art, strategy, and service logic overlap.
 
+## LCAA Phase
+
+In the [[lcaa-method|LCAA Method]], The Caravan sits across **Action** and **Art** — the wiki backlink already names it: *"Action and Art in one object."* It is a literal vehicle that carries leadership development infrastructure to the people, instead of asking the people to come to a conference room in a capital city.
+
+LCAA arc for The Caravan:
+- **Listen** — the [[community-capital|10x10 Community Capital Leadership Retreat]] in Bowral was the listening room; The Caravan is the artefact that carried what was heard outward
+- **Curiosity** — what happens when you invert *"we built a building, come to us"* into *"we built a thing, we're coming to you"*? The same logic that made Orange Sky's vans more powerful than a brochure
+- **Action** — built infrastructure: a vehicle that exists, a venue that travels; resident at [[black-cockatoo-valley|Black Cockatoo Valley]] and available for future Community Capital convenings
+- **Art** — a thing that carries an argument; the caravan as both dignity-infrastructure prototype and Studio piece, embodying [[beautiful-obsolescence|beautiful obsolescence]] — designed to be handed over to whoever needs it next
+
+The Caravan extends the [[feel-good-project|Feel Good Project]] / [[global-laundry-alliance|Orange Sky]] mobile-dignity grammar from service delivery into leadership development.
+
 ## Backlinks
 
 - [[community-capital|Community Capital]] — the retreat that birthed it

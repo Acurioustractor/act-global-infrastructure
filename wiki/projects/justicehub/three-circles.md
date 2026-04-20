@@ -329,6 +329,18 @@ The earlier JusticeHub pitch numbers were partly aspirational. Reviewed against 
 - Maranguka structured data (PDF only)
 - Oonchiumpa diversion-rate citation (study not linked)
 
+## LCAA Phase
+
+In the [[lcaa-method|LCAA Method]], The Three Circles is the canonical pitch that funds the operationalisation of LCAA at national scale — the three concentric circles (Centre / Ten / Rest) and the three years of the program (Listen / Compare / Tell) are the LCAA arc made visible to a funder. The methodology layer is named separately as [[staying|Staying — Country & Council]].
+
+LCAA arc for The Three Circles:
+- **Listen — Circle One (The Living Brain)** — a single, queryable, locally-hosted intelligence system holding everything that exists on Australian youth justice; community queries running on local AI agents so a community in Tennant Creek can ask questions of their own context without a data team and without their information leaving their control
+- **Curiosity — Circle Two (The Ten)** — ten community organisations chosen with care, supported with untied funding and minimised reporting; embedded storytelling on the community's terms; cross-community exchange building relational impact no conference produces; Year 2 international exchange to [[diagrama|Diagrama]], Halt, Children's Hearings
+- **Action — Circle Three (The Rest)** — funders, government, and the wider sector changed by what travels outward from the centre; the data spine ([[grantscope|GrantScope]] / [[civicgraph|CivicGraph]]) makes funding flows, evidence, and outcomes legible to magistrates, philanthropy, and journalists in 30-second queries
+- **Art — *The Country We're Building*** — the single national artefact in 2028: documentary + book + platform + per-young-person Journals; the form that makes the work outlive the funding
+
+The Three Circles funds the *next layer* on top of an operational system — not invention. The $2.9M is for the relational and editorial work that turns infrastructure into a national advocacy artefact; [[staying|Staying]] is the methodology that does the work.
+
 ## Backlinks
 
 - [[projects/justicehub/README|JusticeHub Cluster]] — the cluster this flagship program belongs to

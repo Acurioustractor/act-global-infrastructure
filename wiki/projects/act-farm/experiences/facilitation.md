@@ -63,6 +63,17 @@ Can run at [[black-cockatoo-valley|BCV]], at your venue, at [[the-harvest|The Ha
 
 Tell us what the room is trying to decide, who's in it, and by when. We reply within a few working days. Inquiries go through `/experiences/facilitation` on the ACT Farm site.
 
+## LCAA Phase
+
+In the [[lcaa-method|LCAA Method]], facilitation is where ACT applies Listen → Curiosity → Action → Art as session architecture in someone else's room. Here's how the four phases show up across a facilitated engagement:
+
+- **Listen** — discovery call to surface the actual decision the room needs, who's in it, and what tension is real
+- **Curiosity** — session design that names the question rather than the agenda; ACT sends the architecture back for sign-off before anything is built
+- **Action** — the facilitation itself; ACT in the chair, the group doing the work, decisions named in the room
+- **Art** — a short written note of decisions and moves — not a deck — as the durable record
+
+ACT facilitates other people's work. Not ours dressed up as yours.
+
 ## Cross-links
 
 - [[act-farm|ACT Farm]]

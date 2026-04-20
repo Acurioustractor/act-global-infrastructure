@@ -71,6 +71,18 @@ No project_knowledge records exist in Supabase for ACT-FG. The wiki has not yet 
 | Status | Active |
 | ACT contribution | Caravan build (mobile salon infrastructure) |
 
+## LCAA Phase
+
+In the [[lcaa-method|LCAA Method]], the Feel Good Project sits in the **Action** phase — a mobile salon caravan that brings hair care and beauty services to women experiencing hardship, where they actually are. ACT's specific contribution was practical: helping build the caravan that makes the service possible.
+
+LCAA arc for the Feel Good Project:
+- **Listen** — the project's premise is that fixed-location services serve only the people who can reach them; mobile services serve the people who can't. The starting point is the lived reality of women sleeping rough, in emergency accommodation, or managing unsafe homes
+- **Curiosity** — what if beauty care isn't a luxury but an entry point? The same insight Orange Sky exploits with laundry: the physical thing creates the relational moment, and the relational moment opens the door to other support
+- **Action** — a caravan as built infrastructure; a mobile service that exists because the vehicle exists; ongoing operations with costs tracked under ACT-FG
+- **Art** — the act of someone washing your hair, cutting it, treating you with care; for women who have been controlled, harmed, or invisible, being touched gently by someone who is there for them is sometimes transformative
+
+The Feel Good Project shares its physical grammar with [[the-confessional|The Confessional]] (a horse trailer as mobile healing space) and Orange Sky (laundry as conversation). The pattern is the same: dignity as infrastructure, designed around the reality of people's lives.
+
 ## Backlinks
 
 - [[nicholas-marchesi|Nicholas Marchesi OAM]] — Orange Sky co-founder; the mobile-dignity pattern that informs this project

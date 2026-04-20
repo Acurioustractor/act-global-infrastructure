@@ -66,6 +66,17 @@ We design the sessions with the client. The facilitation craft is ours; the cont
 
 Send us a brief about the team, the problem you're trying to work on, and rough dates. We reply within a few working days and always run a discovery call before confirming. We turn down retreats we don't think will produce change. Inquiries go through `/experiences/corporate-innovation-retreats` on the ACT Farm site.
 
+## LCAA Phase
+
+In the [[lcaa-method|LCAA Method]], a Corporate Innovation Retreat at BCV uses Listen → Curiosity → Action → Art as session architecture — not as branding. Here's how the four phases show up across a typical 2–4 day retreat:
+
+- **Listen** — welcome to Country, a walk before any talk; first evening meal with no agenda; the team genuinely arriving before working
+- **Curiosity** — facilitated sessions broken by land time; the harder question the team came here to face surfacing in the slowness
+- **Action** — closing circle focused on decisions, not themes; the work the team carries back as a real shift, not a deck
+- **Art** — the artefact of the retreat itself: a leadership group that returns with a different relationship to the work, or a different relationship to each other
+
+ACT designs the sessions with the client. The facilitation craft is ours; the content is theirs. ACT holds the frame; the team does the work.
+
 ## Cross-links
 
 - [[act-farm|ACT Farm]]

@@ -74,6 +74,17 @@ Pricing is genuinely per-residency. Bring a funded program, or come to us with a
 
 By conversation, not application round. Tell us the industry you want to work with, the community or place it connects to, the funding context you're working inside (or need help to build), and the artists or practitioners you'd want embedded. We reply within a few working days and usually run two or three calls before any proposal is drafted. Inquiries go through `/experiences/industry-residency-at-the-harvest` on the ACT Farm site.
 
+## LCAA Phase
+
+In the [[lcaa-method|LCAA Method]], an Industry Residency at The Harvest extends the method across months and years — Listen → Curiosity → Action → Art applied to a regional industry rather than an artist's question. Here's how the four phases show up:
+
+- **Listen** — to the local industry, its producers, processors, elders, and the disappearing knowledge layer; conversations with the dairy farmer across the road, the oyster farmer up the coast, the timber cutter who worked the region sixty years ago
+- **Curiosity** — what does this industry want to see of itself, and who needs to be in the room for that to happen? An industry proposition co-shaped with community
+- **Action** — leased footprint at The Harvest; circular-economy brief where every structure has its next life specified; documentation discipline running from day one; public-facing pop-ups and convenings rather than a single closing exhibition
+- **Art** — the artefacts and structures the residency produces; the knowledge layer captured through [[empathy-ledger|Empathy Ledger]]; the Capacity Lab follow-on that turns a one-site residency into a pattern other regions can adapt
+
+Where the [[experiences/artist-residency|artist residency]] asks *what can an artist make here*, the industry residency asks *what does this industry want to see of itself, and who needs to be in the room for that to happen*. [[case-studies/radical-scoops-at-the-harvest|Radical Scoops]] is the live instance.
+
 ## Cross-links
 
 - [[act-farm|ACT Farm]] — the cluster

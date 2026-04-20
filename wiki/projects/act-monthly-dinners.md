@@ -26,6 +26,18 @@ The monthly dinners embody the Listen, Curiosity, Action, Art method at its most
 
 The dinners function as a low-friction entry point to the ACT ecosystem. For many partners, the first contact with ACT's work happens over a meal rather than in a meeting room. This is intentional. ACT's model of relational trust, where partnerships are built through genuine human connection before any formal arrangement, requires spaces where that trust can form.
 
+## LCAA Phase
+
+In the [[lcaa-method|LCAA Method]], ACT Monthly Dinners sit primarily in the **Listen** phase — they are the room where ACT does its most unstructured, least transactional listening to the wider network. The published "LCAA theme" for the dinners is *Connect*; the phase emphasis is *Listen*.
+
+LCAA arc for ACT Monthly Dinners:
+- **Listen** — unhurried time around shared food; no agenda, no slides, no pitch posture; partners and collaborators speak from where they actually are
+- **Curiosity** — the format trusts that diverse guests in unexpected combinations will surface ideas no meeting room would
+- **Action** — many of ACT's most productive collaborations and project ideas have begun at these tables; the dinners function as a low-friction entry point into the ecosystem
+- **Art** — the hosting itself is the craft: setting a table where people feel welcome enough to say what they actually think
+
+The dinners are part of how ACT keeps relational trust ahead of any formal arrangement.
+
 ## See Also
 
 - [[act-identity|A Curious Tractor]] — the ecosystem these dinners serve

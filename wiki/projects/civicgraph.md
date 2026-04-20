@@ -239,6 +239,18 @@ The public site omits the co-operative structure, community treasury, and missio
 
 The "Updated daily" trust signal is underused in internal comms and should appear in all funder pitches for CivicGraph.
 
+## LCAA Phase
+
+In the [[lcaa-method|LCAA Method]], CivicGraph is the **Curiosity** infrastructure of the ACT ecosystem — the systemic data layer that lets anyone interrogate the relationship between money, power, and outcomes in Australia's social sector. The wiki backlink already names it: *"CivicGraph is the Curiosity infrastructure layer inside the ACT ecosystem."*
+
+LCAA arc for CivicGraph:
+- **Listen** — community-defined outcomes and place-based priorities surfaced through the fourth truth layer (community voice, integrated via [[empathy-ledger|Empathy Ledger]]); Indigenous data sovereignty maintained by partnering with rather than appropriating ORIC, Supply Nation, and ACCO data
+- **Curiosity** — 587K resolved entities, 1.5M relationships, $74B of contracts, 30K grants; cross-system queries that reveal who is funded AND donating AND contracting; funding-desert algorithms that surface communities the market can't see
+- **Action** — Procurement Intelligence and Allocation Intelligence products live; Governed Proof certification coming; institutional licensing that funds the open public layer; member-owned distributing co-operative structure that returns surplus to communities
+- **Art** — the *Aesthetics of Asymmetry* data-art campaign turning the data layer into a six-month public investigation; investigations like *"1443 entities donated $3.8B and received $268.5B"* that make the abstraction visceral
+
+The rule that guards every output: AI proposes, evidence proves, communities interpret.
+
 ## Backlinks
 
 - [[lcaa-method|LCAA Method]] — CivicGraph is the Curiosity infrastructure layer inside the ACT ecosystem

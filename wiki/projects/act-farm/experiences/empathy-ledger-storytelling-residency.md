@@ -63,6 +63,17 @@ A residency runs 1–4 weeks, set to match a real story the Ledger is chasing or
 
 Inquiry-based. Tell us about your practice, a story you'd want to work on during the residency, and the consent context you're starting from. We especially want to hear from storytellers whose communities are already in conversation with ACT. Inquiries go through `/experiences/empathy-ledger-storytelling-residency` on the ACT Farm site.
 
+## LCAA Phase
+
+In the [[lcaa-method|LCAA Method]], the [[empathy-ledger|Empathy Ledger]] Storytelling Residency *is* the Listen phase made into a craft — consent, cultural sensitivity, elder approval, and return-to-community publishing all practised at field scale. Here's how the four phases show up across a 1–4 week placement:
+
+- **Listen** — induction on the EL method (consent model, cultural sensitivity filter, elder-approval workflow, `culturalTags` handling) before any capture; the source as author, not subject
+- **Curiosity** — what story is the Ledger ready to host? Which cohort wants its work told? Field time with ACT work on or near BCV — residencies, Harvest sessions, partner visits
+- **Action** — capture workflow running through the Ledger from day one — no side-channel content; editorial conversations with ACT and, where relevant, with the communities the stories belong to
+- **Art** — the storyteller leaves with their craft sharpened, and the Ledger leaves with a story set that actually got consent
+
+This is not a content residency. Storytellers don't come here to extract footage for their own portfolios.
+
 ## Cross-links
 
 - [[act-farm|ACT Farm]]

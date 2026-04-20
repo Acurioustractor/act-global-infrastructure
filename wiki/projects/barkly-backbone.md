@@ -75,6 +75,18 @@ The project requires:
 | Status | Ideation |
 | Geography | Tennant Creek / Barkly region, Northern Territory |
 
+## LCAA Phase
+
+In the [[lcaa-method|LCAA Method]], Barkly Backbone sits primarily in the **Action** phase — it is a backbone-organisation concept designed to remove the structural friction that keeps community work in the Barkly under-funded and under-evidenced. Because the project is still in ideation, the **Listen** phase is its current and necessary work; community consultation in Tennant Creek must precede any operational design.
+
+LCAA arc for Barkly Backbone:
+- **Listen** — community consultation in Tennant Creek and the broader Barkly, led by local organisations rather than imposed by ACT; mapping existing backbone functions already operating in the region
+- **Curiosity** — adapting the collective-impact backbone model (FSG / Kania & Kramer) to the specific remoteness, dispersion, and capacity-trap conditions of the Barkly
+- **Action** — shared technology, administrative capacity, evidence and data support, logistics and connectivity for organisations operating across vast distances; complementing rather than duplicating what already works
+- **Art** — making the cumulative impact of small Barkly organisations legible to funders and policymakers in a form that respects local governance
+
+Barkly Backbone is the field-level complement to [[civicgraph|CivicGraph]]'s national funding-flow intelligence: the platform shows where the gaps are; the backbone makes it possible for Barkly organisations to act in those gaps.
+
 ## Backlinks
 
 - [[index|ACT Wikipedia]]

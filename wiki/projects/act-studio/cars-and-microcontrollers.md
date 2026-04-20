@@ -72,6 +72,18 @@ Evidence in project_knowledge is sparse. The Notion sync (February 2026) confirm
 | Tier | Studio |
 | Status | Active |
 
+## LCAA Phase
+
+In the [[lcaa-method|LCAA Method]], Cars and Microcontrollers sits in the **Action** phase — making with hands as the legitimate site of learning, identity, and creative practice. The thing being built is the argument: a young person who has wired and programmed something physical has been recognised in a way that no abstract curriculum can deliver.
+
+LCAA arc for Cars and Microcontrollers:
+- **Listen** — to where engagement actually lives in the communities ACT works in: practical things that work, mechanical knowledge that is intergenerational and status-bearing
+- **Curiosity** — the long-term question encoded in the design: what if these young people eventually build the technology that helps their own communities?
+- **Action** — hands-on work with cars, engines, circuits, and microcontrollers as physical computing — code that makes things move, sense, and respond
+- **Art** — the recognition itself — the moment a young person's intelligence is named for what it has always been
+
+Cars and Microcontrollers shares the *making-as-pathway* pattern with [[resoleution|ReSOLEution]] (custom sneakers), [[deadlylabs|DeadlyLabs]] (sports-science STEM), and [[goods-on-country|Goods on Country]] (functional goods for community). The thread: young people learn best when they're building something real, with materials they can touch, toward an outcome they understand.
+
 ## Backlinks
 
 - [[act-studio|ACT Regenerative Studio]]

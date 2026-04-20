@@ -66,6 +66,18 @@ The former Green Harvest business — an organic seed and gardening operation �
 
 The property gives ACT something it hadn't had before: ground to stand on. Not metaphorically — literally. The February 2026 internal preparation meeting contained this sentence: *"What does having a property look like for ACT? $50,000 on the table and revenue share."* That sentence marks the shift from ACT as a mobile design-and-facilitation practice to ACT as a place-based organisation.
 
+## LCAA Phase
+
+In the [[lcaa-method|LCAA Method]], Green Harvest Witta sits in the **Listen** phase — and the doc names it explicitly: spending significant time with [[barry-rodgerig|Barry Rodgerig]] before proposing a single building project is *"LCAA Listen phase made visible: every place has a story already being told."* The Harvest is built on ground that remembers something.
+
+LCAA arc for Green Harvest Witta:
+- **Listen** — Barry Rodgerig's shed as living archaeology; the inherited Green Harvest infrastructure (shade cloth, irrigation, propagation benches); Witta's highest-in-Australia homeschooling rate as a community signal; *"You don't build these things twice. You repair them."*
+- **Curiosity** — what does it mean for ACT to be a place-based organisation rather than a mobile design-and-facilitation practice? The negotiation moment: *"What does having a property look like for ACT? $50,000 on the table and revenue share."*
+- **Action** — Phase 1 lease ($117,800, three milestones across Feb–Jun 2026) — site establishment, outdoor builds (pavilion, timber/fire cooking, kids area), soft opening readiness; revenue-share lease structure so Grant shares in the upside
+- **Art** — the garden-as-classroom as direct response to what the listening revealed; the property gives ACT *ground to stand on* — not metaphorically, literally
+
+Green Harvest Witta is the place-history layer of [[the-harvest|The Harvest]] cluster — what explains why the program exists on this specific site.
+
 ## See Also
 
 - [[the-harvest|The Harvest]] — the full program running on this site

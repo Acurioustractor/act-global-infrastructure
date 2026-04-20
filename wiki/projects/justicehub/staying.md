@@ -244,6 +244,20 @@ Q11–Q15 resolved in session:
 - **Q14 — Communities first.** Year 3 produces seven community-led launches in the seven places, plus a published book that gathers the seven journals (with consent) into one volume. The national gallery tour (NGA / MCA / NGV) is **deferred to a Year-4 stretch goal** raised separately — outside this $3.43M envelope.
 - **Q15 — Return pitch with a tight envelope.** Lucy Stronach is already warm and asking for numbers. A prior ~$8M shape was too much. New shape: **~$3.43M total** at ~$1M / $1.24M / $1.20M annual flow. Y1 inside the soft $1M ceiling, Y2/Y3 a touch above to carry Europe and book production. The program is re-cut (1 FTE + 1 support, distributed European exchange, journal as Y3 delivery) to fit. *Edge Holds* publishes alongside the pitch, not as cold warmup.
 
+## LCAA Phase
+
+In the [[lcaa-method|LCAA Method]], Staying *is* the methodology — the wiki backlink names the mapping directly: *"Listen (Y1) → Compare ≈ Curiosity (Y2) → Tell ≈ Action + Art (Y3)."* The three-act structure of the program (Listen / Compare / Tell) is the LCAA arc made operational across three years and seven communities.
+
+LCAA arc for Staying:
+- **Listen — Year 1 (4 months on, 8 months virtual)** — small team rotates through 7 communities; deep accompaniment without arrival-and-departure; the team that *stays* through the season the program is ostensibly about
+- **Curiosity — Year 2 European exchange** — each community sends 2 travellers (1 young person + 1 support) to one of [[diagrama|Diagrama]] (Spain), Halt (Holland), or Children's Hearings (Scotland); reciprocal European visits to Australia in the same year; *"those conversations have never happened in this country's history"*
+- **Action — Year 3 community-led launches** — seven launches in seven places; a national published book gathering the seven journals (with consent) into one volume; a copy to every electorate office
+- **Art — the per-young-person Journal** — A5, hand-stitched, ~80–120 pages, owned by the young person, in [[the-brave-ones|Brave Ones]] visual discipline; *if the program produces nothing else, the journals are the proof*
+
+Cultural protocol is the gate: Elder and Council sign-off before any photographs, recordings, or journals begin; OCAP/CARE protocols at the data layer via [[empathy-ledger|Empathy Ledger]]; the first consent conversation matters more than the first photograph.
+
+Staying is the *methodology layer* of [[three-circles|The Three Circles]] Circle Two — not a competing pitch.
+
 ## Backlinks
 
 - [[projects/justicehub/README|JusticeHub Cluster]] — the cluster this methodology belongs to

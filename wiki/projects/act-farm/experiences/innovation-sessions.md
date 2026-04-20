@@ -74,6 +74,17 @@ Can run at BCV, in your office, or hybrid. The format is the product, not the ve
 
 Tell us which track fits, the problem you're working on, and who'd be in the room. We reply within a few working days and always scope before confirming. Inquiries go through `/experiences/innovation-sessions` on the ACT Farm site.
 
+## LCAA Phase
+
+In the [[lcaa-method|LCAA Method]], an Innovation Session is the focused, 1–2 day version of Listen → Curiosity → Action → Art applied to a specific problem the partner came in with. Here's how the four phases show up across the four tracks (youth justice, AI and systems, data and evidence, storytelling):
+
+- **Listen** — pre-session brief back to the partner on how ACT would frame the problem, before anything is designed
+- **Curiosity** — short inputs followed by longer working blocks; the question reframed in the room rather than imposed from outside
+- **Action** — honest conversation, decisions named, next steps owned by people in the room
+- **Art** — a written note of decisions and moves — not a deck — as the durable artefact
+
+The format is the product, not the venue. ACT brings the method, the ecosystem knowledge, and — when it helps — the right people from the network.
+
 ## Cross-links
 
 - [[act-farm|ACT Farm]]

@@ -165,6 +165,18 @@ See [[three-circles#Data verification status|Three Circles → Data verification
 - Oonchiumpa — anchor community whose 95% diversion proof point lives in the data layer
 - Palm Island Community Company — the strongest community proof point in GrantScope; full dashboard at `/output/picc-comprehensive-dashboard.md`
 
+## LCAA Phase
+
+In the [[lcaa-method|LCAA Method]], GrantScope is the technical implementation of [[civicgraph|CivicGraph]] and therefore the codebase that carries the **Curiosity** infrastructure of the ACT ecosystem — the queryable national intelligence layer that makes Circle One of [[three-circles|The Three Circles]] real today rather than aspirational.
+
+LCAA arc for GrantScope:
+- **Listen** — community-defined priorities surface through the JusticeHub bridge (315 of 556 orgs linked, scaling) and through Empathy Ledger's story sovereignty layer on the same Supabase substrate; PICC, Oonchiumpa, and Maranguka are anchored as named community proof points in the data
+- **Curiosity** — 100K resolved entities, 199K relationships, 71K justice-funding rows, 1,155 ALMA verified interventions, 770K AusTender contracts; six MCP tools (search, entity, power index, funding deserts, revolving door, natural-language ask) that any AI agent can query
+- **Action** — live MCP server, live Hansard scraper (QLD, expanding), live ALMA enrichment pipeline, live JusticeHub ↔ CivicGraph bridge, weekly intelligence reports landing in `/output/` (PICC dashboard, founder intake PRDs, philanthropy power briefs)
+- **Art** — the public CivicGraph product brand and the *Aesthetics of Asymmetry* campaign that turns the data layer into a public investigation; the agentic interface that lets magistrates, funders, and journalists query the system in plain language
+
+GrantScope is also the ledger of what the Three Circles pitch can and cannot defensibly claim; the gaps it documents (international tour data, Maranguka structuring, foundation enrichment, ASIC linkage) are the Year 1 hardening priorities, not unknowns.
+
 ## Backlinks
 
 - [[three-circles|The Three Circles]] — GrantScope is Circle One technical reference
