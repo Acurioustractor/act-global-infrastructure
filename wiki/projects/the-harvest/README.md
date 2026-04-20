@@ -12,7 +12,7 @@ The Harvest is the program. Green Harvest Witta is the property. Both files belo
 
 ## System Position
 
-This folder is the durable memory of the Harvest cluster.
+This folder is the background and reference layer of the Harvest cluster.
 
 - the wiki explains the relationship between the public-facing hub, the property, and the broader place cluster
 - [[empathy-ledger|Empathy Ledger]] carries live story, seasonal media, and editorial proof

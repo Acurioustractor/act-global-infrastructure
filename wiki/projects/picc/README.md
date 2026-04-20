@@ -12,7 +12,7 @@ The parent project is [[picc|PICC]] — a community-controlled organisation with
 
 ## System Position
 
-This cluster is the durable memory for the PICC field.
+This cluster is the background and reference layer for the PICC field.
 
 - the wiki holds the canonical framing of PICC, its sub-projects, and why Palm Island matters in the ACT ecosystem
 - [[empathy-ledger|Empathy Ledger]] holds the live corpus: stories, photos, portraits, storm documentation, and editorial curation

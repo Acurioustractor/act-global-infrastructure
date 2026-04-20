@@ -184,4 +184,4 @@ These source notes now hold the strongest current bridge between raw capture and
 - [[art/innovation/studio-innovation-flow|Studio Innovation Flow]] — how Studio work feeds the wider ecosystem
 - [[art/business/studio-business-model|Studio Business Model]] — how the Studio sustains itself and funds the commons
 - [[living-website-operating-system|Living Website Operating System]] — the public-shell rule for hub, spokes, wiki, and EL
-- [[llm-knowledge-base|LLM Knowledge Base]] — the durable memory pattern the Compendium is intentionally following
+- [[llm-knowledge-base|LLM Knowledge Base]] — the long-form reference pattern the Compendium is intentionally following

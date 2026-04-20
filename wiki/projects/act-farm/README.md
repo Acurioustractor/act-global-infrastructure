@@ -14,7 +14,7 @@ The canonical title for the cluster is **act-farm** (matching the project filena
 
 ## System Position
 
-This cluster is the durable memory for ACT's land-practice program.
+This cluster is the background and reference layer for ACT's land-practice program.
 
 - the wiki explains the method, the place, and the relationship between ACT Farm and [[black-cockatoo-valley|Black Cockatoo Valley]]
 - [[empathy-ledger|Empathy Ledger]] should carry live field proof: photos, drone footage, voice, seasonal notes, and any media-led editorial choices

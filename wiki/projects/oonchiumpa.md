@@ -213,7 +213,7 @@ For the wiki, the load-bearing people in this field are currently:
 
 - [[kristy-bloomfield|Kristy Bloomfield]] — cultural authority and co-director
 
-Tanya Turner, Fred Campbell, Aunty Bev, and Uncle Terry are all clearly important, but they do not yet need standalone wiki people pages unless they become structurally necessary across more than one major ACT page or source cluster. Until then, Oonchiumpa itself and the source bridge should carry that context.
+Tanya Turner, Fred Campbell, Aunty Bev, and Uncle Terry are all clearly important, but they do not yet need standalone wiki people pages unless they become structurally necessary across more than one major ACT page or source cluster. Until then, Oonchiumpa itself and the project doc should carry that context.
 
 ## Published Writing
 
