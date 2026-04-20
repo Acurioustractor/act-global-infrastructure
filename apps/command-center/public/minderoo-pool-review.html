@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Minderoo candidate pool — per-state review</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,500;0,600;1,400&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  body { font-family: 'IM Fell English', Georgia, serif; background: #f8f6f1; color: #1c1c1c; }
+  .serif-h { font-family: 'Cormorant Garamond', Georgia, serif; letter-spacing: -0.01em; }
+  .chip { display: inline-block; padding: 2px 7px; border-radius: 10px; font-size: 10px; font-family: ui-sans-serif, system-ui, sans-serif; }
+  .chip-anchor { background: #fde68a; color: #78350f; border: 1px solid #f59e0b; }
+  .chip-surfaced { background: #dbeafe; color: #1e3a8a; border: 1px solid #93c5fd; }
+  .chip-large { background: #dcfce7; color: #14532d; }
+  .chip-medium { background: #fef3c7; color: #713f12; }
+  .chip-small { background: #f1f5f9; color: #475569; }
+  .chip-govt { background: #fee2e2; color: #991b1b; }
+  .chip-email { background: #d1fae5; color: #065f46; }
+  .cov-bar { height: 6px; background: #e5e7eb; border-radius: 3px; overflow: hidden; }
+  .cov-fill { height: 100%; background: linear-gradient(90deg, #10b981, #059669); }
+  .tab-btn { padding: 6px 14px; border-radius: 6px; cursor: pointer; font-size: 13px; border: 1px solid #d4d4d8; background: white; }
+  .tab-active { background: #1c1c1c; color: white; border-color: #1c1c1c; }
+</style>
+</head>
+<body class="min-h-screen">
+<div class="max-w-7xl mx-auto px-4 py-8">
+  <header class="mb-8">
+    <div class="text-xs uppercase tracking-widest text-stone-500 mb-1">A Curious Tractor · Minderoo Envelope · 2026-04-20</div>
+    <h1 class="serif-h text-4xl mb-2">Candidate Pool — Per-State Review</h1>
+    <p class="text-stone-600 max-w-3xl">Every community-controlled organisation in CivicGraph, scored by corporation size, state, and evidence signals. 4,729 total after the data-quality sweep. Use the state tabs to see the strongest candidates per seat.</p>
+    <div class="mt-3 text-xs text-stone-500">
+      <a class="underline hover:text-stone-900" href="/minderoo-live-dashboard.html">← back to main dashboard</a>
+    </div>
+  </header>
+
+  <!-- Per-state summary table -->
+  <section class="mb-10 bg-white border border-stone-200 rounded-lg p-6 shadow-sm">
+    <h2 class="serif-h text-2xl mb-4">Pool health · per state</h2>
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead class="text-xs uppercase tracking-wider text-stone-500 border-b border-stone-200">
+          <tr>
+            <th class="text-left px-2 py-2">State</th>
+            <th class="text-right px-2 py-2">Total CC</th>
+            <th class="text-right px-2 py-2">with ABN</th>
+            <th class="text-right px-2 py-2">Email coverage</th>
+            <th class="text-right px-2 py-2">Phone coverage</th>
+            <th class="text-right px-2 py-2">Website</th>
+            <th class="text-right px-2 py-2">Large tier</th>
+          </tr>
+        </thead>
+        <tbody id="summary-tbody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- State tabs -->
+  <section class="mb-4 flex gap-2 flex-wrap" id="state-tabs"></section>
+
+  <!-- Current state detail -->
+  <section class="bg-white border border-stone-200 rounded-lg p-6 shadow-sm">
+    <h2 class="serif-h text-2xl mb-2" id="state-title">—</h2>
+    <p class="text-sm text-stone-600 mb-4" id="state-subtitle">—</p>
+    <div id="state-candidates" class="divide-y divide-stone-100"></div>
+  </section>
+
+  <footer class="mt-10 text-xs text-stone-500 text-center">
+    Data spine: gs_entities (CivicGraph) · ORIC bulk CSV (data.gov.au, 2026-04-08) · ACNC API · website scrape · agent research
+  </footer>
+</div>
+
+<script>
+const ORDER = ['ACT','NSW','NT','QLD','SA','TAS','VIC','WA']
+let DATA = null
+let currentState = 'NT'
+
+function pct(n, total) { return total ? Math.round((n/total)*100) : 0 }
+
+function renderSummary() {
+  const tb = document.getElementById('summary-tbody')
+  tb.innerHTML = ORDER.map(s => {
+    const v = DATA.summary[s] || {}
+    const emailPct = pct(v.with_email, v.total)
+    const phonePct = pct(v.with_phone, v.total)
+    return `<tr class="border-t border-stone-100 hover:bg-stone-50 cursor-pointer" onclick="selectState('${s}')">
+      <td class="px-2 py-2 font-semibold">${s}</td>
+      <td class="px-2 py-2 text-right font-mono">${v.total}</td>
+      <td class="px-2 py-2 text-right font-mono">${v.with_abn}</td>
+      <td class="px-2 py-2 text-right">
+        <div class="flex items-center gap-2 justify-end">
+          <span class="font-mono text-xs text-stone-500">${v.with_email}</span>
+          <div class="cov-bar w-16"><div class="cov-fill" style="width:${emailPct}%"></div></div>
+          <span class="font-mono text-xs w-8">${emailPct}%</span>
+        </div>
+      </td>
+      <td class="px-2 py-2 text-right">
+        <div class="flex items-center gap-2 justify-end">
+          <span class="font-mono text-xs text-stone-500">${v.with_phone}</span>
+          <div class="cov-bar w-16"><div class="cov-fill" style="width:${phonePct}%"></div></div>
+        </div>
+      </td>
+      <td class="px-2 py-2 text-right font-mono text-xs">${v.with_website}</td>
+      <td class="px-2 py-2 text-right font-mono font-semibold">${v.large_tier}</td>
+    </tr>`
+  }).join('')
+}
+
+function renderTabs() {
+  document.getElementById('state-tabs').innerHTML = ORDER.map(s =>
+    `<button class="tab-btn ${s===currentState?'tab-active':''}" onclick="selectState('${s}')">${s} <span class="text-stone-400 ml-1 text-xs">${DATA.summary[s]?.total || 0}</span></button>`
+  ).join('')
+}
+
+function renderCandidates() {
+  document.getElementById('state-title').textContent = currentState
+  const v = DATA.summary[currentState]
+  const subtitle = `${v.total} community-controlled orgs · ${v.with_email} with email (${pct(v.with_email, v.total)}%) · ${v.large_tier} Large-tier`
+  document.getElementById('state-subtitle').textContent = subtitle
+  const rows = DATA.by_state[currentState] || []
+  const host = document.getElementById('state-candidates')
+  if (!rows.length) { host.innerHTML = '<div class="text-stone-500 text-sm py-4">No candidates above thresholds.</div>'; return }
+  host.innerHTML = rows.map((r, i) => {
+    const badges = []
+    if (r.anchor) badges.push('<span class="chip chip-anchor">★ ANCHOR</span>')
+    if (r.surfaced) badges.push('<span class="chip chip-surfaced">◆ surfaced</span>')
+    if (r.size === 'Large' || r.size === 'Extra Large') badges.push(`<span class="chip chip-large">${r.size}</span>`)
+    else if (r.size === 'Medium') badges.push('<span class="chip chip-medium">Medium</span>')
+    else if (r.size === 'Small') badges.push('<span class="chip chip-small">Small</span>')
+    if (r.entity_type === 'government_body') badges.push('<span class="chip chip-govt">govt</span>')
+    const contact = []
+    if (r.email) contact.push(`<a class="text-emerald-700 hover:underline" href="mailto:${r.email}">✉ ${r.email}</a>`)
+    if (r.phone) contact.push(`<span class="text-stone-600">☎ ${r.phone}</span>`)
+    if (r.website) contact.push(`<a class="text-sky-700 hover:underline" target="_blank" href="${r.website}">↗ site</a>`)
+    if (r.oric_url) contact.push(`<a class="text-violet-700 hover:underline" target="_blank" href="${r.oric_url}">ORIC</a>`)
+    if (!contact.length) contact.push('<span class="text-stone-400 italic">no public contact</span>')
+    return `<div class="py-3 flex items-start gap-4">
+      <div class="font-mono text-xs text-stone-400 w-6 pt-0.5">${i+1}</div>
+      <div class="flex-1">
+        <div class="font-semibold">${r.name} ${badges.join(' ')}</div>
+        <div class="text-xs text-stone-600 mt-1 flex flex-wrap gap-x-3">${contact.join(' · ')}</div>
+      </div>
+    </div>`
+  }).join('')
+}
+
+function selectState(s) {
+  currentState = s
+  renderTabs()
+  renderCandidates()
+}
+
+async function boot() {
+  const r = await fetch('/minderoo-pool-review.json?v=' + Date.now())
+  DATA = await r.json()
+  renderSummary()
+  renderTabs()
+  renderCandidates()
+}
+boot()
+</script>
+</body>
+</html>
