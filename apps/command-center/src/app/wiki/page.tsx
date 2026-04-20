@@ -324,9 +324,19 @@ export default function WikiPage() {
                   <Book className="h-10 w-10 text-indigo-400" />
                 </div>
                 <h1 className="text-3xl font-bold text-white mb-3">ACT Compendium 2026</h1>
-                <p className="text-lg text-white/60">
+                <p className="text-lg text-white/60 mb-6">
                   A regenerative innovation studio stewarding a working farm on Jinibara Country.
                 </p>
+                <a
+                  href="/tractorpedia.html"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-xl border border-indigo-400/30 bg-indigo-500/10 px-4 py-2 text-sm font-medium text-indigo-200 transition-colors hover:border-indigo-300/50 hover:bg-indigo-500/15"
+                >
+                  <Book className="h-4 w-4" />
+                  Open Tractorpedia (classic view)
+                  <ExternalLink className="h-3.5 w-3.5" />
+                </a>
               </div>
 
               {wikiStatus && (
