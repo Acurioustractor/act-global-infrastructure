@@ -97,7 +97,38 @@
     pointer-events: none;
   }
   body.edit-mode .el-embed:hover .el-edit-hint { opacity: 1; pointer-events: auto; }
-  body.edit-mode .el-embed { outline: 2px dashed var(--m-purple-lite); outline-offset: 2px; }
+  body.edit-mode .el-embed { outline: 2px dashed var(--m-purple-lite); outline-offset: 2px; cursor: pointer; }
+  body.edit-mode .el-embed::after { content: "click to change"; position: absolute; bottom: 8px; right: 8px; background: var(--m-purple); color: white; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 10px; border-radius: 4px; pointer-events: none; z-index: 5; font-family: ui-sans-serif, system-ui, sans-serif; }
+
+  /* Gallery modal */
+  .gal-backdrop { position: fixed; inset: 0; background: rgba(20,10,35,0.82); backdrop-filter: blur(6px); z-index: 1000; display: flex; align-items: center; justify-content: center; padding: 24px; }
+  .gal-panel { background: var(--m-cream); border-radius: 16px; width: 100%; max-width: 1200px; max-height: 90vh; display: flex; flex-direction: column; box-shadow: 0 30px 80px rgba(0,0,0,0.4); overflow: hidden; }
+  .gal-head { padding: 18px 24px; border-bottom: 1px solid var(--m-divider); display: flex; flex-direction: column; gap: 12px; }
+  .gal-search { width: 100%; padding: 10px 14px; border: 1px solid var(--m-divider); border-radius: 8px; font-size: 14px; font-family: inherit; background: white; }
+  .gal-search:focus { outline: 2px solid var(--m-purple-lite); border-color: transparent; }
+  .gal-filters { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+  .gal-chip { padding: 5px 12px; border-radius: 999px; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; border: 1px solid var(--m-divider); background: white; cursor: pointer; color: var(--m-stone-soft); transition: all 0.15s; }
+  .gal-chip:hover { border-color: var(--m-purple-lite); color: var(--m-purple); }
+  .gal-chip.active { background: var(--m-purple); color: white; border-color: var(--m-purple); }
+  .gal-body { flex: 1; overflow-y: auto; padding: 20px 24px 24px; }
+  .gal-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
+  .gal-tile { background: white; border: 1px solid var(--m-divider); border-radius: 10px; overflow: hidden; cursor: pointer; display: flex; flex-direction: column; transition: all 0.15s; }
+  .gal-tile:hover { transform: translateY(-2px); border-color: var(--m-purple); box-shadow: 0 8px 20px rgba(74,37,96,0.12); }
+  .gal-tile-media { aspect-ratio: 4/3; background: var(--m-cream-2); position: relative; overflow: hidden; }
+  .gal-tile-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .gal-tile-media.placeholder { display: flex; align-items: center; justify-content: center; color: var(--m-stone-soft); font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; padding: 20px; text-align: center; }
+  .gal-tile-video-badge { position: absolute; top: 8px; right: 8px; background: rgba(0,0,0,0.7); color: white; padding: 3px 8px; border-radius: 4px; font-size: 10px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; }
+  .gal-tile-meta { padding: 10px 12px; flex: 1; display: flex; flex-direction: column; gap: 4px; }
+  .gal-tile-org { font-size: 9px; text-transform: uppercase; letter-spacing: 0.15em; font-weight: 700; color: var(--m-purple); }
+  .gal-tile-title { font-family: 'Cormorant Garamond', serif; font-size: 14px; font-weight: 500; line-height: 1.2; color: var(--m-stone); }
+  .gal-tile-storyteller { font-size: 11px; color: var(--m-stone-soft); }
+  .gal-tile-state { display: inline-flex; gap: 4px; font-size: 9px; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; }
+  .gal-tile-state .st-active { color: var(--earth-grass); }
+  .gal-tile-state .st-awaiting { color: #8a6f20; }
+  .gal-close { background: none; border: 0; color: var(--m-stone); cursor: pointer; font-size: 28px; line-height: 1; padding: 4px 10px; }
+  .gal-close:hover { color: var(--m-purple); }
+  .gal-row-1 { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+  .gal-slot-info { font-size: 11px; color: var(--m-stone-soft); font-family: ui-monospace, monospace; }
 </style>
 </head>
 <body>
@@ -465,31 +496,154 @@
     grid.innerHTML = cards || '<div class="col-span-full text-center py-10 text-sm text-stone-500 italic">No storyteller posts matched the IDs in this page.</div>';
   }
 
-  // --- Edit mode: append ?edit=1 to URL for dashed outlines + swap dropdowns on every slot ---
+  // --- Gallery modal (search + filter by organisation) ---
+  let __GALLERY__ = null;
+  async function loadGallery() {
+    if (__GALLERY__) return __GALLERY__;
+    try {
+      const r = await fetch('/minderoo-gallery.json?v=' + Date.now());
+      if (!r.ok) throw new Error('gallery fetch failed');
+      __GALLERY__ = await r.json();
+      return __GALLERY__;
+    } catch (e) { return null; }
+  }
+
+  function openGallery(targetSlot) {
+    loadGallery().then(gal => {
+      if (!gal) { alert('Gallery unavailable — check minderoo-gallery.json'); return; }
+      const existing = document.querySelector('.gal-backdrop');
+      if (existing) existing.remove();
+      const current = targetSlot.getAttribute('data-el-story');
+      const orgs = [{slug:'all',name:'All organisations'}, ...(gal.organisations || [])];
+      const variant = targetSlot.getAttribute('data-el-variant') || 'hero';
+
+      const backdrop = document.createElement('div');
+      backdrop.className = 'gal-backdrop';
+      backdrop.innerHTML = `
+        <div class="gal-panel">
+          <div class="gal-head">
+            <div class="gal-row-1">
+              <div>
+                <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.15em;color:var(--m-stone-soft);font-weight:600;margin-bottom:4px">Empathy Ledger v2 · storyteller gallery</div>
+                <h3 style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:500;margin:0">Pick a photo or video for this slot</h3>
+                <div class="gal-slot-info" style="margin-top:4px">Variant: <strong>${variant}</strong> · current: <strong>${(current||'').slice(0,8)}</strong> · ${gal.total_entries} total stories · ${gal.with_media} with media</div>
+              </div>
+              <button class="gal-close" aria-label="Close">✕</button>
+            </div>
+            <input class="gal-search" placeholder="Search titles, storytellers, tags…" autocomplete="off">
+            <div class="gal-filters">
+              ${orgs.map(o => `<button class="gal-chip" data-org="${o.slug}">${o.name}</button>`).join('')}
+              <div style="margin-left:auto;display:flex;align-items:center;gap:8px;font-size:11px;color:var(--m-stone-soft)">
+                <label style="display:inline-flex;align-items:center;gap:5px;cursor:pointer"><input type="checkbox" class="gal-media-only" checked>only with media</label>
+              </div>
+            </div>
+          </div>
+          <div class="gal-body"><div class="gal-grid"></div></div>
+        </div>`;
+      document.body.appendChild(backdrop);
+      const searchEl = backdrop.querySelector('.gal-search');
+      const gridEl = backdrop.querySelector('.gal-grid');
+      const mediaOnlyEl = backdrop.querySelector('.gal-media-only');
+      let filterOrg = 'all';
+
+      function render() {
+        const q = searchEl.value.trim().toLowerCase();
+        const onlyMedia = mediaOnlyEl.checked;
+        const items = (gal.entries || []).filter(e => {
+          if (filterOrg !== 'all' && e.organisation_slug !== filterOrg) return false;
+          if (onlyMedia && !e.has_media) return false;
+          if (q) {
+            const hay = (e.title + ' ' + (e.storyteller||'') + ' ' + e.organisation + ' ' + (e.tags||[]).join(' ')).toLowerCase();
+            if (!hay.includes(q)) return false;
+          }
+          return true;
+        });
+        if (!items.length) { gridEl.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:60px 20px;color:var(--m-stone-soft);font-style:italic;font-family:Cormorant Garamond,serif;font-size:16px">No storyteller posts match these filters.</div>'; return; }
+        gridEl.innerHTML = items.map(e => {
+          const video = e.media.find(m => m.type === 'video');
+          const img = e.media.find(m => m.type === 'image');
+          const mediaHtml = video
+            ? `<div class="gal-tile-media placeholder" style="background:linear-gradient(135deg,#2e1540,#4a2560);color:white;font-size:11px"><div><div style="font-size:18px;margin-bottom:4px">▶</div>Video · ${video.url.includes('descript') ? 'Descript' : 'embed'}</div><span class="gal-tile-video-badge">Video</span></div>`
+            : img
+            ? `<div class="gal-tile-media"><img src="${img.url}" alt="" loading="lazy"></div>`
+            : `<div class="gal-tile-media placeholder">Text-only</div>`;
+          const state = e.consent_status === 'active'
+            ? '<span class="st-active">● Active</span>'
+            : '<span class="st-awaiting">◌ Awaiting</span>';
+          return `<div class="gal-tile" data-story-id="${e.story_id}" data-has-media="${e.has_media}">
+            ${mediaHtml}
+            <div class="gal-tile-meta">
+              <span class="gal-tile-org">${e.organisation_slug}</span>
+              <div class="gal-tile-title">${e.title}</div>
+              ${e.storyteller ? `<div class="gal-tile-storyteller">${e.storyteller}${e.storyteller_is_elder?' · elder':''}</div>` : ''}
+              <div class="gal-tile-state">${state}</div>
+            </div>
+          </div>`;
+        }).join('');
+      }
+
+      // Initial render + wire interactions
+      render();
+      searchEl.addEventListener('input', render);
+      mediaOnlyEl.addEventListener('change', render);
+      backdrop.querySelectorAll('.gal-chip').forEach(btn => {
+        if (btn.dataset.org === filterOrg) btn.classList.add('active');
+        btn.addEventListener('click', () => {
+          filterOrg = btn.dataset.org;
+          backdrop.querySelectorAll('.gal-chip').forEach(b => b.classList.toggle('active', b.dataset.org === filterOrg));
+          render();
+        });
+      });
+      backdrop.querySelector('.gal-close').addEventListener('click', () => backdrop.remove());
+      backdrop.addEventListener('click', (e) => { if (e.target === backdrop) backdrop.remove(); });
+
+      // Delegate tile clicks
+      gridEl.addEventListener('click', (e) => {
+        const tile = e.target.closest('.gal-tile');
+        if (!tile) return;
+        const newId = tile.getAttribute('data-story-id');
+        applyStoryToSlot(targetSlot, newId, gal);
+        backdrop.remove();
+      });
+    });
+  }
+
+  function applyStoryToSlot(el, storyId, gal) {
+    el.setAttribute('data-el-story', storyId);
+    const variant = el.getAttribute('data-el-variant') || 'hero';
+    // Prefer snapshot-curated data if the id is one of the 6 curated stories
+    let story = (window.__EL_SNAPSHOT__ && window.__EL_SNAPSHOT__.byId[storyId]) || null;
+    if (!story && gal) {
+      const entry = gal.entries.find(e => e.story_id === storyId);
+      if (entry) {
+        // Shim: map gallery entry into the shape elMediaHtml + elConsentStrip expect
+        const video = entry.media.find(m => m.type === 'video');
+        const img = entry.media.find(m => m.type === 'image');
+        story = {
+          el_v2_story_id: entry.story_id,
+          title: entry.title,
+          quote: entry.excerpt,
+          organisation: entry.organisation,
+          storyteller: { name: entry.storyteller, role: entry.storyteller_is_elder ? 'elder' : null, portrait: entry.storyteller_portrait },
+          elder: { name: entry.storyteller_is_elder ? entry.storyteller : null, mode: null, mode_label: null, approved_at: entry.elder_approved_at },
+          media: { hero: img ? img.url : null, video_embed: video ? video.url : null },
+          consent: { status: entry.consent_status, last_verified: (entry.updated_at||'').slice(0,10), sensitivity: entry.sensitivity }
+        };
+      }
+    }
+    if (!story) { el.innerHTML = `<div class="el-embed-media" style="aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;color:var(--m-stone-soft);font-size:11px;font-style:italic">Story not found</div>`; return; }
+    el.innerHTML = elMediaHtml(story, variant) + elConsentStrip(story, false) + elEditHint(story, el);
+  }
+
   function enableEditMode() {
     document.body.classList.add('edit-mode');
-    const snap = window.__EL_SNAPSHOT__;
-    if (!snap || !snap.stories.length) return;
-    const opts = snap.stories.map(s => `<option value="${s.el_v2_story_id}">${(s.storyteller && s.storyteller.name) || '—'} · ${(s.title || '').slice(0, 40)}</option>`).join('');
     document.querySelectorAll('.el-embed[data-el-story]').forEach(el => {
-      const current = el.getAttribute('data-el-story');
-      const picker = document.createElement('div');
-      picker.style.cssText = 'position:absolute;top:8px;left:8px;z-index:10;background:white;border:1px solid var(--m-purple-lite);border-radius:6px;padding:4px;display:flex;gap:4px;align-items:center;font-family:ui-monospace,monospace;font-size:10px;box-shadow:0 2px 8px rgba(0,0,0,0.15)';
-      picker.innerHTML = `<select style="font-size:10px;padding:2px 4px;border:0;background:transparent;max-width:220px">${opts}</select>`;
-      const sel = picker.querySelector('select');
-      sel.value = current;
-      sel.addEventListener('change', (e) => {
-        el.setAttribute('data-el-story', e.target.value);
-        const story = snap.byId[e.target.value];
-        const variant = el.getAttribute('data-el-variant') || 'hero';
-        el.innerHTML = elMediaHtml(story, variant) + elConsentStrip(story, false) + elEditHint(story, el);
-        el.appendChild(picker);
-      });
-      el.appendChild(picker);
+      el.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); openGallery(el); });
     });
     const banner = document.createElement('div');
-    banner.style.cssText = 'position:fixed;bottom:20px;right:20px;background:var(--m-purple);color:white;padding:10px 16px;border-radius:8px;font-size:12px;font-family:ui-sans-serif,system-ui,sans-serif;box-shadow:0 4px 16px rgba(74,37,96,0.3);z-index:100;max-width:260px';
-    banner.innerHTML = '<div style="font-weight:600;margin-bottom:4px">Edit mode · live</div><div style="font-size:11px;opacity:0.8">Every photo/video slot is a dropdown. Pick a different storyteller post from the snapshot.</div>';
+    banner.id = 'edit-banner';
+    banner.style.cssText = 'position:fixed;bottom:20px;right:20px;background:var(--m-purple);color:white;padding:12px 18px;border-radius:10px;font-size:12px;font-family:ui-sans-serif,system-ui,sans-serif;box-shadow:0 4px 20px rgba(74,37,96,0.35);z-index:999;max-width:280px';
+    banner.innerHTML = '<div style="font-weight:700;margin-bottom:4px">Edit mode · gallery-picker live</div><div style="font-size:11px;opacity:0.85;line-height:1.45">Click any photo or video on the page to open the Empathy Ledger gallery. Search + filter by organisation. Pick a storyteller post to swap.</div>';
     document.body.appendChild(banner);
   }
 
