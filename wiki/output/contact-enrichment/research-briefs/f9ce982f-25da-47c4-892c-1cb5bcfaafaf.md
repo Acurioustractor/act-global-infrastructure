@@ -1,0 +1,66 @@
+---
+gs_entity_id: f9ce982f-25da-47c4-892c-1cb5bcfaafaf
+org_name: "Umoona Tjutagku Health Service Aboriginal Corporation"
+state: SA
+abn: 91015295247
+entity_type: charity
+is_community_controlled: true
+brief_generated: 2026-04-20T00:25:43.290Z
+status: awaiting_research
+---
+
+# Contact research brief — Umoona Tjutagku Health Service Aboriginal Corporation
+
+## What we know
+
+- **Name:** Umoona Tjutagku Health Service Aboriginal Corporation
+- **State:** SA
+- **ABN:** 91015295247
+- **Entity type:** charity
+- **Community-controlled:** true
+- **LGA:** Unincorporated SA
+- **Postcode:** 5723
+- **Current website:** none
+- **Current email:** none
+- **Current phone:** none
+
+## Research task
+
+Find the current, active contact details for this organisation. Look in this order:
+
+1. **ABN Lookup** (abr.business.gov.au) — enter ABN above, note main business address + GST status
+2. **ACNC register** (acnc.gov.au/charity) — search by name; note email/phone/postal address
+3. **ORIC register** (oric.gov.au) — if entity_type is indigenous_corp, search by name. Note ICN.
+4. **Organisation's own website** — search Google for "Umoona Tjutagku Health Service Aboriginal Corporation" plus state. If there's no website, check Facebook / LinkedIn / local government listings.
+5. **Local directories** — QLD: community.services.gov.au; NSW: service.nsw.gov.au; other state equivalents
+
+## Return format
+
+Overwrite this file's `status:` to `research_complete`, add a results block at the bottom:
+
+```
+## Research findings
+
+- **Operating status:** [active / inactive / unknown]
+- **Email:** [value or "not found"]
+  - Source: [URL]
+  - Confidence: [1-5]
+- **Phone:** [value or "not found"]
+  - Source: [URL]
+  - Confidence: [1-5]
+- **Website:** [value or "none"]
+  - Source: [URL]
+  - Confidence: [1-5]
+- **Postal address:** [if found]
+- **Notes:** [any caveats, name collisions, etc]
+- **Researcher:** [name or "agent"]
+- **Research date:** [ISO date]
+```
+
+## Confidence rubric
+
+- **5** — Direct from ACNC or organisation's official website; recently updated
+- **4** — Confirmed from a secondary official source (government register, etc)
+- **3** — From a credible third-party site (known directory)
+- **2** — From a social-media profile; may not be current
+- **1** — Best guess; treat as unverified

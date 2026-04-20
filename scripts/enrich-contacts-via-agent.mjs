@@ -55,6 +55,7 @@ const APPLY = args.includes('--apply')
 const VERBOSE = args.includes('--verbose')
 const LIMIT = (() => { const i = args.indexOf('--limit'); return i >= 0 ? parseInt(args[i + 1], 10) : null })()
 const STATE = (() => { const i = args.indexOf('--state'); return i >= 0 ? args[i + 1] : null })()
+const IDS_FILE = (() => { const i = args.indexOf('--ids-file'); return i >= 0 ? args[i + 1] : null })()
 
 try {
   const env = readFileSync(join(REPO_ROOT, '.env.local'), 'utf8')
@@ -156,9 +157,20 @@ async function emitBriefs() {
   if (!existsSync(BRIEFS_DIR)) mkdirSync(BRIEFS_DIR, { recursive: true })
   const stateFilter = STATE ? `&state=eq.${STATE}` : ''
   const limit = LIMIT || 50
-  const rows = await get(
-    `gs_entities?select=id,canonical_name,state,abn,entity_type,is_community_controlled,lga_name,postcode,website,email,phone&is_community_controlled=eq.true&email=is.null&website=is.null${stateFilter}&limit=${limit}&order=canonical_name.asc`,
-  )
+  let rows
+  if (IDS_FILE) {
+    const ids = JSON.parse(readFileSync(IDS_FILE, 'utf8'))
+    const idList = (Array.isArray(ids) ? ids : ids.ids || []).map((x) => typeof x === 'string' ? x : x.id).filter(Boolean)
+    console.log(`→ Loading ${idList.length} IDs from ${IDS_FILE}`)
+    const inList = idList.map((id) => `"${id}"`).join(',')
+    rows = await get(
+      `gs_entities?select=id,canonical_name,state,abn,entity_type,is_community_controlled,lga_name,postcode,website,email,phone&id=in.(${inList})&email=is.null&website=is.null&order=state.asc,canonical_name.asc`,
+    )
+  } else {
+    rows = await get(
+      `gs_entities?select=id,canonical_name,state,abn,entity_type,is_community_controlled,lga_name,postcode,website,email,phone&is_community_controlled=eq.true&email=is.null&website=is.null${stateFilter}&limit=${limit}&order=canonical_name.asc`,
+    )
+  }
   console.log(`→ ${rows.length} candidates without email or website`)
   let written = 0, skipped = 0
   for (const row of rows) {

@@ -41,7 +41,7 @@ const __filename = fileURLToPath(import.meta.url)
 const REPO_ROOT = join(dirname(__filename), '..')
 const AUDIT_DIR = join(REPO_ROOT, 'wiki', 'output', 'contact-enrichment')
 
-const UA = 'ACT-contact-enrichment/1.0 (https://act.place — benjamin@act.place)'
+const UA = 'ACT-contact-enrichment/1.0 (+https://act.place; benjamin@act.place)'
 const REQUEST_DELAY_MS = 500 // 2 req/sec
 const FETCH_TIMEOUT_MS = 10000
 
@@ -118,7 +118,8 @@ function extractContacts(html, siteUrl) {
   const patternEmails = Array.from(html.matchAll(/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}/gi)).map((m) => m[0])
   const allEmails = [...new Set([...mailtoMatches, ...patternEmails])]
     .filter((e) => !/\.(png|jpg|jpeg|gif|webp|svg)$/i.test(e))
-    .filter((e) => !/example\.com|yourdomain|placeholder|noreply|donotreply|webmaster@/i.test(e))
+    .filter((e) => !/example\.com|yourdomain|placeholder|noreply|donotreply|webmaster@|user@domain|name@domain|@sentry|wixpress\.com|@sentry-next|@wix\.com|@squarespace|@godaddy/i.test(e))
+    .filter((e) => !/@oric\.gov\.au$|@acnc\.gov\.au$|@abr\.gov\.au$|@asic\.gov\.au$/i.test(e))
   // Prefer info@/contact@/admin@ over others
   const preferredPrefix = /^(info|contact|admin|reception|enquiries|hello|office)@/i
   allEmails.sort((a, b) => (preferredPrefix.test(a) ? -1 : 0) - (preferredPrefix.test(b) ? -1 : 0))

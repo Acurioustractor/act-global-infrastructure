@@ -174,29 +174,37 @@ function buildAcncIndex(csv) {
   const lines = csv.split(/\r?\n/).filter((l) => l.trim())
   if (!lines.length) { console.error('[fatal] ACNC CSV is empty'); process.exit(2) }
   const header = parseCsvLine(lines[0]).map((h) => h.toLowerCase().replace(/[^a-z0-9]+/g, '_'))
-  // Expect fields like: abn, charity_name, charity_address_email, charity_address_phone, website, address_line_1, etc.
-  const abnIdx = header.indexOf('abn')
-  const emailIdx = header.findIndex((h) => h.includes('email'))
-  const phoneIdx = header.findIndex((h) => h.includes('phone'))
-  const websiteIdx = header.findIndex((h) => h.includes('website'))
-  const addrIdx = header.findIndex((h) => h.includes('address') && !h.includes('email') && !h.includes('phone'))
-  const nameIdx = header.findIndex((h) => h.includes('charity') && h.includes('name'))
-  const statusIdx = header.findIndex((h) => h.includes('status') || h.includes('operating'))
-  if (abnIdx < 0) throw new Error(`ACNC CSV header missing ABN column. Headers: ${header.join(', ')}`)
+  // ACNC bulk export has: abn, charity_legal_name, charity_website,
+  // address_line_1/2/3, town_city, state, postcode, country.
+  // Note: ACNC does NOT publish email or phone in the bulk CSV (privacy);
+  // those are available on per-charity public-register pages only.
+  const col = (name) => header.indexOf(name)
+  const abnIdx = col('abn')
+  const nameIdx = col('charity_legal_name')
+  const websiteIdx = col('charity_website')
+  const addrLineIdx = col('address_line_1')
+  const cityIdx = col('town_city')
+  const stateIdx = col('state')
+  const postcodeIdx = col('postcode')
+  const sizeIdx = col('charity_size')
+  const regDateIdx = col('registration_date')
+  if (abnIdx < 0) throw new Error(`ACNC CSV header missing ABN. Headers start: ${header.slice(0, 10).join(', ')}`)
 
   const byAbn = new Map()
   for (let i = 1; i < lines.length; i++) {
     const f = parseCsvLine(lines[i])
     const abn = (f[abnIdx] || '').replace(/\D/g, '')
     if (!abn) continue
+    const addressParts = [f[addrLineIdx], f[cityIdx], f[stateIdx], f[postcodeIdx]].filter(Boolean)
     byAbn.set(abn, {
       abn,
       charity_name: f[nameIdx] || null,
-      email: emailIdx >= 0 ? (f[emailIdx] || null) : null,
-      phone: phoneIdx >= 0 ? (f[phoneIdx] || null) : null,
+      email: null, // Not in ACNC bulk export
+      phone: null, // Not in ACNC bulk export
       website: websiteIdx >= 0 ? (f[websiteIdx] || null) : null,
-      address: addrIdx >= 0 ? (f[addrIdx] || null) : null,
-      status: statusIdx >= 0 ? (f[statusIdx] || null) : null,
+      address: addressParts.join(', ') || null,
+      charity_size: sizeIdx >= 0 ? f[sizeIdx] : null,
+      registration_date: regDateIdx >= 0 ? f[regDateIdx] : null,
     })
   }
   return { byAbn, headerSample: header.slice(0, 20) }
@@ -317,7 +325,7 @@ async function main() {
     `# ACNC contact enrichment — ${new Date().toISOString()}`,
     '',
     `Mode: ${APPLY ? 'APPLY' : 'DRY-RUN'}`,
-    `ACNC source: ${CSV_PATH || CSV_URL}`,
+    `ACNC source: ${CSV_PATH || CSV_URL_OVERRIDE || 'cached / data.gov.au'}`,
     `ACNC index size: ${byAbn.size} registered charities`,
     `gs_entities rows considered: ${rows.length}`,
     '',
