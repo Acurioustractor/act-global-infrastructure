@@ -419,59 +419,62 @@
   <h2 class="text-2xl font-semibold mb-1">Communities map — where the method is already running</h2>
   <p class="text-sm text-stone-600 serif-italic mb-5">Four anchors confirmed today. Three to four more workshopped to final from the 50-candidate pool above. Every anchor is a relationship, not a slot.</p>
 
-  <div class="aus-map relative rounded-md" style="padding-bottom: 62%; background-image: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1000 620%22><path fill=%22%23d4c4a5%22 stroke=%22%238a7856%22 stroke-width=%222%22 d=%22M180,300 Q140,240 170,190 Q210,140 280,130 L380,110 Q480,95 560,130 Q640,150 720,200 L820,250 Q860,310 830,360 Q810,420 770,450 Q700,490 620,500 Q540,510 460,490 Q380,470 320,450 Q240,420 200,380 Q170,340 180,300 Z%22/></svg>'); background-size: cover; background-position: center;">
-    <!-- Approx relative positions -->
-    <div class="map-pin" style="left: 45%; top: 52%;" title="Oonchiumpa — Mparntwe (Alice Springs), NT">
-      <div class="dot" style="background: #4a6b3a"></div>
-      <div class="label">Oonchiumpa</div>
-    </div>
-    <div class="map-pin" style="left: 53%; top: 36%;" title="BG Fit — Mount Isa, QLD">
-      <div class="dot" style="background: #4a6b3a"></div>
-      <div class="label">BG Fit · Mt Isa</div>
-    </div>
-    <div class="map-pin" style="left: 44%; top: 30%;" title="Doomadgee — BG Fit satellite (500km)">
-      <div class="dot" style="background: #c89a3c"></div>
-      <div class="label">Doomadgee</div>
-    </div>
-    <div class="map-pin" style="left: 78%; top: 70%;" title="Mounty Yarns — Mt Druitt NSW">
-      <div class="dot" style="background: #4a6b3a"></div>
-      <div class="label">Mounty Yarns · Mt Druitt</div>
-    </div>
-    <div class="map-pin" style="left: 74%; top: 30%;" title="PICC — Palm Island QLD (selective per-story pending)">
-      <div class="dot" style="background: #c89a3c"></div>
-      <div class="label">PICC · Palm Is</div>
-    </div>
-    <div class="map-pin" style="left: 79%; top: 65%;" title="MMEIC — Minjerribah QLD (in formation)">
-      <div class="dot" style="background: #b7410e"></div>
-      <div class="label">MMEIC · Minjerribah</div>
-    </div>
-    <div class="map-pin" style="left: 49%; top: 44%;" title="Tennant Creek — NT (in development)">
-      <div class="dot" style="background: #b7410e"></div>
-      <div class="label">Tennant Ck</div>
-    </div>
-    <div class="map-pin" style="left: 74%; top: 74%;" title="ACT partner (Ngambri-Ngunnawal, selection Q1 2026)">
-      <div class="dot" style="background: #b7410e"></div>
-      <div class="label">ACT (Ngunnawal)</div>
-    </div>
-    <div class="map-pin" style="left: 68%; top: 88%;" title="Lutruwita (Tasmania partner, selection Q1)">
-      <div class="dot" style="background: #b7410e"></div>
-      <div class="label">Lutruwita</div>
-    </div>
-    <div class="map-pin" style="left: 18%; top: 56%;" title="WA partner (UWA criminology)">
-      <div class="dot" style="background: #b7410e"></div>
-      <div class="label">WA partner</div>
-    </div>
-    <div class="map-pin" style="left: 63%; top: 80%;" title="SA partner (selection Q1)">
-      <div class="dot" style="background: #b7410e"></div>
-      <div class="label">SA partner</div>
-    </div>
-  </div>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <div id="communities-map" style="height: 560px; border-radius: 8px; border: 1px solid var(--earth-soft); background: var(--cream-2);"></div>
 
   <div class="grid grid-cols-3 gap-3 mt-4 text-xs">
     <div class="flex items-center gap-2"><span class="inline-block w-3 h-3 rounded-full" style="background: #4a6b3a"></span>Active · stories flowing</div>
     <div class="flex items-center gap-2"><span class="inline-block w-3 h-3 rounded-full" style="background: #c89a3c"></span>In formation · relationship building</div>
     <div class="flex items-center gap-2"><span class="inline-block w-3 h-3 rounded-full" style="background: #b7410e"></span>Selection Q1 · TBC</div>
   </div>
+
+  <script>
+  (function(){
+    function initMap(){
+      if (typeof L === 'undefined') { setTimeout(initMap, 100); return; }
+      const map = L.map('communities-map', { scrollWheelZoom: false, zoomControl: true }).setView([-25.5, 134], 4);
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+        attribution: '© OpenStreetMap contributors · © CARTO',
+        subdomains: 'abcd', maxZoom: 19,
+      }).addTo(map);
+
+      const markers = [
+        { lat: -23.6980, lng: 133.8807, name: 'Oonchiumpa', place: 'Mparntwe (Alice Springs), NT', status: 'anchor', note: 'Active · 6 stories flowing' },
+        { lat: -20.7256, lng: 139.4927, name: 'BG Fit', place: 'Mount Isa, QLD', status: 'anchor', note: 'Active · 12 stories flowing · Tuesday gym + monthly bush camps' },
+        { lat: -17.9337, lng: 138.8127, name: 'Doomadgee', place: 'QLD · BG Fit satellite (500km)', status: 'forming', note: 'Remote outreach site (quarterly trips)' },
+        { lat: -33.7700, lng: 150.8178, name: 'Mounty Yarns', place: 'Mt Druitt, NSW', status: 'anchor', note: 'Active · 13 storytellers · CONTAINED mobile base camp' },
+        { lat: -18.7389, lng: 146.5833, name: 'PICC', place: 'Palm Island, QLD', status: 'anchor', note: '$29M turnover · 208 FTE · YOSS scaled 3×' },
+        { lat: -27.4833, lng: 153.4333, name: 'MMEIC', place: 'Minjerribah, QLD', status: 'anchor', note: 'Quandamooka Elders-in-Council · 32 years' },
+        { lat: -19.6500, lng: 134.1896, name: 'Tennant Creek', place: 'NT', status: 'tbc', note: 'Session 1 / 2 candidate' },
+        { lat: -35.2809, lng: 149.1300, name: 'ACT partner', place: 'Ngambri-Ngunnawal Country', status: 'tbc', note: 'Gugan Gulwan Youth · selection Session 1' },
+        { lat: -42.8821, lng: 147.3272, name: 'Lutruwita / TAS', place: 'Tasmania', status: 'tbc', note: 'ATSILS TAS · selection Session 1' },
+        { lat: -17.9700, lng: 122.2380, name: 'WA partner', place: 'Kimberley', status: 'tbc', note: 'Olabud Doogethu (Halls Creek) · selection Session 1' },
+        { lat: -31.9505, lng: 115.8605, name: 'WA metro option', place: 'Perth / Noongar Country', status: 'tbc', note: 'Dumbartung · alternative' },
+        { lat: -32.1299, lng: 133.6764, name: 'SA partner', place: 'Far West Coast SA', status: 'tbc', note: 'Scotdesco · selection Session 1' },
+        { lat: -37.8280, lng: 144.9750, name: 'VIC partner', place: 'Kulin Nation / Wurundjeri Country', status: 'tbc', note: 'Rumbalara · selection Session 1' },
+      ];
+      const colorFor = (s) => s === 'anchor' ? '#4a6b3a' : s === 'forming' ? '#c89a3c' : '#b7410e';
+      const bounds = [];
+      markers.forEach(m => {
+        const icon = L.divIcon({
+          className: 'three-circles-pin',
+          html: `<div style="position:relative;transform:translate(-50%,-100%);">
+                   <div style="width:14px;height:14px;border-radius:50%;background:${colorFor(m.status)};border:2px solid white;box-shadow:0 2px 6px rgba(0,0,0,.3);"></div>
+                   <div style="position:absolute;top:18px;left:50%;transform:translateX(-50%);white-space:nowrap;background:rgba(255,255,255,.92);border:1px solid rgba(0,0,0,.1);padding:2px 6px;border-radius:3px;font-size:11px;font-family:ui-sans-serif,system-ui,sans-serif;color:#1c1c1c;font-weight:500;">${m.name}</div>
+                 </div>`,
+          iconSize: [14,14], iconAnchor: [7,14],
+        });
+        L.marker([m.lat, m.lng], { icon }).addTo(map)
+          .bindPopup(`<div style="font-family:'Cormorant Garamond',serif;"><div style="font-weight:600;font-size:15px;">${m.name}</div><div style="font-size:12px;color:#666;margin-bottom:6px;">${m.place}</div><div style="font-size:12px;">${m.note}</div></div>`);
+        bounds.push([m.lat, m.lng]);
+      });
+      map.fitBounds(bounds, { padding: [40,40] });
+    }
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initMap); else initMap();
+  })();
+  </script>
 </section>
 
 <!-- What young people get -->
