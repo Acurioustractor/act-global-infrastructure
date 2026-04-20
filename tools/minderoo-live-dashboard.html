@@ -1232,10 +1232,32 @@
       }).join('');
     }
 
-    // Confirmed anchor cards
+    // Confirmed anchor cards — with Nest wellbeing + Catalyst system tags
     const anchors = Object.entries(t.statuses || {}).filter(([,v]) => v.status === 'confirmed_anchor');
     anchorCountEl.textContent = anchors.length;
+
+    // Per-anchor Nest wellbeing tags (COLI24 uses ARACY's 6-area framework)
+    const NEST = ['Valued, Loved & Safe', 'Material Basics', 'Healthy', 'Learning', 'Participating', 'Identity & Culture'];
+    // Per-anchor Early Years Catalyst systems (COLI24 references these 10)
+    const CATALYST = ['Health','Mental Health','Disability','Early Learning','Child Protection','Family Violence','Parenting + Family','Community Infrastructure','Housing','Social Security'];
+
+    // Map each anchor to which Nest areas + Catalyst systems it delivers on
+    const ANCHOR_TAGS = {
+      'Oonchiumpa Consultancy & Services':              { nest: [1,1,1,1,1,1], sys: ['Child Protection','Mental Health','Parenting + Family','Community Infrastructure'] },
+      'Palm Island Community Company Limited':          { nest: [1,1,1,1,1,1], sys: ['Child Protection','Health','Housing','Community Infrastructure','Mental Health'] },
+      'Minjerribah Moorgumpin (Elders-In-Council) Aboriginal Corporation': { nest: [1,0,1,1,1,1], sys: ['Community Infrastructure','Parenting + Family'] },
+      'Brodie Germaine Fitness Aboriginal Corporation': { nest: [1,0,1,0,1,1], sys: ['Health','Mental Health','Community Infrastructure'] },
+      'MOUNTY ABORIGINAL YOUTH & COMMUNITY SERVICES LTD':{ nest: [1,1,0,1,1,1], sys: ['Child Protection','Housing','Community Infrastructure','Parenting + Family'] },
+    };
+
     anchorCardsEl.innerHTML = anchors.map(([id, v]) => {
+      const tags = ANCHOR_TAGS[v.org_name] || { nest: [0,0,0,0,0,0], sys: [] };
+      const nestDots = NEST.map((n, i) =>
+        '<span title="' + n + (tags.nest[i] ? ' · delivered' : ' · not yet') + '" class="inline-block w-2.5 h-2.5 rounded-full mr-1" style="background:' + (tags.nest[i] ? '#4a6b3a' : '#e5e5e5') + '"></span>'
+      ).join('');
+      const sysChips = tags.sys.map(s =>
+        '<span class="inline-block text-[9px] px-1.5 py-0.5 rounded bg-stone-100 text-stone-700 mr-1 mb-1">' + s + '</span>'
+      ).join('');
       return '<div class="bg-[var(--cream)] border border-stone-200 rounded p-3">' +
         '<div class="flex items-baseline justify-between">' +
           '<div class="font-semibold text-sm">' + v.org_name + '</div>' +
@@ -1244,6 +1266,12 @@
         '<div class="mt-2 text-[11px] text-stone-700"><strong>Approvers:</strong> ' + (v.approvers || []).join(', ') + '</div>' +
         '<div class="text-[11px] text-stone-600 mt-1"><strong>Confirmed:</strong> ' + (v.confirmed_at || 'pending') + ' · <strong>Mode:</strong> ' + (v.consent_mode || '—') + '</div>' +
         (v.notes ? '<div class="text-[11px] text-stone-500 italic mt-2">' + v.notes + '</div>' : '') +
+        '<div class="mt-3 pt-2 border-t border-stone-200">' +
+          '<div class="text-[9px] uppercase tracking-widest text-stone-500 mb-1" title="The Nest — ARACY wellbeing framework used by Minderoo Foundation">Nest · wellbeing areas</div>' +
+          '<div>' + nestDots + '</div>' +
+          '<div class="text-[9px] uppercase tracking-widest text-stone-500 mt-2 mb-1" title="Early Years Catalyst systems landscape atlas — Minderoo framework">Catalyst · systems touched</div>' +
+          '<div class="flex flex-wrap">' + sysChips + '</div>' +
+        '</div>' +
       '</div>';
     }).join('');
   })();
