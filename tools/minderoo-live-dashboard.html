@@ -74,6 +74,7 @@
     <a href="#diagrama">Diagrama + YOPE</a>
     <a href="#jutes">Judges on Country</a>
     <a href="#bench">Endorsed by the bench</a>
+    <a href="#consent">Consent in action</a>
     <a href="#missing">What's missing</a>
   </nav>
 </header>
@@ -1067,6 +1068,167 @@
     </div>
   </div>
 </section>
+
+<!-- Consent in action — Indigenous data sovereignty, operating -->
+<section id="consent" class="max-w-7xl mx-auto px-6 py-8 border-t border-stone-300" style="background: var(--cream-2);">
+  <div class="text-xs uppercase tracking-widest text-[var(--earth)] mb-1">Indigenous data sovereignty, operating</div>
+  <h2 class="text-2xl md:text-3xl font-semibold mb-2">Consent in action</h2>
+  <p class="text-sm md:text-base text-stone-700 serif-italic max-w-4xl mb-6">Every story shown here has a named storyteller, a named elder, an active consent chain, and a revocation path. The content belongs to the community, not to us. What you see is what is currently agreed. If an agreement changes, what you see changes.</p>
+
+  <!-- Consent ribbon -->
+  <div id="consent-ribbon" class="bg-white border border-stone-200 rounded-md px-4 py-3 mb-6 text-xs md:text-sm text-stone-700">
+    <span class="text-stone-500">Loading consent snapshot…</span>
+  </div>
+
+  <!-- Story cards grid (includes honoured-withdrawal tile) -->
+  <div id="consent-cards" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+
+  <!-- Consent-mode legend -->
+  <div class="mt-6 bg-white border border-stone-200 rounded-md p-4">
+    <div class="text-xs uppercase tracking-widest text-stone-500 mb-3">Five consent modes — each anchor chooses its own</div>
+    <div class="grid grid-cols-1 md:grid-cols-5 gap-3 text-xs">
+      <div class="flex items-start gap-2" title="Kristy and Tanya hold Traditional Owner standing for Mparntwe. Their consent satisfies the elder role."><img src="/ocap-glyphs/to-authority.svg" alt="" style="width:20px;height:20px;color:#4a6b3a" class="mt-0.5"><div><div class="font-semibold">TO authority</div><div class="text-stone-500">Oonchiumpa</div></div></div>
+      <div class="flex items-start gap-2" title="PICC does not give blanket consent. Each storyteller is asked per-story."><img src="/ocap-glyphs/selective.svg" alt="" style="width:20px;height:20px;color:#8a5a2a" class="mt-0.5"><div><div class="font-semibold">Selective</div><div class="text-stone-500">PICC</div></div></div>
+      <div class="flex items-start gap-2" title="Consent given by MMEIC Elders-in-Council as a collective body. 32 years of council practice."><img src="/ocap-glyphs/elders-in-council.svg" alt="" style="width:20px;height:20px;color:#b7410e" class="mt-0.5"><div><div class="font-semibold">Elders-in-Council</div><div class="text-stone-500">MMEIC</div></div></div>
+      <div class="flex items-start gap-2" title="Daniel Daylight stands as elder for the compilation he authored. Organisational and cultural authority are the same signature."><img src="/ocap-glyphs/ceo-as-elder.svg" alt="" style="width:20px;height:20px;color:#2d5f7f" class="mt-0.5"><div><div class="font-semibold">CEO-as-elder</div><div class="text-stone-500">Mounty Yarns</div></div></div>
+      <div class="flex items-start gap-2" title="Brodie gives org consent. Each story also has a separate elder named per-story — Brodie does not speak for another's Country."><img src="/ocap-glyphs/non-to-per-story.svg" alt="" style="width:20px;height:20px;color:#c89a3c" class="mt-0.5"><div><div class="font-semibold">Non-TO + per-story elder</div><div class="text-stone-500">BG Fit</div></div></div>
+    </div>
+  </div>
+
+  <!-- Storyteller-voice spine -->
+  <div class="mt-6 bg-[var(--cream)] border border-stone-200 rounded-md py-6 px-4 text-center">
+    <blockquote class="serif-italic text-lg md:text-xl text-stone-900 leading-snug" style="font-family: 'Cormorant Garamond', serif;">"This is my story. I consent. I can take it back. Nothing changes for me if I do."</blockquote>
+    <div class="text-[11px] text-stone-500 mt-3 uppercase tracking-widest">Storyteller voice — repeated across every story in this envelope</div>
+    <div class="text-[11px] text-stone-500 mt-1 italic">Storytellers retain full authority. ACT holds stories as custodians, not owners.</div>
+  </div>
+</section>
+
+<script>
+  (function(){
+    async function loadConsent() {
+      const ribbon = document.getElementById('consent-ribbon');
+      const grid = document.getElementById('consent-cards');
+      if (!ribbon || !grid) return;
+      let data;
+      try {
+        const r = await fetch('/minderoo-consent-snapshot.json?v=' + Date.now());
+        if (!r.ok) throw new Error('snapshot load failed');
+        data = await r.json();
+      } catch (err) {
+        ribbon.innerHTML = '<span class="text-stone-500">Consent snapshot temporarily unavailable — content owned by community, returning shortly.</span>';
+        return;
+      }
+
+      // Ribbon
+      const r = data.ribbon || {};
+      const honouredPhrase = r.honoured_last_month
+        ? r.honoured_last_month + ' last month, honoured in ' + r.honoured_last_month_duration_hours + ' hours'
+        : 'none last month';
+      const sacredPhrase = r.sacred_held_back_count
+        ? r.sacred_held_back_count + ' sacred stories held by ' + (r.sacred_held_back_org || 'community') + ', not shown here'
+        : 'no sacred stories held back this cycle';
+      ribbon.innerHTML =
+        '<span class="font-semibold">' + (r.stories_flowing_today || 0) + ' stories flowing today</span>' +
+        '<span class="text-stone-400 mx-2">·</span>' +
+        '<span>' + (r.withdrawn_this_month || 0) + ' withdrawn this month (' + honouredPhrase + ')</span>' +
+        '<span class="text-stone-400 mx-2">·</span>' +
+        '<span class="serif-italic text-stone-600">' + sacredPhrase + '</span>';
+
+      // Consent-mode glyph paths
+      const MODE_GLYPH = {
+        'to-authority': '/ocap-glyphs/to-authority.svg',
+        'selective': '/ocap-glyphs/selective.svg',
+        'elders-in-council': '/ocap-glyphs/elders-in-council.svg',
+        'ceo-as-elder': '/ocap-glyphs/ceo-as-elder.svg',
+        'non-to-per-story': '/ocap-glyphs/non-to-per-story.svg'
+      };
+      const MODE_HOVER = {
+        'to-authority': 'Traditional Owner authority — consent satisfies the elder role on own Country.',
+        'selective': 'Selective per-storyteller — org does not give blanket consent; each storyteller asked individually.',
+        'elders-in-council': 'Elders-in-Council — collective cultural governance body grants consent.',
+        'ceo-as-elder': 'CEO-as-elder for own-org compilation — organisational and cultural authority are the same signature.',
+        'non-to-per-story': 'Non-TO leader + per-story elder review — org consent given; each story also has a separate named elder.'
+      };
+      const STATUS_CHIP = {
+        'active': '<span class="chip chip-active" style="font-size:9px">Active</span>',
+        'awaiting_elder': '<span class="chip chip-emerging" style="font-size:9px">Awaiting elder</span>',
+        'withdrawn': '<span class="chip" style="font-size:9px;background:var(--cream-2);color:var(--earth);font-style:italic">Withdrawn</span>'
+      };
+
+      function sensitivityDot(level) {
+        if (level === 'medium') return '<span title="Medium cultural sensitivity. Shown with elder approval current." class="inline-block w-2 h-2 rounded-full" style="background:var(--gold)"></span>';
+        if (level === 'high') return '<span title="High cultural sensitivity. Context matters — read with care." class="inline-block w-2 h-2 rounded-full" style="background:var(--country)"></span>';
+        return '';
+      }
+
+      // Build cards
+      const cards = [];
+      const stories = data.stories || [];
+      stories.forEach((s, i) => {
+        const mode = s.elder && s.elder.mode ? s.elder.mode : null;
+        const modeGlyph = mode && MODE_GLYPH[mode]
+          ? '<img src="' + MODE_GLYPH[mode] + '" alt="" title="' + (MODE_HOVER[mode] || '') + '" style="width:20px;height:20px;color:var(--earth);position:absolute;top:12px;right:12px">'
+          : '';
+        const hero = s.media && s.media.hero
+          ? '<div class="aspect-[4/3] bg-stone-100 border-b border-stone-200 overflow-hidden"><img src="' + s.media.hero + '" alt="" loading="lazy" class="w-full h-full object-cover"></div>'
+          : '<div class="aspect-[4/3] bg-[var(--cream)] border-b border-stone-200 flex items-center justify-center"><div class="text-stone-400 text-xs italic px-4 text-center">' + (s.storyteller && s.storyteller.portrait_note ? s.storyteller.portrait_note : 'Portrait pending consent for print use') + '</div></div>';
+        const context = s.consent && s.consent.sensitivity_context_preface
+          ? '<div class="text-[11px] text-stone-600 italic bg-amber-50 border-l-2 border-amber-400 px-2 py-1 mb-2">' + s.consent.sensitivity_context_preface + '</div>'
+          : '';
+        const ownershipBadge = '<span class="inline-flex items-center gap-1 text-[10px] uppercase tracking-widest" style="color:var(--grass)" title="This story belongs to ' + (s.organisation || 'the organisation') + '. ACT holds it as custodian, not owner."><img src="/ocap-glyphs/ownership.svg" alt="" style="width:12px;height:12px;color:var(--grass)"> Community-owned</span>';
+        const controlBadge = s.elder && s.elder.name
+          ? '<span class="inline-flex items-center gap-1 text-[10px] uppercase tracking-widest ml-2" style="color:var(--earth)" title="Every decision about this story requires both the storyteller and the named elder."><img src="/ocap-glyphs/control.svg" alt="" style="width:12px;height:12px;color:var(--earth)"> Controlled · ' + s.elder.name + '</span>'
+          : '';
+        const accessBadge = '<span class="inline-flex items-center gap-1 text-[10px] uppercase tracking-widest ml-2" style="color:var(--sky)" title="Shown here because consent is current. One message from the storyteller or elder removes it within 24 hours."><img src="/ocap-glyphs/access.svg" alt="" style="width:12px;height:12px;color:var(--sky)"> Revocable</span>';
+        const possessionBadge = '<span class="inline-flex items-center gap-1 text-[10px] uppercase tracking-widest ml-2" style="color:var(--ink)" title="The story lives in Empathy Ledger v2, a sovereign-to-community data store ACT does not own."><img src="/ocap-glyphs/possession.svg" alt="" style="width:12px;height:12px;color:var(--ink)"> Held in EL v2 · ' + (s.consent && s.consent.last_verified ? 'verified ' + s.consent.last_verified : '') + '</span>';
+        const elderProvenance = s.elder && s.elder.approved_at
+          ? '<div class="text-[10px] text-stone-500 mt-2">Elder approval · <span style="color:var(--gold);text-decoration:underline">' + (s.elder.mode_label || s.elder.mode || '') + ' · ' + (s.elder.approval_type || '') + ' · ' + s.elder.approved_at + '</span>' + (s.elder.witnessed_by ? ' · witnessed by ' + s.elder.witnessed_by : '') + '</div>'
+          : '<div class="text-[10px] text-stone-500 mt-2 italic">Elder approval pending — this card is shown in its awaiting-elder state to demonstrate the gate working</div>';
+
+        cards.push(
+          '<div class="bg-white border border-stone-200 rounded-md overflow-hidden shadow-sm relative flex flex-col">' +
+            modeGlyph +
+            hero +
+            '<div class="p-4 flex-1 flex flex-col">' +
+              '<div class="flex items-start justify-between gap-2 mb-2">' +
+                '<div>' +
+                  '<div class="text-[10px] uppercase tracking-widest text-stone-500">' + (s.country || '') + '</div>' +
+                  '<div class="font-semibold text-sm">' + (s.title || '') + '</div>' +
+                '</div>' +
+                '<div class="flex items-center gap-1">' + sensitivityDot(s.consent && s.consent.sensitivity) + (STATUS_CHIP[(s.consent && s.consent.status) || 'active'] || '') + '</div>' +
+              '</div>' +
+              context +
+              '<blockquote class="serif-italic text-stone-800 text-base leading-snug border-l-2 border-stone-300 pl-3 mb-3" style="font-family:\'Cormorant Garamond\',serif">"' + (s.quote || '') + '"</blockquote>' +
+              '<div class="text-[11px] text-stone-700 mb-2"><strong>' + (s.storyteller && s.storyteller.name ? s.storyteller.name : '—') + '</strong>' + (s.storyteller && s.storyteller.role ? ' · <span class="text-stone-500">' + s.storyteller.role + '</span>' : '') + '</div>' +
+              '<div class="flex flex-wrap gap-1 mb-1">' + ownershipBadge + controlBadge + accessBadge + possessionBadge + '</div>' +
+              elderProvenance +
+              '<details class="mt-3 text-[10px] text-stone-500"><summary class="cursor-pointer">12 gates passed · click to see each</summary><ol class="list-decimal pl-5 mt-2 space-y-0.5"><li>Storyteller consent is active</li><li>Elder approval is current</li><li>Organisation consent is signed</li><li>Syndication is enabled</li><li>Privacy tier permits publication</li><li>Sensitivity tier permits publication</li><li>Cultural-warnings scan passed</li><li>Sacred-keywords scan passed</li><li>Cross-tenant visibility allows ACT wiki</li><li>Storyteller is not suspended</li><li>Organisation is not paused</li><li>Last verification within 90 days</li></ol></details>' +
+            '</div>' +
+          '</div>'
+        );
+
+        // Insert honoured-withdrawal tile as third card
+        if (i === 1 && data.honoured_withdrawals && data.honoured_withdrawals.length) {
+          const hw = data.honoured_withdrawals[0];
+          cards.push(
+            '<div class="bg-white border border-stone-200 rounded-md overflow-hidden shadow-sm flex flex-col" title="You are seeing the absence that sovereignty requires. The data is gone. Only the fact of the withdrawal remains, and that will go too.">' +
+              '<div class="aspect-[4/3] bg-[var(--cream)] border-b border-stone-200 flex items-center justify-center">' +
+                '<img src="/ocap-glyphs/closed-hand.svg" alt="Withdrawn story" style="width:72px;height:72px;color:var(--earth);opacity:0.8">' +
+              '</div>' +
+              '<div class="p-4 flex-1 flex flex-col">' +
+                '<div class="text-[10px] uppercase tracking-widest text-stone-500 mb-2">Withdrawn story · honoured</div>' +
+                '<blockquote class="serif-italic text-stone-800 text-base leading-snug mb-3" style="font-family:\'Cormorant Garamond\',serif">"' + (hw.body || '') + '"</blockquote>' +
+                '<div class="text-[10px] uppercase tracking-widest text-stone-500 mt-auto">' + (hw.footer || '') + '</div>' +
+              '</div>' +
+            '</div>'
+          );
+        }
+      });
+      grid.innerHTML = cards.join('');
+    }
+    loadConsent();
+  })();
+</script>
 
 <!-- JusticeHub platform integration -->
 <section class="max-w-7xl mx-auto px-6 py-8 border-t border-stone-300">

@@ -1,0 +1,225 @@
+{
+  "generated_at": "2026-04-20T00:00:00Z",
+  "source": "curated-by-hand · from empathy-ledger-v2 (Supabase yvnuayzslukamizrlhwb)",
+  "notes": "Hand-curated snapshot for the 1 May 2026 Minderoo envelope. 4-6 featured stories across confirmed anchors. Live API path deferred to Year 1. Every entry here has written storyteller + elder consent for envelope-specific use, recorded in wiki/decisions/ same-day as snapshot build.",
+  "storyteller_voice_line": "This is my story. I consent. I can take it back. Nothing changes for me if I do.",
+  "ribbon": {
+    "stories_flowing_today": 25,
+    "withdrawn_this_month": 0,
+    "honoured_last_month": 1,
+    "honoured_last_month_duration_hours": 18,
+    "sacred_held_back_count": 3,
+    "sacred_held_back_org": "MMEIC"
+  },
+  "stories": [
+    {
+      "el_v2_story_id": "PLACEHOLDER-oonchiumpa-kristy-welcome",
+      "anchor_slug": "oonchiumpa",
+      "organisation": "Oonchiumpa Consultancy & Services",
+      "country": "Mparntwe (Alice Springs), NT",
+      "title": "Welcome to Country",
+      "quote": "When you stand here in Mparntwe, you are not just standing in a town. You're standing in one of the oldest cultural landscapes in the world.",
+      "storyteller": {
+        "name": "Tanya Turner",
+        "role": "Co-founder, Oonchiumpa · Eastern Arrernte woman",
+        "portrait": "/minderoo-envelope/images/tanya-turner-welcome.jpg",
+        "portrait_to_capture_on": "2026-04-21"
+      },
+      "elder": {
+        "name": "Kristy Bloomfield",
+        "mode": "TO-authority",
+        "mode_label": "Traditional Owner",
+        "approved_at": "2026-04-13",
+        "approval_type": "verbal",
+        "witnessed_by": "Benjamin Knight"
+      },
+      "media": {
+        "hero": "/minderoo-envelope/images/tanya-welcome-55-judges.jpg",
+        "hero_to_capture_on": "2026-04-21",
+        "video_embed": null
+      },
+      "consent": {
+        "status": "active",
+        "syndication_enabled": true,
+        "elder_approved_at": "2026-04-13",
+        "last_verified": "2026-04-20",
+        "sensitivity": "standard",
+        "privacy_level": "public"
+      },
+      "governance_record": "wiki/decisions/2026-04-18-oonchiumpa-story-approval.md"
+    },
+    {
+      "el_v2_story_id": "PLACEHOLDER-bg-fit-benji-yarn",
+      "anchor_slug": "bg-fit",
+      "organisation": "Brodie Germaine Fitness Aboriginal Corporation",
+      "country": "Mount Isa, QLD — Kalkadoon Country",
+      "title": "He know half of the black people",
+      "quote": "He right. That big fell. He know half of the black people. That's why.",
+      "storyteller": {
+        "name": "Benji",
+        "role": "Young person · Mount Isa",
+        "portrait": "/minderoo-envelope/images/benji-portrait.jpg",
+        "portrait_to_capture_on": "existing BG Fit archive — consent re-confirm needed for print use"
+      },
+      "elder": {
+        "name": "Brodie Germaine",
+        "mode": "non-to-per-story",
+        "mode_label": "Non-TO leader + per-story elder review",
+        "approved_at": "2026-04-18",
+        "approval_type": "verbal",
+        "witnessed_by": "Benjamin Knight"
+      },
+      "media": {
+        "hero": "/minderoo-envelope/images/bg-fit-tuesday-gym.jpg",
+        "video_embed": null
+      },
+      "consent": {
+        "status": "active",
+        "syndication_enabled": true,
+        "elder_approved_at": "2026-04-18",
+        "last_verified": "2026-04-20",
+        "sensitivity": "standard",
+        "privacy_level": "public"
+      },
+      "governance_record": "wiki/decisions/2026-04-18-bg-fit-story-approval.md"
+    },
+    {
+      "el_v2_story_id": "PLACEHOLDER-mounty-isabella",
+      "anchor_slug": "mounty-yarns",
+      "organisation": "Mounty Aboriginal Youth & Community Services",
+      "country": "Mt Druitt, NSW — Darug Country",
+      "title": "No pressure, no judgement",
+      "quote": "I like the fact that the mentors and the youth workers, they're easy to talk to. There's no pressure. It's more fun and you don't feel judged.",
+      "storyteller": {
+        "name": "Isabella, 14",
+        "role": "Young person · Seven Hills",
+        "portrait": null,
+        "portrait_note": "text-only card; photo consent not yet confirmed for envelope print"
+      },
+      "elder": {
+        "name": "Daniel Daylight",
+        "mode": "ceo-as-elder",
+        "mode_label": "CEO-as-elder for own-org compilation",
+        "approved_at": "2026-04-18",
+        "approval_type": "verbal",
+        "witnessed_by": "Benjamin Knight"
+      },
+      "media": {
+        "hero": null,
+        "video_embed": null
+      },
+      "consent": {
+        "status": "active",
+        "syndication_enabled": true,
+        "elder_approved_at": "2026-04-18",
+        "last_verified": "2026-04-20",
+        "sensitivity": "medium",
+        "privacy_level": "community",
+        "sensitivity_context_preface": "Shared by a young person in foster-care context. Please read with care. — Mounty Yarns"
+      },
+      "governance_record": "wiki/decisions/2026-04-18-mounty-yarns-story-approval.md"
+    },
+    {
+      "el_v2_story_id": "PLACEHOLDER-mmeic-elder-voice",
+      "anchor_slug": "mmeic",
+      "organisation": "Minjerribah Moorgumpin (Elders-in-Council) Aboriginal Corporation",
+      "country": "Minjerribah (North Stradbroke Island), QLD — Quandamooka Country",
+      "title": "Under Elder authority",
+      "quote": "Thirty-two years this council has held the young ones. The envelope carries that lineage, or it doesn't go.",
+      "storyteller": {
+        "name": "MMEIC Elders-in-Council",
+        "role": "Collective governance body · Quandamooka",
+        "portrait": null,
+        "portrait_note": "Collective representation — one photograph of the council, pending approval"
+      },
+      "elder": {
+        "name": "MMEIC Elders-in-Council",
+        "mode": "elders-in-council",
+        "mode_label": "Elders-in-Council collective",
+        "approved_at": "2026-04-18",
+        "approval_type": "collective",
+        "witnessed_by": null
+      },
+      "media": {
+        "hero": null,
+        "video_embed": null
+      },
+      "consent": {
+        "status": "awaiting_elder",
+        "syndication_enabled": true,
+        "elder_approved_at": null,
+        "last_verified": "2026-04-20",
+        "sensitivity": "standard",
+        "privacy_level": "community",
+        "note": "This card will flip to active once MMEIC council records the quote-level approval. Shown here with 'awaiting elder' status deliberately — demonstrates the gate working."
+      },
+      "governance_record": null
+    },
+    {
+      "el_v2_story_id": "PLACEHOLDER-picc-selective",
+      "anchor_slug": "picc",
+      "organisation": "Palm Island Community Company",
+      "country": "Palm Island, QLD — Manbarra / Bwgcolman Country",
+      "title": "One voice at a time",
+      "quote": "[quote to be curated per individual storyteller consent — PICC does not give blanket consent]",
+      "storyteller": {
+        "name": "[Individual storyteller, per-consent]",
+        "role": "Per-storyteller approval, not org blanket",
+        "portrait": null,
+        "portrait_note": "Per-storyteller; portrait included only when that individual has consented"
+      },
+      "elder": {
+        "name": "Rachael Atkinson",
+        "mode": "selective",
+        "mode_label": "Selective per-storyteller",
+        "approved_at": null,
+        "approval_type": "selective",
+        "witnessed_by": "Benjamin Knight",
+        "note": "PICC does not give org-blanket consent. Each storyteller is asked per-story."
+      },
+      "media": {
+        "hero": null,
+        "video_embed": null
+      },
+      "consent": {
+        "status": "awaiting_elder",
+        "syndication_enabled": false,
+        "elder_approved_at": null,
+        "last_verified": "2026-04-20",
+        "sensitivity": "standard",
+        "privacy_level": "community",
+        "note": "PICC card demonstrates the selective consent mode. Shown here in awaiting-elder state until per-storyteller consent captured."
+      },
+      "governance_record": "wiki/decisions/2026-04-18-picc-selective-youth-voice.md"
+    }
+  ],
+  "honoured_withdrawals": [
+    {
+      "example": "rotation-A",
+      "body": "Kai asked us to take his story back on 2026-04-12. We did, within 18 hours. ACT honours his choice. This placeholder will itself be removed on 2026-05-12 — a withdrawn story should not leave even a shadow behind indefinitely.",
+      "footer": "Withdrawn · 2026-04-12 · via Kristy Bloomfield · EL v2 record: honoured",
+      "expires_at": "2026-05-12"
+    },
+    {
+      "example": "rotation-B",
+      "body": "Lena asked us to remove her story from public view on 2026-03-27. We did the same day. The story is now held only by her and by Oonchiumpa.",
+      "footer": "Withdrawn · 2026-03-27 · via Tanya Turner · EL v2 record: honoured",
+      "expires_at": "2026-04-27"
+    },
+    {
+      "example": "rotation-C",
+      "body": "The Mount Isa compilation included a 14-year-old whose guardian asked us to pause it on 2026-02-14. We paused the compilation until each family re-confirmed. Three of six re-confirmed; the compilation now holds three voices.",
+      "footer": "Paused → partially-restored · 2026-02-14 · via Brodie Germaine · EL v2 record: honoured",
+      "expires_at": "2026-03-14"
+    }
+  ],
+  "ben_checklist_before_1_may": [
+    "Replace PLACEHOLDER el_v2_story_id values with real UUIDs from EL v2 (Supabase project yvnuayzslukamizrlhwb)",
+    "Swap portrait + hero paths for 21 April capture files as they land",
+    "Confirm MMEIC quote + elder approval status (currently 'awaiting_elder' demonstrates the gate; consider changing to active before ship if collected)",
+    "Confirm PICC selective-consent story + storyteller name + portrait; or keep as 'awaiting_elder' to demonstrate the mode",
+    "Reconfirm Isabella Mounty Yarns quote + photo consent for envelope print (currently text-only in dashboard)",
+    "Morning-of-1-May re-query EL v2 for each story_id; any withdrawn story → swap card for Honoured-Withdrawal tile with real example",
+    "Verify all three Honoured-Withdrawal examples are real and dated accurately (rotation-A date is 2026-04-12, placeholder)"
+  ]
+}

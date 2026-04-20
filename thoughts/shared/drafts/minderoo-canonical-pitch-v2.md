@@ -179,6 +179,58 @@ Minderoo's $2.9M, spent on the method already centred by the Australian judiciar
 
 ---
 
+## Page 4c — Consent in action
+
+**Indigenous data sovereignty, operating.**
+
+Every story in this envelope — and every story on the live dashboard — carries a named storyteller, a named elder, an active consent chain, and a revocation path. The content belongs to the community, not to us. What you see is what is currently agreed. If an agreement changes, what you see changes.
+
+### The four OCAP principles, made visible on each story card
+
+- **Ownership** — the story belongs to the organisation. ACT holds it as custodian, not owner.
+- **Control** — every decision (edit, syndicate, withdraw) requires both the storyteller and the named elder.
+- **Access** — the story is shown because consent is current. One message from storyteller or elder removes it within 24 hours.
+- **Possession** — the story lives in Empathy Ledger v2, a sovereign-to-community data store ACT does not own.
+
+### Five consent modes, one per anchor
+
+Each anchor community has chosen its own consent mode. The dashboard renders a small glyph on each card naming which mode applies:
+
+- **Traditional Owner authority** — Oonchiumpa. Kristy and Tanya hold TO standing for Mparntwe; their consent satisfies the elder role. Under the authority of Aunty Bev and Uncle Terry.
+- **Selective per-storyteller** — PICC. No blanket consent. Each storyteller is asked per-story, and each answer is recorded individually.
+- **Elders-in-Council** — MMEIC. Consent is given by the collective body, not by a single individual. 32 years of council practice.
+- **CEO-as-elder for own-org compilation** — Mounty Yarns. Daniel Daylight stands as elder for the compilation he authored.
+- **Non-TO leader + per-story elder review** — BG Fit. Brodie Germaine gives organisational consent; each story also names a separate elder.
+
+### Sensitivity is calibrated. Silence is a feature.
+
+- **Standard** stories flow normally.
+- **Medium** stories carry a small marker and request context-reading.
+- **High** stories require cultural context before sharing.
+- **Sacred** stories never appear here and will never appear here. The envelope does not depend on them.
+
+### The withdrawal that is also proof
+
+On the dashboard, between the active story cards, sits a tile with no photograph. It says:
+
+> *"Kai asked us to take his story back on 2026-04-12. We did, within 18 hours. ACT honours his choice. This placeholder will itself be removed on 2026-05-12 — a withdrawn story should not leave even a shadow behind indefinitely."*
+
+That tile is there on purpose. It proves the mechanism by using it. The data is gone; the fact of the withdrawal remains; that fact will also go.
+
+### The storyteller voice, spine of the envelope
+
+> *"This is my story. I consent. I can take it back. Nothing changes for me if I do."*
+
+Repeated across the envelope. It is the rule every other sentence must survive.
+
+### Why this is here (for Minderoo)
+
+This page is not a governance appendix. It is the envelope's proof that *the Three Circles is a cultural foundation, not a data product.* Every page in the booklet that cites a storyteller has their name, their elder, and their current consent status behind it. Every photograph is present because someone said yes, and is removable because they can say otherwise tomorrow. Indigenous data sovereignty is not a claim this envelope makes. It is the mechanism this envelope runs on.
+
+The 12-gate OCAP chain inside Empathy Ledger v2 enforces this operationally. The live dashboard at the URL on the back cover makes it visible. Minderoo's $2.9M funds the partnership infrastructure that lets this machinery keep running for three years — so the community-owned corpus compounds, and the revocation rights compound with it.
+
+---
+
 ## Page 5 — How this scales across Australia
 
 Five anchors today. The method is not five programs. It is one method practised in five places, each in its own language, each on its own Country.
