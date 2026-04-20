@@ -87,6 +87,8 @@ consent_basis:
 - Ramahyuck District Aboriginal Corporation · Gippsland · broad community services · *reception@ramahyuck.org · (03) 5143 1644*
 - Victorian Aboriginal Health Service (VAHS) · Yarra · 52 years · top score 0.743 · *info@vahs.org.au*
 - Koorie Youth Council · youth-led statewide · *admin@koorieyouth.org.au · (03) 9267 3724*
+- **Dja Dja Wurrung Clans Aboriginal Corporation** · Central VIC Traditional Owner RAP · *info@djadjawurrung.com.au · (03) 5444 2888*
+- Taungurung Land and Waters Council · Central VIC RAP (direct contact via TO office)
 
 ### WA (0 confirmed; one seat)
 
@@ -99,6 +101,8 @@ consent_basis:
 - Dumbartung Aboriginal Corporation · South Perth · 38 years · Indigenous-led · *kyana1@dumbartung.org.au · (08) 9451 4977*
 - Yorgum Healing Services Aboriginal Corporation · Perth metro · 32 years · *lsellers@yorgum.org.au · (08) 9218 9477*
 - Geraldton Sporting Aboriginal Corporation · Mid-West WA · *(08) 9964 5113*
+- **Winun Ngari Aboriginal Corporation** · Derby · Kimberley community anchor · *wnacreception@winunngari.org.au · (08) 9191 1877*
+- Wirraka Maya Health Service · Port Hedland · Pilbara health spine · *admin@wmhsac.com · (08) 9172 0410*
 
 ### SA (0 confirmed; one seat)
 
@@ -120,6 +124,7 @@ consent_basis:
 - Circular Head Aboriginal Corporation · North-West TAS · *(see research brief)*
 - First Tasmanians Aboriginal Corporation (FTAC) · *(see research brief — ABN 89371379452)*
 - Ballawinne Aboriginal Corporation · *(see research brief — ABN 55131350525)*
+- **Mara Melaythenner Aboriginal Corporation** ("Heart of Country") · conceptual fit for Three Circles
 
 ### ACT (0 confirmed; one seat)
 
@@ -127,6 +132,22 @@ consent_basis:
 · *Contact:* aliesha@gugan-gulwan.com.au · (02) 6296 8900
 
 **Decision needed in Session 1:** does ACT territory get its own anchor seat (reaches 8 total) or does its young people get served via Mounty Yarns' NSW network (stays at 7)?
+
+---
+
+## Page 2b — Newly surfaced candidates from 4,729-org review (2026-04-20)
+
+Evidence-surfaced after today's data-quality sweep + ORIC bulk ingest. Every name below is a Large-tier ACCO with public contact on file. Not on page 2 above because they weren't in the original Session 1 short-form, but worth Minderoo's attention as relationship-depth alternates.
+
+### NSW deepening (beyond Mounty Yarns)
+- **Kinchela Boys Home Aboriginal Corporation** · Bowraville · Stolen Generations survivor-led, powerful symbolic weight · *office@kbhac.org.au · (02) 9051 1690*
+- **Tranby Aboriginal Co-operative Limited** · Glebe · 65+ years, Koori education pioneer · *b.russon@tranby.edu.au*
+
+### NT deepening (alongside Oonchiumpa)
+- **Waltja Tjutangku Palyapayi** · Central Desert women-led · anchor-grade peer of Oonchiumpa · *reception1@waltja.org.au · (08) 8953 4488*
+- **Akeyulerre Aboriginal Corporation** · Mparntwe healing centre (Oonchiumpa's near-peer) · *admin@akeyulerre.org.au*
+
+*These can sit in the envelope as "relationship-depth alternates" — ACT has not approached them, but each is reachable today and could accelerate if Minderoo prefers a broader geographic spread or different anchor archetype per state.*
 
 ---
 
