@@ -30,7 +30,7 @@ consent_basis:
 **Country:** Arrernte, Alyawarra, Luritja, Warlpiri (7 language groups served)
 **Leadership:** **Kristy Bloomfield** + **Tanya Turner** (co-directors). **Aunty Bev** + **Uncle Terry** (elder authority). **Fred Campbell** (youth case worker).
 **Consent given:** verbal, week of 2026-04-13 · Ben Knight as witness
-**Status:** Active · 95% diversion · 72% school re-engagement · 97.6% less cost than detention · host of 21 April 2026 Judges on Country trip for 55 judges + magistrates
+**Status:** Active · 95% diversion · 72% school re-engagement · 97.6% less cost than detention · host of 17 April 2026 Judges on Country trip for 55 judges + magistrates
 **Data spine:** 9 ALMA interventions · top score 0.772 · 6 wiki stories flowing
 **Contact:** via Ben Knight (benjamin@act.place)
 **Governance record:** `wiki/decisions/2026-04-18-oonchiumpa-story-approval.md`

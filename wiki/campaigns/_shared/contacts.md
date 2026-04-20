@@ -31,13 +31,13 @@ One source of truth. When someone enters the story through any campaign, they ge
 
 | Name | Capacity | Latest interaction | Campaigns |
 |---|---|---|---|
-| Kristy Bloomfield | Oonchiumpa co-director; Central Arrernte, Eastern Arrernte & Alyawarra Traditional Owner | Coordinating 2026-04-21 JoC trip | judges-on-country, minderoo-pitch (anchor #1), goods-on-country |
-| Tanya Turner | Oonchiumpa co-director; Eastern Arrernte; former associate, Supreme Court of Victoria | Coordinating 2026-04-21 JoC trip | judges-on-country, minderoo-pitch (anchor #1), goods-on-country |
+| Kristy Bloomfield | Oonchiumpa co-director; Central Arrernte, Eastern Arrernte & Alyawarra Traditional Owner | Coordinated 2026-04-17 JoC trip (completed) | judges-on-country, minderoo-pitch (anchor #1), goods-on-country |
+| Tanya Turner | Oonchiumpa co-director; Eastern Arrernte; former associate, Supreme Court of Victoria | Coordinated 2026-04-17 JoC trip (completed) | judges-on-country, minderoo-pitch (anchor #1), goods-on-country |
 | Aunty Bev | Elder authority, Oonchiumpa | (verify with Ben — current state) | judges-on-country, minderoo-pitch (anchor #1) |
 | Uncle Terry | Elder authority, Oonchiumpa | (verify with Ben — current state) | judges-on-country, minderoo-pitch (anchor #1) |
 | Fred Campbell | Youth case worker; cultural lead (Goods partnership); married into Bloomfield family | (verify with Ben — current state) | judges-on-country, goods-on-country |
-| (55 judges and magistrates attending, including at least one High Court judge and Indigenous magistrates) | Queensland, NT, Federal | Attending 2026-04-21 | judges-on-country |
-| Ben Knight | Filming 2026-04-21 session | Present | all |
+| (55 judges and magistrates attending, including at least one High Court judge and Indigenous magistrates) | Queensland, NT, Federal | Attended 2026-04-17 | judges-on-country |
+| Ben Knight | Filmed 2026-04-17 session | Present | all |
 
 ### Palm Island Community Company (PICC) — Anchor #2
 

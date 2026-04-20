@@ -20,7 +20,7 @@ Everything beyond +2 stays in the campaign briefs as "queued", not scheduled.
 | Campaign | Next shipping moment | Date | Risk if missed |
 |---|---|---|---|
 | aesthetics-of-asymmetry | Post 2 ships (if minister silent) | Fri 18 April | Trap deflates. Campaign loses the week's momentum. |
-| judges-on-country | On-country day with Oonchiumpa (Kristy + Tanya) in Mparntwe | Tue 21 April | No makeup — the 55 are there once. |
+| judges-on-country | On-country day with Oonchiumpa (Kristy + Tanya) in Mparntwe | Fri 17 April (completed) | No makeup — the 55 are there once. |
 | minderoo-pitch | Envelope posted to Lucy | Fri 1 May | Lucy back from leave without the proof. Meeting goes without the artefacts. |
 | contained-tour | Adelaide leg scoped | End of April | SA partner selection slips. Three Circles anchor #10 has no candidate. |
 
@@ -28,7 +28,7 @@ These four shipping moments are what the sessions are organised around.
 
 ---
 
-## Week 0 — 2026-04-15 to 2026-04-21 (this week)
+## Week 0 — 2026-04-15 to 2026-04-21 (completed; JoC trip Fri 17 April)
 
 The pressure week. JoC on Tuesday, Minderoo envelope assembly begins.
 
@@ -71,7 +71,7 @@ The pressure week. JoC on Tuesday, Minderoo envelope assembly begins.
 **Who:** Ben
 **Output:** consent forms printed, battery packs, SD cards, clothes. No new thinking today.
 
-### Tue 2026-04-21 · Session G · Judges on Country — on-country day
+### Fri 2026-04-17 · Session G · Judges on Country — on-country day (completed)
 **Who:** Ben on-site, Kristy + Tanya leads, 55 judges/magistrates attend
 **Output:** raw capture (video, audio, stills), storyteller consents signed in the moment, Ben's field notes
 **No other work this day.** No email, no drafts. This is the capture-only day.

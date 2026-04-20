@@ -46,7 +46,7 @@ Core pipeline scripts already in place: `wiki-lint.mjs`, `wiki-build-viewer.mjs`
 - `wiki/projects/justicehub/three-circles.md` — $2.9M / 3-year pitch. Frontmatter `canonical_code: ACT-JH`, `funder: Minderoo Foundation`, `tier: flagship`. Lucy-warm 2026-04-08.
 - `wiki/projects/justicehub/the-brave-ones.md` — counter-mugshot visual architecture
 - `wiki/campaigns/minderoo-pitch/brief.md` — envelope assembly, 9 anchor communities (MMEIC consolidation pending), 1 May ship date
-- `wiki/campaigns/judges-on-country/brief.md` — 21 April trip, content capture
+- `wiki/campaigns/judges-on-country/brief.md` — 17 April trip, content capture
 - `wiki/output/narrative-drafts/SHIPPED-2026-04-09-minderoo-stay-pitch.md` — deployed prior round
 
 **Deployed (JusticeHub repo, the envelope contents):**
@@ -465,7 +465,7 @@ Success signal: Lucy's walk-through session in early May ends with at least one 
 ## Open threads (flagged, not in scope this round)
 
 - **Consent/cultural governance layer.** EL v2 carries `elder_approved_by`, `cultural_sensitivity_level`, `cultural_warnings`. Gap 1 preserves the metadata in frontmatter but doesn't enforce gating. **Next round:** extend autoreason's story-anchor pre-pass to refuse unanchored-to-elder-approved stories for Oonchiumpa content specifically.
-- **2026-04-21 Judges on Country trip.** 55 judges at Oonchiumpa. Any stories captured must flow through EL v2 first, then Gap 1 sync, then into the envelope. **Treat JoC as the first real-world test after Gap 1 ships.**
+- **2026-04-17 Judges on Country trip.** 55 judges at Oonchiumpa. Any stories captured must flow through EL v2 first, then Gap 1 sync, then into the envelope. **Treat JoC as the first real-world test after Gap 1 ships.**
 - **Oonchiumpa app as a source.** It reads from EL v2 but hosts additional content (blog, outcomes, staff portal). Future work: mirror any public outputs into `wiki/raw/` so the existing `wiki-bootstrap-source-summaries` pipeline picks them up.
 - **Embedding-powered relevance.** EL v2 stories carry 1536-dim embeddings. The story-anchor pre-pass in Gap 2 currently picks by project_code/tag match. A later iteration can use cosine similarity against the autoreason task prompt for sharper relevance.
 - **Living Source Packet.** `config/living-source-packet.example.json` defines a sovereign syndication schema with consent gates. Not used yet but the right venue for the consent-gating work noted above.

@@ -22,7 +22,7 @@ three_decisions_for_session_1:
 
 Verbal consent captured, stories flowing, ALMA interventions scored, governance records in `wiki/decisions/2026-04-18-*`:
 
-1. **Oonchiumpa Consultancy & Services** — NT · Mparntwe · Kristy Bloomfield + Tanya Turner · 0.772 score · 4 youth-justice interventions · Foundational anchor. 21 April Judges on Country host.
+1. **Oonchiumpa Consultancy & Services** — NT · Mparntwe · Kristy Bloomfield + Tanya Turner · 0.772 score · 4 youth-justice interventions · Foundational anchor. 17 April Judges on Country host (hosted).
 2. **Palm Island Community Company (PICC)** — QLD · Bwgcolman · Rachael Atkinson (CEO) · 21 interventions (11 youth-justice) · $29M annual turnover · top intervention score 0.793.
 3. **Minjerribah Moorgumpin (Elders-in-Council) Aboriginal Corporation (MMEIC)** — QLD · Quandamooka · Elder council · 32 years operating · top score **0.815** (highest of all anchors). 3 draft interventions pending elder confirmation.
 4. **Brodie Germaine Fitness Aboriginal Corporation (BG Fit)** — QLD · Mount Isa · Brodie Germaine (Pita Pita Wayaka) · 3 years · 3 draft interventions pending Brodie confirmation · top score 0.749.

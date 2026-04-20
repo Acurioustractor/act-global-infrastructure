@@ -18,11 +18,11 @@ minderoo_portfolio_lead: Lucy Stronach (Youth Justice + Early Years)
 ## Page 1 — Begin on Country
 
 > *"When you stand here in Mparntwe, you are not just standing in a town. You're standing in one of the oldest cultural landscapes in the world. And the Arrernte word for this place isn't just a name — it's a story, it's a responsibility."*
-> — Tanya Turner, Eastern Arrernte woman, welcoming 55 judges and magistrates to Mparntwe, 20 April 2026
+> — Tanya Turner, Eastern Arrernte woman, welcoming 55 judges and magistrates to Mparntwe, 16 April 2026
 
 This envelope begins where the program begins — on Country, with permission, under cultural authority.
 
-On 20 April 2026, Kristy Bloomfield — Central Arrernte, Eastern Arrernte and Alyawarra Traditional Owner of Mparntwe — opened the National Judicial College of Australia's first-ever Indigenous Justice Program, welcoming 55 judges and magistrates onto her Country. The next morning, those 55 judges walked onto Eastern Arrernte Country at Atnarpa under the leadership of Oonchiumpa Consultancy and Services.
+On the evening of 16 April 2026, Kristy Bloomfield — Central Arrernte, Eastern Arrernte and Alyawarra Traditional Owner of Mparntwe — opened the National Judicial College of Australia's first-ever Indigenous Justice Program, welcoming 55 judges and magistrates onto her Country. The next morning, Friday 17 April 2026, those 55 judges walked onto Eastern Arrernte Country at Atnarpa under the leadership of Oonchiumpa Consultancy and Services.
 
 That the institution which trains every Australian judge chose **Oonchiumpa's on-Country day as the foundation of the program** is not incidental to this envelope. It is the envelope's thesis. *The community-led method is already carrying Australia's youth-justice capability — it just hasn't been resourced to keep doing so.*
 
@@ -140,7 +140,7 @@ The choice of the additional anchors is made *with* Minderoo in Session 1 and Se
 
 **The Australian judiciary has already chosen Oonchiumpa as the foundation.**
 
-On 21 April 2026, the National Judicial College of Australia — the institution that trains every Australian judge — ran its first-ever Indigenous Justice Program. The on-Country day at the heart of that program was hosted by Oonchiumpa Consultancy and Services at Atnarpa Outstation, 80km east of Mparntwe.
+On 17 April 2026, the National Judicial College of Australia — the institution that trains every Australian judge — ran its first-ever Indigenous Justice Program. The on-Country day at the heart of that program was hosted by Oonchiumpa Consultancy and Services at Atnarpa Outstation, 80km east of Mparntwe.
 
 > *"This is the National Judicial College of Australia Indigenous Justice Program. It's a first for the National Judicial College, and perhaps long overdue. It's led by an on-Country day that sets the foundation for the conversation that happens over the rest of the course. And that on-Country Day is here — at the Atnarpa Outstation, under Oonchiumpa consultancy and the leadership of Tanya and Kristy."*
 > — Anthony Hopkins, Alice Springs Judge
@@ -437,7 +437,7 @@ The anchors are the delivery. ACT is the infrastructure. Minderoo is the partner
 ### If helpful before Session 1
 
 - **The dashboard** — act-global-infrastructure.vercel.app/minderoo-live-dashboard.html — live now. Updates compound every day until we meet.
-- **The 21 April 2026 Judges on Country trip** — already hosting 55 judges and magistrates on Eastern Arrernte Country. Artefacts from that day can be shared with Minderoo immediately.
+- **The 17 April 2026 Judges on Country trip** — already hosting 55 judges and magistrates on Eastern Arrernte Country. Artefacts from that day can be shared with Minderoo immediately.
 
 ---
 
@@ -456,7 +456,7 @@ This envelope contains:
 4. **Anchor Communities contact sheet** (2 pages, every name reachable today)
 5. **Workshop proposal** (1 page, Sessions 1 + 2 process)
 6. **Brave Ones insert** (8 pages A5, 16 anchor voices across 3 sites)
-7. **Judges on Country one-pager** (2 pages, 21 April 2026 field artefact)
+7. **Judges on Country one-pager** (2 pages, 17 April 2026 field artefact)
 8. **Artefact 001 · Murri Watch** (small matte book, physical sample of Year 1)
 9. **A QR code on the back cover** — live dashboard, updating between now and Session 1.
 
@@ -472,7 +472,7 @@ Minderoo's own Cost of Late Intervention launch playbook was a physical report p
 
 *Dear Lucy,*
 
-*On 20 April 2026, Tanya Turner — Eastern Arrernte woman, co-founder of Oonchiumpa Consultancy and Services — welcomed 55 judges and magistrates to Mparntwe. They came for the National Judicial College of Australia's first-ever Indigenous Justice Program. The institution that trains every Australian judge made Oonchiumpa's on-Country day the foundation of that program.*
+*On the evening of 16 April 2026, Tanya Turner — Eastern Arrernte woman, co-founder of Oonchiumpa Consultancy and Services — welcomed 55 judges and magistrates to Mparntwe. The next morning — Friday 17 April 2026 — those judges walked onto Eastern Arrernte Country at Atnarpa for the National Judicial College of Australia's first-ever Indigenous Justice Program. The institution that trains every Australian judge made Oonchiumpa's on-Country day the foundation of that program.*
 
 *Tanya said this to the 55 judges:*
 

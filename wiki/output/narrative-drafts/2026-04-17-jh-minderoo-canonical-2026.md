@@ -81,7 +81,7 @@ Murri Watch is the proof that the stack is live, the method is fast, and the pol
 | Aesthetics of Asymmetry **Artefact 001** — A2 poster | `act-aesthetics-of-asymmetry/artefacts/murri-watch/` | The evidence |
 | Artefact 001 — 16-page printed document | same | The long version of the evidence |
 | Brave Ones — 3 storyteller portraits (A5 prints) | To be produced from JoC trip | Human spine |
-| Judges on Country one-pager | To be drafted from 2026-04-21 trip | Magistrate use case, live |
+| Judges on Country one-pager | Drafting from 2026-04-17 trip (completed) | Magistrate use case, live |
 | **The Brave Ones pitch insert (2pp)** | **NEW** — from Oonchiumpa conversation + CEO review | Daily practice layer for Circle 2 |
 
 Single manila envelope. Hand-delivered if possible, posted if not. No PDF.
@@ -90,7 +90,7 @@ Single manila envelope. Hand-delivered if possible, posted if not. No PDF.
 
 ## Sync with active work this week
 
-**Tuesday 2026-04-21 — Mparntwe (Alice Springs), 55 judges and magistrates on country with Oonchiumpa.** Hosts: Kristy Bloomfield and Tanya Turner. This becomes Example 2 in the executive summary, updated from future tense to present. Ben films. One-pager drafted within 48 hours of return with Kristy + Tanya sign-off before dispatch.
+**Friday 2026-04-17 — Mparntwe (Alice Springs), 55 judges and magistrates on country with Oonchiumpa.** Hosts: Kristy Bloomfield and Tanya Turner. This becomes Example 2 in the executive summary, updated from future tense to present. Ben films. One-pager drafted within 48 hours of return with Kristy + Tanya sign-off before dispatch.
 
 **Naming correction before envelope ships.** The existing `minderoo-three-circles-proposal.md` and `minderoo-executive-summary.md` refer to Oonchiumpa as "Ntumba" and the lead as "Christine" / "Christine Tanya" / "Chrissy". These are all incorrect. Before any envelope or walk-through with Lucy, those two spine documents need sweeping — Ben action. The correct details are: **Oonchiumpa · Mparntwe (Alice Springs) · Kristy Bloomfield + Tanya Turner · project code ACT-OO**.
 

@@ -2,7 +2,7 @@
 campaign: judges-on-country
 status: workshop-draft
 for_meeting: Kristy Bloomfield + Tanya Turner, 2026-04-15
-event_date: 2026-04-21
+event_date: 2026-04-17
 authors: Kristy Bloomfield, Tanya Turner, Benjamin Knight
 ---
 
@@ -14,7 +14,7 @@ authors: Kristy Bloomfield, Tanya Turner, Benjamin Knight
 
 ## What this is
 
-On Tuesday 21 April 2026, 55 judges and magistrates, including at least one High Court judge and Indigenous magistrates, came onto Eastern Arrernte Country at Atnarpa homestead, Loves Creek Station, 80km east of Mparntwe (Alice Springs). They were hosted by Oonchiumpa, under the authority of Aunty Bev and Uncle Terry, and led by co-directors Kristy Bloomfield and Tanya Turner.
+On Friday 17 April 2026, 55 judges and magistrates, including at least one High Court judge and Indigenous magistrates, came onto Eastern Arrernte Country at Atnarpa homestead, Loves Creek Station, 80km east of Mparntwe (Alice Springs). They were hosted by Oonchiumpa, under the authority of Aunty Bev and Uncle Terry, and led by co-directors Kristy Bloomfield and Tanya Turner.
 
 This is what the day was for, what the bench saw, and what we are asking them to do next.
 

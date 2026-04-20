@@ -2,7 +2,7 @@
 title: What the judges' voices add to the envelope — Louise Taylor + Anthony Hopkins
 status: envelope-critical addition
 date: 2026-04-20
-source: transcripts 21 April 2026 Judges on Country trip, Atnarpa
+source: transcripts 17 April 2026 Judges on Country trip, Atnarpa
 speakers:
   - Louise Taylor — Judge of ACT Supreme Court, Kamilaroi woman, Co-chair of the committee that put together the National Judicial College's first-ever Indigenous Justice Program
   - Anthony Hopkins — Judge based in Alice Springs, long-standing connection with Kristy Bloomfield since she was young through ALS work, married to a Warumungu-Literata woman
@@ -85,7 +85,7 @@ A full page featuring Louise Taylor's and Anthony Hopkins' quotes. Title: **"The
 Structure:
 - Header: *"The National Judicial College of Australia — the institution that trains every Australian judge — made Oonchiumpa's on-Country day the foundation of its first-ever Indigenous Justice Program."*
 - Two portrait-quote blocks: Louise (Kamilaroi · ACT Supreme Court), Anthony (Alice Springs)
-- Sub-caption: *"Fifty-five judges from across Australia walked onto Eastern Arrernte Country at Atnarpa under the authority of Traditional Owners and the cultural leadership of Oonchiumpa, on 21 April 2026. This is the evidence layer Minderoo's $2.9M compounds."*
+- Sub-caption: *"Fifty-five judges from across Australia walked onto Eastern Arrernte Country at Atnarpa under the authority of Traditional Owners and the cultural leadership of Oonchiumpa, on 17 April 2026. This is the evidence layer Minderoo's $2.9M compounds."*
 - Bottom: *"Kristy and Tanya really exemplify what's possible when we are given the space to lead things for ourselves."* — Louise Taylor, Kamilaroi
 
 ### New page — "The ripple"
@@ -135,13 +135,13 @@ No other youth-justice philanthropic ask in Australia has all four columns. This
 
 ---
 
-## For the 21 April trip (tomorrow)
+## From the 17 April trip (retrospective)
 
 Shot list priorities updated:
 - **Louise Taylor on camera, longer form** — her full professional context + Kamilaroi identity + ACT Supreme Court role. A 90-second cut is envelope-grade.
 - **Anthony Hopkins on camera, longer form** — his "country is inseparable from people" line + ripple-effect argument. This is the institutional-change sound-bite of the envelope.
 - **The group photo of 55 judges + Oonchiumpa dancers + Elders + young people** — this is the single most important photograph this envelope will contain. Print big, full-bleed, on the inside cover.
-- **Written consent forms for both judges** by end of 21 April.
+- **Written consent forms for both judges** — secure post-trip (priority task this week).
 
 ---
 
@@ -153,4 +153,4 @@ Shot list priorities updated:
 
 Minderoo funds Communities. Louise Taylor funds judicial reform from the bench. Anthony Hopkins funds structural change from Alice Springs. Kristy and Tanya lead the method. **Every invoice Minderoo sends into this partnership moves in four directions at once.**
 
-That's the pitch. That's the power. That's what we write Page 11 of the canonical pitch around, tomorrow morning, before the bus leaves at 6:49.
+That's the pitch. That's the power. That's what Page 11 of the canonical pitch is built around.

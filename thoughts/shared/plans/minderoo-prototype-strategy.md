@@ -70,10 +70,10 @@ Not a PDF stack. A physical, tactile package designed to communicate *this is al
 
 ### Core physical artefacts
 
-1. **Canonical pitch document** — Three Circles proposal, $2.9M / 3 years, hand-bound or high-quality print. Cover photo from Judges on Country 21 April.
+1. **Canonical pitch document** — Three Circles proposal, $2.9M / 3 years, hand-bound or high-quality print. Cover photo from Judges on Country 17 April.
 2. **Artefact 001 — Murri Watch** — A2 poster + 16-page saddle-stitched book. *This is what an issue of the national collection looks like.*
 3. **Brave Ones insert v3** — three-site distributed cohort (now updated). Shows the method travels.
-4. **Judges on Country one-pager** — real content from the 21 April trip, Kristy + Tanya sign-off before print.
+4. **Judges on Country one-pager** — real content from the 17 April trip, Kristy + Tanya sign-off before print.
 5. **Three Brave Ones portraits** — physical A5 prints from JoC shoot. Not stock; real people.
 
 ### Sensory / memorable additions
@@ -82,7 +82,7 @@ Not a PDF stack. A physical, tactile package designed to communicate *this is al
 
 7. **A QR-coded card** that opens on the Lucy-Stronach private dashboard URL (see Part 4). One card, printed on thick stock, matte, no logo clutter. *"Scan this to watch the program run."*
 
-8. **90-second introduction video** — on the USB or via the QR code. Real footage from the 21 April trip + Mount Isa Tuesday gym + Polly or Isabella speaking + Brodie + Tanya. No voiceover. Just the voices already in the corpus, intercut with the sites. Ends on Tanya's *"Our young people are just collateral in a bigger issue."*
+8. **90-second introduction video** — on the USB or via the QR code. Real footage from the 17 April trip + Mount Isa Tuesday gym + Polly or Isabella speaking + Brodie + Tanya. No voiceover. Just the voices already in the corpus, intercut with the sites. Ends on Tanya's *"Our young people are just collateral in a bigger issue."*
 
 ### Data-spine access
 
@@ -107,7 +107,7 @@ Build a private dashboard specifically for Minderoo. URL: `minderoo.justicehub.c
 | **Anchor community tracker** | 10 communities, status per relationship | `wiki/campaigns/minderoo-pitch/brief.md` ten-anchors table |
 | **Financial dashboard** | Spend to date on Brave Ones pilot, projected next quarter | JusticeHub finance layer |
 | **Pitch artefact log** | Every iteration of pitch docs with dates | `wiki/output/narrative-drafts/` snapshots from JH reverse-sync |
-| **Judges on Country tracker** | 55 judges + magistrates on the 21 April trip → what they did next | Post-trip capture, updated as judges engage publicly |
+| **Judges on Country tracker** | 55 judges + magistrates on the 17 April trip → what they did next | Post-trip capture, updated as judges engage publicly |
 | **Live media** | Photos, audio, video as they're captured and consent-cleared | Empathy Ledger media library |
 | **"What's missing"** | Explicit list of gaps the program is trying to close each quarter, with the named person responsible | Direct editorial |
 
@@ -196,7 +196,7 @@ These are the concrete moves that turn this strategy into the actual envelope:
 
 2. **Build the Loop-Back Dashboard wireframe** — just the page structure + URL reserved. Can be populated over 13 days with real data that's already flowing (story-sync manifests, wiki stories, JH reverse-sync snapshots, the JoC trip content). Target: dashboard live for envelope date.
 
-3. **Capture the 90-second film on 21 April at JoC** — brief Ben and whoever's filming on the shot list. Include: Kristy + Tanya delivering on Country, 2–3 judges reacting, a young person speaking, Atnarpa landscape, Fred working with a kid. Tanya's *"collateral"* line is the end-card. Cut Wed 22 – Fri 24 April.
+3. **Capture the 90-second film on 17 April at JoC** — brief Ben and whoever's filming on the shot list. Include: Kristy + Tanya delivering on Country, 2–3 judges reacting, a young person speaking, Atnarpa landscape, Fred working with a kid. Tanya's *"collateral"* line is the end-card. Cut Wed 22 – Fri 24 April.
 
 4. **Draft the 10-anchor contact sheet** — from wiki/campaigns/minderoo-pitch/brief.md's ten-anchors table. One page, photographed, signed-off per community.
 

@@ -1,8 +1,8 @@
 ---
-title: Judges on Country — 21 April 2026 capture plan
-status: field-ready
+title: Judges on Country — 17 April 2026 field record (ARCHIVAL — trip completed)
+status: archival — trip occurred 17 April 2026; retained as field reference for post-trip artefact production
 date: 2026-04-20
-trip_date: 2026-04-21
+trip_date: 2026-04-17 (completed)
 location: Atnarpa Homestead, Loves Creek Station, 80km east of Mparntwe (Alice Springs)
 host: Oonchiumpa (Kristy Bloomfield + Tanya Turner)
 under_authority_of: Aunty Bev + Uncle Terry (elders)
@@ -13,9 +13,9 @@ consent_basis:
   - Fresh same-day verbal re-confirmation with anyone featured, especially young people
 ---
 
-# Judges on Country — 21 April 2026 capture plan
+# Judges on Country — 17 April 2026 field record
 
-> Fifty-five judges and magistrates arrive on Eastern Arrernte Country tomorrow. The trip must do three jobs at once: honour the community's hosting, produce the envelope's strongest artefacts, and avoid any extractive behaviour that would break Kristy and Tanya's trust. This doc is the field reference for the day.
+> Fifty-five judges and magistrates walked onto Eastern Arrernte Country on Friday 17 April 2026 (trip completed). The trip must do three jobs at once: honour the community's hosting, produce the envelope's strongest artefacts, and avoid any extractive behaviour that would break Kristy and Tanya's trust. This doc is the field reference for the day.
 
 ---
 
@@ -96,7 +96,7 @@ Five audio takes to come back with, in priority order:
 > [Name]
 > [Cultural identity, Country]
 > [Role at Oonchiumpa]
-> Photographed at Atnarpa, 21 April 2026
+> Photographed at Atnarpa, 17 April 2026
 > Consented by [named] for use in the Three Circles envelope to the Minderoo Foundation
 
 **Backup portraits to also capture** (in case primary subjects don't consent on the day or ask for retakes):
@@ -166,7 +166,7 @@ Already-named young people we know are Oonchiumpa-tagged in EL v2 and would be w
 
 ---
 
-## Evening wrap (Tue 21 April night)
+## Evening wrap (Fri 17 April night — completed)
 
 Before bed, Ben or crew lead:
 
@@ -196,7 +196,7 @@ Before bed, Ben or crew lead:
 
 ---
 
-## What Ben carries in his pocket tomorrow
+## What Ben carried in his pocket on the day
 
 A single printed page from this doc with:
 
@@ -204,6 +204,6 @@ A single printed page from this doc with:
 2. The 3 [WORKSHOP] prompts (claim line, bench questions, contact channel)
 3. The 3 cultural-safety don'ts
 4. Kristy + Tanya's phone numbers (confirm before departing)
-5. The post-trip timeline — so every frame shot tomorrow has a clear downstream use
+5. The post-trip timeline — so every frame shot on the day has a clear downstream use
 
 Everything else in this plan is reference. Tomorrow is about presence, consent, and listening. The envelope comes from what the day gives, not what a shot list demands.

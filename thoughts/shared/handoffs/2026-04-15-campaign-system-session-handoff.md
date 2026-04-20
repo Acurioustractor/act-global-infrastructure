@@ -68,7 +68,7 @@ All three repos swept for factual errors propagated from older pitch drafts:
 
 ## Judges on Country focus (next session target)
 
-Tuesday 21 April 2026 · Mparntwe (Alice Springs) · hosted by Oonchiumpa (Kristy Bloomfield + Tanya Turner) · 55 judges and magistrates attending
+Friday 17 April 2026 · Mparntwe (Alice Springs) · hosted by Oonchiumpa (Kristy Bloomfield + Tanya Turner) · 55 judges and magistrates attending
 
 **Brief:** `wiki/campaigns/judges-on-country/brief.md`
 

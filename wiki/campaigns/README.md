@@ -18,7 +18,7 @@ campaigns/
 │   └── orgs.md               — organisations + relationships
 ├── _weekly-review-template.md  — Thursday session prompt
 ├── aesthetics-of-asymmetry/  — Murri Watch live, 5 episodes queued
-├── judges-on-country/        — 21 April Alice Springs, 55 judges
+├── judges-on-country/        — 17 April Alice Springs, 55 judges (completed)
 ├── contained-tour/           — ongoing touring container
 └── minderoo-pitch/           — spine + canonical + envelope
 ```

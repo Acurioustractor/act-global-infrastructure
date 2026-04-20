@@ -25,7 +25,7 @@ Nine artefacts, three roles each plays:
 | 5 | **Anchor Communities contact sheet** | **partners/relationships layer** · every named person reachable today | A4 double-sided |
 | 6 | **Workshop proposal · Sessions 1 + 2** | the co-selection process for the remaining 2–3 anchors | A4 single-sided |
 | 7 | **Brave Ones insert** | the daily practice · 3-site distributed cohort · 16 anchor voices | 8-page A5 zine |
-| 8 | **Judges on Country one-pager** | 21 April 2026 field artefact · 90-second film + portraits | A4 double-sided |
+| 8 | **Judges on Country one-pager** | 17 April 2026 field artefact · 90-second film + portraits | A4 double-sided |
 | 9 | **Artefact 001 · Murri Watch** | physical sample of what Year 1 produces · collectible | small matte book |
 
 **Dashboard's role in the package:** the live proof layer. Every other artefact is printed once. The dashboard updates between Sessions 1 and 2 — each story approval, each outreach reply, each scoring refresh visible to Lucy in real time. **This is the "showing partners" element** — the audit trail that every name on the contact sheet is reachable and every anchor's consent is recorded.
@@ -139,7 +139,7 @@ The ask funds **editorial + relational work**, not platform build. JusticeHub, t
 - [x] Anchor Communities contact sheet — page 2b added today
 - [x] Workshop proposal — drafted
 - [ ] Brave Ones v3 insert — drafted; ready to design as A5 zine
-- [ ] Judges on Country one-pager — workshop fills from 21 April trip
+- [ ] Judges on Country one-pager — workshop fills from 17 April trip
 - [ ] Artefact 001 · Murri Watch — Brodie sign-off pending
 
 ---

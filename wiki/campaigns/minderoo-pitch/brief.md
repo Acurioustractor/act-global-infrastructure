@@ -10,7 +10,7 @@ ask: $2.9M / 3 years (FY2026–FY2028)
 
 ## What
 
-One envelope to Minderoo Foundation. Inside: a canonical Three Circles proposal ($2.9M / 3 years), an executive summary, Artefact 001 (poster + 16-page document) as the live proof case, 3 Brave Ones portraits, and a Judges on Country one-pager from the 21 April trip.
+One envelope to Minderoo Foundation. Inside: a canonical Three Circles proposal ($2.9M / 3 years), an executive summary, Artefact 001 (poster + 16-page document) as the live proof case, 3 Brave Ones portraits, and a Judges on Country one-pager from the 17 April trip (completed).
 
 ## Why
 
@@ -24,7 +24,7 @@ Minderoo can be the lead or anchor funder that holds the three circles together 
 
 ## When
 
-- **Mon 21 April 2026:** JoC trip (content capture)
+- **Fri 17 April 2026 (completed):** JoC trip (content capture)
 - **Fri 1 May 2026:** envelope posted
 - **Following week:** Ben + Nick walk Lucy through in person when she's back from leave
 
@@ -75,7 +75,7 @@ The canonical Three Circles and executive summary documents list ten anchors but
 
 | # | Org | Place | Country | Leaders | Status |
 |---|---|---|---|---|---|
-| 1 | **Oonchiumpa** ✓ | Mparntwe (Alice Springs), NT | Arrernte, Alyawarra, Luritja, Warlpiri (7 language groups) | Kristy Bloomfield + Tanya Turner co-directors; Aunty Bev + Uncle Terry elder authority; Fred Campbell youth worker | Active; JoC host 21 April |
+| 1 | **Oonchiumpa** ✓ | Mparntwe (Alice Springs), NT | Arrernte, Alyawarra, Luritja, Warlpiri (7 language groups) | Kristy Bloomfield + Tanya Turner co-directors; Aunty Bev + Uncle Terry elder authority; Fred Campbell youth worker | Active; JoC host Fri 17 April (completed) |
 | 2 | **Palm Island Community Company (PICC)** ✓ | Palm Island, QLD | Manbarra / Bwgcolman | **Rachael Atkinson — CEO** (spelling: Ben wrote "Rachal", assumed "Rachael" — confirm) | Relationship active |
 | 3 | **Mounty Aboriginal Youth & Community Services** ✓ (formerly "Mountie Yarns") | Mt Druitt / Sydney, NSW | Darug | (leader TBC — verify with Ben) | CONTAINED base camp, active |
 | 4 | **Minjerribah Moorgumpin Elders-in-Council Aboriginal Corporation (MMEIC)** ✓ | Minjerribah (North Stradbroke Island), QLD | Quandamooka | (elder leaders TBC — verify with Ben) | Active; founded 1993 |

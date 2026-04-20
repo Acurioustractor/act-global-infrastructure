@@ -46,7 +46,7 @@ related:
         │
         ├─► Judges on Country one-pager (thoughts/shared/drafts/judges-on-country-one-pager-v2.md)
         │       · 3 Brave Ones fills proposed from consented corpus
-        │       · [WORKSHOP] section for trip-day content on 21 April
+        │       · [WORKSHOP] section for trip-day content on 17 April
         │
         └─► Insight memo (thoughts/shared/drafts/brave-ones-young-people-insights.md)
                 · 4 patterns surfaced across corpus
@@ -143,7 +143,7 @@ Total elapsed time from Ben saying Daniel's name to Isabella's voice being in a 
 **Direct inputs into the envelope:**
 
 - **Brave Ones insert v3** — journal + exchange + book + alumni structure, now anchored in 16 named voices and showing the method working in 3 sites today. Answers Minderoo's "can this travel?" question with evidence rather than promise.
-- **Judges on Country one-pager v2** (`thoughts/shared/drafts/judges-on-country-one-pager-v2.md`) — pre-trip fills proposed from consented corpus, [WORKSHOP] section kept open for 21 April trip-day capture.
+- **Judges on Country one-pager v2** (`thoughts/shared/drafts/judges-on-country-one-pager-v2.md`) — pre-trip fills proposed from consented corpus, [WORKSHOP] section kept open for 17 April trip-day capture.
 - **Three Circles canonical pitch** at `wiki/projects/justicehub/three-circles.md` stays canonical; Brave Ones is the human spine inside it.
 
 **Evidence chain for every quote in the envelope:** `wiki/decisions/*` records name who gave approval, when, through what channel, under what authority. If a Minderoo reader or their auditor asks *"how do you know you can use Isabella's words?"* — the chain is two files and one audit entry away.
@@ -171,7 +171,7 @@ The Karpathy-style knowledge base (`wiki/AGENTS.md`) is the persistent memory of
 |---|---|---|
 | PICC selective approval | Candidates identified (Henry Doyle's *"Just Be There for Them"* + Elder's Vision on Palm Island Youth). Decision record staged. | Ben conversation with Rachael Atkinson. Then one `update-el-story-elder-approval.mjs` run per confirmed story |
 | Brave Ones v3 → JH swap | v3 draft ready in `thoughts/shared/drafts/` | `cp` to JH output/proposals/ when Ben approves the draft |
-| Judges on Country 21 April capture | One-pager v2 draft has [WORKSHOP] slot | Trip-day capture; post-trip rush edit 22–24 April with Kristy + Tanya |
+| Judges on Country 17 April capture | One-pager v2 draft has [WORKSHOP] slot | Trip-day capture; post-trip rush edit 22–24 April with Kristy + Tanya |
 | 4 BG Fit elder / leader voices still blocked | Aunty Ivy, Uncle Warren King, Nigel Tain, YPA Team | Separate named-elder review per story (Brodie's CEO authority is wrong shape for these — they ARE the cultural authorities) |
 | Benji summary-only analogue issue in other records | Content-quality issue across the corpus | `update-el-story-content.mjs` now exists; post-envelope pass to enrich summary-only records with real transcripts |
 | Kristy's mangled dollar amounts | *"$,000"* and *"$,852"* in *"Bringing Kids Back to Country"* | Verify real numbers with Kristy, run content update |
@@ -204,7 +204,7 @@ Every named person in the envelope has a decision record two clicks away on `wik
 
 13 days until Minderoo envelope ships. The pipeline, the corpus, and the draft artefacts are ready. Remaining work is primarily:
 
-- Trip-day capture (21 April, Judges on Country)
+- Trip-day capture (17 April, Judges on Country)
 - One-pager rush edit (22–24 April, with Kristy + Tanya)
 - v3 insert approval + swap (whenever Ben signs off)
 - Physical print run (~28 April)

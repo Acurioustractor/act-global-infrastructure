@@ -21,7 +21,7 @@ consent_basis: wiki/decisions/2026-04-18-oonchiumpa-story-approval.md
 
 ---
 
-[PHOTO: Judges on Country, Atnarpa, 21 April 2026. Real photograph. No stock imagery in this envelope.]
+[PHOTO: Judges on Country, Atnarpa, 17 April 2026. Real photograph. No stock imagery in this envelope.]
 
 ---
 

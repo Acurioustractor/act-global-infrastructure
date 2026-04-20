@@ -44,7 +44,7 @@ consent_basis:
 
 ---
 
-[PHOTO: Judges on Country, Atnarpa, 21 April 2026. Real photograph. No stock imagery in this envelope.]
+[PHOTO: Judges on Country, Atnarpa, 17 April 2026. Real photograph. No stock imagery in this envelope.]
 
 ---
 

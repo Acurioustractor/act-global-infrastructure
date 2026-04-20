@@ -112,7 +112,7 @@ Minderoo's 2030 Strategy applies **three lenses to all work**: climate, gender e
 - Anchor Communities contact sheet (2pp) · every name reachable
 - Workshop proposal (1pp) · Session 1 + 2 process
 - Brave Ones A5 zine (8pp) · 3-site cohort, 16 anchor voices
-- Judges on Country one-pager (2pp) · 21 April artefact
+- Judges on Country one-pager (2pp) · 17 April artefact
 - The Three Circles canonical pitch (8pp) · full argument + budget
 - A single QR code · live URL on the back cover
 

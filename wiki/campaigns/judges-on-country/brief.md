@@ -1,7 +1,7 @@
 ---
 campaign: judges-on-country
 status: live-this-week
-event_date: 2026-04-21
+event_date: 2026-04-17
 location: Mparntwe (Alice Springs), NT
 owner: Ben Knight
 host: Oonchiumpa (Kristy Bloomfield + Tanya Turner)
@@ -12,7 +12,7 @@ project_code: ACT-OO
 
 ## What
 
-Fifty-five judges and magistrates including at least one High Court judge and Indigenous magistrates visit Mparntwe (Alice Springs) with Oonchiumpa on Tuesday 21 April 2026. Ben films, captures storytellers (with consent via Empathy Ledger v2), and uses JusticeHub to demonstrate how a community-led service directory could change sentencing.
+Fifty-five judges and magistrates including at least one High Court judge and Indigenous magistrates visit Mparntwe (Alice Springs) with Oonchiumpa on Friday 17 April 2026 (completed). Ben films, captures storytellers (with consent via Empathy Ledger v2), and uses JusticeHub to demonstrate how a community-led service directory could change sentencing.
 
 ## Why
 
@@ -26,7 +26,7 @@ This is the live version of Example 2 in the Minderoo pitch. A magistrate, befor
 
 ## When
 
-- **Tue 21 April 2026:** on-country day with Oonchiumpa in Mparntwe. Ben films, captures with consent.
+- **Fri 17 April 2026 (completed):** on-country day with Oonchiumpa in Mparntwe. Ben films, captures with consent.
 - **Wed 22–Fri 24 April:** rush editing, one-pager drafted (with Kristy + Tanya), 3 Brave Ones portraits selected for Minderoo envelope.
 - **Mon 28 April:** Brave Ones portrait prints ordered.
 - **Fri 1 May:** Minderoo envelope posted with JoC one-pager + Brave Ones + Artefact 001.

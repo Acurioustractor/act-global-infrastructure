@@ -100,7 +100,7 @@ That paragraph is force-a-trap: every sentence the Minderoo reader can ask about
 
 ### C. Judges on Country one-pager
 
-The 21 April trip put 55 judges on Country hearing from Oonchiumpa. This corpus is the post-trip evidence of what they heard. The one-pager should quote three young people (Jackquann, Nigel, Laquisha) and one worker (Fred), titled in a way that makes the judges the audience accountable: *"What we said, when you listened."*
+The 17 April trip put 55 judges on Country hearing from Oonchiumpa. This corpus is the post-trip evidence of what they heard. The one-pager should quote three young people (Jackquann, Nigel, Laquisha) and one worker (Fred), titled in a way that makes the judges the audience accountable: *"What we said, when you listened."*
 
 ### D. autoreason pool for campaign writing
 

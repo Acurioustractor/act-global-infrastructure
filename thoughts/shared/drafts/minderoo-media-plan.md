@@ -6,7 +6,7 @@ purpose: |
   Every image, video, and diagram slot that the envelope + live dashboard
   need. Two columns: PRINT (the booklet) and DIGITAL (the live dashboard +
   envelope QR-linked assets). Sourced from already-consented material or
-  to-be-captured from the 21 April Judges on Country trip.
+  to-be-captured from the 17 April Judges on Country trip (completed).
 ---
 
 # Media plan — print + digital
@@ -24,9 +24,9 @@ The envelope lives on two surfaces. Both carry images, one carries video. Every 
 
 | Page | Image/visual | Source | Consent |
 |---|---|---|---|
-| **1 — The Frame** | Full-bleed image · **the $22.3B ratio bar visualisation** (or a single strong photograph of a young person mid-activity at BG Fit or Oonchiumpa, with data layered over) | Artwork + photo from 21 April JoC or BG Fit Tuesday gym archive | Direct consent required from any young person featured |
-| **2 — Oonchiumpa** | **Portrait of Kristy Bloomfield + Tanya Turner** · ideally taken at Atnarpa or Loves Creek Station on 21 April | JoC 21 April capture | Kristy + Tanya verbal consent in place (2026-04-13); same-day re-ask on shoot |
-| | Secondary: **Aunty Bev + Uncle Terry elders portrait** | JoC 21 April | Elder consent sought on day; optional |
+| **1 — The Frame** | Full-bleed image · **the $22.3B ratio bar visualisation** (or a single strong photograph of a young person mid-activity at BG Fit or Oonchiumpa, with data layered over) | Artwork + photo from 17 April JoC or BG Fit Tuesday gym archive | Direct consent required from any young person featured |
+| **2 — Oonchiumpa** | **Portrait of Kristy Bloomfield + Tanya Turner** · ideally taken at Atnarpa or Loves Creek Station on 17 April 2026 | JoC 17 April capture (completed) | Kristy + Tanya verbal consent in place (2026-04-13); same-day re-ask on shoot |
+| | Secondary: **Aunty Bev + Uncle Terry elders portrait** | JoC 17 April | Elder consent sought on day; optional |
 | **3 — Young people's voices** | Six portrait tiles, one per named young person (Jackquann, Laquisha, Benji, Isabella, Shayle, Taleigha) — *or* six hand-lettered quote cards if photo consent isn't in place for a named young person | Mix: BG Fit archive (Benji), Mounty Yarns archive (Shayle, Taleigha, Isabella), Oonchiumpa (Jackquann, Laquisha) | Per-story elder approvals already captured for Jay, Mt Isa Bush Camp, Doomadgee, Mounty Yarns compilation. Others need same-day re-ask where photos will be published |
 | **4 — The hub idea** | **Diagram: wrap-around hub model** · 5 anchors side-by-side with the stacked interventions each one holds (services radiating from each hub) | Custom diagram (design pass) | — |
 | | **Photo of PCYC Mount Isa Tuesday gym session** · 15-20 young people | BG Fit archive | Consent in place per BG Fit story approvals |
@@ -43,7 +43,7 @@ The envelope lives on two surfaces. Both carry images, one carries video. Every 
 | **11 — What endures** | **Endurance timeline** · 12 quarters × 3 circles · what ships when · Year 3 Q4 highlighted | Custom infographic | — |
 | **12 — How we work together** | **Named-contact portrait strip** · Ben, Nicholas, Kristy, Tanya, Rachael, Brodie, Daniel + MMEIC logo | Existing portraits + JoC new | Consent per each (all in place via 2026-04-18 approvals) |
 | **13 — Next steps** | **Calendar visual** · 4 key dates (1 May, mid-May, June, 1 July) | Custom | — |
-| **14 — One paragraph** | **Full-bleed landscape photo** · strong single image — ideal: Atnarpa sunrise/bush/group-on-Country | JoC 21 April | Kristy consent, same-day reconfirm |
+| **14 — One paragraph** | **Full-bleed landscape photo** · strong single image — ideal: Atnarpa sunrise/bush/group-on-Country | JoC 17 April | Kristy consent, same-day reconfirm |
 | **15 — What you hold** | **Envelope-contents exploded diagram** · 9 artefacts laid flat, overhead shot | Custom photo + annotations | — |
 | **16 — Cover letter** | **Embossed A Curious Tractor tractor mark** + Ben's signature | Existing branding | — |
 
@@ -57,7 +57,7 @@ The envelope lives on two surfaces. Both carry images, one carries video. Every 
 | MMEIC governance stills | official images | Ben to request via manager@mmeic.org |
 | PICC | public-facing images | Ben to request via Rachael Atkinson |
 
-### Images to be captured 21 April 2026 (tomorrow)
+### Images captured 17 April 2026 (trip completed)
 
 Full shot list in `thoughts/shared/drafts/joc-21-april-capture-plan.md`. The capture plan itself specifies the consent protocol (verbal re-ask for every young person featured, no filming of sacred material).
 
@@ -78,8 +78,8 @@ The dashboard already renders. We layer media into it.
 
 | Location | Video | Length | Source |
 |---|---|---|---|
-| Hero section (under "The Three Circles — Live") | **90-second JoC sizzle reel** | 90s | Captured 21 April 2026; edited that week |
-| Communities map section | **Per-anchor 30-second portraits** — click a map pin → plays a 30s portrait of that anchor | 30s × 5 anchors | Oonchiumpa: JoC 21 April. BG Fit: Tuesday gym archive. Mounty Yarns: existing. PICC + MMEIC: to request |
+| Hero section (under "The Three Circles — Live") | **90-second JoC sizzle reel** | 90s | Captured 17 April 2026; edited that week |
+| Communities map section | **Per-anchor 30-second portraits** — click a map pin → plays a 30s portrait of that anchor | 30s × 5 anchors | Oonchiumpa: JoC 17 April. BG Fit: Tuesday gym archive. Mounty Yarns: existing. PICC + MMEIC: to request |
 | Books + journals section | **Page-turn animation of a per-young-person journal** | 15s | Mock-up until Year 2 |
 | International section | **Diagrama + YOPE b-roll** | 45s | Licensed |
 | Bow section (Page 10 equivalent) | **Documentary trailer (Year 3)** — placeholder until produced | 90s | Placeholder now |
@@ -89,7 +89,7 @@ The dashboard already renders. We layer media into it.
 | Location | Gallery | Count |
 |---|---|---|
 | Anchor card hover / click | Each anchor → 8-12 image carousel | 8-12 × 5 |
-| Judges on Country section | JoC trip carousel | 12-20 images from 21 April |
+| Judges on Country section | JoC trip carousel | 12–20 images from 17 April |
 | Young people gallery | Named young-person portraits with quote overlay | 16 across 3 sites |
 
 ### Per-anchor micro-site section (new proposal)
@@ -108,10 +108,10 @@ Adds real weight to the "showing partners" dimension Ben asked for.
 
 ## Part 3 — Implementation priority (before 1 May)
 
-### This week (tomorrow + day after)
+### This week (post-trip edit + design)
 
-1. **21 April JoC trip** captures the core assets: Kristy/Tanya portrait, Aunty Bev/Uncle Terry portrait, 3 Brave Ones portraits, landscape, 90-second film footage.
-2. **Editing timeline** — 21 April evening: raw footage organised; 22–23 April: first cut of 90-second sizzle; 24 April: printed portraits ready; 25–28 April: booklet design pass.
+1. **17 April JoC trip (completed)** captures the core assets: Kristy/Tanya portrait, Aunty Bev/Uncle Terry portrait, 3 Brave Ones portraits, landscape, 90-second film footage.
+2. **Editing timeline** — 17 April evening: raw footage organised; 22–23 April: first cut of 90-second sizzle; 24 April: printed portraits ready; 25–28 April: booklet design pass.
 
 ### Before envelope print (by 28 April)
 
@@ -160,7 +160,7 @@ The media spine **is** the Circle Three artefact production. Every image now cap
 
 ---
 
-## Notes for tomorrow (21 April)
+## Notes from the 17 April trip (retrospective)
 
 - The 90-second film is the single most valuable asset this envelope needs. Priority above everything else.
 - Kristy and Tanya approve every final cut before release.

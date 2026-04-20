@@ -19,7 +19,7 @@ Most funding applications say *"we have ten anchor communities."* Most are infla
 
 The four already in relationship:
 
-- **Oonchiumpa** (Mparntwe, NT) — Kristy Bloomfield + Tanya Turner. 95% diversion, 97.6% less cost than detention. 21 April Judges on Country host.
+- **Oonchiumpa** (Mparntwe, NT) — Kristy Bloomfield + Tanya Turner. 95% diversion, 97.6% less cost than detention. 17 April Judges on Country host (hosted).
 - **Palm Island Community Company** (Bwgcolman, QLD) — Rachael Atkinson, CEO. $29M annual turnover. Elder governance.
 - **BG Fit** (Mount Isa, QLD) — Brodie Germaine. Tuesday gym + on-Country bush camps + Doomadgee 500km remote quarterly.
 - **Mounty Yarns** (Mt Druitt, NSW) — Daniel Daylight, CEO. Youth-led advocacy. 13 storytellers, nine young people at the table.

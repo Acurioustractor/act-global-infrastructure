@@ -2,7 +2,7 @@
 title: What Kristy and Tanya's welcome to the 55 judges teaches the envelope
 status: strategic reflection
 date: 2026-04-20
-source: transcript of Oonchiumpa welcome ceremony, evening before 21 April 2026 Judges on Country trip at Atnarpa
+source: transcript of Oonchiumpa welcome ceremony, evening before 17 April 2026 Judges on Country trip at Atnarpa
 speakers: Kristy Bloomfield (Central Arrernte / Eastern Arrernte / Alyawarra TO of Mparntwe); Tanya Turner (Eastern Arrernte)
 consent: public event for 55 judges + magistrates; Oonchiumpa has ongoing verbal approval for wiki/EL use (2026-04-13); same-day reconfirm with Kristy + Tanya required before any quote reproduces in envelope print
 ---
@@ -113,7 +113,7 @@ Move from COLI24 opening to Tanya's welcome as the opening. COLI24 framing moves
 Proposed new Page 1:
 
 > ***"When you stand here in Mparntwe, you are not just standing in a town. You're standing in one of the oldest cultural landscapes in the world, and the Arrernte word for this place isn't just a name — it's a story, it's a responsibility."***
-> — Tanya Turner, Eastern Arrernte woman, welcoming 55 judges and magistrates to Mparntwe, 20 April 2026.
+> — Tanya Turner, Eastern Arrernte woman, welcoming 55 judges and magistrates to Mparntwe, 16 April 2026 (evening before the 17 April on-Country day).
 >
 > This envelope begins where the program begins: on Country, with permission, under cultural authority.
 
@@ -166,7 +166,7 @@ Above the dashboard analytics: *"Our team doesn't sit behind a desk. We are Coun
 
 ---
 
-## For tomorrow (21 April)
+## From the 17 April trip (retrospective)
 
 On the trip, specifically:
 - Capture the welcome again on video if Kristy and Tanya permit (but don't re-stage — if the 20 April welcome wasn't recorded at professional quality, see if a transcript-reading version can be captured on the bus the next morning)

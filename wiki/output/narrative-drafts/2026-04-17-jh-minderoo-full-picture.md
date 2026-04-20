@@ -36,7 +36,7 @@ synced_at: "2026-04-17T22:14:35.685Z"
 | 3 | Executive summary + worked examples (12pp) | Done (artifact renamed) | `minderoo-executive-summary.md` |
 | 4 | Aesthetics of Asymmetry Artefact 001 — A2 poster | Done | `act-aesthetics-of-asymmetry/artefacts/murri-watch/` |
 | 5 | Artefact 001 — 16-page printed document | Done | same |
-| 6 | Brave Ones — 3 storyteller portraits (A5 prints) | **To produce** from JoC trip 21 April | — |
+| 6 | Brave Ones — 3 storyteller portraits (A5 prints) | **To produce** from JoC trip (completed 17 April) | — |
 | 7 | Judges on Country one-pager | **To draft** within 48hrs of trip return | — |
 | 8 | **The Brave Ones pitch insert (2pp)** | **Done** — CEO reviewed | `brave-ones-pitch-insert.md` |
 | 9 | Diagrama outreach email | **Draft ready** — send by April 17 | `emails/diagrama-outreach.md` |
@@ -363,7 +363,7 @@ Named in the comments: George Newhouse AM, Margaret O'Brien (Telstra Foundation)
 2026-04-16  ✓  Artifact renamed to "The Brave Ones" across spine docs
 2026-04-17     Diagrama outreach email SENT
 2026-04-18     Silence post (Artefact 002) — ships IF minister hasn't named the 22
-2026-04-21     Judges on Country — 55 judges + magistrates, Mparntwe with Oonchiumpa
+2026-04-17     Judges on Country — 55 judges + magistrates, Mparntwe with Oonchiumpa
                ↳ CAPTURE A BRAVE ONES ORIGIN MOMENT (photo for pitch insert page 1)
 2026-04-23     JoC one-pager drafted (within 48hrs of return)
 2026-04-23     Brave Ones A5 portraits produced from JoC footage

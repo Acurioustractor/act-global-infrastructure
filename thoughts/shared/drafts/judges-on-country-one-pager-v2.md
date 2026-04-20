@@ -3,7 +3,7 @@ title: Judges on Country — one-pager v2 (pre-trip fills)
 status: draft-for-ben-review
 date: 2026-04-18
 supersedes: wiki/campaigns/judges-on-country/one-pager-draft.md (v1)
-event_date: 2026-04-21
+event_date: 2026-04-17
 authors: Kristy Bloomfield, Tanya Turner, Benjamin Knight
 anchors:
   - Xavier (Oonchiumpa client, Stretch Bed builder — Fred Campbell testimony)
@@ -15,7 +15,7 @@ fill_status:
   claim_sentence: proposed from Tanya's own recorded quote — still requires Kristy+Tanya sign-off for this use
   brave_ones: proposed from consented corpus
   numbers: confirmed against corpus
-  bench_questions: still [WORKSHOP] — filled Tuesday 21 April evening
+  bench_questions: still [WORKSHOP] — filled Tuesday 17 April evening
 ---
 
 # Judges on Country — one-pager
@@ -26,7 +26,7 @@ fill_status:
 
 ## What this is
 
-On Tuesday 21 April 2026, 55 judges and magistrates, including at least one High Court judge and Indigenous magistrates, come onto Eastern Arrernte Country at Atnarpa homestead, Loves Creek Station, 80km east of Mparntwe (Alice Springs). They are hosted by Oonchiumpa, under the authority of Aunty Bev and Uncle Terry, and led by co-directors Kristy Bloomfield and Tanya Turner.
+On Tuesday 17 April 2026, 55 judges and magistrates, including at least one High Court judge and Indigenous magistrates, come onto Eastern Arrernte Country at Atnarpa homestead, Loves Creek Station, 80km east of Mparntwe (Alice Springs). They are hosted by Oonchiumpa, under the authority of Aunty Bev and Uncle Terry, and led by co-directors Kristy Bloomfield and Tanya Turner.
 
 This is what the day is for, what the bench is being asked to see, and what we ask them to do next.
 
@@ -61,7 +61,7 @@ Oonchiumpa is a 100% Aboriginal-led youth civic agency in Mparntwe, grounding yo
 
 ## What the bench asked
 
-> [WORKSHOP — filled Tuesday 21 April evening. The 3 questions judges most want answered shape the JusticeHub magistrate-facing tool. If the bench asks it, the tool should surface it before sentencing.]
+> [WORKSHOP — filled Tuesday 17 April evening. The 3 questions judges most want answered shape the JusticeHub magistrate-facing tool. If the bench asks it, the tool should surface it before sentencing.]
 
 ## What we are asking the judiciary to do next
 

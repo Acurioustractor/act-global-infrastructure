@@ -124,7 +124,7 @@ Beyond the named candidates already on the contact sheet, **every state has 8+ L
 ### Between Sessions 1 and 2
 
 4. **Reach out to 2–3 Session 1 candidates per state** with the outreach template in wiki/projects/justicehub/three-circles.md. Every state now has at least 5 reachable options.
-5. **Run the 21 April Judges on Country trip** — capture stories for Oonchiumpa evidence tier.
+5. **Run the 17 April Judges on Country trip (completed)** — capture stories for Oonchiumpa evidence tier.
 6. **Update the dashboard** to surface the newly-visible Large-tier orgs per state.
 
 ### Post-1 May
