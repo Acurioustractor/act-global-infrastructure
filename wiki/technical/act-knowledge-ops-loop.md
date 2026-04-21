@@ -23,7 +23,7 @@ ACT now has enough moving parts that "just keep building" creates drift:
 - the wiki can become a dumping ground
 - Empathy Ledger can become a second wiki
 - Supabase can start inventing identity
-- the website can turn into a second CMS
+- the website can turn into a redundant content store
 
 This loop exists to stop that.
 

@@ -76,7 +76,7 @@ For ACT this pattern is not about a personal "brain clone." It is the memory dis
 - the wiki compiles those into durable project, concept, story, and decision pages
 - [[living-website-operating-system|Living Website Operating System]] then lets the websites compose that memory with live EL media and stories
 
-That means the wiki is not separate from the website system. It is the thing that stops the sites from becoming fragmented second CMSs.
+That means the wiki is not separate from the website system. It is the thing that stops the sites from becoming fragmented content stores.
 
 ## Tools & Extensions
 

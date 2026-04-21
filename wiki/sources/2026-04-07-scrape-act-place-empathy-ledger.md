@@ -28,7 +28,7 @@ summary: "Public ACT project-page capture for Empathy Ledger covering storytelle
 
 - This is a stable public framing source for Empathy Ledger before live editorial/media syndication.
 - It helps the wiki keep the philosophical frame of EL distinct from later product or content-layer descriptions.
-- It is useful for website alignment because the current public shell still needs to preserve this sovereignty language.
+- It is useful for website alignment because the current public website still needs to preserve this sovereignty language.
 
 ## Raw Source
 

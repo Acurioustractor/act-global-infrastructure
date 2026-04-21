@@ -52,7 +52,7 @@ The Studio acts as the hub connecting all five ecosystem projects:
 
 ## Studio Field
 
-The Studio is not only the digital hub. It is also ACT's cultural production field. That means the public shell, the works line, and the innovation model belong together:
+The Studio is not only the digital hub. It is also ACT's cultural production field. That means the public website, the works line, and the innovation model belong together:
 
 - [[art-projects|ACT Art Projects]] maps the Studio line of works
 - [[art/philosophy/art-as-infrastructure|Art as Infrastructure]] explains why ACT treats art as a core field rather than a side portfolio

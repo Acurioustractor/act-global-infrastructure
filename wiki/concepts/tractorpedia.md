@@ -108,7 +108,7 @@ The practical split is:
 - **Tractorpedia voices/project surfaces** show live, consented story activity
 - **`wiki/people/`** stays small and durable: only the named people who are load-bearing for understanding ACT's work, methods, or partnerships
 
-The public website sits on top of this split rather than replacing it. See [[living-website-operating-system|Living Website Operating System]] for the practical workflow linking wiki memory, EL live material, and the public shell.
+The public website sits on top of this split rather than replacing it. See [[living-website-operating-system|Living Website Operating System]] for the practical workflow linking wiki memory, EL live material, and the composed public pages.
 
 The same compiled-memory logic also applies to project identity: `wiki/projects/` may contain more pages than the operational project-code system because the wiki is allowed to hold methodologies, works, pitch artefacts, and alias pages. See [[project-identity-and-tagging-system|Project Identity and Tagging System]] for the bridge that keeps the wiki rich without breaking cross-system tagging.
 
@@ -163,4 +163,4 @@ Humans steer and curate. The LLM maintains the graph.
 - [[empathy-ledger|Empathy Ledger]] — sovereign story layer linked through EL API
 - [[indigenous-data-sovereignty|Indigenous Data Sovereignty]] — why Tractorpedia holds references, not stories
 - [[continuous-pipeline|Continuous Pipeline Architecture]] — the automation and maintenance layer that keeps Tractorpedia current
-- [[living-website-operating-system|Living Website Operating System]] — how Tractorpedia feeds the public website without becoming a second CMS
+- [[living-website-operating-system|Living Website Operating System]] — how Tractorpedia feeds the public website without becoming a redundant content store

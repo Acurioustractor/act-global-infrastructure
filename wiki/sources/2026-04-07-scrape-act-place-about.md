@@ -22,7 +22,7 @@ summary: "Public ACT about-page capture that defines the farm ecosystem metaphor
 - Defines the public glossary of ACT metaphor terms: Soil, Seeds, Seed House, Forest, Campfire, Fields, Lab, Warehouse, Tools, Road Stall, Tractor, and Water Tank.
 - Frames ACT as a place where innovation, connection, and real human experience matter more than generic impact language.
 - Shows the early public voice around raucousness, tractor symbolism, and founders-as-farmers.
-- Captures testimonial language from justice, storytelling, and founder-support relationships that shaped the public shell.
+- Captures testimonial language from justice, storytelling, and founder-support relationships that shaped the public website.
 
 ## Why It Matters
 

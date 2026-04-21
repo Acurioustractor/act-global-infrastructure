@@ -37,7 +37,7 @@ This follows the [[llm-knowledge-base|LLM Knowledge Base]] pattern and should co
 | Supabase | Operational mirror and sync state | `projects`, sync metadata, history tables, CRM/finance joins |
 | Websites | Public composition | curated pages, routing, enquiry, syndication |
 
-The wiki should remain the place where ACT's understanding compounds. It should not become a media bucket or a second CMS.
+The wiki should remain the place where ACT's understanding compounds. It should not become a media bucket or a redundant content store.
 
 The same applies to people. `wiki/people/` is a curated explanatory layer, not a mirror of every EL storyteller or every operational contact. The curation rule lives in [[people/README|People Index]].
 

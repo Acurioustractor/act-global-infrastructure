@@ -75,7 +75,7 @@ Weekly rhythms:
 - Capture learnings in the appropriate space (Telegram or Discord)
 - Review shareability before any external communication
 - Run the [[social-soil-canvas|Social Soil Canvas]] when the field feels noisy — especially before adding work, after a hard week, or before making a portfolio cut
-- Keep the public shell aligned to upstream truth using the [[living-website-operating-system|Living Website Operating System]] — wiki first for durable framing, EL for live story/media, website for composition
+- Keep the public website aligned to upstream truth using the [[living-website-operating-system|Living Website Operating System]] — wiki first for durable framing, EL for live story/media, website for composition
 
 ## Field Diagnostics
 

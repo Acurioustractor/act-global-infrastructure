@@ -138,7 +138,7 @@ Its current build contract is:
 1. `sync:wiki`
 2. `next build`
 
-This matters because the public shell should always be rebuilt from generated memory, not from hand-maintained copy drifting away from the canonical graph. The website also pulls live, consented field material from [[empathy-ledger|Empathy Ledger]], but that layer should degrade gracefully when a supporting backend is unavailable.
+This matters because the public website should always be rebuilt from generated memory, not from hand-maintained copy drifting away from the canonical graph. The website also pulls live, consented field material from [[empathy-ledger|Empathy Ledger]], but that layer should degrade gracefully when a supporting backend is unavailable.
 
 `sync:notion` still exists as an optional legacy snapshot step for older enrichment paths, but it is no longer part of the default public build contract.
 
