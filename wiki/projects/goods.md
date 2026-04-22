@@ -4,13 +4,13 @@ status: Active
 date: 2026-04-11
 entity_type: project
 tagging_mode: own-code
-canonical_slug: goods-on-country
+canonical_slug: goods
 canonical_code: ACT-GD
-website_slug: goods-on-country
+website_slug: goods
 website_path: /goods
 public_surface: project
-cluster: goods-on-country
-empathy_ledger_key: goods-on-country
+cluster: goods
+empathy_ledger_key: goods
 ---
 
 # Goods on Country
