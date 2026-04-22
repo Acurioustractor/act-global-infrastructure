@@ -55,8 +55,8 @@
     "ACT-GD": {
       "name": "Goods",
       "code": "ACT-GD",
-      "canonical_slug": "goods-on-country",
-      "slug_aliases": ["goods"],
+      "canonical_slug": "goods",
+      "slug_aliases": ["goods-on-country"],
       "category": "enterprise",
       "tier": "ecosystem",
       "priority": "high",
