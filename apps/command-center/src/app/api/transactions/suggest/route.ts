@@ -2,7 +2,11 @@ import { NextRequest, NextResponse } from 'next/server'
 import Anthropic from '@anthropic-ai/sdk'
 import { supabase } from '@/lib/supabase'
 
-const anthropic = new Anthropic()
+// Lazy-initialised so Vercel preview builds (no ANTHROPIC_API_KEY) don't fail
+// at module load during `next build` page-data collection.
+function getAnthropicClient() {
+  return new Anthropic()
+}
 
 export async function POST(request: NextRequest) {
   try {
@@ -16,6 +20,8 @@ export async function POST(request: NextRequest) {
     if (!vendorName) {
       return NextResponse.json({ error: 'vendorName is required' }, { status: 400 })
     }
+
+    const anthropic = getAnthropicClient()
 
     // Load existing project codes and vendor rules for context
     const [{ data: projects }, { data: rules }] = await Promise.all([
