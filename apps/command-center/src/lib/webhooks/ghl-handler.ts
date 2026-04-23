@@ -44,7 +44,7 @@ const PROJECT_TAGS = [
   'justicehub',
   'the-harvest',
   'act-farm',
-  'goods-on-country',
+  'goods',
   'bcv-residencies',
   'act-studio',
 ];

@@ -1,6 +1,6 @@
 ---
 id: claim-unit-economics-must-be-real
-project: goods-on-country
+project: goods
 type: claim
 frame: structural
 secondary_frame: confrontational

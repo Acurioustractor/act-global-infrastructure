@@ -1,6 +1,6 @@
 ---
 id: claim-bed-to-courtroom
-project: goods-on-country
+project: goods
 type: claim
 frame: structural
 secondary_frame: moral

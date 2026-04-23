@@ -1,6 +1,6 @@
 ---
 id: claim-not-charity-its-enterprise
-project: goods-on-country
+project: goods
 type: claim
 frame: structural
 secondary_frame: confrontational

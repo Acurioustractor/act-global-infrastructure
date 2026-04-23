@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-11T21:01:22.587Z",
+  "generatedAt": "2026-04-23T10:35:42.931Z",
   "sourcePath": "/Users/benknight/Code/act-global-infrastructure/config/living-ecosystem-canon.json",
   "counts": {
     "systems": 6,
@@ -186,7 +186,7 @@
       "notes": "Useful for exploration and handoffs. Nothing here should auto-promote into canon."
     },
     {
-      "id": "goods-on-country",
+      "id": "goods",
       "lane": "surface",
       "display_name": "Goods on Country",
       "kind": "public-site",
@@ -195,7 +195,8 @@
       "verification_status": "inferred",
       "human_decision_required": true,
       "repo_path": "/Users/benknight/Code/Goods Asset Register",
-      "canonical_note_path": "wiki/projects/goods-on-country.md",
+      "site_url": "https://www.goodsoncountry.com",
+      "canonical_note_path": "wiki/projects/goods.md",
       "notes": "Best-fit current reading is spoke. Human confirmation still required."
     },
     {
@@ -208,6 +209,7 @@
       "verification_status": "inferred",
       "human_decision_required": true,
       "repo_path": "/Users/benknight/Code/JusticeHub",
+      "site_url": "https://www.justicehub.com.au",
       "canonical_note_path": "wiki/projects/justicehub/justicehub.md",
       "notes": "Best-fit current reading is spoke. Human confirmation still required."
     },
@@ -233,6 +235,7 @@
       "verification_status": "inferred",
       "human_decision_required": true,
       "repo_path": "/Users/benknight/Code/The Harvest Website",
+      "site_url": "https://www.theharvestwitta.com.au",
       "canonical_note_path": "wiki/projects/the-harvest/the-harvest.md",
       "notes": "Best-fit current reading is spoke. Human confirmation still required."
     }

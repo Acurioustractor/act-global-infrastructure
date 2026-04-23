@@ -111,21 +111,13 @@
       ]
     },
     {
-      "name": "Goods on Country",
-      "slug": "goods-on-country",
-      "source": "el",
-      "notionStatus": null,
-      "themes": [
-        "Product Design",
-        "Cultural Design"
-      ]
-    },
-    {
-      "name": "Goods.",
+      "name": "Goods",
       "slug": "goods",
       "source": "el",
       "notionStatus": null,
       "themes": [
+        "Product Design",
+        "Cultural Design",
         "Sustainability",
         "Resource Tracking",
         "Community Assets"

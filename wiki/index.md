@@ -89,7 +89,7 @@ People pages are **curated, not exhaustive**. The wider voice population lives i
 - [[empathy-ledger|Empathy Ledger]] — sovereign storytelling, the connective tissue
 - [[justicehub|JusticeHub]] — evidence-based justice alternatives
 - [[picc|Palm Island Community Company]] — 20 years of community control
-- [[goods-on-country|Goods on Country]] — place-based design and procurement
+- [[goods|Goods]] — place-based design and procurement
 - [[the-harvest|The Harvest]] — regenerative agriculture and creative practice
 - [[act-public-voice|ACT Public Voice]] — how ACT describes itself to the world (act.place)
 - [[projects/empathy-ledger/annual-field-service|EL Annual Field Service]] — bespoke engagement scope, $50K/year per org, Y1 model
@@ -212,6 +212,8 @@ The fourth letter of [[lcaa-method|LCAA]] — physical, sensory work that makes 
 - [[how-does-the-judges-on-country-experience-feed-back-into-the-act-ecosystem|Judges on Country Feedback Loop]] — how the 30-minute experience feeds stories, signals, claims, and R&D evidence back into every system
 - [[how-should-act-engage-judges-after-the-on-country-experience-and-what-systems-ca|Engaging Judges After the Experience]] — three layers of engagement, what each captures, connection to revenue thesis
 - [[how-does-justicehub-program-search-connect-postcards-to-real-services-across-aus|Postcards to Programs]] — QR to JusticeHub, 1,775 community models, gap signals, the compounding search engine
+- [[how-should-act-apply-the-karpathy-loop-to-justicehub-the-minderoo-pitch-and-the-|Karpathy Loop Alignment]] — where auto-optimisation fits in JusticeHub, how the Minderoo pitch should translate it, and why The Brave Ones is the trace layer
+- [[how-should-act-pitch-minderoo-in-line-with-its-current-strategy-and-what-money-f|Minderoo Strategy and Money Framing]] — why the strongest Lucy pitch is Communities-first, why the anchor hold is the real oar, and why $2.9M is the better opening ask
 - [[what-is-the-third-reality-actually-solving-and-how-do-civicgraph-justicehub-and-|What the Third Reality Is Actually Solving]] — CivicGraph + JusticeHub + Empathy Ledger: how three layers produce what none can alone
 - [[how-does-act-grow-without-fanfare-through-word-of-mouth-incredible-experiences-a|Growing Without Fanfare]] — no galas, no content calendars, no parliament visits — word of mouth from experiences so good people can't stop talking
 - [[what-is-the-living-organism-the-visual-system-for-the-aesthetics-of-asymmetry|The Living Organism]] — CivicGraph as art: Cosmos.gl at 587K nodes, 6 visual episodes, physical artifacts, the data organism that breathes
@@ -227,7 +229,7 @@ A Rowboat-style typed-entity store of every public argument the ecosystem has ma
 - **CONTAINED** — [`wiki/narrative/contained/INDEX.md`](narrative/contained/INDEX.md) — 18 claims, 6 frames, [stat conflicts](narrative/contained/STAT-CONFLICTS.md) tracker
 - **JusticeHub** — [`wiki/narrative/justicehub/INDEX.md`](narrative/justicehub/INDEX.md) — 12 claims spanning the platform + STAY program + Three Circles pitch + Staying methodology + The Brave Ones photographic series. **Constellation:** [[the-full-idea|The Full Idea]] · [[three-circles|Three Circles]] · [[staying|Staying]] · [[the-brave-ones|The Brave Ones]] · [[justicehub|JusticeHub platform]].
 - **Empathy Ledger / World Tour** — [`wiki/narrative/empathy-ledger/INDEX.md`](narrative/empathy-ledger/INDEX.md) — 12 claims, the LISTEN→BUILD→MEASURE loop, story-as-OS, the corpus as procurement weapon, $1.75M-not-pre-revenue. **Source:** [strategy synthesis 2026-04-09](raw/2026-04-09-empathy-ledger-strategy-synthesis.md). **Open decisions:** [tour questions 2026-04-09](decisions/2026-04-09-empathy-ledger-tour-questions.md).
-- **Goods on Country** — [`wiki/narrative/goods-on-country/INDEX.md`](narrative/goods-on-country/INDEX.md) — 4 claims, cross-linked to CONTAINED + Empathy Ledger via `related_claims`
+- **Goods** — [`wiki/narrative/goods/INDEX.md`](narrative/goods/INDEX.md) — 4 claims, cross-linked to CONTAINED + Empathy Ledger via `related_claims`
 - **CivicGraph / Aesthetics of Asymmetry** — [`wiki/narrative/civicgraph/INDEX.md`](narrative/civicgraph/INDEX.md) — 1 claim (information-asymmetry-is-the-system), drives the 6-month art campaign
 - *(future seeds: Black Cockatoo Valley, The Harvest)*
 
@@ -298,7 +300,7 @@ wiki/
 - [[fishers-oysters|Fishers Oysters]] — Environmental Restoration, Community Enterprise
 - [[global-laundry-alliance|Global Laundry Alliance]] — Dignity, Community Hubs, Policy Change
 - [[gold-phone|Gold.Phone]] — Creative Technology, Community Connection, Storytelling
-- [[goods-on-country|Goods on Country]] — Product Design, Cultural Design
+- [[goods|Goods]] — Product Design, Cultural Design
 - [[barkly-backbone|Barkly Backbone]] — Regional Backbone Infrastructure, Northern Territory (ideation)
 - [[cars-and-microcontrollers|Cars and Microcontrollers]] — Art, Technology, Maker Culture
 - [[community-capital|Community Capital]] — Social Impact Capital, Community Convening

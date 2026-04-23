@@ -159,7 +159,7 @@
       "canonical_note_path": "wiki/projects/justicehub/justicehub.md",
       "notes": "Best-fit current reading is spoke. Human confirmation still required."
     },
-    "goods-on-country": {
+    "goods": {
       "display_name": "Goods on Country",
       "kind": "public-site",
       "classification": "spoke",
@@ -168,7 +168,7 @@
       "human_decision_required": true,
       "repo_path": "/Users/benknight/Code/Goods Asset Register",
       "site_url": "https://www.goodsoncountry.com",
-      "canonical_note_path": "wiki/projects/goods-on-country.md",
+      "canonical_note_path": "wiki/projects/goods.md",
       "notes": "Best-fit current reading is spoke. Human confirmation still required."
     },
     "black-cockatoo-valley": {

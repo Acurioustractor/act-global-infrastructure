@@ -21,11 +21,11 @@ const CORE_SITES = [
     localPath: '/Users/benknight/Code/JusticeHub',
   },
   {
-    name: 'Goods on Country',
-    slug: 'goods-on-country',
-    url: 'https://goodsoncountry.au',
+    name: 'Goods',
+    slug: 'goods',
+    url: 'https://goodsoncountry.com.au',
     github: 'Acurioustractor/goods-asset-tracker',
-    projectCode: 'GOODS',
+    projectCode: 'ACT-GD',
     localPath: '/Users/benknight/Code/Goods Asset Register',
   },
   {

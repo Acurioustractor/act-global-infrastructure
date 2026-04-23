@@ -132,11 +132,11 @@ async function logUsage(entry) {
     }
 
     const { error } = await supabase
-      .from('api_usage')
+      .from('llm_usage')
       .insert(entry);
 
     if (error) {
-      console.error('Failed to log API usage:', error.message);
+      console.error('Failed to log LLM usage:', error.message);
     }
   } catch (err) {
     console.error('Usage logging error:', err.message);

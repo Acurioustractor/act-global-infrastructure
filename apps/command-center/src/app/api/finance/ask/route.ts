@@ -1,10 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server'
 import OpenAI from 'openai'
 
-const minimax = new OpenAI({
-  apiKey: process.env.MINIMAX_API_KEY,
-  baseURL: process.env.MINIMAX_BASE_URL || 'https://api.minimax.io/v1',
-})
+// Lazy-initialised inside the handler so Vercel preview builds (which don't
+// have MINIMAX_API_KEY / OPENAI_API_KEY set) don't fail at module load during
+// `next build` page-data collection.
+function getMinimaxClient() {
+  return new OpenAI({
+    apiKey: process.env.MINIMAX_API_KEY,
+    baseURL: process.env.MINIMAX_BASE_URL || 'https://api.minimax.io/v1',
+  })
+}
 
 export async function POST(request: NextRequest) {
   try {
@@ -17,6 +22,8 @@ export async function POST(request: NextRequest) {
     if (!question) {
       return NextResponse.json({ error: 'question is required' }, { status: 400 })
     }
+
+    const minimax = getMinimaxClient()
 
     const systemPrompt = `You are ACT's Finance Tracker — embedded in the Command Center dashboard${pageTitle ? ` on the "${pageTitle}" page` : ''}. You think like a CFO who deeply understands the mission: every dollar serves community.
 

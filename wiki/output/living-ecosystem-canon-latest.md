@@ -4,7 +4,7 @@
 
 ## Summary
 
-- Generated at: **2026-04-11T21:01:22.587Z**
+- Generated at: **2026-04-23T10:35:42.931Z**
 - Systems: **6**
 - Surfaces: **6**
 - Primary assets: **4**
@@ -28,7 +28,7 @@
 | Name | ID | Lane | Class | Role | Verified | Human decision | Notes |
 |---|---|---|---|---|---|---|---|
 | Black Cockatoo Valley | `black-cockatoo-valley` | surface | spoke | project-spoke | inferred | yes | Best-fit current reading is spoke. Human confirmation still required. |
-| Goods on Country | `goods-on-country` | surface | spoke | project-spoke | inferred | yes | Best-fit current reading is spoke. Human confirmation still required. |
+| Goods on Country | `goods` | surface | spoke | project-spoke | inferred | yes | Best-fit current reading is spoke. Human confirmation still required. |
 | JusticeHub | `justicehub` | surface | spoke | project-spoke | inferred | yes | Best-fit current reading is spoke. Human confirmation still required. |
 | The Harvest | `the-harvest` | surface | spoke | project-spoke | inferred | yes | Best-fit current reading is spoke. Human confirmation still required. |
 
