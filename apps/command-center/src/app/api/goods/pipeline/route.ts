@@ -166,7 +166,6 @@ export async function GET() {
         .reduce((sum, o) => sum + o.monetary_value, 0),
       stale_opps: buyerOpps.filter(o => o.is_stale).length,
       demand_signals_still_in_buyer_pipeline: buyerOpps.filter(o => o.is_demand_signal).length,
-      last_sync: pipelines[0]?.last_synced_at ?? null,
     }
 
     return NextResponse.json({

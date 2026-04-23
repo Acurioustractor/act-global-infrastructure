@@ -14,6 +14,7 @@ import {
   RefreshCw,
 } from 'lucide-react'
 import { LoadingPage } from '@/components/ui/loading'
+import { OppDrawer } from '@/components/opp-drawer'
 
 // ━━━ Types ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -111,6 +112,7 @@ export default function GoodsPipelinePage() {
   const queryClient = useQueryClient()
   const [filterMode, setFilterMode] = useState<FilterMode>('non-signal')
   const [view, setView] = useState<'buyer' | 'demand'>('buyer')
+  const [selectedOpp, setSelectedOpp] = useState<PipelineOpp | null>(null)
 
   const { data, isLoading, error } = useQuery({
     queryKey: ['goods', 'pipeline'],
@@ -288,6 +290,7 @@ export default function GoodsPipelinePage() {
                               opp={opp}
                               provided={dragProvided}
                               isDragging={dragSnapshot.isDragging}
+                              onClick={() => setSelectedOpp(opp)}
                             />
                           )}
                         </Draggable>
@@ -301,6 +304,8 @@ export default function GoodsPipelinePage() {
           </div>
         </DragDropContext>
       )}
+
+      <OppDrawer opp={selectedOpp} onClose={() => setSelectedOpp(null)} />
     </div>
   )
 }
@@ -311,9 +316,10 @@ type OppCardProps = {
   opp: PipelineOpp
   provided: Parameters<Parameters<typeof Draggable>[0]['children']>[0]
   isDragging: boolean
+  onClick: () => void
 }
 
-function OppCard({ opp, provided, isDragging }: OppCardProps) {
+function OppCard({ opp, provided, isDragging, onClick }: OppCardProps) {
   const isAnchorOpp = isAnchor(opp)
 
   return (
@@ -321,7 +327,10 @@ function OppCard({ opp, provided, isDragging }: OppCardProps) {
       ref={provided.innerRef}
       {...provided.draggableProps}
       {...provided.dragHandleProps}
-      className={`rounded-lg p-3 transition cursor-grab active:cursor-grabbing ${
+      onClick={() => {
+        if (!isDragging) onClick()
+      }}
+      className={`rounded-lg p-3 transition cursor-pointer ${
         isDragging
           ? 'bg-white/20 shadow-lg ring-2 ring-emerald-400/50'
           : 'bg-white/10 hover:bg-white/15'

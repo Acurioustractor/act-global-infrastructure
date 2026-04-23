@@ -31,17 +31,23 @@ const supabase = createClient(
   process.env.SUPABASE_SERVICE_ROLE_KEY
 );
 
+/**
+ * Funder identity is defined by multiple signals: email domain (most reliable),
+ * company_name patterns, and known people. The matcher tries all three and
+ * picks the contact with most recent activity.
+ */
 const NAMED_FUNDERS = [
-  { name: 'Snow Foundation', key: 'snow' },
-  { name: 'QBE Foundation', key: 'qbe' },
-  { name: 'Minderoo Foundation', key: 'minderoo' },
-  { name: 'Paul Ramsay Foundation', key: 'ramsay' },
-  { name: 'Australian Communities Foundation', key: 'australian communities' },
-  { name: 'FRRR', key: 'frrr' },
-  { name: 'Vincent Fairfax Family Foundation', key: 'vincent fairfax' },
-  { name: 'AMP Foundation', key: 'amp' },
-  { name: 'Centrecorp Foundation', key: 'centrecorp' },
-  { name: 'Nova Peris Foundation', key: 'nova peris' },
+  { name: 'Snow Foundation', emailDomains: ['snowfoundation.org.au'], companyPatterns: ['snow foundation'], knownPeople: ['sally grimsley-ballard', 'georgina byron'] },
+  { name: 'QBE Foundation', emailDomains: ['qbe.com', 'qbefoundation.com'], companyPatterns: ['qbe foundation', 'qbe'], knownPeople: [] },
+  { name: 'Minderoo Foundation', emailDomains: ['minderoo.org', 'minderoo.com.au'], companyPatterns: ['minderoo'], knownPeople: [] },
+  { name: 'Paul Ramsay Foundation', emailDomains: ['paulramsayfoundation.org.au', 'paulramsay.org.au'], companyPatterns: ['paul ramsay', 'ramsay foundation'], knownPeople: [] },
+  { name: 'Australian Communities Foundation', emailDomains: ['communityfoundation.org.au', 'australiancommunities.org.au'], companyPatterns: ['australian communities foundation', 'acf'], knownPeople: [] },
+  { name: 'FRRR', emailDomains: ['frrr.org.au'], companyPatterns: ['frrr', 'foundation for rural'], knownPeople: ['steph pearson', 'katie norman'] },
+  { name: 'Vincent Fairfax Family Foundation', emailDomains: ['vfff.org.au'], companyPatterns: ['vincent fairfax', 'vfff'], knownPeople: [] },
+  { name: 'AMP Foundation', emailDomains: ['ampfoundation.com.au', 'amp.com.au'], companyPatterns: ['amp foundation', 'amp tomorrow'], knownPeople: [] },
+  { name: 'Centrecorp Foundation', emailDomains: ['centrecorp.com.au'], companyPatterns: ['centrecorp'], knownPeople: [] },
+  { name: 'Nova Peris Foundation', emailDomains: ['novaperis.org.au', 'novaperisfoundation.org.au'], companyPatterns: ['nova peris'], knownPeople: [] },
+  { name: 'The Funding Network', emailDomains: ['thefundingnetwork.com.au', 'tfn.org.au'], companyPatterns: ['funding network', 'tfn'], knownPeople: [] },
 ];
 
 const SILENCE_WARN_DAYS = 18;
@@ -50,30 +56,48 @@ const SILENCE_ESCALATE_DAYS = 21;
 async function gatherContext() {
   const today = new Date();
 
-  const lastTouches = await Promise.all(
-    NAMED_FUNDERS.map(async f => {
-      const { data } = await supabase
-        .from('ghl_contacts')
-        .select('id, name, email, updated_at, last_activity, tags')
-        .ilike('name', `%${f.key}%`)
-        .order('updated_at', { ascending: false })
-        .limit(1);
+  // Load all Goods-universe contacts once, then match in memory against all funder signals.
+  // Better than N separate queries with narrow ilike patterns.
+  const { data: allContacts } = await supabase
+    .from('ghl_contacts')
+    .select('id, ghl_id, full_name, first_name, last_name, email, company_name, tags, last_contact_date, updated_at');
 
-      const latest = data?.[0];
-      const lastTouchDate = latest?.last_activity || latest?.updated_at;
-      const daysSince = lastTouchDate
-        ? Math.floor((today - new Date(lastTouchDate)) / (24 * 60 * 60 * 1000))
-        : null;
+  const lastTouches = NAMED_FUNDERS.map(f => {
+    const matches = (allContacts ?? []).filter(c => {
+      const emailMatch = c.email && f.emailDomains.some(d =>
+        c.email.toLowerCase().endsWith('@' + d) || c.email.toLowerCase().endsWith('.' + d)
+      );
+      const companyMatch = c.company_name && f.companyPatterns.some(p =>
+        c.company_name.toLowerCase().includes(p.toLowerCase())
+      );
+      const nameMatch = c.full_name && f.knownPeople.some(p =>
+        c.full_name.toLowerCase().includes(p.toLowerCase())
+      );
+      return emailMatch || companyMatch || nameMatch;
+    });
 
-      return {
-        funder: f.name,
-        contactId: latest?.id,
-        email: latest?.email,
-        lastTouch: lastTouchDate,
-        daysSince,
-      };
-    })
-  );
+    // Pick the contact with most recent last_contact_date; fall back to updated_at.
+    matches.sort((a, b) => {
+      const ta = new Date(a.last_contact_date || a.updated_at || 0).getTime();
+      const tb = new Date(b.last_contact_date || b.updated_at || 0).getTime();
+      return tb - ta;
+    });
+    const latest = matches[0];
+    const lastTouchDate = latest?.last_contact_date || latest?.updated_at;
+    const daysSince = lastTouchDate
+      ? Math.floor((today - new Date(lastTouchDate)) / (24 * 60 * 60 * 1000))
+      : null;
+
+    return {
+      funder: f.name,
+      matchedContact: latest ? `${latest.full_name} <${latest.email ?? '-'}>` : null,
+      contactId: latest?.ghl_id,
+      email: latest?.email,
+      lastTouch: lastTouchDate,
+      daysSince,
+      matchCount: matches.length,
+    };
+  });
 
   const silent = lastTouches.filter(f =>
     f.daysSince === null || f.daysSince > SILENCE_WARN_DAYS
@@ -132,13 +156,40 @@ Style guide per funder (apply if relationship context suggests it):
 - Centrecorp — business-partnership tone; lead with order state + community impact
 - Nova Peris — Indigenous-leadership-respectful; lead with community-named voice, not CEO voice
 
-RULES:
-- 120 words maximum per draft
-- No AI tells (no "delve," "crucial," "tapestry," "underscore," em-dashes, "not just X but Y," rule-of-three padding)
-- No specific dollar figures unless you are certain they are correct — use "we" statements, not audited claims
-- No fabricated quotes from community members — if a moment from a community is used, frame it as reported by the CEO, not as a direct storyteller quote
-- One specific concrete detail per note — a deployment location, a number of beds shipped that month, a workshop moment
+ZERO-FABRICATION RULE (load-bearing — do not violate):
+
+You have NO ground-truth access to this month's deployment numbers, community
+names beyond what the CEO briefing above confirms, specific item counts,
+government procurement percentages, or storyteller moments. DO NOT invent
+them. They will be read by real funders who will notice.
+
+For EVERY factual claim in a draft note, use a placeholder marker the CEO
+fills in before send:
+
+  [# beds deployed this month — verify via asset register]
+  [community name — verify current permissioned storyteller]
+  [invoice amount — verify via Xero]
+  [date — verify]
+
+Write around the placeholders in Curtis voice. Example of the correct pattern:
+
+  Ben here. This month [# beds] went out. Most landed in [community — verify],
+  where [named relationship owner — verify] walked the install. One moment
+  worth naming: [specific detail — ADD ONLY IF VERIFIED, else omit this sentence].
+
+This makes the draft immediately useful to the CEO — they replace 3-5 brackets
+with real numbers in 60 seconds. Without brackets, the whole draft becomes
+unreviewable because fabrications look identical to facts.
+
+OTHER RULES:
+- 120 words maximum per draft, placeholders included
+- No AI tells (no "delve," "crucial," "tapestry," "underscore," em-dashes,
+  "not just X but Y," rule-of-three padding)
 - No "wanted to touch base" / "hope this finds you well" openers
+- No fabricated quotes from community members — ever
+- If a funder has NO contact record in the context, output ONLY:
+  "Status: no contact record in GHL — create a contact first"
+  and nothing else for that funder
 
 OUTPUT FORMAT:
 
