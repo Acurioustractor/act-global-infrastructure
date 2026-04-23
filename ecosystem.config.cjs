@@ -406,6 +406,32 @@ const cronScripts = [
     args: '--verbose',
     cron_restart: '7 */3 * * *', // Every 3 hours +7min (offset from grantscope-to-notion)
   },
+
+  // === Goods Agents (2026-04-23) ===
+  // Daily Xero ↔ GHL drift detector — prevents the invisible-DRAFT-invoice pattern
+  {
+    name: 'agent-xero-ghl-reconciler',
+    script: 'scripts/agents/agent-xero-ghl-reconciler.mjs',
+    cron_restart: '0 5 * * *', // Daily 05:00 AEST (before weekly reconciliation at 08:00)
+  },
+  // Weekly wiki ↔ Xero financial-claim drift detector
+  {
+    name: 'agent-invoice-drift-detector',
+    script: 'scripts/agents/agent-invoice-drift-detector.mjs',
+    cron_restart: '30 8 * * 1', // Monday 08:30 AEST (after weekly reconciliation)
+  },
+  // A1 — Weekly procurement sweep ranking top 3 buyer touches for the week
+  {
+    name: 'agent-procurement-analyst',
+    script: 'scripts/agents/agent-procurement-analyst.mjs',
+    cron_restart: '0 8 * * 1', // Monday 08:00 AEST
+  },
+  // A2 — Daily funder-silence watcher drafting progress notes for review
+  {
+    name: 'agent-funder-cadence',
+    script: 'scripts/agents/agent-funder-cadence.mjs',
+    cron_restart: '0 6 * * *', // Daily 06:00 AEST
+  },
 ];
 
 module.exports = {
