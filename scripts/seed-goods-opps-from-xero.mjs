@@ -142,14 +142,27 @@ async function main() {
       continue;
     }
 
-    // Try to find matching GHL contact by company name
+    // Try to find matching GHL contact by company name (safe from special chars)
     let contactId = null;
-    const { data: contactMatch } = await supabase
+    const { data: byCompany } = await supabase
       .from('ghl_contacts')
       .select('ghl_id')
-      .or(`company_name.ilike.${inv.contact_name}%,full_name.ilike.${inv.contact_name}%`)
+      .ilike('company_name', inv.contact_name)
       .limit(1);
-    if (contactMatch?.[0]) contactId = contactMatch[0].ghl_id;
+    if (byCompany?.[0]) {
+      contactId = byCompany[0].ghl_id;
+    } else {
+      // Fuzzy by first significant word (strip articles, split on comma/space)
+      const key = inv.contact_name.replace(/^(the|a)\s+/i, '').split(/[,\s]/)[0];
+      if (key && key.length > 2) {
+        const { data: byKey } = await supabase
+          .from('ghl_contacts')
+          .select('ghl_id')
+          .ilike('company_name', `%${key}%`)
+          .limit(1);
+        if (byKey?.[0]) contactId = byKey[0].ghl_id;
+      }
+    }
 
     plan.push({
       invoice: inv.invoice_number,
@@ -195,12 +208,32 @@ async function main() {
 
   for (const p of plan) {
     try {
+      // If no matching GHL contact, create one inline with the organisation name
+      let contactId = p.ghl_contact_id;
+      if (!contactId) {
+        // GHL requires email/phone/firstName/lastName — synthesize firstName = "Accounts"
+        // and lastName = organisation name so the contact is searchable + identifiable.
+        const orgName = p.contact_name.replace(/\s*,\s*$/, '').trim();
+        const created = await ghl.request('/contacts/', {
+          method: 'POST',
+          body: JSON.stringify({
+            locationId: process.env.GHL_LOCATION_ID,
+            firstName: 'Accounts',
+            lastName: orgName,
+            companyName: orgName,
+            tags: ['goods', 'auto-created-from-xero'],
+          }),
+        });
+        contactId = created.contact?.id || created.id;
+        console.log(`    → created GHL contact for "${p.contact_name}" (${contactId})`);
+      }
+
       const opp = await ghl.createOpportunity({
         pipelineId: buyerPipeline.ghl_id,
         stageId: p.stage_id,
         name: p.name,
         monetaryValue: p.total,
-        contactId: p.ghl_contact_id,
+        contactId,
         status: p.status === 'PAID' ? 'won' : 'open',
       });
 

@@ -108,7 +108,7 @@ async function main() {
     try {
       await ghl.updateOpportunity(s.ghl_id, {
         pipelineId: demandPipeline.ghl_id,
-        stageId: signalStage.id,
+        pipelineStageId: signalStage.id,
       });
 
       // Mirror update: Supabase will sync on next GHL pull; for immediate UI
