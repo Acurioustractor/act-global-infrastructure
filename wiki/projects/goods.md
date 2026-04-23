@@ -89,7 +89,7 @@ Multiple Tennant Creek community organisations engaged:
 - **Anyinginyi Health** — requested washing machine fleet; specs in negotiation
 - **Julalikari** — introduced ACT to Anyinginyi Health
 
-200 v1 beds were delivered to Tennant Creek communities in early 2025, but were unfunded (~$36K outstanding), creating a cashflow gap that has constrained R&D capacity.
+200 v1 beds were delivered to Tennant Creek communities in early 2025. The associated invoices were settled in late 2025: Centrecorp Foundation paid $37,620 (INV-0259) and Our Community Shed paid $13,500 (INV-0260) on 2025-08-11, and Julalikari Council paid $19,800 (INV-0282) on 2025-10-21 — total $70,920 closing the v1 bed delivery. The earlier claim that ~$36K remained outstanding was carried from pre-August 2025 and is superseded.
 
 ### Central Australia
 

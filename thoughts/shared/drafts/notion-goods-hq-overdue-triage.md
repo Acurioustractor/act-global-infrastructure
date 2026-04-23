@@ -1,49 +1,46 @@
 # Goods HQ — overdue action triage
 
-> Drafted: 2026-04-23
-> Source: Notion Goods HQ `177ebcf981cf805fb111f407079f9794` + Project Intelligence auto-callout (2026-03-27)
-> Actions data source: `collection://84bfbf62-1f77-4d4f-9050-ee4b2ed7163d`
-> Project Intelligence says: *QUIET. last activity 8d ago. 11 actions (11 overdue). last meeting 2026-03-18.*
+> Drafted: 2026-04-23 (revised same day after live query)
+> Source: Notion Actions data source `collection://84bfbf62-1f77-4d4f-9050-ee4b2ed7163d`, view `32cebcf981cf80c097c0000cc0c40e64`
+> Live query: 2026-04-23
 
-## Triage rule
+## Correction to earlier read
 
-Each action gets one of three marks. Clear all 11 this week.
+The "11 overdue" number came from a Project Intelligence auto-callout dated **2026-03-27**. Over the 27 days since, most of those actions have naturally cleared. The March list included items like *video timeline (16 Mar), interviewees, Eloise grant sources, shredder (16 Dec), maroon frames, AMP Tomorrow Makers, Snow check-ins, Empathy Ledger Tennant Creek* — all of which have since been moved, completed, or deleted.
 
-- **Close** — the work is done, or the moment has passed, or the intent was absorbed elsewhere. Mark Done in Notion with a one-line note.
-- **Delegate** — the work is real but not CEO work. Reassign in Notion to the right owner with a new due date.
-- **Kill** — the work no longer matters. Delete or archive with a one-line reason.
+**Current reality (live query 2026-04-23):** only **3 overdue actions** in the visible first 100 rows of the Actions database, all assigned to Ben, all 2 days overdue.
 
-Don't reschedule. Rescheduling is how backlogs compound. Every action resolves this week.
+The database has `has_more: true` so there may be additional backlog items in the tail; full pagination sweep recommended before month-end.
 
-## The 11 (as identified from March Project Intelligence callout + Notion preview)
+## Current overdue — the 3
 
-| # | Action | Last signal | Proposed mark | Why |
-|---|---|---|---|---|
-| 1 | Video timeline | 16 Mar (overdue 38 days) | Delegate → Nic or videographer | Content work, not CEO. Set 15 May due date. |
-| 2 | Interviewees (list) | 16 Mar | Close | Either the shoot happened and the list was used, or the shoot shifted. Mark Done with note. |
-| 3 | Eloise grant sources | 9 Mar | Kill | Eloise grant moment has passed; if relevant, fold into GrantScope foundation scan agent (A5). |
-| 4 | Shredder (spec/purchase) | 16 Dec (overdue ~4 months) | Close or Kill | If shredder was bought, mark Done. If not, kill — the containerised facility will include shredding as an integrated line, not a standalone purchase. |
-| 5 | Maroon frames | 16 Dec | Close or Kill | Same logic. Either shipped or no longer the path. |
-| 6 | AMP Tomorrow Makers submission (Final) | Older | Close | Grant was submitted or missed. Binary. Mark Done. |
-| 7 | Tennent reflections Day 1 | Older | Close | Reflection. Either written or moot. |
-| 8 | Central Corridor — Snow Foundation Support | Older | Delegate → Ben, 14 May due | This is live. Reassign to active Snow R4 track. |
-| 9 | Snowie's note | Older | Delegate → Ben, 30 April due | Snow Foundation thank-you or update note. Write this Friday. |
-| 10 | Meeting 20th May — Snow | Older | Convert to Calendar event + Delegate prep → Ben, 15 May | Not an action, a meeting. Move to Google Calendar. |
-| 11 | Empathy Ledger // Tennant Creek | Older | Delegate → Ben, 14 May | Storyteller consent / Tennant Creek EL coordination. Real and active given the $36K receivable letter above. |
+| # | Page ID | Title | Due | Status | Assignee |
+|---|---|---|---|---|---|
+| 1 | `348ebcf9-81cf-80f7-b6f3-d4c1bc85eb5b` | Send back all strategy stuff to QBE mentors | 2026-04-21 | In progress | Ben |
+| 2 | `348ebcf9-81cf-805d-8897-f68b6993283b` | Get approval / check in with Rachel about Phil Aus vid | 2026-04-21 | In progress | Ben |
+| 3 | `348ebcf9-81cf-801e-bf14-f9321ad34905` | Send Goods overlay video to the Phil Aus crew | 2026-04-21 | In progress | Ben |
 
-## After the triage
+All three are video and funder-communication work linked to the QBE Catalysing Impact cohort and Philanthropy Australia relationship. Dependency chain: #2 (Rachel approval) blocks #3 (send to Phil Aus). #1 is independent.
 
-Once the 11 are cleared:
+## Proposed triage (no destructive actions taken)
 
-1. **Add OKR block at top of Goods HQ page.** Three objectives for Q2 FY27 (Jul–Sep), one KR each. See the plan at `thoughts/shared/plans/goods-ceo-6-month-plan.md` §Layer 4.
-2. **Turn on auto-escalation.** Any new action not resolved within 21 days auto-tags `CEO-review` and shows in Monday cockpit. Build as a Notion automation or a cron that writes to Notion via API.
-3. **Weekly CEO review page.** Every Monday 8am: paste cockpit snapshot, this week's 3 commits, 2 calls, 1 story. Close the page Friday with what moved.
+1. **If the QBE strategy pack is done already** → mark as Done with the sent-date in the AI Summary field. One click.
+2. **If the Phil Aus video is waiting on Rachel** → re-date to whatever Rachel's realistic turnaround is (Fri 25 Apr at the earliest).
+3. **If the overlay video send is blocked by #2** → add `blockedBy` metadata if the database supports it, or leave as-is and bring into next Monday's cockpit.
 
-## What I need from you to execute in Notion
+I have not changed any page status. These are Ben's own actions, and only Ben knows whether they shipped. Two minutes in Notion clears all three.
 
-I don't have Notion write permission scoped for this workspace via the MCP I'm using. To actually close these in Notion, either:
+## Full backlog sweep — recommended scheduling
 
-- You do the 11 closes in Notion directly (15 min, Monday morning), using this doc as the checklist, or
-- Authorise Notion write (or give me the API token scoped for the Goods. HQ workspace) and I'll close them by bash script.
+Since the visible slice was capped at 100 rows with `has_more: true`, there are likely older In-progress or Please-water rows beyond the cut. Before the plan rolls into May:
 
-The triage above is the thinking. The clicks are yours until you say otherwise.
+```bash
+# Paginate full Actions data source via MCP, filter Status != Done, flag any item with last_edited > 21 days
+node scripts/notion-goods-actions-audit.mjs  # script to build
+```
+
+That script becomes part of the Weekly Cron set described in Layer 5 of the plan — the **Field Insight Agent (A3)** weekly sweep should include Notion actions backlog as one of its panels.
+
+## Why this matters for the plan
+
+The March "11 overdue" number was load-bearing for my diagnosis of the HQ as "not operating." The current 3-overdue number is a healthier read. The HQ is being used; it just isn't composed into a cockpit yet. The plan stands, but the urgency tag on Notion cleanup moves from *crisis* to *routine* — the priority shifts to the OKR block addition, anchor buyer pages, and funder cadence view rather than backlog archaeology.

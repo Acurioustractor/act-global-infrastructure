@@ -19,7 +19,7 @@ This plan pulls the wiki, Notion HQ, GrantScope CivicGraph, command-center dashb
 
 - 389 products deployed. 8 communities served. 9,225kg plastic diverted. 33 storytellers documenting it.
 - $445,685 philanthropy received. $537,595 total revenue recorded in Xero under ACT-GD.
-- 200 v1 beds delivered to Tennant Creek early 2025, **~$36K still outstanding**. That cashflow gap has constrained R&D capacity for 15 months.
+- 200 v1 beds delivered to Tennant Creek early 2025. **Resolved — Xero shows three invoices totalling $70,920 paid Aug–Oct 2025** (Centrecorp INV-0259 $37,620, Our Community Shed INV-0260 $13,500, Julalikari INV-0282 $19,800). The wiki's "~$36K outstanding" line was stale and has been corrected. No live receivable. The R&D capacity question is now a forward capital-stack question, not a historical-gap question.
 - $16,566,450 in GHL opportunity pipeline, 103 open opportunities, dominated by `<COMMUNITY> — Goods Demand` leads (Wadeye $1.09M, Maningrida $1.10M, Galiwinku $998K, Wurrumiyanga $749K, plus 15 more > $250K).
 - 5 confirmed anchor community partnerships: Oonchiumpa, PICC, Centrecorp, Anyinginyi, Miwatj.
 - 1 manufacturing partner confirmed for Year 1 facility (Oonchiumpa, Alice Springs pathway).
@@ -354,7 +354,7 @@ These are blocking or silently harmful today. Ship this week.
 3. **Clear 11 overdue Notion actions.** Each action: close, delegate, or kill.
 4. **Add Miwatj to buyer anchor names.** `grantscope/apps/web/src/app/goods-workspace/goods-workspace-client.tsx:372`.
 5. **Fix the `goods-lifecycle-sync.mjs` local path dep.** Move the asset CSV to Supabase Storage or a shared path so the script can run from CI/cron, not just Ben's machine.
-6. **Tennant Creek $36K receivable follow-up.** 15-month-old cashflow gap. Formal payment plan conversation with Centrecorp / Our Community Shed auspicing this week.
+6. **Tennant Creek receivable — resolved, update wiki.** The $36K claim was stale. Verified via Xero: three invoices settled Aug–Oct 2025 totalling $70,920 (Centrecorp, Our Community Shed, Julalikari). Wiki corrected 2026-04-23. No receivable action required; this clears one assumed blocker.
 
 ---
 
@@ -367,7 +367,7 @@ These are blocking or silently harmful today. Ship this week.
 - [ ] Clear 11 overdue Notion actions
 - [ ] Add `'miwatj'` to `BUYER_ANCHOR_NAMES`
 - [ ] Move asset register CSV to Supabase Storage; update `goods-lifecycle-sync.mjs` path
-- [ ] Tennant Creek $36K receivable conversation
+- [x] Tennant Creek receivable — verified settled Aug–Oct 2025 ($70,920 across 3 invoices). Wiki corrected.
 - [ ] Rework Notion Goods HQ to the operating template (OKR block, anchor pages, funder cadence view, weekly review page)
 
 ### May 2026
@@ -457,7 +457,7 @@ These are blocking or silently harmful today. Ship this week.
 | 389 products deployed | Verified (wiki) | `wiki/projects/goods.md` line 73 | 2026-04-23 |
 | $445,685 philanthropy received | Verified (wiki) | `wiki/projects/goods.md` line 78 | 2026-04-23 |
 | $537,595 total revenue | Verified (wiki, sourced from Xero ACT-GD) | `wiki/projects/goods.md` line 80; needs re-query on Xero to confirm current | 2026-04-23 |
-| Tennant Creek $36K unfunded | Verified (wiki) | `wiki/projects/goods.md` line 96 | 2026-04-23 |
+| Tennant Creek $36K unfunded | Disproved — wiki was stale | Xero query via Supabase MCP 2026-04-23: INV-0259 $37,620, INV-0260 $13,500 PAID 2025-08-11; INV-0282 $19,800 PAID 2025-10-21. Wiki corrected. | 2026-04-23 |
 | $16,566,450 GHL open opportunities | Verified (Notion) | Notion Goods HQ Opportunities roll-up | 2026-04-23 |
 | 11/11 overdue actions in Notion | Verified (Notion Project Intelligence callout) | Notion Goods HQ as of 2026-03-27 | 2026-04-23 |
 | Goods wiki page 404s in command-center | Inferred | `apps/command-center/src/lib/wiki-files.ts:121` maps to deleted file `projects/goods-on-country` | 2026-04-23 (needs browser test) |
