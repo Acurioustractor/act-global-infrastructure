@@ -56,8 +56,8 @@ const coreProjects = [
     color: 'text-orange-400',
     bg: 'bg-orange-500/20',
     border: 'border-orange-500/30',
-    actPlaceUrl: 'https://act.place/projects/goods-on-country',
-    website: 'https://goods-on-country.vercel.app',
+    actPlaceUrl: 'https://act.place/projects/goods',
+    website: 'https://goodsoncountry.com.au',
     github: 'https://github.com/Acurioustractor/goods-asset-tracker',
   },
   {

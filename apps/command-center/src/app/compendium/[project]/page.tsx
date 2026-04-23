@@ -138,8 +138,8 @@ const projectData: Record<string, {
     icon: ShoppingBag,
     color: 'text-orange-400',
     bg: 'bg-orange-500/20',
-    actPlaceUrl: 'https://act.place/projects/goods-on-country',
-    website: 'https://goodsoncountry.netlify.app',
+    actPlaceUrl: 'https://act.place/projects/goods',
+    website: 'https://goodsoncountry.com.au',
     lcaa: {
       listen: 'Understanding community economic aspirations and barriers',
       curiosity: 'Exploring models of community ownership and wealth building',

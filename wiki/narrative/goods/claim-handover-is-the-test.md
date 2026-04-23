@@ -1,6 +1,6 @@
 ---
 id: claim-handover-is-the-test
-project: goods-on-country
+project: goods
 type: claim
 frame: structural
 secondary_frame: invitational
