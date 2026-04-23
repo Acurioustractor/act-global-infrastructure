@@ -62,30 +62,52 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: updateErr.message }, { status: 500 })
     }
 
-    // 6. Reassign communications_history records
-    const { error: reassignErr } = await supabase
-      .from('communications_history')
-      .update({ ghl_contact_id: keepId })
-      .in('ghl_contact_id', mergeIds)
+    // 6. Reassign all FK-referenced tables before delete.
+    //    7 tables hold FKs to ghl_contacts — all must be handled.
+    //    Reassign (move to keeper) where history matters; delete where it doesn't.
 
-    if (reassignErr) {
-      console.error('Reassign comms error (non-blocking):', reassignErr)
+    // 6a. Resolve the internal UUIDs for merge targets (contact_entity_links uses id not ghl_id)
+    const mergeIdsStr = mergeIds.join(',')
+    const keeperUuid = keeper.id as string
+    const mergeUuids = mergeCandidates.map(c => c.id as string)
+
+    // 6b. Reassign — preserve history on keeper
+    const reassignTables: Array<{ table: string; column: string; ids: string[]; keep: string }> = [
+      { table: 'communications_history', column: 'ghl_contact_id', ids: mergeIds, keep: keepId },
+      { table: 'contact_votes',          column: 'ghl_contact_id', ids: mergeIds, keep: keepId },
+      { table: 'ghl_opportunities',      column: 'ghl_contact_id', ids: mergeIds, keep: keepId },
+      { table: 'user_identities',        column: 'ghl_contact_id', ids: mergeIds, keep: keepId },
+      { table: 'voice_notes',            column: 'related_contact_id', ids: mergeIds, keep: keepId },
+      { table: 'contact_entity_links',   column: 'contact_id', ids: mergeUuids, keep: keeperUuid },
+    ]
+
+    for (const { table, column, ids, keep } of reassignTables) {
+      const { error: err } = await supabase
+        .from(table)
+        .update({ [column]: keep })
+        .in(column, ids)
+      if (err) {
+        console.error(`[merge] reassign ${table}.${column} failed:`, err.message)
+      }
     }
 
-    // 7. Delete relationship_health rows for merged contacts (FK constraint)
+    // 6c. Delete — relationship_health is per-contact aggregation, regenerated on next run
     await supabase
       .from('relationship_health')
       .delete()
       .in('ghl_contact_id', mergeIds)
 
-    // 8. Delete the merged contacts
+    // 7. Delete the merged contacts (FK reassignments above must succeed first)
     const { error: deleteErr } = await supabase
       .from('ghl_contacts')
       .delete()
       .in('ghl_id', mergeIds)
 
     if (deleteErr) {
-      return NextResponse.json({ error: deleteErr.message }, { status: 500 })
+      return NextResponse.json(
+        { error: `Delete failed (likely FK still referenced): ${deleteErr.message}` },
+        { status: 500 }
+      )
     }
 
     // 8. Push updated tags to GHL (best-effort)
