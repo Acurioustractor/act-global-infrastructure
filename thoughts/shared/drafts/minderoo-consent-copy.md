@@ -1,5 +1,5 @@
 ---
-title: Consent-in-action copy deck — every label, explainer, tile text, voice line
+title: Consent-in-action copy deck, every label, explainer, tile text, voice line
 status: load-bearing for #consent dashboard section + booklet Page 6b
 date: 2026-04-20
 purpose: |
@@ -36,22 +36,22 @@ Sacred, held by community · 3 (never shown here)
 
 ## The OCAP badges (row beneath storyteller name on each card)
 
-Five badges. Same 11px uppercase letterspacing as existing `.chip`. Small hand-drawn stroke-only 16px glyph sits left of label. Click opens the linked governance page (Year 1 — for 1 May, hover only).
+Five badges. Same 11px uppercase letterspacing as existing `.chip`. Small hand-drawn stroke-only 16px glyph sits left of label. Click opens the linked governance page (Year 1, for 1 May, hover only).
 
 ### 1. Ownership
 
 **Label:** `Community-owned · [organisation]`
 **Hover:** This story belongs to [organisation]. ACT holds it as custodian, not owner.
 **Colour:** grass `#4a6b3a`
-**Glyph:** `ocap-glyphs/ownership.svg` — circle containing a small anchor
+**Glyph:** `ocap-glyphs/ownership.svg`, circle containing a small anchor
 **Opens:** `wiki/governance/ownership.md` (Year 1)
 
 ### 2. Control
 
 **Label:** `Controlled by [storyteller] + [elder]`
-**Hover:** Every decision about this story — edit, syndicate, withdraw — requires both the storyteller and the named elder.
+**Hover:** Every decision about this story, edit, syndicate, withdraw, requires both the storyteller and the named elder.
 **Colour:** earth `#8a5a2a`
-**Glyph:** `ocap-glyphs/control.svg` — two open hands
+**Glyph:** `ocap-glyphs/control.svg`, two open hands
 **Opens:** `wiki/governance/control.md` (Year 1)
 
 ### 3. Access
@@ -59,7 +59,7 @@ Five badges. Same 11px uppercase letterspacing as existing `.chip`. Small hand-d
 **Label:** `Shared with consent · revocable`
 **Hover:** Shown here because consent is current. One message from the storyteller or elder removes it within 24 hours.
 **Colour:** sky `#2d5f7f`
-**Glyph:** `ocap-glyphs/access.svg` — open door
+**Glyph:** `ocap-glyphs/access.svg`, open door
 **Opens:** `wiki/governance/access.md` (Year 1)
 
 ### 4. Possession
@@ -67,7 +67,7 @@ Five badges. Same 11px uppercase letterspacing as existing `.chip`. Small hand-d
 **Label:** `Held in EL v2 · verified [YYYY-MM-DD]`
 **Hover:** The story lives in Empathy Ledger v2, a sovereign-to-community data store ACT does not own.
 **Colour:** ink `#0f1111`
-**Glyph:** `ocap-glyphs/possession.svg` — vault with key
+**Glyph:** `ocap-glyphs/possession.svg`, vault with key
 **Opens:** `wiki/governance/possession.md` (Year 1)
 
 ### 5. Elder provenance
@@ -79,9 +79,9 @@ Five badges. Same 11px uppercase letterspacing as existing `.chip`. Small hand-d
 
 ## Consent-status chips (one per card, top-right)
 
-- **Active** — `chip-active` (grass). No icon needed.
-- **Awaiting elder** — `chip-emerging` (gold). Small clock glyph.
-- **Withdrawn** — new `chip-withdrawn` class, earth on cream-2, italic. Small closed-hand glyph.
+- **Active**, `chip-active` (grass). No icon needed.
+- **Awaiting elder**, `chip-emerging` (gold). Small clock glyph.
+- **Withdrawn**, new `chip-withdrawn` class, earth on cream-2, italic. Small closed-hand glyph.
 
 Hover copy:
 - Active: "This story is currently flowing with full consent."
@@ -96,10 +96,10 @@ Rule: quieter as sensitivity increases.
 No marker. Card flows normally.
 
 ### Medium
-Small gold dot beside the OCAP badge row. Hover: *"Medium cultural sensitivity. Shown with elder approval current to [YYYY-MM-DD]. Context matters — please read with care."*
+Small gold dot beside the OCAP badge row. Hover: *"Medium cultural sensitivity. Shown with elder approval current to [YYYY-MM-DD]. Context matters, please read with care."*
 
 ### High
-Country-red `#b7410e` dot AND a one-line cultural-context preface above the quote, written by the organisation. Example preface format: *"Told on [country] after [context] — please sit with this before sharing onwards. —[Organisation]"*
+Country-red `#b7410e` dot AND a one-line cultural-context preface above the quote, written by the organisation. Example preface format: *"Told on [country] after [context], please sit with this before sharing onwards. .[Organisation]"*
 Click-to-share interrupts with a modal: *"This story is culturally sensitive. Please re-confirm you have consent from [organisation] before sharing outside this page."*
 
 ### Sacred
@@ -113,30 +113,30 @@ Click-to-share interrupts with a modal: *"This story is culturally sensitive. Pl
 
 Small 16px stroke-only SVG. Shape-only (no colour meaning). Distinguished by form.
 
-### Mode 1 — Traditional Owner authority
+### Mode 1, Traditional Owner authority
 **Used by:** Oonchiumpa (Kristy Bloomfield + Tanya Turner, Central Arrernte / Eastern Arrernte / Alyawarra TOs of Mparntwe)
-**Glyph:** `ocap-glyphs/to-authority.svg` — triangle inside a circle (land inside community)
+**Glyph:** `ocap-glyphs/to-authority.svg`, triangle inside a circle (land inside community)
 **Hover:** *"Kristy and Tanya hold Traditional Owner standing for Mparntwe. Their consent satisfies the elder role. Under the authority of Aunty Bev and Uncle Terry."*
 
-### Mode 2 — Selective per-storyteller
+### Mode 2, Selective per-storyteller
 **Used by:** PICC (Palm Island Community Company)
-**Glyph:** `ocap-glyphs/selective.svg` — three small dots of uneven size
+**Glyph:** `ocap-glyphs/selective.svg`, three small dots of uneven size
 **Hover:** *"PICC does not give blanket consent. Each storyteller is asked per-story, and each answer is recorded individually."*
 
-### Mode 3 — Elders-in-Council
+### Mode 3, Elders-in-Council
 **Used by:** MMEIC (Minjerribah Moorgumpin Elders-in-Council)
-**Glyph:** `ocap-glyphs/elders-in-council.svg` — ring of five dots around a centre
+**Glyph:** `ocap-glyphs/elders-in-council.svg`, ring of five dots around a centre
 **Hover:** *"Consent is given by the Minjerribah Moorgumpin Elders-in-Council as a collective body, not by a single individual. 32 years of council practice."*
 
-### Mode 4 — CEO-as-elder for own-org compilation
+### Mode 4, CEO-as-elder for own-org compilation
 **Used by:** Mounty Yarns (Daniel Daylight, CEO)
-**Glyph:** `ocap-glyphs/ceo-as-elder.svg` — single dot with a downward anchor line
-**Hover:** *"Daniel Daylight stands as elder for the Mounty Yarns compilation he authored. His organisational authority and his cultural authority are the same signature here."*
+**Glyph:** `ocap-glyphs/ceo-as-elder.svg`, single dot with a downward anchor line
+**Hover:** *"Daniel Daylight is the elder for the Mounty Yarns compilation he authored. His organisational authority and his cultural authority are the same signature here."*
 
-### Mode 5 — Non-TO leader with per-story elder review
+### Mode 5, Non-TO leader with per-story elder review
 **Used by:** BG Fit (Brodie Germaine, non-TO org leader; elder review per story)
-**Glyph:** `ocap-glyphs/non-to-per-story.svg` — two overlapping circles
-**Hover:** *"Brodie Germaine gives organisational consent. Each story also has a separate elder named per-story — Brodie does not speak for another's Country."*
+**Glyph:** `ocap-glyphs/non-to-per-story.svg`, two overlapping circles
+**Hover:** *"Brodie Germaine gives organisational consent. Each story also has a separate elder named per-story, Brodie does not speak for another's Country."*
 
 ## The Honoured-Withdrawal tile
 
@@ -144,7 +144,7 @@ Same card dimensions as other cards. Empty hero slot containing only `ocap-glyph
 
 ### Example A (active rotation, week of 1 May)
 
-> *"Kai asked us to take his story back on 2026-04-12. We did, within 18 hours. ACT honours his choice. This placeholder will itself be removed on 2026-05-12 — a withdrawn story should not leave even a shadow behind indefinitely."*
+> *"Kai asked us to take his story back on 2026-04-12. We did, within 18 hours. ACT honours his choice. This placeholder will itself be removed on 2026-05-12, a withdrawn story should not leave even a shadow behind indefinitely."*
 
 **Sub-row (11px uppercase stone-500):** `Withdrawn · 2026-04-12 · via Kristy Bloomfield · EL v2 record: honoured`
 
@@ -178,7 +178,7 @@ Small `<details>` element. Collapsed label:
 
 **12 gates passed · click to see each**
 
-Expanded content (Year 1 — for 1 May, leave details blank or link to `config/wiki-story-sync.json`):
+Expanded content (Year 1, for 1 May, leave details blank or link to `config/wiki-story-sync.json`):
 
 1. Storyteller consent is active
 2. Elder approval is current
@@ -195,7 +195,7 @@ Expanded content (Year 1 — for 1 May, leave details blank or link to `config/w
 
 Each passed gate shown as a tick + timestamp. Each click opens a wiki page (Year 1).
 
-## Print booklet — Page 6b copy
+## Print booklet, Page 6b copy
 
 Full-page spread inside the canonical pitch booklet. Mirrors the dashboard `#consent` section for the reader who opens the envelope first.
 
@@ -221,13 +221,13 @@ Four to six story cards arranged in a 2-column grid, identical content to the da
 ### Print pull-quote (bottom-third of spread)
 
 > *"This is my story. I consent. I can take it back. Nothing changes for me if I do."*
-> — Storyteller voice, repeated across every story in this envelope.
+>, Storyteller voice, repeated across every story in this envelope.
 
 ### Print Honoured-Withdrawal callout (edge of spread)
 
 Small framed panel with the closed-hand glyph + one real withdrawal example (chose Example A or rotate). 60-80 words max.
 
-## Glossary panel (Year 1 — governance pages)
+## Glossary panel (Year 1, governance pages)
 
 Each governance page follows the same structure:
 
@@ -243,16 +243,16 @@ Each governance page follows the same structure:
 1. First person where the storyteller's voice is load-bearing. Third person factual otherwise. No marketing voice anywhere.
 2. Short sentences. No em-dashes in print (per ACT style). Commas + periods + colons.
 3. Name people. Never "a storyteller" when we mean Kristy. Never "an elder" when we mean Aunty Bev.
-4. Sensitive data never shown as placeholder — if we can't show it, we say what we can't show and why (the sacred-silence line is the model).
-5. The word "revocable" earns its place in the ribbon. The word "sovereign" is in the subtitle only (do not repeat — overuse dilutes).
+4. Sensitive data never shown as placeholder, if we can't show it, we say what we can't show and why (the sacred-silence line is the model).
+5. The word "revocable" earns its place in the ribbon. The word "sovereign" is in the subtitle only (do not repeat, overuse dilutes).
 6. Consent is written as continuous (`is consenting`, `currently agreed`) not past-tense (`gave consent`). Consent is now, not done.
 7. When quoting a storyteller, the attribution carries: name, role, age where consent permits, organisation, Country or mob where consent permits.
 
 ## Accessibility
 
 - All glyphs have `role="img"` and `aria-label` equal to their label text
-- OCAP badges are readable text first, decorated second — screen readers hear "Community-owned — Oonchiumpa" not an emoji
+- OCAP badges are readable text first, decorated second, screen readers hear "Community-owned, Oonchiumpa" not an emoji
 - Sensitivity dots have `aria-label` equal to tier name
-- The Honoured-Withdrawal tile has `aria-label="A story placeholder — this story has been withdrawn by the storyteller"`
-- Keyboard navigation through cards using tab order — hover content appears on focus too
+- The Honoured-Withdrawal tile has `aria-label="A story placeholder, this story has been withdrawn by the storyteller"`
+- Keyboard navigation through cards using tab order, hover content appears on focus too
 - Colour is never the sole carrier of meaning (status chips carry both colour and icon/label)

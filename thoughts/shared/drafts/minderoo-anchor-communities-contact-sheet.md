@@ -1,8 +1,8 @@
 ---
-title: Anchor Communities — confirmed + Session 1 candidates for workshop
+title: Anchor Communities, confirmed + Session 1 candidates for workshop
 status: draft-for-envelope
 date: 2026-04-20
-supersedes: earlier version titled "The Ten Anchor Communities — contact sheet for Minderoo envelope"
+supersedes: earlier version titled "The Ten Anchor Communities, contact sheet for Minderoo envelope"
 print_format: A4 double-sided, designed to face the Three Circles proposal + workshop proposal in the envelope
 consent_basis:
   - wiki/decisions/2026-04-18-oonchiumpa-story-approval.md
@@ -18,11 +18,11 @@ consent_basis:
 
 ---
 
-> Five anchors already confirmed. Two to three more selected together in Session 1 + Session 2 with Minderoo. The final set reaches 7–8 — one per state and territory. This sheet names what is real today and shows honestly what the workshop narrows from.
+> Five anchors already confirmed. Two to three more selected together in Session 1 + Session 2 with Minderoo. The final set reaches 7–8, one per state and territory. This sheet names what is real today and shows honestly what the workshop narrows from.
 
 ---
 
-## Page 1 — The Five Confirmed Anchors
+## Page 1, The Five Confirmed Anchors
 
 *Verbal consent captured. Governance recorded. Stories flowing through Empathy Ledger v2 with named-storyteller provenance. ALMA interventions scored. All five rank in the top 30 of the 235-candidate pool.*
 
@@ -49,7 +49,7 @@ consent_basis:
 **Leadership:** Elders-in-Council governance (founded 7 June 1994)
 **Consent given:** long-standing relationship; 3 draft ALMA interventions pending elder confirmation on intervention wording
 **Status:** Active · 32 years operating · ABN 87836925264 · Dunwich QLD 4183 · manager@mmeic.org · mmeicac.com.au
-**Data spine:** top score **0.815** — highest of all anchors after 2026-04-20 ALMA authoring
+**Data spine:** top score **0.815**, highest of all anchors after 2026-04-20 ALMA authoring
 **Contact:** via Ben Knight; MMEIC direct contacts above
 **Governance record:** `thoughts/shared/drafts/mmeic-alma-draft-interventions.md`
 
@@ -73,7 +73,7 @@ consent_basis:
 
 ---
 
-## Page 2 — Session 1 Candidates for the Remaining Seats
+## Page 2, Session 1 Candidates for the Remaining Seats
 
 *Evidence-ranked community-led Aboriginal Community Controlled organisations from ACT's data spine. Not yet contacted. No community has agreed to participate. Session 1 narrows this list with Minderoo; Session 2 confirms after each community's own consent.*
 
@@ -122,8 +122,8 @@ consent_basis:
 **Alternatives:**
 - Tasmanian Aboriginal Corporation (Tasmanian Aboriginal Centre) · Hobart · *heather.s@tacinc.com.au · 1800 132 260*
 - Circular Head Aboriginal Corporation · North-West TAS · *(see research brief)*
-- First Tasmanians Aboriginal Corporation (FTAC) · *(see research brief — ABN 89371379452)*
-- Ballawinne Aboriginal Corporation · *(see research brief — ABN 55131350525)*
+- First Tasmanians Aboriginal Corporation (FTAC) · *(see research brief, ABN 89371379452)*
+- Ballawinne Aboriginal Corporation · *(see research brief, ABN 55131350525)*
 - **Mara Melaythenner Aboriginal Corporation** ("Heart of Country") · conceptual fit for Three Circles
 
 ### ACT (0 confirmed; one seat)
@@ -135,7 +135,7 @@ consent_basis:
 
 ---
 
-## Page 2b — Newly surfaced candidates from 4,729-org review (2026-04-20)
+## Page 2b, Newly surfaced candidates from 4,729-org review (2026-04-20)
 
 Evidence-surfaced after today's data-quality sweep + ORIC bulk ingest. Every name below is a Large-tier ACCO with public contact on file. Not on page 2 above because they weren't in the original Session 1 short-form, but worth Minderoo's attention as relationship-depth alternates.
 
@@ -147,21 +147,21 @@ Evidence-surfaced after today's data-quality sweep + ORIC bulk ingest. Every nam
 - **Waltja Tjutangku Palyapayi** · Central Desert women-led · anchor-grade peer of Oonchiumpa · *reception1@waltja.org.au · (08) 8953 4488*
 - **Akeyulerre Aboriginal Corporation** · Mparntwe healing centre (Oonchiumpa's near-peer) · *admin@akeyulerre.org.au*
 
-*These can sit in the envelope as "relationship-depth alternates" — ACT has not approached them, but each is reachable today and could accelerate if Minderoo prefers a broader geographic spread or different anchor archetype per state.*
+*These can sit in the envelope as "relationship-depth alternates", ACT has not approached them, but each is reachable today and could accelerate if Minderoo prefers a broader geographic spread or different anchor archetype per state.*
 
 ---
 
-## Page 3 — Decisions for Session 1 with Lucy Stronach
+## Page 3, Decisions for Session 1 with Lucy Stronach
 
 1. **Final anchor count.** 7 (one per state, ACT via NSW's Mounty network) or 8 (ACT seat separate).
-2. **QLD treatment.** Three QLD anchors already confirmed (PICC + MMEIC + BG Fit) by circumstance — each reached via a different community-relationship pathway. Keep all three as full anchors, or consolidate to one with two becoming affiliated network?
+2. **QLD treatment.** Three QLD anchors already confirmed (PICC + MMEIC + BG Fit) by circumstance, each reached via a different community-relationship pathway. Keep all three as full anchors, or consolidate to one with two becoming affiliated network?
 3. **Shortlist narrowing.** From this ~20-candidate shortlist, which 12–15 does ACT approach between sessions? Minderoo flags any Session 1 candidates they have existing relationships with so outreach is pre-warmed.
 
 ## The Honest Frame for Minderoo
 
 **Five anchors have active relationships today** with named community leaders and verbal consent captured.
 
-**Three-to-four remain** — ACT proposes candidates from a 235-community data-spine pool. Minderoo workshops with ACT to narrow. Community consent is the final word on any anchor.
+**Three-to-four remain**, ACT proposes candidates from a 235-community data-spine pool. Minderoo workshops with ACT to narrow. Community consent is the final word on any anchor.
 
 **This is what "ten anchor communities over three years" actually looks like as it is being built**: five already running, 2–3 in named Session 1 proposal, community consent as the binding decision. The pitch commits to never naming a community as an anchor that hasn't consented.
 
@@ -174,10 +174,10 @@ Evidence-surfaced after today's data-quality sweep + ORIC bulk ingest. Every nam
 ## Pre-print checklist for Ben
 
 - [ ] Confirm Rachael Atkinson spelling at PICC (brief earlier flagged "Rachal" vs "Rachael")
-- [ ] MMEIC elder leaders — obtain named permission to include specific elders on this printed sheet, or keep as "Elders-in-Council governance"
-- [ ] BG Fit — verify Brodie is comfortable being named as the confirmation contact on a funder-facing document (not just a story source)
-- [ ] Mounty Yarns — Daniel Daylight named; verify he is comfortable being the public-facing contact or prefers "contact via Ben Knight" routing
-- [ ] Session 1 candidates (page 2) — none contacted yet; label clearly as such in any Minderoo conversation to avoid premature "anchor" claims
-- [ ] Number — decide whether the envelope + this sheet say "7-8" consistently or commit to one
-- [ ] Visual design — A4 double-sided, matte stock, ideally with small photos alongside each named community leader where they have given explicit permission. Placeholder [PHOTO] markers in layout where photos would go.
+- [ ] MMEIC elder leaders, obtain named permission to include specific elders on this printed sheet, or keep as "Elders-in-Council governance"
+- [ ] BG Fit, verify Brodie is comfortable being named as the confirmation contact on a funder-facing document (not just a story source)
+- [ ] Mounty Yarns, Daniel Daylight named; verify he is comfortable being the public-facing contact or prefers "contact via Ben Knight" routing
+- [ ] Session 1 candidates (page 2), none contacted yet; label clearly as such in any Minderoo conversation to avoid premature "anchor" claims
+- [ ] Number, decide whether the envelope + this sheet say "7-8" consistently or commit to one
+- [ ] Visual design, A4 double-sided, matte stock, ideally with small photos alongside each named community leader where they have given explicit permission. Placeholder [PHOTO] markers in layout where photos would go.
 - [ ] Print + bind into envelope after Session 1 if Minderoo's workshop changes the Session 1 candidates

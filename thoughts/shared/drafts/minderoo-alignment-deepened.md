@@ -1,5 +1,5 @@
 ---
-title: Minderoo alignment — deepened with Communities Focus Area + COLI 2025
+title: Minderoo alignment, deepened with Communities Focus Area + COLI 2025
 status: envelope-critical
 date: 2026-04-20
 sources:
@@ -9,9 +9,9 @@ sources:
   - Hartman 2025 Impact Report (endurance + accountability framing)
 ---
 
-# Alignment — deepened
+# Alignment, deepened
 
-Minderoo's Communities focus area publishes five named outcomes and four named bodies of work. The COLI August 2025 press release is the data spine. The Three Circles maps cleanly onto every one — but we need to write it in their words.
+Minderoo's Communities focus area publishes five named outcomes and four named bodies of work. The COLI August 2025 press release is the data spine. The Three Circles maps cleanly onto every one, but we need to write it in their words.
 
 ---
 
@@ -24,15 +24,15 @@ Minderoo's Communities focus area publishes five named outcomes and four named b
 | **Young children are developmentally on track and experiencing strong well-being** | BG Fit Tuesday gyms (15–20 regulars), on-Country bush camps (quarterly), per-young-person journals as durable records of one year of wellbeing |
 | **Families and caregivers are empowered to foster their young child's holistic development** | MMEIC Elders-in-Council governance (32 years), PICC family engagement ($29M delivery), Oonchiumpa's kinship-anchored case work, Mounty Yarns' Seven Hills / Blacktown family base |
 | **Families experiencing adversity can achieve economic dignity** | Anchor ACCOs are major community employers (PICC 208 FTE). The Brave Ones pathways connect young people to work on Country. ORIC enrichment now shows each anchor's financial scale + employees |
-| **Communities have the power to accelerate progress on the things that matter most to them** | The co-selection process itself — Sessions 1 + 2 workshop with Minderoo is the selection-authority sitting inside each community, not imposed. Verbal consent as first-class authority |
-| **Communities are vibrant and socially cohesive, with safe, sustainable and playable environments** | Judges on Country (165+ judge-touchpoints across 3 years). The Brave Ones reciprocal exchanges — 12+ young people see Brisbane, Sydney, Palm Island. Country as the setting that holds the young people, not the justice system |
+| **Communities have the power to accelerate progress on the things that matter most to them** | The co-selection process itself, Sessions 1 + 2 workshop with Minderoo is the selection-authority sitting inside each community, not imposed. Verbal consent as first-class authority |
+| **Communities are vibrant and socially cohesive, with safe, sustainable and playable environments** | Judges on Country (165+ judge-touchpoints across 3 years). The Brave Ones reciprocal exchanges, 12+ young people see Brisbane, Sydney, Palm Island. Country as the setting that holds the young people, not the justice system |
 
 ### Minderoo's 4 Bodies of Work × The Three Circles
 
 | Body of work | Our delivery inside it |
 |---|---|
-| **Place-based Engagement** (primary — direct match) | 7–8 anchor communities in 7–8 places. This IS Minderoo's "scaling deep in 15–20 places" language, translated to youth justice. 5 anchors already in relationship today. |
-| **Valuing the Early Years** | Youth justice is where the early-years investment either held or didn't — our young people are the downstream signal of that. Each anchor's work extends back: Oonchiumpa's 95% diversion keeps kids out of the statutory pipeline; BG Fit's Tuesday gyms are Valuing the Years 5–14 that COLI says are most cost-sensitive. |
+| **Place-based Engagement** (primary, direct match) | 7–8 anchor communities in 7–8 places. This IS Minderoo's "scaling deep in 15–20 places" language, translated to youth justice. 5 anchors already in relationship today. |
+| **Valuing the Early Years** | Youth justice is where the early-years investment either held or didn't, our young people are the downstream signal of that. Each anchor's work extends back: Oonchiumpa's 95% diversion keeps kids out of the statutory pipeline; BG Fit's Tuesday gyms are Valuing the Years 5–14 that COLI says are most cost-sensitive. |
 | **Improving Child & Family Supports** | The JusticeHub magistrate-facing service directory is the support-ecosystem-legibility tool. Maps every community-controlled alternative available per postcode. |
 | **Vibrant & Connected Communities** | The anchor network IS a connected community. The Brave Ones is the daily practice that connects them. The Year-3 national collection is what Australia gets to see. |
 
@@ -40,7 +40,7 @@ Minderoo's Communities focus area publishes five named outcomes and four named b
 
 ## The Cost-of-Late-Intervention frame applied
 
-From the 27 Aug 2025 press release — every number is a hook Ben can lead with:
+From the 27 Aug 2025 press release, every number is a hook Ben can lead with:
 
 **$22.3B annual late-intervention cost** · 47% rise since 2019 ($15.2B → $22.3B).
 *The envelope's job is to make The Three Circles legible as the "early" side of this ledger.*
@@ -48,17 +48,17 @@ From the 27 Aug 2025 press release — every number is a hook Ben can lead with:
 **Youth crime is the #2 line item.** Child protection ($10.2B) is #1.
 *The Three Circles anchors are exactly the orgs that prevent child-protection referrals escalating into youth-justice referrals. We're upstream of #2 and intercepting the transition from #1.*
 
-**NT per-capita $2,808 — nearly 3× SA ($1,011).**
+**NT per-capita $2,808, nearly 3× SA ($1,011).**
 *Oonchiumpa sits inside this NT number. Every dollar spent on Oonchiumpa is upstream of that $2,808.*
 
-**"Early intervention not only reduces long-term costs but also improves life outcomes for hundreds of thousands of children and young people."** — Nicola Forrest AO
+**"Early intervention not only reduces long-term costs but also improves life outcomes for hundreds of thousands of children and young people."**, Nicola Forrest AO
 *This sentence is the Three Circles' permission to exist. Cite it verbatim in the cover letter.*
 
 **"This is a clear case of opportunity cost. By failing to intervene early, we miss the chance to achieve better outcomes."**
 *This is our money ask rendered in Minderoo's own voice. Use in the executive summary.*
 
 **"For every child and young person who needs intensive services, there is a significant impact on families and communities."**
-*The Brave Ones, the per-young-person journals, the 16 named young voices — this is the family + community impact Minderoo is arguing for, made visible.*
+*The Brave Ones, the per-young-person journals, the 16 named young voices, this is the family + community impact Minderoo is arguing for, made visible.*
 
 ### The ratio argument
 
@@ -124,21 +124,21 @@ A timeline grid: 12 quarters × 3 Circles. Each quarter shows what ships. Year 3
 
 ---
 
-## Draft cover letter — the reframe
+## Draft cover letter, the reframe
 
 *Dear Lucy,*
 
-*In August, Minderoo's second Cost of Late Intervention report identified a $22.3 billion annual cost — a 47% rise since 2019 — that Australia spends reacting to harm instead of preventing it. Youth crime is the second-largest line item. The Northern Territory spends $2,808 per person per year, roughly three times South Australia.*
+*In August, Minderoo's second Cost of Late Intervention report identified a $22.3 billion annual cost, a 47% rise since 2019, that Australia spends reacting to harm instead of preventing it. Youth crime is the second-largest line item. The Northern Territory spends $2,808 per person per year, roughly three times South Australia.*
 
 *Nicola Forrest described it as "a clear case of opportunity cost."*
 
-*This envelope is the opportunity made visible. Across five Aboriginal Community-Controlled anchor communities — Oonchiumpa in Mparntwe, Palm Island Community Company, Minjerribah Moorgumpin Elders-in-Council, Brodie Germaine Fitness in Mount Isa, and Mounty Yarns in Mt Druitt — a method is already running. It keeps young people connected to Country, kin and future. It costs 97.6% less than detention. It is led, governed, and audited by community.*
+*This envelope is the opportunity made visible. Across five Aboriginal Community-Controlled anchor communities, Oonchiumpa in Mparntwe, Palm Island Community Company, Minjerribah Moorgumpin Elders-in-Council, Brodie Germaine Fitness in Mount Isa, and Mounty Yarns in Mt Druitt, a method is already running. It keeps young people connected to Country, kin and future. It costs 97.6% less than detention. It is led, governed, and audited by community.*
 
-*The Three Circles is a three-year ask for $2.9 million. 0.004% of a single year of Minderoo's own $22.3B figure. It does not ask Minderoo to fund what already works at the community level. It asks Minderoo to fund the partnership infrastructure — narrative, evidence, relational hold — that turns those five anchors into seven or eight, and makes them visible at national scale.*
+*The Three Circles is a three-year ask for $2.9 million. 0.004% of a single year of Minderoo's own $22.3B figure. It does not ask Minderoo to fund what already works at the community level. It asks Minderoo to fund the partnership infrastructure, narrative, evidence, relational hold, that turns those five anchors into seven or eight, and makes them visible at national scale.*
 
 *It is built, from its foundations, on what Minderoo's Communities focus area already names: place-based engagement; local knowledge and lived experience; environments that shape development; community power to accelerate progress. Every page in this envelope is a translation of that sentence into Country.*
 
-*Live proof of every name here — every story approval, every outreach reply, every record of how this method is working — updates on the dashboard at the URL on the back cover. Between today and our Session 1 conversation, every change compounds the case.*
+*Live proof of every name here, every story approval, every outreach reply, every record of how this method is working, updates on the dashboard at the URL on the back cover. Between today and our Session 1 conversation, every change compounds the case.*
 
 *I would love to walk this with you.*
 
