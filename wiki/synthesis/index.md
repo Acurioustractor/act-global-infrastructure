@@ -24,6 +24,8 @@ This folder is the **second-brain compounding loop**. Per the [Karpathy LLM know
 
 ## Synthesis articles
 
+- [[funder-alignment-2026-04-24|Funder alignment — where wiki plans, DB reality, and in-flight work diverge]] — 2026-04-24 · first artefact of the [[../../thoughts/shared/plans/act-alignment-loop|ACT Alignment Loop]]
+
 - [[how-does-the-tractorpedia-second-brain-pattern-compound-knowledge-over-time|How does the Tractorpedia second-brain pattern compound knowledge over time?]] — 2026-04-07
 
 - [[the-edge-is-where-the-healing-is-justicehub-as-the-world-model-for-community-led|The Edge Is Where the Healing Is — JusticeHub as the world model for community-led justice]] — 2026-04-07
