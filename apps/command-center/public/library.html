@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Library &middot; Three Circles &middot; A Curious Tractor</title>
+<meta name="description" content="The Stay Series. Seven methods, one library. How the Three Circles artefact is produced, bound, and carried across seven anchor communities.">
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --m-purple: #4a2560;
+    --m-purple-deep: #2e1540;
+    --m-orange-text: #a84a1c;
+    --m-gold-text: #7a5f14;
+    --m-gold: #f0b93a;
+    --m-cream: #faf5ec;
+    --m-cream-2: #f2ead9;
+    --m-stone: #2b2530;
+    --m-stone-soft: #605468;
+    --m-divider: #e6dfcf;
+    --earth-grass: #4a6b3a;
+    --earth-country: #b7410e;
+  }
+  * { box-sizing: border-box; }
+  body { font-family: 'Inter', system-ui, sans-serif; background: var(--m-cream); color: var(--m-stone); margin: 0; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  h1, h2, h3, .serif { font-family: 'Cormorant Garamond', Georgia, serif; letter-spacing: -0.01em; }
+  .serif-italic { font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; }
+  .eyebrow { font-size: 10px; text-transform: uppercase; letter-spacing: 3px; font-weight: 600; color: var(--m-stone-soft); }
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 32px; }
+  .container-narrow { max-width: 760px; margin: 0 auto; padding: 0 32px; }
+  .section { padding: 72px 0; }
+  .caption { font-size: 12px; color: var(--m-stone-soft); font-style: italic; line-height: 1.5; }
+  a { color: var(--m-purple); text-decoration: underline; text-underline-offset: 2px; }
+  a:hover { color: var(--m-purple-deep); }
+  figure { margin: 0; }
+  figure img { display: block; width: 100%; height: auto; border-radius: 8px; }
+  .top-nav { padding: 18px 32px; border-bottom: 1px solid var(--m-divider); display: flex; gap: 20px; align-items: center; font-size: 12px; }
+  .top-nav a { color: var(--m-stone-soft); text-decoration: none; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; }
+  .top-nav a:hover { color: var(--m-stone); }
+  .top-nav .brand { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 15px; text-transform: none; letter-spacing: 0; color: var(--m-stone); text-decoration: none; margin-right: auto; }
+  .top-nav a[aria-current="page"] { color: var(--m-stone); border-bottom: 2px solid var(--m-gold); padding-bottom: 4px; }
+  .hero-slipcase { background: var(--m-cream-2); padding: 72px 0; }
+  .hero-slipcase img { max-width: 900px; margin: 0 auto; box-shadow: 0 16px 50px rgba(0,0,0,0.14); border-radius: 12px; display: block; width: 100%; height: auto; }
+  .seven-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin-top: 22px; }
+  .seven-tile { background: white; border: 1px solid var(--m-divider); border-radius: 8px; padding: 14px 18px; }
+  .seven-tile .name { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 500; color: var(--m-stone); margin-bottom: 2px; letter-spacing: 0.02em; }
+  .seven-tile .place { font-size: 11px; color: var(--m-stone-soft); text-transform: uppercase; letter-spacing: 0.08em; }
+  .seven-tile .vol { font-size: 10px; color: var(--m-gold-text); text-transform: uppercase; letter-spacing: 0.12em; font-weight: 700; margin-bottom: 8px; }
+  .journals-strip { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 18px; }
+  .spreads-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+  .how-step { display: grid; grid-template-columns: 80px 1fr; gap: 24px; padding: 22px 0; border-bottom: 1px solid var(--m-divider); }
+  .how-step:last-child { border-bottom: none; }
+  .how-step .num { font-family: 'Cormorant Garamond', serif; font-size: 48px; font-weight: 500; color: var(--m-gold-text); line-height: 1; font-style: italic; }
+  .how-step h3 { font-size: 22px; font-weight: 500; line-height: 1.2; margin: 0 0 8px; }
+  .how-step p { margin: 0; font-size: 15px; line-height: 1.6; color: var(--m-stone); }
+  .cta-row { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 28px; }
+  .btn { display: inline-flex; align-items: center; gap: 6px; padding: 12px 22px; border-radius: 999px; font-size: 13px; font-weight: 600; letter-spacing: 0.05em; text-decoration: none; }
+  .btn-primary { background: var(--m-stone); color: var(--m-cream); }
+  .btn-secondary { background: transparent; color: var(--m-stone); border: 1px solid var(--m-stone); }
+  @media (max-width: 640px) {
+    .section { padding: 48px 0; }
+    .how-step { grid-template-columns: 1fr; gap: 6px; }
+    .how-step .num { font-size: 36px; }
+  }
+  /* Centred sticky in-page anchor nav */
+  .subnav { position: sticky; top: 0; z-index: 50; background: rgba(250,245,236,0.92); backdrop-filter: blur(8px); border-bottom: 1px solid var(--m-divider); }
+  .subnav-inner { max-width: 1100px; margin: 0 auto; padding: 12px 32px; display: flex; gap: 22px; align-items: center; justify-content: center; font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; flex-wrap: wrap; }
+  .subnav-link { color: var(--m-stone-soft); text-decoration: none; padding: 4px 2px; border-bottom: 2px solid transparent; transition: color 0.15s, border-color 0.15s; }
+  .subnav-link:hover { color: var(--m-stone); }
+</style>
+</head>
+<body>
+
+<nav class="top-nav" aria-label="Site navigation">
+  <a href="/minderoo-pitch.html" class="brand">The Three Circles</a>
+  <a href="/minderoo-pitch.html">Pitch</a>
+  <a href="/system.html">System</a>
+  <a href="/library.html" aria-current="page">Library</a>
+  <a href="/justicehub-intelligence.html">Living Brain</a>
+  <a href="/candidates.html">Candidates</a>
+  <a href="/ask.html">The ask</a>
+  <a href="https://wiki.act.place/projects/justicehub/three-circles">Full proposal &nearr;</a>
+</nav>
+
+<nav class="subnav" aria-label="Library sections">
+  <div class="subnav-inner">
+    <a href="#slipcase" class="subnav-link">Slipcase</a>
+    <a href="#volumes" class="subnav-link">Seven volumes</a>
+    <a href="#how" class="subnav-link">How it works</a>
+    <a href="#journals" class="subnav-link">Journals</a>
+    <a href="#spreads" class="subnav-link">Spreads</a>
+    <a href="#travel" class="subnav-link">Travel diary</a>
+  </div>
+</nav>
+
+<main>
+
+<header class="section" style="background: white">
+  <div class="container-narrow">
+    <div class="eyebrow mb-3">The artefact &middot; how the seven&rsquo;s work travels &middot; 2028</div>
+    <h1 style="font-size:56px;font-weight:500;line-height:1.02;margin:0 0 18px">The Stay Series.<br>The seven communities&rsquo; work, made into a library that travels.</h1>
+    <p class="serif-italic" style="font-size:21px;line-height:1.35;color:var(--m-stone);margin:0 0 24px">The artefact of the Three Circles is not a report. It is a seven-volume library, one book per anchor community, produced with them over three years. The artefact is the receipt for what the seven have already done. It is also the form in which the next seven communities pick it up. This page shows what it looks like, how it works, and who holds it.</p>
+  </div>
+</header>
+
+<section class="hero-slipcase" id="slipcase">
+  <div class="container">
+    <img src="/minderoo-artefact/stay-series-slipcase.png" alt="The Stay Series slipcase. Seven bound volumes standing in an open box, each spine labelled with an anchor community place name. Two hand-bound kraft journals sit to the left.">
+    <p class="caption" style="text-align:center;max-width:680px;margin:20px auto 0">The slipcase holds seven volumes. The Stay Series is organised by method (Three Circles, Living Map Loop, Three Ripples, I Have I Am I Can, Field Canvas, Listen &middot; Curiosity &middot; Action &middot; Art / LCAA, Fire Crescendo). The slipcase pictured here shows an anchor-organised arrangement of the same library, an alternative reading for partners who want to read place-by-place. The journals on the left belong to the young people: the library holds the shared method, the journal holds what is theirs alone.</p>
+  </div>
+</section>
+
+<section class="section" style="background: white" id="volumes">
+  <div class="container">
+    <div class="container-narrow" style="padding:0">
+      <div class="eyebrow mb-3">Seven volumes</div>
+      <h2 style="font-size:38px;font-weight:500;line-height:1.1;margin:0 0 12px">Seven methods. One library. Co-authored across the seven anchors.</h2>
+      <p style="font-size:16px;line-height:1.65;color:var(--m-stone);margin:0 0 12px">The Stay Series is organised by method, not by place. Each of the seven volumes carries one framework, illustrated by every anchor community&rsquo;s practice of it. Methods are <strong>chosen</strong> by the field as the load-bearing frameworks emerging from a decade of community-led work. They are also <strong>fluid</strong>: each volume is a living text, refreshed as the practice deepens, with new chapters added at every release. Today&rsquo;s seven, in their current order:</p>
+    </div>
+
+    <div class="seven-list" style="margin-top:36px">
+      <div class="seven-tile">
+        <div class="vol">No. 01</div>
+        <div class="name">The Three Circles</div>
+        <div class="place">The hold &middot; centre, ring, edge</div>
+      </div>
+      <div class="seven-tile">
+        <div class="vol">No. 02</div>
+        <div class="name">The Living Map Loop</div>
+        <div class="place">Australian Living Map of Alternatives (ALMA) &middot; alternatives at the postcode</div>
+      </div>
+      <div class="seven-tile">
+        <div class="vol">No. 03</div>
+        <div class="name">Three Ripples</div>
+        <div class="place">The practice register of Staying</div>
+      </div>
+      <div class="seven-tile">
+        <div class="vol">No. 04</div>
+        <div class="name">I Have, I Am, I Can</div>
+        <div class="place">The youth diagnostic</div>
+      </div>
+      <div class="seven-tile">
+        <div class="vol">No. 05</div>
+        <div class="name">The Field Canvas</div>
+        <div class="place">The site-walk worksheet</div>
+      </div>
+      <div class="seven-tile">
+        <div class="vol">No. 06</div>
+        <div class="name">Listen. Curiosity. Action. Art.</div>
+        <div class="place">The LCAA loop &middot; ACT method</div>
+      </div>
+      <div class="seven-tile">
+        <div class="vol">No. 07</div>
+        <div class="name">Fire Crescendo</div>
+        <div class="place">The closing register &middot; what happens after</div>
+      </div>
+    </div>
+
+    <p style="font-size:13px;color:var(--m-stone-soft);margin:24px 0 0;max-width:760px">The seven anchor communities (Mparntwe, Bwgcolman, Minjerribah, Kalkadoon and three to be confirmed in Session 2) are not the volumes. They are the co-authors. Each anchor contributes a chapter to every method volume. The slipcase image above shows an alternative arrangement (an anchor-organised reading of the same library) for funders and partners who want to read place-by-place rather than method-by-method.</p>
+
+    <figure style="max-width:1080px;margin:48px auto 0;background:white;border:1px solid var(--m-divider);border-radius:12px;padding:18px">
+      <img src="/minderoo-graphics/book-design-system.png" alt="A two-column book design system reference page titled 'JUSTICEHUB | BOOK DESIGN SYSTEM'. Left column shows the JH monogram logo in three variants, the colour palette (cream, ochre, charcoal, ribbon-blue, plum, terracotta), and typography (Cormorant Garamond Italic for serif, IM Fell English Regular for body). Centre column shows book elements (page covers, sticker seals, embossed JH logo, illustrated facades, leaf collateral). Right column shows a book cover template for 'THE LIVING MAP LOOP — 1,155 community models, and growing' with a hand-drawn Australian map at top, the JH spine label, and back cover treatment. Bottom row notes usage guidelines for tone, colour, illustration, photography, and design pattern: 'justice is relational as is knowledge.'" style="width:100%;height:auto;display:block;border-radius:6px">
+      <figcaption class="caption" style="text-align:center;margin-top:14px;max-width:760px;margin-left:auto;margin-right:auto">The book design system. Cover template, monogram, palette, typography, illustration register, photography rules, design pattern, and tone of voice. Each of the seven method volumes is bound to this system so the library reads as one body of work.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="section" style="background: var(--m-cream-2)" id="how">
+  <div class="container">
+    <div class="container-narrow" style="padding:0">
+      <div class="eyebrow mb-3">How it works</div>
+      <h2 style="font-size:38px;font-weight:500;line-height:1.1;margin:0 0 14px">The library is not documentation about the communities. It is produced with them.</h2>
+      <p style="font-size:16px;line-height:1.7;color:var(--m-stone);margin:0 0 30px">Year 1 goes to listening. Year 2 goes to co-authoring. Year 3 goes to editing, binding and release. Every page the communities don&rsquo;t want in is not in. Every page they do want in is. <strong>OCAP</strong> (Ownership, Control, Access, Possession) and <strong>CARE</strong> (Collective benefit, Authority to control, Responsibility, Ethics) Indigenous data-sovereignty principles at the data layer. Right of withdrawal at every layer.</p>
+    </div>
+
+    <div class="container-narrow" style="padding:0;margin-top:20px">
+      <div class="how-step">
+        <div class="num">1</div>
+        <div>
+          <h3>Listen &middot; FY2026</h3>
+          <p>A two-person embedded storytelling team (one North, one South) visits each anchor monthly. No extraction. Recording only with consent, in rooms the community chooses, on devices they can see. Oral history, on Country walks, yarning circles. The result is a corpus of transcripts held in Empathy Ledger v2, revocable within 24 hours.</p>
+        </div>
+      </div>
+      <div class="how-step">
+        <div class="num">2</div>
+        <div>
+          <h3>Co-author &middot; FY2027</h3>
+          <p>The team grows to three FTE. Editorial partners are named. Each anchor drafts its volume with the team. Not as consultation. As co-authorship. Elder-approved where elder approval is required. Community sign-off at each draft.</p>
+        </div>
+      </div>
+      <div class="how-step">
+        <div class="num">3</div>
+        <div>
+          <h3>Bind and release &middot; FY2028</h3>
+          <p>Documentary post-production. Book editorial. Journal binding for every young person who wants one. A national release event (The Doing Convening, workshop-led, no keynotes). International return visit, two or three peers from Spain, Africa and Europe visit anchor sites.</p>
+        </div>
+      </div>
+      <div class="how-step">
+        <div class="num">4</div>
+        <div>
+          <h3>Lives well beyond the funding</h3>
+          <p>The library goes into state libraries, university libraries, community centres. The documentary streams. The platform opens to journalists, magistrates, researchers and funders. The journals stay with the young people who own them. Minderoo&rsquo;s name sits on the artefact, the convening, and the framework launch.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="background: white" id="journals">
+  <div class="container">
+    <div class="container-narrow" style="padding:0;margin-bottom:30px">
+      <div class="eyebrow mb-3">The journals</div>
+      <h2 style="font-size:38px;font-weight:500;line-height:1.1;margin:0 0 12px">One per young person. Hand bound. Theirs.</h2>
+      <p style="font-size:16px;line-height:1.65;color:var(--m-stone);margin:0">The journals are separate from the library. Not indexed. Not searchable. Not Minderoo&rsquo;s. Not ACT&rsquo;s. One bound book per young person who wants one, owned by them, right of withdrawal at any point. One archival copy is held by ACT for the program&rsquo;s evidence base, with explicit consent only.</p>
+    </div>
+
+    <div class="journals-strip">
+      <figure>
+        <img src="/minderoo-artefact/journal-cover-stay.png" alt="A leather-bound journal titled STAY, closed with a brass-buckled leather strap on a scored wooden surface." loading="lazy">
+        <figcaption class="caption" style="margin-top:10px">Variant A &middot; painted leather</figcaption>
+      </figure>
+      <figure>
+        <img src="/minderoo-artefact/journal-cover-embossed.png" alt="A journal with embossed STAY lettering on the cover." loading="lazy">
+        <figcaption class="caption" style="margin-top:10px">Variant B &middot; embossed</figcaption>
+      </figure>
+      <figure>
+        <img src="/minderoo-artefact/journal-cover-label.png" alt="A journal with a printed label reading STAY on the cover." loading="lazy">
+        <figcaption class="caption" style="margin-top:10px">Variant C &middot; label</figcaption>
+      </figure>
+      <figure>
+        <img src="/minderoo-artefact/journal-closed.png" alt="A closed hand-bound journal on a linen surface." loading="lazy">
+        <figcaption class="caption" style="margin-top:10px">Hand bound &middot; kraft cover</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="background: var(--m-cream-2)" id="spreads">
+  <div class="container">
+    <div class="container-narrow" style="padding:0;margin-bottom:30px">
+      <div class="eyebrow mb-3">Interior spreads</div>
+      <h2 style="font-size:38px;font-weight:500;line-height:1.1;margin:0 0 12px">The method on the page.</h2>
+      <p style="font-size:16px;line-height:1.65;color:var(--m-stone);margin:0">Each volume uses a shared visual register: cream stock, Cormorant Garamond typography, marginal notes in Architects Daughter, diagrams where diagrams earn their place. Below is a sample of the method pages that appear across volumes.</p>
+    </div>
+
+    <div class="spreads-grid">
+      <figure>
+        <img src="/minderoo-artefact/three-circles-spread.png" alt="Interior spread showing the Three Circles diagram with annotation." loading="lazy">
+        <figcaption class="caption" style="margin-top:10px">The Three Circles &middot; method spread</figcaption>
+      </figure>
+      <figure>
+        <img src="/minderoo-artefact/three-ripples-spread.png" alt="Interior spread showing the Three Ripples diagram." loading="lazy">
+        <figcaption class="caption" style="margin-top:10px">Three Ripples &middot; the practice spread</figcaption>
+      </figure>
+      <figure>
+        <img src="/minderoo-artefact/alma-loop-spread.png" alt="Interior spread showing the ALMA loop." loading="lazy">
+        <figcaption class="caption" style="margin-top:10px">The ALMA loop &middot; living map of alternatives</figcaption>
+      </figure>
+      <figure>
+        <img src="/minderoo-artefact/lcaa-loop-spread.png" alt="Interior spread showing the LCAA loop (Listen, Curiosity, Action, Art)." loading="lazy">
+        <figcaption class="caption" style="margin-top:10px">Listen Curiosity Action Art &middot; the method</figcaption>
+      </figure>
+      <figure>
+        <img src="/minderoo-artefact/fire-crescendo-spread.png" alt="Interior spread showing the Fire Crescendo diagram." loading="lazy">
+        <figcaption class="caption" style="margin-top:10px">Fire Crescendo &middot; closing spread</figcaption>
+      </figure>
+      <figure>
+        <img src="/minderoo-artefact/field-diagnostic-spread.png" alt="Interior spread showing the field diagnostic tool." loading="lazy">
+        <figcaption class="caption" style="margin-top:10px">Field diagnostic &middot; for the anchors</figcaption>
+      </figure>
+      <figure>
+        <img src="/minderoo-artefact/intentionality-canvas-spread.png" alt="Interior spread showing the intentionality canvas worksheet." loading="lazy">
+        <figcaption class="caption" style="margin-top:10px">Intentionality canvas &middot; worksheet spread</figcaption>
+      </figure>
+      <figure>
+        <img src="/minderoo-artefact/field-spread.png" alt="A field spread from the journal with margin notes and a photograph." loading="lazy">
+        <figcaption class="caption" style="margin-top:10px">Field spread &middot; with margin notes</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="background: white" id="travel">
+  <div class="container-narrow">
+    <div class="eyebrow mb-3">And a travel diary</div>
+    <h2 style="font-size:34px;font-weight:500;line-height:1.1;margin:0 0 16px">A ninth thing. A travel diary, for the international ring.</h2>
+    <p style="font-size:15px;line-height:1.65;color:var(--m-stone);margin:0 0 24px">The Outer Ring of the Three Circles includes an international tour: Diagrama in Spain, peers in Africa and Europe. A separate bound volume holds what those visits surface. What Australia learns from Murcia. What Murcia learns from Palm Island. Two cultures, one world working together.</p>
+    <figure>
+      <img src="/minderoo-artefact/travel-diary.png" alt="The travel diary volume open on a wooden table with maps and a leather band." loading="lazy">
+      <figcaption class="caption" style="margin-top:12px;text-align:center">The travel diary. One volume for the international ring.</figcaption>
+    </figure>
+  </div>
+</section>
+
+</main>
+
+<footer class="section" style="background: var(--m-stone); color: var(--m-cream)">
+  <div class="container-narrow" style="text-align:center">
+    <div class="eyebrow mb-3" style="color:rgba(250,245,236,0.65)">Next</div>
+    <h2 style="font-size:30px;font-weight:500;line-height:1.2;margin:0 0 22px;color:var(--m-cream)">See how the artefact fits inside the full three-year program.</h2>
+    <div class="cta-row" style="justify-content:center">
+      <a href="/minderoo-pitch.html" class="btn" style="background:var(--m-gold);color:var(--m-stone)">Back to the pitch</a>
+      <a href="https://wiki.act.place/projects/justicehub/three-circles" class="btn" style="background:transparent;color:var(--m-cream);border:1px solid rgba(250,245,236,0.4)">Read the full proposal</a>
+    </div>
+    <p class="caption" style="margin-top:30px;color:rgba(250,245,236,0.55);max-width:520px;margin-left:auto;margin-right:auto">Every artefact on this page is consented under OCAP governance. Elder-approved where elder approval is required. Revocable within 24 hours via Empathy Ledger v2.</p>
+  </div>
+</footer>
+
+</body>
+</html>

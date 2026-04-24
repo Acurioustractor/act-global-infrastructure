@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How we identify the seven &middot; Three Circles &middot; A Curious Tractor</title>
+<meta name="description" content="The identification methodology behind the Three Circles anchor selection. From 4,729 community-controlled orgs to 138 verified candidates to seven anchors, co-selected with Minderoo from a transparent pool.">
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --m-purple: #4a2560;
+    --m-purple-deep: #2e1540;
+    --m-purple-lite: #7a5a8f;
+    --m-orange-text: #a84a1c;
+    --m-gold-text: #7a5f14;
+    --m-gold: #f0b93a;
+    --m-cream: #faf5ec;
+    --m-cream-2: #f2ead9;
+    --m-stone: #2b2530;
+    --m-stone-soft: #605468;
+    --m-divider: #e6dfcf;
+    --earth-grass: #4a6b3a;
+    --earth-country: #b7410e;
+    --earth-sky: #2d5f7f;
+  }
+  * { box-sizing: border-box; }
+  body { font-family: 'Inter', system-ui, sans-serif; background: var(--m-cream); color: var(--m-stone); margin: 0; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  h1, h2, h3, .serif { font-family: 'Cormorant Garamond', Georgia, serif; letter-spacing: -0.01em; }
+  .serif-italic { font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; }
+  .mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+  .eyebrow { font-size: 10px; text-transform: uppercase; letter-spacing: 3px; font-weight: 600; color: var(--m-stone-soft); }
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 32px; }
+  .container-narrow { max-width: 760px; margin: 0 auto; padding: 0 32px; }
+  .section { padding: 72px 0; }
+  .caption { font-size: 12px; color: var(--m-stone-soft); font-style: italic; line-height: 1.5; }
+  a { color: var(--m-purple); text-decoration: underline; text-underline-offset: 2px; }
+  a:hover { color: var(--m-purple-deep); }
+  .top-nav { padding: 18px 32px; border-bottom: 1px solid var(--m-divider); display: flex; gap: 20px; align-items: center; font-size: 12px; flex-wrap: wrap; }
+  .top-nav a { color: var(--m-stone-soft); text-decoration: none; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; }
+  .top-nav a:hover { color: var(--m-stone); }
+  .top-nav .brand { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 15px; text-transform: none; letter-spacing: 0; color: var(--m-stone); text-decoration: none; margin-right: auto; }
+  .top-nav a[aria-current="page"] { color: var(--m-stone); border-bottom: 2px solid var(--m-gold); padding-bottom: 4px; }
+  .subnav { position: sticky; top: 0; z-index: 50; background: rgba(250,245,236,0.92); backdrop-filter: blur(8px); border-bottom: 1px solid var(--m-divider); }
+  .subnav-inner { max-width: 1100px; margin: 0 auto; padding: 12px 32px; display: flex; gap: 22px; align-items: center; justify-content: center; font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; flex-wrap: wrap; }
+  .subnav-link { color: var(--m-stone-soft); text-decoration: none; padding: 4px 2px; border-bottom: 2px solid transparent; transition: color 0.15s, border-color 0.15s; }
+  .subnav-link:hover { color: var(--m-stone); }
+  .hero { background: linear-gradient(135deg, #1a0f2a 0%, var(--m-purple-deep) 50%, var(--m-purple) 100%); color: var(--m-cream); padding: 96px 0 80px; }
+  .funnel-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 8px; margin-top: 32px; align-items: end; }
+  .funnel-step { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12); border-radius: 8px; padding: 18px 16px; text-align: center; position: relative; }
+  .funnel-num { font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 500; color: var(--m-gold); line-height: 1; margin-bottom: 6px; }
+  .funnel-label { font-size: 10px; color: rgba(250,245,236,0.75); text-transform: uppercase; letter-spacing: 0.08em; line-height: 1.3; }
+  .funnel-arrow { position: absolute; top: 50%; right: -6px; transform: translateY(-50%); color: rgba(255,255,255,0.4); display: none; }
+  @media (min-width: 700px) { .funnel-arrow { display: block; } }
+  .method-step { display: grid; grid-template-columns: 80px 1fr; gap: 22px; padding: 22px 0; border-bottom: 1px solid var(--m-divider); }
+  .method-step:last-child { border-bottom: none; }
+  .method-step .num { font-family: 'Cormorant Garamond', serif; font-size: 44px; font-weight: 500; color: var(--m-gold-text); line-height: 1; font-style: italic; }
+  .method-step h3 { font-size: 22px; font-weight: 500; line-height: 1.2; margin: 0 0 8px; }
+  .method-step p { margin: 0 0 6px; font-size: 14px; line-height: 1.6; color: var(--m-stone); }
+  .method-step .source { font-size: 11px; color: var(--m-stone-soft); font-family: ui-monospace, monospace; }
+  .state-grid { display: grid; grid-template-columns: 1fr; gap: 18px; }
+  @media (min-width: 760px) { .state-grid { grid-template-columns: repeat(2, 1fr); } }
+  .state-card { background: white; border: 1px solid var(--m-divider); border-radius: 12px; padding: 24px; }
+  .state-card.confirmed { border-color: var(--m-gold); border-width: 2px; box-shadow: 0 8px 24px rgba(240,185,58,0.12); }
+  .state-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--m-divider); }
+  .state-name { font-family: 'Cormorant Garamond', serif; font-size: 30px; font-weight: 500; color: var(--m-stone); line-height: 1; }
+  .state-confirmed-pill { font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700; color: var(--m-gold-text); background: rgba(240,185,58,0.15); padding: 3px 9px; border-radius: 999px; }
+  .state-pending-pill { font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700; color: var(--m-stone-soft); background: var(--m-cream-2); padding: 3px 9px; border-radius: 999px; }
+  .top-candidate { background: var(--m-cream-2); border-radius: 8px; padding: 16px; margin-bottom: 14px; }
+  .top-candidate .org { font-size: 16px; font-weight: 600; color: var(--m-stone); line-height: 1.25; margin-bottom: 6px; }
+  .top-candidate .meta { display: flex; gap: 14px; flex-wrap: wrap; font-size: 11px; color: var(--m-stone-soft); margin-bottom: 10px; }
+  .top-candidate .meta strong { color: var(--m-stone); font-weight: 600; }
+  .top-candidate .contact-row { display: flex; gap: 8px; flex-wrap: wrap; font-size: 11px; }
+  .contact-pill { display: inline-flex; align-items: center; gap: 5px; padding: 3px 9px; border-radius: 999px; font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600; }
+  .contact-pill.has { background: rgba(74,107,58,0.12); color: var(--earth-grass); }
+  .contact-pill.missing { background: var(--m-cream); color: var(--m-stone-soft); border: 1px dashed var(--m-divider); }
+  .contact-pill a { color: inherit; text-decoration: none; }
+  .next-list { font-size: 12px; color: var(--m-stone); }
+  .next-list .next-eyebrow { font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; color: var(--m-stone-soft); margin-bottom: 6px; }
+  .next-list ol { margin: 0; padding-left: 20px; line-height: 1.55; }
+  .next-list li { margin-bottom: 2px; }
+  .next-list .lga { color: var(--m-stone-soft); font-size: 11px; }
+  .session-card { background: white; border: 1px solid var(--m-divider); border-radius: 12px; padding: 28px; }
+  .session-card h3 { font-size: 22px; font-weight: 500; line-height: 1.2; margin: 0 0 10px; }
+  .session-card .when { font-size: 11px; color: var(--m-stone-soft); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; margin-bottom: 14px; }
+  .btn { display: inline-flex; align-items: center; gap: 6px; padding: 12px 22px; border-radius: 999px; font-size: 13px; font-weight: 600; letter-spacing: 0.05em; text-decoration: none; }
+  .cta-row { display: flex; flex-wrap: wrap; gap: 14px; }
+  .legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: 11px; color: var(--m-stone-soft); margin-bottom: 14px; align-items: center; }
+  .legend-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 5px; vertical-align: middle; }
+  @media (max-width: 640px) {
+    .section, .hero { padding: 56px 0; }
+    .method-step { grid-template-columns: 1fr; gap: 6px; }
+    .method-step .num { font-size: 32px; }
+    .state-head { flex-wrap: wrap; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="top-nav" aria-label="Site navigation">
+  <a href="/minderoo-pitch.html" class="brand">The Three Circles</a>
+  <a href="/minderoo-pitch.html">Pitch</a>
+  <a href="/system.html">System</a>
+  <a href="/library.html">Library</a>
+  <a href="/justicehub-intelligence.html">Living Brain</a>
+  <a href="/candidates.html" aria-current="page">Candidates</a>
+  <a href="/ask.html">The ask</a>
+  <a href="https://wiki.act.place/projects/justicehub/three-circles">Full proposal &nearr;</a>
+</nav>
+
+<nav class="subnav" aria-label="Candidates sections">
+  <div class="subnav-inner">
+    <a href="#method" class="subnav-link">Method</a>
+    <a href="#shortlist" class="subnav-link">Shortlist</a>
+    <a href="#sessions" class="subnav-link">Workshop sessions</a>
+  </div>
+</nav>
+
+<main>
+
+<header class="hero">
+  <div class="container">
+    <div class="eyebrow" style="color:rgba(250,245,236,0.7)">Circle Two &middot; how we identify the seven</div>
+    <h1 style="font-size:56px;font-weight:500;line-height:1.04;margin:18px 0 22px;color:var(--m-cream);max-width:760px">Identified, not chosen.<br>The seven anchors are co-selected with Minderoo from a transparent pool.</h1>
+    <p class="serif-italic" style="font-size:20px;line-height:1.4;color:rgba(250,245,236,0.88);margin:0;max-width:760px">Every other youth-justice proposal Minderoo receives asserts &ldquo;we have ten anchor communities&rdquo; as established fact. Most are inflated. Our honest answer: we have one verified pool, four communities already partnering, and a workshop method that picks the final seven with you, in front of you, before any community is publicly named.</p>
+
+    <div style="display:grid;grid-template-columns:1fr;gap:30px;align-items:center;margin-top:36px" class="funnel-block">
+      <figure style="margin:0;text-align:center">
+        <img src="/minderoo-graphics/funnel-4729-to-7.png" alt="Hand-sketched funnel diagram on cream paper. Top: 4,729 community-controlled organisations. Filter: ABN currency. Below: 345 categorised candidates. Filter: ALMA portfolio fit. Below: 138 verified candidates, top 20 per state. Filter: linkage strength. Below: ~20 Session 1 shortlist. Filter: community consent. Bottom: a small ochre gold bowl labelled 'Final anchors, co-selected with Minderoo. Relational, not ranked.'" style="width:100%;max-width:340px;height:auto;border-radius:6px;background:rgba(255,255,255,0.04);padding:8px">
+        <figcaption style="font-size:11px;color:rgba(250,245,236,0.55);font-style:italic;margin-top:10px">The funnel as a working ledger page, not a SaaS chart.</figcaption>
+      </figure>
+
+      <div class="funnel-row">
+        <div class="funnel-step">
+          <div class="funnel-num">4,729</div>
+          <div class="funnel-label">Community-controlled orgs in CivicGraph</div>
+        </div>
+        <div class="funnel-step">
+          <div class="funnel-num">345</div>
+          <div class="funnel-label">Categorised candidates by entity type + control status</div>
+        </div>
+        <div class="funnel-step">
+          <div class="funnel-num">138</div>
+          <div class="funnel-label">Verified candidates, top 20 per state</div>
+        </div>
+        <div class="funnel-step">
+          <div class="funnel-num">~20</div>
+          <div class="funnel-label">Session 1 shortlist with Minderoo</div>
+        </div>
+        <div class="funnel-step" style="border-color:var(--m-gold)">
+          <div class="funnel-num">7</div>
+          <div class="funnel-label" style="color:var(--m-gold)">Final anchors, post community consent</div>
+        </div>
+      </div>
+    </div>
+    <p class="caption" style="margin-top:20px;color:rgba(250,245,236,0.55)">Pool refreshed against the GrantScope and CivicGraph data layers, 20 April 2026. Verified per-state set generated nightly.</p>
+  </div>
+</header>
+
+<section class="section" style="background: white" id="method">
+  <div class="container">
+    <div class="container-narrow" style="padding:0;margin-bottom:32px">
+      <div class="eyebrow mb-3">The method</div>
+      <h2 style="font-size:36px;font-weight:500;line-height:1.1;margin:0 0 14px">Four steps. All queryable today.</h2>
+      <p style="font-size:16px;line-height:1.65;color:var(--m-stone);margin:0">Identification is not a survey or an open call. It is a query against an evidence base we already maintain, narrowed by linkage strength and verified on a per-record basis. Outreach is a separate step that only happens after Minderoo has seen the shortlist.</p>
+    </div>
+
+    <div class="container-narrow" style="padding:0">
+      <div class="method-step">
+        <div class="num">1</div>
+        <div>
+          <h3>Map</h3>
+          <p>Start from CivicGraph: 100,036 entities resolved, 4,729 of them flagged as Aboriginal Community-Controlled or community-led. Filter on operating status, ABN currency and ACNC registration.</p>
+          <p class="source">Source: gs_entities + ACNC + ABR &middot; refreshed nightly.</p>
+        </div>
+      </div>
+      <div class="method-step">
+        <div class="num">2</div>
+        <div>
+          <h3>Filter against ALMA</h3>
+          <p>Bridge each candidate to the Australian Living Map of Alternatives (1,155 verified youth-justice interventions). Score by portfolio fit: youth-justice intervention count, cultural authority, evidence type. Only candidates with at least one ALMA-linked program survive.</p>
+          <p class="source">Source: alma_interventions joined to gs_entities via alma_intervention_id.</p>
+        </div>
+      </div>
+      <div class="method-step">
+        <div class="num">3</div>
+        <div>
+          <h3>Verify per-record</h3>
+          <p>For each survivor: linkage strength (strong / medium / weak), verification score, justice_funding history, recent state grants where data is available. The result is a per-state top 20, ranked. 138 candidates total across the eight jurisdictions.</p>
+          <p class="source">Source: justice_funding (FY24&ndash;26 QLD) + verification_score &middot; cleanup notes in the JSON file.</p>
+        </div>
+      </div>
+      <div class="method-step">
+        <div class="num">4</div>
+        <div>
+          <h3>Reach out only after Minderoo has seen the shortlist</h3>
+          <p>This is the line we will not cross. No community is contacted as a potential anchor before the workshop with Minderoo confirms they are on the shortlist. Outreach uses verified email and phone where present in the record. Where contact data is missing, the verification team retrieves it before the conversation.</p>
+          <p class="source">Outreach status tracked in <span class="mono">minderoo-selection-tracker.json</span> &middot; status values: candidate, shortlisted_s1, outreach_sent, interested, confirmed_anchor.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="background: var(--m-cream-2)" id="shortlist">
+  <div class="container">
+    <figure style="max-width:480px;margin:0 auto 32px;text-align:center">
+      <img src="/minderoo-graphics/map-of-the-seven.png" alt="Hand-drawn ink map of Australia titled 'The Seven, identified.' Four gold dots labelled with anchor place names: Mparntwe (NT), Bwgcolman / Palm Island (QLD), Kalkadoon (QLD), Minjerribah / North Stradbroke (QLD). Three open pencil-outlined circles in NSW, central western Australia, and Tasmania each labelled 'to be confirmed.'" style="width:100%;height:auto;display:block">
+      <figcaption class="caption" style="margin-top:10px">The seven, identified. Four confirmed (gold), three pencil-outlined to be confirmed in Session 2 with Minderoo.</figcaption>
+    </figure>
+    <div class="container-narrow" style="padding:0;margin-bottom:24px">
+      <div class="eyebrow mb-3">The shortlist by state</div>
+      <h2 style="font-size:36px;font-weight:500;line-height:1.1;margin:0 0 14px">One per state and territory. Top-ranked, with the next four visible.</h2>
+      <p style="font-size:15px;line-height:1.65;color:var(--m-stone);margin:0 0 14px">Below: the top-ranked verified candidate per jurisdiction, plus the next four on the per-state list. Confirmed anchors (already partnering, four of seven needed) are marked. Everything else is workshop-ready, not workshop-decided.</p>
+      <div class="legend">
+        <span><span class="legend-dot" style="background:var(--m-gold)"></span>Confirmed anchor</span>
+        <span><span class="legend-dot" style="background:var(--earth-grass)"></span>Email on file</span>
+        <span><span class="legend-dot" style="background:var(--earth-grass)"></span>Phone on file</span>
+        <span><span class="legend-dot" style="background:var(--earth-grass)"></span>Website on file</span>
+        <span><span class="legend-dot" style="background:var(--m-stone-soft)"></span>Verification needed before outreach</span>
+      </div>
+    </div>
+
+    <div class="state-grid" id="state-grid">
+      <div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--m-stone-soft);font-style:italic;font-family:Cormorant Garamond,serif;font-size:18px">Loading verified candidate set&hellip;</div>
+    </div>
+
+    <p class="caption" style="text-align:center;margin-top:30px">Full per-state top 20 (138 candidates total) lives in <a href="/minderoo-verified-candidates.json" class="mono" style="font-size:11px">minderoo-verified-candidates.json</a>. Selection status in <a href="/minderoo-selection-tracker.json" class="mono" style="font-size:11px">minderoo-selection-tracker.json</a>. Both queryable via the Living Brain agent tools.</p>
+  </div>
+</section>
+
+<section class="section" style="background: white" id="sessions">
+  <div class="container">
+    <div class="container-narrow" style="padding:0;margin-bottom:32px">
+      <div class="eyebrow mb-3">What happens next</div>
+      <h2 style="font-size:36px;font-weight:500;line-height:1.1;margin:0 0 14px">Two workshops with Minderoo. Then the seven are public.</h2>
+      <p style="font-size:15px;line-height:1.65;color:var(--m-stone);margin:0">Sessions co-selected, decisions documented, communities consenting. The method that runs in the program runs in front of you, before funding lands.</p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr;gap:18px;max-width:900px;margin:0 auto">
+      <div class="session-card">
+        <div class="when">Session 1 &middot; 90 minutes</div>
+        <h3>Narrow the 138 to ~20.</h3>
+        <p style="margin:0;font-size:14px;line-height:1.6">Minderoo and ACT walk through the verified set state by state. We surface fit signals: ALMA portfolio score, youth-justice intervention count, linkage strength, recent funding, geography. We narrow to roughly 20 candidates that we both agree are worth a community conversation.</p>
+      </div>
+      <div class="session-card">
+        <div class="when">Outreach window &middot; 4&ndash;6 weeks</div>
+        <h3>Approach the ~20. Listen. Decline gracefully where the fit is wrong.</h3>
+        <p style="margin:0;font-size:14px;line-height:1.6">ACT&rsquo;s storytelling team approaches each candidate community using the verified contact channels. Conversation is exploratory, not transactional. Communities have full right of refusal. Some will decline. Some will not be the right fit on second look. Minderoo sees the outreach status tracker live throughout.</p>
+      </div>
+      <div class="session-card" style="border-color:var(--m-gold);border-width:2px">
+        <div class="when">Session 2 &middot; 90 minutes</div>
+        <h3>Confirm the final seven.</h3>
+        <p style="margin:0;font-size:14px;line-height:1.6">Minderoo and ACT confirm the final seven anchor communities, one per state and territory wherever possible, after each community&rsquo;s explicit consent has been recorded in Empathy Ledger v2. From this point on, the seven are publicly named in the program.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="section" style="background: var(--m-stone); color: var(--m-cream)">
+  <div class="container-narrow" style="text-align:center">
+    <div class="eyebrow mb-3" style="color:rgba(250,245,236,0.65)">Next</div>
+    <h2 style="font-size:30px;font-weight:500;line-height:1.2;margin:0 0 22px;color:var(--m-cream)">See how the identified anchors fit inside the program.</h2>
+    <div class="cta-row" style="justify-content:center">
+      <a href="/minderoo-pitch.html" class="btn" style="background:var(--m-gold);color:var(--m-stone)">Back to the pitch</a>
+      <a href="/minderoo-live-dashboard.html" class="btn" style="background:transparent;color:var(--m-cream);border:1px solid rgba(250,245,236,0.4)">Live dashboard</a>
+      <a href="/justicehub-intelligence.html" class="btn" style="background:transparent;color:var(--m-cream);border:1px solid rgba(250,245,236,0.4)">Living Brain</a>
+    </div>
+    <p class="caption" style="margin-top:30px;color:rgba(250,245,236,0.55);max-width:520px;margin-left:auto;margin-right:auto">Outreach to candidate communities only happens after Session 1 with Minderoo. No public naming before Session 2 consent is captured.</p>
+  </div>
+</footer>
+
+<script>
+(async function() {
+  // Confirmed anchors from EL v2 work. State + org name + LGA + handle into the
+  // matching candidate row when the JSON loads.
+  var CONFIRMED = {
+    'NT': { match: /Oonchiumpa|Bloomfield|Atnarpa|Liddle/i, label: 'Oonchiumpa', note: 'Bloomfield + Liddle families · on Country at Atnarpa' },
+    'QLD': [
+      { match: /Palm Island|PICC/i, label: 'Palm Island Community Company', note: 'Bwgcolman · 217 staff, 87% Aboriginal/TSI' },
+      { match: /MMEIC|Minjerribah|Quandamooka/i, label: 'MMEIC', note: 'Quandamooka' },
+      { match: /BG Fit|Brodie Germaine/i, label: 'BG Fit', note: 'Mount Isa + Doomadgee · Kalkadoon Country' }
+    ]
+  };
+
+  var grid = document.getElementById('state-grid');
+  var data;
+  try {
+    var r = await fetch('/minderoo-verified-candidates.json?v=' + Date.now());
+    if (!r.ok) throw new Error('candidates fetch failed ' + r.status);
+    data = await r.json();
+  } catch (err) {
+    grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--earth-country);font-style:italic">Could not load verified-candidates JSON. Refresh, or check the network tab.</div>';
+    return;
+  }
+
+  var stateOrder = ['NT', 'QLD', 'NSW', 'VIC', 'WA', 'SA', 'TAS', 'ACT'];
+  var byState = data.candidates_by_state || {};
+  var html = '';
+
+  function escapeHtml(s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+  function isConfirmed(state, org) {
+    var rules = CONFIRMED[state];
+    if (!rules) return null;
+    var rs = Array.isArray(rules) ? rules : [rules];
+    return rs.find(function(r) { return r.match.test(org || ''); }) || null;
+  }
+  function contactPill(label, url, isLink) {
+    if (url) return '<span class="contact-pill has">' + (isLink ? '<a href="' + escapeHtml(url) + '" target="_blank" rel="noopener">' + label + '</a>' : escapeHtml(label)) + '</span>';
+    return '<span class="contact-pill missing">' + label + ' &nbsp;&middot;&nbsp; needed</span>';
+  }
+
+  stateOrder.forEach(function(state) {
+    var rows = byState[state] || [];
+    if (!rows.length) return;
+    // Promote a confirmed candidate to the top of the card if it exists in the list,
+    // otherwise pick the highest-ranked row.
+    var top = rows[0];
+    var confirmedTag = isConfirmed(state, top.org_name);
+    for (var i = 0; i < rows.length; i++) {
+      var maybe = isConfirmed(state, rows[i].org_name);
+      if (maybe) { top = rows[i]; confirmedTag = maybe; break; }
+    }
+    var nextFour = rows.filter(function(r) { return r !== top; }).slice(0, 4);
+    var emailHref = top.contact_email ? 'mailto:' + top.contact_email : '';
+    var phoneHref = top.contact_phone ? 'tel:' + String(top.contact_phone).replace(/[^0-9+]/g, '') : '';
+    var website = top.contact_website || top.website || '';
+
+    html += '<article class="state-card' + (confirmedTag ? ' confirmed' : '') + '">'
+      + '<div class="state-head">'
+      + '<div class="state-name">' + state + '</div>'
+      + (confirmedTag
+          ? '<span class="state-confirmed-pill">Confirmed &middot; ' + escapeHtml(confirmedTag.label) + '</span>'
+          : '<span class="state-pending-pill">Top candidate &middot; pending workshop</span>')
+      + '</div>'
+      + '<div class="top-candidate">'
+      + '<div class="org">' + escapeHtml(top.org_name) + '</div>'
+      + '<div class="meta">'
+      + (top.lga ? '<span><strong>LGA</strong> ' + escapeHtml(top.lga) + (top.postcode ? ' (' + escapeHtml(top.postcode) + ')' : '') + '</span>' : '')
+      + (typeof top.portfolio_score === 'number' ? '<span><strong>ALMA score</strong> ' + top.portfolio_score.toFixed(2) + '</span>' : '')
+      + (top.yj_intervention_count != null ? '<span><strong>YJ programs</strong> ' + top.yj_intervention_count + '</span>' : '')
+      + (top.linkage_strength ? '<span><strong>Linkage</strong> ' + escapeHtml(top.linkage_strength.replace(/_/g, ' ')) + '</span>' : '')
+      + (top.acnc_size ? '<span><strong>Size</strong> ' + escapeHtml(top.acnc_size) + '</span>' : '')
+      + '</div>'
+      + (confirmedTag ? '<div style="font-size:11px;font-style:italic;color:var(--m-gold-text);margin-bottom:10px;line-height:1.5">' + escapeHtml(confirmedTag.note) + '</div>' : '')
+      + '<div class="contact-row">'
+      + contactPill(top.contact_email ? 'Email' : 'Email', emailHref, true)
+      + contactPill(top.contact_phone ? 'Phone' : 'Phone', phoneHref, true)
+      + contactPill(website ? 'Website' : 'Website', website, true)
+      + '</div>'
+      + '</div>'
+      + (nextFour.length ? '<div class="next-list">'
+        + '<div class="next-eyebrow">Also on the per-state list</div>'
+        + '<ol>' + nextFour.map(function(c) { return '<li>' + escapeHtml(c.org_name) + '<span class="lga">' + (c.lga ? ' &middot; ' + escapeHtml(c.lga) : '') + '</span></li>'; }).join('') + '</ol>'
+        + '</div>' : '')
+      + '</article>';
+  });
+  grid.innerHTML = html || '<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--m-stone-soft);font-style:italic">No state data found in the JSON file.</div>';
+})();
+</script>
+
+</body>
+</html>
