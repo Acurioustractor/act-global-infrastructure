@@ -1,5 +1,5 @@
 ---
-title: The Three Circles — canonical pitch for Minderoo Foundation
+title: The Three Circles, canonical pitch for Minderoo Foundation
 status: draft v2 · ready for design pass
 date: 2026-04-20
 target_format: 16-page A4 booklet, bound
@@ -15,16 +15,16 @@ minderoo_portfolio_lead: Lucy Stronach (Youth Justice + Early Years)
 
 ---
 
-## Page 1 — Begin on Country
+## Page 1, Begin on Country
 
-> *"When you stand here in Mparntwe, you are not just standing in a town. You're standing in one of the oldest cultural landscapes in the world. And the Arrernte word for this place isn't just a name — it's a story, it's a responsibility."*
-> — Tanya Turner, Eastern Arrernte woman, welcoming 55 judges and magistrates to Mparntwe, 16 April 2026
+> *"When you stand here in Mparntwe, you are not just standing in a town. You're standing in one of the oldest cultural landscapes in the world. And the Arrernte word for this place isn't just a name, it's a story, it's a responsibility."*
+>, Tanya Turner, Eastern Arrernte woman, welcoming 55 judges and magistrates to Mparntwe, 16 April 2026
 
-This envelope begins where the program begins — on Country, with permission, under cultural authority.
+This envelope begins where the program begins, on Country, with permission, under cultural authority.
 
-On the evening of 16 April 2026, Kristy Bloomfield — Central Arrernte, Eastern Arrernte and Alyawarra Traditional Owner of Mparntwe — opened the National Judicial College of Australia's first-ever Indigenous Justice Program, welcoming 55 judges and magistrates onto her Country. The next morning, Friday 17 April 2026, those 55 judges walked onto Eastern Arrernte Country at Atnarpa under the leadership of Oonchiumpa Consultancy and Services.
+On the evening of 16 April 2026, Kristy Bloomfield, Central Arrernte, Eastern Arrernte and Alyawarra Traditional Owner of Mparntwe, opened the National Judicial College of Australia's first-ever Indigenous Justice Program, welcoming 55 judges and magistrates onto her Country. The next morning, Friday 17 April 2026, those 55 judges walked onto Eastern Arrernte Country at Atnarpa under the leadership of Oonchiumpa Consultancy and Services.
 
-That the institution which trains every Australian judge chose **Oonchiumpa's on-Country day as the foundation of the program** is not incidental to this envelope. It is the envelope's thesis. *The community-led method is already carrying Australia's youth-justice capability — it just hasn't been resourced to keep doing so.*
+That the institution which trains every Australian judge chose **Oonchiumpa's on-Country day as the foundation of the program** is not incidental to this envelope. It is the envelope's thesis. *The community-led method is already carrying Australia's youth-justice capability, it just hasn't been resourced to keep doing so.*
 
 The Three Circles is a three-year, $2.9 million partnership to hold five Aboriginal Community-Controlled anchor communities that are already running the method, and to co-select 2–3 more with Minderoo in Sessions 1 and 2.
 
@@ -32,10 +32,10 @@ $2.9 million over three years is **0.013% of a single year** of the $22.3 billio
 
 ---
 
-## Page 2 — The method, named from source
+## Page 2, The method, named from source
 
 > *"Our Alternative Service Response is not an add-on to the justice system. It's a cultural foundation that justice should stand on in this region."*
-> — Tanya Turner, Oonchiumpa
+>, Tanya Turner, Oonchiumpa
 
 Oonchiumpa's **Alternative Service Response (ASR)** is what Minderoo's 2024 Cost of Late Intervention report calls a **wrap-around model** (CoLI24 p. ii, recommendation #3). ACT didn't translate COLI24 back into community language. Oonchiumpa named the pillars from cultural logic, years before the report was written.
 
@@ -43,24 +43,24 @@ Oonchiumpa's **Alternative Service Response (ASR)** is what Minderoo's 2024 Cost
 
 **1. Cultural reconnection.** *"Young people need identity and belonging. We take them back to culture, back to Elders, back to story, back to the law of kinship that teach responsibility and respect long before any Western law does."*
 
-**2. Intensive family support.** *"Families in Central Australia navigate overcrowded housing, poverty, intergenerational trauma, and constant crisis. We walk alongside them — not judging, not lecturing — strengthening the whole system around the young person."*
+**2. Intensive family support.** *"Families in Central Australia navigate overcrowded housing, poverty, intergenerational trauma, and constant crisis. We walk alongside them, not judging, not lecturing, strengthening the whole system around the young person."*
 
-**3. Realistic flexible case management.** *"Our team doesn't sit behind a desk. We are Country, in the community, in the late-night spaces where young people actually move. We respond to crises early and prevent escalation — because if you meet a young person at a time that works for them, you prevent half the things that bring them to court in the first place."*
+**3. Realistic flexible case management.** *"Our team doesn't sit behind a desk. We are Country, in the community, in the late-night spaces where young people actually move. We respond to crises early and prevent escalation, because if you meet a young person at a time that works for them, you prevent half the things that bring them to court in the first place."*
 
-**4. Bridging two worlds.** *"We translate between systems — the court, police, schools, child protection — and cultural norms that operate on completely different logic."*
+**4. Bridging two worlds.** *"We translate between systems, the court, police, schools, child protection, and cultural norms that operate on completely different logic."*
 
 Every confirmed anchor practises some version of these four pillars, in their own place, in their own language, on their own Country:
 
-- **Oonchiumpa (Mparntwe, NT)** — 95% diversion, 72% school re-engagement, 97.6% less cost than detention
-- **Palm Island Community Company (Palm Island, QLD)** — $29M turnover, 208 FTE, YOSS grown 3× since 2021
-- **Minjerribah Moorgumpin (Minjerribah, QLD)** — 32 years of Quandamooka Elders-in-Council governance
-- **Brodie Germaine Fitness (Mount Isa, QLD)** — Tuesday gyms + monthly bush camps + Doomadgee remote outreach
-- **Mounty Yarns (Mt Druitt, NSW)** — youth-led hub, 13 storytellers, CONTAINED mobile base camp
+- **Oonchiumpa (Mparntwe, NT)**, 95% diversion, 72% school re-engagement, 97.6% less cost than detention
+- **Palm Island Community Company (Palm Island, QLD)**, $29M turnover, 208 FTE, YOSS grown 3× since 2021
+- **Minjerribah Moorgumpin (Minjerribah, QLD)**, 32 years of Quandamooka Elders-in-Council governance
+- **Brodie Germaine Fitness (Mount Isa, QLD)**, Tuesday gyms + monthly bush camps + Doomadgee remote outreach
+- **Mounty Yarns (Mt Druitt, NSW)**, youth-led hub, 13 storytellers, CONTAINED mobile base camp
 
 *Two cultures, one world working together.* That is Oonchiumpa's operating philosophy. It is also, more precisely than "partner-led", what Minderoo's 2030 Strategy is asking for.
 
 > *"We still tell the past, but we also going to tell the future now. Our most important thing is our kids and their kids being connected. To protect this place."*
-> — Kylie Bloomfield
+>, Kylie Bloomfield
 
 The founders' authority travels through Elders Aunty Bev and Uncle Terry, through the young people, and through the work. Fred Campbell, Oonchiumpa's youth case worker, names what the method actually produces:
 
@@ -70,7 +70,7 @@ Not a program. Trust, earned. Country, held. Kids, kept inside their own kin.
 
 ---
 
-## Page 3 — What the young people themselves say
+## Page 3, What the young people themselves say
 
 ### Jackquann, 14. Upper Camp.
 
@@ -113,49 +113,49 @@ Taleigha is challenging every policy-making table in the country. She is also na
 
 ---
 
-## Page 4 — The hub idea, made literal
+## Page 4, The hub idea, made literal
 
 COLI24 recommendation #3 says:
 
 > *"Invest in wrap-around models. Since the 2019 report, further evidence has been released on the need to stack interventions to support children and young people given the complexity of issues facing families. A variety of models such as hubs and foyers, enable providers to respond to a multiplicity of issues."*
-> — CoLI24, p. ii
+>, CoLI24, p. ii
 
 Every confirmed anchor is already one of these models, in its place, for its community:
 
 - **Oonchiumpa** stacks diversion + school re-engagement + on-Country + elder authority + case work in a single hub that serves 7 language groups.
-- **Palm Island Community Company (PICC)** runs $29M of delivery across 208 FTE — health, housing, family, Youth Offender Support Service grown 3× since 2021 — on a single island.
+- **Palm Island Community Company (PICC)** runs $29M of delivery across 208 FTE, health, housing, family, Youth Offender Support Service grown 3× since 2021, on a single island.
 - **Minjerribah Moorgumpin Elders-in-Council (MMEIC)** holds 32 years of Quandamooka cultural governance, the upstream layer before any service touches a child.
 - **BG Fit (Mount Isa)** stacks Tuesday gym + monthly bush camps + Doomadgee remote outreach (500km) + Spinifex residential partnership.
-- **Mounty Yarns (Mt Druitt)** runs the CONTAINED mobile base, Youth Peak peer support, caseworker network, and 13 named storytellers — a youth-led hub for Darug Country.
+- **Mounty Yarns (Mt Druitt)** runs the CONTAINED mobile base, Youth Peak peer support, caseworker network, and 13 named storytellers, a youth-led hub for Darug Country.
 
 Five hubs, five kinds of wrap-around, all First Nations governed. All already operating.
 
 **The Three Circles holds them for three years and extends the method to two or three more.**
 
-The choice of the additional anchors is made *with* Minderoo in Session 1 and Session 2. Not ACT imposing a list. Sessions walk through the 50-candidate pool — per-state verified ACCOs from our data spine — and narrow to 7 or 8 with Minderoo in the room. Community consent is the final word.
+The choice of the additional anchors is made *with* Minderoo in Session 1 and Session 2. Not ACT imposing a list. Sessions walk through the 50-candidate pool, per-state verified ACCOs from our data spine, and narrow to 7 or 8 with Minderoo in the room. Community consent is the final word.
 
 ---
 
-## Page 4b — Endorsed by the bench
+## Page 4b, Endorsed by the bench
 
 **The Australian judiciary has already chosen Oonchiumpa as the foundation.**
 
-On 17 April 2026, the National Judicial College of Australia — the institution that trains every Australian judge — ran its first-ever Indigenous Justice Program. The on-Country day at the heart of that program was hosted by Oonchiumpa Consultancy and Services at Atnarpa Outstation, 80km east of Mparntwe.
+On 17 April 2026, the National Judicial College of Australia, the institution that trains every Australian judge, ran its first-ever Indigenous Justice Program. The on-Country day at the heart of that program was hosted by Oonchiumpa Consultancy and Services at Atnarpa Outstation, 80km east of Mparntwe.
 
-> *"This is the National Judicial College of Australia Indigenous Justice Program. It's a first for the National Judicial College, and perhaps long overdue. It's led by an on-Country day that sets the foundation for the conversation that happens over the rest of the course. And that on-Country Day is here — at the Atnarpa Outstation, under Oonchiumpa consultancy and the leadership of Tanya and Kristy."*
-> — Anthony Hopkins, Alice Springs Judge
+> *"This is the National Judicial College of Australia Indigenous Justice Program. It's a first for the National Judicial College, and perhaps long overdue. It's led by an on-Country day that sets the foundation for the conversation that happens over the rest of the course. And that on-Country Day is here, at the Atnarpa Outstation, under Oonchiumpa consultancy and the leadership of Tanya and Kristy."*
+>, Anthony Hopkins, Alice Springs Judge
 
 **Two members of the bench spoke on camera, on the record, that day:**
 
-**Louise Taylor** — Judge of the ACT Supreme Court · Kamilaroi woman · Co-chair of the National Judicial College organising committee:
+**Louise Taylor**, Judge of the ACT Supreme Court · Kamilaroi woman · Co-chair of the National Judicial College organising committee:
 
 > *"Kristy and Tanya really exemplify what's possible when we are given the space to lead things for ourselves. The potential for their work to have relevance for so many Australians is immeasurable."*
 
-**Anthony Hopkins** — Alice Springs Judge · long connection with Kristy Bloomfield through the Aboriginal Legal Service:
+**Anthony Hopkins**, Alice Springs Judge · long connection with Kristy Bloomfield through the Aboriginal Legal Service:
 
-> *"Country is central, but that is because it's inseparable from the people that are of country. Being here on our under country at Atnarpa is a place where they can hear from people speaking from country that they are part of, that they are inseparable from — and that just brings a change of power."*
+> *"Country is central, but that is because it's inseparable from the people that are of country. Being here on our under country at Atnarpa is a place where they can hear from people speaking from country that they are part of, that they are inseparable from, and that just brings a change of power."*
 
-### The four-column endorsement — unique in Australian youth-justice philanthropy
+### The four-column endorsement, unique in Australian youth-justice philanthropy
 
 | Column | Evidence |
 |---|---|
@@ -166,41 +166,41 @@ On 17 April 2026, the National Judicial College of Australia — the institution
 
 **The Three Circles is the first Australian youth-justice philanthropic ask to carry all four columns.** Lucy Stronach takes this to the Minderoo Board with cultural authority, institutional endorsement, national evidence, and international legitimacy already in place.
 
-### The ripple — how Communities spend reshapes Justice
+### The ripple, how Communities spend reshapes Justice
 
-Judge Hopkins named the structural mechanism. Minderoo's Communities investment in Oonchiumpa reshapes Australian Justice from the inside — two-for-one portfolio value:
+Judge Hopkins named the structural mechanism. Minderoo's Communities investment in Oonchiumpa reshapes Australian Justice from the inside, two-for-one portfolio value:
 
 > *Judges experience Country → Judicial practice shifts → Court structure reshapes → Employment within courts → Stakeholder engagement → Sentencing + policy → **Young people no longer the collateral***
 
 > *"The ripple effect of change, of personal change, leading out to being able to influence the way your courts operate, but also the court structure, employment within courts, and the stakeholders that are engaging within court."*
-> — Anthony Hopkins
+>, Anthony Hopkins
 
 Minderoo's $2.9M, spent on the method already centred by the Australian judiciary, moves in four directions at once: Communities portfolio delivery · Justice portfolio delivery · First Nations lens · Early Years lens (the COLI24 trajectory).
 
 ---
 
-## Page 4c — Consent in action
+## Page 4c, Consent in action
 
 **Indigenous data sovereignty, operating.**
 
-Every story in this envelope — and every story on the live dashboard — carries a named storyteller, a named elder, an active consent chain, and a revocation path. The content belongs to the community, not to us. What you see is what is currently agreed. If an agreement changes, what you see changes.
+Every story in this envelope, and every story on the live dashboard, carries a named storyteller, a named elder, an active consent chain, and a revocation path. The content belongs to the community, not to us. What you see is what is currently agreed. If an agreement changes, what you see changes.
 
 ### The four OCAP principles, made visible on each story card
 
-- **Ownership** — the story belongs to the organisation. ACT holds it as custodian, not owner.
-- **Control** — every decision (edit, syndicate, withdraw) requires both the storyteller and the named elder.
-- **Access** — the story is shown because consent is current. One message from storyteller or elder removes it within 24 hours.
-- **Possession** — the story lives in Empathy Ledger v2, a sovereign-to-community data store ACT does not own.
+- **Ownership**, the story belongs to the organisation. ACT holds it as custodian, not owner.
+- **Control**, every decision (edit, syndicate, withdraw) requires both the storyteller and the named elder.
+- **Access**, the story is shown because consent is current. One message from storyteller or elder removes it within 24 hours.
+- **Possession**, the story lives in Empathy Ledger v2, a sovereign-to-community data store ACT does not own.
 
 ### Five consent modes, one per anchor
 
 Each anchor community has chosen its own consent mode. The dashboard renders a small glyph on each card naming which mode applies:
 
-- **Traditional Owner authority** — Oonchiumpa. Kristy and Tanya hold TO standing for Mparntwe; their consent satisfies the elder role. Under the authority of Aunty Bev and Uncle Terry.
-- **Selective per-storyteller** — PICC. No blanket consent. Each storyteller is asked per-story, and each answer is recorded individually.
-- **Elders-in-Council** — MMEIC. Consent is given by the collective body, not by a single individual. 32 years of council practice.
-- **CEO-as-elder for own-org compilation** — Mounty Yarns. Daniel Daylight stands as elder for the compilation he authored.
-- **Non-TO leader + per-story elder review** — BG Fit. Brodie Germaine gives organisational consent; each story also names a separate elder.
+- **Traditional Owner authority**, Oonchiumpa. Kristy and Tanya hold TO standing for Mparntwe; their consent satisfies the elder role. Under the authority of Aunty Bev and Uncle Terry.
+- **Selective per-storyteller**, PICC. No blanket consent. Each storyteller is asked per-story, and each answer is recorded individually.
+- **Elders-in-Council**, MMEIC. Consent is given by the collective body, not by a single individual. 32 years of council practice.
+- **CEO-as-elder for own-org compilation**, Mounty Yarns. Daniel Daylight is the elder for the compilation he authored.
+- **Non-TO leader + per-story elder review**, BG Fit. Brodie Germaine gives organisational consent; each story also names a separate elder.
 
 ### Sensitivity is calibrated. Silence is a feature.
 
@@ -213,7 +213,7 @@ Each anchor community has chosen its own consent mode. The dashboard renders a s
 
 On the dashboard, between the active story cards, sits a tile with no photograph. It says:
 
-> *"Kai asked us to take his story back on 2026-04-12. We did, within 18 hours. ACT honours his choice. This placeholder will itself be removed on 2026-05-12 — a withdrawn story should not leave even a shadow behind indefinitely."*
+> *"Kai asked us to take his story back on 2026-04-12. We did, within 18 hours. ACT honours his choice. This placeholder will itself be removed on 2026-05-12, a withdrawn story should not leave even a shadow behind indefinitely."*
 
 That tile is there on purpose. It proves the mechanism by using it. The data is gone; the fact of the withdrawal remains; that fact will also go.
 
@@ -227,53 +227,53 @@ Repeated across the envelope. It is the rule every other sentence must survive.
 
 This page is not a governance appendix. It is the envelope's proof that *the Three Circles is a cultural foundation, not a data product.* Every page in the booklet that cites a storyteller has their name, their elder, and their current consent status behind it. Every photograph is present because someone said yes, and is removable because they can say otherwise tomorrow. Indigenous data sovereignty is not a claim this envelope makes. It is the mechanism this envelope runs on.
 
-The 12-gate OCAP chain inside Empathy Ledger v2 enforces this operationally. The live dashboard at the URL on the back cover makes it visible. Minderoo's $2.9M funds the partnership infrastructure that lets this machinery keep running for three years — so the community-owned corpus compounds, and the revocation rights compound with it.
+The 12-gate OCAP chain inside Empathy Ledger v2 enforces this operationally. The live dashboard at the URL on the back cover makes it visible. Minderoo's $2.9M funds the partnership infrastructure that lets this machinery keep running for three years, so the community-owned corpus compounds, and the revocation rights compound with it.
 
 ---
 
-## Page 5 — How this scales across Australia
+## Page 5, How this scales across Australia
 
 Five anchors today. The method is not five programs. It is one method practised in five places, each in its own language, each on its own Country.
 
-What makes the method transferable is not a manual. It is **local Indigenous systems intelligence** — the knowledge held inside each community about who their young people are, which elders hold authority, what Country means where, how kinship shapes who can say what. Transferable not by instruction but by *being seen*.
+What makes the method transferable is not a manual. It is **local Indigenous systems intelligence**, the knowledge held inside each community about who their young people are, which elders hold authority, what Country means where, how kinship shapes who can say what. Transferable not by instruction but by *being seen*.
 
 Across the pool today we hold:
 
-- **Queensland** — 1,093 community-controlled organisations; 42 Large-tier; three anchors already confirmed (PICC + MMEIC + BG Fit). The state funding layer (FY24–26) tells us $280K–$44M has already flowed to community-controlled operators here. The Three Circles adds a national-voice layer to this.
-- **New South Wales** — 1,065 community-controlled organisations; 48 Large-tier; Mounty Yarns the anchor; Kinchela Boys Home survivor-led Corporation in the relationship-depth tier.
-- **Northern Territory** — 756 community-controlled organisations; 75 Large-tier; Oonchiumpa the anchor; Waltja Tjutangku Palyapayi and Tangentyere Council in the relationship-depth tier.
-- **Western Australia** — 960 community-controlled organisations; 79 Large-tier; Olabud Doogethu (Halls Creek, the justice-reinvestment model) the recommended Session 1 anchor; Marra Worra Worra, Kullarri, Winun Ngari in alternates.
-- **Victoria** — 255 community-controlled organisations; 17 Large-tier; Rumbalara recommended; Wurundjeri Woi-wurrung RAP, Ramahyuck, Koorie Youth Council as alternates; Dja Dja Wurrung + Taungurung as relationship-depth.
-- **South Australia** — 220 community-controlled organisations; 16 Large-tier; Scotdesco recommended; Yalata Anangu Aboriginal Corporation + Koonibba as alternates.
-- **Tasmania** — 38 community-controlled organisations (structurally thin); 4 Large-tier; ATSILS TAS recommended; Mara Melaythenner Aboriginal Corporation — "Heart of Country" — as a deep conceptual fit for Three Circles.
-- **ACT** — 238 community-controlled organisations (1 Large-tier); Gugan Gulwan Youth Aboriginal Corporation the explicit youth-dedicated ACCO. Session 1 decides whether ACT is a seat of its own or is served via Mounty's NSW network.
+- **Queensland**, 1,093 community-controlled organisations; 42 Large-tier; three anchors already confirmed (PICC + MMEIC + BG Fit). The state funding layer (FY24–26) tells us $280K–$44M has already flowed to community-controlled operators here. The Three Circles adds a national-voice layer to this.
+- **New South Wales**, 1,065 community-controlled organisations; 48 Large-tier; Mounty Yarns the anchor; Kinchela Boys Home survivor-led Corporation in the relationship-depth tier.
+- **Northern Territory**, 756 community-controlled organisations; 75 Large-tier; Oonchiumpa the anchor; Waltja Tjutangku Palyapayi and Tangentyere Council in the relationship-depth tier.
+- **Western Australia**, 960 community-controlled organisations; 79 Large-tier; Olabud Doogethu (Halls Creek, the justice-reinvestment model) the recommended Session 1 anchor; Marra Worra Worra, Kullarri, Winun Ngari in alternates.
+- **Victoria**, 255 community-controlled organisations; 17 Large-tier; Rumbalara recommended; Wurundjeri Woi-wurrung RAP, Ramahyuck, Koorie Youth Council as alternates; Dja Dja Wurrung + Taungurung as relationship-depth.
+- **South Australia**, 220 community-controlled organisations; 16 Large-tier; Scotdesco recommended; Yalata Anangu Aboriginal Corporation + Koonibba as alternates.
+- **Tasmania**, 38 community-controlled organisations (structurally thin); 4 Large-tier; ATSILS TAS recommended; Mara Melaythenner Aboriginal Corporation, "Heart of Country", as a deep conceptual fit for Three Circles.
+- **ACT**, 238 community-controlled organisations (1 Large-tier); Gugan Gulwan Youth Aboriginal Corporation the explicit youth-dedicated ACCO. Session 1 decides whether ACT is a seat of its own or is served via Mounty's NSW network.
 
 Every name on every row is reachable by email and phone today. Every ABN has been cross-referenced to the Australian Charities and Not-for-profits Commission register and the ORIC register. Every financial tier has been verified against the 8 April 2026 ORIC dataset.
 
 This is not a prospect list. It is a data spine under community consent discipline.
 
-**How does it scale? Not by exporting the method — by holding the next community long enough that they bring their own version of it.** ACT's role is partnership infrastructure. The anchors are the teachers.
+**How does it scale? Not by exporting the method, by holding the next community long enough that they bring their own version of it.** ACT's role is partnership infrastructure. The anchors are the teachers.
 
 ---
 
-## Page 6 — The shared-knowledge, local-intelligence layer
+## Page 6, The shared-knowledge, local-intelligence layer
 
 The map is not the territory. But the map is what lets Oonchiumpa's practice meet BG Fit's practice meet Mounty Yarns' practice, on the same month, at the same table, without any one of them becoming the template.
 
-- **The Australian Living Map of Alternatives** — 1,155 community-led youth-justice interventions currently scored across evidence, authority, risk, implementation, option value. Grows quarterly.
-- **CivicGraph** — 100,000+ entity-resolved organisations with 199K relationships mapped and now 7,285 ORIC indigenous corporations enriched with corporation size + 2024 financials + industry sectors (as of today).
-- **Empathy Ledger v2** — the consented-story corpus, First Nations data sovereignty governed. 25 stories flowing today. 440+ stories across communities ACT is in relationship with.
-- **JusticeHub platform** — live at justicehub.com.au; magistrate service directory prototyped; evidence layer for the court.
+- **The Australian Living Map of Alternatives**, 1,155 community-led youth-justice interventions currently scored across evidence, authority, risk, implementation, option value. Grows quarterly.
+- **CivicGraph**, 100,000+ entity-resolved organisations with 199K relationships mapped and now 7,285 ORIC indigenous corporations enriched with corporation size + 2024 financials + industry sectors (as of today).
+- **Empathy Ledger v2**, the consented-story corpus, First Nations data sovereignty governed. 25 stories flowing today. 440+ stories across communities ACT is in relationship with.
+- **JusticeHub platform**, live at justicehub.com.au; magistrate service directory prototyped; evidence layer for the court.
 
 These are not products. They are **one backbone of local-Indigenous systems thinking, rendered queryable.**
 
-Minderoo has already funded national-evidence backbones of this shape: the Indigenous Employment Index (Generation One, 2022), the Cost of Late Intervention itself. The Three Circles is the **youth-justice equivalent of the Indigenous Employment Index** — a national dataset + narrative layer owned by community, built for national policy use, available to every magistrate, funder, and community leader at once.
+Minderoo has already funded national-evidence backbones of this shape: the Indigenous Employment Index (Generation One, 2022), the Cost of Late Intervention itself. The Three Circles is the **youth-justice equivalent of the Indigenous Employment Index**, a national dataset + narrative layer owned by community, built for national policy use, available to every magistrate, funder, and community leader at once.
 
 Each anchor feeds the backbone. The backbone connects the anchors to each other. Together they become the first community-owned national evidence base for what works in youth justice that is *not* a government report.
 
 ---
 
-## Page 7 — International leadership
+## Page 7, International leadership
 
 Three years in, the anchor communities are not just visible within Australia. They are visible internationally.
 
@@ -281,7 +281,7 @@ Three years in, the anchor communities are not just visible within Australia. Th
 
 **YOPE Amsterdam** runs the open-foster-community model for at-risk youth that the Netherlands government scaled after decades of community-led proof.
 
-Year 2 and Year 3 of The Three Circles fund **the Brave Ones exchanges** — 3 to 4 international trips per year. Four young people plus two workers per trip. They see the Spanish method. They see the Dutch method. They bring the learning back to Doomadgee, to Mparntwe, to Mt Druitt.
+Year 2 and Year 3 of The Three Circles fund **the Brave Ones exchanges**, 3 to 4 international trips per year. Four young people plus two workers per trip. They see the Spanish method. They see the Dutch method. They bring the learning back to Doomadgee, to Mparntwe, to Mt Druitt.
 
 More importantly, **the Spanish and Dutch come to Australia to see the anchors.**
 
@@ -294,19 +294,19 @@ By end of Year 3:
 This is not vanity-exchange. It is the closing of the attribution loop. Australian community work, recognised as world-class, funded and scaled at home *because* it is recognised abroad. The international standing generates the domestic capital that domestic funders otherwise struggle to justify.
 
 > *"Young people can do things if they are encouraged and they get nurtured towards that way and they get believed in. Then they can also help make a difference."*
-> — Amelia Wyman, Mangpa Guara woman, Wilcannia
+>, Amelia Wyman, Mangpa Guara woman, Wilcannia
 
 ---
 
-## Page 8 — The three-year budget
+## Page 8, The three-year budget
 
 $2.9 million across three financial years. Mapped to Minderoo's own 2030 Strategy functions.
 
 | Function | 3-year | % |
 |---|---:|---:|
 | **Partnership infrastructure** (ACCO anchor hold, co-design, governance records) | $1,050K | 36% |
-| **Narrative + evidence production** (Advocacy and Engagement — editorial lead 0.8 FTE + research 0.5 FTE) | $700K | 24% |
-| **The Brave Ones — young people's practice + international exchanges** (Generation One × Thrive by Five) | $600K | 21% |
+| **Narrative + evidence production** (Advocacy and Engagement, editorial lead 0.8 FTE + research 0.5 FTE) | $700K | 24% |
+| **The Brave Ones, young people's practice + international exchanges** (Generation One × Thrive by Five) | $600K | 21% |
 | **National evidence backbone** (Australian Living Map + CivicGraph + EL v2 integration) | $400K | 14% |
 | **Judges on Country + magistrate engagement** (policy influence) | $150K | 5% |
 | **Total** | **$2,900K** | 100% |
@@ -322,17 +322,17 @@ $2.9 million across three financial years. Mapped to Minderoo's own 2030 Strateg
 | Judges on Country | $50K | $50K | $50K |
 | **Year total** | **$930K** | **$1,050K** | **$920K** |
 
-**Year 1** sets the relationships and lays the editorial layer. **Year 2** is peak — international exchanges begin, documentary shoots. **Year 3** is consolidation and release — the national artefact ships, the book launches, the method becomes transferable.
+**Year 1** sets the relationships and lays the editorial layer. **Year 2** is peak, international exchanges begin, documentary shoots. **Year 3** is consolidation and release, the national artefact ships, the book launches, the method becomes transferable.
 
 ### The ROI
 
-COLI24 cites (p. 5) a **$2-for-$1 return on early intervention investment** across multiple Australian evaluations (PWC 2019, SVA 2019, Accenture 2022). Applied to The Three Circles' $2.9M: minimum **$5.8M of avoided late-intervention cost** by 2029 — before the documentary, the book, and the anchor-community knowledge scale themselves.
+COLI24 cites (p. 5) a **$2-for-$1 return on early intervention investment** across multiple Australian evaluations (PWC 2019, SVA 2019, Accenture 2022). Applied to The Three Circles' $2.9M: minimum **$5.8M of avoided late-intervention cost** by 2029, before the documentary, the book, and the anchor-community knowledge scale themselves.
 
 Break-even is conservative: preventing **one child-year** of detention at Victoria's $7,775/day benchmark across the entire cohort returns the full $2.9M ask.
 
 ---
 
-## Page 9 — Alignment with Minderoo's 2030 strategy
+## Page 9, Alignment with Minderoo's 2030 strategy
 
 The Three Circles delivers directly on every one of Minderoo Communities' five published outcomes:
 
@@ -341,25 +341,25 @@ The Three Circles delivers directly on every one of Minderoo Communities' five p
 | Young children are developmentally on track and experiencing strong wellbeing | BG Fit Tuesday gyms, Oonchiumpa on-Country programs, per-young-person journals |
 | Families and caregivers are empowered to foster their young child's holistic development | MMEIC Elders-in-Council governance, PICC family engagement ($29M delivery), Mounty Yarns' Mt Druitt family base |
 | Families experiencing adversity can achieve economic dignity | Anchor ACCOs are major community employers (PICC 208 FTE). Brave Ones pathways. ORIC-enriched financials now show scale |
-| Communities have the power to accelerate progress on the things that matter most to them | The co-selection Sessions 1 and 2 process itself — selection authority sits inside each community |
+| Communities have the power to accelerate progress on the things that matter most to them | The co-selection Sessions 1 and 2 process itself, selection authority sits inside each community |
 | Communities are vibrant and socially cohesive, with safe, sustainable and playable environments | Judges on Country (165+ judge touchpoints over 3 years). Brave Ones reciprocal exchanges. International exchanges |
 
 And on all four of Minderoo's Communities focus area bodies of work:
 
-- **Place-based Engagement** — 7–8 anchors, each in its place. The direct match.
-- **Valuing the Early Years** — the upstream trajectory of every youth-justice touchpoint we intercept.
-- **Improving Child & Family Supports** — the JusticeHub magistrate service directory is the legibility tool.
-- **Vibrant & Connected Communities** — the anchor network *is* a connected community.
+- **Place-based Engagement**, 7–8 anchors, each in its place. The direct match.
+- **Valuing the Early Years**, the upstream trajectory of every youth-justice touchpoint we intercept.
+- **Improving Child & Family Supports**, the JusticeHub magistrate service directory is the legibility tool.
+- **Vibrant & Connected Communities**, the anchor network *is* a connected community.
 
 And against the three lenses Minderoo applies to all work:
 
-- **First Nations** — every anchor is an Aboriginal Community-Controlled Organisation.
-- **Gender equality** — Oonchiumpa is women-led (Kristy + Tanya + Aunty Bev). MMEIC's Elders-in-Council includes women. Mounty Yarns' Leah and Amelia are women-led.
-- **Climate** — on-Country practice is climate-connected practice. Brave Ones bush camps, RNTBC Country connections, Country as the environment shaping youth development (Minderoo's own 2030 language).
+- **First Nations**, every anchor is an Aboriginal Community-Controlled Organisation.
+- **Gender equality**, Oonchiumpa is women-led (Kristy + Tanya + Aunty Bev). MMEIC's Elders-in-Council includes women. Mounty Yarns' Leah and Amelia are women-led.
+- **Climate**, on-Country practice is climate-connected practice. Brave Ones bush camps, RNTBC Country connections, Country as the environment shaping youth development (Minderoo's own 2030 language).
 
 ---
 
-## Page 10 — What lands after three years: the bow
+## Page 10, What lands after three years: the bow
 
 Every circle ends in an artefact. After three years of the practice, what Minderoo gets to hold is not a report.
 
@@ -369,7 +369,7 @@ It is:
 
 **A book.** Edited from the Empathy Ledger corpus. 450+ consented stories narrowed to ~120 selected by a young-person editorial board. Published in Year 3. A physical artefact for every MP, every magistrate, every anchor community, every Minderoo portfolio director.
 
-**Per-young-person journals.** Each young person who walked through one of the anchors during the three years holds a physical artefact that is their own — their own year, their own face, their own quote, printed to keep. This is how the method teaches itself. The young person is the final teacher. Twenty-five journals by end of Year 3, each its own durable record.
+**Per-young-person journals.** Each young person who walked through one of the anchors during the three years holds a physical artefact that is their own, their own year, their own face, their own quote, printed to keep. This is how the method teaches itself. The young person is the final teacher. Twenty-five journals by end of Year 3, each its own durable record.
 
 **A launch event.** Hosted on Country with anchor community permission. Invited guests: Minderoo Foundation leadership, Nicola and Andrew Forrest, the 2026-2028 cohort of Judges on Country, Diagrama and YOPE delegates, the young people themselves.
 
@@ -380,74 +380,74 @@ It is:
 All four artefacts are led by the young people. Not curated by ACT. Not produced for them. **Led by them.**
 
 > *"Because young people are going through all of this stuff, why are the older fellas making choices for the younger fellas when they're the ones going through it?"*
-> — Taleigha Glover
+>, Taleigha Glover
 
 The bow is what Taleigha's sentence looks like when it is sustained for three years.
 
 ---
 
-## Page 11 — What endures
+## Page 11, What endures
 
 John Hartman, Minderoo CEO, framed the 2025 Impact Report around **endurance and accountability.**
 
 Three-year endurance, inside The Three Circles, delivers:
 
-- **Seven to eight anchor communities each holding an enduring narrative practice** — a monthly compiled voice corpus owned by the community, not a one-time story drop.
+- **Seven to eight anchor communities each holding an ongoing narrative practice**, a monthly compiled voice corpus owned by the community, not a one-time story drop.
 - **Every Aboriginal Community-Controlled youth-justice intervention in Australia discoverable from a single national platform** by end of Year 3, with community-voice metadata attached to every record.
-- **Each anchor cited in at least one national policy submission per year** — the evidence becomes the community's own citation infrastructure.
-- **Each anchor community has both hosted and been hosted** — the relational practice is reciprocal, not one-directional.
+- **Each anchor cited in at least one national policy submission per year**, the evidence becomes the community's own citation infrastructure.
+- **Each anchor community has both hosted and been hosted**, the relational practice is reciprocal, not one-directional.
 - **At least one European journal paper, one European conference keynote, and one visiting-delegation exchange per anchor per year** by Year 3.
-- **The documentary, the book, the journals, the platform** — the durable record of what was built.
+- **The documentary, the book, the journals, the platform**, the durable record of what was built.
 
 This is endurance. This is accountability. These are the lines Lucy Stronach can defend upward to her board.
 
 ---
 
-## Page 12 — How we'll work together
+## Page 12, How we'll work together
 
 ### Sessions 1 and 2
 
-**Session 1** — mid-May 2026. ACT and Minderoo walk through the envelope, confirm the five anchors, workshop the remaining 2–3 seats from the 50-candidate pool, lock the budget shape. Session 1 is a co-selection session, not a pitch session. The anchors are not discussed; they are confirmed via the contact sheet.
+**Session 1**, mid-May 2026. ACT and Minderoo walk through the envelope, confirm the five anchors, workshop the remaining 2–3 seats from the 50-candidate pool, lock the budget shape. Session 1 is a co-selection session, not a pitch session. The anchors are not discussed; they are confirmed via the contact sheet.
 
-**Session 2** — June 2026. Confirmation of all anchors after between-session community outreach. Year 1 budget released 1 July 2026.
+**Session 2**, June 2026. Confirmation of all anchors after between-session community outreach. Year 1 budget released 1 July 2026.
 
 ### Cadence of the partnership
 
-- **Monthly** — living dashboard updated with every anchor story, every outreach reply, every refresh to the data spine.
-- **Quarterly** — formal report to Minderoo. Every quarter presents the artefact shipped that quarter (Artefact 001 Murri Watch ships 1 May 2026; 002 queued).
-- **Annually** — anchor community convening (Judges on Country is the 2026 convening). Full budget acquittal against the five functions.
-- **Three years** — the bow: documentary, book, journals, launch event, durable archive.
+- **Monthly**, living dashboard updated with every anchor story, every outreach reply, every refresh to the data spine.
+- **Quarterly**, formal report to Minderoo. Every quarter presents the artefact shipped that quarter (Artefact 001 Murri Watch ships 1 May 2026; 002 queued).
+- **Annually**, anchor community convening (Judges on Country is the 2026 convening). Full budget acquittal against the five functions.
+- **Three years**, the bow: documentary, book, journals, launch event, durable archive.
 
 ### Who carries this
 
-**Benjamin Knight** — A Curious Tractor co-founder, lead contact. **Nicholas Marchesi OAM** — A Curious Tractor co-founder (Orange Sky), relational work. **Kristy Bloomfield + Tanya Turner** — Oonchiumpa. **Rachael Atkinson** — PICC. **Brodie Germaine** — BG Fit. **Daniel Daylight** — Mounty Yarns. **MMEIC Elders-in-Council** — MMEIC.
+**Benjamin Knight**, A Curious Tractor co-founder, lead contact. **Nicholas Marchesi OAM**, A Curious Tractor co-founder (Orange Sky), relational work. **Kristy Bloomfield + Tanya Turner**, Oonchiumpa. **Rachael Atkinson**, PICC. **Brodie Germaine**, BG Fit. **Daniel Daylight**, Mounty Yarns. **MMEIC Elders-in-Council**, MMEIC.
 
 The anchors are the delivery. ACT is the infrastructure. Minderoo is the partnership.
 
 ---
 
-## Page 13 — Next steps for Minderoo
+## Page 13, Next steps for Minderoo
 
-1. **Acknowledge receipt** — 1 May envelope arrival confirmation.
-2. **Pre-envelope conversation** — Ben and Lucy, any time before Session 1. 30 minutes.
-3. **Session 1** — mid-May. Dates offered: [TBC].
-4. **Session 2** — June. Following Session 1 between-session outreach.
-5. **Year 1 release** — 1 July 2026. Grant activates.
+1. **Acknowledge receipt**, 1 May envelope arrival confirmation.
+2. **Pre-envelope conversation**, Ben and Lucy, any time before Session 1. 30 minutes.
+3. **Session 1**, mid-May. Dates offered: [TBC].
+4. **Session 2**, June. Following Session 1 between-session outreach.
+5. **Year 1 release**, 1 July 2026. Grant activates.
 
 ### If helpful before Session 1
 
-- **The dashboard** — act-global-infrastructure.vercel.app/minderoo-live-dashboard.html — live now. Updates compound every day until we meet.
-- **The 17 April 2026 Judges on Country trip** — already hosting 55 judges and magistrates on Eastern Arrernte Country. Artefacts from that day can be shared with Minderoo immediately.
+- **The dashboard**, act-global-infrastructure.vercel.app/minderoo-live-dashboard.html, live now. Updates compound every day until we meet.
+- **The 17 April 2026 Judges on Country trip**, already hosting 55 judges and magistrates on Eastern Arrernte Country. Artefacts from that day can be shared with Minderoo immediately.
 
 ---
 
-## Page 14 — The case, in one paragraph
+## Page 14, The case, in one paragraph
 
-Australia spent $22.3 billion last year on late intervention. The same children pay the cost twice — once as child protection ($10.2B) and again as youth crime ($3.4B). Five Aboriginal Community-Controlled communities — Oonchiumpa, PICC, MMEIC, BG Fit, Mounty Yarns — already intercept that trajectory. They do it through wrap-around hubs, as Minderoo's own 2024 report prescribes. The Three Circles is a $2.9 million, three-year partnership to hold those five, extend the method to two or three more, connect them through a national evidence backbone, share the method internationally, and release a durable artefact — documentary, book, journals — led by the young people themselves. $2.9 million is 0.013% of a single year of the $22.3 billion. One dollar for every ten thousand dollars of the problem, for three years, to bend the 47% curve. Every name here is reachable today. Every page of this envelope is drawn from Minderoo's own evidence. **We are not asking Minderoo to fund something speculative. We are asking Minderoo to fund what Minderoo's own report says works.**
+Australia spent $22.3 billion last year on late intervention. The same children pay the cost twice, once as child protection ($10.2B) and again as youth crime ($3.4B). Five Aboriginal Community-Controlled communities, Oonchiumpa, PICC, MMEIC, BG Fit, Mounty Yarns, already intercept that trajectory. They do it through wrap-around hubs, as Minderoo's own 2024 report prescribes. The Three Circles is a $2.9 million, three-year partnership to hold those five, extend the method to two or three more, connect them through a national evidence backbone, share the method internationally, and release a durable artefact, documentary, book, journals, led by the young people themselves. $2.9 million is 0.013% of a single year of the $22.3 billion. One dollar for every ten thousand dollars of the problem, for three years, to bend the 47% curve. Every name here is reachable today. Every page of this envelope is drawn from Minderoo's own evidence. **We are not asking Minderoo to fund something speculative. We are asking Minderoo to fund what Minderoo's own report says works.**
 
 ---
 
-## Page 15 — What you hold in your hands
+## Page 15, What you hold in your hands
 
 This envelope contains:
 1. **This canonical pitch** (16 pages, A4 bound)
@@ -458,7 +458,7 @@ This envelope contains:
 6. **Brave Ones insert** (8 pages A5, 16 anchor voices across 3 sites)
 7. **Judges on Country one-pager** (2 pages, 17 April 2026 field artefact)
 8. **Artefact 001 · Murri Watch** (small matte book, physical sample of Year 1)
-9. **A QR code on the back cover** — live dashboard, updating between now and Session 1.
+9. **A QR code on the back cover**, live dashboard, updating between now and Session 1.
 
 Every piece holds alone. Read together, they are the pitch.
 
@@ -468,11 +468,11 @@ Minderoo's own Cost of Late Intervention launch playbook was a physical report p
 
 ---
 
-## Page 16 — Cover letter
+## Page 16, Cover letter
 
 *Dear Lucy,*
 
-*On the evening of 16 April 2026, Tanya Turner — Eastern Arrernte woman, co-founder of Oonchiumpa Consultancy and Services — welcomed 55 judges and magistrates to Mparntwe. The next morning — Friday 17 April 2026 — those judges walked onto Eastern Arrernte Country at Atnarpa for the National Judicial College of Australia's first-ever Indigenous Justice Program. The institution that trains every Australian judge made Oonchiumpa's on-Country day the foundation of that program.*
+*On the evening of 16 April 2026, Tanya Turner, Eastern Arrernte woman, co-founder of Oonchiumpa Consultancy and Services, welcomed 55 judges and magistrates to Mparntwe. The next morning, Friday 17 April 2026, those judges walked onto Eastern Arrernte Country at Atnarpa for the National Judicial College of Australia's first-ever Indigenous Justice Program. The institution that trains every Australian judge made Oonchiumpa's on-Country day the foundation of that program.*
 
 *Tanya said this to the 55 judges:*
 
@@ -484,9 +484,9 @@ Minderoo's own Cost of Late Intervention launch playbook was a physical report p
 
 *That sentence is the envelope.*
 
-*The Three Circles is a three-year, $2.9 million partnership. It does not initiate a program. It resources the cultural foundation that is already holding Australia's youth-justice capability — that has been holding it unacknowledged and unfunded for generations. Five Aboriginal Community-Controlled anchor communities already run the method. Two to three more will be co-selected with you in Sessions 1 and 2.*
+*The Three Circles is a three-year, $2.9 million partnership. It does not initiate a program. It resources the cultural foundation that is already holding Australia's youth-justice capability, that has been holding it unacknowledged and unfunded for generations. Five Aboriginal Community-Controlled anchor communities already run the method. Two to three more will be co-selected with you in Sessions 1 and 2.*
 
-*Every page inside this envelope is drawn from Minderoo's own 2024 Cost of Late Intervention report and 2030 Strategy. We are not asking Minderoo to fund something speculative. We are asking Minderoo to fund what Minderoo's own report says works — and to join the coalition the Australian judiciary has already formed.*
+*Every page inside this envelope is drawn from Minderoo's own 2024 Cost of Late Intervention report and 2030 Strategy. We are not asking Minderoo to fund something speculative. We are asking Minderoo to fund what Minderoo's own report says works, and to join the coalition the Australian judiciary has already formed.*
 
 *$2.9 million over three years is 0.013% of a single year of the $22.3 billion. One dollar per ten-thousand dollars of the problem, for three years, to bend the 47% curve.*
 
