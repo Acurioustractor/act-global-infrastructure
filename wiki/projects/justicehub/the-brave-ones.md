@@ -65,6 +65,14 @@ Typography: refined serif, set small, set far from the centre. Numbers and stati
 | The online hall | A permanent presence on JusticeHub — each portrait a node in ALMA | JusticeHub + Empathy Ledger |
 | The book | Year three: the printed book | ACT publishing partner |
 
+## The trace layer
+
+If JusticeHub is going to improve responsibly, it needs more than quantitative traces like search logs, funding rows, and QR scans. It also needs durable qualitative traces that explain what actually changed in the room.
+
+That is one of The Brave Ones' most important jobs. The portraits, paired words, and consented follow-up reflections are not decorative brand assets. They are the trace layer that stops JusticeHub from optimising toward sterile dashboards. They let ACT ask not just *did this convert?* but *what did the judge see, what made the funder pause, and what felt true enough to move money or practice?*
+
+The portraits themselves are not the thing to auto-optimise. The editable surfaces are the surrounding harnesses: exhibition sequencing, caption scaffolds, invitation flow, and the way the work hands off into [[justicehub|JusticeHub]] and [[empathy-ledger|Empathy Ledger]]. The longer articulation is filed at [[how-should-act-apply-the-karpathy-loop-to-justicehub-the-minderoo-pitch-and-the-|Karpathy loop alignment synthesis]].
+
 ## Cultural protocol (non-negotiable)
 
 Before a single Indigenous young person sits for a portrait:

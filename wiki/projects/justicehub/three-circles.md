@@ -86,7 +86,7 @@ What lives in the centre:
 - Every organisation, board member, political donor and funding relationship
 - Every consented story from the Empathy Ledger, with story sovereignty preserved
 - Every international model, framework and case study captured through the tour
-- Every Indigenous community model documented with consent through the 10 anchor sites
+- Every Indigenous community model documented with consent through the 7 anchor sites
 
 How it works:
 - **Local AI agents** running on dedicated infrastructure (not third-party APIs) so a community in Tennant Creek can query their own context without a data team and without their information leaving their control
@@ -96,11 +96,11 @@ How it works:
 
 Why it matters: right now, the only way to know what's happening in Queensland youth justice is to scrape Hansard yourself with fuzzy search. That should not be the standard. The centre makes the answer to *"who is doing what, with what money, with what evidence, in this community right now"* a 30-second query for everyone who needs it. Magistrates use it before sentencing. Funders use it before granting. Journalists use it before writing. Communities use it before partnering. Government uses it (whether it likes it or not) because everyone else does.
 
-### ◉ Circle Two — The Ten: Local Models, Held in Relationship
+### ◉ Circle Two — The Seven: Local Models, Held in Relationship
 
-Ten community organisations, chosen with care, supported with **untied funding, minimised reporting, and maximised relationship over three years**. The number is deliberate — Dunbar's number tells us 15 is the upper limit of close relationships, and we want to leave headroom for depth.
+Seven community organisations, chosen with care, supported with **untied funding, minimised reporting, and maximised relationship over three years**. The number is deliberate. Twelve was Lucy's principle. We tightened to seven so each anchor is a deep relationship, not a portfolio entry, and so the artefact narrative stays manageable. Dunbar's depth tier sits well below twelve; seven is where genuine accountability lives.
 
-For each of the ten, the program funds:
+For each of the seven, the program funds:
 
 1. **Operational support** — untied, not project-tied, paid quarterly with relationship check-ins instead of acquittals
 2. **Embedded storytelling** — a small editorial team captures the work longitudinally, on the community's terms, using the [[empathy-ledger|Empathy Ledger]] story sovereignty model — *the practice of doing this is called [[#methodology-layer-staying|Staying]] (see below)*
@@ -113,9 +113,9 @@ For each of the ten, the program funds:
 
 Every other funding application Minderoo receives asserts *"we have ten anchor communities"* as established fact. Most are inflated. ACT's honest answer:
 
-- **Five anchors confirmed today** with verbal community consent, stories flowing through Empathy Ledger v2, and ALMA interventions scored
-- **235-candidate pool** queryable from ACT's data spine — 20+ community-led Aboriginal organisations per state/territory, drawn from 1,155 ALMA-verified youth-justice interventions + 100,036 CivicGraph-resolved entities
-- **Final 7–8 anchors selected together** with Minderoo via two 90-minute workshop sessions — one to narrow from 235 to ~20, one to confirm the final set after each community's own consent
+- **Four anchors confirmed today** with verbal community consent, stories flowing through Empathy Ledger v2, and ALMA interventions scored
+- **235-candidate pool** queryable from ACT's data spine: 20+ community-led Aboriginal organisations per state/territory, drawn from 1,155 ALMA-verified youth-justice interventions + 100,036 CivicGraph-resolved entities
+- **Final three anchors co-selected** with Minderoo via two 90-minute workshop sessions: one to narrow from 235 to ~20, one to confirm the final set after each community's own consent
 
 This is not a fudge. It's the method of the program operating *in front of Minderoo, before funding*. If the method holds, Session 2 produces a national anchor network selected with both evidence and community consent. If the method fails, the workshop is where that becomes visible — before any community is publicly named.
 
@@ -124,17 +124,18 @@ This is not a fudge. It's the method of the program operating *in front of Minde
 - Session 1 recommended shortlist: `thoughts/shared/drafts/minderoo-session-1-recommended-shortlist.md`
 - Workshop proposal (one-pager in envelope): `thoughts/shared/drafts/minderoo-workshop-proposal.md`
 
-#### Five anchors already in relationship
+#### Four anchors already in relationship
 
 Verbal consent captured, governance recorded, stories flowing through ACT's wiki with per-storyteller provenance:
 
 | # | Community / Org | Country / Place | Leadership | Confirmation |
 |---|---|---|---|---|
-| 1 | **[[oonchiumpa\|Oonchiumpa Consultancy & Services]]** | Mparntwe (Alice Springs), NT — Arrernte, Alyawarra, Luritja, Warlpiri | Kristy Bloomfield + Tanya Turner co-directors; Aunty Bev + Uncle Terry elder authority; Fred Campbell youth worker | **Confirmed** (verbal, 2026-04-13) |
-| 2 | **[[picc\|Palm Island Community Company (PICC)]]** | Palm Island, QLD — Manbarra / Bwgcolman | Rachael Atkinson (CEO) | **Confirmed** — 21 ALMA interventions, $29M annual turnover |
-| 3 | **Minjerribah Moorgumpin Elders-in-Council Aboriginal Corporation (MMEIC)** | Minjerribah (North Stradbroke Island), QLD — Quandamooka | Elders-in-Council governance (founded 1994) | **Confirmed** — highest-scoring anchor (0.815) after 2026-04-20 ALMA authoring |
-| 4 | **Brodie Germaine Fitness Aboriginal Corporation (BG Fit)** | Mount Isa, QLD — Pita Pita Wayaka + Kalkadoon | Brodie Germaine (founder) | **Confirmed** (verbal, 2026-04-13) — Tuesday gym + on-Country bush camps + Doomadgee quarterly remote |
-| 5 | **Mounty Aboriginal Youth & Community Services (Mounty Yarns)** | Mt Druitt, NSW — Darug | Daniel Daylight (CEO); youth-led structure (Adam + Leah co-run Youth Peak) | **Confirmed** (verbal, 2026-04-18) — 13 storytellers, 9 young people at the table |
+| 1 | **[[oonchiumpa\|Oonchiumpa Consultancy & Services]]** | Mparntwe (Alice Springs), NT: Arrernte, Alyawarra, Luritja, Warlpiri | Kristy Bloomfield + Tanya Turner co-directors; Aunty Bev + Uncle Terry elder authority; Fred Campbell youth worker | **Confirmed** (verbal, 2026-04-13) |
+| 2 | **[[picc\|Palm Island Community Company (PICC)]]** | Palm Island, QLD: Manbarra / Bwgcolman | Rachael Atkinson (CEO) | **Confirmed**: 21 ALMA interventions, $29M annual turnover |
+| 3 | **Minjerribah Moorgumpin Elders-in-Council Aboriginal Corporation (MMEIC)** | Minjerribah (North Stradbroke Island), QLD: Quandamooka | Elders-in-Council governance (founded 1994) | **Confirmed**: highest-scoring anchor (0.815) after 2026-04-20 ALMA authoring |
+| 4 | **Brodie Germaine Fitness Aboriginal Corporation (BG Fit)** | Mount Isa, QLD: Pita Pita Wayaka + Kalkadoon | Brodie Germaine (founder) | **Confirmed** (verbal, 2026-04-13): Tuesday gym + on-Country bush camps + Doomadgee quarterly remote |
+
+**Approached, pending elder/CEO sign-off (held back from the envelope for clean four-confirmed framing):** Mounty Aboriginal Youth & Community Services (Mt Druitt, NSW): Daniel Daylight CEO verbal 2026-04-18, full elder approval pending; carried into the next envelope.
 
 #### Remaining 2–3 anchor seats — one per state/territory, selected in workshop
 
@@ -158,16 +159,16 @@ Selection decisions for Session 1 with Lucy Stronach:
 
 ### ◉ Circle Three — The Outer Ring: The Ecosystem & The World
 
-The outermost circle is where everything plugs in. Because the centre holds everything and the ten anchor communities hold the stories, the outer ring becomes a place where:
+The outermost circle is where everything plugs in. Because the centre holds everything and the seven anchor communities hold the stories, the outer ring becomes a place where:
 
-- **Frameworks plug in** — the Frameworks Institute work Andrea Davidson and the Victorian Violence Reduction Unit are excited about can be tested against real community case studies in the ten, refined in dialogue with Indigenous experience, and published as a *contextualised Australian framework* rather than imported language
-- **JRI and the establishment plug in** — the Justice Reform Initiative's advocacy and convening work has the establishment voices but is missing the place-based grounding. The ten become JRI's grounding. JRI becomes a distribution channel for the ten.
+- **Frameworks plug in**: the Frameworks Institute work Andrea Davidson and the Victorian Violence Reduction Unit are excited about can be tested against real community case studies in the seven, refined in dialogue with Indigenous experience, and published as a *contextualised Australian framework* rather than imported language
+- **JRI and the establishment plug in**: the Justice Reform Initiative's advocacy and convening work has the establishment voices but is missing the place-based grounding. The seven become JRI's grounding. JRI becomes a distribution channel for the seven.
 - **Philanthropy plugs in** — every grant given anywhere in Australian youth justice flows into the centre, becomes searchable, and lets PRF, Snow, Dusseldorp, Ritchie and Minderoo see what each other is funding without needing to ask. *Coordination by infrastructure, not by meetings.*
-- **International peers plug in** — through the storytelling tour (outbound) and the Year 3 return visit (inbound). [[diagrama|Diagrama]] (Spain), Halt (Holland), Norwegian restorative justice, Portuguese diversion, South African community courts, Canadian First Nations sentencing circles — each documented inside the centre and put into dialogue with the ten Australian sites.
+- **International peers plug in**: through the storytelling tour (outbound) and the Year 3 return visit (inbound). [[diagrama|Diagrama]] (Spain), Halt (Holland), Norwegian restorative justice, Portuguese diversion, South African community courts, Canadian First Nations sentencing circles. Each documented inside the centre and put into dialogue with the seven Australian sites.
 - **Magistrates and judges plug in** — through the work already starting in Alice Springs with the 55 judges and magistrates on country. JusticeHub becomes the directory they use before sentencing.
 - **Media and journalists plug in** — open API, verified data, real stories with consent. Investigative journalism becomes possible at a scale it currently isn't.
 
-The outer circle is the **theory of change**. Not *"we will run programs that scale"*. The theory is: *if everything that exists is connected, and ten places are held with depth, then the gap between what's known and what's done collapses — and the political cover for detention-default goes with it.*
+The outer circle is the **theory of change**. Not *"we will run programs that scale"*. The theory is: *if everything that exists is connected, and seven places are held with depth, then the gap between what's known and what's done collapses, and the political cover for detention-default goes with it.*
 
 ## The Artefact — *The Country We're Building*
 
@@ -177,11 +178,11 @@ Every three-year program needs something the people inside it are working *towar
 
 ### 1. *The Country We're Building* — a documentary (90 minutes)
 
-A feature-length film tracking the ten communities over three years. Not a sector documentary — a country documentary. Young people, elders, workers, magistrates who came on country, international peers who visited, moments of failure and moments of recognition. Co-directed with each community, story sovereignty preserved throughout. Premiered at the Year 3 convening, then released nationally.
+A feature-length film tracking the seven communities over three years. Not a sector documentary, a country documentary. Young people, elders, workers, magistrates who came on country, international peers who visited, moments of failure and moments of recognition. Co-directed with each community, story sovereignty preserved throughout. Premiered at the Year 3 convening, then released nationally.
 
 ### 2. *The Country We're Building* — a book
 
-Long-form, photography-rich, structured around the ten communities and the international counterparts. Each community gets a chapter on its own terms. Threaded through it: the framework, the data, the philosophy, and the case for community-led oversight as the next national settlement on youth justice. Published Year 3 with a major Australian publisher; community organisations retain rights and royalty share.
+Long-form, photography-rich, structured around the seven communities and the international counterparts. Each community gets a chapter on its own terms. Threaded through it: the framework, the data, the philosophy, and the case for community-led oversight as the next national settlement on youth justice. Published Year 3 with a major Australian publisher; community organisations retain rights and royalty share.
 
 ### 3. *The Country We're Building* — a living platform
 
@@ -195,28 +196,28 @@ Each young person in deep relationship with the program over three years receive
 
 The journals are the per-young-person counterpart to the country-scale documentary and book. They give every young person something the system never has — *a thing they made, that holds them whole.*
 
-**Why one artefact in four forms matters:** it gives every person in this work — young people, community workers, Nick, Ben, the storytellers, the funders, the international visitors — a single thing they are part of building. It celebrates the individuals doing the work *and* builds the system. It makes the three years feel like a country-wide project rather than ten disconnected grants. And it produces something that outlives the funding cycle.
+**Why one artefact in four forms matters:** it gives every person in this work (young people, community workers, Nick, Ben, the storytellers, the funders, the international visitors) a single thing they are part of building. It celebrates the individuals doing the work *and* builds the system. It makes the three years feel like a country-wide project rather than seven disconnected grants. And it produces something that outlives the funding cycle.
 
 ## How this connects to what Lucy raised
 
 Three things from the conversation that this design directly responds to:
 
 **1. *"Twelve organisations, one per month, one per state, minimised reporting, maximised relationship."***
-This is the spine of Circle Two. We've gone with **ten** rather than twelve to leave depth headroom (Dunbar) and to make the artefact's narrative manageable, but the principle is yours.
+This is the spine of Circle Two. We've gone with **seven** rather than twelve to leave depth headroom (Dunbar) and to make the artefact's narrative manageable, but the principle is yours.
 
 **2. The Frameworks Institute interest from Victoria.**
 Frameworks doesn't work as a standalone deliverable in Australia — Diagrama proved that, even with the best framework work in the world. It works *inside* a living evidence system grounded in Indigenous experience. Circle Three is where the framework work belongs, and where Andrea Davidson's interest can become a real test case rather than another expensive PDF.
 
 **3. The Justice Reform Initiative tensions.**
-We are not trying to replace JRI or compete with the lived-experience groups. We are trying to be the connective tissue that makes the factional split less consequential — because if the ten communities are visible in the centre and speaking with their own voices, no single conference becomes a chokepoint.
+We are not trying to replace JRI or compete with the lived-experience groups. We are trying to be the connective tissue that makes the factional split less consequential, because if the seven communities are visible in the centre and speaking with their own voices, no single conference becomes a chokepoint.
 
 ## The costed ask — $2.9M over 3 years
 
 | Year | Total | What it buys |
 |---|---:|---|
-| **Year 1 — FY2026 (foundation)** | **$780,000** | Data spine hardening + local AI agents · 10 × $35K untied anchor partnerships · 2 FTE storytelling team (1 North + 1 South) · 3 domestic exchanges · Africa + Europe international tour (Ben + 3 community leaders) |
-| **Year 2 — FY2027 (deepening)** | **$960,000** | Centre operations + new modules (oversight dashboards, magistrate-facing tools, Frameworks Institute integration) · 10 × $50K anchor partnerships (second-year trust dividend) · 3 FTE storytelling team (adds film/editorial for the artefact) · 6 domestic exchanges · 10% Delta-model innovation reserve embedded in anchor lines |
-| **Year 3 — FY2028 (national crescendo + the artefact)** | **$1,160,000** | Centre public launch (open API, journalist tooling) · 10 × $50K final-year anchor partnerships · Storytelling team — case study production, **documentary post-production, book editorial, journal binding** · The Doing Convening (workshop-led, no keynotes) · International return visit (2–3 international peers visit Australian anchor sites) |
+| **Year 1 — FY2026 (foundation)** | **$780,000** | Continuing JusticeHub + CivicGraph build (the live map of what works, the funder/spend database, six AI agent tools) · 7 × $35K untied anchor partnerships · 2 FTE storytelling team (1 North + 1 South) · 3 domestic exchanges · Africa + Europe international tour (Ben + 3 community leaders) |
+| **Year 2 — FY2027 (deepening)** | **$960,000** | Continuing JusticeHub + CivicGraph build · oversight dashboards, magistrate-facing tools, Frameworks Institute integration · 7 × $35K anchor partnerships (with the trust dividend expressed as scaled storytelling support and exchanges, not bigger cheques) · 3 FTE storytelling team (adds film/editorial for the artefact) · 6 domestic exchanges · 10% Delta-model innovation reserve embedded in anchor lines |
+| **Year 3 — FY2028 (national crescendo + the artefact)** | **$1,160,000** | JusticeHub + CivicGraph open to the sector (public API, journalist tooling) · 7 × $35K final-year anchor partnerships · Storytelling team: case study production, **documentary post-production, book editorial, journal binding** · The Doing Convening (workshop-led, no keynotes) · International return visit (2–3 international peers visit Australian anchor sites) |
 | **Three-year total** | **$2,900,000** | One program, three circles, four forms of one artefact |
 
 **For context:** the cost of detaining a single young person for one year is **$1.33M** (ROGS 2024–25 national average). **This program costs less per year than detaining one child** — and is designed to make the case for not detaining the next thousand.
@@ -269,8 +270,8 @@ This page is the **canonical project page** for the Three Circles pitch. It supe
 
 **What's locked:**
 - $2.9M total ($780K / $960K / $1.16M)
-- 10 anchor communities (Oonchiumpa locked, PICC locked, 8 more in pipeline)
-- Three Circles structure (Centre / The Ten / Outer Ring)
+- 7 anchor communities (4 confirmed: Oonchiumpa, PICC, MMEIC, BG Fit; 3 to co-select with Minderoo via the 50-to-7 workshop)
+- Three Circles structure (Centre / The Seven / Outer Ring)
 - *The Country We're Building* artefact in four forms (documentary, book, platform, and the per-young-person Journals added in this refresh)
 - Lucy's *"12 orgs, one per month, one per state, minimised reporting, maximised relationship"* as the spine
 - Staying as the Circle Two methodology name; ledger as the visual register
@@ -303,7 +304,7 @@ The earlier JusticeHub pitch numbers were partly aspirational. Reviewed against 
 
 1. *"How do you move from 315 linked orgs (57%) to 90%+ without manual matching?"* — answer: ABN fuzzy-match enrichment in flight, named in Circle One Year 1 hardening
 2. *"Are Maranguka, PICC, Oonchiumpa actually in ALMA as evidence interventions, or just cited in PDFs?"* — answer: PICC is in ALMA dashboard; Maranguka is in PDF only and needs structuring; Oonchiumpa is in ALMA
-3. *"If Frameworks Institute is a Circle Three anchor, where is the work documented?"* — **scoped as a Year 1 deliverable, not a precondition** (decision 2026-04-08). The Y1 hardening line in Circle One funds the integration work; Andrea Davidson's interest becomes a real test case during Year 1 dialogue with the ten anchor communities, not a pre-built artefact. Pitch language: *"Frameworks Institute integration is a Year 1 deliverable inside Circle One"*
+3. *"If Frameworks Institute is a Circle Three anchor, where is the work documented?"*: **scoped as a Year 1 deliverable, not a precondition** (decision 2026-04-08). The Y1 hardening line in Circle One funds the integration work; Andrea Davidson's interest becomes a real test case during Year 1 dialogue with the seven anchor communities, not a pre-built artefact. Pitch language: *"Frameworks Institute integration is a Year 1 deliverable inside Circle One"*
 4. *"What is the source of the 95% Oonchiumpa diversion claim?"* — **Oonchiumpa's own programmatic reporting** (decision 2026-04-08). Specific document reference to be confirmed before funder materials go live
 
 ## What sticks vs what we move past from GrantScope review
@@ -331,11 +332,11 @@ The earlier JusticeHub pitch numbers were partly aspirational. Reviewed against 
 
 ## LCAA Phase
 
-In the [[lcaa-method|LCAA Method]], The Three Circles is the canonical pitch that funds the operationalisation of LCAA at national scale — the three concentric circles (Centre / Ten / Rest) and the three years of the program (Listen / Compare / Tell) are the LCAA arc made visible to a funder. The methodology layer is named separately as [[staying|Staying — Country & Council]].
+In the [[lcaa-method|LCAA Method]], The Three Circles is the canonical pitch that funds the operationalisation of LCAA at national scale: the three concentric circles (Centre / Seven / Rest) and the three years of the program (Listen / Compare / Tell) are the LCAA arc made visible to a funder. The methodology layer is named separately as [[staying|Staying — Country & Council]].
 
 LCAA arc for The Three Circles:
 - **Listen — Circle One (The Living Brain)** — a single, queryable, locally-hosted intelligence system holding everything that exists on Australian youth justice; community queries running on local AI agents so a community in Tennant Creek can ask questions of their own context without a data team and without their information leaving their control
-- **Curiosity — Circle Two (The Ten)** — ten community organisations chosen with care, supported with untied funding and minimised reporting; embedded storytelling on the community's terms; cross-community exchange building relational impact no conference produces; Year 2 international exchange to [[diagrama|Diagrama]], Halt, Children's Hearings
+- **Curiosity — Circle Two (The Seven)**: seven community organisations chosen with care, supported with untied funding and minimised reporting; embedded storytelling on the community's terms; cross-community exchange building relational impact no conference produces; Year 2 international exchange to [[diagrama|Diagrama]], Halt, Children's Hearings
 - **Action — Circle Three (The Rest)** — funders, government, and the wider sector changed by what travels outward from the centre; the data spine ([[grantscope|GrantScope]] / [[civicgraph|CivicGraph]]) makes funding flows, evidence, and outcomes legible to magistrates, philanthropy, and journalists in 30-second queries
 - **Art — *The Country We're Building*** — the single national artefact in 2028: documentary + book + platform + per-young-person Journals; the form that makes the work outlive the funding
 

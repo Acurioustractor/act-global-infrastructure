@@ -7,27 +7,26 @@
     "minderoo": {
       "name": "Minderoo Foundation",
       "stage": "ask-pending",
-      "ask_amount_aud": 3430000,
+      "ask_amount_aud": 2900000,
       "deadline": "2026-05-15",
       "primary_contact": "Lucy Stronach",
-      "themes": ["systems-change", "indigenous-led", "evidence-based", "place-based", "youth-justice", "library-as-artefact"],
-      "tone": "evidence-rich, ambitious, structurally honest, story-rich, library-led",
+      "themes": ["communities", "early-intervention", "indigenous-led", "evidence-based", "place-based", "child-family-supports", "youth-justice"],
+      "tone": "communities-first, evidence-rich, place-based, structurally honest, board-defensible",
       "canonical_pitch_doc": "wiki/projects/justicehub/three-circles.md",
       "comprehensive_walkthrough": "wiki/projects/justicehub/the-full-idea.md",
       "claims_to_lead_with": [
-        "justicehub:claim-the-library-is-the-destination",
-        "justicehub:claim-three-circles-start-at-the-edge",
-        "justicehub:claim-staying-is-the-move",
-        "justicehub:claim-tier-pricing-against-detention-cost",
-        "justicehub:claim-authority-at-the-edge-lineage",
         "justicehub:claim-ten-anchor-communities-filter-is-relationship",
+        "justicehub:claim-three-circles-start-at-the-edge",
         "justicehub:claim-fire-crescendo-build-slowly",
-        "empathy-ledger:claim-the-loop-is-the-product"
+        "justicehub:claim-tier-pricing-against-detention-cost",
+        "justicehub:claim-the-library-is-the-destination",
+        "justicehub:claim-authority-at-the-edge-lineage",
+        "justicehub:claim-the-brave-ones-counter-mugshot"
       ],
       "claims_to_avoid": [
         "contained:claim-evidence-is-settled-question-is-political-will"
       ],
-      "framing_notes": "Minderoo wants infrastructure stories at scale AND Indigenous-led work AND something Lucy can take to the board. The Three Circles + STAY pitch is the canonical Lucy-warm document. Total ask: $3.43M (Crescendo tier — the default). Lead with 'the library is the destination' as the conceptual hook, then move to the methodology (Three Circles), then the cost arithmetic (STAY runs the entire program for less than detaining one child for three years), then the authority lineage (Yunkaporta + Ostrom + Diagrama + Grotberg), then the fire metaphor for the budget tiers. Lucy has been warm since Oct 2025 — this is a relationship pitch, not a cold ask. Crescendo is the default tier ($3.43M). Foundation ($1.8M) is the fallback. Bonfire ($6M) is the dream. Avoid the confrontational frame — they fund builders, not critics. Source docs: three-circles.md (canonical pitch) and the-full-idea.md (comprehensive walkthrough)."
+      "framing_notes": "Minderoo's current public strategy is Communities-first: place-based engagement, local knowledge and lived experience, stronger child and family supports, and vibrant connected communities. Lead with the anchor-community hold, not JusticeHub as a product. JusticeHub is the evidence layer under the community work; The Brave Ones is the human trace layer; the library is the destination, not the opening noun. Use Minderoo's own role language where possible: Partner, Develop, Generate Evidence, Advocate. Primary ask: $2.9M over 3 years (the canonical Three Circles ask). Best staged entry: $780K for Year 1 with a pathway into Years 2-3. Use the older $3.43M Crescendo frame only if Lucy invites ACT upward into the expanded library / artefact expression. Avoid the confrontational frame — they fund builders, not critics. Source docs: three-circles.md (canonical pitch), how-should-act-pitch-minderoo-in-line-with-its-current-strategy-and-what-money-f.md (strategy synthesis), and the-full-idea.md (comprehensive walkthrough)."
     },
     "qbe-catalysing-impact": {
       "name": "QBE Catalysing Impact",

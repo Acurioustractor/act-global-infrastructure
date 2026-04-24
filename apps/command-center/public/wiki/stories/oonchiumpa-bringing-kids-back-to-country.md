@@ -15,7 +15,7 @@ el_v2_match_via: "org:oonchiumpa"
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/stories/oonchiumpa-bringing-kids-back-to-country.md`.
-> Regenerated: `2026-04-20T20:55:40.355Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerated: `2026-04-21T03:19:53.973Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 # Bringing Kids Back to Country
 
 > Kristy Bloomfield

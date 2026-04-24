@@ -12,28 +12,30 @@ channels: [pitch, internal-strategy]
 audiences: [funder, decision-maker]
 cycle: [funder-pitch, budget-week, always]
 sources:
-  - path: wiki/projects/justicehub/the-full-idea.md
-    section: "§9 — The ask (in three tiers)"
-    quote: "Detaining one Australian child for three years costs $3.9M. The Crescendo tier runs the entire program for less than that."
-  - path: wiki/output/narrative-drafts/SHIPPED-2026-04-09-minderoo-stay-pitch.md
-    section: "deployed 2026-04-09 via pitch"
+  - path: wiki/projects/justicehub/three-circles.md
+    section: "§The costed ask — $2.9M over 3 years"
+    quote: "This program costs less per year than detaining one child — and is designed to make the case for not detaining the next thousand."
+  - path: wiki/projects/justicehub/minderoo-pitch-package.md
+    section: "§Strategy reality check (21 April 2026)"
+    quote: "Strongest opening number: the canonical Three Circles ask of $2.9M over 3 years, not the older Crescendo default of $3.43M."
 related_claims: [contained:claim-cost-comparison, justicehub:claim-fire-crescendo-build-slowly, justicehub:claim-the-library-is-the-destination]
 backlinks_to_concepts: [productivity-commission-rogs, foundation-tier, crescendo-tier, bonfire-tier]
 ---
 
-# Claim: Three years of the entire program costs less than detaining one child for three years.
+# Claim: The canonical three-year ask costs less than detaining one child for three years.
 
-**The argument:** Detaining one Australian child for one year costs $1.33M (ROGS 2024–25). For three years it is $3.9M. The STAY program's three tiers run against this number directly. **Foundation tier ($1.8M / 3 years)** is 46% of the cost of detaining one child. **Crescendo tier ($3.43M / 3 years)** — the default — is **88% of the cost of detaining one child**, and runs ten Indigenous-led communities, 14 European exchange travellers, the seven-book STAY Series + ten community volumes + ~50 young-person journals + the national edition. **Bonfire tier ($6.0M / 3 years)** is 154% of the cost of one child and includes the full national gallery tour. The line that should never need defending in a funder meeting: *the Crescendo tier runs the entire program for less than the cost of detaining one child for three years.*
+**The argument:** Detaining one Australian child for one year costs $1.33M (ROGS 2024–25). For three years it is $3.9M. The **canonical Three Circles ask is $2.9M / 3 years**, which is roughly **74%** of the cost of detaining one child for three years. The strongest Minderoo framing is not the older library-heavy Crescendo number but the core Communities ask: 5 confirmed ACCO anchors, 2–3 more co-selected with community consent, the evidence layer underneath them, and the national artefact that follows. **Year 1 ($780K)** is the clean staged entry. **Foundation ($1.8M)** remains a fallback. **Crescendo ($3.43M)** is still a valid expanded expression, but it should only appear if Minderoo invites ACT upward into the larger artefact envelope. The line that should never need defending in a funder meeting is now simpler: *the canonical three-year ask costs less than detaining one child for three years.*
 
 ## Variants used
 
 | Variant | Where |
 |---|---|
-| "Detaining one Australian child for three years costs $3.9M. The Crescendo tier runs the entire program for less than that." | the-full-idea.md §9 |
-| "Foundation 46% · Crescendo 88% · Bonfire 154% — versus detaining 1 child for 3 years" | the-full-idea.md §9 |
 | "This program costs less per year than detaining one child — and is designed to make the case for not detaining the next thousand." | three-circles.md |
-| "$1.33M per child per year (ROGS 2024–25)" | the-full-idea.md §2, three-circles.md |
-| "Detaining one Australian child for three years costs 3.9 million. The Crescendo tier runs the entire program for less than that." | pitch (2026-04-09) |
+| "$2.9M over 3 years" | three-circles.md |
+| "$780K for Year 1, with right-of-first-refusal on Years 2–3" | campaigns/minderoo-pitch/brief.md |
+| "This program costs less per year than detaining one child — and is designed to make the case for not detaining the next thousand." | three-circles.md |
+| "$1.33M per child per year (ROGS 2024–25)" | three-circles.md |
+| "Strongest opening number: the canonical Three Circles ask of $2.9M over 3 years" | minderoo-pitch-package.md |
 
 ## Stat watch — reconcile against contained:STAT-CONFLICTS.md
 
@@ -49,10 +51,11 @@ The 3-year figure ($3.9M) is more stable across sources than the per-year figure
 
 ## What we haven't said yet
 
-- Never said as a **single sentence post** — *"Three years of STAY across ten communities costs less than three years of detaining one child."*
-- Never said with the **specific Queensland equivalent** — *"At Queensland rates the comparison is more stark: Crescendo runs for less than 30 weeks of one detention bed."*
-- Never paired with the **opportunity-cost frame** — *"Australia detains roughly 800 young people. Crescendo tier costs less than detaining 0.3% of them."*
-- Never used to **structure the funder ask as a fire metaphor** — Foundation/Crescendo/Bonfire IS the budget tells the same story as the methodology
+- Never said as a **single sentence post** — *"Three years of the core program across 7–8 anchors costs less than three years of detaining one child."*
+- Never said with the **specific Queensland equivalent** — *"At Queensland rates the comparison is more stark: the $2.9M ask is less than the cost of one detention bed for a year."*
+- Never paired with the **opportunity-cost frame** — *"Australia spends $22.3B on late intervention each year. This ask is 0.013% of one year of that curve."*
+- Never used to **structure the funder ask as a staged commitment** — *"$780K now to fund Year 1 ember and tinder; pathway to the full three-year hold once Minderoo sees the work move."*
+- Never used to **make the expanded ask conditional** — *"The $3.43M Crescendo expression is there if Lucy wants the larger artefact envelope, but it is not the number we need to lead with."*
 - Never positioned as **the line a funder repeats back** — the line should be designed to be repeated unchanged in the next room
 
 ## Adjacencies

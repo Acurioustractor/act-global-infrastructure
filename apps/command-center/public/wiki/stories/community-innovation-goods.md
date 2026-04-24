@@ -6,7 +6,7 @@ projects: goods, picc-storm-stories
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/stories/community-innovation-goods.md`.
-> Regenerated: `2026-04-20T20:55:40.355Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerated: `2026-04-21T03:19:53.973Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # Community Innovation: Beds, Washing Machines, and Orange Sky
 
