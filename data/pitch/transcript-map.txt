@@ -1,0 +1,129 @@
+==========================================================================================
+TRANSCRIPT-CENTRIC MAP — what Empathy Ledger actually holds
+Generated 2026-04-22 · Unit of evidence = transcript, not story
+==========================================================================================
+
+
+## 1. Per-org inventory — transcripts are the primary corpus
+
+Org                       Type              Storytellers  Transcripts   Analyzed    Stories   Public
+----------------------------------------------------------------------------------------------------
+
+  Total transcripts across listed orgs: 0
+  Total with AI analysis attached      : 0
+
+
+## 2. Orgs that DISAPPEAR if we use 'public story' as our unit
+
+
+
+## 3. Top themes across ALL AI-analysed transcripts (not story themes)
+
+  ★   10×  identity                                            [A Curious Tractor, Oonchiumpa, Orange Sky, Palm Island CC (PICC)...]
+  ★    9×  Identity                                            [A Curious Tractor, Orange Sky, Palm Island CC (PICC), Young Guns]
+  ★    8×  community                                           [A Curious Tractor, Oonchiumpa, Orange Sky]
+  ★    7×  resilience                                          [A Curious Tractor, Oonchiumpa, Orange Sky]
+  ★    7×  healing                                             [A Curious Tractor, Oonchiumpa, Orange Sky]
+  ★    5×  Identity and Heritage                               [A Curious Tractor, Oonchiumpa, Palm Island CC (PICC)]
+  ★    5×  Community                                           [Orange Sky, Palm Island CC (PICC), Young Guns]
+  ·    5×  Healing and Resilience                              [A Curious Tractor, Palm Island CC (PICC)]
+  ·    5×  Identity and Belonging                              [A Curious Tractor, Orange Sky]
+  ·    4×  Heritage                                            [Orange Sky, Palm Island CC (PICC)]
+  ★    4×  Resilience                                          [A Curious Tractor, Palm Island CC (PICC), Young Guns]
+  ★    3×  Family                                              [Orange Sky, Palm Island CC (PICC), Young Guns]
+  ★    3×  Healing                                             [Orange Sky, Palm Island CC (PICC), Young Guns]
+  ·    3×  Identity and belonging                              [Orange Sky, Young Guns]
+       2×  heritage                                            [Oonchiumpa]
+  ·    2×  Resilience in the Face of Trauma                    [A Curious Tractor, Oonchiumpa]
+  ·    2×  Resilience in the Face of Adversity                 [A Curious Tractor, Palm Island CC (PICC)]
+  ·    2×  Resilience in the face of adversity                 [A Curious Tractor, Young Guns]
+       2×  Community and Connection                            [A Curious Tractor]
+       2×  cultural heritage                                   [A Curious Tractor]
+  ·    2×  Resilience and Adaptability                         [A Curious Tractor, Orange Sky]
+  ·    2×  Healing and Reconciliation                          [A Curious Tractor, Orange Sky]
+       1×  Connection to land and homecoming                   [Oonchiumpa]
+       1×  Family bonds and intergenerational relationships    [Oonchiumpa]
+       1×  Cultural heritage and preservation                  [Oonchiumpa]
+       1×  Changes in land use and ownership                   [Oonchiumpa]
+       1×  Community engagement and support                    [Oonchiumpa]
+       1×  Physical labor and its toll on the body             [Oonchiumpa]
+       1×  Connection to Country and Heritage                  [Oonchiumpa]
+       1×  Community Building and Sharing                      [Oonchiumpa]
+       1×  Intergenerational Knowledge and Future Planning     [Oonchiumpa]
+       1×  Truth Telling and Reconciliation                    [Oonchiumpa]
+       1×  Empowerment through Education and Opportunities     [Oonchiumpa]
+       1×  Cultural Identity                                   [Oonchiumpa]
+       1×  Family Heritage                                     [Oonchiumpa]
+       1×  Community Empowerment                               [Oonchiumpa]
+       1×  Balancing Traditional Knowledge with Modern Respon  [Oonchiumpa]
+       1×  Identity and self-determination                     [Oonchiumpa]
+       1×  Healing and addressing social issues (housing, edu  [Oonchiumpa]
+       1×  Community and partnership building                  [Oonchiumpa]
+
+
+## 4. Cross-org themes — present in 3+ orgs = CAMPAIGN SPINE CANDIDATES
+
+  ★  10×  identity                                            (5 orgs: A Curious Tractor, Oonchiumpa, Orange Sky, Palm Island CC (PICC), Young Guns)
+  ★   9×  Identity                                            (4 orgs: A Curious Tractor, Orange Sky, Palm Island CC (PICC), Young Guns)
+  ★   8×  community                                           (3 orgs: A Curious Tractor, Oonchiumpa, Orange Sky)
+  ★   7×  resilience                                          (3 orgs: A Curious Tractor, Oonchiumpa, Orange Sky)
+  ★   7×  healing                                             (3 orgs: A Curious Tractor, Oonchiumpa, Orange Sky)
+  ★   5×  Identity and Heritage                               (3 orgs: A Curious Tractor, Oonchiumpa, Palm Island CC (PICC))
+  ★   5×  Community                                           (3 orgs: Orange Sky, Palm Island CC (PICC), Young Guns)
+  ★   4×  Resilience                                          (3 orgs: A Curious Tractor, Palm Island CC (PICC), Young Guns)
+  ★   3×  Family                                              (3 orgs: Orange Sky, Palm Island CC (PICC), Young Guns)
+  ★   3×  Healing                                             (3 orgs: Orange Sky, Palm Island CC (PICC), Young Guns)
+
+
+## 5. Cultural markers from AI analysis (specific nations, real identifiers)
+
+
+
+## 6. Storytellers with most AI-analysed transcripts — RICHEST INSIGHT VOICES
+
+  E 📸 Kristy Bloomfield            | Oonchiumpa        | tx=10 analysed= 5 quotes= 0 | Aboriginal Australian - Tradit | Cultural Identity, Family Heritage, Community Empowerment, Resilience in the Fac
+  E 📸 Aunty Barb and Uncle Tony    | Oonchiumpa        | tx= 2 analysed= 2 quotes= 0 | Aboriginal Elder               | preserving cultural heritage, community resilience and support, aging population
+    📸 Elders Group                 | Palm Island CC (P | tx=17 analysed= 1 quotes= 0 | Aboriginal                     | identity, community resilience, cultural heritage preservation
+  E 📸 Uncle Frank Daniel Landers   | Palm Island CC (P | tx= 7 analysed= 1 quotes= 0 | Aboriginal, Palm Island        | Identity, Heritage, Family Separation and Reunification, Government Control and 
+  E 📸 Dianne Stokes                | A Curious Tractor | tx= 7 analysed= 1 quotes= 0 | Bugainuk                       | Identity and Belonging, Community Development and Cultural Revitalization, Heali
+    📸 Men's Group                  | Palm Island CC (P | tx= 6 analysed= 1 quotes= 0 | Bulgurmen                      | Purpose and meaning, Self-sabotage and self-punishment, Escape through drinking 
+    📸 Iris                         | Palm Island CC (P | tx= 5 analysed= 1 quotes= 0 | Bwgcolman, Badu Island         | Identity, Heritage, Family Dynamics, Community
+    📸 Henry Doyle                  | Palm Island CC (P | tx= 5 analysed= 1 quotes= 0 | Aboriginal                     | Identity, Community, Resilience, Healing
+    📸 Irene Nleallajar             | Palm Island CC (P | tx= 4 analysed= 1 quotes= 0 | Bwgcolman, Palm Island         | Identity and Heritage, Community and Family Ties, Resilience in the Face of Adve
+  E 📸 Henry Bloomfield             | Oonchiumpa        | tx= 3 analysed= 1 quotes= 0 | Aboriginal Australian (Ross Ri | Connection to land and homecoming, Family bonds and intergenerational relationsh
+    📸 Childcare workers            | Palm Island CC (P | tx= 3 analysed= 1 quotes= 0 |                                | Resilience in the face of disaster, Community impact and disruption, Personal ex
+    📸 Ruby Sibley                  | Palm Island CC (P | tx= 3 analysed= 1 quotes= 0 | Aboriginal, Palm Island        | Identity, Heritage, Family, Community
+    📸 Cliff Plummer                | A Curious Tractor | tx= 3 analysed= 1 quotes= 0 | Warga                          | Identity and Cultural Heritage, Community Health and Well-being, Resilience in t
+    📸 Tanya Turner                 | Oonchiumpa        | tx= 2 analysed= 1 quotes= 0 | Eastern/Central Australian Abo | Identity formation through cultural heritage, Navigating intergenerational expec
+    📸 Kylie Bloomfield             | Oonchiumpa        | tx= 2 analysed= 1 quotes= 0 | Aboriginal                     | Connection to Country and Heritage, Community Building and Sharing, Intergenerat
+    📸 Callum William Mason         | Young Guns        | tx= 2 analysed= 1 quotes= 0 | Indigenous                     | Identity and belonging, Resilience in the face of adversity, Importance of famil
+    📸 Amelia Tynan                 | Young Guns        | tx= 2 analysed= 1 quotes= 0 | Non-Indigenous Australian      | Identity, Community, Healing, Resilience
+    📸 George Nanganjuan            | Young Guns        | tx= 2 analysed= 1 quotes= 0 | Papua New Guinean              | identity, community building, healing and resilience, cultural connection
+    📸 Jimmy Frank                  | A Curious Tractor | tx= 2 analysed= 1 quotes= 0 | Warumungu, Western Arrernte    | Identity and Heritage, Community Development and Empowerment, Healing and Resili
+    📸 Melissa Jackson              | A Curious Tractor | tx= 2 analysed= 1 quotes= 0 | Borroloola, Top End            | Identity and Heritage, Family and Community Support, Resilience and Adaptability
+    📸 Risilda Hogan                | A Curious Tractor | tx= 2 analysed= 1 quotes= 0 | Aboriginal                     | identity, community, healing, resilience
+  E 📸 Norman Frank                 | A Curious Tractor | tx= 2 analysed= 1 quotes= 0 | Warlpiri, White Kakadu totem   | Identity and Heritage, Community and Connection, Healing and Resilience, Housing
+    📸 Linda Turner                 | A Curious Tractor | tx= 2 analysed= 1 quotes= 0 | Warumungu                      | Cultural Preservation, Identity and Belonging, Resilience in the Face of Trauma,
+    📸 Annie Morrison               | A Curious Tractor | tx= 2 analysed= 1 quotes= 0 | Aboriginal                     | Preservation of Indigenous culture and heritage, Community resilience and suppor
+    📸 Georgie Ibbott               | Orange Sky        | tx= 2 analysed= 1 quotes= 0 | Non-Indigenous Australian      | Identity: Sense of belonging to a place and community, Heritage: Connection to T
+    📸 Kay Peterson                 | Orange Sky        | tx= 2 analysed= 1 quotes= 0 | Non-Indigenous Australian      | identity, volunteering, community, connection
+    📸 Paul Kayne                   | Orange Sky        | tx= 2 analysed= 1 quotes= 0 | Non-Indigenous Australian      | Identity and sense of belonging, Importance of community service and volunteerin
+    📸 Robyn Watts                  | Orange Sky        | tx= 2 analysed= 1 quotes= 0 | Non-Indigenous Australian      | Resilience and Coping with Grief, The Importance of Community and Social Support
+    📸 Daniel O'neill               | Orange Sky        | tx= 2 analysed= 1 quotes= 0 | Non-Indigenous Australian      | Identity and belonging, Mental health and trauma, Resilience and healing, Commun
+    📸 Linda Pietri                 | Orange Sky        | tx= 2 analysed= 1 quotes= 0 | Non-Indigenous Australian      | Identity as a midwife and volunteer, Relationships and community building with h
+    📸 Keeda Zilm                   | Orange Sky        | tx= 2 analysed= 1 quotes= 0 | Non-Indigenous Australian      | identity, community, healing, resilience
+    📸 Allan Mott                   | Orange Sky        | tx= 2 analysed= 1 quotes= 0 | Non-Indigenous Australian      | Identity, Heritage, Family, Community
+    📸 Julie Jauncey                | Orange Sky        | tx= 2 analysed= 1 quotes= 0 | Non-Indigenous Australian      | identity, community, resilience, healing
+    📸 Siobhan Leyne                | Orange Sky        | tx= 2 analysed= 1 quotes= 0 | Non-Indigenous Australian      | Volunteerism, Personal growth through service, Community and friendship, Social 
+    📸 Shaun Thomas Rogers          | Orange Sky        | tx= 2 analysed= 1 quotes= 0 | Non-Indigenous Australian      | Identity, Community service and volunteering, Collaboration and teamwork, Practi
+    📸 Tasos                        | Orange Sky        | tx= 2 analysed= 1 quotes= 0 | Non-Indigenous Australian      | Identity and belonging, Healing and dignity through hygiene services, Community 
+    📸 Ade Rizer                    | JusticeHub        | tx= 1 analysed= 1 quotes= 0 |                                | importance of support for children in care, lack of funding and resources, need 
+    📸 Joe Kwon                     | A Curious Tractor | tx= 1 analysed= 1 quotes= 0 | Indigenous                     | Identity and Belonging, Community and Social Impact, Healing and Resilience, Cul
+    📸 Brian Russell                | A Curious Tractor | tx= 1 analysed= 1 quotes= 0 | Goa, Gangalidda, Gulf country  | Identity and Belonging, Community and Connection, Healing and Resilience, Family
+    📸 Kirrily Brianne-Scarf        | A Curious Tractor | tx= 1 analysed= 1 quotes= 0 | Chinese-Australian             | Identity, Cultural Exchange, Role Modeling, Intergenerational Connection
+
+
+## 7. Deep-dive into transcript-only orgs (MMEIC, Young Guns, Diagrama)
+
+
+Done.

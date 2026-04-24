@@ -1,0 +1,424 @@
+
+## Oonchiumpa  (23 storytellers available)
+
+   flags | name                                 | roles                                          | heritage                                 | pub | tx
+   ----- + ------------------------------------ + ---------------------------------------------- + ---------------------------------------- + --- + ---
+   📸📖📝 | Kristy Bloomfield                    | Elder                                          | Aboriginal Australian - Traditional Own… |   1 |  10
+   📸📖📝 | Henry Bloomfield                     | Elder                                          | Aboriginal Australian (Ross River)       |   1 |   3
+   📸📖📝 | Kylie Bloomfield                     |                                                | Aboriginal                               |   1 |   2
+   📸📖📝 | Benjamin Knight                      |                                                | First Nations Australian                 |   1 |   1
+   📸  📝 | Tanya Turner                         |                                                | Eastern/Central Australian Aboriginal, … |   0 |   2
+   📸  📝 | Aunty Barb and Uncle Tony            | Elder                                          | Aboriginal Elder                         |   0 |   2
+   📸  📝 | Braydon Dema                         |                                                | Aboriginal Australian (Ross River)       |   0 |   1
+   📸  📝 | Patricia Ann Miller                  |                                                | Aboriginal Australian - Traditional Own… |   0 |   1
+   📸  📝 | Anthony Hopkins                      |                                                |                                          |   0 |   1
+   📸  📝 | Louise                               |                                                |                                          |   0 |   1
+   📸  📝 | Nigel Alice                          |                                                | Aboriginal                               |   0 |   1
+       📝 | Oonchiumpa Community                 |                                                |                                          |   0 |   7
+   📸     | Kirsty Bloomfield                    |                                                | Aboriginal Australian (Ross River)       |   0 |   0
+   📸     | Yani Bloomfield                      |                                                | Aboriginal Australian (Ross River)       |   0 |   0
+   📸     | Paul Marchesi                        |                                                | Non-Indigenous Australian                |   0 |   0
+   📸     | Chelsea Kenneally                    |                                                |                                          |   0 |   0
+   📸     | Suzie Ma                             |                                                | ANU Law Student                          |   0 |   0
+   📸     | Adelaide Hayes                       |                                                | Non-Indigenous Australian                |   0 |   0
+   📸     | Aidan Harris                         |                                                | ANU Law Student                          |   0 |   0
+   📸     | Jackquann                            |                                                | Aboriginal Australian                    |   0 |   0
+   📸     | Fred Campbell                        |                                                | Aboriginal Australian                    |   0 |   0
+   📸     | Laquisha                             |                                                | Indigenous                               |   0 |   0
+   📸     | Shane Bloomfield                     |                                                | Aboriginal                               |   0 |   0
+
+## PICC  (56 storytellers available)
+
+   flags | name                                 | roles                                          | heritage                                 | pub | tx
+   ----- + ------------------------------------ + ---------------------------------------------- + ---------------------------------------- + --- + ---
+   📸📖📝 | Elders Group                         |                                                | Aboriginal                               |  15 |  17
+   📸📖📝 | Allan Palm Island                    | Elder                                          | Manbarra,Wulgurukaba                     |   8 |  11
+   📸📖📝 | Rachel Atkinson                      |                                                | Yorta Yorta                              |   8 |   9
+   📸📖📝 | Aunty Ethel Robertson                | Elder                                          | Aboriginal Australian                    |   5 |   7
+   📸📖📝 | Uncle Frank Daniel Landers           | Elder                                          | Aboriginal, Palm Island                  |   4 |   7
+   📸📖📝 | Men's Group                          |                                                | Bulgurmen                                |   4 |   6
+   📸📖📝 | Iris                                 |                                                | Bwgcolman, Badu Island                   |   3 |   5
+   📸📖📝 | Jeanie Sam                           |                                                | Aboriginal Australian                    |   3 |   3
+   📸📖📝 | Henry Doyle                          |                                                | Aboriginal                               |   2 |   5
+   📸📖📝 | Winifred Obah                        | Elder                                          | Aboriginal Australian                    |   2 |   4
+   📸📖📝 | Playgroup Staff                      |                                                | Aboriginal Australian                    |   2 |   3
+   📸📖📝 | Patricia Doyle                       |                                                | Aboriginal Australian                    |   2 |   3
+   📸📖📝 | Clay Alfred                          |                                                | Aboriginal Australian                    |   2 |   3
+   📸📖📝 | Haley Wetzel                         |                                                | Aboriginal Australian                    |   2 |   2
+   📸📖📝 | Irene Nleallajar                     |                                                | Bwgcolman, Palm Island                   |   1 |   4
+   📸📖📝 | Ferdys staff                         |                                                |                                          |   1 |   3
+   📸📖📝 | Roy Prior                            |                                                | Aboriginal Australian (Palm Island)      |   1 |   3
+   📸📖📝 | Childcare workers                    |                                                |                                          |   1 |   3
+   📸📖📝 | Goonyun Anderson                     |                                                | Aboriginal Australian (Palm Island)      |   1 |   3
+   📸📖📝 | Ruby Sibley                          |                                                | Aboriginal, Palm Island                  |   1 |   3
+   📸📖📝 | Rangers and Elders Conversation      |                                                | Aboriginal Australian                    |   1 |   2
+   📸📖📝 | Ida Richardson                       |                                                | Aboriginal Australian                    |   1 |   2
+   📸📖📝 | Gurtrude Grace Richardson            | Elder                                          | Aboriginal Australian                    |   1 |   2
+   📸📖📝 | Aunty Iris May Whitey                | Elder                                          | Aboriginal Australian                    |   1 |   2
+   📸📖📝 | Cyndel Louise Pryor                  | Elder                                          | Aboriginal Australian                    |   1 |   2
+   📸📖📝 | Marjoyie Burns                       | Elder                                          | Aboriginal Australian                    |   1 |   2
+   📸📖📝 | Elsa Mortoa                          | Elder                                          | Aboriginal Australian                    |   1 |   2
+   📸📖📝 | Agnes Watton                         |                                                | Aboriginal Australian                    |   1 |   1
+   📸  📝 | Jess Smit                            |                                                | Non-Indigenous Australian                |   0 |   2
+   📸  📝 | Jenni Calcraft                       |                                                | Non-Indigenous Australian                |   0 |   2
+   📸  📝 | Freddy Wai                           |                                                | Papua New Guinean                        |   0 |   1
+   📸  📝 | Luigi                                |                                                | Aboriginal                               |   0 |   1
+   📸  📝 | Ethel and Iris Ferdies               |                                                | Aboriginal                               |   0 |   1
+   📸  📝 | Natalie Friday                       |                                                | Eastern Googiallanji, Okla, Bulgaman     |   0 |   1
+   📸  📝 | Nayden                               |                                                | Aboriginal                               |   0 |   1
+   📸  📝 | Uncle George                         | Elder                                          | Kalkadoon                                |   0 |   1
+       📝 | PICC Community Hub Team              |                                                |                                          |   0 |   4
+       📝 | PICC Women's Shelter Team            |                                                |                                          |   0 |   2
+       📝 | PICC Women's Healing Service Team    |                                                |                                          |   0 |   1
+       📝 | Tammy                                |                                                | Aboriginal Australian                    |   0 |   1
+   📸     | Dee Ann Sailor                       |                                                | Aboriginal Australian                    |   0 |   0
+   📸     | Rhonda Phillips                      |                                                | Aboriginal                               |   0 |   0
+   📸     | Luella Bligh                         |                                                | Bwgcolman                                |   0 |   0
+   📸     | Matthew Lindsay                      |                                                |                                          |   0 |   0
+   📸     | Harriet Hulthen                      |                                                | Bwgcolman                                |   0 |   0
+   📸     | Marilyn Laner                        |                                                | Non-Indigenous Australian                |   0 |   0
+   📸     | Raymond W. Palmer Snr.               | Elder                                          | Bwgcolman                                |   0 |   0
+   📸     | Benjamin Knight                      |                                                | First Nations Australian                 |   0 |   0
+   📸     | Paige Tanner Hill                    |                                                | Aboriginal Australian (Palm Island)      |   0 |   0
+   📸     | Jacqui                               |                                                |                                          |   0 |   0
+   📸     | Cassie Lang                          |                                                |                                          |   0 |   0
+   📸     | Uncle Alan Palm Island               |                                                | Aboriginal Elder                         |   0 |   0
+   📸     | Peggy Palm Island                    | Elder                                          | Mumburra                                 |   0 |   0
+   📸     | Richard Cassidy                      |                                                | Non-Indigenous Australian                |   0 |   0
+   📸     | Ivy                                  |                                                | Aboriginal, Palm Island                  |   0 |   0
+   📸     | Jason                                |                                                | Aboriginal, Palm Island                  |   0 |   0
+
+## BG Fit  (19 storytellers available)
+
+   flags | name                                 | roles                                          | heritage                                 | pub | tx
+   ----- + ------------------------------------ + ---------------------------------------------- + ---------------------------------------- + --- + ---
+   📸📖📝 | Brodie Germaine                      |                                                | Gadigal                                  |   1 |   6
+     📖📝 | Spinifex Res Youth                   |                                                |                                          |   1 |   1
+     📖📝 | Mount Isa Camp Participant           |                                                | Aboriginal                               |   1 |   1
+     📖📝 | Doomadgee Camp Participant           |                                                | Aboriginal                               |   1 |   1
+     📖   | Flexi Group Voices                   |                                                |                                          |   1 |   0
+   📸  📝 | Uncle George                         | Elder                                          | Kalkadoon                                |   0 |   4
+   📸  📝 | Gracie Ryder                         |                                                | Australian                               |   0 |   1
+   📸  📝 | Jay                                  |                                                | Aboriginal                               |   0 |   1
+   📸  📝 | Danielle Germaine                    |                                                | Aboriginal                               |   0 |   1
+   📸  📝 | Benji - Young Person                 |                                                | Aboriginal                               |   0 |   1
+   📸  📝 | Siva                                 |                                                |                                          |   0 |   1
+   📸  📝 | Nigel                                |                                                | Australian                               |   0 |   1
+   📸  📝 | Rashad Gavin Isaacson                |                                                | Aboriginal                               |   0 |   1
+   📸  📝 | Aunty Ivy                            | Elder                                          | Aboriginal                               |   0 |   1
+   📸  📝 | YPA Team                             |                                                | Aboriginal                               |   0 |   1
+   📸  📝 | Ben                                  |                                                |                                          |   0 |   1
+   📸  📝 | Uncle Warren King                    | Elder                                          | Aboriginal                               |   0 |   1
+   📸     | Luigi                                |                                                | Aboriginal                               |   0 |   0
+   📸     | Nayden                               |                                                | Aboriginal                               |   0 |   0
+
+## MMEIC  (8 storytellers available)
+
+   flags | name                                 | roles                                          | heritage                                 | pub | tx
+   ----- + ------------------------------------ + ---------------------------------------------- + ---------------------------------------- + --- + ---
+   📸  📝 | Tegan Burns                          |                                                | Aboriginal                               |   0 |   1
+   📸  📝 | Alyssa Dawn Brewster                 |                                                | Bundjalung, Tongan, Genebrawa/Gabi       |   0 |   1
+   📸  📝 | Tarren                               |                                                | Aboriginal Australian (Moira)            |   0 |   1
+   📸  📝 | Uncle Dale                           |                                                | First Nations Australian                 |   0 |   1
+   📸  📝 | Aunty Evie                           |                                                | Aboriginal                               |   0 |   1
+   📸  📝 | Chelsea Rolfe                        |                                                | Aboriginal                               |   0 |   1
+   📸  📝 | Benjamin Moss                        |                                                | Non-Indigenous Australian                |   0 |   1
+   📸  📝 | Aunty Maureen                        | Elder                                          | Quandamooka                              |   0 |   1
+
+## Mounty Yarns  (13 storytellers available)
+
+   flags | name                                 | roles                                          | heritage                                 | pub | tx
+   ----- + ------------------------------------ + ---------------------------------------------- + ---------------------------------------- + --- + ---
+       📝 | Removed                              |                                                |                                          |   0 |   2
+       📝 | Removed                              |                                                |                                          |   0 |   2
+       📝 | Removed                              |                                                |                                          |   0 |   1
+       📝 | Removed                              |                                                |                                          |   0 |   1
+       📝 | Removed                              |                                                |                                          |   0 |   1
+       📝 | Removed                              |                                                |                                          |   0 |   1
+       📝 | Removed                              |                                                |                                          |   0 |   1
+       📝 | Removed                              |                                                |                                          |   0 |   1
+       📝 | Removed                              |                                                |                                          |   0 |   1
+       📝 | Removed                              |                                                |                                          |   0 |   1
+       📝 | Removed                              |                                                |                                          |   0 |   1
+       📝 | Removed                              |                                                |                                          |   0 |   1
+       📝 | Removed                              |                                                |                                          |   0 |   1
+
+## A Curious Tractor  (68 storytellers available)
+
+   flags | name                                 | roles                                          | heritage                                 | pub | tx
+   ----- + ------------------------------------ + ---------------------------------------------- + ---------------------------------------- + --- + ---
+   📸📖📝 | Dianne Stokes                        | Elder                                          | Bugainuk                                 |   2 |   7
+   📸📖📝 | Cliff Plummer                        |                                                | Warga                                    |   1 |   3
+   📸📖📝 | Fred Campbell                        |                                                | Aboriginal Australian                    |   1 |   1
+   📸📖📝 | Barry Rodgerig                       |                                                | Non-Indigenous Australian                |   1 |   1
+     📖📝 | ACT Production Team                  |                                                |                                          |   7 |   7
+   📸📖   | Uncle George                         | Elder                                          | Kalkadoon                                |   1 |   0
+   📸📖   | Brodie Germaine                      |                                                | Gadigal                                  |   1 |   0
+   📸  📝 | Nicholas Marchesi                    |                                                | Non-Indigenous Australian                |   0 |   3
+   📸  📝 | Walter                               |                                                | Aboriginal                               |   0 |   2
+   📸  📝 | Ana - Bega                           |                                                | Aboriginal                               |   0 |   2
+   📸  📝 | Jimmy Frank                          |                                                | Warumungu, Western Arrernte              |   0 |   2
+   📸  📝 | Linda Turner                         |                                                | Warumungu                                |   0 |   2
+   📸  📝 | Wayne Glenn                          |                                                | Non-Indigenous Australian                |   0 |   2
+   📸  📝 | Chris                                |                                                | New Zealander                            |   0 |   2
+   📸  📝 | Gloria                               | Elder                                          | Aboriginal Elder                         |   0 |   2
+   📸  📝 | Annie Morrison                       |                                                | Aboriginal                               |   0 |   2
+   📸  📝 | Chloe                                |                                                | Aboriginal                               |   0 |   2
+   📸  📝 | Risilda Hogan                        |                                                | Aboriginal                               |   0 |   2
+   📸  📝 | Gary                                 |                                                | Non-Indigenous Australian                |   0 |   2
+   📸  📝 | Daniel Patrick Noble                 |                                                | Aboriginal Australian (Yarrabah)         |   0 |   2
+   📸  📝 | Mark                                 |                                                |                                          |   0 |   2
+   📸  📝 | Tracy McCartney                      |                                                | Non-Indigenous Australian                |   0 |   2
+   📸  📝 | Ivy                                  |                                                | Aboriginal, Palm Island                  |   0 |   2
+   📸  📝 | Melissa Jackson                      |                                                | Borroloola, Top End                      |   0 |   2
+   📸  📝 | Alfred Johnson                       |                                                | Aboriginal, Palm Island                  |   0 |   2
+   📸  📝 | Norman Frank                         | Elder                                          | Warlpiri, White Kakadu totem             |   0 |   2
+   📸  📝 | Carmelita & Colette                  |                                                | Aboriginal, Palm Island                  |   0 |   2
+   📸  📝 | Jason                                |                                                | Aboriginal, Palm Island                  |   0 |   2
+   📸  📝 | Clive - CEO Bega                     |                                                | Aboriginal                               |   0 |   1
+   📸  📝 | Patricia Frank                       | Elder                                          | Oo Tribe,White Cockatoo clan group       |   0 |   1
+   📸  📝 | Kylie Bloomfield                     |                                                | Aboriginal                               |   0 |   1
+   📸  📝 | G Mana                               |                                                | Māori, cross-cultural Indigenous knowle… |   0 |   1
+   📸  📝 | Felicity Davis-Smith                 |                                                | Indigenous                               |   0 |   1
+   📸  📝 | Ray Kirkman                          |                                                | Non-Indigenous Australian                |   0 |   1
+   📸  📝 | Joe Kwon                             |                                                | Indigenous                               |   0 |   1
+   📸  📝 | Darrell Pierpoint                    |                                                | Non-Indigenous Australian                |   0 |   1
+   📸  📝 | Kirrily Brianne-Scarf                |                                                | Chinese-Australian                       |   0 |   1
+   📸  📝 | Shane Bloomfield                     |                                                | Aboriginal                               |   0 |   1
+   📸  📝 | Brian Russell                        |                                                | Goa, Gangalidda, Gulf country            |   0 |   1
+   📸  📝 | Ade Rizer                            |                                                |                                          |   0 |   1
+   📸     | Sarah Mayers                         |                                                |                                          |   0 |   0
+   📸     | Heather Mundo                        |                                                | Aboriginal                               |   0 |   0
+   📸     | Chris Mourad                         |                                                | Canadian-Australian                      |   0 |   0
+   📸     | Paul Marchesi                        |                                                | Non-Indigenous Australian                |   0 |   0
+   📸     | Chelsea Kenneally                    |                                                |                                          |   0 |   0
+   📸     | Navjot Soni                          |                                                |                                          |   0 |   0
+   📸     | Bernie Moran                         |                                                | Non-Indigenous Australian                |   0 |   0
+   📸     | Carla Knight                         |                                                |                                          |   0 |   0
+   📸     | Paul Morris                          |                                                |                                          |   0 |   0
+   📸     | Aunty Vicky Wade                     |                                                | Aboriginal Australian - Traditional Own… |   0 |   0
+   📸     | Benjamin Knight                      |                                                | First Nations Australian                 |   0 |   0
+   📸     | Natalie Friday                       |                                                | Eastern Googiallanji, Okla, Bulgaman     |   0 |   0
+   📸     | Tasos                                |                                                | Non-Indigenous Australian                |   0 |   0
+   📸     | Dena                                 |                                                | Non-Indigenous Australian                |   0 |   0
+   📸     | Childcare workers                    |                                                |                                          |   0 |   0
+   📸     | Chris_Phoniex_Service_Provider       |                                                |                                          |   0 |   0
+   📸     | Lisa J                               |                                                |                                          |   0 |   0
+   📸     | Graham                               |                                                |                                          |   0 |   0
+   📸     | Julie Jauncey                        |                                                | Non-Indigenous Australian                |   0 |   0
+   📸     | Keeda Zilm                           |                                                | Non-Indigenous Australian                |   0 |   0
+   📸     | Ranbir Chanhan                       |                                                | Punjabi-Australian                       |   0 |   0
+   📸     | Luke Watkins                         |                                                |                                          |   0 |   0
+   📸     | Lesley Lalor                         |                                                |                                          |   0 |   0
+   📸     | Chris Dwyer                          |                                                |                                          |   0 |   0
+   📸     | Matthew Neill                        |                                                |                                          |   0 |   0
+   📸     | Nichole Ann Dobson                   |                                                |                                          |   0 |   0
+   📸     | Linda Pietri                         |                                                | Non-Indigenous Australian                |   0 |   0
+   📸     | Elaine Everett                       |                                                |                                          |   0 |   0
+
+## JusticeHub  (38 storytellers available)
+
+   flags | name                                 | roles                                          | heritage                                 | pub | tx
+   ----- + ------------------------------------ + ---------------------------------------------- + ---------------------------------------- + --- + ---
+   📸📖📝 | Benjamin Knight                      |                                                | First Nations Australian                 |   1 |   2
+     📖📝 | JusticeHub                           |                                                |                                          |   1 |   1
+   📸  📝 | Braydon Dema                         |                                                | Aboriginal Australian (Ross River)       |   0 |   1
+   📸  📝 | Jackquann                            |                                                | Aboriginal Australian                    |   0 |   1
+   📸  📝 | Fred Campbell                        |                                                | Aboriginal Australian                    |   0 |   1
+   📸  📝 | Laquisha                             |                                                | Indigenous                               |   0 |   1
+   📸  📝 | Pollyanna                            |                                                | Australian                               |   0 |   1
+   📸  📝 | Ade Rizer                            |                                                |                                          |   0 |   1
+   📸     | Gracie Ryder                         |                                                | Australian                               |   0 |   0
+   📸     | Patricia Ann Miller                  |                                                | Aboriginal Australian - Traditional Own… |   0 |   0
+   📸     | Kirsty Bloomfield                    |                                                | Aboriginal Australian (Ross River)       |   0 |   0
+   📸     | Yani Bloomfield                      |                                                | Aboriginal Australian (Ross River)       |   0 |   0
+   📸     | Luigi                                |                                                | Aboriginal                               |   0 |   0
+   📸     | Paul Marchesi                        |                                                | Non-Indigenous Australian                |   0 |   0
+   📸     | Chelsea Kenneally                    |                                                |                                          |   0 |   0
+   📸     | Kylie Bloomfield                     |                                                | Aboriginal                               |   0 |   0
+   📸     | Tanya Turner                         |                                                | Eastern/Central Australian Aboriginal, … |   0 |   0
+   📸     | G Mana                               |                                                | Māori, cross-cultural Indigenous knowle… |   0 |   0
+   📸     | Jay                                  |                                                | Aboriginal                               |   0 |   0
+   📸     | Suzie Ma                             |                                                | ANU Law Student                          |   0 |   0
+   📸     | Danielle Germaine                    |                                                | Aboriginal                               |   0 |   0
+   📸     | Adelaide Hayes                       |                                                | Non-Indigenous Australian                |   0 |   0
+   📸     | Benji - Young Person                 |                                                | Aboriginal                               |   0 |   0
+   📸     | Aidan Harris                         |                                                | ANU Law Student                          |   0 |   0
+   📸     | Nayden                               |                                                | Aboriginal                               |   0 |   0
+   📸     | Uncle George                         | Elder                                          | Kalkadoon                                |   0 |   0
+   📸     | Kristy Bloomfield                    | Elder                                          | Aboriginal Australian - Traditional Own… |   0 |   0
+   📸     | Brodie Germaine                      |                                                | Gadigal                                  |   0 |   0
+   📸     | Siva                                 |                                                |                                          |   0 |   0
+   📸     | Nigel                                |                                                | Australian                               |   0 |   0
+   📸     | Rashad Gavin Isaacson                |                                                | Aboriginal                               |   0 |   0
+   📸     | Aunty Ivy                            | Elder                                          | Aboriginal                               |   0 |   0
+   📸     | YPA Team                             |                                                | Aboriginal                               |   0 |   0
+   📸     | Ben                                  |                                                |                                          |   0 |   0
+   📸     | Uncle Warren King                    | Elder                                          | Aboriginal                               |   0 |   0
+   📸     | Aunty Barb and Uncle Tony            | Elder                                          | Aboriginal Elder                         |   0 |   0
+   📸     | Henry Bloomfield                     | Elder                                          | Aboriginal Australian (Ross River)       |   0 |   0
+   📸     | Shane Bloomfield                     |                                                | Aboriginal                               |   0 |   0
+
+## Young Guns  (6 storytellers available)
+
+   flags | name                                 | roles                                          | heritage                                 | pub | tx
+   ----- + ------------------------------------ + ---------------------------------------------- + ---------------------------------------- + --- + ---
+   📸  📝 | Amelia Tynan                         |                                                | Non-Indigenous Australian                |   0 |   2
+   📸  📝 | George Nanganjuan                    |                                                | Papua New Guinean                        |   0 |   2
+   📸  📝 | Callum William Mason                 |                                                | Indigenous                               |   0 |   2
+   📸  📝 | Keiron Lander                        |                                                | Indigenous                               |   0 |   1
+   📸  📝 | Troy John McConnell                  |                                                |                                          |   0 |   1
+   📸     | Aunty Evie                           |                                                | Aboriginal                               |   0 |   0
+
+## Diagrama  (15 storytellers available)
+
+   flags | name                                 | roles                                          | heritage                                 | pub | tx
+   ----- + ------------------------------------ + ---------------------------------------------- + ---------------------------------------- + --- + ---
+   📸  📝 | Sarah Mayers                         |                                                |                                          |   0 |   3
+   📸  📝 | David Romero McGuire PhD             |                                                | British                                  |   0 |   3
+   📸  📝 | Jesús Teruel                         |                                                |                                          |   0 |   3
+   📸  📝 | Group of young men Murcia            |                                                | Spanish                                  |   0 |   2
+   📸  📝 | Amelia Martinez                      |                                                |                                          |   0 |   2
+   📸  📝 | Chelo                                |                                                |                                          |   0 |   2
+   📸  📝 | Group on home for violent young peo… |                                                |                                          |   0 |   2
+   📸  📝 | Young People Murcia                  |                                                | Spanish                                  |   0 |   2
+   📸  📝 | Migrant Home group                   |                                                |                                          |   0 |   2
+   📸  📝 | Enrique López                        |                                                | Spanish                                  |   0 |   2
+   📸  📝 | Group of Young People in Alicante    |                                                | Spanish                                  |   0 |   2
+   📸  📝 | Javier Aparicio Grau                 |                                                |                                          |   0 |   2
+   📸  📝 | Olga Havnen                          |                                                | Aboriginal                               |   0 |   1
+   📸  📝 | Kate Bjur                            |                                                |                                          |   0 |   1
+   📸     | Benjamin Knight                      |                                                | First Nations Australian                 |   0 |   0
+
+## Confit  (13 storytellers available)
+
+   flags | name                                 | roles                                          | heritage                                 | pub | tx
+   ----- + ------------------------------------ + ---------------------------------------------- + ---------------------------------------- + --- + ---
+   📸📖   | Brodie                               |                                                |                                          |   1 |   0
+   📸📖   | Joe                                  |                                                |                                          |   1 |   0
+   📸📖   | Hamilton                             |                                                |                                          |   1 |   0
+   📸📖   | Metan Bacir Kapula / Confit Mentee   |                                                |                                          |   1 |   0
+   📸📖   | Mount Isa Trip                       |                                                |                                          |   1 |   0
+   📸📖   | Vireak / Confit Mentor               |                                                |                                          |   1 |   0
+   📸📖   | Eddie / Confit Mentee                |                                                |                                          |   1 |   0
+   📸📖   | Moana                                |                                                |                                          |   1 |   0
+   📸📖   | Knox / Confit Mentee                 |                                                |                                          |   1 |   0
+   📸📖   | Tina McPhee - Story                  |                                                |                                          |   1 |   0
+   📸📖   | Dani                                 |                                                |                                          |   1 |   0
+   📸📖   | Gaith                                |                                                |                                          |   1 |   0
+   📸     | Joe Kwon                             |                                                | Indigenous                               |   0 |   0
+
+## Orange Sky  (107 storytellers available)
+
+   flags | name                                 | roles                                          | heritage                                 | pub | tx
+   ----- + ------------------------------------ + ---------------------------------------------- + ---------------------------------------- + --- + ---
+   📸  📝 | Dena                                 |                                                | Non-Indigenous Australian                |   0 |   4
+   📸  📝 | Jacqui                               |                                                |                                          |   0 |   3
+   📸  📝 | Kay Peterson                         |                                                | Non-Indigenous Australian                |   0 |   2
+   📸  📝 | Abby                                 |                                                | Non-Indigenous Australian                |   0 |   2
+   📸  📝 | AJ Bailey                            |                                                |                                          |   0 |   2
+   📸  📝 | Kylie                                |                                                |                                          |   0 |   2
+   📸  📝 | Tasos                                |                                                | Non-Indigenous Australian                |   0 |   2
+   📸  📝 | Shaun Thomas Rogers                  |                                                | Non-Indigenous Australian                |   0 |   2
+   📸  📝 | Amanda Mundell                       |                                                |                                          |   0 |   2
+   📸  📝 | Daniel O'neill                       |                                                | Non-Indigenous Australian                |   0 |   2
+   📸  📝 | Paul Kayne                           |                                                | Non-Indigenous Australian                |   0 |   2
+   📸  📝 | Chris_Phoniex_Service_Provider       |                                                |                                          |   0 |   2
+   📸  📝 | Danee Vanderwall                     |                                                |                                          |   0 |   2
+   📸  📝 | Lisa J                               |                                                |                                          |   0 |   2
+   📸  📝 | Richard Calligan                     |                                                |                                          |   0 |   2
+   📸  📝 | Graham                               |                                                |                                          |   0 |   2
+   📸  📝 | Vicki Sorenson                       |                                                |                                          |   0 |   2
+   📸  📝 | Samantha Breust                      |                                                |                                          |   0 |   2
+   📸  📝 | Julie Jauncey                        |                                                | Non-Indigenous Australian                |   0 |   2
+   📸  📝 | Keeda Zilm                           |                                                | Non-Indigenous Australian                |   0 |   2
+   📸  📝 | Rikki Downman                        |                                                |                                          |   0 |   2
+   📸  📝 | Ranbir Chanhan                       |                                                | Punjabi-Australian                       |   0 |   2
+   📸  📝 | Michael Young (Bear)                 |                                                |                                          |   0 |   2
+   📸  📝 | William Radke                        |                                                |                                          |   0 |   2
+   📸  📝 | Luke Watkins                         |                                                |                                          |   0 |   2
+   📸  📝 | Min                                  |                                                |                                          |   0 |   2
+   📸  📝 | Joanne Kingi                         |                                                |                                          |   0 |   2
+   📸  📝 | Greg Graham                          |                                                |                                          |   0 |   2
+   📸  📝 | Lesley Lalor                         |                                                |                                          |   0 |   2
+   📸  📝 | Samual Thornberry                    |                                                | Non-Indigenous Australian                |   0 |   2
+   📸  📝 | Phil Barton                          |                                                | Aboriginal Australian (Kimberley)        |   0 |   2
+   📸  📝 | Suzanne Evans                        |                                                |                                          |   0 |   2
+   📸  📝 | Jeri Pasovsky                        |                                                |                                          |   0 |   2
+   📸  📝 | Karl Whitney                         |                                                |                                          |   0 |   2
+   📸  📝 | Chris Dwyer                          |                                                |                                          |   0 |   2
+   📸  📝 | Allan Mott                           |                                                | Non-Indigenous Australian                |   0 |   2
+   📸  📝 | Steve Sutton                         |                                                |                                          |   0 |   2
+   📸  📝 | Bob and Julie - Hamilton             |                                                |                                          |   0 |   2
+   📸  📝 | Kevin Vos                            |                                                |                                          |   0 |   2
+   📸  📝 | Melissa Legg                         |                                                |                                          |   0 |   2
+   📸  📝 | Luke Napier                          |                                                |                                          |   0 |   2
+   📸  📝 | Brendan Gunning - School Vice Princ… |                                                |                                          |   0 |   2
+   📸  📝 | Veronica Vos                         |                                                |                                          |   0 |   2
+   📸  📝 | Terina Ahone-Masafi                  |                                                |                                          |   0 |   2
+   📸  📝 | Ashleigh Choice                      |                                                |                                          |   0 |   2
+   📸  📝 | Siobhan Leyne                        |                                                | Non-Indigenous Australian                |   0 |   2
+   📸  📝 | Matthew Neill                        |                                                |                                          |   0 |   2
+   📸  📝 | Kisha Neville                        |                                                | Aboriginal                               |   0 |   2
+   📸  📝 | Rita                                 |                                                |                                          |   0 |   2
+   📸  📝 | Nichole Ann Dobson                   |                                                |                                          |   0 |   2
+   📸  📝 | Tom Robinson                         |                                                |                                          |   0 |   2
+   📸  📝 | Wayne Tait                           |                                                |                                          |   0 |   2
+   📸  📝 | Colin Banks                          |                                                |                                          |   0 |   2
+   📸  📝 | Tom Bowyer                           |                                                |                                          |   0 |   2
+   📸  📝 | Bob Purdy                            |                                                |                                          |   0 |   2
+   📸  📝 | Pam Wellham                          |                                                |                                          |   0 |   2
+   📸  📝 | Muhammad Patel                       |                                                |                                          |   0 |   2
+   📸  📝 | Linda Pietri                         |                                                | Non-Indigenous Australian                |   0 |   2
+   📸  📝 | Robyn Watts                          |                                                | Non-Indigenous Australian                |   0 |   2
+   📸  📝 | Brett Klumpp                         |                                                |                                          |   0 |   2
+   📸  📝 | Kelly Benjamin                       |                                                | South African-Australian                 |   0 |   2
+   📸  📝 | Georgie Ibbott                       |                                                | Non-Indigenous Australian                |   0 |   2
+   📸  📝 | Elaine Everett                       |                                                |                                          |   0 |   2
+   📸  📝 | Kellie Knight                        |                                                |                                          |   0 |   1
+   📸  📝 | Greg Cooke                           |                                                | Non-Indigenous Australian                |   0 |   1
+   📸  📝 | Edward Campion                       |                                                |                                          |   0 |   1
+   📸  📝 | Nici Toll                            |                                                |                                          |   0 |   1
+   📸  📝 | Marcus Barlow                        |                                                |                                          |   0 |   1
+   📸  📝 | Aaron Stapleton                      |                                                |                                          |   0 |   1
+   📸  📝 | Chris Mourad                         |                                                | Canadian-Australian                      |   0 |   1
+   📸  📝 | James Dinsdale                       |                                                |                                          |   0 |   1
+   📸  📝 | Bec Smyth                            |                                                | English-Australian                       |   0 |   1
+   📸  📝 | Sharna Wentworth                     |                                                |                                          |   0 |   1
+   📸  📝 | Brigit Perry                         |                                                | American                                 |   0 |   1
+   📸  📝 | Tracy McIntyre                       |                                                |                                          |   0 |   1
+   📸  📝 | Nicole Snead                         |                                                |                                          |   0 |   1
+   📸  📝 | Pam Ramsay                           |                                                | Non-Indigenous Australian                |   0 |   1
+   📸  📝 | David Allen                          |                                                | English-Australian                       |   0 |   1
+   📸  📝 | Morage Hendry                        |                                                |                                          |   0 |   1
+   📸  📝 | Catherine Plant                      |                                                |                                          |   0 |   1
+   📸  📝 | Celeste Gibbs                        |                                                |                                          |   0 |   1
+   📸  📝 | Amanda Brasnja                       |                                                | Serbian-Australian                       |   0 |   1
+   📸  📝 | Brian Edwards                        |                                                |                                          |   0 |   1
+   📸  📝 | Brontee Lawson                       |                                                |                                          |   0 |   1
+   📸  📝 | Neilson Naje                         |                                                | African                                  |   0 |   1
+   📸  📝 | Marilyn Laner                        |                                                | Non-Indigenous Australian                |   0 |   1
+   📸  📝 | James Miller                         |                                                |                                          |   0 |   1
+   📸  📝 | Tig Hall                             |                                                |                                          |   0 |   1
+   📸  📝 | Paul Gordan                          |                                                |                                          |   0 |   1
+   📸  📝 | Jared Keating                        |                                                |                                          |   0 |   1
+   📸  📝 | Drew Nicholls                        |                                                |                                          |   0 |   1
+   📸  📝 | ZERO                                 |                                                |                                          |   0 |   1
+   📸  📝 | Emily Bell                           |                                                |                                          |   0 |   1
+   📸  📝 | Paul Morris                          |                                                |                                          |   0 |   1
+   📸  📝 | Paul                                 |                                                |                                          |   0 |   1
+   📸  📝 | Felicity Davis-Smith                 |                                                | Indigenous                               |   0 |   1
+   📸  📝 | Michael Quinn                        |                                                | Non-Indigenous Australian                |   0 |   1
+   📸  📝 | Kirrily Brianne-Scarf                |                                                | Chinese-Australian                       |   0 |   1
+   📸  📝 | Margot Scales                        |                                                |                                          |   0 |   1
+   📸  📝 | Marillie Giannakopoulou              |                                                | Non-Indigenous Australian                |   0 |   1
+   📸     | Ferdys staff                         |                                                |                                          |   0 |   0
+   📸     | Freddy Wai                           |                                                | Papua New Guinean                        |   0 |   0
+   📸     | Carla Knight                         |                                                |                                          |   0 |   0
+   📸     | Graham Williams                      |                                                |                                          |   0 |   0
+   📸     | Mason Garland                        |                                                |                                          |   0 |   0
+   📸     | Chris                                |                                                | New Zealander                            |   0 |   0
+   📸     | Tracy McCartney                      |                                                | Non-Indigenous Australian                |   0 |   0
+
+Total: 366 storytellers across all anchors.
+Legend: 📸=avatar · 📖=has public story · 📝=has transcript · sorted by pitch-readiness.

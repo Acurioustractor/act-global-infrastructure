@@ -8,7 +8,8 @@
     "shortlisted_s1": "Narrowed from 235 to ~25 in Workshop Session 1 with Minderoo",
     "outreach_sent": "ACT has contacted community leadership; response pending",
     "interested": "Community has signalled interest; full consent flow in progress",
-    "confirmed_anchor": "Community confirmed, verbal approval captured, anchor relationship formal",
+    "confirmed_anchor": "Community confirmed, verbal approval captured, anchor relationship formal, in this envelope",
+    "approached_paused": "Community approached and verbal interest captured, but full elder or governance approval pending; held back from this envelope and carried into the next",
     "declined": "Community declined (respectfully recorded; do not re-approach for this cycle)",
     "withdrew": "Community initially engaged then withdrew (preserve record + reason)",
     "archived": "Out of scope for this cycle (not rejected, just parked for future)"
@@ -24,14 +25,15 @@
     "shortlisted_s1": 0,
     "outreach_sent": 0,
     "interested": 0,
-    "confirmed_anchor": 5,
+    "confirmed_anchor": 4,
+    "approached_paused": 1,
     "declined": 0,
     "withdrew": 0,
     "archived": 0
   },
   "per_state_targets": {
     "QLD": { "candidates_in_pool": 30, "final_target": 1, "confirmed_so_far": 3, "note": "PICC, MMEIC, BG Fit all confirmed; three QLD anchors is by circumstance not design — workshop may consolidate" },
-    "NSW": { "candidates_in_pool": 30, "final_target": 1, "confirmed_so_far": 1, "note": "Mounty Yarns confirmed" },
+    "NSW": { "candidates_in_pool": 30, "final_target": 1, "confirmed_so_far": 0, "note": "Mounty Yarns approached, pending elder sign-off, carried into next envelope; NSW seat to co-select with Minderoo in Workshop Session 1" },
     "NT": { "candidates_in_pool": 30, "final_target": 1, "confirmed_so_far": 1, "note": "Oonchiumpa confirmed" },
     "VIC": { "candidates_in_pool": 30, "final_target": 1, "confirmed_so_far": 0 },
     "WA": { "candidates_in_pool": 29, "final_target": 1, "confirmed_so_far": 0, "note": "Introduction via Hailey (UWA criminology) in progress" },
@@ -91,14 +93,14 @@
     "9ddcbdc9-4b59-4610-aaeb-6180538ca816": {
       "org_name": "Mounty Aboriginal Youth & Community Services (Mounty Yarns)",
       "state": "NSW",
-      "status": "confirmed_anchor",
+      "status": "approached_paused",
       "first_contacted": "2025",
-      "confirmed_at": "2026-04-18",
+      "approached_at": "2026-04-18",
       "approvers": ["Daniel Daylight (CEO)"],
-      "consent_mode": "verbal-in-conversation",
+      "consent_mode": "verbal-in-conversation, full elder approval pending",
       "governance_record": "wiki/decisions/2026-04-18-mounty-yarns-story-approval.md",
-      "notes": "Mt Druitt, NSW. 13 storytellers in EL v2 (9 young people). 'In Their Own Words' compilation flowing to wiki. 2 ALMA draft interventions authored 2026-04-20.",
-      "last_updated": "2026-04-20"
+      "notes": "Mt Druitt, NSW. 13 storytellers in EL v2 (9 young people). 'In Their Own Words' compilation flowing to wiki. 2 ALMA draft interventions authored 2026-04-20. Held back from Minderoo envelope 2026-04-23 to keep four-confirmed framing clean; carried into next envelope.",
+      "last_updated": "2026-04-23"
     }
   },
   "session_log": [

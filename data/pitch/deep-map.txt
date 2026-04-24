@@ -1,0 +1,197 @@
+==============================================================================
+DEEP MAP — storyteller graph, role clusters, thematics, campaign spines
+Generated 2026-04-22 from EL v2 pitch export.
+==============================================================================
+
+
+######################################################################
+# Oonchiumpa  (Mparntwe / Alice Springs)
+# 23 storytellers — 4 with public stories, 12 with transcripts
+######################################################################
+  📸📖📝  Benjamin Knight                         | Artist / cultural producer / Justice system p | Whatever, First Nations Australian       | pub= 1 tx= 1 loc=
+  📸📖📝  Henry Bloomfield                        | Artist / cultural producer / Elder / Young pe | Aboriginal Australian (Ross River)       | pub= 1 tx= 3 loc=
+  📸📖📝  Kristy Bloomfield                       | Cultural authority / Elder / Frontline worker | Aboriginal Australian - Traditional Owne | pub= 1 tx=10 loc=
+  📸📖📝  Kylie Bloomfield                        | Artist / cultural producer / Education / Youn | Aboriginal, Aboriginal                   | pub= 1 tx= 2 loc=
+  📸  📝  Anthony Hopkins                         | Community member (unlabelled)                 | (unspecified)                            | pub= 0 tx= 1 loc=Palm Island
+  📸  📝  Aunty Bev and Uncle terry               | Elder                                         | Aboriginal Elder                         | pub= 0 tx= 2 loc=
+  📸  📝  Braydon Dema                            | Artist / cultural producer / Family member    | Aboriginal Australian (Ross River)       | pub= 0 tx= 1 loc=
+  📸  📝  Louise                                  | Community member (unlabelled)                 | (unspecified)                            | pub= 0 tx= 1 loc=Palm Island
+  📸  📝  Nigel Alice                             | Artist / cultural producer / Young person     | Aboriginal, Aboriginal                   | pub= 0 tx= 1 loc=Palm Island
+      📝  Oonchiumpa Community                    | Artist / cultural producer / Young person     | (unspecified)                            | pub= 0 tx= 7 loc=
+  📸  📝  Patricia Ann Miller                     | Cultural authority / Justice system practitio | Patricia Ann Miller is a traditional own | pub= 0 tx= 1 loc=
+  📸  📝  Tanya Turner                            | Education / Justice system practitioner       | Aboriginal woman from Central Australia, | pub= 0 tx= 2 loc=
+  📸      Adelaide Hayes                          | Education / Justice system practitioner       | Young white female engaging with Indigen | pub= 0 tx= 0 loc=
+  📸      Aidan Harris                            | Education                                     | Multicultural Australian society with a  | pub= 0 tx= 0 loc=
+  📸      Chelsea Kenneally                       | Education                                     | Engagement with Aboriginal and Torres St | pub= 0 tx= 0 loc=
+  📸      Fred Campbell                           | Family member                                 | Not specified, Aboriginal Australian     | pub= 0 tx= 0 loc=
+  📸      Jackquann                               | Artist / cultural producer / Elder / Young pe | Aboriginal Australian                    | pub= 0 tx= 0 loc=
+  📸      Kirsty Bloomfield                       | Family member                                 | Aboriginal Australian (Ross River)       | pub= 0 tx= 0 loc=
+  📸      Laquisha                                | Artist / cultural producer / Young person     | Indigenous                               | pub= 0 tx= 0 loc=
+  📸      Paul Marchesi                           | Artist / cultural producer                    | Non-Indigenous Australian                | pub= 0 tx= 0 loc=
+  📸      Shane Bloomfield                        | Community member (unlabelled)                 | Aboriginal, Aboriginal                   | pub= 0 tx= 0 loc=
+  📸      Suzie Ma                                | Education / Justice system practitioner       | Aboriginal communities, ANU Law Student  | pub= 0 tx= 0 loc=
+  📸      Yani Bloomfield                         | Family member                                 | Aboriginal Australian (Ross River)       | pub= 0 tx= 0 loc=
+
+  Legend: 📸=avatar on file  📖=has public story  📝=has transcript
+
+
+######################################################################
+# Palm Island Community Company  (Palm Island (Bwgcolman))
+# 56 storytellers — 28 with public stories, 40 with transcripts
+######################################################################
+  📸📖📝  Agnes Watton                            | Artist / cultural producer                    | Island community, Aboriginal Australian  | pub= 1 tx= 1 loc=Palm Island
+  📸📖📝  Allan Palm Island                       | Artist / cultural producer / Elder            | Manbarra, Wulgurukaba                    | pub= 8 tx=11 loc=Palm Island
+  📸📖📝  Aunty Ethel Robertson                   | Elder                                         | Aboriginal Australian                    | pub= 5 tx= 7 loc=Palm Island
+  📸📖📝  Aunty Iris May Whitey                   | Artist / cultural producer / Elder            | Aboriginal Australian                    | pub= 1 tx= 2 loc=Palm Island
+  📸📖📝  Childcare workers                       | Community member (unlabelled)                 | (unspecified)                            | pub= 1 tx= 3 loc=Palm Island
+  📸📖📝  Clay Alfred                             | Artist / cultural producer / Young person     | Aboriginal Australian                    | pub= 2 tx= 3 loc=Palm Island
+  📸📖📝  Cyndel Louise Pryor                     | Artist / cultural producer / Elder            | Aboriginal Australian                    | pub= 1 tx= 2 loc=Palm Island
+  📸📖📝  Elders Group                            | Elder                                         | Aboriginal                               | pub=15 tx=17 loc=Palm Island
+  📸📖📝  Elsa Mortoa                             | Artist / cultural producer / Elder            | Aboriginal Australian                    | pub= 1 tx= 2 loc=Palm Island
+  📸📖📝  Ferdys staff                            | Family member                                 | (unspecified)                            | pub= 1 tx= 3 loc=Palm Island
+  📸📖📝  Goonyun Anderson                        | Community member (unlabelled)                 | Aboriginal Australian (Palm Island)      | pub= 1 tx= 3 loc=Palm Island
+  📸📖📝  Gurtrude Grace Richardson               | Artist / cultural producer / Elder            | Palm Island community, Aboriginal Austra | pub= 1 tx= 2 loc=Palm Island
+  📸📖📝  Haley Wetzel                            | Family member / Organisational leader         | Aboriginal Australian                    | pub= 2 tx= 2 loc=Palm Island
+  📸📖📝  Henry Doyle                             | Sport / fitness / Young person                | Aboriginal                               | pub= 2 tx= 5 loc=Palm Island
+  📸📖📝  Ida Richardson                          | Artist / cultural producer / Elder / Young pe | Aboriginal Australian                    | pub= 1 tx= 2 loc=Palm Island
+  📸📖📝  Irene Nleallajar                        | Family member                                 | Bwgcolman, Palm Island                   | pub= 1 tx= 4 loc=Palm Island
+  📸📖📝  Iris                                    | Family member                                 | Bwgcolman, Badu Island                   | pub= 3 tx= 5 loc=Palm Island
+  📸📖📝  Jeanie Sam                              | Artist / cultural producer                    | Aboriginal Australian                    | pub= 3 tx= 3 loc=Palm Island
+  📸📖📝  Marjoyie Burns                          | Elder / Lived-experience (justice)            | Aboriginal heritage, Palm Island, Aborig | pub= 1 tx= 2 loc=Palm Island
+  📸📖📝  Men's Group                             | Community member (unlabelled)                 | Bulgurmen                                | pub= 4 tx= 6 loc=Palm Island
+  📸📖📝  Patricia Doyle                          | Artist / cultural producer                    | Aboriginal Australian                    | pub= 2 tx= 3 loc=Palm Island
+  📸📖📝  Playgroup Staff                         | Education / Lived-experience (recovery)       | Palm Island community, Aboriginal Austra | pub= 2 tx= 3 loc=Palm Island
+  📸📖📝  Rachel Atkinson                         | Organisational leader / Young person          | Yorta Yorta                              | pub= 8 tx= 9 loc=Palm Island
+  📸📖📝  Rangers and Elders Conversation         | Artist / cultural producer / Young person     | Aboriginal Australian                    | pub= 1 tx= 2 loc=Palm Island
+  📸📖📝  Roy Prior                               | Elder                                         | Aboriginal Australian (Palm Island)      | pub= 1 tx= 3 loc=Palm Island
+  📸📖📝  Ruby Sibley                             | Education                                     | Aboriginal, Palm Island                  | pub= 1 tx= 3 loc=Palm Island
+  📸📖📝  Uncle Frank Daniel Landers              | Elder                                         | Aboriginal, Palm Island                  | pub= 4 tx= 7 loc=Palm Island
+  📸📖📝  Winifred Obah                           | Artist / cultural producer / Elder            | Aboriginal Australian                    | pub= 2 tx= 4 loc=Palm Island
+  📸  📝  Ethel and  Iris Ferdies                 | Family member                                 | Aboriginal                               | pub= 0 tx= 1 loc=Palm Island
+  📸  📝  Freddy Wai                              | Community member (unlabelled)                 | Papua New Guinean                        | pub= 0 tx= 1 loc=Palm Island
+  📸  📝  Jenni Calcraft                          | Cultural authority / Organisational leader    | Non-Indigenous Australian                | pub= 0 tx= 2 loc=Palm Island
+  📸  📝  Jess Smit                               | Cultural authority / Education / Young person | Non-Indigenous Australian                | pub= 0 tx= 2 loc=Palm Island
+  📸  📝  Luigi                                   | Artist / cultural producer / Education / Spor | Aboriginal, Aboriginal                   | pub= 0 tx= 1 loc=
+  📸  📝  Natalie Friday                          | Cultural authority                            | Eastern Googiallanji, Okla, Bulgaman     | pub= 0 tx= 1 loc=Palm Island
+  📸  📝  Nayden                                  | Artist / cultural producer / Education / Youn | Aboriginal, Aboriginal                   | pub= 0 tx= 1 loc=
+      📝  PICC Community Hub Team                 | Artist / cultural producer / Young person     | (unspecified)                            | pub= 0 tx= 4 loc=Palm Island
+      📝  PICC Women's Healing Service Team       | Lived-experience (justice) / Lived-experience | (unspecified)                            | pub= 0 tx= 1 loc=Palm Island
+      📝  PICC Women's Shelter Team               | Community member (unlabelled)                 | (unspecified)                            | pub= 0 tx= 2 loc=Palm Island
+      📝  Tammy                                   | Artist / cultural producer                    | Aboriginal Australian                    | pub= 0 tx= 1 loc=
+  📸  📝  Uncle George                            | Education / Elder / Sport / fitness           | Kalkadoon                                | pub= 0 tx= 1 loc=
+  📸      Benjamin Knight                         | Artist / cultural producer / Justice system p | Whatever, First Nations Australian       | pub= 0 tx= 0 loc=
+  📸      Cassie Lang                             | Justice system practitioner / Organisational  | (unspecified)                            | pub= 0 tx= 0 loc=Queensland
+  📸      Dee Ann Sailor                          | Young person                                  | Aboriginal Australian                    | pub= 0 tx= 0 loc=Palm Island
+  📸      Harriet Hulthen                         | Justice system practitioner / Organisational  | Bwgcolman                                | pub= 0 tx= 0 loc=Palm Island
+  📸      Ivy                                     | Family member                                 | Aboriginal, Palm Island                  | pub= 0 tx= 0 loc=
+  📸      Jacqui                                  | Family member                                 | (unspecified)                            | pub= 0 tx= 0 loc=Palm Island
+  📸      Jason                                   | Community member (unlabelled)                 | Aboriginal, Aboriginal, Palm Island      | pub= 0 tx= 0 loc=
+  📸      Luella Bligh                            | Organisational leader                         | Bwgcolman                                | pub= 0 tx= 0 loc=Palm Island
+  📸      Marilyn Laner                           | Community member (unlabelled)                 | Non-Indigenous Australian                | pub= 0 tx= 0 loc=Palm Island
+  📸      Matthew Lindsay                         | Organisational leader                         | (unspecified)                            | pub= 0 tx= 0 loc=Queensland
+  📸      Paige Tanner Hill                       | Cultural authority / Education / Young person | Aboriginal Australian (Palm Island)      | pub= 0 tx= 0 loc=Palm Island
+  📸      Peggy Palm Island                       | Elder                                         | Mumburra                                 | pub= 0 tx= 0 loc=
+  📸      Raymond W. Palmer Snr.                  | Education / Elder / Organisational leader     | Bwgcolman                                | pub= 0 tx= 0 loc=Palm Island
+  📸      Rhonda Phillips                         | Organisational leader                         | Aboriginal                               | pub= 0 tx= 0 loc=Palm Island
+  📸      Richard Cassidy                         | Young person                                  | Non-Indigenous Australian                | pub= 0 tx= 0 loc=
+  📸      Uncle Alan Palm Island                  | Education / Elder                             | Aboriginal Elder                         | pub= 0 tx= 0 loc=Palm Island
+
+  Legend: 📸=avatar on file  📖=has public story  📝=has transcript
+
+
+######################################################################
+# BG Fit  (Mount Isa / Doomadgee)
+# 20 storytellers — 5 with public stories, 16 with transcripts
+######################################################################
+  📸📖📝  Brodie Germaine                         | Artist / cultural producer / Sport / fitness  | Indigenous Australian, specifically Gadi | pub= 1 tx= 6 loc=
+    📖📝  Doomadgee Camp Participant              | Community member (unlabelled)                 | Aboriginal                               | pub= 1 tx= 1 loc=Doomadgee, QLD
+    📖📝  Mount Isa Camp Participant              | Elder / Young person                          | Indigenous Australian, Aboriginal        | pub= 1 tx= 1 loc=Mount Isa, QLD
+    📖📝  Spinifex Res Youth                      | Young person                                  | (unspecified)                            | pub= 1 tx= 1 loc=Mount Isa, QLD
+    📖    Flexi Group Voices                      | Education                                     | (unspecified)                            | pub= 1 tx= 0 loc=Mount Isa, QLD
+  📸  📝  Aunty Ivy                               | Artist / cultural producer / Elder            | Aboriginal, Aboriginal                   | pub= 0 tx= 1 loc=
+  📸  📝  Ben                                     | Lived-experience (recovery) / Young person    | Unknown                                  | pub= 0 tx= 1 loc=
+  📸  📝  Benji - Young Person                    | Young person                                  | Aboriginal, Aboriginal                   | pub= 0 tx= 1 loc=
+  📸  📝  Danielle Germaine                       | Artist / cultural producer / Family member /  | Aboriginal, Aboriginal                   | pub= 0 tx= 1 loc=
+  📸  📝  Gracie Ryder                            | Justice system practitioner / Organisational  | Australian, Australian                   | pub= 0 tx= 1 loc=
+  📸  📝  Jay                                     | Artist / cultural producer / Young person     | Aboriginal, Aboriginal                   | pub= 0 tx= 1 loc=
+  📸  📝  Nigel                                   | Sport / fitness / Young person                | Australian, Australian                   | pub= 0 tx= 1 loc=
+  📸  📝  Rashad Gavin Isaacson                   | Artist / cultural producer / Young person     | Aboriginal, Aboriginal                   | pub= 0 tx= 1 loc=
+  📸  📝  Siva                                    | Frontline worker / Young person               | Unknown                                  | pub= 0 tx= 1 loc=
+  📸  📝  Uncle George                            | Education / Elder / Sport / fitness           | Kalkadoon                                | pub= 0 tx= 4 loc=
+  📸  📝  Uncle Warren King                       | Elder                                         | Aboriginal, Aboriginal                   | pub= 0 tx= 1 loc=
+  📸  📝  YPA Team                                | Lived-experience (justice) / Young person     | Aboriginal, Aboriginal                   | pub= 0 tx= 1 loc=
+          E2E Super Admin                         | Community member (unlabelled)                 | (unspecified)                            | pub= 0 tx= 0 loc=
+  📸      Luigi                                   | Artist / cultural producer / Education / Spor | Aboriginal, Aboriginal                   | pub= 0 tx= 0 loc=
+  📸      Nayden                                  | Artist / cultural producer / Education / Youn | Aboriginal, Aboriginal                   | pub= 0 tx= 0 loc=
+
+  Legend: 📸=avatar on file  📖=has public story  📝=has transcript
+
+
+
+==============================================================================
+THEMATIC MAP — what recurs across the cohort's public stories
+==============================================================================
+
+Total unique themes surfaced across 85 eligible stories: 45
+Top 30 by frequency (and which anchors reference each):
+
+    3×  connection to country                     [Oonchiumpa, BG Fit]
+    2×  family legacy                             [Oonchiumpa, Palm Island Community Company]
+    2×  youth justice                             [BG Fit]
+    1×  on-country                                [Oonchiumpa]
+    1×  cultural-healing                          [Oonchiumpa]
+    1×  youth-diversion                           [Oonchiumpa]
+    1×  elders                                    [Oonchiumpa]
+    1×  intergenerational enterprise              [Oonchiumpa]
+    1×  truth telling                             [Oonchiumpa]
+    1×  youth empowerment                         [Oonchiumpa]
+    1×  living in two worlds                      [Oonchiumpa]
+    1×  intergenerational wealth                  [Oonchiumpa]
+    1×  cultural continuity                       [Oonchiumpa]
+    1×  coming home                               [Oonchiumpa]
+    1×  youth services                            [Palm Island Community Company]
+    1×  community resilience                      [Palm Island Community Company]
+    1×  sport as connection                       [Palm Island Community Company]
+    1×  role models                               [Palm Island Community Company]
+    1×  palm island                               [Palm Island Community Company]
+    1×  recovery and purpose                      [Palm Island Community Company]
+    1×  breaking dependency                       [Palm Island Community Company]
+    1×  men's wellbeing                           [Palm Island Community Company]
+    1×  community and unity                       [Palm Island Community Company]
+    1×  personal accountability                   [Palm Island Community Company]
+    1×  resourcefulness                           [Palm Island Community Company]
+    1×  education                                 [Palm Island Community Company]
+    1×  healing from addiction                    [Palm Island Community Company]
+    1×  home and belonging                        [Palm Island Community Company]
+    1×  residential care                          [BG Fit]
+    1×  trust through sport                       [BG Fit]
+
+
+Cross-anchor themes (present in 2+ anchors — campaign spine candidates):
+  ★ connection to country                     (3 stories across 2 anchors: Oonchiumpa, BG Fit)
+  ★ family legacy                             (2 stories across 2 anchors: Oonchiumpa, Palm Island Community Company)
+
+
+
+==============================================================================
+ROLE CLUSTERS — who's in the cohort (by typological role)
+==============================================================================
+
+ROLE                                            Oonchiumpa         PICC       BG Fit  TOTAL
+-----------------------------------------------------------------------------------------------
+Young person                                             7           14           13     34
+Artist / cultural producer                               9           17            7     33
+Elder                                                    4           16            4     24
+Education                                                6            9            4     19
+Family member                                            4            7            1     12
+Community member (unlabelled)                            3            7            2     12
+Justice system practitioner                              6            3            1     10
+Organisational leader                                    0            9            1     10
+Sport / fitness                                          0            3            4      7
+Cultural authority                                       2            4            0      6
+Frontline worker                                         1            0            2      3
+Lived-experience (justice)                               0            2            1      3
+Lived-experience (recovery)                              0            2            1      3
+
+
+Done.

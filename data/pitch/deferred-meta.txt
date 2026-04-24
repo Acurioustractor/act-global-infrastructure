@@ -1,0 +1,57 @@
+DEFERRED CAST — transcript metadata probe
+================================================================================
+
+### Nigel Alice
+  transcript: Nigel - Alice Interview  (1310 words)
+    status: completed
+    source_video_url: https://share.descript.com/view/81eXhBcx1sq
+    source_video_platform: descript
+    metadata keys: ai_analysis
+    ai_analysis keys: analyzed_at, alma_signals, network_data, emotional_tone, cultural_themes, analyzer_version, cultural_markers, impact_dimensions, processing_time_ms, requires_elder_review, knowledge_contributions, cultural_sensitivity_level
+    cultural_themes: ["intergenerational_knowledge_transmission","cultural_identity","community_resilience"]
+    knowledge_contributions: {"warnings":["Current detention system creates daily violence rather than preventing it","Formal court proceedings cause trauma and panic rather than rehabilitation","Social media platforms enabling escalation of conflict for young people"],"innovations":["Youth-identified link between online provocation and physical violence","Young person's articulation that programs and school are better than detention"],"lived_experience":["Youth perspective on causes of offending (boredom, lack of activities)","Impact of social media on real-world violence in Alice Springs","Experience of Darwin detention
+    authority: {"level":"lived_experience","voice_control":"full","OCAP_compliance":true,"cultural_positioning":"Aboriginal young person with direct experience of youth justice system"}
+
+### Jackquann
+  transcript: Jackquann - Interview 2  (1218 words)
+    status: completed
+    source_video_url: https://share.descript.com/view/iMkgYckmB6r
+    source_video_platform: descript
+    metadata keys: ai_analysis
+    ai_analysis keys: analyzed_at, alma_signals, network_data, emotional_tone, cultural_themes, analyzer_version, cultural_markers, impact_dimensions, processing_time_ms, requires_elder_review, knowledge_contributions, cultural_sensitivity_level
+    cultural_themes: ["intergenerational_knowledge_transmission","traditional_knowledge","connection_to_country","kinship_systems","justice_system","healing_and_trauma"]
+    knowledge_contributions: {"warnings":["Detention is boring and dehumanizing - not rehabilitative","Police practices like spiking cars create fear and alienation","Without alternatives, young people remain at risk of system involvement"],"innovations":["Simple direct message to decision-makers: stop locking kids up","Recognition of culture programs as alternative to detention"],"lived_experience":["Living in detention and daily routines","Experiences with policing and car pursuits","Court processes and expectations","Value of home and belonging","Family as primary motivation"],"traditional_knowledge":[]}
+    authority: {"level":"lived_experience","voice_control":"shared","OCAP_compliance":true,"cultural_positioning":"Aboriginal Australian young person with direct experience in youth justice system"}
+
+### Laquisha
+  transcript: Laquisha  (3101 words)
+    status: completed
+    source_video_url: https://share.descript.com/view/upRsPoO2uG8
+    source_video_platform: descript
+    metadata keys: type, ai_analysis, created_via, created_manually
+    ai_analysis keys: analyzed_at, alma_signals, network_data, emotional_tone, cultural_themes, analyzer_version, cultural_markers, impact_dimensions, processing_time_ms, requires_elder_review, knowledge_contributions, cultural_sensitivity_level
+    cultural_themes: ["kinship_systems","community_resilience","connection_to_country","intergenerational_knowledge_transmission","healing_and_trauma"]
+    knowledge_contributions: {"warnings":["12-minute phone calls insufficient for family connection","Frequent lockdown harmful to young people","Separation from family increases risk"],"innovations":["Recycled plastic bed project for homelands","Rheumatic heart disease prevention approach"],"lived_experience":["Youth detention conditions at Darwin","Court experience trauma and fear","Family conflict as driver of offending","Oppression as systemic cause of youth crime","Peer pressure mechanisms","Strategies for staying out of trouble"],"traditional_knowledge":[]}
+    authority: {"level":"lived_experience","voice_control":"shared","OCAP_compliance":true,"cultural_positioning":"Indigenous young person, community member"}
+
+### Jay
+  transcript: Jay - Young Person interview  (510 words)
+    status: completed
+    source_video_url: https://share.descript.com/view/CBFA59vK0Cv
+    source_video_platform: descript
+    metadata keys: ai_analysis
+    ai_analysis keys: analyzed_at, alma_signals, network_data, emotional_tone, cultural_themes, analyzer_version, cultural_markers, impact_dimensions, processing_time_ms, requires_elder_review, knowledge_contributions, cultural_sensitivity_level
+    cultural_themes: ["connection_to_country","traditional_knowledge","intergenerational_knowledge_transmission"]
+    knowledge_contributions: {"warnings":["gym in town unknown to local youth - resource awareness gap","environmental exposure to violence needs addressing"],"innovations":[],"lived_experience":["youth experience of boredom and anger triggers","exposure to community violence","perception of police","what motivates disengaged youth"],"traditional_knowledge":["hunting techniques (pig, kangaroo, goanna)","bush navigation"]}
+    authority: {"level":"lived_experience","voice_control":"shared","OCAP_compliance":true,"cultural_positioning":"Aboriginal young person sharing personal perspective"}
+
+### Rashad Gavin Isaacson
+  transcript: Rashad Gavin Isaacson - Recording  (218 words)
+    status: completed
+    source_video_url: https://share.descript.com/view/8ywPFEnrUp4
+    source_video_platform: descript
+    metadata keys: ai_analysis
+    ai_analysis keys: analyzed_at, alma_signals, network_data, emotional_tone, cultural_themes, analyzer_version, cultural_markers, impact_dimensions, processing_time_ms, requires_elder_review, knowledge_contributions, cultural_sensitivity_level
+    cultural_themes: ["cultural_identity","traditional_knowledge","intergenerational_knowledge_transmission"]
+    knowledge_contributions: {"warnings":[],"innovations":[],"lived_experience":["Importance of dance in cultural identity","Approach to engaging youth in culture without force","Kalkadoon Sundowners dance crew participation"],"traditional_knowledge":[]}
+    authority: {"level":"lived_experience","voice_control":"full","OCAP_compliance":true,"cultural_positioning":"Community member speaking from direct cultural participation"}

@@ -1,0 +1,1648 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Three Circles · for Minderoo Foundation</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --m-purple: #4a2560;
+    --m-purple-deep: #2e1540;
+    --m-purple-lite: #7a5a8f;
+    --m-orange: #e8843a;
+    --m-gold: #f0b93a;
+    --m-cream: #faf5ec;
+    --m-cream-2: #f2ead9;
+    --m-stone: #2b2530;
+    --m-stone-soft: #605468;
+    --m-divider: #e6dfcf;
+    --earth-grass: #4a6b3a;
+    --earth-country: #b7410e;
+    --earth-sky: #2d5f7f;
+  }
+  body { font-family: 'Inter', system-ui, sans-serif; background: var(--m-cream); color: var(--m-stone); -webkit-font-smoothing: antialiased; line-height: 1.6; }
+  h1, h2, h3, .serif { font-family: 'Cormorant Garamond', Georgia, serif; letter-spacing: -0.01em; }
+  .serif-italic { font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; }
+  .eyebrow { font-size: 10px; text-transform: uppercase; letter-spacing: 3px; font-weight: 600; color: var(--m-stone-soft); }
+  .hero-gradient { background: linear-gradient(135deg, var(--m-purple-deep) 0%, var(--m-purple) 60%, #6a3580 100%); }
+  .section { padding: 80px 0; }
+  .section-sm { padding: 50px 0; }
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 32px; }
+  .container-narrow { max-width: 780px; margin: 0 auto; padding: 0 32px; }
+  .pullquote { font-family: 'Cormorant Garamond'; font-style: italic; font-weight: 500; line-height: 1.25; }
+  .stat-num { font-family: 'Cormorant Garamond'; font-weight: 500; line-height: 1; color: var(--m-purple); }
+  .ornament { font-family: 'Cormorant Garamond'; color: var(--m-stone-soft); font-size: 20px; text-align: center; margin: 10px 0; letter-spacing: 8px; }
+  .ornament::before { content: "·  ·  ·"; }
+  .image-frame { border-radius: 12px; overflow: hidden; background: var(--m-cream-2); }
+  .hero-photo { width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block; }
+  .portrait-photo { width: 100%; aspect-ratio: 4/5; object-fit: cover; display: block; }
+  .square-photo { width: 100%; aspect-ratio: 1/1; object-fit: cover; display: block; }
+  .caption { font-size: 12px; color: var(--m-stone-soft); font-style: italic; margin-top: 10px; line-height: 1.5; }
+  .circle-pill { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border-radius: 999px; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; font-weight: 600; }
+  .pill-1 { background: rgba(74,107,58,0.1); color: var(--earth-grass); }
+  .pill-2 { background: rgba(232,132,58,0.12); color: var(--m-orange); }
+  .pill-3 { background: rgba(183,65,14,0.1); color: var(--earth-country); }
+  .ratio-track { height: 14px; background: linear-gradient(90deg, var(--m-purple-deep), var(--m-purple)); border-radius: 7px; position: relative; overflow: hidden; box-shadow: inset 0 1px 3px rgba(0,0,0,0.3); }
+  .ratio-marker { position: absolute; left: 0; top: -6px; bottom: -6px; width: 3px; background: var(--m-gold); box-shadow: 0 0 0 5px rgba(240, 185, 58, 0.4); }
+  .trend-bar { display: flex; align-items: flex-end; gap: 3%; height: 240px; padding: 0 2% 36px; position: relative; }
+  .trend-year { flex: 1; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; position: relative; }
+  .trend-col { width: 100%; max-width: 60px; background: linear-gradient(180deg, var(--m-purple-lite), var(--m-purple)); border-radius: 6px 6px 0 0; position: relative; transition: height 0.3s; box-shadow: 0 -1px 0 rgba(255,255,255,0.4) inset; }
+  .trend-col-projection { background: repeating-linear-gradient(135deg, var(--m-purple-lite), var(--m-purple-lite) 6px, rgba(255,255,255,0.35) 6px, rgba(255,255,255,0.35) 12px), linear-gradient(180deg, var(--m-purple-lite), var(--m-purple)); opacity: 0.7; }
+  .trend-label { font-size: 11px; color: var(--m-stone-soft); margin-top: 8px; font-weight: 500; position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%); white-space: nowrap; }
+  .trend-val { font-size: 11px; color: var(--m-purple); font-weight: 700; background: var(--m-cream); padding: 2px 7px; border-radius: 4px; margin-bottom: 4px; box-shadow: 0 1px 2px rgba(0,0,0,0.06); white-space: nowrap; }
+  .breakdown-row { display: grid; grid-template-columns: 140px 1fr 80px; gap: 14px; align-items: center; margin-bottom: 10px; font-size: 14px; }
+  .breakdown-bar { height: 10px; border-radius: 5px; }
+  .concentric-svg { width: 100%; max-width: 520px; height: auto; }
+  .anchor-card-big { background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 2px 8px rgba(46,21,64,0.04); }
+  .number-tile { background: white; border: 1px solid var(--m-divider); border-radius: 12px; padding: 26px 22px; }
+  .timeline-year { display: flex; gap: 24px; padding: 26px 0; border-bottom: 1px solid var(--m-divider); }
+  .timeline-year:last-child { border-bottom: none; }
+  .timeline-year-label { flex: 0 0 140px; font-family: 'Cormorant Garamond'; font-size: 30px; color: var(--m-purple); font-weight: 500; font-style: italic; }
+  .video-frame { position: relative; width: 100%; aspect-ratio: 16/9; border-radius: 14px; overflow: hidden; background: var(--m-stone); box-shadow: 0 20px 60px rgba(46,21,64,0.18); }
+  .video-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .nav-spacer { height: 1px; background: var(--m-divider); }
+  @media print {
+    body { background: white; }
+    .section { padding: 40px 0; page-break-inside: avoid; }
+  }
+  /* Empathy Ledger embed. Consent markers attached to every media block */
+  .el-embed { position: relative; }
+  .el-embed-media { border-radius: 12px; overflow: hidden; background: var(--m-cream-2); display: block; }
+  .el-embed-media img, .el-embed-media iframe { display: block; width: 100%; }
+  .el-consent-strip {
+    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+    background: white; border: 1px solid var(--m-divider); border-top: 0;
+    border-radius: 0 0 12px 12px;
+    padding: 10px 14px;
+    font-size: 11px; color: var(--m-stone-soft);
+    margin-top: -1px;
+  }
+  .el-embed-media { border-radius: 12px 12px 0 0; }
+  .el-consent-strip.standalone { border-radius: 0 0 12px 12px; }
+  .el-consent-name { color: var(--m-stone); font-weight: 600; }
+  .el-consent-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; }
+  .el-consent-chip { display: inline-flex; align-items: center; gap: 5px; padding: 2px 8px; border-radius: 999px; font-size: 10px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; }
+  .el-consent-chip.active { background: rgba(74,107,58,0.1); color: var(--earth-grass); }
+  .el-consent-chip.awaiting { background: rgba(240,185,58,0.15); color: #8a6f20; }
+  .el-consent-chip.withdrawn { background: rgba(138,84,40,0.1); color: var(--earth-country); font-style: italic; }
+  .el-edit-hint {
+    position: absolute; top: 8px; right: 8px;
+    background: rgba(0,0,0,0.6); color: white; font-family: ui-monospace, monospace;
+    font-size: 10px; padding: 3px 8px; border-radius: 4px;
+    opacity: 0; transition: opacity 0.2s;
+    pointer-events: none;
+  }
+  body.edit-mode .el-embed:hover .el-edit-hint { opacity: 1; pointer-events: auto; }
+  body.edit-mode .el-embed { outline: 2px dashed var(--m-purple-lite); outline-offset: 2px; cursor: pointer; }
+  body.edit-mode .el-embed::after { content: "click to change"; position: absolute; bottom: 8px; right: 8px; background: var(--m-purple); color: white; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 10px; border-radius: 4px; pointer-events: none; z-index: 5; font-family: ui-sans-serif, system-ui, sans-serif; }
+
+  /* Gallery modal */
+  .gal-backdrop { position: fixed; inset: 0; background: rgba(20,10,35,0.82); backdrop-filter: blur(6px); z-index: 1000; display: flex; align-items: center; justify-content: center; padding: 24px; }
+  .gal-panel { background: var(--m-cream); border-radius: 16px; width: 100%; max-width: 1200px; max-height: 90vh; display: flex; flex-direction: column; box-shadow: 0 30px 80px rgba(0,0,0,0.4); overflow: hidden; }
+  .gal-head { padding: 18px 24px; border-bottom: 1px solid var(--m-divider); display: flex; flex-direction: column; gap: 12px; }
+  .gal-search { width: 100%; padding: 10px 14px; border: 1px solid var(--m-divider); border-radius: 8px; font-size: 14px; font-family: inherit; background: white; }
+  .gal-search:focus { outline: 2px solid var(--m-purple-lite); border-color: transparent; }
+  .gal-filters { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+  .gal-chip { padding: 5px 12px; border-radius: 999px; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; border: 1px solid var(--m-divider); background: white; cursor: pointer; color: var(--m-stone-soft); transition: all 0.15s; }
+  .gal-chip:hover { border-color: var(--m-purple-lite); color: var(--m-purple); }
+  .gal-chip.active { background: var(--m-purple); color: white; border-color: var(--m-purple); }
+  .gal-body { flex: 1; overflow-y: auto; padding: 20px 24px 24px; }
+  .gal-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
+  .gal-tile { background: white; border: 1px solid var(--m-divider); border-radius: 10px; overflow: hidden; cursor: pointer; display: flex; flex-direction: column; transition: all 0.15s; }
+  .gal-tile:hover { transform: translateY(-2px); border-color: var(--m-purple); box-shadow: 0 8px 20px rgba(74,37,96,0.12); }
+  .gal-tile-media { aspect-ratio: 4/3; background: var(--m-cream-2); position: relative; overflow: hidden; }
+  .gal-tile-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .gal-tile-media.placeholder { display: flex; align-items: center; justify-content: center; color: var(--m-stone-soft); font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; padding: 20px; text-align: center; }
+  .gal-tile-video-badge { position: absolute; top: 8px; right: 8px; background: rgba(0,0,0,0.7); color: white; padding: 3px 8px; border-radius: 4px; font-size: 10px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; }
+  .gal-tile-meta { padding: 10px 12px; flex: 1; display: flex; flex-direction: column; gap: 4px; }
+  .gal-tile-org { font-size: 9px; text-transform: uppercase; letter-spacing: 0.15em; font-weight: 700; color: var(--m-purple); }
+  .gal-tile-title { font-family: 'Cormorant Garamond', serif; font-size: 14px; font-weight: 500; line-height: 1.2; color: var(--m-stone); }
+  .gal-tile-storyteller { font-size: 11px; color: var(--m-stone-soft); }
+  .gal-tile-state { display: inline-flex; gap: 4px; font-size: 9px; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; }
+  .gal-tile-state .st-active { color: var(--earth-grass); }
+  .gal-tile-state .st-awaiting { color: #8a6f20; }
+  .gal-close { background: none; border: 0; color: var(--m-stone); cursor: pointer; font-size: 28px; line-height: 1; padding: 4px 10px; }
+  .gal-close:hover { color: var(--m-purple); }
+  .gal-row-1 { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+  .gal-slot-info { font-size: 11px; color: var(--m-stone-soft); font-family: ui-monospace, monospace; }
+</style>
+</head>
+<body>
+
+<!-- HERO ======================================================= -->
+<header class="hero-gradient text-white relative overflow-hidden">
+  <!-- Subtle Country pattern overlay -->
+  <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle at 20% 30%, white 1px, transparent 1px), radial-gradient(circle at 70% 60%, white 1px, transparent 1px); background-size: 40px 40px, 60px 60px;"></div>
+  <div class="container relative z-10 py-20">
+    <div class="flex items-center gap-3 mb-8">
+      <svg width="44" height="44" viewBox="0 0 44 44" fill="none">
+        <circle cx="22" cy="22" r="20" stroke="white" stroke-width="1.5" opacity="0.5"/>
+        <path d="M6 22 A 16 16 0 0 1 38 22" stroke="var(--m-gold)" stroke-width="2.5" fill="none"/>
+        <path d="M6 22 A 16 16 0 0 0 38 22" stroke="var(--m-orange)" stroke-width="2.5" fill="none"/>
+      </svg>
+      <div class="eyebrow" style="color:rgba(255,255,255,0.8)">For Minderoo Foundation · Envelope ships 1 May 2026</div>
+    </div>
+    <h1 class="text-5xl md:text-7xl mb-6" style="font-weight:500;line-height:1.02">The Three Circles</h1>
+    <p class="serif-italic text-xl md:text-2xl text-white/85 max-w-2xl leading-snug mb-12" style="color:rgba(255,255,255,0.85)">A three-year partnership to hold the Aboriginal Community-Controlled anchor communities that intercept Australia's $22.3 billion late-intervention trajectory, before it becomes detention.</p>
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8 border-t border-white/20 pt-10" style="border-color:rgba(255,255,255,0.2)">
+      <div>
+        <div class="eyebrow mb-2" style="color:rgba(255,255,255,0.6)">Three-year ask</div>
+        <div class="stat-num text-5xl text-white">$2.9M</div>
+        <div class="text-xs mt-1" style="color:rgba(255,255,255,0.7)">FY26 · FY27 · FY28</div>
+      </div>
+      <div>
+        <div class="eyebrow mb-2" style="color:rgba(255,255,255,0.6)">Of one year of COLI24</div>
+        <div class="stat-num text-5xl text-white">0.013%</div>
+        <div class="text-xs mt-1" style="color:rgba(255,255,255,0.7)">1 dollar per 7,700 of the problem</div>
+      </div>
+      <div>
+        <div class="eyebrow mb-2" style="color:rgba(255,255,255,0.6)">Anchor communities</div>
+        <div class="stat-num text-5xl text-white">5 → 7–8</div>
+        <div class="text-xs mt-1" style="color:rgba(255,255,255,0.7)">Confirmed + co-selected</div>
+      </div>
+      <div>
+        <div class="eyebrow mb-2" style="color:rgba(255,255,255,0.6)">Published ROI</div>
+        <div class="stat-num text-5xl text-white">$2:$1</div>
+        <div class="text-xs mt-1" style="color:rgba(255,255,255,0.7)">Minimum $5.8M forward saving</div>
+      </div>
+    </div>
+    <div class="mt-12 text-xs max-w-3xl" style="color:rgba(255,255,255,0.6)">We acknowledge the Traditional Custodians of the Country on which this work happens. Sovereignty has never been ceded. This envelope was shaped under the cultural authority of Oonchiumpa, PICC, MMEIC, BG Fit, and Mounty Yarns. All Aboriginal Community-Controlled.</div>
+  </div>
+</header>
+
+<!-- OPENING IMAGE ====================================================== -->
+<section class="section-sm">
+  <div class="container">
+    <!-- Swap the photo here: change data-el-story to any story UUID in minderoo-consent-snapshot.json -->
+    <div class="el-embed" data-el-story="128e7ad5-b0c7-4b0d-8ada-878e0d8f0a03" data-el-variant="hero"></div>
+  </div>
+</section>
+
+<!-- THE PROBLEM ====================================================== -->
+<section class="section" style="background: white;">
+  <div class="container-narrow">
+    <div class="eyebrow mb-4">The opportunity cost Minderoo already named</div>
+    <h2 class="text-4xl md:text-5xl mb-6" style="font-weight:500;line-height:1.1">Australia spent $22.3 billion last year on children and young people in crisis.</h2>
+    <p class="serif-italic text-lg text-stone-700 mb-2 leading-relaxed">A 47% real-terms rise since 2019.</p>
+    <p class="serif-italic text-lg text-stone-700 leading-relaxed">Child protection is the largest line. Youth crime is the second. Over half the kids in Victoria's youth detention came via child protection. These are not two problems. They are one trajectory. The same children, five years apart.</p>
+  </div>
+
+  <div class="container mt-16">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+      <!-- Trend viz -->
+      <div class="bg-[var(--m-cream-2)] rounded-xl p-8">
+        <div class="eyebrow mb-3">Late-intervention spend · six-year trend</div>
+        <div class="trend-bar">
+          <div class="trend-year">
+            <div class="trend-val">$15.2B</div>
+            <div class="trend-col" style="height: 55%"></div>
+            <div class="trend-label">2019</div>
+          </div>
+          <div class="trend-year">
+            <div class="trend-col" style="height: 60%; opacity: 0.6"></div>
+            <div class="trend-label">2020</div>
+          </div>
+          <div class="trend-year">
+            <div class="trend-col" style="height: 67%; opacity: 0.6"></div>
+            <div class="trend-label">2021</div>
+          </div>
+          <div class="trend-year">
+            <div class="trend-col" style="height: 74%; opacity: 0.6"></div>
+            <div class="trend-label">2022</div>
+          </div>
+          <div class="trend-year">
+            <div class="trend-col" style="height: 84%; opacity: 0.6"></div>
+            <div class="trend-label">2023</div>
+          </div>
+          <div class="trend-year">
+            <div class="trend-val">$22.3B</div>
+            <div class="trend-col" style="height: 94%"></div>
+            <div class="trend-label">2024</div>
+          </div>
+          <div class="trend-year">
+            <div class="trend-col trend-col-projection" style="height: 100%"></div>
+            <div class="trend-label">2029?</div>
+          </div>
+        </div>
+        <p class="caption text-center">Source: The Front Project / Minderoo Foundation · Cost of Late Intervention 2024 · published August 2025. <br>The Three Circles is what bends the 47% curve.</p>
+      </div>
+
+      <!-- Breakdown viz -->
+      <div class="bg-[var(--m-cream-2)] rounded-xl p-8">
+        <div class="eyebrow mb-4">$22.3B broken down by domain</div>
+        <div class="breakdown-row">
+          <div class="text-sm"><strong>Child protection</strong></div>
+          <div class="breakdown-bar" style="width: 100%; background: var(--earth-country)"></div>
+          <div class="text-right text-sm font-semibold" style="color:var(--m-purple)">$10.2B</div>
+        </div>
+        <div class="breakdown-row">
+          <div class="text-sm"><strong>Youth crime</strong></div>
+          <div class="breakdown-bar" style="width: 33%; background: var(--m-orange)"></div>
+          <div class="text-right text-sm font-semibold" style="color:var(--m-purple)">$3.4B</div>
+        </div>
+        <div class="breakdown-row">
+          <div class="text-sm">Youth unemployment</div>
+          <div class="breakdown-bar" style="width: 25%; background: var(--m-gold)"></div>
+          <div class="text-right text-sm">$2.5B</div>
+        </div>
+        <div class="breakdown-row">
+          <div class="text-sm">Youth + adult justice</div>
+          <div class="breakdown-bar" style="width: 22%; background: var(--earth-sky)"></div>
+          <div class="text-right text-sm">$2.2B</div>
+        </div>
+        <div class="breakdown-row">
+          <div class="text-sm">Youth homelessness</div>
+          <div class="breakdown-bar" style="width: 18%; background: var(--m-purple-lite)"></div>
+          <div class="text-right text-sm">$1.8B</div>
+        </div>
+        <div class="breakdown-row">
+          <div class="text-sm">Mental health</div>
+          <div class="breakdown-bar" style="width: 16%; background: var(--earth-grass)"></div>
+          <div class="text-right text-sm">$1.6B</div>
+        </div>
+        <div class="breakdown-row">
+          <div class="text-sm">Physical health</div>
+          <div class="breakdown-bar" style="width: 12%; background: var(--m-stone-soft); opacity: 0.5"></div>
+          <div class="text-right text-sm">$1.2B</div>
+        </div>
+        <div class="breakdown-row">
+          <div class="text-sm">Family violence</div>
+          <div class="breakdown-bar" style="width: 6%; background: var(--m-stone-soft); opacity: 0.5"></div>
+          <div class="text-right text-sm">$0.6B</div>
+        </div>
+        <p class="caption mt-4">#1 and #2 are the same children, five years apart. The anchor communities intercept that transition.</p>
+      </div>
+    </div>
+
+    <!-- Ratio bar -->
+    <div class="mt-12 bg-white border border-stone-200 rounded-xl p-8">
+      <div class="flex items-baseline justify-between mb-4">
+        <div class="eyebrow">$22.3 billion · one year</div>
+        <div class="eyebrow" style="color:var(--m-purple)">The Three Circles · 3 years</div>
+      </div>
+      <div class="ratio-track mb-4">
+        <div class="ratio-marker"></div>
+      </div>
+      <div class="flex items-center justify-between">
+        <div class="text-sm text-stone-600">One tenth of one percent of one year of the problem…</div>
+        <div class="serif-italic text-lg" style="color:var(--m-purple)">…for three years of what bends the curve.</div>
+      </div>
+    </div>
+
+    <blockquote class="pullquote text-2xl md:text-3xl border-l-4 pl-8 py-4 mt-16 max-w-3xl" style="border-color:var(--m-gold);color:var(--m-stone)">
+      "This is a clear case of opportunity cost. By failing to intervene early, we miss the chance to achieve better outcomes for children and young people, and a better return on investment for society."
+    </blockquote>
+    <div class="text-sm text-stone-600 ml-9 mt-3">Nicola Forrest AO · launching COLI24 · August 2025</div>
+  </div>
+</section>
+
+<div class="container section-sm"><div class="ornament"></div></div>
+
+<!-- VIDEO · MOUNTY YARNS ============================================= -->
+<section class="section" style="background: var(--m-cream-2)">
+  <div class="container-narrow">
+    <div class="eyebrow mb-3 text-center">In the storytellers' own words</div>
+    <h2 class="text-4xl md:text-5xl mb-4 text-center" style="font-weight:500">Mt Druitt. Darug Country. Mounty Yarns.</h2>
+    <p class="serif-italic text-lg text-stone-700 mb-10 text-center leading-relaxed">Nine young people. Thirteen storytellers. Lived-experience of police violence, child removal, and a justice system that costs seventeen hundred dollars a day to lock them up. Building the hub that was missing.</p>
+  </div>
+  <div class="container">
+    <div class="el-embed" data-el-story="b3dfcec7-ee70-477f-83af-58cc870c199a" data-el-variant="video"></div>
+    <p class="caption text-center mt-6">Mounty Yarns: In Their Own Words · Mt Druitt, NSW · CEO Daniel Daylight is the elder for this compilation · consent captured 2026-04-18 · held in Empathy Ledger v2, revocable at any time.</p>
+  </div>
+</section>
+
+<!-- EMPATHY LEDGER STORY WIDGET · voices from the anchor communities -->
+<section class="section" style="background: white">
+  <div class="container-narrow text-center mb-10">
+    <div class="eyebrow mb-3">Empathy Ledger · storyteller posts · live-pulled</div>
+    <h2 class="text-4xl md:text-5xl mb-4" style="font-weight:500">Voices from the anchor communities.</h2>
+    <p class="serif-italic text-lg text-stone-700 leading-relaxed">Six storyteller posts pulled directly from Empathy Ledger v2. Every photo, every quote, every consent marker is live. The system behind this page is the same system behind the envelope: community-owned, elder-approved, revocable within 24 hours.</p>
+  </div>
+  <div class="container">
+    <div id="el-stories-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div class="col-span-full text-center py-10 text-sm text-stone-500 italic">Loading storyteller posts from Empathy Ledger v2…</div>
+    </div>
+    <p class="caption text-center mt-6">Each card embeds one post by its EL v2 UUID. Edit <code class="text-[11px] bg-stone-100 px-1 rounded">EL_STORY_IDS</code> in the page source to change which posts appear.</p>
+  </div>
+</section>
+<!-- EIGHTEEN VOICES · locked cast for the Minderoo envelope -->
+<!-- Built 2026-04-22 from data/pitch/*.json + Descript transcripts. -->
+<!-- To refresh: run scripts/pitch-build-cast-wall.mjs and paste output. -->
+<section class="section" style="background: var(--m-cream-2)" id="eighteen-voices">
+  <div class="container-narrow text-center mb-12">
+    <div class="eyebrow mb-3">Empathy Ledger · eighteen voices · consented corpus</div>
+    <h2 class="text-4xl md:text-5xl mb-4" style="font-weight:500">Eighteen voices. Four communities. One ledger.</h2>
+    <p class="serif-italic text-lg text-stone-700 leading-relaxed">Kristy Bloomfield took eight young people to Atnarpa for three days on Country. Three went back to school. Two got jobs. All eight are off the police radar. Three thousand kilometres away, on Palm Island, an Elders Group was left out of cyclone planning by the people who are meant to coordinate it. In Alice Springs, a fourteen-year-old named Jackquann sits in a cell and says four words: detention, that's not my home. Every quote below is the storyteller's own. Every image is elder-approved where elder approval is required. Every theme surfaced from the transcripts, not the cover letter. Ten Elders and organisational leaders. Eight young people, four of them speaking directly from detention or court. Spain is the comparator. Everyone else is the argument.</p>
+  </div>
+  <div class="container mb-12">
+    <div class="eyebrow mb-6 text-center" style="color:var(--m-stone-soft)">Oonchiumpa (Mparntwe)</div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <article style="background:white;border:1px solid var(--m-cream);border-radius:6px;padding:24px;display:flex;flex-direction:column;gap:16px">
+        <header style="display:flex;gap:16px;align-items:center">
+          <div style="width:80px;height:80px;border-radius:50%;overflow:hidden;flex-shrink:0;background:var(--m-cream)"><img src="https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/profile-images/storytellers/kristy_bloomfield.jpg" alt="Kristy Bloomfield" style="width:100%;height:100%;object-fit:cover" loading="lazy"></div>
+          <div style="flex:1;min-width:0">
+            <div style="font-size:17px;font-weight:600;color:var(--m-stone);line-height:1.2">Kristy Bloomfield</div>
+            <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:var(--m-stone-soft);margin-top:4px">Elder · Traditional Owner</div>
+          </div>
+        </header>
+        <blockquote class="pullquote" style="font-size:19px;line-height:1.35;color:var(--m-stone);border-left:3px solid var(--m-gold);padding-left:16px;margin:0">&ldquo;That's what happens when you lead with culture instead of compliance.&rdquo;</blockquote>
+        <footer style="font-size:12px;color:var(--m-stone-soft);font-style:italic;line-height:1.5;margin-top:auto">Bloomfield and Liddle families · Love's Creek / Atnarpa</footer>
+      </article>
+      <article style="background:white;border:1px solid var(--m-cream);border-radius:6px;padding:24px;display:flex;flex-direction:column;gap:16px">
+        <header style="display:flex;gap:16px;align-items:center">
+          <div style="width:80px;height:80px;border-radius:50%;overflow:hidden;flex-shrink:0;background:var(--m-cream)"><img src="https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/media/d0a162d2-282e-4653-9d12-aa934c9dfa4e/1770667725446_20251103-1E5A5101.jpg" alt="Henry Bloomfield" style="width:100%;height:100%;object-fit:cover" loading="lazy"></div>
+          <div style="flex:1;min-width:0">
+            <div style="font-size:17px;font-weight:600;color:var(--m-stone);line-height:1.2">Henry Bloomfield</div>
+            <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:var(--m-stone-soft);margin-top:4px">Elder · Ross River</div>
+          </div>
+        </header>
+        <blockquote class="pullquote" style="font-size:19px;line-height:1.35;color:var(--m-stone);border-left:3px solid var(--m-gold);padding-left:16px;margin:0">&ldquo;I grew up between here and Ross River as a kid. It's good to be back home. To grow my kids up here.&rdquo;</blockquote>
+        <footer style="font-size:12px;color:var(--m-stone-soft);font-style:italic;line-height:1.5;margin-top:auto">67 years old · Aboriginal Australian</footer>
+      </article>
+      <article style="background:white;border:1px solid var(--m-cream);border-radius:6px;padding:24px;display:flex;flex-direction:column;gap:16px">
+        <header style="display:flex;gap:16px;align-items:center">
+          <div style="width:80px;height:80px;border-radius:50%;overflow:hidden;flex-shrink:0;background:var(--m-cream)"><img src="https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/profile-images/storytellers/tanya_turner.jpg" alt="Tanya Turner" style="width:100%;height:100%;object-fit:cover" loading="lazy"></div>
+          <div style="flex:1;min-width:0">
+            <div style="font-size:17px;font-weight:600;color:var(--m-stone);line-height:1.2">Tanya Turner</div>
+            <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:var(--m-stone-soft);margin-top:4px">Traditional owner · Eastern/Central Australian Aboriginal</div>
+          </div>
+        </header>
+        <blockquote class="pullquote" style="font-size:19px;line-height:1.35;color:var(--m-stone);border-left:3px solid var(--m-gold);padding-left:16px;margin:0">&ldquo;Our young people need to know they are valued. Not by the system, but by their own mob.&rdquo;</blockquote>
+        <footer style="font-size:12px;color:var(--m-stone-soft);font-style:italic;line-height:1.5;margin-top:auto">Founders framing line, Oonchiumpa</footer>
+      </article>
+      <article style="background:white;border:1px solid var(--m-cream);border-radius:6px;padding:24px;display:flex;flex-direction:column;gap:16px">
+        <header style="display:flex;gap:16px;align-items:center">
+          <div style="width:80px;height:80px;border-radius:50%;overflow:hidden;flex-shrink:0;background:var(--m-cream)"><img src="https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/avatars/profiles/754b892b-b57a-4a69-b233-324ce52c3272/1762724767455_Screenshot_2025-11-10_at_7.45.10_am.png" alt="Braydon Dema" style="width:100%;height:100%;object-fit:cover" loading="lazy"></div>
+          <div style="flex:1;min-width:0">
+            <div style="font-size:17px;font-weight:600;color:var(--m-stone);line-height:1.2">Braydon Dema</div>
+            <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:var(--m-stone-soft);margin-top:4px">Young person · Ross River</div>
+          </div>
+        </header>
+        <blockquote class="pullquote" style="font-size:19px;line-height:1.35;color:var(--m-stone);border-left:3px solid var(--m-gold);padding-left:16px;margin:0">&ldquo;We're here with 55 judges, showing them how we live. Pops country.&rdquo;</blockquote>
+        <footer style="font-size:12px;color:var(--m-stone-soft);font-style:italic;line-height:1.5;margin-top:auto">On hosting 55 judges at Atnarpa, April 2026</footer>
+      </article>
+      <article style="background:white;border:1px solid var(--m-cream);border-radius:6px;padding:24px;display:flex;flex-direction:column;gap:16px">
+        <header style="display:flex;gap:16px;align-items:center">
+          <div style="width:80px;height:80px;border-radius:50%;overflow:hidden;flex-shrink:0;background:var(--m-cream)"><img src="https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/media/d0a162d2-282e-4653-9d12-aa934c9dfa4e/1775881001863_1E5A2212.jpg" alt="Nigel Alice" style="width:100%;height:100%;object-fit:cover" loading="lazy"></div>
+          <div style="flex:1;min-width:0">
+            <div style="font-size:17px;font-weight:600;color:var(--m-stone);line-height:1.2">Nigel Alice</div>
+            <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:var(--m-stone-soft);margin-top:4px">Young person · Alice Springs · 14</div>
+          </div>
+        </header>
+        <blockquote class="pullquote" style="font-size:19px;line-height:1.35;color:var(--m-stone);border-left:3px solid var(--m-gold);padding-left:16px;margin:0">&ldquo;When I'm talking to the judge, I feel like I'm panicking.&rdquo;</blockquote>
+        <footer style="font-size:12px;color:var(--m-stone-soft);font-style:italic;line-height:1.5;margin-top:auto">On being in court · interviewed 2026</footer>
+      </article>
+      <article style="background:white;border:1px solid var(--m-cream);border-radius:6px;padding:24px;display:flex;flex-direction:column;gap:16px">
+        <header style="display:flex;gap:16px;align-items:center">
+          <div style="width:80px;height:80px;border-radius:50%;overflow:hidden;flex-shrink:0;background:var(--m-cream)"><img src="https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/media/bf17d0a9-2b12-4e4a-982e-09a8b1952ec6/d0a162d2-282e-4653-9d12-aa934c9dfa4e/1774073897284-1E5A2215.jpg" alt="Jackquann" style="width:100%;height:100%;object-fit:cover" loading="lazy"></div>
+          <div style="flex:1;min-width:0">
+            <div style="font-size:17px;font-weight:600;color:var(--m-stone);line-height:1.2">Jackquann</div>
+            <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:var(--m-stone-soft);margin-top:4px">Young person · Alice Springs · 14</div>
+          </div>
+        </header>
+        <blockquote class="pullquote" style="font-size:19px;line-height:1.35;color:var(--m-stone);border-left:3px solid var(--m-gold);padding-left:16px;margin:0">&ldquo;Detention. That's not my home.&rdquo;</blockquote>
+        <footer style="font-size:12px;color:var(--m-stone-soft);font-style:italic;line-height:1.5;margin-top:auto">Detained at Alice Springs Youth Detention Centre</footer>
+      </article>
+      <article style="background:white;border:1px solid var(--m-cream);border-radius:6px;padding:24px;display:flex;flex-direction:column;gap:16px">
+        <header style="display:flex;gap:16px;align-items:center">
+          <div style="width:80px;height:80px;border-radius:50%;overflow:hidden;flex-shrink:0;background:var(--m-cream)"><img src="https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/media/bf17d0a9-2b12-4e4a-982e-09a8b1952ec6/d0a162d2-282e-4653-9d12-aa934c9dfa4e/1774045077303-1E5A2239-2.jpg" alt="Laquisha" style="width:100%;height:100%;object-fit:cover" loading="lazy"></div>
+          <div style="flex:1;min-width:0">
+            <div style="font-size:17px;font-weight:600;color:var(--m-stone);line-height:1.2">Laquisha</div>
+            <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:var(--m-stone-soft);margin-top:4px">Young person · Alice Springs · 16</div>
+          </div>
+        </header>
+        <blockquote class="pullquote" style="font-size:19px;line-height:1.35;color:var(--m-stone);border-left:3px solid var(--m-gold);padding-left:16px;margin:0">&ldquo;It would've been better hanging around with family instead of sitting in your cell by yourself. Twelve-minute calls. Two hours waiting for the next one.&rdquo;</blockquote>
+        <footer style="font-size:12px;color:var(--m-stone-soft);font-style:italic;line-height:1.5;margin-top:auto">On the Darwin youth detention centre · the cause: &quot;oppression&quot;</footer>
+      </article>
+    </div>
+  </div>
+  <div class="container mb-12">
+    <div class="eyebrow mb-6 text-center" style="color:var(--m-stone-soft)">Palm Island Community Company</div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <article style="background:white;border:1px solid var(--m-cream);border-radius:6px;padding:24px;display:flex;flex-direction:column;gap:16px">
+        <header style="display:flex;gap:16px;align-items:center">
+          <div style="width:80px;height:80px;border-radius:50%;overflow:hidden;flex-shrink:0;background:var(--m-cream)"><img src="https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/media/d0a162d2-282e-4653-9d12-aa934c9dfa4e/1775114118938_20251216-1E5A8879.jpg" alt="Allan Palm Island" style="width:100%;height:100%;object-fit:cover" loading="lazy"></div>
+          <div style="flex:1;min-width:0">
+            <div style="font-size:17px;font-weight:600;color:var(--m-stone);line-height:1.2">Allan Palm Island</div>
+            <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:var(--m-stone-soft);margin-top:4px">Elder · Manbarra, Wulgurukaba</div>
+          </div>
+        </header>
+        <blockquote class="pullquote" style="font-size:19px;line-height:1.35;color:var(--m-stone);border-left:3px solid var(--m-gold);padding-left:16px;margin:0">&ldquo;Go back to country and come back home to find ourselves, and teach the kids the history.&rdquo;</blockquote>
+        <footer style="font-size:12px;color:var(--m-stone-soft);font-style:italic;line-height:1.5;margin-top:auto">Bwgcolman · Palm Island Elders Advisory Group</footer>
+      </article>
+      <article style="background:white;border:1px solid var(--m-cream);border-radius:6px;padding:24px;display:flex;flex-direction:column;gap:16px">
+        <header style="display:flex;gap:16px;align-items:center">
+          <div style="width:80px;height:80px;border-radius:50%;overflow:hidden;flex-shrink:0;background:var(--m-cream)"><img src="https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/media/d0a162d2-282e-4653-9d12-aa934c9dfa4e/1775115007139_20251216-1E5A8914.jpg" alt="Aunty Ethel Robertson" style="width:100%;height:100%;object-fit:cover" loading="lazy"></div>
+          <div style="flex:1;min-width:0">
+            <div style="font-size:17px;font-weight:600;color:var(--m-stone);line-height:1.2">Aunty Ethel Robertson</div>
+            <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:var(--m-stone-soft);margin-top:4px">Elder · Palm Island</div>
+          </div>
+        </header>
+        <blockquote class="pullquote" style="font-size:19px;line-height:1.35;color:var(--m-stone);border-left:3px solid var(--m-gold);padding-left:16px;margin:0">&ldquo;A lot of the young generation still don't know the stories. I used to find time for the young people because they wanted to know.&rdquo;</blockquote>
+        <footer style="font-size:12px;color:var(--m-stone-soft);font-style:italic;line-height:1.5;margin-top:auto">Aboriginal Australian · Palm Island Elders Advisory Group</footer>
+      </article>
+      <article style="background:white;border:1px solid var(--m-cream);border-radius:6px;padding:24px;display:flex;flex-direction:column;gap:16px">
+        <header style="display:flex;gap:16px;align-items:center">
+          <div style="width:80px;height:80px;border-radius:50%;overflow:hidden;flex-shrink:0;background:var(--m-cream)"><img src="https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/profile-images/storytellers/rachel_atkinson.jpg" alt="Rachel Atkinson" style="width:100%;height:100%;object-fit:cover" loading="lazy"></div>
+          <div style="flex:1;min-width:0">
+            <div style="font-size:17px;font-weight:600;color:var(--m-stone);line-height:1.2">Rachel Atkinson</div>
+            <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:var(--m-stone-soft);margin-top:4px">CEO, Palm Island Community Company · Yorta Yorta</div>
+          </div>
+        </header>
+        <blockquote class="pullquote" style="font-size:19px;line-height:1.35;color:var(--m-stone);border-left:3px solid var(--m-gold);padding-left:16px;margin:0">&ldquo;They're our ancestors in the future, so we've gotta make it right for them.&rdquo;</blockquote>
+        <footer style="font-size:12px;color:var(--m-stone-soft);font-style:italic;line-height:1.5;margin-top:auto">217 staff. 87% Aboriginal or Torres Strait Islander.</footer>
+      </article>
+      <article style="background:white;border:1px solid var(--m-cream);border-radius:6px;padding:24px;display:flex;flex-direction:column;gap:16px">
+        <header style="display:flex;gap:16px;align-items:center">
+          <div style="width:80px;height:80px;border-radius:50%;overflow:hidden;flex-shrink:0;background:var(--m-cream)"><img src="https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/profile-images/storytellers/elders_group.jpg" alt="Elders Group" style="width:100%;height:100%;object-fit:cover" loading="lazy"></div>
+          <div style="flex:1;min-width:0">
+            <div style="font-size:17px;font-weight:600;color:var(--m-stone);line-height:1.2">Elders Group</div>
+            <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:var(--m-stone-soft);margin-top:4px">PICC Elders Advisory Group</div>
+          </div>
+        </header>
+        <blockquote class="pullquote" style="font-size:19px;line-height:1.35;color:var(--m-stone);border-left:3px solid var(--m-gold);padding-left:16px;margin:0">&ldquo;We should have been consulted.&rdquo;</blockquote>
+        <footer style="font-size:12px;color:var(--m-stone-soft);font-style:italic;line-height:1.5;margin-top:auto">On exclusion from 2024 cyclone emergency planning</footer>
+      </article>
+    </div>
+  </div>
+  <div class="container mb-12">
+    <div class="eyebrow mb-6 text-center" style="color:var(--m-stone-soft)">BG Fit (Mount Isa / Doomadgee)</div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <article style="background:white;border:1px solid var(--m-cream);border-radius:6px;padding:24px;display:flex;flex-direction:column;gap:16px">
+        <header style="display:flex;gap:16px;align-items:center">
+          <div style="width:80px;height:80px;border-radius:50%;overflow:hidden;flex-shrink:0;background:var(--m-cream)"><img src="https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/profile-images/storytellers/brodie_germaine.jpg" alt="Brodie Germaine" style="width:100%;height:100%;object-fit:cover" loading="lazy"></div>
+          <div style="flex:1;min-width:0">
+            <div style="font-size:17px;font-weight:600;color:var(--m-stone);line-height:1.2">Brodie Germaine</div>
+            <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:var(--m-stone-soft);margin-top:4px">Founder, BG Fit · Gadigal</div>
+          </div>
+        </header>
+        <blockquote class="pullquote" style="font-size:19px;line-height:1.35;color:var(--m-stone);border-left:3px solid var(--m-gold);padding-left:16px;margin:0">&ldquo;Some of these kids have never had anyone believe in them before. When you show up every week, that means something.&rdquo;</blockquote>
+        <footer style="font-size:12px;color:var(--m-stone-soft);font-style:italic;line-height:1.5;margin-top:auto">Started BG Fit from a Tuesday PCYC gym session</footer>
+      </article>
+      <article style="background:white;border:1px solid var(--m-cream);border-radius:6px;padding:24px;display:flex;flex-direction:column;gap:16px">
+        <header style="display:flex;gap:16px;align-items:center">
+          <div style="width:80px;height:80px;border-radius:50%;overflow:hidden;flex-shrink:0;background:var(--m-cream)"><img src="https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/profile-images/storytellers/uncle_george.jpg" alt="Uncle George" style="width:100%;height:100%;object-fit:cover" loading="lazy"></div>
+          <div style="flex:1;min-width:0">
+            <div style="font-size:17px;font-weight:600;color:var(--m-stone);line-height:1.2">Uncle George</div>
+            <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:var(--m-stone-soft);margin-top:4px">Elder · Kalkadoon</div>
+          </div>
+        </header>
+        <blockquote class="pullquote" style="font-size:19px;line-height:1.35;color:var(--m-stone);border-left:3px solid var(--m-gold);padding-left:16px;margin:0">&ldquo;You've got to learn to speak from the heart. If you speak from the heart and you tell the truth, people listen.&rdquo;</blockquote>
+        <footer style="font-size:12px;color:var(--m-stone-soft);font-style:italic;line-height:1.5;margin-top:auto">Former Police Liaison Officer · engaged 400–500 kids a week in schools</footer>
+      </article>
+      <article style="background:white;border:1px solid var(--m-cream);border-radius:6px;padding:24px;display:flex;flex-direction:column;gap:16px">
+        <header style="display:flex;gap:16px;align-items:center">
+          <div style="width:80px;height:80px;border-radius:50%;overflow:hidden;flex-shrink:0;background:var(--m-cream)"><img src="https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/media/projects/81bdb028-7855-4682-b501-b727f24e0d6d/media/1770940113065_20250409-IMG_3844.jpg" alt="Jay" style="width:100%;height:100%;object-fit:cover" loading="lazy"></div>
+          <div style="flex:1;min-width:0">
+            <div style="font-size:17px;font-weight:600;color:var(--m-stone);line-height:1.2">Jay</div>
+            <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:var(--m-stone-soft);margin-top:4px">Young person · Mount Isa</div>
+          </div>
+        </header>
+        <blockquote class="pullquote" style="font-size:19px;line-height:1.35;color:var(--m-stone);border-left:3px solid var(--m-gold);padding-left:16px;margin:0">&ldquo;I just get too bored, and I just get angry sometimes.&rdquo;</blockquote>
+        <footer style="font-size:12px;color:var(--m-stone-soft);font-style:italic;line-height:1.5;margin-top:auto">On what causes offending in Mount Isa</footer>
+      </article>
+      <article style="background:white;border:1px solid var(--m-cream);border-radius:6px;padding:24px;display:flex;flex-direction:column;gap:16px">
+        <header style="display:flex;gap:16px;align-items:center">
+          <div style="width:80px;height:80px;border-radius:50%;overflow:hidden;flex-shrink:0;background:var(--m-cream)"><img src="https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/media/d0a162d2-282e-4653-9d12-aa934c9dfa4e/1770938042769_20250409-IMG_3838.jpg" alt="Benji" style="width:100%;height:100%;object-fit:cover" loading="lazy"></div>
+          <div style="flex:1;min-width:0">
+            <div style="font-size:17px;font-weight:600;color:var(--m-stone);line-height:1.2">Benji</div>
+            <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:var(--m-stone-soft);margin-top:4px">Young person · Mount Isa</div>
+          </div>
+        </header>
+        <blockquote class="pullquote" style="font-size:19px;line-height:1.35;color:var(--m-stone);border-left:3px solid var(--m-gold);padding-left:16px;margin:0">&ldquo;Brodie, he know half of the black people. He been around the world.&rdquo;</blockquote>
+        <footer style="font-size:12px;color:var(--m-stone-soft);font-style:italic;line-height:1.5;margin-top:auto">Why young people trust Brodie at the BG Fit gym</footer>
+      </article>
+      <article style="background:white;border:1px solid var(--m-cream);border-radius:6px;padding:24px;display:flex;flex-direction:column;gap:16px">
+        <header style="display:flex;gap:16px;align-items:center">
+          <div style="width:80px;height:80px;border-radius:50%;overflow:hidden;flex-shrink:0;background:var(--m-cream)"><img src="https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/media/projects/81bdb028-7855-4682-b501-b727f24e0d6d/media/1770943319780_Screenshot_2026-02-13_at_10.41.08_am.png" alt="Rashad Gavin Isaacson" style="width:100%;height:100%;object-fit:cover" loading="lazy"></div>
+          <div style="flex:1;min-width:0">
+            <div style="font-size:17px;font-weight:600;color:var(--m-stone);line-height:1.2">Rashad Gavin Isaacson</div>
+            <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:var(--m-stone-soft);margin-top:4px">Kalkadoon Sundowners dance crew · young person</div>
+          </div>
+        </header>
+        <blockquote class="pullquote" style="font-size:19px;line-height:1.35;color:var(--m-stone);border-left:3px solid var(--m-gold);padding-left:16px;margin:0">&ldquo;Culture. It's everything. It's part of my culture.&rdquo;</blockquote>
+        <footer style="font-size:12px;color:var(--m-stone-soft);font-style:italic;line-height:1.5;margin-top:auto">NAIDOC Week, Mount Isa, 2026</footer>
+      </article>
+    </div>
+  </div>
+  <div class="container mb-12">
+    <div class="eyebrow mb-6 text-center" style="color:var(--m-stone-soft)">Diagrama (Spain — comparator)</div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <article style="background:white;border:1px solid var(--m-cream);border-radius:6px;padding:24px;display:flex;flex-direction:column;gap:16px">
+        <header style="display:flex;gap:16px;align-items:center">
+          <div style="width:80px;height:80px;border-radius:50%;overflow:hidden;flex-shrink:0;background:var(--m-cream)"><img src="https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/profile-images/storytellers/david_romero_mcguire_phd.jpg" alt="David Romero McGuire PhD" style="width:100%;height:100%;object-fit:cover" loading="lazy"></div>
+          <div style="flex:1;min-width:0">
+            <div style="font-size:17px;font-weight:600;color:var(--m-stone);line-height:1.2">David Romero McGuire PhD</div>
+            <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:var(--m-stone-soft);margin-top:4px">Chief executive, Diagrama UK · British</div>
+          </div>
+        </header>
+        <blockquote class="pullquote" style="font-size:19px;line-height:1.35;color:var(--m-stone);border-left:3px solid var(--m-gold);padding-left:16px;margin:0">&ldquo;They were shocked about what they saw — the difference between the UK and Spain.&rdquo;</blockquote>
+        <footer style="font-size:12px;color:var(--m-stone-soft);font-style:italic;line-height:1.5;margin-top:auto">On BBC reporting on Spanish youth justice · working with Australia since 2015</footer>
+      </article>
+      <article style="background:white;border:1px solid var(--m-cream);border-radius:6px;padding:24px;display:flex;flex-direction:column;gap:16px">
+        <header style="display:flex;gap:16px;align-items:center">
+          <div style="width:80px;height:80px;border-radius:50%;overflow:hidden;flex-shrink:0;background:var(--m-cream)"><img src="https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/profile-images/storytellers/young_people_murcia.jpg" alt="Young People Murcia" style="width:100%;height:100%;object-fit:cover" loading="lazy"></div>
+          <div style="flex:1;min-width:0">
+            <div style="font-size:17px;font-weight:600;color:var(--m-stone);line-height:1.2">Young People Murcia</div>
+            <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:var(--m-stone-soft);margin-top:4px">Group voice · Diagrama Spain</div>
+          </div>
+        </header>
+        <blockquote class="pullquote" style="font-size:19px;line-height:1.35;color:var(--m-stone);border-left:3px solid var(--m-gold);padding-left:16px;margin:0">&ldquo;You have an educator you can talk to when you're angry. It's more calming.&rdquo;</blockquote>
+        <footer style="font-size:12px;color:var(--m-stone-soft);font-style:italic;line-height:1.5;margin-top:auto">Murcia centre, Spain · open house, ping-pong, sports twice a week</footer>
+      </article>
+    </div>
+  </div>
+  <div class="container-narrow text-center mt-4">
+    <p class="caption">Every voice on this page is consented under OCAP governance. Elder-approved where elder approval is required. Revocable within 24 hours. The system holding the quotes is the system the envelope funds.</p>
+  </div>
+</section>
+
+<!-- FOUR-NOTE SPINE · the arc the corpus itself surfaces -->
+<section class="section" style="background: white">
+  <div class="container-narrow">
+    <div class="eyebrow mb-3 text-center">The four-note spine</div>
+    <h2 class="text-4xl md:text-5xl mb-10 text-center" style="font-weight:500">What the corpus says, without being asked.</h2>
+    <p class="serif-italic text-lg text-stone-700 leading-relaxed mb-10 text-center">Four organisations. Three thousand kilometres between them. No shared playbook. Five hundred storytellers. One consented corpus. The AI analysis could not avoid finding four words repeated across every room. We did not load the question. The corpus answered the question we were not asking.</p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10">
+      <div style="padding:28px;border-left:3px solid var(--m-gold);background:var(--m-cream-2)">
+        <div class="eyebrow mb-3" style="color:var(--m-gold)">Identity</div>
+        <p class="text-lg text-stone-700 leading-relaxed mb-4">Named by ten storytellers in five organisations. Kristy at Atnarpa, before any funding body used the phrase youth diversion. Uncle Frank, Aunty Ethel and the Elders Group on Palm Island. Seventeen transcripts between them. One shared claim. We know what works here. We have always known.</p>
+        <p class="caption" style="color:var(--m-stone-soft)">Identity is not a theme. It is the prior condition.</p>
+      </div>
+
+      <div style="padding:28px;border-left:3px solid var(--earth-country);background:var(--m-cream-2)">
+        <div class="eyebrow mb-3" style="color:var(--earth-country)">Community</div>
+        <p class="text-lg text-stone-700 leading-relaxed mb-4">Named by eight storytellers across the corpus. Rachel Atkinson runs 217 staff, 87% of them Aboriginal or Torres Strait Islander. Brodie Germaine started with five kids at a Tuesday gym session. Uncle George engaged four to five hundred a week in Mount Isa schools. Community is not a virtue. It is a measurement.</p>
+        <p class="caption" style="color:var(--m-stone-soft)">Named by the storytellers themselves, independently, before we asked.</p>
+      </div>
+
+      <div style="padding:28px;border-left:3px solid var(--m-orange);background:var(--m-cream-2)">
+        <div class="eyebrow mb-3" style="color:var(--m-orange)">Resilience</div>
+        <p class="text-lg text-stone-700 leading-relaxed mb-4">Seven storytellers, three organisations. Laquisha on Darwin youth detention: twelve-minute phone calls, two hours of waiting before the next one. Nigel Alice in court at fourteen, panicking. Jackquann, four words: detention, that&rsquo;s not my home. Resilience is the word funders reach for when they do not want to name what it is resilience against. The storytellers already named it. Pretending otherwise breaks the consent.</p>
+        <p class="caption" style="color:var(--m-stone-soft)">Resilience is accounting, not poetry.</p>
+      </div>
+
+      <div style="padding:28px;border-left:3px solid var(--m-purple);background:var(--m-cream-2)">
+        <div class="eyebrow mb-3" style="color:var(--m-purple)">Healing</div>
+        <p class="text-lg text-stone-700 leading-relaxed mb-4">Seven storytellers, three organisations. Uncle George learned it as a police liaison officer. Speak from the heart, people listen. Henry Bloomfield learned it on Love&rsquo;s Creek station, coming home after sixty-seven years. Rachel Atkinson said it plainly. They are our ancestors in the future, so we have got to make it right for them. Healing is what happens when the infrastructure is theirs.</p>
+        <p class="caption" style="color:var(--m-stone-soft)">The ask is not for stories. The ask is for the system that holds them.</p>
+      </div>
+    </div>
+
+    <p class="serif-italic text-lg text-stone-700 leading-relaxed mt-12 text-center">What Minderoo has in front of it is not a parade. It is an argument four communities have already made, under their own governance, in their own voices. The envelope is the next turn of the wheel.</p>
+  </div>
+</section>
+
+
+<!-- EL STORY WIDGET. Reusable vanilla JS that reads minderoo-consent-snapshot.json
+     Two render modes:
+     1. Grid cards section:       document.getElementById('el-stories-grid') driven by EL_STORY_IDS
+     2. Declarative inline media: any [data-el-story="<uuid>" data-el-variant="hero|portrait|video"] renders as photo/video + consent strip
+
+     Edit mode: append ?edit=1 to the URL to show dashed outlines + hover labels
+     revealing each slot's UUID. Click any slot in edit mode to open a UUID picker. -->
+<script>
+  // Which stories to feature in the 6-card grid section.
+  const EL_STORY_IDS = [
+    "6ac1fc12-f6fa-4dd6-930b-9159f692b04d", // Oonchiumpa · Kristy · What happens when community leads
+    "2005424d-3969-41b2-8bb7-163ea6a46ec8", // Oonchiumpa · Aunty Bev & Uncle Tony
+    "b68e2760-648c-4c07-b2b0-b6f6d46f6bfc", // BG Fit · Benji
+    "f99e581e-33de-4a52-9528-daee36d8f0b1", // BG Fit · Jay
+    "128e7ad5-b0c7-4b0d-8ada-878e0d8f0a03", // Oonchiumpa · Bringing kids back to Country
+    "b3dfcec7-ee70-477f-83af-58cc870c199a"  // Mounty Yarns · video
+  ];
+
+  const MODE_COLOUR = {
+    'to-authority': 'var(--earth-grass)',
+    'selective': 'var(--m-orange)',
+    'elders-in-council': 'var(--m-purple)',
+    'ceo-as-elder': 'var(--earth-sky)',
+    'non-to-per-story': 'var(--m-gold)'
+  };
+
+  function elStatusChip(status) {
+    if (status === 'active') return '<span class="el-consent-chip active">Active</span>';
+    if (status === 'awaiting_elder') return '<span class="el-consent-chip awaiting">Awaiting elder</span>';
+    if (status === 'withdrawn') return '<span class="el-consent-chip withdrawn">Withdrawn</span>';
+    return '';
+  }
+
+  function elConsentStrip(story, standalone) {
+    if (!story) return '';
+    const modeColor = (story.elder && story.elder.mode) ? (MODE_COLOUR[story.elder.mode] || 'var(--m-purple)') : 'var(--m-purple)';
+    const name = (story.storyteller && story.storyteller.name) || '';
+    const mode = (story.elder && story.elder.mode_label) || (story.elder && story.elder.mode) || '';
+    const date = (story.elder && story.elder.approved_at) || (story.consent && story.consent.last_verified) || '';
+    const status = (story.consent && story.consent.status) || 'active';
+    return `
+      <div class="el-consent-strip ${standalone ? 'standalone' : ''}" title="Held in Empathy Ledger v2 · 12-gate OCAP chain · revocable within 24 hours">
+        <span class="el-consent-dot" style="background:${modeColor}"></span>
+        <span class="el-consent-name">${name}</span>
+        ${story.organisation ? `<span>· ${story.organisation}</span>` : ''}
+        ${mode ? `<span>· <span style="color:${modeColor};font-weight:500">${mode}</span></span>` : ''}
+        ${date ? `<span>· ${date}</span>` : ''}
+        ${elStatusChip(status)}
+        <span style="margin-left:auto;font-size:10px;color:var(--m-stone-soft);text-transform:uppercase;letter-spacing:0.1em">EL v2 · revocable</span>
+      </div>
+    `;
+  }
+
+  function elMediaHtml(story, variant) {
+    if (!story) return '';
+    if (variant === 'video' || (story.media && story.media.video_embed)) {
+      const url = (story.media && story.media.video_embed) || '';
+      const embed = url.replace('/view/', '/embed/');
+      return `<div class="el-embed-media" style="aspect-ratio:16/9;background:var(--m-stone)"><iframe src="${embed}" allowfullscreen style="width:100%;height:100%;border:0"></iframe></div>`;
+    }
+    const ratio = variant === 'portrait' ? '4/5' : variant === 'square' ? '1/1' : '16/9';
+    if (story.media && story.media.hero) {
+      return `<div class="el-embed-media" style="aspect-ratio:${ratio}"><img src="${story.media.hero}" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover"></div>`;
+    }
+    const note = (story.storyteller && story.storyteller.portrait_note) || 'Photo consent pending for print · text-only card';
+    return `<div class="el-embed-media" style="aspect-ratio:${ratio};display:flex;align-items:center;justify-content:center;color:var(--m-stone-soft);font-size:12px;font-style:italic;padding:20px;text-align:center">${note}</div>`;
+  }
+
+  function elEditHint(story, el) {
+    const id = el.getAttribute('data-el-story') || '';
+    const short = id.slice(0, 8);
+    return `<div class="el-edit-hint">UUID ${short} · ${(story && story.title) || 'unknown'}</div>`;
+  }
+
+  // ---- Slot-persistence (localStorage) --------------------------------
+  const LS_KEY = 'minderoo-pitch-slot-overrides-v1';
+  function assignSlotIds() {
+    document.querySelectorAll('.el-embed[data-el-story]').forEach((el, i) => {
+      if (!el.getAttribute('data-slot')) el.setAttribute('data-slot', 'slot-' + i);
+    });
+  }
+  function readOverrides() {
+    try { return JSON.parse(localStorage.getItem(LS_KEY) || '{}'); } catch { return {}; }
+  }
+  function writeOverride(slot, payload) {
+    const o = readOverrides();
+    if (payload) o[slot] = payload; else delete o[slot];
+    localStorage.setItem(LS_KEY, JSON.stringify(o));
+  }
+  function clearAllOverrides() { localStorage.removeItem(LS_KEY); }
+  window.__clearPitchOverrides = clearAllOverrides;
+
+  async function loadEmpathyLedgerStories() {
+    let data;
+    try {
+      const r = await fetch('/minderoo-consent-snapshot.json?v=' + Date.now());
+      if (!r.ok) throw new Error('snapshot load failed');
+      data = await r.json();
+    } catch (err) {
+      const grid = document.getElementById('el-stories-grid');
+      if (grid) grid.innerHTML = '<div class="col-span-full text-center py-10 text-sm text-stone-500 italic">Stories temporarily unavailable. Content owned by community, returning shortly.</div>';
+      return;
+    }
+    const byId = Object.fromEntries((data.stories || []).map(s => [s.el_v2_story_id, s]));
+    window.__EL_SNAPSHOT__ = { byId, stories: data.stories || [] };
+
+    // --- Pattern 2: populate any [data-el-story] slots anywhere on the page ---
+    document.querySelectorAll('.el-embed[data-el-story]').forEach(el => {
+      const id = el.getAttribute('data-el-story');
+      const variant = el.getAttribute('data-el-variant') || 'hero';
+      const story = byId[id];
+      if (!story) {
+        el.innerHTML = `<div class="el-embed-media" style="aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;color:var(--m-stone-soft);font-size:11px;font-style:italic">Story ${id.slice(0,8)} not in current snapshot</div>`;
+        return;
+      }
+      el.innerHTML = elMediaHtml(story, variant) + elConsentStrip(story, false) + elEditHint(story, el);
+    });
+
+    // --- Pattern 1: populate the 6-card grid section ---
+    const grid = document.getElementById('el-stories-grid');
+    if (!grid) return;
+    const cards = EL_STORY_IDS.map(id => {
+      const s = byId[id];
+      if (!s) return '';
+
+      // Media block: video takes precedence over hero image
+      let media = '';
+      if (s.media && s.media.video_embed) {
+        const embedUrl = s.media.video_embed.replace('/view/', '/embed/');
+        media = `<div style="position:relative;aspect-ratio:16/9;background:var(--m-stone);"><iframe src="${embedUrl}" allowfullscreen style="position:absolute;inset:0;width:100%;height:100%;border:0"></iframe></div>`;
+      } else if (s.media && s.media.hero) {
+        media = `<div style="aspect-ratio:4/3;overflow:hidden;background:var(--m-cream-2)"><img src="${s.media.hero}" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block"></div>`;
+      } else {
+        media = `<div style="aspect-ratio:4/3;background:linear-gradient(135deg,var(--m-cream-2),var(--m-cream));display:flex;align-items:center;justify-content:center;color:var(--m-stone-soft);font-size:12px;font-style:italic;padding:20px;text-align:center">${(s.storyteller && s.storyteller.portrait_note) || 'Text-only card · portrait consent pending for print'}</div>`;
+      }
+
+      const modeColor = (s.elder && s.elder.mode) ? (MODE_COLOUR[s.elder.mode] || 'var(--m-purple)') : 'var(--m-purple)';
+      const statusChip = (s.consent && s.consent.status === 'active')
+        ? `<span style="background:rgba(74,107,58,0.1);color:var(--earth-grass);padding:2px 8px;border-radius:999px;font-size:10px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase">Active</span>`
+        : (s.consent && s.consent.status === 'awaiting_elder')
+        ? `<span style="background:rgba(240,185,58,0.12);color:#8a6f20;padding:2px 8px;border-radius:999px;font-size:10px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase">Awaiting elder</span>`
+        : '';
+      const sensitivityDot = (s.consent && s.consent.sensitivity === 'medium')
+        ? '<span title="Medium cultural sensitivity · elder approval current" style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--m-gold);margin-right:6px"></span>'
+        : (s.consent && s.consent.sensitivity === 'high')
+        ? '<span title="High cultural sensitivity · context matters" style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--earth-country);margin-right:6px"></span>'
+        : '';
+
+      const ownershipBadge = `<span style="display:inline-flex;align-items:center;gap:4px;color:var(--earth-grass);font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em" title="This story belongs to ${s.organisation} · ACT holds it as custodian, not owner">⬤ Community-owned</span>`;
+      const revocableBadge = `<span style="display:inline-flex;align-items:center;gap:4px;color:var(--earth-sky);font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;margin-left:10px" title="One message from the storyteller or elder removes this within 24 hours">◑ Revocable</span>`;
+      const elderLine = (s.elder && s.elder.name)
+        ? `<div style="font-size:11px;color:var(--m-stone-soft);margin-top:8px;line-height:1.4">Elder approval · <strong style="color:${modeColor}">${s.elder.mode_label || s.elder.mode || ''}</strong> · ${(s.elder.approval_type || '')} · ${(s.elder.approved_at || '')}${s.elder.witnessed_by ? ' · witnessed by ' + s.elder.witnessed_by : ''}</div>`
+        : `<div style="font-size:11px;color:var(--m-stone-soft);margin-top:8px;font-style:italic">Elder approval pending. Card shown to demonstrate the gate working.</div>`;
+      const contextPreface = (s.consent && s.consent.sensitivity_context_preface)
+        ? `<div style="font-size:11px;color:#8a6f20;font-style:italic;background:rgba(240,185,58,0.1);border-left:2px solid var(--m-gold);padding:6px 10px;margin-bottom:10px;line-height:1.5">${s.consent.sensitivity_context_preface}</div>`
+        : '';
+
+      return `
+        <div class="anchor-card-big" style="position:relative">
+          ${media}
+          <div style="padding:20px">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;flex-wrap:wrap;gap:6px">
+              <span style="font-size:10px;color:var(--m-stone-soft);text-transform:uppercase;letter-spacing:0.15em;font-weight:600">${s.country || s.organisation}</span>
+              <span style="display:flex;align-items:center">${sensitivityDot}${statusChip}</span>
+            </div>
+            <h3 style="font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:500;margin:0 0 10px;line-height:1.2">${s.title || ''}</h3>
+            ${contextPreface}
+            <blockquote style="font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:500;font-size:16px;line-height:1.35;margin:0 0 12px;padding-left:14px;border-left:3px solid ${modeColor};color:var(--m-stone)">"${s.quote || ''}"</blockquote>
+            <div style="font-size:12px;color:var(--m-stone);margin-bottom:8px"><strong>${(s.storyteller && s.storyteller.name) || ''}</strong>${s.storyteller && s.storyteller.role ? ' · <span style="color:var(--m-stone-soft)">' + s.storyteller.role + '</span>' : ''}</div>
+            <div style="padding-top:10px;border-top:1px solid var(--m-divider);margin-top:12px">
+              ${ownershipBadge}${revocableBadge}
+              ${elderLine}
+              <div style="font-size:10px;color:var(--m-stone-soft);margin-top:6px">Held in Empathy Ledger v2 · verified ${(s.consent && s.consent.last_verified) || 'pending'} · 12-gate OCAP chain passed</div>
+            </div>
+          </div>
+        </div>
+      `;
+    }).filter(Boolean).join('');
+
+    grid.innerHTML = cards || '<div class="col-span-full text-center py-10 text-sm text-stone-500 italic">No storyteller posts matched the IDs in this page.</div>';
+  }
+
+  // --- Gallery modal (search + filter by organisation) ---
+  let __GALLERY__ = null;
+  async function loadGallery() {
+    if (__GALLERY__) return __GALLERY__;
+    try {
+      const r = await fetch('/minderoo-gallery.json?v=' + Date.now());
+      if (!r.ok) throw new Error('gallery fetch failed');
+      __GALLERY__ = await r.json();
+      return __GALLERY__;
+    } catch (e) { return null; }
+  }
+
+  function openGallery(targetSlot) {
+    loadGallery().then(gal => {
+      if (!gal) { alert('Gallery unavailable. Check minderoo-gallery.json'); return; }
+      const existing = document.querySelector('.gal-backdrop');
+      if (existing) existing.remove();
+      const current = targetSlot.getAttribute('data-el-story');
+      const orgs = [{slug:'all',name:'All organisations'}, ...(gal.organisations || [])];
+      const variant = targetSlot.getAttribute('data-el-variant') || 'hero';
+      const stats = gal.stats || {};
+
+      const backdrop = document.createElement('div');
+      backdrop.className = 'gal-backdrop';
+      backdrop.innerHTML = `
+        <div class="gal-panel">
+          <div class="gal-head">
+            <div class="gal-row-1">
+              <div>
+                <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.15em;color:var(--m-stone-soft);font-weight:600;margin-bottom:4px">Empathy Ledger v2 · media gallery</div>
+                <h3 style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:500;margin:0">Pick a photo or video for this slot</h3>
+                <div class="gal-slot-info" style="margin-top:4px">Variant: <strong>${variant}</strong> · ${gal.total_items} items · ${stats.portraits||0} portraits · ${stats.story_heroes||0} story heroes · ${stats.media_assets||0} media assets · ${(stats.story_videos||0)+(stats.media_assets?0:0)} videos</div>
+              </div>
+              <button class="gal-close" aria-label="Close">✕</button>
+            </div>
+            <input class="gal-search" placeholder="Search storyteller, title, caption, organisation…" autocomplete="off">
+            <div class="gal-filters">
+              <span style="font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:var(--m-stone-soft);font-weight:600;margin-right:4px">Type:</span>
+              <button class="gal-chip gal-type-chip active" data-type="all">All</button>
+              <button class="gal-chip gal-type-chip" data-type="portrait">Portraits</button>
+              <button class="gal-chip gal-type-chip" data-type="image">Photos</button>
+              <button class="gal-chip gal-type-chip" data-type="video">Videos</button>
+              <span style="width:1px;background:var(--m-divider);height:20px;margin:0 8px"></span>
+              <span style="font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:var(--m-stone-soft);font-weight:600;margin-right:4px">Org:</span>
+              ${orgs.map(o => `<button class="gal-chip gal-org-chip${o.slug==='all'?' active':''}" data-org="${o.slug}">${o.name}</button>`).join('')}
+            </div>
+          </div>
+          <div class="gal-body"><div class="gal-grid"></div></div>
+        </div>`;
+      document.body.appendChild(backdrop);
+      const searchEl = backdrop.querySelector('.gal-search');
+      const gridEl = backdrop.querySelector('.gal-grid');
+      let filterOrg = 'all';
+      let filterType = 'all';
+
+      function render() {
+        const q = searchEl.value.trim().toLowerCase();
+        const items = (gal.items || []).filter(it => {
+          if (filterOrg !== 'all' && it.organisation_slug !== filterOrg) return false;
+          if (filterType !== 'all' && it.type !== filterType) return false;
+          if (q) {
+            const hay = [(it.title||''), (it.storyteller||''), (it.caption||''), (it.organisation||''), (it.source||'')].join(' ').toLowerCase();
+            if (!hay.includes(q)) return false;
+          }
+          return true;
+        });
+        if (!items.length) { gridEl.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:60px 20px;color:var(--m-stone-soft);font-style:italic;font-family:Cormorant Garamond,serif;font-size:16px">No items match these filters.</div>'; return; }
+        gridEl.innerHTML = items.slice(0, 300).map(it => {
+          let mediaHtml;
+          if (it.type === 'video') {
+            mediaHtml = `<div class="gal-tile-media placeholder" style="background:linear-gradient(135deg,#2e1540,#4a2560);color:white;font-size:11px"><div><div style="font-size:22px;margin-bottom:4px">▶</div>${it.url.includes('descript') ? 'Descript · ' : ''}Video</div><span class="gal-tile-video-badge">Video</span></div>`;
+          } else {
+            const badge = it.type === 'portrait' ? '<span class="gal-tile-video-badge" style="background:var(--m-gold);color:var(--m-stone)">Portrait</span>' : '';
+            mediaHtml = `<div class="gal-tile-media"><img src="${it.url}" alt="" loading="lazy" onerror="this.parentNode.classList.add('placeholder');this.parentNode.innerHTML='Image unavailable'">${badge}</div>`;
+          }
+          const state = it.consent_status === 'active'
+            ? '<span class="st-active">● Active</span>'
+            : it.consent_status === 'awaiting_elder' ? '<span class="st-awaiting">◌ Awaiting</span>'
+            : '<span style="color:var(--earth-country);font-style:italic">✕ Withdrawn</span>';
+          const captionBit = it.caption ? `<div class="gal-tile-storyteller" style="opacity:0.8;font-style:italic">${it.caption.slice(0,60)}${it.caption.length>60?'…':''}</div>` : '';
+          return `<div class="gal-tile" data-item-id="${it.id}" data-story-id="${it.story_id||''}" data-type="${it.type}">
+            ${mediaHtml}
+            <div class="gal-tile-meta">
+              <span class="gal-tile-org">${it.organisation_slug || 'unknown'}</span>
+              <div class="gal-tile-title">${it.title || 'untitled'}</div>
+              ${it.storyteller ? `<div class="gal-tile-storyteller">${it.storyteller}${it.storyteller_is_elder?' · elder':''}</div>` : ''}
+              ${captionBit}
+              <div class="gal-tile-state">${state}</div>
+            </div>
+          </div>`;
+        }).join('') + (items.length > 300 ? `<div style="grid-column:1/-1;text-align:center;padding:20px;color:var(--m-stone-soft);font-size:12px;font-style:italic">Showing 300 of ${items.length}. Refine the search to narrow.</div>` : '');
+      }
+
+      render();
+      searchEl.addEventListener('input', render);
+      backdrop.querySelectorAll('.gal-org-chip').forEach(btn => {
+        btn.addEventListener('click', () => {
+          filterOrg = btn.dataset.org;
+          backdrop.querySelectorAll('.gal-org-chip').forEach(b => b.classList.toggle('active', b.dataset.org === filterOrg));
+          render();
+        });
+      });
+      backdrop.querySelectorAll('.gal-type-chip').forEach(btn => {
+        btn.addEventListener('click', () => {
+          filterType = btn.dataset.type;
+          backdrop.querySelectorAll('.gal-type-chip').forEach(b => b.classList.toggle('active', b.dataset.type === filterType));
+          render();
+        });
+      });
+      backdrop.querySelector('.gal-close').addEventListener('click', () => backdrop.remove());
+      backdrop.addEventListener('click', (e) => { if (e.target === backdrop) backdrop.remove(); });
+      document.addEventListener('keydown', function esc(e) { if (e.key === 'Escape') { backdrop.remove(); document.removeEventListener('keydown', esc); } });
+
+      gridEl.addEventListener('click', (e) => {
+        const tile = e.target.closest('.gal-tile');
+        if (!tile) return;
+        const itemId = tile.getAttribute('data-item-id');
+        const item = (gal.items || []).find(it => it.id === itemId);
+        if (!item) return;
+        applyItemToSlot(targetSlot, item, gal);
+        backdrop.remove();
+      });
+    });
+  }
+
+  function applyItemToSlot(el, item, gal, skipPersist) {
+    const variant = el.getAttribute('data-el-variant') || 'hero';
+    const slot = el.getAttribute('data-slot');
+    if (slot && !skipPersist) writeOverride(slot, { kind: 'item', id: item.id });
+    // Build a story-shaped object from the item so the existing renderers work
+    const isVideo = item.type === 'video';
+    const story = {
+      el_v2_story_id: item.story_id || item.id,
+      title: item.title,
+      quote: item.caption || '',
+      organisation: item.organisation,
+      storyteller: {
+        name: item.storyteller,
+        role: item.storyteller_is_elder ? 'elder' : (item.source === 'storyteller_portrait' ? 'storyteller profile' : null)
+      },
+      elder: { name: item.storyteller_is_elder ? item.storyteller : null, mode: null, mode_label: item.source.replace(/_/g, ' '), approved_at: null },
+      media: { hero: isVideo ? null : item.url, video_embed: isVideo ? item.url : null },
+      consent: { status: item.consent_status, last_verified: (item.created_at||item.updated_at||'').slice(0,10) || 'pending', sensitivity: item.sensitivity }
+    };
+    el.setAttribute('data-el-story', story.el_v2_story_id);
+    el.innerHTML = elMediaHtml(story, variant) + elConsentStrip(story, false) + elEditHint(story, el);
+  }
+
+  function applyStoryToSlot(el, storyId, gal, skipPersist) {
+    el.setAttribute('data-el-story', storyId);
+    const slot = el.getAttribute('data-slot');
+    if (slot && !skipPersist) writeOverride(slot, { kind: 'story', id: storyId });
+    const variant = el.getAttribute('data-el-variant') || 'hero';
+    // Prefer snapshot-curated data if the id is one of the 6 curated stories
+    let story = (window.__EL_SNAPSHOT__ && window.__EL_SNAPSHOT__.byId[storyId]) || null;
+    if (!story && gal) {
+      const entry = gal.entries.find(e => e.story_id === storyId);
+      if (entry) {
+        // Shim: map gallery entry into the shape elMediaHtml + elConsentStrip expect
+        const video = entry.media.find(m => m.type === 'video');
+        const img = entry.media.find(m => m.type === 'image');
+        story = {
+          el_v2_story_id: entry.story_id,
+          title: entry.title,
+          quote: entry.excerpt,
+          organisation: entry.organisation,
+          storyteller: { name: entry.storyteller, role: entry.storyteller_is_elder ? 'elder' : null, portrait: entry.storyteller_portrait },
+          elder: { name: entry.storyteller_is_elder ? entry.storyteller : null, mode: null, mode_label: null, approved_at: entry.elder_approved_at },
+          media: { hero: img ? img.url : null, video_embed: video ? video.url : null },
+          consent: { status: entry.consent_status, last_verified: (entry.updated_at||'').slice(0,10), sensitivity: entry.sensitivity }
+        };
+      }
+    }
+    if (!story) { el.innerHTML = `<div class="el-embed-media" style="aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;color:var(--m-stone-soft);font-size:11px;font-style:italic">Story not found</div>`; return; }
+    el.innerHTML = elMediaHtml(story, variant) + elConsentStrip(story, false) + elEditHint(story, el);
+  }
+
+  function enableEditMode() {
+    document.body.classList.add('edit-mode');
+    document.querySelectorAll('.el-embed[data-el-story]').forEach(el => {
+      el.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); openGallery(el); });
+    });
+    const banner = document.createElement('div');
+    banner.id = 'edit-banner';
+    banner.style.cssText = 'position:fixed;bottom:20px;right:20px;background:var(--m-purple);color:white;padding:12px 18px;border-radius:10px;font-size:12px;font-family:ui-sans-serif,system-ui,sans-serif;box-shadow:0 4px 20px rgba(74,37,96,0.35);z-index:999;max-width:280px';
+    const overrideCount = Object.keys(readOverrides()).length;
+    banner.innerHTML = '<div style="font-weight:700;margin-bottom:4px">Edit mode · gallery-picker live</div><div style="font-size:11px;opacity:0.85;line-height:1.45;margin-bottom:8px">Click any photo or video to open the Empathy Ledger gallery. Swaps persist in this browser across refreshes.</div><div style="font-size:10px;opacity:0.75">' + overrideCount + ' saved override' + (overrideCount === 1 ? '' : 's') + ' · <a href="#" id="reset-overrides" style="color:white;text-decoration:underline">reset all</a></div>';
+    document.body.appendChild(banner);
+    const resetLink = banner.querySelector('#reset-overrides');
+    if (resetLink) resetLink.addEventListener('click', (e) => { e.preventDefault(); if (confirm('Clear all saved photo/video overrides and reload?')) { clearAllOverrides(); location.reload(); } });
+  }
+
+  async function applySavedOverrides() {
+    const overrides = readOverrides();
+    if (!Object.keys(overrides).length) return;
+    const gal = await loadGallery();
+    document.querySelectorAll('.el-embed[data-slot]').forEach(el => {
+      const slot = el.getAttribute('data-slot');
+      const saved = overrides[slot];
+      if (!saved) return;
+      if (saved.kind === 'item' && gal) {
+        const item = (gal.items || []).find(it => it.id === saved.id);
+        if (item) applyItemToSlot(el, item, gal, true);
+      } else if (saved.kind === 'story') {
+        applyStoryToSlot(el, saved.id, gal, true);
+      }
+    });
+  }
+
+  async function bootELWidget() {
+    assignSlotIds();
+    await loadEmpathyLedgerStories();
+    await applySavedOverrides();
+    if (new URLSearchParams(window.location.search).get('edit') === '1') enableEditMode();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', bootELWidget);
+  } else {
+    bootELWidget();
+  }
+</script>
+
+<div class="container section-sm"><div class="ornament"></div></div>
+
+<!-- THE THREE CIRCLES · CONCENTRIC VIZ =============================== -->
+<section class="section" style="background: white">
+  <div class="container-narrow text-center mb-14">
+    <div class="eyebrow mb-3">The partnership, in three movements</div>
+    <h2 class="text-4xl md:text-5xl mb-4" style="font-weight:500">The Three Circles</h2>
+    <p class="serif-italic text-lg text-stone-700 leading-relaxed">Each circle feeds the next. None is the product. The holding of all three for three years is.</p>
+  </div>
+
+  <div class="container">
+    <div class="flex justify-center mb-4">
+      <svg class="concentric-svg" viewBox="0 0 520 520">
+        <defs>
+          <radialGradient id="p-outer" cx="50%" cy="50%" r="50%">
+            <stop offset="60%" stop-color="#faf5ec" stop-opacity="0"/>
+            <stop offset="100%" stop-color="#b7410e" stop-opacity="0.18"/>
+          </radialGradient>
+          <radialGradient id="p-mid" cx="50%" cy="50%" r="50%">
+            <stop offset="40%" stop-color="#f5e9c9" stop-opacity="0.05"/>
+            <stop offset="100%" stop-color="#e8843a" stop-opacity="0.22"/>
+          </radialGradient>
+          <radialGradient id="p-inner" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#a6c296" stop-opacity="0.4"/>
+            <stop offset="100%" stop-color="#4a6b3a" stop-opacity="0.35"/>
+          </radialGradient>
+          <filter id="p-shadow" x="-30%" y="-30%" width="160%" height="160%">
+            <feGaussianBlur in="SourceAlpha" stdDeviation="5"/>
+            <feOffset dx="0" dy="3"/>
+            <feComponentTransfer><feFuncA type="linear" slope="0.25"/></feComponentTransfer>
+            <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+        <circle cx="260" cy="260" r="240" fill="url(#p-outer)" stroke="#b7410e" stroke-width="1" filter="url(#p-shadow)"/>
+        <circle cx="260" cy="260" r="175" fill="url(#p-mid)" stroke="#e8843a" stroke-width="1" filter="url(#p-shadow)"/>
+        <circle cx="260" cy="260" r="95" fill="url(#p-inner)" stroke="#4a6b3a" stroke-width="1.25" filter="url(#p-shadow)"/>
+        <circle cx="260" cy="260" r="210" fill="none" stroke="#e8843a" stroke-opacity="0.25" stroke-width="0.5" stroke-dasharray="2 6"/>
+        <circle cx="260" cy="260" r="135" fill="none" stroke="#4a6b3a" stroke-opacity="0.25" stroke-width="0.5" stroke-dasharray="2 6"/>
+        <text x="260" y="254" text-anchor="middle" font-size="11" fill="#4a6b3a" letter-spacing="3" style="font-family:ui-sans-serif,system-ui,sans-serif;text-transform:uppercase;font-weight:600">Circle One</text>
+        <text x="260" y="278" text-anchor="middle" font-size="19" fill="#2b2530" style="font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:500">The Living Brain</text>
+        <text x="260" y="380" text-anchor="middle" font-size="11" fill="#e8843a" letter-spacing="3" style="font-family:ui-sans-serif,system-ui,sans-serif;text-transform:uppercase;font-weight:600">Circle Two · The Ring</text>
+        <text x="260" y="404" text-anchor="middle" font-size="19" fill="#2b2530" style="font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:500">Staying · Country &amp; Council</text>
+        <text x="260" y="476" text-anchor="middle" font-size="11" fill="#b7410e" letter-spacing="3" style="font-family:ui-sans-serif,system-ui,sans-serif;text-transform:uppercase;font-weight:600">Circle Three · The Edge</text>
+        <text x="260" y="500" text-anchor="middle" font-size="19" fill="#2b2530" style="font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:500">The Country We're Building</text>
+      </svg>
+    </div>
+    <p class="caption text-center max-w-lg mx-auto">Concentric, not sequential. The centre is the evidence. The ring is the practice. The edge is the artefact. Remove one and the method collapses.</p>
+  </div>
+</section>
+
+<!-- CIRCLE ONE · THE LIVING BRAIN ============================= -->
+<section class="section" style="background: var(--m-cream-2)">
+  <div class="container">
+    <div class="grid grid-cols-1 md:grid-cols-5 gap-10 items-start">
+      <div class="md:col-span-2">
+        <!-- Circle One hero portrait. Swap by changing data-el-story -->
+        <div class="el-embed" data-el-story="6ac1fc12-f6fa-4dd6-930b-9159f692b04d" data-el-variant="portrait"></div>
+      </div>
+      <div class="md:col-span-3">
+        <div class="circle-pill pill-1 mb-5">Circle One · The Centre</div>
+        <h2 class="text-4xl md:text-5xl mb-5" style="font-weight:500">The Living Brain</h2>
+        <p class="text-lg text-stone-700 mb-6 leading-relaxed">Everything on Australian youth justice. Queryable, updating, community-governed. The national evidence backbone of community-led alternatives, held under Indigenous data sovereignty with a 12-gate consent chain.</p>
+
+        <div class="grid grid-cols-2 gap-6 mb-8">
+          <div>
+            <div class="eyebrow mb-2">3-year investment</div>
+            <div class="stat-num text-4xl">$800K</div>
+            <div class="text-xs text-stone-500 mt-1">28% of partnership</div>
+          </div>
+          <div>
+            <div class="eyebrow mb-2">Per year</div>
+            <div class="stat-num text-4xl">~$267K</div>
+            <div class="text-xs text-stone-500 mt-1">Editorial 0.8 FTE + Research 0.5 FTE</div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-lg p-5 mb-8">
+          <div class="eyebrow mb-3">Impact by 2029</div>
+          <ul class="text-sm text-stone-700 space-y-2 pl-5 list-disc marker:text-[var(--m-purple)]">
+            <li>Every community-led youth-justice intervention in Australia discoverable from a single platform</li>
+            <li>Each anchor's story corpus compounds monthly under community authority</li>
+            <li>Each anchor cited in ≥1 national policy submission per year</li>
+            <li>OCAP 12-gate chain enforced on every record · revocation honoured within 24 hours</li>
+          </ul>
+        </div>
+
+        <blockquote class="pullquote text-xl leading-snug border-l-4 pl-6 py-2" style="border-color:var(--earth-grass)">"Our Alternative Service Response is not an add-on to the justice system. It's a cultural foundation that justice should stand on in this region."</blockquote>
+        <div class="text-sm text-stone-600 mt-3 ml-6">Tanya Turner · co-founder Oonchiumpa · to 55 judges, 16 April 2026</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CIRCLE TWO · THE RING ====================================== -->
+<section class="section" style="background: white">
+  <div class="container">
+    <div class="grid grid-cols-1 md:grid-cols-5 gap-10 items-start">
+      <div class="md:col-span-3 md:order-2">
+        <!-- Circle Two hero landscape. Swap by changing data-el-story -->
+        <div class="el-embed" data-el-story="128e7ad5-b0c7-4b0d-8ada-878e0d8f0a03" data-el-variant="hero"></div>
+      </div>
+      <div class="md:col-span-2 md:order-1">
+        <div class="circle-pill pill-2 mb-5">Circle Two · The Ring</div>
+        <h2 class="text-4xl md:text-5xl mb-5" style="font-weight:500">Staying · Country &amp; Council</h2>
+        <p class="text-lg text-stone-700 mb-6 leading-relaxed">The relational hold. Five anchor communities already practising the method. Two to three more co-selected with Minderoo. The Brave Ones is the daily practice inside this ring.</p>
+
+        <div class="grid grid-cols-2 gap-6 mb-8">
+          <div>
+            <div class="eyebrow mb-2">3-year investment</div>
+            <div class="stat-num text-4xl">$1.4M</div>
+            <div class="text-xs text-stone-500 mt-1">48%. The largest line.</div>
+          </div>
+          <div>
+            <div class="eyebrow mb-2">Anchors held</div>
+            <div class="stat-num text-4xl">5 → 7–8</div>
+            <div class="text-xs text-stone-500 mt-1">Co-selected Session 1 + 2</div>
+          </div>
+        </div>
+
+        <div class="bg-[var(--m-cream-2)] rounded-lg p-5 mb-8">
+          <div class="eyebrow mb-3">Impact by 2029</div>
+          <ul class="text-sm text-stone-700 space-y-2 pl-5 list-disc marker:text-[var(--m-orange)]">
+            <li>7–8 anchors holding ongoing narrative practice</li>
+            <li>~500+ young people walked through the method</li>
+            <li>12+ Brave Ones domestic exchanges</li>
+            <li>5–6 international trips · Diagrama (Spain) · YOPE (Amsterdam)</li>
+            <li>165+ judge touchpoints via Judges on Country</li>
+          </ul>
+        </div>
+
+        <blockquote class="pullquote text-xl leading-snug border-l-4 pl-6 py-2" style="border-color:var(--m-orange)">"Last month we took eight young people out to Atnarpa for three days on Country. You could see it in their faces. Something shifted."</blockquote>
+        <div class="text-sm text-stone-600 mt-3 ml-6">Kristy Bloomfield · Oonchiumpa</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CIRCLE THREE · THE EDGE ==================================== -->
+<section class="section" style="background: var(--m-cream-2)">
+  <div class="container">
+    <div class="grid grid-cols-1 md:grid-cols-5 gap-10 items-start">
+      <div class="md:col-span-2">
+        <!-- Circle Three hero portrait. Swap by changing data-el-story -->
+        <div class="el-embed" data-el-story="b68e2760-648c-4c07-b2b0-b6f6d46f6bfc" data-el-variant="portrait"></div>
+      </div>
+      <div class="md:col-span-3">
+        <div class="circle-pill pill-3 mb-5">Circle Three · The Edge</div>
+        <h2 class="text-4xl md:text-5xl mb-5" style="font-weight:500">The Country We're Building</h2>
+        <p class="text-lg text-stone-700 mb-6 leading-relaxed">The artefact the community releases. A documentary, a book, per-young-person journals, a national collection, all led by the young people themselves.</p>
+
+        <div class="grid grid-cols-2 gap-6 mb-8">
+          <div>
+            <div class="eyebrow mb-2">3-year investment</div>
+            <div class="stat-num text-4xl">$700K</div>
+            <div class="text-xs text-stone-500 mt-1">24%. Peaks in Year 3.</div>
+          </div>
+          <div>
+            <div class="eyebrow mb-2">Artefacts released</div>
+            <div class="stat-num text-4xl">8+</div>
+            <div class="text-xs text-stone-500 mt-1">Documentary · book · journals · launch</div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-lg p-5 mb-8">
+          <div class="eyebrow mb-3">Impact by 2029</div>
+          <ul class="text-sm text-stone-700 space-y-2 pl-5 list-disc marker:text-[var(--earth-country)]">
+            <li>Documentary released Year 3 Q4, co-directed by young people</li>
+            <li>Published national book · ~120 consented stories · young-person editorial board</li>
+            <li>25+ per-young-person journals · durable records they keep</li>
+            <li>National launch event on Country with anchor-community permission</li>
+            <li>Archive that outlives the funding. EL v2 corpus remains community-held.</li>
+          </ul>
+        </div>
+
+        <blockquote class="pullquote text-xl leading-snug border-l-4 pl-6 py-2" style="border-color:var(--earth-country)">"Because young people are going through all of this stuff, why are the older fellas making choices for the younger fellas when they're the ones going through it?"</blockquote>
+        <div class="text-sm text-stone-600 mt-3 ml-6">Taleigha Glover · young Biripi woman · Mt Druitt</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BUDGET VIZ ======================================================= -->
+<section class="section" style="background: white">
+  <div class="container-narrow">
+    <div class="eyebrow mb-3">$2.9 million · mapped to Minderoo-native functions</div>
+    <h2 class="text-4xl md:text-5xl mb-10" style="font-weight:500">Where the money goes.</h2>
+  </div>
+  <div class="container">
+    <div class="bg-[var(--m-cream-2)] rounded-xl p-8">
+      <div class="breakdown-row" style="grid-template-columns:220px 1fr 100px">
+        <div class="text-sm"><strong>Partnership infrastructure</strong><br><span class="text-xs text-stone-500">Partner-led scaling deep</span></div>
+        <div class="breakdown-bar" style="width: 100%; background: var(--m-purple)"></div>
+        <div class="text-right text-sm font-semibold" style="color:var(--m-purple)">$1,050K · 36%</div>
+      </div>
+      <div class="breakdown-row" style="grid-template-columns:220px 1fr 100px">
+        <div class="text-sm"><strong>Narrative + evidence production</strong><br><span class="text-xs text-stone-500">Advocacy and Engagement</span></div>
+        <div class="breakdown-bar" style="width: 67%; background: var(--m-purple-lite)"></div>
+        <div class="text-right text-sm">$700K · 24%</div>
+      </div>
+      <div class="breakdown-row" style="grid-template-columns:220px 1fr 100px">
+        <div class="text-sm"><strong>The Brave Ones + international</strong><br><span class="text-xs text-stone-500">Generation One × Thrive by Five</span></div>
+        <div class="breakdown-bar" style="width: 57%; background: var(--m-orange)"></div>
+        <div class="text-right text-sm">$600K · 21%</div>
+      </div>
+      <div class="breakdown-row" style="grid-template-columns:220px 1fr 100px">
+        <div class="text-sm"><strong>National evidence backbone</strong><br><span class="text-xs text-stone-500">Systemic infrastructure</span></div>
+        <div class="breakdown-bar" style="width: 38%; background: var(--m-gold)"></div>
+        <div class="text-right text-sm">$400K · 14%</div>
+      </div>
+      <div class="breakdown-row" style="grid-template-columns:220px 1fr 100px">
+        <div class="text-sm"><strong>Judges on Country</strong><br><span class="text-xs text-stone-500">Policy influence</span></div>
+        <div class="breakdown-bar" style="width: 14%; background: var(--earth-sky)"></div>
+        <div class="text-right text-sm">$150K · 5%</div>
+      </div>
+    </div>
+
+    <!-- Year shape -->
+    <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div class="number-tile text-center">
+        <div class="eyebrow mb-2">FY26 · setup year</div>
+        <div class="stat-num text-4xl">$804K</div>
+        <div class="text-xs text-stone-500 mt-2">Relationships + editorial layer</div>
+      </div>
+      <div class="number-tile text-center" style="border-color:var(--m-purple);box-shadow:0 0 0 2px rgba(74,37,96,0.1)">
+        <div class="eyebrow mb-2" style="color:var(--m-purple)">FY27 · peak year</div>
+        <div class="stat-num text-4xl">$1.01M</div>
+        <div class="text-xs text-stone-500 mt-2">International begins · documentary shoots</div>
+      </div>
+      <div class="number-tile text-center">
+        <div class="eyebrow mb-2">FY28 · release year</div>
+        <div class="stat-num text-4xl">$1.08M</div>
+        <div class="text-xs text-stone-500 mt-2">Artefacts ship · national launch</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="container section-sm"><div class="ornament"></div></div>
+
+<!-- PROOF · 4 VOICES ================================================= -->
+<section class="section" style="background: var(--m-purple); color: white">
+  <div class="container-narrow text-center mb-12">
+    <div class="eyebrow mb-3" style="color:rgba(255,255,255,0.7)">Proof · four sentences, four positions</div>
+    <h2 class="text-4xl md:text-5xl mb-4 text-white" style="font-weight:500;color:white">The method is already operating.</h2>
+    <p class="serif-italic text-lg max-w-2xl mx-auto" style="color:rgba(255,255,255,0.9)">Already endorsed. Already holding young people. This envelope asks Minderoo to join a coalition the Australian judiciary has already formed.</p>
+  </div>
+  <div class="container">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- Tanya -->
+      <div class="rounded-xl p-8" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15)">
+        <div class="eyebrow mb-4" style="color:var(--m-gold)">Cultural authority · Traditional Owner</div>
+        <blockquote class="pullquote text-2xl leading-snug mb-4 text-white" style="color:white">"No Aboriginal person in this region is born dangerous or hopeless or broken. They're born into layers of history that most Australians never have to face."</blockquote>
+        <div class="text-sm" style="color:rgba(255,255,255,0.75)">Tanya Turner · Eastern Arrernte · co-founder, Oonchiumpa · welcoming 55 judges to Mparntwe, 16 April 2026</div>
+      </div>
+      <!-- Louise -->
+      <div class="rounded-xl p-8" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15)">
+        <div class="eyebrow mb-4" style="color:var(--m-gold)">Institutional endorsement · Supreme Court</div>
+        <blockquote class="pullquote text-2xl leading-snug mb-4 text-white" style="color:white">"Kristy and Tanya really exemplify what's possible when we are given the space to lead things for ourselves. The potential for their work to have relevance for so many Australians is immeasurable."</blockquote>
+        <div class="text-sm" style="color:rgba(255,255,255,0.75)">Hon. Louise Taylor · Judge, ACT Supreme Court · Kamilaroi · Co-chair, National Judicial College Indigenous Justice Program · 17 April 2026</div>
+      </div>
+      <!-- Jackquann -->
+      <div class="rounded-xl p-8" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15)">
+        <div class="eyebrow mb-4" style="color:var(--m-gold)">Young person's voice</div>
+        <blockquote class="pullquote text-2xl leading-snug mb-2 text-white" style="color:white">"At six o'clock you get locked down. You wait till tomorrow."</blockquote>
+        <blockquote class="pullquote text-2xl leading-snug mb-4 text-white" style="color:white">"Looking after my family."</blockquote>
+        <div class="text-sm" style="color:rgba(255,255,255,0.75)">Jackquann, 14 · Upper Camp, Mparntwe · on detention, and on what keeps him out</div>
+      </div>
+      <!-- Storyteller voice -->
+      <div class="rounded-xl p-8" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15)">
+        <div class="eyebrow mb-4" style="color:var(--m-gold)">Data sovereignty · in practice</div>
+        <blockquote class="pullquote text-2xl leading-snug mb-4 text-white" style="color:white">"This is my story. I consent. I can take it back. Nothing changes for me if I do."</blockquote>
+        <div class="text-sm" style="color:rgba(255,255,255,0.75)">Storyteller voice repeated across every story in this envelope, under the 12-gate OCAP chain enforced in Empathy Ledger v2. Revocation honoured within 24 hours.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IMPACT BY THE NUMBERS ====================================== -->
+<section class="section" style="background: white">
+  <div class="container-narrow text-center mb-12">
+    <div class="eyebrow mb-3">Oonchiumpa's operational numbers today</div>
+    <h2 class="text-4xl md:text-5xl" style="font-weight:500">The method is not theoretical. It is measurable.</h2>
+  </div>
+  <div class="container">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div class="number-tile text-center">
+        <div class="stat-num text-5xl md:text-6xl" style="color:var(--earth-grass)">95%</div>
+        <div class="text-sm text-stone-700 mt-3 font-semibold">Diversion rate</div>
+        <div class="text-xs text-stone-500 mt-1">Young people kept out of the statutory pipeline</div>
+      </div>
+      <div class="number-tile text-center">
+        <div class="stat-num text-5xl md:text-6xl" style="color:var(--earth-grass)">72%</div>
+        <div class="text-sm text-stone-700 mt-3 font-semibold">School re-engagement</div>
+        <div class="text-xs text-stone-500 mt-1">After Oonchiumpa case work</div>
+      </div>
+      <div class="number-tile text-center">
+        <div class="stat-num text-5xl md:text-6xl" style="color:var(--m-purple)">97.6%</div>
+        <div class="text-sm text-stone-700 mt-3 font-semibold">Less cost than detention</div>
+        <div class="text-xs text-stone-500 mt-1">Oonchiumpa vs Vic detention bed</div>
+      </div>
+      <div class="number-tile text-center">
+        <div class="stat-num text-5xl md:text-6xl" style="color:var(--earth-country)">$7,775</div>
+        <div class="text-sm text-stone-700 mt-3 font-semibold">Per day</div>
+        <div class="text-xs text-stone-500 mt-1">Victoria youth detention bed · COLI24 p.22</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THE FIVE ANCHORS ================================================= -->
+<section class="section" style="background: var(--m-cream-2)">
+  <div class="container-narrow text-center mb-12">
+    <div class="eyebrow mb-3">Five anchor communities already operating</div>
+    <h2 class="text-4xl md:text-5xl mb-4" style="font-weight:500">Every anchor is a wrap-around hub.</h2>
+    <p class="serif-italic text-lg text-stone-700 leading-relaxed">The model COLI24 itself recommends (p. ii, rec #3). Already in place, before the funding.</p>
+  </div>
+  <div class="container">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-6">
+
+      <!-- Oonchiumpa -->
+      <div class="anchor-card-big">
+        <div class="el-embed" data-el-story="2005424d-3969-41b2-8bb7-163ea6a46ec8" data-el-variant="hero"></div>
+        <div class="p-6">
+          <div class="eyebrow mb-1" style="color:var(--earth-grass)">NT · Eastern Arrernte</div>
+          <h3 class="text-2xl mb-2" style="font-weight:500">Oonchiumpa</h3>
+          <p class="text-sm text-stone-700 leading-relaxed mb-4">Kristy Bloomfield + Tanya Turner. Under Elders Aunty Bev + Uncle Terry. Hosts the National Judicial College on-Country day.</p>
+          <div class="grid grid-cols-3 gap-2 text-center border-t border-stone-100 pt-4">
+            <div>
+              <div class="text-xl font-semibold" style="color:var(--earth-grass);font-family:'Cormorant Garamond'">95%</div>
+              <div class="text-[10px] text-stone-500 uppercase tracking-wider">Diversion</div>
+            </div>
+            <div>
+              <div class="text-xl font-semibold" style="color:var(--earth-grass);font-family:'Cormorant Garamond'">7</div>
+              <div class="text-[10px] text-stone-500 uppercase tracking-wider">Lang. groups</div>
+            </div>
+            <div>
+              <div class="text-xl font-semibold" style="color:var(--earth-grass);font-family:'Cormorant Garamond'">55</div>
+              <div class="text-[10px] text-stone-500 uppercase tracking-wider">Judges hosted</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PICC -->
+      <div class="anchor-card-big">
+        <div class="p-6 pt-8" style="background:linear-gradient(135deg,#f2ead9,#faf5ec);min-height:240px;border-radius:16px 16px 0 0;display:flex;align-items:center;justify-content:center">
+          <div class="text-center">
+            <svg width="80" height="80" viewBox="0 0 80 80" fill="none" style="margin:0 auto;opacity:0.7">
+              <circle cx="40" cy="40" r="35" stroke="var(--m-purple)" stroke-width="1.5"/>
+              <path d="M20 40 Q40 20 60 40" stroke="var(--earth-country)" stroke-width="2" fill="none"/>
+              <path d="M20 40 Q40 60 60 40" stroke="var(--earth-grass)" stroke-width="2" fill="none"/>
+              <circle cx="40" cy="40" r="4" fill="var(--m-purple)"/>
+            </svg>
+          </div>
+        </div>
+        <div class="p-6">
+          <div class="eyebrow mb-1" style="color:var(--earth-grass)">QLD · Manbarra / Bwgcolman</div>
+          <h3 class="text-2xl mb-2" style="font-weight:500">Palm Island Community Company</h3>
+          <p class="text-sm text-stone-700 leading-relaxed mb-4">Rachael Atkinson CEO. Selective per-storyteller consent. Youth Offender Support Service grown 3× since 2021.</p>
+          <div class="grid grid-cols-3 gap-2 text-center border-t border-stone-100 pt-4">
+            <div>
+              <div class="text-xl font-semibold" style="color:var(--m-purple);font-family:'Cormorant Garamond'">$29M</div>
+              <div class="text-[10px] text-stone-500 uppercase tracking-wider">Turnover</div>
+            </div>
+            <div>
+              <div class="text-xl font-semibold" style="color:var(--m-purple);font-family:'Cormorant Garamond'">208</div>
+              <div class="text-[10px] text-stone-500 uppercase tracking-wider">FTE</div>
+            </div>
+            <div>
+              <div class="text-xl font-semibold" style="color:var(--m-purple);font-family:'Cormorant Garamond'">3×</div>
+              <div class="text-[10px] text-stone-500 uppercase tracking-wider">YOSS growth</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MMEIC -->
+      <div class="anchor-card-big">
+        <div class="p-6 pt-8" style="background:linear-gradient(135deg,#e9e0cc,#f5ecd8);min-height:240px;border-radius:16px 16px 0 0;display:flex;align-items:center;justify-content:center">
+          <svg width="100" height="100" viewBox="0 0 100 100" fill="none" style="opacity:0.8">
+            <circle cx="50" cy="50" r="8" fill="var(--m-purple)"/>
+            <circle cx="50" cy="20" r="5" fill="var(--earth-country)"/>
+            <circle cx="78" cy="38" r="5" fill="var(--earth-country)"/>
+            <circle cx="70" cy="75" r="5" fill="var(--earth-country)"/>
+            <circle cx="30" cy="75" r="5" fill="var(--earth-country)"/>
+            <circle cx="22" cy="38" r="5" fill="var(--earth-country)"/>
+          </svg>
+        </div>
+        <div class="p-6">
+          <div class="eyebrow mb-1" style="color:var(--earth-grass)">QLD · Quandamooka</div>
+          <h3 class="text-2xl mb-2" style="font-weight:500">MMEIC</h3>
+          <p class="text-sm text-stone-700 leading-relaxed mb-4">Minjerribah Moorgumpin Elders-in-Council. Collective cultural governance. Holds children before the system touches them.</p>
+          <div class="grid grid-cols-3 gap-2 text-center border-t border-stone-100 pt-4">
+            <div>
+              <div class="text-xl font-semibold" style="color:var(--m-orange);font-family:'Cormorant Garamond'">32</div>
+              <div class="text-[10px] text-stone-500 uppercase tracking-wider">Years</div>
+            </div>
+            <div>
+              <div class="text-xl font-semibold" style="color:var(--m-orange);font-family:'Cormorant Garamond'">0.815</div>
+              <div class="text-[10px] text-stone-500 uppercase tracking-wider">ALMA top score</div>
+            </div>
+            <div>
+              <div class="text-xl font-semibold" style="color:var(--m-orange);font-family:'Cormorant Garamond'">✓</div>
+              <div class="text-[10px] text-stone-500 uppercase tracking-wider">EIC governance</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BG Fit -->
+      <div class="anchor-card-big">
+        <div class="el-embed" data-el-story="f99e581e-33de-4a52-9528-daee36d8f0b1" data-el-variant="hero"></div>
+        <div class="p-6">
+          <div class="eyebrow mb-1" style="color:var(--earth-grass)">QLD · Kalkadoon</div>
+          <h3 class="text-2xl mb-2" style="font-weight:500">BG Fit</h3>
+          <p class="text-sm text-stone-700 leading-relaxed mb-4">Brodie Germaine · Pita Pita Wayaka. Tuesday gyms at PCYC Mount Isa. Monthly on-Country bush camps. Doomadgee remote outreach (500km).</p>
+          <div class="grid grid-cols-3 gap-2 text-center border-t border-stone-100 pt-4">
+            <div>
+              <div class="text-xl font-semibold" style="color:var(--earth-country);font-family:'Cormorant Garamond'">15-20</div>
+              <div class="text-[10px] text-stone-500 uppercase tracking-wider">Tues gym</div>
+            </div>
+            <div>
+              <div class="text-xl font-semibold" style="color:var(--earth-country);font-family:'Cormorant Garamond'">12</div>
+              <div class="text-[10px] text-stone-500 uppercase tracking-wider">Wiki stories</div>
+            </div>
+            <div>
+              <div class="text-xl font-semibold" style="color:var(--earth-country);font-family:'Cormorant Garamond'">500km</div>
+              <div class="text-[10px] text-stone-500 uppercase tracking-wider">Doomadgee</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mounty -->
+      <div class="anchor-card-big">
+        <div class="p-6 pt-8" style="background:linear-gradient(135deg,#efdbc8,#faedd8);min-height:240px;border-radius:16px 16px 0 0;display:flex;align-items:center;justify-content:center">
+          <svg width="100" height="80" viewBox="0 0 100 80" fill="none" style="opacity:0.85">
+            <rect x="10" y="30" width="80" height="40" rx="6" stroke="var(--m-purple)" stroke-width="1.5" fill="none"/>
+            <rect x="10" y="30" width="80" height="10" rx="6" fill="var(--earth-country)" opacity="0.7"/>
+            <path d="M25 30 L25 12 L75 12 L75 30" stroke="var(--m-purple)" stroke-width="1.5" fill="none"/>
+            <circle cx="50" cy="52" r="6" fill="var(--m-gold)"/>
+          </svg>
+        </div>
+        <div class="p-6">
+          <div class="eyebrow mb-1" style="color:var(--earth-grass)">NSW · Darug</div>
+          <h3 class="text-2xl mb-2" style="font-weight:500">Mounty Yarns</h3>
+          <p class="text-sm text-stone-700 leading-relaxed mb-4">Daniel Daylight CEO. Youth-led hub. CONTAINED mobile base camp. 9 young people at the table.</p>
+          <div class="grid grid-cols-3 gap-2 text-center border-t border-stone-100 pt-4">
+            <div>
+              <div class="text-xl font-semibold" style="color:var(--earth-sky);font-family:'Cormorant Garamond'">13</div>
+              <div class="text-[10px] text-stone-500 uppercase tracking-wider">Storytellers</div>
+            </div>
+            <div>
+              <div class="text-xl font-semibold" style="color:var(--earth-sky);font-family:'Cormorant Garamond'">9</div>
+              <div class="text-[10px] text-stone-500 uppercase tracking-wider">Young voices</div>
+            </div>
+            <div>
+              <div class="text-xl font-semibold" style="color:var(--earth-sky);font-family:'Cormorant Garamond'">✓</div>
+              <div class="text-[10px] text-stone-500 uppercase tracking-wider">Youth-led</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Co-selection placeholder -->
+      <div class="rounded-xl p-8 flex flex-col items-center justify-center text-center" style="background:rgba(74,37,96,0.06);border:2px dashed var(--m-purple-lite);min-height:420px">
+        <div class="eyebrow mb-3" style="color:var(--m-purple)">Co-selection</div>
+        <h3 class="text-2xl mb-3" style="font-weight:500;color:var(--m-purple)">2–3 more seats</h3>
+        <p class="text-sm text-stone-700 leading-relaxed mb-4">Co-selected with Minderoo in Sessions 1 + 2. From a verified 50-candidate shortlist across every state and territory. Session 1 is the co-selection, not a pitch.</p>
+        <div class="text-xs text-stone-600 serif-italic">Community consent is the binding decision, not ACT's.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- MINDEROO ALIGNMENT =============================================== -->
+<section class="section" style="background: white">
+  <div class="container-narrow mb-12">
+    <div class="eyebrow mb-3">Aligned to Minderoo's 2030 Strategy · Communities focus area</div>
+    <h2 class="text-4xl md:text-5xl mb-4" style="font-weight:500">Five outcomes Minderoo already names. Delivered by the people closest to the challenge.</h2>
+  </div>
+
+  <div class="container">
+    <div class="grid grid-cols-1 md:grid-cols-5 gap-3 mb-12">
+      <div class="bg-[var(--m-cream-2)] rounded-lg p-5">
+        <div class="stat-num text-3xl mb-2" style="color:var(--m-purple)">1</div>
+        <div class="serif-italic text-base leading-snug mb-2">Developmentally on track, strong wellbeing</div>
+        <div class="text-xs text-stone-600">BG Fit Tuesday gyms · per-youth journals · Oonchiumpa on-Country</div>
+      </div>
+      <div class="bg-[var(--m-cream-2)] rounded-lg p-5">
+        <div class="stat-num text-3xl mb-2" style="color:var(--m-purple)">2</div>
+        <div class="serif-italic text-base leading-snug mb-2">Families empowered</div>
+        <div class="text-xs text-stone-600">MMEIC Elders-in-Council · PICC family engagement · Mounty Mt Druitt</div>
+      </div>
+      <div class="bg-[var(--m-cream-2)] rounded-lg p-5">
+        <div class="stat-num text-3xl mb-2" style="color:var(--m-purple)">3</div>
+        <div class="serif-italic text-base leading-snug mb-2">Economic dignity</div>
+        <div class="text-xs text-stone-600">Anchors as employers (PICC 208 FTE) · Brave Ones pathways</div>
+      </div>
+      <div class="bg-[var(--m-cream-2)] rounded-lg p-5">
+        <div class="stat-num text-3xl mb-2" style="color:var(--m-purple)">4</div>
+        <div class="serif-italic text-base leading-snug mb-2">Communities accelerate</div>
+        <div class="text-xs text-stone-600">Co-selection process · authority sits inside each community</div>
+      </div>
+      <div class="bg-[var(--m-cream-2)] rounded-lg p-5">
+        <div class="stat-num text-3xl mb-2" style="color:var(--m-purple)">5</div>
+        <div class="serif-italic text-base leading-snug mb-2">Vibrant + cohesive</div>
+        <div class="text-xs text-stone-600">Judges on Country · reciprocal exchanges · international</div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="bg-[var(--m-cream-2)] rounded-lg p-6">
+        <div class="eyebrow mb-3">Four bodies of work</div>
+        <div class="space-y-3 text-sm text-stone-700">
+          <div class="flex items-start gap-3"><span class="text-xl leading-none mt-1" style="color:var(--m-gold)">◆</span><div><strong>Place-based Engagement.</strong> 7–8 anchors in 7–8 places. Minderoo's "scaling deep" in practice.</div></div>
+          <div class="flex items-start gap-3"><span class="text-xl leading-none mt-1" style="color:var(--m-gold)">◆</span><div><strong>Valuing the Early Years.</strong> Upstream of every youth-justice touchpoint we intercept.</div></div>
+          <div class="flex items-start gap-3"><span class="text-xl leading-none mt-1" style="color:var(--m-gold)">◆</span><div><strong>Improving Child &amp; Family Supports.</strong> JusticeHub magistrate service directory makes the ecosystem legible.</div></div>
+          <div class="flex items-start gap-3"><span class="text-xl leading-none mt-1" style="color:var(--m-gold)">◆</span><div><strong>Vibrant &amp; Connected Communities.</strong> The anchor network is a connected community.</div></div>
+        </div>
+      </div>
+      <div class="bg-[var(--m-cream-2)] rounded-lg p-6">
+        <div class="eyebrow mb-3">Three lenses applied to all work</div>
+        <div class="space-y-3 text-sm text-stone-700">
+          <div class="flex items-start gap-3"><span class="text-xl leading-none mt-1" style="color:var(--m-orange)">▲</span><div><strong>First Nations.</strong> Every anchor is an Aboriginal Community-Controlled Organisation.</div></div>
+          <div class="flex items-start gap-3"><span class="text-xl leading-none mt-1" style="color:var(--m-orange)">▲</span><div><strong>Gender equality.</strong> Oonchiumpa women-led (Kristy + Tanya + Aunty Bev); MMEIC includes women elders; Mounty Leah + Amelia.</div></div>
+          <div class="flex items-start gap-3"><span class="text-xl leading-none mt-1" style="color:var(--m-orange)">▲</span><div><strong>Climate.</strong> On-Country practice is climate-connected practice.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-8 bg-white border border-stone-200 rounded-lg p-6 text-center">
+      <div class="eyebrow mb-2">Precedent shape</div>
+      <p class="serif-italic text-lg text-stone-700 max-w-3xl mx-auto leading-relaxed">This ask has the same shape as Minderoo's March 2025 Ngangk Yira Institute partnership: a 3-year, $3M infrastructure investment that flows through to First Nations–led delivery partners.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE ========================================================= -->
+<section class="section" style="background: var(--m-cream-2)">
+  <div class="container-narrow mb-10">
+    <div class="eyebrow mb-3">Three years · what ships when</div>
+    <h2 class="text-4xl md:text-5xl" style="font-weight:500">The timeline.</h2>
+  </div>
+  <div class="container">
+    <div class="bg-white rounded-xl p-8">
+      <div class="timeline-year">
+        <div class="timeline-year-label">FY26</div>
+        <div class="flex-1">
+          <div class="eyebrow mb-2" style="color:var(--earth-grass)">Year 1 · setup</div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="text-sm text-stone-700">Envelope + Session 1 + 2 · anchors confirmed · editorial layer built</div>
+            <div class="text-sm text-stone-700">Artefact 001 Murri Watch ships 1 May 2026 · 002 queued</div>
+            <div class="text-sm text-stone-700">4 domestic Brave Ones exchanges · 1 Judges on Country cycle</div>
+          </div>
+        </div>
+      </div>
+      <div class="timeline-year">
+        <div class="timeline-year-label">FY27</div>
+        <div class="flex-1">
+          <div class="eyebrow mb-2" style="color:var(--m-orange)">Year 2 · peak</div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="text-sm text-stone-700">International exchanges begin · Diagrama (Spain) · YOPE (Amsterdam)</div>
+            <div class="text-sm text-stone-700">Documentary shoots across all 5–8 anchor communities</div>
+            <div class="text-sm text-stone-700">Per-young-person journal production begins · book editorial board forms</div>
+          </div>
+        </div>
+      </div>
+      <div class="timeline-year">
+        <div class="timeline-year-label">FY28</div>
+        <div class="flex-1">
+          <div class="eyebrow mb-2" style="color:var(--earth-country)">Year 3 · release</div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="text-sm text-stone-700">Documentary release · co-directed by young people · national distribution</div>
+            <div class="text-sm text-stone-700">National book publishes · ~120 consented stories · every MP + magistrate receives</div>
+            <div class="text-sm text-stone-700">Launch event on Country · Diagrama + YOPE delegates attend</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THE ASK / CLOSING ================================================ -->
+<section class="hero-gradient text-white">
+  <div class="container py-24 text-center">
+    <div class="eyebrow mb-4" style="color:rgba(255,255,255,0.7)">The ask, made simple</div>
+    <h2 class="text-4xl md:text-6xl mb-8 max-w-3xl mx-auto" style="font-weight:500;line-height:1.1;color:white">Join the coalition the Australian judiciary has already formed.</h2>
+    <p class="serif-italic text-xl md:text-2xl leading-relaxed mb-12 max-w-3xl mx-auto" style="color:rgba(255,255,255,0.9)">This envelope does not ask Minderoo to fund something speculative. It asks Minderoo to fund what Minderoo's own report says works, what the National Judicial College has already centred, what the Aboriginal Community-Controlled anchors have already built.</p>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-16 text-left max-w-4xl mx-auto">
+      <div class="rounded-lg p-6" style="background:rgba(255,255,255,0.08);backdrop-filter:blur(6px)">
+        <div class="eyebrow mb-2" style="color:rgba(255,255,255,0.7)">Session 1</div>
+        <div class="text-lg serif-italic mb-2" style="color:rgba(255,255,255,0.95)">Mid-May 2026</div>
+        <div class="text-sm" style="color:rgba(255,255,255,0.8)">Confirm 5 anchors · co-select remaining 2–3 · lock budget shape</div>
+      </div>
+      <div class="rounded-lg p-6" style="background:rgba(255,255,255,0.08);backdrop-filter:blur(6px)">
+        <div class="eyebrow mb-2" style="color:rgba(255,255,255,0.7)">Session 2</div>
+        <div class="text-lg serif-italic mb-2" style="color:rgba(255,255,255,0.95)">June 2026</div>
+        <div class="text-sm" style="color:rgba(255,255,255,0.8)">Community consent confirmed · budget locked · Year 1 commences 1 July</div>
+      </div>
+      <div class="rounded-lg p-6" style="background:rgba(255,255,255,0.08);backdrop-filter:blur(6px)">
+        <div class="eyebrow mb-2" style="color:rgba(255,255,255,0.7)">Three years later</div>
+        <div class="text-lg serif-italic mb-2" style="color:rgba(255,255,255,0.95)">By 2029</div>
+        <div class="text-sm" style="color:rgba(255,255,255,0.8)">Documentary · book · per-young-person journals · national launch on Country</div>
+      </div>
+    </div>
+
+    <blockquote class="pullquote text-3xl md:text-5xl leading-tight max-w-3xl mx-auto" style="color:rgba(255,255,255,0.98)">"Two cultures, one world working together."</blockquote>
+    <div class="text-sm mt-5" style="color:rgba(255,255,255,0.7)">Oonchiumpa's operating philosophy · more precise than "partner-led"</div>
+  </div>
+</section>
+
+<!-- FOOTER =========================================================== -->
+<footer class="section-sm" style="background: var(--m-stone); color:white">
+  <div class="container">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+      <div>
+        <div class="eyebrow mb-3" style="color:var(--m-gold)">The working dashboard</div>
+        <p class="text-sm mb-4 leading-relaxed" style="color:rgba(255,255,255,0.85)">Every piece of proof in this pitch is visible at the working dashboard. The five anchor communities. The story corpus under 12-gate OCAP consent. The Australian Living Map of Alternatives. The judicial endorsement. The live consent markers. Updates between Sessions 1 and 2.</p>
+        <a href="/minderoo-live-dashboard.html" class="inline-flex items-center gap-2 text-sm font-medium px-5 py-3 rounded-lg" style="background:var(--m-gold);color:var(--m-stone)">Open the working dashboard →</a>
+        <div class="mt-6 text-xs" style="color:rgba(255,255,255,0.55)">
+          <a href="?edit=1#top" style="color:rgba(255,255,255,0.7);text-decoration:underline;text-underline-offset:3px">Enter edit mode</a> to swap any photo or video on this page. Every media slot reveals a dropdown showing all storyteller posts from Empathy Ledger v2.
+        </div>
+      </div>
+      <div>
+        <div class="eyebrow mb-3" style="color:var(--m-gold)">Contact + authorship</div>
+        <p class="text-sm mb-2 leading-relaxed" style="color:rgba(255,255,255,0.9)"><strong>Benjamin Knight</strong> · Co-founder, A Curious Tractor</p>
+        <p class="text-sm mb-2 leading-relaxed" style="color:rgba(255,255,255,0.9)"><strong>Nicholas Marchesi OAM</strong> · Co-founder (Orange Sky)</p>
+        <p class="text-sm mb-5 leading-relaxed" style="color:rgba(255,255,255,0.9)">benjamin@act.place</p>
+        <p class="text-xs italic leading-relaxed" style="color:rgba(255,255,255,0.6)">Prepared under the cultural authority of Oonchiumpa (Kristy Bloomfield + Tanya Turner, under Aunty Bev + Uncle Terry), Palm Island Community Company (Rachael Atkinson), Minjerribah Moorgumpin Elders-in-Council, BG Fit (Brodie Germaine), and Mounty Yarns (Daniel Daylight).</p>
+      </div>
+    </div>
+    <div class="mt-10 pt-8 border-t text-center text-xs" style="border-color:rgba(255,255,255,0.15);color:rgba(255,255,255,0.5)">
+      The Three Circles · A Curious Tractor × JusticeHub · For Minderoo Foundation · Envelope ships 1 May 2026
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
