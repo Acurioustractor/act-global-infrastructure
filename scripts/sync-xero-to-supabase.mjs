@@ -609,6 +609,7 @@ async function syncInvoices(options = {}) {
       const record = {
         xero_id: invoice.InvoiceID,
         tenant_id: XERO_TENANT_ID,
+        xero_tenant_id: XERO_TENANT_ID,
         invoice_number: invoice.InvoiceNumber,
         reference: invoice.Reference,
         contact_name: invoice.Contact?.Name,
@@ -771,6 +772,7 @@ async function syncTransactions(options = {}) {
       const isZombie = status === 'DELETED' || status === 'VOIDED';
       const record = {
         xero_transaction_id: txn.BankTransactionID,
+        xero_tenant_id: XERO_TENANT_ID,
         type: txn.Type, // RECEIVE, SPEND, TRANSFER
         contact_name: txn.Contact?.Name,
         bank_account: txn.BankAccount?.Name,

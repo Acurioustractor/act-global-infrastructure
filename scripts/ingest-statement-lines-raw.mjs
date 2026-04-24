@@ -204,6 +204,7 @@ for (const line of lines) {
     status: status || 'unreconciled',
     bank_account: 'NAB Visa ACT #8815',
     card_last4: '1656',
+    xero_tenant_id: process.env.XERO_TENANT_ID,
   });
 }
 
