@@ -1,8 +1,8 @@
 {
   "_meta": {
     "description": "ACT Unified Project Codes - Use these codes across ALL systems",
-    "version": "1.7.0",
-    "updated": "2026-04-13",
+    "version": "1.8.0",
+    "updated": "2026-04-24",
     "systems": ["notion", "supabase", "ghl", "xero", "dext", "empathy-ledger", "alma", "syndication"],
     "status_values": ["active", "ideation", "sunsetting", "archived", "transferred"],
     "tier_values": ["ecosystem", "studio", "satellite"],
@@ -40,6 +40,7 @@
     "ACT-DG": {
       "name": "Diagrama",
       "code": "ACT-DG",
+      "canonical_slug": "diagrama",
       "category": "justice",
       "priority": "high",
       "status": "active",
@@ -147,6 +148,7 @@
     "ACT-ER": {
       "name": "PICC Elders Room",
       "code": "ACT-ER",
+      "canonical_slug": "picc-elders-hull-river",
       "category": "indigenous",
       "priority": "high",
       "status": "archived",
@@ -181,6 +183,7 @@
     "ACT-PS": {
       "name": "PICC On Country Photo Studio",
       "code": "ACT-PS",
+      "canonical_slug": "picc-on-country-photo-studio",
       "category": "indigenous",
       "tier": "studio",
       "priority": "high",
@@ -201,6 +204,7 @@
     "ACT-SS": {
       "name": "Storm Stories",
       "code": "ACT-SS",
+      "canonical_slug": "storm-stories",
       "category": "indigenous",
       "priority": "high",
       "status": "archived",
@@ -221,6 +225,7 @@
     "ACT-MR": {
       "name": "MingaMinga Rangers",
       "code": "ACT-MR",
+      "canonical_slug": "mingaminga-rangers",
       "category": "indigenous",
       "priority": "medium",
       "status": "archived",
@@ -236,6 +241,7 @@
     "ACT-UA": {
       "name": "Uncle Allan Palm Island Art",
       "code": "ACT-UA",
+      "canonical_slug": "uncle-allan-palm-island-art",
       "category": "indigenous",
       "tier": "studio",
       "priority": "high",
@@ -254,6 +260,7 @@
     "ACT-MN": {
       "name": "Maningrida",
       "code": "ACT-MN",
+      "canonical_slug": "maningrida",
       "category": "justice",
       "priority": "high",
       "status": "archived",
@@ -269,6 +276,7 @@
     "ACT-FN": {
       "name": "First Nations Youth Advocacy",
       "code": "ACT-FN",
+      "canonical_slug": "first-nations-youth-advocacy",
       "category": "justice",
       "priority": "high",
       "status": "archived",
@@ -334,6 +342,7 @@
     "ACT-CN": {
       "name": "Contained",
       "code": "ACT-CN",
+      "canonical_slug": "contained",
       "category": "justice",
       "tier": "studio",
       "priority": "medium",
@@ -350,6 +359,7 @@
     "ACT-FO": {
       "name": "Fishers Oysters",
       "code": "ACT-FO",
+      "canonical_slug": "fishers-oysters",
       "category": "regenerative",
       "tier": "satellite",
       "priority": "medium",
@@ -367,6 +377,7 @@
     "ACT-SM": {
       "name": "SMART",
       "code": "ACT-SM",
+      "canonical_slug": "smart-recovery",
       "category": "health",
       "tier": "satellite",
       "priority": "medium",
@@ -441,6 +452,7 @@
     "ACT-MD": {
       "name": "ACT Monthly Dinners",
       "code": "ACT-MD",
+      "canonical_slug": "act-monthly-dinners",
       "category": "community",
       "tier": "satellite",
       "priority": "medium",
@@ -457,6 +469,7 @@
     "ACT-QF": {
       "name": "QFCC Empathy Ledger",
       "code": "ACT-QF",
+      "canonical_slug": "qfcc-empathy-ledger",
       "category": "stories",
       "priority": "high",
       "status": "archived",
@@ -472,6 +485,7 @@
     "ACT-DD": {
       "name": "Double Disadvantage",
       "code": "ACT-DD",
+      "canonical_slug": "double-disadvantage",
       "category": "justice",
       "priority": "high",
       "status": "archived",
@@ -486,6 +500,7 @@
     "ACT-BM": {
       "name": "Bimberi",
       "code": "ACT-BM",
+      "canonical_slug": "bimberi",
       "category": "justice",
       "priority": "medium",
       "status": "archived",
@@ -499,6 +514,7 @@
     "ACT-AI": {
       "name": "AIME",
       "code": "ACT-AI",
+      "canonical_slug": "aime",
       "category": "indigenous",
       "priority": "medium",
       "status": "archived",
@@ -549,6 +565,7 @@
     "ACT-BG": {
       "name": "BG Fit",
       "code": "ACT-BG",
+      "canonical_slug": "bg-fit",
       "category": "health",
       "tier": "satellite",
       "priority": "medium",
@@ -623,6 +640,7 @@
     "ACT-TN": {
       "name": "TOMNET",
       "code": "ACT-TN",
+      "canonical_slug": "tomnet",
       "category": "community",
       "priority": "low",
       "status": "archived",
@@ -636,6 +654,7 @@
     "ACT-10": {
       "name": "10x10 Retreat",
       "code": "ACT-10",
+      "canonical_slug": "10x10-retreat",
       "category": "events",
       "priority": "medium",
       "status": "archived",
@@ -702,6 +721,7 @@
     "ACT-SH": {
       "name": "The Shed",
       "code": "ACT-SH",
+      "canonical_slug": "the-shed",
       "category": "tech",
       "priority": "low",
       "status": "archived",
@@ -716,6 +736,7 @@
     "ACT-SE": {
       "name": "SEFA Partnership",
       "code": "ACT-SE",
+      "canonical_slug": "sefa-partnership",
       "category": "funding",
       "tier": "satellite",
       "priority": "medium",
@@ -731,6 +752,7 @@
     "ACT-CE": {
       "name": "Custodian Economy",
       "code": "ACT-CE",
+      "canonical_slug": "custodian-economy",
       "category": "enterprise",
       "tier": "satellite",
       "priority": "medium",
@@ -745,6 +767,7 @@
     "ACT-AS": {
       "name": "Art for Social Change",
       "code": "ACT-AS",
+      "canonical_slug": "art-for-social-change",
       "category": "arts",
       "priority": "medium",
       "status": "archived",
@@ -778,6 +801,7 @@
     "ACT-WJ": {
       "name": "Wilya Janta",
       "code": "ACT-WJ",
+      "canonical_slug": "wilya-janta",
       "category": "indigenous",
       "priority": "low",
       "status": "archived",
@@ -792,6 +816,7 @@
     "ACT-YC": {
       "name": "YAC Story and Action",
       "code": "ACT-YC",
+      "canonical_slug": "yac-story-and-action",
       "category": "justice",
       "priority": "low",
       "status": "archived",
@@ -806,6 +831,7 @@
     "ACT-TW": {
       "name": "Travelling Women's Car",
       "code": "ACT-TW",
+      "canonical_slug": "travelling-womens-car",
       "category": "indigenous",
       "priority": "medium",
       "status": "archived",
@@ -821,6 +847,7 @@
     "ACT-HS": {
       "name": "Project Her-Self",
       "code": "ACT-HS",
+      "canonical_slug": "project-her-self",
       "category": "community",
       "priority": "medium",
       "status": "archived",
@@ -835,6 +862,7 @@
     "ACT-DH": {
       "name": "Deadly Homes and Gardens",
       "code": "ACT-DH",
+      "canonical_slug": "deadly-homes-and-gardens",
       "category": "indigenous",
       "priority": "medium",
       "status": "archived",
@@ -850,6 +878,7 @@
     "ACT-MM": {
       "name": "MMEIC Justice",
       "code": "ACT-MM",
+      "canonical_slug": "mmeic-justice",
       "category": "justice",
       "priority": "medium",
       "status": "archived",
@@ -864,6 +893,7 @@
     "ACT-MU": {
       "name": "Murrup + ACT",
       "code": "ACT-MU",
+      "canonical_slug": "murrup-and-act",
       "category": "indigenous",
       "priority": "medium",
       "status": "archived",
@@ -879,6 +909,7 @@
     "ACT-OO": {
       "name": "Oonchiumpa",
       "code": "ACT-OO",
+      "canonical_slug": "oonchiumpa",
       "category": "indigenous",
       "tier": "satellite",
       "priority": "medium",
@@ -896,6 +927,7 @@
     "ACT-CA": {
       "name": "Caring for those who care",
       "code": "ACT-CA",
+      "canonical_slug": "caring-for-those-who-care",
       "category": "arts",
       "tier": "studio",
       "priority": "medium",
@@ -914,6 +946,7 @@
     "ACT-MC": {
       "name": "Cars and Microcontrollers",
       "code": "ACT-MC",
+      "canonical_slug": "cars-and-microcontrollers",
       "category": "arts",
       "tier": "studio",
       "priority": "medium",
@@ -931,6 +964,7 @@
     "ACT-BR": {
       "name": "ACT Bali Retreat",
       "code": "ACT-BR",
+      "canonical_slug": "act-bali-retreat",
       "category": "events",
       "priority": "medium",
       "status": "archived",
@@ -945,6 +979,7 @@
     "ACT-BB": {
       "name": "Barkly Backbone",
       "code": "ACT-BB",
+      "canonical_slug": "barkly-backbone",
       "category": "indigenous",
       "tier": "satellite",
       "priority": "medium",
@@ -961,6 +996,7 @@
     "ACT-JC": {
       "name": "JusticeHub Centre of Excellence",
       "code": "ACT-JC",
+      "canonical_slug": "justicehub-centre-of-excellence",
       "category": "justice",
       "tier": "satellite",
       "priority": "high",
@@ -976,6 +1012,7 @@
     "ACT-TR": {
       "name": "Treacher",
       "code": "ACT-TR",
+      "canonical_slug": "treacher",
       "category": "arts",
       "tier": "studio",
       "priority": "low",
@@ -992,6 +1029,7 @@
     "ACT-DO": {
       "name": "Designing for Obsolescence",
       "code": "ACT-DO",
+      "canonical_slug": "designing-for-obsolescence",
       "category": "tech",
       "tier": "satellite",
       "priority": "medium",
@@ -1007,6 +1045,7 @@
     "ACT-GL": {
       "name": "Global Laundry Alliance",
       "code": "ACT-GL",
+      "canonical_slug": "global-laundry-alliance",
       "category": "enterprise",
       "tier": "satellite",
       "priority": "medium",
@@ -1022,6 +1061,7 @@
     "ACT-CC": {
       "name": "ACT Conservation Collective",
       "code": "ACT-CC",
+      "canonical_slug": "act-conservation-collective",
       "category": "regenerative",
       "priority": "medium",
       "status": "archived",
@@ -1035,6 +1075,7 @@
     "ACT-FP": {
       "name": "Fairfax PLACE Tech",
       "code": "ACT-FP",
+      "canonical_slug": "fairfax-place-tech",
       "category": "tech",
       "priority": "medium",
       "status": "archived",
@@ -1049,6 +1090,7 @@
     "ACT-FA": {
       "name": "Festival Activations",
       "code": "ACT-FA",
+      "canonical_slug": "festival-activations",
       "category": "events",
       "priority": "medium",
       "status": "archived",
@@ -1062,6 +1104,7 @@
     "ACT-SF": {
       "name": "SAF Foundation",
       "code": "ACT-SF",
+      "canonical_slug": "saf-foundation",
       "category": "funding",
       "priority": "medium",
       "status": "archived",
@@ -1075,6 +1118,7 @@
     "ACT-SX": {
       "name": "SXSW 2025",
       "code": "ACT-SX",
+      "canonical_slug": "sxsw-2025",
       "category": "events",
       "priority": "high",
       "status": "archived",
@@ -1089,6 +1133,7 @@
     "ACT-WE": {
       "name": "Westpac Summit 2025",
       "code": "ACT-WE",
+      "canonical_slug": "westpac-summit-2025",
       "category": "events",
       "priority": "medium",
       "status": "archived",
@@ -1103,6 +1148,7 @@
     "ACT-RP": {
       "name": "RPPP Stream Two",
       "code": "ACT-RP",
+      "canonical_slug": "rppp-stream-two",
       "category": "indigenous",
       "priority": "high",
       "status": "archived",
@@ -1118,6 +1164,7 @@
     "ACT-OE": {
       "name": "Olive Express",
       "code": "ACT-OE",
+      "canonical_slug": "olive-express",
       "category": "regenerative",
       "priority": "medium",
       "status": "archived",
@@ -1131,6 +1178,7 @@
     "ACT-OS": {
       "name": "Orange Sky EL",
       "code": "ACT-OS",
+      "canonical_slug": "orange-sky-empathy-ledger",
       "category": "stories",
       "priority": "low",
       "status": "archived",
@@ -1145,6 +1193,7 @@
     "ACT-IN": {
       "name": "ACT Infrastructure",
       "code": "ACT-IN",
+      "canonical_slug": "act-infrastructure",
       "category": "tech",
       "tier": "ecosystem",
       "priority": "high",
@@ -1160,6 +1209,7 @@
     "ACT-GCC": {
       "name": "Global Community Connections",
       "code": "ACT-GCC",
+      "canonical_slug": "global-community-connections",
       "category": "community",
       "status": "archived",
       "description": "Building bridges between local and international communities",
@@ -1168,6 +1218,7 @@
     "ACT-EFI": {
       "name": "Economic Freedom Initiative",
       "code": "ACT-EFI",
+      "canonical_slug": "economic-freedom-initiative",
       "category": "enterprise",
       "status": "archived",
       "description": "Creating pathways for economic empowerment in regional communities",
@@ -1176,6 +1227,7 @@
     "ACT-APO": {
       "name": "Active Projects Overview",
       "code": "ACT-APO",
+      "canonical_slug": "active-projects-overview",
       "category": "tech",
       "status": "archived",
       "description": "Notion overview page - not a real project",
@@ -1184,6 +1236,7 @@
     "ACT-AMT": {
       "name": "API Migration Test",
       "code": "ACT-AMT",
+      "canonical_slug": "api-migration-test",
       "category": "tech",
       "status": "archived",
       "description": "Test project for Notion API migration",
@@ -1192,6 +1245,7 @@
     "ACT-FG": {
       "name": "Feel Good Project",
       "code": "ACT-FG",
+      "canonical_slug": "feel-good-project",
       "category": "community",
       "tier": "satellite",
       "priority": "medium",
@@ -1204,6 +1258,7 @@
     "ACT-CB": {
       "name": "Marriage Celebrant",
       "code": "ACT-CB",
+      "canonical_slug": "marriage-celebrant",
       "category": "community",
       "tier": "satellite",
       "priority": "low",
