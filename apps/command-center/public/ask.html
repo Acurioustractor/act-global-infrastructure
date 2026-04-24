@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Ask &middot; Three Circles &middot; A Curious Tractor</title>
+<meta name="description" content="The full breakdown of the Three Circles ask for Minderoo Foundation. $2.9M over 3 years, by year, by bucket, by line item. Three funding options compared.">
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --m-purple: #4a2560;
+    --m-purple-deep: #2e1540;
+    --m-purple-lite: #7a5a8f;
+    --m-orange-text: #a84a1c;
+    --m-gold-text: #7a5f14;
+    --m-gold: #f0b93a;
+    --m-cream: #faf5ec;
+    --m-cream-2: #f2ead9;
+    --m-stone: #2b2530;
+    --m-stone-soft: #605468;
+    --m-divider: #e6dfcf;
+    --earth-grass: #4a6b3a;
+    --earth-country: #b7410e;
+    --earth-sky: #2d5f7f;
+  }
+  * { box-sizing: border-box; }
+  body { font-family: 'Inter', system-ui, sans-serif; background: var(--m-cream); color: var(--m-stone); margin: 0; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  h1, h2, h3, .serif { font-family: 'Cormorant Garamond', Georgia, serif; letter-spacing: -0.01em; }
+  .serif-italic { font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; }
+  .mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+  .eyebrow { font-size: 10px; text-transform: uppercase; letter-spacing: 3px; font-weight: 600; color: var(--m-stone-soft); }
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 32px; }
+  .container-narrow { max-width: 760px; margin: 0 auto; padding: 0 32px; }
+  .section { padding: 64px 0; }
+  .caption { font-size: 12px; color: var(--m-stone-soft); font-style: italic; line-height: 1.5; }
+  a { color: var(--m-purple); text-decoration: underline; text-underline-offset: 2px; }
+  a:hover { color: var(--m-purple-deep); }
+  .top-nav { padding: 18px 32px; border-bottom: 1px solid var(--m-divider); display: flex; gap: 20px; align-items: center; font-size: 12px; flex-wrap: wrap; }
+  .top-nav a { color: var(--m-stone-soft); text-decoration: none; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; }
+  .top-nav a:hover { color: var(--m-stone); }
+  .top-nav .brand { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 15px; text-transform: none; letter-spacing: 0; color: var(--m-stone); text-decoration: none; margin-right: auto; }
+  .top-nav a[aria-current="page"] { color: var(--m-stone); border-bottom: 2px solid var(--m-gold); padding-bottom: 4px; }
+  .subnav { position: sticky; top: 0; z-index: 50; background: rgba(250,245,236,0.92); backdrop-filter: blur(8px); border-bottom: 1px solid var(--m-divider); }
+  .subnav-inner { max-width: 1100px; margin: 0 auto; padding: 12px 32px; display: flex; gap: 22px; align-items: center; justify-content: center; font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; flex-wrap: wrap; }
+  .subnav-link { color: var(--m-stone-soft); text-decoration: none; padding: 4px 2px; border-bottom: 2px solid transparent; transition: color 0.15s, border-color 0.15s; }
+  .subnav-link:hover { color: var(--m-stone); }
+  table.budget { width: 100%; border-collapse: collapse; background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 14px rgba(46,21,64,0.04); }
+  table.budget th, table.budget td { padding: 14px 16px; text-align: left; font-size: 13px; border-bottom: 1px solid var(--m-divider); vertical-align: top; }
+  table.budget th { background: var(--m-stone); color: var(--m-cream); font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700; border-bottom: none; }
+  table.budget tr:last-child td { border-bottom: none; }
+  table.budget td.num { text-align: right; font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 500; color: var(--m-stone); white-space: nowrap; }
+  table.budget tr.total { background: var(--m-cream-2); font-weight: 600; }
+  table.budget tr.total td { border-top: 2px solid var(--m-stone); }
+  table.budget tr.total td.num { font-size: 22px; color: var(--m-purple); }
+  table.budget td .what { color: var(--m-stone-soft); font-size: 12px; line-height: 1.5; margin-top: 4px; }
+  .option-block { background: white; border-radius: 12px; padding: 32px; border: 1px solid var(--m-divider); }
+  .option-block.lead { border: 2px solid var(--m-gold); box-shadow: 0 8px 30px rgba(240,185,58,0.15); }
+  .option-amount { font-family: 'Cormorant Garamond', serif; font-size: 46px; font-weight: 500; line-height: 1; color: var(--m-stone); }
+  .option-tag { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700; color: var(--m-gold-text); background: rgba(240,185,58,0.15); padding: 3px 10px; border-radius: 999px; }
+  .compare-table th, .compare-table td { font-size: 13px; padding: 14px 16px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--m-divider); }
+  .compare-table th { background: var(--m-stone); color: var(--m-cream); font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700; }
+  .compare-table tr.option-row td { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 17px; color: var(--m-stone); }
+  .yes { color: var(--earth-grass); font-weight: 600; }
+  .no { color: var(--earth-country); font-weight: 600; }
+  .partial { color: var(--m-gold-text); font-weight: 600; }
+  .btn { display: inline-flex; align-items: center; gap: 6px; padding: 12px 22px; border-radius: 999px; font-size: 13px; font-weight: 600; letter-spacing: 0.05em; text-decoration: none; }
+  .cta-row { display: flex; flex-wrap: wrap; gap: 14px; }
+  @media (max-width: 640px) {
+    .section { padding: 48px 0; }
+    table.budget td.num { font-size: 15px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="top-nav" aria-label="Site navigation">
+  <a href="/minderoo-pitch.html" class="brand">The Three Circles</a>
+  <a href="/minderoo-pitch.html">Pitch</a>
+  <a href="/system.html">System</a>
+  <a href="/library.html">Library</a>
+  <a href="/justicehub-intelligence.html">Living Brain</a>
+  <a href="/candidates.html">Candidates</a>
+  <a href="/ask.html" aria-current="page">The ask</a>
+  <a href="https://wiki.act.place/projects/justicehub/three-circles">Full proposal &nearr;</a>
+</nav>
+
+<nav class="subnav" aria-label="Ask sections">
+  <div class="subnav-inner">
+    <a href="#options" class="subnav-link">Three options</a>
+    <a href="#year-view" class="subnav-link">Year view</a>
+    <a href="#bucket-view" class="subnav-link">Bucket view</a>
+    <a href="#what-it-buys" class="subnav-link">What it buys</a>
+    <a href="#compare" class="subnav-link">Compare</a>
+    <a href="#context" class="subnav-link">Context</a>
+  </div>
+</nav>
+
+<main>
+
+<header class="section" style="background: white">
+  <div class="container-narrow">
+    <div class="eyebrow mb-3">The ask</div>
+    <h1 style="font-size:54px;font-weight:500;line-height:1.04;margin:0 0 18px">$2.9M to back the seven properly.</h1>
+    <p class="serif-italic" style="font-size:21px;line-height:1.4;color:var(--m-stone);margin:0">Three options. Below: the full breakdown of every dollar in the program. What each year buys, what each bucket pays for, how the three options compare. The version on the pitch page is the summary. This is the working ledger.</p>
+  </div>
+</header>
+
+<!-- THREE OPTIONS · summary cards -->
+<section class="section" style="background: var(--m-cream-2)" id="options">
+  <div class="container">
+    <div class="container-narrow" style="padding:0;margin-bottom:30px">
+      <div class="eyebrow mb-3">Three options</div>
+      <h2 style="font-size:36px;font-weight:500;line-height:1.1;margin:0 0 12px">All three options back the seven. Option 1 backs them properly.</h2>
+      <p style="font-size:15px;line-height:1.65;color:var(--m-stone);margin:0">The three circles only work as one program because the seven are the load-bearing element. We will make any of these work. Option 1 is the recommendation because it is what the communities already voted for by showing up.</p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr;gap:18px;max-width:760px;margin:0 auto">
+
+      <div class="option-block lead">
+        <div style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:14px">
+          <span class="option-tag">Option 1 &middot; recommended</span>
+          <span style="font-size:12px;color:var(--m-stone-soft)">FY2026&ndash;FY2028</span>
+        </div>
+        <div style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:14px">
+          <span class="option-amount">$2.9M</span>
+          <span style="font-size:14px;color:var(--m-stone-soft);font-weight:500">over three years</span>
+        </div>
+        <h3 style="font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:500;font-size:24px;line-height:1.2;margin:0 0 10px;color:var(--m-stone)">Back all seven. Plus the spine that makes their work visible. Plus the artefact that lets it travel.</h3>
+        <p style="font-size:14px;line-height:1.6;color:var(--m-stone);margin:0">Seven community partnerships at $35K&ndash;$50K per year, untied. Two to three storytelling FTE working alongside them. Continuing JusticeHub and CivicGraph build so what these seven do becomes evidence for the next seven. The Stay Series, the documentary, the touring exhibition, the journals. Minderoo&rsquo;s name on the artefact, the convening and the framework launch in 2028.</p>
+      </div>
+
+      <div class="option-block">
+        <div style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:14px">
+          <span style="font-size:11px;text-transform:uppercase;letter-spacing:0.08em;font-weight:700;color:var(--m-stone-soft);background:var(--m-cream-2);padding:3px 10px;border-radius:999px">Option 2 &middot; stepped</span>
+          <span style="font-size:12px;color:var(--m-stone-soft)">FY2026 only, with right of first refusal on FY27&ndash;FY28</span>
+        </div>
+        <div style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:14px">
+          <span class="option-amount" style="font-size:38px">$780K</span>
+          <span style="font-size:14px;color:var(--m-stone-soft);font-weight:500">Year 1 only</span>
+        </div>
+        <h3 style="font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:500;font-size:22px;line-height:1.2;margin:0 0 10px;color:var(--m-stone)">Lead Year 1 with right of first refusal on Years 2&ndash;3.</h3>
+        <p style="font-size:14px;line-height:1.6;color:var(--m-stone);margin:0">PRF, Snow, Dusseldorp and Ritchie co-fund subsequent years against demonstrated progress. Minderoo retains the option to renew at the end of FY26 with full visibility of the Year 1 results.</p>
+      </div>
+
+      <div class="option-block">
+        <div style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:14px">
+          <span style="font-size:11px;text-transform:uppercase;letter-spacing:0.08em;font-weight:700;color:var(--m-stone-soft);background:var(--m-cream-2);padding:3px 10px;border-radius:999px">Option 3 &middot; single circle</span>
+          <span style="font-size:12px;color:var(--m-stone-soft)">FY2026&ndash;FY2028, Centre only</span>
+        </div>
+        <div style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:14px">
+          <span class="option-amount" style="font-size:38px">~$520K</span>
+          <span style="font-size:14px;color:var(--m-stone-soft);font-weight:500">over 3 years</span>
+        </div>
+        <h3 style="font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:500;font-size:22px;line-height:1.2;margin:0 0 10px;color:var(--m-stone)">Fund the data spine only.</h3>
+        <p style="font-size:14px;line-height:1.6;color:var(--m-stone);margin:0">Circle One. Continuing JusticeHub and CivicGraph build, plus the six AI agent tools, so what works in the sector becomes visible to the next funder, the next minister, the next magistrate. We assemble a separate coalition to back the seven communities and produce the artefact.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- YEAR VIEW · annual breakdown of Option 1 -->
+<section class="section" style="background: white" id="year-view">
+  <div class="container">
+    <div class="container-narrow" style="padding:0;margin-bottom:24px">
+      <div class="eyebrow mb-3">Year view &middot; Option 1 ($2.9M)</div>
+      <h2 style="font-size:32px;font-weight:500;line-height:1.15;margin:0 0 12px">Three years. Each year buys a different layer.</h2>
+      <p style="font-size:14px;line-height:1.65;color:var(--m-stone);margin:0">Year 1 is foundation. Year 2 is deepening. Year 3 is national crescendo and the artefact. Totals match the pitch summary.</p>
+    </div>
+
+    <table class="budget">
+      <thead>
+        <tr>
+          <th style="width:18%">Year</th>
+          <th>What it buys</th>
+          <th class="num" style="text-align:right;width:120px">Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <strong>Year 1 &middot; FY2026</strong>
+            <div class="what">Foundation</div>
+          </td>
+          <td>
+            Ongoing JusticeHub build (live map of what works in youth justice, refreshed quarterly, currently 1,155 verified models). Ongoing CivicGraph build (the database tracking who funds what across government, philanthropy, NDIS and corrections). Six AI agent tools so funders, policymakers and communities can ask plain-language questions of the data and get evidence back.<br>
+            7 anchor community partnerships at $35K&ndash;$50K each (untied).<br>
+            2 storytelling FTE (one North-based, one South-based).<br>
+            3 domestic exchanges between anchors.<br>
+            Africa + Europe international tour (Ben + 3 community leaders).
+          </td>
+          <td class="num">$780K</td>
+        </tr>
+        <tr>
+          <td>
+            <strong>Year 2 &middot; FY2027</strong>
+            <div class="what">Deepening</div>
+          </td>
+          <td>
+            Continued JusticeHub + CivicGraph build, plus new layers funders and policymakers asked for: oversight dashboards (where is the spend going, what is it producing), magistrate-facing tools (what local alternatives to detention exist for this young person), narrative integration with the Frameworks Institute so the data lands as story not spreadsheet.<br>
+            7 anchor partnerships at $50K each (second-year trust dividend).<br>
+            3 storytelling FTE (adds film/editorial for the artefact).<br>
+            6 domestic exchanges.<br>
+            10% Delta-model innovation reserve embedded in anchor lines.
+          </td>
+          <td class="num">$960K</td>
+        </tr>
+        <tr>
+          <td>
+            <strong>Year 3 &middot; FY2028</strong>
+            <div class="what">National crescendo + artefact</div>
+          </td>
+          <td>
+            JusticeHub + CivicGraph open to the sector: free public API so other organisations can build on top of the data, plus journalist-ready tooling (one-click pulls of who funded what, where the spend went, what worked).<br>
+            7 final-year anchor partnerships at $50K each.<br>
+            Storytelling team: case study production, documentary post-production, book editorial, journal binding.<br>
+            The Doing Convening (workshop-led, no keynotes).<br>
+            International return visit (2&ndash;3 international peers visit Australian anchor sites).
+          </td>
+          <td class="num">$1.16M</td>
+        </tr>
+        <tr class="total">
+          <td><strong>Three-year total</strong></td>
+          <td><em>One program. Three circles. Seven communities. One artefact in four forms.</em></td>
+          <td class="num">$2.9M</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- BUCKET VIEW · the three buckets -->
+<section class="section" style="background: var(--m-cream-2)" id="bucket-view">
+  <div class="container">
+    <div class="container-narrow" style="padding:0;margin-bottom:24px">
+      <div class="eyebrow mb-3">Bucket view &middot; Option 1 ($2.9M)</div>
+      <h2 style="font-size:32px;font-weight:500;line-height:1.15;margin:0 0 12px">Same money, different cut.</h2>
+      <p style="font-size:14px;line-height:1.65;color:var(--m-stone);margin:0">For funders who think in budgets-of-work. The same $2.9M, redrawn by what it pays for: holding the communities, generating the evidence, developing and advocating the work outward.</p>
+    </div>
+
+    <table class="budget">
+      <thead>
+        <tr>
+          <th style="width:30%">Bucket</th>
+          <th>What it pays for</th>
+          <th class="num" style="text-align:right;width:120px">3-yr total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <strong>Partner / place-based hold</strong>
+            <div class="what">48% of total</div>
+          </td>
+          <td>Community relationships, local coordination, travel, cultural protocol, and the time required to <em>stay</em> with each anchor over three years.</td>
+          <td class="num">$1.4M</td>
+        </tr>
+        <tr>
+          <td>
+            <strong>Generate evidence</strong>
+            <div class="what">28% of total</div>
+          </td>
+          <td>JusticeHub, CivicGraph, Empathy Ledger, documentation, consent workflow, journals, portraits, and traceability of every quote and image.</td>
+          <td class="num">$800K</td>
+        </tr>
+        <tr>
+          <td>
+            <strong>Develop + advocate</strong>
+            <div class="what">24% of total</div>
+          </td>
+          <td>Editorial production (book + documentary), public artefacts (exhibition + installations), exchanges, and outward-facing civic argument.</td>
+          <td class="num">$700K</td>
+        </tr>
+        <tr class="total">
+          <td><strong>Three-year total</strong></td>
+          <td><em>The same $2.9M, cut a different way for funders who think in workstreams.</em></td>
+          <td class="num">$2.9M</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- WHAT IT BUYS · concrete deliverables -->
+<section class="section" style="background: white" id="what-it-buys">
+  <div class="container">
+    <div class="container-narrow" style="padding:0;margin-bottom:24px">
+      <div class="eyebrow mb-3">What it buys</div>
+      <h2 style="font-size:32px;font-weight:500;line-height:1.15;margin:0 0 12px">The seven, plus what supports them.</h2>
+      <p style="font-size:14px;line-height:1.65;color:var(--m-stone);margin:0">The first row is the seven. Everything below it exists to make their work visible (the spine), durable (the publication), seen (the exhibition), and inhabitable (the installations).</p>
+    </div>
+
+    <table class="budget">
+      <thead>
+        <tr>
+          <th style="width:20%">Tier</th>
+          <th>What gets made</th>
+          <th class="num" style="text-align:right;width:120px">Indicative</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <strong>Anchor partnerships</strong>
+            <div class="what">7 communities &middot; untied &middot; the load-bearing line</div>
+          </td>
+          <td>$35K&ndash;$50K per anchor per year, paid directly to the community organisation, with no tied conditions. This is the hold the communities feel. Everything else in this table exists to support what these seven are already doing.</td>
+          <td class="num">$740K</td>
+        </tr>
+        <tr>
+          <td>
+            <strong>The data spine</strong>
+            <div class="what">Circle One &middot; in service of the seven and the rest of the field</div>
+          </td>
+          <td>Ongoing JusticeHub build (the live map of what works in youth justice, currently 1,155 verified models, refreshed each quarter). Ongoing CivicGraph build (who funds what across government, philanthropy, NDIS, corrections, child protection and disability). Six AI agent tools that turn both into plain-language answers for funders, policymakers and communities. Open API by Year 3 so the sector can build on top of it.</td>
+          <td class="num">$520K</td>
+        </tr>
+        <tr>
+          <td>
+            <strong>Publication</strong>
+            <div class="what">Tier 1 &middot; books + journals + film &middot; how their work travels</div>
+          </td>
+          <td>Stay Series (7 method volumes + slipcase). Hand-bound journals (one per young person). Documentary (90 minutes, festival release).</td>
+          <td class="num">$680K</td>
+        </tr>
+        <tr>
+          <td>
+            <strong>Exhibition</strong>
+            <div class="what">Tier 2 &middot; portraits + tour &middot; how their work is seen</div>
+          </td>
+          <td>The Brave Ones portrait series. Documentary video. National tour (MCA, NGV, Powerhouse, regional galleries, ACCO halls, parliament foyers). International: Diagrama in Spain.</td>
+          <td class="num">$540K</td>
+        </tr>
+        <tr>
+          <td>
+            <strong>Interactive installations</strong>
+            <div class="what">Tier 3 &middot; CONTAINED-style &middot; built by the young people themselves</div>
+          </td>
+          <td>One walk-through container per anchor community, built by the young people of that anchor as paid service work. Scan-to-query the data spine inside the container.</td>
+          <td class="num">$420K</td>
+        </tr>
+        <tr class="total">
+          <td><strong>Three-year total</strong></td>
+          <td><em>Indicative allocations. Final per-tier numbers are confirmed line-by-line in the canonical proposal.</em></td>
+          <td class="num">$2.9M</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- COMPARE · the three options side by side -->
+<section class="section" style="background: var(--m-cream-2)" id="compare">
+  <div class="container">
+    <div class="container-narrow" style="padding:0;margin-bottom:24px">
+      <div class="eyebrow mb-3">Compare</div>
+      <h2 style="font-size:32px;font-weight:500;line-height:1.15;margin:0 0 12px">What each option funds. What each leaves to assemble.</h2>
+      <p style="font-size:14px;line-height:1.65;color:var(--m-stone);margin:0">The honest picture. Option 1 is the cleanest because everything is funded together. Options 2 and 3 still ship something real, just with different downstream choices.</p>
+    </div>
+
+    <table class="compare-table" style="width:100%;background:white;border-radius:10px;overflow:hidden;box-shadow:0 4px 14px rgba(46,21,64,0.04)">
+      <thead>
+        <tr>
+          <th style="width:30%">What gets funded</th>
+          <th>Option 1 &middot; $2.9M</th>
+          <th>Option 2 &middot; $780K Y1</th>
+          <th>Option 3 &middot; ~$520K Centre</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Circle One &middot; data spine</strong> (CivicGraph + JusticeHub + the Australian Living Map of Alternatives (ALMA) + AI agent tools)</td><td><span class="yes">Yes &middot; 3 years</span></td><td><span class="yes">Yes &middot; Year 1</span></td><td><span class="yes">Yes &middot; 3 years</span></td></tr>
+        <tr><td><strong>Circle Two &middot; the seven anchors</strong> (community partnerships, storytelling team)</td><td><span class="yes">Yes &middot; all 7, all 3 years</span></td><td><span class="partial">Year 1 only &middot; subject to renewal</span></td><td><span class="no">No &middot; assemble separately</span></td></tr>
+        <tr><td><strong>Circle Three &middot; ecosystem + artefact</strong> (international tour, documentary, library, journals, exhibition, installations)</td><td><span class="yes">Yes &middot; full delivery in 2028</span></td><td><span class="partial">Foundation laid &middot; full delivery contingent</span></td><td><span class="no">No &middot; assemble separately</span></td></tr>
+        <tr><td><strong>Minderoo on the artefact</strong> (cover, convening, framework launch)</td><td><span class="yes">Yes &middot; named on all three</span></td><td><span class="partial">Year 1 acknowledgement &middot; cover contingent</span></td><td><span class="partial">Centre acknowledgement only</span></td></tr>
+        <tr><td><strong>Right of first refusal on subsequent years</strong></td><td>n/a</td><td><span class="yes">Yes &middot; Y2 + Y3</span></td><td>n/a</td></tr>
+        <tr><td><strong>Coalition assembly required</strong></td><td><span class="yes">No &middot; one program</span></td><td><span class="partial">Y2&ndash;3 only</span></td><td><span class="no">Yes &middot; for Circles Two + Three</span></td></tr>
+      </tbody>
+    </table>
+
+    <p class="caption" style="margin-top:18px;text-align:center;max-width:680px;margin-left:auto;margin-right:auto"><span class="yes">Yes</span> = funded by this option. <span class="partial">Partial</span> = contingent on renewal or coalition. <span class="no">No</span> = ACT assembles funding from elsewhere.</p>
+  </div>
+</section>
+
+<!-- CONTEXT · CoLI grounding -->
+<section class="section" style="background: white" id="context">
+  <div class="container-narrow">
+    <div class="eyebrow mb-3">Context</div>
+    <h2 style="font-size:30px;font-weight:500;line-height:1.15;margin:0 0 16px">Three years of program costs less per year than detaining one child.</h2>
+    <p style="font-size:15px;line-height:1.7;color:var(--m-stone);margin:0 0 14px">One year of detention for a single young person costs <strong>$1.33M</strong> (ROGS 2024&ndash;25 national average). Australia&rsquo;s late-intervention bill is <strong>$22.3 billion</strong> a year and climbing at <strong>7.7%</strong> annually, more than double inflation. Child Protection alone consumes <strong>$10.2B</strong>. The number of young people in detention is falling while the cost per person per day is rising <strong>50%</strong>.</p>
+    <p style="font-size:15px;line-height:1.7;color:var(--m-stone);margin:0">This three-year program costs less per year than detaining one child. It is designed to make the case for not detaining the next thousand. Source: <em>Cost of Late Intervention 2024</em>, The Front Project, supported by Minderoo Foundation. <a href="https://www.thefrontproject.org.au">thefrontproject.org.au</a></p>
+  </div>
+</section>
+
+</main>
+
+<footer class="section" style="background: var(--m-stone); color: var(--m-cream)">
+  <div class="container-narrow" style="text-align:center">
+    <div class="eyebrow mb-3" style="color:rgba(250,245,236,0.65)">Next</div>
+    <h2 style="font-size:30px;font-weight:500;line-height:1.2;margin:0 0 22px;color:var(--m-cream)">Lucy, the easiest yes is Option 1. Shall we take the next meeting?</h2>
+    <div class="cta-row" style="justify-content:center">
+      <a href="mailto:benjamin@act.place?subject=The%20Three%20Circles%20%C2%B7%20next%20meeting" class="btn" style="background:var(--m-gold);color:var(--m-stone)">Email Ben Knight</a>
+      <a href="/minderoo-pitch.html" class="btn" style="background:transparent;color:var(--m-cream);border:1px solid rgba(250,245,236,0.4)">Back to the pitch</a>
+      <a href="https://wiki.act.place/projects/justicehub/three-circles" class="btn" style="background:transparent;color:var(--m-cream);border:1px solid rgba(250,245,236,0.4)">Full proposal</a>
+    </div>
+    <p class="caption" style="margin-top:30px;color:rgba(250,245,236,0.55);max-width:560px;margin-left:auto;margin-right:auto">Indicative breakdowns shown for funder visibility. Final per-line allocations confirmed in the canonical proposal at the wiki link above.</p>
+  </div>
+</footer>
+
+</body>
+</html>
