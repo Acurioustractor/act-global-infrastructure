@@ -1,8 +1,8 @@
 {
   "$schema": "wiki/narrative/funders.schema.json",
   "description": "Active and prospect funders, with the narrative claims that should lead any pitch to them. Used by narrative-draft.mjs --funder <slug> to assemble pitch briefs targeted to the right thesis.",
-  "version": 1,
-  "updated": "2026-04-09",
+  "version": 2,
+  "updated": "2026-04-24",
   "funders": {
     "minderoo": {
       "name": "Minderoo Foundation",
@@ -62,7 +62,7 @@
     },
     "paul-ramsay-foundation": {
       "name": "Paul Ramsay Foundation",
-      "stage": "cold",
+      "stage": "warm",
       "ask_amount_aud": null,
       "deadline": null,
       "primary_contact": "William Frazer",
@@ -76,7 +76,7 @@
       "claims_to_avoid": [
         "contained:claim-built-by-hand"
       ],
-      "framing_notes": "PRF thinks deeply about systems change. Lead with the cost evidence, then the verified-intervention engine (ALMA), then the platform stack as the system-change lever. PRF will be skeptical of 'two people built it with hands' — for them, lead with infrastructure, not artisanship."
+      "framing_notes": "Stage upgraded from cold 2026-04-24: Xero shows 2 paid invoices (small, $7,469 total) and William Frazer is tagged partner+justicehub in GHL — relationship is warmer than cold. Last comm 80 days ago (hello@ address, early Feb). PRF thinks deeply about systems change. Lead with the cost evidence, then the verified-intervention engine (ALMA), then the platform stack as the system-change lever. PRF will be skeptical of 'two people built it with hands' — for them, lead with infrastructure, not artisanship."
     },
     "tim-fairfax": {
       "name": "Tim Fairfax Family Foundation",
@@ -150,7 +150,7 @@
         "empathy-ledger:claim-the-loop-is-the-product"
       ],
       "claims_to_avoid": [],
-      "framing_notes": "JCF has 5 years remaining in their mandate ('15 Down — 5 To Go'). They want impact storytelling for fundraising / wind-down. The Tanzania + Rwanda Africa visit (Sep 2025) is the entry point. Pitch as a multi-year retainer ($40-80K/yr) — not a project grant. We deliver the platform, the editorial pipeline, the annual reports, and the consent-respecting story library across all JCF beneficiaries. The world tour visits the African beneficiaries directly — fieldwork at no marginal cost."
+      "framing_notes": "UNVERIFIED STAGE as of 2026-04-24: wiki claims active-partner + $60K but Xero has no JCF invoice. Validate the relationship status with Nic before drafting from this entry. If confirmed, keep framing below. JCF has 5 years remaining in their mandate ('15 Down — 5 To Go'). They want impact storytelling for fundraising / wind-down. The Tanzania + Rwanda Africa visit (Sep 2025) is the entry point. Pitch as a multi-year retainer ($40-80K/yr) — not a project grant. We deliver the platform, the editorial pipeline, the annual reports, and the consent-respecting story library across all JCF beneficiaries. The world tour visits the African beneficiaries directly — fieldwork at no marginal cost."
     },
     "atlassian-foundation": {
       "name": "Atlassian Foundation",
@@ -170,11 +170,11 @@
       "framing_notes": "Atlassian Foundation funds platform-shaped impact work. Lead with the technical architecture (one database, four layers, 100K+ entities) and the R&D claim of the world tour as a 12-context sovereignty stress test. They will recognise the patterns. World tour funder sponsorship pitch ($150-400K) belongs here."
     },
     "snow-foundation": {
-      "name": "Snow Foundation",
-      "stage": "warm",
-      "ask_amount_aud": 200000,
+      "name": "The Snow Foundation",
+      "stage": "active-partner",
+      "ask_amount_aud": null,
       "deadline": null,
-      "primary_contact": null,
+      "primary_contact": "Sally Grimsley-Ballard / Alexandra Lagelee Kean",
       "themes": ["systems-change", "indigenous-led", "rural-regional"],
       "tone": "values-driven, community-respectful",
       "claims_to_lead_with": [
@@ -183,7 +183,7 @@
         "goods-on-country:claim-not-charity-its-enterprise"
       ],
       "claims_to_avoid": [],
-      "framing_notes": "Snow already in network per ACT global infra contacts. Warm intro available. Tour funder sponsorship candidate. Lead with the closed-loop framing and the regional / Indigenous-led work."
+      "framing_notes": "Active multi-tranche partner. Xero shows $402,930 received + $132,000 AUTHORISED across 7 tranches over 14 months (INV-0321 $132K currently outstanding 37d). No single canonical ask — relationship funds in rolling tranches on project ACT-GD. Last comm 10 days ago, warm. Next action (only-Ben): call Sally or Alexandra to confirm INV-0321 payment AND flag Pty migration — from 1 July 2026 tranches invoice to A Curious Tractor Pty Ltd ACN 697 347 676. Tour funder sponsorship candidate. Lead with the closed-loop framing and the regional / Indigenous-led work."
     },
     "patagonia": {
       "name": "Patagonia Environmental + Social Initiatives",
@@ -230,6 +230,94 @@
       ],
       "claims_to_avoid": [],
       "framing_notes": "Australian B-Corp that built a business out of dignified essentials. Goods on Country is a sister category. Tour co-sponsor candidate. Their 50% donation model maps to the Goods enterprise model conceptually."
+    },
+    "centrecorp": {
+      "name": "Centrecorp Foundation",
+      "stage": "active-partner",
+      "ask_amount_aud": 84700,
+      "deadline": null,
+      "primary_contact": null,
+      "themes": ["indigenous-led", "central-australia", "community-enterprise"],
+      "tone": "community-respectful, place-based, evidence-rich",
+      "claims_to_lead_with": [
+        "goods-on-country:claim-not-charity-its-enterprise",
+        "goods-on-country:claim-unit-economics-must-be-real",
+        "goods-on-country:claim-handover-is-the-test"
+      ],
+      "claims_to_avoid": [],
+      "framing_notes": "Active partner via Goods on Country Production Plant. Tranche 1 ($85,712) paid Nov 2025. Tranche 2 (INV-0314 $84,700) currently DRAFT 70 days old pending only-Ben decision — send / void / reissue-from-Pty post-cutover. Named in Goods → Minderoo pitch as live pipeline. See thoughts/shared/drafts/centrecorp-feb-2026-invoice-forensics.md for history. Lead with completed-plant evidence and unit economics, not a fresh pitch — relationship is built."
+    },
+    "rotary-eclub-outback": {
+      "name": "Rotary eClub of Outback Australia",
+      "stage": "ask-pending",
+      "ask_amount_aud": 82500,
+      "deadline": null,
+      "primary_contact": null,
+      "themes": ["regional", "community-led"],
+      "tone": "community-respectful, grassroots",
+      "claims_to_lead_with": [],
+      "claims_to_avoid": [],
+      "framing_notes": "BLOCKED awaiting only-Ben decision: INV-0222 $82,500 AUTHORISED 2025-04-10 is 380 days unpaid on the sole trader's books. No GHL comm history. Decision needed before 30 June 2026 cutover — chase for payment or write off as bad debt on sole trader's FY26 close-out BAS. GHL stub 'Invoicing Rotary eClub Outback Australia' has no named human — if someone from Rotary emails, the CRM won't route. Do not draft a fresh pitch until the payment disposition is resolved."
+    },
+    "vincent-fairfax": {
+      "name": "Vincent Fairfax Family Foundation",
+      "stage": "lapsed",
+      "ask_amount_aud": null,
+      "deadline": null,
+      "primary_contact": null,
+      "themes": [],
+      "tone": null,
+      "claims_to_lead_with": [],
+      "claims_to_avoid": [],
+      "framing_notes": "DATA-ONLY STUB added 2026-04-24: Xero shows $50,000 paid historically, no current GHL comm. Not to be confused with Tim Fairfax Family Foundation (tim-fairfax slug) — separate foundation. Needs Nic-verified narrative review before pitch-assembly. Until then, narrative-draft.mjs --funder vincent-fairfax will error — that's intentional."
+    },
+    "social-impact-hub": {
+      "name": "Social Impact Hub Foundation",
+      "stage": "lapsed",
+      "ask_amount_aud": null,
+      "deadline": null,
+      "primary_contact": null,
+      "themes": [],
+      "tone": null,
+      "claims_to_lead_with": [],
+      "claims_to_avoid": [],
+      "framing_notes": "DATA-ONLY STUB added 2026-04-24: Xero shows $26,730 paid historically, no current GHL comm. Needs Nic-verified narrative review before pitch-assembly."
+    },
+    "state-qld-dfsdscs": {
+      "name": "State of Queensland (DFSDSCS)",
+      "stage": "lapsed",
+      "ask_amount_aud": null,
+      "deadline": null,
+      "primary_contact": null,
+      "themes": ["government", "queensland"],
+      "tone": null,
+      "claims_to_lead_with": [],
+      "claims_to_avoid": [],
+      "framing_notes": "DATA-ONLY STUB added 2026-04-24: Qld Department of Families, Seniors, Disability Services and Child Safety. Xero shows $22,000 paid historically. Government grant, not a philanthropic funder — route through procurement / gov-grants pipeline if re-engaging, not funder-narrative tooling."
+    },
+    "streetsmart-australia": {
+      "name": "StreetSmart Australia",
+      "stage": "active-partner",
+      "ask_amount_aud": null,
+      "deadline": null,
+      "primary_contact": "Isabella / Alan",
+      "themes": ["homelessness", "community-led"],
+      "tone": "warm, grassroots",
+      "claims_to_lead_with": [],
+      "claims_to_avoid": [],
+      "framing_notes": "DATA-ONLY STUB added 2026-04-24: Xero shows $9,400 paid, GHL shows recent comm 26 days ago (also 105-day prior thread). Active relationship but narrative not yet captured — needs Nic/Ben context on what ACT delivers for StreetSmart before claims can be populated."
+    },
+    "westpac-scholars-trust": {
+      "name": "Westpac Scholars Trust",
+      "stage": "lapsed",
+      "ask_amount_aud": null,
+      "deadline": null,
+      "primary_contact": null,
+      "themes": [],
+      "tone": null,
+      "claims_to_lead_with": [],
+      "claims_to_avoid": [],
+      "framing_notes": "DATA-ONLY STUB added 2026-04-24: Xero shows $3,080 paid historically, no current GHL comm. Small historical amount. Needs Nic-verified narrative review before pitch-assembly."
     }
   },
   "stages": {

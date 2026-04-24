@@ -24,6 +24,10 @@ This folder is the **second-brain compounding loop**. Per the [Karpathy LLM know
 
 ## Synthesis articles
 
+- [[entity-migration-truth-state-2026-04-24|Entity migration truth-state — 67 days to cutover, what's done vs open]] — 2026-04-24 · third artefact of the [[../../thoughts/shared/plans/act-alignment-loop|ACT Alignment Loop]]
+
+- [[project-truth-state-2026-04-24|Project truth-state — 74 codes × 4 sources, who's real]] — 2026-04-24 · second artefact of the [[../../thoughts/shared/plans/act-alignment-loop|ACT Alignment Loop]]
+
 - [[funder-alignment-2026-04-24|Funder alignment — where wiki plans, DB reality, and in-flight work diverge]] — 2026-04-24 · first artefact of the [[../../thoughts/shared/plans/act-alignment-loop|ACT Alignment Loop]]
 
 - [[how-does-the-tractorpedia-second-brain-pattern-compound-knowledge-over-time|How does the Tractorpedia second-brain pattern compound knowledge over time?]] — 2026-04-07
