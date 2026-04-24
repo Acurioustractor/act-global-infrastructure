@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-19T20:43:09.139Z",
+  "generated_at": "2026-04-24T02:15:12.974Z",
   "supabase": "https://tednluwflfhxyucgwigh.supabase.co",
   "verdict": "degraded",
   "summary": {
@@ -75,8 +75,8 @@
   },
   "orphan_community_orgs": {
     "sampled_entities": 500,
-    "orphans_in_sample": 498,
-    "orphan_percentage": 100,
+    "orphans_in_sample": 489,
+    "orphan_percentage": 98,
     "note": "Community-controlled Indigenous corps in CivicGraph with zero ALMA interventions. Potential authoring gaps."
   }
 }
