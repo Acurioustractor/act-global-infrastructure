@@ -40,7 +40,7 @@ const CATEGORY_ACCOUNT: Record<string, string> = {
 
 const R_D_CATEGORIES = new Set(['Software & Subscriptions', 'Professional Services'])
 
-function inferRule(vendor: string, subject: string): Omit<Suggestion, 'vendor_name' | 'receipt_count' | 'total_amount' | 'sample_subjects'> {
+function inferRule(vendor: string, subject: string): Omit<Suggestion, 'vendor_name' | 'receipt_count' | 'total_amount' | 'sample_subjects' | 'first_seen' | 'last_seen'> {
   const v = (vendor || '').toLowerCase()
   const s = (subject || '').toLowerCase()
   const context = v + ' ' + s
