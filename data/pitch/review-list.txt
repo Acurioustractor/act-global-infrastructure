@@ -1,0 +1,804 @@
+==============================================================================
+MINDEROO PITCH — STORYTELLER REVIEW LIST
+Generated 2026-04-22.  Purpose: Ben approves each entry before it lands on the pitch page.
+Filter: is_public=true AND (requires_elder_approval=false OR elder_approved_at IS NOT NULL).
+==============================================================================
+
+
+############################################################
+# Oonchiumpa  (Mparntwe / Alice Springs, NT)
+# 4 pitch-eligible stories out of 6 total
+############################################################
+
+[oonchiumpa-01]  Oonchiumpa: What Happens When Community Leads
+  storyteller : Benjamin Knight · Whatever · Oonchiumpa
+  avatar      : https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/media/avatars/generated/8b5f3aa0-5955-43ac-8442-37e48e7fc810.svg
+  elder status: no elder-approval required
+  themes      : (none)
+  story id    : 6ac1fc12-f6fa-4dd6-930b-9159f692b04d
+  pullquote   : There is a version of this story told through numbers. It has its place.
+
+[oonchiumpa-02]  Bringing Kids Back to Country
+  storyteller : Kristy Bloomfield · Aboriginal Australian - Traditional Owner (Bloomfield and Liddle families) · Oonchiumpa
+  avatar      : https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/profile-images/storytellers/kristy_bloomfield.jpg
+  elder status: no elder-approval required
+  themes      : on-country, cultural-healing, youth-diversion, elders
+  story id    : 128e7ad5-b0c7-4b0d-8ada-878e0d8f0a03
+  pullquote   : Last month we took eight young people out to Atnarpa for three days on Country.
+
+[oonchiumpa-03]  Creating Our Own History
+  storyteller : Kylie Bloomfield · Aboriginal · Oonchiumpa
+  avatar      : https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/media/d0a162d2-282e-4653-9d12-aa934c9dfa4e/1770668803021_20251107-1E5A6052.jpg
+  elder status: no elder-approval required
+  themes      : Connection to Country, Intergenerational Enterprise, Truth Telling, Youth Empowerment, Living in Two Worlds
+  story id    : fa2c44c1-0016-4118-a469-f2288d2df876
+  pullquote   : Kylie Bloomfield speaks powerfully about creating new history on ancestral land. Welcoming
+                school groups, building intergenerational enterprise, and watching her
+                father see the family homestead restored.
+
+[oonchiumpa-04]  Coming Home to Love's Creek
+  storyteller : Henry Bloomfield · Aboriginal Australian (Ross River) · Oonchiumpa
+  avatar      : https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/media/d0a162d2-282e-4653-9d12-aa934c9dfa4e/1770667725446_20251103-1E5A5101.jpg
+  elder status: no elder-approval required
+  themes      : Connection to Country, Family Legacy, Intergenerational Wealth, Cultural Continuity, Coming Home
+  story id    : 96730d82-4c6c-45df-bca4-2a74b3e56ddb
+  pullquote   : Henry Bloomfield, a 67-year-old Elder, shares the multi-generational story of the
+                Bloomfield family's deep connection to Love's Creek station in Central
+                Australia.
+
+
+############################################################
+# Palm Island Community Company  (Palm Island, QLD)
+# 76 pitch-eligible stories out of 236 total
+############################################################
+
+[picc-01]  Walking Country Together: Palm Island Elders Journey to Hull River
+  storyteller : Allan Palm Island · Manbarra, Wulgurukaba · Palm Island · Palm Island Community Company
+  avatar      : https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/media/d0a162d2-282e-4653-9d12-aa934c9dfa4e/1775114118938_20251216-1E5A8879.jpg
+  elder status: no elder-approval required
+  themes      : (none)
+  story id    : 343a941c-dd4e-4026-9320-d834fbcafd0b
+  pullquote   : Overview In 2024, members of the Palm Island Elders Advisory Group made a significant
+                journey from Palm Island through Townsville and Ingham to Hull River in
+                the Mission Beach region.
+
+[picc-02]  Elder Ethel Robinson: Memories of Palm Island and Ancestral Ties
+  storyteller : Aunty Ethel Robertson · Aboriginal Australian · Palm Island · Palm Island Community Company
+  avatar      : https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/media/d0a162d2-282e-4653-9d12-aa934c9dfa4e/1775115007139_20251216-1E5A8914.jpg
+  elder status: no elder-approval required
+  themes      : (none)
+  story id    : 266008a8-1b6c-4d24-8aa1-30c91e1ea364
+  pullquote   : Elder Ethel Taylor Robinson, at 78 years old, stands as a pillar of wisdom and resilience
+                within the Palm Island Aboriginal Community.
+
+[picc-03]  Elder Allan: Memories of Family and Cultural Roots
+  storyteller : Allan Palm Island · Manbarra, Wulgurukaba · Palm Island · Palm Island Community Company
+  avatar      : https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/media/d0a162d2-282e-4653-9d12-aa934c9dfa4e/1775114118938_20251216-1E5A8879.jpg
+  elder status: no elder-approval required
+  themes      : (none)
+  story id    : 3f6a8b14-b38e-4526-934e-4bb11e3830de
+  pullquote   : Elder Allan reflects on his childhood years, growing up in a time of change and continuity
+                on Palm Island.
+
+[picc-04]  Elder Iris: A Legacy of Resilience and Family
+  storyteller : Iris · Bwgcolman, Badu Island · Palm Island · Palm Island Community Company
+  avatar      : https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/media/d0a162d2-282e-4653-9d12-aa934c9dfa4e/1770668087607_20250522-IMG_2853.jpg
+  elder status: no elder-approval required
+  themes      : (none)
+  story id    : 329cb894-a364-4266-9681-4ba2a0055c06
+  pullquote   : Iris Forfoot, a member of the Palm Island Aboriginal Community, recounts a poignant
+                chapter from her family's history, encapsulating the spirit of resilience
+                and kinship.
+
+[picc-05]  Building a Legacy: The Palm Island Community Company
+  storyteller : Rachel Atkinson · Yorta Yorta · Palm Island · Palm Island Community Company
+  avatar      : https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/profile-images/storytellers/rachel_atkinson.jpg
+  elder status: no elder-approval required
+  themes      : (none)
+  story id    : 093202fe-a899-412b-b909-0eab6c16831e
+  pullquote   : Rachel Atkinson, the CEO of the Palm Island Community Company, has spent over 17 years
+                dedicated to transforming the community through sustainable models of
+                care.
+
+[picc-06]  Rebuilding Hope on Palm Island: A Community's Resilience
+  storyteller : Haley Wetzel · Aboriginal Australian · Palm Island · Palm Island Community Company
+  avatar      : https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/profile-images/storytellers/haley_wetzel.jpg
+  elder status: no elder-approval required
+  themes      : (none)
+  story id    : 89f89276-79f2-45e8-a206-7a59723d5048
+  pullquote   : The Palm Island Child and Family Center stands as a beacon of hope and resilience for the
+                community, especially after the devastating storm that left the facility
+                inoperable.
+
+[picc-07]  Elder's Pride: Welcoming Palm Island's Future
+  storyteller : Rachel Atkinson · Yorta Yorta · Palm Island · Palm Island Community Company
+  avatar      : https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/profile-images/storytellers/rachel_atkinson.jpg
+  elder status: no elder-approval required
+  themes      : (none)
+  story id    : a849e3c2-e5ee-4804-bf11-1e0fcbe38564
+  pullquote   : On a day marked by the resilience of the Palm Island Aboriginal Community, families
+                gathered from far and wide, defying the weather, to celebrate a
+                cornerstone event at the Palm Island Early Childhood Center.
+
+[picc-08]  Growing Up on Palm Island: A Journey of Family and Culture
+  storyteller : Allan Palm Island · Manbarra, Wulgurukaba · Palm Island · Palm Island Community Company
+  avatar      : https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/media/d0a162d2-282e-4653-9d12-aa934c9dfa4e/1775114118938_20251216-1E5A8879.jpg
+  elder status: no elder-approval required
+  themes      : (none)
+  story id    : 6945ea0f-53a6-4232-9528-a5abe1f8a600
+  pullquote   : Allan-1's story is a vibrant tapestry of memories from his formative years on Palm Island,
+                where family, culture, and community were tightly woven together.
+
+[picc-09]  Elder's Journey: Preserving the Past for the Future
+  storyteller : Rangers and Elders Conversation · Aboriginal Australian · Palm Island · Palm Island Community Company
+  avatar      : https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/profile-images/storytellers/rangers_and_elders_conversation.jpg
+  elder status: no elder-approval required
+  themes      : (none)
+  story id    : 544f8910-1781-4dad-9ed7-73408246a844
+  pullquote   : The community on Palm Island is at a crossroads, as the last of their elders has passed,
+                leaving a profound gap in leadership and cultural transmission.
+
+[picc-10]  Elder Frank Anderson: Memories of Resilience on Palm Island
+  storyteller : Uncle Frank Daniel Landers · Aboriginal, Palm Island · Palm Island · Palm Island Community Company
+  avatar      : https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/media/d0a162d2-282e-4653-9d12-aa934c9dfa4e/1775115444540_20251216-1E5A8934.jpg
+  elder status: no elder-approval required
+  themes      : (none)
+  story id    : 785aa214-6da9-4955-9f6e-10c84871c653
+  pullquote   : Elder Frank Anderson recalls his early life on Palm Island with a mixture of nostalgia and
+                resilience.
+
+[picc-11]  Elder Marjorie Burns: Memories of Resilience and Heritage
+  storyteller : Marjoyie Burns · Aboriginal heritage, Palm Island · Palm Island · Palm Island Community Company
+  avatar      : https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/media/d0a162d2-282e-4653-9d12-aa934c9dfa4e/1775115408529_20251216-1E5A8907.jpg
+  elder status: no elder-approval required
+  themes      : (none)
+  story id    : 815c4c42-6b82-4347-969f-41e966709b77
+  pullquote   : Elder Marjorie Burns shares a poignant story of her childhood on Palm Island.
+
+[picc-12]  Elder Frank Anderson: Growing Up on Palm Island
+  storyteller : Uncle Frank Daniel Landers · Aboriginal, Palm Island · Palm Island · Palm Island Community Company
+  avatar      : https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/media/d0a162d2-282e-4653-9d12-aa934c9dfa4e/1775115444540_20251216-1E5A8934.jpg
+  elder status: no elder-approval required
+  themes      : (none)
+  story id    : 1bfa5841-d491-492f-9ed3-3b5de02198be
+  pullquote   : Elder Frank Anderson's story is a testament to resilience in the face of challenge and
+                change.
+
+[picc-13]  I Was Safe, But Others Went Under
+  storyteller : Elders Group · Aboriginal · Palm Island · Palm Island Community Company
+  avatar      : https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/profile-images/storytellers/elders_group.jpg
+  elder status: no elder-approval required
+  themes      : (none)
+  story id    : 2e18f685-2e83-4486-b6bf-070d11740efe
+  pullquote   : Craig: ‘I Was Safe, But Others Went Under === [00:00:00] That's good point.
+
+[picc-14]  Elders Speak: "We Should Have Been Consulted"
+  storyteller : Elders Group · Aboriginal · Palm Island · Palm Island Community Company
+  avatar      : https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/profile-images/storytellers/elders_group.jpg
+  elder status: no elder-approval required
+  themes      : (none)
+  story id    : 98206932-1d6d-47ca-a9b2-a95ec0b919b7
+  pullquote   : Ethel, Frank, Elsa, and other elders gathered to discuss the storm's devastating impacts:
+                severe flooding, power outages lasting days, barge delays cutting off
+                supplies, critical food shortages, and extensive palm tree d
+
+[picc-15]  No One Will Do It for You: Purpose, Painting and Men’s Business
+  storyteller : Men's Group · Bulgurmen · Palm Island · Palm Island Community Company
+  avatar      : https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/profile-images/storytellers/men_s_group.jpg
+  elder status: no elder-approval required
+  themes      : (none)
+  story id    : 0acdc72f-b10e-474a-8f1c-946fe2edd7f6
+  pullquote   : No One Will Do It for You: Purpose, Painting and Men’s Business === [00:00:00] Michael,
+                there's two mic.
+
+[picc-16]  From Vouchers to Independence: Changing Our Attitude as Men
+  storyteller : Men's Group · Bulgurmen · Palm Island · Palm Island Community Company
+  avatar      : https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/profile-images/storytellers/men_s_group.jpg
+  elder status: no elder-approval required
+  themes      : (none)
+  story id    : 8594856f-1719-4d9e-abad-61394a8a471b
+  pullquote   : From Vouchers to Independence: Changing Our Attitude as Men === [00:00:00] And that's in
+                there for money every fortnight.
+
+[picc-17]  Men's Group Leader - What Gets Us Out of Bed: Choosing Our Own Day
+  storyteller : Men's Group · Bulgurmen · Palm Island · Palm Island Community Company
+  avatar      : https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/profile-images/storytellers/men_s_group.jpg
+  elder status: no elder-approval required
+  themes      : (none)
+  story id    : b4e8e357-11e5-4a74-9fc1-b237bdb56842
+  pullquote   : Men's Group Leader - What Gets Us Out of Bed: Choosing Our Own Day === [00:00:00] Some
+                people get up.
+
+[picc-18]  Women's Healing Service: Restructured for Better Support
+  storyteller : Rachel Atkinson · Yorta Yorta · Palm Island · Palm Island Community Company
+  avatar      : https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/profile-images/storytellers/rachel_atkinson.jpg
+  elder status: no elder-approval required
+  themes      : (none)
+  story id    : 326478db-864d-4bf5-98fe-5bd90de210de
+  pullquote   : PICC has remodelled its Women's Healing Service to provide better services to women
+                resident, or at risk of being resident, in the Townsville Women's
+                Correctional Centre.
+
+[picc-19]  We Look After Each Other: Palm Island Stories From the Flood
+  storyteller : Elders Group · Aboriginal · Palm Island · Palm Island Community Company
+  avatar      : https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/profile-images/storytellers/elders_group.jpg
+  elder status: no elder-approval required
+  themes      : (none)
+  story id    : fe63165c-fdcf-4f3d-9e32-97e2b7f20c2d
+  pullquote   : We Look After Each Other: Palm Island Stories From the Flood === [00:00:00] That rain.
+
+[picc-20]  Playgroup Closed for Weeks: Building Flooded
+  storyteller : Playgroup Staff · Palm Island community · Palm Island · Palm Island Community Company
+  avatar      : https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/profile-images/storytellers/playgroup_staff.jpg
+  elder status: no elder-approval required
+  themes      : (none)
+  story id    : a586a891-8ef2-42d5-ab95-a3370d80a883
+  pullquote   : Jane, Sakia, Gary, Talitha, and Alice from the playgroup describe the devastating flooding
+                that closed their early learning services for 2-3 weeks.
+
+[picc-21]  Justice Group
+  storyteller : Elders Group · Aboriginal · Palm Island · Palm Island Community Company
+  avatar      : https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/profile-images/storytellers/elders_group.jpg
+  elder status: no elder-approval required
+  themes      : (none)
+  story id    : dc59ab25-d28e-4763-b278-915aa7e3d1e1
+  pullquote   : Justice Group === [00:00:00] Speaker 25: You Right. Just, yeah, I know, I understand.
+
+[picc-22]  Keeping the Stories Alive: A Yarn at the Knowledge Centre
+  storyteller : Elders Group · Aboriginal · Palm Island · Palm Island Community Company
+  avatar      : https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/profile-images/storytellers/elders_group.jpg
+  elder status: no elder-approval required
+  themes      : (none)
+  story id    : c454fbeb-2b8f-4531-8da8-24ecfdd8a20f
+  pullquote   : Keeping the Stories Alive: A Yarn at the Knowledge Centre === [00:00:00] I didn't need to
+                go anywhere, so it really didn't matter to me.
+
+[picc-23]  Elder Allan: A Journey to Revisit Ancestral Pain
+  storyteller : Allan Palm Island · Manbarra, Wulgurukaba · Palm Island · Palm Island Community Company
+  avatar      : https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/media/d0a162d2-282e-4653-9d12-aa934c9dfa4e/1775114118938_20251216-1E5A8879.jpg
+  elder status: no elder-approval required
+  themes      : (none)
+  story id    : ce11430e-f2bc-4941-ba3d-dbf98afa71b7
+  pullquote   : Elder Allan, a member of the Palm Island Aboriginal Community, embarks on a poignant
+                journey to Mission Beach.
+
+[picc-24]  Elders - Rain, Roads and No Voice
+  storyteller : Elders Group · Aboriginal · Palm Island · Palm Island Community Company
+  avatar      : https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/profile-images/storytellers/elders_group.jpg
+  elder status: no elder-approval required
+  themes      : (none)
+  story id    : 52a5651c-ed15-4302-b82c-afd1ecf63171
+  pullquote   : Elders - Rain, Roads and No Voice === [00:00:00] Put it, put it down here.
+
+[picc-25]  Power out
+  storyteller : Elders Group · Aboriginal · Palm Island · Palm Island Community Company
+  avatar      : https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/profile-images/storytellers/elders_group.jpg
+  elder status: no elder-approval required
+  themes      : (none)
+  story id    : 8da59671-39e6-42fd-9a72-f9c568cce336
+  pullquote   : Ruby - Power out === [00:00:00] About Palm Island, you know? Yeah.
+
+[picc-26]  From Floods to Forty Tribes: Yarning About Healing, History and Recovery
+  storyteller : Elders Group · Aboriginal · Palm Island · Palm Island Community Company
+  avatar      : https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/profile-images/storytellers/elders_group.jpg
+  elder status: no elder-approval required
+  themes      : (none)
+  story id    : ff76b4e3-c740-48ee-98ce-3b1c13b1c5ef
+  pullquote   : From Floods to Forty Tribes: Yarning About Healing, History and Recovery === [00:00:00]
+                And, um, oh yeah, yeah, yeah.
+
+[picc-27]  Daycare Workers - Keeping Early Childhood Going After the Storm
+  storyteller : Childcare workers · Palm Island · Palm Island Community Company
+  avatar      : https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/profile-images/storytellers/childcare_workers.jpg
+  elder status: no elder-approval required
+  themes      : (none)
+  story id    : 80f283de-6f78-471a-a449-ca6190aec06b
+  pullquote   : Daycare Workers - Keeping Early Childhood Going After the Storm === [00:00:00] Are we
+                gonna talk specific about the building?
+
+[picc-28]  Food, Water and Supply Stress
+  storyteller : Elders Group · Aboriginal · Palm Island · Palm Island Community Company
+  avatar      : https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/profile-images/storytellers/elders_group.jpg
+  elder status: no elder-approval required
+  themes      : (none)
+  story id    : e7cc66b2-5588-4de6-8f68-441bb08f85cf
+  pullquote   : Food, Water and Supply Stress === [00:00:00] Usually a letter, a letterhead, and it's
+                like, I elder blah, support this program, blah.
+
+[picc-29]  24 Hours Without Power
+  storyteller : Elders Group · Aboriginal · Palm Island · Palm Island Community Company
+  avatar      : https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/profile-images/storytellers/elders_group.jpg
+  elder status: no elder-approval required
+  themes      : (none)
+  story id    : 4b899fc0-cf59-42a8-9335-6fe575e94b13
+  pullquote   : Rodney, Daniel, George & Carlos: 24 Hours Without Power === [00:00:00] What was that like
+                for you?
+
+[picc-30]  Safe Haven: Supporting Our Young People
+  storyteller : Jeanie Sam · Aboriginal Australian · Palm Island · Palm Island Community Company
+  avatar      : https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/profile-images/storytellers/jeanie_sam.jpg
+  elder status: no elder-approval required
+  themes      : (none)
+  story id    : 1527d9f1-961c-4f73-8735-909f0d5466f6
+  pullquote   : The Safe Haven continues to be a vital service for Palm Island, providing safe
+                accommodation and support for children and young people who need a safe
+                place to stay.
+
+[picc-31]  58 Years on Palm: ‘I’ve Never Seen Rain Like This
+  storyteller : Elders Group · Aboriginal · Palm Island · Palm Island Community Company
+  avatar      : https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/profile-images/storytellers/elders_group.jpg
+  elder status: no elder-approval required
+  themes      : (none)
+  story id    : c0591977-d7a8-4003-bd48-70f9c87f014d
+  pullquote   : 58 Years on Palm: ‘I’ve Never Seen Rain Like This === [00:00:00] Oh, easy.
+
+[picc-32]  Ruby Sibley: Resilience in the Heart of Palm Island
+  storyteller : Ruby Sibley · Aboriginal, Palm Island · Palm Island · Palm Island Community Company
+  avatar      : https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/profile-images/storytellers/ruby_sibley.jpg
+  elder status: no elder-approval required
+  themes      : (none)
+  story id    : 23facabc-fd3f-4e0c-8125-ccd7d54f65fa
+  pullquote   : Ruby Sibley is an Aboriginal woman who has spent her entire life on Palm Island, a place
+                she describes with deep affection.
+
+[picc-33]  Elder Iris: A Journey of Resilience and Family Unity
+  storyteller : Iris · Bwgcolman, Badu Island · Palm Island · Palm Island Community Company
+  avatar      : https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/media/d0a162d2-282e-4653-9d12-aa934c9dfa4e/1770668087607_20250522-IMG_2853.jpg
+  elder status: no elder-approval required
+  themes      : (none)
+  story id    : 5512654c-84d6-424e-8746-b9b50de8d509
+  pullquote   : Elder Iris Forfoot shares a poignant narrative of her family's resilience and unity in the
+                face of hardship on Palm Island.
+
+[picc-34]  Bwgcolman Way: Community Control for Our Children
+  storyteller : Jeanie Sam · Aboriginal Australian · Palm Island · Palm Island Community Company
+  avatar      : https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/profile-images/storytellers/jeanie_sam.jpg
+  elder status: no elder-approval required
+  themes      : (none)
+  story id    : 47e5b429-bcce-4102-94ad-3f31dfedbd98
+  pullquote   : A major change to caring arrangements for vulnerable children is at last coming to Palm
+                Island through delegated authority.
+
+[picc-35]  Palm Island Digital Service Centre: A New Industry for Our Community
+  storyteller : Rachel Atkinson · Yorta Yorta · Palm Island · Palm Island Community Company
+  avatar      : https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/profile-images/storytellers/rachel_atkinson.jpg
+  elder status: no elder-approval required
+  themes      : (none)
+  story id    : b08b6692-7057-4d5d-ad9e-eb798fbd839e
+  pullquote   : The Palm Island Digital Service Centre opened in 2023, marking a significant milestone for
+                our community.
+
+[picc-36]  Rebuilding Hope: The Palm Island Child and Family Center
+  storyteller : Haley Wetzel · Aboriginal Australian · Palm Island · Palm Island Community Company
+  avatar      : https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/profile-images/storytellers/haley_wetzel.jpg
+  elder status: no elder-approval required
+  themes      : (none)
+  story id    : b4a3b7d4-1022-4d8d-b280-00588614d83c
+  pullquote   : In the close-knit Palm Island community, Hailey Jane Wetzel stands as a pillar of support
+                and resilience.
+
+[picc-37]  Elder Ethel: Memories of Palm Island and Family Legacy
+  storyteller : Aunty Ethel Robertson · Aboriginal Australian · Palm Island · Palm Island Community Company
+  avatar      : https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/media/d0a162d2-282e-4653-9d12-aa934c9dfa4e/1775115007139_20251216-1E5A8914.jpg
+  elder status: no elder-approval required
+  themes      : (none)
+  story id    : afc740e5-cc70-49fb-88a7-352b073b37f4
+  pullquote   : Elder Ethel Taylor Robinson, a revered member of the Palm Island community, shares a
+                poignant narrative that weaves her family's history with the broader story
+                of displacement and resilience.
+
+[picc-38]  Elder Allan: Celebrating New Beginnings on Palm Island
+  storyteller : Allan Palm Island · Manbarra, Wulgurukaba · Palm Island · Palm Island Community Company
+  avatar      : https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/media/d0a162d2-282e-4653-9d12-aa934c9dfa4e/1775114118938_20251216-1E5A8879.jpg
+  elder status: no elder-approval required
+  themes      : (none)
+  story id    : 585ef7de-c7d1-4956-9846-f15a502689a8
+  pullquote   : On a bright morning, the Palm Island community gathered to celebrate a new chapter in
+                their shared story.
+
+[picc-39]  Winnie Oba: A Journey of Roots and Resilience
+  storyteller : Winifred Obah · Aboriginal Australian · Palm Island · Palm Island Community Company
+  avatar      : https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/media/d0a162d2-282e-4653-9d12-aa934c9dfa4e/1775115466337_20251216-1E5A8891.jpg
+  elder status: no elder-approval required
+  themes      : (none)
+  story id    : dd991353-8b82-47f7-a1cf-ac336fb9c882
+  pullquote   : Winnie Oba, a cultural advisor from the Palm Island Aboriginal Community, shares a
+                heartfelt narrative of her familial roots and the resilience embedded in
+                her heritage.
+
+[picc-40]  We Didn’t Need Anything
+  storyteller : Elders Group · Aboriginal · Palm Island · Palm Island Community Company
+  avatar      : https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/profile-images/storytellers/elders_group.jpg
+  elder status: no elder-approval required
+  themes      : (none)
+  story id    : aff4ebf4-8444-443c-b346-123243fdcec7
+  pullquote   : Thomas - We Didn’t Need Anything === [00:00:00] Your house didn't leak or nothing?
+
+[picc-41]  Elder Winifred: A Journey Back to Mission Beach
+  storyteller : Winifred Obah · Aboriginal Australian · Palm Island · Palm Island Community Company
+  avatar      : https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/media/d0a162d2-282e-4653-9d12-aa934c9dfa4e/1775115466337_20251216-1E5A8891.jpg
+  elder status: no elder-approval required
+  themes      : (none)
+  story id    : 0782022e-7125-4f03-8008-8bc8b912d8a8
+  pullquote   : Elder Winifred Obar, a cultural advisor and a secretary for the elders advisory on Palm
+                Island, shares a heartfelt story of community effort and personal
+                connection as she reflects on the journey back to Mission Beach.
+
+[picc-42]  Resilience in the Wake of the Storm: Rebuilding Palm Island's Daycare
+  storyteller : Playgroup Staff · Palm Island community · Palm Island · Palm Island Community Company
+  avatar      : https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/profile-images/storytellers/playgroup_staff.jpg
+  elder status: no elder-approval required
+  themes      : (none)
+  story id    : d0b95d02-f353-45f2-9a04-7d5af242c8fe
+  pullquote   : In the heart of Palm Island, a story of resilience unfolds as community members strive to
+                restore their vital daycare facility after a devastating storm.
+
+[picc-43]  From Exemption Cards to Cyclones: Remembering, Surviving and Rebuilding on Palm
+  storyteller : Elders Group · Aboriginal · Palm Island · Palm Island Community Company
+  avatar      : https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/profile-images/storytellers/elders_group.jpg
+  elder status: no elder-approval required
+  themes      : (none)
+  story id    : edb8568e-1ac3-4d38-b40f-3723525d9d63
+  pullquote   : From Exemption Cards to Cyclones: Remembering, Surviving and Rebuilding on Palm ===
+                [00:00:00] Fires because it took bad or foot, whatever.
+
+[picc-44]   Two Different Judgements in Australia
+  storyteller : Elders Group · Aboriginal · Palm Island · Palm Island Community Company
+  avatar      : https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/profile-images/storytellers/elders_group.jpg
+  elder status: no elder-approval required
+  themes      : (none)
+  story id    : 72976e3e-e4f1-4b9e-8dca-4084c43328dd
+  pullquote   : Christopher - Two Different Judgements in Australia === [00:00:00] Yep.
+
+[picc-45]  Community Spirit Endures Through the Storm
+  storyteller : Patricia Doyle · Aboriginal Australian · Palm Island · Palm Island Community Company
+  avatar      : https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/profile-images/storytellers/patricia_doyle.jpg
+  elder status: no elder-approval required
+  themes      : (none)
+  story id    : 68010c26-f0c4-41a6-bc30-3198a36d73e4
+  pullquote   : Patricia Doyle, a proud member of the Palm Island Aboriginal community, shared her
+                experience during a recent storm that tested the resilience and unity of
+                her community.
+
+[picc-46]  Elder's Vision: Empowering Palm Island Youth
+  storyteller : Clay Alfred · Aboriginal Australian · Palm Island · Palm Island Community Company
+  avatar      : https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/profile-images/storytellers/clay_alfred.jpg
+  elder status: no elder-approval required
+  themes      : (none)
+  story id    : 1b044eaa-8f2f-4d99-945a-f58629e09cd5
+  pullquote   : In the heart of the Palm Island Aboriginal Community, an elder's voice resonates with
+                wisdom and a vision for empowering the youth through meaningful
+                engagement.
+
+[picc-47]  Nearly 200 Strong: PICC's Workforce Growth
+  storyteller : Rachel Atkinson · Yorta Yorta · Palm Island · Palm Island Community Company
+  avatar      : https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/profile-images/storytellers/rachel_atkinson.jpg
+  elder status: no elder-approval required
+  themes      : (none)
+  story id    : 1eb17908-2a20-4a8b-96d7-54956001c27b
+  pullquote   : The number of staff and trainees we employ has increased by a third since last year, with
+                nearly two hundred people now working for PICC.
+
+[picc-48]  Bwgcolman Healing Service: A Name That Reflects Our Community
+  storyteller : Rachel Atkinson · Yorta Yorta · Palm Island · Palm Island Community Company
+  avatar      : https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/profile-images/storytellers/rachel_atkinson.jpg
+  elder status: no elder-approval required
+  themes      : (none)
+  story id    : cb3599b0-7535-4edd-ae29-36036a4e4743
+  pullquote   : In early 2024, PICC officially changed the name of the Primary Health Centre to the
+                Bwgcolman Healing Service, with new signage installed.
+
+[picc-49]  Community Resilience on Palm Island
+  storyteller : Ferdys staff · Palm Island · Palm Island Community Company
+  avatar      : https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/profile-images/storytellers/ferdys_staff.jpg
+  elder status: no elder-approval required
+  themes      : (none)
+  story id    : 8a7f69b3-c541-4b91-8638-e7b69ff12c6a
+  pullquote   : In the heart of the Palm Island community, resilience and connection weave through the
+                everyday lives of its people, as seen in the experiences shared by members
+                of the Ferdys staff.
+
+[picc-50]  Elder Allan: Stories of Great Palm Island
+  storyteller : Allan Palm Island · Manbarra, Wulgurukaba · Palm Island · Palm Island Community Company
+  avatar      : https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/media/d0a162d2-282e-4653-9d12-aa934c9dfa4e/1775114118938_20251216-1E5A8879.jpg
+  elder status: no elder-approval required
+  themes      : (none)
+  story id    : e4486fc9-2b8f-4567-a9ef-8bb6a687f342
+  pullquote   : Uncle Allan Welcome stands as a storyteller and custodian of Great Palm Island, weaving
+                together the past and present of a land rich with culture and history.
+
+[picc-51]  Roy Pryor: Building Community on Palm Island
+  storyteller : Roy Prior · Aboriginal Australian (Palm Island) · Palm Island · Palm Island Community Company
+  avatar      : https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/profile-images/storytellers/roy_prior.jpg
+  elder status: no elder-approval required
+  themes      : (none)
+  story id    : 6eddcb61-8615-4dbd-a8e0-30c3ef92c6f4
+  pullquote   : Roy Pryor, a proud member of the Palm Island community, has dedicated his life to
+                enhancing the well-being of his people.
+
+[picc-52]  Goonyun Anderson: A Journey of Connection and Resilience
+  storyteller : Goonyun Anderson · Aboriginal Australian (Palm Island) · Palm Island · Palm Island Community Company
+  avatar      : https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/profile-images/storytellers/goonyun_anderson.jpg
+  elder status: no elder-approval required
+  themes      : (none)
+  story id    : 51e3e593-17b5-4506-a5d4-17bdff925c98
+  pullquote   : Goonyun Anderson’s story is one of connection and resilience, a narrative that seamlessly
+                intertwines his experiences of growing up in Townsville, moving to
+                Brisbane, and his deep-rooted ties to Palm Island.
+
+[picc-53]  Henry Doyle: Resilience Amidst the Storm
+  storyteller : Henry Doyle · Aboriginal · Palm Island · Palm Island Community Company
+  avatar      : https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/profile-images/storytellers/henry_doyle.jpg
+  elder status: no elder-approval required
+  themes      : (none)
+  story id    : 6afcdb57-a491-4b28-9d3e-d29d3512c1b3
+  pullquote   : Henry Doyle, a dedicated member of the Palm Island community, has been a steadfast
+                presence on the island since birth.
+
+[picc-54]  Irene's Palm Island: A Legacy of Family and Tradition
+  storyteller : Irene Nleallajar · Bwgcolman, Palm Island · Palm Island · Palm Island Community Company
+  avatar      : https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/profile-images/storytellers/irene_nleallajar.jpg
+  elder status: no elder-approval required
+  themes      : (none)
+  story id    : 31605b2a-1855-47f6-afe5-56e03c6254f7
+  pullquote   : Irene Nleallajar reflects on her life and heritage on Palm Island with profound
+                appreciation and respect.
+
+[picc-55]  Elder Frank: Memories of Resilience and Growth
+  storyteller : Uncle Frank Daniel Landers · Aboriginal, Palm Island · Palm Island · Palm Island Community Company
+  avatar      : https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/media/d0a162d2-282e-4653-9d12-aa934c9dfa4e/1775115444540_20251216-1E5A8934.jpg
+  elder status: no elder-approval required
+  themes      : (none)
+  story id    : 32dddad1-6830-44f5-92f4-86b35dd2379f
+  pullquote   : Elder Frank Anderson, born in 1939, shared a vivid recollection of his early years,
+                offering a glimpse into a challenging yet formative period of his life.
+
+[picc-56]  Patricia Doyle: Palm Is Where the Heart Is
+  storyteller : Patricia Doyle · Aboriginal Australian · Palm Island · Palm Island Community Company
+  avatar      : https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/profile-images/storytellers/patricia_doyle.jpg
+  elder status: no elder-approval required
+  themes      : (none)
+  story id    : 0eeaae2e-e985-4d2b-b032-bc3edb220a3a
+  pullquote   : Patricia Doyle: Palm Is Where the Heart Is === [00:00:00] Um, my name's Ben.
+
+[picc-57]  Elder Allan: Painting the Stories of Family and Culture
+  storyteller : Allan Palm Island · Manbarra, Wulgurukaba · Palm Island · Palm Island Community Company
+  avatar      : https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/media/d0a162d2-282e-4653-9d12-aa934c9dfa4e/1775114118938_20251216-1E5A8879.jpg
+  elder status: no elder-approval required
+  themes      : (none)
+  story id    : 12be44da-306f-4328-b859-558fd9731b7c
+  pullquote   : Elder Allan shares a profound connection to his art, a connection nurtured in his youth by
+                his father's teachings.
+
+[picc-58]  PICC Shares Our Story at National Conference
+  storyteller : Jeanie Sam · Aboriginal Australian · Palm Island · Palm Island Community Company
+  avatar      : https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/profile-images/storytellers/jeanie_sam.jpg
+  elder status: no elder-approval required
+  themes      : (none)
+  story id    : 5d03a51c-6b3d-4fb4-81dd-e9f579254536
+  pullquote   : In September 2023, PICC presented twice at the biennial SNAICC Conference, which was held
+                in Darwin.
+
+[picc-59]  Caring for Elders, Kids and Country
+  storyteller : Elders Group · Aboriginal · Palm Island · Palm Island Community Company
+  avatar      : https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/profile-images/storytellers/elders_group.jpg
+  elder status: no elder-approval required
+  themes      : (none)
+  story id    : 3bca0ae5-02ed-4a3e-b33e-62180c84fd55
+  pullquote   : Gale Larry - Caring for Elders, Kids and Country === [00:00:00] Yeah.
+
+[picc-60]  Jema Richardson: Dance, Community, and Resilience on Palm Island
+  storyteller : Ida Richardson · Aboriginal Australian · Palm Island · Palm Island Community Company
+  avatar      : https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/profile-images/storytellers/ida_richardson.jpg
+  elder status: no elder-approval required
+  themes      : (none)
+  story id    : 9caa23e5-a292-429a-96b5-76f398d2ea0f
+  pullquote   : Jema Joyce Richardson, a devoted mother and community member of Palm Island, shares her
+                story of resilience and connection.
+
+[picc-61]  Empowering Palm Island: A Community Control Success Story
+  storyteller : Rachel Atkinson · Yorta Yorta · Palm Island · Palm Island Community Company
+  avatar      : https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/profile-images/storytellers/rachel_atkinson.jpg
+  elder status: no elder-approval required
+  themes      : (none)
+  story id    : cff2c66d-7646-4cd6-8f4a-cc47958d7251
+  pullquote   : Rachel Atkinson, the dedicated CEO of the Palm Island Community Company (PICC), has spent
+                nearly 18 years nurturing a model of community-driven empowerment.
+
+[picc-62]  Elder Ethel Robinson: A Journey of Resilience and Heritage
+  storyteller : Aunty Ethel Robertson · Aboriginal Australian · Palm Island · Palm Island Community Company
+  avatar      : https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/media/d0a162d2-282e-4653-9d12-aa934c9dfa4e/1775115007139_20251216-1E5A8914.jpg
+  elder status: no elder-approval required
+  themes      : (none)
+  story id    : ed0790b7-debd-4b78-82f8-09654f17d5fa
+  pullquote   : Elder Ethel Robinson, a distinguished member of the Palm Island community, shares a
+                poignant narrative of resilience and cultural heritage.
+
+[picc-63]  Growing Up on Palm Island: A Journey of Family and Tradition
+  storyteller : Allan Palm Island · Manbarra, Wulgurukaba · Palm Island · Palm Island Community Company
+  avatar      : https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/media/d0a162d2-282e-4653-9d12-aa934c9dfa4e/1775114118938_20251216-1E5A8879.jpg
+  elder status: no elder-approval required
+  themes      : (none)
+  story id    : 9512da67-15f9-4d20-b828-86c995bc2546
+  pullquote   : Allan, a member of the Palm Island Aboriginal Community, shares his childhood memories
+                with a mix of nostalgia and reverence for his heritage.
+
+[picc-64]  Elder Ethel Robertson: Stories of Strength and Survival
+  storyteller : Aunty Ethel Robertson · Aboriginal Australian · Palm Island · Palm Island Community Company
+  avatar      : https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/media/d0a162d2-282e-4653-9d12-aa934c9dfa4e/1775115007139_20251216-1E5A8914.jpg
+  elder status: no elder-approval required
+  themes      : (none)
+  story id    : 41447ed2-6724-4144-b00f-f700977bd8cf
+  pullquote   : Ethel Robertson, a respected elder from the Palm Island Aboriginal Community, shares a
+                poignant narrative of resilience and family bonds.
+
+[picc-65]  Elder's Vision: Strengthening Our Future Generations
+  storyteller : Rachel Atkinson · Yorta Yorta · Palm Island · Palm Island Community Company
+  avatar      : https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/profile-images/storytellers/rachel_atkinson.jpg
+  elder status: no elder-approval required
+  themes      : (none)
+  story id    : a51fb559-fb21-453c-9759-5d663e67e6a2
+  pullquote   : The Palm Island Aboriginal Community recently gathered to celebrate a momentous occasion,
+                the opening of the newly upgraded Palm Island Early Childhood Center.
+
+[picc-66]  Elder Frank Landers: A Journey of Resilience and Community
+  storyteller : Uncle Frank Daniel Landers · Aboriginal, Palm Island · Palm Island · Palm Island Community Company
+  avatar      : https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/media/d0a162d2-282e-4653-9d12-aa934c9dfa4e/1775115444540_20251216-1E5A8934.jpg
+  elder status: no elder-approval required
+  themes      : (none)
+  story id    : 473fe560-53e1-42be-8231-ed85d9589784
+  pullquote   : Elder Frank Daniel Landers shares a poignant story of resilience and community, reflecting
+                on his life journey from Ingham to the Palm Island Aboriginal Community.
+
+[picc-67]  Elder Ethel Robinson: A Journey Through Trials and Triumphs
+  storyteller : Aunty Ethel Robertson · Aboriginal Australian · Palm Island · Palm Island Community Company
+  avatar      : https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/media/d0a162d2-282e-4653-9d12-aa934c9dfa4e/1775115007139_20251216-1E5A8914.jpg
+  elder status: no elder-approval required
+  themes      : (none)
+  story id    : 817d39c0-8427-45d9-bc36-880fa57aa333
+  pullquote   : Elder Ethel Robinson shares a poignant story of her family's history, weaving together
+                threads of resilience and survival.
+
+[picc-68]  Elder Ude Grace Richardson: A Journey of Resilience and Belonging
+  storyteller : Gurtrude Grace Richardson · Palm Island community · Palm Island · Palm Island Community Company
+  avatar      : https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/media/d0a162d2-282e-4653-9d12-aa934c9dfa4e/1775115335268_20251216-1E5A8927.jpg
+  elder status: no elder-approval required
+  themes      : (none)
+  story id    : f2b297bf-0e3d-41f2-bcfc-71532234dc73
+  pullquote   : Elder Ude Grace Richardson, a revered member of the Palm Island community, shared her life
+                story, painting a vivid picture of resilience and belonging.
+
+[picc-69]  Elsa Watson: Stories of Resilience on Palm Island
+  storyteller : Elsa Mortoa · Aboriginal Australian · Palm Island · Palm Island Community Company
+  avatar      : https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/media/d0a162d2-282e-4653-9d12-aa934c9dfa4e/1775115312323_20251216-1E5A8943.jpg
+  elder status: no elder-approval required
+  themes      : (none)
+  story id    : aab00695-e8c6-4695-acb3-ffadbc0648c7
+  pullquote   : Elsa Watson, a Cultural Advisor from the Palm Island Aboriginal Community, shared her
+                family's poignant history and her own experiences growing up on Palm
+                Island.
+
+[picc-70]  Elder Del Louise Pryor: A Journey of Connection and Healing
+  storyteller : Cyndel Louise Pryor · Aboriginal Australian · Palm Island · Palm Island Community Company
+  avatar      : https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/media/d0a162d2-282e-4653-9d12-aa934c9dfa4e/1775115278246_20251216-1E5A8955.jpg
+  elder status: no elder-approval required
+  themes      : (none)
+  story id    : efbd8d1d-95e0-4405-b375-8dc6c7ee802e
+  pullquote   : In the heart of the Palm Island Aboriginal Community, Elder Del Louise Pryor shares her
+                poignant story, weaving a narrative of connection, loss, and resilience.
+
+[picc-71]  Clay Alfred - Staying Prepared, Staying Sober
+  storyteller : Clay Alfred · Aboriginal Australian · Palm Island · Palm Island Community Company
+  avatar      : https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/profile-images/storytellers/clay_alfred.jpg
+  elder status: no elder-approval required
+  themes      : (none)
+  story id    : ad04ca4a-8ce6-45f4-aa15-3d8686d2219f
+  pullquote   : Clay Alfred - Staying Prepared, Staying Sober === [00:00:00] Oh yeah.
+
+[picc-72]  Agnes Watton - Riding Out the Storm Alone
+  storyteller : Agnes Watton · Island community · Palm Island · Palm Island Community Company
+  avatar      : https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/profile-images/storytellers/agnes_watton.jpg
+  elder status: no elder-approval required
+  themes      : (none)
+  story id    : 404cde54-46cf-4f9b-86f2-10ecd477b68a
+  pullquote   : Agnes Watton - Riding Out the Storm Alone === [00:00:00] Because like she's the only one
+                on the island that's got an elevator.
+
+[picc-73]  Ethel and Iris: Carrying the Torch of Heritage
+  storyteller : Aunty Iris May Whitey · Aboriginal Australian · Palm Island · Palm Island Community Company
+  avatar      : https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/profile-images/storytellers/aunty_iris_may_whitey.jpg
+  elder status: no elder-approval required
+  themes      : (none)
+  story id    : aba7aac5-b24d-4075-a922-3bb3e94a7e9d
+  pullquote   : Ethel and Iris Ferdies, sisters from the Palm Island Aboriginal Community, carry the
+                stories and struggles of their family with profound dignity.
+
+[picc-74]  Just Be There for Them
+  storyteller : Henry Doyle · Aboriginal · Palm Island · Palm Island Community Company
+  avatar      : https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/profile-images/storytellers/henry_doyle.jpg
+  elder status: no elder-approval required
+  themes      : Youth Services, Community Resilience, Sport as Connection, Role Models, Palm Island
+  story id    : 2f634e1d-1eef-4ea0-85be-33eb31cb1008
+  pullquote   : Henry Doyle, a young Aboriginal man born and raised on Palm Island, works in youth
+                services helping kids who've fallen through the cracks. From organising
+                footy teams to converting a bakery into a youth hub.
+
+[picc-75]  Finding a Reason to Get Out of Bed
+  storyteller : Men's Group · Bulgurmen · Palm Island · Palm Island Community Company
+  avatar      : https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/profile-images/storytellers/men_s_group.jpg
+  elder status: no elder-approval required
+  themes      : Recovery and Purpose, Breaking Dependency, Men's Wellbeing, Community and Unity, Personal Accountability
+  story id    : 7cbe27f1-ab05-41a0-9b9c-c3ae1ea761fd
+  pullquote   : In a raw men's group session on Palm Island, an Elder facilitator challenges the men to
+                examine what gets them out of bed each morning. confronting the cycle of
+                addiction, dependency, and self-punishment.
+
+[picc-76]  The Little Boat Called Ivy May
+  storyteller : Iris · Bwgcolman, Badu Island · Palm Island · Palm Island Community Company
+  avatar      : https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/media/d0a162d2-282e-4653-9d12-aa934c9dfa4e/1770668087607_20250522-IMG_2853.jpg
+  elder status: no elder-approval required
+  themes      : Family Legacy, Resourcefulness, Education, Healing from Addiction, Home and Belonging
+  story id    : 2980f2ce-b305-4ccc-afb4-af062448ba63
+  pullquote   : Iris, a sixty-five-year-old Elder on Palm Island, tells the story of her father building a
+                small boat called the Ivy May to row to Possum Island and feed the family
+                on turtle, fish, and damper.
+
+
+############################################################
+# BG Fit  (Mount Isa / Doomadgee, QLD)
+# 5 pitch-eligible stories out of 18 total
+############################################################
+
+[bg-fit-01]  Spinifex Residential — Getting Through to the Hard Cases
+  storyteller : Spinifex Res Youth · Mount Isa, QLD · BG Fit
+  avatar      : (none)
+  elder status: no elder-approval required
+  themes      : Youth Justice, Residential Care, Trust Through Sport, Creating Pathways
+  story id    : ce620748-6b15-4497-a1f5-baef224d5bf1
+  pullquote   : BG Fit's program at Spinifex Residential works with young people in out-of-home care and
+                the justice system, using sport to build trust.
+
+[bg-fit-02]  Tuesday Gym Sessions — Building Consistency
+  storyteller : Flexi Group Voices · Mount Isa, QLD · BG Fit
+  avatar      : (none)
+  elder status: no elder-approval required
+  themes      : Consistency, Youth Mentoring, Trust Building, Sport as Therapy
+  story id    : f02fc41f-612e-48e6-b415-b945d645cd0e
+  pullquote   : BG Fit's weekly Tuesday gym sessions at Mount Isa PCYC have grown from 5 to 20 regular
+                attendees, building trust through consistency.
+
+[bg-fit-03]  Doomadgee Camp — Taking It Remote
+  storyteller : Doomadgee Camp Participant · Aboriginal · Doomadgee, QLD · BG Fit
+  avatar      : (none)
+  elder status: no elder-approval required
+  themes      : Remote Communities, Youth Engagement, Showing Up, Community Need
+  story id    : 5f8a774a-6725-4ec0-b2c0-80f88c05e72d
+  pullquote   : BG Fit's Doomadgee bush camp brought fitness and cultural activities to one of
+                Queensland's most remote Indigenous communities.
+
+[bg-fit-04]  Mount Isa Bush Camp — First One on Country
+  storyteller : Mount Isa Camp Participant · Indigenous Australian · Mount Isa, QLD · BG Fit
+  avatar      : (none)
+  elder status: no elder-approval required
+  themes      : Connection to Country, Youth Development, Cultural Connection, Healing on Country
+  story id    : 37b2d916-85db-4ef2-ad65-d2e8a6a19ac0
+  pullquote   : The first BG Fit bush camp took 12 young people on country near Mount Isa for three days
+                of cultural connection and Elder guidance.
+
+[bg-fit-05]  Why I Started BG Fit
+  storyteller : Brodie Germaine · Indigenous Australian, specifically Gadigal · BG Fit
+  avatar      : https://yvnuayzslukamizrlhwb.supabase.co/storage/v1/object/public/profile-images/storytellers/brodie_germaine.jpg
+  elder status: no elder-approval required
+  themes      : Youth Justice, Sport as Intervention, Community Building, Cultural Strength
+  story id    : 33d25ec6-2d88-4e00-9291-35df8589f8ab
+  pullquote   : Brodie shares the founding story of BG Fit — born from witnessing too many Indigenous
+                young people cycling through the justice system without support.
+
+
+==============================================================================
+HOW TO USE
+==============================================================================
+Ben to mark each entry APPROVE / SKIP / EDIT.
+For APPROVE: say which slot on the pitch (portrait panel, community tile, section 3 quote, judges callout, blog post).
+For EDIT: paste the rewritten attribution or pullquote.
+I will not write anything to the pitch page until each surfaced item is individually approved.

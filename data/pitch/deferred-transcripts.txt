@@ -1,0 +1,135 @@
+==========================================================================================
+DEFERRED CAST — transcripts + stories pulled directly from EL v2
+Generated 2026-04-21T23:02:14.463Z
+==========================================================================================
+
+##########################################################################################
+# Tanya Turner
+##########################################################################################
+
+Transcripts: 2 · Stories: 1
+
+[transcript] Tanya - Overall Interview  (4925 words)
+null
+
+[transcript] Tanya1  (4927 words)
+null
+
+[story] Young People Need to Be Valued by Their Own Mob  public=false
+Proposed title: Young People Need to Be Valued by Their Own Mob
+
+Storyteller: Tanya Turner (dc85700d-f139-46fa-9074-6afee55ea801)
+
+Quote excerpt: “Our young people need to know they are valued. Not by the system, but by their own mob.”
+
+Summary: Publish Tanya’s founders framing as a short public EL story so the postcard can point to a first-class storyteller record instead of a JusticeHub editorial route.
+
+Current quote source: https://justicehub.com.au/organizations/oonchiumpa?lens=judiciary
+This Tanya line is currently held as a curated JusticeHub framing line rather than a public EL story quote.
+
+Current image source: https://justicehub.com.au/people/tanya-turner
+The postcard front uses the local Tanya portrait stored in JusticeHub, not the EL avatar derivative.
+
+Target route after publication: https://justicehub.com.au/organizations/oonchiumpa?lens=judiciary
+Keep Tanya’s card tied to the founders/basecamp route until a public EL story exists for this line.
+
+##########################################################################################
+# Nigel Alice
+##########################################################################################
+
+Transcripts: 1 · Stories: 0
+
+[transcript] Nigel - Alice Interview  (1310 words)
+null
+
+##########################################################################################
+# Jackquann
+##########################################################################################
+
+Transcripts: 1 · Stories: 0
+
+[transcript] Jackquann - Interview 2  (1218 words)
+null
+
+##########################################################################################
+# Laquisha
+##########################################################################################
+
+Transcripts: 1 · Stories: 0
+
+[transcript] Laquisha  (3101 words)
+null
+
+##########################################################################################
+# Uncle George
+##########################################################################################
+
+Transcripts: 5 · Stories: 1
+
+[transcript] Uncle George Interview  (3824 words)
+null
+
+[transcript] NAIDOC March  (782 words)
+null
+
+[transcript] Speak From the Heart and They Will Listen  (657 words)
+null
+
+[transcript] Uncle Frank - Flood Stories  (2001 words)
+null
+
+[transcript] Uncle George - Interview Transcript  (3824 words)
+null
+
+[story] Speak From the Heart and They Will Listen  public=true
+My name's George Leon. I'm a Kalkadoon Elder, Mount Isa. Been in this area since I was born, same as the family. My father moved here in 1947.
+
+Where we're talking now is the house where all twelve of us were born and raised in this yard. But it wasn't just us twelve. Thousands and thousands of people came through here. From all over the communities, footballers especially. A lot of footballers came to play rugby league, and they all stayed here. My father looked after them. You had to go to work. He made us go to school. Even the mayor's son ran away from home to come live here.
+
+What I've done in my life. I've been on both sides of the fence, like everybody. Nobody's pure. People make mistakes, and you can always improve. And I think the best way is helping people. That's how I got a name here.
+
+I started as a PLO. Police Liaison Officer. I was just about to retire and I decided, there's still a lot to be done here. People talked to me about helping the community, and they knew I give tough love.
+
+When I joined, I created a position where I engaged with schools. All the crime they talk about. The only way you're going to find out who these kids are is engage with them when they're young, in school. I'd go into every school, any class, and talk to them about behaviours. I wasn't just dealing with the bad kids either. I never ignored the good kids. Every kid I engaged with. About four or five hundred a week.
+
+All the families used to try and talk to kids, get them to school. They'd tell the kids, "Uncle George is coming over. If you're not ready for school, he's going to drag you to school." Even now that I've finished, the parents are still saying that.
+
+Since I've finished, I've seen more and more kids out on the street during the day. Not one person, no agency doing what I used to do. Pulling up, talking to these kids, asking why they're not at school.
+
+When I was young here, it was good. It was a lot better. Everyone got on. You could sleep outside, doors open, you trusted anyone. We had football clubs. We looked after each other. But since the phones came in, life's changed. And it's changed for the worst, not for the best.
+
+People apply for grants to run things, but you've got to know the people first. Know the needs before you set anything up. You can't just take kids out bush for a week or two and expect they're going to change. These kids will take years to change.
+
+We're not targeting the main ones. People target kids that are just being a bit naughty. But they're not targeting the real leaders. The kids who lead the others into trouble. That's who you grab. You grab them and start working on them so they can work on the rest.
+
+People send workers to do courses in Brisbane or Melbourne. Courses on what? You've got to learn to speak from the heart. If you speak from the heart and you tell the truth, people listen.
+
+I've got naughty kids, bad kids, and real terrible kids. Those terrible ones, I growled at them. But then I'd say, "You know why I'm saying this? It's because I care. I care about your life. I'm not here to just tell you off. I'm here because I care."
+
+That police job was one of the hardest jobs. I was a boilermaker before, worked in the sun and sweated. But working as a police officer dealing with the community, that was harder. I was on terrible money and overworked, but I liked what I've done.
+
+You want to prove your life? Get a group of good people together. You can stop it. I tell you right now, if you get a group together, you can stop it.
+
+##########################################################################################
+# Jay
+##########################################################################################
+
+Transcripts: 1 · Stories: 1
+
+[transcript] Jay - Young Person interview  (510 words)
+null
+
+[story] Jay - Young Person interview  public=false
+Jay is a young person experiencing boredom and behavioral challenges in an urban environment, drawn to conflict and negative peer influences. However, he demonstrates clear self-awareness and shows marked enthusiasm and positive engagement when discussing bush activities, particularly hunting and connection to country, recognizing these experiences keep him out of trouble.
+
+##########################################################################################
+# Rashad Gavin Isaacson
+##########################################################################################
+
+Transcripts: 1 · Stories: 1
+
+[transcript] Rashad Gavin Isaacson - Recording  (218 words)
+null
+
+[story] Rashad Gavin Isaacson - Recording  public=false
+Rashad Gavin Isaacson, a young Kalkadoon dancer with the Sundowners dance crew, shares his participation in NAIDOC Week celebrations in Mount Isa. He expresses that NAIDOC and culture are 'everything' to him, and advocates for engaging more young people through showing them their culture and encouraging (not forcing) participation in cultural dance and activities.
