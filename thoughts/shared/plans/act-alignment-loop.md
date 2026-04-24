@@ -101,14 +101,16 @@ Phase 0 (this plan):
 
 Phase 1 (after Phase 0 proves out):
 - [ ] `scripts/synthesize-funder-alignment.mjs`
-- [ ] `scripts/synthesize-project-truth-state.mjs`
+- [x] `scripts/synthesize-project-truth-state.mjs` (shipped 2026-04-24, multi-repo extension 2026-04-25)
 - [ ] `scripts/synthesize-entity-migration-truth-state.mjs`
 - [ ] Script output schema stabilised so Phase 2 can diff
 
 Phase 2 (once Phase 1 is stable):
-- [ ] PM2 schedule for weekly runs
+- [x] Weekly cron via remote agent (`trig_018X1ZRtc9zdgFENiYsx5t8c`, Friday 08:00 Brisbane)
+- [x] Phase 2a — multi-repo Q2 codebase scan across all 9 ACT codebases (shipped 2026-04-25; plan: `act-brain-phase-2a-multi-repo-q2.md`; runtime ~11s; new threshold total≥5 OR any-non-hub≥3; new "Where (top repos)" column in output)
+- [ ] Phase 2b — email content surfacing into Q1 (planned in `act-brain-expansion.md`)
+- [ ] Phase 2c — Notion document body sync into Q2/Q3 (planned in `act-brain-expansion.md`)
 - [ ] Diff-against-last-week logic
-- [ ] Telegram alert on material drift
 - [ ] Rotation so all three questions run but staggered (not all on the same Monday)
 
 ## Decision Log

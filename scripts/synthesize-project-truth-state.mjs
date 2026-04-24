@@ -20,13 +20,17 @@ import { readFileSync, writeFileSync } from 'node:fs'
 import { execSync } from 'node:child_process'
 import { createClient } from '@supabase/supabase-js'
 import { join } from 'node:path'
+import { scanAll, topReposFor, ACT_REPOS } from './lib/act-codebase-scan.mjs'
 
 const REPO_ROOT = process.cwd()
 const CONFIG_PATH = join(REPO_ROOT, 'config/project-codes.json')
 const WIKI_PROJECTS_ROOT = join(REPO_ROOT, 'wiki/projects')
 const SYNTHESIS_DIR = join(REPO_ROOT, 'wiki/synthesis')
-const CODE_REFS_THRESHOLD = 3
-const GREP_PATHS = ['apps/', 'scripts/', 'config/']
+// Threshold: total >= 5 across all repos OR >= 3 in any single non-hub repo.
+// The "any non-hub repo" clause catches code that lives heavily in one place
+// even when hub-side refs are minimal (e.g., a feature entirely in goods/).
+const CODE_REFS_THRESHOLD_TOTAL = 5
+const CODE_REFS_THRESHOLD_PER_REPO = 3
 
 const argv = process.argv.slice(2)
 const DRY_RUN = argv.includes('--dry-run')
@@ -84,14 +88,10 @@ function walkWikiFiles() {
   return out.trim().split('\n').map(f => f.replace(`${WIKI_PROJECTS_ROOT}/`, ''))
 }
 
+// Multi-repo codebase scan via shared lib. Returns:
+//   { 'ACT-GD': { total: N, byRepo: { hub: N, goods: M, ... } }, ... }
 function codebaseRefCounts() {
-  const out = execSync(`grep -roh "ACT-[A-Z]\\{2,4\\}" ${GREP_PATHS.join(' ')} 2>/dev/null | sort | uniq -c | sort -rn`, { encoding: 'utf8' })
-  const counts = {}
-  for (const line of out.trim().split('\n')) {
-    const m = line.trim().match(/^(\d+)\s+(ACT-[A-Z]+)$/)
-    if (m) counts[m[2]] = Number(m[1])
-  }
-  return counts
+  return scanAll(ACT_REPOS)
 }
 
 function findWikiFile(code, proj, wikiFiles) {
@@ -118,11 +118,18 @@ function scoreRow(code, proj, wikiFiles, xi, xt, bsl, dbCanon, storytellers, cod
   const bslN = bsl[code] || 0
   const xeroOk = xeroInv + xeroTxn + bslN > 0 ? 1 : 0
   const dbOk = xeroOk || dbCanon.has(code) || storytellers.has(code) ? 1 : 0
-  const refs = codeRefs[code] || 0
-  const codeOk = refs >= CODE_REFS_THRESHOLD ? 1 : 0
+  // Multi-repo refs: codeRefs[code] = { total, byRepo }, or undefined
+  const entry = codeRefs[code] || { total: 0, byRepo: {} }
+  const refs = entry.total
+  const byRepo = entry.byRepo
+  const maxNonHub = Object.entries(byRepo)
+    .filter(([k]) => k !== 'hub')
+    .reduce((m, [, v]) => Math.max(m, v), 0)
+  const codeOk = (refs >= CODE_REFS_THRESHOLD_TOTAL || maxNonHub >= CODE_REFS_THRESHOLD_PER_REPO) ? 1 : 0
   return {
     code, name: proj.name, status: proj.status || '?', tier: proj.tier || '-',
-    wikiFile, wikiOk, dbOk, xi: xeroInv, xt: xeroTxn, bsl: bslN, codeRefs: refs, xeroOk,
+    wikiFile, wikiOk, dbOk, xi: xeroInv, xt: xeroTxn, bsl: bslN,
+    codeRefs: refs, byRepo, xeroOk,
     presence: wikiOk + dbOk + codeOk + xeroOk,
   }
 }
@@ -177,9 +184,9 @@ function renderMarkdown(rows, totalCodes) {
   const table = [
     '## At-a-glance — all projects by presence score',
     '',
-    '| Code | Name | Status | Tier | Wiki | DB | CodeRefs | Xero | Score |',
-    '|------|------|--------|------|:----:|:--:|--------:|:----:|:-----:|',
-    ...rowsByScore.map(r => `| ${r.code} | ${r.name} | ${r.status} | ${r.tier} | ${tick(r.wikiOk)} | ${tick(r.dbOk)} | ${r.codeRefs} | ${xeroCell(r)} | **${r.presence}/4** |`),
+    '| Code | Name | Status | Tier | Wiki | DB | CodeRefs | Where (top repos) | Xero | Score |',
+    '|------|------|--------|------|:----:|:--:|--------:|------|:----:|:-----:|',
+    ...rowsByScore.map(r => `| ${r.code} | ${r.name} | ${r.status} | ${r.tier} | ${tick(r.wikiOk)} | ${tick(r.dbOk)} | ${r.codeRefs} | ${topReposFor(r.byRepo) || '·'} | ${xeroCell(r)} | **${r.presence}/4** |`),
     '',
   ]
 
@@ -218,8 +225,9 @@ function renderMarkdown(rows, totalCodes) {
     `- Generated: ${new Date().toISOString()}`,
     `- Script: \`scripts/synthesize-project-truth-state.mjs\``,
     `- Config: \`config/project-codes.json\` (${totalCodes} projects)`,
-    '- Sources: `xero_invoices`, `xero_transactions`, `bank_statement_lines`, `projects`, `org_projects`, `project_storytellers`, wiki/projects filesystem walk, codebase grep',
-    `- Code-refs threshold: ≥${CODE_REFS_THRESHOLD} hits in apps/ scripts/ config/ (filters config-only entries)`,
+    '- Sources: `xero_invoices`, `xero_transactions`, `bank_statement_lines`, `projects`, `org_projects`, `project_storytellers`, wiki/projects filesystem walk, codebase grep across 9 ACT codebases',
+    `- Code-refs threshold: ≥${CODE_REFS_THRESHOLD_TOTAL} total OR ≥${CODE_REFS_THRESHOLD_PER_REPO} in any single non-hub repo (catches both ecosystem-wide projects and single-repo-heavy projects)`,
+    '- Repos scanned: act-global-infrastructure (hub), act-regenerative-studio, empathy-ledger-v2, JusticeHub, goods, grantscope, Palm Island Reposistory, act-farm, The Harvest Website',
     '',
     '## Backlinks',
     '',
