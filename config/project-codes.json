@@ -1224,24 +1224,6 @@
       "description": "Creating pathways for economic empowerment in regional communities",
       "notion_pages": ["Economic Freedom Initiative"]
     },
-    "ACT-APO": {
-      "name": "Active Projects Overview",
-      "code": "ACT-APO",
-      "canonical_slug": "active-projects-overview",
-      "category": "tech",
-      "status": "archived",
-      "description": "Notion overview page - not a real project",
-      "notion_pages": ["Active Projects Overview"]
-    },
-    "ACT-AMT": {
-      "name": "API Migration Test",
-      "code": "ACT-AMT",
-      "canonical_slug": "api-migration-test",
-      "category": "tech",
-      "status": "archived",
-      "description": "Test project for Notion API migration",
-      "notion_pages": ["API Migration Test Project"]
-    },
     "ACT-FG": {
       "name": "Feel Good Project",
       "code": "ACT-FG",
