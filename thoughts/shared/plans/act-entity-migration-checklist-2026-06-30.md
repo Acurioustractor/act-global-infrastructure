@@ -192,22 +192,73 @@ All new policies go in Pty name. Sole trader's current insurance (if any) runs o
 
 A rough sequence, read top-to-bottom:
 
-1. This week: NAB account applied, Standard Ledger brief sent, Director IDs confirmed. Research insurance brokers.
-2. Week 3: ABN + GST issued. Pty Xero file opens. NAB account active.
-3. Week 4-5: Insurance policies in place (at minimum: PL $20M, D&O). Shareholders agreement signed.
-4. Week 5-6: Grant novation letters sent to all current funders. IP assignment deed drafted.
-5. Week 7-8: Subscriptions audited. Customer novations in progress. Stripe account for Pty.
-6. Week 9 (22-29 June): Final sole trader invoices raised. Sole trader Xero closes to new entries.
-7. Cutover (30 June 2026): Sole trader stops trading. Pty starts trading.
-8. Week 10-12: Final sole trader BAS and tax return prepared. Cancellation of sole trader ABN lodged. Domain, website, email, invoice footers updated.
+1. This week: NAB account applied, Standard Ledger brief sent, Director IDs confirmed. Research insurance brokers. **Shareholders Agreement drafted by Standard Ledger's referred lawyer.**
+2. Week 2: **Shareholders Agreement signed.** NAB onboarding in flight.
+3. Week 3: ABN + GST issued. Pty Xero file opens. NAB account active.
+4. Week 4-5: Insurance policies in place (at minimum: PL $20M, D&O). IP clause audit on grant + partnership agreements before IP assignment deed drafting.
+5. Week 5-6: Grant novation letters sent to all current funders. IP assignment deed drafted.
+6. End May: **R&D FY26 records review with dedicated R&D consultant** (separate from Standard Ledger's tax prep). Verify contemporaneous activity records support the ~$109K claim.
+7. Week 7-8: Subscriptions audited. Customer novations in progress. Stripe account for Pty.
+8. Week 9 (22-29 June): Final sole trader invoices raised. Sole trader Xero closes to new entries.
+9. Cutover (30 June 2026): Sole trader stops trading. Pty starts trading.
+10. Week 10-12: Final sole trader BAS and tax return prepared. Cancellation of sole trader ABN lodged. Domain, website, email, invoice footers updated.
+
+---
+
+## Cutover rules (decided by CEO review 2026-04-24)
+
+### Rule 1 — Pre-cutover invoices stay with sole trader
+Invoices issued under the sole trader ABN before 30 June 2026 get paid to the sole trader bank account, regardless of when the payment actually lands. This matches ATO income recognition (revenue belongs to the entity that earned it) and keeps FY26 R&D attribution clean. Sole trader bank account stays open through FY27 Q1 (at least) for run-off receipts. Novation letters to existing funders must say: "existing invoices pay as normal; new tranches from 1 July invoice to the Pty."
+
+### Rule 2 — Cutover fallback (honest delay over silent mis-attribution)
+If ABN / NAB / Pty Xero is not invoice-ready by 1 July, the sole trader continues trading until the Pty is genuinely live. The announcement email and website/invoice footer updates happen when the real cutover occurs, not on an aspirational date. This protects against ATO exposure from sole trader issuing invoices past a registered cutover date or Pty issuing retroactive invoices without an operational Xero file.
+
+### Rule 3 — Rotary eClub INV-0222 is a recovery problem, not a novation one
+INV-0222 ($82,500 AUTHORISED, 380+ days unpaid) does not need a novation letter. It needs a chase-or-write-off decision. Recovery is tracked separately from the migration batch.
+
+### Rule 4 — Shareholders Agreement is Week 1-2, not Week 4-5
+Pty has two equal shareholders from two separate family trusts. Until the SHA is signed, Corporations Act defaults apply (deadlock, dividend discretion, 50/50 removal votes). For the 9-week cutover window with grants landing and Minderoo potentially due-diligencing the Pty, this is latent risk worth closing immediately. Standard Ledger's referred lawyer drafts from template.
 
 ---
 
 ## Known gaps (Ben to fill or Standard Ledger to advise)
 
 - Full list of active grants under Nic's sole trader (need to enumerate before novation letters)
-- Full list of SaaS subscriptions and their billing cycles
+- Full list of SaaS subscriptions and their billing cycles (supplement: `subscription_patterns` DB table has 38 vendor patterns)
 - Full list of current Innovation Studio consulting clients
 - Specific Goods on Country supplier agreements requiring novation
+- **IP clause audit on grant + partnership agreements before IP deed** (unverified assumption: Nic has clean title to assign; Commonwealth grants may contain IP clauses)
+- **Buyer-contract assignment-clause audit** for the 19 Goods on Country active buyers (some commercial contracts require prior written consent, not unilateral notice)
+- **Stripe subscription migration plan** — Stripe doesn't move between ABNs; customer re-authentication required with 30+ days notice
 - Trademark registration priority and timing
-- R&D consultant selection for R&D claim preparation
+- R&D consultant selection for R&D claim preparation (see Rule 1 above — dedicated consultant, scheduled end May)
+
+---
+
+## Open actions from CEO review 2026-04-24
+
+All accepted by Ben during review. Each slots into an existing week or adds a small item.
+
+- [ ] **IP clause audit on grant + partnership contracts** — Week 4-5 — Standard Ledger's referred lawyer. Blocks IP assignment deed. Verify Nic holds clean title to assign before drafting deed.
+- [ ] **Buyer assignment-clause audit for 19 Goods on Country active buyers** — Week 4-5 — Ben. Commercial contracts may require prior written consent, not unilateral notice. Flag consent-required ones for individual negotiation.
+- [ ] **Stripe subscription migration plan with 30+ day customer notice** — Week 6-7 — Ben. Stripe doesn't transfer between ABNs; customers re-authenticate. Audit recurring subs now, notify 30+ days before cutover.
+- [ ] **Dry-run $1 test invoice from Pty Xero** — Week 8 — Ben. Issue to a friendly recipient, pay it, verify end-to-end: Xero tenant, bank account, Stripe, project_code tagging, BAS treatment.
+- [ ] **Secrets hygiene for Pty Xero / Stripe / NAB creds** — Week 3-4 — Ben. Rotate new tenant credentials into project env vars via existing `env-secrets-manager` skill pattern.
+- [ ] **Weekly scheduled Alignment Loop agent from 2026-05-08** — Ben. Currently one-shot (`trig_018X1ZRtc9zdgFENiYsx5t8c` fires 2026-05-07T22:00:00Z). Update to cron weekly until 2026-07-01 for drift signal every week through cutover.
+
+---
+
+## GSTACK REVIEW REPORT
+
+| Review | Trigger | Why | Runs | Status | Findings |
+|--------|---------|-----|------|--------|----------|
+| CEO Review | `/plan-ceo-review` | Scope & strategy | 1 | HOLD_SCOPE | 5 critical gaps surfaced; 4 decisions applied (cutover rules 1-4); 6 TODOS proposed |
+| Eng Review | `/plan-eng-review` | Architecture & tests (required) | 0 | — | — |
+| Design Review | `/plan-design-review` | UI/UX gaps | 0 | N/A (no UI scope) | — |
+| Outside Voice | Independent challenge | 2nd opinion | 1 | ran (claude subagent; codex errored on model access) | 7 additions surfaced; 2 incorporated as D7/D8, 5 to TODOS |
+
+**CROSS-MODEL:** Claude main review + Claude outside-voice subagent. Outside voice surfaced 5 issues main review missed (Rotary recovery vs novation, R&D records verification, IP title cleanness, SHA timing, Stripe migration complexity). User incorporated 2 into plan (Rules 3 + 4) + 1 as new scope item (R&D records review, Rule 3 block). Remaining 2 (IP clause audit, Stripe migration) added to Known Gaps.
+
+**UNRESOLVED:** 0.
+
+**VERDICT:** CEO review applied. Plan upgraded with 4 cutover rules + resequenced SHA + R&D records scope. Eng review not applicable (this is a legal/operational checklist, not an architectural plan). Ready for execution.
