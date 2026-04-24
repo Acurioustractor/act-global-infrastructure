@@ -55,6 +55,8 @@ That means this folder should explain what JusticeHub is and how the constellati
 | Looking up a specific methodology (Three Circles, Living Map Loop, Three Ripples, I Have I Am I Can, Field Canvas, LCAA, Fire Crescendo) | [[the-full-idea]] §4 |
 | Understanding "what is JusticeHub the platform" | [[justicehub]] |
 | Designing the art companion | [[the-brave-ones]] |
+| Aligning to Minderoo's current public strategy | [[how-should-act-pitch-minderoo-in-line-with-its-current-strategy-and-what-money-f|Minderoo strategy and money framing]] |
+| Stress-testing where the Karpathy loop actually fits | [[how-should-act-apply-the-karpathy-loop-to-justicehub-the-minderoo-pitch-and-the-|Karpathy loop alignment synthesis]] |
 | Reminding yourself why "staying" matters | [[staying]] |
 
 ## The narrative claim store
@@ -82,7 +84,7 @@ The cost-of-detention figure drifts across the constellation: $1.1M / $1.3M / $1
 - **Sister projects in their own clusters** — [[contained]] (the campaign), [[empathy-ledger]] (the storytelling platform), [[goods-on-country]] (the enterprise)
 - **Communities referenced** — [[oonchiumpa]], [[picc]], [[mounty-yarns]], [[campfire]], plus Maranguka and Olabud Doogethu (no individual project files yet)
 - **Concepts** — [[lcaa-method]], [[third-reality]], [[civicgraph]], [[alma]]
-- **Synthesis** — [[the-edge-is-where-the-healing-is-justicehub-as-the-world-model-for-community-led|The Edge Is Where the Healing Is]]
+- **Synthesis** — [[the-edge-is-where-the-healing-is-justicehub-as-the-world-model-for-community-led|The Edge Is Where the Healing Is]] · [[how-should-act-apply-the-karpathy-loop-to-justicehub-the-minderoo-pitch-and-the-|Karpathy loop alignment]] · [[how-should-act-pitch-minderoo-in-line-with-its-current-strategy-and-what-money-f|Minderoo strategy and money framing]]
 
 ## Edit hygiene
 

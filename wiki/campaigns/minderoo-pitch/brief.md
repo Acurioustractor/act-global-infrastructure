@@ -1,91 +1,118 @@
 ---
 campaign: minderoo-pitch
-status: envelope-assembly
+status: aligned-to-coli-bridge
 owner: Ben Knight + Nick Marchesi
 target: Minderoo Foundation (lead: Lucy Stronach)
 ask: $2.9M / 3 years (FY2026–FY2028)
+updated: 2026-04-21
 ---
 
 # Minderoo pitch — campaign brief
 
-## What
+## What this pitch is
 
-One envelope to Minderoo Foundation. Inside: a canonical Three Circles proposal ($2.9M / 3 years), an executive summary, Artefact 001 (poster + 16-page document) as the live proof case, 3 Brave Ones portraits, and a Judges on Country one-pager from the 17 April trip (completed).
+This is not:
 
-## Why
+- `fund our youth justice program`
+- `fund our platform`
+- `fund our AI`
 
-Minderoo can be the lead or anchor funder that holds the three circles together for three years. The existing proposal material (`JusticeHub/output/proposals/`) is strong. What was missing before this week: live proof that the stack surfaces what the system buries in under a week. Murri Watch is that proof. Judges on Country is the live evidence of the magistrate-facing tool.
+This is:
 
-## Who (audience)
+> Help turn the evidence Minderoo already supported into a living, Indigenous-led mechanism for recognition, redirection, and community-led proof.
 
-- Primary: Lucy at Minderoo (on leave — envelope arrives after return)
-- Secondary: Minderoo's internal review; co-funder candidates PRF, Snow, Dusseldorp, Ritchie
-- Tertiary: sector peers for validation
+## Success metric
 
-## When
+**Lucy commits to the Year 1 entry point of $780K, with a pathway into the full $2.9M / 3-year hold.**
 
-- **Fri 17 April 2026 (completed):** JoC trip (content capture)
-- **Fri 1 May 2026:** envelope posted
-- **Following week:** Ben + Nick walk Lucy through in person when she's back from leave
+## Opening discipline
 
-## Success metric (single)
+Use only the verified COLI backbone:
 
-**Lucy commits to Year 1 ($780k) by end of May 2026, with right-of-first-refusal on Years 2–3.**
+- `$22.3B` annual late intervention spend
+- up from `$15.2B` in 2019
+- `child protection = $10.2B / 43%`
+- `youth crime = $3.4B / 14%`
 
-Secondary: at least two of PRF, Snow, Dusseldorp, Ritchie signal interest in co-funding Years 2–3 by end of June.
+Primary phrase:
 
-## What's shipped
+- `early recognition`
 
-- **2026-04-15 · Canonical pitch document** at `/Users/benknight/Code/JusticeHub/output/proposals/minderoo-canonical-2026.md`. Points to existing Three Circles (`minderoo-three-circles-proposal.md`) and Executive Summary (`minderoo-executive-summary.md`) as the spine. Adds Murri Watch opening proof.
+Bridge sentence:
 
-## What's queued
+- `Early recognition is how this proposal translates Minderoo's early-intervention logic into the lives of young people the system has already started to misrecognise.`
 
-- Brave Ones portrait prints (3 × A5 from JoC shoot)
-- Judges on Country one-pager (post-trip, with Kristy Bloomfield + Tanya Turner input and sign-off)
-- Artefact 001 physical print run (A2 poster + 16-page saddle-stitched)
-- Physical envelope assembly
-- Walk-through session with Lucy after her return from leave
+Do not use:
 
-## What's blocked / waiting
+- stale legacy western-Sydney cohort references
+- unverified downstream justice dollar figures
+- product-first or AI-first framing
+- certainty about a fixed ten-community cohort
 
-- Lucy's return-from-leave date (confirm with her assistant)
-- Kristy Bloomfield + Tanya Turner (Oonchiumpa) sign-off on JoC one-pager before it goes in envelope
-- Murri Watch yarn — if they grant permission, add a consented storyteller quote to the opening page
-- **Correct "Ntumba" → "Oonchiumpa" in the canonical Three Circles spine documents at `/Users/benknight/Code/JusticeHub/output/proposals/minderoo-three-circles-proposal.md` and `minderoo-executive-summary.md` BEFORE envelope ships. Ben action.**
+## The 20-minute Lucy script
 
-## Links
+### 1. Two minutes — start with Minderoo's own evidence
 
-- Canonical cover: `/Users/benknight/Code/JusticeHub/output/proposals/minderoo-canonical-2026.md`
-- Three Circles spine: `/Users/benknight/Code/JusticeHub/output/proposals/minderoo-three-circles-proposal.md`
-- Executive summary: `/Users/benknight/Code/JusticeHub/output/proposals/minderoo-executive-summary.md`
-- Artefact 001: `act-aesthetics-of-asymmetry/artefacts/murri-watch/`
-- JoC trip brief: `wiki/campaigns/judges-on-country/brief.md`
+Say:
 
-## The Ten (anchor communities) · currently 9 confirmed rows after MMEIC consolidation
+> You’ve helped Australia name the cost of late intervention. The 2024 update put the bill at $22.3 billion a year, up from $15.2 billion in 2019. Child protection alone is $10.2 billion. Youth crime is another $3.4 billion. The question for us is what it looks like to back the communities already doing the opposite of that.
 
-For full rationale see the Three Circles proposal. Corrections applied 2026-04-15 per Ben. **Anchors in active relationship marked ✓.**
+### 2. Four minutes — define the gap
 
-### Structural correction required in the pitch
+Say:
 
-The canonical Three Circles and executive summary documents list ten anchors but rows 5 ("Minjerra Bastow Burke · NSW Mid North Coast") and row 6 ("Stradbroke Island (oyster + elder governance partner) · Quandamooka") are **the same organisation**: Minjerribah Moorgumpin Elders-in-Council Aboriginal Corporation (MMEIC) on Minjerribah (North Stradbroke Island). The pitch currently has **nine anchor slots**. Before envelope ships, either:
-- Name a tenth anchor, or
-- Update pitch language from "Ten" to "Nine" everywhere (Three Circles proposal, executive summary, email, canonical cover).
+> Australia’s late-intervention economy is highly organised. Detention, child protection, policing, residential care, and crisis systems all have budgets, metrics, and institutional gravity. The community-led prevention and recognition economy is not. The people keeping children connected to culture, family, school, and Country are doing life-saving work with almost no structural support, almost no visibility, and almost no power over the systems that judge their children.
 
-### Current nine anchors
+### 3. Five minutes — tell The Kettle / Oonchiumpa truth
 
-| # | Org | Place | Country | Leaders | Status |
-|---|---|---|---|---|---|
-| 1 | **Oonchiumpa** ✓ | Mparntwe (Alice Springs), NT | Arrernte, Alyawarra, Luritja, Warlpiri (7 language groups) | Kristy Bloomfield + Tanya Turner co-directors; Aunty Bev + Uncle Terry elder authority; Fred Campbell youth worker | Active; JoC host Fri 17 April (completed) |
-| 2 | **Palm Island Community Company (PICC)** ✓ | Palm Island, QLD | Manbarra / Bwgcolman | **Rachael Atkinson — CEO** (spelling: Ben wrote "Rachal", assumed "Rachael" — confirm) | Relationship active |
-| 3 | **Mounty Aboriginal Youth & Community Services** ✓ (formerly "Mountie Yarns") | Mt Druitt / Sydney, NSW | Darug | (leader TBC — verify with Ben) | CONTAINED base camp, active |
-| 4 | **Minjerribah Moorgumpin Elders-in-Council Aboriginal Corporation (MMEIC)** ✓ | Minjerribah (North Stradbroke Island), QLD | Quandamooka | (elder leaders TBC — verify with Ben) | Active; founded 1993 |
-| 5 | Tennant Creek partner | Tennant Creek, NT | Warumungu | "William Junta" (verify spelling + org name + surname) | In development |
-| 6 | ACT partner (TBC) | Ngambri-Ngunnawal country, ACT | Ngambri-Ngunnawal | TBC | Selection Q1 2026 |
-| 7 | Tasmanian partner (TBC) | Lutruwita (Tasmania) | (multiple) | TBC via JRI / Diagrama network | Selection Q1 2026 |
-| 8 | WA partner | WA | (verify country) | contact via Hailey, UWA criminology (verify Hailey's surname) | In conversation |
-| 9 | SA partner (TBC) | SA | Kaurna or other (verify) | Flinders-linked (contact TBC) | Selection Q1 2026 |
+Say:
 
-**Before envelope ships 1 May:**
-- Row 5 (Tennant Creek) — verify "William Junta" spelling + full org name
-- Row 8 (WA) — Hailey's surname + whether she's the anchor contact or a facilitator
-- Rows 6, 7, 9 — either name anchors or keep as "in development" in the pitch (preferred over guessing)
+> The kettle is already on. Before any formal intervention arrives, there is already a room where somebody knows who needs tea, who needs silence, who needs to sit without being interrogated. That knowledge is not background service delivery. It is governance. That is the truth Oonchiumpa makes visible.
+
+Hold these points:
+
+- the room is real
+- the Aunties, Elders, ACCOs, and workers are protagonists
+- the child is still reachable
+- this is where `early recognition` becomes tangible
+
+### 4. Five minutes — explain the method
+
+Say:
+
+> The reason the system keeps acting too late is that the evidence, the funding context, the story, and the cultural authority are held in different rooms. The Third Reality is how we hold them together.
+
+Then map the stack cleanly:
+
+- `JusticeHub = evidence spine`
+- `CivicGraph = system map`
+- `Empathy Ledger = consent and sovereignty`
+- `The Third Reality = shared truth`
+- `The Brave Ones = public form that carries it outward`
+
+### 5. Four minutes — land the ask
+
+Say:
+
+> The ask is $2.9 million over three years, with $780,000 in Year 1 as the clean entry point. This is not a blank-page idea. Oonchiumpa is ready. The relationships already exist. JusticeHub, CivicGraph, and Empathy Ledger are already live. What Minderoo would be funding is the place-based hold and the public form that lets its own late-intervention evidence become a national mechanism for early recognition.
+
+## Supporting lines to keep ready
+
+- `Minderoo has named the cost of acting too late.`
+- `The Brave Ones is early recognition for young people the system has already started to misrecognise.`
+- `From the kettle to the capital.`
+
+## Current public cohort
+
+- [[oonchiumpa|Oonchiumpa]]
+- [[picc|Palm Island Community Company]]
+- [[bg-fit|BG Fit]]
+- [[mmeic|MMEIC]]
+- `2–3 additional relationships` to be co-selected carefully
+
+## Active proposal files
+
+- [minderoo-canonical-2026.md](/Users/benknight/Code/JusticeHub/output/proposals/minderoo-canonical-2026.md)
+- [minderoo-executive-summary.md](/Users/benknight/Code/JusticeHub/output/proposals/minderoo-executive-summary.md)
+- [brave-ones-pitch-insert.md](/Users/benknight/Code/JusticeHub/output/proposals/brave-ones-pitch-insert.md)
+- [minderoo-three-circles-proposal.md](/Users/benknight/Code/JusticeHub/output/proposals/minderoo-three-circles-proposal.md)

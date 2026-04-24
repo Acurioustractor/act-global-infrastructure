@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-19T23:00:00.232Z",
+  "generated_at": "2026-04-21T03:19:32.977Z",
   "scope": "canonical-graph",
   "domains": {
     "art": 8,
@@ -11,19 +11,19 @@
     "projects": 89,
     "research": 15,
     "stories": 54,
-    "synthesis": 18,
+    "synthesis": 20,
     "technical": 6
   },
   "summary": {
-    "date": "2026-04-19",
-    "total_articles": 257,
-    "total_links": 2071,
+    "date": "2026-04-21",
+    "total_articles": 259,
+    "total_links": 2127,
     "orphans": 26,
     "broken_links": 34,
     "stubs": 0,
     "missing_from_index": 45,
-    "missing_backlinks": 464,
-    "advisory_backlinks": 449
+    "missing_backlinks": 502,
+    "advisory_backlinks": 453
   },
   "source_bridge": {
     "raw_sources": 153,

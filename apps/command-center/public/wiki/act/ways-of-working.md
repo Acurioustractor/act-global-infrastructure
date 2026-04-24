@@ -5,7 +5,7 @@ status: Active
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/concepts/ways-of-working.md`.
-> Regenerated: `2026-04-20T20:55:40.355Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerated: `2026-04-21T03:19:53.973Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # Ways of Working
 
@@ -79,7 +79,7 @@ Weekly rhythms:
 - Capture learnings in the appropriate space (Telegram or Discord)
 - Review shareability before any external communication
 - Run the [[social-soil-canvas|Social Soil Canvas]] when the field feels noisy — especially before adding work, after a hard week, or before making a portfolio cut
-- Keep the public shell aligned to upstream truth using the [[living-website-operating-system|Living Website Operating System]] — wiki first for durable framing, EL for live story/media, website for composition
+- Keep the public website aligned to upstream truth using the [[living-website-operating-system|Living Website Operating System]] — wiki first for durable framing, EL for live story/media, website for composition
 
 ## Field Diagnostics
 
