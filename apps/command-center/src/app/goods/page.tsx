@@ -73,6 +73,7 @@ export default function GoodsPage() {
   const [showAddExisting, setShowAddExisting] = useState(false)
   const [selectedContactId, setSelectedContactId] = useState<string | null>(null)
   const [showDedupModal, setShowDedupModal] = useState(false)
+  const [dupMode, setDupMode] = useState<'email' | 'company'>('email')
   const queryClient = useQueryClient()
 
   const { data, isLoading, error } = useQuery({
@@ -81,8 +82,8 @@ export default function GoodsPage() {
   })
 
   const { data: dupData } = useQuery({
-    queryKey: ['goods', 'duplicates'],
-    queryFn: getGoodsDuplicates,
+    queryKey: ['goods', 'duplicates', dupMode],
+    queryFn: () => getGoodsDuplicates(dupMode),
   })
 
   const newsletterMutation = useMutation({
@@ -320,6 +321,8 @@ export default function GoodsPage() {
       {showDedupModal && dupData && (
         <DedupModal
           duplicates={dupData.duplicates}
+          mode={dupMode}
+          onModeChange={setDupMode}
           onClose={() => setShowDedupModal(false)}
           onMerge={async (keepId, mergeIds) => {
             await mergeGoodsContacts(keepId, mergeIds)
@@ -1162,8 +1165,10 @@ function AddExistingModal({ onClose, onAdded }: {
 
 // ─── Dedup Modal ──────────────────────────────────────────────────
 
-function DedupModal({ duplicates, onClose, onMerge }: {
+function DedupModal({ duplicates, mode, onModeChange, onClose, onMerge }: {
   duplicates: DuplicateGroup[]
+  mode: 'email' | 'company'
+  onModeChange: (m: 'email' | 'company') => void
   onClose: () => void
   onMerge: (keepId: string, mergeIds: string[]) => Promise<void>
 }) {
@@ -1177,6 +1182,18 @@ function DedupModal({ duplicates, onClose, onMerge }: {
   })
   const [merging, setMerging] = useState(false)
   const [merged, setMerged] = useState<Set<string>>(new Set())
+  const [errors, setErrors] = useState<Record<string, string>>({})
+
+  useEffect(() => {
+    const next: Record<string, string> = {}
+    for (const group of duplicates) {
+      const sorted = [...group.contacts].sort((a, b) => b.tags.length - a.tags.length)
+      next[group.email] = sorted[0].ghl_id
+    }
+    setSelections(next)
+    setMerged(new Set())
+    setErrors({})
+  }, [mode, duplicates])
 
   const handleMerge = async (email: string) => {
     const keepId = selections[email]
@@ -1184,9 +1201,12 @@ function DedupModal({ duplicates, onClose, onMerge }: {
     if (!group) return
     const mergeIds = group.contacts.filter(c => c.ghl_id !== keepId).map(c => c.ghl_id)
     setMerging(true)
+    setErrors(prev => { const { [email]: _, ...rest } = prev; return rest })
     try {
       await onMerge(keepId, mergeIds)
       setMerged(prev => new Set(prev).add(email))
+    } catch (e) {
+      setErrors(prev => ({ ...prev, [email]: (e as Error).message || 'Merge failed' }))
     } finally {
       setMerging(false)
     }
@@ -1197,13 +1217,32 @@ function DedupModal({ duplicates, onClose, onMerge }: {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
       <div className="glass-card p-6 w-full max-w-2xl mx-4 max-h-[80vh] overflow-y-auto">
-        <div className="flex items-center justify-between mb-6">
+        <div className="flex items-center justify-between mb-4">
           <h2 className="text-lg font-semibold text-white flex items-center gap-2">
             <Merge className="h-5 w-5 text-amber-400" />
             Merge Duplicate Contacts
           </h2>
           <button onClick={onClose} className="text-white/40 hover:text-white/60">
             <X className="h-5 w-5" />
+          </button>
+        </div>
+
+        <div className="flex items-center gap-1 mb-6 p-1 bg-white/5 rounded-lg w-fit">
+          <button
+            onClick={() => onModeChange('email')}
+            className={`px-3 py-1 text-xs rounded transition-colors ${
+              mode === 'email' ? 'bg-amber-500/30 text-amber-200' : 'text-white/50 hover:text-white/80'
+            }`}
+          >
+            By email (exact)
+          </button>
+          <button
+            onClick={() => onModeChange('company')}
+            className={`px-3 py-1 text-xs rounded transition-colors ${
+              mode === 'company' ? 'bg-amber-500/30 text-amber-200' : 'text-white/50 hover:text-white/80'
+            }`}
+          >
+            By company
           </button>
         </div>
 
@@ -1271,6 +1310,11 @@ function DedupModal({ duplicates, onClose, onMerge }: {
                   <Merge className="h-3.5 w-3.5" />
                   {merging ? 'Merging...' : 'Merge — keep selected'}
                 </button>
+                {errors[group.email] && (
+                  <p className="mt-2 text-xs text-red-400 bg-red-500/10 rounded p-2 break-words">
+                    Merge failed: {errors[group.email]}
+                  </p>
+                )}
               </div>
             ))}
           </div>

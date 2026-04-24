@@ -3055,8 +3055,9 @@ export interface DuplicateGroup {
   contacts: Array<{ ghl_id: string; full_name: string; tags: string[]; company_name: string | null; created_at: string }>
 }
 
-export async function getGoodsDuplicates() {
-  return fetchApi<{ duplicates: DuplicateGroup[]; count: number }>('/api/goods/duplicates')
+export async function getGoodsDuplicates(mode: 'email' | 'company' = 'email') {
+  const endpoint = mode === 'company' ? '/api/goods/duplicates-by-company' : '/api/goods/duplicates'
+  return fetchApi<{ duplicates: DuplicateGroup[]; count: number }>(endpoint)
 }
 
 export interface SearchContact {
