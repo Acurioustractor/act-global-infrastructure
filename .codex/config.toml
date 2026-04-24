@@ -7,7 +7,7 @@ review_model = "gpt-5.4"
 
 [tools.web_search]
 context_size = "medium"
-location = { city = "Brisbane", region = "Queensland", country = "Australia", timezone = "Australia/Brisbane" }
+location = { city = "Brisbane", region = "Queensland", country = "AU", timezone = "Australia/Brisbane" }
 
 [profiles.act-quick]
 model_reasoning_effort = "medium"

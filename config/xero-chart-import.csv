@@ -1,0 +1,107 @@
+*Code,*Name,*Type,*Tax Code,Description,Dashboard,Expense Claims,Enable Payments
+200,Sales - Rent,REVENUE,INPUTTAXED,Residential Rental Income ,Yes,No,No
+210,Eco-tourism sales,REVENUE,OUTPUT,Income from Eco-tourism activities including cabin rental,Yes,No,No
+220,Consulting/Mentoring Income,REVENUE,OUTPUT,Consulting/Mentoring income,Yes,No,No
+255,Travel Income,REVENUE,OUTPUT,Income for billing of travel related on-billing for projects.,Yes,Yes,No
+260,Other Revenue,REVENUE,OUTPUT,Any other income that does not relate to normal business activities and is not recurring,Yes,No,No
+261,Sale of Assets,OTHERINCOME,OUTPUT,Sale of capital items,Yes,No,No
+262,Grants Received,REVENUE,OUTPUT,Record income from Grants,Yes,No,No
+270,Interest Income,REVENUE,EXEMPTOUTPUT,Interest income,Yes,No,No
+310,Cost of Goods Sold,DIRECTCOSTS,INPUT,Cost of goods sold by the business,Yes,No,No
+400,Advertising & Marketing,EXPENSE,INPUT,Expenses incurred for advertising while trying to increase sales,Yes,No,No
+402,Finance Costs,EXPENSE,BASEXCLUDED,costs of borrowings,Yes,No,No
+403,Company Costs,EXPENSE,EXEMPTEXPENSES,ASIC filing fees etc,Yes,No,No
+405,Borrowing Costs,EXPENSE,BASEXCLUDED,Costs associated with finance,Yes,No,Yes
+406,Bad Debts,EXPENSE,INPUT,Debts unable to be recovered,Yes,No,No
+407,Bank Fees,EXPENSE,EXEMPTEXPENSES,Fees charged by your bank for transactions regarding your bank account(s).,Yes,No,No
+408,Cleaning,EXPENSE,INPUT,Expenses incurred for cleaning business property.,Yes,No,No
+409,Client to Advise,EXPENSE,BASEXCLUDED, No Tax invoice provided / Insufficient info to determine business use,Yes,No,No
+410,Booking Commissions & Fees,EXPENSE,EXEMPTEXPENSES,Admin charges related to cabins,Yes,No,No
+411,Merchant Fees,EXPENSE,INPUT,,Yes,No,No
+412,Consulting & Accounting,EXPENSE,INPUT,Expenses related to paying consultants,Yes,Yes,No
+413,Bookkeeping,EXPENSE,INPUT,,Yes,No,No
+415,"Conferences, training & seminars",EXPENSE,INPUT,,Yes,Yes,No
+416,Depreciation,EXPENSE,BASEXCLUDED,The amount of the asset's cost (based on the useful life) that was consumed during the period,Yes,No,No
+417,Donations,EXPENSE,BASEXCLUDED,,Yes,No,No
+420,Entertainment,EXPENSE,EXEMPTEXPENSES,Expenses paid by company for the business but are not deductable for income tax purposes.,Yes,Yes,No
+421,Light meals &  refreshments,EXPENSE,INPUT,Business related meetings etc.,Yes,Yes,No
+423,Catering,EXPENSE,INPUT,food & beverages for events hosted on site.,Yes,Yes,No
+424,Fines & Penalties,EXPENSE,BASEXCLUDED,,Yes,No,No
+425,Freight & Courier,EXPENSE,INPUT,Expenses incurred on courier & freight costs,Yes,No,No
+429,General Expenses,EXPENSE,INPUT,General expenses related to the running of the business.,Yes,Yes,No
+430,Gifts,EXPENSE,INPUT,,Yes,Yes,No
+432,Hire Expenses,EXPENSE,INPUT,Equipment & venue hire,Yes,Yes,No
+433,Insurance,EXPENSE,INPUT,Expenses incurred for insuring the business' assets,Yes,Yes,No
+435,Licences & Fees,EXPENSE,INPUT,operating Licences or Fees incurred.,Yes,Yes,No
+437,Interest Expense,EXPENSE,EXEMPTEXPENSES,"Any interest expenses paid to ATO, business bank accounts or credit card accounts.",Yes,No,No
+441,Legal expenses,EXPENSE,INPUT,Expenses incurred on any legal matters,Yes,No,No
+445,"Light, Power, Heating",EXPENSE,INPUT,"Expenses incurred for lighting, powering or heating the premises",Yes,Yes,No
+446,Materials & Supplies,EXPENSE,INPUT,"Cost of materials for purpose of improving farm facilities, and entities other than rental property",Yes,No,No
+447,Minor Tools & Equipment < $1k,EXPENSE,INPUT,Record low value equipment,Yes,Yes,No
+448,"Farm Equipment - Fuel, oil & maintenance",EXPENSE,INPUT,,Yes,Yes,No
+449,MV - Fuel & Oil,EXPENSE,INPUT,Fuel expenses incurred on the running of company motor vehicles,Yes,Yes,No
+450,MV - Registration & Insurance,EXPENSE,INPUT,,Yes,Yes,No
+451,MV - Repairs & Maintenance,EXPENSE,INPUT,,Yes,Yes,No
+452,"Parking, Tolls & Taxis",EXPENSE,INPUT,Business related expenses,Yes,Yes,No
+453,Office Expenses,EXPENSE,INPUT,General expenses related to the running of the business office.,Yes,Yes,No
+455,Minor Assets - Eco-Tourism Decor & Furnishings,EXPENSE,INPUT,,Yes,Yes,No
+461,Printing & Stationery,EXPENSE,INPUT,Expenses incurred by the entity as a result of printing and stationery,Yes,Yes,No
+463,Protective Clothing & Equipment,EXPENSE,INPUT,,Yes,Yes,No
+467,Rates & Water,EXPENSE,BASEXCLUDED,Council rates & water bills,Yes,No,No
+469,Rent,EXPENSE,INPUT,The payment to lease a building or area.,Yes,No,No
+473,Repairs and Maintenance,EXPENSE,INPUT,Expenses incurred on a damaged or run down asset that will bring the asset back to its original condition.,Yes,Yes,No
+477,Wages and Salaries,EXPENSE,BASEXCLUDED,Payment to employees in exchange for their resources,Yes,No,No
+478,Superannuation,EXPENSE,BASEXCLUDED,Superannuation contributions,Yes,No,No
+485,Subscriptions,EXPENSE,INPUT,"E.g. Magazines, professional bodies.",Yes,Yes,No
+486,Sub-contractors,EXPENSE,INPUT,,Yes,No,No
+489,Telephone & Internet,EXPENSE,INPUT,"Expenditure incurred from any business-related phone calls, phone lines, or internet connections",Yes,Yes,No
+490,Veterinary & Animal Welfare,EXPENSE,INPUT,"costs for veterinary treatment, medicines, and general health care for animals.",Yes,No,No
+493,Travel - National,EXPENSE,INPUT,Expenses incurred from domestic travel which has a business purpose,Yes,No,No
+494,Travel - International,EXPENSE,EXEMPTEXPENSES,Expenses incurred from international travel which has a business purpose,Yes,No,No
+495,Income Tax Expense,EXPENSE,BASEXCLUDED,A percentage of total earnings paid to the government.,Yes,No,No
+581,Rental - Phone / Cable / Internet,EXPENSE,BASEXCLUDED,,Yes,No,No
+582,Rental - Electricity,EXPENSE,BASEXCLUDED,,Yes,No,No
+583,Rental - Cleaning,EXPENSE,BASEXCLUDED,,Yes,No,No
+584,Rental - Advertising,EXPENSE,BASEXCLUDED,,Yes,No,No
+586,Rental - Borrowing,EXPENSE,BASEXCLUDED,,Yes,No,No
+587,Rental - Insurance,EXPENSE,BASEXCLUDED,,Yes,No,No
+588,Rental - Gardening,EXPENSE,BASEXCLUDED,,Yes,No,No
+589,Rental - Interest,EXPENSE,BASEXCLUDED,"NAB ""Witta interest""",Yes,No,No
+590,Rental - Land tax,EXPENSE,BASEXCLUDED,Witta Portion,Yes,No,No
+591,Rental - Property Agents Fees,EXPENSE,BASEXCLUDED,,Yes,No,No
+593,Rental - Pest Control,EXPENSE,BASEXCLUDED,,Yes,No,No
+594,Rental - Council Rates,EXPENSE,BASEXCLUDED,Witta Rate Costs,Yes,No,No
+595,Rental - Stationery & Petties,EXPENSE,BASEXCLUDED,,Yes,No,No
+596,Rental - Repair & Maintenance,EXPENSE,BASEXCLUDED,,Yes,No,No
+597,Rental - Water Costs,EXPENSE,BASEXCLUDED,,Yes,No,No
+598,Rental - Sundry Rental,EXPENSE,BASEXCLUDED,,Yes,No,No
+599,Rental - Legal & lease costs,EXPENSE,BASEXCLUDED,,Yes,No,No
+610,Accounts Receivable,CURRENT,BASEXCLUDED,Outstanding invoices the company has issued out to the client but has not yet received in cash at balance date.,Yes,No,No
+620,Prepayments,CURRENT,BASEXCLUDED,An expenditure that has been paid for in advance.,Yes,No,No
+625,Deposits Paid,CURRENT,BASEXCLUDED,"Deposit on goods, bookings etc",Yes,No,Yes
+630,Inventory,INVENTORY,BASEXCLUDED,Value of tracked items for resale.,Yes,No,No
+700,Motor Vehicle,FIXED,CAPEXINPUT,Business use asset,Yes,No,No
+710,Office Equipment,FIXED,CAPEXINPUT,Office equipment that is owned and controlled by the business,Yes,No,No
+711,Less Accumulated Depreciation on Office Equipment,FIXED,BASEXCLUDED,The total amount of office equipment cost that has been consumed by the entity (based on the useful life),Yes,No,No
+720,Computer Equipment,FIXED,CAPEXINPUT,Computer equipment that is owned and controlled by the business,Yes,No,No
+721,Less Accumulated Depreciation on Computer Equipment,FIXED,BASEXCLUDED,The total amount of computer equipment cost that has been consumed by the business (based on the useful life),Yes,No,No
+730,Land & Buildings at Cost - Witta,FIXED,CAPEXINPUT,"Costs of Property purchased for income producing purposes. - 601 Maleny-Kenilworth Rd, Witta 4552",Yes,No,Yes
+740,Farm Land & Building - Improvements at Cost,FIXED,INPUT,Cost of addition of infrastructure and improvement of existing amenities,Yes,Yes,No
+750,Plant & Equipment,FIXED,CAPEXINPUT,"Plant, equipment, trailers etc.",Yes,No,No
+800,Accounts Payable,CURRLIAB,BASEXCLUDED,Outstanding invoices the company has received from suppliers but has not yet paid at balance date,Yes,No,No
+801,Unpaid Expense Claims,CURRLIAB,BASEXCLUDED,Expense claims typically made by employees/shareholder employees still outstanding.,Yes,No,No
+804,Wages Payable - Payroll,CURRLIAB,BASEXCLUDED,"Where this account is set as the nominated Wages Payable account within Payroll Settings, Xero allocates the net wage amount of each pay run created using Payroll to this account",Yes,No,No
+821,ATO Clearing Account,CURRLIAB,BASEXCLUDED,,Yes,No,No
+825,PAYG Withholdings Payable,CURRLIAB,BASEXCLUDED,The amount of PAYE tax that is due to be paid,Yes,No,No
+826,Superannuation Payable,CURRLIAB,BASEXCLUDED,The amount of superannuation that is due to be paid,Yes,No,No
+830,Income Tax Payable,CURRLIAB,BASEXCLUDED,"The amount of income tax that is due to be paid, also resident withholding tax paid on interest received.",Yes,No,No
+832,Integrated Client Account,CURRLIAB,BASEXCLUDED,,Yes,No,Yes
+850,Suspense,CURRLIAB,BASEXCLUDED,"An entry that allows an unknown transaction to be entered, so the accounts can still be worked on in balance and the entry can be dealt with later.",Yes,No,Yes
+852,Rental Bonds Held,CURRLIAB,BASEXCLUDED,Record receipt of rental bond,Yes,No,No
+881,Funds Introduced - N Marchesi,CURRLIAB,BASEXCLUDED,Funds contributed by the owner,Yes,No,Yes
+882,Drawings - Ben Knight,CURRLIAB,BASEXCLUDED,,Yes,No,No
+900,Heritage Loan - Land & Buildings - Witta,TERMLIAB,BASEXCLUDED,"Mortgage - 601 Maleny-Kenilworth Rd, Witta 4552
+Repayments $3921.00 for 359 mths; final payment $3698.93",Yes,No,Yes
+960,Retained Earnings,EQUITY,BASEXCLUDED,Do not Use,Yes,No,No
+970,Loan - FFP investment Trust,PREPAYMENT,BASEXCLUDED,Payments made on behalf of FFP investment Trust,Yes,No,No
+971,Loan - FFP Holdings Pty Ltd,CURRENT,BASEXCLUDED,Payments made on behalf of FFP Holdings Pty Ltd,Yes,No,No
