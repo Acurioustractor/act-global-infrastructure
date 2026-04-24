@@ -230,15 +230,19 @@ async function main() {
 
   console.log(`OCR Dext Processing — ${apply ? 'APPLY' : 'DRY RUN'} | model: ${MODEL} | concurrency: ${concurrency}${limit ? ` | limit: ${limit}` : ''}\n`);
 
-  // Fetch target rows: Dext-imported receipts missing vendor/amount
+  // Fetch target rows: receipts missing vendor/amount
+  const sourcesIdx = args.indexOf('--sources');
+  const sourcesArg = sourcesIdx !== -1 ? args[sourcesIdx + 1] : 'dext_import';
+  const sourceList = sourcesArg.split(',').map(s => `'${s.trim()}'`).join(',');
+
   const rows = await q(`
     SELECT id, attachment_url, attachment_filename, attachment_content_type,
            vendor_name, amount_detected, status, dext_item_id, source
     FROM receipt_emails
-    WHERE source = 'dext_import'
-      AND (vendor_name IS NULL OR amount_detected IS NULL OR amount_detected = 0)
+    WHERE source IN (${sourceList})
+      AND (vendor_name IS NULL OR vendor_name ILIKE '%unknown%' OR amount_detected IS NULL OR amount_detected = 0)
       AND attachment_url IS NOT NULL
-      AND status != 'uploaded'
+      AND status NOT IN ('uploaded', 'junk')
     ORDER BY created_at DESC
     ${limit ? `LIMIT ${limit}` : 'LIMIT 500'}
   `);
