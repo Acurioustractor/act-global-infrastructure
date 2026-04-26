@@ -17,25 +17,14 @@
  *   node scripts/bitwarden-find-duplicates.mjs --json     # JSON output
  */
 import { execSync } from 'node:child_process'
+import { ensureUnlocked } from './lib/bitwarden-session.mjs'
 
 const argv = process.argv.slice(2)
 const BY_FLAG = argv.indexOf('--by')
 const BY = BY_FLAG >= 0 ? argv[BY_FLAG + 1] : 'both'
 const JSON_OUT = argv.includes('--json')
 
-function precheck() {
-  try {
-    execSync('which bw', { stdio: 'pipe' })
-  } catch {
-    console.error('bw (Bitwarden CLI) not installed.')
-    process.exit(2)
-  }
-  if (!process.env.BW_SESSION) {
-    console.error('BW_SESSION not set.')
-    console.error('Run: export BW_SESSION="$(bw unlock --raw)"')
-    process.exit(3)
-  }
-}
+// precheck replaced by ensureUnlocked() from lib/bitwarden-session.mjs
 
 function bw(args) {
   return execSync(`bw ${args}`, {
@@ -126,7 +115,7 @@ function suggestKeep(group) {
 }
 
 function main() {
-  precheck()
+  ensureUnlocked()
   const items = listItems()
 
   let groups = []

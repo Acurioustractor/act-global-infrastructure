@@ -24,6 +24,7 @@
  *   - vault locked / session expired → re-unlock instruction + exit 4
  */
 import { execSync } from 'node:child_process'
+import { ensureUnlocked } from './lib/bitwarden-session.mjs'
 
 const argv = process.argv.slice(2)
 const SEARCH_FLAG = argv.indexOf('--search')
@@ -32,33 +33,8 @@ const ORG_FLAG = argv.indexOf('--org')
 const ORG = ORG_FLAG >= 0 ? argv[ORG_FLAG + 1] : null
 const JSON_OUT = argv.includes('--json')
 
-function precheck() {
-  try {
-    execSync('which bw', { stdio: 'pipe' })
-  } catch {
-    console.error('bw (Bitwarden CLI) not installed.')
-    console.error('Install: npm install -g @bitwarden/cli   OR   brew install bitwarden-cli')
-    process.exit(2)
-  }
-  if (!process.env.BW_SESSION) {
-    console.error('BW_SESSION not set.')
-    console.error('Run: export BW_SESSION="$(bw unlock --raw)"')
-    process.exit(3)
-  }
-}
-
 function bw(args) {
-  try {
-    return execSync(`bw ${args}`, { encoding: 'utf8', env: process.env, stdio: ['pipe', 'pipe', 'pipe'] })
-  } catch (err) {
-    const msg = err.stderr?.toString() || err.message
-    if (msg.includes('Vault is locked') || msg.includes('mac failed')) {
-      console.error('Vault locked or session expired.')
-      console.error('Run: export BW_SESSION="$(bw unlock --raw)"')
-      process.exit(4)
-    }
-    throw err
-  }
+  return execSync(`bw ${args}`, { encoding: 'utf8', env: process.env, stdio: ['pipe', 'pipe', 'pipe'] })
 }
 
 function listItems() {
@@ -78,7 +54,7 @@ function listFolders() {
 }
 
 function main() {
-  precheck()
+  ensureUnlocked()
 
   const items = listItems()
   const orgs = listOrganizations()

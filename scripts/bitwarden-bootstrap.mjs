@@ -19,6 +19,7 @@
  *   node scripts/bitwarden-bootstrap.mjs --stubs      # only stub items
  */
 import { execSync } from 'node:child_process'
+import { ensureUnlocked } from './lib/bitwarden-session.mjs'
 
 const argv = process.argv.slice(2)
 const APPLY = argv.includes('--apply')
@@ -140,19 +141,7 @@ function bw(args, stdin) {
   }
 }
 
-function precheck() {
-  try {
-    execSync('which bw', { stdio: 'pipe' })
-  } catch {
-    console.error('bw (Bitwarden CLI) not installed.')
-    process.exit(2)
-  }
-  if (!process.env.BW_SESSION) {
-    console.error('BW_SESSION not set.')
-    console.error('Run: export BW_SESSION="$(bw unlock --raw)"')
-    process.exit(3)
-  }
-}
+// precheck replaced by ensureUnlocked() from lib/bitwarden-session.mjs
 
 function listFolders() {
   return JSON.parse(bw('list folders'))
@@ -212,7 +201,7 @@ function planStubs(existingItems, folderMap) {
 }
 
 function main() {
-  precheck()
+  ensureUnlocked()
 
   console.log(`[bitwarden-bootstrap] mode: ${APPLY ? 'APPLY' : 'DRY-RUN'}`)
   console.log('[bitwarden-bootstrap] reading vault state…')
