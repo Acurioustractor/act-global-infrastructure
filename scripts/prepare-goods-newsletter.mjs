@@ -141,7 +141,7 @@ Return ONLY valid JSON.`;
     const raw = await trackedClaudeCompletion(
       [{ role: 'user', content: prompt }],
       'prepare-goods-newsletter',
-      { model: 'claude-3-5-haiku-20241022', temperature: 0.7, maxTokens: 800 }
+      { model: 'claude-haiku-4-5', temperature: 0.7, maxTokens: 800 }
     );
     const cleaned = raw.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim();
     return JSON.parse(cleaned);

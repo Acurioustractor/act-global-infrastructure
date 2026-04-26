@@ -81,7 +81,7 @@ Scoring guide:
 
     try {
       const response = await trackedClaudeCompletion(prompt, SCRIPT_NAME, {
-        model: 'claude-3-5-haiku-20241022',
+        model: 'claude-haiku-4-5',
         maxTokens: 2000,
         operation: 'score-batch',
       });

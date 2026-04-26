@@ -544,7 +544,7 @@ async function getMoonCycleTodos(moonPhase) {
 async function sendToTeamChannels(brief) {
   // Dynamic import to avoid loading if not needed
   try {
-    const { sendToTeam } = await import('../clawdbot-docker/services/whatsapp-team.mjs');
+    const { sendToTeam } = await import('../archive/clawdbot-docker-2026-04/services/whatsapp-team.mjs');
 
     const shortBrief = formatShortBrief(brief);
     await sendToTeam(shortBrief);
