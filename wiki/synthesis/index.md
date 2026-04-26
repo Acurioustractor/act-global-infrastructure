@@ -24,6 +24,18 @@ This folder is the **second-brain compounding loop**. Per the [Karpathy LLM know
 
 ## Synthesis articles
 
+### Alignment Loop — second pass (2026-05-08)
+
+- [[alignment-loop-drift-2026-04-24-to-2026-05-08|Alignment loop drift — 2026-04-24 to 2026-05-08]] — 2026-05-08 · drift summary: Q2 canonical_slug backlog cleared; Q3 novation template drafted; Q1 funder invoices flat
+
+- [[entity-migration-truth-state-2026-05-08|Entity migration truth-state — 65 days to cutover, novation template now exists]] — 2026-05-08 · second pass Q3, [[../../thoughts/shared/plans/act-alignment-loop|ACT Alignment Loop]]
+
+- [[project-truth-state-2026-05-08|Project truth-state — 72 codes, canonical_slug backlog cleared]] — 2026-05-08 · second pass Q2, [[../../thoughts/shared/plans/act-alignment-loop|ACT Alignment Loop]]
+
+- [[funder-alignment-2026-05-08|Funder alignment — second pass, funder invoices unmoved]] — 2026-05-08 · second pass Q1, [[../../thoughts/shared/plans/act-alignment-loop|ACT Alignment Loop]]
+
+### Alignment Loop — baseline (2026-04-24)
+
 - [[entity-migration-truth-state-2026-04-24|Entity migration truth-state — 67 days to cutover, what's done vs open]] — 2026-04-24 · third artefact of the [[../../thoughts/shared/plans/act-alignment-loop|ACT Alignment Loop]]
 
 - [[project-truth-state-2026-04-24|Project truth-state — 74 codes × 4 sources, who's real]] — 2026-04-24 · second artefact of the [[../../thoughts/shared/plans/act-alignment-loop|ACT Alignment Loop]]
