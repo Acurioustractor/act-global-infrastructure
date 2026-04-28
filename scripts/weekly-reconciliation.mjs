@@ -105,6 +105,7 @@ async function main() {
   console.log('📋 Step 1: Update tags and matches...');
   runScript('tag-statement-lines.mjs', '--apply');
   runScript('reconciliation-report.mjs', '--match --apply');
+  runScript('tag-lanes.mjs', '--apply');
   runScript('tag-lcaa-phases.mjs', '--apply');
   runScript('four-lanes-snapshot.mjs', '');
 
