@@ -97,7 +97,7 @@ People pages are **curated, not exhaustive**. The wider voice population lives i
 - [[projects/justicehub/judges-on-country|Judges on Country]] — 55 judges in Mparntwe, story-led decision deck, Traditional Owner-led experience
 - [[projects/smart-recovery/smart-recovery|SMART Recovery]] — addiction peer support, GP integration
 - [[projects/act-monthly-dinners|ACT Monthly Dinners]] — regular community gatherings over shared meals
-- [[projects/custodian-economy|Custodian Economy]] — economic models grounded in custodianship
+- [[projects/custodian-first-economy|Custodian First Economy]]: partner program supporting young people on youth justice orders (stub, pending detail)
 - [[projects/marriage-celebrant|Marriage Celebrant]] — Ben's civil marriage celebrant practice
 
 ### Cluster Overviews

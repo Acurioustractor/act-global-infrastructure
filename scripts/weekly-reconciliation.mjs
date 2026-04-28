@@ -105,6 +105,9 @@ async function main() {
   console.log('📋 Step 1: Update tags and matches...');
   runScript('tag-statement-lines.mjs', '--apply');
   runScript('reconciliation-report.mjs', '--match --apply');
+  runScript('tag-lanes.mjs', '--apply');
+  runScript('tag-lcaa-phases.mjs', '--apply');
+  runScript('four-lanes-snapshot.mjs', '');
 
   // Step 2: Load all statement lines for the quarter (paginate past 1000-row cap)
   console.log('\n📊 Step 2: Computing stats...');
@@ -344,7 +347,44 @@ async function main() {
     msg += `\n🧠 *${learnings} patterns* (${locInserted} locations + ${subInserted} subs auto-added)`;
   }
 
-  msg += `\n_Run reconciliation-report.mjs for full details_`;
+  // ── Step 4: Four lanes + soul check ────────────────────────────
+  // Reads the lane / lcaa_phase tags written above by tag-lcaa-phases.mjs.
+  // Methodology: wiki/concepts/four-lanes.md and wiki/concepts/lcaa-method.md.
+  console.log('\n💰 Step 4: Four lanes + soul check...');
+  const laneRows = lines; // already loaded for this quarter, has lane + lcaa_phase
+  const laneTotals = { to_us: 0, to_down: 0, to_grow: 0, to_others: 0 };
+  const phaseTotals = { listen: 0, curiosity: 0, action: 0, art: 0 };
+  for (const r of laneRows) {
+    if (laneTotals[r.lane] !== undefined) laneTotals[r.lane] += parseFloat(r.amount);
+    if (phaseTotals[r.lcaa_phase] !== undefined) phaseTotals[r.lcaa_phase] += parseFloat(r.amount);
+  }
+
+  const LANE_LABELS = { to_us: 'To Us', to_down: 'To Down', to_grow: 'To Grow', to_others: 'To Others' };
+  const SOUL_CHECK = {
+    to_us: "When did Ben and Nic last get paid by the entity that earns the money? If the answer is 'not this quarter', that is the work.",
+    to_down: "What old liability is unblocked by clearing this quarter? Receivables, ATO, legacy debts. Pick one.",
+    to_grow: "Which project most needs the next dollar? Equipment, sites, engineering hours, travel.",
+    to_others: "Which community partner hasn't had a fellowship or anchor payment yet? Make the list.",
+  };
+  const orderedLanes = ['to_us', 'to_down', 'to_grow', 'to_others'];
+  let mostBehind = orderedLanes[0];
+  for (const l of orderedLanes) if (laneTotals[l] < laneTotals[mostBehind]) mostBehind = l;
+
+  const phaseSum = Object.values(phaseTotals).reduce((a, b) => a + b, 0);
+  const fmtPct = (n) => phaseSum > 0 ? Math.round((n / phaseSum) * 100) + '%' : '0%';
+
+  console.log(`   Lane: To Us $${Math.round(laneTotals.to_us)} · To Down $${Math.round(laneTotals.to_down)} · To Grow $${Math.round(laneTotals.to_grow)} · To Others $${Math.round(laneTotals.to_others)}`);
+  console.log(`   LCAA: L ${fmtPct(phaseTotals.listen)} · C ${fmtPct(phaseTotals.curiosity)} · A ${fmtPct(phaseTotals.action)} · Art ${fmtPct(phaseTotals.art)}`);
+  console.log(`   Lane most behind: ${LANE_LABELS[mostBehind]} ($${Math.round(laneTotals[mostBehind])})`);
+
+  msg += `\n\n💰 *Four lanes (${quarter} FY26):*\n`;
+  msg += `To Us $${Math.round(laneTotals.to_us)} · To Down $${Math.round(laneTotals.to_down)} · To Grow $${Math.round(laneTotals.to_grow)} · To Others $${Math.round(laneTotals.to_others)}\n`;
+  if (phaseSum > 0) {
+    msg += `LCAA: L ${fmtPct(phaseTotals.listen)} · C ${fmtPct(phaseTotals.curiosity)} · A ${fmtPct(phaseTotals.action)} · Art ${fmtPct(phaseTotals.art)}\n`;
+  }
+  msg += `\n🌱 *Soul check:* lane most behind = *${LANE_LABELS[mostBehind]}* ($${Math.round(laneTotals[mostBehind])}).\n${SOUL_CHECK[mostBehind]}`;
+
+  msg += `\n\n_Run reconciliation-report.mjs for full details_`;
 
   await sendTelegram(msg);
 

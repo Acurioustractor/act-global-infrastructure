@@ -80,23 +80,23 @@ const MAX_RETRIES = 3;
 const PROVIDER_CONFIGS: Record<ProviderType, Record<string, ProviderConfig>> = {
   claude: {
     'haiku': {
-      model: 'claude-3-5-haiku-20241022',
+      model: 'claude-haiku-4-5',
       costPer1kInput: 0.001,
       costPer1kOutput: 0.005,
       maxTokens: 8192,
       description: 'Fast, cheap for quick analysis'
     },
     'sonnet': {
-      model: 'claude-sonnet-4-5-20250929',
+      model: 'claude-sonnet-4-6',
       costPer1kInput: 0.003,
       costPer1kOutput: 0.015,
       maxTokens: 8192,
       description: 'Best for ACT voice and LCAA understanding'
     },
     'opus': {
-      model: 'claude-opus-4-5-20251101',
-      costPer1kInput: 0.015,
-      costPer1kOutput: 0.075,
+      model: 'claude-opus-4-7',
+      costPer1kInput: 0.005,
+      costPer1kOutput: 0.025,
       maxTokens: 8192,
       description: 'Highest quality, strategic decisions'
     }
@@ -241,7 +241,7 @@ async function checkProviderHealth(provider: ProviderType): Promise<boolean> {
       case 'claude':
         if (!anthropic) throw new Error('Claude not configured');
         await anthropic.messages.create({
-          model: 'claude-3-5-haiku-20241022',
+          model: 'claude-haiku-4-5',
           max_tokens: 10,
           messages: [{ role: 'user', content: 'test' }]
         });

@@ -103,7 +103,7 @@ LCAA arc for Community Capital:
 
 - [[civicgraph|CivicGraph]] — data layer mapping funding flows that Community Capital navigates
 - [[funding-transparency|Funding Transparency]] — the concept Community Capital enacts in practice
-- [[custodian-economy|Custodian Economy]] — the stewardship economic model that Community Capital's convening helps fund and legitimise
+- [[custodian-first-economy|Custodian First Economy]]: partner program ACT works with around young people on youth justice orders
 - [[act-farm|ACT Farm]] — where Community Capital's program now has a physical home
 - [[black-cockatoo-valley|Black Cockatoo Valley]] — the land the year of accommodation runs on
 - [[the-caravan|The Caravan]] — built for Phase 1, resident at BCV
