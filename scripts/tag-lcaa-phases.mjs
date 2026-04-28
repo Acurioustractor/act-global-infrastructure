@@ -58,8 +58,12 @@ const VENDOR_OVERRIDES = [
   { match: /^adobe/i, phase: 'art', reason: 'design_tooling' },
   { match: /eckersley|whitehouse institute|frame shop|^gallery|atkins photo|vanbar|kayell|printful|printify|raspberry pi|core electronics|element14|pixapro|b&h photo|adorama|kadmium|illustrator sydney/i, phase: 'art', reason: 'art_supply' },
 
-  // Cultural production vendors → Art (journals, identity, design studios, print runs)
-  { match: /editandprin|^edit and print|defy design|stacks of wax/i, phase: 'art', reason: 'cultural_production' },
+  // Cultural production vendors → Art (journals, print runs, art studios)
+  { match: /editandprin|^edit and print|stacks of wax/i, phase: 'art', reason: 'cultural_production' },
+
+  // Product / operational design → Action (overrides project defaults like ACT-GD = Listen).
+  // Defy Design works on Goods (per Ben 2026-04-29).
+  { match: /defy design/i, phase: 'action', reason: 'design:operational' },
 
   // Materials and manufacturing vendors → Action (override project defaults like ACT-GD = Listen)
   { match: /carla furnishers/i, phase: 'action', reason: 'materials' },
@@ -126,7 +130,7 @@ const PROJECT_DEFAULTS = {
   'ACT-GD': 'listen',   // Goods on Country: most spend is fieldwork (travel/meals/Country time);
                         // materials vendors (Carla Furnishers, Stratco, etc.) override → Action via VENDOR_OVERRIDES above
   'ACT-CORE': 'action', // Core studio
-  'ACT-CE': 'action',   // Custodian Economy partner work
+  'ACT-CE': 'action',   // Custodian First Economy partner work
   'ACT-CC': 'action',   // Community Capital
 
   // Art-flavoured: cultural production
