@@ -1,8 +1,16 @@
 # Custodian Economy
 
+> ⚠️ **STALE — needs rewrite (flagged 2026-04-28).** The framing below is wrong. Per Ben, the Custodian Economy is a separate partner project that ACT works with, supporting young kids on youth justice orders. It is not ACT's own theoretical economic concept. The content below incorrectly frames it as such.
+>
+> ACT's own internal economy now lives at [[../concepts/four-lanes|The Four Lanes]]. Do not conflate the two files.
+>
+> **Action:** full rewrite needed once accurate detail about the partner project is captured (who runs it, where, who they work with, ACT's relationship, what they actually do for kids on youth justice orders). The content below is preserved for review, not as fact.
+
+---
+
 > An economic model exploring what it means to be custodians rather than owners, applied to land, knowledge, and enterprise.
 
-**Status:** Active | **Code:** ACT-CE | **Tier:** Satellite
+**Status:** Stale (framing incorrect, see note above) | **Code:** ACT-CE | **Tier:** Satellite
 
 ## Overview
 

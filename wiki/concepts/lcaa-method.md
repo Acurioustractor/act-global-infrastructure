@@ -2,9 +2,19 @@
 
 > Listen. Curiosity. Action. Art.
 
+> Method sits downstream of [[soul|Soul]]. It is not a framework imported. It is a description of what already happens.
+
 ## Definition
 
-LCAA is [[act-identity|A Curious Tractor (ACT)]]'s foundational methodology — the operating system for how ACT approaches every project, community, and challenge. It is not a linear checklist. It is a loop: Art returns us to Listen, and the cycle continues.
+LCAA is [[act-identity|A Curious Tractor (ACT)]]'s foundational methodology. It is the operating system for how ACT approaches every project, community, and challenge. It is not a linear checklist. It is a loop: Art returns us to Listen, and the cycle continues.
+
+## How LCAA Came to Be
+
+LCAA did not come from a whiteboard. It is a description of what already happens when Ben builds, Nic connects, and both make art at the end because they cannot help it. The method is the founder soul externalised. It is teachable because it was lived first.
+
+This makes LCAA an honesty check as well as an operating system. If Ben and Nic stop doing all four in their own practice, the method has to stop being a slogan in the work. The wiki cannot tell the world to listen, be curious, act, and make art if the founders themselves stopped one of them.
+
+For the upstream why behind any of this, see [[soul|Soul]].
 
 ## The Four Phases
 
@@ -141,6 +151,8 @@ Every project, every piece of art, every community relationship can be tagged wi
 
 ## Backlinks
 
+- [[soul|Soul]] — the upstream source: the founder why behind everything LCAA does
+- [[four-lanes|The Four Lanes]] — how LCAA shows up in the money: every dollar tagged to a phase
 - [[benjamin-knight|Benjamin Knight]] — founder lane for justice, story, and systems practice
 - [[nicholas-marchesi|Nicholas Marchesi OAM]] — founder lane for place, invitation, and handover
 - [[richard-cassidy|Richard Cassidy]] — shared-story framing as listening practice

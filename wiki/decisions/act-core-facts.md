@@ -13,6 +13,8 @@ review_cadence: weekly (via Alignment Loop agent)
 
 > **Update cadence:** human-edited as facts change; weekly verification by the Alignment Loop agent diffing against Supabase reality.
 
+> **Source upstream of this file:** [[../concepts/soul|Soul]] holds the founder why. This file holds the facts that serve it. If a fact here ever contradicts soul, soul is right and this file needs an edit.
+
 ---
 
 ## Last verified
@@ -35,6 +37,18 @@ review_cadence: weekly (via Alignment Loop agent)
 **Do NOT use** the labels "ACT Foundation" or "ACT Ventures" as legal entity names. They are conceptual labels in older docs; not real entities.
 
 **On first reference:** "A Curious Tractor Pty Ltd" → then "the Pty"; "A Kind Tractor Ltd" → then "the charity".
+
+### Why this structure
+
+Three trading entities, one charity, one winding-down sole trader. The point is not bureaucracy.
+
+Each project earns the right to grow on its own revenue. The Harvest's money funds the Harvest's growth. Farm money funds Farm growth. A Curious Tractor Pty Ltd is the holding muscle that carries the founder relationship and the cross-cutting work.
+
+If we ran a single Pty Ltd with three project codes, the financial story would mash. Founders would have no clean way to see whether each project pays its way. To Grow at Harvest would be invisible to Farm.
+
+The structure costs more in compliance. It saves more in legibility. Legibility is what makes the soul able to read its own body.
+
+For how money flows through these entities and into the four lanes (To Us, To Down, To Grow, To Others), see [[../concepts/four-lanes|The Four Lanes]]. For the upstream why behind any of this, see [[../concepts/soul|Soul]].
 
 ---
 
