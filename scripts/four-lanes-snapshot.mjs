@@ -65,6 +65,12 @@ function isoDate(d) {
   return d.toISOString().slice(0, 10);
 }
 
+// Today's date in AEST (Australia/Brisbane, no DST). Avoids the UTC drift that
+// stamps the snapshot a day behind when run before 10am AEST.
+function todayAEST() {
+  return new Intl.DateTimeFormat('en-CA', { timeZone: 'Australia/Brisbane' }).format(new Date());
+}
+
 function australianFyQuarter(date) {
   const d = new Date(date);
   const m = d.getUTCMonth() + 1; // 1-12
@@ -216,7 +222,7 @@ async function main() {
   let mostBehind = LANES[0];
   for (const l of LANES) if (behindBasis[l] < behindBasis[mostBehind]) mostBehind = l;
 
-  const today = new Date().toISOString().slice(0, 10);
+  const today = todayAEST();
   const lines = [];
   lines.push('---');
   lines.push('title: Four Lanes Today');
