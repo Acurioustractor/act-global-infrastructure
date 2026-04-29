@@ -134,6 +134,16 @@ Runbook: `thoughts/shared/handoffs/supabase-health-2026-04-29/weekly-runbook.md`
 
 ---
 
+## 2026-04-30 (Week 0.6 — B6 long tail, 50 more tables)
+- **Smoke test:** 6/6
+- **Advisor SEC:** 485 total (unchanged) but `rls_disabled_in_public` 130 → **80** (Δ −50)
+- **ERROR-level SEC:** 170 → **120** (Δ −50)
+- **Migration:** `enable_rls_b6_longtail_50_tables_2026_04_30` — goods_*, community_orgs, integration_events (14k rows), wiki_*, tracker_*, ghl_pipelines/tags, act_entities, blog_posts_profiles, ecosystem_projects, studio_projects, services, scraped_services, project_contact_alignment, knowledge_edges/links, media_*, sprint_items/suggestions, contact_*_links, user_gamification_stats, financial_overview_cache, financial_summary, partner_external_links, repo_project_links, sector_map_cache, organizations_profiles, opportunities_unified, policy_events, privacy_settings, procurement_webhook_receipts, migration_email_templates, email_response_templates, content_link_suggestions, communication_*, campaign_tracked_posts, clearinghouse_documents, reminders.
+- **Verified at scale:** integration_events 14,242 rows, goods_supply_routes 3,917, community_orgs 826, goods_asset_lifecycle 404, wiki_search_index 271 — all readable via service role.
+- **Notes:** Per-table grep across 50 tables, zero frontend or anon-key consumers. ERROR-level SEC has now dropped from ~397 founding → 120 (−70%).
+
+---
+
 ## Template (copy this for next week)
 
 ```markdown

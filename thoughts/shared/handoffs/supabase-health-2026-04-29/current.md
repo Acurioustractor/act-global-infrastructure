@@ -19,6 +19,11 @@
 - Bucket C2 closed: 107 ACT-side views flipped to `security_invoker = true` in 4 batches of 25/25/25/32. The 40 remaining `security_definer_view` lints are all civicscope C1 (intentionally untouched).
 - Bucket B6 cluster 1 closed: 8 `notion_*` tables (notion_actions, _calendar, _decisions, _grants, _meetings, _opportunities, _organizations, _projects) flipped to RLS-on with zero policies. Verified all consumers use service-role client — service role bypasses RLS, so the API routes/scripts continue to read normally; anon/authenticated paths are now denied.
 
+### Week 0.6 (2026-04-30 night, late) — B6 long tail
+1 migration. **50 more tables** locked down (goods, community_orgs, integration_events 14k rows, wiki_*, tracker_*, ghl_pipelines/tags, services, scraped_services, knowledge_*, media_*, sprint_*, contact_*_links, etc). ERROR-level SEC 170 → **120**. `rls_disabled_in_public` 130 → 80.
+- Per-table grep verified zero frontend or anon-key consumers across all 50.
+- Smoke 6/6. Service-role reads verified at scale.
+
 ### Week 0.5 (2026-04-30 night) — agent_proposals fix + B3 user-facing
 2 migrations + 1 app refactor. **50 more tables** locked down. ERROR-level SEC 220 → 170 (↓50). `rls_disabled_in_public` 180 → 130.
 - **App refactor**: `apps/command-center/src/components/agent-approvals.tsx` switched from direct `supabaseClient` (anon-key) to `fetch('/api/agent/proposals')` (server-side, service-role). Real exposure closed.
@@ -53,8 +58,8 @@
 ### Long tail (next sessions, civicscope-safe)
 - 1,156 unused indexes still flagged
 - 353 multiple_permissive_policies remaining
-- **130 rls_disabled_in_public** (was 250 founding, **−120** across Weeks 0.3 + 0.4 + 0.5)
-- 136 rls_enabled_no_policy (INFO-level — defense-in-depth posture; same tables as above migrated ERROR→INFO)
+- **80 rls_disabled_in_public** (was 250 founding, **−170** across Weeks 0.3–0.6) — remaining likely BUCKETs B1 reference-data + niche server-only tables
+- 186 rls_enabled_no_policy (INFO-level — defense-in-depth posture; tables migrated ERROR→INFO)
 - 40 security_definer_view (all civicscope C1, leave alone)
 - 49+49 anon/authenticated-executable SECURITY DEFINER functions — review each
 - 161 unindexed_foreign_keys
@@ -93,6 +98,9 @@ scripts/civicscope-smoketest.mjs                             # 6-route site smok
 ```
 
 ## Migrations applied (all reversible via PITR + ddl-rollback.sql)
+**2026-04-30 batch (Week 0.6 — B6 long tail):**
+29. `enable_rls_b6_longtail_50_tables_2026_04_30` — 50 tables across goods/community/wiki/tracker/sprint/financial/contact/knowledge/media/policy clusters
+
 **2026-04-30 batch (Week 0.5 — agent_proposals + B3 user-facing):**
 27. `enable_rls_agent_proposals_2026_04_30` — agent_proposals (after frontend refactor in agent-approvals.tsx)
 28. `enable_rls_b3_user_facing_2026_04_30` — 49 B3 tables (users, sessions, synced_stories, etc.)
