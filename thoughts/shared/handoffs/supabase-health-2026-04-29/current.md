@@ -1,8 +1,36 @@
 # Supabase health cleanup — current handoff
-**Updated:** 2026-04-30 (Week 0.3 — Bucket C2 + B6 notion sweep)
+**Updated:** 2026-04-30 night (Weeks 0.3 → 0.6 shipped; pushed through e7cd833)
 **DB:** `tednluwflfhxyucgwigh` (shared ACT/grantscope/JusticeHub)
-**Branch:** cockpit-refresh-2026-04-26 / migrations applied via Supabase MCP (all reversible via PITR)
+**Branch:** cockpit-refresh-2026-04-26 / 5 commits ahead of last push, all on remote
 **PITR:** ON, 7-day window, scheduled to turn off ≥ 2026-05-13 once stable
+
+## Where we stopped (2026-04-30 night)
+**ACT-side surface fully closed at ERROR level.** Every single remaining ERROR-level SEC lint (120 total) is on **civicscope-protected tables** — 80 `rls_disabled_in_public` (abr_registry 20M, asic_name_lookup 2.1M, gs_*, foundations, ndis_*, acnc_*, alma_*, civic_*, etc.) + 40 `security_definer_view` (v_acnc_*, v_charity_*, v_funding_*, v_justice_*, v_ndis_*, v_youth_justice_*, etc.). These are intentional per the triage doc — civicscope is service-role-only and the lints are known false positives in that posture.
+
+172 tables/views hardened across the session. Cumulative ERROR-level SEC drop: ~397 → 120 (−70%). Civicscope row counts unchanged throughout (gs_entities ≥591k, grants 32k, foundations 10.9k, asic 2.17M, austender 798k). Smoke test 6/6 across 13 runs.
+
+## What to consider tomorrow (pick any)
+
+### DB-health continuation
+1. **Civicscope ERROR closure (decision needed)** — Option A: leave 120 ERROR lints as documented intentional false positives. Option B: enable RLS no-policy on the 80 civicscope B1 tables (zero data risk if civicscope.app is purely service-role; smoke test already suggests yes since matviews are revoked from anon). Run a stronger civicscope smoke first (more routes, more matviews) before flipping. Would zero the ERROR-level SEC count.
+2. **49+49 SECURITY DEFINER functions executable by anon/authenticated** — per-function review. Pattern: `REVOKE EXECUTE ON FUNCTION public.<name>(args) FROM anon, authenticated;` for ones not called from the browser. Some are RPCs that legitimately need anon (e.g. civicscope search RPCs) — careful per function.
+3. **77 `rls_policy_always_true` policies** — review each. Either intentional public-read (add a comment) or replace with real predicates.
+4. **161 unindexed_foreign_keys** — `procurement_shortlists` worst (8 unindexed). Add covering indexes where the FK is actually queried.
+5. **1,156 unused indexes** — slow but high-value cleanup; reclaim disk + lower write overhead. Drop in batches of 20–30 with smoke test between.
+6. **353 multiple_permissive_policies** — group by table, consolidate where possible. Saved 105 in Week 0.2 with bgfit + saved_foundations.
+7. **PITR turn-off prep** — pg_dump cold snapshot now (insurance), then keep weekly runbook running, target turn-off 2026-05-13 (earliest) or 2026-05-20 (recommended).
+
+### Other ACT work that's ready to pick up
+- **Goods → Minderoo pitch** — draft + DRAFT PDF at `thoughts/shared/writing/drafts/goods-minderoo-pitch/` awaiting Ben's voice review. Lands mid-May.
+- **INV-0314 Centrecorp Production Plant $84,700 DRAFT** — send or void (10 min call with Nic; Gmail nudge composed in earlier session).
+- **Soul stack item 9** — only remaining work-order item is the weekly digest line. Plan tracker `thoughts/shared/plans/strategy-from-soul.md`.
+- **Wiki story sync OCAP cascade design** — Part D in `thoughts/shared/plans/wiki-living-library-review.md`.
+- **Spending intelligence Q3 ingestion** — Q2 closed, R&D tagging + agent weekly loop are next steps per `thoughts/shared/handoffs/spending-intelligence-v3-handoff.md`.
+
+### Routine maintenance (any Monday)
+- `node scripts/civicscope-smoketest.mjs` (1 min)
+- Pull advisor counts, compare to last log entry
+- Append a row to `thoughts/shared/handoffs/db-health-log.md`
 
 ## Start here next session
 1. **Read the weekly runbook** — `weekly-runbook.md` (this folder)
