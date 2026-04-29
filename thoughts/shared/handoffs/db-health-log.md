@@ -69,6 +69,30 @@ Runbook: `thoughts/shared/handoffs/supabase-health-2026-04-29/weekly-runbook.md`
 
 ---
 
+## 2026-04-30 (Week 0.3 — Bucket C2 sweep + B6 notion_*)
+- **Smoke test:** 6/6 (run 5 times — pre-batch + after each of 4 batches + after notion RLS — all green, 280–950 ms)
+- **DB size:** 21 GB (no change)
+- **Indexes / policies / matviews:** unchanged (no DROP this session, only `ALTER VIEW SET` + `ALTER TABLE ENABLE RLS`)
+- **WAL archiving:** healthy
+- **Advisor PERF:** 1,677 (unchanged — this session was security-only)
+- **Advisor SEC:** 485 (Δ **−107** vs Week 0.2 of 592, Δ −188 vs founding baseline of 673)
+  - `security_definer_view`: 147 → 40 (−107) — remaining 40 are all civicscope C1, intentionally untouched
+  - `rls_disabled_in_public`: 250 → 242 (−8) — 8 notion_* tables flipped to RLS-on
+  - `rls_enabled_no_policy`: 16 → 24 (+8) — same 8 notion_* now show under this lint (INFO-level, expected; service-role bypass means anon is denied which is the goal)
+- **ERROR-level:** 290 → 282 (Δ −8 from notion_* RLS); founding-session 3 ERROR closures still hold
+- **Civicscope counts:** gs_entities ≥591k / grants 32k / foundations 10.9k ✅ (smoke test verifies live aggregate paths)
+- **Migrations applied:**
+  1. `c2_batch1_security_invoker_views_2026_04_30` — 25 ACT views (accounting_summary → partner_storytellers_v)
+  2. `c2_batch2_security_invoker_views_2026_04_30` — 25 views (pending_extractions → v_bgfit_upcoming_deadlines)
+  3. `c2_batch3_security_invoker_views_2026_04_30` — 25 views (v_calendar_events_with_projects → v_project_health_summary)
+  4. `c2_batch4_security_invoker_views_2026_04_30` — 32 views (v_project_questions → xero_upcoming_payables)
+  5. `enable_rls_notion_server_only_2026_04_30` — 8 notion_* tables ENABLE ROW LEVEL SECURITY (zero policies, server-only via service role)
+- **Verified after migration:** service-role read of notion_projects (80), notion_organizations (74), notion_opportunities (43) succeeds — RLS bypass intact for service role.
+- **Skipped:** 40 civicscope C1 SECURITY DEFINER views (v_acnc_*, v_charity_*, v_funding_*, v_justice_*, v_ndis_*, v_youth_justice_*, v_governed_proof_*, v_qld_watchhouse_latest, v_state_ecosystem_summary, v_data_health, v_data_quality_scores, v_data_catalog_latest, v_alma_current_impact, v_prf_portfolio_outcomes, v_nt_community_*, justice_funding_clean) — service-role-only path makes SECURITY DEFINER non-issue and they may rely on creator-priv joins.
+- **Notes:** Mechanical session. No application code touched. Frontend dashboards reading these views via service-role client are unaffected (security_invoker only changes the permission check; service role bypasses RLS on underlying tables). The 8 notion_* tables had 0 anon-key consumers (all imports via service-role-bound `@/lib/supabase`), so RLS-on with no policy is the correct posture.
+
+---
+
 ## Template (copy this for next week)
 
 ```markdown

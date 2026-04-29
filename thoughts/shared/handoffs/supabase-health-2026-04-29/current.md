@@ -1,7 +1,7 @@
 # Supabase health cleanup — current handoff
-**Updated:** 2026-04-30 evening
+**Updated:** 2026-04-30 (Week 0.3 — Bucket C2 + B6 notion sweep)
 **DB:** `tednluwflfhxyucgwigh` (shared ACT/grantscope/JusticeHub)
-**Branch:** main / no commits made (all changes applied as Supabase migrations)
+**Branch:** cockpit-refresh-2026-04-26 / migrations applied via Supabase MCP (all reversible via PITR)
 **PITR:** ON, 7-day window, scheduled to turn off ≥ 2026-05-13 once stable
 
 ## Start here next session
@@ -13,6 +13,11 @@
 
 ## What this session did (2026-04-29 → 30)
 13 migrations applied. Lint reductions: PERF 2,574 → 1,830 (↓744), SEC 1,011 → 673 (↓338). DB shrunk 22 → 21 GB. Civicscope counts unchanged throughout.
+
+### Week 0.3 (2026-04-30 evening) — security-only sweep
+5 migrations applied. SEC 592 → 485 (↓107 — `security_definer_view` 147→40, `rls_disabled_in_public` 250→242). PERF unchanged (1,677). Smoke test 6/6 after every migration. No application code touched.
+- Bucket C2 closed: 107 ACT-side views flipped to `security_invoker = true` in 4 batches of 25/25/25/32. The 40 remaining `security_definer_view` lints are all civicscope C1 (intentionally untouched).
+- Bucket B6 cluster 1 closed: 8 `notion_*` tables (notion_actions, _calendar, _decisions, _grants, _meetings, _opportunities, _organizations, _projects) flipped to RLS-on with zero policies. Verified all consumers use service-role client — service role bypasses RLS, so the API routes/scripts continue to read normally; anon/authenticated paths are now denied.
 
 **Closed ERROR-level security holes:**
 - 3 sensitive_columns_exposed (gmail_auth_tokens, bank_statement_lines, xero_contacts)
@@ -32,12 +37,13 @@
 
 ### Long tail (next sessions, civicscope-safe)
 - 1,156 unused indexes still flagged (was 1,188, −32 across two batches)
-- 353 multiple_permissive_policies remaining (was 458, **−105** in batch 1: saved_foundations + bgfit_* × 4 — see migrations 2026-04-30)
-- 250 rls_disabled_in_public — **triaged into 6 buckets in `batch-bc-triage.md`**, awaiting per-bucket execution
-- 147 security_definer_view — **triaged into 3 buckets in `batch-bc-triage.md`**, ~80 in C2 ready for mechanical `ALTER VIEW SET security_invoker = true`
+- 353 multiple_permissive_policies remaining (was 458, **−105** consolidated)
+- 242 rls_disabled_in_public (was 250, **−8** notion_* in Week 0.3) — see `batch-bc-triage.md` for remaining 6 buckets
+- 40 security_definer_view (was 147, **−107** in Week 0.3) — all 40 remaining are civicscope C1, leave alone unless schema-reorg goes ahead
+- 24 rls_enabled_no_policy (was 16, +8 — these are the notion_* tables now showing RLS-on without explicit policies; INFO-level, expected)
 - 161 unindexed_foreign_keys — `procurement_shortlists` worst (8 unindexed FKs)
 - 49+49 anon/authenticated-executable SECURITY DEFINER functions — review each
-- 18 stragglers on auth_rls_initplan after batch 3 — verify if all closed
+- 1 straggler on auth_rls_initplan (was 18, all but one resolved through wraps) — find & wrap
 
 ### Schema reorganisation (bigger conversation)
 - **Plan drafted: `thoughts/shared/plans/supabase-schema-reorg.md`** — needs Ben sign-off before any DDL
@@ -67,6 +73,13 @@ scripts/civicscope-smoketest.mjs                             # 6-route site smok
 ```
 
 ## Migrations applied (all reversible via PITR + ddl-rollback.sql)
+**2026-04-30 batch (Week 0.3 — security-only):**
+18. `c2_batch1_security_invoker_views_2026_04_30` — 25 ACT views → security_invoker
+19. `c2_batch2_security_invoker_views_2026_04_30` — 25 ACT views → security_invoker
+20. `c2_batch3_security_invoker_views_2026_04_30` — 25 ACT views → security_invoker
+21. `c2_batch4_security_invoker_views_2026_04_30` — 32 ACT views → security_invoker
+22. `enable_rls_notion_server_only_2026_04_30` — 8 notion_* tables RLS-on (no policy = service-role-only)
+
 **2026-04-30 batch (Week 0.2):**
 16. `drop_unused_indexes_batch2_2026_04_30` — 13 unused indexes
 17. `consolidate_permissive_policies_batch1_2026_04_30` — saved_foundations 4 + bgfit_* × 4 admin merges

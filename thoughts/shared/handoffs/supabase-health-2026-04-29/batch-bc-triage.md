@@ -1,7 +1,8 @@
 # Batch B + C triage — RLS disabled + SECURITY DEFINER views
 **Captured:** 2026-04-30 (Week 0.1)
-**Counts:** 250 `rls_disabled_in_public` + 147 `security_definer_view`
-**Status:** Triage only — no execution. Each bucket needs an explicit decision before action.
+**Updated:** 2026-04-30 (Week 0.3 — Bucket C2 closed; B6 notion_* sub-cluster closed)
+**Counts (after Week 0.3):** 242 `rls_disabled_in_public` (↓8) + 40 `security_definer_view` (↓107, all civicscope C1)
+**Status:** Bucket C2 ✅ COMPLETE. B6 notion_* ✅ COMPLETE. Remaining: B3/B5/B6 long tail.
 
 ---
 
@@ -185,7 +186,12 @@ v_nt_community_procurement_summary · justice_funding_clean
 
 ---
 
-### Bucket C2: ACT internal dashboards — SAFE TO MIGRATE (~80 views)
+### Bucket C2: ACT internal dashboards — ✅ COMPLETE (107 views migrated 2026-04-30 Week 0.3)
+
+Done in 4 batches of 25/25/25/32. Smoke test 6/6 between each batch and after notion sweep. SEC `security_definer_view` lint dropped 147 → 40 (the 40 remaining are all civicscope C1, intentionally untouched). See migrations `c2_batch{1..4}_security_invoker_views_2026_04_30`.
+
+Original target list (preserved for reference):
+
 
 ```
 agent_health_dashboard · agent_status · agentic_project_dashboard ·
@@ -246,12 +252,22 @@ Not in C lint per se — matviews don't have `security_invoker` in the same way.
 
 ## Suggested next-session order
 
-1. **Pick one Bucket B6 sub-cluster** (e.g. all `notion_*` tables) → consumer-grep → enable RLS or move to deny-all → smoke test.
-2. **Bucket C2 in 4 batches of ~20 views** → `ALTER VIEW SET security_invoker = true` → smoke test between each.
-3. Re-run advisor — expect SEC count to drop ~80, PERF unchanged.
-4. Update this doc to reflect what was processed.
+**Done in Week 0.3 (2026-04-30):**
+- ✅ Bucket C2 (107 views) — closed in 4 batches with smoke test between each
+- ✅ B6 notion_* (8 tables) — verified service-role-only consumers, RLS enabled with no policy
 
-This is **3-4 hour-long sessions** of work. Don't try to ship in one.
+**Remaining work (next sessions):**
+1. **B6 — pick the next sub-cluster.** Suggested order, based on row volume + frontend exposure risk:
+   - `gmail_*` (gmail_contacts, gmail_messages, gmail_sync_status) — server-only sync, mailboxes are personal, lock down
+   - `agent_*` infrastructure (~20 tables in B2 list) — mass-enable RLS with no policies, defense-in-depth
+   - `intelligence_*`, `pulse_reports`, `oversight_recommendations` — verify consumers, then decide
+   - `goods_*`, `community_orgs` — public-readable? add `CREATE POLICY public_read FOR SELECT USING (true)`
+2. **Bucket B3 user-facing tables** — these are the riskiest because some have anon-key consumers. Per-table grep + per-user policy. Examples: `profiles`, `calendar_events`, `users`, `sessions`.
+3. **Bucket B5 finance/Xero** — server-only via service role. Pattern matches notion_*: enable RLS with zero policies.
+4. **49+49 anon/authenticated SECURITY DEFINER functions** — separate review, each function needs `REVOKE EXECUTE FROM anon, authenticated;` or equivalent.
+5. **multiple_permissive_policies** — 353 remaining. Group by table, consolidate where possible.
+
+This is **3-4 more hour-long sessions** of work.
 
 ---
 
