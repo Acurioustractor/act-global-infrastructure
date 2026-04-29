@@ -93,6 +93,29 @@ Runbook: `thoughts/shared/handoffs/supabase-health-2026-04-29/weekly-runbook.md`
 
 ---
 
+## 2026-04-30 (Week 0.4 — B6 gmail/agent + B5 finance/Xero + B2 infra)
+- **Smoke test:** 6/6 (run twice — after gmail+agent batch, after finance+infra batch)
+- **DB size:** 21 GB (no change)
+- **Indexes / policies / matviews:** unchanged (RLS-enable is a flag flip, no DDL beyond ALTER TABLE)
+- **WAL archiving:** healthy
+- **Advisor PERF:** 1,677 (unchanged — security-only session)
+- **Advisor SEC total:** 485 (unchanged in count, but composition shifted ERROR → INFO)
+  - `rls_disabled_in_public`: 242 → 180 (Δ −62)
+  - `rls_enabled_no_policy`: 24 → 86 (Δ +62, INFO-level — same 62 tables, now defense-in-depth)
+- **ERROR-level SEC:** 282 → **220** (Δ −62) — biggest single-session ERROR drop after C2 closure
+- **Civicscope counts:** unchanged ✅ (gs_entities ≥591k, grants 32k, foundations 10.9k, asic 2.17M, austender 798k)
+- **Verified after migration:** service-role reads succeed for xero_bank_accounts (5), subscription_patterns (48), money_flows (4,630), agent_runs (1,593), privacy_audit_log (1,278,440), source_frontier (53,485) — RLS bypass intact at scale.
+- **Migrations applied:**
+  6. `enable_rls_gmail_server_only_2026_04_30` — 3 gmail_* tables (gmail_auth_tokens already had RLS)
+  7. `enable_rls_agent_infrastructure_2026_04_30` — 14 agent_*/agentic_*/ralph_* tables (skipped agent_proposals — see below)
+  8. `enable_rls_finance_xero_server_only_2026_04_30` — 27 finance/Xero/receipts/subscriptions/vendor tables
+  9. `enable_rls_supporting_infra_server_only_2026_04_30` — 18 telemetry/sync/audit/cron/pipeline/data-catalog tables
+- **62 tables locked down** in this session.
+- **NOT migrated (B3 follow-up needed):** `agent_proposals` — `apps/command-center/src/components/agent-approvals.tsx` reads + writes via the browser anon-key client. Real exposure: anyone hitting the dashboard can approve/reject AI agent proposals without auth. Fix is to move read+write into `apps/command-center/src/app/api/agent/proposals/` (the route exists) and refactor the component to call the API. Tracked as B3 priority.
+- **Notes:** Per-table consumer-grep before each batch (frontend components vs API routes vs scripts). Pattern: 0 frontend = safe to enable RLS no-policy. The ERROR→INFO migration is the actual security improvement — anon/authenticated paths now blocked, service-role bypass keeps everything else working unchanged.
+
+---
+
 ## Template (copy this for next week)
 
 ```markdown

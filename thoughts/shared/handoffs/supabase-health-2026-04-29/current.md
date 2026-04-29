@@ -19,6 +19,15 @@
 - Bucket C2 closed: 107 ACT-side views flipped to `security_invoker = true` in 4 batches of 25/25/25/32. The 40 remaining `security_definer_view` lints are all civicscope C1 (intentionally untouched).
 - Bucket B6 cluster 1 closed: 8 `notion_*` tables (notion_actions, _calendar, _decisions, _grants, _meetings, _opportunities, _organizations, _projects) flipped to RLS-on with zero policies. Verified all consumers use service-role client — service role bypasses RLS, so the API routes/scripts continue to read normally; anon/authenticated paths are now denied.
 
+### Week 0.4 (2026-04-30 late evening) — B6 + B5 + B2 lockdown
+4 more migrations. **62 tables** flipped to RLS-on (server-only via service role). ERROR-level SEC 282 → 220 (↓62). Total SEC unchanged because the lints shifted from `rls_disabled_in_public` (ERROR) to `rls_enabled_no_policy` (INFO-level, expected).
+- B6 gmail_*: gmail_contacts, gmail_messages, gmail_sync_status (3)
+- B6 agent infra: agent_actions, agent_audit_log, agent_runs, agent_runtime_state, agent_schedules, agent_task_queue, agent_tasks, agentic_chat, agentic_projects, agentic_tasks, agentic_work_log, agents, ralph_prds, ralph_tasks (14)
+- B5 finance/Xero: 27 tables (xero_*, bookkeeping_*, invoice_project_*, receipt_*, dext_*, subscription*, vendor_*, location_project_rules, collections_actions, charity_impact_reports, money_flows, metrics, outcomes_metrics)
+- B2 supporting infra: 18 tables (llm_usage, api_pricing, app_config, pm2_cron_status, pipeline_*, processing_jobs, sync_status, profile_sync_log, ghl_sync_log, data_sources, data_catalog*, source_frontier, mv_refresh_log, webhook_delivery_log, privacy_audit_log, enrichment_candidates)
+- **Verified at scale**: service role still reads privacy_audit_log (1.27M rows), source_frontier (53k), agent_runs (1,593), money_flows (4,630).
+- **Skipped**: `agent_proposals` — anon-key consumer in `agent-approvals.tsx`. Real exposure (anyone hitting dashboard can approve agent proposals without auth). Tracked in B3.
+
 **Closed ERROR-level security holes:**
 - 3 sensitive_columns_exposed (gmail_auth_tokens, bank_statement_lines, xero_contacts)
 - 5 policy_exists_rls_disabled (blog_posts, page_views, profiles, quotes, story_reactions)
@@ -36,14 +45,17 @@
 ## Open items by priority
 
 ### Long tail (next sessions, civicscope-safe)
-- 1,156 unused indexes still flagged (was 1,188, −32 across two batches)
-- 353 multiple_permissive_policies remaining (was 458, **−105** consolidated)
-- 242 rls_disabled_in_public (was 250, **−8** notion_* in Week 0.3) — see `batch-bc-triage.md` for remaining 6 buckets
-- 40 security_definer_view (was 147, **−107** in Week 0.3) — all 40 remaining are civicscope C1, leave alone unless schema-reorg goes ahead
-- 24 rls_enabled_no_policy (was 16, +8 — these are the notion_* tables now showing RLS-on without explicit policies; INFO-level, expected)
-- 161 unindexed_foreign_keys — `procurement_shortlists` worst (8 unindexed FKs)
+- 1,156 unused indexes still flagged
+- 353 multiple_permissive_policies remaining
+- **180 rls_disabled_in_public** (was 250, **−70** across Weeks 0.3 + 0.4)
+- 86 rls_enabled_no_policy (INFO-level, expected from the RLS-enable sweeps — defense-in-depth posture)
+- 40 security_definer_view (all civicscope C1, leave alone)
 - 49+49 anon/authenticated-executable SECURITY DEFINER functions — review each
-- 1 straggler on auth_rls_initplan (was 18, all but one resolved through wraps) — find & wrap
+- 161 unindexed_foreign_keys
+- 1 straggler on auth_rls_initplan
+
+### B3 follow-up (real exposures requiring app-code changes)
+- **`agent_proposals`** — `apps/command-center/src/components/agent-approvals.tsx` reads+writes via anon-key. Anyone with dashboard URL can approve agent proposals. Fix: move into `apps/command-center/src/app/api/agent/proposals/` (route already exists) and refactor component to call the API. Then enable RLS no-policy.
 
 ### Schema reorganisation (bigger conversation)
 - **Plan drafted: `thoughts/shared/plans/supabase-schema-reorg.md`** — needs Ben sign-off before any DDL
@@ -73,6 +85,12 @@ scripts/civicscope-smoketest.mjs                             # 6-route site smok
 ```
 
 ## Migrations applied (all reversible via PITR + ddl-rollback.sql)
+**2026-04-30 batch (Week 0.4 — RLS lockdown):**
+23. `enable_rls_gmail_server_only_2026_04_30` — 3 gmail_* tables
+24. `enable_rls_agent_infrastructure_2026_04_30` — 14 agent_*/agentic_*/ralph_* tables
+25. `enable_rls_finance_xero_server_only_2026_04_30` — 27 xero/receipts/subscriptions/vendor tables
+26. `enable_rls_supporting_infra_server_only_2026_04_30` — 18 telemetry/sync/audit/cron/pipeline tables
+
 **2026-04-30 batch (Week 0.3 — security-only):**
 18. `c2_batch1_security_invoker_views_2026_04_30` — 25 ACT views → security_invoker
 19. `c2_batch2_security_invoker_views_2026_04_30` — 25 ACT views → security_invoker
