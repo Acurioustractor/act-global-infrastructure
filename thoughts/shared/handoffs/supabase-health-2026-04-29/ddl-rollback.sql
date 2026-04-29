@@ -172,11 +172,58 @@ ORDER BY count(DISTINCT company_acn) DESC;
 
 
 -- =====================================================
+-- PART D — Unused index drops (2026-04-30 batch, Week 0.1)
+-- =====================================================
+-- Civicscope-safe: ACT-side + JusticeHub-single-owner only. All idx_scan = 0.
+
+CREATE INDEX idx_organizations_name_trgm ON public.organizations USING gin (lower(name) gin_trgm_ops);
+CREATE INDEX idx_organizations_graph_score ON public.organizations USING btree (graph_score) WHERE (graph_score > (0)::numeric);
+CREATE INDEX idx_organizations_type ON public.organizations USING btree (type);
+CREATE INDEX idx_voice_notes_embedding ON public.voice_notes USING ivfflat (embedding vector_cosine_ops) WITH (lists='100');
+CREATE INDEX idx_comms_thread ON public.communications_history USING btree (source_thread_id);
+CREATE INDEX idx_integration_events_source ON public.integration_events USING btree (source, created_at DESC);
+CREATE INDEX idx_articles_search ON public.articles USING gin (to_tsvector('english'::regconfig, ((((title || ' '::text) || COALESCE(excerpt, ''::text)) || ' '::text) || content)));
+CREATE INDEX idx_alma_evidence_search ON public.alma_evidence USING gin (search_vector);
+CREATE INDEX idx_linkedin_contacts_company ON public.linkedin_contacts USING btree (current_company);
+CREATE INDEX idx_cae_acnc_abn ON public.campaign_alignment_entities USING btree (acnc_abn);
+CREATE INDEX idx_cae_person_id ON public.campaign_alignment_entities USING btree (person_id);
+CREATE INDEX idx_cae_composite_score ON public.campaign_alignment_entities USING btree (composite_score DESC);
+CREATE INDEX idx_cae_campaign_list ON public.campaign_alignment_entities USING btree (campaign_list);
+
+
+-- =====================================================
+-- PART E — Permissive policy consolidations (2026-04-30 batch, Week 0.1)
+-- =====================================================
+
+-- saved_foundations: redundant action-specific policies (subsumed by "Users manage own saved foundations" FOR ALL)
+CREATE POLICY "delete own" ON public.saved_foundations FOR DELETE TO public USING (((SELECT auth.uid()) = user_id));
+CREATE POLICY "insert own" ON public.saved_foundations FOR INSERT TO public WITH CHECK (((SELECT auth.uid()) = user_id));
+CREATE POLICY "select own" ON public.saved_foundations FOR SELECT TO public USING (((SELECT auth.uid()) = user_id));
+CREATE POLICY "update own" ON public.saved_foundations FOR UPDATE TO public USING (((SELECT auth.uid()) = user_id));
+
+-- bgfit_budget_items: original split admin policies (merged into bgfit_budget_items_admin_or_org_admin)
+CREATE POLICY bgfit_budget_items_admin ON public.bgfit_budget_items FOR ALL TO public USING ((EXISTS (SELECT 1 FROM profiles WHERE profiles.id = (SELECT auth.uid()) AND profiles.role = 'admin'::text)));
+CREATE POLICY bgfit_budget_items_org_admin ON public.bgfit_budget_items FOR ALL TO public USING ((EXISTS (SELECT 1 FROM bgfit_grants g JOIN organization_members om ON om.organization_id = g.organization_id WHERE g.id = bgfit_budget_items.grant_id AND om.user_id = (SELECT auth.uid()) AND om.role = 'admin'::text)));
+
+-- bgfit_deadlines: original split admin policies
+CREATE POLICY bgfit_deadlines_admin ON public.bgfit_deadlines FOR ALL TO public USING ((EXISTS (SELECT 1 FROM profiles WHERE profiles.id = (SELECT auth.uid()) AND profiles.role = 'admin'::text)));
+CREATE POLICY bgfit_deadlines_org_admin ON public.bgfit_deadlines FOR ALL TO public USING ((grant_id IS NULL OR EXISTS (SELECT 1 FROM bgfit_grants g JOIN organization_members om ON om.organization_id = g.organization_id WHERE g.id = bgfit_deadlines.grant_id AND om.user_id = (SELECT auth.uid()) AND om.role = 'admin'::text)));
+
+-- bgfit_grants: original split admin policies
+CREATE POLICY bgfit_grants_admin ON public.bgfit_grants FOR ALL TO public USING ((EXISTS (SELECT 1 FROM profiles WHERE profiles.id = (SELECT auth.uid()) AND profiles.role = 'admin'::text)));
+CREATE POLICY bgfit_grants_org_admin ON public.bgfit_grants FOR ALL TO public USING ((EXISTS (SELECT 1 FROM organization_members om WHERE om.organization_id = bgfit_grants.organization_id AND om.user_id = (SELECT auth.uid()) AND om.role = 'admin'::text)));
+
+-- bgfit_transactions: original split admin policies
+CREATE POLICY bgfit_transactions_admin ON public.bgfit_transactions FOR ALL TO public USING ((EXISTS (SELECT 1 FROM profiles WHERE profiles.id = (SELECT auth.uid()) AND profiles.role = 'admin'::text)));
+CREATE POLICY bgfit_transactions_org_admin ON public.bgfit_transactions FOR ALL TO public USING ((EXISTS (SELECT 1 FROM bgfit_grants g JOIN organization_members om ON om.organization_id = g.organization_id WHERE g.id = bgfit_transactions.grant_id AND om.user_id = (SELECT auth.uid()) AND om.role = 'admin'::text)));
+
+
+-- =====================================================
 -- ROLLBACK NOTES
 -- =====================================================
 --
 -- To rebuild a single dropped index:
---   1. Find it in PART A or PART B of this file
+--   1. Find it in PART A, PART B, or PART D of this file
 --   2. Run the CREATE INDEX statement (consider adding CONCURRENTLY to avoid locking)
 --   3. ANALYZE the table afterward
 --

@@ -31,19 +31,20 @@
 ## Open items by priority
 
 ### Long tail (next sessions, civicscope-safe)
-- 1,188 unused indexes still flagged — per-table review
-- 458 multiple_permissive_policies remaining (mostly user/admin combos on BGFit, procurement_*, funder_portfolios)
-- 250 rls_disabled_in_public — needs per-table decision
-- 147 security_definer_view — per-view review
-- 160 unindexed_foreign_keys — `procurement_shortlists` worst (8 unindexed FKs)
+- 1,156 unused indexes still flagged (was 1,188, −32 across two batches)
+- 353 multiple_permissive_policies remaining (was 458, **−105** in batch 1: saved_foundations + bgfit_* × 4 — see migrations 2026-04-30)
+- 250 rls_disabled_in_public — **triaged into 6 buckets in `batch-bc-triage.md`**, awaiting per-bucket execution
+- 147 security_definer_view — **triaged into 3 buckets in `batch-bc-triage.md`**, ~80 in C2 ready for mechanical `ALTER VIEW SET security_invoker = true`
+- 161 unindexed_foreign_keys — `procurement_shortlists` worst (8 unindexed FKs)
 - 49+49 anon/authenticated-executable SECURITY DEFINER functions — review each
 - 18 stragglers on auth_rls_initplan after batch 3 — verify if all closed
 
 ### Schema reorganisation (bigger conversation)
+- **Plan drafted: `thoughts/shared/plans/supabase-schema-reorg.md`** — needs Ben sign-off before any DDL
 - 22 grantscope-only tables → move to `civicscope.*` schema
 - 2 JusticeHub-only tables → move to `justicehub.*`
-- 20 multi-owner tables → need view/RPC contracts before any schema changes
-- See `table-consumers.md` for full per-table picture
+- 20 multi-owner tables → recommended NOT to move (no cross-schema views) — let `public.<table>` continue to serve both consumers
+- See `table-consumers.md` for full per-table picture, `supabase-schema-reorg.md` for design + migration order
 
 ### Civicscope embedding decision (deferred)
 - 4 vector embedding indexes (~3.2 GB total) ARE wired up to RPCs but get 0 scans (frontend dormant)
@@ -66,6 +67,11 @@ scripts/civicscope-smoketest.mjs                             # 6-route site smok
 ```
 
 ## Migrations applied (all reversible via PITR + ddl-rollback.sql)
+**2026-04-30 batch (Week 0.2):**
+16. `drop_unused_indexes_batch2_2026_04_30` — 13 unused indexes
+17. `consolidate_permissive_policies_batch1_2026_04_30` — saved_foundations 4 + bgfit_* × 4 admin merges
+
+**Founding session 2026-04-29:**
 1. `lock_down_sensitive_columns_2026_04_29`
 2. `cleanup_orphans_dupes_rls_2026_04_29`
 3. `enable_rls_profiles_2026_04_29`

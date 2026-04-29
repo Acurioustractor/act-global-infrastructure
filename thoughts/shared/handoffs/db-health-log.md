@@ -45,6 +45,30 @@ Runbook: `thoughts/shared/handoffs/supabase-health-2026-04-29/weekly-runbook.md`
 
 ---
 
+## 2026-04-30 (Week 0.2 — post-Batch D + A + triage)
+- **Smoke test:** 6/6 (run 3 times across the session — pre-D, post-D, post-A — all green)
+- **DB size:** 21 GB (no change)
+- **Indexes:** 2,480 (Δ −13 from baseline; 13 unused dropped in Batch D)
+- **Policies:** 494 (Δ −8 from baseline; 4 saved_foundations redundant + 8 bgfit split admin policies dropped, 4 merged bgfit admin_or_org_admin policies created)
+- **Worst dead_pct:** 3.5% on grant_opportunities (unchanged)
+- **WAL archiving:** healthy
+- **Top query share:** postgrest set_config 29.0% (unchanged)
+- **Advisor PERF:** 1,677 (Δ −153 vs 2026-04-29 baseline of 1,830, Δ −117 within session)
+  - unused_index: 1,169 → 1,156 (−13)
+  - multiple_permissive_policies: 458 → 353 (**−105** — biggest single delta)
+- **Advisor SEC:** 592 (unchanged — Batches B + C are triage-only this session)
+- **ERROR-level:** 0 new findings; 3 closures from founding session still hold
+- **Civicscope counts:** gs_entities 591,821 / grants 32,059 / foundations 10,918 ✅
+- **Migrations applied:**
+  1. `drop_unused_indexes_batch2_2026_04_30` — 13 unused indexes (organizations, voice_notes, communications_history, integration_events, articles, alma_evidence, linkedin_contacts, campaign_alignment_entities × 4)
+  2. `consolidate_permissive_policies_batch1_2026_04_30` — saved_foundations 4 redundant policies + bgfit × 4 admin/org_admin merges
+- **Triage produced (no execution):**
+  - `batch-bc-triage.md` — 250 RLS-disabled grouped into 6 buckets, 147 SECURITY DEFINER views into 3 buckets
+  - `thoughts/shared/plans/supabase-schema-reorg.md` — full design doc for civicscope/justicehub schema split (needs sign-off before any DDL)
+- **Notes:** Single session (Week 0.2 within Week 1). Civicscope-protect rules held throughout. PITR remains on. Next routine check still scheduled for 2026-05-06.
+
+---
+
 ## Template (copy this for next week)
 
 ```markdown
