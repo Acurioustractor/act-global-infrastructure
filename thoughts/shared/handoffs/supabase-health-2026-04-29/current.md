@@ -19,6 +19,12 @@
 - Bucket C2 closed: 107 ACT-side views flipped to `security_invoker = true` in 4 batches of 25/25/25/32. The 40 remaining `security_definer_view` lints are all civicscope C1 (intentionally untouched).
 - Bucket B6 cluster 1 closed: 8 `notion_*` tables (notion_actions, _calendar, _decisions, _grants, _meetings, _opportunities, _organizations, _projects) flipped to RLS-on with zero policies. Verified all consumers use service-role client — service role bypasses RLS, so the API routes/scripts continue to read normally; anon/authenticated paths are now denied.
 
+### Week 0.5 (2026-04-30 night) — agent_proposals fix + B3 user-facing
+2 migrations + 1 app refactor. **50 more tables** locked down. ERROR-level SEC 220 → 170 (↓50). `rls_disabled_in_public` 180 → 130.
+- **App refactor**: `apps/command-center/src/components/agent-approvals.tsx` switched from direct `supabaseClient` (anon-key) to `fetch('/api/agent/proposals')` (server-side, service-role). Real exposure closed.
+- **B3 batch**: 49 user-facing tables (users, sessions, synced_stories, calendar_events, ce_*, contact_*, photos & photo_albums, project_*, intelligence_*, revenue_*, relationship_pipeline, touchpoints, daily_reflections, idea_board, memory_episodes, telegram_conversations, imessage_attachments, el_*, stories, storyteller_media, transcripts, oversight_recommendations, pulse_reports). Per-table consumer-grep verified zero frontend or anon-key callers; all access via API routes/scripts.
+- 121 tables locked down across this 2-day session (8 notion + 3 gmail + 14 agent + 27 finance + 18 infra + 1 agent_proposals + 49 B3 + previously committed cleanups).
+
 ### Week 0.4 (2026-04-30 late evening) — B6 + B5 + B2 lockdown
 4 more migrations. **62 tables** flipped to RLS-on (server-only via service role). ERROR-level SEC 282 → 220 (↓62). Total SEC unchanged because the lints shifted from `rls_disabled_in_public` (ERROR) to `rls_enabled_no_policy` (INFO-level, expected).
 - B6 gmail_*: gmail_contacts, gmail_messages, gmail_sync_status (3)
@@ -47,15 +53,17 @@
 ### Long tail (next sessions, civicscope-safe)
 - 1,156 unused indexes still flagged
 - 353 multiple_permissive_policies remaining
-- **180 rls_disabled_in_public** (was 250, **−70** across Weeks 0.3 + 0.4)
-- 86 rls_enabled_no_policy (INFO-level, expected from the RLS-enable sweeps — defense-in-depth posture)
+- **130 rls_disabled_in_public** (was 250 founding, **−120** across Weeks 0.3 + 0.4 + 0.5)
+- 136 rls_enabled_no_policy (INFO-level — defense-in-depth posture; same tables as above migrated ERROR→INFO)
 - 40 security_definer_view (all civicscope C1, leave alone)
 - 49+49 anon/authenticated-executable SECURITY DEFINER functions — review each
 - 161 unindexed_foreign_keys
+- 77 rls_policy_always_true — policies that say `USING (true)`; either intentional public-read or they need real predicates
 - 1 straggler on auth_rls_initplan
 
-### B3 follow-up (real exposures requiring app-code changes)
-- **`agent_proposals`** — `apps/command-center/src/components/agent-approvals.tsx` reads+writes via anon-key. Anyone with dashboard URL can approve agent proposals. Fix: move into `apps/command-center/src/app/api/agent/proposals/` (route already exists) and refactor component to call the API. Then enable RLS no-policy.
+### B3 follow-up (✅ closed in Week 0.5)
+- agent_proposals refactor + RLS enable — done.
+- Remaining 49 user-facing tables — all locked down with no app-code changes needed (zero anon-key consumers verified).
 
 ### Schema reorganisation (bigger conversation)
 - **Plan drafted: `thoughts/shared/plans/supabase-schema-reorg.md`** — needs Ben sign-off before any DDL
@@ -85,6 +93,10 @@ scripts/civicscope-smoketest.mjs                             # 6-route site smok
 ```
 
 ## Migrations applied (all reversible via PITR + ddl-rollback.sql)
+**2026-04-30 batch (Week 0.5 — agent_proposals + B3 user-facing):**
+27. `enable_rls_agent_proposals_2026_04_30` — agent_proposals (after frontend refactor in agent-approvals.tsx)
+28. `enable_rls_b3_user_facing_2026_04_30` — 49 B3 tables (users, sessions, synced_stories, etc.)
+
 **2026-04-30 batch (Week 0.4 — RLS lockdown):**
 23. `enable_rls_gmail_server_only_2026_04_30` — 3 gmail_* tables
 24. `enable_rls_agent_infrastructure_2026_04_30` — 14 agent_*/agentic_*/ralph_* tables

@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect, useState, useCallback } from 'react'
-import { supabaseClient } from '@/lib/supabase-client'
 import { cn, formatRelativeDate } from '@/lib/utils'
 import {
   Bot,
@@ -17,13 +16,12 @@ import {
 
 interface AgentProposal {
   id: string
-  agent_name: string
-  action_type: string
+  agent_id: string
+  action_name: string
   title: string
   description: string
   priority: 'low' | 'medium' | 'high' | 'critical'
   status: string
-  context: Record<string, unknown>
   created_at: string
   reviewed_at?: string
 }
@@ -45,20 +43,17 @@ export function AgentApprovals() {
     setLoading(true)
     setError(null)
 
-    const { data, error: fetchError } = await supabaseClient
-      .from('agent_proposals')
-      .select('*')
-      .eq('status', 'pending')
-      .order('created_at', { ascending: false })
-      .limit(20)
-
-    if (fetchError) {
-      setError(fetchError.message)
+    try {
+      const res = await fetch('/api/agent/proposals?status=pending&limit=20')
+      if (!res.ok) throw new Error(`HTTP ${res.status}`)
+      const json = await res.json()
+      setProposals(json.proposals || [])
+    } catch (e) {
+      setError(e instanceof Error ? e.message : 'Failed to load')
       setProposals([])
-    } else {
-      setProposals(data || [])
+    } finally {
+      setLoading(false)
     }
-    setLoading(false)
   }, [])
 
   useEffect(() => {
@@ -68,22 +63,22 @@ export function AgentApprovals() {
   const handleAction = async (id: string, newStatus: 'approved' | 'rejected') => {
     setActionInProgress(id)
 
-    const { error: updateError } = await supabaseClient
-      .from('agent_proposals')
-      .update({
-        status: newStatus,
-        reviewed_at: new Date().toISOString(),
+    try {
+      const res = await fetch('/api/agent/proposals', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          id,
+          action: newStatus === 'approved' ? 'approve' : 'reject',
+        }),
       })
-      .eq('id', id)
-
-    if (updateError) {
-      setError(`Failed to ${newStatus === 'approved' ? 'approve' : 'reject'}: ${updateError.message}`)
-    } else {
-      // Remove from list optimistically
+      if (!res.ok) throw new Error(`HTTP ${res.status}`)
       setProposals((prev) => prev.filter((p) => p.id !== id))
+    } catch (e) {
+      setError(`Failed to ${newStatus === 'approved' ? 'approve' : 'reject'}: ${e instanceof Error ? e.message : 'unknown'}`)
+    } finally {
+      setActionInProgress(null)
     }
-
-    setActionInProgress(null)
   }
 
   if (loading) {
@@ -157,7 +152,7 @@ export function AgentApprovals() {
                   <div className="flex items-center gap-2 mb-1">
                     <Bot className="h-3.5 w-3.5 text-white/40" />
                     <span className="text-xs font-medium text-white/40">
-                      {proposal.agent_name}
+                      {proposal.agent_id}
                     </span>
                     <span className="text-xs text-white/30">
                       {formatRelativeDate(proposal.created_at)}

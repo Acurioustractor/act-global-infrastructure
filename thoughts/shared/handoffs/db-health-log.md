@@ -116,6 +116,24 @@ Runbook: `thoughts/shared/handoffs/supabase-health-2026-04-29/weekly-runbook.md`
 
 ---
 
+## 2026-04-30 (Week 0.5 — agent_proposals fix + B3 user-facing tables)
+- **Smoke test:** 6/6 (run twice — after agent_proposals, after B3 batch)
+- **DB size:** 21 GB
+- **Advisor PERF:** 1,677 (unchanged — security-only)
+- **Advisor SEC total:** 485 (unchanged total, composition still shifting ERROR → INFO)
+  - `rls_disabled_in_public`: 180 → **130** (Δ −50)
+  - `rls_enabled_no_policy`: 86 → 136 (Δ +50, INFO-level — same 50 tables)
+- **ERROR-level SEC:** 220 → **170** (Δ −50)
+- **Application code change:** `apps/command-center/src/components/agent-approvals.tsx` refactored — removed direct `supabaseClient` reads/writes against `agent_proposals`; now calls existing `/api/agent/proposals` GET + POST endpoints. TypeScript clean. This was a real exposure: the dashboard was readable+writable from anyone with the URL via the anon key. Now any anon-key path is blocked.
+- **Migrations applied:**
+  10. `enable_rls_agent_proposals_2026_04_30` — agent_proposals after frontend refactor
+  11. `enable_rls_b3_user_facing_2026_04_30` — 49 tables: users (13 rows), sessions (14), synced_stories (142), agent_proposals (188), pulse_reports (5), project_commentary (4), all photo_*, intelligence_*, project_* (most at 0 rows but locked for defense-in-depth)
+- **NOT migrated:** profiles already had RLS-on with 1 policy, untouched.
+- **Verified:** service-role reads still work for users (13), sessions (14), synced_stories (142), agent_proposals (188).
+- **Notes:** B3 was the last riskiest bucket. 49 tables × per-table grep confirmed zero frontend-component or anon-key consumers (excluding the one we just refactored). All access via API routes (server-side, service-role) or scripts. Defense-in-depth is now on across the entire B6+B5+B2+B3 surface — 121 tables flipped this session.
+
+---
+
 ## Template (copy this for next week)
 
 ```markdown
