@@ -1,0 +1,58 @@
+# ACT Global Infrastructure
+
+> Central automation, command center, public website, wiki, scripts, and operating knowledge for A Curious Tractor.
+
+This file is the LLM-facing entrypoint for tools such as ChatGPT, Codex, Claude, and repo indexers.
+
+## Start Here
+
+- [Steering map](STEERING.md): where canonical truth lives in this repo.
+- [Agent instructions](AGENTS.md): repo rules for coding agents.
+- [Git branching and hygiene](docs/governance/git-branching.md): branch model and cleanup process.
+- [Soul pointer](.soul): root pointer to the upstream philosophy file.
+- [Canonical soul](wiki/concepts/soul.md): why ACT exists.
+- [ACT identity](wiki/concepts/act-identity.md): what A Curious Tractor is.
+- [LCAA method](wiki/concepts/lcaa-method.md): how ACT works.
+- [Four lanes](wiki/concepts/four-lanes.md): how money sustains the work.
+- [ACT core facts](wiki/decisions/act-core-facts.md): canonical entity and operating facts.
+- [Wiki index](wiki/index.md): main catalog for Tractorpedia.
+
+## Codebase Map
+
+- `apps/command-center/`: main dashboard and internal operating app.
+- `apps/website/`: public website.
+- `apps/command-center/src/app/api/`: Next.js API routes.
+- `packages/`: shared packages.
+- `scripts/`: operational scripts and automation.
+- `scripts/lib/`: shared script modules.
+- `config/`: shared configuration.
+- `supabase/`: database migrations and Supabase configuration.
+- `docs/architecture/`: system architecture and integration design.
+- `wiki/`: canonical knowledge base.
+- `thoughts/shared/`: plans, handoffs, reports, and working memory.
+- `archive/`: read-only reference code. Do not add new features there.
+
+## Canonical Knowledge Rules
+
+- Philosophy, frameworks, methods, and taxonomies belong in `wiki/concepts/`.
+- Settled decisions and canonical operating facts belong in `wiki/decisions/`.
+- System and integration architecture belong in `docs/architecture/`.
+- Plans and handoffs belong in `thoughts/shared/`; promote settled truth into `wiki/`.
+- Root dotfiles such as `.soul` are pointers only, not duplicate sources of truth.
+
+## Development Rules
+
+- Read relevant files before editing.
+- Keep changes scoped.
+- Verify fixes before claiming they work.
+- New dashboard UI goes in `apps/command-center/`.
+- New public website UI goes in `apps/website/`.
+- New API routes go in `apps/command-center/src/app/api/`.
+- Do not add features to `archive/`.
+- Before database work, verify the target Supabase project and schema.
+
+## Public Wiki
+
+- Public wiki host: `https://wiki.act.place`
+- Soul alias: `https://wiki.act.place/.soul`
+- Canonical local source for that alias: `wiki/concepts/soul.md`

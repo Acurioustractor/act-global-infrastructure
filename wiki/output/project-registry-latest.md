@@ -37,7 +37,7 @@
 | Community Capital | `community-capital` | `ACT-CP` | `ACT-CP` | project | own-code | Keep as coded project. |
 | ConFit Pathways | `confit-pathways` | `ACT-CT` | `ACT-CT` | project | own-code | Keep as coded project. |
 | CONTAINED | `contained` | `ACT-CN` | `ACT-CN` | project | own-code | Keep as coded project. |
-| Custodian Economy | `custodian-economy` | `ACT-CE` | `ACT-CE` | project | own-code | Keep as coded project. |
+| Custodian First Economy | `custodian-first-economy` | `ACT-CE` | `ACT-CE` | project | own-code | Keep as coded project. |
 | Dad.Lab.25 | `dad-lab-25` | `ACT-DL` | `ACT-DL` | project | own-code | Keep as coded project. |
 | Designing for Obsolescence | `designing-for-obsolescence` | `ACT-DO` | `ACT-DO` | project | own-code | Keep as coded project. |
 | Diagrama | `diagrama` | `ACT-DG` | `ACT-DG` | project | own-code | Keep as coded project. |

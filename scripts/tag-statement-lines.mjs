@@ -53,7 +53,7 @@ const TRIP_RULES = [
 
 // Vendor-specific overrides that are always the same project regardless of location
 const VENDOR_PROJECT_OVERRIDES = {
-  'Defy Design': 'ACT-IN',  // Website work — always internal
+  'Defy Design': 'ACT-GD',  // Goods project (per Ben 2026-04-29)
   'TradeMutt': 'ACT-HV',    // Hi-vis — Harvest
   'Hatch Electrical': 'ACT-PI', // Always PICC
   'RNM Carpentry': 'ACT-PI',   // Always PICC

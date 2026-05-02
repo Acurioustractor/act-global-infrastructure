@@ -750,16 +750,16 @@
       "alma_program": "social-finance"
     },
     "ACT-CE": {
-      "name": "Custodian Economy",
+      "name": "Custodian First Economy",
       "code": "ACT-CE",
-      "canonical_slug": "custodian-economy",
+      "canonical_slug": "custodian-first-economy",
       "category": "enterprise",
       "tier": "satellite",
       "priority": "medium",
       "status": "active",
-      "description": "Economic model for custodianship",
-      "notion_pages": ["Custodian Economy"],
-      "ghl_tags": ["custodian-economy"],
+      "description": "Partner program supporting young people on youth justice orders. ACT works with the partner; ACT does not run it. Detail pending Ben's brief (see wiki/projects/custodian-first-economy.md).",
+      "notion_pages": ["Custodian First Economy"],
+      "ghl_tags": ["custodian-first-economy"],
       "xero_tracking": "ACT-CE — Custodian Economy",
       "dext_category": "Social Enterprise",
       "alma_program": "economic-models"

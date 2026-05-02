@@ -2,6 +2,9 @@
 
 **Central automation and tooling for the ACT ecosystem**
 
+**Start here for steering files:** [`STEERING.md`](STEERING.md)
+**LLM entrypoint:** [`llms.txt`](llms.txt)
+
 ---
 
 ## 🎯 What This Is

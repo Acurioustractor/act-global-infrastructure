@@ -1,5 +1,22 @@
 # ACT Ecosystem - Codex Rules
 
+## Steering Files
+
+- Start with `STEERING.md` when a task touches philosophy, positioning, entity language, money logic, or strategic architecture.
+- `.soul` is a root pointer only. The canonical source is `wiki/concepts/soul.md`.
+- Put philosophy, methods, frameworks, and theories in `wiki/concepts/`.
+- Put settled strategic decisions and canonical operating facts in `wiki/decisions/`.
+- Put system architecture and integration design in `docs/architecture/`.
+- Use `thoughts/shared/` for plans, handoffs, drafts, and reports, not permanent source-of-truth files.
+
+## Git Hygiene
+
+- Start branch/process work by reading `docs/governance/git-branching.md`.
+- Run `npm run repo:hygiene` before creating branches, before staging, and before reporting a repo clean.
+- Keep `main` as the only long-lived integration branch unless a deployment environment explicitly needs another.
+- Use short-lived branches: `codex/<task>`, `feature/<task>`, `fix/<bug>`, `docs/<topic>`, or `finance/<topic>`.
+- Do not start unrelated work from a dirty worktree. Commit, stash, ignore generated files, or move unfinished work to a named WIP branch first.
+
 ## Debugging Discipline (read first)
 
 - **Do NOT claim a fix works without verifying it.** Run the actual code path, query the DB, check the UI, capture the output. If you cannot verify, say "unverified" and tell the user how to test.

@@ -216,7 +216,7 @@ Write ONLY the section content (no heading, no markdown formatting).`
 
       try {
         const response = await anthropic.messages.create({
-          model: 'claude-sonnet-4-5-20250929',
+          model: 'claude-sonnet-4-6',
           max_tokens: template.words * 3,
           messages: [{ role: 'user', content: prompt }],
         })

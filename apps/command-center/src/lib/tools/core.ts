@@ -9,7 +9,7 @@ import {
 } from '@act/intel'
 import type { DailyBriefingResult } from '@act/intel'
 import { hybridSearch } from '../wiki-search'
-import { searchCanonicalWiki } from '../wiki-files'
+import { mergeWikiSearchResults, searchCanonicalWiki } from '../wiki-files'
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // TOOL: query_supabase
@@ -627,13 +627,16 @@ export async function executeSearchWiki(input: {
   const buildUrl = (path: string) => `${wikiBase}/?page=${encodeURIComponent(path)}`
 
   try {
+    const canonicalResults = searchCanonicalWiki(query)
+
     try {
       const hybrid = await hybridSearch(query, limit)
       if (hybrid.length > 0) {
+        const results = mergeWikiSearchResults(query, hybrid, canonicalResults, limit)
         return JSON.stringify({
-          source: 'hybrid',
+          source: 'hybrid+canonical',
           query,
-          results: hybrid.slice(0, limit).map(r => ({
+          results: results.map(r => ({
             title: r.title,
             path: r.path,
             section: r.section,
@@ -647,11 +650,10 @@ export async function executeSearchWiki(input: {
       console.warn('[search_wiki] hybrid failed, falling back:', (err as Error).message)
     }
 
-    const fallback = searchCanonicalWiki(query)
     return JSON.stringify({
       source: 'substring',
       query,
-      results: fallback.slice(0, limit).map(r => ({
+      results: canonicalResults.slice(0, limit).map(r => ({
         title: r.title,
         path: r.path,
         section: r.section,

@@ -45,10 +45,13 @@ const PRICING = {
     'text-embedding-ada-002': { input: 0.10, output: 0 }
   },
   anthropic: {
+    'claude-opus-4-7': { input: 5.00, output: 25.00 },
     'claude-opus-4-6': { input: 5.00, output: 25.00 },
     'claude-opus-4-5-20251101': { input: 5.00, output: 25.00 },
+    'claude-sonnet-4-6': { input: 3.00, output: 15.00 },
     'claude-sonnet-4-5-20250929': { input: 3.00, output: 15.00 },
     'claude-sonnet-4-20250514': { input: 3.00, output: 15.00 },
+    'claude-haiku-4-5': { input: 1.00, output: 5.00 },
     'claude-haiku-4-5-20251001': { input: 1.00, output: 5.00 },
     'claude-3-5-haiku-20241022': { input: 0.80, output: 4.00 },
     'claude-3-haiku-20240307': { input: 0.25, output: 1.25 }
@@ -87,7 +90,7 @@ export function selectModel(task, provider = 'anthropic') {
   const tier = TASK_TO_TIER[task] || 'cheap';
 
   const MODELS = {
-    anthropic: { cheap: 'claude-haiku-4-5-20251001', mid: 'claude-sonnet-4-5-20250929', expensive: 'claude-opus-4-6' },
+    anthropic: { cheap: 'claude-haiku-4-5', mid: 'claude-sonnet-4-6', expensive: 'claude-opus-4-7' },
     openai: { cheap: 'gpt-4o-mini', mid: 'gpt-4o', expensive: 'gpt-4o' },
   };
 
@@ -337,7 +340,7 @@ export async function trackedCompletion(messages, scriptName, options = {}) {
  */
 export async function claudeComplete(prompt, options = {}) {
   const result = await anthropic.messages.create({
-    model: options.model || 'claude-3-5-haiku-20241022',
+    model: options.model || 'claude-haiku-4-5',
     max_tokens: options.maxTokens || 1000,
     messages: [{ role: 'user', content: prompt }]
   });
@@ -348,7 +351,7 @@ export async function claudeComplete(prompt, options = {}) {
  * Anthropic completion with tracking
  */
 export async function trackedClaudeCompletion(prompt, scriptName, options = {}) {
-  const model = options.model || 'claude-3-5-haiku-20241022';
+  const model = options.model || 'claude-haiku-4-5';
   const start = Date.now();
 
   const messages = Array.isArray(prompt)

@@ -10,7 +10,7 @@ const PUBLIC_API_PREFIXES = [
 
 // Host aliases that front specific app paths
 const WIKI_HOST = 'wiki.act.place'
-const WIKI_PASSTHROUGH_PREFIXES = ['/wiki', '/knowledge', '/api', '/_next', '/icons', '/fonts']
+const WIKI_PASSTHROUGH_PREFIXES = ['/wiki', '/knowledge', '/api', '/_next', '/icons', '/fonts', '/.well-known']
 const WIKI_PASSTHROUGH_FILES = new Set(['/tractorpedia-manifest.json', '/manifest.json', '/favicon.ico', '/robots.txt', '/sitemap.xml'])
 
 function isPublicRoute(pathname: string): boolean {
@@ -90,5 +90,10 @@ export function middleware(request: NextRequest) {
 export const config = {
   // Run on everything except static assets — needed so the wiki.act.place host
   // rewrite catches root requests. The /api auth gate still only fires on /api.
-  matcher: ['/((?!_next/static|_next/image|icons/|fonts/|favicon.ico|.*\\.[a-zA-Z0-9]+$).*)', '/api/:path*'],
+  matcher: [
+    '/((?!_next/static|_next/image|icons/|fonts/|favicon.ico|.*\\.[a-zA-Z0-9]+$).*)',
+    '/:dotSlug(\\.[^/]+)',
+    '/concepts/.soul',
+    '/api/:path*',
+  ],
 }
