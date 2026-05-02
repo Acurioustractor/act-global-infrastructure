@@ -42,11 +42,11 @@ This is why the [[funding-transparency|funding transparency]] argument matters. 
 
 ### 2. QLD is the proof-of-concept jurisdiction
 
-ALMA-linkage rate (interventions matched to funding records) is **above 90% in QLD** across community services, youth justice, legal services, and procurement. It's near zero in most other states and absent from the national ROGS rollups. JusticeHub's evidence base is presently a QLD model — for good reason, since the data was richest there — but the scaling story for 2026–2027 is replicating the linkage in NSW, VIC, and WA.
+ALMA-linkage rate (interventions matched to funding records through ALMA-governed review fields) is **above 90% in QLD** across community services, youth justice, legal services, and procurement. It's near zero in most other states and absent from the national ROGS rollups. JusticeHub's evidence base is presently a QLD model — for good reason, since the data was richest there — but the scaling story for 2026–2027 is replicating the linkage in NSW, VIC, and WA.
 
 ### 3. The numbers don't follow the evidence
 
-QLD youth justice spend: **$4.1B across 7,004 organisations**. The [[alma-intervention-portfolio|top-scoring interventions in ALMA's portfolio]] — DIYDG, Rumbalara, Oochiumpa, Mulungu — are typically funded between $50K and $5M each. The dollars concentrate at the top end (large NGOs, Legal Aid, departmental programs); the evidence concentrates at the bottom (small ACCOs).
+QLD youth justice spend: **$4.1B across 7,004 organisations**. The [[alma-intervention-portfolio|strongest interventions in the ALMA-named portfolio]] — DIYDG, Rumbalara, Oochiumpa, Mulungu — are typically funded between $50K and $5M each. The dollars concentrate at the top end (large NGOs, Legal Aid, departmental programs); the evidence concentrates at the bottom (small ACCOs).
 
 This is the gap [[justicehub|JusticeHub]] exists to make visible.
 
@@ -54,7 +54,7 @@ This is the gap [[justicehub|JusticeHub]] exists to make visible.
 
 - **National reporting rows** (103 records per state) are aggregate ROGS lines, not granular spending. They appear large because they're rolled-up totals.
 - **"Procurement" sectors** capture government contracts visible in AusTender — they miss state-level procurement that doesn't publish.
-- **ALMA linkage is a quality signal**: where it's high, the data has been triangulated against intervention records; where it's zero, the dollars are visible but not yet matched to outcomes.
+- **ALMA linkage is a review signal**: where it's high, the data has been triangulated against intervention records; where it's zero, the dollars are visible but not yet matched to outcomes.
 
 ## Backlinks
 

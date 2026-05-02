@@ -9,7 +9,7 @@ status: Active
 
 ## Overview
 
-ACT's approach to AI is built on a single principle: AI serves community voice, it never replaces it. Every AI capability in the ecosystem is gated by consent, aligned to [[alma|ALMA]], and subject to community override. Efficiency is never a sufficient reason to bypass these constraints.
+ACT's approach to AI is built on a single principle: AI serves community voice, it never replaces it. Every AI capability in the ecosystem must respect [[alma|Accountable Listening and Meaningful Action (ALMA)]]: consent, authority, provenance, and review before action. Efficiency is never a sufficient reason to bypass these constraints.
 
 This article covers the ethical framework, the internal agent roles, and what AI can and cannot do within ACT systems.
 
@@ -23,26 +23,25 @@ This article covers the ethical framework, the internal agent roles, and what AI
 | **Community authority highest weight** | Overrides efficiency in decision paths |
 | **Consent before analysis** | No opt-out model, explicit opt-in only |
 
-## ALMA as Gatekeeper
+## AI Under ALMA Review
 
-All AI learning and ethics checks pass through [[alma|ALMA]]:
+ALMA is not an AI agent or a technical gatekeeper. It is the governed sensemaking process AI tools must remain subordinate to:
 
 ```
 User/Community Input
         ↓
-   ALMA Check
+   Governed Review
    - Consent verified?
    - Cultural sensitivity flagged?
    - Authority confirmed?
+   - Provenance clear?
         ↓
    AI Processing (if permitted)
         ↓
-   ALMA Review
+   Human + Community Review
    - Output safe?
    - Individual profiling avoided?
    - Value returned to community?
-        ↓
-   Community Review
         ↓
    Output
 ```
@@ -78,7 +77,7 @@ ACT uses named agent roles to make AI responsibilities explicit:
 | **Cartographer** | Maps relationships between projects, stories, signals | System-level patterns only |
 | **Evidence Steward** | Checks consent scope and shareability | Cannot override community decisions |
 | **Studio Assistant** | Supports drafting and editing | Never owns the narrative |
-| **Farmhand** | Orchestrates tasks, turns messy inputs into actions | ALMA checks on all outputs |
+| **Farmhand** | Orchestrates tasks, turns messy inputs into actions | Consent, authority, provenance, and review visible on outputs |
 
 ### The Farmhand Role
 
@@ -88,7 +87,7 @@ Farmhand is ACT's primary AI layer — the infrastructure that reduces admin and
 - Turn messy inputs into clear tasks
 - Protect consent and cultural boundaries in summaries
 - Connect LCAA steps to real work
-- Keep ALMA signals visible
+- Keep consent, authority, provenance, and review status visible
 
 **Farmhand cannot:**
 - Profile individuals
@@ -105,7 +104,7 @@ For any new AI feature:
 | Check | Required |
 |-------|----------|
 | OCAP principles respected? | Yes |
-| ALMA gatekeeper integrated? | Yes |
+| Accountable Listening and Meaningful Action (ALMA) respected? | Yes |
 | Individual profiling prevented? | Yes |
 | Sacred content hard-blocked? | Yes |
 | Community authority preserved? | Yes |
@@ -124,7 +123,7 @@ As AI capabilities grow, ACT maintains:
 
 ## Backlinks
 
-- [[alma|ALMA Framework]] — the impact and ethics model that gates all AI
+- [[alma|ALMA]] — governed sensemaking process AI must remain subordinate to
 - [[governance-consent|Governance & Consent]] — consent architecture AI must respect
 - [[empathy-ledger|Empathy Ledger]] — the platform where AI consent settings live
 - [[ai-community-engagement|AI Community Engagement]] — broader AI use in community contexts

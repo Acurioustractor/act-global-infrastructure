@@ -23,8 +23,9 @@ export default function ImpactPage() {
                     Ecosystem Impact
                 </h1>
                 <p className="max-w-2xl text-lg text-[#4D3F33] leading-relaxed">
-                    The ALMA (Adaptive Learning & Measurement Architecture) system visualizes the
-                    regenerative outcomes of our work across Land, Studio, and Harvest contexts.
+                    Accountable Listening and Meaningful Action (ALMA) helps ACT review
+                    regenerative outcomes across Land, Studio, and Harvest contexts with consent,
+                    authority, provenance, and care.
                 </p>
 
                 {/* Impact Placemat (Sankey) */}

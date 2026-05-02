@@ -72,12 +72,12 @@ This isn't just better for communities — it's better economics. Community mode
 | Audience | Entry Point | Tool |
 |---------|-------------|------|
 | Youth | "I need help" | Youth Scout |
-| Organizations | ALMA Network | Directory + evidence tools |
+| Organizations | JusticeHub network | Directory + evidence tools |
 | Policymakers | Evidence dashboards | Cost Calculator, System Map, Impact Dashboard |
 
 ## Key Features
 
-- **ALMA AI Chat** — conversational interface to the evidence base
+- **JusticeHub evidence chat** — conversational interface to the evidence base with citations and review metadata
 - **Cost Calculator** — real-time cost comparison of detention vs community alternatives
 - **System Map** — visual mapping of the justice ecosystem
 - **Impact Dashboard** — outcome data across programs
@@ -87,9 +87,9 @@ This isn't just better for communities — it's better economics. Community mode
 
 JusticeHub needs **$500K** to scale nationally.
 
-## ALMA (Australian Living Map of Alternatives)
+## ALMA-Governed Evidence Records
 
-The "what works" layer sitting on top of funding data:
+The "what works" layer sitting on top of funding data, governed by [[alma|Accountable Listening and Meaningful Action (ALMA)]]:
 - Evidence-based interventions mapped by topic and geography
 - 9 topic domains: child-protection, community-led, diversion, family-services, indigenous, legal-services, ndis, prevention, youth-justice
 - Cross-referenced with CivicGraph entity graph (56% linkage rate)
@@ -114,7 +114,7 @@ The "what works" layer sitting on top of funding data:
 ### Impact-Weighted Quadratic Funding (ImpactQF)
 - Integrating Gitcoin's open-source Allo Protocol for programmable capital allocation
 - Matching funds distributed based on verified community outcomes, not popularity
-- ALMA AI scores projects → capital follows evidence
+- ALMA-governed review keeps project evidence tied to consent, authority, provenance, and review before capital follows
 
 ### Hypercerts
 - Semi-fungible tokens recording verified social outcomes

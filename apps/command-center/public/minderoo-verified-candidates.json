@@ -2,7 +2,7 @@
   "generated_at": "2026-04-20",
   "schema_version": 1,
   "source": "gs_entities + alma_interventions + justice_funding (FY24-26 QLD), joined",
-  "purpose": "Verified per-state top 20 community-led organisations with ABN, community-control flag, website, ALMA score, recent state funding (QLD only). Each org classified by linkage_strength so the weak-linkage ones can be flagged for outreach.",
+  "purpose": "Verified per-state top 20 community-led organisations with ABN, community-control flag, website, ALMA review score, recent state funding (QLD only). Each org classified by linkage_strength so the weak-linkage ones can be flagged for outreach.",
   "total_candidates": 138,
   "per_state": {
     "ACT": 20,

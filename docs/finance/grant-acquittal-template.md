@@ -90,7 +90,7 @@
 | Artworks created | <!-- TODO --> | <!-- TODO --> | <!-- Portfolio --> |
 | Employment created | <!-- TODO --> | <!-- TODO --> | <!-- Payroll records --> |
 
-### ALMA Impact Score (if applicable)
+### ALMA Review Fields (if applicable)
 
 | Dimension | Score | Evidence |
 |-----------|-------|----------|

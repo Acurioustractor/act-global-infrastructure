@@ -1,7 +1,7 @@
 /**
- * ALMA (Adaptive Learning & Measurement Architecture) TypeScript Types
+ * ALMA (Accountable Listening and Meaningful Action) TypeScript Types
  *
- * IMPACT OPERATING SYSTEM FOR THE ACT ECOSYSTEM
+ * GOVERNED REVIEW STRUCTURES FOR THE ACT ECOSYSTEM
  * Generalized to cover Land, Studio, Harvest, and Art.
  *
  * Core Entities:

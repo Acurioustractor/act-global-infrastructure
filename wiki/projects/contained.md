@@ -45,7 +45,7 @@ The numbers that power CONTAINED come directly from [[justicehub|JusticeHub]] da
 | Youth detention | $1.1–1.3 million ($3,320/day) | 15.5% |
 | Community-led alternatives | ~$58,000 ($150/day) | 78% |
 
-This isn't abstracted — it's drawn from 145,242 justice funding records and 570 evidence items in ALMA (Australian Living Map of Alternatives) tracked in [[civicgraph|CivicGraph]]. CONTAINED makes that data walk off the screen and into the room.
+This isn't abstracted — it's drawn from 145,242 justice funding records and 570 evidence items held in ALMA-governed review records tracked in [[civicgraph|CivicGraph]]. CONTAINED makes that data walk off the screen and into the room.
 
 ## The Form
 

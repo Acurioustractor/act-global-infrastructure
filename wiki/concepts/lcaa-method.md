@@ -116,7 +116,7 @@ When reviewing a project or planning a meeting, note which LCAA phase it sits in
 | Phase | Primary Platforms | Expression |
 |-------|------------------|------------|
 | Listen | Empathy Ledger, field research | Sovereign storytelling, community voice capture |
-| Curiosity | CivicGraph, JusticeHub, ALMA | Data exploration, evidence review, pattern discovery |
+| Curiosity | CivicGraph, JusticeHub, [[alma|ALMA]] | Data exploration, evidence review, pattern discovery |
 | Action | [[goods-on-country|Goods on Country]], PICC, [[bg-fit|BG Fit]] | Place-based design, service delivery, enterprise |
 | Art | Empathy Ledger, Uncle Allan, CONTAINED | Photography, installation, exhibition, narrative |
 
@@ -161,7 +161,8 @@ Every project, every piece of art, every community relationship can be tagged wi
 - [[civicgraph|CivicGraph]]: Curiosity
 - [[picc|PICC]]: spans all four phases
 - [[third-reality|The Third Reality]]: the synthesis LCAA produces
-- [[alma|ALMA]]: evidence model that feeds all LCAA phases
+- [[alma|ALMA]]: governed sensemaking process that turns listening into accountable action
+- [[governed-proof|Governed Proof]]: evidence and review layer after action
 - [[ai-community-engagement|AI and Community Engagement]]: administrative compression that protects time for relational work
 - [[beautiful-obsolescence|Beautiful Obsolescence]]: the Action phase discipline
 - [[place-land-practice|Place & Land Practice]]: Country and land practice as the pace-setting context for the whole method

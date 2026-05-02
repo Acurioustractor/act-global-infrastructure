@@ -1,5 +1,5 @@
 
-// Static data for ALMA Impact Dashboard (Local Mock)
+// Static data for ALMA governed review surfaces (local mock)
 
 export type AlmaType = 'Land' | 'Studio' | 'Harvest';
 export type EvidenceStrength = 'High' | 'Medium' | 'Low' | 'Emerging';

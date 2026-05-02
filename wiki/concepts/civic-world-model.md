@@ -11,7 +11,7 @@ CivicGraph is building the **Civic World Model** — the social sector equivalen
 ## Four Architectural Principles (from Block)
 
 ### 1. The "Honest Signal"
-Block views transaction data as the most honest signal. In social impact, traditional signals are subjective grant applications and marketing spin. CivicGraph redefines the honest signal by tracking actual money flows (procurement, donations, grants) cross-referenced with verified outcome data from ALMA.
+Block views transaction data as the most honest signal. In social impact, traditional signals are subjective grant applications and marketing spin. CivicGraph redefines the honest signal by tracking actual money flows (procurement, donations, grants) cross-referenced with ALMA-governed evidence records.
 
 ### 2. Humans at the Edge
 The system handles intelligence and coordination. Human roles shift to the "edge" — community leaders running diversion programs, storytellers on Empathy Ledger, designers of Goods on Country. Administrative burden removed from grassroots organizations.
@@ -45,7 +45,7 @@ Key linkage rates:
 - Federal Contracts: **85%** (791K records)
 - Foundations: **100%** (10.8K records)
 - Political Donations: **59%** (313K records)
-- ALMA Interventions: **56%** (1.4K records)
+- Australian Living Map interventions: **56%** (1.4K records)
 
 ## Data Coverage Gaps
 

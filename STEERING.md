@@ -13,10 +13,12 @@ The rule: root-level files orient agents and developers; `wiki/` holds the canon
 5. `wiki/concepts/soul.md` - the upstream why. If another layer contradicts this, soul wins.
 6. `wiki/concepts/act-identity.md` - who ACT is.
 7. `wiki/concepts/lcaa-method.md` - how ACT works.
-8. `wiki/concepts/four-lanes.md` - how money sustains the work.
-9. `wiki/decisions/act-core-facts.md` - canonical entity and structure facts.
-10. `docs/architecture/` - system architecture and integration design.
-11. `thoughts/shared/` - plans, handoffs, drafts, reports, and working memory.
+8. `wiki/concepts/alma.md` - how listening becomes accountable action.
+9. `wiki/concepts/governed-proof.md` - how action becomes evidence, review, and publication.
+10. `wiki/concepts/four-lanes.md` - how money sustains the work.
+11. `wiki/decisions/act-core-facts.md` - canonical entity and structure facts.
+12. `docs/architecture/` - system architecture and integration design.
+13. `thoughts/shared/` - plans, handoffs, drafts, reports, and working memory.
 
 ## The Core Stack
 
@@ -25,6 +27,8 @@ The rule: root-level files orient agents and developers; `wiki/` holds the canon
 | Soul | `wiki/concepts/soul.md` | Why Ben and Nic do this work. The upstream file. |
 | Identity | `wiki/concepts/act-identity.md` | What A Curious Tractor is. |
 | Method | `wiki/concepts/lcaa-method.md` | Listen, Curiosity, Action, Art as operating practice. |
+| Accountable action | `wiki/concepts/alma.md` | Accountable Listening and Meaningful Action: the governed listening-to-action process. |
+| Governed proof | `wiki/concepts/governed-proof.md` | Evidence, review, confidence, publication, and audit trails. |
 | Obsolescence | `wiki/concepts/beautiful-obsolescence.md` | The handover discipline. |
 | Economy | `wiki/concepts/four-lanes.md` | To Us, To Down, To Grow, To Others. |
 | Structure | `wiki/decisions/act-core-facts.md` | Entities, ABNs/ACNs, banks, and canonical operating facts. |

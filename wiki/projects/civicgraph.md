@@ -53,7 +53,7 @@ It is the **systemic data layer** of [[third-reality|The Third Reality]] and the
 - Federal Contracts: 85% (791K records)
 - Foundations: 100% (10.8K records)
 - Political Donations: 59% (313K records)
-- ALMA Interventions: 56% (1.4K records)
+- Australian Living Map interventions: 56% (1.4K records)
 
 ### Cross-System Influence
 

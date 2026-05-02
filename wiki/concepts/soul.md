@@ -74,6 +74,14 @@ Identity, method, the four lanes, the entity structure: all downstream. They are
 
 When in doubt about anything else in the wiki or the website, return here first. If the answer doesn't sit on top of what is in this file, the answer is wrong.
 
+## Relationship to ALMA
+
+Soul is why ACT exists.
+
+ALMA is not the soul.
+
+[[alma|Accountable Listening and Meaningful Action (ALMA)]] is one downstream process that helps ACT move from listening to responsible action without bypassing consent, authority, provenance, or human and community review.
+
 ---
 
 ## Backlinks
@@ -82,5 +90,7 @@ When in doubt about anything else in the wiki or the website, return here first.
 - [[../people/nicholas-marchesi|Nicholas Marchesi OAM]]: co-founder, place and hospitality
 - [[act-identity|ACT Identity]]: the org built on top of this soul
 - [[lcaa-method|LCAA Method]]: the externalised practice loop
+- [[alma|ALMA]]: downstream governed process for moving from listening to accountable action
+- [[governed-proof|Governed Proof]]: evidence, review, and publication layer after action
 - [[four-lanes|The Four Lanes]]: the body the soul lives in, the economy that sustains the work and the founders
 - [[beautiful-obsolescence|Beautiful Obsolescence]]: the discipline that lets the soul outlive the org

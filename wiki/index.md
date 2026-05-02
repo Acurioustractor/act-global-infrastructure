@@ -31,14 +31,15 @@ This wiki follows the [[llm-knowledge-base|Karpathy LLM Knowledge Base pattern]]
 - [[ocap-principles|OCAP Principles]] — Ownership, Control, Access, Possession — the four architectural requirements
 - [[llm-knowledge-base|LLM Knowledge Base]] — the architecture pattern powering this wiki
 - [[lcaa-method|LCAA Method]] — Listen, Curiosity, Action, Art
+- [[alma|ALMA]] — Accountable Listening and Meaningful Action; ACT's governed process for moving from listening to meaningful action
+- [[governed-proof|Governed Proof]] — evidence, review, confidence, publication, and audit trail after action
 - [[ai-community-engagement|AI and Community Engagement]] — when AI eats the paperwork, people get their time back
 - [[youth-justice-reform|Youth Justice Reform]] — evidence, policy, alternatives
 - [[consent-as-infrastructure|Consent as Infrastructure]] — OCAP principles as database architecture
 - [[governance-consent|Governance & Consent]] — operational shareability matrix, Elder review, OCAP in practice
 - [[funding-transparency|Funding Transparency]] — the $107B gap, civic intelligence, legibility
 - [[beautiful-obsolescence|Beautiful Obsolescence]] — the tractor PTO metaphor, designing for handover
-- [[ai-ethics|AI Ethics]] — non-negotiables, ALMA as gatekeeper, agent roles
-- [[alma|ALMA]] — six-signal evidence framework, Story → Signal → Shift → Scope
+- [[ai-ethics|AI Ethics]] — non-negotiables for AI under consent, authority, provenance, and review
 - [[ways-of-working|Ways of Working]] — daily practice, meeting rhythms, infrastructure philosophy
 - [[living-website-operating-system|Living Website Operating System]] — the workflow linking Tractorpedia, Empathy Ledger, and the public shell
 - [[project-identity-and-tagging-system|Project Identity & Tagging System]] — which wiki pages get their own code, which roll up, and how retagging works
@@ -48,7 +49,7 @@ This wiki follows the [[llm-knowledge-base|Karpathy LLM Knowledge Base pattern]]
 - [[voice-guide|Voice Guide]] — four voice characteristics, farm metaphor bank
 - [[place-land-practice|Place & Land Practice]] — BCV, Harvest, Farm as the Place cluster
 - [[visual-system|Visual System]] — diagram vocabulary, palette, photography guidelines
-- [[glossary|Glossary]] — core terms, ALMA signals, governance vocabulary
+- [[glossary|Glossary]] — core terms, ALMA review fields, governance vocabulary
 - [[transcript-analysis-method|Transcript Analysis Method]] — EL's four-layer voice-preserving pipeline
 
 ## People

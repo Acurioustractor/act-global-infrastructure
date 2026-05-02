@@ -89,7 +89,7 @@ ON ANY NEW DESIGN WORK in any ACT repo
 ### Communications + Public-facing writing
 - **Voice rules**: `.claude/skills/act-brand-alignment/references/writing-voice.md` (Curtis method + AI-tells blocklist)
 - **Identity**: `.claude/skills/act-brand-alignment/references/brand-core.md` (LCAA, voice, project narratives)
-- **Naming rules**: in act-core-facts.md (no bare "ALMA"; no bare "LCAA"; Indigenous place names always; no em-dashes)
+- **Naming rules**: in act-core-facts.md (spell out Australian Living Map of Alternatives; first-use Accountable Listening and Meaningful Action (ALMA); no bare "LCAA"; Indigenous place names always; no em-dashes)
 - **Daily action**: nothing — this surfaces only when you write
 - **Whenever drafting**: load both writing-voice.md + brand-core.md before composing (every Claude session in any ACT repo already has the pointers via CLAUDE.md)
 

@@ -197,10 +197,10 @@ agents/
 
 ---
 
-## ALMA Measurement Everywhere
+## ALMA Review Everywhere
 
 **Current:** ALMA exists in Empathy Ledger v2
-**V2 Goal:** ALMA scores on everything
+**V2 Goal:** Accountable Listening and Meaningful Action (ALMA) review fields on every relevant record
 
 | Entity | ALMA Metric |
 |--------|-------------|

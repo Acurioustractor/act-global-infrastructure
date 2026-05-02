@@ -71,7 +71,7 @@ The Studio hosts a living Compendium at `/compendium/` containing:
 - **7 sections**: Identity, Place, Ecosystem, Story, Operations, Roadmap, Appendices
 - **~95 pages** of organisational knowledge
 - **31 vignettes** across 7 categories
-- **35 project pages** with ALMA signals
+- **35 project pages** with ALMA review fields
 
 ## Key Public Pages
 

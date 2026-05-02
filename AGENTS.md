@@ -9,6 +9,22 @@
 - Put system architecture and integration design in `docs/architecture/`.
 - Use `thoughts/shared/` for plans, handoffs, drafts, and reports, not permanent source-of-truth files.
 
+## ALMA Language Rule
+
+Always spell out ALMA on first use:
+
+Accountable Listening and Meaningful Action (ALMA)
+
+Do not describe ALMA as:
+- the Soul
+- an AI agent
+- a ranking engine
+- a measurement dashboard
+- a replacement for human or community authority
+
+Describe ALMA as:
+ACT's governed sensemaking process for moving from listening to meaningful action with consent, authority, provenance, and review.
+
 ## Git Hygiene
 
 - Start branch/process work by reading `docs/governance/git-branching.md`.

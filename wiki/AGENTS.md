@@ -94,6 +94,7 @@ If you're running a batch of edits, lint and rebuild once at the end.
 - **Always add new articles to `wiki/index.md`** — orphaned articles fail lint
 - **Always add a `## Backlinks` section** — missing backlinks generate lint warnings
 - **Respect consent tiers** — stories from Empathy Ledger may have `consent_tier: internal-only` in frontmatter. These are excluded from the public viewer automatically.
+- **ALMA first-use rule** — spell out Accountable Listening and Meaningful Action (ALMA) on first use. Do not define ALMA as the Soul, an AI agent, a ranking engine, or a measurement dashboard.
 
 ## Key Scripts
 

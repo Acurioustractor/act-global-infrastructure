@@ -72,7 +72,7 @@ The Empathy Ledger adheres to the **OCAP** principles for all Indigenous data:
 We use personal information to:
 
 1. **Operate the platform** — display stories, connect storytellers, measure impact
-2. **Measure impact** — ALMA scores (Agency, Legacy, Momentum, Accountability)
+2. **Review impact evidence** — Accountable Listening and Meaningful Action (ALMA) review fields
 3. **Support community programs** — connect storytellers with relevant projects
 4. **Improve the platform** — understand usage patterns (anonymized)
 5. **Comply with legal obligations** — grant reporting, regulatory requirements
@@ -150,7 +150,7 @@ When you request story deletion:
 - Story content removed from platform within 7 days
 - Story removed from search/aggregation immediately
 - Backup copies removed within 30 days
-- ALMA scores recalculated excluding your data
+- ALMA review fields recalculated excluding your data
 - We retain only a minimal audit record (consent withdrawal date)
 
 ---

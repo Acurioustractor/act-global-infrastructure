@@ -128,7 +128,8 @@ If ACT cannot hand over the knowledge and public framing layer, it has not actua
 - [[lcaa-method|LCAA Method]] — Action phase is where handover planning lives
 - [[nicholas-marchesi|Nicholas Marchesi OAM]] — founder lane where handover is treated as a practical design choice
 - [[governance-consent|Governance & Consent]] — governance as handover discipline
-- [[alma|ALMA Framework]] — learning model that feeds capacity transfer
+- [[alma|ALMA]] — governed listening-to-action process that protects handover from extraction
+- [[governed-proof|Governed Proof]] — proof discipline that makes handover traceable
 - [[empathy-ledger|Empathy Ledger]] — primary platform designed for obsolescence
 - [[the-harvest|The Harvest]] — public place layer that should become community-held rather than ACT-dependent
 - [[act-farm|ACT Farm]] — tractor logic and field discipline made operational

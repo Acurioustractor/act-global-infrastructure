@@ -17,7 +17,7 @@ This document is the **complete idea**, in one place, written for walk-through r
 
 ## §1 · What it is, in one paragraph
 
-**STAY.** is a three-year program that leaves a library. Seven method books in **The STAY Series**, ten community volumes from ten anchor communities on Country, around fifty hand-stitched young-person Journals, and a national edition that goes to every electorate office in the country. The library is the proof — and it is the destination. A small team accompanies it into being by holding ten Indigenous-led communities over three years, wiring the infrastructure that makes their work legible (CivicGraph + the Australian Living Map of Alternatives + Empathy Ledger), and producing the artefacts the rest of the world will fly in to read.
+**STAY.** is a three-year program that leaves a library. Seven method books in **The STAY Series**, ten community volumes from ten anchor communities on Country, around fifty hand-stitched young-person Journals, and a national edition that goes to every electorate office in the country. The library is the proof — and it is the destination. A small team accompanies it into being by holding ten Indigenous-led communities over three years, wiring the infrastructure that makes their work legible (CivicGraph + ALMA-governed JusticeHub evidence + Empathy Ledger), and producing the artefacts the rest of the world will fly in to read.
 
 The word **STAY** carries the whole methodology. *Stay where you are* — don't move children off Country to be punished. *Stay connected* — don't parachute in and leave. *Stay in the work* — don't file the artefact and forget. The library is the form all three meanings take.
 
@@ -59,13 +59,13 @@ This program is **not starting from zero.** The infrastructure layer is already 
 | Layer                                     | What it is                                                                                     |                                                                                                         Live numbers |
 | ----------------------------------------- | ---------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------: |
 | **CivicGraph**                            | The legibility layer — entities, relationships, place-mapping, daily syncs from public sources |       **100,036** entities · **199,001** relationships · **94.1%** entity-match accuracy · **96%** postcode coverage |
-| **Australian Living Map of Alternatives** | The case library of community-led models that already work                                     | **1,775** community models, of which **128** are verified at the top three tiers (Indigenous-led, Effective, Proven) |
+| **ALMA-governed JusticeHub evidence** | The case library of community-led models that already work                                     | **1,775** community models, of which **128** are verified at the top three tiers (Indigenous-led, Effective, Proven) |
 | **JusticeHub**                            | The public-facing front end — search, dossiers, MCP agent tools, place pages                   |                                                                       Live at justicehub.com.au · 6 live agent tools |
 | **Empathy Ledger**                        | Consent and sovereignty layer — every voice transcript, every story, every consent             |                                                         **226** storytellers · OCAP/CARE protocols at the data layer |
 | **CONTAINED**                             | The companion exhibition — a shipping container on the road, currently at Mounty Yarns         |                                                                                                          Active tour |
 | **Justice funding tracking**              | Indexed records of grants, contracts, donations, procurement                                   |                              **52K** justice funding records · **672K** AusTender contracts · **312K** AEC donations |
 
-The full stack: **CivicGraph + Living Map + JusticeHub + Empathy Ledger + CONTAINED.**
+The full stack: **CivicGraph + ALMA-governed evidence + JusticeHub + Empathy Ledger + CONTAINED.**
 
 This is the answer to *"how do you know it works?"* — built so communities can witness, document, verify, and publish what already works on their own terms.
 
@@ -113,7 +113,7 @@ These are the seven methods the program runs on. Each one has its own page in th
 
 ![](../output/alma-loop-journal.png)
 
-**Subtitle:** *How communities grow the Australian Living Map of Alternatives.*
+**Subtitle:** *How communities grow the ALMA-governed evidence commons.*
 
 **The four moves:**
 
@@ -130,7 +130,7 @@ These are the seven methods the program runs on. Each one has its own page in th
 > 128 already verified by Elders, communities, or trials.
 > The rest are the work — and the Loop is how we move them up the ladder.
 >
-> The system doesn't know what works because it never asked. The Australian Living Map of Alternatives is the answer to that — built so communities can witness, document, verify and publish *what already works*, on their own terms.
+> The system doesn't know what works because it never asked. The ALMA-governed evidence commons is the answer to that — built so communities can witness, document, verify and publish *what already works*, on their own terms.
 >
 > Every entry attracts the next witness. The library grows by recognition, not by extraction.
 

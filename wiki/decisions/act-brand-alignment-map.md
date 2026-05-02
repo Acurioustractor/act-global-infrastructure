@@ -163,7 +163,7 @@ These rules apply to every surface, regardless of cluster:
 
 1. **Voice (Curtis method).** Name the room, name the body, load the abstract noun, stop the line before the explanation. From `writing-voice.md`.
 2. **AI-tells blocklist.** Never use: delve, crucial, pivotal, tapestry, underscore, "not just X but Y", rule-of-three adjective padding, em-dashes (in any ACT-facing writing), "challenges and future prospects", "-ing" significance tails.
-3. **Naming.** "Australian Living Map of Alternatives" never bare "ALMA". "Listen · Curiosity · Action · Art" never bare "LCAA". Indigenous place names always; colonial in brackets only.
+3. **Naming.** "Australian Living Map of Alternatives" is always spelled out. "Accountable Listening and Meaningful Action (ALMA)" needs first-use expansion and should not be used bare where it could be confused with the map. "Listen · Curiosity · Action · Art" never bare "LCAA". Indigenous place names always; colonial in brackets only.
 4. **LCAA imprint.** Every project should be reachable from the LCAA framing — Listen, Curiosity, Action, Art — visually OR narratively. Some lean Listen (EL v2), some Action (JH), some Art (Studio), some all four (Farm). State which.
 5. **Indigenous protocols.** Cultural-protocols-true projects (PICC, Oonchiumpa, BG Fit, Mounty Yarns) require OCAP-style consent before any storyteller content lands publicly. From `wiki/projects/...` per-project notes + `project_wiki_story_sync.md` memory.
 

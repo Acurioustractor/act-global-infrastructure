@@ -126,9 +126,9 @@ const projectData: Record<string, {
         content: 'Every storyteller owns their content. They decide who can access their stories, how they can be used, and can revoke access at any time. This is true data sovereignty.',
       },
       {
-        title: 'ALMA Framework',
+        title: 'ALMA',
         icon: Zap,
-        content: 'ALMA (Active Listening, Measuring, Amplifying) is our methodology for capturing impact through stories. It connects lived experience to measurable outcomes.',
+        content: 'Accountable Listening and Meaningful Action (ALMA) is ACT\'s governed process for moving from story to responsible action with consent, authority, provenance, and review.',
       },
     ],
   },
@@ -266,7 +266,7 @@ const projectData: Record<string, {
       {
         title: 'Current Projects',
         icon: Zap,
-        content: '• Empathy Ledger platform\n• ACT Command Center\n• Community data infrastructure\n• AI agents for community work\n• ALMA measurement framework',
+        content: '• Empathy Ledger platform\n• ACT Command Center\n• Community data infrastructure\n• AI agents for community work\n• ALMA governed review process',
       },
     ],
   },

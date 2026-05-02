@@ -13,6 +13,8 @@ This file is the LLM-facing entrypoint for tools such as ChatGPT, Codex, Claude,
 - [Canonical soul](wiki/concepts/soul.md): why ACT exists.
 - [ACT identity](wiki/concepts/act-identity.md): what A Curious Tractor is.
 - [LCAA method](wiki/concepts/lcaa-method.md): how ACT works.
+- [ALMA](wiki/concepts/alma.md): Accountable Listening and Meaningful Action; how listening becomes accountable action.
+- [Governed Proof](wiki/concepts/governed-proof.md): evidence, review, confidence, publication, and audit trail.
 - [Four lanes](wiki/concepts/four-lanes.md): how money sustains the work.
 - [ACT core facts](wiki/decisions/act-core-facts.md): canonical entity and operating facts.
 - [Wiki index](wiki/index.md): main catalog for Tractorpedia.
@@ -39,6 +41,7 @@ This file is the LLM-facing entrypoint for tools such as ChatGPT, Codex, Claude,
 - System and integration architecture belong in `docs/architecture/`.
 - Plans and handoffs belong in `thoughts/shared/`; promote settled truth into `wiki/`.
 - Root dotfiles such as `.soul` are pointers only, not duplicate sources of truth.
+- Always spell out Accountable Listening and Meaningful Action (ALMA) on first use. Do not describe ALMA as the Soul, an AI agent, a ranking engine, or a measurement dashboard.
 
 ## Development Rules
 

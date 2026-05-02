@@ -48,7 +48,7 @@ The data spine is already live at [[justicehub|justicehub.com.au]] and [[civicgr
 
 | Asset | What it is | Status |
 |---|---|---|
-| **ALMA evidence base** (Australian Living Map of Alternatives) | **1,155 verified youth-justice interventions** documented with evidence type, methodology, outcomes, cultural authority, target cohort, geography. The most comprehensive map of Australian youth-justice alternatives in existence. | **Live (verified)** |
+| **ALMA-governed evidence base** | **1,155 verified youth-justice interventions** documented with evidence type, methodology, outcomes, cultural authority, target cohort, geography. The most comprehensive map of Australian youth-justice alternatives in existence. | **Live (verified)** |
 | **CivicGraph entity resolution** | **100,036 entities resolved** (target 150K+) across charities, Indigenous corps, social enterprises. F1 match precision **94.1%**. **199,001 relationships mapped** (target 200K+). | **Live (verified)** |
 | **Geographic precision** | **96% postcode coverage, 96% remoteness, 95% LGA, 94% SEIFA** — enables gap analysis showing where alternatives are systematically unfunded. | **Live (verified)** |
 | **Justice funding ledger** | **71K rows in `justice_funding` table** — state, recipient, program, amount, year, announcement date — bridged to ALMA interventions via `alma_intervention_id`. **315 of 556 JusticeHub orgs linked to CivicGraph entities (57%)**; 241 still to bridge. | **Live (verified)** |
