@@ -1,5 +1,14 @@
 # ACT Ecosystem - Codex Rules
 
+## Steering Files
+
+- Start with `STEERING.md` when a task touches philosophy, positioning, entity language, money logic, or strategic architecture.
+- `.soul` is a root pointer only. The canonical source is `wiki/concepts/soul.md`.
+- Put philosophy, methods, frameworks, and theories in `wiki/concepts/`.
+- Put settled strategic decisions and canonical operating facts in `wiki/decisions/`.
+- Put system architecture and integration design in `docs/architecture/`.
+- Use `thoughts/shared/` for plans, handoffs, drafts, and reports, not permanent source-of-truth files.
+
 ## Debugging Discipline (read first)
 
 - **Do NOT claim a fix works without verifying it.** Run the actual code path, query the DB, check the UI, capture the output. If you cannot verify, say "unverified" and tell the user how to test.

@@ -1,6 +1,6 @@
 import { NextResponse, type NextRequest } from 'next/server'
 import { hybridSearch } from '@/lib/wiki-search'
-import { searchCanonicalWiki } from '@/lib/wiki-files'
+import { mergeWikiSearchResults, searchCanonicalWiki } from '@/lib/wiki-files'
 
 export async function GET(request: NextRequest) {
   try {
@@ -9,8 +9,9 @@ export async function GET(request: NextRequest) {
 
     // Try hybrid search (BM25 + vector + RRF)
     try {
+      const canonicalResults = searchCanonicalWiki(q)
       const results = await hybridSearch(q)
-      if (results.length > 0) return NextResponse.json({ results })
+      if (results.length > 0) return NextResponse.json({ results: mergeWikiSearchResults(q, results, canonicalResults) })
     } catch (e) {
       console.warn('Hybrid search failed, falling back to substring:', e)
     }

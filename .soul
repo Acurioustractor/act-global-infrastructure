@@ -1,0 +1,14 @@
+# .soul
+
+This is a pointer file, not the source of truth.
+
+The canonical ACT soul file lives at:
+
+- `wiki/concepts/soul.md`
+
+The public/wiki route alias is:
+
+- `https://wiki.act.place/.soul`
+
+Use this file only as a stable root-level anchor for humans, agents, and tools that look for `.soul`.
+Do not duplicate the full soul text here. If the soul changes, edit `wiki/concepts/soul.md`.
