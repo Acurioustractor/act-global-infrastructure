@@ -45,7 +45,7 @@ Key linkage rates:
 - Federal Contracts: **85%** (791K records)
 - Foundations: **100%** (10.8K records)
 - Political Donations: **59%** (313K records)
-- Australian Living Map interventions: **56%** (1.4K records)
+- ALMA-governed intervention records: **56%** (1.4K records)
 
 ## Data Coverage Gaps
 

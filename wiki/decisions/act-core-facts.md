@@ -153,8 +153,8 @@ Full list: `config/project-codes.json` (v1.8.0, 74 projects, all with canonical_
 
 ## Naming & voice (always apply)
 
-- **"Australian Living Map of Alternatives"** — spell out in external copy; do not use the bare acronym "ALMA" for the map
-- **"Accountable Listening and Meaningful Action (ALMA)"** — spell out on first use; avoid bare "ALMA" where it could be confused with the map
+- **"Accountable Listening and Meaningful Action (ALMA)"** — spell out on first use; never use bare "ALMA" in external copy
+- **"JusticeHub evidence map"** or **"ALMA-governed JusticeHub evidence"** — use this for the intervention map; do not call the map "ALMA"
 - **"Listen · Curiosity · Action · Art"** — never bare acronym "LCAA" in external copy
 - **Indigenous place names always**, colonial in brackets only
 - **No em-dashes** in any ACT-facing writing (journals, pitches, web copy, posts)

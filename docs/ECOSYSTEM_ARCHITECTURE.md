@@ -149,7 +149,7 @@ Goods serves **both** public and internal functions:
 - **Deployment**: Vercel (most), Netlify (Goods)
 
 ### Project-Specific
-- **Empathy Ledger**: ALMA AI analysis, Content Hub API
+- **Empathy Ledger**: ALMA-governed review support, Content Hub API
 - **Goods**: CLI tools, static HTML storefront
 - **ACT Placemat**: Intelligence Layer, ecosystem dashboards
 

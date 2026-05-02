@@ -168,7 +168,7 @@ PICC is anchor community #2 in the canonical [[three-circles|Three Circles]] Min
 - [[richard-cassidy|Richard Cassidy]] — Palm Island governance and "Our Story" framing
 - [[allan-palm-island|Allan Palm Island]] — cultural and art anchor in the Palm Island field
 - [[aunty-ethel-robertson|Aunty Ethel Robertson]] — Elder authority and community grounding
-- [[three-circles|The Three Circles]] — **anchor community #2** in the canonical 3-year, $2.9M Minderoo pitch. Richard Cassidy and the Bwgcolman families. **PICC is the program's strongest community proof point**: $29M annual turnover, 208 FTE, $38.9M of tracked funding 2021–25, 78% diversion rate, Young Offender Support Service growing 3× since 2021. Already in the Australian Living Map evidence base.
+- [[three-circles|The Three Circles]] — **anchor community #2** in the canonical 3-year, $2.9M Minderoo pitch. Richard Cassidy and the Bwgcolman families. **PICC is the program's strongest community proof point**: $29M annual turnover, 208 FTE, $38.9M of tracked funding 2021–25, 78% diversion rate, Young Offender Support Service growing 3× since 2021. Already in the ALMA-governed JusticeHub evidence base.
 - [[staying|Staying — Country & Council]] — methodology layer of Three Circles' Circle Two
 - [[palm-island|Palm Island (Bwgcolman)]] — community article
 - [[third-reality|The Third Reality]] — methodology PICC exemplifies

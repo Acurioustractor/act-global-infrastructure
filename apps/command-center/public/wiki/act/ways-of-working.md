@@ -5,7 +5,7 @@ status: Active
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/concepts/ways-of-working.md`.
-> Regenerated: `2026-04-21T03:19:53.973Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerated: `2026-05-02T23:12:49.852Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # Ways of Working
 
@@ -21,7 +21,7 @@ ACT's internal working practices aren't administrative procedures — they're ex
 |----------|---------|
 | **Listen first** | If in doubt, pause and return to community voice |
 | **Use LCAA** | Structure planning and delivery through the phases |
-| **Use ALMA** | Check ethics and learning quality |
+| **Use ALMA** | Check consent, authority, provenance, review, and action readiness |
 | **Ground language** | Keep it non-extractive, honest, no savior framing |
 | **Mark nuance** | Tag high-nuance partner details as `[INTERNAL ONLY]` |
 
@@ -48,7 +48,7 @@ See [[voice-guide|ACT Voice Guide]] for the full language system.
 Small, repeatable actions that keep the model real:
 
 1. Apply the [[lcaa-method|LCAA]] framework to every project plan and update
-2. Route impact learning through Empathy Ledger and [[alma|ALMA]]
+2. Route listening-to-action decisions through Empathy Ledger and [[alma|ALMA]]
 3. Keep enterprise pathways practical and community-led (The Harvest, Goods on Country)
 4. Protect consent and cultural protocols at every stage
 5. Review claims before external sharing
@@ -75,7 +75,7 @@ Small, repeatable actions that keep the model real:
 ## Knowledge Capture
 
 Weekly rhythms:
-- Update the agent system with project slugs and ALMA signals
+- Update the agent system with project slugs, consent status, authority, provenance, and review fields
 - Capture learnings in the appropriate space (Telegram or Discord)
 - Review shareability before any external communication
 - Run the [[social-soil-canvas|Social Soil Canvas]] when the field feels noisy — especially before adding work, after a hard week, or before making a portfolio cut
@@ -132,7 +132,8 @@ How we work reflects what we believe. Every interaction is an expression of valu
 
 - [[act-public-voice|ACT Public Voice]] — public-facing expression of the internal operating rhythm and language discipline
 - [[lcaa-method|LCAA Method]] — the methodology these practices support
-- [[alma|ALMA Framework]] — ethics and learning check used daily
+- [[alma|ALMA]] — governed listening-to-action process used daily
+- [[governed-proof|Governed Proof]] — proof and publication discipline after action
 - [[governance-consent|Governance & Consent]] — consent practices embedded in daily work
 - [[voice-guide|ACT Voice Guide]] — language guidance for writing and communication
 - [[social-soil-canvas|Social Soil Canvas]] — weekly field diagnostic for founder-level cuts and pattern recognition

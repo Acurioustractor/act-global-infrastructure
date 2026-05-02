@@ -15,7 +15,7 @@ empathy_ledger_key: justicehub
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/projects/justicehub/justicehub.md`.
-> Regenerated: `2026-04-21T03:19:53.973Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerated: `2026-05-02T23:12:49.852Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # JusticeHub
 
@@ -76,12 +76,12 @@ This isn't just better for communities — it's better economics. Community mode
 | Audience | Entry Point | Tool |
 |---------|-------------|------|
 | Youth | "I need help" | Youth Scout |
-| Organizations | ALMA Network | Directory + evidence tools |
+| Organizations | JusticeHub network | Directory + evidence tools |
 | Policymakers | Evidence dashboards | Cost Calculator, System Map, Impact Dashboard |
 
 ## Key Features
 
-- **ALMA AI Chat** — conversational interface to the evidence base
+- **JusticeHub evidence chat** — conversational interface to the evidence base with citations and review metadata
 - **Cost Calculator** — real-time cost comparison of detention vs community alternatives
 - **System Map** — visual mapping of the justice ecosystem
 - **Impact Dashboard** — outcome data across programs
@@ -91,9 +91,9 @@ This isn't just better for communities — it's better economics. Community mode
 
 JusticeHub needs **$500K** to scale nationally.
 
-## ALMA (Australian Living Map of Alternatives)
+## ALMA-Governed Evidence Records
 
-The "what works" layer sitting on top of funding data:
+The "what works" layer sitting on top of funding data, governed by [[alma|Accountable Listening and Meaningful Action (ALMA)]]:
 - Evidence-based interventions mapped by topic and geography
 - 9 topic domains: child-protection, community-led, diversion, family-services, indigenous, legal-services, ndis, prevention, youth-justice
 - Cross-referenced with CivicGraph entity graph (56% linkage rate)
@@ -118,7 +118,7 @@ The "what works" layer sitting on top of funding data:
 ### Impact-Weighted Quadratic Funding (ImpactQF)
 - Integrating Gitcoin's open-source Allo Protocol for programmable capital allocation
 - Matching funds distributed based on verified community outcomes, not popularity
-- ALMA AI scores projects → capital follows evidence
+- ALMA-governed review keeps project evidence tied to consent, authority, provenance, and review before capital follows
 
 ### Hypercerts
 - Semi-fungible tokens recording verified social outcomes
@@ -255,7 +255,7 @@ The site leads not with JusticeHub as a platform, but as a data statement: "1,00
 
 Named by role, not urgency:
 - **"I need help"** — direct to crisis/service support, "No judgment, just options"
-- **"I do the work"** — ALMA Network framing, peer-to-peer
+- **"I do the work"** — JusticeHub network framing, peer-to-peer
 - **"I fund or shape policy"** — evidence first, "Make decisions based on data, not lobby groups"
 
 The three-door design is notably non-hierarchical. Young people in need get top billing alongside funders.
@@ -289,7 +289,7 @@ The site's SEO title is "JusticeHub — Empowering Youth Through Storytelling" b
 In the [[lcaa-method|LCAA Method]], JusticeHub is the **evidence layer** of [[third-reality|The Third Reality]] — the **Curiosity** infrastructure that catalogs what works, surfaces it for funders and policymakers, and connects young people, communities, and decision-makers to community-led alternatives to detention.
 
 LCAA arc for JusticeHub:
-- **Listen** — three doors named by role rather than urgency (*"I need help"*, *"I do the work"*, *"I fund or shape policy"*); ALMA AI chat surfacing community voice alongside policy evidence; service directory built from community knowledge
+- **Listen** — three doors named by role rather than urgency (*"I need help"*, *"I do the work"*, *"I fund or shape policy"*); evidence chat surfacing community voice alongside policy evidence; service directory built from community knowledge
 - **Curiosity** — 1,387 verified models, 430 with evidence data, 98K orgs mapped, $94.6B funding tracked; international comparisons ([[diagrama|Diagrama]], Spain); the cost case (community-led ~$15K/year vs detention ~$1.3M/year, 86x cheaper)
 - **Action** — Cost Calculator, System Map, Impact Dashboard, Learning Trips; capital routing via Allo Protocol and Hypercerts; service directory connecting youth to support; on-the-ground proof from BG Fit, [[oonchiumpa|Oonchiumpa]], and [[confit-pathways|ConFit Pathways]]
 - **Art** — [[contained|CONTAINED]] — the touring shipping container exhibition that brings justice reform into public consciousness and makes system change felt, not abstract; portraits from [[the-brave-ones|The Brave Ones]] live on its inside walls

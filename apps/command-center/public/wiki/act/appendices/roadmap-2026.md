@@ -5,7 +5,7 @@ status: Active
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/decisions/roadmap-2026.md`.
-> Regenerated: `2026-04-21T03:19:53.973Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerated: `2026-05-02T23:12:49.852Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # 2026 Roadmap
 
@@ -24,7 +24,7 @@ This is a seasonal map, not a fixed plan. ACT chooses readiness over deadlines a
 | Finalise compendium and align project language to core model | In Progress |
 | Stabilise Harvest operations and maker pathways in Witta | In Progress |
 | Confirm Goods production readiness and support pathways | Planning |
-| Align AI agent guardrails to ALMA and Empathy Ledger | Complete |
+| Align AI agent guardrails to Accountable Listening and Meaningful Action (ALMA) and Empathy Ledger | Complete |
 | JusticeHub vision and path to externalise | Planning |
 | ACT regular communication (1-to-some and 1-to-many via GHL) | In Progress |
 
@@ -67,7 +67,7 @@ Support local makers and micro-enterprise through markets, workshops, and venue 
 Move Goods from pilots to reliable production. Strengthen supply chains, quality, and local capability. Hold community ownership and fair value return as non-negotiables throughout scale.
 
 ### 5. Story and Evidence
-Treat storytelling as infrastructure for change, not marketing. Protect consent and cultural protocols in every output. Use evidence to learn, not to extract. Anchor impact learning in [[alma|ALMA]] and Empathy Ledger.
+Treat storytelling as infrastructure for change, not marketing. Protect consent and cultural protocols in every output. Use evidence to learn, not to extract. Anchor listening-to-action decisions in [[alma|ALMA]] and Empathy Ledger.
 
 ## Risks and Dependencies
 
@@ -79,7 +79,7 @@ Naming risk early is part of stewardship. We do not hide it in the margins.
 | **Consent risk** | Misuse of stories or data — clear protocols, regular review |
 | **Enterprise risk** | Supply chain and operational reliability — build slowly, local first |
 | **Land risk** | Overextension beyond capacity — land veto, seasonal planning |
-| **AI risk** | Misalignment or extractive outputs — ALMA gatekeeping, community override |
+| **AI risk** | Misalignment or extractive outputs — consent, authority, provenance, ALMA review, community override |
 
 > The risk we ignore is the one that shows up in the work.
 
@@ -92,7 +92,8 @@ Naming risk early is part of stewardship. We do not hide it in the margins.
 
 ## Backlinks
 
-- [[alma|ALMA Framework]] — impact model that measures progress without profiling
+- [[alma|ALMA]] — governed process for moving from listening to meaningful action
+- [[governed-proof|Governed Proof]] — evidence, review, and publication layer after action
 - [[lcaa-method|LCAA Method]] — methodology that shapes how work moves through the year
 - [[beautiful-obsolescence|Beautiful Obsolescence]] — Q4 focus on handover documentation
 - [[ways-of-working|Ways of Working]] — the daily practice that makes the roadmap real

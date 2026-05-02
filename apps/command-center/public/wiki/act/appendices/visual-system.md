@@ -11,7 +11,7 @@ image_model: gemini-3-pro-image-preview via mcp__gemini-image__create_asset
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/concepts/visual-system.md`.
-> Regenerated: `2026-04-21T03:19:53.973Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerated: `2026-05-02T23:12:49.852Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # ACT Visual System
 
@@ -128,7 +128,7 @@ These are the canonical model diagrams maintained across ACT documentation. Each
 | **The Three Circles** ([[three-circles|Three Circles]]) | **Variant A — Tree trunk** | Centre / The Ten / The Outer Ring → *The Country We're Building* artefact |
 | **ACT Core Model** | Variant D — Ripples (smaller scale) | LAND PRACTICE → ENTERPRISE / LCAA / IMPACT → COMMUNITY (Ownership) |
 | **LCAA Loop** | Variant B — Basket coil (cycle, not arrow) | Listen → Curiosity → Action → Art → Listen (Art returns us to Listen) |
-| **ALMA Reporting Loop** | Variant D — Ripples | STORY → SIGNAL → SHIFT → SCOPE → (feedback) → STORY |
+| **ALMA Listening-to-Action Loop** | Variant D — Ripples | LISTEN → AUTHORITY / CONSENT → MEANING → ACTION / HOLD BACK → REVIEW |
 | **Consent and Data Flow** ([[empathy-ledger|Empathy Ledger]]) | Custom — concentric envelopes | Empathy Ledger as source of truth, internal/external paths determined by consent scope |
 | **Enterprise Pathway Loops** | Variant A — Tree rings (slow, accumulating) | Goods on Country: Need → Design → Manufacture → Distribute → Maintain → 40% Returns. The Harvest: Land Care → Grow/Make → Community Enterprise → Revenue → Reinvest. |
 | **Map of the Ten** (Three Circles companion) | Stylised hand-drawn map of Australia | Ten anchor communities marked as glowing accent-color fires; constellation web connecting them |
@@ -238,7 +238,7 @@ That's the entire recipe. Aspect ratio `2:3` for book covers, `1:1` for symbols/
 |---|---|---|
 | **Three Circles cover with title** | `three-circles-cover-typography.png` | Slide 1 of the deck · book mockup for *The Country We're Building* |
 | **Three Circles symbol (no text)** | `three-circles-penguin-v3-clean.png` | Standalone mark · social · electorate-office stamp |
-| **ALMA Reporting Loop** | `alma-loop-penguin.png` | STORY → SIGNAL → SHIFT → SCOPE diagram |
+| **ALMA Listening-to-Action Loop** | `alma-loop-penguin.png` | LISTEN → AUTHORITY / CONSENT → MEANING → ACTION / HOLD BACK → REVIEW diagram |
 | **LCAA four-petal** | `lcaa-loop-penguin.png` | Listen / Curiosity / Action / Art rosette |
 | **Map of the Ten** | `map-of-the-ten-penguin.png` | Slide 7 of the deck · the ten anchor communities |
 | **Three-Year Fire Crescendo** | `fire-crescendo-penguin.png` | Slide 5 of the deck · Year 1 → Year 2 → Year 3 timeline |

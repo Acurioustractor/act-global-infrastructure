@@ -260,7 +260,7 @@ agents/
 - [ ] Email AI extraction
 - [ ] Social media monitoring
 - [ ] Project management sync
-- [ ] ALMA scoring everywhere
+- [ ] ALMA review fields everywhere
 
 ---
 

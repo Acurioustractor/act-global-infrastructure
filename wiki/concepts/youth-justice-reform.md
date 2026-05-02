@@ -85,7 +85,7 @@ The submission explicitly named [[campfire|CAMPFIRE]] (BG Fit, Mount Isa) and th
 
 [[justicehub|JusticeHub]] is ACT's intelligence platform underpinning this reform thesis. It has mapped more than 800 verified interventions, organisations, and programs across every state and territory. It tracks where public money goes — more than $1 billion in justice spending, line by line. It shows the gap between what governments spend on detention and what they invest in what actually works. All of it public. All of it sourced.
 
-JusticeHub makes the argument that communities already have the answers. The data layer — 145,242 justice funding records, 1,357 evidence-based interventions in the Australian Living Map of Alternatives, 57,435 crime statistics records — is the empirical foundation for everything CONTAINED campaigns for.
+JusticeHub makes the argument that communities already have the answers. The data layer — 145,242 justice funding records, 1,357 evidence-based interventions in ALMA-governed JusticeHub evidence records, 57,435 crime statistics records — is the empirical foundation for everything CONTAINED campaigns for.
 
 ## The Role of CONTAINED
 

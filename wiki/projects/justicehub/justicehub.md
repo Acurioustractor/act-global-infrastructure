@@ -251,7 +251,7 @@ The site leads not with JusticeHub as a platform, but as a data statement: "1,00
 
 Named by role, not urgency:
 - **"I need help"** — direct to crisis/service support, "No judgment, just options"
-- **"I do the work"** — ALMA Network framing, peer-to-peer
+- **"I do the work"** — JusticeHub network framing, peer-to-peer
 - **"I fund or shape policy"** — evidence first, "Make decisions based on data, not lobby groups"
 
 The three-door design is notably non-hierarchical. Young people in need get top billing alongside funders.
@@ -285,7 +285,7 @@ The site's SEO title is "JusticeHub — Empowering Youth Through Storytelling" b
 In the [[lcaa-method|LCAA Method]], JusticeHub is the **evidence layer** of [[third-reality|The Third Reality]] — the **Curiosity** infrastructure that catalogs what works, surfaces it for funders and policymakers, and connects young people, communities, and decision-makers to community-led alternatives to detention.
 
 LCAA arc for JusticeHub:
-- **Listen** — three doors named by role rather than urgency (*"I need help"*, *"I do the work"*, *"I fund or shape policy"*); ALMA AI chat surfacing community voice alongside policy evidence; service directory built from community knowledge
+- **Listen** — three doors named by role rather than urgency (*"I need help"*, *"I do the work"*, *"I fund or shape policy"*); evidence chat surfacing community voice alongside policy evidence; service directory built from community knowledge
 - **Curiosity** — 1,387 verified models, 430 with evidence data, 98K orgs mapped, $94.6B funding tracked; international comparisons ([[diagrama|Diagrama]], Spain); the cost case (community-led ~$15K/year vs detention ~$1.3M/year, 86x cheaper)
 - **Action** — Cost Calculator, System Map, Impact Dashboard, Learning Trips; capital routing via Allo Protocol and Hypercerts; service directory connecting youth to support; on-the-ground proof from BG Fit, [[oonchiumpa|Oonchiumpa]], and [[confit-pathways|ConFit Pathways]]
 - **Art** — [[contained|CONTAINED]] — the touring shipping container exhibition that brings justice reform into public consciousness and makes system change felt, not abstract; portraits from [[the-brave-ones|The Brave Ones]] live on its inside walls

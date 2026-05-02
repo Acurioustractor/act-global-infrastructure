@@ -3,6 +3,10 @@ title: Governed Proof
 status: Active
 ---
 
+> Generated legacy mirror for command-center.
+> Source of truth: `wiki/concepts/governed-proof.md`.
+> Regenerated: `2026-05-02T23:12:49.852Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+
 # Governed Proof
 
 > Proof is not what ACT says happened. Proof is what can be traced, reviewed, shared, and challenged without bypassing consent or authority.

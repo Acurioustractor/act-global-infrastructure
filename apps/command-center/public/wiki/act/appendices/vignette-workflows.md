@@ -5,7 +5,7 @@ status: Active
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/technical/vignette-workflows.md`.
-> Regenerated: `2026-04-21T03:19:53.973Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerated: `2026-05-02T23:12:49.852Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # Vignette & Media Workflows
 
@@ -13,7 +13,7 @@ status: Active
 
 ## Overview
 
-Story vignettes are the compendium's unit of impact evidence — short, structured documents that link a consented community story to [[alma|ALMA]] signals, project context, and media. They are static markdown files with rich YAML frontmatter, sourced from Empathy Ledger and built into the compendium.
+Story vignettes are the compendium's unit of impact evidence — short, structured documents that link a consented community story to [[alma|ALMA]] review fields, project context, and media. They are static markdown files with rich YAML frontmatter, sourced from Empathy Ledger and built into the compendium.
 
 ## Architecture
 
@@ -46,7 +46,7 @@ Story vignettes are the compendium's unit of impact evidence — short, structur
 
 ### Prerequisites
 - Story exists in Empathy Ledger with proper consent
-- ALMA signals have been assessed (see [[transcription-workflow|Transcription Workflow]])
+- ALMA review fields have been assessed (see [[transcription-workflow|Transcription Workflow]])
 - Cultural review status is known
 - Media assets are uploaded (if applicable)
 
@@ -61,7 +61,7 @@ Story vignettes are the compendium's unit of impact evidence — short, structur
    - Set `cultural_review_status` and related fields
    - Add `project_slugs` array
    - Set `place_country`, `voice_owner`, `voice_role`
-   - Score all 6 ALMA signals (1–5)
+   - Complete the six legacy `alma_signals` review fields (1-5)
    - Set `lcaa_stage` and `lcaa_shift`
    - Add media references if available
 4. **Write content** — opening quote, story summary, ALMA reflection, cultural notes, provenance
@@ -101,7 +101,7 @@ Story vignettes are the compendium's unit of impact evidence — short, structur
          consent_status: "granted"
    ```
 
-## Workflow 3: Updating ALMA Signals
+## Workflow 3: Updating ALMA Review Fields
 
 Update when: after community story review, when new evidence emerges, during periodic compendium audits.
 
@@ -162,7 +162,7 @@ linked_vignettes:
   - 16-community-recognition-referrals
 ```
 
-After linking, recalculate project ALMA aggregate scores (avg across all linked vignettes).
+After linking, recalculate project-level ALMA review summaries only for internal review. Do not present them as a community ranking.
 
 ## File Naming Conventions
 
@@ -178,7 +178,7 @@ Before publishing a new or updated vignette:
 
 - [ ] Consent verified in Empathy Ledger
 - [ ] Cultural review completed (if required)
-- [ ] ALMA signals scored (all 6)
+- [ ] ALMA review fields completed (all 6)
 - [ ] All frontmatter fields populated
 - [ ] Content respects consent scope
 - [ ] Media embeds appropriate for scope
@@ -196,7 +196,8 @@ Before publishing a new or updated vignette:
 
 ## Backlinks
 
-- [[transcription-workflow|Transcription Workflow]] — how transcripts become ALMA analysis
-- [[alma|ALMA Framework]] — the signal model embedded in vignette frontmatter
+- [[transcription-workflow|Transcription Workflow]] — how transcripts become ALMA review
+- [[alma|ALMA]] — the governed process behind the legacy `alma_signals` frontmatter
+- [[governed-proof|Governed Proof]] — proof and publication discipline for vignettes
 - [[governance-consent|Governance & Consent]] — consent rules that govern every step
 - [[visual-system|Visual System]] — photography and video guidelines for media

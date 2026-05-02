@@ -18,6 +18,7 @@ Helper: `node scripts/wiki-log.mjs <op> "<summary>" [files...]`
 
 ## 2026
 
+- 2026-05-02 09:12 | snapshot-sync | 24 direct mirrors · 55 stories · 4 wrappers | apps/command-center/public/wiki/README.md, apps/command-center/public/wiki/snapshot-meta.json
 - 2026-05-02 08:37 | manual | Added llms.txt entrypoint for ChatGPT-style repo discovery | llms.txt, STEERING.md, README.md
 - 2026-05-02 08:35 | manual | Added root steering map and .soul pointer to canonical wiki soul stack | STEERING.md, .soul, AGENTS.md, README.md
 - 2026-05-02 08:21 | url-audit | Fixed wiki.act.place/.soul route alias and canonical search discovery for concepts/soul.md | apps/command-center/src/middleware.ts, apps/command-center/src/lib/wiki-files.ts, apps/command-center/src/app/api/wiki/search/route.ts, apps/command-center/src/lib/tools/core.ts

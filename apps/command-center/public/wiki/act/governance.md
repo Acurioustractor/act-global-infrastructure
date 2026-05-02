@@ -5,7 +5,7 @@ status: Active
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/concepts/governance-consent.md`.
-> Regenerated: `2026-04-21T03:19:53.973Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerated: `2026-05-02T23:12:49.852Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # Governance & Consent (Operational)
 
@@ -140,7 +140,8 @@ Every project should be able to answer:
 
 - [[consent-as-infrastructure|Consent as Infrastructure]] — the architectural and philosophical argument
 - [[ocap-principles|OCAP Principles]] — the rights framework this operational model implements in daily work
-- [[alma|ALMA Framework]] — impact model that respects consent boundaries
+- [[alma|ALMA]] — governed listening-to-action process that depends on consent boundaries
+- [[governed-proof|Governed Proof]] — evidence and publication layer that records review status
 - [[empathy-ledger|Empathy Ledger]] — the platform where consent architecture lives
 - [[ai-ethics|AI Ethics & Agent Strategy]] — AI-specific consent rules
 - [[beautiful-obsolescence|Beautiful Obsolescence]] — governance as handover discipline

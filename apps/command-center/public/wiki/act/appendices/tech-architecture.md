@@ -5,7 +5,7 @@ status: Active
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/technical/act-architecture.md`.
-> Regenerated: `2026-04-21T03:19:53.973Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerated: `2026-05-02T23:12:49.852Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # ACT Technical Architecture
 
@@ -85,7 +85,7 @@ Consent is checked at query time on every access, not cached at publication. The
 
 ### Vector Search (pgvector)
 
-Stories include a vector embedding column (`vector(1536)`) for semantic search. Indexed with `ivfflat` for performance. Used for cross-story pattern matching in [[alma|ALMA]] analysis.
+Stories include a vector embedding column (`vector(1536)`) for semantic search. Indexed with `ivfflat` for performance. Used for cross-story pattern matching that can support [[alma|ALMA]] review.
 
 ## API Patterns
 
@@ -200,5 +200,6 @@ New features: UI goes in `apps/command-center/`, API routes in `apps/command-cen
 - [[transcription-workflow|Transcription Workflow]] — how Empathy Ledger transcripts flow through the system
 - [[vignette-workflows|Vignette Workflows]] — how stories connect to the compendium
 - [[consent-as-infrastructure|Consent as Infrastructure]] — architectural argument behind the consent design
-- [[alma|ALMA]] — the impact model that reads from this data
+- [[alma|ALMA]] — the governed listening-to-action process this data can support
+- [[governed-proof|Governed Proof]] — evidence and publication discipline downstream of this architecture
 - [[ways-of-working|Ways of Working]] — the operational discipline this architecture is meant to support quietly and reliably

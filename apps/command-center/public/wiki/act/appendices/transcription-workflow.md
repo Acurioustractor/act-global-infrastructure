@@ -1,19 +1,19 @@
 ---
-title: Descript Transcription & ALMA Workflow
+title: Descript Transcription & ALMA Review Workflow
 status: Active
 ---
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/technical/transcription-workflow.md`.
-> Regenerated: `2026-04-21T03:19:53.973Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerated: `2026-05-02T23:12:49.852Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
-# Descript Transcription & ALMA Workflow
+# Descript Transcription & ALMA Review Workflow
 
-> How transcribed stories move from Descript into Empathy Ledger and through the ALMA analysis pipeline.
+> How transcribed stories move from Descript into Empathy Ledger and through Accountable Listening and Meaningful Action review.
 
 ## Overview
 
-Empathy Ledger holds video stories recorded and shared via Descript. This workflow describes how transcripts are ingested, analyzed through [[alma|ALMA]], aggregated to storyteller profiles, and ultimately used to enrich compendium vignettes. It is a four-layer pipeline, each layer building on the last.
+Empathy Ledger holds video stories recorded and shared via Descript. This workflow describes how transcripts are ingested, reviewed through [[alma|ALMA]], aggregated to storyteller profiles, and ultimately used to enrich compendium vignettes. It is a four-layer pipeline, each layer building on the last.
 
 ## Architecture
 
@@ -35,7 +35,7 @@ Empathy Ledger holds video stories recorded and shared via Descript. This workfl
 ┌─────────────────────────────────────────────────────────────┐
 │                  AI ANALYSIS (LAYER 1)                      │
 │  Script: batch-analyze-transcripts-direct.ts                │
-│  Extracts: Themes, quotes, ALMA signals, cultural flags     │
+│  Extracts: Themes, quotes, ALMA review fields, flags        │
 │  Output: transcript_analysis_results table                  │
 └───────────────────────────┬─────────────────────────────────┘
                             │
@@ -62,9 +62,9 @@ Empathy Ledger holds video stories recorded and shared via Descript. This workfl
 4. Link story to transcript via `story_id`
 5. Update story's `media_url` to the Descript share URL
 
-## Workflow 2: Running ALMA Analysis
+## Workflow 2: Running ALMA Review
 
-ALMA analysis extracts themes, quotes, impact scores, and cultural flags from transcripts.
+ALMA review extracts themes, quotes, review fields, and cultural flags from transcripts. It does not publish or decide for the storyteller.
 
 Prerequisites: Transcript exists in database, `tenant_id` is correct, story is linked.
 
@@ -84,17 +84,17 @@ npx tsx scripts/verify-alma-extraction.ts
 npx tsx scripts/backfill-storyteller-analysis.ts
 ```
 
-## What ALMA Analysis Extracts
+## What ALMA Review Extracts
 
 | Field | Type | Use in Vignette |
 |-------|------|-----------------|
 | `themes` | Array | Tag cloud, categorization |
 | `quotes` | Array | Pull quotes for content |
-| `impact_assessment` | Object | ALMA signal scores |
+| `impact_assessment` | Object | ALMA review fields |
 | `cultural_flags` | Object | Consent gating, sensitivity |
 | `quality_metrics` | Object | Confidence scores |
 
-## Mapping Analysis to ALMA Signals
+## Mapping Analysis to ALMA Review Fields
 
 | Analysis Field | Vignette Signal | Mapping |
 |----------------|-----------------|---------|
@@ -138,7 +138,8 @@ npx tsx scripts/backfill-storyteller-analysis.ts
 
 ## Backlinks
 
-- [[alma|ALMA Framework]] — the impact model this pipeline feeds
+- [[alma|ALMA]] — the governed review process this pipeline supports
+- [[governed-proof|Governed Proof]] — where reviewed story evidence becomes proof, publication, or holdback
 - [[vignette-workflows|Vignette Workflows]] — how analyzed stories become compendium content
 - [[governance-consent|Governance & Consent]] — consent must be verified before analysis runs
 - [[act-architecture|ACT Technical Architecture]] — database tables and Supabase instances

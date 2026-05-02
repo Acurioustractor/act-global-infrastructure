@@ -15,7 +15,7 @@ empathy_ledger_key: act-studio
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/projects/act-studio/act-studio.md`.
-> Regenerated: `2026-04-21T03:19:53.973Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerated: `2026-05-02T23:12:49.852Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # ACT Regenerative Studio
 
@@ -75,7 +75,7 @@ The Studio hosts a living Compendium at `/compendium/` containing:
 - **7 sections**: Identity, Place, Ecosystem, Story, Operations, Roadmap, Appendices
 - **~95 pages** of organisational knowledge
 - **31 vignettes** across 7 categories
-- **35 project pages** with ALMA signals
+- **35 project pages** with ALMA review fields
 
 ## Key Public Pages
 

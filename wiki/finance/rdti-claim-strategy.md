@@ -55,7 +55,7 @@ The CPA needs to understand what ACT actually builds. Map of core R&D activities
 
 - **Entity graph**: 100K+ entities, 672K+ contracts, 312K+ political donations resolved into a single graph with deterministic GS IDs.
 - **Multi-LLM round-robin**: 9 LLM providers in round-robin for entity enrichment; novel architecture for cost/quality/latency balancing.
-- **Australian Living Map of Alternatives evidence engine**: six-review-field evidence framework applied to 1,155+ youth justice interventions.
+- **ALMA-governed JusticeHub evidence engine**: six-review-field evidence framework applied to 1,155+ youth justice interventions.
 - **R&D uncertainty**: how to achieve reliable entity resolution across fragmented government procurement datasets with inconsistent identifiers; how to score intervention quality from heterogeneous evidence types.
 
 ### [[justicehub|JusticeHub]] — civic intelligence and campaign infrastructure

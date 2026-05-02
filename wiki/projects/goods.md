@@ -224,9 +224,9 @@ REAL Innovation Fund ($1.2M over 4 years via Oonchiumpa consortium) is the prima
 
 ## R&D Tax Incentive
 
-Goods on Country is classified as **Supporting R&D** under ACT's FY26 Division 355 claim (ITAA 1997). It supports the core R&D activities (ALMA AI orchestration, IoT fleet telemetry) by providing:
+Goods on Country is classified as **Supporting R&D** under ACT's FY26 Division 355 claim (ITAA 1997). It supports the core R&D activities (ALMA review orchestration, IoT fleet telemetry) by providing:
 
-1. **IoT telemetry system** — Particle.io devices on 10 washing machines generate real-time data for the ALMA infrastructure experiments
+1. **IoT telemetry system** — Particle.io devices on 10 washing machines generate real-time data for the ALMA-governed infrastructure experiments
 2. **Remote deployment logistics** — iterating on community infrastructure constraints as an experimental testbed
 3. **Community handover protocols** — transitioning from ACT-managed to community-managed fleet operations
 

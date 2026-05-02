@@ -11,7 +11,7 @@ tags: [oonchiumpa, founders, cultural-authority, mparntwe, judges-on-country]
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/stories/oonchiumpa-kristy-tanya-founders.md`.
-> Regenerated: `2026-04-21T03:19:53.973Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerated: `2026-05-02T23:12:49.852Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # Our young people are just collateral in a bigger issue
 

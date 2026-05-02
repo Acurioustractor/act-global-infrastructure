@@ -1058,7 +1058,7 @@ CREATE POLICY "Authenticated users can log usage"
 
 **Cross-Project Metrics ↔ Portfolio Signals**:
 - `cross_project_metrics` stores calculated portfolio scores
-- Daily/weekly job aggregates ALMA signals
+- Daily/weekly job aggregates ALMA review fields
 - Feeds into Empathy Ledger dashboards
 
 ---
@@ -1345,4 +1345,3 @@ export interface ConsentCheckResult {
 ---
 
 **This integration transforms JusticeHub from a service directory into Australia's first community-governed youth justice intelligence commons.**
-
