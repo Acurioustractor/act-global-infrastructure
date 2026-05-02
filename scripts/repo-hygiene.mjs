@@ -2,11 +2,13 @@
 import { execFileSync } from 'node:child_process'
 
 function git(args, options = {}) {
-  return execFileSync('git', args, {
+  const output = execFileSync('git', args, {
     encoding: 'utf8',
     stdio: ['ignore', 'pipe', 'pipe'],
     ...options,
-  }).trim()
+  })
+
+  return output.replace(/\s+$/u, '')
 }
 
 function lines(value) {
