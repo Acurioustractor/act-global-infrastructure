@@ -15,8 +15,8 @@ import { createClient } from '@supabase/supabase-js';
 import { readFileSync, writeFileSync, existsSync } from 'fs';
 import path from 'path';
 
-const SUPABASE_URL = process.env.SUPABASE_SHARED_URL || 'https://tednluwflfhxyucgwigh.supabase.co';
-const SUPABASE_KEY = process.env.SUPABASE_SHARED_SERVICE_ROLE_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY;
+const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_SHARED_URL || 'https://tednluwflfhxyucgwigh.supabase.co';
+const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_SHARED_SERVICE_ROLE_KEY;
 const sb = createClient(SUPABASE_URL, SUPABASE_KEY);
 
 // Xero auth
@@ -100,6 +100,51 @@ function pct(n, d) {
   return Math.round((n / d) * 100) + '%';
 }
 
+function num(value) {
+  return Number(value || 0);
+}
+
+function asLineItems(lineItems) {
+  return Array.isArray(lineItems) ? lineItems : [];
+}
+
+function taxTypesFor(lineItems) {
+  const types = new Set(asLineItems(lineItems).map((li) => li?.tax_type).filter(Boolean));
+  return [...types];
+}
+
+function accountCodesFor(lineItems) {
+  const codes = new Set(asLineItems(lineItems).map((li) => li?.account_code).filter(Boolean));
+  return [...codes];
+}
+
+function lineTotal(lineItems) {
+  return asLineItems(lineItems).reduce((sum, li) => sum + Math.abs(num(li?.line_amount)), 0);
+}
+
+function gstForTaxableLines(lineItems, taxableTypes) {
+  return asLineItems(lineItems).reduce((sum, li) => {
+    const taxType = li?.tax_type;
+    if (!taxableTypes.has(taxType)) return sum;
+    return sum + (Math.abs(num(li?.line_amount)) / 11);
+  }, 0);
+}
+
+function directReceiveTreatment(lineItems) {
+  const types = taxTypesFor(lineItems);
+  if (types.includes('OUTPUT')) return { bucket: 'G1 + 1A', includeG1: true, include1A: true };
+  if (types.some((t) => ['EXEMPTOUTPUT', 'INPUTTAXED'].includes(t))) return { bucket: 'G1 only', includeG1: true, include1A: false };
+  if (types.some((t) => ['BASEXCLUDED', 'EXEMPTEXPENSES'].includes(t))) return { bucket: 'BAS excluded', includeG1: false, include1A: false };
+  return { bucket: 'review', includeG1: false, include1A: false };
+}
+
+function addGrouped(map, key, row) {
+  const current = map.get(key) || { ...row, cnt: 0, total: 0 };
+  current.cnt += row.cnt || 1;
+  current.total += num(row.total);
+  map.set(key, current);
+}
+
 async function main() {
   const args = process.argv.slice(2);
   const quarterArg = args.find(a => /^Q[1-4]$/i.test(a))?.toUpperCase() || getCurrentQuarter();
@@ -134,7 +179,7 @@ async function main() {
   const salesPaid = await q(`
     SELECT contact_name, invoice_number, total::numeric(12,2), total_tax::numeric(12,2) as gst,
            date, status, amount_paid::numeric(12,2)
-    FROM xero_invoices
+    FROM public.xero_invoices
     WHERE type = 'ACCREC' AND status = 'PAID'
     AND date >= '${quarter.start}' AND date <= '${quarter.end}'
     ORDER BY total DESC
@@ -143,8 +188,8 @@ async function main() {
   // Also get RECEIVE bank transactions (direct sales income)
   // NOTE: xero_transactions has no `reference` column — that's on xero_invoices.
   const directIncome = await q(`
-    SELECT contact_name, total::numeric(12,2), date
-    FROM xero_transactions
+    SELECT contact_name, total::numeric(12,2), date, bank_account, project_code, line_items
+    FROM public.xero_transactions
     WHERE status NOT IN ('DELETED','VOIDED') AND type = 'RECEIVE' AND date >= '${quarter.start}' AND date <= '${quarter.end}'
     ORDER BY total DESC
   `);
@@ -163,14 +208,49 @@ async function main() {
     push('');
   }
 
-  if (directIncome.length > 0) {
-    push('  Direct income (bank receives):');
-    push('  ' + '-'.repeat(68));
-    for (const tx of directIncome) {
-      push(`  ${(tx.contact_name || '?').padEnd(30)} ${''.padEnd(12)} ${fmt(tx.total).padStart(12)}`);
-      totalSales += Number(tx.total) || 0;
-      // Estimate GST as 1/11 of total for GST-inclusive income
+  const directGroups = new Map();
+  let directIncludedG1 = 0;
+  let directIncluded1A = 0;
+  let directExcluded = 0;
+  let directReview = 0;
+
+  for (const tx of directIncome) {
+    const treatment = directReceiveTreatment(tx.line_items);
+    const amount = num(tx.total);
+    const taxTypes = taxTypesFor(tx.line_items).join('+') || 'NO_TAX_TYPE';
+    const accountCodes = accountCodesFor(tx.line_items).join('+') || 'NO_ACCOUNT';
+    const key = `${treatment.bucket}|${tx.contact_name || '?'}|${taxTypes}|${accountCodes}`;
+    addGrouped(directGroups, key, {
+      bucket: treatment.bucket,
+      contact_name: tx.contact_name || '?',
+      tax_types: taxTypes,
+      account_codes: accountCodes,
+      total: amount,
+    });
+
+    if (treatment.includeG1) {
+      totalSales += amount;
+      directIncludedG1 += amount;
+    } else if (treatment.bucket === 'BAS excluded') {
+      directExcluded += amount;
+    } else {
+      directReview += amount;
     }
+
+    if (treatment.include1A) {
+      const gst = gstForTaxableLines(tx.line_items, new Set(['OUTPUT']));
+      totalSalesGST += gst;
+      directIncluded1A += gst;
+    }
+  }
+
+  if (directIncome.length > 0) {
+    push('  Direct bank receives by BAS treatment:');
+    push('  ' + '-'.repeat(68));
+    for (const g of [...directGroups.values()].sort((a, b) => b.total - a.total)) {
+      push(`  ${g.bucket.padEnd(12)} ${(g.contact_name || '?').padEnd(24)} ${g.tax_types.padEnd(14)} acct ${g.account_codes.padEnd(8)} ${String(g.cnt).padStart(3)} txns ${fmt(g.total).padStart(12)}`);
+    }
+    push(`  Included in G1: ${fmt(directIncludedG1)} | included in 1A: ${fmt(directIncluded1A)} | BAS excluded: ${fmt(directExcluded)} | review: ${fmt(directReview)}`);
     push('');
   }
 
@@ -189,7 +269,7 @@ async function main() {
   const spendByProject = await q(`
     SELECT COALESCE(project_code, 'UNTAGGED') as proj, count(*)::int as cnt,
            sum(abs(total))::numeric(12,2) as total
-    FROM xero_transactions
+    FROM public.xero_transactions
     WHERE status NOT IN ('DELETED','VOIDED') AND date >= '${quarter.start}' AND date <= '${quarter.end}' AND type = 'SPEND'
     GROUP BY 1 ORDER BY total DESC
   `);
@@ -205,8 +285,32 @@ async function main() {
   push('');
 
   // Estimate GST on purchases (INPUT tax type = 10% GST claimable)
-  // Without tax_type column, estimate from Xero reports
-  const estimatedPurchaseGST = totalPurchases / 11; // Rough: assume most are GST-inclusive
+  const purchaseTaxTypes = await q(`
+    SELECT COALESCE(li->>'tax_type', 'NO_TAX_TYPE') as tax_type,
+           count(*)::int as line_count,
+           sum(abs(COALESCE((li->>'line_amount')::numeric, 0)))::numeric(12,2) as total
+    FROM public.xero_transactions t
+    CROSS JOIN LATERAL jsonb_array_elements(COALESCE(t.line_items, '[]'::jsonb)) li
+    WHERE t.status NOT IN ('DELETED','VOIDED')
+      AND t.date >= '${quarter.start}'
+      AND t.date <= '${quarter.end}'
+      AND t.type = 'SPEND'
+    GROUP BY 1 ORDER BY total DESC
+  `);
+  const estimatedPurchaseGST = purchaseTaxTypes.reduce((sum, row) => {
+    if (!['INPUT', 'CAPEXINPUT'].includes(row.tax_type)) return sum;
+    return sum + (num(row.total) / 11);
+  }, 0);
+
+  if (purchaseTaxTypes.length > 0) {
+    push('  GST by purchase tax type:');
+    push('  ' + '-'.repeat(50));
+    for (const row of purchaseTaxTypes) {
+      const gst = ['INPUT', 'CAPEXINPUT'].includes(row.tax_type) ? num(row.total) / 11 : 0;
+      push(`  ${row.tax_type.padEnd(16)} ${String(row.line_count).padStart(4)} lines ${fmt(row.total).padStart(12)}  1B ${fmt(gst).padStart(10)}`);
+    }
+    push('');
+  }
 
   // Try to get P&L from Xero for accurate GST numbers
   push('  Fetching Xero P&L for accurate GST breakdown...');
@@ -281,6 +385,10 @@ async function main() {
   push(`  ─────────────────────────────────────────────────────`);
   const netGST = g1A - g1B;
   push(`  NET  GST position                       ${fmt(netGST).padStart(15)} ${netGST >= 0 ? '(PAYABLE to ATO)' : '(REFUND from ATO)'}`);
+  if (directExcluded > 0 || directReview > 0) {
+    push('');
+    push(`  Review note: direct receives excluded from G1: ${fmt(directExcluded)}; review-only direct receives: ${fmt(directReview)}.`);
+  }
   push('');
 
   // =========================================================================
@@ -291,7 +399,7 @@ async function main() {
 
   const receiptCoverage = await q(`
     SELECT has_attachments, count(*)::int as cnt, sum(abs(total))::numeric(12,2) as total
-    FROM xero_transactions
+    FROM public.xero_transactions
     WHERE status NOT IN ('DELETED','VOIDED') AND date >= '${quarter.start}' AND date <= '${quarter.end}' AND type = 'SPEND'
     GROUP BY 1
   `);
@@ -300,10 +408,27 @@ async function main() {
   const withoutReceipts = receiptCoverage.find(r => r.has_attachments === false) || { cnt: 0, total: 0 };
   const totalTxns = Number(withReceipts.cnt) + Number(withoutReceipts.cnt);
   const totalAmt = Number(withReceipts.total) + Number(withoutReceipts.total);
+  const missingReceiptGst = await q(`
+    SELECT COALESCE(sum(
+      CASE
+        WHEN li->>'tax_type' IN ('INPUT', 'CAPEXINPUT')
+        THEN abs(COALESCE((li->>'line_amount')::numeric, 0)) / 11
+        ELSE 0
+      END
+    ), 0)::numeric(12,2) as gst_at_risk
+    FROM public.xero_transactions t
+    CROSS JOIN LATERAL jsonb_array_elements(COALESCE(t.line_items, '[]'::jsonb)) li
+    WHERE t.status NOT IN ('DELETED','VOIDED')
+      AND t.date >= '${quarter.start}'
+      AND t.date <= '${quarter.end}'
+      AND t.type = 'SPEND'
+      AND t.has_attachments = false
+  `);
+  const missingReceiptGstAtRisk = Number(missingReceiptGst[0]?.gst_at_risk || 0);
 
   push(`  Receipts attached:    ${String(withReceipts.cnt).padStart(4)} / ${totalTxns} transactions (${pct(withReceipts.cnt, totalTxns)})`);
   push(`  Amount documented:    ${fmt(withReceipts.total).padStart(12)} / ${fmt(totalAmt)} (${pct(Number(withReceipts.total), totalAmt)})`);
-  push(`  Amount at risk:       ${fmt(withoutReceipts.total).padStart(12)} (GST credits: ~${fmt(Number(withoutReceipts.total) / 11)})`);
+  push(`  Amount at risk:       ${fmt(withoutReceipts.total).padStart(12)} (tax-type GST credits: ~${fmt(missingReceiptGstAtRisk)})`);
   push('');
 
   // Project tagging
@@ -311,7 +436,7 @@ async function main() {
     SELECT
       count(*) FILTER (WHERE project_code IS NOT NULL)::int as tagged,
       count(*)::int as total
-    FROM xero_transactions
+    FROM public.xero_transactions
     WHERE status NOT IN ('DELETED','VOIDED') AND date >= '${quarter.start}' AND date <= '${quarter.end}' AND type = 'SPEND'
   `);
 
@@ -322,7 +447,7 @@ async function main() {
   // Reconciliation
   const reconData = await q(`
     SELECT is_reconciled, count(*)::int as cnt
-    FROM xero_transactions
+    FROM public.xero_transactions
     WHERE status NOT IN ('DELETED','VOIDED') AND date >= '${quarter.start}' AND date <= '${quarter.end}'
     GROUP BY 1
   `);
@@ -360,19 +485,33 @@ async function main() {
 
   // Top vendors missing receipts
   const missingReceipts = await q(`
-    SELECT contact_name, count(*)::int as cnt, sum(abs(total))::numeric(12,2) as total
-    FROM xero_transactions
-    WHERE status NOT IN ('DELETED','VOIDED') AND date >= '${quarter.start}' AND date <= '${quarter.end}'
-    AND type = 'SPEND' AND has_attachments = false
+    SELECT contact_name,
+           count(*)::int as cnt,
+           sum(abs(total))::numeric(12,2) as total,
+           COALESCE(sum((
+             SELECT sum(
+               CASE
+                 WHEN li->>'tax_type' IN ('INPUT', 'CAPEXINPUT')
+                 THEN abs(COALESCE((li->>'line_amount')::numeric, 0)) / 11
+                 ELSE 0
+               END
+             )
+             FROM jsonb_array_elements(COALESCE(line_items, '[]'::jsonb)) li
+           )), 0)::numeric(12,2) as gst_at_risk
+    FROM public.xero_transactions
+    WHERE status NOT IN ('DELETED','VOIDED')
+      AND date >= '${quarter.start}'
+      AND date <= '${quarter.end}'
+      AND type = 'SPEND'
+      AND has_attachments = false
     GROUP BY 1 ORDER BY total DESC LIMIT 10
   `);
 
   if (missingReceipts.length > 0) {
-    const totalMissingGST = missingReceipts.reduce((s, r) => s + Number(r.total) / 11, 0);
-    push(`  MISSING RECEIPTS — ${Number(withoutReceipts.cnt)} transactions, GST at risk: ~${fmt(totalMissingGST)}`);
+    push(`  MISSING RECEIPTS — ${Number(withoutReceipts.cnt)} transactions, tax-type GST at risk: ~${fmt(missingReceiptGstAtRisk)}`);
     push('  ' + '-'.repeat(60));
     for (const v of missingReceipts) {
-      push(`  ${(v.contact_name || '?').padEnd(30)} ${String(v.cnt).padStart(3)} txns  ${fmt(v.total).padStart(10)}  (GST ~${fmt(Number(v.total) / 11)})`);
+      push(`  ${(v.contact_name || '?').padEnd(30)} ${String(v.cnt).padStart(3)} txns  ${fmt(v.total).padStart(10)}  (GST ~${fmt(v.gst_at_risk)})`);
     }
     push('');
   }
@@ -380,7 +519,7 @@ async function main() {
   // Untagged transactions
   const untagged = await q(`
     SELECT contact_name, count(*)::int as cnt, sum(abs(total))::numeric(12,2) as total
-    FROM xero_transactions
+    FROM public.xero_transactions
     WHERE status NOT IN ('DELETED','VOIDED') AND date >= '${quarter.start}' AND date <= '${quarter.end}'
     AND type = 'SPEND' AND project_code IS NULL
     GROUP BY 1 ORDER BY total DESC LIMIT 10
@@ -400,7 +539,7 @@ async function main() {
     SELECT contact_name, sum(amount_due)::numeric(12,2) as due,
            min(date) as oldest_date,
            count(*)::int as cnt
-    FROM xero_invoices
+    FROM public.xero_invoices
     WHERE type = 'ACCREC' AND status = 'AUTHORISED' AND amount_due > 0
     GROUP BY contact_name ORDER BY due DESC LIMIT 10
   `);
@@ -419,7 +558,7 @@ async function main() {
   // Outstanding payables
   const payables = await q(`
     SELECT count(*)::int as cnt, sum(amount_due)::numeric(12,2) as due
-    FROM xero_invoices
+    FROM public.xero_invoices
     WHERE type = 'ACCPAY' AND status = 'AUTHORISED' AND amount_due > 0
   `);
 
@@ -440,7 +579,7 @@ async function main() {
   const rdSpend = await q(`
     SELECT project_code, count(*)::int as cnt, sum(abs(total))::numeric(12,2) as total,
            count(*) FILTER (WHERE has_attachments = true)::int as with_receipts
-    FROM xero_transactions
+    FROM public.xero_transactions
     WHERE status NOT IN ('DELETED','VOIDED') AND date >= '${quarter.start}' AND date <= '${quarter.end}'
     AND type = 'SPEND' AND project_code IN ('ACT-EL', 'ACT-IN', 'ACT-JH', 'ACT-GD')
     GROUP BY project_code ORDER BY total DESC
@@ -519,7 +658,7 @@ async function main() {
 
   const pipeline = await q(`
     SELECT status, count(*)::int as cnt, sum(COALESCE(amount_detected, 0))::numeric(12,2) as total
-    FROM receipt_emails
+    FROM public.receipt_emails
     GROUP BY status ORDER BY cnt DESC
   `);
 

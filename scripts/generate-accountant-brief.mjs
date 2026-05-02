@@ -15,8 +15,8 @@ import { createClient } from '@supabase/supabase-js';
 import { writeFileSync } from 'fs';
 import path from 'path';
 
-const SUPABASE_URL = process.env.SUPABASE_SHARED_URL || 'https://tednluwflfhxyucgwigh.supabase.co';
-const SUPABASE_KEY = process.env.SUPABASE_SHARED_SERVICE_ROLE_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY;
+const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_SHARED_URL || 'https://tednluwflfhxyucgwigh.supabase.co';
+const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_SHARED_SERVICE_ROLE_KEY;
 const sb = createClient(SUPABASE_URL, SUPABASE_KEY);
 
 const QUARTERS = {
@@ -51,7 +51,7 @@ async function main() {
   // Income (PAID ACCREC, cash basis)
   const income = await q(`
     SELECT contact_name, total::numeric(12,2), total_tax::numeric(12,2), invoice_number
-    FROM xero_invoices
+    FROM public.xero_invoices
     WHERE type = 'ACCREC' AND status = 'PAID'
       AND COALESCE(fully_paid_date, date) >= '${quarter.start}'
       AND COALESCE(fully_paid_date, date) <= '${quarter.end}'
@@ -59,6 +59,41 @@ async function main() {
   `);
   const incomeTotal = income.reduce((s, r) => s + Number(r.total || 0), 0);
   const incomeGST = income.reduce((s, r) => s + Number(r.total_tax || 0), 0);
+  const directReceivesAgg = await q(`
+    SELECT
+      COALESCE(sum(
+        CASE
+          WHEN li->>'tax_type' IN ('OUTPUT', 'EXEMPTOUTPUT', 'INPUTTAXED')
+          THEN abs(COALESCE((li->>'line_amount')::numeric, 0))
+          ELSE 0
+        END
+      ), 0)::numeric(12,2) as direct_g1,
+      COALESCE(sum(
+        CASE
+          WHEN li->>'tax_type' = 'OUTPUT'
+          THEN abs(COALESCE((li->>'line_amount')::numeric, 0)) / 11
+          ELSE 0
+        END
+      ), 0)::numeric(12,2) as direct_1a,
+      COALESCE(sum(
+        CASE
+          WHEN li->>'tax_type' IN ('BASEXCLUDED', 'EXEMPTEXPENSES')
+          THEN abs(COALESCE((li->>'line_amount')::numeric, 0))
+          ELSE 0
+        END
+      ), 0)::numeric(12,2) as direct_excluded
+    FROM public.xero_transactions t
+    CROSS JOIN LATERAL jsonb_array_elements(COALESCE(t.line_items, '[]'::jsonb)) li
+    WHERE t.status NOT IN ('DELETED','VOIDED')
+      AND t.type = 'RECEIVE'
+      AND t.date >= '${quarter.start}'
+      AND t.date <= '${quarter.end}'
+  `);
+  const directG1 = Number(directReceivesAgg[0]?.direct_g1 || 0);
+  const direct1A = Number(directReceivesAgg[0]?.direct_1a || 0);
+  const directExcluded = Number(directReceivesAgg[0]?.direct_excluded || 0);
+  const basG1 = incomeTotal + directG1;
+  const bas1A = incomeGST + direct1A;
 
   // Expenses summary
   const expensesAgg = await q(`
@@ -69,31 +104,79 @@ async function main() {
       count(*) FILTER (WHERE is_reconciled = true)::int as reconciled,
       count(*) FILTER (WHERE project_code IS NOT NULL)::int as tagged,
       sum(abs(total)) FILTER (WHERE has_attachments = false)::numeric(12,2) as missing_amount
-    FROM xero_transactions
-    WHERE type = 'SPEND' AND date >= '${quarter.start}' AND date <= '${quarter.end}'
+    FROM public.xero_transactions
+    WHERE status NOT IN ('DELETED','VOIDED') AND type = 'SPEND' AND date >= '${quarter.start}' AND date <= '${quarter.end}'
   `);
   const e = expensesAgg[0] || {};
   const expensesTotal = Number(e.total_amount || 0);
-  const estGSTOnExpenses = expensesTotal / 11;
-  const netGST = incomeGST - estGSTOnExpenses;
+  const gstCreditsAgg = await q(`
+    SELECT COALESCE(sum(
+      CASE
+        WHEN li->>'tax_type' IN ('INPUT', 'CAPEXINPUT')
+        THEN abs(COALESCE((li->>'line_amount')::numeric, 0)) / 11
+        ELSE 0
+      END
+    ), 0)::numeric(12,2) as gst_credits
+    FROM public.xero_transactions t
+    CROSS JOIN LATERAL jsonb_array_elements(COALESCE(t.line_items, '[]'::jsonb)) li
+    WHERE t.status NOT IN ('DELETED','VOIDED')
+      AND t.type = 'SPEND'
+      AND t.date >= '${quarter.start}'
+      AND t.date <= '${quarter.end}'
+  `);
+  const estGSTOnExpenses = Number(gstCreditsAgg[0]?.gst_credits || 0);
+  const netGST = bas1A - estGSTOnExpenses;
 
   // Top expense categories (project codes)
   const byProject = await q(`
     SELECT COALESCE(project_code, 'UNTAGGED') as project_code,
            count(*)::int as cnt,
            sum(abs(total))::numeric(12,2) as total
-    FROM xero_transactions
-    WHERE type = 'SPEND' AND date >= '${quarter.start}' AND date <= '${quarter.end}'
+    FROM public.xero_transactions
+    WHERE status NOT IN ('DELETED','VOIDED') AND type = 'SPEND' AND date >= '${quarter.start}' AND date <= '${quarter.end}'
     GROUP BY 1 ORDER BY total DESC LIMIT 8
   `);
+
+  const missingAll = await q(`
+    SELECT COALESCE(sum((
+      SELECT sum(
+        CASE
+          WHEN li->>'tax_type' IN ('INPUT', 'CAPEXINPUT')
+          THEN abs(COALESCE((li->>'line_amount')::numeric, 0)) / 11
+          ELSE 0
+        END
+      )
+      FROM jsonb_array_elements(COALESCE(line_items, '[]'::jsonb)) li
+    )), 0)::numeric(12,2) as gst_at_risk
+    FROM public.xero_transactions
+    WHERE status NOT IN ('DELETED','VOIDED')
+      AND type = 'SPEND'
+      AND date >= '${quarter.start}'
+      AND date <= '${quarter.end}'
+      AND has_attachments = false
+  `);
+  const missingGstAtRisk = Number(missingAll[0]?.gst_at_risk || 0);
 
   // Top vendors missing receipts
   const missing = await q(`
     SELECT contact_name,
            count(*)::int as cnt,
-           sum(abs(total))::numeric(12,2) as total
-    FROM xero_transactions
-    WHERE type = 'SPEND' AND date >= '${quarter.start}' AND date <= '${quarter.end}'
+           sum(abs(total))::numeric(12,2) as total,
+           COALESCE(sum((
+             SELECT sum(
+               CASE
+                 WHEN li->>'tax_type' IN ('INPUT', 'CAPEXINPUT')
+                 THEN abs(COALESCE((li->>'line_amount')::numeric, 0)) / 11
+                 ELSE 0
+               END
+             )
+             FROM jsonb_array_elements(COALESCE(line_items, '[]'::jsonb)) li
+           )), 0)::numeric(12,2) as gst_at_risk
+    FROM public.xero_transactions
+    WHERE status NOT IN ('DELETED','VOIDED')
+      AND type = 'SPEND'
+      AND date >= '${quarter.start}'
+      AND date <= '${quarter.end}'
       AND has_attachments = false
     GROUP BY 1 ORDER BY total DESC LIMIT 5
   `);
@@ -105,8 +188,8 @@ async function main() {
            count(*)::int as cnt,
            sum(abs(total))::numeric(12,2) as total,
            count(*) FILTER (WHERE has_attachments = true)::int as with_receipts
-    FROM xero_transactions
-    WHERE type = 'SPEND' AND date >= '${quarter.start}' AND date <= '${quarter.end}'
+    FROM public.xero_transactions
+    WHERE status NOT IN ('DELETED','VOIDED') AND type = 'SPEND' AND date >= '${quarter.start}' AND date <= '${quarter.end}'
       AND project_code IN (${rdList})
     GROUP BY project_code ORDER BY total DESC
   `);
@@ -118,11 +201,11 @@ async function main() {
   // Receivables + payables
   const receivablesAgg = await q(`
     SELECT count(*)::int as cnt, sum(amount_due)::numeric(12,2) as total
-    FROM xero_invoices WHERE type = 'ACCREC' AND status = 'AUTHORISED' AND amount_due > 0
+    FROM public.xero_invoices WHERE type = 'ACCREC' AND status = 'AUTHORISED' AND amount_due > 0
   `);
   const payablesAgg = await q(`
     SELECT count(*)::int as cnt, sum(amount_due)::numeric(12,2) as total
-    FROM xero_invoices WHERE type = 'ACCPAY' AND status = 'AUTHORISED' AND amount_due > 0
+    FROM public.xero_invoices WHERE type = 'ACCPAY' AND status = 'AUTHORISED' AND amount_due > 0
   `);
 
   // Confidence score (matches prepare-bas.mjs weights)
@@ -145,13 +228,14 @@ async function main() {
 
 | Line | Amount |
 |---|---:|
-| G1 Total Sales (inc GST) | ${fmt(incomeTotal)} |
+| G1 Total Sales (inc GST) | ${fmt(basG1)} |
 | G11 Non-capital purchases | ${fmt(expensesTotal)} |
-| 1A GST collected | ${fmt(incomeGST)} |
-| 1B GST paid (estimated 1/11th) | ${fmt(estGSTOnExpenses)} |
+| 1A GST collected | ${fmt(bas1A)} |
+| 1B GST paid (tax-type estimate) | ${fmt(estGSTOnExpenses)} |
 | **Net GST position** | **${fmt(netGST)} ${netGST >= 0 ? 'PAYABLE' : 'REFUND'}** |
 
-> ⚠ **1B is estimated** as total/11. Please verify against Xero BAS report — tax-type-aware number will be more accurate. My automation doesn't currently read the tax_type column on line items.
+> ⚠ **1B is estimated from Xero line-item tax types**. Please verify against the Xero GST Audit Report / BAS report before lodgement.
+${directG1 || directExcluded ? `> Direct receives: ${fmt(directG1)} included in G1; ${fmt(directExcluded)} excluded from BAS by Xero tax type.` : ''}
 
 ## Top Income (${income.length} invoices paid this quarter)
 
@@ -169,11 +253,11 @@ ${byProject.map(p => `| ${p.project_code} | ${p.cnt} | ${fmt(p.total)} |`).join(
 - **Project-tagged:** ${e.tagged}/${totalCount} (${pct(e.tagged, totalCount)})
 - **Receipts attached:** ${e.with_receipts}/${totalCount} (${pct(e.with_receipts, totalCount)})
 - **Bank-reconciled:** ${e.reconciled}/${totalCount} (${pct(e.reconciled, totalCount)})
-- **GST at risk from missing receipts:** ~${fmt(Number(e.missing_amount || 0) / 11)}
+- **GST at risk from missing receipts:** ~${fmt(missingGstAtRisk)}
 
 ## Top 5 Missing Receipts (by value)
 
-${missing.map(m => `- ${m.contact_name} — ${m.cnt} txns, ${fmt(m.total)} (GST ~${fmt(Number(m.total) / 11)})`).join('\n') || '- (none)'}
+${missing.map(m => `- ${m.contact_name} — ${m.cnt} txns, ${fmt(m.total)} (GST ~${fmt(m.gst_at_risk)})`).join('\n') || '- (none)'}
 
 ## R&D Tax Incentive (43.5% refundable offset)
 
@@ -193,7 +277,7 @@ ${rd.map(r => `| ${r.project_code} | ${r.cnt} | ${fmt(r.total)} | ${fmt(Number(r
 ## Open Questions for Accountant
 
 1. ${overdue ? `Can we request a lodgement deferral for this quarter? It's ${Math.abs(daysUntil)} days overdue.` : `Confirm on-time lodgement path — we're ${daysUntil} days from due date.`}
-2. Should we adjust the 1B estimate now, or wait for Xero's tax-type breakdown to be correct?
+2. Cross-check the tax-type 1B estimate against Xero GST Audit Report before lodging.
 3. Triage plan for the ${payablesAgg[0]?.cnt || 0} outstanding payables — phantom vs real?
 4. Write-off vs chase decision for aged receivables (>180 days)?
 5. R&D substantiation — is our current receipt coverage enough to claim the full ${fmt(rdRefund)} or should we hold back the unreceipted portion?

@@ -17,8 +17,8 @@ import { createClient } from '@supabase/supabase-js';
 import { mkdirSync, writeFileSync } from 'fs';
 import path from 'path';
 
-const SUPABASE_URL = process.env.SUPABASE_SHARED_URL || 'https://tednluwflfhxyucgwigh.supabase.co';
-const SUPABASE_KEY = process.env.SUPABASE_SHARED_SERVICE_ROLE_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY;
+const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_SHARED_URL || 'https://tednluwflfhxyucgwigh.supabase.co';
+const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_SHARED_SERVICE_ROLE_KEY;
 const sb = createClient(SUPABASE_URL, SUPABASE_KEY);
 
 const QUARTERS = {
@@ -53,6 +53,25 @@ function fmt(n) {
   return Number(n || 0).toLocaleString('en-AU', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 }
 
+function num(value) {
+  return Number(value || 0);
+}
+
+function asLineItems(lineItems) {
+  return Array.isArray(lineItems) ? lineItems : [];
+}
+
+function taxTypesFor(lineItems) {
+  return [...new Set(asLineItems(lineItems).map((li) => li?.tax_type).filter(Boolean))].join('+') || 'NO_TAX_TYPE';
+}
+
+function gstCreditFromLines(lineItems) {
+  return asLineItems(lineItems).reduce((sum, li) => {
+    if (!['INPUT', 'CAPEXINPUT'].includes(li?.tax_type)) return sum;
+    return sum + (Math.abs(num(li?.line_amount)) / 11);
+  }, 0);
+}
+
 async function main() {
   const quarterArg = (process.argv[2] || 'Q3').toUpperCase();
   const quarter = QUARTERS[quarterArg];
@@ -72,7 +91,7 @@ async function main() {
            COALESCE(fully_paid_date, date) as paid_date,
            total::numeric(12,2), total_tax::numeric(12,2), amount_paid::numeric(12,2),
            status, project_code, income_type
-    FROM xero_invoices
+    FROM public.xero_invoices
     WHERE type = 'ACCREC' AND status = 'PAID'
       AND COALESCE(fully_paid_date, date) >= '${quarter.start}'
       AND COALESCE(fully_paid_date, date) <= '${quarter.end}'
@@ -86,14 +105,19 @@ async function main() {
   // ---- EXPENSES (all SPEND bank transactions in quarter) ----
   const expenses = await q(`
     SELECT date, contact_name, total::numeric(12,2), project_code, entity_code,
-           bank_account, has_attachments, is_reconciled, rd_eligible, rd_category, status
-    FROM xero_transactions
-    WHERE type = 'SPEND' AND date >= '${quarter.start}' AND date <= '${quarter.end}'
+           bank_account, has_attachments, is_reconciled, rd_eligible, rd_category, status, line_items
+    FROM public.xero_transactions
+    WHERE status NOT IN ('DELETED','VOIDED') AND type = 'SPEND' AND date >= '${quarter.start}' AND date <= '${quarter.end}'
     ORDER BY date DESC, total DESC
   `);
+  const expensesForCsv = expenses.map((row) => ({
+    ...row,
+    tax_types: taxTypesFor(row.line_items),
+    gst_credit_estimate: gstCreditFromLines(row.line_items).toFixed(2),
+  }));
   writeFileSync(
     path.join(outDir, 'expenses.csv'),
-    toCSV(expenses, ['date', 'contact_name', 'total', 'project_code', 'entity_code', 'bank_account', 'has_attachments', 'is_reconciled', 'rd_eligible', 'rd_category', 'status'])
+    toCSV(expensesForCsv, ['date', 'contact_name', 'total', 'tax_types', 'gst_credit_estimate', 'project_code', 'entity_code', 'bank_account', 'has_attachments', 'is_reconciled', 'rd_eligible', 'rd_category', 'status'])
   );
 
   // ---- EXPENSES BY PROJECT ----
@@ -104,8 +128,8 @@ async function main() {
            count(*) FILTER (WHERE has_attachments = true)::int as with_receipts,
            count(*) FILTER (WHERE is_reconciled = true)::int as reconciled,
            sum(abs(total)) FILTER (WHERE has_attachments = false)::numeric(12,2) as at_risk
-    FROM xero_transactions
-    WHERE type = 'SPEND' AND date >= '${quarter.start}' AND date <= '${quarter.end}'
+    FROM public.xero_transactions
+    WHERE status NOT IN ('DELETED','VOIDED') AND type = 'SPEND' AND date >= '${quarter.start}' AND date <= '${quarter.end}'
     GROUP BY 1 ORDER BY total DESC
   `);
   writeFileSync(
@@ -117,29 +141,39 @@ async function main() {
   const rdList = RD_PROJECTS.map(p => `'${p}'`).join(',');
   const rd = await q(`
     SELECT project_code, date, contact_name, total::numeric(12,2),
-           has_attachments, rd_category, bank_account
-    FROM xero_transactions
-    WHERE type = 'SPEND' AND date >= '${quarter.start}' AND date <= '${quarter.end}'
+           has_attachments, rd_category, bank_account, line_items
+    FROM public.xero_transactions
+    WHERE status NOT IN ('DELETED','VOIDED') AND type = 'SPEND' AND date >= '${quarter.start}' AND date <= '${quarter.end}'
       AND project_code IN (${rdList})
     ORDER BY project_code, date DESC
   `);
+  const rdForCsv = rd.map((row) => ({
+    ...row,
+    tax_types: taxTypesFor(row.line_items),
+    gst_credit_estimate: gstCreditFromLines(row.line_items).toFixed(2),
+  }));
   writeFileSync(
     path.join(outDir, 'rd-allocation.csv'),
-    toCSV(rd, ['project_code', 'date', 'contact_name', 'total', 'has_attachments', 'rd_category', 'bank_account'])
+    toCSV(rdForCsv, ['project_code', 'date', 'contact_name', 'total', 'tax_types', 'gst_credit_estimate', 'has_attachments', 'rd_category', 'bank_account'])
   );
 
   // ---- MISSING RECEIPTS (SPEND without attachments, sorted by GST at risk) ----
   const missing = await q(`
     SELECT date, contact_name, project_code, total::numeric(12,2),
-           (abs(total) / 11)::numeric(12,2) as gst_at_risk, bank_account
-    FROM xero_transactions
-    WHERE type = 'SPEND' AND date >= '${quarter.start}' AND date <= '${quarter.end}'
+           bank_account, line_items
+    FROM public.xero_transactions
+    WHERE status NOT IN ('DELETED','VOIDED') AND type = 'SPEND' AND date >= '${quarter.start}' AND date <= '${quarter.end}'
       AND has_attachments = false
     ORDER BY abs(total) DESC
   `);
+  const missingForCsv = missing.map((row) => ({
+    ...row,
+    tax_types: taxTypesFor(row.line_items),
+    gst_at_risk: gstCreditFromLines(row.line_items).toFixed(2),
+  }));
   writeFileSync(
     path.join(outDir, 'missing-receipts.csv'),
-    toCSV(missing, ['date', 'contact_name', 'project_code', 'total', 'gst_at_risk', 'bank_account'])
+    toCSV(missingForCsv, ['date', 'contact_name', 'project_code', 'total', 'tax_types', 'gst_at_risk', 'bank_account'])
   );
 
   // ---- RECEIVABLES OUTSTANDING ----
@@ -147,7 +181,7 @@ async function main() {
     SELECT date, contact_name, invoice_number, reference,
            total::numeric(12,2), amount_due::numeric(12,2),
            (CURRENT_DATE - date)::int as days_old, project_code, status
-    FROM xero_invoices
+    FROM public.xero_invoices
     WHERE type = 'ACCREC' AND status = 'AUTHORISED' AND amount_due > 0
     ORDER BY amount_due DESC
   `);
@@ -161,7 +195,7 @@ async function main() {
     SELECT date, contact_name, invoice_number, reference,
            total::numeric(12,2), amount_due::numeric(12,2),
            (CURRENT_DATE - date)::int as days_old, project_code, status
-    FROM xero_invoices
+    FROM public.xero_invoices
     WHERE type = 'ACCPAY' AND status = 'AUTHORISED' AND amount_due > 0
     ORDER BY amount_due DESC
   `);
@@ -174,9 +208,10 @@ async function main() {
   const incomeTotal = income.reduce((s, r) => s + Number(r.total || 0), 0);
   const incomeGST = income.reduce((s, r) => s + Number(r.total_tax || 0), 0);
   const expensesTotal = expenses.reduce((s, r) => s + Math.abs(Number(r.total || 0)), 0);
-  const estGSTOnExpenses = expensesTotal / 11;
+  const estGSTOnExpenses = expenses.reduce((s, r) => s + gstCreditFromLines(r.line_items), 0);
   const rdTotal = rd.reduce((s, r) => s + Math.abs(Number(r.total || 0)), 0);
   const missingTotal = missing.reduce((s, r) => s + Math.abs(Number(r.total || 0)), 0);
+  const missingGST = missing.reduce((s, r) => s + gstCreditFromLines(r.line_items), 0);
   const receiptedCount = expenses.filter(r => r.has_attachments).length;
   const reconciledCount = expenses.filter(r => r.is_reconciled).length;
 
@@ -197,7 +232,7 @@ async function main() {
 | Income (invoices paid) | $${fmt(incomeTotal)} |
 | GST on income | $${fmt(incomeGST)} |
 | Expenses (bank SPEND) | $${fmt(expensesTotal)} |
-| GST on expenses (estimated) | $${fmt(estGSTOnExpenses)} |
+| GST on expenses (tax-type estimate) | $${fmt(estGSTOnExpenses)} |
 | **Net GST position** | **$${fmt(incomeGST - estGSTOnExpenses)}** |
 | R&D-eligible expenditure | $${fmt(rdTotal)} |
 | R&D refund (43.5%) | $${fmt(rdTotal * 0.435)} |
@@ -219,7 +254,7 @@ async function main() {
 - \`expenses.csv\` — ${expenses.length} SPEND transactions
 - \`expenses-by-project.csv\` — ${byProject.length} project-code groupings
 - \`rd-allocation.csv\` — ${rd.length} R&D-eligible line items
-- \`missing-receipts.csv\` — ${missing.length} transactions lacking a receipt (GST at risk: ~$${fmt(missingTotal / 11)})
+- \`missing-receipts.csv\` — ${missing.length} transactions lacking a receipt (tax-type GST at risk: ~$${fmt(missingGST)})
 - \`receivables-outstanding.csv\` — ${receivables.length} unpaid customer invoices
 - \`payables-outstanding.csv\` — ${payables.length} unpaid supplier bills (some likely already paid — need reconciliation)
 

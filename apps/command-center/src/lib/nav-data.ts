@@ -12,6 +12,7 @@ import {
   Palette,
   Brain,
   DollarSign,
+  CircleDollarSign,
   BarChart3,
   Landmark,
   Calculator,
@@ -102,6 +103,7 @@ export const navStructure: SidebarNavGroup[] = [
         icon: DollarSign,
         children: [
           { href: '/finance/review', label: 'The Review', icon: ClipboardList, color: 'text-amber-400', bg: 'bg-amber-500/20' },
+          { href: '/finance/money-alignment', label: 'Money Alignment', icon: CircleDollarSign, color: 'text-emerald-400', bg: 'bg-emerald-500/20' },
           { href: '/finance/overview', label: 'Overview', icon: Layers, color: 'text-emerald-400', bg: 'bg-emerald-500/20' },
           { href: '/finance/project-plan', label: 'Project Plans', icon: Target, color: 'text-indigo-400', bg: 'bg-indigo-500/20' },
           { href: '/finance/projects', label: 'Projects P&L', icon: BarChart3, color: 'text-green-400', bg: 'bg-green-500/20' },
