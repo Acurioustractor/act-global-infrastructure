@@ -5,13 +5,13 @@
  * Accessible from web UI, CLI, or external integrations.
  *
  * POST /api/v1/ask
- * Body: { query: string, tier?: 'quick' | 'deep', includeSources?: boolean }
+ * Body: { query: string, tier?: 'quick' | 'deep' | 'strategic' | 'expert', includeSources?: boolean }
  * Response: { answer, sources?, confidence, cost, latency }
  */
 
 import { NextRequest, NextResponse } from 'next/server';
 import { unifiedRAG } from '@/lib/ai-intelligence/unified-rag-service';
-import type { AnalysisTier } from '@/lib/ai-intelligence/types';
+import type { AnalysisTier } from '@/lib/ai-intelligence/multi-provider-ai';
 
 // CORS headers for cross-origin requests (if needed)
 const corsHeaders = {
@@ -38,6 +38,7 @@ export async function POST(req: NextRequest) {
       minSimilarity,
       useHybridSearch
     } = body;
+    const normalizedTier = tier === 'comprehensive' ? 'expert' : tier;
 
     // Validate query
     if (!query || typeof query !== 'string' || query.trim().length === 0) {
@@ -48,8 +49,8 @@ export async function POST(req: NextRequest) {
     }
 
     // Validate tier
-    const validTiers: AnalysisTier[] = ['quick', 'deep', 'comprehensive'];
-    if (tier && !validTiers.includes(tier)) {
+    const validTiers: AnalysisTier[] = ['quick', 'deep', 'strategic', 'expert'];
+    if (normalizedTier && !validTiers.includes(normalizedTier)) {
       return NextResponse.json(
         { error: `Invalid tier. Must be one of: ${validTiers.join(', ')}` },
         { status: 400, headers: corsHeaders }
@@ -65,17 +66,17 @@ export async function POST(req: NextRequest) {
 
     const response = await unifiedRAG.ask({
       query: query.trim(),
-      tier: tier as AnalysisTier,
-      topK: topK || (tier === 'quick' ? 5 : 10),
-      minSimilarity: minSimilarity || (tier === 'quick' ? 0.6 : 0.7),
+      tier: normalizedTier as AnalysisTier,
+      topK: topK || (normalizedTier === 'quick' ? 5 : 10),
+      minSimilarity: minSimilarity || (normalizedTier === 'quick' ? 0.6 : 0.7),
       includeSources,
-      useHybridSearch: useHybridSearch ?? (tier === 'deep' || tier === 'comprehensive')
+      useHybridSearch: useHybridSearch ?? (normalizedTier === 'deep' || normalizedTier === 'strategic' || normalizedTier === 'expert')
     });
 
     const totalTime = Date.now() - startTime;
 
     // Log query for analytics (optional)
-    console.log(`[Query] "${query.substring(0, 50)}..." | Tier: ${tier} | Time: ${totalTime}ms | Cost: $${response.cost.total.toFixed(4)}`);
+    console.log(`[Query] "${query.substring(0, 50)}..." | Tier: ${normalizedTier} | Time: ${totalTime}ms | Cost: $${response.cost.total.toFixed(4)}`);
 
     // Return response
     return NextResponse.json(
@@ -95,7 +96,7 @@ export async function POST(req: NextRequest) {
           generation: response.latencyMs.generation,
           total: totalTime
         },
-        tier,
+        tier: normalizedTier,
         timestamp: new Date().toISOString()
       },
       { headers: corsHeaders }
