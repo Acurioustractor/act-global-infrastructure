@@ -79,6 +79,7 @@
     "living:scan": "node scripts/living-ecosystem-alignment-scan.mjs",
     "living:validate": "node scripts/validate-living-ecosystem-config.mjs",
     "repo:connections": "node scripts/verify-repo-connections.mjs",
+    "repo:hygiene": "node scripts/repo-hygiene.mjs",
     "wiki:bootstrap:sources": "node scripts/wiki-bootstrap-source-summaries.mjs",
     "wiki:bootstrap:sources:dry-run": "node scripts/wiki-bootstrap-source-summaries.mjs --dry-run",
     "wiki:bootstrap:sources:articles": "node scripts/wiki-bootstrap-source-summaries.mjs --auto-supabase-articles",

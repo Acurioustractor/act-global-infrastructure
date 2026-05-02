@@ -8,6 +8,7 @@ This file is the LLM-facing entrypoint for tools such as ChatGPT, Codex, Claude,
 
 - [Steering map](STEERING.md): where canonical truth lives in this repo.
 - [Agent instructions](AGENTS.md): repo rules for coding agents.
+- [Git branching and hygiene](docs/governance/git-branching.md): branch model and cleanup process.
 - [Soul pointer](.soul): root pointer to the upstream philosophy file.
 - [Canonical soul](wiki/concepts/soul.md): why ACT exists.
 - [ACT identity](wiki/concepts/act-identity.md): what A Curious Tractor is.
