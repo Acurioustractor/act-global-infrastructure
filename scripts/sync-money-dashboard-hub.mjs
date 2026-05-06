@@ -413,6 +413,16 @@ async function buildBlocks() {
 
 async function main() {
   log('=== Money Dashboard Hub ===');
+
+  // SAFETY: refuse to operate on a trashed framework page
+  if (!DRY_RUN) {
+    const page = await notion.pages.retrieve({ page_id: HUB_PAGE });
+    if (page.archived || page.in_trash) {
+      log(`ABORT: ACT Money Framework page (${HUB_PAGE}) is in Trash. Restore it in Notion before re-running.`);
+      process.exit(2);
+    }
+  }
+
   const blocks = await buildBlocks();
   log(`Built ${blocks.length} top-level blocks`);
 

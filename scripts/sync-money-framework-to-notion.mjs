@@ -1151,6 +1151,9 @@ async function findSectionRange(pageId) {
     const b = allBlocks[i];
     if (b.type === 'heading_1') break;
     if (b.type === 'heading_2') break; // any other H2 ends our section
+    // SAFETY: deleting a child_page block trashes the underlying sub-page;
+    // deleting a child_database block trashes the underlying database. Skip both.
+    if (b.type === 'child_page' || b.type === 'child_database') continue;
     blockIdsToDelete.push(b.id);
   }
   const insertAfterId = markerIndex > 0 ? allBlocks[markerIndex - 1].id : null;
@@ -1380,6 +1383,13 @@ async function main() {
   }
 
   const pageId = DRY_RUN ? 'dry-run-no-page' : await ensurePage();
+  if (!DRY_RUN) {
+    const page = await notion.pages.retrieve({ page_id: pageId });
+    if (page.archived || page.in_trash) {
+      log(`ABORT: ACT Money Framework page (${pageId}) is in Trash. Restore it in Notion before re-running.`);
+      process.exit(2);
+    }
+  }
   await updatePage(pageId);
 }
 
