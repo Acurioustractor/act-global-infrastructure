@@ -205,6 +205,70 @@ A rough sequence, read top-to-bottom:
 
 ---
 
+## 11. Meeting decisions from 2026-05-05 (Standard Ledger conversation)
+
+Four operational decisions confirmed in the 5 May 2026 conversation. Each updates or adds to the work-streams above.
+
+### D11.1 — Harvest is a subsidiary, not a project line
+
+The Harvest will be incorporated as a separate Pty Ltd subsidiary of A Curious Tractor Pty Ltd, with the property owner (the philanthropist landlord, ex-logistics, ~$60M exit) as a minority shareholder under a profit-share arrangement. Reasoning: the landlord wants hands-off involvement plus simple reporting; the cleanest path is a self-contained company that ACT can report on and chuck cash into without muddying the parent. ACT-HV in the chart of accounts continues to track Harvest spend pre-incorporation; post-incorporation, Harvest gets its own Xero file.
+
+- [ ] **Draft Harvest subsidiary structure** — Week 4-5 — Ben + Standard Ledger lawyer. Decide: % split, profit-share trigger, voting/board, pre-emption, exit. See [decision page](../../wiki/decisions/2026-05-harvest-subsidiary-structure.md).
+- [ ] **Confirm Harvest lease counterparty** — Week 4 — Ben. The Harvest lease should be in the new subsidiary's name, not in A Curious Tractor Pty Ltd or in Nic's sole trader. Update [§1 Commercial contracts](#1-commercial-contracts-and-customer-relationships) row.
+- [ ] **Open separate Xero file for Harvest subsidiary** — Day 0 of Harvest incorporation — Ben. Re-use the same chart of accounts + tracking categories the new Pty file uses; copy via `config/xero-chart-import.csv` and `scripts/seed-xero-tracking.mjs`.
+
+### D11.2 — Founder payroll cadence: $10K/mo base + director loan + EOY settle
+
+Both founders target $200K/year, but **paid as $10K/month base salary + super + PAYG withholding** (covers mortgages, bills, lifestyle), with **additional cash drawn during the year as a director's loan**, settled at year-end into one of: salary bonus, dividend through the family trust, or sole trader invoice. Reasoning: the company handles tax + super on the predictable portion; the lumpy portion stays flexible for reinvestment without forcing PAYG installments on cash that may not exist; trusts provide downstream distribution flexibility.
+
+- Base: $10,000/month each = $120,000/year + super (currently 11.5% FY26, 12% FY27) + PAYG withholding. Subject to fair-work minimum wage (well above).
+- Top-up: drawn against director's loan account during the year as cash needs arise. Settled by 30 June.
+- EOY settle options: bonus salary (with super), dividend through Knight / Marchesi family trust, or sole-trader-style invoice from each director's ABN.
+- R&D-relevant: founder time is ~95% R&D (Ben) and split (Nic). Personnel costs are the largest R&D-eligible category — see [`pty-ltd-transition-and-rd-strategy.md` Part 3](pty-ltd-transition-and-rd-strategy.md).
+
+- [ ] **Set up payroll on the Pty Xero file** — Day 0 of Pty Xero — Ben. Two employees (Ben + Nic), $10K/mo + super, fortnightly or monthly cycle (Standard Ledger to recommend).
+- [ ] **Open director's loan accounts** — Week 3 — Ben + Standard Ledger. One per founder. Document drawing rules so the ATO doesn't deem it a Division 7A loan.
+- [ ] **Decide FY26 founder pay catch-up** — Week 5 — Ben + Nic + Standard Ledger. Both founders haven't drawn salary from the sole trader this FY; the meeting flagged the importance of paying enough this FY to optimise R&D. Decide: pay through Pty post-cutover only, or backdate via sole trader invoice from each founder's ABN.
+- [ ] **End-of-month allocation across projects** — ongoing — Bookkeeper. Process payroll as a single line, then journal-allocate across project codes monthly based on each founder's time split. Standard Ledger pattern.
+
+### D11.3 — Per-project Dext email forwarding addresses
+
+Dext supports per-project email addresses. Set up one forwarding address per ACT-XX code so expense receipts get tagged to the correct project at point of entry instead of needing post-hoc tagging. The accountant called this "the gold" — embed tagging in the act of forwarding.
+
+- [ ] **Provision Dext per-project email addresses** — Week 4 — Ben. For the active codes only (don't create one per of the 44 codes — start with the top 12 by line count from the [allocation snapshot](../reports/act-money-alignment-2026-05-01.md): ACT-IN, ACT-GD, ACT-CORE, ACT-FM, ACT-HV, UNASSIGNED, ACT-DO, ACT-PI, ACT-UA, ACT-CA, ACT-OO, ACT-MD).
+- [ ] **Document the address map** — Week 4 — Ben. Add to `config/dext-project-emails.json` (new) so scripts and humans share one source.
+- [ ] **Update `scripts/gmail-to-xero-pipeline.mjs` to route by vendor → project address** — Week 5 — Ben. Vendor rules table already maps vendor → project_code; pipe each forwarded email to the matching Dext per-project address instead of the catch-all.
+- [ ] **Brief Nic on the new addresses** — Week 5 — Ben. Run-and-gun forwarding only works if Nic uses the right addresses on his end too.
+
+### D11.5 — Knight Photography FY26 invoicing (Option A confirmed 2026-05-05)
+
+The 6 Oct 2025 $100K bank transfers from Nic's non-Xero account to Knight Photography are off-books. Decision: Ben raises Knight Photography invoices to the sole trader (Phase 1+2) for FY26 work, then Pty direct from 1 July 2026 (Phase 3). Path C R&D refund: ~$108K on a fully-invoiced ~$250K FY26 (95% R&D × 43.5%).
+
+Full plan: [`thoughts/shared/plans/knight-photography-fy26-invoice-proposal.md`](knight-photography-fy26-invoice-proposal.md).
+
+- [ ] **Phase 1 — Invoice 15078 ($100K, dated 2025-09-30)** — Ben to raise in Knight Photography books, send to Nic. Matches the existing 6 Oct 2025 bank transfers.
+- [ ] **Phase 1 entry into Xero** — Nic enters as ACCPAY against contact "Knight Photography", applies 6-line project split, matches bank transfers as bill payments.
+- [ ] **Phase 1 director's-loan journal** — Standard Ledger books `Cr Director's Loan (Nic) $100,000 / Dr Knight Photography ACCPAY $100,000` because source account is off-Xero.
+- [ ] **Phase 2 — quarterly $50K invoices (15079-15081)** dated 2025-12-31, 2026-03-31, 2026-06-30, addressed to sole trader.
+- [ ] **Phase 3 — mixed model from 1 July 2026:** Pty payroll $10K/mo base (per §D11.2) + Knight Photography invoicing (Inv 15082+) for lumpy top-up work + Knight Family Trust receives dividends only (NOT service invoices — PSI attribution risk).
+- [ ] **GST registration check** for Knight Photography (FY26 revenue >$75K threshold once Phase 2 lands — backdate to 1 Jul 2025 if needed, Standard Ledger to advise).
+- [ ] **Re-tag existing FY25 invoices 15076 + 15077** ($79K) from ACT-PS to correct project mix (ACT-IN/EL/JH per descriptions).
+
+### D11.4 — Sole trader → Pty income/expense mapping spreadsheet
+
+Standard Ledger called this out as the explicit cutover artefact: a spreadsheet that maps every income line and every expense line in Nic's sole trader for FY26 to "this was actually ACT's, here's the project code". The principle is **treat the sole trader as if it was acting on behalf of the Pty**. Income that landed in Nic's account belongs to ACT; expenses Nic incurred were on behalf of ACT. The spreadsheet drives the journal entries Standard Ledger will book to move it across.
+
+- Source: `xero_transactions` and `xero_invoices` for the sole trader tenant, FY26 YTD.
+- Project codes: already mostly in place (97.5% transaction coverage per [snapshot](../reports/act-money-alignment-2026-05-01.md)). Untagged ~69 transactions and ~175 invoices need clearing first.
+- Output: a CSV/Sheet with columns `date | type | xero_id | contact | description | amount | gst | project_code | rd_eligible | reallocate_to_pty (Y/N) | notes`.
+
+- [ ] **Clear the untagged review queue** — Week 4 — Ben. Use `/finance/tagger-v2` and `/finance/money-alignment` review queues. Block: stop all new code until untagged ≈0.
+- [x] **Generate the mapping export** — `scripts/export-sole-trader-to-pty-mapping.mjs` written 2026-05-05. Pulls FY26 YTD `xero_transactions + xero_invoices`, signs amounts by direction (income +ve / expense -ve), tags each line with reallocation decision (Y / N / REVIEW). First run: 2,879 lines, 246 REVIEW (untagged), $832K net on ACT-GD, -$63K net on ACT-FM (stays). Output: `out/sole-trader-to-pty-mapping-FY26-YTD.csv` + `-summary.csv`. Re-run after untagged queue is cleared.
+- [ ] **Standard Ledger reviews the mapping** — Week 5-6 — Standard Ledger. Confirm reallocation principle (income flow-through, expense reimbursement, asset transfer at market value).
+- [ ] **Book the journal entries** — Week 8-9 — Standard Ledger. Cross-entity journals: sole trader debit, Pty credit (or vice versa) with full audit trail.
+
+---
+
 ## Cutover rules (decided by CEO review 2026-04-24)
 
 ### Rule 1 — Pre-cutover invoices stay with sole trader

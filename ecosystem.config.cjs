@@ -85,6 +85,109 @@ const cronScripts = [
     cron_restart: '0 8 * * 1', // Weekly Monday 8am AEST — reconciliation report + Telegram
   },
   {
+    name: 'money-framework-sync',
+    script: 'scripts/sync-money-framework-to-notion.mjs',
+    cron_restart: '15 8 * * 1', // Weekly Monday 8:15am AEST — refresh ACT Money Framework page in Notion (after weekly-reconciliation)
+  },
+  {
+    name: 'opportunities-db-sync',
+    script: 'scripts/sync-opportunities-to-notion-db.mjs',
+    cron_restart: '30 8 * * 1', // Weekly Monday 8:30am AEST — sync ACT Opportunities database (GHL + Xero + foundation grants)
+  },
+  {
+    name: 'pile-pages-sync',
+    script: 'scripts/sync-pile-pages-to-notion.mjs',
+    cron_restart: '45 8 * * 1', // Weekly Monday 8:45am AEST — refresh per-pile strategic pages (Voice / Flow / Ground / Grants)
+  },
+  {
+    name: 'cash-forecast-sync',
+    script: 'scripts/sync-cash-forecast-to-notion.mjs',
+    cron_restart: '50 8 * * 1', // Weekly Monday 8:50am AEST — 13-week rolling cash forecast (Build 1)
+  },
+  {
+    name: 'kpis-sync',
+    script: 'scripts/sync-kpis-to-notion.mjs',
+    cron_restart: '55 8 * * 1', // Weekly Monday 8:55am AEST — KPIs & Concentration Risk (Build 2)
+  },
+  {
+    name: 'budget-actual-sync',
+    script: 'scripts/sync-budget-vs-actual-to-notion.mjs',
+    cron_restart: '0 9 * * 1', // Weekly Monday 9:00am AEST — Budget vs Actual per project (Build 3)
+  },
+  {
+    name: 'cash-scenarios-sync',
+    script: 'scripts/sync-cash-scenarios-to-notion.mjs',
+    cron_restart: '5 9 * * 1', // Weekly Monday 9:05am AEST — Cash scenarios 12-month (Build 4)
+  },
+  {
+    name: 'dashboard-hub-sync',
+    script: 'scripts/sync-money-dashboard-hub.mjs',
+    cron_restart: '10 9 * * 1', // Weekly Monday 9:10am AEST — Main dashboard hub (last in chain, after all sub-pages refresh)
+  },
+  {
+    name: 'money-metrics-snapshot',
+    script: 'scripts/sync-money-metrics-to-notion.mjs',
+    cron_restart: '15 9 * * 1', // Weekly Monday 9:15am AEST — Append weekly metrics snapshot (powers Dashboard view charts)
+  },
+  {
+    name: 'planning-rhythm-sync',
+    script: 'scripts/sync-planning-rhythm-to-notion.mjs',
+    cron_restart: '20 9 * * 1', // Weekly Monday 9:20am AEST — Multi-period planning page (weekly/monthly/half/year/5-year)
+  },
+  {
+    name: 'entity-hub-sync',
+    script: 'scripts/sync-entity-hub-to-notion.mjs',
+    cron_restart: '25 9 * * 1', // Weekly Monday 9:25am AEST — Master Entity Hub (orgs across Xero/GHL/Foundations)
+  },
+  {
+    name: 'daily-money-briefing',
+    script: 'scripts/daily-money-briefing.mjs',
+    cron_restart: '0 8 * * *', // Daily 8am AEST — full briefing (wins + pipeline + overdue + actions)
+  },
+  {
+    name: 'telegram-money-alerts',
+    script: 'scripts/telegram-money-alerts.mjs',
+    cron_restart: '0 13 * * *', // Daily 1pm AEST — afternoon alert (silent if nothing actionable)
+  },
+  {
+    name: 'weekly-money-digest',
+    script: 'scripts/weekly-money-digest.mjs',
+    cron_restart: '0 15 * * 5', // Weekly Friday 3:00pm AEST — Friday Money Digest (week wins, burns, stale, actions)
+  },
+  {
+    name: 'ghl-cleanup-auto',
+    script: 'scripts/cleanup-stale-ghl-opps.mjs',
+    args: '--apply',
+    cron_restart: '0 6 * * 1', // Weekly Monday 6:00am AEST — auto-archive past-deadline grants + ACT Events invitations BEFORE the framework/db sync runs
+  },
+  {
+    name: 'grant-seed-weekly',
+    script: 'scripts/seed-ghl-grants.mjs',
+    args: '--count 5',
+    cron_restart: '30 6 * * 1', // Weekly Monday 6:30am AEST — seed top 5 fresh ACT-fit grants into GHL
+  },
+  {
+    name: 'xero-payments-sync',
+    script: 'scripts/sync-xero-payments.mjs',
+    args: '--days=180',
+    cron_restart: '50 6 * * 1', // Weekly Monday 6:50am AEST — sync Xero Payments (deposit↔invoice link table)
+  },
+  {
+    name: 'money-in-audit',
+    script: 'scripts/audit-money-in-alignment.mjs',
+    cron_restart: '0 7 * * 1', // Weekly Monday 7:00am AEST — generate money-in alignment markdown report
+  },
+  {
+    name: 'money-out-audit',
+    script: 'scripts/audit-money-out-alignment.mjs',
+    cron_restart: '5 7 * * 1', // Weekly Monday 7:05am AEST — generate money-out alignment markdown report
+  },
+  {
+    name: 'money-alignment-notion',
+    script: 'scripts/sync-money-alignment-to-notion.mjs',
+    cron_restart: '10 7 * * 1', // Weekly Monday 7:10am AEST — push both alignment reports to Notion
+  },
+  {
     name: 'wiki-build-viewer',
     script: 'scripts/wiki-build-viewer.mjs',
     cron_restart: '15 9 * * 1', // Weekly Monday 9:15am AEST — regenerate the viewer and sync the command-center wiki mirror
