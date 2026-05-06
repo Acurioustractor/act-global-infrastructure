@@ -7,7 +7,7 @@ series: judges-on-country-postcards
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/stories/healing-journey-country.md`.
-> Regenerated: `2026-05-02T23:12:49.852Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerated: `2026-05-06T07:17:55.233Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # Healing Journey to Country: Young Men Find Connection at Atnarpa Station
 

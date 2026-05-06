@@ -18,6 +18,14 @@ Helper: `node scripts/wiki-log.mjs <op> "<summary>" [files...]`
 
 ## 2026
 
+- 2026-05-06 17:17 | viewer-build | 287 articles · 84 photo maps · 2202KB | tools/act-wikipedia.html
+- 2026-05-06 17:17 | snapshot-sync | 24 direct mirrors · 55 stories · 4 wrappers | apps/command-center/public/wiki/README.md, apps/command-center/public/wiki/snapshot-meta.json
+- 2026-05-06 17:17 | url-audit | 9 live · 0 dead · 2 known-issue · 21 no-URL · 20 no-repo | wiki/decisions/url-audit-2026-05-06.md, wiki/decisions/url-audit-latest.json
+- 2026-05-06 17:16 | lint | 287 canonical articles · 203 broken links · 46 orphans · 99% source-bridge coverage | wiki/output/lint-2026-05-06.md, wiki/output/status-latest.json
+- 2026-05-06 16:31 | viewer-build | 286 articles · 84 photo maps · 2197KB | tools/act-wikipedia.html
+- 2026-05-06 16:31 | snapshot-sync | 24 direct mirrors · 55 stories · 4 wrappers | apps/command-center/public/wiki/README.md, apps/command-center/public/wiki/snapshot-meta.json
+- 2026-05-06 16:31 | url-audit | 9 live · 0 dead · 2 known-issue · 21 no-URL · 20 no-repo | wiki/decisions/url-audit-2026-05-06.md, wiki/decisions/url-audit-latest.json
+- 2026-05-06 16:31 | lint | 286 canonical articles · 201 broken links · 45 orphans · 99% source-bridge coverage | wiki/output/lint-2026-05-06.md, wiki/output/status-latest.json
 - 2026-05-02 09:12 | snapshot-sync | 24 direct mirrors · 55 stories · 4 wrappers | apps/command-center/public/wiki/README.md, apps/command-center/public/wiki/snapshot-meta.json
 - 2026-05-02 08:37 | manual | Added llms.txt entrypoint for ChatGPT-style repo discovery | llms.txt, STEERING.md, README.md
 - 2026-05-02 08:35 | manual | Added root steering map and .soul pointer to canonical wiki soul stack | STEERING.md, .soul, AGENTS.md, README.md

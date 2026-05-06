@@ -1,13 +1,13 @@
 ---
 title: Four Lanes Today
 status: Live
-updated: 2026-04-28
+updated: 2026-05-07
 source_of_truth: wiki/concepts/four-lanes.md
 ---
 
 # Four Lanes Today
 
-> Live snapshot of ACT's internal economy. Generated 2026-04-28.
+> Live snapshot of ACT's internal economy. Generated 2026-05-07.
 > Methodology and meaning: [[../concepts/four-lanes|The Four Lanes]].
 
 > **Data range:** 2025-10-01 to 2026-03-31. If this lags the current date, statement ingestion is behind.
@@ -28,18 +28,18 @@ Q3 FY26 (2026-01-01 to 2026-03-31):
 ## Last 90 days
 
 - **To Us**: $0 (0%)
-- **To Down**: $469 (0%)
-- **To Grow**: $128,637 (100%)
+- **To Down**: $461 (0%)
+- **To Grow**: $114,724 (100%)
 - **To Others**: $0 (0%)
 
-Revenue last 90 days: $151,528
+Revenue last 90 days: $143,412
 
 ## LCAA by spend (last 90 days)
 
-- **Listen**: $40,946 (32%)
-- **Curiosity**: $7,845 (6%)
-- **Action**: $64,530 (50%)
-- **Art**: $15,785 (12%)
+- **Listen**: $33,662 (29%)
+- **Curiosity**: $7,668 (7%)
+- **Action**: $64,551 (56%)
+- **Art**: $9,303 (8%)
 
 ## Soul check
 

@@ -28,15 +28,15 @@
 | Date | Invoice | Amount | PaymentID |
 |---|---|---:|---|
 | 2026-03-24 | INV-0323 | $37,290 | 640056fd... |
-| 2026-04-24 | INV-0295 | $27,500 | 2f3546a3... |
+| 2025-12-01 | INV-0277 | $29,480 | 72609f50... |
 | 2026-03-16 | INV-0289 | $10,800 | c2c14cff... |
 | 2026-03-24 | INV-0246 | $9,000 | f041b3b7... |
 | 2026-03-15 | INV-0319 | $6,000 | f3a8ea60... |
-| 2026-04-24 | INV-0320 | $3,267 | e71be106... |
-| 2026-03-09 | QDFY-020326 | $2,413 | 1fa810db... |
-| 2026-03-05 | AGAPY3VP-0008 | $35 | 7a98c039... |
-| 2026-03-07 | MOZLLRUU-0004 | $17 | e6566e05... |
-| 2026-03-07 | MOZLLRUU-0004 | $17 | 60365235... |
+| 2026-01-27 | 2FBD9E4O-0001 | $313 | bd735b4e... |
+| 2025-12-12 | INV-0235 | $200 | 7fae772c... |
+| 2026-01-23 | AGAPY3VP-0005 | $142 | 5ab7b476... |
+| 2025-11-17 | 1763254998 | $71 | d2df2409... |
+| 2026-01-19 | NZ2Y87AU-0002 | $34 | d7ec7e82... |
 
 ## 🚩 Alignment gaps
 
@@ -174,7 +174,7 @@
 | INV-0301 | Regional Arts Australia | 2026-03-02 ⚠️ | $16,500 | ACT-HV |
 | INV-0325 | Brodie Germaine Fitness Aboriginal Corpo | 2026-04-29 ⚠️ | $15,400 | ACT-BG |
 | INV-0322 | SMART Recovery Australia | 2026-03-27 ⚠️ | $2,200 | ACT-SM |
-| INV-0327 | The John Villiers Trust | 2026-05-17 | $1,200 | 🚩 |
+| INV-0327 | The John Villiers Trust | 2026-05-17 | $1,200 | ACT-CORE |
 | INV-0287 | Aleisha J Keating | 2025-11-07 ⚠️ | $450 | ACT-FM |
 | INV-0274 | Aleisha J Keating | 2025-09-26 ⚠️ | $450 | ACT-FM |
 | INV-0306 | Aleisha J Keating | 2025-12-26 ⚠️ | $450 | ACT-FM |

@@ -15,7 +15,7 @@ el_v2_match_via: "org:bg-fit"
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/stories/bg-fit-doomadgee-camp-taking-it-remote.md`.
-> Regenerated: `2026-05-02T23:12:49.852Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerated: `2026-05-06T07:17:55.233Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 # Doomadgee Camp — Taking It Remote
 
 > Doomadgee Camp Participant
