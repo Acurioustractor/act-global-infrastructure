@@ -42,7 +42,8 @@ const FORBIDDEN_PHRASES = [
   'stands as', 'serves as',
 ];
 const PATTERNS = {
-  em_dash:                  /—|--/,
+  // em-dash: literal — OR exactly two hyphens (NOT three+, which are markdown horizontal rules)
+  em_dash:                  /—|(?<![-])--(?![-])/,
   curly_quotes:             /[“”‘’]/,
   negative_parallelism:     /not just\b.{0,60}\bbut\b|it'?s not about\b.{0,60}\bit'?s about\b|more than\b.{0,60}\bit'?s\b/i,
   significance_claim:       /(plays?|its|a) (pivotal|key|crucial|vital) role|marks a (key|pivotal) moment|sets the stage for|paving the way|at a critical juncture/i,
@@ -53,6 +54,22 @@ const PATTERNS = {
   inline_header_puff:       /^\*\*[A-Z][a-zA-Z ]+:\*\*\s+(We|Our|This)/m,
 };
 
+// A line is a "self-check / quoted-rule list" if it lists multiple forbidden words
+// inside quotes or is explicitly an authoring checklist. Skip Tier 1 on these.
+function isMetaLine(ln) {
+  const lower = ln.toLowerCase().trim();
+  if (/^\s*-?\s*\[[ x]\]\s*no\s+["']/i.test(ln)) return true; // "- [ ] No "delve, crucial..."
+  if (/^\s*(forbidden|reject|avoid|do not use|don'?t use|no\s)/i.test(ln) && /[",]\s*[a-z]+,\s*[a-z]+/.test(ln)) return true;
+  // line lists 3+ comma-separated forbidden vocab words inside quotes
+  const quoted = ln.match(/["']([^"']+)["']/);
+  if (quoted) {
+    const inside = quoted[1].toLowerCase();
+    const matches = FORBIDDEN_BASE.filter(w => inside.includes(w)).length;
+    if (matches >= 3) return true;
+  }
+  return false;
+}
+
 function tier1(text) {
   const failures = [];
   const lines = text.split('\n');
@@ -60,16 +77,19 @@ function tier1(text) {
   for (const word of FORBIDDEN_VOCAB) {
     const re = new RegExp(`\\b${word}\\b`, 'i');
     lines.forEach((ln, i) => {
+      if (isMetaLine(ln)) return;
       if (re.test(ln)) failures.push({ rule: 'forbidden_vocab', evidence: word, line: i + 1, snippet: ln.trim().slice(0, 80) });
     });
   }
   for (const phrase of FORBIDDEN_PHRASES) {
     lines.forEach((ln, i) => {
+      if (isMetaLine(ln)) return;
       if (ln.toLowerCase().includes(phrase)) failures.push({ rule: 'forbidden_phrase', evidence: phrase, line: i + 1, snippet: ln.trim().slice(0, 80) });
     });
   }
   for (const [rule, re] of Object.entries(PATTERNS)) {
     lines.forEach((ln, i) => {
+      if (isMetaLine(ln) && rule !== 'em_dash' && rule !== 'curly_quotes') return;
       const m = ln.match(re);
       if (m) failures.push({ rule, evidence: m[0], line: i + 1, snippet: ln.trim().slice(0, 80) });
     });
@@ -161,7 +181,7 @@ async function tier23(text, project, genre, anthropic) {
     .replace('{{TEXT}}', text);
   const resp = await anthropic.messages.create({
     model: process.env.GRADE_VOICE_MODEL || 'claude-sonnet-4-6',
-    max_tokens: 800,
+    max_tokens: 2500,
     messages: [{ role: 'user', content: prompt }],
   });
   const raw = resp.content[0].text.trim();
@@ -286,11 +306,67 @@ async function runCalibration(opts = {}) {
   process.exit(passed === results.length ? 0 : 1);
 }
 
+function getArg(flag, fallback = null) {
+  const i = process.argv.indexOf(flag);
+  return i >= 0 ? process.argv[i + 1] : fallback;
+}
+
+async function runFile(filePath, project, genre, opts = {}) {
+  if (!process.env.ANTHROPIC_API_KEY && !opts.tier1Only) {
+    console.error('ANTHROPIC_API_KEY not set; falling back to --tier1-only');
+    opts.tier1Only = true;
+  }
+  const anthropic = opts.tier1Only ? null : new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+  const raw = fs.readFileSync(filePath, 'utf8');
+  // Strip markdown frontmatter and fenced code blocks before grading prose.
+  const noFrontmatter = raw.replace(/^---\n[\s\S]*?\n---\n/, '');
+  const text = noFrontmatter.replace(/```[\s\S]*?```/g, '').trim();
+
+  const result = await grade(text, project, genre, anthropic, opts);
+
+  console.log(`\n# Voice grade — ${path.basename(filePath)}`);
+  console.log(`Project: ${project}  ·  Genre: ${genre}  ·  Length: ${text.length} chars`);
+  console.log(`\nVerdict: **${result.verdict.toUpperCase()}**  ·  Score: ${result.score}/100`);
+  if (result.hard_failures.length) {
+    console.log(`\n## Hard failures (${result.hard_failures.length})`);
+    const grouped = {};
+    for (const f of result.hard_failures) {
+      const key = `${f.rule}:${f.evidence}`;
+      grouped[key] = (grouped[key] || 0) + 1;
+    }
+    Object.entries(grouped).sort(([, a], [, b]) => b - a).slice(0, 20).forEach(([key, n]) => {
+      const [rule, evidence] = key.split(':');
+      console.log(`  - **${rule}** \`${evidence}\`${n > 1 ? ` (${n}x)` : ''}`);
+    });
+    if (Object.keys(grouped).length > 20) console.log(`  ... ${Object.keys(grouped).length - 20} more rule types`);
+  } else {
+    console.log('\nHard failures: none.');
+  }
+  if (result.structural_check) {
+    console.log(`\nStructural: rooms=${result.structural_check.rooms_named} body=${result.structural_check.bodies_named} abstract=${result.structural_check.abstract_loaded} stops=${result.structural_check.line_stops}`);
+  }
+  if (result.plainness) {
+    console.log(`Plainness: doomadgee=${result.plainness.doomadgee_test} pitch_deck=${result.plainness.pitch_deck_test}`);
+  }
+  if (result.weight_bearing && result.weight_bearing.length) {
+    console.log('\n## Weight-bearing sentences');
+    result.weight_bearing.forEach(s => console.log(`  - "${s}"`));
+  }
+  if (result.advice && result.advice.length) {
+    console.log('\n## Advice');
+    result.advice.forEach(a => console.log(`  - ${a}`));
+  }
+  process.exit(result.verdict === 'fail' ? 1 : 0);
+}
+
 const args = process.argv.slice(2);
 const tier1Only = args.includes('--tier1-only');
-if (args.length === 0 || args.includes('--calibrate') || tier1Only) {
+const file = getArg('--file');
+if (file) {
+  runFile(file, getArg('--project', 'hub'), getArg('--genre', 'pitch'), { tier1Only });
+} else if (args.length === 0 || args.includes('--calibrate') || tier1Only) {
   runCalibration({ tier1Only });
 } else {
-  console.error('Production mode not yet wired. Use --calibrate or --tier1-only.');
+  console.error('Usage:\n  --calibrate                       run canonical 6 fixtures\n  --tier1-only                      deterministic only (no API)\n  --file <path> --project <slug> --genre <slug>   grade a real draft');
   process.exit(2);
 }
