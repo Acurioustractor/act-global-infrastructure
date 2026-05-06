@@ -18,6 +18,7 @@
  */
 import './lib/load-env.mjs';
 import fs from 'node:fs';
+import path from 'node:path';
 import { createClient } from '@supabase/supabase-js';
 import { execSync } from 'child_process';
 
@@ -99,6 +100,46 @@ function runScript(name, args = '') {
 }
 
 const NO_RD_GRADE = process.argv.includes('--no-rd-grade');
+const NO_VOICE_SCAN = process.argv.includes('--no-voice-scan');
+
+// Tier 1-only voice scan over drafts modified in the past 7 days.
+// Deterministic regex/wordlist — no LLM cost. Catches em-dashes, AI-tell vocab,
+// negative parallelisms, etc. Tier 2-3 (Curtis structural + plainness) is run
+// only on demand via grade-voice.mjs --file <path> directly.
+function voiceScanRecentDrafts() {
+  if (NO_VOICE_SCAN) return { skipped: 'flag --no-voice-scan' };
+  const dir = '/Users/benknight/Code/act-global-infrastructure/thoughts/shared/drafts';
+  if (!fs.existsSync(dir)) return { skipped: 'drafts dir not found' };
+  const cutoff = Date.now() - 7 * 24 * 60 * 60 * 1000;
+  const files = fs.readdirSync(dir)
+    .filter(f => f.endsWith('.md'))
+    .map(f => {
+      try {
+        const p = path.join(dir, f);
+        return { name: f, path: p, mtime: fs.statSync(p).mtime.getTime() };
+      } catch { return null; }
+    })
+    .filter(f => f && f.mtime > cutoff)
+    .sort((a, b) => b.mtime - a.mtime);
+
+  if (files.length === 0) return { checked: 0, failed: [] };
+
+  const failed = [];
+  let checked = 0;
+  for (const f of files.slice(0, 15)) {
+    try {
+      execSync(
+        `node scripts/grade-voice.mjs --file "${f.path}" --project hub --genre pitch --tier1-only`,
+        { cwd: '/Users/benknight/Code/act-global-infrastructure', stdio: ['ignore', 'pipe', 'pipe'], timeout: 15_000 },
+      );
+      checked++;
+    } catch {
+      failed.push(f.name);
+      checked++;
+    }
+  }
+  return { checked, failed };
+}
 
 // Grade the R&D evidence pack against rubric v1.0.
 // Returns { verdict, score, hardFailures } or { skipped: reason }.
@@ -411,8 +452,28 @@ async function main() {
   }
   msg += `\n🌱 *Soul check:* lane most behind = *${LANE_LABELS[mostBehind]}* ($${Math.round(laneTotals[mostBehind])}).\n${SOUL_CHECK[mostBehind]}`;
 
+  // ── Voice scan over recent drafts ────────────────────────────────
+  console.log('\n🎙  Step 5a: Voice scan over drafts modified in past 7 days...');
+  const voiceScan = voiceScanRecentDrafts();
+  if (voiceScan.skipped) {
+    console.log(`   ⏭  Voice scan skipped: ${voiceScan.skipped}`);
+    msg += `\n\n🎙 *Voice scan:* skipped (${voiceScan.skipped})`;
+  } else if (voiceScan.checked === 0) {
+    console.log('   📭 No drafts modified in past 7 days');
+    msg += `\n\n🎙 *Voice scan:* no drafts modified this week`;
+  } else if (voiceScan.failed.length === 0) {
+    console.log(`   ✅ ${voiceScan.checked} drafts checked, all clean (Tier 1)`);
+    msg += `\n\n🎙 *Voice scan:* ✅ ${voiceScan.checked} drafts clean (Tier 1)`;
+  } else {
+    console.log(`   🔴 ${voiceScan.failed.length}/${voiceScan.checked} drafts failed Tier 1`);
+    msg += `\n\n🎙 *Voice scan:* 🔴 ${voiceScan.failed.length}/${voiceScan.checked} failed`;
+    for (const name of voiceScan.failed.slice(0, 5)) msg += `\n  • ${name}`;
+    if (voiceScan.failed.length > 5) msg += `\n  • _and ${voiceScan.failed.length - 5} more_`;
+    msg += `\n  _Run \`node scripts/grade-voice.mjs --file <path>\` for full Tier 2-3 review_`;
+  }
+
   // ── R&D pack grade ───────────────────────────────────────────────
-  console.log('\n🔬 Step 5: R&D pack grade...');
+  console.log('\n🔬 Step 5b: R&D pack grade...');
   const rdGrade = gradeRdPack();
   if (rdGrade.skipped) {
     console.log(`   ⏭  R&D grade skipped: ${rdGrade.skipped}`);
