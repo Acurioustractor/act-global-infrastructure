@@ -41,7 +41,7 @@
  */
 
 import '../../lib/load-env.mjs';
-import { trackedClaudeCompletion, selectModel } from './llm-client.mjs';
+import { trackedAgentCompletion, resolveAgentProvider, selectModel } from './llm-client.mjs';
 import { createClient } from '@supabase/supabase-js';
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -104,22 +104,24 @@ ${scopedFiles.map(f => `  - ${f}`).join('\n')}
 ${systemPrompt}
 `.trim();
 
-  // ━━━ Select model by task complexity
-  const model = selectModel(task, 'anthropic');
+  // ━━━ Resolve provider (env-driven: MINIMAX > ANTHROPIC > GEMINI > OPENAI) + model by task tier
+  const provider = resolveAgentProvider();
+  const model = selectModel(task, provider);
 
   if (dryRun) {
-    console.log(`[dry-run] agent=${name} model=${model} would write to ${outputPath}`);
+    console.log(`[dry-run] agent=${name} provider=${provider} model=${model} would write to ${outputPath}`);
     console.log(`[dry-run] system prompt length: ${contractPrompt.length} chars`);
     console.log(`[dry-run] user prompt length: ${userPrompt.length} chars`);
-    return { output: '[dry-run]', model, outputPath };
+    return { output: '[dry-run]', provider, model, outputPath };
   }
 
-  // ━━━ LLM call via trackedClaudeCompletion (logs to api_usage table)
-  const output = await trackedClaudeCompletion(
+  // ━━━ LLM call via trackedAgentCompletion (logs to api_usage table; routes by provider)
+  const output = await trackedAgentCompletion(
     userPrompt,
     `agents/${name}`,
     {
       model,
+      task,
       maxTokens: budget.maxTokens,
       system: contractPrompt,
       agentId: name,

@@ -92,9 +92,29 @@ export function selectModel(task, provider = 'anthropic') {
   const MODELS = {
     anthropic: { cheap: 'claude-haiku-4-5', mid: 'claude-sonnet-4-6', expensive: 'claude-opus-4-7' },
     openai: { cheap: 'gpt-4o-mini', mid: 'gpt-4o', expensive: 'gpt-4o' },
+    minimax: { cheap: 'MiniMax-M2.7-highspeed', mid: 'MiniMax-M2.7', expensive: 'MiniMax-M2.7' },
+    gemini: { cheap: 'gemini-2.5-flash-lite', mid: 'gemini-2.5-flash', expensive: 'gemini-2.5-pro' },
   };
 
   return MODELS[provider]?.[tier] || MODELS.anthropic[tier];
+}
+
+/**
+ * Resolve which provider an agent should call, based on env. Priority:
+ *   1. AGENT_PROVIDER env var (explicit override: 'minimax' | 'gemini' | 'anthropic' | 'openai')
+ *   2. MINIMAX_API_KEY set → minimax
+ *   3. ANTHROPIC_API_KEY set → anthropic
+ *   4. GEMINI_API_KEY set → gemini
+ *   5. OPENAI_API_KEY set → openai
+ */
+export function resolveAgentProvider() {
+  const explicit = process.env.AGENT_PROVIDER?.toLowerCase();
+  if (explicit && ['minimax', 'gemini', 'anthropic', 'openai'].includes(explicit)) return explicit;
+  if (process.env.MINIMAX_API_KEY) return 'minimax';
+  if (process.env.ANTHROPIC_API_KEY) return 'anthropic';
+  if (process.env.GEMINI_API_KEY) return 'gemini';
+  if (process.env.OPENAI_API_KEY) return 'openai';
+  throw new Error('No LLM provider configured (set AGENT_PROVIDER or one of MINIMAX_API_KEY/ANTHROPIC_API_KEY/GEMINI_API_KEY/OPENAI_API_KEY)');
 }
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -385,6 +405,124 @@ export async function trackedClaudeCompletion(prompt, scriptName, options = {}) 
   });
 
   return result.content[0].text;
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// MINIMAX COMPLETIONS (international OpenAI-compatible endpoint)
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+const MINIMAX_BASE_URL = process.env.MINIMAX_BASE_URL || 'https://api.minimax.io/v1';
+
+export async function trackedMiniMaxCompletion(prompt, scriptName, options = {}) {
+  if (!process.env.MINIMAX_API_KEY) throw new Error('MINIMAX_API_KEY not set');
+  const model = options.model || 'MiniMax-M2.7';
+  const messages = options.system ? [{ role: 'system', content: options.system }] : [];
+  if (typeof prompt === 'string') messages.push({ role: 'user', content: prompt });
+  else messages.push(...prompt);
+
+  // OpenAI-compatible path on api.minimax.io; fallback to native if user override
+  const path = MINIMAX_BASE_URL.includes('minimaxi.chat')
+    ? '/text/chatcompletion_v2'
+    : '/chat/completions';
+
+  const start = Date.now();
+  const result = await withRetry(async () => {
+    const res = await fetch(`${MINIMAX_BASE_URL}${path}`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${process.env.MINIMAX_API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ model, messages, max_tokens: options.maxTokens || 1000 }),
+    });
+    if (!res.ok) throw new Error(`MiniMax ${res.status}: ${(await res.text()).slice(0, 200)}`);
+    return res.json();
+  });
+
+  await logUsage({
+    provider: 'minimax', model, endpoint: 'chat',
+    input_tokens: result.usage?.total_tokens ? Math.round(result.usage.total_tokens * 0.7) : 0,
+    output_tokens: result.usage?.total_tokens ? Math.round(result.usage.total_tokens * 0.3) : 0,
+    script_name: scriptName, agent_id: options.agentId || scriptName,
+    operation: options.operation || 'complete', latency_ms: Date.now() - start,
+    cache_hit: false, response_status: 200,
+  });
+
+  return result.choices?.[0]?.message?.content || '';
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// GEMINI COMPLETIONS (via @google/genai)
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+let _genai = null;
+async function getGenai() {
+  if (!_genai) {
+    if (!process.env.GEMINI_API_KEY) throw new Error('GEMINI_API_KEY not set');
+    const { GoogleGenAI } = await import('@google/genai');
+    _genai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+  }
+  return _genai;
+}
+
+export async function trackedGeminiCompletion(prompt, scriptName, options = {}) {
+  const ai = await getGenai();
+  const model = options.model || 'gemini-2.5-flash-lite';
+  const userText = typeof prompt === 'string' ? prompt : prompt.map(m => `${m.role}: ${m.content}`).join('\n\n');
+
+  const start = Date.now();
+  const result = await withRetry(async () => {
+    return ai.models.generateContent({
+      model,
+      contents: userText,
+      config: {
+        systemInstruction: options.system,
+        maxOutputTokens: options.maxTokens || 1000,
+      },
+    });
+  });
+
+  await logUsage({
+    provider: 'gemini', model, endpoint: 'chat',
+    input_tokens: result.usageMetadata?.promptTokenCount || 0,
+    output_tokens: result.usageMetadata?.candidatesTokenCount || 0,
+    script_name: scriptName, agent_id: options.agentId || scriptName,
+    operation: options.operation || 'complete', latency_ms: Date.now() - start,
+    cache_hit: false, response_status: 200,
+  });
+
+  return result.text || '';
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// SMART ROUTER — pick provider via env, used by all agents
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+export async function trackedAgentCompletion(prompt, scriptName, options = {}) {
+  const provider = resolveAgentProvider();
+  const model = options.model && providerMatchesModel(provider, options.model)
+    ? options.model
+    : selectModel(options.task || 'generate', provider);
+  const opts = { ...options, model };
+
+  if (provider === 'minimax') return trackedMiniMaxCompletion(prompt, scriptName, opts);
+  if (provider === 'gemini') return trackedGeminiCompletion(prompt, scriptName, opts);
+  if (provider === 'anthropic') return trackedClaudeCompletion(prompt, scriptName, opts);
+  if (provider === 'openai') {
+    const messages = options.system ? [{ role: 'system', content: options.system }] : [];
+    if (typeof prompt === 'string') messages.push({ role: 'user', content: prompt });
+    else messages.push(...prompt);
+    return trackedCompletion(messages, scriptName, opts);
+  }
+  throw new Error(`Unknown provider: ${provider}`);
+}
+
+function providerMatchesModel(provider, model) {
+  if (provider === 'minimax') return /^MiniMax/i.test(model);
+  if (provider === 'gemini') return /^gemini/i.test(model);
+  if (provider === 'anthropic') return /^claude/i.test(model);
+  if (provider === 'openai') return /^gpt/i.test(model);
+  return false;
 }
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
