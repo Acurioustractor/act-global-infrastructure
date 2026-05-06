@@ -78,6 +78,9 @@ config/ACT_MASTER_SECRETS.md
 # Backups (large)
 backups/
 
+# Local export outputs (regenerable from scripts)
+out/
+
 # Binary documents (track in cloud storage, not git)
 *.docx
 

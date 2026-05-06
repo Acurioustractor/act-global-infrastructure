@@ -273,8 +273,12 @@ async function syncOpportunities(supabase, ghl) {
           monetary_value: opp.monetaryValue,
           custom_fields: opp.customFields || {},
           assigned_to: opp.assignedTo,
-          ghl_created_at: opp.dateAdded,
-          ghl_updated_at: opp.dateUpdated,
+          // GHL v2 API returns createdAt/updatedAt (camelCase, not dateAdded/dateUpdated).
+          // lastStageChangeAt + lastStatusChangeAt are the real staleness signals.
+          ghl_created_at: opp.createdAt || opp.dateAdded || null,
+          ghl_updated_at: opp.updatedAt || opp.dateUpdated || null,
+          last_stage_change_at: opp.lastStageChangeAt || null,
+          last_status_change_at: opp.lastStatusChangeAt || null,
           last_synced_at: new Date().toISOString()
         };
 
