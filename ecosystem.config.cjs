@@ -266,12 +266,16 @@ const cronScripts = [
     args: '--verbose',
     cron_restart: '0 6,12,18 * * *', // 3x daily: 6am, 12pm, 6pm AEST
   },
-  {
-    name: 'actions-decisions-sync',
-    script: 'scripts/sync-actions-decisions-to-notion.mjs',
-    args: '--verbose',
-    cron_restart: '*/15 * * * *', // Every 15 minutes (matches checkbox polling)
-  },
+  // Removed 2026-05-06 — target Live Alerts Notion DB does not exist in current
+  // workspace. actions/projects/decisions DBs ARE accessible but the script's
+  // Notion calls hit a missing ID and abort. Re-add only after Live Alerts DB
+  // is recreated and config/notion-database-ids.json:liveAlerts is updated.
+  // {
+  //   name: 'actions-decisions-sync',
+  //   script: 'scripts/sync-actions-decisions-to-notion.mjs',
+  //   args: '--verbose',
+  //   cron_restart: '*/15 * * * *',
+  // },
   // contacts-sync removed — People Directory too noisy, focus on knowledge + meetings
   {
     name: 'generate-insights',
@@ -342,11 +346,15 @@ const cronScripts = [
     script: 'scripts/push-highlights-to-notion.mjs',
     cron_restart: '*/30 * * * *', // Every 30 minutes
   },
-  {
-    name: 'notion-weekly-review',
-    script: 'scripts/notion-weekly-review.mjs',
-    cron_restart: '0 17 * * 0', // Sunday 5pm AEST (before weekly-digest at 6pm)
-  },
+  // Removed 2026-05-06 — target weeklyReports DB (2d6ebcf9...) renders broken
+  // ('Something went wrong / Try again' in Notion UI). Re-add after the page
+  // is repaired or recreated and config/notion-database-ids.json:weeklyReports
+  // points at a working DB.
+  // {
+  //   name: 'notion-weekly-review',
+  //   script: 'scripts/notion-weekly-review.mjs',
+  //   cron_restart: '0 17 * * 0',
+  // },
   {
     name: 'weekly-relationship-review',
     script: 'scripts/weekly-relationship-review.mjs',
@@ -401,12 +409,16 @@ const cronScripts = [
     args: '--verbose',
     cron_restart: '30 6 * * *', // Daily 6:30am AEST (before 7am briefing — scored priority engine)
   },
-  {
-    name: 'sync-priorities-to-notion',
-    script: 'scripts/sync-priorities-to-notion.mjs',
-    args: '--verbose',
-    cron_restart: '45 6 * * *', // Daily 6:45am AEST (after priorities at 6:30, before briefing at 7)
-  },
+  // Removed 2026-05-06 — hardcoded MISSION_CONTROL_OS_DB id (3db68c5f...) does
+  // not exist in any accessible Notion workspace (search returns no match).
+  // Re-add after a Mission Control OS database is created and the script's
+  // hardcoded id is updated to its new uuid.
+  // {
+  //   name: 'sync-priorities-to-notion',
+  //   script: 'scripts/sync-priorities-to-notion.mjs',
+  //   args: '--verbose',
+  //   cron_restart: '45 6 * * *',
+  // },
   {
     name: 'sync-grantscope-matches',
     script: 'scripts/sync-grantscope-matches.mjs',
