@@ -28,6 +28,8 @@ import {
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { formatMoney, formatMoneyCompact } from '@/lib/finance/format'
+import { FounderPayCard } from '@/components/finance/FounderPayCard'
+import { ReceiptAutomationCard } from '@/components/finance/ReceiptAutomationCard'
 
 // ── Types ────────────────────────────────────────────────────────────
 
@@ -500,10 +502,21 @@ export default function FinanceOverview() {
         </div>
       </header>
 
+      {/* Section anchors — six things the CEO wants in one click */}
+      <nav aria-label="Cockpit anchors" className="flex flex-wrap gap-2 -mt-2">
+        <a href="#right-now" className="text-xs px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 text-white/60 hover:text-white transition-colors border border-white/10">Right Now</a>
+        <a href="#founder-pay" className="text-xs px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 text-white/60 hover:text-white transition-colors border border-white/10">Founder Pay</a>
+        <a href="#receipts" className="text-xs px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 text-white/60 hover:text-white transition-colors border border-white/10">Receipts</a>
+        <a href="#whats-coming" className="text-xs px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 text-white/60 hover:text-white transition-colors border border-white/10">Pipeline</a>
+        <Link href="/finance/board" className="text-xs px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 text-white/60 hover:text-white transition-colors border border-white/10">Burn / Runway</Link>
+        <Link href="/finance/rd-evidence" className="text-xs px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 text-white/60 hover:text-white transition-colors border border-white/10">R&amp;D Estimate</Link>
+        <Link href="/finance/projects" className="text-xs px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 text-white/60 hover:text-white transition-colors border border-white/10">Projects History</Link>
+      </nav>
+
       {/* ═══════════════════════════════════════════ */}
       {/* SECTION 1: RIGHT NOW                        */}
       {/* ═══════════════════════════════════════════ */}
-      <section>
+      <section id="right-now">
         <h2 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
           <DollarSign className="h-5 w-5 text-emerald-400" />
           Right Now
@@ -671,9 +684,19 @@ export default function FinanceOverview() {
       </section>
 
       {/* ═══════════════════════════════════════════ */}
+      {/* SECTION 1.5: FOUNDER PAY + RECEIPT AUTOMATION */}
+      {/* ═══════════════════════════════════════════ */}
+      <section id="founder-pay" className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <FounderPayCard />
+        <div id="receipts">
+          <ReceiptAutomationCard />
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════ */}
       {/* SECTION 2: WHAT'S COMING — Pipeline         */}
       {/* ═══════════════════════════════════════════ */}
-      <section>
+      <section id="whats-coming">
         <h2 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
           <Telescope className="h-5 w-5 text-indigo-400" />
           What&apos;s Coming
