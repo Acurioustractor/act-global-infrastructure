@@ -7,9 +7,9 @@ registrant_acn: 697 347 676
 status: assembling
 last_updated: 2026-05-07
 target_lodgement: 2027-04-30
-total_claim_aud: 329500
-expected_refund_aud_low: 121833
-expected_refund_aud_high: 143333
+total_claim_aud: 354047
+expected_refund_aud_low: 130910
+expected_refund_aud_high: 154010
 lead_contact_for_pack: Ben Knight (ben@benjamink.com.au)
 ---
 
@@ -24,9 +24,9 @@ lead_contact_for_pack: Ben Knight (ben@benjamink.com.au)
 | Financial year | FY25-26 (1 Jul 2025 – 30 Jun 2026) |
 | Registration status | Pending (target window: Jul 2026 – 30 Apr 2027 per Path C plan) |
 | Path | Path C (sole-trader period FY24-25 forfeited per decision logged 2026-04-27) |
-| Total preliminary claim (this pack — three core registers only) | **AUD $329,500** |
+| Total preliminary claim (this pack — four core registers) | **AUD $354,047** |
 | Refund rate | 43.5% (R&D refundable offset for sub-$20M aggregated-turnover entities) |
-| Expected refund — three registers only (range) | **AUD $121,833 – $143,333** (low = 0.435 × claim × 0.85 receipt threshold; high = 0.435 × claim) |
+| Expected refund — four registers (range) | **AUD $130,910 – $154,010** (low = 0.435 × claim × 0.85 receipt threshold; high = 0.435 × claim) |
 | Money Framework total R&D-eligible spend (per founder pay thesis) | **AUD ~$627,000** (founders' personnel cost $317.5K + ACT-IN tagged $284K + per-project tagged ~$12.5K + SaaS/API ~$13K) |
 | Money Framework realistic refund range | **AUD $200,000 – $250,000** (per `wiki/finance/founder-pay-and-rd-thesis-fy26-fy27.md` line 108) |
 | Coverage of the three registers vs Money Framework total | ~52% — the three core activity registers cover Empathy Ledger consent + multi-tenancy, CivicGraph entity resolution, and Goods buyer-supplier matching. The remaining ~48% is ACT-IN core activities (agent system, ALMA, governed proof, platform infrastructure) not yet split into discrete registers, plus founders' personnel cost on those activities. |
@@ -36,7 +36,7 @@ lead_contact_for_pack: Ben Knight (ben@benjamink.com.au)
 
 > The Money Framework realistic-range estimate ($180-220K) is higher than this pack's preliminary total ($147,250) because the framework includes R&D-eligible spend across cloud, contractors, and supporting activities not yet fully accounted for in the per-project registers. The two will converge as the registers close out.
 
-## Three core activity registers (one per project)
+## Four core activity registers (one per project)
 
 The core activities are documented in per-project registers, symlinked into this pack from the canonical wiki location:
 
@@ -45,6 +45,7 @@ The core activities are documented in per-project registers, symlinked into this
 | ACT-GD | Goods on Country | `act-gd-rd-activity-register.md` | `wiki/projects/goods/rd-activity-register.md` | Nic Marchesi | $188,250 |
 | ACT-EL | Empathy Ledger | `act-el-rd-activity-register.md` | `wiki/projects/empathy-ledger/rd-activity-register.md` | Ben Knight | $79,750 |
 | ACT-CG | CivicGraph | `act-cg-rd-activity-register.md` | `wiki/projects/civicgraph/rd-activity-register.md` | Ben Knight | $61,500 |
+| ACT-JH | JusticeHub | `act-jh-rd-activity-register.md` | `wiki/projects/justicehub/rd-activity-register.md` | Ben Knight | $24,547 |
 
 Each register contains: hypothesis, technical uncertainty, experiment design, expected outcome, actual outcome (interim), linked supporting activities, evidence trail (real commit hashes), and salary allocation.
 
