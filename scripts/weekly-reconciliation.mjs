@@ -17,6 +17,7 @@
  *   node scripts/weekly-reconciliation.mjs --quarter Q2   # Specific quarter
  */
 import './lib/load-env.mjs';
+import fs from 'node:fs';
 import { createClient } from '@supabase/supabase-js';
 import { execSync } from 'child_process';
 
@@ -94,6 +95,32 @@ function runScript(name, args = '') {
     console.log(`   ✅ ${name} complete`);
   } catch (e) {
     console.log(`   ⚠️  ${name} failed: ${e.message?.split('\n')[0]}`);
+  }
+}
+
+const NO_RD_GRADE = process.argv.includes('--no-rd-grade');
+
+// Grade the R&D evidence pack against rubric v1.0.
+// Returns { verdict, score, hardFailures } or { skipped: reason }.
+function gradeRdPack() {
+  if (NO_RD_GRADE) return { skipped: 'flag --no-rd-grade' };
+  const packDir = '/Users/benknight/Code/act-global-infrastructure/thoughts/shared/rd-pack-fy26';
+  const rubric = '/Users/benknight/Code/act-global-infrastructure/thoughts/shared/rubrics/rd-evidence-pack.md';
+  if (!fs.existsSync(packDir)) return { skipped: 'pack dir not found' };
+  if (!process.env.ANTHROPIC_API_KEY) return { skipped: 'no ANTHROPIC_API_KEY' };
+  try {
+    const out = execSync(
+      `node scripts/grade-pack.mjs --rubric ${rubric} --pack ${packDir}`,
+      { cwd: '/Users/benknight/Code/act-global-infrastructure', stdio: ['ignore', 'pipe', 'pipe'], timeout: 90_000 },
+    ).toString();
+    const parsed = JSON.parse(out.replace(/^```json\s*|\s*```$/g, '').trim());
+    return {
+      verdict: parsed.verdict || 'unknown',
+      score: parsed.score ?? null,
+      hardFailures: (parsed.hard_failures || []).slice(0, 3).map(f => f.rule || JSON.stringify(f).slice(0, 60)),
+    };
+  } catch (e) {
+    return { skipped: `grader error: ${e.message?.split('\n')[0]}` };
   }
 }
 
@@ -383,6 +410,21 @@ async function main() {
     msg += `LCAA: L ${fmtPct(phaseTotals.listen)} · C ${fmtPct(phaseTotals.curiosity)} · A ${fmtPct(phaseTotals.action)} · Art ${fmtPct(phaseTotals.art)}\n`;
   }
   msg += `\n🌱 *Soul check:* lane most behind = *${LANE_LABELS[mostBehind]}* ($${Math.round(laneTotals[mostBehind])}).\n${SOUL_CHECK[mostBehind]}`;
+
+  // ── R&D pack grade ───────────────────────────────────────────────
+  console.log('\n🔬 Step 5: R&D pack grade...');
+  const rdGrade = gradeRdPack();
+  if (rdGrade.skipped) {
+    console.log(`   ⏭  R&D grade skipped: ${rdGrade.skipped}`);
+    msg += `\n\n🔬 *R&D pack:* skipped (${rdGrade.skipped})`;
+  } else {
+    const verdictEmoji = rdGrade.verdict === 'pass' ? '✅' : rdGrade.verdict === 'warn' ? '🟡' : '🔴';
+    console.log(`   ${verdictEmoji} R&D pack: ${rdGrade.verdict.toUpperCase()} · score ${rdGrade.score ?? '—'}/100`);
+    msg += `\n\n🔬 *R&D pack:* ${verdictEmoji} ${rdGrade.verdict.toUpperCase()} · ${rdGrade.score ?? '—'}/100`;
+    if (rdGrade.hardFailures.length) {
+      msg += `\n   _Top gaps_: ${rdGrade.hardFailures.join(' · ')}`;
+    }
+  }
 
   msg += `\n\n_Run reconciliation-report.mjs for full details_`;
 
