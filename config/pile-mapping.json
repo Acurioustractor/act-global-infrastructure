@@ -1,0 +1,44 @@
+{
+  "_meta": {
+    "description": "Canonical pile mapping for ACT money framework. Maps project_code (ACT-*) to one of: Voice | Flow | Ground | Grants | Other | Uncoded. Used by scripts/sync-money-framework-to-notion.mjs, scripts/backfill-pile-tags.mjs, and any future tool that needs to compute pile.",
+    "version": "1.0.0",
+    "updated": "2026-05-06",
+    "rules": [
+      "If income_type='grant', pile=Grants regardless of project_code.",
+      "Else, look up project_code in projects map below.",
+      "If no match, pile=Other (for known infrastructure codes) or Uncoded (no project_code).",
+      "Update this file (not the script) when projects change pile."
+    ]
+  },
+  "piles": {
+    "Voice": "Empathy Ledger / storytelling commercialisation",
+    "Flow": "CivicGraph / Goods / JusticeHub / SaaS / retail / commercial scale",
+    "Ground": "Farm / Harvest / experiences / place-anchored",
+    "Grants": "Philanthropic / government / foundation grants (regardless of project)",
+    "Other": "Infrastructure / cross-cutting / not pile-aligned",
+    "Uncoded": "No project_code assigned — needs triage"
+  },
+  "projects": {
+    "ACT-EL": "Voice",
+    "ACT-OO": "Voice",
+    "ACT-BG": "Voice",
+    "ACT-CF": "Voice",
+    "ACT-PI": "Voice",
+    "ACT-GD": "Flow",
+    "ACT-CS": "Flow",
+    "ACT-JH": "Flow",
+    "ACT-SM": "Flow",
+    "ACT-WJ": "Flow",
+    "ACT-CA": "Flow",
+    "ACT-CP": "Flow",
+    "ACT-GP": "Flow",
+    "ACT-UA": "Flow",
+    "ACT-DO": "Flow",
+    "ACT-HV": "Ground",
+    "ACT-BV": "Ground",
+    "ACT-FM": "Ground",
+    "ACT-CORE": "Other",
+    "ACT-IN": "Other",
+    "ACT-MD": "Other"
+  }
+}
