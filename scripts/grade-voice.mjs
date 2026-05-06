@@ -9,7 +9,7 @@ import Anthropic from '@anthropic-ai/sdk';
 import fs from 'node:fs';
 import path from 'node:path';
 
-const RUBRIC_VERSION = '0.1';
+const RUBRIC_VERSION = '0.2';
 const REPORT_PATH = 'thoughts/shared/rubrics/act-voice-curtis.calibration.md';
 
 const FORBIDDEN_BASE = [
@@ -240,6 +240,15 @@ const FIXTURES = [
     text: 'Our dedicated team delves into the intricate tapestry of systemic injustice, highlighting the crucial role of grassroots advocacy in shaping a more equitable future.' },
   { id: 'bad-3', label: 'BAD: despite challenges', expect: 'fail', project: 'goods', genre: 'pitch',
     text: 'Despite facing numerous challenges, the project continues to thrive, demonstrating its pivotal role in the evolving landscape of regenerative economics.' },
+  // --- v0.2 expansion: board-report + donor-letter genres ---
+  { id: 'good-4', label: 'GOOD: board-report parity', expect: 'pass', project: 'goods', genre: 'board-report',
+    text: 'Q3 FY26. The basket left country eleven times. The hand at market was paid for ten of those. Parity moved one notch.' },
+  { id: 'bad-4', label: 'BAD: board-report puff', expect: 'fail', project: 'goods', genre: 'board-report',
+    text: 'This quarter our team continues to leverage the supplier network to drive transformative outcomes for First Nations enterprise. Goods plays a pivotal role in fostering a more equitable future, demonstrating our commitment to vibrant, community-led economic empowerment.' },
+  { id: 'good-5', label: 'GOOD: donor letter', expect: 'pass', project: 'bcv', genre: 'donor-letter',
+    text: 'Three winters ago you paid for the fence. The cockatoo came back before it came down. The valley remembers your hand.' },
+  { id: 'bad-5', label: 'BAD: donor letter puff', expect: 'fail', project: 'bcv', genre: 'donor-letter',
+    text: 'Dear supporter, your generous contribution is empowering us to drive meaningful change in the vibrant landscape of regenerative ecology. Your investment leverages our ability to foster nuanced, community-led restoration that delivers transformative outcomes.' },
 ];
 
 function fmtFailure(f) { return `      - **${f.rule}** \`${f.evidence}\` (line ${f.line}): ${f.snippet || ''}`; }
