@@ -61,7 +61,7 @@ The report diagnoses the failure of participation. It does not prescribe the dem
 
 That gap is where Goods sits. Indigenous Procurement Policy is one instrument, narrow to Commonwealth procurement. Outside Commonwealth, mid-market buyers have intent and no path. Supply Nation certifies. First Australians Capital invests. Dream Venture trains. Goods routes the demand into the certified, financed, capable enterprises these programs already produce.
 
-When the demand-side infrastructure works, the participation precondition resolves through trade, not transfer. Forrest's frame, not welfare's.
+When the basket moves from country to market, the participation precondition resolves through trade, not transfer. Forrest's frame, not welfare's.
 
 ---
 
