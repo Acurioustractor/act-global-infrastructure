@@ -1,13 +1,14 @@
 # Rubric: ACT voice (Curtis method)
 
 > Slug: `act-voice-curtis`
-> Version: 0.2
+> Version: 1.0
 > Created: 2026-05-07
 > Source of truth: `.claude/skills/act-brand-alignment/references/writing-voice.md`
 > Use: pass to Anthropic Managed Agents Outcomes, or to local grader at `scripts/grade-voice.mjs`.
-> Calibration: Tier 1 = 6/6 (perfect). Tier 2-3 = 3/6 — bad fixtures correctly fail, good fixtures incorrectly warn. See `act-voice-curtis.calibration.md`.
-> Tier 1 status: **production-eligible** for any genre.
-> Tier 2-3 status: **needs prompt tuning before promotion.** Haiku 4.5 is too strict on Curtis terseness — it doesn't recognise "cockatoo/fence", "court", "signal/speaker" as room/body matches even though they're explicit in the project table. Likely fixes (next session): (a) few-shot examples in the prompt; (b) bump model to Sonnet 4.6 for grading; (c) relax structural rule to require ANY 2 of 4 moves rather than all 4.
+> Calibration: 6/6 across all three tiers against canonical fixtures. See `act-voice-curtis.calibration.md`.
+> Status: **production-eligible** for any genre.
+> Default grading model: `claude-sonnet-4-6` (Haiku 4.5 was too strict on Curtis terseness).
+> Pass threshold: 3 of 4 structural moves + clean plainness (Curtis 1–3 sentence pieces often only land 3 explicitly).
 
 ## What this rubric grades
 
