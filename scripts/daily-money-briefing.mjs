@@ -13,6 +13,7 @@ import { createClient } from '@supabase/supabase-js';
 import { readFileSync, writeFileSync } from 'fs';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
+import { execSync } from 'child_process';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -72,7 +73,27 @@ async function fetchBriefingData() {
     priority: a.properties?.Priority?.select?.name,
   }));
 
-  return { tradingBal, runway, monthlyBurn, paidYesterday, newOpps, overdueTop, expectedThisWeek, overdueTotal, criticalActions };
+  return { tradingBal, runway, monthlyBurn, paidYesterday, newOpps, overdueTop, expectedThisWeek, overdueTotal, criticalActions, chainHealth: fetchChainHealth() };
+}
+
+function fetchChainHealth() {
+  if (new Date().getDay() !== 1) return null; // Monday only
+  try {
+    const out = execSync('pm2 jlist 2>/dev/null', { encoding: 'utf8', timeout: 5000 });
+    const procs = JSON.parse(out);
+    if (procs.length === 0) {
+      return { error: 'PM2 has zero processes registered. Run `pm2 start ecosystem.config.cjs && pm2 save`.' };
+    }
+    const failures = procs
+      .filter(p => {
+        const exit = p.pm2_env?.exit_code;
+        return exit !== null && exit !== undefined && exit !== 0;
+      })
+      .map(p => ({ name: p.name, exit_code: p.pm2_env?.exit_code, status: p.pm2_env?.status }));
+    return { count: procs.length, failures };
+  } catch (err) {
+    return { error: `PM2 query failed: ${err.message?.slice(0, 80)}` };
+  }
 }
 
 function buildMessage(d) {
@@ -119,6 +140,24 @@ function buildMessage(d) {
       lines.push(`   [${a.priority}] ${a.name?.slice(0, 60)}${a.due ? ` (due ${a.due})` : ''}`);
     }
     lines.push('');
+  }
+
+  // Mon-only chain integrity
+  if (d.chainHealth) {
+    if (d.chainHealth.error) {
+      lines.push(`🚨 *Mon chain integrity*`);
+      lines.push(`   ${d.chainHealth.error}`);
+      lines.push('');
+    } else if (d.chainHealth.failures.length > 0) {
+      lines.push(`🚨 *Mon chain — ${d.chainHealth.failures.length} cron failures*`);
+      for (const f of d.chainHealth.failures.slice(0, 5)) {
+        lines.push(`   ${f.name} exit=${f.exit_code} (${f.status})`);
+      }
+      lines.push('');
+    } else {
+      lines.push(`✅ Mon chain: all ${d.chainHealth.count} cron processes clean`);
+      lines.push('');
+    }
   }
 
   // Closing
