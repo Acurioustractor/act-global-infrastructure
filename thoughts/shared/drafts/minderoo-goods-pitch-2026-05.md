@@ -1,5 +1,5 @@
 ---
-title: Goods on Country — Minderoo envelope (working draft)
+title: Goods on Country, Minderoo envelope (working draft)
 status: Draft for Nic review
 date: 2026-05-06
 author: Ben (with ACT voice)
@@ -8,7 +8,7 @@ lands: Mid-May 2026 (~3 weeks after JusticeHub envelope of 1 May)
 related: thoughts/shared/research/goods-minderoo-pitch/pitch-architecture.md
 ---
 
-# Goods on Country — Minderoo envelope (working draft)
+# Goods on Country, Minderoo envelope (working draft)
 
 > This is the operational draft of the pack. Voice-loaded, evidence-current, blocked only on the items in §7 (the ask itself, pending Nic's call on QBE matched-side structure). Cover, executive summary, problem, work, and ecosystem sections are submission-ready for Nic's review.
 
@@ -18,8 +18,8 @@ related: thoughts/shared/research/goods-minderoo-pitch/pitch-architecture.md
 
 Earlier architecture spoke of "ACT Foundation" / "ACT Ventures." Those names are not legal entities. The truth on the ground:
 
-- **A Curious Tractor Pty Ltd** (ACN 697 347 676) — trading entity. Registered 24 April 2026. Knight + Marchesi family trusts 50/50. Goods on Country sits here. Cutover from Nic's sole trader 30 June 2026.
-- **A Kind Tractor Ltd** (ACN 669 029 341) — charity, dormant, NOT DGR-endorsed.
+- **A Curious Tractor Pty Ltd** (ACN 697 347 676), trading entity. Registered 24 April 2026. Knight + Marchesi family trusts 50/50. Goods on Country sits here. Cutover from Nic's sole trader 30 June 2026.
+- **A Kind Tractor Ltd** (ACN 669 029 341), charity, dormant, NOT DGR-endorsed.
 
 **Implication for Minderoo:** Goods is housed in a Pty Ltd, not a DGR. That makes the ask a Program-Related Investment (PRI) on the matched side, not a grant on Minderoo's distribution side. This is consistent with the QBE Catalysing Impact 2026 cohort design, which explicitly stacks catalytic grant with matched investment. Lock with Nic + Standard Ledger before lodging.
 
@@ -27,27 +27,27 @@ Earlier architecture spoke of "ACT Foundation" / "ACT Ventures." Those names are
 
 ## §1. Cover
 
-**Goods on Country: the demand-side infrastructure for First Nations employment parity.**
+**The basket leaves country. The hand at market is paid. Goods is the route between.**
 
-One line. ACT mark. Pretext type, black on cream.
+Three lines. ACT mark. Pretext type, black on cream.
+
+Operational reading (deck-side, second slide): Goods on Country is the demand-side layer for First Nations employment parity.
 
 ---
 
 ## §2. Executive summary
 
-Minderoo has spent a decade building the supply side of First Nations enterprise. Generation One. Dream Venture. Backing Black Business. The Indigenous Employment Index. First Australians Capital, which QBE doubled in 2024. The capital and the capability are now in the system at scale.
+Minderoo built the supply side. Generation One. Dream Venture. Backing Black Business. First Australians Capital. The basket is full. The hand that fills it is First Nations. The buyer who carries it home is not.
 
-The volume is not.
+Indigenous Procurement Policy reaches Commonwealth agencies. Mid-market buyers, the businesses that move the bulk of Australian trade, have no equivalent layer. The supply side waits for a demand side that has not arrived.
 
-Indigenous Procurement Policy reaches Commonwealth agencies. Mid-market buyers, the businesses that move the bulk of Australian trade, have no equivalent infrastructure. The supply side waits for a demand side that has not arrived.
-
-Goods on Country is that infrastructure.
+Goods on Country is that layer.
 
 We curate anchor buyers with verified spend. We vet and onboard First Nations suppliers. We facilitate contracts. We measure parity outcomes against the Indigenous Employment Index. We acquit, monthly, against Xero.
 
-In FY25-26 Goods has invoiced **$1.35 million** through real buyer contracts. **$621,000 has settled.** The open pipeline across 128 opportunities sits at **$16.3 million.** The operational layer that runs underneath this — Buyer Pipeline, Demand Register, Procurement Analyst, Funder Cadence agent, Invoice Drift Detector, Reconciler — is in production now, not on a roadmap.
+In FY25-26 Goods has invoiced **$1.35 million** through real buyer contracts. **$621,000 has settled.** The open pipeline across 128 opportunities sits at **$16.3 million.** The operational layer that runs underneath this, the Buyer Pipeline, Demand Register, Procurement Analyst, Funder Cadence agent, Invoice Drift Detector, Reconciler, is in production now, not on a roadmap.
 
-QBE Australia announced ACT in the 2026 Catalysing Impact cohort on 23 March. Stage 2 grants, AU$150,000 to AU$400,000, are explicitly designed to unlock matched investment. The 2025 cohort leveraged 2.7x.
+QBE Australia announced ACT in the 2026 Catalysing Impact cohort on 23 March. Stage 2 grants, AU$150,000 to AU$400,000, are designed to draw matched investment. QBE writes that the 2025 cohort drew 2.7x.
 
 We are inviting Minderoo to be the matched side. The dollar figure sets the stack.
 
@@ -134,7 +134,7 @@ The measurement frame is the Indigenous Employment Index. Quarterly parity repor
 - Dollar figure (above options).
 - Term.
 - Deliverables: 8 quarterly reports against IEI parity categories. Annual independent evaluation by Murawin or equivalent. Named anchor cohort and supplier cohort, with attainment thresholds.
-- Matched-side mechanic: precise stack with QBE's commitment, what unlocks at each tranche.
+- Matched-side mechanic: precise stack with QBE's commitment, what releases at each tranche.
 - Governance: ACT Pty Ltd board, First Nations advisory body, named reporters to Minderoo.
 
 **Ben + Nic to decide before 12 May.**
@@ -152,19 +152,19 @@ The measurement frame is the Indigenous Employment Index. Quarterly parity repor
 
 ## The envelope itself (draft email to Lucy, ~150 words)
 
-Subject: **Goods on Country — the demand-side piece**
+Subject: **Goods on Country, the demand-side piece**
 
 Lucy,
 
-Three weeks ago you read the JusticeHub envelope. Different market, same architecture: ACT curates a portfolio of anchors, the funder catalyses, we operationalise.
+The basket leaves country. The hand at market is paid. Goods is the route between.
 
-This is the second envelope.
+Three weeks ago you read the JusticeHub envelope. Different market, same architecture.
 
-Goods on Country is the demand-side infrastructure for First Nations employment parity. We curate anchor buyers, vet suppliers, facilitate contracts, measure parity. In FY25-26 Goods has invoiced $1.35 million through real trade, with $16.3 million in the open pipeline. The agent layer that runs underneath is in production.
+This is the second envelope. Goods on Country curates anchor buyers, vets First Nations suppliers, facilitates contracts, measures parity. In FY25-26 Goods has invoiced $1.35 million through real trade. The open pipeline sits at $16.3 million. The agent layer that runs underneath is in production.
 
-QBE has placed ACT in the 2026 Catalysing Impact cohort. The Stage 2 grant is designed to unlock matched investment. We are inviting Minderoo to be the matched side.
+QBE has placed ACT in the 2026 Catalysing Impact cohort. The Stage 2 grant is designed to draw matched investment. We are inviting Minderoo to be the matched side.
 
-Pack attached. Ben + Nic ready for a 30-minute conversation any time across the next three weeks.
+Pack attached. Ben + Nic ready for a 30-minute conversation any time in the next three weeks.
 
 Best,
 Ben Knight

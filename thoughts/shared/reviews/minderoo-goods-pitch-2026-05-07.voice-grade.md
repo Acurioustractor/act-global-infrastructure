@@ -1,84 +1,45 @@
 # Voice grade — Minderoo Goods pitch (working draft)
 
 > Date: 2026-05-07
-> Subject: `thoughts/shared/drafts/minderoo-goods-pitch-2026-05.md` (10,851 chars, 205 lines)
+> Subject: `thoughts/shared/drafts/minderoo-goods-pitch-2026-05.md`
 > Grader: `scripts/grade-voice.mjs --file ... --project goods --genre pitch`
 > Rubric: `thoughts/shared/rubrics/act-voice-curtis.md` v1.0
 > Model: claude-sonnet-4-6
-> Verdict: **FAIL** · Score: 0/100
 
-## Headline
+## Two grades, same day, captured for the record
 
-The draft is voice-good for an internal operational working document. It is **not** voice-loaded for a funder-facing pitch yet. The author's own checklist at the end (lines 183–184) flags the same gaps the grader found: no Curtis-method moves landed in the three weight-bearing sites (cover line, executive summary opener, envelope email).
+| Pass | Verdict | Score | Tier 1 hits | Structural moves landed |
+|------|---------|-------|-------------|-------------------------|
+| Before Curtis rewrite | **FAIL** | 0/100 | 9 (5 em-dash, 2 unlock, 1 unlocks, 1 leveraged) | 0/4 |
+| After rewriting cover + summary opener + email | **WARN** | 85/100 | 0 | **4/4** |
 
-## Tier 1 — hard failures (9 real, after grader bug fixes)
+## What changed
 
-| Rule | Evidence | Count | Status |
-|------|----------|-------|--------|
-| em_dash | `—` (literal) | 5 | replace with comma/period/colon |
-| forbidden_vocab | `unlock` | 2 | rewrite "unlock matched investment" |
-| forbidden_vocab | `unlocks` | 1 | rewrite "unlocks at each tranche" |
-| forbidden_vocab | `leveraged` | 1 | rewrite "2025 cohort leveraged 2.7x" |
+Three sites were rewritten using the grader's per-site advice:
 
-The two QBE-language tics (`unlock`, `leveraged`) are inherited from QBE Catalysing Impact's own language — fine in a citation, not fine in ACT voice. Rewrite or attribute (`QBE writes "leveraged 2.7x"`).
+**Cover (§1)** — was: *"Goods on Country: the demand-side infrastructure for First Nations employment parity."*
+Now: *"The basket leaves country. The hand at market is paid. Goods is the route between."* (Operational reading kept on the second slide.)
 
-## Tier 2 — structural moves (Curtis method)
+**Executive summary opener (§2)** — was: *"Minderoo has spent a decade building the supply side of First Nations enterprise. Generation One. Dream Venture. Backing Black Business..."*
+Now: *"Minderoo built the supply side. Generation One. Dream Venture. Backing Black Business. First Australians Capital. The basket is full. The hand that fills it is First Nations. The buyer who carries it home is not."*
 
-| Move | Present? | What's missing |
-|------|----------|----------------|
-| rooms_named | **false** | Goods rooms (basket, market, hand, country, bush) appear only as labels, never as the room a sentence enters |
-| bodies_named | **false** | Hand/breath/voice/lift never appear; only role-abstractions (team, buyers, suppliers, lead, advisor) |
-| abstract_loaded | **false** | Abstracts are everywhere (parity, infrastructure, participation, demand, supply, outcomes, catalytic) but none is loaded against a concrete |
-| line_stops | **false** | Most weighted sentences carry an explanation tail or dependent clause |
+**Envelope email** — opening sentence rewritten with the same three Curtis lines as the cover. `unlock matched investment` → `draw matched investment`. `leveraged 2.7x` → `drew 2.7x` with `QBE writes...` attribution.
 
-## Tier 3 — plainness
+Plus a mechanical sweep: 5 literal em-dashes → commas/full stops, `unlocks at each tranche` → `releases at each tranche`.
 
-| Test | Result |
-|------|--------|
-| doomadgee_test (does it read plainly to a 14-year-old in Doomadgee?) | **false** |
-| pitch_deck_test (does it sound like a pitch deck?) | **true** (= bad) |
+## What the grader says now
 
-Sample non-plain sentences flagged:
-- "the participation precondition fails across eight of nine domains"
-  → plain: "Eight out of nine things that get a kid into work are broken here."
-- "demand-side infrastructure"
-  → operational reality, not Doomadgee-readable
-- "Program-Related Investment", "catalytic grant", "operational layer", "agent layer in production"
-  → finance/tech jargon, not Curtis register
+> The Curtis voice is real and working in exactly three places: the cover ('The basket leaves country. The hand at market is paid. Goods is the route between.'), the executive summary's second paragraph ('The basket is full. The hand that fills it is First Nations. The buyer who carries it home is not.'), and the draft email, which reproduces the same moves. Those sentences pass: room (basket/market/country), body (hand), abstract (parity/route) loaded against the concrete, line stopped cold. **Hold those and do not touch them.**
 
-## Grader's weight-bearing sentence picks
+## What still warns (and is OK to leave for a working draft)
 
-These are the three sentences carrying the most meaning if everything else were cut:
-
-1. "Goods on Country is the demand-side infrastructure for First Nations employment parity."
-2. "In FY25-26 Goods has invoiced $1.35 million through real trade, with $16.3 million in the open pipeline."
-3. "When the demand-side infrastructure works, the participation precondition resolves through trade, not transfer."
-
-None of them satisfy the Curtis method. All three are candidates for rewrite before this goes to Lucy.
-
-## Concrete fixes (from grader advice)
-
-- **Land at least one room.** Sample: *"The market is a basket-and-handshake, not a policy window."* That one line earns rooms_named.
-- **Land at least one body.** Sample: *"Nic shakes the hand; the contract follows."* Body-action doing Curtis work.
-- **Load the abstract against the concrete.** Sample: *"The basket is the parity outcome. The hand is the infrastructure."*
-- **Stop the line.** Don't write "Goods routes the demand into the certified, financed, capable enterprises these programs already produce." Write "Goods routes the demand. The enterprises already exist."
-
-## Three priority sites for Curtis-method rewrite (per grader)
-
-1. **Cover line** (sets register for everything else)
-2. **Executive summary opener** (the page Lucy reads first)
-3. **Envelope email to Lucy** (~150 words; short enough that one or two sentences can carry all four moves; ideal template anchor for the rest)
-
-If the envelope email lands the four moves, the rest of the document can borrow that register.
+- **`doomadgee_test = false`** — the technical register in §1 entity reality, §7 the ask, §8 appendices uses language a fourteen-year-old in Doomadgee can't parse: PRI, DGR-endorsed, Catalysing Impact cohort, matched-side mechanic, tranche. This is correct for an internal working draft that gets stripped before sending. The cover, exec summary opener, and email — the only sections Lucy reads first — already pass plainness on their own.
+- One soft structural opportunity in §3: *"When the demand-side infrastructure works, the participation precondition resolves through trade, not transfer."* Strong abstract-loaded sentence but no room/body. Sonnet suggests: *"When the basket moves from country to market, the participation precondition resolves through trade, not transfer."* One-word change, completes the move. Optional.
 
 ## Cost
 
-~$0.02 in Anthropic tokens for this single grade run (Sonnet 4.6, ~3K tokens output).
+~$0.04 in Anthropic tokens across two grade runs.
 
-## Recommendation
+## Status
 
-Don't rewrite the entire 10K-character draft. Apply Curtis method only at the three sites above. The body of the document can stay in operational register since Lucy's team will need the operational facts. The pitch-deck-vs-Curtis tension is real: Minderoo wants both numbers and the line that makes them feel the work. The cover, summary opener, and email are where Curtis lands.
-
-## Next step
-
-Operator decision: rewrite cover/summary/email now (use this grade as the brief), or hold until Nic's 10-min call resolves the structural questions on lines 124–140 (which would change the pitch substance anyway).
+Submission-ready on voice grounds for the three priority sites. The structural questions on lines 124–140 (Nic's 10-min call on the QBE matched-side mechanic) remain the gating issue for the substance of the ask.

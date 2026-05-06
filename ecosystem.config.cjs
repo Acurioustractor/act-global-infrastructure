@@ -481,11 +481,10 @@ const cronScripts = [
     args: '--notify',
     cron_restart: '0 7 1 * *', // 1st of month at 7am AEST
   },
-  {
-    name: 'collections-autopilot',
-    script: 'scripts/chase-overdue-invoices.mjs',
-    cron_restart: '0 10 * * 1-5', // Weekdays 10am AEST (after Xero sync + morning briefing)
-  },
+  // collections-autopilot removed 2026-05-07: scripts/chase-overdue-invoices.mjs
+  // never existed on disk. PICC + Aleisha snooze/write-off flow now uses
+  // xero_invoices.metadata.do_not_chase_until as the snooze mechanism.
+  // When a real chase autopilot is built it should read that field.
   {
     name: 'financial-advisor',
     script: 'scripts/financial-advisor-agent.mjs',
