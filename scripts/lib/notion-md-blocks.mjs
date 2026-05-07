@@ -112,10 +112,22 @@ export function markdownToBlocks(md) {
 }
 
 export async function clearPage(notion, pageId, sleep = (ms) => new Promise((r) => setTimeout(r, ms))) {
+  // Refuse to operate on a page that's already in trash — protects against
+  // accidental restore-then-clear cycles.
+  const page = await notion.pages.retrieve({ page_id: pageId })
+  if (page.archived || page.in_trash) {
+    throw new Error(`clearPage refused: page ${pageId} is archived/in_trash. Restore it before clearing.`)
+  }
+
   let cursor
   do {
     const res = await notion.blocks.children.list({ block_id: pageId, start_cursor: cursor, page_size: 100 })
     for (const c of res.results) {
+      // CRITICAL: never delete child_page or child_database blocks. Calling
+      // blocks.delete on them archives the entire child page or database,
+      // which cascades through all their descendants. This is the bug pattern
+      // that took out 17 money-stack pages on 2026-05-06.
+      if (c.type === 'child_page' || c.type === 'child_database') continue
       try {
         await notion.blocks.delete({ block_id: c.id })
         await sleep(80)
