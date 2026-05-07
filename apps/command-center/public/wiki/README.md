@@ -2,6 +2,6 @@
 
 This folder is a generated legacy mirror of the canonical repo-root wiki at `/wiki`.
 
-- Generated: `2026-05-06T07:17:55.233Z`
+- Generated: `2026-05-07T19:17:43.824Z`
 - Use `node scripts/wiki-sync-command-center-snapshot.mjs` to regenerate it.
 - Do not edit these files as the source of truth.

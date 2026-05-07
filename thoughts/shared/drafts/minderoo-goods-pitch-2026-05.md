@@ -87,14 +87,14 @@ The team:
 
 (numbers refreshed 2026-05-06 from live Supabase + Xero feeds)
 
-| Signal | Current state |
-|---|---|
-| FY25-26 invoiced through Goods | **$1.35M** (30 invoices) |
-| FY25-26 received | **$621K** |
-| Open buyer pipeline | **$16.3M** across 128 opportunities |
-| Receipt match rate (audit-ready) | 95.3 per cent |
-| Agent layer in production | 5 agents, MiniMax-M2.7 backend, daily cadence |
-| Reporting cadence | Monday morning chain refreshes 12 dashboard builds in Notion before 9:30 AEST |
+| Signal | Current state | Source |
+|---|---|---|
+| FY25-26 invoiced through Goods | **$1.35M** (30 invoices) | Xero ACT-GD invoices, FY25-26 |
+| FY25-26 received | **$621K** | Xero ACT-GD reconciled payments, FY25-26 |
+| Open buyer pipeline | **$16.3M** across 128 opportunities | GHL pipeline tagged `goods` (snapshot 2026-05-06) |
+| Receipt match rate (audit-ready) | 95.3 per cent | `receipt_emails.status='uploaded'` over `xero_transactions` (audit-ready cohort, 2026-05-06) |
+| Agent layer in production | 5 agents, MiniMax-M2.7 backend, daily cadence | `apps/command-center/src/lib/agent-tools.ts`, daily PM2 cron |
+| Reporting cadence | Monday morning chain refreshes 12 dashboard builds in Notion before 9:30 AEST | `ecosystem.config.cjs` PM2 chain, Mon 6:00–9:30am AEST |
 
 Named anchor buyers and named suppliers belong in this section, in a one-page table. Pulling that list is a 30-minute exercise once Nic confirms which relationships he wants Lucy to see by name.
 
@@ -120,6 +120,8 @@ The measurement frame is the Indigenous Employment Index. Quarterly parity repor
 ---
 
 ## §7. The ask (blocked, pending Nic)
+
+> Note: every dollar figure in this section is a proposed option for the 12 May Ben + Nic call. None is a committed ask. Final figure is locked at the call and replaces the option list before the envelope ships.
 
 **Held back until 10-minute call with Nic resolves three structural questions:**
 

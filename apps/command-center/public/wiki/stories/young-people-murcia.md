@@ -6,7 +6,7 @@ projects: diagrama, justicehub
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/stories/young-people-murcia.md`.
-> Regenerated: `2026-05-06T07:17:55.233Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerated: `2026-05-07T19:17:43.824Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # Young People Murcia — Key Story
 
