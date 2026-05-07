@@ -102,7 +102,7 @@ Phase 0 (this plan):
 Phase 1 (after Phase 0 proves out):
 - [x] `scripts/synthesize-funder-alignment.mjs` (shipped 2026-05-07, PASS 100/100 against alignment-loop-synthesis rubric v0.1; Phase-2 self-grade wiring inherited via `scripts/lib/alignment-loop-grade.mjs`)
 - [x] `scripts/synthesize-project-truth-state.mjs` (shipped 2026-04-24, multi-repo extension 2026-04-25)
-- [ ] `scripts/synthesize-entity-migration-truth-state.mjs`
+- [x] `scripts/synthesize-entity-migration-truth-state.mjs` (shipped 2026-05-07, PASS 100/100; 52 checklist items × 39 outstanding receivables × 4 sources)
 - [ ] Script output schema stabilised so Phase 2 can diff
 
 Phase 2 (once Phase 1 is stable):
