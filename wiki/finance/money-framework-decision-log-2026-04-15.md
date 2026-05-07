@@ -69,33 +69,30 @@ The per-project R&D split for Nic, as a working hypothesis pending sign-off, mir
 
 ## Decision 4 — Per-project R&D activity register reconciliation
 
-The three R&D activity registers in the pack at `thoughts/shared/rd-pack-fy26/` claim the following total amounts:
+**Reconciliation status (as of 2026-05-07): Option A applied across all four registers.**
 
-| Register | Claim ($) | Comprises |
-|----------|-----------|-----------|
-| ACT-CG (CivicGraph entity resolution) | $58,000 | Ben 22% × $200K + Anthropic/Supabase $14K |
-| ACT-EL (Empathy Ledger consent + multi-tenancy) | $126,000 | Nic 15% × $200K + Ben 35% × $200K + SaaS/storage $26K |
-| ACT-GD (Goods buyer-supplier matching) | $184,500 | Nic 25% × $200K + Ben 10% × $200K + contractor $42K + cloud/LLM $72.5K |
-| **Sum across three registers** | **$368,500** | |
-
-**Reconciliation status (as of 2026-05-07): Option A applied.**
-
-Each activity register's salary table has been updated to match Decision 2's project-mix and Decision 3's split, on the correct personnel-cost bases:
+The four R&D activity registers in the pack at `thoughts/shared/rd-pack-fy26/` have all had their salary tables updated to match Decision 2's project-mix (Ben) and Decision 3's split (Nic), on the correct personnel-cost bases:
 - Ben Knight: $250K Knight Photography invoicing × 95% R&D allocation = $237,500 R&D-eligible (per Decision 1)
 - Nicholas Marchesi: $200K retrospective director-salary characterisation × 40% R&D allocation = $80,000 R&D-eligible (per Decision 1)
 
-**Per-project register R&D-eligible totals (post-update)**:
+**Per-project register R&D-eligible totals (post-update, four registers)**:
 
-| Register | Ben portion | Nic portion | Vendor/SaaS | Total |
-|----------|-------------|-------------|-------------|-------|
+| Register | Ben portion | Nic portion | Vendor / SaaS / Other | Total |
+|----------|-------------|-------------|------------------------|-------|
 | ACT-CG | $47,500 (≈20% × $250K × 95%, subset of ACT-IN bucket) | — | $14,000 | $61,500 |
 | ACT-EL | $23,750 (10% × $250K × 95%) | $30,000 (15% × $200K) | $26,000 | $79,750 |
 | ACT-GD | $23,750 (10% × $250K × 95%) | $50,000 (25% × $200K) | $114,500 | $188,250 |
-| **Sum across three registers** | **$95,000** | **$80,000** | **$154,500** | **$329,500** |
+| ACT-JH | $23,750 (10% × $250K × 95%) | — (Nic at strategy level only per Decision 3) | $797 (DB-attested ACT-JH bills + txns FY26) | $24,547 |
+| **Sum across four registers** | **$118,750** | **$80,000** | **$155,297** | **$354,047** |
 
-**Coverage of total R&D claim**: The three registers cover ~$329,500 of the ~$614K total R&D-eligible spend identified in the founder-pay thesis (~52%). The remaining ~$284K is largely ACT-IN core activities (agent system, ALMA, governed proof, platform infrastructure) not yet split into discrete activity registers, plus SaaS/API consumption attributable to those activities. These will be added to the pack as additional core activity registers before the lodgement window closes (30 Apr 2027).
+Sum-check (Ben): $47.5K + $23.75K + $23.75K + $23.75K = $118.75K (50% of his $237.5K R&D-eligible total; remaining 50% covers ACT-IN-other / ACT-DO / ACT-CORE per Decision 2).
+Sum-check (Nic): $30K + $50K = $80K - exactly matches Decision 3 R&D total.
+
+**Coverage of total R&D claim**: The four registers cover ~$354,047 of the ~$614K total R&D-eligible spend identified in the founder-pay thesis (~58%). The remaining ~$260K is ACT-IN core activities (agent system, ALMA, governed proof, platform infrastructure) not yet split into discrete activity registers, plus ACT-DO and ACT-CORE founder time, plus SaaS/API consumption attributable to those buckets. These will be added to the pack as additional core activity registers if material before the lodgement window closes (30 Apr 2027).
 
 **Open reconciliation item**: Ben's portion of ACT-CG (~$47,500) is an estimate of what fraction of the ACT-IN bucket (60% × $250K × 95% = $142,500) is attributable specifically to the entity-resolution work. The remaining ~$95K of Ben's ACT-IN time covers other R&D activities not yet split out. Standard Ledger to confirm the appropriate split before lodgement.
+
+**Historical note**: An earlier draft of this table (pre-2026-05-07) used a stale three-register sum of $329,500 with figures based on a $200K direct-salary basis for Ben rather than the canonical Knight Photography invoicing basis. Those figures are now fully retired across the pack (sidecars, salary CSV, README) and replaced with the four-register $354,047 total.
 
 ## Decision 5 — Aggregated turnover and refundable threshold
 

@@ -17,7 +17,22 @@ purpose: Contemporaneous record of R&D activity per Australian R&DTI rule on con
 | ACT-EL (Empathy Ledger) | 10+ | 2025-12-30 | 2026-05-07 |
 | ACT-CG (CivicGraph) | 5+ | 2026-02-13 | 2026-05-07 |
 | ACT-GD (Goods on Country) | 15+ | 2026-02-05 | 2026-05-07 |
+| ACT-JH (JusticeHub) | 601 (separate repo) + 4 cross-EL | see ACT-JH section | 2026-05-07 |
 | Cross-project R&D infrastructure | 8 | 2026-02-13 | 2026-05-07 |
+
+## Classification key — what's claimed vs context
+
+The tables below mix three commit categories. To pre-empt rubric rule 1.8 (excluded activity types) and AusIndustry/ATO scrutiny, the classification used in the "Activity register section" column is:
+
+| Tag in column | Category | R&DTI status |
+|---------------|----------|--------------|
+| `core hypothesis`, `core actual outcome`, register-section anchor (`ACT-XX-S1`, `S2`, etc.) | R&D core | **CLAIMED** under s355-25 (core R&D activity) |
+| `linked supporting activity`, `dedup infrastructure`, `production scheduling`, `tagging`, `receipt linkage` | R&D supporting | **CLAIMED** under s355-30 (directly related supporting activity) |
+| `narrative`, `narrative supporting`, `strategic`, `strategic precursor`, `downstream artefact`, `downstream consumer`, `naming canon`, `accounting`, `tagging correction` | Context (general business development) | **NOT CLAIMED** — present here for evidence completeness only; would fail rule 1.8 if claimed |
+
+The "Context (NOT CLAIMED)" rows are kept in this audit trail to give a reviewer a complete contemporaneous record of activity in the period. Their presence does not imply they are R&D-eligible. Examples: the Minderoo pitch (`7adb04f`), the Goods CEO operating plan (`9f86f55`), and the "On Country Goods" article draft (`274bb09`) are funder-facing or strategy documents, not core/supporting R&D.
+
+If a future activity register tries to claim any commit currently tagged Context, the classification must move to core or supporting first, with a written justification against s355-25 / s355-30.
 
 ## ACT-EL — Empathy Ledger
 
@@ -29,12 +44,12 @@ purpose: Contemporaneous record of R&D activity per Australian R&DTI rule on con
 | e3a0728 | 2026-04-18 | feat(wiki): EL v2 → wiki living library pipeline + OCAP governance | core hypothesis + ACT-EL-S4 |
 | 2ea8bcc | 2026-04-14 | docs(wiki): The Human Layer — EL v2 integration for art project | ACT-EL-S4 |
 | d435431 | 2026-04-14 | docs(wiki): Empathy Ledger Storytelling Residency | ACT-EL-S4 |
-| 5e85986 | 2026-04-14 | docs: The Third Reality — full article draft for Empathy Ledger | narrative supporting |
+| 5e85986 | 2026-04-14 | docs: The Third Reality — full article draft for Empathy Ledger | narrative supporting **(NOT CLAIMED)** |
 | 93e06e8 | 2026-04-20 | docs(minderoo): media plan — images, video, consent ribbon protocol | ACT-EL core (consent capture) |
 | 4fff285 | 2026-04-20 | feat(dashboard): Consent in action — Indigenous data sovereignty as lived practice | ACT-EL-S5 |
 | 4856e13 | 2026-04-20 | fix(consent): replace placeholders with live EL v2 data | ACT-EL-S6 |
-| 29e33c1 | 2026-04-20 | feat(pitch): Empathy Ledger storyteller-posts widget | downstream consumer |
-| 67e288d | 2026-04-20 | feat(pitch): searchable EL v2 gallery modal replaces per-slot dropdown | downstream consumer |
+| 29e33c1 | 2026-04-20 | feat(pitch): Empathy Ledger storyteller-posts widget | downstream consumer **(NOT CLAIMED)** |
+| 67e288d | 2026-04-20 | feat(pitch): searchable EL v2 gallery modal replaces per-slot dropdown | downstream consumer **(NOT CLAIMED)** |
 | c880e70 | 2026-04-20 | feat(gallery): expand from story list → full media pool (540 items) | ACT-EL core (multi-tenancy) |
 | fc38b2a | 2026-04-20 | fix(gallery): paginate EL v2 pull → 3,018 items (was 540) | ACT-EL core (multi-tenancy) |
 
@@ -43,9 +58,9 @@ purpose: Contemporaneous record of R&D activity per Australian R&DTI rule on con
 | Commit | Date | Description | Activity register section |
 |--------|------|-------------|----------------------------|
 | 3a16982 | 2026-02-13 | feat: Notion bidirectional sync, entity resolution, and analysis scripts | core hypothesis (resolver origin) |
-| 37f8dea | 2026-04-14 | docs(narrative): CivicGraph LinkedIn v2 — human voice, AI kills stripped | narrative |
-| d14547a | 2026-04-14 | docs(narrative): CivicGraph agitation post — 3 options for LinkedIn | narrative |
-| fd8aa9f | 2026-04-12 | docs(wiki): CivicGraph UK market entry — deep research synthesis | strategic |
+| 37f8dea | 2026-04-14 | docs(narrative): CivicGraph LinkedIn v2 — human voice, AI kills stripped | narrative **(NOT CLAIMED)** |
+| d14547a | 2026-04-14 | docs(narrative): CivicGraph agitation post — 3 options for LinkedIn | narrative **(NOT CLAIMED)** |
+| fd8aa9f | 2026-04-12 | docs(wiki): CivicGraph UK market entry — deep research synthesis | strategic **(NOT CLAIMED)** |
 | c910fad | 2026-04-20 | feat(contacts): three-tier contact enrichment workflow | ACT-CG-S1 + ACT-CG-S2 + ACT-CG-S3 |
 | 29d48be | 2026-04-20 | fix(contacts): ACNC auto-download unreliable — fallback to manual + --csv-path | ACT-CG-S1 |
 | cbc67fe | 2026-04-20 | feat(enrichment): Tier 1-3 contact pipeline — 660 emails + 752 phones added | core actual outcome (interim) |
@@ -55,13 +70,13 @@ purpose: Contemporaneous record of R&D activity per Australian R&DTI rule on con
 
 | Commit | Date | Description | Activity register section |
 |--------|------|-------------|----------------------------|
-| 274bb09 | 2026-02-05 | writing: new draft "On Country Goods - Community Manufacturing Model" | strategic precursor |
+| 274bb09 | 2026-02-05 | writing: new draft "On Country Goods - Community Manufacturing Model" | strategic precursor **(NOT CLAIMED)** |
 | 36c23b7 | 2026-02-06 | feat: Goods dashboard — org display, inline editing, bidirectional GHL sync | ACT-GD-S4 |
-| 040625d | 2026-04-22 | rename(wiki): goods-on-country.md → goods.md + slug frontmatter | naming canon |
-| fe67e53 | 2026-04-22 | config(goods): rename canonical_slug | naming canon |
-| 40663a8 | 2026-04-23 | fix(goods): propagate slug rename across surfaces | naming canon |
-| 9f86f55 | 2026-04-23 | docs(goods): CEO 6-month operating plan + triage drafts | strategic |
-| 546ddaf | 2026-04-23 | fix(goods): correct stale $36K Tennant Creek receivable | accounting |
+| 040625d | 2026-04-22 | rename(wiki): goods-on-country.md → goods.md + slug frontmatter | naming canon **(NOT CLAIMED)** |
+| fe67e53 | 2026-04-22 | config(goods): rename canonical_slug | naming canon **(NOT CLAIMED)** |
+| 40663a8 | 2026-04-23 | fix(goods): propagate slug rename across surfaces | naming canon **(NOT CLAIMED)** |
+| 9f86f55 | 2026-04-23 | docs(goods): CEO 6-month operating plan + triage drafts | strategic **(NOT CLAIMED)** |
+| 546ddaf | 2026-04-23 | fix(goods): correct stale $36K Tennant Creek receivable | accounting **(NOT CLAIMED)** |
 | 5610fe3 | 2026-04-24 | feat(goods): A1+A2 agent stubs + May CEO letter + Centrecorp forensics | ACT-GD-S2 + ACT-GD-S3 (core agent stubs) |
 | 0db21ce | 2026-04-24 | feat(goods): CRM upgrade — pipeline kanban UI + Xero↔GHL reconciler | ACT-GD-S4 |
 | b6ca767 | 2026-04-24 | fix(goods-crm): make seed + migrate production-ready after live run | ACT-GD-S4 |
@@ -71,12 +86,32 @@ purpose: Contemporaneous record of R&D activity per Australian R&DTI rule on con
 | 52c9f8b | 2026-04-24 | feat(goods): Option A — funder matcher + reconciler fix + opp drawer | ACT-GD-S4 |
 | daa4b9f | 2026-04-24 | feat(goods): duplicates-by-company API + stub rename push tooling | dedup infrastructure |
 | 5fcb5a9 | 2026-05-06 | fix(goods): match communications_history schema | ACT-GD-S4 |
-| 7adb04f | 2026-05-06 | docs(minderoo): Goods envelope working draft, voice-loaded, evidence-current | downstream artefact (funder pitch) |
-| bf85ef4 | 2026-04-29 | fix(finance): Defy Design is Goods + Action, not Art (+ DB rows) | tagging correction |
+| 7adb04f | 2026-05-06 | docs(minderoo): Goods envelope working draft, voice-loaded, evidence-current | downstream artefact (funder pitch) **(NOT CLAIMED)** |
+| bf85ef4 | 2026-04-29 | fix(finance): Defy Design is Goods + Action, not Art (+ DB rows) | tagging correction **(NOT CLAIMED)** |
+
+## ACT-JH — JusticeHub
+
+The JusticeHub codebase lives in a separate repo (`/Users/benknight/Code/JusticeHub`) and is not part of the `Acurioustractor/act-global-infrastructure` git history. Per the ACT-JH activity register, **601 FY26 commits** in the JusticeHub repo cover the federated procurement-code mapping work; for a reviewer to reproduce that count, run from the JusticeHub repo:
+
+```
+git log --since="2025-07-01" --until="2026-06-30" --oneline | wc -l
+```
+
+Cross-EL integration commits in this repo (act-global-infrastructure) that touch the JusticeHub × Empathy Ledger consent boundary:
+
+| Commit | Date | Description | Activity register section |
+|--------|------|-------------|----------------------------|
+| 6329d53 | 2026-04-21 | feat(jh): consent-boundary integration with EL v2 | ACT-JH core (consent layer) |
+| 6eb2c93 | 2026-04-22 | feat(jh): procurement-code mapping schema + 3 seed mappings | ACT-JH core (schema) |
+| 8cb8345 | 2026-04-24 | feat(jh): federated read-path for service-catalog query | ACT-JH-S2 |
+| 1da8f83 | 2026-04-29 | feat(jh): IPP/justice-reinvestment line-item harvester | ACT-JH-S3 |
+| b592bc4 | 2026-05-07 | feat(rd): ACT-JH JusticeHub R&D activity register | core (register collation) |
+
+The 100-row procurement-code gold set referenced in the ACT-JH register (rule 2.3 warning) is to be hand-labelled from the JusticeHub repo's audit logs and added here when assembled.
 
 ## Cross-project R&D infrastructure
 
-These commits represent infrastructure that supports all three R&D activity registers (tagging, reconciliation, evidence collection, grader infrastructure).
+These commits represent infrastructure that supports all four R&D activity registers (tagging, reconciliation, evidence collection, grader infrastructure).
 
 | Commit | Date | Description | Supports |
 |--------|------|-------------|----------|
