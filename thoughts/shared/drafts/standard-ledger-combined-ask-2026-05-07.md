@@ -1,15 +1,15 @@
 # Standard Ledger combined ask - Aleisha write-off + R&D decision-log sign-off
 
-> Date drafted: 2026-05-07
-> To send to: Standard Ledger (primary contact - confirm name)
-> Round-trip closes: Aleisha bad-debt $12,150 (~$4–4.5K tax saving) + R&D pack rubric rule 1.5 (personnel basis Unverified blocker)
-> Format: single email, two asks, attachments referenced inline
+> Date drafted: 2026-05-07 (tightened pass: 2026-05-07)
+> To send to: Standard Ledger (primary contact - confirm name before sending)
+> Round-trip closes: Aleisha bad-debt $12,150 (~$4–4.5K tax saving) + R&D pack rule 1.5 (personnel basis Unverified blocker)
+> Format: single email, two asks, four attachments listed at end
 
 ---
 
 ## Subject
 
-FY26 - two requests in one round-trip - Aleisha bad-debt write-off ($12,150) + Money Framework decision-log sign-off (R&D personnel basis)
+FY26 sign-off: Aleisha bad-debt write-off ($12,150) + R&D decision log
 
 ## Body
 
@@ -19,23 +19,23 @@ Two things to land before lodgement, packaged together so we can resolve in one 
 
 ### 1. Aleisha J Keating bad-debt write-off - FY26
 
-Want to write off Aleisha's outstanding ledger as bad debt in FY26: 27 weekly $450 invoices from 2025-07-04 to 2026-01-02, total **$12,150**, all on Nic's sole trader (ABN 21 591 780 066). Last invoice 124 days ago, no payments received across the lot. Treating it as genuinely irrecoverable.
+Want to write off Aleisha's outstanding ledger as bad debt in FY26: 27 weekly $450 invoices from 2025-07-04 to 2026-01-02, total **$12,150**, all on Nic's sole trader (ABN 21 591 780 066). Last invoice 124 days ago, $0 received across the lot.
 
 Three questions before I action it:
 
 1. **Account code.** Which expense account should the write-off post against? Bad Debts 6800, or another?
 2. **Tax-type discrepancy.** First 13 invoices are coded `EXEMPTOUTPUT`; the next 14 are `INPUTTAXED`. Both are GST-free, so write-off is income-tax-deduction only with no BAS impact. Worth amending the codes before write-off, or leave as-is?
-3. **Method preference.** Xero UI per-invoice (27 clicks) or one API batch via my scripts? I have the API path ready and can run it in 5 minutes once you sign off the account code.
+3. **Method.** Xero UI per-invoice (27 clicks), or one API run via a script I've already built and dry-run-tested? Script takes ~60 seconds end-to-end once you confirm the account code.
 
 Estimated FY26 income tax deduction: $12,150. Saving at Nic's marginal rate: ~$4,000–$4,500. Once actioned I'll post a contact-level file note in Xero on Aleisha's record with date and irrecoverability reason.
 
-Full invoice list and tax-type breakdown attached: `thoughts/shared/handoffs/2026-05-07-aleisha-writeoff-and-picc-snooze.md`.
+Full invoice list and tax-type breakdown attached.
 
 ### 2. Money Framework decision log - FY26 R&D personnel basis
 
 The FY25-26 R&D Tax Incentive evidence pack is assembling toward Jul 2026 lodgement (Path C, claimed via A Curious Tractor Pty Ltd ACN 697 347 676). The pack has four core activity registers (ACT-CG, ACT-EL, ACT-GD, ACT-JH) totalling $354,047 in claim. The pack scores WARN/62 on the rubric. The single biggest substance gap on the personnel side is rule 1.5: **salary allocation marked Unverified pending your sign-off**.
 
-I'd like you to countersign the decision log so the R&D figures move from `Unverified` to `Verified-by-accountant`. The log is at `thoughts/shared/rd-pack-fy26/money-framework-decision-log-2026-04-15.md`. Five decisions, four needing your eye:
+I'd like you to countersign the decision log so the R&D figures move from `Unverified` to `Verified-by-accountant`. The log is attached. Five decisions, all needing your eye:
 
 | # | Decision | What I'm asking you to confirm |
 |---|----------|--------------------------------|
@@ -52,7 +52,7 @@ The log is light reading - about 5 minutes. Sign-off can be a one-line reply nam
 ### Round-trip impact
 
 - Aleisha: ~$4,000–4,500 income tax saving in FY26
-- Decision log: closes R&D pack rubric rule 1.5, ~$130–154K refund estimate becomes claimable once AusIndustry registration lands Jul 2026
+- Decision log: closes R&D pack rule 1.5; ~$130–154K refund (four-register range) becomes claimable on FY26 R&DTI lodgement, window Jul 2026 to 30 Apr 2027
 
 Cheers,
 Ben
