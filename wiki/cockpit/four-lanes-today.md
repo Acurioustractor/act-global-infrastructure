@@ -29,16 +29,16 @@ Q3 FY26 (2026-01-01 to 2026-03-31):
 
 - **To Us**: $0 (0%)
 - **To Down**: $461 (0%)
-- **To Grow**: $114,724 (100%)
+- **To Grow**: $112,933 (100%)
 - **To Others**: $0 (0%)
 
-Revenue last 90 days: $143,412
+Revenue last 90 days: $143,321
 
 ## LCAA by spend (last 90 days)
 
-- **Listen**: $33,662 (29%)
+- **Listen**: $31,870 (28%)
 - **Curiosity**: $7,668 (7%)
-- **Action**: $64,551 (56%)
+- **Action**: $64,551 (57%)
 - **Art**: $9,303 (8%)
 
 ## Soul check
