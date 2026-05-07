@@ -84,60 +84,81 @@ const cronScripts = [
     args: '',  // auto-detects current quarter
     cron_restart: '0 8 * * 1', // Weekly Monday 8am AEST — reconciliation report + Telegram
   },
+  // CRON ORDER (2026-05-08 reshuffle, see thoughts/shared/reviews/notion-finance-dashboard-2026-05-08.md):
+  //   8:15  dashboard-hub      — full-page replace, writes nav + Right now / Quick actions
+  //   8:18  daily-pulse        — adds "📡 Today's Pulse" section at top
+  //   8:20  opportunities-db
+  //   8:25  pile-pages
+  //   8:30  cash-forecast
+  //   8:35  kpis
+  //   8:40  budget-actual
+  //   8:45  cash-scenarios
+  //   8:50  money-metrics-snapshot
+  //   8:55  planning-rhythm
+  //   9:00  entity-hub
+  //   9:10  money-framework    — section-replace (LAST: appends panels at bottom)
+  // The ordering matters: dashboard-hub does full-page replace, money-framework
+  // does marker-based section-replace. If money-framework ran first, the hub
+  // would wipe its panels. With this order both coexist on moneyFramework.
   {
-    name: 'money-framework-sync',
-    script: 'scripts/sync-money-framework-to-notion.mjs',
-    cron_restart: '15 8 * * 1', // Weekly Monday 8:15am AEST — refresh ACT Money Framework page in Notion (after weekly-reconciliation)
+    name: 'dashboard-hub-sync',
+    script: 'scripts/sync-money-dashboard-hub.mjs',
+    cron_restart: '15 8 * * 1', // Weekly Monday 8:15am AEST — Main dashboard hub (FIRST: full-page replace, writes nav)
+  },
+  {
+    name: 'daily-pulse-sync',
+    script: 'scripts/sync-daily-pulse-to-notion.mjs',
+    cron_restart: '13 8 * * *', // Daily 8:13am AEST — "Today's Pulse" at top of moneyFramework (bank, runway, today's actions)
   },
   {
     name: 'opportunities-db-sync',
     script: 'scripts/sync-opportunities-to-notion-db.mjs',
-    cron_restart: '30 8 * * 1', // Weekly Monday 8:30am AEST — sync ACT Opportunities database (GHL + Xero + foundation grants)
+    cron_restart: '20 8 * * 1', // Weekly Monday 8:20am AEST — sync ACT Opportunities database (GHL + Xero + foundation grants)
   },
   {
     name: 'pile-pages-sync',
     script: 'scripts/sync-pile-pages-to-notion.mjs',
-    cron_restart: '45 8 * * 1', // Weekly Monday 8:45am AEST — refresh per-pile strategic pages (Voice / Flow / Ground / Grants)
+    cron_restart: '25 8 * * 1', // Weekly Monday 8:25am AEST — refresh per-pile strategic pages (Voice / Flow / Ground / Grants)
   },
   {
     name: 'cash-forecast-sync',
     script: 'scripts/sync-cash-forecast-to-notion.mjs',
-    cron_restart: '50 8 * * 1', // Weekly Monday 8:50am AEST — 13-week rolling cash forecast (Build 1)
+    cron_restart: '30 8 * * 1', // Weekly Monday 8:30am AEST — 13-week rolling cash forecast (Build 1)
   },
   {
     name: 'kpis-sync',
     script: 'scripts/sync-kpis-to-notion.mjs',
-    cron_restart: '55 8 * * 1', // Weekly Monday 8:55am AEST — KPIs & Concentration Risk (Build 2)
+    cron_restart: '35 8 * * 1', // Weekly Monday 8:35am AEST — KPIs & Concentration Risk (Build 2)
   },
   {
     name: 'budget-actual-sync',
     script: 'scripts/sync-budget-vs-actual-to-notion.mjs',
-    cron_restart: '0 9 * * 1', // Weekly Monday 9:00am AEST — Budget vs Actual per project (Build 3)
+    cron_restart: '40 8 * * 1', // Weekly Monday 8:40am AEST — Budget vs Actual per project (Build 3)
   },
   {
     name: 'cash-scenarios-sync',
     script: 'scripts/sync-cash-scenarios-to-notion.mjs',
-    cron_restart: '5 9 * * 1', // Weekly Monday 9:05am AEST — Cash scenarios 12-month (Build 4)
-  },
-  {
-    name: 'dashboard-hub-sync',
-    script: 'scripts/sync-money-dashboard-hub.mjs',
-    cron_restart: '10 9 * * 1', // Weekly Monday 9:10am AEST — Main dashboard hub (last in chain, after all sub-pages refresh)
+    cron_restart: '45 8 * * 1', // Weekly Monday 8:45am AEST — Cash scenarios 12-month (Build 4)
   },
   {
     name: 'money-metrics-snapshot',
     script: 'scripts/sync-money-metrics-to-notion.mjs',
-    cron_restart: '15 9 * * 1', // Weekly Monday 9:15am AEST — Append weekly metrics snapshot (powers Dashboard view charts)
+    cron_restart: '50 8 * * 1', // Weekly Monday 8:50am AEST — Append weekly metrics snapshot (powers Dashboard view charts)
   },
   {
     name: 'planning-rhythm-sync',
     script: 'scripts/sync-planning-rhythm-to-notion.mjs',
-    cron_restart: '20 9 * * 1', // Weekly Monday 9:20am AEST — Multi-period planning page (weekly/monthly/half/year/5-year)
+    cron_restart: '55 8 * * 1', // Weekly Monday 8:55am AEST — Multi-period planning page (weekly/monthly/half/year/5-year)
   },
   {
     name: 'entity-hub-sync',
     script: 'scripts/sync-entity-hub-to-notion.mjs',
-    cron_restart: '25 9 * * 1', // Weekly Monday 9:25am AEST — Master Entity Hub (orgs across Xero/GHL/Foundations)
+    cron_restart: '0 9 * * 1', // Weekly Monday 9:00am AEST — Master Entity Hub (orgs across Xero/GHL/Foundations)
+  },
+  {
+    name: 'money-framework-sync',
+    script: 'scripts/sync-money-framework-to-notion.mjs',
+    cron_restart: '10 9 * * 1', // Weekly Monday 9:10am AEST — refresh ACT Money Framework panels (LAST: section-replace appends below hub nav)
   },
   {
     name: 'daily-money-briefing',
@@ -344,11 +365,15 @@ const cronScripts = [
     script: 'scripts/weekly-digest.mjs',
     cron_restart: '0 18 * * 0', // Sunday 6pm AEST
   },
-  {
-    name: 'push-highlights-notion',
-    script: 'scripts/push-highlights-to-notion.mjs',
-    cron_restart: '*/30 * * * *', // Every 30 minutes
-  },
+  // push-highlights-notion DISABLED 2026-05-08: depends on liveAlerts page key
+  // which was retired with 17 other stale operational dashboard keys (see
+  // thoughts/shared/reviews/notion-finance-dashboard-2026-05-08.md). Re-enable
+  // by re-creating the Live Alerts DB in Notion and re-adding the key.
+  // {
+  //   name: 'push-highlights-notion',
+  //   script: 'scripts/push-highlights-to-notion.mjs',
+  //   cron_restart: '*/30 * * * *',
+  // },
   // Removed 2026-05-06 — target weeklyReports DB (2d6ebcf9...) renders broken
   // ('Something went wrong / Try again' in Notion UI). Re-add after the page
   // is repaired or recreated and config/notion-database-ids.json:weeklyReports

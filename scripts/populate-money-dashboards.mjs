@@ -36,6 +36,14 @@ const SKIP = SKIP_FLAG >= 0 ? new Set(argv[SKIP_FLAG + 1].split(',').map((s) => 
 
 // Order matches ecosystem.config.cjs cron schedule. Each step is one PM2
 // app from the money-stack chain.
+//
+// IMPORTANT (2026-05-08): dashboard-hub MUST run BEFORE money-framework.
+// dashboard-hub does full-page replace on moneyFramework (wiping its body),
+// then writes the nav cards / Right now / Quick actions / How to use.
+// money-framework then uses section-replace via the H2 marker — when no
+// marker is found it appends a new section at the end. This way the page
+// ends up with: hub nav at top, framework live panels at bottom. If the
+// order were reversed, dashboard-hub would wipe the framework section.
 const CHAIN = [
   // Pre-sync prep (cleanup + payment sync + audits)
   { name: 'ghl-cleanup', script: 'cleanup-stale-ghl-opps.mjs', args: ['--apply'] },
@@ -45,17 +53,23 @@ const CHAIN = [
   { name: 'money-out-audit', script: 'audit-money-out-alignment.mjs' },
   { name: 'money-alignment-notion', script: 'sync-money-alignment-to-notion.mjs' },
   // The dashboard refresh chain (fresh data → Notion pages)
-  { name: 'money-framework', script: 'sync-money-framework-to-notion.mjs' },
+  // dashboard-hub establishes the canvas (full-page replace, writes nav).
+  { name: 'dashboard-hub', script: 'sync-money-dashboard-hub.mjs' },
+  // daily-pulse runs after dashboard-hub, before framework. It writes today's
+  // pulse (bank, runway, top overdue, today's actions) at the top of moneyFramework.
+  { name: 'daily-pulse', script: 'sync-daily-pulse-to-notion.mjs' },
   { name: 'opportunities-db', script: 'sync-opportunities-to-notion-db.mjs' },
   { name: 'pile-pages', script: 'sync-pile-pages-to-notion.mjs' },
   { name: 'cash-forecast', script: 'sync-cash-forecast-to-notion.mjs' },
   { name: 'kpis', script: 'sync-kpis-to-notion.mjs' },
   { name: 'budget-actual', script: 'sync-budget-vs-actual-to-notion.mjs' },
   { name: 'cash-scenarios', script: 'sync-cash-scenarios-to-notion.mjs' },
-  { name: 'dashboard-hub', script: 'sync-money-dashboard-hub.mjs' },
   { name: 'money-metrics', script: 'sync-money-metrics-to-notion.mjs' },
   { name: 'planning-rhythm', script: 'sync-planning-rhythm-to-notion.mjs' },
   { name: 'entity-hub', script: 'sync-entity-hub-to-notion.mjs' },
+  // money-framework uses section-replace and runs LAST so its content
+  // appears at the bottom of moneyFramework, below the hub nav.
+  { name: 'money-framework', script: 'sync-money-framework-to-notion.mjs' },
 ]
 
 function runStep(step) {

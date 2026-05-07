@@ -477,54 +477,10 @@ async function fetchFY26Totals() {
 // Section builders
 // ============================================
 
-function buildNav() {
-  // Front-door nav block. Links to the daily/weekly/year surfaces from the
-  // canonical hub. Update reading order: open dashboards top-down each morning,
-  // capture in Money Sync, weekly digest on Friday, year plan when zooming out.
-  const link = (id) => id ? notionUrl(id) : null;
-  const ids = notionDbIds;
-  const blocks = [];
-  blocks.push(h3('\u{1F9ED} How to use this dashboard'));
-  blocks.push(callout([
-    rt('Open daily numbers top-down. Capture questions in Money Sync. Read the Friday Digest weekly. Open the FY26-27 plan when stepping back. Multi-period view (Planning Rhythm) for week/month/half/year/5-year navigation.', { italic: true }),
-  ], '\u{1F5DD}\u{FE0F}', 'gray_background'));
-  blocks.push(bullet([
-    rt('\u{1F305}  Daily — money-in / money-out: ', { bold: true }),
-    rt('Money-In Alignment', link(ids.moneyInAlignment) ? { link: link(ids.moneyInAlignment), color: 'blue' } : {}),
-    rt(' · '),
-    rt('Money-Out Alignment', link(ids.moneyOutAlignment) ? { link: link(ids.moneyOutAlignment), color: 'blue' } : {}),
-  ]));
-  blocks.push(bullet([
-    rt('\u{1F4C5}  Weekly review (Fri): ', { bold: true }),
-    rt('Friday Money Digest', link(ids.weeklyDigest) ? { link: link(ids.weeklyDigest), color: 'blue' } : {}),
-  ]));
-  blocks.push(bullet([
-    rt('\u{1F9ED}  Multi-period (week / month / half / year / 5y): ', { bold: true }),
-    rt('Planning Rhythm', link(ids.planningRhythm) ? { link: link(ids.planningRhythm), color: 'blue' } : {}),
-  ]));
-  blocks.push(bullet([
-    rt('\u{1F3AF}  Year plan (FY26-27): ', { bold: true }),
-    rt('FY26-27 Money Philosophy + Plan', link(ids.cy26StrategyPlan) ? { link: link(ids.cy26StrategyPlan), color: 'blue' } : {}),
-  ]));
-  blocks.push(bullet([
-    rt('\u{1F4AC}  Capture (questions, decisions, ideas): ', { bold: true }),
-    rt('Money Sync', link(ids.moneySyncPage) ? { link: link(ids.moneySyncPage), color: 'blue' } : {}),
-  ]));
-  blocks.push(bullet([
-    rt('\u{1F52C}  R&D pack (FY26): ', { bold: true }),
-    rt('thoughts/shared/rd-pack-fy26/', { code: true }),
-    rt(' · grader: '),
-    rt('node scripts/grade-pack.mjs --rubric thoughts/shared/rubrics/rd-evidence-pack.md --pack thoughts/shared/rd-pack-fy26', { code: true }),
-  ]));
-  blocks.push(bullet([
-    rt('\u{1F4DA}  Reference: ', { bold: true }),
-    rt('Pile pages — Voice / Flow / Ground / Grants', { color: 'gray' }),
-    rt(' · Finance Surface Design', link(ids.financeSurfaceDesign) ? { link: link(ids.financeSurfaceDesign), color: 'blue' } : {}),
-    rt(' · Dashboard Walkthrough', link(ids.dashboardWalkthrough) ? { link: link(ids.dashboardWalkthrough), color: 'blue' } : {}),
-  ]));
-  blocks.push(divider());
-  return blocks;
-}
+// buildNav() removed 2026-05-08. The dashboard-hub script (sync-money-dashboard-hub.mjs)
+// is the canonical source of nav cards on moneyFramework. Keeping a second nav here
+// produced three competing "How to use" sections. See:
+// thoughts/shared/reviews/notion-finance-dashboard-2026-05-08.md (Move 1).
 
 function buildHeader() {
   const blocks = [];
@@ -1244,9 +1200,6 @@ async function updatePage(pageId) {
   const blocks = [];
   blocks.push(h2(SECTION_MARKER));
 
-  // Front-door nav (daily/weekly/year)
-  blocks.push(...buildNav());
-
   // Prominent link to the database
   const dbId = notionDbIds.opportunitiesDb;
   if (dbId) {
@@ -1401,7 +1354,6 @@ async function main() {
     const [pipeline, grantScope, foundationResearch] = await Promise.all([fetchPipelineByPile(), fetchGrantScopeStatus(), fetchFoundationResearch()]);
     const blocks = [];
     blocks.push(h2(SECTION_MARKER));
-    blocks.push(...buildNav());
     blocks.push(...buildHeader());
     blocks.push(divider());
     blocks.push(...buildAssumptions());
