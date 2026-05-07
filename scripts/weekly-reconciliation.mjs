@@ -488,6 +488,30 @@ async function main() {
     }
   }
 
+  // ── Money-stack alignment check ──────────────────────────────────
+  console.log('\n🧭 Step 5c: Money-stack alignment check...');
+  let alignSummary = null;
+  try {
+    const alignOut = execSync(`node scripts/check-money-stack-alignment.mjs --json`, { encoding: 'utf-8', stdio: ['ignore', 'pipe', 'pipe'] });
+    const results = JSON.parse(alignOut);
+    const buckets = results.reduce((acc, r) => ((acc[r.status] = (acc[r.status] || 0) + 1), acc), {});
+    alignSummary = buckets;
+    const drift = (buckets.DRIFT || 0) + (buckets['NOT-WIRED'] || 0) + (buckets.STALE || 0);
+    if (drift === 0) {
+      console.log(`   ✅ no drift detected (DEFERRED ${buckets.DEFERRED || 0} pending Notion token)`);
+      msg += `\n\n🧭 *Alignment:* ✅ no drift`;
+    } else {
+      console.log(`   🟡 ${drift} drift item(s): DRIFT=${buckets.DRIFT || 0} NOT-WIRED=${buckets['NOT-WIRED'] || 0} STALE=${buckets.STALE || 0}`);
+      msg += `\n\n🧭 *Alignment:* 🟡 ${drift} item(s)`;
+      const items = results.filter((r) => ['DRIFT', 'NOT-WIRED', 'STALE'].includes(r.status)).slice(0, 5);
+      for (const r of items) msg += `\n  • ${r.id}: ${r.summary || r.reason || ''}`;
+      msg += `\n  _Run \`node scripts/money-status.mjs\` for full report_`;
+    }
+  } catch (err) {
+    console.log(`   ⏭  alignment-check skipped: ${err.message}`);
+    msg += `\n\n🧭 *Alignment:* skipped (${err.message.slice(0, 60)})`;
+  }
+
   msg += `\n\n_Run reconciliation-report.mjs for full details_`;
 
   await sendTelegram(msg);

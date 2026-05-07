@@ -2,7 +2,7 @@
   "$schema": "wiki/narrative/funders.schema.json",
   "description": "Active and prospect funders, with the narrative claims that should lead any pitch to them. Used by narrative-draft.mjs --funder <slug> to assemble pitch briefs targeted to the right thesis.",
   "version": 2,
-  "updated": "2026-04-24",
+  "updated": "2026-05-07",
   "funders": {
     "minderoo": {
       "name": "Minderoo Foundation",
@@ -10,7 +10,15 @@
       "ask_amount_aud": 2900000,
       "deadline": "2026-05-15",
       "primary_contact": "Lucy Stronach",
-      "themes": ["communities", "early-intervention", "indigenous-led", "evidence-based", "place-based", "child-family-supports", "youth-justice"],
+      "themes": [
+        "communities",
+        "early-intervention",
+        "indigenous-led",
+        "evidence-based",
+        "place-based",
+        "child-family-supports",
+        "youth-justice"
+      ],
       "tone": "communities-first, evidence-rich, place-based, structurally honest, board-defensible",
       "canonical_pitch_doc": "wiki/projects/justicehub/three-circles.md",
       "comprehensive_walkthrough": "wiki/projects/justicehub/the-full-idea.md",
@@ -34,7 +42,12 @@
       "ask_amount_aud": null,
       "deadline": null,
       "primary_contact": null,
-      "themes": ["enterprise", "unit-economics", "scalable", "social-investment"],
+      "themes": [
+        "enterprise",
+        "unit-economics",
+        "scalable",
+        "social-investment"
+      ],
       "tone": "investor-grade, cost-honest, no hand-waving",
       "claims_to_lead_with": [
         "goods-on-country:claim-unit-economics-must-be-real",
@@ -50,7 +63,11 @@
       "ask_amount_aud": 16500,
       "deadline": null,
       "primary_contact": "Rachel Fyfe / Jessica Duffy",
-      "themes": ["education", "youth-voice", "community-led"],
+      "themes": [
+        "education",
+        "youth-voice",
+        "community-led"
+      ],
       "tone": "education-led, community-respectful, evidence-grounded",
       "claims_to_lead_with": [
         "contained:claim-young-people-as-experts",
@@ -66,7 +83,11 @@
       "ask_amount_aud": null,
       "deadline": null,
       "primary_contact": "William Frazer",
-      "themes": ["systems-change", "evidence-based", "institutional-reform"],
+      "themes": [
+        "systems-change",
+        "evidence-based",
+        "institutional-reform"
+      ],
       "tone": "rigorous, system-thinking, evidence-first",
       "claims_to_lead_with": [
         "contained:claim-cost-comparison",
@@ -84,7 +105,11 @@
       "ask_amount_aud": null,
       "deadline": null,
       "primary_contact": "Katie Norman",
-      "themes": ["regional", "community-led", "creative-practice"],
+      "themes": [
+        "regional",
+        "community-led",
+        "creative-practice"
+      ],
       "tone": "warm, place-based, story-rich",
       "claims_to_lead_with": [
         "contained:claim-room-3-community-already-doing-it",
@@ -100,7 +125,11 @@
       "ask_amount_aud": null,
       "deadline": null,
       "primary_contact": null,
-      "themes": ["education", "youth-pathways", "evidence"],
+      "themes": [
+        "education",
+        "youth-pathways",
+        "evidence"
+      ],
       "tone": "evidence-led, educational outcomes",
       "claims_to_lead_with": [
         "contained:claim-detention-doesnt-work",
@@ -112,7 +141,11 @@
     "amnesty-australia": {
       "name": "Amnesty International Australia",
       "stage": "cold",
-      "themes": ["human-rights", "first-nations", "institutional-accountability"],
+      "themes": [
+        "human-rights",
+        "first-nations",
+        "institutional-accountability"
+      ],
       "tone": "rights-based, structurally honest, willing to confront",
       "claims_to_lead_with": [
         "contained:claim-indigenous-overrepresentation",
@@ -125,7 +158,10 @@
     "niaa": {
       "name": "National Indigenous Australians Agency",
       "stage": "procurement-prospect",
-      "themes": ["indigenous-procurement", "community-led-enterprise"],
+      "themes": [
+        "indigenous-procurement",
+        "community-led-enterprise"
+      ],
       "tone": "procurement-ready, IPP-compliant, enterprise",
       "claims_to_lead_with": [
         "goods-on-country:claim-not-charity-its-enterprise",
@@ -141,7 +177,12 @@
       "ask_amount_aud": 60000,
       "deadline": null,
       "primary_contact": null,
-      "themes": ["impact-storytelling", "wind-down-legacy", "africa-australia", "philanthropic-spine"],
+      "themes": [
+        "impact-storytelling",
+        "wind-down-legacy",
+        "africa-australia",
+        "philanthropic-spine"
+      ],
       "tone": "warm, story-rich, legacy-conscious",
       "claims_to_lead_with": [
         "empathy-ledger:claim-story-is-the-spine",
@@ -158,7 +199,12 @@
       "ask_amount_aud": 200000,
       "deadline": null,
       "primary_contact": null,
-      "themes": ["software-for-good", "platform-thinking", "open-source", "developer-led-impact"],
+      "themes": [
+        "software-for-good",
+        "platform-thinking",
+        "open-source",
+        "developer-led-impact"
+      ],
       "tone": "engineering-credible, platform-native, scale-aware",
       "claims_to_lead_with": [
         "empathy-ledger:claim-the-ecosystem-is-one-database",
@@ -175,7 +221,11 @@
       "ask_amount_aud": null,
       "deadline": null,
       "primary_contact": "Sally Grimsley-Ballard / Alexandra Lagelee Kean",
-      "themes": ["systems-change", "indigenous-led", "rural-regional"],
+      "themes": [
+        "systems-change",
+        "indigenous-led",
+        "rural-regional"
+      ],
       "tone": "values-driven, community-respectful",
       "claims_to_lead_with": [
         "empathy-ledger:claim-the-loop-is-the-product",
@@ -191,7 +241,12 @@
       "ask_amount_aud": 150000,
       "deadline": null,
       "primary_contact": null,
-      "themes": ["environmental-justice", "regenerative-systems", "indigenous-rights", "anti-corporate-power"],
+      "themes": [
+        "environmental-justice",
+        "regenerative-systems",
+        "indigenous-rights",
+        "anti-corporate-power"
+      ],
       "tone": "earned-credibility, climate-honest, no-greenwash",
       "claims_to_lead_with": [
         "goods-on-country:claim-not-charity-its-enterprise",
@@ -207,7 +262,11 @@
       "ask_amount_aud": 100000,
       "deadline": null,
       "primary_contact": null,
-      "themes": ["sustainable-materials", "supply-chain-transparency", "B-corp"],
+      "themes": [
+        "sustainable-materials",
+        "supply-chain-transparency",
+        "B-corp"
+      ],
       "tone": "supply-chain-honest, materials-curious",
       "claims_to_lead_with": [
         "goods-on-country:claim-not-charity-its-enterprise",
@@ -222,7 +281,11 @@
       "ask_amount_aud": 100000,
       "deadline": null,
       "primary_contact": null,
-      "themes": ["dignified-essentials", "sanitation", "community-investment"],
+      "themes": [
+        "dignified-essentials",
+        "sanitation",
+        "community-investment"
+      ],
       "tone": "playful, dignified-essentials, anti-charity",
       "claims_to_lead_with": [
         "goods-on-country:claim-not-charity-its-enterprise",
@@ -237,7 +300,11 @@
       "ask_amount_aud": 84700,
       "deadline": null,
       "primary_contact": null,
-      "themes": ["indigenous-led", "central-australia", "community-enterprise"],
+      "themes": [
+        "indigenous-led",
+        "central-australia",
+        "community-enterprise"
+      ],
       "tone": "community-respectful, place-based, evidence-rich",
       "claims_to_lead_with": [
         "goods-on-country:claim-not-charity-its-enterprise",
@@ -253,7 +320,10 @@
       "ask_amount_aud": 82500,
       "deadline": null,
       "primary_contact": null,
-      "themes": ["regional", "community-led"],
+      "themes": [
+        "regional",
+        "community-led"
+      ],
       "tone": "community-respectful, grassroots",
       "claims_to_lead_with": [],
       "claims_to_avoid": [],
@@ -289,7 +359,10 @@
       "ask_amount_aud": null,
       "deadline": null,
       "primary_contact": null,
-      "themes": ["government", "queensland"],
+      "themes": [
+        "government",
+        "queensland"
+      ],
       "tone": null,
       "claims_to_lead_with": [],
       "claims_to_avoid": [],
@@ -301,7 +374,10 @@
       "ask_amount_aud": null,
       "deadline": null,
       "primary_contact": "Isabella / Alan",
-      "themes": ["homelessness", "community-led"],
+      "themes": [
+        "homelessness",
+        "community-led"
+      ],
       "tone": "warm, grassroots",
       "claims_to_lead_with": [],
       "claims_to_avoid": [],
@@ -318,6 +394,42 @@
       "claims_to_lead_with": [],
       "claims_to_avoid": [],
       "framing_notes": "DATA-ONLY STUB added 2026-04-24: Xero shows $3,080 paid historically, no current GHL comm. Small historical amount. Needs Nic-verified narrative review before pitch-assembly."
+    },
+    "rotary-eclub-outback-australia-9560": {
+      "name": "Rotary Eclub Outback Australia, Division 9560",
+      "stage": "active-partner",
+      "ask_amount_aud": null,
+      "deadline": null,
+      "primary_contact": null,
+      "themes": [],
+      "tone": null,
+      "claims_to_lead_with": [],
+      "claims_to_avoid": [],
+      "framing_notes": "DATA-ONLY STUB added 2026-05-07: Xero shows $82,500 AUTH on INV-0222 (392 days outstanding); funder-alignment synthesis flags this as the longest-overdue live invoice on the sole trader. Surfaced by 2026-05-07 funder-alignment synthesis as wiki-absent. Needs Ben/Nic-verified narrative review before any pitch-assembly."
+    },
+    "brisbane-powerhouse-foundation": {
+      "name": "Brisbane Powerhouse Foundation",
+      "stage": "lapsed",
+      "ask_amount_aud": null,
+      "deadline": null,
+      "primary_contact": null,
+      "themes": [],
+      "tone": null,
+      "claims_to_lead_with": [],
+      "claims_to_avoid": [],
+      "framing_notes": "DATA-ONLY STUB added 2026-05-07: Xero shows $7,150 paid historically; no current GHL communication. Surfaced by 2026-05-07 funder-alignment synthesis as wiki-absent. Needs Ben/Nic-verified narrative review before any pitch-assembly."
+    },
+    "the-john-villiers-trust": {
+      "name": "The John Villiers Trust",
+      "stage": "lapsed",
+      "ask_amount_aud": null,
+      "deadline": null,
+      "primary_contact": null,
+      "themes": [],
+      "tone": null,
+      "claims_to_lead_with": [],
+      "claims_to_avoid": [],
+      "framing_notes": "DATA-ONLY STUB added 2026-05-07: Xero shows $1,200 paid historically; very small amount; no current GHL activity. Surfaced by 2026-05-07 funder-alignment synthesis as wiki-absent. Needs Ben/Nic-verified narrative review before any pitch-assembly."
     }
   },
   "stages": {
@@ -331,10 +443,24 @@
     "procurement-prospect": "Not a grant funder — a buyer under procurement programs."
   },
   "themes_glossary": [
-    "systems-change", "indigenous-led", "evidence-based", "place-based",
-    "enterprise", "unit-economics", "scalable", "social-investment",
-    "education", "youth-voice", "community-led", "institutional-reform",
-    "regional", "creative-practice", "youth-pathways", "human-rights",
-    "first-nations", "institutional-accountability", "indigenous-procurement"
+    "systems-change",
+    "indigenous-led",
+    "evidence-based",
+    "place-based",
+    "enterprise",
+    "unit-economics",
+    "scalable",
+    "social-investment",
+    "education",
+    "youth-voice",
+    "community-led",
+    "institutional-reform",
+    "regional",
+    "creative-practice",
+    "youth-pathways",
+    "human-rights",
+    "first-nations",
+    "institutional-accountability",
+    "indigenous-procurement"
   ]
 }

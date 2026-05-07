@@ -1,5 +1,6 @@
 ---
 synthesis_slug: funder-alignment
+schema_version: 1
 cycle_date: 2026-05-07
 title: Funder alignment auto-cycle 2026-05-07
 summary: Phase-1 automation of Q1 of the ACT Alignment Loop. Cross-source reconciliation of every funder relationship across xero_invoices, ghl_contacts + communications_history, wiki/narrative/funders.json, and thoughts/shared/{plans,drafts}/**.
@@ -10,8 +11,22 @@ sources_queried:
   - { kind: "xero", table: "xero_invoices", filter: "type=ACCREC, status not in (VOIDED,DELETED), income_type=grant or contact_name matches funder regex (22 rows)" }
   - { kind: "ghl", table: "ghl_contacts", filter: "tags contain funder|goods-funder|justicehub-funder|goods-gmail-funder (37 rows)" }
   - { kind: "ghl", table: "communications_history", filter: "ghl_contact_id in funder-tagged set (27 rows)" }
-  - { kind: "wiki", path: "wiki/narrative/funders.json", filter: "all entries (21 rows)" }
+  - { kind: "wiki", path: "wiki/narrative/funders.json", filter: "all entries (24 rows)" }
   - { kind: "thoughts", path: "thoughts/shared/{plans,drafts}/**", filter: "grep funder canonical names (108 files matched)" }
+summary_metrics:
+  days_to_cutover: 54
+  ghl_comms_scanned: 27
+  ghl_funder_contacts_scanned: 37
+  ghl_silent_90_plus_count: 14
+  ghost_active_partner_count: 1
+  live_money_funder_count: 4
+  live_money_outstanding_aud: 300400
+  plan_mention_files_scanned: 108
+  stage_drift_count: 2
+  total_relationships: 53
+  wiki_absent_count: 0
+  wiki_funders_scanned: 24
+  xero_invoices_scanned: 22
 ---
 
 # Funder alignment 2026-05-07
@@ -23,10 +38,9 @@ One synthesis, four sources: `xero_invoices` (DB reality), `ghl_contacts` + `com
 ## Headline findings
 
 1. **4 funder(s) hold live money** totalling $300,400 on the sole trader's books with 54 days to 2026-06-30 cutover. Top: The Snow Foundation $132,000 AUTH (INV-0321); Centrecorp Foundation $84,700 DRAFT (INV-0314); Rotary Eclub Outback Australia, Division 9560 $82,500 AUTH-392d (INV-0222).
-2. **3 funder(s) absent from `wiki/narrative/funders.json`** with paid Xero invoices: Rotary Eclub Outback Australia, Division 9560 $82,500; Brisbane Powerhouse Foundation $7,150; The John Villiers Trust $1,200. The narrative-draft tooling cannot target funders with no slug, so pitch assembly is writing from an incomplete ledger (`funders.json` last updated 2026-04-24, baseline 2026-04-24).
-3. **2 funder(s) have a stage classification in `funders.json` that disagrees with Xero reality**: StreetSmart Australia (`funders.streetsmart-australia.stage` = active-partner); Dusseldorp Forum (`funders.dusseldorp-forum.stage` = active-partner).
-4. **14 GHL contact(s) tagged `funder` silent >90 days**: ardi muckan (96d, `ghl_contacts.ghl_id=ZusFJbPZAmqYKTcewpvz`); robyn sloggett (92d, `ghl_contacts.ghl_id=OW2zTQuu9b0IpNnrXuQE`); michelle scott (251d, `ghl_contacts.ghl_id=6peQg1ebW1NfDIlCT4Sy`); amanda neil (92d, `ghl_contacts.ghl_id=oQgOGy1TaIqeXFsBwYis`). Decision needed: re-engage or drop tag.
-5. **53 funder relationships indexed across the four sources** (11 Xero-grounded, 13 `funders.json`-only, 29 GHL-only).
+2. **2 funder(s) have a stage classification in `funders.json` that disagrees with Xero reality**: StreetSmart Australia (`funders.streetsmart-australia.stage` = active-partner); Dusseldorp Forum (`funders.dusseldorp-forum.stage` = active-partner).
+3. **14 GHL contact(s) tagged `funder` silent >90 days**: ardi muckan (96d, `ghl_contacts.ghl_id=ZusFJbPZAmqYKTcewpvz`); robyn sloggett (92d, `ghl_contacts.ghl_id=OW2zTQuu9b0IpNnrXuQE`); michelle scott (251d, `ghl_contacts.ghl_id=6peQg1ebW1NfDIlCT4Sy`); amanda neil (92d, `ghl_contacts.ghl_id=oQgOGy1TaIqeXFsBwYis`). Decision needed: re-engage or drop tag.
+4. **53 funder relationships indexed across the four sources** (11 Xero-grounded, 13 `funders.json`-only, 29 GHL-only).
 
 ## At-a-glance - every funder, every source
 
@@ -51,9 +65,6 @@ Drift column uses canonical classifications: `aligned` / `drift-alert` / `wiki-a
 | **jacqueline fearnley** | · | · | · | · | *absent* | 212d | · | drift-alert GHL-tagged `funder`; no Xero invoice, last comm 212 days ago |
 | **AMP Foundation** | · | · | · | · | *absent* | 139d | plans:64 drafts:18 | drift-alert GHL-tagged `funder`; no Xero invoice, last comm 139 days ago |
 | **The Bryan Foundation** | · | · | · | · | *absent* | 182d | plans:1 | drift-alert GHL-tagged `funder`; no Xero invoice, last comm 182 days ago |
-| **Rotary Eclub Outback Australia, Division 9560** | *absent* | $82,500 | **$82,500** | 1 | *absent* | · | · | wiki-absent Xero has 1 invoice(s); funders.json has no `rotary-eclub-outback-australia-division-9560` entry |
-| **The John Villiers Trust** | *absent* | $1,200 | **$1,200** | 1 | *absent* | · | · | wiki-absent Xero has 1 invoice(s); funders.json has no `john-villiers-trust` entry |
-| **Brisbane Powerhouse Foundation** | *absent* | $7,150 | 0 | 1 | *absent* | · | · | wiki-absent Xero has 1 invoice(s); funders.json has no `brisbane-powerhouse-foundation` entry |
 | **National Indigenous Australians Agency** | `funders.niaa` | · | · | · | procurement-prospect | · | · | db-absent funders.json claims relationship; no Xero invoice on file |
 | **State of Queensland (DFSDSCS)** | `funders.state-qld-dfsdscs` | · | · | · | lapsed | · | · | db-absent funders.json claims relationship; no Xero invoice on file |
 | **Caroline Geoghegan** | · | · | · | · | *absent* | · | · | db-absent GHL-tagged `funder`; no Xero invoice yet |
@@ -73,6 +84,8 @@ Drift column uses canonical classifications: `aligned` / `drift-alert` / `wiki-a
 | **yj_grants ** | · | · | · | · | *absent* | 54d | · | db-absent GHL-tagged `funder`; no Xero invoice yet |
 | **The Snow Foundation** | `funders.snow-foundation` | $402,930 | **$132,000** | 7 | active-partner | · | plans:64 drafts:18 | aligned Live tranche; funders.json stage matches DB activity |
 | **Centrecorp Foundation** | `funders.centrecorp` | $208,032 | **$84,700** | 3 | active-partner | · | plans:12 drafts:6 | aligned Live tranche; funders.json stage matches DB activity |
+| **Rotary Eclub Outback Australia, Division 9560** | `funders.rotary-eclub-outback-australia-9560` | $82,500 | **$82,500** | 1 | active-partner | · | · | aligned Live tranche; funders.json stage matches DB activity |
+| **The John Villiers Trust** | `funders.the-john-villiers-trust` | $1,200 | **$1,200** | 1 | lapsed | · | · | aligned Live tranche; funders.json stage matches DB activity |
 | **Minderoo Foundation** | `funders.minderoo` | · | · | · | ask-pending | · | plans:14 drafts:14 | aligned Prospect or pending stage; no DB activity expected yet |
 | **QBE Catalysing Impact** | `funders.qbe-catalysing-impact` | · | · | · | term-sheet-pending | · | plans:16 drafts:6 | aligned Prospect or pending stage; no DB activity expected yet |
 | **Tim Fairfax Family Foundation** | `funders.tim-fairfax` | · | · | · | warm-cold | · | plans:6 drafts:2 | aligned Prospect or pending stage; no DB activity expected yet |
@@ -85,6 +98,7 @@ Drift column uses canonical classifications: `aligned` / `drift-alert` / `wiki-a
 | **Rotary eClub of Outback Australia** | `funders.rotary-eclub-outback` | · | · | · | ask-pending | · | plans:4 | aligned Prospect or pending stage; no DB activity expected yet |
 | **Paul Ramsay Foundation** | `funders.paul-ramsay-foundation` | $7,469 | 0 | 2 | warm | 93d | plans:11 drafts:3 | historical-only 2 paid invoice(s), nothing live; funders.json stage `warm` consistent |
 | **Social Impact Hub Foundation** | `funders.social-impact-hub` | $26,730 | 0 | 2 | lapsed | · | plans:23 drafts:2 | historical-only 2 paid invoice(s), nothing live; funders.json stage `lapsed` consistent |
+| **Brisbane Powerhouse Foundation** | `funders.brisbane-powerhouse-foundation` | $7,150 | 0 | 1 | lapsed | · | · | historical-only 1 paid invoice(s), nothing live; funders.json stage `lapsed` consistent |
 | **Vincent Fairfax Family Foundation** | `funders.vincent-fairfax` | $50,000 | 0 | 1 | lapsed | · | plans:3 drafts:2 | historical-only 1 paid invoice(s), nothing live; funders.json stage `lapsed` consistent |
 | **Westpac Scholars Trust** | `funders.westpac-scholars-trust` | $3,080 | 0 | 1 | lapsed | · | · | historical-only 1 paid invoice(s), nothing live; funders.json stage `lapsed` consistent |
 
@@ -117,14 +131,6 @@ Drift column uses canonical classifications: `aligned` / `drift-alert` / `wiki-a
 - **Risk if silent:** payment lands in sole trader post-2026-06-30 cutover; novation memo missed; bad-debt impact on close-out BAS.
 
 ## Drift inventory
-
-### Funders paid by ACT but absent from `wiki/narrative/funders.json`
-
-These have Xero invoices but no `funders.<slug>` entry. `scripts/narrative-draft.mjs --funder <slug>` cannot target them. The authoring backlog is a single PR adding entries to `wiki/narrative/funders.json` with at minimum `name`, `stage`, `claims_to_lead_with`.
-
-1. **Rotary Eclub Outback Australia, Division 9560** - `xero_invoices` 1 row(s) [INV-0222], $82,500 billed, $82,500 outstanding. Suggested key: `funders.rotary-eclub-outback-australia-division-9560` in `wiki/narrative/funders.json`.
-2. **Brisbane Powerhouse Foundation** - `xero_invoices` 1 row(s) [INV-0273], $7,150 billed, $0 outstanding. Suggested key: `funders.brisbane-powerhouse-foundation` in `wiki/narrative/funders.json`.
-3. **The John Villiers Trust** - `xero_invoices` 1 row(s) [INV-0327], $1,200 billed, $1,200 outstanding. Suggested key: `funders.john-villiers-trust` in `wiki/narrative/funders.json`.
 
 ### Funders in `wiki/narrative/funders.json` whose stage disagrees with Xero
 
@@ -189,10 +195,9 @@ Ordered by 2026-06-30 cutover risk. Each action names a specific file path + key
 2. **Decide Centrecorp Foundation INV-0314 ($84,700 DRAFT, 83d old) with Nic by 2026-05-14.** Three options: send to sole trader; void and re-issue from A Curious Tractor Pty Ltd after 2026-06-30; close out. Owner: Ben + Nic.
 3. **Decide Rotary Eclub Outback Australia, Division 9560 INV-0222 ($82,500 AUTHORISED, 392d old) with Nic by 2026-05-14.** Chase or write off; if conditions unmet, log as FY26 bad debt. Owner: Ben + Nic.
 4. **Confirm The John Villiers Trust INV-0327 payment timing by 2026-05-21.** Owner: Ben.
-5. **Update `wiki/narrative/funders.json` by 2026-05-14** to add 3 absent entries: `funders.rotary-eclub-outback-australia-division-9560`, `funders.brisbane-powerhouse-foundation`, `funders.john-villiers-trust`. Each entry needs at minimum `name`, `stage`, `claims_to_lead_with`. Owner: Ben.
-6. **Set `funders.streetsmart-australia.stage` from `active-partner` to `warm` in `wiki/narrative/funders.json` by 2026-05-14.** Evidence: 2-tranche history totalling $9,400. Owner: Ben.
-7. **Set `funders.dusseldorp-forum.stage` from `active-partner` to `warm` in `wiki/narrative/funders.json` by 2026-05-14.** Evidence: 1-tranche history totalling $16,500. Owner: Ben.
-8. **Decide on the 14 >90-day silent GHL contact(s) by 2026-05-21**: `8kwXzXjwXz4ZMkVG9Tvq` (jioji ravulo), `6peQg1ebW1NfDIlCT4Sy` (michelle scott), `0BUdIRIhOwZd4gJJtMr6` (jacqueline fearnley), `biTWj8ZEBLtP0abMMjS9` (shannon lemanski), +10 more. Re-engage with a specific message or remove `funder` tag. Owner: Ben.
+5. **Set `funders.streetsmart-australia.stage` from `active-partner` to `warm` in `wiki/narrative/funders.json` by 2026-05-14.** Evidence: 2-tranche history totalling $9,400. Owner: Ben.
+6. **Set `funders.dusseldorp-forum.stage` from `active-partner` to `warm` in `wiki/narrative/funders.json` by 2026-05-14.** Evidence: 1-tranche history totalling $16,500. Owner: Ben.
+7. **Decide on the 14 >90-day silent GHL contact(s) by 2026-05-21**: `8kwXzXjwXz4ZMkVG9Tvq` (jioji ravulo), `6peQg1ebW1NfDIlCT4Sy` (michelle scott), `0BUdIRIhOwZd4gJJtMr6` (jacqueline fearnley), `biTWj8ZEBLtP0abMMjS9` (shannon lemanski), +10 more. Re-engage with a specific message or remove `funder` tag. Owner: Ben.
 
 ## Sources queried
 
@@ -201,12 +206,12 @@ Ordered by 2026-06-30 cutover risk. Each action names a specific file path + key
 | `xero_invoices` | type=ACCREC, status not in (VOIDED,DELETED), income_type=grant or contact_name funder regex | 22 | 2026-05-07 |
 | `ghl_contacts` | tags contain funder/goods-funder/justicehub-funder/goods-gmail-funder | 37 | 2026-05-07 |
 | `communications_history` | ghl_contact_id in funder-tagged set | 27 | 2026-05-07 |
-| `wiki/narrative/funders.json` | all entries | 21 | file-updated 2026-04-24 |
+| `wiki/narrative/funders.json` | all entries | 24 | file-updated 2026-05-07 |
 | `thoughts/shared/{plans,drafts}/**` | grep funder canonical names | 108 files | 2026-05-07 |
 
 ## Provenance
 
-- Generated: 2026-05-07T03:52:01.349Z
+- Generated: 2026-05-07T05:44:30.957Z
 - Script: `scripts/synthesize-funder-alignment.mjs`
 - Cutover anchor: 2026-06-30 (54 days from synthesis date)
 - Stale-communication threshold: 90 days
