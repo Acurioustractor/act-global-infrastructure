@@ -25,7 +25,7 @@ Status: DRIFT 0 · NOT-WIRED 1 · STALE 0 · IN-SYNC 5 · INFO 2 · DEFERRED 0 �
 
 ### 1-hub-redundancy
 
-- **summary**: 0 heading overlap between moneyFramework (1 h2s) and financeOverview (0 h2s)
+- **summary**: financeOverview archived (deprecated 2026-05-08); moneyFramework is the single canonical hub
 
 ### 2-pile-mix-populated
 

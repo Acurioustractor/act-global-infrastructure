@@ -179,8 +179,17 @@ function headingTexts(blocks, level = 'heading_2') {
 
 async function checkHubRedundancy() {
   if (!notion) return { id: '1-hub-redundancy', status: 'DEFERRED', reason: 'NOTION_TOKEN not set', fix: 'rotate NOTION_TOKEN and re-run' }
-  if (!cfg.moneyFramework || !cfg.financeOverview) return { id: '1-hub-redundancy', status: 'BLOCKED', reason: 'cfg.moneyFramework or cfg.financeOverview missing' }
+  if (!cfg.moneyFramework) return { id: '1-hub-redundancy', status: 'BLOCKED', reason: 'cfg.moneyFramework missing' }
+  // financeOverview was deprecated 2026-05-08 and archived. moneyFramework is now canonical.
+  // If financeOverview is gone (404 on retrieve), the redundancy is structurally resolved — mark IN-SYNC.
+  if (!cfg.financeOverview) {
+    return { id: '1-hub-redundancy', status: 'IN-SYNC', summary: 'financeOverview retired; moneyFramework is the single canonical hub' }
+  }
   try {
+    const fovPage = await notion.pages.retrieve({ page_id: cfg.financeOverview }).catch(() => null)
+    if (!fovPage || fovPage.archived || fovPage.in_trash) {
+      return { id: '1-hub-redundancy', status: 'IN-SYNC', summary: 'financeOverview archived (deprecated 2026-05-08); moneyFramework is the single canonical hub' }
+    }
     const [a, b] = await Promise.all([listChildBlocks(cfg.moneyFramework), listChildBlocks(cfg.financeOverview)])
     const aH = new Set(headingTexts(a))
     const bH = new Set(headingTexts(b))

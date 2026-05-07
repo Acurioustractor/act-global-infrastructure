@@ -54,7 +54,8 @@ const MONEY_KEYS = new Set([
   'entityHub',
   'cy26StrategyPlan', 'planningRhythm', 'weeklyDigest', 'moneySyncPage',
   'fourLanesCard',
-  'financeOverview', 'financeSurfaceDesign', 'dashboardWalkthrough',
+  // financeOverview retired 2026-05-08; archived. moneyFramework is canonical.
+  'financeSurfaceDesign', 'dashboardWalkthrough',
 ])
 
 const FRESH_DAYS = 14
