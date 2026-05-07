@@ -72,4 +72,6 @@ Ben
 - Update each register's `salary_basis_status` to `verified-by-accountant`
 - Update each provenance sidecar dollar-figure rows from `Unverified` to `Verified`
 - Re-grade the pack - expected to move from WARN/62 toward WARN/75+ depending on which other warnings have closed by then
-- For Aleisha: run write-off via API (`scripts/write-off-aleisha-invoices.mjs` to be written) once account code confirmed
+- For Aleisha: run write-off via API once account code confirmed:
+  `node scripts/write-off-aleisha-invoices.mjs --apply --account-code <code> --confirm`
+  (script is built and dry-run-tested; triple-trigger required for the write; ~60s total to action)
