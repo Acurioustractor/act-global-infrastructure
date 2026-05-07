@@ -1,204 +1,181 @@
 ---
-title: Entity migration truth-state — 61 days to cutover, one 🔴 moved to 🟡
-summary: Third artefact of the ACT Alignment Loop (Q3), Pass 2. 6 days elapsed since the 2026-04-24 baseline. Critical positive: novation letter template drafted (one 🔴 → 🟡). Critical negatives: Pty ABN, NAB account, and Pty Xero file still not opened. D&O insurance deadline now 24 days away.
+title: Entity migration truth-state — 54 days to cutover, no Pty infrastructure yet
+summary: Third artefact of the ACT Alignment Loop (Q3), second pass. 54 days to cutover. Pty Xero file and NAB business account still unopened — both were Week 1-3 targets, now overdue. D&O insurance due in 17 days with no binding evidence. One win: novation-letter-templates.md now exists. Total outstanding rose to $537,240 (+$29,890).
 tags: [synthesis, entity-migration, alignment-loop, pty-ltd, cutover]
 status: active
-date: 2026-05-08
+date: 2026-05-07
 ---
 
 # Entity migration truth-state — 2026-05-08
 
-> Third artefact of the [[act-alignment-loop|ACT Alignment Loop]], Pass 2. Queries ran 2026-04-30 (6 days after the 2026-04-24 baseline). Sources: `thoughts/shared/plans/act-entity-migration-checklist-2026-06-30.md` (updated with 4 cutover rules post-baseline), Supabase (Xero invoices, tenant state, bank lines), `thoughts/shared/drafts/**` (one novation draft found), and codebase plan files.
+> Third artefact of the [[act-alignment-loop|ACT Alignment Loop]], second pass. Same four sources as baseline: the 10-section cutover checklist, Supabase (Xero invoices, tenant state, bank lines), `thoughts/shared/drafts/**`, and the entity migration plan. Compare to [[entity-migration-truth-state-2026-04-24|the 2026-04-24 baseline]].
 
 ## Headline findings
 
-1. **61 days to cutover. Three blockers still unopened.** The Pty ABN has not issued (Standard Ledger Week 1-2 target). The NAB Pty business account has not opened (applied "this week" per baseline — no confirmation). The Pty Xero file has not opened (blocked on ABN). These three are the critical path. Every subsequent step in the plan is blocked behind them.
-2. **One 🔴 moved to 🟡 — novation letter template drafted.** `thoughts/shared/drafts/novation-letter-templates.md` appeared after the baseline. It contains two fully scaffolded templates (grant funders + commercial counterparties), placeholder-complete, ready for Standard Ledger review. The baseline had zero drafts. This is the only confirmed positive status change.
-3. **New plans added.** `thoughts/shared/plans/new-entity-xero-launch-playbook.md` — a day-0 Xero setup playbook for the Pty file (Step 1 through Step 13, bank rules, tracking categories, contacts migration). `thoughts/shared/plans/pty-ltd-transition-and-rd-strategy.md` — R&D strategy context (pre-existing, dated 2026-03-17). These reduce execution risk once the ABN issues.
-4. **CEO review applied to migration checklist (`9f353f1`).** Four cutover rules added: pre-cutover invoices stay with sole trader, fallback if ABN not ready by 1 July, Rotary recovery is separate from novation, Shareholders Agreement is Week 1-2 (not Week 4-5 as originally written). SHA is still not signed.
-5. **D&O insurance deadline is now 24 days away (2026-05-24).** Registered 2026-04-24. 30-day window expires 2026-05-24. No broker selection or policy binding visible in Xero or plans. This is the most time-sensitive item in the checklist that can be acted on NOW.
-6. **$507,700 outstanding on sole trader's books** (vs $507,350 baseline — +$350 from one additional Aleisha weekly). No invoices paid or resolved since baseline.
+1. **Pty infrastructure is not materialising in the data.** At 54 days to cutover, Supabase still shows 1 Xero tenant (sole trader only) and 1 bank account (NAB Visa ACT #8815 only). The Pty Xero file was supposed to open in Week 3 (by early May). The Pty NAB business account was supposed to be applied for in Week 1 (by late April). Neither has produced DB-visible evidence. These are now the two hardest blockers on the critical path.
+
+2. **D&O insurance due 17 days from now.** The 30-day post-registration window for Directors and Officers insurance closes ~2026-05-24. At baseline this was 30 days away (🟡). No binding evidence found in Xero (no insurance-broker ACCPAY invoices). This must close before 17 days from now or the Pty directors trade uninsured.
+
+3. **Total outstanding on sole trader's books rose to $537,240** — up $29,890 from baseline ($507,350). Collections since baseline: Just Reinvest $27,500 paid ✅, PICC INV-0317 partial ($16,500 paid, still $19,800 outstanding). New invoices raised: Sonas Properties INV-0328 $37,290, John Villiers Trust INV-0327 $1,200. Anomaly: Homeland School INV-0303 shows $40,000 outstanding vs $4,950 at baseline — verify with Nic whether the invoice was re-issued at a higher amount or if the DB reflects a new invoice.
+
+4. **One novation artefact now exists.** `thoughts/shared/drafts/novation-letter-templates.md` was created (dated 2026-04-24, drafted by the ACT Alignment Loop). The baseline had zero novation drafts. The templates cover both grant-funder and commercial-counterparty scenarios with Standard Ledger review caveat. This changes the novation preparation from 🔴 NOT STARTED → 🟡 DRAFT EXISTS.
+
+5. **ABN and GST registration: no DB evidence.** Standard Ledger target was first week of May. No ABN visible in Xero tenant record, no new Pty Xero file. Either the ABN process is in progress but hasn't yet cascaded to Xero, or it's slipping. Cannot confirm from DB alone — Ben/Nic to verify directly with Standard Ledger.
 
 ---
 
-## Items × evidence × risk
+## Items × evidence × risk — changes from baseline
 
-Days until 30 June 2026 cutover: **61 days** (as of 2026-04-30).
+Days until 30 June 2026 cutover: **54 days** (was 67).
 
-### Section 1 — Entity setup (PRE-MIGRATION)
+### Section 1 — Entity setup
 
-| Item | Target | Evidence | Status | At risk if slips |
-|---|---|---|---|---|
-| Pty registered at ASIC | Done | ACN 697 347 676 registered 2026-04-24 | ✅ DONE | n/a |
-| Directors appointed (Ben + Nic) | Done | Confirmed at baseline | ✅ DONE | n/a |
-| Shareholders set (Knight FT 50 / Marchesi FT 50) | Done | Confirmed at baseline | ✅ DONE | n/a |
-| Director IDs confirmed | Week 1 | Still unverified | ⚠️ UNVERIFIED | Blocks ABN application |
-| ABN application (Pty) | Week 1-2 (Standard Ledger) | No ABN visible | 🔴 OPEN | Blocks Xero file, invoicing, GST |
-| GST registration (Pty) | With ABN | Paired with ABN | 🔴 OPEN | Blocks invoicing |
-| Standard Ledger briefed | Week 1 | Confirmed at baseline | ✅ DONE | n/a |
+| Item | Status baseline | Status now | Change |
+|---|---|---|---|
+| Pty registered at ASIC (ACN 697 347 676) | ✅ DONE | ✅ DONE | → |
+| Directors appointed (Ben + Nic) | ✅ DONE | ✅ DONE | → |
+| Shareholders (Knight FT 50 / Marchesi FT 50) | ✅ DONE | ✅ DONE | → |
+| Director IDs confirmed | ⚠️ UNVERIFIED | ⚠️ UNVERIFIED | → |
+| ABN application (Pty) — Standard Ledger | 🔴 OPEN | 🔴 OPEN (no DB evidence) | → |
+| GST registration (Pty) | 🔴 OPEN | 🔴 OPEN | → |
+| Standard Ledger briefed | ✅ DONE | ✅ DONE | → |
 
-### Section 2 — Banking and payment rails
+### Section 2 — Banking
 
-| Item | Target | Evidence | Status | At risk |
-|---|---|---|---|---|
-| NAB business account (Pty) | Apply this week | Only "NAB Visa ACT #8815" in `bank_statement_lines` — no Pty account | 🔴 OPEN | Blocks Stripe, subscriptions, first Pty invoicing |
-| Stripe account (Pty) | 1 July | No artefact | 🔴 OPEN (not-yet-due) | Customer payments route to sole trader |
-| PayID / Osko on Pty NAB | After NAB opens | — | ⏳ BLOCKED ON NAB | — |
-| Expense cards (Pty) | After NAB opens | — | ⏳ BLOCKED ON NAB | — |
-| Auto-debits audit + migrate | By 1 July | No artefact | 🟡 OPEN | Silent continuation |
+| Item | Status baseline | Status now | Change |
+|---|---|---|---|
+| NAB business account (Pty) — OPEN | 🔴 OPEN | 🔴 OPEN (still 1 BSL account) | → |
+| Stripe account (Pty) | 🔴 NOT YET DUE | 🔴 NOT YET DUE | → |
+| PayID / Osko on Pty NAB | ⏳ BLOCKED ON NAB | ⏳ BLOCKED ON NAB | → |
+| Auto-debits audit + migrate | 🟡 OPEN | 🟡 OPEN | → |
 
 ### Section 3 — Xero
 
-| Item | Target | Evidence | Status | At risk |
-|---|---|---|---|---|
-| Pty Xero file opens | Week 3 | 1 xero_tenant_id only: `786af1ed-e3ce-42fc-9ea9-ddf3447d79d0` (sole trader, 1,744 invoices) | 🔴 OPEN | Can't issue Pty invoices July 1 |
-| Pty Xero launch playbook | — | `thoughts/shared/plans/new-entity-xero-launch-playbook.md` now exists — 13-step Day-0 playbook | 🟡 PREPARED | n/a |
-| Final sole trader BAS (Q4 FY26) | 28 July 2026 | Not yet (Q4 = Apr-Jun) | ⏳ NOT YET DUE | — |
-| R&D Tax Incentive — FY26 claim | With tax return | Standard Ledger coordinating | ⏳ NOT YET DUE | Lose 43.5% if evidence thin |
-| R&D FY27 re-registration (Pty) | Post-1-July | — | ⏳ NOT YET DUE | — |
-| ABN (sole trader) cancellation | After final BAS | — | ⏳ NOT YET DUE | — |
-
-### Section 4 — Grants and funders (CRITICAL PATH)
-
-#### Outstanding receivables on sole trader's books (2026-04-30)
-
-| Counterparty | Invoice | Amount | Status | Age (days) | Project | Action needed |
-|---|---|---:|---|---:|---|---|
-| **Snow Foundation** | INV-0321 | $132,000 | AUTHORISED | 43 | ACT-GD | Call Alexandra/Sally — payment + Pty migration notice |
-| **Rotary eClub Outback Australia** | INV-0222 | $82,500 | AUTHORISED | **386** | ACT-GD | Chase-or-write-off decision (only-Ben) |
-| **Centrecorp Foundation** | INV-0314 | $84,700 | **DRAFT** | 76 | ACT-GD | Send / void / reissue-from-Pty (only-Ben) |
-| **PICC** | INV-0317 | $36,300 | AUTHORISED | 73 | ACT-PI | Confirm payment timing |
-| **PICC** | INV-0324 | $77,000 | AUTHORISED | 22 | ACT-PI | Monitor; project_code fixed post-baseline |
-| **Regional Arts Australia** | INV-0301/0302 | $33,000 | AUTHORISED | 135 | ACT-HV | Chase — 135d unusual |
-| **Just Reinvest** | INV-0295 | $27,500 | AUTHORISED | 60 | ACT-JH | Chase |
-| **Brodie Germaine Fitness** | INV-0325 | $15,400 | AUTHORISED | 15 | ACT-BG | Recent, monitor |
-| **Aleisha J Keating** | INV-0238..0307 | $12,150 | AUTHORISED (×27) | 7d–301d | ACT-FM | Weekly $450 retainer — decide Pty continuation |
-| **Homeland School Company** | INV-0303 | $4,950 | AUTHORISED | 70 | ACT-JH | Chase |
-| **SMART Recovery Australia** | INV-0322 | $2,200 | AUTHORISED | 42 | ACT-SM | Chase |
-| **TOTAL OUTSTANDING** | | **$507,700** | | | | |
-
-#### Planned novation work
-
-| Item | Target | Evidence | Status |
+| Item | Status baseline | Status now | Change |
 |---|---|---|---|
-| Novation letter template | Week 5-6 | `thoughts/shared/drafts/novation-letter-templates.md` — two templates (grant funders + commercial counterparties), placeholder-complete | 🟡 DRAFT — Standard Ledger review needed before sending |
-| Novation letters to Snow, Paul Ramsay, Lord Mayor's, Dusseldorp, Equity Trustees | Week 5-6 | None sent | 🔴 NOT STARTED (template exists; sending is next) |
-| Enumeration of active grants on sole trader | Before Week 5 | Q1 synthesis partially enumerated; Q3 receivables list extends it | 🟡 IN PROGRESS |
+| Pty Xero file opens | 🔴 OPEN | 🔴 OPEN (still 1 tenant, 1,772 invoices) | → |
+| Final sole trader BAS | ⏳ NOT YET DUE | ⏳ NOT YET DUE | → |
+| R&D FY26 claim | ⏳ NOT YET DUE | ⏳ NOT YET DUE | → |
 
-### Section 5 — Commercial contracts (unchanged)
+### Section 4 — Grants and funders
 
-All items remain 🔴 NOT STARTED. No new drafts or evidence of progress since baseline.
-
-### Section 6 — IP (unchanged)
-
-| Item | Status |
-|---|---|
-| IP assignment deed (Nic → Pty) | 🔴 NOT STARTED |
-| GitHub org transfer | 🔴 NOT STARTED |
-| Trademark registration | 🔴 NOT STARTED |
-
-### Section 7 — Insurance ⚠️ TIME-CRITICAL
-
-| Item | Required by | Evidence | Status |
+| Item | Status baseline | Status now | Change |
 |---|---|---|---|
-| Public Liability $20M | Before Harvest lease | No broker selection | 🔴 NOT STARTED |
-| Workers Comp | First employee | No staff | ⏳ NOT YET DUE |
-| Professional Indemnity | 1 July 2026 | No binding | 🔴 NOT STARTED |
-| Product Liability | First Goods sale | — | ⏳ NOT YET DUE |
-| **Directors & Officers** | **2026-05-24 (24 days)** | **No broker, no binding, no ACCPAY invoice in Xero** | **🔴 URGENT — 24 days remain** |
-| Cyber | Year 1 | — | ⏳ DEFERRED |
-| Insurance broker selection | Week 1 | No decision recorded | 🔴 NOT STARTED |
+| Snow INV-0321 ($132K) — call + migration notice | 🔴 NOT STARTED | 🔴 NOT STARTED | → **13 days overdue** |
+| Centrecorp INV-0314 ($84.7K) — DRAFT decision | 🔴 NOT STARTED | 🔴 NOT STARTED | → **84-day DRAFT now** |
+| Rotary INV-0222 ($82.5K) — chase or write off | 🔴 NOT STARTED | 🔴 NOT STARTED | → **392 days** |
+| Novation letter template | 🔴 NOT STARTED | **🟡 DRAFT EXISTS** | ✅ **improved** |
+| Novation letters to funders (send) | 🔴 NOT STARTED | 🔴 NOT STARTED | → |
+| Grant enumeration for sole trader | 🟡 IN PROGRESS | 🟡 IN PROGRESS | → |
 
-### Section 8 — Governance artefacts
+New receivables requiring migration decisions:
 
-| Item | Target | Status |
-|---|---|---|
-| Shareholders Agreement | Week 1-2 (per CEO review Rule 4) | 🔴 NOT STARTED — resequenced to Week 1-2 but still unsigned |
-| Pty minute book | Ongoing | 🟡 UNVERIFIED |
+| Counterparty | Invoice | Amount | Status | Project | Note |
+|---|---:|---:|---|---|---|
+| **Snow Foundation** | INV-0321 | $132,000 | AUTHORISED | ACT-GD | 50d old; migration notice overdue |
+| **Rotary eClub** | INV-0222 | $82,500 | AUTHORISED | ACT-GD | 392d old; chase or write off |
+| **PICC** | INV-0317 | $19,800 | AUTHORISED | ACT-PI | Partial paid ($16.5K); $19.8K outstanding |
+| **PICC** | INV-0324 | $77,000 | AUTHORISED | ACT-PI | 29d old; confirm payment timing |
+| **Regional Arts Australia** | INV-0301/0302 | $33,000 | AUTHORISED | ACT-HV | 141d old |
+| **Homeland School Company** | INV-0303 | $40,000 | AUTHORISED | ACT-JH | ⚠️ was $4,950 at baseline; verify re-issue |
+| **Sonas Properties Pty Ltd** | INV-0328 | $37,290 | AUTHORISED | ACT-HV | 🆕 New — verify provenance |
+| **Brodie Germaine Fitness** | INV-0325 | $15,400 | AUTHORISED | ACT-BG | 22d; monitor |
+| **Aleisha J Keating** | INV-0238..0307 | $12,150 | AUTHORISED (×27) | ACT-FM | Retainer decisions needed pre-cutover |
+| **SMART Recovery Australia** | INV-0322 | $2,200 | AUTHORISED | ACT-SM | Chase |
+| **John Villiers Trust** | INV-0327 | $1,200 | AUTHORISED | ACT-CORE | 🆕 New — small grant/service invoice |
+| **Centrecorp Foundation** | INV-0314 | $84,700 | **DRAFT** | ACT-GD | 84d DRAFT; decision overdue |
+| **TOTAL OUTSTANDING** | | **$537,240** | | | ↑ $29,890 vs baseline |
 
-### Sections 9–10 — Subscriptions and Communications (unchanged)
+**Paid since baseline:** Just Reinvest INV-0295 $27,500 ✅ · PICC INV-0317 partial $16,500 ✅
 
-All subscription transfers (Xero, GHL, Supabase, Vercel, Google Workspace, Stripe, Anthropic, GitHub, etc.) and communications (email footers, website, announcement email) remain 🔴 NOT STARTED or ⏳ BLOCKED. Expected — most are scheduled for Weeks 7-8.
+### Section 7 — Insurance
+
+| Item | Status baseline | Status now | Change |
+|---|---|---|---|
+| D&O insurance | 🟡 DUE ~30 DAYS (by 2026-05-24) | 🔴 DUE **17 DAYS** | ↑ **escalated** |
+| Insurance broker selection | 🔴 NOT STARTED | 🔴 NOT STARTED | → |
+| Public Liability $20M | 🔴 NOT STARTED | 🔴 NOT STARTED | → |
+| Professional Indemnity | 🔴 NOT STARTED | 🔴 NOT STARTED | → |
+
+### Section 8 — Governance
+
+| Item | Status baseline | Status now | Change |
+|---|---|---|---|
+| Shareholders Agreement | 🔴 NOT STARTED | 🔴 NOT STARTED | → |
+| Pty minute book | 🟡 UNVERIFIED | 🟡 UNVERIFIED | → |
 
 ---
 
-## Status summary
+## Status summary — full checklist
 
-| Status | Baseline count | 2026-04-30 count | Change |
+| Status | Baseline (2026-04-24) | This pass (2026-05-07) | Change |
 |---|---:|---:|---|
 | ✅ DONE | 5 | 5 | → |
-| 🟡 IN PROGRESS / PARTIAL | 7 | 8 | +1 (novation template drafted) |
-| 🔴 NOT STARTED / OPEN | 28 | 27 | -1 (moved to 🟡) |
+| 🟡 IN PROGRESS / PARTIAL | 7 | **8** | ↑ 1 (novation templates) |
+| 🔴 NOT STARTED / OPEN | 28 | **27** | ↓ 1 (novation templates) |
 | ⏳ NOT YET DUE / BLOCKED | 13 | 13 | → |
 | **Total** | **53** | **53** | |
 
-53% of items not started is still expected — the plan sequences most artefacts for Weeks 5-8. But the three Standard-Ledger-dependent blockers (ABN, Pty Xero, NAB) are now on the critical path for everything else.
+The 5% done rate is unchanged. The D&O insurance has escalated from 🟡 to effectively 🔴 (17 days, no binding). If counted as 🔴, NOT STARTED rises back to 28 and IN PROGRESS stays at 7. Either way, the picture is: one artefact win (novation template), everything structural still open.
 
 ---
 
-## Cutover risk map
+## Cutover risk map — updated
 
-### 🚨 Red (would materially damage 1 July launch if not done)
+### 🚨 Red (now critical — were amber/open at baseline)
 
-1. **D&O insurance binding — due 2026-05-24 (24 days).** No broker selected. This is the most immediately actionable 🔴 item.
-2. **Pty ABN + GST rego** — blocks Pty Xero, invoicing. Standard Ledger Week 1-2.
-3. **NAB business account** — blocks Stripe, subscriptions, Pty invoicing.
-4. **Pty Xero file** — blocks all Pty invoicing from 1 July.
-5. **Director IDs confirmed** — unverified; blocks ABN if missing.
-6. **Centrecorp INV-0314 DRAFT decision** — $84.7K, Minderoo pitch deadline 2026-05-15.
-7. **Shareholders Agreement** — resequenced to Week 1-2 per CEO Rule 4; still unsigned.
+1. **D&O insurance binding** — due **2026-05-24, 17 days away**. No binding evidence. If no broker was selected (baseline action not visible in DB), select today and accept same-day bind.
+2. **Pty ABN + GST rego** — target was first week of May, now overdue by 7 days. No Pty Xero file means no invoicing from 1 July.
+3. **Pty Xero file opens** — blocked on ABN. Now 54 days out with zero Pty file evidence.
+4. **Pty NAB business account** — apply was "this week" from 2026-04-24. Still no Pty account in DB. Stripe + subscriptions blocked.
+5. **Director IDs confirmed** — unverified 2 weeks running. Blocks ABN if missing.
+6. **Centrecorp INV-0314** — 84-day DRAFT. Blocks Minderoo pitch. Only-Ben decision.
 
-### 🟠 Amber (must ship by mid-May to hit 30 June cleanly)
+### 🟠 Amber (must ship by mid-May)
 
-8. **Snow Foundation INV-0321 call** — payment + Pty migration notice.
-9. **Novation letters batch** — template exists; sending requires Standard Ledger review + ABN.
-10. **IP assignment deed** — plan Week 4-5; needs lawyer turnaround.
-11. **Enumeration of active grants** — prerequisite for novation batch.
-12. **Rotary eClub INV-0222 decision** — 386 days old; chase-or-write-off.
-13. **Harvest lease** — lease_start 2026-07-01; must be signed in Pty name.
+7. **Novation letters sent to all current funders** — template exists ✅; send is still scheduled Weeks 5-6 (now Weeks 3-4 in the compressed timeline). Snow call overdue.
+8. **IP assignment deed + Shareholders Agreement** — no draft, plan week 4-5. Standard Ledger lawyer needed.
+9. **Homeland School INV-0303 anomaly** — amount jumped $4,950 → $40,000, verify with Nic.
+10. **Harvest lease (Sonas Properties)** — lease_start 2026-07-01. No signed lease in Pty name.
 
-### 🟡 Yellow (recoverable post-cutover)
+### 🟡 Yellow (recoverable if addressed by end of May)
 
-14. Email/website footer updates, announcement email, Xero invoice template, subscription transfers, GitHub org transfer, trademark registration.
+11. Email/website footer updates.
+12. Announcement email draft.
+13. Subscription billing audit (38 vendor patterns in DB, no consolidated output yet).
+14. GitHub org transfer.
 
 ---
 
-## Alignment-loop acceptance criteria
+## Open questions — unchanged from baseline
 
-| Criterion | Met? | Evidence |
-|---|---|---|
-| Every "this week" action either verifiably done or flagged open | ✅ | All Week-1 items status tracked; ABN/NAB/Director IDs still 🔴 |
-| Every grant in Q1's live list has novation status | ✅ | Template drafted; sending 🔴 |
-| Drafts-but-not-sent distinguished from sent | ✅ | 1 draft (template), 0 sent |
+1. Are Director IDs for Ben and Nic already registered (from A Kind Tractor Ltd setup)?
+2. Has NAB application been submitted? (no DB evidence but may be in-process)
+3. Has Standard Ledger confirmed ABN date? (target was first week of May)
+4. Aleisha Keating retainer — continues under Pty? (27 invoices outstanding, oldest 307 days)
+5. Regional Arts Australia $33K at 141 days — chase status?
+6. Homeland School INV-0303 — why did the amount change from $4,950 to $40,000?
 
 ---
 
 ## Sources queried
 
-| Source | Query / path | As-of |
+| Source | Query | As-of |
 |---|---|---|
-| Plan | `thoughts/shared/plans/act-entity-migration-checklist-2026-06-30.md` | 2026-04-30 (updated post-baseline) |
-| DB | `xero_invoices` WHERE status IN (AUTHORISED, DRAFT) AND type=ACCREC AND amount_due>0 | 2026-04-30 |
-| DB | `xero_invoices` GROUP BY xero_tenant_id | 2026-04-30 |
-| DB | `bank_statement_lines` GROUP BY bank_account | 2026-04-30 |
-| DB | `xero_invoices` GROUP BY status, type | 2026-04-30 |
-| Drafts | `thoughts/shared/drafts/` listing, filtered for novation/migration keywords | 2026-04-30 |
-| Plans | `thoughts/shared/plans/` listing, filtered for entity/migration/pty keywords | 2026-04-30 |
+| `xero_invoices` | xero_tenant_id GROUP BY; ACCREC outstanding; status/type summary | 2026-05-07 |
+| `bank_statement_lines` | GROUP BY bank_account | 2026-05-07 |
+| `thoughts/shared/drafts/` | migration keyword grep | 2026-05-07 |
+| `thoughts/shared/plans/act-entity-migration-checklist-2026-06-30.md` | full read | 2026-05-07 |
 
-### Caveats
-
-1. **D&O insurance binding not in Xero** — no ACCPAY insurance invoice visible. If Standard Ledger or Ben bound a policy outside Xero, it wouldn't show here. Flagged as 🔴 based on absence of evidence.
-2. **ABN not visible via DB** — Pty's ABN would only appear when Standard Ledger adds a new Xero tenant. The 1-tenant result confirms no new file. Does not confirm whether ABN application was submitted.
-3. **Shareholders Agreement** — no internal copy referenced. Standard Ledger may have initiated. Flagged 🔴 as conservative default.
-4. **Director IDs** — unverifiable via DB. Still ⚠️ UNVERIFIED.
-
----
+**Caveats:**
+1. ABN, Director IDs, NAB, and insurance are not DB-visible until they produce transactions. Absence of evidence ≠ evidence of absence — verify directly with Ben/Nic.
+2. Novation drafts may exist in Google Drive / email not visible in the repo.
+3. Pty Xero file will appear in DB only after Standard Ledger connects it to the Supabase sync.
 
 ## Backlinks
 
 - [[act-alignment-loop|ACT Alignment Loop — the cycle this synthesis belongs to]]
-- [[funder-alignment-2026-05-08|Q1 funder alignment — second pass]]
-- [[project-truth-state-2026-05-08|Q2 project truth-state — second pass]]
 - [[entity-migration-truth-state-2026-04-24|Q3 entity migration — 2026-04-24 baseline]]
-- [[alignment-loop-drift-2026-04-24-to-2026-05-08|Drift summary — what changed between passes]]
+- [[funder-alignment-2026-05-08|Q1 funder-alignment — 2026-05-08 second pass]]
+- [[alignment-loop-drift-2026-04-24-to-2026-05-08|Drift summary — 2026-04-24 → 2026-05-08]]
 - [[index|ACT Wikipedia]]

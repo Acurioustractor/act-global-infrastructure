@@ -1,115 +1,130 @@
 ---
-title: Funder alignment — second pass, 6 days after baseline
-summary: Second pass of the ACT Alignment Loop (Q1). Same four-source cross-reference as the 2026-04-24 baseline. Key finding: zero invoice status changes in 6 days — Snow still unpaid, Centrecorp still unsent, Rotary still unresolved. funders.json is now v2 (21 funders). The Snow call still hasn't happened.
+title: Funder alignment — second pass, 13 days after baseline
+summary: Second pass of the ACT Alignment Loop (Q1), 13 days after the 2026-04-24 baseline. Funder-invoice receivables unchanged at $299K. 90+ day silent contact count grew from ~10 to 17. John Villiers Trust billed for the first time ($1,200). Centrecorp still a DRAFT on day 84.
 tags: [synthesis, funders, alignment-loop, entity-migration]
 status: active
-date: 2026-05-08
+date: 2026-05-07
 ---
 
 # Funder alignment — 2026-05-08
 
-> Second artefact of the [[act-alignment-loop|ACT Alignment Loop]], Pass 2. Queries ran 2026-04-30 (6 days after the 2026-04-24 baseline); file is dated 2026-05-08 per the scheduled second-pass cadence. Four sources: `xero_invoices` (DB reality), `ghl_contacts` (communication state), `wiki/narrative/funders.json` (strategic narrative), `thoughts/shared/drafts + plans` (in-flight work).
+> Second artefact of the [[act-alignment-loop|ACT Alignment Loop]], second pass. Same four sources as baseline: `xero_invoices` (DB reality), `ghl_contacts + communications_history` (communication state), `wiki/narrative/funders.json` (strategic narrative), and `thoughts/shared/drafts + plans` (in-flight work). Compare to [[funder-alignment-2026-04-24|the 2026-04-24 baseline]].
 
 ## Headline findings
 
-1. **Zero invoice status changes since 2026-04-24.** Snow Foundation INV-0321 is still AUTHORISED and now 43 days old. Centrecorp INV-0314 is still a DRAFT and now 76 days old. Rotary eClub INV-0222 is still AUTHORISED and now 386 days old. The three decisions flagged in the baseline have not been made.
-2. **Total outstanding up by $350 — one additional Aleisha weekly.** $507,700 vs $507,350 baseline. Aleisha's recurring retainer added one more unpaid weekly invoice (INV-0307 paid, new week queued). The change is noise, not signal.
-3. **`wiki/narrative/funders.json` updated to v2 on 2026-04-24.** The 7 absent funders flagged in the Q1 baseline were added as stub entries on the same day. The wiki ledger now has 21 funders, up from 14. Stage accuracy still needs Nic-verified review for several stubs.
-4. **Snow contact silence grew from 10 to 17 days.** Alexandra Lagelee Kean's last communication was 2026-04-13. The "call Snow to confirm payment + Pty migration notice" action has not been taken.
-5. **Paul Ramsay Foundation crossed 87 days silent.** Was 80 days at baseline. Approaching the 90-day threshold that flags a relationship at risk.
-6. **Two missing project_codes fixed post-baseline.** PICC INV-0324 ($77K) now correctly tagged `ACT-PI`. Brodie Germaine Fitness INV-0325 ($15.4K) now correctly tagged `ACT-BG`. These data-quality gaps from the baseline are closed.
+1. **The three live funder invoices are unmoved.** Snow ($132K AUTHORISED, now 50 days), Centrecorp ($84.7K DRAFT, now 84 days), Rotary ($82.5K AUTHORISED, now 392 days). Combined $299,200 — the same figure as baseline. No collection on any of the three in 13 days.
+
+2. **`wiki/narrative/funders.json` unchanged.** Version 2, still 21 funders, last updated 2026-04-24. The 7 new data-only stubs added in the baseline run haven't been enriched. Stage corrections for Snow (now `active-partner` ✅) and Paul Ramsay (now `warm` ✅) were committed at baseline and stand.
+
+3. **The 90+ day silent contact count jumped from ~10 to 17.** The university research cluster (Sandra Phillips, Nizam Abdu, Robyn Sloggett, Emily Nicholson, Amanda Neil) all crossed 90 days simultaneously (now 93 days). Paul Ramsay Foundation crossed 90 days (94 days). Ardi Muckan (QLD Sport) crossed 90 days (97 days). The January cold-outreach batch (Matthew Cox / Bryan Foundation, Kristen Lark / TFN) is now 183-184 days silent — well past recoverable territory.
+
+4. **John Villiers Trust now has a Xero invoice.** INV-0327 $1,200 AUTHORISED (issued 2026-05-03, ACT-CORE). JV Trust was a GHL-only lead at baseline (Fiona Maxwell, 25 days silent). They now have a small billing relationship but no `funders.json` entry — the wiki ledger is still incomplete for this contact.
+
+5. **Sonas Properties INV-0328 $37,290 new.** AUTHORISED 2026-05-06, tagged ACT-HV. Sonas is the Harvest (Witta) property landlord — this is an unusual ACCREC relationship. Origin unclear from DB: could be a service invoice, a deposit recovery, or a recharge. Verify with Nic before treating as a grant receivable.
 
 ---
 
-## At-a-glance — funders with DB or comms presence
+## At-a-glance — every funder, every source
 
-Legend: 🟢 paid / current, 🟡 outstanding, ⚪ historical-only, ❔ wiki-only (no DB presence), ⚠️ drift-alert
+Legend: 🟢 paid / current, 🟡 outstanding, ⚪ historical-only, ❔ wiki-only (no DB presence), ⚠️ drift-alert, 🆕 new since baseline
 
-| Funder | DB status | Total billed | Outstanding | Last comm | `funders.json` stage | Named in plans? | Drift |
-|---|---|---|---|---|---|---|---|
-| **The Snow Foundation** | 🟢 live | $402,930+ | **$132,000** AUTHORISED 43d | 17 days | active-partner (v2) | ✅ entity-migration, Goods pitch | ⚠️ call still not made (was 10d silent at baseline) |
-| **Centrecorp Foundation** | 🟡 draft | $208,032 | **$84,700** DRAFT 76d | — | active-partner (v2) | ✅ goods-ceo-letter | ⚠️ draft still unsent; Nic decision outstanding |
-| **Rotary eClub Outback Australia** | 🟡 12mo+ | $82,500 | **$82,500** AUTH 386d | — | ask-pending (v2) | — | ⚠️ chase-or-write-off still undecided |
-| **Vincent Fairfax Family Foundation** | 🟢 paid | $50,000 | 0 | — | lapsed (v2) | — | → stub added 2026-04-24, no new activity |
-| **Social Impact Hub Foundation** | 🟢 paid | $26,730 | 0 | — | lapsed (v2) | — | → stub added |
-| **State of QLD DFSDSCS** | 🟢 paid | $22,000 | 0 | — | lapsed (v2) | — | → stub added |
-| **Dusseldorp Forum** | 🟢 paid | $16,500 | 0 | 29 days | active-partner | ✅ CONTAINED tour | ⚠️ silence +7d |
-| **StreetSmart Australia** | 🟢 paid | $9,400 | 0 | — | active-partner (v2) | ✅ funder-notes | → stub added; narrative TBD |
-| **Paul Ramsay Foundation** | 🟢 paid | $7,469 | 0 | 87 days | warm | ✅ multiple | ⚠️ 87d silent (approaching 90d threshold) |
-| **Westpac Scholars Trust** | 🟢 paid | $3,080 | 0 | — | lapsed (v2) | — | → stub added |
-| **Minderoo Foundation** | ❔ ask-pending | — | — | — | ask-pending ($2.9M due 2026-05-15) | ✅ everywhere | ⚠️ deadline 15 days away |
-| **QBE Catalysing Impact** | ❔ term-pending | — | — | — | term-sheet-pending | ✅ entity-migration | ✅ aligned |
-| **Tim Fairfax Family Foundation** | ❔ | — | — | — | warm-cold | — | neutral |
-| **June Canavan Foundation** | ❔ | — | — | — | active-partner ($60K) | — | ⚠️ still no Xero invoice (unverified stage) |
-| **Atlassian Foundation** | ❔ | — | — | — | cold ($200K target) | — | neutral |
-| **The Smith Family** | ❔ | — | — | — | cold | — | neutral |
-| **Amnesty International Australia** | ❔ | — | — | — | cold | — | neutral |
-| **NIAA** | ❔ | — | — | — | procurement-prospect | — | neutral |
-| **Patagonia / Allbirds / Who Gives A Crap** | ❔ | — | — | — | cold | — | brand-aligned longshots |
-| **Georgina Byron** | 🟢 GHL-only | — | — | 36 days | *not listed* | — | 🟢 new lead surfaced |
-| **Adam Robinson** | 🟢 GHL-only | — | — | 33 days | *not listed* | — | 🟢 new lead surfaced |
-| **YJ Grants** | 🟢 GHL-only | — | — | 48 days | *not listed* | — | 🟢 new lead surfaced |
-| **AMP Foundation Tomorrow Makers** | 🟢 GHL-only | — | — | 133 days | *not listed* | — | ⚠️ 133d silent |
-| **Queensland Gives** | 🟢 GHL-only | — | — | 139 days | *not listed* | — | ⚠️ 139d silent |
-| **Matthew Cox (Bryan Foundation)** | 🟢 GHL-only | — | — | 176 days | *not listed* | — | ⚠️ 176d silent |
-| **Kristen Lark (TFN)** | 🟢 GHL-only | — | — | 177 days | *not listed* | — | ⚠️ 177d silent |
-
----
-
-## Money in flight — 61-day countdown
-
-Three invoices remain on the sole trader's books with outstanding balance. The 30 June cutover is now 61 days away (as of 2026-04-30).
-
-### 🔴 Snow Foundation INV-0321 — $132,000 AUTHORISED (2026-03-18, 43 days)
-
-- **Status:** Unchanged since baseline. AUTHORISED, not paid.
-- **Baseline action:** "Call Sally or Alexandra within 2 weeks to confirm payment + notify Pty migration."
-- **Status of action:** NOT TAKEN. Alexandra Lagelee Kean's last comm was 2026-04-13 (17 days ago). The relationship is still warm but the window is contracting. The Minderoo pitch (due 2026-05-15) makes this conversation more urgent — Snow is named in the Goods pitch as live active-partner validation.
-- **Risk:** Payment lands in sole trader post-cutover if Pty migration notice isn't sent. Next tranche mis-attributed if relationship isn't briefed.
-
-### 🔴 Centrecorp Foundation INV-0314 — $84,700 DRAFT (2026-02-13, 76 days)
-
-- **Status:** Unchanged since baseline. Still a DRAFT, never sent.
-- **Baseline action:** "Decide with Nic: send now / void / reissue from Pty July 1."
-- **Status of action:** NOT TAKEN. Named in the Goods → Minderoo pitch as live pipeline. The pitch deadline is 2026-05-15 — 15 days. If Lucy asks about Centrecorp's status, the answer is still "a draft invoice, 76 days old."
-- **Risk:** Compromises Minderoo pitch evidence. $84.7K stranded until decision is made.
-
-### 🔴 Rotary eClub Outback Australia INV-0222 — $82,500 AUTHORISED (2025-04-10, 386 days)
-
-- **Status:** Unchanged. AUTHORISED, 386 days unpaid, no comm history.
-- **Baseline action:** "Chase or write off. Only-Ben decision."
-- **Status of action:** NOT TAKEN. No communications history visible in GHL. Cutover in 61 days makes this increasingly a bad-debt decision rather than a chase.
-- **Risk:** Sole trader closes out FY26 with this as an unresolved receivable. Either a bad-debt write-off on the sole trader's return (deductible but messy) or a pre-cutover recovery sprint.
+| Funder | DB status | Total billed | Outstanding | Last comm (days) | `funders.json` stage | Drift |
+|---|---|---|---|---|---|---|
+| **The Snow Foundation** | 🟡 authorised | $402,930 hist + $132K out | **$132,000** AUTHORISED 50d | 24d (Alexandra) | active-partner | ⚠️ still unpaid 50d; migration notice not yet sent |
+| **Centrecorp Foundation** | 🟡 draft | $208,032 hist | **$84,700** DRAFT 84d | no comm | active-partner | ⚠️ still DRAFT — 84 days, blocks Minderoo pitch credibility |
+| **Rotary eClub Outback Australia** | 🟡 12mo+ | $82,500 | **$82,500** AUTH 392d | no comm | ask-pending | ⚠️ 392 days, no movement, no decision |
+| **John Villiers Trust** | 🆕 small inv | $1,200 | **$1,200** AUTHORISED 4d | — | *not listed* | 🆕 first Xero invoice; no funders.json entry |
+| **Sonas Properties** | 🆕 ACCREC | — | **$37,290** AUTHORISED 1d | — | *not listed* | 🆕 unusual ACCREC to a landlord — verify provenance |
+| **Vincent Fairfax Family Foundation** | 🟢 paid | $50,000 | 0 | — | lapsed (stub) | ✅ stub added 2026-04-24 |
+| **Social Impact Hub Foundation** | 🟢 paid | $26,730 | 0 | — | lapsed (stub) | ✅ stub added 2026-04-24 |
+| **State of QLD DFSDSCS** | 🟢 paid | $22,000 | 0 | — | lapsed (stub) | ✅ stub added 2026-04-24 |
+| **Dusseldorp Forum** | 🟢 paid | $16,500 | 0 | 36d (Teya) | active-partner | ✅ aligned |
+| **StreetSmart Australia** | 🟢 paid | $9,400 | 0 | 247d (Alan White) | active-partner (stub) | ⚠️ silence deepened to 247d |
+| **Paul Ramsay Foundation** | 🟢 paid | $7,469 | 0 | 94d (general@) | warm | ⚠️ crossed 90-day silence threshold |
+| **Westpac Scholars Trust** | 🟢 paid | $3,080 | 0 | — | lapsed (stub) | ✅ no change |
+| **Minderoo Foundation** | ❔ ask-pending | — | — | — | ask-pending ($2.9M) | ⚠️ deadline was 2026-05-15 — 8 days from now |
+| **QBE Catalysing Impact** | ❔ term-pending | — | — | — | term-sheet-pending | ✅ aligned |
+| **Tim Fairfax Family Foundation** | ❔ | — | — | — | warm-cold | neutral |
+| **June Canavan Foundation** | ❔ | — | — | — | active-partner ($60K) | ⚠️ still unverified — no Xero invoice |
+| **Atlassian Foundation** | ❔ | — | — | — | cold ($200K) | neutral |
+| **The Smith Family** | ❔ | — | — | — | cold | neutral |
+| **Amnesty International Australia** | ❔ | — | — | — | cold | neutral |
+| **NIAA** | ❔ | — | — | — | procurement-prospect | neutral |
+| **Patagonia / Allbirds / Who Gives A Crap** | ❔ | — | — | — | cold | neutral |
+| **FRRR (Steph Pearson)** | 🟢 GHL-only | — | — | — | *not listed* | 🟢 lead |
+| **Matthew Cox / Bryan Foundation** | 🟢 GHL-only | — | — | 183d | *not listed* | ⚠️ 183d — effectively lapsed |
+| **Kristen Lark / TFN** | 🟢 GHL-only | — | — | 184d | *not listed* | ⚠️ 184d — effectively lapsed |
+| **AMP Foundation** | 🟢 GHL-only | — | — | 140d | *not listed* | ⚠️ 140d |
+| **Queensland Gives** | 🟢 GHL-only | — | — | 146d | *not listed* | ⚠️ 146d |
 
 ---
 
-## Communication-overdue list
+## Money in flight — the 54-day countdown
 
-GHL `communications_history` against funder-tagged contacts. As of 2026-04-30:
+Three funder invoices outstanding. Status identical to baseline — zero movement.
 
-| Days silent | Funder / contact | Signal |
+### 🔴 Snow Foundation INV-0321 — $132,000 AUTHORISED (50 days old)
+
+- **Status unchanged from baseline.** Was 37 days old on 2026-04-24, now 50 days old. Still unpaid.
+- Alexandra Lagelee Kean last comm 24 days ago (2026-04-13) — relationship still warm.
+- **Migration notice not yet sent.** This call (confirm payment + Pty transition notice) was flagged as "this week" in the baseline. It is now overdue by 13 days.
+- **Required action (only-Ben):** Call Sally or Alexandra this week. Confirm INV-0321 payment timing. Notify: from 1 July 2026, future tranches invoice to A Curious Tractor Pty Ltd ACN 697 347 676.
+
+### 🔴 Centrecorp Foundation INV-0314 — $84,700 DRAFT (84 days old)
+
+- **Status unchanged from baseline.** Still a DRAFT. No decision on send / void / reissue-from-Pty.
+- **Blocking the Minderoo pitch.** The Goods → Minderoo pipeline lists Centrecorp as live pipeline. At 84 days as a DRAFT, this is a credibility liability.
+- **Required action (only-Ben):** The 10-minute Nic conversation. Send now (sole trader gets the money), void + reissue from Pty after 1 July, or close. Decision is now overdue by 13+ days.
+
+### 🔴 Rotary eClub Outback Australia INV-0222 — $82,500 AUTHORISED (392 days old)
+
+- **Status unchanged from baseline.** Now 392 days old. No action, no communication, no decision.
+- **Required action (only-Ben):** Chase or write off. This is now at the 13-month mark with no response. If the grant conditions weren't met, it's bad debt on the sole trader's FY26 close-out BAS. 30 June is 54 days away.
+
+---
+
+## Communication-overdue list — 2026-05-07
+
+| Days | Contact / org | Signal |
 |---|---|---|
-| 17 | Alexandra Lagelee Kean (Snow Foundation) | Key relationship — call overdue per baseline action |
-| 29 | Teya Dusseldorp | Active partner; recent enough |
-| 48 | YJ Grants | Surfaced since baseline; worth understanding |
-| 69 | Anne Gripper | Borderline |
-| 86–87 | Sandra Phillips, Robyn Sloggett, Nizam Abdu, Emily Nicholson, Amanda Neil, Paul Ramsay Foundation | University/research cluster + PRF — PRF approaching 90d |
-| 90 | Ardi Muckan (QLD Sport) | Government |
-| 133 | AMP Foundation Tomorrow Makers | Early-Dec batch — well past 90d threshold |
-| 139 | Queensland Gives | Same batch |
-| 176–177 | Matthew Cox (Bryan Foundation), Kristen Lark (TFN) | November batch — 5+ months silent |
-| 204+ | Shannon Lemanski, Jacqueline Fearnley, StreetSmart cluster, Jioji Ravulo, Michelle Scott | September–October cold-contact batch — functionally lapsed |
+| 24 | Alexandra Lagelee Kean (Snow Foundation) | Warm — but Snow INV-0321 still outstanding |
+| 29 | Georgina Byron | Funder-tagged contact — verify role |
+| 36 | Teya Dusseldorp (Dusseldorp Forum) | Active partner — 36d is fine |
+| 40 | Adam Robinson | Funder-tagged — verify relationship |
+| 55 | YJ Grants | Grant programme contact |
+| 76 | Anne Gripper | One-off contact |
+| 93 | Sandra Phillips, Nizam Abdu, Robyn Sloggett, Emily Nicholson, Amanda Neil | University cluster — crossed 90d |
+| 94 | Paul Ramsay Foundation (general@) | **Crossed 90d** — re-engage or acknowledge lapsed |
+| 97 | Ardi Muckan (QLD Sport) | **Crossed 90d** — government contact |
+| 140 | AMP Foundation Tomorrow Makers | Jan cold-outreach batch — likely lapsed |
+| 146 | Queensland Gives | Jan cold-outreach batch — likely lapsed |
+| 183 | Matthew Cox (Bryan Foundation) | Jan cold-outreach batch — lapsed |
+| 184 | Kristen Lark (The Funding Network) | Jan cold-outreach batch — lapsed |
+| 211 | Shannon Lemanski | Lapsed |
+| 213 | Jacqueline Fearnley | Lapsed |
+| 247 | Alan White (StreetSmart) | Lapsed |
+| 252 | Michelle Scott | Lapsed |
+| 267 | Isabella Stanley (StreetSmart) | Lapsed |
+| 288 | Jioji Ravulo | Lapsed |
+
+**90+ day count: 17** (was ~10 at baseline). Growth driven by the university cluster and Paul Ramsay crossing the threshold.
 
 ---
 
-## Open actions (ranked by 30 June cutover risk)
+## Drift — what changed since 2026-04-24
 
-1. **Call Snow Foundation — INV-0321 payment + Pty migration notice.** Overdue since baseline. Window: before Minderoo pitch 2026-05-15.
-2. **Decide Centrecorp INV-0314 with Nic.** Before Minderoo pitch 2026-05-15.
-3. **Decide Rotary eClub INV-0222 chase-or-write-off.** Before June 30 close.
-4. **Verify funders.json v2 stubs with Nic.** Snow stage confirmed. JCF (June Canavan Foundation) still "active-partner" with no Xero invoice — unverified.
-5. **Re-engage Paul Ramsay Foundation.** 87 days silent, approaching 90d threshold. William Frazer is tagged `partner + justicehub` in GHL.
-6. **Minderoo deadline 2026-05-15.** No Xero invoice yet — this is the largest single ask ($2.9M / $900K year-1). Named in plans everywhere. Ensure pitch reflects current Centrecorp / Snow positioning.
+| Metric | 2026-04-24 | 2026-05-07 | Direction |
+|---|---|---|---|
+| Snow INV-0321 age | 37d AUTHORISED | 50d AUTHORISED | ↑ worse |
+| Centrecorp INV-0314 age | 70d DRAFT | 84d DRAFT | ↑ worse |
+| Rotary INV-0222 age | 380d AUTHORISED | 392d AUTHORISED | ↑ worse |
+| Total 3-funder outstanding | $299,200 | $299,200 | → unchanged |
+| Snow migration notice sent | ❌ | ❌ | → no action |
+| Centrecorp DRAFT decision | ❌ | ❌ | → no action |
+| funders.json version | v2, 21 funders | v2, 21 funders | → no change |
+| 90+ day silent contacts | ~10 | 17 | ↑ 7 new crossings |
+| New funder invoices | 0 | JVT $1.2K, Sonas $37.3K | ↑ 2 new ACCREC |
+| Minderoo deadline | 19 days away | 8 days away | ↑ critical |
 
 ---
 
@@ -117,25 +132,37 @@ GHL `communications_history` against funder-tagged contacts. As of 2026-04-30:
 
 | Criterion | Met? |
 |---|---|
-| Every funder with live outstanding amount is named | ✅ Snow, Centrecorp, Rotary |
-| Every funder in active plans with no DB presence is flagged | ✅ Minderoo, JCF, Tim Fairfax |
-| Every funder silent >90 days is flagged | ✅ AMP (133d), Queensland Gives (139d), Bryan (176d), TFN (177d), others |
+| Every funder with live outstanding amount named | ✅ Snow, Centrecorp, Rotary, JVT, Sonas |
+| Every funder in active plans with no DB presence flagged | ✅ Minderoo (8 days to deadline), June Canavan (unverified) |
+| Every funder silent >90 days flagged | ✅ 17 contacts listed |
+
+---
+
+## Open actions — ordered by urgency
+
+1. **Call Snow Foundation this week.** INV-0321 $132K still outstanding 50d. Confirm payment + Pty migration notice. Overdue by 13 days from baseline target. (only-Ben)
+2. **Decide Centrecorp INV-0314 with Nic.** 84-day DRAFT. 10-minute call. Blocking Minderoo pitch credibility. (only-Ben)
+3. **Decide Rotary INV-0222.** 392 days. Chase or write off before 30 June. (only-Ben)
+4. **Verify Sonas Properties INV-0328.** $37,290 ACCREC to the Harvest landlord — confirm what ACT is billing Sonas for. (Nic)
+5. **Minderoo deadline 2026-05-15.** 8 days. Confirm submission status. (Ben)
+6. **Re-engage or formally drop** the university cluster (93d), Paul Ramsay (94d), Ardi Muckan (97d).
+7. **Write off** the 140-183d cold-outreach batch (AMP, Qld Gives, Bryan Foundation, TFN) unless there's a specific re-engagement rationale.
+8. **Add John Villiers Trust to `funders.json`** — they now have a billing relationship ($1,200, ACT-CORE).
 
 ---
 
 ## Sources queried
 
-| Source | Query / file | Rows | As-of |
+| Source | Query / file | Rows / items | As-of |
 |---|---|---|---|
-| `xero_invoices` | ACCREC, status IN (AUTHORISED, DRAFT), amount_due > 0 | 39 | 2026-04-30 |
-| `ghl_contacts` | `funder` ∈ tags | ~27 with comm history | 2026-04-30 |
-| `communications_history` | joined against funder-tagged ghl_ids via ghl_id | 23 with comm history | 2026-04-30 |
-| `wiki/narrative/funders.json` | v2, 21 entries | 21 | 2026-04-24 (updated) |
-| `thoughts/shared/{plans,drafts}/**` | grep for funder names | current working tree | 2026-04-30 |
+| `xero_invoices` | ACCREC, AUTHORISED+DRAFT, amount_due > 0 | 40 | 2026-05-07 |
+| `ghl_contacts` + `communications_history` | funder-tagged contacts with comm history | 23 | 2026-05-07 |
+| `wiki/narrative/funders.json` | full file | 21 funders | 2026-04-24 (unchanged) |
+| `thoughts/shared/drafts/` | migration-keyword grep | novation-letter-templates.md | 2026-05-07 |
 
 ## Backlinks
 
 - [[act-alignment-loop|ACT Alignment Loop — the cycle this synthesis belongs to]]
 - [[funder-alignment-2026-04-24|Q1 funder-alignment — 2026-04-24 baseline]]
-- [[alignment-loop-drift-2026-04-24-to-2026-05-08|Drift summary — what changed between passes]]
+- [[alignment-loop-drift-2026-04-24-to-2026-05-08|Drift summary — 2026-04-24 → 2026-05-08]]
 - [[index|ACT Wikipedia]]
