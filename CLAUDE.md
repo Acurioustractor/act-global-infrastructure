@@ -84,6 +84,8 @@ Before implementing ANY external service integration:
 3. Check existing patterns in this codebase
 4. Then propose, with fallback if primary approach has risk
 
+**Notion edit rule**: Notion is mostly an outbound dashboard layer (17 `sync-*-to-notion.mjs` scripts overwrite content on each run). Before editing a Notion page or telling someone they can edit it, consult `wiki/decisions/notion-page-policy.md` to see whether the page is read-only, bidirectional, capture, or free-form. Capture pages (Money Sync, meetings, goals, inbound) are safe to edit. Outbound-only pages lose their edits on the next sync.
+
 ### Already Configured
 
 | Service | Package | Key Files |
