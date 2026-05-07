@@ -1,7 +1,7 @@
 # Standard Ledger combined ask - Aleisha write-off + R&D decision-log sign-off
 
 > Date drafted: 2026-05-07 (tightened pass: 2026-05-07)
-> To send to: Standard Ledger (primary contact - confirm name before sending)
+> To send to: Remco Marcelis <remco@standardledger.co> (resolved 2026-05-08 from Gmail thread "Recap of your meeting with Standard Ledger" 2026-05-05)
 > Round-trip closes: Aleisha bad-debt $12,150 (~$4–4.5K tax saving) + R&D pack rule 1.5 (personnel basis Unverified blocker)
 > Format: single email, two asks, four attachments listed at end
 
@@ -13,7 +13,7 @@ FY26 sign-off: Aleisha bad-debt write-off ($12,150) + R&D decision log
 
 ## Body
 
-Hi [name],
+Hi Remco,
 
 Two things to land before lodgement, packaged together so we can resolve in one round.
 
