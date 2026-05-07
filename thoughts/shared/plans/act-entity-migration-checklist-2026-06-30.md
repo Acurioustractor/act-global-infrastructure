@@ -308,7 +308,7 @@ All accepted by Ben during review. Each slots into an existing week or adds a sm
 - [ ] **Stripe subscription migration plan with 30+ day customer notice** — Week 6-7 — Ben. Stripe doesn't transfer between ABNs; customers re-authenticate. Audit recurring subs now, notify 30+ days before cutover.
 - [ ] **Dry-run $1 test invoice from Pty Xero** — Week 8 — Ben. Issue to a friendly recipient, pay it, verify end-to-end: Xero tenant, bank account, Stripe, project_code tagging, BAS treatment.
 - [ ] **Secrets hygiene for Pty Xero / Stripe / NAB creds** — Week 3-4 — Ben. Rotate new tenant credentials into project env vars via existing `env-secrets-manager` skill pattern.
-- [ ] **Weekly scheduled Alignment Loop agent from 2026-05-08** — Ben. Currently one-shot (`trig_018X1ZRtc9zdgFENiYsx5t8c` fires 2026-05-07T22:00:00Z). Update to cron weekly until 2026-07-01 for drift signal every week through cutover.
+- [ ] **Weekly scheduled Alignment Loop agent from 2026-05-08** — Ben. Currently one-shot (`trig_018X1ZRtc9zdgFENiYsx5t8c` fires 2026-05-07T22:00:00Z). Update to cron weekly (`0 22 * * 4` UTC = Friday 08:00 Brisbane) until 2026-07-01 for drift signal every week through cutover. Trigger should call `node scripts/run-alignment-loop-cycle.mjs` (the cadence-aware dispatcher shipped 2026-05-07; pre-cutover runs entity-migration weekly + alternates funder/project).
 
 ---
 
