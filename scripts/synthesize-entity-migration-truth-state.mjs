@@ -23,6 +23,7 @@ import { readFileSync, writeFileSync, readdirSync, existsSync, statSync } from '
 import { createClient } from '@supabase/supabase-js'
 import { join } from 'node:path'
 import { gradeAndLint } from './lib/alignment-loop-grade.mjs'
+import { SCHEMA_VERSION, serializeMetrics } from './lib/synthesis-schema.mjs'
 
 const REPO_ROOT = process.cwd()
 const SYNTHESIS_DIR = join(REPO_ROOT, 'wiki/synthesis')
@@ -368,9 +369,23 @@ function renderMarkdown(sections, ctx) {
   const topContacts = Object.values(ctx.receivables.byContact).sort((a, b) => b.total_outstanding - a.total_outstanding)
 
   // Frontmatter
+  const summaryMetrics = {
+    bank_accounts_visible: ctx.bankAccounts.length,
+    days_to_cutover: cutoverDays,
+    drafts_scanned: ctx.drafts.length,
+    items_done: counts.DONE,
+    items_in_progress: counts.IN_PROGRESS,
+    items_not_started: counts.NOT_STARTED,
+    items_not_yet_due: counts.NOT_YET_DUE,
+    outstanding_receivables_aud: outstandingTotal,
+    outstanding_receivables_count: ctx.receivables.rows.length,
+    total_items: total,
+    xero_tenants_visible: ctx.xeroTenants.length,
+  }
   const fm = [
     '---',
     'synthesis_slug: entity-migration-truth-state',
+    `schema_version: ${SCHEMA_VERSION}`,
     `cycle_date: ${DATE}`,
     `title: Entity migration truth-state ${DATE} (${cutoverDays} days to cutover)`,
     `summary: Phase-1 automation of Q3 of the ACT Alignment Loop. For each item in \`${PLAN_PATH}\`, cross-references plan intent with DB evidence + draft evidence + memory state. Surfaces outstanding-on-sole-trader receivables and ranks items by 30 June 2026 cutover risk.`,
@@ -384,6 +399,7 @@ function renderMarkdown(sections, ctx) {
     `  - { kind: "xero", table: "xero_invoices", filter: "GROUP BY xero_tenant_id (${ctx.xeroTenants.length} tenants)" }`,
     `  - { kind: "xero", table: "bank_statement_lines", filter: "GROUP BY bank_account (${ctx.bankAccounts.length} accounts)" }`,
     `  - { kind: "thoughts", path: "thoughts/shared/drafts/**", filter: "novation/transition/migration/IP/announcement keyword search (${ctx.drafts.length} files)" }`,
+    ...serializeMetrics(summaryMetrics),
     '---',
     '',
   ]

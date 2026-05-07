@@ -25,6 +25,7 @@ import { createClient } from '@supabase/supabase-js'
 import { join } from 'node:path'
 import { loadFunders } from './lib/claim-loader.mjs'
 import { gradeAndLint } from './lib/alignment-loop-grade.mjs'
+import { SCHEMA_VERSION, serializeMetrics } from './lib/synthesis-schema.mjs'
 
 const REPO_ROOT = process.cwd()
 const FUNDERS_PATH = 'wiki/narrative/funders.json'
@@ -401,9 +402,25 @@ function renderMarkdown(rows, totals) {
   const outstandingTotal = live.reduce((s, r) => s + r.xero.outstanding, 0)
 
   // Frontmatter
+  const summaryMetrics = {
+    days_to_cutover: cutoverDays,
+    ghl_comms_scanned: totals.ghlComms,
+    ghl_funder_contacts_scanned: totals.ghlFunderContacts,
+    ghl_silent_90_plus_count: ghlSilent.length,
+    ghost_active_partner_count: ghostActivePartner.length,
+    live_money_funder_count: live.length,
+    live_money_outstanding_aud: outstandingTotal,
+    plan_mention_files_scanned: totals.planMentionFiles,
+    stage_drift_count: stageDrift.length,
+    total_relationships: rows.length,
+    wiki_absent_count: wikiAbsent.length,
+    wiki_funders_scanned: totals.wikiFunders,
+    xero_invoices_scanned: totals.xeroFunderInvoices,
+  }
   const fm = [
     '---',
     `synthesis_slug: funder-alignment`,
+    `schema_version: ${SCHEMA_VERSION}`,
     `cycle_date: ${DATE}`,
     `title: Funder alignment auto-cycle ${DATE}`,
     `summary: Phase-1 automation of Q1 of the ACT Alignment Loop. Cross-source reconciliation of every funder relationship across xero_invoices, ghl_contacts + communications_history, wiki/narrative/funders.json, and thoughts/shared/{plans,drafts}/**.`,
@@ -416,6 +433,7 @@ function renderMarkdown(rows, totals) {
     `  - { kind: "ghl", table: "communications_history", filter: "ghl_contact_id in funder-tagged set (${totals.ghlComms} rows)" }`,
     `  - { kind: "wiki", path: "wiki/narrative/funders.json", filter: "all entries (${totals.wikiFunders} rows)" }`,
     `  - { kind: "thoughts", path: "thoughts/shared/{plans,drafts}/**", filter: "grep funder canonical names (${totals.planMentionFiles} files matched)" }`,
+    ...serializeMetrics(summaryMetrics),
     '---',
     '',
   ]

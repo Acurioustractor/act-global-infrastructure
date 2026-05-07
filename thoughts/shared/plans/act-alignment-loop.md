@@ -103,7 +103,7 @@ Phase 1 (after Phase 0 proves out):
 - [x] `scripts/synthesize-funder-alignment.mjs` (shipped 2026-05-07, PASS 100/100 against alignment-loop-synthesis rubric v0.1; Phase-2 self-grade wiring inherited via `scripts/lib/alignment-loop-grade.mjs`)
 - [x] `scripts/synthesize-project-truth-state.mjs` (shipped 2026-04-24, multi-repo extension 2026-04-25, Phase-2 self-grade wired 2026-05-07)
 - [x] `scripts/synthesize-entity-migration-truth-state.mjs` (shipped 2026-05-07, PASS 100/100; 52 checklist items × 39 outstanding receivables × 4 sources)
-- [ ] Script output schema stabilised so Phase 2 can diff (needed before week-on-week diff logic; today every synthesis emits free-form markdown without a stable section anchor or YAML frontmatter)
+- [x] Script output schema stabilised so Phase 2 can diff (shipped 2026-05-07). All three synthesize-* scripts now emit a YAML frontmatter `schema_version: 1` plus a flat `summary_metrics` dict via `scripts/lib/synthesis-schema.mjs`. Funder metrics: 13 keys (live-money funder count, outstanding AUD, drift counts, silent-90+ count, source-row scans). Project metrics: 9 keys (score distribution + acceptance-criterion violations). Entity metrics: 11 keys (item-status counts + receivables totals + tenant/bank visibility). Fields are sorted alphabetically for deterministic diff. Items-sidecar (per-row identity for item-level diff) deferred to v2 — week-on-week metric movement covers the headline drift signal first.
 
 Phase 2 (once Phase 1 is stable):
 - [~] Cron via remote agent (`trig_018X1ZRtc9zdgFENiYsx5t8c`, Friday 08:00 Brisbane = `0 22 * * 4` UTC). **Currently a one-shot fired 2026-05-07T22:00:00Z** — needs upgrade to recurring weekly trigger so the dispatcher actually runs every Friday through cutover. Tracked in `act-entity-migration-checklist-2026-06-30.md` line 311 (Ben to action via `schedule` skill or `RemoteTrigger`).
@@ -112,7 +112,7 @@ Phase 2 (once Phase 1 is stable):
 - [x] Rotation so all three questions run but staggered (shipped 2026-05-07). `scripts/run-alignment-loop-cycle.mjs` is the weekly dispatcher. Pre-cutover (today ≤ 2026-06-30): entity-migration runs every Friday (54-day countdown demands weekly drift signal), and funder-alignment / project-truth-state alternate by ISO-week parity (2 syntheses per Friday). Post-cutover: 3-way rotation by ISO-week % 3 (1 synthesis per Friday). `--all` for force-runs, `--question <slug>` for ad-hoc invocation, all other flags pass through to children.
 - [ ] Phase 2b — email content surfacing into Q1 (planned in `act-brain-expansion.md`)
 - [ ] Phase 2c — Notion document body sync into Q2/Q3 (planned in `act-brain-expansion.md`)
-- [ ] Diff-against-last-week logic (blocked on output-schema stabilisation in Phase 1)
+- [ ] Diff-against-last-week logic — schema unblocked 2026-05-07 (`schema_version: 1` + `summary_metrics` flat dict in every synthesis frontmatter). Differ should compare two `summary_metrics` blocks for the same `synthesis_slug` and surface (a) any metric movement >X% and (b) any metric crossing zero (new drift alert appears, last receivable closes, etc.). Item-level diff requires v2 schema (per-row sidecar JSON).
 
 ## Decision Log
 

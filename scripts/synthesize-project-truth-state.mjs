@@ -22,6 +22,7 @@ import { createClient } from '@supabase/supabase-js'
 import { join } from 'node:path'
 import { scanAll, topReposFor, ACT_REPOS } from './lib/act-codebase-scan.mjs'
 import { gradeAndLint } from './lib/alignment-loop-grade.mjs'
+import { SCHEMA_VERSION, serializeMetrics } from './lib/synthesis-schema.mjs'
 
 const REPO_ROOT = process.cwd()
 const CONFIG_PATH = join(REPO_ROOT, 'config/project-codes.json')
@@ -154,13 +155,28 @@ function renderMarkdown(rows, totalCodes) {
   const zeros = rows.filter(r => r.presence === 0)
   const ones = rows.filter(r => r.presence === 1)
 
+  const summaryMetrics = {
+    active_below_score_2_count: activeBelow2.length,
+    db_present_wiki_absent_count: dbNoWiki.length,
+    score_0_count: by[0],
+    score_1_count: by[1],
+    score_2_count: by[2],
+    score_3_count: by[3],
+    score_4_count: by[4],
+    total_codes: totalCodes,
+    wiki_present_xero_absent_count: wikiNoXero.length,
+  }
   const head = [
     '---',
+    `synthesis_slug: project-truth-state`,
+    `schema_version: ${SCHEMA_VERSION}`,
+    `cycle_date: ${DATE}`,
     `title: Project truth-state — ${totalCodes} codes × 4 sources (auto-generated)`,
     `summary: Phase-1 automation of Q2 of the ACT Alignment Loop. For each project code in config/project-codes.json, scores presence across wiki, DB activity, codebase references, and Xero tracking.`,
     `tags: [synthesis, projects, alignment-loop, project-codes, auto-generated]`,
     `status: active`,
     `date: ${DATE}`,
+    ...serializeMetrics(summaryMetrics),
     '---',
     '',
     `# Project truth-state — ${DATE}`,
