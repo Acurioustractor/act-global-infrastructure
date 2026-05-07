@@ -122,6 +122,20 @@ async function main() {
     codes.push({ slug, code })
   }
 
+  // After all syntheses for this cycle, run the week-on-week differ so the
+  // summary_metrics movement gets captured in wiki/cockpit/. Cheap (<1s,
+  // file reads only); always run, even if some syntheses failed — the
+  // differ tolerates partial state.
+  console.log(`[alignment-loop-cycle] running diff against last cycle`)
+  await new Promise((resolve) => {
+    const child = spawn('node', ['scripts/diff-alignment-loop-cycle.mjs'], { stdio: 'inherit' })
+    child.on('exit', () => resolve())
+    child.on('error', (err) => {
+      console.error(`[alignment-loop-cycle] diff failed: ${err.message}`)
+      resolve()
+    })
+  })
+
   const failed = codes.filter((c) => c.code !== 0)
   if (failed.length) {
     console.error(`[alignment-loop-cycle] ${failed.length}/${codes.length} synthesis runs failed:`)

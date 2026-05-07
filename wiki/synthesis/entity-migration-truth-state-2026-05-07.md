@@ -1,5 +1,6 @@
 ---
 synthesis_slug: entity-migration-truth-state
+schema_version: 1
 cycle_date: 2026-05-07
 title: Entity migration truth-state 2026-05-07 (54 days to cutover)
 summary: Phase-1 automation of Q3 of the ACT Alignment Loop. For each item in `thoughts/shared/plans/act-entity-migration-checklist-2026-06-30.md`, cross-references plan intent with DB evidence + draft evidence + memory state. Surfaces outstanding-on-sole-trader receivables and ranks items by 30 June 2026 cutover risk.
@@ -13,6 +14,18 @@ sources_queried:
   - { kind: "xero", table: "xero_invoices", filter: "GROUP BY xero_tenant_id (1 tenants)" }
   - { kind: "xero", table: "bank_statement_lines", filter: "GROUP BY bank_account (1 accounts)" }
   - { kind: "thoughts", path: "thoughts/shared/drafts/**", filter: "novation/transition/migration/IP/announcement keyword search (39 files)" }
+summary_metrics:
+  bank_accounts_visible: 1
+  days_to_cutover: 54
+  drafts_scanned: 39
+  items_done: 5
+  items_in_progress: 5
+  items_not_started: 30
+  items_not_yet_due: 12
+  outstanding_receivables_aud: 537240
+  outstanding_receivables_count: 39
+  total_items: 52
+  xero_tenants_visible: 1
 ---
 
 # Entity migration truth-state 2026-05-07
@@ -246,7 +259,7 @@ Each action names a specific file path + key, person + deadline, or script invoc
 
 ## Provenance
 
-- Generated: 2026-05-07T04:06:47.175Z
+- Generated: 2026-05-07T05:48:28.016Z
 - Script: `scripts/synthesize-entity-migration-truth-state.mjs`
 - Cutover anchor: 2026-06-30 (54 days from synthesis date)
 - Pty registration: 2026-04-24 (ACN 697 347 676)
