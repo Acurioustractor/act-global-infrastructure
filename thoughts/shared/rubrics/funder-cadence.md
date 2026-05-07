@@ -5,9 +5,9 @@
 > Created: 2026-05-07
 > Source of truth: `wiki/narrative/funders.json` (per-funder tone, themes, claims_to_lead_with, claims_to_avoid, ask_amount_aud, stage)
 > Use: pass to Anthropic Managed Agents Outcomes, or to a local grader before sending any pitch / report / renewal / followup to a funder.
-> Calibration: 0/0 (no fixtures yet — see `funder-cadence.calibration.md`)
-> Status: **draft**, not production-eligible until calibration ≥ 6/6.
-> Pass threshold: clean Tier 1 + ≥3 of 4 structural moves + zero `claims_to_avoid` hits + every dollar figure cited.
+> Calibration: 6/6 across the fixture matrix (see `funder-cadence.calibration.md`)
+> Status: **calibrated**, production-eligible.
+> Pass threshold: clean Tier 1 + all four structural moves + all four judgment moves + zero `claims_to_avoid` hits + every dollar figure cited.
 
 ## What this rubric grades
 
@@ -48,9 +48,11 @@ The rubric layers on top of `act-voice-curtis` (which catches AI-tells, em-dashe
 }
 ```
 
-`verdict = fail` if any Tier 1 hard rule trips OR any `claims_to_avoid` appears OR any dollar figure is uncited.
+`verdict = fail` if any Tier 1 hard rule trips OR any `claims_to_avoid` appears OR any dollar figure is uncited OR any Tier 3 judgment-check is `false` (tone, stage, closing, claims-to-avoid paraphrase).
 `verdict = warn` if Tier 1 + Tier 3 clean but `structural_check` has any `false`.
 `verdict = pass` if Tier 1 clean + all four structural checks pass + all four judgment checks pass.
+
+Note (2026-05-07 calibration): Tier 3 judgment misses count as `fail`, not `warn`, because a tone-mismatch or stage-contradiction or vague-closing failure is substantively as serious as an opening-language failure. Calibration intent in `funder-cadence.calibration.md` matches this; the earlier draft of these threshold lines treated judgment misses as warn-level, which let `bad-1` (generic-opener pitch) score `warn` instead of the expected `fail`. Tightened in calibration.
 
 The act-voice-curtis rubric must also be run against the same text. A `fail` there is a `fail` here; this rubric does not duplicate those checks.
 
