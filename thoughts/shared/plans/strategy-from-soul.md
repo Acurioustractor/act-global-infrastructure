@@ -95,6 +95,16 @@ Smallest sequence that fixes the whole stack. Wiki work first (so the source is 
 
 Items 1–5 are wiki. Items 6–9 are surfaces. Both flow from the same source.
 
+## Follow-ups (post work-order, status as of 2026-05-07)
+
+The 2026-04-29 handoff listed five open follow-ups. Current state:
+
+1. **PostgREST timeout in `tag-lcaa-phases.mjs`** — RESOLVED. The script already uses keyset pagination (`PAGE=200`, `lastId` cursor) plus exponential-backoff retry. Verified 2026-05-07 by running both default and `--retag-defaults` modes end-to-end against prod (628 rows fetched in ~5 seconds, 0 timeouts). The handoff's note was historical — the fix had already shipped.
+2. **Listen-at-9% interpretation** — Stale baseline. The handoff cited 9% Listen; the 2026-04-29 ACT-GD-fieldwork rule refinements moved 192 rows to Listen, lifting the 90-day Listen share to **29%** (Q3 FY26 90-day window: Listen $33,662, Curiosity $7,668, Action $58,470, Art $14,924 — figures via `wiki/cockpit/four-lanes-today.md`). Still under the handoff's 40% healthy bar, but the structural under-tag is fixed. Remaining gap is per-trip context-tagging (cafes/hotels in Hobart/Sydney that should carry the trip's project_code) which can't be auto-inferred without Ben's calendar.
+3. **Art-at-0% refinement** — Partly resolved. Art is now **3.0%** of all-time debits ($9,396 across 11 rows) thanks to Adobe + art-vendor + cultural-production rules added 2026-04-29. A 2026-05-07 sweep of Action-tagged rows for art keywords surfaced one cleanish candidate (HUMAN.KIND STUDIOS Adelaide $159, ACT-IN); other regex matches were false positives (Starlink, Linktree, Dinkum Dunnies). No new vendor rule added — too few rows for confident generalisation. Bulk Art reclassification needs Ben's read of Gold.Phone / Confessional / journal print run transactions which are likely tagged ACT-IN → Action.
+4. **Custodian Economy project file rewrite** — BLOCKED on Ben. `wiki/projects/custodian-economy.md` still carries the stale-warning callout from 2026-04-29. Needs partner detail: who runs the Custodian Economy project, where it operates, what they do for kids on youth justice orders.
+5. **Notion-API push of the four-lanes card** — DONE. `scripts/sync-four-lanes-card-to-notion.mjs` (2026-05-07) reads `wiki/cockpit/four-lanes-today.md`, converts headings/quotes/lists/paragraphs to Notion blocks, replaces the body of the target page. Wired into `weekly-reconciliation.mjs:179` after the snapshot generation. Fail-soft: skips quietly if `NOTION_PAGE_FOUR_LANES_CARD` env var or `cfg.fourLanesCard` not set, so the cron stays green until a target page is configured. To activate: create a Notion page, add `"fourLanesCard": "<page-id>"` to `config/notion-database-ids.json`.
+
 ## What Done Looks Like
 
 A Tuesday morning, three months from now.

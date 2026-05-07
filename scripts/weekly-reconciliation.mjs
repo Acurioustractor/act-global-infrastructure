@@ -176,6 +176,7 @@ async function main() {
   runScript('tag-lanes.mjs', '--apply');
   runScript('tag-lcaa-phases.mjs', '--apply');
   runScript('four-lanes-snapshot.mjs', '');
+  runScript('sync-four-lanes-card-to-notion.mjs', ''); // fail-soft: skips quietly if NOTION_PAGE_FOUR_LANES_CARD / cfg.fourLanesCard not set
 
   // Step 2: Load all statement lines for the quarter (paginate past 1000-row cap)
   console.log('\n📊 Step 2: Computing stats...');
