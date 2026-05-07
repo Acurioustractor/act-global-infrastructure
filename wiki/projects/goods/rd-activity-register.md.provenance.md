@@ -35,12 +35,12 @@ canonical_entity: goods
 
 | Figure | Status | Evidence | Notes |
 |---|---|---|---|
-| Total claim AUD $184,500 | **Inferred** | Sum of below | Subject to Money Framework reconciliation |
-| Nic Marchesi 25% × $200,000 = $50,000 | **Unverified** | Money Framework decision log 2026-04-15 (cited but not yet in pack) | Org-wide default 25% — at default |
-| Ben Knight 10% × $200,000 = $20,000 | **Unverified** | Same | Org-wide default 10% — at default |
-| Algorithm engineering contractor $42,000 | **Unverified** | Xero invoices to be back-tagged | Contractor identity not yet committed; line item is a placeholder for whichever vendor delivers the matching algorithm |
-| Cloud + LLM consumption $72,500 | **Unverified** | Xero invoices to be back-tagged | Includes Anthropic + Supabase consumption attributable to ACT-GD |
-| Salary base $200,000 | **Unverified** | See ACT-CG provenance | Will be re-applied to reconciled basis |
+| Total claim AUD $188,250 | **Inferred** | Sum of below; matches register `claim_total_aud` frontmatter | Subject to Money Framework reconciliation |
+| Nic Marchesi 25% × $200,000 = $50,000 | **Unverified** | Money Framework decision log 2026-04-15 Decision 3 — pack copy at `money-framework-decision-log-2026-04-15.md` | At decision-log default 25%; Nic's basis is $200K direct salary |
+| Ben Knight 10% × $250,000 Knight Photography × 95% R&D = $23,750 | **Unverified** | Money Framework decision log 2026-04-15 Decisions 1+2; thesis line 64 project-mix | Replaces earlier 10% × $200K = $20,000 — Ben's basis is Knight Photography invoicing, not direct salary |
+| Algorithm engineering contractor $42,000 | **Unverified** | Placeholder line — contractor identity not yet committed | Audit-risk per rule 3.2 (vendor:personnel ratio) — will need contractor engagement evidence before lodgement |
+| Cloud + LLM consumption $72,500 | **Unverified** | Xero invoices tagged `project_code = 'ACT-GD'` | Tagging COMPLETE in DB (FY26): 154 ACT-GD bills $247,837 total, 99.5% receipt coverage by value — see `thoughts/shared/rd-pack-fy26/receipt-coverage-attestation.md` |
+| Personnel basis: Nic $200,000 (direct salary), Ben $250,000 (Knight Photography invoicing) | **Unverified** | Money Framework Decisions 1+2+3 set the two-track basis | Replaces earlier single $200K basis; reconciled at lodgement pending Standard Ledger sign-off |
 | Refund rate 43.5% | **Verified** | ATO RDTI rate schedule | `wiki/finance/act-money-framework.md` line 49 |
 
 ## Verification Status — non-dollar figures

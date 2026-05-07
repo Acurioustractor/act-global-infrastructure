@@ -1,0 +1,82 @@
+{
+  "verdict": "warn",
+  "score": 59,
+  "estimated_refund_range": [
+    0,
+    0
+  ],
+  "hard_failures": [
+    {
+      "rule": "1.2 AusIndustry registration absent or incomplete",
+      "evidence": "All four activity registers carry 'ausindustry_registration: pending_jul_2026' in frontmatter. No registration ID, confirmation receipt, or verifiable record is present anywhere in the pack. README.md explicitly lists this as a gating item: 'AusIndustry registration submission | Standard Ledger + Ben | Hard rule 1.2 — ausindustry: missing'. The rubric requires a registration ID/date that resolves to a verifiable record; a future-pending citation does not satisfy this. This is a Tier 1 hard failure."
+    },
+    {
+      "rule": "1.6 Contemporaneous records check — activity registers written >30 days after early activities",
+      "evidence": "audit-trail.md states: 'The three activity registers in this pack were collated 2026-05-07.' ACT-EL commit 74b0f3f is dated 2025-12-30 (159 days before the register was written). ACT-CG commit 3a16982 is dated 2026-02-13 (83 days before the register). ACT-GD commit 274bb09 is dated 2026-02-05 (91 days before the register). Multiple ACT-GD commits from 2026-02-05 through 2026-03-21 are described by registers written only on 2026-05-07, well beyond the 30-day contemporaneity window. The registers acknowledge they were collated from prior commits rather than written at the time of activity. While the code commits themselves are contemporaneous, the narrative activity-register entries (hypothesis, uncertainty, experiment design) were written 83–159 days after the earliest activities they describe. The rubric's 90-day hard-fail threshold is breached for ACT-EL (commit 74b0f3f, 159 days) and approached or breached for ACT-CG and ACT-GD. The contemporaneity rationale in audit-trail.md conflates code-commit timestamps with narrative-register timestamps; the ATO contemporaneous test applies to both."
+    }
+  ],
+  "warnings": [
+    {
+      "rule": "2.4 Outcome (expected vs actual) — all four projects show no measured actual outcomes",
+      "evidence": "Every activity register is marked 'status: in_progress' with actual outcomes explicitly deferred. ACT-GD: 'First-order conversion rate against the manual baseline [not yet measured]. A1 top-3 acceptance rate [not yet measured]. Demand Register retention rate [not yet measured].' ACT-EL: 'The <60s third-party-reviewer audit has not been run.' ACT-CG: '200-row hand-labelled gold set is not yet assembled. Precision/recall numbers cannot be cited.' ACT-JH: '100-row hand-labelled procurement-code gold set not yet assembled.' All four registers carry only pre-experiment estimates. A pure 'we built it and it worked' with no measurement fails this rule; here the measurement has not even begun for the success criteria."
+    },
+    {
+      "rule": "1.5 Salary allocation — figures marked Unverified; personnel basis pending Standard Ledger sign-off",
+      "evidence": "salary-allocations.csv and all provenance sidecars explicitly mark the two key salary bases as 'Unverified': Ben Knight $250,000 Knight Photography invoicing and Nic Marchesi $200,000 retrospective director-salary characterisation. money-framework-decision-log-2026-04-15.md Decision 6 states: 'at lodgement, the registers' R&D-eligible amounts must be re-applied to the correct basis.' The decision log is itself DRAFT status. Open Question 2 in the decision log asks Standard Ledger to confirm Nic's fair-market figure (possibly $238K not $200K, which would shift R&D eligible from $80K to $95,200). The ±2% reconciliation cannot be confirmed until Standard Ledger signs off. This is a structural warning now but risks becoming a hard failure at lodgement if the reconciliation reveals a mismatch >2%."
+    },
+    {
+      "rule": "1.7 Receipt-to-activity linkage — ACT-CG has no direct project_code='ACT-CG' in xero_invoices",
+      "evidence": "receipt-coverage-attestation.md states: 'There is no separate ACT-CG bill in xero_invoices for FY26 — the project_code ACT-CG surfaces only in xero_transactions.' The ACT-CG register's claimed $14,000 Anthropic+Supabase spend is bundled under ACT-IN. An ATO auditor cannot directly trace an ACT-CG R&D claim to a specific receipt without navigating the Decision 4 'bundling' rationale. Rule 1.7 requires every R&D-claimed receipt over $1,000 to link to a specific activity; the ACT-CG $14,000 vendor spend lacks a direct project_code link to the registered activity."
+    },
+    {
+      "rule": "4.1 Tax accountant reviewable — executive summary present but pack contents listing in README.md omits ACT-JH register",
+      "evidence": "README.md 'Pack contents' section lists only three symlinks (act-gd, act-el, act-cg) but the pack actually contains act-jh-rd-activity-register.md. The pack contents tree is incomplete. Additionally, the README notes total preliminary claim as $354,047 (four registers) but the 'expected_refund_aud_low' and 'expected_refund_aud_high' in frontmatter ($130,910 / $154,010) do not reconcile with the rubric formula (0.435 × $354,047 × 0.85 = $131,023 low; 0.435 × $354,047 = $154,010 high) — low is off by $113, a minor arithmetic discrepancy but visible to a reviewer."
+    },
+    {
+      "rule": "4.2 Provenance sidecars — sidecars present for CG, EL, GD, JH but all marked Draft; act-gd, act-el, act-cg, act-jh provenance sidecars note key figures as Unverified",
+      "evidence": "All four .provenance.md files carry 'status: Draft' and list multiple figures as 'Unverified'. act-gd-rd-activity-register.md.provenance.md: 'Algorithm engineering contractor $42,000 — Unverified. Placeholder line — contractor identity not yet committed.' act-el-rd-activity-register.md.provenance.md: 'Anthropic + Supabase + storage $26,000 — Unverified.' act-cg-rd-activity-register.md.provenance.md: '$14,000 Anthropic + Supabase — Unverified.' The sidecars exist (good) but carry unverified dollar figures that underpin the claim total."
+    },
+    {
+      "rule": "4.2 Provenance sidecars — no provenance sidecar for README.md, audit-trail.md, supporting-activities.md, or salary-allocations.csv",
+      "evidence": "The rubric requires every dollar figure to have a .provenance.md sidecar per project. The README.md itself contains dollar figures ($354,047 total claim; $130,910–$154,010 refund range) with no sidecar. salary-allocations.csv contains all dollar figures but has no .provenance.md. supporting-activities.md has no sidecar. audit-trail.md has no sidecar."
+    },
+    {
+      "rule": "4.3 Cross-references — multiple references to external documents that cannot be verified as resolving",
+      "evidence": "The pack contains numerous references to documents outside the pack bundle: 'wiki/finance/act-money-framework.md', 'wiki/finance/founder-pay-and-rd-thesis-fy26-fy27.md', 'wiki/finance/act-money-thesis-rebuttal.md', 'thoughts/shared/plans/rd-tax-incentive-fy2526-path-c.md', 'wiki/finance/money-framework-decision-log-2026-04-15.md' (cited but canonical copy is 'thoughts/shared/rd-pack-fy26/money-framework-decision-log-2026-04-15.md'), 'wiki/projects/civicgraph/rd-activity-register.md.provenance.md (TBD)', 'wiki/projects/empathy-ledger/rd-activity-register.md.provenance.md (TBD)', 'wiki/projects/goods/rd-activity-register.md.provenance.md (TBD)'. Several are explicitly marked TBD. The canonical wiki versions of the provenance sidecars do not exist yet."
+    },
+    {
+      "rule": "3.2 Reasonable proportion — ACT-GD supporting:core ratio flag",
+      "evidence": "ACT-GD core personnel cost is $73,750. ACT-GD vendor/SaaS spend (contractor $42,000 + cloud/LLM $72,500) totals $114,500, which is 1.55× the personnel core — within rubric's 5× rule of thumb. However, the DB-attested ACT-GD bills total $247,837 (receipt-coverage-attestation.md) against the claimed $188,250, meaning the pack is claiming a subset of tagged spend without fully explaining which bills constitute the R&D-eligible portion. The contractor line ($42,000) is flagged in act-gd-rd-activity-register.md.provenance.md as 'Placeholder line — contractor identity not yet committed. Audit-risk per rule 3.2.' This is a structural gap that needs resolution before lodgement."
+    },
+    {
+      "rule": "2.3 Experiment design — ACT-JH gold set TBD and controls not described with sufficient specificity",
+      "evidence": "ACT-JH experiment design states: '100-row hand-labelled gold set of (program, correct procurement code(s)) pairs (TBD — needs to be assembled from existing JusticeHub evidence data).' Without the gold set the experiment has no ground truth and the controls (string-match baseline) cannot be run. The success criteria are stated but the data-capture method for the evidence-linkage layer is described only as 'cross-references to gs_entities... cross-references to EL v2 gallery_media_associations' without specifying how leakage is measured."
+    },
+    {
+      "rule": "1.4 Receipts gap — ACT-CORE 22.4% coverage below 85% threshold",
+      "evidence": "receipt-coverage-attestation.md: 'ACT-CORE bucket (4 bills, $14,180) has one $11,000 bill without an attachment. This is below the 85% threshold for ACT-CORE.' ACT-CORE is not a primary R&D-claim project in this pack, and the pack itself flags this as an issue to resolve. No R&D claim is currently made against ACT-CORE in the four core registers, so this does not trip the hard rule for a claimed project — but if ACT-CORE spend is later included in the lodgement it would trigger 1.4."
+    }
+  ],
+  "missing_artefacts": [
+    "ausindustry-registration.{md,pdf,html} or equivalent with a registration ID and date (required by rule 1.2 — currently pending_jul_2026, not yet submitted)",
+    "wiki/projects/goods/rd-activity-register.md.provenance.md (canonical location — marked TBD in pack)",
+    "wiki/projects/empathy-ledger/rd-activity-register.md.provenance.md (canonical location — marked TBD in pack)",
+    "wiki/projects/civicgraph/rd-activity-register.md.provenance.md (canonical location — marked TBD in pack)",
+    "wiki/projects/justicehub/rd-activity-register.md.provenance.md (not present in pack and not mentioned as TBD in JH register)",
+    "200-row hand-labelled gold set for ACT-CG entity-resolution precision/recall evaluation",
+    "100-row hand-labelled gold set for ACT-JH procurement-code mapping evaluation",
+    "Third-party-reviewer locatability audit results for ACT-EL (4-community approval set: Oonchiumpa, BG Fit, Mounty Yarns, PICC)",
+    "A1 Procurement Analyst production run logs (8+ Monday runs required for ACT-GD actual outcome)",
+    "Demand Register migration production execution results (currently dry-run only)",
+    "Automated cross-org leakage assertion test for ACT-EL (0% leakage criterion not yet tested)",
+    "Automated 0% data-sovereignty leakage test for ACT-JH",
+    "Standard Ledger sign-off on Nic Marchesi director-salary characterisation basis ($200K vs $238K)",
+    "Standard Ledger sign-off on Ben Knight Photography GST registration timing (backdated to 1 Jul 2025)",
+    "Standalone supporting-activities.md linked to per-project registers (present in pack but not symlinked from canonical wiki location)",
+    "ACT-CORE $11,000 missing receipt (22.4% coverage — below 85% threshold if ACT-CORE spend is claimed)"
+  ],
+  "audit_readiness": {
+    "ausindustry": "missing",
+    "ato": "partial"
+  }
+}

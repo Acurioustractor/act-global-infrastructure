@@ -29,7 +29,7 @@ lead_contact_for_pack: Ben Knight (ben@benjamink.com.au)
 | Expected refund — four registers (range) | **AUD $130,910 – $154,010** (low = 0.435 × claim × 0.85 receipt threshold; high = 0.435 × claim) |
 | Money Framework total R&D-eligible spend (per founder pay thesis) | **AUD ~$627,000** (founders' personnel cost $317.5K + ACT-IN tagged $284K + per-project tagged ~$12.5K + SaaS/API ~$13K) |
 | Money Framework realistic refund range | **AUD $200,000 – $250,000** (per `wiki/finance/founder-pay-and-rd-thesis-fy26-fy27.md` line 108) |
-| Coverage of the three registers vs Money Framework total | ~52% — the three core activity registers cover Empathy Ledger consent + multi-tenancy, CivicGraph entity resolution, and Goods buyer-supplier matching. The remaining ~48% is ACT-IN core activities (agent system, ALMA, governed proof, platform infrastructure) not yet split into discrete registers, plus founders' personnel cost on those activities. |
+| Coverage of the four registers vs Money Framework total | ~58% — the four core activity registers cover Empathy Ledger consent + multi-tenancy, CivicGraph entity resolution, Goods buyer-supplier matching, and JusticeHub federated procurement-code mapping. The remaining ~42% is ACT-IN core activities (agent system, ALMA, governed proof, platform infrastructure) not yet split into discrete registers, plus founders' personnel cost on those activities. |
 | Money Framework realistic-range estimate | $180–220K (per `wiki/finance/act-money-thesis-rebuttal.md`) |
 | Lead contact for this pack | Ben Knight |
 | Pack status | **Assembling — WARN (will become PASS as gaps below close)** |
@@ -92,7 +92,7 @@ Weekly grade output is included in the Monday weekly-reconciliation Telegram mes
 
 ## Calibration anchors
 
-For comparison, calibrated good-pass examples are in `thoughts/shared/rubrics/fixtures/rd-evidence/`. The three real registers in this pack are modelled on those templates but use real commit hashes, real DB row counts, and real codebase artefacts.
+For comparison, calibrated good-pass examples are in `thoughts/shared/rubrics/fixtures/rd-evidence/`. The four real registers in this pack are modelled on those templates but use real commit hashes, real DB row counts, and real codebase artefacts.
 
 ## What's still missing (gating items before lodgement)
 
@@ -129,7 +129,15 @@ thoughts/shared/rd-pack-fy26/
 ├── README.md                                  ← this file (executive summary + gating items)
 ├── act-gd-rd-activity-register.md             ← symlink → wiki/projects/goods/rd-activity-register.md
 ├── act-el-rd-activity-register.md             ← symlink → wiki/projects/empathy-ledger/rd-activity-register.md
-└── act-cg-rd-activity-register.md             ← symlink → wiki/projects/civicgraph/rd-activity-register.md
+├── act-cg-rd-activity-register.md             ← symlink → wiki/projects/civicgraph/rd-activity-register.md
+├── act-jh-rd-activity-register.md             ← symlink → wiki/projects/justicehub/rd-activity-register.md
+├── *.provenance.md                            ← provenance sidecar per register (symlinked alongside)
+├── audit-trail.md                             ← contemporaneous evidence record (commits, decisions)
+├── money-framework-decision-log-2026-04-15.md ← copy of canonical decision log
+├── receipt-coverage-attestation.md            ← DB-attested receipt coverage by project_code
+├── salary-allocations.csv                     ← per-project R&D-eligible founder time
+├── supporting-activities.md                   ← directly-related supporting activities
+└── grades/                                    ← rubric grade artefacts (per re-grade)
 ```
 
 The symlink pattern keeps the wiki version canonical for working drafts and the pack version stable for audit. They are the same file.

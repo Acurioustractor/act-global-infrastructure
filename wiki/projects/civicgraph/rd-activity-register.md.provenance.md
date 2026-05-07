@@ -38,10 +38,10 @@ canonical_entity: civicgraph
 
 | Figure | Status | Evidence | Notes |
 |---|---|---|---|
-| Total claim AUD $58,000 | **Inferred** | Sum of below | Subject to Money Framework reconciliation |
-| Ben Knight 22% × $200,000 = $44,000 | **Unverified** | Money Framework decision log 2026-04-15 (cited but not yet present in pack) | Per-project elevation above org-wide default 10% requires the decision log to be in the pack before lodgement |
-| Anthropic + Supabase consumption $14,000 | **Unverified** | Xero invoices to be back-tagged with `project_code = 'ACT-CG'` | Tagging COMPLETE in DB (FY26): 516 ACT-IN bills, $224K total, 98.5% receipt coverage by value — see `thoughts/shared/rd-pack-fy26/receipt-coverage-attestation.md` |
-| Salary base $200,000 | **Unverified** | Calibration fixture used $200K; Money Framework default for post-cutover PAYG salary is $10K/mo = $120K/yr | Will be re-applied to reconciled basis at lodgement (the cutover is 2026-06-30) |
+| Total claim AUD $61,500 | **Inferred** | Sum of below; matches register `claim_total_aud` frontmatter | Subject to Money Framework reconciliation |
+| Ben Knight ~20% of ACT-IN bucket × $250,000 Knight Photography × 95% R&D = $47,500 | **Unverified** | Money Framework decision log 2026-04-15 Decisions 1+2+4 (Option A) — pack copy at `money-framework-decision-log-2026-04-15.md` | ACT-CG is subset of ACT-IN bucket which is 60% of Knight Photography invoicing; reconciles to salary CSV row 1 |
+| Anthropic + Supabase consumption $14,000 | **Unverified** | Xero invoices tagged `project_code = 'ACT-IN'` (CG bundled here per Decision 4) | Tagging COMPLETE in DB (FY26): 516 ACT-IN bills, $224,144 total, 98.5% receipt coverage by value — see `thoughts/shared/rd-pack-fy26/receipt-coverage-attestation.md` |
+| Personnel basis $250,000 (Ben Knight Photography invoicing) | **Unverified** | Money Framework Decisions 1+2 set Ben's personnel basis as Knight Photography 2025 invoicing $250K × 95% R&D = $237,500 — not direct salary | Replaces earlier $200K direct-salary fixture; reconciled basis pending Standard Ledger sign-off at lodgement |
 | Refund rate 43.5% | **Verified** | ATO RDTI rate schedule for refundable offset, sub-$20M aggregated turnover | `wiki/finance/act-money-framework.md` line 49 |
 
 ## Verification Status — non-dollar figures
