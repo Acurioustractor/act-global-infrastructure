@@ -5,9 +5,9 @@
 > Created: 2026-05-07
 > Source of truth: `thoughts/shared/plans/act-alignment-loop.md` (the Karpathy-style cross-source pattern)
 > Use: pass to Anthropic Managed Agents Outcomes, or to a local grader before any synthesis doc lands in `wiki/synthesis/`.
-> Calibration: 0/0 (no fixtures yet — see `alignment-loop-synthesis.calibration.md`)
-> Status: **draft**, not production-eligible until calibration ≥ 6/6.
-> Pass threshold: clean Tier 1 + ≥3 of 4 structural moves + every drift claim sourced both ways.
+> Calibration: 6/6 across the fixture matrix (see `alignment-loop-synthesis.calibration.md`)
+> Status: **calibrated**, production-eligible.
+> Pass threshold: clean Tier 1 + all four structural moves + all four judgment moves + every drift claim sourced both ways.
 
 ## What this rubric grades
 
@@ -63,9 +63,11 @@ The rubric layers on top of `act-voice-curtis` (which catches AI-tells, plainnes
 }
 ```
 
-`verdict = fail` if any Tier 1 hard rule trips OR any drift claim is uncited on either side OR any reconciliation recommendation is non-actionable.
+`verdict = fail` if any Tier 1 hard rule trips OR any drift claim is uncited on either side OR any Tier 3 judgment-check is `false` (decision-log contradiction, vague reconciliation target, stage-classification mismatch, silent inversion).
 `verdict = warn` if Tier 1 + Tier 3 clean but `structural_check` has any `false`.
 `verdict = pass` if Tier 1 clean + all four structural checks pass + all four judgment checks pass.
+
+Note (2026-05-07 calibration): Tier 3 judgment misses count as `fail`, not `warn`, matching the funder-cadence sister rubric. A vague reconciliation target ("review with Ben") or a silent stage inversion is substantively as serious as an uncited drift claim. Bad-3 in the calibration matrix expected fail on rule 3.2 (vague targets); the earlier draft of these threshold lines mapped Tier-3 false to warn, so bad-3 would have scored warn instead. Tightened in calibration.
 
 The `act-voice-curtis` rubric must also be run against the same text. A `fail` there is a `fail` here; this rubric does not duplicate those checks.
 

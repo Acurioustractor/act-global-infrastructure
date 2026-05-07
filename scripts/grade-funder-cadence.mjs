@@ -65,7 +65,7 @@ const VOICE_FORBIDDEN_PHRASES = [
   'stands as', 'serves as',
 ];
 const VOICE_PATTERNS = {
-  em_dash: /—|(?<![-])--(?![-])/,
+  em_dash: /—|(?<![-])--(?![-A-Za-z])/,
   curly_quotes: /[“”‘’]/,
   negative_parallelism: /not just\b.{0,60}\bbut\b|it'?s not about\b.{0,60}\bit'?s about\b|more than\b.{0,60}\bit'?s\b/i,
   significance_claim: /(plays?|its|a) (pivotal|key|crucial|vital) role|marks a (key|pivotal) moment|sets the stage for|paving the way|at a critical juncture/i,
