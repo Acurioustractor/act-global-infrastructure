@@ -25,7 +25,7 @@ Status: DRIFT 0 · NOT-WIRED 1 · STALE 0 · IN-SYNC 5 · INFO 2 · DEFERRED 0 �
 
 ### 1-hub-redundancy
 
-- **summary**: 0 heading overlap between moneyFramework (1 h2s) and financeOverview (1 h2s)
+- **summary**: 0 heading overlap between moneyFramework (1 h2s) and financeOverview (0 h2s)
 
 ### 2-pile-mix-populated
 
@@ -59,12 +59,12 @@ Status: DRIFT 0 · NOT-WIRED 1 · STALE 0 · IN-SYNC 5 · INFO 2 · DEFERRED 0 �
   - `2026-04-18-mounty-yarns-story-approval.md` (19d ago)
   - `2026-04-18-oonchiumpa-story-approval.md` (19d ago)
   - `2026-04-18-picc-selective-youth-voice.md` (19d ago)
-  - `2026-04-five-year-plan.md` (23d ago)
-  - `2026-04-founder-lanes-and-top-two-bets.md` (23d ago)
   - `2026-04-09-empathy-ledger-tour-questions.md` (24d ago)
+  - `2026-04-09-lesotho-data-needs.md` (24d ago)
+  - `2026-04-five-year-plan.md` (24d ago)
   - ... and 6 more
 
 ### 4-decisions-log-row-diff
 
-- **summary**: Notion decisionsLog has 2 rows · wiki/decisions/ has 25 files
+- **summary**: Notion decisionsLog has 27 rows · wiki/decisions/ has 25 files
 - **note**: Auto-diff is naive (slug→title comparison). For an actual reconciliation, audit titles by hand. The two stores are designed to differ (Notion = working, wiki = canonical) but every load-bearing decision should appear in both.

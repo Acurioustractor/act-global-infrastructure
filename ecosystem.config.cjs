@@ -283,12 +283,15 @@ const cronScripts = [
     args: '--verbose',
     cron_restart: '0 */2 * * *', // Every 2 hours (reduced from 30min — most insights don't need 30-min freshness)
   },
-  {
-    name: 'finance-sync',
-    script: 'scripts/sync-finance-to-notion.mjs',
-    args: '--verbose',
-    cron_restart: '30 8 * * *', // Daily 8:30am AEST (after knowledge pipeline at 8am)
-  },
+  // finance-sync DISABLED 2026-05-08: target page (financeOverview) deprecated.
+  // Canonical hub is now ACT Money Framework — see scripts/sync-money-framework-to-notion.mjs
+  // (runs in Monday cron via populate-money-dashboards.mjs).
+  // {
+  //   name: 'finance-sync',
+  //   script: 'scripts/sync-finance-to-notion.mjs',
+  //   args: '--verbose',
+  //   cron_restart: '30 8 * * *',
+  // },
   {
     name: 'auto-tag-transactions',
     script: 'scripts/tag-transactions-by-vendor.mjs',

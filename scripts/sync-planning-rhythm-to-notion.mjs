@@ -286,7 +286,7 @@ function buildFiveYear() {
 
   blocks.push(h3('📋 Annual 5-year review (do this each Dec or June)'));
   for (const item of [
-    'Update CY plan (cy26-money-philosophy-and-plan.md) for next CY',
+    'Update FY plan (fy26-27-money-philosophy-and-plan.md) for next FY',
     'Review entity structure — any new entities to add (Harvest sub, Farm, IPP JV)?',
     'Review CGT concession positioning — active asset evidence current?',
     'Review trust distribution patterns — beneficiaries + amounts still right?',

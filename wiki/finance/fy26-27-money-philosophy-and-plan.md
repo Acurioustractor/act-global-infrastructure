@@ -1,23 +1,24 @@
 ---
-title: ACT Money Philosophy + CY26 Plan
+title: ACT Money Philosophy + FY26-27 Plan
 status: Working strategy document
-date: 2026-05-06
+date: 2026-05-08
 audience: Ben + Nic (primary), Standard Ledger + Cameron (Ben's partner) for review
-purpose: One document holding the philosophy of how money moves through ACT, and the calendar-year 2026 plan — covering cutover, founder pay, trust distributions, family payments, Africa R&D, and the Mon/Fri review rhythm.
+purpose: One document holding the philosophy of how money moves through ACT, and the financial-year plan covering FY26 close (May–Jun 2026) and FY27 (Jul 2026 – Jun 2027) — cutover, founder pay, trust distributions, family payments, Africa R&D, BAS quarters, R&D lodgement window, and the Mon/Fri review rhythm.
 tags:
   - finance
   - philosophy
-  - cy26-plan
+  - fy26-27-plan
   - cutover
   - payroll
   - trust
   - family-payments
   - r-and-d
   - africa
+  - bas
 parent: act-money-framework
 ---
 
-# ACT Money Philosophy + CY26 Plan
+# ACT Money Philosophy + FY26-27 Plan
 
 > **The philosophy in one paragraph.** Money in ACT serves three things: it lets us do the work, it pays the people doing the work, and it builds the asset base that funds the next chapter. The system shouldn't be cleverer than it needs to be — predictable salary covers life, trust distributions handle profit at year-end, R&D refunds compound the asset side, and the family relationships (Cameron, Pollyanna) are supported through legitimate roles in the work, not through informal money flow. Everything we build (the dashboards, the framework, the syncs) exists so that this stays visible and trustworthy at a glance.
 
@@ -62,9 +63,11 @@ Five rules to never break:
 
 ---
 
-## Part 2 — CY26 timeline (May → December)
+## Part 2 — FY26-27 timeline (May 2026 → Jun 2027)
 
-### Where we are now (6 May 2026)
+> Australia runs on financial years (Jul–Jun). R&D, BAS, tax, and the cutover all turn on FY boundaries, so the plan is FY-shaped. CY26 (Jan–Dec 2026) appears only inside Q3-FY26 / Q1-Q2 FY27.
+
+### Where we are now (8 May 2026 — Q4 FY26)
 
 - **$1.33M cash at bank** (Mar 2026)
 - **$1.40M cash in FY26-to-date** ($1.09M invoices + $284K direct grants)
@@ -73,7 +76,7 @@ Five rules to never break:
 - **56 days to ACT Pty cutover** (30 Jun 2026)
 - **R&D spend FY26-to-date: $270K eligible** (target refund $180-220K)
 
-### May 2026 — final FY26 sprint
+### May 2026 — Q4 FY26 sprint (final two months of sole-trader period)
 
 | Action | Owner | Trigger |
 |---|---|---|
@@ -86,7 +89,7 @@ Five rules to never break:
 | R&D consultant engaged | Standard Ledger refers | Mid-May |
 | Trust deeds reviewed for streaming permissions | Standard Ledger | Mid-May |
 
-### June 2026 — cutover month
+### June 2026 — cutover month (FY26 close → FY27 open)
 
 | Date | Action |
 |---|---|
@@ -107,7 +110,7 @@ Five rules to never break:
 | **R&D refund lands** (FY26 claim) | September-December (4-6 month window) |
 | Q1 FY27 cashflow review — bridge loan if needed | August (if Pty cash dips) |
 
-### October-December 2026 (Q2 FY27 — settling in)
+### October-December 2026 (Q2 FY27 — settling in, BAS Q1 due 28 Oct)
 
 | Action | Trigger |
 |---|---|
@@ -118,13 +121,45 @@ Five rules to never break:
 | 2026 calendar year tax planning meeting | November |
 | Nic + Ben year-end personal tax review | December |
 
-### End of CY26 (December)
+### End of Q2 FY27 (December 2026)
 
 - **Personal tax position:** Ben's CY26 personal income = sole-trader profit (Nic's, not Ben's; Ben's KP income only) + post-cutover salary from Pty (~$60K = 6 months × $10K)
 - **Pty's first 6-month P&L** — should show: ~$1.5M revenue, ~$1M operating cost, ~$200-300K net before tax
 - **R&D refund expected mid-Q2** — adds $180-220K cash buffer
 - **Sole trader** (Nic's) finalised tax + super, account being closed but ABN kept active for one more year to handle stragglers
 - **First trust distribution opportunity** — if Pty made enough profit in H1
+
+### January-March 2027 (Q3 FY27 — R&D lodgement prep, BAS Q2)
+
+| Action | Trigger |
+|---|---|
+| BAS Q2 FY27 (Oct-Dec) lodged | 28 Feb 2027 |
+| FY26 R&D claim final pack assembled | Feb (4 months before deadline) |
+| Standard Ledger countersigns R&D personnel basis | Feb (if not done in FY26) |
+| Trust deed amendments confirmed (streaming permissions) | Feb |
+| Pty Q3 cashflow review — buffer healthy? | Mar |
+| Pre-FY27-end R&D-eligible spend window opens | Mar (last quarter to bring forward) |
+
+### April-June 2027 (Q4 FY27 — R&D lodgement deadline, FY27 close)
+
+| Action | Trigger |
+|---|---|
+| **30 Apr 2027 — FY26 R&D registration absolute deadline** | Filed by Standard Ledger / R&D consultant |
+| BAS Q3 FY27 (Jan-Mar) lodged | 28 Apr 2027 |
+| FY27 final R&D-eligible spend pull-forward complete | May |
+| FY27 trust distribution resolutions drafted (Knight + Marchesi) | Mid-Jun |
+| **30 Jun 2027 — Trust resolutions signed, FY27 close** | Non-negotiable: late = trust pays at 47% |
+| FY27 founder pay total reviewed: $120K + $14.4K super each? | Jun |
+| FY27 net profit assessed → trust + bucket co split decided | Jun |
+| Pty H2 trust distribution opportunity (FY27 final) | Jun |
+
+### End of FY27 (June 2027)
+
+- **Pty FY27 full-year P&L** — target: ~$3M revenue, ~$2M operating cost, ~$400-600K net before tax (per honest target rebuttal §2.1)
+- **FY26 R&D refund** has landed by now (Sep-Dec 2026 window)
+- **First full FY of Pty trading** complete; cleaner audit trail than mixed-entity FY26
+- **Trust + bucket co positions** assessed — Knight + Marchesi each receive distributions per resolution
+- **R&D pack for FY27** starts assembling (registers should be live, not retrospective)
 
 ---
 

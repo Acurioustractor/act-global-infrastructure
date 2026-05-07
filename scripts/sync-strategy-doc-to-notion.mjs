@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 /**
- * Push the CY26 Money Philosophy + Plan markdown doc to Notion as a sub-page.
- * Re-runnable: replaces page body each time.
+ * Push the FY26-27 Money Philosophy + Plan markdown doc to Notion as a sub-page.
+ * Re-runnable: replaces page body each time. Also keeps the page title in sync
+ * with the FY26-27 framing (renamed from CY26 on 2026-05-08).
  */
 
 import { Client } from '@notionhq/client';
@@ -18,7 +19,8 @@ const notion = new Client({ auth: process.env.NOTION_TOKEN });
 const cfgPath = join(__dirname, '..', 'config', 'notion-database-ids.json');
 const cfg = JSON.parse(readFileSync(cfgPath, 'utf-8'));
 const PARENT = cfg.moneyFramework;
-const DOC_PATH = join(__dirname, '..', 'wiki', 'finance', 'cy26-money-philosophy-and-plan.md');
+const DOC_PATH = join(__dirname, '..', 'wiki', 'finance', 'fy26-27-money-philosophy-and-plan.md');
+const PAGE_TITLE = 'FY26-27 Money Philosophy + Plan';
 
 const log = (m) => console.log(`[${new Date().toISOString().slice(11, 19)}] ${m}`);
 const sleep = (ms) => new Promise(r => setTimeout(r, ms));
@@ -85,13 +87,24 @@ async function main() {
   if (!pageId) {
     const page = await notion.pages.create({
       parent: { type: 'page_id', page_id: PARENT },
-      properties: { title: [{ type: 'text', text: { content: 'CY26 Money Philosophy + Plan' } }] },
+      properties: { title: [{ type: 'text', text: { content: PAGE_TITLE } }] },
       icon: { type: 'emoji', emoji: '\u{1F4DC}' },
     });
     pageId = page.id;
     cfg.cy26StrategyPlan = pageId;
     writeFileSync(cfgPath, JSON.stringify(cfg, null, 2) + '\n');
     log(`Created: ${pageId}`);
+  } else {
+    // Keep existing page title in sync with FY26-27 framing
+    try {
+      await notion.pages.update({
+        page_id: pageId,
+        properties: { title: [{ type: 'text', text: { content: PAGE_TITLE } }] },
+      });
+      log(`Title set to "${PAGE_TITLE}"`);
+    } catch (e) {
+      log(`Warn: title update failed: ${e.message}`);
+    }
   }
 
   // Replace body

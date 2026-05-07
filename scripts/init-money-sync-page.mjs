@@ -37,7 +37,7 @@ const blocks = [
   { object: 'block', type: 'heading_3', heading_3: { rich_text: [r('📌 Decisions made (log)')] } },
   { object: 'block', type: 'bulleted_list_item', bulleted_list_item: { rich_text: [r('(date — decision — context — owner)')] } },
   { object: 'block', type: 'heading_3', heading_3: { rich_text: [r('🔗 Related docs')] } },
-  { object: 'block', type: 'bulleted_list_item', bulleted_list_item: { rich_text: [r('Philosophy + CY26 plan: wiki/finance/cy26-money-philosophy-and-plan.md')] } },
+  { object: 'block', type: 'bulleted_list_item', bulleted_list_item: { rich_text: [r('Philosophy + FY26-27 plan: wiki/finance/fy26-27-money-philosophy-and-plan.md')] } },
   { object: 'block', type: 'bulleted_list_item', bulleted_list_item: { rich_text: [r('Money framework: wiki/finance/act-money-framework.md')] } },
 ];
 

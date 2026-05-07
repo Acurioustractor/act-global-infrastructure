@@ -8,35 +8,35 @@ Buckets: FRESH 26 · AGEING 0 · STALE 1 · ORPHANED 0 · ARCHIVED 0 · MISSING 
 
 | Key | Title | Kind | Children | Days since edit | Parent |
 |---|---|---|---:|---:|---|
-| `financeOverview` | Finance Overview | page | 72 | 0 | page_id |
-| `moneyFramework` | ACT Money Framework | page | 158 | 0 | page_id |
-| `moneyInAlignment` | Money In Alignment | page | 24 | 0 | page_id |
-| `moneyOutAlignment` | Money Out Alignment | page | 15 | 0 | page_id |
+| `financeOverview` | Finance Overview (deprecated → ACT Money Framework | page | 4 | 0 | page_id |
+| `moneyFramework` | ACT Money Framework | page | 168 | 0 | page_id |
+| `cy26StrategyPlan` | FY26-27 Money Philosophy + Plan | page | 206 | 0 | page_id |
+| `planningRhythm` | Planning Rhythm — multi-period | page | 84 | 0 | page_id |
 | `pilePage_voice` | Voice — Storytelling commercialisation | page | 19 | 1 | page_id |
 | `pilePage_flow` | Flow — Commercial scale | page | 21 | 1 | page_id |
 | `pilePage_ground` | Ground — Place-anchored experiences | page | 17 | 1 | page_id |
 | `pilePage_grants` | Grants — Philanthropic + government funding | page | 18 | 1 | page_id |
-| `opportunitiesDb` | ACT Opportunities | database | ? | 1 | page_id |
-| `moneySyncPage` | Money Sync — Questions & Ideas | page | 13 | 1 | page_id |
-| `weeklyDigest` | Friday Money Digest | page | 35 | 1 | page_id |
-| `cy26StrategyPlan` | CY26 Money Philosophy + Plan | page | 195 | 1 | page_id |
-| `financeSurfaceDesign` | Finance Surface Design (Notion vs Float/Causal/Fat | page | 185 | 1 | page_id |
+| `moneyInAlignment` | Money In Alignment | page | 24 | 1 | page_id |
+| `moneyOutAlignment` | Money Out Alignment | page | 15 | 1 | page_id |
 | `cashForecast` | Cash Forecast (13-week rolling) | page | 16 | 1 | page_id |
 | `kpisPage` | KPIs & Concentration Risk | page | 19 | 1 | page_id |
 | `budgetActual` | Budget vs Actual per Project | page | 7 | 1 | page_id |
 | `cashScenarios` | Cash Scenarios (12-month) | page | 20 | 1 | page_id |
-| `moneyMetricsDb` | Money Metrics (snapshots over time) | database | ? | 1 | page_id |
-| `dashboardWalkthrough` | Notion Dashboard Walkthrough | page | 189 | 1 | page_id |
-| `decisionsLog` | Decisions Log | database | ? | 1 | page_id |
-| `actionItems` | Action Items | database | ? | 1 | page_id |
-| `foundationsDb` | Foundations | database | ? | 1 | page_id |
-| `ledgerQA` | Standard Ledger Q&A | database | ? | 1 | page_id |
-| `stakeholders` | Stakeholders | database | ? | 1 | page_id |
-| `planningRhythm` | Planning Rhythm — multi-period | page | 84 | 1 | page_id |
-| `entityHub` | Entity Hub (orgs across all systems) | database | ? | 1 | page_id |
+| `opportunitiesDb` | ACT Opportunities | database | ? | 2 | page_id |
+| `moneySyncPage` | Money Sync — Questions & Ideas | page | 13 | 2 | page_id |
+| `weeklyDigest` | Friday Money Digest | page | 35 | 2 | page_id |
+| `financeSurfaceDesign` | Finance Surface Design (Notion vs Float/Causal/Fat | page | 185 | 2 | page_id |
+| `moneyMetricsDb` | Money Metrics (snapshots over time) | database | ? | 2 | page_id |
+| `dashboardWalkthrough` | Notion Dashboard Walkthrough | page | 189 | 2 | page_id |
+| `decisionsLog` | Decisions Log | database | ? | 2 | page_id |
+| `actionItems` | Action Items | database | ? | 2 | page_id |
+| `foundationsDb` | Foundations | database | ? | 2 | page_id |
+| `ledgerQA` | Standard Ledger Q&A | database | ? | 2 | page_id |
+| `stakeholders` | Stakeholders | database | ? | 2 | page_id |
+| `entityHub` | Entity Hub (orgs across all systems) | database | ? | 2 | page_id |
 
 ## STALE (1)
 
 | Key | Title | Kind | Children | Days since edit | Parent |
 |---|---|---|---:|---:|---|
-| `grantPipeline` | Grant Pipeline Tracker | database | ? | 45 | workspace |
+| `grantPipeline` | Grant Pipeline Tracker | database | ? | 46 | workspace |

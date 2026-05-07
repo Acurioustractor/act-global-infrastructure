@@ -1,13 +1,13 @@
 ---
 title: Four Lanes Today
 status: Live
-updated: 2026-05-07
+updated: 2026-05-08
 source_of_truth: wiki/concepts/four-lanes.md
 ---
 
 # Four Lanes Today
 
-> Live snapshot of ACT's internal economy. Generated 2026-05-07.
+> Live snapshot of ACT's internal economy. Generated 2026-05-08.
 > Methodology and meaning: [[../concepts/four-lanes|The Four Lanes]].
 
 > **Data range:** 2025-10-01 to 2026-03-31. If this lags the current date, statement ingestion is behind.

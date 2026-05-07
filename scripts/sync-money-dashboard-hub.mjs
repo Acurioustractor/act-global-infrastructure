@@ -211,7 +211,7 @@ async function buildBlocks() {
   // Row 4: Strategy + Reviews
   blocks.push({ object: 'block', type: 'paragraph', paragraph: { rich_text: [rt('📜 Strategy & Reviews', { bold: true, color: 'brown' })] } });
   blocks.push(buildNavGridRow([
-    navCard('📜', 'CY26 Plan & Philosophy', 'Cutover · payroll · Cameron + Pollyanna · Africa R&D', cfg.cy26StrategyPlan),
+    navCard('📜', 'FY26-27 Plan & Philosophy', 'Cutover · payroll · trust distributions · R&D · Africa', cfg.cy26StrategyPlan),
     navCard('🏗️', 'Surface Design', 'Why we built this in Notion (vs Float / Causal / Fathom)', cfg.financeSurfaceDesign),
     navCard('🎯', 'Budget vs Actual', 'Per-project FY26 tracking', cfg.budgetActual),
   ]));
