@@ -23,6 +23,7 @@ import { execSync } from 'node:child_process'
 import { readFileSync, existsSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import { dirname, join } from 'node:path'
+import { markdownToBlocks, clearPage, appendBlocks } from './lib/notion-md-blocks.mjs'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
@@ -47,88 +48,6 @@ function resolvePageId() {
     if (cfg.fourLanesCard) return cfg.fourLanesCard
   }
   return null
-}
-
-function rt(text, opts = {}) {
-  const r = { type: 'text', text: { content: String(text).slice(0, 2000) } }
-  if (opts.link) r.text.link = { url: opts.link }
-  if (opts.bold || opts.code) {
-    r.annotations = {}
-    if (opts.bold) r.annotations.bold = true
-    if (opts.code) r.annotations.code = true
-  }
-  return r
-}
-
-// Convert a single markdown line to inline rich_text array, handling
-// **bold** spans. Anything else is treated as plain text.
-function mdInline(line) {
-  const out = []
-  const re = /\*\*([^*]+)\*\*/g
-  let last = 0
-  let m
-  while ((m = re.exec(line)) !== null) {
-    if (m.index > last) out.push(rt(line.slice(last, m.index)))
-    out.push(rt(m[1], { bold: true }))
-    last = m.index + m[0].length
-  }
-  if (last < line.length) out.push(rt(line.slice(last)))
-  return out.length ? out : [rt(line)]
-}
-
-// Convert the cockpit markdown (everything after the YAML frontmatter)
-// into Notion blocks.
-function markdownToBlocks(md) {
-  const body = md.replace(/^---\n[\s\S]*?\n---\n+/, '')
-  const lines = body.split('\n')
-  const blocks = []
-  let i = 0
-  while (i < lines.length) {
-    const line = lines[i]
-    if (line.trim() === '') {
-      i++
-      continue
-    }
-    if (line.startsWith('# ')) {
-      blocks.push({ object: 'block', type: 'heading_1', heading_1: { rich_text: mdInline(line.slice(2)) } })
-    } else if (line.startsWith('## ')) {
-      blocks.push({ object: 'block', type: 'heading_2', heading_2: { rich_text: mdInline(line.slice(3)) } })
-    } else if (line.startsWith('### ')) {
-      blocks.push({ object: 'block', type: 'heading_3', heading_3: { rich_text: mdInline(line.slice(4)) } })
-    } else if (line.startsWith('> ')) {
-      blocks.push({ object: 'block', type: 'quote', quote: { rich_text: mdInline(line.slice(2)) } })
-    } else if (/^\s*[-*]\s+/.test(line)) {
-      const text = line.replace(/^\s*[-*]\s+/, '')
-      blocks.push({ object: 'block', type: 'bulleted_list_item', bulleted_list_item: { rich_text: mdInline(text) } })
-    } else {
-      blocks.push({ object: 'block', type: 'paragraph', paragraph: { rich_text: mdInline(line) } })
-    }
-    i++
-  }
-  return blocks
-}
-
-async function clearPage(notion, pageId) {
-  let cursor
-  do {
-    const res = await notion.blocks.children.list({ block_id: pageId, start_cursor: cursor, page_size: 100 })
-    for (const c of res.results) {
-      try {
-        await notion.blocks.delete({ block_id: c.id })
-        await sleep(80)
-      } catch (e) {
-        log(`warn: failed to delete block ${c.id}: ${e.message}`)
-      }
-    }
-    cursor = res.has_more ? res.next_cursor : null
-  } while (cursor)
-}
-
-async function appendBlocks(notion, pageId, blocks) {
-  for (let i = 0; i < blocks.length; i += 50) {
-    await notion.blocks.children.append({ block_id: pageId, children: blocks.slice(i, i + 50) })
-    await sleep(120)
-  }
 }
 
 async function main() {

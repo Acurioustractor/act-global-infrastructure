@@ -144,6 +144,10 @@ async function main() {
   writeFileSync(STATUS_PATH, lines.join('\n'))
   log(`wrote ${STATUS_PATH}`)
 
+  // Mirror to Notion (fail-soft: skips quietly if NOTION_TOKEN dead or
+  // cfg.moneyStatus unset).
+  runQuiet(`node ${join(__dirname, 'sync-money-status-to-notion.mjs')}`)
+
   // Terminal summary
   if (!QUIET) {
     console.log('')

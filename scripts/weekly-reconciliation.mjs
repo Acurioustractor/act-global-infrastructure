@@ -514,7 +514,25 @@ async function main() {
 
   msg += `\n\n_Run reconciliation-report.mjs for full details_`;
 
+  // Persist the digest to wiki/cockpit/ before sending so sync-weekly-digest-
+  // to-notion.mjs (and any future readers) can pick it up. Markdown is the
+  // Telegram message body unchanged — Telegram's *bold* and `code` tokens
+  // happen to render usefully in Notion's markdown→blocks converter.
+  try {
+    const digestDate = new Date().toISOString().slice(0, 10);
+    const digestPath = path.join('wiki', 'cockpit', `weekly-digest-${digestDate}.md`);
+    const digestMd = `---\ntitle: Weekly Reconciliation Digest\ndate: ${digestDate}\nstatus: live\n---\n\n# Weekly digest — ${digestDate}\n\n${msg}\n`;
+    fs.writeFileSync(digestPath, digestMd);
+    console.log(`\n📝 wrote digest to ${digestPath}`);
+  } catch (err) {
+    console.log(`\n⚠  failed to persist digest to wiki/cockpit/: ${err.message}`);
+  }
+
   await sendTelegram(msg);
+
+  // Mirror to Notion weeklyDigest page (fail-soft: skips quietly if
+  // NOTION_TOKEN dead or cfg.weeklyDigest unset).
+  runScript('sync-weekly-digest-to-notion.mjs', '');
 
   console.log(`\n✅ Done in ${duration}s`);
 }
