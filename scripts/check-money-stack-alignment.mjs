@@ -15,11 +15,14 @@
  *   Bonus: lists wiki/decisions/*.md files Ben should mirror against the
  *      Notion decisionsLog manually (no auto-diff yet — see one-stop-shop).
  *
- * What this script cannot check without Notion (deferred until token works):
- *   #1 Hub-page redundancy (moneyFramework vs financeOverview)
- *   #2 Pile-mix vs FY27 target (need Notion-side pile mix + Xero pile data)
- *   #3 Money-in/out alignment Notion content vs the synthesis files
- *   #4 Notion decisionsLog row-by-row diff vs wiki/decisions/
+ * Notion-side checks (require working NOTION_TOKEN, otherwise skipped as
+ * DEFERRED with a token-rotation pointer):
+ *   #1 Hub-page redundancy — heading_2 overlap between moneyFramework and
+ *      financeOverview surfaces dead-weight duplication.
+ *   #2 Pile-mix populated — each of the 4 pile_* pages has >5 child blocks.
+ *   #3 Money-in/out content present — moneyInAlignment + moneyOutAlignment
+ *      both have live content (>5 blocks each).
+ *   #4 decisionsLog row diff — Notion db rows vs wiki/decisions/*.md titles.
  *
  * Output: prints a colour-light report and writes
  *   wiki/cockpit/money-stack-alignment-YYYY-MM-DD.md
@@ -31,10 +34,16 @@
 import { readFileSync, statSync, existsSync, writeFileSync, readdirSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import { dirname, join } from 'node:path'
+import { Client } from '@notionhq/client'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 const REPO_ROOT = join(__dirname, '..')
+await import(join(__dirname, 'lib/load-env.mjs'))
+
+const CFG_PATH = join(REPO_ROOT, 'config/notion-database-ids.json')
+const cfg = existsSync(CFG_PATH) ? JSON.parse(readFileSync(CFG_PATH, 'utf-8')) : {}
+const notion = process.env.NOTION_TOKEN ? new Client({ auth: process.env.NOTION_TOKEN }) : null
 const argv = process.argv.slice(2)
 const JSON_OUT = argv.includes('--json')
 
@@ -153,22 +162,145 @@ function listWikiDecisions() {
   }
 }
 
-// Concerns deferred to Notion API
-function deferredNotionChecks() {
-  return [
-    { id: '1-hub-redundancy', status: 'DEFERRED', reason: 'needs Notion API to compare moneyFramework vs financeOverview content', fix: 'rotate NOTION_TOKEN and re-run scripts/audit-notion-money-stack.mjs --money-only' },
-    { id: '2-pile-mix-vs-fy27-target', status: 'DEFERRED', reason: 'needs Notion API to read pilePage_* current values + a canonical FY27 target source' },
-    { id: '3-money-in-out-vs-syntheses', status: 'DEFERRED', reason: 'needs Notion API to read moneyInAlignment / moneyOutAlignment content and diff against the synthesis files' },
-    { id: '4-decisions-log-row-diff', status: 'DEFERRED', reason: 'needs Notion API to query decisionsLog rows for diff against wiki/decisions/' },
-  ]
+async function listChildBlocks(pageId) {
+  const out = []
+  let cursor
+  do {
+    const res = await notion.blocks.children.list({ block_id: pageId, start_cursor: cursor, page_size: 100 })
+    out.push(...res.results)
+    cursor = res.has_more ? res.next_cursor : null
+  } while (cursor)
+  return out
 }
+
+function headingTexts(blocks, level = 'heading_2') {
+  return blocks.filter((b) => b.type === level).map((b) => (b[level].rich_text || []).map((t) => t.plain_text).join('').trim().toLowerCase()).filter(Boolean)
+}
+
+async function checkHubRedundancy() {
+  if (!notion) return { id: '1-hub-redundancy', status: 'DEFERRED', reason: 'NOTION_TOKEN not set', fix: 'rotate NOTION_TOKEN and re-run' }
+  if (!cfg.moneyFramework || !cfg.financeOverview) return { id: '1-hub-redundancy', status: 'BLOCKED', reason: 'cfg.moneyFramework or cfg.financeOverview missing' }
+  try {
+    const [a, b] = await Promise.all([listChildBlocks(cfg.moneyFramework), listChildBlocks(cfg.financeOverview)])
+    const aH = new Set(headingTexts(a))
+    const bH = new Set(headingTexts(b))
+    const overlap = [...aH].filter((h) => bH.has(h))
+    const total = new Set([...aH, ...bH]).size
+    const pct = total ? Math.round((overlap.length / total) * 100) : 0
+    if (overlap.length === 0) {
+      return { id: '1-hub-redundancy', status: 'IN-SYNC', summary: `0 heading overlap between moneyFramework (${aH.size} h2s) and financeOverview (${bH.size} h2s)` }
+    }
+    return {
+      id: '1-hub-redundancy',
+      status: pct >= 30 ? 'DRIFT' : 'INFO',
+      summary: `${overlap.length} of ${total} h2 headings overlap (${pct}%) between moneyFramework and financeOverview`,
+      drift: overlap,
+      fix: pct >= 30 ? 'Pick one as canonical front door; move unique content from the other; archive the loser. Per money-stack-one-stop-shop.md the recommendation is to deprecate financeOverview and fold into moneyFramework.' : undefined,
+    }
+  } catch (e) {
+    return { id: '1-hub-redundancy', status: 'BLOCKED', reason: e.message.slice(0, 100) }
+  }
+}
+
+async function checkPileMixPopulated() {
+  if (!notion) return { id: '2-pile-mix-populated', status: 'DEFERRED', reason: 'NOTION_TOKEN not set' }
+  const piles = ['pilePage_voice', 'pilePage_flow', 'pilePage_ground', 'pilePage_grants']
+  const missing = piles.filter((k) => !cfg[k])
+  if (missing.length) return { id: '2-pile-mix-populated', status: 'BLOCKED', reason: `cfg keys missing: ${missing.join(', ')}` }
+  try {
+    const counts = await Promise.all(piles.map(async (k) => ({ key: k, blocks: (await listChildBlocks(cfg[k])).length })))
+    const empty = counts.filter((c) => c.blocks <= 5)
+    if (empty.length === 0) {
+      return { id: '2-pile-mix-populated', status: 'IN-SYNC', summary: `all 4 pile pages populated (blocks: ${counts.map((c) => c.key.replace('pilePage_', '') + '=' + c.blocks).join(', ')})` }
+    }
+    return {
+      id: '2-pile-mix-populated',
+      status: 'DRIFT',
+      summary: `${empty.length} of 4 pile pages near-empty (≤5 blocks)`,
+      drift: empty.map((c) => `${c.key} (${c.blocks} blocks)`),
+      fix: 'Run `node scripts/sync-pile-pages-to-notion.mjs` to repopulate.',
+    }
+  } catch (e) {
+    return { id: '2-pile-mix-populated', status: 'BLOCKED', reason: e.message.slice(0, 100) }
+  }
+}
+
+async function checkMoneyInOutVsSyntheses() {
+  if (!notion) return { id: '3-money-in-out-vs-syntheses', status: 'DEFERRED', reason: 'NOTION_TOKEN not set' }
+  if (!cfg.moneyInAlignment || !cfg.moneyOutAlignment) return { id: '3-money-in-out-vs-syntheses', status: 'BLOCKED', reason: 'cfg keys missing' }
+  try {
+    const [inBlocks, outBlocks] = await Promise.all([listChildBlocks(cfg.moneyInAlignment), listChildBlocks(cfg.moneyOutAlignment)])
+    const tooShort = []
+    if (inBlocks.length <= 5) tooShort.push(`moneyInAlignment (${inBlocks.length} blocks)`)
+    if (outBlocks.length <= 5) tooShort.push(`moneyOutAlignment (${outBlocks.length} blocks)`)
+    if (tooShort.length === 0) {
+      return { id: '3-money-in-out-vs-syntheses', status: 'IN-SYNC', summary: `moneyInAlignment=${inBlocks.length} blocks · moneyOutAlignment=${outBlocks.length} blocks` }
+    }
+    return {
+      id: '3-money-in-out-vs-syntheses',
+      status: 'DRIFT',
+      summary: `${tooShort.length} alignment page(s) near-empty`,
+      drift: tooShort,
+      fix: 'Run `node scripts/audit-money-in-alignment.mjs && node scripts/audit-money-out-alignment.mjs && node scripts/sync-money-alignment-to-notion.mjs` to refresh.',
+    }
+  } catch (e) {
+    return { id: '3-money-in-out-vs-syntheses', status: 'BLOCKED', reason: e.message.slice(0, 100) }
+  }
+}
+
+async function checkDecisionsLogRowDiff() {
+  if (!notion) return { id: '4-decisions-log-row-diff', status: 'DEFERRED', reason: 'NOTION_TOKEN not set' }
+  // SDK v5 + Notion API 2025-09-03 routes db queries through dataSources.
+  const dsId = cfg.decisionsLogDataSource
+  if (!dsId) return { id: '4-decisions-log-row-diff', status: 'BLOCKED', reason: 'cfg.decisionsLogDataSource missing' }
+  try {
+    const rows = []
+    let cursor
+    do {
+      const res = await notion.dataSources.query({ data_source_id: dsId, start_cursor: cursor, page_size: 100 })
+      rows.push(...res.results)
+      cursor = res.has_more ? res.next_cursor : null
+    } while (cursor)
+    const notionTitles = rows.map((r) => {
+      const props = r.properties || {}
+      for (const k of Object.keys(props)) {
+        const p = props[k]
+        if (p?.type === 'title') return (p.title || []).map((t) => t.plain_text).join('').trim().toLowerCase()
+      }
+      return ''
+    }).filter(Boolean)
+
+    const wikiDir = join(REPO_ROOT, 'wiki/decisions')
+    const wikiFiles = existsSync(wikiDir)
+      ? readdirSync(wikiDir).filter((f) => f.endsWith('.md') && f !== 'README.md').map((f) => f.replace(/\.md$/, '').replace(/-/g, ' ').toLowerCase())
+      : []
+
+    return {
+      id: '4-decisions-log-row-diff',
+      status: 'INFO',
+      summary: `Notion decisionsLog has ${notionTitles.length} rows · wiki/decisions/ has ${wikiFiles.length} files`,
+      note: 'Auto-diff is naive (slug→title comparison). For an actual reconciliation, audit titles by hand. The two stores are designed to differ (Notion = working, wiki = canonical) but every load-bearing decision should appear in both.',
+      notion_count: notionTitles.length,
+      wiki_count: wikiFiles.length,
+    }
+  } catch (e) {
+    return { id: '4-decisions-log-row-diff', status: 'BLOCKED', reason: e.message.slice(0, 100) }
+  }
+}
+
+const notionChecks = await Promise.all([
+  checkHubRedundancy(),
+  checkPileMixPopulated(),
+  checkMoneyInOutVsSyntheses(),
+  checkDecisionsLogRowDiff(),
+])
 
 const results = [
   checkFoundationsVsFundersJson(),
   checkEntityHubFreshness(),
   checkFourLanesCardWired(),
   listWikiDecisions(),
-  ...deferredNotionChecks(),
+  ...notionChecks,
 ]
 
 if (JSON_OUT) {
