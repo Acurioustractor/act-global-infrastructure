@@ -274,7 +274,7 @@ function tier1(text) {
 }
 
 // ─── Frontmatter parsing ────────────────────────────────────────────────────
-function parseFrontmatter(text) {
+export function parseFrontmatter(text) {
   if (!text.startsWith('---\n')) return { fm: {}, body: text };
   const end = text.indexOf('\n---\n', 4);
   if (end < 0) return { fm: {}, body: text };
@@ -391,7 +391,7 @@ function synthesize(t1, t23) {
   };
 }
 
-async function grade(text, slug, anthropic, opts = {}) {
+export async function grade(text, slug, anthropic, opts = {}) {
   const { fm, body } = parseFrontmatter(text);
   const t1 = tier1(text);
   if (opts.tier1Only || !anthropic) {
@@ -555,4 +555,6 @@ async function main() {
   }
 }
 
-main().catch(e => { console.error(e); process.exit(1); });
+// Only run main() when invoked as CLI; allow programmatic import without side effects.
+const isMain = process.argv[1] === fileURLToPath(import.meta.url);
+if (isMain) main().catch(e => { console.error(e); process.exit(1); });

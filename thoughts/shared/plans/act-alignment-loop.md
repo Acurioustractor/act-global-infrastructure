@@ -108,6 +108,7 @@ Phase 1 (after Phase 0 proves out):
 Phase 2 (once Phase 1 is stable):
 - [x] Weekly cron via remote agent (`trig_018X1ZRtc9zdgFENiYsx5t8c`, Friday 08:00 Brisbane)
 - [x] Phase 2a — multi-repo Q2 codebase scan across all 9 ACT codebases (shipped 2026-04-25; plan: `act-brain-phase-2a-multi-repo-q2.md`; runtime ~11s; new threshold total≥5 OR any-non-hub≥3; new "Where (top repos)" column in output)
+- [x] Phase 2 self-grade integration — graders check synthesis docs before commit (shipped 2026-05-07). The `alignment-loop-synthesis` rubric (calibrated 6/6, v0.1) and the `funder-cadence` rubric (calibrated 6/6, v0.1) are wired into `scripts/synthesize-project-truth-state.mjs` via `scripts/lib/alignment-loop-grade.mjs`. After each synthesis writes its draft, the lib helper grades it; on `pass` the run exits clean, on `warn`/`fail` it writes a triage report to `wiki/output/lint-loop-YYYY-MM-DD.md` and exits non-zero on `fail`. `--no-grade` opts out for environments without `ANTHROPIC_API_KEY`. When the other two synthesize scripts (`synthesize-funder-alignment.mjs`, `synthesize-entity-migration-truth-state.mjs`) land, they pick up the same wiring with one import + one call.
 - [ ] Phase 2b — email content surfacing into Q1 (planned in `act-brain-expansion.md`)
 - [ ] Phase 2c — Notion document body sync into Q2/Q3 (planned in `act-brain-expansion.md`)
 - [ ] Diff-against-last-week logic
