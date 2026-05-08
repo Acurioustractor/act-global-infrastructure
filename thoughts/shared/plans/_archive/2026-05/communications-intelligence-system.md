@@ -1,6 +1,6 @@
 ---
 title: "Implementation Plan: Communications Intelligence System"
-status: review-needed
+status: archive
 date: 2026-02-09
 last_verified: 2026-05-08
 ---

@@ -336,7 +336,7 @@
       "code": "ACT-PS",
       "canonical_slug": "picc-on-country-photo-studio",
       "category": "indigenous",
-      "tier": "studio",
+      "tier": "background",
       "priority": "high",
       "status": "active",
       "description": "Mobile photo studio for Palm Island community storytelling",
@@ -434,7 +434,7 @@
       "code": "ACT-UA",
       "canonical_slug": "uncle-allan-palm-island-art",
       "category": "indigenous",
-      "tier": "studio",
+      "tier": "background",
       "priority": "high",
       "status": "active",
       "description": "Indigenous art project",
@@ -679,7 +679,7 @@
         "confessional"
       ],
       "category": "arts",
-      "tier": "studio",
+      "tier": "background",
       "priority": "medium",
       "status": "active",
       "description": "Safe space installation for sharing stories in confidence. Art piece creating conditions for truth-telling",
@@ -750,7 +750,7 @@
         "gold.phone"
       ],
       "category": "arts",
-      "tier": "studio",
+      "tier": "background",
       "priority": "medium",
       "status": "active",
       "description": "Hacked vintage payphone randomly connecting strangers globally. Thousands of authentic conversations documented",
@@ -921,7 +921,7 @@
         "red-tape"
       ],
       "category": "arts",
-      "tier": "studio",
+      "tier": "background",
       "priority": "medium",
       "status": "active",
       "description": "Art installation making bureaucratic friction physically legible",
@@ -1230,7 +1230,7 @@
       "code": "ACT-SE",
       "canonical_slug": "sefa-partnership",
       "category": "funding",
-      "tier": "satellite",
+      "tier": "background",
       "priority": "medium",
       "status": "archived",
       "description": "Social Enterprise Finance Australia",
@@ -1297,7 +1297,7 @@
       "code": "ACT-RA",
       "canonical_slug": "regional-arts-fellowship",
       "category": "arts",
-      "tier": "studio",
+      "tier": "background",
       "priority": "medium",
       "status": "active",
       "description": "Supporting regional arts practitioners through residencies, mentorship, and creative development",
@@ -1537,7 +1537,7 @@
       "code": "ACT-MC",
       "canonical_slug": "cars-and-microcontrollers",
       "category": "arts",
-      "tier": "studio",
+      "tier": "background",
       "priority": "medium",
       "status": "active",
       "description": "Art and technology crossover — combining mechanical craft with microcontroller programming to create interactive installations",
@@ -1613,7 +1613,7 @@
       "code": "ACT-JC",
       "canonical_slug": "justicehub-centre-of-excellence",
       "category": "justice",
-      "tier": "satellite",
+      "tier": "background",
       "priority": "high",
       "status": "ideation",
       "description": "Centre of excellence for youth justice reform",
@@ -1634,7 +1634,7 @@
       "code": "ACT-TR",
       "canonical_slug": "treacher",
       "category": "arts",
-      "tier": "studio",
+      "tier": "background",
       "priority": "low",
       "status": "ideation",
       "description": "Film exploring themes of trust, betrayal, and institutional accountability",
@@ -1969,6 +1969,33 @@
         "Marriage Celebrant"
       ],
       "dext_category": "Community"
+    },
+    "ACT-GS": {
+      "name": "GrantScope (CivicGraph)",
+      "code": "ACT-GS",
+      "canonical_slug": "grantscope",
+      "category": "background",
+      "status": "active",
+      "description": "GrantScope tool / CivicGraph reference. Wiki page at wiki/projects/grantscope.md. Lives in separate repo at /Users/benknight/Code/grantscope.",
+      "tier": "background"
+    },
+    "ACT-PB": {
+      "name": "Place-Based Policy Lab",
+      "code": "ACT-PB",
+      "canonical_slug": "place-based-policy-lab",
+      "category": "background",
+      "status": "active",
+      "description": "Background record (added 2026-05-09 cleanup) — wiki page exists at wiki/projects/place-based-policy-lab.md.",
+      "tier": "background"
+    },
+    "ACT-DLB": {
+      "name": "Deadly Labs",
+      "code": "ACT-DLB",
+      "canonical_slug": "deadlylabs",
+      "category": "background",
+      "status": "active",
+      "description": "Background record (added 2026-05-09 cleanup) — wiki page exists at wiki/projects/deadlylabs.md.",
+      "tier": "background"
     }
   },
   "categories": {

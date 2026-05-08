@@ -1,6 +1,6 @@
 ---
 title: ACT Comprehensive Financial Review
-status: review-needed
+status: archive
 date: 2026-02-10
 last_verified: 2026-05-08
 ---

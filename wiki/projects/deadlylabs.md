@@ -2,8 +2,8 @@
 title: DeadlyLabs
 status: Active
 canonical_slug: deadlylabs
-canonical_code: TBD
-tier: unspecified
+canonical_code: ACT-DLB
+tier: background
 website_slug: deadlylabs
 website_path: /projects/deadlylabs
 public_surface: project

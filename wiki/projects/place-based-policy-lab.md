@@ -2,8 +2,8 @@
 title: Place-Based Policy Lab
 status: Active
 canonical_slug: place-based-policy-lab
-canonical_code: TBD
-tier: unspecified
+canonical_code: ACT-PB
+tier: background
 website_slug: place-based-policy-lab
 website_path: /projects/place-based-policy-lab
 public_surface: project

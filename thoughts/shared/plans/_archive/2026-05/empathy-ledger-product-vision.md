@@ -1,6 +1,6 @@
 ---
 title: "Empathy Ledger: The Storytelling Culture Platform"
-status: review-needed
+status: archive
 date: 2026-02-28
 last_verified: 2026-05-08
 ---

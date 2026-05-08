@@ -2,8 +2,8 @@
 title: GrantScope (CivicGraph)
 status: Active — Circle One technical reference for [[three-circles|The Three Circles]]
 canonical_slug: grantscope
-canonical_code: TBD
-tier: unspecified
+canonical_code: ACT-GS
+tier: background
 website_slug: grantscope
 website_path: /projects/grantscope
 public_surface: project

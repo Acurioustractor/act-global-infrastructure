@@ -1,8 +1,9 @@
 ---
 title: Unified Financial Overview — Plan
-status: review-needed
+status: superseded
 date: 2026-03-21
 last_verified: 2026-05-08
+superseded_by: unified-financial-overview-v2
 ---
 # Unified Financial Overview — Plan
 
