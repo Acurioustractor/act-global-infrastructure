@@ -1,3 +1,15 @@
+---
+title: Mounty Yarns
+status: Active
+canonical_slug: mounty-yarns
+canonical_code: ACT-MY
+tier: studio
+website_slug: mounty-yarns
+website_path: /projects/mounty-yarns
+public_surface: project
+cluster: mounty-yarns
+---
+
 # Mounty Yarns
 
 > A community storytelling project in Mount Gravatt — gathering and preserving local knowledge through yarning, oral history, and cultural exhibition.

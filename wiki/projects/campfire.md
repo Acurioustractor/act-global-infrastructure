@@ -1,3 +1,15 @@
+---
+title: CAMPFIRE
+status: Active
+canonical_slug: campfire
+canonical_code: ACT-CM
+tier: satellite
+website_slug: campfire
+website_path: /projects/campfire
+public_surface: project
+cluster: campfire
+---
+
 # CAMPFIRE
 
 > A cultural immersion, fitness, and mentorship program for Indigenous youth in Mount Isa and surrounding communities, founded by Brodie Germaine.

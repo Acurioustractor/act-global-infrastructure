@@ -1,3 +1,15 @@
+---
+title: ACT Public Voice
+status: Active
+canonical_slug: act-public-voice
+canonical_code: ACT-MISC
+tier: unspecified
+website_slug: act-public-voice
+website_path: /projects/act-public-voice
+public_surface: project
+cluster: act-public-voice
+---
+
 # ACT Public Voice
 
 > How A Curious Tractor describes itself to the world — in the words chosen for act.place.

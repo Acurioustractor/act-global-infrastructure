@@ -1,3 +1,15 @@
+---
+title: Fishers Oysters
+status: Transferred
+canonical_slug: fishers-oysters
+canonical_code: ACT-FO
+tier: satellite
+website_slug: fishers-oysters
+website_path: /projects/fishers-oysters
+public_surface: project
+cluster: fishers-oysters
+---
+
 # Fishers Oysters
 
 > A cultural-first aquaculture enterprise reclaiming and restoring Moreton Bay's oyster industry through Indigenous knowledge, community ownership, and regenerative practice.

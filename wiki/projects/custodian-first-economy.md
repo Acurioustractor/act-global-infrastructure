@@ -1,6 +1,13 @@
 ---
 title: Custodian First Economy
 status: Stub
+canonical_slug: custodian-first-economy
+canonical_code: ACT-CE
+tier: satellite
+website_slug: custodian-first-economy
+website_path: /projects/custodian-first-economy
+public_surface: partner
+cluster: custodian-first-economy
 project_code: ACT-CE
 type: partner
 ---

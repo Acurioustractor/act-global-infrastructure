@@ -1,9 +1,14 @@
 ---
 title: Black Cockatoo Valley
-summary: A 150-acre conservation-first property on Jinibara Country that sets the pace for ACT's land practice, enterprise, and stewardship methodology.
-tags: [place, land, regenerative, conservation, queensland, jinibara]
-project_code: ACT-BV
 status: active
+canonical_slug: black-cockatoo-valley
+canonical_code: ACT-BV
+tier: satellite
+website_slug: black-cockatoo-valley
+website_path: /projects/black-cockatoo-valley
+public_surface: project
+cluster: black-cockatoo-valley
+project_code: ACT-BV
 ---
 
 # Black Cockatoo Valley

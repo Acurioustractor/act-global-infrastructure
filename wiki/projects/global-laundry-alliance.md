@@ -1,3 +1,15 @@
+---
+title: Global Laundry Alliance
+status: Transferred
+canonical_slug: global-laundry-alliance
+canonical_code: ACT-GL
+tier: satellite
+website_slug: global-laundry-alliance
+website_path: /projects/global-laundry-alliance
+public_surface: project
+cluster: global-laundry-alliance
+---
+
 # Global Laundry Alliance
 
 > A dignity-centred international network connecting community laundry hubs — advocating for policy change that recognises clean clothing and access to basic hygiene as a matter of human dignity, not charity.

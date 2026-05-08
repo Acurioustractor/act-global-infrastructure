@@ -1,3 +1,15 @@
+---
+title: DeadlyLabs
+status: Active
+canonical_slug: deadlylabs
+canonical_code: TBD
+tier: unspecified
+website_slug: deadlylabs
+website_path: /projects/deadlylabs
+public_surface: project
+cluster: deadlylabs
+---
+
 # DeadlyLabs
 
 > STEM education meets youth detention — where sports science converges with cultural identity to redefine futures.

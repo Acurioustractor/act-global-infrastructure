@@ -1,3 +1,15 @@
+---
+title: Place-Based Policy Lab
+status: Active
+canonical_slug: place-based-policy-lab
+canonical_code: TBD
+tier: unspecified
+website_slug: place-based-policy-lab
+website_path: /projects/place-based-policy-lab
+public_surface: project
+cluster: place-based-policy-lab
+---
+
 # Place-Based Policy Lab
 
 > An evidence-based, participatory research initiative co-designing community-led policy from the ground up — where expertise lives in the community, not the think tank.

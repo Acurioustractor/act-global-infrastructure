@@ -1,6 +1,13 @@
 ---
 title: TOMNET
-code: ACT-TN
+status: Active
+canonical_slug: tomnet
+canonical_code: ACT-TN
+tier: background
+website_slug: tomnet
+website_path: /projects/tomnet
+public_surface: project
+cluster: tomnet
 ---
 
 # TOMNET

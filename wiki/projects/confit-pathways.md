@@ -1,3 +1,15 @@
+---
+title: ConFit Pathways
+status: Active
+canonical_slug: confit-pathways
+canonical_code: ACT-CT
+tier: satellite
+website_slug: confit-pathways
+website_path: /projects/confit-pathways
+public_surface: project
+cluster: confit-pathways
+---
+
 # ConFit Pathways
 
 > A fitness and boxing-based youth transformation program using mentors with lived incarceration experience to build pathways out of the justice system.

@@ -1,16 +1,16 @@
 ---
 title: CONTAINED
 status: Active
-date: 2026-04-11
-entity_type: work
-tagging_mode: own-code
 canonical_slug: contained
 canonical_code: ACT-CN
+tier: studio
 website_slug: contained
 website_path: /projects/contained
 public_surface: work
 cluster: justicehub
-parent_project: justicehub
+date: 2026-04-11
+entity_type: work
+tagging_mode: own-code
 empathy_ledger_key: contained
 ---
 
