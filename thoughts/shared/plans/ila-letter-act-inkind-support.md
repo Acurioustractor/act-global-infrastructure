@@ -1,3 +1,9 @@
+---
+title: Letter of In-Kind Support — A Curious Tractor (ACT)
+status: review-needed
+date: 2026-03-21
+last_verified: 2026-05-08
+---
 # Letter of In-Kind Support — A Curious Tractor (ACT)
 ## For ILA 2026-27: "Voices on Country"
 

@@ -1,5 +1,6 @@
 ---
 title: Verified per-state 20 + QLD funding deep-dive + contact enrichment plan
+status: active
 date: 2026-04-20
 purpose: |
   Ben asked: identify 20 main organisations per state with ABNs, charity status, community-control status etc verified; find a way to contact all of them where linkage is weak; especially surface QLD orgs that received specific state government program support in the last 2 years because CivicGraph already has that data.

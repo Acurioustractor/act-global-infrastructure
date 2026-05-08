@@ -1,3 +1,9 @@
+---
+title: Mannifera 2026 Signature Grant — Draft Application
+status: review-needed
+date: 2026-03-09
+last_verified: 2026-05-08
+---
 # Mannifera 2026 Signature Grant — Draft Application
 ## Applicant: ACT Foundation (A Kind Tractor LTD)
 ## Project: "Civic Intelligence for Excluded Communities"

@@ -1,3 +1,9 @@
+---
+title: Financial Cockpit — Interactive Money Management
+status: review-needed
+date: 2026-03-27
+last_verified: 2026-05-08
+---
 # Financial Cockpit — Interactive Money Management
 
 ## What This Is NOT

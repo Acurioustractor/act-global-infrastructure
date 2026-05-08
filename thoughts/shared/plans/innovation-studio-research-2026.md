@@ -1,3 +1,9 @@
+---
+title: ACT Innovation Studio Research — Strategic Benchmarks
+status: review-needed
+date: 2026-03-21
+last_verified: 2026-05-08
+---
 # ACT Innovation Studio Research — Strategic Benchmarks
 
 *Generated: 2026-03-18*

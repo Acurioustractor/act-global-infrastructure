@@ -1,3 +1,9 @@
+---
+title: "Feature Plan: Spending Intelligence System"
+status: review-needed
+date: 2026-04-20
+last_verified: 2026-05-08
+---
 # Feature Plan: Spending Intelligence System
 Created: 2026-04-13
 Author: architect-agent

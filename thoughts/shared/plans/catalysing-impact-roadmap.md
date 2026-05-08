@@ -1,3 +1,9 @@
+---
+title: "Catalysing Impact — Roadmap & Strategy"
+status: review-needed
+date: 2026-03-27
+last_verified: 2026-05-08
+---
 # Catalysing Impact — Roadmap & Strategy
 
 **Date:** 2026-03-22

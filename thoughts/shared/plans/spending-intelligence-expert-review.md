@@ -1,3 +1,9 @@
+---
+title: "Spending Intelligence — Expert Review & Practice Guide"
+status: review-needed
+date: 2026-04-24
+last_verified: 2026-05-08
+---
 # Spending Intelligence — Expert Review & Practice Guide
 
 **Date:** 2026-04-23

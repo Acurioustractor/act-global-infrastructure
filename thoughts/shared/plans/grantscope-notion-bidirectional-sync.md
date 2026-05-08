@@ -1,3 +1,9 @@
+---
+title: "GrantScope ↔ Notion: Bidirectional Sync & Product Vision"
+status: review-needed
+date: 2026-03-12
+last_verified: 2026-05-08
+---
 # GrantScope ↔ Notion: Bidirectional Sync & Product Vision
 
 ## The Two-Space Problem

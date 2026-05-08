@@ -1,3 +1,9 @@
+---
+title: "Plan: Phase 2a — Multi-repo Q2 codebase scan"
+status: review-needed
+date: 2026-04-25
+last_verified: 2026-05-08
+---
 # Plan: Phase 2a — Multi-repo Q2 codebase scan
 
 > Slug: `act-brain-phase-2a-multi-repo-q2`

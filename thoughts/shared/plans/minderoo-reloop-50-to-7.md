@@ -1,5 +1,6 @@
 ---
 title: Minderoo reloop — 50 to 7, and what we hadn't considered
+status: active
 date: 2026-04-20
 supersedes: selected framing from thoughts/shared/plans/minderoo-prototype-strategy.md (the "ten anchors" section specifically)
 audience: Ben, for envelope-design decisions before 1 May

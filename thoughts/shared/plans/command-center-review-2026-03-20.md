@@ -1,3 +1,9 @@
+---
+title: ACT Command Center — Full Review
+status: review-needed
+date: 2026-03-21
+last_verified: 2026-05-08
+---
 # ACT Command Center — Full Review
 **Date:** 2026-03-20 | **Scope:** Complete React app audit
 

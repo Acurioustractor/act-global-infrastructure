@@ -1,3 +1,9 @@
+---
+title: Tractorpedia Viewer Generator — Known Bugs
+status: review-needed
+date: 2026-04-21
+last_verified: 2026-05-08
+---
 # Tractorpedia Viewer Generator — Known Bugs
 
 **File:** `scripts/wiki-build-viewer.mjs`

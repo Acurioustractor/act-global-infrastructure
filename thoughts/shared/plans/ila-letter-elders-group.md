@@ -1,3 +1,9 @@
+---
+title: Joint Letter of Support — PICC Elders Group
+status: review-needed
+date: 2026-03-21
+last_verified: 2026-05-08
+---
 # Joint Letter of Support — PICC Elders Group
 ## For ILA 2026-27 Application: "Voices on Country"
 

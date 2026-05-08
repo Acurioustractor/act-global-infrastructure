@@ -1,3 +1,9 @@
+---
+title: ACT Finance Engine — Master Plan
+status: review-needed
+date: 2026-03-17
+last_verified: 2026-05-08
+---
 # ACT Finance Engine — Master Plan
 
 **Date:** 2026-03-17

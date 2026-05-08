@@ -1,6 +1,7 @@
 ---
 title: Supabase shared-DB schema reorganisation
-status: Draft (needs sign-off)
+status: blocked
+status_note: "Draft (needs sign-off)"
 date: 2026-04-30
 parent_plan: thoughts/shared/plans/supabase-health-2026-04-29.md
 db: tednluwflfhxyucgwigh

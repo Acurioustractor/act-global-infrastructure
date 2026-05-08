@@ -1,3 +1,9 @@
+---
+title: Notion Custom Agents Design — ACT Operating System
+status: review-needed
+date: 2026-03-27
+last_verified: 2026-05-08
+---
 # Notion Custom Agents Design — ACT Operating System
 
 ## Database Map (Verified Schemas)

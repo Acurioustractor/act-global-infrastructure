@@ -1,3 +1,9 @@
+---
+title: REAL Innovation Fund — EOI Draft v3
+status: review-needed
+date: 2026-02-28
+last_verified: 2026-05-08
+---
 # REAL Innovation Fund — EOI Draft v3
 
 **Grant**: REAL Innovation Fund (GO8213)

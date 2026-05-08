@@ -1,3 +1,9 @@
+---
+title: ACT entity alignment plan
+status: review-needed
+date: 2026-04-24
+last_verified: 2026-05-08
+---
 # ACT entity alignment plan
 
 > Written: 2026-04-24. Author: Ben + Claude.

@@ -1,3 +1,9 @@
+---
+title: Quote for Services — Benjamin Knight / A Curious Tractor
+status: review-needed
+date: 2026-03-21
+last_verified: 2026-05-08
+---
 # Quote for Services — Benjamin Knight / A Curious Tractor
 ## For ILA 2026-27: "Voices on Country: Palm Island Elders Knowledge Journeys"
 

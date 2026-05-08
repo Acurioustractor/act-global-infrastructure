@@ -1,3 +1,9 @@
+---
+title: "Plan: Wiki Hybrid Search (BM25 + Vector + RRF)"
+status: review-needed
+date: 2026-04-13
+last_verified: 2026-05-08
+---
 # Plan: Wiki Hybrid Search (BM25 + Vector + RRF)
 
 > Slug: `wiki-hybrid-search`

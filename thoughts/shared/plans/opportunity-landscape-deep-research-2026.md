@@ -1,3 +1,9 @@
+---
+title: ACT Opportunity Landscape — Deep Research (March 2026)
+status: review-needed
+date: 2026-03-21
+last_verified: 2026-05-08
+---
 # ACT Opportunity Landscape — Deep Research (March 2026)
 
 **Generated:** 2026-03-20

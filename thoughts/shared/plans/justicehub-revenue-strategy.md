@@ -1,3 +1,9 @@
+---
+title: "JusticeHub — Revenue Strategy & Sprint Plan"
+status: review-needed
+date: 2026-03-06
+last_verified: 2026-05-08
+---
 # JusticeHub — Revenue Strategy & Sprint Plan
 
 > **Position:** Australia's Recidiviz. The justice data platform that doesn't exist yet.

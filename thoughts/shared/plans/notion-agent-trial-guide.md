@@ -1,3 +1,9 @@
+---
+title: Notion Custom Agent Trial Guide — ACT Ecosystem
+status: review-needed
+date: 2026-02-26
+last_verified: 2026-05-08
+---
 # Notion Custom Agent Trial Guide — ACT Ecosystem
 
 **Phase 1: Three Notion-internal agents (zero ACT changes)**

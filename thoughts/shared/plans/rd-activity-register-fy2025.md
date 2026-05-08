@@ -1,3 +1,9 @@
+---
+title: "ACT R&D Activity Register — FY2025 Development Period"
+status: review-needed
+date: 2026-03-21
+last_verified: 2026-05-08
+---
 # ACT R&D Activity Register — FY2025 Development Period
 
 **Prepared:** March 11, 2026

@@ -1,3 +1,9 @@
+---
+title: "Implementation Plan: Layered Memory System for ACT Ecosystem"
+status: review-needed
+date: 2026-02-09
+last_verified: 2026-05-08
+---
 # Implementation Plan: Layered Memory System for ACT Ecosystem
 Generated: 2026-01-30
 

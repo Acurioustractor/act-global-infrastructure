@@ -1,3 +1,9 @@
+---
+title: "Grant Process: Learnings, Improvements & Ceremony"
+status: review-needed
+date: 2026-03-23
+last_verified: 2026-05-08
+---
 # Grant Process: Learnings, Improvements & Ceremony
 
 ## What We Learned (This Session)

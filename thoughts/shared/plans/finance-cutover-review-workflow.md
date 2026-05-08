@@ -1,6 +1,7 @@
 ---
 title: Finance Cutover Review Workflow
-status: Live working playbook
+status: active
+status_note: "Live working playbook"
 date: 2026-05-05
 parent: act-entity-migration-checklist-2026-06-30
 purpose: One simple end-to-end pass to get FY26 sole-trader books cutover-ready — bank match, receipt match, project tag, R&D tag, mapping export.

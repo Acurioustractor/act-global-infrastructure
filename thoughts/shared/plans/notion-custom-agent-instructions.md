@@ -1,3 +1,9 @@
+---
+title: Notion Custom Agent Instructions (v2)
+status: review-needed
+date: 2026-03-09
+last_verified: 2026-05-08
+---
 # Notion Custom Agent Instructions (v2)
 
 > **How to use:** Open Notion → Settings → Agents → Create Custom Agent → paste the Name and Instructions below.

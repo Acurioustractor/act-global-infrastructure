@@ -1,3 +1,9 @@
+---
+title: Letter of Financial Support — Palm Island Community Company
+status: review-needed
+date: 2026-03-21
+last_verified: 2026-05-08
+---
 # Letter of Financial Support — Palm Island Community Company
 ## For ILA 2026-27: "Voices on Country"
 

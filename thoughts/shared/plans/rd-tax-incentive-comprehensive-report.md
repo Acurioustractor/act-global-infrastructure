@@ -1,3 +1,9 @@
+---
+title: "ACT R&D Tax Incentive — Comprehensive Report"
+status: review-needed
+date: 2026-02-28
+last_verified: 2026-05-08
+---
 # ACT R&D Tax Incentive — Comprehensive Report
 
 **Prepared:** 19 February 2026

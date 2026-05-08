@@ -1,3 +1,9 @@
+---
+title: ILA 2026-27 — Draft Application Responses
+status: review-needed
+date: 2026-02-28
+last_verified: 2026-05-08
+---
 # ILA 2026-27 — Draft Application Responses
 ## Applicant: Palm Island Community Company (PICC)
 ## Project: "Voices on Country: Palm Island Elders Knowledge Journeys"

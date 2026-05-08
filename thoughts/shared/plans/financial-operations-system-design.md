@@ -1,3 +1,9 @@
+---
+title: ACT Financial Operations System Design
+status: review-needed
+date: 2026-03-21
+last_verified: 2026-05-08
+---
 # ACT Financial Operations System Design
 
 **Date:** 2026-03-20

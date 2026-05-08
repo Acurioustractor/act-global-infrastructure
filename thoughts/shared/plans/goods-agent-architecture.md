@@ -1,3 +1,9 @@
+---
+title: "Plan: Goods Agent Architecture — Agents We Should Build"
+status: review-needed
+date: 2026-04-23
+last_verified: 2026-05-08
+---
 # Plan: Goods Agent Architecture — Agents We Should Build
 
 > Slug: `goods-agent-architecture`

@@ -1,3 +1,9 @@
+---
+title: "Pty Ltd Transition, R&D Tax Incentive & Cash Movement Strategy"
+status: review-needed
+date: 2026-03-21
+last_verified: 2026-05-08
+---
 # Pty Ltd Transition, R&D Tax Incentive & Cash Movement Strategy
 
 **Entity:** Nicholas Marchesi T/as A Curious Tractor → ACT Ventures Pty Ltd

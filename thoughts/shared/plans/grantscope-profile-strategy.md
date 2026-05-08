@@ -1,3 +1,9 @@
+---
+title: GrantScope Profile Strategy for ACT
+status: review-needed
+date: 2026-03-21
+last_verified: 2026-05-08
+---
 # GrantScope Profile Strategy for ACT
 
 **Date:** 2026-03-19

@@ -1,3 +1,9 @@
+---
+title: The Relationship Flywheel Engine
+status: review-needed
+date: 2026-03-21
+last_verified: 2026-05-08
+---
 # The Relationship Flywheel Engine
 ## A self-improving machine that links every business in Australia to ACT's mission
 

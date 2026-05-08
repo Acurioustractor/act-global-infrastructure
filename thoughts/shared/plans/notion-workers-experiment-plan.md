@@ -1,3 +1,9 @@
+---
+title: Notion Workers Experiment Plan
+status: review-needed
+date: 2026-02-28
+last_verified: 2026-05-08
+---
 # Notion Workers Experiment Plan
 
 **Goal:** Progressively expose ACT ecosystem intelligence inside Notion via Workers, turning Notion from a static workspace into an intelligent, interactive hub.

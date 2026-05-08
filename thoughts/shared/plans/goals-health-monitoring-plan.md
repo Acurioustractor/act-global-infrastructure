@@ -1,3 +1,9 @@
+---
+title: "Feature Plan: ACT Goals & Health Monitoring System"
+status: review-needed
+date: 2026-02-09
+last_verified: 2026-05-08
+---
 # Feature Plan: ACT Goals & Health Monitoring System
 Created: 2026-01-24
 Author: architect-agent

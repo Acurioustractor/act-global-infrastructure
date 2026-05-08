@@ -1,3 +1,9 @@
+---
+title: "R&D Tax Incentive — FY26 Package for Accountant & ATO"
+status: review-needed
+date: 2026-03-27
+last_verified: 2026-05-08
+---
 # R&D Tax Incentive — FY26 Package for Accountant & ATO
 
 **Entity:** ACT Foundation (Company Limited by Guarantee)

@@ -1,3 +1,9 @@
+---
+title: ACT Comprehensive Financial Review
+status: review-needed
+date: 2026-02-10
+last_verified: 2026-05-08
+---
 # ACT Comprehensive Financial Review
 **Date:** 9 February 2026 (Sunday Reset)
 **Period:** Feb 2025 - Feb 2026 (12 months)

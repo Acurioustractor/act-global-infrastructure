@@ -1,3 +1,9 @@
+---
+title: Project Financial Workspaces — Architecture Plan
+status: review-needed
+date: 2026-03-27
+last_verified: 2026-05-08
+---
 # Project Financial Workspaces — Architecture Plan
 
 **Date:** 2026-03-22

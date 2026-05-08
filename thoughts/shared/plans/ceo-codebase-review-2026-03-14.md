@@ -1,3 +1,9 @@
+---
+title: ACT Global Infrastructure — CEO Codebase Review
+status: review-needed
+date: 2026-03-21
+last_verified: 2026-05-08
+---
 # ACT Global Infrastructure — CEO Codebase Review
 ## SCOPE EXPANSION Mode | 2026-03-14
 

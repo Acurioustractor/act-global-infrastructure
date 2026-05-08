@@ -1,3 +1,9 @@
+---
+title: "Plan: CEO Money Cockpit — 2 widgets + section anchors"
+status: review-needed
+date: 2026-05-07
+last_verified: 2026-05-08
+---
 # Plan: CEO Money Cockpit — 2 widgets + section anchors
 
 > Slug: `ceo-money-cockpit-2026-05-07`

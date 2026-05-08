@@ -1,3 +1,9 @@
+---
+title: Notion 3.3 Custom Agents — ACT Alignment Strategy
+status: review-needed
+date: 2026-02-28
+last_verified: 2026-05-08
+---
 # Notion 3.3 Custom Agents — ACT Alignment Strategy
 
 **Date**: 26 February 2026

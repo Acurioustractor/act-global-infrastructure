@@ -1,3 +1,9 @@
+---
+title: "Goods on Country — Opportunity Pipeline & Strategy"
+status: review-needed
+date: 2026-03-21
+last_verified: 2026-05-08
+---
 # Goods on Country — Opportunity Pipeline & Strategy
 
 **Created:** 2026-03-13

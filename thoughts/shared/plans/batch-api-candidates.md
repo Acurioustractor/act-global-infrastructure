@@ -1,3 +1,9 @@
+---
+title: Batch API Candidates — ACT Cron Scripts
+status: review-needed
+date: 2026-03-21
+last_verified: 2026-05-08
+---
 # Batch API Candidates — ACT Cron Scripts
 
 **Date:** 2026-03-20

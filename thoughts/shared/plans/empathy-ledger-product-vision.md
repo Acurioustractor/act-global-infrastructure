@@ -1,3 +1,9 @@
+---
+title: "Empathy Ledger: The Storytelling Culture Platform"
+status: review-needed
+date: 2026-02-28
+last_verified: 2026-05-08
+---
 # Empathy Ledger: The Storytelling Culture Platform
 
 > Every organisation has a story. Most can't tell it. Empathy Ledger is the platform that helps organisations build a storytelling culture — celebrating themselves, their staff, their clients, and their supporters in one place.
