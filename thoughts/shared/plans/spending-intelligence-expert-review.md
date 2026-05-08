@@ -1,8 +1,9 @@
 ---
 title: "Spending Intelligence — Expert Review & Practice Guide"
-status: review-needed
+status: superseded
 date: 2026-04-24
 last_verified: 2026-05-08
+superseded_by: spending-intelligence-v4-full-automation
 ---
 # Spending Intelligence — Expert Review & Practice Guide
 
