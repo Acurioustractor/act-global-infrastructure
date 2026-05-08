@@ -222,3 +222,17 @@ For tasks that don't match any active skill, just do the work directly.
 ## Skills Pruned 2026-05-01
 
 The gstack bundle and ~25 standalone meta-skills were archived to `~/.claude/skills/_archive/2026-05-01-pruning/`. Restore on demand — see `RESTORE.md` in that dir. If a skill you reach for is missing, surface it: "the X skill is archived, want me to restore it?"
+
+## Action Tiers (load every session, especially in auto-mode)
+
+Full classification: `~/.claude/rules/workflow.md` § "Action tiers".
+
+Quick reference:
+- **Tier 1 (local-only)** — Read/Edit/local scripts/local commits/branch creation. Auto-mode: just do.
+- **Tier 2 (shared-state, reversible)** — `git push`, archive moves, Notion edits to outbound pages, PM2 changes, GHL field updates. Always post "about to do X — proceed?" first, even in auto-mode.
+- **Tier 3 (shared-state, hard-to-reverse)** — Open/close/merge PR, push to main, force-push, send email/Slack/Telegram, Xero writes, Supabase migrations. **Require the explicit verb in the user's message** ("merge", "send", "void"). No verb → no action.
+- **Tier 4 (forbidden in auto-mode)** — Drop tables, send money, force-push to main, delete user data. Refuse + ask, ≥2 confirmations.
+
+At session start in this repo, run `git log --since="2 hours ago" --all --oneline` and flag if another session was active. Prevents cross-session races (encountered 2026-05-08 with PR #52).
+
+"Archive X" = `git mv` to a dated `_archive/` dir + `RESTORE.md`. Never `git rm` when "archive" was the request.
