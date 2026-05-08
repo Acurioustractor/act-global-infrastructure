@@ -224,9 +224,9 @@ REAL Innovation Fund ($1.2M over 4 years via Oonchiumpa consortium) is the prima
 
 ## R&D Tax Incentive
 
-Goods on Country is classified as **Supporting R&D** under ACT's FY26 Division 355 claim (ITAA 1997). It supports the core R&D activities (ALMA AI orchestration, IoT fleet telemetry) by providing:
+Goods on Country is classified as **Supporting R&D** under ACT's FY26 Division 355 claim (ITAA 1997). It supports the core R&D activities (ALMA review orchestration, IoT fleet telemetry) by providing:
 
-1. **IoT telemetry system** — Particle.io devices on 10 washing machines generate real-time data for the ALMA infrastructure experiments
+1. **IoT telemetry system** — Particle.io devices on 10 washing machines generate real-time data for the ALMA-governed infrastructure experiments
 2. **Remote deployment logistics** — iterating on community infrastructure constraints as an experimental testbed
 3. **Community handover protocols** — transitioning from ACT-managed to community-managed fleet operations
 
@@ -336,5 +336,5 @@ Severity levels: Low → Medium → High → Critical.
 - [[youth-justice-reform|Youth Justice Reform]] — housing, beds, and durable household infrastructure as upstream justice intervention, not separate from reform
 - [[2026-04-act-farm-repositioning|Act-Farm Repositioning]] — Goods referenced in the regenerative capital pivot
 - [[rdti-claim-strategy|R&D Tax Incentive Claim Strategy]] — Goods manufacturing as eligible R&D activity
-- [[custodian-economy|Custodian Economy]] — the economic model Goods on Country enacts through community-owned manufacturing and stewardship
+- [[custodian-first-economy|Custodian First Economy]]: partner program ACT works with around young people on youth justice orders
 - [[fishers-oysters|Fishers Oysters]] — fellow regenerative enterprise applying custodian economics and circular practice to aquaculture on Country

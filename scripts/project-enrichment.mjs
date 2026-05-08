@@ -109,7 +109,7 @@ const ACT_FRONTENDS = {
     description: 'NAS deployment - Telegram, Signal, agent services',
     category: 'infrastructure',
     tech: ['Docker', 'Node.js', 'Signal API'],
-    path: '/Users/benknight/Code/act-global-infrastructure/clawdbot-docker'
+    path: '/Users/benknight/Code/act-global-infrastructure/archive/clawdbot-docker-2026-04'
   },
   'the-harvest-website': {
     name: 'The Harvest Website',

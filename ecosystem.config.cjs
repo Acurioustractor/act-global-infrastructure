@@ -84,6 +84,130 @@ const cronScripts = [
     args: '',  // auto-detects current quarter
     cron_restart: '0 8 * * 1', // Weekly Monday 8am AEST — reconciliation report + Telegram
   },
+  // CRON ORDER (2026-05-08 reshuffle, see thoughts/shared/reviews/notion-finance-dashboard-2026-05-08.md):
+  //   8:15  dashboard-hub      — full-page replace, writes nav + Right now / Quick actions
+  //   8:18  daily-pulse        — adds "📡 Today's Pulse" section at top
+  //   8:20  opportunities-db
+  //   8:25  pile-pages
+  //   8:30  cash-forecast
+  //   8:35  kpis
+  //   8:40  budget-actual
+  //   8:45  cash-scenarios
+  //   8:50  money-metrics-snapshot
+  //   8:55  planning-rhythm
+  //   9:00  entity-hub
+  //   9:10  money-framework    — section-replace (LAST: appends panels at bottom)
+  // The ordering matters: dashboard-hub does full-page replace, money-framework
+  // does marker-based section-replace. If money-framework ran first, the hub
+  // would wipe its panels. With this order both coexist on moneyFramework.
+  {
+    name: 'dashboard-hub-sync',
+    script: 'scripts/sync-money-dashboard-hub.mjs',
+    cron_restart: '15 8 * * 1', // Weekly Monday 8:15am AEST — Main dashboard hub (FIRST: full-page replace, writes nav)
+  },
+  {
+    name: 'daily-pulse-sync',
+    script: 'scripts/sync-daily-pulse-to-notion.mjs',
+    cron_restart: '13 8 * * *', // Daily 8:13am AEST — "Today's Pulse" at top of moneyFramework (bank, runway, today's actions)
+  },
+  {
+    name: 'opportunities-db-sync',
+    script: 'scripts/sync-opportunities-to-notion-db.mjs',
+    cron_restart: '20 8 * * 1', // Weekly Monday 8:20am AEST — sync ACT Opportunities database (GHL + Xero + foundation grants)
+  },
+  {
+    name: 'pile-pages-sync',
+    script: 'scripts/sync-pile-pages-to-notion.mjs',
+    cron_restart: '25 8 * * 1', // Weekly Monday 8:25am AEST — refresh per-pile strategic pages (Voice / Flow / Ground / Grants)
+  },
+  {
+    name: 'cash-forecast-sync',
+    script: 'scripts/sync-cash-forecast-to-notion.mjs',
+    cron_restart: '30 8 * * 1', // Weekly Monday 8:30am AEST — 13-week rolling cash forecast (Build 1)
+  },
+  {
+    name: 'kpis-sync',
+    script: 'scripts/sync-kpis-to-notion.mjs',
+    cron_restart: '35 8 * * 1', // Weekly Monday 8:35am AEST — KPIs & Concentration Risk (Build 2)
+  },
+  {
+    name: 'budget-actual-sync',
+    script: 'scripts/sync-budget-vs-actual-to-notion.mjs',
+    cron_restart: '40 8 * * 1', // Weekly Monday 8:40am AEST — Budget vs Actual per project (Build 3)
+  },
+  {
+    name: 'cash-scenarios-sync',
+    script: 'scripts/sync-cash-scenarios-to-notion.mjs',
+    cron_restart: '45 8 * * 1', // Weekly Monday 8:45am AEST — Cash scenarios 12-month (Build 4)
+  },
+  {
+    name: 'money-metrics-snapshot',
+    script: 'scripts/sync-money-metrics-to-notion.mjs',
+    cron_restart: '50 8 * * 1', // Weekly Monday 8:50am AEST — Append weekly metrics snapshot (powers Dashboard view charts)
+  },
+  {
+    name: 'planning-rhythm-sync',
+    script: 'scripts/sync-planning-rhythm-to-notion.mjs',
+    cron_restart: '55 8 * * 1', // Weekly Monday 8:55am AEST — Multi-period planning page (weekly/monthly/half/year/5-year)
+  },
+  {
+    name: 'entity-hub-sync',
+    script: 'scripts/sync-entity-hub-to-notion.mjs',
+    cron_restart: '0 9 * * 1', // Weekly Monday 9:00am AEST — Master Entity Hub (orgs across Xero/GHL/Foundations)
+  },
+  {
+    name: 'money-framework-sync',
+    script: 'scripts/sync-money-framework-to-notion.mjs',
+    cron_restart: '10 9 * * 1', // Weekly Monday 9:10am AEST — refresh ACT Money Framework panels (LAST: section-replace appends below hub nav)
+  },
+  {
+    name: 'daily-money-briefing',
+    script: 'scripts/daily-money-briefing.mjs',
+    cron_restart: '0 8 * * *', // Daily 8am AEST — full briefing (wins + pipeline + overdue + actions)
+  },
+  {
+    name: 'telegram-money-alerts',
+    script: 'scripts/telegram-money-alerts.mjs',
+    cron_restart: '0 13 * * *', // Daily 1pm AEST — afternoon alert (silent if nothing actionable)
+  },
+  {
+    name: 'weekly-money-digest',
+    script: 'scripts/weekly-money-digest.mjs',
+    cron_restart: '0 15 * * 5', // Weekly Friday 3:00pm AEST — Friday Money Digest (week wins, burns, stale, actions)
+  },
+  {
+    name: 'ghl-cleanup-auto',
+    script: 'scripts/cleanup-stale-ghl-opps.mjs',
+    args: '--apply',
+    cron_restart: '0 6 * * 1', // Weekly Monday 6:00am AEST — auto-archive past-deadline grants + ACT Events invitations BEFORE the framework/db sync runs
+  },
+  {
+    name: 'grant-seed-weekly',
+    script: 'scripts/seed-ghl-grants.mjs',
+    args: '--count 5',
+    cron_restart: '30 6 * * 1', // Weekly Monday 6:30am AEST — seed top 5 fresh ACT-fit grants into GHL
+  },
+  {
+    name: 'xero-payments-sync',
+    script: 'scripts/sync-xero-payments.mjs',
+    args: '--days=180',
+    cron_restart: '50 6 * * 1', // Weekly Monday 6:50am AEST — sync Xero Payments (deposit↔invoice link table)
+  },
+  {
+    name: 'money-in-audit',
+    script: 'scripts/audit-money-in-alignment.mjs',
+    cron_restart: '0 7 * * 1', // Weekly Monday 7:00am AEST — generate money-in alignment markdown report
+  },
+  {
+    name: 'money-out-audit',
+    script: 'scripts/audit-money-out-alignment.mjs',
+    cron_restart: '5 7 * * 1', // Weekly Monday 7:05am AEST — generate money-out alignment markdown report
+  },
+  {
+    name: 'money-alignment-notion',
+    script: 'scripts/sync-money-alignment-to-notion.mjs',
+    cron_restart: '10 7 * * 1', // Weekly Monday 7:10am AEST — push both alignment reports to Notion
+  },
   {
     name: 'wiki-build-viewer',
     script: 'scripts/wiki-build-viewer.mjs',
@@ -163,12 +287,16 @@ const cronScripts = [
     args: '--verbose',
     cron_restart: '0 6,12,18 * * *', // 3x daily: 6am, 12pm, 6pm AEST
   },
-  {
-    name: 'actions-decisions-sync',
-    script: 'scripts/sync-actions-decisions-to-notion.mjs',
-    args: '--verbose',
-    cron_restart: '*/15 * * * *', // Every 15 minutes (matches checkbox polling)
-  },
+  // Removed 2026-05-06 — target Live Alerts Notion DB does not exist in current
+  // workspace. actions/projects/decisions DBs ARE accessible but the script's
+  // Notion calls hit a missing ID and abort. Re-add only after Live Alerts DB
+  // is recreated and config/notion-database-ids.json:liveAlerts is updated.
+  // {
+  //   name: 'actions-decisions-sync',
+  //   script: 'scripts/sync-actions-decisions-to-notion.mjs',
+  //   args: '--verbose',
+  //   cron_restart: '*/15 * * * *',
+  // },
   // contacts-sync removed — People Directory too noisy, focus on knowledge + meetings
   {
     name: 'generate-insights',
@@ -176,12 +304,15 @@ const cronScripts = [
     args: '--verbose',
     cron_restart: '0 */2 * * *', // Every 2 hours (reduced from 30min — most insights don't need 30-min freshness)
   },
-  {
-    name: 'finance-sync',
-    script: 'scripts/sync-finance-to-notion.mjs',
-    args: '--verbose',
-    cron_restart: '30 8 * * *', // Daily 8:30am AEST (after knowledge pipeline at 8am)
-  },
+  // finance-sync DISABLED 2026-05-08: target page (financeOverview) deprecated.
+  // Canonical hub is now ACT Money Framework — see scripts/sync-money-framework-to-notion.mjs
+  // (runs in Monday cron via populate-money-dashboards.mjs).
+  // {
+  //   name: 'finance-sync',
+  //   script: 'scripts/sync-finance-to-notion.mjs',
+  //   args: '--verbose',
+  //   cron_restart: '30 8 * * *',
+  // },
   {
     name: 'auto-tag-transactions',
     script: 'scripts/tag-transactions-by-vendor.mjs',
@@ -234,16 +365,24 @@ const cronScripts = [
     script: 'scripts/weekly-digest.mjs',
     cron_restart: '0 18 * * 0', // Sunday 6pm AEST
   },
-  {
-    name: 'push-highlights-notion',
-    script: 'scripts/push-highlights-to-notion.mjs',
-    cron_restart: '*/30 * * * *', // Every 30 minutes
-  },
-  {
-    name: 'notion-weekly-review',
-    script: 'scripts/notion-weekly-review.mjs',
-    cron_restart: '0 17 * * 0', // Sunday 5pm AEST (before weekly-digest at 6pm)
-  },
+  // push-highlights-notion DISABLED 2026-05-08: depends on liveAlerts page key
+  // which was retired with 17 other stale operational dashboard keys (see
+  // thoughts/shared/reviews/notion-finance-dashboard-2026-05-08.md). Re-enable
+  // by re-creating the Live Alerts DB in Notion and re-adding the key.
+  // {
+  //   name: 'push-highlights-notion',
+  //   script: 'scripts/push-highlights-to-notion.mjs',
+  //   cron_restart: '*/30 * * * *',
+  // },
+  // Removed 2026-05-06 — target weeklyReports DB (2d6ebcf9...) renders broken
+  // ('Something went wrong / Try again' in Notion UI). Re-add after the page
+  // is repaired or recreated and config/notion-database-ids.json:weeklyReports
+  // points at a working DB.
+  // {
+  //   name: 'notion-weekly-review',
+  //   script: 'scripts/notion-weekly-review.mjs',
+  //   cron_restart: '0 17 * * 0',
+  // },
   {
     name: 'weekly-relationship-review',
     script: 'scripts/weekly-relationship-review.mjs',
@@ -298,12 +437,16 @@ const cronScripts = [
     args: '--verbose',
     cron_restart: '30 6 * * *', // Daily 6:30am AEST (before 7am briefing — scored priority engine)
   },
-  {
-    name: 'sync-priorities-to-notion',
-    script: 'scripts/sync-priorities-to-notion.mjs',
-    args: '--verbose',
-    cron_restart: '45 6 * * *', // Daily 6:45am AEST (after priorities at 6:30, before briefing at 7)
-  },
+  // Removed 2026-05-06 — hardcoded MISSION_CONTROL_OS_DB id (3db68c5f...) does
+  // not exist in any accessible Notion workspace (search returns no match).
+  // Re-add after a Mission Control OS database is created and the script's
+  // hardcoded id is updated to its new uuid.
+  // {
+  //   name: 'sync-priorities-to-notion',
+  //   script: 'scripts/sync-priorities-to-notion.mjs',
+  //   args: '--verbose',
+  //   cron_restart: '45 6 * * *',
+  // },
   {
     name: 'sync-grantscope-matches',
     script: 'scripts/sync-grantscope-matches.mjs',
@@ -366,11 +509,10 @@ const cronScripts = [
     args: '--notify',
     cron_restart: '0 7 1 * *', // 1st of month at 7am AEST
   },
-  {
-    name: 'collections-autopilot',
-    script: 'scripts/chase-overdue-invoices.mjs',
-    cron_restart: '0 10 * * 1-5', // Weekdays 10am AEST (after Xero sync + morning briefing)
-  },
+  // collections-autopilot removed 2026-05-07: scripts/chase-overdue-invoices.mjs
+  // never existed on disk. PICC + Aleisha snooze/write-off flow now uses
+  // xero_invoices.metadata.do_not_chase_until as the snooze mechanism.
+  // When a real chase autopilot is built it should read that field.
   {
     name: 'financial-advisor',
     script: 'scripts/financial-advisor-agent.mjs',
@@ -383,11 +525,14 @@ const cronScripts = [
     args: '--current',
     cron_restart: '0 9 1 * *', // 1st of month at 9am AEST (after Xero sync at 8:30am)
   },
-  {
-    name: 'finance-daily-briefing',
-    script: 'scripts/finance-daily-briefing.mjs',
-    cron_restart: '0 7 * * 1-5', // Weekdays 7am AEST (alongside general daily-briefing)
-  },
+  // finance-daily-briefing DISABLED 2026-05-08: redundant with daily-money-briefing
+  // (8am AEST, daily, richer output with chain-health + R&D pack score). Script
+  // archived to scripts/_archive/2026-05-finance-cleanup/.
+  // {
+  //   name: 'finance-daily-briefing',
+  //   script: 'scripts/finance-daily-briefing.mjs',
+  //   cron_restart: '0 7 * * 1-5',
+  // },
   {
     name: 'finance-health-digest',
     script: 'scripts/finance-engine.mjs',

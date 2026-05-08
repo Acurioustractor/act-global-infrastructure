@@ -388,7 +388,7 @@ export async function cachedCompletion(messages, scriptName, options = {}) {
  */
 export async function cachedClaudeCompletion(prompt, scriptName, options = {}) {
   const cache = await initCache();
-  const model = options.model || 'claude-3-5-haiku-20241022';
+  const model = options.model || 'claude-haiku-4-5';
   const ttl = options.ttlSeconds || 3600;
 
   const messages = Array.isArray(prompt)

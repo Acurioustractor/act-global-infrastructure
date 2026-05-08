@@ -27,8 +27,8 @@ ACT's methodology for ethical innovation:
 
 See [[lcaa-method|LCAA Method]].
 
-### ALMA (Adaptive Learning for Meaningful Accountability)
-ACT's impact model that reads system-level signals without profiling individuals. Uses six signal families to guide learning and decision-making. ALMA protects against extractive data practices while enabling genuine learning. See [[alma|ALMA]].
+### Accountable Listening and Meaningful Action (ALMA)
+ACT's governed sensemaking process for moving from listening to meaningful action with consent, authority, provenance, and review. ALMA is not the Soul, an AI personality, a dashboard, or a ranking engine. See [[alma|ALMA]].
 
 ### Power Take-Off (PTO)
 A tractor mechanism that transfers engine power to implements. ACT's founding metaphor: we provide power that communities direct, not the other way around.
@@ -89,18 +89,18 @@ Standardized `/api/registry` endpoint exposed by each project. Enables ecosystem
 
 ---
 
-## ALMA Signal Families
+## ALMA Review Fields
 
-See [[alma|ALMA]] for the full framework.
+Some legacy schemas use `alma_signals` fields. Treat these as review prompts inside [[alma|ALMA]], not as the public definition of ALMA.
 
-| Signal | What It Measures |
+| Review Field | What It Checks |
 |--------|-----------------|
-| Evidence Strength | How reliable is the learning? |
+| Evidence Strength | Is the claim sourced and reliable? |
 | Community Authority | Who holds authority? Is consent in place? |
-| Harm Risk (Inverted) | Potential for harm if shared (higher = safer) |
-| Implementation Capability | Can this be acted on? |
+| Harm Risk | What could go wrong if this is acted on or shared? |
+| Implementation Capability | Can this be acted on responsibly now? |
 | Option Value | Does this open or close future possibilities? |
-| Community Value Return | How much value flows back to community? |
+| Community Value Return | Does value flow back to the people or place involved? |
 
 ---
 
@@ -173,7 +173,7 @@ Terms like "harvesting data," "capturing value," "mining insights" that treat pe
 | Acronym | Meaning |
 |---------|---------|
 | ACT | A Curious Tractor |
-| ALMA | Adaptive Learning for Meaningful Accountability |
+| ALMA | Accountable Listening and Meaningful Action |
 | BCV | Black Cockatoo Valley |
 | CSA | Community Supported Agriculture |
 | GHL | GoHighLevel (CRM platform) |
@@ -191,7 +191,8 @@ Terms like "harvesting data," "capturing value," "mining insights" that treat pe
 ## Backlinks
 
 - [[lcaa-method|LCAA Method]] — core methodology
-- [[alma|ALMA]] — impact and learning model
+- [[alma|ALMA]] — governed listening-to-action process
+- [[governed-proof|Governed Proof]] — evidence, review, confidence, publication, and audit trail
 - [[consent-as-infrastructure|Consent as Infrastructure]] — OCAP architecture
 - [[beautiful-obsolescence|Beautiful Obsolescence]] — handover design principle
 - [[voice-guide|ACT Voice Guide]] — language system

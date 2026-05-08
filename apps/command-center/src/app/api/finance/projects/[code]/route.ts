@@ -310,8 +310,9 @@ export async function GET(
 
     const totalExpenseInvoices = expenseData.reduce((s: number, e: any) => s + e.total, 0)
 
-    // Pipeline data
-    const pipelineData = (pipeline.data || []).map((g: any) => ({
+    // Pipeline data: dedupe by name (highest-probability winner), convert percent → decimal.
+    // Source data has heavy sync-drift duplication (same opportunity inserted on each run).
+    const pipelineRaw = (pipeline.data || []).map((g: any) => ({
       id: g.id,
       name: g.name,
       provider: g.provider,
@@ -321,11 +322,25 @@ export async function GET(
       status: g.status,
       stage: g.pipeline_stage,
       closesAt: g.closes_at,
-      probability: g.metadata?.probability ? Number(g.metadata.probability) : null,
+      // probability is stored as percent (0-100); convert to decimal here so the renderer
+      // can simply multiply by 100 again for display
+      probability: g.metadata?.probability ? Number(g.metadata.probability) / 100 : null,
     }))
+    // Collapse duplicates: keep the row with the highest non-null probability per name,
+    // tiebreak on highest amount.
+    const dedupeMap = new Map<string, any>()
+    for (const item of pipelineRaw) {
+      const existing = dedupeMap.get(item.name)
+      if (!existing) { dedupeMap.set(item.name, item); continue }
+      const existingScore = (existing.probability ?? 0) * 1e9 + (existing.amountMax || existing.amountMin || 0)
+      const itemScore = (item.probability ?? 0) * 1e9 + (item.amountMax || item.amountMin || 0)
+      if (itemScore > existingScore) dedupeMap.set(item.name, item)
+    }
+    const pipelineData = Array.from(dedupeMap.values())
+    const pipelineRawCount = pipelineRaw.length
     const pipelineWeightedTotal = pipelineData.reduce((s: number, g: any) => {
       const amt = g.amountMax || g.amountMin || 0
-      const prob = g.probability || 0.1
+      const prob = g.probability ?? 0.1
       return s + amt * prob
     }, 0)
 
@@ -366,6 +381,7 @@ export async function GET(
       // NEW: Grant pipeline
       pipeline: pipelineData,
       pipelineWeightedTotal,
+      pipelineRawCount,
       // NEW: Expense invoices
       expenses: expenseData,
       expensesByCategory,

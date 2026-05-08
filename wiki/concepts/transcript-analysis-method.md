@@ -39,21 +39,21 @@ Whisper-based transcription produces verbatim text. **The verbatim text is the s
 ### 3. Analyse
 AI analysis produces structured outputs:
 - **Themes** drawn from the storyteller's actual language
-- **[[alma|ALMA signals]]** mapped to the six-signal framework
+- **[[alma|ALMA review fields]]** mapped to consent, authority, evidence, harm, action readiness, and value return
 - **Quote candidates** with line-level provenance
 - **Cultural sensitivity flags** for review
 
 The analysis layer is tightly scoped: it identifies and structures, it does not interpret or moralise.
 
 ### 4. Vignette Creation
-Only after the analysis is complete and the storyteller has reviewed the proposed vignette is anything published. The vignette format (template at `wiki/raw/2026-04-07-cc-stories-vignette-template.md`) preserves voice ownership, consent scope, and ALMA signal mapping.
+Only after the analysis is complete and the storyteller has reviewed the proposed vignette is anything published. The vignette format (template at `wiki/raw/2026-04-07-cc-stories-vignette-template.md`) preserves voice ownership, consent scope, and ALMA review-field mapping.
 
 ## The Story → Signal → Shift → Scope Loop
 
-The method connects directly to [[alma|ALMA]]'s reporting model:
+The method connects directly to [[alma|ALMA]]'s listening-to-action process:
 
 - **Story:** the storyteller's lived experience, captured verbatim
-- **Signal:** what the story tells us about the system (ALMA's six families: economic, cultural, social, etc.)
+- **Signal:** what the story tells us about the system, held with consent and authority
 - **Shift:** what changed because of the work (or what didn't)
 - **Scope:** who else this insight applies to, and at what level
 
@@ -66,7 +66,7 @@ The framework draws hard lines:
 **AI is allowed to:**
 - Transcribe speech to text
 - Identify themes mentioned by the storyteller
-- Map quotes to ALMA signal categories
+- Map quotes to ALMA review fields
 - Flag cultural sensitivity for human review
 - Surface candidate vignettes for human authoring
 
@@ -88,7 +88,8 @@ This method is the answer.
 ## Backlinks
 
 - [[empathy-ledger|Empathy Ledger]] — the platform this method powers
-- [[alma|ALMA]] — the signal framework this method feeds
+- [[alma|ALMA]] — the governed listening-to-action process this method supports
+- [[governed-proof|Governed Proof]] — where reviewed story evidence becomes proof, publication, or holdback
 - [[ai-ethics|AI Ethics]] — the governance constraints
 - [[governance-consent|Governance & Consent]] — the consent infrastructure
 - [[transcription-workflow|Transcription Workflow]] — the operational runbook

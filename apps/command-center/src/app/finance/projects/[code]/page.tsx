@@ -185,6 +185,7 @@ interface ProjectFinancialsData {
   incomeByType: Record<string, IncomeTypeGroup>
   pipeline: PipelineItem[]
   pipelineWeightedTotal: number
+  pipelineRawCount?: number
   expenses: ExpenseItem[]
   expensesByCategory: Record<string, ExpenseCategoryGroup>
   topVendors: Array<{ vendor: string; total: number }>
@@ -470,10 +471,21 @@ export default function ProjectFinancialsPage({
             Grant Pipeline
           </h2>
           <p className="text-sm text-white/40 mb-4">
-            {data.pipeline.length} opportunities &middot; {formatMoney(data.pipelineWeightedTotal)} weighted value
+            {data.pipeline.length} unique opportunities &middot; {formatMoney(data.pipelineWeightedTotal)} weighted value
+            {typeof data.pipelineRawCount === 'number' && data.pipelineRawCount > data.pipeline.length && (
+              <span className="text-xs text-amber-400/80 ml-2">({data.pipelineRawCount - data.pipeline.length} duplicates collapsed)</span>
+            )}
+            <span className="text-xs text-white/30 ml-2">· showing top 5 by weighted value</span>
           </p>
           <div className="space-y-2">
-            {data.pipeline.map((g: PipelineItem) => {
+            {[...data.pipeline]
+              .sort((a, b) => {
+                const aw = (a.amountMax || a.amountMin || 0) * ((a.probability ?? 0.1))
+                const bw = (b.amountMax || b.amountMin || 0) * ((b.probability ?? 0.1))
+                return bw - aw
+              })
+              .slice(0, 5)
+              .map((g: PipelineItem) => {
               const amt = g.amountMax || g.amountMin || 0
               return (
                 <div key={g.id} className="flex items-center gap-3 py-2 px-3 rounded-lg hover:bg-white/5 transition-colors">

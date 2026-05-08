@@ -740,7 +740,7 @@ export default function ReconciliationPage() {
 
       {/* Quick Links */}
       <div className="grid grid-cols-3 gap-4 mt-6">
-        <Link href="/finance/tagger" className="glass-card p-4 hover:bg-white/5 transition-colors group">
+        <Link href="/finance/tagger-v2" className="glass-card p-4 hover:bg-white/5 transition-colors group">
           <div className="flex items-center gap-3">
             <Tag className="h-5 w-5 text-amber-400" />
             <div>

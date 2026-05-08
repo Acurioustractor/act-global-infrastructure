@@ -77,6 +77,21 @@ async function xeroGet(url, _retries = 0) {
   return r;
 }
 
+async function exitWithFilesApiError(response) {
+  const body = await response.text();
+  if (response.status === 401) {
+    console.error('Files API error: 401 Unauthorized');
+    console.error('');
+    console.error('The Xero OAuth connection is not authorised for the Files API.');
+    console.error('Add the `files.read` scope to the ACT Xero app, re-authorise Xero, then rerun this scan.');
+    console.error('');
+    console.error('Raw response:', body);
+    process.exit(1);
+  }
+  console.error('Files API error:', response.status, body);
+  process.exit(1);
+}
+
 async function main() {
   loadTokens();
   console.log('=== Xero Files Library Scan ===\n');
@@ -86,7 +101,7 @@ async function main() {
   let page = 1;
   while (true) {
     const r = await xeroGet(`${FILES_API}/Files?pagesize=100&page=${page}`);
-    if (!r.ok) { console.error('Files API error:', r.status, await r.text()); process.exit(1); }
+    if (!r.ok) await exitWithFilesApiError(r);
     const j = await r.json();
     const items = j.Items || j.items || [];
     if (items.length === 0) break;

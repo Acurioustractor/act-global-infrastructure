@@ -526,9 +526,10 @@ async function addGrant(options) {
     }
   };
 
+  // Upsert on (source, name) — partial unique index grant_opportunities_source_name_uniq.
   const { data, error } = await supabase
     .from('grant_opportunities')
-    .insert(grant)
+    .upsert(grant, { onConflict: 'source,name', ignoreDuplicates: false })
     .select()
     .single();
 

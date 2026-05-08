@@ -179,8 +179,8 @@
       <div class="method-step">
         <div class="num">2</div>
         <div>
-          <h3>Filter against ALMA</h3>
-          <p>Bridge each candidate to the Australian Living Map of Alternatives (1,155 verified youth-justice interventions). Score by portfolio fit: youth-justice intervention count, cultural authority, evidence type. Only candidates with at least one ALMA-linked program survive.</p>
+          <h3>Filter through ALMA review</h3>
+          <p>Bridge each candidate to ALMA-governed JusticeHub evidence records (1,155 verified youth-justice interventions). Review by portfolio fit: youth-justice intervention count, cultural authority, evidence type. Only candidates with at least one ALMA-linked program survive.</p>
           <p class="source">Source: alma_interventions joined to gs_entities via alma_intervention_id.</p>
         </div>
       </div>
@@ -341,7 +341,7 @@
       + '<div class="org">' + escapeHtml(top.org_name) + '</div>'
       + '<div class="meta">'
       + (top.lga ? '<span><strong>LGA</strong> ' + escapeHtml(top.lga) + (top.postcode ? ' (' + escapeHtml(top.postcode) + ')' : '') + '</span>' : '')
-      + (typeof top.portfolio_score === 'number' ? '<span><strong>ALMA score</strong> ' + top.portfolio_score.toFixed(2) + '</span>' : '')
+      + (typeof top.portfolio_score === 'number' ? '<span><strong>Review score</strong> ' + top.portfolio_score.toFixed(2) + '</span>' : '')
       + (top.yj_intervention_count != null ? '<span><strong>YJ programs</strong> ' + top.yj_intervention_count + '</span>' : '')
       + (top.linkage_strength ? '<span><strong>Linkage</strong> ' + escapeHtml(top.linkage_strength.replace(/_/g, ' ')) + '</span>' : '')
       + (top.acnc_size ? '<span><strong>Size</strong> ' + escapeHtml(top.acnc_size) + '</span>' : '')

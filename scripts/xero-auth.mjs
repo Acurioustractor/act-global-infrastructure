@@ -44,6 +44,7 @@ const SCOPES = [
   'accounting.reports.read',
   'accounting.budgets.read',
   'accounting.journals.read',
+  'assets.read',
 ].join(' ');
 
 // PKCE helpers

@@ -1,29 +1,29 @@
 {
-  "generated_at": "2026-04-21T03:19:32.977Z",
+  "generated_at": "2026-05-06T07:16:52.038Z",
   "scope": "canonical-graph",
   "domains": {
     "art": 8,
     "communities": 3,
-    "concepts": 26,
-    "decisions": 15,
-    "finance": 2,
+    "concepts": 29,
+    "decisions": 23,
+    "finance": 15,
     "people": 23,
-    "projects": 89,
+    "projects": 90,
     "research": 15,
     "stories": 54,
-    "synthesis": 20,
+    "synthesis": 23,
     "technical": 6
   },
   "summary": {
-    "date": "2026-04-21",
-    "total_articles": 259,
-    "total_links": 2127,
-    "orphans": 26,
-    "broken_links": 34,
+    "date": "2026-05-06",
+    "total_articles": 287,
+    "total_links": 2139,
+    "orphans": 46,
+    "broken_links": 203,
     "stubs": 0,
-    "missing_from_index": 45,
-    "missing_backlinks": 502,
-    "advisory_backlinks": 453
+    "missing_from_index": 73,
+    "missing_backlinks": 507,
+    "advisory_backlinks": 481
   },
   "source_bridge": {
     "raw_sources": 153,
@@ -68,63 +68,75 @@
   "repair_queue": {
     "broken_links": [
       {
-        "stem": "2026-04-18-mounty-yarns-story-approval",
-        "title": "Mounty Yarns org-level story approval",
-        "relative_path": "decisions/2026-04-18-mounty-yarns-story-approval.md",
-        "page_path": "decisions/2026-04-18-mounty-yarns-story-approval",
-        "missing_target": "mounty-aboriginal-youth-community-services"
+        "stem": "studio-business-model",
+        "title": "Studio Business Model",
+        "relative_path": "art/business/studio-business-model.md",
+        "page_path": "art/business/studio-business-model",
+        "missing_target": "black-cockatoo-valley"
       },
       {
-        "stem": "2026-04-18-oonchiumpa-story-approval",
-        "title": "Oonchiumpa org-level story approval — and the verbal-consent governance pattern",
-        "relative_path": "decisions/2026-04-18-oonchiumpa-story-approval.md",
-        "page_path": "decisions/2026-04-18-oonchiumpa-story-approval",
-        "missing_target": "../concepts/ocap-framework"
+        "stem": "studio-innovation-flow",
+        "title": "Studio Innovation Flow",
+        "relative_path": "art/innovation/studio-innovation-flow.md",
+        "page_path": "art/innovation/studio-innovation-flow",
+        "missing_target": "black-cockatoo-valley"
       },
       {
-        "stem": "_template",
-        "title": "<Case Study Title>",
-        "relative_path": "projects/act-farm/case-studies/_template.md",
-        "page_path": "projects/act-farm/case-studies/_template",
-        "missing_target": "case-studies/README"
+        "stem": "studio-innovation-flow",
+        "title": "Studio Innovation Flow",
+        "relative_path": "art/innovation/studio-innovation-flow.md",
+        "page_path": "art/innovation/studio-innovation-flow",
+        "missing_target": "goods-on-country"
       },
       {
-        "stem": "_template",
-        "title": "<Case Study Title>",
-        "relative_path": "projects/act-farm/case-studies/_template.md",
-        "page_path": "projects/act-farm/case-studies/_template",
-        "missing_target": "experiences/<slug>"
+        "stem": "act-ecosystem",
+        "title": "ACT Ecosystem",
+        "relative_path": "concepts/act-ecosystem.md",
+        "page_path": "concepts/act-ecosystem",
+        "missing_target": "black-cockatoo-valley"
       },
       {
-        "stem": "_template",
-        "title": "<Case Study Title>",
-        "relative_path": "projects/act-farm/case-studies/_template.md",
-        "page_path": "projects/act-farm/case-studies/_template",
-        "missing_target": "experiences/<slug>"
+        "stem": "act-ecosystem",
+        "title": "ACT Ecosystem",
+        "relative_path": "concepts/act-ecosystem.md",
+        "page_path": "concepts/act-ecosystem",
+        "missing_target": "goods-on-country"
       },
       {
-        "stem": "dad-lab-bcv-2025",
-        "title": "DAD.LAB — the inaugural cohort at BCV, 2025",
-        "relative_path": "projects/act-farm/case-studies/dad-lab-bcv-2025.md",
-        "page_path": "projects/act-farm/case-studies/dad-lab-bcv-2025",
-        "missing_target": "case-studies/README"
+        "stem": "glossary",
+        "title": "Glossary",
+        "relative_path": "concepts/glossary.md",
+        "page_path": "concepts/glossary",
+        "missing_target": "custodian-economy"
       },
       {
-        "stem": "dad-lab-bcv-2025",
-        "title": "DAD.LAB — the inaugural cohort at BCV, 2025",
-        "relative_path": "projects/act-farm/case-studies/dad-lab-bcv-2025.md",
-        "page_path": "projects/act-farm/case-studies/dad-lab-bcv-2025",
-        "missing_target": "team/ben"
+        "stem": "glossary",
+        "title": "Glossary",
+        "relative_path": "concepts/glossary.md",
+        "page_path": "concepts/glossary",
+        "missing_target": "goods-on-country"
       },
       {
-        "stem": "dad-lab-bcv-2025",
-        "title": "DAD.LAB — the inaugural cohort at BCV, 2025",
-        "relative_path": "projects/act-farm/case-studies/dad-lab-bcv-2025.md",
-        "page_path": "projects/act-farm/case-studies/dad-lab-bcv-2025",
-        "missing_target": "team/nic"
+        "stem": "lcaa-method",
+        "title": "LCAA Method",
+        "relative_path": "concepts/lcaa-method.md",
+        "page_path": "concepts/lcaa-method",
+        "missing_target": "goods-on-country"
       }
     ],
     "missing_from_index": [
+      {
+        "stem": "four-lanes",
+        "title": "The Four Lanes",
+        "relative_path": "concepts/four-lanes.md",
+        "page_path": "concepts/four-lanes"
+      },
+      {
+        "stem": "soul",
+        "title": "Soul",
+        "relative_path": "concepts/soul.md",
+        "page_path": "concepts/soul"
+      },
       {
         "stem": "2026-04-18-bg-fit-story-approval",
         "title": "BG Fit org-level story approval",
@@ -150,28 +162,16 @@
         "page_path": "decisions/2026-04-18-picc-selective-youth-voice"
       },
       {
-        "stem": "_template",
-        "title": "<Case Study Title>",
-        "relative_path": "projects/act-farm/case-studies/_template.md",
-        "page_path": "projects/act-farm/case-studies/_template"
+        "stem": "2026-05-harvest-subsidiary-structure",
+        "title": "The Harvest — Subsidiary Structure Decision",
+        "relative_path": "decisions/2026-05-harvest-subsidiary-structure.md",
+        "page_path": "decisions/2026-05-harvest-subsidiary-structure"
       },
       {
-        "stem": "community-capital-at-bcv",
-        "title": "Community Capital at BCV — a year in the valley",
-        "relative_path": "projects/act-farm/case-studies/community-capital-at-bcv.md",
-        "page_path": "projects/act-farm/case-studies/community-capital-at-bcv"
-      },
-      {
-        "stem": "community-capital-bowral-2025",
-        "title": "Community Capital — Bowral, 23–25 Feb 2025",
-        "relative_path": "projects/act-farm/case-studies/community-capital-bowral-2025.md",
-        "page_path": "projects/act-farm/case-studies/community-capital-bowral-2025"
-      },
-      {
-        "stem": "dad-lab-bcv-2025",
-        "title": "DAD.LAB — the inaugural cohort at BCV, 2025",
-        "relative_path": "projects/act-farm/case-studies/dad-lab-bcv-2025.md",
-        "page_path": "projects/act-farm/case-studies/dad-lab-bcv-2025"
+        "stem": "2026-05-pile-opportunity-workspace",
+        "title": "Pile-Tagged Opportunity Workspace — Unified Architecture",
+        "relative_path": "decisions/2026-05-pile-opportunity-workspace.md",
+        "page_path": "decisions/2026-05-pile-opportunity-workspace"
       }
     ],
     "missing_backlinks": [
@@ -236,39 +236,39 @@
         }
       },
       {
-        "stem": "2026-04-18-bg-fit-story-approval",
-        "title": "BG Fit org-level story approval",
-        "relative_path": "decisions/2026-04-18-bg-fit-story-approval.md",
-        "page_path": "decisions/2026-04-18-bg-fit-story-approval",
+        "stem": "act-identity",
+        "title": "A Curious Tractor (ACT)",
+        "relative_path": "concepts/act-identity.md",
+        "page_path": "concepts/act-identity",
         "target": {
-          "stem": "bg-fit",
-          "title": "BG Fit",
-          "relative_path": "projects/bg-fit.md",
-          "page_path": "projects/bg-fit"
+          "stem": "act-core-facts",
+          "title": "ACT Core Facts",
+          "relative_path": "decisions/act-core-facts.md",
+          "page_path": "decisions/act-core-facts"
         }
       },
       {
-        "stem": "2026-04-18-bg-fit-story-approval",
-        "title": "BG Fit org-level story approval",
-        "relative_path": "decisions/2026-04-18-bg-fit-story-approval.md",
-        "page_path": "decisions/2026-04-18-bg-fit-story-approval",
+        "stem": "four-lanes",
+        "title": "The Four Lanes",
+        "relative_path": "concepts/four-lanes.md",
+        "page_path": "concepts/four-lanes",
         "target": {
-          "stem": "the-brave-ones",
-          "title": "The Brave Ones",
-          "relative_path": "projects/justicehub/the-brave-ones.md",
-          "page_path": "projects/justicehub/the-brave-ones"
+          "stem": "beautiful-obsolescence",
+          "title": "Beautiful Obsolescence",
+          "relative_path": "concepts/beautiful-obsolescence.md",
+          "page_path": "concepts/beautiful-obsolescence"
         }
       },
       {
-        "stem": "2026-04-18-mounty-yarns-story-approval",
-        "title": "Mounty Yarns org-level story approval",
-        "relative_path": "decisions/2026-04-18-mounty-yarns-story-approval.md",
-        "page_path": "decisions/2026-04-18-mounty-yarns-story-approval",
+        "stem": "governed-proof",
+        "title": "Governed Proof",
+        "relative_path": "concepts/governed-proof.md",
+        "page_path": "concepts/governed-proof",
         "target": {
-          "stem": "the-brave-ones",
-          "title": "The Brave Ones",
-          "relative_path": "projects/justicehub/the-brave-ones.md",
-          "page_path": "projects/justicehub/the-brave-ones"
+          "stem": "consent-as-infrastructure",
+          "title": "Consent as Infrastructure",
+          "relative_path": "concepts/consent-as-infrastructure.md",
+          "page_path": "concepts/consent-as-infrastructure"
         }
       }
     ],
@@ -298,28 +298,28 @@
         "page_path": "decisions/2026-04-18-picc-selective-youth-voice"
       },
       {
-        "stem": "_template",
-        "title": "<Case Study Title>",
-        "relative_path": "projects/act-farm/case-studies/_template.md",
-        "page_path": "projects/act-farm/case-studies/_template"
+        "stem": "2026-05-harvest-subsidiary-structure",
+        "title": "The Harvest — Subsidiary Structure Decision",
+        "relative_path": "decisions/2026-05-harvest-subsidiary-structure.md",
+        "page_path": "decisions/2026-05-harvest-subsidiary-structure"
       },
       {
-        "stem": "_template",
-        "title": "<Experience Name>",
-        "relative_path": "projects/act-farm/experiences/_template.md",
-        "page_path": "projects/act-farm/experiences/_template"
+        "stem": "2026-05-pile-opportunity-workspace",
+        "title": "Pile-Tagged Opportunity Workspace — Unified Architecture",
+        "relative_path": "decisions/2026-05-pile-opportunity-workspace.md",
+        "page_path": "decisions/2026-05-pile-opportunity-workspace"
+      },
+      {
+        "stem": "operational-reference",
+        "title": "ACT Operational Reference",
+        "relative_path": "decisions/operational-reference.md",
+        "page_path": "decisions/operational-reference"
       },
       {
         "stem": "README",
-        "title": "ACT Farm Experiences",
-        "relative_path": "projects/act-farm/experiences/README.md",
-        "page_path": "projects/act-farm/experiences/README"
-      },
-      {
-        "stem": "bg-fit-ben-recording",
-        "title": "Ben - Recording",
-        "relative_path": "stories/bg-fit-ben-recording.md",
-        "page_path": "stories/bg-fit-ben-recording"
+        "title": "ACT Brain — read first",
+        "relative_path": "decisions/README.md",
+        "page_path": "decisions/README"
       }
     ],
     "stubs": [],

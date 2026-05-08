@@ -124,6 +124,18 @@ Bad:
 Good:
 > Four years in. The cockatoo came back before the fence came down.
 
+Bad (board report — fund-speak register):
+> This quarter our team continues to leverage the supplier network to drive transformative outcomes for First Nations enterprise. Goods plays a pivotal role in fostering a more equitable future, demonstrating our commitment to vibrant, community-led economic empowerment.
+
+Good (board report — Curtis register):
+> Q3 FY26. The basket left country eleven times. The hand at market was paid for ten of those. Parity moved one notch.
+
+Bad (donor letter — NGO register):
+> Dear supporter, your generous contribution is empowering us to drive meaningful change in the vibrant landscape of regenerative ecology. Your investment leverages our ability to foster nuanced, community-led restoration that delivers transformative outcomes.
+
+Good (donor letter — Curtis register):
+> Three winters ago you paid for the fence. The cockatoo came back before it came down. The valley remembers your hand.
+
 ## The one-line test
 
 For any piece of ACT writing, take the three sentences that carry the most weight. Ask of each:

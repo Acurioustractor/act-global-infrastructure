@@ -10,7 +10,7 @@ source: alma_interventions table, captured 2026-04-07
 
 ## Overview
 
-ALMA (the engine behind JusticeHub) maintains a structured catalogue of community-led, government, and philanthropic interventions in youth justice and adjacent sectors. As of April 2026, it holds **1,766 interventions** from **729 operating organisations**, scored against ten intervention types and four evidence levels.
+The ALMA-named intervention portfolio is JusticeHub's structured catalogue of community-led, government, and philanthropic interventions in youth justice and adjacent sectors. As of April 2026, it holds **1,766 interventions** from **729 operating organisations**, assessed against ten intervention types and four evidence levels.
 
 The portfolio is the answer to the question funders keep asking: *"What works, who runs it, and what does it cost?"* It is also the answer to the question communities keep asking: *"Why does the funding go to the same people who already have it?"* — because the portfolio's top scores reveal exactly which small ACCOs are doing the highest-leverage work.
 
@@ -29,11 +29,11 @@ The portfolio is the answer to the question funders keep asking: *"What works, w
 | Early Intervention | 72 | 0.43 |
 | Family Strengthening | 57 | 0.45 |
 
-**Wraparound Support** and **Justice Reinvestment** are the highest-scoring categories on average — both also the most under-funded relative to their evidence base. The largest category by count, **Community-Led** (345 interventions), captures the long tail of place-based programs that government funders typically don't see.
+**Wraparound Support** and **Justice Reinvestment** are the strongest categories on average — both also the most under-funded relative to their evidence base. The largest category by count, **Community-Led** (345 interventions), captures the long tail of place-based programs that government funders typically don't see.
 
 ## The Top of the Portfolio
 
-The 15 highest-scoring interventions reveal the pattern ACT and JusticeHub keep finding: **Indigenous-led organisations dominate the evidence**, but rarely have the formal evaluation infrastructure that Western funders demand.
+The 15 strongest interventions in this portfolio reveal the pattern ACT and JusticeHub keep finding: **Indigenous-led organisations dominate the evidence**, but rarely have the formal evaluation infrastructure that Western funders demand.
 
 | Rank | Name | Org | Score | Evidence |
 |------|------|-----|-------|----------|
@@ -54,15 +54,15 @@ The 15 highest-scoring interventions reveal the pattern ACT and JusticeHub keep 
 
 Two things:
 
-1. **The funding doesn't follow the evidence.** [[justice-funding-landscape|$4.12B in QLD youth justice]] is spread across 7,004 organisations. The top-scoring interventions in ALMA's portfolio are typically funded for $50K–$5M each — orders of magnitude below the largest government and philanthropic recipients.
+1. **The funding doesn't follow the evidence.** [[justice-funding-landscape|$4.12B in QLD youth justice]] is spread across 7,004 organisations. The strongest interventions in this portfolio are typically funded for $50K-$5M each — orders of magnitude below the largest government and philanthropic recipients.
 
-2. **The "untested" label is a funding category, not a quality category.** When [[picc|Palm Island Community Company]] runs a 20-year program with intergenerational outcomes but no peer-reviewed RCT, Western evaluation frameworks call it "untested." ALMA's portfolio score is designed to make that distinction visible.
+2. **The "untested" label is a funding category, not a quality category.** When [[picc|Palm Island Community Company]] runs a 20-year program with intergenerational outcomes but no peer-reviewed RCT, Western evaluation frameworks call it "untested." The portfolio review fields make that distinction visible.
 
 ## How JusticeHub Uses This
 
 - **Funder briefings:** "These 15 organisations are doing the strongest work and receive a fraction of available funding. Here's the evidence."
 - **Community matching:** "If you want to fund cultural connection in QLD, here are the 206 interventions sorted by community authority."
-- **Procurement intelligence:** Cross-reference top-scoring interventions against [[justice-funding-landscape|government contract pipelines]] to find under-resourced programs that match commissioning priorities.
+- **Procurement intelligence:** Cross-reference high-evidence, high-authority interventions against [[justice-funding-landscape|government contract pipelines]] to find under-resourced programs that match commissioning priorities.
 
 ## Live Impact (snapshot)
 
@@ -81,4 +81,4 @@ These numbers are deliberately small. They're the slice ACT has direct line-of-s
 - [[acco-sector-analysis|ACCO Sector Analysis]] — community-controlled organisation context
 - [[picc|Palm Island Community Company]] — 20-year evidence base, "untested" by formal frameworks
 - [[oonchiumpa|Oonchiumpa]] — only top-15 intervention with "Effective" evidence rating
-- [[alma|ALMA]] — the methodology behind the scoring
+- [[alma|ALMA]] — the governed process that keeps portfolio review accountable to consent, authority, provenance, and review

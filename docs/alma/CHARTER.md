@@ -1,4 +1,4 @@
-# ALMA Charter
+# ALMA - Accountable Listening and Meaningful Action Charter
 
 **Version**: 1.0
 **Date**: December 31, 2025
@@ -8,9 +8,16 @@
 
 ## Purpose
 
-ALMA (the sensemaking and action layer) turns community knowledge + evidence + funding signals into decisions, tools, and accountable workflows.
+Accountable Listening and Meaningful Action (ALMA) is ACT's governed sensemaking process. It helps move what we hear from people, place, evidence, and systems into responsible action, but only when consent, authority, provenance, and review are clear.
 
-ALMA exists to build **continuous, compounding intelligence** across Australia's fragmented social impact system by:
+ALMA is downstream of Soul and LCAA.
+
+Soul defines why ACT exists.
+LCAA defines how ACT practises.
+ALMA defines how listening becomes accountable action.
+Governed Proof defines how evidence and publication are handled.
+
+ALMA exists to support **continuous, accountable sensemaking** across Australia's fragmented social impact system by:
 - Making evidence legible without stripping cultural meaning
 - Creating feedback loops: what worked, where, for whom, under what conditions
 - Converting community truth into better grantmaking, program design, and accountability
@@ -19,44 +26,49 @@ ALMA exists to build **continuous, compounding intelligence** across Australia's
 
 ## What ALMA Is
 
-**ALMA is an operating system / agent layer** that:
+**ALMA is a governed process** that:
 
-1. **Ingests** sources (documents, datasets, lived experience notes, grant docs)
-2. **Extracts** structured meaning (entities, outcomes, risks, evidence strength)
-3. **Reasons** about what works in what contexts (portfolio intelligence)
-4. **Recommends** actions (next best grant, missing evidence, replication candidates)
-5. **Pushes** results into JusticeHub/Empathy Ledger workflows **with consent and accountability**
+1. **Listens** across stories, place, data, systems, and community signals
+2. **Checks** consent, authority, context, provenance, and consequence
+3. **Structures** meaning without stripping cultural authority
+4. **Routes** possible action to review, publication, funding, handover, holdback, or refusal
+5. **Blocks** action when authority, consent, or evidence is unclear
 
 **ALMA is NOT**:
+- The Soul
+- An AI personality
+- A dashboard
+- A product brand
+- A ranking engine
+- A measurement dashboard
 - A replacement for human/community decision-making
 - A black-box recommendation engine
 - Extractive of community knowledge
 - Culturally neutral or values-free
-- A standalone product (it's a capability layer)
+- A standalone product
 
 ---
 
 ## The Stack (How ALMA Fits)
 
 ```
-JusticeHub (community system)
-  ↓
-  Collaboration + knowledge exchange platform
-  Built on: Airtable + Softr
-  Purpose: Profiles, projects, outcomes, replication, community governance
+Soul
+  Purpose: Why ACT exists before the organisation
 
-Empathy Ledger (funding + impact system)
-  ↓
-  Impact mapping + funding intelligence layer
-  Purpose: Money flows, outcomes, storytelling, attribution
+LCAA
+  Purpose: How ACT practises: Listen, Curiosity, Action, Art
 
-ALMA (intelligence + action)
-  ↓
-  Operating system / agent layer
-  Purpose: Connect unstructured ⇄ structured, community ⇄ funders, evidence ⇄ decisions
+ALMA
+  Purpose: How listening becomes accountable action
+
+Governed Proof
+  Purpose: How action becomes evidence, review, confidence, publication, and audit trail
+
+JusticeHub + Empathy Ledger
+  Purpose: Platform surfaces where evidence, stories, and action workflows live
 ```
 
-ALMA is the **engine** that keeps JusticeHub and Empathy Ledger evidence-backed and up to date.
+ALMA is the process that prevents JusticeHub and Empathy Ledger from jumping from story to action too quickly.
 
 ---
 
@@ -424,7 +436,8 @@ This charter evolves as ALMA evolves:
 
 ---
 
-**ALMA = The sensemaking and action layer that turns community knowledge + evidence + funding signals into decisions, tools, and accountable workflows.**
+**ALMA = Accountable Listening and Meaningful Action.**
+
+**ALMA is ACT's governed sensemaking process for moving from listening to meaningful action with consent, authority, provenance, and review.**
 
 **Built with consent. Governed by community. Powered by evidence. Accountable always.**
-

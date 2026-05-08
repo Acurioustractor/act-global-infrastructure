@@ -645,14 +645,15 @@ async function syncInvoices(options = {}) {
           .upsert(record, { onConflict: 'xero_id' });
 
         if (error) {
+          // Log first error for debugging
+          if (stats.invoices.errors === 0) {
+            console.error('\n   First error:', error.code, error.message);
+            console.error('   Detail:', JSON.stringify(error).slice(0, 500));
+          }
           if (error.code === '42P01') {
             console.error('   Table xero_invoices does not exist');
             console.log('   Run migration: supabase db push');
             return { synced: 0, errors: 1, needsMigration: true };
-          }
-          // Log first error for debugging
-          if (stats.invoices.errors === 0) {
-            console.error('\n   First error:', error.code, error.message);
           }
           throw error;
         }

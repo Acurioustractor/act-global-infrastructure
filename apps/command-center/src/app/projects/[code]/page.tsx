@@ -406,7 +406,7 @@ export default function ProjectPage({ params, searchParams }: PageParams) {
           { id: 'overview' as const, label: 'Overview', icon: Activity },
           { id: 'financials' as const, label: 'Financials', icon: DollarSign },
           { id: 'pipeline' as const, label: 'Pipeline', icon: GitBranch },
-          { id: 'alma' as const, label: 'ALMA Impact', icon: Heart },
+          { id: 'alma' as const, label: 'ALMA Review', icon: Heart },
         ].map(tab => (
           <button
             key={tab.id}
@@ -999,7 +999,7 @@ export default function ProjectPage({ params, searchParams }: PageParams) {
         </div>
       )}
 
-      {/* ALMA Impact Tab */}
+      {/* ALMA Review Tab */}
       {activeTab === 'alma' && (
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
           <div className="lg:col-span-8">
@@ -1009,8 +1009,8 @@ export default function ProjectPage({ params, searchParams }: PageParams) {
             <div className="glass-card p-6">
               <h3 className="font-semibold text-white mb-3">About ALMA</h3>
               <p className="text-sm text-white/50 leading-relaxed">
-                The ALMA framework measures project impact through four dimensions
-                that reflect ACT's commitment to community-led development.
+                Accountable Listening and Meaningful Action (ALMA) reviews project readiness
+                through four dimensions that reflect ACT's commitment to community-led development.
               </p>
               <div className="mt-4 space-y-3 text-sm">
                 <div className="flex items-start gap-2">

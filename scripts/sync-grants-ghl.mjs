@@ -193,9 +193,14 @@ async function syncGHLToGrants() {
         discovered_by: 'ghl_sync',
       };
 
-      console.log(`  ➕ Create: "${ghl.name}" ($${ghl.monetary_value || 0}) [${ghl.stage_name}]`);
+      console.log(`  ➕ Create/upsert: "${ghl.name}" ($${ghl.monetary_value || 0}) [${ghl.stage_name}]`);
       if (!dryRun) {
-        await supabase.from('grant_opportunities').insert(newGrant);
+        // Upsert on (source, name) — partial unique index grant_opportunities_source_name_uniq.
+        // Stops the sync-drift bleed where each cron run inserted a new row.
+        await supabase.from('grant_opportunities').upsert(newGrant, {
+          onConflict: 'source,name',
+          ignoreDuplicates: false,
+        });
       }
       stats.ghlToGrants.created++;
     }

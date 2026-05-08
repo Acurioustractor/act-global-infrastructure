@@ -10,7 +10,7 @@
 
 **Default Private, Explicit Consent to Share**
 
-ALMA operates on the principle that all knowledge contributions are private by default. Movement from private to community commons to public requires explicit, informed consent from contributors and cultural authority holders.
+Accountable Listening and Meaningful Action (ALMA) operates on the principle that all knowledge contributions are private by default. Movement from private to community commons to public requires explicit, informed consent from contributors and cultural authority holders.
 
 ---
 
@@ -333,7 +333,7 @@ function calculateRevenueShare(quarterlyRevenue, usageLogs) {
 1. Community review status = "Approved"
 2. Cultural authority holder signs off
 3. JusticeHub publication drafted
-4. Final check by ALMA governance layer
+4. Final governed review for consent, authority, provenance, and publication scope
 5. Publish to JusticeHub + public namespace
 6. Enable revenue sharing tracking
 
@@ -364,26 +364,26 @@ function calculateRevenueShare(quarterlyRevenue, usageLogs) {
 **Namespace**: `default` (vector DB)
 **Overlap with ALMA**: Partners and grants can link to ALMA interventions
 
-### ALMA Layer (Domain Intelligence)
+### ALMA-Governed Domain Knowledge
 
 **Scope**: Youth justice interventions, evidence, community contexts
 **Data classification**: Three-tier (Private / Community / Public)
 **Namespace**: `alma:youth_justice:{tier}` (vector DB)
-**Overlap with Hub**: ALMA queries can reference Hub data (partners, grants)
+**Overlap with Hub**: ALMA-governed review can reference Hub data (partners, grants)
 
 ### JusticeHub (Community Platform)
 
 **Scope**: Public-facing knowledge exchange, replication playbooks
 **Data classification**: Public Knowledge Commons only
 **Namespace**: Published Airtable views via Softr
-**Data source**: ALMA (after community approval workflow)
+**Data source**: ALMA-governed records after community approval workflow
 
 ### Empathy Ledger (Funder Intelligence)
 
 **Scope**: Portfolio analytics, funding recommendations, impact attribution
 **Data classification**: Aggregated, not raw (privacy-preserving)
 **Namespace**: Empathy Ledger database
-**Data source**: ALMA analytics (portfolio signals, gap analysis)
+**Data source**: ALMA-governed portfolio review fields and gap analysis
 
 ---
 
@@ -612,5 +612,4 @@ async function checkConsentExpiry() {
 
 ---
 
-**ALMA's data posture is not a policy document. It is a technical architecture enforcing community ownership through code.**
-
+**ALMA's data posture is not just a policy document. It is a technical architecture enforcing community ownership through code.**

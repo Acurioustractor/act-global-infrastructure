@@ -1,0 +1,83 @@
+{
+  "verdict": "warn",
+  "score": 62,
+  "estimated_refund_range": [
+    0,
+    0
+  ],
+  "hard_failures": [
+    {
+      "rule": "1.2 — AusIndustry registration absent or incomplete",
+      "evidence": "All four activity registers carry `ausindustry_registration: pending_jul_2026`. No registration ID, no confirmation receipt, no resolved verifiable record is present in the pack. The README acknowledges this as a gating item: 'AusIndustry registration submission — Blocks Hard rule 1.2 — ausindustry: missing'. The rubric allows frontmatter citation only if 'all four components ARE in the pack itself' and 'the record is verifiable' — a pending placeholder is not a verifiable record. This is a binary Tier 1 block."
+    }
+  ],
+  "warnings": [
+    {
+      "rule": "1.5 — Salary allocation sheet: percentage column uses narrative strings, not numeric values",
+      "evidence": "salary-allocations.csv `percentage` column contains strings like '~20% of ACT-IN bucket × 95% R&D' and '10% × 95% R&D' rather than a numeric figure. The rubric requires 'percentage or hours'. The approximation marker '~' on the ACT-CG row and the nested-formula format make machine reconciliation ambiguous. The ±2% mismatch test cannot be run deterministically against narrative strings."
+    },
+    {
+      "rule": "1.5 — Salary mismatch risk: ACT-EL Nic allocation inconsistency between decision log and registers",
+      "evidence": "Money Framework decision log Decision 4 table shows ACT-EL personnel basis for Ben as '35% × $200K = $70,000' (using the old $200K direct-salary basis for Ben), while the updated registers show '10% × $250K × 95% = $23,750'. The decision log Decision 6 explicitly notes '$200K as placeholder' was used in earlier calibration fixtures. The decision log's own Decision 4 reconciliation table has not been fully updated to reflect Decision 2's project-mix correction — creating a within-pack numeric inconsistency that an auditor would flag."
+    },
+    {
+      "rule": "1.6 — Contemporaneous records: activity registers drafted 2026-05-07, some activities date to 2025-12",
+      "evidence": "audit-trail.md commit 74b0f3f is dated 2025-12-30 (Empathy Ledger path references). The activity register synthesising this was drafted 2026-05-07 — a gap of ~129 days, exceeding the 90-day hard-fail threshold. However, the rubric permits git commits as primary contemporaneous evidence and these commits are within-period. The register itself is the synthesising narrative; the underlying artefact (commit) is contemporaneous. This is a borderline warning rather than a clean fail, but an auditor will ask about the narrative gap. The audit-trail.md's contemporaneity rationale section addresses this but may not satisfy strict ATO review."
+    },
+    {
+      "rule": "1.7 — Receipt-to-activity linkage: ACT-CG has no discrete xero_invoices project_code='ACT-CG'",
+      "evidence": "receipt-coverage-attestation.md explicitly states: 'There is no separate ACT-CG bill in xero_invoices for FY26 — the project_code ACT-CG surfaces only in xero_transactions'. The $14,000 Anthropic + Supabase line in the ACT-CG register is tagged to ACT-IN, not ACT-CG. Receipts over $1,000 must link to a specific activity. The linkage is indirect (ACT-IN bucket → CivicGraph activity) and depends on the Money Framework decision log's bundling rationale, which is itself 'unverified' per the provenance sidecar."
+    },
+    {
+      "rule": "2.4 — Outcome (expected vs actual): all four registers have incomplete actual outcomes",
+      "evidence": "ACT-CG: '200-row hand-labelled gold set is not yet assembled. Without it, the precision/recall numbers cannot be cited as evidence.' ACT-EL: 'Verbal-consent locatability has not yet been measured against an external reviewer.' ACT-GD: 'First-order conversion rate against the manual baseline... the treatment cohort has not yet been run.' ACT-JH: '100-row hand-labelled gold set is not yet assembled. Procurement-code mapping precision/recall has not been benchmarked.' All four fail Tier 2 rule 2.4 — 'A pure we built it and it worked with no measurement → fail this rule.' The registers are honest about this but the gaps are material."
+    },
+    {
+      "rule": "2.3 — Experiment design: controls are described but not yet executed for any project",
+      "evidence": "ACT-GD: 'manual-pair baseline cohort of 30 buyer-supplier introductions' is cited but 'the baseline cohort exists but the treatment cohort has not yet been run.' ACT-CG: 'fuzzywuzzy token-set-ratio baseline at thresholds 80, 85, 90' — 'controls (fuzzywuzzy baseline at 3 thresholds)... record numbers' listed as open item. ACT-JH: 'Run controls and treatment; record precision / recall / cost-per-mapping' is an open item. Controls are structurally described but data capture has not occurred."
+    },
+    {
+      "rule": "3.2 — Reasonable proportion: supporting:core ratio unverifiable due to subsumed-in-core treatment",
+      "evidence": "supporting-activities.md acknowledges: 'The rubric flagged 3.2 (Reasonable proportion — supporting:core ratio unverifiable) as a warning because no expenditure was assigned to supporting activities separately from core.' All supporting activities are marked 'subsumed in core'. While the explanation is reasonable, AusIndustry scrutinises high supporting:core ratios and the absence of discrete supporting-activity dollar amounts makes the ratio assessment impossible for an external reviewer."
+    },
+    {
+      "rule": "4.2 — Provenance sidecars: sidecars present for all four registers but marked Draft with gaps",
+      "evidence": "All four provenance sidecars (act-cg, act-el, act-gd, act-jh) have `status: Draft` and multiple figures marked 'Unverified'. ACT-CG provenance: 'The $14,000 Anthropic + Supabase consumption figure is a placeholder.' ACT-EL provenance: 'The $26,000 Anthropic + Supabase + storage figure is a placeholder.' ACT-GD provenance: 'Algorithm engineering contractor $42,000 — Unverified — Placeholder line — contractor identity not yet committed.' Sidecars exist (partial credit) but contain material unverified figures."
+    },
+    {
+      "rule": "4.3 — Cross-references intact: multiple referenced files are not present in the pack",
+      "evidence": "README.md references the following files not present in the pack bundle: `thoughts/shared/plans/rd-tax-incentive-fy2526-path-c.md`, `wiki/finance/founder-pay-and-rd-thesis-fy26-fy27.md`, `wiki/finance/act-money-framework.md`, `wiki/finance/act-money-thesis-rebuttal.md`, `wiki/output/contact-enrichment/<ts>-<tier>.md` (per-tier audit logs), `wiki/projects/civicgraph/rd-activity-register.md.provenance.md` (described as TBD in ACT-CG register). The pack's own README lists these as canonical cross-references but they are not included or verifiably linked to the bundle."
+    },
+    {
+      "rule": "4.1 — Executive summary: total claim figure inconsistent across documents",
+      "evidence": "README.md states total_claim_aud: 354047 and expected_refund_aud_low: 130910, expected_refund_aud_high: 154010. The money-framework-decision-log-2026-04-15.md Decision 4 table shows 'Sum across three registers' as $329,500 (three registers only, before JH was added). The decision log's own sum ($329,500) differs from the README total ($354,047) by $24,547 — the JH register amount. The decision log has not been updated to include ACT-JH, creating a within-pack inconsistency an auditor will flag immediately."
+    },
+    {
+      "rule": "1.4 — Receipts gap: ACT-CORE 22.4% coverage below 85% threshold",
+      "evidence": "receipt-coverage-attestation.md: 'ACT-CORE bucket (4 bills, $14,180) has one $11,000 bill without an attachment. This is below the 85% threshold for ACT-CORE.' ACT-CORE is not a primary R&D-claim project and the pack explicitly notes it ('not a primary R&D-claim project in this pack'). However, salary-allocations.csv includes rows for Benjamin Knight ACT-CORE ($11,875 R&D-eligible) and the decision log references ACT-CORE as part of the founder R&D-eligible total. If ACT-CORE spend is claimed, the 22.4% coverage is a hard-rule failure. Currently treated as warning pending clarification of whether ACT-CORE is in-scope for the claim."
+    },
+    {
+      "rule": "Salary reconciliation: ACT-GD vendor spend ($114,500 SaaS) versus activity register claim ($72,500 cloud+LLM + $42,000 contractor = $114,500) vs DB attestation ($247,837 total bills)",
+      "evidence": "ACT-GD register claims $72,500 cloud+LLM and $42,000 contractor = $114,500 vendor/SaaS total. salary-allocations.csv bottom row for ACT-GD shows DB-attested $247,837 total bills. The pack's claimed $114,500 vendor portion is a subset of the $247,837 total tagged to ACT-GD, but the register does not explain which specific invoices within the $247,837 are the $114,500 R&D-eligible portion versus non-R&D business spend. The contractor identity is also explicitly 'not yet committed' per the provenance sidecar — a material gap for a $42,000 line."
+    }
+  ],
+  "missing_artefacts": [
+    "ausindustry-registration.{md,pdf,html} or equivalent with a verifiable registration ID and date",
+    "wiki/finance/founder-pay-and-rd-thesis-fy26-fy27.md (referenced throughout but not in pack)",
+    "wiki/finance/act-money-framework.md (referenced throughout but not in pack)",
+    "wiki/finance/act-money-thesis-rebuttal.md (referenced throughout but not in pack)",
+    "thoughts/shared/plans/rd-tax-incentive-fy2526-path-c.md (Path C decision log, referenced throughout but not in pack)",
+    "wiki/output/contact-enrichment/ per-tier audit logs (referenced as primary evidence for ACT-CG yield rates)",
+    "200-row hand-labelled gold set for ACT-CG entity resolution (required for 2.4 actual outcome)",
+    "100-row hand-labelled procurement-code gold set for ACT-JH (required for 2.4 actual outcome)",
+    "Third-party-reviewer verbal-consent locatability audit results for ACT-EL (required for 2.4 actual outcome)",
+    "Algorithm engineering contractor engagement evidence for ACT-GD $42,000 line",
+    "ACT-DO and ACT-IN (non-CivicGraph) core activity registers (claimed in salary-allocations.csv but no registers present)",
+    "Standalone audit-trail for JusticeHub repo separate from act-global-infrastructure git log",
+    "money-framework-decision-log-2026-04-15.md updated to include ACT-JH register (current version sum is $329,500, missing JH)"
+  ],
+  "audit_readiness": {
+    "ausindustry": "missing",
+    "ato": "partial"
+  }
+}

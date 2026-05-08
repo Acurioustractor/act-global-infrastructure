@@ -2,6 +2,18 @@
 
 **Central automation and tooling for the ACT ecosystem**
 
+**Start here for steering files:** [`STEERING.md`](STEERING.md)
+**LLM entrypoint:** [`llms.txt`](llms.txt)
+
+---
+
+## Core ACT Terms
+
+- **Soul** - the origin layer of ACT.
+- **LCAA** - Listen, Curiosity, Action, Art; ACT's practice loop.
+- **ALMA** - Accountable Listening and Meaningful Action; ACT's governed sensemaking process.
+- **Governed Proof** - the evidence, review, and publication layer.
+
 ---
 
 ## 🎯 What This Is

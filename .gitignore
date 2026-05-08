@@ -33,6 +33,7 @@ node_modules/
 .trae/
 .windsurf/
 .DS_Store
+/Untitled.md
 
 # Build artifacts
 .next/
@@ -40,6 +41,7 @@ node_modules/
 packages/*/bundle/
 packages/*/dist/
 generated-images/
+*.tsbuildinfo
 
 # TLDR cache
 .tldr/
@@ -54,6 +56,8 @@ apps/command-center/.tldrignore
 .claude/cache/
 .claude/tsc-cache/
 .claude/artifact-index/
+.claude/scheduled_tasks.lock
+.claude/worktrees/
 
 # Logs
 deployment/logs/*.log
@@ -66,11 +70,16 @@ workers.json
 
 # Legacy / one-off
 act-personal-ai/.venv311/
+**/.venv*/
 clawdbot-docker/clawdbot-farmhand.tar.gz
+archive/**/*.tar.gz
 config/ACT_MASTER_SECRETS.md
 
 # Backups (large)
 backups/
+
+# Local export outputs (regenerable from scripts)
+out/
 
 # Binary documents (track in cloud storage, not git)
 *.docx

@@ -34,7 +34,7 @@ export async function POST(request: NextRequest) {
     const ruleExamples = (rules || []).slice(0, 20).map(r => `${r.vendor_name} → ${r.project_code}`).join('\n')
 
     const response = await anthropic.messages.create({
-      model: 'claude-haiku-4-5-20251001',
+      model: 'claude-haiku-4-5',
       max_tokens: 100,
       system: `You are a transaction classifier for ACT (A Curious Tractor), an Australian nonprofit ecosystem. Given a vendor name and transaction details, suggest the most likely project code.
 

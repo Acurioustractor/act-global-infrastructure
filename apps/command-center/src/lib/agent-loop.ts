@@ -8,8 +8,8 @@ import { loadConversation, saveConversation } from './telegram/conversation-stat
 // CONFIG
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-export const HAIKU_MODEL = 'claude-3-5-haiku-20241022'
-export const SONNET_MODEL = 'claude-sonnet-4-5-20250929'
+export const HAIKU_MODEL = 'claude-haiku-4-5'
+export const SONNET_MODEL = 'claude-sonnet-4-6'
 const MAX_TOKENS = 4096
 const MAX_TOOL_ROUNDS = 10
 const ESCALATION_ROUND = 4

@@ -260,6 +260,16 @@ export interface GHLWebhookEvent {
   note?: GHLNote;
 }
 
+export interface GHLWebhookPayload {
+  locationId?: string;
+  contact: GHLContact;
+  customFields?: Record<string, any>;
+  formId?: string;
+  formName?: string;
+  submittedAt?: string;
+  source?: string;
+}
+
 export interface GHLFormSubmission {
   id: string;
   formId: string;

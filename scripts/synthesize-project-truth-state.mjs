@@ -21,6 +21,8 @@ import { execSync } from 'node:child_process'
 import { createClient } from '@supabase/supabase-js'
 import { join } from 'node:path'
 import { scanAll, topReposFor, ACT_REPOS } from './lib/act-codebase-scan.mjs'
+import { gradeAndLint } from './lib/alignment-loop-grade.mjs'
+import { SCHEMA_VERSION, serializeMetrics } from './lib/synthesis-schema.mjs'
 
 const REPO_ROOT = process.cwd()
 const CONFIG_PATH = join(REPO_ROOT, 'config/project-codes.json')
@@ -34,6 +36,7 @@ const CODE_REFS_THRESHOLD_PER_REPO = 3
 
 const argv = process.argv.slice(2)
 const DRY_RUN = argv.includes('--dry-run')
+const NO_GRADE = argv.includes('--no-grade')
 const DATE_FLAG = argv.indexOf('--date')
 const DATE = DATE_FLAG >= 0 ? argv[DATE_FLAG + 1] : new Date().toISOString().slice(0, 10)
 
@@ -152,13 +155,28 @@ function renderMarkdown(rows, totalCodes) {
   const zeros = rows.filter(r => r.presence === 0)
   const ones = rows.filter(r => r.presence === 1)
 
+  const summaryMetrics = {
+    active_below_score_2_count: activeBelow2.length,
+    db_present_wiki_absent_count: dbNoWiki.length,
+    score_0_count: by[0],
+    score_1_count: by[1],
+    score_2_count: by[2],
+    score_3_count: by[3],
+    score_4_count: by[4],
+    total_codes: totalCodes,
+    wiki_present_xero_absent_count: wikiNoXero.length,
+  }
   const head = [
     '---',
+    `synthesis_slug: project-truth-state`,
+    `schema_version: ${SCHEMA_VERSION}`,
+    `cycle_date: ${DATE}`,
     `title: Project truth-state — ${totalCodes} codes × 4 sources (auto-generated)`,
     `summary: Phase-1 automation of Q2 of the ACT Alignment Loop. For each project code in config/project-codes.json, scores presence across wiki, DB activity, codebase references, and Xero tracking.`,
     `tags: [synthesis, projects, alignment-loop, project-codes, auto-generated]`,
     `status: active`,
     `date: ${DATE}`,
+    ...serializeMetrics(summaryMetrics),
     '---',
     '',
     `# Project truth-state — ${DATE}`,
@@ -277,6 +295,28 @@ async function main() {
   writeFileSync(outPath, md)
   console.error(`[synthesize-project-truth-state] wrote ${outPath}`)
   console.error(`[synthesize-project-truth-state] ${rows.length} projects scored, distribution: ${[4,3,2,1,0].map(s => `${s}/4:${rows.filter(r => r.presence === s).length}`).join(' ')}`)
+
+  // Self-grade the synthesis against the alignment-loop-synthesis rubric (Phase-2 wiring).
+  // On warn/fail, a triage report lands at wiki/output/lint-loop-YYYY-MM-DD.md.
+  if (NO_GRADE) {
+    console.error(`[synthesize-project-truth-state] grader skipped (--no-grade)`)
+    return
+  }
+  try {
+    console.error(`[synthesize-project-truth-state] self-grading…`)
+    const grade = await gradeAndLint(outPath, 'project-truth-state')
+    console.error(`[synthesize-project-truth-state] grade: ${grade.verdict.toUpperCase()} · ${grade.score}/100`)
+    if (grade.lintPath) {
+      console.error(`[synthesize-project-truth-state] lint report: ${grade.lintPath}`)
+    }
+    if (grade.verdict === 'fail') {
+      // Synthesis written, but flagged not-commit-eligible. Exit non-zero so cron / CI notice.
+      process.exitCode = 1
+    }
+  } catch (e) {
+    // Grader failure should not destroy the synthesis run; log and continue.
+    console.error(`[synthesize-project-truth-state] grader error (synthesis still written): ${e.message}`)
+  }
 }
 
 main().catch(e => { console.error(e); process.exit(1) })
