@@ -5,7 +5,7 @@ status: Active
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/concepts/beautiful-obsolescence.md`.
-> Regenerated: `2026-05-07T19:17:43.824Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerated: `2026-05-08T23:46:53.419Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # Beautiful Obsolescence
 

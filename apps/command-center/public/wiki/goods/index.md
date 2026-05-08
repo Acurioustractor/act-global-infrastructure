@@ -1,21 +1,22 @@
 ---
 title: Goods on Country
 status: Active
-date: 2026-04-11
-entity_type: project
-tagging_mode: own-code
 canonical_slug: goods
 canonical_code: ACT-GD
+tier: ecosystem
 website_slug: goods
 website_path: /goods
 public_surface: project
 cluster: goods
+date: 2026-04-11
+entity_type: project
+tagging_mode: own-code
 empathy_ledger_key: goods
 ---
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/projects/goods.md`.
-> Regenerated: `2026-05-07T19:17:43.824Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerated: `2026-05-08T23:46:53.419Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # Goods on Country
 
