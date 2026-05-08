@@ -1,3 +1,15 @@
+---
+title: CivicGraph
+status: Active
+canonical_slug: civicgraph
+canonical_code: ACT-CS
+tier: satellite
+website_slug: civicgraph
+website_path: /projects/civicgraph
+public_surface: project
+cluster: civicgraph
+---
+
 # CivicGraph
 
 > 587,390 entities connected by 1,535,772 relationships across 254 tables and 29.5M records. Making government spending, influence, and outcomes visible.

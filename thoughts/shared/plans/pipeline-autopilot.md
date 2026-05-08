@@ -1,3 +1,9 @@
+---
+title: Pipeline Autopilot — Business Control System
+status: review-needed
+date: 2026-03-27
+last_verified: 2026-05-08
+---
 # Pipeline Autopilot — Business Control System
 
 ## Vision (Ben, 23 Mar 2026)

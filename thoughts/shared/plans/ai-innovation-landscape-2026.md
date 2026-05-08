@@ -1,3 +1,9 @@
+---
+title: AI Innovation Landscape for ACT — Strategic Research
+status: review-needed
+date: 2026-03-21
+last_verified: 2026-05-08
+---
 # AI Innovation Landscape for ACT — Strategic Research
 
 **Date:** 2026-03-20

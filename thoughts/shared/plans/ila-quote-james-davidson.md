@@ -1,3 +1,9 @@
+---
+title: "Quote for Services — James Davidson / Video Editor & Producer"
+status: review-needed
+date: 2026-03-21
+last_verified: 2026-05-08
+---
 # Quote for Services — James Davidson / Video Editor & Producer
 ## For ILA 2026-27: "Voices on Country: Palm Island Elders Knowledge Journeys"
 

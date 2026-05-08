@@ -1,3 +1,15 @@
+---
+title: ReSOLEution
+status: Active
+canonical_slug: resoleution
+canonical_code: ACT-RS
+tier: satellite
+website_slug: resoleution
+website_path: /projects/resoleution
+public_surface: project
+cluster: resoleution
+---
+
 # ReSOLEution
 
 > A shoe design and customisation program inside youth detention that transforms young people from sneaker consumers into sneaker creators, building identity, skills, and commercial pathways.

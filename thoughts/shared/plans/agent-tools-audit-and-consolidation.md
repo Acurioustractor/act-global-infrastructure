@@ -1,3 +1,9 @@
+---
+title: "Agent Tools Audit & Consolidation Plan"
+status: review-needed
+date: 2026-03-21
+last_verified: 2026-05-08
+---
 # Agent Tools Audit & Consolidation Plan
 
 ## The Problem

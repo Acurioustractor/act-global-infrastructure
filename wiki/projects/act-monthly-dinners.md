@@ -1,3 +1,15 @@
+---
+title: ACT Monthly Dinners
+status: Active
+canonical_slug: act-monthly-dinners
+canonical_code: ACT-MD
+tier: satellite
+website_slug: act-monthly-dinners
+website_path: /projects/act-monthly-dinners
+public_surface: project
+cluster: act-monthly-dinners
+---
+
 # ACT Monthly Dinners
 
 > Regular community gatherings that bring the ACT network together over shared meals, conversation, and connection.

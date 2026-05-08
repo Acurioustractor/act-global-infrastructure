@@ -1,3 +1,15 @@
+---
+title: Community Capital
+status: Active
+canonical_slug: community-capital
+canonical_code: ACT-CP
+tier: satellite
+website_slug: community-capital
+website_path: /projects/community-capital
+public_surface: project
+cluster: community-capital
+---
+
 # Community Capital
 
 > The gap between community organisations doing extraordinary work and the capital that could sustain them is not a knowledge gap. It's a relationship gap.

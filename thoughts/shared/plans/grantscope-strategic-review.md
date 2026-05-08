@@ -1,3 +1,9 @@
+---
+title: GrantScope Strategic Review for ACT
+status: review-needed
+date: 2026-03-21
+last_verified: 2026-05-08
+---
 # GrantScope Strategic Review for ACT
 **Date:** 2026-03-20
 

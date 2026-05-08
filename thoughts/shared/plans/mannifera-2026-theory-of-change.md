@@ -1,3 +1,9 @@
+---
+title: Theory of Change
+status: review-needed
+date: 2026-03-09
+last_verified: 2026-05-08
+---
 # Theory of Change
 ## Community Intelligence: Sovereign Civic Infrastructure for Excluded Communities
 

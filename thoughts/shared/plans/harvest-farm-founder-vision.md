@@ -1,3 +1,9 @@
+---
+title: The Harvest + ACT Farm — Founder Vision
+status: review-needed
+date: 2026-03-21
+last_verified: 2026-05-08
+---
 # The Harvest + ACT Farm — Founder Vision
 
 *A place where people come to be amazed, to reconnect, and to remember what matters.*

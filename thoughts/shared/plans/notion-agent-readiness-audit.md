@@ -1,3 +1,9 @@
+---
+title: Notion Agent Readiness Audit
+status: review-needed
+date: 2026-03-27
+last_verified: 2026-05-08
+---
 # Notion Agent Readiness Audit
 
 ## Summary

@@ -1,3 +1,9 @@
+---
+title: Empathy Ledger for Organisations
+status: review-needed
+date: 2026-03-09
+last_verified: 2026-05-08
+---
 # Empathy Ledger for Organisations
 
 **Every Story Matters. Yours included.**

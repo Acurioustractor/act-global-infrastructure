@@ -1,3 +1,9 @@
+---
+title: "Migration checklist: Nic sole trader → A Curious Tractor Pty Ltd"
+status: review-needed
+date: 2026-04-24
+last_verified: 2026-05-08
+---
 # Migration checklist: Nic sole trader → A Curious Tractor Pty Ltd
 
 > Cutover: 30 June 2026 (end of FY26)

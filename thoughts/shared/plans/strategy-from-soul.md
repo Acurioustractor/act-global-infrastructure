@@ -1,6 +1,6 @@
 ---
 title: Strategy from Soul
-status: Draft
+status: review-needed
 date: 2026-04-28
 source_of_truth: wiki/concepts/soul.md
 ---

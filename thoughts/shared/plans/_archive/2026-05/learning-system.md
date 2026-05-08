@@ -1,3 +1,9 @@
+---
+title: "Feature Plan: Agent Learning System"
+status: archive
+date: 2026-02-09
+last_verified: 2026-05-08
+---
 # Feature Plan: Agent Learning System
 
 Created: 2026-01-30

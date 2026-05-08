@@ -1,3 +1,9 @@
+---
+title: "ACT Financial Strategy — FY27 Planning & Founder Wealth"
+status: review-needed
+date: 2026-03-27
+last_verified: 2026-05-08
+---
 # ACT Financial Strategy — FY27 Planning & Founder Wealth
 
 **Date:** 2026-03-23

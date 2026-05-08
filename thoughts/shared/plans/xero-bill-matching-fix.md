@@ -1,3 +1,9 @@
+---
+title: "Xero Bill Matching Fix — Phantom Payables & Missing Receipts"
+status: review-needed
+date: 2026-03-21
+last_verified: 2026-05-08
+---
 # Xero Bill Matching Fix — Phantom Payables & Missing Receipts
 
 **Created:** 2026-03-17

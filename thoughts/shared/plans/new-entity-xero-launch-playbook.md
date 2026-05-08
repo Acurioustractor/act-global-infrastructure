@@ -1,3 +1,9 @@
+---
+title: New-Entity Xero Launch Playbook
+status: review-needed
+date: 2026-04-24
+last_verified: 2026-05-08
+---
 # New-Entity Xero Launch Playbook
 
 **Status:** Ready to execute when new Pty Ltd Xero is live.

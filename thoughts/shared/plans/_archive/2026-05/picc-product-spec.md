@@ -1,3 +1,9 @@
+---
+title: "ACT Innovation Studio: Product System"
+status: archive
+date: 2026-02-28
+last_verified: 2026-05-08
+---
 # ACT Innovation Studio: Product System
 
 > The value is in specification, not production. ACT helps organisations become intent-literate — clear about what they want, what matters, and why. Technology handles execution.

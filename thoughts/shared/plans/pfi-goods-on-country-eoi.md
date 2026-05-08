@@ -1,3 +1,9 @@
+---
+title: PFI Stage 1 EOI — Goods on Country (ACT-GD)
+status: review-needed
+date: 2026-03-09
+last_verified: 2026-05-08
+---
 # PFI Stage 1 EOI — Goods on Country (ACT-GD)
 
 > **Fund:** QLD Partnering for Impact Fund (PFI)

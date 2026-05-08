@@ -1,3 +1,15 @@
+---
+title: Quandamooka Justice and Healing Strategy
+status: Active
+canonical_slug: quandamooka-justice-strategy
+canonical_code: ACT-QD
+tier: satellite
+website_slug: quandamooka-justice-strategy
+website_path: /projects/quandamooka-justice-strategy
+public_surface: project
+cluster: quandamooka-justice-strategy
+---
+
 # Quandamooka Justice and Healing Strategy
 
 > A justice reinvestment and community healing initiative grounded in Quandamooka Country — led by the Quandamooka people, focused on self-determination, and built on the understanding that healing and justice are inseparable.

@@ -1,3 +1,9 @@
+---
+title: Letter of Support — Uncle Allan Palm Island
+status: review-needed
+date: 2026-03-21
+last_verified: 2026-05-08
+---
 # Letter of Support — Uncle Allan Palm Island
 ## For ILA 2026-27 Application: "Voices on Country"
 

@@ -1,3 +1,9 @@
+---
+title: Mounty Yarns — Just Reinvest Cost Breakdown
+status: review-needed
+date: 2026-03-21
+last_verified: 2026-05-08
+---
 # Mounty Yarns — Just Reinvest Cost Breakdown
 
 ## Project Overview

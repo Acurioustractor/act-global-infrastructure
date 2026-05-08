@@ -1,3 +1,9 @@
+---
+title: ACT Revenue Acceleration Model — From Grant-Dependent to Compounding
+status: review-needed
+date: 2026-03-27
+last_verified: 2026-05-08
+---
 # ACT Revenue Acceleration Model — From Grant-Dependent to Compounding
 
 **Date:** 23 March 2026

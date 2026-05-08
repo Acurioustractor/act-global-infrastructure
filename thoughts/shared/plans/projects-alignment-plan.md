@@ -1,3 +1,9 @@
+---
+title: "Projects Alignment & Enhancement Plan"
+status: review-needed
+date: 2026-04-08
+last_verified: 2026-05-08
+---
 # Projects Alignment & Enhancement Plan
 
 **Goal:** Align ACT projects across Empathy Ledger v2 and Tractorpedia, add cover photos, improve People tab, connect galleries, and build toward the LLM knowledge system.

@@ -1,3 +1,9 @@
+---
+title: Unified Financial Overview v2 — Implementation Plan
+status: review-needed
+date: 2026-03-27
+last_verified: 2026-05-08
+---
 # Unified Financial Overview v2 — Implementation Plan
 
 **Date:** 2026-03-21

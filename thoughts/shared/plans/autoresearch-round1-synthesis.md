@@ -1,3 +1,9 @@
+---
+title: ACT Autoresearch Round 1 — Chief Strategist Synthesis
+status: review-needed
+date: 2026-03-21
+last_verified: 2026-05-08
+---
 # ACT Autoresearch Round 1 — Chief Strategist Synthesis
 
 **Date:** 2026-03-12

@@ -1,3 +1,9 @@
+---
+title: "Phase 1: Build the Engine — Sprint Plan"
+status: review-needed
+date: 2026-03-06
+last_verified: 2026-05-08
+---
 # Phase 1: Build the Engine — Sprint Plan
 
 > **Goal:** First paying customers on Empathy Ledger. R&D tracking started. GrantScope org layer designed.

@@ -1,3 +1,9 @@
+---
+title: "Plan: Goods CRM Upgrade — move people through procurement"
+status: review-needed
+date: 2026-04-24
+last_verified: 2026-05-08
+---
 # Plan: Goods CRM Upgrade — move people through procurement
 
 > Slug: `goods-crm-upgrade`

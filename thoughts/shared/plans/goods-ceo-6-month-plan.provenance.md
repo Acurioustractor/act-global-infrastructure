@@ -1,3 +1,9 @@
+---
+title: Provenance — Goods CEO 6-Month Plan
+status: review-needed
+date: 2026-04-23
+last_verified: 2026-05-08
+---
 # Provenance — Goods CEO 6-Month Plan
 
 > Sidecar for: `thoughts/shared/plans/goods-ceo-6-month-plan.md`

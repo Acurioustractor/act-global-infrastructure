@@ -1,3 +1,9 @@
+---
+title: "Feature Plan: Mono-Repo Consolidation"
+status: archive
+date: 2026-02-09
+last_verified: 2026-05-08
+---
 # Feature Plan: Mono-Repo Consolidation
 
 Created: 2026-01-30

@@ -1,15 +1,16 @@
 ---
 title: Empathy Ledger
 status: Active
-date: 2026-04-11
-entity_type: project
-tagging_mode: own-code
 canonical_slug: empathy-ledger
 canonical_code: ACT-EL
+tier: ecosystem
 website_slug: empathy-ledger
 website_path: /empathy-ledger
 public_surface: project
 cluster: empathy-ledger
+date: 2026-04-11
+entity_type: project
+tagging_mode: own-code
 empathy_ledger_key: empathy-ledger
 ---
 

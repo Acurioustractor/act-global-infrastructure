@@ -1,3 +1,15 @@
+---
+title: Feel Good Project
+status: Active
+canonical_slug: feel-good-project
+canonical_code: ACT-FG
+tier: satellite
+website_slug: feel-good-project
+website_path: /projects/feel-good-project
+public_surface: project
+cluster: feel-good-project
+---
+
 # Feel Good Project
 
 > A haircut is not a haircut. For a woman who has been invisible for months, it's someone saying: you are worth looking after.

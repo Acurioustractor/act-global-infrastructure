@@ -1,3 +1,9 @@
+---
+title: Finance Flow Dashboard + Agentic Bookkeeper
+status: review-needed
+date: 2026-03-11
+last_verified: 2026-05-08
+---
 # Finance Flow Dashboard + Agentic Bookkeeper
 
 **Created:** 2026-03-11

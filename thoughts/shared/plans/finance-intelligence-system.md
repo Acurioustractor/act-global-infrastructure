@@ -1,3 +1,9 @@
+---
+title: "ACT Finance Intelligence System — Research Synthesis & Action Plan"
+status: review-needed
+date: 2026-03-11
+last_verified: 2026-05-08
+---
 # ACT Finance Intelligence System — Research Synthesis & Action Plan
 
 **Generated:** 2026-03-11

@@ -1,3 +1,9 @@
+---
+title: "Plan: Ecosystem Alignment for Launch"
+status: review-needed
+date: 2026-04-13
+last_verified: 2026-05-08
+---
 # Plan: Ecosystem Alignment for Launch
 
 > Slug: `ecosystem-alignment-launch`

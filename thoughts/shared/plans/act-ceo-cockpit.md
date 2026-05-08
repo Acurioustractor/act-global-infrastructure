@@ -1,3 +1,9 @@
+---
+title: "Plan: ACT CEO Cockpit — the daily landing page"
+status: review-needed
+date: 2026-04-25
+last_verified: 2026-05-08
+---
 # Plan: ACT CEO Cockpit — the daily landing page
 
 > Slug: `act-ceo-cockpit`

@@ -1,3 +1,9 @@
+---
+title: "Implementation Plan: Communications Intelligence System"
+status: archive
+date: 2026-02-09
+last_verified: 2026-05-08
+---
 # Implementation Plan: Communications Intelligence System
 
 Generated: 2026-02-01

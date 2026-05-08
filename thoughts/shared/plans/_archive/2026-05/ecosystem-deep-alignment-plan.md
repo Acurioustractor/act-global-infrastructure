@@ -1,3 +1,9 @@
+---
+title: "Feature Plan: Ecosystem Deep Alignment"
+status: archive
+date: 2026-02-10
+last_verified: 2026-05-08
+---
 # Feature Plan: Ecosystem Deep Alignment
 Created: 2026-02-09
 Author: architect-agent

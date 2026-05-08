@@ -1,3 +1,9 @@
+---
+title: Supabase health — strain reduction plan
+status: review-needed
+date: 2026-04-30
+last_verified: 2026-05-08
+---
 # Supabase health — strain reduction plan
 **Project:** Shared ACT/GS — `tednluwflfhxyucgwigh`
 **Date:** 2026-04-29

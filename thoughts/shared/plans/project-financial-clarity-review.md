@@ -1,3 +1,9 @@
+---
+title: Project Financial Clarity System — CEO/COO Review
+status: review-needed
+date: 2026-03-21
+last_verified: 2026-05-08
+---
 # Project Financial Clarity System — CEO/COO Review
 
 **Date:** 2026-03-17

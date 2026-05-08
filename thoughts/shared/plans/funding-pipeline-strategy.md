@@ -1,3 +1,9 @@
+---
+title: ACT Ecosystem Funding Pipeline Strategy
+status: review-needed
+date: 2026-03-21
+last_verified: 2026-05-08
+---
 # ACT Ecosystem Funding Pipeline Strategy
 
 **Created:** 2026-03-12

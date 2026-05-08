@@ -1,3 +1,9 @@
+---
+title: "Plan: ACT Living Website Build Reset"
+status: review-needed
+date: 2026-04-20
+last_verified: 2026-05-08
+---
 # Plan: ACT Living Website Build Reset
 
 > Slug: `act-living-website-build-reset`

@@ -1,5 +1,6 @@
 ---
 title: ALMA health — why we missed PICC, BG Fit, Mounty Yarns, MMEIC, and how to make sure we don't miss again
+status: active
 date: 2026-04-20
 purpose: Diagnose the real gaps in ALMA's coverage + scoring, propose a 3-phase fix, and build a health-check mechanism so anchor-to-data drift is visible on the dashboard
 audience: Ben, before approving any writes to ALMA production data in GrantScope

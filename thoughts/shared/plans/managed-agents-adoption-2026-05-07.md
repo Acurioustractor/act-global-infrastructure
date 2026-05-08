@@ -1,3 +1,9 @@
+---
+title: "Plan: Claude Managed Agents Adoption — Finance + Services Sweep"
+status: review-needed
+date: 2026-05-07
+last_verified: 2026-05-08
+---
 # Plan: Claude Managed Agents Adoption — Finance + Services Sweep
 
 > Slug: `managed-agents-adoption-2026-05-07`

@@ -1,3 +1,15 @@
+---
+title: Designing for Obsolescence
+status: Sunsetting
+canonical_slug: designing-for-obsolescence
+canonical_code: ACT-DO
+tier: satellite
+website_slug: designing-for-obsolescence
+website_path: /projects/designing-for-obsolescence
+public_surface: project
+cluster: designing-for-obsolescence
+---
+
 # Designing for Obsolescence
 
 > A core ACT philosophy and manifesto: the most successful social innovation is one that makes the social entrepreneur unnecessary — designing systems that hand power back to communities and then get out of the way.

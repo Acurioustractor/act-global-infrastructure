@@ -1,3 +1,15 @@
+---
+title: June's Patch
+status: Active
+canonical_slug: junes-patch
+canonical_code: ACT-JP
+tier: satellite
+website_slug: junes-patch
+website_path: /projects/junes-patch
+public_surface: project
+cluster: junes-patch
+---
+
 # June's Patch
 
 > A network of therapeutic gardens providing nature prescriptions for Queensland healthcare workers — responding to a mental health crisis in the caring professions through land, community, and evidence-based social prescribing.

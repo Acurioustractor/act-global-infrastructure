@@ -1,3 +1,15 @@
+---
+title: Diagrama
+status: Active
+canonical_slug: diagrama
+canonical_code: ACT-DG
+tier: background
+website_slug: diagrama
+website_path: /projects/diagrama
+public_surface: project
+cluster: diagrama
+---
+
 # Diagrama
 
 > Spain's leading therapeutic detention model as an alternative to Australia's punitive justice system — studying, learning from, and working toward an ethical, Indigenous-led transfer of therapeutic detention knowledge to Australia.

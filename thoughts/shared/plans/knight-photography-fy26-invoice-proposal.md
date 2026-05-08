@@ -1,6 +1,7 @@
 ---
 title: Knight Photography → ACT FY26 Invoice Proposal
-status: Option A confirmed by Ben 2026-05-05 — invoice sole trader now, journal to Pty at cutover
+status: active
+status_note: "Option A confirmed by Ben 2026-05-05 — invoice sole trader now, journal to Pty at cutover"
 date: 2026-05-05
 parent: act-entity-migration-checklist-2026-06-30
 canonical_entity: knight-photography

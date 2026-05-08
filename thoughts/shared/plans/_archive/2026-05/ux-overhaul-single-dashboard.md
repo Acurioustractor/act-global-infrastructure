@@ -1,3 +1,9 @@
+---
+title: "UX Overhaul: Single Dashboard"
+status: archive
+date: 2026-02-09
+last_verified: 2026-05-08
+---
 # UX Overhaul: Single Dashboard
 
 **Status:** Plan

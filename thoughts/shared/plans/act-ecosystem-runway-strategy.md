@@ -1,3 +1,9 @@
+---
+title: ACT Ecosystem — 3-Year Runway to Financial Independence
+status: review-needed
+date: 2026-03-06
+last_verified: 2026-05-08
+---
 # ACT Ecosystem — 3-Year Runway to Financial Independence
 
 > **Goal:** Build the runway so ACT's platforms pay for themselves in perpetuity. Those who can pay, pay — so communities who can't, never have to. Protect community ownership. Design for generational wealth.

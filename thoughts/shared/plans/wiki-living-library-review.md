@@ -1,6 +1,7 @@
 ---
+title: Wiki Living Library Review (Minderoo envelope, 1 May 2026)
 slug: wiki-living-library-review
-status: draft
+status: active
 date: 2026-04-18
 owner: Ben Knight
 driver: Minderoo envelope — Friday 1 May 2026

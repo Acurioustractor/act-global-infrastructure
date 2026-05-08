@@ -1,3 +1,9 @@
+---
+title: ACT Foundation — Nonprofit Software Discount Tracker
+status: review-needed
+date: 2026-03-21
+last_verified: 2026-05-08
+---
 # ACT Foundation — Nonprofit Software Discount Tracker
 
 **Generated:** 2026-03-11

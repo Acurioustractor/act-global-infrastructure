@@ -1,3 +1,9 @@
+---
+title: ILA 2026-27 Grant Application Strategy
+status: archive
+date: 2026-02-28
+last_verified: 2026-05-08
+---
 # ILA 2026-27 Grant Application Strategy
 ## Palm Island Elders — Knowledge Journeys & Manbarra Language Conservation
 

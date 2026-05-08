@@ -1,3 +1,9 @@
+---
+title: ACT Revenue Compendium — How to Make a Shitload of Money
+status: review-needed
+date: 2026-03-27
+last_verified: 2026-05-08
+---
 # ACT Revenue Compendium — How to Make a Shitload of Money
 
 **Date:** 2026-03-22
