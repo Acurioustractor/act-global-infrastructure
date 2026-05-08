@@ -3,6 +3,17 @@
 > One page. What to run, in what order, every day / week / quarter, to keep the finance, R&D, receipts, and tax stack honest.
 > Last verified: 2026-05-08. Branch: `codex/recover-finance-money-alignment`.
 
+## The 4-Surface Model (which surface for which use case)
+
+| Surface | Job | Front door |
+|---|---|---|
+| **Notion** | Read · plan · capture · decide | `notion.so/357ebcf981cf8101bc12dd5eab9ebec5` (ACT Money Framework) |
+| **Command-center `/finance/*`** | Operate (tag, fix receipts, reconcile) | `https://command.act.place/finance` |
+| **Scripts `scripts/*.mjs`** | Automate + admin (cron + ops) | `node scripts/<x>.mjs` |
+| **Telegram bot** | Push (briefing, digest, /standup) | grammY webhook |
+
+When in doubt: **Notion for reading · command-center for operating · scripts for automating · Telegram for pushing.**
+
 ## State of the system, in one paragraph
 
 Three Supabase instances (operational `tednluwflfhxyucgwigh`, EL v2 `yvnuayzslukamizrlhwb`, media-only `uaxhjzqrdotoahjnxmbj`). Xero connected via refresh-token rotation (`scripts/sync-xero-tokens.mjs`). GHL contacts + opportunities synced (333 opps, 276 tagged with `project_code`, 83% coverage). Xero transactions synced (3,062 rows, 2,990 project-tagged at 97.6%, 363 flagged `rd_eligible`). Notion money-stack: 26 fresh dashboards, 0 drift, 0 missing. Receipts: 95.3% of transactions matched to receipt files via Gemini OCR + Xero bill attachment copying. R&D evidence pack scores WARN/62 (ceiling until Standard Ledger + AusIndustry inputs land).

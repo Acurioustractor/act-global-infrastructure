@@ -297,6 +297,28 @@ async function checkDecisionsLogRowDiff() {
   }
 }
 
+// 8-finance-index-route — verifies the canonical /finance index page exists
+// and references all 7 keeper routes. Smoke check after the 2026-05-08 retirement.
+function checkFinanceIndexRoute() {
+  const indexPath = join(REPO_ROOT, 'apps/command-center/src/app/finance/page.tsx')
+  if (!existsSync(indexPath)) {
+    return { id: '8-finance-index-route', status: 'DRIFT', summary: '/finance/page.tsx missing', fix: 'Restore the canonical index — see ~/.claude/plans/rewive-all-the-finciance-agile-pearl.md Move 4' }
+  }
+  const body = readFileSync(indexPath, 'utf-8')
+  const expected = ['/finance/overview', '/finance/money-alignment', '/finance/reconciliation', '/finance/tagger-v2', '/finance/receipts-triage', '/finance/pipeline', '/finance/projects']
+  const missing = expected.filter((href) => !body.includes(href))
+  if (missing.length > 0) {
+    return { id: '8-finance-index-route', status: 'DRIFT', summary: `/finance index missing ${missing.length} keeper card(s): ${missing.join(', ')}`, fix: 'Add the missing cards back to apps/command-center/src/app/finance/page.tsx' }
+  }
+  // Also confirm retired routes don't appear
+  const retired = ['/finance/tagger"', '/finance/tagger-bulk', '/finance/pipeline-viz', '/finance/pipeline-kanban', '/finance/project-plan', '/finance/self-reliance', '/finance/vendor-rules-suggest']
+  const stillReferenced = retired.filter((href) => body.includes(href))
+  if (stillReferenced.length > 0) {
+    return { id: '8-finance-index-route', status: 'DRIFT', summary: `/finance index references ${stillReferenced.length} retired route(s)`, drift: stillReferenced }
+  }
+  return { id: '8-finance-index-route', status: 'IN-SYNC', summary: `/finance index has all 7 keeper cards · 0 retired refs` }
+}
+
 const notionChecks = await Promise.all([
   checkHubRedundancy(),
   checkPileMixPopulated(),
@@ -309,6 +331,7 @@ const results = [
   checkEntityHubFreshness(),
   checkFourLanesCardWired(),
   listWikiDecisions(),
+  checkFinanceIndexRoute(),
   ...notionChecks,
 ]
 

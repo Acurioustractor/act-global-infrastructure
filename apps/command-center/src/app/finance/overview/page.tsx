@@ -490,7 +490,7 @@ export default function FinanceOverview() {
           <Link href="/finance/projects" className="px-3 py-1.5 rounded-lg text-xs bg-white/5 text-white/50 hover:text-white hover:bg-white/10 transition-colors">
             Projects P&L
           </Link>
-          <Link href="/finance/pipeline-kanban" className="px-3 py-1.5 rounded-lg text-xs bg-indigo-500/20 text-indigo-400 hover:text-indigo-300 hover:bg-indigo-500/30 transition-colors">
+          <Link href="/finance/pipeline" className="px-3 py-1.5 rounded-lg text-xs bg-indigo-500/20 text-indigo-400 hover:text-indigo-300 hover:bg-indigo-500/30 transition-colors">
             Pipeline Board
           </Link>
           <Link href="/finance/board" className="px-3 py-1.5 rounded-lg text-xs bg-white/5 text-white/50 hover:text-white hover:bg-white/10 transition-colors">
@@ -748,7 +748,7 @@ export default function FinanceOverview() {
         <div className="glass-card overflow-hidden">
           <div className="px-4 py-3 border-b border-white/10 flex items-center justify-between">
             <span className="text-sm font-medium text-white/60">Top Opportunities (by weighted value)</span>
-            <Link href="/finance/pipeline-kanban" className="text-xs text-white/30 hover:text-white/60 flex items-center gap-1 transition-colors">
+            <Link href="/finance/pipeline" className="text-xs text-white/30 hover:text-white/60 flex items-center gap-1 transition-colors">
               Pipeline board <ChevronRight className="h-3 w-3" />
             </Link>
           </div>

@@ -1146,7 +1146,7 @@ export default function PipelineReviewPage() {
 
                     <div className="mt-3 pt-3 border-t border-white/5 flex items-center gap-3">
                       <Link
-                        href="/finance/pipeline-kanban"
+                        href="/finance/pipeline"
                         className="text-xs text-indigo-400/60 hover:text-indigo-400 transition-colors"
                       >
                         View in Kanban →
