@@ -1,8 +1,9 @@
 ---
 title: "Feature Plan: Spending Intelligence System"
-status: review-needed
+status: superseded
 date: 2026-04-20
 last_verified: 2026-05-08
+superseded_by: spending-intelligence-v4-full-automation
 ---
 # Feature Plan: Spending Intelligence System
 Created: 2026-04-13
