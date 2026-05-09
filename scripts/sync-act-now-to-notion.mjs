@@ -67,6 +67,38 @@ const callout = (parts, emoji, color) => ({
 });
 const divider = () => ({ object: 'block', type: 'divider', divider: {} });
 
+// KPI tile (used inside a column_list for the top strip)
+const kpiTile = (emoji, value, label, bgColor) => ({
+  object: 'block', type: 'callout',
+  callout: {
+    rich_text: [
+      rt(value, { bold: true }),
+      rt(`\n${label}`, { color: 'gray' }),
+    ],
+    icon: { type: 'emoji', emoji },
+    color: bgColor || 'gray_background',
+  },
+});
+const kpiStrip = (tiles) => ({
+  object: 'block', type: 'column_list',
+  column_list: { children: tiles.map(t => ({ object: 'block', type: 'column', column: { children: [t] } })) },
+});
+
+// Native Notion table block — much cleaner than bulleted lists for tabular data
+const tableRow = (cells) => ({
+  type: 'table_row',
+  table_row: { cells: cells.map(c => Array.isArray(c) ? c : [rt(String(c ?? ''))]) },
+});
+const tableBlock = (headers, rows) => ({
+  object: 'block', type: 'table',
+  table: {
+    table_width: headers.length,
+    has_column_header: true,
+    has_row_header: false,
+    children: [tableRow(headers.map(h => [rt(h, { bold: true })])), ...rows.map(r => tableRow(r))],
+  },
+});
+
 // ─── card 1: receivables ─────────────────────────────────────────────────
 async function fetchReceivables() {
   const { data } = await supabase
@@ -80,24 +112,28 @@ async function fetchReceivables() {
 }
 
 function buildReceivablesCard(d) {
-  const blocks = [h3('💰 Receivables — who owes ACT')];
+  const blocks = [h2('💰 Receivables — who owes ACT')];
   if (!d.rows.length) {
     blocks.push(para('No outstanding receivables.'));
     return blocks;
   }
   blocks.push(para([
-    rt('Total outstanding: ', {}), rt(fmt(d.total), { bold: true }),
-    rt(` across ${d.rows.length} invoices. Top by amount:`),
+    rt('Total outstanding ', {}), rt(fmt(d.total), { bold: true }),
+    rt(` across ${d.rows.length} invoices.`),
   ]));
-  for (const r of d.rows.slice(0, 5)) {
+  const rows = d.rows.slice(0, 8).map((r) => {
     const age = r.due_date ? ageDays(r.due_date) : null;
     const overdue = age && age > 0;
-    const ageStr = age == null ? '' : overdue ? ` · ${age}d overdue` : ` · due in ${-age}d`;
-    blocks.push(bullet([
-      rt(fmt(r.amount_due), { bold: true, color: overdue ? 'red' : 'default' }),
-      rt(` — ${r.contact_name || 'Unknown'} (${r.invoice_number || '—'})${ageStr}`),
-    ]));
-  }
+    const ageCell = age == null ? '—' : overdue ? `${age}d overdue` : `due in ${-age}d`;
+    return [
+      [rt(fmt(r.amount_due), { bold: true, color: overdue ? 'red' : 'default' })],
+      [rt(r.contact_name || 'Unknown')],
+      [rt(r.invoice_number || '—', { code: true })],
+      [rt(r.due_date || '—')],
+      [rt(ageCell, { color: overdue ? 'red' : 'gray' })],
+    ];
+  });
+  blocks.push(tableBlock(['Amount', 'Contact', 'Invoice', 'Due date', 'Aging'], rows));
   return blocks;
 }
 
@@ -140,15 +176,22 @@ async function fetchBasState() {
 }
 
 function buildBasCard(quarters) {
-  const blocks = [h3('📋 BAS by quarter')];
-  for (const q of quarters) {
+  const blocks = [h2('📋 BAS by quarter')];
+  const rows = quarters.map((q) => {
     const status = q.lodged ? '✅ lodged' : '🟡 in progress';
-    const flag = q.apMissingRcptCount > 0 ? ` · ⚠️ ${q.apMissingRcptCount} bills missing receipts (${fmt(q.apMissingRcptAmt)})` : '';
-    blocks.push(bullet([
-      rt(`${q.label} `, { bold: true }),
-      rt(`${status} · ${q.total} invoices · AR outstanding ${fmt(q.arOutstandingAmt)} · AP outstanding ${fmt(q.apOutstandingAmt)}${flag}`),
-    ]));
-  }
+    const receiptsCell = q.apMissingRcptCount > 0
+      ? [rt(`⚠️ ${q.apMissingRcptCount} bills (${fmt(q.apMissingRcptAmt)})`, { color: 'orange' })]
+      : [rt('—', { color: 'gray' })];
+    return [
+      [rt(q.label, { bold: true })],
+      [rt(status)],
+      [rt(String(q.total))],
+      [rt(fmt(q.arOutstandingAmt))],
+      [rt(fmt(q.apOutstandingAmt))],
+      receiptsCell,
+    ];
+  });
+  blocks.push(tableBlock(['Quarter', 'Status', 'Invoices', 'AR outstanding', 'AP outstanding', 'Missing receipts'], rows));
   return blocks;
 }
 
@@ -184,22 +227,28 @@ async function fetchPipelineByPile() {
 }
 
 function buildPileCard(d) {
-  const blocks = [h3('🪣 Pipeline by pile')];
+  const blocks = [h2('🪣 Pipeline by pile')];
   if (!d) {
     blocks.push(para('Pipeline data unavailable (Opportunities DB unreachable or schema mismatch).'));
     return blocks;
   }
   const total = Object.values(d.buckets).reduce((s, v) => s + v, 0);
-  blocks.push(para([rt('Open pipeline (Voice/Flow/Ground/Grants/Other), weighted value: ', {}), rt(fmt(total), { bold: true })]));
-  for (const k of ['Voice', 'Flow', 'Ground', 'Grants', 'Other']) {
-    if (d.counts[k] === 0) continue;
-    blocks.push(bullet([
-      rt(`${k} `, { bold: true }),
-      rt(`${fmt(d.buckets[k])} across ${d.counts[k]} opps`),
-    ]));
-  }
+  const totalCount = Object.values(d.counts).reduce((s, v) => s + v, 0);
+  blocks.push(para([
+    rt('Open pipeline weighted ', {}), rt(fmt(total), { bold: true }),
+    rt(` across ${totalCount} opportunities. Numbers may include closed/won — schema follow-up pending.`, { color: 'gray', italic: true }),
+  ]));
+  const rows = ['Voice', 'Flow', 'Ground', 'Grants', 'Other']
+    .filter((k) => d.counts[k] > 0)
+    .map((k) => [
+      [rt(k, { bold: true })],
+      [rt(String(d.counts[k]))],
+      [rt(fmt(d.buckets[k]))],
+    ]);
+  blocks.push(tableBlock(['Pile', 'Count', 'Weighted value'], rows));
   return blocks;
 }
+
 
 // ─── card 4: open decisions + actions ────────────────────────────────────
 async function fetchAttention() {
@@ -254,23 +303,28 @@ async function fetchAttention() {
 }
 
 function buildAttentionCard(d) {
-  const blocks = [h3('🛎️ Decisions & actions waiting')];
+  const blocks = [h2('🛎️ Decisions & actions waiting')];
   if (!d.decisions.length && !d.actions.length) {
     blocks.push(para('All decisions implemented and no critical/high actions outstanding.'));
     return blocks;
   }
-  if (d.decisions.length) {
-    blocks.push(para([rt('Decisions aged > 7d:', { bold: true })]));
-    for (const it of d.decisions) {
-      blocks.push(bullet([rt(`${it.name} `, { bold: true }), rt(`(${it.status || 'Open'}, ${it.age}d)`)]));
-    }
-  }
   if (d.actions.length) {
-    blocks.push(para([rt('Critical/high action items:', { bold: true })]));
-    for (const it of d.actions) {
-      const dueStr = it.due ? ` · due ${it.due}` : '';
-      blocks.push(bullet([rt(it.name, { bold: true }), rt(` (${it.priority || 'High'}${dueStr})`)]));
-    }
+    blocks.push(h3('Critical / high actions'));
+    const rows = d.actions.map((it) => [
+      [rt(it.priority || 'High', { color: it.priority === 'Critical' ? 'red' : 'orange', bold: true })],
+      [rt(it.name, { bold: true })],
+      [rt(it.due || '—', { color: 'gray' })],
+    ]);
+    blocks.push(tableBlock(['Priority', 'Task', 'Due'], rows));
+  }
+  if (d.decisions.length) {
+    blocks.push(h3('Decisions aged > 7 days'));
+    const rows = d.decisions.map((it) => [
+      [rt(it.name, { bold: true })],
+      [rt(it.status || 'Proposed')],
+      [rt(`${it.age}d`, { color: 'gray' })],
+    ]);
+    blocks.push(tableBlock(['Decision', 'Status', 'Age'], rows));
   }
   return blocks;
 }
@@ -316,15 +370,16 @@ function fetchStaleDrafts() {
 }
 
 function buildStaleDraftsCard(rows) {
-  const blocks = [h3('📝 Drafts going stale')];
+  const blocks = [h2('📝 Drafts going stale')];
   if (!rows.length) { blocks.push(para('No drafts > 14 days old without send-ready status.')); return blocks; }
   blocks.push(para(`${rows.length} drafts not touched in > 14 days. Top by age:`));
-  for (const r of rows) {
-    blocks.push(bullet([
-      rt(`${r.title} `, { bold: true }),
-      rt(`(${r.status}, ${r.age}d) — ${r.name}`),
-    ]));
-  }
+  const tRows = rows.map((r) => [
+    [rt(r.title, { bold: true })],
+    [rt(r.status, { color: r.status === 'unknown' ? 'gray' : 'default' })],
+    [rt(`${r.age}d`, { color: r.age > 30 ? 'red' : 'orange' })],
+    [rt(r.name, { code: true })],
+  ]);
+  blocks.push(tableBlock(['Title', 'Status', 'Age', 'File'], tRows));
   return blocks;
 }
 
@@ -355,17 +410,25 @@ function fetchPlansNeedingMarkup() {
 }
 
 function buildPlansCard(d) {
-  const blocks = [h3('📐 Plans awaiting Ben markup')];
+  const blocks = [h2('📐 Plans awaiting Ben markup')];
   if (!d.total) {
     blocks.push(para('No plans with status: review-needed (or no plans frontmatter normalised yet — see plans-triage handoff).'));
     return blocks;
   }
-  const shown = Math.min(d.total, 8);
-  const hint = d.total > shown ? ` (showing top ${shown})` : '';
-  blocks.push(para(`${d.total} plans flagged for markup${hint}. See plans-triage handoff for the full list:`));
-  for (const r of d.all.slice(0, shown)) {
-    blocks.push(bullet([rt(`${r.title} `, { bold: true }), rt(`(${r.status}) — ${r.name}`)]));
-  }
+  const shown = Math.min(d.total, 10);
+  const hint = d.total > shown ? ` Showing top ${shown}.` : '';
+  blocks.push(para([
+    rt(`${d.total} plans flagged for markup.`, { bold: true }),
+    rt(`${hint} See `),
+    rt('thoughts/shared/handoffs/2026-05-08-plans-triage-proposal.md', { code: true }),
+    rt(' for the full list.'),
+  ]));
+  const rows = d.all.slice(0, shown).map((r) => [
+    [rt(r.title, { bold: true })],
+    [rt(r.status, { color: 'gray' })],
+    [rt(r.name, { code: true })],
+  ]);
+  blocks.push(tableBlock(['Plan', 'Status', 'File'], rows));
   return blocks;
 }
 
@@ -379,6 +442,18 @@ async function buildAllBlocks() {
   log('Scanning plans needing markup...');  const plans = fetchPlansNeedingMarkup();
 
   const refreshed = new Date().toISOString().replace('T', ' ').slice(0, 16) + ' UTC';
+
+  // KPI strip (4 tiles, mirrors the dashboard hub style)
+  const overdueCount = recv.rows.filter(r => r.due_date && new Date(r.due_date) < new Date()).length;
+  const overdueAmt = recv.rows.filter(r => r.due_date && new Date(r.due_date) < new Date()).reduce((s, r) => s + Number(r.amount_due || 0), 0);
+  const attentionCount = (att.actions?.length || 0) + (att.decisions?.length || 0);
+  const kpis = kpiStrip([
+    kpiTile('💰', fmt(recv.total), `Receivables outstanding · ${recv.rows.length} invoices`),
+    kpiTile('🔥', overdueCount > 0 ? `${overdueCount} overdue` : '0 overdue', overdueCount > 0 ? `${fmt(overdueAmt)} past due` : 'No overdue invoices', overdueCount > 0 ? 'red_background' : 'green_background'),
+    kpiTile('🛎️', String(attentionCount), 'Decisions + critical actions waiting', attentionCount > 0 ? 'orange_background' : 'gray_background'),
+    kpiTile('📐', String(plans.total), `Plans · drafts > 14d: ${stale.length}`),
+  ]);
+
   return [
     callout(
       [
@@ -389,6 +464,7 @@ async function buildAllBlocks() {
       ],
       '🎯', 'gray_background',
     ),
+    kpis,
     ...buildReceivablesCard(recv),
     divider(),
     ...buildBasCard(bas),
