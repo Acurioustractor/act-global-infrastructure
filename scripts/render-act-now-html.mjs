@@ -28,6 +28,9 @@ await import(join(__dirname, 'lib/load-env.mjs'));
 const REPO_ROOT = join(__dirname, '..');
 const OUT_DIR = join(REPO_ROOT, 'thoughts', 'shared', 'cockpit');
 const OUT = join(OUT_DIR, 'act-now.html');
+// Second output: served via command-center Vercel deploy as a shareable URL.
+const PUBLIC_OUT_DIR = join(REPO_ROOT, 'apps', 'command-center', 'public');
+const PUBLIC_OUT = join(PUBLIC_OUT_DIR, 'act-now.html');
 
 const notion = new Client({ auth: process.env.NOTION_TOKEN });
 const supabase = createClient(
@@ -780,11 +783,24 @@ async function main() {
   const data = await fetchAll();
   log(`Receivables: ${data.receivables.length} · BAS Q4 invoices: ${data.bas.q4.length} · Opps: ${data.opps.length} · Actions: ${data.actions.length} · Decisions: ${data.decisions.length} · Drafts: ${data.drafts.length} · Plans: ${data.plans.total}`);
   const html = renderHtml(data);
+  const sizeKb = (Buffer.byteLength(html) / 1024).toFixed(1);
+
   try { mkdirSync(OUT_DIR, { recursive: true }); } catch {}
   writeFileSync(OUT, html, 'utf-8');
-  const sizeKb = (Buffer.byteLength(html) / 1024).toFixed(1);
   log(`✓ Wrote ${relative(REPO_ROOT, OUT)} (${sizeKb} KB)`);
-  log(`  Open: open ${relative(process.cwd(), OUT)}`);
+
+  // Also drop into command-center/public so it ships with the next Vercel deploy
+  // and becomes a shareable https:// URL (no file:// gotchas).
+  try {
+    mkdirSync(PUBLIC_OUT_DIR, { recursive: true });
+    writeFileSync(PUBLIC_OUT, html, 'utf-8');
+    log(`✓ Wrote ${relative(REPO_ROOT, PUBLIC_OUT)} (deploys via Vercel)`);
+  } catch (e) {
+    log(`  warn: could not write public copy: ${e.message}`);
+  }
+
+  log(`  Local preview: open ${relative(process.cwd(), OUT)}`);
+  log(`  After commit + push: https://command.act.place/act-now.html`);
 }
 
 main().catch((e) => { console.error(e); process.exit(1); });
