@@ -106,6 +106,11 @@ const cronScripts = [
     cron_restart: '15 8 * * 1', // Weekly Monday 8:15am AEST — Main dashboard hub (FIRST: full-page replace, writes nav)
   },
   {
+    name: 'act-now-sync',
+    script: 'scripts/sync-act-now-to-notion.mjs',
+    cron_restart: '11 8 * * *', // Daily 8:11am AEST — "🎯 ACT Now" executive read at top of moneyFramework (receivables, BAS-by-quarter, pipeline-by-pile, decisions/actions waiting, stale drafts, plans-needing-markup). Runs BEFORE daily-pulse so its section sits above. See thoughts/shared/handoffs/2026-05-09-one-stop-shop-diagnostic.md.
+  },
+  {
     name: 'daily-pulse-sync',
     script: 'scripts/sync-daily-pulse-to-notion.mjs',
     cron_restart: '13 8 * * *', // Daily 8:13am AEST — "Today's Pulse" at top of moneyFramework (bank, runway, today's actions)
