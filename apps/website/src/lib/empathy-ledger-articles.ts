@@ -26,7 +26,7 @@ type ContentHubArticleDetail = ContentHubArticle & {
 const EMPATHY_LEDGER_URL =
   process.env.EMPATHY_LEDGER_URL ||
   process.env.NEXT_PUBLIC_EMPATHY_LEDGER_URL ||
-  'http://localhost:3030';
+  'https://www.empathyledger.com';
 
 function buildHeaders() {
   const headers: Record<string, string> = {};
