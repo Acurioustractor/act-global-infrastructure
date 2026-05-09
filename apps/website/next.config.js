@@ -22,6 +22,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "tednluwflfhxyucgwigh.supabase.co",
       },
+      {
+        protocol: "https",
+        hostname: "yvnuayzslukamizrlhwb.supabase.co",
+      },
     ],
   },
   // Exclude admin-wiki subdirectory (separate Next.js app)

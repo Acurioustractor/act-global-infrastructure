@@ -1,21 +1,28 @@
 /**
  * Cover image lookup for wiki-rendered project cards.
  *
- * Layers on top of the existing Empathy Ledger featured-content
- * endpoint (`/api/v1/act-projects/<slug>/featured`). For each project
- * slug, returns the first story's featured image OR the first
- * storyteller's portrait OR null.
+ * Uses the public EL Content Hub articles endpoint:
+ *   GET /api/v1/content-hub/articles?project=<slug>&limit=1
  *
- * Never throws. If the EL backend env var is missing, fetch fails,
- * or no featured content exists, the entry is `null` and the card
- * falls back to its gradient. The homepage always renders.
+ * Returns the latest article's featuredImageUrl as the cover. The
+ * endpoint is unauthenticated for reads in production (verified
+ * 2026-05-09: returns 200 with full image URLs from
+ * yvnuayzslukamizrlhwb.supabase.co storage).
+ *
+ * Earlier draft hit `/api/v1/act-projects/<slug>/featured` — that
+ * endpoint does not exist in EL v2 and returned 401, which is why
+ * the original ship needed env-var "fix". The real fix is the URL.
+ *
+ * Never throws. If fetch fails for any reason, the entry is `null`
+ * and the card falls back to its gradient. The homepage always renders.
  */
-import { getFeaturedContentForProject } from "./empathy-ledger-featured";
+import { fetchContentHubArticles } from "./empathy-ledger-articles";
 
 export type CoverImage = {
   url: string;
   alt: string;
-  source: "story" | "storyteller";
+  /** Article slug — useful for click-through later if we want it */
+  articleSlug?: string;
 };
 
 export async function getProjectCoverImages(
@@ -25,31 +32,19 @@ export async function getProjectCoverImages(
   await Promise.all(
     slugs.map(async (slug) => {
       try {
-        const resp = await getFeaturedContentForProject(slug, { limit: 1 });
-        // Featured-content schema is loose between EL versions — use any
-        // to unblock; actual fields probed at runtime.
-        const story = (resp?.featured as any)?.stories?.[0];
-        const storyImage = story?.featured_image_url || story?.image_url;
-        if (storyImage) {
+        const articles = await fetchContentHubArticles({ project: slug, limit: 1 });
+        const article = articles[0];
+        if (article?.featuredImageUrl) {
           out.set(slug, {
-            url: storyImage,
-            alt: story.story_title || slug,
-            source: "story",
-          });
-          return;
-        }
-        const teller = (resp?.featured as any)?.storytellers?.[0];
-        if (teller?.profile_image_url) {
-          out.set(slug, {
-            url: teller.profile_image_url,
-            alt: teller.display_name || teller.full_name || slug,
-            source: "storyteller",
+            url: article.featuredImageUrl,
+            alt: article.featuredImageAlt || article.title || slug,
+            articleSlug: article.slug,
           });
           return;
         }
         out.set(slug, null);
       } catch {
-        // EL backend unreachable or env missing — graceful null
+        // Fetch failed (network, env, EL down) — graceful null
         out.set(slug, null);
       }
     })
