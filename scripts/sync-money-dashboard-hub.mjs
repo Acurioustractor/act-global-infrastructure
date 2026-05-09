@@ -183,6 +183,13 @@ async function buildBlocks() {
   // ── Navigation grid ─────────────
   blocks.push({ object: 'block', type: 'heading_3', heading_3: { rich_text: [rt('🧭 Navigate')] } });
 
+  // Row 0: Executive read (top priority — refreshed daily, full-width standalone callout)
+  // Notion column_list needs >=2 children, so we emit the callout directly.
+  if (cfg.actNowPage) {
+    blocks.push({ object: 'block', type: 'paragraph', paragraph: { rich_text: [rt('🎯 Executive read', { bold: true, color: 'red' })] } });
+    blocks.push(navCard('🎯', 'ACT Now', 'Executive read across finance + operations · refreshed daily 8:11am · receivables, BAS-by-quarter, pipeline, decisions, stale drafts, plans-needing-markup', cfg.actNowPage));
+  }
+
   // Row 1: Operations
   blocks.push({ object: 'block', type: 'paragraph', paragraph: { rich_text: [rt('💼 Operations', { bold: true, color: 'purple' })] } });
   blocks.push(buildNavGridRow([

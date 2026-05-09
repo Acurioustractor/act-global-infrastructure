@@ -1,7 +1,11 @@
 #!/usr/bin/env node
 /**
- * ACT Now → Notion. Writes a "🎯 ACT Now" section to the ACT Money Framework
- * page — the executive read across finance + business operations.
+ * ACT Now → Notion. Writes the executive read to a dedicated CHILD page
+ * under ACT Money Framework. Self-bootstrapping: creates the child page on
+ * first run, persists its ID to config/notion-database-ids.json as
+ * `actNowPage`, full-replaces all children each run (no in-page section
+ * tetris), and cleans up the legacy "🎯 ACT Now" H2 marker section that
+ * the v1 of this script had appended to the parent moneyFramework page.
  *
  * Six cards (the gap surfaced in 2026-05-09-one-stop-shop-diagnostic.md):
  *   1. Receivables          — who owes ACT, top 5 by amount, with aging
@@ -11,8 +15,7 @@
  *   5. Stale drafts         — thoughts/shared/drafts/*.md > 14d old, status != send-ready
  *   6. Plans needing markup — thoughts/shared/plans/*.md with status: review-needed
  *
- * Strategy: section-replace via H2 marker, mirrors sync-daily-pulse-to-notion.mjs.
- * Cron: chained AFTER daily-pulse so the section sits at top.
+ * Cron: daily 8:11am AEST (entry in ecosystem.config.cjs as act-now-sync).
  *
  * Usage:
  *   node scripts/sync-act-now-to-notion.mjs              # full run
@@ -21,7 +24,7 @@
 
 import { Client } from '@notionhq/client';
 import { createClient } from '@supabase/supabase-js';
-import { readFileSync, readdirSync, statSync } from 'fs';
+import { readFileSync, writeFileSync, readdirSync, statSync } from 'fs';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 
@@ -31,6 +34,7 @@ await import(join(__dirname, 'lib/load-env.mjs'));
 
 const DRY_RUN = process.argv.includes('--dry-run');
 const REPO_ROOT = join(__dirname, '..');
+const CONFIG_PATH = join(__dirname, '..', 'config', 'notion-database-ids.json');
 
 const notion = new Client({ auth: process.env.NOTION_TOKEN });
 const supabase = createClient(
@@ -38,9 +42,10 @@ const supabase = createClient(
   process.env.SUPABASE_SHARED_SERVICE_ROLE_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY,
 );
 
-const cfg = JSON.parse(readFileSync(join(__dirname, '..', 'config', 'notion-database-ids.json'), 'utf-8'));
+const cfg = JSON.parse(readFileSync(CONFIG_PATH, 'utf-8'));
 
-const MARKER = '🎯 ACT Now';
+const LEGACY_MARKER = '🎯 ACT Now'; // H2 the v1 of this script appended to moneyFramework
+const PAGE_TITLE = '🎯 ACT Now — executive read';
 const log = (m) => console.log(`[${new Date().toISOString().slice(11, 19)}] ${m}`);
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const fmt = (n) => `$${Number(n || 0).toLocaleString('en-AU', { maximumFractionDigits: 0 })}`;
@@ -364,7 +369,7 @@ function buildPlansCard(d) {
   return blocks;
 }
 
-// ─── compose page ────────────────────────────────────────────────────────
+// ─── compose page (no H2 marker; this page is dedicated to ACT Now) ──────
 async function buildAllBlocks() {
   log('Fetching receivables...');           const recv = await fetchReceivables();
   log('Fetching BAS state...');             const bas = await fetchBasState();
@@ -375,9 +380,13 @@ async function buildAllBlocks() {
 
   const refreshed = new Date().toISOString().replace('T', ' ').slice(0, 16) + ' UTC';
   return [
-    h2(MARKER),
     callout(
-      [rt('Executive read across finance + operations. Refreshed ', { italic: true }), rt(refreshed, { italic: true, bold: true }), rt('. Source: ', { italic: true }), rt('scripts/sync-act-now-to-notion.mjs', { code: true })],
+      [
+        rt('Executive read across finance + operations. Refreshed ', { italic: true }),
+        rt(refreshed, { italic: true, bold: true }),
+        rt('. Daily 8:11am AEST. Source: ', { italic: true }),
+        rt('scripts/sync-act-now-to-notion.mjs', { code: true }),
+      ],
       '🎯', 'gray_background',
     ),
     ...buildReceivablesCard(recv),
@@ -394,12 +403,43 @@ async function buildAllBlocks() {
   ];
 }
 
-// ─── section-replace via marker ──────────────────────────────────────────
-async function findSectionRange(pageId) {
+// ─── self-bootstrap: ensure child page exists, persist ID to config ──────
+async function ensureActNowPage() {
+  if (cfg.actNowPage) {
+    // Verify the page still exists and is not trashed
+    try {
+      const page = await notion.pages.retrieve({ page_id: cfg.actNowPage });
+      if (!page.archived && !page.in_trash) return cfg.actNowPage;
+      log(`Configured actNowPage ${cfg.actNowPage} is trashed/archived — recreating...`);
+    } catch (e) {
+      log(`Configured actNowPage ${cfg.actNowPage} not retrievable (${e.message?.slice(0, 80)}) — recreating...`);
+    }
+  }
+  if (DRY_RUN) {
+    log(`DRY-RUN: would create child page "${PAGE_TITLE}" under cfg.moneyFramework`);
+    return '<dry-run-page-id>';
+  }
+  log(`Creating child page "${PAGE_TITLE}" under cfg.moneyFramework...`);
+  const page = await notion.pages.create({
+    parent: { type: 'page_id', page_id: cfg.moneyFramework },
+    icon: { type: 'emoji', emoji: '🎯' },
+    properties: {
+      title: { title: [{ type: 'text', text: { content: PAGE_TITLE } }] },
+    },
+  });
+  cfg.actNowPage = page.id;
+  writeFileSync(CONFIG_PATH, JSON.stringify(cfg, null, 2) + '\n', 'utf-8');
+  log(`Created actNowPage: ${page.id} — persisted to ${CONFIG_PATH}`);
+  return page.id;
+}
+
+// ─── one-time cleanup: remove legacy "🎯 ACT Now" H2 section from parent ─
+async function cleanupLegacySection() {
+  const parentId = cfg.moneyFramework;
   const all = [];
   let cursor;
   do {
-    const r = await notion.blocks.children.list({ block_id: pageId, start_cursor: cursor, page_size: 100 });
+    const r = await notion.blocks.children.list({ block_id: parentId, start_cursor: cursor, page_size: 100 });
     all.push(...(r.results || []));
     cursor = r.has_more ? r.next_cursor : undefined;
   } while (cursor);
@@ -408,11 +448,11 @@ async function findSectionRange(pageId) {
   for (let i = 0; i < all.length; i++) {
     const b = all[i];
     if (b.type === 'heading_2') {
-      const t = (b.heading_2.rich_text || []).map((rt) => rt.plain_text).join('');
-      if (t.includes(MARKER)) { markerIdx = i; break; }
+      const t = (b.heading_2.rich_text || []).map((r) => r.plain_text).join('');
+      if (t.includes(LEGACY_MARKER)) { markerIdx = i; break; }
     }
   }
-  if (markerIdx === -1) return { delete: [] };
+  if (markerIdx === -1) return 0;
 
   const toDelete = [all[markerIdx].id];
   for (let i = markerIdx + 1; i < all.length; i++) {
@@ -421,45 +461,59 @@ async function findSectionRange(pageId) {
     if (b.type === 'child_page' || b.type === 'child_database') continue;
     toDelete.push(b.id);
   }
-  return { delete: toDelete };
+  log(`Cleanup: deleting ${toDelete.length} legacy "🎯 ACT Now" section blocks from moneyFramework...`);
+  for (const id of toDelete) {
+    try { await notion.blocks.delete({ block_id: id }); await sleep(80); } catch {}
+  }
+  return toDelete.length;
+}
+
+// ─── full-replace all children of the dedicated ACT Now page ─────────────
+async function clearAllChildren(pageId) {
+  const all = [];
+  let cursor;
+  do {
+    const r = await notion.blocks.children.list({ block_id: pageId, start_cursor: cursor, page_size: 100 });
+    all.push(...(r.results || []));
+    cursor = r.has_more ? r.next_cursor : undefined;
+  } while (cursor);
+  if (!all.length) return 0;
+  log(`Clearing ${all.length} existing blocks from actNowPage...`);
+  for (const b of all) {
+    if (b.type === 'child_page' || b.type === 'child_database') continue;
+    try { await notion.blocks.delete({ block_id: b.id }); await sleep(80); } catch {}
+  }
+  return all.length;
 }
 
 async function main() {
-  log('=== ACT Now → Notion ===');
-  const pageId = cfg.moneyFramework;
-  if (!pageId) { log('ERROR: cfg.moneyFramework missing'); process.exit(1); }
+  log('=== ACT Now → Notion (child-page strategy) ===');
+  if (!cfg.moneyFramework) { log('ERROR: cfg.moneyFramework missing'); process.exit(1); }
 
-  if (!DRY_RUN) {
-    const page = await notion.pages.retrieve({ page_id: pageId });
-    if (page.archived || page.in_trash) {
-      log(`ABORT: moneyFramework (${pageId}) is in Trash. Restore it before re-running.`);
-      process.exit(2);
-    }
-  }
+  const pageId = await ensureActNowPage();
 
+  // Build blocks first (so DRY-RUN preview works without needing a real page)
   const blocks = await buildAllBlocks();
   log(`Built ${blocks.length} blocks`);
 
   if (DRY_RUN) {
-    log('DRY-RUN: skipping Notion write.');
+    log('DRY-RUN: skipping Notion writes (page create / cleanup / append).');
     log('Block summary:');
     for (const b of blocks) {
       const t = b.type;
-      const text = (b[t]?.rich_text || []).map(r => r.plain_text || r.text?.content || '').join('').slice(0, 100);
+      const text = (b[t]?.rich_text || []).map((r) => r.plain_text || r.text?.content || '').join('').slice(0, 100);
       console.log(`  [${t.padEnd(20)}] ${text}`);
     }
     return;
   }
 
-  const range = await findSectionRange(pageId);
-  if (range.delete.length > 0) {
-    log(`Deleting ${range.delete.length} existing ACT Now blocks...`);
-    for (const id of range.delete) {
-      try { await notion.blocks.delete({ block_id: id }); await sleep(80); } catch {}
-    }
-  }
+  // One-time cleanup: remove legacy section from parent moneyFramework page
+  await cleanupLegacySection();
 
-  log(`Appending ${blocks.length} blocks...`);
+  // Full replace of all children on the dedicated page
+  await clearAllChildren(pageId);
+
+  log(`Appending ${blocks.length} fresh blocks to actNowPage...`);
   for (let i = 0; i < blocks.length; i += 50) {
     await notion.blocks.children.append({ block_id: pageId, children: blocks.slice(i, i + 50) });
     await sleep(300);
