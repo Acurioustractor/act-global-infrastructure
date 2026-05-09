@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { getEcosystemProjects, type WikiProject } from "@/lib/wiki";
+import { getProjectCoverImages, type CoverImage } from "@/lib/wiki-cover-images";
 
 // Visual palette per project code. Design decision, not data — kept here
 // so wiki frontmatter stays focused on identity/structure.
@@ -82,6 +83,7 @@ const HOMEPAGE_COPY: Record<
 
 type HomepageProject = {
   code: string;
+  slug: string;
   name: string;
   href: string;
   external: boolean;
@@ -90,36 +92,50 @@ type HomepageProject = {
   color: string;
   borderColor: string;
   hoverColor: string;
+  cover: CoverImage | null;
 };
 
-function toHomepageProject(p: WikiProject): HomepageProject {
+function toHomepageProject(
+  p: WikiProject,
+  cover: CoverImage | null
+): HomepageProject {
   const palette = COLOR_MAP[p.code] ?? FALLBACK_COLORS;
   const copy = HOMEPAGE_COPY[p.code];
   return {
     code: p.code,
+    slug: p.slug,
     name: p.title,
     href: p.href,
     external: p.external,
     tagline: copy?.tagline ?? p.tagline ?? p.description ?? "",
     description: copy?.description ?? p.description ?? p.tagline ?? "",
+    cover,
     ...palette,
   };
 }
 
-// Render the ecosystem-tier projects (excluding ACT-CORE — this site
-// itself — and any without a public surface). Pulled live from the
-// canonical wiki at <repo>/wiki/projects/*.md.
-const projects: HomepageProject[] = getEcosystemProjects()
-  .filter((p) => p.code !== "ACT-CORE")
-  .map(toHomepageProject);
+const wikiProjects = getEcosystemProjects().filter((p) => p.code !== "ACT-CORE");
+const projectSlugs = wikiProjects.map((p) => p.slug);
 
-const projectCount = projects.length;
+const projectCount = wikiProjects.length;
 const projectCountLabel = (() => {
   const words = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"];
   return words[projectCount] ?? String(projectCount);
 })();
 
-export default function HomePage() {
+// Revalidate the cover-image fetch every 5 minutes so the homepage
+// stays fresh as EL content changes.
+export const revalidate = 300;
+
+export default async function HomePage() {
+  // Pulled live from the canonical wiki at <repo>/wiki/projects/*.md
+  // + cover images from the Empathy Ledger featured-content endpoint.
+  // Both fail gracefully — wiki always works, EL cover is null on env miss.
+  const covers = await getProjectCoverImages(projectSlugs);
+  const projects: HomepageProject[] = wikiProjects.map((p) =>
+    toHomepageProject(p, covers.get(p.slug) ?? null)
+  );
+
   return (
     <div className="space-y-24">
       {/* Hero */}
@@ -168,21 +184,34 @@ export default function HomePage() {
 
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {projects.map((project) => {
-            const cardClass = `group flex flex-col rounded-3xl border ${project.borderColor} bg-gradient-to-br ${project.color} p-8 transition ${project.hoverColor} hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(50,42,31,0.12)]`;
+            const cardClass = `group flex flex-col overflow-hidden rounded-3xl border ${project.borderColor} bg-gradient-to-br ${project.color} transition ${project.hoverColor} hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(50,42,31,0.12)]`;
             const inner = (
               <>
-                <div className="flex-1 space-y-3">
-                  <h3 className="font-[var(--font-display)] text-2xl font-semibold text-[#2F3E2E]">
-                    {project.name}
-                  </h3>
-                  <p className="text-sm font-medium text-[#4CAF50]">
-                    {project.tagline}
-                  </p>
-                  <p className="text-sm text-[#5A4A3A]">{project.description}</p>
-                </div>
-                <div className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#2F3E2E] transition group-hover:gap-3">
-                  <span>{project.external ? "Visit" : "Explore"}</span>
-                  <span aria-hidden="true">{project.external ? "↗" : "→"}</span>
+                {project.cover ? (
+                  <div className="relative aspect-[16/9] w-full overflow-hidden bg-stone-100">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={project.cover.url}
+                      alt={project.cover.alt}
+                      loading="lazy"
+                      className="h-full w-full object-cover transition group-hover:scale-105"
+                    />
+                  </div>
+                ) : null}
+                <div className="flex flex-1 flex-col p-8">
+                  <div className="flex-1 space-y-3">
+                    <h3 className="font-[var(--font-display)] text-2xl font-semibold text-[#2F3E2E]">
+                      {project.name}
+                    </h3>
+                    <p className="text-sm font-medium text-[#4CAF50]">
+                      {project.tagline}
+                    </p>
+                    <p className="text-sm text-[#5A4A3A]">{project.description}</p>
+                  </div>
+                  <div className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#2F3E2E] transition group-hover:gap-3">
+                    <span>{project.external ? "Visit" : "Explore"}</span>
+                    <span aria-hidden="true">{project.external ? "↗" : "→"}</span>
+                  </div>
                 </div>
               </>
             );
