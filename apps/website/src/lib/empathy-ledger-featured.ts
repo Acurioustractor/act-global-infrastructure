@@ -5,7 +5,7 @@
  */
 
 const EMPATHY_LEDGER_URL =
-  process.env.EMPATHY_LEDGER_URL || 'http://localhost:3001';
+  process.env.EMPATHY_LEDGER_URL || 'https://www.empathyledger.com';
 
 export interface FeaturedStoryteller {
   storyteller_id: string;
