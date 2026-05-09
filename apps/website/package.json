@@ -5,6 +5,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "snapshot-wiki": "node scripts/snapshot-wiki.mjs",
+    "prebuild": "node scripts/snapshot-wiki.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",

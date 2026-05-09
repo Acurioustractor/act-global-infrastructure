@@ -18,9 +18,21 @@
 import fs from "node:fs";
 import path from "node:path";
 
-const REPO_ROOT = path.resolve(process.cwd(), "../..");
-const PROJECTS_DIR = path.join(REPO_ROOT, "wiki", "projects");
-const CONFIG_PATH = path.join(REPO_ROOT, "config", "project-codes.json");
+// On Vercel only apps/website is uploaded, so we can't read ../../wiki/.
+// scripts/snapshot-wiki.mjs (run as prebuild) copies wiki+config
+// into _wiki-snapshot/. Locally, both sources work — snapshot takes
+// precedence so dev mirrors prod.
+const APP_ROOT = path.resolve(process.cwd());
+const REPO_ROOT = path.resolve(APP_ROOT, "../..");
+const SNAPSHOT_DIR = path.join(APP_ROOT, "_wiki-snapshot");
+
+const PROJECTS_DIR = fs.existsSync(path.join(SNAPSHOT_DIR, "projects"))
+  ? path.join(SNAPSHOT_DIR, "projects")
+  : path.join(REPO_ROOT, "wiki", "projects");
+
+const CONFIG_PATH = fs.existsSync(path.join(SNAPSHOT_DIR, "project-codes.json"))
+  ? path.join(SNAPSHOT_DIR, "project-codes.json")
+  : path.join(REPO_ROOT, "config", "project-codes.json");
 
 export type WikiProjectTier =
   | "ecosystem"

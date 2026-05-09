@@ -1,0 +1,125 @@
+---
+title: Community Capital
+status: Active
+canonical_slug: community-capital
+canonical_code: ACT-CP
+tier: satellite
+website_slug: community-capital
+website_path: /projects/community-capital
+public_surface: project
+cluster: community-capital
+---
+
+# Community Capital
+
+> The gap between community organisations doing extraordinary work and the capital that could sustain them is not a knowledge gap. It's a relationship gap.
+
+**Status:** Active | **Code:** ACT-CP
+
+## What It Is
+
+Community Capital is an ACT-facilitated leadership retreat — formally titled the **10x10 Community Capital Leadership Retreat** — bringing together community leaders and social impact capital. The inaugural Phase 1 retreat ran **23–25 February 2025** in Bowral, NSW (documented in [[case-studies/community-capital-bowral-2025|the Bowral case study]] in the ACT Farm cluster). It is funded via the Social Impact Hub Foundation, which distributes approximately $10 million in funds to not-for-profits annually.
+
+ACT's role is facilitation: creating and holding the space between people doing community-level work and people with access to capital, without imposing its own agenda on either.
+
+## Origin and Format
+
+Community Capital convenes in Bowral, NSW — a wealthy Southern Highlands town that also hosts a concentration of philanthropic and impact investing activity. ACT has run this retreat as a structured gathering where not-for-profit leaders and social entrepreneurs meet people who can fund them, not in a grant-application format but in a relational context.
+
+The meeting notes from February 2025 capture Nicholas Marchesi (primary facilitator, $5,400) and Ben Knight (in-kind support) facilitating the Community Capital retreat at a "super fancy wedding venue" in Bowral — an aside that reveals something about the format. The physical setting signals to participants that their work is worth treating as serious: not a government meeting room, not a community hall. A space that says the organisations in it are worth a real investment of attention and environment.
+
+The "10x10" framing suggests the retreat operates at scale: approximately ten community leaders meeting with capital holders plus support, roughly 25 people in the room total. The exact composition is only partly resolved in available source material (INV-0289 is the most concrete primary source).
+
+## Phase 1 and Phase 2
+
+Community Capital runs in two linked phases:
+
+- **Phase 1 — the retreat.** The 23–25 Feb 2025 Bowral convening. The relational ground. Funded and delivered through ACT facilitation. Full detail in [[case-studies/community-capital-bowral-2025|Community Capital — Bowral, 23–25 Feb 2025]].
+- **Phase 2 — Catalysing Impact.** Signed **17 March 2026**, thirteen months after Phase 1. Up to **$400K** drawn from a **$1M pool funded by QBE via the Social Impact Hub**. This is the capital-deployment extension of the relational work started at Bowral.
+
+The gap between the two phases is intentional. Relational capital does not sign on the back of a single weekend; it signs after a year of relationship. The Phase 1 → Phase 2 pattern is the method.
+
+## The Caravan at Black Cockatoo Valley
+
+After Bowral, Community Capital funded a year of accommodation at [[black-cockatoo-valley|Black Cockatoo Valley]] — ACT Farm's 150-acre land holding on Jinibara Country. [[the-caravan|The Caravan]], built for Phase 1, now lives there too, at a notional $550/month that is unbilled. This is documented in two case studies in the ACT Farm cluster:
+
+- [[case-studies/community-capital-at-bcv|Community Capital at BCV]] — the year-in-the-valley case study
+- [[case-studies/the-caravan-at-bcv|The Caravan at BCV]] — the studio object in residence
+
+The retreat came home. Future Community Capital convenings can run out of BCV, and the space is also available to other aligned groups through [[experiences/the-space-at-bcv|The Space at BCV]].
+
+## "Make candles while talking about money"
+
+The Bowral retreat used candle-making kits (25 kits, line-itemed on INV-0289) as a shared making activity while the capital conversations happened. This is not decoration — it is the method.
+
+Hands-occupied talk loosens what heads-only talk cannot. Candle-making creates a shared object, a shared rhythm, and a lateral frame. The pitch posture collapses. Two people making something together do not ask each other for money the way two people facing each other across a table do. The candles are also a souvenir — participants leave with a physical reminder of the room.
+
+The method now has a home at BCV. The making infrastructure is resident, not rented.
+
+## ACT's Role: Facilitating the Space Between
+
+ACT does not hold the capital in Community Capital. It holds the room. This is a deliberate choice that reflects one of ACT's core operating principles: the organisation's job is to remove friction between people who have something and communities that need it, without extracting value in either direction.
+
+This is the same logic that drives [[civicgraph|CivicGraph]] — mapping funding flows so community organisations understand the sector they're trying to navigate — and ACT's evidence infrastructure more broadly — making the evidence base legible to funders who want proof before they commit. Community Capital is the relational complement to those systems. CivicGraph provides the data. The evidence layer provides the proof. Community Capital provides the room.
+
+## Why This Matters: The Capital Access Problem
+
+Community organisations doing the most important work in Australia often face the same structural barrier: they are not connected to the networks where capital decisions get made. Impact investors and philanthropic funders are often genuinely looking for exactly the kind of organisations ACT works with — but the discovery process favours organisations with professional development staff, existing funder relationships, and polished reporting capability. Small, community-rooted organisations rarely have these things.
+
+Community Capital is a deliberate workaround: by designing the convening, ACT creates a discovery moment that the normal market wouldn't produce.
+
+The Social Impact Hub Foundation's focus on not-for-profits receiving approximately $10 million in distributed grants situates this in a mid-tier philanthropic context — significant funding flowing to the sector, with ACT as the connective tissue.
+
+## Relationship to Ecosystem Concepts
+
+### CivicGraph
+[[civicgraph|CivicGraph]] maps the funding landscape of the Australian social sector — entities, grants, procurement, and the relationships between them. The intelligence CivicGraph generates about where capital flows (and where it doesn't) is directly relevant to the design of Community Capital events: which communities are systematically underfunded, which funders are looking for community-controlled organisations, where the relationship gaps are largest.
+
+### Funding Transparency
+[[funding-transparency|Funding Transparency]] as a concept addresses the opacity of philanthropic capital — who has it, how it moves, what it's looking for, and what it avoids. Community Capital as a convening operates on the premise that transparency produces better capital allocation: when community leaders and funders are in the same room talking honestly, the matching is better than when grants are decided at a distance.
+
+### PICC
+Palm Island Community Company (PICC) is ACT's clearest example of community-controlled finance at scale — a 200+ person workforce in health, family services, and employment, entirely controlled by the Palm Island community. PICC demonstrates what becomes possible when a community has real capital under its own governance. Community Capital is one of the mechanisms through which ACT tries to build more PICC-like situations.
+
+### The TYSON Bank / Community Finance Thread
+
+Earlier ACT thinking (meeting notes, 2023) explored community banking and community capital concepts through a "TYSON" framing — Tell Your Story Once Now — imagining a person-centred financial services model for disadvantaged communities. One participant at that meeting noted a precedent: an organisation that created a community investment fund, ran it at cost, and achieved 10% greater returns than comparable instruments, then distributed $5 million to not-for-profits. Community Capital, as a convening model, operates in this same space — closing the gap between community need and capital deployment.
+
+## Current Stage
+
+Active. Phase 1 retreat completed (Bowral, 23–25 Feb 2025). Phase 2 Catalysing Impact signed 17 Mar 2026. Year of accommodation at Black Cockatoo Valley funded and current. The Caravan in residence at BCV. The full history of Community Capital events, the Social Impact Hub Foundation's grant portfolio flowing through the program, and the outcomes for participating organisations continue to be documented via the case studies in the [[act-farm|ACT Farm]] cluster.
+
+## Project Codes
+
+| System | Reference |
+|--------|-----------|
+| Project code | `ACT-CP` |
+| Xero tracking | `ACT-CP — Community Capital` |
+| Status | Active |
+| Funder | Social Impact Hub Foundation (~$10M distributed annually) |
+| Format | Leadership retreat, Bowral NSW |
+
+## LCAA Phase
+
+In the [[lcaa-method|LCAA Method]], Community Capital sits across **Listen** and **Action** — it is a relational convening designed to put community leaders and capital holders in the same room without a pitch posture, then follow the relationships into actual capital deployment a year later. ACT does not hold the capital; it holds the room.
+
+LCAA arc for Community Capital:
+- **Listen** — Phase 1 retreat in Bowral (23–25 Feb 2025) with ten community leaders meeting capital holders in a setting that signals their work is worth real attention; candle-making as the lateral frame that lets hands-occupied talk loosen what heads-only talk cannot
+- **Curiosity** — testing whether relational capital (not transactional grant-application capital) produces better matches; the year-long gap between Phase 1 and Phase 2 as a deliberate experiment in trust as precondition
+- **Action** — Phase 2 *Catalysing Impact* signed 17 March 2026, deploying up to $400K from a $1M QBE / Social Impact Hub pool; year of accommodation funded at [[black-cockatoo-valley|Black Cockatoo Valley]]; [[the-caravan|The Caravan]] resident at BCV; future convenings hosted on the same land
+- **Art** — the format itself as art: a fancy wedding venue, a candle, a year-long arc; treating community organisations as serious enough to host in a serious environment
+
+[[civicgraph|CivicGraph]] maps the funding flows; Community Capital makes the rooms where new funder–community matches can actually happen.
+
+## Backlinks
+
+- [[civicgraph|CivicGraph]] — data layer mapping funding flows that Community Capital navigates
+- [[funding-transparency|Funding Transparency]] — the concept Community Capital enacts in practice
+- [[custodian-first-economy|Custodian First Economy]]: partner program ACT works with around young people on youth justice orders
+- [[act-farm|ACT Farm]] — where Community Capital's program now has a physical home
+- [[black-cockatoo-valley|Black Cockatoo Valley]] — the land the year of accommodation runs on
+- [[the-caravan|The Caravan]] — built for Phase 1, resident at BCV
+- [[case-studies/community-capital-bowral-2025|Case Study — Bowral, 23–25 Feb 2025]]
+- [[case-studies/community-capital-at-bcv|Case Study — Community Capital at BCV]]
+- [[case-studies/the-caravan-at-bcv|Case Study — The Caravan at BCV]]
+- [[experiences/the-space-at-bcv|The Space at BCV]] — the convening space offer that carries Phase 1 forward
