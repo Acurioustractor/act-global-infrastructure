@@ -107,8 +107,8 @@ const cronScripts = [
   },
   {
     name: 'act-now-sync',
-    script: 'scripts/sync-act-now-to-notion.mjs',
-    cron_restart: '11 8 * * *', // Daily 8:11am AEST — "🎯 ACT Now" executive read at top of moneyFramework (receivables, BAS-by-quarter, pipeline-by-pile, decisions/actions waiting, stale drafts, plans-needing-markup). Runs BEFORE daily-pulse so its section sits above. See thoughts/shared/handoffs/2026-05-09-one-stop-shop-diagnostic.md.
+    script: 'scripts/cron-act-now.mjs',
+    cron_restart: '11 8 * * *', // Daily 8:11am AEST — wrapper: refreshes Notion child page (35bebcf9...) AND renders act-now.html into apps/command-center/public/, auto-commits + pushes if HTML changed (Vercel auto-redeploys https://command.act.place/act-now.html). See thoughts/shared/handoffs/2026-05-09-one-stop-shop-diagnostic.md.
   },
   {
     name: 'daily-pulse-sync',
