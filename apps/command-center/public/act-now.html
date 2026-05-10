@@ -1,0 +1,665 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ACT Now — 2026-05-09 13:42 UTC</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+:root {
+  --bg: #f7f6f1;
+  --surface: #ffffff;
+  --ink: #1a1a17;
+  --muted: #5b5b54;
+  --border: #e5e3dc;
+  --accent: #0a4f3a;
+  --warn: #a36400;
+  --warn-bg: #fff8e8;
+  --fail: #a31a1a;
+  --fail-bg: #fdeded;
+  --pass: #0a7d3a;
+  --pass-bg: #e8f5ec;
+  --voice: #c2410c;
+  --flow: #1d4ed8;
+  --ground: #15803d;
+  --grants: #7c2d12;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font: 14px/1.55 ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 20px 24px 60px;
+}
+h1, h2, h3 { font-family: ui-serif, "Iowan Old Style", Palatino, Georgia, serif; line-height: 1.2; margin: 0 0 8px; }
+h1 { font-size: 30px; }
+h2 { font-size: 22px; margin: 32px 0 14px; padding-bottom: 8px; border-bottom: 2px solid var(--border); }
+h3 { font-size: 16px; margin: 20px 0 8px; }
+
+header.banner {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 18px 22px;
+  margin-bottom: 16px;
+  display: flex; justify-content: space-between; align-items: center; gap: 24px;
+}
+.banner-title { display: flex; flex-direction: column; }
+.banner-sub { color: var(--muted); font-size: 13px; margin-top: 2px; }
+.banner-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+.btn {
+  padding: 8px 14px;
+  background: var(--accent); color: white; border: 0; border-radius: 6px;
+  font: 13px ui-sans-serif, -apple-system, sans-serif; cursor: pointer; text-decoration: none;
+}
+.btn:hover { opacity: 0.9; }
+.btn-ghost { background: transparent; color: var(--ink); border: 1px solid var(--border); }
+.btn-ghost:hover { background: #efece4; }
+
+.kpi-strip {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px;
+  margin-bottom: 20px;
+}
+.kpi-tile {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px 16px;
+  position: relative;
+}
+.kpi-tile.warn { background: var(--warn-bg); border-left: 4px solid var(--warn); }
+.kpi-tile.fail { background: var(--fail-bg); border-left: 4px solid var(--fail); }
+.kpi-tile.pass { background: var(--pass-bg); border-left: 4px solid var(--pass); }
+.kpi-emoji { font-size: 18px; }
+.kpi-value { font-size: 24px; font-weight: 700; line-height: 1.1; margin: 4px 0 2px; font-variant-numeric: tabular-nums; }
+.kpi-label { font-size: 12px; color: var(--muted); }
+
+.grid-2 { display: grid; grid-template-columns: 2fr 1fr; gap: 18px; align-items: start; }
+@media (max-width: 900px) { .grid-2 { grid-template-columns: 1fr; } }
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px 18px;
+}
+.card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; gap: 10px; flex-wrap: wrap; }
+.card-header h2 { margin: 0; padding: 0; border: 0; font-size: 18px; }
+.card-summary { color: var(--muted); font-size: 12px; }
+
+.filter-chips { display: flex; gap: 6px; flex-wrap: wrap; margin: 6px 0 12px; }
+.chip {
+  padding: 4px 10px;
+  background: #efece4;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  font-size: 12px;
+  cursor: pointer;
+  user-select: none;
+}
+.chip.active { background: var(--ink); color: white; border-color: var(--ink); }
+
+table { border-collapse: collapse; width: 100%; font-size: 13px; }
+th, td { padding: 6px 9px; border-bottom: 1px solid var(--border); text-align: left; vertical-align: top; }
+th { background: #efece4; font-weight: 600; cursor: pointer; user-select: none; position: sticky; top: 0; }
+th:hover { background: #e5e1d3; }
+th.sort-asc::after { content: ' ▲'; color: var(--muted); font-size: 10px; }
+th.sort-desc::after { content: ' ▼'; color: var(--muted); font-size: 10px; }
+tbody tr { transition: background 0.1s; }
+tbody tr:hover { background: #fbfaf6; }
+tbody tr.hidden { display: none; }
+.amount { font-variant-numeric: tabular-nums; font-weight: 600; }
+.amount.overdue { color: var(--fail); }
+.badge { padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 500; display: inline-block; }
+.badge-red { background: var(--fail-bg); color: var(--fail); }
+.badge-orange { background: var(--warn-bg); color: var(--warn); }
+.badge-green { background: var(--pass-bg); color: var(--pass); }
+.badge-gray { background: #efece4; color: var(--muted); }
+.badge-voice { background: #fff1e8; color: var(--voice); }
+.badge-flow { background: #eef2ff; color: var(--flow); }
+.badge-ground { background: #ecfdf5; color: var(--ground); }
+.badge-grants { background: #fef3c7; color: var(--grants); }
+
+.chart-box { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 14px; height: 320px; position: relative; }
+.chart-box canvas { max-height: 280px; }
+
+.search-box {
+  width: 100%; padding: 6px 10px; font: 13px ui-sans-serif, sans-serif;
+  border: 1px solid var(--border); border-radius: 4px; margin-bottom: 8px;
+}
+.toast {
+  position: fixed; bottom: 24px; right: 24px; background: var(--ink); color: white;
+  padding: 10px 16px; border-radius: 6px; font-size: 13px; opacity: 0;
+  transition: opacity 0.2s; pointer-events: none;
+}
+.toast.show { opacity: 1; }
+
+footer { margin-top: 36px; padding-top: 14px; border-top: 1px solid var(--border); font-size: 11px; color: var(--muted); }
+footer a { color: var(--accent); }
+</style>
+</head>
+<body>
+
+<header class="banner">
+  <div class="banner-title">
+    <h1>🎯 ACT Now</h1>
+    <div class="banner-sub">Executive read · refreshed 2026-05-09 13:42 UTC · commit <code>9c66411</code></div>
+  </div>
+  <div class="banner-actions">
+    <button class="btn" id="copy-md">📋 Copy summary as markdown</button>
+    <a class="btn btn-ghost" href="https://www.notion.so/35bebcf981cf81319f14d8d4b23e35f4" target="_blank">Open in Notion</a>
+    <a class="btn btn-ghost" href="https://command.act.place/finance" target="_blank">Command center</a>
+  </div>
+</header>
+
+<section class="kpi-strip">
+  <div class="kpi-tile">
+    <div class="kpi-emoji">🏦</div>
+    <div class="kpi-value">$679,915</div>
+    <div class="kpi-label">Cash in trading accounts</div>
+  </div>
+  <div class="kpi-tile pass">
+    <div class="kpi-emoji">🛬</div>
+    <div class="kpi-value">30.9 mo</div>
+    <div class="kpi-label">Runway at current burn</div>
+  </div>
+  <div class="kpi-tile">
+    <div class="kpi-emoji">💰</div>
+    <div class="kpi-value">$444,440</div>
+    <div class="kpi-label">Receivables · 20 invoices</div>
+  </div>
+  <div class="kpi-tile fail">
+    <div class="kpi-emoji">🔥</div>
+    <div class="kpi-value">15 overdue</div>
+    <div class="kpi-label">$217,450 past due</div>
+  </div>
+  <div class="kpi-tile warn">
+    <div class="kpi-emoji">🛎️</div>
+    <div class="kpi-value">4</div>
+    <div class="kpi-label">Decisions + critical actions waiting</div>
+  </div>
+  <div class="kpi-tile">
+    <div class="kpi-emoji">📐</div>
+    <div class="kpi-value">27</div>
+    <div class="kpi-label">Plans · 0 stale drafts</div>
+  </div>
+</section>
+
+<section class="grid-2">
+  <div class="card">
+    <div class="card-header">
+      <h2>💰 Receivables</h2>
+      <div class="card-summary"><strong>$444,440</strong> across 20 invoices · <strong style="color:var(--fail)">$217,450 overdue</strong></div>
+    </div>
+    <div class="filter-chips" data-target="receivables-table">
+      <span class="chip active" data-filter="all">All (20)</span>
+      <span class="chip" data-filter="overdue">Overdue (15)</span>
+      <span class="chip" data-filter="future">Future</span>
+    </div>
+    <input class="search-box" placeholder="Search contact / invoice…" data-target="receivables-table">
+    <div style="max-height: 360px; overflow-y: auto;">
+    <table id="receivables-table" data-sortable>
+      <thead><tr>
+        <th data-type="number">Amount</th>
+        <th>Contact</th>
+        <th>Invoice</th>
+        <th>Due date</th>
+        <th data-type="number">Aging</th>
+      </tr></thead>
+      <tbody>
+        <tr data-state="future">
+          <td><span class="amount ">$132,000</span></td>
+          <td>The Snow Foundation</td>
+          <td><code>INV-0321</code></td>
+          <td>2026-06-01</td>
+          <td><span class="badge badge-green">due in 23d</span></td>
+        </tr>
+        <tr data-state="overdue">
+          <td><span class="amount overdue">$82,500</span></td>
+          <td>Rotary Eclub Outback Australia, Division 9560,</td>
+          <td><code>INV-0222</code></td>
+          <td>2025-04-24</td>
+          <td><span class="badge badge-red">380d overdue</span></td>
+        </tr>
+        <tr data-state="overdue">
+          <td><span class="amount overdue">$77,000</span></td>
+          <td>Palm Island Community Company Limited (PICC)</td>
+          <td><code>INV-0324</code></td>
+          <td>2026-04-15</td>
+          <td><span class="badge badge-red">24d overdue</span></td>
+        </tr>
+        <tr data-state="future">
+          <td><span class="amount ">$40,000</span></td>
+          <td>Homeland School Company</td>
+          <td><code>INV-0303</code></td>
+          <td>2026-06-30</td>
+          <td><span class="badge badge-green">due in 52d</span></td>
+        </tr>
+        <tr data-state="future">
+          <td><span class="amount ">$37,290</span></td>
+          <td>Sonas Properties Pty Ltd</td>
+          <td><code>INV-0328</code></td>
+          <td>2026-05-15</td>
+          <td><span class="badge badge-green">due in 6d</span></td>
+        </tr>
+        <tr data-state="overdue">
+          <td><span class="amount overdue">$19,800</span></td>
+          <td>Palm Island Community Company Limited (PICC)</td>
+          <td><code>INV-0317</code></td>
+          <td>2026-02-27</td>
+          <td><span class="badge badge-red">71d overdue</span></td>
+        </tr>
+        <tr data-state="overdue">
+          <td><span class="amount overdue">$16,500</span></td>
+          <td>Regional Arts Australia</td>
+          <td><code>INV-0301</code></td>
+          <td>2026-03-02</td>
+          <td><span class="badge badge-red">68d overdue</span></td>
+        </tr>
+        <tr data-state="future">
+          <td><span class="amount ">$16,500</span></td>
+          <td>Regional Arts Australia</td>
+          <td><code>INV-0302</code></td>
+          <td>2026-06-30</td>
+          <td><span class="badge badge-green">due in 52d</span></td>
+        </tr>
+        <tr data-state="overdue">
+          <td><span class="amount overdue">$15,400</span></td>
+          <td>Brodie Germaine Fitness Aboriginal Corporation</td>
+          <td><code>INV-0325</code></td>
+          <td>2026-04-29</td>
+          <td><span class="badge badge-red">10d overdue</span></td>
+        </tr>
+        <tr data-state="overdue">
+          <td><span class="amount overdue">$2,200</span></td>
+          <td>SMART Recovery Australia</td>
+          <td><code>INV-0322</code></td>
+          <td>2026-03-27</td>
+          <td><span class="badge badge-red">43d overdue</span></td>
+        </tr>
+        <tr data-state="future">
+          <td><span class="amount ">$1,200</span></td>
+          <td>The John Villiers Trust</td>
+          <td><code>INV-0327</code></td>
+          <td>2026-05-17</td>
+          <td><span class="badge badge-green">due in 8d</span></td>
+        </tr>
+        <tr data-state="overdue">
+          <td><span class="amount overdue">$450</span></td>
+          <td>Aleisha J Keating</td>
+          <td><code>INV-0294</code></td>
+          <td>2025-12-05</td>
+          <td><span class="badge badge-red">155d overdue</span></td>
+        </tr>
+        <tr data-state="overdue">
+          <td><span class="amount overdue">$450</span></td>
+          <td>Aleisha J Keating</td>
+          <td><code>INV-0254</code></td>
+          <td>2025-07-25</td>
+          <td><span class="badge badge-red">288d overdue</span></td>
+        </tr>
+        <tr data-state="overdue">
+          <td><span class="amount overdue">$450</span></td>
+          <td>Aleisha J Keating</td>
+          <td><code>INV-0287</code></td>
+          <td>2025-11-07</td>
+          <td><span class="badge badge-red">183d overdue</span></td>
+        </tr>
+        <tr data-state="overdue">
+          <td><span class="amount overdue">$450</span></td>
+          <td>Aleisha J Keating</td>
+          <td><code>INV-0274</code></td>
+          <td>2025-09-26</td>
+          <td><span class="badge badge-red">225d overdue</span></td>
+        </tr>
+        <tr data-state="overdue">
+          <td><span class="amount overdue">$450</span></td>
+          <td>Aleisha J Keating</td>
+          <td><code>INV-0306</code></td>
+          <td>2025-12-26</td>
+          <td><span class="badge badge-red">134d overdue</span></td>
+        </tr>
+        <tr data-state="overdue">
+          <td><span class="amount overdue">$450</span></td>
+          <td>Aleisha J Keating</td>
+          <td><code>INV-0284</code></td>
+          <td>2025-10-24</td>
+          <td><span class="badge badge-red">197d overdue</span></td>
+        </tr>
+        <tr data-state="overdue">
+          <td><span class="amount overdue">$450</span></td>
+          <td>Aleisha J Keating</td>
+          <td><code>INV-0270</code></td>
+          <td>2025-09-12</td>
+          <td><span class="badge badge-red">239d overdue</span></td>
+        </tr>
+        <tr data-state="overdue">
+          <td><span class="amount overdue">$450</span></td>
+          <td>Aleisha J Keating</td>
+          <td><code>INV-0265</code></td>
+          <td>2025-08-15</td>
+          <td><span class="badge badge-red">267d overdue</span></td>
+        </tr>
+        <tr data-state="overdue">
+          <td><span class="amount overdue">$450</span></td>
+          <td>Aleisha J Keating</td>
+          <td><code>INV-0271</code></td>
+          <td>2025-09-19</td>
+          <td><span class="badge badge-red">232d overdue</span></td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>📊 Receivables aging</h2>
+    <div class="chart-box"><canvas id="aging-chart"></canvas></div>
+  </div>
+</section>
+
+<section class="grid-2" style="margin-top: 18px;">
+  <div class="card">
+    <div class="card-header">
+      <h2>📋 BAS by quarter</h2>
+    </div>
+    <table data-sortable>
+      <thead><tr>
+        <th>Quarter</th>
+        <th>Status</th>
+        <th data-type="number">Invoices</th>
+        <th data-type="number">AR outstanding</th>
+        <th data-type="number">AP outstanding</th>
+        <th>Missing receipts</th>
+      </tr></thead>
+      <tbody>
+
+        <tr>
+          <td><strong>Q2 FY26 (Oct-Dec 25)</strong></td>
+          <td><span class="badge badge-green">✅ lodged</span></td>
+          <td>384</td>
+          <td><span class="amount">$38,850</span></td>
+          <td><span class="amount">$84,201</span></td>
+          <td><span class="badge badge-orange">⚠️ 9 bills · $15,972</span></td>
+        </tr>
+        <tr>
+          <td><strong>Q3 FY26 (Jan-Mar 26)</strong></td>
+          <td><span class="badge badge-green">✅ lodged</span></td>
+          <td>350</td>
+          <td><span class="amount">$107,150</span></td>
+          <td><span class="amount">$210,641</span></td>
+          <td><span class="badge badge-gray">—</span></td>
+        </tr>
+        <tr>
+          <td><strong>Q4 FY26 (Apr-Jun 26)</strong></td>
+          <td><span class="badge badge-orange">🟡 in progress</span></td>
+          <td>19</td>
+          <td><span class="amount">$302,890</span></td>
+          <td><span class="amount">$4,233</span></td>
+          <td><span class="badge badge-gray">—</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>🪣 Pipeline by pile</h2>
+    <div class="chart-box"><canvas id="pile-chart"></canvas></div>
+  </div>
+</section>
+
+<section class="card" style="margin-top: 18px;">
+  <div class="card-header">
+    <h2>🛎️ Decisions & critical actions waiting</h2>
+    <div class="card-summary">4 critical/high actions · 0 decisions aged > 7d</div>
+  </div>
+  
+  
+  <h3>Critical / high actions</h3>
+  <table data-sortable>
+    <thead><tr>
+      <th>Priority</th>
+      <th>Task</th>
+      <th>Due</th>
+    </tr></thead>
+    <tbody>
+
+      <tr>
+        <td><span class="badge badge-red">Critical</span></td>
+        <td><strong>Email Standard Ledger — schedule cutover prep meeting</strong></td>
+        <td>2026-05-12</td>
+      </tr>
+      <tr>
+        <td><span class="badge badge-orange">High</span></td>
+        <td><strong>Engage R&amp;D consultant for FY26 claim</strong></td>
+        <td>2026-05-19</td>
+      </tr>
+      <tr>
+        <td><span class="badge badge-orange">High</span></td>
+        <td><strong>Reconcile INV-0295 Just Reinvest $27,500 in Xero</strong></td>
+        <td>2026-05-08</td>
+      </tr>
+      <tr>
+        <td><span class="badge badge-orange">High</span></td>
+        <td><strong>Reconcile INV-0314 Centrecorp $84,700 in Xero</strong></td>
+        <td>2026-05-10</td>
+      </tr>
+    </tbody>
+  </table>
+  
+</section>
+
+<section class="grid-2" style="margin-top: 18px;">
+  <div class="card">
+    <div class="card-header">
+      <h2>📝 Drafts going stale</h2>
+      <div class="card-summary">0 drafts > 14 days untouched</div>
+    </div>
+    <p style="color: var(--muted)">No drafts older than 14 days.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <h2>📐 Plans awaiting markup</h2>
+      <div class="card-summary">27 plans flagged · top 10 shown</div>
+    </div>
+    
+    <table data-sortable>
+      <thead><tr>
+        <th>Plan</th>
+        <th>File</th>
+      </tr></thead>
+      <tbody>
+
+        <tr>
+          <td><strong>Implementation Plans Index</strong></td>
+          <td><code style="font-size:11px">INDEX.md</code></td>
+        </tr>
+        <tr>
+          <td><strong>Plan: ACT Alignment Loop — a Karpathy-style cross-source research cycle</strong></td>
+          <td><code style="font-size:11px">act-alignment-loop.md</code></td>
+        </tr>
+        <tr>
+          <td><strong>Plan: ACT Brain — cross-repo sync + multi-source review architecture</strong></td>
+          <td><code style="font-size:11px">act-brain-expansion.md</code></td>
+        </tr>
+        <tr>
+          <td><strong>Plan: Phase 2a — Multi-repo Q2 codebase scan</strong></td>
+          <td><code style="font-size:11px">act-brain-phase-2a-multi-repo-q2.md</code></td>
+        </tr>
+        <tr>
+          <td><strong>Plan: ACT CEO Cockpit — the daily landing page</strong></td>
+          <td><code style="font-size:11px">act-ceo-cockpit.md</code></td>
+        </tr>
+        <tr>
+          <td><strong>ACT entity alignment plan</strong></td>
+          <td><code style="font-size:11px">act-entity-alignment-2026-04.md</code></td>
+        </tr>
+        <tr>
+          <td><strong>Migration checklist: Nic sole trader → A Curious Tractor Pty Ltd</strong></td>
+          <td><code style="font-size:11px">act-entity-migration-checklist-2026-06-30.md</code></td>
+        </tr>
+        <tr>
+          <td><strong>ACT Fear-Setting — for Ben + Nic</strong></td>
+          <td><code style="font-size:11px">act-fear-setting-2026-04-20.md</code></td>
+        </tr>
+        <tr>
+          <td><strong>ACT Knowledge System — Idea File</strong></td>
+          <td><code style="font-size:11px">act-knowledge-system-idea.md</code></td>
+        </tr>
+        <tr>
+          <td><strong>Plan: ACT Living Website Build Reset</strong></td>
+          <td><code style="font-size:11px">act-living-website-build-reset.md</code></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<footer>
+  Generated by <code>scripts/render-act-now-html.mjs</code> · branch <code>claude/act-now-child-page</code> · commit <code>9c66411</code><br>
+  Data sources: Supabase <code>xero_invoices</code> + <code>xero_bank_accounts</code> + <code>xero_transactions</code>; Notion Opportunities + Decisions + Action Items; filesystem <code>thoughts/shared/drafts/</code> + <code>thoughts/shared/plans/</code>.<br>
+  Regenerate: <code>node scripts/render-act-now-html.mjs</code>
+</footer>
+
+<div class="toast" id="toast">Copied to clipboard</div>
+
+<script>
+// ─── sortable tables ──────────────────────────────────────────────────
+function parseCellSort(td, type) {
+  const t = (td.textContent || '').trim();
+  if (type === 'number') {
+    const n = Number(t.replace(/[\$,A-Za-z\s%]/g, ''));
+    return Number.isFinite(n) ? n : 0;
+  }
+  return t.toLowerCase();
+}
+document.querySelectorAll('table[data-sortable]').forEach((table) => {
+  const ths = table.querySelectorAll('thead th');
+  ths.forEach((th, idx) => {
+    th.addEventListener('click', () => {
+      const tbody = table.querySelector('tbody');
+      const rows = Array.from(tbody.querySelectorAll('tr'));
+      const dir = th.classList.contains('sort-asc') ? 'desc' : 'asc';
+      ths.forEach((t) => t.classList.remove('sort-asc', 'sort-desc'));
+      th.classList.add(dir === 'asc' ? 'sort-asc' : 'sort-desc');
+      const type = th.dataset.type || 'string';
+      rows.sort((a, b) => {
+        const A = parseCellSort(a.children[idx], type);
+        const B = parseCellSort(b.children[idx], type);
+        if (type === 'number') return dir === 'asc' ? A - B : B - A;
+        return dir === 'asc' ? String(A).localeCompare(String(B)) : String(B).localeCompare(String(A));
+      });
+      rows.forEach((r) => tbody.appendChild(r));
+    });
+  });
+});
+
+// ─── filter chips ─────────────────────────────────────────────────────
+document.querySelectorAll('.filter-chips').forEach((chips) => {
+  const targetId = chips.dataset.target;
+  const table = document.getElementById(targetId);
+  chips.querySelectorAll('.chip').forEach((chip) => {
+    chip.addEventListener('click', () => {
+      chips.querySelectorAll('.chip').forEach((c) => c.classList.remove('active'));
+      chip.classList.add('active');
+      const filter = chip.dataset.filter;
+      table.querySelectorAll('tbody tr').forEach((row) => {
+        if (filter === 'all' || row.dataset.state === filter) row.classList.remove('hidden');
+        else row.classList.add('hidden');
+      });
+    });
+  });
+});
+
+// ─── search box ───────────────────────────────────────────────────────
+document.querySelectorAll('.search-box').forEach((box) => {
+  const targetId = box.dataset.target;
+  const table = document.getElementById(targetId);
+  box.addEventListener('input', () => {
+    const q = box.value.toLowerCase();
+    table.querySelectorAll('tbody tr').forEach((row) => {
+      const text = row.textContent.toLowerCase();
+      row.classList.toggle('hidden', q && !text.includes(q));
+    });
+  });
+});
+
+// ─── copy markdown summary ────────────────────────────────────────────
+const MD_SUMMARY = "# ACT Now — 2026-05-09 13:42 UTC\n\n## KPIs\n- Cash in trading accounts: $679,915\n- Runway: 30.9 mo\n- Receivables outstanding: $444,440 across 20 invoices\n- Overdue: 15 invoices · $217,450\n- Critical/high actions waiting: 4\n- Decisions awaiting (>7d): 0\n- Drafts going stale (>14d): 0\n- Plans awaiting markup: 27\n\n## Top receivables\n- $132,000 The Snow Foundation (INV-0321) · due 2026-06-01\n- $82,500 Rotary Eclub Outback Australia, Division 9560, (INV-0222) · due 2025-04-24\n- $77,000 Palm Island Community Company Limited (PICC) (INV-0324) · due 2026-04-15\n- $40,000 Homeland School Company (INV-0303) · due 2026-06-30\n- $37,290 Sonas Properties Pty Ltd (INV-0328) · due 2026-05-15\n\n## BAS by quarter\n- Q2 FY26 (Oct-Dec 25): lodged · 384 invoices · AR $38,850 · AP $84,201 · ⚠️ 9 bills missing receipts ($15,972)\n- Q3 FY26 (Jan-Mar 26): lodged · 350 invoices · AR $107,150 · AP $210,641\n- Q4 FY26 (Apr-Jun 26): in progress · 19 invoices · AR $302,890 · AP $4,233\n\n## Pipeline by pile\n- Voice: 5 opps · $0\n- Flow: 43 opps · $4,923,304\n- Ground: 8 opps · $8,100\n- Grants: 37 opps · $61,963,202\n- Other: 7 opps · $0\n\nSource: scripts/render-act-now-html.mjs · commit 9c66411\n";
+document.getElementById('copy-md').addEventListener('click', async () => {
+  try {
+    await navigator.clipboard.writeText(MD_SUMMARY);
+    const t = document.getElementById('toast');
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 1800);
+  } catch (e) {
+    alert('Copy failed: ' + e.message);
+  }
+});
+
+// ─── charts ───────────────────────────────────────────────────────────
+const AGING_DATA = {"Future":226990,"0-30 overdue":92400,"31-60 overdue":2200,"61-90 overdue":36300,"90+ overdue":86550};
+const PILE_DATA = {"Voice":{"count":5,"value":0},"Flow":{"count":43,"value":4923304.11},"Ground":{"count":8,"value":8100},"Grants":{"count":37,"value":61963202},"Other":{"count":7,"value":0}};
+
+window.addEventListener('load', () => {
+  if (typeof Chart === 'undefined') return;
+
+  const agingLabels = Object.keys(AGING_DATA);
+  const agingValues = Object.values(AGING_DATA);
+  const agingColors = ['#0a7d3a', '#a36400', '#d97706', '#c2410c', '#a31a1a'];
+  new Chart(document.getElementById('aging-chart').getContext('2d'), {
+    type: 'bar',
+    data: {
+      labels: agingLabels,
+      datasets: [{
+        label: 'Outstanding $',
+        data: agingValues,
+        backgroundColor: agingColors,
+      }],
+    },
+    options: {
+      maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        y: { beginAtZero: true, ticks: { callback: (v) => '$' + (v / 1000).toFixed(0) + 'k' } },
+      },
+    },
+  });
+
+  const pileLabels = Object.keys(PILE_DATA).filter((k) => PILE_DATA[k].count > 0);
+  const pileValues = pileLabels.map((k) => PILE_DATA[k].value);
+  const pileColors = { Voice: '#c2410c', Flow: '#1d4ed8', Ground: '#15803d', Grants: '#7c2d12', Other: '#5b5b54' };
+  new Chart(document.getElementById('pile-chart').getContext('2d'), {
+    type: 'doughnut',
+    data: {
+      labels: pileLabels,
+      datasets: [{
+        data: pileValues,
+        backgroundColor: pileLabels.map((k) => pileColors[k]),
+      }],
+    },
+    options: {
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { position: 'right', labels: { font: { size: 12 } } },
+        tooltip: {
+          callbacks: {
+            label: (ctx) => {
+              const k = ctx.label;
+              const v = PILE_DATA[k];
+              return `${k}: ${v.count} opps · $${(v.value / 1000).toFixed(0)}k`;
+            },
+          },
+        },
+      },
+    },
+  });
+});
+</script>
+
+</body>
+</html>

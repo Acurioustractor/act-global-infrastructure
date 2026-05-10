@@ -63,9 +63,11 @@ apps/command-center/.tldrignore
 deployment/logs/*.log
 *.log
 
-# Root playground/experiment files (not project code)
-act-*.html
-act-*.js
+# Root playground/experiment files (not project code).
+# Anchored to repo root so nested act-*.html dashboard artifacts
+# (e.g. thoughts/shared/cockpit/act-now.html) stay tracked.
+/act-*.html
+/act-*.js
 workers.json
 
 # Legacy / one-off
