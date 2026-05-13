@@ -428,6 +428,36 @@ export class GHLService {
     });
   }
 
+  /**
+   * Merge a secondary contact into a primary contact.
+   * Primary keeps all fields; secondary is deleted from GHL.
+   *
+   * @param {string} primaryContactId - The contact to keep
+   * @param {string} secondaryContactId - The contact to merge in (will be deleted)
+   * @returns {Promise<Object>} merged contact
+   */
+  async mergeContacts(primaryContactId, secondaryContactId) {
+    return await this.request(`/contacts/merge`, {
+      method: 'POST',
+      body: JSON.stringify({
+        locationId: this.locationId,
+        primaryContactId,
+        secondaryContactId
+      })
+    });
+  }
+
+  /**
+   * Delete a contact from GHL.
+   *
+   * @param {string} contactId - GHL contact ID
+   */
+  async deleteContact(contactId) {
+    return await this.request(`/contacts/${contactId}`, {
+      method: 'DELETE'
+    });
+  }
+
   // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   // CUSTOM FIELDS
   // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -575,12 +605,13 @@ export class GHLService {
  * @returns {GHLService}
  */
 export function createGHLService() {
-  const apiKey = process.env.GHL_API_KEY;
+  // Prefer Private Integration Token (PIT) — broader API access including delete/merge
+  const apiKey = process.env.GHL_PRIVATE_TOKEN || process.env.GHL_API_KEY;
   const locationId = process.env.GHL_LOCATION_ID;
 
   if (!apiKey || !locationId) {
     throw new Error(
-      'Missing GHL credentials. Set GHL_API_KEY and GHL_LOCATION_ID environment variables.'
+      'Missing GHL credentials. Set GHL_PRIVATE_TOKEN (or GHL_API_KEY) and GHL_LOCATION_ID environment variables.'
     );
   }
 
