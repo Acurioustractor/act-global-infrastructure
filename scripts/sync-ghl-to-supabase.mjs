@@ -20,6 +20,7 @@
 
 import { createGHLService } from './lib/ghl-api-service.mjs';
 import { createClient } from '@supabase/supabase-js';
+import { buildProjectTagMap, deriveProjectCodes } from './lib/project-code-resolver.mjs';
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // CONFIGURATION
@@ -119,6 +120,10 @@ async function syncContacts(supabase, ghl) {
   console.log('\n👥 Syncing Contacts...\n');
 
   try {
+    // Load canonical project-code lookup ONCE
+    const { directMap: projectTagMap } = await buildProjectTagMap(supabase);
+    console.log(`   Loaded ${projectTagMap.size} project tag mappings`);
+
     // Fetch all contacts from GHL
     const ghlContacts = await getAllGHLContacts(ghl);
     console.log(`   Found ${ghlContacts.length} contacts in GHL`);
@@ -139,7 +144,7 @@ async function syncContacts(supabase, ghl) {
     // Sync each contact
     for (const ghlContact of ghlContacts) {
       try {
-        const contactData = transformContactForSupabase(ghlContact);
+        const contactData = transformContactForSupabase(ghlContact, projectTagMap);
         const existingUpdatedAt = existingMap.get(ghlContact.id);
 
         const { error } = await supabase
@@ -192,10 +197,11 @@ async function getAllGHLContacts(ghl) {
   return allContacts;
 }
 
-function transformContactForSupabase(ghlContact) {
-  // Extract project tags
-  const projectTags = ['empathy-ledger', 'justicehub', 'the-harvest', 'act-farm', 'goods-on-country', 'bcv-residencies', 'act-studio'];
-  const projects = (ghlContact.tags || []).filter(tag => projectTags.includes(tag));
+function transformContactForSupabase(ghlContact, projectTagMap) {
+  // Derive canonical ACT-XX codes from tags via projects.ghl_tags + prefix rules
+  const projects = projectTagMap
+    ? deriveProjectCodes(ghlContact.tags, projectTagMap)
+    : [];
 
   // Determine engagement status from tags
   const engagementTags = (ghlContact.tags || []).filter(tag => tag.startsWith('engagement:'));
