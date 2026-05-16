@@ -232,6 +232,25 @@ const cronScripts = [
     cron_restart: '0 15 * * 5', // Weekly Friday 3:00pm AEST — Friday Money Digest (week wins, burns, stale, actions)
   },
   {
+    // Sonnet 4.6 reads the money-command data + week deltas and writes the
+    // "5 things to know this week" narrative in Curtis voice. Writes to
+    // wiki/cockpit/weekly-narrative-YYYY-MM-DD.md and Telegram.
+    name: 'weekly-narrative',
+    script: 'scripts/narrate-weekly-digest.mjs',
+    args: '--telegram',
+    cron_restart: '15 15 * * 5', // Weekly Friday 3:15pm AEST — after weekly-money-digest at 3:00pm
+  },
+  {
+    // Polls finance_receipt_documents for newly-OCR'd Dext docs that have no
+    // AI suggestion yet, grades them with Sonnet 4.6, writes to
+    // finance_ai_routing_suggestions. The workbench surfaces the grades so
+    // you see project_code + risk_flags before you publish to Xero.
+    name: 'pre-publish-dext-grader',
+    script: 'scripts/poll-pre-publish-dext-grader.mjs',
+    args: '--batch 25 --telegram',
+    cron_restart: '*/15 8-18 * * 1-5', // Every 15 min, 8am-6pm AEST, Mon-Fri
+  },
+  {
     name: 'ghl-cleanup-auto',
     script: 'scripts/cleanup-stale-ghl-opps.mjs',
     args: '--apply',

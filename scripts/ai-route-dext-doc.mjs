@@ -177,6 +177,41 @@ async function fetchUnroutedReceiptEmails(limit) {
   }));
 }
 
+async function fetchUnroutedReceiptDocuments(limit) {
+  // finance_receipt_documents is the cleaner Dext-OCR pipeline source. We want
+  // docs that have OCR'd vendor + amount but haven't been graded yet (no
+  // suggestion row exists for this doc + prompt_version + model).
+  const { data: alreadyGraded } = await sb
+    .from('finance_ai_routing_suggestions')
+    .select('source_record_id')
+    .eq('source_table', 'finance_receipt_documents')
+    .eq('prompt_version', PROMPT_VERSION)
+    .eq('model', MODEL);
+  const skipIds = new Set((alreadyGraded || []).map((r) => r.source_record_id));
+
+  const { data, error } = await sb
+    .from('finance_receipt_documents')
+    .select('id,document_date,vendor_name,document_number,amount_total,subject,from_email,source')
+    .not('vendor_name', 'is', null)
+    .not('amount_total', 'is', null)
+    .order('document_date', { ascending: false, nullsFirst: false })
+    .limit(limit * 2);
+  if (error) throw new Error(`finance_receipt_documents: ${error.message}`);
+
+  return (data || [])
+    .filter((r) => !skipIds.has(r.id))
+    .slice(0, limit)
+    .map((r) => ({
+      source_table: 'finance_receipt_documents',
+      source_record_id: r.id,
+      txn_date: r.document_date,
+      vendor_name: r.vendor_name,
+      amount: r.amount_total,
+      bank_account: null,
+      description: [r.document_number, r.subject, r.from_email, r.source].filter(Boolean).join(' | '),
+    }));
+}
+
 async function fetchUnroutedXeroTransactions(limit) {
   const { data, error } = await sb
     .from('xero_transactions')
@@ -214,6 +249,7 @@ async function fetchInputs() {
   const fns = [];
   if (want === 'all' || want === 'bank') fns.push(fetchUnroutedBankLines);
   if (want === 'all' || want === 'receipt') fns.push(fetchUnroutedReceiptEmails);
+  if (want === 'all' || want === 'documents') fns.push(fetchUnroutedReceiptDocuments);
   if (want === 'all' || want === 'xero') fns.push(fetchUnroutedXeroTransactions);
 
   const perSource = Math.ceil(LIMIT / Math.max(fns.length, 1));
