@@ -1,6 +1,6 @@
 # 2026-05-16 Money Audit — Handoff
 
-**Status:** Pass A1 + A2 + A3 complete (read-only audit). Pass A4 (archive moves) **awaiting Ben's OK**. Pass B (build `/finance/command` view) is next session.
+**Status:** Pass A SHIPPED (`cb4d0ad`) + Pass B SHIPPED (`81e4bb1`) on branch `chore/finance-audit-2026-05-16`. Migration applied to shared DB. Build clean (`pnpm build` passed, `tsc --noEmit` exit 0). **Not pushed** — push is a Tier-2 action awaiting Ben.
 
 ## Artifacts
 
@@ -17,9 +17,27 @@
 
 ## Resume next session
 
-1. Get Ben's OK on archive list (decisions.md → "Pass A action plan")
-2. Execute `git mv` batch (Tier 2 — one commit per category)
-3. Update `apps/command-center/src/lib/nav-data.ts` lines 122 + 124 (remove `revenue-planning` + `review` from nav)
-4. Add `RESTORE.md` in each `_archived/2026-05-16/` dir
-5. Verify: `pnpm --filter @act/command-center build` + `npx tsc --noEmit`
-6. Begin Pass B: write `supabase/migrations/20260516_project_alignment_state.sql`
+1. **Smoke test** `/finance/command` against live dev server (`pnpm --filter @act/command-center dev` → `http://localhost:3002/finance/command`)
+2. Decide on push: `git push -u origin chore/finance-audit-2026-05-16` (Tier 2)
+3. (Optional) Open PR for review or merge directly to main
+4. **Followups deferred from this pass:**
+   - Wire cash-in-bank source (TOP layer KpiCard shows "—" currently)
+   - Build `scripts/compute-project-money-state.mjs` for daily snapshot cron (view is read live now)
+   - Add "money command summary" block to `scripts/weekly-reconciliation.mjs` Telegram digest
+   - Trim 3 redundant weekly digests + 4 daily briefings (cron cleanup — Pass A2)
+   - Review HOLD routes: `/finance/board` (role-dependent), `/finance/accountant`, `/finance/revenue`
+
+## Pass A shipped — files
+
+- 14 archive moves (2 routes + 10 APIs + 2 scripts) with RESTORE.md
+- `scripts/inventory-finance-surface.mjs` — rerunnable
+- `apps/command-center/src/lib/nav-data.ts` — 2 routes removed from nav
+- `thoughts/shared/handoffs/2026-05-16-money-audit/{inventory,decisions,current}.md`
+
+## Pass B shipped — files
+
+- `supabase/migrations/20260516000000_money_command_state.sql` (applied)
+- `apps/command-center/src/app/api/finance/command/route.ts` (651 B route)
+- `apps/command-center/src/app/finance/command/page.tsx` (4.76 kB page)
+- `apps/command-center/src/lib/nav-data.ts` (Compass entry pinned to top)
+- `scripts/lib/finance/drift-detector.mjs` (shared lib)
