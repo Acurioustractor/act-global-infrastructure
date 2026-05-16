@@ -222,6 +222,21 @@ const cronScripts = [
     cron_restart: '15 8 * * *', // Daily 8:15am AEST — snapshot /finance/command (coverage, drift, 90d incoming, lifetime) + send to Telegram
   },
   {
+    name: 'compliance-snapshot',
+    script: 'scripts/build-compliance-calendar.mjs',
+    cron_restart: '0 7 * * *', // Daily 7am AEST — rebuild compliance snapshot before alerts cron at 7:30
+  },
+  {
+    name: 'compliance-alerts',
+    script: 'scripts/compliance-alerts.mjs',
+    cron_restart: '30 7 * * *', // Daily 7:30am AEST — fires Telegram only when T-30/T-7/T-1 lead time matches exactly
+  },
+  {
+    name: 'compliance-notion-sync',
+    script: 'scripts/sync-compliance-calendar-to-notion.mjs',
+    cron_restart: '45 7 * * *', // Daily 7:45am AEST — push latest snapshot to Notion mirror page (no-op if NOTION_COMPLIANCE_PAGE_ID unset)
+  },
+  {
     name: 'telegram-money-alerts',
     script: 'scripts/telegram-money-alerts.mjs',
     cron_restart: '0 13 * * *', // Daily 1pm AEST — afternoon alert (silent if nothing actionable)

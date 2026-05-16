@@ -123,6 +123,31 @@ interface LifetimeResponse {
   topCustomers: LifetimeCustomer[]
 }
 
+interface ComplianceObligation {
+  id: string
+  title: string
+  type: string
+  entity: string
+  due_date: string | null
+  status: string
+  notes?: string
+  owner: string
+  expected_refund_aud?: number
+  monetary_value?: number
+  days_until_due: number | null
+  severity: 'critical' | 'high' | 'medium' | null
+  at_risk: boolean
+  source: 'wiki' | 'ghl_opportunities'
+}
+
+interface ComplianceResponse {
+  generatedAt: string
+  source: 'snapshot' | 'live'
+  sources: { wiki: { count: number }; grants: { count: number } }
+  counters: { critical: number; high: number; medium: number; filed: number }
+  obligations: ComplianceObligation[]
+}
+
 interface DeltaResponse {
   available: boolean
   reason?: string
@@ -175,6 +200,15 @@ export default function MoneyCommandPage() {
     },
     staleTime: 10 * 60 * 1000,
   })
+  const { data: compliance } = useQuery<ComplianceResponse>({
+    queryKey: ['finance', 'compliance-calendar'],
+    queryFn: async () => {
+      const res = await fetch('/api/finance/compliance-calendar', { cache: 'no-store' })
+      if (!res.ok) throw new Error(`HTTP ${res.status}`)
+      return res.json()
+    },
+    staleTime: 10 * 60 * 1000,
+  })
 
   return (
     <div className="min-h-screen bg-neutral-950 text-neutral-100 p-6 lg:p-10">
@@ -211,6 +245,8 @@ export default function MoneyCommandPage() {
 
         {data && (
           <>
+            {/* AT RISK TODAY — unified attention pane */}
+            <AtRiskTodaySection compliance={compliance} top={data.top} drift={data.middle.drift} />
             {/* TOP LAYER */}
             <TopLayer top={data.top} />
             {/* MIDDLE LAYER */}
@@ -228,6 +264,139 @@ export default function MoneyCommandPage() {
       </div>
     </div>
   )
+}
+
+function AtRiskTodaySection({
+  compliance,
+  top,
+  drift,
+}: {
+  compliance: ComplianceResponse | undefined
+  top: CommandResponse['top']
+  drift: DriftItem[]
+}) {
+  // Build risk items in severity order: critical (red), high (orange), medium (yellow)
+  type Risk = {
+    severity: 'critical' | 'high' | 'medium'
+    icon: string
+    label: string
+    note: string
+    href: string
+  }
+  const items: Risk[] = []
+
+  // Compliance items
+  if (compliance) {
+    for (const o of compliance.obligations) {
+      if (!o.severity) continue
+      const dd = o.days_until_due
+      const tag = dd == null ? '' : dd < 0 ? `T+${Math.abs(dd)}d` : `T-${dd}d`
+      items.push({
+        severity: o.severity,
+        icon: '📋',
+        label: `[${tag}] ${o.title}`,
+        note: o.notes ? o.notes.split('\n')[0].slice(0, 60) : `${o.type} · ${o.entity}`,
+        href:
+          o.source === 'ghl_opportunities'
+            ? '/finance/workbench'
+            : 'https://github.com/Acurioustractor/act-global-infrastructure/blob/main/wiki/finance/compliance-calendar.md',
+      })
+    }
+  }
+
+  // Cash / runway derived risks (compute from top totals if cash is known)
+  if (top.cashInBank != null) {
+    const monthlyBurn = (top.fyExpenses - top.fyIncome) / Math.max(1, monthsSince('2025-07-01'))
+    if (monthlyBurn > 0) {
+      const runwayMonths = top.cashInBank / monthlyBurn
+      if (runwayMonths < 2) {
+        items.push({
+          severity: 'critical',
+          icon: '🔥',
+          label: `runway ${runwayMonths.toFixed(1)} months`,
+          note: `cash ${formatMoneyCompact(top.cashInBank)} · monthly burn ${formatMoneyCompact(monthlyBurn)}`,
+          href: '/finance/overview',
+        })
+      } else if (runwayMonths < 3) {
+        items.push({
+          severity: 'medium',
+          icon: '⏱️',
+          label: `runway ${runwayMonths.toFixed(1)} months`,
+          note: `cash ${formatMoneyCompact(top.cashInBank)} · monthly burn ${formatMoneyCompact(monthlyBurn)}`,
+          href: '/finance/overview',
+        })
+      }
+    }
+  }
+
+  // Drift items above $5K
+  for (const d of drift.slice(0, 3)) {
+    if (Math.abs(d.amount) < 5000) continue
+    items.push({
+      severity: Math.abs(d.amount) >= 50000 ? 'high' : 'medium',
+      icon: '🔀',
+      label: `drift ${formatMoneyCompact(Math.abs(d.amount))}`,
+      note: d.label.slice(0, 60),
+      href: d.workbenchUrl ?? '/finance/workbench',
+    })
+  }
+
+  // Sort by severity (critical first, then high, then medium)
+  const sevOrder = { critical: 0, high: 1, medium: 2 }
+  items.sort((a, b) => sevOrder[a.severity] - sevOrder[b.severity])
+
+  const SEV_TONE: Record<Risk['severity'], { icon: string; bg: string; text: string }> = {
+    critical: { icon: '🔴', bg: 'border-rose-900/60 bg-rose-950/30', text: 'text-rose-300' },
+    high: { icon: '🟠', bg: 'border-amber-900/60 bg-amber-950/20', text: 'text-amber-300' },
+    medium: { icon: '🟡', bg: 'border-yellow-900/40 bg-yellow-950/10', text: 'text-yellow-300' },
+  }
+
+  return (
+    <section className="space-y-3">
+      <div className="flex items-center gap-2 text-neutral-400 text-xs font-medium uppercase tracking-wider">
+        <AlertTriangle size={14} className="text-rose-400" />
+        At risk today
+        <span className="text-neutral-600 normal-case font-normal tracking-normal">
+          · {items.length} {items.length === 1 ? 'item' : 'items'}
+          {compliance ? ` · compliance refreshed ${new Date(compliance.generatedAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}` : ''}
+        </span>
+      </div>
+      {items.length === 0 ? (
+        <div className="rounded-lg border border-emerald-900/40 bg-emerald-950/15 p-4 text-sm text-emerald-300">
+          <CheckCircle2 size={14} className="inline mr-2 -mt-0.5" />
+          All clear — you have a clean board today.
+        </div>
+      ) : (
+        <div className="rounded-lg border border-neutral-800 bg-neutral-900/60 p-3 space-y-1.5">
+          {items.map((r, i) => {
+            const tone = SEV_TONE[r.severity]
+            return (
+              <Link
+                key={i}
+                href={r.href}
+                target={r.href.startsWith('http') ? '_blank' : undefined}
+                className={cn(
+                  'flex items-center gap-3 px-3 py-2 rounded border hover:bg-neutral-800/50 transition-colors',
+                  tone.bg,
+                )}
+              >
+                <span className="text-base shrink-0">{tone.icon}</span>
+                <span className={cn('text-sm font-medium shrink-0', tone.text)}>{r.label}</span>
+                <span className="text-xs text-neutral-500 flex-1 truncate">{r.note}</span>
+                <ArrowRight size={12} className="text-neutral-600 shrink-0" />
+              </Link>
+            )
+          })}
+        </div>
+      )}
+    </section>
+  )
+}
+
+function monthsSince(isoDate: string): number {
+  const start = new Date(isoDate + 'T00:00:00Z').getTime()
+  const now = Date.now()
+  return Math.max(1, (now - start) / (1000 * 60 * 60 * 24 * 30.44))
 }
 
 function TopLayer({ top }: { top: CommandResponse['top'] }) {
