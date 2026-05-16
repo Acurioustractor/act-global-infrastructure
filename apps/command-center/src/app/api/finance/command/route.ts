@@ -165,8 +165,8 @@ export async function GET() {
   // 4. Drift queue
   const drift = await loadDriftQueue()
 
-  // 5. Cash in bank — wire up later; /finance/overview already has a working source.
-  const cashInBank: number | null = null
+  // 5. Cash in bank — sum live balances from xero_bank_accounts (mirrors /finance/overview)
+  const cashInBank = await loadCashInBank()
 
   // 6. Build projected incoming 90d stack
   const projectedIncoming90d = totals.receivables + totals.pipelineWeighted + totals.grantsInFlight
@@ -310,3 +310,13 @@ async function loadDriftQueue(): Promise<DriftItem[]> {
   return items.slice(0, 10)
 }
 
+async function loadCashInBank(): Promise<number | null> {
+  const { data, error } = await supabase
+    .from('xero_bank_accounts')
+    .select('current_balance, status')
+  if (error || !data || data.length === 0) return null
+  const total = data
+    .filter(a => a.status !== 'ARCHIVED')
+    .reduce((sum, a) => sum + Number(a.current_balance ?? 0), 0)
+  return Number.isFinite(total) ? total : null
+}
