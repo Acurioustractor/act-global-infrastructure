@@ -1,6 +1,6 @@
 ---
 status: generated
-generated_at: 2026-05-16T02:59:33.643Z
+generated_at: 2026-05-16T10:35:30.861Z
 canonical_source: wiki/concepts/alma.md
 ---
 
