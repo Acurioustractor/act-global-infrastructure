@@ -87,6 +87,7 @@
 
 import { Worker } from "@notionhq/workers";
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
+import { registerContactsSync } from "./syncs/contacts.js";
 import {
   fetchDailyBriefing,
   fetchProjectHealth,
@@ -162,6 +163,13 @@ function daysAgo(n: number): string {
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 const worker = new Worker();
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// SYNC: Contacts — mirrors v_canonical_contacts into a Notion database
+// (Phase 1 of wiki/decisions/2026-05-14-notion-platform-architecture.md)
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+registerContactsSync(worker);
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // TOOL CURATION — Only register high-value tools (15 of 43)

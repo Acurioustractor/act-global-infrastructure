@@ -2,7 +2,7 @@
   "$schema": "wiki/narrative/funders.schema.json",
   "description": "Active and prospect funders, with the narrative claims that should lead any pitch to them. Used by narrative-draft.mjs --funder <slug> to assemble pitch briefs targeted to the right thesis.",
   "version": 2,
-  "updated": "2026-05-07",
+  "updated": "2026-05-16",
   "funders": {
     "minderoo": {
       "name": "Minderoo Foundation",
@@ -430,6 +430,300 @@
       "claims_to_lead_with": [],
       "claims_to_avoid": [],
       "framing_notes": "DATA-ONLY STUB added 2026-05-07: Xero shows $1,200 paid historically; very small amount; no current GHL activity. Surfaced by 2026-05-07 funder-alignment synthesis as wiki-absent. Needs Ben/Nic-verified narrative review before any pitch-assembly."
+    },
+    "palm-island-community-company-limited-picc": {
+      "name": "Palm Island Community Company Limited (PICC)",
+      "stage": "needs-writeup",
+      "needs_writeup": true,
+      "themes": [],
+      "tone": "TBD — write narrative based on existing Xero relationship history",
+      "claims_to_lead_with": [],
+      "framing_notes": "Auto-stubbed from xero_invoices on 2026-05-16. Replace this stub with a hand-written brief: who this is, what we have done together, what we should ask for next. See xero_summary for the relationship financials.",
+      "xero_summary": {
+        "paid_total_aud": 436700,
+        "outstanding_ar_aud": 96800,
+        "last_invoice_date": "2026-04-08"
+      }
+    },
+    "smart-recovery-australia": {
+      "name": "SMART Recovery Australia",
+      "stage": "needs-writeup",
+      "needs_writeup": true,
+      "themes": [],
+      "tone": "TBD — write narrative based on existing Xero relationship history",
+      "claims_to_lead_with": [],
+      "framing_notes": "Auto-stubbed from xero_invoices on 2026-05-16. Replace this stub with a hand-written brief: who this is, what we have done together, what we should ask for next. See xero_summary for the relationship financials.",
+      "xero_summary": {
+        "paid_total_aud": 156500,
+        "outstanding_ar_aud": 2200,
+        "last_invoice_date": "2026-03-19"
+      }
+    },
+    "sonas-properties-pty-ltd": {
+      "name": "Sonas Properties Pty Ltd",
+      "stage": "needs-writeup",
+      "needs_writeup": true,
+      "themes": [],
+      "tone": "TBD — write narrative based on existing Xero relationship history",
+      "claims_to_lead_with": [],
+      "framing_notes": "Auto-stubbed from xero_invoices on 2026-05-16. Replace this stub with a hand-written brief: who this is, what we have done together, what we should ask for next. See xero_summary for the relationship financials.",
+      "xero_summary": {
+        "paid_total_aud": 81290,
+        "outstanding_ar_aud": 37290,
+        "last_invoice_date": "2026-05-06"
+      }
+    },
+    "ingkerreke-services-aboriginal-corporation": {
+      "name": "Ingkerreke Services Aboriginal Corporation",
+      "stage": "needs-writeup",
+      "needs_writeup": true,
+      "themes": [],
+      "tone": "TBD — write narrative based on existing Xero relationship history",
+      "claims_to_lead_with": [],
+      "framing_notes": "Auto-stubbed from xero_invoices on 2026-05-16. Replace this stub with a hand-written brief: who this is, what we have done together, what we should ask for next. See xero_summary for the relationship financials.",
+      "xero_summary": {
+        "paid_total_aud": 103099.7,
+        "outstanding_ar_aud": 0,
+        "last_invoice_date": "2025-09-27"
+      }
+    },
+    "rotary-eclub-outback-australia-division-9560": {
+      "name": "Rotary Eclub Outback Australia, Division 9560,",
+      "stage": "needs-writeup",
+      "needs_writeup": true,
+      "themes": [],
+      "tone": "TBD — write narrative based on existing Xero relationship history",
+      "claims_to_lead_with": [],
+      "framing_notes": "Auto-stubbed from xero_invoices on 2026-05-16. Replace this stub with a hand-written brief: who this is, what we have done together, what we should ask for next. See xero_summary for the relationship financials.",
+      "xero_summary": {
+        "paid_total_aud": 0,
+        "outstanding_ar_aud": 82500,
+        "last_invoice_date": "2025-04-10"
+      }
+    },
+    "regional-arts-australia": {
+      "name": "Regional Arts Australia",
+      "stage": "needs-writeup",
+      "needs_writeup": true,
+      "themes": [],
+      "tone": "TBD — write narrative based on existing Xero relationship history",
+      "claims_to_lead_with": [],
+      "framing_notes": "Auto-stubbed from xero_invoices on 2026-05-16. Replace this stub with a hand-written brief: who this is, what we have done together, what we should ask for next. See xero_summary for the relationship financials.",
+      "xero_summary": {
+        "paid_total_aud": 16500,
+        "outstanding_ar_aud": 33000,
+        "last_invoice_date": "2025-12-16"
+      }
+    },
+    "homeland-school-company": {
+      "name": "Homeland School Company",
+      "stage": "needs-writeup",
+      "needs_writeup": true,
+      "themes": [],
+      "tone": "TBD — write narrative based on existing Xero relationship history",
+      "claims_to_lead_with": [],
+      "framing_notes": "Auto-stubbed from xero_invoices on 2026-05-16. Replace this stub with a hand-written brief: who this is, what we have done together, what we should ask for next. See xero_summary for the relationship financials.",
+      "xero_summary": {
+        "paid_total_aud": 40000,
+        "outstanding_ar_aud": 0,
+        "last_invoice_date": "2026-05-18"
+      }
+    },
+    "just-reinvest": {
+      "name": "Just Reinvest",
+      "stage": "needs-writeup",
+      "needs_writeup": true,
+      "themes": [],
+      "tone": "TBD — write narrative based on existing Xero relationship history",
+      "claims_to_lead_with": [],
+      "framing_notes": "Auto-stubbed from xero_invoices on 2026-05-16. Replace this stub with a hand-written brief: who this is, what we have done together, what we should ask for next. See xero_summary for the relationship financials.",
+      "xero_summary": {
+        "paid_total_aud": 27500,
+        "outstanding_ar_aud": 0,
+        "last_invoice_date": "2026-03-01"
+      }
+    },
+    "green-fox-training-studio-limited": {
+      "name": "GREEN FOX TRAINING STUDIO LIMITED",
+      "stage": "needs-writeup",
+      "needs_writeup": true,
+      "themes": [],
+      "tone": "TBD — write narrative based on existing Xero relationship history",
+      "claims_to_lead_with": [],
+      "framing_notes": "Auto-stubbed from xero_invoices on 2026-05-16. Replace this stub with a hand-written brief: who this is, what we have done together, what we should ask for next. See xero_summary for the relationship financials.",
+      "xero_summary": {
+        "paid_total_aud": 27000,
+        "outstanding_ar_aud": 0,
+        "last_invoice_date": "2025-07-17"
+      }
+    },
+    "state-of-queensland-acting-through-the-department-of-familie": {
+      "name": "State of Queensland (acting through the Department of Families, Seniors, Disability Services and Child Safety)",
+      "stage": "needs-writeup",
+      "needs_writeup": true,
+      "themes": [],
+      "tone": "TBD — write narrative based on existing Xero relationship history",
+      "claims_to_lead_with": [],
+      "framing_notes": "Auto-stubbed from xero_invoices on 2026-05-16. Replace this stub with a hand-written brief: who this is, what we have done together, what we should ask for next. See xero_summary for the relationship financials.",
+      "xero_summary": {
+        "paid_total_aud": 22000,
+        "outstanding_ar_aud": 0,
+        "last_invoice_date": "2025-05-15"
+      }
+    },
+    "our-community-shed-incorporated": {
+      "name": "Our Community Shed Incorporated",
+      "stage": "needs-writeup",
+      "needs_writeup": true,
+      "themes": [],
+      "tone": "TBD — write narrative based on existing Xero relationship history",
+      "claims_to_lead_with": [],
+      "framing_notes": "Auto-stubbed from xero_invoices on 2026-05-16. Replace this stub with a hand-written brief: who this is, what we have done together, what we should ask for next. See xero_summary for the relationship financials.",
+      "xero_summary": {
+        "paid_total_aud": 20265,
+        "outstanding_ar_aud": 0,
+        "last_invoice_date": "2026-02-23"
+      }
+    },
+    "julalikari-council-aboriginal-corporation": {
+      "name": "Julalikari Council Aboriginal Corporation",
+      "stage": "needs-writeup",
+      "needs_writeup": true,
+      "themes": [],
+      "tone": "TBD — write narrative based on existing Xero relationship history",
+      "claims_to_lead_with": [],
+      "framing_notes": "Auto-stubbed from xero_invoices on 2026-05-16. Replace this stub with a hand-written brief: who this is, what we have done together, what we should ask for next. See xero_summary for the relationship financials.",
+      "xero_summary": {
+        "paid_total_aud": 19800,
+        "outstanding_ar_aud": 0,
+        "last_invoice_date": "2025-10-21"
+      }
+    },
+    "red-dust-role-models-limited": {
+      "name": "Red Dust Role Models Limited",
+      "stage": "needs-writeup",
+      "needs_writeup": true,
+      "themes": [],
+      "tone": "TBD — write narrative based on existing Xero relationship history",
+      "claims_to_lead_with": [],
+      "framing_notes": "Auto-stubbed from xero_invoices on 2026-05-16. Replace this stub with a hand-written brief: who this is, what we have done together, what we should ask for next. See xero_summary for the relationship financials.",
+      "xero_summary": {
+        "paid_total_aud": 15950,
+        "outstanding_ar_aud": 0,
+        "last_invoice_date": "2025-07-30"
+      }
+    },
+    "brodie-germaine-fitness-aboriginal-corporation": {
+      "name": "Brodie Germaine Fitness Aboriginal Corporation",
+      "stage": "needs-writeup",
+      "needs_writeup": true,
+      "themes": [],
+      "tone": "TBD — write narrative based on existing Xero relationship history",
+      "claims_to_lead_with": [],
+      "framing_notes": "Auto-stubbed from xero_invoices on 2026-05-16. Replace this stub with a hand-written brief: who this is, what we have done together, what we should ask for next. See xero_summary for the relationship financials.",
+      "xero_summary": {
+        "paid_total_aud": 0,
+        "outstanding_ar_aud": 15400,
+        "last_invoice_date": "2026-04-15"
+      }
+    },
+    "berry-obsession-pty-ltd": {
+      "name": "Berry Obsession PTY LTD",
+      "stage": "needs-writeup",
+      "needs_writeup": true,
+      "themes": [],
+      "tone": "TBD — write narrative based on existing Xero relationship history",
+      "claims_to_lead_with": [],
+      "framing_notes": "Auto-stubbed from xero_invoices on 2026-05-16. Replace this stub with a hand-written brief: who this is, what we have done together, what we should ask for next. See xero_summary for the relationship financials.",
+      "xero_summary": {
+        "paid_total_aud": 13000,
+        "outstanding_ar_aud": 0,
+        "last_invoice_date": "2026-02-10"
+      }
+    },
+    "aleisha-j-keating": {
+      "name": "Aleisha J Keating",
+      "stage": "needs-writeup",
+      "needs_writeup": true,
+      "themes": [],
+      "tone": "TBD — write narrative based on existing Xero relationship history",
+      "claims_to_lead_with": [],
+      "framing_notes": "Auto-stubbed from xero_invoices on 2026-05-16. Replace this stub with a hand-written brief: who this is, what we have done together, what we should ask for next. See xero_summary for the relationship financials.",
+      "xero_summary": {
+        "paid_total_aud": 0,
+        "outstanding_ar_aud": 12150,
+        "last_invoice_date": "2026-01-02"
+      }
+    },
+    "qic-limited": {
+      "name": "QIC LIMITED",
+      "stage": "needs-writeup",
+      "needs_writeup": true,
+      "themes": [],
+      "tone": "TBD — write narrative based on existing Xero relationship history",
+      "claims_to_lead_with": [],
+      "framing_notes": "Auto-stubbed from xero_invoices on 2026-05-16. Replace this stub with a hand-written brief: who this is, what we have done together, what we should ask for next. See xero_summary for the relationship financials.",
+      "xero_summary": {
+        "paid_total_aud": 12000,
+        "outstanding_ar_aud": 0,
+        "last_invoice_date": "2025-06-30"
+      }
+    },
+    "blue-gum-station": {
+      "name": "Blue Gum Station",
+      "stage": "needs-writeup",
+      "needs_writeup": true,
+      "themes": [],
+      "tone": "TBD — write narrative based on existing Xero relationship history",
+      "claims_to_lead_with": [],
+      "framing_notes": "Auto-stubbed from xero_invoices on 2026-05-16. Replace this stub with a hand-written brief: who this is, what we have done together, what we should ask for next. See xero_summary for the relationship financials.",
+      "xero_summary": {
+        "paid_total_aud": 6000,
+        "outstanding_ar_aud": 0,
+        "last_invoice_date": "2026-03-14"
+      }
+    },
+    "jenn-brazier": {
+      "name": "Jenn Brazier",
+      "stage": "needs-writeup",
+      "needs_writeup": true,
+      "themes": [],
+      "tone": "TBD — write narrative based on existing Xero relationship history",
+      "claims_to_lead_with": [],
+      "framing_notes": "Auto-stubbed from xero_invoices on 2026-05-16. Replace this stub with a hand-written brief: who this is, what we have done together, what we should ask for next. See xero_summary for the relationship financials.",
+      "xero_summary": {
+        "paid_total_aud": 5862.34,
+        "outstanding_ar_aud": 0,
+        "last_invoice_date": "2025-07-17"
+      }
+    },
+    "bigmeats-qld-pty-ltd": {
+      "name": "Bigmeats Qld Pty Ltd",
+      "stage": "needs-writeup",
+      "needs_writeup": true,
+      "themes": [],
+      "tone": "TBD — write narrative based on existing Xero relationship history",
+      "claims_to_lead_with": [],
+      "framing_notes": "Auto-stubbed from xero_invoices on 2026-05-16. Replace this stub with a hand-written brief: who this is, what we have done together, what we should ask for next. See xero_summary for the relationship financials.",
+      "xero_summary": {
+        "paid_total_aud": 5720,
+        "outstanding_ar_aud": 0,
+        "last_invoice_date": "2025-02-09"
+      }
+    },
+    "malala-health-service-aboriginal-corporation": {
+      "name": "Mala’la Health Service Aboriginal Corporation",
+      "stage": "needs-writeup",
+      "needs_writeup": true,
+      "themes": [],
+      "tone": "TBD — write narrative based on existing Xero relationship history",
+      "claims_to_lead_with": [],
+      "framing_notes": "Auto-stubbed from xero_invoices on 2026-05-16. Replace this stub with a hand-written brief: who this is, what we have done together, what we should ask for next. See xero_summary for the relationship financials.",
+      "xero_summary": {
+        "paid_total_aud": 5434,
+        "outstanding_ar_aud": 0,
+        "last_invoice_date": "2025-10-21"
+      }
     }
   },
   "stages": {

@@ -46,6 +46,51 @@ const cronScripts = [
     cron_restart: '*/5 * * * *', // Every 5 minutes (near real-time)
   },
   {
+    // Phase 1 mirror — Supabase v_canonical_contacts → Notion DB (ADR 2026-05-14).
+    // Notion Workers admin CLI is blocked on this account, so we run the same
+    // sync as a regular PM2 cron. Same outcome, same DB, different runtime.
+    name: 'notion-canonical-contacts',
+    script: 'scripts/sync-canonical-contacts-to-notion.mjs',
+    args: '--apply',
+    cron_restart: '20 * * * *', // Hourly at :20 — offset from notion-sync at :*/5
+  },
+  {
+    // Weekly Monday 8:30am AEST digest — posts a "Weekly Digest YYYY-MM-DD"
+    // page under Mission Control summarising money / pipeline / stories /
+    // actions / cadence. The Notion AI-indexable surface for Ben + Nic to
+    // read first thing on a Monday.
+    name: 'notion-weekly-digest',
+    script: 'scripts/notion-weekly-digest.mjs',
+    args: '--apply',
+    cron_restart: '30 8 * * 1', // Weekly Monday 8:30am AEST
+  },
+  {
+    // Daily 7am AEST: refresh "🎯 Today's Focus" + sweep for drift signals
+    // (stuck opps · overdue invoices · FAIL cadence · easy-win storyteller
+    // transcripts) and auto-create new Action Items rows.
+    name: 'notion-daily-focus',
+    script: 'scripts/notion-daily-focus.mjs',
+    args: '--apply',
+    cron_restart: '0 7 * * *', // Daily 7am AEST
+  },
+  {
+    // Daily 7:30am AEST: phone-first daily focus push to Ben's Telegram.
+    // Runs after notion-daily-focus so the data is fresh.
+    name: 'telegram-daily-focus',
+    script: 'scripts/telegram-daily-focus.mjs',
+    args: '--apply',
+    cron_restart: '30 7 * * *', // Daily 7:30am AEST
+  },
+  {
+    // Nightly 11pm AEST: pull Notion Contacts changes (Tags + Projects)
+    // back to ghl_contacts so the next morning's outbound sync respects
+    // any tagging Ben did in Notion. Closes the round-trip.
+    name: 'notion-inbound-contacts',
+    script: 'scripts/sync-notion-inbound-contacts.mjs',
+    args: '--apply',
+    cron_restart: '0 23 * * *', // Daily 11pm AEST
+  },
+  {
     name: 'agent-learning',
     script: 'scripts/agent-learning-job.mjs',
     cron_restart: '0 2 * * *', // Daily 2am AEST (before storyteller sync)
@@ -169,6 +214,12 @@ const cronScripts = [
     name: 'daily-money-briefing',
     script: 'scripts/daily-money-briefing.mjs',
     cron_restart: '0 8 * * *', // Daily 8am AEST — full briefing (wins + pipeline + overdue + actions)
+  },
+  {
+    name: 'money-command-digest',
+    script: 'scripts/money-command-digest.mjs',
+    args: '--telegram',
+    cron_restart: '15 8 * * *', // Daily 8:15am AEST — snapshot /finance/command (coverage, drift, 90d incoming, lifetime) + send to Telegram
   },
   {
     name: 'telegram-money-alerts',

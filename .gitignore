@@ -130,3 +130,6 @@ apps/command-center/apps/
 !.claude/skills/sync-storytellers
 !.claude/skills/tag-transactions
 !.claude/skills/wiki
+
+# GHL alignment run logs (large, run-output; keep only .md audits)
+thoughts/shared/audits/*.log
