@@ -14,27 +14,32 @@
  * @param {string} message - Markdown-formatted message text
  * @param {Object} [opts]
  * @param {string} [opts.parseMode='Markdown'] - 'Markdown' or 'HTML'
+ * @param {Object} [opts.replyMarkup] - Telegram InlineKeyboardMarkup (use buildInlineKeyboard helper)
+ * @param {string|number} [opts.chatId] - Override TELEGRAM_CHAT_ID (e.g. per-owner DM)
  * @returns {Promise<boolean>} true if sent successfully
  */
-export async function sendTelegram(message, { parseMode = 'Markdown' } = {}) {
+export async function sendTelegram(message, { parseMode = 'Markdown', replyMarkup, chatId: chatIdOverride } = {}) {
   const botToken = process.env.TELEGRAM_BOT_TOKEN;
-  const chatId = process.env.TELEGRAM_CHAT_ID;
+  const chatId = chatIdOverride ?? process.env.TELEGRAM_CHAT_ID;
 
   if (!botToken || !chatId) {
     console.log('Telegram not configured (missing TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID)');
     return false;
   }
 
+  const body = {
+    chat_id: chatId,
+    text: message,
+    parse_mode: parseMode,
+    disable_web_page_preview: true,
+  };
+  if (replyMarkup) body.reply_markup = replyMarkup;
+
   try {
     const res = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        chat_id: chatId,
-        text: message,
-        parse_mode: parseMode,
-        disable_web_page_preview: true,
-      }),
+      body: JSON.stringify(body),
     });
 
     if (res.ok) {
@@ -49,4 +54,18 @@ export async function sendTelegram(message, { parseMode = 'Markdown' } = {}) {
     console.error('Telegram send error:', err.message);
     return false;
   }
+}
+
+/**
+ * Build a Telegram InlineKeyboardMarkup from a 2D array of {text, callbackData} buttons.
+ *
+ * @param {Array<Array<{text: string, callbackData: string}>>} rows
+ * @returns {{inline_keyboard: Array<Array<{text: string, callback_data: string}>>}}
+ */
+export function buildInlineKeyboard(rows) {
+  return {
+    inline_keyboard: rows.map((row) =>
+      row.map(({ text, callbackData }) => ({ text, callback_data: callbackData })),
+    ),
+  };
 }

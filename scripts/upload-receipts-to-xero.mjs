@@ -327,6 +327,20 @@ async function showStatus() {
   }
 }
 
+async function updateReceiptRow(receiptId, updates) {
+  const { error } = await supabase
+    .from('receipt_emails')
+    .update({
+      ...updates,
+      updated_at: new Date().toISOString(),
+    })
+    .eq('id', receiptId);
+
+  if (error) {
+    throw new Error(`receipt_emails update failed for ${receiptId}: ${error.message}`);
+  }
+}
+
 // ============================================================================
 // MAIN: UPLOAD MATCHED RECEIPTS
 // ============================================================================
@@ -402,13 +416,13 @@ async function uploadMatchedReceipts() {
         const xStatus = entity?.Status;
         if (xStatus === 'DELETED' || xStatus === 'VOIDED') {
           log(`  SKIP: Xero entity is ${xStatus} — cannot attach. Resetting to captured.`);
-          await supabase.from('receipt_emails').update({
+          await updateReceiptRow(receipt.id, {
             status: 'captured',
             xero_bank_transaction_id: null,
             xero_invoice_id: null,
             xero_transaction_id: null,
             error_message: `Xero entity ${entityId} is ${xStatus} — match invalidated`,
-          }).eq('id', receipt.id);
+          });
           // Also fix the mirror so the matcher stops re-matching to this entity
           if (entityType === 'BankTransactions') {
             await supabase.from('xero_transactions')
@@ -425,10 +439,9 @@ async function uploadMatchedReceipts() {
       const existing = await getExistingAttachments(entityId, entityType);
       if (existing && existing.length > 0) {
         log(`  SKIP: Transaction already has ${existing.length} attachment(s)`);
-        await supabase.rpc('update_receipt_match', {
-          receipt_id: receipt.id,
-          new_status: 'uploaded',
-          new_error_message: `Already had ${existing.length} attachment(s) — skipped duplicate upload`,
+        await updateReceiptRow(receipt.id, {
+          status: 'uploaded',
+          error_message: `Already had ${existing.length} attachment(s) — skipped duplicate upload`,
         });
         skipped++;
         await sleep(XERO_DELAY_MS);
@@ -457,11 +470,10 @@ async function uploadMatchedReceipts() {
       );
 
       // Mark as uploaded
-      await supabase.rpc('update_receipt_match', {
-        receipt_id: receipt.id,
-        new_status: 'uploaded',
-        new_error_message: null,
-        new_retry_count: receipt.retry_count || 0,
+      await updateReceiptRow(receipt.id, {
+        status: 'uploaded',
+        error_message: null,
+        retry_count: receipt.retry_count || 0,
       });
 
       const attachmentId = result?.Attachments?.[0]?.AttachmentID || 'ok';
@@ -473,11 +485,10 @@ async function uploadMatchedReceipts() {
       const retryCount = (receipt.retry_count || 0) + 1;
       const newStatus = retryCount >= 3 ? 'failed' : 'matched'; // retry if < 3 attempts
 
-      await supabase.rpc('update_receipt_match', {
-        receipt_id: receipt.id,
-        new_status: newStatus,
-        new_error_message: err.message,
-        new_retry_count: retryCount,
+      await updateReceiptRow(receipt.id, {
+        status: newStatus,
+        error_message: err.message,
+        retry_count: retryCount,
       });
 
       failed++;

@@ -1,0 +1,257 @@
+{
+  "_meta": {
+    "description": "Dext setup sections and routing rules for ACT bookkeeping cleanup and future ACT Pty flow.",
+    "version": "1.0.0",
+    "updated": "2026-05-15",
+    "principle": "Dext captures evidence; Xero remains the accounting system of record; Supabase/workbench is the review layer."
+  },
+  "global_settings": {
+    "legacy_cleanup_mode": {
+      "auto_publish_default": false,
+      "archive_after_export": false,
+      "publish_destination_for_paid_card_spend": "Bank Accounts / Spend Money",
+      "publish_destination_for_unpaid_supplier_invoices": "Purchases / Bills",
+      "hold_if_unsure": true,
+      "notes": [
+        "Do not bulk publish historical items until they are classified against Xero bank lines.",
+        "Do not publish zero-total, refund-only, duplicate, unknown supplier, or already-reconciled documents.",
+        "For NAB Visa ACT #8815 spend, prefer paid spend-money/bank-account destination, not unpaid bills."
+      ]
+    },
+    "new_act_pty_mode": {
+      "auto_publish_default": false,
+      "enable_auto_publish_after_sample_size": 3,
+      "sample_requirement": "At least three clean same-vendor same-destination publishes with no phantom bills.",
+      "notes": [
+        "Start new ACT Pty Dext account/client with auto-publish off.",
+        "Only enable auto-publish for predictable SaaS/card charges after Xero sync proves the mapping is clean.",
+        "Keep travel, contractors, materials, assets, and foreign currency on manual review."
+      ]
+    }
+  },
+  "dext_fields_to_configure": [
+    {
+      "field": "Payment Method",
+      "required": true,
+      "values": [
+        {
+          "name": "NAB Visa ACT #8815",
+          "use_for": "ACT card spend already paid by business card",
+          "xero_destination": "Bank Accounts / Spend Money",
+          "default_publish": "manual_review"
+        },
+        {
+          "name": "Personal paid - Ben",
+          "use_for": "Ben paid personally and needs reimbursement/expense claim review",
+          "xero_destination": "Expense Claim / reimbursement review",
+          "default_publish": "hold"
+        },
+        {
+          "name": "Personal paid - Nic",
+          "use_for": "Nic paid personally and needs reimbursement/expense claim review",
+          "xero_destination": "Expense Claim / reimbursement review",
+          "default_publish": "hold"
+        },
+        {
+          "name": "Bank transfer / invoice",
+          "use_for": "Supplier invoices that are not card-paid",
+          "xero_destination": "Purchases / Bills only if genuinely unpaid or bill workflow is intended",
+          "default_publish": "manual_review"
+        }
+      ]
+    },
+    {
+      "field": "Project Tracking",
+      "required": true,
+      "values": [
+        { "code": "ACT-IN", "name": "ACT Infrastructure", "use_for": "core software, internet, AI tools, systems, general infrastructure" },
+        { "code": "ACT-HV", "name": "The Harvest Witta", "use_for": "Harvest site, Witta/Maleny property improvements, farm build materials" },
+        { "code": "ACT-FM", "name": "The Farm", "use_for": "farm operations, animal welfare, local farm supplies and fuel where not Harvest capital works" },
+        { "code": "ACT-GD", "name": "Goods", "use_for": "Goods build, manufacturing, containers, marketplace, product/asset work" },
+        { "code": "ACT-JH", "name": "JusticeHub", "use_for": "justice travel, research, civic/youth justice work" },
+        { "code": "ACT-CORE", "name": "ACT Regenerative Studio", "use_for": "studio operations, accounting, admin, general ACT work that is not infrastructure SaaS" },
+        { "code": "ACT-EL", "name": "Empathy Ledger", "use_for": "storytelling, media capture, empathy ledger platform and content work" },
+        { "code": "ACT-PS", "name": "PICC On Country Photo Studio", "use_for": "photo studio, camera/print/creative equipment for PICC work" },
+        { "code": "ACT-MY", "name": "Mounty Yarns", "use_for": "Mounty Yarns related materials, events, travel, production" },
+        { "code": "ACT-OO", "name": "Oonchiumpa", "use_for": "Oonchiumpa consultancy/service costs" },
+        { "code": "ASK_USER", "name": "Ask Ben/Nic", "use_for": "travel, meals, hotels, large purchases, ambiguous locations, shared trips" },
+        { "code": "SL_REVIEW", "name": "Standard Ledger Review", "use_for": "BAS/tax treatment, insurance, donations, write-offs, duplicate bills, capitalisation" }
+      ]
+    },
+    {
+      "field": "Business Division",
+      "required": false,
+      "values": [
+        { "name": "ACT Pty", "use_for": "future clean entity flow" },
+        { "name": "Legacy ACT/Nic Dext cleanup", "use_for": "current export and historical Dext cleanup only" },
+        { "name": "Personal/Reimbursement", "use_for": "items paid personally or not clearly company card spend" }
+      ]
+    }
+  ],
+  "category_defaults": [
+    {
+      "dext_category": "485 - Subscriptions",
+      "default_project": "ACT-IN",
+      "tax_rate": "GST on Expenses unless overseas/zero-GST invoice",
+      "rd_default": "R&D supporting",
+      "publish_policy": "auto_publish_after_vendor_proven",
+      "notes": "Good auto-publish candidates after test publishes: OpenAI, Anthropic/Claude, Supabase, Webflow, Vercel, Bitwarden, Railway, HighLevel, Dext, Notion."
+    },
+    {
+      "dext_category": "489 - Telephone & Internet",
+      "default_project": "ACT-IN",
+      "tax_rate": "GST on Expenses if Australian supplier",
+      "rd_default": "R&D supporting",
+      "publish_policy": "manual_review",
+      "notes": "Belong/Starlink may be ACT-IN, ACT-HV, ACT-FM, or A Curious Tractor depending site/use."
+    },
+    {
+      "dext_category": "446 - Materials & Supplies",
+      "default_project": "ASK_USER",
+      "tax_rate": "GST on Expenses",
+      "rd_default": "review",
+      "publish_policy": "manual_review",
+      "notes": "Usually ACT-HV, ACT-FM, ACT-GD, ACT-PS, or ACT-MY based on supplier/location/job."
+    },
+    {
+      "dext_category": "750 - Plant & Equipment",
+      "default_project": "ASK_USER",
+      "tax_rate": "GST on Expenses",
+      "rd_default": "review",
+      "publish_policy": "manual_review",
+      "notes": "Likely asset/capital treatment. Do not auto-publish without Standard Ledger review for high-value items."
+    },
+    {
+      "dext_category": "432 - Hire Expenses",
+      "default_project": "ASK_USER",
+      "tax_rate": "GST on Expenses",
+      "rd_default": "review",
+      "publish_policy": "manual_review",
+      "notes": "Kennards/hire usually project-specific and must match job/trip."
+    },
+    {
+      "dext_category": "486 - Sub-contractors",
+      "default_project": "ASK_USER",
+      "tax_rate": "Check invoice GST registration",
+      "rd_default": "review",
+      "publish_policy": "manual_review",
+      "notes": "Never auto-publish; project, GST, and payable/payment state need review."
+    },
+    {
+      "dext_category": "493 - Travel - National",
+      "default_project": "ASK_USER",
+      "tax_rate": "GST on Expenses when domestic taxable",
+      "rd_default": "review",
+      "publish_policy": "manual_review",
+      "notes": "Use calendar/trip context. Qantas/Virgin/Uber/Avis/Budget/Airbnb/Booking stay manual."
+    },
+    {
+      "dext_category": "494 - Travel - International (0%)",
+      "default_project": "ASK_USER",
+      "tax_rate": "No GST / BAS excluded as advised",
+      "rd_default": "review",
+      "publish_policy": "manual_review",
+      "notes": "Foreign currency and overseas travel need project/business-purpose review."
+    },
+    {
+      "dext_category": "421 - Light meals & refreshments",
+      "default_project": "ASK_USER",
+      "tax_rate": "GST on Expenses if Australian taxable receipt",
+      "rd_default": "review",
+      "publish_policy": "manual_review",
+      "notes": "Keep receipt evidence even under threshold; classify by trip/event/business purpose."
+    },
+    {
+      "dext_category": "449 - MV - Fuel & Oil",
+      "default_project": "ASK_USER",
+      "tax_rate": "GST on Expenses",
+      "rd_default": "review",
+      "publish_policy": "manual_review",
+      "notes": "Project depends on vehicle/trip/location; Maleny/Witta often ACT-HV or ACT-FM."
+    },
+    {
+      "dext_category": "450 - MV - Registration & Insurance",
+      "default_project": "SL_REVIEW",
+      "tax_rate": "Check GST treatment",
+      "rd_default": "not R&D unless directly justified",
+      "publish_policy": "manual_review",
+      "notes": "Can be large and entity/vehicle-specific."
+    },
+    {
+      "dext_category": "467 - Rates & Water (0%)",
+      "default_project": "ACT-HV",
+      "tax_rate": "No GST / BAS excluded as advised",
+      "rd_default": "not R&D unless directly justified",
+      "publish_policy": "manual_review",
+      "notes": "Likely Harvest/property costs; confirm property and entity."
+    },
+    {
+      "dext_category": "433 - Insurance",
+      "default_project": "SL_REVIEW",
+      "tax_rate": "Check stamp duty/GST split",
+      "rd_default": "not R&D unless directly justified",
+      "publish_policy": "manual_review",
+      "notes": "Insurance often has mixed GST/stamp duty treatment."
+    }
+  ],
+  "supplier_defaults": [
+    {
+      "suppliers": ["OpenAI", "Anthropic", "Claude.AI", "Supabase", "Webflow", "Vercel", "Railway Corporation", "Bitwarden", "HighLevel", "Dext Software", "Notion Labs", "Firecrawl", "Cognition AI", "X Global LLC", "Google Australia", "RealtimeBoard", "Shipstation"],
+      "category": "485 - Subscriptions",
+      "project": "ACT-IN",
+      "payment_method": "NAB Visa ACT #8815",
+      "publish_destination": "Bank Accounts / Spend Money",
+      "auto_publish": "after three clean test publishes",
+      "rd_default": "R&D supporting"
+    },
+    {
+      "suppliers": ["Qantas", "Qantas Group Accommodation", "Virgin Australia", "Uber", "Avis", "Budget", "Budget Car and Truck Rental (NT)", "Thrifty", "Airbnb", "Booking.com", "Greyhound Australia", "Taxi Receipt", "GoGet", "Holafly"],
+      "category": "493 - Travel - National / 494 - Travel - International",
+      "project": "ASK_USER",
+      "payment_method": "NAB Visa ACT #8815",
+      "publish_destination": "Bank Accounts / Spend Money only after matching bank line",
+      "auto_publish": false,
+      "rd_default": "review"
+    },
+    {
+      "suppliers": ["Bunnings Warehouse", "Maleny Hardware And Rural Supplies", "MALENY LANDSCAPING SUPPLIES", "Kennards Hire", "Liberty Maleny", "BP", "Reddy Express", "The Bolt King", "Carbatec Brisbane", "Kennedy's", "Edmonds Landscaping Supplies", "Allclass", "Container Options", "Telford Smith Engineering", "Bionic Self Storage", "Hatch Electrical"],
+      "category": "446 - Materials & Supplies / 432 - Hire / 750 - Plant & Equipment",
+      "project": "ASK_USER, often ACT-HV/ACT-FM/ACT-GD",
+      "payment_method": "NAB Visa ACT #8815 or supplier invoice",
+      "publish_destination": "Manual review",
+      "auto_publish": false,
+      "rd_default": "review"
+    },
+    {
+      "suppliers": ["Defy Manufacturing", "Defy", "BOE Design", "DNP Australia", "Centre Canvas And Upholstery"],
+      "category": "Project Materials / Printing & Stationery / Plant & Equipment",
+      "project": "ACT-GD or ACT-PS depending item",
+      "payment_method": "review",
+      "publish_destination": "Manual review",
+      "auto_publish": false,
+      "rd_default": "review"
+    },
+    {
+      "suppliers": ["Sophie Deirdre Hickey", "Joseph Kirmos", "Oonchiumpa Consultancy and Services", "The Matnic Trust", "Manbarra Operations"],
+      "category": "486 - Sub-contractors",
+      "project": "ASK_USER",
+      "payment_method": "review",
+      "publish_destination": "Purchases/Bills only if genuinely unpaid; otherwise match paid bank line",
+      "auto_publish": false,
+      "rd_default": "review"
+    }
+  ],
+  "never_auto_publish": [
+    "unknown supplier",
+    "blank supplier",
+    "zero total",
+    "refund-only or negative amount",
+    "foreign currency unless exact matched",
+    "personal/reimbursement",
+    "duplicate image or duplicate Dext receipt ID",
+    "already reconciled in Xero",
+    "large asset or capital item",
+    "insurance or rates needing GST split",
+    "anything over $500 unless recurring SaaS"
+  ]
+}

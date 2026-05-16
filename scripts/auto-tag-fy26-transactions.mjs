@@ -231,6 +231,26 @@ function checkRdEligible(projectCode, contactName) {
   return false;
 }
 
+async function fetchAllRows(buildQuery, label) {
+  const rows = [];
+  const pageSize = 1000;
+
+  for (let from = 0; ; from += pageSize) {
+    const { data, error } = await buildQuery()
+      .range(from, from + pageSize - 1);
+
+    if (error) {
+      throw new Error(`${label}: ${error.message}`);
+    }
+    if (!data || data.length === 0) break;
+
+    rows.push(...data);
+    if (data.length < pageSize) break;
+  }
+
+  return rows;
+}
+
 // ============================================================================
 // MAIN
 // ============================================================================
@@ -246,18 +266,16 @@ async function main() {
   // Load vendor rules from DB
   await loadVendorRules();
 
-  // Fetch all FY26 transactions
-  const { data: allTxns, error: allErr } = await supabase
-    .from('xero_transactions')
-    .select('id, xero_transaction_id, contact_name, type, total, date, project_code, project_code_source, line_items')
-    .gte('date', FY26_START)
-    .lte('date', FY26_END)
-    .order('date', { ascending: true });
-
-  if (allErr) {
-    console.error('Failed to fetch transactions:', allErr);
-    process.exit(1);
-  }
+  // Fetch all FY26 transactions. Supabase defaults to 1,000 rows, so paginate.
+  const allTxns = await fetchAllRows(
+    () => supabase
+      .from('xero_transactions')
+      .select('id, xero_transaction_id, contact_name, type, total, date, project_code, project_code_source, line_items')
+      .gte('date', FY26_START)
+      .lte('date', FY26_END)
+      .order('date', { ascending: true }),
+    'xero_transactions FY26',
+  );
 
   const total = allTxns.length;
   const alreadyTagged = allTxns.filter(t => t.project_code && t.project_code !== '');

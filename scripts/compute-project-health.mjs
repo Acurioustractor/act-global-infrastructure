@@ -46,34 +46,54 @@ if (loadError) {
 
 const thirtyDaysAgo = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString();
 
+async function fetchAllRows(buildQuery, label) {
+  const rows = [];
+  const pageSize = 1000;
+
+  for (let from = 0; ; from += pageSize) {
+    const { data, error } = await buildQuery()
+      .range(from, from + pageSize - 1);
+
+    if (error) {
+      throw new Error(`${label}: ${error.message}`);
+    }
+    if (!data || data.length === 0) break;
+
+    rows.push(...data);
+    if (data.length < pageSize) break;
+  }
+
+  return rows;
+}
+
 async function computeProjectHealth(code, project) {
   // Parallel fetch all metrics
   const [
-    txResult,
-    invResult,
-    oppsResult,
+    transactions,
+    invoices,
+    opportunities,
     contactsResult,
     emailsResult,
-    grantsResult,
-    subsResult,
+    grants,
+    subs,
   ] = await Promise.all([
     // Transactions
-    supabase
+    fetchAllRows(() => supabase
       .from('xero_transactions')
       .select('total, type')
-      .eq('project_code', code),
+      .eq('project_code', code), `xero_transactions:${code}`),
 
     // Invoices
-    supabase
+    fetchAllRows(() => supabase
       .from('xero_invoices')
       .select('total, amount_due, type')
-      .eq('project_code', code),
+      .eq('project_code', code), `xero_invoices:${code}`),
 
     // GHL opportunities
-    supabase
+    fetchAllRows(() => supabase
       .from('ghl_opportunities')
       .select('monetary_value, status')
-      .eq('project_code', code),
+      .eq('project_code', code), `ghl_opportunities:${code}`),
 
     // GHL contacts (by tag)
     supabase
@@ -88,24 +108,18 @@ async function computeProjectHealth(code, project) {
       .contains('project_codes', [code]),
 
     // Grant applications
-    supabase
+    fetchAllRows(() => supabase
       .from('grant_applications')
       .select('status, amount_requested, outcome_amount')
-      .eq('project_code', code),
+      .eq('project_code', code), `grant_applications:${code}`),
 
     // Subscriptions
-    supabase
+    fetchAllRows(() => supabase
       .from('subscriptions')
       .select('amount')
       .contains('project_codes', [code])
-      .eq('account_status', 'active'),
+      .eq('account_status', 'active'), `subscriptions:${code}`),
   ]);
-
-  const transactions = txResult.data || [];
-  const invoices = invResult.data || [];
-  const opportunities = oppsResult.data || [];
-  const grants = grantsResult.data || [];
-  const subs = subsResult.data || [];
 
   // Financial metrics
   let income = 0, expenses = 0;

@@ -201,6 +201,14 @@ async function main() {
     process.exit(1);
   }
 
+  if (dryRun) {
+    console.log('\nDry run: not testing refresh tokens against Xero.');
+    console.log('Reason: Xero rotates refresh tokens on every successful refresh, so a true');
+    console.log('read-only dry run would invalidate the working token without persisting it.');
+    console.log('Run without --dry-run to diagnose and persist the refreshed token safely.');
+    return;
+  }
+
   console.log('\nTesting each candidate against Xero...');
   let working = null;
   for (const c of unique) {

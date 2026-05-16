@@ -13,9 +13,12 @@
  *   node scripts/capture-receipts.mjs --days 90    # Full backfill
  *   node scripts/capture-receipts.mjs --dry-run    # Preview without saving
  *   node scripts/capture-receipts.mjs --verbose    # Detailed output
+ *   node scripts/capture-receipts.mjs --recapture-forwarded-missing  # Do not treat old Dext forwards as fully captured
  *   node scripts/capture-receipts.mjs --mailbox benjamin@act.place  # Single mailbox
+ *   node scripts/capture-receipts.mjs --user accounts@act.place      # Alias for --mailbox
  */
 
+import './lib/load-env.mjs';
 import { execSync } from 'child_process';
 import { google } from 'googleapis';
 import { createClient } from '@supabase/supabase-js';
@@ -24,12 +27,19 @@ import { recordSyncStatus } from './lib/sync-status.mjs';
 const args = process.argv.slice(2);
 const DRY_RUN = args.includes('--dry-run');
 const VERBOSE = args.includes('--verbose');
+const RECAPTURE_FORWARDED_MISSING = args.includes('--recapture-forwarded-missing');
 const daysBack = (() => {
   const idx = args.indexOf('--days');
   return idx !== -1 ? parseInt(args[idx + 1], 10) : 3;
 })();
 const singleMailbox = (() => {
   const idx = args.indexOf('--mailbox');
+  if (idx !== -1) return args[idx + 1];
+  const userIdx = args.indexOf('--user');
+  return userIdx !== -1 ? args[userIdx + 1] : null;
+})();
+const explicitMailboxes = (() => {
+  const idx = args.indexOf('--mailboxes');
   return idx !== -1 ? args[idx + 1] : null;
 })();
 
@@ -68,7 +78,7 @@ function loadSecrets() {
 
 function getSecret(name) {
   const secrets = loadSecrets();
-  return secrets[name] || process.env[name];
+  return process.env[name] || secrets[name];
 }
 
 async function getGmailForUser(userEmail) {
@@ -91,6 +101,7 @@ async function getGmailForUser(userEmail) {
 
 function getDelegatedUsers() {
   if (singleMailbox) return [singleMailbox];
+  if (explicitMailboxes) return explicitMailboxes.split(',').map(e => e.trim()).filter(Boolean);
   const multiUser = getSecret('GOOGLE_DELEGATED_USERS');
   if (multiUser) return multiUser.split(',').map(e => e.trim()).filter(Boolean);
   const singleUser = getSecret('GOOGLE_DELEGATED_USER');
@@ -157,6 +168,7 @@ function loadVendorPatterns() {
     { name: 'Audible', from: ['audible.com', 'audible.com.au'] },
     // === Utilities & Insurance ===
     { name: 'Telstra', from: ['telstra.com', 'telstra.com.au'] },
+    { name: 'Belong', from: ['belong.com.au'] },
     { name: 'AGL', from: ['agl.com.au'] },
     { name: 'Origin Energy', from: ['originenergy.com.au'] },
     { name: 'RACQ', from: ['racq.com.au'] },
@@ -239,6 +251,10 @@ function isLikelyReceipt(subject, from) {
   const subjectLower = (subject || '').toLowerCase();
   const fromLower = (from || '').toLowerCase();
 
+  if (subjectLower.includes('payment is due soon') || subjectLower.includes('payment due soon')) {
+    return false;
+  }
+
   // Strong positive signals — definitely a receipt
   const strongReceiptSignals = [
     'receipt', 'invoice', 'tax invoice', 'your payment', 'payment confirmed',
@@ -266,6 +282,7 @@ function isLikelyReceipt(subject, from) {
     'how to set up', 'how to get', 'save time', 'organize your',
     'invite your', 'to do today', 'top tips', 'data import',
     'overdue acquittal', 'urgent - overdue',
+    'payment is due soon', 'payment due soon',
   ];
   if (marketingSignals.some(s => subjectLower.includes(s))) return false;
 
@@ -283,7 +300,7 @@ function isLikelyReceipt(subject, from) {
 // Vendors that send HTML receipts (no PDF attachment) — need special handling
 const HTML_RECEIPT_VENDORS = new Set([
   'uber', 'apple', 'telstra', 'garmin', 'obsidian',
-  'highlevel', 'mighty networks', 'docplay', 'audible',
+  'belong', 'highlevel', 'mighty networks', 'docplay', 'audible',
 ]);
 
 function isHtmlReceiptVendor(vendorName) {
@@ -495,8 +512,10 @@ async function uploadToStorage(supabase, filePath, fileBuffer, contentType) {
 // ============================================================================
 
 async function getAlreadyCaptured(supabase) {
-  // Fetch all gmail_message_ids from receipt_emails + dext_forwarded_emails
+  // Fetch all gmail_message_ids from receipt_emails. Old Dext forward logs are
+  // only a transport audit; they do not prove a usable receipt/file exists.
   const ids = new Set();
+  const receiptEmailIds = new Set();
 
   // receipt_emails (new pipeline)
   let page = 0;
@@ -508,16 +527,24 @@ async function getAlreadyCaptured(supabase) {
       .not('gmail_message_id', 'is', null)
       .range(page * PAGE_SIZE, (page + 1) * PAGE_SIZE - 1);
     if (error) break;
-    for (const row of data || []) ids.add(row.gmail_message_id);
+    for (const row of data || []) {
+      ids.add(row.gmail_message_id);
+      receiptEmailIds.add(row.gmail_message_id);
+    }
     if (!data || data.length < PAGE_SIZE) break;
     page++;
   }
 
-  // dext_forwarded_emails (old pipeline — don't recapture these)
-  const { data: forwarded } = await supabase
-    .from('dext_forwarded_emails')
-    .select('gmail_message_id');
-  for (const row of forwarded || []) ids.add(row.gmail_message_id);
+  if (!RECAPTURE_FORWARDED_MISSING) {
+    // dext_forwarded_emails (old pipeline) - by default, keep historical
+    // behaviour and do not recapture forwarded messages.
+    const { data: forwarded } = await supabase
+      .from('dext_forwarded_emails')
+      .select('gmail_message_id');
+    for (const row of forwarded || []) ids.add(row.gmail_message_id);
+  }
+
+  ids.receiptEmailCount = receiptEmailIds.size;
 
   return ids;
 }
@@ -531,6 +558,9 @@ async function main() {
   log('=== Receipt Capture (Gmail → Supabase) ===');
   log(`Scanning last ${daysBack} days`);
   if (DRY_RUN) log('DRY RUN — nothing will be saved');
+  if (RECAPTURE_FORWARDED_MISSING) {
+    log('Recapture mode: Dext-forwarded emails without receipt_emails rows will be scanned again');
+  }
 
   const supabase = getSupabase();
   const users = getDelegatedUsers();
@@ -632,9 +662,10 @@ async function main() {
         if (attachments.length === 0) {
           // No PDF attachment — try HTML receipt extraction for known vendors
           let htmlAmount = amount;
+          let htmlPart = null;
           if (isHtmlReceiptVendor(vendor)) {
             // Decode email body HTML
-            const htmlPart = findHtmlPart(fullMessage.payload);
+            htmlPart = findHtmlPart(fullMessage.payload);
             if (htmlPart) {
               const htmlData = extractReceiptFromHtml(htmlPart);
               if (htmlData?.amount && !htmlAmount) htmlAmount = htmlData.amount;
@@ -646,6 +677,16 @@ async function main() {
           totals.noAttachment++;
 
           if (!DRY_RUN) {
+            let uploadedPath = null;
+            let htmlBuffer = null;
+            let htmlFilename = null;
+            if (htmlPart && htmlAmount) {
+              htmlBuffer = Buffer.from(htmlPart, 'utf8');
+              htmlFilename = `${(vendor || 'receipt').replace(/[^a-zA-Z0-9._-]/g, '_')}-${msg.id}.html`;
+              const storagePath = `${userEmail}/${new Date().getFullYear()}/${msg.id}/${htmlFilename}`;
+              uploadedPath = await uploadToStorage(supabase, storagePath, htmlBuffer, 'text/html');
+            }
+
             await supabase.from('receipt_emails').upsert({
               gmail_message_id: msg.id,
               mailbox: userEmail,
@@ -654,6 +695,10 @@ async function main() {
               received_at: msg.date ? new Date(msg.date).toISOString() : null,
               vendor_name: vendor,
               amount_detected: htmlAmount,
+              attachment_url: uploadedPath ? `receipt-attachments/${uploadedPath}` : null,
+              attachment_filename: htmlFilename,
+              attachment_content_type: uploadedPath ? 'text/html' : null,
+              attachment_size_bytes: htmlBuffer?.length || null,
               source: 'gmail',
               status: 'captured',
             }, { onConflict: 'gmail_message_id' });

@@ -1,0 +1,230 @@
+{
+  "generatedAt": "2026-05-16T07:43:55.427Z",
+  "sources": {
+    "wiki": {
+      "path": "wiki/finance/compliance-calendar.md",
+      "count": 10
+    },
+    "grants": {
+      "table": "ghl_opportunities",
+      "count": 0
+    }
+  },
+  "counters": {
+    "critical": 0,
+    "high": 0,
+    "medium": 2,
+    "filed": 1
+  },
+  "obligations": [
+    {
+      "id": "sole-trader-pty-cutover",
+      "title": "Sole trader → Pty Ltd cutover",
+      "type": "ONE-OFF",
+      "entity": "both",
+      "due_date": "2026-06-30",
+      "status": "pending",
+      "lead_times_days": [
+        60,
+        30,
+        14,
+        7,
+        1
+      ],
+      "notes": "All commercial activity must transfer from Nicholas Marchesi\nsole trader (ABN 21 591 780 066) to A Curious Tractor Pty Ltd\n(ACN 697 347 676) by 30 Jun 2026. Canonical checklist at\nthoughts/shared/plans/act-entity-migration-checklist-2026-06-30.md\nwith ~50 line items: Xero new org, GHL re-keying, contract\nnovations, Stripe re-onboarding, etc.\n",
+      "source": "wiki",
+      "owner": "ben",
+      "earliest_filable": null,
+      "last_filed_at": null,
+      "days_until_due": 45,
+      "severity": "medium",
+      "at_risk": true
+    },
+    {
+      "id": "bas-q4-fy25-26",
+      "title": "BAS Q4 FY25-26 (Apr-Jun 2026)",
+      "type": "BAS",
+      "entity": "sole-trader",
+      "due_date": "2026-07-28",
+      "status": "pending",
+      "lead_times_days": [
+        30,
+        7,
+        1
+      ],
+      "notes": "LAST sole-trader BAS. Cutover to Pty happens 30 Jun 2026, so\nthis quarter is split: Apr-Jun sole-trader BAS, Pty Ltd starts\nits own BAS lifecycle from Q1 FY26-27 (Jul-Sep 2026).\n",
+      "source": "wiki",
+      "owner": "ben",
+      "earliest_filable": null,
+      "last_filed_at": null,
+      "days_until_due": 73,
+      "severity": "medium",
+      "at_risk": true
+    },
+    {
+      "id": "bas-q3-fy25-26",
+      "title": "BAS Q3 FY25-26 (Jan-Mar 2026)",
+      "type": "BAS",
+      "entity": "sole-trader",
+      "due_date": "2026-04-28",
+      "status": "filed",
+      "last_filed_at": "2026-04-24",
+      "lead_times_days": [
+        30,
+        7,
+        1
+      ],
+      "notes": "GST + PAYG instalment. Lodged via tax agent.\n",
+      "source": "wiki",
+      "owner": "ben",
+      "earliest_filable": null,
+      "days_until_due": -18,
+      "severity": null,
+      "at_risk": false
+    },
+    {
+      "id": "bas-q1-fy26-27-pty",
+      "title": "BAS Q1 FY26-27 (Jul-Sep 2026) — FIRST Pty Ltd BAS",
+      "type": "BAS",
+      "entity": "pty-ltd",
+      "due_date": "2026-10-28",
+      "status": "pending",
+      "lead_times_days": [
+        30,
+        7,
+        1
+      ],
+      "notes": "First BAS under A Curious Tractor Pty Ltd. Confirms ABN\nregistration is working for GST/PAYG.\n",
+      "source": "wiki",
+      "owner": "ben",
+      "earliest_filable": null,
+      "last_filed_at": null,
+      "days_until_due": 165,
+      "severity": null,
+      "at_risk": false
+    },
+    {
+      "id": "ato-annual-fy25-26-sole-trader",
+      "title": "ATO annual return FY25-26 (sole trader, Nicholas Marchesi)",
+      "type": "ATO",
+      "entity": "sole-trader",
+      "due_date": "2026-10-31",
+      "status": "pending",
+      "lead_times_days": [
+        60,
+        30,
+        7
+      ],
+      "notes": "Standard self-assessment. With tax agent extension can push\nto ~May 2027. Covers Jul 2025 – Jun 2026 sole-trader activity.\n",
+      "source": "wiki",
+      "owner": "ben",
+      "earliest_filable": null,
+      "last_filed_at": null,
+      "days_until_due": 168,
+      "severity": null,
+      "at_risk": false
+    },
+    {
+      "id": "acnc-annual-aiks-tractor",
+      "title": "ACNC Annual Information Statement — A Kind Tractor Ltd",
+      "type": "ACNC",
+      "entity": "a-kind-tractor-ltd",
+      "due_date": "2026-12-31",
+      "status": "pending",
+      "lead_times_days": [
+        60,
+        14
+      ],
+      "notes": "A Kind Tractor Ltd (ACN 669 029 341) is a registered charity\nbut dormant + NOT DGR. Annual statement required even when\ndormant. Lodge by 31 Dec for FY ending 30 Jun.\n",
+      "source": "wiki",
+      "owner": "ben",
+      "earliest_filable": null,
+      "last_filed_at": null,
+      "days_until_due": 229,
+      "severity": null,
+      "at_risk": false
+    },
+    {
+      "id": "bas-q2-fy26-27-pty",
+      "title": "BAS Q2 FY26-27 (Oct-Dec 2026)",
+      "type": "BAS",
+      "entity": "pty-ltd",
+      "due_date": "2027-02-28",
+      "status": "pending",
+      "lead_times_days": [
+        30,
+        7,
+        1
+      ],
+      "source": "wiki",
+      "owner": "ben",
+      "earliest_filable": null,
+      "last_filed_at": null,
+      "days_until_due": 288,
+      "severity": null,
+      "at_risk": false
+    },
+    {
+      "id": "ato-annual-fy25-26-pty",
+      "title": "ATO annual return FY25-26 (Pty Ltd partial year)",
+      "type": "ATO",
+      "entity": "pty-ltd",
+      "due_date": "2027-02-28",
+      "status": "pending",
+      "lead_times_days": [
+        60,
+        30,
+        7
+      ],
+      "notes": "Pty Ltd registered 2026-04-24, so FY25-26 covers only the\nApr-Jun 2026 stub. Full FY26-27 return due 2028.\n",
+      "source": "wiki",
+      "owner": "ben",
+      "earliest_filable": null,
+      "last_filed_at": null,
+      "days_until_due": 288,
+      "severity": null,
+      "at_risk": false
+    },
+    {
+      "id": "asic-annual-act-pty-1st",
+      "title": "ASIC annual review — A Curious Tractor Pty Ltd (first)",
+      "type": "ASIC",
+      "entity": "pty-ltd",
+      "due_date": "2027-04-24",
+      "status": "pending",
+      "lead_times_days": [
+        30,
+        7
+      ],
+      "notes": "Registered 2026-04-24. Annual review due 2 months after each\nanniversary. ASIC sends a Company Statement; verify and pay\nthe annual review fee.\n",
+      "source": "wiki",
+      "owner": "ben",
+      "earliest_filable": null,
+      "last_filed_at": null,
+      "days_until_due": 343,
+      "severity": null,
+      "at_risk": false
+    },
+    {
+      "id": "rd-claim-fy25-26",
+      "title": "R&D Tax Incentive claim FY25-26 ($200K refund)",
+      "type": "R&D",
+      "entity": "pty-ltd",
+      "earliest_filable": "2026-07-01",
+      "due_date": "2027-04-30",
+      "status": "pending",
+      "lead_times_days": [
+        60,
+        14
+      ],
+      "expected_refund_aud": 200000,
+      "notes": "Path C locked 2026-04-27. FY24-25 forfeited (sole-trader period,\nineligible). Lodge via A Curious Tractor Pty Ltd Jul 2026 –\n30 Apr 2027. Evidence pack lives at thoughts/shared/rd-pack-fy26/.\n",
+      "source": "wiki",
+      "owner": "ben",
+      "last_filed_at": null,
+      "days_until_due": 349,
+      "severity": null,
+      "at_risk": false
+    }
+  ]
+}

@@ -9,11 +9,15 @@ import {
   ExternalLink,
   Tag,
   Layers,
+  ClipboardList,
+  ShieldAlert,
+  Bot,
 } from 'lucide-react'
+import { TodayActionsHero } from '@/components/finance/TodayActionsHero'
 
 // Canonical /finance index page (2026-05-08 cleanup).
 // Per the 4-surface model in CLAUDE.md: command-center owns *operate* tasks.
-// This page is the front door to the 7 keeper routes. Notion/scripts/Telegram
+// This page is the front door to the keeper routes. Notion/scripts/Telegram
 // links sit in the footer for cross-surface awareness.
 
 const cards: Array<{
@@ -23,6 +27,27 @@ const cards: Array<{
   icon: typeof DollarSign
   accent: string
 }> = [
+  {
+    title: 'Finance workbench',
+    href: '/finance/workbench',
+    description: 'One table for receipts, project codes, income/outgoing, and R&D review.',
+    icon: ClipboardList,
+    accent: 'from-cyan-500/10 to-cyan-500/5 border-cyan-500/30',
+  },
+  {
+    title: 'Dext push audit',
+    href: '/finance/dext-push-audit',
+    description: 'Audit Dext-created Xero bills before Find & Match. Prevent duplicate spend.',
+    icon: ShieldAlert,
+    accent: 'from-red-500/10 to-red-500/5 border-red-500/30',
+  },
+  {
+    title: 'Xero page copilot',
+    href: '/finance/xero-page-copilot',
+    description: 'Paste one Xero Reconcile page and get a safe row-by-row action queue.',
+    icon: Bot,
+    accent: 'from-cyan-500/10 to-amber-500/5 border-cyan-500/30',
+  },
   {
     title: 'CEO money cockpit',
     href: '/finance/overview',
@@ -107,7 +132,7 @@ const otherSurfaces: Array<{
 export default function FinanceIndexPage() {
   return (
     <main className="mx-auto max-w-6xl px-6 py-10">
-      <header className="mb-8">
+      <header className="mb-6">
         <p className="text-xs uppercase tracking-wider text-muted-foreground">Finance</p>
         <h1 className="mt-1 text-3xl font-semibold tracking-tight">Operate</h1>
         <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
@@ -115,6 +140,8 @@ export default function FinanceIndexPage() {
           drill into a project. For reading and planning use Notion. For pushes use Telegram.
         </p>
       </header>
+
+      <TodayActionsHero />
 
       <section aria-labelledby="cards" className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         <h2 id="cards" className="sr-only">Operate</h2>

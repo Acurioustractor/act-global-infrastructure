@@ -50,9 +50,61 @@ export async function handleReactorCallback(
       return handleXeroCallback(action, entityId)
     case 'gmail':
       return handleGmailCallback(action, entityId)
+    case 'idea':
+      return handleIdeaCallback(action, entityId, parts[3])
     default:
       return { toast: `Unknown: ${domain}` }
   }
+}
+
+async function handleIdeaCallback(
+  action: string,
+  entityId: string,
+  extra?: string,
+): Promise<CallbackResult> {
+  const { executeTransitionIdeaStage, executeSnoozeIdea } = await import('@/lib/tools/ideas')
+
+  if (action === 'to_fundraise') {
+    const result = JSON.parse(await executeTransitionIdeaStage({ id: entityId, stage: 'fundraise' }))
+    if (result.error) return { toast: result.error.slice(0, 200) }
+    return {
+      toast: '→ fundraise',
+      editMessage: `→ fundraise · "${result.text}"`,
+    }
+  }
+
+  if (action === 'to_start') {
+    const result = JSON.parse(await executeTransitionIdeaStage({ id: entityId, stage: 'start' }))
+    if (result.error) return { toast: result.error.slice(0, 200) }
+    return {
+      toast: '→ start',
+      editMessage: `→ start · "${result.text}"${result.needs_project_code ? ' (run suggest-code helper next)' : ''}`,
+    }
+  }
+
+  if (action === 'kill') {
+    const result = JSON.parse(await executeTransitionIdeaStage({ id: entityId, stage: 'killed' }))
+    if (result.error) return { toast: result.error.slice(0, 200) }
+    return {
+      toast: '❌ killed',
+      editMessage: `❌ killed · "${result.text}"`,
+    }
+  }
+
+  if (action === 'snooze') {
+    const days = extra ? Number.parseInt(extra, 10) : 14
+    const result = JSON.parse(await executeSnoozeIdea({ id: entityId, days }))
+    if (result.error === 'snooze_limit_reached') {
+      return { toast: result.message.slice(0, 200) }
+    }
+    if (result.error) return { toast: result.error.slice(0, 200) }
+    return {
+      toast: `💤 ${days}d`,
+      editMessage: `💤 snoozed until ${result.snoozed_until} (${result.remaining} snoozes left)`,
+    }
+  }
+
+  return { toast: `Unknown idea action: ${action}` }
 }
 
 async function handleGrantCallback(action: string, entityId: string): Promise<CallbackResult> {

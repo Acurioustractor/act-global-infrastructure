@@ -222,6 +222,26 @@ const cronScripts = [
     cron_restart: '15 8 * * *', // Daily 8:15am AEST — snapshot /finance/command (coverage, drift, 90d incoming, lifetime) + send to Telegram
   },
   {
+    name: 'compliance-snapshot',
+    script: 'scripts/build-compliance-calendar.mjs',
+    cron_restart: '0 7 * * *', // Daily 7am AEST — rebuild compliance snapshot before alerts cron at 7:30
+  },
+  {
+    name: 'compliance-alerts',
+    script: 'scripts/compliance-alerts.mjs',
+    cron_restart: '30 7 * * *', // Daily 7:30am AEST — fires Telegram only when T-30/T-7/T-1 lead time matches exactly
+  },
+  {
+    name: 'compliance-notion-sync',
+    script: 'scripts/sync-compliance-calendar-to-notion.mjs',
+    cron_restart: '45 7 * * *', // Daily 7:45am AEST — push latest snapshot to Notion mirror page (no-op if NOTION_COMPLIANCE_PAGE_ID unset)
+  },
+  {
+    name: 'idea-board-reminders',
+    script: 'scripts/idea-board-reminders.mjs',
+    cron_restart: '0 8 * * *', // Daily 8am AEST — per-owner DM with stale ideas + inline buttons (idea 90d, scope 30d, fundraise 14d). Cap 5 per DM.
+  },
+  {
     name: 'telegram-money-alerts',
     script: 'scripts/telegram-money-alerts.mjs',
     cron_restart: '0 13 * * *', // Daily 1pm AEST — afternoon alert (silent if nothing actionable)
@@ -230,6 +250,41 @@ const cronScripts = [
     name: 'weekly-money-digest',
     script: 'scripts/weekly-money-digest.mjs',
     cron_restart: '0 15 * * 5', // Weekly Friday 3:00pm AEST — Friday Money Digest (week wins, burns, stale, actions)
+  },
+  {
+    // Sonnet 4.6 reads the money-command data + week deltas and writes the
+    // "5 things to know this week" narrative in Curtis voice. Writes to
+    // wiki/cockpit/weekly-narrative-YYYY-MM-DD.md and Telegram.
+    name: 'weekly-narrative',
+    script: 'scripts/narrate-weekly-digest.mjs',
+    args: '--telegram',
+    cron_restart: '15 15 * * 5', // Weekly Friday 3:15pm AEST — after weekly-money-digest at 3:00pm
+  },
+  {
+    // Single-entry replacement for the Mon 5:30-9:10 chain (6 separate PM2
+    // entries). Runs each step in sequence with failure isolation — one
+    // step failing doesn't stop the rest. Single Telegram summary at the
+    // end + wiki/cockpit/monday-chain-YYYY-MM-DD.md log.
+    //
+    // To migrate: enable this entry, then disable the 6 individual entries
+    // (weekly-project-pulse, ghl-cleanup-auto, grant-seed-weekly,
+    // xero-payments-sync, weekly-reconciliation, money-framework-sync).
+    // Until migration: this is OFF by default — uncomment to enable.
+    //
+    // name: 'monday-morning-chain',
+    // script: 'scripts/monday-morning-chain.mjs',
+    // args: '--telegram',
+    // cron_restart: '30 5 * * 1', // Mon 5:30am AEST — orchestrates the full chain
+  },
+  {
+    // Polls finance_receipt_documents for newly-OCR'd Dext docs that have no
+    // AI suggestion yet, grades them with Sonnet 4.6, writes to
+    // finance_ai_routing_suggestions. The workbench surfaces the grades so
+    // you see project_code + risk_flags before you publish to Xero.
+    name: 'pre-publish-dext-grader',
+    script: 'scripts/poll-pre-publish-dext-grader.mjs',
+    args: '--batch 25 --telegram',
+    cron_restart: '*/15 8-18 * * 1-5', // Every 15 min, 8am-6pm AEST, Mon-Fri
   },
   {
     name: 'ghl-cleanup-auto',
