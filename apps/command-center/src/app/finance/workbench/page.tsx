@@ -226,6 +226,39 @@ function StatCard({
   )
 }
 
+function BulkAcceptAi({
+  rows,
+  onAccept,
+  pending,
+}: {
+  rows: WorkbenchItem[]
+  onAccept: (suggestionIds: string[]) => void
+  pending: boolean
+}) {
+  const safeIds = rows
+    .filter((r) =>
+      r.aiSuggestion &&
+      !r.aiSuggestion.blockedForAutoApply &&
+      r.aiSuggestion.confidence >= 0.85 &&
+      r.projectCode !== r.aiSuggestion.projectCode,
+    )
+    .map((r) => r.aiSuggestion!.id)
+
+  if (safeIds.length === 0) return null
+
+  return (
+    <button
+      type="button"
+      onClick={() => onAccept(safeIds)}
+      disabled={pending}
+      className="inline-flex items-center gap-2 rounded-full bg-emerald-400 px-4 py-1.5 text-xs font-semibold text-slate-950 transition hover:bg-emerald-300 disabled:opacity-50"
+    >
+      <FlaskConical className="h-3 w-3" />
+      {pending ? `Accepting ${safeIds.length}…` : `Accept ${safeIds.length} safe AI suggestion${safeIds.length === 1 ? '' : 's'}`}
+    </button>
+  )
+}
+
 function AISuggestionChip({
   item,
   onAccept,
@@ -364,6 +397,27 @@ export default function FinanceWorkbenchPage() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['finance', 'workbench'] })
     },
+  })
+
+  const bulkAcceptMutation = useMutation({
+    mutationFn: async (suggestionIds: string[]) => {
+      const results: Array<{ id: string; ok: boolean; error?: string }> = []
+      for (const id of suggestionIds) {
+        try {
+          const res = await fetch('/api/finance/workbench/accept-suggestion', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ suggestionId: id, action: 'accept' }),
+          })
+          const j = await res.json()
+          results.push({ id, ok: !!j.ok, error: j.error })
+        } catch (err) {
+          results.push({ id, ok: false, error: (err as Error).message })
+        }
+      }
+      return results
+    },
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['finance', 'workbench'] }),
   })
 
   const data = query.data
@@ -743,11 +797,16 @@ export default function FinanceWorkbenchPage() {
         )}
 
         <section className="mt-6 overflow-hidden rounded-2xl border border-white/10 bg-white/[0.025]">
-          <div className="flex items-center justify-between border-b border-white/10 px-4 py-3">
+          <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/10 px-4 py-3">
             <p className="text-sm text-white/55">
               Showing <span className="font-semibold text-white">{rows.length.toLocaleString()}</span>
               {data ? ` of ${data.totalMatching.toLocaleString()} matching rows` : ''}.
             </p>
+            <BulkAcceptAi
+              rows={rows}
+              onAccept={(ids) => bulkAcceptMutation.mutate(ids)}
+              pending={bulkAcceptMutation.isPending}
+            />
             <p className="text-xs text-white/35">Project changes save to Supabase mirrors only. Xero accounting state is not changed here.</p>
           </div>
 
