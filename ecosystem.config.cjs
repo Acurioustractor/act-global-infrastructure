@@ -297,19 +297,6 @@ const cronScripts = [
     cron_restart: '*/15 8-18 * * 1-5', // Every 15 min, 8am-6pm AEST, Mon-Fri
   },
   {
-    // Issue #66 (pivot) — push AI tracking suggestions to Xero.
-    // ai-route-dext-doc.mjs --apply writes project_code to xero_transactions
-    // in Supabase but doesn't touch the Xero record. This polls finance_ai_
-    // routing_suggestions for high-conf, applied-locally-but-not-in-Xero rows
-    // and POSTs Business Division + Project Tracking via the Xero API.
-    // Runs offset from pre-publish-dext-grader by 15 min so the grader has
-    // time to finish writing.
-    name: 'push-ai-tracking-to-xero',
-    script: 'scripts/push-ai-tracking-to-xero.mjs',
-    args: '--limit 50',
-    cron_restart: '7,37 8-18 * * 1-5', // 8:07, 8:37, ..., 18:37 Mon-Fri AEST
-  },
-  {
     name: 'ghl-cleanup-auto',
     script: 'scripts/cleanup-stale-ghl-opps.mjs',
     args: '--apply',
