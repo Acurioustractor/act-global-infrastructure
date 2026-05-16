@@ -19,7 +19,7 @@
 
 import { Client } from '@notionhq/client';
 import { createClient } from '@supabase/supabase-js';
-import { readFileSync, writeFileSync } from 'fs';
+import { existsSync, readdirSync, readFileSync, writeFileSync } from 'fs';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 
@@ -113,6 +113,120 @@ async function main() {
     .limit(1);
   const bankNow = cashflow?.[0]?.closing_balance;
 
+  // Pass 2C C3 — accountability sections (compliance / ideas / ack gaps)
+  const weekAgoIso = new Date(Date.now() - 7 * 86400000).toISOString();
+  const fiveDaysAgoIso = new Date(Date.now() - 5 * 86400000).toISOString();
+
+  const complianceSnap = readLatestComplianceSnapshot();
+  const { data: complianceAcks } = await supabase
+    .from('compliance_ack')
+    .select('obligation_id, acked_at, acked_by, acked_via')
+    .gte('acked_at', weekAgoIso)
+    .order('acked_at', { ascending: false });
+  const ackedByObligation = new Map();
+  for (const a of complianceAcks || []) {
+    if (!ackedByObligation.has(a.obligation_id)) ackedByObligation.set(a.obligation_id, a);
+  }
+
+  const complianceHits = [];      // filed OR acked this week
+  const complianceMisses = [];    // due in last week, no filing + no ack
+  const compliancePending = [];   // upcoming next 30d
+  if (complianceSnap?.obligations) {
+    for (const o of complianceSnap.obligations) {
+      const dd = o.days_until_due;
+      const filedThisWeek = o.status === 'filed' && o.last_filed_at && o.last_filed_at >= weekAgoIso.slice(0, 10);
+      const ack = ackedByObligation.get(o.id);
+      if (filedThisWeek) {
+        complianceHits.push({ ...o, _reason: 'filed', _acked_at: o.last_filed_at });
+      } else if (ack) {
+        complianceHits.push({ ...o, _reason: 'acked', _acked_at: ack.acked_at });
+      } else if (dd != null && dd < 0 && dd >= -7 && o.status !== 'filed') {
+        complianceMisses.push({ ...o });
+      } else if (dd != null && dd >= 0 && dd <= 30 && o.status !== 'filed') {
+        compliancePending.push({ ...o });
+      }
+    }
+    compliancePending.sort((a, b) => (a.days_until_due ?? 999) - (b.days_until_due ?? 999));
+  }
+
+  // Idea lifecycle moves this week (lifecycle_stage transitions)
+  const { data: ideaMoves } = await supabase
+    .from('idea_board')
+    .select('id, text, lifecycle_stage, owner, kill_reason, value_estimate, stage_entered_at')
+    .in('lifecycle_stage', ['start', 'killed'])
+    .gte('stage_entered_at', weekAgoIso)
+    .order('stage_entered_at', { ascending: false });
+
+  // Snooze-burned ideas (3+ snoozes) — forced decisions overdue
+  const { data: snoozeRows } = await supabase
+    .from('idea_snoozes')
+    .select('idea_id');
+  const snoozeCount = new Map();
+  for (const s of snoozeRows || []) {
+    snoozeCount.set(s.idea_id, (snoozeCount.get(s.idea_id) || 0) + 1);
+  }
+  const burnedIdeaIds = [...snoozeCount.entries()].filter(([, n]) => n >= 3).map(([id]) => id);
+  let burnedIdeas = [];
+  if (burnedIdeaIds.length > 0) {
+    const { data } = await supabase
+      .from('idea_board')
+      .select('id, text, lifecycle_stage, owner, value_estimate')
+      .in('id', burnedIdeaIds)
+      .not('lifecycle_stage', 'in', '("start","killed")');
+    burnedIdeas = data || [];
+  }
+
+  // Acknowledgement gaps — AT RISK obligations + pilot risks with no fresh ack
+  const ackGaps = [];
+  if (complianceSnap?.obligations) {
+    for (const o of complianceSnap.obligations) {
+      if (!o.at_risk || o.status === 'filed') continue;
+      const ack = ackedByObligation.get(o.id);
+      if (ack && ack.acked_at >= fiveDaysAgoIso) continue;
+      ackGaps.push({
+        kind: 'compliance',
+        id: o.id,
+        label: o.title,
+        last_ack: ack?.acked_at ?? null,
+        severity: o.severity,
+        days_until_due: o.days_until_due,
+      });
+    }
+  }
+  // Pilot risk ack gaps — scope/fundraise stale items not acked in 5d
+  const { data: ideaAcks } = await supabase
+    .from('idea_ack')
+    .select('idea_id, acked_at')
+    .gte('acked_at', fiveDaysAgoIso);
+  const recentIdeaAcks = new Set((ideaAcks || []).map(a => a.idea_id));
+  const { data: stalePilots } = await supabase
+    .from('idea_board')
+    .select('id, text, lifecycle_stage, stage_entered_at, value_estimate')
+    .in('lifecycle_stage', ['scope', 'fundraise']);
+  for (const p of stalePilots || []) {
+    const stage = p.lifecycle_stage;
+    const threshold = stage === 'scope' ? 30 : 14;
+    const enteredAt = p.stage_entered_at;
+    if (!enteredAt) continue;
+    const ageDays = Math.floor((Date.now() - new Date(enteredAt).getTime()) / 86400000);
+    if (ageDays < threshold) continue;
+    if (recentIdeaAcks.has(p.id)) continue;
+    ackGaps.push({
+      kind: 'idea',
+      id: p.id,
+      label: (p.text || 'unnamed').slice(0, 60),
+      last_ack: null,
+      severity: 'high',
+      stage,
+      age_days: ageDays,
+      value_estimate: Number(p.value_estimate || 0),
+    });
+  }
+  ackGaps.sort((a, b) => {
+    const sev = { critical: 0, high: 1, medium: 2 };
+    return (sev[a.severity] ?? 3) - (sev[b.severity] ?? 3);
+  });
+
   // Build blocks
   const blocks = [];
   blocks.push(h2(`💵 Friday Digest — ${today}`));
@@ -182,6 +296,88 @@ async function main() {
     }
   }
 
+  // Pass 2C C3 — Compliance hits/misses this week
+  blocks.push(h3('\u{1F4CB} Compliance this week'));
+  if (!complianceSnap) {
+    blocks.push(para([rt('(no compliance snapshot — run node scripts/build-compliance-calendar.mjs)', { italic: true, color: 'gray' })]));
+  } else {
+    if (complianceHits.length === 0 && complianceMisses.length === 0 && compliancePending.length === 0) {
+      blocks.push(para([rt('(no compliance movement this week)', { italic: true, color: 'gray' })]));
+    }
+    for (const h of complianceHits) {
+      blocks.push(bullet([
+        rt('\u{2705} ', { color: 'green' }),
+        rt(h.title, { bold: true }),
+        rt(`  · ${h._reason === 'filed' ? 'filed' : 'acked'} ${h._acked_at?.slice(0, 10) ?? ''}`, { color: 'green' }),
+      ]));
+    }
+    for (const m of complianceMisses) {
+      blocks.push(bullet([
+        rt('\u{2717} ', { color: 'red' }),
+        rt(m.title, { bold: true }),
+        rt(`  · T+${Math.abs(m.days_until_due)}d past due · ${m.entity}`, { color: 'red' }),
+      ]));
+    }
+    for (const p of compliancePending.slice(0, 5)) {
+      blocks.push(bullet([
+        rt('\u{2192} ', { color: 'gray' }),
+        rt(p.title),
+        rt(`  · T-${p.days_until_due}d · ${p.entity}`, { color: 'gray' }),
+      ]));
+    }
+  }
+
+  // Idea decisions this week
+  blocks.push(h3('\u{1F4A1} Ideas — moves & forced decisions'));
+  const shipped = (ideaMoves || []).filter(i => i.lifecycle_stage === 'start');
+  const killed = (ideaMoves || []).filter(i => i.lifecycle_stage === 'killed');
+  if (shipped.length === 0 && killed.length === 0 && burnedIdeas.length === 0) {
+    blocks.push(para([rt('(no idea lifecycle moves this week)', { italic: true, color: 'gray' })]));
+  }
+  for (const i of shipped) {
+    blocks.push(bullet([
+      rt('\u{1F680} shipped → ', { color: 'green' }),
+      rt((i.text || 'unnamed').slice(0, 60), { bold: true }),
+      rt(`  · owner ${i.owner || 'ben'}`, { color: 'gray' }),
+    ]));
+  }
+  for (const i of killed) {
+    blocks.push(bullet([
+      rt('\u{1F480} killed — ', { color: 'red' }),
+      rt((i.text || 'unnamed').slice(0, 60), { bold: true }),
+      rt(`  · ${i.kill_reason || 'no reason'}`, { color: 'gray' }),
+    ]));
+  }
+  for (const i of burnedIdeas) {
+    blocks.push(bullet([
+      rt('\u{1F4A4}\u{00D7}3 forced decision: ', { color: 'orange' }),
+      rt((i.text || 'unnamed').slice(0, 60), { bold: true }),
+      rt(`  · still in ${i.lifecycle_stage} · owner ${i.owner || 'ben'}`, { color: 'orange' }),
+    ]));
+  }
+
+  // Acknowledgement gaps — AT RISK items not acked > 5d
+  blocks.push(h3('\u{1F4D2} Acknowledgement gaps (>5d unactioned)'));
+  if (ackGaps.length === 0) {
+    blocks.push(para([rt('(none — everything risky has a recent ack)', { italic: true, color: 'green' })]));
+  } else {
+    for (const g of ackGaps.slice(0, 8)) {
+      const lastSeen = g.last_ack
+        ? `last ack ${g.last_ack.slice(0, 10)}`
+        : 'never acked';
+      const tag = g.kind === 'compliance'
+        ? (g.days_until_due != null
+            ? (g.days_until_due < 0 ? `T+${Math.abs(g.days_until_due)}d` : `T-${g.days_until_due}d`)
+            : '')
+        : `${g.stage} ${g.age_days}d idle`;
+      blocks.push(bullet([
+        rt(`[${g.kind === 'compliance' ? 'compliance' : 'idea'}] `, { color: 'gray' }),
+        rt(g.label, { bold: true }),
+        rt(`  · ${tag} · ${lastSeen}`, { color: 'red' }),
+      ]));
+    }
+  }
+
   // Suggested actions
   blocks.push(h3('\u{1F4CC} Suggested next-week actions'));
   blocks.push(bullet('Open the 5 stalest opps in GHL — Won/Lost or move stage'));
@@ -234,6 +430,18 @@ async function main() {
     await sleep(300);
   }
   log(`Done. Open: notion.so/${pageId.replace(/-/g, '')}`);
+}
+
+function readLatestComplianceSnapshot() {
+  const dir = join(__dirname, '..', 'thoughts', 'shared', 'data', 'compliance-calendar');
+  if (!existsSync(dir)) return null;
+  const files = readdirSync(dir).filter(f => f.endsWith('.json')).sort();
+  if (files.length === 0) return null;
+  try {
+    return JSON.parse(readFileSync(join(dir, files[files.length - 1]), 'utf8'));
+  } catch {
+    return null;
+  }
 }
 
 main().catch(err => { console.error('Fatal:', err); process.exit(1); });
