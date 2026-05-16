@@ -20,10 +20,14 @@
  */
 export async function sendTelegram(message, { parseMode = 'Markdown', replyMarkup, chatId: chatIdOverride } = {}) {
   const botToken = process.env.TELEGRAM_BOT_TOKEN;
-  const chatId = chatIdOverride ?? process.env.TELEGRAM_CHAT_ID;
+  // Resolution order: explicit override → TELEGRAM_CHAT_ID → first entry of
+  // TELEGRAM_AUTHORIZED_USERS (matches the convention used by
+  // telegram-money-alerts.mjs and other cron scripts in this repo).
+  const fallbackFromAuth = (process.env.TELEGRAM_AUTHORIZED_USERS || '').split(',')[0]?.trim();
+  const chatId = chatIdOverride ?? process.env.TELEGRAM_CHAT_ID ?? fallbackFromAuth;
 
   if (!botToken || !chatId) {
-    console.log('Telegram not configured (missing TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID)');
+    console.log('Telegram not configured (missing TELEGRAM_BOT_TOKEN or chat id — set TELEGRAM_CHAT_ID or TELEGRAM_AUTHORIZED_USERS)');
     return false;
   }
 

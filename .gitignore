@@ -97,6 +97,20 @@ archive/intelligence-platform/
 apps/command-center/apps/
 .superdesign
 
+# MCP/browser caches (regenerable)
+.playwright-mcp/
+
+# Local downloads (Dext receipts, temp files)
+/Dext/
+/tmp/
+
+# Root-level screenshots (one-off captures, not project assets)
+/*.png
+
+# Local notion-workers config backups (not project state)
+packages/notion-workers/workers.json.bak-*
+packages/notion-workers/workers.json.old
+
 # External skill/tool configs (managed outside repo)
 /skills/
 

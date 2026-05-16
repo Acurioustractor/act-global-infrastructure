@@ -1,0 +1,30 @@
+category,receipt_count,total_aud_abs,default_project,tax_rate,rd_default,publish_policy,notes
+446 - Materials & Supplies,83,150997.69,ASK_USER,GST on Expenses,review,manual_review,"Usually ACT-HV, ACT-FM, ACT-GD, ACT-PS, or ACT-MY based on supplier/location/job."
+"452 - Parking, Tolls & Taxis",71,7193.57,ASK_USER,review,review,manual_review,
+493 - Travel - National,67,40667.25,ASK_USER,GST on Expenses when domestic taxable,review,manual_review,Use calendar/trip context. Qantas/Virgin/Uber/Avis/Budget/Airbnb/Booking stay manual.
+485 - Subscriptions,59,4177.21,ACT-IN,GST on Expenses unless overseas/zero-GST invoice,R&D supporting,auto_publish_after_vendor_proven,"Good auto-publish candidates after test publishes: OpenAI, Anthropic/Claude, Supabase, Webflow, Vercel, Bitwarden, Railway, HighLevel, Dext, Notion."
+(blank),29,62798.26,ASK_USER,review,review,manual_review,
+421 - Light meals &  refreshments,23,2843.65,ASK_USER,review,review,manual_review,
+449 - MV - Fuel & Oil,21,2548.73,ASK_USER,GST on Expenses,review,manual_review,Project depends on vehicle/trip/location; Maleny/Witta often ACT-HV or ACT-FM.
+486 - Sub-contractors,14,99197.24,ASK_USER,Check invoice GST registration,review,manual_review,"Never auto-publish; project, GST, and payable/payment state need review."
+400 - Advertising & Marketing,10,26985.46,ASK_USER,review,review,manual_review,
+432 - Hire Expenses,9,23860.50,ASK_USER,GST on Expenses,review,manual_review,Kennards/hire usually project-specific and must match job/trip.
+412 - Consulting & Accounting,7,37604.77,ASK_USER,review,review,manual_review,
+750 - Plant & Equipment,7,25286.60,ASK_USER,GST on Expenses,review,manual_review,Likely asset/capital treatment. Do not auto-publish without Standard Ledger review for high-value items.
+"448 - Farm Equipment - Fuel, oil & maintenance",5,10609.05,ASK_USER,review,review,manual_review,
+451 - MV - Repairs & Maintenance,5,3096.50,ASK_USER,review,review,manual_review,
+420 - Entertainment (0%),5,2322.48,ASK_USER,review,review,manual_review,
+489 - Telephone & Internet,5,445.58,ACT-IN,GST on Expenses if Australian supplier,R&D supporting,manual_review,"Belong/Starlink may be ACT-IN, ACT-HV, ACT-FM, or A Curious Tractor depending site/use."
+417 - Donations (0%),4,145006.00,ASK_USER,review,review,manual_review,
+"445 - Light, Power, Heating",4,1317.38,ASK_USER,review,review,manual_review,
+494 - Travel - International (0%),4,670.34,ASK_USER,No GST / BAS excluded as advised,review,manual_review,Foreign currency and overseas travel need project/business-purpose review.
+490 - Veterinary & Animal Welfare,3,7049.50,ASK_USER,review,review,manual_review,
+467 - Rates & Water (0%),3,1827.83,ACT-HV,No GST / BAS excluded as advised,not R&D unless directly justified,manual_review,Likely Harvest/property costs; confirm property and entity.
+450 - MV - Registration & Insurance,3,1420.29,SL_REVIEW,Check GST treatment,not R&D unless directly justified,manual_review,Can be large and entity/vehicle-specific.
+430 - Gifts,2,183.20,ASK_USER,review,review,manual_review,
+598 - Rental - Sundry Rental (0%),1,6226.00,ASK_USER,review,review,manual_review,
+433 - Insurance,1,5483.95,SL_REVIEW,Check stamp duty/GST split,not R&D unless directly justified,manual_review,Insurance often has mixed GST/stamp duty treatment.
+461 - Printing & Stationery,1,4063.89,ASK_USER,review,review,manual_review,
+710 - Office Equipment,1,3320.00,ASK_USER,review,review,manual_review,
+593 - Rental - Pest Control (0%),1,165.00,ASK_USER,review,review,manual_review,
+423 - Catering,1,25.40,ASK_USER,review,review,manual_review,

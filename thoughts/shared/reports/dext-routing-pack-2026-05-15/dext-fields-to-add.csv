@@ -1,0 +1,20 @@
+field,required,name_or_code,use_for,xero_destination,default_publish
+Payment Method,true,NAB Visa ACT #8815,ACT card spend already paid by business card,Bank Accounts / Spend Money,manual_review
+Payment Method,true,Personal paid - Ben,Ben paid personally and needs reimbursement/expense claim review,Expense Claim / reimbursement review,hold
+Payment Method,true,Personal paid - Nic,Nic paid personally and needs reimbursement/expense claim review,Expense Claim / reimbursement review,hold
+Payment Method,true,Bank transfer / invoice,Supplier invoices that are not card-paid,Purchases / Bills only if genuinely unpaid or bill workflow is intended,manual_review
+Project Tracking,true,ACT-IN · ACT Infrastructure,"core software, internet, AI tools, systems, general infrastructure",,
+Project Tracking,true,ACT-HV · The Harvest Witta,"Harvest site, Witta/Maleny property improvements, farm build materials",,
+Project Tracking,true,ACT-FM · The Farm,"farm operations, animal welfare, local farm supplies and fuel where not Harvest capital works",,
+Project Tracking,true,ACT-GD · Goods,"Goods build, manufacturing, containers, marketplace, product/asset work",,
+Project Tracking,true,ACT-JH · JusticeHub,"justice travel, research, civic/youth justice work",,
+Project Tracking,true,ACT-CORE · ACT Regenerative Studio,"studio operations, accounting, admin, general ACT work that is not infrastructure SaaS",,
+Project Tracking,true,ACT-EL · Empathy Ledger,"storytelling, media capture, empathy ledger platform and content work",,
+Project Tracking,true,ACT-PS · PICC On Country Photo Studio,"photo studio, camera/print/creative equipment for PICC work",,
+Project Tracking,true,ACT-MY · Mounty Yarns,"Mounty Yarns related materials, events, travel, production",,
+Project Tracking,true,ACT-OO · Oonchiumpa,Oonchiumpa consultancy/service costs,,
+Project Tracking,true,ASK_USER · Ask Ben/Nic,"travel, meals, hotels, large purchases, ambiguous locations, shared trips",,
+Project Tracking,true,SL_REVIEW · Standard Ledger Review,"BAS/tax treatment, insurance, donations, write-offs, duplicate bills, capitalisation",,
+Business Division,false,ACT Pty,future clean entity flow,,
+Business Division,false,Legacy ACT/Nic Dext cleanup,current export and historical Dext cleanup only,,
+Business Division,false,Personal/Reimbursement,items paid personally or not clearly company card spend,,

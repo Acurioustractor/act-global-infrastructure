@@ -56,6 +56,21 @@ export function SidebarItem({
 
   const paddingLeft = depth === 0 ? 'pl-3' : depth === 1 ? 'pl-9' : 'pl-14'
 
+  // Divider items render as non-clickable section headers (placed after hooks
+  // run so the hooks-order rule is satisfied across both render paths).
+  if (item.divider) {
+    return (
+      <div
+        className={cn(
+          'mt-3 mb-1 pr-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-white/30',
+          paddingLeft,
+        )}
+      >
+        {item.label}
+      </div>
+    )
+  }
+
   return (
     <div>
       <div className="flex items-center">
