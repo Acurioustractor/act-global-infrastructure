@@ -21,7 +21,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "STAMP=.claude/.session-branch-stamp; if [ -f \"$STAMP\" ]; then CURRENT=$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo unknown); EXPECTED=$(cat \"$STAMP\" 2>/dev/null); if [ -n \"$EXPECTED\" ] && [ \"$CURRENT\" != \"$EXPECTED\" ]; then echo \"⚠️  BRANCH MISMATCH: session started on '$EXPECTED', HEAD now on '$CURRENT'. Another session likely switched branches — verify intent before writing.\" >&2; fi"
+            "command": "STAMP=.claude/.session-branch-stamp; if [ -f \"$STAMP\" ]; then CURRENT=$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo unknown); EXPECTED=$(cat \"$STAMP\" 2>/dev/null); if [ -n \"$EXPECTED\" ] && [ \"$CURRENT\" != \"$EXPECTED\" ]; then echo \"⚠️  BRANCH MISMATCH: session started on '$EXPECTED', HEAD now on '$CURRENT'. Another session likely switched branches — verify intent before writing.\" >&2; fi; fi"
           }
         ]
       }
