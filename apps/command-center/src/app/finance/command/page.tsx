@@ -6,9 +6,11 @@ import {
   AlertTriangle,
   ArrowRight,
   ArrowUpRight,
+  CheckCircle2,
   Compass,
   ExternalLink,
   Gauge,
+  History,
   RefreshCw,
   Sparkles,
   Tags,
@@ -78,6 +80,36 @@ interface CommandResponse {
   }
 }
 
+interface LifetimeCustomer {
+  contact_name: string
+  paid_count: number
+  paid_total: number
+  authorised_outstanding: number
+  draft_total: number
+  last_invoice_date: string | null
+  in_funder_snapshot: boolean
+}
+
+interface LifetimeResponse {
+  generatedAt: string
+  totals: {
+    distinctCustomers: number
+    payingCustomers: number
+    lifetimePaid: number
+    lifetimeAuthorised: number
+    lifetimeDraft: number
+    visibleBook: number
+  }
+  coverageGap: {
+    snapshotRows: number
+    xeroPayers: number
+    matched: number
+    missingFromSnapshot: number
+    missingNames: string[]
+  }
+  topCustomers: LifetimeCustomer[]
+}
+
 export default function MoneyCommandPage() {
   const { data, isLoading, error, refetch, isRefetching } = useQuery<CommandResponse>({
     queryKey: ['finance', 'command'],
@@ -87,6 +119,15 @@ export default function MoneyCommandPage() {
       return res.json()
     },
     staleTime: 60 * 1000,
+  })
+  const { data: lifetime } = useQuery<LifetimeResponse>({
+    queryKey: ['finance', 'lifetime-ledger'],
+    queryFn: async () => {
+      const res = await fetch('/api/finance/lifetime-ledger', { cache: 'no-store' })
+      if (!res.ok) throw new Error(`HTTP ${res.status}`)
+      return res.json()
+    },
+    staleTime: 5 * 60 * 1000,
   })
 
   return (
@@ -128,6 +169,8 @@ export default function MoneyCommandPage() {
             <TopLayer top={data.top} />
             {/* MIDDLE LAYER */}
             <MiddleLayer middle={data.middle} />
+            {/* LIFETIME LEDGER — surfaces xero_invoices as the canonical record */}
+            {lifetime && <LifetimeLedgerSection data={lifetime} />}
             {/* BOTTOM LAYER */}
             <BottomLayer bottom={data.bottom} generatedAt={data.generatedAt} />
           </>
@@ -357,6 +400,140 @@ function MiddleLayer({ middle }: { middle: CommandResponse['middle'] }) {
               })}
             </tbody>
           </table>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function LifetimeLedgerSection({ data }: { data: LifetimeResponse }) {
+  const { totals, coverageGap, topCustomers } = data
+  const matchedPct = coverageGap.xeroPayers === 0 ? 0 :
+    Math.round((coverageGap.matched / coverageGap.xeroPayers) * 100)
+
+  return (
+    <section className="space-y-4">
+      <div className="flex items-center gap-2 text-neutral-400 text-xs font-medium uppercase tracking-wider">
+        <History size={14} /> Lifetime ledger
+        <span className="text-neutral-600 normal-case font-normal tracking-normal">
+          · the canonical record is <code className="text-neutral-500">xero_invoices</code>
+        </span>
+      </div>
+
+      {/* Totals strip */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+        <KpiCard
+          label="Visible book (lifetime)"
+          value={formatMoney(totals.visibleBook)}
+          tone="positive"
+          note={`${totals.distinctCustomers} distinct customers · ${totals.payingCustomers} have paid`}
+        />
+        <KpiCard
+          label="Paid (all-time)"
+          value={formatMoney(totals.lifetimePaid)}
+          tone="positive"
+          note="status = PAID"
+        />
+        <KpiCard
+          label="Outstanding AR"
+          value={formatMoney(totals.lifetimeAuthorised)}
+          note="AUTHORISED / SUBMITTED"
+        />
+        <KpiCard
+          label="Draft"
+          value={formatMoney(totals.lifetimeDraft)}
+          note="not yet sent"
+        />
+      </div>
+
+      {/* Coverage gap callout */}
+      <div className={cn(
+        'rounded-lg border p-4',
+        matchedPct < 50
+          ? 'border-amber-900/60 bg-amber-950/20'
+          : 'border-neutral-800 bg-neutral-900/50',
+      )}>
+        <div className="flex items-start justify-between gap-4 flex-wrap">
+          <div>
+            <div className="flex items-center gap-2 text-sm font-medium text-neutral-200">
+              {matchedPct < 50 ? <AlertTriangle size={14} className="text-amber-400" /> : <CheckCircle2 size={14} className="text-emerald-400" />}
+              CivicGraph coverage gap
+            </div>
+            <p className="text-xs text-neutral-400 mt-1 max-w-2xl">
+              Only <strong className="text-neutral-200">{coverageGap.matched} of {coverageGap.xeroPayers}</strong> paying
+              customers ({matchedPct}%) are in <code className="text-neutral-500">funder_context_snapshot</code> —
+              the dossier feeding the kanban + narrative tools. {coverageGap.missingFromSnapshot} relationship histories
+              are invisible to grant-recommendation and outreach drafting.
+            </p>
+            {coverageGap.missingNames.length > 0 && (
+              <details className="mt-2 text-xs text-neutral-400">
+                <summary className="cursor-pointer hover:text-neutral-200">
+                  Missing from snapshot (top {coverageGap.missingNames.length} by paid):
+                </summary>
+                <ul className="mt-2 pl-4 list-disc space-y-0.5">
+                  {coverageGap.missingNames.map(n => (
+                    <li key={n} className="text-neutral-400">{n}</li>
+                  ))}
+                </ul>
+              </details>
+            )}
+          </div>
+          <div className="text-xs text-neutral-500 max-w-xs">
+            Fix: extend <code>scripts/refresh-funder-context.mjs</code> to pull <code>DISTINCT contact_name FROM xero_invoices WHERE type=&apos;ACCREC&apos;</code> alongside the foundations seed.
+          </div>
+        </div>
+      </div>
+
+      {/* Top customers table */}
+      <div className="rounded-lg border border-neutral-800 bg-neutral-900/50 p-4">
+        <h3 className="text-sm font-medium text-neutral-300 mb-3">
+          Top {topCustomers.length} customers by paid + outstanding
+        </h3>
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="text-left text-xs text-neutral-500 border-b border-neutral-800">
+                <th className="py-2 pr-3 font-medium">#</th>
+                <th className="py-2 pr-3 font-medium">Customer / Funder</th>
+                <th className="py-2 pr-3 font-medium text-right">Invoices</th>
+                <th className="py-2 pr-3 font-medium text-right">Paid</th>
+                <th className="py-2 pr-3 font-medium text-right">Outstanding</th>
+                <th className="py-2 pr-3 font-medium text-right">Draft</th>
+                <th className="py-2 pr-3 font-medium text-right">Last</th>
+                <th className="py-2 pr-3 font-medium">CG?</th>
+              </tr>
+            </thead>
+            <tbody>
+              {topCustomers.map((c, i) => (
+                <tr key={c.contact_name} className="border-b border-neutral-900 last:border-0 hover:bg-neutral-900/40">
+                  <td className="py-2 pr-3 text-xs text-neutral-500 tabular-nums">{i + 1}</td>
+                  <td className="py-2 pr-3 text-neutral-200">{c.contact_name}</td>
+                  <td className="py-2 pr-3 text-right text-xs text-neutral-500 tabular-nums">{c.paid_count}</td>
+                  <td className="py-2 pr-3 text-right tabular-nums text-emerald-300">
+                    {c.paid_total > 0 ? formatMoney(c.paid_total) : '—'}
+                  </td>
+                  <td className="py-2 pr-3 text-right tabular-nums text-amber-300">
+                    {c.authorised_outstanding > 0 ? formatMoney(c.authorised_outstanding) : '—'}
+                  </td>
+                  <td className="py-2 pr-3 text-right tabular-nums text-neutral-400">
+                    {c.draft_total > 0 ? formatMoney(c.draft_total) : '—'}
+                  </td>
+                  <td className="py-2 pr-3 text-right text-xs text-neutral-500 tabular-nums">
+                    {c.last_invoice_date ?? '—'}
+                  </td>
+                  <td className="py-2 pr-3">
+                    {c.in_funder_snapshot
+                      ? <CheckCircle2 size={14} className="text-emerald-400" />
+                      : <AlertTriangle size={12} className="text-amber-500/60" />}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <div className="text-xs text-neutral-600 mt-3">
+          <strong>CG?</strong> = in <code>funder_context_snapshot</code> (the dossier feeding kanban + narrative tools).
+          Amber = missing.
         </div>
       </div>
     </section>
