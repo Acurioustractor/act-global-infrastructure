@@ -23,8 +23,10 @@ import { fileURLToPath } from 'node:url'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const REPO = path.resolve(__dirname, '..')
-loadEnv({ path: path.join(REPO, '.env.local') })
-loadEnv({ path: path.join(REPO, '.env') })
+// override: true so the file values take precedence over any stale shell
+// exports (e.g. an old NOTION_TOKEN from .envrc or zshrc).
+loadEnv({ path: path.join(REPO, '.env.local'), override: true })
+loadEnv({ path: path.join(REPO, '.env'), override: true })
 
 const DRY_RUN = process.argv.includes('--dry-run')
 const PAGE_ID = process.env.NOTION_COMPLIANCE_PAGE_ID
