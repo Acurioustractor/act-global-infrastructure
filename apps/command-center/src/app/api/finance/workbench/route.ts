@@ -90,6 +90,16 @@ interface XeroInvoiceRow {
   income_type: string | null
 }
 
+interface AISuggestion {
+  id: string
+  projectCode: string
+  confidence: number
+  reason: string | null
+  riskFlags: string[]
+  model: string
+  blockedForAutoApply: boolean
+}
+
 interface WorkbenchItem {
   id: string
   source: SourceFilter
@@ -118,6 +128,7 @@ interface WorkbenchItem {
   needsRdReview: boolean
   xeroReference: string | null
   receiptEvidenceUrl: string
+  aiSuggestion: AISuggestion | null
 }
 
 interface SummaryRow {
@@ -260,6 +271,7 @@ function bankLineToItem(row: BankEvidenceRow): WorkbenchItem {
     needsRdReview: false,
     xeroReference: row.xero_transaction_id || row.matched_xero_transaction_id,
     receiptEvidenceUrl: receiptEvidenceUrl(row.date, vendor),
+    aiSuggestion: null,
   }
 }
 
@@ -304,6 +316,7 @@ function xeroTransactionToItem(row: XeroTransactionRow): WorkbenchItem {
     needsRdReview: row.rd_category === 'review',
     xeroReference: row.xero_transaction_id,
     receiptEvidenceUrl: receiptEvidenceUrl(row.date, vendor),
+    aiSuggestion: null,
   }
 }
 
@@ -346,6 +359,7 @@ function xeroInvoiceToItem(row: XeroInvoiceRow): WorkbenchItem {
     needsRdReview: false,
     xeroReference: row.invoice_number || row.xero_id,
     receiptEvidenceUrl: receiptEvidenceUrl(row.date, vendor),
+    aiSuggestion: null,
   }
 }
 
@@ -455,6 +469,88 @@ async function loadSummary() {
   }
 }
 
+// Map workbench source -> AI suggestions source_table column value
+function sourceToAiTable(source: SourceFilter): string | null {
+  switch (source) {
+    case 'bank_lines': return 'bank_statement_lines'
+    case 'xero_transactions': return 'xero_transactions'
+    case 'xero_invoices': return null // grader does not currently emit suggestions for invoices
+    default: return null
+  }
+}
+
+const AI_NO_AUTO_APPLY = new Set(['ASK_USER', 'SL_REVIEW'])
+
+// Attach the best open suggestion (highest confidence, not applied, not rejected)
+// per (source_table, source_record_id) pair to each visible item.
+async function enrichWithAISuggestions(items: WorkbenchItem[]): Promise<void> {
+  // Build buckets by source_table
+  const buckets = new Map<string, string[]>()
+  for (const item of items) {
+    const tbl = sourceToAiTable(item.source)
+    if (!tbl) continue
+    if (!buckets.has(tbl)) buckets.set(tbl, [])
+    buckets.get(tbl)!.push(item.id)
+  }
+  if (!buckets.size) return
+
+  // Fetch all open suggestions for the visible IDs, per table
+  type Row = {
+    id: string
+    source_table: string
+    source_record_id: string
+    suggested_project_code: string
+    confidence: number
+    reason: string | null
+    risk_flags: string[] | null
+    model: string
+  }
+  const allRows: Row[] = []
+  await Promise.all(Array.from(buckets.entries()).map(async ([tbl, ids]) => {
+    if (!ids.length) return
+    const { data, error } = await supabase
+      .from('finance_ai_routing_suggestions')
+      .select('id, source_table, source_record_id, suggested_project_code, confidence, reason, risk_flags, model')
+      .eq('source_table', tbl)
+      .eq('applied_to_source', false)
+      .is('rejected_at', null)
+      .in('source_record_id', ids)
+      .order('confidence', { ascending: false })
+    if (error) {
+      console.warn(`[workbench] AI suggestions lookup (${tbl}) failed: ${error.message}`)
+      return
+    }
+    if (data) allRows.push(...(data as Row[]))
+  }))
+
+  // Best (highest-confidence) suggestion per (table, recordId)
+  const best = new Map<string, Row>()
+  for (const r of allRows) {
+    const key = `${r.source_table}:${r.source_record_id}`
+    const existing = best.get(key)
+    if (!existing || Number(r.confidence) > Number(existing.confidence)) {
+      best.set(key, r)
+    }
+  }
+
+  // Attach to items in place
+  for (const item of items) {
+    const tbl = sourceToAiTable(item.source)
+    if (!tbl) continue
+    const found = best.get(`${tbl}:${item.id}`)
+    if (!found) continue
+    item.aiSuggestion = {
+      id: found.id,
+      projectCode: found.suggested_project_code,
+      confidence: Number(found.confidence),
+      reason: found.reason,
+      riskFlags: Array.isArray(found.risk_flags) ? found.risk_flags : [],
+      model: found.model,
+      blockedForAutoApply: AI_NO_AUTO_APPLY.has(found.suggested_project_code),
+    }
+  }
+}
+
 export async function GET(request: NextRequest) {
   const params = request.nextUrl.searchParams
   const source = (params.get('source') || 'bank_lines') as SourceFilter
@@ -540,6 +636,9 @@ export async function GET(request: NextRequest) {
         return (new Date(b.date || '1900-01-01').getTime() || 0) - (new Date(a.date || '1900-01-01').getTime() || 0)
       })
 
+    const visibleItems = filtered.slice(0, limit)
+    await enrichWithAISuggestions(visibleItems)
+
     return NextResponse.json({
       fy: { start: FY_START, end: FY_END },
       filters: { source, direction, status, project, q, limit },
@@ -551,7 +650,7 @@ export async function GET(request: NextRequest) {
         status: p.status,
       })),
       totalMatching: filtered.length,
-      items: filtered.slice(0, limit),
+      items: visibleItems,
     })
   } catch (error) {
     console.error('[finance/workbench] GET failed:', error)

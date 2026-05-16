@@ -42,6 +42,16 @@ interface ProjectOption {
   status: string | null
 }
 
+interface AISuggestion {
+  id: string
+  projectCode: string
+  confidence: number
+  reason: string | null
+  riskFlags: string[]
+  model: string
+  blockedForAutoApply: boolean
+}
+
 interface WorkbenchItem {
   id: string
   source: Exclude<SourceFilter, 'all'>
@@ -70,6 +80,7 @@ interface WorkbenchItem {
   needsRdReview: boolean
   xeroReference: string | null
   receiptEvidenceUrl: string
+  aiSuggestion: AISuggestion | null
 }
 
 interface WorkbenchResponse {
@@ -215,6 +226,62 @@ function StatCard({
   )
 }
 
+function AISuggestionChip({
+  item,
+  onAccept,
+  pending,
+}: {
+  item: WorkbenchItem
+  onAccept: () => void
+  pending: boolean
+}) {
+  const s = item.aiSuggestion
+  if (!s) return null
+  const alreadyApplied = item.projectCode && item.projectCode === s.projectCode
+  const tone =
+    s.confidence >= 0.9
+      ? 'border-emerald-400/40 bg-emerald-500/10 text-emerald-200'
+      : s.confidence >= 0.75
+        ? 'border-cyan-400/40 bg-cyan-500/10 text-cyan-200'
+        : s.confidence >= 0.6
+          ? 'border-amber-400/40 bg-amber-500/10 text-amber-200'
+          : 'border-rose-400/40 bg-rose-500/10 text-rose-200'
+
+  return (
+    <div className={cn('mt-2 rounded-lg border px-2 py-1.5 text-[11px]', tone)}>
+      <div className="flex items-center gap-1.5">
+        <FlaskConical className="h-3 w-3" />
+        <span className="font-semibold tabular-nums">{s.projectCode}</span>
+        <span className="tabular-nums">{(s.confidence * 100).toFixed(0)}%</span>
+        {alreadyApplied ? (
+          <span className="ml-auto text-[10px] uppercase tracking-[0.18em] opacity-60">applied</span>
+        ) : s.blockedForAutoApply ? (
+          <span className="ml-auto text-[10px] uppercase tracking-[0.18em] opacity-60">human review</span>
+        ) : (
+          <button
+            type="button"
+            onClick={onAccept}
+            disabled={pending}
+            className="ml-auto rounded-md bg-emerald-400 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.1em] text-slate-950 transition hover:bg-emerald-300 disabled:opacity-50"
+          >
+            {pending ? '…' : 'Accept'}
+          </button>
+        )}
+      </div>
+      {s.reason && <p className="mt-1 leading-tight opacity-80">{s.reason}</p>}
+      {s.riskFlags.length > 0 && (
+        <div className="mt-1 flex flex-wrap gap-1">
+          {s.riskFlags.slice(0, 3).map((f) => (
+            <span key={f} className="rounded-full bg-black/30 px-1.5 py-0.5 text-[9px] uppercase tracking-[0.1em]">
+              {f}
+            </span>
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}
+
 async function fetchWorkbench(params: {
   source: SourceFilter
   status: StatusFilter
@@ -275,6 +342,26 @@ export default function FinanceWorkbenchPage() {
     onSuccess: () => {
       setPendingProjects({})
       setPendingRd({})
+      queryClient.invalidateQueries({ queryKey: ['finance', 'workbench'] })
+    },
+  })
+
+  const [pendingAi, setPendingAi] = useState<string | null>(null)
+  const acceptAiMutation = useMutation({
+    mutationFn: async (item: WorkbenchItem) => {
+      if (!item.aiSuggestion) throw new Error('No AI suggestion to accept')
+      setPendingAi(item.aiSuggestion.id)
+      const res = await fetch('/api/finance/workbench/accept-suggestion', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ suggestionId: item.aiSuggestion.id, action: 'accept' }),
+      })
+      const data = await res.json()
+      if (!res.ok || !data.ok) throw new Error(data.error || 'Accept failed')
+      return data
+    },
+    onSettled: () => setPendingAi(null),
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['finance', 'workbench'] })
     },
   })
@@ -779,6 +866,7 @@ export default function FinanceWorkbenchPage() {
                           {item.projectSource || 'no source'}
                           {item.needsProjectReview ? ' · review broad tag' : ''}
                         </p>
+                        <AISuggestionChip item={item} onAccept={() => acceptAiMutation.mutate(item)} pending={pendingAi === item.aiSuggestion?.id} />
                       </td>
                       <td className="px-4 py-4">
                         {canEditRd ? (
