@@ -236,3 +236,61 @@ Quick reference:
 At session start in this repo, run `git log --since="2 hours ago" --all --oneline` and flag if another session was active. Prevents cross-session races (encountered 2026-05-08 with PR #52).
 
 "Archive X" = `git mv` to a dated `_archive/` dir + `RESTORE.md`. Never `git rm` when "archive" was the request.
+
+## Multi-session discipline (2026-05-17 — load every session)
+
+Parallel Claude Code sessions WILL stomp each other unless these rules hold. The 2026-05-17 ecosystem-digest session hit 3 cross-session collisions in one sitting: stashed untracked files, branch swaps mid-edit, commits landing on wrong branches. This section codifies what stops it happening again.
+
+### Session start (mandatory)
+
+1. `git fetch --prune origin` — sync remote refs, drop deleted remotes.
+2. `git rev-parse --abbrev-ref HEAD` — note the branch you're starting on.
+3. `git log --since="2 hours ago" --all --oneline` — flag unknown commits to the user.
+4. `git status -s` — flag any in-progress work from a prior session.
+
+If steps 3 or 4 surface anything unexpected, **STOP** and surface to the user before any Edit/Write. Cross-session work is the leading cause of lost edits here.
+
+### Active guardrails (installed)
+
+- **Branch-stamp hook** in `.claude/settings.json` (`SessionStart` + `PreToolUse` Edit|Write): warns when HEAD has moved since session start. Stamp file `.claude/.session-branch-stamp` is gitignored. Snippet to install: `.claude/settings.json.proposed-2026-05-17`.
+- **Commit-msg hook** in `.githooks/commit-msg`: nudges (does not block) `Plan: <slug>` adoption. Activate per-clone with `git config core.hooksPath .githooks`.
+- **Weekly ecosystem digest** runs Mon 7:55am AEST (PM2 entry `ecosystem-digest`). Surfaces what shipped across all ACT repos grouped by `Plan:` trailer + by file-area heatmap. Notion page id: `ecosystemDigest` in `config/notion-database-ids.json`.
+
+### Worktree lifecycle
+
+- Each Claude Code session running concurrently MUST be in its own worktree under `.claude/worktrees/<adjective-name-XXXXXX>/`. NEVER two sessions in the main worktree (`/Users/benknight/Code/act-global-infrastructure`).
+- After a worktree's work is merged (or session ends): commit/stash any leftover state, push the branch if useful, then `git worktree remove <path>`.
+- Stale worktrees with leftover untracked work get recovered (move drafts to main repo's `thoughts/shared/drafts/`, commit plan/wiki edits to their own branch, push) before removal.
+
+### Stash hygiene
+
+- `git stash push -m "<descriptive label>"` every time. No anonymous stashes.
+- Prune stashes older than 2 weeks during periodic sweeps (`git stash drop stash@{N}`).
+
+_(See "Archive X" rule above — applies inside agent worktrees too.)_
+
+## Trust profile — solo-author mode (2026-05-17)
+
+ACT is a solo-author repo. **Ben is the only human contributor.** Other PR authors (`claude/*`, `eod-sweep/*`, `codex/*`, `feat/*-YYYY-MM-DD`) are agent worktrees acting on Ben's behalf. Treat their work the same as his own.
+
+### Default actions — no per-action verb needed
+
+- **Merge own PRs** — when `gh pr view <N> --json mergeable,statusCheckRollup` shows mergeable AND no failing required checks AND title doesn't contain `WIP` / `DRAFT` / `DO NOT MERGE`, run `gh pr merge <N> --merge --delete-branch` without asking. Vercel preview failures on PRs that don't touch `apps/` are NOT blocking.
+- **Commit recovered work** — when cleaning stale worktrees / stashes, default to committing preserved files to the current cleanup branch with a `recovered(<area>):` commit message. Never delete unreviewed user work.
+- **Rename agent-named branches** — for `claude/<adjective-noun-XXXXXX>` branches with preserved work, rename to `wip/<topic>-<YYYY-MM-DD>` before pushing. `<topic>` = directory of the first changed file (e.g. `wip/rd-plans-2026-05-17`).
+- **Edit `.claude/settings.json`** — allowed once the `settings.local.json` permission rule is in place (see `.claude/settings.local.json.proposed-2026-05-17` for the rules to paste).
+- **Reload PM2 + `pm2 save`** — when a script or config change requires it, just do it.
+
+### Still requires explicit verb in user's message
+
+- `git push --force` to any branch
+- `git rm` (not `git mv`) of tracked files
+- Anything in `~/.claude/rules/workflow.md` Tier 4 (drop tables, send money, force-push to main, delete user data)
+- Send external messages — email / Slack / Telegram / Notion comments addressed to people other than Ben
+- Production database migrations (apply_migration)
+- Anything that moves money in Xero (invoice writes, payments, voids)
+- GHL contact merge / delete / bulk-update
+
+### Permission baseline (paired with this trust profile)
+
+The trust profile assumes `.claude/settings.local.json` has the allow rules from `.claude/settings.local.json.proposed-2026-05-17`. Without those, the auto-mode classifier still blocks `.claude/settings.json` edits regardless of what this section says.

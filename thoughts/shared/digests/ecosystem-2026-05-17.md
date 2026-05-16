@@ -2,28 +2,32 @@
 title: ACT Ecosystem Digest — 2026-05-17
 window: 7 days (2026-05-10 → 2026-05-17)
 repos_scanned: 8
-total_commits: 166
-plans_advanced: 0
-unscoped_commits: 166
-generated: 2026-05-16T21:21:33.362Z
+total_commits: 189
+plans_advanced: 1
+unscoped_commits: 188
+generated: 2026-05-16T22:29:32.538Z
 ---
 
 # ACT Ecosystem — Week of 2026-05-17
 
-> **166 commits** across **8 repos** · **0 plans advanced** · **166 commits** without `Plan:` trailer
+> **189 commits** across **8 repos** · **1 plans advanced** · **188 commits** without `Plan:` trailer
 
 _Skipped repos (not on disk / not git):_ `goods`
 
 
 ## 🎯 Plans advanced (last 7 days)
 
-_No commits with `Plan: <slug>` trailers in the window. Add `Plan: <slug>` to commit bodies (slug must match a file in `thoughts/shared/plans/`) to track plan movement._
+### `xero-receipt-close-cockpit` — 1 commit
+[plan](../plans/xero-receipt-close-cockpit.md)
+
+- **act-global-infrastructure**
+  - `7af5d2b` chore: accumulated 2026-05-14..16 work — scripts, drafts, reports, notion-workers package _(2026-05-17)_
 
 ## 📦 Per-repo activity
 
 | Repo | Branch | Commits | Plans touched |
 |---|---|---:|---:|
-| act-global-infrastructure | feat/issue-66-ai-tracking-to-dext | 33 | 0 |
+| act-global-infrastructure | feat/eod-sweep-2026-05-17 | 56 | 1 |
 | act-regenerative-studio | main | 0 | 0 |
 | empathy-ledger-v2 | main | 28 | 0 |
 | JusticeHub | main | 2 | 0 |
@@ -32,9 +36,52 @@ _No commits with `Plan: <slug>` trailers in the window. Add `Plan: <slug>` to co
 | act-farm | main | 0 | 0 |
 | The Harvest Website | main | 34 | 0 |
 
+## 🔥 Where work happened (unscoped — last 7 days)
+
+Top 15 areas by file-touches across commits without a `Plan:` trailer. Tells you where work landed even when the trailer is missing. Add rules in `AREA_RULES` (`scripts/weekly-ecosystem-digest.mjs`) when "Other" gets large.
+
+| Area | Intensity | File touches | Commits | Repos |
+|---|---|---:|---:|---|
+| Other | `████████████████████` | 371 | 107 | act-global-infrastructure, empathy-ledger-v2, JusticeHub +3 |
+| Command Center | `█████████░░░░░░░░░░░` | 171 | 3 | act-global-infrastructure |
+| Scripts | `█████░░░░░░░░░░░░░░░` | 101 | 39 | act-global-infrastructure, empathy-ledger-v2, grantscope +1 |
+| Apps · Other | `████░░░░░░░░░░░░░░░░` | 73 | 18 | grantscope |
+| DB Migrations | `██░░░░░░░░░░░░░░░░░░` | 34 | 23 | act-global-infrastructure, empathy-ledger-v2, grantscope |
+| Command Center · API | `██░░░░░░░░░░░░░░░░░░` | 33 | 15 | act-global-infrastructure |
+| Command Center · Finance | `█░░░░░░░░░░░░░░░░░░░` | 20 | 13 | act-global-infrastructure |
+| Handoffs | `█░░░░░░░░░░░░░░░░░░░` | 16 | 14 | act-global-infrastructure, grantscope |
+| Command Center · Lib | `█░░░░░░░░░░░░░░░░░░░` | 13 | 8 | act-global-infrastructure |
+| Thoughts | `█░░░░░░░░░░░░░░░░░░░` | 13 | 9 | act-global-infrastructure, empathy-ledger-v2 |
+| Scripts · Lib | `█░░░░░░░░░░░░░░░░░░░` | 12 | 8 | act-global-infrastructure, grantscope |
+| Notion Syncs | `█░░░░░░░░░░░░░░░░░░░` | 10 | 8 | act-global-infrastructure, grantscope |
+| Wiki | `█░░░░░░░░░░░░░░░░░░░` | 6 | 2 | act-global-infrastructure |
+| Wiki · Decisions | `█░░░░░░░░░░░░░░░░░░░` | 6 | 4 | act-global-infrastructure |
+| Packages | `█░░░░░░░░░░░░░░░░░░░` | 4 | 2 | act-global-infrastructure |
+
+_…and 10 more areas below the top 15._
+
 ## 📝 Commits without `Plan:` trailer
 
 ### act-global-infrastructure
+- `6f325b3` docs(handoff): correct pnpm-lock stash diagnosis + note 2nd parallel-session collision _(2026-05-17)_
+- `4a3cf87` docs(handoff): end-of-day sweep 2026-05-17 — what shipped, test steps, outstanding _(2026-05-17)_
+- `ebbc890` Merge pull request #61 from Acurioustractor/feat/ghl-canonical-code-alignment _(2026-05-17)_
+- `c02e27c` Merge pull request #62 from Acurioustractor/alignment-loop-2026-05-14 _(2026-05-17)_
+- `4855a91` Merge pull request #72 from Acurioustractor/feat/money-brain-followups-2026-05-17 _(2026-05-17)_
+- `168b7d2` Merge pull request #74 from Acurioustractor/feat/issue-66-ai-tracking-to-dext _(2026-05-17)_
+- `21fe311` Merge pull request #75 from Acurioustractor/feat/issue-66-paired-grader _(2026-05-17)_
+- `ee224e6` feat(cron): #66 paired grader — ai-router-xero-mode for the writeback chain _(2026-05-17)_
+- `62954df` Merge pull request #73 from Acurioustractor/feat/ecosystem-digest-2026-05-17 _(2026-05-17)_
+- `c8bc1c3` feat(finance): #66 pivot — push AI tracking suggestions to Xero on publish _(2026-05-17)_
+- `4488d36` feat(ecosystem): weekly cross-repo commit digest → Notion _(2026-05-17)_
+- `b1da0f2` feat(ecosystem): weekly cross-repo commit digest → Notion _(2026-05-17)_
+- `e1f17eb` docs(handoff): refresh Phase 2 ledger — Pass 2A+2B both shipped, PR #72 open _(2026-05-17)_
+- `9ae1ea5` chore(gitignore): exclude MCP caches, local downloads, root screenshots, notion-workers backups _(2026-05-17)_
+- `97cd112` fix(notion-sync): override dotenv with file values to defeat stale shell exports _(2026-05-17)_
+- `7ac103e` fix(cron): telegram fallback to TELEGRAM_AUTHORIZED_USERS[0] _(2026-05-17)_
+- `f06e36e` feat(finance): link AI suggestions from finance index + sidebar divider rendering _(2026-05-17)_
+- `ed063e5` docs(finance): Money Brain — 6 follow-up issues handoff doc _(2026-05-17)_
+- `fbdc5b5` feat(finance): bulk-accept AI suggestions on the workbench filter bar _(2026-05-16)_
 - `51eca14` chore: auto-rebuild Tractorpedia viewer [skip ci] _(2026-05-16)_
 - `43fbc8e` Merge pull request #65 from Acurioustractor/feat/compliance-calendar-2026-05-16 _(2026-05-16)_
 - `b008656` feat(finance): inline AI suggestions in workbench rows + one-click Accept _(2026-05-16)_
@@ -65,6 +112,9 @@ _No commits with `Plan: <slug>` trailers in the window. Add `Plan: <slug>` to co
 - `a99a8a3` chore(finance): Pass A — audit + archive 14 stale routes/APIs/scripts _(2026-05-16)_
 - `f8d81dd` feat(notion): Phase 1 Contacts sync + architecture ADRs _(2026-05-15)_
 - `f9fdbfe` feat(ghl): canonical project-code alignment across Xero · Supabase · GHL · wiki _(2026-05-14)_
+- `265b015` docs(alignment-loop): 2026-05-14 second pass — Q1+Q2+Q3 refresh + drift summary _(2026-05-14)_
+- `13d43b9` feat(notion): Phase 1 Contacts sync + architecture ADRs _(2026-05-15)_
+- `4c47319` feat(ghl): canonical project-code alignment across Xero · Supabase · GHL · wiki _(2026-05-14)_
 - `eba71b4` Merge pull request #60 from Acurioustractor/claude/act-now-cron-wrapper _(2026-05-11)_
 - `1098db2` feat(cron): wrap act-now-sync — Notion + HTML + auto-commit/push _(2026-05-11)_
 - `45911cc` Merge pull request #59 from Acurioustractor/claude/act-now-child-page _(2026-05-11)_

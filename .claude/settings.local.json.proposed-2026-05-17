@@ -1,0 +1,26 @@
+// PROPOSED additions to .claude/settings.local.json `permissions.allow` array.
+// Paste these BEFORE the closing `]` of the allow array (add a comma to the
+// preceding line). Or use `/permissions` slash command in Claude Code to add
+// them interactively.
+//
+// Why these specific rules:
+//   - Edit/Write(.claude/settings.json): lets the agent install/update its own
+//     hooks (e.g. the 2026-05-17 branch-mismatch hook). Without this, every
+//     hook change requires manual paste.
+//   - Bash(gh pr merge:*) + Bash(gh pr review:*): explicit even though shadowed
+//     by Bash(gh *) — documents intent + survives any future tightening.
+//   - Bash(git worktree remove:*) + Bash(git stash drop:*): explicit allow for
+//     the cleanup operations needed during periodic sweeps.
+//
+// SECURITY NOTE: granting Edit on .claude/settings.json lets the agent change
+// its own startup config. The classifier defends against unauthorized agents
+// pulling this lever, so the rule is the explicit "trust this agent" signal.
+// Pair with the trust profile section in CLAUDE.md.
+
+,
+"Edit(.claude/settings.json)",
+"Write(.claude/settings.json)",
+"Bash(gh pr merge:*)",
+"Bash(gh pr review:*)",
+"Bash(git worktree remove:*)",
+"Bash(git stash drop:*)"

@@ -1,0 +1,57 @@
+// PROPOSED `hooks` block for .claude/settings.json — replace the current
+// `"hooks": { ... }` value with this object verbatim.
+//
+// Why: 2026-05-17 ecosystem-digest session got hit by 3 branch switches
+// from parallel sessions, including one that stashed untracked files and
+// silently displaced work in progress. This adds two hooks:
+//
+//   1. SessionStart — write the current branch name to
+//      .claude/.session-branch-stamp at session boot.
+//   2. PreToolUse (Edit|Write) — before any file write, compare HEAD's
+//      branch to the stamp. If different, print a loud ⚠️ to stderr.
+//      Exit 0 so it warns but does not block (catches the race; lets you
+//      decide whether the new branch is intended).
+//
+// The existing PostToolUse tsc hook is preserved verbatim. The stamp file
+// is gitignored.
+//
+// To apply: drop the comments, replace the `"hooks":` value in
+// .claude/settings.json with the JSON below.
+
+"hooks": {
+  "SessionStart": [
+    {
+      "_comment": "Stamp branch at session start so PreToolUse can detect mid-session branch switches from parallel sessions. Triggered by the 2026-05-17 ecosystem-digest incident.",
+      "hooks": [
+        {
+          "type": "command",
+          "command": "git rev-parse --abbrev-ref HEAD 2>/dev/null > .claude/.session-branch-stamp || true"
+        }
+      ]
+    }
+  ],
+  "PreToolUse": [
+    {
+      "_comment": "Warn (do not block) if HEAD has moved since session start. Catches silent branch swaps from parallel sessions before they cause silent data loss.",
+      "matcher": "Edit|Write",
+      "hooks": [
+        {
+          "type": "command",
+          "command": "STAMP=.claude/.session-branch-stamp; if [ -f \"$STAMP\" ]; then CURRENT=$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo unknown); EXPECTED=$(cat \"$STAMP\" 2>/dev/null); if [ -n \"$EXPECTED\" ] && [ \"$CURRENT\" != \"$EXPECTED\" ]; then echo \"⚠️  BRANCH MISMATCH: session started on '$EXPECTED', HEAD now on '$CURRENT'. Another session likely switched branches — verify intent before writing.\" >&2; fi"
+        }
+      ]
+    }
+  ],
+  "PostToolUse": [
+    {
+      "_comment": "After every TypeScript edit in command-center, run tsc --noEmit on just that app. Only fires when a .ts/.tsx/.mts file under apps/command-center/ is touched. Output is truncated to 30 lines so it doesn't blow context.",
+      "matcher": "Edit|Write",
+      "hooks": [
+        {
+          "type": "command",
+          "command": "FILE=\"$CLAUDE_TOOL_INPUT_file_path\"; case \"$FILE\" in *apps/command-center/*.ts|*apps/command-center/*.tsx|*apps/command-center/*.mts) cd apps/command-center && npx tsc --noEmit 2>&1 | head -30 || true ;; *apps/website/*.ts|*apps/website/*.tsx|*apps/website/*.mts) cd apps/website && npx tsc --noEmit 2>&1 | head -30 || true ;; *) : ;; esac"
+        }
+      ]
+    }
+  ]
+}

@@ -107,6 +107,31 @@ function currentBranch(cwd) {
   }
 }
 
+function getFilesPerCommit(repoPath, sinceDays) {
+  // One git call returns hash + changed file list, parsed via __COMMIT__ marker.
+  // Cheaper than N `git show` calls. Map keyed by short hash (matches %h).
+  const map = {}
+  try {
+    const out = execSync(
+      `git log --since="${sinceDays} days ago" --name-only --format="__COMMIT__%h"`,
+      { cwd: repoPath, encoding: 'utf8', maxBuffer: 32 * 1024 * 1024 }
+    )
+    let current = null
+    for (const line of out.split('\n')) {
+      if (line.startsWith('__COMMIT__')) {
+        current = line.slice('__COMMIT__'.length).trim()
+        if (current) map[current] = []
+      } else if (current && line.trim()) {
+        map[current].push(line.trim())
+      }
+    }
+  } catch {
+    // Best-effort. If files-per-commit fails, downstream area-grouping
+    // just shows nothing — does not block the rest of the digest.
+  }
+  return map
+}
+
 function scrapeRepo(repoPath, sinceDays, validSlugs) {
   const repoName = basename(repoPath)
   const result = {
@@ -114,7 +139,7 @@ function scrapeRepo(repoPath, sinceDays, validSlugs) {
     repoName,
     branch: '?',
     available: false,
-    commits: [], // { hash, subject, dateIso, planSlug | null }
+    commits: [], // { hash, subject, dateIso, planSlug | null, files: [] }
     error: null,
   }
 
@@ -124,6 +149,8 @@ function scrapeRepo(repoPath, sinceDays, validSlugs) {
   }
   result.available = true
   result.branch = currentBranch(repoPath)
+
+  const filesMap = getFilesPerCommit(repoPath, sinceDays)
 
   try {
     // %h hash · %s subject · %ai author date · %b body
@@ -151,6 +178,7 @@ function scrapeRepo(repoPath, sinceDays, validSlugs) {
         subject,
         dateIso: dateIso.split(' ')[0] || '',
         planSlug,
+        files: filesMap[hash] || [],
       })
     }
   } catch (e) {
@@ -160,10 +188,60 @@ function scrapeRepo(repoPath, sinceDays, validSlugs) {
   return result
 }
 
+// ── Area mapping (file path → human area) ────────────────────────────
+
+// Order matters: first match wins. Tuned for the ACT ecosystem repos.
+// Add rules as new dirs become hot. If a path doesn't match anything,
+// it falls through to "Other" — which is the signal to add a rule.
+const AREA_RULES = [
+  [/^apps\/command-center\/src\/app\/finance\//, 'Command Center · Finance'],
+  [/^apps\/command-center\/src\/app\/api\//, 'Command Center · API'],
+  [/^apps\/command-center\/src\/app\//, 'Command Center · UI'],
+  [/^apps\/command-center\/src\//, 'Command Center · Lib'],
+  [/^apps\/command-center\//, 'Command Center'],
+  [/^apps\/website\//, 'Website'],
+  [/^apps\//, 'Apps · Other'],
+  [/^packages\//, 'Packages'],
+  [/^scripts\/sync-.*-to-notion/, 'Notion Syncs'],
+  [/^scripts\/(sync|notion)-/, 'Notion Syncs'],
+  [/^scripts\/weekly-/, 'Weekly Crons'],
+  [/^scripts\/lib\//, 'Scripts · Lib'],
+  [/^scripts\//, 'Scripts'],
+  [/^wiki\/projects\//, 'Wiki · Projects'],
+  [/^wiki\/decisions\//, 'Wiki · Decisions'],
+  [/^wiki\/finance\//, 'Wiki · Finance'],
+  [/^wiki\//, 'Wiki'],
+  [/^thoughts\/shared\/plans\//, 'Plans'],
+  [/^thoughts\/shared\/handoffs\//, 'Handoffs'],
+  [/^thoughts\/shared\/rd-pack/, 'R&D Pack'],
+  [/^thoughts\/shared\/digests\//, 'Digests'],
+  [/^thoughts\//, 'Thoughts'],
+  [/^supabase\/migrations\//, 'DB Migrations'],
+  [/^supabase\//, 'Supabase'],
+  [/^config\//, 'Config'],
+  [/^\.claude\/skills\//, 'Skills'],
+  [/^\.claude\//, 'Claude Config'],
+  [/^\.githooks\//, 'Git Hooks'],
+  [/^\.github\//, 'CI/CD'],
+  [/^docs\//, 'Docs'],
+  [/^public\//, 'Public Assets'],
+]
+
+function mapFileToArea(filepath) {
+  for (const [re, area] of AREA_RULES) {
+    if (re.test(filepath)) return area
+  }
+  return 'Other'
+}
+
 // ── Aggregate ────────────────────────────────────────────────────────
 
 function buildAggregate(repoResults) {
   const byPlan = {} // slug -> [{ repoName, hash, subject, dateIso }]
+  // Area-level rollup of UNSCOPED commits (the ones without `Plan:`).
+  // Counts both commits-that-touched-area (Set) and file-touches (int) so
+  // we surface intensity even when a single commit edits many files.
+  const byArea = {} // area -> { commits: Set, fileTouches: number, repos: Set }
   let totalCommits = 0
   let unscopedCount = 0
 
@@ -180,6 +258,17 @@ function buildAggregate(repoResults) {
         })
       } else {
         unscopedCount++
+        // Drop unscoped commit's files into area buckets. Merge commits
+        // and empty diffs simply contribute nothing — fine.
+        for (const file of c.files || []) {
+          const area = mapFileToArea(file)
+          if (!byArea[area]) {
+            byArea[area] = { commits: new Set(), fileTouches: 0, repos: new Set() }
+          }
+          byArea[area].commits.add(`${r.repoName}:${c.hash}`)
+          byArea[area].fileTouches++
+          byArea[area].repos.add(r.repoName)
+        }
       }
     }
   }
@@ -188,6 +277,7 @@ function buildAggregate(repoResults) {
     totalCommits,
     unscopedCount,
     byPlan,
+    byArea,
     reposScanned: repoResults.filter((r) => r.available).length,
     reposMissing: repoResults.filter((r) => !r.available).map((r) => ({ name: r.repoName, error: r.error })),
   }
@@ -261,6 +351,28 @@ ${planEntries.length === 0
 | Repo | Branch | Commits | Plans touched |
 |---|---|---:|---:|
 ${perRepoRows.join('\n') || '| _no active repos_ | | | |'}
+
+## 🔥 Where work happened (unscoped — last ${days} days)
+
+${(() => {
+  const areas = Object.entries(agg.byArea)
+    .map(([area, v]) => ({ area, commits: v.commits.size, fileTouches: v.fileTouches, repos: Array.from(v.repos) }))
+    .sort((a, b) => b.fileTouches - a.fileTouches)
+  if (areas.length === 0) return '_No file-touches recorded — either every commit had a `Plan:` trailer (good) or git could not enumerate files (check log)._'
+  const top = areas.slice(0, 15)
+  const maxTouches = top[0].fileTouches
+  const rows = top.map(({ area, commits, fileTouches, repos }) => {
+    const barLen = Math.max(1, Math.round((fileTouches / maxTouches) * 20))
+    const bar = '█'.repeat(barLen) + '░'.repeat(20 - barLen)
+    return `| ${area} | \`${bar}\` | ${fileTouches} | ${commits} | ${repos.slice(0, 3).join(', ')}${repos.length > 3 ? ` +${repos.length - 3}` : ''} |`
+  })
+  const remaining = areas.length - top.length
+  return `Top ${top.length} areas by file-touches across commits without a \`Plan:\` trailer. Tells you where work landed even when the trailer is missing. Add rules in \`AREA_RULES\` (\`scripts/weekly-ecosystem-digest.mjs\`) when "Other" gets large.
+
+| Area | Intensity | File touches | Commits | Repos |
+|---|---|---:|---:|---|
+${rows.join('\n')}${remaining > 0 ? `\n\n_…and ${remaining} more area${remaining === 1 ? '' : 's'} below the top 15._` : ''}`
+})()}
 
 ## 📝 Commits without \`Plan:\` trailer
 
