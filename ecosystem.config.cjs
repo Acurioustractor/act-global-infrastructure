@@ -65,6 +65,16 @@ const cronScripts = [
     cron_restart: '30 8 * * 1', // Weekly Monday 8:30am AEST
   },
   {
+    // Weekly Monday 7:55am AEST: cross-repo digest of what shipped in the
+    // last 7 days across all 9 ACT codebases, grouped by `Plan: <slug>`
+    // commit trailer. Pushes into Notion page cfg.ecosystemDigest. Lands
+    // before notion-weekly-digest (8:30) so ecosystem context arrives first.
+    name: 'ecosystem-digest',
+    script: 'scripts/weekly-ecosystem-digest.mjs',
+    args: '--notion',
+    cron_restart: '55 7 * * 1', // Weekly Monday 7:55am AEST
+  },
+  {
     // Daily 7am AEST: refresh "🎯 Today's Focus" + sweep for drift signals
     // (stuck opps · overdue invoices · FAIL cadence · easy-win storyteller
     // transcripts) and auto-create new Action Items rows.
