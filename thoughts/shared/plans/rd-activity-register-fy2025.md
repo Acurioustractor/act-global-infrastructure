@@ -1,3 +1,7 @@
+> **⚠️ FRAMING UPDATE 2026-04-28.** The technical narratives, git evidence, and 7 R&D activity clusters in this register remain reusable. **However, the income-year framing must shift from FY24-25 to FY25-26.** Per Path C decision (2026-04-27), the FY24-25 claim is forfeited (sole-trader period, ineligible under ITAA 1997 s355-25). The FY25-26 claim runs from 24 Apr 2026 (A Curious Tractor Pty Ltd incorporation, ACN 697 347 676) onward. When the R&D specialist re-uses this register, the activities to register are those *the Pty Ltd conducted post-24 Apr 2026* — the pre-24-Apr commit history and earlier activities are evidence of project continuity but are not directly claimable. Live plan: [rd-tax-incentive-fy2526-path-c.md](rd-tax-incentive-fy2526-path-c.md).
+
+---
+
 # ACT R&D Activity Register — FY2025 Development Period
 
 **Prepared:** March 11, 2026

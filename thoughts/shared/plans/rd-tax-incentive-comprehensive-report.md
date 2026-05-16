@@ -1,3 +1,7 @@
+> **⚠️ SUPERSEDED 2026-04-28 — read before acting.** This plan assumed a Pty Ltd that didn't exist during FY24-25 and proposes a claim that is structurally not possible: sole traders are excluded from the R&DTI under ITAA 1997 s355-25, and A Curious Tractor Pty Ltd (ACN 697 347 676) only registered 2026-04-24. **Do not act on the FY24-25 action checklist or the FY24-25/FY25-26 offset estimates** — both assume a Pty Ltd in place from 1 Jul 2024 that didn't exist. Use **[rd-tax-incentive-fy2526-path-c.md](rd-tax-incentive-fy2526-path-c.md)** as the live plan: forfeit FY24-25, claim FY25-26 onward through the new Pty Ltd, deadline 30 April 2027. The activity narratives (Section 2), vendor R&D-eligibility map (Section 9), and evidence sources (Section 6) below are still useful inputs for the FY25-26 register.
+
+---
+
 # ACT R&D Tax Incentive — Comprehensive Report
 
 **Prepared:** 19 February 2026

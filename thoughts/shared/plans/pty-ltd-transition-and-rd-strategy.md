@@ -1,3 +1,11 @@
+> **⚠️ PARTIALLY SUPERSEDED 2026-04-28.** Two assumptions in this plan have changed since 2026-03-17:
+> 1. **Entity is now registered.** A Curious Tractor Pty Ltd (ACN 697 347 676, NOT "ACT Ventures") was registered 2026-04-24 — earlier than the 1 Jul 2026 target. ABN application in flight.
+> 2. **The FY24-25 R&DTI claim is forfeited (Path C, locked 2026-04-27).** Sole traders are excluded under ITAA 1997 s355-25. The "Register R&D Tax Incentive with AusIndustry" item against 30 April 2026 is no longer being pursued. Do not act on the 30 April line or on the $468K / $204K FY26 R&D estimate (assumed full-year Pty Ltd that didn't exist).
+>
+> **Live R&D plan:** [rd-tax-incentive-fy2526-path-c.md](rd-tax-incentive-fy2526-path-c.md). The cash movement strategy (Part 4), end-of-FY actions (super, instant asset write-off), and director-wages R&D leverage analysis (Part 3) are still good — the entity-eligibility framing and FY24-25 deadline are not.
+
+---
+
 # Pty Ltd Transition, R&D Tax Incentive & Cash Movement Strategy
 
 **Entity:** Nicholas Marchesi T/as A Curious Tractor → ACT Ventures Pty Ltd
