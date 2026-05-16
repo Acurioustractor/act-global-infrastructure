@@ -153,25 +153,55 @@ Note: the entity migration doc surfaced **D&O insurance binding deadline = 2026-
 
 ### Local-state cleanup notes
 
-After the next session pulls latest main, the following local-only state should be cleared:
+After the next session pulls latest main, the following local-only state should be reviewed.
+
+**IMPORTANT — pnpm-lock.yaml drift in stash:** I initially labeled this as "cron drift" but inspection showed it's a pending dependency bump:
+
+- `next: 15.1.3 → 15.3.9` (minor version bump — possible breaking changes, needs a build smoke-test)
+- `@img/sharp: 0.33.5 → 0.34.5`
+
+A parallel session also caught this and re-stashed it with a clearer label *"leftover pnpm-lock from old session 2026-05-17 (stashed by ecosystem-digest cleanup)"*. The stash exists in near-duplicate copies. Compare and decide:
 
 ```bash
-# Stashes worth dropping (cron-output noise, no work)
-git stash list   # confirm there's one labeled "cron drift + untracked carryover from 2026-05-17 session"
-git stash drop stash@{0}   # the eod-sweep stash
-# Older stashes from earlier sessions can also be reviewed/dropped:
-#   stash@{1-4}: codex/* and cockpit-refresh-* WIPs from April/May
+# Inspect both copies, see which to keep
+git stash show -p stash@{0}   # parallel session's relabel
+git stash show -p stash@{1}   # my original stash
 
-# Local branches that are merged + deleted on origin (safe to prune)
-git branch -d feat/issue-66-ai-tracking-to-dext   # merged via #74
-git branch -d feat/money-brain-followups-2026-05-17   # merged via #72
-git branch -d feat/ecosystem-digest-2026-05-17   # merged via #73
-git branch -d feat/issue-66-paired-grader   # merged via #75
-# Plus any other merged branches: git remote prune origin && git branch --merged origin/main
+# Option A — adopt the bump
+git stash pop stash@{0}                                  # apply the lockfile change
+pnpm install                                             # reconcile
+pnpm --filter @act/command-center build                  # smoke test
+# If clean → commit on a new branch + PR
+
+# Option B — reject the bump (stay on 15.1.3)
+git stash drop stash@{0}
+git stash drop stash@{1}     # also drop the duplicate
+# pnpm-lock.yaml on main stays at 15.1.3
+```
+
+**Other stashes**:
+- `stash@{2}`: "background cron output 2026-05-17" — cron drift only, safe to drop
+- `stash@{3-5}`: codex/* and cockpit-refresh-* WIPs from April/May — review before dropping
+
+**Local branches** merged + deleted on origin (safe to prune):
+
+```bash
+git branch -d feat/issue-66-ai-tracking-to-dext       # merged via #74
+git branch -d feat/money-brain-followups-2026-05-17    # merged via #72
+git branch -d feat/ecosystem-digest-2026-05-17         # merged via #73
+git branch -d feat/issue-66-paired-grader              # merged via #75
+# After EOD-sweep PR merges:
+git branch -d feat/eod-sweep-2026-05-17                # will be merged via #76
+# Bulk prune of any other merged branches:
+git remote prune origin && git branch --merged origin/main | grep -v '^[* ]\+main$' | xargs -n1 git branch -d
 ```
 
 ## Session metadata
 
-- **Branch this doc lives on:** `feat/eod-sweep-2026-05-17`
+- **Branch this doc lives on:** `feat/eod-sweep-2026-05-17` (PR #76)
 - **Net result of session on main:** 6 merge commits, ~3,500 net added lines, 3 new PM2 crons, 2 new Supabase columns + 1 migration record reconciliation
-- **One incident worth noting:** parallel session collision early on — uncommitted ecosystem.config.cjs edit got swept into someone else's commit (b1da0f2). Untangled via reset + manual edit. Lesson: when working in this repo with potential parallel sessions, commit early or use a worktree.
+- **Two parallel-session incidents worth noting:**
+  1. Early on, uncommitted `ecosystem.config.cjs` edit got swept into another session's commit (`b1da0f2`). Untangled via reset + manual edit.
+  2. Late session, a parallel session created `feat/ecosystem-digest-followups-2026-05-17` AND switched my checkout to it while I was writing the handoff. Switched back manually.
+  
+  Lesson: when working in this repo with active parallel sessions, commit early and check `git branch --show-current` before each edit. Or use a worktree for isolation.
