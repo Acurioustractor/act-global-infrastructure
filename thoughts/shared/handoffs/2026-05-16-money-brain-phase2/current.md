@@ -1,126 +1,119 @@
 # Money Brain Phase 2 — Resume Handoff
 
-**Updated:** 2026-05-16T07:55:00Z
+**Updated:** 2026-05-17T20:30:00Z
 **Goal:** Build COO+CIO+CFO+risk Money Brain on top of /finance/command
 **Branches:**
-- Phase 1 shipped to `main` via PR #63 (Pass A→I: /finance/command page + view + backfills + digest cron)
-- Phase 2 Pass A shipped to `feat/compliance-calendar-2026-05-16` (commit `c3e0e03`, **PR not open yet** — Tier 3 awaits Ben's verb)
+- Phase 1 shipped to `main` via PR #63
+- Phase 2 Pass 2A + Pass 2B shipped to `main` via PR #65 (merged 2026-05-16)
+- Post-PR-#65 follow-ups in flight on `feat/money-brain-followups-2026-05-17` via PR #72 (open, awaiting review)
 
 ## Ledger
 
 ### Now
-[->] Pass 2A complete. Ready for Pass 2B (pilot lifecycle) — fresh branch off main, design fully locked in plan file.
+[->] Pass 2A + 2B both shipped & merged. PR #72 (follow-ups) open. **Next:** Pass 2C (Accountability) OR start the 6-issue Money Brain set (#66-71).
 
-### Last session — 12 grill questions + 6 build tasks
-- Q1-Q11: design decisions captured in `~/.claude/plans/coo-cio-cfo-money-brain-phase2.md`
-- Q12: build order = Compliance → Pilot → Accountability
-- Pass 2A built end-to-end: wiki canonical file → compute script → API → AT RISK pane → Telegram cron → Notion sync (graceful no-op without env)
-- Live state: 2 🟡 medium obligations today (cutover T-45, BAS Q4 T-73), 1 ✓ filed (BAS Q3)
-- Build clean (TS exit 0). Prerender errors on `/finance/invoices` + `/` are pre-existing, unrelated to changes; Vercel handles fine
+### What shipped in the parallel-terminal flurry (2026-05-14 → 2026-05-17)
 
-### Next — Pass 2B (Pilot Lifecycle, single session)
+Far more than just compliance landed before PR #65 merged. The branch picked up most of the Phase 2 + AI infrastructure work in one cycle:
 
-**Branch:** `git checkout main && git pull --ff-only && git checkout -b feat/pilot-lifecycle-2026-05-17`
+| Commit | Feature | Pass |
+|---|---|---|
+| `c3e0e03` | Compliance calendar + AT RISK TODAY pane + Telegram cron + Notion sync | 2A ✓ |
+| `62d3696` | idea_board lifecycle + reminders + AT RISK wiring | 2B ✓ |
+| `a993357` | Monday-chain cron wrapper (one entry, failure-isolated) | — |
+| `44023ee` | AI Dext routing grader (Sonnet 4.6 → `finance_ai_routing_suggestions`) | — |
+| `e7ea801` | Pre-publish Dext grader (every receipt graded before Xero) | — |
+| `d8175c4` | Xero copilot click-wiring (`attach_evidence` + `find_match_bill` + `transfer`) | — |
+| `3467704` | AI suggestions review page (`/finance/ai-suggestions`) | — |
+| `b008656` | Inline AI suggestions in workbench rows + one-click Accept | — |
+| `f40a5e3` | Weekly narrative digest (Curtis voice, Sonnet 4.6) | — |
+| `fbdc5b5` | Bulk-accept on workbench filter bar | follow-up |
 
-**Tasks (in build order):**
+Plus this session's 5 follow-ups on PR #72:
+- `f06e36e` link AI suggestions card from finance index + sidebar dividers
+- `7ac103e` telegram chat-id fallback to `TELEGRAM_AUTHORIZED_USERS[0]`
+- `97cd112` notion sync dotenv override (defeats stale shell exports)
+- `7af5d2b` chore — 121 files of accumulated 2026-05-14..16 work (drafts, reports, scripts, `packages/notion-workers/` package)
+- `9ae1ea5` gitignore — MCP caches, local downloads, root PNGs, workers backups
 
-1. **B1 · Schema migration** — `supabase/migrations/20260517_idea_lifecycle.sql`:
-   - `ALTER TABLE idea_board ADD COLUMN lifecycle_stage text DEFAULT 'idea' CHECK (lifecycle_stage IN ('idea','scope','fundraise','start','killed'))`
-   - `ALTER TABLE idea_board ADD COLUMN owner text DEFAULT 'ben'`
-   - `ALTER TABLE idea_board ADD COLUMN kill_reason text`
-   - `CREATE TABLE idea_snoozes (id uuid PK, idea_id uuid FK references idea_board, snoozed_at timestamptz, snoozed_until date, by_owner text)`
-   - Backfill 73 existing rows: `open → idea`, `exploring → scope`, `doing → start`, `done → start`. All `owner = 'ben'`.
-   - Apply via `mcp__supabase__apply_migration`.
+## Outstanding — three threads
 
-2. **B2 · Telegram bot agent tools** in `apps/command-center/src/lib/telegram/bot.ts` (and `src/lib/agent-tools.ts`):
-   - `add_idea(text, category?, energy?, value_estimate?)` — sets `owner` from Telegram user ID (map via env or hardcode `ben`), stage `'idea'`
-   - `transition_idea_stage(id, stage, kill_reason?)` — validates state-machine moves; on `start` triggers AI-suggest flow
-   - `snooze_idea(id, days)` — INSERT into `idea_snoozes`; refuses if snooze_count >= 3
-   - Inline keyboard builder for reminders: `→ fundraise` `→ start` `❌ kill` `💤 snooze 14d`
+### Track A — Pass 2C (Accountability) — last pass of Phase 2
 
-3. **B3 · AI-suggest project_code helper** — `scripts/lib/projects/suggest-code.mjs`:
-   - Input: idea text + existing `projects.code` list
-   - Anthropic call (Claude Haiku — cheap for 2-letter naming)
-   - Returns `ACT-XX` suffix
-   - On confirm: `INSERT INTO projects (code, name, tier, status)` (tier='satellite', status='active') + `UPDATE idea_board SET project_code = ?`
+Never started. Sized ~1 session. Locked design in `~/.claude/plans/coo-cio-cfo-money-brain-phase2.md` § Pass 2C.
 
-4. **B4 · Reminder cron** — `scripts/idea-board-reminders.mjs`:
-   - Stage-aware tiered staleness: `idea` 90d · `scope` 30d · `fundraise` 14d · `start` never · `killed` never
-   - Group by `owner`, max 5 items per DM per night
-   - Inline buttons per item (via grammY `InlineKeyboardMarkup`)
-   - Add PM2 entry: daily 8:00am AEST (`'0 8 * * *'`)
+- **C1 · Ack tables** — `compliance_ack` + `idea_ack` (lightweight: id, item_id/type, ack_at, ack_by)
+- **C2 · Debt counter on AT RISK pane** — snapshot ("3 ack-overdue today") not cumulative (settled at Q11)
+- **C3 · Weekly digest section** — extend `scripts/weekly-money-digest.mjs` with hits/misses/snooze chain. Friday 3pm Telegram delivery (existing cron, add sections)
 
-5. **B5 · `/ideas` page UX update** — `apps/command-center/src/app/ideas/page.tsx` (1057 LOC existing kanban):
-   - Replace status columns (open/exploring/doing/done) with lifecycle stages (idea/scope/fundraise/start/killed)
-   - Add owner badge + snooze count badge (`💤 ×2`)
-   - Deep-link target: `/ideas?focus=<idea_id>` opens specific card
+### Track B — Money Brain 6-issue set (created 2026-05-16 evening)
 
-6. **B6 · Wire pilot risks into AT RISK TODAY pane** — `/api/finance/command/route.ts`:
-   - Extend the AT RISK aggregation (currently compliance + cash/runway + drift) to include stale ideas
-   - Severity: 🟠 if scope 30d+ or fundraise 14d+; 🟡 if snooze-burned (3 snoozes total)
+Handoff: `thoughts/shared/handoffs/2026-05-17-money-brain-issue-set.md`. Total ~5 days. Priority order **1 → 4 → 2 → 3 → 6 → 5**:
 
-### After Pass 2B: Pass 2C — Accountability surfaces
-- `compliance_ack` + `idea_ack` lightweight tables
-- Debt counter on AT RISK pane (snapshot, not cumulative — settled in grill Q11)
-- Extend `scripts/weekly-money-digest.mjs` with compliance/idea/snooze/ack-gap sections
-- Friday 3pm Telegram delivery (existing cron, just add sections)
+- **#66** Push AI project_code to Dext tracking before publish (0.5d) — every receipt arrives in Dext with project pre-filled
+- **#69** Xero webhook for sub-minute bank line updates (1d) — polling → push
+- **#67** Founder pay tracker widget on `/finance/command` (0.5d)
+- **#68** Live R&D tracker — running total + 43.5% refund estimate (1d)
+- **#71** Phone shortcut + voice-memo capture (1.25d)
+- **#70** Roadmap waterfall — 6/12/60mo cashflow (1-2d)
 
-## Locked design decisions
+### Track C — Open PRs needing decision
 
-Full plan + 12 grilled decisions: `~/.claude/plans/coo-cio-cfo-money-brain-phase2.md`
+- **#72** money-brain-followups (this session's PR) — awaiting review/merge
+- **#62** Alignment Loop 2026-05-14 second pass — stale, decide merge/close
+- **#61** ghl-canonical-code-alignment — stale (2026-05-13), decide merge/close
+- **#50** Alignment Loop 2026-05-08 — very stale (2026-04-26), almost certainly close
+- **#48** cockpit gen failed 2026-04-25 — very stale, almost certainly close
 
-Quick reference for Pass 2B:
-- Pilot stages: **idea → scope → fundraise → start + killed**
-- Reminder thresholds: **idea 90d · scope 30d · fundraise 14d · start never · killed never**
-- Owner column on idea_board, default `ben`
-- Capture path: **Telegram-first** via `/idea <text>` bot command
-- Reminder action loop: **inline Telegram buttons** (advance/kill/snooze)
-- Kill: **optional one-word reason** (encouraged not required)
-- Snooze: **3-strike cap** then forced decision
-- Project bridge on `→ start`: **AI-suggest, user confirms**; creates `projects` row but no GHL opp auto-creation
+## Pass 2C build sketch (when ready)
 
-## Open Tier-2/3 items (Ben's verb required)
+### C1 · Ack tables (`supabase/migrations/20260518_ack_tables.sql`)
 
-1. **Open PR for Pass 2A**: `gh pr create --base main --head feat/compliance-calendar-2026-05-16 --title "Pass 2A — compliance calendar + AT RISK TODAY pane"`
-2. **PM2 start** new crons: `pm2 start ecosystem.config.cjs --only compliance-snapshot,compliance-alerts,compliance-notion-sync && pm2 save`
-3. **Notion compliance page**: create page under ACT Money Framework, share with integration, add `NOTION_COMPLIANCE_PAGE_ID` to `.env.local`. Until then `compliance-notion-sync` cron logs gracefully and exits 0.
-4. **Smoke-test in browser** at http://localhost:3002/finance/command — visually confirm AT RISK pane renders the 2 medium items
+```sql
+CREATE TABLE compliance_ack (
+  id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  obligation_id text NOT NULL,       -- e.g. 'bas-q4-fy26' from compliance-calendar.md
+  ack_at timestamptz DEFAULT now(),
+  ack_by text NOT NULL,              -- 'ben' | 'nic'
+  note text                          -- optional context
+);
 
-## Critical files (Pass 2A built/edited)
+CREATE TABLE idea_ack (
+  id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  idea_id uuid NOT NULL REFERENCES idea_board(id) ON DELETE CASCADE,
+  ack_at timestamptz DEFAULT now(),
+  ack_by text NOT NULL,
+  decision text NOT NULL CHECK (decision IN ('saw','advanced','killed','snoozed'))
+);
 
-- `wiki/finance/compliance-calendar.md` (NEW — canonical source, edit when filings happen or new entities added)
-- `scripts/build-compliance-calendar.mjs` (NEW)
-- `scripts/compliance-alerts.mjs` (NEW)
-- `scripts/sync-compliance-calendar-to-notion.mjs` (NEW)
-- `apps/command-center/src/app/api/finance/compliance-calendar/route.ts` (NEW)
-- `apps/command-center/src/app/finance/command/page.tsx` (EDIT — added `AtRiskTodaySection` above `TopLayer`)
-- `ecosystem.config.cjs` (EDIT — 3 new daily crons 7:00/7:30/7:45)
-- `thoughts/shared/data/compliance-calendar/2026-05-16.json` (seeded snapshot)
+CREATE INDEX idx_compliance_ack_obligation ON compliance_ack(obligation_id);
+CREATE INDEX idx_idea_ack_idea ON idea_ack(idea_id);
+```
+
+### C2 · Debt counter — extend `/api/finance/command/route.ts`
+
+In the AT RISK aggregator, count obligations/ideas that pinged in last 14 days WITHOUT a matching ack row. Surface as a header pill: `📒 3 ack-overdue` (red if >5, yellow if 1-5, hidden if 0).
+
+### C3 · Weekly digest — extend `scripts/weekly-money-digest.mjs`
+
+Add three sections:
+- **Compliance hits/misses** — what got acked vs missed in the past week
+- **Idea decisions** — what moved (advanced/killed/snoozed) vs what stayed stale
+- **Snooze chain** — anything snoozed 2+ times that's approaching the 3-cap
 
 ## Operational notes
 
-- The `compliance-snapshot` cron at 7am rebuilds the JSON daily. Without it, the snapshot would go stale.
-- Add a new BAS quarter to the wiki annually (at FY rollover).
-- When a BAS is filed: edit the wiki to set `status: filed` + `last_filed_at: <date>`. Re-run `scripts/build-compliance-calendar.mjs` to refresh.
-- Grant acquittals are auto-pulled — when a grant gets an `acquittal_due_date` in GHL (via canonical alignment work), it shows up automatically on next cron run.
-- Pre-existing `/finance/invoices` + `/` prerender errors during `next build` — unrelated to Phase 2, Vercel handles fine. Don't waste time debugging.
-
-## Branch status
-
-```
-feat/compliance-calendar-2026-05-16 (this session — pushed, not PR'd)
-c3e0e03  feat(finance): Pass 2A — compliance calendar + AT RISK TODAY pane
-
-main (production)
-071155f  chore: auto-rebuild Tractorpedia viewer [skip ci]
-c2c5f74  Merge pull request #63 (Phase 1: /finance/command end-to-end)
-```
+- The `compliance-snapshot` cron at 7am rebuilds the calendar JSON daily.
+- Add a new BAS quarter to `wiki/finance/compliance-calendar.md` annually (at FY rollover).
+- When a BAS is filed: edit wiki → set `status: filed` + `last_filed_at`. Re-run `scripts/build-compliance-calendar.mjs`.
+- Grant acquittals are auto-pulled from GHL when an `acquittal_due_date` is set on the opportunity.
+- The Phase 2 schema additions (`lifecycle_stage`, `idea_snoozes`, `owner`, `kill_reason`) are live in production via Pass 2B's `20260517_idea_lifecycle.sql` migration.
+- Pre-existing `/finance/invoices` + `/` prerender errors during `next build` — unrelated, Vercel handles fine. Don't debug.
 
 ## Resume sequence
 
 1. `/clear`
 2. Open this handoff: `thoughts/shared/handoffs/2026-05-16-money-brain-phase2/current.md`
-3. Re-read plan: `~/.claude/plans/coo-cio-cfo-money-brain-phase2.md`
-4. Decide: open PR for Pass 2A first, OR jump straight to Pass 2B
-5. If Pass 2B: `git checkout main && git pull && git checkout -b feat/pilot-lifecycle-2026-05-17`
-6. Start with B1 schema migration via `mcp__supabase__apply_migration`
+3. Decide thread: **A** (Pass 2C), **B** (start #66 — recommended), or **C** (stale PR triage)
+4. If #66: read the issue body via `gh issue view 66`, branch off latest main, ship
+5. If Pass 2C: re-read `~/.claude/plans/coo-cio-cfo-money-brain-phase2.md` § Pass 2C, branch off latest main, start with C1 migration
