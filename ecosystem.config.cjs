@@ -237,6 +237,11 @@ const cronScripts = [
     cron_restart: '45 7 * * *', // Daily 7:45am AEST — push latest snapshot to Notion mirror page (no-op if NOTION_COMPLIANCE_PAGE_ID unset)
   },
   {
+    name: 'idea-board-reminders',
+    script: 'scripts/idea-board-reminders.mjs',
+    cron_restart: '0 8 * * *', // Daily 8am AEST — per-owner DM with stale ideas + inline buttons (idea 90d, scope 30d, fundraise 14d). Cap 5 per DM.
+  },
+  {
     name: 'telegram-money-alerts',
     script: 'scripts/telegram-money-alerts.mjs',
     cron_restart: '0 13 * * *', // Daily 1pm AEST — afternoon alert (silent if nothing actionable)

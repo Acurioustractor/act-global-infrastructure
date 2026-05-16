@@ -28,6 +28,12 @@ interface Idea {
   project_code: string | null
   energy: number
   status: string
+  // Pass 2B lifecycle fields
+  lifecycle_stage: 'idea' | 'scope' | 'fundraise' | 'start' | 'killed'
+  owner: string
+  stage_entered_at: string
+  kill_reason: string | null
+  snooze_count?: number
   notes: string | null
   value_estimate: number
   created_at: string
@@ -46,11 +52,11 @@ const CATEGORIES = [
 ] as const
 
 const STAGES = [
-  { id: 'open', label: 'Spark', icon: '💡', color: 'border-yellow-500/30', desc: 'Raw ideas' },
-  { id: 'exploring', label: 'Exploring', icon: '🔍', color: 'border-blue-500/30', desc: 'Researching' },
-  { id: 'doing', label: 'Building', icon: '🔨', color: 'border-green-500/30', desc: 'In progress' },
-  { id: 'parked', label: 'Parked', icon: '⏸️', color: 'border-white/10', desc: 'On hold' },
-  { id: 'done', label: 'Done', icon: '✅', color: 'border-emerald-500/30', desc: 'Completed' },
+  { id: 'idea', label: 'Idea', icon: '💡', color: 'border-yellow-500/30', desc: 'Raw experiment (90d nudge)' },
+  { id: 'scope', label: 'Scope', icon: '🔍', color: 'border-blue-500/30', desc: 'Actively shaping (30d nudge)' },
+  { id: 'fundraise', label: 'Fundraise', icon: '💸', color: 'border-purple-500/30', desc: 'Asking for money (14d nudge)' },
+  { id: 'start', label: 'Start', icon: '🚀', color: 'border-emerald-500/30', desc: 'In flight (look-back)' },
+  { id: 'killed', label: 'Killed', icon: '❌', color: 'border-white/10', desc: 'Terminal' },
 ] as const
 
 const PROJECT_CODES = ['EL', 'JH', 'GOC', 'BCV', 'HARVEST', 'FARM', 'ART', 'ACT-CORE', 'ACT-EL', 'ACT-JH', 'ACT-GD', 'ACT-HV'] as const
@@ -96,6 +102,27 @@ function formatMoney(n: number): string {
 
 export default function IdeasPage() {
   const queryClient = useQueryClient()
+  // Pass 2B — deep-link target: /ideas?focus=<idea_id> highlights + scrolls to that card.
+  const [focusId, setFocusId] = React.useState<string | null>(null)
+  React.useEffect(() => {
+    if (typeof window === 'undefined') return
+    const id = new URLSearchParams(window.location.search).get('focus')
+    if (id) setFocusId(id)
+  }, [])
+  React.useEffect(() => {
+    if (!focusId) return
+    // Wait for cards to render then scroll
+    const t = setTimeout(() => {
+      const el = document.getElementById(`idea-card-${focusId}`)
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' })
+        el.classList.add('ring-2', 'ring-yellow-400/70')
+        setTimeout(() => el.classList.remove('ring-2', 'ring-yellow-400/70'), 3000)
+      }
+    }, 250)
+    return () => clearTimeout(t)
+  }, [focusId])
+
   const [newText, setNewText] = React.useState('')
   const [newCategory, setNewCategory] = React.useState('idea')
   const [newProject, setNewProject] = React.useState<string | null>(null)
@@ -225,18 +252,21 @@ export default function IdeasPage() {
   const handleDragEnd = (result: DropResult) => {
     if (!result.destination) return
     const { draggableId, destination } = result
-    const newStatus = destination.droppableId
-    updateMutation.mutate({ id: draggableId, updates: { status: newStatus } })
+    const newStage = destination.droppableId as Idea['lifecycle_stage']
+    updateMutation.mutate({
+      id: draggableId,
+      updates: { lifecycle_stage: newStage, stage_entered_at: new Date().toISOString() },
+    })
   }
 
-  // Board: group by status
+  // Board: group by lifecycle_stage (Pass 2B). Falls back to legacy 'open' → 'idea'.
   const board = React.useMemo(() => {
     const cols: Record<string, Idea[]> = {}
     for (const stage of STAGES) cols[stage.id] = []
     for (const idea of filteredIdeas) {
-      const status = idea.status || 'open'
-      if (cols[status]) cols[status].push(idea)
-      else cols['open'].push(idea)
+      const stage = idea.lifecycle_stage || 'idea'
+      if (cols[stage]) cols[stage].push(idea)
+      else cols['idea'].push(idea)
     }
     return cols
   }, [filteredIdeas])
@@ -577,7 +607,7 @@ export default function IdeasPage() {
             {STAGES.map((stage) => {
               const items = board[stage.id] || []
               const colValue = items.reduce((s, i) => s + (i.value_estimate || 0), 0)
-              const isTerminal = stage.id === 'parked' || stage.id === 'done'
+              const isTerminal = stage.id === 'killed' || stage.id === 'start'
 
               return (
                 <Droppable key={stage.id} droppableId={stage.id}>
@@ -738,6 +768,7 @@ function IdeaCard({
 
   return (
     <div
+      id={`idea-card-${idea.id}`}
       className={cn(
         'rounded-xl border transition-all',
         isEditing ? `${cat.border} bg-white/[0.06]` : 'border-white/[0.06] bg-white/[0.03] hover:bg-white/[0.05] hover:border-white/[0.1]',
@@ -754,6 +785,28 @@ function IdeaCard({
           {idea.project_code && (
             <span className="text-[10px] font-mono px-1.5 py-0.5 bg-white/[0.06] rounded text-white/40">
               {idea.project_code}
+            </span>
+          )}
+          {idea.owner && idea.owner !== 'ben' && (
+            <span className="text-[10px] px-1.5 py-0.5 bg-white/[0.06] rounded text-white/40" title={`Owner: ${idea.owner}`}>
+              @{idea.owner}
+            </span>
+          )}
+          {idea.snooze_count && idea.snooze_count > 0 && (
+            <span
+              className={cn(
+                'text-[10px] px-1.5 py-0.5 rounded',
+                idea.snooze_count >= 3
+                  ? 'bg-red-500/15 text-red-300'
+                  : 'bg-white/[0.06] text-white/50',
+              )}
+              title={
+                idea.snooze_count >= 3
+                  ? 'Snooze cap reached — make a call'
+                  : `${idea.snooze_count} snooze${idea.snooze_count === 1 ? '' : 's'} (cap 3)`
+              }
+            >
+              💤×{idea.snooze_count}
             </span>
           )}
           <span className="flex-1" />
@@ -854,19 +907,22 @@ function IdeaCard({
         {/* Quick action bar (always visible, not just when editing) */}
         {!isEditing && !compact && (
           <div className="flex items-center gap-1 mt-1 opacity-0 group-hover:opacity-100 transition-opacity">
-            {/* Status quick-advance button */}
-            {idea.status !== 'done' && (
+            {/* Lifecycle stage quick-advance button */}
+            {idea.lifecycle_stage !== 'start' && idea.lifecycle_stage !== 'killed' && (
               <button
                 onClick={(e) => {
                   e.stopPropagation()
-                  const statusOrder = ['open', 'exploring', 'doing', 'done']
-                  const idx = statusOrder.indexOf(idea.status)
-                  if (idx < statusOrder.length - 1) {
-                    onUpdate({ status: statusOrder[idx + 1] })
+                  const order: Idea['lifecycle_stage'][] = ['idea', 'scope', 'fundraise', 'start']
+                  const idx = order.indexOf(idea.lifecycle_stage)
+                  if (idx >= 0 && idx < order.length - 1) {
+                    onUpdate({
+                      lifecycle_stage: order[idx + 1],
+                      stage_entered_at: new Date().toISOString(),
+                    })
                   }
                 }}
                 className="flex items-center gap-0.5 text-[10px] text-white/20 hover:text-white/50 px-1 py-0.5 rounded hover:bg-white/[0.04]"
-                title={`Move to next stage`}
+                title="Move to next lifecycle stage"
               >
                 <ChevronRight className="h-3 w-3" />
               </button>
@@ -904,10 +960,13 @@ function IdeaCard({
 
             {/* Controls row */}
             <div className="flex items-center gap-2 flex-wrap">
-              {/* Status */}
+              {/* Lifecycle stage */}
               <select
-                value={idea.status}
-                onChange={(e) => onUpdate({ status: e.target.value })}
+                value={idea.lifecycle_stage}
+                onChange={(e) => onUpdate({
+                  lifecycle_stage: e.target.value as Idea['lifecycle_stage'],
+                  stage_entered_at: new Date().toISOString(),
+                })}
                 className="text-[10px] px-2 py-1 bg-white/[0.06] border border-white/[0.06] rounded text-white/50 focus:outline-none cursor-pointer"
               >
                 {STAGES.map(s => (
@@ -985,18 +1044,18 @@ function IdeaCard({
           </div>
         )}
 
-        {/* Status badge (grid view, not editing) */}
-        {!isEditing && !compact && idea.status !== 'open' && (
+        {/* Lifecycle stage badge (grid view, not editing) */}
+        {!isEditing && !compact && idea.lifecycle_stage !== 'idea' && (
           <div className="mt-1">
             <span className={cn(
               'text-[10px] px-1.5 py-0.5 rounded capitalize',
-              idea.status === 'exploring' ? 'bg-blue-500/15 text-blue-400' :
-              idea.status === 'doing' ? 'bg-green-500/15 text-green-400' :
-              idea.status === 'parked' ? 'bg-white/[0.06] text-white/30' :
-              idea.status === 'done' ? 'bg-emerald-500/15 text-emerald-400' :
+              idea.lifecycle_stage === 'scope' ? 'bg-blue-500/15 text-blue-400' :
+              idea.lifecycle_stage === 'fundraise' ? 'bg-purple-500/15 text-purple-400' :
+              idea.lifecycle_stage === 'start' ? 'bg-emerald-500/15 text-emerald-400' :
+              idea.lifecycle_stage === 'killed' ? 'bg-white/[0.06] text-white/30' :
               'text-white/30'
             )}>
-              {idea.status}
+              {idea.lifecycle_stage}
             </span>
           </div>
         )}

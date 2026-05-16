@@ -148,6 +148,25 @@ interface ComplianceResponse {
   obligations: ComplianceObligation[]
 }
 
+interface PilotRiskItem {
+  id: string
+  severity: 'high' | 'medium'
+  stage: 'scope' | 'fundraise'
+  text: string
+  owner: string
+  age_days: number
+  snooze_count: number
+  snooze_burned: boolean
+  value_estimate: number
+  href: string
+}
+
+interface PilotRisksResponse {
+  generatedAt: string
+  items: PilotRiskItem[]
+  counters: { high: number; medium: number; snooze_burned: number }
+}
+
 interface DeltaResponse {
   available: boolean
   reason?: string
@@ -209,6 +228,15 @@ export default function MoneyCommandPage() {
     },
     staleTime: 10 * 60 * 1000,
   })
+  const { data: pilotRisks } = useQuery<PilotRisksResponse>({
+    queryKey: ['finance', 'pilot-risks'],
+    queryFn: async () => {
+      const res = await fetch('/api/finance/pilot-risks', { cache: 'no-store' })
+      if (!res.ok) throw new Error(`HTTP ${res.status}`)
+      return res.json()
+    },
+    staleTime: 10 * 60 * 1000,
+  })
 
   return (
     <div className="min-h-screen bg-neutral-950 text-neutral-100 p-6 lg:p-10">
@@ -246,7 +274,7 @@ export default function MoneyCommandPage() {
         {data && (
           <>
             {/* AT RISK TODAY — unified attention pane */}
-            <AtRiskTodaySection compliance={compliance} top={data.top} drift={data.middle.drift} />
+            <AtRiskTodaySection compliance={compliance} pilotRisks={pilotRisks} top={data.top} drift={data.middle.drift} />
             {/* TOP LAYER */}
             <TopLayer top={data.top} />
             {/* MIDDLE LAYER */}
@@ -268,10 +296,12 @@ export default function MoneyCommandPage() {
 
 function AtRiskTodaySection({
   compliance,
+  pilotRisks,
   top,
   drift,
 }: {
   compliance: ComplianceResponse | undefined
+  pilotRisks: PilotRisksResponse | undefined
   top: CommandResponse['top']
   drift: DriftItem[]
 }) {
@@ -339,6 +369,22 @@ function AtRiskTodaySection({
       note: d.label.slice(0, 60),
       href: d.workbenchUrl ?? '/finance/workbench',
     })
+  }
+
+  // Pilot lifecycle risks (Pass 2B B6) — stale scope/fundraise + snooze-burned
+  if (pilotRisks) {
+    for (const p of pilotRisks.items.slice(0, 5)) {
+      const stageIcon = p.stage === 'fundraise' ? '💸' : '🔍'
+      const valueTag = p.value_estimate > 0 ? ` · ~${formatMoneyCompact(p.value_estimate)}` : ''
+      const burnTag = p.snooze_burned ? ' · 💤×3 forced decision' : p.snooze_count > 0 ? ` · 💤×${p.snooze_count}` : ''
+      items.push({
+        severity: p.severity,
+        icon: stageIcon,
+        label: `[${p.stage} ${p.age_days}d idle${valueTag}${burnTag}]`,
+        note: p.text.slice(0, 60),
+        href: p.href,
+      })
+    }
   }
 
   // Sort by severity (critical first, then high, then medium)

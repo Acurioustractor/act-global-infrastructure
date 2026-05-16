@@ -298,6 +298,57 @@ export const AGENT_TOOLS: Anthropic.Tool[] = [
     },
   },
 
+  // ── PILOT LIFECYCLE (Pass 2B) ──────────────────────────────────────
+  {
+    name: 'add_idea',
+    description:
+      'Capture a pre-funding experimental idea (not a funded project, workshop, or buyer deal). Use when the user says "new idea", "log this idea", "/idea X", or describes something they want to remember as an experiment to maybe pursue. Sets stage = "idea"; the system will nudge them in 90 days if it stays idle.',
+    input_schema: {
+      type: 'object' as const,
+      properties: {
+        text: { type: 'string', description: 'Short description of the idea (one-line works fine).' },
+        category: { type: 'string', description: 'Optional category like idea, hunch, pilot, partnership. Default: idea.' },
+        energy: { type: 'number', description: 'Optional 1-5 energy score (how much the user is excited about it).' },
+        value_estimate: { type: 'number', description: 'Optional rough $ value if pursued.' },
+        owner: { type: 'string', description: 'Owner. Default: ben.' },
+      },
+      required: ['text'],
+    },
+  },
+  {
+    name: 'transition_idea_stage',
+    description:
+      'Move an idea forward (or kill it) in the lifecycle: idea → scope → fundraise → start, or → killed at any point. Use when the user says "move idea X to fundraise", "kill idea Y", "this idea is starting", or taps an inline reminder button. On → start, the system will suggest a project_code via a separate flow.',
+    input_schema: {
+      type: 'object' as const,
+      properties: {
+        id: { type: 'string', description: 'idea_board.id (uuid).' },
+        stage: {
+          type: 'string',
+          enum: ['idea', 'scope', 'fundraise', 'start', 'killed'],
+          description: 'Target stage.',
+        },
+        kill_reason: { type: 'string', description: 'Optional free-text reason if stage = "killed".' },
+        force: { type: 'boolean', description: 'Set true to allow backwards or skip-stage moves (default false).' },
+      },
+      required: ['id', 'stage'],
+    },
+  },
+  {
+    name: 'snooze_idea',
+    description:
+      'Push the next reminder for an idea out by N days (1-90). Capped at 3 snoozes per idea — on the 4th attempt the system refuses and asks for a forced decision (→ fundraise / → start / ❌ kill). Use when user says "snooze idea X" or taps "💤 snooze 14d".',
+    input_schema: {
+      type: 'object' as const,
+      properties: {
+        id: { type: 'string', description: 'idea_board.id (uuid).' },
+        days: { type: 'number', description: 'Number of days to snooze (1-90). Default reminder cadence offers 14.' },
+        by_owner: { type: 'string', description: 'Owner who is snoozing. Default: ben.' },
+      },
+      required: ['id', 'days'],
+    },
+  },
+
   // ── GRANT & PIPELINE TOOLS (read-only) ─────────────────────────────
 
   {
@@ -1155,6 +1206,10 @@ const PROJECT_TOOL_NAMES = new Set([
   'get_contacts_needing_attention',
   'get_deal_risks',
   'get_goods_intelligence',
+  // Pilot lifecycle (Pass 2B)
+  'add_idea',
+  'transition_idea_stage',
+  'snooze_idea',
 ])
 
 /** Writing, reflection, dreams, planning */
