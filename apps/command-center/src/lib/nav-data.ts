@@ -106,6 +106,7 @@ export const navStructure: SidebarNavGroup[] = [
         children: [
           // 2026-05-08 cleanup — retired: tagger, tagger-bulk, pipeline-viz, pipeline-kanban, project-plan, self-reliance, vendor-rules-suggest.
           // 2026-05-16 cleanup — retired: revenue-planning, review (see thoughts/shared/handoffs/2026-05-16-money-audit/).
+          { href: '/finance/command', label: 'Money Command', icon: Compass, color: 'text-emerald-400', bg: 'bg-emerald-500/20' },
           { href: '/finance', label: 'All finance (operate hub)', icon: DollarSign, color: 'text-foreground', bg: 'bg-white/10' },
           { href: '/finance/workbench', label: 'Finance Workbench', icon: ClipboardList, color: 'text-cyan-400', bg: 'bg-cyan-500/20' },
           { href: '/finance/xero-page-copilot', label: 'Xero Page Copilot', icon: Bot, color: 'text-cyan-400', bg: 'bg-cyan-500/20' },
