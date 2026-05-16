@@ -72,6 +72,17 @@ interface CommandResponse {
     projects: ProjectMoneyRow[]
     drift: DriftItem[]
   }
+  pileMix: {
+    pileCoverage: { total: number; tagged: number; pct: number }
+    piles: Array<{
+      pile: string
+      openCount: number
+      rawValue: number
+      weighted: number
+      pctOfWeighted: number
+    }>
+    concentrationWarning: string | null
+  }
   bottom: {
     actionLinks: Array<{ href: string; label: string; note: string }>
   }
@@ -150,6 +161,9 @@ export async function GET() {
   // 5. Cash in bank — sum live balances from xero_bank_accounts (mirrors /finance/overview)
   const cashInBank = await loadCashInBank()
 
+  // 6. Pile mix (Voice/Flow/Ground/Grants concentration + coverage)
+  const pileMix = await loadPileMix()
+
   // 6. Build projected incoming 90d stack
   const projectedIncoming90d = totals.receivables + totals.pipelineWeighted + totals.grantsInFlight
   const incomingStack = [
@@ -180,6 +194,7 @@ export async function GET() {
       ),
       drift,
     },
+    pileMix,
     bottom: {
       actionLinks: [
         { href: '/finance/workbench', label: 'Workbench', note: 'fix tags / receipts' },
@@ -310,4 +325,75 @@ async function loadCashInBank(): Promise<number | null> {
     .filter(a => a.status !== 'ARCHIVED')
     .reduce((sum, a) => sum + Number(a.current_balance ?? 0), 0)
   return Number.isFinite(total) ? total : null
+}
+
+const STAGE_PROBABILITY: Array<[RegExp, number]> = [
+  [/(won|invoiced|harvest|graduation)/i, 1.00],
+  [/(submitted|growth|negotiation)/i, 0.70],
+  [/(proposed|invited|application.in.progress)/i, 0.50],
+  [/(germination|scoping|needs.assessment|grant.opportunity.identified)/i, 0.25],
+  [/(identified|signal|new.lead|new.inquiry|outreach)/i, 0.10],
+  [/(lost|cancelled|dropped)/i, 0.00],
+]
+
+function stageProbability(stage: string | null): number {
+  if (!stage) return 0.15
+  for (const [re, p] of STAGE_PROBABILITY) if (re.test(stage)) return p
+  return 0.15
+}
+
+async function loadPileMix() {
+  const { data: opps } = await supabase
+    .from('ghl_opportunities')
+    .select('pile, monetary_value, stage_name, status')
+    .eq('status', 'open')
+  const rows = opps ?? []
+  const byPile = new Map<string, { openCount: number; rawValue: number; weighted: number }>()
+  let taggedCount = 0
+  let totalCount = 0
+  for (const o of rows) {
+    totalCount += 1
+    const pile = o.pile && String(o.pile).trim() ? String(o.pile).trim() : null
+    if (pile) taggedCount += 1
+    const key = pile ?? '__untagged__'
+    let row = byPile.get(key)
+    if (!row) {
+      row = { openCount: 0, rawValue: 0, weighted: 0 }
+      byPile.set(key, row)
+    }
+    const raw = Number(o.monetary_value ?? 0)
+    row.openCount += 1
+    row.rawValue += raw
+    row.weighted += raw * stageProbability(o.stage_name)
+  }
+
+  const totalWeighted = [...byPile.values()].reduce((s, r) => s + r.weighted, 0)
+  const piles = ['Voice', 'Flow', 'Ground', 'Grants', 'Other', '__untagged__'].map(name => {
+    const r = byPile.get(name) ?? { openCount: 0, rawValue: 0, weighted: 0 }
+    return {
+      pile: name === '__untagged__' ? '(unclassified)' : name,
+      openCount: r.openCount,
+      rawValue: Math.round(r.rawValue),
+      weighted: Math.round(r.weighted),
+      pctOfWeighted: totalWeighted === 0 ? 0 : Math.round((r.weighted / totalWeighted) * 1000) / 10,
+    }
+  }).filter(p => p.openCount > 0)
+
+  // Concentration warning if any single classified pile > 60% of weighted
+  const dominant = piles
+    .filter(p => p.pile !== '(unclassified)')
+    .sort((a, b) => b.pctOfWeighted - a.pctOfWeighted)[0]
+  const concentrationWarning = dominant && dominant.pctOfWeighted > 60
+    ? `Pile concentration: ${dominant.pile} = ${dominant.pctOfWeighted}% of weighted pipeline. Diversify across other piles to reduce single-source risk.`
+    : null
+
+  return {
+    pileCoverage: {
+      total: totalCount,
+      tagged: taggedCount,
+      pct: totalCount === 0 ? 0 : Math.round((taggedCount / totalCount) * 1000) / 10,
+    },
+    piles,
+    concentrationWarning,
+  }
 }

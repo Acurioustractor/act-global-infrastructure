@@ -56,6 +56,14 @@ interface DriftItem {
   workbenchUrl: string | null
 }
 
+interface PileRow {
+  pile: string
+  openCount: number
+  rawValue: number
+  weighted: number
+  pctOfWeighted: number
+}
+
 interface CommandResponse {
   generatedAt: string
   fy: { start: string; end: string }
@@ -74,6 +82,11 @@ interface CommandResponse {
     coverage: Array<{ source: string; total: number; tagged: number; pct: number }>
     projects: ProjectMoneyRow[]
     drift: DriftItem[]
+  }
+  pileMix: {
+    pileCoverage: { total: number; tagged: number; pct: number }
+    piles: PileRow[]
+    concentrationWarning: string | null
   }
   bottom: {
     actionLinks: Array<{ href: string; label: string; note: string }>
@@ -202,6 +215,8 @@ export default function MoneyCommandPage() {
             <TopLayer top={data.top} />
             {/* MIDDLE LAYER */}
             <MiddleLayer middle={data.middle} />
+            {/* PILE MIX — Voice/Flow/Ground/Grants concentration */}
+            <PileMixSection data={data.pileMix} />
             {/* LIFETIME LEDGER — surfaces xero_invoices as the canonical record */}
             {lifetime && <LifetimeLedgerSection data={lifetime} />}
             {/* DELTA — what changed since yesterday's snapshot */}
@@ -437,6 +452,109 @@ function MiddleLayer({ middle }: { middle: CommandResponse['middle'] }) {
           </table>
         </div>
       </div>
+    </section>
+  )
+}
+
+function PileMixSection({ data }: { data: CommandResponse['pileMix'] }) {
+  const PILE_TONE: Record<string, { bg: string; text: string; accent: string }> = {
+    Voice: { bg: 'bg-purple-500/15', text: 'text-purple-300', accent: 'bg-purple-500/80' },
+    Flow: { bg: 'bg-cyan-500/15', text: 'text-cyan-300', accent: 'bg-cyan-500/80' },
+    Ground: { bg: 'bg-amber-500/15', text: 'text-amber-300', accent: 'bg-amber-500/80' },
+    Grants: { bg: 'bg-emerald-500/15', text: 'text-emerald-300', accent: 'bg-emerald-500/80' },
+    Other: { bg: 'bg-neutral-500/15', text: 'text-neutral-300', accent: 'bg-neutral-500/80' },
+    '(unclassified)': { bg: 'bg-rose-500/15', text: 'text-rose-300', accent: 'bg-rose-500/80' },
+  }
+
+  const totalWeighted = data.piles.reduce((s, p) => s + p.weighted, 0)
+
+  return (
+    <section className="space-y-4">
+      <div className="flex items-center gap-2 text-neutral-400 text-xs font-medium uppercase tracking-wider">
+        <Tags size={14} /> Pile mix — Voice · Flow · Ground · Grants
+        <span className="text-neutral-600 normal-case font-normal tracking-normal">
+          · weighted by stage probability
+        </span>
+      </div>
+
+      {/* Coverage bar */}
+      <div className="rounded-lg border border-neutral-800 bg-neutral-900/50 p-4">
+        <div className="flex items-center justify-between text-xs text-neutral-500 mb-2">
+          <span>Pile coverage on open opportunities</span>
+          <span className="tabular-nums">
+            {data.pileCoverage.tagged} / {data.pileCoverage.total} ({data.pileCoverage.pct.toFixed(1)}%)
+          </span>
+        </div>
+        <div className="h-2 rounded bg-neutral-800 overflow-hidden">
+          <div
+            className={cn(
+              'h-full',
+              data.pileCoverage.pct >= 80 ? 'bg-emerald-500' :
+              data.pileCoverage.pct >= 60 ? 'bg-amber-500' : 'bg-rose-500',
+            )}
+            style={{ width: `${data.pileCoverage.pct}%` }}
+          />
+        </div>
+      </div>
+
+      {/* Concentration warning */}
+      {data.concentrationWarning && (
+        <div className="rounded-lg border border-amber-900/40 bg-amber-950/20 p-3 text-sm text-amber-200">
+          <AlertTriangle size={14} className="inline mr-2 -mt-0.5" />
+          {data.concentrationWarning}
+        </div>
+      )}
+
+      {/* Pile cards */}
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
+        {data.piles.map(p => {
+          const tone = PILE_TONE[p.pile] ?? PILE_TONE.Other
+          return (
+            <div key={p.pile} className={cn('rounded-lg border border-neutral-800 p-3', tone.bg)}>
+              <div className={cn('text-xs font-medium uppercase tracking-wider mb-1', tone.text)}>{p.pile}</div>
+              <div className="text-lg font-semibold tabular-nums text-neutral-100">
+                {formatMoneyCompact(p.weighted)}
+              </div>
+              <div className="text-xs text-neutral-500 mt-0.5">
+                {p.openCount} open · {p.pctOfWeighted.toFixed(0)}%
+              </div>
+            </div>
+          )
+        })}
+      </div>
+
+      {/* Stacked bar visualizing concentration */}
+      {totalWeighted > 0 && (
+        <div className="rounded-lg border border-neutral-800 bg-neutral-900/50 p-4">
+          <div className="text-xs text-neutral-500 mb-2">Weighted pipeline distribution</div>
+          <div className="flex h-6 rounded overflow-hidden">
+            {data.piles.map(p => {
+              const tone = PILE_TONE[p.pile] ?? PILE_TONE.Other
+              const width = totalWeighted === 0 ? 0 : (p.weighted / totalWeighted) * 100
+              if (width < 0.1) return null
+              return (
+                <div
+                  key={p.pile}
+                  className={cn('h-full', tone.accent)}
+                  style={{ width: `${width}%` }}
+                  title={`${p.pile}: ${formatMoney(p.weighted)} (${p.pctOfWeighted.toFixed(1)}%)`}
+                />
+              )
+            })}
+          </div>
+          <div className="flex flex-wrap gap-3 mt-2 text-xs text-neutral-400">
+            {data.piles.map(p => {
+              const tone = PILE_TONE[p.pile] ?? PILE_TONE.Other
+              return (
+                <span key={p.pile} className="inline-flex items-center gap-1.5">
+                  <span className={cn('inline-block w-2 h-2 rounded-sm', tone.accent)} />
+                  {p.pile}
+                </span>
+              )
+            })}
+          </div>
+        </div>
+      )}
     </section>
   )
 }
