@@ -241,6 +241,22 @@ const cronScripts = [
     cron_restart: '15 15 * * 5', // Weekly Friday 3:15pm AEST — after weekly-money-digest at 3:00pm
   },
   {
+    // Single-entry replacement for the Mon 5:30-9:10 chain (6 separate PM2
+    // entries). Runs each step in sequence with failure isolation — one
+    // step failing doesn't stop the rest. Single Telegram summary at the
+    // end + wiki/cockpit/monday-chain-YYYY-MM-DD.md log.
+    //
+    // To migrate: enable this entry, then disable the 6 individual entries
+    // (weekly-project-pulse, ghl-cleanup-auto, grant-seed-weekly,
+    // xero-payments-sync, weekly-reconciliation, money-framework-sync).
+    // Until migration: this is OFF by default — uncomment to enable.
+    //
+    // name: 'monday-morning-chain',
+    // script: 'scripts/monday-morning-chain.mjs',
+    // args: '--telegram',
+    // cron_restart: '30 5 * * 1', // Mon 5:30am AEST — orchestrates the full chain
+  },
+  {
     // Polls finance_receipt_documents for newly-OCR'd Dext docs that have no
     // AI suggestion yet, grades them with Sonnet 4.6, writes to
     // finance_ai_routing_suggestions. The workbench surfaces the grades so
