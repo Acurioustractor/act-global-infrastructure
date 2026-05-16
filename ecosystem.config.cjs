@@ -294,6 +294,17 @@ const cronScripts = [
     // and POSTs Business Division + Project Tracking via the Xero API.
     // Runs offset from pre-publish-dext-grader so the grader has time to
     // finish writing.
+    // Issue #66 paired grader — grades freshly-arrived xero_transactions
+    // (rows that landed via Xero sync but have no project_code yet) and
+    // writes high-confidence suggestions to finance_ai_routing_suggestions
+    // with applied_to_source=true. Runs at xx:00 and xx:30 — 7 min before
+    // push-ai-tracking-to-xero so the suggestions are written first.
+    name: 'ai-router-xero-mode',
+    script: 'scripts/ai-route-dext-doc.mjs',
+    args: '--source xero --apply --limit 30 --min-confidence 0.85',
+    cron_restart: '0,30 8-18 * * 1-5', // xx:00 and xx:30, Mon-Fri 8am-6pm AEST
+  },
+  {
     name: 'push-ai-tracking-to-xero',
     script: 'scripts/push-ai-tracking-to-xero.mjs',
     args: '--limit 50',
