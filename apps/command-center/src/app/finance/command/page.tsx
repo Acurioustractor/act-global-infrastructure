@@ -1,7 +1,8 @@
 'use client'
 
 import Link from 'next/link'
-import { useQuery } from '@tanstack/react-query'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
+import { useState } from 'react'
 import {
   AlertTriangle,
   ArrowRight,
@@ -167,6 +168,19 @@ interface PilotRisksResponse {
   counters: { high: number; medium: number; snooze_burned: number }
 }
 
+interface AckRow {
+  acked_at: string
+  acked_by: string
+}
+
+interface AckStateResponse {
+  generatedAt: string
+  lookbackDays: number
+  debtHours: number
+  compliance: Record<string, AckRow>
+  idea: Record<string, AckRow>
+}
+
 interface DeltaResponse {
   available: boolean
   reason?: string
@@ -237,6 +251,15 @@ export default function MoneyCommandPage() {
     },
     staleTime: 10 * 60 * 1000,
   })
+  const { data: ackState } = useQuery<AckStateResponse>({
+    queryKey: ['finance', 'ack-state'],
+    queryFn: async () => {
+      const res = await fetch('/api/finance/ack-state', { cache: 'no-store' })
+      if (!res.ok) throw new Error(`HTTP ${res.status}`)
+      return res.json()
+    },
+    staleTime: 60 * 1000,
+  })
 
   return (
     <div className="min-h-screen bg-neutral-950 text-neutral-100 p-6 lg:p-10">
@@ -274,7 +297,13 @@ export default function MoneyCommandPage() {
         {data && (
           <>
             {/* AT RISK TODAY — unified attention pane */}
-            <AtRiskTodaySection compliance={compliance} pilotRisks={pilotRisks} top={data.top} drift={data.middle.drift} />
+            <AtRiskTodaySection
+              compliance={compliance}
+              pilotRisks={pilotRisks}
+              top={data.top}
+              drift={data.middle.drift}
+              ackState={ackState}
+            />
             {/* TOP LAYER */}
             <TopLayer top={data.top} />
             {/* MIDDLE LAYER */}
@@ -299,19 +328,25 @@ function AtRiskTodaySection({
   pilotRisks,
   top,
   drift,
+  ackState,
 }: {
   compliance: ComplianceResponse | undefined
   pilotRisks: PilotRisksResponse | undefined
   top: CommandResponse['top']
   drift: DriftItem[]
+  ackState: AckStateResponse | undefined
 }) {
-  // Build risk items in severity order: critical (red), high (orange), medium (yellow)
+  // Build risk items in severity order: critical (red), high (orange), medium (yellow).
+  // Items with an ackKind+ackId can be acknowledged + checked against ackState
+  // for the debt counter (Pass 2C C2).
   type Risk = {
     severity: 'critical' | 'high' | 'medium'
-    icon: string
     label: string
     note: string
     href: string
+    ackKind?: 'compliance' | 'idea'
+    ackId?: string
+    firstSurfacedAt?: string  // approximation of when this risk became visible
   }
   const items: Risk[] = []
 
@@ -323,13 +358,17 @@ function AtRiskTodaySection({
       const tag = dd == null ? '' : dd < 0 ? `T+${Math.abs(dd)}d` : `T-${dd}d`
       items.push({
         severity: o.severity,
-        icon: '📋',
         label: `[${tag}] ${o.title}`,
         note: o.notes ? o.notes.split('\n')[0].slice(0, 60) : `${o.type} · ${o.entity}`,
         href:
           o.source === 'ghl_opportunities'
             ? '/finance/workbench'
             : 'https://github.com/Acurioustractor/act-global-infrastructure/blob/main/wiki/finance/compliance-calendar.md',
+        ackKind: 'compliance',
+        ackId: o.id,
+        // best-effort age proxy: compliance snapshot rebuilds daily at 7am, so
+        // any item present has been visible at least since that rebuild.
+        firstSurfacedAt: compliance.generatedAt,
       })
     }
   }
@@ -342,7 +381,6 @@ function AtRiskTodaySection({
       if (runwayMonths < 2) {
         items.push({
           severity: 'critical',
-          icon: '🔥',
           label: `runway ${runwayMonths.toFixed(1)} months`,
           note: `cash ${formatMoneyCompact(top.cashInBank)} · monthly burn ${formatMoneyCompact(monthlyBurn)}`,
           href: '/finance/overview',
@@ -350,7 +388,6 @@ function AtRiskTodaySection({
       } else if (runwayMonths < 3) {
         items.push({
           severity: 'medium',
-          icon: '⏱️',
           label: `runway ${runwayMonths.toFixed(1)} months`,
           note: `cash ${formatMoneyCompact(top.cashInBank)} · monthly burn ${formatMoneyCompact(monthlyBurn)}`,
           href: '/finance/overview',
@@ -364,7 +401,6 @@ function AtRiskTodaySection({
     if (Math.abs(d.amount) < 5000) continue
     items.push({
       severity: Math.abs(d.amount) >= 50000 ? 'high' : 'medium',
-      icon: '🔀',
       label: `drift ${formatMoneyCompact(Math.abs(d.amount))}`,
       note: d.label.slice(0, 60),
       href: d.workbenchUrl ?? '/finance/workbench',
@@ -374,15 +410,16 @@ function AtRiskTodaySection({
   // Pilot lifecycle risks (Pass 2B B6) — stale scope/fundraise + snooze-burned
   if (pilotRisks) {
     for (const p of pilotRisks.items.slice(0, 5)) {
-      const stageIcon = p.stage === 'fundraise' ? '💸' : '🔍'
       const valueTag = p.value_estimate > 0 ? ` · ~${formatMoneyCompact(p.value_estimate)}` : ''
       const burnTag = p.snooze_burned ? ' · 💤×3 forced decision' : p.snooze_count > 0 ? ` · 💤×${p.snooze_count}` : ''
       items.push({
         severity: p.severity,
-        icon: stageIcon,
         label: `[${p.stage} ${p.age_days}d idle${valueTag}${burnTag}]`,
         note: p.text.slice(0, 60),
         href: p.href,
+        ackKind: 'idea',
+        ackId: p.id,
+        firstSurfacedAt: pilotRisks.generatedAt,
       })
     }
   }
@@ -391,11 +428,35 @@ function AtRiskTodaySection({
   const sevOrder = { critical: 0, high: 1, medium: 2 }
   items.sort((a, b) => sevOrder[a.severity] - sevOrder[b.severity])
 
+  // Debt counter — snapshot count of ackable items WITHOUT a fresh ack.
+  // "Fresh" = acked AFTER the surface time AND within the lookback window.
+  // Threshold uses ackState.debtHours; items that haven't been visible that
+  // long aren't yet "in debt".
+  const debtHours = ackState?.debtHours ?? 24
+  const now = Date.now()
+  let unackedCount = 0
+  for (const r of items) {
+    if (!r.ackKind || !r.ackId) continue
+    const lookup = r.ackKind === 'compliance' ? ackState?.compliance : ackState?.idea
+    const ack = lookup?.[r.ackId]
+    const surfaceTime = r.firstSurfacedAt ? new Date(r.firstSurfacedAt).getTime() : now
+    const ageHours = (now - surfaceTime) / (1000 * 60 * 60)
+    if (ageHours < debtHours) continue
+    if (ack && new Date(ack.acked_at).getTime() >= surfaceTime) continue
+    unackedCount += 1
+  }
+
   const SEV_TONE: Record<Risk['severity'], { icon: string; bg: string; text: string }> = {
     critical: { icon: '🔴', bg: 'border-rose-900/60 bg-rose-950/30', text: 'text-rose-300' },
     high: { icon: '🟠', bg: 'border-amber-900/60 bg-amber-950/20', text: 'text-amber-300' },
     medium: { icon: '🟡', bg: 'border-yellow-900/40 bg-yellow-950/10', text: 'text-yellow-300' },
   }
+
+  // Debt-counter pill tone (Pass 2C C2): hidden at 0, yellow 1-5, red >5
+  const debtTone =
+    unackedCount === 0 ? null
+      : unackedCount > 5 ? 'text-rose-300 bg-rose-950/40 border-rose-900/60'
+      : 'text-amber-300 bg-amber-950/30 border-amber-900/50'
 
   return (
     <section className="space-y-3">
@@ -406,6 +467,14 @@ function AtRiskTodaySection({
           · {items.length} {items.length === 1 ? 'item' : 'items'}
           {compliance ? ` · compliance refreshed ${new Date(compliance.generatedAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}` : ''}
         </span>
+        {debtTone && (
+          <span
+            className={cn('ml-2 inline-flex items-center gap-1 rounded border px-1.5 py-0.5 text-[10px] font-medium normal-case tracking-normal', debtTone)}
+            title={`${unackedCount} ackable items unactioned > ${debtHours}h`}
+          >
+            📒 {unackedCount} ack-overdue
+          </span>
+        )}
       </div>
       {items.length === 0 ? (
         <div className="rounded-lg border border-emerald-900/40 bg-emerald-950/15 p-4 text-sm text-emerald-300">
@@ -416,26 +485,102 @@ function AtRiskTodaySection({
         <div className="rounded-lg border border-neutral-800 bg-neutral-900/60 p-3 space-y-1.5">
           {items.map((r, i) => {
             const tone = SEV_TONE[r.severity]
+            const lookup = r.ackKind === 'compliance' ? ackState?.compliance
+              : r.ackKind === 'idea' ? ackState?.idea
+              : undefined
+            const ack = r.ackId ? lookup?.[r.ackId] : undefined
             return (
-              <Link
-                key={i}
-                href={r.href}
-                target={r.href.startsWith('http') ? '_blank' : undefined}
+              <div
+                key={`${r.ackKind ?? 'unack'}-${r.ackId ?? i}`}
                 className={cn(
-                  'flex items-center gap-3 px-3 py-2 rounded border hover:bg-neutral-800/50 transition-colors',
+                  'flex items-center gap-3 px-3 py-2 rounded border transition-colors',
                   tone.bg,
                 )}
               >
                 <span className="text-base shrink-0">{tone.icon}</span>
-                <span className={cn('text-sm font-medium shrink-0', tone.text)}>{r.label}</span>
+                <Link
+                  href={r.href}
+                  target={r.href.startsWith('http') ? '_blank' : undefined}
+                  className={cn('text-sm font-medium shrink-0 hover:underline', tone.text)}
+                >
+                  {r.label}
+                </Link>
                 <span className="text-xs text-neutral-500 flex-1 truncate">{r.note}</span>
-                <ArrowRight size={12} className="text-neutral-600 shrink-0" />
-              </Link>
+                {r.ackKind && r.ackId ? (
+                  <AckButton kind={r.ackKind} id={r.ackId} ack={ack} />
+                ) : (
+                  <ArrowRight size={12} className="text-neutral-600 shrink-0" />
+                )}
+              </div>
             )
           })}
         </div>
       )}
     </section>
+  )
+}
+
+function AckButton({
+  kind,
+  id,
+  ack,
+}: {
+  kind: 'compliance' | 'idea'
+  id: string
+  ack: AckRow | undefined
+}) {
+  const qc = useQueryClient()
+  const [busy, setBusy] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+
+  if (ack) {
+    const ageHours = (Date.now() - new Date(ack.acked_at).getTime()) / (1000 * 60 * 60)
+    const ageLabel = ageHours < 1
+      ? 'just now'
+      : ageHours < 24
+        ? `${Math.round(ageHours)}h ago`
+        : `${Math.round(ageHours / 24)}d ago`
+    return (
+      <span
+        className="inline-flex items-center gap-1 text-[11px] text-emerald-400 shrink-0"
+        title={`acked by ${ack.acked_by} at ${new Date(ack.acked_at).toLocaleString()}`}
+      >
+        <CheckCircle2 size={12} /> {ageLabel}
+      </span>
+    )
+  }
+
+  const submit = async () => {
+    setBusy(true)
+    setError(null)
+    try {
+      const res = await fetch('/api/finance/ack', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ kind, id, ack_by: 'ben', via: 'command-page' }),
+      })
+      if (!res.ok) throw new Error(`HTTP ${res.status}`)
+      qc.invalidateQueries({ queryKey: ['finance', 'ack-state'] })
+    } catch (err) {
+      setError((err as Error).message)
+    } finally {
+      setBusy(false)
+    }
+  }
+
+  return (
+    <button
+      type="button"
+      onClick={submit}
+      disabled={busy}
+      className={cn(
+        'inline-flex items-center gap-1 rounded border border-neutral-700 bg-neutral-900/60 px-2 py-0.5 text-[11px] text-neutral-300 hover:border-emerald-700 hover:text-emerald-300 disabled:opacity-50 shrink-0',
+        error && 'border-rose-700 text-rose-300',
+      )}
+      title={error ?? 'Mark seen — does not change underlying status'}
+    >
+      {busy ? '…' : 'Ack'}
+    </button>
   )
 }
 
