@@ -163,3 +163,15 @@ git mv scripts/receipt-pipeline.mjs scripts/_archive/2026-05-16-finance-cleanup/
 1. **Confirm 8 orphan APIs are truly orphan.** The grep found zero UI consumers, but they might be called from external systems (Postman, Telegram bot, webhooks). Worth a 60-second eyeball.
 2. **`/finance/revenue-planning` last edited 3 months ago — confirm it's not load-bearing for FY27 planning.**
 3. **Board role:** when we kill `/finance/board`, what does the board see? Options: redirect to overview, or build a "board-mode" toggle on overview.
+
+---
+
+## HOLD routes — closeout decision (post-Pass G inspection, 2026-05-16)
+
+After live inspection of the three HOLD routes, the decision is **KEEP all three**:
+
+- `/finance/board` (688 LOC) — has its own simplified board-specific layout (Wallet/Building2/PieChart cards). Replacing with `/finance/command` would expose board members to all 6 of its sections, which may overwhelm. Better to keep the curated board view. Added `/finance/command` to `boardFinanceHrefs` so board can drill in if they want.
+- `/finance/accountant` (575 LOC) — distinct accountant-pack workflow (ProgressBar, Tremor BarChart, Download). Accountant role currently has access to all of finance, but this page is the canonical "things accountant needs in one place" view. Keep.
+- `/finance/revenue` (387 LOC) — Revenue Sequencing has distinct concerns from `/finance/pipeline` (deal-by-deal). Sequencing focuses on revenue STREAMS over time. Keep.
+
+**Net post-Pass A+G state: 16 finance routes** (down from 19, was originally targeted at ≤12; reaching ≤12 would require absorbing role-specific pages into role-aware single pages, which is its own multi-session refactor).

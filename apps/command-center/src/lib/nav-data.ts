@@ -158,8 +158,8 @@ const roleGroupAccess: Record<Role, string[]> = {
   team: ['dashboard', 'relationships', 'projects', 'knowledge'],
 }
 
-// Board members only see overview + board report within finance
-const boardFinanceHrefs = new Set(['/finance', '/finance/overview', '/finance/board'])
+// Board members see the canonical Money Command + executive overview + board report
+const boardFinanceHrefs = new Set(['/finance', '/finance/command', '/finance/overview', '/finance/board'])
 
 export function filterNavForRole(role: Role): SidebarNavGroup[] {
   const allowedGroups = roleGroupAccess[role]
