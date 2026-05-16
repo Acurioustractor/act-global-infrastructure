@@ -29,6 +29,8 @@ import {
   Target,
   Receipt,
   ClipboardList,
+  Bot,
+  ShieldAlert,
 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 
@@ -102,9 +104,12 @@ export const navStructure: SidebarNavGroup[] = [
         label: 'Finance',
         icon: DollarSign,
         children: [
-          // 2026-05-08 cleanup — only canonical keepers in nav.
-          // Retired (in /finance/_archived/): tagger, tagger-bulk, pipeline-viz, pipeline-kanban, project-plan, self-reliance, vendor-rules-suggest.
+          // 2026-05-08 cleanup — retired: tagger, tagger-bulk, pipeline-viz, pipeline-kanban, project-plan, self-reliance, vendor-rules-suggest.
+          // 2026-05-16 cleanup — retired: revenue-planning, review (see thoughts/shared/handoffs/2026-05-16-money-audit/).
           { href: '/finance', label: 'All finance (operate hub)', icon: DollarSign, color: 'text-foreground', bg: 'bg-white/10' },
+          { href: '/finance/workbench', label: 'Finance Workbench', icon: ClipboardList, color: 'text-cyan-400', bg: 'bg-cyan-500/20' },
+          { href: '/finance/xero-page-copilot', label: 'Xero Page Copilot', icon: Bot, color: 'text-cyan-400', bg: 'bg-cyan-500/20' },
+          { href: '/finance/dext-push-audit', label: 'Dext Push Audit', icon: ShieldAlert, color: 'text-red-400', bg: 'bg-red-500/20' },
           { href: '/finance/overview', label: 'CEO money cockpit', icon: Layers, color: 'text-emerald-400', bg: 'bg-emerald-500/20' },
           { href: '/finance/money-alignment', label: 'Money Alignment', icon: CircleDollarSign, color: 'text-emerald-400', bg: 'bg-emerald-500/20' },
           { href: '/finance/reconciliation', label: 'Reconciliation (receipts)', icon: ClipboardCheck, color: 'text-cyan-400', bg: 'bg-cyan-500/20' },
@@ -114,9 +119,7 @@ export const navStructure: SidebarNavGroup[] = [
           { href: '/finance/pipeline', label: 'Pipeline', icon: Target, color: 'text-indigo-400', bg: 'bg-indigo-500/20' },
           { href: '/finance/board', label: 'Board Report', icon: Landmark, color: 'text-blue-400', bg: 'bg-blue-500/20' },
           { href: '/finance/accountant', label: 'Accountant Pack', icon: Calculator, color: 'text-orange-400', bg: 'bg-orange-500/20' },
-          { href: '/finance/review', label: 'The Review', icon: ClipboardList, color: 'text-amber-400', bg: 'bg-amber-500/20' },
           { href: '/finance/revenue', label: 'Revenue Sequencing', icon: TrendingUp, color: 'text-purple-400', bg: 'bg-purple-500/20' },
-          { href: '/finance/revenue-planning', label: 'Revenue Planning', icon: TrendingUp, color: 'text-purple-400', bg: 'bg-purple-500/20' },
           { href: '/finance/invoices', label: 'Invoice Command', icon: Receipt, color: 'text-emerald-400', bg: 'bg-emerald-500/20' },
         ],
       },
