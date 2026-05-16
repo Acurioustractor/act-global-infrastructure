@@ -268,3 +268,29 @@ If steps 3 or 4 surface anything unexpected, **STOP** and surface to the user be
 - Prune stashes older than 2 weeks during periodic sweeps (`git stash drop stash@{N}`).
 
 _(See "Archive X" rule above — applies inside agent worktrees too.)_
+
+## Trust profile — solo-author mode (2026-05-17)
+
+ACT is a solo-author repo. **Ben is the only human contributor.** Other PR authors (`claude/*`, `eod-sweep/*`, `codex/*`, `feat/*-YYYY-MM-DD`) are agent worktrees acting on Ben's behalf. Treat their work the same as his own.
+
+### Default actions — no per-action verb needed
+
+- **Merge own PRs** — when `gh pr view <N> --json mergeable,statusCheckRollup` shows mergeable AND no failing required checks AND title doesn't contain `WIP` / `DRAFT` / `DO NOT MERGE`, run `gh pr merge <N> --merge --delete-branch` without asking. Vercel preview failures on PRs that don't touch `apps/` are NOT blocking.
+- **Commit recovered work** — when cleaning stale worktrees / stashes, default to committing preserved files to the current cleanup branch with a `recovered(<area>):` commit message. Never delete unreviewed user work.
+- **Rename agent-named branches** — for `claude/<adjective-noun-XXXXXX>` branches with preserved work, rename to `wip/<topic>-<YYYY-MM-DD>` before pushing. `<topic>` = directory of the first changed file (e.g. `wip/rd-plans-2026-05-17`).
+- **Edit `.claude/settings.json`** — allowed once the `settings.local.json` permission rule is in place (see `.claude/settings.local.json.proposed-2026-05-17` for the rules to paste).
+- **Reload PM2 + `pm2 save`** — when a script or config change requires it, just do it.
+
+### Still requires explicit verb in user's message
+
+- `git push --force` to any branch
+- `git rm` (not `git mv`) of tracked files
+- Anything in `~/.claude/rules/workflow.md` Tier 4 (drop tables, send money, force-push to main, delete user data)
+- Send external messages — email / Slack / Telegram / Notion comments addressed to people other than Ben
+- Production database migrations (apply_migration)
+- Anything that moves money in Xero (invoice writes, payments, voids)
+- GHL contact merge / delete / bulk-update
+
+### Permission baseline (paired with this trust profile)
+
+The trust profile assumes `.claude/settings.local.json` has the allow rules from `.claude/settings.local.json.proposed-2026-05-17`. Without those, the auto-mode classifier still blocks `.claude/settings.json` edits regardless of what this section says.
