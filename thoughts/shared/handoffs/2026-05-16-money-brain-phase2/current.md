@@ -1,18 +1,34 @@
 # Money Brain Phase 2 — Resume Handoff
 
-**Updated:** 2026-05-17T22:00:00Z
+**Updated:** 2026-05-16T23:50:00Z
 **Goal:** Build COO+CIO+CFO+risk Money Brain on top of /finance/command
 **Branches:**
 - Phase 1 shipped to `main` via PR #63
 - Phase 2 Pass 2A + Pass 2B shipped to `main` via PR #65 (merged 2026-05-16)
 - Post-PR-#65 follow-ups shipped to `main` via PR #72 (merged 2026-05-16T22:15Z)
 - Ecosystem-digest follow-ups shipped to `main` via PR #77 (merged 2026-05-16T22:55Z)
+- **Phase 2 final pass — Pass 2C Accountability — shipped via PR #78 (merged 2026-05-16T23:48Z, commit `58a69bd`)**
 - Branch-mismatch hook installed live in `.claude/settings.json` (commit `2738c3c`, syntax-patch 2026-05-17)
 
 ## Ledger
 
 ### Now
-[->] **All in-flight PRs merged. Repo clean on `main` (0/0 vs origin).** Stale parallel-session stashes dropped 2026-05-17 (1× pnpm-lock superseded by `34ea21c`, 2× wiki snapshot bumps superseded by cron). **Next:** Pass 2C (Accountability) OR start the 6-issue Money Brain set (#66-71).
+[->] **Phase 2 of Money Brain COMPLETE. Pass 2A + 2B + 2C all on `main`.** Repo clean (0/0 vs origin). **Next:** start the 6-issue Money Brain set (#66-71) — priority order 1→4→2→3→6→5 (see Track B below).
+
+### Pass 2C — Accountability (shipped 2026-05-16T23:48Z, PR #78)
+
+- **C1 · Ack tables** — `supabase/migrations/20260518000100_ack_tables.sql` applied to shared DB.
+  - `compliance_ack(id, obligation_id, acked_at, acked_by, acked_via)` — `obligation_id` is the slug from wiki/finance/compliance-calendar.md or GHL opportunity id, NOT an FK
+  - `idea_ack(id, idea_id → idea_board, acked_at, acked_by, reminder_id)`
+- **C2 · Debt counter + per-row ack on `/finance/command`**
+  - `GET /api/finance/ack-state` → `{ compliance: { [id]: { acked_at, acked_by } }, idea: {...}, lookbackDays: 14, debtHours: 24 }`
+  - `POST /api/finance/ack` → `{ kind: 'compliance'|'idea', id, ack_by?, via?, reminder_id? }`
+  - AT RISK section: compliance + pilot rows show `Ack` button (POSTs + invalidates query) or `✓ Xh/d ago` chip when acked.
+  - Header pill: `📒 N ack-overdue` — **snapshot, not cumulative** (Q11). Hidden at 0, yellow 1-5, red >5. Surface age uses source endpoint's `generatedAt` as first-surfaced; counts items where (now - surface) > 24h AND no ack newer than surface.
+- **C3 · Weekly digest extension** — `scripts/weekly-money-digest.mjs` gains three new sections before suggested actions:
+  - **Compliance this week** — filed ✓ · acked ✓ · T+N missed · T-30 pending (joins compliance snapshot + `compliance_ack`)
+  - **Ideas — moves & forced decisions** — shipped/killed with `kill_reason` + 💤×3 burned-snooze pilots still pre-funding (joins `idea_board.stage_entered_at` + `idea_snoozes` count >= 3)
+  - **Acknowledgement gaps** — AT RISK obligations + stale scope/fundraise pilots without an ack in 5+ days, severity-ordered
 
 ### What shipped in the parallel-terminal flurry (2026-05-14 → 2026-05-17)
 
@@ -40,13 +56,9 @@ Plus this session's 5 follow-ups on PR #72:
 
 ## Outstanding — three threads
 
-### Track A — Pass 2C (Accountability) — last pass of Phase 2
+### Track A — Pass 2C (Accountability) — ✅ SHIPPED 2026-05-16 (PR #78)
 
-Never started. Sized ~1 session. Locked design in `~/.claude/plans/coo-cio-cfo-money-brain-phase2.md` § Pass 2C.
-
-- **C1 · Ack tables** — `compliance_ack` + `idea_ack` (lightweight: id, item_id/type, ack_at, ack_by)
-- **C2 · Debt counter on AT RISK pane** — snapshot ("3 ack-overdue today") not cumulative (settled at Q11)
-- **C3 · Weekly digest section** — extend `scripts/weekly-money-digest.mjs` with hits/misses/snooze chain. Friday 3pm Telegram delivery (existing cron, add sections)
+See "Pass 2C — Accountability" section above for the delivered shape.
 
 ### Track B — Money Brain 6-issue set (created 2026-05-16 evening)
 
