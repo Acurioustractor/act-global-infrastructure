@@ -52,9 +52,13 @@ const supabase = createClient(
 );
 
 function chatIdForOwner(owner) {
-  // Per-owner override (e.g. TELEGRAM_CHAT_ID_NIC). Falls back to default TELEGRAM_CHAT_ID for ben.
+  // Resolution order: per-owner override (TELEGRAM_CHAT_ID_NIC etc) →
+  // TELEGRAM_CHAT_ID → first entry of TELEGRAM_AUTHORIZED_USERS (matches the
+  // convention used by other cron scripts in this repo). For 'ben' the
+  // fallback is the right thing; other owners need their own override.
   const upper = owner.toUpperCase();
-  return process.env[`TELEGRAM_CHAT_ID_${upper}`] ?? process.env.TELEGRAM_CHAT_ID;
+  const fallbackFromAuth = (process.env.TELEGRAM_AUTHORIZED_USERS || '').split(',')[0]?.trim();
+  return process.env[`TELEGRAM_CHAT_ID_${upper}`] ?? process.env.TELEGRAM_CHAT_ID ?? fallbackFromAuth;
 }
 
 async function loadStaleIdeas() {
