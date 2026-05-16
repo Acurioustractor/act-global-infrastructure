@@ -147,3 +147,6 @@ packages/notion-workers/workers.json.old
 
 # GHL alignment run logs (large, run-output; keep only .md audits)
 thoughts/shared/audits/*.log
+
+# Branch-stamp file written by .claude/settings.json SessionStart hook
+.claude/.session-branch-stamp
