@@ -45,19 +45,20 @@ const fmtPct = n => `${Number(n).toFixed(1)}%`
 
 async function loadCoverage() {
   // Use aggregate counts to dodge the 1000-row default cap on .select() results.
-  const countTagged = async (table, filters = q => q) => {
+  const countTagged = async (table, filters = q => q, taggedColumn = 'project_code') => {
     const total = await filters(supabase.from(table).select('*', { count: 'exact', head: true }))
-    const tagged = await filters(supabase.from(table).select('*', { count: 'exact', head: true }).not('project_code', 'is', null))
+    const tagged = await filters(supabase.from(table).select('*', { count: 'exact', head: true }).not(taggedColumn, 'is', null))
     const t = total.count ?? 0
     const ta = tagged.count ?? 0
     return { total: t, tagged: ta, pct: t === 0 ? 0 : (ta / t) * 100 }
   }
-  const [transactions, invoices, opportunities] = await Promise.all([
+  const [transactions, invoices, opportunities, oppPiles] = await Promise.all([
     countTagged('xero_transactions', q => q.gte('date', FY_START)),
     countTagged('xero_invoices', q => q.eq('type', 'ACCREC').gte('date', FY_START)),
     countTagged('ghl_opportunities', q => q.eq('status', 'open')),
+    countTagged('ghl_opportunities', q => q.eq('status', 'open'), 'pile'),
   ])
-  return { transactions, invoices, opportunities }
+  return { transactions, invoices, opportunities, oppPiles }
 }
 
 async function loadDriftTop5() {
@@ -171,7 +172,8 @@ async function main() {
   lines.push('Coverage:')
   lines.push(`  Transactions: ${fmtPct(coverage.transactions.pct)}${delta(coverage.transactions.pct, previous?.coverage?.transactions?.pct)} (${coverage.transactions.tagged}/${coverage.transactions.total})`)
   lines.push(`  Invoices:     ${fmtPct(coverage.invoices.pct)}${delta(coverage.invoices.pct, previous?.coverage?.invoices?.pct)} (${coverage.invoices.tagged}/${coverage.invoices.total})`)
-  lines.push(`  Opportunities:${fmtPct(coverage.opportunities.pct)}${delta(coverage.opportunities.pct, previous?.coverage?.opportunities?.pct)} (${coverage.opportunities.tagged}/${coverage.opportunities.total})`)
+  lines.push(`  Opp project:  ${fmtPct(coverage.opportunities.pct)}${delta(coverage.opportunities.pct, previous?.coverage?.opportunities?.pct)} (${coverage.opportunities.tagged}/${coverage.opportunities.total})`)
+  lines.push(`  Opp pile:     ${fmtPct(coverage.oppPiles.pct)}${delta(coverage.oppPiles.pct, previous?.coverage?.oppPiles?.pct)} (${coverage.oppPiles.tagged}/${coverage.oppPiles.total})`)
   lines.push('')
   if (drift.length > 0) {
     lines.push('Drift queue (top 5 by $):')

@@ -15,6 +15,11 @@
       "total": 400,
       "tagged": 252,
       "pct": 63
+    },
+    "oppPiles": {
+      "total": 400,
+      "tagged": 400,
+      "pct": 100
     }
   },
   "drift": [
@@ -31,12 +36,12 @@
     {
       "kind": "opp",
       "amount": 37507787,
-      "label": "ARC Centre of Excellence for Indigenous and Environmental Histories and Futures. ARC Centre of Excellence for Indigenous and Environmental Histories and Futures. The proposed Centre aims to generate a · Grants"
+      "label": "ARC Centre of Excellence for Indigenous Futures. ARC Centre of Excellence for Indigenous Futures. The ARC Centre of Excellence for Indigenous Futures aims to transform and improve the life chances of · Grants"
     },
     {
       "kind": "opp",
       "amount": 37507787,
-      "label": "ARC Centre of Excellence for Indigenous Futures. ARC Centre of Excellence for Indigenous Futures. The ARC Centre of Excellence for Indigenous Futures aims to transform and improve the life chances of · Grants"
+      "label": "ARC Centre of Excellence for Indigenous and Environmental Histories and Futures. ARC Centre of Excellence for Indigenous and Environmental Histories and Futures. The proposed Centre aims to generate a · Grants"
     },
     {
       "kind": "opp",
@@ -46,9 +51,9 @@
   ],
   "incoming": {
     "receivables": 412540,
-    "pipelineWeighted": 9002928.75,
+    "pipelineWeighted": 4911069.600000001,
     "grantsInFlight": 230000,
-    "projected90d": 9645468.75
+    "projected90d": 5553609.600000001
   },
   "cash": 210620.11999999994,
   "lifetime": {

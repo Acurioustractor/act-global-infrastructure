@@ -331,15 +331,16 @@ const STAGE_PROBABILITY: Array<[RegExp, number]> = [
   [/(won|invoiced|harvest|graduation)/i, 1.00],
   [/(submitted|growth|negotiation)/i, 0.70],
   [/(proposed|invited|application.in.progress)/i, 0.50],
-  [/(germination|scoping|needs.assessment|grant.opportunity.identified)/i, 0.25],
-  [/(identified|signal|new.lead|new.inquiry|outreach)/i, 0.10],
+  [/(germination|scoping|needs.assessment)/i, 0.25],
+  // Grant Opportunity Identified is discovery, not active pipeline — 10%
+  [/(grant.opportunity.identified|identified|signal|new.lead|new.inquiry|outreach)/i, 0.10],
   [/(lost|cancelled|dropped)/i, 0.00],
 ]
 
 function stageProbability(stage: string | null): number {
-  if (!stage) return 0.15
+  if (!stage) return 0.10
   for (const [re, p] of STAGE_PROBABILITY) if (re.test(stage)) return p
-  return 0.15
+  return 0.10
 }
 
 async function loadPileMix() {

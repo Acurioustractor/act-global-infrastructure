@@ -53,10 +53,11 @@ opp_stats AS (
         WHEN lower(o.stage_name) ~ '(won|invoiced|harvest|graduation)' THEN 1.00
         WHEN lower(o.stage_name) ~ '(submitted|growth|negotiation)' THEN 0.70
         WHEN lower(o.stage_name) ~ '(proposed|invited|application.in.progress)' THEN 0.50
-        WHEN lower(o.stage_name) ~ '(germination|scoping|needs.assessment|grant.opportunity.identified)' THEN 0.25
-        WHEN lower(o.stage_name) ~ '(identified|signal|new.lead|new.inquiry|outreach)' THEN 0.10
+        WHEN lower(o.stage_name) ~ '(germination|scoping|needs.assessment)' THEN 0.25
+        -- 'Grant Opportunity Identified' is discovery, not active pipeline — 10%
+        WHEN lower(o.stage_name) ~ '(grant.opportunity.identified|identified|signal|new.lead|new.inquiry|outreach)' THEN 0.10
         WHEN lower(o.stage_name) ~ '(lost|cancelled|dropped)' THEN 0.00
-        ELSE 0.15
+        ELSE 0.10
       END
     ELSE 0 END) AS pipeline_weighted,
     sum(CASE WHEN o.status = 'open' THEN COALESCE(o.monetary_value, 0) ELSE 0 END) AS pipeline_raw,
