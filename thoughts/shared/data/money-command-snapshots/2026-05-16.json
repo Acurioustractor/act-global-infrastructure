@@ -51,9 +51,9 @@
   ],
   "incoming": {
     "receivables": 412540,
-    "pipelineWeighted": 4911069.600000001,
     "grantsInFlight": 230000,
-    "projected90d": 5553609.600000001
+    "pipelineWeighted": 2190240.6,
+    "projected90d": 2832780.6
   },
   "cash": 210620.11999999994,
   "lifetime": {

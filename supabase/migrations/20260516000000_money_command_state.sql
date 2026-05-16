@@ -54,8 +54,10 @@ opp_stats AS (
         WHEN lower(o.stage_name) ~ '(submitted|growth|negotiation)' THEN 0.70
         WHEN lower(o.stage_name) ~ '(proposed|invited|application.in.progress)' THEN 0.50
         WHEN lower(o.stage_name) ~ '(germination|scoping|needs.assessment)' THEN 0.25
-        -- 'Grant Opportunity Identified' is discovery, not active pipeline — 10%
-        WHEN lower(o.stage_name) ~ '(grant.opportunity.identified|identified|signal|new.lead|new.inquiry|outreach)' THEN 0.10
+        -- 'Grant Opportunity Identified' is GHL's scouting bucket — zero out so headline
+        -- doesn't drown in $200M+ of opportunities we're not actively pursuing.
+        WHEN lower(o.stage_name) ~ '(grant.opportunity.identified)' THEN 0.00
+        WHEN lower(o.stage_name) ~ '(identified|signal|new.lead|new.inquiry|outreach)' THEN 0.10
         WHEN lower(o.stage_name) ~ '(lost|cancelled|dropped)' THEN 0.00
         ELSE 0.10
       END

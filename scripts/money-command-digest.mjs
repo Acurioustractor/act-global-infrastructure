@@ -83,14 +83,41 @@ async function loadDriftTop5() {
   ].sort((a, b) => Math.abs(b.amount) - Math.abs(a.amount)).slice(0, 5)
 }
 
+const STAGE_PROBABILITY = [
+  [/(won|invoiced|harvest|graduation)/i, 1.00],
+  [/(submitted|growth|negotiation)/i, 0.70],
+  [/(proposed|invited|application.in.progress)/i, 0.50],
+  [/(germination|scoping|needs.assessment)/i, 0.25],
+  // 'Grant Opportunity Identified' = GHL's scouting bucket — zero out so headline
+  // doesn't drown in $200M+ of opportunities we're not actively pursuing.
+  [/(grant.opportunity.identified)/i, 0.00],
+  [/(identified|signal|new.lead|new.inquiry|outreach)/i, 0.10],
+  [/(lost|cancelled|dropped)/i, 0.00],
+]
+function stageProb(stage) {
+  if (!stage) return 0.10
+  for (const [re, p] of STAGE_PROBABILITY) if (re.test(stage)) return p
+  return 0.10
+}
+
 async function loadIncoming90d() {
-  const { data: state } = await supabase.from('v_project_money_state').select('receivables, pipeline_weighted, grants_in_flight')
-  const totals = (state ?? []).reduce((a, r) => ({
-    receivables: a.receivables + Number(r.receivables ?? 0),
-    pipelineWeighted: a.pipelineWeighted + Number(r.pipeline_weighted ?? 0),
-    grantsInFlight: a.grantsInFlight + Number(r.grants_in_flight ?? 0),
-  }), { receivables: 0, pipelineWeighted: 0, grantsInFlight: 0 })
-  return { ...totals, projected90d: totals.receivables + totals.pipelineWeighted + totals.grantsInFlight }
+  // The per-project v_project_money_state misses untagged opps. Query directly to
+  // capture the full weighted pipeline.
+  const [stateRes, oppsRes] = await Promise.all([
+    supabase.from('v_project_money_state').select('receivables, grants_in_flight'),
+    supabase.from('ghl_opportunities').select('monetary_value, stage_name').eq('status', 'open'),
+  ])
+  const state = stateRes.data ?? []
+  const opps = oppsRes.data ?? []
+  const receivables = state.reduce((s, r) => s + Number(r.receivables ?? 0), 0)
+  const grantsInFlight = state.reduce((s, r) => s + Number(r.grants_in_flight ?? 0), 0)
+  const pipelineWeighted = opps.reduce((s, o) => s + Number(o.monetary_value ?? 0) * stageProb(o.stage_name), 0)
+  return {
+    receivables,
+    grantsInFlight,
+    pipelineWeighted,
+    projected90d: receivables + pipelineWeighted + grantsInFlight,
+  }
 }
 
 async function loadCashInBank() {

@@ -162,7 +162,12 @@ export async function GET() {
   const cashInBank = await loadCashInBank()
 
   // 6. Pile mix (Voice/Flow/Ground/Grants concentration + coverage)
+  // Side-effect: pile mix iterates all open opportunities and gives the canonical
+  // weighted total (the per-project view misses untagged opps, so totals.pipelineWeighted
+  // gets corrected below using the pile sum).
   const pileMix = await loadPileMix()
+  const pileWeightedTotal = pileMix.piles.reduce((s, p) => s + p.weighted, 0)
+  totals.pipelineWeighted = pileWeightedTotal
 
   // 6. Build projected incoming 90d stack
   const projectedIncoming90d = totals.receivables + totals.pipelineWeighted + totals.grantsInFlight
@@ -332,8 +337,11 @@ const STAGE_PROBABILITY: Array<[RegExp, number]> = [
   [/(submitted|growth|negotiation)/i, 0.70],
   [/(proposed|invited|application.in.progress)/i, 0.50],
   [/(germination|scoping|needs.assessment)/i, 0.25],
-  // Grant Opportunity Identified is discovery, not active pipeline — 10%
-  [/(grant.opportunity.identified|identified|signal|new.lead|new.inquiry|outreach)/i, 0.10],
+  // 'Grant Opportunity Identified' is GHL's scouting bucket where bots dump
+  // every scraped grant. It's pre-pipeline, not pipeline. Zero it out so the
+  // headline doesn't drown in $200M+ of opportunities we're not pursuing.
+  [/(grant.opportunity.identified)/i, 0.00],
+  [/(identified|signal|new.lead|new.inquiry|outreach)/i, 0.10],
   [/(lost|cancelled|dropped)/i, 0.00],
 ]
 
