@@ -1,16 +1,18 @@
 # Money Brain Phase 2 — Resume Handoff
 
-**Updated:** 2026-05-17T20:30:00Z
+**Updated:** 2026-05-17T22:00:00Z
 **Goal:** Build COO+CIO+CFO+risk Money Brain on top of /finance/command
 **Branches:**
 - Phase 1 shipped to `main` via PR #63
 - Phase 2 Pass 2A + Pass 2B shipped to `main` via PR #65 (merged 2026-05-16)
-- Post-PR-#65 follow-ups in flight on `feat/money-brain-followups-2026-05-17` via PR #72 (open, awaiting review)
+- Post-PR-#65 follow-ups shipped to `main` via PR #72 (merged 2026-05-16T22:15Z)
+- Ecosystem-digest follow-ups shipped to `main` via PR #77 (merged 2026-05-16T22:55Z)
+- Branch-mismatch hook installed live in `.claude/settings.json` (commit `2738c3c`, syntax-patch 2026-05-17)
 
 ## Ledger
 
 ### Now
-[->] Pass 2A + 2B both shipped & merged. PR #72 (follow-ups) open. **Next:** Pass 2C (Accountability) OR start the 6-issue Money Brain set (#66-71).
+[->] **All in-flight PRs merged. Repo clean on `main` (0/0 vs origin).** Stale parallel-session stashes dropped 2026-05-17 (1× pnpm-lock superseded by `34ea21c`, 2× wiki snapshot bumps superseded by cron). **Next:** Pass 2C (Accountability) OR start the 6-issue Money Brain set (#66-71).
 
 ### What shipped in the parallel-terminal flurry (2026-05-14 → 2026-05-17)
 
@@ -57,13 +59,16 @@ Handoff: `thoughts/shared/handoffs/2026-05-17-money-brain-issue-set.md`. Total ~
 - **#71** Phone shortcut + voice-memo capture (1.25d)
 - **#70** Roadmap waterfall — 6/12/60mo cashflow (1-2d)
 
-### Track C — Open PRs needing decision
+### Track C — Open PRs needing decision ✅ RESOLVED 2026-05-17
 
-- **#72** money-brain-followups (this session's PR) — awaiting review/merge
-- **#62** Alignment Loop 2026-05-14 second pass — stale, decide merge/close
-- **#61** ghl-canonical-code-alignment — stale (2026-05-13), decide merge/close
-- **#50** Alignment Loop 2026-05-08 — very stale (2026-04-26), almost certainly close
-- **#48** cockpit gen failed 2026-04-25 — very stale, almost certainly close
+- **#72** money-brain-followups — **MERGED** 2026-05-16T22:15Z
+- **#62** Alignment Loop 2026-05-14 second pass — **MERGED** 2026-05-16T22:18Z
+- **#61** ghl-canonical-code-alignment — **MERGED** 2026-05-16T22:19Z
+- **#50** Alignment Loop 2026-05-08 — **CLOSED** (not merged)
+- **#48** cockpit gen failed 2026-04-25 — **CLOSED** (not merged)
+- **#77** ecosystem-digest-followups (added after this ledger was first written) — **MERGED** 2026-05-16T22:55Z
+
+No open PRs remain.
 
 ## Pass 2C build sketch (when ready)
 
@@ -114,6 +119,6 @@ Add three sections:
 
 1. `/clear`
 2. Open this handoff: `thoughts/shared/handoffs/2026-05-16-money-brain-phase2/current.md`
-3. Decide thread: **A** (Pass 2C), **B** (start #66 — recommended), or **C** (stale PR triage)
+3. Decide thread: **A** (Pass 2C) or **B** (start #66 — recommended). Track C resolved.
 4. If #66: read the issue body via `gh issue view 66`, branch off latest main, ship
 5. If Pass 2C: re-read `~/.claude/plans/coo-cio-cfo-money-brain-phase2.md` § Pass 2C, branch off latest main, start with C1 migration
