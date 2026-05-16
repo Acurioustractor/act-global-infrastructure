@@ -16,7 +16,7 @@ empathy_ledger_key: goods
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/projects/goods.md`.
-> Regenerated: `2026-05-08T23:46:53.419Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerated: `2026-05-16T02:59:33.643Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # Goods on Country
 

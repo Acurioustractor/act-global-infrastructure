@@ -5,7 +5,7 @@ status: Active
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/technical/transcription-workflow.md`.
-> Regenerated: `2026-05-08T23:46:53.419Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerated: `2026-05-16T02:59:33.643Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # Descript Transcription & ALMA Review Workflow
 
