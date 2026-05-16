@@ -137,30 +137,12 @@ export async function GET() {
     { income: 0, expenses: 0, receivables: 0, pipelineWeighted: 0, grantsInFlight: 0, txnTotal: 0, txnUntagged: 0, invTotal: 0, invUntagged: 0, oppTotal: 0, oppUntagged: 0 },
   )
 
-  // 3. Global coverage (counts include rows without project_code, which view groups under NULL)
-  // Re-query directly so we capture the FULL FY totals (the view's per-project rollup misses NULL project_code rows).
-  const [{ data: invAll }, { data: oppAll }, { data: txnAll }] = await Promise.all([
-    supabase
-      .from('xero_invoices')
-      .select('xero_id, project_code', { count: 'exact', head: false })
-      .gte('date', FY_START)
-      .lte('date', FY_END),
-    supabase
-      .from('ghl_opportunities')
-      .select('ghl_id, project_code')
-      .eq('status', 'open'),
-    supabase
-      .from('xero_transactions')
-      .select('xero_transaction_id, project_code')
-      .gte('date', FY_START)
-      .lte('date', FY_END),
+  // 3. Global coverage — use aggregate counts to dodge the 1000-row default cap.
+  const coverage = await Promise.all([
+    countCoverage('xero_transactions', q => q.gte('date', FY_START).lte('date', FY_END)),
+    countCoverage('xero_invoices', q => q.eq('type', 'ACCREC').gte('date', FY_START).lte('date', FY_END)),
+    countCoverage('ghl_opportunities (open)', q => q.eq('status', 'open'), 'ghl_opportunities'),
   ])
-
-  const coverage = [
-    coverageRow('xero_transactions', txnAll ?? []),
-    coverageRow('xero_invoices', invAll ?? []),
-    coverageRow('ghl_opportunities (open)', oppAll ?? []),
-  ]
 
   // 4. Drift queue
   const drift = await loadDriftQueue()
@@ -211,11 +193,20 @@ export async function GET() {
   return NextResponse.json(response)
 }
 
-function coverageRow(source: string, rows: Array<{ project_code: string | null }>) {
-  const total = rows.length
-  const tagged = rows.filter(r => r.project_code != null && r.project_code !== '').length
+async function countCoverage(
+  displayName: string,
+  filter: (q: any) => any,
+  tableOverride?: string,
+) {
+  const table = tableOverride ?? displayName
+  const [totalRes, taggedRes] = await Promise.all([
+    filter(supabase.from(table).select('*', { count: 'exact', head: true })),
+    filter(supabase.from(table).select('*', { count: 'exact', head: true }).not('project_code', 'is', null)),
+  ])
+  const total = totalRes.count ?? 0
+  const tagged = taggedRes.count ?? 0
   return {
-    source,
+    source: displayName,
     total,
     tagged,
     pct: total === 0 ? 0 : Math.round((tagged / total) * 1000) / 10,

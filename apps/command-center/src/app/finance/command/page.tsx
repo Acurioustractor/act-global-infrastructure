@@ -110,6 +110,30 @@ interface LifetimeResponse {
   topCustomers: LifetimeCustomer[]
 }
 
+interface DeltaResponse {
+  available: boolean
+  reason?: string
+  from?: string
+  to?: string
+  deltas?: {
+    cash: number | null
+    projected90d: number | null
+    receivables: number | null
+    pipelineWeighted: number | null
+    grantsInFlight: number | null
+    lifetimePaid: number | null
+    lifetimeAr: number | null
+    coverage: {
+      transactions: number | null
+      invoices: number | null
+      opportunities: number | null
+    }
+    payingCustomers: number
+  }
+  driftNew?: Array<{ kind: string; amount: number; label: string }>
+  driftResolved?: Array<{ kind: string; amount: number; label: string }>
+}
+
 export default function MoneyCommandPage() {
   const { data, isLoading, error, refetch, isRefetching } = useQuery<CommandResponse>({
     queryKey: ['finance', 'command'],
@@ -128,6 +152,15 @@ export default function MoneyCommandPage() {
       return res.json()
     },
     staleTime: 5 * 60 * 1000,
+  })
+  const { data: delta } = useQuery<DeltaResponse>({
+    queryKey: ['finance', 'command-delta'],
+    queryFn: async () => {
+      const res = await fetch('/api/finance/command-delta', { cache: 'no-store' })
+      if (!res.ok) throw new Error(`HTTP ${res.status}`)
+      return res.json()
+    },
+    staleTime: 10 * 60 * 1000,
   })
 
   return (
@@ -171,6 +204,8 @@ export default function MoneyCommandPage() {
             <MiddleLayer middle={data.middle} />
             {/* LIFETIME LEDGER — surfaces xero_invoices as the canonical record */}
             {lifetime && <LifetimeLedgerSection data={lifetime} />}
+            {/* DELTA — what changed since yesterday's snapshot */}
+            {delta && <DeltaSection data={delta} />}
             {/* BOTTOM LAYER */}
             <BottomLayer bottom={data.bottom} generatedAt={data.generatedAt} />
           </>
@@ -403,6 +438,128 @@ function MiddleLayer({ middle }: { middle: CommandResponse['middle'] }) {
         </div>
       </div>
     </section>
+  )
+}
+
+function DeltaSection({ data }: { data: DeltaResponse }) {
+  if (!data.available) {
+    return (
+      <section className="space-y-2">
+        <div className="flex items-center gap-2 text-neutral-400 text-xs font-medium uppercase tracking-wider">
+          <RefreshCw size={14} /> What's changed
+        </div>
+        <div className="rounded-lg border border-neutral-800 bg-neutral-900/50 p-4 text-sm text-neutral-500">
+          {data.reason ?? 'no snapshot data'} — run <code>node scripts/money-command-digest.mjs</code> daily to enable deltas
+        </div>
+      </section>
+    )
+  }
+  const d = data.deltas!
+  const arrow = (n: number | null) => {
+    if (n == null || Math.abs(n) < 0.005) return ''
+    return n > 0 ? '↑' : '↓'
+  }
+  const tone = (n: number | null, goodWhenPositive = true) => {
+    if (n == null || Math.abs(n) < 0.005) return 'text-neutral-500'
+    const good = goodWhenPositive ? n > 0 : n < 0
+    return good ? 'text-emerald-400' : 'text-rose-400'
+  }
+  const fmtDeltaMoney = (n: number | null) => {
+    if (n == null) return '—'
+    if (Math.abs(n) < 1) return '$0'
+    const sign = n > 0 ? '+' : '−'
+    return `${sign}${formatMoneyCompact(Math.abs(n))}`
+  }
+  const fmtDeltaPct = (n: number | null) => {
+    if (n == null) return '—'
+    if (Math.abs(n) < 0.05) return '0%'
+    const sign = n > 0 ? '+' : '−'
+    return `${sign}${Math.abs(n).toFixed(1)}pp`
+  }
+
+  return (
+    <section className="space-y-4">
+      <div className="flex items-center gap-2 text-neutral-400 text-xs font-medium uppercase tracking-wider">
+        <RefreshCw size={14} /> What's changed
+        <span className="text-neutral-600 normal-case font-normal tracking-normal">
+          · {data.from} → {data.to}
+        </span>
+      </div>
+
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+        <DeltaCard label="Cash" value={fmtDeltaMoney(d.cash)} arrow={arrow(d.cash)} tone={tone(d.cash)} />
+        <DeltaCard label="Projected 90d" value={fmtDeltaMoney(d.projected90d)} arrow={arrow(d.projected90d)} tone={tone(d.projected90d)} />
+        <DeltaCard label="Receivables" value={fmtDeltaMoney(d.receivables)} arrow={arrow(d.receivables)} tone={tone(d.receivables, false)} />
+        <DeltaCard label="Pipeline ×p" value={fmtDeltaMoney(d.pipelineWeighted)} arrow={arrow(d.pipelineWeighted)} tone={tone(d.pipelineWeighted)} />
+      </div>
+
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+        <DeltaCard label="Txn coverage" value={fmtDeltaPct(d.coverage.transactions)} arrow={arrow(d.coverage.transactions)} tone={tone(d.coverage.transactions)} />
+        <DeltaCard label="Inv coverage" value={fmtDeltaPct(d.coverage.invoices)} arrow={arrow(d.coverage.invoices)} tone={tone(d.coverage.invoices)} />
+        <DeltaCard label="Opp coverage" value={fmtDeltaPct(d.coverage.opportunities)} arrow={arrow(d.coverage.opportunities)} tone={tone(d.coverage.opportunities)} />
+      </div>
+
+      {(data.driftNew && data.driftNew.length > 0) || (data.driftResolved && data.driftResolved.length > 0) ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div className="rounded-lg border border-amber-900/40 bg-amber-950/10 p-4">
+            <div className="flex items-center gap-2 text-amber-300 text-xs font-medium uppercase tracking-wider mb-2">
+              <AlertTriangle size={12} /> New drift since {data.from}
+            </div>
+            {(data.driftNew ?? []).length === 0 ? (
+              <div className="text-xs text-neutral-500">none</div>
+            ) : (
+              <ul className="text-xs space-y-1">
+                {(data.driftNew ?? []).slice(0, 5).map((d, i) => (
+                  <li key={i} className="text-neutral-300 truncate">
+                    <span className="text-amber-400 mr-1">[{d.kind}]</span>
+                    {formatMoneyCompact(Math.abs(d.amount))} · {d.label}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+          <div className="rounded-lg border border-emerald-900/40 bg-emerald-950/10 p-4">
+            <div className="flex items-center gap-2 text-emerald-300 text-xs font-medium uppercase tracking-wider mb-2">
+              <CheckCircle2 size={12} /> Resolved since {data.from}
+            </div>
+            {(data.driftResolved ?? []).length === 0 ? (
+              <div className="text-xs text-neutral-500">none</div>
+            ) : (
+              <ul className="text-xs space-y-1">
+                {(data.driftResolved ?? []).slice(0, 5).map((d, i) => (
+                  <li key={i} className="text-neutral-300 truncate">
+                    <span className="text-emerald-400 mr-1">[{d.kind}]</span>
+                    {formatMoneyCompact(Math.abs(d.amount))} · {d.label}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        </div>
+      ) : null}
+    </section>
+  )
+}
+
+function DeltaCard({
+  label,
+  value,
+  arrow,
+  tone,
+}: {
+  label: string
+  value: string
+  arrow: string
+  tone: string
+}) {
+  return (
+    <div className="rounded-lg border border-neutral-800 bg-neutral-900/50 p-3">
+      <div className="text-xs text-neutral-500 uppercase tracking-wider mb-1">{label}</div>
+      <div className={cn('text-lg font-semibold tabular-nums flex items-baseline gap-1', tone)}>
+        <span>{arrow}</span>
+        <span>{value}</span>
+      </div>
+    </div>
   )
 }
 

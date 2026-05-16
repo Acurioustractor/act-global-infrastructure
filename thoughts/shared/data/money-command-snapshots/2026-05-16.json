@@ -1,0 +1,62 @@
+{
+  "today": "2026-05-16",
+  "coverage": {
+    "transactions": {
+      "total": 1804,
+      "tagged": 1804,
+      "pct": 100
+    },
+    "invoices": {
+      "total": 94,
+      "tagged": 94,
+      "pct": 100
+    },
+    "opportunities": {
+      "total": 400,
+      "tagged": 252,
+      "pct": 63
+    }
+  },
+  "drift": [
+    {
+      "kind": "opp",
+      "amount": 44000000,
+      "label": "Aboriginal Housing Office (AHO) SHAF ACHP 2024 Stream 1 - Preliminary works & DA development · Grants"
+    },
+    {
+      "kind": "opp",
+      "amount": 44000000,
+      "label": "Aboriginal Housing Office (AHO) SHAF ACHP 2024 Stream 2 - Upgrades to long-term vacant properties · Grants"
+    },
+    {
+      "kind": "opp",
+      "amount": 37507787,
+      "label": "ARC Centre of Excellence for Indigenous and Environmental Histories and Futures. ARC Centre of Excellence for Indigenous and Environmental Histories and Futures. The proposed Centre aims to generate a · Grants"
+    },
+    {
+      "kind": "opp",
+      "amount": 37507787,
+      "label": "ARC Centre of Excellence for Indigenous Futures. ARC Centre of Excellence for Indigenous Futures. The ARC Centre of Excellence for Indigenous Futures aims to transform and improve the life chances of · Grants"
+    },
+    {
+      "kind": "opp",
+      "amount": 12610000,
+      "label": "Aboriginal and Torres Strait Islander(ATSI) initiatives · Grants"
+    }
+  ],
+  "incoming": {
+    "receivables": 412540,
+    "pipelineWeighted": 9002928.75,
+    "grantsInFlight": 230000,
+    "projected90d": 9645468.75
+  },
+  "cash": 210620.11999999994,
+  "lifetime": {
+    "distinctCustomers": 39,
+    "paying": 30,
+    "paid": 1535134.3100000003,
+    "ar": 412540,
+    "draft": 84700,
+    "visibleBook": 2032374.3100000003
+  }
+}

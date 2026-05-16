@@ -44,20 +44,20 @@ const fmt = n => '$' + Number(n).toLocaleString('en-US', { maximumFractionDigits
 const fmtPct = n => `${Number(n).toFixed(1)}%`
 
 async function loadCoverage() {
-  const [{ data: txns }, { data: invs }, { data: opps }] = await Promise.all([
-    supabase.from('xero_transactions').select('project_code').gte('date', FY_START),
-    supabase.from('xero_invoices').select('project_code').eq('type', 'ACCREC').gte('date', FY_START),
-    supabase.from('ghl_opportunities').select('project_code').eq('status', 'open'),
+  // Use aggregate counts to dodge the 1000-row default cap on .select() results.
+  const countTagged = async (table, filters = q => q) => {
+    const total = await filters(supabase.from(table).select('*', { count: 'exact', head: true }))
+    const tagged = await filters(supabase.from(table).select('*', { count: 'exact', head: true }).not('project_code', 'is', null))
+    const t = total.count ?? 0
+    const ta = tagged.count ?? 0
+    return { total: t, tagged: ta, pct: t === 0 ? 0 : (ta / t) * 100 }
+  }
+  const [transactions, invoices, opportunities] = await Promise.all([
+    countTagged('xero_transactions', q => q.gte('date', FY_START)),
+    countTagged('xero_invoices', q => q.eq('type', 'ACCREC').gte('date', FY_START)),
+    countTagged('ghl_opportunities', q => q.eq('status', 'open')),
   ])
-  const pct = (rows) => {
-    const t = rows.length, tagged = rows.filter(r => r.project_code).length
-    return { total: t, tagged, pct: t === 0 ? 0 : (tagged / t) * 100 }
-  }
-  return {
-    transactions: pct(txns ?? []),
-    invoices: pct(invs ?? []),
-    opportunities: pct(opps ?? []),
-  }
+  return { transactions, invoices, opportunities }
 }
 
 async function loadDriftTop5() {
