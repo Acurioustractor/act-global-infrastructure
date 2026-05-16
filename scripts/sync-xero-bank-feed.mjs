@@ -63,6 +63,20 @@ function saveTokens(accessToken, refreshToken, expiresIn) {
       expires_at: Date.now() + (expiresIn * 1000) - 60000
     }, null, 2));
   } catch (e) {}
+
+  try {
+    const envFile = path.join(process.cwd(), '.env.local');
+    if (existsSync(envFile)) {
+      let envBody = readFileSync(envFile, 'utf8');
+      const line = `XERO_REFRESH_TOKEN=${refreshToken}`;
+      if (/^XERO_REFRESH_TOKEN=/m.test(envBody)) {
+        envBody = envBody.replace(/^XERO_REFRESH_TOKEN=.*/m, line);
+      } else {
+        envBody = `${envBody.trimEnd()}\n${line}\n`;
+      }
+      writeFileSync(envFile, envBody);
+    }
+  } catch (e) {}
 }
 
 async function loadTokenFromSupabase() {

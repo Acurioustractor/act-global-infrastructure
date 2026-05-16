@@ -5,7 +5,7 @@
  */
 import '../lib/load-env.mjs';
 import { createClient } from '@supabase/supabase-js';
-import { writeFileSync } from 'fs';
+import { existsSync, readFileSync, writeFileSync } from 'fs';
 
 const XERO_CLIENT_ID = process.env.XERO_CLIENT_ID;
 const XERO_CLIENT_SECRET = process.env.XERO_CLIENT_SECRET;
@@ -13,6 +13,21 @@ const XERO_CLIENT_SECRET = process.env.XERO_CLIENT_SECRET;
 const SUPABASE_URL = process.env.SUPABASE_SHARED_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
 const SUPABASE_KEY = process.env.SUPABASE_SHARED_SERVICE_ROLE_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY;
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+
+function updateEnvRefreshToken(refreshToken) {
+  const envFile = '.env.local';
+  if (!existsSync(envFile)) return false;
+
+  let envBody = readFileSync(envFile, 'utf8');
+  const line = `XERO_REFRESH_TOKEN=${refreshToken}`;
+  if (/^XERO_REFRESH_TOKEN=/m.test(envBody)) {
+    envBody = envBody.replace(/^XERO_REFRESH_TOKEN=.*/m, line);
+  } else {
+    envBody = `${envBody.trimEnd()}\n${line}\n`;
+  }
+  writeFileSync(envFile, envBody);
+  return true;
+}
 
 async function main() {
   console.log('=== Xero Token Refresh ===\n');
@@ -80,6 +95,9 @@ async function main() {
     expires_at: expiresAt.getTime(),
   }, null, 2));
   console.log('Saved to .xero-tokens.json');
+  if (updateEnvRefreshToken(tokens.refresh_token)) {
+    console.log('Saved rotated refresh token to .env.local');
+  }
 
   // Verify: get connections
   console.log('\nVerifying connection...');
@@ -104,6 +122,8 @@ async function main() {
     { name: 'BankTransactions', url: 'https://api.xero.com/api.xro/2.0/BankTransactions?page=1&pageSize=1' },
     { name: 'Invoices', url: 'https://api.xero.com/api.xro/2.0/Invoices?page=1&pageSize=1' },
     { name: 'Contacts', url: 'https://api.xero.com/api.xro/2.0/Contacts?page=1&pageSize=1' },
+    { name: 'Receipts', url: 'https://api.xero.com/api.xro/2.0/Receipts' },
+    { name: 'ExpenseClaims', url: 'https://api.xero.com/api.xro/2.0/ExpenseClaims' },
     { name: 'TrackingCategories', url: 'https://api.xero.com/api.xro/2.0/TrackingCategories' },
     { name: 'ManualJournals', url: 'https://api.xero.com/api.xro/2.0/ManualJournals?page=1&pageSize=1' },
     { name: 'Reports/ProfitAndLoss', url: 'https://api.xero.com/api.xro/2.0/Reports/ProfitAndLoss' },
@@ -142,16 +162,31 @@ async function main() {
   // Check what scopes we NEED for full suite
   const NEEDED_SCOPES = [
     'openid', 'profile', 'email', 'offline_access',
-    'accounting.transactions',           // read+write bank transactions
-    'accounting.transactions.read',      // read transactions
-    'accounting.contacts',               // read+write contacts
-    'accounting.contacts.read',          // read contacts
-    'accounting.attachments',            // upload attachments
-    'accounting.settings',               // tracking categories read+write
-    'accounting.settings.read',          // tracking categories read
-    'accounting.reports.read',           // P&L, balance sheet, budget
-    'accounting.budgets.read',           // budget reports
-    'accounting.journals.read',          // manual journals read
+    'accounting.transactions',
+    'accounting.transactions.read',
+    'accounting.banktransactions',
+    'accounting.banktransactions.read',
+    'accounting.invoices',
+    'accounting.invoices.read',
+    'accounting.payments',
+    'accounting.payments.read',
+    'accounting.contacts',
+    'accounting.contacts.read',
+    'accounting.attachments',
+    'accounting.settings',
+    'accounting.settings.read',
+    'accounting.reports.read',
+    'accounting.reports.aged.read',
+    'accounting.reports.balancesheet.read',
+    'accounting.reports.profitandloss.read',
+    'accounting.reports.trialbalance.read',
+    'accounting.budgets.read',
+    'accounting.journals.read',
+    'accounting.manualjournals',
+    'accounting.manualjournals.read',
+    'assets.read',
+    'files',
+    'files.read',
   ];
 
   console.log('\n=== Scope Recommendations ===');

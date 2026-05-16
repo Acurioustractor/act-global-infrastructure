@@ -25,7 +25,7 @@ const sinceArg = args.find(a => a.startsWith('--since'));
 const SINCE = sinceArg ? sinceArg.split(/[ =]/)[1] : '2025-07-01';
 
 const supabase = createClient(
-  process.env.SUPABASE_SHARED_URL || process.env.SUPABASE_URL,
+  process.env.SUPABASE_SHARED_URL || process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL,
   process.env.SUPABASE_SHARED_SERVICE_ROLE_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY,
 );
 

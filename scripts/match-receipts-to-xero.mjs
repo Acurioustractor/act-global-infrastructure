@@ -33,6 +33,14 @@ function log(msg) {
   console.log(`[${new Date().toISOString().slice(11, 19)}] ${msg}`);
 }
 
+async function updateReceiptRow(receiptId, updates) {
+  const { error } = await supabase
+    .from('receipt_emails')
+    .update({ ...updates, updated_at: new Date().toISOString() })
+    .eq('id', receiptId);
+  if (error) throw error;
+}
+
 // ============================================================================
 // MATCHING ENGINE
 // ============================================================================
@@ -491,43 +499,28 @@ async function main() {
     let applied = 0;
 
     for (const { receipt, match } of matches) {
-      const isInvoice = match.tx._is_invoice;
-      const updateParams = {
-        receipt_id: receipt.id,
-        new_status: 'matched',
-        new_xero_transaction_id: isInvoice ? null : match.tx.id,
-        new_xero_bank_transaction_id: isInvoice ? null : match.tx.xero_transaction_id,
-        new_match_confidence: match.score,
-        new_match_method: match.method || 'auto_heuristic',
-        new_project_code: match.tx.project_code || null,
-      };
-
-      // For invoice matches, store the invoice ID separately
-      if (isInvoice) {
-        // Use direct update for invoice matches since RPC doesn't have xero_invoice_id param
-        const { error: directErr } = await supabase
-          .from('receipt_emails')
-          .update({
+      try {
+        const isInvoice = match.tx._is_invoice;
+        if (isInvoice) {
+          await updateReceiptRow(receipt.id, {
             status: 'matched',
             xero_invoice_id: match.tx.xero_transaction_id,
             match_confidence: match.score,
             match_method: match.method || 'auto_heuristic',
-          })
-          .eq('id', receipt.id);
-        if (directErr) {
-          log(`  ERROR: ${receipt.vendor_name}: ${directErr.message}`);
+          });
         } else {
-          applied++;
+          await updateReceiptRow(receipt.id, {
+            status: 'matched',
+            xero_transaction_id: match.tx.id,
+            xero_bank_transaction_id: match.tx.xero_transaction_id,
+            match_confidence: match.score,
+            match_method: match.method || 'auto_heuristic',
+            project_code: match.tx.project_code || null,
+          });
         }
-        continue;
-      }
-
-      const { error } = await supabase.rpc('update_receipt_match', updateParams);
-
-      if (error) {
-        log(`  ERROR: ${receipt.vendor_name}: ${error.message}`);
-      } else {
         applied++;
+      } catch (error) {
+        log(`  ERROR: ${receipt.vendor_name}: ${error.message}`);
       }
     }
     log(`Applied: ${applied}/${matches.length}`);
@@ -539,11 +532,10 @@ async function main() {
     if (remainingAmbiguous.length > 0) {
       log(`Marking ${remainingAmbiguous.length} ambiguous as 'review'...`);
       for (const { receipt, match } of remainingAmbiguous) {
-        await supabase.rpc('update_receipt_match', {
-          receipt_id: receipt.id,
-          new_status: 'review',
-          new_match_confidence: match.score,
-          new_match_method: 'needs_review',
+        await updateReceiptRow(receipt.id, {
+          status: 'review',
+          match_confidence: match.score,
+          match_method: 'needs_review',
         });
       }
 

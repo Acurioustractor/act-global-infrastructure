@@ -9,13 +9,7 @@
  *
  * Safe: read-only. Surfaces candidates for human review.
  *
- * ⚠️ REQUIRES: Xero OAuth app must be authorized with `files` scope.
- * Current ACT app only has accounting scopes — this script will 401 until
- * the app is re-authorized with files.read. To fix:
- *   1. Update Xero app scopes at https://developer.xero.com
- *   2. Add: files.read
- *   3. Have Nic re-authorize at the OAuth consent screen
- *   4. New refresh token flows through sync-xero-tokens.mjs automatically
+ * Requires Xero OAuth scopes `files` and `files.read`.
  *
  * Usage:
  *   node scripts/xero-files-library-scan.mjs          # full scan
@@ -60,6 +54,27 @@ async function refreshXeroToken() {
   XERO_ACCESS_TOKEN = d.access_token;
   XERO_REFRESH_TOKEN = d.refresh_token;
   writeFileSync(TOKEN_FILE, JSON.stringify({ access_token: d.access_token, refresh_token: d.refresh_token, expires_at: Date.now() + d.expires_in * 1000 - 60000 }, null, 2));
+  if (SUPABASE_KEY) {
+    const expiresAt = new Date(Date.now() + d.expires_in * 1000 - 60000).toISOString();
+    await sb.from('xero_tokens').upsert({
+      id: 'default',
+      access_token: d.access_token,
+      refresh_token: d.refresh_token,
+      expires_at: expiresAt,
+      updated_at: new Date().toISOString(),
+      updated_by: 'xero-files-library-scan',
+    }, { onConflict: 'id' });
+  }
+  if (existsSync('.env.local')) {
+    let envBody = readFileSync('.env.local', 'utf8');
+    const line = `XERO_REFRESH_TOKEN=${d.refresh_token}`;
+    if (/^XERO_REFRESH_TOKEN=/m.test(envBody)) {
+      envBody = envBody.replace(/^XERO_REFRESH_TOKEN=.*/m, line);
+    } else {
+      envBody = `${envBody.trimEnd()}\n${line}\n`;
+    }
+    writeFileSync('.env.local', envBody);
+  }
   return true;
 }
 
@@ -202,7 +217,40 @@ async function main() {
   }
 
   writeFileSync(reportPath, lines.join('\n'));
+  writeFileSync(`${reportPath}.provenance.md`, [
+    '# Provenance: Xero Files Library Scan',
+    '',
+    `Report: ${reportPath}`,
+    `Generated: ${new Date().toISOString()}`,
+    '',
+    '## Data Sources Queried',
+    '- Xero Files API `GET /Files`.',
+    '- Xero Files API `GET /Folders`.',
+    '- Supabase `xero_transactions` for unreceipted SPEND transaction names.',
+    '- Supabase `xero_tokens` for token refresh persistence if required.',
+    '',
+    '## Mutations',
+    '- No Xero accounting or Files Library mutation was performed.',
+    '- OAuth token mirrors may be rotated and persisted when the access token is expired.',
+    '',
+    '## Verified',
+    '- File/folder counts come from live Xero Files API responses.',
+    '- Missing-vendor comparisons use current Supabase Xero transaction mirror rows.',
+    '',
+    '## Inferred',
+    '- Vendor matches are filename heuristics only; amount/date must be checked before linking.',
+    '',
+    '## Unknown',
+    '- Whether a floating file is the correct receipt until a human confirms image/PDF content.',
+    '',
+    '## Reproduce',
+    '```bash',
+    'node scripts/xero-files-library-scan.mjs',
+    '```',
+    '',
+  ].join('\n'));
   console.log(`\nReport: ${reportPath}`);
+  console.log(`Provenance: ${reportPath}.provenance.md`);
 }
 
 main().catch(e => { console.error(e); process.exit(1); });
