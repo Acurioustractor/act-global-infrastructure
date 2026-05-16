@@ -13,6 +13,7 @@ import {
   ShieldAlert,
   Bot,
 } from 'lucide-react'
+import { TodayActionsHero } from '@/components/finance/TodayActionsHero'
 
 // Canonical /finance index page (2026-05-08 cleanup).
 // Per the 4-surface model in CLAUDE.md: command-center owns *operate* tasks.
@@ -131,7 +132,7 @@ const otherSurfaces: Array<{
 export default function FinanceIndexPage() {
   return (
     <main className="mx-auto max-w-6xl px-6 py-10">
-      <header className="mb-8">
+      <header className="mb-6">
         <p className="text-xs uppercase tracking-wider text-muted-foreground">Finance</p>
         <h1 className="mt-1 text-3xl font-semibold tracking-tight">Operate</h1>
         <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
@@ -139,6 +140,8 @@ export default function FinanceIndexPage() {
           drill into a project. For reading and planning use Notion. For pushes use Telegram.
         </p>
       </header>
+
+      <TodayActionsHero />
 
       <section aria-labelledby="cards" className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         <h2 id="cards" className="sr-only">Operate</h2>

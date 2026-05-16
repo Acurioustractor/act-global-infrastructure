@@ -15,6 +15,22 @@ export function SidebarItem({
   depth?: number
 }) {
   const pathname = usePathname()
+
+  // Divider items render as non-clickable section headers inside a children list.
+  if (item.divider) {
+    const dividerPad = depth === 0 ? 'pl-3' : depth === 1 ? 'pl-9' : 'pl-14'
+    return (
+      <div
+        className={cn(
+          'mt-3 mb-1 pr-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-white/30',
+          dividerPad,
+        )}
+      >
+        {item.label}
+      </div>
+    )
+  }
+
   const isExactActive = pathname === item.href
   const isActive = isExactActive || pathname.startsWith(`${item.href}/`)
   const hasChildren = item.children && item.children.length > 0

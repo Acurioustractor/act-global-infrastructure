@@ -43,6 +43,8 @@ export interface SidebarNavItem {
   color?: string
   bg?: string
   children?: SidebarNavItem[]
+  /** Render as a non-clickable section header inside a children list. */
+  divider?: boolean
 }
 
 export interface SidebarNavGroup {
@@ -106,22 +108,34 @@ export const navStructure: SidebarNavGroup[] = [
         children: [
           // 2026-05-08 cleanup — retired: tagger, tagger-bulk, pipeline-viz, pipeline-kanban, project-plan, self-reliance, vendor-rules-suggest.
           // 2026-05-16 cleanup — retired: revenue-planning, review (see thoughts/shared/handoffs/2026-05-16-money-audit/).
+          // 2026-05-16 UX audit — grouped by job-to-do with 5 section dividers (ux-audit.md).
+          { href: '#today', label: 'Today', icon: Sun, divider: true },
           { href: '/finance/command', label: 'Money Command', icon: Compass, color: 'text-emerald-400', bg: 'bg-emerald-500/20' },
-          { href: '/finance', label: 'All finance (operate hub)', icon: DollarSign, color: 'text-foreground', bg: 'bg-white/10' },
-          { href: '/finance/workbench', label: 'Finance Workbench', icon: ClipboardList, color: 'text-cyan-400', bg: 'bg-cyan-500/20' },
+          { href: '/finance/workbench', label: 'Workbench', icon: ClipboardList, color: 'text-cyan-400', bg: 'bg-cyan-500/20' },
           { href: '/finance/xero-page-copilot', label: 'Xero Page Copilot', icon: Bot, color: 'text-cyan-400', bg: 'bg-cyan-500/20' },
           { href: '/finance/dext-push-audit', label: 'Dext Push Audit', icon: ShieldAlert, color: 'text-red-400', bg: 'bg-red-500/20' },
-          { href: '/finance/overview', label: 'CEO money cockpit', icon: Layers, color: 'text-emerald-400', bg: 'bg-emerald-500/20' },
-          { href: '/finance/money-alignment', label: 'Money Alignment', icon: CircleDollarSign, color: 'text-emerald-400', bg: 'bg-emerald-500/20' },
-          { href: '/finance/reconciliation', label: 'Reconciliation (receipts)', icon: ClipboardCheck, color: 'text-cyan-400', bg: 'bg-cyan-500/20' },
-          { href: '/finance/tagger-v2', label: 'Rapid Tagger', icon: Tag, color: 'text-amber-400', bg: 'bg-amber-500/20' },
+
+          { href: '#receipts', label: 'Receipts & spending', icon: Receipt, divider: true },
+          { href: '/finance/reconciliation', label: 'Reconciliation', icon: ClipboardCheck, color: 'text-cyan-400', bg: 'bg-cyan-500/20' },
           { href: '/finance/receipts-triage', label: 'Receipts Triage', icon: Receipt, color: 'text-rose-400', bg: 'bg-rose-500/20' },
+          { href: '/finance/tagger-v2', label: 'Rapid Tagger', icon: Tag, color: 'text-amber-400', bg: 'bg-amber-500/20' },
+
+          { href: '#money-state', label: 'Money state', icon: BarChart3, divider: true },
+          { href: '/finance/overview', label: 'CEO Cockpit', icon: Layers, color: 'text-emerald-400', bg: 'bg-emerald-500/20' },
+          { href: '/finance/money-alignment', label: 'Money Alignment', icon: CircleDollarSign, color: 'text-emerald-400', bg: 'bg-emerald-500/20' },
           { href: '/finance/projects', label: 'Projects P&L', icon: BarChart3, color: 'text-green-400', bg: 'bg-green-500/20' },
+
+          { href: '#pipeline', label: 'Pipeline & invoices', icon: Target, divider: true },
           { href: '/finance/pipeline', label: 'Pipeline', icon: Target, color: 'text-indigo-400', bg: 'bg-indigo-500/20' },
+          { href: '/finance/invoices', label: 'Invoice Command', icon: Receipt, color: 'text-emerald-400', bg: 'bg-emerald-500/20' },
+
+          { href: '#roles', label: 'Role views', icon: Landmark, divider: true },
           { href: '/finance/board', label: 'Board Report', icon: Landmark, color: 'text-blue-400', bg: 'bg-blue-500/20' },
           { href: '/finance/accountant', label: 'Accountant Pack', icon: Calculator, color: 'text-orange-400', bg: 'bg-orange-500/20' },
           { href: '/finance/revenue', label: 'Revenue Sequencing', icon: TrendingUp, color: 'text-purple-400', bg: 'bg-purple-500/20' },
-          { href: '/finance/invoices', label: 'Invoice Command', icon: Receipt, color: 'text-emerald-400', bg: 'bg-emerald-500/20' },
+
+          { href: '#hub', label: 'Hub', icon: DollarSign, divider: true },
+          { href: '/finance', label: 'All finance (operate hub)', icon: DollarSign, color: 'text-foreground', bg: 'bg-white/10' },
         ],
       },
     ],
