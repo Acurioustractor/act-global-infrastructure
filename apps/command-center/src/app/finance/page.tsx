@@ -9,11 +9,14 @@ import {
   ExternalLink,
   Tag,
   Layers,
+  ClipboardList,
+  ShieldAlert,
+  Bot,
 } from 'lucide-react'
 
 // Canonical /finance index page (2026-05-08 cleanup).
 // Per the 4-surface model in CLAUDE.md: command-center owns *operate* tasks.
-// This page is the front door to the 7 keeper routes. Notion/scripts/Telegram
+// This page is the front door to the keeper routes. Notion/scripts/Telegram
 // links sit in the footer for cross-surface awareness.
 
 const cards: Array<{
@@ -23,6 +26,27 @@ const cards: Array<{
   icon: typeof DollarSign
   accent: string
 }> = [
+  {
+    title: 'Finance workbench',
+    href: '/finance/workbench',
+    description: 'One table for receipts, project codes, income/outgoing, and R&D review.',
+    icon: ClipboardList,
+    accent: 'from-cyan-500/10 to-cyan-500/5 border-cyan-500/30',
+  },
+  {
+    title: 'Dext push audit',
+    href: '/finance/dext-push-audit',
+    description: 'Audit Dext-created Xero bills before Find & Match. Prevent duplicate spend.',
+    icon: ShieldAlert,
+    accent: 'from-red-500/10 to-red-500/5 border-red-500/30',
+  },
+  {
+    title: 'Xero page copilot',
+    href: '/finance/xero-page-copilot',
+    description: 'Paste one Xero Reconcile page and get a safe row-by-row action queue.',
+    icon: Bot,
+    accent: 'from-cyan-500/10 to-amber-500/5 border-cyan-500/30',
+  },
   {
     title: 'CEO money cockpit',
     href: '/finance/overview',
