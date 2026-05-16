@@ -65,6 +65,16 @@ const cronScripts = [
     cron_restart: '30 8 * * 1', // Weekly Monday 8:30am AEST
   },
   {
+    // Weekly Monday 7:55am AEST: cross-repo digest of what shipped in the
+    // last 7 days across all 9 ACT codebases, grouped by `Plan: <slug>`
+    // commit trailer. Pushes into Notion page cfg.ecosystemDigest. Lands
+    // before notion-weekly-digest (8:30) so ecosystem context arrives first.
+    name: 'ecosystem-digest',
+    script: 'scripts/weekly-ecosystem-digest.mjs',
+    args: '--notion',
+    cron_restart: '55 7 * * 1', // Weekly Monday 7:55am AEST
+  },
+  {
     // Daily 7am AEST: refresh "🎯 Today's Focus" + sweep for drift signals
     // (stuck opps · overdue invoices · FAIL cadence · easy-win storyteller
     // transcripts) and auto-create new Action Items rows.
@@ -285,6 +295,19 @@ const cronScripts = [
     script: 'scripts/poll-pre-publish-dext-grader.mjs',
     args: '--batch 25 --telegram',
     cron_restart: '*/15 8-18 * * 1-5', // Every 15 min, 8am-6pm AEST, Mon-Fri
+  },
+  {
+    // Issue #66 (pivot) — push AI tracking suggestions to Xero.
+    // ai-route-dext-doc.mjs --apply writes project_code to xero_transactions
+    // in Supabase but doesn't touch the Xero record. This polls finance_ai_
+    // routing_suggestions for high-conf, applied-locally-but-not-in-Xero rows
+    // and POSTs Business Division + Project Tracking via the Xero API.
+    // Runs offset from pre-publish-dext-grader by 15 min so the grader has
+    // time to finish writing.
+    name: 'push-ai-tracking-to-xero',
+    script: 'scripts/push-ai-tracking-to-xero.mjs',
+    args: '--limit 50',
+    cron_restart: '7,37 8-18 * * 1-5', // 8:07, 8:37, ..., 18:37 Mon-Fri AEST
   },
   {
     name: 'ghl-cleanup-auto',
