@@ -1,0 +1,584 @@
+id,date,payee,particulars,amount,status,receipt_match_status,project_code
+27a8809d-6f35-4038-b68f-db7c1a093cec,2025-10-01,DNPPHOTO.COM.AU PORT MELBOURN,DNPPHOTO.COM.AU PORT MELBOURN,693,reconciled,matched,ACT-IN
+63e7ae73-eabf-41a9-886e-c7987b065d2f,2025-10-01,Linktree,LINKTREE COLLINGWOOD,8.2,unreconciled,no_receipt_needed,ACT-IN
+6d068b91-2e74-47eb-afc9-e2207c90c4f6,2025-10-02,Mr Wong Sydney,Mr Wong Sydney,159.16,reconciled,no_receipt_needed,ACT-IN
+69b0188d-4915-4331-9883-506b6740f639,2025-10-02,NAB International Fee,NAB INTNL TRAN FEE - (MC),2.61,reconciled,no_receipt_needed,ACT-IN
+8e11966b-9e68-4bc4-a548-1ab6a8dc8da0,2025-10-03,BWC BRISBANE 133222 HAMILTON,BWC BRISBANE 133222 HAMILTON,88.19,reconciled,no_receipt_needed,ACT-IN
+febe1d6d-678d-40cb-a891-6605647acf2d,2025-10-03,Claude.AI,CLAUDE.AI SUBSCRIPTION ANTHROPIC.COMCA,152.09,reconciled,no_receipt_needed,ACT-IN
+7b66c13e-f04d-4973-81cf-c145e802de8b,2025-10-03,NAB International Fee,NAB INTNL TRAN FEE - (MC),5.32,reconciled,no_receipt_needed,ACT-IN
+069d08bb-176f-445d-b9a8-ff1f0d0947e3,2025-10-06,Internet Transfer,INTERNET TRANSFER Linked Acc Trns,260,unreconciled,no_receipt_needed,ACT-IN
+ed6985fe-2bf5-497e-b8d5-ba06d65c402a,2025-10-06,LinkedIn,LinkedInPreC *52161414 16506873555,74.99,unreconciled,no_receipt_needed,ACT-IN
+8f706d7e-13c0-4abe-a532-b53f876ef38b,2025-10-06,NAB International Fee,NAB INTNL TRAN FEE - (MC),0.96,reconciled,no_receipt_needed,ACT-IN
+ffeb6cb5-472e-413e-83e7-1135529e7418,2025-10-06,NAB International Fee,NAB INTNL TRAN FEE - (MC),1.76,reconciled,no_receipt_needed,ACT-IN
+fc4eda48-0bb6-406f-bf3d-bd22fde9d613,2025-10-06,SP DRNKS MASLIN BEACH,SP DRNKS MASLIN BEACH,300,reconciled,matched,ACT-FM
+d74d2903-7cc4-4b76-a774-c42acd110564,2025-10-06,SQ *GREMLIN GROUNDS Maleny,SQ *GREMLIN GROUNDS Maleny,6.86,unreconciled,no_receipt_needed,ACT-FM
+5a87933f-8d44-413e-b4fa-ad14d37be468,2025-10-06,SQ *NEST IN WITTA Witta,SQ *NEST IN WITTA Witta,86.19,unreconciled,no_receipt_needed,ACT-FM
+f44cc4d1-0c49-4969-a4e4-16560c2bc330,2025-10-06,UPTON GROUP AUSTRALIA BEERWAH,UPTON GROUP AUSTRALIA BEERWAH,447.84,reconciled,matched,ACT-FM
+d76fdbe6-23b1-44b6-88a0-33d185468fce,2025-10-07,A W M ELECTRICAL WHO ALICE SPRINGS,A W M ELECTRICAL WHO ALICE SPRINGS,395.77,unreconciled,unmatched,ACT-GD
+d6c43615-2411-45e1-b781-18b9e97c7679,2025-10-07,About Time Bathhouse Torquay,About Time Bathhouse Torquay,100,unreconciled,no_receipt_needed,ACT-IN
+8d7f0727-362e-48e6-86cb-635da630fb11,2025-10-07,Audible,Audible Limited AU MELBOURNE,16.45,reconciled,no_receipt_needed,ACT-IN
+418e5e34-2038-411b-8c33-a5afd40f593c,2025-10-07,NAB International Fee,NAB INTNL TRAN FEE - (SC),0.82,reconciled,no_receipt_needed,ACT-IN
+4ee22c2f-0053-4aa4-af59-94743088ec7e,2025-10-07,RICEBOI MOOLOOLABA,RICEBOI MOOLOOLABA,94,unreconciled,no_receipt_needed,ACT-FM
+1043d5f8-1a4e-4beb-b20d-0c09b7730e2f,2025-10-07,Squarespace,SQSP* DOMAIN#204276426 SQUARESPACE.CNY,23.5,unreconciled,no_receipt_needed,ACT-IN
+8808ad21-2b99-4ed3-b593-98c0b84ae812,2025-10-08,SUSHI GOSU PTY LTD Braitling,SUSHI GOSU PTY LTD Braitling,7.11,unreconciled,no_receipt_needed,ACT-GD
+2756c07e-7923-45cb-9db3-fbcb00156307,2025-10-08,SUSHI GOSU PTY LTD Braitling,SUSHI GOSU PTY LTD Braitling,112.16,unreconciled,matched,ACT-GD
+9ca2698c-1228-4eb7-9ade-3b33ab082241,2025-10-09,AHERRENGE COMMUNITY AMPILATWATJA,AHERRENGE COMMUNITY AMPILATWATJA,69,reconciled,no_receipt_needed,ACT-GD
+e87e60a3-6ce6-4e9d-83f8-d533bcccbd9b,2025-10-09,NAB International Fee,NAB INTNL TRAN FEE - (MC),1.7,reconciled,no_receipt_needed,ACT-IN
+076f049f-732e-4cd5-958a-140f7d6e3669,2025-10-10,CabFare,CabFare Payments Melbourne,19.11,unreconciled,no_receipt_needed,ACT-GD
+b18e56c4-b56e-4f6e-98c0-4787c8814399,2025-10-10,NAB International Fee,NAB INTNL TRAN FEE - (MC),6.64,reconciled,no_receipt_needed,ACT-IN
+681fe473-078b-4275-803a-85caba03c97d,2025-10-13,ALICE SPRINGS CASINO O ALICE SPRINGS,ALICE SPRINGS CASINO O ALICE SPRINGS,188.18,reconciled,matched,ACT-GD
+c67805b6-e89d-4c55-93dc-d153a62f3928,2025-10-13,BOJANGLES SALOON&DININ ALICE SPRINGS,BOJANGLES SALOON&DININ ALICE SPRINGS,31.75,unreconciled,no_receipt_needed,ACT-GD
+0c8cc419-4814-46c6-84a2-aca8c5c97cc3,2025-10-13,NAB International Fee,NAB INTNL TRAN FEE - (MC),0.89,reconciled,no_receipt_needed,ACT-IN
+a6a994ef-c7ad-444e-b78e-4de182081e3b,2025-10-13,NAB International Fee,NAB INTNL TRAN FEE - (MC),1.57,reconciled,no_receipt_needed,ACT-IN
+cdd39fdb-9d1d-404f-b015-93c29b7934fb,2025-10-13,NAB International Fee,NAB INTNL TRAN FEE - (MC),3.25,reconciled,no_receipt_needed,ACT-IN
+9d50a77e-8d2a-4452-9f67-438dccf72ca9,2025-10-13,SQ *DUYU COFFEE ROASTERS Ciccone,SQ *DUYU COFFEE ROASTERS Ciccone,88.34,unreconciled,no_receipt_needed,ACT-GD
+085d939a-53ae-466c-87d1-6b42b1b0c9cd,2025-10-13,TANGENTYERE ARTISTS ALICE SPRINGS,TANGENTYERE ARTISTS ALICE SPRINGS,145,reconciled,matched,ACT-GD
+5b7921e2-bb78-4fda-8deb-1b11d674f0ff,2025-10-14,BARLMARRK SUPERMARKT BERRIMAH,BARLMARRK SUPERMARKT BERRIMAH,240.86,reconciled,no_receipt_needed,ACT-GD
+7f0c4889-5ddd-47c0-8903-e403f33d9b3e,2025-10-14,BEARPEP PTY LTD LARRAKEYAH,BEARPEP PTY LTD LARRAKEYAH,64.99,unreconciled,no_receipt_needed,ACT-GD
+a02f9ced-9407-4285-a255-eb82d2f66591,2025-10-14,BEARPEP PTY LTD LARRAKEYAH,BEARPEP PTY LTD LARRAKEYAH,323.3,unreconciled,unmatched,ACT-GD
+2c772e75-2961-49bc-8b07-82388eb99ffa,2025-10-14,DAYUSE Paris,DAYUSE Paris,156.2,unreconciled,no_receipt_needed,ACT-IN
+3a824180-ee04-405f-8bf4-be7e2b068695,2025-10-14,NAB International Fee,NAB INTNL TRAN FEE - (MC),2.49,reconciled,no_receipt_needed,ACT-IN
+c16c3d83-49ee-43e3-8e46-fcc174b43143,2025-10-14,NAB International Fee,NAB INTNL TRAN FEE - (SC),5.47,reconciled,no_receipt_needed,ACT-IN
+f355ee89-9124-4b5a-b7a3-2577ac544c98,2025-10-14,NAB International Fee,NAB INTNL TRAN FEE - (MC),6.42,reconciled,no_receipt_needed,ACT-IN
+ead945b9-8630-4132-9806-3a67a704266f,2025-10-14,NAB International Fee,NAB INTNL TRAN FEE - (SC),8.37,reconciled,no_receipt_needed,ACT-IN
+5484a978-6b05-441e-bd6b-63e22143d241,2025-10-14,Smarte Carte 0393383111,Smarte Carte 0393383111,30,reconciled,matched,ACT-IN
+31798e11-62cd-4e6b-9a5c-1042e52ebeed,2025-10-14,WILD FOOD CAFE BERRIMAH,WILD FOOD CAFE BERRIMAH,25.34,unreconciled,no_receipt_needed,ACT-GD
+13027b25-4113-455f-b9e1-b47d00789df9,2025-10-15,AZUCAR CAFE PTY LTD MASCOT,AZUCAR CAFE PTY LTD MASCOT,6.6,reconciled,no_receipt_needed,ACT-IN
+2bc56b17-e900-4548-b8c2-fcf8be0aa531,2025-10-15,NOVOTEL SYDNEY WEST HQ ROOTY HILL,NOVOTEL SYDNEY WEST HQ ROOTY HILL,239,unreconciled,unmatched,ACT-GD
+70185654-37d7-4f0e-818d-bf4325eeed04,2025-10-16,Amazon Prime,AMZNPRIMEAU MEMBERSHIP SYDNEY SOUTH,9.99,unreconciled,no_receipt_needed,ACT-IN
+5ba7ef2d-5c04-4624-b0db-ad2ec9712953,2025-10-16,BARLMARRK SUPERMARKET MANINGRIDA,BARLMARRK SUPERMARKET MANINGRIDA,204.62,unreconciled,no_receipt_needed,ACT-GD
+5b60583c-d458-4970-96a9-b4ee21dbe2b9,2025-10-16,NAB International Fee,NAB INTNL TRAN FEE - (MC),2.5,reconciled,no_receipt_needed,ACT-IN
+9d1ecb0e-9566-4e54-b450-e3fb779c5677,2025-10-16,Relay,RELAY GARBUTT,15.2,reconciled,no_receipt_needed,ACT-HV
+76583499-7e17-4867-87a9-f5b3bf6d5b89,2025-10-16,SUNSET SNACK FOODS PTY LTPALM ISLAND,SUNSET SNACK FOODS PTY LTPALM ISLAND,12,reconciled,matched,ACT-GD
+9025470a-d9cc-40c8-ae3a-5e83cdea4d3d,2025-10-16,ZLR*TSVMAGG Garbutt,ZLR*TSVMAGG Garbutt,8.5,reconciled,matched,ACT-HV
+f0696b64-5c50-4672-9269-98a3d5a04e80,2025-10-20,Avis,AVIS AUSTRALIA MASCOT,1032.9,unreconciled,unmatched,ACT-IN
+a628caa5-3041-45ad-ba97-85f2e0ca8181,2025-10-20,NAB International Fee,NAB INTNL TRAN FEE - (MC),1.09,reconciled,no_receipt_needed,ACT-IN
+052162f0-085e-44f0-bccc-ab802657d81e,2025-10-20,News Pty Limited,NEWS PTY LIMITED SURRY HILLS,24,unreconciled,no_receipt_needed,ACT-IN
+82f65941-206a-4aef-8f20-22059f60244c,2025-10-20,SQ *GOLOSA Surry Hills,SQ *GOLOSA Surry Hills,27,reconciled,matched,ACT-IN
+6b946660-55de-48ba-85c0-2445ed78524a,2025-10-20,SQ *NEST IN WITTA Witta,SQ *NEST IN WITTA Witta,7.14,reconciled,no_receipt_needed,ACT-FM
+9e120356-45c3-41c6-a4df-1445c78f347c,2025-10-20,SQ *NEST IN WITTA Witta,SQ *NEST IN WITTA Witta,65.28,reconciled,no_receipt_needed,ACT-FM
+122ac3fa-2f18-42ae-8f97-f2a9b8712b5e,2025-10-20,TEITZEL'S IGA/20 MORRIS STULLY,TEITZEL'S IGA/20 MORRIS STULLY,49.68,unreconciled,no_receipt_needed,ACT-HV
+2a87cdfd-3142-4023-a9ab-1083397be299,2025-10-20,Thriday,THRIDAY ACCOUNTING CARLTON,1190,reconciled,matched,ACT-IN
+07624ff2-7a68-4f51-bc86-2a7aa80d88a5,2025-10-20,Virgin Australia,VIRGIN AUSTRALIA BRISBANE,759.45,unreconciled,unmatched,ACT-HV
+efee87fe-5bd9-48dd-9940-3d9f360bf69d,2025-10-21,BIG W/CRN OF GEORGE & PARSYDNEY,BIG W/CRN OF GEORGE & PARSYDNEY,167.75,unreconciled,no_receipt_needed,ACT-JH
+f20a175e-00f4-497b-bf51-9935dca1591a,2025-10-21,Relay,RELAY GARBUTT,102.49,reconciled,no_receipt_needed,ACT-HV
+520c1c75-e62e-4e4f-a292-03c1962334e1,2025-10-21,Woolworths,WOOLWORTHS/CNR 540 GEORGESYDNEY,73.1,unreconciled,no_receipt_needed,ACT-HV
+13c6aecc-2e55-4189-9218-baedf9a2bcdc,2025-10-21,WWW.ECOFLO.COM.AU VIRGINIA,WWW.ECOFLO.COM.AU VIRGINIA,89.69,unreconciled,no_receipt_needed,ACT-HV
+f3ee7cb9-cea8-4404-ae16-fc2cee84b272,2025-10-22,NAB International Fee,NAB INTNL TRAN FEE - (SC),0.41,reconciled,no_receipt_needed,ACT-IN
+7e5cc570-369a-4c1e-87df-0850e264bbbc,2025-10-22,NAB International Fee,NAB INTNL TRAN FEE - (MC),1.73,reconciled,no_receipt_needed,ACT-IN
+adb31a3b-26cf-407a-8333-e80ab3b8d185,2025-10-22,NAB International Fee,NAB INTNL TRAN FEE - (MC),2.9,reconciled,no_receipt_needed,ACT-IN
+e5488951-97ea-4e91-89d0-cb9fd1bef9e4,2025-10-22,RedBalloon,REDBALLOON THE ROCKS,1008.9,reconciled,matched,ACT-IN
+66bb7e95-faf4-4ab0-a3d0-1f541f5594af,2025-10-22,SQ *GOLOSA Surry Hills,SQ *GOLOSA Surry Hills,25.5,reconciled,matched,ACT-IN
+649b6aff-fbad-4301-aeaf-9b5a91718ddb,2025-10-22,Squarespace,SQSP* WORKSP#206228379 SQUARESPACE.CNY,11.8,unreconciled,no_receipt_needed,ACT-IN
+1650c108-2dda-4bf7-b29e-55cde5eedf2c,2025-10-22,TRANSPORTMAINRDS BRISBANE,TRANSPORTMAINRDS BRISBANE,273.63,reconciled,matched,ACT-JH
+c0675912-50b9-4b8b-9a07-128b132d6625,2025-10-23,Internet Transfer,INTERNET TRANSFER Linked Acc Trns,623.7,unreconciled,matched,ACT-IN
+47aff1b8-707f-4489-a70c-927ccb4df717,2025-10-23,NAB International Fee,NAB INTNL TRAN FEE - (SC),0.75,reconciled,no_receipt_needed,ACT-IN
+6919bdea-d14b-4562-9bda-16fd291f3641,2025-10-23,ONLYDOMAINS.COM 649-925-0327,ONLYDOMAINS.COM 649-925-0327,21.44,reconciled,matched,ACT-IN
+9452dd5d-a0b9-4d5d-92fd-3665430c6e1d,2025-10-24,Internet Transfer,INTERNET TRANSFER Linked Acc Trns,2000,unreconciled,no_receipt_needed,ACT-IN
+a419c57d-496a-403d-afcb-caa5ccac85df,2025-10-24,Internet Transfer,INTERNET TRANSFER Linked Acc Trns,3500,unreconciled,no_receipt_needed,ACT-IN
+2c0d30bb-a581-447e-8a15-6746fba282fc,2025-10-24,NAB International Fee,NAB INTNL TRAN FEE - (MC),0.27,reconciled,no_receipt_needed,ACT-IN
+86245c52-9a93-4940-9bc6-9844c23b3900,2025-10-24,NAB International Fee,NAB INTNL TRAN FEE - (MC),1.57,reconciled,no_receipt_needed,ACT-IN
+da1de28d-6e4f-4c5a-9b1b-7514a1d5cc5b,2025-10-24,NAB International Fee,NAB INTNL TRAN FEE - (MC),1.72,reconciled,no_receipt_needed,ACT-IN
+72dccf96-8138-4663-918c-1a4345d03de0,2025-10-27,Audible,Audible Limited AU MELBOURNE,16.45,unreconciled,no_receipt_needed,ACT-IN
+a91707b4-97d9-42ed-8dc9-718b514721d5,2025-10-27,BUTCHERS BUFFET CHINAT HAYMARKET,BUTCHERS BUFFET CHINAT HAYMARKET,3.96,unreconciled,no_receipt_needed,ACT-IN
+a7b453be-273e-4086-835f-b98305bf4fa0,2025-10-27,Cabcharge,CABCHARGE *13CABS ALEXANDRIA,37.46,unreconciled,no_receipt_needed,ACT-IN
+e8810565-3e5e-432f-926f-b4bbd9f4e016,2025-10-27,Cabcharge,CABCHARGE *13CABS ALEXANDRIA,47.94,unreconciled,no_receipt_needed,ACT-IN
+6043981a-060c-4445-a52f-64c89b897cc8,2025-10-27,Cabcharge,CABCHARGE *13CABS ALEXANDRIA,52.88,unreconciled,no_receipt_needed,ACT-IN
+ee65d076-835f-458e-a5c2-598b227fbffc,2025-10-27,Cabcharge,CABCHARGE *13CABS ALEXANDRIA,57.6,unreconciled,no_receipt_needed,ACT-IN
+8ce1e11f-a48c-42f3-aee0-468b88eed38e,2025-10-27,Cabcharge,CABCHARGE *13CABS ALEXANDRIA,65.16,unreconciled,no_receipt_needed,ACT-IN
+27e1c9ab-2257-49c6-827a-bcd711e6fd98,2025-10-27,Internet Transfer,INTERNET TRANSFER Linked Acc Trns,1100,unreconciled,no_receipt_needed,ACT-IN
+59858850-1b13-4843-9997-aaa630c6d76f,2025-10-27,Mighty Networks,MIGHTY NETWORKS MIGHTYNETWORKCA,75.66,reconciled,no_receipt_needed,ACT-IN
+727846da-4b7f-48bb-a104-36ccac6280a8,2025-10-27,NAB International Fee,NAB INTNL TRAN FEE - (MC),2.65,reconciled,no_receipt_needed,ACT-IN
+f49d5861-1c36-4282-bb17-53e835cedf6f,2025-10-27,NAB International Fee,NAB INTNL TRAN FEE - (MC),4.09,reconciled,no_receipt_needed,ACT-IN
+c2aac242-2f74-4474-9f7f-efe1424c1f33,2025-10-28,JMC No2 Pty Ltd TS Ken Kenilworth,JMC No2 Pty Ltd TS Ken Kenilworth,314.2,unreconciled,no_receipt_needed,ACT-FM
+0a29bc34-12d4-4ab6-9e55-8d659c752811,2025-10-28,VIBE SYDNEY SYDNEY,VIBE SYDNEY SYDNEY,4.05,reconciled,no_receipt_needed,ACT-IN
+132c4fc5-4ae0-44f3-be06-00cba4427ce6,2025-10-29,GUZMAN Y GOMEZ SURRY HILLS,GUZMAN Y GOMEZ SURRY HILLS,28.1,unreconciled,no_receipt_needed,ACT-IN
+6d589f49-e0b1-4790-a3e3-bca20adaa5b1,2025-10-29,NAB International Fee,NAB INTNL TRAN FEE - (MC),1.18,reconciled,no_receipt_needed,ACT-IN
+68f0817d-532f-43cd-991c-4b98a41fe84f,2025-10-29,NAB International Fee,NAB INTNL TRAN FEE - (SC),1.96,reconciled,no_receipt_needed,ACT-IN
+6543fb28-5eb7-4d26-a2ec-b1ebd62611d1,2025-10-29,SMP*Gone Bonkers Disc72 Maleny,SMP*Gone Bonkers Disc72 Maleny,37.93,unreconciled,matched,ACT-FM
+40ee22ac-8f71-4ac2-bbed-6dab53ea7c4e,2025-10-30,Garmin,Garmin Eastern Creek,33,unreconciled,no_receipt_needed,ACT-IN
+591fba4c-29d7-4674-821a-b0e53879c54b,2025-10-30,Internet Transfer,INTERNET TRANSFER Linked Acc Trns,360,unreconciled,no_receipt_needed,ACT-IN
+62d57fe4-a80b-47e6-9965-123ce1b0827c,2025-10-30,NAB Cash Advance Fee,C ADV INTERNET TFR FEE,12.6,unreconciled,no_receipt_needed,ACT-IN
+cd12f8a7-1b54-4698-b508-1835a4987bce,2025-10-30,SQ *VALLEY SLICE PTY LTD Mooloolah Val,SQ *VALLEY SLICE PTY LTD Mooloolah Val,352.22,unreconciled,no_receipt_needed,ACT-FM
+896984a5-6402-4a32-8bdb-7082a511f924,2025-10-31,Aldi,ALDI STORES CALOUNDRA,245.28,unreconciled,no_receipt_needed,ACT-IN
+68935c95-92e3-476d-94f5-e0e96219d148,2025-10-31,Liberty,LIBERTY MALENY Maleny,100,unreconciled,matched,ACT-FM
+72ad732e-2dad-4e09-9621-1f13fb661a9d,2025-10-31,NAB International Fee,NAB INTNL TRAN FEE - (MC),1.18,reconciled,no_receipt_needed,ACT-IN
+e4f09084-748e-41d2-9c2d-4372283cc8f9,2025-10-31,SQ *THE MALENY PIE GUY HQmaleny,SQ *THE MALENY PIE GUY HQmaleny,45.5,unreconciled,no_receipt_needed,ACT-FM
+0f265ae7-91e5-4494-9404-d9ba09e99608,2025-10-31,The Source Bulk Foods Maleny,The Source Bulk Foods Maleny,12.07,unreconciled,no_receipt_needed,ACT-FM
+545f0aee-0097-4328-91df-b338d4c293b1,2025-10-31,TRANSPORTMAINRDS BRISBANE,TRANSPORTMAINRDS BRISBANE,78.18,reconciled,matched,ACT-IN
+188fb48e-d786-4790-9122-b1d93bc99ad3,2025-10-31,Woolworths,WOOLWORTHS/2 BUNYA ST MALENY,483.33,unreconciled,no_receipt_needed,ACT-FM
+d93ee8a8-6e77-4857-aa48-1ae62e5e26b4,2025-10-31,ZLR*S3POPU1 Mascot,ZLR*S3POPU1 Mascot,34.48,reconciled,no_receipt_needed,ACT-IN
+0e842d5d-fe30-4ad4-b891-8bbc0f1543b7,2025-11-03,Claude.AI,CLAUDE.AI SUBSCRIPTION ANTHROPIC.COMCA,153.12,reconciled,no_receipt_needed,ACT-IN
+10e35f1f-f512-4209-8d91-2242a84f9ca5,2025-11-03,IGA MOOLOOLAH SUPER MOOLOOLAH VAL,IGA MOOLOOLAH SUPER MOOLOOLAH VAL,21,reconciled,no_receipt_needed,ACT-FM
+62afb633-2999-48af-88f6-ad2b94646ce5,2025-11-03,Linktree,LINKTREE COLLINGWOOD,8.05,unreconciled,no_receipt_needed,ACT-IN
+d4de38e8-ce7f-401f-adb8-eea577953979,2025-11-03,Maleny Hot Bread Bake Maleny,Maleny Hot Bread Bake Maleny,25.05,unreconciled,no_receipt_needed,ACT-FM
+77c0202f-e634-464c-8411-384690badf70,2025-11-03,Maleny Hot Bread Bake Maleny,Maleny Hot Bread Bake Maleny,31.43,unreconciled,no_receipt_needed,ACT-FM
+022c79b2-fa11-472f-a110-9f893ca2c34e,2025-11-03,MAPLE STREET MEAT MERC MALENY,MAPLE STREET MEAT MERC MALENY,203.23,unreconciled,no_receipt_needed,ACT-FM
+e2d9d152-25e3-4965-a270-8b3906444084,2025-11-03,NAB International Fee,NAB INTNL TRAN FEE - (MC),0.64,reconciled,no_receipt_needed,ACT-IN
+918a9b91-11ae-443b-8fb3-0f95d9d30929,2025-11-03,NAB International Fee,NAB INTNL TRAN FEE - (MC),2.63,reconciled,no_receipt_needed,ACT-IN
+66bf1916-7f0a-4a72-886f-2bc43692af80,2025-11-03,NAB International Fee,NAB INTNL TRAN FEE - (MC),5.36,reconciled,no_receipt_needed,ACT-IN
+0c575df1-4934-497e-9280-2acea908eddf,2025-11-03,SEASONS SUPERMARKET 10 MALENY,SEASONS SUPERMARKET 10 MALENY,104.99,reconciled,no_receipt_needed,ACT-FM
+4a1ab9bf-e77a-456e-a502-c30a2f2544be,2025-11-03,SQ *ROSEBEDANDFINCH Eudlo,SQ *ROSEBEDANDFINCH Eudlo,60,unreconciled,matched,ACT-FM
+8acdfc1e-9a5c-4924-aabc-30d03455b28c,2025-11-04,CabFare,CabFare Payments Melbourne,53.23,reconciled,matched,ACT-FM
+70e14056-4995-4169-8406-3dac32069fea,2025-11-04,Internet Banking Transfer,INTERNET BANKING TRANSFERMELBOURNE,45.8,unreconciled,no_receipt_needed,ACT-IN
+12e6c588-9d5f-4279-b8c7-c5fb457958bd,2025-11-04,Internet Banking Transfer,INTERNET BANKING TRANSFERMELBOURNE,202.16,unreconciled,no_receipt_needed,ACT-IN
+d0c351fe-aa4a-491d-a3af-9e69df9c77e6,2025-11-04,LS tanakas pty ltd Alice Springs,LS tanakas pty ltd Alice Springs,14,unreconciled,matched,ACT-GD
+be218526-ead2-4948-a3fc-7b435b2a9473,2025-11-04,NAB Interest,INTEREST ON CASH ADV(S),0.84,unreconciled,no_receipt_needed,ACT-IN
+3d98704c-7869-4a2b-91a5-c3b4c590e5d9,2025-11-04,Thriday,THRIDAY ACCOUNTING CARLTON,440,reconciled,matched,ACT-IN
+a17e6b8e-a420-4269-aac2-b1b4e8964fbe,2025-11-04,Woolworths,WOOLWORTHS/40 HARTLEY ST ALICE SPRINGS,72,unreconciled,no_receipt_needed,ACT-GD
+3aa348a8-ea5f-415e-9679-f5ef47ccd227,2025-11-04,Woolworths,WOOLWORTHS/40 HARTLEY ST ALICE SPRINGS,165.99,unreconciled,no_receipt_needed,ACT-GD
+f3163b51-ff4d-486b-a758-6f1466629df9,2025-11-05,NAB International Fee,NAB INTNL TRAN FEE - (MC),1.77,reconciled,no_receipt_needed,ACT-IN
+b9e808db-e6dc-4da1-991b-dd63525b2a82,2025-11-06,LinkedIn,LinkedInPreC *13557984 16506873555,74.99,unreconciled,no_receipt_needed,ACT-IN
+214a0c14-1a92-432f-a90c-78163ba810e0,2025-11-07,Audible,Audible Limited AU MELBOURNE,16.45,reconciled,no_receipt_needed,ACT-IN
+0236c8da-bc7b-4a18-8e00-c8385f1ea0bb,2025-11-10,BRALINDA INVESTMENTS P ALICE SPRINGS,BRALINDA INVESTMENTS P ALICE SPRINGS,1213.2,unreconciled,unmatched,ACT-GD
+ae1b576d-8f9e-4e9e-8135-8d24ecc53520,2025-11-10,CabFare,CabFare Payments Melbourne,45.15,reconciled,matched,ACT-GD
+d9fa6ff5-40ae-4f24-9280-90c2885149f4,2025-11-10,EG GROUP/WILLS TCE & RAILALICE SPRINGS,EG GROUP/WILLS TCE & RAILALICE SPRINGS,141.63,unreconciled,no_receipt_needed,ACT-GD
+74284d38-66e4-4d52-94e3-3bb599a4e953,2025-11-10,NAB International Fee,NAB INTNL TRAN FEE - (MC),0.6,reconciled,no_receipt_needed,ACT-IN
+db700c37-19e2-4042-a988-9bf9d2652b81,2025-11-10,NAB International Fee,NAB INTNL TRAN FEE - (MC),1.57,reconciled,no_receipt_needed,ACT-IN
+dbc7f78b-8c12-40df-82ed-778c869d76d9,2025-11-10,NAB International Fee,NAB INTNL TRAN FEE - (MC),1.73,reconciled,no_receipt_needed,ACT-IN
+08ea7944-564e-406d-9143-71792eb5344a,2025-11-10,NAB International Fee,NAB INTNL TRAN FEE - (MC),5.72,reconciled,no_receipt_needed,ACT-IN
+c4eab49f-32c2-42bb-89bc-78f89139a88c,2025-11-10,News Pty Limited,NEWS PTY LIMITED SURRY HILLS,24,unreconciled,no_receipt_needed,ACT-IN
+83127bb2-d98f-42e5-bfa5-d3ced3b2c40c,2025-11-11,ALICE SPRINGS CASINO O ALICE SPRINGS,ALICE SPRINGS CASINO O ALICE SPRINGS,135,unreconciled,no_receipt_needed,ACT-GD
+91d3f2e0-c567-42e5-b02b-c19f66dd1a58,2025-11-11,ALICE SPRINGS CASINO O ALICE SPRINGS,ALICE SPRINGS CASINO O ALICE SPRINGS,1012.56,unreconciled,unmatched,ACT-GD
+41ebf7d9-68ee-4f82-b346-5e27ad20bddd,2025-11-11,EPILOGUE ENTERPRISES ALICE SPRINGS,EPILOGUE ENTERPRISES ALICE SPRINGS,5.08,reconciled,matched,ACT-GD
+7dfae421-47cd-4bc7-9602-96ae65f11dd7,2025-11-11,EPILOGUE ENTERPRISES ALICE SPRINGS,EPILOGUE ENTERPRISES ALICE SPRINGS,249.79,unreconciled,no_receipt_needed,ACT-GD
+dabcb871-ec2e-43a1-8e36-a95d2737f5ba,2025-11-11,Uber,UBER *TRIP HELP.UBER.COM Sydney,5,reconciled,no_receipt_needed,ACT-GD
+8888f259-0f77-4a6a-b490-d4b4ae7ea37d,2025-11-12,ALICE SPRINGS CASINO O ALICE SPRINGS,ALICE SPRINGS CASINO O ALICE SPRINGS,4.57,reconciled,no_receipt_needed,ACT-GD
+d0b970be-9e38-449a-acd8-f067a24cc756,2025-11-12,NAB International Fee,NAB INTNL TRAN FEE - (MC),3.22,reconciled,no_receipt_needed,ACT-IN
+34944b84-f7f3-44f0-b163-9fb58c0c303f,2025-11-12,UNITED CAB 4749 9999 MOUNT ISA,UNITED CAB 4749 9999 MOUNT ISA,31.4,reconciled,matched,ACT-GD
+e87aff36-649d-421c-b202-ed0132124b1f,2025-11-13,Firecrawl,FIRECRAWL.DEV WWW.FIRECRAWLDE,29.18,reconciled,no_receipt_needed,ACT-IN
+7c40ca4c-f02d-4e04-bf0a-526687f741f5,2025-11-13,NAB International Fee,NAB INTNL TRAN FEE - (MC),1.02,reconciled,no_receipt_needed,ACT-IN
+b411943e-5071-478e-ac66-a3184d7ec237,2025-11-13,NAB International Fee,NAB INTNL TRAN FEE - (MC),1.56,reconciled,no_receipt_needed,ACT-IN
+f414abb9-c72c-4e64-a495-cfc04ff55993,2025-11-13,Xero,XERO AU INV-47874856 HAWTHORN,75,unreconciled,no_receipt_needed,ACT-IN
+ab7bda28-eda4-4fe1-8573-039af1ab865c,2025-11-14,Live Payments Barangaroo,Live Payments Barangaroo,26.77,reconciled,matched,ACT-IN
+dd014c1e-a097-4cd6-856d-2d2c879704ba,2025-11-14,ZLR*ISACLOV Mount Isa Cit,ZLR*ISACLOV Mount Isa Cit,27.28,reconciled,matched,ACT-GD
+9b737c01-2bac-4fc0-b1eb-4b90ecf5f273,2025-11-17,AIG Australia,AIG Australia -,34,unreconciled,no_receipt_needed,ACT-IN
+8aacd29d-61ec-4fc3-bbf6-e029ca35aace,2025-11-17,Amazon Prime,AMZNPRIMEAU MEMBERSHIP SYDNEY SOUTH,9.99,unreconciled,no_receipt_needed,ACT-IN
+721cb15e-53cb-49f0-8cd8-3d04e0a57245,2025-11-17,Flyparks,FLYPARKS MARCOOLA,119,unreconciled,matched,ACT-IN
+13eed03b-6a2b-4692-8e28-0506f9c1bf3b,2025-11-17,Indonesia Arrival ROTTERDAM,Indonesia Arrival ROTTERDAM,204.55,unreconciled,no_receipt_needed,ACT-IN
+00cbfb22-9ac5-4444-9417-ad34c50e5095,2025-11-17,Indonesia Arrival ROTTERDAM,Indonesia Arrival ROTTERDAM,393.72,unreconciled,no_receipt_needed,ACT-IN
+4401f978-41ac-47b8-9e41-709b4d9145bb,2025-11-17,Kogan.com 3BUDH9QW Melbourne,Kogan.com 3BUDH9QW Melbourne,291.98,unreconciled,no_receipt_needed,ACT-IN
+2da9384c-aa96-4049-91c1-a97bf62a0772,2025-11-17,NAB International Fee,NAB INTNL TRAN FEE - (MC),2.48,reconciled,no_receipt_needed,ACT-IN
+22a3ddc6-4c34-43f7-b8d0-5a454fd72396,2025-11-17,NAB International Fee,NAB INTNL TRAN FEE - (MC),2.49,reconciled,no_receipt_needed,ACT-IN
+55e02c85-aa97-450a-8184-908a58d8dd7b,2025-11-17,NAB International Fee,NAB INTNL TRAN FEE - (MC),6.39,reconciled,no_receipt_needed,ACT-IN
+ef03387b-465c-489b-9342-004b705494eb,2025-11-17,NAB International Fee,NAB INTNL TRAN FEE - (MC),7.16,reconciled,no_receipt_needed,ACT-IN
+05a3a36f-b446-4ece-9217-93b2cc3c54f2,2025-11-17,NAB International Fee,NAB INTNL TRAN FEE - (MC),13.78,reconciled,no_receipt_needed,ACT-IN
+7fcdbba9-27d5-495f-86aa-4113582ef12c,2025-11-18,Carla Furnishers,CARLA FURNISHERS P/L CICCONE,5590,unreconciled,unmatched,ACT-GD
+b2f8191d-6e96-4568-8bc3-ed2a32f4648c,2025-11-18,TICKETS*FARM MY SC 0404900312,TICKETS*FARM MY SC 0404900312,103,unreconciled,unmatched,ACT-FM
+93cbd09f-60d8-44fc-b3ca-2b91949807b2,2025-11-19,BRISBANE POWERHOUSE NEW FARM,BRISBANE POWERHOUSE NEW FARM,137.5,unreconciled,no_receipt_needed,ACT-IN
+03b69fa9-871c-4215-b007-a7ebf5d3d8d5,2025-11-19,GoPayID,GoPayID DKI Jakarta,0.64,unreconciled,no_receipt_needed,ACT-IN
+4b556bcd-b4ca-44fd-9056-760526d8df92,2025-11-19,GoPayID,GoPayID DKI Jakarta,1.06,unreconciled,no_receipt_needed,ACT-IN
+16e4af6d-de2e-4198-8f5f-4fc0a4f383b0,2025-11-19,NAB International Fee,NAB INTNL TRAN FEE - (MC),0.02,reconciled,no_receipt_needed,ACT-IN
+8fdb303e-65f0-4339-9f31-917270e42430,2025-11-19,NAB International Fee,NAB INTNL TRAN FEE - (MC),0.04,reconciled,no_receipt_needed,ACT-IN
+47f182b6-ae49-4d15-8f65-749cd025f619,2025-11-20,Ezviz,EZVIZ INTERNATIONAL LI WAN CHAI,14.99,unreconciled,matched,ACT-IN
+3ef2c023-ce1e-4051-ae67-6b274131ffa8,2025-11-20,Gojek,GOJEK RECURRING NON3DS JAKARTA SELAT,0.83,unreconciled,no_receipt_needed,ACT-IN
+121a59e3-2d52-460d-a049-d612defd89aa,2025-11-20,NAB International Fee,NAB INTNL TRAN FEE - (MC),0.03,reconciled,no_receipt_needed,ACT-IN
+7a1d4e6a-31a1-4d3c-a3bd-4033f6d85b65,2025-11-20,NAB International Fee,NAB INTNL TRAN FEE - (MC),0.45,reconciled,no_receipt_needed,ACT-IN
+3abc3f33-9e28-437b-b2d1-a024c073d569,2025-11-20,NAB International Fee,NAB INTNL TRAN FEE - (SC),0.52,reconciled,no_receipt_needed,ACT-IN
+e4873987-194f-49d7-86f5-d4c02207d77a,2025-11-20,NAB International Fee,NAB INTNL TRAN FEE - (MC),1.08,reconciled,no_receipt_needed,ACT-IN
+3de07af1-d1f2-4286-9e42-44bd9909009d,2025-11-21,Admission Badung,ADMISSION BADUNG - BALI,138.56,unreconciled,no_receipt_needed,ACT-IN
+d32c9112-50ff-4fc5-9116-fb49a88488de,2025-11-21,GoPayID,GoPayID DKI Jakarta,1.29,unreconciled,no_receipt_needed,ACT-IN
+2a05edb9-d32b-496e-8ba9-9c7a9316c5d0,2025-11-21,GoPayID,GoPayID DKI Jakarta,1.48,unreconciled,no_receipt_needed,ACT-IN
+942b70ca-9926-4053-b9ca-3218df9121d3,2025-11-21,NAB International Fee,NAB INTNL TRAN FEE - (MC),0.05,reconciled,no_receipt_needed,ACT-IN
+7614d293-c26d-4c9a-b67f-a6c206de7aea,2025-11-21,NAB International Fee,NAB INTNL TRAN FEE - (MC),1.93,reconciled,no_receipt_needed,ACT-IN
+99724a0e-80e5-48ec-8c45-e2a8bc1d5a19,2025-11-21,NAB International Fee,NAB INTNL TRAN FEE - (MC),2.43,reconciled,no_receipt_needed,ACT-IN
+6ea249f0-3f76-45c5-9df3-e44b70ef11de,2025-11-21,NAB International Fee,NAB INTNL TRAN FEE - (MC),4.85,reconciled,no_receipt_needed,ACT-IN
+35f9e974-ecc0-4f45-aa30-0ec59add83db,2025-11-21,NAB International Fee,NAB INTNL TRAN FEE - (MC),6.97,reconciled,no_receipt_needed,ACT-IN
+676d8d3f-8097-4695-b3dd-ca3cd94835fd,2025-11-24,Emme Mac Black,SQ *EMME MAC BLACK Chiltern,112.09,unreconciled,no_receipt_needed,ACT-IN
+74ba2ea7-2dcc-43c2-b284-aa1abdb51701,2025-11-24,Gojek,GOJEK RECURRING NON3DS JAKARTA SELAT,1.21,unreconciled,no_receipt_needed,ACT-IN
+861d6252-9ba6-424b-9ce1-8e2112cfaf6c,2025-11-24,GoPayID,GoPayID DKI Jakarta,1.2,unreconciled,no_receipt_needed,ACT-IN
+81590e35-138c-470e-a64b-ff054f01fb77,2025-11-24,GoPayID,GoPayID DKI Jakarta,1.39,unreconciled,no_receipt_needed,ACT-IN
+6fc3719a-d6d0-4a99-9386-dc9d10ed117e,2025-11-24,GoPayID,GoPayID DKI Jakarta,1.44,unreconciled,no_receipt_needed,ACT-IN
+d9ca37b4-1509-4c1d-afcc-4313865f6e77,2025-11-24,GoPayID,GoPayID DKI Jakarta,1.57,unreconciled,no_receipt_needed,ACT-IN
+51a2b937-4b8c-4391-95c9-04321e1b7ad4,2025-11-24,NAB International Fee,NAB INTNL TRAN FEE - (MC),0.04,reconciled,no_receipt_needed,ACT-IN
+c44cd31d-d2a8-4758-94cf-e596b09cbe56,2025-11-24,NAB International Fee,NAB INTNL TRAN FEE - (MC),0.05,reconciled,no_receipt_needed,ACT-IN
+faa432c8-5927-4863-bc88-efb2e4d630e7,2025-11-24,NAB International Fee,NAB INTNL TRAN FEE - (MC),0.06,reconciled,no_receipt_needed,ACT-IN
+80cf7b49-4580-4f06-9d1e-47b7293d91e7,2025-11-24,NAB International Fee,NAB INTNL TRAN FEE - (SC),0.41,reconciled,no_receipt_needed,ACT-IN
+39c3c226-e214-42c5-b7b6-8e1ab6929898,2025-11-24,NAB International Fee,NAB INTNL TRAN FEE - (MC),1.48,reconciled,no_receipt_needed,ACT-IN
+79732aec-f08c-4978-9c1a-6e1d35f7c0b1,2025-11-24,NAB International Fee,NAB INTNL TRAN FEE - (MC),1.58,reconciled,no_receipt_needed,ACT-IN
+b978fcea-5bfd-427e-86ce-ac2eafe9bbdc,2025-11-24,NAB International Fee,NAB INTNL TRAN FEE - (MC),1.74,reconciled,no_receipt_needed,ACT-IN
+c84a38f0-cd22-48b5-8994-d66dc99ff4ec,2025-11-24,NAB International Fee,NAB INTNL TRAN FEE - (SC),2.55,reconciled,no_receipt_needed,ACT-IN
+3c905f53-76e5-4738-826a-7d88c1476411,2025-11-24,NAB International Fee,NAB INTNL TRAN FEE - (MC),3.41,reconciled,no_receipt_needed,ACT-IN
+8277e77f-59e4-434a-a87c-898a49c600e0,2025-11-24,NAB International Fee,NAB INTNL TRAN FEE - (MC),5.82,reconciled,no_receipt_needed,ACT-IN
+89aee650-8121-4270-b5ca-74f3d33887d6,2025-11-24,NAB International Fee,NAB INTNL TRAN FEE - (MC),6.2,reconciled,no_receipt_needed,ACT-IN
+33597530-2547-444e-a637-d230d813b66a,2025-11-24,NAB International Fee,NAB INTNL TRAN FEE - (MC),12.21,reconciled,no_receipt_needed,ACT-IN
+8a800db0-3c0e-48c0-84c1-0882ad531d0f,2025-11-24,NAB International Fee,NAB INTNL TRAN FEE - (MC),15.67,reconciled,no_receipt_needed,ACT-IN
+05c010b8-659c-4395-811f-deec9b4365bc,2025-11-24,Squarespace,SQSP* WORKSP#210305590 SQUARESPACE.CNY,11.8,unreconciled,no_receipt_needed,ACT-IN
+d0e44b34-ca41-42d2-a889-25addbc93a4e,2025-11-24,Squarespace,SQSP* DOMAIN#210630189 SQUARESPACE.CNY,72.9,unreconciled,no_receipt_needed,ACT-IN
+e84e25c4-f379-43b3-ba2e-c0c8e1b4a56f,2025-11-25,La Porchetta,LA PORCHETTA COLAC COLAC,15.65,unreconciled,no_receipt_needed,ACT-IN
+91043f19-3d5b-47f8-8e49-9e1573b8c05e,2025-11-26,Audible,Audible Limited AU MELBOURNE,16.45,unreconciled,no_receipt_needed,ACT-IN
+552b7ad2-85ce-4ee3-8273-7a3fb012d10d,2025-11-26,Mighty Networks,MIGHTY NETWORKS MIGHTYNETWORKCA,76.34,unreconciled,no_receipt_needed,ACT-IN
+c5aa72da-4cb4-4a3f-97a2-da41f54e9687,2025-11-26,NAB International Fee,NAB INTNL TRAN FEE - (MC),2.67,reconciled,no_receipt_needed,ACT-IN
+2cb3df18-6231-48a3-8c34-333a0ed4367d,2025-11-27,Internet Transfer,INTERNET TRANSFER Linked Acc Trns,1166,unreconciled,no_receipt_needed,ACT-IN
+54ae5d00-d379-492c-948a-56ae716df042,2025-11-28,NAB International Fee,NAB INTNL TRAN FEE - (MC),1.43,reconciled,no_receipt_needed,ACT-IN
+b81128a2-4e2e-4748-8b05-bcc46affe79e,2025-12-01,Bargain Car Rentals,BARGAINCARRENTALS HOBART,809.29,unreconciled,unmatched,ACT-GD
+1a376120-6f5a-499d-a7cd-581ef7ecaa9b,2025-12-01,Bargain Car Rentals,BARGAINCARRENTALS HOBART,998.94,unreconciled,unmatched,ACT-GD
+df310c83-3d97-4f0a-9d6d-6bc15ef983b9,2025-12-01,Garmin,Garmin Eastern Creek,25,unreconciled,no_receipt_needed,ACT-IN
+5711fc4e-33b7-4a75-a4cb-fb321fad61e0,2025-12-01,JB Hi-Fi,JB HI FI KEDRON HOME KEDRON,1491.9,unreconciled,unmatched,ACT-IN
+819d98f5-8a42-4f2d-bbf1-0961e26f301c,2025-12-01,Linkt Avis Budget,Linkt Avis Budget Grou Sydney,9.84,unreconciled,no_receipt_needed,ACT-HV
+bfe9e8ff-8491-4ccd-9851-1a4649c9431e,2025-12-01,NAB International Fee,NAB INTNL TRAN FEE - (MC),1.18,reconciled,no_receipt_needed,ACT-IN
+6494c16b-7776-415e-bce8-cf34d16546f6,2025-12-01,NAB International Fee,NAB INTNL TRAN FEE - (SC),1.96,reconciled,no_receipt_needed,ACT-IN
+4423b436-cd2b-4a12-a00a-e4cbdb356a07,2025-12-01,P & J Mabasa,P & J MABASA PL ALICE SPRINGS,674,unreconciled,unmatched,ACT-GD
+a5fda979-3115-4c25-8037-42981b5a83c0,2025-12-01,Uber,UBER *TRIP HELP.UBER.COM Sydney,8.28,reconciled,no_receipt_needed,ACT-HV
+168078b3-7390-4f43-9f18-a1b2633931f4,2025-12-01,Woolworths,WOOLWORTHS/W/FRONT PDE & IDALIA,425.57,unreconciled,no_receipt_needed,ACT-HV
+e2c5dbb8-84c6-4f7a-83b3-f92dfc6ebae2,2025-12-02,DocPlay,DOCPLAY*PREMIUM docplay.com,9.99,unreconciled,no_receipt_needed,ACT-IN
+1cec52c3-d793-4cba-9545-6203ac89eb99,2025-12-02,Linktree,LINKTREE COLLINGWOOD,16.23,unreconciled,no_receipt_needed,ACT-IN
+2ae3782f-b558-4d6f-ac3e-187bd216b204,2025-12-02,TSV Magg,ZLR*TSVMAGG Garbutt,19.27,reconciled,matched,ACT-HV
+53474574-8905-49a3-b43c-1bf48d7c722b,2025-12-03,Dominos,Dominos Estore Kirwan dominos.com.a,330,unreconciled,matched,ACT-HV
+fbd6c61c-c05c-4d63-8068-58a97009a1a9,2025-12-03,EG Group,EG GROUP/CNR LAKESIDE DR CLUDEN,101.45,unreconciled,no_receipt_needed,ACT-HV
+5e117187-a917-4361-92c6-5df784666ba4,2025-12-03,NAB International Fee,NAB INTNL TRAN FEE - (SC),0.53,reconciled,no_receipt_needed,ACT-IN
+248a1d25-cc11-43a7-ab85-336eb6566703,2025-12-04,Claude.AI,CLAUDE.AI SUBSCRIPTION ANTHROPIC.COMCA,153.05,reconciled,no_receipt_needed,ACT-IN
+17d3252b-c337-4494-856f-b6e645f255d8,2025-12-04,Edmonds Landscaping,EDMONDS LANDSCAPING BOHLE PLAINS,120,unreconciled,no_receipt_needed,ACT-HV
+e7fc0a14-1bc9-45ae-954b-0a5b9f58a7af,2025-12-04,NAB International Fee,NAB INTNL TRAN FEE - (MC),0.64,reconciled,no_receipt_needed,ACT-IN
+71060615-4d4f-4591-a4fc-f58c46d187b2,2025-12-04,NAB International Fee,NAB INTNL TRAN FEE - (MC),5.36,reconciled,no_receipt_needed,ACT-IN
+812d1fd3-edac-4ad4-b7e9-a116a71ba13e,2025-12-05,NAB International Fee,NAB INTNL TRAN FEE - (MC),1.77,reconciled,no_receipt_needed,ACT-IN
+133fe69c-be94-4914-9aed-6fef26801f66,2025-12-05,Nightowl,NIGHTOWL HERVEY RANG KIRWAN,124.79,unreconciled,matched,ACT-HV
+cf70b57e-f8b2-4859-b0b4-b03503e93705,2025-12-08,Audible,Audible Limited AU MELBOURNE,16.45,reconciled,no_receipt_needed,ACT-IN
+ce36d7f5-7617-488a-b00e-43ff187382de,2025-12-08,LinkedIn,LinkedInPreC *71571784 16506873555,74.99,unreconciled,no_receipt_needed,ACT-IN
+226e2d5e-69e2-49b3-8890-7d3c09aa4acf,2025-12-08,News Pty Limited,NEWS PTY LIMITED SURRY HILLS,24,unreconciled,no_receipt_needed,ACT-IN
+84e17cd2-9bba-4dc1-9137-c0be03a29231,2025-12-08,Relay,RELAY GARBUTT,43.62,reconciled,no_receipt_needed,ACT-HV
+2b6fd6a0-7e10-40d4-9784-5f6a7601db1e,2025-12-10,Kennards Hire,KENNARDS HIRE HO QLD SEVEN HILLS,2871,unreconciled,unmatched,ACT-MY
+38285c8b-3665-440b-889b-5e3c96b32f10,2025-12-10,Poi Minchinbury,Poi Minchinbury Minchinbury,62.01,unreconciled,no_receipt_needed,ACT-MY
+1f29fb05-0e68-492a-b6ab-32d50409f859,2025-12-11,Colyton Hotel,COLYTON HOTEL COLYTON,436.24,unreconciled,no_receipt_needed,ACT-MY
+fa6fa5bb-ff00-4be0-a3b7-c9306c27f102,2025-12-11,NAB International Fee,NAB INTNL TRAN FEE - (MC),1.53,reconciled,no_receipt_needed,ACT-IN
+c05b1b75-68d6-44ba-a07a-f672beaaf5c8,2025-12-11,NAB International Fee,NAB INTNL TRAN FEE - (MC),2.8,reconciled,no_receipt_needed,ACT-IN
+ca90bbd0-fcbb-4bfa-bc8a-d36e9dfa048e,2025-12-15,Alice Springs Casino,ALICE SPRINGS CASINO O ALICE SPRINGS,4.57,reconciled,no_receipt_needed,ACT-GD
+7b78bbed-d217-4416-b4d8-bd749894806a,2025-12-15,Alice Springs Casino,ALICE SPRINGS CASINO O ALICE SPRINGS,298.92,unreconciled,unmatched,ACT-GD
+0df25ff8-e852-45b2-9c69-5f365d5d9dee,2025-12-15,NAB International Fee,NAB INTNL TRAN FEE - (MC),1,reconciled,no_receipt_needed,ACT-IN
+b9299856-6e03-4255-bccd-65261d40ae1a,2025-12-15,NAB International Fee,NAB INTNL TRAN FEE - (MC),1.53,reconciled,no_receipt_needed,ACT-IN
+6e38cdd7-59bf-413b-aa08-9ed68bba6dbd,2025-12-15,NAB International Fee,NAB INTNL TRAN FEE - (MC),2.44,reconciled,no_receipt_needed,ACT-IN
+3f408dd4-3925-41d6-aafc-c848ca14a233,2025-12-15,NAB International Fee,NAB INTNL TRAN FEE - (MC),3.17,reconciled,no_receipt_needed,ACT-IN
+741c55ac-69ea-4754-aa26-c21bf8fd2cd3,2025-12-15,NAB International Fee,NAB INTNL TRAN FEE - (MC),6.28,reconciled,no_receipt_needed,ACT-IN
+d06bfb77-642e-4d66-ad5c-8f2b35b857a7,2025-12-15,NRMA Insurance,NRMA Insurance nrma.com.au,635.05,unreconciled,no_receipt_needed,ACT-IN
+1e0b1335-bb59-4f6e-a749-ce175f20be58,2025-12-15,Vezina,VEZINA PL MASCOT,42.83,unreconciled,matched,ACT-IN
+cb217af4-d7cc-4809-9777-4763008414f3,2025-12-15,Xero,XERO AU INV-48632847 HAWTHORN,75,unreconciled,matched,ACT-IN
+e0ea611f-6f8d-419e-ad95-a67d83f826d4,2025-12-16,Amazon Prime,AMZNPRIMEAU MEMBERSHIP SYDNEY SOUTH,9.99,unreconciled,no_receipt_needed,ACT-IN
+fb8059fe-567d-467f-a6c9-36ddbc8b3eb4,2025-12-16,T60023,ZLR*T60023 Kelso,28.5,reconciled,matched,ACT-HV
+2ce034fd-2349-44b0-bc9c-29ae589c1e4f,2025-12-16,Tennant Food Barn,TENNANT FOOD BARN TENNANT CREEK,41.28,reconciled,no_receipt_needed,ACT-GD
+82f5a84c-e82b-4e29-ad82-eadfcf750f0a,2025-12-16,The Beet Bar,SQ *THE BEET BAR 1800595310,7.21,unreconciled,no_receipt_needed,ACT-GD
+1b0ce74e-24d8-421e-8d02-fd1c33f5d281,2025-12-16,The Beet Bar,SQ *THE BEET BAR 1800595310,10.31,unreconciled,no_receipt_needed,ACT-GD
+46cb9ea0-01f3-4df4-802e-6f0e32308f31,2025-12-16,Yo! Sushi,ZLR*YO! Sushi Brisbane Air,21.3,reconciled,no_receipt_needed,ACT-GD
+401a84b2-dbd1-42e2-bb25-4cbd08682203,2025-12-17,ATO,ATO Payment Adelaide,13345.9,unreconciled,no_receipt_needed,ACT-IN
+a935d05a-c382-4a2b-be98-134dfdc587aa,2025-12-17,Epilogue Enterprises,EPILOGUE ENTERPRISES ALICE SPRINGS,82.17,unreconciled,no_receipt_needed,ACT-GD
+bb8e763a-fe35-48db-9e46-ce28a0dc1bd7,2025-12-17,Linkt Avis Budget,Linkt Avis Budget Grou Sydney,34.22,unreconciled,no_receipt_needed,ACT-GD
+05de87db-221d-4a3a-ba2a-3a67fb003f09,2025-12-17,NAB International Fee,NAB INTNL TRAN FEE - (MC),2.44,reconciled,no_receipt_needed,ACT-IN
+d7d0c7a5-d172-47fd-9207-4f620e7674d1,2025-12-18,Amazon,AMAZON RETA* AMAZON AU SYDNEY,58.99,unreconciled,no_receipt_needed,ACT-IN
+9e20e18d-bfe9-44a4-8553-8558c9a91969,2025-12-18,The Beet Bar,SQ *THE BEET BAR 1800595310,9.28,unreconciled,no_receipt_needed,ACT-GD
+4a557a95-6a1b-472c-b821-e87f5acd5317,2025-12-18,The Beet Bar,SQ *THE BEET BAR 1800595310,29.9,reconciled,no_receipt_needed,ACT-GD
+75edde8e-4d2a-4f18-9c8b-98ce4b2e79a4,2025-12-18,Woolworths,WOOLWORTHS/126 STURT STRETOWNSVILLE,28,unreconciled,no_receipt_needed,ACT-HV
+7657f25b-3686-4cf7-883a-fb29b92fa275,2025-12-19,Alice Springs Casino,ALICE SPRINGS CASINO O ALICE SPRINGS,8.78,unreconciled,no_receipt_needed,ACT-GD
+b3895a15-aa16-4b09-9bb7-d279942339ef,2025-12-19,Alice Springs Casino,ALICE SPRINGS CASINO O ALICE SPRINGS,50.75,unreconciled,no_receipt_needed,ACT-GD
+0902a55c-a61a-44b3-9ce7-46a68e8ebe33,2025-12-19,NAB International Fee,NAB INTNL TRAN FEE - (MC),1.06,reconciled,no_receipt_needed,ACT-IN
+6d21e10a-82f0-4740-a4d4-5c0d20128030,2025-12-22,Ezviz,EZVIZ INTERNATIONAL LI WAN CHAI,14.99,unreconciled,matched,ACT-IN
+d82307fa-af07-43b0-9c5b-d56b693fa146,2025-12-22,NAB International Fee,NAB INTNL TRAN FEE - (SC),0.41,reconciled,no_receipt_needed,ACT-IN
+f7930179-d2b5-423a-90e9-e0b63dd5899d,2025-12-22,NAB International Fee,NAB INTNL TRAN FEE - (SC),0.52,reconciled,no_receipt_needed,ACT-IN
+13b2e8e2-ccc0-4086-bb61-86d5fcf8d14f,2025-12-22,NAB International Fee,NAB INTNL TRAN FEE - (MC),1.69,reconciled,no_receipt_needed,ACT-IN
+8ec8c398-5a7d-461d-ab8e-34f4bb22ac08,2025-12-22,NAB International Fee,NAB INTNL TRAN FEE - (SC),3.12,reconciled,no_receipt_needed,ACT-IN
+dd164845-1155-42ac-9483-18bc94c7d4a8,2025-12-22,NAB International Fee,NAB INTNL TRAN FEE - (MC),4.19,reconciled,no_receipt_needed,ACT-IN
+49355608-4e92-4311-bc69-48f5665d5cfe,2025-12-22,NAB International Fee,NAB INTNL TRAN FEE - (SC),7.7,reconciled,no_receipt_needed,ACT-IN
+8c6792c3-1f5e-48c2-ab4b-271ea8c36cc5,2025-12-22,Squarespace,SQSP* WORKSP#214868627 SQUARESPACE.CNY,11.8,unreconciled,no_receipt_needed,ACT-IN
+a17ba99b-2d3b-44c8-b2ac-3f9e520b046e,2025-12-23,Pholklore,PHOLKLORE - TORQUAY TORQUAY,129.78,unreconciled,no_receipt_needed,ACT-IN
+d0fa2ba8-55ca-45db-95e1-5f0919a4c0d2,2025-12-24,Mortadeli,SQ *MORTADELI Hughesdale,42.35,unreconciled,no_receipt_needed,ACT-IN
+eb6f819c-2c17-4ff5-9415-700adcab4294,2025-12-29,AIG Australia,AIG Australia -,826,unreconciled,no_receipt_needed,ACT-IN
+bd7910a8-e652-4b7e-835c-70e14b409b27,2025-12-29,Audible,Audible Limited AU MELBOURNE,16.45,unreconciled,no_receipt_needed,ACT-IN
+abbd3938-0f7d-4eb2-ad62-f2740c6dc26d,2025-12-29,Chocolate Country,Chocolate Country Montville,36.88,unreconciled,no_receipt_needed,ACT-FM
+cbdffbcc-4fbb-43aa-abe8-2d6c15f206c5,2025-12-29,Mighty Networks,MIGHTY NETWORKS MIGHTYNETWORKCA,73.66,unreconciled,no_receipt_needed,ACT-IN
+7ac28528-da3d-44cd-a3c2-1a3ee787b67a,2025-12-29,NAB International Fee,NAB INTNL TRAN FEE - (MC),0.26,reconciled,no_receipt_needed,ACT-IN
+4ea81d36-a91d-4cd0-aa64-d14fbf5b3837,2025-12-29,NAB International Fee,NAB INTNL TRAN FEE - (MC),0.52,reconciled,no_receipt_needed,ACT-IN
+84e8427d-1524-4477-93b6-a4345fe804b2,2025-12-29,NAB International Fee,NAB INTNL TRAN FEE - (MC),1.15,reconciled,no_receipt_needed,ACT-IN
+4de636d0-b143-44a7-bf92-ca63aec413eb,2025-12-29,NAB International Fee,NAB INTNL TRAN FEE - (MC),1.38,reconciled,no_receipt_needed,ACT-IN
+1bd6e4c8-697c-44d5-a79e-4ee08bc992a0,2025-12-29,NAB International Fee,NAB INTNL TRAN FEE - (MC),1.53,reconciled,no_receipt_needed,ACT-IN
+a3d4e156-a6c0-4130-b7c3-4a4343693231,2025-12-29,NAB International Fee,NAB INTNL TRAN FEE - (MC),1.68,reconciled,no_receipt_needed,ACT-IN
+eca97f49-fc77-47eb-9d99-04998c4258c3,2025-12-29,NAB International Fee,NAB INTNL TRAN FEE - (SC),1.96,reconciled,no_receipt_needed,ACT-IN
+91ccc0b7-02e5-4058-ae19-c834278d2dbd,2025-12-29,NAB International Fee,NAB INTNL TRAN FEE - (MC),2.58,reconciled,no_receipt_needed,ACT-IN
+8bf947ff-ed48-4508-b06c-ace8077fbabd,2025-12-29,NAB International Fee,NAB INTNL TRAN FEE - (MC),5.14,reconciled,no_receipt_needed,ACT-IN
+6c78d4f1-ffee-41ed-8395-00be931cf151,2025-12-29,Woodfordia,WOODFORDIA INC WOODFORD,151.73,unreconciled,no_receipt_needed,ACT-FM
+f38e29b5-e39d-4505-9908-3ba9a3fe4a60,2025-12-30,Garmin,Garmin Eastern Creek,25,unreconciled,no_receipt_needed,ACT-IN
+43db6f66-f62f-48b1-a74f-86d29e32c7bc,2026-01-02,AAMI BUSINESS INSUR BRISBANE,AAMI BUSINESS INSUR BRISBANE,456.99,unreconciled,matched,ACT-IN
+a692ed79-e05e-44a7-af46-7ff0e0ad1278,2026-01-02,Linktree,LINKTREE COLLINGWOOD,16.17,unreconciled,no_receipt_needed,ACT-IN
+ddf7bbcc-cc8d-401d-b8c7-f425256ead77,2026-01-02,NAB International Fee,NAB INTNL TRAN FEE - (MC),1.15,reconciled,no_receipt_needed,ACT-IN
+b5b7bb99-e043-48e7-b87d-e1a25c77c392,2026-01-05,Claude.AI,CLAUDE.AI SUBSCRIPTION ANTHROPIC.COMCA,150.13,reconciled,matched,ACT-IN
+02babf8b-059c-47ee-be41-2255af126a9a,2026-01-05,Mr Wong Sydney,Mr Wong Sydney,185.93,reconciled,matched,ACT-IN
+9580c09a-fe19-4e3d-a22d-bfea3d387e88,2026-01-05,NAB International Fee,NAB INTNL TRAN FEE - (MC),0.58,reconciled,no_receipt_needed,ACT-IN
+7f9fbb89-0f16-414a-a8df-b58b1c65182b,2026-01-05,NAB International Fee,NAB INTNL TRAN FEE - (MC),0.63,reconciled,no_receipt_needed,ACT-IN
+9d63fb83-e576-4284-ad6d-22e9b638943a,2026-01-05,NAB International Fee,NAB INTNL TRAN FEE - (MC),1.73,reconciled,no_receipt_needed,ACT-IN
+c99e2268-c781-4fcd-b347-8dd9da382843,2026-01-05,NAB International Fee,NAB INTNL TRAN FEE - (SC),2.17,reconciled,no_receipt_needed,ACT-IN
+21654d9f-3165-40d5-a6e2-91670fb21947,2026-01-05,NAB International Fee,NAB INTNL TRAN FEE - (MC),5.25,reconciled,no_receipt_needed,ACT-IN
+f229eb0a-0234-4681-bcd1-ce3c187f775c,2026-01-05,News Pty Limited,NEWS PTY LIMITED SURRY HILLS,24,unreconciled,no_receipt_needed,ACT-IN
+e2c75139-1c38-4944-be35-0c9e9337d67c,2026-01-06,Claude.AI,CLAUDE.AI SUBSCRIPTION ANTHROPIC.COMCA,159.63,reconciled,matched,ACT-IN
+ae3f7789-2875-4693-9046-6060772ef2ff,2026-01-06,LinkedIn,LinkedInPreC *29661164 16506873555,74.99,unreconciled,no_receipt_needed,ACT-IN
+d3abb4ec-2c34-4090-bb3b-933828a8b19a,2026-01-06,NAB International Fee,NAB INTNL TRAN FEE - (MC),5.59,reconciled,no_receipt_needed,ACT-IN
+c1214531-77c7-4e90-a725-6f4c1f2f71f9,2026-01-07,CARBA TEC PTY LTD TINGALPA,CARBA TEC PTY LTD TINGALPA,4575.65,unreconciled,matched,ACT-HV
+8f0f0b92-5b5e-4bc8-92b2-dd86c9a10085,2026-01-07,NAB International Fee,NAB INTNL TRAN FEE - (MC),1.31,reconciled,no_receipt_needed,ACT-IN
+af0af627-f86e-4464-a23d-721ceeae5d7d,2026-01-08,TRANSPORTMAINRDS BRISBANE,TRANSPORTMAINRDS BRISBANE,39.09,unreconciled,matched,ACT-IN
+dcc03b05-8dfd-4d4d-be89-4cfdc443a006,2026-01-09,Booking.com,Hotel at Booking.com Amsterdam,275,unreconciled,matched,ACT-IN
+82bcd9de-9f0e-4bea-b1d3-264d945c42bd,2026-01-09,NAB International Fee,NAB INTNL TRAN FEE - (MC),0.63,reconciled,no_receipt_needed,ACT-IN
+a903a6d5-ef25-4c27-b5b0-a67ca774f75e,2026-01-09,NAB International Fee,NAB INTNL TRAN FEE - (MC),1.04,reconciled,no_receipt_needed,ACT-IN
+6908fb66-a5fd-43c9-84d5-b5f5b189280b,2026-01-09,NAB International Fee,NAB INTNL TRAN FEE - (SC),9.63,reconciled,no_receipt_needed,ACT-IN
+303c1014-4b91-498a-916e-f48fb000559d,2026-01-09,TWILIO INC TWILIO.COM CA,TWILIO INC TWILIO.COM CA,29.85,unreconciled,no_receipt_needed,ACT-IN
+789c9636-48d8-4a81-b1bf-874356a293c6,2026-01-12,NAB International Fee,NAB INTNL TRAN FEE - (MC),0.58,reconciled,no_receipt_needed,ACT-IN
+f04c554c-2fcf-4e67-8668-04f7c1607808,2026-01-12,NAB International Fee,NAB INTNL TRAN FEE - (MC),1.52,reconciled,no_receipt_needed,ACT-IN
+a474e9b7-7d8e-4b4e-87c0-837776f6aa47,2026-01-12,NAB International Fee,NAB INTNL TRAN FEE - (MC),2.77,reconciled,no_receipt_needed,ACT-IN
+2c2fabb6-8e2b-44f9-b717-3f6c6e051e7a,2026-01-13,CARBA TEC PTY LTD TINGALPA,CARBA TEC PTY LTD TINGALPA,1811.7,unreconciled,matched,ACT-HV
+edc520ab-13dc-48d0-910d-d96f2b38222a,2026-01-13,Xero,XERO AU INV-49391965 HAWTHORN,75,unreconciled,no_receipt_needed,ACT-IN
+0deace90-07f8-4ecb-84cc-ac2b5fe370d1,2026-01-14,3DEXPERIENCE DASSAULT MELBOURNE,3DEXPERIENCE DASSAULT MELBOURNE,92.4,unreconciled,unmatched,ACT-IN
+4d7375ee-e928-449e-82bb-80d9c3649b54,2026-01-14,NAB International Fee,NAB INTNL TRAN FEE - (MC),0.26,reconciled,no_receipt_needed,ACT-IN
+21f4eae1-102e-466b-80a4-bf8699c0b49a,2026-01-14,NAB International Fee,NAB INTNL TRAN FEE - (MC),1.1,reconciled,no_receipt_needed,ACT-IN
+001f3bb4-50b8-4f35-872c-c3e63d6324af,2026-01-14,NAB International Fee,NAB INTNL TRAN FEE - (MC),1.52,reconciled,no_receipt_needed,ACT-IN
+f21d8c24-b880-4a25-93aa-6d8b7f4c2a43,2026-01-14,OBSIDIAN OAKVILLE ON,OBSIDIAN OAKVILLE ON,7.51,unreconciled,no_receipt_needed,ACT-IN
+235200af-055a-4434-9768-0ac5bb323cb6,2026-01-15,AIRTASKER* 19323270X HAYMARKET,AIRTASKER* 19323270X HAYMARKET,399.45,unreconciled,matched,ACT-IN
+dc5fd324-8c1c-4887-b336-3a39e8da15ed,2026-01-15,NAB International Fee,NAB INTNL TRAN FEE - (MC),2.42,reconciled,no_receipt_needed,ACT-IN
+5f4cc933-94ff-4853-bc4e-7c9255135425,2026-01-16,DNA STEEL DIRECT ALICE SPRINGS,DNA STEEL DIRECT ALICE SPRINGS,739.54,unreconciled,unmatched,ACT-GD
+c1f381be-53ee-4126-a227-1e694db22069,2026-01-19,Claude.AI,CLAUDE.AI SUBSCRIPTION ANTHROPIC.COMCA,30.91,reconciled,matched,ACT-IN
+7fb48b24-5016-42bd-a500-5ada8d189e47,2026-01-19,Claude.AI,CLAUDE.AI SUBSCRIPTION ANTHROPIC.COMCA,34,reconciled,matched,ACT-IN
+bd350c54-91ea-469a-bcbe-316eb551de7b,2026-01-19,MALENY HARDWARE AND RURALMALENY,MALENY HARDWARE AND RURALMALENY,133.58,unreconciled,matched,ACT-FM
+8e189320-6151-48a9-8610-333aa1cc5490,2026-01-19,NAB International Fee,NAB INTNL TRAN FEE - (MC),1.05,reconciled,no_receipt_needed,ACT-IN
+a41da607-cad1-444c-b822-ef123779d21b,2026-01-19,NAB International Fee,NAB INTNL TRAN FEE - (SC),1.08,reconciled,no_receipt_needed,ACT-IN
+4ad584c6-5a39-4726-93bc-ee94d6ed6fe4,2026-01-19,NAB International Fee,NAB INTNL TRAN FEE - (SC),1.19,reconciled,no_receipt_needed,ACT-IN
+ebd54522-971b-4b23-9f66-37b760819e27,2026-01-19,NAB International Fee,NAB INTNL TRAN FEE - (MC),2.43,reconciled,no_receipt_needed,ACT-IN
+0fdbc1e6-dc58-4a35-bc03-dd3208aaf275,2026-01-19,SQ *POCKY ASIAN RESTAURANMaleny,SQ *POCKY ASIAN RESTAURANMaleny,206.44,unreconciled,unmatched,ACT-FM
+20bf233b-c086-41eb-8802-bb73fe219756,2026-01-20,Ezviz,EZVIZ INTERNATIONAL LI WAN CHAI,14.99,unreconciled,no_receipt_needed,ACT-IN
+23914bb1-c974-4b22-b122-4ceaffb9661d,2026-01-20,NAB International Fee,NAB INTNL TRAN FEE - (SC),0.52,reconciled,no_receipt_needed,ACT-IN
+b04b8a6e-4110-4eb4-9d73-5c9669b4a2d2,2026-01-21,NAB International Fee,NAB INTNL TRAN FEE - (SC),1.08,reconciled,no_receipt_needed,ACT-IN
+445454d2-aa59-40ef-ab06-eb82df6ca6f8,2026-01-21,NANONOBLE PTE. LTD. SINGAPORE,NANONOBLE PTE. LTD. SINGAPORE,30.98,unreconciled,no_receipt_needed,ACT-IN
+bc5596aa-9687-4ff6-8bdf-6c703e8e5a30,2026-01-22,Illustrator Sydney,Illustrator Sydney,35.99,unreconciled,no_receipt_needed,ACT-IN
+ec8fe310-bec5-4230-930e-221bcfb97e53,2026-01-23,BABI'S KITCHEN Ultimo,BABI'S KITCHEN Ultimo,43.1,reconciled,no_receipt_needed,ACT-IN
+bfe0cf7d-67fc-4d8d-a4da-b51ef908f248,2026-01-23,Internet Transfer,INTERNET TRANSFER Linked Acc Trns,3000,unreconciled,no_receipt_needed,ACT-IN
+21217c77-6124-472d-8470-1943f2d5d0c5,2026-01-23,NAB International Fee,NAB INTNL TRAN FEE - (SC),0.41,reconciled,no_receipt_needed,ACT-IN
+b2b71c4f-a1b5-4895-a197-5d609146aa3c,2026-01-23,NAB International Fee,NAB INTNL TRAN FEE - (MC),1.66,reconciled,no_receipt_needed,ACT-IN
+996a12b5-70a7-41c2-99da-436f6d4f858d,2026-01-23,NAB International Fee,NAB INTNL TRAN FEE - (SC),3.18,reconciled,no_receipt_needed,ACT-IN
+eb6ebfce-ca25-499d-b33e-ca8e2b513a34,2026-01-23,NAB International Fee,NAB INTNL TRAN FEE - (MC),4.44,reconciled,no_receipt_needed,ACT-IN
+572138ce-e87a-4f8b-a3e3-2ba5ebdb1f58,2026-01-23,Squarespace,SQSP* WORKSP#218979387 SQUARESPACE.CNY,11.8,unreconciled,no_receipt_needed,ACT-IN
+186ca8b2-4f7f-4245-af81-8567d7bc4bc7,2026-01-27,Amazon,AMAZON MARKETPLACE AU SYDNEY,28.99,unreconciled,no_receipt_needed,ACT-IN
+432268b5-5a18-44e7-895b-77d6ca392f33,2026-01-27,Audible,Audible Limited AU MELBOURNE,16.45,reconciled,no_receipt_needed,ACT-IN
+91969aa3-5f16-466f-8200-1845970405f3,2026-01-27,CABUK PTY. LTD HAYMARKET,CABUK PTY. LTD HAYMARKET,5.56,unreconciled,no_receipt_needed,ACT-IN
+15d34087-25fc-4798-863f-6a4873a38d4e,2026-01-27,CEX PARRAMATTA,CEX PARRAMATTA,540,reconciled,matched,ACT-IN
+423fdaa7-e4d4-4ae1-8217-affc5f4a9ebd,2026-01-27,Mighty Networks,MIGHTY NETWORKS MIGHTYNETWORKCA,71.72,reconciled,no_receipt_needed,ACT-IN
+c7b44db1-12e1-4ad6-b06e-2daa1199eb13,2026-01-27,NAB International Fee,NAB INTNL TRAN FEE - (MC),0.26,reconciled,no_receipt_needed,ACT-IN
+e68a6398-d551-4558-9a07-b4cb97b19efd,2026-01-27,NAB International Fee,NAB INTNL TRAN FEE - (MC),1.34,reconciled,no_receipt_needed,ACT-IN
+fc2e8dd7-e605-4860-8ad9-a7c8faf6a16d,2026-01-27,NAB International Fee,NAB INTNL TRAN FEE - (MC),1.63,reconciled,no_receipt_needed,ACT-IN
+7286fc84-3d50-487c-9072-5f13f16d5bd4,2026-01-27,NAB International Fee,NAB INTNL TRAN FEE - (MC),2.51,reconciled,no_receipt_needed,ACT-IN
+bf1b91ea-80f3-4958-9eb3-0a281bb3d0c8,2026-01-27,NAB International Fee,NAB INTNL TRAN FEE - (MC),5.03,reconciled,no_receipt_needed,ACT-IN
+3948e1bc-0bec-4ed9-bc4c-ffe98ce92573,2026-01-27,NAB International Fee,NAB INTNL TRAN FEE - (MC),10.95,reconciled,no_receipt_needed,ACT-IN
+32e5a1fd-7cd1-44fa-9065-ca8b6043d530,2026-01-27,TRANSPORTMAINRDS BRISBANE,TRANSPORTMAINRDS BRISBANE,78.18,reconciled,matched,ACT-IN
+78bd4625-bbe8-4ea3-961d-16d8bedae609,2026-01-28,ORANGESKY STAFFORD,ORANGESKY STAFFORD,288,unreconciled,matched,ACT-IN
+9ef403ce-4173-4abe-aa4b-8eb3e49bdc54,2026-01-28,SEASONS SUPERMARKET 10 MALENY,SEASONS SUPERMARKET 10 MALENY,366.58,unreconciled,matched,ACT-FM
+71adc7a0-a820-4e39-a4c5-2c456c8170c9,2026-01-29,Carla Furnishers,CARLA FURNISHERS P/L CICCONE,4816,unreconciled,unmatched,ACT-GD
+f5bc9a13-8fc2-4b50-a0f7-88cfa16ce44c,2026-01-30,AAMI BUSINESS INSUR BRISBANE,AAMI BUSINESS INSUR BRISBANE,456.99,unreconciled,matched,ACT-IN
+72f047fd-9d5c-4b63-b311-96699ef5f236,2026-01-30,Garmin,Garmin Eastern Creek,25,reconciled,no_receipt_needed,ACT-IN
+71f7d3d0-1c03-4602-b706-3ed88a6a9156,2026-01-30,NAB International Fee,NAB INTNL TRAN FEE - (MC),1.1,reconciled,no_receipt_needed,ACT-IN
+d46a5efd-7d38-434c-9fbd-c2f57ae50f63,2026-01-30,NAB International Fee,NAB INTNL TRAN FEE - (SC),1.96,reconciled,no_receipt_needed,ACT-IN
+45669c42-e379-49e5-afd8-c98f41d5f026,2026-01-30,NAB International Fee,NAB INTNL TRAN FEE - (SC),2.55,reconciled,no_receipt_needed,ACT-IN
+46652c81-46f7-4f00-a73a-f95c02e86dba,2026-01-30,Squarespace,SQSP* DOMAIN#220115153 SQUARESPACE.CNY,72.9,reconciled,no_receipt_needed,ACT-IN
+8bcd26d2-bf79-470f-9f72-9694ffa64f62,2026-02-02,AYERS ROCK RESORT SE YULARA,AYERS ROCK RESORT SE YULARA,106.49,reconciled,unmatched,ACT-GD
+07d0b8c2-6e9a-4a4b-8835-8f521011effc,2026-02-02,KALLEGA INVESTMENTS PT ALICE SPRINGS,KALLEGA INVESTMENTS PT ALICE SPRINGS,4715,unreconciled,matched,ACT-GD
+6cca6a91-baa8-4c96-8573-26f40d756dcc,2026-02-02,Linktree,LINKTREE COLLINGWOOD,15.78,reconciled,no_receipt_needed,ACT-IN
+a17ac6aa-1a6c-40cb-87ac-9fa55e17aaca,2026-02-02,NAB International Fee,NAB INTNL TRAN FEE - (MC),0.55,reconciled,no_receipt_needed,ACT-IN
+8feb3e45-9759-4821-a2e9-98e70601e4cb,2026-02-02,NAB International Fee,NAB INTNL TRAN FEE - (SC),2.17,reconciled,no_receipt_needed,ACT-IN
+b6159a17-859a-4f3a-82bd-4dd7380cece9,2026-02-02,News Pty Limited,NEWS PTY LIMITED SURRY HILLS,24,unreconciled,no_receipt_needed,ACT-IN
+2b1a8747-5ff1-4905-a79f-b876432b477b,2026-02-02,PARKS AUSTRALIA CANBERRA,PARKS AUSTRALIA CANBERRA,76,unreconciled,matched,ACT-IN
+f59f7548-7100-4f35-9e73-04495736b3bd,2026-02-02,VTC-ONLINE YULARA,VTC-ONLINE YULARA,287.57,unreconciled,unmatched,ACT-GD
+ffc83a70-e730-4d88-98bc-1bcb92eada5b,2026-02-02,VTC-ONLINETOURING YULARA,VTC-ONLINETOURING YULARA,99.89,unreconciled,matched,ACT-GD
+364e6ca4-df36-47b0-bdfa-095ca43008ad,2026-02-03,ERLDUNDA DESERT OAKS ERLDUNDA,ERLDUNDA DESERT OAKS ERLDUNDA,180.76,unreconciled,unmatched,ACT-GD
+3fb6e318-002a-4104-a008-2b7e9c7fb7c4,2026-02-03,Hanuman Restaurant Ali Alice Springs,Hanuman Restaurant Ali Alice Springs,118.36,unreconciled,unmatched,ACT-GD
+5c8ab81f-8cdc-4dd0-b33b-33c494d42202,2026-02-04,DISCOVERY RESORTS-KING PETERMANN,DISCOVERY RESORTS-KING PETERMANN,103.59,unreconciled,unmatched,ACT-GD
+38c35c8c-6dad-4ec5-ad2c-efed4fb89283,2026-02-05,THRIFTY AS CITY ALICE SPRINGS,THRIFTY AS CITY ALICE SPRINGS,1126.6,unreconciled,matched,ACT-GD
+50b7eadb-6369-4f5c-9955-db17a560fc9d,2026-02-06,CabFare,CabFare Payments Melbourne,51.44,reconciled,no_receipt_needed,ACT-IN
+1545e92c-fbf4-4749-a128-4699c1227774,2026-02-06,Claude.AI,CLAUDE.AI SUBSCRIPTION ANTHROPIC.COMCA,287.07,reconciled,matched,ACT-IN
+37768a6b-fcdf-4633-bdbb-30af0952b7ec,2026-02-06,LinkedIn,LinkedInPreC *93548314 16506873555,74.99,reconciled,no_receipt_needed,ACT-IN
+baa160b8-8ffc-4d5a-a879-0c849e739529,2026-02-06,NAB International Fee,NAB INTNL TRAN FEE - (MC),1.11,reconciled,no_receipt_needed,ACT-IN
+0dba0662-1684-42bb-a747-9af1b2b7a838,2026-02-06,NAB International Fee,NAB INTNL TRAN FEE - (MC),1.26,reconciled,no_receipt_needed,ACT-IN
+0c17b925-aab3-4031-b78e-b075b0157b91,2026-02-06,NAB International Fee,NAB INTNL TRAN FEE - (MC),10.05,reconciled,no_receipt_needed,ACT-IN
+c8a1e727-e72b-45e7-9d7c-4d59ab7acb14,2026-02-06,SEASONS SUPERMARKET 10 MALENY,SEASONS SUPERMARKET 10 MALENY,248.06,reconciled,matched,ACT-FM
+096d804c-45ea-4cbb-8e92-f60a41dc6d3e,2026-02-06,STEELMART CALOUNDRA CALOUNDRAQLD,STEELMART CALOUNDRA CALOUNDRAQLD,538.12,unreconciled,unmatched,ACT-HV
+bbc3877e-6063-46c8-b206-2988b1ecec9b,2026-02-09,A CURIOUS TRACTOR WITTA,A CURIOUS TRACTOR WITTA,600,unreconciled,matched,ACT-FM
+57f7dc93-b0a4-40aa-9b8f-8360bf36db82,2026-02-09,FOUNDERPASS.COM ESSEX,FOUNDERPASS.COM ESSEX,143.58,unreconciled,unmatched,ACT-IN
+987d3d30-367e-4e7f-b6a8-898554f97137,2026-02-09,NAB International Fee,NAB INTNL TRAN FEE - (MC),5.03,reconciled,no_receipt_needed,ACT-IN
+4ae8725b-4338-4081-bcaa-ddea724a2705,2026-02-09,ORSO GASTRONOMIA PTY L ROSE PARK,ORSO GASTRONOMIA PTY L ROSE PARK,213,unreconciled,unmatched,ACT-IN
+f049e9f0-ce94-4c34-8400-394844329ec5,2026-02-09,SEASONS SUPERMARKET 10 MALENY,SEASONS SUPERMARKET 10 MALENY,62.97,reconciled,no_receipt_needed,ACT-FM
+efbda77c-6a7e-4f54-a974-03afc42662f0,2026-02-10,NAB International Fee,NAB INTNL TRAN FEE - (MC),0.61,reconciled,no_receipt_needed,ACT-IN
+9a61c30b-9a99-42b7-b6e3-20a607d11619,2026-02-10,NAB International Fee,NAB INTNL TRAN FEE - (MC),2.64,reconciled,no_receipt_needed,ACT-IN
+4d806a4c-1e4c-4499-b83a-e2acfa6ebd2e,2026-02-12,TRANSPORTMAINRDS BRISBANE,TRANSPORTMAINRDS BRISBANE,70.24,reconciled,matched,ACT-IN
+6bc87c0a-7e78-466f-a1d3-1f20da44932f,2026-02-12,Woolworths,WOOLWORTHS/2 BUNYA ST MALENY,60.5,unreconciled,no_receipt_needed,ACT-FM
+0f197d0c-11ce-4e65-b5d0-4a2dd3b48be2,2026-02-13,Amazon,AMAZON MARKETPLACE AU SYDNEY,126.5,unreconciled,matched,ACT-IN
+ae7adc34-ee3b-43d0-965d-883637dccca2,2026-02-13,AUSTRALIAN TOURIST PARK MYAMBA,AUSTRALIAN TOURIST PARK MYAMBA,232.96,unreconciled,matched,ACT-CP
+b6df3f43-c7b3-4864-9567-e0b4e1a2695a,2026-02-13,NAB International Fee,NAB INTNL TRAN FEE - (MC),0.25,reconciled,no_receipt_needed,ACT-IN
+40aaff7b-ab4b-4ad8-97ca-b1855dacfd39,2026-02-13,OBSIDIAN OAKVILLE ON,OBSIDIAN OAKVILLE ON,7.08,unreconciled,no_receipt_needed,ACT-IN
+9c8a1c41-5ce4-4a48-b447-659e44c87451,2026-02-13,SEASONS SUPERMARKET 10 MALENY,SEASONS SUPERMARKET 10 MALENY,119.89,unreconciled,unmatched,ACT-FM
+becf6f9f-7374-4c82-809b-ddacc8efb0ce,2026-02-13,WWW.VEVOR.COM.AU MELBOURNE,WWW.VEVOR.COM.AU MELBOURNE,115.99,unreconciled,unmatched,ACT-HV
+3bf348d9-4060-4700-ba73-7b8a886d237f,2026-02-16,HARRIS FARM MARKETS PT WEST END,HARRIS FARM MARKETS PT WEST END,89.46,unreconciled,unmatched,ACT-FM
+c61c5d18-bc19-4a49-ac42-5cca688cbd9d,2026-02-16,NAB International Fee,NAB INTNL TRAN FEE - (MC),0.55,reconciled,no_receipt_needed,ACT-IN
+fb60bf19-3d36-4dab-9003-0cd9798a08e2,2026-02-16,NAB International Fee,NAB INTNL TRAN FEE - (SC),0.66,reconciled,no_receipt_needed,ACT-IN
+57f041b6-1e6f-4f76-bffc-3e48dc3b982e,2026-02-16,NAB International Fee,NAB INTNL TRAN FEE - (MC),1.04,reconciled,no_receipt_needed,ACT-IN
+086e518b-b321-4ecc-a632-1ca1fef71936,2026-02-16,NAB International Fee,NAB INTNL TRAN FEE - (MC),1.44,reconciled,no_receipt_needed,ACT-IN
+c236b783-8836-4f00-b89d-cbb91707920e,2026-02-16,NAB International Fee,NAB INTNL TRAN FEE - (MC),2.3,reconciled,no_receipt_needed,ACT-IN
+caf48da5-3823-4f1c-9f6a-05a19e6d1d77,2026-02-16,TRANSPORTMAINRDS BRISBANE,TRANSPORTMAINRDS BRISBANE,1070.42,reconciled,matched,ACT-IN
+20fe859c-e035-44f9-91ca-a744604cfd9c,2026-02-17,Amazon,AMAZON MARKETPLACE AU SYDNEY,93.4,unreconciled,matched,ACT-IN
+cdc4e6ac-d58e-495e-871f-39f3e824cade,2026-02-17,Grilld Townsville Townsville,Grilld Townsville Townsville,30.9,reconciled,matched,ACT-HV
+ce6d6bf6-1848-485d-847a-acf9d1bc5c89,2026-02-18,NAB International Fee,NAB INTNL TRAN FEE - (MC),0.99,reconciled,no_receipt_needed,ACT-IN
+31b79ab6-acea-44f3-82d8-c05e7ee7815a,2026-02-18,NAB International Fee,NAB INTNL TRAN FEE - (MC),1,reconciled,no_receipt_needed,ACT-IN
+e6a09e67-7ea6-4e1e-ab07-fb7c835627d6,2026-02-18,NANONOBLE PTE. LTD. SINGAPORE,NANONOBLE PTE. LTD. SINGAPORE,28.46,unreconciled,no_receipt_needed,ACT-IN
+cd767c0f-71bf-429e-b570-846020537f42,2026-02-19,Ezviz,EZVIZ INTERNATIONAL LI WAN CHAI,14.99,unreconciled,no_receipt_needed,ACT-IN
+ab788e6b-426a-4efa-b1fb-fbcf482a0093,2026-02-19,NAB International Fee,NAB INTNL TRAN FEE - (SC),0.52,reconciled,no_receipt_needed,ACT-IN
+02e3bf8b-d6f0-4d68-a064-5d3d1d13215c,2026-02-19,Qantas,QANTAS CONCOURSE BRISBANE AIRP,18.14,unreconciled,no_receipt_needed,ACT-IN
+561981fb-5ed7-4f92-af2f-f0746266e06a,2026-02-20,Amazon,AMAZON MARKETPLACE AU SYDNEY,349.48,unreconciled,matched,ACT-IN
+cbdd5bb9-8335-4668-9860-01ed85b80ce0,2026-02-20,EDITANDPRIN 0414586892,EDITANDPRIN 0414586892,7151.76,reconciled,matched,ACT-IN
+0d8e77fd-8679-4cfe-89f8-9e25f6ee1d8c,2026-02-23,Booking.com,Hotel at Booking.com Sydney,202.5,unreconciled,matched,ACT-IN
+16dd1a76-e55b-401b-a56f-a9aecb656f82,2026-02-23,BUNDANON ILLAROO,BUNDANON ILLAROO,120,unreconciled,unmatched,ACT-IN
+711144f9-1597-4b4b-9ed2-83e6e37a898c,2026-02-23,Illustrator Sydney,Illustrator Sydney,35.99,reconciled,no_receipt_needed,ACT-IN
+ac1bf36b-b20e-40e8-b5cc-771ccfa62eba,2026-02-23,NAB International Fee,NAB INTNL TRAN FEE - (SC),0.41,reconciled,no_receipt_needed,ACT-IN
+780f5a6a-8c9e-4248-b2c9-1e498834124f,2026-02-23,NAB International Fee,NAB INTNL TRAN FEE - (SC),0.69,reconciled,no_receipt_needed,ACT-IN
+b94c0f33-5666-4278-9236-005144a4a82f,2026-02-23,NAB International Fee,NAB INTNL TRAN FEE - (MC),1.59,reconciled,no_receipt_needed,ACT-IN
+f7ab6c36-062f-4bc3-bc32-afa09e58de69,2026-02-23,NAB International Fee,NAB INTNL TRAN FEE - (MC),4.36,reconciled,no_receipt_needed,ACT-IN
+8c28d8cf-c67d-40eb-8c51-19a7f641753f,2026-02-23,NAB International Fee,NAB INTNL TRAN FEE - (SC),134.16,reconciled,no_receipt_needed,ACT-IN
+69a307b0-23eb-45a2-9767-2583a37bc489,2026-02-23,ONLYDOMAINS.COM 649-925-0327,ONLYDOMAINS.COM 649-925-0327,19.79,reconciled,no_receipt_needed,ACT-IN
+6e6dbd87-9c53-425c-aaf2-6320218f2c9b,2026-02-23,Squarespace,SQSP* WORKSP#223280526 SQUARESPACE.CNY,11.8,reconciled,no_receipt_needed,ACT-IN
+867d2b1b-35e0-49b7-9859-a2c5db2139fc,2026-02-23,STACKS OF WAX PTY LT NEWTOWN,STACKS OF WAX PTY LT NEWTOWN,150,unreconciled,unmatched,ACT-IN
+883d3984-a4d6-48ca-b6d7-344f852b83d5,2026-02-23,TICKETS*AN EXCLUSI 0272026035,TICKETS*AN EXCLUSI 0272026035,165,reconciled,unmatched,ACT-HV
+c1177f1f-d329-420b-b3a7-da125b88187e,2026-02-23,TRANSPORTMAINRDS BRISBANE,TRANSPORTMAINRDS BRISBANE,273.63,unreconciled,matched,ACT-IN
+34772618-719f-4abd-aa4d-6501eca1fd2d,2026-02-24,NAB International Fee,NAB INTNL TRAN FEE - (MC),0.25,reconciled,no_receipt_needed,ACT-IN
+867cf171-4808-454c-8898-5bafd3ab5f92,2026-02-24,NAB International Fee,NAB INTNL TRAN FEE - (MC),4.84,reconciled,no_receipt_needed,ACT-IN
+ce5bbd0c-8be4-4364-8061-692bd013366a,2026-02-25,BIG W/OLD HUME HWY & ROSCMITTAGONG,BIG W/OLD HUME HWY & ROSCMITTAGONG,388.2,unreconciled,unmatched,ACT-IN
+94997179-4829-426b-b2ef-1c1eeb8b6f01,2026-02-25,MALENY HARDWARE AND RURALMALENY,MALENY HARDWARE AND RURALMALENY,81.9,unreconciled,no_receipt_needed,ACT-FM
+691b633d-b0cd-4e6d-a8de-475d5e96afa0,2026-02-25,Mighty Networks,MIGHTY NETWORKS MIGHTYNETWORKCA,69.56,unreconciled,no_receipt_needed,ACT-IN
+23dea7cf-4f21-4d85-98e6-29b88323a697,2026-02-25,NAB International Fee,NAB INTNL TRAN FEE - (MC),2.43,reconciled,no_receipt_needed,ACT-IN
+f2cb8c05-33fd-436e-95b2-93db82cb0638,2026-02-25,SPOTLIGHT MITTAGONG MITTAGONGNSW,SPOTLIGHT MITTAGONG MITTAGONGNSW,199.6,unreconciled,unmatched,ACT-IN
+247ea6e6-041f-4536-af6c-38b9e4104e82,2026-02-26,ADGE Hotel OPI Surry Hills,ADGE Hotel OPI Surry Hills,2161.19,unreconciled,matched,ACT-IN
+cecc0ca5-abcf-45d1-ba9d-c4e92b70ae88,2026-02-26,Audible,Audible Limited AU MELBOURNE,16.45,reconciled,no_receipt_needed,ACT-IN
+1765e514-d754-4548-a88f-934f63b65f65,2026-02-27,MYO*THE TRUSTEE FOR TH BRENDALE,MYO*THE TRUSTEE FOR TH BRENDALE,3212.04,unreconciled,unmatched,ACT-HV
+189b54fc-b199-4574-bc74-370a662c329d,2026-02-27,TRANSPORTMAINRDS BRISBANE,TRANSPORTMAINRDS BRISBANE,273.63,unreconciled,matched,ACT-IN
+2d9a402c-8182-49ff-be00-8f68b2e5abd0,2026-03-02,AMPOL WYONG DIESEL NO WYONG,AMPOL WYONG DIESEL NO WYONG,232.55,unreconciled,unmatched,ACT-IN
+78bf76f4-64f3-4381-88ab-4ca1d361b7c3,2026-03-02,Garmin,Garmin Eastern Creek,25,unreconciled,no_receipt_needed,ACT-IN
+047820a2-1d9e-4158-8370-843f68bb4341,2026-03-02,Linktree,LINKTREE COLLINGWOOD,15.21,unreconciled,no_receipt_needed,ACT-IN
+1f8346d2-8333-43d9-b49f-7d2ea8f17dbf,2026-03-02,MALENYVIBESPILATES.COM GOLDEN BEACH,MALENYVIBESPILATES.COM GOLDEN BEACH,150,unreconciled,unmatched,ACT-FM
+d94b3388-e99b-4735-9ee8-ec7cc3ea14d4,2026-03-02,NAB International Fee,NAB INTNL TRAN FEE - (MC) Bank Feed Auto-reconciled,0.44,reconciled,no_receipt_needed,ACT-IN
+c5d29f76-2138-4de5-b7f7-8fe6990ec99c,2026-03-02,NAB International Fee,NAB INTNL TRAN FEE - (SC) Bank Feed Auto-reconciled,0.46,reconciled,no_receipt_needed,ACT-IN
+58420236-7d3e-42c1-9a78-e70fb99764e4,2026-03-02,NAB International Fee,NAB INTNL TRAN FEE - (MC) Bank Feed Auto-reconciled,0.49,reconciled,no_receipt_needed,ACT-IN
+7ed1a415-c470-43a7-9d3d-9c4ed6480f6d,2026-03-02,NAB International Fee,NAB INTNL TRAN FEE - (MC) Bank Feed Auto-reconciled,1.09,reconciled,no_receipt_needed,ACT-IN
+30c68b32-22d5-42ad-9a9e-0e3187c103cb,2026-03-02,NAB International Fee,NAB INTNL TRAN FEE - (MC) Bank Feed Auto-reconciled,1.31,reconciled,no_receipt_needed,ACT-IN
+f3fb89cd-28f1-4a67-a7b8-36849876cb27,2026-03-02,NAB International Fee,NAB INTNL TRAN FEE - (SC) Bank Feed Auto-reconciled,1.96,reconciled,no_receipt_needed,ACT-IN
+eba16ad0-6a56-4f53-b915-d5ced241ca5a,2026-03-02,NAB International Fee,NAB INTNL TRAN FEE - (SC) Bank Feed Auto-reconciled,2.4,reconciled,no_receipt_needed,ACT-IN
+37b78532-e4c5-4a5b-9d75-b8f1df0a2f12,2026-03-02,News Pty Limited,NEWS PTY LIMITED SURRY HILLS,24,unreconciled,no_receipt_needed,ACT-IN
+d137c41d-ee33-4f87-9321-ed40397bd299,2026-03-02,QATAR AIR 0002134251468DOHA,QATAR AIR 0002134251468DOHA,5067.99,unreconciled,unmatched,ACT-IN
+06c6377f-bb11-4658-ba29-4d786d7e265a,2026-03-02,SP RETRO OUTDOOR CO BAULKHAM HILL,SP RETRO OUTDOOR CO BAULKHAM HILL,4497,unreconciled,unmatched,ACT-HV
+859eace9-5aec-4055-aa34-0ae6e9938963,2026-03-02,TICKETS*ENTRANCE 5 0272026035,TICKETS*ENTRANCE 5 0272026035,46.63,reconciled,no_receipt_needed,ACT-HV
+0af3236b-4dfe-4463-baba-9aa571ebef50,2026-03-03,ADGE Hotel OPI Surry Hills,ADGE Hotel OPI Surry Hills,209,unreconciled,matched,ACT-IN
+29f14cb8-aec9-4be9-a17d-8bbd62c21fea,2026-03-03,BP NAMBUCCA TRVL CTR 7795VALLA,BP NAMBUCCA TRVL CTR 7795VALLA,212.21,unreconciled,unmatched,ACT-IN
+458c877a-b656-4b43-8ef1-a245011789e0,2026-03-04,BALLINA TRAVEL CTR 9072 BALLINA,BALLINA TRAVEL CTR 9072 BALLINA,133.63,unreconciled,unmatched,ACT-IN
+309bd4d1-d662-4c5f-8160-d7437fa98422,2026-03-04,Maleny Hot Bread Bake Maleny,Maleny Hot Bread Bake Maleny,8.52,unreconciled,matched,ACT-FM
+a1698749-4a23-4568-a670-706fc17273b0,2026-03-05,SEASONS SUPERMARKET 10 MALENY,SEASONS SUPERMARKET 10 MALENY,33.42,unreconciled,no_receipt_needed,ACT-FM
+c7524a74-43b8-49bc-affb-df738695b283,2026-03-05,SQ *WOODFORD CJ'S PASTRIEWoodford Bank Feed Auto-reconciled,SQ *WOODFORD CJ'S PASTRIEWoodford Bank Feed Auto-reconciled,14.3,reconciled,matched,ACT-IN
+76bf8326-2be8-4f00-9aba-e9439fb5ebf7,2026-03-05,VENTIA AUSTRALIA PTY L BRISBANE AIRP Bank Feed Auto-reconciled,VENTIA AUSTRALIA PTY L BRISBANE AIRP Bank Feed Auto-reconciled,45.6,reconciled,matched,ACT-IN
+8346225b-1374-4551-9db0-75bdfc9789ef,2026-03-06,LinkedIn,LinkedInPreC *54212904 16506873555 Bank Feed Auto-reconciled,74.99,reconciled,no_receipt_needed,ACT-IN
+e2f0074b-5ba6-406c-91ab-33dc5b8968b1,2026-03-06,NAB International Fee,NAB INTNL TRAN FEE - (SC) Bank Feed Auto-reconciled,1.04,reconciled,no_receipt_needed,ACT-IN
+231d4dc1-55b9-4044-bc11-93c3d8993d70,2026-03-06,NAB International Fee,NAB INTNL TRAN FEE - (SC) Bank Feed Auto-reconciled,1.05,reconciled,no_receipt_needed,ACT-IN
+fd75c6a5-4c6e-4d9f-9d11-589e54ace5cf,2026-03-06,NAB International Fee,NAB INTNL TRAN FEE - (MC) Bank Feed Auto-reconciled,1.25,reconciled,no_receipt_needed,ACT-IN
+d9defdbc-49f0-4ba0-8e03-b14767a4bf59,2026-03-06,PAPER.DESIGN PAPER.DESIGN CA,PAPER.DESIGN PAPER.DESIGN CA,29.77,unreconciled,no_receipt_needed,ACT-IN
+a0c35bd3-6c0d-4618-978c-4062b2b8354c,2026-03-06,WITTA RRC BEERWAH,WITTA RRC BEERWAH,35,unreconciled,no_receipt_needed,ACT-FM
+90c7d352-6355-4b7c-a047-82f49eca80f5,2026-03-06,WITTA RRC BEERWAH,WITTA RRC BEERWAH,148,unreconciled,unmatched,ACT-FM
+12646d2e-774c-4ddb-9804-3fe4de659cc7,2026-03-09,Internet Transfer,INTERNET TRANSFER Linked Acc Trns Bank Feed Auto-reconciled,200,reconciled,matched,ACT-IN
+17d51908-2009-497b-a701-e6938f789856,2026-03-09,NAB International Fee,NAB INTNL TRAN FEE - (MC) Bank Feed Auto-reconciled,0.55,reconciled,no_receipt_needed,ACT-IN
+30b4b539-767e-4410-b3d3-1daea50a7324,2026-03-09,NAB International Fee,NAB INTNL TRAN FEE - (MC) Bank Feed Auto-reconciled,0.6,reconciled,no_receipt_needed,ACT-IN
+dfe893e7-c5b8-4e65-a182-47245c80fe62,2026-03-09,SEASONS SUPERMARKET 10 MALENY,SEASONS SUPERMARKET 10 MALENY,26.99,unreconciled,no_receipt_needed,ACT-FM
+66068f3d-b9ba-4852-a118-e4e3646694e1,2026-03-09,SEASONS SUPERMARKET 10 MALENY,SEASONS SUPERMARKET 10 MALENY,294.04,unreconciled,matched,ACT-FM
+ab138e86-0066-450d-adac-f17cfc646bfd,2026-03-09,Shotgun Espresso Maleny,Shotgun Espresso Maleny,23.35,unreconciled,no_receipt_needed,ACT-FM
+7bfd5038-3528-4ea7-a189-b61958aea914,2026-03-09,SQ *A CURIOUS TRACTOR Kingston,SQ *A CURIOUS TRACTOR Kingston,3.5,unreconciled,no_receipt_needed,ACT-IN
+33daf589-87db-44e9-bd32-b555c076b922,2026-03-09,SQ *FLIGHT BAR WITTA Witta,SQ *FLIGHT BAR WITTA Witta,4,unreconciled,no_receipt_needed,ACT-FM
+5ce49430-a9c0-43b9-a687-1fa0cebd5a40,2026-03-09,SUPER CHEAP AUTO ACACIA RIDGE,SUPER CHEAP AUTO ACACIA RIDGE,90.45,unreconciled,unmatched,ACT-HV
+beaa1192-6e33-4fc0-970c-ba81972f9e7f,2026-03-10,NAB International Fee,NAB INTNL TRAN FEE - (MC) Bank Feed Auto-reconciled,0.33,reconciled,no_receipt_needed,ACT-IN
+f563a602-5f2a-4623-a27e-ea989741c152,2026-03-10,NAB International Fee,NAB INTNL TRAN FEE - (SC) Bank Feed Auto-reconciled,2.43,reconciled,no_receipt_needed,ACT-IN
+43af9876-1b0e-4d9d-9e91-7ca91d8efb34,2026-03-10,NAB International Fee,NAB INTNL TRAN FEE - (MC) Bank Feed Auto-reconciled,2.66,reconciled,no_receipt_needed,ACT-IN
+7ed6d38c-e48b-40e8-bb37-143104fd10c1,2026-03-10,SANKALP ANNERLEY,SANKALP ANNERLEY,186.75,unreconciled,unmatched,ACT-IN
+21266b7f-3879-46e9-9340-fc31284fab30,2026-03-12,Woolworths,WOOLWORTHS/2 BUNYA ST MALENY,101.55,unreconciled,unmatched,ACT-FM
+63a49659-3966-4335-be83-a9a407f6a88b,2026-03-13,NAB International Fee,NAB INTNL TRAN FEE - (MC) Bank Feed Auto-reconciled,0.47,reconciled,no_receipt_needed,ACT-IN
+456db350-411b-47ef-b2b7-2267da96f2aa,2026-03-13,NAB International Fee,NAB INTNL TRAN FEE - (MC) Bank Feed Auto-reconciled,1.43,reconciled,no_receipt_needed,ACT-IN
+d05c1180-8ec0-44be-8813-bd5b66ee52d8,2026-03-13,ORANGESKY STAFFORD,ORANGESKY STAFFORD,160,unreconciled,matched,ACT-IN
+1a7a6716-593b-409c-8b82-e2acd3b7f97d,2026-03-16,Maleny Hot Bread Bake Maleny,Maleny Hot Bread Bake Maleny,18.15,unreconciled,no_receipt_needed,ACT-FM
+16626895-c785-465c-92ec-247a75e4562d,2026-03-16,NAB International Fee,NAB INTNL TRAN FEE - (MC) Bank Feed Auto-reconciled,0.25,reconciled,no_receipt_needed,ACT-IN
+59075cdf-0076-47ac-b1ae-8cf509d6c01a,2026-03-16,NAB International Fee,NAB INTNL TRAN FEE - (MC) Bank Feed Auto-reconciled,1.1,reconciled,no_receipt_needed,ACT-IN
+9c3aa729-4d72-45aa-b736-a1ceb79e0bab,2026-03-16,NAB International Fee,NAB INTNL TRAN FEE - (MC) Bank Feed Auto-reconciled,2.32,reconciled,no_receipt_needed,ACT-IN
+abc96629-be24-4068-adb2-fe3bad9542f4,2026-03-16,NRMA Insurance,NRMA Insurance nrma.com.au,635.03,unreconciled,matched,ACT-IN
+ca120853-04be-4106-b781-7c87c903649a,2026-03-16,OBSIDIAN OAKVILLE ON,OBSIDIAN OAKVILLE ON,7.17,unreconciled,no_receipt_needed,ACT-IN
+99ac68f6-276d-45e4-b13f-f5c5c2b5ec3c,2026-03-18,CabFare,CabFare Payments Melbourne,55.33,unreconciled,no_receipt_needed,ACT-IN
+128b831c-3c9a-438e-8941-b1a691e389b3,2026-03-18,Internet Transfer,INTERNET TRANSFER Linked Acc Trns Bank Feed Auto-reconciled,800,reconciled,no_receipt_needed,ACT-IN
+5dd25606-e195-4644-8c7c-bfbbcc7d7e51,2026-03-18,NAB International Fee,NAB INTNL TRAN FEE - (MC) Bank Feed Auto-reconciled,0.99,reconciled,no_receipt_needed,ACT-IN
+849a9caf-f895-439d-9b9a-e17974ff38bc,2026-03-19,DoubleTree Alice Springs Alice Springs,DoubleTree Alice Springs Alice Springs,588,unreconciled,matched,ACT-GD
+478c1cd8-c230-4083-b8de-c7a405b1e26f,2026-03-19,Ezviz,EZVIZ INTERNATIONAL LI WAN CHAI,14.99,unreconciled,matched,ACT-IN
+6fc08b31-454b-4d46-9591-6734540f1839,2026-03-19,NAB International Fee,NAB INTNL TRAN FEE - (SC) Bank Feed Auto-reconciled,0.52,reconciled,no_receipt_needed,ACT-IN
+08018059-83c5-4943-809c-b8aff7a8f333,2026-03-20,MIYABI SUSHI ALICE SPRINGS,MIYABI SUSHI ALICE SPRINGS,31.97,unreconciled,no_receipt_needed,ACT-GD
+5a436fbf-a3d9-4fb3-993a-28bac563df57,2026-03-20,Woolworths,WOOLWORTHS/40 HARTLEY ST ALICE SPRINGS,68.1,unreconciled,no_receipt_needed,ACT-GD
+8b2ce3fa-a632-4709-9527-1a2831c96b7b,2026-03-23,Coles,COLES 0418 ALICE SPRINGS,16.98,unreconciled,no_receipt_needed,ACT-GD
+f957191c-8e4e-43ca-a6d1-53669ab0206e,2026-03-23,DoubleTree Alice Springs Alice Springs,DoubleTree Alice Springs Alice Springs,117,unreconciled,matched,ACT-GD
+34684915-e2db-415a-8467-52b5f9a46cdd,2026-03-23,EDITANDPRIN 0414586892,EDITANDPRIN 0414586892,931.41,unreconciled,matched,ACT-IN
+d2891871-96ae-4286-af60-4531ea390d81,2026-03-23,Illustrator Sydney,Illustrator Sydney,35.99,unreconciled,no_receipt_needed,ACT-IN
+7ff0ab18-ec99-49b6-840d-d5207ec93947,2026-03-23,NAB International Fee,NAB INTNL TRAN FEE - (SC) Bank Feed Auto-reconciled,0.41,reconciled,no_receipt_needed,ACT-IN
+620cad43-268a-4cf0-86d3-c6e33c2e7cfd,2026-03-23,NAB International Fee,NAB INTNL TRAN FEE - (MC) Bank Feed Auto-reconciled,0.75,reconciled,no_receipt_needed,ACT-IN
+271419e9-8783-4965-8f43-1940cea352f1,2026-03-23,NAB International Fee,NAB INTNL TRAN FEE - (MC) Bank Feed Auto-reconciled,1,reconciled,no_receipt_needed,ACT-IN
+396622fd-379d-48ae-9ba7-d60993098878,2026-03-23,NAB International Fee,NAB INTNL TRAN FEE - (MC) Bank Feed Auto-reconciled,1.59,reconciled,no_receipt_needed,ACT-IN
+06d66798-465b-45a1-b0b8-95510e343235,2026-03-23,NAB International Fee,NAB INTNL TRAN FEE - (MC) Bank Feed Auto-reconciled,3.58,reconciled,no_receipt_needed,ACT-IN
+5cba2abc-a020-4f2f-b853-6eac58973f0b,2026-03-23,NAB International Fee,NAB INTNL TRAN FEE - (MC) Bank Feed Auto-reconciled,4.36,reconciled,no_receipt_needed,ACT-IN
+97db7a72-e6e8-4a27-b6fd-a31addbf77a6,2026-03-23,NAB International Fee,NAB INTNL TRAN FEE - (MC) Bank Feed Auto-reconciled,5.08,reconciled,no_receipt_needed,ACT-IN
+3ddd6545-b607-4bce-acc1-08a3a3d41c0c,2026-03-23,NAB International Fee,NAB INTNL TRAN FEE - (SC) Bank Feed Auto-reconciled,6.77,reconciled,no_receipt_needed,ACT-IN
+e59c3b2d-f95a-497e-8e87-aeab0db02fdb,2026-03-23,NAB International Fee,NAB INTNL TRAN FEE - (SC) Bank Feed Auto-reconciled,137.15,reconciled,no_receipt_needed,ACT-IN
+616f744f-2f4f-4e8a-8ab6-39676baa0e3e,2026-03-23,NANONOBLE PTE. LTD. SINGAPORE,NANONOBLE PTE. LTD. SINGAPORE,28.56,unreconciled,no_receipt_needed,ACT-IN
+8b40c2c6-3e09-4d9a-850b-f2ba1b4ac468,2026-03-23,Squarespace,SQSP* WORKSP#227291700 SQUARESPACE.CNY Bank Feed Auto-reconciled,11.8,reconciled,no_receipt_needed,ACT-IN
+2e9c6949-e8ec-4dc2-a172-9fa7b8bfc973,2026-03-24,ALICE SPRINGS CASINO O ALICE SPRINGS,ALICE SPRINGS CASINO O ALICE SPRINGS,36.54,unreconciled,no_receipt_needed,ACT-GD
+08eb8ee9-b9de-435e-abf7-5d1bcacebaa1,2026-03-24,FAWLTYS FINE FOOD ALICE SPRINGS,FAWLTYS FINE FOOD ALICE SPRINGS,6,unreconciled,no_receipt_needed,ACT-GD
+59bd6306-7664-4d43-8007-959ba816ecfb,2026-03-24,JLL INVESTMENT GROUP FAIRFIELD,JLL INVESTMENT GROUP FAIRFIELD,81.87,unreconciled,no_receipt_needed,ACT-IN
+12bbb734-57ba-4864-846e-952167dc05ee,2026-03-24,NAB International Fee,NAB INTNL TRAN FEE - (MC) Bank Feed Auto-reconciled,0.25,reconciled,no_receipt_needed,ACT-IN
+721a0d27-9a49-44e2-b172-2181f2ca50e6,2026-03-24,NAB International Fee,NAB INTNL TRAN FEE - (MC) Bank Feed Auto-reconciled,2.19,reconciled,no_receipt_needed,ACT-IN
+ea5905ab-d14d-464b-a695-818d3d7bfd44,2026-03-24,NAB International Fee,NAB INTNL TRAN FEE - (MC) Bank Feed Auto-reconciled,4.85,reconciled,no_receipt_needed,ACT-IN
+ded883d9-9703-44e3-8422-5900559a3aa9,2026-03-24,PAGE 27 CAFE ALICE SPRINGS,PAGE 27 CAFE ALICE SPRINGS,6.92,unreconciled,no_receipt_needed,ACT-GD
+122ca2ea-f6f9-4635-b58a-704f2100730e,2026-03-25,Mighty Networks,MIGHTY NETWORKS MIGHTYNETWORKCA,70.92,unreconciled,no_receipt_needed,ACT-IN
+482bb0f6-0201-4207-854b-417d4e55ca91,2026-03-25,NAB International Fee,NAB INTNL TRAN FEE - (MC) Bank Feed Auto-reconciled,0.78,reconciled,no_receipt_needed,ACT-IN
+f2fb0fcf-6071-4edb-8744-bee1abb88a11,2026-03-25,NAB International Fee,NAB INTNL TRAN FEE - (MC) Bank Feed Auto-reconciled,2.48,reconciled,no_receipt_needed,ACT-IN
+29a9fa35-fead-47cd-8a57-8b6aabd947f1,2026-03-25,NAB International Fee,NAB INTNL TRAN FEE - (MC) Bank Feed Auto-reconciled,3.47,reconciled,no_receipt_needed,ACT-IN
+35074331-97b1-46f5-a7d9-106a03f2a2ea,2026-03-25,NAB International Fee,NAB INTNL TRAN FEE - (SC) Bank Feed Auto-reconciled,4.25,reconciled,no_receipt_needed,ACT-IN
+ff5f5ff6-d77e-48f1-a88d-374ea7ab1b14,2026-03-25,NAB International Fee,NAB INTNL TRAN FEE - (MC) Bank Feed Auto-reconciled,4.59,reconciled,no_receipt_needed,ACT-IN
+b7e6f9f2-7671-4b01-a518-3721beba03a5,2026-03-25,SQ *EAT LEBANESE Caringbah,SQ *EAT LEBANESE Caringbah,40.76,unreconciled,no_receipt_needed,ACT-IN
+49635952-0905-495c-b2f4-49e2cce02821,2026-03-25,TRIPLE BULL CRONULLA,TRIPLE BULL CRONULLA,153,unreconciled,unmatched,ACT-IN
+c1917e17-3749-4e08-a385-dc56a21fa97e,2026-03-26,Audible,Audible Limited AU MELBOURNE Bank Feed Auto-reconciled,16.45,reconciled,no_receipt_needed,ACT-IN
+21c21840-d078-4abd-a1f9-799d6f159c4f,2026-03-26,NAB International Fee,NAB INTNL TRAN FEE - (MC) Bank Feed Auto-reconciled,0.32,reconciled,no_receipt_needed,ACT-IN
+6030a304-032c-4310-a8d9-633a9d59e9a4,2026-03-26,NAB International Fee,NAB INTNL TRAN FEE - (MC) Bank Feed Auto-reconciled,17.5,reconciled,no_receipt_needed,ACT-IN
+c4e77e30-408b-453f-97af-cedf798f4596,2026-03-26,SQ *ON LAKE CAFE McDougalls Hi,SQ *ON LAKE CAFE McDougalls Hi,27.5,unreconciled,no_receipt_needed,ACT-IN
+7c9c296d-ee9e-4882-b9e0-5294304c406a,2026-03-26,STRELEC LJUBLJANA,STRELEC LJUBLJANA,500.1,unreconciled,unmatched,ACT-IN
+2b7c5c28-466f-4add-888e-6bd4350a15d3,2026-03-27,DEPT OF PARLIAMENTARY CAPITAL HILL,DEPT OF PARLIAMENTARY CAPITAL HILL,7,unreconciled,no_receipt_needed,ACT-IN
+a58ac8a4-6682-428a-a7d2-cffe7dc16502,2026-03-27,NAB International Fee,NAB INTNL TRAN FEE - (MC) Bank Feed Auto-reconciled,0.32,reconciled,no_receipt_needed,ACT-IN
+f21d3f27-d7ba-4ef7-9da9-e715d9781518,2026-03-27,NAB International Fee,NAB INTNL TRAN FEE - (MC) Bank Feed Auto-reconciled,0.62,reconciled,no_receipt_needed,ACT-IN
+85c906d0-0317-4c8b-9726-bc687f1a7c64,2026-03-27,NAB International Fee,NAB INTNL TRAN FEE - (MC) Bank Feed Auto-reconciled,1.34,reconciled,no_receipt_needed,ACT-IN
+4575f399-7935-4709-bb57-d23b259d4272,2026-03-27,Uber,UBER *TRIP HELP.UBER.COM Bank Feed Auto-reconciled,17.84,reconciled,no_receipt_needed,ACT-IN
+47c1277e-3eb5-4911-80f4-bcfa8b9746e7,2026-03-27,ZLR*Pattysmiths Manuka Griffith,ZLR*Pattysmiths Manuka Griffith,31.24,unreconciled,no_receipt_needed,ACT-IN
+27826742-81c4-4181-9fd8-a09bbf7ee555,2026-03-30,7 ELEVEN 4223 LITTLE MOUNTA,7 ELEVEN 4223 LITTLE MOUNTA,103.64,unreconciled,unmatched,ACT-FM
+78970d5c-0776-44e5-9b6d-6cddfe70512f,2026-03-30,AMPOL CANBERRA 20006F CANBERRA AIRP,AMPOL CANBERRA 20006F CANBERRA AIRP,76.23,unreconciled,no_receipt_needed,ACT-IN
+66588349-6770-433d-92b6-4ac63ecaa902,2026-03-30,COASTAL FASTENERS PTY LTDMAROOCHYDORE,COASTAL FASTENERS PTY LTDMAROOCHYDORE,35.2,unreconciled,no_receipt_needed,ACT-FM
+1131dd03-e362-4cbc-b890-30d10c420cc8,2026-03-30,Garmin,Garmin Eastern Creek,25,unreconciled,no_receipt_needed,ACT-IN
+a40986c9-10f2-461a-9313-5392b66db0c3,2026-03-30,GREEN MOTION SLOVENIJA BRNIK - AEROD,GREEN MOTION SLOVENIJA BRNIK - AEROD,687.02,unreconciled,matched,ACT-IN
+85a72cac-ffad-4b83-aed7-3971f3c65782,2026-03-30,"HERTZ, RA, 643314792 SOUTH MELBOUR","HERTZ, RA, 643314792 SOUTH MELBOUR",598.57,unreconciled,matched,ACT-IN
+6324e910-a7d8-4126-942a-c7cda9965e97,2026-03-30,NAB International Fee,NAB INTNL TRAN FEE - (MC) Bank Feed Auto-reconciled,0.03,reconciled,no_receipt_needed,ACT-IN
+22f63c83-003f-4907-a33a-1ea0f4cb3aaa,2026-03-30,NAB International Fee,NAB INTNL TRAN FEE - (MC) Bank Feed Auto-reconciled,0.26,reconciled,no_receipt_needed,ACT-IN
+4593bbd9-3611-45d5-a4bb-b2de20e8ad63,2026-03-30,NAB International Fee,NAB INTNL TRAN FEE - (MC) Bank Feed Auto-reconciled,0.43,reconciled,no_receipt_needed,ACT-IN
+3fd49647-281e-40f1-a58e-342bb6e63eee,2026-03-30,NAB International Fee,NAB INTNL TRAN FEE - (MC) Bank Feed Auto-reconciled,0.47,reconciled,no_receipt_needed,ACT-IN
+b416abc0-c61d-4bf6-9a28-045b1638e268,2026-03-30,NAB International Fee,NAB INTNL TRAN FEE - (MC) Bank Feed Auto-reconciled,0.52,reconciled,no_receipt_needed,ACT-IN
+496fe1e5-31e4-49f7-821a-37afd3b25378,2026-03-30,NAB International Fee,NAB INTNL TRAN FEE - (MC) Bank Feed Auto-reconciled,0.55,reconciled,no_receipt_needed,ACT-IN
+0dc2c24d-407c-470a-bd23-6592f7e5789f,2026-03-30,NAB International Fee,NAB INTNL TRAN FEE - (MC) Bank Feed Auto-reconciled,0.56,reconciled,no_receipt_needed,ACT-IN
+1282d0ad-70db-4c70-b08c-0d609cf745ff,2026-03-30,NAB International Fee,NAB INTNL TRAN FEE - (MC) Bank Feed Auto-reconciled,0.58,reconciled,no_receipt_needed,ACT-IN
+abdc3df5-d623-4c2a-bd01-b7b488cbe9f5,2026-03-30,NAB International Fee,NAB INTNL TRAN FEE - (MC) Bank Feed Auto-reconciled,0.61,reconciled,no_receipt_needed,ACT-IN
+ce3e5b26-f6e6-4e5a-b6ed-a8d43950dd01,2026-03-30,NAB International Fee,NAB INTNL TRAN FEE - (MC) Bank Feed Auto-reconciled,0.64,reconciled,no_receipt_needed,ACT-IN
+6e751433-beca-4692-957d-b8d7e8ff00f9,2026-03-30,NAB International Fee,NAB INTNL TRAN FEE - (MC) Bank Feed Auto-reconciled,1.74,reconciled,no_receipt_needed,ACT-IN
+fcc68175-0f11-49aa-93d9-eae5c20a720a,2026-03-30,NAB International Fee,NAB INTNL TRAN FEE - (MC) Bank Feed Auto-reconciled,1.94,reconciled,no_receipt_needed,ACT-IN
+72acaec5-c1b6-4ddb-850b-80beda35981d,2026-03-30,NAB International Fee,NAB INTNL TRAN FEE - (SC) Bank Feed Auto-reconciled,1.96,reconciled,no_receipt_needed,ACT-IN
+1c4657f5-aa9a-48a1-b2c7-257c720f5575,2026-03-30,NAB International Fee,NAB INTNL TRAN FEE - (MC) Bank Feed Auto-reconciled,4.54,reconciled,no_receipt_needed,ACT-IN
+94dd6472-9192-44e4-820c-50e9cb58ba7e,2026-03-30,NAB International Fee,NAB INTNL TRAN FEE - (MC) Bank Feed Auto-reconciled,4.68,reconciled,no_receipt_needed,ACT-IN
+281b7212-669c-45fe-a556-498c4effdef7,2026-03-30,NAB International Fee,NAB INTNL TRAN FEE - (MC) Bank Feed Auto-reconciled,24.05,reconciled,no_receipt_needed,ACT-IN
+ab2abdcd-69e5-419c-81ed-2948ef9818e6,2026-03-30,News Pty Limited,NEWS PTY LIMITED SURRY HILLS,24,unreconciled,no_receipt_needed,ACT-IN
+2332cc25-9255-4474-8cc3-e9fc9c3b8f31,2026-03-30,NYX*MOLNyrt Budapest,NYX*MOLNyrt Budapest,0.87,unreconciled,no_receipt_needed,ACT-IN
+8b466968-0897-40d6-b984-66e45c49d113,2026-03-30,SEASONS SUPERMARKET 10 MALENY,SEASONS SUPERMARKET 10 MALENY,8.95,unreconciled,no_receipt_needed,ACT-FM
+1300d05c-1f8f-45a4-a0dd-2a4d57fe4e65,2026-03-30,SEASONS SUPERMARKET 10 MALENY,SEASONS SUPERMARKET 10 MALENY,51.01,unreconciled,no_receipt_needed,ACT-FM
+6c519625-328b-447d-aa70-4abcbae35828,2026-03-30,SQ *POCKY ASIAN RESTAURANMaleny,SQ *POCKY ASIAN RESTAURANMaleny,81.1,unreconciled,matched,ACT-FM
+3fa8a1b2-afc0-4a1f-8202-9c6c2d44ff12,2026-03-30,Uber,UBER *TRIP HELP.UBER.COM Amsterdam Bank Feed Auto-reconciled,7.57,reconciled,no_receipt_needed,ACT-IN
+c7e63812-49ba-4b34-999c-712285097739,2026-03-30,Uber,UBER *TRIP HELP.UBER.COM Amsterdam Bank Feed Auto-reconciled,15.79,reconciled,no_receipt_needed,ACT-IN
+52a7d1d8-920d-4aef-baa4-609fa7a40d9e,2026-03-30,Uber,UBER *TRIP HELP.UBER.COM Amsterdam Bank Feed Auto-reconciled,16.05,reconciled,no_receipt_needed,ACT-IN
+12c552f1-a9b1-46f2-93a8-5da4fe8db595,2026-03-30,Uber,UBER *TRIP HELP.UBER.COM Amsterdam Bank Feed Auto-reconciled,16.53,reconciled,no_receipt_needed,ACT-IN
+ea0209ba-041e-4bd5-be59-a55d0a9b1fd6,2026-03-31,Hinterland Aviation Cairns,Hinterland Aviation Cairns,426.36,unreconciled,unmatched,ACT-GD
+5a360d76-a8f3-4695-8eff-9e33e192bf87,2026-03-31,SEASONS SUPERMARKET 10 MALENY,SEASONS SUPERMARKET 10 MALENY,44.28,unreconciled,no_receipt_needed,ACT-FM
+2b66eee3-e69f-4712-bdcf-241db1e2f812,2026-03-31,SQ *GOLOSA Surry Hills,SQ *GOLOSA Surry Hills,22,unreconciled,no_receipt_needed,ACT-IN
