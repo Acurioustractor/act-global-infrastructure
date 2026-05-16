@@ -112,6 +112,7 @@ export const navStructure: SidebarNavGroup[] = [
           { href: '#today', label: 'Today', icon: Sun, divider: true },
           { href: '/finance/command', label: 'Money Command', icon: Compass, color: 'text-emerald-400', bg: 'bg-emerald-500/20' },
           { href: '/finance/workbench', label: 'Workbench', icon: ClipboardList, color: 'text-cyan-400', bg: 'bg-cyan-500/20' },
+          { href: '/finance/ai-suggestions', label: 'AI Suggestions', icon: Sparkles, color: 'text-emerald-400', bg: 'bg-emerald-500/20' },
           { href: '/finance/xero-page-copilot', label: 'Xero Page Copilot', icon: Bot, color: 'text-cyan-400', bg: 'bg-cyan-500/20' },
           { href: '/finance/dext-push-audit', label: 'Dext Push Audit', icon: ShieldAlert, color: 'text-red-400', bg: 'bg-red-500/20' },
 
