@@ -3,6 +3,29 @@
   "_comment": "ACT ecosystem Claude Code settings. Hooks enforce verification discipline so Claude can't claim 'fixed' without evidence. See .claude/skills/verify-fix/SKILL.md.",
 
   "hooks": {
+    "SessionStart": [
+      {
+        "_comment": "Stamp branch at session start so PreToolUse can detect mid-session branch switches from parallel sessions. Triggered by the 2026-05-17 ecosystem-digest incident: a parallel session stashed + switched branches mid-edit, silently moving untracked files.",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "git rev-parse --abbrev-ref HEAD 2>/dev/null > .claude/.session-branch-stamp || true"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "_comment": "Warn (do not block) if HEAD has moved since session start. Fires before any Edit/Write so we catch silent branch swaps from parallel sessions before writing to the wrong branch. Stamp file at .claude/.session-branch-stamp (gitignored).",
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "STAMP=.claude/.session-branch-stamp; if [ -f \"$STAMP\" ]; then CURRENT=$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo unknown); EXPECTED=$(cat \"$STAMP\" 2>/dev/null); if [ -n \"$EXPECTED\" ] && [ \"$CURRENT\" != \"$EXPECTED\" ]; then echo \"⚠️  BRANCH MISMATCH: session started on '$EXPECTED', HEAD now on '$CURRENT'. Another session likely switched branches — verify intent before writing.\" >&2; fi"
+          }
+        ]
+      }
+    ],
     "PostToolUse": [
       {
         "_comment": "After every TypeScript edit in command-center, run tsc --noEmit on just that app. Only fires when a .ts/.tsx/.mts file under apps/command-center/ is touched. Output is truncated to 30 lines so it doesn't blow context.",
