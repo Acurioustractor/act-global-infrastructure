@@ -12,6 +12,7 @@ import {
   ClipboardList,
   ShieldAlert,
   Bot,
+  Sparkles,
 } from 'lucide-react'
 import { TodayActionsHero } from '@/components/finance/TodayActionsHero'
 
@@ -33,6 +34,13 @@ const cards: Array<{
     description: 'One table for receipts, project codes, income/outgoing, and R&D review.',
     icon: ClipboardList,
     accent: 'from-cyan-500/10 to-cyan-500/5 border-cyan-500/30',
+  },
+  {
+    title: 'AI suggestions',
+    href: '/finance/ai-suggestions',
+    description: 'Review AI-graded project codes. Accept high-confidence with one click.',
+    icon: Sparkles,
+    accent: 'from-emerald-500/10 to-emerald-500/5 border-emerald-500/30',
   },
   {
     title: 'Dext push audit',
