@@ -31,6 +31,8 @@ import {
   ClipboardList,
   Bot,
   ShieldAlert,
+  ListChecks,
+  Activity,
 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 
@@ -111,6 +113,7 @@ export const navStructure: SidebarNavGroup[] = [
           // 2026-05-16 UX audit — grouped by job-to-do with 5 section dividers (ux-audit.md).
           { href: '#today', label: 'Today', icon: Sun, divider: true },
           { href: '/finance/command', label: 'Money Command', icon: Compass, color: 'text-emerald-400', bg: 'bg-emerald-500/20' },
+          { href: '/finance/actions', label: 'All Open Actions', icon: ListChecks, color: 'text-amber-400', bg: 'bg-amber-500/20' },
           { href: '/finance/workbench', label: 'Workbench', icon: ClipboardList, color: 'text-cyan-400', bg: 'bg-cyan-500/20' },
           { href: '/finance/ai-suggestions', label: 'AI Suggestions', icon: Sparkles, color: 'text-emerald-400', bg: 'bg-emerald-500/20' },
           { href: '/finance/xero-page-copilot', label: 'Xero Page Copilot', icon: Bot, color: 'text-cyan-400', bg: 'bg-cyan-500/20' },
@@ -137,6 +140,7 @@ export const navStructure: SidebarNavGroup[] = [
 
           { href: '#hub', label: 'Hub', icon: DollarSign, divider: true },
           { href: '/finance', label: 'All finance (operate hub)', icon: DollarSign, color: 'text-foreground', bg: 'bg-white/10' },
+          { href: '/admin/sync-health', label: 'Sync Health', icon: Activity, color: 'text-neutral-400', bg: 'bg-neutral-500/20' },
         ],
       },
     ],
