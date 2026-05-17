@@ -134,6 +134,11 @@ const cronScripts = [
     cron_restart: '5 9 * * 1', // Weekly Monday 9:05am AEST — verify GitHub repos + Vercel deploy URLs (before viewer build)
   },
   {
+    name: 'quarterly-rd-checklist',
+    script: 'scripts/create-quarterly-rd-checklist.mjs',
+    cron_restart: '0 9 1 1,4,7,10 *', // 9am AEST on 1 Jan / 1 Apr / 1 Jul / 1 Oct — quarterly R&D founder discipline checklist
+  },
+  {
     name: 'weekly-reconciliation',
     script: 'scripts/weekly-reconciliation.mjs',
     args: '',  // auto-detects current quarter

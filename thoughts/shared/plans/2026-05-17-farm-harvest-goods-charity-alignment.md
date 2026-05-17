@@ -9,7 +9,7 @@ review_needed: standard-ledger
 
 > Companion to `act-entity-migration-checklist-2026-06-30.md`. The migration checklist covers the operating entity cutover (sole trader → A Curious Tractor Pty Ltd). This doc covers the **three sub-entities** that sit alongside the Pty: The Farm (Nic's, separate), The Harvest (subsidiary), and the new Goods on Country charity. Each has distinct insurance, trademark, and R&D implications that the checklist doesn't yet pin down.
 
-## 1 · The four-entity picture (target state, post-30-June)
+## 1 · The five-entity picture (target state, post-30-June)
 
 ```
                    ┌─────────────────────────────────────┐
@@ -19,16 +19,30 @@ review_needed: standard-ledger
                    │  Family Trusts                      │
                    └──────────────┬──────────────────────┘
                                   │
-            ┌─────────────────────┼─────────────────────┐
-            │                     │                     │
-            ▼                     ▼                     ▼
-   ┌──────────────────┐  ┌──────────────────┐  ┌──────────────────────┐
-   │ Harvest Pty Ltd  │  │ Goods on Country │  │ A Kind Tractor Ltd   │
-   │ (subsidiary)     │  │ charity (NEW)    │  │ ACN 669 029 341      │
-   │ ACT majority +   │  │ structure TBD    │  │ dormant · NOT DGR    │
-   │ landlord minority│  │ — see §3         │  │ existing             │
-   │ via profit-share │  │                  │  │                      │
-   └──────────────────┘  └──────────────────┘  └──────────────────────┘
+            ┌─────────────────────┼──────────────────────────────┐
+            │                     │                              │
+            ▼                     ▼                              ▼
+   ┌──────────────────┐  ┌──────────────────────────┐  ┌──────────────────────┐
+   │ Harvest Pty Ltd  │  │ Goods Commercial Pty Ltd │  │ A Kind Tractor Ltd   │
+   │ (subsidiary)     │  │ (subsidiary — when scale │  │ ACN 669 029 341      │
+   │ ACT majority +   │  │  justifies; today, Goods │  │ dormant · NOT DGR    │
+   │ landlord minority│  │  trades inside parent)   │  │ FUTURE disposition   │
+   │ via profit-share │  │                          │  │ decision pending     │
+   └──────────────────┘  └────────────┬─────────────┘  └──────────────────────┘
+                                      │ brand licence
+                                      ▼
+                         ┌──────────────────────────┐
+                         │ The Butterfly Movement   │
+                         │ Ltd (DGR1 charity)       │
+                         │ Post-AGM-swap board:     │
+                         │ Kristy Bloomfield        │
+                         │ (Oonchiumpa)             │
+                         │ Nicholas Marchesi OAM    │
+                         │ Benjamin Knight          │
+                         │ Eloise Hall (continuity) │
+                         │ Holds: "Goods on Country"│
+                         │ DGR1 status + trademark  │
+                         └──────────────────────────┘
 
                    ┌─────────────────────────────────────┐
                    │  THE FARM (separate, Nic's)         │
@@ -111,81 +125,92 @@ review_needed: standard-ledger
 
 ---
 
-## 4 · The new Goods on Country charity — open decisions
+## 4 · Goods on Country DGR1 — Butterfly Movement transition (decided 2026-05-14)
+
+> **Correction 2026-05-17:** An earlier draft of this doc recommended "activate A Kind Tractor Ltd as the Goods charity (Option C)". That was wrong. The actual structure was already decided 2026-05-14 via the **Butterfly Movement Ltd transition** (Notion Decisions Log, status: Decided). The detail below replaces the prior Option A/B/C analysis.
 
 ### Status today
-- Goods on Country currently operates through Nic's sole trader
-- Trading via goodsoncountry.com.au — manufacturing + sales + distribution
-- Active Indigenous Procurement Policy JV being negotiated with Oonchiumpa (per memory note)
+- Goods on Country currently trades through Nic's sole trader (ABN 21 591 780 066); migrates to A Curious Tractor Pty Ltd at cutover, then to a dedicated Goods commercial vehicle as scale demands
+- goodsoncountry.com.au — manufacturing + sales + distribution
+- Active Indigenous Procurement Policy (IPP) discussions with Oonchiumpa
 - Co-design relationships with Fred Campbell (Oonchiumpa, Western Arrernte) + others
 - Product P&L: $550-850/unit institutional pricing, 50-55% gross margin at scale
 
-### The structural question
+### Decided structure — Butterfly Movement Ltd → Goods DGR1 home
 
-User flagged that a **new Goods charity entity is being established**. The structure isn't pinned down yet. Three viable shapes, each with different implications:
+The TABOO Foundation's existing charity vehicle, **The Butterfly Movement Ltd** (DGR1, established for the TABOO brand), is being transitioned to become Goods on Country's charitable home via **director swap at AGM** — NOT an entity close + new-entity registration.
 
-#### Option A — Goods charity as new PBI / DGR Item 1 entity
+**Mechanics**
+- Eloise Hall (TABOO) introduced 2026-05-12
+- John Cranwell (current chair) call held 2026-05-14 5pm AEST
+- Sonia (current board, legal/tax) — early meeting needed before mid-late June
+- AGM mechanics: 21-day AGM notice + 28-day director nomination notice; AGM cannot run before 30 Jun (FY close); earliest realistic AGM mid-July 2026
+- Adelaide visits 2026-06-01 + second-last week June
 
-- **Form:** New company limited by guarantee, registered with ACNC + ATO for DGR endorsement
-- **Pros:** Tax-deductible donations from public + philanthropic; eligible for DGR-only grants (philanthropy sees Goods as a separable mission)
-- **Cons:** ACNC oversight; can't distribute profits; needs independent board majority; charity-restricted trading rules
-- **R&D impact:** Goods commercial trading would need to live elsewhere (Pty Ltd subsidiary?) — charity can't be the primary commercial vehicle without compromising endorsement
-- **Trademark:** "Goods on Country" trademark held by charity; commercial entity licenses it
+**Proposed new board (after AGM swap)**
+- Kristy Bloomfield (Oonchiumpa, founding director — Indigenous leadership)
+- Nicholas Marchesi OAM
+- Benjamin Knight
+- Eloise Hall (continuity from TABOO board)
 
-#### Option B — Goods commercial Pty Ltd subsidiary + Indigenous-led licensing
+**Transferring at director swap**
+- DGR1 charitable status (the load-bearing asset)
+- Nothing else: no financial assets, no IP, no stock, no trademarks (precedent: TABOO retained these)
 
-- **Form:** New Pty Ltd, subsidiary of A Curious Tractor Pty Ltd OR JV with Oonchiumpa
-- **Pros:** Commercial flexibility, can pursue Indigenous Procurement Policy contracts (with Indigenous co-owner Oonchiumpa pushes JV >50% Indigenous-owned); Goods stays in trading economy
-- **Cons:** No tax-deductible donation pathway; less attractive for philanthropic capital
-- **R&D impact:** R&D eligible if novel product engineering + AI-augmented matching + co-design platform is documented; revenue defends claim
-- **Trademark:** "Goods on Country" trademark held by JV; ACT licenses brand if applicable
+**NOT transferring**
+- Butterfly Movement remains the same legal entity (continuity of DGR1 — a new entity would have to apply for DGR1 from scratch, ~6-12 months)
+- The TABOO brand stays with TABOO; Butterfly Movement post-swap operates under a brand-licence model for "Goods on Country" use
+- A Curious Tractor Pty Ltd remains the commercial parent
+- A Kind Tractor Ltd stays dormant (separate dormant-charity disposition decision needed — see open decisions §7)
 
-#### Option C — Hybrid: A Kind Tractor Ltd activated as Goods charity + Goods commercial as Pty sub
+### Goods commercial entity (separate from charity)
 
-- **Form:** Activate existing A Kind Tractor Ltd (currently dormant + NOT DGR) — apply for DGR, give it the Goods mission; separately incorporate Goods Commercial Pty as subsidiary of A Curious Tractor Pty
-- **Pros:** Uses existing dormant charity (cost saving); separates philanthropic Goods (training, community capacity-building, co-design) from commercial Goods (manufacturing, sales, distribution)
-- **Cons:** DGR endorsement application timing (~6-12 months); A Kind Tractor's existing constitution may need amendment; two entities to govern instead of one
-- **R&D impact:** Commercial sub is the R&D-eligible vehicle (novel product engineering); charity is operational community work
-- **Trademark:** "Goods on Country" master mark held by whichever entity has stronger continuity claim — leaning charity to protect community-facing identity
+Goods commercial trading does NOT live inside Butterfly Movement Ltd — DGR1 charities can't be the primary commercial vehicle without compromising endorsement. Commercial options being considered:
 
-### Recommendation (subject to Standard Ledger + lawyer review)
+- **Stay inside A Curious Tractor Pty Ltd** for now (simplest; consolidates with rest of ACT) — works until Goods volume justifies separation
+- **Goods Commercial Pty Ltd** subsidiary of A Curious Tractor Pty Ltd — incorporate when (a) IPP-eligible contract requires Indigenous JV partner ownership shape, or (b) annual revenue passes ~$500K and contamination of R&D base becomes a concern
+- **JV with Oonchiumpa** — depending on whether IPP procurement contracts require >50% Indigenous ownership, structure as JV with Oonchiumpa-led commercial entity holding majority
 
-**Option C — hybrid.** Reasoning:
+The trigger for incorporating Goods Commercial Pty is **whichever comes first: first IPP-eligible contract OR FY27 Q2 revenue review**.
 
-1. A Kind Tractor Ltd exists, is registered, has ACN. Activating it for Goods avoids new-entity incorporation cost + delay.
-2. Separating charity (community-facing co-design + training + capacity-building) from commercial (manufacturing + sales + distribution) is cleanest for both Indigenous Procurement Policy compliance AND R&D defensibility.
-3. The commercial Pty subsidiary can be the JV vehicle with Oonchiumpa (or community partner of choice) — solving Indigenous-ownership question for IPP contracts.
-4. A Kind Tractor Ltd's DGR endorsement application can run in parallel to Pty cutover (Standard Ledger to gauge realistic timeline — likely 6-12 months to DGR endorsement after constitution amendments).
-5. Trademark holds: A Kind Tractor (the charity, custodian of the mission) owns the "Goods on Country" trademark; Goods Commercial Pty Ltd licenses it under a written brand-licence agreement.
+### Brand-licence model
 
-**Decisions to lock**
+Per the decision, Goods on Country uses a brand-licence structure mirroring the TABOO precedent:
+- **Butterfly Movement Ltd** (DGR1 charity, post-swap board) is the **brand-licence grantor** for "Goods on Country" — receives charitable donations + uses funds for capacity-building, co-design, community training, community capacity work
+- **Goods commercial entity** (A Curious Tractor Pty Ltd today; Goods Commercial Pty Ltd later) is the **brand-licence holder** — manufactures, sells, distributes; pays a brand-licence fee back to Butterfly Movement annually OR per-unit royalty
+- Royalty structure to be negotiated as part of post-AGM director onboarding
 
-| Decision | Who | Deadline |
-|---|---|---|
-| **Confirm Option A/B/C** | Ben + Nic + Standard Ledger + community partners | End May 2026 |
-| **A Kind Tractor Ltd constitution amendments** (if Option C) | Lawyer (SL referral) | June 2026 |
-| **DGR endorsement application** (if pursuing) | Lawyer + Standard Ledger | June-July 2026 (lodge before cutover so review starts) |
-| **Goods Commercial Pty Ltd incorporation** (if Option B or C) | Lawyer | Before first IPP contract or first FY27 institutional sale |
-| **JV terms with Oonchiumpa** (if pursuing IPP-eligible JV) | Ben + Oonchiumpa leadership + lawyer | Tied to first IPP-eligible contract |
-| **"Goods on Country" trademark filing** | Lawyer (trademark attorney) | Before Goods Commercial Pty starts trading independently |
-
-### Insurance — Goods (whichever structure lands)
+### Insurance — Goods (charity side + commercial side)
 
 | Type | Held by | Why |
 |---|---|---|
-| **Product liability** | Goods commercial entity | Critical — manufactured products in homes including remote and vulnerable contexts. Should be high-limit ($20M+). |
-| **Public liability $20M** | Goods commercial entity + Goods charity (separately) | Co-design sessions, community visits, deployments |
-| **Cargo / freight** | Goods commercial entity | Stock in transit to remote communities |
-| **Stock + plant** | Goods commercial entity | Manufacturing equipment, raw materials, finished inventory |
-| **Professional indemnity** | Both entities | Design + advisory work to communities |
-| **Cyber** | Both entities | Community data + supplier data |
-| **Recall cover** | Goods commercial entity | Manufactured product recall is expensive; specialty cover |
+| **Public liability $20M** | Butterfly Movement post-swap + commercial entity (separately) | Charity holds for co-design / community visits / capacity events; commercial holds for deployments + buyer-side events |
+| **Product liability** | Commercial entity | Manufactured products in homes, including remote and vulnerable contexts. High-limit ($20M+). |
+| **Cargo / freight** | Commercial entity | Stock in transit to remote communities |
+| **Stock + plant** | Commercial entity | Manufacturing equipment, raw materials, finished inventory |
+| **Professional indemnity** | Both | Design + advisory work to communities |
+| **Cyber** | Both | Community data + supplier data |
+| **Recall cover** | Commercial entity | Manufactured product recall is expensive; specialty cover |
+| **Directors & Officers** | Butterfly Movement (post-swap board) | Standard for charity directors; first 30 days post-AGM |
 
 ### R&D implications
 
-- **Goods R&D-eligible activity:** Novel product engineering (HDPE structural design for extreme conditions), co-design methodology, AI-augmented buyer-matching platform, supply chain tech, identity-verification for Indigenous business supplier panel.
-- **Goods commercial revenue defends the R&D claim** — ATO sees a company with real commercial trading, not a grant-funded research outfit.
-- **Risk:** If Goods sits inside A Curious Tractor Pty Ltd (not in a subsidiary), the manufacturing volume could distort Pty's R&D share of total spend. Better to subsidiary it once volume is material (>$500K annual).
+- **R&D-eligible activity sits with the commercial entity**, not the charity. Novel product engineering (HDPE structural design for extreme conditions), co-design methodology platform, AI-augmented buyer-matching, identity-verification for Indigenous supplier panel.
+- **Goods commercial revenue defends the R&D claim** — ATO sees real commercial trading, not a grant-funded research outfit.
+- **Charity-side spend (training, community capacity, co-design facilitation) is NOT R&D-eligible** — it's charitable mission work, properly attributed to Butterfly Movement post-swap.
+- **Risk:** If commercial trading remains inside A Curious Tractor Pty Ltd as Goods volume scales, the manufacturing volume could distort Pty's R&D share of total spend. Better to subsidiary it once volume is material (~$500K annual or first IPP contract).
+
+### Decisions still to lock (post the Butterfly Movement parent decision)
+
+| Decision | Who | Deadline |
+|---|---|---|
+| **Goods commercial entity timing** — stay in A Curious Tractor Pty Ltd vs incorporate Goods Commercial Pty | Ben + Nic + SL | FY27 Q2 review OR first IPP contract |
+| **Brand-licence terms** — annual fee vs per-unit royalty + amount | Both boards (Butterfly post-swap + ACT) | Post-AGM (mid-July+) |
+| **JV with Oonchiumpa for IPP eligibility** — % split + governance + IPP threshold | Ben + Oonchiumpa leadership + lawyer | Tied to first IPP-eligible contract |
+| **AGM date confirmation** | John Cranwell + new board candidates | Once Sonia (legal/tax) meeting held |
+| **Sonia meeting (legal/tax review)** | Ben + Sonia | Before mid-late June 2026 (per current handoff) |
+| **A Kind Tractor Ltd disposition** — given Butterfly is now the DGR1 home, wind up AKT or keep dormant? | Ben + Nic + SL | Post-cutover (FY27 Q1) |
+| **"Goods on Country" trademark filing — held by Butterfly Movement post-swap (per brand-licence model)** | Lawyer (trademark attorney) | Before Goods Commercial Pty starts trading independently OR before AGM if continuity matters |
 
 ---
 
@@ -197,7 +222,7 @@ The user flagged trademark especially for Goods given the charity decision. Here
 |---|---|---|
 | **A Curious Tractor** | A Curious Tractor Pty Ltd | Parent operating entity; mark filed at registration |
 | **The Harvest** | A Curious Tractor Pty Ltd OR Harvest Pty Ltd subsidiary | If subsidiary will exit eventually, mark sits in parent to preserve continuity. If long-term standalone, sits in subsidiary. **Recommendation: parent.** |
-| **Goods on Country** | A Kind Tractor Ltd (if Option C activated) OR Goods Commercial Pty Ltd (if standalone) | Custodial brand. Charity holder preferred if pursuing DGR pathway — protects mission from commercial exit scenarios. |
+| **Goods on Country** | **Butterfly Movement Ltd** (post-AGM swap — the DGR1 charitable home) | Custodial brand sits with the charity per the brand-licence model (TABOO precedent). Commercial entity licenses the mark. Protects the mission from commercial exit scenarios. |
 | **Empathy Ledger** | A Curious Tractor Pty Ltd | Core methodology + platform; licensable to partners |
 | **JusticeHub** | A Curious Tractor Pty Ltd | Same |
 | **ALMA (Australian Living Map of Alternatives)** | A Curious Tractor Pty Ltd | Methodology mark |
@@ -207,7 +232,7 @@ The user flagged trademark especially for Goods given the charity decision. Here
 ### Filing priority (sequenced)
 
 1. **A Curious Tractor + The Harvest** — file as soon as Pty has ABN (May 2026). Cheap insurance against squatters.
-2. **Goods on Country** — file before Goods Commercial Pty Ltd starts trading or before first independent IPP-eligible contract. Lock to the eventual custodian (A Kind Tractor or Goods Commercial).
+2. **Goods on Country** — file in name of **Butterfly Movement Ltd** before the AGM director swap completes (so the mark is locked in the charity before any commercial expansion). Brand-licence agreement defines the commercial entity's use.
 3. **Empathy Ledger + JusticeHub** — file before either platform is licensed to a third party.
 4. **ALMA + LCAA + Aesthetics of Asymmetry** — file before any publication that makes them the foundation of a public-facing book or campaign.
 
@@ -223,21 +248,24 @@ The user flagged trademark especially for Goods given the charity decision. Here
 |---|---|
 | §1 Harvest lease — currently "ASSIGN via new lease in Pty name" | **Change to: lease counterparty = Harvest Pty Ltd subsidiary (newly incorporated), NOT parent A Curious Tractor Pty Ltd.** Update §D11.1 owner row. |
 | §1 Farm lease — currently "NEW LEASE with Nic as lessor, Pty as lessee" | Confirmed. Add to scope: who is legal lessor (Nic personally or land trust) — Standard Ledger decision needed. |
-| §6 Trademarks — currently "REGISTER in Pty name" for Goods | **Change to: REGISTER in custodian charity name (A Kind Tractor Ltd if Option C) OR in Goods Commercial Pty Ltd.** Separate trademark attorney engagement needed; not Standard Ledger scope. |
-| §6 IP assignment deed — currently "Nic assigns to Pty" | Confirmed for everything EXCEPT Goods brand-specific IP, which assigns to Goods Commercial Pty Ltd or A Kind Tractor Ltd depending on structure decision. |
-| §1 Goods on Country buyer relationships — currently "NOVATE" | **Reframe:** if Goods Commercial Pty Ltd is incorporated before 30 Jun, novate direct from sole trader to Goods Commercial Pty (not to A Curious Tractor Pty Ltd). If not, novate to A Curious Tractor Pty Ltd first, then second-stage transfer later. |
-| §8 Insurance — currently "PL $20M before Harvest lease signing" | Confirmed for Harvest. **Additionally**: Goods Commercial Pty Ltd needs PL $20M + product liability + recall cover before first independent sale. |
+| §6 Trademarks — currently "REGISTER in Pty name" for Goods | **Change to: REGISTER in Butterfly Movement Ltd name** (the DGR1 charitable home post-AGM-swap). Brand-licence agreement defines commercial entity's use. Separate trademark attorney engagement needed; not SL scope. |
+| §6 IP assignment deed — currently "Nic assigns to Pty" | Confirmed for everything EXCEPT Goods brand-specific IP, which sits with Butterfly Movement Ltd post-swap (no IP transferring from TABOO — per the decision). |
+| §1 Goods on Country buyer relationships — currently "NOVATE" | **Reframe:** in the short term, novate from sole trader → A Curious Tractor Pty Ltd at cutover (commercial entity remains inside parent). When Goods Commercial Pty Ltd is later incorporated (FY27 Q2 trigger), second-stage transfer to that entity. |
+| §8 Insurance — currently "PL $20M before Harvest lease signing" | Confirmed for Harvest. **Additionally**: Butterfly Movement post-swap needs PL $20M + D&O (charity side); Goods commercial entity (A Curious Tractor Pty Ltd today, Goods Commercial Pty Ltd later) needs PL $20M + product liability + recall cover before first independent institutional sale. |
 
 ---
 
 ## 7 · Open questions (gating decisions)
 
-- [ ] **Goods charity structure** — Option A, B, or C (recommendation: C — hybrid) — Ben + Nic + Standard Ledger
+- [ ] **Butterfly Movement AGM date confirmation** (current target: mid-July; needs Sonia legal/tax meeting first) — Ben + John Cranwell + Sonia
+- [ ] **Brand-licence terms** between Butterfly Movement (post-swap) and commercial entity — annual fee vs per-unit royalty + amount — both boards
+- [ ] **Goods commercial entity timing** — stay in A Curious Tractor Pty Ltd vs incorporate Goods Commercial Pty (trigger: FY27 Q2 review OR first IPP contract) — Ben + Nic + SL
 - [ ] **Goods JV with Oonchiumpa terms** — % split, governance, IPP-eligibility threshold (>50% Indigenous-owned) — Ben + Oonchiumpa
 - [ ] **Farm lessor legal form** — Nic personally vs land-holding trust — Nic + Standard Ledger
+- [ ] **Farm market rate determination** — arms-length defensible rate for ACT use of Farm — Standard Ledger
 - [ ] **Harvest profit-share waterfall details** — landlord trigger, dividend timing, exit — Ben + landlord + SHA lawyer
 - [ ] **Trademark attorney engagement** — outside Standard Ledger scope; need a referral
-- [ ] **A Kind Tractor Ltd DGR endorsement path** (if Option C) — Standard Ledger to gauge timeline + cost
+- [ ] **A Kind Tractor Ltd disposition** — given Butterfly Movement is now the DGR1 home for Goods, wind up AKT or keep dormant for a future mission? — Ben + Nic + SL (post-cutover)
 
 ---
 
