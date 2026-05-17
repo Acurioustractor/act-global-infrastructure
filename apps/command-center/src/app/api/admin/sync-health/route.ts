@@ -92,7 +92,15 @@ function categoriseAndScore(row: Omit<SyncRow, 'health' | 'category'>): SyncRow 
 export async function GET() {
   let raw: string
   try {
-    raw = execSync('pm2 jlist', { encoding: 'utf8', timeout: 5000 })
+    // maxBuffer raised — pm2 jlist output for 50+ processes can exceed default 1MB.
+    // Use absolute path because the Next.js dev server may not inherit a PATH that
+    // contains Homebrew (/opt/homebrew/bin) when started in some shells.
+    const pm2Bin = '/opt/homebrew/bin/pm2'
+    raw = execSync(`${pm2Bin} jlist`, {
+      encoding: 'utf8',
+      timeout: 10000,
+      maxBuffer: 1024 * 1024 * 20, // 20 MB
+    })
   } catch (err) {
     return NextResponse.json(
       { error: 'pm2 not available', detail: String(err) },
