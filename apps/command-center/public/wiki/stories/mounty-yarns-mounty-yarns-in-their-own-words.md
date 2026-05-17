@@ -15,7 +15,7 @@ el_v2_match_via: "org:mounty-yarns"
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/stories/mounty-yarns-mounty-yarns-in-their-own-words.md`.
-> Regenerated: `2026-05-16T10:35:30.861Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerated: `2026-05-17T00:54:41.198Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 # Mounty Yarns: In Their Own Words
 
 > Mounty Yarns Community

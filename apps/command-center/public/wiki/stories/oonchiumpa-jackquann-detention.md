@@ -11,7 +11,7 @@ tags: [oonchiumpa, detention, young-people, mparntwe, judges-on-country]
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/stories/oonchiumpa-jackquann-detention.md`.
-> Regenerated: `2026-05-16T10:35:30.861Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerated: `2026-05-17T00:54:41.198Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # Detention. That's not my home.
 

@@ -1013,7 +1013,7 @@ a.wikilink:visited {
   <ul style="list-style:none; display:flex; gap:1em; flex-wrap:wrap; color:#72777d;">
     <li>Content is compiled by LLM from raw sources</li>
     <li>Powered by the <a href="#" onclick="navigateTo('llm-knowledge-base'); return false;">LLM Knowledge Base</a> pattern</li>
-    <li>Last compiled: 2026-05-16</li>
+    <li>Last compiled: 2026-05-17</li>
   </ul>
 </div>
 
@@ -7265,6 +7265,175 @@ As AI capabilities grow, ACT maintains:
 - [[ai-community-engagement|AI Community Engagement]] — broader AI use in community contexts
 - [[transcript-analysis-method|Transcript Analysis Method]] — the concrete guardrail set for AI transcription and theme extraction`
   },
+  "alignment-loop-drift-2026-04-24-to-2026-05-14": {
+    slug: "alignment-loop-drift-2026-04-24-to-2026-05-14",
+    title: "Alignment Loop drift — 2026-04-24 to 2026-05-14",
+    domain: "synthesis",
+    links: ["act-alignment-loop","funder-alignment-2026-04-24","funder-alignment-2026-05-14","project-truth-state-2026-04-24","project-truth-state-2026-05-14","entity-migration-truth-state-2026-04-24","entity-migration-truth-state-2026-05-14","index"],
+    content: `# Alignment Loop drift — 2026-04-24 to 2026-05-14
+
+> Diff of the three [[act-alignment-loop|ACT Alignment Loop]] Phase 0 artefacts, 20 days after the 2026-04-24 baseline. Four artefacts compared:
+> - Q1 baseline: [[funder-alignment-2026-04-24|funder-alignment-2026-04-24]] → [[funder-alignment-2026-05-14|funder-alignment-2026-05-14]]
+> - Q2 baseline: [[project-truth-state-2026-04-24|project-truth-state-2026-04-24]] → [[project-truth-state-2026-05-14|project-truth-state-2026-05-14]]
+> - Q3 baseline: [[entity-migration-truth-state-2026-04-24|entity-migration-truth-state-2026-04-24]] → [[entity-migration-truth-state-2026-05-14|entity-migration-truth-state-2026-05-14]]
+
+---
+
+## TL;DR — what moved since 24 Apr
+
+- **Q3 entity migration: decision-making accelerated (5 major structural decisions from the 2026-05-05 Standard Ledger meeting), but no DB evidence any Week 1-3 execution items are done. ABN unissued, NAB unopened, Pty Xero absent. D&O insurance deadline is 10 days away (2026-05-24) with zero binding evidence.**
+- **Q1 funders: the ledger is materially more complete (14 → 24 entries, Q1 recommendations acted on). $10K cleared from receivables (Just Reinvest + Homeland paid). Centrecorp is still DRAFT at 90 days — no decision despite being called urgent at baseline. Minderoo deadline was yesterday.**
+- **Q2 projects: significant quality improvement — all 40+ missing canonical_slugs resolved, 10 new wiki articles, 75 codes (was 74), ACT-CT and ACT-BV moved to 4/4. ACT-PS wiki gap is the sole remaining authoring backlog item.**
+
+---
+
+## Q1 — Funder drift
+
+### What changed
+
+| Metric | 2026-04-24 | 2026-05-14 | Direction |
+|---|---|---|---|
+| \`funders.json\` version | v1 (updated 2026-04-09) | v2 (updated 2026-05-07) | ↑ |
+| \`funders.json\` entry count | 14 | 24 | ↑ +10 |
+| Total ACCREC outstanding | $507,350 | $497,240 | ↓ −$10,110 |
+| AUTHORISED ACCREC outstanding | $422,650 | $412,540 | ↓ −$10,110 |
+| DRAFT ACCREC outstanding | $84,700 (Centrecorp, 1 inv) | $84,700 (Centrecorp, 1 inv) | → |
+| Snow INV-0321 status | AUTH, 37d, date 2026-03-18 | AUTH, date now 2026-05-22 | ⚠️ date changed |
+| Centrecorp INV-0314 status | DRAFT 70d | DRAFT **90d** | ↓ +20d, no action |
+| Rotary INV-0222 status | AUTH **380d** | AUTH **399d** | ↓ +20d, no action |
+| Just Reinvest INV-0295 ($27,500) | AUTHORISED outstanding | PAID | ↑ cleared |
+| Homeland School INV-0303 ($4,950) | AUTHORISED outstanding | PAID | ↑ cleared |
+| PICC INV-0317 | $36,300 AUTH | $19,800 AUTH | ↑ partial payment −$16,500 |
+| New invoice: Sonas Properties | — | INV-0328 $37,290 AUTH | 🆕 |
+| New invoice: John Villiers Trust | — | INV-0327 $1,200 AUTH | 🆕 |
+| Funders absent from wiki | 7 (Centrecorp, Rotary, VFFF, SIH, QLD, StreetSmart, Westpac) | 0 of those 7 absent | ↑ all added |
+| Silent 90+ days count | 10+ | Not re-queried (GHL schema error) | — |
+| Novation templates in drafts | 0 | 1 | ↑ |
+
+### Material changes — Q1
+
+**Actions executed:** The Q1 synthesis recommended adding 7 absent funders to \`funders.json\`, upgrading Snow's stage from "warm" to "active-partner", and upgrading Paul Ramsay from "cold" to "warm". All three recommendations were executed within the 20-day window. This is the clearest evidence of the alignment loop driving action.
+
+**Stalled:** Centrecorp INV-0314 was called out at baseline as "the 10-minute Nic conversation" with clear options. Twenty days later it is still DRAFT. The Minderoo pitch (deadline 2026-05-15) names Centrecorp as live pipeline. If Lucy Stronach asked about it during due diligence, the answer was "still a draft."
+
+**New data surfaces:** Sonas Properties ($37,290 Harvest) and John Villiers Trust ($1,200) both appeared as new ACCREC invoices. Sonas is architecturally significant — it's the first financial trace of the Harvest subsidiary structure decided on 2026-05-05.
+
+**⚠️ Snow date anomaly:** INV-0321 shows date 2026-05-22 (future). Baseline recorded 2026-03-18. This warrants confirmation: was the invoice reissued? Has the migration conversation with Snow happened?
+
+---
+
+## Q2 — Project truth-state drift
+
+### What changed
+
+| Metric | 2026-04-24 | 2026-05-14 | Direction |
+|---|---|---|---|
+| Project codes in config | 74 | 75 | ↑ +1 (ACT-GS GrantScope) |
+| \`canonical_slug\` missing | 40+ | **0** | ↑ fully resolved |
+| Wiki project articles | 88 | 98 | ↑ +10 |
+| Score 4/4 count | 28 (38%) | ~33 (44%) | ↑ +5 estimated |
+| Score 3/4 count | 16 (22%) | ~11 (15%) | ↓ −5 estimated |
+| Score 2/4 count | 26 (35%) | ~27 (36%) | → +1 (ACT-GS new) |
+| Score 1/4 count | 4 (5%) | ~4 (5%) | → |
+| Score 0/4 count | 0 | 0 | → |
+| Active/ideation projects <2/4 | 0 | 0 | → criterion met |
+| ACT-CT Xero invoices | 0 | 5 | ↑ gained Xero tracking |
+| ACT-BV Xero invoices | 0 | 1 (+6 txn) | ↑ gained Xero tracking |
+| ACT-SM wiki match | False-negative (no slug) | ✅ found via canonical_slug | ↑ |
+| Authoring backlog real gaps | 1 (ACT-PS) | 1 (ACT-PS) | → unchanged |
+| Codes missing from config cleanup | ACT-APO, ACT-AMT, ACT-EFI, ACT-GCC | same 4 | → pending |
+
+### Material changes — Q2
+
+The baseline's most significant finding was structural rather than content-based: 40+ missing \`canonical_slug\` fields meant the scoring engine was producing false negatives. That is fully resolved. This single fix likely accounts for most of the estimated 4/4 improvement (+5), because many projects that previously appeared "wiki-missing" now correctly score their wiki dimension.
+
+**No regressions.** The acceptance criterion (no active project <2/4) was met at baseline and is met again.
+
+**ACT-PS is the persistent gap.** If the wiki article were written today (30-minute task), the authoring backlog would reach zero.
+
+---
+
+## Q3 — Entity migration drift (MOST IMPORTANT)
+
+### What changed
+
+| Metric | 2026-04-24 | 2026-05-14 | Direction |
+|---|---|---|---|
+| Days until cutover | 67 | **47** | ↓ (time shrinking) |
+| xero_tenant_id count | 1 | **1** | → NO CHANGE — Pty Xero still absent |
+| Pty NAB account in bank_statement_lines | 0 | **0** | → NO CHANGE |
+| Total ACCREC outstanding | $507,350 | $497,240 | ↓ −$10,110 |
+| DRAFT ACCREC count | 2 | 3 | ↑ (new 0-value DRAFTs; Centrecorp still only live one) |
+| DRAFT ACCREC live amount | $84,700 | $84,700 | → unchanged |
+| AUTHORISED ACCREC | $422,650 | $412,540 | ↓ −$10,110 |
+| Novation drafts in \`/drafts/\` | 0 | **1** | ↑ templates written |
+| New entity Xero playbook | 0 | **1** | ↑ new plan |
+| Section 11 decisions | 0 | **5 major decisions** | ↑ Standard Ledger 2026-05-05 |
+| Total checklist items tracked | 53 | ~58 | ↑ +5 (D11 items added) |
+| Status: DONE | 5 (9%) | 6 (~10%) | ↑ +1 (mapping export D11.4) |
+| Status: IN PROGRESS / PARTIAL | 7 (13%) | 8 (~14%) | ↑ +1 (novation template) |
+| Status: NOT STARTED / OPEN | 28 (53%) | 32 (~55%) | ↑ D11 items added as new NOT STARTED |
+| Status: NOT YET DUE / BLOCKED | 13 (25%) | 12 (~21%) | ↓ some become LATE |
+| D&O insurance binding | 🟡 DUE IN ~30 DAYS | 🔴 **DUE IN 10 DAYS — no binding** | ↓ ESCALATED |
+| ABN application | 🔴 OPEN (target Week 1) | 🔴 **OPEN/LATE** | ↓ target MISSED |
+| NAB account application | 🔴 OPEN (target "this week" 24 Apr) | 🔴 **OPEN/LATE** | ↓ target MISSED |
+| Shareholders Agreement | 🔴 NOT STARTED (Rule 4 said Week 1-2) | 🔴 **OPEN/LATE** | ↓ target MISSED |
+| Director IDs confirmed | ⚠️ UNVERIFIED | ⚠️ UNVERIFIED | → unchanged |
+| Centrecorp INV-0314 decision | 🔴 OPEN (70d) | 🔴 OPEN (**90d**) | ↓ stalled |
+| Rotary INV-0222 decision | 🔴 OPEN (380d) | 🔴 OPEN (**399d**) | ↓ stalled |
+| Harvest subsidiary structure | n/a | 🔴 DECISION MADE, NOT EXECUTED | 🆕 |
+| Knight Photography Phase 1 ($100K) | n/a | 🔴 PLAN WRITTEN, NOT EXECUTED | 🆕 |
+| Mapping export script | n/a | ✅ DONE (D11.4, 2026-05-05) | 🆕 |
+
+### Material changes — Q3
+
+**The decisions are real and important.** The 2026-05-05 Standard Ledger meeting produced well-documented decisions that change the shape of the migration:
+- The Harvest is a subsidiary, not a project line — this changes the complexity of the cutover.
+- Founder payroll at $10K/month — this triggers payroll setup the moment the Pty Xero opens.
+- The mapping export script is written and ran. 2,879 lines, 246 REVIEW items remaining.
+
+**The execution gap is widening, not closing.** Four "Week 1" actions from the 2026-04-24 baseline (NAB account, Director IDs, ABN application, insurance broker research) still show no DB evidence of completion 20 days later. These were due by 2026-05-01. The plan sequences everything else behind them. Until ABN issues, the Pty Xero can't open. Until Pty Xero opens, payroll can't start. Until NAB account is active, bank details can't go into novation letters. Until ABN + bank details are set, novation letters can't be sent. Until novation letters go out by end-May, the 30-June cutover is in jeopardy.
+
+**D&O insurance is the single most time-critical item in the whole migration.** Registered 2026-04-24. Standard practice = bind within 30 days = 2026-05-24. That is 10 days from now. No ACCPAY from an insurance broker in Xero. No broker selection recorded anywhere. If D&O is not bound by 2026-05-24, the directors have been operating without cover since registration. This is not a cutover-planning risk — it is an immediate governance risk.
+
+**🔴 Call-out: four items that should have flipped but haven't:**
+1. ABN — should be issued by now (was "first week of May"). Still 🔴.
+2. NAB business account — should be applied and onboarding by now. Still 🔴.
+3. Shareholders Agreement — Rule 4 explicitly said Week 1-2 (signed by ~2026-05-08). Still 🔴 and NOW LATE.
+4. D&O insurance — "within 30 days of registration" = 2026-05-24. Still 🔴 with 10 days.
+
+**🟢 What did flip correctly:**
+- Novation templates are now drafted (was 0 → 1 file).
+- Pty Xero launch playbook written.
+- Knight Photography plan written.
+- Sole trader → Pty mapping export script written and ran.
+- Standard Ledger meeting held 2026-05-05, 5 decisions documented.
+
+---
+
+## Cross-question verdict
+
+The alignment loop's value is visibility into gaps before they become crises. Here is the cross-question read:
+
+**Q1 (funders) → Q3 (migration):** The funder ledger now has 24 entries. Novation templates are drafted. But templates can't be sent without ABN and bank details — both of which depend on the ABN being issued. The chain is: ABN → Pty Xero → NAB bank details → complete novation letter → send by end May → clean 30-June cutover. The chain is broken at the first link.
+
+**Q2 (projects) → Q3 (migration):** The project truth-state is healthy and improving. The canonical_slug fix is a genuine infrastructure win that will compound over time. No project-level migration risks surfaced in Q2 that aren't already captured in Q3.
+
+**Overall trajectory:** Decisions accelerating, execution beginning to lag. The two-week window between now and end-May is the critical path for D&O, ABN, NAB, SHA, and novation letters. If all five clear by 2026-05-28, the 30-June cutover is achievable. If any of the first three don't clear by then, the cutover will need Rule 2 invoked (honest delay over silent mis-attribution).
+
+---
+
+## Backlinks
+
+- [[act-alignment-loop|ACT Alignment Loop — the cycle this synthesis belongs to]]
+- [[funder-alignment-2026-05-14|Q1 funder alignment — 2026-05-14]]
+- [[project-truth-state-2026-05-14|Q2 project truth-state — 2026-05-14]]
+- [[entity-migration-truth-state-2026-05-14|Q3 entity migration — 2026-05-14]]
+- [[funder-alignment-2026-04-24|Q1 baseline — 2026-04-24]]
+- [[project-truth-state-2026-04-24|Q2 baseline — 2026-04-24]]
+- [[entity-migration-truth-state-2026-04-24|Q3 baseline — 2026-04-24]]
+- [[index|ACT Wikipedia]]`
+  },
   "allan-palm-island": {
     slug: "allan-palm-island",
     title: "Allan Palm Island",
@@ -12953,6 +13122,243 @@ Each action names a specific file path + key, person + deadline, or script invoc
 - [[funder-alignment-2026-05-07|Q1 funder alignment]]
 - [[index|ACT Wikipedia]]`
   },
+  "entity-migration-truth-state-2026-05-14": {
+    slug: "entity-migration-truth-state-2026-05-14",
+    title: "Entity migration truth-state — 47 days to cutover, decision-making accelerated, execution still light",
+    domain: "synthesis",
+    links: ["act-alignment-loop","entity-migration-truth-state-2026-04-24","funder-alignment-2026-05-14","project-truth-state-2026-05-14","index"],
+    content: `# Entity migration truth-state — 2026-05-14
+
+> Second pass of the [[act-alignment-loop|ACT Alignment Loop]], Q3. Sources: the 10-section + §11 decisions checklist at \`thoughts/shared/plans/act-entity-migration-checklist-2026-06-30.md\`, Supabase (Xero invoices, transactions, bank lines, tenant state), \`thoughts/shared/drafts/**\`, and \`thoughts/shared/plans/**\`. Baseline: [[entity-migration-truth-state-2026-04-24|2026-04-24]].
+
+## Headline findings
+
+1. **47 days to cutover.** The baseline was 67 days. 20 days have passed. The plan's "Week 1" actions (NAB applied, Director IDs confirmed, ABN application filed, insurance brokers researched) were due by 2026-05-01. No DB evidence any of these have completed.
+
+2. **Standard Ledger meeting 2026-05-05 produced five major structural decisions.** Section §11 was added to the checklist post-baseline:
+   - **D11.1 — Harvest is a subsidiary**, not a project line. Separate Pty Ltd, Sonas principals as minority shareholders. Harvest lease in the subsidiary's name.
+   - **D11.2 — Founder payroll:** $10K/month base salary + director's loan + EOY settle into bonus/dividend/trust.
+   - **D11.3 — Dext per-project email forwarding** for top 12 codes.
+   - **D11.4 — Sole trader → Pty mapping spreadsheet.** Script written 2026-05-05; 2,879 lines, 246 REVIEW rows.
+   - **D11.5 — Knight Photography FY26 invoicing** (Option A confirmed).
+   These decisions are important and well-documented. They do not yet show DB evidence of execution.
+
+3. **ABN, NAB, and Pty Xero remain unopened.** Only one \`xero_tenant_id\` in the DB (\`786af1ed-e3ce-42fc-9ea9-ddf3447d79d0\` = Nic's sole trader, now 2,094 invoices). Only one bank account (\`NAB Visa ACT #8815\`). Target dates for both were "Week 1-3 of the plan" — May 2026. We are in Week 3 with no signal.
+
+4. **D&O insurance deadline is 10 days away.** Registered 2026-04-24. Standard practice is to bind D&O within 30 days of registration → deadline ~2026-05-24. No insurance broker ACCPAY invoice in Xero. No binding evidence anywhere. This is the most time-critical item on the whole checklist.
+
+5. **Novation letter template is now drafted.** \`thoughts/shared/drafts/novation-letter-templates.md\` exists (was ZERO at baseline). Two templates — grant funders and commercial counterparties — with Standard Ledger review note. The funder batch can be sent once ABN + NAB bank details are confirmed. This is real progress.
+
+6. **Outstanding receivables dropped $10,110: from $507,350 to $497,240.** Just Reinvest ($27,500) and Homeland School ($4,950) paid. PICC INV-0317 partial payment (-$16,500). New invoices added: Sonas Properties $37,290 (Harvest early-access), John Villiers Trust $1,200, Aleisha one more weekly ($450). Centrecorp $84,700 DRAFT unchanged — still no decision at 90 days.
+
+---
+
+## Items × evidence × risk — updated
+
+Days until 30 June 2026 cutover: **47 days**.
+
+### Section 1 — Entity setup
+
+| Item | Evidence of completion | Status | Change since baseline |
+|---|---|---|---|
+| Pty registered (ACN 697 347 676) | ✅ confirmed | ✅ DONE | → |
+| Directors appointed (Ben + Nic) | ✅ confirmed | ✅ DONE | → |
+| Shareholders set (Knight FT 50 / Marchesi FT 50) | ✅ confirmed | ✅ DONE | → |
+| Director IDs confirmed | No evidence; was "unverified" at baseline | ⚠️ UNVERIFIED | → unchanged |
+| ABN application (Pty) | No second xero_tenant, no ABN in DB | 🔴 OPEN/LATE | → target was "first week of May" — MISSED |
+| GST registration (Pty) | Paired with ABN | 🔴 OPEN | → |
+| Standard Ledger briefed | Confirmed; 2026-05-05 meeting held | ✅ DONE | ✅ meeting notes now captured in §11 |
+| Shareholders Agreement | No draft found; Rule 4 says Week 1-2 | 🔴 OPEN/LATE | → target was "Week 2 signed" — MISSED |
+
+### Section 2 — Banking and payment rails
+
+| Item | Evidence | Status | Change |
+|---|---|---|---|
+| NAB business account (Pty) | Only "NAB Visa ACT #8815" in bank_statement_lines | 🔴 OPEN/LATE | → target was "apply Week 1, onboarding in Week 2-3" |
+| Stripe account (Pty) | No artefact | 🔴 OPEN | → |
+| Auto-debits audit + migrate | No consolidated list | 🟡 OPEN | → |
+
+### Section 3 — Xero
+
+| Item | Evidence | Status | Change |
+|---|---|---|---|
+| Pty Xero file opens | 1 tenant only (sole trader) | 🔴 OPEN/LATE | → target "Week 3" now |
+| Pty Xero launch playbook written | \`thoughts/shared/plans/new-entity-xero-launch-playbook.md\` | 🟢 ARTEFACT READY | 🆕 new since baseline |
+| Final sole trader BAS (Q4 FY26) | Q4 runs Apr–Jun, due 28 July | ⏳ NOT YET DUE | → |
+
+### Section 4 — Grants and funders
+
+#### Outstanding receivables (updated)
+
+| Counterparty | Invoice | Amount | Status | Age | Change |
+|---|---|---|---:|---|---|
+| **Snow Foundation** | INV-0321 | $132,000 | AUTH | date now 2026-05-22 | ⚠️ date changed |
+| **Rotary eClub** | INV-0222 | $82,500 | AUTH | **399d** | 🔴 +20d, no action |
+| **Centrecorp** | INV-0314 | $84,700 | **DRAFT** | **90d** | 🔴 +20d, no action |
+| **PICC** | INV-0317 | $19,800 | AUTH | 87d | 🟢 partial payment −$16,500 |
+| **PICC** | INV-0324 | $77,000 | AUTH | 36d | → |
+| **Sonas Properties** | INV-0328 | $37,290 | AUTH | 8d | 🆕 NEW (Harvest subsidiary) |
+| **Regional Arts Australia** | INV-0301/0302 | $33,000 | AUTH | 150d | → +21d |
+| **Brodie Germaine Fitness** | INV-0325 | $15,400 | AUTH | 29d | → |
+| **Aleisha J Keating** | INV-0238..0307 | $12,150 | AUTH (×27) | 7d–315d | ⚠️ now 27 inv, oldest 315d |
+| **SMART Recovery** | INV-0322 | $2,200 | AUTH | 56d | → |
+| **John Villiers Trust** | INV-0327 | $1,200 | AUTH | 11d | 🆕 NEW |
+| **Just Reinvest** | INV-0295 | — | PAID | — | 🟢 PAID |
+| **Homeland School** | INV-0303 | — | PAID | — | 🟢 PAID |
+| **TOTAL OUTSTANDING** | | **$497,240** | | | ↓ −$10,110 from baseline |
+
+#### Planned novation work
+
+| Item | Evidence | Status | Change |
+|---|---|---|---|
+| Novation letter template | \`thoughts/shared/drafts/novation-letter-templates.md\` | 🟡 DRAFTED (pending Standard Ledger review) | 🆕 progress from 0 |
+| Novation letters to funders | None sent; template awaiting Standard Ledger review + ABN + bank details | 🔴 NOT SENT | → plan target: end May |
+| Enumeration of active grants | Q1 synthesis enumerated funders; §4 above covers receivables | 🟡 PARTIAL | → |
+
+### Section 5 — Commercial contracts
+
+| Item | Status | Change |
+|---|---|---|
+| Innovation Studio novation letters | 🔴 NOT STARTED | → |
+| JusticeHub partnerships | 🔴 NOT STARTED | → |
+| Goods on Country buyer relationships (19 active) | 🔴 NOT STARTED | → |
+| Harvest lease (in Harvest subsidiary name) | 🟡 DECISION MADE (D11.1); subsidiary not yet incorporated | 🆕 decision clarified |
+| Farm lease (Nic ↔ Pty) | 🔴 NOT STARTED | → |
+
+### Section 6 — IP
+
+| Item | Status | Change |
+|---|---|---|
+| IP assignment deed (Nic → Pty) | 🔴 NOT STARTED | → |
+| GitHub org transfer | 🔴 NOT STARTED | → |
+| Trademark registration (EL, JH, ALMA, Goods) | 🔴 NOT STARTED | → |
+
+### Section 7 — Insurance
+
+| Item | Required by | Status | Change |
+|---|---|---|---|
+| Public Liability $20M | Before Harvest lease | 🔴 NOT STARTED | → |
+| Workers Comp | First employee | ⏳ NOT YET DUE | → |
+| Professional Indemnity | 1 July 2026 | 🔴 NOT STARTED | → |
+| **Directors & Officers** | ~**2026-05-24** (10 days) | 🔴 URGENT — no binding evidence | → deadline approaching |
+| Cyber | Year 1 recommended | ⏳ DEFERRED | → |
+| Insurance broker selection | Was "Week 1" | 🔴 NOT STARTED/LATE | → |
+
+### Section 8 — Governance
+
+| Item | Status | Change |
+|---|---|---|
+| Shareholders Agreement | 🔴 NOT STARTED/LATE (Rule 4 said Week 1-2) | → |
+| Pty minute book | 🟡 UNVERIFIED | → |
+| ASIC first annual review | ⏳ NOT YET DUE (April 2027) | → |
+
+### Section 9 — Subscriptions and tooling
+
+| Item | Status | Change |
+|---|---|---|
+| Pty Xero file | 🔴 OPEN/LATE | → |
+| Full subscription audit | 🟡 DATA AVAILABLE | → |
+| All other SaaS transfers | 🔴 NOT STARTED | → |
+
+### Section 10 — Communications
+
+All items remain 🔴 NOT STARTED — correctly deferred to Week 9-10 per the plan sequence.
+
+### Section 11 — 2026-05-05 Standard Ledger decisions (NEW)
+
+| Decision | Artefact | Status |
+|---|---|---|
+| D11.1 — Harvest subsidiary structure | Draft Harvest subsidiary structure doc | 🔴 NOT STARTED |
+| D11.1 — Confirm Harvest lease counterparty | Per-session confirmation needed | 🟡 DECISION MADE, NOT EXECUTED |
+| D11.2 — Set up payroll on Pty Xero | Blocked on Pty Xero | ⏳ BLOCKED |
+| D11.2 — Open director loan accounts | Blocked on Pty Xero | ⏳ BLOCKED |
+| D11.2 — Decide FY26 founder pay catch-up | Standard Ledger consultation | 🔴 NOT STARTED |
+| D11.3 — Provision Dext per-project email addresses | No artefact | 🔴 NOT STARTED |
+| D11.4 — Clear untagged Xero review queue (~246 items) | No signal | 🔴 NOT STARTED |
+| D11.4 — Mapping export | **[x] DONE** — \`scripts/export-sole-trader-to-pty-mapping.mjs\`, 2,879 lines | ✅ DONE |
+| D11.5 — Knight Photography Phase 1 invoice ($100K) | Plan at \`thoughts/shared/plans/knight-photography-fy26-invoice-proposal.md\` | 🔴 NOT EXECUTED |
+| D11.5 — GST registration check for Knight Photography | Standard Ledger to advise | 🔴 NOT STARTED |
+
+---
+
+## Status summary
+
+| Status | Count | Share | Change from baseline |
+|---|---:|---:|---|
+| ✅ DONE | 6 | ~10% | ↑ +1 (mapping export D11.4) |
+| 🟡 IN PROGRESS / PARTIAL | 8 | ~14% | ↑ +1 (novation template drafted) |
+| 🔴 NOT STARTED / OPEN / LATE | 32 | ~54% | ↑ +4 (D11 items added, some Week 1-3 targets LATE) |
+| ⏳ NOT YET DUE / BLOCKED | 12 | ~20% | → |
+| **Total items tracked** | **58** | | ↑ +5 (D11 items added to scope) |
+
+---
+
+## Cutover risk map — updated
+
+### 🚨 Red (would materially damage 1 July launch if not done)
+
+1. **D&O insurance binding** — deadline ~2026-05-24 (10 days). No binding. No broker selected. If missed, Pty operates as a director-unprotected company from day one. Bind this week.
+2. **ABN + GST rego** — "first week of May" target missed. Every downstream item (Pty Xero, NAB verification, first Pty invoice) is blocked. Escalate to Standard Ledger today.
+3. **NAB business account (Pty)** — "apply this week" from 2026-04-24 = 20 days ago. No evidence of application. Blocks Stripe, subscriptions, bank details for novation letters.
+4. **Shareholders Agreement** — Rule 4 said Week 1-2 (by ~2026-05-08). MISSED. While Minderoo is in due diligence, the Pty has two equal shareholders with no SHA. Latent deadlock risk.
+5. **Pty Xero file opens** — blocked on ABN. Every invoicing, payroll, and financial artefact is blocked behind this.
+
+### 🟠 Amber (must ship by mid-May to hit 30 June cleanly)
+
+6. **Novation letters to funders** — template drafted; waiting for Standard Ledger review + ABN + NAB bank details. Window is closing. Plan says end-May. If ABN doesn't issue this week, the letters slip to June and the funder notifications compress.
+7. **Centrecorp INV-0314 DRAFT ($84,700) decision** — 90 days old. Minderoo pitch credibility. Only-Ben decision.
+8. **IP assignment deed** — plan says Week 4-5 (now). No lawyer engaged.
+9. **Shareholders Agreement** — already RED but also AMBER: escalate today.
+10. **Harvest subsidiary structure draft** — D11.1. No artefact. Sonas already has a $37,290 invoice on the books.
+11. **Knight Photography Phase 1 invoice ($100K)** — D11.5. Plan written but invoice not raised yet. R&D attribution depends on this.
+
+### 🟡 Yellow (recoverable post-cutover but best done by 30 June)
+
+12. Subscription audit output.
+13. Customer novations (Goods on Country buyers).
+14. Email/website footer updates.
+15. Stripe account for Pty.
+16. GitHub org transfer.
+
+---
+
+## Open questions — carried from baseline + new
+
+1. **Has the NAB Pty application been submitted?** No DB signal yet.
+2. **Has Standard Ledger filed the ABN application?** Target was "first week of May" — now past. No second Xero tenant, no ABN in any DB field.
+3. **Are Director IDs for Ben and Nic verified?** Still unverified from baseline.
+4. **Snow INV-0321 date change** — why is the invoice now dated 2026-05-22? Was the invoice reissued?
+5. **Has the migration notice been given to Snow Foundation** (call Sally/Alexandra)? Should have happened within 2 weeks of baseline.
+6. **Minderoo outcome** — 2026-05-15 deadline. What is the result?
+7. **Rotary eClub INV-0222 — chase or write off?** 399 days, no decision.
+8. **Harvest subsidiary incorporation timeline** — D11.1 decision made but no draft structure. Who is the lawyer for this?
+9. **R&D records review** — plan schedules end-May. Who is the dedicated R&D consultant?
+
+---
+
+## Sources queried
+
+| Source | Query / path | As-of |
+|---|---|---|
+| Plan | \`thoughts/shared/plans/act-entity-migration-checklist-2026-06-30.md\` | file (last_verified 2026-05-08) |
+| DB | \`xero_invoices\` WHERE ACCREC AND AUTHORISED/DRAFT AND amount_due>0 | 2026-05-14 |
+| DB | \`xero_invoices\` GROUP BY xero_tenant_id | 2026-05-14 |
+| DB | \`bank_statement_lines\` GROUP BY bank_account | 2026-05-14 |
+| DB | \`xero_invoices\` status/type summary | 2026-05-14 |
+| DB | \`xero_invoices\` WHERE ACCPAY AND contact_name ILIKE '%insurance%' etc. | 2026-05-14 — no insurance/ASIC ACCPAY |
+| Drafts | \`thoughts/shared/drafts/\` — migration keyword grep | 2026-05-14 — 1 novation draft found |
+| Plans | \`thoughts/shared/plans/\` — migration keyword grep | 2026-05-14 |
+
+---
+
+## Backlinks
+
+- [[act-alignment-loop|ACT Alignment Loop — the cycle this synthesis belongs to]]
+- [[entity-migration-truth-state-2026-04-24|Q3 entity migration — 2026-04-24 baseline]]
+- [[funder-alignment-2026-05-14|Q1 funder alignment — this pass]]
+- [[project-truth-state-2026-05-14|Q2 project truth-state — this pass]]
+- [[index|ACT Wikipedia]]`
+  },
   "episode-01-keyhole": {
     slug: "episode-01-keyhole",
     title: "Episode 01 — The Keyhole",
@@ -13787,6 +14193,102 @@ Things to do BEFORE 30 June 2026 because they're worth more at sole-trader margi
 
 ---
 
+## 11. Stakes & best practice — rules of the road for founder R&D
+
+> Added 2026-05-17 — codifying what's at risk if any of this gets sloppy and the discipline that keeps the claim defensible. Read at the start of every quarter.
+
+### What's actually at stake
+
+| Lever | Annual $ | Mechanism | Loseable if... |
+|---|---:|---|---|
+| **FY26 R&D refund** | $200-250K cash | Path C journal from sole trader → Pty | PSI re-characterisation kills personnel cost deduction; inadequate records kill activity claim |
+| **FY27+ ongoing R&D refund** | $70-100K/yr | Pty payroll + contractor invoicing at R&D allocation | Founders fail PSI tests; commercial revenue drops below 50%; trust used as service vehicle |
+| **Division 7A trap (downside)** | up to $50K tax | Director's loan deemed an unfranked dividend at marginal rate | Loan not documented, no repayment, no commercial interest, not settled in 7 years |
+| **Trust distribution defensibility** | unlimited downside | Trust receives dividends only; distributions flexible | Trust receives service invoices = ATO re-attributes income to active beneficiary |
+| **Going-concern + commercial-defence** | Whole R&D claim | ≥50% commercial revenue defends "company that does R&D" framing | Grants + R&D refund > commercial revenue → ATO sees "research outfit" not "company"; claim scrutiny escalates |
+
+Headline number: **getting the structure right is worth ~$200K refund in FY26 alone, ~$70-100K/yr after that, AND avoids ~$50K of Division 7A downside.** Getting it wrong on any single line in this section can take any of those off the table.
+
+### What kills the claim (the seven main traps)
+
+1. **PSI / PSB re-characterisation** — If Knight Photography (Ben) or Nic's sole-trader contractor invoicing fails the personal services income tests, the ATO treats the income as personal income of the founder and disallows the company deduction. **Pass criteria:** at least one of — (a) results test (paid for a result, supplies own tools, liable for defective work), (b) unrelated-clients test (income from ≥2 unrelated clients), (c) employment test (employs others), (d) business-premises test. Knight Photography needs to pass at least one per FY.
+2. **Division 7A on director's loans** — Loan to founder, not in writing, no commercial interest, no repayment schedule → deemed unfranked dividend at marginal rate. **Pass criteria:** written loan agreement at year of advance, benchmark interest rate (ATO publishes annually), minimum yearly repayment for 7 years OR fully repaid by year 7.
+3. **Below-market related-party transactions** — Farm rent below market, Pty/Harvest services agreement underpriced, Knight Family Trust receives sub-market dividends and gets propped up by other transfers. **Pass criteria:** every related-party transaction has a written agreement, market-rate evidence, and a paper trail of arms-length negotiation.
+4. **Inadequate contemporaneous records** — Calendar gaps, no commit log evidence, no R&D activity diary, no time allocation by project. **Pass criteria:** every R&D-allocated day has either a calendar entry, a commit, a meeting note, or a written output that ties to an R&D activity register entry.
+5. **Operational-hospitality contamination of R&D base** — If Harvest's cafe/retail/venue revenue or costs run through Pty's books instead of the subsidiary, the R&D share of total spend drops + ATO scrutinises. **Pass criteria:** Harvest subsidiary has its own Xero file; only the inter-entity services billing crosses (Pty bills Harvest for strategy time; Pty doesn't book Harvest's cafe sales).
+6. **Family trust used as service-provider** — Knight or Marchesi Family Trust invoices Pty for "consulting" → ATO re-attributes income back to the active beneficiary (the founder) at marginal rate, AND disallows the deduction at company level. **Pass criteria:** family trusts are passive shareholders receiving dividends only. Never invoice from trust. Never have trust enter service agreements.
+7. **Commercial revenue under 50% of total** — Pty earns mostly grants + R&D refund → ATO sees research outfit, scrutinises claim, may disallow. **Pass criteria:** target ≥60% commercial revenue (per §6 Revenue mix); never let it drop below 50% across a full FY.
+
+### Founder discipline — quarterly checklist
+
+Each founder runs this at the end of each quarter (target: 20 minutes):
+
+**Time + activity evidence**
+- [ ] Calendar export for the quarter — every working day accounted for (R&D activity / operational / commercial / leave / personal)
+- [ ] Git commit log export tied to R&D project codes (ACT-IN, ACT-EL, ACT-JH, ACT-CG, ACT-DO, ALMA-related)
+- [ ] R&D activity diary entry covering: what activity, what uncertainty was being resolved, what the technical / scientific hypothesis was, what outputs landed
+- [ ] R&D allocation % update if reality diverges from baseline (Ben 95% / Nic 40%)
+
+**Income + invoicing hygiene (Ben — Knight Photography)**
+- [ ] Quarter's KP invoice raised (Phase 2 quarterly cadence pre-cutover)
+- [ ] PSI tests pass-check — at least one client other than ACT-related entity OR results-test evidence (delivered to spec, own tools, defect liability)
+- [ ] GST returns lodged (KP is registered; monthly or quarterly per SL advice)
+- [ ] Invoice has ABN + GST broken out + project mix split
+
+**Income + invoicing hygiene (Nic — sole-trader pre-cutover, ABN post-cutover)**
+- [ ] Quarterly drawings reconciled vs $200K fair-market salary target
+- [ ] Any third-party contractor work invoiced under separate ABN with proper PSI defence
+- [ ] Director's loan account balance documented + within 7-year repayment ceiling
+
+**Trust hygiene**
+- [ ] Knight Family Trust: no service invoices issued (passive only); dividends received properly franked + resolved
+- [ ] Marchesi Family Trust: same
+- [ ] Trust resolutions for any income distributed filed
+
+**Pty cashflow + R&D maths**
+- [ ] Pty commercial revenue % of total — green if ≥60%, watch if 50-60%, escalate if <50%
+- [ ] R&D-eligible spend running total + estimated 43.5% refund (live tracker on \`/finance/command\` once issue #68 lands)
+- [ ] R&D pack grade (target PASS; WARN acceptable mid-FY; FAIL = escalate to SL)
+
+**Receipts + evidence**
+- [ ] R&D-eligible spend over $82.50 has tax invoice attached
+- [ ] R&D-eligible spend over $1,000 has detailed tax invoice with supplier ABN
+- [ ] Coverage % above 95% (live on \`/finance/reconciliation\`)
+
+### What "best practice" looks like in flight
+
+Day-to-day discipline that prevents the seven traps:
+
+- **Knight Photography invoices ACT only after PSI defence test is documented for the quarter** — never auto-renew; review each FY.
+- **Director's loan drawn against a written loan agreement, with benchmark interest accruing monthly** — never an undocumented "I'll pay it back" transfer.
+- **Farm rent paid Pty → Nic on a written lease at SL-confirmed market rate** — invoice issued monthly, paid by EFT, recorded in Xero.
+- **Pty → Harvest services agreement charges market hourly rate for founder strategy time** — billed monthly, separate from Harvest's own cafe/retail trading.
+- **R&D activity diary** — one paragraph per project per fortnight, written contemporaneously. Even rough notes are fine; gaps are not.
+- **Family trust distributions resolved annually** before 30 June with proper trustee resolution; never reactive after the fact.
+- **Commercial pipeline reviewed monthly** — if commercial share drops below 55%, escalate; below 50%, change the plan.
+
+### Red flags — escalate to Standard Ledger immediately
+
+- Any quarter where Ben's commit count drops > 50% vs baseline without explanation in the diary (R&D allocation argument weakens)
+- Any quarter where Pty's commercial revenue share drops below 50%
+- Any transfer Pty → founder that isn't tagged as payroll, director's loan, dividend, or invoice settlement
+- Any related-party transaction without a written agreement (Farm, Harvest services, Knight Photography terms)
+- Any month where Knight Photography invoices ONLY ACT-related entities AND fails the results test → PSI risk active
+- Any director's loan balance approaching the 7-year repayment ceiling
+
+### What we never do
+
+1. Never bill from a family trust to the Pty for services.
+2. Never set a related-party rate below SL-confirmed market.
+3. Never let a director's loan run undocumented or without commercial interest.
+4. Never run Harvest cafe/retail revenue through Pty's books.
+5. Never lodge an R&D claim without SL sign-off on the activity register + pack grade.
+6. Never amend a journal that's already been booked by SL without telling them first.
+7. Never use the personal credit card for an R&D-eligible expense without a tax invoice from the vendor.
+8. Never let a quarter close without a written R&D activity diary entry per active project.
+
+---
+
 ## Summary
 
 **One sentence per founder:**
@@ -14354,6 +14856,141 @@ Ordered by 2026-06-30 cutover risk. Each action names a specific file path + key
 
 - [[act-alignment-loop|ACT Alignment Loop]]
 - [[funder-alignment-2026-04-24|2026-04-24 baseline]]
+- [[index|ACT Wikipedia]]`
+  },
+  "funder-alignment-2026-05-14": {
+    slug: "funder-alignment-2026-05-14",
+    title: "Funder alignment — second pass, ledger expanded and receivables beginning to clear",
+    domain: "synthesis",
+    links: ["act-alignment-loop","funder-alignment-2026-04-24","index"],
+    content: `# Funder alignment — 2026-05-14
+
+> Second artefact of the [[act-alignment-loop|ACT Alignment Loop]], Q1 pass. Same four sources as baseline: \`xero_invoices\` (DB reality), \`ghl_contacts\` (communication state), \`wiki/narrative/funders.json\` (strategic narrative), and \`thoughts/shared/drafts + plans\` (in-flight work). Baseline: [[funder-alignment-2026-04-24|2026-04-24]].
+
+## Headline findings
+
+1. **\`wiki/narrative/funders.json\` has grown from 14 to 24 entries.** Version upgraded to v2 (updated 2026-05-07). All seven Q1-recommended additions are in. Three more were added 2026-05-07: Brisbane Powerhouse Foundation ($7,150 paid historical), John Villiers Trust ($1,200 newly invoiced), and a second Rotary eClub stub (duplicate of the existing \`rotary-eclub-outback\` entry — should be merged). The ledger that pitch-assembly tooling reads is materially more complete.
+
+2. **Total outstanding ACCREC dropped from $507,350 to $497,240.** Two funders paid: Just Reinvest ($27,500) and Homeland School ($4,950). PICC INV-0317 received a partial payment (down from $36,300 to $19,800). Three new invoices added: Sonas Properties Pty Ltd $37,290 (Harvest-related, ACT-HV), John Villiers Trust $1,200 (ACT-CORE), and one additional Aleisha Keating weekly retainer ($450). Net movement: ~$10K reduction.
+
+3. **Centrecorp INV-0314 ($84,700 DRAFT) is now 90 days old.** The baseline flagged this at 70 days and called for an immediate decision. Twenty days later it is still DRAFT. No action. Named in the Goods → Minderoo pitch as live pipeline. This is the single most consequential stalled decision on the receivable book.
+
+4. **Snow Foundation INV-0321 ($132,000) shows a future date: 2026-05-22.** The baseline recorded this invoice as dated 2026-03-18. The DB now shows 2026-05-22 — 8 days from now. Either the invoice was reissued with a new date, or the \`date\` field reflects a due date that has been extended. Worth confirming with Nic whether the invoice was amended and whether the migration conversation with Snow has happened.
+
+5. **Rotary INV-0222 ($82,500) is now 399 days unpaid.** No change in status. The baseline called for a chase-or-write-off decision. Still unresolved. Approaching the point where the sole trader's FY26 close-out will carry this as bad debt if it isn't chased now.
+
+6. **Sonas Properties Pty Ltd INV-0328 ($37,290) is new.** ACCREC invoice dated 2026-05-06, project ACT-HV. Not in baseline. Likely related to the Harvest early-access arrangement confirmed in the 2026-05-05 Standard Ledger conversation (D11.1 — Harvest as a subsidiary structure). This is a new receivable and does not have a \`funders.json\` entry.
+
+---
+
+## At-a-glance — every funder, every source
+
+Legend: 🟢 paid / current, 🟡 outstanding, ⚪ historical-only, ❔ wiki-only (no DB presence), ⚠️ drift-alert, 🆕 new since baseline
+
+| Funder | DB status | Total billed | Outstanding | \`funders.json\` stage | Named in plans? | Change since baseline |
+|---|---|---|---|---|---|---|
+| **The Snow Foundation** | 🟡 auth | $402,930 paid + $132K out | **$132,000** AUTH (future-dated 2026-05-22) | active-partner | ✅ | ⚠️ invoice date changed; Pty migration call still needed |
+| **Centrecorp Foundation** | 🟡 draft | $208,032 | **$84,700** DRAFT **90d** | active-partner | ✅ | 🔴 still DRAFT, 20 more days, no decision |
+| **Rotary eClub Outback Australia** | 🟡 overdue | $82,500 | **$82,500** AUTH **399d** | ask-pending | — | 🔴 20 more days, no decision |
+| **PICC** | 🟡 partial | $113,300 | **$96,800** (was $113K) | — | ✅ | 🟢 INV-0317 partial payment -$16.5K |
+| **Regional Arts Australia** | 🟡 auth | $33,000 | **$33,000** AUTH 150d | — | — | → no change, 21 more days outstanding |
+| **Sonas Properties Pty Ltd** | 🆕 auth | $37,290 | **$37,290** AUTH | — | ✅ (Harvest D11.1) | 🆕 new invoice, no wiki entry |
+| **Brodie Germaine Fitness** | 🟡 auth | $15,400 | **$15,400** AUTH | — | — | → no change |
+| **Aleisha J Keating** | 🟡 recurring | $12,150 | **$12,150** AUTH (27 inv) | — | ✅ (FM retainer) | ⚠️ 27 invoices now (was 26), oldest 315d |
+| **Just Reinvest** | 🟢 paid | $27,500 | **$0** | — | ✅ | 🟢 PAID since baseline |
+| **Homeland School** | 🟢 paid | $4,950 | **$0** | — | — | 🟢 PAID since baseline |
+| **SMART Recovery Australia** | 🟡 auth | $2,200 | **$2,200** AUTH | — | — | → no change |
+| **The John Villiers Trust** | 🆕 auth | $1,200 | **$1,200** AUTH | lapsed (stub 2026-05-07) | — | 🆕 new invoice; funders.json stub says "paid historically" — contradiction |
+| **Dusseldorp Forum** | 🟢 paid | $16,500 | $0 | active-partner | ✅ | → no change |
+| **Vincent Fairfax Family Foundation** | ⚪ historical | $50,000 | $0 | lapsed (stub 2026-04-24) | — | ✅ stub added |
+| **Social Impact Hub Foundation** | ⚪ historical | $26,730 | $0 | lapsed (stub 2026-04-24) | — | ✅ stub added |
+| **State of QLD DFSDSCS** | ⚪ historical | $22,000 | $0 | lapsed (stub 2026-04-24) | — | ✅ stub added |
+| **StreetSmart Australia** | ⚪ historical | $9,400 | $0 | active-partner (stub 2026-04-24) | — | ✅ stub added |
+| **Brisbane Powerhouse Foundation** | 🆕 historical | $7,150 | $0 | lapsed (stub 2026-05-07) | — | 🆕 new stub |
+| **Westpac Scholars Trust** | ⚪ historical | $3,080 | $0 | lapsed (stub 2026-04-24) | — | ✅ stub added |
+| **Paul Ramsay Foundation** | ⚪ historical | $7,469 | $0 | warm (upgraded from cold) | ✅ | ✅ stage updated |
+| **Minderoo Foundation** | ❔ ask-pending | — | — | ask-pending ($2.9M due 2026-05-15) | ✅ everywhere | ⚠️ deadline tomorrow — outcome unknown |
+| **QBE Catalysing Impact** | ❔ term-pending | — | — | term-sheet-pending | ✅ | → no change |
+| **June Canavan Foundation** | ❔ | — | — | active-partner (unverified) | — | → unverified, unchanged |
+| **Tim Fairfax Family Foundation** | ❔ | — | — | warm-cold | — | → no change |
+
+---
+
+## Money in flight — the 47-day countdown
+
+Three funder invoices remain open on the sole trader.
+
+### 🔴 Centrecorp Foundation INV-0314 — $84,700 DRAFT (90 days since 2026-02-13)
+
+- **Status:** still DRAFT. Baseline called for an immediate decision. No action in 20 days.
+- **Risk escalation:** the Minderoo pitch (deadline 2026-05-15) names this as live pipeline. If Lucy Stronach's team asks about it during due diligence, the answer needs to be "sent and payment in progress", not "still a draft".
+- **Decision options remain unchanged:** send now → sole trader receives $84,700; void + reissue from Pty after 1 July; or close out. This is an only-Ben/Nic decision.
+
+### 🔴 Rotary eClub Outback Australia INV-0222 — $82,500 AUTHORISED (399 days since 2025-04-10)
+
+- **Status:** unchanged. 399 days. No GHL communication history exists. No action taken.
+- **Risk:** 47 days until cutover. If not chased, this becomes a sole trader bad debt on the FY26 close-out BAS. A 400+ day unpaid AUTHORISED invoice is auditor-unfriendly.
+- **Action:** decide this week — chase or write off as bad debt.
+
+### 🟡 Snow Foundation INV-0321 — $132,000 AUTHORISED (date shows 2026-05-22)
+
+- **Status:** still AUTHORISED, $132,000 outstanding. Invoice date changed from 2026-03-18 to 2026-05-22. Possible the invoice was amended or extended.
+- **Migration note:** the Pty migration conversation with Snow should have happened by now (the checklist "call this week" action was from 2026-04-24). Confirm with Nic whether the migration notice has been given to Sally/Alexandra.
+
+---
+
+## New data surfaces — funders not in baseline
+
+### 🆕 Sonas Properties Pty Ltd — $37,290 AUTHORISED (2026-05-06)
+
+Not a traditional funder — the Harvest landlord. The 2026-05-05 Standard Ledger conversation confirmed that The Harvest will be a separate Pty Ltd subsidiary with Sonas's principals as minority shareholders. This ACCREC invoice likely reflects an early-access or deposit arrangement under the Harvest relationship. Needs a category in \`funders.json\` or a note in the wiki, and a disposition decision as part of the Harvest subsidiary incorporation.
+
+### 🆕 Brisbane Powerhouse Foundation — $7,150 paid historical
+
+Added to \`funders.json\` 2026-05-07 as a data-only stub. No current Xero activity, no GHL comm. Historical relationship only.
+
+### ⚠️ Rotary eClub duplicate
+
+\`funders.json\` now has two Rotary entries: \`rotary-eclub-outback\` (stage: ask-pending, added 2026-04-24) and \`rotary-eclub-outback-australia-9560\` (stage: active-partner, stub added 2026-05-07). These are the same entity. The second stub should be merged into the first and the duplicate removed. \`narrative-draft.mjs --funder rotary-eclub-outback-australia-9560\` would produce misleading output.
+
+### ⚠️ John Villiers Trust — DB contradiction
+
+\`funders.json\` says "Xero shows $1,200 paid historically" (stub dated 2026-05-07). But Xero shows INV-0327 as AUTHORISED ACCREC $1,200 dated 2026-05-03 — not paid. The stub was written inaccurately. Amount is small but the discrepancy should be corrected.
+
+---
+
+## Minderoo deadline — tomorrow (2026-05-15)
+
+\`funders.json\` records the Minderoo ask deadline as 2026-05-15 ($2.9M via Lucy Stronach). As of this synthesis (2026-05-14), the outcome of that submission is unknown. Minderoo is the largest single ask in the funder ledger. If accepted, it would contract directly to the Pty (per the migration checklist). If rejected or deferred, the receivable book and migration cash-flow plan need updating. **Flag for next week's synthesis pass.**
+
+---
+
+## Actions — priority order
+
+1. **Decide Centrecorp INV-0314** — 90 days DRAFT, Minderoo pitch credibility at stake. 10-minute Nic conversation. Today.
+2. **Decide Rotary INV-0222** — 399 days unpaid. Chase or write off. Week of 2026-05-14.
+3. **Confirm Snow INV-0321 date change** — was 2026-03-18, now shows 2026-05-22. Confirm if amended and whether migration notice was given.
+4. **Merge Rotary duplicate in \`funders.json\`** — remove \`rotary-eclub-outback-australia-9560\`, consolidate into \`rotary-eclub-outback\`.
+5. **Correct John Villiers Trust stub** — says "paid historically", actual DB shows AUTHORISED outstanding.
+6. **Add Sonas Properties** — either as a \`funders.json\` entry (counterparty, not a funder) or reference in the Harvest subsidiary plan.
+7. **Check Minderoo outcome** — 2026-05-15 deadline passes tomorrow; next synthesis should record result.
+
+---
+
+## Sources queried
+
+| Source | Query / file | Rows / notes | As-of |
+|---|---|---|---|
+| \`xero_invoices\` | ACCREC, AUTHORISED+DRAFT, amount_due > 0 | 38 rows | 2026-05-14 |
+| \`xero_invoices\` | status+type GROUP BY | summary | 2026-05-14 |
+| \`wiki/narrative/funders.json\` | all entries | 24 entries, v2, updated 2026-05-07 | 2026-05-14 |
+| \`thoughts/shared/drafts/\` | migration-keyword grep | 1 novation draft | 2026-05-14 |
+| \`ghl_contacts\` + \`communications_history\` | funder-tagged, days_silent | query schema error — GHL comms not updated this pass | — |
+
+## Backlinks
+
+- [[act-alignment-loop|ACT Alignment Loop — the cycle this synthesis belongs to]]
+- [[funder-alignment-2026-04-24|Q1 funder-alignment — 2026-04-24 baseline]]
 - [[index|ACT Wikipedia]]`
   },
   "funding-transparency": {
@@ -24936,6 +25573,156 @@ Active projects where the wiki has a claim but no money is tagged against the co
 
 - [[act-alignment-loop|ACT Alignment Loop]]
 - [[project-truth-state-2026-04-24|2026-04-24 baseline]]
+- [[index|ACT Wikipedia]]`
+  },
+  "project-truth-state-2026-05-14": {
+    slug: "project-truth-state-2026-05-14",
+    title: "Project truth-state — 75 codes × 4 sources, second pass",
+    domain: "synthesis",
+    links: ["act-alignment-loop","project-truth-state-2026-04-24","funder-alignment-2026-05-14","index"],
+    content: `# Project truth-state — 2026-05-14
+
+> Second pass of the [[act-alignment-loop|ACT Alignment Loop]], Q2. Same four sources as baseline: \`config/project-codes.json\` (source-of-truth for codes), \`wiki/projects/**\` (narrative), Supabase (\`xero_invoices\`, \`xero_transactions\`, \`bank_statement_lines\`, \`projects\`, \`org_projects\`), and codebase grep across \`apps/\` \`scripts/\` \`config/\`. Baseline: [[project-truth-state-2026-04-24|2026-04-24]].
+
+## Headline findings
+
+1. **The canonical_slug gap is fully closed.** The baseline's most significant finding was 40+ codes in \`config/project-codes.json\` without a \`canonical_slug\`, making wiki coverage appear worse than it was. As of 2026-05-14, all 75 codes have a \`canonical_slug\`. This was the fix that enables Phase-1 automation of this synthesis — the scoring engine can now match code to wiki article cleanly.
+
+2. **75 projects now (was 74).** One new active project added to config: \`ACT-GS\` (GrantScope / CivicGraph). Status: active. The codebase grep shows \`ACT-CG\` with 32 references in apps/scripts/config — these likely overlap with the GrantScope scope. Wiki article exists at slug \`grantscope\`.
+
+3. **98 wiki project articles (was 88).** Ten new articles added since 2026-04-24. These resolve several previously "wiki-missing" scores. Combined with the canonical_slug fix, the 4/4 count has increased.
+
+4. **ACT-CT (ConFit Pathways) and ACT-BV (Black Cockatoo Valley) gained Xero presence.** ACT-CT now has 5 Xero invoices (was 0 at baseline — listed as "xero: missing"). ACT-BV now has 1 invoice + 6 transactions (baseline: transactions only, no invoices). Both projects move from 3/4 to 4/4.
+
+5. **ACT-PS (PICC On Country Photo Studio) wiki gap persists.** Still the only active studio project with DB activity and no dedicated wiki article. \`xero_invoices\` shows 10 invoices + 3 transactions for ACT-PS. Codebase grep shows 62 references. This is the sole authoring backlog item carried from the baseline.
+
+6. **ACT-SM (SMART Recovery) false-negative resolved.** The baseline scored this 3/4 (wiki false-negative: article existed at \`wiki/projects/smart-recovery/smart-recovery.md\` but config lacked \`canonical_slug\`). With \`canonical_slug: smart-recovery\` now in place, ACT-SM scores 4/4.
+
+## Score distribution (estimated)
+
+| Score | Count | Share | Change from baseline |
+|---|---:|---:|---|
+| **4/4** | ~33 | 44% | ↑ +5 (ACT-CT, ACT-BV, ACT-SM + canonical_slug resolving at least 2 more) |
+| **3/4** | ~11 | 15% | ↓ −5 |
+| **2/4** | ~27 | 36% | ↑ +1 (new ACT-GS in config, not yet fully verified) |
+| **1/4** | ~4 | 5% | → unchanged |
+| **0/4** | 0 | 0% | → unchanged |
+| **Total** | **75** | | |
+
+_Note: A full scripted re-score would require a \`/tmp/synthesize.mjs\` run against the updated canonical_slug fields and 98-article wiki. The distribution above is an estimated delta from the confirmed point changes. The acceptance criterion (no active/ideation project at <2/4) is assessed below._
+
+## Acceptance criteria
+
+| Criterion | Met? | Evidence |
+|---|---|---|
+| Every active/ideation project scores ≥2/4 | ✅ | No active or ideation project has fewer than 2 sources (all have at minimum config + DB row) |
+| Any project at 0/4 flagged for retirement | ✅ | No 0/4 projects (same as baseline) |
+| DB activity but no wiki surfaces as authoring backlog | ✅ | ACT-PS is the one real gap |
+
+---
+
+## At-a-glance — what changed since baseline
+
+### Confirmed moves to 4/4
+
+| Code | Name | What changed |
+|------|------|---|
+| ACT-CT | ConFit Pathways | Gained Xero invoices (5 inv). Was 3/4 missing Xero. Now 4/4. |
+| ACT-BV | Black Cockatoo Valley | Gained Xero invoice (1 inv; 6 txn already existed). Was 3/4 missing Xero invoices. Now 4/4. |
+| ACT-SM | SMART | canonical_slug added. Wiki match now works. Was 3/4 (wiki false-neg). Now 4/4. |
+
+### Confirmed moves to higher score via canonical_slug fix
+
+All codes that were false-negatives in the wiki dimension — previously scoring one point lower than actual — now score correctly. ACT-SM is the explicitly documented case. Others may follow a similar pattern but require a scripted re-score to enumerate.
+
+### New project added: ACT-GS GrantScope (CivicGraph)
+
+- Config: active, canonical_slug: grantscope
+- Wiki: \`wiki/projects/grantscope\` (article exists based on slug)
+- DB: ACT-GS appeared in \`org_projects\` / \`projects\` table (confirmed in DB union query)
+- Codebase: \`ACT-CG\` has 32 references which may overlap or be the prior code for this project
+- Xero: no \`ACT-GS\` tagged invoices yet (project may be early-stage)
+- Estimated score: 3/4 (config + wiki + DB row, no Xero yet)
+
+### Persistent gap: ACT-PS wiki article
+
+The one real authoring backlog item from the baseline is unchanged. ACT-PS (PICC On Country Photo Studio) has:
+- 10 Xero invoices, 3 transactions
+- 62 codebase references (up from 47)
+- A \`projects\` / \`org_projects\` DB row
+- **No wiki article at \`wiki/projects/picc/picc-on-country-photo-studio.md\`**
+
+The adjacent article \`picc-photo-kiosk.md\` covers a different concept (the kiosk/server, not the on-Country photo studio). Adding the PS article is a 30-minute task and brings all active studio projects to 4/4 wiki coverage.
+
+---
+
+## Xero tracking coverage — what's new
+
+### Projects that gained invoices since baseline
+
+| Code | Baseline Xero | Current Xero | Change |
+|------|------|------|---|
+| ACT-CT | 0 inv | 5 inv | 🟢 gained Xero tracking |
+| ACT-BV | txn:6 only | inv:1 + txn:6 | 🟢 gained invoice tracking |
+| ACT-IN | inv:990 | inv:990 | → static |
+| ACT-GD | inv:218 | inv:269 | ↑ +51 invoices |
+| ACT-PI | inv:13 | inv:18 | ↑ +5 invoices |
+| ACT-CORE | inv:9 | inv:13 | ↑ +4 invoices (incl. John Villiers Trust $1,200) |
+
+### Projects still missing Xero tracking (active, wiki + DB present)
+
+| Code | Name | Tier | Likely reason |
+|------|------|------|---|
+| ACT-CS | Civic Scope | satellite | Budget runs through ACT-IN |
+| ACT-CM | CAMPFIRE | satellite | Brodie-led, billing may route through his entity |
+| ACT-RT | Redtape | studio | Low cost base, art installation |
+| ACT-JC | JusticeHub Centre of Excellence | satellite (ideation) | Not yet operational |
+| ACT-TR | Treacher | studio (ideation) | Not yet operational |
+| ACT-GS | GrantScope | active | Early stage, no invoices yet |
+
+---
+
+## Config hygiene carried from baseline
+
+### Recommended removals (still pending)
+
+| Code | Name | Reason |
+|------|------|---|
+| ACT-APO | Active Projects Overview | Self-described "Notion overview page — not a real project" |
+| ACT-AMT | API Migration Test | Self-described "test project" |
+| ACT-EFI | Economic Freedom Initiative | Archived, no traces |
+| ACT-GCC | Global Community Connections | Archived, 2 code refs only |
+
+These four carry over from the baseline recommendation. With canonical_slugs now fixed, these are lower priority — but they add noise to the 75-code universe. Safe to remove from config with a \`git mv\` to archive.
+
+---
+
+## Derived actions
+
+1. **Write \`wiki/projects/picc/picc-on-country-photo-studio.md\`** — the one real authoring gap. 10 invoices + 62 code refs + no article. 30-minute task.
+2. **Run a scripted full re-score** — now that all \`canonical_slug\` fields are populated, \`scripts/synthesize-project-truth-state.mjs\` can run cleanly. This would give exact score distribution rather than the estimates above.
+3. **Confirm ACT-GS / ACT-CG relationship** — the new GrantScope config uses \`ACT-GS\` but the codebase grep shows 32 references to \`ACT-CG\`. If CivicGraph was the old code and GrantScope is the new, the old references should migrate.
+4. **Decide on 4 ghost codes** — ACT-APO, ACT-AMT, ACT-EFI, ACT-GCC. Remove from config once actioned.
+
+---
+
+## Sources queried
+
+| Source | Query / path | As-of |
+|---|---|---|
+| \`config/project-codes.json\` | parsed (75 projects, canonical_slug checked) | 2026-05-14 |
+| \`wiki/projects/**\` | find, count | 98 .md files |
+| \`xero_invoices\` | GROUP BY project_code | 2026-05-14 |
+| \`xero_transactions\` | GROUP BY project_code | 2026-05-14 |
+| \`bank_statement_lines\` | GROUP BY project_code | 2026-05-14 |
+| \`projects\` + \`org_projects\` | UNION on code | 2026-05-14 |
+| codebase grep | \`ACT-[A-Z0-9]+\` over apps/ scripts/ config/ | 2026-05-14 |
+
+## Backlinks
+
+- [[act-alignment-loop|ACT Alignment Loop — the cycle this synthesis belongs to]]
+- [[project-truth-state-2026-04-24|Q2 project truth-state — 2026-04-24 baseline]]
+- [[funder-alignment-2026-05-14|Q1 funder-alignment — this pass]]
 - [[index|ACT Wikipedia]]`
   },
   "projects/act-farm/README": {
@@ -35777,7 +36564,7 @@ That is what Nigel's postcard does in a judge's hand. That is what the entire AC
     links: [],
     content: `# Wiki Health Report — 2026-04-07
 
-**Articles:** 309
+**Articles:** 313
 **Wikilinks:** 753
 
 ## Summary
@@ -37039,7 +37826,7 @@ function showMainPage() {
   // ── FOOTER ────────────────────────────────────────
   html += '<div class="mp-stats" style="text-align:center;font-size:12px;color:#888;border-top:1px solid #e5e5e5;padding-top:1em;margin-top:1em;">';
   html += 'Tractorpedia is maintained using the <a href="#llm-knowledge-base" class="wikilink" onclick="navigateTo(\'llm-knowledge-base\'); return false;">LLM Knowledge Base</a> pattern. ';
-  html += 'Photos live from <a href="https://www.empathyledger.com" target="_blank">Empathy Ledger</a>. Last compiled: 2026-05-16.';
+  html += 'Photos live from <a href="https://www.empathyledger.com" target="_blank">Empathy Ledger</a>. Last compiled: 2026-05-17.';
   html += '</div>';
 
   document.getElementById('mw-content-text').innerHTML = html;
@@ -38001,6 +38788,18 @@ function showArtPortfolio() {
       }
     });
   });
+  // Now async-load real photos for each card. fetchELMedia(slug) handles project_id + filename fallback.
+  artProjects.forEach(function(p) {
+    fetchELMedia(p.slug, 1).then(function(media) {
+      let el = document.getElementById('art-thumb-' + p.slug);
+      if (!el) return;
+      if (media && media.length > 0) {
+        el.innerHTML = '<img src="' + media[0].url + '" style="width:100%;height:100%;object-fit:cover;" alt="' + (media[0].title || p.name) + '">';
+      } else {
+        el.innerHTML = '<div style="text-align:center;padding:20px;"><div style="font-size:11px;text-transform:uppercase;letter-spacing:0.05em;color:#aaa;">photos coming soon</div><div style="font-size:11px;color:#bbb;margin-top:4px;">tag in Empathy Ledger</div></div>';
+      }
+    });
+  });
 }
 
 // ============================================================
@@ -38010,6 +38809,10 @@ function handleHash() {
   let hash = window.location.hash.substring(1);
   if (!hash) {
     showMainPage();
+    return;
+  }
+  if (hash === 'art-portfolio') {
+    showArtPortfolio();
     return;
   }
   if (hash === 'art-portfolio') {

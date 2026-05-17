@@ -15,7 +15,7 @@ el_v2_match_via: "org:bg-fit"
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/stories/bg-fit-danielle-germaine-recording.md`.
-> Regenerated: `2026-05-16T10:35:30.861Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerated: `2026-05-17T00:54:41.198Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 # Danielle Germaine. - Recording
 
 > Danielle Germaine
