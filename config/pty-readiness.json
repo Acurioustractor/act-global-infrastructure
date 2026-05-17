@@ -1,0 +1,227 @@
+{
+  "_schema": "Pty Readiness — cutover-critical items for 30 Jun 2026. Edit `status` per item: 'done' | 'doing' | 'todo' | 'blocked'. `evidence_url` is optional. Each git commit of this file leaves an audit trail.",
+  "entity": "A Curious Tractor Pty Ltd (ACN 697 347 676)",
+  "cutover_date": "2026-06-30",
+  "items": [
+    {
+      "id": "pty-incorporated",
+      "label": "Pty Ltd incorporated with ASIC",
+      "category": "registration",
+      "owner": "standard-ledger",
+      "priority": "critical",
+      "due": "2026-04-24",
+      "status": "done",
+      "evidence": "ACN 697 347 676 registered 2026-04-24 (per wiki/decisions/act-core-facts.md; ASIC extract authoritative)"
+    },
+    {
+      "id": "knight-trust-tfn",
+      "label": "Knight Family Trust TFN sent to Standard Ledger",
+      "category": "registration",
+      "owner": "ben",
+      "priority": "critical",
+      "due": "2026-05-15",
+      "status": "done",
+      "evidence": "Sent to Vanessa 2026-05-15 (closed 31-day cascade blocker)"
+    },
+    {
+      "id": "sl-ignition-signed",
+      "label": "Standard Ledger Ignition proposal signed",
+      "category": "registration",
+      "owner": "ben",
+      "priority": "critical",
+      "due": "2026-05-23",
+      "status": "todo",
+      "evidence": "Reminder fired 2026-05-13; covers Knight FT + Marchesi FT + ACT Pty + R&D + quarterly BAS @ $75/mo"
+    },
+    {
+      "id": "form-201-signed",
+      "label": "Form 201 + initial resolutions + share certificates + bank-account resolution signed",
+      "category": "registration",
+      "owner": "ben",
+      "priority": "critical",
+      "due": "2026-05-23",
+      "status": "todo",
+      "evidence": "Returned to Vanessa Ordoñez at Standard Ledger"
+    },
+    {
+      "id": "abn-gst-issued",
+      "label": "ABN + GST registration issued for Pty",
+      "category": "registration",
+      "owner": "standard-ledger",
+      "priority": "critical",
+      "due": "2026-05-30",
+      "status": "blocked",
+      "evidence": "ATO mail to Vanessa's office 18+ days overdue; possibly delayed by Annerley postcode error — chase Vanessa"
+    },
+    {
+      "id": "sha-signed",
+      "label": "Shareholders Agreement signed (two-trust SHA — Knight + Marchesi)",
+      "category": "registration",
+      "owner": "ben",
+      "priority": "critical",
+      "due": "2026-05-30",
+      "status": "todo",
+      "evidence": "Cutover Rule 4 elevated this to Week 1-2; drafted by SL's referred lawyer"
+    },
+    {
+      "id": "nab-account-live",
+      "label": "NAB Pty business account live with initial deposit",
+      "category": "banking",
+      "owner": "ben",
+      "priority": "critical",
+      "due": "2026-05-30",
+      "status": "todo",
+      "evidence": "2-week onboarding; SL providing direct-banker contact"
+    },
+    {
+      "id": "pty-xero-open",
+      "label": "Pty Xero file open with chart of accounts + tracking categories",
+      "category": "banking",
+      "owner": "ben",
+      "priority": "critical",
+      "due": "2026-05-30",
+      "status": "todo",
+      "evidence": "Port via config/xero-chart-import.csv + scripts/seed-xero-tracking.mjs"
+    },
+    {
+      "id": "stripe-pty-account",
+      "label": "Stripe Pty account opened + customer re-auth notices sent (30-day)",
+      "category": "banking",
+      "owner": "ben",
+      "priority": "high",
+      "due": "2026-06-06",
+      "status": "todo",
+      "evidence": "Stripe doesn't transfer between ABNs; 30+ day customer notice required"
+    },
+    {
+      "id": "insurance-pl-20m",
+      "label": "Public Liability $20M for Pty bound",
+      "category": "insurance",
+      "owner": "ben",
+      "priority": "critical",
+      "due": "2026-06-06",
+      "status": "todo",
+      "evidence": "Gating insurance for Harvest lease + community-facing activities; need broker engaged"
+    },
+    {
+      "id": "insurance-do",
+      "label": "Directors & Officers cover for Pty bound (within 30 days of registration)",
+      "category": "insurance",
+      "owner": "ben",
+      "priority": "high",
+      "due": "2026-06-06",
+      "status": "todo",
+      "evidence": "Standard practice; required pre-cutover"
+    },
+    {
+      "id": "fair-market-salary",
+      "label": "SL confirms fair-market salary determination (Nic ~$200K + Ben PSI/PSB risk)",
+      "category": "payroll",
+      "owner": "standard-ledger",
+      "priority": "critical",
+      "due": "2026-06-06",
+      "status": "todo",
+      "evidence": "Drives R&D personnel cost on books; foundational for Path C journal"
+    },
+    {
+      "id": "untagged-queue-cleared",
+      "label": "Untagged review queue cleared (≈69 txns + 175 invoices)",
+      "category": "bookkeeping",
+      "owner": "ben",
+      "priority": "high",
+      "due": "2026-05-30",
+      "status": "doing",
+      "evidence": "Block: stop new code until untagged ≈ 0; gates the cross-entity mapping"
+    },
+    {
+      "id": "mapping-spreadsheet-final",
+      "label": "Cross-entity mapping spreadsheet final + SL reviewed",
+      "category": "bookkeeping",
+      "owner": "ben",
+      "priority": "critical",
+      "due": "2026-06-13",
+      "status": "todo",
+      "evidence": "Re-run scripts/export-sole-trader-to-pty-mapping.mjs after untagged clear; SL reviews reallocation principle"
+    },
+    {
+      "id": "knight-photo-phase-12",
+      "label": "Knight Photography Phase 1+2 invoices raised + journaled",
+      "category": "bookkeeping",
+      "owner": "ben",
+      "priority": "critical",
+      "due": "2026-05-23",
+      "status": "todo",
+      "evidence": "Phase 1 Inv 15078 $100K dated 2025-09-30; Phase 2 quarterly $50K × 3 (15079/15080/15081)"
+    },
+    {
+      "id": "ip-deed-signed",
+      "label": "IP assignment deed signed (Nic → Pty)",
+      "category": "ip",
+      "owner": "ben",
+      "priority": "high",
+      "due": "2026-06-13",
+      "status": "todo",
+      "evidence": "After IP clause audit of grant + partnership contracts; drafted by SL's referred lawyer"
+    },
+    {
+      "id": "trademarks-act-harvest",
+      "label": "Trademarks A Curious Tractor + The Harvest filed",
+      "category": "ip",
+      "owner": "ben",
+      "priority": "medium",
+      "due": "2026-06-13",
+      "status": "todo",
+      "evidence": "First two filings — cheap insurance against squatters; separate trademark attorney needed"
+    },
+    {
+      "id": "pty-payroll-configured",
+      "label": "Pty payroll configured ($10K/mo Ben + $10K/mo Nic + super + PAYG)",
+      "category": "payroll",
+      "owner": "standard-ledger",
+      "priority": "critical",
+      "due": "2026-06-27",
+      "status": "todo",
+      "evidence": "Day-0 of Pty Xero; first run July 2026"
+    },
+    {
+      "id": "director-loan-accounts",
+      "label": "Director's loan accounts opened with written Division 7A agreements",
+      "category": "payroll",
+      "owner": "ben",
+      "priority": "high",
+      "due": "2026-06-27",
+      "status": "todo",
+      "evidence": "Written agreement + benchmark interest + 7-year repayment ceiling"
+    },
+    {
+      "id": "test-invoice-run",
+      "label": "$1 test invoice run end-to-end (Pty Xero → bank → Stripe → BAS treatment)",
+      "category": "operations",
+      "owner": "ben",
+      "priority": "critical",
+      "due": "2026-06-27",
+      "status": "todo",
+      "evidence": "Validates entire Pty operational stack before cutover"
+    },
+    {
+      "id": "rd-pack-pass-grade",
+      "label": "R&D pack scores PASS grade (currently WARN/62)",
+      "category": "operations",
+      "owner": "ben",
+      "priority": "high",
+      "due": "2026-06-20",
+      "status": "doing",
+      "evidence": "3 warnings closed today; 2 remaining are external-input-gated (SL R&D rule 1.5, AusIndustry 1.2)"
+    },
+    {
+      "id": "funder-novations-sent",
+      "label": "Funder novation letters sent to all current sole-trader funders",
+      "category": "operations",
+      "owner": "ben",
+      "priority": "high",
+      "due": "2026-05-30",
+      "status": "todo",
+      "evidence": "Snow, PRF, LMCF, Dusseldorp, Equity Trustees, Commonwealth/state grants; SL template needed"
+    }
+  ]
+}

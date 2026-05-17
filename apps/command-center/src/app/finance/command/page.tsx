@@ -181,6 +181,31 @@ interface AckStateResponse {
   idea: Record<string, AckRow>
 }
 
+type ReadinessStatus = 'done' | 'doing' | 'todo' | 'blocked'
+type ReadinessPriority = 'critical' | 'high' | 'medium' | 'low'
+
+interface ReadinessItem {
+  id: string
+  label: string
+  category: string
+  owner: string
+  priority: ReadinessPriority
+  due: string
+  status: ReadinessStatus
+  evidence?: string
+}
+
+interface ReadinessResponse {
+  generatedAt: string
+  entity: string
+  cutoverDate: string
+  daysToCutover: number
+  totals: { total: number; done: number; doing: number; todo: number; blocked: number; pct: number }
+  critical: { total: number; done: number; pct: number }
+  categories: Array<{ category: string; total: number; done: number; pct: number; blocked: number }>
+  gaps: ReadinessItem[]
+}
+
 interface DeltaResponse {
   available: boolean
   reason?: string
@@ -260,6 +285,15 @@ export default function MoneyCommandPage() {
     },
     staleTime: 60 * 1000,
   })
+  const { data: ptyReadiness } = useQuery<ReadinessResponse>({
+    queryKey: ['finance', 'pty-readiness'],
+    queryFn: async () => {
+      const res = await fetch('/api/finance/pty-readiness', { cache: 'no-store' })
+      if (!res.ok) throw new Error(`HTTP ${res.status}`)
+      return res.json()
+    },
+    staleTime: 5 * 60 * 1000,
+  })
 
   return (
     <div className="min-h-screen bg-neutral-950 text-neutral-100 p-6 lg:p-10">
@@ -276,14 +310,17 @@ export default function MoneyCommandPage() {
               <code className="mx-1 px-1.5 py-0.5 rounded bg-neutral-900 text-xs">v_project_money_state</code>.
             </p>
           </div>
-          <button
-            onClick={() => refetch()}
-            className="inline-flex items-center gap-2 rounded-md border border-neutral-800 px-3 py-1.5 text-sm hover:bg-neutral-900"
-            disabled={isRefetching}
-          >
-            <RefreshCw size={14} className={cn(isRefetching && 'animate-spin')} />
-            Refresh
-          </button>
+          <div className="flex items-center gap-2">
+            <CutoverCountdownPill compliance={compliance} />
+            <button
+              onClick={() => refetch()}
+              className="inline-flex items-center gap-2 rounded-md border border-neutral-800 px-3 py-1.5 text-sm hover:bg-neutral-900"
+              disabled={isRefetching}
+            >
+              <RefreshCw size={14} className={cn(isRefetching && 'animate-spin')} />
+              Refresh
+            </button>
+          </div>
         </header>
 
         {isLoading && <SkeletonBlocks />}
@@ -296,6 +333,8 @@ export default function MoneyCommandPage() {
 
         {data && (
           <>
+            {/* PTY READINESS — single live score for 30 Jun cutover */}
+            {ptyReadiness && <PtyReadinessSection data={ptyReadiness} />}
             {/* AT RISK TODAY — unified attention pane */}
             <AtRiskTodaySection
               compliance={compliance}
@@ -320,6 +359,155 @@ export default function MoneyCommandPage() {
         )}
       </div>
     </div>
+  )
+}
+
+// Pty Readiness — single live score for the 30 Jun 2026 cutover. Reads from
+// config/pty-readiness.json (audit trail via git) and surfaces critical-item
+// completion + top gaps. Edit the JSON to update status.
+function PtyReadinessSection({ data }: { data: ReadinessResponse }) {
+  const statusClasses: Record<ReadinessStatus, string> = {
+    done: 'border-emerald-800/50 bg-emerald-950/30 text-emerald-300',
+    doing: 'border-blue-800/60 bg-blue-950/30 text-blue-300',
+    todo: 'border-neutral-800 bg-neutral-900 text-neutral-400',
+    blocked: 'border-red-800/60 bg-red-950/40 text-red-300',
+  }
+  const priorityChip: Record<ReadinessPriority, string> = {
+    critical: 'bg-red-900/40 text-red-300',
+    high: 'bg-orange-900/40 text-orange-300',
+    medium: 'bg-yellow-900/30 text-yellow-300',
+    low: 'bg-neutral-900 text-neutral-500',
+  }
+
+  // Score-bar colour matches health
+  const scorePct = data.critical.pct
+  let scoreClass = 'bg-red-500'
+  if (scorePct >= 80) scoreClass = 'bg-emerald-500'
+  else if (scorePct >= 50) scoreClass = 'bg-amber-500'
+  else if (scorePct >= 25) scoreClass = 'bg-orange-500'
+
+  return (
+    <section>
+      <div className="flex items-center justify-between mb-2">
+        <h2 className="text-sm font-medium uppercase tracking-wider text-neutral-400 flex items-center gap-2">
+          <Target size={14} /> Pty Readiness <span className="text-neutral-600">· {data.entity}</span>
+        </h2>
+        <a
+          href="https://github.com/Acurioustractor/act-global-infrastructure/blob/main/config/pty-readiness.json"
+          target="_blank"
+          rel="noreferrer"
+          className="text-xs text-neutral-500 hover:text-neutral-300"
+        >
+          Edit config →
+        </a>
+      </div>
+
+      <div className="rounded-lg border border-neutral-800 bg-neutral-900/40 p-5 space-y-4">
+        {/* TOP ROW — headline score */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <div className="md:col-span-2">
+            <div className="text-xs uppercase tracking-wider text-neutral-500 mb-1">
+              Critical-path readiness
+            </div>
+            <div className="text-3xl font-semibold">
+              {data.critical.done}/{data.critical.total}
+              <span className="text-neutral-500 text-lg ml-2">critical items ✓</span>
+            </div>
+            <div className="mt-2 h-2 rounded-full bg-neutral-800 overflow-hidden">
+              <div className={cn('h-full transition-all', scoreClass)} style={{ width: `${scorePct}%` }} />
+            </div>
+            <div className="text-xs text-neutral-500 mt-1">
+              {scorePct}% of critical · {data.totals.done}/{data.totals.total} total items done
+            </div>
+          </div>
+          <div>
+            <div className="text-xs uppercase tracking-wider text-neutral-500 mb-1">Days to cutover</div>
+            <div className="text-3xl font-semibold">{data.daysToCutover}</div>
+            <div className="text-xs text-neutral-500 mt-1">→ {data.cutoverDate}</div>
+          </div>
+          <div>
+            <div className="text-xs uppercase tracking-wider text-neutral-500 mb-1">Status mix</div>
+            <div className="flex flex-col gap-1 text-xs">
+              <div className="flex justify-between">
+                <span className="text-emerald-300">Done</span>
+                <span>{data.totals.done}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-blue-300">Doing</span>
+                <span>{data.totals.doing}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-neutral-400">To do</span>
+                <span>{data.totals.todo}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-red-300">Blocked</span>
+                <span>{data.totals.blocked}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* CATEGORIES — small progress bars */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 pt-2 border-t border-neutral-800/60">
+          {data.categories.map(cat => (
+            <div key={cat.category}>
+              <div className="flex justify-between text-xs">
+                <span className="text-neutral-400 capitalize">{cat.category}</span>
+                <span className="text-neutral-500">
+                  {cat.done}/{cat.total}
+                  {cat.blocked > 0 && <span className="text-red-400 ml-1">· {cat.blocked} ⚠</span>}
+                </span>
+              </div>
+              <div className="mt-1 h-1.5 rounded-full bg-neutral-800 overflow-hidden">
+                <div
+                  className={cn(
+                    'h-full',
+                    cat.pct >= 80 ? 'bg-emerald-600' : cat.pct >= 50 ? 'bg-amber-600' : 'bg-orange-600',
+                  )}
+                  style={{ width: `${cat.pct}%` }}
+                />
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* GAPS — top critical + high items not done */}
+        {data.gaps.length > 0 && (
+          <div className="pt-2 border-t border-neutral-800/60">
+            <div className="text-xs uppercase tracking-wider text-neutral-500 mb-2">
+              Top gaps — critical + high items not done
+            </div>
+            <ul className="space-y-1.5">
+              {data.gaps.slice(0, 6).map(item => (
+                <li key={item.id} className="flex items-start gap-2 text-sm">
+                  <span
+                    className={cn(
+                      'inline-block rounded px-1.5 py-0.5 text-[10px] font-medium uppercase tracking-wide shrink-0',
+                      priorityChip[item.priority],
+                    )}
+                    style={{ minWidth: '44px', textAlign: 'center' }}
+                  >
+                    {item.priority}
+                  </span>
+                  <span
+                    className={cn(
+                      'inline-block rounded border px-1.5 py-0.5 text-[10px] shrink-0',
+                      statusClasses[item.status],
+                    )}
+                    style={{ minWidth: '52px', textAlign: 'center' }}
+                  >
+                    {item.status}
+                  </span>
+                  <span className="text-neutral-300 flex-1">{item.label}</span>
+                  <span className="text-xs text-neutral-600 shrink-0">{item.due}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
+    </section>
   )
 }
 
@@ -588,6 +776,53 @@ function monthsSince(isoDate: string): number {
   const start = new Date(isoDate + 'T00:00:00Z').getTime()
   const now = Date.now()
   return Math.max(1, (now - start) / (1000 * 60 * 60 * 24 * 30.44))
+}
+
+// Cutover countdown pill — reads the sole-trader → Pty cutover obligation from
+// the compliance calendar and renders a colour-graded days-until pill in the
+// header. Hidden if the obligation is missing or already filed. Surface drives
+// urgency colour-coding through the 9-week window to 30 Jun 2026.
+function CutoverCountdownPill({ compliance }: { compliance: ComplianceResponse | undefined }) {
+  if (!compliance) return null
+  const cutover = compliance.obligations.find(o => o.id === 'sole-trader-pty-cutover')
+  if (!cutover || cutover.status === 'filed') return null
+  const dd = cutover.days_until_due
+  if (dd == null) return null
+
+  let cls = 'border-emerald-800/50 bg-emerald-950/30 text-emerald-300'
+  let label = `Cutover · T-${dd}d`
+  let pulse = false
+  if (dd <= 0) {
+    cls = 'border-red-700 bg-red-950/60 text-red-200'
+    pulse = true
+    label = dd === 0 ? 'Cutover TODAY' : `Cutover T+${Math.abs(dd)}d overdue`
+  } else if (dd <= 7) {
+    cls = 'border-red-800/60 bg-red-950/40 text-red-300'
+    pulse = dd <= 1
+  } else if (dd <= 14) {
+    cls = 'border-orange-800/60 bg-orange-950/40 text-orange-300'
+  } else if (dd <= 30) {
+    cls = 'border-amber-800/60 bg-amber-950/40 text-amber-300'
+  } else if (dd <= 60) {
+    cls = 'border-yellow-800/60 bg-yellow-950/30 text-yellow-300'
+  }
+
+  return (
+    <a
+      href="https://github.com/Acurioustractor/act-global-infrastructure/blob/main/thoughts/shared/plans/act-entity-migration-checklist-2026-06-30.md"
+      target="_blank"
+      rel="noreferrer"
+      className={cn(
+        'inline-flex items-center gap-1.5 rounded-md border px-2.5 py-1.5 text-xs font-medium uppercase tracking-wider hover:brightness-125',
+        cls,
+        pulse && 'animate-pulse',
+      )}
+      title={`Sole trader → A Curious Tractor Pty Ltd cutover · due ${cutover.due_date}`}
+    >
+      <Target size={13} />
+      <span>{label}</span>
+    </a>
+  )
 }
 
 function TopLayer({ top }: { top: CommandResponse['top'] }) {
