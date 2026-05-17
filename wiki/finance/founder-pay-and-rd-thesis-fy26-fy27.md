@@ -375,6 +375,102 @@ Things to do BEFORE 30 June 2026 because they're worth more at sole-trader margi
 
 ---
 
+## 11. Stakes & best practice — rules of the road for founder R&D
+
+> Added 2026-05-17 — codifying what's at risk if any of this gets sloppy and the discipline that keeps the claim defensible. Read at the start of every quarter.
+
+### What's actually at stake
+
+| Lever | Annual $ | Mechanism | Loseable if... |
+|---|---:|---|---|
+| **FY26 R&D refund** | $200-250K cash | Path C journal from sole trader → Pty | PSI re-characterisation kills personnel cost deduction; inadequate records kill activity claim |
+| **FY27+ ongoing R&D refund** | $70-100K/yr | Pty payroll + contractor invoicing at R&D allocation | Founders fail PSI tests; commercial revenue drops below 50%; trust used as service vehicle |
+| **Division 7A trap (downside)** | up to $50K tax | Director's loan deemed an unfranked dividend at marginal rate | Loan not documented, no repayment, no commercial interest, not settled in 7 years |
+| **Trust distribution defensibility** | unlimited downside | Trust receives dividends only; distributions flexible | Trust receives service invoices = ATO re-attributes income to active beneficiary |
+| **Going-concern + commercial-defence** | Whole R&D claim | ≥50% commercial revenue defends "company that does R&D" framing | Grants + R&D refund > commercial revenue → ATO sees "research outfit" not "company"; claim scrutiny escalates |
+
+Headline number: **getting the structure right is worth ~$200K refund in FY26 alone, ~$70-100K/yr after that, AND avoids ~$50K of Division 7A downside.** Getting it wrong on any single line in this section can take any of those off the table.
+
+### What kills the claim (the seven main traps)
+
+1. **PSI / PSB re-characterisation** — If Knight Photography (Ben) or Nic's sole-trader contractor invoicing fails the personal services income tests, the ATO treats the income as personal income of the founder and disallows the company deduction. **Pass criteria:** at least one of — (a) results test (paid for a result, supplies own tools, liable for defective work), (b) unrelated-clients test (income from ≥2 unrelated clients), (c) employment test (employs others), (d) business-premises test. Knight Photography needs to pass at least one per FY.
+2. **Division 7A on director's loans** — Loan to founder, not in writing, no commercial interest, no repayment schedule → deemed unfranked dividend at marginal rate. **Pass criteria:** written loan agreement at year of advance, benchmark interest rate (ATO publishes annually), minimum yearly repayment for 7 years OR fully repaid by year 7.
+3. **Below-market related-party transactions** — Farm rent below market, Pty/Harvest services agreement underpriced, Knight Family Trust receives sub-market dividends and gets propped up by other transfers. **Pass criteria:** every related-party transaction has a written agreement, market-rate evidence, and a paper trail of arms-length negotiation.
+4. **Inadequate contemporaneous records** — Calendar gaps, no commit log evidence, no R&D activity diary, no time allocation by project. **Pass criteria:** every R&D-allocated day has either a calendar entry, a commit, a meeting note, or a written output that ties to an R&D activity register entry.
+5. **Operational-hospitality contamination of R&D base** — If Harvest's cafe/retail/venue revenue or costs run through Pty's books instead of the subsidiary, the R&D share of total spend drops + ATO scrutinises. **Pass criteria:** Harvest subsidiary has its own Xero file; only the inter-entity services billing crosses (Pty bills Harvest for strategy time; Pty doesn't book Harvest's cafe sales).
+6. **Family trust used as service-provider** — Knight or Marchesi Family Trust invoices Pty for "consulting" → ATO re-attributes income back to the active beneficiary (the founder) at marginal rate, AND disallows the deduction at company level. **Pass criteria:** family trusts are passive shareholders receiving dividends only. Never invoice from trust. Never have trust enter service agreements.
+7. **Commercial revenue under 50% of total** — Pty earns mostly grants + R&D refund → ATO sees research outfit, scrutinises claim, may disallow. **Pass criteria:** target ≥60% commercial revenue (per §6 Revenue mix); never let it drop below 50% across a full FY.
+
+### Founder discipline — quarterly checklist
+
+Each founder runs this at the end of each quarter (target: 20 minutes):
+
+**Time + activity evidence**
+- [ ] Calendar export for the quarter — every working day accounted for (R&D activity / operational / commercial / leave / personal)
+- [ ] Git commit log export tied to R&D project codes (ACT-IN, ACT-EL, ACT-JH, ACT-CG, ACT-DO, ALMA-related)
+- [ ] R&D activity diary entry covering: what activity, what uncertainty was being resolved, what the technical / scientific hypothesis was, what outputs landed
+- [ ] R&D allocation % update if reality diverges from baseline (Ben 95% / Nic 40%)
+
+**Income + invoicing hygiene (Ben — Knight Photography)**
+- [ ] Quarter's KP invoice raised (Phase 2 quarterly cadence pre-cutover)
+- [ ] PSI tests pass-check — at least one client other than ACT-related entity OR results-test evidence (delivered to spec, own tools, defect liability)
+- [ ] GST returns lodged (KP is registered; monthly or quarterly per SL advice)
+- [ ] Invoice has ABN + GST broken out + project mix split
+
+**Income + invoicing hygiene (Nic — sole-trader pre-cutover, ABN post-cutover)**
+- [ ] Quarterly drawings reconciled vs $200K fair-market salary target
+- [ ] Any third-party contractor work invoiced under separate ABN with proper PSI defence
+- [ ] Director's loan account balance documented + within 7-year repayment ceiling
+
+**Trust hygiene**
+- [ ] Knight Family Trust: no service invoices issued (passive only); dividends received properly franked + resolved
+- [ ] Marchesi Family Trust: same
+- [ ] Trust resolutions for any income distributed filed
+
+**Pty cashflow + R&D maths**
+- [ ] Pty commercial revenue % of total — green if ≥60%, watch if 50-60%, escalate if <50%
+- [ ] R&D-eligible spend running total + estimated 43.5% refund (live tracker on `/finance/command` once issue #68 lands)
+- [ ] R&D pack grade (target PASS; WARN acceptable mid-FY; FAIL = escalate to SL)
+
+**Receipts + evidence**
+- [ ] R&D-eligible spend over $82.50 has tax invoice attached
+- [ ] R&D-eligible spend over $1,000 has detailed tax invoice with supplier ABN
+- [ ] Coverage % above 95% (live on `/finance/reconciliation`)
+
+### What "best practice" looks like in flight
+
+Day-to-day discipline that prevents the seven traps:
+
+- **Knight Photography invoices ACT only after PSI defence test is documented for the quarter** — never auto-renew; review each FY.
+- **Director's loan drawn against a written loan agreement, with benchmark interest accruing monthly** — never an undocumented "I'll pay it back" transfer.
+- **Farm rent paid Pty → Nic on a written lease at SL-confirmed market rate** — invoice issued monthly, paid by EFT, recorded in Xero.
+- **Pty → Harvest services agreement charges market hourly rate for founder strategy time** — billed monthly, separate from Harvest's own cafe/retail trading.
+- **R&D activity diary** — one paragraph per project per fortnight, written contemporaneously. Even rough notes are fine; gaps are not.
+- **Family trust distributions resolved annually** before 30 June with proper trustee resolution; never reactive after the fact.
+- **Commercial pipeline reviewed monthly** — if commercial share drops below 55%, escalate; below 50%, change the plan.
+
+### Red flags — escalate to Standard Ledger immediately
+
+- Any quarter where Ben's commit count drops > 50% vs baseline without explanation in the diary (R&D allocation argument weakens)
+- Any quarter where Pty's commercial revenue share drops below 50%
+- Any transfer Pty → founder that isn't tagged as payroll, director's loan, dividend, or invoice settlement
+- Any related-party transaction without a written agreement (Farm, Harvest services, Knight Photography terms)
+- Any month where Knight Photography invoices ONLY ACT-related entities AND fails the results test → PSI risk active
+- Any director's loan balance approaching the 7-year repayment ceiling
+
+### What we never do
+
+1. Never bill from a family trust to the Pty for services.
+2. Never set a related-party rate below SL-confirmed market.
+3. Never let a director's loan run undocumented or without commercial interest.
+4. Never run Harvest cafe/retail revenue through Pty's books.
+5. Never lodge an R&D claim without SL sign-off on the activity register + pack grade.
+6. Never amend a journal that's already been booked by SL without telling them first.
+7. Never use the personal credit card for an R&D-eligible expense without a tax invoice from the vendor.
+8. Never let a quarter close without a written R&D activity diary entry per active project.
+
+---
+
 ## Summary
 
 **One sentence per founder:**
