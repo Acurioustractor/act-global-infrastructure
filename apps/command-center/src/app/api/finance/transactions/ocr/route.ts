@@ -66,7 +66,9 @@ export async function POST(request: NextRequest) {
     const xeroId = (row as any)[xeroIdCol] as string
 
     const xeroObject = source === 'bill' ? 'Invoices' : 'BankTransactions'
-    const xero = await createXeroClient(supabase)
+    // Cast: xero-client.mjs is JS — type clash from duplicate @supabase/supabase-js
+    // copies on Vercel's npm install (pnpm dedups locally).
+    const xero = await createXeroClient(supabase as any)
 
     // 1) List attachments
     const attList = await xero.request(`${xeroObject}/${xeroId}/Attachments`)
