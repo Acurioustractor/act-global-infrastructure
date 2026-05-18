@@ -15,7 +15,7 @@ el_v2_match_via: "org:oonchiumpa"
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/stories/oonchiumpa-oonchiumpa-what-happens-when-community-leads.md`.
-> Regenerated: `2026-05-17T23:15:22.883Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerated: `2026-05-18T03:37:13.699Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 # Oonchiumpa: What Happens When Community Leads
 
 > Benjamin Knight
