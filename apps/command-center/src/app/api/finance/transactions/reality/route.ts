@@ -32,14 +32,14 @@ export async function GET(request: NextRequest) {
 
     let billsQ = supabase
       .from('xero_invoices')
-      .select('id, xero_id, date, contact_name, total, status, line_items, project_code, has_attachments')
+      .select('id, xero_id, date, contact_name, total, status, line_items, project_code, project_code_source, has_attachments')
       .eq('type', 'ACCPAY')
       .in('status', ['AUTHORISED', 'PAID'])
       .gte('date', since)
 
     let spendsQ = supabase
       .from('xero_transactions')
-      .select('id, xero_transaction_id, date, contact_name, total, status, type, line_items, project_code, has_attachments, bank_account')
+      .select('id, xero_transaction_id, date, contact_name, total, status, type, line_items, project_code, project_code_source, has_attachments, bank_account')
       .in('type', ['SPEND', 'SPEND-OVERPAYMENT'])
       .gte('date', since)
     if (accountsParam === 'act-only') spendsQ = spendsQ.in('bank_account', ACT_ACCOUNTS)
@@ -47,15 +47,16 @@ export async function GET(request: NextRequest) {
 
     const [bills, spends] = await Promise.all([fetchAll(billsQ), fetchAll(spendsQ)])
 
-    // ----- Dedup: bill paid via bank produces a spend with same vendor+amount within ±14d -----
-    const paidBills = bills.filter((b: any) => b.status === 'PAID')
+    // ----- Dedup: bill paid via bank produces a spend with same vendor+amount within ±30d -----
+    // Widened from ±14d → ±30d (bills sometimes paid weeks late). Include both AUTHORISED + PAID
+    // bills as matchable — the spend pays it regardless of bill status.
     const matchedSpendIds = new Set<string>()
     for (const s of spends) {
       const sd = new Date(s.date as string).getTime()
-      const m = paidBills.find((b: any) =>
+      const m = bills.find((b: any) =>
         (b.contact_name || '').trim().toUpperCase() === (s.contact_name || '').trim().toUpperCase() &&
         Number(b.total) === Number(s.total) &&
-        Math.abs((new Date(b.date as string).getTime() - sd) / 86400000) <= 14
+        Math.abs((new Date(b.date as string).getTime() - sd) / 86400000) <= 30
       )
       if (m) matchedSpendIds.add(s.xero_transaction_id as string)
     }
@@ -99,9 +100,12 @@ export async function GET(request: NextRequest) {
     for (const v of dupKey.values()) if (v > 1) duplicates += v - 1
 
     // Project mismatch: line desc says ACT-XX but project_code is ACT-YY
+    // Skip manual overrides — `project_code_source LIKE 'manual%'` means user
+    // deliberately overrode Dext's reading. Dext text is stale, tag is right.
     let mismatches = 0
     for (const r of [...bills, ...unmatchedSpends] as any[]) {
       if (!r.project_code) continue
+      if (typeof r.project_code_source === 'string' && r.project_code_source.startsWith('manual')) continue
       const desc = firstDescr(r.line_items)
       const m = /—\s*(ACT-[A-Z]{2,4})\b/i.exec(desc)
       if (m && m[1].toUpperCase() !== r.project_code.toUpperCase()) mismatches += 1
