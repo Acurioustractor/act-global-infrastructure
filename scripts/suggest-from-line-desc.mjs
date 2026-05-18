@@ -19,13 +19,21 @@
  */
 import './lib/load-env.mjs';
 import { createClient } from '@supabase/supabase-js';
-import { writeFileSync } from 'fs';
+import { writeFileSync, readFileSync } from 'fs';
+import { join } from 'path';
 
 const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY);
 
 const ACT_ACCOUNTS = ['NAB Visa ACT #8815', 'NJ Marchesi T/as ACT Everyday'];
 const SINCE = '2025-07-01';
-const HARVEST_CUTOFF = '2026-01-01';
+
+// Load shared rules — same JSON the frontend reads
+const RULES = JSON.parse(readFileSync(join(process.cwd(), 'config', 'tag-suggester-rules.json'), 'utf8'));
+const HARVEST_CUTOFF = RULES._meta.harvest_cutoff;
+const VENDOR_RULES = { ...RULES.vendor_rules, ...RULES.special_vendors };
+const WITTA_VENDORS = new Set(RULES.witta_vendors);
+const AMBIGUOUS_VENDORS = new Set(RULES.ambiguous_vendors);
+const SPECIAL_VENDORS = RULES.special_vendors;
 
 const args = process.argv.slice(2);
 const FORMAT = args.find(a => a.startsWith('--format='))?.split('=')[1] || 'md';
@@ -58,72 +66,7 @@ async function fetchAll(query) {
   return out;
 }
 
-// ---- Vendor whitelist (Tier B) — 100% one project across all history ----
-const VENDOR_RULES = {
-  // --- ACT-HV (Harvest, post Jan-26 cutoff) ---
-  "Kennedy's": { code: 'ACT-HV', tier: 'B', note: 'decking supplier — always Harvest' },
-  'Maleny Landscaping Supplies': { code: 'ACT-HV', tier: 'B', note: '15 rows in FY26 all Harvest' },
-  'MALENY LANDSCAPING SUPPLIES': { code: 'ACT-HV', tier: 'B', note: 'duplicate-cased entry' },
-  'Longara': { code: 'ACT-HV', tier: 'B', note: 'crates supplier — Harvest' },
-  'Savage Landscape Supplies': { code: 'ACT-HV', tier: 'B', note: 'Harvest landscaping' },
-  'Smartwood': { code: 'ACT-HV', tier: 'B', note: 'Harvest timber' },
-  'Diggermate Franchising': { code: 'ACT-HV', tier: 'B', note: 'Harvest hire' },
-  'Hydraulink Brisbane North': { code: 'ACT-HV', tier: 'B', note: 'Harvest equipment' },
-  'Total Tools East Brisbane': { code: 'ACT-HV', tier: 'B', note: 'Harvest tools' },
-  'Thais Pupio Design': { code: 'ACT-HV', tier: 'B', note: 'Harvest design — verify if also Goods' },
-  'Sophie Deirdre Hickey': { code: 'ACT-HV', tier: 'B', note: 'Harvest contractor labour' },
-
-  // --- ACT-GD (Goods) — manufacturing + materials ---
-  'Defy Manufacturing': { code: 'ACT-GD', tier: 'B', note: '27 rows all Goods — primary manufacturer' },
-  'Defy Design': { code: 'ACT-GD', tier: 'B', note: '6 rows all Goods — design arm of Defy' },
-  'Byo Group': { code: 'ACT-GD', tier: 'B', note: '19 rows all Goods' },
-  'Zinus Australia': { code: 'ACT-GD', tier: 'B', note: '7 rows all Goods — mattress supplier' },
-  'Carla Furnishers': { code: 'ACT-GD', tier: 'B', note: '2 rows $22K — furniture' },
-  'Joseph Kirmos': { code: 'ACT-GD', tier: 'B', note: '6 rows all Goods — contractor' },
-  'Carbatec Brisbane': { code: 'ACT-GD', tier: 'B', note: '3 rows all Goods — woodworking tools' },
-  'RW Pacific Traders': { code: 'ACT-GD', tier: 'B', note: '3 rows all Goods' },
-  'Department of Primary Hobart': { code: 'ACT-GD', tier: 'B', note: '3 rows all Goods — TAS biosecurity' },
-  'Endless Parks': { code: 'ACT-GD', tier: 'B', note: '2 rows all Goods' },
-
-  // --- ACT-GD — logistics + delivery ---
-  'Peak Up Transport': { code: 'ACT-GD', tier: 'B', note: '5 rows all Goods — interstate freight' },
-  'Loadshift Sydney': { code: 'ACT-GD', tier: 'B', note: '3 rows all Goods — freight' },
-  'Reddy Express': { code: 'ACT-GD', tier: 'B', note: '12 rows all Goods — courier' },
-  'Sendle': { code: 'ACT-GD', tier: 'B', note: '8 rows all Goods — courier' },
-
-  // --- ACT-GD — NT/QLD delivery-route accommodation ---
-  'Palm Island Motel': { code: 'ACT-GD', tier: 'B', note: '8 rows all Goods — Palm Island delivery' },
-  'Palm Island Barge': { code: 'ACT-GD', tier: 'B', note: '2 rows all Goods — Palm Island transport' },
-  'Ti Tree Roadhouse': { code: 'ACT-GD', tier: 'B', note: '7 rows all Goods — NT delivery route' },
-  'Tennant Creek Caravan Park': { code: 'ACT-GD', tier: 'B', note: '4 rows all Goods — NT delivery route' },
-  'Grand Hotel & Apartments Townsville': { code: 'ACT-GD', tier: 'B', note: '4 rows all Goods — TSV stop' },
-  'Icon On Isa': { code: 'ACT-GD', tier: 'B', note: '3 rows all Goods — Mt Isa stop' },
-  'Wild Earth': { code: 'ACT-GD', tier: 'B', note: '4 rows all Goods' },
-};
-
-// ---- Known-ambiguous vendors (Tier D) — split across projects with no reliable signal ----
-// Surface these distinctly so manual reviewer knows it's a known-hard case, not a missing rule.
-// Historic splits seen:
-//   Avis    → ACT-GD 4 rows · ACT-HV 1 row · ACT-IN 10 rows · ACT-CORE varies
-//   Thrifty → ACT-GD 1 row  · ACT-IN 5 rows
-const AMBIGUOUS_VENDORS = new Set(['Avis', 'Thrifty']);
-
-// ---- Date-bounded vendor rules (Tier C) — Witta-location vendors ----
-const WITTA_VENDORS = new Set([
-  'Maleny Hardware And Rural Supplies',
-  'TNT Plastering & Maintenance',
-  'Chris Witta',
-  'Kennards Hire',           // Sunshine Coast Kennards branches
-  'Flight Bar Witta',
-  'Liberty Maleny',
-  'Mapleton Public House',
-  'Maleny Hotel',
-]);
-
-// ---- User-confirmed special cases (Tier B') ----
-const SPECIAL_VENDORS = {
-  'RNM CARPENTRY': { code: 'ACT-FM', tier: 'B', note: 'Ben: not Harvest, homestead build (farm) — confirm' },
-};
+// Rules now loaded from config/tag-suggester-rules.json — see top-of-file constants.
 
 function suggest(row) {
   const vendor = (row.contact_name || '').trim();

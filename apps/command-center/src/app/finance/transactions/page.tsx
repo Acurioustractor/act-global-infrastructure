@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from 'react'
 import Link from 'next/link'
+import { suggest as ruleSuggest, type Suggestion as TierSuggestion } from '@/lib/tag-suggester'
 
 type Row = {
   id: string
@@ -99,6 +100,14 @@ export default function TransactionsExplorer() {
   const [openVendor, setOpenVendor] = useState<string | null>(null)
   const [vendorData, setVendorData] = useState<any>(null)
   const [vendorLoading, setVendorLoading] = useState(false)
+
+  // Paint-bucket mode (Feature B): click any row to apply the active project
+  const [paintMode, setPaintMode] = useState(false)
+  const [paintProject, setPaintProject] = useState<string>('')
+
+  // Batch OCR state (Feature C)
+  const [batchOcrBusy, setBatchOcrBusy] = useState(false)
+  const [batchOcrProgress, setBatchOcrProgress] = useState({ done: 0, total: 0 })
 
   async function runOcr(row: Row) {
     if (!row.hasAttachments) { setToast('No Xero attachment on this row'); setTimeout(() => setToast(null), 2000); return }
@@ -256,6 +265,77 @@ export default function TransactionsExplorer() {
     } catch (e: any) {
       setToast(`Failed: ${e.message}`); setTimeout(() => setToast(null), 3500)
     } finally { setSavingId(null) }
+  }
+
+  // Feature A — bulk apply all Tier A and B suggestions visible
+  async function applyAllTierAB() {
+    const items: Array<{ id: string; source: string; code: string }> = []
+    for (const r of filtered) {
+      if (r.projectCode) continue
+      const s = ruleSuggest({ contact: r.contact, date: r.date, description: r.description })
+      if (!s || (s.tier !== 'A' && s.tier !== 'B')) continue
+      items.push({ id: r.id, source: r.source, code: s.code })
+    }
+    if (items.length === 0) { setToast('No Tier A or B suggestions for visible rows'); setTimeout(() => setToast(null), 2500); return }
+    if (!confirm(`Apply ${items.length} high-confidence (Tier A+B) suggestions?`)) return
+    setBulkBusy(true)
+    // Group by target code so we can do one PATCH per code
+    const byCode: Record<string, Array<{ id: string; source: string }>> = {}
+    for (const it of items) {
+      (byCode[it.code] ||= []).push({ id: it.id, source: it.source })
+    }
+    try {
+      let ok = 0
+      for (const [code, group] of Object.entries(byCode)) {
+        const resp = await fetch('/api/finance/transactions', {
+          method: 'PATCH', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ items: group, projectCode: code }),
+        })
+        const d = await resp.json()
+        if (!resp.ok) throw new Error(d.error || 'failed')
+        ok += d.total || group.length
+        const ids = new Set(group.map(g => g.id))
+        setRows(prev => prev.map(x => ids.has(x.id) ? { ...x, projectCode: code, projectSource: 'manual' } : x))
+      }
+      setToast(`Applied ${ok} suggestions across ${Object.keys(byCode).length} projects`)
+      setTimeout(() => setToast(null), 3500)
+    } catch (e: any) {
+      setToast(`Apply-all failed: ${e.message}`); setTimeout(() => setToast(null), 4000)
+    } finally { setBulkBusy(false) }
+  }
+
+  // Feature B — paint-bucket: row click in paint mode applies the active project
+  async function paintRow(row: Row) {
+    if (!paintProject) { setToast('Pick a project first'); setTimeout(() => setToast(null), 2000); return }
+    const code = paintProject === 'UNTAGGED' ? null : paintProject
+    await retag(row, code)
+  }
+
+  // Feature C — batch OCR every visible row with an attachment
+  async function batchOcrVisible() {
+    const targets = filtered.filter(r => r.hasAttachments && !r.description.startsWith('[OCR]'))
+    if (targets.length === 0) { setToast('No rows to OCR (need attachment + not already OCR’d)'); setTimeout(() => setToast(null), 2500); return }
+    if (!confirm(`Batch OCR ${targets.length} rows? Each call hits Gemini (~$0.0003 per row).`)) return
+    setBatchOcrBusy(true)
+    setBatchOcrProgress({ done: 0, total: targets.length })
+    let done = 0, fail = 0
+    for (const r of targets) {
+      try {
+        const resp = await fetch('/api/finance/transactions/ocr', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id: r.id, source: r.source }),
+        })
+        const d = await resp.json()
+        if (resp.ok) {
+          setRows(prev => prev.map(x => x.id === r.id ? { ...x, description: `[OCR] ${d.summary}` } : x))
+          done += 1
+        } else fail += 1
+      } catch { fail += 1 }
+      setBatchOcrProgress({ done: done + fail, total: targets.length })
+    }
+    setBatchOcrBusy(false)
+    setToast(`Batch OCR done: ${done} ok, ${fail} failed`)
+    setTimeout(() => setToast(null), 4000)
   }
 
   async function bulkRetag() {
@@ -485,6 +565,58 @@ export default function TransactionsExplorer() {
           )}
         </div>
 
+        {/* Auto-suggest + paint-bucket + batch-OCR toolbar */}
+        <div className="bg-emerald-500/5 border border-emerald-500/20 rounded-lg p-3 mb-3 flex flex-wrap items-center gap-3">
+          <span className="text-xs text-emerald-200/70 uppercase tracking-wider">Quick tagger</span>
+          {(() => {
+            const eligible = filtered.filter(r => {
+              if (r.projectCode) return false
+              const s = ruleSuggest({ contact: r.contact, date: r.date, description: r.description })
+              return s && (s.tier === 'A' || s.tier === 'B')
+            }).length
+            return (
+              <button
+                onClick={applyAllTierAB}
+                disabled={bulkBusy || eligible === 0}
+                title="Apply every Tier A (Dext line desc) and Tier B (vendor whitelist) suggestion to currently-visible untagged rows"
+                className="text-sm px-3 py-1 bg-emerald-500/20 border border-emerald-500/40 text-emerald-200 rounded hover:bg-emerald-500/30 disabled:opacity-40">
+                ✓ Apply {eligible} Tier A+B suggestions
+              </button>
+            )
+          })()}
+
+          <span className="text-white/20">·</span>
+
+          <label className={`flex items-center gap-1 text-sm ${paintMode ? 'text-amber-200' : 'text-white/70'}`}>
+            <input type="checkbox" checked={paintMode} onChange={e => setPaintMode(e.target.checked)} />
+            🎨 Paint-bucket mode
+          </label>
+          {paintMode && (
+            <select value={paintProject} onChange={e => setPaintProject(e.target.value)}
+              className="bg-black border border-amber-500/40 text-amber-200 rounded px-2 py-1 text-sm">
+              <option value="">Pick active project…</option>
+              <option value="UNTAGGED">UNTAGGED</option>
+              {projects.filter(p => p.code).map(p => <option key={p.code} value={p.code!}>{projectLabel(p)}</option>)}
+            </select>
+          )}
+
+          <span className="text-white/20">·</span>
+
+          <button
+            onClick={batchOcrVisible}
+            disabled={batchOcrBusy}
+            title="OCR every visible row with an attachment (skips already-OCR’d). ~$0.0003 per receipt."
+            className="text-sm px-3 py-1 bg-purple-500/20 border border-purple-500/40 text-purple-200 rounded hover:bg-purple-500/30 disabled:opacity-40">
+            {batchOcrBusy ? `📎 OCR ${batchOcrProgress.done}/${batchOcrProgress.total}…` : '📎 Batch OCR visible'}
+          </button>
+        </div>
+
+        {paintMode && (
+          <div className="bg-amber-500/10 border border-amber-500/40 rounded-lg p-2 mb-3 text-amber-200 text-sm">
+            🎨 <strong>Paint mode ON</strong> — clicking any row's vendor name will tag it as <code>{paintProject || '(pick a project)'}</code>. Turn off the toggle above to return to normal click behavior.
+          </div>
+        )}
+
         {/* Bulk action bar */}
         {selected.size > 0 && (
           <div className="bg-blue-500/10 border border-blue-500/40 rounded-lg p-3 mb-3 flex items-center gap-3">
@@ -530,7 +662,8 @@ export default function TransactionsExplorer() {
                       onVendorClick={() => openVendorSidebar(r.contact)}
                       ocrBusy={ocrBusy.has(r.id)} onOcr={() => runOcr(r)}
                       noteDraft={noteDraft[r.id]} setNoteDraft={(v: string) => setNoteDraft((s) => ({ ...s, [r.id]: v }))}
-                      onSaveNote={(v: string) => saveNote(r, v)} />
+                      onSaveNote={(v: string) => saveNote(r, v)}
+                      paintMode={paintMode} paintProject={paintProject} onPaint={() => paintRow(r)} />
                   ))}
                   {groupedRows && groupedRows.map(([month, monthRows]) => (
                     <MonthGroup key={month} month={month} rows={monthRows} selected={selected} expanded={expanded}
@@ -539,7 +672,8 @@ export default function TransactionsExplorer() {
                       onVendorClick={(v) => openVendorSidebar(v)}
                       ocrBusy={ocrBusy} onOcr={runOcr}
                       noteDraft={noteDraft} setNoteDraft={(id: string, v: string) => setNoteDraft((s) => ({ ...s, [id]: v }))}
-                      onSaveNote={saveNote} />
+                      onSaveNote={saveNote}
+                      paintMode={paintMode} paintProject={paintProject} onPaint={paintRow} />
                   ))}
                 </tbody>
               </table>
@@ -570,18 +704,28 @@ export default function TransactionsExplorer() {
   )
 }
 
-function TxnRow({ r, i, selected, expanded, onToggle, onExpand, onRetag, projects, savingId, suggestions, onVendorClick, ocrBusy, onOcr, noteDraft, setNoteDraft, onSaveNote }: {
+function TxnRow({ r, i, selected, expanded, onToggle, onExpand, onRetag, projects, savingId, suggestions, onVendorClick, ocrBusy, onOcr, noteDraft, setNoteDraft, onSaveNote, paintMode, paintProject, onPaint }: {
   r: Row; i: number; selected: boolean; expanded: boolean;
   onToggle: () => void; onExpand: () => void; onRetag: (c: string | null) => void;
   projects: ProjectOpt[]; savingId: string | null; suggestions: Record<string, Suggestion>;
   onVendorClick: () => void;
   ocrBusy: boolean; onOcr: () => void;
   noteDraft: string | undefined; setNoteDraft: (v: string) => void; onSaveNote: (v: string) => void;
+  paintMode?: boolean; paintProject?: string; onPaint?: () => void;
 }) {
   const sug = !r.projectCode ? suggestions[r.contact.toLowerCase()] : null
+  const tierSug = !r.projectCode ? ruleSuggest({ contact: r.contact, date: r.date, description: r.description }) : null
   const note = auditNote(r)
-  const rowBg = note.startsWith('⚠') ? 'bg-amber-500/5' : note.startsWith('★') ? 'bg-emerald-500/5' : note.startsWith('?') ? 'bg-yellow-500/5' : selected ? 'bg-blue-500/10' : i % 2 ? 'bg-white/[0.02]' : ''
+  const rowBg = paintMode && !r.projectCode ? 'bg-amber-500/5 hover:bg-amber-500/15' : note.startsWith('⚠') ? 'bg-amber-500/5' : note.startsWith('★') ? 'bg-emerald-500/5' : note.startsWith('?') ? 'bg-yellow-500/5' : selected ? 'bg-blue-500/10' : i % 2 ? 'bg-white/[0.02]' : ''
   const noteValue = noteDraft !== undefined ? noteDraft : (r.note || '')
+
+  const tierChipColor: Record<string, string> = {
+    A: 'bg-emerald-500/30 border-emerald-500/60 text-emerald-100',
+    'A*': 'bg-amber-500/30 border-amber-500/60 text-amber-100',
+    B: 'bg-blue-500/30 border-blue-500/60 text-blue-100',
+    C: 'bg-purple-500/30 border-purple-500/60 text-purple-100',
+    D: 'bg-fuchsia-500/30 border-fuchsia-500/60 text-fuchsia-100',
+  }
   return (
     <>
       <tr className={`border-t border-white/5 ${rowBg}`}>
@@ -601,7 +745,10 @@ function TxnRow({ r, i, selected, expanded, onToggle, onExpand, onRetag, project
               : chip(r.bankAccount.slice(0, 18), 'bg-white/10 text-white/60')
           ) : <span className="text-white/30 text-xs">—</span>}
         </td>
-        <td className="px-3 py-1.5 text-white cursor-pointer hover:underline" onClick={onVendorClick}>{r.contact}</td>
+        <td className="px-3 py-1.5 text-white cursor-pointer hover:underline" onClick={paintMode && !r.projectCode && paintProject ? onPaint : onVendorClick}
+          title={paintMode && !r.projectCode && paintProject ? `🎨 Click to tag this row as ${paintProject}` : 'Click to open vendor sidebar'}>
+          {r.contact}
+        </td>
         <td className="px-3 py-1.5 text-right tabular-nums text-white/90">{fmt(r.total)}</td>
         <td className="px-3 py-1.5 text-white/50">
           {r.status === 'PAID' ? chip('PAID', 'bg-emerald-500/20 text-emerald-200')
@@ -616,7 +763,20 @@ function TxnRow({ r, i, selected, expanded, onToggle, onExpand, onRetag, project
               <option value="">UNTAGGED</option>
               {projects.filter(p => p.code).map(p => <option key={p.code} value={p.code!}>{projectLabel(p)}</option>)}
             </select>
-            {sug && (() => {
+            {tierSug && tierSug.code !== 'MANUAL' && (
+              <button onClick={() => onRetag(tierSug.code)}
+                title={`Tier ${tierSug.tier} (${tierSug.confidence}): ${tierSug.reason}`}
+                className={`text-[10px] px-1 py-0.5 border rounded ${tierChipColor[tierSug.tier] || 'bg-white/10 border-white/30 text-white'}`}>
+                {tierSug.tier} → {tierSug.code}
+              </button>
+            )}
+            {tierSug && tierSug.code === 'MANUAL' && (
+              <span title={tierSug.reason}
+                className="text-[10px] px-1 py-0.5 bg-fuchsia-500/20 border border-fuchsia-500/40 text-fuchsia-200 rounded cursor-help">
+                D · manual
+              </span>
+            )}
+            {sug && !tierSug && (() => {
               const sugName = projects.find(p => p.code === sug.project_code)?.name
               return (
                 <button onClick={() => onRetag(sug.project_code)}
@@ -672,7 +832,7 @@ function TxnRow({ r, i, selected, expanded, onToggle, onExpand, onRetag, project
   )
 }
 
-function MonthGroup({ month, rows, selected, expanded, onToggle, onExpand, onRetag, projects, savingId, suggestions, onVendorClick, ocrBusy, onOcr, noteDraft, setNoteDraft, onSaveNote }: {
+function MonthGroup({ month, rows, selected, expanded, onToggle, onExpand, onRetag, projects, savingId, suggestions, onVendorClick, ocrBusy, onOcr, noteDraft, setNoteDraft, onSaveNote, paintMode, paintProject, onPaint }: {
   month: string; rows: Row[]; selected: Set<string>; expanded: Set<string>;
   onToggle: (id: string) => void; onExpand: (id: string) => void;
   onRetag: (r: Row, code: string | null) => void; projects: ProjectOpt[]; savingId: string | null;
@@ -680,6 +840,7 @@ function MonthGroup({ month, rows, selected, expanded, onToggle, onExpand, onRet
   ocrBusy: Set<string>; onOcr: (r: Row) => void;
   noteDraft: Record<string, string>; setNoteDraft: (id: string, v: string) => void;
   onSaveNote: (r: Row, v: string) => void;
+  paintMode?: boolean; paintProject?: string; onPaint?: (r: Row) => void;
 }) {
   const sum = rows.reduce((a, r) => a + r.total, 0)
   return (
@@ -694,7 +855,8 @@ function MonthGroup({ month, rows, selected, expanded, onToggle, onExpand, onRet
           onToggle={() => onToggle(r.id)} onExpand={() => onExpand(r.id)} onRetag={(c) => onRetag(r, c)}
           projects={projects} savingId={savingId} suggestions={suggestions} onVendorClick={() => onVendorClick(r.contact)}
           ocrBusy={ocrBusy.has(r.id)} onOcr={() => onOcr(r)}
-          noteDraft={noteDraft[r.id]} setNoteDraft={(v: string) => setNoteDraft(r.id, v)} onSaveNote={(v: string) => onSaveNote(r, v)} />
+          noteDraft={noteDraft[r.id]} setNoteDraft={(v: string) => setNoteDraft(r.id, v)} onSaveNote={(v: string) => onSaveNote(r, v)}
+          paintMode={paintMode} paintProject={paintProject} onPaint={() => onPaint?.(r)} />
       ))}
     </>
   )
