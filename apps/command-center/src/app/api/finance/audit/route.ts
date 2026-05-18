@@ -42,7 +42,7 @@ export async function GET(request: NextRequest) {
 
     let billsQ = supabase
       .from('xero_invoices')
-      .select('id, xero_id, date, contact_name, total, status, line_items, project_code, project_code_source')
+      .select('id, xero_id, date, contact_name, total, status, line_items, project_code, project_code_source, reference')
       .eq('type', 'ACCPAY')
       .in('status', ['AUTHORISED', 'PAID'])
       .gte('date', since)
@@ -53,6 +53,7 @@ export async function GET(request: NextRequest) {
       .in('type', ['SPEND', 'SPEND-OVERPAYMENT'])
       .gte('date', since)
       .order('date', { ascending: false })
+    // (dedup logic widened below from ±14d → ±30d + AUTHORISED|PAID 2026-05-18)
     if (accountsParam === 'act-only') spendsQ = spendsQ.in('bank_account', ACT_ACCOUNTS)
     else if (accountsParam !== 'all') spendsQ = spendsQ.eq('bank_account', accountsParam)
 
@@ -70,24 +71,25 @@ export async function GET(request: NextRequest) {
       })
     }
 
-    // Dedupe bank-payment-of-bill
-    const paidBills = bills.filter((b: any) => b.status === 'PAID')
+    // Dedupe bank-payment-of-bill — widened to ±30d + AUTHORISED|PAID 2026-05-18
     const matched = new Set<string>()
     for (const s of spends) {
       const sd = new Date(s.date as string).getTime()
-      if (paidBills.some((b: any) =>
+      if (bills.some((b: any) =>
         (b.contact_name || '').trim().toUpperCase() === (s.contact_name || '').trim().toUpperCase() &&
         Number(b.total) === Number(s.total) &&
-        Math.abs((new Date(b.date as string).getTime() - sd) / 86400000) <= 14
+        Math.abs((new Date(b.date as string).getTime() - sd) / 86400000) <= 30
       )) matched.add(s.xero_transaction_id as string)
     }
 
     const expenseRows = [
-      ...bills.map((b: any) => ({ source: 'bill' as const, id: b.id, xeroId: b.xero_id, date: b.date, contact: b.contact_name, total: Number(b.total), status: b.status, projectCode: b.project_code as string | null, line_items: b.line_items, bankAccount: null as string | null })),
+      ...bills.map((b: any) => ({ source: 'bill' as const, id: b.id, xeroId: b.xero_id, date: b.date, contact: b.contact_name, total: Number(b.total), status: b.status, projectCode: b.project_code as string | null, projectSource: b.project_code_source as string | null, reference: b.reference as string | null, line_items: b.line_items, bankAccount: null as string | null })),
       ...spends.filter((s: any) => !matched.has(s.xero_transaction_id)).map((s: any) => ({
         source: s.type === 'SPEND' ? 'spend' as const : 'spend-overpay' as const,
         id: s.id, xeroId: s.xero_transaction_id, date: s.date, contact: s.contact_name, total: Number(s.total), status: s.status,
         projectCode: s.project_code as string | null,
+        projectSource: s.project_code_source as string | null,
+        reference: null as string | null,
         line_items: s.line_items,
         bankAccount: s.bank_account as string | null,
       })),
@@ -144,8 +146,11 @@ export async function GET(request: NextRequest) {
     }
 
     // Bunnings rows with line desc mentioning a DIFFERENT project than project_code
+    // Skip manual overrides — those are intentional user corrections of Dext.
     for (const r of expenseRows) {
       if (!r.projectCode) continue
+      const src = (r as any).projectSource || ''
+      if (typeof src === 'string' && src.startsWith('manual')) continue
       const desc = firstDescr(r.line_items as any[])
       const match = /—\s*(ACT-[A-Z]{2,4})\b/i.exec(desc)
       if (match && match[1].toUpperCase() !== r.projectCode.toUpperCase()) {
@@ -292,6 +297,107 @@ export async function GET(request: NextRequest) {
       unknownCode: projectReview.filter(r => r.recommendation === 'unknown-code').length,
     }
 
+    // ----- DUPLICATE GROUPS — definite + probable, structured for one-click voiding -----
+    // Excluded vendors: Qantas multi-leg flights, Qantas Group Accommodation multi-room,
+    // Airbnb subscriptions — these legitimately produce same-vendor-same-amount-same-day rows.
+    const DUP_EXCLUDED_VENDORS = new Set(['Qantas', 'Qantas Group Accommodation', 'Virgin Australia'])
+
+    type DupRow = { xeroId: string; status: string; reference: string | null; source: 'bill' | 'spend' | 'spend-overpay'; xeroLink: string }
+    type DupGroup = {
+      vendor: string
+      amount: number
+      date: string
+      projectCode: string | null
+      confidence: 'definite' | 'probable'
+      reason: string
+      rows: DupRow[]
+      extraDollars: number  // amount × (rows.length - 1) — the inflated amount if dups not voided
+    }
+
+    function mkLink(r: typeof expenseRows[0]): string {
+      return r.source === 'bill'
+        ? `https://go.xero.com/AccountsPayable/View.aspx?InvoiceID=${r.xeroId}`
+        : `https://go.xero.com/Bank/ViewTransaction.aspx?bankTransactionID=${r.xeroId}`
+    }
+    function extractDextId(ref: string | null): string | null {
+      if (!ref) return null
+      const m = /dext_import\s+([a-f0-9]{4,})/i.exec(ref)
+      return m ? m[1].toLowerCase() : null
+    }
+
+    // 1) DEFINITE — bills (only) sharing the same dext_import reference ID
+    const byDextId = new Map<string, typeof expenseRows>()
+    for (const r of expenseRows) {
+      if (r.source !== 'bill') continue
+      const id = extractDextId(r.reference)
+      if (!id) continue
+      const arr = byDextId.get(id) || []
+      arr.push(r); byDextId.set(id, arr)
+    }
+    const definiteDuplicates: DupGroup[] = []
+    for (const [, group] of byDextId.entries()) {
+      if (group.length < 2) continue
+      const first = group[0]
+      definiteDuplicates.push({
+        vendor: first.contact,
+        amount: first.total,
+        date: first.date as string,
+        projectCode: first.projectCode,
+        confidence: 'definite',
+        reason: `Same Dext import ID — receipt was processed into Xero twice.`,
+        rows: group.map((r) => ({ xeroId: r.xeroId as string, status: r.status as string, reference: r.reference, source: r.source, xeroLink: mkLink(r) })),
+        extraDollars: first.total * (group.length - 1),
+      })
+    }
+
+    // 2) PROBABLE — bill+bill same vendor+amount+date+project, excluding noisy vendors
+    const probDupKey = new Map<string, typeof expenseRows>()
+    for (const r of expenseRows) {
+      if (r.source !== 'bill') continue
+      if (DUP_EXCLUDED_VENDORS.has(r.contact)) continue
+      if (r.total < 100) continue
+      // Skip rows already counted as definite duplicates
+      const dextId = extractDextId(r.reference)
+      if (dextId && (byDextId.get(dextId)?.length || 0) > 1) continue
+      const key = `${r.contact}|${r.total.toFixed(2)}|${r.date}|${r.projectCode || 'UNTAGGED'}`
+      const arr = probDupKey.get(key) || []
+      arr.push(r); probDupKey.set(key, arr)
+    }
+    const probableDuplicates: DupGroup[] = []
+    for (const [, group] of probDupKey.entries()) {
+      if (group.length < 2) continue
+      const first = group[0]
+      const statuses = group.map((r) => r.status).join(' + ')
+      const reasonBits: string[] = []
+      if (statuses.includes('PAID') && statuses.includes('AUTHORISED')) {
+        reasonBits.push('1 PAID + ≥1 AUTHORISED — likely double-import; void the AUTH copies')
+      } else if (group.every((r) => r.status === 'AUTHORISED')) {
+        reasonBits.push('Both AUTHORISED — neither paid yet; void one before payment')
+      } else if (group.every((r) => r.status === 'PAID')) {
+        reasonBits.push('Both PAID — could be legitimate separate purchases; verify before voiding')
+      }
+      probableDuplicates.push({
+        vendor: first.contact,
+        amount: first.total,
+        date: first.date as string,
+        projectCode: first.projectCode,
+        confidence: 'probable',
+        reason: reasonBits.join(' · ') || `${group.length}× same vendor+amount+date`,
+        rows: group.map((r) => ({ xeroId: r.xeroId as string, status: r.status as string, reference: r.reference, source: r.source, xeroLink: mkLink(r) })),
+        extraDollars: first.total * (group.length - 1),
+      })
+    }
+
+    definiteDuplicates.sort((a, b) => b.extraDollars - a.extraDollars)
+    probableDuplicates.sort((a, b) => b.extraDollars - a.extraDollars)
+
+    const dupSummary = {
+      definiteCount: definiteDuplicates.length,
+      probableCount: probableDuplicates.length,
+      definiteDollars: Math.round(definiteDuplicates.reduce((a, g) => a + g.extraDollars, 0) * 100) / 100,
+      probableDollars: Math.round(probableDuplicates.reduce((a, g) => a + g.extraDollars, 0) * 100) / 100,
+    }
+
     return NextResponse.json({
       since,
       accountsParam,
@@ -310,6 +416,9 @@ export async function GET(request: NextRequest) {
       ocrFindings: ocrFindings.slice(0, 30),
       projectReview,
       reviewCounts,
+      definiteDuplicates,
+      probableDuplicates,
+      dupSummary,
     })
   } catch (e: any) {
     console.error('finance/audit error', e)

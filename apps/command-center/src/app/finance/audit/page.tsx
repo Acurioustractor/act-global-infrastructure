@@ -129,6 +129,15 @@ export default function FinanceAuditPage() {
               </div>
             </div>
 
+            {/* DUPLICATES — definite + probable, one-click Xero open */}
+            {(data.definiteDuplicates?.length > 0 || data.probableDuplicates?.length > 0) && (
+              <DuplicatesPanel
+                definite={data.definiteDuplicates || []}
+                probable={data.probableDuplicates || []}
+                summary={data.dupSummary}
+              />
+            )}
+
             {/* Notable findings */}
             {findings.length > 0 && (
               <div className="mb-4">
@@ -209,6 +218,90 @@ export default function FinanceAuditPage() {
             )}
           </>
         )}
+      </div>
+    </div>
+  )
+}
+
+type DupRow = { xeroId: string; status: string; reference: string | null; source: 'bill' | 'spend' | 'spend-overpay'; xeroLink: string }
+type DupGroup = {
+  vendor: string
+  amount: number
+  date: string
+  projectCode: string | null
+  confidence: 'definite' | 'probable'
+  reason: string
+  rows: DupRow[]
+  extraDollars: number
+}
+
+function DuplicatesPanel({ definite, probable, summary }: { definite: DupGroup[]; probable: DupGroup[]; summary: any }) {
+  const [showProbable, setShowProbable] = useState(true)
+
+  function renderGroup(g: DupGroup, key: string) {
+    return (
+      <div key={key} className={`border rounded p-3 ${g.confidence === 'definite' ? 'border-red-500/50 bg-red-500/5' : 'border-amber-500/40 bg-amber-500/5'}`}>
+        <div className="flex items-baseline justify-between gap-3">
+          <div className="flex-1">
+            <div className="text-sm font-semibold text-white">
+              {g.confidence === 'definite' ? '🔴' : '🟡'} {g.vendor}
+              <span className="ml-2 text-xs text-white/50">{g.date}</span>
+              {g.projectCode && <Link href={`/finance/projects/${g.projectCode}`} className="ml-2 text-xs text-blue-400 hover:underline">{g.projectCode}</Link>}
+            </div>
+            <div className="text-xs text-white/60 mt-0.5">{g.reason}</div>
+          </div>
+          <div className="text-right whitespace-nowrap">
+            <div className="text-base font-bold tabular-nums text-white">{fmt(g.amount)} × {g.rows.length}</div>
+            <div className="text-[10px] text-white/40">overage: {fmt(g.extraDollars)}</div>
+          </div>
+        </div>
+        <div className="mt-2 flex flex-wrap gap-2">
+          {g.rows.map((r, i) => (
+            <a key={i} href={r.xeroLink} target="_blank" rel="noreferrer"
+              className={`text-xs px-2 py-1 rounded border hover:bg-white/10 ${r.status === 'PAID' ? 'border-emerald-500/40 text-emerald-200' : r.status === 'AUTHORISED' ? 'border-amber-500/40 text-amber-200' : 'border-white/30 text-white/70'}`}>
+              {r.status} · {r.source} · {r.reference?.slice(0, 32) || r.xeroId.slice(0, 8)} ↗
+            </a>
+          ))}
+        </div>
+      </div>
+    )
+  }
+
+  return (
+    <div className="mb-4">
+      <h2 className="text-sm uppercase text-white/40 mb-2">
+        Duplicates worth voiding
+        <span className="ml-2 text-red-300/80">{summary?.definiteCount || 0} definite · {fmt(summary?.definiteDollars || 0)}</span>
+        <span className="ml-2 text-amber-300/80">{summary?.probableCount || 0} probable · {fmt(summary?.probableDollars || 0)}</span>
+      </h2>
+
+      {definite.length > 0 && (
+        <div className="mb-3">
+          <div className="text-xs text-red-300/70 uppercase tracking-wider mb-1">Definite (same Dext import ID)</div>
+          <div className="space-y-2">
+            {definite.map((g, i) => renderGroup(g, `def-${i}`))}
+          </div>
+        </div>
+      )}
+
+      {probable.length > 0 && (
+        <div>
+          <div className="text-xs text-amber-300/70 uppercase tracking-wider mb-1 flex items-center gap-2">
+            Probable (same vendor + amount + date)
+            <button onClick={() => setShowProbable(!showProbable)} className="text-[10px] px-1.5 py-0.5 border border-white/20 rounded hover:bg-white/10">
+              {showProbable ? 'hide' : `show ${probable.length}`}
+            </button>
+          </div>
+          {showProbable && (
+            <div className="space-y-2">
+              {probable.map((g, i) => renderGroup(g, `prob-${i}`))}
+            </div>
+          )}
+        </div>
+      )}
+
+      <div className="text-[10px] text-white/40 mt-2">
+        Click any chip to open the row in Xero. For PAID + AUTHORISED pairs, void the AUTHORISED one. For both-PAID, verify before voiding. After voiding, refresh — the alert clears once the bill no longer shows.
       </div>
     </div>
   )
