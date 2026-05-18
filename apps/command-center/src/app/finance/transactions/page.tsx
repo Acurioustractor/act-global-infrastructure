@@ -605,8 +605,8 @@ export default function TransactionsExplorer() {
             >
               <div className="text-xs text-white/40 uppercase tracking-wider mb-1">Receipted</div>
               <div className={`text-xl font-bold tabular-nums ${reality.receiptedPct >= 95 ? 'text-emerald-300' : reality.receiptedPct >= 80 ? 'text-amber-300' : 'text-red-300'}`}>{reality.receiptedPct}%</div>
-              <div className="text-[10px] text-white/40">{reality.receipted.toLocaleString()} of {reality.totalDeduped.toLocaleString()}</div>
-              <div className="text-[10px] text-white/30">{reality.unreceipted.toLocaleString()} missing →</div>
+              <div className="text-[10px] text-white/40">{reality.receipted.toLocaleString()} of {(reality.receiptableTotal ?? reality.totalDeduped).toLocaleString()}</div>
+              <div className="text-[10px] text-white/30">{reality.unreceipted.toLocaleString()} missing → · {reality.noReceiptNeeded ?? 0} excluded (transfers/ATO)</div>
             </Link>
             <Link
               href="/finance/audit"

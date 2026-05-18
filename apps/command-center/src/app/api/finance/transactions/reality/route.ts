@@ -5,6 +5,23 @@ export const dynamic = 'force-dynamic'
 
 const ACT_ACCOUNTS = ['NAB Visa ACT #8815', 'NJ Marchesi T/as ACT Everyday']
 
+// Rows where "no receipt" is the correct state — bank statement IS the evidence.
+// Excluded from receipt-coverage denominator so the headline reflects real action items.
+function isNoReceiptNeeded(contactName: string | null | undefined): boolean {
+  const n = (contactName || '').trim()
+  if (!n) return false
+  // Owner / inter-account transfers (Marchesi family + Knight family)
+  if (/^(Nicholas|Nic|Benjamin|Ben)(\s+(Marchesi|Knight|)|$)/i.test(n)) return true
+  if (/Marchesi|Knight/i.test(n) && /^(Nicholas|Nic|Benjamin|Ben)/i.test(n)) return true
+  if (n === 'Nicholas' || n === 'Nic' || n === 'Ben' || n === 'Benjamin') return true
+  if (n === 'Nicholas Marchesi' || n === 'Benjamin Knight') return true
+  // Government / tax payments — no receipt
+  if (n === 'Australian Taxation Office' || /^ATO\b/i.test(n)) return true
+  // Bank fees / interest
+  if (/^(NAB|Bank|Internal|Transfer)\b/i.test(n) && /(fee|charge|interest|transfer)/i.test(n)) return true
+  return false
+}
+
 function firstDescr(li: any[] | null | undefined): string {
   if (!Array.isArray(li) || !li.length) return ''
   return li.map((x) => x?.description || x?.Description || '').filter(Boolean).join(' | ')
@@ -78,10 +95,17 @@ export async function GET(request: NextRequest) {
       const key = `${(b.contact_name || '').trim().toUpperCase()}|${Number(b.total).toFixed(2)}|${b.date}`
       if (b.has_attachments) billAttachmentByKey.set(key, true)
     }
-    const billReceipted = bills.filter((b: any) => b.has_attachments).length
-    const spendReceipted = unmatchedSpends.filter((s: any) => s.has_attachments).length
+    // "No receipt needed" categories don't count against receipt coverage —
+    // bank statement IS the evidence for transfers + ATO + bank fees.
+    const noReceiptNeeded = [
+      ...bills.filter((b: any) => isNoReceiptNeeded(b.contact_name)),
+      ...unmatchedSpends.filter((s: any) => isNoReceiptNeeded(s.contact_name)),
+    ].length
+    const receiptableTotal = totalDeduped - noReceiptNeeded
+    const billReceipted = bills.filter((b: any) => b.has_attachments && !isNoReceiptNeeded(b.contact_name)).length
+    const spendReceipted = unmatchedSpends.filter((s: any) => s.has_attachments && !isNoReceiptNeeded(s.contact_name)).length
     const receipted = billReceipted + spendReceipted
-    const receiptedPct = totalDeduped > 0 ? Math.round((receipted / totalDeduped) * 100) : 0
+    const receiptedPct = receiptableTotal > 0 ? Math.round((receipted / receiptableTotal) * 100) : 0
 
     // ----- Audit issue counts -----
     // Duplicates: same vendor+amount+date appearing twice on the same project
@@ -128,10 +152,12 @@ export async function GET(request: NextRequest) {
       tagged,
       untagged,
       taggedPct,
-      // Receipts
+      // Receipts (denominator excludes no-receipt-needed: transfers, ATO, bank fees)
       receipted,
-      unreceipted: totalDeduped - receipted,
+      unreceipted: receiptableTotal - receipted,
       receiptedPct,
+      noReceiptNeeded,
+      receiptableTotal,
       // Audit
       duplicates,
       mismatches,
