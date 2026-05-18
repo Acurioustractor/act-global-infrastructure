@@ -109,6 +109,10 @@ export default function TransactionsExplorer() {
   const [batchOcrBusy, setBatchOcrBusy] = useState(false)
   const [batchOcrProgress, setBatchOcrProgress] = useState({ done: 0, total: 0 })
 
+  // Reality-check strip (org-wide stats, separate from the filter-scoped row set)
+  const [reality, setReality] = useState<any>(null)
+  const [realityLoading, setRealityLoading] = useState(false)
+
   async function runOcr(row: Row) {
     if (!row.hasAttachments) { setToast('No Xero attachment on this row'); setTimeout(() => setToast(null), 2000); return }
     setOcrBusy((s) => { const n = new Set(s); n.add(row.id); return n })
@@ -201,6 +205,16 @@ export default function TransactionsExplorer() {
   }, [])
 
   useEffect(load, [projectFilter, since, accountFilter])
+
+  // Load reality stats once per (since, accountFilter) change — org-wide, ignores project filter
+  useEffect(() => {
+    setRealityLoading(true)
+    const sp = new URLSearchParams({ accounts: accountFilter, since })
+    fetch(`/api/finance/transactions/reality?${sp.toString()}`)
+      .then(r => r.json())
+      .then(setReality)
+      .finally(() => setRealityLoading(false))
+  }, [since, accountFilter])
 
   const filtered = useMemo(() => {
     let r = rows
@@ -564,6 +578,49 @@ export default function TransactionsExplorer() {
             </div>
           )}
         </div>
+
+        {/* Reality-check strip — org-wide, click any tile to drill in */}
+        {reality && !reality.error && (
+          <div className="bg-white/5 border border-white/15 rounded-lg p-3 mb-3 grid grid-cols-2 md:grid-cols-4 gap-3">
+            <div className="text-center">
+              <div className="text-xs text-white/40 uppercase tracking-wider mb-1">Volume</div>
+              <div className="text-xl font-bold text-white tabular-nums">{reality.totalDeduped.toLocaleString()}</div>
+              <div className="text-[10px] text-white/40">{reality.billsCount} bills + {reality.spendsRaw - reality.matchedPairs} unmatched spends</div>
+              <div className="text-[10px] text-white/30">{reality.matchedPairs} bill↔spend pairs deduped</div>
+            </div>
+            <button
+              onClick={() => { setProjectFilter('UNTAGGED'); setSelected(new Set()) }}
+              className={`text-center rounded p-1 transition-colors ${reality.taggedPct >= 95 ? 'hover:bg-emerald-500/10' : 'hover:bg-amber-500/10'}`}
+              title="Click to filter to UNTAGGED rows"
+            >
+              <div className="text-xs text-white/40 uppercase tracking-wider mb-1">Tagged</div>
+              <div className={`text-xl font-bold tabular-nums ${reality.taggedPct >= 95 ? 'text-emerald-300' : reality.taggedPct >= 80 ? 'text-amber-300' : 'text-red-300'}`}>{reality.taggedPct}%</div>
+              <div className="text-[10px] text-white/40">{reality.tagged.toLocaleString()} of {reality.totalDeduped.toLocaleString()}</div>
+              <div className="text-[10px] text-white/30">{reality.untagged.toLocaleString()} need tags →</div>
+            </button>
+            <Link
+              href="/finance/reconciliation"
+              className={`text-center rounded p-1 transition-colors block ${reality.receiptedPct >= 95 ? 'hover:bg-emerald-500/10' : 'hover:bg-amber-500/10'}`}
+              title="Open reconciliation — match bank lines to receipts"
+            >
+              <div className="text-xs text-white/40 uppercase tracking-wider mb-1">Receipted</div>
+              <div className={`text-xl font-bold tabular-nums ${reality.receiptedPct >= 95 ? 'text-emerald-300' : reality.receiptedPct >= 80 ? 'text-amber-300' : 'text-red-300'}`}>{reality.receiptedPct}%</div>
+              <div className="text-[10px] text-white/40">{reality.receipted.toLocaleString()} of {reality.totalDeduped.toLocaleString()}</div>
+              <div className="text-[10px] text-white/30">{reality.unreceipted.toLocaleString()} missing →</div>
+            </Link>
+            <Link
+              href="/finance/audit"
+              className={`text-center rounded p-1 transition-colors block ${(reality.duplicates + reality.mismatches) === 0 ? 'hover:bg-emerald-500/10' : 'hover:bg-red-500/10'}`}
+              title="Open audit — duplicates and project-tag mismatches"
+            >
+              <div className="text-xs text-white/40 uppercase tracking-wider mb-1">Audit issues</div>
+              <div className={`text-xl font-bold tabular-nums ${(reality.duplicates + reality.mismatches) === 0 ? 'text-emerald-300' : 'text-red-300'}`}>{reality.duplicates + reality.mismatches}</div>
+              <div className="text-[10px] text-white/40">{reality.duplicates} dups · {reality.mismatches} mismatch</div>
+              <div className="text-[10px] text-white/30">go to audit →</div>
+            </Link>
+          </div>
+        )}
+        {realityLoading && !reality && <div className="bg-white/5 border border-white/15 rounded-lg p-3 mb-3 text-center text-xs text-white/40">Loading reality check…</div>}
 
         {/* Auto-suggest + paint-bucket + batch-OCR toolbar */}
         <div className="bg-emerald-500/5 border border-emerald-500/20 rounded-lg p-3 mb-3 flex flex-wrap items-center gap-3">
