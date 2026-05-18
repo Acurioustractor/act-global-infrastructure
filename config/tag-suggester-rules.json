@@ -1,0 +1,61 @@
+{
+  "_meta": {
+    "description": "Shared rules for the tag suggester. Used by both scripts/suggest-from-line-desc.mjs and apps/command-center/src/lib/tag-suggester.ts. Edit here; both surfaces re-read on next run.",
+    "harvest_cutoff": "2026-01-01",
+    "last_updated": "2026-05-18"
+  },
+  "vendor_rules": {
+    "Kennedy's":                          { "code": "ACT-HV", "tier": "B", "note": "decking supplier — always Harvest" },
+    "Maleny Landscaping Supplies":        { "code": "ACT-HV", "tier": "B", "note": "15 rows in FY26 all Harvest" },
+    "MALENY LANDSCAPING SUPPLIES":        { "code": "ACT-HV", "tier": "B", "note": "duplicate-cased entry" },
+    "Longara":                            { "code": "ACT-HV", "tier": "B", "note": "crates supplier — Harvest" },
+    "Savage Landscape Supplies":          { "code": "ACT-HV", "tier": "B", "note": "Harvest landscaping" },
+    "Smartwood":                          { "code": "ACT-HV", "tier": "B", "note": "Harvest timber" },
+    "Diggermate Franchising":             { "code": "ACT-HV", "tier": "B", "note": "Harvest hire" },
+    "Hydraulink Brisbane North":          { "code": "ACT-HV", "tier": "B", "note": "Harvest equipment" },
+    "Total Tools East Brisbane":          { "code": "ACT-HV", "tier": "B", "note": "Harvest tools" },
+    "Thais Pupio Design":                 { "code": "ACT-HV", "tier": "B", "note": "Harvest design — verify if also Goods" },
+    "Sophie Deirdre Hickey":              { "code": "ACT-HV", "tier": "B", "note": "Harvest contractor labour" },
+
+    "Defy Manufacturing":                 { "code": "ACT-GD", "tier": "B", "note": "27 rows all Goods — primary manufacturer" },
+    "Defy Design":                        { "code": "ACT-GD", "tier": "B", "note": "6 rows all Goods — design arm of Defy" },
+    "Byo Group":                          { "code": "ACT-GD", "tier": "B", "note": "19 rows all Goods" },
+    "Zinus Australia":                    { "code": "ACT-GD", "tier": "B", "note": "7 rows all Goods — mattress supplier" },
+    "Carla Furnishers":                   { "code": "ACT-GD", "tier": "B", "note": "2 rows $22K — furniture" },
+    "Joseph Kirmos":                      { "code": "ACT-GD", "tier": "B", "note": "6 rows all Goods — contractor" },
+    "Carbatec Brisbane":                  { "code": "ACT-GD", "tier": "B", "note": "3 rows all Goods — woodworking tools" },
+    "RW Pacific Traders":                 { "code": "ACT-GD", "tier": "B", "note": "3 rows all Goods" },
+    "Department of Primary Hobart":       { "code": "ACT-GD", "tier": "B", "note": "3 rows all Goods — TAS biosecurity" },
+    "Endless Parks":                      { "code": "ACT-GD", "tier": "B", "note": "2 rows all Goods" },
+
+    "Peak Up Transport":                  { "code": "ACT-GD", "tier": "B", "note": "5 rows all Goods — interstate freight" },
+    "Loadshift Sydney":                   { "code": "ACT-GD", "tier": "B", "note": "3 rows all Goods — freight" },
+    "Reddy Express":                      { "code": "ACT-GD", "tier": "B", "note": "12 rows all Goods — courier" },
+    "Sendle":                             { "code": "ACT-GD", "tier": "B", "note": "8 rows all Goods — courier" },
+
+    "Palm Island Motel":                  { "code": "ACT-GD", "tier": "B", "note": "8 rows all Goods — Palm Island delivery" },
+    "Palm Island Barge":                  { "code": "ACT-GD", "tier": "B", "note": "2 rows all Goods — Palm Island transport" },
+    "Ti Tree Roadhouse":                  { "code": "ACT-GD", "tier": "B", "note": "7 rows all Goods — NT delivery route" },
+    "Tennant Creek Caravan Park":         { "code": "ACT-GD", "tier": "B", "note": "4 rows all Goods — NT delivery route" },
+    "Grand Hotel & Apartments Townsville":{ "code": "ACT-GD", "tier": "B", "note": "4 rows all Goods — TSV stop" },
+    "Icon On Isa":                        { "code": "ACT-GD", "tier": "B", "note": "3 rows all Goods — Mt Isa stop" },
+    "Wild Earth":                         { "code": "ACT-GD", "tier": "B", "note": "4 rows all Goods" }
+  },
+  "special_vendors": {
+    "RNM CARPENTRY":                      { "code": "ACT-OO", "tier": "B", "note": "Ben confirmed 2026-05-18: Oonchiumpa station project (NOT Harvest, NOT farm)" }
+  },
+  "witta_vendors": [
+    "Maleny Hardware And Rural Supplies",
+    "TNT Plastering & Maintenance",
+    "Chris Witta",
+    "Kennards Hire",
+    "Flight Bar Witta",
+    "Liberty Maleny",
+    "Mapleton Public House",
+    "Maleny Hotel"
+  ],
+  "ambiguous_vendors": [
+    "Avis",
+    "Thrifty"
+  ]
+}
