@@ -33,6 +33,9 @@ import {
   ShieldAlert,
   ListChecks,
   Activity,
+  Search,
+  Building2,
+  AlertOctagon,
 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 
@@ -123,8 +126,11 @@ export const navStructure: SidebarNavGroup[] = [
           { href: '/finance/reconciliation', label: 'Reconciliation', icon: ClipboardCheck, color: 'text-cyan-400', bg: 'bg-cyan-500/20' },
           { href: '/finance/receipts-triage', label: 'Receipts Triage', icon: Receipt, color: 'text-rose-400', bg: 'bg-rose-500/20' },
           { href: '/finance/tagger-v2', label: 'Rapid Tagger', icon: Tag, color: 'text-amber-400', bg: 'bg-amber-500/20' },
+          { href: '/finance/transactions', label: 'All Transactions', icon: Search, color: 'text-blue-400', bg: 'bg-blue-500/20' },
+          { href: '/finance/vendors', label: 'Vendors', icon: Building2, color: 'text-purple-400', bg: 'bg-purple-500/20' },
 
           { href: '#money-state', label: 'Money state', icon: BarChart3, divider: true },
+          { href: '/finance/audit', label: 'Spend Audit', icon: AlertOctagon, color: 'text-red-400', bg: 'bg-red-500/20' },
           { href: '/finance/overview', label: 'CEO Cockpit', icon: Layers, color: 'text-emerald-400', bg: 'bg-emerald-500/20' },
           { href: '/finance/money-alignment', label: 'Money Alignment', icon: CircleDollarSign, color: 'text-emerald-400', bg: 'bg-emerald-500/20' },
           { href: '/finance/projects', label: 'Projects P&L', icon: BarChart3, color: 'text-green-400', bg: 'bg-green-500/20' },

@@ -344,7 +344,201 @@ export async function GET(
       return s + amt * prob
     }, 0)
 
+    // ---- REAL EXPENSE COMPUTATION (bills + unmatched bank spend, deduped) ----
+    // The pre-existing project_monthly_financials only counts bank txns, missing
+    // ACCPAY bills. Recompute from raw to give the page accurate numbers + audit alerts.
+    const [realBillsRes, realSpendsRes] = await Promise.all([
+      supabase
+        .from('xero_invoices')
+        .select('id, xero_id, date, contact_name, total, status, line_items, project_code_source')
+        .eq('project_code', projectCode)
+        .eq('type', 'ACCPAY')
+        .in('status', ['AUTHORISED', 'PAID'])
+        .order('date', { ascending: false })
+        .range(0, 4999),
+      supabase
+        .from('xero_transactions')
+        .select('id, xero_transaction_id, date, contact_name, total, status, type, line_items, project_code_source, has_attachments')
+        .eq('project_code', projectCode)
+        .in('type', ['SPEND', 'SPEND-OVERPAYMENT'])
+        .order('date', { ascending: false })
+        .range(0, 4999),
+    ])
+    const realBills = realBillsRes.data || []
+    const realSpends = realSpendsRes.data || []
+    const paidBills = realBills.filter((b: any) => b.status === 'PAID')
+    const matchedSpendIds = new Set<string>()
+    for (const s of realSpends) {
+      const sd = new Date(s.date as string).getTime()
+      if (paidBills.some((b: any) =>
+        (b.contact_name || '').trim().toUpperCase() === (s.contact_name || '').trim().toUpperCase() &&
+        Number(b.total) === Number(s.total) &&
+        Math.abs((new Date(b.date as string).getTime() - sd) / 86400000) <= 14
+      )) matchedSpendIds.add(s.xero_transaction_id as string)
+    }
+    const realExpenseRows = [
+      ...realBills.map((b: any) => ({ source: 'bill' as const, id: b.id, xeroId: b.xero_id, date: b.date, contact: b.contact_name, total: Number(b.total), status: b.status })),
+      ...realSpends.filter((s: any) => !matchedSpendIds.has(s.xero_transaction_id)).map((s: any) => ({ source: s.type === 'SPEND' ? 'spend' as const : 'spend-overpay' as const, id: s.id, xeroId: s.xero_transaction_id, date: s.date, contact: s.contact_name, total: Number(s.total), status: s.status })),
+    ]
+    const realExpenseTotal = realExpenseRows.reduce((a, r) => a + r.total, 0)
+
+    // Recompute monthly expenses
+    const realMonthlyExpenses = new Map<string, number>()
+    for (const r of realExpenseRows) {
+      const key = (r.date as string).slice(0, 10) // YYYY-MM-DD; we'll trim later
+      const month = key.slice(0, 7) + '-01' // YYYY-MM-01 to match monthly format
+      realMonthlyExpenses.set(month, (realMonthlyExpenses.get(month) || 0) + r.total)
+    }
+    // Merge into monthlyData (preserving existing months + revenue; replacing expenses with real values)
+    const monthlyMap = new Map<string, any>(monthlyData.map((m: any) => [m.month, { ...m }]))
+    for (const [month, exp] of realMonthlyExpenses) {
+      const existing = monthlyMap.get(month) || { month, revenue: 0, expenses: 0, net: 0, revenueBreakdown: {}, expenseBreakdown: {}, fyYtdRevenue: 0, fyYtdExpenses: 0, fyYtdNet: 0, transactionCount: 0, unmappedCount: 0 }
+      existing.expenses = exp
+      existing.net = (existing.revenue || 0) - exp
+      monthlyMap.set(month, existing)
+    }
+    const monthlyDataReal = [...monthlyMap.values()].sort((a, b) => a.month.localeCompare(b.month))
+
+    // Recompute totals from real monthly
+    const totalsReal = monthlyDataReal.reduce((acc: any, m: any) => ({
+      revenue: acc.revenue + Number(m.revenue || 0),
+      expenses: acc.expenses + Number(m.expenses || 0),
+      net: acc.net + Number(m.net || 0),
+    }), { revenue: 0, expenses: 0, net: 0 })
+
+    // Top vendors by real expense
+    const realVendorSpend = new Map<string, { contact: string; total: number; count: number; bills: number; spends: number }>()
+    for (const r of realExpenseRows) {
+      const v = realVendorSpend.get(r.contact) || { contact: r.contact, total: 0, count: 0, bills: 0, spends: 0 }
+      v.total += r.total; v.count += 1
+      if (r.source === 'bill') v.bills += 1; else v.spends += 1
+      realVendorSpend.set(r.contact, v)
+    }
+    const realTopVendors = [...realVendorSpend.values()].sort((a, b) => b.total - a.total).slice(0, 15)
+
+    // Audit alerts — heuristic detection from the 2026-05-17 review (project-agnostic)
+    type AuditAlert = { severity: 'high' | 'medium' | 'info'; title: string; detail: string; amount?: number; xeroLink?: string }
+    const auditAlerts: AuditAlert[] = []
+    const notableFindings: AuditAlert[] = []
+
+    // 1) Same-day same-amount duplicates (vendor + amount + date)
+    const dupKeyCount = new Map<string, { rows: typeof realExpenseRows; key: string }>()
+    for (const r of realExpenseRows) {
+      const key = `${r.contact}|${r.total.toFixed(2)}|${r.date}`
+      const entry = dupKeyCount.get(key) || { rows: [], key }
+      entry.rows.push(r); dupKeyCount.set(key, entry)
+    }
+    for (const { rows: dupRows } of dupKeyCount.values()) {
+      if (dupRows.length > 1 && dupRows[0].total > 100) {
+        auditAlerts.push({
+          severity: 'high',
+          title: `${dupRows.length}× duplicate? ${dupRows[0].contact} ${dupRows[0].date}`,
+          detail: `Same vendor + amount + date appears ${dupRows.length} times — likely duplicate billing or quote+invoice.`,
+          amount: dupRows[0].total * (dupRows.length - 1),
+          xeroLink: dupRows[0].source === 'bill'
+            ? `https://go.xero.com/AccountsPayable/View.aspx?InvoiceID=${dupRows[0].xeroId}`
+            : `https://go.xero.com/Bank/ViewTransaction.aspx?bankTransactionID=${dupRows[0].xeroId}`,
+        })
+      }
+    }
+
+    // 2) Hardcoded known findings for ACT-HV (extend per project as findings accrue)
+    if (projectCode === 'ACT-HV') {
+      // St Mary's Cathedral decking — embedded in Kennedy's invoices, found via OCR
+      notableFindings.push({
+        severity: 'info',
+        title: '★ St Mary\'s Cathedral decking — 12.5t @ $700 = $8,750',
+        detail: 'Discovered via OCR. Embedded across Kennedy\'s 2026-04-24 ($7,000 / 10t) and 2026-05-07 ($1,750 / 2.5t) invoices.',
+        amount: 8750,
+      })
+      // Known duplicate
+      const dupKennedy = realExpenseRows.find((r) => r.xeroId === '0e7e9885-4c3e-4100-a6fc-40433e2e1e6d')
+      if (dupKennedy) {
+        auditAlerts.push({
+          severity: 'high',
+          title: '⚠ Kennedy\'s 2026-04-24 duplicate — $8,525 should be voided',
+          detail: 'Same invoice charged twice. Real paid amount is $8,594.91 (other row, incl. CC surcharge).',
+          amount: 8525,
+          xeroLink: 'https://go.xero.com/Bank/ViewTransaction.aspx?bankTransactionID=0e7e9885-4c3e-4100-a6fc-40433e2e1e6d',
+        })
+      }
+      // Flight Bar Witta miscoded NT travel
+      const flightBarRows = realExpenseRows.filter((r) => r.contact === 'Flight Bar Witta')
+      if (flightBarRows.length > 0) {
+        const sum = flightBarRows.reduce((a, r) => a + r.total, 0)
+        auditAlerts.push({
+          severity: 'medium',
+          title: `⚠ Flight Bar Witta — ${flightBarRows.length} miscoded NT travel rows`,
+          detail: 'Bank-feed auto-coded "Flight Bar Witta" but the actual charges are Alice Springs / Tennant Creek / etc. Should be ACT-OO.',
+          amount: sum,
+        })
+      }
+      // Carbatec maybe-duplicates
+      const carbatecRouterDup = realExpenseRows.find((r) => r.xeroId === '310fa568-bf02-4fdf-b6d4-c7e41f0ff4a4')
+      const carbatecBandsawDup = realExpenseRows.find((r) => r.xeroId === '6bf82502-d122-45ab-8f1c-843415d36441')
+      if (carbatecRouterDup || carbatecBandsawDup) {
+        auditAlerts.push({
+          severity: 'medium',
+          title: '? Carbatec maybe-duplicates — $3,657.70 needs verification',
+          detail: 'Router table $2,338.70 AUTHORISED appears as line in $4,575.65 PAID invoice. Same for $1,319 bandsaw inside $1,811.70.',
+          amount: 3657.70,
+        })
+      }
+      // RNM Carpentry — Ben flagged not Harvest
+      const rnmRows = realExpenseRows.filter((r) => r.contact.toUpperCase().startsWith('RNM CARPENTRY'))
+      if (rnmRows.length > 0) {
+        const sum = rnmRows.reduce((a, r) => a + r.total, 0)
+        auditAlerts.push({
+          severity: 'high',
+          title: `⚠ RNM Carpentry — $${sum.toFixed(2)} flagged not Harvest`,
+          detail: 'Per user direction 2026-05-17, RNM Carpentry spend should not sit under ACT-HV. Retag or move.',
+          amount: sum,
+        })
+      }
+    }
+
+    // 3) Untagged-project-source detection — rows where project_code_source is something fishy
+    const autoSourced = [...realBills, ...realSpends].filter((r: any) => r.project_code_source && r.project_code_source !== 'manual').length
+    if (autoSourced > 0) {
+      auditAlerts.push({
+        severity: 'info',
+        title: `${autoSourced} rows tagged by auto-rule (not manual review)`,
+        detail: 'These rows were auto-tagged via vendor rules. Spot-check that they actually belong to this project.',
+      })
+    }
+
+    // OCR-discovered line items — surface anything tagged via _ocr blob
+    const ocrSurfacable: { date: string; contact: string; summary: string; xeroLink: string }[] = []
+    for (const r of [...realBills, ...realSpends]) {
+      const li = Array.isArray(r.line_items) ? (r.line_items as any[]) : []
+      for (const item of li) {
+        if (item?._ocr?.summary) {
+          const xeroLink = realBills.includes(r as any)
+            ? `https://go.xero.com/AccountsPayable/View.aspx?InvoiceID=${(r as any).xero_id}`
+            : `https://go.xero.com/Bank/ViewTransaction.aspx?bankTransactionID=${(r as any).xero_transaction_id}`
+          ocrSurfacable.push({ date: r.date as string, contact: r.contact_name as string, summary: item._ocr.summary, xeroLink })
+          break
+        }
+      }
+    }
+
+    // Override what the page renders
+    totals.expenses = totalsReal.expenses
+    totals.revenue = totalsReal.revenue
+    totals.net = totalsReal.net
+    monthlyData.length = 0
+    monthlyData.push(...monthlyDataReal)
+    // Use real top vendors as the project's expense breakdown
+    const realExpensesByVendor: Record<string, number> = {}
+    for (const v of realVendorSpend.values()) realExpensesByVendor[v.contact] = v.total
+
     return NextResponse.json({
+      auditAlerts,
+      notableFindings,
+      realExpenseTotal,
+      realExpenseRowCount: realExpenseRows.length,
+      realTopVendors,
+      ocrFindings: ocrSurfacable.slice(0, 20),
       projectCode,
       monthly: monthlyData,
       totals,

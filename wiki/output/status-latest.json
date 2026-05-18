@@ -1,35 +1,35 @@
 {
-  "generated_at": "2026-05-06T07:16:52.038Z",
+  "generated_at": "2026-05-17T23:00:00.617Z",
   "scope": "canonical-graph",
   "domains": {
     "art": 8,
     "communities": 3,
-    "concepts": 29,
-    "decisions": 23,
-    "finance": 15,
+    "concepts": 30,
+    "decisions": 29,
+    "finance": 19,
     "people": 23,
-    "projects": 90,
+    "projects": 98,
     "research": 15,
     "stories": 54,
-    "synthesis": 23,
+    "synthesis": 30,
     "technical": 6
   },
   "summary": {
-    "date": "2026-05-06",
-    "total_articles": 287,
-    "total_links": 2139,
-    "orphans": 46,
-    "broken_links": 203,
+    "date": "2026-05-17",
+    "total_articles": 313,
+    "total_links": 2164,
+    "orphans": 67,
+    "broken_links": 230,
     "stubs": 0,
-    "missing_from_index": 73,
-    "missing_backlinks": 507,
+    "missing_from_index": 99,
+    "missing_backlinks": 525,
     "advisory_backlinks": 481
   },
   "source_bridge": {
-    "raw_sources": 153,
+    "raw_sources": 154,
     "source_summaries": 151,
     "covered_raw_sources": 151,
-    "missing_source_summaries": 2,
+    "missing_source_summaries": 3,
     "orphan_source_summaries": 0,
     "by_kind": {
       "published_article_capture": {
@@ -38,9 +38,9 @@
         "missing_raw_sources": 0
       },
       "database_export": {
-        "raw_sources": 2,
+        "raw_sources": 3,
         "covered_raw_sources": 2,
-        "missing_raw_sources": 0
+        "missing_raw_sources": 1
       },
       "raw_capture": {
         "raw_sources": 82,
@@ -63,7 +63,7 @@
         "missing_raw_sources": 0
       }
     },
-    "coverage_pct": 99
+    "coverage_pct": 98
   },
   "repair_queue": {
     "broken_links": [
@@ -162,16 +162,16 @@
         "page_path": "decisions/2026-04-18-picc-selective-youth-voice"
       },
       {
-        "stem": "2026-05-harvest-subsidiary-structure",
-        "title": "The Harvest — Subsidiary Structure Decision",
-        "relative_path": "decisions/2026-05-harvest-subsidiary-structure.md",
-        "page_path": "decisions/2026-05-harvest-subsidiary-structure"
+        "stem": "2026-05-14-notion-platform-architecture",
+        "title": "Notion as the unified ask layer",
+        "relative_path": "decisions/2026-05-14-notion-platform-architecture.md",
+        "page_path": "decisions/2026-05-14-notion-platform-architecture"
       },
       {
-        "stem": "2026-05-pile-opportunity-workspace",
-        "title": "Pile-Tagged Opportunity Workspace — Unified Architecture",
-        "relative_path": "decisions/2026-05-pile-opportunity-workspace.md",
-        "page_path": "decisions/2026-05-pile-opportunity-workspace"
+        "stem": "2026-05-15-act-system-architecture",
+        "title": "ACT system architecture",
+        "relative_path": "decisions/2026-05-15-act-system-architecture.md",
+        "page_path": "decisions/2026-05-15-act-system-architecture"
       }
     ],
     "missing_backlinks": [
@@ -298,6 +298,18 @@
         "page_path": "decisions/2026-04-18-picc-selective-youth-voice"
       },
       {
+        "stem": "2026-05-14-notion-platform-architecture",
+        "title": "Notion as the unified ask layer",
+        "relative_path": "decisions/2026-05-14-notion-platform-architecture.md",
+        "page_path": "decisions/2026-05-14-notion-platform-architecture"
+      },
+      {
+        "stem": "2026-05-15-act-system-architecture",
+        "title": "ACT system architecture",
+        "relative_path": "decisions/2026-05-15-act-system-architecture.md",
+        "page_path": "decisions/2026-05-15-act-system-architecture"
+      },
+      {
         "stem": "2026-05-harvest-subsidiary-structure",
         "title": "The Harvest — Subsidiary Structure Decision",
         "relative_path": "decisions/2026-05-harvest-subsidiary-structure.md",
@@ -308,18 +320,6 @@
         "title": "Pile-Tagged Opportunity Workspace — Unified Architecture",
         "relative_path": "decisions/2026-05-pile-opportunity-workspace.md",
         "page_path": "decisions/2026-05-pile-opportunity-workspace"
-      },
-      {
-        "stem": "operational-reference",
-        "title": "ACT Operational Reference",
-        "relative_path": "decisions/operational-reference.md",
-        "page_path": "decisions/operational-reference"
-      },
-      {
-        "stem": "README",
-        "title": "ACT Brain — read first",
-        "relative_path": "decisions/README.md",
-        "page_path": "decisions/README"
       }
     ],
     "stubs": [],
@@ -421,8 +421,30 @@
         }
       }
     ],
-    "frontmatter_contract_violations": [],
+    "frontmatter_contract_violations": [
+      {
+        "stem": "contained",
+        "title": "CONTAINED",
+        "relative_path": "projects/contained.md",
+        "page_path": "projects/contained",
+        "missing_fields": [
+          "parent_project"
+        ]
+      }
+    ],
     "missing_source_summaries": [
+      {
+        "raw_source": "raw/2026-04-01-meeting-picc-x-a-curious-tractor.md",
+        "suggested_summary": "sources/2026-04-01-meeting-picc-x-a-curious-tractor.md",
+        "kind": "database_export",
+        "priority": "high",
+        "focus": [
+          "CONTAINED",
+          "Goods on Country",
+          "Empathy Ledger",
+          "ACT Farm"
+        ]
+      },
       {
         "raw_source": "raw/2026-04-14-civicgraph-art-framing-report.md",
         "suggested_summary": "sources/2026-04-14-civicgraph-art-framing-report.md",
@@ -446,7 +468,15 @@
     ],
     "orphan_source_summaries": []
   },
-  "frontmatter_contract_violations": [],
+  "frontmatter_contract_violations": [
+    {
+      "id": "projects/contained",
+      "relativePath": "projects/contained.md",
+      "missingFields": [
+        "parent_project"
+      ]
+    }
+  ],
   "backlink_policy": {
     "missing_backlinks": "Reciprocal links expected for non-hub articles only.",
     "advisory_backlinks": "Cluster pages, portfolios, and broad overview pages are reported separately as navigational references."
