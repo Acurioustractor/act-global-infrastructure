@@ -190,6 +190,10 @@ interface ProjectFinancialsData {
   expensesByCategory: Record<string, ExpenseCategoryGroup>
   topVendors: Array<{ vendor: string; total: number }>
   totalExpenseInvoices: number
+  auditAlerts?: Array<{ severity: 'high' | 'medium' | 'info'; title: string; detail: string; amount?: number; xeroLink?: string }>
+  notableFindings?: Array<{ severity: 'high' | 'medium' | 'info'; title: string; detail: string; amount?: number; xeroLink?: string }>
+  realExpenseRowCount?: number
+  realExpenseTotal?: number
 }
 
 const INCOME_TYPE_CONFIG: Record<string, { label: string; icon: any; color: string }> = {
@@ -281,6 +285,43 @@ export default function ProjectFinancialsPage({
           {monthly[monthly.length - 1]?.month?.substring(0, 7)})
         </p>
       </header>
+
+      {/* Audit alerts + notable findings */}
+      {((data.auditAlerts?.length ?? 0) > 0 || (data.notableFindings?.length ?? 0) > 0) && (
+        <div className="mb-6 space-y-2">
+          {data.notableFindings?.map((f: any, i: number) => (
+            <div key={`nf-${i}`} className="glass-card border border-emerald-500/30 bg-emerald-500/5 p-3 flex items-start justify-between">
+              <div>
+                <div className="text-sm font-semibold text-emerald-200">{f.title}</div>
+                <div className="text-xs text-white/60 mt-0.5">{f.detail}</div>
+              </div>
+              {f.amount != null && <div className="text-sm font-bold tabular-nums text-emerald-200 whitespace-nowrap">{formatMoney(f.amount)}</div>}
+            </div>
+          ))}
+          {data.auditAlerts?.map((a: any, i: number) => (
+            <div key={`aa-${i}`} className={cn(
+              'glass-card border p-3 flex items-start justify-between',
+              a.severity === 'high' ? 'border-red-500/40 bg-red-500/5' :
+              a.severity === 'medium' ? 'border-amber-500/40 bg-amber-500/5' :
+              'border-white/20 bg-white/5'
+            )}>
+              <div className="flex-1">
+                <div className={cn(
+                  'text-sm font-semibold',
+                  a.severity === 'high' ? 'text-red-200' : a.severity === 'medium' ? 'text-amber-200' : 'text-white/80'
+                )}>{a.title}</div>
+                <div className="text-xs text-white/60 mt-0.5">{a.detail}</div>
+                {a.xeroLink && <a href={a.xeroLink} target="_blank" rel="noreferrer" className="text-xs text-blue-400 hover:underline mt-1 inline-block">open in Xero ↗</a>}
+              </div>
+              {a.amount != null && <div className="text-sm font-bold tabular-nums whitespace-nowrap ml-3">{formatMoney(a.amount)}</div>}
+            </div>
+          ))}
+          <div className="flex gap-3 text-xs text-white/40 pt-1">
+            <Link href={`/finance/projects/${data.projectCode}/transactions`} className="underline hover:text-white">→ full transaction ledger ({data.realExpenseRowCount} rows)</Link>
+            {data.realExpenseTotal != null && <span>Real cost commitment: <span className="text-white font-medium">{formatMoney(data.realExpenseTotal)}</span> (incl. bills, deduped where bank spend pays a bill)</span>}
+          </div>
+        </div>
+      )}
 
       {/* Summary Cards */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
@@ -777,20 +818,20 @@ export default function ProjectFinancialsPage({
                 <span className="text-sm text-white/40 font-normal ml-auto">{data.recentTransactions.length}</span>
               </h2>
               <div className="space-y-1">
-                {data.recentTransactions.slice(0, 20).map((tx) => (
-                  <div key={tx.id} className="flex items-center justify-between py-2 px-3 rounded-lg hover:bg-white/5 transition-colors">
-                    <div>
-                      <span className="text-sm text-white">{tx.contact || 'Unknown'}</span>
-                      <span className="text-xs text-white/30 ml-2">{tx.date}</span>
+                {data.recentTransactions.slice(0, 20).map((tx) => {
+                  const isOutflow = tx.type === 'SPEND' || tx.type === 'SPEND-OVERPAYMENT' || tx.type === 'ACCPAY'
+                  return (
+                    <div key={tx.id} className="flex items-center justify-between py-2 px-3 rounded-lg hover:bg-white/5 transition-colors">
+                      <div>
+                        <span className="text-sm text-white">{tx.contact || 'Unknown'}</span>
+                        <span className="text-xs text-white/30 ml-2">{tx.date}</span>
+                      </div>
+                      <span className={cn('text-sm font-medium tabular-nums', isOutflow ? 'text-red-400' : 'text-green-400')}>
+                        {isOutflow ? '−' : '+'}${Math.abs(tx.amount).toLocaleString()}
+                      </span>
                     </div>
-                    <span className={cn(
-                      'text-sm font-medium tabular-nums',
-                      tx.amount >= 0 ? 'text-green-400' : 'text-red-400'
-                    )}>
-                      {tx.amount >= 0 ? '+' : '-'}${Math.abs(tx.amount).toLocaleString()}
-                    </span>
-                  </div>
-                ))}
+                  )
+                })}
               </div>
             </div>
           )}

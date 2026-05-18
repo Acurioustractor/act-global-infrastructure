@@ -61,13 +61,13 @@ review_needed: standard-ledger
 
 ### Decisions to lock before 30 Jun
 
-| Decision | Why now | Who | Status |
-|---|---|---|---|
-| **Who is the legal lessor?** Nic personally, or via a land-holding trust | Affects market rate negotiation + Nic's personal asset protection | Nic + Standard Ledger | Open |
-| **Arms-length market rate** | Required for R&D claim defensibility — ATO scrutinises related-party rent | Standard Ledger to advise (commercial valuation reference) | Open |
-| **Lease term + termination** | Pty needs continuity for R&D evidence (field site stability); Nic needs flexibility if farm income strategy changes | Both | Open |
-| **What ACT pays for: rent only, or rent + utilities + maintenance** | Maintenance reimbursement gets complex if Nic owns the asset | Standard Ledger | Open |
-| **Capital improvements** — if ACT funds farm infra (sheds, fencing, water) does Pty own them or are they leasehold improvements | Tax + asset register implications | Standard Ledger | Open |
+| Decision                                                                                                                        | Why now                                                                                                             | Who                                                        | Status |
+| ------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------- | ------ |
+| **Who is the legal lessor?** Nic personally, or via a land-holding trust                                                        | Affects market rate negotiation + Nic's personal asset protection                                                   | Nic + Standard Ledger                                      | Open   |
+| **Arms-length market rate**                                                                                                     | Required for R&D claim defensibility — ATO scrutinises related-party rent                                           | Standard Ledger to advise (commercial valuation reference) | Open   |
+| **Lease term + termination**                                                                                                    | Pty needs continuity for R&D evidence (field site stability); Nic needs flexibility if farm income strategy changes | Both                                                       | Open   |
+| **What ACT pays for: rent only, or rent + utilities + maintenance**                                                             | Maintenance reimbursement gets complex if Nic owns the asset                                                        | Standard Ledger                                            | Open   |
+| **Capital improvements** — if ACT funds farm infra (sheds, fencing, water) does Pty own them or are they leasehold improvements | Tax + asset register implications                                                                                   | Standard Ledger                                            | Open   |
 
 ### Insurance — Farm
 

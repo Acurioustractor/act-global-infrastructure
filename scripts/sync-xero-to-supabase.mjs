@@ -781,19 +781,31 @@ async function syncTransactions(options = {}) {
       };
 
       // Build record matching schema
-      // Only include project_code if Xero has tracking — never overwrite tagger-set codes with null
-      // ZOMBIE GUARD: when Xero status is DELETED or VOIDED, force has_attachments=true so
-      // downstream consumers (BAS gap sweep, matcher, bill-to-txn sync) treat them as already handled.
-      // Without this, deleted shadows re-introduce themselves on every sync and pollute every report.
+      // Only include project_code if Xero has tracking AND the existing row isn't manually tagged.
+      // Manual tags (source starts with 'manual') are user overrides and must NEVER be overwritten.
       const status = txn.Status || 'ACTIVE';
       const isZombie = status === 'DELETED' || status === 'VOIDED';
+      // MANUAL-TAG GUARD: if user has retagged this row in our UI, leave project_code alone.
+      let preserveManualTag = false;
+      if (supabase && projectCode && txn.BankTransactionID) {
+        try {
+          const { data: existingRow } = await supabase
+            .from('xero_transactions')
+            .select('project_code_source')
+            .eq('xero_transaction_id', txn.BankTransactionID)
+            .maybeSingle();
+          if (existingRow?.project_code_source && String(existingRow.project_code_source).startsWith('manual')) {
+            preserveManualTag = true;
+          }
+        } catch (_e) { /* best-effort; fall through */ }
+      }
       const record = {
         xero_transaction_id: txn.BankTransactionID,
         xero_tenant_id: XERO_TENANT_ID,
         type: txn.Type, // RECEIVE, SPEND, TRANSFER
         contact_name: txn.Contact?.Name,
         bank_account: txn.BankAccount?.Name,
-        ...(projectCode ? { project_code: projectCode, project_code_source: 'xero_tracking' } : {}),
+        ...(projectCode && !preserveManualTag ? { project_code: projectCode, project_code_source: 'xero_tracking' } : {}),
         total: parseFloat(txn.Total) || 0,
         status,
         date: parseXeroDate(txn.Date),

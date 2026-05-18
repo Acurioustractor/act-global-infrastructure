@@ -47,10 +47,10 @@ The rubric flagged 3.2 (Reasonable proportion — supporting:core ratio unverifi
 
 For external review purposes, the dollar attribution is:
 
-| Project | Core personnel | SaaS / vendor | Supporting (engineering effort, subsumed) | Total claim |
-|---------|----------------|---------------|--------------------------------------------|-------------|
-| ACT-CG | $47,500 | $14,000 | included in $47,500 | $61,500 |
-| ACT-EL | $53,750 ($23,750 Ben + $30,000 Nic) | $26,000 | included in $53,750 | $79,750 |
-| ACT-GD | $73,750 ($23,750 Ben + $50,000 Nic) | $114,500 | included in $73,750 | $188,250 |
+| Project | Core personnel                      | SaaS / vendor | Supporting (engineering effort, subsumed) | Total claim |
+| ------- | ----------------------------------- | ------------- | ----------------------------------------- | ----------- |
+| ACT-CG  | $47,500                             | $14,000       | included in $47,500                       | $61,500     |
+| ACT-EL  | $53,750 ($23,750 Ben + $30,000 Nic) | $26,000       | included in $53,750                       | $79,750     |
+| ACT-GD  | $73,750 ($23,750 Ben + $50,000 Nic) | $114,500      | included in $73,750                       | $188,250    |
 
 The supporting engineering effort (S1 through S6 per project) is the *content* of the personnel cost; it is not an additional line item.

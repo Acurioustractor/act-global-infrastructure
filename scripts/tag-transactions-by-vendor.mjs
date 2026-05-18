@@ -219,8 +219,10 @@ async function tagTransactions() {
   while (true) {
     const { data, error } = await supabase
       .from('xero_transactions')
-      .select('id, contact_name, line_items, total, date, type, bank_account')
+      .select('id, contact_name, line_items, total, date, type, bank_account, project_code_source')
       .is('project_code', null)
+      // MANUAL-TAG GUARD: skip rows the user deliberately untagged
+      .not('project_code_source', 'like', 'manual%')
       .range(offset, offset + pageSize - 1)
       .order('date', { ascending: false });
 
@@ -360,8 +362,10 @@ async function tagTransactions() {
   while (true) {
     const { data, error } = await supabase
       .from('xero_invoices')
-      .select('id, contact_name, reference, line_items, total, date, type, tracking_option_1, tracking_option_2')
+      .select('id, contact_name, reference, line_items, total, date, type, tracking_option_1, tracking_option_2, project_code_source')
       .is('project_code', null)
+      // MANUAL-TAG GUARD: skip rows the user deliberately untagged
+      .not('project_code_source', 'like', 'manual%')
       .range(offset, offset + pageSize - 1);
 
     if (error) {

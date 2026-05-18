@@ -6,7 +6,7 @@ projects: picc-photo-kiosk, empathy-ledger
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/stories/peggy-palm-island.md`.
-> Regenerated: `2026-05-17T00:54:41.198Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerated: `2026-05-17T23:15:22.883Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # Peggy Palm Island's Story
 

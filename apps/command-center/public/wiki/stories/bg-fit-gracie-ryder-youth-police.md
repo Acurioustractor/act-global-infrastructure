@@ -15,7 +15,7 @@ el_v2_match_via: "org:bg-fit"
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/stories/bg-fit-gracie-ryder-youth-police.md`.
-> Regenerated: `2026-05-17T00:54:41.198Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerated: `2026-05-17T23:15:22.883Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 # Gracie Ryder - Youth Police
 
 > Gracie Ryder

@@ -7,13 +7,17 @@ import { navStructure, findGroupForPath } from '@/lib/nav-data'
 export interface SidebarContextType {
   expandedGroups: Set<string>
   isMobileOpen: boolean
+  isCollapsed: boolean
   toggleGroup: (groupId: string) => void
   setMobileOpen: (open: boolean) => void
+  setCollapsed: (collapsed: boolean) => void
+  toggleCollapsed: () => void
 }
 
 export const SidebarContext = createContext<SidebarContextType | undefined>(undefined)
 
 const STORAGE_KEY = 'act-sidebar-expanded'
+const COLLAPSED_KEY = 'act-sidebar-collapsed'
 
 function getDefaultExpanded(): Set<string> {
   return new Set(
@@ -25,6 +29,7 @@ export function SidebarProvider({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
   const [expandedGroups, setExpandedGroups] = useState<Set<string>>(getDefaultExpanded)
   const [isMobileOpen, setIsMobileOpen] = useState(false)
+  const [isCollapsed, setIsCollapsed] = useState(false)
   const [hydrated, setHydrated] = useState(false)
 
   // Hydrate from localStorage
@@ -37,11 +42,19 @@ export function SidebarProvider({ children }: { children: React.ReactNode }) {
           setExpandedGroups(new Set(parsed))
         }
       }
+      const collapsed = localStorage.getItem(COLLAPSED_KEY)
+      if (collapsed === 'true') setIsCollapsed(true)
     } catch {
       // ignore
     }
     setHydrated(true)
   }, [])
+
+  // Persist collapsed state
+  useEffect(() => {
+    if (!hydrated) return
+    try { localStorage.setItem(COLLAPSED_KEY, String(isCollapsed)) } catch {}
+  }, [isCollapsed, hydrated])
 
   // Persist to localStorage after hydration
   useEffect(() => {
@@ -88,13 +101,19 @@ export function SidebarProvider({ children }: { children: React.ReactNode }) {
     setIsMobileOpen(open)
   }, [])
 
+  const setCollapsedCb = useCallback((collapsed: boolean) => setIsCollapsed(collapsed), [])
+  const toggleCollapsedCb = useCallback(() => setIsCollapsed((c) => !c), [])
+
   return (
     <SidebarContext.Provider
       value={{
         expandedGroups,
         isMobileOpen,
+        isCollapsed,
         toggleGroup,
         setMobileOpen: setMobileOpenCb,
+        setCollapsed: setCollapsedCb,
+        toggleCollapsed: toggleCollapsedCb,
       }}
     >
       {children}

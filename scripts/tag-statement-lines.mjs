@@ -116,6 +116,8 @@ async function main() {
 
     if (UNTAGGED_ONLY) {
       query = query.is('project_code', null);
+      // (bank_statement_lines has no project_code_source column — user untags happen on
+      // xero_transactions/xero_invoices, not here, so no extra guard needed.)
     }
 
     const { data: batch } = await query;
