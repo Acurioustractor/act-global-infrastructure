@@ -282,7 +282,7 @@ export async function POST(request: NextRequest) {
 
   let xero
   try {
-    xero = await createXeroClient(supabase)
+    xero = await createXeroClient(supabase as any)
   } catch (err) {
     return NextResponse.json(
       { error: `Xero client init failed: ${(err as Error).message}` },
