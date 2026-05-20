@@ -160,10 +160,22 @@ const cronScripts = [
   // The ordering matters: dashboard-hub does full-page replace, money-framework
   // does marker-based section-replace. If money-framework ran first, the hub
   // would wipe its panels. With this order both coexist on moneyFramework.
+  // 2026-05-21 S5 — Money-stack orchestrator replaces 11 separate Mon-morning cron entries.
+  // Single entry runs sync-money-stack.mjs at 8:15 Mon, which sequentially invokes all 11
+  // sync-*-to-notion scripts in dependency order. Benefits: one log, halt-on-fail support
+  // (--halt-on-fail flag), order changes happen in the script not by tweaking 11 cron strings.
+  // The 11 individual entries below are commented out — to revert, uncomment them and remove
+  // this orchestrator entry.
+  {
+    name: 'money-stack-sync',
+    script: 'scripts/sync-money-stack.mjs',
+    cron_restart: '15 8 * * 1', // Weekly Monday 8:15am AEST — orchestrates all 11 sync-*-to-notion scripts in order
+  },
   {
     name: 'dashboard-hub-sync',
     script: 'scripts/sync-money-dashboard-hub.mjs',
-    cron_restart: '15 8 * * 1', // Weekly Monday 8:15am AEST — Main dashboard hub (FIRST: full-page replace, writes nav)
+    // cron_restart: '15 8 * * 1',  // 2026-05-21 S5: superseded by money-stack-sync orchestrator
+    autorestart: false,
   },
   {
     name: 'act-now-sync',
@@ -175,66 +187,74 @@ const cronScripts = [
     script: 'scripts/sync-daily-pulse-to-notion.mjs',
     cron_restart: '13 8 * * *', // Daily 8:13am AEST — "Today's Pulse" at top of moneyFramework (bank, runway, today's actions)
   },
+  // 2026-05-21 S5: The 10 entries below are superseded by money-stack-sync orchestrator above.
+  // Kept (with autorestart:false) so PM2 doesn't lose them on reload — easier to restore.
   {
     name: 'opportunities-db-sync',
     script: 'scripts/sync-opportunities-to-notion-db.mjs',
-    cron_restart: '20 8 * * 1', // Weekly Monday 8:20am AEST — sync ACT Opportunities database (GHL + Xero + foundation grants)
+    autorestart: false,
   },
   {
     name: 'pile-pages-sync',
     script: 'scripts/sync-pile-pages-to-notion.mjs',
-    cron_restart: '25 8 * * 1', // Weekly Monday 8:25am AEST — refresh per-pile strategic pages (Voice / Flow / Ground / Grants)
+    autorestart: false,
   },
   {
     name: 'cash-forecast-sync',
     script: 'scripts/sync-cash-forecast-to-notion.mjs',
-    cron_restart: '30 8 * * 1', // Weekly Monday 8:30am AEST — 13-week rolling cash forecast (Build 1)
+    autorestart: false,
   },
   {
     name: 'kpis-sync',
     script: 'scripts/sync-kpis-to-notion.mjs',
-    cron_restart: '35 8 * * 1', // Weekly Monday 8:35am AEST — KPIs & Concentration Risk (Build 2)
+    autorestart: false,
   },
   {
     name: 'budget-actual-sync',
     script: 'scripts/sync-budget-vs-actual-to-notion.mjs',
-    cron_restart: '40 8 * * 1', // Weekly Monday 8:40am AEST — Budget vs Actual per project (Build 3)
+    autorestart: false,
   },
   {
     name: 'cash-scenarios-sync',
     script: 'scripts/sync-cash-scenarios-to-notion.mjs',
-    cron_restart: '45 8 * * 1', // Weekly Monday 8:45am AEST — Cash scenarios 12-month (Build 4)
+    autorestart: false,
   },
   {
     name: 'money-metrics-snapshot',
     script: 'scripts/sync-money-metrics-to-notion.mjs',
-    cron_restart: '50 8 * * 1', // Weekly Monday 8:50am AEST — Append weekly metrics snapshot (powers Dashboard view charts)
+    autorestart: false,
   },
   {
     name: 'planning-rhythm-sync',
     script: 'scripts/sync-planning-rhythm-to-notion.mjs',
-    cron_restart: '55 8 * * 1', // Weekly Monday 8:55am AEST — Multi-period planning page (weekly/monthly/half/year/5-year)
+    autorestart: false,
   },
   {
     name: 'entity-hub-sync',
     script: 'scripts/sync-entity-hub-to-notion.mjs',
-    cron_restart: '0 9 * * 1', // Weekly Monday 9:00am AEST — Master Entity Hub (orgs across Xero/GHL/Foundations)
+    autorestart: false,
   },
   {
     name: 'money-framework-sync',
     script: 'scripts/sync-money-framework-to-notion.mjs',
-    cron_restart: '10 9 * * 1', // Weekly Monday 9:10am AEST — refresh ACT Money Framework panels (LAST: section-replace appends below hub nav)
+    autorestart: false,
   },
+  // 2026-05-21 QW4 — Telegram daily-push consolidation (Option A).
+  // Reason: 3 overlapping Telegram messages each morning. Kept telegram-daily-focus (7:30)
+  // as the single phone-first push. Snapshot scripts still run (data lands in command-center),
+  // they just don't post.
+  // To revert: uncomment cron_restart on daily-money-briefing + re-add args:'--telegram' below.
   {
     name: 'daily-money-briefing',
     script: 'scripts/daily-money-briefing.mjs',
-    cron_restart: '0 8 * * *', // Daily 8am AEST — full briefing (wins + pipeline + overdue + actions)
+    // cron_restart: '0 8 * * *',  // 2026-05-21 QW4: disabled (overlaps telegram-daily-focus 7:30)
+    autorestart: false,
   },
   {
     name: 'money-command-digest',
     script: 'scripts/money-command-digest.mjs',
-    args: '--telegram',
-    cron_restart: '15 8 * * *', // Daily 8:15am AEST — snapshot /finance/command (coverage, drift, 90d incoming, lifetime) + send to Telegram
+    args: '',  // 2026-05-21 QW4: dropped --telegram (snapshot still runs, just no push)
+    cron_restart: '15 8 * * *', // Daily 8:15am AEST — snapshot /finance/command (coverage, drift, 90d incoming, lifetime)
   },
   {
     name: 'compliance-snapshot',
