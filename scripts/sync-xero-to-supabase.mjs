@@ -923,6 +923,19 @@ async function fullSync(options = {}) {
   // Log the sync
   await logSync('full', results);
 
+  // S2 2026-05-21: refresh materialized per-project quarterly view so downstream
+  // dashboards (Notion + command-center) read fresh aggregates.
+  try {
+    const { error: mvError } = await supabase.rpc('refresh_mv_project_quarter_position');
+    if (mvError) {
+      console.warn(`   ⚠ Failed to refresh mv_project_quarter_position: ${mvError.message}`);
+    } else {
+      console.log('   ✓ Refreshed mv_project_quarter_position');
+    }
+  } catch (err) {
+    console.warn(`   ⚠ Failed to refresh mv_project_quarter_position: ${err.message}`);
+  }
+
   // Summary
   const duration = ((Date.now() - stats.startTime) / 1000).toFixed(1);
 
