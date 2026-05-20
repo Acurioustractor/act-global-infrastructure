@@ -9,8 +9,9 @@ export async function GET(
     const { code } = await params
     const projectCode = decodeURIComponent(code).toUpperCase()
 
-    // Parallel fetch monthly financials, variance notes, transactions, budgets, R&D vendors, invoices, pipeline
-    const [monthly, variances, transactions, budgets, rdVendors, salaryAllocs, revenueStreams, invoiceMappings, expenseInvoices, pipeline, cardSpendResult] = await Promise.all([
+    // Parallel fetch monthly financials, variance notes, transactions, budgets, R&D vendors, invoices, pipeline,
+    // funding allocations (S1 2026-05-21), org burn snapshot (S4 2026-05-21), linked contacts (Item 4 2026-05-21).
+    const [monthly, variances, transactions, budgets, rdVendors, salaryAllocs, revenueStreams, invoiceMappings, expenseInvoices, pipeline, cardSpendResult, fundingAllocations, orgBurnSnapshot, linkedContacts] = await Promise.all([
       supabase
         .from('project_monthly_financials')
         .select('*')
@@ -139,6 +140,42 @@ export async function GET(
           WHERE direction = 'debit'
             AND project_code = '${projectCode.replace(/'/g, "''")}'
             AND date >= '2025-07-01'
+        `
+      }),
+
+      // S1 2026-05-21: funder allocations for this project
+      supabase
+        .from('v_project_funding_position')
+        .select('*')
+        .eq('project_code', projectCode)
+        .order('committed_amount', { ascending: false }),
+
+      // S4 2026-05-21: org-wide 3-month avg burn + current bank balance for runway impact card
+      supabase
+        .from('financial_snapshots')
+        .select('month, income, expenses, closing_balance')
+        .order('month', { ascending: false })
+        .limit(3),
+
+      // Item 4 2026-05-21: linked contacts for this project (via contact_project_links → canonical_entities)
+      supabase.rpc('exec_sql', {
+        query: `
+          SELECT
+            ce.id,
+            ce.canonical_name,
+            ce.entity_type,
+            ce.canonical_email,
+            ce.canonical_company,
+            ce.engagement_status,
+            ce.tags,
+            cpl.confidence,
+            cpl.source,
+            cpl.created_at as linked_at
+          FROM contact_project_links cpl
+          JOIN canonical_entities ce ON ce.id = cpl.entity_id
+          WHERE cpl.project_code = '${projectCode.replace(/'/g, "''")}'
+          ORDER BY ce.relationship_strength DESC NULLS LAST, ce.canonical_name
+          LIMIT 50
         `
       }),
     ])
@@ -309,6 +346,100 @@ export async function GET(
       .map(([vendor, total]) => ({ vendor, total }))
 
     const totalExpenseInvoices = expenseData.reduce((s: number, e: any) => s + e.total, 0)
+
+    // ---- S4 2026-05-21: BURN RATE + RUNWAY IMPACT ----
+    // Project's last-3-months avg burn (from monthlyData if available, else from expenseData)
+    const last3Months = monthlyData.slice(-3)
+    const projectBurn3moAvg = last3Months.length > 0
+      ? last3Months.reduce((s: number, m: any) => s + Math.abs(m.expenses), 0) / last3Months.length
+      : 0
+    const projectBurn12moAvg = monthlyData.length > 0
+      ? monthlyData.reduce((s: number, m: any) => s + Math.abs(m.expenses), 0) / monthlyData.length
+      : 0
+    const burnAcceleration = projectBurn12moAvg > 0
+      ? Math.round(100 * (projectBurn3moAvg - projectBurn12moAvg) / projectBurn12moAvg)
+      : null
+
+    // Org-level: 3-month avg expense + current closing balance from financial_snapshots
+    const orgSnaps = orgBurnSnapshot?.data || []
+    const orgBurn3moAvg = orgSnaps.length > 0
+      ? orgSnaps.reduce((s: number, r: any) => s + Number(r.expenses || 0), 0) / orgSnaps.length
+      : 0
+    const currentBalance = orgSnaps.length > 0 ? Number(orgSnaps[0].closing_balance || 0) : 0
+
+    const projectShareOfBurn = orgBurn3moAvg > 0
+      ? Math.round(1000 * projectBurn3moAvg / orgBurn3moAvg) / 10  // 1 decimal place
+      : null
+    // "If we kept this project at current burn and stopped all other spend, how many months would $X balance last?"
+    // i.e. months of runway this project alone would consume from current balance
+    const projectRunwayMonths = projectBurn3moAvg > 0
+      ? Math.round(10 * currentBalance / projectBurn3moAvg) / 10
+      : null
+
+    const burnMetrics = {
+      projectBurn3moAvg: Math.round(projectBurn3moAvg),
+      projectBurn12moAvg: Math.round(projectBurn12moAvg),
+      burnAccelerationPct: burnAcceleration,  // positive = accelerating
+      projectShareOfBurnPct: projectShareOfBurn,
+      orgBurn3moAvg: Math.round(orgBurn3moAvg),
+      currentOrgBalance: Math.round(currentBalance),
+      projectRunwayMonths,  // if this project's burn rate continued, how many months of org cash it consumes
+    }
+
+    // ---- Item 4 2026-05-21: LINKED CONTACTS ----
+    const contactsData = (linkedContacts?.data || []).map((c: any) => ({
+      id: c.id,
+      name: c.canonical_name,
+      entityType: c.entity_type,
+      email: c.canonical_email,
+      company: c.canonical_company,
+      engagementStatus: c.engagement_status,
+      tags: c.tags || [],
+      confidence: c.confidence != null ? Number(c.confidence) : null,
+      role: (() => {
+        const tags = (c.tags || []).map((t: string) => t.toLowerCase())
+        if (tags.includes('funder')) return 'funder'
+        if (tags.includes('partner') || tags.some((t: string) => t.startsWith('goods-partner') || t.endsWith('-partner'))) return 'partner'
+        if (tags.some((t: string) => t.includes('advisor'))) return 'advisor'
+        if (tags.includes('prospect') || c.engagement_status === 'lead') return 'lead'
+        if (tags.includes('responsive')) return 'responsive'
+        return c.entity_type || 'contact'
+      })(),
+      linkedAt: c.linked_at,
+    }))
+    const contactsSummary = {
+      total: contactsData.length,
+      funders: contactsData.filter((c: any) => c.role === 'funder').length,
+      partners: contactsData.filter((c: any) => c.role === 'partner').length,
+      advisors: contactsData.filter((c: any) => c.role === 'advisor').length,
+      leads: contactsData.filter((c: any) => c.role === 'lead').length,
+    }
+
+    // ---- S1 2026-05-21: FUNDING ALLOCATIONS ----
+    const fundingData = (fundingAllocations?.data || []).map((a: any) => ({
+      allocationId: a.allocation_id,
+      funder: a.funder_org_name,
+      grantRef: a.grant_or_contract_ref,
+      committed: Number(a.committed_amount || 0),
+      drawn: Number(a.drawn_amount || 0),
+      remaining: Number(a.remaining_amount || 0),
+      drawnPct: a.drawn_pct != null ? Number(a.drawn_pct) : null,
+      status: a.status,
+      periodStart: a.period_start,
+      periodEnd: a.period_end,
+      pileTag: a.pile_tag,
+      lastDrawnAt: a.last_drawn_at,
+      drawdownCount: Number(a.drawdown_count || 0),
+      notes: a.notes,
+    }))
+    const fundingSummary = {
+      totalCommitted: fundingData.reduce((s: number, f: any) => s + f.committed, 0),
+      totalDrawn: fundingData.reduce((s: number, f: any) => s + f.drawn, 0),
+      totalRemaining: fundingData.reduce((s: number, f: any) => s + f.remaining, 0),
+      activeAllocations: fundingData.filter((f: any) => f.status === 'drawing' || f.status === 'committed').length,
+      proposedAllocations: fundingData.filter((f: any) => f.status === 'proposed').length,
+      closedAllocations: fundingData.filter((f: any) => f.status === 'closed').length,
+    }
 
     // Pipeline data: dedupe by name (highest-probability winner), convert percent → decimal.
     // Source data has heavy sync-drift duplication (same opportunity inserted on each run).
@@ -581,6 +712,14 @@ export async function GET(
       expensesByCategory,
       topVendors,
       totalExpenseInvoices,
+      // S4 2026-05-21: burn-rate + runway impact metrics
+      burnMetrics,
+      // S1 2026-05-21: funder allocations + drawdowns
+      funding: fundingData,
+      fundingSummary,
+      // Item 4 2026-05-21: linked contacts from contact_project_links
+      contacts: contactsData,
+      contactsSummary,
       // Card spend from bank statement lines
       cardSpend: (() => {
         const row = (cardSpendResult?.data || [])[0] || {}

@@ -25,6 +25,7 @@ import {
   CheckCircle2,
   Circle,
   ExternalLink,
+  Gauge,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { AskAboutThis } from '@/components/ask-about-this'
@@ -194,6 +195,61 @@ interface ProjectFinancialsData {
   notableFindings?: Array<{ severity: 'high' | 'medium' | 'info'; title: string; detail: string; amount?: number; xeroLink?: string }>
   realExpenseRowCount?: number
   realExpenseTotal?: number
+  // S4 2026-05-21: burn-rate + runway impact
+  burnMetrics?: {
+    projectBurn3moAvg: number
+    projectBurn12moAvg: number
+    burnAccelerationPct: number | null
+    projectShareOfBurnPct: number | null
+    orgBurn3moAvg: number
+    currentOrgBalance: number
+    projectRunwayMonths: number | null
+  }
+  // S1 2026-05-21: funder allocations
+  funding?: Array<{
+    allocationId: string
+    funder: string
+    grantRef: string | null
+    committed: number
+    drawn: number
+    remaining: number
+    drawnPct: number | null
+    status: 'proposed' | 'committed' | 'drawing' | 'closed' | 'withdrawn'
+    periodStart: string | null
+    periodEnd: string | null
+    pileTag: string | null
+    lastDrawnAt: string | null
+    drawdownCount: number
+    notes: string | null
+  }>
+  fundingSummary?: {
+    totalCommitted: number
+    totalDrawn: number
+    totalRemaining: number
+    activeAllocations: number
+    proposedAllocations: number
+    closedAllocations: number
+  }
+  // Item 4 2026-05-21: linked contacts
+  contacts?: Array<{
+    id: string
+    name: string
+    entityType: string | null
+    email: string | null
+    company: string | null
+    engagementStatus: string | null
+    tags: string[]
+    confidence: number | null
+    role: 'funder' | 'partner' | 'advisor' | 'lead' | 'responsive' | string
+    linkedAt: string
+  }>
+  contactsSummary?: {
+    total: number
+    funders: number
+    partners: number
+    advisors: number
+    leads: number
+  }
 }
 
 const INCOME_TYPE_CONFIG: Record<string, { label: string; icon: any; color: string }> = {
@@ -275,15 +331,42 @@ export default function ProjectFinancialsPage({
         <ArrowLeft className="h-4 w-4" /> All Projects
       </Link>
 
-      <header className="mb-8">
-        <h1 className="text-2xl md:text-3xl font-bold text-white flex items-center gap-3">
-          <DollarSign className="h-8 w-8 text-green-400" />
-          {data.projectCode} — P&L
-        </h1>
-        <p className="text-white/50 mt-1">
-          {monthly.length} months of data ({monthly[0]?.month?.substring(0, 7)} to{' '}
-          {monthly[monthly.length - 1]?.month?.substring(0, 7)})
-        </p>
+      <header className="mb-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <div>
+          <h1 className="text-2xl md:text-3xl font-bold text-white flex items-center gap-3">
+            <DollarSign className="h-8 w-8 text-green-400" />
+            {data.projectCode} — P&L
+          </h1>
+          <p className="text-white/50 mt-1">
+            {monthly.length} months of data ({monthly[0]?.month?.substring(0, 7)} to{' '}
+            {monthly[monthly.length - 1]?.month?.substring(0, 7)})
+          </p>
+        </div>
+        {/* QW3 2026-05-21: cross-link to Notion pile page (based on first funding's pile_tag, else Money Framework) */}
+        {(() => {
+          const PILE_LINKS: Record<string, { href: string; label: string }> = {
+            voice: { href: 'https://www.notion.so/357ebcf981cf814f9ad3c02a7c9adbe6', label: 'Voice pile in Notion' },
+            flow: { href: 'https://www.notion.so/357ebcf981cf815e8926f8d4836ac3ff', label: 'Flow pile in Notion' },
+            ground: { href: 'https://www.notion.so/357ebcf981cf81419fc0e527e479932d', label: 'Ground pile in Notion' },
+            grants: { href: 'https://www.notion.so/357ebcf981cf81a28e19fa10b077ff7f', label: 'Grants pile in Notion' },
+          }
+          const firstPile = data.funding?.find((f) => f.pileTag)?.pileTag
+          const link = (firstPile && PILE_LINKS[firstPile]) || {
+            href: 'https://www.notion.so/357ebcf981cf8101bc12dd5eab9ebec5',
+            label: 'Money Framework in Notion',
+          }
+          return (
+            <a
+              href={link.href}
+              target="_blank"
+              rel="noreferrer"
+              className="px-3 py-1.5 rounded-lg text-xs bg-amber-500/10 text-amber-300 hover:text-amber-200 hover:bg-amber-500/20 transition-colors inline-flex items-center gap-1.5 self-start"
+              title={link.label}
+            >
+              {link.label} <ExternalLink className="h-3 w-3" />
+            </a>
+          )
+        })()}
       </header>
 
       {/* Audit alerts + notable findings */}
@@ -375,6 +458,164 @@ export default function ProjectFinancialsPage({
           </>
         )}
       </div>
+
+      {/* S4 2026-05-21: Burn rate + runway impact */}
+      {data.burnMetrics && data.burnMetrics.projectBurn3moAvg > 0 && (
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+          <div className="glass-card p-5">
+            <div className="flex items-center justify-between mb-2">
+              <p className="text-xs uppercase tracking-wide text-white/40">3-month burn</p>
+              <TrendingDown className="h-4 w-4 text-amber-400" />
+            </div>
+            <p className="text-2xl font-bold text-white tabular-nums">{formatMoney(data.burnMetrics.projectBurn3moAvg)}</p>
+            <p className="text-xs text-white/40 mt-1">
+              per month, rolling 3mo avg
+              {data.burnMetrics.burnAccelerationPct != null && data.burnMetrics.projectBurn12moAvg > 0 && (
+                <>
+                  {' '}&middot;{' '}
+                  <span className={cn(
+                    'font-medium',
+                    data.burnMetrics.burnAccelerationPct > 20 ? 'text-red-400' :
+                    data.burnMetrics.burnAccelerationPct > 0 ? 'text-amber-400' :
+                    'text-emerald-400'
+                  )}>
+                    {data.burnMetrics.burnAccelerationPct > 0 ? '+' : ''}{data.burnMetrics.burnAccelerationPct}% vs 12mo
+                  </span>
+                </>
+              )}
+            </p>
+          </div>
+          <div className="glass-card p-5">
+            <div className="flex items-center justify-between mb-2">
+              <p className="text-xs uppercase tracking-wide text-white/40">Share of org burn</p>
+              <Gauge className="h-4 w-4 text-cyan-400" />
+            </div>
+            <p className="text-2xl font-bold text-white tabular-nums">
+              {data.burnMetrics.projectShareOfBurnPct != null ? `${data.burnMetrics.projectShareOfBurnPct}%` : '—'}
+            </p>
+            <p className="text-xs text-white/40 mt-1">
+              of org-wide monthly burn ({formatMoney(data.burnMetrics.orgBurn3moAvg)}/mo)
+            </p>
+          </div>
+          <div className="glass-card p-5">
+            <div className="flex items-center justify-between mb-2">
+              <p className="text-xs uppercase tracking-wide text-white/40">Runway impact</p>
+              <Clock className="h-4 w-4 text-purple-400" />
+            </div>
+            <p className="text-2xl font-bold text-white tabular-nums">
+              {data.burnMetrics.projectRunwayMonths != null ? `${data.burnMetrics.projectRunwayMonths}mo` : '—'}
+            </p>
+            <p className="text-xs text-white/40 mt-1">
+              if only this project burned, {formatMoney(data.burnMetrics.currentOrgBalance)} lasts {data.burnMetrics.projectRunwayMonths}mo
+            </p>
+          </div>
+        </div>
+      )}
+
+      {/* S1 2026-05-21: Funding sources */}
+      {data.funding && data.funding.length > 0 && data.fundingSummary && (
+        <div className="glass-card p-6 mb-8">
+          <h2 className="text-lg font-semibold text-white flex items-center gap-2 mb-1">
+            <Landmark className="h-5 w-5 text-amber-400" />
+            Funding sources
+          </h2>
+          <p className="text-sm text-white/40 mb-4">
+            {formatMoney(data.fundingSummary.totalCommitted)} committed
+            {data.fundingSummary.totalDrawn > 0 && <> &middot; {formatMoney(data.fundingSummary.totalDrawn)} drawn</>}
+            {data.fundingSummary.totalRemaining > 0 && <> &middot; {formatMoney(data.fundingSummary.totalRemaining)} remaining</>}
+            {data.fundingSummary.proposedAllocations > 0 && <> &middot; {data.fundingSummary.proposedAllocations} proposed</>}
+          </p>
+          <div className="space-y-4">
+            {data.funding.map((f) => {
+              const drawnPct = f.drawnPct ?? (f.committed > 0 ? Math.round(100 * f.drawn / f.committed) : 0)
+              const statusColor = f.status === 'drawing' ? 'text-emerald-400' :
+                f.status === 'committed' ? 'text-blue-400' :
+                f.status === 'proposed' ? 'text-amber-400' :
+                f.status === 'closed' ? 'text-white/40' :
+                'text-white/30'
+              return (
+                <div key={f.allocationId} className="border border-white/5 rounded-lg p-4">
+                  <div className="flex items-baseline justify-between gap-2 mb-2">
+                    <div className="min-w-0 flex-1">
+                      <div className="text-sm font-medium text-white truncate">{f.funder}</div>
+                      {f.grantRef && <div className="text-xs text-white/40 truncate mt-0.5">{f.grantRef}</div>}
+                    </div>
+                    <span className={cn('text-[10px] uppercase tracking-wide font-medium', statusColor)}>{f.status}</span>
+                  </div>
+                  <div className="flex items-center gap-3 mb-1">
+                    <div className="flex-1 h-2 bg-white/5 rounded-full overflow-hidden">
+                      <div
+                        className={cn(
+                          'h-full transition-all',
+                          f.status === 'proposed' ? 'bg-amber-500/40' :
+                          drawnPct >= 100 ? 'bg-emerald-500' :
+                          drawnPct >= 80 ? 'bg-amber-500' :
+                          'bg-blue-500'
+                        )}
+                        style={{ width: `${Math.min(drawnPct, 100)}%` }}
+                      />
+                    </div>
+                    <span className="text-xs text-white/50 tabular-nums shrink-0">{drawnPct}%</span>
+                  </div>
+                  <div className="flex items-center justify-between text-xs text-white/40 tabular-nums">
+                    <span>{formatMoney(f.drawn)} drawn{f.drawdownCount > 0 ? ` (${f.drawdownCount})` : ''}</span>
+                    <span>{formatMoney(f.remaining)} remaining of {formatMoney(f.committed)}</span>
+                  </div>
+                  {f.notes && f.notes.includes('⚠') && (
+                    <div className="mt-2 text-xs text-amber-300 italic">{f.notes}</div>
+                  )}
+                </div>
+              )
+            })}
+          </div>
+        </div>
+      )}
+
+      {/* Item 4 2026-05-21: Linked Contacts panel */}
+      {data.contacts && data.contacts.length > 0 && data.contactsSummary && (
+        <div className="glass-card p-6 mb-8">
+          <h2 className="text-lg font-semibold text-white flex items-center gap-2 mb-1">
+            <Users className="h-5 w-5 text-cyan-400" />
+            Key contacts
+          </h2>
+          <p className="text-sm text-white/40 mb-4">
+            {data.contactsSummary.total} linked contacts
+            {data.contactsSummary.funders > 0 && <> &middot; <span className="text-amber-300">{data.contactsSummary.funders} funder{data.contactsSummary.funders === 1 ? '' : 's'}</span></>}
+            {data.contactsSummary.partners > 0 && <> &middot; <span className="text-blue-300">{data.contactsSummary.partners} partner{data.contactsSummary.partners === 1 ? '' : 's'}</span></>}
+            {data.contactsSummary.advisors > 0 && <> &middot; <span className="text-purple-300">{data.contactsSummary.advisors} advisor{data.contactsSummary.advisors === 1 ? '' : 's'}</span></>}
+            {data.contactsSummary.leads > 0 && <> &middot; <span className="text-white/40">{data.contactsSummary.leads} leads</span></>}
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+            {data.contacts.slice(0, 12).map((c) => {
+              const roleColor =
+                c.role === 'funder' ? 'text-amber-300 bg-amber-500/10' :
+                c.role === 'partner' ? 'text-blue-300 bg-blue-500/10' :
+                c.role === 'advisor' ? 'text-purple-300 bg-purple-500/10' :
+                c.role === 'responsive' ? 'text-emerald-300 bg-emerald-500/10' :
+                'text-white/40 bg-white/5'
+              return (
+                <div key={c.id} className="border border-white/5 rounded-lg p-3 flex items-start gap-3">
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-baseline gap-2 flex-wrap">
+                      <span className="text-sm font-medium text-white truncate capitalize">{c.name}</span>
+                      <span className={cn('text-[10px] uppercase tracking-wide font-medium px-1.5 py-0.5 rounded', roleColor)}>{c.role}</span>
+                    </div>
+                    {c.company && <div className="text-xs text-white/50 truncate mt-0.5">{c.company}</div>}
+                    {c.email && (
+                      <a href={`mailto:${c.email}`} className="text-xs text-white/40 hover:text-cyan-300 truncate block mt-0.5">{c.email}</a>
+                    )}
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+          {data.contacts.length > 12 && (
+            <div className="mt-4 text-xs text-white/40 text-center">
+              + {data.contacts.length - 12} more linked contacts (view via /relationships)
+            </div>
+          )}
+        </div>
+      )}
 
       {/* Income Streams by Type */}
       {hasInvoices && data.incomeByType && (

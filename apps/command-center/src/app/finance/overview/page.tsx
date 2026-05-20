@@ -499,6 +499,16 @@ export default function FinanceOverview() {
           <Link href="/finance/revenue-planning" className="px-3 py-1.5 rounded-lg text-xs bg-white/5 text-white/50 hover:text-white hover:bg-white/10 transition-colors">
             Revenue Planning
           </Link>
+          {/* QW3 2026-05-21: cross-link to Notion read surface (ACT Money Framework hub) */}
+          <a
+            href="https://www.notion.so/357ebcf981cf8101bc12dd5eab9ebec5"
+            target="_blank"
+            rel="noreferrer"
+            className="px-3 py-1.5 rounded-lg text-xs bg-amber-500/10 text-amber-300 hover:text-amber-200 hover:bg-amber-500/20 transition-colors inline-flex items-center gap-1.5"
+            title="ACT Money Framework — daily read surface in Notion"
+          >
+            Notion Hub <ArrowUpRight className="h-3 w-3" />
+          </a>
         </div>
       </header>
 

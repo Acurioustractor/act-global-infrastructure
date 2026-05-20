@@ -129,11 +129,14 @@ export const navStructure: SidebarNavGroup[] = [
           { href: '/finance/transactions', label: 'All Transactions', icon: Search, color: 'text-blue-400', bg: 'bg-blue-500/20' },
           { href: '/finance/vendors', label: 'Vendors', icon: Building2, color: 'text-purple-400', bg: 'bg-purple-500/20' },
 
+          // 2026-05-21 QW2 — reordered: read-first (Cockpit → Projects P&L → Money Alignment),
+          // operate-last (Spend Audit). Money Alignment kept as separate route during transition;
+          // see thoughts/shared/reviews/finance-system-review-2026-05-21.md B2 for fold-into-Cockpit plan.
           { href: '#money-state', label: 'Money state', icon: BarChart3, divider: true },
-          { href: '/finance/audit', label: 'Spend Audit', icon: AlertOctagon, color: 'text-red-400', bg: 'bg-red-500/20' },
           { href: '/finance/overview', label: 'CEO Cockpit', icon: Layers, color: 'text-emerald-400', bg: 'bg-emerald-500/20' },
-          { href: '/finance/money-alignment', label: 'Money Alignment', icon: CircleDollarSign, color: 'text-emerald-400', bg: 'bg-emerald-500/20' },
           { href: '/finance/projects', label: 'Projects P&L', icon: BarChart3, color: 'text-green-400', bg: 'bg-green-500/20' },
+          { href: '/finance/money-alignment', label: 'Money Alignment', icon: CircleDollarSign, color: 'text-emerald-400', bg: 'bg-emerald-500/20' },
+          { href: '/finance/audit', label: 'Spend Audit', icon: AlertOctagon, color: 'text-red-400', bg: 'bg-red-500/20' },
 
           { href: '#pipeline', label: 'Pipeline & invoices', icon: Target, divider: true },
           { href: '/finance/pipeline', label: 'Pipeline', icon: Target, color: 'text-indigo-400', bg: 'bg-indigo-500/20' },
