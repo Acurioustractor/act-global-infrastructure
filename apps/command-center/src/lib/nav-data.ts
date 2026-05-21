@@ -136,6 +136,7 @@ export const navStructure: SidebarNavGroup[] = [
           { href: '/finance/overview', label: 'CEO Cockpit', icon: Layers, color: 'text-emerald-400', bg: 'bg-emerald-500/20' },
           { href: '/finance/projects', label: 'Projects P&L', icon: BarChart3, color: 'text-green-400', bg: 'bg-green-500/20' },
           { href: '/finance/money-alignment', label: 'Money Alignment', icon: CircleDollarSign, color: 'text-emerald-400', bg: 'bg-emerald-500/20' },
+          { href: '/finance/funders', label: 'Funders', icon: Users, color: 'text-cyan-400', bg: 'bg-cyan-500/20' },
           { href: '/finance/audit', label: 'Spend Audit', icon: AlertOctagon, color: 'text-red-400', bg: 'bg-red-500/20' },
 
           { href: '#pipeline', label: 'Pipeline & invoices', icon: Target, divider: true },
