@@ -77,6 +77,8 @@ export async function GET(
         drawdownMethod: allocation.drawdown_method,
         pileTag: allocation.pile_tag,
         notes: allocation.notes,
+        nextReportDue: allocation.next_report_due,
+        nextReportName: allocation.next_report_name,
         updatedAt: allocation.updated_at,
       } : null,
       drawdowns: drawdowns.map((d: any) => ({
@@ -128,6 +130,7 @@ export async function PATCH(
     const editable = [
       'committed_amount', 'status', 'grant_or_contract_ref', 'period_start',
       'period_end', 'drawdown_method', 'pile_tag', 'notes', 'project_code',
+      'next_report_due', 'next_report_name',
     ]
     for (const f of editable) {
       if (f in body) updates[f] = body[f]

@@ -35,6 +35,8 @@ interface FunderRow {
   allocationStatus: string | null
   grantRef: string | null
   pileTag: string | null
+  nextReportDue: string | null
+  nextReportName: string | null
 }
 
 interface FundersResponse {
@@ -70,6 +72,7 @@ export default function FundersPage() {
   const [search, setSearch] = useState('')
   const [showAdd, setShowAdd] = useState(false)
   const [selectedFunder, setSelectedFunder] = useState<string | null>(null)
+  const [reportFilter, setReportFilter] = useState<'all' | 'due30' | 'due90' | 'overdue'>('all')
 
   const { data, isLoading } = useQuery<FundersResponse>({
     queryKey: ['finance', 'funders'],
@@ -78,12 +81,26 @@ export default function FundersPage() {
 
   const filtered = useMemo(() => {
     if (!data?.rows) return []
+    const today = new Date()
     return data.rows.filter(r => {
       if (bandFilter !== 'ALL' && r.warmthBand !== bandFilter) return false
       if (search && !r.funderName.toLowerCase().includes(search.toLowerCase())) return false
+      if (reportFilter !== 'all') {
+        if (!r.nextReportDue) return false
+        const due = new Date(r.nextReportDue)
+        const days = Math.floor((due.getTime() - today.getTime()) / (1000 * 60 * 60 * 24))
+        if (reportFilter === 'overdue' && days >= 0) return false
+        if (reportFilter === 'due30' && (days < 0 || days > 30)) return false
+        if (reportFilter === 'due90' && (days < 0 || days > 90)) return false
+      }
       return true
     })
-  }, [data?.rows, bandFilter, search])
+  }, [data?.rows, bandFilter, search, reportFilter])
+
+  function daysUntil(dateStr: string | null): number | null {
+    if (!dateStr) return null
+    return Math.floor((new Date(dateStr).getTime() - Date.now()) / (1000 * 60 * 60 * 24))
+  }
 
   if (isLoading) {
     return (
@@ -165,6 +182,28 @@ export default function FundersPage() {
         />
       </div>
 
+      {/* Reports filter — surfaces upcoming reporting deadlines */}
+      <div className="flex flex-wrap gap-2 mb-4 text-xs">
+        <span className="text-white/40 self-center mr-1">Reports:</span>
+        {([
+          { id: 'all', label: 'All' },
+          { id: 'overdue', label: 'Overdue' },
+          { id: 'due30', label: 'Due ≤30d' },
+          { id: 'due90', label: 'Due ≤90d' },
+        ] as const).map(opt => (
+          <button
+            key={opt.id}
+            onClick={() => setReportFilter(opt.id)}
+            className={cn(
+              'px-3 py-1 rounded-full border transition-colors',
+              reportFilter === opt.id ? 'border-white/30 bg-white/10 text-white' : 'border-white/10 text-white/50 hover:text-white'
+            )}
+          >
+            {opt.label}
+          </button>
+        ))}
+      </div>
+
       {/* Funder table */}
       <div className="glass-card overflow-hidden">
         <div className="overflow-x-auto">
@@ -179,6 +218,7 @@ export default function FundersPage() {
                 <th className="px-3 py-3 text-right">Committed</th>
                 <th className="px-3 py-3 text-right">Drawn %</th>
                 <th className="px-3 py-3 text-right">Days since</th>
+                <th className="px-3 py-3">Next report</th>
                 <th className="px-3 py-3">Projects</th>
                 <th className="px-3 py-3">Next move</th>
               </tr>
@@ -226,6 +266,18 @@ export default function FundersPage() {
                       ) : <span className="text-white/30">—</span>}
                     </td>
                     <td className="px-3 py-3 text-right tabular-nums text-white/60">{r.daysSinceLast}</td>
+                    <td className="px-3 py-3 text-xs">
+                      {r.nextReportDue ? (() => {
+                        const d = daysUntil(r.nextReportDue)
+                        const color = d == null ? 'text-white/30' : d < 0 ? 'text-red-400' : d <= 30 ? 'text-amber-400' : d <= 90 ? 'text-emerald-400' : 'text-white/50'
+                        return (
+                          <div className={color}>
+                            <div className="font-medium">{d != null ? (d < 0 ? `${Math.abs(d)}d overdue` : `${d}d`) : '—'}</div>
+                            {r.nextReportName && <div className="text-[10px] text-white/40 truncate max-w-[160px]" title={r.nextReportName}>{r.nextReportName}</div>}
+                          </div>
+                        )
+                      })() : <span className="text-white/20">—</span>}
+                    </td>
                     <td className="px-3 py-3 text-white/60 text-xs">{r.projects.join(', ')}</td>
                     <td className="px-3 py-3 text-white/70 text-xs max-w-[280px] truncate" title={r.nextMove}>{r.nextMove}</td>
                   </tr>
@@ -309,6 +361,8 @@ function FunderEditPanel({ funderName, onClose, onSaved }: { funderName: string;
           pile_tag: form.pileTag || null,
           notes: form.notes,
           project_code: form.projectCode,
+          next_report_due: form.nextReportDue || null,
+          next_report_name: form.nextReportName || null,
         }),
       })
       const json = await res.json()
@@ -476,6 +530,26 @@ function FunderEditPanel({ funderName, onClose, onSaved }: { funderName: string;
                 </select>
               </Field>
 
+              <div className="grid grid-cols-2 gap-3">
+                <Field label="Next report due">
+                  <input
+                    type="date"
+                    value={form.nextReportDue || ''}
+                    onChange={e => setForm({ ...form, nextReportDue: e.target.value })}
+                    className="form-input"
+                  />
+                </Field>
+                <Field label="Next report name">
+                  <input
+                    type="text"
+                    value={form.nextReportName || ''}
+                    onChange={e => setForm({ ...form, nextReportName: e.target.value })}
+                    className="form-input"
+                    placeholder="e.g. FY26 Operational acquittal"
+                  />
+                </Field>
+              </div>
+
               <Field label="Notes">
                 <textarea
                   value={form.notes || ''}
@@ -490,7 +564,7 @@ function FunderEditPanel({ funderName, onClose, onSaved }: { funderName: string;
                 <div className="text-sm text-red-400 bg-red-500/10 border border-red-500/20 rounded p-2">{error}</div>
               )}
 
-              <div className="flex gap-2 pt-2">
+              <div className="flex gap-2 pt-2 flex-wrap">
                 <button
                   onClick={data.allocation ? save : createAllocation}
                   disabled={saving || !form.projectCode || !form.committedAmount}
@@ -504,8 +578,18 @@ function FunderEditPanel({ funderName, onClose, onSaved }: { funderName: string;
                 >
                   Open project <ExternalLink className="h-3 w-3" />
                 </a>
+                <SyncToNotionButton funderName={funderName} />
               </div>
             </div>
+
+            {/* Add-drawdown inline form */}
+            {data.allocation && (
+              <AddDrawdownForm
+                funderName={funderName}
+                invoices={data.invoices}
+                onAdded={onSaved}
+              />
+            )}
 
             {/* Invoice list */}
             {data.invoices?.length > 0 && (
@@ -683,6 +767,205 @@ function AddFunderModal({ onClose, onCreated }: { onClose: () => void; onCreated
             </button>
             <button onClick={onClose} className="px-4 py-2 rounded-lg bg-white/5 hover:bg-white/10 text-white/60 text-sm">Cancel</button>
           </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function SyncToNotionButton({ funderName }: { funderName: string }) {
+  const [syncing, setSyncing] = useState(false)
+  const [result, setResult] = useState<{ ok: boolean; action?: string; url?: string | null; error?: string } | null>(null)
+
+  async function run(force: boolean) {
+    setSyncing(true)
+    setResult(null)
+    try {
+      const res = await fetch(`/api/finance/funders/${encodeURIComponent(funderName)}/sync-notion`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ force }),
+      })
+      const json = await res.json()
+      setResult(json)
+    } catch (e: any) {
+      setResult({ ok: false, error: e.message })
+    } finally {
+      setSyncing(false)
+    }
+  }
+
+  return (
+    <div className="flex flex-col gap-1">
+      <div className="flex gap-2">
+        <button
+          onClick={() => run(false)}
+          disabled={syncing}
+          className="px-4 py-2 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 disabled:opacity-40 text-amber-300 text-sm inline-flex items-center gap-1"
+          title="Create page in Notion if not present, otherwise no-op"
+        >
+          {syncing ? 'Syncing…' : 'Sync to Notion'}
+        </button>
+        <button
+          onClick={() => run(true)}
+          disabled={syncing}
+          className="px-3 py-2 rounded-lg bg-white/5 hover:bg-white/10 disabled:opacity-40 text-white/60 text-xs"
+          title="Force-refresh content of existing Notion page"
+        >
+          ↻ Force refresh
+        </button>
+      </div>
+      {result && (
+        <div className={cn(
+          'text-[11px] mt-1 px-2 py-1 rounded',
+          result.ok ? 'bg-emerald-500/10 text-emerald-300' : 'bg-red-500/10 text-red-300'
+        )}>
+          {result.ok ? (
+            <>
+              {result.action === 'created' && '✓ Created new page'}
+              {result.action === 'refreshed' && '✓ Refreshed existing page'}
+              {result.action === 'already-exists' && '⊙ Page already exists (use Force refresh to update)'}
+              {result.url && <> · <a href={result.url} target="_blank" rel="noreferrer" className="underline">open</a></>}
+            </>
+          ) : (
+            <>✗ {result.error}</>
+          )}
+        </div>
+      )}
+    </div>
+  )
+}
+
+function AddDrawdownForm({ funderName, invoices, onAdded }: {
+  funderName: string
+  invoices: Array<{ xeroId: string; invoiceNumber: string; date: string; total: number; status: string }>
+  onAdded: () => void
+}) {
+  const [open, setOpen] = useState(false)
+  const [saving, setSaving] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+  const [form, setForm] = useState({
+    drawn_amount: '',
+    drawn_at: new Date().toISOString().slice(0, 10),
+    xero_invoice_id: '',
+    source: 'manual',
+    notes: '',
+  })
+
+  async function submit() {
+    setSaving(true)
+    setError(null)
+    try {
+      const res = await fetch(`/api/finance/funders/${encodeURIComponent(funderName)}/drawdowns`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          drawn_amount: Number(form.drawn_amount),
+          drawn_at: form.drawn_at,
+          xero_invoice_id: form.xero_invoice_id || null,
+          source: form.source,
+          notes: form.notes || null,
+        }),
+      })
+      const json = await res.json()
+      if (!res.ok) throw new Error(json.error || 'Add failed')
+      setOpen(false)
+      setForm({ drawn_amount: '', drawn_at: new Date().toISOString().slice(0, 10), xero_invoice_id: '', source: 'manual', notes: '' })
+      onAdded()
+    } catch (e: any) {
+      setError(e.message)
+    } finally {
+      setSaving(false)
+    }
+  }
+
+  if (!open) {
+    return (
+      <div className="mt-6">
+        <button
+          onClick={() => setOpen(true)}
+          className="px-3 py-1.5 text-xs rounded-lg bg-white/5 hover:bg-white/10 text-white/60 inline-flex items-center gap-1"
+        >
+          + Add drawdown record
+        </button>
+      </div>
+    )
+  }
+
+  return (
+    <div className="mt-6 glass-card p-4">
+      <div className="flex items-center justify-between mb-3">
+        <h3 className="text-sm font-semibold text-white/80">Add drawdown</h3>
+        <button onClick={() => setOpen(false)} className="text-white/50 hover:text-white text-xs">✕</button>
+      </div>
+      <div className="space-y-3">
+        <div className="grid grid-cols-2 gap-3">
+          <Field label="Drawn amount">
+            <input
+              type="number"
+              value={form.drawn_amount}
+              onChange={e => setForm({ ...form, drawn_amount: e.target.value })}
+              className="form-input tabular-nums"
+            />
+          </Field>
+          <Field label="Drawn at">
+            <input
+              type="date"
+              value={form.drawn_at}
+              onChange={e => setForm({ ...form, drawn_at: e.target.value })}
+              className="form-input"
+            />
+          </Field>
+        </div>
+        <Field label="Linked invoice (optional)">
+          <select
+            value={form.xero_invoice_id}
+            onChange={e => setForm({ ...form, xero_invoice_id: e.target.value })}
+            className="form-input"
+          >
+            <option value="">— no linked invoice —</option>
+            {invoices.map(i => (
+              <option key={i.xeroId} value={i.xeroId}>
+                {i.invoiceNumber} · {i.date} · {i.status} · ${Math.round(i.total).toLocaleString()}
+              </option>
+            ))}
+          </select>
+        </Field>
+        <Field label="Source">
+          <select
+            value={form.source}
+            onChange={e => setForm({ ...form, source: e.target.value })}
+            className="form-input"
+          >
+            <option value="manual">Manual</option>
+            <option value="xero_invoice_auto">Xero invoice (auto)</option>
+            <option value="xero_payment_auto">Xero payment (auto)</option>
+            <option value="reimbursement">Reimbursement</option>
+          </select>
+        </Field>
+        <Field label="Notes">
+          <input
+            type="text"
+            value={form.notes}
+            onChange={e => setForm({ ...form, notes: e.target.value })}
+            className="form-input"
+            placeholder="What milestone / phase / batch this represents"
+          />
+        </Field>
+
+        {error && (
+          <div className="text-sm text-red-400 bg-red-500/10 border border-red-500/20 rounded p-2">{error}</div>
+        )}
+
+        <div className="flex gap-2">
+          <button
+            onClick={submit}
+            disabled={saving || !form.drawn_amount || !form.drawn_at}
+            className="px-4 py-2 rounded-lg bg-emerald-500/20 hover:bg-emerald-500/30 disabled:opacity-40 text-emerald-300 text-sm"
+          >
+            {saving ? 'Adding…' : 'Add drawdown'}
+          </button>
+          <button onClick={() => setOpen(false)} className="px-4 py-2 rounded-lg bg-white/5 hover:bg-white/10 text-white/60 text-sm">Cancel</button>
         </div>
       </div>
     </div>

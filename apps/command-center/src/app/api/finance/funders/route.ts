@@ -51,6 +51,8 @@ export async function GET() {
         periodStart: alloc?.period_start ?? null,
         periodEnd: alloc?.period_end ?? null,
         notes: alloc?.notes ?? null,
+        nextReportDue: (alloc as any)?.next_report_due ?? null,
+        nextReportName: (alloc as any)?.next_report_name ?? null,
       }
     })
 
