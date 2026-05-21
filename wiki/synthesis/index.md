@@ -24,13 +24,13 @@ This folder is the **second-brain compounding loop**. Per the [Karpathy LLM know
 
 ## Synthesis articles
 
-- [[alignment-loop-drift-2026-04-24-to-2026-05-08|Alignment Loop drift — 2026-04-24 → 2026-05-08]] — 2026-05-07 · drift summary, second pass of the [[../../thoughts/shared/plans/act-alignment-loop|ACT Alignment Loop]]
+- [[alignment-loop-drift-2026-04-24-to-2026-05-08|Alignment Loop drift — 2026-04-24 → 2026-05-08]] — 2026-05-08 · Centrecorp sent, D&O overdue, ABN still open, $602K outstanding. Second pass of the [[../../thoughts/shared/plans/act-alignment-loop|ACT Alignment Loop]].
 
-- [[entity-migration-truth-state-2026-05-08|Entity migration truth-state — 54 days to cutover, no Pty infrastructure yet]] — 2026-05-07 · third artefact, second pass
+- [[entity-migration-truth-state-2026-05-08|Entity migration truth-state — 53 days to cutover, Centrecorp sent, D&O overdue]] — 2026-05-08 · Q3 second pass, [[../../thoughts/shared/plans/act-alignment-loop|ACT Alignment Loop]]
 
-- [[project-truth-state-2026-05-08|Project truth-state — second pass, 72 codes × 4 sources]] — 2026-05-07 · second artefact, second pass
+- [[project-truth-state-2026-05-08|Project truth-state — 75 codes × 4 sources, second pass]] — 2026-05-08 · Q2 second pass, [[../../thoughts/shared/plans/act-alignment-loop|ACT Alignment Loop]]
 
-- [[funder-alignment-2026-05-08|Funder alignment — second pass, 13 days after baseline]] — 2026-05-07 · first artefact, second pass
+- [[funder-alignment-2026-05-08|Funder alignment — ledger at 40 entries, Centrecorp sent, $602K outstanding]] — 2026-05-08 · Q1 second pass, [[../../thoughts/shared/plans/act-alignment-loop|ACT Alignment Loop]]
 
 - [[entity-migration-truth-state-2026-04-24|Entity migration truth-state — 67 days to cutover, what's done vs open]] — 2026-04-24 · third artefact of the [[../../thoughts/shared/plans/act-alignment-loop|ACT Alignment Loop]]
 

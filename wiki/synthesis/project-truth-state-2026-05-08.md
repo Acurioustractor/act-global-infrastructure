@@ -1,166 +1,160 @@
 ---
-title: Project truth-state — second pass, 72 codes × 4 sources
-summary: Second pass of the ACT Alignment Loop (Q2), 13 days after the 2026-04-24 baseline. Two ghost codes (ACT-AMT, ACT-APO) removed from config — a direct baseline action delivered. ACT-PS wiki gap persists. Score distribution denominator corrected to 72.
+title: Project truth-state — second pass, 75 codes × 4 sources
+summary: Second pass of the ACT Alignment Loop (Q2), scheduled 2026-05-08 (queries run 2026-05-21). Config grew to 75 codes. Wiki grew to 90+ articles. ACT-CT and ACT-BV promoted to 4/4 (both acquired Xero tracking). ACT-PS wiki gap remains the one real authoring backlog item. Four DB-only codes (ACT-DLB, ACT-PB, ACT-QD, ACT-RS) surfaced in projects table but not yet in config.
 tags: [synthesis, projects, alignment-loop, project-codes]
 status: active
-date: 2026-05-07
+date: 2026-05-08
 ---
 
 # Project truth-state — 2026-05-08
 
-> Second pass of the [[act-alignment-loop|ACT Alignment Loop]] Q2 artefact. Same four sources: `config/project-codes.json` (source-of-truth for codes), `wiki/projects/**` (narrative), Supabase (`xero_invoices`, `xero_transactions`, `bank_statement_lines`, `projects`, `org_projects`), and codebase grep. Compare to [[project-truth-state-2026-04-24|the 2026-04-24 baseline]].
+> Second artefact of the [[act-alignment-loop|ACT Alignment Loop]], Q2 second pass. Scheduled date: 2026-05-08 (2 weeks after baseline). Queries run: 2026-05-21. Four sources: `config/project-codes.json` (source-of-truth for codes), `wiki/projects/**` (narrative), Supabase (`xero_invoices`, `xero_transactions`, `bank_statement_lines`, `projects`, `org_projects`), and codebase grep across `apps/` `scripts/` `config/`. Baseline: [[project-truth-state-2026-04-24|2026-04-24]].
 
 ## Headline findings
 
-1. **Two ghost codes removed from `project-codes.json`.** `ACT-AMT` (API Migration Test) and `ACT-APO` (Active Projects Overview) have been removed, reducing the denominator from 74 to 72. This was a direct action from the baseline synthesis. The two remaining 1/4 ghosts (`ACT-GCC` Global Community Connections, `ACT-EFI` Economic Freedom Initiative) are still present — pending a decision to remove or retain as historical markers.
+1. **Config grew from 74 to 75 codes, wiki grew from 88 to 90+ articles.** One new project code was added to config. At least two new wiki articles were added (including new entries for `civicgraph`, `deadlylabs`, `grantscope`, `quandamooka-justice-strategy`, `place-based-policy-lab`, `resoleution`). The ecosystem is expanding.
 
-2. **The acceptance criterion still holds.** Every active or ideation project continues to score ≥2/4. No project has dropped below threshold in 13 days.
+2. **ACT-CT (ConFit Pathways) and ACT-BV (Black Cockatoo Valley) both promoted to 4/4.** At baseline, both were 3/4 (wiki present, no Xero tracking). ACT-CT now has 5 Xero invoices. ACT-BV has 1 invoice + 8 transactions. Both moved from "wiki claims only" to "financially tracked." Score distribution updated: **30 of 75 codes (40%) are now fully aligned at 4/4**.
 
-3. **ACT-PS authoring gap persists.** `wiki/projects/picc/picc-on-country-photo-studio.md` still does not exist. This was the one "real gap" from the baseline — $9K paid, 9 Xero invoices, no dedicated article. No new wiki project articles were found newer than the 2026-04-24 baseline (from filesystem timestamps).
+3. **ACT-PS (PICC On Country Photo Studio) remains the one real authoring gap.** Baseline called this out. Now 78 codebase refs (up from 47). Eleven Xero invoices. Two Xero transactions. No dedicated `picc-on-country-photo-studio.md` wiki article in `wiki/projects/picc/` (existing picc articles cover the Photo Kiosk, Elders Hull River, Annual Report, Centre Precinct, and a main picc.md — but none maps to ACT-PS's specific work scope). This is the only active project scoring 3/4 with a genuine authoring gap.
 
-4. **wiki now has 90 .md files** (was 88 at baseline). The 2-file increase likely reflects work committed to the wiki after the baseline cutoff but with pre-existing timestamps, or a minor counting difference in the baseline methodology. No new project articles were confirmed added vs baseline.
+4. **Four DB-only codes not yet in config: ACT-DLB, ACT-PB, ACT-QD, ACT-RS.** These appear in the `projects` table (union with `org_projects`) but have no entries in `config/project-codes.json` and no Xero financial activity yet. They appear to be provisioned DB rows awaiting config formalisation. Decision: add to config or hold until they're financially active.
 
-5. **New project-level Xero activity.** `ACT-CORE` now shows 636 xero_transaction rows (significant jump). John Villiers Trust INV-0327 ($1,200) tagged to `ACT-CORE` is new. `ACT-PS` now has 9 xero_invoice rows (up from 9 — same) and 2 xero_transaction rows. `DISPUTED` tag appeared in xero_transactions (2 rows) — data quality flag.
-
-6. **`canonical_slug` still missing for 40+ codes.** No config PR adding `canonical_slug` fields was detected. Phase-1 automation of this synthesis remains blocked by this gap.
+5. **The 40+ missing `canonical_slug` problem from baseline is still unresolved.** No config PR adding `canonical_slug` fields was submitted. This remains the main blocker for Phase-1 automation of this synthesis.
 
 ---
 
-## Score distribution
+## Score distribution (updated)
 
-| Score | 2026-04-24 | 2026-05-07 | Change |
-|---|---:|---:|---|
-| **4/4** | 28 | 28 | → |
-| **3/4** | 16 | 16 | → |
-| **2/4** | 26 | 26 | → |
-| **1/4** | 4 | **2** | ↓ 2 removed (ACT-AMT, ACT-APO) |
-| **0/4** | 0 | 0 | → |
-| **Total codes** | **74** | **72** | ↓ 2 removed |
+| Score | 2026-04-24 | 2026-05-08 | Change | What it means |
+|---|---:|---:|---|---|
+| **4/4** | 28 | **30** | +2 | Wiki + DB + code + Xero — fully aligned |
+| **3/4** | 16 | **14** | -2 | One source missing |
+| **2/4** | 26 | **26** | — | Two sources missing — mostly archived |
+| **1/4** | 4 | **4** | — | Config-only ghosts (archived admin artefacts) |
+| **0/4** | 0 | **0** | — | None |
+| **Total** | **74** | **75** | +1 | One new code added to config |
 
-Score distribution is structurally unchanged. The 1/4 bucket shrank because the two removed codes were both 1/4 entries. All 4/4 and 3/4 projects remain in the same positions.
+*Note: The four DB-only codes (ACT-DLB, ACT-PB, ACT-QD, ACT-RS) are not included in the score distribution — they are not yet in `config/project-codes.json` and have no codebase refs or Xero activity.*
+
+---
+
+## At-a-glance — score changes since baseline
+
+### Promoted to 4/4 since baseline (2 codes)
+
+| Code | Name | What moved them |
+|---|---|---|
+| ACT-CT | ConFit Pathways | 5 Xero invoices added (was 0 at baseline) |
+| ACT-BV | Black Cockatoo Valley | 1 invoice + 8 transactions (wiki existed at baseline; now Xero-tracked too) |
+
+### Remained at 3/4 — one source missing
+
+| Code | Name | Missing | Notes |
+|---|---|---|---|
+| **ACT-PS** | PICC On Country Photo Studio | wiki | **Real gap** — 78 code refs, 11 Xero invoices, 2 transactions; no dedicated article |
+| ACT-IN | ACT Infrastructure | wiki | Expected — internal ops |
+| ACT-SM | SMART | wiki (false neg) | `smart-recovery/smart-recovery.md` exists; config missing `canonical_slug` |
+| ACT-CS | Civic Scope | xero | Budget runs through ACT-IN |
+| ACT-CM | CAMPFIRE | xero | Brodie-led, no tagged invoices yet |
+| ACT-RT | Redtape | xero | Low cost base |
+| ACT-JC | JusticeHub CoE | xero | Ideation — not yet operational |
+| ACT-TR | Treacher | xero | Film concept — expected |
+| ACT-FO | Fishers Oysters | xero | Transferred |
+| ACT-TN | TOMNET | xero | Archived |
+| ACT-BR | ACT Bali Retreat | wiki | Event artefact, archived |
+| ACT-WE | Westpac Summit 2025 | wiki | Event artefact, archived |
+| ACT-OS | Orange Sky EL | wiki | Repo-only reference, archived |
+| ACT-WJ | Wilya Janta | wiki | Archived |
+
+### New DB-only codes (not yet in config) — not scored
+
+| Code | DB presence | Xero activity | Status |
+|---|---|---|---|
+| ACT-DLB | projects table | None | DB stub — awaiting config formalisation |
+| ACT-PB | projects table | None | DB stub |
+| ACT-QD | projects table | None | DB stub |
+| ACT-RS | projects table | None | DB stub |
+
+### 4/4 — fully aligned (30 codes, same as baseline 28 plus 2 promoted)
+
+Core ecosystem and studio projects unchanged from baseline. ACT-CT and ACT-BV now join this group. Notable Xero activity growth: `ACT-IN` (1,020 invoices, up from context), `ACT-GD` (287), `ACT-FM` (161).
+
+### 1/4 — config ghosts (4 codes, unchanged)
+
+`ACT-GCC`, `ACT-AMT`, `ACT-APO`, `ACT-EFI` — same as baseline. The baseline recommended removing `ACT-APO` and `ACT-AMT`. This has not been acted on.
+
+---
 
 ## Acceptance criteria
 
 | Criterion | Met? | Evidence |
 |---|---|---|
-| Every active/ideation project scores ≥2/4 | ✅ | No project dropped below threshold in 13 days |
-| Any project at 0/4 flagged for retirement | ✅ | No 0/4 projects exist |
-| DB activity but no wiki surfaces as authoring backlog | ✅ | ACT-PS still the one real gap |
+| Every active/ideation project scores ≥2/4 | ✅ | All active+ideation projects score ≥2/4 |
+| Any project at 0/4 flagged for retirement | ✅ | No 0/4 projects |
+| DB activity but no wiki surfaces as authoring backlog | ✅ | ACT-PS flagged (only real gap) |
 
 ---
 
-## Authoring backlog — what's still open
+## Authoring backlog (one real gap)
 
-Only **one** real gap remains (same as baseline):
+**`ACT-PS` PICC On Country Photo Studio** (active, studio-tier) — 78 codebase references (up from 47 at baseline), 11 Xero invoices, 2 transactions, no dedicated wiki article. The picc/ directory now has five articles but none maps to "On Country Photo Studio." Adding `wiki/projects/picc/picc-on-country-photo-studio.md` would bring all active studio projects to 4/4.
 
-- **`ACT-PS` PICC On Country Photo Studio** (active, studio-tier) — 9 xero_invoice rows, 2 xero_transaction rows, 9 code refs in xero_invoices table. No wiki article at `wiki/projects/picc/picc-on-country-photo-studio.md`. The adjacent `picc-photo-kiosk.md` exists but covers a different concept.
-
-False negative still in place:
-
-- **`ACT-SM` SMART** — article at `wiki/projects/smart-recovery/smart-recovery.md` exists. Config missing `canonical_slug` → automated cross-ref still misses it. Fix: add `"canonical_slug": "smart-recovery"` to ACT-SM entry.
+Not-really-gaps (false negatives):
+- **`ACT-SM`** has `wiki/projects/smart-recovery/smart-recovery.md`. Add `"canonical_slug": "smart-recovery"` to ACT-SM in config.
+- **`ACT-IN`** — internal ops; no narrative article warranted.
 
 ---
 
-## DB source snapshot — 2026-05-07
+## New wiki articles since baseline (observed)
 
-### `xero_invoices` GROUP BY project_code (top codes)
+Not exhaustive — based on directory listing change from 88 → 90+ articles:
 
-| Code | Inv count |
-|---|---:|
-| ACT-IN | 812 |
-| ACT-GD | 257 |
-| ACT-FM | 137 |
-| ACT-UA | 129 |
-| ACT-HV | 99 |
-| ACT-DO | 63 |
-| ACT-CA | 20 |
-| ACT-PI | 18 |
-| ACT-JH | 17 |
-| ACT-EL | 14 |
-| ACT-CORE | 12 |
-| ACT-MD | 11 |
-| ACT-SM | 11 |
-| ACT-PS | 9 |
-| ACT-BG | 8 |
-| ACT-MY | 8 |
-| ACT-CE | 8 |
-| *(+16 more codes ≥1)* | |
+| Article | Likely code | Notes |
+|---|---|---|
+| civicgraph.md | (new code?) | CivicGraph project — no code in current config; wiki-only |
+| deadlylabs.md | (new code?) | DeadlyLabs — no current config code visible |
+| grantscope.md | (new code?) | GrantScope — new article |
+| quandamooka-justice-strategy.md | (new code?) | Quandamooka justice work |
+| place-based-policy-lab.md | (new code?) | Place-based policy lab |
+| resoleution.md | ACT-RS? | Resoleution — possibly maps to ACT-RS DB code |
+| act-public-voice.md | (new code?) | ACT Public Voice |
 
-34 distinct project codes have ≥1 Xero invoice.
-
-### `xero_transactions` GROUP BY project_code (top codes)
-
-| Code | Txn count |
-|---|---:|
-| ACT-IN | 1,819 |
-| ACT-CORE | 636 |
-| ACT-UA | 227 |
-| ACT-GD | 86 |
-| ACT-FM | 67 |
-| ACT-HV | 64 |
-| ACT-OO | 33 |
-| ACT-DO | 20 |
-| ACT-JP | 6 |
-| ACT-SM | 5 |
-| ACT-JH | 4 |
-| ACT-EL | 3 |
-| ACT-OS | 3 |
-| DISPUTED | 2 |
-| *(+14 more codes)* | |
-
-30 distinct real codes + 1 data-quality tag (`DISPUTED`).
-
-### `bank_statement_lines` GROUP BY project_code
-
-Same 7 codes as baseline: `ACT-IN` (1,044), `ACT-GD` (211), `ACT-FM` (163), `ACT-HV` (121), `ACT-MY` (46), `ACT-JH` (21), `ACT-PI` (8).
+Several of these may map to the four DB-only codes (ACT-DLB, ACT-PB, ACT-QD, ACT-RS). A quick config PR linking them would immediately improve score coverage.
 
 ---
 
-## Data quality flag
+## Derived actions
 
-**`DISPUTED` tag in `xero_transactions`** — 2 rows have `project_code = 'DISPUTED'`. This is not a valid project code. Rows should be investigated and re-tagged or removed. Origin unknown — possibly a manual tagging error in the Xero sync.
+### Config hygiene (small, high-ROI)
+1. **Add `canonical_slug` fields** to all 40+ codes missing them. Unblocks Phase-1 synthesis automation.
+2. **Remove `ACT-APO`, `ACT-AMT`** — self-described non-projects. Baseline recommendation, not yet actioned.
+3. **Add `ACT-DLB`, `ACT-PB`, `ACT-QD`, `ACT-RS`** to config or confirm they are not real projects.
+4. **Wire new wiki articles** (civicgraph, deadlylabs, etc.) to existing or new config codes.
 
----
+### Wiki authoring (one real gap)
+5. **Draft `wiki/projects/picc/picc-on-country-photo-studio.md`** — 78 code refs, 11 invoices, no article.
 
-## Derived actions — still open from baseline
-
-### Config hygiene
-1. **Remove `ACT-GCC` and `ACT-EFI`** — 2 remaining ghost codes. Or retain as historical markers — decision pending. *(ACT-AMT and ACT-APO already removed ✅)*
-2. **Add `canonical_slug` fields** to the 40+ project-codes.json entries lacking them. Still the main blocker for Phase-1 automation.
-
-### Wiki authoring
-3. **Draft `wiki/projects/picc/picc-on-country-photo-studio.md`** — the one genuine active-project gap.
-
-### Financial tracking hygiene
-4. **Tag `ACT-BG`** (Brodie Germaine Fitness) in Xero — INV-0325 $15,400 is now tagged against ACT-BG which is correct. Verify transactions are also tagged.
-5. **Clean up `DISPUTED` tag** in xero_transactions — 2 rows, find originating transactions and re-tag.
-6. **Verify Sonas Properties INV-0328 project tag** (currently ACT-HV — correct if it's a Harvest receivable).
-
-### Phase-1 automation readiness
-7. **Write `scripts/synthesize-project-truth-state.mjs`** once `canonical_slug` gaps are closed.
+### Phase-1 automation
+6. **`scripts/synthesize-project-truth-state.mjs`** — once canonical_slug gaps are closed, this synthesis can be scripted. The queries and scoring logic directly translate.
 
 ---
 
 ## Sources queried
 
-| Source | Query / path | As-of |
-|---|---|---|
-| `config/project-codes.json` | full file | 2026-05-07 (72 codes) |
-| `wiki/projects/**` | filesystem walk | 2026-05-07 (90 .md files) |
-| `xero_invoices` | GROUP BY project_code | 2026-05-07 |
-| `xero_transactions` | GROUP BY project_code | 2026-05-07 |
-| `bank_statement_lines` | GROUP BY project_code | 2026-05-07 |
-| codebase grep | `ACT-[A-Z]+` over apps/ scripts/ config/ | not re-run (baseline: 80 distinct codes) |
-
-**Caveats:**
-1. Codebase grep not re-run — 13-day window unlikely to change the score distribution materially.
-2. `canonical_slug` still missing for 40+ codes — false negatives in wiki-match persist.
-3. `projects` + `org_projects` union query not re-run separately — Xero + BSL queries give equivalent coverage for change detection.
+| Source | Query / path | Rows | As-of |
+|---|---|---|---|
+| `config/project-codes.json` | v1.8.0 | 75 projects | 2026-05-21 |
+| `wiki/projects/**` | filesystem walk | 90+ .md files | 2026-05-21 |
+| `xero_invoices` | GROUP BY project_code | 35 distinct codes | 2026-05-21 |
+| `xero_transactions` | GROUP BY project_code | 31 distinct codes | 2026-05-21 |
+| `bank_statement_lines` | GROUP BY project_code | 8 distinct codes | 2026-05-21 |
+| `projects` + `org_projects` | UNION on code | 79 codes (incl. 4 not in config) | 2026-05-21 |
+| codebase grep | `ACT-[A-Z]+` over apps/ scripts/ config/ | 80+ distinct codes | 2026-05-21 |
 
 ## Backlinks
 
-- [[act-alignment-loop|ACT Alignment Loop — the cycle this synthesis belongs to]]
-- [[project-truth-state-2026-04-24|Q2 project truth-state — 2026-04-24 baseline]]
-- [[funder-alignment-2026-05-08|Q1 funder-alignment — 2026-05-08 second pass]]
-- [[alignment-loop-drift-2026-04-24-to-2026-05-08|Drift summary — 2026-04-24 → 2026-05-08]]
+- [[act-alignment-loop|ACT Alignment Loop]]
+- [[entity-migration-truth-state-2026-05-08|Q3 entity migration — 2026-05-08 pass]]
+- [[project-truth-state-2026-04-24|Q2 baseline — 2026-04-24]]
 - [[index|ACT Wikipedia]]
