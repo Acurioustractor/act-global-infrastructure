@@ -52,6 +52,7 @@ apps/command-center/.tldrignore
 
 # Claude Code caches (not code, regenerated)
 .claude/cache/
+.claude/.session-branch-stamp
 .claude/tsc-cache/
 .claude/artifact-index/
 
