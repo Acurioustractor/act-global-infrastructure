@@ -24,7 +24,11 @@
 import './lib/load-env.mjs';
 import { createClient } from '@supabase/supabase-js';
 import { readFileSync } from 'node:fs';
-import { trackedClaudeCompletion } from './lib/llm-client.mjs';
+import {
+  trackedAgentCompletionWithFallback,
+  resolveAgentProvider,
+  selectModel,
+} from './lib/llm-client.mjs';
 
 const SUPABASE_URL = process.env.SUPABASE_SHARED_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
 const SUPABASE_KEY = process.env.SUPABASE_SHARED_SERVICE_ROLE_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY;
@@ -41,11 +45,15 @@ const APPLY = args.includes('--apply');
 const LIMIT = numberAfter('--limit', 20);
 const MIN_CONFIDENCE = numberAfter('--min-confidence', 0.85);
 const SOURCE = valueAfter('--source') || 'all';
+// --model legacy flag now maps to task tier (classify=cheap, generate=mid,
+// reason=expensive). Router resolves the actual model per active provider.
 const MODEL_TAG = valueAfter('--model') || 'sonnet';
-const MODEL =
-  MODEL_TAG === 'haiku' ? 'claude-haiku-4-5'
-  : MODEL_TAG === 'opus' ? 'claude-opus-4-7'
-  : 'claude-sonnet-4-6';
+const TASK =
+  MODEL_TAG === 'haiku' ? 'classify'
+  : MODEL_TAG === 'opus' ? 'reason'
+  : 'generate';
+const PROVIDER = resolveAgentProvider();
+const MODEL = selectModel(TASK, PROVIDER);
 const PROMPT_VERSION = 'v1';
 const SCRIPT_NAME = 'ai-route-dext-doc';
 
@@ -261,10 +269,10 @@ async function gradeOne(row) {
   const userPrompt = buildUserPrompt(row);
   let responseText;
   try {
-    responseText = await trackedClaudeCompletion(userPrompt, SCRIPT_NAME, {
-      model: MODEL,
+    responseText = await trackedAgentCompletionWithFallback(userPrompt, SCRIPT_NAME, {
+      task: TASK,
       system: SYSTEM_PROMPT,
-      maxTokens: 300,
+      maxTokens: 800, // MiniMax-M2.7 needs headroom for stripped <think> blocks
       operation: 'route_dext',
     });
   } catch (err) {

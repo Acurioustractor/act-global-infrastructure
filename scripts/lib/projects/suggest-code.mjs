@@ -14,18 +14,17 @@
  */
 
 import 'dotenv/config';
-import Anthropic from '@anthropic-ai/sdk';
 import { createClient } from '@supabase/supabase-js';
+import { trackedAgentCompletionWithFallback } from '../llm-client.mjs';
 
 const ACT_ORG_ID = '88f84b66-f0fd-4fcf-9ec9-3cfc682303c5';
+const SCRIPT_NAME = 'projects/suggest-code';
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
   process.env.SUPABASE_SERVICE_ROLE_KEY,
   { auth: { persistSession: false } },
 );
-
-const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
 async function loadExistingCodes() {
   const { data, error } = await supabase
@@ -71,13 +70,12 @@ Rules:
 - Don't reuse any existing code above
 - Name should be the actual thing the idea is, not a marketing slogan`;
 
-  const resp = await anthropic.messages.create({
-    model: 'claude-haiku-4-5-20251001',
-    max_tokens: 200,
-    messages: [{ role: 'user', content: prompt }],
+  const text = await trackedAgentCompletionWithFallback(prompt, SCRIPT_NAME, {
+    task: 'classify', // cheap-tier: naming is a shallow pick
+    maxTokens: 600, // MiniMax needs headroom for stripped <think> blocks
+    operation: 'suggest-project-code',
   });
 
-  const text = resp.content[0].type === 'text' ? resp.content[0].text : '';
   const jsonMatch = text.match(/\{[\s\S]*\}/);
   if (!jsonMatch) {
     throw new Error(`Could not parse JSON from model response: ${text.slice(0, 200)}`);

@@ -9,9 +9,13 @@
  */
 
 import Anthropic from '@anthropic-ai/sdk';
-import { trackedClaudeCompletion } from './llm-client.mjs';
+import { trackedAgentCompletionWithFallback } from './llm-client.mjs';
 
 const SCRIPT_NAME = 'grant-sources';
+// Anthropic client retained ONLY for the web_search tool below — that's an
+// Anthropic-specific hosted tool with no MiniMax equivalent. When Anthropic
+// credit is out, searchWithWebSearch returns [] (handled in its catch) and the
+// script gracefully degrades to the migrated LLM-only path.
 const anthropic = new Anthropic();
 
 // Rate limiter: 1 request per second
@@ -130,9 +134,9 @@ Rules:
 - Set url to null — do NOT make up URLs`;
 
   try {
-    const response = await trackedClaudeCompletion(prompt, SCRIPT_NAME, {
-      model: 'claude-haiku-4-5',
-      maxTokens: 2000,
+    const response = await trackedAgentCompletionWithFallback(prompt, SCRIPT_NAME, {
+      task: 'classify', // cheap-tier; grant discovery is shallow extraction not reasoning
+      maxTokens: 3000, // MiniMax needs extra headroom for stripped <think> blocks
       operation: `search-${sourceName.toLowerCase().replace(/\s+/g, '-')}`,
     });
 
