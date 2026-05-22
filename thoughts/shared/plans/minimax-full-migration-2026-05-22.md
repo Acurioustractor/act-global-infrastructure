@@ -1,11 +1,24 @@
 ---
 title: MiniMax Full Migration (all-in)
 date: 2026-05-22
-status: planned
+status: in_progress
 chosen_option: C-full (everything including bot + dashboard)
 trigger: Anthropic credit balance exhausted; AGENT_PROVIDER=minimax already set; provider router exists but only ~half of callers use it
 estimated_effort: 2-3 days across multiple sessions
 plan_trailer: minimax-full-migration-2026-05-22
+progress:
+  - Phase 0 (baseline commit 3442592): DONE
+  - Phase 1 (router hardening 07793dd): DONE — incl. <think>-block stripping, MiniMax pricing, fallback wrapper
+  - Phase 2 (3 non-grader scripts a73d1f9): DONE — ai-route-dext-doc, grant-sources LLM path, suggest-code; fallback wrapper proven under real rate-limit
+  - Phase 3a (4 graders code refactor 89d9355): DONE — code only, calibration deferred
+  - Phase 3b (calibration runs): DEFERRED — MiniMax 5h rate limit hit; running --calibrate now would cascade to Anthropic and burn the $6 top-up
+  - Phase 4 (bot + dashboard adapter): NOT STARTED — needs 1-2 days, fresh session
+  - Phase 5 (verification + cleanup): NOT STARTED
+findings_during_migration:
+  - MiniMax-M2.7 emits <think>...</think> reasoning blocks; strip in router (fixed)
+  - MiniMax-M2.7 ~30% larger output for same task vs Claude; bumped maxTokens 50% in all graders
+  - MiniMax has 5-hour rolling rate limit on this API key tier; production volume will need paid tier
+  - Fallback wrapper transparently caught a MiniMax 429 during Phase 2 and routed to Anthropic — confirms architecture works
 ---
 
 # MiniMax Full Migration — 2026-05-22
