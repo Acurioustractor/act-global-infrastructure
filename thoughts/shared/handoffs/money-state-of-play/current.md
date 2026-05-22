@@ -1,8 +1,8 @@
 ---
-title: Money state of play — audit complete, MiniMax Phase 4b shipped, D1/D4 locked
-date: 2026-05-22
-status: open — Phase 4b done (5 command-center callers wired); D1+D4 resolved; D2/D3 deferred; Phase 4c spike + 3b calibration + 4d Telegram flip blocked on MiniMax 5h-window reset (~2026-05-22T10:00:00Z)
-session: claude (Opus 4.7, 1M context) — 2026-05-21/22 overnight marathon + 2026-05-22 morning continuation (3 commits before /clear-save)
+title: Money state of play — audit complete, MiniMax Phase 4b shipped, D1/D4 locked, Phase 4d mechanics CORRECTED
+date: 2026-05-23
+status: open — Phase 4b done (5 command-center callers wired); D1+D4 resolved; D2/D3 deferred; Phase 4c spike + 3b calibration + 4d Telegram flip blocked on next MiniMax 5h-window reset (2026-05-23T00:00:00Z)
+session: claude (Opus 4.7, 1M context) — 2026-05-22 resume + Phase 4d mechanics correction (bot is Vercel, not PM2)
 related_handoffs:
   - 2026-05-19-money-state-of-play.md (prior — audit was triggered from this)
   - 2026-05-17-finance-tagging-platform-handoff.md
@@ -16,17 +16,17 @@ related_reports:
 
 ## Ledger
 <!-- This section is extracted by SessionStart hook for quick resume -->
-**Updated:** 2026-05-22T06:10:00Z
-**Goal:** Finance audit → RCA → fix runbook DONE. MiniMax all-in migration: 7 script callers + 5 command-center callers + adapter all refactored. 10 commits on main this push (8 code/plan + 2 ledger). Next session resumes Phase 4c → 3b → 4d when MiniMax 5h window opens (~10:00Z).
-**Branch:** main (clean — all 10 commits pushed). Last commit `8406804`.
-**Test:** open /finance/transactions → receipt% should be ~87% (was 81%, NAB bank-fee filter loosened). Bot still on Claude — `LLM_PROVIDER` unset = Anthropic passthrough; adapter wired but inert until env var flipped.
+**Updated:** 2026-05-22T22:30:00Z
+**Goal:** Finance audit → RCA → fix runbook DONE. MiniMax all-in migration: 7 script callers + 5 command-center callers + adapter all refactored. Phase 4d mechanics corrected this resume — bot is **Vercel-hosted Next.js webhook**, not PM2. Next window: 2026-05-23T00:00:00Z.
+**Branch:** main (clean — 10 commits pushed last session). Last commit `8406804`.
+**Test:** open /finance/transactions → receipt% should be ~87% (was 81%, NAB bank-fee filter loosened). Bot still on Claude in production — Vercel has **no MiniMax env vars set**; adapter wired but defaults to Anthropic SDK passthrough.
 
-### Now (resume after MiniMax 5h window clears — ~2026-05-22T10:00:00Z)
-1. ✅ **DONE — rate-limit probe** at session start returned valid content (one-shot success on residual capacity).
-2. ✅ **DONE — Phase 4b adapter wiring** committed as `fb42a72`. Five command-center callers swapped from `new Anthropic(...)` → `new LLMClient(...)`: `app/api/agent/chat/route.ts:38`, `app/api/grants/[id]/draft/route.ts:117`, `app/api/transactions/suggest/route.ts:9`, `lib/agent-loop.ts:66`, `lib/tools/actions.ts:1070`. Anthropic import kept in each for types. `tool-definitions.ts` and `telegram/conversation-state.ts` are types-only — untouched. `npx tsc --noEmit` clean.
-3. 🟡 **Spike-test adapter — request path verified, response path blocked.** Live test against MiniMax returned a structured `2056` 429 (proves the Anthropic→OpenAI request conversion is valid; MiniMax accepted the payload shape). Response-conversion code is straightforward and TS-clean but not exercised end-to-end yet. Re-run `/tmp` spike (or curl against `/api/transactions/suggest` with `LLM_PROVIDER=minimax`) once the 5h window clears.
-4. **Phase 3b — grader calibration** — `node scripts/grade-voice.mjs --calibrate` then `grade-pack.mjs --rubric ... --calibrate ...` then funder-cadence + alignment-loop-synthesis. Compare to Sonnet 4.6 baselines. If any drift > 1 verdict tier, document in rubric calibration history. Will consume ~30 MiniMax requests of the 4,500/5h budget.
-5. **Phase 4d — staged Telegram rollout** — flip `LLM_PROVIDER=minimax` in `ecosystem.config.cjs` for `telegram-bot-webhook` (or wherever the bot runs), `pm2 reload ecosystem.config.cjs`. Send 5 test messages exercising different tools (status, finance query, draft, tag review, journal). Observe for 30 min. If clean, leave on MiniMax. If issues, unset → Claude in one command. **Pending Ben verb** (Tier 2, production rollout).
+### Now (resume after MiniMax 5h window opens — 2026-05-23T00:00:00Z)
+1. ✅ **DONE — rate-limit probe** (2026-05-22T22:07Z): HTTP 200, `reasoning_split:true` confirmed — reasoning isolated from content (30 tokens went to reasoning_content). One-shot success on residual capacity.
+2. ✅ **DONE — Phase 4b adapter wiring** committed as `fb42a72`. Five command-center callers swapped from `new Anthropic(...)` → `new LLMClient(...)`: `app/api/agent/chat/route.ts:38`, `app/api/grants/[id]/draft/route.ts:117`, `app/api/transactions/suggest/route.ts:9`, `lib/agent-loop.ts:66`, `lib/tools/actions.ts:1070`. Anthropic import kept for types. `tool-definitions.ts` and `telegram/conversation-state.ts` are types-only — untouched. `npx tsc --noEmit` clean.
+3. 🟡 **Phase 4c spike — BLOCKED on quota.** Second probe (22:08Z) returned `429 / 2056 / (0/0 used)` — quota empty, resets `2026-05-23T00:00:00Z`. Spike script staged at `/tmp/spike-llm-adapter.ts`: 3 tests (text completion, tool_use call, tool_result follow-up). To run when window opens: `cp /tmp/spike-llm-adapter.ts apps/command-center/ && cd apps/command-center && set -a && source ../../.env.local && set +a && LLM_PROVIDER=minimax npx tsx spike-llm-adapter.ts`. Delete the copy after — it sits in tsconfig include glob.
+4. **Phase 3b — grader calibration** — `node scripts/grade-voice.mjs --calibrate` then `grade-pack.mjs --rubric ... --calibrate ...` then funder-cadence + alignment-loop-synthesis. Compare to Sonnet 4.6 baselines. If drift > 1 verdict tier, document in rubric calibration history. ~30 MiniMax requests of the 4,500/5h budget.
+5. **Phase 4d — staged Telegram rollout (MECHANICS CORRECTED 2026-05-22)** — bot is a **Vercel webhook** at `apps/command-center/src/app/api/telegram/webhook/route.ts`, NOT PM2. Current Vercel env (verified `vercel env ls`): only `ANTHROPIC_API_KEY` set among LLM vars. To flip: (a) `vercel env add MINIMAX_API_KEY production` + paste key from `.env.local`; (b) `vercel env add MINIMAX_BASE_URL production` value `https://api.minimax.io/v1`; (c) `vercel env add LLM_PROVIDER production` value `minimax`; (d) trigger redeploy (`vercel --prod` or git push to trigger CI). Send 5 test messages (Telegram). Observe 30 min. Rollback: `vercel env rm LLM_PROVIDER production` + redeploy. **Pending Ben verb** (Tier 2, production rollout via Vercel).
 
 ### Session commits (10 on main — head is `8406804`)
 
@@ -71,20 +71,26 @@ related_reports:
 3. **OPEN** — Anthropic — temporary bridge or permanent fallback? Recommend permanent fallback at small balance (~$6 working capital). Decision deferred.
 4. ✅ **RESOLVED 2026-05-22** — ~10 min Phase 4d attention window accepted (implicit in D1).
 
-### Phase 4d execution checklist (when 5h window opens ~10:00Z)
+### Phase 4d execution checklist (when 5h window opens 2026-05-23T00:00:00Z)
 
-1. **Re-probe** rate-limit: `curl ... MiniMax-M2.7 ... max_tokens:30`. If 2056 → wait. If content → proceed.
-2. **Spike-test response conversion** (Phase 4c): re-run `/tmp` spike or curl `POST /api/transactions/suggest` with `LLM_PROVIDER=minimax`. Confirms OpenAI→Anthropic response shape. ~2 requests.
+1. **Re-probe** rate-limit: `curl ... ${MINIMAX_BASE_URL}/chat/completions ... MiniMax-M2.7 ... max_tokens:30`. If `2056` 429 → wait. If content → proceed. Note: base URL already includes `/v1`, append `/chat/completions` not `/v1/chat/completions`.
+2. **Spike-test response conversion** (Phase 4c) — staged at `/tmp/spike-llm-adapter.ts`. To run: `cp /tmp/spike-llm-adapter.ts apps/command-center/ && cd apps/command-center && set -a && source ../../.env.local && set +a && LLM_PROVIDER=minimax npx tsx spike-llm-adapter.ts`. Tests: (a) plain text completion, (b) tool_use call shape, (c) tool_result follow-up turn. **Delete the copy after** — `tsconfig.json` has `**/*.ts` in `include`. ~3 requests.
 3. **Phase 3b grader calibration** (~30 requests): `node scripts/grade-voice.mjs --calibrate` → `grade-pack.mjs --calibrate` → funder-cadence → alignment-loop-synthesis. Compare to Sonnet 4.6 baselines. If any rubric drifts > 1 verdict tier, document in calibration history. D2 fires if voice grader drifts — keep that one on Claude.
-4. **Phase 4d staged Telegram flip** — `pm2 stop telegram-bot-webhook` → set `LLM_PROVIDER=minimax` in `ecosystem.config.cjs` → `pm2 reload ecosystem.config.cjs` → `pm2 logs telegram-bot-webhook --lines 50` (watch for adapter errors).
-5. **5-tool accuracy gate** — send these from your phone, in order. Each must produce a correct tool_use call with correct args. **Any failure → unset `LLM_PROVIDER`, reload, abort.**
+4. **Phase 4d staged Telegram flip (VERCEL, NOT PM2)** — bot runs in Vercel command-center deployment.
+   - `env -u VERCEL_PROJECT_ID -u VERCEL_ORG_ID vercel env add MINIMAX_API_KEY production` (paste value from `.env.local`)
+   - `env -u VERCEL_PROJECT_ID -u VERCEL_ORG_ID vercel env add MINIMAX_BASE_URL production` (value: `https://api.minimax.io/v1`)
+   - `env -u VERCEL_PROJECT_ID -u VERCEL_ORG_ID vercel env add LLM_PROVIDER production` (value: `minimax`)
+   - Trigger redeploy: `env -u VERCEL_PROJECT_ID -u VERCEL_ORG_ID vercel --prod` from `apps/command-center` (or push a no-op commit to main if Vercel auto-deploys from git).
+   - Tail logs: `env -u VERCEL_PROJECT_ID -u VERCEL_ORG_ID vercel logs <deployment-url> --since 5m` (watch for adapter errors).
+   - **Rollback in one command**: `vercel env rm LLM_PROVIDER production` + redeploy. The other two env vars (MiniMax API key + base URL) can stay set — they're inert unless `LLM_PROVIDER=minimax`.
+5. **5-tool accuracy gate** — send these from your phone, in order. Each must produce a correct tool_use call with correct args. **Any failure → `vercel env rm LLM_PROVIDER production`, redeploy, abort.**
    - **(a) Read-only finance query** — e.g. "What's our cash position?" — exercises a read tool, no side effects, fast smoke-test.
    - **(b) Capture-to-Notion write** — e.g. "Add to money sync: bot now on MiniMax" — exercises Notion API + the bot's text-to-structured-data step.
    - **(c) Gmail draft** — e.g. "Draft an email to nicholas@act.place subject 'minimax test' body 'ignore'" — exercises a write tool with multi-field args.
    - **(d) Calendar create** — e.g. "Schedule a 15-min event tomorrow 9am called MiniMax verification" — exercises date parsing + calendar API.
    - **(e) Long compound query that triggers Sonnet route** — e.g. "Analyze our spend across the last quarter and compare to budget" — forces `selectModel()` → SONNET_MODEL → `MiniMax-M2.7` (non-highspeed). Verifies both models work.
-6. **Observe 30 min** with `pm2 logs`. If clean → leave on MiniMax. If any flake → unset, reload, file what broke.
-7. **Update ledger**: mark Phase 4d closed (or aborted with reason).
+6. **Observe 30 min** with `vercel logs`. If clean → leave on MiniMax. If any flake → `vercel env rm LLM_PROVIDER production`, redeploy, file what broke.
+7. **Update ledger**: mark Phase 4d closed (or aborted with reason). Commit-trailer `Plan: minimax-full-migration-2026-05-22`.
 
 ### How to resume
 1. SessionStart hook loads this ledger.
@@ -93,13 +99,18 @@ related_reports:
 4. Update this ledger after each step. Use commit-trailer `Plan: minimax-full-migration-2026-05-22`.
 
 ### Files state
-- Branch: `main`, clean (10 commits all on main, HEAD `8406804`)
+- Branch: `main`, clean (10 prior commits on main, HEAD `8406804`)
 - Work-tree has cron-managed wiki/ noise and a few untracked digest/snapshot JSONs — leave for crons. Nothing of mine is unstaged.
 - Adapter at `apps/command-center/src/lib/llm-adapter.ts` — 243 lines, **wired to 5 callers** in passthrough mode (`LLM_PROVIDER` unset → Anthropic SDK)
+- **Vercel command-center prod env (verified 2026-05-22T22:15Z)**: only `ANTHROPIC_API_KEY` set among LLM vars. No `MINIMAX_*`, no `LLM_PROVIDER`. Bot in prod is on Claude. Adapter is inert until Vercel env flipped.
+- Spike script at `/tmp/spike-llm-adapter.ts` — staged but not run (quota empty)
 - Migration plan at `thoughts/shared/plans/minimax-full-migration-2026-05-22.md` — full phase-by-phase detail
 - Fix runbook at `thoughts/shared/plans/finance-fix-runbook-2026-05-22.md` — 14 recipes
 - Audit report at `thoughts/shared/reports/finance-audit-2026-05-21.md` — 8 sections, Top 10 in §8
 - RCA at `thoughts/shared/reports/finance-rca-2026-05-22.md` — 5 patterns + 3 watchdog signals
+
+### Phase 4d mechanics correction note (2026-05-22 resume)
+Prior ledger said "flip `LLM_PROVIDER` in `ecosystem.config.cjs` + `pm2 reload`". **Wrong.** Telegram bot is a Vercel-hosted Next.js webhook (`apps/command-center/src/app/api/telegram/webhook/route.ts`), not PM2. PM2 has `telegram-daily-focus` and `telegram-money-alerts` (push-only cron scripts) but **no webhook process**. Real flip is via `vercel env add` + redeploy — see step 4 of the checklist above. Verified by reading the route file (it's an App Router POST handler with `maxDuration = 60`) and `vercel env ls` (no MiniMax config in prod).
 
 ---
 
