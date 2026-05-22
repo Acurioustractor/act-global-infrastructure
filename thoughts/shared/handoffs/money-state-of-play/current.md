@@ -1,93 +1,91 @@
 ---
-title: Money state of play — Standard Ledger, Pty, trusts, BAS, R&D, farm, charity
-date: 2026-05-17
-status: open — picked up across multiple sessions today, /clear-saved here
-session: claude (Opus 4.7, 1M context)
+title: Money state of play — audit complete, MiniMax migration 7/16 done
+date: 2026-05-22
+status: open — Phase 4b (bot wiring) ready to start; Phase 3b (calibration) waiting on MiniMax rate-limit reset
+session: claude (Opus 4.7, 1M context) — 2026-05-21/22 overnight marathon
 related_handoffs:
-  - 2026-05-17-end-of-day-sweep.md (parallel session — PR #61/#62/#72/#73/#74/#75 landed)
-  - 2026-05-17-money-brain-issue-set.md (parallel session — issue triage)
-  - 2026-05-16-money-audit/current.md (parallel session — money UX audit)
-  - 2026-05-16-money-brain-phase2/ (parallel session — money brain phase 2)
-  - 2026-05-15-money-state-of-play.md (this session's synthesis artifact)
+  - 2026-05-19-money-state-of-play.md (prior — audit was triggered from this)
+  - 2026-05-17-finance-tagging-platform-handoff.md
+related_plans:
+  - thoughts/shared/plans/minimax-full-migration-2026-05-22.md (master plan, 5 phases)
+  - thoughts/shared/plans/finance-fix-runbook-2026-05-22.md (14 fix recipes)
+related_reports:
+  - thoughts/shared/reports/finance-audit-2026-05-21.md (8 sections, ~45 findings)
+  - thoughts/shared/reports/finance-rca-2026-05-22.md (5 structural patterns)
 ---
 
 ## Ledger
 <!-- This section is extracted by SessionStart hook for quick resume -->
-**Updated:** 2026-05-17T00:00:00Z
-**Goal:** Map current state across Standard Ledger comms · ACT Pty setup · family trusts · BAS · R&D FY25-26 · farm/Harvest · Butterfly Movement charity transition. Push into Notion as a dated plan.
-**Branch:** feat/ghl-canonical-code-alignment (15 behind main, 2 ahead, 20 modified files, 4 untracked dirs — see audit #2 + #7)
-**Test:** open the FY26 Close Sprint Notion page — does it have all 8 checklist sections?
+**Updated:** 2026-05-22T15:00:00Z
+**Goal:** Finance audit → RCA → fix runbook DONE. MiniMax all-in migration in progress (7/16 callers refactored, 7 commits on main, plus 1 bot adapter built but unwired).
+**Branch:** main (clean — all 7 commits pushed)
+**Test:** open /finance/transactions → receipt% should be ~87% (was 81%, NAB bank-fee filter loosened). Bot still on Claude — `LLM_PROVIDER` unset = Anthropic passthrough.
 
-### Now
-[->] State synthesised + pushed to Notion (FY26 Close Sprint page + 7 Decisions Log entries + SUPERSEDED banner on stale R&D page). 10-item codebase audit complete. Waiting on Ben to act on critical path.
+### Now (do these in order tomorrow morning)
+1. **Check MiniMax rate-limit cleared** — `curl -s -X POST https://api.minimax.io/v1/chat/completions -H "Authorization: Bearer $MINIMAX_API_KEY" -H "Content-Type: application/json" -d '{"model":"MiniMax-M2.7","messages":[{"role":"user","content":"hi"}],"max_tokens":50}'`. If `2056 usage limit exceeded`, wait. If a normal response with `content`, proceed.
+2. **Phase 4b — wire adapter into 7 callers** (pure code, no API calls, ~1 hr). In each file, swap `import Anthropic from '@anthropic-ai/sdk'` + `new Anthropic(...)` → `import { LLMClient } from '@/lib/llm-adapter'` + `new LLMClient(...)`. Files: `apps/command-center/src/app/api/agent/chat/route.ts:37`, `app/api/grants/[id]/draft/route.ts:116`, `app/api/transactions/suggest/route.ts:8`, `lib/agent-loop.ts:65`, `lib/tools/actions.ts:1069`, `lib/telegram/conversation-state.ts` (if it has Anthropic refs — last check showed none). Run `npx tsc --noEmit` after each. `LLM_PROVIDER` stays unset → bot behavior unchanged.
+3. **Spike-test adapter manually** — set `LLM_PROVIDER=minimax` for one curl/node test against `/api/transactions/suggest` (simplest single-completion endpoint). Confirms response conversion works. Reset env var.
+4. **Phase 3b — grader calibration** — `node scripts/grade-voice.mjs --calibrate` then `grade-pack.mjs --rubric ... --calibrate ...` then funder-cadence + alignment-loop-synthesis. Compare to Sonnet 4.6 baselines. If any drift > 1 verdict tier, document in rubric calibration history. Will consume ~30 MiniMax requests of the 4,500/5h budget.
+5. **Phase 4d — staged Telegram rollout** — flip `LLM_PROVIDER=minimax` in `ecosystem.config.cjs` for `telegram-bot-webhook` (or wherever the bot runs), `pm2 reload ecosystem.config.cjs`. Send 5 test messages exercising different tools (status, finance query, draft, tag review, journal). Observe for 30 min. If clean, leave on MiniMax. If issues, unset → Claude in one command.
 
-### This session (2026-05-15 → 2026-05-17)
-- [x] Audited all Standard Ledger Gmail threads across 4 mailboxes (benjamin@, nicholas@, hi@, accounts@)
-- [x] Mapped current state across 5 workstreams (SL · ACT Pty · trusts · BAS · R&D)
-- [x] Mapped the farm/Harvest split (ACT-FM inside ACT Pty; The Harvest = separate Pty subsidiary)
-- [x] Mapped Butterfly Movement → Goods on Country DGR1 transition mechanics
-- [x] Wrote synthesis to `thoughts/shared/handoffs/2026-05-15-money-state-of-play.md` (~2500 words, source-of-truth)
-- [x] Created Notion FY26 Close Sprint page: https://www.notion.so/360ebcf981cf81238b9eca4b90fbe2df
-- [x] Created 7 Decisions Log entries (R&D Path C · Aleisha · BAS approach · 5-May SL call · Harvest subsidiary · Butterfly Movement · Act-Farm repositioning)
-- [x] Added SUPERSEDED banner to stale R&D Tax Package page (333ebcf981cf81069af2fbd6f938179f) — was listing "ACT Foundation CLG" with sole-trader ABN
-- [x] Ran codebase audit — 10 issues found, severity-ranked
-- [x] User sent the Knight Family Trust TFN reply (was 31-day-old draft, biggest cascade block — now cleared)
+### Tonight's session (7 commits on main)
 
-### Next (in priority order)
-- [ ] **Verify ACT Pty incorporation date 22 vs 24 Apr 2026** — act-core-facts.md says 24, Gmail thread suggests 22. ASIC extract is authoritative. Whichever is wrong propagates to 7 repos via `sync-act-context.mjs --apply`.
-- [ ] **Sign the latest Standard Ledger Ignition proposal** (reminder fired 13 May)
-- [ ] **Sign + return Form 201 + initial resolutions + share certificates + bank-account resolution** to Vanessa Ordoñez
-- [ ] **Chase Vanessa** on Annerley postcode correction + ATO mail status (ABN/TFN/GST/PAYG letters 18+ days overdue from ATO; possibly mis-routed due to wrong postcode)
-- [ ] **Send the combined-ask email** to Remco Marcelis — draft is at `thoughts/shared/drafts/standard-ledger-combined-ask-2026-05-07.md`. Closes Aleisha $12,150 writeoff + R&D rule 1.5 sign-off.
-- [ ] **Resolve Q2+Q3 FY26 BAS path** with Robhie (combined ~$35,867 GST liability, both overdue). SL now formal BAS agent for Nick as of 13 May.
-- [ ] **Book meeting with Sonia** (Butterfly Movement board, legal/tax) this week — she's dark mid-to-late June
-- [ ] **Deal with branch hygiene** (audit #2) — 20 uncommitted Xero/finance scripts + 4 untracked finance routes; stash or commit-PR before rebase
-- [ ] **Then sync** — `git checkout main && git pull --ff-only && git checkout feat/ghl-canonical-code-alignment && git rebase main`
+| Commit | What landed |
+|---|---|
+| `3442592` | Baseline: overnight finance audit + RCA + fix runbook + NAB bank-fee filter loosened (receipt% 81→87%) |
+| `07793dd` | Phase 1: llm-client.mjs router hardening — MiniMax pricing, `trackedAgentCompletionWithFallback` (auth/quota smart fallback), `<think>` strip |
+| `a73d1f9` | Phase 2: 3 non-grader scripts → MiniMax router (ai-route-dext-doc, grant-sources LLM path, projects/suggest-code). Fallback proven live under real MiniMax 429. |
+| `89d9355` | Phase 3a: 4 graders + alignment-loop helper code-refactored. Calibration deferred (3b). |
+| `d040861` | Plan progress doc update |
+| `e7c1f92` | Small wins: `reasoning_split=true` (cleaner than `<think>` strip), PRICING cleanup (deprecated removed, M2.5/M2.1/M2 added for fallback), Phase 4 scope revised down (MiniMax accepts Anthropic-format tools natively) |
+| `ef6d19e` | Phase 4a: `apps/command-center/src/lib/llm-adapter.ts` — `LLMClient` drop-in shim. NOT yet wired. Defaults to Anthropic passthrough; flip `LLM_PROVIDER=minimax` to route. |
 
-### Critical decisions captured (now in Notion Decisions Log)
-1. R&D Path C — FY24-25 forfeit, claim FY25-26 via ACT Pty (Decided 2026-04-27)
-2. Aleisha $12,150 bad-debt write-off (Proposed 2026-05-07, awaiting SL account code)
-3. Q2+Q3 FY26 BAS lodgement approach (Proposed 2026-05-15, decision needed)
-4. Centralize operations on ACT Pty (Decided 2026-05-05 with SL)
-5. The Harvest as separate Pty Ltd subsidiary (Decided 2026-05-05)
-6. Butterfly Movement → Goods DGR1 home (Proposed 2026-05-14)
-7. Act-Farm repositioning — regenerative capital engine (Decided 2026-04-12)
+### Critical findings to remember
+1. **MiniMax has a 5h rolling rate limit** on Token Plan Plus ($20/mo, 4,500 req/5h). Already burned through today by audit + tests. Resets at `2026-05-22T10:00:00Z` (or whatever window we're in).
+2. **MiniMax-M2.7 emits `<think>` blocks always** — cannot disable. Use `reasoning_split: true` to keep them out of `content` (now baked into router).
+3. **MiniMax accepts Anthropic-format tool definitions** at `/v1/chat/completions`. But response is always OpenAI-shaped → adapter converts to Anthropic shape in `llm-adapter.ts`.
+4. **`$6 Anthropic top-up is load-bearing during migration**. Fallback wrapper cascades to Anthropic when MiniMax 429s. Don't let it drain.
+5. **`AGENT_PROVIDER=minimax` is already set** in `.env.local`. The provider router uses it. Scripts that bypass the router (graders pre-3a) hit Anthropic directly; after 3a they route via env.
+6. **`LLM_PROVIDER` (different env var) controls the bot adapter** (`llm-adapter.ts`). Defaults to `anthropic`. Set to `minimax` to flip. Independent of `AGENT_PROVIDER`.
 
-### Codebase audit — top 10 (full punch-list in session)
-1. 🔴 **CONTRADICTION** Pty date 22 vs 24 Apr (verify ASIC extract)
-2. 🔴 **WIP RISK** 20 uncommitted modified scripts + 4 untracked finance routes
-3. 🟡 **STALE** 8 `.bak` files in working tree (incl. 4 .env.local backups from Jan)
-4. 🟡 **DRIFT** Notion sync-policy doc lists 20 sync scripts; disk has 33
-5. 🟡 **HYGIENE** Hardcoded Supabase anon JWT in 2 wiki scripts
-6. 🟡 **PM2 CRUFT** ~30 stopped processes with high restart counts
-7. 🟡 **PROCESS** Branch state messy (15 behind + 2 ahead + 20 modified)
-8. 🟢 **TODO DEBT** Placeholder TODOs treated as production code (smart-alerts.mjs:152 `daysElapsed = 15` is worst)
-9. 🟢 **UNTRACKED** `Dext/` and `.playwright-mcp/` in repo root, no gitignore decision
-10. 🟢 **DEAD CRON** 3 disabled 2026-05-08 entries reference removed surfaces
+### Audit findings (separately actionable — see runbook for recipes)
+- **§3.7 Telford Smith $59K quadruple** — keep PAID bill `843767e6`, void 3 others via Xero UI (Tier 3)
+- **§4.5 Three parallel tagger rule stores** — pick DB as canonical, archive JSON + tag_inference_rules
+- **§6.1 PM2 "outage" was misread** — finance crons stopped between firings is NORMAL. Real issues: Anthropic credit (now $6), Xero token expired (Phase 0 still pending)
+- **§7.5 $735K AP backlog** — all 389 AUTHORISED bills overdue; mostly paid-outside-Xero, need payment records applied in Xero UI (Tier 2)
+- **§7.7 1,010 unreconciled bank txns ($1.8M)** — UI-only; reconciliation sprint needed
 
-### Decisions
-- **Notion was right surface, not Supabase project_knowledge** — direct create-pages to data source `c8f1cf8e-fef7-4e22-ac71-bf60c1f668b2` since `sync-actions-decisions-to-notion.mjs` only creates from Supabase to Notion (won't overwrite)
-- **Banner instead of replace** on stale R&D page (preserves Mar 2026 historical numbers for audit trail)
-- **FY26 Close Sprint as parent-of-truth** — checklist by week, links back to repo handoff + decisions
+### Open from prior session (carried over, still relevant)
+1. **Grill-me Q1** — canonical receipt-capture path (recommended B = Dext + connectors). Affects whether to comment out the receipt-chain in PM2 config (Fix 3 in runbook, NOT done).
+2. **Xero re-auth** — `node scripts/xero-auth.mjs` (interactive browser flow). Token expired 2026-05-18, blocks Xero MCP reads. Run when you get a chance.
+3. **Sydney trip 2025-10-01 + 2025-10-13 cluster** — what project?
+4. **Hong Kong $63.70 SP BINGELI SAN PO KONG** — real or skim?
+5. **ACT Pty date** — 22 or 24 Apr 2026? Need ASIC extract.
 
-### Open questions for Ben
-1. Did the 14 May 5pm call with John Cranwell + Briony happen? Notion meeting page exists but no follow-up captured
-2. Adelaide visits 1 Jun + second-last week Jun — flights confirmed? Butterfly Movement AGM mechanics ride on these
-3. The Harvest landlord — has subsidiary-structure brief been delivered yet?
-4. Sonia (Butterfly Movement legal/tax) — booked yet?
+### Pending Ben decisions for Phase 4
+1. **OK to replace `claude-3-5-haiku` bot with `MiniMax-M2.7-highspeed`?** Tool-call accuracy may shift.
+2. **If voice grader fails calibration, keep on Claude as exception, or accept drift?**
+3. **Anthropic — temporary bridge or permanent fallback?** Recommend permanent fallback at small balance.
+4. **OK with ~10 min bot downtime during Phase 4d staged rollout?**
 
-### Key artifacts (DO NOT lose)
-- Session synthesis: `thoughts/shared/handoffs/2026-05-15-money-state-of-play.md`
-- Notion FY26 Close Sprint: https://www.notion.so/360ebcf981cf81238b9eca4b90fbe2df
-- Notion Decisions Log: https://www.notion.so/f8b0bfb6b5ad4b18829e15c4561f55e0
-- Migration checklist: `thoughts/shared/plans/act-entity-migration-checklist-2026-06-30.md`
-- R&D pack: `thoughts/shared/rd-pack-fy26/` (grade WARN/62)
-- Combined-ask draft (UNSENT): `thoughts/shared/drafts/standard-ledger-combined-ask-2026-05-07.md`
-- Aleisha write-off script (READY): `scripts/write-off-aleisha-invoices.mjs`
-- Harvest subsidiary decision: `wiki/decisions/2026-05-harvest-subsidiary-structure.md`
-- Act-Farm repositioning: `wiki/decisions/2026-04-act-farm-repositioning.md`
+### How to resume tomorrow
+1. SessionStart hook loads this ledger.
+2. Run the rate-limit probe (step 1 above).
+3. If MiniMax up: execute Phase 4b (the 7-caller wire-up). Use `git log --since='2 hours ago' --all --oneline` first to flag any cross-session work.
+4. Spike-test → Phase 3b calibration → Phase 4d Telegram flip.
+5. Update this ledger after each phase completes.
 
-### Resume context
-- Today: 2026-05-17. FY26 close: 30 Jun 2026 (44 days). R&D lodgement window: 1 Jul 2026 – 30 Apr 2027 (≤349 days).
-- The TFN unblock cleared the biggest cascade. Next domino: chase ATO mail to Vanessa + sign Ignition + send combined-ask to Remco.
-- Parallel sessions today landed 6 PRs (see `2026-05-17-end-of-day-sweep.md`) — check `git log main --oneline -20` before any branch work.
+### Files state
+- Branch: `main`, clean (last 7 commits all on main)
+- Unmodified work-tree (wiki/ auto-syncs from crons NOT staged — left for cron to manage)
+- Adapter at `apps/command-center/src/lib/llm-adapter.ts` — 243 lines, type-checked clean, not yet imported
+- Migration plan at `thoughts/shared/plans/minimax-full-migration-2026-05-22.md` — has full phase-by-phase detail
+- Fix runbook at `thoughts/shared/plans/finance-fix-runbook-2026-05-22.md` — has 14 recipes
+- Audit report at `thoughts/shared/reports/finance-audit-2026-05-21.md` — 8 sections, Top 10 in §8
+- RCA at `thoughts/shared/reports/finance-rca-2026-05-22.md` — 5 patterns + 3 watchdog signals
+
+---
+
+## Archive — prior session content
+
+Prior content from 2026-05-19 handoff archived to `thoughts/shared/handoffs/2026-05-19-money-state-of-play.md` (see related_handoffs frontmatter). The "grill-me Q1 awaiting Ben's choice" question is captured in the Open from prior session section above.
