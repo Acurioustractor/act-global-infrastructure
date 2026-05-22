@@ -1,7 +1,7 @@
 # Voice rubric calibration — v0.2
 
-> Run: 2026-05-06T23:48:54.726Z
-> Pass rate: 10/10
+> Run: 2026-05-22T22:22:16.881Z
+> Pass rate: 9/10
 > Rubric: `thoughts/shared/rubrics/act-voice-curtis.md`
 > Grader: `scripts/grade-voice.mjs` (Haiku 4.5 for tier 2-3)
 
@@ -14,7 +14,7 @@
 | GOOD: court | pass | pass | 100 | YES |
 | BAD: transformative outcomes | fail | fail | 41 | YES |
 | BAD: intricate tapestry | fail | fail | 17 | YES |
-| BAD: despite challenges | fail | fail | 29 | YES |
+| BAD: despite challenges | fail | error | 0 | **NO** |
 | GOOD: board-report parity | pass | pass | 100 | YES |
 | BAD: board-report puff | fail | fail | 5 | YES |
 | GOOD: donor letter | pass | pass | 100 | YES |
@@ -34,7 +34,7 @@ Structural: rooms=true body=true abstract=true stops=true
 Plainness: doomadgee=true pitch_deck=false
 
 Advice: 
-- This is the calibration anchor for correct voice — nothing to change.
+- Voice is correct. Terrific terseness.
 
 ### GOOD: signal (`good-2`) — OK
 
@@ -44,14 +44,13 @@ Advice:
 
 Hard failures: none.
 
-Structural: rooms=true body=true abstract=true stops=true
+Structural: rooms=true body=true abstract=false stops=true
 Plainness: doomadgee=true pitch_deck=false
 
 Advice: 
-- This is close to correct voice — terse, plain, no pitch-deck inflation.
-- 'Signal' names the room (empathy-ledger table), 'speaker' names the body, and 'theirs' loads ownership against the signal's return — that's the abstract loaded against the concrete.
-- 'We work with First Nations communities' is the weakest line — it's a common opener that edges toward boilerplate. Consider cutting it and trusting the last two sentences to carry the whole piece.
-- If you keep three sentences, make the first one do more concrete work — name a place, a hand, a tape, something that lands before 'the story is theirs'.
+- The signal (room) and speaker (body) are correctly named, but no institutional abstract noun (impact, outcome, capacity, permanence) is loaded against the concrete.
+- Consider a contrast structure: place an institutional abstraction in tension with the concrete signal or speaker, like 'The signal cuts through impact' or loading 'outcome' against the speaker's return.
+- The sentences currently read as declarations rather than contrasts. Add a weight-bearing sentence that places an abstract noun against the concrete room or body to complete the four moves.
 
 ### GOOD: court (`good-3`) — OK
 
@@ -65,7 +64,7 @@ Structural: rooms=true body=true abstract=true stops=true
 Plainness: doomadgee=true pitch_deck=false
 
 Advice: 
-- This is the voice. Both sentences carry weight. Nothing to fix.
+- This is the voice. Two sentences, four moves done.
 
 ### BAD: transformative outcomes (`bad-1`) — OK
 
@@ -81,11 +80,10 @@ Structural: rooms=false body=false abstract=false stops=false
 Plainness: doomadgee=false pitch_deck=true
 
 Advice: 
-- No room is named — 'partnership', 'communities', and 'initiatives' are abstractions, not places. For hub, pick any concrete room from the project table (cell, studio, basket, fence, gym, island, circle, etc.) and plant the sentence there.
-- No body appears anywhere. Name a hand, a voice, a breath, a foot on the ground — something that exists in a body.
-- Every noun is abstract and they pile up without being loaded against anything concrete. 'Transformative outcomes', 'meaningful change', 'innovative initiatives' — none of these land. Load one abstract against one concrete thing and stop.
-- The line never stops — it keeps adding '-ing' tails ('fostering', 'leveraging', 'to drive'). Cut at the first true thing and leave it there.
-- This is the calibration-anchor failure example (Example C) verbatim. Start over. One room. One body. One weight. Stop.
+- Name a concrete room from any project table
+- Name a concrete body or body-action
+- Load an institutional abstract noun against the concrete
+- Stop the line before explanation — terse is the point
 
 ### BAD: intricate tapestry (`bad-2`) — OK
 
@@ -103,33 +101,28 @@ Structural: rooms=false body=false abstract=false stops=false
 Plainness: doomadgee=false pitch_deck=true
 
 Advice: 
-- No room named — for justicehub, drop the reader into a cell, a court, a watch-house, a road. One concrete word does it.
-- 'Tapestry', 'equitable future', 'grassroots advocacy', 'systemic injustice' — every noun here is an abstraction piled on another abstraction. None of them are loaded against anything real.
-- No body anywhere. No hand, no voice, no breath, no person walking out of a watch-house. The reader has nothing to stand on.
-- The -ing tail ('shaping a more equitable future') is the classic pitch-deck move — cut it. Stop the line before the explanation.
-- Rewrite test: try something like 'The court forgets a name fast. We write it down.' — room named, body implied, abstract (forgetting/memory) loaded against the concrete act, line stops.
+- This is pure pitch-deck register. 'Dedicated team,' 'intricate tapestry,' 'systemic injustice,' 'crucial role,' 'shaping a more equitable future' — all abstraction, no concrete.
+- No room from the justicehub table appears (cell, court, road, remand, watch-house). Nothing anchors to a place.
+- No body or body-action named (hand, breath, voice, lift, eye, walk, sit, ear).
+- The -ing tail 'in shaping a more equitable future' is explanation — it doesn't stop.
+- For justicehub: name a room. Name a body. Load an abstract against that concrete. Stop. Example: 'The court forgets. We remember.' That's the voice.
 
-### BAD: despite challenges (`bad-3`) — OK
+### BAD: despite challenges (`bad-3`) — MISMATCH
 
 > Despite facing numerous challenges, the project continues to thrive, demonstrating its pivotal role in the evolving landscape of regenerative economics.
 
-**Verdict:** fail  ·  **Score:** 29  ·  **Expected:** fail
+**Verdict:** error  ·  **Score:** 0  ·  **Expected:** fail
 
 Hard failures (3):
       - **forbidden_vocab** `pivotal` (line 1): Despite facing numerous challenges, the project continues to thrive, demonstrati
       - **significance_claim** `its pivotal role` (line 1): Despite facing numerous challenges, the project continues to thrive, demonstrati
       - **challenges_future** `continues to thrive` (line 1): Despite facing numerous challenges, the project continues to thrive, demonstrati
 
-Structural: rooms=false body=false abstract=false stops=false
-Plainness: doomadgee=false pitch_deck=true
+Structural: skipped
+Plainness: skipped
 
 Advice: 
-- No room named — for goods, drop into basket, market, hand, country, or bush immediately.
-- No body present — whose hand is carrying the basket? Whose country? Name a body or body-action.
-- Every noun here is abstract: 'challenges', 'landscape', 'regenerative economics', 'pivotal role' — none is loaded against anything concrete, they just pile on each other.
-- The sentence ends with an explanation tail ('demonstrating its pivotal role in...') — cut before it explains itself.
-- 'Pivotal role in the evolving landscape of regenerative economics' is pitch-deck at full volume — a fourteen-year-old in Doomadgee would stop reading here.
-- Try something like: 'The basket came back to country. That is the economy.' Two sentences, four moves done.
+- t23 parse failed: json_parse_failed
 
 ### GOOD: board-report parity (`good-4`) — OK
 
@@ -143,11 +136,7 @@ Structural: rooms=true body=true abstract=true stops=true
 Plainness: doomadgee=true pitch_deck=false
 
 Advice: 
-- This is correct. All four moves are present and tight.
-- 'Basket' and 'country' and 'hand' and 'market' all fire as goods rooms/bodies per the project table — no problem there.
-- 'Parity moved one notch' is the abstract load: an institutional noun (parity) dragged against the concrete count (eleven trips, ten payments). That tension does the work without explanation.
-- The line stops before any explanation — 'Parity moved one notch' refuses to add 'which demonstrates progress toward equity outcomes' or similar. Hold that discipline.
-- Q3 FY26 as a datestamp is clean board-report framing — it grounds the piece in time without inflating it. No changes required.
+- This passes. Rooms named (basket, country, market), body named (hand), abstract loaded (parity), line stops (no explanation). The brevity serves the board-report genre well. Each sentence is a data point that speaks for itself.
 
 ### BAD: board-report puff (`bad-4`) — OK
 
@@ -166,12 +155,11 @@ Structural: rooms=false body=false abstract=false stops=false
 Plainness: doomadgee=false pitch_deck=true
 
 Advice: 
-- No room from the goods table appears anywhere — basket, market, hand, country, bush are all absent. Name the actual place where the work happens.
-- No body is present. Whose hands? Whose country? A person or a body-action needs to be in here.
-- Every noun is abstract: 'outcomes', 'empowerment', 'commitment', 'equitable future'. None of them is loaded against anything concrete — they just pile on top of each other.
-- The lines never stop — '-ing' tails ('fostering', 'demonstrating', 'leveraging') keep the sentences open and explanatory. Cut before the explanation.
-- This reads like a pitch deck from start to finish. 'Pivotal role', 'transformative outcomes', 'community-led economic empowerment' would all fail the Doomadgee test.
-- Try something like: 'The basket moved through three hands before it left the market.' That is one sentence, four moves done.
+- Name a concrete room from the goods table: basket, market, hand, country, bush — and anchor it in sentence one.
+- Name a concrete body or body-action: hand, eye, voice, walk, sit, ear — make it specific, not 'our team.'
+- Load an institutional abstract noun (outcome, impact, capacity, permanence) against the concrete room or body — do not pile abstractions without anchor.
+- Stop the line before explanation. Write terse. Two sentences can do the work of four.
+- Strip the pitch-deck language: 'leveraging,' 'transformative,' 'pivotal role,' 'vibrant,' 'community-led economic empowerment' are all violations. Write so a fourteen-year-old in Doomadgee reads it plainly.
 
 ### GOOD: donor letter (`good-5`) — OK
 
@@ -185,10 +173,9 @@ Structural: rooms=true body=true abstract=true stops=true
 Plainness: doomadgee=true pitch_deck=false
 
 Advice: 
-- This is the voice. All four moves land cleanly across three sentences.
-- 'Three winters ago' does the work of time without abstraction — keep that.
-- 'The valley remembers your hand' loads the abstract (permanence, legacy, donor impact) against concrete body (hand) without explaining it — that is exactly the move.
-- No changes required. This is a calibration-quality example for bcv donor-letter.
+- Voice is correct. Two sentences do the work.
+- The cockatoo as body-marker of place is perfect for bcv.
+- The valley remembering is an abstract (permanence/memory) loaded against the concrete — this is the move.
 
 ### BAD: donor letter puff (`bad-5`) — OK
 
@@ -207,13 +194,11 @@ Structural: rooms=false body=false abstract=false stops=false
 Plainness: doomadgee=false pitch_deck=true
 
 Advice: 
-- No room named — for bcv, drop in valley, fence, creek, paddock, cockatoo, or tree. A single concrete place-word does the work.
-- No body named — put a hand, a boot, a breath, a walk into the sentence. Who is standing where doing what?
-- Every noun is abstract: contribution, change, landscape, investment, ability, restoration, outcomes. None of them are loaded against anything concrete. The abstraction has nothing to push against.
-- The sentences do not stop — they trail with -ing tails ('empowering us to drive', 'leverages our ability to foster') which is the hallmark of pitch-deck register. Cut to the bone and stop.
-- A fourteen-year-old in Doomadgee cannot picture anything in this letter. Rewrite until they can see the fence, hear the cockatoo, feel the dirt.
-- Try something like: 'The cockatoo was back on the fence last spring. That took four years of work.' Two sentences, four moves, done.
+- This reads like a pitch deck. No concrete rooms from the bcv table appear (valley, fence, tree, creek, paddock, cockatoo). No concrete bodies (hand, voice, eye, walk, etc.). The abstract nouns 'change,' 'outcomes,' 'restoration' float without being loaded against a concrete thing.
+- Cut all institutional language: 'empowering,' 'leverages,' 'foster,' 'nuanced,' 'transformative.' These are pitch-deck fillers.
+- Use the donor-letter genre to name a concrete place and body. Example: 'Your gift keeps the cockatoo coming back to the fence. That's the restoration.' One sentence can carry all four moves.
+- Remember: two sentences can satisfy all four moves. Do not explain. Stop at the concrete.
 
 ## Tuning notes
 
-- All fixtures classified correctly. Promote rubric to v0.2 (production-eligible).
+- One or more mismatches. Inspect detail above. Tune rubric or grader before promoting.
