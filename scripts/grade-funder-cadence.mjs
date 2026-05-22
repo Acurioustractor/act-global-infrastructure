@@ -23,11 +23,18 @@
  */
 
 import 'dotenv/config';
-import Anthropic from '@anthropic-ai/sdk';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { loadClaim, loadFunders } from './lib/claim-loader.mjs';
+import {
+  trackedAgentCompletionWithFallback,
+  providerFromModelName,
+} from './lib/llm-client.mjs';
+
+function anyLLMConfigured() {
+  return !!(process.env.ANTHROPIC_API_KEY || process.env.MINIMAX_API_KEY || process.env.GEMINI_API_KEY || process.env.OPENAI_API_KEY);
+}
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.resolve(__dirname, '..');
@@ -364,17 +371,20 @@ ${text}
 """`;
 }
 
-async function tier23(text, funder, cycle, anthropic) {
+async function tier23(text, funder, cycle, _llmAvailable) {
   const leading = (funder.claims_to_lead_with || []).map(loadClaim);
   const avoid = (funder.claims_to_avoid || []).map(loadClaim);
   const prompt = buildTier23Prompt(text, funder, cycle, leading, avoid);
-  const resp = await anthropic.messages.create({
-    model: process.env.GRADE_FUNDER_MODEL || 'claude-sonnet-4-6',
-    max_tokens: 1500,
-    messages: [{ role: 'user', content: prompt }],
+  const envModel = process.env.GRADE_FUNDER_MODEL;
+  const forceProvider = envModel ? providerFromModelName(envModel) : null;
+  const raw = await trackedAgentCompletionWithFallback(prompt, 'grade-funder-cadence', {
+    task: 'generate',
+    model: envModel || undefined,
+    forceProvider,
+    maxTokens: 2500, // bumped from 1500 for MiniMax <think> headroom
+    operation: 'grade-funder-tier23',
   });
-  const raw = resp.content[0].text.trim();
-  const cleaned = raw.replace(/^```json\s*|\s*```$/g, '');
+  const cleaned = raw.trim().replace(/^```json\s*|\s*```$/g, '');
   try { return JSON.parse(cleaned); }
   catch (e) { return { error: 'json_parse_failed', raw }; }
 }
@@ -461,11 +471,11 @@ async function runCalibration(opts = {}) {
   }
   let anthropic = null;
   if (!opts.tier1Only) {
-    if (!process.env.ANTHROPIC_API_KEY) {
-      console.error('ANTHROPIC_API_KEY not set; falling back to --tier1-only');
+    if (!anyLLMConfigured()) {
+      console.error('No LLM provider configured (set AGENT_PROVIDER + MINIMAX_API_KEY or ANTHROPIC_API_KEY); falling back to --tier1-only');
       opts.tier1Only = true;
     } else {
-      anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+      anthropic = {}; // truthy marker — router resolves real provider from env
     }
   }
   const results = [];
@@ -562,8 +572,8 @@ async function main() {
   const text = fs.readFileSync(filePath, 'utf8');
   let anthropic = null;
   if (!tier1Only) {
-    if (!process.env.ANTHROPIC_API_KEY) { console.error('ANTHROPIC_API_KEY not set; using --tier1-only'); }
-    else anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+    if (!anyLLMConfigured()) { console.error('No LLM provider configured; using --tier1-only'); }
+    else anthropic = {}; // truthy marker — router resolves real provider from env
   }
   const result = await grade(text, funderSlug, cycle, anthropic, { tier1Only });
   // Print human-readable summary

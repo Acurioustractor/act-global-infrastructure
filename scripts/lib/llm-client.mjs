@@ -591,11 +591,24 @@ function shouldFallback(err) {
 }
 
 function providerMatchesModel(provider, model) {
-  if (provider === 'minimax') return /^MiniMax/i.test(model);
+  if (provider === 'minimax') return /^MiniMax|^abab/i.test(model);
   if (provider === 'gemini') return /^gemini/i.test(model);
   if (provider === 'anthropic') return /^claude/i.test(model);
-  if (provider === 'openai') return /^gpt/i.test(model);
+  if (provider === 'openai') return /^gpt|^o\d/i.test(model);
   return false;
+}
+
+/**
+ * Infer provider from a model name string. Returns null if the model name
+ * doesn't unambiguously map to a provider. Useful for honoring legacy env
+ * vars like GRADE_VOICE_MODEL=claude-sonnet-4-6 (forces Anthropic).
+ */
+export function providerFromModelName(model) {
+  if (!model) return null;
+  for (const provider of ['minimax', 'anthropic', 'gemini', 'openai']) {
+    if (providerMatchesModel(provider, model)) return provider;
+  }
+  return null;
 }
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -778,6 +791,7 @@ export default {
   trackedMiniMaxCompletion,
   trackedGeminiCompletion,
   resolveAgentProvider,
+  providerFromModelName,
   selectModel,
   getCostSummary,
   getDailyCosts,

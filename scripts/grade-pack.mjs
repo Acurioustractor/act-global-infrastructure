@@ -18,9 +18,16 @@
 //   match is checked against the filename prefix)
 
 import 'dotenv/config';
-import Anthropic from '@anthropic-ai/sdk';
 import fs from 'node:fs';
 import path from 'node:path';
+import {
+  trackedAgentCompletionWithFallback,
+  providerFromModelName,
+} from './lib/llm-client.mjs';
+
+function anyLLMConfigured() {
+  return !!(process.env.ANTHROPIC_API_KEY || process.env.MINIMAX_API_KEY || process.env.GEMINI_API_KEY || process.env.OPENAI_API_KEY);
+}
 
 function loadPack(packPath) {
   const stat = fs.statSync(packPath);
@@ -55,7 +62,7 @@ PACK ({{PACK_NAME}}):
 
 Return JSON now:`;
 
-async function gradePack(rubricPath, packPath, anthropic) {
+async function gradePack(rubricPath, packPath, _llmAvailable) {
   const rubric = fs.readFileSync(rubricPath, 'utf8');
   const pack = loadPack(packPath);
   const prompt = PROMPT
@@ -63,13 +70,16 @@ async function gradePack(rubricPath, packPath, anthropic) {
     .replace('{{PACK_NAME}}', pack.name)
     .replace('{{PACK_CONTENT}}', pack.content);
 
-  const resp = await anthropic.messages.create({
-    model: process.env.GRADE_PACK_MODEL || 'claude-sonnet-4-6',
-    max_tokens: 4000,
-    messages: [{ role: 'user', content: prompt }],
+  const envModel = process.env.GRADE_PACK_MODEL;
+  const forceProvider = envModel ? providerFromModelName(envModel) : null;
+  const raw = await trackedAgentCompletionWithFallback(prompt, 'grade-pack', {
+    task: 'generate',
+    model: envModel || undefined,
+    forceProvider,
+    maxTokens: 5500, // bumped from 4000 for MiniMax <think> headroom
+    operation: 'grade-pack',
   });
-  const raw = resp.content[0].text.trim();
-  const cleaned = raw.replace(/^```json\s*|\s*```$/g, '');
+  const cleaned = raw.trim().replace(/^```json\s*|\s*```$/g, '');
   try { return JSON.parse(cleaned); }
   catch (e) { return { error: 'json_parse_failed', raw: raw.slice(0, 1000) }; }
 }
@@ -80,8 +90,8 @@ function getArg(flag, fallback = null) {
 }
 
 async function runCalibration(rubricPath, fixturesDir) {
-  if (!process.env.ANTHROPIC_API_KEY) { console.error('ANTHROPIC_API_KEY not set'); process.exit(2); }
-  const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+  if (!anyLLMConfigured()) { console.error('No LLM provider configured (set AGENT_PROVIDER + MINIMAX_API_KEY or ANTHROPIC_API_KEY)'); process.exit(2); }
+  const anthropic = {}; // truthy marker — router resolves real provider from env
   const files = fs.readdirSync(fixturesDir)
     .filter(f => f.endsWith('.md') && !f.startsWith('_'))  // skip _calibration.md and other generated files
     .sort();
@@ -157,11 +167,11 @@ async function main() {
     process.exit(2);
   }
 
-  if (!process.env.ANTHROPIC_API_KEY) {
-    console.error('ANTHROPIC_API_KEY not set');
+  if (!anyLLMConfigured()) {
+    console.error('No LLM provider configured (set AGENT_PROVIDER + MINIMAX_API_KEY or ANTHROPIC_API_KEY)');
     process.exit(2);
   }
-  const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+  const anthropic = {}; // truthy marker — router resolves real provider from env
   const result = await gradePack(rubric, pack, anthropic);
   const json = JSON.stringify(result, null, 2);
   if (out) {

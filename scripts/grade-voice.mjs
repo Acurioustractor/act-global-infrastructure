@@ -5,9 +5,12 @@
 // Production mode: pass `--file <path>` and `--project <slug>` and `--genre <slug>`.
 
 import 'dotenv/config';
-import Anthropic from '@anthropic-ai/sdk';
 import fs from 'node:fs';
 import path from 'node:path';
+import {
+  trackedAgentCompletionWithFallback,
+  providerFromModelName,
+} from './lib/llm-client.mjs';
 
 const RUBRIC_VERSION = '0.2';
 const REPORT_PATH = 'thoughts/shared/rubrics/act-voice-curtis.calibration.md';
@@ -174,18 +177,25 @@ TEXT TO GRADE:
 {{TEXT}}
 """`;
 
-async function tier23(text, project, genre, anthropic) {
+async function tier23(text, project, genre, _llmAvailable) {
+  // _llmAvailable is a truthy/falsy marker from the caller — we don't need an
+  // SDK client anymore (router resolves provider from env).
   const prompt = TIER23_PROMPT
     .replace('{{PROJECT}}', project)
     .replace('{{GENRE}}', genre)
     .replace('{{TEXT}}', text);
-  const resp = await anthropic.messages.create({
-    model: process.env.GRADE_VOICE_MODEL || 'claude-sonnet-4-6',
-    max_tokens: 2500,
-    messages: [{ role: 'user', content: prompt }],
+  // If GRADE_VOICE_MODEL is explicitly set, force the matching provider
+  // (preserves calibration-baseline runs that pin to a specific model).
+  const envModel = process.env.GRADE_VOICE_MODEL;
+  const forceProvider = envModel ? providerFromModelName(envModel) : null;
+  const raw = await trackedAgentCompletionWithFallback(prompt, 'grade-voice', {
+    task: 'generate', // mid-tier rubric grading
+    model: envModel || undefined,
+    forceProvider,
+    maxTokens: 3500, // bumped from 2500 for MiniMax <think> headroom
+    operation: 'grade-voice-tier23',
   });
-  const raw = resp.content[0].text.trim();
-  const cleaned = raw.replace(/^```json\s*|\s*```$/g, '');
+  const cleaned = raw.trim().replace(/^```json\s*|\s*```$/g, '');
   try { return JSON.parse(cleaned); }
   catch (e) { return { error: 'json_parse_failed', raw }; }
 }
@@ -256,8 +266,12 @@ function fmtFailure(f) { return `      - **${f.rule}** \`${f.evidence}\` (line $
 async function runCalibration(opts = {}) {
   let anthropic = null;
   if (!opts.tier1Only) {
-    if (!process.env.ANTHROPIC_API_KEY) { console.error('ANTHROPIC_API_KEY not set; falling back to --tier1-only'); opts.tier1Only = true; }
-    else anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+    if (!process.env.ANTHROPIC_API_KEY && !process.env.MINIMAX_API_KEY && !process.env.GEMINI_API_KEY && !process.env.OPENAI_API_KEY) {
+      console.error('No LLM provider configured (set AGENT_PROVIDER + MINIMAX_API_KEY or ANTHROPIC_API_KEY); falling back to --tier1-only');
+      opts.tier1Only = true;
+    } else {
+      anthropic = {}; // truthy marker — router resolves real provider from env
+    }
   }
   const results = [];
   for (const fx of FIXTURES) {
@@ -321,11 +335,11 @@ function getArg(flag, fallback = null) {
 }
 
 async function runFile(filePath, project, genre, opts = {}) {
-  if (!process.env.ANTHROPIC_API_KEY && !opts.tier1Only) {
-    console.error('ANTHROPIC_API_KEY not set; falling back to --tier1-only');
+  if (!opts.tier1Only && !process.env.ANTHROPIC_API_KEY && !process.env.MINIMAX_API_KEY && !process.env.GEMINI_API_KEY && !process.env.OPENAI_API_KEY) {
+    console.error('No LLM provider configured (set AGENT_PROVIDER + MINIMAX_API_KEY or ANTHROPIC_API_KEY); falling back to --tier1-only');
     opts.tier1Only = true;
   }
-  const anthropic = opts.tier1Only ? null : new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+  const anthropic = opts.tier1Only ? null : {}; // truthy marker — router resolves real provider from env
   const raw = fs.readFileSync(filePath, 'utf8');
   // Strip markdown frontmatter and fenced code blocks before grading prose.
   const noFrontmatter = raw.replace(/^---\n[\s\S]*?\n---\n/, '');

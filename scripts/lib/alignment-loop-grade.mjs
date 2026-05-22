@@ -21,11 +21,14 @@
  */
 
 import 'dotenv/config';
-import Anthropic from '@anthropic-ai/sdk';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { grade as gradeSynthesis } from '../grade-alignment-loop-synthesis.mjs';
+
+function anyLLMConfigured() {
+  return !!(process.env.ANTHROPIC_API_KEY || process.env.MINIMAX_API_KEY || process.env.GEMINI_API_KEY || process.env.OPENAI_API_KEY);
+}
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.resolve(__dirname, '../..');
@@ -47,11 +50,11 @@ export async function gradeAndLint(filePath, slug, opts = {}) {
 
   let anthropic = null;
   if (!opts.tier1Only) {
-    if (!process.env.ANTHROPIC_API_KEY) {
-      console.error('[alignment-loop-grade] ANTHROPIC_API_KEY not set; running --tier1-only');
+    if (!anyLLMConfigured()) {
+      console.error('[alignment-loop-grade] No LLM provider configured; running --tier1-only');
       opts = { ...opts, tier1Only: true };
     } else {
-      anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+      anthropic = {}; // truthy marker — router resolves real provider from env
     }
   }
 
