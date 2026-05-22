@@ -57,13 +57,17 @@ const PRICING = {
     'claude-3-haiku-20240307': { input: 0.25, output: 1.25 }
   },
   minimax: {
-    // Approximate Jan 2026 pricing per minimax.io; verify against current
-    // public rates before treating these as authoritative.
+    // Verified 2026-05-22 against minimax.io pricing. Cache reads ~$0.06/M
+    // for repeated prefixes (5x cheaper than fresh input) — see PRICING.minimax_cache_read.
     'MiniMax-M2.7': { input: 0.30, output: 1.20 },
     'MiniMax-M2.7-highspeed': { input: 0.15, output: 0.60 },
-    'MiniMax-M2': { input: 0.30, output: 1.20 },
-    'MiniMax-Text-01': { input: 0.20, output: 1.10 },
-    'abab6.5s-chat': { input: 0.10, output: 0.50 }
+    // Older variants kept for fallback safety (router won't pick them by
+    // default, but explicit GRADE_*_MODEL overrides can target them).
+    'MiniMax-M2.5': { input: 0.30, output: 1.20 },
+    'MiniMax-M2.5-highspeed': { input: 0.15, output: 0.60 },
+    'MiniMax-M2.1': { input: 0.30, output: 1.20 },
+    'MiniMax-M2.1-highspeed': { input: 0.15, output: 0.60 },
+    'MiniMax-M2': { input: 0.30, output: 1.20 }
   },
   gemini: {
     'gemini-2.5-pro': { input: 1.25, output: 5.00 },
@@ -447,28 +451,39 @@ export async function trackedMiniMaxCompletion(prompt, scriptName, options = {})
         'Authorization': `Bearer ${process.env.MINIMAX_API_KEY}`,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ model, messages, max_tokens: options.maxTokens || 1000 }),
+      body: JSON.stringify({
+        model,
+        messages,
+        max_tokens: options.maxTokens || 1000,
+        // reasoning_split=true keeps <think> blocks out of the `content` field —
+        // they land in `reasoning_content` / `reasoning_details` instead.
+        // Without this, M2.7 emits "<think>...</think>OK" in content; with it,
+        // content is just "OK". Pass options.keepThinking=true to opt out.
+        reasoning_split: !options.keepThinking,
+      }),
     });
     if (!res.ok) throw new Error(`MiniMax ${res.status}: ${(await res.text()).slice(0, 200)}`);
     return res.json();
   });
 
+  // Reasoning tokens are billed as completion tokens but tracked separately
+  // by MiniMax so we can attribute cost. Both go in output_tokens for cost
+  // calc — we're charged for both at the output rate.
+  const reasoningTokens = result.usage?.completion_tokens_details?.reasoning_tokens || 0;
   await logUsage({
     provider: 'minimax', model, endpoint: 'chat',
-    input_tokens: result.usage?.total_tokens ? Math.round(result.usage.total_tokens * 0.7) : 0,
-    output_tokens: result.usage?.total_tokens ? Math.round(result.usage.total_tokens * 0.3) : 0,
+    input_tokens: result.usage?.prompt_tokens || 0,
+    output_tokens: result.usage?.completion_tokens || 0,
     script_name: scriptName, agent_id: options.agentId || scriptName,
     operation: options.operation || 'complete', latency_ms: Date.now() - start,
     cache_hit: false, response_status: 200,
+    metadata: reasoningTokens ? { reasoning_tokens: reasoningTokens } : undefined,
   });
 
-  const raw = result.choices?.[0]?.message?.content || '';
-  // MiniMax-M2.7 emits <think>...</think> reasoning blocks before the final
-  // answer; strip them so downstream parsers (graders, JSON extractors, tool-
-  // call dispatchers) see clean output. Pass `options.keepThinking = true` to
-  // preserve them when explicitly wanted.
-  if (options.keepThinking) return raw;
-  return raw.replace(/<think>[\s\S]*?<\/think>\s*/g, '').trim();
+  const content = result.choices?.[0]?.message?.content || '';
+  // Safety net: if reasoning_split didn't honor (older models?), strip <think>.
+  if (options.keepThinking) return content;
+  return content.replace(/<think>[\s\S]*?<\/think>\s*/g, '').trim();
 }
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

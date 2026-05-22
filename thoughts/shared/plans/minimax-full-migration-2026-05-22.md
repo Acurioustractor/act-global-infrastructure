@@ -114,16 +114,22 @@ For each grader in Domain B:
 
 ---
 
-### Phase 4 — Bot + dashboard (1-2 days — HIGHEST RISK)
-**Why:** user-facing. Multi-turn tool use. 19 tools. Anthropic `tool_use` blocks vs MiniMax OpenAI-compat `function_call` format.
+### Phase 4 — Bot + dashboard (1 day — REVISED, less risky than feared)
 
-#### Phase 4a — Build adapter layer (3 hrs)
+**Critical revision after 2026-05-22 research:** MiniMax M2.7 accepts Anthropic-format tool definitions natively at `/v1/chat/completions`. Per their docs (https://platform.minimax.io/docs/guides/text-m2-function-call), both SDK formats work against the same endpoint:
+
+- Anthropic-style: `{ name, description, input_schema, ... }` → response has `tool_use` blocks
+- OpenAI-style: `{ type: 'function', function: {...} }` → response has `tool_calls` array
+
+**This means the bot's existing Anthropic-shaped tool definitions can stay.** Phase 4a shrinks from "build a translation adapter" to "swap the SDK base URL + auth header". Estimated effort drops 1-2 days → 4-6 hours.
+
+#### Phase 4a — Adapter layer (1-2 hrs, not 3)
 - [ ] Create `apps/command-center/src/lib/llm-adapter.ts`
-- [ ] Implement `complete(messages, tools, options)` that returns an Anthropic-shaped response regardless of underlying provider
-- [ ] For Anthropic path: passthrough
-- [ ] For MiniMax path: convert tool definitions Anthropic → OpenAI function-calling schema; convert response `function_call` → Anthropic `tool_use` block
-- [ ] Add `LLM_PROVIDER` env var (default `anthropic` for safety)
-- [ ] Unit test the adapter with both providers + at least 1 multi-turn tool-call sequence
+- [ ] Implement `complete(messages, tools, options)` that picks provider via `LLM_PROVIDER` env (default `anthropic`)
+- [ ] For Anthropic path: passthrough using existing SDK
+- [ ] For MiniMax path: same Anthropic SDK pattern, but post to `MINIMAX_BASE_URL` with `MINIMAX_API_KEY`. Tool format passes through unchanged.
+- [ ] **Verify with one tool-call round-trip** before committing — confirm MiniMax actually emits Anthropic-shaped `tool_use` blocks (docs say yes; trust-but-verify)
+- [ ] If MiniMax emits OpenAI-format despite Anthropic-format input, fall back to a thin response converter (~30 lines)
 
 #### Phase 4b — Migrate non-bot routes (2 hrs)
 - [ ] `api/grants/[id]/draft/route.ts` — single completion, lowest risk
