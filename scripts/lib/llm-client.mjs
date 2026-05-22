@@ -55,6 +55,20 @@ const PRICING = {
     'claude-haiku-4-5-20251001': { input: 1.00, output: 5.00 },
     'claude-3-5-haiku-20241022': { input: 0.80, output: 4.00 },
     'claude-3-haiku-20240307': { input: 0.25, output: 1.25 }
+  },
+  minimax: {
+    // Approximate Jan 2026 pricing per minimax.io; verify against current
+    // public rates before treating these as authoritative.
+    'MiniMax-M2.7': { input: 0.30, output: 1.20 },
+    'MiniMax-M2.7-highspeed': { input: 0.15, output: 0.60 },
+    'MiniMax-M2': { input: 0.30, output: 1.20 },
+    'MiniMax-Text-01': { input: 0.20, output: 1.10 },
+    'abab6.5s-chat': { input: 0.10, output: 0.50 }
+  },
+  gemini: {
+    'gemini-2.5-pro': { input: 1.25, output: 5.00 },
+    'gemini-2.5-flash': { input: 0.30, output: 2.50 },
+    'gemini-2.5-flash-lite': { input: 0.075, output: 0.30 }
   }
 };
 
@@ -448,7 +462,13 @@ export async function trackedMiniMaxCompletion(prompt, scriptName, options = {})
     cache_hit: false, response_status: 200,
   });
 
-  return result.choices?.[0]?.message?.content || '';
+  const raw = result.choices?.[0]?.message?.content || '';
+  // MiniMax-M2.7 emits <think>...</think> reasoning blocks before the final
+  // answer; strip them so downstream parsers (graders, JSON extractors, tool-
+  // call dispatchers) see clean output. Pass `options.keepThinking = true` to
+  // preserve them when explicitly wanted.
+  if (options.keepThinking) return raw;
+  return raw.replace(/<think>[\s\S]*?<\/think>\s*/g, '').trim();
 }
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -499,11 +519,16 @@ export async function trackedGeminiCompletion(prompt, scriptName, options = {}) 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 export async function trackedAgentCompletion(prompt, scriptName, options = {}) {
-  const provider = resolveAgentProvider();
+  const provider = options.forceProvider || resolveAgentProvider();
+  return callProvider(provider, prompt, scriptName, options);
+}
+
+async function callProvider(provider, prompt, scriptName, options) {
   const model = options.model && providerMatchesModel(provider, options.model)
     ? options.model
     : selectModel(options.task || 'generate', provider);
   const opts = { ...options, model };
+  delete opts.forceProvider;
 
   if (provider === 'minimax') return trackedMiniMaxCompletion(prompt, scriptName, opts);
   if (provider === 'gemini') return trackedGeminiCompletion(prompt, scriptName, opts);
@@ -515,6 +540,54 @@ export async function trackedAgentCompletion(prompt, scriptName, options = {}) {
     return trackedCompletion(messages, scriptName, opts);
   }
   throw new Error(`Unknown provider: ${provider}`);
+}
+
+/**
+ * Like trackedAgentCompletion, but falls back to the next available provider if
+ * the primary throws on rate-limit, credit-balance, or 5xx errors. Auth errors
+ * (401/403) and bad-request (400 without credit/quota hints) do NOT trigger
+ * fallback — those are config problems, not provider problems.
+ *
+ * Fallback order: configured providers minus the primary, in MiniMax →
+ * Anthropic → Gemini → OpenAI preference (cheapest viable first).
+ */
+export async function trackedAgentCompletionWithFallback(prompt, scriptName, options = {}) {
+  const primary = options.forceProvider || resolveAgentProvider();
+  const candidates = ['minimax', 'anthropic', 'gemini', 'openai']
+    .filter(p => p !== primary)
+    .filter(p => process.env[providerEnvKey(p)]);
+
+  try {
+    return await callProvider(primary, prompt, scriptName, options);
+  } catch (err) {
+    if (!shouldFallback(err)) throw err;
+
+    for (const fallback of candidates) {
+      console.warn(`[llm-fallback] ${primary} failed (${(err.message || '').slice(0, 100)}); trying ${fallback}`);
+      try {
+        return await callProvider(fallback, prompt, scriptName, options);
+      } catch (fallbackErr) {
+        if (!shouldFallback(fallbackErr)) throw fallbackErr;
+        continue;
+      }
+    }
+    throw err;
+  }
+}
+
+function providerEnvKey(provider) {
+  return ({
+    minimax: 'MINIMAX_API_KEY',
+    anthropic: 'ANTHROPIC_API_KEY',
+    gemini: 'GEMINI_API_KEY',
+    openai: 'OPENAI_API_KEY',
+  })[provider];
+}
+
+function shouldFallback(err) {
+  if (err.status === 401 || err.status === 403) return false;
+  if (err.status === 400 && !/credit|balance|quota|rate.?limit/i.test(err.message || '')) return false;
+  return true;
 }
 
 function providerMatchesModel(provider, model) {
@@ -700,6 +773,12 @@ export default {
   trackedCompletion,
   claudeComplete,
   trackedClaudeCompletion,
+  trackedAgentCompletion,
+  trackedAgentCompletionWithFallback,
+  trackedMiniMaxCompletion,
+  trackedGeminiCompletion,
+  resolveAgentProvider,
+  selectModel,
   getCostSummary,
   getDailyCosts,
   getScriptCosts,
