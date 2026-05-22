@@ -1,4 +1,5 @@
 import Anthropic from '@anthropic-ai/sdk'
+import { LLMClient } from '../llm-adapter'
 import { Client as NotionClient } from '@notionhq/client'
 import { readFileSync } from 'fs'
 import { join } from 'path'
@@ -1066,7 +1067,7 @@ export async function executeDraftGrantResponse(
       .join('\n')
 
     // 5. Call Claude to draft
-    const anthropic = new Anthropic()
+    const anthropic = new LLMClient()
     const sectionsList = input.sections?.length
       ? `Focus on these sections: ${input.sections.join(', ')}`
       : 'Draft a complete EOI covering: project description, alignment with grant objectives, community benefit, methodology, and budget justification'

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import Anthropic from '@anthropic-ai/sdk'
+import { LLMClient } from '@/lib/llm-adapter'
 import { AGENT_SYSTEM_PROMPT } from '@/lib/agent-system-prompt'
 import { AGENT_TOOLS, executeTool, logAgentUsage, calculateCost } from '@/lib/agent-tools'
 
@@ -34,7 +35,7 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    const client = new Anthropic({ apiKey })
+    const client = new LLMClient({ apiKey })
 
     // Build messages array from history + current message
     const messages: Anthropic.MessageParam[] = []

@@ -1,11 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server'
 import Anthropic from '@anthropic-ai/sdk'
+import { LLMClient } from '@/lib/llm-adapter'
 import { supabase } from '@/lib/supabase'
 
 // Lazy-initialised so Vercel preview builds (no ANTHROPIC_API_KEY) don't fail
 // at module load during `next build` page-data collection.
 function getAnthropicClient() {
-  return new Anthropic()
+  return new LLMClient()
 }
 
 export async function POST(request: NextRequest) {

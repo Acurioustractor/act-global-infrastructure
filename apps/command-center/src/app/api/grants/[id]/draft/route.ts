@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { supabase } from '@/lib/supabase'
 import { generateEmbedding } from '@/lib/embeddings'
 import Anthropic from '@anthropic-ai/sdk'
+import { LLMClient } from '@/lib/llm-adapter'
 
 const SECTION_TEMPLATES: Record<string, { label: string; words: number; description: string }> = {
   executive_summary: {
@@ -113,7 +114,7 @@ export async function POST(
     }
 
     // 4. Generate drafts using Claude Sonnet
-    const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
+    const anthropic = new LLMClient({ apiKey: process.env.ANTHROPIC_API_KEY })
 
     const knowledgeContext = knowledgeItems
       .slice(0, 10)
