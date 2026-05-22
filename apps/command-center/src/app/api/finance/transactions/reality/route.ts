@@ -19,6 +19,9 @@ function isNoReceiptNeeded(contactName: string | null | undefined): boolean {
   if (n === 'Australian Taxation Office' || /^ATO\b/i.test(n)) return true
   // Bank fees / interest
   if (/^(NAB|Bank|Internal|Transfer)\b/i.test(n) && /(fee|charge|interest|transfer)/i.test(n)) return true
+  // Bare NAB contact — FX fees, annual fees, cash adv fees where Xero defaulted contact_name to bank.
+  // Line items confirmed bank-fee class (NAB INTNL TRAN FEE, Annual Fee, Cash Adv fee).
+  if (/^(NAB|Bank)$/i.test(n)) return true
   return false
 }
 
