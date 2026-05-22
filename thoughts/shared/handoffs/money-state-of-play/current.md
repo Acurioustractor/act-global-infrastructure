@@ -63,11 +63,26 @@ related_reports:
 4. **Hong Kong $63.70 SP BINGELI SAN PO KONG** — real or skim?
 5. **ACT Pty date** — 22 or 24 Apr 2026? Need ASIC extract.
 
-### Pending Ben decisions for Phase 4
-1. **OK to replace `claude-3-5-haiku` bot with `MiniMax-M2.7-highspeed`?** Tool-call accuracy may shift.
-2. **If voice grader fails calibration, keep on Claude as exception, or accept drift?**
-3. **Anthropic — temporary bridge or permanent fallback?** Recommend permanent fallback at small balance.
-4. **OK with ~10 min bot downtime during Phase 4d staged rollout?**
+### Ben decisions for Phase 4
+1. ✅ **RESOLVED 2026-05-22** — Bot Haiku → M2.7-highspeed swap APPROVED, conditional on the tighter 5-tool-call check below. If any tool call fails to fire or fires with wrong args → unset `LLM_PROVIDER` immediately, no "close enough".
+2. **OPEN** — If voice grader fails calibration, keep on Claude as exception, or accept drift? (Only relevant after Phase 3b runs.)
+3. **OPEN** — Anthropic — temporary bridge or permanent fallback? Recommend permanent fallback at small balance (~$6 working capital). Decision deferred.
+4. ✅ **RESOLVED 2026-05-22** — ~10 min Phase 4d attention window accepted (implicit in D1).
+
+### Phase 4d execution checklist (when 5h window opens ~10:00Z)
+
+1. **Re-probe** rate-limit: `curl ... MiniMax-M2.7 ... max_tokens:30`. If 2056 → wait. If content → proceed.
+2. **Spike-test response conversion** (Phase 4c): re-run `/tmp` spike or curl `POST /api/transactions/suggest` with `LLM_PROVIDER=minimax`. Confirms OpenAI→Anthropic response shape. ~2 requests.
+3. **Phase 3b grader calibration** (~30 requests): `node scripts/grade-voice.mjs --calibrate` → `grade-pack.mjs --calibrate` → funder-cadence → alignment-loop-synthesis. Compare to Sonnet 4.6 baselines. If any rubric drifts > 1 verdict tier, document in calibration history. D2 fires if voice grader drifts — keep that one on Claude.
+4. **Phase 4d staged Telegram flip** — `pm2 stop telegram-bot-webhook` → set `LLM_PROVIDER=minimax` in `ecosystem.config.cjs` → `pm2 reload ecosystem.config.cjs` → `pm2 logs telegram-bot-webhook --lines 50` (watch for adapter errors).
+5. **5-tool accuracy gate** — send these from your phone, in order. Each must produce a correct tool_use call with correct args. **Any failure → unset `LLM_PROVIDER`, reload, abort.**
+   - **(a) Read-only finance query** — e.g. "What's our cash position?" — exercises a read tool, no side effects, fast smoke-test.
+   - **(b) Capture-to-Notion write** — e.g. "Add to money sync: bot now on MiniMax" — exercises Notion API + the bot's text-to-structured-data step.
+   - **(c) Gmail draft** — e.g. "Draft an email to nicholas@act.place subject 'minimax test' body 'ignore'" — exercises a write tool with multi-field args.
+   - **(d) Calendar create** — e.g. "Schedule a 15-min event tomorrow 9am called MiniMax verification" — exercises date parsing + calendar API.
+   - **(e) Long compound query that triggers Sonnet route** — e.g. "Analyze our spend across the last quarter and compare to budget" — forces `selectModel()` → SONNET_MODEL → `MiniMax-M2.7` (non-highspeed). Verifies both models work.
+6. **Observe 30 min** with `pm2 logs`. If clean → leave on MiniMax. If any flake → unset, reload, file what broke.
+7. **Update ledger**: mark Phase 4d closed (or aborted with reason).
 
 ### How to resume
 1. SessionStart hook loads this ledger.
