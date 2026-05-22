@@ -23,6 +23,7 @@ import path from 'node:path';
 import {
   trackedAgentCompletionWithFallback,
   providerFromModelName,
+  extractJson,
 } from './lib/llm-client.mjs';
 
 function anyLLMConfigured() {
@@ -78,10 +79,11 @@ async function gradePack(rubricPath, packPath, _llmAvailable) {
     forceProvider,
     maxTokens: 5500, // bumped from 4000 for MiniMax <think> headroom
     operation: 'grade-pack',
+    temperature: 0, // determinism for calibration + reproducible verdicts
   });
-  const cleaned = raw.trim().replace(/^```json\s*|\s*```$/g, '');
-  try { return JSON.parse(cleaned); }
-  catch (e) { return { error: 'json_parse_failed', raw: raw.slice(0, 1000) }; }
+  const parsed = extractJson(raw);
+  if (parsed) return parsed;
+  return { error: 'json_parse_failed', raw: raw.slice(0, 1000) };
 }
 
 function getArg(flag, fallback = null) {

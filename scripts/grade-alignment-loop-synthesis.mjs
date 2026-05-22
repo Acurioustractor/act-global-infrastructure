@@ -24,6 +24,7 @@ import { loadFunders } from './lib/claim-loader.mjs';
 import {
   trackedAgentCompletionWithFallback,
   providerFromModelName,
+  extractJson,
 } from './lib/llm-client.mjs';
 
 function anyLLMConfigured() {
@@ -373,10 +374,11 @@ async function tier23(text, slug, fm, _llmAvailable) {
     forceProvider,
     maxTokens: 2500, // bumped from 1500 for MiniMax <think> headroom
     operation: 'grade-synthesis-tier23',
+    temperature: 0, // determinism for calibration + reproducible verdicts
   });
-  const cleaned = raw.trim().replace(/^```json\s*|\s*```$/g, '');
-  try { return JSON.parse(cleaned); }
-  catch (e) { return { error: 'json_parse_failed', raw }; }
+  const parsed = extractJson(raw);
+  if (parsed) return parsed;
+  return { error: 'json_parse_failed', raw };
 }
 
 function synthesize(t1, t23) {

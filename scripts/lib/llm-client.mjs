@@ -460,6 +460,10 @@ export async function trackedMiniMaxCompletion(prompt, scriptName, options = {})
         // Without this, M2.7 emits "<think>...</think>OK" in content; with it,
         // content is just "OK". Pass options.keepThinking=true to opt out.
         reasoning_split: !options.keepThinking,
+        // Pass temperature through when set — needed for grader determinism.
+        // MiniMax default is ~0.7 (sampling); graders should pass 0 for
+        // reproducible calibration runs.
+        ...(options.temperature != null ? { temperature: options.temperature } : {}),
       }),
     });
     if (!res.ok) throw new Error(`MiniMax ${res.status}: ${(await res.text()).slice(0, 200)}`);
@@ -484,6 +488,47 @@ export async function trackedMiniMaxCompletion(prompt, scriptName, options = {})
   // Safety net: if reasoning_split didn't honor (older models?), strip <think>.
   if (options.keepThinking) return content;
   return content.replace(/<think>[\s\S]*?<\/think>\s*/g, '').trim();
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// JSON EXTRACTOR — robust against MiniMax <think> + code fence leakage
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+// Why: MiniMax-M2.7 sometimes leaks reasoning into `content` despite
+// reasoning_split:true (observed in Phase 3b calibration 2026-05-22 —
+// 5/8 grader misses were json_parse_failed). This extractor:
+//   1. Strips <think>...</think> blocks (defense in depth)
+//   2. Strips markdown code fences
+//   3. Greedily extracts from first { to last } (or [ to ])
+//   4. Returns null if no valid JSON found
+//
+// Returns parsed object or null. Caller decides fallback behavior.
+export function extractJson(raw) {
+  if (!raw || typeof raw !== 'string') return null;
+  let text = raw;
+
+  // Strip <think>...</think> blocks (MiniMax leakage)
+  text = text.replace(/<think>[\s\S]*?<\/think>/gi, '').trim();
+
+  // Strip leading/trailing markdown fences (```json...``` or ```...```)
+  text = text.replace(/^```(?:json)?\s*/i, '').replace(/\s*```\s*$/i, '').trim();
+
+  // Direct parse — works when response is clean JSON
+  try { return JSON.parse(text); } catch { /* fall through */ }
+
+  // Greedy brace/bracket extraction — handles trailing/leading prose
+  const candidates = [];
+  const firstObj = text.indexOf('{');
+  const lastObj = text.lastIndexOf('}');
+  if (firstObj >= 0 && lastObj > firstObj) candidates.push(text.slice(firstObj, lastObj + 1));
+  const firstArr = text.indexOf('[');
+  const lastArr = text.lastIndexOf(']');
+  if (firstArr >= 0 && lastArr > firstArr) candidates.push(text.slice(firstArr, lastArr + 1));
+
+  for (const c of candidates) {
+    try { return JSON.parse(c); } catch { /* try next */ }
+  }
+  return null;
 }
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
