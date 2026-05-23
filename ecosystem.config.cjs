@@ -499,7 +499,7 @@ const cronScripts = [
     name: 'auto-tag-transactions',
     script: 'scripts/tag-transactions-by-vendor.mjs',
     args: '--apply',
-    cron_restart: '15 */2 * * *', // Every 2 hours +15min (continuous tagging — was 6h)
+    cron_restart: '15 */6 * * *', // Every 6 hours +15min (reverted 2026-05-23: 2h cron was spamming the same unmatched-vendor alert)
   },
   {
     name: 'enrich-communications',
