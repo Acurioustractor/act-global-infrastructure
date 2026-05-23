@@ -22,7 +22,7 @@
  *   node scripts/sync-drafts-to-notion.mjs --apply
  *
  * PM2 cron: every 10 min (catches new drafts soon after the drafter runs)
- *   `*/10 * * * *`
+ *   '* /10 * * * *' (every 10 minutes — comment escaped to avoid JS block-end)
  *
  * Plan: act-communication-pipeline-2026-05-23-locked
  */
@@ -99,7 +99,7 @@ function draftToProperties(d) {
     'Audience':           { select: { name: d.audience } },
     'Recipient':          { rich_text: d.recipient_slug ? [{ text: { content: d.recipient_slug } }] : [] },
     'Edition period':     { rich_text: d.edition_period ? [{ text: { content: d.edition_period } }] : [] },
-    'Status':             { status: { name: d.status } },
+    'Status':             { select: { name: d.status } },
     'Selected subject':   { rich_text: d.selected_subject ? [{ text: { content: d.selected_subject.slice(0, 1900) } }] : [] },
     'Subject candidates': { rich_text: (d.subject_candidates || []).length
                               ? [{ text: { content: d.subject_candidates.map((s, i) => `${i + 1}. ${s}`).join('\n').slice(0, 1900) } }]

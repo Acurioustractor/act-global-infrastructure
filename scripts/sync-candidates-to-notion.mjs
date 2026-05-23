@@ -98,7 +98,7 @@ async function notionFetch(path, init = {}, attempt = 0) {
 function candidateToNotionProperties(c) {
   return {
     'Title':            { title: [{ text: { content: (c.title || '').slice(0, 1900) } }] },
-    'Status':           { status: { name: c.status } },
+    'Status':           { select: { name: c.status } },
     'Auto audiences':   { multi_select: (c.auto_audiences || []).map(a => ({ name: a })) },
     'Audiences':        { multi_select: (c.audiences || []).map(a => ({ name: a })) },
     'Source type':      { select: { name: c.source_type } },
@@ -131,13 +131,13 @@ async function updateNotionPage(pageId, c) {
 }
 
 async function main() {
-  // Pull candidates that need a Notion page (no notion_page_id yet) OR were
-  // status-changed in Supabase since the last sync (rare — usually status
-  // flows Notion→Supabase, but we cover the reverse for completeness).
+  // Pull candidates that need a Notion page (no notion_page_id yet).
+  // Status-back-sync from Supabase → Notion is rare since status normally
+  // flows Notion→Supabase; we accept Notion staleness on Supabase-side edits.
   const { data: candidates, error } = await supabase
     .from('newsletter_candidates')
     .select('*')
-    .or('notion_page_id.is.null,status_changed_at.gt.created_at')
+    .is('notion_page_id', null)
     .order('event_date', { ascending: false })
     .limit(200);
   if (error) throw error;

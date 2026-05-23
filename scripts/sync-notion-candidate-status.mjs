@@ -102,7 +102,7 @@ async function queryAllPages() {
 }
 
 function readStatusFromPage(page) {
-  return page.properties?.Status?.status?.name || 'proposed';
+  return page.properties?.Status?.select?.name || 'proposed';
 }
 
 function readAudiencesFromPage(page) {
