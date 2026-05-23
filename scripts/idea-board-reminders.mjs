@@ -26,6 +26,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createClient } from '@supabase/supabase-js';
 import { sendTelegram, buildInlineKeyboard } from './lib/telegram.mjs';
+import { alertHash, shouldSend, markSent } from './lib/telegram-dedup.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO = path.resolve(__dirname, '..');
@@ -195,15 +196,26 @@ async function main() {
       continue;
     }
 
-    await sendTelegram(headerLines.join('\n'), { chatId });
-    for (const idea of shown) {
-      const replyMarkup = buildInlineKeyboard(buildKeyboardRows(idea));
-      await sendTelegram(formatIdeaLine(idea), { replyMarkup, chatId });
+    // Dedup: same set of stale-idea IDs for this owner → skip (don't
+    // re-ping the same nudge daily). TTL 24h, so tomorrow's run can land
+    // if the set has rotated.
+    const hash = alertHash(owner, shown.map(i => i.id), overflow);
+    if (!shouldSend(`idea-reminders-${owner}`, hash, { ttlHours: 24 })) {
+      console.log(`Suppressed reminders for owner=${owner} (same stale-idea set as last send)`);
+      continue;
     }
-    if (overflow > 0) {
-      await sendTelegram(`…${overflow} more capped — view at /ideas`, { chatId });
-    }
-    console.log(`Sent ${shown.length} reminders to owner=${owner}${overflow > 0 ? ` (+${overflow} overflow)` : ''}`);
+
+    // Collapse the previous 3-messages-per-owner into ONE consolidated msg
+    // (header + idea lines + overflow). Idea-specific inline buttons are
+    // dropped from the consolidated view; user clicks through to /ideas.
+    const combined = [
+      ...headerLines,
+      ...shown.map(formatIdeaLine),
+      overflow > 0 ? `\n…${overflow} more capped — view at /ideas` : '',
+    ].filter(Boolean).join('\n');
+    await sendTelegram(combined, { chatId });
+    markSent(`idea-reminders-${owner}`, hash);
+    console.log(`Sent consolidated reminder to owner=${owner} (${shown.length} ideas${overflow > 0 ? ` +${overflow} overflow` : ''})`);
   }
 }
 

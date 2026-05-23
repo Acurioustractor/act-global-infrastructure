@@ -31,6 +31,7 @@ import { createClient } from '@supabase/supabase-js';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 await import(join(__dirname, 'lib/load-env.mjs'));
 const { sendTelegram } = await import(join(__dirname, 'lib/telegram.mjs'));
+const { alertHash, shouldSend, markSent } = await import(join(__dirname, 'lib/telegram-dedup.mjs'));
 
 const APPLY = process.argv.includes('--apply');
 const TOKEN = process.env.NOTION_MIRROR_TOKEN;
@@ -174,5 +175,15 @@ if (!APPLY) {
 
 if (!TG_CHAT) { console.error('No TELEGRAM_AUTHORIZED_USERS configured'); process.exit(1); }
 
+// Dedup: focus content typically changes daily, but if the cron runs
+// twice on the same day (e.g. PM2 restart) we don't want a duplicate.
+// TTL 12h so a same-day double-fire is suppressed but tomorrow's run lands.
+const hash = alertHash(message);
+if (!shouldSend('daily-focus', hash, { ttlHours: 12 })) {
+  console.log('Suppressed (same focus text sent in last 12h).');
+  process.exit(0);
+}
+
 const ok = await sendTelegram(message);
+if (ok) markSent('daily-focus', hash);
 console.log(ok ? 'Sent.' : 'Failed.');

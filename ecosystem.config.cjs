@@ -75,6 +75,15 @@ const cronScripts = [
     cron_restart: '55 7 * * 1', // Weekly Monday 7:55am AEST
   },
   {
+    // Daily 06:35am AEST: drain the quiet-hours Telegram queue. Anything
+    // queued during 21:00-06:30 (held by scripts/lib/telegram.mjs) gets
+    // consolidated + sent as ONE morning summary. See
+    // thoughts/shared/plans/telegram-noise-audit-2026-05-23.md
+    name: 'telegram-queue-drain',
+    script: 'scripts/drain-telegram-queue.mjs',
+    cron_restart: '35 6 * * *',
+  },
+  {
     // Daily 7:00am AEST: cross-codebase activity feed (last 24h).
     // Scans 6 ACT codebases for commits w/ Plan trailers, new wiki/plan/
     // decision/handoff files. Pulls EL stories + wiki_pages from shared

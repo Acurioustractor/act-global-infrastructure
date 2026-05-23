@@ -19,6 +19,7 @@ import { existsSync, readdirSync, readFileSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { sendTelegram } from './lib/telegram.mjs'
+import { alertHash, shouldSend, markSent } from './lib/telegram-dedup.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const REPO = path.resolve(__dirname, '..')
@@ -98,7 +99,16 @@ async function main() {
     return
   }
 
+  // Dedup: only push if the set of matching deadlines + lead-times changed
+  // since last send. Same set of T-30/-7/-1 hits = no re-ping.
+  const hash = alertHash(matches.map(m => `${m.title}@${m.leadTime || ''}`))
+  if (!shouldSend('compliance-deadlines', hash, { ttlHours: 24 })) {
+    console.log('✓ Suppressed (same deadlines as last send)')
+    return
+  }
+
   const ok = await sendTelegram(message)
+  if (ok) markSent('compliance-deadlines', hash)
   console.log(ok ? '✓ Sent' : '✗ Telegram send failed (check env)')
 }
 

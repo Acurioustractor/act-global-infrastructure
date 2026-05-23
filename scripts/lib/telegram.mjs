@@ -16,9 +16,10 @@
  * @param {string} [opts.parseMode='Markdown'] - 'Markdown' or 'HTML'
  * @param {Object} [opts.replyMarkup] - Telegram InlineKeyboardMarkup (use buildInlineKeyboard helper)
  * @param {string|number} [opts.chatId] - Override TELEGRAM_CHAT_ID (e.g. per-owner DM)
+ * @param {boolean} [opts.urgent=false] - Bypass quiet-hours guard (21:00-06:30 AEST)
  * @returns {Promise<boolean>} true if sent successfully
  */
-export async function sendTelegram(message, { parseMode = 'Markdown', replyMarkup, chatId: chatIdOverride } = {}) {
+export async function sendTelegram(message, { parseMode = 'Markdown', replyMarkup, chatId: chatIdOverride, urgent = false } = {}) {
   const botToken = process.env.TELEGRAM_BOT_TOKEN;
   // Resolution order: explicit override → TELEGRAM_CHAT_ID → first entry of
   // TELEGRAM_AUTHORIZED_USERS (matches the convention used by
@@ -29,6 +30,38 @@ export async function sendTelegram(message, { parseMode = 'Markdown', replyMarku
   if (!botToken || !chatId) {
     console.log('Telegram not configured (missing TELEGRAM_BOT_TOKEN or chat id — set TELEGRAM_CHAT_ID or TELEGRAM_AUTHORIZED_USERS)');
     return false;
+  }
+
+  // ─── Quiet hours guard (21:00 – 06:30 AEST) ───────────────────────────
+  // Hold any non-urgent push during quiet hours by appending to a queue
+  // file. A drain cron at 07:00am sends the de-duped queue as a single
+  // morning summary. Urgent pushes (set opts.urgent=true) bypass the guard.
+  if (!urgent && process.env.TG_FORCE !== '1') {
+    const nowAEST = new Date(Date.now() + 10 * 60 * 60 * 1000); // UTC + 10h
+    const hour = nowAEST.getUTCHours();
+    const minute = nowAEST.getUTCMinutes();
+    const aestMinutes = hour * 60 + minute;
+    const quietStart = 21 * 60; // 21:00
+    const quietEnd = 6 * 60 + 30; // 06:30
+    const inQuietHours = aestMinutes >= quietStart || aestMinutes < quietEnd;
+    if (inQuietHours) {
+      try {
+        const { appendFileSync } = await import('node:fs');
+        appendFileSync('/tmp/.tg-queue.jsonl',
+          JSON.stringify({
+            queued_at: new Date().toISOString(),
+            chat_id: chatId,
+            message,
+            parse_mode: parseMode,
+            reply_markup: replyMarkup,
+          }) + '\n'
+        );
+        console.log(`[telegram] queued for morning drain (quiet hours, AEST ${String(hour).padStart(2,'0')}:${String(minute).padStart(2,'0')})`);
+      } catch (e) {
+        console.error('[telegram] queue write failed:', e.message);
+      }
+      return false;
+    }
   }
 
   const body = {

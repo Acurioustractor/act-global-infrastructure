@@ -17,6 +17,7 @@ import '../lib/load-env.mjs';
 import { createClient } from '@supabase/supabase-js';
 import { loadProjectsConfig } from './lib/project-loader.mjs';
 import { sendTelegram } from './lib/telegram.mjs';
+import { alertHash, shouldSend, markSent } from './lib/telegram-dedup.mjs';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 
@@ -490,23 +491,10 @@ async function tagTransactions() {
         `Total: $${totalValue.toFixed(0)}`,
       ].filter(Boolean).join('\n');
 
-      // Dedup: only send if the unmatched-vendor list has changed since
-      // last alert. Hash the sorted vendor list + count; compare to
-      // /tmp/.tagger-last-alert-hash. Prevents the same alert spamming
-      // every cron run (2026-05-23: was firing every 2h with identical
-      // content until vendor rules were added).
-      const { createHash } = await import('node:crypto');
-      const { readFileSync, writeFileSync, existsSync } = await import('node:fs');
-      const HASH_FILE = '/tmp/.tagger-last-alert-hash';
-      const hashInput = `${unmatchedFY26.length}:${[...vendorList].sort().join('|')}`;
-      const currentHash = createHash('sha256').update(hashInput).digest('hex').slice(0, 16);
-      const lastHash = existsSync(HASH_FILE) ? readFileSync(HASH_FILE, 'utf8').trim() : '';
-      if (currentHash === lastHash) {
-        console.log(`[tagger] unmatched-vendor alert dedup'd (hash=${currentHash}, no change since last run)`);
-      } else {
+      const hash = alertHash(unmatchedFY26.length, vendorList);
+      if (shouldSend('tagger-unmatched', hash, { ttlHours: 24 })) {
         await sendTelegram(msg);
-        writeFileSync(HASH_FILE, currentHash);
-        console.log(`[tagger] alert sent (hash=${currentHash})`);
+        markSent('tagger-unmatched', hash);
       }
     }
   }
