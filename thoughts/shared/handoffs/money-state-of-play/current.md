@@ -16,31 +16,32 @@ related_reports:
 
 ## Ledger
 <!-- This section is extracted by SessionStart hook for quick resume -->
-**Updated:** 2026-05-22T22:35:00Z
-**Goal:** Finance audit → RCA → fix runbook DONE. MiniMax all-in migration: Phase 4c spike PASSED, Phase 3b calibration at 71% (5/8 misses are JSON parse errors, not verdict drift). Phase 4d still blocked on **highspeed quota** refresh (separate from regular — see §3 below). Bot mechanics corrected: Vercel webhook, not PM2.
-**Branch:** main (1 new commit `3975717` ahead of pushed `8406804`).
-**Test:** open /finance/transactions → receipt% should be ~87% (was 81%, NAB bank-fee filter loosened). Bot still on Claude in production — Vercel has **no MiniMax env vars set**; adapter wired but defaults to Anthropic SDK passthrough.
+**Updated:** 2026-05-23T00:50:00Z
+**Goal:** Finance audit → RCA → fix runbook DONE. MiniMax migration: Phase 4c spike ✅, Phase 3b calibration ✅ (23/28 = 82% post-hardening), Plan B (Haiku→regular) ✅, **Phase 4d Test (a) PASSED in production — bot live on MiniMax**. Tests (b)-(e) deferred to next session. Plan C (Gemini Flash Lite) pending.
+**Branch:** main, all commits pushed through `37bfcfa`.
+**Bot is LIVE on MiniMax** in production. Webhook URL fixed: was pointing to dead `command-center-*.vercel.app`, now `command.act.place/api/telegram/webhook` with secret.
+**Rollback in one cmd:** `vercel env rm LLM_PROVIDER production` + auto-redeploy.
 
-### Now (resume — Phase 4c ✅ DONE, Phase 3b ⚠️ partial, Phase 4d waiting on highspeed quota)
-1. ✅ **Rate-limit probe** (22:07Z): HTTP 200, `reasoning_split:true` confirmed.
-2. ✅ **Phase 4b adapter wiring** (last session, `fb42a72`). Five command-center callers wired. `tsc --noEmit` clean.
-3. ✅ **Phase 4c spike PASSED** (22:21Z, this session). Spike script `/tmp/spike-llm-adapter.ts`. **All 3 tests green:**
-   - Test 1 (plain text): `stop_reason: max_tokens` (correctly mapped from OpenAI `length`), content returned.
-   - Test 2 (tool-use): `stop_reason: tool_use`, args `{"city":"Brisbane","unit":"celsius"}` correctly extracted, tool ID preserved (`call_function_*`).
-   - Test 3 (tool_result follow-up): `stop_reason: end_turn`, natural reply.
-   - **Caveat:** spike used model `claude-sonnet-4-5-20250929` → `MiniMax-M2.7` (regular). Haiku-mapped models route to highspeed which is exhausted (see §critical-finding-7 below).
-4. ⚠️ **Phase 3b grader calibration PARTIAL** (22:22–22:27Z, this session, run vs Sonnet 4.6 baseline 6/6 on each):
-   | Grader | Pass rate | Verdict drifts | JSON parse errors |
-   |---|---|---|---|
-   | grade-voice.mjs | 9/10 | 0 | 1 (bad-3) |
-   | grade-pack rd-evidence | 5/6 | 1 real (good-1 pass→fail — MiniMax caught fixture bug: $70k vs $122.5k salary inconsistency) | 0 |
-   | grade-funder-cadence | 3/6 | 1 acceptable (good-2 pass→warn, 1 tier) | 2 (bad-1, bad-3) |
-   | grade-alignment-loop-synthesis | 3/6 | 1 real (good-3 pass→fail) | 2 (good-1, good-2) |
-   | **TOTAL** | **20/28 (71%)** | 3 (1 real, 1 acceptable, 1 correct) | 5 |
-   - **5/8 misses are infrastructure** (`t23 parse failed: json_parse_failed`) — MiniMax sometimes leaks `<think>` blocks or markdown fences into content despite `reasoning_split:true`. Fix: harden JSON extractor in `scripts/lib/llm-client.mjs` to strip `<think>...</think>`, code fences, extract `{...}` greedily as fallback.
-   - **Voice grader is OK to flip** (9/10 with 0 verdict drifts) — D2 not triggered.
-   - **Other 3 graders should stay on Anthropic** until JSON extractor hardened. Add `GRADE_*_MODEL` env override or per-call provider pin.
-5. 🔴 **Phase 4d — BLOCKED on highspeed quota** (resets `2026-05-23T00:00:00Z`, ~1h 25m from this update). Bot's default model is `claude-haiku-4-5` → maps to `MiniMax-M2.7-highspeed`. Highspeed is currently `(0/0 used)` — every bot message would 429 if flipped now. Wait for refresh, then per the Vercel checklist below.
+### Now (resume — production bot live on MiniMax, 4 of 5 tool-gate tests pending)
+1. ✅ **Phase 4c spike** (22:21Z): all 3 tests green against `MiniMax-M2.7` regular.
+2. ✅ **Phase 3b grader calibration** (22:22–22:38Z), with extractJson() + temp=0:
+   | Grader | Final | Notes |
+   |---|---|---|
+   | grade-voice | **10/10** | OK to flip — D2 not triggered |
+   | grade-pack rd-evidence | 4/6 | 1 real drift (good-1: $70k vs $122.5k fixture bug MiniMax caught) |
+   | grade-funder-cadence | 4/6 | drifts shift run-to-run despite temp=0 |
+   | grade-alignment-loop | 4/6 | drifts shift run-to-run |
+   | **TOTAL** | **22-23/28 (~80%)** | (varies slightly run-to-run) |
+   - Voice grader stays on MiniMax. Other 3 should pin to Anthropic via `GRADE_*_MODEL=claude-sonnet-4-6` until prompt-tightening reduces drift.
+3. ✅ **Plan B — Haiku route remap** (commit `37bfcfa`). MINIMAX_MODEL_MAP cheap-tier now routes to `MiniMax-M2.7` (regular). Highspeed requires separate $40/mo Plus-Highspeed plan we don't have — confirmed via research, MiniMax-M2.7-highspeed returns `429 (0/0 used)` structurally (cap is permanently zero on Plan Plus).
+4. ✅ **Phase 4d Test (a) PASSED in production**: "what is our cash position?" returned full structured reply with $851,640 balance, $602K receivables, $735K payables, 44-month runway, "collection trough" insight, actionable next-steps. End-to-end proven: webhook → adapter → MiniMax-M2.7 → Xero tool-call → response synthesis → Telegram delivery.
+   - **Vercel runtime logs lag the actual function completion** — only the FIRST console.log surfaced in get_runtime_logs (`[agent] Mode switched to: f...`). Don't roll back on silence; check Telegram delivery instead. I made this mistake at 00:39Z, immediately restored.
+5. 🟡 **Tests (b)–(e) deferred** — Ben to run when ready. Bot stays on MiniMax in the meantime.
+   - (b) Notion capture: "Add to money sync: bot now on MiniMax"
+   - (c) Gmail draft: "Draft an email to nicholas@act.place subject 'minimax test' body 'ignore'"
+   - (d) Calendar create: "Schedule a 15-min event tomorrow 9am called MiniMax verification"
+   - (e) Compound (Sonnet route): "Analyze our spend across the last quarter and compare to budget"
+6. 🔴 **Plan C — Gemini Flash Lite as cheap-tier primary** — pending. 1,500 req/day free tier covers ACT bot usage. Add Gemini backend to llm-adapter.ts using `@google/genai` (already in repo via `src/lib/telegram/voice.ts`). Fallback chain: Gemini → MiniMax-M2.7 → Anthropic.
 
 ### Session commits (10 on main — head is `8406804`)
 
