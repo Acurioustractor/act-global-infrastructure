@@ -125,6 +125,15 @@ const cronScripts = [
     cron_restart: '0,30 9-18 * * *',
   },
   {
+    // Every 10 min: push newsletter drafts (Supabase) → Notion drafts DB.
+    // Drafts arrive in Notion soon after the drafter creates them. Ben
+    // reviews + picks subject + edits + marks send-ready in Notion.
+    name: 'newsletter-drafts-to-notion',
+    script: 'scripts/sync-drafts-to-notion.mjs',
+    args: '--apply',
+    cron_restart: '*/10 * * * *',
+  },
+  {
     // Daily 7am AEST: refresh "🎯 Today's Focus" + sweep for drift signals
     // (stuck opps · overdue invoices · FAIL cadence · easy-win storyteller
     // transcripts) and auto-create new Action Items rows.
