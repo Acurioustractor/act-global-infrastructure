@@ -1,0 +1,3147 @@
+{
+  "generated_at": "2026-05-23T07:19:31.377Z",
+  "script": "pushback-ghl-project-tags.mjs",
+  "summary": {
+    "total_entries": 211,
+    "tags_to_add": 211,
+    "already_tagged": 0,
+    "applied": 184,
+    "failed": 27
+  },
+  "entries": [
+    {
+      "ghl_contact_id": "rXsgPCumzDZ5rf8AnrII",
+      "contact_name": "melbourne fringe",
+      "contact_email": "",
+      "existing_tags": [
+        "goods",
+        "goods-supporter"
+      ],
+      "project_code": "ACT-CE",
+      "tag_added": "project:ACT-CE",
+      "action": "add-tag",
+      "status": "failed",
+      "error": "GHL API Error (400): {\"message\":\"Contact not found for id:rXsgPCumzDZ5rf8AnrII\",\"error\":\"Bad Request\",\"statusCode\":400}"
+    },
+    {
+      "ghl_contact_id": "qIuqGLFoVusIOhYSL0Hf",
+      "contact_name": "baressa frazer",
+      "contact_email": "paiden.4892@gmail.com",
+      "existing_tags": [
+        "contained-hot-lead",
+        "justicehub",
+        "partner",
+        "cape-york",
+        "indigenous-led",
+        "container-request",
+        "act-cn",
+        "act-jh"
+      ],
+      "project_code": "ACT-CE",
+      "tag_added": "project:ACT-CE",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:19:32.342Z"
+    },
+    {
+      "ghl_contact_id": "jkXvzq4QJDPKCur8akIX",
+      "contact_name": "aayka qld",
+      "contact_email": "aayka@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-signal",
+        "goods-new",
+        "priority-medium",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:19:32.844Z"
+    },
+    {
+      "ghl_contact_id": "wQVJE0BSUbasxNGSUuSE",
+      "contact_name": "seana osbourne",
+      "contact_email": "seana@queenslandgives.org.au",
+      "existing_tags": [
+        "goods",
+        "goods-supporter",
+        "goods-newsletter",
+        "act-gd"
+      ],
+      "project_code": "ACT-JH",
+      "tag_added": "project:ACT-JH",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:19:33.280Z"
+    },
+    {
+      "ghl_contact_id": "AXrbvQAQKR0TcTcZL71H",
+      "contact_name": "benjamin knight",
+      "contact_email": "benjamin+test.1768173444591@act.place",
+      "existing_tags": [],
+      "project_code": "WATCH",
+      "tag_added": "project:WATCH",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:19:34.030Z"
+    },
+    {
+      "ghl_contact_id": "AXrbvQAQKR0TcTcZL71H",
+      "contact_name": "benjamin knight",
+      "contact_email": "benjamin+test.1768173444591@act.place",
+      "existing_tags": [],
+      "project_code": "ACT-HV",
+      "tag_added": "project:ACT-HV",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:19:34.647Z"
+    },
+    {
+      "ghl_contact_id": "AXrbvQAQKR0TcTcZL71H",
+      "contact_name": "benjamin knight",
+      "contact_email": "benjamin+test.1768173444591@act.place",
+      "existing_tags": [],
+      "project_code": "ACT-RA",
+      "tag_added": "project:ACT-RA",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:19:35.224Z"
+    },
+    {
+      "ghl_contact_id": "AXrbvQAQKR0TcTcZL71H",
+      "contact_name": "benjamin knight",
+      "contact_email": "benjamin+test.1768173444591@act.place",
+      "existing_tags": [],
+      "project_code": "ACT-OO",
+      "tag_added": "project:ACT-OO",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:19:35.739Z"
+    },
+    {
+      "ghl_contact_id": "AXrbvQAQKR0TcTcZL71H",
+      "contact_name": "benjamin knight",
+      "contact_email": "benjamin+test.1768173444591@act.place",
+      "existing_tags": [],
+      "project_code": "ACT-JH",
+      "tag_added": "project:ACT-JH",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:19:36.283Z"
+    },
+    {
+      "ghl_contact_id": "AXrbvQAQKR0TcTcZL71H",
+      "contact_name": "benjamin knight",
+      "contact_email": "benjamin+test.1768173444591@act.place",
+      "existing_tags": [],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:19:36.698Z"
+    },
+    {
+      "ghl_contact_id": "AXrbvQAQKR0TcTcZL71H",
+      "contact_name": "benjamin knight",
+      "contact_email": "benjamin+test.1768173444591@act.place",
+      "existing_tags": [],
+      "project_code": "ACT-CORE",
+      "tag_added": "project:ACT-CORE",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:19:37.236Z"
+    },
+    {
+      "ghl_contact_id": "AXrbvQAQKR0TcTcZL71H",
+      "contact_name": "benjamin knight",
+      "contact_email": "benjamin+test.1768173444591@act.place",
+      "existing_tags": [],
+      "project_code": "ACT-CN",
+      "tag_added": "project:ACT-CN",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:19:37.873Z"
+    },
+    {
+      "ghl_contact_id": "AXrbvQAQKR0TcTcZL71H",
+      "contact_name": "benjamin knight",
+      "contact_email": "benjamin+test.1768173444591@act.place",
+      "existing_tags": [],
+      "project_code": "ACT-CE",
+      "tag_added": "project:ACT-CE",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:19:38.506Z"
+    },
+    {
+      "ghl_contact_id": "AXrbvQAQKR0TcTcZL71H",
+      "contact_name": "benjamin knight",
+      "contact_email": "benjamin+test.1768173444591@act.place",
+      "existing_tags": [],
+      "project_code": "ACT-FA",
+      "tag_added": "project:ACT-FA",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:19:39.122Z"
+    },
+    {
+      "ghl_contact_id": "AXrbvQAQKR0TcTcZL71H",
+      "contact_name": "benjamin knight",
+      "contact_email": "benjamin+test.1768173444591@act.place",
+      "existing_tags": [],
+      "project_code": "ACT-MR",
+      "tag_added": "project:ACT-MR",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:19:39.764Z"
+    },
+    {
+      "ghl_contact_id": "AXrbvQAQKR0TcTcZL71H",
+      "contact_name": "benjamin knight",
+      "contact_email": "benjamin+test.1768173444591@act.place",
+      "existing_tags": [],
+      "project_code": "ACT-CA",
+      "tag_added": "project:ACT-CA",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:19:40.384Z"
+    },
+    {
+      "ghl_contact_id": "AXrbvQAQKR0TcTcZL71H",
+      "contact_name": "benjamin knight",
+      "contact_email": "benjamin+test.1768173444591@act.place",
+      "existing_tags": [],
+      "project_code": "ACT-RP",
+      "tag_added": "project:ACT-RP",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:19:40.981Z"
+    },
+    {
+      "ghl_contact_id": "ZglWAiFRwvjGj8Tcm45Q",
+      "contact_name": "santa teresa nt",
+      "contact_email": "santa-teresa@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-warm",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:19:41.653Z"
+    },
+    {
+      "ghl_contact_id": "SYhvJjn05QVkvbFJPhGv",
+      "contact_name": "coordinator — our community shed",
+      "contact_email": "coordinator@ourshed.org",
+      "existing_tags": [
+        "goods",
+        "goods-partner",
+        "goods-newsletter",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:19:42.221Z"
+    },
+    {
+      "ghl_contact_id": "2ojfzkDrhTP69Wede1V3",
+      "contact_name": "sunshine coast council",
+      "contact_email": "",
+      "existing_tags": [],
+      "project_code": "ACT-RA",
+      "tag_added": "project:ACT-RA",
+      "action": "add-tag",
+      "status": "failed",
+      "error": "GHL API Error (400): {\"message\":\"Contact not found for id:2ojfzkDrhTP69Wede1V3\",\"error\":\"Bad Request\",\"statusCode\":400}"
+    },
+    {
+      "ghl_contact_id": "KGhFuJS5vxZTucLSBY1L",
+      "contact_name": "paul ramsey",
+      "contact_email": "",
+      "existing_tags": [],
+      "project_code": "ACT-DL",
+      "tag_added": "project:ACT-DL",
+      "action": "add-tag",
+      "status": "failed",
+      "error": "GHL API Error (400): {\"message\":\"Contact not found for id:KGhFuJS5vxZTucLSBY1L\",\"error\":\"Bad Request\",\"statusCode\":400}"
+    },
+    {
+      "ghl_contact_id": "if7Y5Z9gsY6ucIXZrh3q",
+      "contact_name": "ben knight1",
+      "contact_email": "storyteller-d26ebc97@empathy-ledger.local",
+      "existing_tags": [
+        "storyteller",
+        "empathy ledger"
+      ],
+      "project_code": "ACT-EL",
+      "tag_added": "project:ACT-EL",
+      "action": "add-tag",
+      "status": "failed",
+      "error": "GHL API Error (400): {\"message\":\"Contact not found for id:if7Y5Z9gsY6ucIXZrh3q\",\"error\":\"Bad Request\",\"statusCode\":400}"
+    },
+    {
+      "ghl_contact_id": "if7Y5Z9gsY6ucIXZrh3q",
+      "contact_name": "ben knight1",
+      "contact_email": "storyteller-d26ebc97@empathy-ledger.local",
+      "existing_tags": [
+        "storyteller",
+        "empathy ledger"
+      ],
+      "project_code": "ACT-MR",
+      "tag_added": "project:ACT-MR",
+      "action": "add-tag",
+      "status": "failed",
+      "error": "GHL API Error (400): {\"message\":\"Contact not found for id:if7Y5Z9gsY6ucIXZrh3q\",\"error\":\"Bad Request\",\"statusCode\":400}"
+    },
+    {
+      "ghl_contact_id": "OG7LsPZq97OcSlZjnqpX",
+      "contact_name": "vivid sydney",
+      "contact_email": "",
+      "existing_tags": [
+        "goods",
+        "goods-supporter"
+      ],
+      "project_code": "ACT-CE",
+      "tag_added": "project:ACT-CE",
+      "action": "add-tag",
+      "status": "failed",
+      "error": "GHL API Error (400): {\"message\":\"Contact not found for id:OG7LsPZq97OcSlZjnqpX\",\"error\":\"Bad Request\",\"statusCode\":400}"
+    },
+    {
+      "ghl_contact_id": "ehnCEv62bCaGNTd1QuGp",
+      "contact_name": "randle walker",
+      "contact_email": "randle@centrecorp.com.au",
+      "existing_tags": [
+        "goods",
+        "goods-supporter",
+        "goods-newsletter",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:19:44.447Z"
+    },
+    {
+      "ghl_contact_id": "ehnCEv62bCaGNTd1QuGp",
+      "contact_name": "randle walker",
+      "contact_email": "randle@centrecorp.com.au",
+      "existing_tags": [
+        "goods",
+        "goods-supporter",
+        "goods-newsletter",
+        "act-gd"
+      ],
+      "project_code": "ACT-CA",
+      "tag_added": "project:ACT-CA",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:19:45.088Z"
+    },
+    {
+      "ghl_contact_id": "HeuqniBi1H2Fe6HcEN4R",
+      "contact_name": "mindi rardi wa",
+      "contact_email": "mindi-rardi@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-nurture",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:19:45.678Z"
+    },
+    {
+      "ghl_contact_id": "59lCqC8pRDkTPwTVqcAT",
+      "contact_name": "ben contact final test",
+      "contact_email": "benjamin+harvest-contact-final-8736674111@act.place",
+      "existing_tags": [
+        "contact-form",
+        "harvest-website",
+        "newsletter",
+        "harvest-newsletter",
+        "engagement:lead"
+      ],
+      "project_code": "ACT-CORE",
+      "tag_added": "project:ACT-CORE",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:19:46.091Z"
+    },
+    {
+      "ghl_contact_id": "xIjgrNst0t7q3xDPqOE4",
+      "contact_name": "rhian miller",
+      "contact_email": "rhian@epicpathways.org.au",
+      "existing_tags": [
+        "contained-hot-lead",
+        "contained-original-requester",
+        "justicehub",
+        "partner",
+        "brisbane",
+        "container-request",
+        "act-cn",
+        "act-jh"
+      ],
+      "project_code": "ACT-CE",
+      "tag_added": "project:ACT-CE",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:19:46.582Z"
+    },
+    {
+      "ghl_contact_id": "uItVXFJ4Wku1yYG1SY5t",
+      "contact_name": "Creative Australia",
+      "contact_email": "",
+      "existing_tags": [],
+      "project_code": "ACT-PI",
+      "tag_added": "project:ACT-PI",
+      "action": "add-tag",
+      "status": "failed",
+      "error": "GHL API Error (400): {\"message\":\"Contact not found for id:uItVXFJ4Wku1yYG1SY5t\",\"error\":\"Bad Request\",\"statusCode\":400}"
+    },
+    {
+      "ghl_contact_id": "2pnFY2n6Kb3Ne1whX5GJ",
+      "contact_name": "melissa douglas",
+      "contact_email": "msmdouglas@outlook.com",
+      "existing_tags": [
+        "newsletter",
+        "harvest-newsletter",
+        "harvest-website",
+        "interest-membership",
+        "interest-events",
+        "interest-community",
+        "interest-garden",
+        "interest-volunteer",
+        "interest-sustainability",
+        "interest-workshops",
+        "interest-markets",
+        "interest-food",
+        "harvest-member",
+        "member-comments",
+        "harvest-inbox"
+      ],
+      "project_code": "ACT-GL",
+      "tag_added": "project:ACT-GL",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:19:47.631Z"
+    },
+    {
+      "ghl_contact_id": "UawzR7sP1MVpX7JtBUI7",
+      "contact_name": "brisbane festival",
+      "contact_email": "",
+      "existing_tags": [
+        "goods",
+        "goods-supporter"
+      ],
+      "project_code": "ACT-CE",
+      "tag_added": "project:ACT-CE",
+      "action": "add-tag",
+      "status": "failed",
+      "error": "GHL API Error (400): {\"message\":\"Contact not found for id:UawzR7sP1MVpX7JtBUI7\",\"error\":\"Bad Request\",\"statusCode\":400}"
+    },
+    {
+      "ghl_contact_id": "qZAN8H2SBfxvmYCA92ud",
+      "contact_name": "irene portelli",
+      "contact_email": "irene.portelli@wemadeit.com.au",
+      "existing_tags": [
+        "contained-hot-lead",
+        "justicehub",
+        "partner",
+        "cairns",
+        "container-request",
+        "act-cn",
+        "act-jh"
+      ],
+      "project_code": "ACT-CE",
+      "tag_added": "project:ACT-CE",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:19:48.516Z"
+    },
+    {
+      "ghl_contact_id": "irzRJjuw3RvbTCZ4KbxV",
+      "contact_name": "Uncle Allan Palm Island",
+      "contact_email": "",
+      "existing_tags": [],
+      "project_code": "ACT-UA",
+      "tag_added": "project:ACT-UA",
+      "action": "add-tag",
+      "status": "failed",
+      "error": "GHL API Error (400): {\"message\":\"Contact not found for id:irzRJjuw3RvbTCZ4KbxV\",\"error\":\"Bad Request\",\"statusCode\":400}"
+    },
+    {
+      "ghl_contact_id": "rmrG40t5m6Yn8cGcoznb",
+      "contact_name": "alice mahar",
+      "contact_email": "alice@cornerstorenetwork.org.au",
+      "existing_tags": [
+        "contained-personal-outreach",
+        "justicehub",
+        "partner",
+        "melbourne",
+        "container-request",
+        "act-cn",
+        "act-jh"
+      ],
+      "project_code": "ACT-CE",
+      "tag_added": "project:ACT-CE",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:19:49.146Z"
+    },
+    {
+      "ghl_contact_id": "xBxaigCAdO1v8ARO1lo2",
+      "contact_name": "new merinee nsw",
+      "contact_email": "new-merinee@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-signal",
+        "goods-new",
+        "priority-medium",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:19:49.719Z"
+    },
+    {
+      "ghl_contact_id": "KZ7RJfJUV7Pd720EYBVv",
+      "contact_name": "anita pahor",
+      "contact_email": "anita.pahor@lkg.com.au",
+      "existing_tags": [
+        "contained-hot-lead",
+        "contained-original-requester",
+        "justicehub",
+        "partner",
+        "melbourne",
+        "container-request",
+        "act-cn",
+        "act-jh"
+      ],
+      "project_code": "ACT-CE",
+      "tag_added": "project:ACT-CE",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:19:50.043Z"
+    },
+    {
+      "ghl_contact_id": "FYz6uKocaowPMWGHjTUT",
+      "contact_name": "ben contact workflow test",
+      "contact_email": "benjamin+harvest-contact-workflow-8736125364@act.place",
+      "existing_tags": [
+        "contact-form",
+        "harvest-website",
+        "newsletter",
+        "harvest-newsletter",
+        "engagement:lead"
+      ],
+      "project_code": "ACT-CORE",
+      "tag_added": "project:ACT-CORE",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:19:50.630Z"
+    },
+    {
+      "ghl_contact_id": "Q5m6C54kTgx4zPM3dMfu",
+      "contact_name": "lewina schrale",
+      "contact_email": "lewina.schrale@decyp.tas.gov.au",
+      "existing_tags": [
+        "contained-hot-lead",
+        "justicehub",
+        "partner",
+        "tasmania",
+        "government",
+        "container-request",
+        "act-cn",
+        "act-jh"
+      ],
+      "project_code": "ACT-CE",
+      "tag_added": "project:ACT-CE",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:19:51.148Z"
+    },
+    {
+      "ghl_contact_id": "yCiaPtyAOWYsEs9ITUGj",
+      "contact_name": "lucy stronach",
+      "contact_email": "lstronach@minderoo.org",
+      "existing_tags": [
+        "goods",
+        "goods-supporter",
+        "goods-newsletter",
+        "contained-personal-outreach",
+        "justicehub",
+        "partner",
+        "act-gd",
+        "act-cn",
+        "act-jh",
+        "contained"
+      ],
+      "project_code": "ACT-CE",
+      "tag_added": "project:ACT-CE",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:19:51.618Z"
+    },
+    {
+      "ghl_contact_id": "MPRAYiwYgow3O48hHagA",
+      "contact_name": "wathanhiin qld",
+      "contact_email": "wathanhiin@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-nurture",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:19:52.199Z"
+    },
+    {
+      "ghl_contact_id": "ltQrFUsVkLSNkY3NJDaa",
+      "contact_name": "qbe ",
+      "contact_email": "",
+      "existing_tags": [
+        "goods",
+        "goods-supporter"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "failed",
+      "error": "GHL API Error (400): {\"message\":\"Contact not found for id:ltQrFUsVkLSNkY3NJDaa\",\"error\":\"Bad Request\",\"statusCode\":400}"
+    },
+    {
+      "ghl_contact_id": "tlqWqWhNuJJMPnbcPJ2F",
+      "contact_name": "alpurrurulam nt",
+      "contact_email": "alpurrurulam@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-warm",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:19:53.184Z"
+    },
+    {
+      "ghl_contact_id": "jJBHzRusRmhDnpWbE2ew",
+      "contact_name": "galiwinku nt",
+      "contact_email": "galiwinku@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-hot",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:19:53.751Z"
+    },
+    {
+      "ghl_contact_id": "yZcX8GoQEqBYqcb5Uyjm",
+      "contact_name": "rachel atkinson",
+      "contact_email": "ratkinson@picc.com.au",
+      "existing_tags": [
+        "goods",
+        "goods-community",
+        "goods-newsletter",
+        "goods-inquiry",
+        "goods-tier-champion",
+        "auto-created-from-xero",
+        "act-gd"
+      ],
+      "project_code": "ACT-HV",
+      "tag_added": "project:ACT-HV",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:19:54.409Z"
+    },
+    {
+      "ghl_contact_id": "yZcX8GoQEqBYqcb5Uyjm",
+      "contact_name": "rachel atkinson",
+      "contact_email": "ratkinson@picc.com.au",
+      "existing_tags": [
+        "goods",
+        "goods-community",
+        "goods-newsletter",
+        "goods-inquiry",
+        "goods-tier-champion",
+        "auto-created-from-xero",
+        "act-gd"
+      ],
+      "project_code": "ACT-CA",
+      "tag_added": "project:ACT-CA",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:19:54.756Z"
+    },
+    {
+      "ghl_contact_id": "9eSq6vFfQEVxCToD8Mru",
+      "contact_name": "leeza stratford",
+      "contact_email": "leeza@treehousearts.com.au",
+      "existing_tags": [
+        "eoi-gathering-march-2026",
+        "harvest-website",
+        "act-hv",
+        "newsletter",
+        "harvest-newsletter",
+        "interest-membership",
+        "interest-events",
+        "interest-community",
+        "interest-markets",
+        "interest-workshops",
+        "interest-garden",
+        "interest-food",
+        "interest-volunteer",
+        "harvest-member",
+        "harvest-shop-interest",
+        "shop-follow-up",
+        "shop-produce",
+        "engagement:lead"
+      ],
+      "project_code": "ACT-HV",
+      "tag_added": "project:ACT-HV",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:19:55.329Z"
+    },
+    {
+      "ghl_contact_id": "0MFGPZ12sPDC16ekD9cz",
+      "contact_name": "ben published question test",
+      "contact_email": "benjamin+harvest-member-question-published-1778735476@act.place",
+      "existing_tags": [
+        "engagement:lead",
+        "harvest-member",
+        "harvest-newsletter",
+        "harvest-website",
+        "interest-membership",
+        "member-question",
+        "newsletter"
+      ],
+      "project_code": "ACT-SH",
+      "tag_added": "project:ACT-SH",
+      "action": "add-tag",
+      "status": "failed",
+      "error": "GHL API Error (400): {\"message\":\"Contact not found for id:0MFGPZ12sPDC16ekD9cz\",\"error\":\"Bad Request\",\"statusCode\":400}"
+    },
+    {
+      "ghl_contact_id": "SA723TCBUsGizxCfNs4n",
+      "contact_name": "loic fery",
+      "contact_email": "loic.fery@gmail.com",
+      "existing_tags": [
+        "contained-hot-lead",
+        "justicehub",
+        "partner",
+        "tasmania",
+        "container-request",
+        "act-cn",
+        "act-jh"
+      ],
+      "project_code": "ACT-CE",
+      "tag_added": "project:ACT-CE",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:19:56.002Z"
+    },
+    {
+      "ghl_contact_id": "vcpRdRWPqykY2oHXrJ9I",
+      "contact_name": "hannah march",
+      "contact_email": "hannah@justicereforminitiative.org.au",
+      "existing_tags": [
+        "contained-hot-lead",
+        "contained-original-requester",
+        "justicehub",
+        "partner",
+        "venue-partner",
+        "adelaide",
+        "conference-host",
+        "container-request",
+        "meeting-held",
+        "act-cn",
+        "act-jh"
+      ],
+      "project_code": "ACT-CE",
+      "tag_added": "project:ACT-CE",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:19:57.114Z"
+    },
+    {
+      "ghl_contact_id": "fnCak04opqtSP8QPfD2G",
+      "contact_name": "shaun fisher",
+      "contact_email": "fishers.oysters@gmail.com",
+      "existing_tags": [
+        "goods",
+        "goods-newsletter",
+        "act-gd"
+      ],
+      "project_code": "ACT-HV",
+      "tag_added": "project:ACT-HV",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:19:57.527Z"
+    },
+    {
+      "ghl_contact_id": "fnCak04opqtSP8QPfD2G",
+      "contact_name": "shaun fisher",
+      "contact_email": "fishers.oysters@gmail.com",
+      "existing_tags": [
+        "goods",
+        "goods-newsletter",
+        "act-gd"
+      ],
+      "project_code": "ACT-CA",
+      "tag_added": "project:ACT-CA",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:19:58.114Z"
+    },
+    {
+      "ghl_contact_id": "fHCJVf3yWEnLg2eTspTK",
+      "contact_name": "stephen alexander",
+      "contact_email": "stephen@stephenalexander.com.au",
+      "existing_tags": [
+        "harvest-website",
+        "eoi-gathering-march-2026",
+        "act-hv",
+        "newsletter",
+        "harvest-newsletter",
+        "interest-membership",
+        "interest-events",
+        "interest-community",
+        "interest-garden",
+        "interest-workshops",
+        "interest-volunteer",
+        "harvest-member",
+        "member-comments",
+        "harvest-inbox"
+      ],
+      "project_code": "ACT-HV",
+      "tag_added": "project:ACT-HV",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:19:58.697Z"
+    },
+    {
+      "ghl_contact_id": "6bjo08S459GAjsCrJEa0",
+      "contact_name": "umbakumba nt",
+      "contact_email": "umbakumba@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-warm",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:19:59.264Z"
+    },
+    {
+      "ghl_contact_id": "AIrpQMtxPZJvHG45duw9",
+      "contact_name": "katherine hayes",
+      "contact_email": "katherine@yac.net.au",
+      "existing_tags": [
+        "contained-hot-lead",
+        "contained-original-requester",
+        "act-cn"
+      ],
+      "project_code": "ACT-CE",
+      "tag_added": "project:ACT-CE",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:00.079Z"
+    },
+    {
+      "ghl_contact_id": "gPxPrnGkA01DbSigTaYM",
+      "contact_name": "gunun woonam qld",
+      "contact_email": "gunun-woonam@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-signal",
+        "goods-new",
+        "priority-medium",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:00.668Z"
+    },
+    {
+      "ghl_contact_id": "kTimXhFlc71LShGqSwGI",
+      "contact_name": "kintore nt",
+      "contact_email": "kintore@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-warm",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:01.172Z"
+    },
+    {
+      "ghl_contact_id": "BZvB3crwSpby8FfzmB19",
+      "contact_name": "grantscope triage",
+      "contact_email": "grantscope-triage@act.place",
+      "existing_tags": [
+        "grantscope-source",
+        "auto-triage"
+      ],
+      "project_code": "ACT-HV",
+      "tag_added": "project:ACT-HV",
+      "action": "add-tag",
+      "status": "failed",
+      "error": "GHL API Error (400): {\"message\":\"Contact not found for id:BZvB3crwSpby8FfzmB19\",\"error\":\"Bad Request\",\"statusCode\":400}"
+    },
+    {
+      "ghl_contact_id": "BZvB3crwSpby8FfzmB19",
+      "contact_name": "grantscope triage",
+      "contact_email": "grantscope-triage@act.place",
+      "existing_tags": [
+        "grantscope-source",
+        "auto-triage"
+      ],
+      "project_code": "ACT-CORE",
+      "tag_added": "project:ACT-CORE",
+      "action": "add-tag",
+      "status": "failed",
+      "error": "GHL API Error (400): {\"message\":\"Contact not found for id:BZvB3crwSpby8FfzmB19\",\"error\":\"Bad Request\",\"statusCode\":400}"
+    },
+    {
+      "ghl_contact_id": "D92Es2ULBuVt172OtTRy",
+      "contact_name": "ampilatwatja nt",
+      "contact_email": "ampilatwatja@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-warm",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:02.273Z"
+    },
+    {
+      "ghl_contact_id": "F3lMq74Bo4NQiJ8FBUr2",
+      "contact_name": "ben knight",
+      "contact_email": "knighttss@gmail.copm",
+      "existing_tags": [
+        "locals-day-march-2026",
+        "eoi-gathering-march-2026",
+        "harvest-website",
+        "harvest-duplicate-review",
+        "act-hv"
+      ],
+      "project_code": "ACT-CA",
+      "tag_added": "project:ACT-CA",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:02.689Z"
+    },
+    {
+      "ghl_contact_id": "F3lMq74Bo4NQiJ8FBUr2",
+      "contact_name": "ben knight",
+      "contact_email": "knighttss@gmail.copm",
+      "existing_tags": [
+        "locals-day-march-2026",
+        "eoi-gathering-march-2026",
+        "harvest-website",
+        "harvest-duplicate-review",
+        "act-hv"
+      ],
+      "project_code": "ACT-CE",
+      "tag_added": "project:ACT-CE",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:03.254Z"
+    },
+    {
+      "ghl_contact_id": "F3lMq74Bo4NQiJ8FBUr2",
+      "contact_name": "ben knight",
+      "contact_email": "knighttss@gmail.copm",
+      "existing_tags": [
+        "locals-day-march-2026",
+        "eoi-gathering-march-2026",
+        "harvest-website",
+        "harvest-duplicate-review",
+        "act-hv"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:03.907Z"
+    },
+    {
+      "ghl_contact_id": "7sp5Zwueh0OKblAKQirR",
+      "contact_name": "thulkurr qld",
+      "contact_email": "thulkurr@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-signal",
+        "goods-new",
+        "priority-medium",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:04.519Z"
+    },
+    {
+      "ghl_contact_id": "ANsVZBAfWzSWFeoirQf6",
+      "contact_name": "oriners qld",
+      "contact_email": "oriners@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-nurture",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:05.104Z"
+    },
+    {
+      "ghl_contact_id": "vw6Jm7f2nthXcoQ2izyX",
+      "contact_name": "ludmila andrade",
+      "contact_email": "ludmila@youngperspectives.org",
+      "existing_tags": [
+        "contained-hot-lead",
+        "contained-original-requester",
+        "justicehub",
+        "partner",
+        "international",
+        "container-request",
+        "act-cn",
+        "act-jh"
+      ],
+      "project_code": "ACT-CE",
+      "tag_added": "project:ACT-CE",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:05.671Z"
+    },
+    {
+      "ghl_contact_id": "ZC6OOSxs3h5ZOGPm4Qgr",
+      "contact_name": "lingara nt",
+      "contact_email": "lingara@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-signal",
+        "goods-new",
+        "priority-medium",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:06.292Z"
+    },
+    {
+      "ghl_contact_id": "fm0tdDRDfl3EFTOg1JS7",
+      "contact_name": "fordy farm qld",
+      "contact_email": "fordy-farm@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-signal",
+        "goods-new",
+        "priority-medium",
+        "act-gd"
+      ],
+      "project_code": "ACT-FM",
+      "tag_added": "project:ACT-FM",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:07.038Z"
+    },
+    {
+      "ghl_contact_id": "0kEs9BJmkmi7ZUc5haEX",
+      "contact_name": "kristy bloomfield",
+      "contact_email": "kristy.bloomfield@oonchiumpa.com.au",
+      "existing_tags": [
+        "goods-newsletter",
+        "justicehub",
+        "partner",
+        "act-gd",
+        "act-jh"
+      ],
+      "project_code": "ACT-HV",
+      "tag_added": "project:ACT-HV",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:07.695Z"
+    },
+    {
+      "ghl_contact_id": "0kEs9BJmkmi7ZUc5haEX",
+      "contact_name": "kristy bloomfield",
+      "contact_email": "kristy.bloomfield@oonchiumpa.com.au",
+      "existing_tags": [
+        "goods-newsletter",
+        "justicehub",
+        "partner",
+        "act-gd",
+        "act-jh"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:08.384Z"
+    },
+    {
+      "ghl_contact_id": "pZ9kGnooEvG4MG13E6KA",
+      "contact_name": "rohan lulham",
+      "contact_email": "rohan.lulham@sydney.edu.au",
+      "existing_tags": [
+        "contained-hot-lead",
+        "contained-original-requester",
+        "justicehub",
+        "partner",
+        "sydney",
+        "research",
+        "container-request",
+        "act-cn",
+        "act-jh"
+      ],
+      "project_code": "ACT-CE",
+      "tag_added": "project:ACT-CE",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:08.954Z"
+    },
+    {
+      "ghl_contact_id": "wu6SihnJXkEkKrUYtheG",
+      "contact_name": "bannick burn qld",
+      "contact_email": "bannick-burn@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-signal",
+        "goods-new",
+        "priority-medium",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:09.587Z"
+    },
+    {
+      "ghl_contact_id": "nZDW2c7bgNmKT62iOMP4",
+      "contact_name": "sally grimsley-ballard",
+      "contact_email": "s.grimsley-ballard@snowfoundation.org.au",
+      "existing_tags": [
+        "goods-inquiry",
+        "goods",
+        "funder",
+        "goods-funder",
+        "goods-newsletter",
+        "goods-tier-aware",
+        "act-gd",
+        "goods-src-footer"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:10.159Z"
+    },
+    {
+      "ghl_contact_id": "tBKNUXD8tPybDqV8pqCi",
+      "contact_name": "beswick nt",
+      "contact_email": "beswick@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-warm",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:11.287Z"
+    },
+    {
+      "ghl_contact_id": "3nOgW4r1aD8wZsgt1HHH",
+      "contact_name": "nicole mekler",
+      "contact_email": "nicole@justreinvest.org.au",
+      "existing_tags": [
+        "justicehub",
+        "partner",
+        "act-jh"
+      ],
+      "project_code": "ACT-CA",
+      "tag_added": "project:ACT-CA",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:11.880Z"
+    },
+    {
+      "ghl_contact_id": "SNYQwLml4Llfscyc4tmR",
+      "contact_name": "CURRENTS New Media Festival",
+      "contact_email": "",
+      "existing_tags": [],
+      "project_code": "ACT-CE",
+      "tag_added": "project:ACT-CE",
+      "action": "add-tag",
+      "status": "failed",
+      "error": "GHL API Error (400): {\"message\":\"Contact not found for id:SNYQwLml4Llfscyc4tmR\",\"error\":\"Bad Request\",\"statusCode\":400}"
+    },
+    {
+      "ghl_contact_id": "V2hJIGzGwYLZA1h2zVE4",
+      "contact_name": "ars electronica festival",
+      "contact_email": "",
+      "existing_tags": [],
+      "project_code": "ACT-CE",
+      "tag_added": "project:ACT-CE",
+      "action": "add-tag",
+      "status": "failed",
+      "error": "GHL API Error (400): {\"message\":\"Contact not found for id:V2hJIGzGwYLZA1h2zVE4\",\"error\":\"Bad Request\",\"statusCode\":400}"
+    },
+    {
+      "ghl_contact_id": "eZLKrY7lfaJG5D5JYMGa",
+      "contact_name": "sydney fringe",
+      "contact_email": "",
+      "existing_tags": [
+        "goods",
+        "goods-supporter"
+      ],
+      "project_code": "ACT-CE",
+      "tag_added": "project:ACT-CE",
+      "action": "add-tag",
+      "status": "failed",
+      "error": "GHL API Error (400): {\"message\":\"Contact not found for id:eZLKrY7lfaJG5D5JYMGa\",\"error\":\"Bad Request\",\"statusCode\":400}"
+    },
+    {
+      "ghl_contact_id": "YopnzNzbbrsB4QbroYtw",
+      "contact_name": "Immerse 2026",
+      "contact_email": "",
+      "existing_tags": [
+        "goods",
+        "goods-supporter",
+        "goods-newsletter"
+      ],
+      "project_code": "ACT-CE",
+      "tag_added": "project:ACT-CE",
+      "action": "add-tag",
+      "status": "failed",
+      "error": "GHL API Error (400): {\"message\":\"Contact not found for id:YopnzNzbbrsB4QbroYtw\",\"error\":\"Bad Request\",\"statusCode\":400}"
+    },
+    {
+      "ghl_contact_id": "Ja3sGsiivyv4Hjc52byI",
+      "contact_name": "jess lilley",
+      "contact_email": "jess@theopenarms.com.au",
+      "existing_tags": [
+        "contained-personal-outreach",
+        "justicehub",
+        "partner",
+        "melbourne",
+        "container-request",
+        "act-cn",
+        "act-jh"
+      ],
+      "project_code": "ACT-CE",
+      "tag_added": "project:ACT-CE",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:13.641Z"
+    },
+    {
+      "ghl_contact_id": "fMRgBk6Yg48qebEmXkqp",
+      "contact_name": "anna philip",
+      "contact_email": "anna.philip2@nt.gov.au",
+      "existing_tags": [],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "failed",
+      "error": "GHL API Error (400): {\"message\":\"Contact not found for id:fMRgBk6Yg48qebEmXkqp\",\"error\":\"Bad Request\",\"statusCode\":400}"
+    },
+    {
+      "ghl_contact_id": "FZVkL64TmufEwTNcw61G",
+      "contact_name": "SXSW Sydney",
+      "contact_email": "",
+      "existing_tags": [
+        "goods",
+        "goods-supporter",
+        "goods-newsletter"
+      ],
+      "project_code": "ACT-SX",
+      "tag_added": "project:ACT-SX",
+      "action": "add-tag",
+      "status": "failed",
+      "error": "GHL API Error (400): {\"message\":\"Contact not found for id:FZVkL64TmufEwTNcw61G\",\"error\":\"Bad Request\",\"statusCode\":400}"
+    },
+    {
+      "ghl_contact_id": "mKFNpKfzLAzJc2Uw7QO3",
+      "contact_name": "uncontained arts festival",
+      "contact_email": "",
+      "existing_tags": [
+        "goods",
+        "goods-supporter"
+      ],
+      "project_code": "ACT-CN",
+      "tag_added": "project:ACT-CN",
+      "action": "add-tag",
+      "status": "failed",
+      "error": "GHL API Error (400): {\"message\":\"Contact not found for id:mKFNpKfzLAzJc2Uw7QO3\",\"error\":\"Bad Request\",\"statusCode\":400}"
+    },
+    {
+      "ghl_contact_id": "MoWuMVU2r9CvadoDojFx",
+      "contact_name": "illuminate adelaide",
+      "contact_email": "",
+      "existing_tags": [
+        "goods",
+        "goods-supporter"
+      ],
+      "project_code": "ACT-CE",
+      "tag_added": "project:ACT-CE",
+      "action": "add-tag",
+      "status": "failed",
+      "error": "GHL API Error (400): {\"message\":\"Contact not found for id:MoWuMVU2r9CvadoDojFx\",\"error\":\"Bad Request\",\"statusCode\":400}"
+    },
+    {
+      "ghl_contact_id": "dYbBIH1H5deXDEerV5HE",
+      "contact_name": "shipton flats qld",
+      "contact_email": "shipton-flats@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-signal",
+        "goods-new",
+        "priority-medium",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:15.314Z"
+    },
+    {
+      "ghl_contact_id": "jXjMKjzaCa9RqvSSzkKF",
+      "contact_name": "genus passi",
+      "contact_email": "genus@namucollective.com",
+      "existing_tags": [],
+      "project_code": "ACT-CA",
+      "tag_added": "project:ACT-CA",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:16.402Z"
+    },
+    {
+      "ghl_contact_id": "DdlevaALhR53yslwYmfY",
+      "contact_name": "tina morris",
+      "contact_email": "tina.morris@diagrama.org.uk",
+      "existing_tags": [],
+      "project_code": "ACT-CA",
+      "tag_added": "project:ACT-CA",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:16.963Z"
+    },
+    {
+      "ghl_contact_id": "uSGWMtFqCX2pCUixkyZY",
+      "contact_name": "ray matthews",
+      "contact_email": "",
+      "existing_tags": [
+        "goods",
+        "goods-supporter"
+      ],
+      "project_code": "ACT-CA",
+      "tag_added": "project:ACT-CA",
+      "action": "add-tag",
+      "status": "failed",
+      "error": "GHL API Error (400): {\"message\":\"Contact not found for id:uSGWMtFqCX2pCUixkyZY\",\"error\":\"Bad Request\",\"statusCode\":400}"
+    },
+    {
+      "ghl_contact_id": "3GxNySmg9LkFFkJ1MLD5",
+      "contact_name": "lucy mcgarry",
+      "contact_email": "lm@wilyajanta.org",
+      "existing_tags": [
+        "goods",
+        "goods-supporter",
+        "goods-newsletter",
+        "act-gd"
+      ],
+      "project_code": "ACT-CA",
+      "tag_added": "project:ACT-CA",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:17.891Z"
+    },
+    {
+      "ghl_contact_id": "OAM0dvKcNPuLwjT15smE",
+      "contact_name": "kaltukatjara nt",
+      "contact_email": "kaltukatjara@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-warm",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:18.523Z"
+    },
+    {
+      "ghl_contact_id": "pnQYdYCfWN4ERnfHmBJ8",
+      "contact_name": "old rodeo ground qld",
+      "contact_email": "old-rodeo-ground@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-nurture",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:19.101Z"
+    },
+    {
+      "ghl_contact_id": "AYQsBL3uvU1hKU3HCrsj",
+      "contact_name": "wadeye nt",
+      "contact_email": "wadeye@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-hot",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:19.563Z"
+    },
+    {
+      "ghl_contact_id": "u7d9n0XKA84Gz44QeTU5",
+      "contact_name": "fairview station qld",
+      "contact_email": "fairview-station@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-nurture",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:20.175Z"
+    },
+    {
+      "ghl_contact_id": "3LNDa9OQDi3ztpZFHJr2",
+      "contact_name": "teya dusseldorp",
+      "contact_email": "teya@dusseldorp.org.au",
+      "existing_tags": [
+        "funder",
+        "goods",
+        "goods-funder",
+        "goods-newsletter",
+        "justicehub",
+        "partner",
+        "meeting-held",
+        "tour-funding",
+        "act-gd",
+        "act-jh"
+      ],
+      "project_code": "ACT-CN",
+      "tag_added": "project:ACT-CN",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:20.757Z"
+    },
+    {
+      "ghl_contact_id": "f8sbjgfZo1oD0Je0yArk",
+      "contact_name": "accounts palm island community company limited (picc)",
+      "contact_email": "",
+      "existing_tags": [
+        "goods",
+        "auto-created-from-xero",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:21.544Z"
+    },
+    {
+      "ghl_contact_id": "W0YjdHZAvk4TxpSEqXpg",
+      "contact_name": "yani bloomfield",
+      "contact_email": "yani.bloomfield@placeholder.local",
+      "existing_tags": [
+        "storyteller",
+        "empathy ledger"
+      ],
+      "project_code": "ACT-MR",
+      "tag_added": "project:ACT-MR",
+      "action": "add-tag",
+      "status": "failed",
+      "error": "GHL API Error (400): {\"message\":\"Contact not found for id:W0YjdHZAvk4TxpSEqXpg\",\"error\":\"Bad Request\",\"statusCode\":400}"
+    },
+    {
+      "ghl_contact_id": "rkrcjP5LQUCOu90E7hI7",
+      "contact_name": "jabir jabir wa",
+      "contact_email": "jabir-jabir@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-nurture",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:22.543Z"
+    },
+    {
+      "ghl_contact_id": "cAt1QstivkhGfT2ShFAc",
+      "contact_name": "thaangkunh-nhiin qld",
+      "contact_email": "thaangkunh-nhiin@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-signal",
+        "goods-new",
+        "priority-medium",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:23.135Z"
+    },
+    {
+      "ghl_contact_id": "M88yKS6uU8J226otlOUg",
+      "contact_name": "maningrida nt",
+      "contact_email": "maningrida@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-hot",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:23.465Z"
+    },
+    {
+      "ghl_contact_id": "rCZvszCFVZhrntB1pR8d",
+      "contact_name": "angurugu nt",
+      "contact_email": "angurugu@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-warm",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:24.117Z"
+    },
+    {
+      "ghl_contact_id": "LQA981UdkvCPXOBllBsZ",
+      "contact_name": "craig swann",
+      "contact_email": "craig@southstart.co",
+      "existing_tags": [
+        "festivals-target"
+      ],
+      "project_code": "ACT-CE",
+      "tag_added": "project:ACT-CE",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:25.161Z"
+    },
+    {
+      "ghl_contact_id": "Q0HsirXpDJJ3vLpNIKmj",
+      "contact_name": "jilundarina nt",
+      "contact_email": "jilundarina@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-signal",
+        "goods-new",
+        "priority-medium",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:25.764Z"
+    },
+    {
+      "ghl_contact_id": "8AFOcUy9esYG9EnkPk1U",
+      "contact_name": "yawuru wa",
+      "contact_email": "yawuru@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-nurture",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:26.315Z"
+    },
+    {
+      "ghl_contact_id": "V5UX8tUsn1IStcYo1WSV",
+      "contact_name": "bamaga qld",
+      "contact_email": "bamaga@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-nurture",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:27.264Z"
+    },
+    {
+      "ghl_contact_id": "vODv4WEcboVdvA5wLHnp",
+      "contact_name": "nillygan wa",
+      "contact_email": "nillygan@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-nurture",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:27.835Z"
+    },
+    {
+      "ghl_contact_id": "ROaK9ASzpkvDXQfj8YdW",
+      "contact_name": "peppan qld",
+      "contact_email": "peppan@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-nurture",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:28.466Z"
+    },
+    {
+      "ghl_contact_id": "oN98M0rrPl8CyoPPpOPr",
+      "contact_name": "warralong wa",
+      "contact_email": "warralong@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-nurture",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:29.581Z"
+    },
+    {
+      "ghl_contact_id": "x16W2jUDXOVCJhBq6omX",
+      "contact_name": "prince of wales qld",
+      "contact_email": "prince-of-wales@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-nurture",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:30.245Z"
+    },
+    {
+      "ghl_contact_id": "rMfUsllTxsW7uoGiMl9S",
+      "contact_name": "chelsea baker",
+      "contact_email": "chelsea@visibleimpact.com.au",
+      "existing_tags": [],
+      "project_code": "ACT-BG",
+      "tag_added": "project:ACT-BG",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:30.709Z"
+    },
+    {
+      "ghl_contact_id": "y0ovAilSxP1FoEt76ZRU",
+      "contact_name": "Rachel Mounsey",
+      "contact_email": "rmmounsey@gmail.com",
+      "existing_tags": [],
+      "project_code": "ACT-MR",
+      "tag_added": "project:ACT-MR",
+      "action": "add-tag",
+      "status": "failed",
+      "error": "GHL API Error (400): {\"message\":\"Contact not found for id:y0ovAilSxP1FoEt76ZRU\",\"error\":\"Bad Request\",\"statusCode\":400}"
+    },
+    {
+      "ghl_contact_id": "QA0N6F78VoAVksZmvJUV",
+      "contact_name": "Shaun Fisher",
+      "contact_email": "storyteller-5bb1c324@empathy-ledger.local",
+      "existing_tags": [
+        "storyteller",
+        "empathy ledger",
+        "justicehub"
+      ],
+      "project_code": "ACT-JH",
+      "tag_added": "project:ACT-JH",
+      "action": "add-tag",
+      "status": "failed",
+      "error": "GHL API Error (400): {\"message\":\"Contact not found for id:QA0N6F78VoAVksZmvJUV\",\"error\":\"Bad Request\",\"statusCode\":400}"
+    },
+    {
+      "ghl_contact_id": "btYibB3o4EWqNhab84Kk",
+      "contact_name": "wulununjur wa",
+      "contact_email": "wulununjur@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-nurture",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:31.724Z"
+    },
+    {
+      "ghl_contact_id": "ihitC4ElCdANnHYJ7jCT",
+      "contact_name": "ngalingkadji wa",
+      "contact_email": "ngalingkadji@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-nurture",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:32.136Z"
+    },
+    {
+      "ghl_contact_id": "LQkHp9pCoKnCJvUqFfBG",
+      "contact_name": "gapuwiyak nt",
+      "contact_email": "gapuwiyak@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-warm",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:32.866Z"
+    },
+    {
+      "ghl_contact_id": "G4vUZfUSQadk1R4KGRZC",
+      "contact_name": "el schwanke",
+      "contact_email": "elschwanke@vfff.org.au",
+      "existing_tags": [
+        "goods",
+        "goods-supporter",
+        "goods-newsletter",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:33.304Z"
+    },
+    {
+      "ghl_contact_id": "VbPl2qLoyWZlYL2HmOtY",
+      "contact_name": "sonia randhawa",
+      "contact_email": "soniarandhawa1@yahoo.com.my",
+      "existing_tags": [
+        "contained-hot-lead",
+        "contained-original-requester",
+        "justicehub",
+        "media",
+        "container-request",
+        "act-cn",
+        "act-jh"
+      ],
+      "project_code": "ACT-CE",
+      "tag_added": "project:ACT-CE",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:33.892Z"
+    },
+    {
+      "ghl_contact_id": "3Zj23DFHnxadPi1t8bBW",
+      "contact_name": "andy beecroft",
+      "contact_email": "andy.beecroft@adelaidefringe.com.au",
+      "existing_tags": [
+        "goods",
+        "goods-supporter",
+        "goods-newsletter",
+        "festivals-target",
+        "act-gd"
+      ],
+      "project_code": "ACT-CE",
+      "tag_added": "project:ACT-CE",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:34.466Z"
+    },
+    {
+      "ghl_contact_id": "KOG1ayAAftRYkBe1nZxg",
+      "contact_name": "loongabid wa",
+      "contact_email": "loongabid@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-nurture",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:35.027Z"
+    },
+    {
+      "ghl_contact_id": "MQg66x2sux7DpVe4imB0",
+      "contact_name": "munget wa",
+      "contact_email": "munget@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-nurture",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:35.650Z"
+    },
+    {
+      "ghl_contact_id": "cnNzFM6zrQjRaMJ69NpE",
+      "contact_name": "toby gowland",
+      "contact_email": "tobyg@kalianahoutdoors.com.au",
+      "existing_tags": [
+        "goods-inquiry",
+        "contained-hot-lead",
+        "justicehub",
+        "partner",
+        "brisbane",
+        "container-request",
+        "goods-tier-champion",
+        "act-gd",
+        "act-cn",
+        "act-jh"
+      ],
+      "project_code": "ACT-CE",
+      "tag_added": "project:ACT-CE",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:36.218Z"
+    },
+    {
+      "ghl_contact_id": "2XxGmIJ5sKBHPybj7BTk",
+      "contact_name": "ramingining nt",
+      "contact_email": "ramingining@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-warm",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:36.803Z"
+    },
+    {
+      "ghl_contact_id": "K8TnlbUH6o1AqUQxECAV",
+      "contact_name": "badu community qld",
+      "contact_email": "badu-community@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-nurture",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:37.350Z"
+    },
+    {
+      "ghl_contact_id": "3v2RCOhzU5fCgsxEDgff",
+      "contact_name": "fiona scicluna",
+      "contact_email": "fiona@reddust.org.au",
+      "existing_tags": [
+        "goods",
+        "goods-supporter",
+        "goods-newsletter",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:37.747Z"
+    },
+    {
+      "ghl_contact_id": "dqikATaNcATh7yBYT2Cw",
+      "contact_name": "king george river wa",
+      "contact_email": "king-george-river@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-nurture",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:38.090Z"
+    },
+    {
+      "ghl_contact_id": "URDekfzUYrFAk8WK3Dkz",
+      "contact_name": "kupungarri wa",
+      "contact_email": "kupungarri@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-nurture",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:38.646Z"
+    },
+    {
+      "ghl_contact_id": "grx9GGjCACtrtgxwjyxc",
+      "contact_name": "tallowon sa",
+      "contact_email": "tallowon@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-nurture",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:39.049Z"
+    },
+    {
+      "ghl_contact_id": "HWcscoGWFSUHymYEm4Hx",
+      "contact_name": "blue mountain qld",
+      "contact_email": "blue-mountain@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-nurture",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:39.482Z"
+    },
+    {
+      "ghl_contact_id": "hKvQvAYqZSDpbXX7itO9",
+      "contact_name": "marra worra worra wa",
+      "contact_email": "marra-worra-worra@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-nurture",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:40.047Z"
+    },
+    {
+      "ghl_contact_id": "RmiaAGfDHtChd5HxDECM",
+      "contact_name": "michael haji-ali",
+      "contact_email": "michaelhajiali@hotmail.com",
+      "existing_tags": [
+        "contained-hot-lead",
+        "justicehub",
+        "partner",
+        "perth",
+        "indigenous-led",
+        "container-request",
+        "act-cn",
+        "act-jh"
+      ],
+      "project_code": "ACT-CE",
+      "tag_added": "project:ACT-CE",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:40.640Z"
+    },
+    {
+      "ghl_contact_id": "biTWj8ZEBLtP0abMMjS9",
+      "contact_name": "shannon lemanski",
+      "contact_email": "shannon.lemanski@aquaubique.com.au",
+      "existing_tags": [
+        "funder",
+        "contained-hot-lead",
+        "contained-original-requester",
+        "act-cn"
+      ],
+      "project_code": "ACT-CE",
+      "tag_added": "project:ACT-CE",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:41.219Z"
+    },
+    {
+      "ghl_contact_id": "huXguIGvyFHkixustqey",
+      "contact_name": "accounts rotary eclub outback australia, division 9560",
+      "contact_email": "",
+      "existing_tags": [
+        "goods",
+        "auto-created-from-xero",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:41.821Z"
+    },
+    {
+      "ghl_contact_id": "nT3ouWvINi012LEpRERD",
+      "contact_name": "eunnmen qld",
+      "contact_email": "eunnmen@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-nurture",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:42.361Z"
+    },
+    {
+      "ghl_contact_id": "EbG9e0fDuRUKbZG1ZG9q",
+      "contact_name": "guda guda wa",
+      "contact_email": "guda-guda@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-nurture",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:42.990Z"
+    },
+    {
+      "ghl_contact_id": "UKb31FMRel8MFUJkbl9l",
+      "contact_name": "mulgul station wa",
+      "contact_email": "mulgul-station@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-nurture",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:43.558Z"
+    },
+    {
+      "ghl_contact_id": "jAUMeZcG3FcQC6LIzNWd",
+      "contact_name": "walberi qld",
+      "contact_email": "walberi@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-nurture",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:44.206Z"
+    },
+    {
+      "ghl_contact_id": "v61ji16m7Y00y3EQiRNg",
+      "contact_name": "mingalalka wa",
+      "contact_email": "mingalalka@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-nurture",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:44.767Z"
+    },
+    {
+      "ghl_contact_id": "bNReEzWIh2My7vUYv3xU",
+      "contact_name": "chuula qld",
+      "contact_email": "chuula@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-nurture",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:45.330Z"
+    },
+    {
+      "ghl_contact_id": "O2JVXQrnXoxDd3TVHc3Q",
+      "contact_name": "pantijan wa",
+      "contact_email": "pantijan@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-nurture",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:45.885Z"
+    },
+    {
+      "ghl_contact_id": "n8I1sKPauHc2otlC8rZb",
+      "contact_name": "pago wa",
+      "contact_email": "pago@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-nurture",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:46.528Z"
+    },
+    {
+      "ghl_contact_id": "olkCA3P2HYmQyykYz6im",
+      "contact_name": "youngaleena wa",
+      "contact_email": "youngaleena@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-nurture",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:47.180Z"
+    },
+    {
+      "ghl_contact_id": "2vBYuZdev3ZoR4oBww5U",
+      "contact_name": "maddy howlett",
+      "contact_email": "maddyh@brisbanepowerhouse.org",
+      "existing_tags": [],
+      "project_code": "ACT-CF",
+      "tag_added": "project:ACT-CF",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:47.550Z"
+    },
+    {
+      "ghl_contact_id": "wHWVWBV4762pDYvsRIsw",
+      "contact_name": "penny lamaro",
+      "contact_email": "plamaro@ascentgroup.org.au",
+      "existing_tags": [
+        "contained-hot-lead",
+        "justicehub",
+        "partner",
+        "regional-nsw",
+        "container-request",
+        "act-cn",
+        "act-jh"
+      ],
+      "project_code": "ACT-CE",
+      "tag_added": "project:ACT-CE",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:48.261Z"
+    },
+    {
+      "ghl_contact_id": "a6a3faSs6GGfjAAJw0ts",
+      "contact_name": "romina reyftmann",
+      "contact_email": "romina.ilad@gmail.com",
+      "existing_tags": [
+        "contained-hot-lead",
+        "justicehub",
+        "funder",
+        "container-request",
+        "act-cn",
+        "act-jh"
+      ],
+      "project_code": "ACT-CE",
+      "tag_added": "project:ACT-CE",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:48.825Z"
+    },
+    {
+      "ghl_contact_id": "7NVtg5cAWxbYn12ZixJU",
+      "contact_name": "maddi alderuccio",
+      "contact_email": "madeline.alderuccio@thefundingnetwork.com.au",
+      "existing_tags": [
+        "goods",
+        "goods-supporter",
+        "goods-newsletter",
+        "act-gd"
+      ],
+      "project_code": "ACT-CA",
+      "tag_added": "project:ACT-CA",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:49.369Z"
+    },
+    {
+      "ghl_contact_id": "iwG4UwCX5uJjTiWVPbru",
+      "contact_name": "yardoogarra wa",
+      "contact_email": "yardoogarra@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-nurture",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:49.953Z"
+    },
+    {
+      "ghl_contact_id": "7GNE9X3vWpSyp3bb6Id7",
+      "contact_name": "atambaya qld",
+      "contact_email": "atambaya@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-nurture",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:50.571Z"
+    },
+    {
+      "ghl_contact_id": "ZG23Ls4wXAy4geGqr9Ue",
+      "contact_name": "millargoon wa",
+      "contact_email": "millargoon@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-nurture",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:51.164Z"
+    },
+    {
+      "ghl_contact_id": "61EYs8DxPCQfSHYHNaOA",
+      "contact_name": "kalkarindji nt",
+      "contact_email": "kalkarindji@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-warm",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:51.736Z"
+    },
+    {
+      "ghl_contact_id": "HA9CmKAVCNWyj6PgUfz5",
+      "contact_name": "bondini reserve wa",
+      "contact_email": "bondini-reserve@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-nurture",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:52.331Z"
+    },
+    {
+      "ghl_contact_id": "FKxRWSPSEeK6dxGSgpam",
+      "contact_name": "nganmarriyanga nt",
+      "contact_email": "nganmarriyanga@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-warm",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:52.952Z"
+    },
+    {
+      "ghl_contact_id": "2wbFPbLwzUiqGpvVpA7Z",
+      "contact_name": "southwell qld",
+      "contact_email": "southwell@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-nurture",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:53.650Z"
+    },
+    {
+      "ghl_contact_id": "HTujeK3XWvJRt32IoyqQ",
+      "contact_name": "jim.rebbechi ",
+      "contact_email": "jim.rebbechi@ingkerreke.org.au",
+      "existing_tags": [
+        "goods",
+        "goods-supporter",
+        "goods-newsletter",
+        "act-gd"
+      ],
+      "project_code": "ACT-CA",
+      "tag_added": "project:ACT-CA",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:54.405Z"
+    },
+    {
+      "ghl_contact_id": "Z6POQ8e2wtBKSWDuPLEx",
+      "contact_name": "accounts mala’la health service aboriginal corporation",
+      "contact_email": "",
+      "existing_tags": [
+        "goods",
+        "auto-created-from-xero",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:55.049Z"
+    },
+    {
+      "ghl_contact_id": "OSWHIOCG3vHdyAEHot6F",
+      "contact_name": "gm corporate — julalikari",
+      "contact_email": "gmcorporate@julalikari.com.au",
+      "existing_tags": [
+        "goods",
+        "goods-supporter",
+        "goods-newsletter",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:55.686Z"
+    },
+    {
+      "ghl_contact_id": "NxMkIvOuA4gwEhmqLWd1",
+      "contact_name": "nygah nygah wa",
+      "contact_email": "nygah-nygah@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-nurture",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:56.290Z"
+    },
+    {
+      "ghl_contact_id": "l9lmkPUaT2kGlfyhchEW",
+      "contact_name": "numbulwar nt",
+      "contact_email": "numbulwar@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-warm",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:56.850Z"
+    },
+    {
+      "ghl_contact_id": "CrKIhxyK5JX9UINlIUtl",
+      "contact_name": "three mile wa",
+      "contact_email": "three-mile@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-nurture",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:57.469Z"
+    },
+    {
+      "ghl_contact_id": "fdUGUi2mAciyOrHws8iI",
+      "contact_name": "benjamin knight",
+      "contact_email": "benjamin+test.1768165666356@act.place",
+      "existing_tags": [],
+      "project_code": "ACT-CE",
+      "tag_added": "project:ACT-CE",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:58.054Z"
+    },
+    {
+      "ghl_contact_id": "72pMbIAD0lxcrJsVuIvm",
+      "contact_name": "ngarantjadu wa",
+      "contact_email": "ngarantjadu@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-nurture",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:58.777Z"
+    },
+    {
+      "ghl_contact_id": "Mvd6MBqRPUZVZpwrrX4b",
+      "contact_name": " ",
+      "contact_email": "ben@croftski.com",
+      "existing_tags": [
+        "goods-newsletter",
+        "act-gd"
+      ],
+      "project_code": "ACT-CE",
+      "tag_added": "project:ACT-CE",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:20:59.540Z"
+    },
+    {
+      "ghl_contact_id": "r70CURB5tnJdiZhmU0Bp",
+      "contact_name": "milikapiti nt",
+      "contact_email": "milikapiti@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-warm",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:21:00.293Z"
+    },
+    {
+      "ghl_contact_id": "dHHW3F15SwaqfBYkpvQa",
+      "contact_name": "Daniel Daylight",
+      "contact_email": "daniel@justreinvest.org.au",
+      "existing_tags": [],
+      "project_code": "ACT-MY",
+      "tag_added": "project:ACT-MY",
+      "action": "add-tag",
+      "status": "failed",
+      "error": "GHL API Error (400): {\"message\":\"Contact not found for id:dHHW3F15SwaqfBYkpvQa\",\"error\":\"Bad Request\",\"statusCode\":400}"
+    },
+    {
+      "ghl_contact_id": "OO91V7JaWqZStMbYRaUg",
+      "contact_name": "tapper's inlet wa",
+      "contact_email": "tapper-s-inlet@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-nurture",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:21:01.212Z"
+    },
+    {
+      "ghl_contact_id": "2cMA4iQ3y5ilf0LPMOmY",
+      "contact_name": "ambang qld",
+      "contact_email": "ambang@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-nurture",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:21:01.866Z"
+    },
+    {
+      "ghl_contact_id": "cKVOOorXaGuuHbmcm81x",
+      "contact_name": "dajarra qld",
+      "contact_email": "dajarra@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-nurture",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:21:02.549Z"
+    },
+    {
+      "ghl_contact_id": "NfBBaeWqSgN3DilQF4Zb",
+      "contact_name": "dinah line sa",
+      "contact_email": "dinah-line@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-nurture",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:21:03.091Z"
+    },
+    {
+      "ghl_contact_id": "hv7tFXO8UGDq3dMc98SG",
+      "contact_name": "accounts homeland school company",
+      "contact_email": "",
+      "existing_tags": [
+        "goods",
+        "auto-created-from-xero",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:21:03.836Z"
+    },
+    {
+      "ghl_contact_id": "bbxwznARO7AUZC0rInDR",
+      "contact_name": "jimbalakudunj wa",
+      "contact_email": "jimbalakudunj@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-nurture",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:21:04.488Z"
+    },
+    {
+      "ghl_contact_id": "xlYTe43gGbuSbAlXmF0D",
+      "contact_name": "Lawrence Marshbaum",
+      "contact_email": "",
+      "existing_tags": [],
+      "project_code": "ACT-10",
+      "tag_added": "project:ACT-10",
+      "action": "add-tag",
+      "status": "failed",
+      "error": "GHL API Error (400): {\"message\":\"Contact not found for id:xlYTe43gGbuSbAlXmF0D\",\"error\":\"Bad Request\",\"statusCode\":400}"
+    },
+    {
+      "ghl_contact_id": "tf0hHvlpP2KBGJAdRuwo",
+      "contact_name": "yalata sa",
+      "contact_email": "yalata@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-nurture",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:21:05.432Z"
+    },
+    {
+      "ghl_contact_id": "L1kooixF2tOI61OSdbP8",
+      "contact_name": "jarlmadanka wa",
+      "contact_email": "jarlmadanka@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-nurture",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:21:06.057Z"
+    },
+    {
+      "ghl_contact_id": "1MIZAZ9Kqj0vQveEZydt",
+      "contact_name": "delilah macgillivray",
+      "contact_email": "dmagilla@icloud.com",
+      "existing_tags": [
+        "contained-personal-outreach",
+        "justicehub",
+        "partner",
+        "rockhampton",
+        "indigenous-led",
+        "container-request",
+        "act-cn",
+        "act-jh"
+      ],
+      "project_code": "ACT-CE",
+      "tag_added": "project:ACT-CE",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:21:06.657Z"
+    },
+    {
+      "ghl_contact_id": "Ut0jUZOFgJVifnQBvZna",
+      "contact_name": "mindy sotiri",
+      "contact_email": "mindy@justicereforminitiative.org.au",
+      "existing_tags": [
+        "justicehub",
+        "partner",
+        "adelaide",
+        "conference-host",
+        "festivals-target",
+        "act-jh"
+      ],
+      "project_code": "ACT-CE",
+      "tag_added": "project:ACT-CE",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:21:07.430Z"
+    },
+    {
+      "ghl_contact_id": "yeMPioJn5VX8Amps2tVA",
+      "contact_name": "tilun tilun sa",
+      "contact_email": "tilun-tilun@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-nurture",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:21:08.055Z"
+    },
+    {
+      "ghl_contact_id": "5OH8wj9dbYaZjeb4nzjb",
+      "contact_name": "dowar island qld",
+      "contact_email": "dowar-island@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-nurture",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:21:08.681Z"
+    },
+    {
+      "ghl_contact_id": "UsaoP8VVTbtLXH52woG8",
+      "contact_name": "parukupan wa",
+      "contact_email": "parukupan@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-nurture",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:21:09.205Z"
+    },
+    {
+      "ghl_contact_id": "hoFdvQNJAEIHgPcKkFbu",
+      "contact_name": "nauiyu nt",
+      "contact_email": "nauiyu@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-warm",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:21:09.766Z"
+    },
+    {
+      "ghl_contact_id": "ykfMyzruEdbaGZdVtF0M",
+      "contact_name": "gunbalanya nt",
+      "contact_email": "gunbalanya@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-hot",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:21:10.293Z"
+    },
+    {
+      "ghl_contact_id": "TLWasEc2ouxn6TVfPinX",
+      "contact_name": "ngukurr nt",
+      "contact_email": "ngukurr@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-hot",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:21:10.861Z"
+    },
+    {
+      "ghl_contact_id": "6ldmF1XhCf5wJBEsCHq4",
+      "contact_name": "yirrkala nt",
+      "contact_email": "yirrkala@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-warm",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:21:11.338Z"
+    },
+    {
+      "ghl_contact_id": "T5OMQxquSFP6URSS4lyO",
+      "contact_name": "nyumwah wa",
+      "contact_email": "nyumwah@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-nurture",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:21:11.898Z"
+    },
+    {
+      "ghl_contact_id": "ySlREZLXJ6zbe0j9b8MM",
+      "contact_name": "cheeditha wa",
+      "contact_email": "cheeditha@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-nurture",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:21:12.467Z"
+    },
+    {
+      "ghl_contact_id": "spPgzzyIoriQBgEWcnou",
+      "contact_name": "joes lagoon qld",
+      "contact_email": "joes-lagoon@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-nurture",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:21:13.026Z"
+    },
+    {
+      "ghl_contact_id": "i3odQcXuB5Ek7jjnayH6",
+      "contact_name": "warruwi nt",
+      "contact_email": "warruwi@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-warm",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:21:13.604Z"
+    },
+    {
+      "ghl_contact_id": "vI75fv3vDBImW5Anp08I",
+      "contact_name": "silver plains qld",
+      "contact_email": "silver-plains@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-nurture",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:21:14.177Z"
+    },
+    {
+      "ghl_contact_id": "MkQfXMl2MdE56o3G8qc4",
+      "contact_name": "moojeeba qld",
+      "contact_email": "moojeeba@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-nurture",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:21:14.736Z"
+    },
+    {
+      "ghl_contact_id": "kYeSImxSw1fOJGTs1vzH",
+      "contact_name": "goobiny wa",
+      "contact_email": "goobiny@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-nurture",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:21:15.321Z"
+    },
+    {
+      "ghl_contact_id": "Lr4knUOiiM6qKSbeiD1o",
+      "contact_name": "lajamanu nt",
+      "contact_email": "lajamanu@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-warm",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:21:15.893Z"
+    },
+    {
+      "ghl_contact_id": "YfbLAEIIqZpCXAdF16FF",
+      "contact_name": "billard wa",
+      "contact_email": "billard@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-nurture",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:21:16.540Z"
+    },
+    {
+      "ghl_contact_id": "bSdWDr23YVZb7qfeHyFm",
+      "contact_name": "nyapari sa",
+      "contact_email": "nyapari@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-nurture",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:21:17.069Z"
+    },
+    {
+      "ghl_contact_id": "rwaXgwC8KYbNY1rNqMCQ",
+      "contact_name": "puntawari wa",
+      "contact_email": "puntawari@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-nurture",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:21:17.622Z"
+    },
+    {
+      "ghl_contact_id": "sTvgHaWnDeaKnCayvyf8",
+      "contact_name": "papunya nt",
+      "contact_email": "papunya@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-warm",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:21:18.117Z"
+    },
+    {
+      "ghl_contact_id": "S7ElQCh6ure0nhCze9Gd",
+      "contact_name": "melterr qld",
+      "contact_email": "melterr@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-nurture",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:21:18.686Z"
+    },
+    {
+      "ghl_contact_id": "65oqqmNvJ056JG0Mp3pF",
+      "contact_name": "milingimbi nt",
+      "contact_email": "milingimbi@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-hot",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:21:19.166Z"
+    },
+    {
+      "ghl_contact_id": "mGiSocLUxM0LlBomEJKO",
+      "contact_name": "djoodood wa",
+      "contact_email": "djoodood@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-nurture",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:21:19.735Z"
+    },
+    {
+      "ghl_contact_id": "dkzYZ4KLlBiSeU0sHkmB",
+      "contact_name": "pirlangimpi nt",
+      "contact_email": "pirlangimpi@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-warm",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:21:20.214Z"
+    },
+    {
+      "ghl_contact_id": "uSbvhCQTmSaTsSjENyLR",
+      "contact_name": "welcome station qld",
+      "contact_email": "welcome-station@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-nurture",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:21:20.800Z"
+    },
+    {
+      "ghl_contact_id": "Z2H2ncLdT2u5eCtZBp7a",
+      "contact_name": "ngurtuwarta wa",
+      "contact_email": "ngurtuwarta@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-nurture",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:21:21.498Z"
+    },
+    {
+      "ghl_contact_id": "emFxTiYXcS1rEXdbhX4V",
+      "contact_name": "buttah windee wa",
+      "contact_email": "buttah-windee@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-nurture",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:21:22.095Z"
+    },
+    {
+      "ghl_contact_id": "88OuJDK6lW7nO3DxdNNj",
+      "contact_name": "wurrumiyanga nt",
+      "contact_email": "wurrumiyanga@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-hot",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:21:22.654Z"
+    },
+    {
+      "ghl_contact_id": "1PQwJgL8vG0X50WLNcFt",
+      "contact_name": "putaputa sa",
+      "contact_email": "putaputa@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-nurture",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:21:23.452Z"
+    },
+    {
+      "ghl_contact_id": "PNACRhUZUoN9a6ioad1s",
+      "contact_name": "gnylmarung wa",
+      "contact_email": "gnylmarung@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-nurture",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:21:24.059Z"
+    },
+    {
+      "ghl_contact_id": "RLKRnukMDUqE1HTlkGZ0",
+      "contact_name": "wiluna community wa",
+      "contact_email": "wiluna-community@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-nurture",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:21:24.571Z"
+    },
+    {
+      "ghl_contact_id": "5MYHdXULAX5BhC7nTZQa",
+      "contact_name": "kalka sa",
+      "contact_email": "kalka@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-warm",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:21:24.975Z"
+    },
+    {
+      "ghl_contact_id": "uPpIqeOMahVTSBk5N3j3",
+      "contact_name": "barunga nt",
+      "contact_email": "barunga@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-warm",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:21:25.458Z"
+    },
+    {
+      "ghl_contact_id": "T9TiIXAMEGaqYFY8yAea",
+      "contact_name": "dauan island qld",
+      "contact_email": "dauan-island@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-nurture",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:21:25.834Z"
+    },
+    {
+      "ghl_contact_id": "JySmgDeWWTbBhyhso7pg",
+      "contact_name": "hermannsburg nt",
+      "contact_email": "hermannsburg@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-warm",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:21:26.506Z"
+    },
+    {
+      "ghl_contact_id": "sLrNSpHK0j64lsFLaiV0",
+      "contact_name": "northern land council ",
+      "contact_email": "northern-land-council-gapuwiyak@goods.civicgraph.io",
+      "existing_tags": [
+        "civicgraph",
+        "goods",
+        "goods-community-gapuwiyak",
+        "goods-state-nt",
+        "goods-role-council",
+        "goods-communitycontrolled",
+        "goods-stage-prospect"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:21:27.086Z"
+    },
+    {
+      "ghl_contact_id": "OhRuLuoVJC9H0w9xWMp9",
+      "contact_name": "yarilena sa",
+      "contact_email": "yarilena@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-nurture",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:21:27.584Z"
+    },
+    {
+      "ghl_contact_id": "LMYmZLXXEHD435VcKuyi",
+      "contact_name": "yuendumu nt",
+      "contact_email": "yuendumu@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-warm",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:21:28.079Z"
+    },
+    {
+      "ghl_contact_id": "fl1l7BEio7oAuN7b1dsZ",
+      "contact_name": "langi qld",
+      "contact_email": "langi@goods.civicgraph.io",
+      "existing_tags": [
+        "goods-warm",
+        "act-gd"
+      ],
+      "project_code": "ACT-GD",
+      "tag_added": "project:ACT-GD",
+      "action": "add-tag",
+      "status": "applied",
+      "applied_at": "2026-05-23T07:21:28.602Z"
+    }
+  ],
+  "completed_at": "2026-05-23T07:21:28.602Z"
+}

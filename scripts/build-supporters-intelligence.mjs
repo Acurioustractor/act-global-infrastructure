@@ -135,6 +135,92 @@ async function main() {
     .eq('type', 'ACCREC');
   if (xeroErr) throw xeroErr;
 
+  // 2b. Paginated pull of GHL contacts (default 1000-row Supabase cap; we have 2,200+)
+  const ghlContacts = [];
+  {
+    let from = 0; const PAGE = 1000;
+    while (true) {
+      const { data, error } = await supabase
+        .from('ghl_contacts')
+        .select('ghl_id, full_name, email, tags')
+        .range(from, from + PAGE - 1);
+      if (error) throw error;
+      if (!data?.length) break;
+      ghlContacts.push(...data);
+      if (data.length < PAGE) break;
+      from += PAGE;
+    }
+  }
+  console.log(`✓ Loaded ${ghlContacts.length} GHL contacts`);
+  const ghlContactMap = new Map(ghlContacts.map(c => [c.ghl_id, c]));
+
+  // 2c. Pull all GHL opportunities
+  const { data: oppRows } = await supabase
+    .from('ghl_opportunities')
+    .select('ghl_contact_id, pipeline_name, stage_name, status, monetary_value, project_code, ghl_updated_at')
+    .range(0, 9999);
+
+  // 2c. Aggregate opportunities per Xero-equivalent name (best-effort match)
+  const oppAgg = new Map();
+  for (const o of oppRows || []) {
+    const contact = ghlContactMap.get(o.ghl_contact_id);
+    if (!contact) continue;
+    // Multi-key match: store agg under email-domain AND name-slug so lookup is forgiving
+    const keys = new Set();
+    const dom = (contact.email || '').toLowerCase().trim().split('@')[1];
+    if (dom) keys.add(dom);
+    const nm = (contact.full_name || '').trim().toLowerCase();
+    if (nm) {
+      keys.add(nm);
+      // Strip common Xero prefixes like "accounts ", "ar ", "ap "
+      const stripped = nm.replace(/^(accounts?|ar|ap|finance|admin)\s+/i, '');
+      if (stripped && stripped !== nm) keys.add(stripped);
+      // Also a slug variant
+      keys.add(xeroNameToSlug(contact.full_name));
+    }
+    if (keys.size === 0) continue;
+    let agg = null;
+    for (const key of keys) {
+      if (oppAgg.has(key)) { agg = oppAgg.get(key); break; }
+    }
+    if (!agg) {
+      agg = {
+        open_count: 0, won_count: 0,
+        open_value: 0, won_value: 0,
+        pipelines: new Set(),
+        latest_stage: null, latest_stage_pipeline: null, latest_at: null,
+      };
+      for (const key of keys) oppAgg.set(key, agg);
+    } else {
+      // Make sure all keys point to same agg
+      for (const key of keys) oppAgg.set(key, agg);
+    }
+    if (o.status === 'open') { agg.open_count++; agg.open_value += Number(o.monetary_value || 0); }
+    if (o.status === 'won')  { agg.won_count++;  agg.won_value  += Number(o.monetary_value || 0); }
+    agg.pipelines.add(o.pipeline_name);
+    if (o.ghl_updated_at && (!agg.latest_at || o.ghl_updated_at > agg.latest_at)) {
+      agg.latest_at = o.ghl_updated_at;
+      agg.latest_stage = o.stage_name;
+      agg.latest_stage_pipeline = o.pipeline_name;
+    }
+  }
+  console.log(`✓ Aggregated GHL opportunities — ${oppAgg.size} keys with opp data`);
+
+  function lookupOpps(supporter) {
+    const tries = [];
+    const email = supporter.primary_email || '';
+    if (email) tries.push(email.split(',')[0].split('@')[1]?.toLowerCase());
+    if (supporter.cc_email) tries.push(supporter.cc_email.split(',')[0].split('@')[1]?.toLowerCase());
+    tries.push((supporter.name || '').trim().toLowerCase());
+    tries.push((supporter.xero_contact_name || '').trim().toLowerCase());
+    tries.push(supporter.slug);
+    tries.push(xeroNameToSlug(supporter.xero_contact_name || supporter.name || ''));
+    for (const t of tries) {
+      if (t && oppAgg.has(t)) return oppAgg.get(t);
+    }
+    return null;
+  }
+
   // 3. Aggregate per contact_name
   const xeroAgg = new Map();
   for (const r of xeroRows) {
@@ -173,16 +259,71 @@ async function main() {
   }
   console.log(`✓ Aggregated Xero — ${xeroAgg.size} contacts with ACCREC invoices`);
 
+  // 3b. Pull Xero RECEIVE transactions (direct deposits without invoices)
+  //     These are real $ in from supporters that never had an invoice raised.
+  const SKIP_RECEIVE_CONTACTS = new Set([
+    'Nicholas Marchesi',                      // internal sole-trader → ACT transfers
+    'A Curious Tractor',
+    'A Curious Tractor Pty Ltd',
+    'Bunnings Warehouse',                     // likely refund not supporter
+    'Bunnings',
+  ]);
+  const { data: receiveRows } = await supabase
+    .from('xero_transactions')
+    .select('contact_name, total, date, project_code')
+    .eq('type', 'RECEIVE')
+    .range(0, 9999);
+  for (const r of (receiveRows || [])) {
+    if (!r.contact_name || SKIP_RECEIVE_CONTACTS.has(r.contact_name)) continue;
+    if (!xeroAgg.has(r.contact_name)) {
+      xeroAgg.set(r.contact_name, {
+        contact_name: r.contact_name,
+        invoice_count: 0,
+        paid_invoice_count: 0,
+        outstanding_invoice_count: 0,
+        total_paid_aud: 0,
+        outstanding_aud: 0,
+        first_invoice_date: null,
+        last_invoice_date: null,
+        oldest_open_date: null,
+        projects: new Set(),
+        direct_receipts_count: 0,
+      });
+    }
+    const agg = xeroAgg.get(r.contact_name);
+    agg.direct_receipts_count = (agg.direct_receipts_count || 0) + 1;
+    agg.total_paid_aud += Number(r.total || 0);
+    if (!agg.first_invoice_date || r.date < agg.first_invoice_date) agg.first_invoice_date = r.date;
+    if (!agg.last_invoice_date || r.date > agg.last_invoice_date) agg.last_invoice_date = r.date;
+    if (r.project_code) agg.projects.add(r.project_code);
+  }
+  console.log(`✓ Folded in Xero RECEIVE transactions — ${xeroAgg.size} contacts now`);
+
+  // 3c. Pull GHL-tagged funders/supporters (no $ flow yet — pure relationship)
+  //     These are PROSPECT-tier supporters we should track communications + asks against.
+  const ghlFunders = [];
+  for (const c of ghlContacts) {
+    const tags = c.tags || [];
+    const isFunder = tags.includes('funder')
+      || tags.includes('goods-funder')
+      || tags.includes('goods-supporter')
+      || tags.includes('partner-funder')
+      || tags.includes('foundation');
+    const gone = tags.includes('gone-from-ghl');
+    if (isFunder && !gone) ghlFunders.push(c);
+  }
+  console.log(`✓ Found ${ghlFunders.length} GHL-tagged funders/supporters (no Xero $ required)`);
+
   // 4. Build supporter records — start with Xero contacts, then add funders.json-only entries
   const supporters = [];
   const seenSlugs = new Set();
+  const seenDomains = new Set();
 
   for (const [contactName, agg] of xeroAgg) {
     const slug = xeroNameToSlug(contactName);
     seenSlugs.add(slug);
     const funder = funders[slug];
-
-    supporters.push({
+    const supporter = {
       slug,
       name: funder?.name || contactName,
       xero_contact_name: contactName,
@@ -210,7 +351,21 @@ async function main() {
       next_report_due: funder?.next_report_due || null,
       next_report_name: funder?.next_report_name || null,
       in_funders_json: !!funder,
-    });
+    };
+    const opps = lookupOpps(supporter);
+    supporter.open_opp_count = opps?.open_count || 0;
+    supporter.open_opp_value_aud = opps ? Math.round(opps.open_value * 100) / 100 : 0;
+    supporter.won_opp_count = opps?.won_count || 0;
+    supporter.won_opp_value_aud = opps ? Math.round(opps.won_value * 100) / 100 : 0;
+    supporter.pipelines = opps ? [...opps.pipelines] : [];
+    supporter.latest_stage = opps?.latest_stage || null;
+    supporter.latest_stage_pipeline = opps?.latest_stage_pipeline || null;
+    // Track domain so GHL-only step doesn't duplicate
+    if (supporter.primary_email) {
+      const dom = supporter.primary_email.split(',')[0].split('@')[1]?.toLowerCase();
+      if (dom) seenDomains.add(dom);
+    }
+    supporters.push(supporter);
   }
 
   // 5. Add funders.json entries that aren't in Xero (warm/cold)
@@ -245,7 +400,102 @@ async function main() {
       next_report_name: funder.next_report_name || null,
       in_funders_json: true,
     });
+    if (funder.primary_email) {
+      const dom = funder.primary_email.split(',')[0].split('@')[1]?.toLowerCase();
+      if (dom) seenDomains.add(dom);
+    }
   }
+
+  // 5b. Add GHL-only funders/supporters (no Xero $, no funders.json entry)
+  //     These are warm prospects + community engaged supporters tagged in GHL.
+  //     One row per (canonical-org-name) — group GHL contacts by email domain.
+  const ghlByOrg = new Map();
+  for (const c of ghlFunders) {
+    const email = (c.email || '').trim().toLowerCase();
+    if (!email) continue;
+    const domain = email.split('@')[1];
+    if (!domain) continue;
+    if (seenDomains.has(domain)) continue; // already covered by Xero/funders.json
+    if (!ghlByOrg.has(domain)) {
+      ghlByOrg.set(domain, {
+        domain,
+        contacts: [],
+        tags: new Set(),
+        projects: new Set(),
+      });
+    }
+    const org = ghlByOrg.get(domain);
+    org.contacts.push(c);
+    for (const t of (c.tags || [])) {
+      org.tags.add(t);
+      // project tag → project_code
+      if (t.startsWith('act-') && t.length <= 8) {
+        org.projects.add(t.toUpperCase());
+      }
+    }
+  }
+
+  function inferOrgName(domain, contacts) {
+    // Try to infer org from domain + first contact's name
+    const parts = domain.split('.');
+    const main = parts[0];
+    const titled = main.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+    return titled;
+  }
+  function inferTierFromTags(tags) {
+    if (tags.has('funder') || tags.has('partner-funder')) return 'WARM';
+    if (tags.has('goods-funder')) return 'WARM';
+    if (tags.has('goods-supporter') || tags.has('foundation')) return 'PROSPECT';
+    return 'PROSPECT';
+  }
+
+  let ghlAdded = 0;
+  for (const [domain, org] of ghlByOrg) {
+    const orgName = inferOrgName(domain, org.contacts);
+    const slug = xeroNameToSlug(orgName);
+    if (seenSlugs.has(slug)) continue;
+    seenSlugs.add(slug);
+    const primary = org.contacts[0];
+    const opps = lookupOpps({ slug, primary_email: primary.email, name: orgName, xero_contact_name: orgName });
+    supporters.push({
+      slug,
+      name: orgName,
+      xero_contact_name: null,
+      tier: inferTierFromTags(org.tags),
+      stage: 'ghl-only',
+      total_paid_aud: 0,
+      outstanding_aud: 0,
+      invoice_count: 0,
+      paid_invoice_count: 0,
+      outstanding_invoice_count: 0,
+      first_invoice_date: null,
+      last_invoice_date: null,
+      oldest_open_date: null,
+      outstanding_age_days: null,
+      outstanding_alert: 'CLEAR',
+      projects: [...org.projects],
+      primary_contact: primary.full_name || null,
+      primary_email: primary.email || null,
+      cc_email: org.contacts.slice(1, 4).map(c => c.email).filter(Boolean).join(', ') || null,
+      last_communicated_at: null,
+      days_since_last_contact: null,
+      themes: [...org.tags].filter(t => !t.startsWith('act-') && !t.startsWith('goods-tier-')).slice(0, 8),
+      tone: null,
+      framing_notes_excerpt: null,
+      next_report_due: null,
+      next_report_name: null,
+      in_funders_json: false,
+      open_opp_count: opps?.open_count || 0,
+      open_opp_value_aud: opps ? Math.round(opps.open_value * 100) / 100 : 0,
+      won_opp_count: opps?.won_count || 0,
+      won_opp_value_aud: opps ? Math.round(opps.won_value * 100) / 100 : 0,
+      pipelines: opps ? [...opps.pipelines] : [],
+      latest_stage: opps?.latest_stage || null,
+      latest_stage_pipeline: opps?.latest_stage_pipeline || null,
+    });
+    ghlAdded++;
+  }
+  console.log(`✓ Added ${ghlAdded} GHL-only supporters (PROSPECT/WARM tier)`);
 
   // 6. Sort: by outstanding desc, then by total paid desc
   supporters.sort((a, b) => {

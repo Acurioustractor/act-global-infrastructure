@@ -77,6 +77,7 @@ export const navStructure: SidebarNavGroup[] = [
     id: 'relationships',
     label: 'Relationships',
     items: [
+      { href: '/supporters', label: 'Supporters', icon: Users, color: 'text-emerald-400', bg: 'bg-emerald-500/20' },
       { href: '/pipeline', label: 'Pipeline', icon: Handshake, color: 'text-indigo-400', bg: 'bg-indigo-500/20' },
       { href: '/people', label: 'People', icon: Users },
     ],

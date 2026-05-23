@@ -30,6 +30,7 @@ import { cn } from '@/lib/utils'
 import { formatMoney, formatMoneyCompact } from '@/lib/finance/format'
 import { FounderPayCard } from '@/components/finance/FounderPayCard'
 import { ReceiptAutomationCard } from '@/components/finance/ReceiptAutomationCard'
+import { SupportersGlanceCard } from '@/components/finance/SupportersGlanceCard'
 
 // ── Types ────────────────────────────────────────────────────────────
 
@@ -521,7 +522,11 @@ export default function FinanceOverview() {
         <Link href="/finance/board" className="text-xs px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 text-white/60 hover:text-white transition-colors border border-white/10">Burn / Runway</Link>
         <Link href="/finance/rd-evidence" className="text-xs px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 text-white/60 hover:text-white transition-colors border border-white/10">R&amp;D Estimate</Link>
         <Link href="/finance/projects" className="text-xs px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 text-white/60 hover:text-white transition-colors border border-white/10">Projects History</Link>
+        <Link href="/supporters" className="text-xs px-3 py-1.5 rounded-full bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-300 hover:text-emerald-200 transition-colors border border-emerald-500/30">Supporters</Link>
       </nav>
+
+      {/* Supporters quick card — needs-reply + critical-outstanding glance */}
+      <SupportersGlanceCard />
 
       {/* ═══════════════════════════════════════════ */}
       {/* SECTION 1: RIGHT NOW                        */}

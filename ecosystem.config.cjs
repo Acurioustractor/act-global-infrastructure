@@ -152,6 +152,31 @@ const cronScripts = [
     cron_restart: '5 6 * * *',
   },
   {
+    // Daily 06:10am AEST: roll up GHL opportunities into project_pipelines
+    // (project_code × pipeline_name). Output: project_pipelines Supabase
+    // table + thoughts/shared/reports/project-pipelines-latest.{json,md}.
+    // Watchlist (bot-scraped research grants) are project_code='WATCH' and
+    // excluded from project totals.
+    name: 'project-pipelines',
+    script: 'scripts/build-project-pipelines.mjs',
+    cron_restart: '10 6 * * *',
+  },
+  {
+    // Daily 06:15am AEST: aggregate communications_history into supporter_comms_summary
+    // (per email-domain rollup: last_touch_at, last_touch_channel, in/out 30d, waiting count).
+    // Feeds the /supporters command-center page + the needs-reply nudge below.
+    name: 'supporter-comms',
+    script: 'scripts/build-supporter-comms.mjs',
+    cron_restart: '15 6 * * *',
+  },
+  {
+    // Daily 07:15am AEST: Telegram nudge for CRITICAL outstanding supporters
+    // that haven't been touched in 14+ days. Pulls from /api/supporters.
+    name: 'supporters-nudge',
+    script: 'scripts/nudge-supporters-critical.mjs',
+    cron_restart: '15 7 * * *',
+  },
+  {
     // Daily 7am AEST: refresh "🎯 Today's Focus" + sweep for drift signals
     // (stuck opps · overdue invoices · FAIL cadence · easy-win storyteller
     // transcripts) and auto-create new Action Items rows.

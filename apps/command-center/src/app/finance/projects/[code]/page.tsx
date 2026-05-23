@@ -187,6 +187,75 @@ interface ProjectFinancialsData {
   pipeline: PipelineItem[]
   pipelineWeightedTotal: number
   pipelineRawCount?: number
+  // 2026-05-23: GHL pipelines (per-pipeline rollup from project_pipelines table)
+  ghlPipelines?: Array<{
+    pipelineName: string
+    openCount: number
+    wonCount: number
+    lostCount: number
+    openValueAud: number
+    wonValueAud: number
+    earliestOpenAt: string | null
+    latestActivityAt: string | null
+    stagesPresent: string[]
+    contactsCount: number
+    computedAt: string
+  }>
+  ghlPipelineTotals?: {
+    openCount: number
+    wonCount: number
+    openValueAud: number
+    wonValueAud: number
+    pipelinesActive: number
+  }
+  // 2026-05-23: supporters funding this project
+  projectSupporters?: Array<{
+    slug: string
+    name: string
+    tier: string
+    stage: string | null
+    totalPaidAud: number
+    outstandingAud: number
+    outstandingAlert: string
+    primaryContact: string | null
+    lastCommunicatedAt: string | null
+    daysSinceLastContact: number | null
+    openOppCount: number
+    openOppValueAud: number
+    wonOppCount: number
+    wonOppValueAud: number
+  }>
+  projectSupportersTotals?: {
+    count: number
+    totalPaidAud: number
+    totalOutstandingAud: number
+    critical: number
+  }
+  // 2026-05-23: funder briefs (QBE-HQ pattern)
+  funderBriefs?: Array<{
+    id: string
+    funderSlug: string
+    briefTitle: string | null
+    status: string
+    asksFromThem: Array<{ ask: string; source: string; due?: string; done?: boolean }>
+    askAmountAud: number | null
+    askOutcome: string | null
+    askStatus: string | null
+    alignmentStatus: 'PASS' | 'WARN' | 'FAIL'
+    alignmentNotes: string | null
+    procurementDeliveredCount: number | null
+    procurementUnit: string | null
+    procurementDemandCount: number | null
+    procurementNotes: string | null
+    strategyTheirPriorities: string[]
+    strategyOurClaims: string[]
+    nextMove: string | null
+    nextMoveOwner: string | null
+    nextMoveDue: string | null
+    notionHqUrl: string | null
+    lastFeedbackDate: string | null
+    lastFeedbackSummary: string | null
+  }>
   expenses: ExpenseItem[]
   expensesByCategory: Record<string, ExpenseCategoryGroup>
   topVendors: Array<{ vendor: string; total: number }>
@@ -294,6 +363,9 @@ export default function ProjectFinancialsPage({
   const hasMonthly = (data?.monthly?.length ?? 0) > 0
   const hasInvoices = (data?.invoices?.length ?? 0) > 0
   const hasPipeline = (data?.pipeline?.length ?? 0) > 0
+  const hasGhlPipelines = (data?.ghlPipelines?.length ?? 0) > 0
+  const hasProjectSupporters = (data?.projectSupporters?.length ?? 0) > 0
+  const hasFunderBriefs = (data?.funderBriefs?.length ?? 0) > 0
 
   if (!data || (!hasMonthly && !hasInvoices && !hasPipeline)) {
     return (
@@ -803,6 +875,272 @@ export default function ProjectFinancialsPage({
           >
             View full pipeline →
           </Link>
+        </div>
+      )}
+
+      {/* GHL Pipelines (per-pipeline rollup from GoHighLevel) — 2026-05-23 */}
+      {hasGhlPipelines && data.ghlPipelines && data.ghlPipelineTotals && (
+        <div className="glass-card p-6 mb-8">
+          <h2 className="text-lg font-semibold text-white flex items-center gap-2 mb-1">
+            <BarChart3 className="h-5 w-5 text-fuchsia-400" />
+            GHL Pipelines
+          </h2>
+          <p className="text-sm text-white/40 mb-4">
+            {data.ghlPipelineTotals.pipelinesActive} pipeline{data.ghlPipelineTotals.pipelinesActive === 1 ? '' : 's'} active &middot;{' '}
+            <span className="text-amber-400">{data.ghlPipelineTotals.openCount} open ({formatMoney(data.ghlPipelineTotals.openValueAud)})</span>{' · '}
+            <span className="text-green-400">{data.ghlPipelineTotals.wonCount} won ({formatMoney(data.ghlPipelineTotals.wonValueAud)})</span>
+            <span className="text-xs text-white/30 ml-2">· refreshed daily 06:10am</span>
+          </p>
+          <div className="space-y-2">
+            {data.ghlPipelines.map((p) => (
+              <div key={p.pipelineName} className="rounded-lg border border-white/5 hover:border-white/10 p-3 transition-colors">
+                <div className="flex items-baseline justify-between gap-3">
+                  <div className="min-w-0 flex-1">
+                    <div className="text-sm font-medium text-white truncate">{p.pipelineName}</div>
+                    <div className="text-[11px] text-white/40 mt-0.5">
+                      {p.contactsCount} contact{p.contactsCount === 1 ? '' : 's'}
+                      {p.stagesPresent.length > 0 && <> &middot; {p.stagesPresent.join(' / ')}</>}
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-4 shrink-0 tabular-nums text-sm">
+                    {p.openCount > 0 && (
+                      <div className="text-right">
+                        <div className="text-amber-400 font-medium">{p.openCount} open</div>
+                        <div className="text-[10px] text-white/40">{formatMoney(p.openValueAud)}</div>
+                      </div>
+                    )}
+                    {p.wonCount > 0 && (
+                      <div className="text-right">
+                        <div className="text-green-400 font-medium">{p.wonCount} won</div>
+                        <div className="text-[10px] text-white/40">{formatMoney(p.wonValueAud)}</div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Supporters funding this project — 2026-05-23 */}
+      {hasProjectSupporters && data.projectSupporters && data.projectSupportersTotals && (
+        <div className="glass-card p-6 mb-8">
+          <div className="flex items-center justify-between mb-3">
+            <h2 className="text-lg font-semibold text-white flex items-center gap-2">
+              <Users className="h-5 w-5 text-emerald-400" />
+              Supporters funding {data.projectCode}
+            </h2>
+            <Link
+              href={`/supporters?project=${data.projectCode}`}
+              className="text-xs text-emerald-400 hover:text-emerald-300 transition-colors flex items-center gap-1"
+            >
+              View all in Supporters
+              <ChevronRight className="h-3 w-3" />
+            </Link>
+          </div>
+          <p className="text-sm text-white/40 mb-4">
+            {data.projectSupportersTotals.count} supporter{data.projectSupportersTotals.count === 1 ? '' : 's'} &middot;{' '}
+            <span className="text-green-400">{formatMoney(data.projectSupportersTotals.totalPaidAud)} paid</span>
+            {data.projectSupportersTotals.totalOutstandingAud > 0 && (
+              <>{' · '}<span className="text-orange-400">{formatMoney(data.projectSupportersTotals.totalOutstandingAud)} outstanding</span></>
+            )}
+            {data.projectSupportersTotals.critical > 0 && (
+              <>{' · '}<span className="text-red-400">{data.projectSupportersTotals.critical} critical</span></>
+            )}
+          </p>
+          <div className="space-y-2">
+            {data.projectSupporters.slice(0, 8).map((sup) => (
+              <Link
+                key={sup.slug}
+                href={`/supporters?q=${encodeURIComponent(sup.name)}`}
+                className="flex items-center gap-3 py-2 px-3 rounded-lg hover:bg-white/5 transition-colors group"
+              >
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-baseline gap-2">
+                    <span className="text-sm text-white font-medium">{sup.name}</span>
+                    <span className={cn(
+                      'text-[10px] font-medium px-1.5 py-0.5 rounded',
+                      sup.tier === 'PAID' ? 'bg-green-500/15 text-green-400' :
+                      sup.tier === 'OUTSTANDING' ? 'bg-orange-500/15 text-orange-400' :
+                      sup.tier === 'WARM' ? 'bg-yellow-500/15 text-yellow-400' :
+                      sup.tier === 'COLD' ? 'bg-blue-500/15 text-blue-400' :
+                      'bg-white/10 text-white/50'
+                    )}>
+                      {sup.tier}
+                    </span>
+                    {sup.outstandingAlert === 'CRITICAL' && (
+                      <span className="text-[10px] font-medium px-1.5 py-0.5 rounded bg-red-500/20 text-red-400">CRITICAL</span>
+                    )}
+                  </div>
+                  <div className="text-xs text-white/40 mt-0.5">
+                    {sup.primaryContact || '—'}
+                    {sup.daysSinceLastContact !== null && (
+                      <> &middot; last contact {sup.daysSinceLastContact}d ago</>
+                    )}
+                  </div>
+                </div>
+                <div className="text-right shrink-0 tabular-nums">
+                  {sup.totalPaidAud > 0 && (
+                    <div className="text-sm text-green-400">{formatMoney(sup.totalPaidAud)}</div>
+                  )}
+                  {sup.outstandingAud > 0 && (
+                    <div className="text-xs text-orange-400">+{formatMoney(sup.outstandingAud)} due</div>
+                  )}
+                  {sup.openOppCount > 0 && (
+                    <div className="text-[10px] text-fuchsia-400">{sup.openOppCount} open · {formatMoney(sup.openOppValueAud)}</div>
+                  )}
+                </div>
+              </Link>
+            ))}
+            {data.projectSupporters.length > 8 && (
+              <div className="text-xs text-white/30 text-center pt-2">
+                +{data.projectSupporters.length - 8} more
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* Funder Briefs — QBE-HQ pattern (2026-05-23) */}
+      {hasFunderBriefs && data.funderBriefs && (
+        <div className="glass-card p-6 mb-8">
+          <h2 className="text-lg font-semibold text-white flex items-center gap-2 mb-1">
+            <Target className="h-5 w-5 text-purple-400" />
+            Funder Briefs
+          </h2>
+          <p className="text-sm text-white/40 mb-4">
+            What each funder asked of us · what we&apos;re asking of them · alignment · next move
+          </p>
+          <div className="space-y-4">
+            {data.funderBriefs.map((b) => {
+              const openAsks = (b.asksFromThem || []).filter((a) => !a.done).length
+              const overdue = b.nextMoveDue ? new Date(b.nextMoveDue) < new Date() : false
+              return (
+                <div key={b.id} className="rounded-lg border border-white/5 p-4 bg-white/[0.02]">
+                  <div className="flex items-start justify-between gap-3 mb-3">
+                    <div className="min-w-0 flex-1">
+                      <div className="flex items-baseline gap-2 flex-wrap">
+                        <h3 className="text-sm font-semibold text-white">{b.briefTitle || `${b.funderSlug} brief`}</h3>
+                        <span className={cn(
+                          'text-[10px] font-medium px-1.5 py-0.5 rounded',
+                          b.alignmentStatus === 'PASS' ? 'bg-green-500/20 text-green-400' :
+                          b.alignmentStatus === 'WARN' ? 'bg-amber-500/20 text-amber-400' :
+                          'bg-red-500/20 text-red-400'
+                        )}>
+                          {b.alignmentStatus}
+                        </span>
+                        {b.askStatus && (
+                          <span className="text-[10px] px-1.5 py-0.5 rounded bg-blue-500/15 text-blue-400">
+                            {b.askStatus}
+                          </span>
+                        )}
+                        {overdue && (
+                          <span className="text-[10px] px-1.5 py-0.5 rounded bg-red-500/20 text-red-400">OVERDUE</span>
+                        )}
+                      </div>
+                      {b.lastFeedbackSummary && (
+                        <p className="text-xs text-white/50 mt-1">{b.lastFeedbackSummary}</p>
+                      )}
+                    </div>
+                    <div className="text-right shrink-0 text-xs">
+                      {b.askAmountAud && (
+                        <div className="text-green-400 tabular-nums font-medium">{formatMoney(b.askAmountAud)}</div>
+                      )}
+                      {b.nextMoveDue && (
+                        <div className={cn('text-[11px] tabular-nums', overdue ? 'text-red-400' : 'text-white/50')}>
+                          due {b.nextMoveDue}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Asks from them */}
+                  {openAsks > 0 && (
+                    <div className="mb-3">
+                      <div className="text-[10px] uppercase tracking-wider text-white/40 mb-1">
+                        Asks from them ({openAsks} open)
+                      </div>
+                      <ul className="space-y-1">
+                        {(b.asksFromThem || []).filter((a) => !a.done).slice(0, 5).map((a, i) => (
+                          <li key={i} className="text-xs text-white/70 flex items-start gap-2">
+                            <Circle className="h-3 w-3 mt-0.5 shrink-0 text-amber-400" />
+                            <span>{a.ask}</span>
+                          </li>
+                        ))}
+                        {openAsks > 5 && <li className="text-[10px] text-white/30">+{openAsks - 5} more</li>}
+                      </ul>
+                    </div>
+                  )}
+
+                  {/* Procurement */}
+                  {b.procurementDeliveredCount !== null && b.procurementUnit && (
+                    <div className="mb-3">
+                      <div className="text-[10px] uppercase tracking-wider text-white/40 mb-1">Procurement</div>
+                      <div className="text-xs text-white/70">
+                        <span className="text-emerald-400 font-medium">{b.procurementDeliveredCount}</span> {b.procurementUnit} delivered
+                        {b.procurementDemandCount && (
+                          <> · <span className="text-fuchsia-400 font-medium">{b.procurementDemandCount}</span> demand</>
+                        )}
+                        {b.procurementNotes && <div className="text-[11px] text-white/40 mt-0.5">{b.procurementNotes}</div>}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Strategy */}
+                  {(b.strategyTheirPriorities?.length > 0 || b.strategyOurClaims?.length > 0) && (
+                    <div className="mb-3 grid grid-cols-2 gap-3">
+                      {b.strategyTheirPriorities?.length > 0 && (
+                        <div>
+                          <div className="text-[10px] uppercase tracking-wider text-white/40 mb-1">Their priorities</div>
+                          <div className="flex flex-wrap gap-1">
+                            {b.strategyTheirPriorities.map((p, i) => (
+                              <span key={i} className="text-[10px] px-1.5 py-0.5 rounded bg-blue-500/10 text-blue-300">{p}</span>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                      {b.strategyOurClaims?.length > 0 && (
+                        <div>
+                          <div className="text-[10px] uppercase tracking-wider text-white/40 mb-1">Our claims</div>
+                          <div className="flex flex-wrap gap-1">
+                            {b.strategyOurClaims.map((c, i) => (
+                              <span key={i} className="text-[10px] px-1.5 py-0.5 rounded bg-emerald-500/10 text-emerald-300">{c}</span>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  )}
+
+                  {/* Next move + links */}
+                  {b.nextMove && (
+                    <div className="mb-2 pt-2 border-t border-white/5">
+                      <div className="text-[10px] uppercase tracking-wider text-white/40 mb-1">Next move</div>
+                      <div className="text-xs text-white/80">
+                        {b.nextMove}
+                        {b.nextMoveOwner && <span className="text-white/40"> · {b.nextMoveOwner}</span>}
+                      </div>
+                    </div>
+                  )}
+
+                  {(b.notionHqUrl || (b.alignmentNotes && b.alignmentStatus !== 'PASS')) && (
+                    <div className="flex items-center justify-between gap-2 pt-2 border-t border-white/5 text-[11px]">
+                      {b.alignmentNotes && b.alignmentStatus !== 'PASS' && (
+                        <div className="text-amber-300 flex-1">⚠ {b.alignmentNotes}</div>
+                      )}
+                      {b.notionHqUrl && (
+                        <a href={b.notionHqUrl} target="_blank" rel="noopener noreferrer"
+                          className="text-blue-400 hover:text-blue-300 shrink-0 flex items-center gap-1">
+                          Notion HQ <ExternalLink className="h-3 w-3" />
+                        </a>
+                      )}
+                    </div>
+                  )}
+                </div>
+              )
+            })}
+          </div>
         </div>
       )}
 

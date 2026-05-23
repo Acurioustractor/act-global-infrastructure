@@ -101,6 +101,12 @@ function toProperties(s) {
     'Framing notes':           { rich_text: s.framing_notes_excerpt ? [{ text: { content: s.framing_notes_excerpt.slice(0, 1900) } }] : [] },
     'Next report due':         s.next_report_due ? { date: { start: s.next_report_due } } : { date: null },
     'Next report name':        { rich_text: s.next_report_name ? [{ text: { content: s.next_report_name.slice(0, 1900) } }] : [] },
+    'Open opps':               { number: s.open_opp_count == null ? null : Number(s.open_opp_count) },
+    'Open opp value AUD':      { number: s.open_opp_value_aud == null ? null : Number(s.open_opp_value_aud) },
+    'Won opps':                { number: s.won_opp_count == null ? null : Number(s.won_opp_count) },
+    'Won opp value AUD':       { number: s.won_opp_value_aud == null ? null : Number(s.won_opp_value_aud) },
+    'Pipelines':               { multi_select: (s.pipelines || []).filter(Boolean).slice(0, 10).map(p => ({ name: p.slice(0, 95) })) },
+    'Latest stage':            { rich_text: s.latest_stage ? [{ text: { content: `${s.latest_stage}${s.latest_stage_pipeline ? ` (${s.latest_stage_pipeline})` : ''}`.slice(0, 1900) } }] : [] },
     'Slug':                    { rich_text: [{ text: { content: s.slug } }] },
     'Synced at':               { date: { start: new Date().toISOString() } },
   };

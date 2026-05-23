@@ -10,8 +10,9 @@ export async function GET(
     const projectCode = decodeURIComponent(code).toUpperCase()
 
     // Parallel fetch monthly financials, variance notes, transactions, budgets, R&D vendors, invoices, pipeline,
-    // funding allocations (S1 2026-05-21), org burn snapshot (S4 2026-05-21), linked contacts (Item 4 2026-05-21).
-    const [monthly, variances, transactions, budgets, rdVendors, salaryAllocs, revenueStreams, invoiceMappings, expenseInvoices, pipeline, cardSpendResult, fundingAllocations, orgBurnSnapshot, linkedContacts] = await Promise.all([
+    // funding allocations (S1 2026-05-21), org burn snapshot (S4 2026-05-21), linked contacts (Item 4 2026-05-21),
+    // GHL pipelines (2026-05-23) — per-pipeline rollup from project_pipelines table.
+    const [monthly, variances, transactions, budgets, rdVendors, salaryAllocs, revenueStreams, invoiceMappings, expenseInvoices, pipeline, cardSpendResult, fundingAllocations, orgBurnSnapshot, linkedContacts, ghlPipelines, projectSupporters, funderBriefs] = await Promise.all([
       supabase
         .from('project_monthly_financials')
         .select('*')
@@ -178,6 +179,27 @@ export async function GET(
           LIMIT 50
         `
       }),
+
+      // 2026-05-23: GHL pipelines rollup for this project
+      supabase
+        .from('project_pipelines')
+        .select('pipeline_name, open_count, won_count, lost_count, open_value_aud, won_value_aud, earliest_open_at, latest_activity_at, stages_present, contacts_count, computed_at')
+        .eq('project_code', projectCode)
+        .order('open_value_aud', { ascending: false }),
+
+      // 2026-05-23: supporters funding this project (filter supporters_intelligence by projects array)
+      supabase
+        .from('supporters_intelligence')
+        .select('slug, name, tier, stage, total_paid_aud, outstanding_aud, outstanding_alert, primary_contact, last_communicated_at, days_since_last_contact, open_opp_count, open_opp_value_aud, won_opp_count, won_opp_value_aud')
+        .contains('projects', [projectCode])
+        .order('total_paid_aud', { ascending: false }),
+
+      // 2026-05-23: funder briefs for this project
+      supabase
+        .from('funder_briefs')
+        .select('*')
+        .eq('project_code', projectCode)
+        .order('next_move_due', { ascending: true, nullsFirst: false }),
     ])
 
     const monthlyData = (monthly.data || []).map((m: any) => ({
@@ -707,6 +729,75 @@ export async function GET(
       pipeline: pipelineData,
       pipelineWeightedTotal,
       pipelineRawCount,
+      // 2026-05-23: GHL pipelines rollup (per pipeline × stage; uses project_pipelines table refreshed daily 06:10am)
+      ghlPipelines: (ghlPipelines.data || []).map((r: any) => ({
+        pipelineName: r.pipeline_name,
+        openCount: r.open_count || 0,
+        wonCount: r.won_count || 0,
+        lostCount: r.lost_count || 0,
+        openValueAud: Number(r.open_value_aud || 0),
+        wonValueAud: Number(r.won_value_aud || 0),
+        earliestOpenAt: r.earliest_open_at,
+        latestActivityAt: r.latest_activity_at,
+        stagesPresent: r.stages_present || [],
+        contactsCount: r.contacts_count || 0,
+        computedAt: r.computed_at,
+      })),
+      ghlPipelineTotals: {
+        openCount: (ghlPipelines.data || []).reduce((s: number, r: any) => s + (r.open_count || 0), 0),
+        wonCount:  (ghlPipelines.data || []).reduce((s: number, r: any) => s + (r.won_count  || 0), 0),
+        openValueAud: (ghlPipelines.data || []).reduce((s: number, r: any) => s + Number(r.open_value_aud || 0), 0),
+        wonValueAud:  (ghlPipelines.data || []).reduce((s: number, r: any) => s + Number(r.won_value_aud  || 0), 0),
+        pipelinesActive: (ghlPipelines.data || []).length,
+      },
+      // 2026-05-23: supporters funding this project
+      projectSupporters: (projectSupporters.data || []).map((s: any) => ({
+        slug: s.slug,
+        name: s.name,
+        tier: s.tier,
+        stage: s.stage,
+        totalPaidAud: Number(s.total_paid_aud || 0),
+        outstandingAud: Number(s.outstanding_aud || 0),
+        outstandingAlert: s.outstanding_alert,
+        primaryContact: s.primary_contact,
+        lastCommunicatedAt: s.last_communicated_at,
+        daysSinceLastContact: s.days_since_last_contact,
+        openOppCount: s.open_opp_count || 0,
+        openOppValueAud: Number(s.open_opp_value_aud || 0),
+        wonOppCount: s.won_opp_count || 0,
+        wonOppValueAud: Number(s.won_opp_value_aud || 0),
+      })),
+      projectSupportersTotals: {
+        count: (projectSupporters.data || []).length,
+        totalPaidAud: (projectSupporters.data || []).reduce((s: number, r: any) => s + Number(r.total_paid_aud || 0), 0),
+        totalOutstandingAud: (projectSupporters.data || []).reduce((s: number, r: any) => s + Number(r.outstanding_aud || 0), 0),
+        critical: (projectSupporters.data || []).filter((r: any) => r.outstanding_alert === 'CRITICAL').length,
+      },
+      // 2026-05-23: funder briefs for this project (QBE-HQ pattern generalised)
+      funderBriefs: (funderBriefs.data || []).map((r: any) => ({
+        id: r.id,
+        funderSlug: r.funder_slug,
+        briefTitle: r.brief_title,
+        status: r.status,
+        asksFromThem: r.asks_from_them || [],
+        askAmountAud: r.ask_amount_aud,
+        askOutcome: r.ask_outcome,
+        askStatus: r.ask_status,
+        alignmentStatus: r.alignment_status,
+        alignmentNotes: r.alignment_notes,
+        procurementDeliveredCount: r.procurement_delivered_count,
+        procurementUnit: r.procurement_unit,
+        procurementDemandCount: r.procurement_demand_count,
+        procurementNotes: r.procurement_notes,
+        strategyTheirPriorities: r.strategy_their_priorities || [],
+        strategyOurClaims: r.strategy_our_claims || [],
+        nextMove: r.next_move,
+        nextMoveOwner: r.next_move_owner,
+        nextMoveDue: r.next_move_due,
+        notionHqUrl: r.notion_hq_url,
+        lastFeedbackDate: r.last_feedback_date,
+        lastFeedbackSummary: r.last_feedback_summary,
+      })),
       // NEW: Expense invoices
       expenses: expenseData,
       expensesByCategory,
