@@ -107,6 +107,24 @@ const cronScripts = [
     cron_restart: '30 7 * * *',
   },
   {
+    // Daily 7:35am AEST: push new candidates from Supabase → Notion
+    // (Newsletter candidates DB). Creates a row per new candidate so Ben
+    // can tap include/exclude/defer in Notion's UI.
+    name: 'newsletter-candidates-to-notion',
+    script: 'scripts/sync-candidates-to-notion.mjs',
+    args: '--apply',
+    cron_restart: '35 7 * * *',
+  },
+  {
+    // Business hours every 30 min: read Notion status taps back to Supabase.
+    // Status changes (include/exclude/defer) + audiences overrides flow
+    // back here so the drafter sees them.
+    name: 'newsletter-status-from-notion',
+    script: 'scripts/sync-notion-candidate-status.mjs',
+    args: '--apply',
+    cron_restart: '0,30 9-18 * * *',
+  },
+  {
     // Daily 7am AEST: refresh "🎯 Today's Focus" + sweep for drift signals
     // (stuck opps · overdue invoices · FAIL cadence · easy-win storyteller
     // transcripts) and auto-create new Action Items rows.
