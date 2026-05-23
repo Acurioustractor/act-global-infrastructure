@@ -245,12 +245,20 @@ export class GHLService {
    * @returns {Promise<Array>} Matching contacts
    */
   async searchContacts(query) {
-    const queryParams = new URLSearchParams({
-      locationId: this.locationId,
-      query: query
+    // GHL v2 API: POST /contacts/search with JSON body. The older GET-style
+    // /contacts/search/?query=X 400s with "Contact with id search not found"
+    // because GHL interprets `search` as a contact ID in the path.
+    // Docs: https://highlevel.stoplight.io/docs/integrations/dba1e4d8d2eb6-search-contacts
+    const data = await this.request('/contacts/search', {
+      method: 'POST',
+      body: JSON.stringify({
+        locationId: this.locationId,
+        pageLimit: 100,
+        // GHL's "query" param is a free-text match across name + email + phone.
+        // The filters array supports more precise constraints if needed.
+        query,
+      }),
     });
-
-    const data = await this.request(`/contacts/search/?${queryParams}`);
     return data.contacts || [];
   }
 
