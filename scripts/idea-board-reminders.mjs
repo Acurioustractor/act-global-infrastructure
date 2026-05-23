@@ -200,7 +200,7 @@ async function main() {
     // re-ping the same nudge daily). TTL 24h, so tomorrow's run can land
     // if the set has rotated.
     const hash = alertHash(owner, shown.map(i => i.id), overflow);
-    if (!shouldSend(`idea-reminders-${owner}`, hash, { ttlHours: 24 })) {
+    if (!await shouldSend(`idea-reminders-${owner}`, hash, { ttlHours: 24 })) {
       console.log(`Suppressed reminders for owner=${owner} (same stale-idea set as last send)`);
       continue;
     }

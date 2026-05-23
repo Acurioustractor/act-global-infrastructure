@@ -492,8 +492,10 @@ async function tagTransactions() {
       ].filter(Boolean).join('\n');
 
       const hash = alertHash(unmatchedFY26.length, vendorList);
-      if (shouldSend('tagger-unmatched', hash, { ttlHours: 24 })) {
-        await sendTelegram(msg);
+      if (await shouldSend('tagger-unmatched', hash, { ttlHours: 24 })) {
+        const { snoozeButtons } = await import('./lib/telegram-dedup.mjs');
+        const { buildInlineKeyboard } = await import('./lib/telegram.mjs');
+        await sendTelegram(msg, { replyMarkup: buildInlineKeyboard(snoozeButtons('tagger-unmatched')) });
         markSent('tagger-unmatched', hash);
       }
     }

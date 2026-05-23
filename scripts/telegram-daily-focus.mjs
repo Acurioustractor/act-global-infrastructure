@@ -179,11 +179,13 @@ if (!TG_CHAT) { console.error('No TELEGRAM_AUTHORIZED_USERS configured'); proces
 // twice on the same day (e.g. PM2 restart) we don't want a duplicate.
 // TTL 12h so a same-day double-fire is suppressed but tomorrow's run lands.
 const hash = alertHash(message);
-if (!shouldSend('daily-focus', hash, { ttlHours: 12 })) {
+if (!await shouldSend('daily-focus', hash, { ttlHours: 12 })) {
   console.log('Suppressed (same focus text sent in last 12h).');
   process.exit(0);
 }
 
-const ok = await sendTelegram(message);
+const { snoozeButtons } = await import(join(__dirname, 'lib/telegram-dedup.mjs'));
+const { buildInlineKeyboard } = await import(join(__dirname, 'lib/telegram.mjs'));
+const ok = await sendTelegram(message, { replyMarkup: buildInlineKeyboard(snoozeButtons('daily-focus')) });
 if (ok) markSent('daily-focus', hash);
 console.log(ok ? 'Sent.' : 'Failed.');

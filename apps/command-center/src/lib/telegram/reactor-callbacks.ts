@@ -52,8 +52,56 @@ export async function handleReactorCallback(
       return handleGmailCallback(action, entityId)
     case 'idea':
       return handleIdeaCallback(action, entityId, parts[3])
+    case 'mute':
+      // mute:24h:<source-key>  /  mute:7d:<source-key>  /  mute:forever:<source-key>
+      // entityId here is the source-key after `mute:24h:`. We pass the
+      // original parts to handleMuteCallback to keep parsing simple.
+      return handleMuteCallback(action, parts.slice(2).join(':'), chatId)
     default:
       return { toast: `Unknown: ${domain}` }
+  }
+}
+
+async function handleMuteCallback(
+  action: string,
+  source: string,
+  chatId: number,
+): Promise<CallbackResult> {
+  if (!source) return { toast: 'Missing source key' }
+
+  // Map snooze duration → hours
+  const hoursByAction: Record<string, number | null> = {
+    '24h': 24,
+    '7d': 24 * 7,
+    'forever': null,
+  }
+  if (!(action in hoursByAction)) {
+    return { toast: `Unknown mute action: ${action}` }
+  }
+  const hours = hoursByAction[action]
+  const muted_until = hours === null ? null : new Date(Date.now() + hours * 3600 * 1000).toISOString()
+
+  const { error } = await supabase
+    .from('telegram_mutes')
+    .upsert(
+      {
+        source,
+        muted_until,
+        muted_at: new Date().toISOString(),
+        muted_by: String(chatId),
+        reason: action === 'forever' ? 'muted forever' : `snoozed ${action}`,
+      },
+      { onConflict: 'source' },
+    )
+
+  if (error) {
+    return { toast: `Mute failed: ${error.message.slice(0, 180)}` }
+  }
+
+  const label = action === 'forever' ? '🔇 muted' : `😴 snoozed ${action}`
+  return {
+    toast: label,
+    editMessage: `${label} — ${source}`,
   }
 }
 

@@ -147,7 +147,7 @@ async function main() {
   // Dedup: same set of actionable signals → don't re-ping
   const { alertHash, shouldSend, markSent } = await import('./lib/telegram-dedup.mjs');
   const hash = alertHash(signals);
-  if (!shouldSend('money-alerts', hash, { ttlHours: 18 })) {
+  if (!await shouldSend('money-alerts', hash, { ttlHours: 18 })) {
     log('Suppressed (same signals as last send).');
     return;
   }

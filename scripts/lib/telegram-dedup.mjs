@@ -80,15 +80,100 @@ export function markSent(source, hash) {
  * Convenience wrapper. Returns true if the caller should send.
  * Caller is still responsible for calling sendTelegram() + markSent().
  *
+ * Now async — also checks Supabase telegram_mutes table.
+ * Falls open (allow send) if mute check fails.
+ *
  * Example:
- *   if (!shouldSend('compliance', hash)) return;
+ *   if (!await shouldSend('compliance', hash)) return;
  *   await sendTelegram(msg);
  *   markSent('compliance', hash);
  */
-export function shouldSend(source, hash, opts) {
+export async function shouldSend(source, hash, opts) {
+  // 1. Mute check (Supabase shared state — set by bot inline buttons)
+  if (await isMuted(source)) {
+    console.log(`[telegram-dedup] ${source} suppressed (muted)`);
+    return false;
+  }
+  // 2. Dedup check (local filesystem hash compare)
   if (sentRecently(source, hash, opts)) {
     console.log(`[telegram-dedup] ${source} suppressed (hash=${hash} sent within ${opts?.ttlHours ?? 24}h)`);
     return false;
   }
   return true;
+}
+
+let _supabase = null;
+async function getSupabase() {
+  if (_supabase) return _supabase;
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL;
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  if (!url || !key) return null;
+  const { createClient } = await import('@supabase/supabase-js');
+  _supabase = createClient(url, key);
+  return _supabase;
+}
+
+/**
+ * Is this source currently muted?
+ * Reads telegram_mutes table. NULL muted_until = forever.
+ * Returns false on any error (fail open — don't suppress sends on infra blips).
+ */
+export async function isMuted(source) {
+  try {
+    const supabase = await getSupabase();
+    if (!supabase) return false;
+    const { data, error } = await supabase
+      .from('telegram_mutes')
+      .select('muted_until')
+      .eq('source', source)
+      .maybeSingle();
+    if (error || !data) return false;
+    if (data.muted_until === null) return true; // forever
+    return Date.parse(data.muted_until) > Date.now();
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Mute a source. hours = null means forever.
+ * Called by bot callback handler (mute:24h:source-key).
+ */
+export async function muteFor(source, hours, mutedBy) {
+  const supabase = await getSupabase();
+  if (!supabase) throw new Error('Supabase not configured');
+  const muted_until = hours === null ? null : new Date(Date.now() + hours * 3600 * 1000).toISOString();
+  const { error } = await supabase
+    .from('telegram_mutes')
+    .upsert({
+      source,
+      muted_until,
+      muted_at: new Date().toISOString(),
+      muted_by: mutedBy ? String(mutedBy) : null,
+      reason: hours === null ? 'muted forever' : `snoozed ${hours}h`,
+    }, { onConflict: 'source' });
+  if (error) throw error;
+}
+
+/**
+ * Unmute a source.
+ */
+export async function unmute(source) {
+  const supabase = await getSupabase();
+  if (!supabase) throw new Error('Supabase not configured');
+  await supabase.from('telegram_mutes').delete().eq('source', source);
+}
+
+/**
+ * Build inline keyboard rows with snooze/mute buttons. Returned
+ * structure matches buildInlineKeyboard() input in scripts/lib/telegram.mjs.
+ */
+export function snoozeButtons(source) {
+  return [
+    [
+      { text: '😴 24h', callback_data: `mute:24h:${source}` },
+      { text: '🛌 7d', callback_data: `mute:7d:${source}` },
+      { text: '🔇 Mute', callback_data: `mute:forever:${source}` },
+    ],
+  ];
 }

@@ -34,7 +34,7 @@ export async function sendTelegram(message, { parseMode = 'Markdown', replyMarku
 
   // ─── Quiet hours guard (21:00 – 06:30 AEST) ───────────────────────────
   // Hold any non-urgent push during quiet hours by appending to a queue
-  // file. A drain cron at 07:00am sends the de-duped queue as a single
+  // file. A drain cron at 06:35am sends the de-duped queue as a single
   // morning summary. Urgent pushes (set opts.urgent=true) bypass the guard.
   if (!urgent && process.env.TG_FORCE !== '1') {
     const nowAEST = new Date(Date.now() + 10 * 60 * 60 * 1000); // UTC + 10h
@@ -61,6 +61,48 @@ export async function sendTelegram(message, { parseMode = 'Markdown', replyMarku
         console.error('[telegram] queue write failed:', e.message);
       }
       return false;
+    }
+  }
+
+  // ─── Daily push budget (default 8/day) ────────────────────────────────
+  // Counter at ~/.act-tg-budget.json — {date: 'YYYY-MM-DD', count: N}.
+  // Urgent pushes don't count toward the budget AND aren't blocked.
+  // Non-urgent over-budget pushes queue for next morning drain.
+  if (!urgent && process.env.TG_FORCE !== '1') {
+    try {
+      const { readFileSync, writeFileSync, existsSync, appendFileSync } = await import('node:fs');
+      const { homedir } = await import('node:os');
+      const { join } = await import('node:path');
+      const BUDGET_FILE = join(homedir(), '.act-tg-budget.json');
+      const cap = parseInt(process.env.TG_DAILY_BUDGET || '8', 10);
+      const today = new Date().toISOString().slice(0, 10);
+      let state = { date: today, count: 0 };
+      if (existsSync(BUDGET_FILE)) {
+        try {
+          const parsed = JSON.parse(readFileSync(BUDGET_FILE, 'utf8'));
+          if (parsed.date === today) state = parsed;
+        } catch { /* reset on parse error */ }
+      }
+      if (state.count >= cap) {
+        appendFileSync('/tmp/.tg-queue.jsonl',
+          JSON.stringify({
+            queued_at: new Date().toISOString(),
+            chat_id: chatId,
+            message,
+            parse_mode: parseMode,
+            reply_markup: replyMarkup,
+            reason: 'budget-exceeded',
+          }) + '\n'
+        );
+        console.log(`[telegram] queued (budget ${state.count}/${cap} exceeded today)`);
+        return false;
+      }
+      // Bump count BEFORE we attempt the send so racing crons don't all sneak past
+      state.count += 1;
+      writeFileSync(BUDGET_FILE, JSON.stringify(state));
+    } catch (e) {
+      // Budget tracking failure shouldn't block sends — fail open.
+      console.warn('[telegram] budget tracking failed:', e.message);
     }
   }
 
