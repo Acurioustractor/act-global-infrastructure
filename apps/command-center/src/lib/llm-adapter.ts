@@ -29,11 +29,17 @@ type Message = Anthropic.Messages.Message;
 const PROVIDER = (process.env.LLM_PROVIDER || 'anthropic').toLowerCase();
 const MINIMAX_BASE_URL = process.env.MINIMAX_BASE_URL || 'https://api.minimax.io/v1';
 
+// Haiku-tier routes to MiniMax-M2.7 (regular), NOT highspeed.
+// Highspeed is a separate $40/mo "Plus-Highspeed" subscription tier that we
+// don't have — Token Plan Plus ($20/mo) only covers MiniMax-M2.7 regular.
+// Discovered 2026-05-23: every probe to MiniMax-M2.7-highspeed returns
+// `429 (0/0 used)` because the cap is structurally zero on Plan Plus.
+// To upgrade: see https://platform.minimax.io/docs/token-plan/intro
 const MINIMAX_MODEL_MAP: Record<string, string> = {
-  'claude-haiku-4-5': 'MiniMax-M2.7-highspeed',
-  'claude-haiku-4-5-20251001': 'MiniMax-M2.7-highspeed',
-  'claude-3-5-haiku-20241022': 'MiniMax-M2.7-highspeed',
-  'claude-3-haiku-20240307': 'MiniMax-M2.7-highspeed',
+  'claude-haiku-4-5': 'MiniMax-M2.7',
+  'claude-haiku-4-5-20251001': 'MiniMax-M2.7',
+  'claude-3-5-haiku-20241022': 'MiniMax-M2.7',
+  'claude-3-haiku-20240307': 'MiniMax-M2.7',
   'claude-sonnet-4-6': 'MiniMax-M2.7',
   'claude-sonnet-4-5-20250929': 'MiniMax-M2.7',
   'claude-sonnet-4-20250514': 'MiniMax-M2.7',

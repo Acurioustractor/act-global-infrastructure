@@ -110,7 +110,10 @@ export function selectModel(task, provider = 'anthropic') {
   const MODELS = {
     anthropic: { cheap: 'claude-haiku-4-5', mid: 'claude-sonnet-4-6', expensive: 'claude-opus-4-7' },
     openai: { cheap: 'gpt-4o-mini', mid: 'gpt-4o', expensive: 'gpt-4o' },
-    minimax: { cheap: 'MiniMax-M2.7-highspeed', mid: 'MiniMax-M2.7', expensive: 'MiniMax-M2.7' },
+    // cheap tier uses MiniMax-M2.7 (regular) — highspeed requires the separate
+    // Plus-Highspeed subscription ($40/mo) which we don't have. See note in
+    // apps/command-center/src/lib/llm-adapter.ts for context.
+    minimax: { cheap: 'MiniMax-M2.7', mid: 'MiniMax-M2.7', expensive: 'MiniMax-M2.7' },
     gemini: { cheap: 'gemini-2.5-flash-lite', mid: 'gemini-2.5-flash', expensive: 'gemini-2.5-pro' },
   };
 
