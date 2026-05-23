@@ -487,7 +487,7 @@ const cronScripts = [
     name: 'auto-tag-transactions',
     script: 'scripts/tag-transactions-by-vendor.mjs',
     args: '--apply',
-    cron_restart: '15 */6 * * *', // Every 6 hours +15min (after xero-sync at :00)
+    cron_restart: '15 */2 * * *', // Every 2 hours +15min (continuous tagging — was 6h)
   },
   {
     name: 'enrich-communications',
