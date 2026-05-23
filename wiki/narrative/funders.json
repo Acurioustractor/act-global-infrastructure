@@ -785,6 +785,51 @@
         "outstanding_ar_aud": 0,
         "last_invoice_date": "2025-10-21"
       }
+    },
+    "ufgc-gmbh": {
+      "name": "UFGC GmbH",
+      "stage": "needs-writeup",
+      "needs_writeup": true,
+      "themes": ["international", "technical"],
+      "tone": "international, technical",
+      "claims_to_lead_with": [],
+      "framing_notes": "Auto-added from xero_invoices on 2026-05-23. Austrian recipient of ACT-CORE work. Single invoice $3,267 paid 2026-03-17. Investigate relationship + future opportunity. Address: Grillparzerstraße 26, 8010 Graz, Austria.",
+      "projects_funded": ["ACT-CORE"],
+      "xero_summary": {
+        "paid_total_aud": 3267.48,
+        "outstanding_ar_aud": 0,
+        "last_invoice_date": "2026-03-17"
+      }
+    },
+    "qld-housing-department": {
+      "name": "QLD Department of Housing",
+      "stage": "needs-writeup",
+      "needs_writeup": true,
+      "themes": ["government", "housing", "remote-communities"],
+      "tone": "government-formal, evidence-grounded",
+      "claims_to_lead_with": [],
+      "framing_notes": "Auto-added from xero_invoices on 2026-05-23. Three small invoices totalling $1,500 across 2025. Farm project relationship (ACT-FM). Investigate scope + further partnership potential.",
+      "projects_funded": ["ACT-FM"],
+      "xero_summary": {
+        "paid_total_aud": 1500,
+        "outstanding_ar_aud": 0,
+        "last_invoice_date": "2025-09-05"
+      }
+    },
+    "minjerribah-moorgumpin": {
+      "name": "Minjerribah Moorgumpin (Elders-In-Council) Aboriginal Corporation",
+      "stage": "needs-writeup",
+      "needs_writeup": true,
+      "themes": ["first-nations", "elders-led", "community-led"],
+      "tone": "First Nations-led, community-respectful",
+      "claims_to_lead_with": [],
+      "framing_notes": "Auto-added from xero_invoices on 2026-05-23. ACT-JH partner Elders' organisation on Minjerribah (Stradbroke Island). Two small invoices totalling $1,155 paid 2025. Justice work via JusticeHub.",
+      "projects_funded": ["ACT-JH"],
+      "xero_summary": {
+        "paid_total_aud": 1155,
+        "outstanding_ar_aud": 0,
+        "last_invoice_date": "2025-07-17"
+      }
     }
   },
   "stages": {

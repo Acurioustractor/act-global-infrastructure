@@ -134,6 +134,24 @@ const cronScripts = [
     cron_restart: '*/10 * * * *',
   },
   {
+    // Daily 06:00am AEST: rebuild the supporter intelligence view.
+    // Joins Xero invoices + funders.json + GHL contacts into one row per
+    // supporter org. Output: supporters_intelligence Supabase table +
+    // thoughts/shared/reports/supporters-intelligence-latest.json.
+    name: 'supporters-intelligence',
+    script: 'scripts/build-supporters-intelligence.mjs',
+    cron_restart: '0 6 * * *',
+  },
+  {
+    // Daily 06:05am AEST (5min after the build above): push the supporter
+    // intelligence to Notion "Supporters" DB. Notion becomes the human
+    // surface for tier + outstanding alerts + framing notes per org.
+    name: 'supporters-to-notion',
+    script: 'scripts/sync-supporters-to-notion.mjs',
+    args: '--apply',
+    cron_restart: '5 6 * * *',
+  },
+  {
     // Daily 7am AEST: refresh "🎯 Today's Focus" + sweep for drift signals
     // (stuck opps · overdue invoices · FAIL cadence · easy-win storyteller
     // transcripts) and auto-create new Action Items rows.
