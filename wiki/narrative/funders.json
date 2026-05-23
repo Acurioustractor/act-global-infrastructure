@@ -2,11 +2,11 @@
   "$schema": "wiki/narrative/funders.schema.json",
   "description": "Active and prospect funders, with the narrative claims that should lead any pitch to them. Used by narrative-draft.mjs --funder <slug> to assemble pitch briefs targeted to the right thesis.",
   "version": 2,
-  "updated": "2026-05-16",
+  "updated": "2026-05-23",
   "funders": {
     "minderoo": {
       "name": "Minderoo Foundation",
-      "stage": "ask-pending",
+      "stage": "paused",
       "ask_amount_aud": 2900000,
       "deadline": "2026-05-15",
       "primary_contact": "Lucy Stronach",
@@ -34,14 +34,21 @@
       "claims_to_avoid": [
         "contained:claim-evidence-is-settled-question-is-political-will"
       ],
-      "framing_notes": "Minderoo's current public strategy is Communities-first: place-based engagement, local knowledge and lived experience, stronger child and family supports, and vibrant connected communities. Lead with the anchor-community hold, not JusticeHub as a product. JusticeHub is the evidence layer under the community work; The Brave Ones is the human trace layer; the library is the destination, not the opening noun. Use Minderoo's own role language where possible: Partner, Develop, Generate Evidence, Advocate. Primary ask: $2.9M over 3 years (the canonical Three Circles ask). Best staged entry: $780K for Year 1 with a pathway into Years 2-3. Use the older $3.43M Crescendo frame only if Lucy invites ACT upward into the expanded library / artefact expression. Avoid the confrontational frame — they fund builders, not critics. Source docs: three-circles.md (canonical pitch), how-should-act-pitch-minderoo-in-line-with-its-current-strategy-and-what-money-f.md (strategy synthesis), and the-full-idea.md (comprehensive walkthrough)."
+      "framing_notes": "Minderoo's current public strategy is Communities-first: place-based engagement, local knowledge and lived experience, stronger child and family supports, and vibrant connected communities. Lead with the anchor-community hold, not JusticeHub as a product. JusticeHub is the evidence layer under the community work; The Brave Ones is the human trace layer; the library is the destination, not the opening noun. Use Minderoo's own role language where possible: Partner, Develop, Generate Evidence, Advocate. Primary ask: $2.9M over 3 years (the canonical Three Circles ask). Best staged entry: $780K for Year 1 with a pathway into Years 2-3. Use the older $3.43M Crescendo frame only if Lucy invites ACT upward into the expanded library / artefact expression. Avoid the confrontational frame — they fund builders, not critics. Source docs: three-circles.md (canonical pitch), how-should-act-pitch-minderoo-in-line-with-its-current-strategy-and-what-money-f.md (strategy synthesis), and the-full-idea.md (comprehensive walkthrough).",
+      "primary_email": "lstronach@minderoo.org",
+      "last_communicated_at": "2026-05-14",
+      "projects_funded": [
+        "ACT-CN",
+        "ACT-JH"
+      ],
+      "pause_note": "Lucy paused justice conversations 2026-05-14 — Minderoo internal restructure. Re-engage Q3 FY27 or on her signal."
     },
     "qbe-catalysing-impact": {
       "name": "QBE Catalysing Impact",
-      "stage": "term-sheet-pending",
+      "stage": "active-partner",
       "ask_amount_aud": null,
       "deadline": null,
-      "primary_contact": null,
+      "primary_contact": "Jay Boolkin (SIH admin) / Matt Allen (Goods diagnostic)",
       "themes": [
         "enterprise",
         "unit-economics",
@@ -55,14 +62,21 @@
         "goods-on-country:claim-not-charity-its-enterprise"
       ],
       "claims_to_avoid": [],
-      "framing_notes": "Investor language. Lead with the delivered cost number, the decision band, the handover binary. Do NOT pitch this as a charity case. Do NOT show up without the actual cost report — the whole point of the cost report doc is that QBE will not move without it."
+      "framing_notes": "Investor language. Lead with the delivered cost number, the decision band, the handover binary. Do NOT pitch this as a charity case. Do NOT show up without the actual cost report — the whole point of the cost report doc is that QBE will not move without it.",
+      "primary_email": "jay@socialimpacthub.org, matt.allen@socialimpacthub.org",
+      "cc_email": "malcolm.aikman@socialimpacthub.org",
+      "last_communicated_at": "2026-05-19",
+      "projects_funded": [
+        "ACT-GD"
+      ],
+      "administration_note": "Relationship runs through Social Impact Hub admin team, not QBE direct. Catalysing Impact 2026 cohort."
     },
     "dusseldorp-forum": {
       "name": "Dusseldorp Forum",
       "stage": "active-partner",
       "ask_amount_aud": 16500,
       "deadline": null,
-      "primary_contact": "Rachel Fyfe / Jessica Duffy",
+      "primary_contact": "Jessica Duffy / Margot Beach (Teya + Rachel CC)",
       "themes": [
         "education",
         "youth-voice",
@@ -75,14 +89,21 @@
         "contained:claim-detention-doesnt-work"
       ],
       "claims_to_avoid": [],
-      "framing_notes": "Dusseldorp already funds — this is a deepening relationship, not a new ask. Lead with the education angle (18% of detained kids complete education), then young-people-as-experts. They have the education frame in their DNA."
+      "framing_notes": "Dusseldorp already funds — this is a deepening relationship, not a new ask. Lead with the education angle (18% of detained kids complete education), then young-people-as-experts. They have the education frame in their DNA.",
+      "primary_email": "jessicaduffy@dusseldorp.org.au, margotbeach@dusseldorp.org.au",
+      "cc_email": "teya@dusseldorp.org.au, rachelfyfe@dusseldorp.org.au",
+      "last_communicated_at": "2026-05-19",
+      "projects_funded": [
+        "ACT-CN",
+        "ACT-JH"
+      ]
     },
     "paul-ramsay-foundation": {
       "name": "Paul Ramsay Foundation",
       "stage": "warm",
       "ask_amount_aud": null,
       "deadline": null,
-      "primary_contact": "William Frazer",
+      "primary_contact": "William Frazer (Jonas + Prebhjot + Julia CC)",
       "themes": [
         "systems-change",
         "evidence-based",
@@ -97,11 +118,18 @@
       "claims_to_avoid": [
         "contained:claim-built-by-hand"
       ],
-      "framing_notes": "Stage upgraded from cold 2026-04-24: Xero shows 2 paid invoices (small, $7,469 total) and William Frazer is tagged partner+justicehub in GHL — relationship is warmer than cold. Last comm 80 days ago (hello@ address, early Feb). PRF thinks deeply about systems change. Lead with the cost evidence, then the verified-intervention engine (ALMA), then the platform stack as the system-change lever. PRF will be skeptical of 'two people built it with hands' — for them, lead with infrastructure, not artisanship."
+      "framing_notes": "Stage upgraded from cold 2026-04-24: Xero shows 2 paid invoices (small, $7,469 total) and William Frazer is tagged partner+justicehub in GHL — relationship is warmer than cold. Last comm 80 days ago (hello@ address, early Feb). PRF thinks deeply about systems change. Lead with the cost evidence, then the verified-intervention engine (ALMA), then the platform stack as the system-change lever. PRF will be skeptical of 'two people built it with hands' — for them, lead with infrastructure, not artisanship.",
+      "primary_email": "wfrazer@paulramsayfoundation.org.au",
+      "cc_email": "jonas@paulramsayfoundation.org.au, pkaur@paulramsayfoundation.org.au, jpayne@paulramsayfoundation.org.au",
+      "last_communicated_at": null,
+      "projects_funded": [
+        "ACT-GD",
+        "ACT-JH"
+      ]
     },
     "tim-fairfax": {
       "name": "Tim Fairfax Family Foundation",
-      "stage": "warm-cold",
+      "stage": "warm",
       "ask_amount_aud": null,
       "deadline": null,
       "primary_contact": "Katie Norman",
@@ -117,7 +145,13 @@
         "contained:claim-young-people-as-experts"
       ],
       "claims_to_avoid": [],
-      "framing_notes": "Tim Fairfax loves regional and community-led. Lead with Room 3 (Mounty Yarns, PICC, Oonchiumpa) and the touring model. The container-as-method is a creative-practice claim that lands well here."
+      "framing_notes": "Tim Fairfax loves regional and community-led. Lead with Room 3 (Mounty Yarns, PICC, Oonchiumpa) and the touring model. The container-as-method is a creative-practice claim that lands well here.",
+      "primary_email": "knorman@tfff.org.au",
+      "last_communicated_at": "2026-05-20",
+      "projects_funded": [
+        "ACT-EL",
+        "ACT-JH"
+      ]
     },
     "smith-family": {
       "name": "The Smith Family",
@@ -176,7 +210,7 @@
       "stage": "active-partner",
       "ask_amount_aud": 60000,
       "deadline": null,
-      "primary_contact": null,
+      "primary_contact": "Anne Gripper",
       "themes": [
         "impact-storytelling",
         "wind-down-legacy",
@@ -191,7 +225,13 @@
         "empathy-ledger:claim-the-loop-is-the-product"
       ],
       "claims_to_avoid": [],
-      "framing_notes": "UNVERIFIED STAGE as of 2026-04-24: wiki claims active-partner + $60K but Xero has no JCF invoice. Validate the relationship status with Nic before drafting from this entry. If confirmed, keep framing below. JCF has 5 years remaining in their mandate ('15 Down — 5 To Go'). They want impact storytelling for fundraising / wind-down. The Tanzania + Rwanda Africa visit (Sep 2025) is the entry point. Pitch as a multi-year retainer ($40-80K/yr) — not a project grant. We deliver the platform, the editorial pipeline, the annual reports, and the consent-respecting story library across all JCF beneficiaries. The world tour visits the African beneficiaries directly — fieldwork at no marginal cost."
+      "framing_notes": "UNVERIFIED STAGE as of 2026-04-24: wiki claims active-partner + $60K but Xero has no JCF invoice. Validate the relationship status with Nic before drafting from this entry. If confirmed, keep framing below. JCF has 5 years remaining in their mandate ('15 Down — 5 To Go'). They want impact storytelling for fundraising / wind-down. The Tanzania + Rwanda Africa visit (Sep 2025) is the entry point. Pitch as a multi-year retainer ($40-80K/yr) — not a project grant. We deliver the platform, the editorial pipeline, the annual reports, and the consent-respecting story library across all JCF beneficiaries. The world tour visits the African beneficiaries directly — fieldwork at no marginal cost.",
+      "primary_email": "anne.gripper@outlook.com",
+      "last_communicated_at": "2026-05-21",
+      "projects_funded": [
+        "ACT-EL",
+        "ACT-GD"
+      ]
     },
     "atlassian-foundation": {
       "name": "Atlassian Foundation",
@@ -233,7 +273,13 @@
         "goods-on-country:claim-not-charity-its-enterprise"
       ],
       "claims_to_avoid": [],
-      "framing_notes": "Active multi-tranche partner. Xero shows $402,930 received + $132,000 AUTHORISED across 7 tranches over 14 months (INV-0321 $132K currently outstanding 37d). No single canonical ask — relationship funds in rolling tranches on project ACT-GD. Last comm 10 days ago, warm. Next action (only-Ben): call Sally or Alexandra to confirm INV-0321 payment AND flag Pty migration — from 1 July 2026 tranches invoice to A Curious Tractor Pty Ltd ACN 697 347 676. Tour funder sponsorship candidate. Lead with the closed-loop framing and the regional / Indigenous-led work."
+      "framing_notes": "Active multi-tranche partner. Xero shows $402,930 received + $132,000 AUTHORISED across 7 tranches over 14 months (INV-0321 $132K currently outstanding 37d). No single canonical ask — relationship funds in rolling tranches on project ACT-GD. Last comm 10 days ago, warm. Next action (only-Ben): call Sally or Alexandra to confirm INV-0321 payment AND flag Pty migration — from 1 July 2026 tranches invoice to A Curious Tractor Pty Ltd ACN 697 347 676. Tour funder sponsorship candidate. Lead with the closed-loop framing and the regional / Indigenous-led work.",
+      "primary_email": "s.grimsley-ballard@snowfoundation.org.au, a.lageleekean@snowfoundation.org.au",
+      "cc_email": "g.byron@snowfoundation.org.au, a.machuca@snowfoundation.org.au, c.ludovici@snowfoundation.org.au",
+      "last_communicated_at": "2026-05-20",
+      "projects_funded": [
+        "ACT-GD"
+      ]
     },
     "patagonia": {
       "name": "Patagonia Environmental + Social Initiatives",
@@ -299,7 +345,7 @@
       "stage": "active-partner",
       "ask_amount_aud": 84700,
       "deadline": null,
-      "primary_contact": null,
+      "primary_contact": "Randle Walker / Jodie Tilmouth",
       "themes": [
         "indigenous-led",
         "central-australia",
@@ -312,7 +358,12 @@
         "goods-on-country:claim-handover-is-the-test"
       ],
       "claims_to_avoid": [],
-      "framing_notes": "Active partner via Goods on Country Production Plant. Tranche 1 ($85,712) paid Nov 2025. Tranche 2 (INV-0314 $84,700) currently DRAFT 70 days old pending only-Ben decision — send / void / reissue-from-Pty post-cutover. Named in Goods → Minderoo pitch as live pipeline. See thoughts/shared/drafts/centrecorp-feb-2026-invoice-forensics.md for history. Lead with completed-plant evidence and unit economics, not a fresh pitch — relationship is built."
+      "framing_notes": "Active partner via Goods on Country Production Plant. Tranche 1 ($85,712) paid Nov 2025. Tranche 2 (INV-0314 $84,700) currently DRAFT 70 days old pending only-Ben decision — send / void / reissue-from-Pty post-cutover. Named in Goods → Minderoo pitch as live pipeline. See thoughts/shared/drafts/centrecorp-feb-2026-invoice-forensics.md for history. Lead with completed-plant evidence and unit economics, not a fresh pitch — relationship is built.",
+      "primary_email": "randle@centrecorp.com.au, jodie@centrecorp.com.au",
+      "last_communicated_at": "2026-02-13",
+      "projects_funded": [
+        "ACT-GD"
+      ]
     },
     "rotary-eclub-outback": {
       "name": "Rotary eClub of Outback Australia",
@@ -373,7 +424,7 @@
       "stage": "active-partner",
       "ask_amount_aud": null,
       "deadline": null,
-      "primary_contact": "Isabella / Alan",
+      "primary_contact": "Adam Robinson (CEO) / Isabella Stanley / Alan White",
       "themes": [
         "homelessness",
         "community-led"
@@ -381,7 +432,12 @@
       "tone": "warm, grassroots",
       "claims_to_lead_with": [],
       "claims_to_avoid": [],
-      "framing_notes": "DATA-ONLY STUB added 2026-04-24: Xero shows $9,400 paid, GHL shows recent comm 26 days ago (also 105-day prior thread). Active relationship but narrative not yet captured — needs Nic/Ben context on what ACT delivers for StreetSmart before claims can be populated."
+      "framing_notes": "DATA-ONLY STUB added 2026-04-24: Xero shows $9,400 paid, GHL shows recent comm 26 days ago (also 105-day prior thread). Active relationship but narrative not yet captured — needs Nic/Ben context on what ACT delivers for StreetSmart before claims can be populated.",
+      "primary_email": "adam@streetsmartaustralia.org, isabella@streetsmartaustralia.org, alan@streetsmartaustralia.org",
+      "last_communicated_at": "2026-03-28",
+      "projects_funded": [
+        "ACT-JH"
+      ]
     },
     "westpac-scholars-trust": {
       "name": "Westpac Scholars Trust",
@@ -400,12 +456,17 @@
       "stage": "active-partner",
       "ask_amount_aud": null,
       "deadline": null,
-      "primary_contact": null,
+      "primary_contact": "Pene Curtis / Greg Marlow",
       "themes": [],
       "tone": null,
       "claims_to_lead_with": [],
       "claims_to_avoid": [],
-      "framing_notes": "DATA-ONLY STUB added 2026-05-07: Xero shows $82,500 AUTH on INV-0222 (392 days outstanding); funder-alignment synthesis flags this as the longest-overdue live invoice on the sole trader. Surfaced by 2026-05-07 funder-alignment synthesis as wiki-absent. Needs Ben/Nic-verified narrative review before any pitch-assembly."
+      "framing_notes": "DATA-ONLY STUB added 2026-05-07: Xero shows $82,500 AUTH on INV-0222 (392 days outstanding); funder-alignment synthesis flags this as the longest-overdue live invoice on the sole trader. Surfaced by 2026-05-07 funder-alignment synthesis as wiki-absent. Needs Ben/Nic-verified narrative review before any pitch-assembly.",
+      "primary_email": "pene.curtis@bigpond.com, greg@marlowcanete.com.au",
+      "last_communicated_at": "2026-04-13",
+      "projects_funded": [
+        "ACT-GD"
+      ]
     },
     "brisbane-powerhouse-foundation": {
       "name": "Brisbane Powerhouse Foundation",
