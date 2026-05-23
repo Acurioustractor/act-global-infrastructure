@@ -75,6 +75,18 @@ const cronScripts = [
     cron_restart: '55 7 * * 1', // Weekly Monday 7:55am AEST
   },
   {
+    // Daily 7:00am AEST: cross-codebase activity feed (last 24h).
+    // Scans 6 ACT codebases for commits w/ Plan trailers, new wiki/plan/
+    // decision/handoff files. Pulls EL stories + wiki_pages from shared
+    // Supabase. Output to thoughts/shared/cross-codebase-feed/<date>.json
+    // + latest.{json,md}. Substrate for newsletter selectors, bot RAG,
+    // and ask-act.mjs.
+    name: 'cross-codebase-feed',
+    script: 'scripts/build-cross-codebase-feed.mjs',
+    args: '--since 1d',
+    cron_restart: '0 7 * * *',
+  },
+  {
     // Daily 7am AEST: refresh "🎯 Today's Focus" + sweep for drift signals
     // (stuck opps · overdue invoices · FAIL cadence · easy-win storyteller
     // transcripts) and auto-create new Action Items rows.
