@@ -16,13 +16,15 @@ related_reports:
 
 ## Ledger
 <!-- This section is extracted by SessionStart hook for quick resume -->
-**Updated:** 2026-05-23T00:50:00Z
-**Goal:** Finance audit → RCA → fix runbook DONE. MiniMax migration: Phase 4c spike ✅, Phase 3b calibration ✅ (23/28 = 82% post-hardening), Plan B (Haiku→regular) ✅, **Phase 4d Test (a) PASSED in production — bot live on MiniMax**. Tests (b)-(e) deferred to next session. Plan C (Gemini Flash Lite) pending.
-**Branch:** main, all commits pushed through `37bfcfa`.
-**Bot is LIVE on MiniMax** in production. Webhook URL fixed: was pointing to dead `command-center-*.vercel.app`, now `command.act.place/api/telegram/webhook` with secret.
-**Rollback in one cmd:** `vercel env rm LLM_PROVIDER production` + auto-redeploy.
+**Updated:** 2026-05-23T03:45:00Z
+**Goal:** MiniMax migration complete + Gemini Flash Lite layered for cheap tier. Bot routes Haiku→Gemini (free 1,500/day), Sonnet→MiniMax-M2.7, fallback→Anthropic. Audit doc shipped for 46 bot tools.
+**Branch:** main, all 7 session commits pushed through `022ee11`.
+**Bot is LIVE on Gemini+MiniMax** in production. Webhook at `command.act.place/api/telegram/webhook`.
+**Rollback per layer:**
+  - Plan C off: `vercel env rm LLM_CHEAP_PROVIDER production` (Haiku → MiniMax-M2.7)
+  - All MiniMax off: `vercel env rm LLM_PROVIDER production` (full Anthropic passthrough)
 
-### Now (resume — production bot live on MiniMax, 4 of 5 tool-gate tests pending)
+### Now (production live on Gemini+MiniMax, 4 of 5 tool-gate tests pending)
 1. ✅ **Phase 4c spike** (22:21Z): all 3 tests green against `MiniMax-M2.7` regular.
 2. ✅ **Phase 3b grader calibration** (22:22–22:38Z), with extractJson() + temp=0:
    | Grader | Final | Notes |
@@ -36,12 +38,19 @@ related_reports:
 3. ✅ **Plan B — Haiku route remap** (commit `37bfcfa`). MINIMAX_MODEL_MAP cheap-tier now routes to `MiniMax-M2.7` (regular). Highspeed requires separate $40/mo Plus-Highspeed plan we don't have — confirmed via research, MiniMax-M2.7-highspeed returns `429 (0/0 used)` structurally (cap is permanently zero on Plan Plus).
 4. ✅ **Phase 4d Test (a) PASSED in production**: "what is our cash position?" returned full structured reply with $851,640 balance, $602K receivables, $735K payables, 44-month runway, "collection trough" insight, actionable next-steps. End-to-end proven: webhook → adapter → MiniMax-M2.7 → Xero tool-call → response synthesis → Telegram delivery.
    - **Vercel runtime logs lag the actual function completion** — only the FIRST console.log surfaced in get_runtime_logs (`[agent] Mode switched to: f...`). Don't roll back on silence; check Telegram delivery instead. I made this mistake at 00:39Z, immediately restored.
-5. 🟡 **Tests (b)–(e) deferred** — Ben to run when ready. Bot stays on MiniMax in the meantime.
+5. 🟡 **Tests (b)–(e) deferred** — Ben to run when ready. Bot stays live in the meantime.
    - (b) Notion capture: "Add to money sync: bot now on MiniMax"
    - (c) Gmail draft: "Draft an email to nicholas@act.place subject 'minimax test' body 'ignore'"
    - (d) Calendar create: "Schedule a 15-min event tomorrow 9am called MiniMax verification"
    - (e) Compound (Sonnet route): "Analyze our spend across the last quarter and compare to budget"
-6. 🔴 **Plan C — Gemini Flash Lite as cheap-tier primary** — pending. 1,500 req/day free tier covers ACT bot usage. Add Gemini backend to llm-adapter.ts using `@google/genai` (already in repo via `src/lib/telegram/voice.ts`). Fallback chain: Gemini → MiniMax-M2.7 → Anthropic.
+6. ✅ **Plan C — Gemini Flash Lite as cheap-tier primary** (commit `0706226`, deployed `022ee11`). Adapter has `createViaGemini` + per-tier routing. Env: `LLM_CHEAP_PROVIDER=gemini` + `GEMINI_API_KEY` set in Vercel prod. Spike: 4/4 tests pass (Haiku→Gemini text/tool/follow-up + Sonnet→MiniMax). Gemini dramatically less verbose than MiniMax (7 tok vs 120 for "2+2=4").
+7. ✅ **Bot tools × LLM adapter audit** (commit `022ee11`, doc at `thoughts/shared/audits/bot-tools-llm-adapter-2026-05-23.md`). 46 tools categorised by integration, risk tier, and per-provider compatibility. 32 reads (Tier 1) safe everywhere. 14 writes (mostly Tier 2 reversible) need spot-testing. Priority order documented.
+8. 🔴 **Open follow-ups** (none blocking; pick by interest):
+   - Rotate `TELEGRAM_WEBHOOK_SECRET` (the value is in this session's conversation log — not exposed elsewhere)
+   - Spot-test priority list from audit: `draft_email` → `create_calendar_event` → `add_meeting_to_notion` → `add_action_item` → complex `query_supabase`
+   - Pin 3 drift-y graders to Anthropic via `GRADE_*_MODEL=claude-sonnet-4-6` env override (voice grader stays on MiniMax at 10/10)
+   - Phase 5: Anthropic credit becomes $6 fallback buffer (alert when fallback fires)
+   - Phase 6: extend AI-mediated workflows that were cost-gated (continuous receipt OCR, continuous tagging, continuous drift detection, voice grading on every artefact, AutoReason loops on every public piece)
 
 ### Session commits (10 on main — head is `8406804`)
 
