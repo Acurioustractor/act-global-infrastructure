@@ -96,6 +96,17 @@ const cronScripts = [
     cron_restart: '0 7 * * *',
   },
   {
+    // Daily 7:30am AEST (30min after cross-codebase-feed completes):
+    // Sync the feed into newsletter_candidates Supabase table. Computes
+    // auto_audiences via source-type deterministic rule. Status='proposed'
+    // on first insert; subsequent runs upsert (won't overwrite human
+    // include/exclude/defer status).
+    // Plan: act-communication-pipeline-2026-05-23-locked
+    name: 'newsletter-candidates-sync',
+    script: 'scripts/sync-feed-to-newsletter-candidates.mjs',
+    cron_restart: '30 7 * * *',
+  },
+  {
     // Daily 7am AEST: refresh "🎯 Today's Focus" + sweep for drift signals
     // (stuck opps · overdue invoices · FAIL cadence · easy-win storyteller
     // transcripts) and auto-create new Action Items rows.
