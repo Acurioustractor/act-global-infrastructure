@@ -16,10 +16,15 @@ related_reports:
 
 ## Ledger
 <!-- This section is extracted by SessionStart hook for quick resume -->
-**Updated:** 2026-05-23T03:45:00Z
-**Goal:** MiniMax migration complete + Gemini Flash Lite layered for cheap tier. Bot routes Haiku→Gemini (free 1,500/day), Sonnet→MiniMax-M2.7, fallback→Anthropic. Audit doc shipped for 46 bot tools.
-**Branch:** main, all 7 session commits pushed through `022ee11`.
-**Bot is LIVE on Gemini+MiniMax** in production. Webhook at `command.act.place/api/telegram/webhook`.
+**Updated:** 2026-05-23T05:30:00Z
+**Goal:** MiniMax + Gemini migration done. Bot routes Haiku→Gemini, Sonnet→MiniMax, fallback→Anthropic. Cross-codebase feed cron live. 3 drift-y graders pinned to Sonnet via .env.local. TELEGRAM_WEBHOOK_SECRET rotated post-conversation-log exposure.
+**Branch:** main, 14 session commits pushed across 2 repos.
+**Bot is LIVE** on Gemini+MiniMax at `command.act.place/api/telegram/webhook`.
+**Pinned graders** (in `.env.local`, not git):
+  `GRADE_PACK_MODEL=claude-sonnet-4-6`
+  `GRADE_FUNDER_MODEL=claude-sonnet-4-6`
+  `GRADE_SYNTHESIS_MODEL=claude-sonnet-4-6`
+  Voice grader stays on MiniMax (10/10).
 **Rollback per layer:**
   - Plan C off: `vercel env rm LLM_CHEAP_PROVIDER production` (Haiku → MiniMax-M2.7)
   - All MiniMax off: `vercel env rm LLM_PROVIDER production` (full Anthropic passthrough)
