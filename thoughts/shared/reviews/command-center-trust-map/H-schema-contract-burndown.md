@@ -4,6 +4,39 @@
 command-center `.from().select()`). **Baseline:** `config/schema-contract-baseline.json` — the test
 fails on any NEW drift. **Goal:** burn this to 0, then delete the baseline for full strictness.
 
+> **Progress 2026-05-27 (tranche 3 — filter-column coverage, task 5):** The checker now validates
+> **filter/order column args** (`.eq/.neq/.gt/.gte/.lt/.lte/.like/.ilike/.is/.in/.contains/.not/.filter/.order`),
+> not just `.select()` — closing the documented blind spot. Extraction is scoped to each query's
+> **fluent method chain** (new `fluentChainAfter` walker), not the text chunk, so a reassigned builder
+> variable's `.eq()` / interleaved inline sub-query no longer misattributes (caught + killed two false
+> positives: `projects → full_name`, `v_project_money_state → date,type,status`). 5 new unit tests
+> (20/20 green). This surfaced **27 previously-invisible filter drifts**; **18 fixed** (latent
+> silent-zero bugs — queries were 400ing), **9 baselined as needs-intent** (net baseline 64 → 72).
+> Fixed (verified vs live DB): `project_knowledge.type → knowledge_type` ×11 (reports monthly/weekly/yearly
+> — knowledge sections were showing 0; now 146 meetings / 258 actions / 83 decisions),
+> `xero_transactions.has_attachment → has_attachments` (weekly-review receipt match — now 1304),
+> `xero_transactions.xero_id → xero_transaction_id` (webhooks/xero new_transaction alert; the
+> `xero_invoices.xero_id` filter above it is correct — that table's PK *is* `xero_id`),
+> `communications_history.responded_at → response_received_at` (inbox unanswered-emails),
+> `communications_history.communication_date → occurred_at` + its broken `.or('contact_id.eq.…')` →
+> `contact_email` (notifications last-comm topic — whole query was 400ing),
+> `grant_opportunities.discovered_at → created_at` ×2 (notifications new-grant alerts — no `discovered_at`
+> column; `created_at` = insertion = discovery time),
+> `ghl_opportunities .ilike('tags', …) → .eq('project_code', …)` (notion-agent/health — `ghl_opportunities`
+> has no `tags`; `project_code` is the real column; now returns 5 ACT-HV opps).
+> **Baselined needs-intent filter drifts (still to burn down):**
+> `agent_audit_log.{status, created_at}` (`agent/insights`, `proposals/stats` — both query it as an
+> approvals table with `status in (executed/completed/approved)`; the table has `success`/`timestamp`,
+> not `status`/`created_at` — likely wrong table / dead feature, needs a product call);
+> `subscriptions.{status, amount_aud}` (`business/overview`, `lib/tools/writing.ts` — `status='active'`
+> is **financial**: `account_status='active'` = 6 subs vs `review_status='active'` = 68 → recommend
+> `account_status` + `amount`, but it feeds a $ total so Ben should confirm);
+> `communications_history.contact_id` / `ghl_opportunities.contact_id` (`notifications.ts`, `tools/actions.ts`
+> ×4 — real column is `ghl_contact_id`; the `ghl_opportunities` ones already pass `contact.ghl_id` so are
+> clean renames, but the `communications_history` ones pass `contact.id` (internal) where the column wants
+> the GHL id — needs the value traced, not just the column renamed);
+> `contact_project_links.ghl_contact_id` (`contacts/[id]/link-project` — table keys on `entity_id`, needs a join).
+>
 > **Progress 2026-05-27 (tranche 2):** baseline **72 → 64** (8 more fixed). Clean renames via aliases:
 > `ghl_opportunities.pipeline_stage→stage_name` (runway, notion-agent health+mission),
 > `xero_transactions.vendor_name→contact_name` (projects/financials), `xero_transactions.{description,

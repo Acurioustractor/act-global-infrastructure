@@ -29,6 +29,7 @@ import {
   parseClientInstances,
   scanFile,
   scanAll,
+  fluentChainAfter,
   resolveSchema,
   loadBaseline,
   applyBaseline,
@@ -115,6 +116,56 @@ describe('scanFile', () => {
     const { refs, dynamic } = scanFile(p, dir);
     assert.equal(refs.length, 0); // no quoted-literal .from
     assert.ok(dynamic.some((d) => d.expr === 't'));
+  });
+
+  it('extracts filter/order column args from a fluent chain', () => {
+    const p = write('e.ts', `import { supabase } from '@/lib/supabase'\nawait supabase.from('xero_transactions').select('id').eq('type', 'SPEND').gte('date', d).is('project_code', null).order('total', { ascending: false })`);
+    const { refs } = scanFile(p, dir);
+    assert.deepEqual(refs[0].filterColumns.sort(), ['date', 'project_code', 'total', 'type']);
+  });
+
+  it('validates filter columns even under select(*) (write/star refs)', () => {
+    const p = write('e2.ts', `import { supabase } from '@/lib/supabase'\nsupabase.from('projects').select('*').eq('ghost_col', 1)`);
+    const { refs } = scanFile(p, dir);
+    assert.equal(refs[0].hasStar, true);
+    assert.deepEqual(refs[0].filterColumns, ['ghost_col']);
+  });
+
+  it('scopes filter columns to the fluent chain, not the whole text chunk', () => {
+    // Regression for the contacts/all false positive: an inline `.from('projects')` sub-query
+    // whose chain ends, followed by `.order()` calls on a *different* builder variable. Chunk-based
+    // attribution wrongly blamed `projects` for `full_name`/`tags`; chain-scoping must not.
+    const p = write('f.ts', [
+      `import { supabase } from '@/lib/supabase'`,
+      `let query = base.from('ghl_contacts').select('*')`,
+      `if (project) {`,
+      `  const { data } = await supabase.from('projects').select('code').eq('code', project).limit(1)`,
+      `  query = query.contains('tags', [x])`,
+      `}`,
+      `query = query.order('full_name', { ascending: true })`,
+    ].join('\n'));
+    const { refs } = scanFile(p, dir);
+    const projectsRef = refs.find((r) => r.table === 'projects');
+    assert.deepEqual(projectsRef.filterColumns.sort(), ['code']); // NOT full_name / tags
+  });
+});
+
+// ---------------------------------------------------------------------------
+// Unit: fluent-chain walker (parses one query's attached method chain)
+// ---------------------------------------------------------------------------
+describe('fluentChainAfter', () => {
+  it('stops at the end of the statement (next line is a new statement, not a .method)', () => {
+    const src = `from('x').select('a').eq('b', 1)\nquery = query.order('c')`;
+    const chain = fluentChainAfter(src, src.indexOf(')') + 1); // just after from('x')
+    assert.ok(chain.includes(".eq('b', 1)"));
+    assert.ok(!chain.includes('order')); // the reassigned-variable call is excluded
+  });
+
+  it('is string/paren aware (args containing parens or quotes do not end the chain early)', () => {
+    const src = `from('x').or('a.eq.1,b.eq.2').eq('c', fn(1, 2)).limit(3)`;
+    const chain = fluentChainAfter(src, src.indexOf(')') + 1);
+    assert.ok(chain.includes(".eq('c', fn(1, 2))"));
+    assert.ok(chain.includes('.limit(3)'));
   });
 });
 

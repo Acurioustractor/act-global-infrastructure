@@ -83,28 +83,28 @@ export async function GET(request: Request) {
     const { count: totalMeetings } = await supabase
       .from('project_knowledge')
       .select('id', { count: 'exact', head: true })
-      .eq('type', 'meeting')
+      .eq('knowledge_type', 'meeting')
       .gte('created_at', fyStart.toISOString())
       .lte('created_at', fyEnd.toISOString())
 
     const { count: totalActions } = await supabase
       .from('project_knowledge')
       .select('id', { count: 'exact', head: true })
-      .eq('type', 'action')
+      .eq('knowledge_type', 'action')
       .gte('created_at', fyStart.toISOString())
       .lte('created_at', fyEnd.toISOString())
 
     const { count: totalDecisions } = await supabase
       .from('project_knowledge')
       .select('id', { count: 'exact', head: true })
-      .eq('type', 'decision')
+      .eq('knowledge_type', 'decision')
       .gte('created_at', fyStart.toISOString())
       .lte('created_at', fyEnd.toISOString())
 
     const { count: prevMeetings } = await supabase
       .from('project_knowledge')
       .select('id', { count: 'exact', head: true })
-      .eq('type', 'meeting')
+      .eq('knowledge_type', 'meeting')
       .gte('created_at', prevFyStart.toISOString())
       .lte('created_at', prevFyEnd.toISOString())
 

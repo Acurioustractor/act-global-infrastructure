@@ -133,7 +133,7 @@ async function buildDailyBriefing(): Promise<string> {
     supabase
       .from('grant_opportunities')
       .select('name, provider, amount_max, closes_at, fit_score, aligned_projects')
-      .gte('discovered_at', yesterday)
+      .gte('created_at', yesterday)
       .order('fit_score', { ascending: false })
       .limit(5),
 
@@ -405,7 +405,7 @@ export async function checkGrantAlerts(): Promise<{ sent: number; alerts: string
   const { data: newGrants } = await supabase
     .from('grant_opportunities')
     .select('name, provider, amount_max, closes_at, fit_score, aligned_projects')
-    .gte('discovered_at', yesterday)
+    .gte('created_at', yesterday)
     .order('fit_score', { ascending: false })
     .limit(5)
 
@@ -970,8 +970,8 @@ export async function sendPreMeetingBriefings(): Promise<{ sent: number; errors:
         const { data: lastComm } = await supabase
           .from('communications_history')
           .select('subject')
-          .or(`contact_id.eq.${att.email}`)
-          .order('communication_date', { ascending: false })
+          .or(`contact_email.eq.${att.email}`)
+          .order('occurred_at', { ascending: false })
           .limit(1)
           .maybeSingle()
 

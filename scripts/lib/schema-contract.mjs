@@ -69,6 +69,12 @@ const DYNAMIC_FROM_RE = /\.from\(\s*([A-Za-z_$][A-Za-z0-9_$.]*)\s*\)/g;
 const SELECT_RE = /\.select\(\s*(['"`])([\s\S]*?)\1/;
 // write ops reference the table but columns come from a JS object payload → table-only check.
 const WRITE_RE = /\.(insert|upsert|update|delete)\(/;
+// PostgREST filter/order methods whose FIRST argument is a column name. Quoted-literal first arg
+// only — this structurally excludes Array.prototype.filter(cb), String.match(re), Object.is(a,b)
+// etc. (none of which take a quoted string as the first argument). The checker validated only
+// .select() columns before; `.is('responded_at', …)` and `.ilike('tags', …)` drift slipped past.
+const FILTER_RE =
+  /\.(eq|neq|gt|gte|lt|lte|like|ilike|is|in|contains|containedBy|overlaps|rangeGt|rangeGte|rangeLt|rangeLte|not|filter|order)\(\s*(['"`])([^'"`]*)\2/g;
 
 /**
  * Build a map of local client identifier -> Supabase instance ('shared' | 'el' | 'media')
@@ -153,6 +159,53 @@ export function baseColumn(token) {
 }
 
 /**
+ * From the index just after a `.from('table')` literal, return the text of the unbroken fluent
+ * method chain attached to it (`.select(...).eq(...).order(...)`…), stopping at the end of the
+ * statement. This scopes filter-column attribution to THIS query. Plain text-chunk attribution
+ * wrongly swept in `.eq/.order` calls belonging to a reassigned builder variable
+ * (`query = query.eq(...)`) or an interleaved inline sub-query, producing false positives like
+ * `projects → full_name`. String/paren aware so args containing `()` or quotes don't fool it.
+ */
+export function fluentChainAfter(content, startIdx) {
+  const n = content.length;
+  let i = startIdx;
+  let out = '';
+  for (;;) {
+    let j = i;
+    while (j < n && /\s/.test(content[j])) j++;
+    // optional chaining `?.` or plain `.`
+    if (content[j] === '?' && content[j + 1] === '.') j += 2;
+    else if (content[j] === '.') j += 1;
+    else break; // chain ended (statement over, or a non-call token)
+    let k = j;
+    while (k < n && /[A-Za-z0-9_$]/.test(content[k])) k++;
+    if (k === j) break; // not a method name
+    let p = k;
+    while (p < n && /\s/.test(content[p])) p++;
+    if (content[p] !== '(') break; // property access (e.g. `.length`), not a call → chain ends
+    // consume balanced parens, string-aware (so `.eq('a)b', x)` and template literals don't fool it)
+    let depth = 0;
+    let str = null;
+    let q = p;
+    for (; q < n; q++) {
+      const ch = content[q];
+      if (str) {
+        if (ch === '\\') { q++; continue; }
+        if (ch === str) str = null;
+        continue;
+      }
+      if (ch === '"' || ch === "'" || ch === '`') { str = ch; continue; }
+      if (ch === '(') depth++;
+      else if (ch === ')') { depth--; if (depth === 0) { q++; break; } }
+    }
+    if (depth !== 0) break; // unbalanced → bail out safely
+    out += content.slice(i, q);
+    i = q;
+  }
+  return out;
+}
+
+/**
  * Scan one source file. Returns { refs, dynamic }.
  *   refs:   [{ file, line, table, columns:[], hasStar, kind:'select'|'write'|'bare', selectDynamic }]
  *   dynamic:[{ file, line, expr }]  (dynamic .from(variable) near a query verb)
@@ -181,10 +234,21 @@ export function scanFile(path, repoRoot = process.cwd()) {
       table,
       instance,
       columns: [],
+      filterColumns: [],
       hasStar: false,
       kind: 'bare',
       selectDynamic: false,
     };
+
+    // Filter/order column args on THIS query's fluent chain (independent of .select form, so
+    // `.from(t).select('*').eq('bad_col', …)` and write-then-filter are still validated). Scoped
+    // to the chain — not the whole text chunk — so a reassigned builder variable's `.eq()` calls
+    // aren't misattributed to an interleaved inline sub-query.
+    const chain = fluentChainAfter(content, startIdx);
+    for (const fm of chain.matchAll(FILTER_RE)) {
+      const col = baseColumn(fm[3]);
+      if (col) ref.filterColumns.push(col);
+    }
 
     const sel = chunk.match(SELECT_RE);
     if (sel) {
@@ -346,11 +410,15 @@ export function diff(refs, schema, allowlist = {}) {
     }
     const tableCols = schema.columns.get(ref.table);
     const ignored = new Set(ignoreColumns[ref.table] || []);
-    if (ref.selectDynamic || ref.kind === 'write' || ref.kind === 'bare') {
-      ok++; // table verified; columns not statically checkable here
+    // Select columns are only statically known when there's a literal .select(); filter/order
+    // columns are always known (a literal first arg) regardless of the select form.
+    const toCheck = [...(ref.filterColumns || [])];
+    if (ref.kind === 'select' && !ref.selectDynamic) toCheck.push(...ref.columns);
+    if (!toCheck.length) {
+      ok++; // table verified; no statically-checkable columns on this ref
       continue;
     }
-    const bad = ref.columns.filter((c) => !tableCols.has(c) && !ignored.has(c));
+    const bad = [...new Set(toCheck)].filter((c) => !tableCols.has(c) && !ignored.has(c));
     if (bad.length) {
       deadColumns.push({ ...ref, badColumns: bad });
     } else {

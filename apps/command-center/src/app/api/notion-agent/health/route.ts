@@ -46,7 +46,7 @@ export async function GET(req: NextRequest) {
         supabase
           .from('ghl_opportunities')
           .select('name, status, monetary_value, pipeline_stage:stage_name')
-          .ilike('tags', `%${projectCode}%`)
+          .eq('project_code', projectCode)
           .limit(10),
       ])
 

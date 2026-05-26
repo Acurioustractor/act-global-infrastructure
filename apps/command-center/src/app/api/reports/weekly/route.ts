@@ -24,19 +24,19 @@ export async function GET() {
     const { count: meetingsCount } = await supabase
       .from('project_knowledge')
       .select('id', { count: 'exact', head: true })
-      .eq('type', 'meeting')
+      .eq('knowledge_type', 'meeting')
       .gte('created_at', weekAgo.toISOString())
 
     const { count: actionsCount } = await supabase
       .from('project_knowledge')
       .select('id', { count: 'exact', head: true })
-      .eq('type', 'action')
+      .eq('knowledge_type', 'action')
       .gte('created_at', weekAgo.toISOString())
 
     const { count: decisionsCount } = await supabase
       .from('project_knowledge')
       .select('id', { count: 'exact', head: true })
-      .eq('type', 'decision')
+      .eq('knowledge_type', 'decision')
       .gte('created_at', weekAgo.toISOString())
 
     // Contacts engaged this week

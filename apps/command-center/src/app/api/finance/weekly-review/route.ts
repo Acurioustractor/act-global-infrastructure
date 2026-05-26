@@ -200,7 +200,7 @@ async function getReceiptGap(filters: Filters) {
     .from('xero_transactions')
     .select('*', { count: 'exact', head: true })
     .eq('type', 'SPEND')
-    .eq('has_attachment', true)
+    .eq('has_attachments', true)
     .gte('date', receiptFrom)
     .lte('date', filters.to)
   if (filters.account) matchedQ = matchedQ.eq('bank_account', filters.account)
