@@ -159,6 +159,15 @@ interface ProjectFinancialsData {
   expenseCategories: Record<string, number>
   revenueCategories: Record<string, number>
   budgetVsActual: BudgetVsActual | null
+  stageBudget?: {
+    zones: Array<{ id: string; label: string; stage: number; garden: boolean; budget: number; actual: number; variance: number; utilisationPct: number | null }>
+    garden: { budget: number; actual: number }
+    stage1: { budget: number; actual: number }
+    stage2: { budget: number; actual: number }
+    totalBudget: number
+    totalActual: number
+    unallocated: number
+  } | null
   rdSummary: RdSummary
   salaryAllocations: SalaryAllocations
   revenueStreams: Array<{
@@ -581,6 +590,81 @@ export default function ProjectFinancialsPage({
               if only this project burned, {formatMoney(data.burnMetrics.currentOrgBalance)} lasts {data.burnMetrics.projectRunwayMonths}mo
             </p>
           </div>
+        </div>
+      )}
+
+      {/* Build budget by stage (ACT-HV) — garden area pinned. 2026-05-26 */}
+      {data.stageBudget && (
+        <div className="glass-card p-6 mb-8">
+          <h2 className="text-lg font-semibold text-white flex items-center gap-2 mb-1">
+            <Target className="h-5 w-5 text-emerald-400" />
+            Build budget by stage
+          </h2>
+          <p className="text-sm text-white/40 mb-4">
+            {formatMoney(data.stageBudget.totalActual)} spent of {formatMoney(data.stageBudget.totalBudget)} budgeted
+            {data.stageBudget.unallocated > 0 && <> &middot; {formatMoney(data.stageBudget.unallocated)} unallocated</>}
+            <span className="text-xs text-white/30 ml-2">&middot; budgets are DRAFT — edit in harvest-budget.ts</span>
+          </p>
+
+          {/* Garden area highlight */}
+          {(() => {
+            const g = data.stageBudget!.garden
+            const pct = g.budget > 0 ? Math.round((g.actual / g.budget) * 100) : 0
+            return (
+              <div className="rounded-lg border border-emerald-500/30 bg-emerald-500/5 p-4 mb-5">
+                <div className="flex items-baseline justify-between mb-2">
+                  <span className="text-sm font-semibold text-emerald-200">🌱 Garden area</span>
+                  <span className="text-sm tabular-nums text-white">{formatMoney(g.actual)} <span className="text-white/40">/ {formatMoney(g.budget)}</span></span>
+                </div>
+                <div className="h-2 bg-white/10 rounded-full overflow-hidden">
+                  <div className={cn('h-full', pct > 100 ? 'bg-red-500' : pct > 85 ? 'bg-amber-500' : 'bg-emerald-500')} style={{ width: `${Math.min(pct, 100)}%` }} />
+                </div>
+                <div className="text-xs text-white/40 mt-1 tabular-nums">{pct}% of garden budget{pct > 100 && <span className="text-red-300"> — over</span>}</div>
+              </div>
+            )
+          })()}
+
+          {/* Zones grouped by stage */}
+          {[1, 2].map((stage) => {
+            const zs = data.stageBudget!.zones.filter((z) => z.stage === stage)
+            if (!zs.length) return null
+            const sb = stage === 1 ? data.stageBudget!.stage1 : data.stageBudget!.stage2
+            return (
+              <div key={stage} className="mb-4">
+                <div className="flex items-baseline justify-between mb-2">
+                  <h3 className="text-xs font-medium text-white/50 uppercase tracking-wider">Stage {stage}</h3>
+                  <span className="text-xs text-white/40 tabular-nums">{formatMoney(sb.actual)} / {formatMoney(sb.budget)}</span>
+                </div>
+                <div className="space-y-2">
+                  {[...zs].sort((a, b) => b.actual - a.actual).map((z) => {
+                    const pct = z.budget > 0 ? Math.round((z.actual / z.budget) * 100) : (z.actual > 0 ? 999 : 0)
+                    return (
+                      <div key={z.id}>
+                        <div className="flex justify-between text-xs mb-1">
+                          <span className="text-white/70 flex items-center gap-1.5">
+                            {z.garden && <span className="text-emerald-400">🌱</span>}{z.label}
+                          </span>
+                          <span className="text-white/50 tabular-nums">
+                            {formatMoney(z.actual)} / {formatMoney(z.budget)}
+                            {pct > 100 && <span className="text-red-300 ml-1">({pct}%)</span>}
+                          </span>
+                        </div>
+                        <div className="h-1.5 bg-white/10 rounded-full overflow-hidden">
+                          <div className={cn('h-full rounded-full', z.budget === 0 ? 'bg-white/20' : pct > 100 ? 'bg-red-500' : pct > 85 ? 'bg-amber-500' : 'bg-emerald-500/70')} style={{ width: `${z.budget > 0 ? Math.min(pct, 100) : 0}%` }} />
+                        </div>
+                      </div>
+                    )
+                  })}
+                </div>
+              </div>
+            )
+          })}
+
+          {data.stageBudget.unallocated > 0 && (
+            <div className="text-xs text-white/40 mt-3 pt-3 border-t border-white/10">
+              {formatMoney(data.stageBudget.unallocated)} unallocated — suppliers not yet in the vendor→zone map (harvest-budget.ts)
+            </div>
+          )}
         </div>
       )}
 

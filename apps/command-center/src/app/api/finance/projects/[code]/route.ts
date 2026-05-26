@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { supabase } from '@/lib/supabase'
+import { HARVEST_ZONES, zoneForVendor } from '@/lib/harvest-budget'
 
 export async function GET(
   request: Request,
@@ -685,7 +686,42 @@ export async function GET(
     const realExpensesByVendor: Record<string, number> = {}
     for (const v of realVendorSpend.values()) realExpensesByVendor[v.contact] = v.total
 
+    // ---- HARVEST STAGE/ZONE BUDGET (ACT-HV only) ----
+    // Attribute the deduped real expense rows to zones via the vendor→zone map,
+    // then roll up to zone → stage → garden-area. Budgets come from config.
+    let stageBudget: any = null
+    if (projectCode === 'ACT-HV') {
+      const actualByZone = new Map<string, number>()
+      let unallocated = 0
+      for (const r of realExpenseRows) {
+        const zid = zoneForVendor(r.contact)
+        if (zid) actualByZone.set(zid, (actualByZone.get(zid) || 0) + r.total)
+        else unallocated += r.total
+      }
+      const round2 = (n: number) => Math.round(n * 100) / 100
+      const zones = HARVEST_ZONES.map((z) => {
+        const actual = round2(actualByZone.get(z.id) || 0)
+        return {
+          id: z.id, label: z.label, stage: z.stage, garden: z.garden,
+          budget: z.budget, actual, variance: round2(z.budget - actual),
+          utilisationPct: z.budget > 0 ? Math.round((actual / z.budget) * 100) : null,
+        }
+      })
+      const sum = (arr: typeof zones, pick: (z: (typeof zones)[number]) => number) => round2(arr.reduce((a, z) => a + pick(z), 0))
+      const gardenZones = zones.filter((z) => z.garden)
+      stageBudget = {
+        zones,
+        garden: { budget: sum(gardenZones, (z) => z.budget), actual: sum(gardenZones, (z) => z.actual) },
+        stage1: { budget: sum(zones.filter((z) => z.stage === 1), (z) => z.budget), actual: sum(zones.filter((z) => z.stage === 1), (z) => z.actual) },
+        stage2: { budget: sum(zones.filter((z) => z.stage === 2), (z) => z.budget), actual: sum(zones.filter((z) => z.stage === 2), (z) => z.actual) },
+        totalBudget: sum(zones, (z) => z.budget),
+        totalActual: sum(zones, (z) => z.actual),
+        unallocated: round2(unallocated),
+      }
+    }
+
     return NextResponse.json({
+      stageBudget,
       auditAlerts,
       notableFindings,
       realExpenseTotal,
