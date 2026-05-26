@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import { supabase } from '@/lib/supabase'
 import { getFYDates } from '@/lib/finance/dates'
 import { getOrgLedger, getMonthlyPL, getCashPosition, getRdTaxWindow, RD_REFUND_RATE } from '@/lib/finance/ledger'
+import { ACT_ENTITIES, getCutoverStatus } from '@/lib/finance/entities'
 
 /**
  * /company front-door data. Rebuilt 2026-05-26 on the one ledger (lib/finance/ledger.ts).
@@ -56,6 +57,11 @@ export async function GET() {
       timestamp: now.toISOString(),
       fy: `FY${fyStart.slice(2, 4)}-${fyEnd.slice(2, 4)}`,
       data_quality: dataQuality,
+      entity: {
+        current: 'ACT-ST',
+        entities: ACT_ENTITIES,
+        cutover: getCutoverStatus(now),
+      },
       financial: {
         revenue: pl.revenue,
         expenses: pl.expenses,

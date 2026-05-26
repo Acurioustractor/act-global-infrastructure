@@ -13,6 +13,11 @@ interface IntelligenceData {
   timestamp: string
   fy: string
   data_quality: Record<string, Wired>
+  entity: {
+    current: string
+    cutover: { cutoverDate: string; daysUntil: number; passed: boolean; message: string }
+    entities: Array<{ code: string; shortName: string; identifier: string; role: string; status: string; tradingNow: boolean }>
+  }
   financial: {
     revenue: number
     expenses: number
@@ -141,7 +146,7 @@ export default function CompanyPage() {
     return <div className="p-8 text-red-400">Failed to load intelligence data</div>
   }
 
-  const { financial: fin, receivables: recv, projects: proj, relationships: rel, pipeline: pipe, receipts: rcpt, rd, activity: act, data_quality: dq } = data
+  const { financial: fin, receivables: recv, projects: proj, relationships: rel, pipeline: pipe, receipts: rcpt, rd, activity: act, data_quality: dq, entity: ent } = data
 
   // Alerts — honest, no fabricated deadlines.
   const alerts: Array<{ severity: 'critical' | 'warning' | 'info'; message: string }> = []
@@ -165,6 +170,18 @@ export default function CompanyPage() {
           Company Overview
         </h1>
         <p className="text-sm text-white/40 mt-1">{data.fy} — {new Date(data.timestamp).toLocaleString('en-AU', { timeZone: 'Australia/Brisbane', dateStyle: 'medium', timeStyle: 'short' })}</p>
+      </div>
+
+      {/* Entity / Pty cutover strip */}
+      <div className={`glass-card p-3 border-l-4 ${ent.cutover.passed ? 'border-red-500/50' : ent.cutover.daysUntil <= 45 ? 'border-amber-500/50' : 'border-white/10'} flex items-center justify-between gap-3 text-xs`}>
+        <div className="text-white/70">
+          <span className="text-white/40">Entity:</span>{' '}
+          {ent.entities.find(e => e.code === ent.current)?.shortName || ent.current} ({ent.current})
+          <span className="text-white/30"> · {ent.cutover.message}</span>
+        </div>
+        <span className={`shrink-0 font-medium ${ent.cutover.passed ? 'text-red-400' : ent.cutover.daysUntil <= 45 ? 'text-amber-400' : 'text-white/50'}`}>
+          {ent.cutover.passed ? 'cutover overdue' : `${ent.cutover.daysUntil}d to Pty cutover`}
+        </span>
       </div>
 
       {broken.length > 0 && (
