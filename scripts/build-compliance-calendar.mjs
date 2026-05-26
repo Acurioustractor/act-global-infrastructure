@@ -177,9 +177,13 @@ async function main() {
   }
 
   if (!existsSync(OUT_DIR)) mkdirSync(OUT_DIR, { recursive: true })
+  const json = JSON.stringify(snapshot, null, 2)
   const outPath = path.join(OUT_DIR, todayStr() + '.json')
-  writeFileSync(outPath, JSON.stringify(snapshot, null, 2))
-  console.error(`Wrote ${outPath}`)
+  writeFileSync(outPath, json)
+  // Stable filename the API + Notion sync read; the only snapshot tracked in git (dated history is
+  // gitignored). The API recomputes days_until_due/severity live, so this need not be committed daily.
+  writeFileSync(path.join(OUT_DIR, 'latest.json'), json)
+  console.error(`Wrote ${outPath} + latest.json`)
   console.error(`Totals: ${counters.critical} 🔴 critical · ${counters.high} 🟠 high · ${counters.medium} 🟡 medium · ${counters.filed} ✓ filed`)
 }
 
