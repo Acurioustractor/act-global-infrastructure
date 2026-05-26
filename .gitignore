@@ -150,3 +150,6 @@ thoughts/shared/audits/*.log
 
 # Branch-stamp file written by .claude/settings.json SessionStart hook
 .claude/.session-branch-stamp
+
+# Compliance-calendar: track only latest.json; dated daily history stays local
+thoughts/shared/data/compliance-calendar/[0-9]*.json
