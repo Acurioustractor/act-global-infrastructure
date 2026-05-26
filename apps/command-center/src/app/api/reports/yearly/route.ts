@@ -1,6 +1,14 @@
 import { NextResponse } from 'next/server'
 import { supabase } from '@/lib/supabase'
-import { fetchAllRows } from '@/lib/finance/query'
+import { getMonthlyPL } from '@/lib/finance/ledger'
+
+type PmfRow = {
+  month: string
+  revenue: number | string | null
+  expenses: number | string | null
+  revenue_breakdown: Record<string, number> | null
+  expense_breakdown: Record<string, number> | null
+}
 
 export async function GET(request: Request) {
   try {
@@ -22,26 +30,26 @@ export async function GET(request: Request) {
     const prevStartStr = prevFyStart.toISOString().split('T')[0]
     const prevEndStr = prevFyEnd.toISOString().split('T')[0]
 
-    // === CURRENT FY FINANCIAL DATA === (paginated past PostgREST ~1000-row cap)
-    const [currentTxns, prevTxns] = await Promise.all([
-      fetchAllRows<{ total: number; type: string; contact_name: string; date: string }>((from, to) =>
-        supabase
-          .from('xero_transactions')
-          .select('total, type, contact_name, date')
-          .gte('date', fyStartStr)
-          .lte('date', fyEndStr)
-          .range(from, to)),
-      // === PREVIOUS FY FINANCIAL DATA ===
-      fetchAllRows<{ total: number; type: string }>((from, to) =>
-        supabase
-          .from('xero_transactions')
-          .select('total, type')
-          .gte('date', prevStartStr)
-          .lte('date', prevEndStr)
-          .range(from, to)),
+    // === FINANCIAL DATA FROM CANONICAL ORG LEDGER (project_monthly_financials) ===
+    // Headline income/expense/net come from getMonthlyPL so this surface agrees with /company,
+    // /strategy and the per-project pages. Raw RECEIVE/SPEND bank sums were wrong (RECEIVE
+    // undercounts income — most invoice settlements land as RECEIVE-TRANSFER). FY26 net ≈ +$518,059.
+    const [currentPL, prevPL, currentPmf] = await Promise.all([
+      getMonthlyPL({ fyStart: fyStartStr, fyEnd: fyEndStr }),
+      getMonthlyPL({ fyStart: prevStartStr, fyEnd: prevEndStr }),
+      supabase
+        .from('project_monthly_financials')
+        .select('month, revenue, expenses, revenue_breakdown, expense_breakdown')
+        .gte('month', fyStartStr)
+        .lte('month', fyEndStr)
+        .range(0, 9999),
     ])
 
-    let income = 0, expenses = 0, prevIncome = 0, prevExpenses = 0
+    const income = currentPL.revenue
+    const expenses = currentPL.expenses
+    const prevIncome = prevPL.revenue
+    const prevExpenses = prevPL.expenses
+
     const incomeBySource: Record<string, number> = {}
     const expenseByCategory: Record<string, number> = {}
     const monthlyData: Record<string, { income: number; expenses: number }> = {}
@@ -53,28 +61,22 @@ export async function GET(request: Request) {
       monthlyData[key] = { income: 0, expenses: 0 }
     }
 
-    for (const tx of currentTxns || []) {
-      const amt = Math.abs(Number(tx.total) || 0)
-      const txDate = new Date(tx.date)
-      const monthKey = txDate.toLocaleDateString('en-AU', { month: 'short', year: '2-digit' })
-
-      if (tx.type === 'RECEIVE') {
-        income += amt
-        const src = tx.contact_name || 'Other'
-        incomeBySource[src] = (incomeBySource[src] || 0) + amt
-        if (monthlyData[monthKey]) monthlyData[monthKey].income += amt
-      } else if (tx.type === 'SPEND') {
-        expenses += amt
-        const cat = tx.contact_name || 'Other'
-        expenseByCategory[cat] = (expenseByCategory[cat] || 0) + amt
-        if (monthlyData[monthKey]) monthlyData[monthKey].expenses += amt
+    for (const row of (currentPmf.data as PmfRow[] | null) || []) {
+      // pmf.month is the first-of-month date string (e.g. '2025-07-01'); parse to the trend key.
+      const monthDate = new Date(`${row.month}T00:00:00`)
+      const monthKey = monthDate.toLocaleDateString('en-AU', { month: 'short', year: '2-digit' })
+      if (monthlyData[monthKey]) {
+        monthlyData[monthKey].income += Number(row.revenue) || 0
+        monthlyData[monthKey].expenses += Number(row.expenses) || 0
       }
-    }
-
-    for (const tx of prevTxns || []) {
-      const amt = Math.abs(Number(tx.total) || 0)
-      if (tx.type === 'RECEIVE') prevIncome += amt
-      else if (tx.type === 'SPEND') prevExpenses += amt
+      for (const [name, amt] of Object.entries(row.revenue_breakdown || {})) {
+        const src = name || 'Other'
+        incomeBySource[src] = (incomeBySource[src] || 0) + (Number(amt) || 0)
+      }
+      for (const [name, amt] of Object.entries(row.expense_breakdown || {})) {
+        const cat = name || 'Other'
+        expenseByCategory[cat] = (expenseByCategory[cat] || 0) + (Number(amt) || 0)
+      }
     }
 
     // === KNOWLEDGE DATA ===

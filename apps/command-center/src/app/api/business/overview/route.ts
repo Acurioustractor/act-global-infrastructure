@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { supabase } from '@/lib/supabase'
 import { fetchAllRows } from '@/lib/finance/query'
+import { getMonthlyPL } from '@/lib/finance/ledger'
 
 /**
  * GET /api/business/overview
@@ -27,20 +28,13 @@ export async function GET() {
   thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30)
   const thirtyDaysAgoStr = thirtyDaysAgo.toISOString().split('T')[0]
 
-  // FY totals (paginated past PostgREST ~1000-row cap)
-  const fyTxns = await fetchAllRows<{ total: number; type: string }>((from, to) =>
-    supabase
-      .from('xero_transactions')
-      .select('total, type')
-      .gte('date', fyStartStr)
-      .range(from, to))
-
-  let fyIncome = 0, fyExpenses = 0
-  for (const tx of fyTxns || []) {
-    const amt = Math.abs(Number(tx.total) || 0)
-    if (tx.type === 'RECEIVE') fyIncome += amt
-    else if (tx.type === 'SPEND') fyExpenses += amt
-  }
+  // FY income/expense/net from the canonical org ledger (project_monthly_financials), so this
+  // surface agrees with /company, /strategy and the per-project pages. Raw RECEIVE/SPEND bank sums
+  // were wrong — RECEIVE undercounts income (most invoice settlements land as RECEIVE-TRANSFER).
+  // FY26 net ≈ +$518,059 (rev $1,732,851 − exp $1,214,792).
+  const fyPL = await getMonthlyPL({ fyStart: fyStartStr })
+  const fyIncome = fyPL.revenue
+  const fyExpenses = fyPL.expenses
 
   // This month
   const { data: monthTxns } = await supabase
