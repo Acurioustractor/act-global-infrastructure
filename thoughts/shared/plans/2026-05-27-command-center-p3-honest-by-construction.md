@@ -63,7 +63,7 @@ Files (all new — no entanglement with the 143 pre-existing dirty working-tree 
 - [x] 1c. Client-aware parsing (EL-alias) instead of table allowlist; commit schema snapshot
 - [x] 1d. `node --test` wrapper (15/15 green) + baseline ratchet (87 accepted)
 - [x] 1e. Wire CI workflow `.github/workflows/schema-contract.yml`
-- [ ] 2.  Archive dead-table fakes (git mv + RESTORE.md) — burn-down §H — **Tier 2, confirm**
+- [~] 2.  Archive dead-table fakes — **DONE for the 14 truly-dead routes + team page** (baseline 70→47, RESTORE.md written); the other §H Cat-1 routes turned out to be **live pages reading dead tables** → reclassified to fix-don't-archive (Cat-3), NOT archived
 - [~] 3.  Fix residual column-drift — select-drift DONE (87→64); **filter-drift: 18 fixed, 9 baselined needs-intent**; remaining needs-intent batch in §H awaits product calls (subscriptions $ total, agent_audit_log wrong-table, contact_id value-tracing)
 - [ ] 4.  Prune nav to clarity spine
 - [x] 5.  Extend checker to validate filter columns (.eq/.gte/.is/.order etc.) — DONE: fluent-chain-scoped extraction + `fluentChainAfter` (kills false positives), 5 new tests (20/20)
@@ -145,6 +145,29 @@ table (no `status` col — likely dead feature), `*.contact_id` needs the passed
 column renamed. Documented in §H. **Baseline 64 → 72** (coverage went up; burn-down list grew honestly).
 **Next:** product calls on the 9 needs-intent drifts; then task 2 (Tier-2 archive of dead-table routes)
 + task 4 (nav prune). Commits local on `wip/harvest-stage-budget-2026-05-26`, unpushed.
+
+### 2026-05-27 — Archive dead-table routes (task 2), baseline 70 → 47
+**Objective:** Archive the dead-table fake routes (trust-map §H Cat-1) — Tier 2, Ben confirmed full
+safe sweep + Stripe unwired.
+**Changed:** `git mv` 13 dead API routes + the orphan `team/page.tsx` →
+`app/_archived/2026-05-27-dead-table-routes/` (+ RESTORE.md). Next.js ignores `_archived/`
+(underscore segment) and so does the scanner (`SKIP_DIRS`) → 23 dead-table violations drop out.
+Routes: agent/{autonomy,learning,procedures}, assets, business-dev, compliance, debt,
+notion-agent/trials, pipeline/unified, receipts/achievements, subscriptions/alerts, team, webhooks/stripe.
+**Verified:** `.next` cleared (stale route-type stubs) → `npx tsc --noEmit` exit 0; checker baseline
+70 → 47; no NEW drift.
+**Learned (the load-bearing finding):** the §H Cat-1 archive list was **too aggressive** — tracing
+`lib/api.ts` helper → page consumption showed **most "dead-table" routes are fetched by LIVE pages**
+(intelligence, finance/board, development, ecosystem, knowledge, today, finance/accountant). They render
+empty sections; archiving the route would turn empty → a 404 *error*. Naive bulk-archiving would have
+broken 7+ live pages. Those were left in place + reclassified to fix-don't-archive. Only routes with
+**zero live-page consumers** were archived.
+**Deferred (documented in RESTORE.md):** `agent/page.tsx` still fetches its 3 now-archived routes (404;
+sections already broken, page not in nav — panel removal is risky surgery on an 830-line file); 7 dead
+`lib/api.ts` fetch-wrapper helpers (invisible to the schema checker, zero callers) left as dead code.
+**Next:** the 47 remaining baselined violations are now mostly **fix-don't-archive** (live routes,
+dead column/table refs needing a rename or a join) + the needs-intent batch. Task 4 (nav prune) +
+task 3 residual. Commits local on `wip/harvest-stage-budget-2026-05-26`, unpushed.
 
 ---
 
