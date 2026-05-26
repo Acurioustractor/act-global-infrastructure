@@ -451,10 +451,8 @@ export async function executeGetQuarterlyReview(input: { quarter?: string; detai
         .from('v_subscription_alerts')
         .select('*')
         .limit(20),
-      supabase
-        .from('v_upcoming_renewals')
-        .select('*')
-        .limit(20),
+      // v_upcoming_renewals view removed from DB — returns empty until a backend exists
+      Promise.resolve({ data: [] as any[] }),
       supabase
         .from('xero_transactions')
         .select('date, type, total, contact_name')

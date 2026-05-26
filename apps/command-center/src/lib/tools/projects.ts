@@ -221,11 +221,8 @@ export async function executeGetUpcomingDeadlines(input: {
 
     // Compliance deadlines
     if (category === 'all' || category === 'compliance') {
-      const { data: compliance } = await supabase
-        .from('compliance_items')
-        .select('title, next_due, category, status, project_code, responsible')
-        .lte('next_due', cutoff)
-        .not('status', 'in', '("completed","not-applicable")')
+      // compliance_items table removed from DB — returns empty until a backend exists
+      const compliance: any[] = []
 
       for (const c of compliance || []) {
         if (!c.next_due) continue

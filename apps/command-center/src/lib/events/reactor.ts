@@ -55,38 +55,25 @@ export async function evaluateEvent(event: IntegrationEventRow): Promise<Reactio
 
 /**
  * Check if a rule+entity combination is rate limited.
+ *
+ * notification_rate_limits table removed from DB — returns false (never
+ * rate-limited) until a backend exists, so reactions are always allowed.
  */
 async function checkRateLimit(
-  ruleName: string,
-  entityKey: string,
-  cooldownMinutes: number
+  _ruleName: string,
+  _entityKey: string,
+  _cooldownMinutes: number
 ): Promise<boolean> {
-  const cutoff = new Date(Date.now() - cooldownMinutes * 60 * 1000).toISOString();
-
-  const { data } = await supabase
-    .from('notification_rate_limits')
-    .select('last_notified_at')
-    .eq('rule_name', ruleName)
-    .eq('entity_key', entityKey)
-    .gte('last_notified_at', cutoff)
-    .maybeSingle();
-
-  return !!data;
+  return false;
 }
 
 /**
  * Record a rate limit entry.
+ *
+ * notification_rate_limits table removed from DB — no-op until a backend exists.
  */
-async function recordRateLimit(ruleName: string, entityKey: string): Promise<void> {
-  await supabase.from('notification_rate_limits').upsert(
-    {
-      rule_name: ruleName,
-      entity_key: entityKey,
-      last_notified_at: new Date().toISOString(),
-      count_today: 1,
-    },
-    { onConflict: 'rule_name,entity_key' }
-  );
+async function recordRateLimit(_ruleName: string, _entityKey: string): Promise<void> {
+  // intentionally empty
 }
 
 /**
