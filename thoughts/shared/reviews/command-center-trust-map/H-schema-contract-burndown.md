@@ -70,6 +70,25 @@ silent empty). Exactly the class of bug the contract test exists to stop.
 > the checker resolves their `import { elSupabase as supabase }` alias and routes those reads to the
 > EL v2 instance (30 refs skipped). No false positives.
 
+> **Archive execution-scoping (2026-05-27, task 2 prep — read before any `git mv`):** Tracing the
+> 37 dead-table files revealed archiving is **4-layer coupled**, not a clean route move: each route is
+> `app/api/<x>/route.ts` → a helper in `src/lib/api.ts` (e.g. `getAssets()`/`getDebt()`) → a UI page
+> fetch → a sidebar nav link. Verified consumption:
+> - **Only `team` is a fully-dead PAGE** — `team/page.tsx` fetches only the dead `/api/team` (→ `seasonal_demand`).
+> - **`agent` page is NOT fully dead** — it fetches `/api/agent/{autonomy,learning,procedures}` (dead) **and
+>   `/api/agent/proposals` (live)**. Archive the 3 dead routes + **remove their fetches from the page**; keep the page.
+> - **~17 orphan API routes** are not fetched by any `.tsx` page; several are referenced only by dead
+>   `lib/api.ts` helpers (archive route + prune the helper). `pipeline/unified` + `webhooks/stripe` have
+>   **zero** references (stripe = external webhook → confirm Stripe is unwired before archiving).
+> - **Fix-don't-archive (live routes, one dead ref — these are Cat-3 column work, NOT Cat-1):**
+>   `reports/{monthly,yearly}` (`communications`→`communications_history`, `contacts`→`ghl_contacts`),
+>   `strategy` (`grant_financial_tracking`), `finance/tax` + `projects/[code]/financials` + `revenue-streams`
+>   (`donations`), `finance/projects/[code]` (`financial_variance_notes`).
+> - **`compliance` route + `lib/tools/projects.ts`** (`compliance_items`/`tracked_documents`): superseded by
+>   the file-based compliance calendar (G-audit) → safe to archive, but confirm nothing still reads them.
+> Net: the safe Cat-1 archive set is ~15 orphan routes + `team` (page+route+nav) + agent's 3 dead routes
+> (with page fetch-removal). Awaiting scope confirmation.
+
 ## Category 1 — Archive the fake page + route (dead-table API routes)
 These back UI pages that read tables that don't exist → silent zeros. Per the audit's archive list.
 `git mv` route + page to `_archived/` with a `RESTORE.md`. **Judgment flags noted.**
