@@ -698,8 +698,8 @@ export async function executeMoonCycleReview(input: {
         .in('status', ['AUTHORISED', 'SENT']),
       supabase
         .from('subscriptions')
-        .select('amount_aud, billing_cycle')
-        .eq('status', 'active'),
+        .select('amount, billing_cycle')
+        .eq('account_status', 'active'),
     ])
 
     const totalIncome = (income.data || []).reduce((s, i) => s + (parseFloat(String(i.total)) || 0), 0)
@@ -707,7 +707,7 @@ export async function executeMoonCycleReview(input: {
     const totalOutstanding = (outstanding.data || []).reduce((s, i) => s + (parseFloat(String(i.amount_due)) || 0), 0)
     let monthlySubBurn = 0
     for (const sub of subs.data || []) {
-      const amt = parseFloat(String(sub.amount_aud)) || 0
+      const amt = parseFloat(String(sub.amount)) || 0
       if (sub.billing_cycle === 'monthly') monthlySubBurn += amt
       else if (sub.billing_cycle === 'yearly') monthlySubBurn += amt / 12
       else if (sub.billing_cycle === 'quarterly') monthlySubBurn += amt / 3
@@ -737,7 +737,7 @@ export async function executeMoonCycleReview(input: {
         .order('last_contact_date', { ascending: true })
         .limit(10),
       supabase
-        .from('communications')
+        .from('communications_history')
         .select('id')
         .gte('created_at', startDate)
         .lte('created_at', endDate),
@@ -792,10 +792,10 @@ export async function executeMoonCycleReview(input: {
   if (focus === 'full' || focus === 'wellbeing') {
     const reflections = await supabase
       .from('daily_reflections')
-      .select('date, gratitude, challenges, learnings, lcaa_listen, lcaa_art')
-      .gte('date', startDate)
-      .lte('date', endDate)
-      .order('date', { ascending: false })
+      .select('reflection_date, gratitude, challenges, learnings, lcaa_listen, lcaa_art')
+      .gte('reflection_date', startDate)
+      .lte('reflection_date', endDate)
+      .order('reflection_date', { ascending: false })
       .limit(31)
 
     const refData = reflections.data || []

@@ -24,7 +24,7 @@ export async function GET(request: Request) {
     // Fetch transactions
     const { data: transactions } = await supabase
       .from('xero_transactions')
-      .select('date, contact_name, description, total, type, account_code, project_code, line_items')
+      .select('date, contact_name, total, type, project_code, line_items')
       .gte('date', start)
       .lt('date', end)
       .order('date', { ascending: true })
@@ -43,10 +43,10 @@ export async function GET(request: Request) {
       return [
         tx.date,
         `"${(tx.contact_name || '').replace(/"/g, '""')}"`,
-        `"${(tx.description || '').replace(/"/g, '""')}"`,
+        `"${(tx.line_items?.[0]?.description || '').replace(/"/g, '""')}"`,
         tx.total || 0,
         tx.type,
-        tx.account_code || '',
+        tx.line_items?.[0]?.account_code || '',
         tx.project_code || '',
         gst.toFixed(2),
       ].join(',')

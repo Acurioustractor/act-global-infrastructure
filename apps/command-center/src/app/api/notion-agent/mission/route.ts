@@ -16,7 +16,7 @@ export async function GET() {
       // Today's calendar
       supabase
         .from('calendar_events')
-        .select('summary, start_time, end_time, location, calendar_name')
+        .select('summary:title, start_time, end_time, location, calendar_name')
         .gte('start_time', `${today}T00:00:00`)
         .lte('start_time', `${today}T23:59:59`)
         .order('start_time', { ascending: true }),
@@ -45,7 +45,7 @@ export async function GET() {
       // Pipeline
       supabase
         .from('ghl_opportunities')
-        .select('name, status, monetary_value, pipeline_stage')
+        .select('name, status, monetary_value, pipeline_stage:stage_name')
         .in('status', ['open', 'won'])
         .order('monetary_value', { ascending: false })
         .limit(10),

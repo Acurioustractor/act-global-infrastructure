@@ -136,12 +136,12 @@ export async function executeFindReceipt(input: {
     // Search Gmail
     if (input.vendor) {
       let gmailQuery = supabase
-        .from('communications')
-        .select('subject, from_address, date, snippet, project_code')
-        .or(`subject.ilike.%${input.vendor}%,from_address.ilike.%${input.vendor}%,snippet.ilike.%${input.vendor}%`)
-        .order('date', { ascending: false })
+        .from('communications_history')
+        .select('subject, from_address:contact_email, date:occurred_at, snippet:content_preview, project_code')
+        .or(`subject.ilike.%${input.vendor}%,contact_email.ilike.%${input.vendor}%,content_preview.ilike.%${input.vendor}%`)
+        .order('occurred_at', { ascending: false })
         .limit(5)
-      if (dateRange) gmailQuery = gmailQuery.gte('date', dateRange.from).lte('date', dateRange.to)
+      if (dateRange) gmailQuery = gmailQuery.gte('occurred_at', dateRange.from).lte('occurred_at', dateRange.to)
       const { data: emails } = await gmailQuery
       if (emails?.length) {
         results.push(`**Gmail (${emails.length}):**`)
@@ -922,7 +922,7 @@ export async function executeGetWeeklyFinanceSummary(input: {
     const [transactions, snapshots, overdueInvoices, upcomingBills] = await Promise.all([
       supabase
         .from('xero_transactions')
-        .select('amount, type, contact_name')
+        .select('amount:total, type, contact_name')
         .gte('date', sevenDaysAgo.split('T')[0])
         .lte('date', today),
       supabase

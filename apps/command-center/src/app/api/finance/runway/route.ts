@@ -114,7 +114,7 @@ async function fetchScenarios() {
 async function fetchGHLWins() {
   const { data } = await supabase
     .from('ghl_opportunities')
-    .select('name, monetary_value, pipeline_stage')
+    .select('name, monetary_value, pipeline_stage:stage_name')
     .eq('status', 'won')
 
   return (data || []).reduce((sum: number, o: any) => sum + (o.monetary_value || 0), 0)

@@ -344,9 +344,9 @@ export async function executeGetMeetingPrep(input: {
         // Get last communication
         const { data: lastComm } = await supabase
           .from('communications_history')
-          .select('subject, communication_date, direction')
-          .eq('contact_id', contact.id)
-          .order('communication_date', { ascending: false })
+          .select('subject, occurred_at, direction')
+          .eq('ghl_contact_id', contact.ghl_id)
+          .order('occurred_at', { ascending: false })
           .limit(1)
           .maybeSingle()
 
@@ -354,7 +354,7 @@ export async function executeGetMeetingPrep(input: {
         const { data: deals } = await supabase
           .from('ghl_opportunities')
           .select('monetary_value')
-          .eq('contact_id', contact.ghl_id)
+          .eq('ghl_contact_id', contact.ghl_id)
           .eq('status', 'open')
 
         const pipelineValue = (deals || []).reduce((sum, d) => sum + (d.monetary_value || 0), 0)

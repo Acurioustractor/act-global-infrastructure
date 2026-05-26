@@ -70,7 +70,7 @@ export async function executeGetDealRisks(input: {
     // Get open opportunities
     const { data: opportunities, error } = await supabase
       .from('ghl_opportunities')
-      .select('id, name, monetary_value, stage_name, pipeline_name, contact_id, status, updated_at')
+      .select('id, name, monetary_value, stage_name, pipeline_name, contact_id:ghl_contact_id, status, updated_at')
       .eq('status', 'open')
       .order('monetary_value', { ascending: false })
 

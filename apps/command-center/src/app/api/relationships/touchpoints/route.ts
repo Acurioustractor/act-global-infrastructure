@@ -9,7 +9,7 @@ export async function GET() {
       // Relationship health — all contacts with temperature data
       supabase
         .from('relationship_health')
-        .select('ghl_contact_id, temperature, days_since_contact, lcaa_stage, total_touchpoints, last_touchpoint_date, email_score, calendar_score, financial_score, pipeline_score')
+        .select('ghl_contact_id, temperature, days_since_contact, lcaa_stage, total_touchpoints, last_touchpoint_date:last_contact_at, email_score, calendar_score, financial_score, pipeline_score')
         .order('temperature', { ascending: true }),
 
       // Recent communications — last 30 days

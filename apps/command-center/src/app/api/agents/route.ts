@@ -6,8 +6,8 @@ export async function GET() {
     // Check if we have agent data in the audit log
     const { data: recentActivity } = await supabase
       .from('agent_audit_log')
-      .select('agent_name, action, created_at')
-      .order('created_at', { ascending: false })
+      .select('agent_name:agent_id, action, created_at:timestamp')
+      .order('timestamp', { ascending: false })
       .limit(50)
 
     // Derive agent list from recent activity

@@ -1,0 +1,9 @@
+{
+  "_doc": "Exceptions for the schema-contract check (scripts/check-schema-contract.mjs). Only add entries that are deliberately NOT in the shared DB tednluwflfhxyucgwigh — never to silence a real bug.",
+  "crossInstanceTables": [],
+  "_crossInstanceTables_doc": "Tables that live in EL v2 (yvnuayzslukamizrlhwb) or media (uaxhjzqrdotoahjnxmbj), queried via a non-shared client. Seeded from _schema-truth.md.",
+  "ignoreFiles": [],
+  "_ignoreFiles_doc": "Path substrings of files that construct their own non-shared Supabase client.",
+  "ignoreColumns": {},
+  "_ignoreColumns_doc": "table -> [columns] known false-positives (e.g. RPC-returned aliases the parser can't see). Document why for each."
+}

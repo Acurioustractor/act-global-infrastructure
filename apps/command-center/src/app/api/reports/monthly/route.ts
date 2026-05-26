@@ -61,21 +61,21 @@ export async function GET(request: Request) {
     const { count: meetingsCount } = await supabase
       .from('project_knowledge')
       .select('id', { count: 'exact', head: true })
-      .eq('type', 'meeting')
+      .eq('knowledge_type', 'meeting')
       .gte('created_at', monthStart.toISOString())
       .lte('created_at', monthEnd.toISOString())
 
     const { count: actionsCount } = await supabase
       .from('project_knowledge')
       .select('id', { count: 'exact', head: true })
-      .eq('type', 'action')
+      .eq('knowledge_type', 'action')
       .gte('created_at', monthStart.toISOString())
       .lte('created_at', monthEnd.toISOString())
 
     const { count: decisionsCount } = await supabase
       .from('project_knowledge')
       .select('id', { count: 'exact', head: true })
-      .eq('type', 'decision')
+      .eq('knowledge_type', 'decision')
       .gte('created_at', monthStart.toISOString())
       .lte('created_at', monthEnd.toISOString())
 
@@ -83,22 +83,22 @@ export async function GET(request: Request) {
     const { count: prevMeetings } = await supabase
       .from('project_knowledge')
       .select('id', { count: 'exact', head: true })
-      .eq('type', 'meeting')
+      .eq('knowledge_type', 'meeting')
       .gte('created_at', prevMonthStart.toISOString())
       .lte('created_at', prevMonthEnd.toISOString())
 
     // === RELATIONSHIPS ===
     const { count: contactsEngaged } = await supabase
-      .from('contacts')
+      .from('ghl_contacts')
       .select('id', { count: 'exact', head: true })
       .gte('updated_at', monthStart.toISOString())
       .lte('updated_at', monthEnd.toISOString())
 
     const { count: communicationsCount } = await supabase
-      .from('communications')
+      .from('communications_history')
       .select('id', { count: 'exact', head: true })
-      .gte('received_at', monthStart.toISOString())
-      .lte('received_at', monthEnd.toISOString())
+      .gte('occurred_at', monthStart.toISOString())
+      .lte('occurred_at', monthEnd.toISOString())
 
     // === PROJECTS ===
     const { data: projectActivity } = await supabase

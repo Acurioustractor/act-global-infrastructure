@@ -133,7 +133,7 @@ async function buildDailyBriefing(): Promise<string> {
     supabase
       .from('grant_opportunities')
       .select('name, provider, amount_max, closes_at, fit_score, aligned_projects')
-      .gte('discovered_at', yesterday)
+      .gte('created_at', yesterday)
       .order('fit_score', { ascending: false })
       .limit(5),
 
@@ -405,7 +405,7 @@ export async function checkGrantAlerts(): Promise<{ sent: number; alerts: string
   const { data: newGrants } = await supabase
     .from('grant_opportunities')
     .select('name, provider, amount_max, closes_at, fit_score, aligned_projects')
-    .gte('discovered_at', yesterday)
+    .gte('created_at', yesterday)
     .order('fit_score', { ascending: false })
     .limit(5)
 
@@ -970,8 +970,8 @@ export async function sendPreMeetingBriefings(): Promise<{ sent: number; errors:
         const { data: lastComm } = await supabase
           .from('communications_history')
           .select('subject')
-          .or(`contact_id.eq.${att.email}`)
-          .order('communication_date', { ascending: false })
+          .or(`contact_email.eq.${att.email}`)
+          .order('occurred_at', { ascending: false })
           .limit(1)
           .maybeSingle()
 
@@ -1195,9 +1195,9 @@ export async function checkRelationshipNudges(): Promise<{ sent: number; nudges:
     // Get last communication topic
     const { data: lastComm } = await supabase
       .from('communications_history')
-      .select('subject, communication_date')
-      .eq('contact_id', contact.id)
-      .order('communication_date', { ascending: false })
+      .select('subject, occurred_at')
+      .eq('ghl_contact_id', contact.ghl_id)
+      .order('occurred_at', { ascending: false })
       .limit(1)
       .maybeSingle()
 
@@ -1205,7 +1205,7 @@ export async function checkRelationshipNudges(): Promise<{ sent: number; nudges:
     const { data: deals } = await supabase
       .from('ghl_opportunities')
       .select('monetary_value')
-      .eq('contact_id', contact.ghl_id)
+      .eq('ghl_contact_id', contact.ghl_id)
       .eq('status', 'open')
 
     const pipelineValue = (deals || []).reduce((sum, d) => sum + (d.monetary_value || 0), 0)
@@ -1259,7 +1259,7 @@ export async function sendWeeklyFinanceSummary(): Promise<{ sent: number; errors
   ] = await Promise.all([
     supabase
       .from('xero_transactions')
-      .select('amount, type')
+      .select('amount:total, type')
       .gte('date', sevenDaysAgo.split('T')[0])
       .lte('date', today),
     // Real bank balance from Xero

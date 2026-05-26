@@ -200,7 +200,7 @@ async function getReceiptGap(filters: Filters) {
     .from('xero_transactions')
     .select('*', { count: 'exact', head: true })
     .eq('type', 'SPEND')
-    .eq('has_attachment', true)
+    .eq('has_attachments', true)
     .gte('date', receiptFrom)
     .lte('date', filters.to)
   if (filters.account) matchedQ = matchedQ.eq('bank_account', filters.account)
@@ -290,7 +290,7 @@ async function getGrantDeadlines(_filters: Filters) {
   // Also check grant_opportunities closing soon
   const { data: opps } = await supabase
     .from('grant_opportunities')
-    .select('title, closes_at, amount_min, amount_max')
+    .select('title:name, closes_at, amount_min, amount_max')
     .gte('closes_at', today)
     .lte('closes_at', cutoffStr)
     .order('closes_at')

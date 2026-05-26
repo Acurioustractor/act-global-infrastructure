@@ -1,0 +1,57 @@
+name: Schema Contract
+
+# Fails when command-center code references a Supabase table/column that doesn't exist in the
+# live shared DB — the "honest by construction" gate from the 2026-05-26 trust-map P3.
+# Passes today via a burn-down baseline (config/schema-contract-baseline.json); fails on NEW drift.
+
+on:
+  pull_request:
+    paths:
+      - 'apps/command-center/src/**'
+      - 'scripts/lib/schema-contract.mjs'
+      - 'scripts/check-schema-contract.mjs'
+      - 'scripts/tests/schema-contract.test.mjs'
+      - 'config/schema-contract-allowlist.json'
+      - 'config/schema-contract-baseline.json'
+      - 'config/schema-snapshot.json'
+      - '.github/workflows/schema-contract.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'apps/command-center/src/**'
+  workflow_dispatch:
+
+jobs:
+  schema-contract:
+    name: Verify schema contract
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Schema-contract check
+        # Live schema if the secret is present (most accurate); otherwise the committed
+        # snapshot. With neither, the checker errors rather than passing silently.
+        env:
+          SUPABASE_SHARED_URL: ${{ secrets.SUPABASE_SHARED_URL }}
+          SUPABASE_SHARED_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SHARED_SERVICE_ROLE_KEY }}
+        run: node scripts/check-schema-contract.mjs
+
+      - name: Parser unit + integration tests
+        env:
+          SUPABASE_SHARED_URL: ${{ secrets.SUPABASE_SHARED_URL }}
+          SUPABASE_SHARED_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SHARED_SERVICE_ROLE_KEY }}
+        run: node --test scripts/tests/schema-contract.test.mjs

@@ -73,7 +73,7 @@ export async function GET() {
         .select('id, contact_name, contact_email, subject, occurred_at, project_code')
         .eq('direction', 'inbound')
         .eq('requires_response', true)
-        .is('responded_at', null)
+        .is('response_received_at', null)
         .gte('occurred_at', threeDaysAgo)
         .order('occurred_at', { ascending: false })
         .limit(15),

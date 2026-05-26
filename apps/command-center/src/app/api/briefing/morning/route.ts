@@ -81,12 +81,12 @@ async function fetchNeedToRespond() {
   const threeDaysAgo = daysAgo(3)
   const { data } = await supabase
     .from('communications_history')
-    .select('id, contact_name, contact_email, subject, channel, received_at, ai_summary')
+    .select('id, contact_name, contact_email, subject, channel, received_at:occurred_at, ai_summary:summary')
     .eq('direction', 'inbound')
     .eq('requires_response', true)
-    .is('responded_at', null)
-    .gte('received_at', threeDaysAgo)
-    .order('received_at', { ascending: false })
+    .is('response_received_at', null)
+    .gte('occurred_at', threeDaysAgo)
+    .order('occurred_at', { ascending: false })
     .limit(10)
 
   return (data || []).map(row => ({
@@ -108,13 +108,13 @@ async function fetchCommunicationStats() {
   const { count: todayCount } = await supabase
     .from('communications_history')
     .select('id', { count: 'exact', head: true })
-    .gte('received_at', today.toISOString())
+    .gte('occurred_at', today.toISOString())
 
   const { count: yesterdayCount } = await supabase
     .from('communications_history')
     .select('id', { count: 'exact', head: true })
-    .gte('received_at', yesterday.toISOString())
-    .lt('received_at', today.toISOString())
+    .gte('occurred_at', yesterday.toISOString())
+    .lt('occurred_at', today.toISOString())
 
   return {
     today: todayCount || 0,

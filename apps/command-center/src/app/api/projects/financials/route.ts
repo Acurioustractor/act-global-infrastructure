@@ -7,7 +7,7 @@ export async function GET() {
     // Coverage uses count-only queries (head: true) — never transfer >1000 rows just to count them.
     const [financialsResult, rdResult, totalCountResult, taggedCountResult] = await Promise.all([
       supabase.from('v_project_financials').select('*'),
-      supabase.from('xero_transactions').select('vendor_name, total, date').eq('project_code', 'ACT-RD'),
+      supabase.from('xero_transactions').select('vendor_name:contact_name, total, date').eq('project_code', 'ACT-RD'),
       supabase.from('xero_transactions').select('id', { count: 'exact', head: true }),
       supabase.from('xero_transactions').select('id', { count: 'exact', head: true }).not('project_code', 'is', null),
     ])
