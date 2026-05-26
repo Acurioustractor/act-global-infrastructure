@@ -9,6 +9,9 @@
   "scripts": {
     "test": "node --test scripts/tests/*.test.mjs",
     "test:finance": "node scripts/finance-engine.mjs --self-test",
+    "schema:check": "node scripts/check-schema-contract.mjs",
+    "schema:baseline": "node scripts/check-schema-contract.mjs --baseline",
+    "schema:snapshot": "node scripts/check-schema-contract.mjs --snapshot",
     "ask": "node scripts/ask-act.mjs",
     "sync:ghl": "node scripts/sync-ghl-to-notion.mjs",
     "sync:ghl:supabase": "node scripts/sync-ghl-to-supabase.mjs",
