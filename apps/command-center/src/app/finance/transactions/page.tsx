@@ -64,6 +64,9 @@ export default function TransactionsExplorer() {
   const [projects, setProjects] = useState<ProjectOpt[]>([])
   const [suggestions, setSuggestions] = useState<Record<string, Suggestion>>({})
   const [loading, setLoading] = useState(true)
+  // Gate the first data load until URL filters are read, so we don't fire two
+  // races (default UNTAGGED vs the URL-driven view) where the slower one wins.
+  const [initialized, setInitialized] = useState(false)
 
   // server-side filters
   const [projectFilter, setProjectFilter] = useState<string>('UNTAGGED')
@@ -182,6 +185,27 @@ export default function TransactionsExplorer() {
     } catch {}
   }, [])
 
+  // Deep-linkable filters: initialise the server-side filters from the URL on mount
+  // (e.g. ?project=ACT-HV&since=2026-01-01&accounts=all opens straight onto that view).
+  useEffect(() => {
+    const sp = new URLSearchParams(window.location.search)
+    const p = sp.get('project'); if (p) setProjectFilter(p)
+    const s = sp.get('since'); if (s) setSince(s)
+    const a = sp.get('accounts'); if (a) setAccountFilter(a)
+    setInitialized(true)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  // Keep the URL in sync as filters change, so a view is shareable + survives refresh.
+  useEffect(() => {
+    const sp = new URLSearchParams()
+    if (projectFilter !== 'UNTAGGED') sp.set('project', projectFilter)
+    if (since !== '2025-07-01') sp.set('since', since)
+    if (accountFilter !== 'act-only') sp.set('accounts', accountFilter)
+    const qs = sp.toString()
+    window.history.replaceState(null, '', qs ? `?${qs}` : window.location.pathname)
+  }, [projectFilter, since, accountFilter])
+
   function load() {
     setLoading(true)
     const sp = new URLSearchParams()
@@ -204,7 +228,7 @@ export default function TransactionsExplorer() {
       })
   }, [])
 
-  useEffect(load, [projectFilter, since, accountFilter])
+  useEffect(() => { if (initialized) load() }, [projectFilter, since, accountFilter, initialized])
 
   // Load reality stats once per (since, accountFilter) change — org-wide, ignores project filter
   useEffect(() => {
