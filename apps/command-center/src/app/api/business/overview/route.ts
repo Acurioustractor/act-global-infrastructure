@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { supabase } from '@/lib/supabase'
+import { fetchAllRows } from '@/lib/finance/query'
 
 /**
  * GET /api/business/overview
@@ -26,11 +27,13 @@ export async function GET() {
   thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30)
   const thirtyDaysAgoStr = thirtyDaysAgo.toISOString().split('T')[0]
 
-  // FY totals
-  const { data: fyTxns } = await supabase
-    .from('xero_transactions')
-    .select('total, type')
-    .gte('date', fyStartStr)
+  // FY totals (paginated past PostgREST ~1000-row cap)
+  const fyTxns = await fetchAllRows<{ total: number; type: string }>((from, to) =>
+    supabase
+      .from('xero_transactions')
+      .select('total, type')
+      .gte('date', fyStartStr)
+      .range(from, to))
 
   let fyIncome = 0, fyExpenses = 0
   for (const tx of fyTxns || []) {
@@ -92,11 +95,13 @@ export async function GET() {
   // === LIVE R&D SPEND DATA ===
   const RD_ELIGIBLE_PROJECTS = ['ACT-EL', 'ACT-IN', 'ACT-JH', 'ACT-GD', 'ACT-PS', 'ACT-CF']
 
-  const { data: rdTxns } = await supabase
-    .from('xero_transactions')
-    .select('project_code, total')
-    .in('project_code', RD_ELIGIBLE_PROJECTS)
-    .gte('date', fyStartStr)
+  const rdTxns = await fetchAllRows<{ project_code: string; total: number }>((from, to) =>
+    supabase
+      .from('xero_transactions')
+      .select('project_code, total')
+      .in('project_code', RD_ELIGIBLE_PROJECTS)
+      .gte('date', fyStartStr)
+      .range(from, to))
 
   let rdSpendTotal = 0
   const rdByProject: Record<string, number> = {}

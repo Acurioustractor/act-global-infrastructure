@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { supabase } from '@/lib/supabase'
+import { fetchAllRows } from '@/lib/finance/query'
 
 const FY26_START = '2025-07-01'
 const FY26_END = '2026-06-30'
@@ -36,7 +37,7 @@ interface FounderPayResponse {
 export async function GET() {
   try {
     // Mirrors scripts/sync-money-framework-to-notion.mjs::fetchKnightPhotography + fetchFY26Totals
-    const [knightRes, fy26Res] = await Promise.all([
+    const [knightRes, fy26Rows] = await Promise.all([
       supabase
         .from('xero_invoices')
         .select('invoice_number, date, total, status')
@@ -46,20 +47,21 @@ export async function GET() {
         .lte('date', FY26_END)
         .order('date', { ascending: false })
         .limit(40),
-      supabase
-        .from('xero_invoices')
-        .select('type, total, status, amount_paid')
-        .gte('date', FY26_START)
-        .lte('date', FY26_END),
+      fetchAllRows<{ type: string; total: number; status: string; amount_paid: number }>((from, to) =>
+        supabase
+          .from('xero_invoices')
+          .select('type, total, status, amount_paid')
+          .gte('date', FY26_START)
+          .lte('date', FY26_END)
+          .range(from, to)),
     ])
 
     if (knightRes.error) throw knightRes.error
-    if (fy26Res.error) throw fy26Res.error
 
     const knightInvoices = (knightRes.data || []) as FounderInvoice[]
     let income = 0
     let expenses = 0
-    for (const i of fy26Res.data || []) {
+    for (const i of fy26Rows) {
       const t = Number(i.total || 0)
       if (i.type === 'ACCREC') income += t
       else if (i.type === 'ACCPAY') expenses += t

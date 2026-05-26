@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { supabase } from '@/lib/supabase'
+import { fetchAllRows } from '@/lib/finance/query'
 
 export const dynamic = 'force-dynamic'
 
@@ -43,13 +44,15 @@ export async function GET() {
     oneWeek.setDate(oneWeek.getDate() + 7)
     const oneWeekStr = oneWeek.toISOString().split('T')[0]
 
-    // Fetch all active invoices + projects in parallel
-    const [invResult, projectsResult] = await Promise.all([
-      supabase
-        .from('xero_invoices')
-        .select('id, xero_id, invoice_number, type, status, contact_name, date, due_date, total, amount_due, amount_paid, has_attachments, reference, project_code, line_items, fully_paid_date')
-        .in('status', ['DRAFT', 'SUBMITTED', 'AUTHORISED', 'PAID'])
-        .order('due_date', { ascending: true, nullsFirst: false }),
+    // Fetch all active invoices (paginated past PostgREST ~1000-row cap) + projects in parallel
+    const [invoices, projectsResult] = await Promise.all([
+      fetchAllRows<InvoiceRow>((from, to) =>
+        supabase
+          .from('xero_invoices')
+          .select('id, xero_id, invoice_number, type, status, contact_name, date, due_date, total, amount_due, amount_paid, has_attachments, reference, project_code, line_items, fully_paid_date')
+          .in('status', ['DRAFT', 'SUBMITTED', 'AUTHORISED', 'PAID'])
+          .order('due_date', { ascending: true, nullsFirst: false })
+          .range(from, to)),
       supabase
         .from('projects')
         .select('code, name, tier')
@@ -57,7 +60,6 @@ export async function GET() {
         .order('name'),
     ])
 
-    const invoices = (invResult.data || []) as InvoiceRow[]
     const projects = projectsResult.data || []
 
     // Compute stats and enrich items
