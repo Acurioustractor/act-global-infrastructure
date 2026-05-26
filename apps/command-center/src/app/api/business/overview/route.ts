@@ -74,7 +74,7 @@ export async function GET() {
   const { data: subs } = await supabase
     .from('subscriptions')
     .select('amount')
-    .eq('status', 'active')
+    .eq('account_status', 'active')
 
   const monthlySubscriptions = (subs || []).reduce((sum, s) => sum + (Number(s.amount) || 0), 0)
 
