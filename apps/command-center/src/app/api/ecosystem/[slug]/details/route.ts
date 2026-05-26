@@ -14,13 +14,8 @@ export async function GET(_req: Request, { params }: { params: Promise<{ slug: s
       return NextResponse.json({ error: 'Site not found' }, { status: 404 })
     }
 
-    const { data: latestCheck } = await supabase
-      .from('health_checks')
-      .select('*')
-      .eq('site_id', site.id)
-      .order('checked_at', { ascending: false })
-      .limit(1)
-      .single()
+    // health_checks table removed from DB — returns null until a backend exists
+    const latestCheck = null
 
     return NextResponse.json({ site, latestCheck: latestCheck || null })
   } catch (e) {

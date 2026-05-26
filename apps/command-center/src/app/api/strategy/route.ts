@@ -101,11 +101,8 @@ export async function GET() {
         .eq('fy_year', 'FY26')
         .limit(500),
 
-      // Grant financial tracking (links grants → Xero invoices)
-      supabase
-        .from('grant_financial_tracking')
-        .select('id, opportunity_id, project_code, grant_name, monetary_value, status, xero_invoice_id, xero_invoice_number, approved_date, received_date, acquittal_due_date, acquittal_status, notes')
-        .limit(200),
+      // grant_financial_tracking table removed from DB — returns empty until a backend exists
+      Promise.resolve({ data: [] as any[] }),
 
       // trailing operating history (up to 36 months)
       supabase

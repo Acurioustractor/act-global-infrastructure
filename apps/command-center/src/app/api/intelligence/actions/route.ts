@@ -217,11 +217,8 @@ export async function GET(request: NextRequest) {
         .order('follow_up_date', { ascending: true })
         .limit(8),
 
-      // 9. Insight votes (for contact/project importance boost)
-      supabase
-        .from('insight_votes')
-        .select('vote_type, contact_id, project_codes, voted_at')
-        .order('voted_at', { ascending: false }),
+      // 9. insight_votes table removed from DB — returns empty until a backend exists
+      Promise.resolve({ data: [] as any[] }),
     ])
 
     // Build lookup maps
