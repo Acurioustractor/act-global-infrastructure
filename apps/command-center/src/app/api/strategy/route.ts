@@ -61,7 +61,7 @@ export async function GET() {
       // Active pipeline opportunities (not lost/expired/identified)
       supabase
         .from('opportunities_unified')
-        .select('id, title, stage, probability, value_mid, project_codes, expected_close, source_system, deadline')
+        .select('id, title, stage, probability, value_mid, project_codes, expected_close, source_system, deadline:expected_close')
         .not('stage', 'in', '(lost,expired,identified)')
         .limit(500),
 

@@ -344,9 +344,9 @@ export async function executeGetMeetingPrep(input: {
         // Get last communication
         const { data: lastComm } = await supabase
           .from('communications_history')
-          .select('subject, communication_date, direction')
+          .select('subject, occurred_at, direction')
           .eq('contact_id', contact.id)
-          .order('communication_date', { ascending: false })
+          .order('occurred_at', { ascending: false })
           .limit(1)
           .maybeSingle()
 

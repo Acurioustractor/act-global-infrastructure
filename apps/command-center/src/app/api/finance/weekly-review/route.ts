@@ -290,7 +290,7 @@ async function getGrantDeadlines(_filters: Filters) {
   // Also check grant_opportunities closing soon
   const { data: opps } = await supabase
     .from('grant_opportunities')
-    .select('title, closes_at, amount_min, amount_max')
+    .select('title:name, closes_at, amount_min, amount_max')
     .gte('closes_at', today)
     .lte('closes_at', cutoffStr)
     .order('closes_at')

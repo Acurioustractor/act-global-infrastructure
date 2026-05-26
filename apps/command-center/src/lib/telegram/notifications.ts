@@ -1195,9 +1195,9 @@ export async function checkRelationshipNudges(): Promise<{ sent: number; nudges:
     // Get last communication topic
     const { data: lastComm } = await supabase
       .from('communications_history')
-      .select('subject, communication_date')
+      .select('subject, occurred_at')
       .eq('contact_id', contact.id)
-      .order('communication_date', { ascending: false })
+      .order('occurred_at', { ascending: false })
       .limit(1)
       .maybeSingle()
 
@@ -1259,7 +1259,7 @@ export async function sendWeeklyFinanceSummary(): Promise<{ sent: number; errors
   ] = await Promise.all([
     supabase
       .from('xero_transactions')
-      .select('amount, type')
+      .select('amount:total, type')
       .gte('date', sevenDaysAgo.split('T')[0])
       .lte('date', today),
     // Real bank balance from Xero

@@ -1,9 +1,22 @@
 # H — Schema-contract burn-down (the P3 "honest by construction" checklist)
 
 **Date:** 2026-05-27 · **Tool:** `scripts/check-schema-contract.mjs` (live-schema diff of every
-command-center `.from().select()`). **Baseline:** `config/schema-contract-baseline.json` — 87 unique
-violations (100 refs) accepted today; the test fails on any NEW drift. **Goal:** burn this to 0,
-then delete the baseline for full strictness.
+command-center `.from().select()`). **Baseline:** `config/schema-contract-baseline.json` — the test
+fails on any NEW drift. **Goal:** burn this to 0, then delete the baseline for full strictness.
+
+> **Progress 2026-05-27:** baseline **87 → 72** (15 fixed). Done: the live `/harvest` regression
+> (both routes — `description`/`account_code` now read from `line_items[]`, restoring zeroed totals +
+> vendor + GL-account spend) and 13 clean column renames via PostgREST aliases (preserve downstream
+> keys): `xero_transactions.amount→total`, `communications_history.communication_date→occurred_at`,
+> `daily_reflections.date→reflection_date`, `agent_audit_log.{agent_name→agent_id,created_at→timestamp}`,
+> `project_summaries.summary→summary_text`, `foundations.annual_giving_total→total_giving_annual`,
+> `opportunities_unified.deadline→expected_close`, `relationship_health.last_touchpoint_date→last_contact_at`,
+> `calendar_events.summary→title`, `grant_opportunities.{title→name,funder_name→provider,close_date→closes_at}`.
+> **Skipped (needs intent, still baselined):** `contact_project_links.ghl_contact_id` (table keys on
+> `entity_id` = canonical entity, not a GHL contact id — needs a join, not a rename); `subscriptions`
+> old names; `project_budgets` (needs aggregation); remaining `ghl_opportunities` drift;
+> `api_usage` (table repurposed → rewrite/archive); `receipt_matches.project_code`;
+> `xero_transactions.{description,account_code}` in `tax/export` + `projects/financials` (line_items).
 
 This is the mechanical, client-aware reproduction of the audit's manual findings — and it caught a
 **fresh regression the audit missed**: the just-shipped `/harvest` routes select

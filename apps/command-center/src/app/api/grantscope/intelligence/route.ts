@@ -25,10 +25,10 @@ export async function GET() {
     supabase.from('foundations').select('id', { count: 'exact', head: true }),
     supabase.from('grant_opportunities').select('id', { count: 'exact', head: true }),
     supabase.from('grant_opportunities').select('id', { count: 'exact', head: true })
-      .gte('close_date', now),
-    supabase.from('grant_opportunities').select('id, title, close_date, amount_max, funder_name', { count: 'exact' })
-      .gte('close_date', now).lte('close_date', thirtyDays)
-      .order('close_date', { ascending: true })
+      .gte('closes_at', now),
+    supabase.from('grant_opportunities').select('id, title:name, close_date:closes_at, amount_max, funder_name:provider', { count: 'exact' })
+      .gte('closes_at', now).lte('closes_at', thirtyDays)
+      .order('closes_at', { ascending: true })
       .limit(10),
     supabase.from('foundations')
       .select('id, name, total_giving_annual, website')
@@ -36,7 +36,7 @@ export async function GET() {
       .order('total_giving_annual', { ascending: false })
       .limit(10),
     supabase.from('grant_opportunities')
-      .select('id, title, funder_name, amount_max, close_date, created_at')
+      .select('id, title:name, funder_name:provider, amount_max, close_date:closes_at, created_at')
       .order('created_at', { ascending: false })
       .limit(10),
     supabase.from('v_pipeline_value').select('*').limit(1).single(),

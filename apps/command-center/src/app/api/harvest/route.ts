@@ -20,7 +20,8 @@ export async function GET() {
       // Xero transactions
       supabase
         .from('xero_transactions')
-        .select('id, date, description, contact_name, total, type')
+        // description lives in line_items[].description, not a top-level column
+        .select('id, date, line_items, contact_name, total, type')
         .eq('project_code', PROJECT_CODE)
         .order('date', { ascending: false })
         .limit(200),
@@ -174,7 +175,7 @@ export async function GET() {
       transactions: txData.slice(0, 50).map((tx: any) => ({
         id: tx.id,
         date: tx.date,
-        description: tx.description || '',
+        description: tx.line_items?.[0]?.description || '',
         contactName: tx.contact_name || '',
         amount: tx.total || 0,
         type: tx.type,

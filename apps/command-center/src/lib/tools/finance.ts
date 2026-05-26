@@ -922,7 +922,7 @@ export async function executeGetWeeklyFinanceSummary(input: {
     const [transactions, snapshots, overdueInvoices, upcomingBills] = await Promise.all([
       supabase
         .from('xero_transactions')
-        .select('amount, type, contact_name')
+        .select('amount:total, type, contact_name')
         .gte('date', sevenDaysAgo.split('T')[0])
         .lte('date', today),
       supabase

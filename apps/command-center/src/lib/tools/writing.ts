@@ -792,10 +792,10 @@ export async function executeMoonCycleReview(input: {
   if (focus === 'full' || focus === 'wellbeing') {
     const reflections = await supabase
       .from('daily_reflections')
-      .select('date, gratitude, challenges, learnings, lcaa_listen, lcaa_art')
-      .gte('date', startDate)
-      .lte('date', endDate)
-      .order('date', { ascending: false })
+      .select('reflection_date, gratitude, challenges, learnings, lcaa_listen, lcaa_art')
+      .gte('reflection_date', startDate)
+      .lte('reflection_date', endDate)
+      .order('reflection_date', { ascending: false })
       .limit(31)
 
     const refData = reflections.data || []

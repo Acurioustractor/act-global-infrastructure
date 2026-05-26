@@ -38,7 +38,7 @@ export async function GET(req: NextRequest) {
           .limit(5),
         supabase
           .from('project_summaries')
-          .select('summary, generated_at')
+          .select('summary:summary_text, generated_at')
           .eq('project_code', projectCode)
           .order('generated_at', { ascending: false })
           .limit(1)
