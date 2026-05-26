@@ -31,6 +31,29 @@ export function isActBankAccount(name: string | null | undefined): boolean {
 const SPEND_TYPES = ['SPEND', 'SPEND-OVERPAYMENT']
 const RECEIVE_TYPES = ['RECEIVE', 'RECEIVE-OVERPAYMENT']
 
+interface BillRow { date: string; contact_name: string | null; total: number | string; amount_due: number | string | null; status: string }
+interface SpendRow { date: string; contact_name: string | null; total: number | string; type: string; rd_eligible: boolean | null }
+interface ReceiveRow { total: number | string | null; date: string }
+
+/**
+ * PostgREST caps every request at ~1000 rows even with .range() (server `max-rows`). Org-wide reads
+ * that exceed 1000 (FY26 SPEND ~2k, bills ~2k) MUST paginate or the sums silently truncate — this
+ * is exactly what shipped wrong first: cash_spent read $590K of the real $975K. Page until exhausted.
+ */
+async function fetchAllRows<T>(
+  make: (from: number, to: number) => PromiseLike<{ data: T[] | null; error: unknown }>,
+): Promise<{ rows: T[]; ok: boolean }> {
+  const PAGE = 1000
+  const rows: T[] = []
+  for (let from = 0; ; from += PAGE) {
+    const { data, error } = await make(from, from + PAGE - 1)
+    if (error) return { rows, ok: false }
+    const batch = data ?? []
+    rows.push(...batch)
+    if (batch.length < PAGE) return { rows, ok: true }
+  }
+}
+
 // ── R&D Tax Incentive window (FY25-26 Path C — locked 2026-04-27) ──────────────
 // FY24-25 forfeited (sole-trader period). Claim FY25-26 via A Curious Tractor Pty Ltd.
 // Registration + lodgement window: opens after 30 Jun 2026 year-end, CLOSES 30 Apr 2027
@@ -94,46 +117,40 @@ interface LedgerParams {
 }
 
 export async function getOrgLedger({ fyStart, fyEnd, entityCode }: LedgerParams): Promise<OrgLedger> {
-  let billQ = supabase
-    .from('xero_invoices')
-    .select('date, contact_name, total, amount_due, status')
-    .eq('type', 'ACCPAY')
-    .in('status', ['AUTHORISED', 'PAID'])
-    .gte('date', fyStart)
-  let spendQ = supabase
-    .from('xero_transactions')
-    .select('date, contact_name, total, type, rd_eligible')
-    .in('type', SPEND_TYPES)
-    .gte('date', fyStart)
-  let receiveQ = supabase
-    .from('xero_transactions')
-    .select('total, date')
-    .in('type', RECEIVE_TYPES)
-    .gte('date', fyStart)
-
-  if (fyEnd) {
-    billQ = billQ.lte('date', fyEnd)
-    spendQ = spendQ.lte('date', fyEnd)
-    receiveQ = receiveQ.lte('date', fyEnd)
-  }
   // Entity scope (today all rows are ACT-ST; this future-proofs the Pty migration).
-  if (entityCode) {
-    billQ = billQ.eq('entity_code', entityCode)
-    spendQ = spendQ.eq('entity_code', entityCode)
-    receiveQ = receiveQ.eq('entity_code', entityCode)
+  const billPage = (from: number, to: number) => {
+    let q = supabase.from('xero_invoices').select('date, contact_name, total, amount_due, status')
+      .eq('type', 'ACCPAY').in('status', ['AUTHORISED', 'PAID']).gte('date', fyStart)
+    if (fyEnd) q = q.lte('date', fyEnd)
+    if (entityCode) q = q.eq('entity_code', entityCode)
+    return q.range(from, to)
+  }
+  const spendPage = (from: number, to: number) => {
+    let q = supabase.from('xero_transactions').select('date, contact_name, total, type, rd_eligible')
+      .in('type', SPEND_TYPES).gte('date', fyStart)
+    if (fyEnd) q = q.lte('date', fyEnd)
+    if (entityCode) q = q.eq('entity_code', entityCode)
+    return q.range(from, to)
+  }
+  const receivePage = (from: number, to: number) => {
+    let q = supabase.from('xero_transactions').select('total, date')
+      .in('type', RECEIVE_TYPES).gte('date', fyStart)
+    if (fyEnd) q = q.lte('date', fyEnd)
+    if (entityCode) q = q.eq('entity_code', entityCode)
+    return q.range(from, to)
   }
 
-  const [bills, spends, receives, rdVendors] = await Promise.all([
-    billQ.range(0, 9999),
-    spendQ.range(0, 9999),
-    receiveQ.range(0, 9999),
+  const [billsR, spendsR, receivesR, rdVendors] = await Promise.all([
+    fetchAllRows<BillRow>(billPage),
+    fetchAllRows<SpendRow>(spendPage),
+    fetchAllRows<ReceiveRow>(receivePage),
     supabase.from('vendor_project_rules').select('vendor_name').eq('rd_eligible', true),
   ])
 
-  const ok = !bills.error && !spends.error && !receives.error
-  const billRows = bills.data || []
-  const spendRows = spends.data || []
-  const receiveRows = receives.data || []
+  const ok = billsR.ok && spendsR.ok && receivesR.ok
+  const billRows = billsR.rows
+  const spendRows = spendsR.rows
+  const receiveRows = receivesR.rows
   const norm = (s: string | null) => (s || '').trim().toUpperCase()
   const rdVendorSet = new Set((rdVendors.data || []).map((v: { vendor_name: string }) => norm(v.vendor_name)))
   const isRdVendor = (contact: string | null) => rdVendorSet.has(norm(contact))
