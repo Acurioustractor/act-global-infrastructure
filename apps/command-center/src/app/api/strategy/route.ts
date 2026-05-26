@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { supabase } from '@/lib/supabase'
+import { getRdTaxWindow } from '@/lib/finance/ledger'
 
 function getCurrentBasDueDate() {
   const now = new Date()
@@ -339,19 +340,22 @@ export async function GET() {
       urgency: 'critical' | 'urgent' | 'important'
     }> = []
 
-    // 1. R&D registration deadline ($407K at stake)
-    const rdDeadline = '2026-04-30'
-    const rdDaysUntil = Math.ceil((new Date(rdDeadline).getTime() - now.getTime()) / 86400000)
+    // 1. R&D Tax Incentive (FY25-26, claimed via A Curious Tractor Pty Ltd).
+    // FIX 2026-05-26: the old '2026-04-30 / $407K' was fabricated. Real window: lodge by 30 Apr 2027.
+    const rdWindow = getRdTaxWindow(now)
+    const rdEligibleNow = (fySpendResult.data || [])
+      .filter((row) => row.rd_eligible === true)
+      .reduce((sum, row) => sum + Math.abs(Number(row.total || 0)), 0)
     needleMovers.push({
       rank: 0,
-      title: 'R&D Tax Incentive Registration',
-      dollarValue: 407000,
-      deadline: rdDeadline,
-      daysUntil: rdDaysUntil,
-      actionType: 'Register',
-      projectCodes: ['ACT-EL', 'ACT-IN', 'ACT-JH', 'ACT-GD'],
-      why: '43.5% refundable offset on eligible R&D spend — biggest single cash injection available',
-      urgency: rdDaysUntil <= 30 ? 'critical' : rdDaysUntil <= 60 ? 'urgent' : 'important',
+      title: 'R&D Tax Incentive (FY25-26 — lodge via Pty Ltd)',
+      dollarValue: Math.round(rdEligibleNow * 0.435),
+      deadline: rdWindow.lodgementClose,
+      daysUntil: rdWindow.daysUntilClose,
+      actionType: 'Lodge',
+      projectCodes: [],
+      why: rdWindow.note,
+      urgency: rdWindow.windowOpen && rdWindow.daysUntilClose <= 60 ? 'urgent' : 'important',
     })
 
     // 2. Overdue receivables (money already owed)
