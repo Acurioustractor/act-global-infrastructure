@@ -1,25 +1,24 @@
 'use client'
 
-import { useState, Suspense } from 'react'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useState, useEffect, useCallback, Suspense } from 'react'
+import { useSearchParams } from 'next/navigation'
 
 function LoginForm() {
-  const router = useRouter()
   const params = useSearchParams()
   const next = params.get('next') || '/'
+  const magicKey = params.get('k') // one-click magic link: /login?k=<password>
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
-  const [busy, setBusy] = useState(false)
+  const [busy, setBusy] = useState(!!magicKey)
 
-  async function submit(e: React.FormEvent) {
-    e.preventDefault()
+  const doLogin = useCallback(async (pw: string) => {
     setBusy(true)
     setError('')
     try {
       const r = await fetch('/api/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ password }),
+        body: JSON.stringify({ password: pw }),
       })
       if (!r.ok) {
         const d = await r.json().catch(() => ({}))
@@ -33,6 +32,16 @@ function LoginForm() {
       setError('Something went wrong — try again')
       setBusy(false)
     }
+  }, [next])
+
+  // Magic link: if ?k=<password> is present, log in automatically.
+  useEffect(() => {
+    if (magicKey) doLogin(magicKey)
+  }, [magicKey, doLogin])
+
+  function submit(e: React.FormEvent) {
+    e.preventDefault()
+    doLogin(password)
   }
 
   return (
