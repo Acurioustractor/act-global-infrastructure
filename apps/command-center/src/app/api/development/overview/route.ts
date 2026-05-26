@@ -376,15 +376,7 @@ async function fetchRepoProjectLinks() {
   return data || []
 }
 
-async function fetchRepoContacts() {
-  const { data, error } = await supabase
-    .from('repo_contacts')
-    .select('repo_name, contact_id, contact_name, role')
-
-  if (error) {
-    console.error('Repo contacts error:', error)
-    return []
-  }
-
-  return data || []
+async function fetchRepoContacts(): Promise<Array<{ repo_name: string; contact_id: string; contact_name: string | null; role: string | null }>> {
+  // repo_contacts table removed from DB — returns empty until a backend exists
+  return []
 }

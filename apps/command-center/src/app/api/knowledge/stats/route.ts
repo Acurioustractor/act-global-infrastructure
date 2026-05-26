@@ -24,9 +24,8 @@ export async function GET() {
       supabase.from('knowledge_edges').select('id', { count: 'exact', head: true }),
       supabase.rpc('get_edge_type_counts').then(r => r, () => ({ data: null })),
       supabase.rpc('get_decay_stats').then(r => r, () => ({ data: null })),
-      supabase
-        .from('memory_consolidation_log')
-        .select('id', { count: 'exact', head: true }),
+      // memory_consolidation_log table removed from DB — returns 0 until a backend exists
+      Promise.resolve({ count: 0 }),
       supabase
         .from('knowledge_chunks')
         .select('id', { count: 'exact', head: true })
@@ -46,12 +45,13 @@ export async function GET() {
     ])
 
     // Episode, procedural, and agent stats
+    // procedural_memory, agent_working_memory, agent_learnings tables removed from DB — return 0 until a backend exists
     const [episodes, procedures, workingMemory, proposals, learnings] = await Promise.all([
       supabase.from('memory_episodes').select('id', { count: 'exact', head: true }),
-      supabase.from('procedural_memory').select('id', { count: 'exact', head: true }),
-      supabase.from('agent_working_memory').select('id', { count: 'exact', head: true }),
+      Promise.resolve({ count: 0 }),
+      Promise.resolve({ count: 0 }),
       supabase.from('agent_proposals').select('id', { count: 'exact', head: true }),
-      supabase.from('agent_learnings').select('id', { count: 'exact', head: true }),
+      Promise.resolve({ count: 0 }),
     ])
 
     const stats = {

@@ -15,14 +15,9 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
 
     if (!site) return NextResponse.json({ history: [] })
 
-    const { data } = await supabase
-      .from('health_checks')
-      .select('*')
-      .eq('site_id', site.id)
-      .order('checked_at', { ascending: false })
-      .limit(limit)
-
-    return NextResponse.json({ history: data || [] })
+    // health_checks table removed from DB — returns empty until a backend exists
+    void limit
+    return NextResponse.json({ history: [] })
   } catch (e) {
     console.error('Health history error:', e)
     return NextResponse.json({ history: [] })

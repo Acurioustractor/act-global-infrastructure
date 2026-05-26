@@ -21,12 +21,8 @@ export async function GET(
         .order('month', { ascending: true })
         .limit(24),
 
-      supabase
-        .from('financial_variance_notes')
-        .select('*')
-        .eq('project_code', projectCode)
-        .order('month', { ascending: false })
-        .limit(12),
+      // financial_variance_notes table removed from DB — returns empty until a backend exists
+      Promise.resolve({ data: [] as any[] }),
 
       supabase
         .from('xero_transactions')

@@ -58,10 +58,8 @@ export async function GET() {
         .from('ghl_opportunities')
         .select('name, monetary_value, status, stage_name'),
 
-      // Donations
-      supabase
-        .from('donations')
-        .select('amount, donation_date, project'),
+      // donations table removed from DB — returns empty until a backend exists
+      Promise.resolve({ data: [] as any[] }),
     ])
 
     const streams = streamsRes.data || []

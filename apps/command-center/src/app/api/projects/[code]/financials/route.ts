@@ -142,11 +142,8 @@ export async function GET(
         .select('name, amount, status, project_codes')
         .contains('project_codes', [projectCode]),
 
-      // Donations
-      supabase
-        .from('donations')
-        .select('amount, project')
-        .eq('project', projectCode),
+      // donations table removed from DB — returns empty until a backend exists
+      Promise.resolve({ data: [] as any[] }),
 
       // Project health (BUNYA)
       supabase

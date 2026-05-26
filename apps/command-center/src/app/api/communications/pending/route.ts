@@ -84,14 +84,8 @@ export async function GET() {
       byProject[key].push(item)
     }
 
-    // Also get follow-up suggestions from agent insights
-    const { data: followUps } = await supabase
-      .from('agent_insights')
-      .select('id, title, description, data, status, created_at')
-      .eq('insight_type', 'follow_up')
-      .neq('status', 'dismissed')
-      .order('created_at', { ascending: false })
-      .limit(10)
+    // agent_insights table removed from DB — returns empty until a backend exists
+    const followUps: Array<{ id: string; title: string; description: string | null; status: string | null; created_at: string }> = []
 
     return NextResponse.json({
       pending: items,
