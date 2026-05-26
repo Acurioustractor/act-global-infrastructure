@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { supabase } from '@/lib/supabase'
+import { fetchAllRows } from '@/lib/finance/query'
 
 const FY_START = '2025-07-01'
 const R_AND_D_PROJECTS = ['ACT-EL', 'ACT-IN', 'ACT-JH', 'ACT-GD']
@@ -21,8 +22,8 @@ export async function GET() {
       projectsResult,
       receivablesResult,
       payablesResult,
-      transactionsResult,
-      invoicesResult,
+      transactions,
+      invoices,
       pipelineResult,
     ] = await Promise.all([
       // Monthly financials
@@ -56,19 +57,21 @@ export async function GET() {
         .order('due_date', { ascending: true })
         .limit(500),
 
-      // All FY26 transactions for R&D and coverage
-      supabase
-        .from('xero_transactions')
-        .select('id, date, contact_name, total, type, project_code')
-        .gte('date', FY_START)
-        .limit(2000),
+      // All FY26 transactions for R&D and coverage (paginated past PostgREST ~1000-row cap)
+      fetchAllRows<{ id: string; date: string; contact_name: string; total: number; type: string; project_code: string }>((from, to) =>
+        supabase
+          .from('xero_transactions')
+          .select('id, date, contact_name, total, type, project_code')
+          .gte('date', FY_START)
+          .range(from, to)),
 
-      // All FY26 invoices for completeness
-      supabase
-        .from('xero_invoices')
-        .select('id, contact_name, total, project_code, type')
-        .gte('date', FY_START)
-        .limit(2000),
+      // All FY26 invoices for completeness (paginated past PostgREST ~1000-row cap)
+      fetchAllRows<{ id: string; contact_name: string; total: number; project_code: string; type: string }>((from, to) =>
+        supabase
+          .from('xero_invoices')
+          .select('id, contact_name, total, project_code, type')
+          .gte('date', FY_START)
+          .range(from, to)),
 
       // Pipeline data
       supabase
@@ -83,8 +86,6 @@ export async function GET() {
     const projects = projectsResult.data || []
     const receivables = receivablesResult.data || []
     const payables = payablesResult.data || []
-    const transactions = transactionsResult.data || []
-    const invoices = invoicesResult.data || []
     const pipelineData = pipelineResult.data || []
 
     const projectMap = new Map(projects.map(p => [p.code, p]))

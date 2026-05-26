@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { supabase } from '@/lib/supabase'
+import { fetchAllRows } from '@/lib/finance/query'
 
 export async function GET(request: Request) {
   try {
@@ -21,19 +22,24 @@ export async function GET(request: Request) {
     const prevStartStr = prevFyStart.toISOString().split('T')[0]
     const prevEndStr = prevFyEnd.toISOString().split('T')[0]
 
-    // === CURRENT FY FINANCIAL DATA ===
-    const { data: currentTxns } = await supabase
-      .from('xero_transactions')
-      .select('total, type, contact_name, date')
-      .gte('date', fyStartStr)
-      .lte('date', fyEndStr)
-
-    // === PREVIOUS FY FINANCIAL DATA ===
-    const { data: prevTxns } = await supabase
-      .from('xero_transactions')
-      .select('total, type')
-      .gte('date', prevStartStr)
-      .lte('date', prevEndStr)
+    // === CURRENT FY FINANCIAL DATA === (paginated past PostgREST ~1000-row cap)
+    const [currentTxns, prevTxns] = await Promise.all([
+      fetchAllRows<{ total: number; type: string; contact_name: string; date: string }>((from, to) =>
+        supabase
+          .from('xero_transactions')
+          .select('total, type, contact_name, date')
+          .gte('date', fyStartStr)
+          .lte('date', fyEndStr)
+          .range(from, to)),
+      // === PREVIOUS FY FINANCIAL DATA ===
+      fetchAllRows<{ total: number; type: string }>((from, to) =>
+        supabase
+          .from('xero_transactions')
+          .select('total, type')
+          .gte('date', prevStartStr)
+          .lte('date', prevEndStr)
+          .range(from, to)),
+    ])
 
     let income = 0, expenses = 0, prevIncome = 0, prevExpenses = 0
     const incomeBySource: Record<string, number> = {}

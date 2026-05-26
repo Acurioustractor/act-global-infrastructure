@@ -1,5 +1,8 @@
 import { NextResponse } from 'next/server'
 import { supabase } from '@/lib/supabase'
+import { fetchAllRows } from '@/lib/finance/query'
+
+type PLTxn = { total: number; bank_account: string; contact_name: string; date: string }
 
 export async function GET() {
   try {
@@ -8,19 +11,24 @@ export async function GET() {
     if (now.getMonth() < 6) fyStart.setFullYear(fyStart.getFullYear() - 1)
     const fyStartStr = fyStart.toISOString().split('T')[0]
 
-    // Get RECEIVE transactions (income)
-    const { data: income } = await supabase
-      .from('xero_transactions')
-      .select('total, bank_account, contact_name, date')
-      .eq('type', 'RECEIVE')
-      .gte('date', fyStartStr)
-
-    // Get SPEND transactions (expenses)
-    const { data: expenses } = await supabase
-      .from('xero_transactions')
-      .select('total, bank_account, contact_name, date')
-      .eq('type', 'SPEND')
-      .gte('date', fyStartStr)
+    // Get RECEIVE transactions (income) + SPEND transactions (expenses),
+    // paginated past PostgREST ~1000-row cap
+    const [income, expenses] = await Promise.all([
+      fetchAllRows<PLTxn>((from, to) =>
+        supabase
+          .from('xero_transactions')
+          .select('total, bank_account, contact_name, date')
+          .eq('type', 'RECEIVE')
+          .gte('date', fyStartStr)
+          .range(from, to)),
+      fetchAllRows<PLTxn>((from, to) =>
+        supabase
+          .from('xero_transactions')
+          .select('total, bank_account, contact_name, date')
+          .eq('type', 'SPEND')
+          .gte('date', fyStartStr)
+          .range(from, to)),
+    ])
 
     // Group income by contact/source
     const incomeByAccount: Record<string, number> = {}

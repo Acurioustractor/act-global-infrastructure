@@ -1,25 +1,27 @@
 import { NextResponse } from 'next/server'
 import { supabase } from '@/lib/supabase'
+import { fetchAllRows } from '@/lib/finance/query'
 
 export async function GET() {
   try {
-    // Fetch all data in parallel
-    const [txResult, invResult] = await Promise.all([
+    // Fetch all data in parallel (paginated past PostgREST ~1000-row cap)
+    const [transactions, invoices] = await Promise.all([
       // All transactions for aggregation
-      supabase
-        .from('xero_transactions')
-        .select('total, type, date, contact_name')
-        .order('date', { ascending: false }),
+      fetchAllRows<{ total: number; type: string; date: string; contact_name: string }>((from, to) =>
+        supabase
+          .from('xero_transactions')
+          .select('total, type, date, contact_name')
+          .order('date', { ascending: false })
+          .range(from, to)),
 
       // All invoices
-      supabase
-        .from('xero_invoices')
-        .select('invoice_number, contact_name, amount_due, total, type, status, due_date')
-        .in('status', ['AUTHORISED', 'SENT', 'PAID']),
+      fetchAllRows<{ invoice_number: string; contact_name: string; amount_due: number; total: number; type: string; status: string; due_date: string }>((from, to) =>
+        supabase
+          .from('xero_invoices')
+          .select('invoice_number, contact_name, amount_due, total, type, status, due_date')
+          .in('status', ['AUTHORISED', 'SENT', 'PAID'])
+          .range(from, to)),
     ])
-
-    const transactions = txResult.data || []
-    const invoices = invResult.data || []
 
     // Aggregate income/expenses totals
     let totalIncome = 0
