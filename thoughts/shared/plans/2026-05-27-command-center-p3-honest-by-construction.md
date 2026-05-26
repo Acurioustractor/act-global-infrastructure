@@ -64,8 +64,9 @@ Files (all new — no entanglement with the 143 pre-existing dirty working-tree 
 - [x] 1d. `node --test` wrapper (15/15 green) + baseline ratchet (87 accepted)
 - [x] 1e. Wire CI workflow `.github/workflows/schema-contract.yml`
 - [ ] 2.  Archive dead-table fakes (git mv + RESTORE.md) — burn-down §H — **Tier 2, confirm**
-- [ ] 3.  Fix residual column-drift in routes we KEEP — burn-down §H Cat 3
+- [~] 3.  Fix residual column-drift — **tractable ones DONE (87→64)**; needs-intent batch remains (§H)
 - [ ] 4.  Prune nav to clarity spine
+- [ ] 5.  (follow-up) Extend checker to validate filter columns (.eq/.gte/.is/.order), not just .select()
 
 Burn-down checklist: `thoughts/shared/reviews/command-center-trust-map/H-schema-contract-burndown.md`
 
@@ -101,6 +102,23 @@ fallback works; no-source path throws (no silent pass). Found a NEW regression t
 (b) storyteller routes alias `elSupabase as supabase` → must resolve client→instance per file, not a
 table allowlist (eliminated 30 false positives structurally).
 **Next:** burn-down §H — Tier 2 archiving of dead-table routes (confirm with Ben) + Cat-3 column fixes.
+
+### 2026-05-27 — Column burn-down, two passes (87→64)
+**Objective:** "Fix columns first" (Ben's call). Tractable column drift only.
+**Changed:** commit `86ef6be` (pass 1, 87→72): live `/harvest` regression (verified vs DB — old select
+400'd → overview showed $0; now reads `line_items[]`, returns 58 rows / $51,573 spend / 10 GL accounts)
++ 13 clean renames via PostgREST aliases. commit `568b277` (pass 2, 72→64): 8 more renames
+(pipeline_stage→stage_name, vendor_name→contact_name, description/account_code→line_items[],
+received_at/ai_summary→occurred_at/summary) + a filter-column fix (responded_at→response_received_at).
+**Verified:** harvest query runs (was 400ing); no NEW drift after each pass; type-checks clean; only my
+files staged (3 pre-existing dirty `page.tsx` + 143 wiki files left untouched).
+**Learned:** the checker has a blind spot — it validates `.select()` columns but NOT filter/order
+columns (`.eq/.gte/.is/.order`), so `responded_at` and `notion-agent`'s `.ilike('tags')` slipped past.
+Added as task 5.
+**Next:** needs-intent column batch (contact_project_links join, subscriptions name/value_rating,
+project_budgets aggregation, ghl_opportunities close_date/contact joins, api_usage rewrite,
+receipt_matches.project_code, business/overview running_balance) — each needs a product decision.
+Then Tier-2 archiving (task 2). 3 commits local, unpushed.
 
 ---
 
