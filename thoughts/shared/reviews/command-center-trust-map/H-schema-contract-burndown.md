@@ -4,7 +4,17 @@
 command-center `.from().select()`). **Baseline:** `config/schema-contract-baseline.json` — the test
 fails on any NEW drift. **Goal:** burn this to 0, then delete the baseline for full strictness.
 
-> **Progress 2026-05-27:** baseline **87 → 72** (15 fixed). Done: the live `/harvest` regression
+> **Progress 2026-05-27 (tranche 2):** baseline **72 → 64** (8 more fixed). Clean renames via aliases:
+> `ghl_opportunities.pipeline_stage→stage_name` (runway, notion-agent health+mission),
+> `xero_transactions.vendor_name→contact_name` (projects/financials), `xero_transactions.{description,
+> account_code}→line_items[]` (tax/export, projects/[code]/financials),
+> `communications_history.{received_at→occurred_at, ai_summary→summary}` (briefing/morning, tools/core).
+> Also fixed a **filter-column** drift the checker can't see: `briefing/morning` filtered
+> `.is('responded_at', …)` → `response_received_at` (the checker only validates `.select()` columns —
+> extending it to `.eq/.gte/.is/.order` args is a worthwhile follow-up; would also catch the
+> `notion-agent` `.ilike('tags', …)` on ghl_opportunities, which has no `tags` column).
+>
+> **Progress 2026-05-27 (tranche 1):** baseline **87 → 72** (15 fixed). Done: the live `/harvest` regression
 > (both routes — `description`/`account_code` now read from `line_items[]`, restoring zeroed totals +
 > vendor + GL-account spend) and 13 clean column renames via PostgREST aliases (preserve downstream
 > keys): `xero_transactions.amount→total`, `communications_history.communication_date→occurred_at`,

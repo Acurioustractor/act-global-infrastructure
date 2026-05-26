@@ -438,7 +438,7 @@ export async function executeGetDayContext(input: { date?: string }): Promise<st
         .order('start_time'),
       supabase
         .from('communications_history')
-        .select('contact_name, direction, channel, subject, ai_summary')
+        .select('contact_name, direction, channel, subject, ai_summary:summary')
         .gte('created_at', `${date}T00:00:00Z`)
         .lte('created_at', `${date}T23:59:59Z`)
         .order('created_at', { ascending: false })

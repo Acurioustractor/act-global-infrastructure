@@ -45,7 +45,7 @@ export async function GET() {
       // Pipeline
       supabase
         .from('ghl_opportunities')
-        .select('name, status, monetary_value, pipeline_stage')
+        .select('name, status, monetary_value, pipeline_stage:stage_name')
         .in('status', ['open', 'won'])
         .order('monetary_value', { ascending: false })
         .limit(10),
