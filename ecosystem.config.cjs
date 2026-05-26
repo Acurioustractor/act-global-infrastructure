@@ -25,6 +25,11 @@ const cronScripts = [
     cron_restart: '0 3 * * *', // Daily 3am AEST (before daily briefing at 7am)
   },
   {
+    name: 'xero-bank-balances',
+    script: 'scripts/sync-xero-bank-balances.mjs',
+    cron_restart: '0 6 * * *', // Daily 6am AEST — refresh bank closing balances (Reports/BankSummary) BEFORE the 7am briefings + 8:13 daily-pulse. Was manual-only until 2026-05-27, so cash ran ~27d stale ($586K shown vs true ~$130K). Balance-only upsert — no transaction re-tag risk.
+  },
+  {
     name: 'daily-briefing',
     script: 'scripts/daily-briefing.mjs',
     cron_restart: '0 7 * * *', // Daily 7am AEST
