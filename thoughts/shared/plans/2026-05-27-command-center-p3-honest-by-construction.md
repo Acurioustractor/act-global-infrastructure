@@ -64,7 +64,7 @@ Files (all new — no entanglement with the 143 pre-existing dirty working-tree 
 - [x] 1d. `node --test` wrapper (15/15 green) + baseline ratchet (87 accepted)
 - [x] 1e. Wire CI workflow `.github/workflows/schema-contract.yml`
 - [~] 2.  Archive dead-table fakes — **DONE for the 14 truly-dead routes + team page** (baseline 70→47, RESTORE.md written); the other §H Cat-1 routes turned out to be **live pages reading dead tables** → reclassified to fix-don't-archive (Cat-3), NOT archived
-- [~] 3.  Fix residual column-drift — select-drift DONE (87→64); **filter-drift: 18 fixed, 9 baselined needs-intent**; remaining needs-intent batch in §H awaits product calls (subscriptions $ total, agent_audit_log wrong-table, contact_id value-tracing)
+- [~] 3.  Fix residual column-drift — select-drift DONE (87→64); filter-drift 18 fixed; **fix-don't-archive renames DONE (47→36): communications→communications_history ×4, contacts→ghl_contacts ×3, contact_id→ghl_contact_id ×5**; remaining 36 are genuinely-gone tables (need feature removal) + needs-intent (project_budgets aggregation, api_usage rewrite, agent_audit_log wrong-table, ghl_opportunities close_date/contact_name joins, subscriptions name/value_rating, business/overview running_balance)
 - [ ] 4.  Prune nav to clarity spine
 - [x] 5.  Extend checker to validate filter columns (.eq/.gte/.is/.order etc.) — DONE: fluent-chain-scoped extraction + `fluentChainAfter` (kills false positives), 5 new tests (20/20)
 
@@ -168,6 +168,30 @@ sections already broken, page not in nav — panel removal is risky surgery on a
 **Next:** the 47 remaining baselined violations are now mostly **fix-don't-archive** (live routes,
 dead column/table refs needing a rename or a join) + the needs-intent batch. Task 4 (nav prune) +
 task 3 residual. Commits local on `wip/harvest-stage-budget-2026-05-26`, unpushed.
+
+### 2026-05-27 — Fix-don't-archive clean renames (task 3), baseline 47 → 36
+**Objective:** Burn down by fixing live routes whose dead ref is a clean rename to an existing
+table/column (not the genuinely-gone tables).
+**Changed (7 files):** `communications → communications_history` (reports/monthly+yearly with
+`received_at→occurred_at`; lib/tools/writing.ts; lib/tools/finance.ts gmail-search), `contacts →
+ghl_contacts` (reports/monthly+yearly), `contact_id → ghl_contact_id` ×5 (lib/tools/actions.ts,
+lib/telegram/notifications.ts — communications_history value also corrected `contact.id→contact.ghl_id`;
+lib/tools/projects.ts via `contact_id:ghl_contact_id` alias to preserve downstream keys).
+**Verified vs live DB:** ghl_contacts updated-last-yr 2281, communications_history 18556, gmail-search
+alias returns rows. **Caught a mapping bug in verification:** first mapped `from_address→from_identity`,
+but `from_identity` is a **UUID** (identity FK) → `uuid ~~* unknown` on ILIKE; the text email is
+`contact_email` — corrected. `npx tsc --noEmit` clean; 20/20 tests; baseline 47 → 36.
+**Learned:** don't assume a same-sounding column is the right type — `communications_history` has both
+`from_identity` (uuid) and `contact_email` (text); the verification query (not the checker, which only
+checks existence) caught it. PostgREST `alias:real_col` keeps downstream code untouched on renames.
+**Deferred (the 36 remaining):** genuinely-gone tables needing feature-removal (insight_votes,
+repo_contacts, donations, v_cashflow_explained, grant_financial_tracking, financial_variance_notes,
+receipt_gamification_stats, agent_insights, agent_* memory, deployments/health_checks,
+notification_rate_limits, telegram_pending_actions, gmail_sync_state, v_upcoming_renewals) +
+needs-intent columns (project_budgets aggregation, api_usage rewrite, agent_audit_log wrong-table,
+ghl_opportunities close_date/contact_name joins, subscriptions name/value_rating, xero_transactions
+running_balance, receipt_matches project_code, contact_project_links entity_id join). Commits local,
+unpushed (now 11 on the branch).
 
 ---
 

@@ -737,7 +737,7 @@ export async function executeMoonCycleReview(input: {
         .order('last_contact_date', { ascending: true })
         .limit(10),
       supabase
-        .from('communications')
+        .from('communications_history')
         .select('id')
         .gte('created_at', startDate)
         .lte('created_at', endDate),

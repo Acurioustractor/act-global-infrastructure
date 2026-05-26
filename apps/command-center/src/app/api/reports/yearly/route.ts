@@ -110,20 +110,20 @@ export async function GET(request: Request) {
 
     // === RELATIONSHIPS ===
     const { count: totalContacts } = await supabase
-      .from('contacts')
+      .from('ghl_contacts')
       .select('id', { count: 'exact', head: true })
 
     const { count: newContacts } = await supabase
-      .from('contacts')
+      .from('ghl_contacts')
       .select('id', { count: 'exact', head: true })
       .gte('created_at', fyStart.toISOString())
       .lte('created_at', fyEnd.toISOString())
 
     const { count: totalComms } = await supabase
-      .from('communications')
+      .from('communications_history')
       .select('id', { count: 'exact', head: true })
-      .gte('received_at', fyStart.toISOString())
-      .lte('received_at', fyEnd.toISOString())
+      .gte('occurred_at', fyStart.toISOString())
+      .lte('occurred_at', fyEnd.toISOString())
 
     // === PROJECTS ===
     const { data: projectData } = await supabase

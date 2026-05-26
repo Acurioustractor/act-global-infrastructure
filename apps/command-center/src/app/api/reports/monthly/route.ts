@@ -89,16 +89,16 @@ export async function GET(request: Request) {
 
     // === RELATIONSHIPS ===
     const { count: contactsEngaged } = await supabase
-      .from('contacts')
+      .from('ghl_contacts')
       .select('id', { count: 'exact', head: true })
       .gte('updated_at', monthStart.toISOString())
       .lte('updated_at', monthEnd.toISOString())
 
     const { count: communicationsCount } = await supabase
-      .from('communications')
+      .from('communications_history')
       .select('id', { count: 'exact', head: true })
-      .gte('received_at', monthStart.toISOString())
-      .lte('received_at', monthEnd.toISOString())
+      .gte('occurred_at', monthStart.toISOString())
+      .lte('occurred_at', monthEnd.toISOString())
 
     // === PROJECTS ===
     const { data: projectActivity } = await supabase

@@ -1196,7 +1196,7 @@ export async function checkRelationshipNudges(): Promise<{ sent: number; nudges:
     const { data: lastComm } = await supabase
       .from('communications_history')
       .select('subject, occurred_at')
-      .eq('contact_id', contact.id)
+      .eq('ghl_contact_id', contact.ghl_id)
       .order('occurred_at', { ascending: false })
       .limit(1)
       .maybeSingle()
@@ -1205,7 +1205,7 @@ export async function checkRelationshipNudges(): Promise<{ sent: number; nudges:
     const { data: deals } = await supabase
       .from('ghl_opportunities')
       .select('monetary_value')
-      .eq('contact_id', contact.ghl_id)
+      .eq('ghl_contact_id', contact.ghl_id)
       .eq('status', 'open')
 
     const pipelineValue = (deals || []).reduce((sum, d) => sum + (d.monetary_value || 0), 0)
