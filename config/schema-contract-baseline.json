@@ -1,17 +1,14 @@
 {
   "_doc": "Known schema-contract violations accepted as of the date below. The test fails on any violation NOT in this list. Burn this down (archive dead-table routes, fix drifted columns) until empty, then delete the file for full strictness. Regenerate: node scripts/check-schema-contract.mjs --baseline",
-  "generatedAt": "2026-05-26T23:37:40.450Z",
-  "count": 12,
+  "generatedAt": "2026-05-27T00:26:40.796Z",
+  "count": 9,
   "accepted": [
     "apps/command-center/src/app/api/agent/insights/route.ts::agent_audit_log::created_at,status",
     "apps/command-center/src/app/api/business/overview/route.ts::xero_transactions::running_balance",
     "apps/command-center/src/app/api/business/upcoming/route.ts::ghl_opportunities::close_date",
     "apps/command-center/src/app/api/contacts/[id]/link-project/route.ts::contact_project_links::ghl_contact_id",
-    "apps/command-center/src/app/api/finance/overview/route.ts::project_budgets::annual_budget,annual_revenue_target,fy",
-    "apps/command-center/src/app/api/finance/projects/route.ts::project_budgets::annual_budget,fy,ytd_budget",
     "apps/command-center/src/app/api/intelligence/actions/route.ts::contact_project_links::ghl_contact_id",
     "apps/command-center/src/app/api/proposals/stats/route.ts::agent_audit_log::status",
-    "apps/command-center/src/app/api/system/usage/route.ts::api_usage::estimated_cost,input_cost,input_tokens,latency_ms,model,output_cost,output_tokens,script_name",
     "apps/command-center/src/lib/telegram/reactor-callbacks.ts::ghl_opportunities::contact_name",
     "apps/command-center/src/lib/tools/finance.ts::receipt_matches::project_code",
     "apps/command-center/src/lib/tools/finance.ts::subscriptions::amount_aud,name,renewal_date,status,value_rating,vendor"

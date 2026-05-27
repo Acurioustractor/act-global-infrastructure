@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { supabase } from '@/lib/supabase'
+import { aggregateProjectBudgets } from '@/lib/finance/budgets'
 
 export async function GET() {
   try {
@@ -21,8 +22,8 @@ export async function GET() {
 
       supabase
         .from('project_budgets')
-        .select('project_code, fy, annual_budget, ytd_budget')
-        .eq('fy', 'FY26')
+        .select('project_code, budget_type, budget_amount')
+        .eq('fy_year', 'FY26')
         .limit(200),
 
       supabase
@@ -33,7 +34,7 @@ export async function GET() {
 
     const monthlyData = monthlyResult.data || []
     const projects = projectsResult.data || []
-    const budgets = budgetsResult.data || []
+    const budgets = aggregateProjectBudgets(budgetsResult.data || [], 'FY26')
     const vendorRules = vendorRulesResult.data || []
 
     // Build project lookup
