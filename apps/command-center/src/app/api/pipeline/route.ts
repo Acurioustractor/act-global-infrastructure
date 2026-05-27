@@ -12,7 +12,6 @@ export async function GET(request: NextRequest) {
     // Paginate past the PostgREST 1,000-row cap — relationship_pipeline has ~1,458 rows, so a
     // single .select('*') silently dropped ~458 entries (foundations off the board). Page in 1,000s.
     const PAGE = 1000
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const data: any[] = []
     for (let from = 0; ; from += PAGE) {
       let query = supabase
