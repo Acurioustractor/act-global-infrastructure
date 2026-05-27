@@ -49,5 +49,7 @@
   "notionAiPrompts": "358ebcf9-81cf-8133-b72a-c664c256c524",
   "agentArchitecture": "358ebcf9-81cf-8194-96be-de08f49e1ef2",
   "actNowPage": "35bebcf9-81cf-8131-9f14-d8d4b23e35f4",
-  "ecosystemDigest": "362ebcf9-81cf-8177-8c4e-c33d6c61d765"
+  "ecosystemDigest": "362ebcf9-81cf-8177-8c4e-c33d6c61d765",
+  "eofyTracker": "63cbc05e-64ba-4203-b514-beb8eb4f9445",
+  "eofyTrackerDataSource": "2c8666b5-b0ed-4617-958d-37ededee15d0"
 }

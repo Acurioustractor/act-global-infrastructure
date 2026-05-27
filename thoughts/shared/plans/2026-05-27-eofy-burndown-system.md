@@ -1,0 +1,61 @@
+---
+title: "EOFY Burndown System — countdown to 30 June 2026 cutover"
+slug: 2026-05-27-eofy-burndown-system
+status: in-progress
+date: 2026-05-27
+owner: Ben (execution by Claude; external steps by Ben + Standard Ledger)
+---
+# EOFY Burndown System
+
+## Objective
+
+A single date-driven tracker + burndown for the sole-trader → **A Curious Tractor Pty Ltd (ACN 697 347 676)** cutover at **30 June 2026** (FY end). One Notion database (source of truth, under ACT Business Admin HQ) feeding a `/eofy` command-center page with a live countdown and ideal-vs-actual burndown. Covers all EOFY workstreams Ben listed: entity/trusts, Xero, banking + credit cards, insurance, R&D + BAS, payroll/wages/super, subscriptions, IP, LastPass intake, Standard Ledger decisions, opportunities. Does NOT re-author the canonical checklist (`act-entity-migration-checklist-2026-06-30.md`) — adds the persistent status + visualisation layer it lacked.
+
+## What shipped (2026-05-27)
+
+| Piece | Location | State |
+|---|---|---|
+| Notion DB "EOFY Setup Tracker" | DB `63cbc05e-64ba-4203-b514-beb8eb4f9445` · data source `2c8666b5-b0ed-4617-958d-37ededee15d0` · child of ACT Business Admin HQ (`298eb5c6…`) | ✅ created |
+| 41 seeded rows | critical-path-to-30-June, statuses verified vs 2026-05-14 synthesis + live Xero | ✅ seeded via MCP |
+| Seed data (version-controlled) | `config/eofy-tracker-seed.json` | ✅ |
+| Reusable seed script | `scripts/seed-eofy-tracker.mjs` (`--dry-run`; dedupes by title) | ✅ (needs integration connected to run vs prod token) |
+| Config keys | `config/notion-database-ids.json` → `eofyTracker`, `eofyTrackerDataSource` | ✅ |
+| API route | `apps/command-center/src/app/api/eofy/route.ts` — countdown + totals + byCategory/Owner/Priority + atRisk + burndown(ideal/actual/projected) + forecastFinish; degrades gracefully if integration not connected | ✅ tsc clean |
+| Page | `apps/command-center/src/app/eofy/page.tsx` — client + react-query + recharts LineChart; countdown hero, progress bar, burndown, at-risk, by-workstream, by-owner | ✅ tsc clean |
+| Nav | `src/lib/nav-data.ts` — "EOFY Cutover" in dashboard group (founder/accountant/team) | ✅ |
+
+## ⚠️ Required manual step (blocks the command-center page + prod)
+
+The DB was created under the **Claude.ai Notion connection**, but the command-center route reads via `NOTION_TOKEN` = the **"JusticeHub" Notion integration**, which can't yet see the new DB. Until connected, `/eofy` shows a "one setup step left" callout (by design).
+
+**Fix (one time, Ben):** open the [EOFY Setup Tracker](https://www.notion.so/63cbc05e64ba4203b514beb8eb4f9445) in Notion → ••• → Connections → add the command-center / JusticeHub integration. (Connecting it on the parent **ACT Business Admin HQ** page instead would let future child DBs inherit access.)
+
+## Architecture
+
+- Burndown's **actual** line derives at request time from each task's **Done date** (`remaining(d) = total − count(Done date ≤ d)`); **ideal** is linear from seed-count → 0 at 30 Jun; **projected** extends current burn rate to a forecast finish. No Supabase table, no committed JSON — Vercel reads Notion live.
+- Route is a near-clone of `api/finance/actions/route.ts` (Notion SDK v5 `dataSources.query`, `getText/getDate` helpers).
+- Page mirrors `finance/overview/page.tsx` (react-query) + recharts v3 (as in `components/storyteller/thematic-chart.tsx`).
+- Auth: `src/middleware.ts` gates `/eofy` via `DASHBOARD_PASSWORD` automatically; same-origin fetch reaches `/api/eofy`.
+
+## Verification Log
+
+| Claim | Verified? | How | Date |
+|---|---|---|---|
+| Pty ASIC-registered; sole-trader still the only Xero tenant | ✅ | `mcp__claude_ai_Xero__get_connected_user_organisation` → org `786af1ed…` "Nicholas Marchesi" | 2026-05-27 |
+| Statuses reflect reality | ✅ (as of 2026-05-14 + Ben's ABN/GST-lodged update) | `wiki/synthesis/entity-migration-truth-state-2026-05-14.md` | 2026-05-27 |
+| DB + 41 rows created | ✅ | Notion create responses (41 page IDs) | 2026-05-27 |
+| tsc clean | ✅ | `npx tsc --noEmit` → 0 errors | 2026-05-27 |
+| Production build | ⏳ | `pnpm build` (running) | 2026-05-27 |
+| `/eofy` renders full burndown | ⛔ blocked | needs JusticeHub integration connected to the DB | — |
+
+## Next steps
+
+- [ ] **Ben:** connect the integration to the DB (above), then reload `/eofy`.
+- [ ] Deploy to Vercel (Tier 3 — Ben's explicit "deploy"). Runs locally first.
+- [ ] (Optional, fast-follow) `scripts/snapshot-eofy-burndown.mjs` — daily PM2 cron to stamp Done-dates on newly-Done tasks + push a Telegram countdown. Needs the integration connected.
+- [ ] Update the P0 statuses in Notion as ABN/NAB/D&O/SHA land.
+
+## Provenance
+- Sources: `act-entity-migration-checklist-2026-06-30.md`, `entity-migration-truth-state-2026-05-14.md`, live Xero org check, command-center finance routes/middleware, `config/notion-database-ids.json`.
+- Unverified: P0 statuses post-2026-05-14 (Ben confirmed ABN/GST lodged; NAB/D&O/SHA/Director-IDs unconfirmed — seeded as overdue).
+- Generated by: Claude (Opus 4.7), 2026-05-27.
