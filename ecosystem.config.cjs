@@ -693,6 +693,12 @@ const cronScripts = [
     cron_restart: '30 6 * * *', // Daily 6:30am AEST (after discover-grants at 6am)
   },
   {
+    name: 'relationship-pipeline-populate',
+    script: 'scripts/populate-relationship-pipeline.mjs',
+    args: '--apply',
+    cron_restart: '0 8 * * *', // Daily 8am AEST — refresh the /pipeline kanban (cultivation + active deals) from opportunities_unified + foundations. Runs AFTER pipeline-sync (6:30) + relationship-health (3:15). Clears untouched auto-rows, preserves human-edited cards. The table had no populator before this (one-time March seed) → built 2026-05-27.
+  },
+  {
     name: 'monthly-financials',
     script: 'scripts/calculate-project-monthly-financials.mjs',
     cron_restart: '0 7 1 * *', // 1st of month at 7am AEST
