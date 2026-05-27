@@ -1,16 +1,9 @@
 {
   "_doc": "Known schema-contract violations accepted as of the date below. The test fails on any violation NOT in this list. Burn this down (archive dead-table routes, fix drifted columns) until empty, then delete the file for full strictness. Regenerate: node scripts/check-schema-contract.mjs --baseline",
-  "generatedAt": "2026-05-27T00:26:40.796Z",
-  "count": 9,
+  "generatedAt": "2026-05-27T00:33:53.112Z",
+  "count": 2,
   "accepted": [
-    "apps/command-center/src/app/api/agent/insights/route.ts::agent_audit_log::created_at,status",
-    "apps/command-center/src/app/api/business/overview/route.ts::xero_transactions::running_balance",
-    "apps/command-center/src/app/api/business/upcoming/route.ts::ghl_opportunities::close_date",
     "apps/command-center/src/app/api/contacts/[id]/link-project/route.ts::contact_project_links::ghl_contact_id",
-    "apps/command-center/src/app/api/intelligence/actions/route.ts::contact_project_links::ghl_contact_id",
-    "apps/command-center/src/app/api/proposals/stats/route.ts::agent_audit_log::status",
-    "apps/command-center/src/lib/telegram/reactor-callbacks.ts::ghl_opportunities::contact_name",
-    "apps/command-center/src/lib/tools/finance.ts::receipt_matches::project_code",
-    "apps/command-center/src/lib/tools/finance.ts::subscriptions::amount_aud,name,renewal_date,status,value_rating,vendor"
+    "apps/command-center/src/app/api/intelligence/actions/route.ts::contact_project_links::ghl_contact_id"
   ]
 }
