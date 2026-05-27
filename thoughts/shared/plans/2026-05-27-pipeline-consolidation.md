@@ -58,10 +58,18 @@ its populator" decision, **not** a consolidation.
   **built** (compute `love/money/strategic/urgency` scores per entity from relationship_health +
   opportunities + comms). That's a net-new design task → see **D3a** below. The kanban stays; it shows
   the frozen March snapshot until a populator exists.
-- ⬜ **D3a — build a relationship_pipeline populator?** Net-new script that computes the kanban scores
-  on a cadence. Needs the scoring design (what drives love/money/strategic/urgency) — likely derivable
-  from the now-fresh `relationship_health` + `opportunities_unified`, but it's a real feature build, not
-  a config flip. Awaiting Ben's go to scope it.
+- ✅ **D3a — DONE (2026-05-27): built the relationship_pipeline populator.** `scripts/populate-relationship-pipeline.mjs`
+  (`--dry-run` default, `--apply` writes) — scope **cultivation + active deals** (Ben): 430 active deals +
+  400 top aligned grants + 628 engaged foundations (foundations behind grants we track, not all 11,010).
+  Documented score formulas: money=value bucket, urgency=expected_close proximity, strategic=project-align
+  + fit, love=relationship_health temperature (0-100 bucketed). **Applied** (cleared 1,170 untouched stale
+  auto-rows, inserted 1,458 fresh — verified 0 manual edits to lose) + daily 8am PM2 cron
+  `relationship-pipeline-populate` (after pipeline-sync 6:30 + relationship-health 3:15). Manual-edit
+  preservation: clears/updates only untouched-auto rows (no `next_action`, no Notion sync, `updated_at`
+  within 60s of `created_at`); human-curated cards survive.
+  **Known limitation:** `love_score=0` for all — `opportunities_unified.contact_ids` is empty across every
+  row, so there's no contact link to pull warmth from. The lookup is built and lights up automatically if
+  that field ever populates.
 - ✅ **D4 — DONE (2026-05-27): relationship_health re-lit.** Ran `relationship-health.mjs update`
   (refreshed → 1,197 rows, fresh now) + added a daily `15 3 * * *` PM2 cron entry (`relationship-health`)
   to `ecosystem.config.cjs`, `pm2 start` + `pm2 save`. Root cause was the populator was never scheduled
