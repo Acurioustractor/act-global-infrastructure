@@ -1,5 +1,5 @@
 /**
- * ALMA (Accountable Listening and Meaningful Action) TypeScript Types
+ * ALMA (Australian Living Map of Alternatives) TypeScript Types
  *
  * GOVERNED REVIEW STRUCTURES FOR THE ACT ECOSYSTEM
  * Generalized to cover Land, Studio, Harvest, and Art.

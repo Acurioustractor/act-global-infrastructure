@@ -5,7 +5,7 @@ status: Internal
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/stories/index.md`.
-> Regenerated: `2026-05-18T03:37:13.699Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerated: `2026-05-25T19:37:27.398Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # Stories
 

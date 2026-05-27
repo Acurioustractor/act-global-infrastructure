@@ -15,7 +15,7 @@ empathy_ledger_key: justicehub
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/projects/justicehub/justicehub.md`.
-> Regenerated: `2026-05-18T03:37:13.699Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerated: `2026-05-25T19:37:27.398Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # JusticeHub
 
@@ -93,7 +93,7 @@ JusticeHub needs **$500K** to scale nationally.
 
 ## ALMA-Governed Evidence Records
 
-The "what works" layer sitting on top of funding data, governed by [[alma|Accountable Listening and Meaningful Action (ALMA)]]:
+The "what works" layer sitting on top of funding data, governed by [[alma|Australian Living Map of Alternatives (ALMA)]]:
 - Evidence-based interventions mapped by topic and geography
 - 9 topic domains: child-protection, community-led, diversion, family-services, indigenous, legal-services, ndis, prevention, youth-justice
 - Cross-referenced with CivicGraph entity graph (56% linkage rate)

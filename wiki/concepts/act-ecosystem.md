@@ -13,6 +13,14 @@ status: Active
 
 [[empathy-ledger|Empathy Ledger]] is the connective tissue. It flows stories into The Harvest, evidence into JusticeHub, community voices into PICC's annual report, and cultural knowledge into CivicGraph's picture of the system. Without Empathy Ledger, you have data. With it, you have the [[third-reality|Third Reality]].
 
+## The Civic Operating System (within the ecosystem)
+
+Three of the ecosystem's projects, [[civicgraph|CivicGraph]] (intelligence), [[justicehub|JusticeHub]] (practice), and [[empathy-ledger|Empathy Ledger]] (accountability), form **one civic operating system with three layers**. They share one architecture, share consent and audit primitives, and call each other in code. Together they are the reflex layer of ACT's product work, the cerebellum that makes the boring-but-essential work happen reliably.
+
+The other clusters below (Place, Community Control at Scale, Youth and Justice, Art and Culture) are not part of the civic OS. They sit alongside it on different revenue lanes (see [[four-lanes|The Four Lanes]]). The civic OS gives them intelligence, practice infrastructure, and accountability rails when they want them; it does not absorb them.
+
+See [[civic-operating-system|Civic Operating System]] for the architecture, [[civic-reflex-automation|Civic Reflex Automation]] for the AI thesis, and [[evidence-as-by-product|Evidence as a By-Product]] for how impact reporting composes from the layers.
+
 ## The Clusters
 
 ### 1. Narrative Sovereignty
@@ -87,8 +95,12 @@ The ACT Studio coordinates across all of them. Every project can syndicate conte
 ## Backlinks
 
 - [[act-identity|ACT Identity]] — what ACT is and how it's structured
+- [[civic-operating-system|Civic Operating System]] — the three-layer architecture (CivicGraph, JusticeHub, Empathy Ledger) sitting inside this ecosystem
+- [[civic-reflex-automation|Civic Reflex Automation]] — the AI thesis underneath the civic OS
+- [[evidence-as-by-product|Evidence as a By-Product of the Work]] — how impact reporting composes from the layers
 - [[empathy-ledger|Empathy Ledger]] — the connective tissue
 - [[the-harvest|The Harvest]] — place cluster anchor
 - [[picc|PICC]] — the proof case
 - [[third-reality|The Third Reality]] — the impact methodology that ties it together
 - [[lcaa-method|LCAA Method]] — the operating framework
+- [[four-lanes|The Four Lanes]] — how money flows through the ecosystem; clarifies which projects sit inside the civic OS and which sit alongside it

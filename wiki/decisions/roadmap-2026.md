@@ -20,7 +20,7 @@ This is a seasonal map, not a fixed plan. ACT chooses readiness over deadlines a
 | Finalise compendium and align project language to core model | In Progress |
 | Stabilise Harvest operations and maker pathways in Witta | In Progress |
 | Confirm Goods production readiness and support pathways | Planning |
-| Align AI agent guardrails to Accountable Listening and Meaningful Action (ALMA) and Empathy Ledger | Complete |
+| Align AI agent guardrails to Australian Living Map of Alternatives (ALMA) and Empathy Ledger | Complete |
 | JusticeHub vision and path to externalise | Planning |
 | ACT regular communication (1-to-some and 1-to-many via GHL) | In Progress |
 

@@ -74,13 +74,13 @@ Identity, method, the four lanes, the entity structure: all downstream. They are
 
 When in doubt about anything else in the wiki or the website, return here first. If the answer doesn't sit on top of what is in this file, the answer is wrong.
 
-## Relationship to ALMA
+## Relationship to the Downstream Architecture
 
-Soul is why ACT exists.
+Soul is why ACT exists. Everything else is how the soul gets delivered without losing itself.
 
-ALMA is not the soul.
+ACT's product work runs on a [[civic-operating-system|civic operating system]] with three layers: [[civicgraph|CivicGraph]] (intelligence — sees the field), [[justicehub|JusticeHub]] (practice — supports the work), [[empathy-ledger|Empathy Ledger]] (accountability — holds the trust). The [[civic-reflex-automation|Civic Reflex Automation]] thesis says these layers exist to handle the boring-but-essential work reliably so humans stay free for relationships, judgment, and art. [[alma|Australian Living Map of Alternatives (ALMA)]] is the catalogue of what works that the practice layer draws on. [[governed-proof|Governed Proof]] gates what can be published from any of it. [[evidence-as-by-product|Evidence as a By-Product of the Work]] is how impact reporting composes from the layers without becoming a separate workstream.
 
-[[alma|Accountable Listening and Meaningful Action (ALMA)]] is one downstream process that helps ACT move from listening to responsible action without bypassing consent, authority, provenance, or human and community review.
+None of these is the soul. They are how the soul stays operational without being eaten by drift.
 
 ---
 
@@ -90,7 +90,10 @@ ALMA is not the soul.
 - [[../people/nicholas-marchesi|Nicholas Marchesi OAM]]: co-founder, place and hospitality
 - [[act-identity|ACT Identity]]: the org built on top of this soul
 - [[lcaa-method|LCAA Method]]: the externalised practice loop
-- [[alma|ALMA]]: downstream governed process for moving from listening to accountable action
-- [[governed-proof|Governed Proof]]: evidence, review, and publication layer after action
+- [[civic-operating-system|Civic Operating System]]: the three-layer architecture (CivicGraph, JusticeHub, Empathy Ledger) downstream of soul
+- [[civic-reflex-automation|Civic Reflex Automation]]: the AI thesis — automate the boring, amplify the art, never replace judgment
+- [[evidence-as-by-product|Evidence as a By-Product of the Work]]: how impact reporting composes from the layers
+- [[alma|ALMA]]: the catalogue of community-led alternatives, evidence-graded with cultural authority
+- [[governed-proof|Governed Proof]]: evidence, review, and publication layer
 - [[four-lanes|The Four Lanes]]: the body the soul lives in, the economy that sustains the work and the founders
 - [[beautiful-obsolescence|Beautiful Obsolescence]]: the discipline that lets the soul outlive the org

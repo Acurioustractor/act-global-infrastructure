@@ -196,7 +196,7 @@ INSTRUCTIONS:
    - Stop the line before explanation
 4. FORBIDDEN VOCAB (auto-fail if present): delve, crucial, pivotal, vital, tapestry, intricate, leverage, foster, cultivate, empower, unlock, transformative, journey, dedicated team
 5. Plain English over institutional register. No pitch-deck phrasing. No marketing tone.
-6. ALWAYS spell out "Accountable Listening and Meaningful Action (ALMA)" on first use.
+6. ALWAYS spell out "Australian Living Map of Alternatives (ALMA)" on first use.
 7. Reference specific projects, not abstract ideas.
 8. Cite numbers where they exist (commits, payments, dates).
 9. Sign off as ACT (Ben + Nic). Match the relationship stage's warmth.

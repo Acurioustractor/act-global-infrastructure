@@ -10,7 +10,7 @@
 | [Guides](./guides/) | How-to guides for operational tasks |
 | [Integrations](./integrations/) | External system connections (GHL, Notion, etc.) |
 | [Reference](./reference/) | Executive overviews and strategic plans |
-| [ALMA](./alma/) | Accountable Listening and Meaningful Action documentation |
+| [ALMA](./alma/) | Australian Living Map of Alternatives documentation |
 | [Archive](./archive/) | Historical documents and completed phases |
 
 ---
@@ -75,7 +75,7 @@ Strategic and executive documents.
 
 ## ALMA
 
-Documentation for Accountable Listening and Meaningful Action (ALMA), ACT's governed process for moving from listening to meaningful action with consent, authority, provenance, and review.
+Documentation for Australian Living Map of Alternatives (ALMA), ACT's governed process for moving from listening to meaningful action with consent, authority, provenance, and review.
 
 | Document | Description |
 |----------|-------------|
@@ -91,7 +91,7 @@ Documentation for Accountable Listening and Meaningful Action (ALMA), ACT's gove
 
 - **Soul** - the origin layer of ACT.
 - **LCAA** - Listen, Curiosity, Action, Art; ACT's practice loop.
-- **ALMA** - Accountable Listening and Meaningful Action; ACT's governed sensemaking process.
+- **ALMA** - Australian Living Map of Alternatives; ACT's evidence-graded catalogue of community-led alternatives.
 - **Governed Proof** - the evidence, review, and publication layer.
 
 ---

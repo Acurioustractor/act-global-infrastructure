@@ -11,7 +11,7 @@
 
 - **Soul** - the origin layer of ACT.
 - **LCAA** - Listen, Curiosity, Action, Art; ACT's practice loop.
-- **ALMA** - Accountable Listening and Meaningful Action; ACT's governed sensemaking process.
+- **ALMA** - Australian Living Map of Alternatives; ACT's evidence-graded catalogue of community-led alternatives.
 - **Governed Proof** - the evidence, review, and publication layer.
 
 ---

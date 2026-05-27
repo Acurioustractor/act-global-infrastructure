@@ -161,8 +161,11 @@ Every project, every piece of art, every community relationship can be tagged wi
 - [[civicgraph|CivicGraph]]: Curiosity
 - [[picc|PICC]]: spans all four phases
 - [[third-reality|The Third Reality]]: the synthesis LCAA produces
-- [[alma|ALMA]]: governed sensemaking process that turns listening into accountable action
+- [[alma|ALMA]]: the catalogue of community-led alternatives, evidence-graded with cultural authority; what gets curated through LCAA's Curiosity phase
 - [[governed-proof|Governed Proof]]: evidence and review layer after action
+- [[civic-operating-system|Civic Operating System]]: the three-layer architecture (CivicGraph, JusticeHub, Empathy Ledger) that operationalises LCAA at the product level
+- [[civic-reflex-automation|Civic Reflex Automation]]: the AI thesis that protects LCAA's human work by automating only the boring reflex tasks
+- [[evidence-as-by-product|Evidence as a By-Product of the Work]]: how impact reporting composes from LCAA's outputs without becoming a separate task
 - [[ai-community-engagement|AI and Community Engagement]]: administrative compression that protects time for relational work
 - [[beautiful-obsolescence|Beautiful Obsolescence]]: the Action phase discipline
 - [[place-land-practice|Place & Land Practice]]: Country and land practice as the pace-setting context for the whole method

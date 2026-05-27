@@ -72,7 +72,7 @@ The Empathy Ledger adheres to the **OCAP** principles for all Indigenous data:
 We use personal information to:
 
 1. **Operate the platform** — display stories, connect storytellers, measure impact
-2. **Review impact evidence** — Accountable Listening and Meaningful Action (ALMA) review fields
+2. **Review impact evidence** — Australian Living Map of Alternatives (ALMA) review fields
 3. **Support community programs** — connect storytellers with relevant projects
 4. **Improve the platform** — understand usage patterns (anonymized)
 5. **Comply with legal obligations** — grant reporting, regulatory requirements

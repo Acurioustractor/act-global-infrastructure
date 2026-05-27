@@ -27,7 +27,7 @@ The rule: root-level files orient agents and developers; `wiki/` holds the canon
 | Soul | `wiki/concepts/soul.md` | Why Ben and Nic do this work. The upstream file. |
 | Identity | `wiki/concepts/act-identity.md` | What A Curious Tractor is. |
 | Method | `wiki/concepts/lcaa-method.md` | Listen, Curiosity, Action, Art as operating practice. |
-| Accountable action | `wiki/concepts/alma.md` | Accountable Listening and Meaningful Action: the governed listening-to-action process. |
+| Accountable action | `wiki/concepts/alma.md` | Australian Living Map of Alternatives: the governed listening-to-action process. |
 | Governed proof | `wiki/concepts/governed-proof.md` | Evidence, review, confidence, publication, and audit trails. |
 | Obsolescence | `wiki/concepts/beautiful-obsolescence.md` | The handover discipline. |
 | Economy | `wiki/concepts/four-lanes.md` | To Us, To Down, To Grow, To Others. |

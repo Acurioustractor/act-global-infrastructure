@@ -80,6 +80,13 @@ ON ANY NEW DESIGN WORK in any ACT repo
 - **Daily action**: if a funder needs a call, do it; if a tranche due, follow up
 - **Strategic action**: Minderoo lands mid-May; pitch already in `thoughts/shared/writing/drafts/goods-minderoo-pitch/`
 
+### Impact reporting + Evidence
+- **Standing principle**: [[../concepts/evidence-as-by-product|Evidence as a By-Product of the Work]] — impact reporting composes from the layers (Empathy Ledger, ALMA, CivicGraph, Governed Proof). It is not a separate workstream and does not have its own team or budget line.
+- **Sources at composition time**: ALMA for "what works", Empathy Ledger for consented stories, CivicGraph for financial context, Governed Proof for confidence rating and publication boundaries.
+- **Four standing report shapes**: funder report (per bespoke EL customer) · sector report (State of Civic Money, annual flagship) · internal cockpit (this doc and the daily cockpit) · grant-application evidence bundle.
+- **What ACT stops doing**: writing "what happened" narratives from memory at quarter-end; treating reports as the deliverable; letting funder formats dictate which layer owns evidence; using ALMA as the answer to every evidence question.
+- **Action**: when a new funder asks for a report, do not start a new template. Compose from the existing layers. If the layers are missing the data, fix the layers, not the report.
+
 ### Brand + Design (any sub-brand work)
 - **Read first**: `wiki/decisions/act-brand-alignment-map.md`
 - **Decision tree**: data tool → CivicGraph cluster; multi-tenant storytelling → EL v2; STAY journal extension → JusticeHub; default → parent editorial (act-regenerative-studio)
@@ -89,7 +96,7 @@ ON ANY NEW DESIGN WORK in any ACT repo
 ### Communications + Public-facing writing
 - **Voice rules**: `.claude/skills/act-brand-alignment/references/writing-voice.md` (Curtis method + AI-tells blocklist)
 - **Identity**: `.claude/skills/act-brand-alignment/references/brand-core.md` (LCAA, voice, project narratives)
-- **Naming rules**: in act-core-facts.md (first-use Accountable Listening and Meaningful Action (ALMA); call the intervention map JusticeHub evidence; no bare "LCAA"; Indigenous place names always; no em-dashes)
+- **Naming rules**: in act-core-facts.md (first-use Australian Living Map of Alternatives (ALMA); call the intervention map JusticeHub evidence; no bare "LCAA"; Indigenous place names always; no em-dashes)
 - **Daily action**: nothing — this surfaces only when you write
 - **Whenever drafting**: load both writing-voice.md + brand-core.md before composing (every Claude session in any ACT repo already has the pointers via CLAUDE.md)
 

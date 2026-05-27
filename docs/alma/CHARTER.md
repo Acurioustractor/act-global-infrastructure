@@ -1,4 +1,4 @@
-# ALMA - Accountable Listening and Meaningful Action Charter
+# ALMA - Australian Living Map of Alternatives Charter
 
 **Version**: 1.0
 **Date**: December 31, 2025
@@ -8,7 +8,7 @@
 
 ## Purpose
 
-Accountable Listening and Meaningful Action (ALMA) is ACT's governed sensemaking process. It helps move what we hear from people, place, evidence, and systems into responsible action, but only when consent, authority, provenance, and review are clear.
+Australian Living Map of Alternatives (ALMA) is ACT's evidence-graded catalogue of community-led alternatives. It helps move what we hear from people, place, evidence, and systems into responsible action, but only when consent, authority, provenance, and review are clear.
 
 ALMA is downstream of Soul and LCAA.
 
@@ -436,8 +436,8 @@ This charter evolves as ALMA evolves:
 
 ---
 
-**ALMA = Accountable Listening and Meaningful Action.**
+**ALMA = Australian Living Map of Alternatives.**
 
-**ALMA is ACT's governed sensemaking process for moving from listening to meaningful action with consent, authority, provenance, and review.**
+**ALMA is ACT's catalogue of community-led alternatives, evidence-graded with cultural authority.**
 
 **Built with consent. Governed by community. Powered by evidence. Accountable always.**

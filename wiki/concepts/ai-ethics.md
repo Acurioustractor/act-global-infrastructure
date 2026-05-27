@@ -9,7 +9,13 @@ status: Active
 
 ## Overview
 
-ACT's approach to AI is built on a single principle: AI serves community voice, it never replaces it. Every AI capability in the ecosystem must respect [[alma|Accountable Listening and Meaningful Action (ALMA)]]: consent, authority, provenance, and review before action. Efficiency is never a sufficient reason to bypass these constraints.
+ACT's approach to AI is built on a single principle: AI serves community voice, it never replaces it. Every AI capability in the ecosystem must respect three composed gatekeepers, each owned by a different layer of the [[civic-operating-system|civic operating system]]:
+
+- **Consent** lives in [[empathy-ledger|Empathy Ledger]] (consent state, AI-use ledger, audit trail)
+- **Cultural authority and evidence quality** live in [[alma|Australian Living Map of Alternatives (ALMA)]] scoring methodology (the six dimensions; cultural-authority verification before any score is set)
+- **Publication discipline** lives in [[governed-proof|Governed Proof]] (confidence rating, review trail, what can be shared with whom)
+
+Efficiency is never a sufficient reason to bypass any of these. This is the operational expression of the [[civic-reflex-automation|Civic Reflex Automation]] thesis: gatekeeping reflexes are automated and verifiable; the human work (cultural authority, judgment, relationship) stays human.
 
 This article covers the ethical framework, the internal agent roles, and what AI can and cannot do within ACT systems.
 
@@ -23,18 +29,17 @@ This article covers the ethical framework, the internal agent roles, and what AI
 | **Community authority highest weight** | Overrides efficiency in decision paths |
 | **Consent before analysis** | No opt-out model, explicit opt-in only |
 
-## AI Under ALMA Review
+## AI Under the Composed Gatekeepers
 
-ALMA is not an AI agent or a technical gatekeeper. It is the governed sensemaking process AI tools must remain subordinate to:
+ALMA is the catalogue, not the gatekeeping process. The three gates above (consent, cultural authority and evidence quality, publication discipline) are each owned by a different layer and composed at runtime. The flow:
 
 ```
 User/Community Input
         ↓
-   Governed Review
-   - Consent verified?
-   - Cultural sensitivity flagged?
-   - Authority confirmed?
-   - Provenance clear?
+   Composed Gate (at intake)
+   - Consent verified?         (Empathy Ledger)
+   - Cultural authority?       (ALMA scoring methodology)
+   - Evidence supported?       (ALMA scoring methodology)
         ↓
    AI Processing (if permitted)
         ↓
@@ -43,8 +48,15 @@ User/Community Input
    - Individual profiling avoided?
    - Value returned to community?
         ↓
-   Output
+   Composed Gate (at output)
+   - Publication permitted?    (Governed Proof)
+   - Confidence rating set?    (Governed Proof)
+   - Audit trail written?      (Empathy Ledger AI-use ledger)
+        ↓
+   Output (with provenance, written to audit trail)
 ```
+
+Each gate is a real check enforced by code in the relevant layer, not an aspirational principle. See [[civic-operating-system|the Civic Operating System concept page]] for how the layers compose.
 
 ## What AI Can Do
 
@@ -104,7 +116,7 @@ For any new AI feature:
 | Check | Required |
 |-------|----------|
 | OCAP principles respected? | Yes |
-| Accountable Listening and Meaningful Action (ALMA) respected? | Yes |
+| Australian Living Map of Alternatives (ALMA) respected? | Yes |
 | Individual profiling prevented? | Yes |
 | Sacred content hard-blocked? | Yes |
 | Community authority preserved? | Yes |
@@ -123,8 +135,11 @@ As AI capabilities grow, ACT maintains:
 
 ## Backlinks
 
-- [[alma|ALMA]] — governed sensemaking process AI must remain subordinate to
+- [[civic-operating-system|Civic Operating System]] — the three-layer architecture this ethics framework composes across
+- [[civic-reflex-automation|Civic Reflex Automation]] — the AI thesis these principles operationalise (automate the boring, amplify the art, never replace judgment)
+- [[alma|ALMA]] — the catalogue layer; AI must respect its cultural authority and evidence-scoring methodology
+- [[empathy-ledger|Empathy Ledger]] — the consent + audit + AI-use ledger layer
+- [[governed-proof|Governed Proof]] — the publication gate AI outputs pass through
 - [[governance-consent|Governance & Consent]] — consent architecture AI must respect
-- [[empathy-ledger|Empathy Ledger]] — the platform where AI consent settings live
 - [[ai-community-engagement|AI Community Engagement]] — broader AI use in community contexts
 - [[transcript-analysis-method|Transcript Analysis Method]] — the concrete guardrail set for AI transcription and theme extraction
