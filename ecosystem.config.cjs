@@ -379,6 +379,16 @@ const cronScripts = [
     cron_restart: '45 7 * * *', // Daily 7:45am AEST — push latest snapshot to Notion mirror page (no-op if NOTION_COMPLIANCE_PAGE_ID unset)
   },
   {
+    // Daily 7:20am AEST: stamp a Done date on any EOFY task marked Done without
+    // one (keeps the /eofy burndown "actual" line accurate) + push a one-line
+    // cutover countdown to Telegram. No-ops cleanly until the Notion integration
+    // is connected to the EOFY Setup Tracker DB. Inert until next `./dev cron`.
+    // See thoughts/shared/plans/2026-05-27-eofy-burndown-system.md.
+    name: 'eofy-burndown',
+    script: 'scripts/snapshot-eofy-burndown.mjs',
+    cron_restart: '20 7 * * *', // Daily 7:20am AEST
+  },
+  {
     name: 'idea-board-reminders',
     script: 'scripts/idea-board-reminders.mjs',
     cron_restart: '0 8 * * *', // Daily 8am AEST — per-owner DM with stale ideas + inline buttons (idea 90d, scope 30d, fundraise 14d). Cap 5 per DM.
