@@ -667,6 +667,12 @@ const cronScripts = [
     cron_restart: '0 18 * * 5', // Friday 6pm AEST
   },
   {
+    name: 'relationship-health',
+    script: 'scripts/relationship-health.mjs',
+    args: 'update',
+    cron_restart: '15 3 * * *', // Daily 3:15am AEST — recompute relationship scores. The populator was never scheduled (only the Fri consumer was), so relationship_health froze ~4 weeks (last Apr 29) until re-lit 2026-05-27. Feeds the 7 /relationships + intelligence routes + the Fri review.
+  },
+  {
     name: 'project-intelligence',
     script: 'scripts/generate-project-intelligence-snapshots.mjs',
     cron_restart: '0 6 * * *', // Daily 6am AEST (before daily-briefing at 7am)
