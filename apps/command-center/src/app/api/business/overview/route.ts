@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import { supabase } from '@/lib/supabase'
 import { fetchAllRows } from '@/lib/finance/query'
-import { getMonthlyPL } from '@/lib/finance/ledger'
+import { getMonthlyPL, getCashPosition } from '@/lib/finance/ledger'
 
 /**
  * GET /api/business/overview
@@ -62,11 +62,10 @@ export async function GET() {
     else if (tx.type === 'SPEND') recentOut += amt
   }
 
-  // Bank balance: xero_transactions has no running_balance column and there is no bank-balance
-  // feed table in the shared DB, so there is no source to read a live balance from here. Left null
-  // (downstream handles null → bankBalance/runway null) rather than fabricate one. The CEO bank
-  // position lives on the rebuilt /company page (lib/finance ledger).
-  const latestBalance = null as { running_balance: number | null } | null
+  // Bank balance: the live ACT cash position = the two ACT operating accounts (ACT Everyday + NAB
+  // Visa #8815, two-account rule), summed from xero_bank_accounts (synced daily by xero-bank-balances).
+  // Reuse the canonical ledger helper so this matches /company.
+  const cashPosition = await getCashPosition()
 
   // Subscriptions total
   const { data: subs } = await supabase
@@ -305,12 +304,14 @@ export async function GET() {
       netFlow: Math.round(recentIn - recentOut),
     },
     currentPosition: {
-      bankBalance: latestBalance?.running_balance ? Math.round(Number(latestBalance.running_balance)) : null,
+      bankBalance: cashPosition.ok ? cashPosition.cash : null,
+      bankBalanceAsOf: cashPosition.asOf,
+      bankBalanceStale: cashPosition.stale,
       receivables: Math.round(receivables),
       monthlySubscriptions: Math.round(monthlySubscriptions),
       burnRate: Math.round(monthExpenses),
-      runway: monthExpenses > 0 && latestBalance?.running_balance
-        ? Math.round(Number(latestBalance.running_balance) / monthExpenses)
+      runway: monthExpenses > 0 && cashPosition.ok
+        ? Math.round(cashPosition.cash / monthExpenses)
         : null,
     },
   }

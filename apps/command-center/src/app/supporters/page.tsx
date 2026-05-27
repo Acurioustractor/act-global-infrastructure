@@ -127,9 +127,20 @@ export default function SupportersPage() {
     refetchOnWindowFocus: false,
   })
 
+  type SortKey =
+    | 'name' | 'tier' | 'totalPaidAud' | 'outstandingAud'
+    | 'openOppValueAud' | 'lastTouchAt' | 'in30out' | 'waiting' | 'projects'
+  const [sortKey, setSortKey] = useState<SortKey>('outstandingAud')
+  const [sortDir, setSortDir] = useState<'asc' | 'desc'>('desc')
+
+  function toggleSort(key: SortKey) {
+    if (sortKey === key) setSortDir(sortDir === 'asc' ? 'desc' : 'asc')
+    else { setSortKey(key); setSortDir(key === 'name' || key === 'tier' || key === 'projects' ? 'asc' : 'desc') }
+  }
+
   const filtered = useMemo(() => {
     if (!data?.supporters) return []
-    let rows = data.supporters
+    let rows = [...data.supporters]
     if (tierFilter !== 'all') rows = rows.filter((s) => s.tier === tierFilter)
     if (projectFilter !== 'all') rows = rows.filter((s) => s.projects?.includes(projectFilter))
     if (needsReplyOnly) rows = rows.filter((s) => s.needsReply)
@@ -142,8 +153,44 @@ export default function SupportersPage() {
           (s.primaryContact || '').toLowerCase().includes(q),
       )
     }
+    // Sort
+    const sign = sortDir === 'asc' ? 1 : -1
+    rows.sort((a, b) => {
+      let av: any, bv: any
+      switch (sortKey) {
+        case 'name': av = a.name.toLowerCase(); bv = b.name.toLowerCase(); break
+        case 'tier': av = a.tier; bv = b.tier; break
+        case 'totalPaidAud': av = a.totalPaidAud; bv = b.totalPaidAud; break
+        case 'outstandingAud': av = a.outstandingAud; bv = b.outstandingAud; break
+        case 'openOppValueAud': av = a.openOppValueAud; bv = b.openOppValueAud; break
+        case 'lastTouchAt': av = a.lastTouchAt ? new Date(a.lastTouchAt).getTime() : 0; bv = b.lastTouchAt ? new Date(b.lastTouchAt).getTime() : 0; break
+        case 'in30out': av = (a.in30d + a.out30d); bv = (b.in30d + b.out30d); break
+        case 'waiting': av = a.waitingForResponseCount; bv = b.waitingForResponseCount; break
+        case 'projects': av = (a.projects || []).join(','); bv = (b.projects || []).join(','); break
+      }
+      if (av < bv) return -1 * sign
+      if (av > bv) return 1 * sign
+      return 0
+    })
     return rows
-  }, [data, tierFilter, projectFilter, needsReplyOnly, search])
+  }, [data, tierFilter, projectFilter, needsReplyOnly, search, sortKey, sortDir])
+
+  function SortBtn({ k, label, align = 'left' }: { k: SortKey; label: string; align?: 'left' | 'right' }) {
+    const active = sortKey === k
+    return (
+      <button
+        onClick={() => toggleSort(k)}
+        className={cn(
+          'inline-flex items-center gap-1 hover:text-white transition-colors',
+          align === 'right' && 'justify-end',
+          active && 'text-white',
+        )}
+      >
+        {label}
+        <span className={cn('text-[8px]', active ? 'opacity-100' : 'opacity-20')}>{active && sortDir === 'asc' ? '▲' : '▼'}</span>
+      </button>
+    )
+  }
 
   const allProjects = useMemo(() => {
     if (!data?.supporters) return []
@@ -308,15 +355,15 @@ export default function SupportersPage() {
           <table className="w-full text-sm">
             <thead className="bg-white/5 text-xs text-white/40 uppercase tracking-wider">
               <tr>
-                <th className="text-left p-3">Supporter</th>
-                <th className="text-left p-3">Tier</th>
-                <th className="text-right p-3">$ Paid</th>
-                <th className="text-right p-3">$ Outstanding</th>
-                <th className="text-right p-3">Open Opps</th>
-                <th className="text-left p-3">Last Touch</th>
-                <th className="text-right p-3">In/Out 30d</th>
-                <th className="text-right p-3">Waiting</th>
-                <th className="text-left p-3">Projects</th>
+                <th className="text-left p-3"><SortBtn k="name" label="Supporter" /></th>
+                <th className="text-left p-3"><SortBtn k="tier" label="Tier" /></th>
+                <th className="text-right p-3"><SortBtn k="totalPaidAud" label="$ Paid" align="right" /></th>
+                <th className="text-right p-3"><SortBtn k="outstandingAud" label="$ Outstanding" align="right" /></th>
+                <th className="text-right p-3"><SortBtn k="openOppValueAud" label="Open Opps" align="right" /></th>
+                <th className="text-left p-3"><SortBtn k="lastTouchAt" label="Last Touch" /></th>
+                <th className="text-right p-3"><SortBtn k="in30out" label="In/Out 30d" align="right" /></th>
+                <th className="text-right p-3"><SortBtn k="waiting" label="Waiting" align="right" /></th>
+                <th className="text-left p-3"><SortBtn k="projects" label="Projects" /></th>
               </tr>
             </thead>
             <tbody>

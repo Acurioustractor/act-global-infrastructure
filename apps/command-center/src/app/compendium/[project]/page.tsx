@@ -128,7 +128,7 @@ const projectData: Record<string, {
       {
         title: 'ALMA',
         icon: Zap,
-        content: 'Accountable Listening and Meaningful Action (ALMA) is ACT\'s governed process for moving from story to responsible action with consent, authority, provenance, and review.',
+        content: 'Australian Living Map of Alternatives (ALMA) is ACT\'s governed process for moving from story to responsible action with consent, authority, provenance, and review.',
       },
     ],
   },

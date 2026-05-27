@@ -1009,7 +1009,7 @@ export default function ProjectPage({ params, searchParams }: PageParams) {
             <div className="glass-card p-6">
               <h3 className="font-semibold text-white mb-3">About ALMA</h3>
               <p className="text-sm text-white/50 leading-relaxed">
-                Accountable Listening and Meaningful Action (ALMA) reviews project readiness
+                Australian Living Map of Alternatives (ALMA) reviews project readiness
                 through four dimensions that reflect ACT's commitment to community-led development.
               </p>
               <div className="mt-4 space-y-3 text-sm">
