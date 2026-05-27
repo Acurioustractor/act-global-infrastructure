@@ -1,0 +1,105 @@
+# Plan: Pipeline consolidation — retire/re-light the legacy pipeline tables (blueprint Phase 4)
+
+> Slug: `pipeline-consolidation`
+> Created: 2026-05-27
+> Status: draft — awaiting Ben's decisions (marked ⬜ below)
+> Owner: Ben + Claude
+> Parent: `thoughts/shared/plans/2026-05-26-act-operating-picture-blueprint.md` §6 Phase 4
+
+## Objective
+
+Blueprint Phase 4 says "retire `relationship_pipeline`/`fundraising_pipeline` → `opportunities_unified`."
+Investigation shows the two legacy tables are in **different situations**, and the naive "merge both into
+opportunities_unified" is only half-right. This plan documents what's actually true and the decisions
+needed before any code moves — because two of the 11 affected routes are **money surfaces**
+(`/finance/runway`, `/business/scoreboard`) where a wrong column mapping = wrong numbers, and the
+schema-contract checker can't catch a semantic mis-map (the columns all exist).
+
+## What's actually true (verified 2026-05-27 against the live shared DB)
+
+**`opportunities_unified` is the canonical, fresh, aggregated READ-model** — 15,549 rows, updated daily by
+`scripts/sync-opportunities-to-unified-pipeline.mjs`. It pulls from 6+ sources:
+
+| source_system / type | rows |
+|---|---|
+| grant_opportunities / grant | 14,326 |
+| grantscope / grant | 685 |
+| ghl_opportunities / deal | 500 |
+| manual / deal+grant+revenue | 21 |
+| **fundraising_pipeline** / donation+grant | **14** |
+| xero / deal | 2 |
+
+**`fundraising_pipeline`** (14 rows, frozen 2026-03-06) — a manual WRITE-model that **already feeds
+opportunities_unified** (its 14 rows are in there as `source_system='fundraising_pipeline'`). So it is
+*not* abandoned-dead; it's a low-volume, stale input. The active funding pipeline today is GHL
+(`ghl_opportunities`, 500 rows in opps_unified).
+
+**`relationship_pipeline`** (1,170 rows, frozen 2026-03-12) — a **different domain**: a relationship-CRM
+kanban with `love_score / money_score / strategic_score / urgency_score / color / next_action`. It is
+**NOT a source of opportunities_unified** and `opportunities_unified` has no score columns. Merging it
+into opportunities would lose its whole reason for existing. This is a "retire the feature or re-light
+its populator" decision, **not** a consolidation.
+
+## Decisions needed (⬜ = needs Ben)
+
+- ⬜ **D1 — fundraising reads → opportunities_unified?** The 6 read routes (below) could read
+  `opportunities_unified` filtered to `source_system='fundraising_pipeline'` (or `opportunity_type IN
+  ('donation','grant','fundraising')`) instead of the raw table, for one canonical pipeline. But the data
+  is 14 stale rows; low payoff. **Recommendation:** yes for consistency, but low priority — do it only as
+  part of a broader "all pipeline reads go through opportunities_unified" pass.
+- ⬜ **D2 — fundraising WRITE model.** `/api/opportunities` + `/api/opportunities/update` are the CRUD for
+  `fundraising_pipeline` (writes then sync to opps_unified). Keep `fundraising_pipeline` as the write-model
+  (recommended — opps_unified is derived, never write to it directly), or migrate fundraising CRUD onto
+  GHL/another store. **Recommendation:** keep as write-model; don't break it.
+- ⬜ **D3 — relationship_pipeline / the `/pipeline` kanban.** Retire the relationship-kanban feature
+  (5 route refs + the `/pipeline` page), OR re-light its populator so the scores refresh. Need to know:
+  is the relationship-kanban still used, or superseded by the `/relationships/*` pages + GHL? **No
+  recommendation without that answer** — it's a product call.
+- ⬜ **D4 — relationship_health** (tracked in trust-map §H, related): recompute (add the unscheduled
+  `relationship-health.mjs update` to PM2 — cheap) vs retire. **Recommendation: recompute.**
+
+## Per-route migration map (the 11 refs)
+
+### fundraising_pipeline (6 refs) — if D1 = yes, repoint reads to opportunities_unified
+opps_unified mapping: `name→title`, `funder→contact_name`, `amount→value_mid`, `status→stage`,
+`probability→probability`, `expected_date→expected_close`, `actual_date→actual_close`,
+`deadline→metadata`, `project_codes→project_codes`, `contact_id→contact_ids[]`, filter
+`source_system='fundraising_pipeline'`.
+
+| Route | Select today | Surface | Action |
+|---|---|---|---|
+| `app/api/opportunities/route.ts:52` | full (`id,name,funder,type,amount,status,probability,expected_date,deadline,project_codes,created_at,contact_id`) | opportunities list | read → opps_unified (or keep raw as the write-model's own list) |
+| `app/api/opportunities/update/route.ts:123` | **WRITE** | CRUD | **keep `fundraising_pipeline`** (write-model, D2) |
+| `app/api/projects/[code]/financials/route.ts:141` | `name,amount,status,project_codes` | project financials | read → opps_unified (⚠️ money surface — verify amount→value_mid) |
+| `app/api/business/scoreboard/route.ts:26` | `*` | **exec scoreboard (money)** | read → opps_unified (⚠️ verify all fields used) |
+| `app/api/finance/runway/route.ts:65` | `name,amount,status,project_codes` | **runway (money)** | read → opps_unified (⚠️ verify amount→value_mid) |
+| `lib/tools/projects.ts:201` | `name,deadline,expected_date,status,project_codes` | bot project tool | read → opps_unified |
+
+### relationship_pipeline (5 refs) — blocked on D3 (retire vs re-light)
+| Route | Action (if RETIRE) | Action (if RE-LIGHT) |
+|---|---|---|
+| `app/api/pipeline/route.ts:13,64` | archive route + `/pipeline` page | re-light populator; no code change |
+| `app/api/pipeline/[id]/route.ts:15,36` | archive | no change |
+| `app/api/pipeline/search/route.ts:46` | drop the rel-pipeline source from search | no change |
+
+## Risks
+- **Money surfaces (runway, scoreboard, project financials):** `amount` (single number) → opps_unified has
+  `value_low/value_mid/value_high`. Mapping `amount→value_mid` must be confirmed per route; a wrong choice
+  shifts displayed pipeline value. The schema-contract test will NOT catch this (all columns exist).
+- **Never write to opportunities_unified** — it's overwritten by the daily sync. Writes go to the source
+  table (fundraising_pipeline).
+- `fundraising_pipeline` data is 14 rows / stale since March → low value; the migration is about *one
+  canonical pipeline*, not fixing live numbers (the live funding pipeline is GHL).
+
+## Recommended sequence (once decisions land)
+1. D4 (relationship_health recompute) — cheapest, isolated PM2 entry.
+2. D3 (relationship_pipeline) — if retire, archive the 3 `/pipeline` routes + page (like the §H archive).
+3. D1/D2 (fundraising reads → opps_unified) — last, lowest payoff; do the money-surface routes one at a
+   time with live-data verification of `amount→value_mid`.
+
+## Provenance
+- Verified vs live shared DB (`tednluwflfhxyucgwigh`) 2026-05-27: table freshness, opps_unified
+  source_system distribution, the 11 route `.from()/.select()` refs, the `ecosystem.config.cjs` cron set.
+- relationship_health populator analysis: `scripts/relationship-health.mjs` (only writer, line 288) is
+  absent from `ecosystem.config.cjs`; `weekly-relationship-review` (Fri 6pm) only reads it.
+- Generated by: Claude (investigation), pending Ben's D1–D4.
