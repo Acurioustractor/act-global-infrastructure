@@ -1,0 +1,103 @@
+{
+  "generatedAt": "2026-05-27T23:49:42.126Z",
+  "applied": true,
+  "restore": [
+    {
+      "community": "KALTUKATJARA",
+      "action": {
+        "community": "KALTUKATJARA",
+        "keepId": "4K9xnpqBxsidPMmZfy7L",
+        "deleteId": "va7aNGSaSLMQsXBz8io3",
+        "why": "ICN 172 (Nguratjaku Council) deregistered 2005-03-07; ICN 200 (Community Council) is the active corp → keep active, delete defunct"
+      },
+      "deletedOpp": {
+        "id": "va7aNGSaSLMQsXBz8io3",
+        "name": "Kaltukatjara Nguratjaku Council (Aboriginal Corporation) — KALTUKATJARA",
+        "monetaryValue": 0,
+        "pipelineId": "UQsrmuqzxMSdCTklxEcG",
+        "pipelineStageId": "02502aa3-9a0d-4ddd-b1f0-c1e836838426",
+        "status": "open",
+        "source": "Goods top-25 activation",
+        "lastStatusChangeAt": "2026-05-27T06:10:10.322Z",
+        "lastStageChangeAt": "2026-05-27T06:10:10.322Z",
+        "createdAt": "2026-05-27T06:10:10.322Z",
+        "updatedAt": "2026-05-27T06:10:10.322Z",
+        "contactId": "9DIjNWgD0WXnUhB2DAUm",
+        "isAttribute": false,
+        "internalSource": {
+          "type": "CREATED",
+          "channel": "OAUTH",
+          "id": "695cb35c2eda1cb50c2dd51f",
+          "source": "INTEGRATION",
+          "apiVersion": "2021-07-28"
+        },
+        "locationId": "agzsSZWgovjwgpcoASWG",
+        "lastActionDate": "2026-05-27T06:10:10.322Z",
+        "followers": [],
+        "contact": {
+          "id": "9DIjNWgD0WXnUhB2DAUm",
+          "name": "Kaltukatjara Nguratjaku Council (Aboriginal Corporation)",
+          "companyName": "Kaltukatjara Nguratjaku Council (Aboriginal Corporation)",
+          "email": "kaltukatjara-nguratjaku-council-aboriginal-corporation-kaltukatj@goods.civicgraph.io",
+          "tags": [
+            "civicgraph",
+            "goods",
+            "act-gd",
+            "project:act-gd",
+            "goods-community-kaltukatjara",
+            "goods-state-nt",
+            "goods-role-council",
+            "goods-communitycontrolled",
+            "goods-stage-prospect",
+            "audience-partner"
+          ],
+          "followers": []
+        }
+      },
+      "keptOpp": {
+        "id": "4K9xnpqBxsidPMmZfy7L",
+        "name": "Kaltukatjara Community Council (Aboriginal Corporation) — KALTUKATJARA",
+        "monetaryValue": 0,
+        "pipelineId": "UQsrmuqzxMSdCTklxEcG",
+        "pipelineStageId": "02502aa3-9a0d-4ddd-b1f0-c1e836838426",
+        "status": "open",
+        "source": "Goods top-25 activation",
+        "lastStatusChangeAt": "2026-05-27T06:10:03.606Z",
+        "lastStageChangeAt": "2026-05-27T06:10:03.606Z",
+        "createdAt": "2026-05-27T06:10:03.606Z",
+        "updatedAt": "2026-05-27T06:10:03.606Z",
+        "contactId": "wrRHeRChqJEXAcOp5HAw",
+        "isAttribute": false,
+        "internalSource": {
+          "source": "INTEGRATION",
+          "id": "695cb35c2eda1cb50c2dd51f",
+          "type": "CREATED",
+          "apiVersion": "2021-07-28",
+          "channel": "OAUTH"
+        },
+        "locationId": "agzsSZWgovjwgpcoASWG",
+        "lastActionDate": "2026-05-27T06:10:03.606Z",
+        "followers": [],
+        "contact": {
+          "id": "wrRHeRChqJEXAcOp5HAw",
+          "name": "Kaltukatjara Community Council (Aboriginal Corporation)",
+          "companyName": "Kaltukatjara Community Council (Aboriginal Corporation)",
+          "email": "kaltukatjara-community-council-aboriginal-corporation-kaltukatja@goods.civicgraph.io",
+          "tags": [
+            "civicgraph",
+            "goods",
+            "act-gd",
+            "project:act-gd",
+            "goods-community-kaltukatjara",
+            "goods-state-nt",
+            "goods-role-council",
+            "goods-communitycontrolled",
+            "goods-stage-prospect",
+            "audience-partner"
+          ],
+          "followers": []
+        }
+      }
+    }
+  ]
+}
