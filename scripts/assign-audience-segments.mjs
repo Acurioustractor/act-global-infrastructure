@@ -221,8 +221,10 @@ function audiencesFor(contact, opp) {
 
   // Apply: push audience-* tags to GHL (add then remove, within the audience-* namespace only)
   const ghl = createGHLService();
+  const today = new Date().toISOString().slice(0, 10);
   let applied = 0;
   let skippedNoId = 0;
+  let ghostsMarked = 0;
   let errors = 0;
   for (const p of plan) {
     if (!p.contact.ghl_id) {
@@ -239,11 +241,20 @@ function audiencesFor(contact, opp) {
       applied++;
       if (applied % 50 === 0) console.log(`  …${applied}/${plan.length} contacts updated`);
     } catch (e) {
-      errors++;
-      console.error(`  ✗ ${p.contact.ghl_id}: ${e.message}`);
+      // Contact deleted/merged out of GHL → soft-mark it so future runs skip it
+      if (/not found/i.test(e.message)) {
+        const goneTags = [...new Set([...(p.contact.tags || []), GONE_TAG, `${GONE_TAG}-${today}`])];
+        await supabase.from('ghl_contacts').update({ tags: goneTags }).eq('id', p.contact.id);
+        ghostsMarked++;
+      } else {
+        errors++;
+        console.error(`  ✗ ${p.contact.ghl_id}: ${e.message}`);
+      }
     }
   }
-  console.log(`\n✅ Applied to ${applied} contacts · ${skippedNoId} skipped (no ghl_id) · ${errors} errors\n`);
+  console.log(
+    `\n✅ Applied to ${applied} contacts · ${ghostsMarked} ghosts marked '${GONE_TAG}' · ${skippedNoId} no-id · ${errors} other errors\n`
+  );
 })().catch((e) => {
   console.error('Fatal:', e);
   process.exit(1);
