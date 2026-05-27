@@ -32,7 +32,7 @@
  */
 
 import '../lib/load-env.mjs';
-import { readFileSync } from 'fs';
+import { readFileSync, writeFileSync } from 'fs';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import { createClient } from '@supabase/supabase-js';
@@ -46,6 +46,9 @@ const APPLY = args.has('--apply');
 const VERBOSE = args.has('--verbose');
 const LIMIT_IDX = process.argv.indexOf('--limit');
 const LIMIT = LIMIT_IDX > -1 ? parseInt(process.argv[LIMIT_IDX + 1], 10) : null;
+const DUMP_IDX = process.argv.indexOf('--dump-stale-candidates');
+const DUMP_PATH = DUMP_IDX > -1 ? process.argv[DUMP_IDX + 1] : null;
+const GONE_TAG = 'gone-from-ghl';
 
 const SUPABASE_URL =
   process.env.SUPABASE_SHARED_URL || process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -149,9 +152,15 @@ function audiencesFor(contact, opp) {
   const counts = Object.fromEntries(Object.keys(AUDIENCES).map((k) => [k, 0]));
   const sizeDist = {}; // number-of-audiences → count
   let noAudience = 0;
+  let goneCount = 0;
   const plan = []; // { contact, target:Set, add:[], remove:[] }
 
   for (const c of contacts) {
+    // Skip contacts that no longer exist in GHL (soft-deleted by clean-stale-ghl-contacts)
+    if ((c.tags || []).some((t) => norm(t) === GONE_TAG)) {
+      goneCount++;
+      continue;
+    }
     const auds = audiencesFor(c, oppIndex.get(c.ghl_id));
     for (const a of auds) counts[a]++;
     sizeDist[auds.length] = (sizeDist[auds.length] || 0) + 1;
@@ -162,6 +171,20 @@ function audiencesFor(contact, opp) {
     const add = [...targetTags].filter((t) => !existingAudienceTags.map(norm).includes(norm(t)));
     const remove = existingAudienceTags.filter((t) => !targetTags.has(t));
     if (add.length || remove.length) plan.push({ contact: c, add, remove });
+  }
+
+  // Dump candidate manifest for clean-stale-ghl-contacts-from-manifest.mjs and exit
+  if (DUMP_PATH) {
+    const entries = plan
+      .filter((p) => p.contact.ghl_id)
+      .map((p) => ({ status: 'failed', error: 'Contact not found', ghl_contact_id: p.contact.ghl_id }));
+    writeFileSync(
+      DUMP_PATH,
+      JSON.stringify({ generated_at: new Date().toISOString(), source: 'assign-audience-segments.mjs', entries }, null, 2)
+    );
+    console.log(`Wrote ${entries.length} candidate ids to ${DUMP_PATH}`);
+    console.log(`Next: node scripts/clean-stale-ghl-contacts-from-manifest.mjs ${DUMP_PATH} --apply`);
+    return;
   }
 
   // Report
@@ -175,6 +198,7 @@ function audiencesFor(contact, opp) {
     console.log(`  ${n} audience(s): ${sizeDist[n]}`);
   }
   console.log(`  → ${noAudience} contacts in no audience (not on any send list yet)`);
+  if (goneCount) console.log(`  (skipped ${goneCount} contacts tagged '${GONE_TAG}' — no longer in GHL)`);
 
   console.log(`\nTag changes needed: ${plan.length} contacts`);
   const totalAdd = plan.reduce((s, p) => s + p.add.length, 0);
@@ -208,6 +232,10 @@ function audiencesFor(contact, opp) {
     try {
       for (const t of p.add) await ghl.addTagToContact(p.contact.ghl_id, t);
       for (const t of p.remove) await ghl.removeTagFromContact(p.contact.ghl_id, t);
+      // Mirror into Supabase so ghl_contacts.tags reflects GHL (keeps re-runs idempotent)
+      const removeSet = new Set(p.remove.map(norm));
+      const mirrored = [...new Set([...(p.contact.tags || []).filter((t) => !removeSet.has(norm(t))), ...p.add])];
+      await supabase.from('ghl_contacts').update({ tags: mirrored }).eq('id', p.contact.id);
       applied++;
       if (applied % 50 === 0) console.log(`  …${applied}/${plan.length} contacts updated`);
     } catch (e) {
