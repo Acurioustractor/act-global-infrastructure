@@ -6,7 +6,7 @@
 
 Always spell out ALMA on first use:
 
-Accountable Listening and Meaningful Action (ALMA)
+Australian Living Map of Alternatives (ALMA)
 
 Do not describe ALMA as:
 - the soul
@@ -16,7 +16,7 @@ Do not describe ALMA as:
 - a replacement for human or community authority
 
 Describe ALMA as:
-ACT's governed sensemaking process for moving from listening to meaningful action with consent, authority, provenance, and review.
+ACT's catalogue of community-led alternatives, evidence-graded with cultural authority.
 
 ## Database & Environment
 

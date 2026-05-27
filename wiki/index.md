@@ -26,12 +26,15 @@ This wiki follows the [[llm-knowledge-base|Karpathy LLM Knowledge Base pattern]]
 - [[act-identity|ACT Identity]] — what A Curious Tractor is: dual-entity structure, LCAA, Beautiful Obsolescence
 - [[act-ecosystem|ACT Ecosystem]] — how the projects fit together: narrative, evidence, place, proof case, art
 - [[third-reality|The Third Reality]] — ACT's proprietary methodology for social impact measurement
-- [[civic-world-model|Civic World Model]] — CivicGraph as living civic intelligence
+- [[civic-operating-system|Civic Operating System]] — three layers, one architecture: CivicGraph (intelligence) + JusticeHub (practice) + Empathy Ledger (accountability)
+- [[civic-reflex-automation|Civic Reflex Automation]] — the AI thesis: automate the boring, amplify the art, never replace human judgment
+- [[evidence-as-by-product|Evidence as a By-Product of the Work]] — how impact reporting composes from the layers; no separate reporting workstream
+- [[civic-world-model|Civic World Model]] — the intelligence sensorium of the civic OS: how CivicGraph illuminates the field
 - [[indigenous-data-sovereignty|Indigenous Data Sovereignty]] — Mukurtu, CARE principles, TK Labels
 - [[ocap-principles|OCAP Principles]] — Ownership, Control, Access, Possession — the four architectural requirements
 - [[llm-knowledge-base|LLM Knowledge Base]] — the architecture pattern powering this wiki
 - [[lcaa-method|LCAA Method]] — Listen, Curiosity, Action, Art
-- [[alma|ALMA]] — Accountable Listening and Meaningful Action; ACT's governed process for moving from listening to meaningful action
+- [[alma|ALMA]] — Australian Living Map of Alternatives; the catalogue of community-led interventions, evidence-graded with cultural authority
 - [[governed-proof|Governed Proof]] — evidence, review, confidence, publication, and audit trail after action
 - [[ai-community-engagement|AI and Community Engagement]] — when AI eats the paperwork, people get their time back
 - [[youth-justice-reform|Youth Justice Reform]] — evidence, policy, alternatives

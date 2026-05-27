@@ -23,7 +23,7 @@ export default function ImpactPage() {
                     Ecosystem Impact
                 </h1>
                 <p className="max-w-2xl text-lg text-[#4D3F33] leading-relaxed">
-                    Accountable Listening and Meaningful Action (ALMA) helps ACT review
+                    Australian Living Map of Alternatives (ALMA) helps ACT review
                     regenerative outcomes across Land, Studio, and Harvest contexts with consent,
                     authority, provenance, and care.
                 </p>

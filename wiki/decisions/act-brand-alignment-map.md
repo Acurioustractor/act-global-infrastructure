@@ -19,6 +19,36 @@ review_cadence: monthly + on any new sub-brand
 
 ---
 
+## The three tools are one civic OS (read this first)
+
+> Before any visual deviation rule below: **CivicGraph, JusticeHub, and Empathy Ledger are not three independent products.** They are three layers of one civic operating system. The visual deviations downstream serve the layer differentiation; they are not branding accidents and they cannot be unified into one look without breaking the product architecture.
+
+ACT builds three tools that share one architecture, one ethics, one publishing cadence, and one set of reflex primitives (intake, consent, triage, referral, follow-up, audit, evidence):
+
+| Layer | Tool | Role |
+|---|---|---|
+| **Intelligence** | CivicGraph (grantscope repo) | Sees the civic field. Maps money, power, opportunities, deserts. |
+| **Practice** | JusticeHub | Supports the work. Reflex layer for community-led justice and social-impact practice. |
+| **Accountability** | Empathy Ledger v2 | Holds the trust. Consent, audit, AI-use ledger, human-in-the-loop, sovereignty primitives. |
+
+The three tools call each other technically (CivicGraph writes provenance events to Empathy Ledger's accountability API; JusticeHub fetches opportunities from CivicGraph and verifies consent against Empathy Ledger). The civic OS is enforced in code, not just in marketing.
+
+**Why the visual deviations below exist:**
+- **CivicGraph wears Civic Bauhaus** because the intelligence layer publishes accountability data (funding deserts, revolving doors, power concentration). Warmth on that surface would undermine the teeth the data has earned.
+- **JusticeHub and Empathy Ledger wear Editorial Warmth** (in different subfamilies) because they are practice and storytelling surfaces for human relationships, lived experience, and cultural authority. Bauhaus on those surfaces would feel extractive.
+- The clusters serve the layers. Don't apply Bauhaus to a story surface. Don't apply Editorial Warmth to a data atlas. If a future surface doesn't clearly belong to one layer, that's a product-architecture question first, a visual question second.
+
+**Not in the civic OS:** Goods on Country, ACT Farm, and The Harvest Witta are separate ACT projects on different revenue lanes (see [[../concepts/four-lanes|The Four Lanes]]). They are part of the wider ACT ecosystem but do not inherit the civic-OS three-layer scheme. The visual cluster choices for those surfaces are made independently, per their own sections below.
+
+**Read before designing in any of the three civic-OS repos:**
+- [[../concepts/civic-operating-system|Civic Operating System concept page]] — the architecture, the shared reflex primitives, the cross-product API calls
+- [[2026-05-25-civic-cerebellum-reframe|Civic Cerebellum Reframe ADR (2026-05-25)]] — the decision that established the architecture
+- [[../concepts/civic-reflex-automation|Civic Reflex Automation]] — the AI thesis that makes the layers coherent
+
+The visual decisions in the rest of this file only make sense once you understand which layer your surface serves.
+
+---
+
 ## The visual family (three clusters)
 
 ACT has one parent identity (regenerative innovation; PTO metaphor; LCAA method; Indigenous-led partnership) but three legitimate visual families. Each family has a reason. Don't merge them; choose deliberately.
@@ -163,7 +193,7 @@ These rules apply to every surface, regardless of cluster:
 
 1. **Voice (Curtis method).** Name the room, name the body, load the abstract noun, stop the line before the explanation. From `writing-voice.md`.
 2. **AI-tells blocklist.** Never use: delve, crucial, pivotal, tapestry, underscore, "not just X but Y", rule-of-three adjective padding, em-dashes (in any ACT-facing writing), "challenges and future prospects", "-ing" significance tails.
-3. **Naming.** "Accountable Listening and Meaningful Action (ALMA)" needs first-use expansion and should not be used bare. Call the intervention map "JusticeHub evidence map" or "ALMA-governed JusticeHub evidence", not ALMA. "Listen · Curiosity · Action · Art" never bare "LCAA". Indigenous place names always; colonial in brackets only.
+3. **Naming.** "Australian Living Map of Alternatives (ALMA)" needs first-use expansion and should not be used bare. Call the intervention map "JusticeHub evidence map" or "ALMA-governed JusticeHub evidence", not ALMA. "Listen · Curiosity · Action · Art" never bare "LCAA". Indigenous place names always; colonial in brackets only.
 4. **LCAA imprint.** Every project should be reachable from the LCAA framing — Listen, Curiosity, Action, Art — visually OR narratively. Some lean Listen (EL v2), some Action (JH), some Art (Studio), some all four (Farm). State which.
 5. **Indigenous protocols.** Cultural-protocols-true projects (PICC, Oonchiumpa, BG Fit, Mounty Yarns) require OCAP-style consent before any storyteller content lands publicly. From `wiki/projects/...` per-project notes + `project_wiki_story_sync.md` memory.
 

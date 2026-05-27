@@ -18,6 +18,40 @@ Helper: `node scripts/wiki-log.mjs <op> "<summary>" [files...]`
 
 ## 2026
 
+- 2026-05-25 05:37 | viewer-build | 321 articles · 92 photo maps · 2571KB | tools/act-wikipedia.html
+- 2026-05-25 05:37 | snapshot-sync | 24 direct mirrors · 55 stories · 4 wrappers | apps/command-center/public/wiki/README.md, apps/command-center/public/wiki/snapshot-meta.json
+- 2026-05-24 09:15 | viewer-build | 321 articles · 92 photo maps · 2568KB | tools/act-wikipedia.html
+- 2026-05-24 09:15 | snapshot-sync | 24 direct mirrors · 55 stories · 4 wrappers | apps/command-center/public/wiki/README.md, apps/command-center/public/wiki/snapshot-meta.json
+- 2026-05-24 09:05 | url-audit | 8 live · 0 dead · 2 known-issue · 22 no-URL · 20 no-repo | wiki/decisions/url-audit-2026-05-24.md, wiki/decisions/url-audit-latest.json
+- 2026-05-24 09:00 | lint | 320 canonical articles · 252 broken links · 68 orphans · 98% source-bridge coverage | wiki/output/lint-2026-05-24.md, wiki/output/status-latest.json
+- 2026-05-23 16:47 | viewer-build | 316 articles · 92 photo maps · 2485KB | tools/act-wikipedia.html
+- 2026-05-23 16:47 | snapshot-sync | 24 direct mirrors · 55 stories · 4 wrappers | apps/command-center/public/wiki/README.md, apps/command-center/public/wiki/snapshot-meta.json
+- 2026-05-23 16:47 | url-audit | 8 live · 0 dead · 2 known-issue · 22 no-URL · 20 no-repo | wiki/decisions/url-audit-2026-05-23.md, wiki/decisions/url-audit-latest.json
+- 2026-05-23 16:47 | lint | 316 canonical articles · 236 broken links · 69 orphans · 98% source-bridge coverage | wiki/output/lint-2026-05-23.md, wiki/output/status-latest.json
+- 2026-05-23 15:47 | viewer-build | 316 articles · 92 photo maps · 2484KB | tools/act-wikipedia.html
+- 2026-05-23 15:47 | snapshot-sync | 24 direct mirrors · 55 stories · 4 wrappers | apps/command-center/public/wiki/README.md, apps/command-center/public/wiki/snapshot-meta.json
+- 2026-05-23 15:47 | url-audit | 8 live · 0 dead · 2 known-issue · 22 no-URL · 20 no-repo | wiki/decisions/url-audit-2026-05-23.md, wiki/decisions/url-audit-latest.json
+- 2026-05-23 15:46 | lint | 316 canonical articles · 236 broken links · 69 orphans · 98% source-bridge coverage | wiki/output/lint-2026-05-23.md, wiki/output/status-latest.json
+- 2026-05-23 15:42 | viewer-build | 316 articles · 92 photo maps · 2483KB | tools/act-wikipedia.html
+- 2026-05-23 15:42 | snapshot-sync | 24 direct mirrors · 55 stories · 4 wrappers | apps/command-center/public/wiki/README.md, apps/command-center/public/wiki/snapshot-meta.json
+- 2026-05-23 15:42 | url-audit | 8 live · 0 dead · 2 known-issue · 22 no-URL · 20 no-repo | wiki/decisions/url-audit-2026-05-23.md, wiki/decisions/url-audit-latest.json
+- 2026-05-23 15:42 | lint | 316 canonical articles · 236 broken links · 69 orphans · 98% source-bridge coverage | wiki/output/lint-2026-05-23.md, wiki/output/status-latest.json
+- 2026-05-23 15:34 | viewer-build | 316 articles · 92 photo maps · 2482KB | tools/act-wikipedia.html
+- 2026-05-23 15:34 | snapshot-sync | 24 direct mirrors · 55 stories · 4 wrappers | apps/command-center/public/wiki/README.md, apps/command-center/public/wiki/snapshot-meta.json
+- 2026-05-23 15:34 | url-audit | 8 live · 0 dead · 2 known-issue · 22 no-URL · 20 no-repo | wiki/decisions/url-audit-2026-05-23.md, wiki/decisions/url-audit-latest.json
+- 2026-05-23 15:34 | lint | 316 canonical articles · 236 broken links · 69 orphans · 98% source-bridge coverage | wiki/output/lint-2026-05-23.md, wiki/output/status-latest.json
+- 2026-05-23 14:33 | viewer-build | 316 articles · 92 photo maps · 2487KB | tools/act-wikipedia.html
+- 2026-05-23 14:33 | snapshot-sync | 24 direct mirrors · 55 stories · 4 wrappers | apps/command-center/public/wiki/README.md, apps/command-center/public/wiki/snapshot-meta.json
+- 2026-05-23 14:33 | url-audit | 8 live · 0 dead · 2 known-issue · 22 no-URL · 20 no-repo | wiki/decisions/url-audit-2026-05-23.md, wiki/decisions/url-audit-latest.json
+- 2026-05-23 14:33 | lint | 316 canonical articles · 236 broken links · 69 orphans · 98% source-bridge coverage | wiki/output/lint-2026-05-23.md, wiki/output/status-latest.json
+- 2026-05-23 14:03 | viewer-build | 315 articles · 92 photo maps · 2482KB | tools/act-wikipedia.html
+- 2026-05-23 14:03 | snapshot-sync | 24 direct mirrors · 55 stories · 4 wrappers | apps/command-center/public/wiki/README.md, apps/command-center/public/wiki/snapshot-meta.json
+- 2026-05-23 14:03 | url-audit | 8 live · 0 dead · 2 known-issue · 22 no-URL · 20 no-repo | wiki/decisions/url-audit-2026-05-23.md, wiki/decisions/url-audit-latest.json
+- 2026-05-23 14:03 | lint | 315 canonical articles · 234 broken links · 68 orphans · 98% source-bridge coverage | wiki/output/lint-2026-05-23.md, wiki/output/status-latest.json
+- 2026-05-20 09:16 | viewer-build | 314 articles · 92 photo maps · 2477KB | tools/act-wikipedia.html
+- 2026-05-20 09:16 | snapshot-sync | 24 direct mirrors · 55 stories · 4 wrappers | apps/command-center/public/wiki/README.md, apps/command-center/public/wiki/snapshot-meta.json
+- 2026-05-20 09:16 | url-audit | 8 live · 0 dead · 2 known-issue · 22 no-URL · 20 no-repo | wiki/decisions/url-audit-2026-05-20.md, wiki/decisions/url-audit-latest.json
+- 2026-05-20 09:16 | lint | 314 canonical articles · 232 broken links · 67 orphans · 98% source-bridge coverage | wiki/output/lint-2026-05-20.md, wiki/output/status-latest.json
 - 2026-05-17 08:45 | viewer-build | 314 articles · 92 photo maps · 2475KB | tools/act-wikipedia.html
 - 2026-05-17 08:45 | snapshot-sync | 24 direct mirrors · 55 stories · 4 wrappers | apps/command-center/public/wiki/README.md, apps/command-center/public/wiki/snapshot-meta.json
 - 2026-05-17 08:35 | url-audit | 8 live · 0 dead · 2 known-issue · 22 no-URL · 20 no-repo | wiki/decisions/url-audit-2026-05-17.md, wiki/decisions/url-audit-latest.json

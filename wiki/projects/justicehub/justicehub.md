@@ -89,7 +89,7 @@ JusticeHub needs **$500K** to scale nationally.
 
 ## ALMA-Governed Evidence Records
 
-The "what works" layer sitting on top of funding data, governed by [[alma|Accountable Listening and Meaningful Action (ALMA)]]:
+The "what works" layer sitting on top of funding data, governed by [[alma|Australian Living Map of Alternatives (ALMA)]]:
 - Evidence-based interventions mapped by topic and geography
 - 9 topic domains: child-protection, community-led, diversion, family-services, indigenous, legal-services, ndis, prevention, youth-justice
 - Cross-referenced with CivicGraph entity graph (56% linkage rate)

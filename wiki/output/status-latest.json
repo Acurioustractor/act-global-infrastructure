@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-05-17T23:00:00.617Z",
+  "generated_at": "2026-05-24T23:00:00.499Z",
   "scope": "canonical-graph",
   "domains": {
     "art": 8,
     "communities": 3,
-    "concepts": 30,
-    "decisions": 29,
+    "concepts": 33,
+    "decisions": 33,
     "finance": 19,
     "people": 23,
     "projects": 98,
@@ -15,15 +15,15 @@
     "technical": 6
   },
   "summary": {
-    "date": "2026-05-17",
-    "total_articles": 313,
-    "total_links": 2164,
-    "orphans": 67,
-    "broken_links": 230,
+    "date": "2026-05-24",
+    "total_articles": 320,
+    "total_links": 2358,
+    "orphans": 68,
+    "broken_links": 252,
     "stubs": 0,
-    "missing_from_index": 99,
-    "missing_backlinks": 525,
-    "advisory_backlinks": 481
+    "missing_from_index": 103,
+    "missing_backlinks": 527,
+    "advisory_backlinks": 626
   },
   "source_bridge": {
     "raw_sources": 154,
@@ -103,25 +103,25 @@
         "missing_target": "goods-on-country"
       },
       {
-        "stem": "glossary",
-        "title": "Glossary",
-        "relative_path": "concepts/glossary.md",
-        "page_path": "concepts/glossary",
-        "missing_target": "custodian-economy"
+        "stem": "civic-operating-system",
+        "title": "Civic Operating System",
+        "relative_path": "concepts/civic-operating-system.md",
+        "page_path": "concepts/civic-operating-system",
+        "missing_target": "../../thoughts/shared/plans/2026-05-25-fy27-launch-operations-plan"
       },
       {
-        "stem": "glossary",
-        "title": "Glossary",
-        "relative_path": "concepts/glossary.md",
-        "page_path": "concepts/glossary",
-        "missing_target": "goods-on-country"
+        "stem": "civic-operating-system",
+        "title": "Civic Operating System",
+        "relative_path": "concepts/civic-operating-system.md",
+        "page_path": "concepts/civic-operating-system",
+        "missing_target": "../../thoughts/shared/plans/2026-05-25-fy27-launch-operations-plan"
       },
       {
-        "stem": "lcaa-method",
-        "title": "LCAA Method",
-        "relative_path": "concepts/lcaa-method.md",
-        "page_path": "concepts/lcaa-method",
-        "missing_target": "goods-on-country"
+        "stem": "civic-reflex-automation",
+        "title": "Civic Reflex Automation",
+        "relative_path": "concepts/civic-reflex-automation.md",
+        "page_path": "concepts/civic-reflex-automation",
+        "missing_target": "../../thoughts/shared/plans/2026-05-25-fy27-launch-operations-plan"
       }
     ],
     "missing_from_index": [
@@ -236,15 +236,15 @@
         }
       },
       {
-        "stem": "act-identity",
-        "title": "A Curious Tractor (ACT)",
-        "relative_path": "concepts/act-identity.md",
-        "page_path": "concepts/act-identity",
+        "stem": "ai-ethics",
+        "title": "AI Ethics & Agent Strategy",
+        "relative_path": "concepts/ai-ethics.md",
+        "page_path": "concepts/ai-ethics",
         "target": {
-          "stem": "act-core-facts",
-          "title": "ACT Core Facts",
-          "relative_path": "decisions/act-core-facts.md",
-          "page_path": "decisions/act-core-facts"
+          "stem": "governed-proof",
+          "title": "Governed Proof",
+          "relative_path": "concepts/governed-proof.md",
+          "page_path": "concepts/governed-proof"
         }
       },
       {
@@ -286,12 +286,6 @@
         "page_path": "decisions/2026-04-18-mounty-yarns-story-approval"
       },
       {
-        "stem": "2026-04-18-oonchiumpa-story-approval",
-        "title": "Oonchiumpa org-level story approval — and the verbal-consent governance pattern",
-        "relative_path": "decisions/2026-04-18-oonchiumpa-story-approval.md",
-        "page_path": "decisions/2026-04-18-oonchiumpa-story-approval"
-      },
-      {
         "stem": "2026-04-18-picc-selective-youth-voice",
         "title": "PICC — selective youth-voice approval",
         "relative_path": "decisions/2026-04-18-picc-selective-youth-voice.md",
@@ -320,6 +314,12 @@
         "title": "Pile-Tagged Opportunity Workspace — Unified Architecture",
         "relative_path": "decisions/2026-05-pile-opportunity-workspace.md",
         "page_path": "decisions/2026-05-pile-opportunity-workspace"
+      },
+      {
+        "stem": "money-stack-one-stop-shop",
+        "title": "Money stack — one-stop-shop",
+        "relative_path": "decisions/money-stack-one-stop-shop.md",
+        "page_path": "decisions/money-stack-one-stop-shop"
       }
     ],
     "stubs": [],

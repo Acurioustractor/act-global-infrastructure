@@ -43,9 +43,11 @@ $100K each, 95%/40% R&D allocation, through the family trust structures being se
 
 ### 2. CivicGraph is the commercial trading arm
 
+> **_updated 2026-05-25:** This section is amended by [[2026-05-25-civic-cerebellum-reframe|the Civic Cerebellum Reframe ADR]] (signed off by Ben + Nic, 2026-05-25). The "CivicGraph as strategic exit lever for a Y5 sale" framing is **retired**. CivicGraph is now positioned as the **intelligence layer of the civic operating system**, alongside JusticeHub (practice) and Empathy Ledger (accountability). The Stripe tiers stand. Commissioned intelligence and ACT advisory are added as named revenue flywheels. The five-year revenue arc below is unchanged; the channels through which it arrives are updated. The Beautiful Obsolescence rule is also amended (CivicGraph is infrastructure-inherited, not infrastructure-obsoleted). See the ADR for full detail.
+
 [[civicgraph|CivicGraph]] keeps its Stripe tiers ($79–$1999/mo), grows its data moat (100K entities, 672K contracts, 312K donations), and is explicitly positioned as the product that funds the other products' community handover.
 
-The [[beautiful-obsolescence|Beautiful Obsolescence]] language stays on [[empathy-ledger|Empathy Ledger]], [[justicehub|JusticeHub]], [[goods-on-country|Goods on Country]], [[the-harvest|The Harvest]]. It is never applied to CivicGraph publicly. CivicGraph exists to be commercially valuable and, in Y5, potentially sold to a strategic acquirer ($4–10M EV range at 3–6x ARR) to fund the Years 6–10 art and activism phase.
+The [[beautiful-obsolescence|Beautiful Obsolescence]] language stays on [[empathy-ledger|Empathy Ledger]], [[justicehub|JusticeHub]], [[goods-on-country|Goods on Country]], [[the-harvest|The Harvest]]. It is never applied to CivicGraph publicly. CivicGraph exists to be commercially valuable and, in Y5, potentially sold to a strategic acquirer ($4–10M EV range at 3–6x ARR) to fund the Years 6–10 art and activism phase. *(2026-05-25 — the Y5 sale framing in this paragraph is retired by the [[2026-05-25-civic-cerebellum-reframe|Civic Cerebellum Reframe ADR]]. Commercial dimension stands; strategic-exit framing does not.)*
 
 ### 3. Empathy Ledger stays bespoke in Y1
 

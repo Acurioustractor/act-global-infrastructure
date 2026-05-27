@@ -10,7 +10,7 @@
 
 **Default Private, Explicit Consent to Share**
 
-Accountable Listening and Meaningful Action (ALMA) operates on the principle that all knowledge contributions are private by default. Movement from private to community commons to public requires explicit, informed consent from contributors and cultural authority holders.
+Australian Living Map of Alternatives (ALMA) operates on the principle that all knowledge contributions are private by default. Movement from private to community commons to public requires explicit, informed consent from contributors and cultural authority holders.
 
 ---
 

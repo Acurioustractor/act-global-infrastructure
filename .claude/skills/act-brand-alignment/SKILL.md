@@ -38,7 +38,7 @@ Listen → Curiosity → Action → Art
 | JusticeHub | Justice innovation, forkable models | `projects-ecosystem.md` |
 | Empathy Ledger | Ethical storytelling, consent, sovereignty | `projects-ecosystem.md` |
 | The Harvest | CSA, community gatherings | `land-practice.md` |
-| Goods on Country | Circular economy, waste-to-product | `projects-ecosystem.md` |
+| Goods on Country | Circular economy, waste-to-product, comms agent system | `goods.md` |
 | Art | Art as revolution, cultural production | `projects-ecosystem.md` |
 
 ## Voice Guardrails

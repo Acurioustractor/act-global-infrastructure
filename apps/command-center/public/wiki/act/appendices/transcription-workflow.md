@@ -5,11 +5,11 @@ status: Active
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/technical/transcription-workflow.md`.
-> Regenerated: `2026-05-18T03:37:13.699Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerated: `2026-05-25T19:37:27.398Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # Descript Transcription & ALMA Review Workflow
 
-> How transcribed stories move from Descript into Empathy Ledger and through Accountable Listening and Meaningful Action review.
+> How transcribed stories move from Descript into Empathy Ledger and through Australian Living Map of Alternatives review.
 
 ## Overview
 

@@ -65,7 +65,7 @@ Marchesi Family Trust ─┘    │
                             ├──► Empathy Ledger v2 (project + future spinout candidate)
                             ├──► JusticeHub (project)
                             ├──► CivicGraph / Civic World Model (project)
-                            └──► ALMA (governed sensemaking process)
+                            └──► ALMA (the catalogue, evidence-graded)
 
 Nicholas Marchesi T/as A Curious Tractor (sole trader, ABN 21 591 780 066)
     Stops trading 30 June 2026

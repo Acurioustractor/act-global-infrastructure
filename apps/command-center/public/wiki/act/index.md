@@ -6,7 +6,7 @@ source_of_truth: wiki/concepts/soul.md
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/concepts/act-identity.md`.
-> Regenerated: `2026-05-18T03:37:13.699Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerated: `2026-05-25T19:37:27.398Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # A Curious Tractor (ACT)
 
@@ -52,6 +52,14 @@ Every ACT project, relationship, and piece of infrastructure can be tagged with 
 > "If we cannot hand it over, we are still in Curiosity."
 
 The test for any ACT project: can the community run this without us? Can they modify it? Can they export their data? If any answer is no, the work is not finished.
+
+## The Civic Operating System
+
+ACT's product work is organised as one civic operating system with three layers: [[civicgraph|CivicGraph]] sees the field (intelligence), [[justicehub|JusticeHub]] supports the work (practice), [[empathy-ledger|Empathy Ledger]] holds the trust (accountability). They share one architecture, one ethics, and one set of reflex primitives (intake, consent, triage, referral, follow-up, audit, evidence). They are not three independent products; they are three layers of one system.
+
+The AI thesis underneath is [[civic-reflex-automation|Civic Reflex Automation]]: automate the boring, amplify the art, never replace human judgment on relationships, consent, or creative direction. Impact reporting follows the [[evidence-as-by-product|Evidence as a By-Product]] principle, where reporting composes from the layers rather than running as a separate workstream.
+
+See [[civic-operating-system|the Civic Operating System concept page]] for the architecture, and the [[../decisions/2026-05-25-civic-cerebellum-reframe|Civic Cerebellum Reframe ADR]] for the decision that established it.
 
 ## How ACT Differs from a Typical NGO
 

@@ -5,7 +5,7 @@ status: Active
 
 # Descript Transcription & ALMA Review Workflow
 
-> How transcribed stories move from Descript into Empathy Ledger and through Accountable Listening and Meaningful Action review.
+> How transcribed stories move from Descript into Empathy Ledger and through Australian Living Map of Alternatives review.
 
 ## Overview
 

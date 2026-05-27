@@ -200,7 +200,7 @@ agents/
 ## ALMA Review Everywhere
 
 **Current:** ALMA exists in Empathy Ledger v2
-**V2 Goal:** Accountable Listening and Meaningful Action (ALMA) review fields on every relevant record
+**V2 Goal:** Australian Living Map of Alternatives (ALMA) review fields on every relevant record
 
 | Entity | ALMA Metric |
 |--------|-------------|

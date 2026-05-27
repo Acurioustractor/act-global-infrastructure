@@ -5,7 +5,7 @@ status: Active
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/decisions/roadmap-2026.md`.
-> Regenerated: `2026-05-18T03:37:13.699Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerated: `2026-05-25T19:37:27.398Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # 2026 Roadmap
 
@@ -24,7 +24,7 @@ This is a seasonal map, not a fixed plan. ACT chooses readiness over deadlines a
 | Finalise compendium and align project language to core model | In Progress |
 | Stabilise Harvest operations and maker pathways in Witta | In Progress |
 | Confirm Goods production readiness and support pathways | Planning |
-| Align AI agent guardrails to Accountable Listening and Meaningful Action (ALMA) and Empathy Ledger | Complete |
+| Align AI agent guardrails to Australian Living Map of Alternatives (ALMA) and Empathy Ledger | Complete |
 | JusticeHub vision and path to externalise | Planning |
 | ACT regular communication (1-to-some and 1-to-many via GHL) | In Progress |
 
