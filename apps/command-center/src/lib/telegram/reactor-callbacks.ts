@@ -193,11 +193,22 @@ async function handleGHLCallback(action: string, entityId: string): Promise<Call
   if (action === 'opp') {
     const { data: opp } = await supabase
       .from('ghl_opportunities')
-      .select('name, pipeline_name, stage_name, monetary_value, contact_name')
+      .select('name, pipeline_name, stage_name, monetary_value, ghl_contact_id')
       .eq('ghl_id', entityId)
       .maybeSingle()
 
     if (!opp) return { toast: 'Opportunity not found' }
+
+    // ghl_opportunities has no contact_name — resolve it from ghl_contacts via ghl_contact_id.
+    let contactName = 'Unknown'
+    if (opp.ghl_contact_id) {
+      const { data: c } = await supabase
+        .from('ghl_contacts')
+        .select('full_name')
+        .eq('ghl_id', opp.ghl_contact_id)
+        .maybeSingle()
+      if (c?.full_name) contactName = c.full_name
+    }
 
     const value = opp.monetary_value
       ? `\nValue: $${Number(opp.monetary_value).toLocaleString('en-AU')}`
@@ -205,7 +216,7 @@ async function handleGHLCallback(action: string, entityId: string): Promise<Call
 
     return {
       toast: 'Loaded opportunity',
-      reply: `${opp.name}\nPipeline: ${opp.pipeline_name}\nStage: ${opp.stage_name}\nContact: ${opp.contact_name || 'Unknown'}${value}`,
+      reply: `${opp.name}\nPipeline: ${opp.pipeline_name}\nStage: ${opp.stage_name}\nContact: ${contactName}${value}`,
     }
   }
 

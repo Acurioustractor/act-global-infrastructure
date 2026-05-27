@@ -228,7 +228,7 @@ export async function executeFindReceipt(input: {
     {
       let rmQuery = supabase
         .from('receipt_matches')
-        .select('vendor_name, amount, transaction_date, status, project_code')
+        .select('vendor_name, amount, transaction_date, status')
         .order('transaction_date', { ascending: false })
         .limit(5)
       if (input.vendor) rmQuery = rmQuery.ilike('vendor_name', `%${input.vendor}%`)
@@ -240,7 +240,7 @@ export async function executeFindReceipt(input: {
       if (rms?.length) {
         results.push(`**Receipt Pipeline (${rms.length}):**`)
         for (const r of rms) {
-          results.push(`  $${r.amount?.toFixed(2)} ${r.vendor_name} [${r.status}] ${r.project_code || ''}`)
+          results.push(`  $${r.amount?.toFixed(2)} ${r.vendor_name} [${r.status}]`)
         }
         totalMatches += rms.length
       }
@@ -444,9 +444,9 @@ export async function executeGetQuarterlyReview(input: { quarter?: string; detai
         .lte('transaction_date', qDates.end),
       supabase
         .from('subscriptions')
-        .select('vendor, name, amount_aud, billing_cycle, category, status, renewal_date, value_rating')
-        .eq('status', 'active')
-        .order('amount_aud', { ascending: false }),
+        .select('vendor:vendor_name, amount_aud:amount, billing_cycle, category, status:account_status, renewal_date:next_billing_date')
+        .eq('account_status', 'active')
+        .order('amount', { ascending: false }),
       supabase
         .from('v_subscription_alerts')
         .select('*')
@@ -577,7 +577,7 @@ export async function executeGetQuarterlyReview(input: { quarter?: string; detai
     }
 
     const topSubCosts = subs.slice(0, 10).map((s) => ({
-      vendor: s.vendor || s.name,
+      vendor: s.vendor,
       monthly_amount: parseFloat(String(s.amount_aud)) || 0,
       category: s.category,
       billing_cycle: s.billing_cycle,

@@ -8,7 +8,7 @@ export async function GET() {
 
     for (const s of statuses) {
       const { count } = await supabase
-        .from('agent_audit_log')
+        .from('agent_proposals')
         .select('id', { count: 'exact', head: true })
         .eq('status', s)
       results[s] = count || 0

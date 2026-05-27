@@ -21,16 +21,15 @@ export async function GET() {
     const deadlines: Deadline[] = []
 
     // 1. GHL opportunities with close dates (grants & opportunities)
-    const { data: opportunities } = await supabase
-      .from('ghl_opportunities')
-      .select('id, name, monetary_value, status, close_date, pipeline_name, stage_name')
-      .eq('status', 'open')
-      .not('close_date', 'is', null)
-      .lte('close_date', thirtyDaysOut.toISOString())
-      .order('close_date', { ascending: true })
-      .limit(15)
+    // ghl_opportunities has no close_date, and acquittal_due_date/received_date are 0% populated
+    // on open opps — there is no opportunity-deadline data to surface. Returns empty until a
+    // close/expected-close date is synced from GHL. (Other deadline sources below still apply.)
+    const opportunities: Array<{
+      id: string; name: string; monetary_value: number; close_date: string
+      pipeline_name: string; stage_name: string
+    }> = []
 
-    for (const opp of opportunities || []) {
+    for (const opp of opportunities) {
       const closeDate = new Date(opp.close_date)
       deadlines.push({
         id: `opp-${opp.id}`,

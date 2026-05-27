@@ -6,21 +6,22 @@ export async function GET(request: NextRequest) {
   try {
     const limit = parseInt(new URL(request.url).searchParams.get('limit') || '10')
 
-    // Query agent_audit_log for executed/completed actions as "insights"
+    // Surface reviewed/ready agent proposals as "insights" (agent_proposals, not the
+    // request-level agent_audit_log — that table has no status/proposal lifecycle).
     const { data } = await supabase
-      .from('agent_audit_log')
+      .from('agent_proposals')
       .select('*')
-      .in('status', ['executed', 'completed', 'approved'])
+      .in('status', ['approved', 'completed', 'draft_ready'])
       .order('created_at', { ascending: false })
       .limit(limit)
 
     const insights = (data || []).map((row) => ({
       id: row.id,
-      agent_name: row.agent_name || 'system',
-      insight_type: row.action_type === 'alert' ? 'alert' : 'suggestion',
-      title: row.title || row.action_type || 'Agent insight',
+      agent_name: row.agent_id || 'system',
+      insight_type: row.priority === 'high' ? 'alert' : 'suggestion',
+      title: row.title || row.action_name || 'Agent insight',
       description: row.description || row.reasoning || '',
-      data: row.context || row.metadata || null,
+      data: row.proposed_action || row.impact_assessment || null,
       created_at: row.created_at,
     }))
 

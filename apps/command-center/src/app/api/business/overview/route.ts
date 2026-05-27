@@ -62,13 +62,11 @@ export async function GET() {
     else if (tx.type === 'SPEND') recentOut += amt
   }
 
-  // Bank balance (latest from Xero or estimate)
-  const { data: latestBalance } = await supabase
-    .from('xero_transactions')
-    .select('bank_account, running_balance')
-    .order('date', { ascending: false })
-    .limit(1)
-    .single()
+  // Bank balance: xero_transactions has no running_balance column and there is no bank-balance
+  // feed table in the shared DB, so there is no source to read a live balance from here. Left null
+  // (downstream handles null → bankBalance/runway null) rather than fabricate one. The CEO bank
+  // position lives on the rebuilt /company page (lib/finance ledger).
+  const latestBalance = null as { running_balance: number | null } | null
 
   // Subscriptions total
   const { data: subs } = await supabase
