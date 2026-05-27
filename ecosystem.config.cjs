@@ -34,11 +34,15 @@ const cronScripts = [
     script: 'scripts/daily-briefing.mjs',
     cron_restart: '0 7 * * *', // Daily 7am AEST
   },
-  {
-    name: 'storyteller-sync',
-    script: 'scripts/sync-storytellers-to-ghl.mjs',
-    cron_restart: '30 4 * * *', // Daily 4:30am AEST (before embed)
-  },
+  // DISABLED 2026-05-28: storytellers are NOT pushed to GHL — their data stays
+  // in Empathy Ledger / Supabase per ACT data protocol. The push script is kept
+  // (schema-fixed + OCAP-filtered) for manual/dry-run use, but the daily GHL push
+  // is off. The Supabase-only `storyteller-link` below stays on.
+  // {
+  //   name: 'storyteller-sync',
+  //   script: 'scripts/sync-storytellers-to-ghl.mjs',
+  //   cron_restart: '30 4 * * *', // Daily 4:30am AEST (before embed)
+  // },
   {
     name: 'storyteller-link',
     script: 'scripts/link-storytellers-to-contacts.mjs',

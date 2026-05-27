@@ -115,16 +115,14 @@ async function getStorytellersWithCounts(elClient, options = {}) {
       display_name,
       bio,
       location,
-      cultural_background,
-      language_skills,
-      areas_of_expertise,
       public_avatar_url,
       is_active,
+      is_ancestor,
+      deleted_at,
       is_elder,
       is_featured,
       is_justicehub_featured,
       justicehub_enabled,
-      author_role,
       created_at,
       updated_at,
       profiles:profile_id (
@@ -133,6 +131,8 @@ async function getStorytellersWithCounts(elClient, options = {}) {
       )
     `)
     .eq('is_active', true)
+    .is('deleted_at', null) // exclude soft-deleted storytellers
+    .not('is_ancestor', 'is', true) // OCAP: never CRM-contact deceased ancestors
     .order('updated_at', { ascending: false });
 
   if (limit) {
@@ -233,18 +233,10 @@ function storytellerToGHLContact(storyteller) {
     [CONFIG.CUSTOM_FIELDS.PUBLISHED_STORIES]: String(storyteller.published_stories || 0)
   };
 
-  if (storyteller.cultural_background?.length > 0) {
-    customFields[CONFIG.CUSTOM_FIELDS.CULTURAL_BACKGROUND] =
-      storyteller.cultural_background.join(', ');
-  }
-  if (storyteller.language_skills?.length > 0) {
-    customFields[CONFIG.CUSTOM_FIELDS.LANGUAGES] =
-      storyteller.language_skills.join(', ');
-  }
-  if (storyteller.areas_of_expertise?.length > 0) {
-    customFields[CONFIG.CUSTOM_FIELDS.EXPERTISE] =
-      storyteller.areas_of_expertise.join(', ');
-  }
+  // Cultural data (cultural_background, languages, expertise) is intentionally
+  // NOT pushed to GHL — it stays in Empathy Ledger / Supabase per ACT's data
+  // protocol (decision 2026-05-28). The languages/expertise columns no longer
+  // exist in EL v2 either.
 
   return {
     firstName,
