@@ -51,12 +51,21 @@ its populator" decision, **not** a consolidation.
   `fundraising_pipeline` (writes then sync to opps_unified). Keep `fundraising_pipeline` as the write-model
   (recommended — opps_unified is derived, never write to it directly), or migrate fundraising CRUD onto
   GHL/another store. **Recommendation:** keep as write-model; don't break it.
-- ⬜ **D3 — relationship_pipeline / the `/pipeline` kanban.** Retire the relationship-kanban feature
-  (5 route refs + the `/pipeline` page), OR re-light its populator so the scores refresh. Need to know:
-  is the relationship-kanban still used, or superseded by the `/relationships/*` pages + GHL? **No
-  recommendation without that answer** — it's a product call.
-- ⬜ **D4 — relationship_health** (tracked in trust-map §H, related): recompute (add the unscheduled
-  `relationship-health.mjs update` to PM2 — cheap) vs retire. **Recommendation: recompute.**
+- ✅ **D3 — DECIDED (Ben 2026-05-27): KEEP the `/pipeline` kanban.** BUT the investigation found there
+  is **no populator** — `relationship_pipeline` was created by migration `20260312000000` (table only,
+  no seed) and **nothing in the codebase writes to it**; its 1,170 rows are a one-time March load,
+  frozen since. So "make it healthy" is not a re-light (there's no light) — it needs a populator
+  **built** (compute `love/money/strategic/urgency` scores per entity from relationship_health +
+  opportunities + comms). That's a net-new design task → see **D3a** below. The kanban stays; it shows
+  the frozen March snapshot until a populator exists.
+- ⬜ **D3a — build a relationship_pipeline populator?** Net-new script that computes the kanban scores
+  on a cadence. Needs the scoring design (what drives love/money/strategic/urgency) — likely derivable
+  from the now-fresh `relationship_health` + `opportunities_unified`, but it's a real feature build, not
+  a config flip. Awaiting Ben's go to scope it.
+- ✅ **D4 — DONE (2026-05-27): relationship_health re-lit.** Ran `relationship-health.mjs update`
+  (refreshed → 1,197 rows, fresh now) + added a daily `15 3 * * *` PM2 cron entry (`relationship-health`)
+  to `ecosystem.config.cjs`, `pm2 start` + `pm2 save`. Root cause was the populator was never scheduled
+  (only the Fri consumer was).
 
 ## Per-route migration map (the 11 refs)
 
