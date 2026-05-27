@@ -193,6 +193,36 @@ ghl_opportunities close_date/contact_name joins, subscriptions name/value_rating
 running_balance, receipt_matches project_code, contact_project_links entity_id join). Commits local,
 unpushed (now 11 on the branch).
 
+### 2026-05-27 — Needs-intent burn-down, baseline 12 → 2 (real fixes, not guesses)
+**Objective:** Work through the needs-intent violations with correct fixes (investigate schema +
+usage + data first).
+**Fixed (10 violations across 9 files):**
+- **api_usage** (system/usage) → re-point to `llm_usage` (LLM telemetry moved there; api_usage is now
+  per-key request logging). All 9 columns matched. 1373 rows / $2.63 30d.
+- **project_budgets** (finance/overview + finance/projects) → new `lib/finance/budgets.ts`
+  `aggregateProjectBudgets()` pivots the per-budget_type rows (expense→annual_budget,
+  revenue+grant→annual_revenue_target, expense×monthsElapsed/12→ytd_budget). Verified ACT-PI $1.2M etc.
+- **agent_audit_log** (agent/insights + proposals/stats) → re-point to `agent_proposals` (the real
+  proposal-lifecycle table with status/created_at). Insights surfaces approved/completed/draft_ready;
+  stats counts real statuses (pending 321).
+- **business/overview** running_balance → null (no bank-balance feed exists; route handles null).
+- **business/upcoming** close_date → opportunity-deadline source returns empty (no close_date col,
+  acquittal/received dates 0% populated on open opps).
+- **reactor-callbacks** contact_name → resolved from ghl_contacts via ghl_contact_id.
+- **receipt_matches** project_code → dropped (no such column; was always-empty display).
+- **subscriptions** (finance.ts) → aliased vendor/amount_aud/status/renewal_date to real columns,
+  dropped unused name/value_rating.
+**Verified:** tsc clean (tsc caught 3 of my edits — `null`→`never` narrowing + 2 downstream reads of
+dropped fields — all fixed); 20/20 tests; every fix checked against live DB.
+**Deferred (the final 2 — genuine data-model decision, NOT guess-safe):** `contact_project_links`
+`ghl_contact_id` (link-project write + intelligence/actions read). The table keys on `entity_id` =
+canonical entity (sampled UUIDs don't match ghl_contacts by id/ghl_id; 1584/2281 contacts have a
+canonical_entity_id). Reconciling needs: (a) a canonical-entity join on the read, (b) on the write,
+resolve ghl-contact→canonical_entity_id + the correct `onConflict` unique constraint. Wrong guess =
+bad contact↔project links. Needs Ben's call: add `ghl_contact_id` to the table, or wire the
+canonical-entity mapping. **Baseline 12 → 2.**
+**Cumulative P3 result: schema-contract baseline 87 → 2.**
+
 ---
 
 ## Provenance
