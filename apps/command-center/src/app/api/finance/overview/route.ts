@@ -14,6 +14,7 @@ import {
   type HealthLevel,
 } from '@/lib/finance'
 import { aggregateProjectBudgets } from '@/lib/finance/budgets'
+import { isActBankAccount } from '@/lib/finance/ledger'
 
 export const dynamic = 'force-dynamic'
 
@@ -132,8 +133,13 @@ async function computeOverview() {
   const totalReceivables = receivables.reduce((s, r) => s + Number(r.amount_due || 0), 0)
   const totalPayables = payables.reduce((s, p) => s + Math.abs(Number(p.amount_due || 0)), 0)
 
-  const cashInBank = bankAccounts.length > 0
-    ? bankAccounts.reduce((sum, a) => sum + Number(a.current_balance || 0), 0)
+  // Two-account rule: ACT cash = ACT Everyday + NAB Visa #8815 only. Exclude NM Personal / Maximiser
+  // (else the figure was contaminated, e.g. −$245,844 incl. Nic's personal vs the true ~$130K).
+  const actBankAccounts = bankAccounts.filter(
+    (a) => isActBankAccount(a.name) && a.current_balance != null,
+  )
+  const cashInBank = actBankAccounts.length > 0
+    ? actBankAccounts.reduce((sum, a) => sum + Number(a.current_balance || 0), 0)
     : null
 
   const cashForRunway = cashInBank ?? Math.max(0, fyRevenue - fyExpenses + totalReceivables)

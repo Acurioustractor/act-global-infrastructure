@@ -9,20 +9,28 @@ export async function GET(request: NextRequest) {
     const minUrgency = searchParams.get('min_urgency')
     const search = searchParams.get('q')
 
-    let query = supabase
-      .from('relationship_pipeline')
-      .select('*')
-      .order('urgency_score', { ascending: false })
-      .order('updated_at', { ascending: false })
+    // Paginate past the PostgREST 1,000-row cap — relationship_pipeline has ~1,458 rows, so a
+    // single .select('*') silently dropped ~458 entries (foundations off the board). Page in 1,000s.
+    const PAGE = 1000
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const data: any[] = []
+    for (let from = 0; ; from += PAGE) {
+      let query = supabase
+        .from('relationship_pipeline')
+        .select('*')
+        .order('urgency_score', { ascending: false })
+        .order('updated_at', { ascending: false })
 
-    if (entityType) query = query.eq('entity_type', entityType)
-    if (stage) query = query.eq('stage', stage)
-    if (minUrgency) query = query.gte('urgency_score', parseInt(minUrgency))
-    if (search) query = query.ilike('entity_name', `%${search}%`)
+      if (entityType) query = query.eq('entity_type', entityType)
+      if (stage) query = query.eq('stage', stage)
+      if (minUrgency) query = query.gte('urgency_score', parseInt(minUrgency))
+      if (search) query = query.ilike('entity_name', `%${search}%`)
 
-    const { data, error } = await query
-
-    if (error) return NextResponse.json({ error: error.message }, { status: 500 })
+      const { data: page, error } = await query.range(from, from + PAGE - 1)
+      if (error) return NextResponse.json({ error: error.message }, { status: 500 })
+      data.push(...(page || []))
+      if (!page || page.length < PAGE) break
+    }
 
     // Group by stage for board view
     const stages = ['cold', 'warm', 'engaged', 'active', 'partner', 'dormant', 'lost']
