@@ -223,6 +223,23 @@ bad contact↔project links. Needs Ben's call: add `ghl_contact_id` to the table
 canonical-entity mapping. **Baseline 12 → 2.**
 **Cumulative P3 result: schema-contract baseline 87 → 2.**
 
+### 2026-05-27 — Baseline burned to 0 — FULLY STRICT
+**Objective:** Close the last 2 violations (`contact_project_links.ghl_contact_id`) and remove the
+baseline grace so the checker fails on ANY drift.
+**Decision (Ben):** the link is **per GHL contact** → add a `ghl_contact_id` column (the code already
+wrote/read it; the table only had the canonical `entity_id`).
+**Changed:** migration `supabase/migrations/20260527000000_contact_project_links_ghl_contact_id.sql`
+applied to the shared DB (`apply_migration`, verified instance) — `ALTER TABLE … ADD COLUMN
+ghl_contact_id text`, backfilled all 487 rows from `ghl_contacts.canonical_entity_id → ghl_id`
+(pre-checked: 0 dup `(ghl_contact_id, project_code)` pairs), added the matching UNIQUE constraint +
+index. `entity_id` (FK → canonical_entities) kept. Refreshed `config/schema-snapshot.json` (781 tables)
+and **emptied `config/schema-contract-baseline.json` (count 0)** = full strictness.
+**Verified vs live DB:** column present, 487/487 backfilled, unique constraint present; checker = "schema
+contract holds — no dead tables or columns anywhere"; 20/20 tests pass strict; `/api/intelligence/actions`
+200 (reads the column); link-project upsert `onConflict('ghl_contact_id,project_code')` idempotent.
+**Result: schema-contract baseline 87 → 0. The command-center is honest by construction, enforced**
+(both `Verify schema contract` + `Type Check & Lint` are required branch-protection checks on `main`).
+
 ---
 
 ## Provenance

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-26T21:08:07.180Z",
+  "generatedAt": "2026-05-27T03:31:49.960Z",
   "db": "tednluwflfhxyucgwigh (shared)",
   "tables": {
     "abr_registry": [
@@ -2781,6 +2781,7 @@
       "confidence",
       "created_at",
       "entity_id",
+      "ghl_contact_id",
       "id",
       "project_code",
       "source"
@@ -7718,6 +7719,16 @@
       "suggested_title",
       "suggested_type",
       "wiki_page_id"
+    ],
+    "pending_form_submissions": [
+      "additional_tags",
+      "created_at",
+      "fields",
+      "form_type",
+      "id",
+      "project_code",
+      "source",
+      "synced"
     ],
     "pending_proposals": [
       "agent_id",
