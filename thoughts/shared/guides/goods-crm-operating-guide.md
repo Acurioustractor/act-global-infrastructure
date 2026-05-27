@@ -83,7 +83,7 @@ The habit is simple. When a deal gets concrete, put the bed count, the washing-m
 
 ## The cockpit
 
-Live page: `command.act.place` Goods workspace, or direct at `/org/act/goods/funnel` (linked from the Goods operating-system page).
+Live page: CivicScope (`civicgraph.app`) Goods workspace, or direct at `/org/act/goods/funnel` (linked from the Goods operating-system page).
 
 It shows one table:
 
@@ -141,4 +141,4 @@ The order matters. A purchase order repeats. A grant runs out. The strategy is t
 - Operating model and decisions: `thoughts/shared/plans/2026-05-28-goods-three-pipeline-operating-model.md`
 - Roll-up that produces the cockpit numbers: `goods-pipeline-rollup.mjs` (grantscope)
 - Repeat-buyer research, the warm procurement targets: `thoughts/shared/reports/goods-repeat-buyers-2026-05-28.md` (grantscope)
-- The CRM lives in GoHighLevel under the Goods location. The cockpit lives in the command centre.
+- The CRM lives in GoHighLevel under the Goods location. The cockpit lives in CivicScope (the grantscope app, `civicgraph.app`).
