@@ -476,8 +476,24 @@ export class GHLService {
    * @returns {Promise<Array>} Custom field definitions
    */
   async getCustomFields() {
-    const data = await this.request(`/custom-fields?locationId=${this.locationId}`);
+    // v2 path: /locations/{id}/customFields (the older /custom-fields?locationId= 404s)
+    const data = await this.request(`/locations/${this.locationId}/customFields`);
     return data.customFields || [];
+  }
+
+  /**
+   * Create a custom field (v2: POST /locations/{id}/customFields/).
+   * @param {Object} f - { name, dataType, model='contact', placeholder?, parentId? }
+   *   dataType: TEXT | LARGE_TEXT | NUMERICAL | MONETORY | PHONE | DATE | SINGLE_OPTIONS | MULTIPLE_OPTIONS
+   * @returns {Promise<Object>} created custom field
+   */
+  async createCustomField({ name, dataType, model = 'contact', placeholder, parentId }) {
+    const body = { name, dataType, model, ...(placeholder && { placeholder }), ...(parentId && { parentId }) };
+    const data = await this.request(`/locations/${this.locationId}/customFields/`, {
+      method: 'POST',
+      body: JSON.stringify(body),
+    });
+    return data.customField || data;
   }
 
   // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
