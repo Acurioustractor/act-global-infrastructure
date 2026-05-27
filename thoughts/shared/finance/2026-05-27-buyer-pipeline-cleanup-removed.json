@@ -1,0 +1,194 @@
+{
+  "pipelineId": "FjMyJM3YzWQFmKqR9fur",
+  "removedAt": "2026-05-27T05:40:36.853Z",
+  "records": [
+    {
+      "why": "GD2 test record",
+      "id": "qLaDvOyq1yOHZGOAKHrS",
+      "name": "GD2 - flagship-inquiry",
+      "value": 0,
+      "stageId": "1fd317ec-f8f1-4837-b324-e48c22956cdd",
+      "contactId": "bP4jEBSns3be5KnonIro",
+      "contactName": "GD2",
+      "email": "opp-v2-gd@example.com",
+      "tags": [
+        "test-submission",
+        "act-regenerative-studio",
+        "act-gd",
+        "flagship-inquiry"
+      ]
+    },
+    {
+      "why": "dup THULKURR",
+      "id": "7Fn2JOclc2CoNWfgaMqB",
+      "name": "Goods Buyer: THULKURR — Unmet demand: THULKURR (QLD) — 52 beds, 6 washers",
+      "value": 0,
+      "stageId": "e5220eb2-be40-4e79-9571-6acae12285c7",
+      "contactId": "7sp5Zwueh0OKblAKQirR",
+      "contactName": "THULKURR QLD",
+      "email": "thulkurr@goods.civicgraph.io",
+      "tags": [
+        "goods-signal",
+        "goods-new",
+        "priority-medium",
+        "act-gd",
+        "project:act-gd"
+      ]
+    },
+    {
+      "why": "dup NEW MERINEE",
+      "id": "y8w1eSUJMhQlYM0ecMco",
+      "name": "Goods Buyer: NEW MERINEE — Unmet demand: NEW MERINEE (NSW) — 52 beds, 6 washers",
+      "value": 0,
+      "stageId": "e5220eb2-be40-4e79-9571-6acae12285c7",
+      "contactId": "xBxaigCAdO1v8ARO1lo2",
+      "contactName": "NEW MERINEE NSW",
+      "email": "new-merinee@goods.civicgraph.io",
+      "tags": [
+        "goods-signal",
+        "goods-new",
+        "priority-medium",
+        "act-gd",
+        "project:act-gd"
+      ]
+    },
+    {
+      "why": "dup GUNUN WOONAM",
+      "id": "fpdvQF3YmXvoAs3fmYGA",
+      "name": "Goods Buyer: GUNUN WOONAM — Unmet demand: GUNUN WOONAM (QLD) — 52 beds, 6 washers",
+      "value": 0,
+      "stageId": "e5220eb2-be40-4e79-9571-6acae12285c7",
+      "contactId": "gPxPrnGkA01DbSigTaYM",
+      "contactName": "GUNUN WOONAM QLD",
+      "email": "gunun-woonam@goods.civicgraph.io",
+      "tags": [
+        "goods-signal",
+        "goods-new",
+        "priority-medium",
+        "act-gd",
+        "project:act-gd"
+      ]
+    },
+    {
+      "why": "dup SHIPTON FLATS",
+      "id": "It2t2mhn6S6azbnW0r0Z",
+      "name": "Goods Buyer: SHIPTON FLATS — Unmet demand: SHIPTON FLATS (QLD) — 52 beds, 6 washers",
+      "value": 0,
+      "stageId": "e5220eb2-be40-4e79-9571-6acae12285c7",
+      "contactId": "dYbBIH1H5deXDEerV5HE",
+      "contactName": "SHIPTON FLATS QLD",
+      "email": "shipton-flats@goods.civicgraph.io",
+      "tags": [
+        "goods-signal",
+        "goods-new",
+        "priority-medium",
+        "act-gd",
+        "project:act-gd"
+      ]
+    },
+    {
+      "why": "dup FORDY FARM",
+      "id": "bxKLejbl23aP51J7dbvy",
+      "name": "Goods Buyer: FORDY FARM — Unmet demand: FORDY FARM (QLD) — 52 beds, 6 washers",
+      "value": 0,
+      "stageId": "e5220eb2-be40-4e79-9571-6acae12285c7",
+      "contactId": "fm0tdDRDfl3EFTOg1JS7",
+      "contactName": "FORDY FARM QLD",
+      "email": "fordy-farm@goods.civicgraph.io",
+      "tags": [
+        "goods-signal",
+        "goods-new",
+        "priority-medium",
+        "act-gd",
+        "project:act-fm"
+      ]
+    },
+    {
+      "why": "dup AAYKA",
+      "id": "gA2WqhVUiMuF0svfZYkv",
+      "name": "Goods Buyer: AAYKA — Unmet demand: AAYKA (QLD) — 52 beds, 6 washers",
+      "value": 0,
+      "stageId": "e5220eb2-be40-4e79-9571-6acae12285c7",
+      "contactId": "jkXvzq4QJDPKCur8akIX",
+      "contactName": "AAYKA QLD",
+      "email": "aayka@goods.civicgraph.io",
+      "tags": [
+        "goods-signal",
+        "goods-new",
+        "priority-medium",
+        "act-gd",
+        "project:act-gd"
+      ]
+    },
+    {
+      "why": "dup LINGARA",
+      "id": "idpLpcz5sG76y2s8X1aI",
+      "name": "Goods Buyer: LINGARA — Unmet demand: LINGARA (NT) — 17 beds, 2 washers",
+      "value": 0,
+      "stageId": "e5220eb2-be40-4e79-9571-6acae12285c7",
+      "contactId": "ZC6OOSxs3h5ZOGPm4Qgr",
+      "contactName": "LINGARA NT",
+      "email": "lingara@goods.civicgraph.io",
+      "tags": [
+        "goods-signal",
+        "goods-new",
+        "priority-medium",
+        "act-gd",
+        "project:act-gd"
+      ]
+    },
+    {
+      "why": "dup THAANGKUNH-NHIIN",
+      "id": "IKxXaIXbQFhXHieao0EI",
+      "name": "Goods Buyer: THAANGKUNH-NHIIN — Unmet demand: THAANGKUNH-NHIIN (QLD) — 52 beds, 6 washers",
+      "value": 0,
+      "stageId": "e5220eb2-be40-4e79-9571-6acae12285c7",
+      "contactId": "cAt1QstivkhGfT2ShFAc",
+      "contactName": "THAANGKUNH-NHIIN QLD",
+      "email": "thaangkunh-nhiin@goods.civicgraph.io",
+      "tags": [
+        "goods-signal",
+        "goods-new",
+        "priority-medium",
+        "act-gd",
+        "project:act-gd"
+      ]
+    },
+    {
+      "why": "dup BANNICK BURN",
+      "id": "N95Z3uJMg8nrIYhVhlet",
+      "name": "Goods Buyer: BANNICK BURN — Unmet demand: BANNICK BURN (QLD) — 52 beds, 6 washers",
+      "value": 0,
+      "stageId": "e5220eb2-be40-4e79-9571-6acae12285c7",
+      "contactId": "wu6SihnJXkEkKrUYtheG",
+      "contactName": "BANNICK BURN QLD",
+      "email": "bannick-burn@goods.civicgraph.io",
+      "tags": [
+        "goods-signal",
+        "goods-new",
+        "priority-medium",
+        "act-gd",
+        "project:act-gd"
+      ]
+    },
+    {
+      "why": "dup JILUNDARINA",
+      "id": "nAcEQ7QM1gD1rxG2eSW4",
+      "name": "Goods Buyer: JILUNDARINA — Unmet demand: JILUNDARINA (NT) — 52 beds, 6 washers",
+      "value": 0,
+      "stageId": "e5220eb2-be40-4e79-9571-6acae12285c7",
+      "contactId": "Q0HsirXpDJJ3vLpNIKmj",
+      "contactName": "JILUNDARINA NT",
+      "email": "jilundarina@goods.civicgraph.io",
+      "tags": [
+        "goods-signal",
+        "goods-new",
+        "priority-medium",
+        "act-gd",
+        "project:act-gd"
+      ]
+    }
+  ],
+  "malalaBadOpp": "WhMkunwtIU6ug12rtApN",
+  "malalaStubContact": "J4iGAZJY70veM2FjqkzD"
+}
