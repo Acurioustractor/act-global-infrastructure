@@ -16,7 +16,8 @@ const PROSPECTS = [
   { name: 'ALIVE', pipeline: 'buyer', stage: 'In Conversation', value: 60000, tags: ['goods-role-corp', 'goods-stage-prospect'], note: 'Up to $60,000 commitment (ALIVE — Beds list).' },
   { name: 'Hewitt Agriculture', pipeline: 'buyer', stage: 'In Conversation', value: 0, tags: ['goods-role-corp', 'goods-stage-prospect'], note: 'Commercial buyer — ~10 beds for their own (agricultural) properties. Unit price TBC → value 0 for now.' },
   { name: 'Ampilatwatja Health Centre Aboriginal Corporation', pipeline: 'buyer', stage: 'Outreach Queued', value: 0, tags: ['goods-role-health', 'goods-state-nt', 'goods-communitycontrolled', 'goods-stage-prospect'], note: 'NT ACCHO (Ampilatwatja, Utopia region).' },
-  // Garama/Garma = the Garma Festival location, NOT a buyer → tracked as a display/exposure opportunity, not a pipeline opp.
+  // Garma = the Garma Festival (NE Arnhem Land) — a SHOWCASE/engagement opportunity, not a buyer.
+  { name: 'Garma Festival — Beds Showcase', pipeline: 'demand', stage: 'Signal', value: 0, tags: ['goods-event', 'goods-showcase', 'goods-state-nt', 'goods-stage-prospect'], note: "Exposure/engagement opportunity — showcase beds at Garma Festival, Australia's biggest Indigenous festival. High-traffic lead-gen + relationship-building, not a purchase." },
   { name: 'Centre Canvas', pipeline: 'demand', stage: 'Signal', value: 0, tags: ['goods-stage-prospect'], note: 'Tentative (Ben flagged with "?").' },
 ];
 
