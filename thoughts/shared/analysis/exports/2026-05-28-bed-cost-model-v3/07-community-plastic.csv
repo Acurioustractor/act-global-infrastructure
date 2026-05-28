@@ -1,0 +1,5 @@
+Pay tier,$/kg,kg/bed,$/bed,Annual community pay @ 100 beds,Annual community pay @ 500 beds
+Bottom (kerbside-equivalent),0.2,40,8.00,800,4000
+Mid (community-coop rate),0.5,40,20.00,2000,10000
+Premium (ocean/remote story-value),1,40,40.00,4000,20000
+"High (clean sorted, remote community)",2,40,80.00,8000,40000

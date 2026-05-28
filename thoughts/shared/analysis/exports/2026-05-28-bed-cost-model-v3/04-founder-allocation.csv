@@ -1,0 +1,6 @@
+Activity,Days/yr,Rate ($/day),Annual cost ($),Allocate to,Per-bed @ 100/yr ($),Per-bed @ 500/yr ($),Per-bed @ 1000/yr ($)
+"Production-related (oversight, QA, design iteration, supplier rel.)",30,1000,30000,bed-overhead,300.00,60.00,30.00
+"Fundraising / philanthropy (briefs, asks, reporting, donor rel.)",50,1000,50000,funding-side-offset,—,—,—
+"Commercialisation / buyer dev (Centrecorp, councils, sales)",25,1000,25000,funding-side-offset,—,—,—
+"Governance, strategy, comms, brand",45,1000,45000,act-wide-overhead,—,—,—
+TOTAL,150,1000,150000,,,,

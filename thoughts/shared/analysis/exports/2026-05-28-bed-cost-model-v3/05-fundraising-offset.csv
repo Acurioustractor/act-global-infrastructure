@@ -1,0 +1,8 @@
+Metric,Value,Note
+Philanthropy founder-days/yr,50,Days founder spends raising philanthropic funds
+$ raised per philanthropy day,5000,Mid-stage social-enterprise benchmark
+Annual philanthropy raised,250000,50 × $5K = $250K
+Commercial founder-days/yr,25,Days on buyer development
+Commercial buyer benchmark,$801/bed,"Centrecorp INV-0291 (107 beds @ $85,712)"
+Per-bed subsidy @ 100/yr,$2500,$250K / 100 beds
+Per-bed subsidy @ 500/yr,$500,$250K / 500 beds

@@ -1,0 +1,29 @@
+State,Label,Component,Amount ($),Direct total ($),New capex ($),Cumulative capex ($)
+state_1_defy_everything,"Defy does everything (today, INV-1507)",Single Bed fully fabricated,600.00,600.00,0,0
+state_2_buy_kit_assemble,"Buy Defy kit, assemble in-house",Defy bed kit (sheets cut+finished),344.05,514.42,2000,2000
+,,Canvas (RW Pacific or via Defy),93.50,,,
+,,Steel poles,27.00,,,
+,,End caps + hardware,3.20,,,
+,,In-house assembly labour,46.67,,,
+state_3_buy_sheets_cut_assemble,"Buy pressed sheets, cut+finish+assemble in-house",1.5 half-sheets from Defy @ $200,300.00,530.37,38000,40000
+,,In-house CNC cut + finish,60.00,,,
+,,Canvas,93.50,,,
+,,Steel,27.00,,,
+,,End caps + hardware,3.20,,,
+,,Assembly labour,46.67,,,
+state_4_all_in_house,"Buy raw HDPE shred, do everything in-house",HDPE shred 20kg @ $2/kg (Ben confirmed),40.00,310.37,160000,200000
+,,In-house sheet pressing,40.00,,,
+,,In-house CNC cut + finish,60.00,,,
+,,Canvas,93.50,,,
+,,Steel,27.00,,,
+,,End caps + hardware,3.20,,,
+,,Assembly labour,46.67,,,
+state_5_community_plastic,Community-collected plastic + all in-house (vision),Community plastic pay @ $1/kg × 20kg,20.00,320.37,30000,230000
+,,Wash + dry + sort,20.00,,,
+,,In-house shredding,10.00,,,
+,,In-house sheet pressing,40.00,,,
+,,In-house CNC + finish,60.00,,,
+,,Canvas,93.50,,,
+,,Steel,27.00,,,
+,,End caps + hardware,3.20,,,
+,,Assembly labour,46.67,,,
