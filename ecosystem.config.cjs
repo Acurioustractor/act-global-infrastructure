@@ -143,6 +143,17 @@ const cronScripts = [
     cron_restart: '*/10 * * * *',
   },
   {
+    // Daily 7:40am AEST (after newsletter-candidates-to-notion at 7:35):
+    // Recompute per-audience comms cadence (last sent → next due → candidates
+    // ready vs threshold) and sync the 4 rows to the Notion Comms Content
+    // Calendar. Read-only on Supabase; no sends. Engine: locked plan Q5.
+    // Plan: 2026-05-28-unified-content-calendar
+    name: 'comms-content-calendar',
+    script: 'scripts/comms-calendar.mjs',
+    args: '--sync-notion',
+    cron_restart: '40 7 * * *',
+  },
+  {
     // Daily 06:00am AEST: rebuild the supporter intelligence view.
     // Joins Xero invoices + funders.json + GHL contacts into one row per
     // supporter org. Output: supporters_intelligence Supabase table +
