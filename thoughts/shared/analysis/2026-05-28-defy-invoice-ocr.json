@@ -1,0 +1,843 @@
+[
+  {
+    "id": "b9e10922-5047-4444-a7a7-ffc7b9b9f6bd",
+    "xero_id": "36affeaa-1aa3-4b5a-9d16-aa612f1bcd20",
+    "xero_tenant_id": "786af1ed-e3ce-42fc-9ea9-ddf3447d79d0",
+    "invoice_number": "INV-1174",
+    "date": "2025-06-02",
+    "total": 5445,
+    "has_attachments": true,
+    "attachment": "17036162340.pdf",
+    "line_items": [
+      {
+        "description": "coasters in 8mm Atlantis with custom engraving",
+        "quantity": 900,
+        "unit_price": 5
+      },
+      {
+        "description": "sourcing and applying sticker",
+        "quantity": 900,
+        "unit_price": 0.5
+      },
+      {
+        "description": "shipping T.B.C",
+        "line_total": 0
+      }
+    ],
+    "product_summary": "This invoice is for 900 coasters with custom engraving and associated services.",
+    "bed_count": 0,
+    "notes": "Custom engraving and sourcing/applying stickers were noted for the coasters. Work will commence after receipt of payment."
+  },
+  {
+    "id": "57c83c2b-21bb-4ed0-a69f-e6e53501af95",
+    "xero_id": "76806092-d540-4117-af77-8e1895e55a4e",
+    "xero_tenant_id": "786af1ed-e3ce-42fc-9ea9-ddf3447d79d0",
+    "invoice_number": "INV-1181",
+    "date": "2025-06-04",
+    "total": 3790.3,
+    "has_attachments": true,
+    "attachment": "17287316070.pdf",
+    "line_items": [
+      {
+        "description": "additional design time to resolve panel details, sizing and fixing methods",
+        "quantity": 1,
+        "unit_price": 818.1818
+      },
+      {
+        "description": "Shipping 5 x pallets from Sydney to Alice Springs to arrive by the 24th of june",
+        "quantity": 1,
+        "unit_price": 2627.5455
+      }
+    ],
+    "product_summary": "This invoice covers design time and shipping for bed-frame products.",
+    "bed_count": 0,
+    "notes": "Work will commence after receipt of payment."
+  },
+  {
+    "id": "4d9c1956-c8b2-4817-ad6c-b6e5304fa95c",
+    "xero_id": "45257477-8edd-4361-a56a-f452a8813d6d",
+    "xero_tenant_id": "786af1ed-e3ce-42fc-9ea9-ddf3447d79d0",
+    "invoice_number": "INV-1236",
+    "date": "2025-07-08",
+    "total": 5500,
+    "has_attachments": true,
+    "attachment": "18982707740.pdf",
+    "line_items": [
+      {
+        "description": "Washing Machine Cladding Sets:\n- Flat Packed and Packaged Ready to Ship\n- Includes Hardware",
+        "quantity": 5,
+        "unit_price": 1000
+      },
+      {
+        "description": "Freight T.B.C",
+        "line_total": 500
+      }
+    ],
+    "product_summary": "This invoice covers washing machine cladding sets made from recycled HDPE plastic.",
+    "bed_count": 0,
+    "notes": "Work will commence after receipt of payment."
+  },
+  {
+    "id": "3abe2f74-9b66-4447-8e6c-7f5c030118a3",
+    "xero_id": "963e8045-428c-48f6-ae84-c2378769ac62",
+    "xero_tenant_id": "786af1ed-e3ce-42fc-9ea9-ddf3447d79d0",
+    "invoice_number": "INV-1237",
+    "date": "2025-07-08",
+    "total": 5280,
+    "has_attachments": true,
+    "attachment": "18982707800.pdf",
+    "line_items": [
+      {
+        "description": "First Washing Machine Cladding:\n- fully Installed and fixed to washing machine here at the\nDEFY factory - Packaged and ready to ship fully\nassembled",
+        "quantity": 3,
+        "unit_price": 1200
+      },
+      {
+        "description": "Road Case for Travelling display machines",
+        "quantity": 3,
+        "unit_price": 400
+      },
+      {
+        "description": "Freight T.B.C",
+        "line_total": 0
+      }
+    ],
+    "product_summary": "This invoice is for custom cladding and road cases for washing machines.",
+    "bed_count": 0,
+    "notes": "Work will commence after receipt of payment."
+  },
+  {
+    "id": "eed9385c-de6a-4ce2-bb67-8cd394e95733",
+    "xero_id": "2b2db1e6-2d64-458a-b77d-23a1a8165e36",
+    "xero_tenant_id": "786af1ed-e3ce-42fc-9ea9-ddf3447d79d0",
+    "invoice_number": "INV-1233",
+    "date": "2025-07-08",
+    "total": 1051.51,
+    "has_attachments": true,
+    "attachment": "18982707750.pdf",
+    "line_items": [
+      {
+        "description": "Pallet & Packing Fee + Protective Cardboard D:120 x 120 x 150cm W:150kg",
+        "quantity": 1,
+        "unit_price": 150
+      },
+      {
+        "description": "Standard Road Freight Botany NSW 2019 to Alice Springs NT 0871",
+        "quantity": 1,
+        "unit_price": 805.92
+      }
+    ],
+    "product_summary": "This invoice covers freight and packing fees for a curious tractor product.",
+    "bed_count": 0,
+    "notes": "Work will commence after receipt of payment."
+  },
+  {
+    "id": "e407a0c0-a511-4278-9809-bdf882dae4e2",
+    "xero_id": "f80e1b68-387c-4b0b-a553-bcb0c0b941a2",
+    "xero_tenant_id": "786af1ed-e3ce-42fc-9ea9-ddf3447d79d0",
+    "invoice_number": "INV-1235",
+    "date": "2025-07-08",
+    "total": 1320,
+    "has_attachments": true,
+    "attachment": "18982707780.pdf",
+    "line_items": [
+      {
+        "description": "Washing Machine Cladding Sets: - Additional Clad washing machine (already made) and will be sent to allice",
+        "quantity": 1,
+        "unit_price": 1200
+      }
+    ],
+    "product_summary": "This invoice covers custom cladding sets for a washing machine made from recycled panels.",
+    "bed_count": 0,
+    "notes": "Work will commence after receipt of payment."
+  },
+  {
+    "id": "1c85ffd1-76c6-40a4-b372-c255d3238241",
+    "xero_id": "83692ff2-0ac5-4f0c-98f4-3e64bdfbb82c",
+    "xero_tenant_id": "786af1ed-e3ce-42fc-9ea9-ddf3447d79d0",
+    "invoice_number": "INV-1257",
+    "date": "2025-07-16",
+    "total": 5500,
+    "has_attachments": true,
+    "attachment": "17481685880.pdf",
+    "line_items": [
+      {
+        "description": "Washing Machine Cladding Sets:\nFlat Packed and Packaged Ready to Ship\n- Includes Hardware",
+        "quantity": 5,
+        "unit_price": 1000
+      },
+      {
+        "description": "Freight T.B.C",
+        "line_total": 500
+      }
+    ],
+    "product_summary": "This invoice covers washing machine cladding sets and freight.",
+    "bed_count": 0,
+    "notes": "Payment via credit card will incur a 1.7% processing fee from Stripe. Work will commence after receipt of payment."
+  },
+  {
+    "id": "27909779-fdea-4492-91c4-c3278ca7a96e",
+    "xero_id": "d18e3e97-c7de-485c-af50-23203b9c1ebb",
+    "xero_tenant_id": "786af1ed-e3ce-42fc-9ea9-ddf3447d79d0",
+    "invoice_number": "INV-1259",
+    "date": "2025-07-16",
+    "total": 1100,
+    "has_attachments": true,
+    "attachment": "17481685840.pdf",
+    "line_items": [
+      {
+        "description": "First Unit - Woven Bed:\n- After the design stage and round of prototyping we will\nbring a resolved version of the leading design\nThis will include all recycled plastic parts, webbing and\nhardware if required\nThis will be packed ready for sending",
+        "quantity": 1,
+        "unit_price": 1000
+      },
+      {
+        "description": "Freight T.B.C",
+        "line_total": 0
+      }
+    ],
+    "product_summary": "This invoice covers the first unit of a Woven Bed, including design stage, prototyping, recycled plastic parts, webbing, and hardware.",
+    "bed_count": 1,
+    "notes": "Payment via credit card will incur a 1.7% processing fee from Stripe. Work will commence after receipt of payment."
+  },
+  {
+    "id": "7182b9a2-43c2-4e00-9950-a86f6c49c253",
+    "xero_id": "11a4d75b-5f9f-40be-b981-ca3713784bf2",
+    "xero_tenant_id": "786af1ed-e3ce-42fc-9ea9-ddf3447d79d0",
+    "invoice_number": "INV-1258",
+    "date": "2025-07-16",
+    "total": 6600,
+    "has_attachments": true,
+    "attachment": "17481685870.pdf",
+    "line_items": [
+      {
+        "description": "Design Stage:\n- Exploration of Bed designs including creation of multiple\nconcepts with different build methods\n- Exploring tensioning methods for woven sections\n- Refining Bed concepts into prototypes\n- Testing and evaluating concepts and prototypes\n- Hopefully these prototypes can be taken to communities\nto get their feedback. It will depend on how well they work",
+        "quantity": 1,
+        "unit_price": 6000
+      }
+    ],
+    "product_summary": "This invoice is for the design stage of woven bed products.",
+    "bed_count": 1,
+    "notes": "Payment via credit card will incur a 1.7% processing fee from Stripe."
+  },
+  {
+    "id": "efd6e573-02e9-4475-9c51-108095f3e35c",
+    "xero_id": "43813669-79b8-435f-a894-f33c7a14812a",
+    "xero_tenant_id": "786af1ed-e3ce-42fc-9ea9-ddf3447d79d0",
+    "invoice_number": "INV-1285",
+    "date": "2025-07-29",
+    "total": 3300,
+    "has_attachments": true,
+    "attachment": "17618472140.pdf",
+    "line_items": [
+      {
+        "description": "Mad Beds - Small amount of design improvements and adjustments - This will include all recycled plastic parts, webbing and hardware if required - This will be packed ready for sending",
+        "quantity": 3,
+        "unit_price": 1000
+      },
+      {
+        "description": "Freight T.B.C",
+        "line_total": 0
+      }
+    ],
+    "product_summary": "This invoice covers the production of 3 Mad Beds with design improvements and adjustments, and includes freight costs.",
+    "bed_count": 3,
+    "notes": "Payment via credit card will incur a 1.7% processing fee from Stripe. Work will commence after receipt of payment."
+  },
+  {
+    "id": "9de2e086-9786-4478-8002-94f9ef19a1b1",
+    "xero_id": "5fc2af76-6e1c-4be0-86b2-23778d4b296b",
+    "xero_tenant_id": "786af1ed-e3ce-42fc-9ea9-ddf3447d79d0",
+    "invoice_number": "INV-1291",
+    "date": "2025-07-30",
+    "total": 1457.17,
+    "has_attachments": true,
+    "attachment": "17619457550.pdf",
+    "line_items": [
+      {
+        "description": "Payment for invoice(s) INV-1291",
+        "line_total": 1457.17
+      }
+    ],
+    "product_summary": "This invoice covers a payment for previous purchases from Defy.",
+    "bed_count": 0,
+    "notes": "This is a payment receipt, not an invoice detailing line items."
+  },
+  {
+    "id": "4b09e697-47c3-4a85-942e-42a41d7878d2",
+    "xero_id": "38fd5522-3b0f-49e6-824e-27204fe41d96",
+    "xero_tenant_id": "786af1ed-e3ce-42fc-9ea9-ddf3447d79d0",
+    "invoice_number": "INV-1293",
+    "date": "2025-08-01",
+    "total": 747.34,
+    "has_attachments": true,
+    "attachment": "17648985470.pdf",
+    "line_items": [
+      {
+        "description": "Freight of 3 x Mad Beds to Alice Springs",
+        "quantity": 1,
+        "unit_price": 679.4
+      }
+    ],
+    "product_summary": "This invoice is for the freight of 3 assembled beds.",
+    "bed_count": 3,
+    "notes": "Work will commence after receipt of payment. Payment via credit card will incur a 1.7% processing fee from Stripe."
+  },
+  {
+    "id": "e51f5abe-5473-46d2-9fe9-aad53fd7b1d3",
+    "xero_id": "92683a88-32b6-416a-bac6-736226c3bb6d",
+    "xero_tenant_id": "786af1ed-e3ce-42fc-9ea9-ddf3447d79d0",
+    "invoice_number": "INV-1326",
+    "date": "2025-08-20",
+    "total": 1320,
+    "has_attachments": true,
+    "attachment": "18954469400.pdf",
+    "line_items": [
+      {
+        "description": "Monday 18/08 - full\nSam",
+        "quantity": 1,
+        "unit_price": 480
+      },
+      {
+        "description": "Tuesday 19/08 - full\nSam",
+        "quantity": 1,
+        "unit_price": 480
+      },
+      {
+        "description": "Wednesday 20/08 - half\nSam $240",
+        "quantity": 1,
+        "unit_price": 240
+      }
+    ],
+    "product_summary": "This invoice covers the purchase of assembled bed frames from recycled HDPE plastic.",
+    "bed_count": 2,
+    "notes": "Payment via credit card will incur a 1.7% processing fee from Stripe. Work will commence after receipt of payment."
+  },
+  {
+    "id": "b79a759a-6134-4bfa-bfa0-fefb664c0e15",
+    "xero_id": "e8d54949-4559-4671-a84a-59aab5cfdd92",
+    "xero_tenant_id": "786af1ed-e3ce-42fc-9ea9-ddf3447d79d0",
+    "invoice_number": "INV-1325",
+    "date": "2025-08-20",
+    "total": 2640,
+    "has_attachments": true,
+    "attachment": "18954469390.pdf",
+    "line_items": [
+      {
+        "description": "Tuesday 12/08 - full:\n- Todd\n- Sam",
+        "quantity": 2,
+        "unit_price": 480
+      },
+      {
+        "description": "Wednesday 13/08 - full:\n- Todd\n- Sam",
+        "quantity": 2,
+        "unit_price": 480
+      },
+      {
+        "description": "Thursday 14/08 - half\n- Todd\n- Sam",
+        "quantity": 2,
+        "unit_price": 240
+      }
+    ],
+    "product_summary": "This invoice is for assembled bed-frame products of varying sizes.",
+    "bed_count": 6,
+    "notes": "Payment via credit card will incur a 1.7% processing fee from Stripe. Work will commence after receipt of payment."
+  },
+  {
+    "id": "001c5cb3-8af3-4a8d-a21a-bba4939e365a",
+    "xero_id": "0783dcd5-e5b1-4b3c-9af5-9d0337b69cf1",
+    "xero_tenant_id": "786af1ed-e3ce-42fc-9ea9-ddf3447d79d0",
+    "invoice_number": "INV-1337",
+    "date": "2025-08-22",
+    "total": 3015.76,
+    "has_attachments": true,
+    "attachment": "17848422770.pdf",
+    "line_items": [
+      {
+        "description": "Packing and Palletization",
+        "quantity": 1,
+        "unit_price": 120
+      },
+      {
+        "description": "Road Freight From Botany 2019 Sydney to Darwin City NT\n0800",
+        "quantity": 1,
+        "unit_price": 2621.6
+      }
+    ],
+    "product_summary": "This invoice is for freight and palletization services related to washing machines.",
+    "bed_count": 0,
+    "notes": "Payment via credit card will incur a 1.7% processing fee from Stripe. Work will commence after receipt of payment."
+  },
+  {
+    "id": "ccc2e2df-a435-4a48-9865-1aa89c203bba",
+    "xero_id": "09fefdd1-629b-4e5e-a845-2f2936327fb0",
+    "xero_tenant_id": "786af1ed-e3ce-42fc-9ea9-ddf3447d79d0",
+    "invoice_number": "1584-1572",
+    "date": "2025-09-05",
+    "total": 1015.01,
+    "has_attachments": true,
+    "attachment": "17966526720.pdf",
+    "line_items": [
+      {
+        "description": "Payment for invoice(s) INV-1361",
+        "line_total": 1015.01
+      }
+    ],
+    "product_summary": "This invoice covers a payment for Defy's services related to bed-frame products and related items.",
+    "bed_count": 0,
+    "notes": "The total amount paid was A$1,015.01."
+  },
+  {
+    "id": "fc8f00b4-9178-4f3a-a816-e18fdb7c8cd2",
+    "xero_id": "62e26405-f3c4-40fd-b2ab-927a870876ee",
+    "xero_tenant_id": "786af1ed-e3ce-42fc-9ea9-ddf3447d79d0",
+    "invoice_number": "INV-1362",
+    "date": "2025-09-05",
+    "total": 10316.32,
+    "has_attachments": true,
+    "attachment": "17966526680.pdf",
+    "line_items": [],
+    "product_summary": "This invoice is for a payment made to Defy for invoice INV-1362, likely for bed-frame products and related items.",
+    "bed_count": 0,
+    "notes": "The payment was made via VISA and Apple Pay."
+  },
+  {
+    "id": "71069c63-6148-43df-b833-2236bc6ecb9a",
+    "xero_id": "7f55164d-7077-4788-952b-b4a61d53b6ba",
+    "xero_tenant_id": "786af1ed-e3ce-42fc-9ea9-ddf3447d79d0",
+    "invoice_number": "INV-1503",
+    "date": "2025-11-17",
+    "total": 2733.72,
+    "has_attachments": true,
+    "attachment": "18741310940.pdf",
+    "line_items": [
+      {
+        "description": "Washing Machine Cladding Sets:\n- Flat Packed and Packaged Ready to Ship\n- Includes Hardware\n- using 12mm material pre purchased",
+        "quantity": 4,
+        "unit_price": 621.3
+      },
+      {
+        "description": "Freight T.B.C",
+        "line_total": 0
+      }
+    ],
+    "product_summary": "This invoice covers washing machine cladding sets made from recycled HDPE plastic.",
+    "bed_count": 0,
+    "notes": "Work will commence after receipt of payment. Payment via credit card will incur a 1.7% processing fee from Stripe."
+  },
+  {
+    "id": "8dee381b-f6fc-4d12-bb09-52cc4f7da528",
+    "xero_id": "8bd2dd9a-a8c4-4624-a301-f2ef5b00ef81",
+    "xero_tenant_id": "786af1ed-e3ce-42fc-9ea9-ddf3447d79d0",
+    "invoice_number": "INV-1507",
+    "date": "2025-11-19",
+    "total": 16500,
+    "has_attachments": true,
+    "attachment": "18741310960.pdf",
+    "line_items": [
+      {
+        "description": "Single Beds - New weave bed with updated design.\n- Recycled plastic\n- Steel\n- Canvas",
+        "quantity": 25,
+        "unit_price": 600
+      },
+      {
+        "description": "Freight T.B.C",
+        "line_total": 1500
+      }
+    ],
+    "product_summary": "This invoice covers single beds made from recycled plastic, steel, and canvas.",
+    "bed_count": 25,
+    "notes": "Work will commence after receipt of payment. Payment via credit card incurs a 1.7% processing fee from Stripe."
+  },
+  {
+    "id": "24e1c7e9-e6db-48d5-962a-cb9bb638e130",
+    "xero_id": "baa3ed75-9886-484b-af47-6a89f66efa83",
+    "xero_tenant_id": "786af1ed-e3ce-42fc-9ea9-ddf3447d79d0",
+    "invoice_number": null,
+    "date": "2025-11-27",
+    "total": 1858.78,
+    "has_attachments": true,
+    "attachment": "Defy-Manufacturing-receipt.pdf",
+    "line_items": [
+      {
+        "description": "Packing and Palletizing fee",
+        "quantity": 1,
+        "unit_price": 210
+      },
+      {
+        "description": "Freight\nBotany 2019 to Alice NT 0870\nPallet dim: 240 x 120 x 83cm\nWeight: 980kg",
+        "quantity": 1,
+        "unit_price": 1479.8
+      }
+    ],
+    "product_summary": "This invoice covers freight and palletizing fees for beds and washing machine skins.",
+    "bed_count": 25,
+    "notes": "Payment via credit card will incur a 1.7% processing fee from Stripe. Work will commence after receipt of payment."
+  },
+  {
+    "id": "48ec710d-50b2-43c4-840b-7ff536d38d7e",
+    "xero_id": "c8d99460-6ba7-4813-86c7-2ba6739a9781",
+    "xero_tenant_id": "786af1ed-e3ce-42fc-9ea9-ddf3447d79d0",
+    "invoice_number": null,
+    "date": "2025-11-28",
+    "total": 1894.1,
+    "has_attachments": true,
+    "attachment": "Defy-receipt.pdf",
+    "line_items": [
+      {
+        "description": "Payment for invoice(s) INV-1518",
+        "line_total": 1894.1
+      }
+    ],
+    "product_summary": "This invoice is for a payment towards invoice INV-1518.",
+    "bed_count": 0,
+    "notes": "The payment method was VISA via Apple Pay."
+  },
+  {
+    "id": "130e7686-6b9c-4906-81a7-6d774cf4246f",
+    "xero_id": "2cfca6af-4bf9-4bad-a3be-703b8961ec7e",
+    "xero_tenant_id": "786af1ed-e3ce-42fc-9ea9-ddf3447d79d0",
+    "invoice_number": null,
+    "date": "2025-12-18",
+    "total": 3199.83,
+    "has_attachments": true,
+    "attachment": "Defy-Manufacturing-receipt.pdf",
+    "line_items": [
+      {
+        "description": "19mm Recycled HDPE Panels",
+        "quantity": 6,
+        "unit_price": 446.1
+      },
+      {
+        "description": "HDPE Shreds - Assorted (approx. 20kg per\ntub) QTY in KG",
+        "quantity": 200,
+        "unit_price": 2
+      },
+      {
+        "description": "Tubs - to house and store shreds",
+        "quantity": 10,
+        "unit_price": 10
+      }
+    ],
+    "product_summary": "This invoice covers recycled HDPE panels, assorted HDPE shreds, and tubs for storing shreds.",
+    "notes": "All contents will be on a pallet in the DEFY yard. Ready to pickup anytime from the 22nd. Work will commence after receipt of payment."
+  },
+  {
+    "id": "323c0c08-042a-4c95-96bc-e477e026f9b9",
+    "xero_id": "372be68a-f2f7-4add-ae57-6f2a5e1bf2c6",
+    "xero_tenant_id": "786af1ed-e3ce-42fc-9ea9-ddf3447d79d0",
+    "invoice_number": null,
+    "date": "2025-12-18",
+    "total": 3260.63,
+    "has_attachments": true,
+    "attachment": "Defy-receipt.pdf",
+    "line_items": [],
+    "product_summary": "This invoice is for a payment made to Defy for an unspecified invoice.",
+    "bed_count": 0,
+    "notes": "The invoice mentions a payment for invoice(s) INV-1558."
+  },
+  {
+    "id": "d7cb1ff7-7728-40ae-85e4-32c5ee1982a1",
+    "xero_id": "8b96e972-4067-4424-954e-56d06ca1b3ec",
+    "xero_tenant_id": "786af1ed-e3ce-42fc-9ea9-ddf3447d79d0",
+    "invoice_number": null,
+    "date": "2025-12-22",
+    "total": 3598.09,
+    "has_attachments": true,
+    "attachment": "Defy-receipt.pdf",
+    "line_items": [],
+    "product_summary": "This invoice appears to be a payment receipt for a previous invoice (INV-1559) and does not contain specific line item details.",
+    "bed_count": 0,
+    "notes": "The invoice mentions a payment for a previous invoice (INV-1559) rather than detailing specific products or services."
+  },
+  {
+    "id": "f6508cea-eb9c-4de5-a7ee-016156c35c49",
+    "xero_id": "4c915112-4085-41b1-99f8-92863a1aaddf",
+    "xero_tenant_id": "786af1ed-e3ce-42fc-9ea9-ddf3447d79d0",
+    "invoice_number": null,
+    "date": "2026-01-11",
+    "total": 893.47,
+    "has_attachments": true,
+    "attachment": "Defy-receipt.pdf",
+    "line_items": [],
+    "product_summary": "This invoice is for a payment made for invoice(s) INV-1571.",
+    "bed_count": 0,
+    "notes": "The payment of A$893.47 was made on Jan 12, 2026 via VISA ending in 1656."
+  },
+  {
+    "id": "4ac335f7-0cfc-4c7a-ad78-4acc60ce2cef",
+    "xero_id": "71952972-7c3b-485d-a079-5b64b8cdef56",
+    "xero_tenant_id": "786af1ed-e3ce-42fc-9ea9-ddf3447d79d0",
+    "invoice_number": null,
+    "date": "2026-01-11",
+    "total": 876.81,
+    "has_attachments": true,
+    "attachment": "Defy-Manufacturing-receipt.pdf",
+    "line_items": [
+      {
+        "description": "Pallet & Packing Fee\nD:120 x 120 x 78cm\nW:190kg",
+        "quantity": 1,
+        "unit_price": 60
+      },
+      {
+        "description": "Standard Road Freight\nBotany NSW 2019 to Alice Springs NT 0871\n*Must arrive before 26/01",
+        "quantity": 1,
+        "unit_price": 737.1
+      }
+    ],
+    "product_summary": "This invoice covers freight and packing fees for a bed-related product.",
+    "bed_count": 6,
+    "notes": "Payment via credit card will incur a 1.7% processing fee from Stripe. Work will commence after receipt of payment."
+  },
+  {
+    "id": "41d01447-2acd-4394-a696-4336c87cab26",
+    "xero_id": "97d1526c-8546-4189-a7b6-d6b8a7bb007b",
+    "xero_tenant_id": "786af1ed-e3ce-42fc-9ea9-ddf3447d79d0",
+    "invoice_number": "INV-1602",
+    "date": "2026-01-30",
+    "total": 36947.46,
+    "has_attachments": true,
+    "attachment": "19517226320.pdf",
+    "line_items": [
+      {
+        "description": "16 Beds made from previously ordered 19mm recycled plastic sheets. Cut and finished",
+        "quantity": 16,
+        "unit_price": 121
+      },
+      {
+        "description": "92 Beds kits in 19mm Jungle recycled plastic sheets. Cut and finished",
+        "quantity": 92,
+        "unit_price": 344.05
+      },
+      {
+        "description": "Pallet and Packing TBC",
+        "quantity": 0,
+        "unit_price": 0
+      },
+      {
+        "description": "Freight T.B.C",
+        "quantity": 0,
+        "unit_price": 0
+      }
+    ],
+    "product_summary": "This invoice covers beds and bed kits made from recycled plastic sheets.",
+    "bed_count": 108,
+    "notes": "Payment via credit card will incur a 1.7% processing fee. Work will commence after receipt of payment."
+  },
+  {
+    "id": "57393c5c-6b3e-4c7d-951c-d57ed0ff9a88",
+    "xero_id": "0b54db47-3fc9-4539-85ac-8550f4b6f312",
+    "xero_tenant_id": "786af1ed-e3ce-42fc-9ea9-ddf3447d79d0",
+    "invoice_number": "1868-7651",
+    "date": "2026-02-17",
+    "total": 4903.94,
+    "has_attachments": true,
+    "attachment": "19649737880.pdf",
+    "line_items": [
+      {
+        "description": "Payment for invoice(s) INV-1637",
+        "line_total": 4903.94
+      }
+    ],
+    "product_summary": "This invoice is for a payment made to Defy for invoice INV-1637.",
+    "bed_count": 0,
+    "notes": "The payment was made via VISA ending in 1656 on Feb 17, 2026."
+  },
+  {
+    "id": "e642db12-a2f7-4955-b090-3e9bafba39e4",
+    "xero_id": "a34f34fb-f8be-4dde-9286-5cce6995a327",
+    "xero_tenant_id": "786af1ed-e3ce-42fc-9ea9-ddf3447d79d0",
+    "invoice_number": "INV-1637",
+    "date": "2026-02-17",
+    "total": 4812.5,
+    "has_attachments": true,
+    "attachment": "19649715720.pdf",
+    "line_items": [
+      {
+        "description": "coasters in 8mm Atlantis with custom engraving",
+        "quantity": 700,
+        "unit_price": 5.5
+      },
+      {
+        "description": "sourcing and applying sticker",
+        "quantity": 700,
+        "unit_price": 0.75
+      },
+      {
+        "description": "shipping T.B.C",
+        "quantity": 1,
+        "unit_price": 0
+      }
+    ],
+    "product_summary": "This invoice is for 700 coasters with custom engraving and associated services.",
+    "bed_count": 0,
+    "notes": "The invoice mentions custom engraving on the coasters and a 1.7% processing fee from Stripe for credit card payments. Work will commence after receipt of payment."
+  },
+  {
+    "id": "652d3079-b92a-4921-a4e9-57320742b94a",
+    "xero_id": "b4ec9594-aa18-4d5e-87a7-c592e60a0e73",
+    "xero_tenant_id": "786af1ed-e3ce-42fc-9ea9-ddf3447d79d0",
+    "invoice_number": "INV-1657",
+    "date": "2026-02-27",
+    "total": 1349.19,
+    "has_attachments": true,
+    "attachment": "19744560000.pdf",
+    "line_items": [
+      {
+        "description": "Packing and palletizing fee",
+        "quantity": 2,
+        "unit_price": 60
+      },
+      {
+        "description": "Freight - 1 x Clad Washing Machine\nBotany NSW 2019 → The Gap NT 0870\nPallet Dim: 120 x 120 x 130cm\nWeight: 120kg\nDrop off ETA: 10th - 11th March",
+        "quantity": 1,
+        "unit_price": 802.9
+      },
+      {
+        "description": "Freight - 2 x Skins\nBotany NSW 2019 → Stafford QLD 4053\nPallet Dim: 120 x 120 x 40cm\nWeight: 64kg",
+        "quantity": 1,
+        "unit_price": 303.64
+      }
+    ],
+    "product_summary": "This invoice is for freight and palletizing services related to clad washing machines and skins.",
+    "bed_count": 0,
+    "notes": "Payment via credit card will incur a 1.7% processing fee from Stripe. Work will commence after receipt of payment."
+  },
+  {
+    "id": "ea6c8da3-9dfd-455e-ad27-478216c201e6",
+    "xero_id": "72bbe67b-770b-4d05-ac5a-570b361d8226",
+    "xero_tenant_id": "786af1ed-e3ce-42fc-9ea9-ddf3447d79d0",
+    "invoice_number": "INV-1657",
+    "date": "2026-02-27",
+    "total": 1374.82,
+    "has_attachments": true,
+    "attachment": "19781852520.pdf",
+    "line_items": [
+      {
+        "description": "Payment for invoice(s) INV-1657",
+        "line_total": 1374.82
+      }
+    ],
+    "product_summary": "Payment for a previous invoice from Defy.",
+    "bed_count": 0,
+    "notes": "This is a receipt for a payment of a previous invoice, not an invoice for new products."
+  },
+  {
+    "id": "6849bdf6-e469-4aac-87d4-ec874fd32afc",
+    "xero_id": "30742f52-1556-40cd-9721-991dead8df78",
+    "xero_tenant_id": "786af1ed-e3ce-42fc-9ea9-ddf3447d79d0",
+    "invoice_number": null,
+    "date": "2026-03-19",
+    "total": 199.43,
+    "has_attachments": true,
+    "attachment": "receipt.pdf",
+    "line_items": [
+      {
+        "description": "Credit for 3 road cases",
+        "quantity": 3,
+        "unit_price": -400
+      },
+      {
+        "description": "Assembly cost for 8 beds",
+        "quantity": 8,
+        "unit_price": 55.95
+      },
+      {
+        "description": "Freight and packing cost to Alice Springs",
+        "quantity": 1,
+        "unit_price": 873.7
+      },
+      {
+        "description": "Packing for Canberra",
+        "quantity": 1,
+        "unit_price": 60
+      }
+    ],
+    "product_summary": "This invoice covers assembly costs for beds and related freight and packing services.",
+    "bed_count": 8,
+    "notes": "Payment via credit card will incur a 1.7% processing fee from Stripe. Work will commence after receipt of payment."
+  },
+  {
+    "id": "c563d03d-941e-45e7-8d30-9b4b01f53f21",
+    "xero_id": "bfe8052d-e67a-47a8-903b-02e6586f9ef1",
+    "xero_tenant_id": "786af1ed-e3ce-42fc-9ea9-ddf3447d79d0",
+    "invoice_number": null,
+    "date": "2026-03-27",
+    "total": 18922.75,
+    "has_attachments": true,
+    "attachment": "receipt.pdf",
+    "line_items": [
+      {
+        "description": "50 Beds kits in 19mm Jungle recycled plastic sheets. Cut and finished",
+        "quantity": 50,
+        "unit_price": 344.05
+      },
+      {
+        "description": "Does not including assembly. Does not include hardware",
+        "quantity": 0,
+        "unit_price": 0
+      },
+      {
+        "description": "Pallet and Packing TBC",
+        "quantity": 0,
+        "unit_price": 0
+      },
+      {
+        "description": "Freight T.B.C",
+        "quantity": 0,
+        "unit_price": 0
+      }
+    ],
+    "product_summary": "This invoice is for 50 bed kits made from recycled plastic sheets.",
+    "bed_count": 50,
+    "notes": "Payment via credit card will incur a 1.7% processing fee from Stripe. Work will commence after receipt of payment."
+  },
+  {
+    "id": "7344d3a5-f831-4753-b878-1034414fc849",
+    "xero_id": "5d3bbbea-4fe4-444a-a16e-eb2dc137aa4b",
+    "xero_tenant_id": "786af1ed-e3ce-42fc-9ea9-ddf3447d79d0",
+    "invoice_number": null,
+    "date": "2026-03-27",
+    "total": 8525,
+    "has_attachments": true,
+    "attachment": "receipt.pdf",
+    "line_items": [
+      {
+        "description": "2 Bulka Bags of recycled plastic jungle mix Shred. 600kg of shred per bag 1200kg total",
+        "quantity": 1200,
+        "unit_price": 2
+      },
+      {
+        "description": "1200mm x 1200mm x 19mm Jungle Mix sheets - our full sheets cut in half - these have been supplied at the bulk discounted rate",
+        "quantity": 20,
+        "unit_price": 200
+      },
+      {
+        "description": "Freight to 601 Maleny Kenilworth Rd Witta 4522",
+        "quantity": 3,
+        "unit_price": 450
+      }
+    ],
+    "product_summary": "This invoice is for recycled plastic shreds and sheets, along with freight services.",
+    "bed_count": 0,
+    "notes": "The sheets were supplied at a bulk discounted rate. Payment via credit card incurs a 1.7% processing fee."
+  },
+  {
+    "id": "73bfa4c3-35ac-4455-aa9b-2d1f796be97e",
+    "xero_id": "63533b93-444d-4ed4-a8ea-9bbeef2321df",
+    "xero_tenant_id": "786af1ed-e3ce-42fc-9ea9-ddf3447d79d0",
+    "invoice_number": null,
+    "date": "2026-03-31",
+    "total": 8686.98,
+    "has_attachments": true,
+    "attachment": "receipt.pdf",
+    "line_items": [
+      {
+        "description": "Payment for invoice(s) INV-1731",
+        "line_total": 8686.98
+      }
+    ],
+    "product_summary": "This invoice is for payment of an unspecified Defy Manufacturing product or service, paid via Stripe.",
+    "bed_count": 0,
+    "notes": "Payment made via VISA ending in 1656."
+  }
+]
