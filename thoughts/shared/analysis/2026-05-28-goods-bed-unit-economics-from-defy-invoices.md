@@ -2,10 +2,25 @@
 title: Goods — bed unit economics, worked backwards from Defy invoices
 created: 2026-05-28
 owner: Ben
-status: working draft
-source_of_truth_for: apps/web/src/lib/services/goods-cost-evidence.ts (buildFunderView)
+status: SUPERSEDED — flawed methodology (do not trust the per-bed numbers below)
+source_of_truth_for: NONE (kept as a record of the wrong approach)
 plan_slug: goods-cost-evidence-funder-artifact
 ---
+
+> ⚠ **2026-05-28 correction.** This analysis divided all-product Defy spend +
+> all-project overhead by bed count alone. That's wrong: Goods produces
+> multiple products (beds, sheds, coasters, samples, prototypes) and only ONE
+> Xero line (INV-1602) explicitly names beds. The per-bed numbers below
+> ($5,800 today, etc.) are **inflated by every non-bed product loaded onto
+> the bed denominator**. The Notion BOM's $523.70/bed direct is the correct
+> per-bed stack for a *standard* bed; INV-1602's $2,099/bed is either a
+> special-finish batch or a volume effect, not evidence the BOM is wrong by 37×.
+>
+> The correct next step is **per-product unit economics**: identify which
+> Defy invoices are for beds vs sheds vs coasters vs prototypes, then compute
+> per-bed cost using only bed-attributable lines.
+>
+> Kept on file as a record of the wrong approach; **do not cite the numbers below**.
 
 # Goods — what does a bed actually cost?
 
