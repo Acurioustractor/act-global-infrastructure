@@ -9,10 +9,10 @@
     "hdpe_density_g_per_cm3": 0.96,
     "half_sheet_dims_cm": [120, 120, 1.9],
     "half_sheet_mass_kg": 26.27,
-    "half_sheets_per_bed_low": 1.0,
-    "half_sheets_per_bed_mid": 1.5,
-    "half_sheets_per_bed_high": 2.0,
-    "_note": "half_sheets_per_bed is the load-bearing assumption — Ben to confirm."
+    "hdpe_kg_per_bed": 20,
+    "_hdpe_per_bed_source": "Ben confirmed 2026-05-28 — 20kg of HDPE per finished bed (~76% of one half-sheet; the rest is offcuts/press loss).",
+    "raw_hdpe_cost_per_bed": 40.00,
+    "half_sheets_per_bed_equivalent": 0.76
   },
   "defy_verified_rates": {
     "single_bed_fully_fabricated": { "amount": 600.00, "source": "INV-1507 Nov 2025, 25 beds", "confidence": "verified" },
@@ -102,7 +102,7 @@
     "state_4_all_in_house": {
       "label": "Buy raw HDPE shred, do everything in-house",
       "components": [
-        { "label": "HDPE shred 40kg @ $2/kg", "amount": 80.00 },
+        { "label": "HDPE shred 20kg @ $2/kg (Ben confirmed)", "amount": 40.00 },
         { "label": "In-house sheet pressing", "amount": 40.00 },
         { "label": "In-house CNC cut + finish", "amount": 60.00 },
         { "label": "Canvas", "amount": 93.50 },
@@ -110,14 +110,14 @@
         { "label": "End caps + hardware", "amount": 3.20 },
         { "label": "Assembly labour", "amount": 46.67 }
       ],
-      "direct_total": 350.37,
+      "direct_total": 310.37,
       "capital_added": 160000,
       "capital_cumulative": 200000
     },
     "state_5_community_plastic": {
       "label": "Community-collected plastic + all in-house (vision)",
       "components": [
-        { "label": "Community plastic pay @ $1/kg × 40kg", "amount": 40.00 },
+        { "label": "Community plastic pay @ $1/kg × 20kg", "amount": 20.00 },
         { "label": "Wash + dry + sort", "amount": 20.00 },
         { "label": "In-house shredding", "amount": 10.00 },
         { "label": "In-house sheet pressing", "amount": 40.00 },
@@ -127,14 +127,14 @@
         { "label": "End caps + hardware", "amount": 3.20 },
         { "label": "Assembly labour", "amount": 46.67 }
       ],
-      "direct_total": 340.37,
+      "direct_total": 320.37,
       "capital_added": 30000,
       "capital_cumulative": 230000,
       "community_jobs_created": true
     }
   },
   "idiot_index": [
-    { "element": "HDPE shred → finished kit", "raw_low": 52.55, "raw_high": 105.10, "current": 344.05, "index_low": 3.3, "index_high": 6.5, "markup_pays_for": "Shredding, sheet pressing, CNC cutting, finishing, Defy margin" },
+    { "element": "HDPE shred → finished kit", "raw_low": 40.00, "raw_high": 40.00, "current": 344.05, "index_low": 8.6, "index_high": 8.6, "markup_pays_for": "Shredding, sheet pressing, CNC cutting, finishing, Defy margin. BIGGEST LEVERAGE in the model.", "raw_basis": "20kg HDPE × $2/kg (Ben confirmed 2026-05-28)" },
     { "element": "Half-sheet (1200×1200×19mm)", "raw_low": 52.55, "raw_high": 52.55, "current": 200.00, "index_low": 3.8, "index_high": 3.8, "markup_pays_for": "Hot-press machine time, energy, Defy margin" },
     { "element": "Cut+finish only", "raw_low": 30.00, "raw_high": 60.00, "current": 121.00, "index_low": 2.0, "index_high": 4.0, "markup_pays_for": "CNC operator + machine time + Defy margin" },
     { "element": "Assembly labour (Defy)", "raw_low": 52.00, "raw_high": 52.00, "current": 55.95, "index_low": 1.1, "index_high": 1.1, "markup_pays_for": "Already efficient — small Defy margin" },
@@ -163,8 +163,11 @@
       "field_travel_per_bed": 510,
       "freight_per_bed": 150,
       "fully_loaded_state_1": 1707,
-      "fully_loaded_state_4": 1230,
-      "fully_loaded_state_5": 1070
+      "fully_loaded_state_4": 1417,
+      "fully_loaded_state_5": 1427,
+      "_math_state_1": "600 + 150 + 300 + 147 + 510 = 1707",
+      "_math_state_4": "310.37 + 150 + 300 + 147 + 510 = 1417.37",
+      "_math_state_5": "320.37 + 150 + 300 + 147 + 510 = 1427.37"
     },
     {
       "label": "Target (500 beds/yr)",
@@ -173,9 +176,12 @@
       "admin_per_bed": 29,
       "field_travel_per_bed": 100,
       "freight_per_bed": 100,
-      "fully_loaded_state_1": 910,
-      "fully_loaded_state_4": 575,
-      "fully_loaded_state_5": 510
+      "fully_loaded_state_1": 889,
+      "fully_loaded_state_4": 599,
+      "fully_loaded_state_5": 609,
+      "_math_state_1": "600 + 100 + 60 + 29 + 100 = 889",
+      "_math_state_4": "310.37 + 100 + 60 + 29 + 100 = 599.37",
+      "_math_state_5": "320.37 + 100 + 60 + 29 + 100 = 609.37"
     },
     {
       "label": "Vision (1,000 beds/yr, in-house assembly)",
@@ -184,9 +190,12 @@
       "admin_per_bed": 15,
       "field_travel_per_bed": 50,
       "freight_per_bed": 80,
-      "fully_loaded_state_1": 770,
-      "fully_loaded_state_4": 465,
-      "fully_loaded_state_5": 405
+      "fully_loaded_state_1": 775,
+      "fully_loaded_state_4": 485,
+      "fully_loaded_state_5": 495,
+      "_math_state_1": "600 + 80 + 30 + 15 + 50 = 775",
+      "_math_state_4": "310.37 + 80 + 30 + 15 + 50 = 485.37",
+      "_math_state_5": "320.37 + 80 + 30 + 15 + 50 = 495.37"
     }
   ],
   "fundraising_offset": {

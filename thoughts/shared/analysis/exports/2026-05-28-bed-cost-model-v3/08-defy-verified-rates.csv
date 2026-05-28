@@ -1,0 +1,12 @@
+Item,Rate ($),Source,Confidence
+single_bed_fully_fabricated,600,"INV-1507 Nov 2025, 25 beds",verified
+bed_kit_cut_finished,344.05,INV-1602 (92 kits) + 2026-03-27 (50 kits),verified
+cut_and_finish_only,121,"INV-1602 (16 beds, pre-purchased sheets)",verified
+assembly_labour,55.95,"2026-03-19 (8 beds, exact line)",verified
+half_sheet_bulk_price,200,2026-03-27 (20 sheets bulk discount),verified
+hdpe_shred_per_kg,2,2026-03-27 (1200kg bulk bags),verified
+worker_day_rate_full,480,"INV-1325/1326 (Sam, Todd)",verified
+worker_day_rate_half,240,INV-1325/1326,verified
+freight_botany_to_alice_per_pallet_low,808,Multiple Defy freight lines,verified
+freight_botany_to_alice_per_pallet_high,1480,Multiple Defy freight lines,verified
+beds_per_pallet_typical,8,,

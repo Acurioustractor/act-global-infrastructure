@@ -1,0 +1,4 @@
+Scenario,Beds/yr,Production founder ($/bed),Admin ($/bed),Field travel ($/bed),Freight ($/bed),State 1 fully-loaded ($),State 4 fully-loaded ($),State 5 fully-loaded ($)
+Today (100 beds/yr),100,300,147,510,150,1707,1417,1427
+Target (500 beds/yr),500,60,29,100,100,889,599,609
+"Vision (1,000 beds/yr, in-house assembly)",1000,30,15,50,80,775,485,495
