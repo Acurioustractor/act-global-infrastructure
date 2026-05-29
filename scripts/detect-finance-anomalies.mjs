@@ -15,6 +15,7 @@
  */
 import '../lib/load-env.mjs'
 import { createClient } from '@supabase/supabase-js'
+import { writeFileSync } from 'fs'
 
 const URL = process.env.NEXT_PUBLIC_SUPABASE_URL
 const KEY = process.env.SUPABASE_SERVICE_ROLE_KEY
@@ -23,6 +24,20 @@ const sb = createClient(URL, KEY)
 
 const SINCE = '2024-07-01'
 const JSON_OUT = process.argv.includes('--json')
+const WORKLIST = process.argv.includes('--worklist')
+
+// Confidence that an AUTHORISED bill is a duplicate of the PAID one:
+//   near-certain — same invoice # on both, OR no-number + no-attachment shadow (Carla pattern)
+//   likely       — no-number AUTHORISED shadowing a numbered PAID
+//   review       — different invoice #s (could be a legit separate same-amount invoice)
+function classifyDup(auth, paid) {
+  const an = (auth.invoice_number || '').trim()
+  const pn = (paid.invoice_number || '').trim()
+  if (an && pn && an === pn) return 'near-certain'
+  if (!an && !auth.has_attachments) return 'near-certain'
+  if (!an) return 'likely'
+  return 'review'
+}
 const fmt = (n) => '$' + Number(n || 0).toLocaleString('en-AU', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
 const days = (a, b) => Math.abs((new Date(a) - new Date(b)) / 86400000)
 const norm = (s) => (s || '').toLowerCase().replace(/[^a-z0-9]/g, '')
@@ -70,7 +85,8 @@ async function main() {
       voidCandidates.push({
         vendor: a.contact_name, amount: Number(a.total), date: a.date,
         authInvoice: a.invoice_number || '(no #)', authId: a.xero_id, authHasAttach: !!a.has_attachments,
-        paidInvoice: near.invoice_number || '(no #)', paidId: near.xero_id, paidDate: near.date,
+        paidInvoice: near.invoice_number || '(no #)', paidId: near.xero_id, paidDate: near.date, paidHasAttach: !!near.has_attachments,
+        confidence: classifyDup(a, near),
         xeroLink: xeroLink(a.xero_id),
       })
     }
@@ -108,6 +124,40 @@ async function main() {
     exactDups,
     ge429: { bills: ge.length, amount: Math.round(geAmount) },
     vendorVariants: variants,
+  }
+
+  if (WORKLIST) {
+    const order = { 'near-certain': 0, likely: 1, review: 2 }
+    const vc = [...voidCandidates].sort((a, b) => (order[a.confidence] - order[b.confidence]) || (b.amount - a.amount))
+    const sum = (conf) => vc.filter((v) => v.confidence === conf).reduce((s, v) => s + v.amount, 0)
+    const rows = vc.map((v) => {
+      const badge = v.confidence === 'near-certain' ? '🔴 near-certain' : v.confidence === 'likely' ? '🟠 likely' : '🟡 review'
+      const why = v.authInvoice === v.paidInvoice && v.authInvoice !== '(no #)' ? 'same invoice # on both'
+        : v.authInvoice === '(no #)' && !v.authHasAttach ? 'no-# + no-attachment shadow'
+        : v.authInvoice === '(no #)' ? 'no-# shadow' : 'different #s — confirm not a separate invoice'
+      return `| ${badge} | ${v.date} | ${fmt(v.amount)} | [${(v.vendor || '').slice(0, 30)}](${v.xeroLink}) | ${v.authInvoice}${v.authHasAttach ? '' : ' (no attach)'} | ${v.paidInvoice} · ${v.paidDate} | ${why} |`
+    })
+    const md = `# Duplicate void worklist — AUTHORISED bills shadowing a PAID bill
+
+**Generated:** ${result.date} · **Source:** ${bills.length} ACCPAY bills (app DB) · tool: \`scripts/detect-finance-anomalies.mjs --worklist\`
+
+Each row is an **AUTHORISED** bill that matches a **PAID** bill (same vendor + amount, within 60 days) — i.e. a likely duplicate sitting as phantom AP. **Void the AUTHORISED one in Xero** (keep the PAID). 🔴/🟠 are high-confidence; 🟡 need a human to confirm it isn't a genuinely separate same-amount invoice. **Voiding is a Tier-3 Xero write — review first.**
+
+- 🔴 near-certain: ${vc.filter((v) => v.confidence === 'near-certain').length} · ${fmt(sum('near-certain'))}
+- 🟠 likely: ${vc.filter((v) => v.confidence === 'likely').length} · ${fmt(sum('likely'))}
+- 🟡 review: ${vc.filter((v) => v.confidence === 'review').length} · ${fmt(sum('review'))}
+- **Total phantom AP if all confirmed: ${fmt(vc.reduce((s, v) => s + v.amount, 0))}**
+
+| Confidence | Date | Amount | Vendor (→ Xero AUTH bill) | AUTHORISED | PAID twin | Why |
+|---|---|---:|---|---|---|---|
+${rows.join('\n')}
+
+> Notes: 🔴 HighLevel + Booking.com have the **exact same invoice #** on both copies (one invoice entered twice). Several 🟡 rows have **near-identical** refs (Repco 4120364586/412364586, Palm Island 6D1D49DE4A) — likely dups, worth a glance. **Kirmos INV-004 has a *different* # (INV-006) → may be genuinely owed, NOT a dup** (Ben checking with Joey). Telford $19,800 matches the recon's known double-pay.
+`
+    const out = 'thoughts/shared/financials/2026-05-29-duplicate-void-worklist.md'
+    writeFileSync(out, md)
+    console.log(`Wrote ${vc.length} void-candidates → ${out}`)
+    return
   }
 
   if (JSON_OUT) { console.log(JSON.stringify(result, null, 2)); return }
