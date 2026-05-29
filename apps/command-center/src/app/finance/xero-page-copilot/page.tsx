@@ -2,7 +2,7 @@
 
 import { useMemo, useState, startTransition } from 'react'
 import Link from 'next/link'
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQuery } from '@tanstack/react-query'
 import {
   AlertTriangle,
   ArrowLeft,
@@ -15,11 +15,24 @@ import {
   Loader2,
   ReceiptText,
   RefreshCcw,
+  Search,
   ShieldCheck,
   Sparkles,
 } from 'lucide-react'
 import { formatMoney } from '@/lib/finance/format'
 import { cn } from '@/lib/utils'
+import { ReceiptInXero } from '@/components/finance/ReceiptInXero'
+import { RetagSelect, type ProjectOption } from '@/components/finance/RetagSelect'
+
+// OPERATE workspace (plan 2026-05-29 P3) — the surfaces this copilot anchors.
+const OPERATE_TABS: Array<{ href: string; label: string }> = [
+  { href: '/finance/xero-page-copilot', label: 'Reconcile Copilot' },
+  { href: '/finance/tagger-v2', label: 'Tagger' },
+  { href: '/finance/receipts-triage', label: 'Receipts' },
+  { href: '/finance/reconciliation', label: 'Reconciliation' },
+  { href: '/finance/ai-suggestions', label: 'AI Suggestions' },
+  { href: '/finance/dext-push-audit', label: 'Dext Audit' },
+]
 
 type SuggestedAction =
   | 'click_ok_existing_match'
@@ -237,6 +250,18 @@ export default function XeroPageCopilotPage() {
     mutationFn: analyzePage,
   })
 
+  // Project codes for inline re-tag (P3).
+  const { data: projects = [] } = useQuery<ProjectOption[]>({
+    queryKey: ['finance', 'project-codes'],
+    queryFn: async () => {
+      const res = await fetch('/api/finance/projects')
+      if (!res.ok) throw new Error('projects fetch failed')
+      const json = await res.json()
+      return (json.projects ?? []).map((p: { code: string; name: string }) => ({ code: p.code, name: p.name }))
+    },
+    staleTime: 10 * 60 * 1000,
+  })
+
   const rows = mutation.data?.rows || []
   const filteredRows = useMemo(() => {
     if (filter === 'all') return rows
@@ -269,8 +294,9 @@ export default function XeroPageCopilotPage() {
               Paste one Xero reconcile page. Get the next safe click.
             </h1>
             <p className="mt-3 max-w-3xl text-sm leading-6 text-white/58">
-              This is deliberately no-write. It parses what Xero is showing, checks ACT mirror evidence,
-              Dext-created bills, receipt status, transfers, refunds, and gives a per-row action queue.
+              It parses what Xero is showing, checks ACT mirror evidence, Dext-created bills, receipt
+              status, transfers and refunds, and gives a per-row action queue. The Xero reconcile clicks
+              stay yours — but you can now re-tag the project inline and jump straight to a missing receipt.
             </p>
           </div>
           <div className="rounded-3xl border border-amber-300/20 bg-amber-300/10 p-4 text-sm text-amber-50 lg:max-w-sm">
@@ -283,6 +309,27 @@ export default function XeroPageCopilotPage() {
             </p>
           </div>
         </header>
+
+        {/* OPERATE workspace tabs (P3 fold) */}
+        <nav aria-label="Operate workspace" className="mb-6 flex flex-wrap gap-2">
+          {OPERATE_TABS.map((tab) => {
+            const isCurrent = tab.href === '/finance/xero-page-copilot'
+            return (
+              <Link
+                key={tab.href}
+                href={tab.href}
+                className={cn(
+                  'rounded-full px-3.5 py-1.5 text-xs font-medium transition',
+                  isCurrent
+                    ? 'bg-cyan-300 text-slate-950'
+                    : 'border border-white/12 bg-white/5 text-white/55 hover:border-white/30 hover:text-white',
+                )}
+              >
+                {tab.label}
+              </Link>
+            )
+          })}
+        </nav>
 
         <section className="grid gap-5 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)]">
           <div className="rounded-[2rem] border border-white/10 bg-white/[0.045] p-5 shadow-[0_30px_100px_rgba(0,0,0,0.28)]">
@@ -508,16 +555,22 @@ export default function XeroPageCopilotPage() {
                   <div className="mt-3 space-y-3 text-sm">
                     {row.billCandidates[0] ? (
                       <div className="rounded-2xl border border-cyan-300/20 bg-cyan-300/10 p-3">
-                        <p className="font-medium text-cyan-50">Xero bill candidate</p>
+                        <div className="flex items-center justify-between gap-2">
+                          <p className="font-medium text-cyan-50">Xero bill candidate</p>
+                          <ReceiptInXero hasAttachment={row.billCandidates[0].hasAttachments} variant="full" />
+                        </div>
                         <p className="mt-1 text-cyan-100/75">
                           {row.billCandidates[0].contactName || 'Unknown'} · {dateLabel(row.billCandidates[0].date)} · {formatMoney(row.billCandidates[0].total)}
                         </p>
                         <p className="mt-1 text-cyan-100/60">
-                          {row.billCandidates[0].status || 'no status'} · {row.billCandidates[0].hasAttachments ? 'attachment' : 'no attachment'} · {row.billCandidates[0].reference || 'no reference'}
+                          {row.billCandidates[0].status || 'no status'} · {row.billCandidates[0].reference || 'no reference'}
                         </p>
-                        <a href={row.billCandidates[0].xeroUrl} target="_blank" rel="noreferrer" className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-cyan-100 hover:text-white">
-                          Open Xero bill <ExternalLink className="h-3 w-3" />
-                        </a>
+                        <div className="mt-2 flex flex-wrap items-center justify-between gap-2">
+                          <a href={row.billCandidates[0].xeroUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-xs font-semibold text-cyan-100 hover:text-white">
+                            Open Xero bill <ExternalLink className="h-3 w-3" />
+                          </a>
+                          <RetagSelect kind="bill" id={row.billCandidates[0].id} currentCode={row.billCandidates[0].projectCode} projects={projects} />
+                        </div>
                       </div>
                     ) : (
                       <p className="rounded-2xl border border-white/10 bg-white/[0.035] p-3 text-white/45">No exact Xero bill candidate found.</p>
@@ -536,7 +589,16 @@ export default function XeroPageCopilotPage() {
                         </Link>
                       </div>
                     ) : (
-                      <p className="rounded-2xl border border-white/10 bg-white/[0.035] p-3 text-white/45">No receipt evidence match found in the mirror.</p>
+                      <Link
+                        href={row.receiptEvidenceUrl}
+                        className="flex items-center justify-between gap-2 rounded-2xl border border-amber-300/25 bg-amber-300/10 p-3 text-sm text-amber-50 transition hover:bg-amber-300/20"
+                      >
+                        <span className="inline-flex items-center gap-2">
+                          <Search className="h-4 w-4" />
+                          No receipt matched — find the missing receipt
+                        </span>
+                        <ExternalLink className="h-3.5 w-3.5" />
+                      </Link>
                     )}
 
                     {row.bankLine && (
@@ -547,9 +609,10 @@ export default function XeroPageCopilotPage() {
                             : <AlertTriangle className="h-4 w-4 text-amber-200" />}
                           <span>Mirror: {row.bankLine.status || 'unknown'}</span>
                         </div>
-                        <p className="mt-1">
-                          Project {row.bankLine.projectCode || 'unset'} · date delta {row.bankLine.dateDeltaDays ?? '?'}d
-                        </p>
+                        <div className="mt-2 flex flex-wrap items-center justify-between gap-2">
+                          <span className="text-white/45">date delta {row.bankLine.dateDeltaDays ?? '?'}d</span>
+                          <RetagSelect kind="bankLine" id={row.bankLine.id} currentCode={row.bankLine.projectCode} projects={projects} />
+                        </div>
                       </div>
                     )}
                   </div>
