@@ -68,8 +68,9 @@ function vendorHeuristic(name) {
   if (/insurance/.test(n)) return '433';
   return null;
 }
-// Judgement items — NEVER auto-recode (need SL / a decision)
-const EXCLUDE = /funding network|mol nyrt|a curious tractor|telford|^nicholas$|nicholas marchesi|the matnic/i;
+// Judgement items — NEVER auto-recode (need SL / a decision).
+// Includes duplicate/void candidates (Hatch, 1300 Washer, Mounty, Allclass) — kept in 429 so SL sees them.
+const EXCLUDE = /funding network|mol nyrt|a curious tractor|telford|^nicholas$|nicholas marchesi|the matnic|hatch electrical|1300 washer|mounty|allclass/i;
 
 function suggest(vendor, rule) {
   const cat = (rule?.category || '').toLowerCase();
@@ -124,7 +125,8 @@ async function main() {
   // build candidate set
   let candidates = bills.filter(b => (b.line_items || []).some(li => String(li.account_code) === GE));
   if (ONE) candidates = candidates.filter(b => b.xero_id === ONE);
-  const allowMedium = BAND === 'high+medium';
+  const allowHigh = BAND.includes('high');     // 'high', 'high+medium'
+  const allowMedium = BAND.includes('medium'); // 'medium', 'high+medium'
 
   const revert = []; let planned = 0, skipped = 0, applied = 0, failed = 0;
   for (const b of candidates) {
@@ -132,6 +134,7 @@ async function main() {
     if (EXCLUDE.test(b.contact_name || '')) { skipped++; continue; }
     const s = suggest(b.contact_name, ruleBy[(b.contact_name || '').toLowerCase()]);
     if (!s.code || s.conf === 'review') { skipped++; continue; }
+    if (s.conf === 'high' && !allowHigh) { skipped++; continue; }
     if (s.conf === 'medium' && !allowMedium) { skipped++; continue; }
     if (s.code === GE) { skipped++; continue; }
 
@@ -145,7 +148,7 @@ async function main() {
     if (!geLines.length) { skipped++; continue; }
 
     const updatedLines = inv.LineItems.map(li => {
-      const base = { LineItemID: li.LineItemID, Description: li.Description, Quantity: li.Quantity, UnitAmount: li.UnitAmount, TaxType: li.TaxType, AccountCode: li.AccountCode, Tracking: li.Tracking || [] };
+      const base = { LineItemID: li.LineItemID, Description: li.Description, Quantity: li.Quantity, UnitAmount: li.UnitAmount, LineAmount: li.LineAmount, TaxType: li.TaxType, AccountCode: li.AccountCode, Tracking: li.Tracking || [] };
       if (String(li.AccountCode) === GE) base.AccountCode = s.code;   // ONLY change
       return base;
     });
@@ -157,7 +160,7 @@ async function main() {
       revert.push({ invoiceID: b.xero_id, contact: b.contact_name, before: inv.LineItems.map(li => ({ LineItemID: li.LineItemID, AccountCode: li.AccountCode })) });
       const pr = await fetch(`https://api.xero.com/api.xro/2.0/Invoices/${b.xero_id}`, { method: 'POST', headers: xh(token), body: JSON.stringify({ Invoices: [{ InvoiceID: b.xero_id, LineItems: updatedLines }] }) });
       if (pr.ok) { applied++; }
-      else { failed++; console.log(`     ✗ POST ${pr.status}: ${(await pr.text()).slice(0, 200)}`); }
+      else { failed++; const txt = await pr.text(); let msg = txt.slice(0, 300); try { const j = JSON.parse(txt); const el = j.Elements?.[0]; const ve = (el?.ValidationErrors || []).concat((el?.LineItems || []).flatMap(l => l.ValidationErrors || [])); msg = ve.length ? ve.map(v => v.Message).join(' | ') : JSON.stringify(el).slice(0, 300); } catch {} console.log(`     ✗ POST ${pr.status} [${b.contact_name}]: ${msg}`); }
     }
   }
 
