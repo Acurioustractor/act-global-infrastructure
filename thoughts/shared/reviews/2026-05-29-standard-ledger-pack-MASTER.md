@@ -156,4 +156,55 @@ Together these are the difference between a P&L that's overstated on both sides 
 
 ---
 
-*Nothing in this pack was written to Xero, GHL, Notion, or any external system. Reconciliation can only be **finished** in Xero (the final match/approve/void click) by SL or a human — the API/scripts only **prepare** (propose matches, recode, flag dupes). The single biggest unblocker remains signing the Ignition BAS proposal + granting SL Xero access (item 0). The single biggest correction is The Funding Network reversal (item 1) — it moves the P&L by ~$289K and the BAS by $13,142.*
+## 8. Why reconciliation has felt impossible (operating model)
+
+Full doc: `thoughts/shared/reviews/2026-05-29-reconciliation-receipts-operating-model.md`.
+
+Root cause: **two receipt-capture systems (Dext + a homegrown Gmail pipeline) and four disagreeing "status" fields**, none wired together, with the homegrown automations switched off. The same question gets a different answer from each source:
+
+| Question | Source of truth to use | Ignore |
+|---|---|---|
+| Is it reconciled? | Xero `is_reconciled` (card 70% / bank 26%) | `bank_statement_lines.status` (stale homegrown flag) |
+| Is the receipt in Xero? | Xero `has_attachments` | `receipt_match_status` (homegrown, card-only) |
+
+**Corrected receipt picture (verified):** the scary "7,172 captured / 0 pushed to Xero" is **mostly redundant** — the homegrown pipeline re-captured supplier bills Dext already handles. All 981 Q2/Q3 bills with a "ready" homegrown receipt **already have a Dext attachment**, so bulk-pushing would create duplicates. Genuine gap = ~16 bank txns + 66 truly missing ($31,585). **Don't bulk-push; consolidate the two systems.**
+
+## 9. Automation & tooling — make it stay reconciled (expert layer)
+
+**Xero bank rules** (copy-list: `recon-pack/07-bank-rules-proposal.md`) — set these and reconciliation becomes near one-click. Tier 1: Qantas $83K/123 lines → 493 Travel; Uber → 452; NAB fees → 407; SaaS cluster → 485; Telstra → 489. *Bank rules can be run over the existing open lines to clear backlog immediately.*
+
+**Xero's current AI** (2025–26): "Just Ask Xero" (JAX) **automatic bank reconciliation** went to beta Nov 2025, available on **Grow plan and above** in AU (~97% vendor-claimed accuracy on known/repeat payees). It learns from your bank rules + attached documents + reconciliation history. **Action: confirm ACT's Xero plan tier** — JAX auto-recon + bulk cash-coding need Grow+, the entry "Ignite" plan doesn't include them.
+
+**Dext vs Hubdoc (cost decision for the Pty):** Hubdoc is **free with Xero** (~90% OCR); Dext is paid (~$35–50/mo, ~99% OCR, line-item supplier rules, paperwork-to-bank matching). For ACT's likely volume, **Hubdoc is probably sufficient → consolidating to it saves the Dext fee**, *unless* receipt volume/complexity justifies Dext. Either way: **run ONE receipt tool, set to auto-publish with the PDF attached** — running both is half the confusion. Fixing **Dext/Hubdoc supplier rules so bills land on the right account (not 429)** is the upstream cure for the whole General-Expenses problem.
+
+**Setup order:** bank feeds → bank rules for top ~20 payees → one receipt tool auto-publishing → JAX/AI for the long tail → reconcile (most lines one-click).
+
+## 10. Australian GST / BAS notes (confirm with SL — ATO-sourced)
+
+- **TFN $144,558 is grant income → GST-free** (a grant isn't a taxable supply unless something is supplied in return; meeting eligibility criteria ≠ a supply). So the $13,141.64 input credit claimed on the two bills is **not allowable**.
+- ⚠️ **The $13,142 over-claim likely needs a REVISED BAS, not a later-BAS correction.** The ATO "correct on a later BAS" path for a debit error is only allowed if the net debit errors are **≤ $12,500** (turnover <$20M). $13,142 **exceeds** that limit → revise the original quarter's activity statement. *Also:* no corrections once the ATO notifies an audit on that period; 4-year limits apply. **SL to confirm whether Q2 BAS was lodged with this credit and choose the correction path.**
+- **Donations** (genuine gift, no supply back) = no GST either way. The Sept TFN bills ($6,000+$500) correctly used GST-free — the Nov/Dec ones never should have carried INPUT GST.
+
+## 11. Pty cutover prep (start the new Xero clean)
+
+- A Pty = a **new legal entity → a brand-new Xero org** (new ABN; don't rename the sole-trader org). Start it at the incorporation date; mid-year cutover = a stub period for the sole trader — coordinate the changeover date with SL so BAS periods don't overlap/gap.
+- **Bank rules do NOT transfer between Xero orgs** (no export/import) — they must be rebuilt. **So `recon-pack/07` is reusable: build these rules in the Pty org from day one.**
+- Tracking categories (projects) must be recreated; the Dext/Hubdoc connection must be disconnected and reconnected to the new org.
+- **Decide the target operating model now:** one receipt tool, bank rules seeded day one, Xero as the single source of truth, automations actually running.
+
+## 12. Consolidated questions for Standard Ledger
+
+1. **Ignition + Xero access** — sign the BAS proposal, get access on this org, coordinate the Pty ATO Client-to-Agent linking with Nic. *(gates everything)*
+2. **TFN reversal + BAS:** confirm the two bills are grant income (void + recognise GST-free); **which account did the $89,361 + $55,197 land in?**; **was Q2 BAS lodged with the $13,142 credit — and given it exceeds $12,500, do we revise the original BAS?**
+3. **Telford Smith** — one $19,800 job or two stages? (drives a $19.8K vs ~$59.4K correction).
+4. **Founder $21,159** — equity drawings now; confirm the Pty structure (salary + Director's Loan) and the R&D basis.
+5. **MOL Nyrt $30,691** (USD vendor?) + **A Curious Tractor $6,226 self-bill** — recode or void?
+6. **Centrecorp production-plant deal** — still live, at what figure?
+7. **Bank rules** — do you maintain them, or shall we set up `recon-pack/07`? **Plan tier** — are we on Grow+ (for JAX auto-recon)?
+8. **Everyday bank statement** — pull/confirm Oct–Mar so the bank side reconciles, not just the card.
+9. **Dext vs Hubdoc** — keep paying for Dext or consolidate to free Hubdoc for the Pty?
+10. **Homegrown `bank_statement_lines.status`** disagrees with Xero — confirm we treat Xero `is_reconciled` as truth and retire it.
+
+---
+
+*Nothing in this pack was written to Xero, GHL, Notion, or any external system. Reconciliation can only be **finished** in Xero (the final match/approve/void click) by SL or a human — the API/scripts only **prepare** (propose matches, recode, flag dupes). The single biggest unblocker remains signing the Ignition BAS proposal + granting SL Xero access (item 0). The single biggest correction is The Funding Network reversal (item 1) — it moves the P&L by ~$289K and the BAS by $13,142 (which, exceeding the $12,500 limit, likely means a revised Q2 BAS).*
