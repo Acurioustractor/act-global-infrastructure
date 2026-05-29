@@ -1,7 +1,7 @@
 # Finance Cockpit Consolidation — plan
 
 **Date:** 2026-05-29 · **Goal:** ONE trustworthy finance surface to *always see current state*, **re-tag**, **find missing**, **see for certain when receipts are in Xero**, and **copilot into Xero to 100%** — on continuously-aligned data.
-**Status:** Foundation DONE; UI consolidation pending (phased below).
+**Status:** Foundation DONE. **P1–P4 SHIPPED 2026-05-29** (commits `c593390` P1 · `e2dc9f7` P2 · `ef9206f` P3 · `d85984b` P4, branch `wip/xero-recon-recode-2026-05-29`, **not pushed**). tsc + eslint clean; endpoints verified vs live DB; routes 200. Pending: authenticated browser pass on the new client UI (TrustMeters strip + copilot inline re-tag) — shared browser was in use during build.
 
 ## Why this plan
 The command-center finance UI is **over-built and fragmented**: ~23 live `/finance/*` routes incl. **four overlapping cockpits** (`/finance`, `/finance/command`, `/finance/workbench`, `/finance/overview`). Every capability you want already exists — but scattered, and (until today) on stale data. So this is **consolidation + trust**, not new sprawl.
@@ -30,10 +30,10 @@ Per-project P&L drill-down + the cleanup/exception queue. Keep as-is.
 - **`<ReceiptInXero>`** — ✓/✗/"pipeline-only" badge from `xero_transactions.has_attachments` / `xero_invoices.has_attachments`. Used everywhere a txn/bill row appears. *This is "see for certain when receipts are connected in Xero."*
 
 ## Build phases (phase-at-a-time; each ships independently)
-- **P1 — Trust primitives:** `FreshnessBadge` + `ReceiptInXero` + the `/api/finance/sync-freshness` route. Drop into existing headers/tables. (Highest leverage; small.)
-- **P2 — STATE fold:** elevate `/finance/overview`; embed money-alignment + command summaries; add the trust meters. Redirect `/finance/command`, `/finance/money-alignment` → overview.
-- **P3 — OPERATE fold:** make `xero-page-copilot` the work surface; add inline re-tag + missing-receipt; fold tagger/triage/reconciliation entries into tabs.
-- **P4 — Nav cleanup:** collapse `nav-data.ts` finance group to State · Operate · Projects · Audit · Funders · Reports; archive the folded routes (move to `_archived/`, keep redirects).
+- **P1 — Trust primitives:** ✅ `FreshnessBadge` (in finance layout header → every surface) + `ReceiptInXero` + `/api/finance/sync-freshness` (file lastSync → max(synced_at) fallback; green<6h/amber/red>12h). All 4 verified vs live DB.
+- **P2 — STATE fold:** ✅ `/api/finance/trust-meters` (recon 65.6% · receipt 77.6% · tagging 96% · GE-429 catch-all $285,769/95 bills) + `<TrustMeters>` "Trust & Coverage" strip on overview (pile-mix folded up from command's API). `/finance/command` + `/finance/money-alignment` pages → redirect stubs to overview (their API routes stay live). *Decision: redirect both literally (Ben).*
+- **P3 — OPERATE fold:** ✅ copilot made read-write (Ben's call, overriding its no-write design): `<RetagSelect>` inline re-tag (bills→transactions PATCH, bank lines→reconciliation/inbox tag; both manual-source) + `<ReceiptInXero>` ✓/✗ on bill candidates + find-missing-receipt CTA + OPERATE tab-bar. Bank lines are `bank_statement_lines` (not xero_transactions).
+- **P4 — Nav cleanup:** ✅ finance sidebar collapsed to State · Operate · Drill (projects/audit/transactions/vendors/funders) · Reports. Operate work-tools moved to the copilot tab-bar; kept LIVE (no `_archived/` move — naive archiving 404s live pages per prior reviews). command/money-alignment stay redirect stubs.
 
 ## Guardrails
 - Verify against fresh Supabase (sync now current). `npx tsc --noEmit` per file. Commit per phase.
