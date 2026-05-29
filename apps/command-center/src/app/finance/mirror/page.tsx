@@ -67,6 +67,7 @@ export default function XeroMirrorPage() {
   const [typeFilter, setTypeFilter] = useState<'all' | 'bill' | 'spend'>('all')
   const [accountFilter, setAccountFilter] = useState<string>('all')
   const [receiptFilter, setReceiptFilter] = useState<'all' | 'has' | 'missing' | 'na'>('all')
+  const [periodFilter, setPeriodFilter] = useState<'all' | '7' | '30' | '90'>('all')
 
   const { data, isLoading, isFetching, refetch } = useQuery<TxnResponse>({
     queryKey: ['finance', 'mirror', 'txns', accountScope],
@@ -98,10 +99,14 @@ export default function XeroMirrorPage() {
     if (receiptFilter === 'has') out = out.filter((r) => r.hasAttachments)
     else if (receiptFilter === 'missing') out = out.filter((r) => r.source === 'bill' && !r.hasAttachments)
     else if (receiptFilter === 'na') out = out.filter((r) => r.source !== 'bill' && !r.hasAttachments)
+    if (periodFilter !== 'all') {
+      const cutoff = new Date(Date.now() - Number(periodFilter) * 86400000).toISOString().slice(0, 10)
+      out = out.filter((r) => r.date >= cutoff)
+    }
     const q = search.trim().toLowerCase()
     if (q) out = out.filter((r) => r.contact.toLowerCase().includes(q) || r.description.toLowerCase().includes(q) || (r.projectCode || '').toLowerCase().includes(q))
     return out
-  }, [rows, railSel, activeFlag, search, typeFilter, accountFilter, receiptFilter])
+  }, [rows, railSel, activeFlag, search, typeFilter, accountFilter, receiptFilter, periodFilter])
 
   const sorted = useMemo(() => {
     const dir = sortDir === 'asc' ? 1 : -1
@@ -124,7 +129,7 @@ export default function XeroMirrorPage() {
   }, [filtered, sortKey, sortDir])
 
   const shown = sorted.slice(0, 500)
-  const anyColFilter = typeFilter !== 'all' || accountFilter !== 'all' || receiptFilter !== 'all' || search.trim() !== ''
+  const anyColFilter = typeFilter !== 'all' || accountFilter !== 'all' || receiptFilter !== 'all' || periodFilter !== 'all' || search.trim() !== ''
   const filteredTotals = useMemo(() => {
     let inAmt = 0, outAmt = 0
     for (const r of filtered) {
@@ -270,8 +275,14 @@ export default function XeroMirrorPage() {
           <option value="missing">Bill · no receipt</option>
           <option value="na">Bank · n/a</option>
         </select>
+        <select value={periodFilter} onChange={(e) => setPeriodFilter(e.target.value as 'all' | '7' | '30' | '90')} className={selStyle} aria-label="Period">
+          <option value="all">All time</option>
+          <option value="7">Last 7 days</option>
+          <option value="30">Last 30 days</option>
+          <option value="90">Last 90 days</option>
+        </select>
         {(anyColFilter || railSel !== 'all' || activeFlag) && (
-          <button type="button" onClick={() => { setTypeFilter('all'); setAccountFilter('all'); setReceiptFilter('all'); setSearch(''); setRailSel('all'); setActiveFlag(null) }} className="text-white/40 underline hover:text-white">clear all</button>
+          <button type="button" onClick={() => { setTypeFilter('all'); setAccountFilter('all'); setReceiptFilter('all'); setPeriodFilter('all'); setSearch(''); setRailSel('all'); setActiveFlag(null) }} className="text-white/40 underline hover:text-white">clear all</button>
         )}
       </div>
 
