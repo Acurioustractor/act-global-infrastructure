@@ -22,13 +22,25 @@ Full report + provenance: `thoughts/shared/financials/2026-05-29-goods-ap-recon-
 - Expense **≈ $614K** P&L (de-duped; Defy INV-1507 $16,500 + 1300 Washer $13,980 both kept in Goods). Cash-out basis ≈ $566K.
 - AP genuinely owed **≈ $0** — the $124,878 AUTHORISED is a Xero payment-matching gap (bills paid from ACT's own accounts, never applied). **No working-capital squeeze, no director loan** — all spend came from NAB Visa ACT + ACT Everyday, $0 from NM Personal.
 
-## 3. OPEN — bookkeeper Xero corrections (need Ben's authorisation; all Xero writes)
+## 3. Xero corrections — DONE (2026-05-29 PM, Ben-authorised) + AP deep-dive
 
-1. **Void** Carla Furnishers duplicate $11,180 (2025-11-16) — Xero `42960d4f-49e3-4f9a-a378-af8fde24704c` (no-attachment copy; keep `6a60f4fd-c99d-4bb2-9ad2-51f372958cbc`).
-2. **Retag + recode** 1300 Washer $13,980 (2025-12-15) — Xero `c3d5dd2a-98e9-4261-81aa-18e57ec86109`. CONFIRMED Goods (washing machines for the Goods project) but Xero line still tracks **"ACT-FM — The Farm"** + account **429**. Retag line ACT-FM→ACT-GD and recode off 429 so Xero matches the mirror and The Farm stops carrying $13,980.
-3. **Match (don't re-pay)** the ~35 remaining AUTHORISED ACT-GD bills (incl. Defy INV-1507 $16,500 — confirmed legit Goods bed+washer production) to their existing ACT-account payments to clear them. Full list with Xero IDs in the report.
+**Two writes applied + verified live** (codebase OAuth path; Xero MCP still broken). Scripts: `scripts/apply-goods-bookkeeper-corrections.mjs` (dry-run default, `--apply`, revert log) + `scripts/verify-goods-bookkeeper-targets.mjs` (read-only probe). Revert log: `scripts/output/goods-bookkeeper-revert-1780030961185.json`.
 
-> Next session: offer to draft these as a ready-to-send bookkeeper instruction (vendor · amount · Xero ID · action). The copilot at `/finance/xero-page-copilot` is now the surface to do the inline re-tags from.
+1. ✅ **VOIDED** Carla duplicate $11,180 — Xero `42960d4f…` (was AUTHORISED/$0-paid/no-attachment Dext junk; keeper `6a60f4fd…` untouched). Confirmed VOIDED via live GET.
+2. ✅ **RECODED** 1300 Washer $13,980 — Xero `c3d5dd2a…`: line acct **429→446**, Project Tracking **ACT-FM→ACT-GD** (Business Divisions + INPUT tax preserved). The Farm no longer carries it. Confirmed via live GET.
+3. **Match (don't re-pay) — NOT done via API by design** (double-pay risk; `match-bank-txns-to-bills.mjs` is dry-run-only on purpose). Instead produced a 3-bucket **Find & Match action sheet**: `thoughts/shared/financials/2026-05-29-goods-find-and-match-worklist.md` (generator `scripts/generate-goods-match-worklist.mjs`).
+
+**AP deep-dive (resolves the recon's "AP owed ≈ $0"):**
+- **Bucket A (11 bills · ~$65K)** — clean Xero UI Find & Match (bank line exists, unreconciled). Bookkeeper job.
+- **Bucket B (~18 bills · ~$16K)** — pre-Nov-2025, paid via NM Personal/old accounts; no ACT-account line to match. Leave/void.
+- **Bucket C** — Defy **covered** (25 PAID + matching SPEND; 3 small unmatched sit against ample unassigned Defy cash). Real exposure is tiny: see open items.
+- **Method note:** "bills − SPEND balance" OVERSTATES AP (most bill payments live outside `xero_transactions` — Kirmos has $13,500 PAID with only $2,737.50 of bank SPEND). Use bill-level `amount_due`/`status`, not the subtraction.
+
+**Open items (next session / bookkeeper / Ben):**
+- ⚠️ **Joseph Kirmos INV-004 $4,500 (Feb 16) — possibly genuinely owed** (AUTHORISED while Mar/May INV-005/006/007 all PAID; no tracking, no payment). **Ben to check with Joey** whether he was paid off-table. If yes → match/mark paid; if no → real payable.
+- **Two more duplicates flagged, HELD (not voided — Ben's call deferred):** Kirmos (no#) $4,500 (2026-03-29, dup of PAID INV-006) + Clearview (no#) $768.83 (2026-01-05, dup of PAID SO-297222). Same Carla signature. Re-run `apply-goods-bookkeeper-corrections.mjs` pattern if confirmed.
+- **Clearview INV-301697 $768.83 (Jan 22)** — possible genuine 2nd order or 3rd dup; bookkeeper to confirm.
+- Bookkeeper to clear the 11 Bucket-A Find & Match in Xero UI.
 
 ## 4. ⚠️ Cross-session: the `excludeRadar` refactor was reverted (not by this session)
 

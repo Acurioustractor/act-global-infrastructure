@@ -1,0 +1,34 @@
+[
+  {
+    "op": "void",
+    "invoiceID": "42960d4f-49e3-4f9a-a378-af8fde24704c",
+    "before": {
+      "Status": "AUTHORISED"
+    }
+  },
+  {
+    "op": "recode",
+    "invoiceID": "c3d5dd2a-98e9-4261-81aa-18e57ec86109",
+    "before": [
+      {
+        "LineItemID": "9f20d687-1796-42e7-9198-394d985edab6",
+        "AccountCode": "429",
+        "Description": "1300 Washer — Operations — ACT-FM",
+        "Tracking": [
+          {
+            "Name": "Business Divisions",
+            "Option": "A Curious Tractor",
+            "TrackingCategoryID": "91448ff3-eb13-437a-9d97-4d2e52c86ca4",
+            "TrackingOptionID": "1973a257-0d96-42c3-bca0-99623cb52923"
+          },
+          {
+            "Name": "Project Tracking",
+            "Option": "ACT-FM — The Farm",
+            "TrackingCategoryID": "1a1ad7c5-249a-4b1f-842d-06ba2a63a0fe",
+            "TrackingOptionID": "5dbff1f4-8257-4d2f-adbe-553f91f4afb8"
+          }
+        ]
+      }
+    ]
+  }
+]
