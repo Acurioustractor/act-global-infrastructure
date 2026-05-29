@@ -404,6 +404,17 @@ const cronScripts = [
     cron_restart: '20 7 * * *', // Daily 7:20am AEST
   },
   {
+    // #4 close-the-books assistant — monthly close pack. No period arg → last
+    // completed calendar month; --save writes thoughts/shared/reports/close-pack-*.md
+    // (+ .provenance.md). Deterministic, NO external send. Inert until next `./dev cron`.
+    // See thoughts/shared/plans/2026-05-29-close-the-books-assistant.md.
+    name: 'close-the-books-monthly',
+    script: 'scripts/close-the-books.mjs',
+    args: '--save',
+    cron_restart: '30 6 1 * *', // Monthly, 1st @ 6:30am AEST — save last month's close pack
+    autorestart: false,
+  },
+  {
     name: 'idea-board-reminders',
     script: 'scripts/idea-board-reminders.mjs',
     cron_restart: '0 8 * * *', // Daily 8am AEST — per-owner DM with stale ideas + inline buttons (idea 90d, scope 30d, fundraise 14d). Cap 5 per DM.

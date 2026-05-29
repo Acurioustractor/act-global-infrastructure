@@ -32,7 +32,10 @@ const args = process.argv.slice(2)
 const JSON_OUT = args.includes('--json')
 const SAVE = args.includes('--save')
 const NARRATE = args.includes('--narrate')
-const periodArg = args.find((a) => !a.startsWith('--'))
+const explicitPeriod = args.find((a) => !a.startsWith('--'))
+// No period given (e.g. the monthly cron) → default to the last completed calendar month.
+function lastCompletedMonth() { const d = new Date(); d.setUTCDate(1); d.setUTCMonth(d.getUTCMonth() - 1); return `${d.getUTCFullYear()}-${String(d.getUTCMonth() + 1).padStart(2, '0')}` }
+const periodArg = explicitPeriod || lastCompletedMonth()
 
 // Load env WITHOUT polluting stdout (the shared loader + dotenv v17 both print to
 // stdout, which corrupts --json piping). Silence dotenv + route the loader's
@@ -128,6 +131,7 @@ function detectorAnomalies() {
 
 async function main() {
   const P = parsePeriod(periodArg)
+  if (!explicitPeriod) process.stderr.write(`(no period given — defaulting to last completed month: ${P.label})\n`)
   const inWin = (d) => d >= P.start && d <= P.end
 
   const [bills, sales, txns] = await Promise.all([
