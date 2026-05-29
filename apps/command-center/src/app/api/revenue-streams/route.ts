@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { supabase } from '@/lib/supabase'
+import { isRadarPipeline } from '@/lib/finance/pipeline-rollup'
 
 /**
  * Revenue Streams API — pulls REAL data from across the ecosystem:
@@ -53,10 +54,10 @@ export async function GET() {
         .select('application_name, outcome_amount, status, project_code')
         .eq('status', 'successful'),
 
-      // GHL pipeline (real opportunities)
+      // GHL pipeline (real opportunities) — pipeline_name lets us drop grant-radar from the aggregate
       supabase
         .from('ghl_opportunities')
-        .select('name, monetary_value, status, stage_name'),
+        .select('name, monetary_value, status, stage_name, pipeline_name'),
 
       // donations table removed from DB — returns empty until a backend exists
       Promise.resolve({ data: [] as any[] }),
@@ -211,6 +212,7 @@ export async function GET() {
           expected_date: new Date().toISOString(),
           notes: o.stage_name || '',
           created_at: new Date().toISOString(),
+          pipelineName: o.pipeline_name as string | null | undefined,
         })),
       // GHL won opportunities
       ...ghlOpps
@@ -226,6 +228,7 @@ export async function GET() {
           expected_date: new Date().toISOString(),
           notes: 'Won',
           created_at: new Date().toISOString(),
+          pipelineName: o.pipeline_name as string | null | undefined,
         })),
     ]
 
@@ -238,8 +241,13 @@ export async function GET() {
     const onTarget = enrichedStreams.filter(
       s => s.projected_revenue >= (s.target_monthly || 0) && (s.target_monthly || 0) > 0
     ).length
+    // Exclude grant-radar (GHL "Grants" pipeline) from the weighted pipeline value —
+    // it's a discovery dump, not worked deals. The pipeline[] list above is unchanged.
     const pipelineValue = pipeline.reduce(
-      (sum, p) => sum + ((p.amount || 0) * (p.probability || 0)), 0
+      (sum, p) => isRadarPipeline((p as { pipelineName?: string | null }).pipelineName)
+        ? sum
+        : sum + ((p.amount || 0) * (p.probability || 0)),
+      0
     )
 
     // Financial health context from snapshots

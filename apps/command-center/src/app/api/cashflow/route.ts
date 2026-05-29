@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { supabase } from '@/lib/supabase'
+import { excludeRadar } from '@/lib/finance/pipeline-rollup'
 
 interface FinancialSnapshot {
   month: string
@@ -185,7 +186,7 @@ async function fetchPipelineIncome(): Promise<number> {
   // GHL opportunities with probability weighting by stage
   const { data: opportunities, error } = await supabase
     .from('ghl_opportunities')
-    .select('monetary_value, stage_name, status')
+    .select('monetary_value, stage_name, status, pipeline_name')
     .eq('status', 'open')
     .gt('monetary_value', 0)
 
@@ -193,6 +194,10 @@ async function fetchPipelineIncome(): Promise<number> {
     console.error('Error fetching pipeline:', error)
     return 0
   }
+
+  // Exclude grant-radar (GHL "Grants" pipeline) from the cash-forecast pipeline income —
+  // it's a discovery dump, not worked deals that will convert to cash.
+  const workedOpps = excludeRadar(opportunities || [])
 
   // Weight by stage — later stages are more likely to convert
   const stageWeights: Record<string, number> = {
@@ -205,7 +210,7 @@ async function fetchPipelineIncome(): Promise<number> {
   }
 
   let weightedTotal = 0
-  ;(opportunities || []).forEach((opp: any) => {
+  ;(workedOpps || []).forEach((opp: any) => {
     const stageLower = (opp.stage_name || '').toLowerCase()
     // Find best matching weight
     let weight = 0.3 // default for unknown stages

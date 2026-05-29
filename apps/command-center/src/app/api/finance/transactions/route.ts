@@ -34,6 +34,23 @@ function firstNote(li: any[] | null | undefined): string {
   return ''
 }
 
+// PostgREST caps each response at 1000 rows even with .range(0, 4999) — so loop
+// 1000-row pages until exhausted (or the cap). `build` must return a FRESH query
+// each call (filters applied, no range) so pages don't collide.
+async function fetchAllPaged<T>(build: () => any, cap: number): Promise<T[]> {
+  const PAGE = 1000
+  let all: T[] = []
+  for (let from = 0; from < cap; from += PAGE) {
+    const to = Math.min(from + PAGE - 1, cap - 1)
+    const { data, error } = await build().range(from, to)
+    if (error) throw new Error(error.message)
+    const batch = (data || []) as T[]
+    all = all.concat(batch)
+    if (batch.length < PAGE) break
+  }
+  return all
+}
+
 export async function GET(request: NextRequest) {
   try {
     const sp = new URL(request.url).searchParams
@@ -46,37 +63,40 @@ export async function GET(request: NextRequest) {
     // Bills (xero_invoices) have no bank_account until paid, so this filter only applies to spends.
     const accountsParam = (sp.get('accounts') || 'act-only').toLowerCase()
 
-    // Bills
-    let billsQ = supabase
-      .from('xero_invoices')
-      .select('id, xero_id, date, contact_name, total, status, project_code, project_code_source, line_items')
-      .eq('type', 'ACCPAY')
-      .in('status', ['AUTHORISED', 'PAID'])
-      .gte('date', since)
-      .order('date', { ascending: false })
-      .range(0, limit - 1)
-    if (until) billsQ = billsQ.lte('date', until)
-    if (project === 'UNTAGGED') billsQ = billsQ.is('project_code', null)
-    else if (project && project !== 'all') billsQ = billsQ.eq('project_code', project)
+    // Bills — fresh builder per page (paginated past PostgREST's 1000 cap)
+    const buildBills = () => {
+      let q = supabase
+        .from('xero_invoices')
+        .select('id, xero_id, date, contact_name, total, status, project_code, project_code_source, line_items, has_attachments')
+        .eq('type', 'ACCPAY')
+        .in('status', ['AUTHORISED', 'PAID'])
+        .gte('date', since)
+        .order('date', { ascending: false })
+      if (until) q = q.lte('date', until)
+      if (project === 'UNTAGGED') q = q.is('project_code', null)
+      else if (project && project !== 'all') q = q.eq('project_code', project)
+      return q
+    }
 
-    // Bank txns
-    let spendsQ = supabase
-      .from('xero_transactions')
-      .select('id, xero_transaction_id, date, contact_name, total, status, type, project_code, project_code_source, line_items, has_attachments, bank_account')
-      .in('type', ['SPEND', 'SPEND-OVERPAYMENT', 'RECEIVE'])
-      .gte('date', since)
-      .order('date', { ascending: false })
-      .range(0, limit - 1)
-    if (until) spendsQ = spendsQ.lte('date', until)
-    if (project === 'UNTAGGED') spendsQ = spendsQ.is('project_code', null)
-    else if (project && project !== 'all') spendsQ = spendsQ.eq('project_code', project)
-    // Bank-account filter
-    if (accountsParam === 'act-only') spendsQ = spendsQ.in('bank_account', ACT_ACCOUNTS)
-    else if (accountsParam !== 'all') spendsQ = spendsQ.eq('bank_account', accountsParam)
+    // Bank txns — fresh builder per page
+    const buildSpends = () => {
+      let q = supabase
+        .from('xero_transactions')
+        .select('id, xero_transaction_id, date, contact_name, total, status, type, project_code, project_code_source, line_items, has_attachments, bank_account')
+        .in('type', ['SPEND', 'SPEND-OVERPAYMENT', 'RECEIVE'])
+        .gte('date', since)
+        .order('date', { ascending: false })
+      if (until) q = q.lte('date', until)
+      if (project === 'UNTAGGED') q = q.is('project_code', null)
+      else if (project && project !== 'all') q = q.eq('project_code', project)
+      if (accountsParam === 'act-only') q = q.in('bank_account', ACT_ACCOUNTS)
+      else if (accountsParam !== 'all') q = q.eq('bank_account', accountsParam)
+      return q
+    }
 
-    const [billsRes, spendsRes, projRes, projectsMetaRes] = await Promise.all([
-      billsQ,
-      spendsQ,
+    const [billsData, spendsData, projRes, projectsMetaRes] = await Promise.all([
+      fetchAllPaged<any>(buildBills, limit),
+      fetchAllPaged<any>(buildSpends, limit),
       // Distinct project codes for filter dropdown
       supabase.rpc('exec_sql', {
         query: `
@@ -95,7 +115,7 @@ export async function GET(request: NextRequest) {
     ])
 
     const rows: Row[] = []
-    for (const b of billsRes.data || []) {
+    for (const b of billsData) {
       rows.push({
         id: b.id as string,
         xeroId: b.xero_id as string,
@@ -107,13 +127,13 @@ export async function GET(request: NextRequest) {
         projectCode: (b.project_code as string) || null,
         projectSource: (b.project_code_source as string) || null,
         description: firstDescr(b.line_items as any[]),
-        hasAttachments: false,
+        hasAttachments: !!b.has_attachments,
         xeroLink: `https://go.xero.com/AccountsPayable/View.aspx?InvoiceID=${b.xero_id}`,
         note: firstNote(b.line_items as any[]),
         bankAccount: null, // bills don't have a bank account until paid
       })
     }
-    for (const s of spendsRes.data || []) {
+    for (const s of spendsData) {
       const src: Row['source'] = s.type === 'SPEND' ? 'spend' : s.type === 'SPEND-OVERPAYMENT' ? 'spend-overpay' : 'receive'
       rows.push({
         id: s.id as string,

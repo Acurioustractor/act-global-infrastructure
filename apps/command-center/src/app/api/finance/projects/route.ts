@@ -68,7 +68,7 @@ export async function GET() {
     // Also get R&D spend, invoice summaries, and pipeline data
     const [{ data: rdSpendData }, { data: invoiceSummaryData }, { data: pipelineData }] = await Promise.all([
       supabase.rpc('exec_sql', {
-        sql: `
+        query: `
           SELECT
             t.project_code,
             SUM(ABS(t.total)) as rd_spend
@@ -82,25 +82,27 @@ export async function GET() {
         `
       }),
 
-      // Invoice summaries per project from invoice_project_map
+      // Invoice summaries per project — read project tags straight off xero_invoices
+      // (the invoice_project_map join silently dropped revenue: e.g. Goods' $649K of
+      // PAID ACCREC was tagged on xero_invoices.project_code but never mapped, so
+      // received showed $0. This matches how the rest of the app tags invoices.)
       supabase.rpc('exec_sql', {
-        sql: `
+        query: `
           SELECT
-            m.project_code,
+            i.project_code,
             SUM(CASE WHEN i.status = 'PAID' THEN i.total ELSE 0 END) as received,
             SUM(CASE WHEN i.status IN ('AUTHORISED', 'SUBMITTED') THEN i.total ELSE 0 END) as pending,
             SUM(CASE WHEN i.status = 'DRAFT' THEN i.total ELSE 0 END) as draft,
             COUNT(*) as invoice_count
-          FROM invoice_project_map m
-          JOIN xero_invoices i ON i.id = m.invoice_id
-          WHERE i.type = 'ACCREC'
-          GROUP BY m.project_code
+          FROM xero_invoices i
+          WHERE i.type = 'ACCREC' AND i.project_code IS NOT NULL
+          GROUP BY i.project_code
         `
       }),
 
       // Grant pipeline weighted totals per project
       supabase.rpc('exec_sql', {
-        sql: `
+        query: `
           SELECT
             p.project_code,
             SUM(COALESCE(p.amount_max, p.amount_min, 0) * COALESCE((p.metadata->>'probability')::numeric, 0.1)) as weighted_pipeline,

@@ -37,6 +37,7 @@ import {
   MessageSquare,
 } from 'lucide-react'
 import { cn, formatRelativeDate } from '@/lib/utils'
+import { isRadarPipeline } from '@/lib/finance/pipeline-rollup'
 import { AlmaImpact } from '@/components/alma-impact'
 import {
   getNotionProjectsRaw,
@@ -270,7 +271,11 @@ export default function ProjectPage({ params, searchParams }: PageParams) {
     opp.name?.toLowerCase().includes(projectName.toLowerCase().split(' ')[0])
   ) || []
 
-  const totalOpportunityValue = opportunities.reduce((sum, opp) => sum + (opp.monetary_value || 0), 0)
+  // Exclude grant-radar (GHL "Grants" pipeline) from the headline pipeline value —
+  // the opportunities list below still shows every deal.
+  const totalOpportunityValue = opportunities
+    .filter(opp => !isRadarPipeline(opp.pipeline_name))
+    .reduce((sum, opp) => sum + (opp.monetary_value || 0), 0)
 
   return (
     <div className="min-h-screen p-4 md:p-8">

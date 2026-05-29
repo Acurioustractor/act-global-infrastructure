@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { supabase } from '@/lib/supabase'
+import { excludeRadar } from '@/lib/finance/pipeline-rollup'
 
 // Core ecosystem projects to highlight
 const CORE_PROJECTS = ['ACT-GD', 'ACT-HV', 'ACT-JH', 'ACT-CA', 'ACT-EL', 'ACT-FM']
@@ -27,7 +28,7 @@ export async function GET() {
       // GHL pipeline by project
       supabase
         .from('ghl_opportunities')
-        .select('name, monetary_value, project_code, stage_name, ghl_contact_id, ghl_updated_at')
+        .select('name, monetary_value, project_code, stage_name, ghl_contact_id, ghl_updated_at, pipeline_name')
         .eq('status', 'open')
         .order('monetary_value', { ascending: false }),
 
@@ -67,7 +68,7 @@ export async function GET() {
 
     // Aggregate totals
     const totalReceivable = (receivablesRes.data || []).reduce((sum, inv) => sum + (parseFloat(inv.amount_due) || 0), 0)
-    const totalPipeline = (pipelineRes.data || []).reduce((sum, o) => sum + (parseFloat(o.monetary_value) || 0), 0)
+    const totalPipeline = excludeRadar(pipelineRes.data || []).reduce((sum, o) => sum + (parseFloat(o.monetary_value) || 0), 0)
 
     // Overdue receivables
     const overdueReceivables = (overdueInvoicesRes.data || []).map(inv => ({
