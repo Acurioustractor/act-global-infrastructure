@@ -1,0 +1,12 @@
+[
+  {
+    "invoiceID": "74d83251-ef5e-4720-88e1-a418057a8ada",
+    "contact": "The Sand Yard",
+    "before": [
+      {
+        "LineItemID": "23430eb1-8256-4902-8dff-587873bc91b1",
+        "AccountCode": "429"
+      }
+    ]
+  }
+]

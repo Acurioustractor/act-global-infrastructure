@@ -1,5 +1,5 @@
 {
-  "exported_at": "2026-04-23T10:13:12.113Z",
+  "exported_at": "2026-05-28T20:21:03.554Z",
   "source_tenant": {
     "TenantID": "786af1ed-e3ce-42fc-9ea9-ddf3447d79d0",
     "OrganisationID": "786af1ed-e3ce-42fc-9ea9-ddf3447d79d0",
@@ -16,7 +16,7 @@
     "accounts_total": 118,
     "accounts_active": 114,
     "tracking_categories": 2,
-    "tracking_options_total": 51,
+    "tracking_options_total": 38,
     "tax_rates_active": 11
   },
   "accounts": [
@@ -1768,7 +1768,7 @@
           "TrackingOptionID": "99c62f14-036a-4e7e-907f-1c150c744091"
         },
         {
-          "Name": "Rental - 47 Scott Rd -",
+          "Name": "Rental - 47 Scott Rd",
           "Status": "ACTIVE",
           "TrackingOptionID": "89a86687-3aca-4987-90df-6725a51cba01"
         },
@@ -1798,11 +1798,6 @@
           "Name": "ACT-BG — BG Fit",
           "Status": "ACTIVE",
           "TrackingOptionID": "e5104c52-5756-4eb8-ba6c-87e4ce6f3c42"
-        },
-        {
-          "Name": "ACT-BM — Bimberi",
-          "Status": "ACTIVE",
-          "TrackingOptionID": "48815a3e-9ae6-424d-8621-569976043782"
         },
         {
           "Name": "ACT-BR — ACT Bali Retreat",
@@ -1855,16 +1850,6 @@
           "TrackingOptionID": "fcad4681-a2d0-4bac-9819-bd4b333bab47"
         },
         {
-          "Name": "ACT-ER — PICC Elders Room",
-          "Status": "ACTIVE",
-          "TrackingOptionID": "71f8147c-010b-4a35-b946-af7aa7e6b9a0"
-        },
-        {
-          "Name": "ACT-FA — Festival Activations",
-          "Status": "ACTIVE",
-          "TrackingOptionID": "104382cc-7584-41b4-afe7-34c36c6c64ba"
-        },
-        {
           "Name": "ACT-FG — Feel Good Project",
           "Status": "ACTIVE",
           "TrackingOptionID": "13be4b5c-ce90-49e4-b4fd-939567834ad8"
@@ -1873,16 +1858,6 @@
           "Name": "ACT-FM — The Farm",
           "Status": "ACTIVE",
           "TrackingOptionID": "5dbff1f4-8257-4d2f-adbe-553f91f4afb8"
-        },
-        {
-          "Name": "ACT-FO — Fishers Oysters",
-          "Status": "ACTIVE",
-          "TrackingOptionID": "d262daf8-4843-449b-b7ba-75c3807ff06f"
-        },
-        {
-          "Name": "ACT-FP — Fairfax PLACE Tech",
-          "Status": "ACTIVE",
-          "TrackingOptionID": "004aa4db-ba6b-4e19-8436-b2171d8825a6"
         },
         {
           "Name": "ACT-GD — Goods",
@@ -1900,11 +1875,6 @@
           "TrackingOptionID": "8f6a5bb3-8178-4965-8293-76498a2599c9"
         },
         {
-          "Name": "ACT-HS — Project Her-Self",
-          "Status": "ACTIVE",
-          "TrackingOptionID": "19285c96-8e02-4de2-9272-43d942406334"
-        },
-        {
           "Name": "ACT-HV — The Harvest Witta",
           "Status": "ACTIVE",
           "TrackingOptionID": "25a2184b-12ce-4c8d-8aa3-8e31c5df2f72"
@@ -1913,11 +1883,6 @@
           "Name": "ACT-IN — ACT Infrastructure",
           "Status": "ACTIVE",
           "TrackingOptionID": "8250fb3a-4fc4-40c5-822d-7cd7a9caffaa"
-        },
-        {
-          "Name": "ACT-IN — Infrastructure",
-          "Status": "ACTIVE",
-          "TrackingOptionID": "e932c96f-1e66-4269-a377-06f126678622"
         },
         {
           "Name": "ACT-JH — JusticeHub",
@@ -1938,16 +1903,6 @@
           "Name": "ACT-MD — ACT Monthly Dinners",
           "Status": "ACTIVE",
           "TrackingOptionID": "2ea512ef-180d-4ac4-bc76-02347fe9e0d4"
-        },
-        {
-          "Name": "ACT-MM — MMEIC Justice",
-          "Status": "ACTIVE",
-          "TrackingOptionID": "c4433149-bc96-44a1-8f09-786042265035"
-        },
-        {
-          "Name": "ACT-MR — MingaMinga Rangers",
-          "Status": "ACTIVE",
-          "TrackingOptionID": "a581a62a-3c5f-4af6-a2bb-21a75d91dc01"
         },
         {
           "Name": "ACT-MY — Mounty Yarns",
@@ -1980,34 +1935,14 @@
           "TrackingOptionID": "a20a6b33-c015-4201-b728-7a254435a378"
         },
         {
-          "Name": "ACT-SS — Storm Stories",
-          "Status": "ACTIVE",
-          "TrackingOptionID": "97ad7eeb-f151-4c0a-938b-dabf3436f1c6"
-        },
-        {
-          "Name": "ACT-TN — TOMNET",
-          "Status": "ACTIVE",
-          "TrackingOptionID": "b9420032-cd0e-44c3-a80e-b79008bfbac9"
-        },
-        {
           "Name": "ACT-TR — Treacher",
           "Status": "ACTIVE",
           "TrackingOptionID": "5679356c-32de-429b-888d-5b38b046652a"
         },
         {
-          "Name": "ACT-TW — Travelling Women's Car",
-          "Status": "ACTIVE",
-          "TrackingOptionID": "cc218b38-dd94-4700-bc31-f6d77dd210e1"
-        },
-        {
           "Name": "ACT-UA — Uncle Allan Palm Island Art",
           "Status": "ACTIVE",
           "TrackingOptionID": "11852673-3259-4bac-8c0d-59964bc82f39"
-        },
-        {
-          "Name": "ACT-WE — Westpac Summit 2025",
-          "Status": "ACTIVE",
-          "TrackingOptionID": "f9e79707-db2c-4e3f-98b4-a27ffc0baec5"
         },
         {
           "Name": "Unassigned",

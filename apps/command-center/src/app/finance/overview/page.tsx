@@ -31,6 +31,7 @@ import { formatMoney, formatMoneyCompact } from '@/lib/finance/format'
 import { FounderPayCard } from '@/components/finance/FounderPayCard'
 import { ReceiptAutomationCard } from '@/components/finance/ReceiptAutomationCard'
 import { SupportersGlanceCard } from '@/components/finance/SupportersGlanceCard'
+import { TrustMeters } from '@/components/finance/TrustMeters'
 
 // ── Types ────────────────────────────────────────────────────────────
 
@@ -516,6 +517,7 @@ export default function FinanceOverview() {
       {/* Section anchors — six things the CEO wants in one click */}
       <nav aria-label="Cockpit anchors" className="flex flex-wrap gap-2 -mt-2">
         <a href="#right-now" className="text-xs px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 text-white/60 hover:text-white transition-colors border border-white/10">Right Now</a>
+        <a href="#trust" className="text-xs px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 text-white/60 hover:text-white transition-colors border border-white/10">Trust</a>
         <a href="#founder-pay" className="text-xs px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 text-white/60 hover:text-white transition-colors border border-white/10">Founder Pay</a>
         <a href="#receipts" className="text-xs px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 text-white/60 hover:text-white transition-colors border border-white/10">Receipts</a>
         <a href="#whats-coming" className="text-xs px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 text-white/60 hover:text-white transition-colors border border-white/10">Pipeline</a>
@@ -527,6 +529,9 @@ export default function FinanceOverview() {
 
       {/* Supporters quick card — needs-reply + critical-outstanding glance */}
       <SupportersGlanceCard />
+
+      {/* ═══ TRUST & COVERAGE (P2 — folds in command + money-alignment) ═══ */}
+      <TrustMeters />
 
       {/* ═══════════════════════════════════════════ */}
       {/* SECTION 1: RIGHT NOW                        */}

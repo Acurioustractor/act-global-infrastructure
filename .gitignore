@@ -153,3 +153,6 @@ thoughts/shared/audits/*.log
 
 # Compliance-calendar: track only latest.json; dated daily history stays local
 thoughts/shared/data/compliance-calendar/[0-9]*.json
+
+# Xero incremental sync state (modifiedSince cursor)
+.xero-sync-state.json
