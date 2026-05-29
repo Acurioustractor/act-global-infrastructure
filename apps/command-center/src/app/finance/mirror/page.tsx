@@ -10,6 +10,7 @@ import { FreshnessBadge } from '@/components/finance/FreshnessBadge'
 import { TrustMeters } from '@/components/finance/TrustMeters'
 import { RetagSelect } from '@/components/finance/RetagSelect'
 import { ReceiptInXero } from '@/components/finance/ReceiptInXero'
+import { AttachReceiptButton } from '@/components/finance/AttachReceiptButton'
 import { MirrorProjectRail, type RailSelection } from '@/components/finance/MirrorProjectRail'
 import { MirrorFlags, type MirrorFlag } from '@/components/finance/MirrorFlags'
 
@@ -243,7 +244,13 @@ export default function XeroMirrorPage() {
                   </td>
                   <td className="px-3 py-2 text-[11px] text-white/40 whitespace-nowrap">{r.bankAccount ? (r.bankAccount.includes('Visa') ? 'NAB Visa' : r.bankAccount.includes('Everyday') ? 'ACT Everyday' : r.bankAccount) : r.source === 'bill' ? 'bill' : '—'}</td>
                   <td className="px-3 py-2"><RetagSelect kind={retagKind(r.source)} id={r.id} currentCode={r.projectCode} projects={projectOptions} /></td>
-                  <td className="px-3 py-2 text-center">{r.source === 'bill' ? <ReceiptInXero hasAttachment={r.hasAttachments} /> : r.hasAttachments ? <ReceiptInXero hasAttachment /> : <span className="text-white/20" title="Bank spend — receipt n/a">—</span>}</td>
+                  <td className="px-3 py-2 text-center">
+                    {r.source === 'bill'
+                      ? (r.hasAttachments
+                          ? <ReceiptInXero hasAttachment />
+                          : <AttachReceiptButton id={r.id} source={r.source} onAttached={() => qc.invalidateQueries({ queryKey: ['finance', 'mirror', 'txns'] })} />)
+                      : (r.hasAttachments ? <ReceiptInXero hasAttachment /> : <span className="text-white/20" title="Bank spend — receipt n/a">—</span>)}
+                  </td>
                   <td className="px-3 py-2"><a href={r.xeroLink} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-[11px] text-cyan-300/70 hover:text-cyan-300"><ExternalLink className="h-3 w-3" /></a></td>
                 </tr>
               ))}
