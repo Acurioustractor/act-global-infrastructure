@@ -72,14 +72,16 @@ export default function XeroMirrorPage() {
   )
 
   const untaggedCount = useMemo(() => rows.filter((r) => !r.projectCode).length, [rows])
-  const missingReceiptCount = useMemo(() => rows.filter((r) => isExpense(r.source) && !r.hasAttachments).length, [rows])
+  // Bills are the receipt-bearing docs (Dext attachments); bank spends rarely
+  // carry an individual receipt, so flagging them as "missing" is just noise.
+  const missingReceiptCount = useMemo(() => rows.filter((r) => r.source === 'bill' && !r.hasAttachments).length, [rows])
 
   const filtered = useMemo(() => {
     let out = rows
     if (railSel === 'UNTAGGED') out = out.filter((r) => !r.projectCode)
     else if (railSel !== 'all') out = out.filter((r) => r.projectCode === railSel)
     if (activeFlag === 'untagged') out = out.filter((r) => !r.projectCode)
-    else if (activeFlag === 'missing-receipt') out = out.filter((r) => isExpense(r.source) && !r.hasAttachments)
+    else if (activeFlag === 'missing-receipt') out = out.filter((r) => r.source === 'bill' && !r.hasAttachments)
     const q = search.trim().toLowerCase()
     if (q) out = out.filter((r) => r.contact.toLowerCase().includes(q) || r.description.toLowerCase().includes(q) || (r.projectCode || '').toLowerCase().includes(q))
     return out
@@ -241,7 +243,7 @@ export default function XeroMirrorPage() {
                   </td>
                   <td className="px-3 py-2 text-[11px] text-white/40 whitespace-nowrap">{r.bankAccount ? (r.bankAccount.includes('Visa') ? 'NAB Visa' : r.bankAccount.includes('Everyday') ? 'ACT Everyday' : r.bankAccount) : r.source === 'bill' ? 'bill' : '—'}</td>
                   <td className="px-3 py-2"><RetagSelect kind={retagKind(r.source)} id={r.id} currentCode={r.projectCode} projects={projectOptions} /></td>
-                  <td className="px-3 py-2 text-center">{isExpense(r.source) ? <ReceiptInXero hasAttachment={r.hasAttachments} /> : <span className="text-white/20">—</span>}</td>
+                  <td className="px-3 py-2 text-center">{r.source === 'bill' ? <ReceiptInXero hasAttachment={r.hasAttachments} /> : r.hasAttachments ? <ReceiptInXero hasAttachment /> : <span className="text-white/20" title="Bank spend — receipt n/a">—</span>}</td>
                   <td className="px-3 py-2"><a href={r.xeroLink} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-[11px] text-cyan-300/70 hover:text-cyan-300"><ExternalLink className="h-3 w-3" /></a></td>
                 </tr>
               ))}

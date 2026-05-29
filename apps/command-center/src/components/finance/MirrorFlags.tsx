@@ -6,9 +6,9 @@ import { cn } from '@/lib/utils'
 import { formatMoney } from '@/lib/finance/format'
 
 // Mirror surface — "flag issues". Three actionable signals:
-//   • Untagged       (rows with no project_code)        → filters the table
-//   • Missing receipt (spends with has_attachments=false)→ filters the table
-//   • Duplicates      (audit high-severity dup alerts)   → expands an inline list
+//   • Untagged        (rows with no project_code)         → filters the table
+//   • Bills · no receipt (bills with has_attachments=false)→ filters the table
+//   • Duplicates      (audit high-severity dup alerts)    → expands an inline list
 // Untagged/missing counts are computed by the parent from the live rows; the
 // duplicate list comes from /api/finance/audit (the same detector behind
 // /finance/audit, incl. the PAID+AUTHORISED Carla/Kirmos pattern).
@@ -88,7 +88,7 @@ export function MirrorFlags({
     <div>
       <div className="grid grid-cols-3 gap-2">
         <FlagCard icon={Tag} label="Untagged" count={untaggedCount} active={activeFlag === 'untagged'} onClick={() => toggle('untagged')} />
-        <FlagCard icon={Paperclip} label="Missing receipt" count={missingReceiptCount} active={activeFlag === 'missing-receipt'} onClick={() => toggle('missing-receipt')} />
+        <FlagCard icon={Paperclip} label="Bills · no receipt" count={missingReceiptCount} active={activeFlag === 'missing-receipt'} onClick={() => toggle('missing-receipt')} />
         <FlagCard icon={Copy} label="Duplicates" count={dups.length} active={activeFlag === 'duplicates'} onClick={() => toggle('duplicates')} />
       </div>
 
