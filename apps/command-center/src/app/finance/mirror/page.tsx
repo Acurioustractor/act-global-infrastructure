@@ -3,7 +3,7 @@
 import { useMemo, useState } from 'react'
 import Link from 'next/link'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
-import { ArrowLeft, ExternalLink, Search, Layers, RefreshCw, Loader2 } from 'lucide-react'
+import { ArrowLeft, ExternalLink, Search, Layers, RefreshCw, Loader2, ChevronUp, ChevronDown, ChevronsUpDown } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { formatMoney } from '@/lib/finance/format'
 import { FreshnessBadge } from '@/components/finance/FreshnessBadge'
@@ -59,6 +59,13 @@ export default function XeroMirrorPage() {
   const [selected, setSelected] = useState<Map<string, { id: string; source: 'bill' | 'spend' }>>(new Map())
   const [bulkCode, setBulkCode] = useState('')
   const [bulkState, setBulkState] = useState<'idle' | 'saving'>('idle')
+  // Sort + per-column filters
+  type SortKey = 'date' | 'vendor' | 'amount' | 'account' | 'project' | 'receipt'
+  const [sortKey, setSortKey] = useState<SortKey>('date')
+  const [sortDir, setSortDir] = useState<'asc' | 'desc'>('desc')
+  const [typeFilter, setTypeFilter] = useState<'all' | 'bill' | 'spend'>('all')
+  const [accountFilter, setAccountFilter] = useState<string>('all')
+  const [receiptFilter, setReceiptFilter] = useState<'all' | 'has' | 'missing' | 'na'>('all')
 
   const { data, isLoading, isFetching, refetch } = useQuery<TxnResponse>({
     queryKey: ['finance', 'mirror', 'txns', accountScope],
@@ -83,12 +90,39 @@ export default function XeroMirrorPage() {
     else if (railSel !== 'all') out = out.filter((r) => r.projectCode === railSel)
     if (activeFlag === 'untagged') out = out.filter((r) => !r.projectCode)
     else if (activeFlag === 'missing-receipt') out = out.filter((r) => r.source === 'bill' && !r.hasAttachments)
+    if (typeFilter === 'bill') out = out.filter((r) => r.source === 'bill')
+    else if (typeFilter === 'spend') out = out.filter((r) => r.source !== 'bill')
+    if (accountFilter !== 'all') out = out.filter((r) => r.bankAccount === accountFilter)
+    if (receiptFilter === 'has') out = out.filter((r) => r.hasAttachments)
+    else if (receiptFilter === 'missing') out = out.filter((r) => r.source === 'bill' && !r.hasAttachments)
+    else if (receiptFilter === 'na') out = out.filter((r) => r.source !== 'bill' && !r.hasAttachments)
     const q = search.trim().toLowerCase()
     if (q) out = out.filter((r) => r.contact.toLowerCase().includes(q) || r.description.toLowerCase().includes(q) || (r.projectCode || '').toLowerCase().includes(q))
     return out
-  }, [rows, railSel, activeFlag, search])
+  }, [rows, railSel, activeFlag, search, typeFilter, accountFilter, receiptFilter])
 
-  const shown = filtered.slice(0, 500)
+  const sorted = useMemo(() => {
+    const dir = sortDir === 'asc' ? 1 : -1
+    const receiptRank = (r: MirrorRow) => (r.hasAttachments ? 2 : r.source === 'bill' ? 0 : 1)
+    const arr = [...filtered]
+    arr.sort((a, b) => {
+      let c = 0
+      switch (sortKey) {
+        case 'date': c = a.date.localeCompare(b.date); break
+        case 'vendor': c = a.contact.localeCompare(b.contact); break
+        case 'amount': c = Math.abs(a.total) - Math.abs(b.total); break
+        case 'account': c = (a.bankAccount || '~').localeCompare(b.bankAccount || '~'); break
+        case 'project': c = (a.projectCode || '~').localeCompare(b.projectCode || '~'); break
+        case 'receipt': c = receiptRank(a) - receiptRank(b); break
+      }
+      if (c === 0) c = a.date.localeCompare(b.date) // stable tiebreak
+      return c * dir
+    })
+    return arr
+  }, [filtered, sortKey, sortDir])
+
+  const shown = sorted.slice(0, 500)
+  const anyColFilter = typeFilter !== 'all' || accountFilter !== 'all' || receiptFilter !== 'all' || search.trim() !== ''
   const filteredTotals = useMemo(() => {
     let inAmt = 0, outAmt = 0
     for (const r of filtered) {
@@ -137,6 +171,18 @@ export default function XeroMirrorPage() {
       setBulkState('idle')
     }
   }
+
+  function onSort(k: SortKey) {
+    if (sortKey === k) setSortDir((d) => (d === 'asc' ? 'desc' : 'asc'))
+    else { setSortKey(k); setSortDir(k === 'amount' || k === 'date' ? 'desc' : 'asc') }
+  }
+  const sortIcon = (k: SortKey) =>
+    sortKey !== k
+      ? <ChevronsUpDown className="inline h-3 w-3 opacity-30" />
+      : sortDir === 'asc'
+        ? <ChevronUp className="inline h-3 w-3" />
+        : <ChevronDown className="inline h-3 w-3" />
+  const selStyle = 'rounded-md border border-white/15 bg-black/40 px-2 py-1 text-xs text-white/80 outline-none focus:border-cyan-300/50'
 
   return (
     <div className="min-h-screen p-6 md:p-8 space-y-6">
@@ -197,6 +243,36 @@ export default function XeroMirrorPage() {
         </div>
       </div>
 
+      {/* Column filters */}
+      <div className="flex flex-wrap items-center gap-2 text-xs">
+        <span className="uppercase tracking-wide text-white/30">Filter</span>
+        <select value={typeFilter} onChange={(e) => setTypeFilter(e.target.value as 'all' | 'bill' | 'spend')} className={selStyle} aria-label="Type">
+          <option value="all">All types</option>
+          <option value="bill">Bills</option>
+          <option value="spend">Bank txns</option>
+        </select>
+        <select value={accountFilter} onChange={(e) => setAccountFilter(e.target.value)} className={selStyle} aria-label="Account">
+          <option value="all">All accounts</option>
+          {(data?.accounts ?? []).map((a) => (
+            <option key={a} value={a}>{a.includes('Visa') ? 'NAB Visa' : a.includes('Everyday') ? 'ACT Everyday' : a}</option>
+          ))}
+        </select>
+        <select value={railSel} onChange={(e) => { setRailSel(e.target.value as RailSelection); setActiveFlag(null) }} className={selStyle} aria-label="Project">
+          <option value="all">All projects</option>
+          <option value="UNTAGGED">Untagged</option>
+          {projectOptions.map((p) => <option key={p.code} value={p.code}>{p.code}</option>)}
+        </select>
+        <select value={receiptFilter} onChange={(e) => setReceiptFilter(e.target.value as 'all' | 'has' | 'missing' | 'na')} className={selStyle} aria-label="Receipt">
+          <option value="all">Any receipt</option>
+          <option value="has">Has receipt</option>
+          <option value="missing">Bill · no receipt</option>
+          <option value="na">Bank · n/a</option>
+        </select>
+        {(anyColFilter || railSel !== 'all' || activeFlag) && (
+          <button type="button" onClick={() => { setTypeFilter('all'); setAccountFilter('all'); setReceiptFilter('all'); setSearch(''); setRailSel('all'); setActiveFlag(null) }} className="text-white/40 underline hover:text-white">clear all</button>
+        )}
+      </div>
+
       {/* Bulk bar */}
       {selected.size > 0 && (
         <div className="flex items-center gap-3 rounded-lg border border-cyan-300/30 bg-cyan-500/10 px-4 py-2">
@@ -221,12 +297,12 @@ export default function XeroMirrorPage() {
             <thead>
               <tr className="border-b border-white/10 text-left text-[11px] uppercase tracking-wide text-white/40">
                 <th className="px-3 py-2"><input type="checkbox" checked={shown.length > 0 && shown.every((r) => selected.has(rowKey(r)))} onChange={selectAllShown} /></th>
-                <th className="px-3 py-2">Date</th>
-                <th className="px-3 py-2">Vendor</th>
-                <th className="px-3 py-2 text-right">Amount</th>
-                <th className="px-3 py-2">Account</th>
-                <th className="px-3 py-2">Project</th>
-                <th className="px-3 py-2 text-center">Receipt</th>
+                <th className="px-3 py-2 cursor-pointer select-none hover:text-white/70" onClick={() => onSort('date')}>Date {sortIcon('date')}</th>
+                <th className="px-3 py-2 cursor-pointer select-none hover:text-white/70" onClick={() => onSort('vendor')}>Vendor {sortIcon('vendor')}</th>
+                <th className="px-3 py-2 text-right cursor-pointer select-none hover:text-white/70" onClick={() => onSort('amount')}>Amount {sortIcon('amount')}</th>
+                <th className="px-3 py-2 cursor-pointer select-none hover:text-white/70" onClick={() => onSort('account')}>Account {sortIcon('account')}</th>
+                <th className="px-3 py-2 cursor-pointer select-none hover:text-white/70" onClick={() => onSort('project')}>Project {sortIcon('project')}</th>
+                <th className="px-3 py-2 text-center cursor-pointer select-none hover:text-white/70" onClick={() => onSort('receipt')}>Receipt {sortIcon('receipt')}</th>
                 <th className="px-3 py-2"></th>
               </tr>
             </thead>
