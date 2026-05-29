@@ -11,6 +11,7 @@ import { TrustMeters } from '@/components/finance/TrustMeters'
 import { RetagSelect } from '@/components/finance/RetagSelect'
 import { ReceiptInXero } from '@/components/finance/ReceiptInXero'
 import { AttachReceiptButton } from '@/components/finance/AttachReceiptButton'
+import { SuggestProjectChip } from '@/components/finance/SuggestProjectChip'
 import { MirrorProjectRail, type RailSelection } from '@/components/finance/MirrorProjectRail'
 import { MirrorFlags, type MirrorFlag } from '@/components/finance/MirrorFlags'
 
@@ -79,6 +80,7 @@ export default function XeroMirrorPage() {
     [data],
   )
 
+  const validCodes = useMemo(() => new Set(projectOptions.map((p) => p.code)), [projectOptions])
   const untaggedCount = useMemo(() => rows.filter((r) => !r.projectCode).length, [rows])
   // Bills are the receipt-bearing docs (Dext attachments); bank spends rarely
   // carry an individual receipt, so flagging them as "missing" is just noise.
@@ -319,7 +321,14 @@ export default function XeroMirrorPage() {
                     {isIncoming(r.source) ? '↑' : '↓'}{formatMoney(r.total)}
                   </td>
                   <td className="px-3 py-2 text-[11px] text-white/40 whitespace-nowrap">{r.bankAccount ? (r.bankAccount.includes('Visa') ? 'NAB Visa' : r.bankAccount.includes('Everyday') ? 'ACT Everyday' : r.bankAccount) : r.source === 'bill' ? 'bill' : '—'}</td>
-                  <td className="px-3 py-2"><RetagSelect kind={retagKind(r.source)} id={r.id} currentCode={r.projectCode} projects={projectOptions} /></td>
+                  <td className="px-3 py-2">
+                    <div className="flex items-center gap-1.5">
+                      <RetagSelect kind={retagKind(r.source)} id={r.id} currentCode={r.projectCode} projects={projectOptions} />
+                      {!r.projectCode && (
+                        <SuggestProjectChip vendor={r.contact} description={r.description} id={r.id} source={patchSource(r.source)} validCodes={validCodes} onAccepted={() => qc.invalidateQueries({ queryKey: ['finance', 'mirror', 'txns'] })} />
+                      )}
+                    </div>
+                  </td>
                   <td className="px-3 py-2 text-center">
                     {r.source === 'bill'
                       ? (r.hasAttachments
