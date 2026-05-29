@@ -62,7 +62,7 @@ Ben chose to add a TYPE dimension rather than a flat audience tag. Proposed cont
 
 The risk: a GHL workflow with a "Contact Tag added" trigger would fire when we ADD a canonical tag. Findings so far (prep pack §9): the one live marketing automation (`Harvest - Member Welcome`) is **form-triggered**, and the rest are form/event/contact-sync triggered. Guard regardless:
 
-1. **Trigger pre-check (blocking).** Before any write, confirm none of the CANONICAL target tags (`audience-storyteller`, `audience-partner`, `audience-funder`, `act-gd`) are "Contact Tag added" enrolment triggers on any published workflow. (Pending: the 4 ambiguous workflows in the glance list.)
+1. **Trigger pre-check (blocking).** Before any write, confirm none of the CANONICAL target tags (`audience-storyteller`, `audience-partner`, `audience-funder`, `act-gd`) are "Contact Tag added" enrolment triggers on any published workflow. (DONE 2026-05-29: confirmed — the only Contact-Tag triggers in use are `act-inquiry` and a CONTAINED-launch tag; no canonical/legacy merge-target tag is a trigger.)
 2. **Pause-during-migration option.** If any target tag IS a trigger, temporarily unpublish that workflow for the migration window, then republish. (Tier 2 GHL change — explicit approval.)
 3. **Canary first.** Apply to 2-3 contacts, then watch `conversations_search-conversation?lastMessageAction=automated&lastMessageDirection=outbound` for any new send in the next few minutes. Zero new sends → proceed.
 4. **Idempotency + manual-tag respect.** Mirror the existing guard pattern (`pushback-ghl-project-tags` writes a reversible manifest; taggers skip `project_code_source LIKE 'manual%'`). Add canonical before removing legacy so no contact is ever momentarily untagged.
@@ -81,11 +81,11 @@ The risk: a GHL workflow with a "Contact Tag added" trigger would fire when we A
 ## Task ledger
 
 - [x] P0: Ben resolved needs-decision rows — `goods`→merge to `act-gd`; `goods-funder`→keep sub-tag; `newsletter`→rename `act-newsletter`, per-project lists kept (2026-05-29)
-- [ ] P0: Confirm triggers of the 4 ambiguous workflows (glance list) — STILL OPEN
+- [x] P0: Triggers confirmed (2026-05-29 via screenshots) — Contact-Tag triggers in use = `act-inquiry` (Contact→Universal Inquiry, live) + a CONTAINED-launch tag (Contained launch 2025, draft, no tag selected). **No merge/rename target tag is a trigger → tag canonicalization is send-safe.**
 - [ ] P0: Ben confirms single `audience_segment` vs `audience_segments text[]` (recommend array — contacts are multi-audience)
-- [ ] P1: Write + apply `audience_segment` migration; populate; verify
+- [x] P1: Migration APPLIED + backfilled (2026-05-29). `audience_segments` populated: 710 contacts segmented (60 multi-segment), funder 87 / partner 274 / storyteller 313 / brand 114; buyer+community deferred (no clean source tag). Verified on prod.
 - [ ] P2: Dry-run mapping report; Ben review
-- [ ] P2.5: Partner/funder TYPE classification — signal-based suggestion → Ben confirms each → apply type sub-tags (review-first)
+- [~] P2.5: Classifier built + run (`scripts/suggest-audience-types.mjs`, dry-run). Review file `thoughts/shared/reports/audience-type-suggestions.md`. Auto-typed: funders 21/80 (corporate 4 / foundation 13 / intermediary 4), partners 52/271 (community 31 / govt 20 / delivery 1). **Needs Ben's manual call: 59 funders + 219 partners.** Applying types to GHL = paused Phase 3.
 - [ ] P3: Canary 2-3 contacts; confirm zero automated sends
 - [ ] P4: Batch migration with manifest; re-sweep
 - [ ] P5: Allowlist validation in sync scripts; weekly singleton flag
@@ -100,8 +100,9 @@ The risk: a GHL workflow with a "Contact Tag added" trigger would fire when we A
 | `goods-funder` → keep as sub-tag | Accepted (Ben) | Optional: also add `audience-funder` to those 42 |
 | bare `newsletter` → rename `act-newsletter` | Accepted (Ben) | No ambiguous catch-all; per-project lists stay |
 | Partner/funder get a TYPE dimension (not flat merge) | Accepted (Ben) | Taxonomy proposed above; Ben to edit the type lists |
-| audience field shape (single enum vs `text[]`) | OPEN | Recommend `text[]` — contacts are multi-audience |
-| Whether any target tag is a workflow trigger | OPEN | Glance list + prep pack §9 |
+| audience field shape | `text[]` drafted | Migration `20260529000000_ghl_contacts_audience_segments.sql` written (DDL only); pending Ben confirm + apply (Tier 3) |
+| Any merge-target tag is a workflow trigger? | Resolved: NO | Triggers in use = `act-inquiry` (live) + CONTAINED-launch (draft); none of storyteller/funder/partner/goods/newsletter. Merges send-safe. |
+| Workflow hygiene flags | Noted | `Contained launch 2025` draft has empty tag-filter + a broken pipeline action; `Harvest - Follow Welcome` is published with no trigger (inert). |
 
 ## Verification log
 

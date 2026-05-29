@@ -179,6 +179,18 @@ Test contacts (Codex Smoke, Wash Test, Jenny Rosen `stripe@example.com`) trigger
 - `Contained launch 2025` (draft, 25 enrolled) — JusticeHub CONTAINED launch, parked in draft
 - `New Workflow : <timestamp>` ×4 — empty abandoned drafts (cleanup)
 
-**Net:** no rogue mass-mailer. The only live marketing automation is a one-time, consent-clean Harvest welcome. The real risk is structural: **several workflows are likely tag/form-triggered, so tag canonicalization must first confirm which tags are enrolment triggers** (start with `harvest-member`). Dedupe the two Universal Inquiry workflows; clear the 4 empty drafts; resolve the 2 "Needs Review".
+**Net:** no rogue mass-mailer. The only live marketing automation is a one-time, consent-clean Harvest welcome. The real risk is structural: **several workflows are tag/form-triggered, so tag canonicalization must first confirm which tags are enrolment triggers**. Dedupe the two Universal Inquiry workflows; clear the 4 empty drafts; resolve the 2 "Needs Review".
+
+### Trigger readings (2026-05-29, screenshots)
+
+| Workflow | Trigger | Tag? | Status |
+|---|---|---|---|
+| Contact → Universal Inquiry | Contact Tag — `act-inquiry` | YES | published |
+| Contained launch 2025 | Contact Tag — "CONTAINED Launch 2026" (**no tag selected**) | YES | draft |
+| Contact Form to Universal Inquiry | Form Submitted | no | published |
+| Harvest - Follow Welcome | **no trigger set** | no | published (inert) |
+| Harvest - Member Welcome (earlier) | Form Submitted | no | published |
+
+**Conclusion: tag canonicalization is send-safe** — the Contact-Tag triggers fire on `act-inquiry` and a CONTAINED-launch tag, neither of which we touch. **Hygiene flags:** `Contained launch 2025` draft has an empty tag-filter (would misfire if published) + a red error on its "Add Contact to Mounty Yarns Launch Pipeline" action; `Harvest - Follow Welcome` is published with no trigger (does nothing — wire or unpublish).
 
 _No git commit made. Branch `wip/ghl-honest-money-2026-05-29` holds the roll-up code; the unrelated uncommitted wiki changes from another session were left untouched (committed nothing with `git add -A`). All numbers live-queried 2026-05-29; the only mutations this session were local file writes — no GHL, Supabase, tag, or message writes._
