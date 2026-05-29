@@ -32,6 +32,8 @@ const OPERATE_TABS: Array<{ href: string; label: string }> = [
   { href: '/finance/reconciliation', label: 'Reconciliation' },
   { href: '/finance/ai-suggestions', label: 'AI Suggestions' },
   { href: '/finance/dext-push-audit', label: 'Dext Audit' },
+  { href: '/finance/workbench', label: 'Workbench' },
+  { href: '/finance/actions', label: 'Open Actions' },
 ]
 
 type SuggestedAction =
