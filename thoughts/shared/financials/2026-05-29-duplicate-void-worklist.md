@@ -2,6 +2,20 @@
 
 **Generated:** 2026-05-29 · **Source:** 1880 ACCPAY bills (app DB) · tool: `scripts/detect-finance-anomalies.mjs --worklist`
 
+---
+
+## ✅ OUTCOME — 2026-05-29 PM (Ben approved "void all 26")
+
+Worked the list live (read-only verify → walked the 🟡 eyeball-8 against live line-items/refs → voided). Tools: `scripts/verify-void-worklist.mjs`, `scripts/compare-void-twins.mjs`, `scripts/void-duplicate-bills-2026-05-29.mjs --apply`. Revert log (full before-state of every bill, for re-creation): `scripts/output/void-dups-revert-1780048855209.json`.
+
+- **✅ VOIDED: 20 bills · $67,970.72** — all confirmed VOIDED in live Xero. (The 18 high-confidence 🔴+🟠 + 2 of the 🟡: Maleny $285.20 + Apple $99.99, both dated after the lock date.)
+- **🔒 BLOCKED by Xero period lock (30-Sep-2025): 6 bills · $3,221.03** — Bunnings $1,199.80, Palm Island $514, Maleny $497.48, Maleny $423.75, Repco $384, Virgin $202. All dated on/before 30-Sep-2025 (FY26-Q1, **BAS lodged**). Xero correctly refuses to edit locked-period documents. These were confirmed dups on inspection but **must go to Standard Ledger as a prior-period adjustment / credit note** — do NOT lift the lock to void them (changes a lodged BAS).
+- **⏸ HELD — not dups (4 bills, $4,867.98):** Kirmos **INV-004 $4,500** (genuinely owed — only unpaid numbered invoice in a recurring $4,500 series; pay don't void) · **Google $67.98** + **Dialpad $56** (consecutive-month SaaS subs, 32-day gap — detector's 60-day window false-positived) · **Kennards $244** (separate equipment hire, 48-day gap).
+
+**Net phantom AP cleared: $67,970.72. Remaining to resolve via SL: $3,221.03 (locked-period dups).**
+
+---
+
 Each row is an **AUTHORISED** bill that matches a **PAID** bill (same vendor + amount, within 60 days) — i.e. a likely duplicate sitting as phantom AP. **Void the AUTHORISED one in Xero** (keep the PAID). 🔴/🟠 are high-confidence; 🟡 need a human to confirm it isn't a genuinely separate same-amount invoice. **Voiding is a Tier-3 Xero write — review first.**
 
 - 🔴 near-certain: 2 · $226.27
