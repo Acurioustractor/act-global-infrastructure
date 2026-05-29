@@ -316,6 +316,16 @@ async function xeroRequest(endpoint, options = {}) {
           return xeroRequest(endpoint, options);
         }
         console.error('Token refresh failed');
+      } else if (response.status === 429) {
+        // Xero rate limit (60 calls/min). Honour Retry-After and back off, up to 6 times.
+        const retries = options._retries || 0;
+        if (retries < 6) {
+          const retryAfter = parseInt(response.headers.get('Retry-After') || '5', 10) || 5;
+          console.log(`   Rate limited (429) — waiting ${retryAfter}s then retrying (${retries + 1}/6)...`);
+          await new Promise(r => setTimeout(r, retryAfter * 1000));
+          return xeroRequest(endpoint, { ...options, _retries: retries + 1 });
+        }
+        console.error('Xero API 429 — retries exhausted');
       } else {
         const errorText = await response.text();
         console.error(`Xero API error: ${response.status} - ${errorText}`);
@@ -554,20 +564,20 @@ async function syncInvoices(options = {}) {
   console.log('  Syncing Invoices from Xero');
   console.log('=========================================\n');
 
-  const daysBack = options.days || 90;
-  const since = new Date(Date.now() - daysBack * 24 * 60 * 60 * 1000);
-  const sinceStr = since.toISOString().split('T')[0];
-
-  console.log(`   Fetching invoices since: ${sinceStr} (${daysBack} days)`);
-
-  // Build where clause for date filter
-  const whereClause = `Date>=DateTime(${since.getFullYear()},${since.getMonth() + 1},${since.getDate()})`;
+  // Incremental by MODIFICATION date (If-Modified-Since) catches retro edits to old
+  // invoices (recodes/voids/reconciles) that a Date-windowed pull silently misses.
+  // Legacy Date>= window is used only when --days=N is explicitly passed (deep pulls).
+  const { headers: reqHeaders, label: modeLabel, whereClause } = buildFetchScope(options);
+  console.log(`   Fetching invoices (${modeLabel})`);
 
   // Paginate to get full line items with tracking categories
   let allInvoices = [];
   let page = 1;
   while (true) {
-    const data = await xeroRequest(`Invoices?where=${encodeURIComponent(whereClause)}&order=Date DESC&page=${page}`);
+    const q = whereClause
+      ? `Invoices?where=${encodeURIComponent(whereClause)}&order=Date DESC&page=${page}`
+      : `Invoices?order=Date DESC&page=${page}`;
+    const data = await xeroRequest(q, { headers: reqHeaders });
     if (!data?.Invoices?.length) break;
     allInvoices = allInvoices.concat(data.Invoices);
     if (data.Invoices.length < 100) break;
@@ -707,21 +717,19 @@ async function syncTransactions(options = {}) {
   console.log('  Syncing Bank Transactions from Xero');
   console.log('=========================================\n');
 
-  const daysBack = options.days || 90;
-  const since = new Date(Date.now() - daysBack * 24 * 60 * 60 * 1000);
-  const sinceStr = since.toISOString().split('T')[0];
-
-  console.log(`   Fetching transactions since: ${sinceStr} (${daysBack} days)`);
-
-  // Build where clause for date filter
-  const whereClause = `Date>=DateTime(${since.getFullYear()},${since.getMonth() + 1},${since.getDate()})`;
+  // Same incremental-by-modification-date scope as invoices (see buildFetchScope).
+  const { headers: reqHeaders, label: modeLabel, whereClause } = buildFetchScope(options);
+  console.log(`   Fetching transactions (${modeLabel})`);
 
   // Paginate to get full line items with tracking categories
   // The list endpoint omits Tracking[] unless we paginate with page=N
   let allTransactions = [];
   let page = 1;
   while (true) {
-    const data = await xeroRequest(`BankTransactions?where=${encodeURIComponent(whereClause)}&order=Date DESC&page=${page}`);
+    const q = whereClause
+      ? `BankTransactions?where=${encodeURIComponent(whereClause)}&order=Date DESC&page=${page}`
+      : `BankTransactions?order=Date DESC&page=${page}`;
+    const data = await xeroRequest(q, { headers: reqHeaders });
     if (!data?.BankTransactions?.length) break;
     allTransactions = allTransactions.concat(data.BankTransactions);
     if (data.BankTransactions.length < 100) break; // last page
@@ -1015,10 +1023,46 @@ Token Refresh:
 // CLI
 // ============================================================================
 
+// ── Incremental sync scope (modification-date based) ─────────────────────────
+const SYNC_STATE_FILE = '.xero-sync-state.json';
+function readSyncState() {
+  try { return existsSync(SYNC_STATE_FILE) ? JSON.parse(readFileSync(SYNC_STATE_FILE, 'utf8')) : null; }
+  catch { return null; }
+}
+function writeSyncState(lastSyncIso) {
+  try { writeFileSync(SYNC_STATE_FILE, JSON.stringify({ lastSync: lastSyncIso, updatedAt: new Date().toISOString() }, null, 2)); }
+  catch (e) { console.warn('   Could not persist sync state:', e.message); }
+}
+/**
+ * Decide the fetch scope. Default = incremental by Xero modification date
+ * (If-Modified-Since) so retro edits to OLD invoices (recodes/voids/reconciles)
+ * are caught. --days=N forces the legacy Date>= window for deep/backfill pulls.
+ */
+function buildFetchScope(options = {}) {
+  if (options.modifiedSince) {
+    const iso = new Date(options.modifiedSince).toISOString().split('.')[0]; // Xero header wants no millis
+    return { headers: { 'If-Modified-Since': iso }, label: `modified since ${iso}`, whereClause: null };
+  }
+  const daysBack = options.days || 90;
+  const since = new Date(Date.now() - daysBack * 24 * 60 * 60 * 1000);
+  return {
+    headers: {},
+    label: `Date >= ${since.toISOString().split('T')[0]} (${daysBack}d window)`,
+    whereClause: `Date>=DateTime(${since.getFullYear()},${since.getMonth() + 1},${since.getDate()})`,
+  };
+}
+
 async function main() {
   const command = process.argv[2] || 'help';
   const daysArg = process.argv.find(a => a.startsWith('--days='));
-  const days = daysArg ? parseInt(daysArg.split('=')[1]) : 90;
+  const days = daysArg ? parseInt(daysArg.split('=')[1]) : null;
+
+  // Default = incremental by modification date (catches retro edits to old records).
+  // --days=N forces the legacy Date-window deep pull (backfills).
+  const runStartIso = new Date().toISOString();
+  const syncState = readSyncState();
+  const incrementalFallback = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
+  const syncOptions = days ? { days } : { modifiedSince: syncState?.lastSync || incrementalFallback };
 
   console.log('=========================================');
   console.log('  Xero -> Supabase Financial Sync');
@@ -1053,17 +1097,20 @@ async function main() {
 
   switch (command) {
     case 'invoices':
-      await syncInvoices({ days });
+      await syncInvoices(syncOptions);
       await logSync('invoices', { invoices: stats.invoices });
+      if (!days) writeSyncState(runStartIso);
       break;
 
     case 'transactions':
-      await syncTransactions({ days });
+      await syncTransactions(syncOptions);
       await logSync('transactions', { transactions: stats.transactions });
+      if (!days) writeSyncState(runStartIso);
       break;
 
     case 'full':
-      await fullSync({ days });
+      await fullSync(syncOptions);
+      if (!days) writeSyncState(runStartIso);
       break;
 
     case 'setup':
