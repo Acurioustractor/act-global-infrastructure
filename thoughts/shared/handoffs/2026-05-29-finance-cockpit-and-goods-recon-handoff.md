@@ -30,9 +30,11 @@ Full report + provenance: `thoughts/shared/financials/2026-05-29-goods-ap-recon-
 
 > Next session: offer to draft these as a ready-to-send bookkeeper instruction (vendor · amount · Xero ID · action). The copilot at `/finance/xero-page-copilot` is now the surface to do the inline re-tags from.
 
-## 4. OPEN — other session's uncommitted work (DO NOT touch / commit)
+## 4. ⚠️ Cross-session: the `excludeRadar` refactor was reverted (not by this session)
 
-The working tree carries **26 uncommitted files from another session** — an `excludeRadar` / `pipeline-rollup` refactor across ~12 finance API routes (cashflow, runway, briefing, opportunities, pipeline/board, ecosystem, harvest, projects, revenue-streams) + generated outputs. Untouched this session. Ben to commit or stash before it's stomped.
+Earlier this session the working tree carried an uncommitted `excludeRadar` / `pipeline-rollup` refactor across ~12 finance API routes (cashflow, runway, briefing, opportunities, pipeline/board, ecosystem, harvest, projects, revenue-streams). **By session close those code changes were gone** — not committed (no commit exists for them on any branch), not stashed (`git stash list` empty), reverted by a concurrent process. **This session did not touch them** (only the 3 docs in §commit were staged; git can't discard unstaged edits via add/commit/switch/push).
+
+If that refactor was wanted: check the other active session's context/worktree — it may still hold it; otherwise it needs re-doing. Remaining modified files are now only ~14 generated outputs / cron-noise (reports, cross-codebase-feed, financials/ACT-GD.md + INDEX.md, wiki/log.md, etc.).
 
 ## Resume checklist
 - Read this handoff + `financials/2026-05-29-goods-ap-recon-dedup.md`.
