@@ -3,6 +3,7 @@ import {
   Calendar,
   Users,
   Layers,
+  Tags,
   FolderKanban,
   Scale,
   Heart,
@@ -118,6 +119,9 @@ export const navStructure: SidebarNavGroup[] = [
           // tab-bar (/finance/xero-page-copilot). They stay LIVE (no _archived move — the tab-bar
           // links them; the 2026-05-21/05-27 reviews showed naive archiving 404s live pages).
           // command + money-alignment are redirect stubs → /finance/overview (P2).
+
+          // ALIGN — the Xero mirror: tag-alignment + per-project in/out + flags (mirror plan 2026-05-29)
+          { href: '/finance/mirror', label: 'Align · Mirror', icon: Tags, color: 'text-cyan-400', bg: 'bg-cyan-500/20' },
 
           // STATE — where are we right now (trust meters + money state)
           { href: '#state', label: 'State', icon: BarChart3, divider: true },

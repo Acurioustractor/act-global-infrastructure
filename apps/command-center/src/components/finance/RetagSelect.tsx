@@ -4,12 +4,13 @@ import { useState } from 'react'
 import { Check, Loader2, Tag } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
-// Inline re-tag for the OPERATE surface (plan 2026-05-29 P3). Writes project_code
-// straight to Supabase via the existing endpoints, both stamping a manual source
-// so the auto-taggers won't overwrite it:
-//   - bill        → PATCH /api/finance/transactions {id, source:'bill', projectCode}
+// Inline re-tag for the OPERATE + MIRROR surfaces (plans 2026-05-29 P3 + mirror).
+// Writes project_code straight to Supabase via the existing endpoints, all stamping
+// a manual source so the auto-taggers won't overwrite it:
+//   - bill        → PATCH /api/finance/transactions {id, source:'bill',  projectCode}
+//   - spend       → PATCH /api/finance/transactions {id, source:'spend', projectCode}  (xero_transactions)
 //   - bankLine    → POST  /api/finance/reconciliation/inbox {lineId, action:'tag', projectCode}
-// The bank-line endpoint requires a projectCode (can't clear), so untag is bill-only.
+// The bank-line endpoint requires a projectCode (can't clear), so untag is bill/spend only.
 
 export interface ProjectOption {
   code: string
@@ -23,7 +24,7 @@ export function RetagSelect({
   projects,
   className,
 }: {
-  kind: 'bankLine' | 'bill'
+  kind: 'bankLine' | 'bill' | 'spend'
   id: string
   currentCode: string | null
   projects: ProjectOption[]
@@ -39,16 +40,16 @@ export function RetagSelect({
     setErr(null)
     try {
       const res =
-        kind === 'bill'
-          ? await fetch('/api/finance/transactions', {
-              method: 'PATCH',
-              headers: { 'content-type': 'application/json' },
-              body: JSON.stringify({ id, source: 'bill', projectCode: next || null }),
-            })
-          : await fetch('/api/finance/reconciliation/inbox', {
+        kind === 'bankLine'
+          ? await fetch('/api/finance/reconciliation/inbox', {
               method: 'POST',
               headers: { 'content-type': 'application/json' },
               body: JSON.stringify({ lineId: id, action: 'tag', projectCode: next }),
+            })
+          : await fetch('/api/finance/transactions', {
+              method: 'PATCH',
+              headers: { 'content-type': 'application/json' },
+              body: JSON.stringify({ id, source: kind, projectCode: next || null }),
             })
       if (!res.ok) {
         const body = await res.json().catch(() => ({}))
@@ -73,7 +74,7 @@ export function RetagSelect({
         className="rounded-md border border-white/15 bg-black/40 px-1.5 py-1 text-xs text-white/80 outline-none transition focus:border-cyan-300/50 disabled:opacity-50"
         aria-label="Re-tag project"
       >
-        {kind === 'bill' ? (
+        {kind !== 'bankLine' ? (
           <option value="">untagged</option>
         ) : (
           !code && <option value="" disabled>set project…</option>
