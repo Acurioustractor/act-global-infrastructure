@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { supabase } from '@/lib/supabase'
+import { isRadarPipeline } from '@/lib/finance/pipeline-rollup'
 
 interface UnifiedOpportunity {
   id: string
@@ -13,6 +14,9 @@ interface UnifiedOpportunity {
   status: string
   provider?: string
   url?: string
+  // GHL pipeline name (undefined for grant/fundraising sources). Used to keep
+  // grant-radar opps in the list but out of the aggregate money total.
+  pipelineName?: string
   discoveredAt?: string
   contact?: {
     name: string
@@ -170,6 +174,7 @@ export async function GET(request: NextRequest) {
         amount: { max: o.monetary_value ?? undefined },
         status: o.stage_name || o.status || 'open',
         provider: o.pipeline_name ?? undefined,
+        pipelineName: o.pipeline_name ?? undefined,
         discoveredAt: o.ghl_created_at ?? undefined,
         contact,
         recentEmails: emails,
@@ -238,7 +243,9 @@ export async function GET(request: NextRequest) {
       grants: filtered.filter(o => o.source === 'grant').length,
       ghl: filtered.filter(o => o.source === 'ghl').length,
       fundraising: filtered.filter(o => o.source === 'fundraising').length,
-      totalValue: filtered.reduce((sum, o) => sum + (o.amount.max || 0), 0),
+      // Exclude grant-radar (GHL "Grants" pipeline) from the aggregate money total —
+      // it's a discovery dump, not worked deals. The list above still shows every opp.
+      totalValue: filtered.filter(o => !isRadarPipeline(o.pipelineName)).reduce((sum, o) => sum + (o.amount.max || 0), 0),
       highFit: filtered.filter(o => (o.fitScore || 0) >= 70).length,
     }
 

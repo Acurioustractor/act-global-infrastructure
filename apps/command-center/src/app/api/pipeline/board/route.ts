@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { supabase } from '@/lib/supabase'
+import { isRadarPipeline } from '@/lib/finance/pipeline-rollup'
 
 export async function GET() {
   try {
@@ -33,6 +34,7 @@ export async function GET() {
       createdAt: string
       updatedAt: string
       daysInStage: number
+      pipelineName: string
     }> = []
 
     // Build board data - group opportunities by pipeline and stage
@@ -65,6 +67,7 @@ export async function GET() {
             updatedAt,
             daysInStage,
             projectCode: o.project_code || '',
+            pipelineName: pipeline.name || o.pipeline_name || '',
           }
           allMappedOpps.push(entry)
           return entry
@@ -90,10 +93,12 @@ export async function GET() {
       }
     })
 
-    // Build summary with won/lost stats
-    const openOpps = allMappedOpps.filter(o => o.status !== 'won' && o.status !== 'lost' && o.status !== 'abandoned')
-    const wonOpps = allMappedOpps.filter(o => o.status === 'won')
-    const lostOpps = allMappedOpps.filter(o => o.status === 'lost')
+    // Build summary with won/lost stats.
+    // Exclude grant-radar from the aggregate headline (per-pipeline columns above still show it).
+    const workedOpps = allMappedOpps.filter(o => !isRadarPipeline(o.pipelineName))
+    const openOpps = workedOpps.filter(o => o.status !== 'won' && o.status !== 'lost' && o.status !== 'abandoned')
+    const wonOpps = workedOpps.filter(o => o.status === 'won')
+    const lostOpps = workedOpps.filter(o => o.status === 'lost')
     const totalValue = openOpps.reduce((s, o) => s + o.value, 0)
     const staleDeals = openOpps.filter(o => o.daysInStage > 14)
 

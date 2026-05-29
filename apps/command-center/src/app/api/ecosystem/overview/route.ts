@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { supabase } from '@/lib/supabase'
+import { excludeRadar } from '@/lib/finance/pipeline-rollup'
 
 // Project code definitions matching the 10 ACT project codes
 const PROJECT_CODES = [
@@ -31,11 +32,12 @@ export async function GET() {
       .select('id, project_codes')
       .gte('occurred_at', sevenDaysAgo.toISOString())
 
-    // Query open opportunities
-    const { data: opportunities } = await supabase
+    // Query open opportunities (exclude grant-radar from money roll-ups)
+    const { data: rawOpportunities } = await supabase
       .from('ghl_opportunities')
-      .select('id, name, monetary_value, project_code, status')
+      .select('id, name, monetary_value, project_code, status, pipeline_name')
       .eq('status', 'open')
+    const opportunities = excludeRadar(rawOpportunities || [])
 
     // Query project descriptions from canonical projects table
     const { data: projectDescs } = await supabase

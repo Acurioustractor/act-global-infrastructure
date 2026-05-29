@@ -16,6 +16,7 @@
 
 import { NextRequest, NextResponse } from 'next/server'
 import { supabase } from '@/lib/supabase'
+import { isRadarPipeline } from '@/lib/finance/pipeline-rollup'
 
 // Load project tag-to-code map from DB (cached at module level)
 let projectTagMap: Map<string, string> | null = null
@@ -131,7 +132,7 @@ export async function GET(request: NextRequest) {
           .order('occurred_at', { ascending: false }),
         supabase
           .from('ghl_opportunities')
-          .select('ghl_contact_id, monetary_value, status')
+          .select('ghl_contact_id, monetary_value, status, pipeline_name')
           .in('ghl_contact_id', ghlIds),
       ])
 
@@ -149,6 +150,8 @@ export async function GET(request: NextRequest) {
       if (opps) {
         for (const opp of opps) {
           if (!opp.ghl_contact_id) continue
+          // Skip grant-radar (GHL "Grants" pipeline) from the per-contact pipeline roll-up.
+          if (isRadarPipeline(opp.pipeline_name)) continue
           const existing = pipelineMap.get(opp.ghl_contact_id) || { pipeline_value: 0, opp_count: 0 }
           existing.pipeline_value += Number(opp.monetary_value) || 0
           existing.opp_count += 1

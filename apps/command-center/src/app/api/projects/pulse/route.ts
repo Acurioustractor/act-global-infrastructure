@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { supabase } from '@/lib/supabase'
+import { excludeRadar } from '@/lib/finance/pipeline-rollup'
 
 /**
  * Cross-System Project Pulse
@@ -93,10 +94,10 @@ export async function GET() {
         .eq('knowledge_type', 'decision')
         .gte('recorded_at', oneMonthAgo),
 
-      // Open opportunities
+      // Open opportunities (select pipeline_name so we can drop grant-radar)
       supabase
         .from('ghl_opportunities')
-        .select('project_code, monetary_value, status')
+        .select('project_code, monetary_value, status, pipeline_name')
         .eq('status', 'open'),
     ])
 
@@ -126,8 +127,11 @@ export async function GET() {
     const xeroSpend = sumBy(xeroRes.data, 'project_code', 'total')
     const meetings = countBy(meetingsRes.data)
     const decisions = countBy(decisionsRes.data)
-    const oppCounts = countBy(opportunitiesRes.data)
-    const oppValues = sumBy(opportunitiesRes.data, 'project_code', 'monetary_value')
+    // Exclude grant-radar (GHL "Grants" pipeline) from per-project pulse roll-ups —
+    // it's a discovery dump that would ~10x the pipeline value.
+    const workedOpps = excludeRadar(opportunitiesRes.data || [])
+    const oppCounts = countBy(workedOpps)
+    const oppValues = sumBy(workedOpps, 'project_code', 'monetary_value')
 
     // Actions: count open and overdue per project
     const actionsOpen: Record<string, number> = {}

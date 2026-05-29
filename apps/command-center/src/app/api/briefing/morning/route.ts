@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import { supabase, elSupabase } from '@/lib/supabase'
 import { fetchDailyBriefing } from '@act/intel'
 import type { SupabaseQueryClient } from '@act/intel'
+import { excludeRadar } from '@/lib/finance/pipeline-rollup'
 
 export const dynamic = 'force-dynamic'
 
@@ -349,7 +350,9 @@ async function fetchFinancialSummary() {
     .from('ghl_opportunities')
     .select('status, monetary_value, pipeline_name, stage_name')
 
-  const rows = data || []
+  // Exclude grant-radar (GHL "Grants" pipeline) from the financial summary headline —
+  // it's a discovery dump that would ~10x the pipeline value in the morning briefing.
+  const rows = excludeRadar(data || [])
   let openValue = 0, wonValue = 0, lostValue = 0
   const byStage: Record<string, { value: number; count: number }> = {}
 
