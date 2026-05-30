@@ -80,17 +80,35 @@ Probe: `scripts/probe-goods-funder-truth.mjs` (read-only, DB `tednluwflfhxyucgwi
 - Confirm reconciler reality (Q2). Output: `thoughts/shared/financials/2026-05-30-xero-tracking-audit.md`.
 - **Verify:** worklist totals reconcile to the 125 ACCREC + $649K Goods.
 
-### Phase 1 — Standardize Xero `Project Tracking` options · Tier 3 Xero write (dry-run → `--apply`)
-- Rename/merge dirty options to canonical via the existing
-  `dryrun-archive-xero-tracking-options.mjs` / `archive-xero-tracking-options.mjs`.
-- **Verify:** option list == canonical set; no usage orphaned.
+### Phase 1 — Standardize Xero `Project Tracking` options · ~~Tier 3~~ → **NO-OP (verified 2026-05-30)**
+- **Live Xero already has 33 clean `ACT-XX — Name` options, zero archived, zero orphans.**
+  The `Goods.` / `ACT-ER — PICC Elders Room` / `Mounty` / `The Harvest` "dirty options" from
+  Phase 0 are **stale strings in the Supabase mirror's cached line_items**, not live Xero options.
+  Nothing to standardise in Xero. PICC = `ACT-PI` confirmed live.
 
-### Phase 2 — Backfill Xero tracking from clean `project_code` · Tier 3 Xero write (dry-run → `--apply`, unlocked only)
-- For each unlocked ACCREC where Supabase `project_code` is set but Xero tracking is
-  missing/wrong: set the line-item tracking to the canonical option. Pattern:
-  dry-run default · GET-fresh + abort-on-mismatch · full revert log · `--apply` gate.
-- Locked-period rows → `thoughts/shared/financials/2026-05-30-locked-tracking-for-sl.md` (hand to Standard Ledger).
-- **Verify:** Xero income tracking coverage 45% → ~99% on unlocked.
+### Phase 1′ — Re-sync the mirror to current Xero truth · Tier 2 (Supabase write) — **DONE 2026-05-30**
+- Ran `sync-xero-to-supabase.mjs invoices --days=90` → 258 invoices refreshed, 0 errors, Goods held $649,711.
+- **KEY FINDING: a re-sync CANNOT clear phantom voided receivables** — Xero's `where=Date>=` query
+  **excludes VOIDED/DELETED invoices by design**, so the sync never re-fetches them to zero their `amount_due`.
+- **Fix applied (deterministic):** zeroed `amount_due` on the 5 ACCREC VOIDED/DELETED rows still carrying it
+  ($375,100 phantom: Centrecorp $298,100 + Palm Island/PICC $77,000). Revert log
+  `scripts/output/void-amountdue-revert-2026-05-30.json`. Verified: Centrecorp due $298,100→$0,
+  Goods due $380,600→$82,500 (Rotary's real pledge), live surface corrected (data-layer, no redeploy).
+- ⚠️ **DURABLE FOLLOW-UP (recurrence risk):** the mirror's `amount_due` isn't auto-zeroed when an invoice
+  is voided (Xero won't re-sync it). Either (a) `v_funder_next_move` + outstanding queries should
+  `WHERE status NOT IN ('VOIDED','DELETED')`, or (b) the void scripts must zero `amount_due` in the mirror.
+  Pick one before the next void batch or this phantom returns.
+- Also corrects an earlier report: **PICC real outstanding ≈ $0** (the "$77K due" was a voided invoice).
+
+### Phase 2 — Backfill `Project Tracking` onto unlocked income · Tier 3 Xero write — **UNLOCKED DONE 2026-05-30**
+- Tools: dry-run `scripts/backfill-xero-tracking.mjs` · apply `scripts/apply-xero-tracking-backfill.mjs`
+  (GET-fresh per invoice · modify Tracking only · post-write Total/AmountDue verify · revert log).
+- **✅ All unlocked income tagged in live Xero — 17 invoices across 5 programs, every total intact:**
+  ACT-GD 5 ($249,711) · ACT-HV 6 · ACT-JH 3 (incl Homeland INV-0303 AUTHORISED) · ACT-SM 2 · ACT-PI 1.
+  Independently re-verified INV-0282, INV-0321 (Snow), INV-0286 (PICC). Revert log:
+  `scripts/output/xero-tracking-backfill-revert-2026-05-30.json`.
+- **Still TODO:** Locked 54 invoices · $1.08M → **Standard Ledger handoff doc** (Tier 1, not yet generated).
+- Mirror lags Xero until next sync (expected); Phase 3 derivation will pick up the new tags.
 
 ### Phase 3 — Flip the mirror derivation · Tier 1–2 code
 - `scripts/sync-xero-to-supabase.mjs`: derive `project_code` **from**
@@ -108,7 +126,22 @@ Probe: `scripts/probe-goods-funder-truth.mjs` (read-only, DB `tednluwflfhxyucgwi
 - **Retire** `seed-goods-supporter-journey.mjs` (archive, don't delete).
 - **Verify:** ledger total == $649,711; funder rows match probe output.
 
-### Phase 5 — GHL + dashboard read the ledger · Tier 3 GHL write (dry-run diff → `--apply`)
+### Phase 4.5 — SHIPPED 2026-05-30 (PR #127, merged `a66c78e`) — funders surface drift overlay · Tier 1
+- `/finance/funders` extended: project filter (ACT-GD lens) + "GHL vs Xero" column
+  (🟢 MATCH / 🟡 DRIFT / ⚪ PROSPECT + pipeline tooltip) + phantom-paid banner.
+  API joins `ghl_opportunities`; `summary.ghl` rollup. Read-only diff = the live dry-run for Phase 5.
+
+### Phase 5 — Reconciliation cockpit: resolve drift across all areas, anchored to Xero · Tier 3 GHL write (dry-run → approve → `--apply`)
+- **Reshape from batch script → interactive resolve flow on `/finance/funders`.** Per-row
+  **Reconcile** button → dry-run diff panel → approve → write. One verb per verdict:
+  DRIFT→dedupe to pipeline-of-record (value=Xero cash, withdraw dup); PHANTOM→withdraw/convert-to-pledge;
+  PLEDGE→reclassify to open stage; XERO_ONLY→create opp. Anchor rule: **resolution always makes
+  other systems agree with Xero, never the reverse.**
+- Propagation: one resolve writes GHL (`ghl-api-service.mjs` + `ghl_sync_log` `supabase_to_ghl`),
+  dashboard auto-updates (same ledger), Notion syncs (`sync-funder-reporting-to-notion.mjs`).
+- Second direction ("reconcile *for* Xero"): rows also flag funders whose Xero invoices lack
+  `ACT-GD` Project Tracking → resolve back-tags Xero (ties to Phases 1–2).
+- Add a "funder reconciliation %" lens to the close-the-books gate.
 - **Live-GHL finding (2026-05-30, `scripts/goods-funder-ledger-diff.mjs` vs `ghl_opportunities`):**
   GHL "paid" = $1,273,103 vs Xero cash $649,711 — ~2× inflated. Causes: (a) **same funder
   duplicated across pipelines** (Supporter Journey + Buyer Pipeline, sometimes The Shop) —
