@@ -41,6 +41,7 @@ export async function GET() {
     .from('xero_invoices')
     .select('contact_name, status, type, total, amount_due, date')
     .eq('type', 'ACCREC')
+    .not('status', 'in', '(DELETED,VOIDED)')
     .not('contact_name', 'is', null)
 
   if (error) return NextResponse.json({ error: error.message }, { status: 500 })
