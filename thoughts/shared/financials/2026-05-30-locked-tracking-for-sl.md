@@ -15,6 +15,33 @@ project classification isn't required for your process.
 **Ask:** apply the `→ Set` option to each invoice's line items (or advise if a manual journal /
 reclassification is the right mechanism for locked periods). No amounts change — this is dimensional tagging only.
 
+---
+
+## ⚠️ SEPARATE FINDING — $144K Goods grant booked as an expense (RECLASSIFICATION, not tagging)
+
+Surfaced 2026-05-30 during a per-project sense-check. **This is a misclassification that changes amounts**, unlike the dimension-tagging above. Confirmed with Ben: this is **The Funding Network "Goods" grant — income received for the Goods project (ACT-GD)** — but it is recorded in Xero as **Accounts Payable bills (expenses) coded to `ACT-CE` (Custodian Economy)**. There is **no income (ACCREC) record** for the grant anywhere in the ledger.
+
+| Ref | Date | Type | Status | Amount | Currently |
+|---|---|---|---|---|---|
+| (no #) | 2025-11-27 | ACCPAY | AUTHORISED (unpaid) | **$89,361** | ACT-CE expense |
+| (no #) | 2025-12-17 | ACCPAY | AUTHORISED (unpaid) | **$55,197** | ACT-CE expense |
+| R-8469621 | 2025-09-03 | ACCPAY | PAID | $6,000 | ACT-CE expense |
+| R-8469458 | 2025-09-03 | ACCPAY | PAID | $500 | ACT-CE expense |
+| | | | **Total** | **$151,058** | |
+
+**Effect of the error:** Goods income is understated by ~$144–151K and expenses overstated by the same, and **ACT-CE (Custodian Economy) shows a phantom ~$144K loss** it never incurred. The two large bills are AUTHORISED/unpaid — they will never be paid because they are not real payables.
+
+**Ask (SL):** reclassify The Funding Network amounts from AP expense (ACT-CE) to **Goods grant income (ACCREC / income account, `ACT-GD — Goods` Project Tracking)** — reverse/credit the AP bills and recognise the grant as income. Dates are unlocked (Sep–Dec 2025) but the treatment is an accounting decision, so flagging rather than auto-fixing. Please confirm the correct income account + mechanism.
+
+### More sense-check follow-ups (2026-05-30, confirmed with Ben)
+
+Two more AUTHORISED/unpaid AP bills surfaced in the same review (both `xero_tracking`, auto-pushed via Dext):
+
+1. **The Plasticians — $29,800** (2025-12-17, AUTHORISED). Xero `Project Tracking` = `ACT-IN`, but Ben confirms this is **plastic/HDPE materials for Goods beds → should be `ACT-GD — Goods`**. Unlocked + amount-unchanged, so this is a simple **Project Tracking re-tag in Xero** (same mechanism as the Phase 2 backfill) — does not need SL unless you'd prefer SL to do it. Once re-tagged in Xero + re-synced, $29.8K moves ACT-IN → Goods.
+2. **MOL Nyrt. — $30,691** (2026-03-27, AUTHORISED). Line item: "MOL Nyrt. — Other — ACT-IN **[native USD 30691.00 — adjustment]**". Vendor + the "native USD … adjustment" note suggest a **Dext/FX import artifact or duplicate**, not a genuine payable. **Ask (SL): verify this is a real bill; if it's an FX/import artifact, void it** — it's inflating ACT-IN expense and outstanding AP by ~$30K.
+
+---
+
 ## By project
 
 | project_code → option | invoices | total |
