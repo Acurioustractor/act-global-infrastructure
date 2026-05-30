@@ -126,6 +126,7 @@ export const navStructure: SidebarNavGroup[] = [
           // STATE — where are we right now (trust meters + money state)
           { href: '#state', label: 'State', icon: BarChart3, divider: true },
           { href: '/finance/overview', label: 'State · Cockpit', icon: Layers, color: 'text-emerald-400', bg: 'bg-emerald-500/20' },
+          { href: '/finance/project-money', label: 'State · Project Money', icon: DollarSign, color: 'text-emerald-400', bg: 'bg-emerald-500/20' },
           { href: '/finance/close', label: 'State · Close pack', icon: ClipboardCheck, color: 'text-cyan-400', bg: 'bg-cyan-500/20' },
 
           // OPERATE — get to 100% (full toolset lives in the Operate tab-bar)
