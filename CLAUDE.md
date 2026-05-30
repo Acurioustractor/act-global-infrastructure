@@ -139,6 +139,11 @@ Before any DB-touching code:
 - **Don't tell user to test until fix is deployed.** TypeScript clean → build passes → deployed → env vars set → THEN report ready.
 - For Vercel: check `vercel ls` or deployment URL before declaring success.
 
+## Review discipline (review in the smart zone, not the dumb zone)
+
+- **Never self-review money/external-write code in the implementing session.** The session that wrote it reviews from the dumb zone (degraded by accumulated context). Clear (or hand to a fresh subagent / `/code-review`) and review against the diff in a clean context.
+- **Push standards TO the reviewer.** The implementer *pulls* context as needed; the reviewer gets the standards pushed in — verification.md confidence levels, the Schema-First rule, and the two-account rule (ACT spend lives only in NAB Visa #8815 + NJ Marchesi T/as ACT Everyday). For finance PRs, the review must confirm money math reconciles (attempted vs actual count) — feedback-loop quality is the ceiling on output quality.
+
 ## Data Display
 
 - **Query ALL matching records** for maps/tables — never limit to one page unless user asks. Default 1,000 limit applies.
@@ -157,67 +162,49 @@ Critical for: R&D tax evidence (43.5% refund), grant apps (funders verify), boar
 
 When creating plans (only when asked), use template at `thoughts/shared/templates/plan-template.md`. Include task ledger, decision log, verification log, structured changelog. Plans go in `thoughts/shared/plans/<slug>.md`.
 
+**Doc lifecycle — scaffolding vs evidence (guard against doc-rot).** Two distinct artifacts, two fates:
+- **Scaffolding** (implementation plans, issue/PRD-as-checklist) is *disposable*. Once shipped, `git mv` the plan into a dated `_archive/` dir so live agents don't re-discover a stale plan and code against requirements that have since changed. Don't keep shipped plans sitting in `thoughts/shared/plans/` as if current.
+- **Evidence** (decisions, `.provenance.md` sidecars, ADRs, the R&D narrative, the wiki) is *durable* — keep forever. R&D's 43.5% refund and funder verification require contemporaneous records; this is generated from decisions, not the working plan, and survives the scaffolding it came from.
+- **Money work:** one record proves the full path before any bulk run — tag/reconcile/display a single transaction end-to-end (the tracer bullet) before processing the batch.
+
 ## Finance — the 4-Surface Model (2026-05-08)
 
-Every finance use case maps to exactly one of four surfaces. No use case is served by two surfaces.
+Every finance use case maps to exactly one of four surfaces — no use case is served by two. **Notion for reading · command-center for operating · scripts for automating · Telegram for pushing.**
 
-| Surface | What it's for | Front door |
-|---|---|---|
-| **Notion** | Read · plan · capture · decide. Daily glance, weekly review, year plan, free-form capture, charts that tell trend stories. | `notion.so/357ebcf981cf8101bc12dd5eab9ebec5` (ACT Money Framework) |
-| **Command-center `/finance/*`** | Operate. Tag transactions, fix receipts, run reconciliation, drill into a project, view R&D pack. | `https://command.act.place/finance` |
-| **Scripts `scripts/*.mjs`** | Automate + admin. Cron syncs (Mon morning chain, daily pulse), on-demand ops (write off invoice, sync Xero tokens, grade R&D pack). | `node scripts/<x>.mjs` |
-| **Telegram bot** | Push. Daily 8am briefing, afternoon alert, Friday digest, on-demand `/money-status` and `/standup`. | grammY webhook |
-
-When in doubt: **Notion for reading · command-center for operating · scripts for automating · Telegram for pushing.**
-
-### Use case → canonical surface
-
-| Use case | Canonical surface |
-|---|---|
-| "Where's the money RIGHT NOW?" | Notion ACT Money Framework → 📡 Today's Pulse (refreshed daily 8:13am) + Telegram briefing 8am |
-| Visual charts of trend (bank, runway, pile mix) | Notion Money Dashboard view (widgets on Money Metrics DB) |
-| Year plan (FY26-27) | Notion FY26-27 Money Philosophy + Plan |
-| Multi-period rhythm (week / month / half / year / 5y) | Notion Planning Rhythm |
-| Capture a question / decision / idea | Notion Money Sync (Q&A) |
-| Decisions log | Notion Decisions Log database |
-| Action items | Notion Action Items database |
-| Tag a Xero transaction | Command-center `/finance/tagger-v2` |
-| Fix a receipt | Command-center `/finance/receipts-triage` |
-| Per-project budget | Command-center `/finance/projects/[code]` |
-| Reconciliation status | Command-center `/finance/reconciliation` |
-| CEO money cockpit | Command-center `/finance/overview` |
-| Money alignment (in/out) | Command-center `/finance/money-alignment` |
-| Pipeline view | Notion Opportunities DB (filter by Pile) |
-| R&D pack (FY26 evidence) | Filesystem `thoughts/shared/rd-pack-fy26/` + `scripts/grade-pack.mjs` |
-| BAS prep (quarterly) | `scripts/prepare-bas.mjs` + Notion Standard Ledger Q&A |
-| Funder research | Skill `/brief-funder` + Notion Foundations DB |
-| Funder outreach drafting | Skill `/draft-funder` (with brand voice grade) |
-| Cash scenarios (Base/Upside/Downside) | Notion Cash Scenarios |
-| Cash forecast (13-week) | Notion Cash Forecast |
-| Operational standup | Telegram `/standup` |
-
-Full runbook: `thoughts/shared/handoffs/2026-05-08-money-brain-runbook.md`. Architecture review: `thoughts/shared/reviews/notion-finance-dashboard-2026-05-08.md`. Consolidation plan: `~/.claude/plans/rewive-all-the-finciance-agile-pearl.md`.
-
-### Retired / archived (2026-05-08)
-
-- 17 stale Notion operational dashboard keys removed from `config/notion-database-ids.json` (commandCenter, sprintTracking, githubIssues, etc.). Backup at `config/notion-database-ids.json.bak-2026-05-08`.
-- 14 React routes under `/finance/*` archived to `apps/command-center/src/app/finance/_archived/` (tagger, tagger-bulk, pipeline-viz, pipeline-kanban, board, accountant, revenue, revenue-planning, project-plan, invoices, self-reliance, vendor-rules-suggest, review, projects).
-- ~85 stale finance scripts archived to `scripts/_archive/2026-05-finance-cleanup/` (cabin disposal one-offs, prototype `act-money.mjs`, superseded `finance-engine.mjs`, etc.). Restore from git history if needed.
+Full detail — front-door URLs, the use-case→surface routing table (22 cases), runbook/architecture pointers, and the retired/archived inventory — is in `.claude/references/finance-surfaces.md`. **Read it before routing a specific finance use case to a surface** (pull, not always-on).
 
 ## Skill Routing (active skills only)
 
 When the user's request matches an active skill, invoke it as the FIRST action.
 
+- **Non-trivial feature / design (3+ files or a domain decision)** → `grill-with-docs` is the front door — it aligns the plan against ACT's documented domain (ALMA, LCAA, entity structure, finance model) and catches naming drift (the Oonchiumpa→"Ntumba", ALMA-spelling, Custodian-Economy traps) before any code. Reserve plain `grill-me` for greenfield work with no domain docs to grill against. Alignment is human-in-loop and can't be looped — don't over-polish the resulting PRD; the shared understanding is the asset. **Write targets:** resolved terms → `wiki/concepts/`, ADRs → `wiki/decisions/` (per `docs/agents/domain.md`) — never let the skill create `CONTEXT.md` or `docs/adr/`.
 - **ANY ACT-facing writing** (pitches, grants, web copy, journal spreads, board reports, donor letters, captions, artefact prose) → `act-brand-alignment` and load `references/writing-voice.md`. Curtis method: name the room, name the body, load the abstract noun, stop the line. Reject AI tells (delve, crucial, pivotal, tapestry, em dashes, "not just X but Y").
+- **Before publishing ANY storyteller/community content externally** (a story, quote, name, photo, or video → public wiki, newsletter, Empathy Ledger syndication, social, funder/board deck, website) → `consent-check` FIRST. Blocking OCAP gate: incomplete or unverified consent trail = do not publish; never fabricate names/dates to fill a gap.
 - **Database query/schema check** → `db-check` or `preflight`
 - **Bug fix loop** → `fix` (orchestrates debug → implement → test → commit)
-- **Receipt hunt / BAS / finance** → `bas-cycle`, `find-receipt`, `tag-transactions`, `scan-subscriptions`
+- **Receipt hunt / BAS / finance ops** → `bas-cycle`, `find-receipt`, `tag-transactions`, `scan-subscriptions` (these tag/fetch — they don't compute).
+- **Writing or changing money *math*** (ledger aggregations, reconciliation, R&D offset, runway, pile-mix — anything that emits a dollar figure) → **TDD-first** via `tdd`: write the failing test asserting the expected total *before* the implementation. A silent wrong number is the expensive finance failure and a manual glance won't catch it — the PostgREST 1000-cap truncation read org cash_spent at $590K of a real $975K; a test pinned to a known total catches that whole class of bug. Feedback-loop quality is the ceiling on output quality.
+- **After completing engineering that resolved genuine technical uncertainty** (novel architecture, experimental integration, an outcome not knowable in advance) → offer `rd-capture` to record the contemporaneous R&D evidence for the 43.5% R&D Tax Incentive. Eligibility gate first — routine CRUD / config / known-solution fixes are NOT R&D; never inflate them.
 - **Wiki / knowledge base** → `wiki`
 - **Deploy** → `deploy`
 - **Verify a fix** → `verify-fix` before claiming done
 - **Scheduled background work** → `/schedule` (built-in)
 
 For tasks that don't match any active skill, just do the work directly.
+
+## Agent skills
+
+### Issue tracker
+
+Issues and PRDs for this repo live in GitHub Issues for `Acurioustractor/act-global-infrastructure`. See `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+The mattpocock triage roles use their default label strings, with existing `wontfix` reused. See `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+This repo uses ACT's multi-source domain layout: `STEERING.md`, `wiki/concepts/`, `wiki/decisions/`, and `docs/architecture/`. See `docs/agents/domain.md`.
 
 ## Skills Pruned 2026-05-01
 
