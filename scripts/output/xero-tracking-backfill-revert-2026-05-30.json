@@ -1,0 +1,92 @@
+[
+  {
+    "invoiceId": "ea2ef0d3-f2d6-4a6b-9882-1dcbe87eeb53",
+    "invoiceNumber": "INV-0286",
+    "original": [
+      {
+        "Description": "Phase 1. Discovery & Planning\n\nProject audit, stakeholder engagement, digital setup\n\nSite review, consultation, risk management",
+        "UnitAmount": 18000,
+        "TaxType": "OUTPUT",
+        "TaxAmount": 1800,
+        "LineAmount": 18000,
+        "AccountCode": "260",
+        "Tracking": [
+          {
+            "Name": "Business Divisions",
+            "Option": "A Curious Tractor",
+            "TrackingCategoryID": "91448ff3-eb13-437a-9d97-4d2e52c86ca4",
+            "TrackingOptionID": "1973a257-0d96-42c3-bca0-99623cb52923"
+          }
+        ],
+        "Quantity": 1,
+        "LineItemID": "02564ed8-5152-44ab-9cb9-1f8d552e1e5d",
+        "AccountID": "24ed737e-e8c6-449e-83cc-597d0d680d06",
+        "ValidationErrors": []
+      },
+      {
+        "Description": "Phase 2. Pre-Trip DocumentationSite survey, community workshop, logisticsMapping, rubbish & vegetation assessment",
+        "UnitAmount": 10000,
+        "TaxType": "OUTPUT",
+        "TaxAmount": 1000,
+        "LineAmount": 10000,
+        "AccountCode": "260",
+        "Tracking": [
+          {
+            "Name": "Business Divisions",
+            "Option": "A Curious Tractor",
+            "TrackingCategoryID": "91448ff3-eb13-437a-9d97-4d2e52c86ca4",
+            "TrackingOptionID": "1973a257-0d96-42c3-bca0-99623cb52923"
+          }
+        ],
+        "Quantity": 1,
+        "LineItemID": "ec4ca522-7712-4be3-aefe-6bee74e6221e",
+        "AccountID": "24ed737e-e8c6-449e-83cc-597d0d680d06",
+        "ValidationErrors": []
+      },
+      {
+        "Description": "Phase 3. Working Bee\n8-person crew + community team for cleaning, repairs, vegetation",
+        "UnitAmount": 107000,
+        "TaxType": "OUTPUT",
+        "TaxAmount": 10700,
+        "LineAmount": 107000,
+        "AccountCode": "260",
+        "Tracking": [],
+        "Quantity": 1,
+        "LineItemID": "9684ae6c-ce86-4836-aa3d-0e9ef768f186",
+        "AccountID": "24ed737e-e8c6-449e-83cc-597d0d680d06",
+        "ValidationErrors": []
+      },
+      {
+        "Description": "Phase 4. Tools & EquipmentTool chest, safety gear, lockable storageHand + power tools, PPE, storage",
+        "UnitAmount": 9000,
+        "TaxType": "OUTPUT",
+        "TaxAmount": 900,
+        "LineAmount": 9000,
+        "AccountCode": "260",
+        "Tracking": [],
+        "Quantity": 1,
+        "LineItemID": "d2700caa-d875-46c0-b0d6-2f844fa6a5b4",
+        "AccountID": "24ed737e-e8c6-449e-83cc-597d0d680d06",
+        "ValidationErrors": []
+      },
+      {
+        "Description": "Phase 5. Documentation & Next PhasePhoto/video, report, planningFinal report, handover materials",
+        "UnitAmount": 6000,
+        "TaxType": "OUTPUT",
+        "TaxAmount": 600,
+        "LineAmount": 6000,
+        "AccountCode": "260",
+        "Tracking": [],
+        "Quantity": 1,
+        "LineItemID": "efcc1e86-d0a8-49fa-9253-6c17fa423b52",
+        "AccountID": "24ed737e-e8c6-449e-83cc-597d0d680d06",
+        "ValidationErrors": []
+      }
+    ],
+    "before": {
+      "Total": 165000,
+      "SubTotal": 150000,
+      "AmountDue": 0
+    }
+  }
+]

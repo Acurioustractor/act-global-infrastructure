@@ -33,8 +33,8 @@ Unlocked worklist by project:
 
 | project_code | invoices | cash | due |
 |---|---|---|---|
-| ACT-GD | 16 | $249,711 | $298,100 |
-| ACT-PI | 3 | $165,000 | $77,000 |
+| ACT-GD | 16 | $249,711 | $0 |
+| ACT-PI | 3 | $165,000 | $0 |
 | ACT-HV | 7 | $96,000 | $16,500 |
 | ACT-JH | 5 | $44,000 | $44,000 |
 | ACT-SM | 2 | $32,200 | $0 |
@@ -56,7 +56,7 @@ Unlocked worklist by project:
 
 ## Goods (ACT-GD) spotlight
 
-- Invoices: 29 · cash $649,711 · due $380,600 · locked: 13
+- Invoices: 29 · cash $649,711 · due $82,500 · locked: 13
 - Tracking state: MISSING=25 · WRONG=4
 
 ## Standardisation map (Phase 1 input)
