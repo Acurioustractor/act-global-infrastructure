@@ -120,9 +120,12 @@ export default function ProjectMoneyPage() {
                       {r.untagged ? (
                         <span className="inline-flex items-center gap-1 text-amber-400"><AlertTriangle className="h-3.5 w-3.5" /> Untagged</span>
                       ) : (
-                        <Link href={`/finance/projects/${r.code}`} className="hover:underline">
-                          <span className="font-mono text-xs text-muted-foreground">{r.code}</span> {r.name}
-                        </Link>
+                        <span className="inline-flex items-center gap-2">
+                          <Link href={`/finance/transactions?project=${r.code}&since=2025-07-01`} className="hover:underline" title={`Review & retag ${r.code} transactions`}>
+                            <span className="font-mono text-xs text-muted-foreground">{r.code}</span> {r.name}
+                          </Link>
+                          <Link href={`/finance/projects/${r.code}`} className="text-[10px] uppercase tracking-wide text-muted-foreground/50 hover:text-foreground">P&amp;L</Link>
+                        </span>
                       )}
                     </td>
                     <td className="px-3 py-2 text-right tabular-nums text-emerald-400/90">{r.income ? fmt(r.income) : '—'}</td>
