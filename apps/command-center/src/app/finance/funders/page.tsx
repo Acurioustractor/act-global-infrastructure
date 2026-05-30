@@ -27,6 +27,7 @@ interface FunderRow {
   daysSinceLast: number
   yearsActive: number
   projects: string[]
+  ghl: { paid: number; open: number; pipelines: string[]; verdict: 'MATCH' | 'DRIFT' | 'PROSPECT' | null } | null
   allocationId: string | null
   committedAmount: number | null
   drawnAmount: number | null
@@ -47,6 +48,7 @@ interface FundersResponse {
     totalGross: number
     totalOutstanding: number
     totalCommitted: number
+    ghl?: { goodsPaidTotal: number; phantomCount: number; phantomPaid: number }
   }
 }
 
@@ -69,6 +71,7 @@ const BAND_META: Record<Band, { icon: any; label: string; color: string; bg: str
 export default function FundersPage() {
   const queryClient = useQueryClient()
   const [bandFilter, setBandFilter] = useState<Band | 'ALL'>('ALL')
+  const [projectFilter, setProjectFilter] = useState<string>('ALL')
   const [search, setSearch] = useState('')
   const [showAdd, setShowAdd] = useState(false)
   const [selectedFunder, setSelectedFunder] = useState<string | null>(null)
@@ -79,11 +82,18 @@ export default function FundersPage() {
     queryFn: () => fetch('/api/finance/funders').then(r => r.json()),
   })
 
+  const projectOptions = useMemo(() => {
+    const set = new Set<string>()
+    for (const r of data?.rows || []) for (const p of r.projects || []) if (p) set.add(p)
+    return [...set].sort()
+  }, [data?.rows])
+
   const filtered = useMemo(() => {
     if (!data?.rows) return []
     const today = new Date()
     return data.rows.filter(r => {
       if (bandFilter !== 'ALL' && r.warmthBand !== bandFilter) return false
+      if (projectFilter !== 'ALL' && !r.projects.includes(projectFilter)) return false
       if (search && !r.funderName.toLowerCase().includes(search.toLowerCase())) return false
       if (reportFilter !== 'all') {
         if (!r.nextReportDue) return false
@@ -95,7 +105,7 @@ export default function FundersPage() {
       }
       return true
     })
-  }, [data?.rows, bandFilter, search, reportFilter])
+  }, [data?.rows, bandFilter, projectFilter, search, reportFilter])
 
   function daysUntil(dateStr: string | null): number | null {
     if (!dateStr) return null
@@ -173,12 +183,21 @@ export default function FundersPage() {
             </button>
           )
         })}
+        <select
+          value={projectFilter}
+          onChange={e => setProjectFilter(e.target.value)}
+          className="ml-auto px-3 py-1.5 rounded-full text-xs bg-white/5 border border-white/10 text-white focus:outline-none focus:border-white/30"
+          title="Filter funders by project"
+        >
+          <option value="ALL">All projects</option>
+          {projectOptions.map(p => <option key={p} value={p}>{p}</option>)}
+        </select>
         <input
           type="text"
           placeholder="Search funder…"
           value={search}
           onChange={e => setSearch(e.target.value)}
-          className="ml-auto px-3 py-1.5 rounded-full text-xs bg-white/5 border border-white/10 text-white placeholder-white/30 focus:outline-none focus:border-white/30"
+          className="px-3 py-1.5 rounded-full text-xs bg-white/5 border border-white/10 text-white placeholder-white/30 focus:outline-none focus:border-white/30"
         />
       </div>
 
@@ -204,6 +223,16 @@ export default function FundersPage() {
         ))}
       </div>
 
+      {/* Phantom GHL alert — money the CRM claims as paid with no Xero backing */}
+      {data?.summary.ghl && data.summary.ghl.phantomPaid > 0 && (
+        <div className="mb-4 flex items-start gap-2 rounded-lg border border-red-500/20 bg-red-500/10 px-3 py-2 text-xs text-red-300">
+          <AlertCircle className="h-4 w-4 mt-0.5 shrink-0" />
+          <span>
+            <strong>{data.summary.ghl.phantomCount} GHL opportunities marked paid ({fmt(data.summary.ghl.phantomPaid)})</strong> have no matching Xero income — likely phantom or duplicate. GHL Goods &ldquo;paid&rdquo; totals {fmt(data.summary.ghl.goodsPaidTotal)}; the GHL column below flags each funder against Xero truth.
+          </span>
+        </div>
+      )}
+
       {/* Funder table */}
       <div className="glass-card overflow-hidden">
         <div className="overflow-x-auto">
@@ -215,6 +244,7 @@ export default function FundersPage() {
                 <th className="px-3 py-3 text-right">Score</th>
                 <th className="px-3 py-3 text-right">Gross</th>
                 <th className="px-3 py-3 text-right">Outstanding</th>
+                <th className="px-3 py-3 text-right">GHL vs Xero</th>
                 <th className="px-3 py-3 text-right">Committed</th>
                 <th className="px-3 py-3 text-right">Drawn %</th>
                 <th className="px-3 py-3 text-right">Days since</th>
@@ -246,6 +276,22 @@ export default function FundersPage() {
                       'px-3 py-3 text-right tabular-nums',
                       r.outstanding > 50000 ? 'text-red-400 font-medium' : r.outstanding > 0 ? 'text-amber-400' : 'text-white/30'
                     )}>{r.outstanding > 0 ? fmt(r.outstanding) : '—'}</td>
+                    <td className="px-3 py-3 text-right tabular-nums text-xs">
+                      {r.ghl && r.ghl.verdict ? (
+                        <span
+                          className={cn(
+                            'inline-flex items-center gap-1 justify-end',
+                            r.ghl.verdict === 'MATCH' ? 'text-emerald-400' :
+                            r.ghl.verdict === 'DRIFT' ? 'text-amber-400' :
+                            'text-white/40'
+                          )}
+                          title={`Xero cash ${fmt(r.paidRevenue)} · GHL paid ${fmt(r.ghl.paid)}${r.ghl.open ? ` · GHL open ${fmt(r.ghl.open)}` : ''}\nPipelines: ${r.ghl.pipelines.join(', ') || '—'}`}
+                        >
+                          {r.ghl.verdict === 'MATCH' ? '🟢' : r.ghl.verdict === 'DRIFT' ? '🟡' : '⚪'}
+                          {r.ghl.verdict === 'PROSPECT' ? fmt(r.ghl.open) : fmt(r.ghl.paid)}
+                        </span>
+                      ) : <span className="text-white/20">—</span>}
+                    </td>
                     <td className="px-3 py-3 text-right tabular-nums text-white/80">{r.committedAmount != null ? fmt(r.committedAmount) : <span className="text-white/30">—</span>}</td>
                     <td className="px-3 py-3 text-right tabular-nums">
                       {r.drawnPct != null ? (
