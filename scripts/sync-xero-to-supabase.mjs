@@ -494,6 +494,39 @@ function detectProjectFromTracking(trackingCategories) {
 }
 
 /**
+ * Phase 3 (2026-05-30): Xero `Project Tracking` is the topmost source of truth.
+ * Returns the ACT-XX code ONLY when a line item carries a `Project Tracking`
+ * (or legacy `Project`) tag that resolves to a known code. Returns null
+ * otherwise — the caller must then PRESERVE the existing mirror `project_code`
+ * (hybrid rule: Xero-where-present, else keep existing). Deliberately excludes
+ * Business Divisions and text/contact heuristics: those are the drift-prone
+ * guesses Phase 3 moves away from. ~71% of income is in locked periods and
+ * cannot carry a Xero tag, so a hard flip would erase historical classification.
+ */
+function detectProjectFromXeroTracking(trackingCategories) {
+  if (!trackingCategories?.length) return null;
+  for (const tracking of trackingCategories) {
+    const catName = tracking.Name || '';
+    if (catName !== 'Project Tracking' && catName !== 'Project') continue;
+    const trackingValue = (tracking.Option || '').trim();
+    if (!trackingValue) continue;
+    // Direct ACT-XX prefix, e.g. "ACT-GD — Goods"
+    if (trackingValue.startsWith('ACT-')) {
+      const code = trackingValue.split(/\s*[—–-]\s*/)[0].trim();
+      if (PROJECT_CODES.projects?.[code]) return code;
+    }
+    // Resolve via xero_tracking field / aliases
+    const trackingLower = trackingValue.toLowerCase();
+    for (const [code, proj] of Object.entries(PROJECT_CODES.projects || {})) {
+      if ((proj.xero_tracking || '').toLowerCase() === trackingLower) return code;
+      const aliases = (proj.xero_tracking_aliases || []).map(a => a.toLowerCase());
+      if (aliases.includes(trackingLower)) return code;
+    }
+  }
+  return null;
+}
+
+/**
  * Detect project code from reference or description text
  */
 function detectProjectFromText(text) {
@@ -610,9 +643,28 @@ async function syncInvoices(options = {}) {
 
   for (const invoice of allInvoices) {
     try {
-      // Detect project code
+      // Detect project code (broad heuristic — kept for the match-rate stat only)
       const projectCode = detectProjectCode(invoice);
       if (projectCode) stats.invoices.matched_projects++;
+
+      // Phase 3: derive project_code FROM the authoritative Xero `Project Tracking`
+      // tag (hybrid — Xero-where-present, else preserve the mirror's existing code).
+      const allInvoiceTracking = invoice.LineItems?.flatMap(l => l.Tracking || []) || [];
+      const xeroTrackingCode = detectProjectFromXeroTracking(allInvoiceTracking);
+      // MANUAL-TAG GUARD: never overwrite a user's manual retag from our UI.
+      let preserveManualTag = false;
+      if (supabase && xeroTrackingCode && invoice.InvoiceID) {
+        try {
+          const { data: existingRow } = await supabase
+            .from('xero_invoices')
+            .select('project_code_source')
+            .eq('xero_id', invoice.InvoiceID)
+            .maybeSingle();
+          if (existingRow?.project_code_source && String(existingRow.project_code_source).startsWith('manual')) {
+            preserveManualTag = true;
+          }
+        } catch (_e) { /* best-effort; fall through */ }
+      }
 
       // Match contact to GHL
       const contactId = await matchContactToGHL(
@@ -643,6 +695,10 @@ async function syncInvoices(options = {}) {
         contact_xero_id: invoice.Contact?.ContactID,
         status: invoice.Status,
         type: invoice.Type, // ACCREC or ACCPAY
+        // Phase 3: write project_code ONLY when Xero carries a Project Tracking tag
+        // and the row isn't manually tagged. Otherwise omit it so the upsert
+        // preserves the mirror's existing project_code (taggers/manual/historical).
+        ...(xeroTrackingCode && !preserveManualTag ? { project_code: xeroTrackingCode, project_code_source: 'xero_tracking' } : {}),
         total: parseFloat(invoice.Total) || 0,
         subtotal: parseFloat(invoice.SubTotal) || 0,
         total_tax: parseFloat(invoice.TotalTax) || 0,

@@ -110,7 +110,7 @@ Probe: `scripts/probe-goods-funder-truth.mjs` (read-only, DB `tednluwflfhxyucgwi
 - **Still TODO:** Locked 54 invoices · $1.08M → **Standard Ledger handoff doc** (Tier 1, not yet generated).
 - Mirror lags Xero until next sync (expected); Phase 3 derivation will pick up the new tags.
 
-### Phase 3 — Flip the mirror derivation · Tier 1–2 code
+### Phase 3 — Flip the mirror derivation · Tier 1–2 code — **DONE 2026-05-30**
 - `scripts/sync-xero-to-supabase.mjs`: derive `project_code` **from**
   `line_items[].tracking[]` where `Name === 'Project Tracking'` (parse `ACT-XX` prefix).
   **Xero-where-present, else keep existing `project_code`** — NOT a hard flip. This is
@@ -118,7 +118,29 @@ Probe: `scripts/probe-goods-funder-truth.mjs` (read-only, DB `tednluwflfhxyucgwi
   drop Goods from $649K to the ~15 tagged invoices. Xero is authoritative when set;
   Supabase `project_code` fills the locked/historical gap.
 - Keep the **manual-source guard** (never overwrite `project_code_source LIKE 'manual%'`).
-- **Verify:** re-sync → Goods ledger unchanged at $649,711 (no regression).
+- **✅ Implemented:** new helper `detectProjectFromXeroTracking()` (authoritative `Project
+  Tracking`/`Project` category ONLY — excludes Business Divisions + text/contact heuristics).
+  **KEY GAP FOUND:** the invoice write block *never wrote `project_code` at all* (line 614
+  computed it as a stat counter only, threw it away) — the invoice mirror's `project_code`
+  was maintained entirely by the standalone taggers, never by the sync. The bank-txn block
+  *did* write it (line 816). Added the same conditional-spread + DB manual-guard to the
+  invoice `record`. Derivation runs only when a live Xero tag exists; otherwise the upsert
+  omits `project_code` so PostgREST preserves the existing value.
+- **✅ Verify (re-synced `invoices --days=250`, 1248 invoices, 0 errors):**
+  - Goods ACCREC `ACT-GD` = **19 invoices · $650,910.79**. The +$1,200 vs the documented
+    $649,711 is **INV-0327 (John Villiers, PAID)** — live Xero `Project Tracking="ACT-GD —
+    Goods"` on all 4 lines (flights/accom/program mgmt) but the old heuristics had misfiled
+    it `ACT-CORE`. Xero asserting authority = correct, not a regression. Verified live
+    pre-write (`get Invoices?InvoiceNumbers=…`).
+  - INV-0298 Dusseldorp confirmed `ACT-JH` live (dry-run's "→ACT-MY" was **stale-mirror
+    line_items** noise; the mirror lagged Xero). No JH→MY drift.
+  - **583 invoices** (all types) now source=`xero_tracking` (was 0 for invoices). Manual
+    sources (`manual_retag_2026-05-12` ×4, `manual` ×1) preserved.
+  - **Window note:** `--days=N` filters by invoice **Date**, so it (a) catches all unlocked
+    tagged invoices (earliest Goods tag = INV-0282 `2025-10-21`) and (b) **excludes VOIDED**
+    invoices — which is why the dry-run's voided "flips" (INV-0324/0317/0296/0297) never
+    materialized. Incremental (`modifiedSince`) would be needed to relabel retro-modified
+    invoices dated before the window, but the cron's next incremental pass handles those.
 
 ### Phase 4 — Goods funder ledger as a derived view · Tier 1 (+ Tier 3 if DB view migration)
 - Build `v_goods_funder_ledger` (or script-materialised): ACCREC where derived
