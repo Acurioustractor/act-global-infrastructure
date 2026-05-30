@@ -1,6 +1,6 @@
 # ACT Ecosystem — Claude Rules
 
-> Global rules live in `~/.claude/rules/` (verification, workflow, memory-system, context-efficiency, opus-4-7-prompting). This file is project-specific only — no duplicates.
+> Global rules live in `~/.claude/rules/` (verification, workflow, memory-system, context-efficiency, opus-4-8-prompting). This file is project-specific only — no duplicates.
 
 ## ALMA Language Rule
 
