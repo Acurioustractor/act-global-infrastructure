@@ -702,7 +702,12 @@ async function syncInvoices(options = {}) {
         total: parseFloat(invoice.Total) || 0,
         subtotal: parseFloat(invoice.SubTotal) || 0,
         total_tax: parseFloat(invoice.TotalTax) || 0,
-        amount_due: parseFloat(invoice.AmountDue) || 0,
+        // Phantom-receivable guard: a VOIDED/DELETED invoice owes nothing. Force
+        // amount_due to 0 so the mirror can never persist a stale "due" for a
+        // voided row (root cause of the 2026-05-30 $375,100 phantom receivables).
+        amount_due: (invoice.Status === 'VOIDED' || invoice.Status === 'DELETED')
+          ? 0
+          : (parseFloat(invoice.AmountDue) || 0),
         amount_paid: parseFloat(invoice.AmountPaid) || 0,
         currency_code: invoice.CurrencyCode || 'AUD',
         date: parseXeroDate(invoice.Date),
