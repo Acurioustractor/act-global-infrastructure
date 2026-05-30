@@ -39,6 +39,33 @@ function chip(text: string, color: string) {
   return <span className={`inline-block rounded px-1.5 py-0.5 text-xs ${color}`} style={{ fontFamily: 'ui-monospace, monospace' }}>{text}</span>
 }
 
+// Deterministic colour per project so the same code reads the same everywhere.
+// Full literal class strings (not interpolated) so Tailwind compiles them.
+const PROJECT_PALETTE = [
+  'bg-emerald-500/15 border-emerald-500/40 text-emerald-200 hover:border-emerald-400',
+  'bg-blue-500/15 border-blue-500/40 text-blue-200 hover:border-blue-400',
+  'bg-purple-500/15 border-purple-500/40 text-purple-200 hover:border-purple-400',
+  'bg-cyan-500/15 border-cyan-500/40 text-cyan-200 hover:border-cyan-400',
+  'bg-pink-500/15 border-pink-500/40 text-pink-200 hover:border-pink-400',
+  'bg-indigo-500/15 border-indigo-500/40 text-indigo-200 hover:border-indigo-400',
+  'bg-teal-500/15 border-teal-500/40 text-teal-200 hover:border-teal-400',
+  'bg-orange-500/15 border-orange-500/40 text-orange-200 hover:border-orange-400',
+  'bg-lime-500/15 border-lime-500/40 text-lime-200 hover:border-lime-400',
+  'bg-violet-500/15 border-violet-500/40 text-violet-200 hover:border-violet-400',
+]
+function projectColor(code: string): string {
+  if (!code || code === 'UNTAGGED') return 'bg-amber-500/10 border-amber-500/50 text-amber-300 hover:border-amber-400'
+  let h = 0
+  for (let i = 0; i < code.length; i++) h = (h * 31 + code.charCodeAt(i)) >>> 0
+  return PROJECT_PALETTE[h % PROJECT_PALETTE.length]
+}
+const SOURCE_COLOR: Record<string, string> = {
+  spend: 'bg-rose-500/15 border-rose-500/40 text-rose-200 hover:border-rose-400',
+  'spend-overpay': 'bg-rose-500/15 border-rose-500/40 text-rose-200 hover:border-rose-400',
+  bill: 'bg-amber-500/15 border-amber-500/40 text-amber-200 hover:border-amber-400',
+  receive: 'bg-emerald-500/15 border-emerald-500/40 text-emerald-200 hover:border-emerald-400',
+}
+
 function auditNote(r: Row): string {
   const id = r.xeroId
   const n = (r.contact || '').toLowerCase()
@@ -69,7 +96,9 @@ export default function TransactionsExplorer() {
   const [initialized, setInitialized] = useState(false)
 
   // server-side filters
-  const [projectFilter, setProjectFilter] = useState<string>('UNTAGGED')
+  // Default to all (tagged + untagged). Untagged is ~empty now that FY26 is fully
+  // tagged, so the old 'UNTAGGED' default landed on a blank list.
+  const [projectFilter, setProjectFilter] = useState<string>('all')
   const [since, setSince] = useState('2025-07-01')
   const [accountFilter, setAccountFilter] = useState<string>('act-only') // 'act-only', 'all', or specific account name
   const [availableAccounts, setAvailableAccounts] = useState<string[]>([])
@@ -197,14 +226,17 @@ export default function TransactionsExplorer() {
   }, [])
 
   // Keep the URL in sync as filters change, so a view is shareable + survives refresh.
+  // Gated on `initialized` so this never overwrites the incoming ?project= before the
+  // init effect above has read it (else a deep-link like ?project=ACT-GD gets clobbered).
   useEffect(() => {
+    if (!initialized) return
     const sp = new URLSearchParams()
-    if (projectFilter !== 'UNTAGGED') sp.set('project', projectFilter)
+    if (projectFilter !== 'all') sp.set('project', projectFilter)
     if (since !== '2025-07-01') sp.set('since', since)
     if (accountFilter !== 'act-only') sp.set('accounts', accountFilter)
     const qs = sp.toString()
     window.history.replaceState(null, '', qs ? `?${qs}` : window.location.pathname)
-  }, [projectFilter, since, accountFilter])
+  }, [projectFilter, since, accountFilter, initialized])
 
   function load() {
     setLoading(true)
@@ -484,8 +516,8 @@ export default function TransactionsExplorer() {
                 return (
                   <button key={code} onClick={() => setProjectFilter(code === 'UNTAGGED' ? 'UNTAGGED' : code)}
                     title={code}
-                    className="text-xs px-2 py-0.5 rounded border border-white/10 hover:border-white/30">
-                    {lbl} · {s.count} · {fmt(s.sum)}
+                    className={`text-xs px-2 py-0.5 rounded border transition-colors ${projectColor(code)} ${projectFilter === code ? 'ring-1 ring-white/50' : ''}`}>
+                    <span className="font-mono opacity-60">{code === 'UNTAGGED' ? '—' : code}</span> {lbl} · {s.count} · {fmt(s.sum)}
                   </button>
                 )
               })}
@@ -495,7 +527,8 @@ export default function TransactionsExplorer() {
             <div className="text-xs text-white/40 mb-2">By source</div>
             <div className="flex flex-wrap gap-1">
               {stats.bySource.map(([src, s]) => (
-                <button key={src} onClick={() => setSource(src)} className="text-xs px-2 py-0.5 rounded border border-white/10 hover:border-white/30">
+                <button key={src} onClick={() => setSource(src)}
+                  className={`text-xs px-2 py-0.5 rounded border transition-colors ${SOURCE_COLOR[src] || 'border-white/10 hover:border-white/30'} ${source === src ? 'ring-1 ring-white/50' : ''}`}>
                   {src} · {s.count} · {fmt(s.sum)}
                 </button>
               ))}
