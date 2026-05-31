@@ -126,15 +126,17 @@ export async function getOrgLedger({ fyStart, fyEnd, entityCode }: LedgerParams)
     return q.range(from, to)
   }
   const spendPage = (from: number, to: number) => {
+    // Exclude DELETED/voided rows — they stay in Xero's table and otherwise inflate
+    // cashSpent, committedExpense and the 43.5% R&D-eligible claim. (Bills filter status above.)
     let q = supabase.from('xero_transactions').select('date, contact_name, total, type, rd_eligible')
-      .in('type', SPEND_TYPES).gte('date', fyStart)
+      .in('type', SPEND_TYPES).neq('status', 'DELETED').gte('date', fyStart)
     if (fyEnd) q = q.lte('date', fyEnd)
     if (entityCode) q = q.eq('entity_code', entityCode)
     return q.range(from, to)
   }
   const receivePage = (from: number, to: number) => {
     let q = supabase.from('xero_transactions').select('total, date')
-      .in('type', RECEIVE_TYPES).gte('date', fyStart)
+      .in('type', RECEIVE_TYPES).neq('status', 'DELETED').gte('date', fyStart)
     if (fyEnd) q = q.lte('date', fyEnd)
     if (entityCode) q = q.eq('entity_code', entityCode)
     return q.range(from, to)
