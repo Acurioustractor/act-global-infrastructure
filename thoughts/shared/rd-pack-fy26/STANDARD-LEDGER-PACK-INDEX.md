@@ -38,7 +38,7 @@ All four are `in_progress`: designs written, no success criterion yet measured a
 ## 3. The full R&D map (this is the consolidation you asked for)
 
 1. **Domestic FY26 (registered):** the four registers above = $354,047.
-2. **ACT-IN internal infrastructure (NOT registered - biggest gap, but HIGH-RISK):** ~40-42% of Ben's time / ~$95K eligible is flagged in the CivicGraph register but has **no register**. Two candidates found (Alignment-Loop truth-state synthesis; LLM-graded rubric calibration). **Compliance caveat (TA 2017/5):** these are INTERNAL tooling and at high risk of the **internal-administration exclusion** as CORE activities; at best claimable as **supporting** (dominant purpose supporting a core experiment). Do NOT bank ACT-IN as core - see `software-rd-compliance-check.md`. The defensible core is the four external-facing product registers.
+2. **ACT-IN internal infrastructure - RESOLVED 2026-05-31 (`act-in-classification.md`):** the internal tools (Alignment-Loop truth-state synthesis, rubric grader, finance harness) are **EXCLUDED as core** (internal-administration exclusion, purpose-based) and **fail the supporting-activity test** (their dominant purpose is ACT's own ops/QC, not supporting a core experiment). **Do NOT create an ACT-IN core register.** Instead **re-cut Ben's ~60% "ACT-IN" time:** the external-facing experimental portion (ALMA -> ACT-JH; entity-resolution autoresearch -> ACT-CG; Governed-Proof -> JH) moves into the **product registers**; the internal-ops portion is simply not R&D. Net: there is no ~$95K core gap to fill - the defensible claim is the four product registers + properly-homed product experiments. Lower-risk and audit-safe.
 3. **FY26-27 overseas (Overseas Finding required):** the World Tour validates EL + JH cores overseas. It does not replace the domestic claim - it is next year's continuation. See the finding draft.
 
 ## 4. How the overseas finding interacts with the main R&D
@@ -63,7 +63,7 @@ All four are `in_progress`: designs written, no success criterion yet measured a
 1. Written R&D scope + pricing (and confirm SL is the R&D consultant, no separate engagement).
 2. **Nic's arms-length salary** determination - sets the $80,000 ACT-EL/personnel base; currently a retrospective characterisation.
 3. **AusIndustry registration timing** for FY26 (the hard blocker; due within 10 months of year-end = by 30 Apr 2027).
-4. **ACT-IN register decision** - whether to write up the two new core candidates (~$95K) before lodgement.
+4. **Confirm the ACT-IN resolution** (`act-in-classification.md`): internal tools excluded as core; re-cut Ben's time so experimental product work lands in the product registers and internal-ops time is dropped. Confirm the purpose characterisation + the re-cut percentage.
 5. **Core-vs-supporting classification** of each overseas activity (World Tour finding).
 6. **Overseas Finding** lodgement plan (FY26-27; before 30 Jun 2027; ~90 days).
 7. Confirm the contemporaneous-record standard is met (audit-trail.md + provenance sidecars + this system).
@@ -77,5 +77,5 @@ All four are `in_progress`: designs written, no success criterion yet measured a
 ## 8. Confidence
 
 - **Verified:** the four register dollar figures and hypotheses; the salary-allocations columns; the 2024 National Priorities; CtG Target 11; the overseas-finding four conditions. (Register reads + web checks 2026-05-31.)
-- **Estimate / adviser-dependent:** ACT-IN ~$95K (an allocation estimate, not a claim); core-vs-supporting of new candidates and overseas activities; all refund figures; Nic's salary base.
+- **Estimate / adviser-dependent:** ACT-IN resolved 2026-05-31 as excluded-core / reallocate (not a ~$95K core claim); core-vs-supporting of the overseas activities; all refund figures; Nic's salary base.
 - Detail behind this index: `thoughts/shared/handoffs/world-tour-tax-rd/` (rd-existing-pack-synthesis, rd-novelty-sweep, rd-history-proof).
