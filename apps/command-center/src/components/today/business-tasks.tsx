@@ -8,6 +8,10 @@ import { getKnowledgeActions } from '@/lib/api'
 
 const REFRESH_INTERVAL = 30 * 1000
 
+function cleanTitle(title: string): string {
+  return title.replace(/^Domino:\s*/i, '')
+}
+
 export function BusinessTasks() {
   const { data, isLoading } = useQuery({
     queryKey: ['knowledge', 'actions-overdue'],
@@ -64,7 +68,7 @@ export function BusinessTasks() {
                 action.importance === 'high' ? 'bg-red-400' : 'bg-amber-400'
               )} />
               <div className="flex-1 min-w-0">
-                <p className="text-sm text-white truncate">{action.title}</p>
+                <p className="text-sm text-white truncate">{cleanTitle(action.title)}</p>
                 <div className="flex items-center gap-2 mt-0.5">
                   {action.project_code && (
                     <span className="text-[10px] text-indigo-400">{action.project_code}</span>

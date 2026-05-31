@@ -1,0 +1,198 @@
+import assert from 'node:assert/strict'
+import test from 'node:test'
+import {
+  buildFinanceWorkbenchResponse,
+  type BankEvidenceRow,
+  type FinanceWorkbenchFilters,
+  type WorkbenchSummary,
+  type XeroInvoiceRow,
+  type XeroTransactionRow,
+} from './workbench'
+
+const baseFilters: FinanceWorkbenchFilters = {
+  source: 'all',
+  direction: 'all',
+  status: 'needs_action',
+  project: 'all',
+  q: '',
+  limit: 10,
+}
+
+const summary: WorkbenchSummary = {
+  bankLines: 3,
+  receiptGaps: 1,
+  receiptGapValue: 120,
+  candidateReceipts: 1,
+  xeroDraftCandidates: 1,
+  xeroDraftCandidateValue: 120,
+  unreconciledBankLines: 1,
+  unreconciledValue: 120,
+  bankProjectGaps: 1,
+  xeroProjectGaps: 1,
+  invoiceProjectGaps: 1,
+  actInReview: 1,
+  rdReview: 1,
+  rdEligibleSpend: 500,
+}
+
+const bankRows: BankEvidenceRow[] = [
+  {
+    id: 'bank-1',
+    date: '2026-01-15',
+    direction: 'debit',
+    payee: 'Supplier A',
+    particulars: 'Workshop tools',
+    reference: 'INV-1',
+    amount: 120,
+    status: 'unreconciled',
+    bank_account: 'NAB Visa ACT #8815',
+    project_code: null,
+    project_source: null,
+    rd_eligible: true,
+    receipt_match_status: 'unmatched',
+    evidence_status: 'uncovered',
+    candidate_count: 0,
+    best_confidence: null,
+    best_source: null,
+    best_vendor_name: null,
+    has_approved_link: false,
+    xero_transaction_id: null,
+    matched_xero_transaction_id: null,
+  },
+  {
+    id: 'bank-2',
+    date: '2026-01-20',
+    direction: 'credit',
+    payee: 'Grant Partner',
+    particulars: 'Payment',
+    reference: 'PAY-1',
+    amount: 1000,
+    status: 'reconciled',
+    bank_account: 'ACT Everyday',
+    project_code: 'ACT-GD',
+    project_source: 'manual',
+    rd_eligible: false,
+    receipt_match_status: 'matched',
+    evidence_status: 'matched',
+    candidate_count: 0,
+    best_confidence: null,
+    best_source: null,
+    best_vendor_name: null,
+    has_approved_link: true,
+    xero_transaction_id: 'xero-bank-2',
+    matched_xero_transaction_id: null,
+  },
+]
+
+const txRows: XeroTransactionRow[] = [
+  {
+    id: 'txn-1',
+    xero_transaction_id: 'xero-txn-1',
+    type: 'SPEND',
+    contact_name: 'Supplier B',
+    bank_account: 'NAB Visa ACT #8815',
+    project_code: 'ACT-IN',
+    project_code_source: 'vendor_rule',
+    total: 300,
+    status: 'AUTHORISED',
+    date: '2026-01-18',
+    line_items: [{ description: 'R&D review item' }],
+    has_attachments: false,
+    is_reconciled: false,
+    rd_eligible: false,
+    rd_category: 'review',
+  },
+]
+
+const invoiceRows: XeroInvoiceRow[] = [
+  {
+    id: 'invoice-1',
+    xero_id: 'xero-invoice-1',
+    invoice_number: 'INV-1',
+    type: 'ACCPAY',
+    status: 'AUTHORISED',
+    contact_name: 'Supplier C',
+    date: '2026-01-10',
+    total: 90,
+    amount_due: 90,
+    amount_paid: 0,
+    line_items: [{ Description: 'Missing receipt invoice' }],
+    has_attachments: false,
+    reference: null,
+    project_code: null,
+    project_code_source: null,
+    income_type: null,
+  },
+]
+
+test('buildFinanceWorkbenchResponse classifies and filters workbench items', () => {
+  const response = buildFinanceWorkbenchResponse(baseFilters, {
+    projects: [],
+    summary,
+    bankRows,
+    txRows,
+    invoiceRows,
+  })
+
+  assert.equal(response.totalMatching, 3)
+  assert.equal(response.items[0].id, 'bank-1')
+  assert.equal(response.items[0].needsReceipt, true)
+  assert.equal(response.items[0].needsProject, true)
+  assert.equal(response.items[0].needsXeroDraft, true)
+  assert.equal(response.items.find((item) => item.id === 'txn-1')?.needsRdReview, true)
+  assert.equal(response.items.find((item) => item.id === 'invoice-1')?.source, 'xero_invoices')
+})
+
+test('buildFinanceWorkbenchResponse applies project and text filters', () => {
+  const response = buildFinanceWorkbenchResponse(
+    { ...baseFilters, status: 'all', project: 'ACT-GD', q: 'grant' },
+    {
+      projects: [],
+      summary,
+      bankRows,
+      txRows,
+      invoiceRows,
+    }
+  )
+
+  assert.equal(response.totalMatching, 1)
+  assert.equal(response.items[0].id, 'bank-2')
+  assert.equal(response.items[0].direction, 'income')
+})
+
+test('buildFinanceWorkbenchResponse attaches highest-confidence AI suggestion', () => {
+  const response = buildFinanceWorkbenchResponse(
+    { ...baseFilters, status: 'all', source: 'bank_lines' },
+    {
+      projects: [],
+      summary,
+      bankRows,
+      aiSuggestions: [
+        {
+          id: 'suggestion-low',
+          source_table: 'bank_statement_lines',
+          source_record_id: 'bank-1',
+          suggested_project_code: 'ACT-IN',
+          confidence: 0.4,
+          reason: 'fallback',
+          risk_flags: [],
+          model: 'fixture',
+        },
+        {
+          id: 'suggestion-high',
+          source_table: 'bank_statement_lines',
+          source_record_id: 'bank-1',
+          suggested_project_code: 'SL_REVIEW',
+          confidence: 0.9,
+          reason: 'needs review',
+          risk_flags: ['ambiguous'],
+          model: 'fixture',
+        },
+      ],
+    }
+  )
+
+  assert.equal(response.items[0].aiSuggestion?.id, 'suggestion-high')
+  assert.equal(response.items[0].aiSuggestion?.blockedForAutoApply, true)
+  assert.deepEqual(response.items[0].aiSuggestion?.riskFlags, ['ambiguous'])
+})
