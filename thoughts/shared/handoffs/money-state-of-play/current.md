@@ -15,11 +15,21 @@ related_financials:
 
 ## Ledger
 <!-- This section is extracted by SessionStart hook for quick resume -->
-**Updated:** 2026-06-01 — Entity cutover + business architecture + Goods/Butterfly + R&D reframe
+**Updated:** 2026-06-01 (PM) — draft review + doc-drift fix PUSHED; next = command-center spend/income alignment across all projects
 **Read first:** `wiki/concepts/act-business-architecture.md` (canonical structure) · `thoughts/shared/plans/2026-06-01-cutover-30-day-critical-path.md` · `thoughts/shared/financials/2026-06-01-sl-perspective-rd-outcomes.md`
-**Committed (local, NOT pushed) on `wip/opus-4-8-prompting-2026-05-31`:** `0c6ba5b` (PTY readiness page + Goods/Butterfly entity lock-in) · `97a2099` (SL-perspective R&D + FY27 engine + service agreement) + this ledger commit.
+**PUSHED to `origin/wip/opus-4-8-prompting-2026-05-31`** (HEAD `9a10f26`): earlier cutover commits + `b035dbc` (wiki doc-drift: remove stale "Farm Pty Ltd (forming)" from four-lanes + act-identity — Farm = program on trust land, not a Pty) + `9a10f26` (novation draft: Minderoo Goods grant routes to Butterfly NOT ACT Pty).
+
+### Session 2026-06-01 (PM) — Tier-3 draft review + doc-drift + push
+- **Reviewed the 4 Tier-3 cutover drafts (clean-context).** Findings: (1) **Knight Photo pack self-flags HOLD** — it's sole-trader↔sole-trader, NOT a valid Pty R&D lever; this *contradicts* the prior "raise Knight Photo invoices next" — the draft's HOLD-until-SL is the safer read. (2) **Novation: Minderoo Goods grant → Butterfly, not ACT Pty** (sharpened in the draft, committed). (3) **Test-invoice runbook = most ready, SL-independent** — can run once Pty Xero+NAB live. (4) **Service agreement can't execute before 26 Jun Butterfly handover** + needs independent charity-board approval.
+- **Doc-drift fixed + committed:** stale "Farm Pty Ltd (forming)" removed from `wiki/concepts/four-lanes.md` (×3) + `act-identity.md` (×1). Grep-verified: only correct conditional "Farm Pty only if/when it earns" remains.
+- **Corrections to prior ledger:** `wiki/concepts/goods.md` **does not exist** (prior "reconcile goods.md" pointed at nothing). **Money Cockpit is NOT greenfield** — `forecast.ts`, `staffing.ts`, `money-cockpit/page.tsx` already exist (parked, with tests); it's "complete the gap," not "build." "Goods Pty" survives only in dated handoffs (history, leave) + the Notion proposal (flag, unfixed — Tier-2).
+- **Process note:** burned a long stretch on a FALSE "harness corrupting tool output" theory; reality = I was matching strings not in the files. Tools were fine. Read exact strings before editing.
+
+### Session 2026-06-01 (AM) — entity architecture, cutover, Goods/Butterfly, R&D reframe
 
 ### Session 2026-06-01 — entity architecture, cutover, Goods/Butterfly, R&D reframe
+
+_(AM arc — full detail retained below.)_
 
 **Arc:** started as "review command-center finance overview / build a Money Cockpit" → pivoted to the **sole-trader → ACT Pty cutover** → then **documenting the whole ACT business/entity architecture** → deep-dive on **Goods on Country**.
 
