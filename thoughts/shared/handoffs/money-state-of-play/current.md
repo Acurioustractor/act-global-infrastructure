@@ -15,9 +15,23 @@ related_financials:
 
 ## Ledger
 <!-- This section is extracted by SessionStart hook for quick resume -->
-**Updated:** 2026-06-01 (PM) — draft review + doc-drift fix PUSHED; next = command-center spend/income alignment across all projects
-**Read first:** `wiki/concepts/act-business-architecture.md` (canonical structure) · `thoughts/shared/plans/2026-06-01-cutover-30-day-critical-path.md` · `thoughts/shared/financials/2026-06-01-sl-perspective-rd-outcomes.md`
-**PUSHED to `origin/wip/opus-4-8-prompting-2026-05-31`** (HEAD `9a10f26`): earlier cutover commits + `b035dbc` (wiki doc-drift: remove stale "Farm Pty Ltd (forming)" from four-lanes + act-identity — Farm = program on trust land, not a Pty) + `9a10f26` (novation draft: Minderoo Goods grant routes to Butterfly NOT ACT Pty).
+**Updated:** 2026-06-01 (PM-2) — Finance Workbench recovered+committed; READY to do the actual cross-project spend/income alignment next session
+**Read first:** `apps/command-center/src/lib/finance/workbench.ts` (the alignment tool) · `wiki/concepts/act-business-architecture.md` · `thoughts/shared/plans/2026-05-29-finance-cockpit-consolidation.md`
+**HEAD `b33ae56`** on `wip/opus-4-8-prompting-2026-05-31`. Pushed through `632074a`; **`b33ae56` (workbench recovery) is the one commit to push next.**
+
+### Session 2026-06-01 (PM-2) — Finance Workbench = the cross-project spend/income alignment tool (ALREADY BUILT)
+**The ask** ("command-center review + tagging + alignment of spend & income across all projects") **already has a tool** — found it in-flight (uncommitted, from a 31-May session on this branch) and preserved it.
+- **`apps/command-center/src/lib/finance/workbench.ts` (727 lines)** + `api/finance/workbench/route.ts` (refactored 657→103, logic now in the testable lib) + `workbench.test.ts` (now tracked). Unifies **bank_statement_lines + xero_transactions + xero_invoices** for the FY (`2025-07-01..2026-06-30`) into ONE review surface. Per-row flags: `needs_project` (untagged), `project_review` (**ACT-IN catch-all + vendor-rule guesses needing a human**), `receipt_gap`, `unreconciled`, `rd_review`; + AI project suggestions. Paginates (respects PostgREST 1000-cap). **Default `source=bank_lines`; pass `?source=all` for the full cross-source view.**
+- **VERIFIED real (not inferred):** `tsc --noEmit` clean (whole app); workbench tests **3/3**; `GET /api/finance/workbench` → **200** with a working NON-ZERO summary:
+
+  | bankProjectGaps | xeroProjectGaps | invoiceProjectGaps | actInReview (ACT-IN catch-all) | rdReview | rdEligibleSpend | receiptGaps | unreconciled |
+  |---|---|---|---|---|---|---|---|
+  | 4 | **254** | 14 | **2,779** | 688 | $325,947 | 64 / $49,872 | 518 / $649,237 |
+
+- **THE ACTUAL ALIGNMENT WORK (next session, start here):** the big cross-project gaps are **2,779 ACT-IN catch-all rows** + **254 untagged Xero transactions** + 14 untagged invoices. Use `?status=project_review` and `?status=needs_project`. **Money-tagging = follow the auto-tagger guard** (skip `project_code_source LIKE 'manual%'`) and the **two-account rule**; per CLAUDE.md, any tagging that changes a project total should be checked against `project_monthly_financials`. UI page: check `apps/command-center/src/app/today/page.tsx` (today components also changed in this commit) + whatever consumes the workbench API; confirm the front-door route before driving it.
+- **⚠️ PROCESS — READ:** mid/late this session the tool-output display layer became unreliable under large context (echoing duplicated + partly-confabulated bash/temp-file output). This produced THREE false alarms I had to retract: (1) "harness corrupting edits" (really: I matched strings not in the files), (2) "cross-session race on `7eac883`" (really: an existing 31-May commit), (3) "workbench summary reads all-zero / gitignore eats all tests" (really: summary works, tests are tracked). **Lesson: verify with single minimal tool calls; don't trust large batched output. The workbench facts above were re-verified with clean single calls. `/clear` before continuing.**
+
+### Session 2026-06-01 (PM) — Tier-3 draft review + doc-drift + push
 
 ### Session 2026-06-01 (PM) — Tier-3 draft review + doc-drift + push
 - **Reviewed the 4 Tier-3 cutover drafts (clean-context).** Findings: (1) **Knight Photo pack self-flags HOLD** — it's sole-trader↔sole-trader, NOT a valid Pty R&D lever; this *contradicts* the prior "raise Knight Photo invoices next" — the draft's HOLD-until-SL is the safer read. (2) **Novation: Minderoo Goods grant → Butterfly, not ACT Pty** (sharpened in the draft, committed). (3) **Test-invoice runbook = most ready, SL-independent** — can run once Pty Xero+NAB live. (4) **Service agreement can't execute before 26 Jun Butterfly handover** + needs independent charity-board approval.
