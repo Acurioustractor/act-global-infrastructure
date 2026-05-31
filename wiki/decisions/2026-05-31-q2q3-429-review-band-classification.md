@@ -77,7 +77,7 @@ Net ledger effect of the recommended apply (MOL only): **−$30,539.69** from 42
 Matnic Trust is a **materials supplier** (keepers coded **446** across PICC/Goods/Harvest) — **NOT** a rent/landlord (recon-pack's "matnic properties → rent/469" lead was wrong). Each charge had a **Dext duplicate** (429/ACT-IN) shadowing a properly-coded **PAID keeper**:
 - $6,441.74 → Dext dup **VOIDED** (2026-05-29) ✓ · keeper PAID **446 / ACT-PI (PICC)**.
 - $2,826.92 → Dext dup **VOIDED** ✓ · keeper PAID **446 / ACT-GD (Goods)**.
-- **$591.28 (2026-03-11) → Dext dup the sweep MISSED, still AUTHORISED in 429/ACT-IN** · keeper PAID **446 / ACT-HV (Harvest)** → **void candidate** (small; bundle with cleanup).
+- **$591.28 (2026-03-11) → Dext dup the sweep MISSED** · keeper PAID **446 / ACT-HV (Harvest)** → **✅ VOIDED 2026-05-31** (`f8982afe`, contact "matnic properties").
 
 No rent reclassification needed. **Systemic pattern confirmed:** much of the "remaining 429 REVIEW band" is **Dext-import shadow duplicates** of correctly-coded PAID keepers, not genuine uncoded spend.
 
@@ -85,7 +85,7 @@ No rent reclassification needed. **Systemic pattern confirmed:** much of the "re
 
 - **PayPal — RESOLVED.** The $3,918.50 (recon-pack's "$3,919") is already **PAID, coded 407 (Bank/Merchant Fees), ACT-IN** — done. A separate **$2,650.62 is an old DRAFT (Jun 2025)** → fold into draft cleanup. No action.
 - **Nicholas Marchesi $5,149** (3 AUTHORISED 429 bills, descr "Income"):
-  - **$1,974.50 ×2 — both 2025-11-24, identical Dext ref `03a26314` = DUPLICATE** → void one (`72d0abe7` / `764b8b05`).
+  - **$1,974.50 ×2 — both 2025-11-24, identical Dext ref `03a26314` = DUPLICATE** → **✅ VOIDED 2026-05-31** (`764b8b05`; kept twin `72d0abe7` for the owner-loan reclass below).
   - **$1,200 (6-Nov) + $1,974.50 (24-Nov)** → Ben: these are **Nic putting money into the business / being repaid — an owner (sole-trader) loan**, not expense or income. Reclassify to an **owner's loan / contributions equity account** (out of 429; not ACCPAY-with-GST). **OPEN for SL.**
 - **A Curious Tractor self-bill $6,226 (2025-11-10, AUTHORISED, 429, ACT-IN, Dext):** Ben: **same theme** — relates to **how Nic added money to the business (owner/sole-trader loan) and pays himself back**, not a third-party expense. **OPEN for SL** to structure the owner-loan accounting — do NOT void blindly (real money movement, mis-recorded).
 
@@ -103,11 +103,11 @@ No rent reclassification needed. **Systemic pattern confirmed:** much of the "re
 - **RW Pacific $4,200 / Total Tools $4,547** → instant-write-off equipment (confirm not personal).
 - Project moves (recon-pack High band): Plasticians ACT-IN → ACT-GD; Allclass ACT-IN → ACT-FM.
 
-**Void candidates (cleanup batch):**
-- Mounty Container $11,000 phantom — **UI-only** (archived contact, no API path).
-- Nicholas Marchesi $1,974.50 duplicate.
-- Matnic Trust $591.28 leftover dup (2026-05-29 sweep missed it).
-- (+ the existing 7 archived-contact bills, Sand Yard ×3 / Edmonds ×4.)
+**Voids:**
+- ✅ Nicholas Marchesi $1,974.50 duplicate — **VOIDED 2026-05-31** (`scripts/void-429-leftover-dups.mjs`).
+- ✅ Matnic "matnic properties" $591.28 leftover dup — **VOIDED 2026-05-31**.
+- ⏸ Mounty Container $11,000 phantom — **UI-only** (archived contact, no API path) → SL.
+- ⏸ The existing 7 archived-contact bills (Sand Yard ×3 / Edmonds ×4) — UI/SL.
 
 **🔓 OPEN — for SL discussion (owner-funding cluster, §6):**
 - A Curious Tractor self-bill $6,226 + Nicholas Marchesi $1,200 + $1,974.50 → Nic's owner/sole-trader loan; reclassify to owner's-loan/equity; formalise as Pty Director's Loan at cutover.
