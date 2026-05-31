@@ -15,9 +15,17 @@ related_financials:
 
 ## Ledger
 <!-- This section is extracted by SessionStart hook for quick resume -->
-**Updated:** 2026-06-01 (PM-2) — Finance Workbench recovered+committed; READY to do the actual cross-project spend/income alignment next session
-**Read first:** `apps/command-center/src/lib/finance/workbench.ts` (the alignment tool) · `wiki/concepts/act-business-architecture.md` · `thoughts/shared/plans/2026-05-29-finance-cockpit-consolidation.md`
-**HEAD `b33ae56`** on `wip/opus-4-8-prompting-2026-05-31`. Pushed through `632074a`; **`b33ae56` (workbench recovery) is the one commit to push next.**
+**Updated:** 2026-06-01 (PM-3) — Workbench DELETED+transfer fix shipped & PUSHED (`a09b7ea`). Tracer-bullet found the "254 untagged txns" were 100% internal transfers + DELETED rows inflating R&D-eligible spend $31,761. Canonical surfaces (ledger.ts + rollup) still carry the DELETED bug — QUEUED.
+**Read first:** `thoughts/shared/plans/2026-06-01-deleted-row-exclusion-canonical-finance.md` (the queued fix — do in clean context) · `apps/command-center/src/lib/finance/workbench.ts` (fixed alignment tool) · memory `command-center-finance-truth.md` (DELETED bullet).
+**HEAD `a09b7ea`** on `wip/opus-4-8-prompting-2026-05-31`, pushed, 0/0 with origin.
+
+### Session 2026-06-01 (PM-3) — Workbench DELETED + transfer fix (tracer-bullet caught a $31.7K R&D overstatement)
+**The ask was "fix this"** (pasted the PM-2 sign-off). Verified PM-2's facts were ALL accurate (workbench works, tests pass via `node --import tsx --test`, git clean) — so "fix this" = do the alignment work. Chose tracer-bullet → safe subset.
+- **Tracer-bullet finding: the "254 untagged Xero transactions" ($1.95M) are 100% internal bank transfers** (127 SPEND-TRANSFER + 127 RECEIVE-TRANSFER between ACT's own 2 accounts; blank contact; 0 AI suggestions). They must NOT get a project code — tagging would double-count. **There was no safe subset to tag.** Plus 58 of the 254 were DELETED; 7 sat in excluded accounts; 4 transfers are wrongly tagged to a real project (double-count, un-tag = deferred Tier-2).
+- **Bigger finding: `status='DELETED'` (voided) rows pollute every count.** FY26 = 309 DELETED txns ($429K); 249 DELETED SPEND ($32,288), 205 rd_eligible ($31,761). **$31,761 of the $325,947 "R&D-eligible spend" headline was voided rows** → ~$13.8K of refund resting on voided spend.
+- **FIXED + PUSHED `a09b7ea` (`workbench.ts` + `workbench.test.ts`):** exclude transfers from `needsProject`/`xero_project_gaps`; exclude DELETED from summary SQL + row loaders. Unit test pins the transfer rule. tsc clean, tests **4/4**. Live verify: `xeroProjectGaps` 254→**0**, `rdEligibleSpend` $325,947→**$294,186**, `actInReview` 2,779→**2,599**.
+- **BLAST RADIUS (Ben's 2nd ask) — VERIFIED, QUEUED not fixed:** `ledger.ts getOrgLedger` (no status filter → `cashSpent`+`rdEligibleSpend` inflated; **R&D claim basis**) and `scripts/calculate-project-monthly-financials.mjs` (→ `project_monthly_financials.expenses` inflated ~$32K, headline P&L). Transfers already safe in both. Fix plan: `thoughts/shared/plans/2026-06-01-deleted-row-exclusion-canonical-finance.md` (TDD + Tier-2 table repopulate; clean context).
+- **REAL remaining alignment work (Ben's project calls, NOT auto-taggable):** 14 invoices (Kennards/Bunnings/Maleny Hardware/TNT Plastering/Joseph Kirmos $4.5K/Sophie Hickey — Harvest/Farm), 4 bank income lines (DTF/Airbnb×2/Uber), **2,599 ACT-IN catch-all**.
 
 ### Session 2026-06-01 (PM-2) — Finance Workbench = the cross-project spend/income alignment tool (ALREADY BUILT)
 **The ask** ("command-center review + tagging + alignment of spend & income across all projects") **already has a tool** — found it in-flight (uncommitted, from a 31-May session on this branch) and preserved it.
