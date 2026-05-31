@@ -51,7 +51,7 @@ These get a novation/variation request (active or future-tranche relationships):
 | Lord Mayor's Charitable Foundation | Funder-to-notify list | — | |
 | Dusseldorp Forum | Active partner | Rachel Fyfe / Jessica Duffy | |
 | Equity Trustees | If active grant | — | Confirm if live before sending |
-| Minderoo Foundation | Pitch already addressed to the Pty — no novation, just confirm | Lucy Stronach | Confirmation only |
+| Minderoo Foundation | The Minderoo ask is for **Goods** — and Goods grants route to **The Butterfly Movement Ltd (charity)**, not ACT Pty (per `act-business-architecture.md`). A pitch/grant "addressed to the Pty" needs its recipient entity confirmed, not a routine sign-off. | Lucy Stronach | ⚠️ Confirm Goods grant → Butterfly (not ACT Pty) with SL + Minderoo before anything is signed — biggest routing risk |
 | Any Commonwealth / state grant | Check grant register | — | These often need a formal deed of novation, not just notice |
 
 These do **not** get a novation letter:
