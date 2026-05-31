@@ -160,6 +160,75 @@ test('buildFinanceWorkbenchResponse applies project and text filters', () => {
   assert.equal(response.items[0].direction, 'income')
 })
 
+test('buildFinanceWorkbenchResponse does not flag internal transfers as needing a project', () => {
+  const transferRows: XeroTransactionRow[] = [
+    {
+      id: 'tx-transfer-spend',
+      xero_transaction_id: 'xero-tx-transfer-spend',
+      type: 'SPEND-TRANSFER',
+      contact_name: null,
+      bank_account: 'NJ Marchesi T/as ACT Everyday',
+      project_code: null,
+      project_code_source: null,
+      total: 30000,
+      status: 'AUTHORISED',
+      date: '2025-12-01',
+      line_items: [{ description: 'Bank Transfer to NAB Visa ACT #8815.' }],
+      has_attachments: false,
+      is_reconciled: false,
+      rd_eligible: false,
+      rd_category: null,
+    },
+    {
+      id: 'tx-transfer-recv',
+      xero_transaction_id: 'xero-tx-transfer-recv',
+      type: 'RECEIVE-TRANSFER',
+      contact_name: null,
+      bank_account: 'NAB Visa ACT #8815',
+      project_code: null,
+      project_code_source: null,
+      total: 30000,
+      status: 'AUTHORISED',
+      date: '2025-12-01',
+      line_items: [{ description: 'Bank Transfer from NJ Marchesi T/as ACT Everyday.' }],
+      has_attachments: false,
+      is_reconciled: false,
+      rd_eligible: false,
+      rd_category: null,
+    },
+    {
+      id: 'tx-normal-spend',
+      xero_transaction_id: 'xero-tx-normal-spend',
+      type: 'SPEND',
+      contact_name: 'Kennards Hire',
+      bank_account: 'NAB Visa ACT #8815',
+      project_code: null,
+      project_code_source: null,
+      total: 1714,
+      status: 'AUTHORISED',
+      date: '2025-12-08',
+      line_items: [{ description: 'Equipment hire' }],
+      has_attachments: false,
+      is_reconciled: false,
+      rd_eligible: false,
+      rd_category: null,
+    },
+  ]
+
+  const response = buildFinanceWorkbenchResponse(
+    { ...baseFilters, source: 'xero_transactions', status: 'all' },
+    { projects: [], summary, txRows: transferRows }
+  )
+
+  const spendTransfer = response.items.find((item) => item.id === 'tx-transfer-spend')
+  const recvTransfer = response.items.find((item) => item.id === 'tx-transfer-recv')
+  const normalSpend = response.items.find((item) => item.id === 'tx-normal-spend')
+
+  assert.equal(spendTransfer?.needsProject, false, 'a SPEND-TRANSFER is internal movement, not project spend')
+  assert.equal(recvTransfer?.needsProject, false, 'a RECEIVE-TRANSFER is internal movement, not project income')
+  assert.equal(normalSpend?.needsProject, true, 'a real untagged vendor SPEND still needs a project')
+})
+
 test('buildFinanceWorkbenchResponse attaches highest-confidence AI suggestion', () => {
   const response = buildFinanceWorkbenchResponse(
     { ...baseFilters, status: 'all', source: 'bank_lines' },
