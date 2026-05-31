@@ -60,11 +60,17 @@ Readiness as of 1 June: **3 done · 5 doing · 14 todo · 0 blocked.** Critical 
 - [ ] **Pre-30-June discretionary spend** at sole-trader marginal rate: $20K instant asset write-off, Nic super top-up to $30K cap, pre-pay annual SaaS. Cap ~$50K combined.
 - [ ] **30 June — cutover.** Sole trader stops trading; Pty starts 1 July.
 
-### Post-cutover — July–August
-- [ ] First Pty payroll run (July).
-- [ ] **Cross-entity journals booked** from the mapping spreadsheet (SL, August).
+### Post-cutover — July–August (stand up the FY27 R&D engine)
+- [ ] **First Pty payroll run (July)** — founders at $10K/mo, with the **95% (Ben) / 40% (Nic) R&D time split documented weekly** from day 1. This is what makes FY27 the maximal R&D year.
+- [ ] **Register R&D activities with AusIndustry** for the Pty (FY27 window; plus the small FY26 24 Apr–30 Jun slice if claiming).
+- [ ] **Contemporaneous R&D records from 1 July** — git, calendar, activity register. The evidence is the claim.
+- [ ] **Keep R&D "at risk"** — fund from ACT Pty commercial revenue; grants fund non-R&D community work via the charity (grant-reimbursed R&D is clawed back).
+- [ ] **Cross-entity journals booked** from the mapping spreadsheet (SL, August) — for accounting/P&L, NOT as the R&D claim basis.
 - [ ] Final sole-trader BAS (Q4 FY26, due 28 July) + cancel sole-trader ABN/GST after.
-- [ ] FY26 R&D claim assembled + lodged via Pty (Sept 2026 – 30 Apr 2027).
+- [ ] **FY26 R&D — minimal, defensible claim only** (accrue founder remuneration for 24 Apr–30 Jun + register). No aggressive "on behalf of" R&D journals.
+
+## R&D re-baseline (2026-06-01)
+Per the SL-perspective analysis (`thoughts/shared/financials/2026-06-01-sl-perspective-rd-outcomes.md`): **FY26 R&D is likely largely stranded** (sole-trader period, same rule that forfeited FY24-25). Re-baseline the refund: **FY26 ≈ $0-25K; FY27 ≈ $200-260K, recurring.** Update any cashflow that banked $200K into FY26. This does not block the cutover, it changes the expectation not the setup. Confirm with SL (question sent: `2026-06-01-sl-rd-eligibility-question.md`).
 
 ## Risk flags
 

@@ -221,7 +221,37 @@
       "priority": "high",
       "due": "2026-05-30",
       "status": "todo",
-      "evidence": "Snow, PRF, LMCF, Dusseldorp, Equity Trustees, Commonwealth/state grants; SL template needed"
+      "evidence": "Snow, PRF, LMCF, Dusseldorp, Equity Trustees, Commonwealth/state grants; SL template needed (drafts: thoughts/shared/financials/2026-06-01-funder-novation-letters.md)"
+    },
+    {
+      "id": "family-trust-elections",
+      "label": "Family trust elections (FTEs) lodged for Knight + Marchesi trusts",
+      "category": "registration",
+      "owner": "standard-ledger",
+      "priority": "critical",
+      "due": "2026-06-27",
+      "status": "todo",
+      "evidence": "Gates Subdiv 328-G restructure rollover — ultimate-economic-ownership test across two family groups (s328-440). SL to confirm + lodge"
+    },
+    {
+      "id": "goods-dgr-application",
+      "label": "Goods DGR application lodged (The Butterfly Movement Ltd)",
+      "category": "registration",
+      "owner": "ben",
+      "priority": "high",
+      "due": "2026-06-30",
+      "status": "todo",
+      "evidence": "Charity is the Goods grants/DGR vehicle; DGR endorsement is slow, lodge now. Auspicing + retrospective receipts bridge until endorsed"
+    },
+    {
+      "id": "goods-butterfly-service-agreement",
+      "label": "Arm's-length service agreement ACT Pty <-> The Butterfly Movement Ltd",
+      "category": "operations",
+      "owner": "ben",
+      "priority": "high",
+      "due": "2026-06-30",
+      "status": "doing",
+      "evidence": "ACT Pty bills charity for back-office at market rate; keeps trading income out of charity; related-party + COI safeguards. Outline drafted 2026-06-01 (thoughts/shared/financials/2026-06-01-actpty-butterfly-service-agreement-outline.md)"
     }
   ]
 }
