@@ -50,8 +50,8 @@
       "owner": "standard-ledger",
       "priority": "critical",
       "due": "2026-05-30",
-      "status": "blocked",
-      "evidence": "ATO mail to Vanessa's office 18+ days overdue; possibly delayed by Annerley postcode error — chase Vanessa"
+      "status": "done",
+      "evidence": "ABN 36 697 347 676 issued + GST registered for ACN 697 347 676 — confirmed by Ben 2026-06-01 (unblocks Pty Xero, NAB, payroll, invoicing)"
     },
     {
       "id": "sha-signed",
@@ -70,8 +70,8 @@
       "owner": "ben",
       "priority": "critical",
       "due": "2026-05-30",
-      "status": "todo",
-      "evidence": "2-week onboarding; SL providing direct-banker contact"
+      "status": "doing",
+      "evidence": "NAB onboarding started by Ben 2026-06-01; ~2-week onboarding; SL providing direct-banker contact"
     },
     {
       "id": "pty-xero-open",
@@ -100,8 +100,8 @@
       "owner": "ben",
       "priority": "critical",
       "due": "2026-06-06",
-      "status": "todo",
-      "evidence": "Gating insurance for Harvest lease + community-facing activities; need broker engaged"
+      "status": "doing",
+      "evidence": "Insurance process started by Ben 2026-06-01; gating insurance for Harvest lease + community-facing activities"
     },
     {
       "id": "insurance-do",
@@ -110,8 +110,8 @@
       "owner": "ben",
       "priority": "high",
       "due": "2026-06-06",
-      "status": "todo",
-      "evidence": "Standard practice; required pre-cutover"
+      "status": "doing",
+      "evidence": "Insurance process started by Ben 2026-06-01; standard practice, required pre-cutover"
     },
     {
       "id": "fair-market-salary",

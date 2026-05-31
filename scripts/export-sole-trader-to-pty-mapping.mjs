@@ -43,19 +43,28 @@ const sb = createClient(
 );
 
 // --- reallocation rule ---
-// Returns 'Y' | 'N' | 'REVIEW' + a note.
+// Returns { decision: 'Y'|'N'|'REVIEW', destination, note }.
+// destination_entity routes each line to its post-cutover home (Goods structure locked 2026-06-01):
+//   ACT-PTY      → A Curious Tractor Pty Ltd
+//   SOLE_TRADER  → stays with Nic (farm / personal)
+//   GOODS-SPLIT  → Goods: grants/philanthropy → The Butterfly Movement Ltd (charity);
+//                  commercial/contract → ACT Pty. Not derivable from project_code alone — split by contact.
+//   REVIEW       → manual triage
 function reallocationDecision(projectCode) {
   const code = (projectCode || '').trim().toUpperCase();
-  if (!code) return { decision: 'REVIEW', note: 'No project code — needs manual triage' };
+  if (!code) return { decision: 'REVIEW', destination: 'REVIEW', note: 'No project code — needs manual triage' };
   if (code === 'ACT-FM' || code === 'ACT-BV') {
-    return { decision: 'N', note: 'Farm/place asset stays with Nic / separate farm entity (per CEO decision)' };
+    return { decision: 'N', destination: 'SOLE_TRADER', note: 'Farm/place asset stays with Nic / separate farm entity (per CEO decision)' };
+  }
+  if (code === 'ACT-GD') {
+    return { decision: 'REVIEW', destination: 'GOODS-SPLIT', note: 'Goods: grant/philanthropy → Butterfly Movement Ltd (charity); commercial/contract → ACT Pty. Classify by contact.' };
   }
   if (code === 'ACT-HV') {
-    return { decision: 'Y', note: 'Pre-incorporation Harvest spend rolls into Pty; post-incorporation moves to Harvest subsidiary' };
+    return { decision: 'Y', destination: 'ACT-PTY', note: 'Pre-incorporation Harvest spend rolls into Pty; post-incorporation moves to Harvest subsidiary' };
   }
-  if (code === 'UNASSIGNED') return { decision: 'REVIEW', note: 'Untagged — clear before reallocation' };
-  if (code.startsWith('ACT-')) return { decision: 'Y', note: 'ACT project — reallocate to Pty' };
-  return { decision: 'REVIEW', note: `Unknown code prefix (${code}) — confirm with Standard Ledger` };
+  if (code === 'UNASSIGNED') return { decision: 'REVIEW', destination: 'REVIEW', note: 'Untagged — clear before reallocation' };
+  if (code.startsWith('ACT-')) return { decision: 'Y', destination: 'ACT-PTY', note: 'ACT project — reallocate to Pty' };
+  return { decision: 'REVIEW', destination: 'REVIEW', note: `Unknown code prefix (${code}) — confirm with Standard Ledger` };
 }
 
 // --- helpers ---
@@ -145,7 +154,7 @@ console.log(`Pulled ${txns.length} transactions, ${invs.length} invoices`);
 
 // --- shape rows ---
 const txRows = (txns || []).map(t => {
-  const { decision, note } = reallocationDecision(t.project_code);
+  const { decision, destination, note } = reallocationDecision(t.project_code);
   const dir = direction(t.type);
   return {
     source: 'transaction',
@@ -165,12 +174,13 @@ const txRows = (txns || []).map(t => {
     rd_eligible: t.rd_eligible === true ? 'Y' : t.rd_eligible === false ? 'N' : '',
     rd_category: t.rd_category || '',
     reallocate_to_pty: decision,
+    destination_entity: destination,
     notes: note,
   };
 });
 
 const invRows = (invs || []).map(i => {
-  const { decision, note } = reallocationDecision(i.project_code);
+  const { decision, destination, note } = reallocationDecision(i.project_code);
   const dir = direction(i.type);
   return {
     source: 'invoice',
@@ -190,6 +200,7 @@ const invRows = (invs || []).map(i => {
     rd_eligible: '',
     rd_category: '',
     reallocate_to_pty: decision,
+    destination_entity: destination,
     notes: [note, i.status ? `status=${i.status}` : '', i.amount_due > 0 ? `due=${fmt(i.amount_due)}` : ''].filter(Boolean).join(' | '),
   };
 });
@@ -260,6 +271,7 @@ const detailCols = [
   { key: 'rd_eligible' },
   { key: 'rd_category' },
   { key: 'reallocate_to_pty' },
+  { key: 'destination_entity' },
   { key: 'notes' },
 ];
 const summaryCols = [

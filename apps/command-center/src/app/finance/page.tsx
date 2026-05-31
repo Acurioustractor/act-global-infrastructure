@@ -107,6 +107,45 @@ const cards: Array<{
   },
 ]
 
+// Plan surface — the planning-side pages (previously unlinked from the front door).
+// These will be composed into the unified Money Cockpit (/finance/cockpit) as it lands.
+const planCards: Array<{
+  title: string
+  href: string
+  description: string
+  icon: typeof DollarSign
+  accent: string
+}> = [
+  {
+    title: 'PTY cutover readiness',
+    href: '/finance/pty-readiness',
+    description: 'Live 30-Jun cutover tracker — critical path, blockers, days to go.',
+    icon: Target,
+    accent: 'from-amber-500/10 to-amber-500/5 border-amber-500/30',
+  },
+  {
+    title: 'Project money',
+    href: '/finance/project-money',
+    description: 'All-projects income / received / expense / net. FY26, cash basis.',
+    icon: Layers,
+    accent: 'from-indigo-500/10 to-indigo-500/5 border-indigo-500/30',
+  },
+  {
+    title: 'Funders',
+    href: '/finance/funders',
+    description: 'Committed + potential incoming. GHL vs Xero drift, next reports.',
+    icon: GitBranch,
+    accent: 'from-blue-500/10 to-blue-500/5 border-blue-500/30',
+  },
+  {
+    title: 'Revenue model',
+    href: '/finance/revenue',
+    description: '18-month forward revenue timeline by layer + scenarios.',
+    icon: PieChart,
+    accent: 'from-emerald-500/10 to-emerald-500/5 border-emerald-500/30',
+  },
+]
+
 const otherSurfaces: Array<{
   title: string
   description: string
@@ -170,6 +209,34 @@ export default function FinanceIndexPage() {
             </Link>
           )
         })}
+      </section>
+
+      <hr className="my-10 border-border" />
+
+      <section aria-labelledby="plan" className="space-y-4">
+        <div>
+          <h2 id="plan" className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">Plan</h2>
+          <p className="mt-1 text-sm text-muted-foreground">
+            The planning side — what&apos;s coming in, what&apos;s going out, and the road to the Pty cutover. (Being composed into a single Money Cockpit.)
+          </p>
+        </div>
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {planCards.map((card) => {
+            const Icon = card.icon
+            return (
+              <Link
+                key={card.href}
+                href={card.href}
+                className={`group relative rounded-xl border bg-gradient-to-br ${card.accent} p-5 transition hover:shadow-md`}
+              >
+                <Icon className="mb-3 h-5 w-5 text-foreground/80" />
+                <h3 className="text-base font-semibold">{card.title}</h3>
+                <p className="mt-1 text-sm text-muted-foreground">{card.description}</p>
+                <span className="mt-3 inline-block text-xs font-medium text-foreground/60 group-hover:text-foreground">Open →</span>
+              </Link>
+            )
+          })}
+        </div>
       </section>
 
       <hr className="my-10 border-border" />

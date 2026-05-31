@@ -28,11 +28,12 @@ review_cadence: weekly (via Alignment Loop agent)
 
 | Entity | Type | ACN/ABN | Status | Purpose |
 |--------|------|---------|--------|---------|
-| **A Curious Tractor Pty Ltd** | Pty Ltd (shares) | ACN 697 347 676; ABN PENDING | **Registered ASIC 2026-04-24** | Primary trading entity from 1 July 2026. Shareholders: Knight Family Trust (50) + Marchesi Family Trust (50). Directors: Ben Knight + Nicholas Marchesi. Bank: NAB. Accountant: Standard Ledger. |
+| **A Curious Tractor Pty Ltd** | Pty Ltd (shares) | ACN 697 347 676; ABN 36 697 347 676 | **Registered ASIC 2026-04-24; ABN+GST issued 2026-06-01** | Primary trading entity from 1 July 2026. Shareholders: Knight Family Trust (50) + Marchesi Family Trust (50). Directors: Ben Knight + Nicholas Marchesi. Bank: NAB. Accountant: Standard Ledger. |
 | **Nicholas Marchesi (sole trader)** | Individual | ABN 21 591 780 066 (active 2007, GST since 2022) | **Trading until 30 June 2026** | Currently holds all consulting + grants + Goods + JusticeHub revenue. Hard cutover to Pty 30 June. |
-| **A Kind Tractor Ltd** | Company Limited by Guarantee | ACN 669 029 341, ABN 73 669 029 341 | ACNC-registered 2023-12-11 (GST + Income Tax exempt; **NOT DGR**, application parked) | Charitable mission holder, currently dormant. Backstop vehicle for DGR-only funders if ever activated. |
+| **A Kind Tractor Ltd** | Company Limited by Guarantee | ACN 669 029 341, ABN 73 669 029 341 | ACNC-registered 2023-12-11 (GST + Income Tax exempt; **NOT DGR**, application parked) | Charitable mission holder, currently dormant. **NOT the Goods on Country vehicle** — that is The Butterfly Movement Ltd (see next rows). General DGR backstop only. |
 | Harvest entity | TBD | — | Designing | Pending Standard Ledger advice. Drivers: food-safety liability, investor structure, tax. |
 | Farm entity | TBD | — | Designing | Pending Standard Ledger advice. Drivers: land ring-fencing, insurance, primary production tax. |
+| **The Butterfly Movement Ltd** | Company Limited by Guarantee (ACNC charity) | ACN TBC (ex-TABOO Foundation) | **Stewardship handover in progress — formal handover 26 Jun 2026** | The charitable + grants/DGR home for **Goods on Country** (DGR endorsement pending). Indigenous-majority board (Kristy Bloomfield, Audrey Deemal; Sonia transition director). **No "Goods Pty" is registered — this charity is the only Goods entity.** A Curious Tractor Pty Ltd runs Goods' commercial/operational arm + contracting + is the R&D claimant. |
 
 **Do NOT use** the labels "ACT Foundation" or "ACT Ventures" as legal entity names. They are conceptual labels in older docs; not real entities.
 
