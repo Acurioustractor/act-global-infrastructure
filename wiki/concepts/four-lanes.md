@@ -38,7 +38,7 @@ Debts paid. Old liabilities cleared. Receivables collected. ATO obligations met.
 This lane exists because an org that owes money cannot move freely. Clearing the past is what frees the future.
 
 ### To Grow
-Reinvestment into A Curious Tractor Pty Ltd, Harvest Pty Ltd, Farm Pty Ltd, and the projects each entity carries. New equipment for the Goods workshop. Site costs at Witta. Engineering hours for Empathy Ledger. Travel to Mount Isa.
+Reinvestment into A Curious Tractor Pty Ltd, Harvest Pty Ltd, and the projects each entity carries (ACT Farm runs as a program on land held in Nic's trust, not its own Pty). New equipment for the Goods workshop. Site costs at Witta. Engineering hours for Empathy Ledger. Travel to Mount Isa.
 
 This lane exists because the work has to keep getting better. Growth here is not scale. It is depth.
 
@@ -63,8 +63,8 @@ Standalone P&L for The Harvest. Lease, cafe, garden, table, events, retreats. Ea
 
 The reason Harvest gets its own entity is so its story is legible. We can see what The Harvest cost, what it earned, what it bought, and what it gave away, without it mashing into a single ACT ledger that makes none of it readable.
 
-### Farm Pty Ltd (forming)
-Same logic. Standalone P&L for ACT Farm. Conservation work, land practice, residencies, the BCV arc. Earns its own. Grows its own.
+### ACT Farm (program, not a Pty)
+ACT Farm runs as a program (code ACT-FM). The 150-acre Black Cockatoo Valley land is held in Nic's family trust and leased to ACT; conservation work, land practice, residencies and the BCV arc run on it. A Farm Pty Ltd only forms if and when the Farm earns enough to stand on its own P&L.
 
 ### A Kind Tractor Ltd
 ACN 669 029 341. Company Limited by Guarantee. ACNC-registered. Currently dormant. Not yet DGR-endorsed.
@@ -76,11 +76,11 @@ The legacy entity. Trading migrates out of here into A Curious Tractor Pty Ltd b
 
 ---
 
-## Why Three Pty Ltds, Not One
+## Why Separate Entities, Not One
 
-Because each project earns the right to grow on its own revenue. The Harvest's money funds the Harvest's growth. Farm money funds Farm growth. A Curious Tractor Pty Ltd is the holding muscle that carries the founder relationship.
+Because each project earns the right to grow on its own revenue. The Harvest's money funds the Harvest's growth. A Curious Tractor Pty Ltd is the holding muscle that carries the founder relationship; ACT Farm runs as a program on trust-held land until it earns its own entity.
 
-If we ran a single Pty Ltd with three project codes, the financial story would mash. To Grow at Harvest would be invisible to Farm. Founders would have no clean way to see whether each project pays its way.
+If we ran a single Pty Ltd with every project mashed into one ledger, the financial story would blur. To Grow at Harvest would be invisible. Founders would have no clean way to see whether each project pays its way.
 
 The structure costs more in compliance. It saves more in legibility. Legibility is what makes the soul able to read its own body.
 
