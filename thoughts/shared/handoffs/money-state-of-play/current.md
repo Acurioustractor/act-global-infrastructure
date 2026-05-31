@@ -15,6 +15,63 @@ related_financials:
 
 ## Ledger
 <!-- This section is extracted by SessionStart hook for quick resume -->
+**Updated:** 2026-06-01 — Entity cutover + business architecture + Goods/Butterfly + R&D reframe
+**Read first:** `wiki/concepts/act-business-architecture.md` (canonical structure) · `thoughts/shared/plans/2026-06-01-cutover-30-day-critical-path.md` · `thoughts/shared/financials/2026-06-01-sl-perspective-rd-outcomes.md`
+**Committed (local, NOT pushed) on `wip/opus-4-8-prompting-2026-05-31`:** `0c6ba5b` (PTY readiness page + Goods/Butterfly entity lock-in) · `97a2099` (SL-perspective R&D + FY27 engine + service agreement) + this ledger commit.
+
+### Session 2026-06-01 — entity architecture, cutover, Goods/Butterfly, R&D reframe
+
+**Arc:** started as "review command-center finance overview / build a Money Cockpit" → pivoted to the **sole-trader → ACT Pty cutover** → then **documenting the whole ACT business/entity architecture** → deep-dive on **Goods on Country**.
+
+**Locked decisions:**
+- **ABN 36 697 347 676 issued** + GST registered for A Curious Tractor Pty Ltd (was THE blocker; unblocks Pty Xero/NAB/payroll/invoicing).
+- **Goods on Country = The Butterfly Movement Ltd** (existing ACNC charity/CLG handover, ex-TABOO, Indigenous-MAJORITY board; formal handover 26 Jun 2026). **NO Goods Pty.** NOT A Kind Tractor. ACT Pty = commercial/operational arm + R&D claimant; charity = grants/DGR (pending). → memory `goods-butterfly-structure.md` + 2 Notion pages.
+- **Entity trajectories** (canonical `wiki/concepts/act-business-architecture.md`): core in ACT Pty (Innovation Studio, Regen Studio, Empathy Ledger, JusticeHub, CivicGraph-for-now) · commercial subsidiary (Harvest Pty) · DGR charity (Goods=Butterfly) · partnership (PICC/Oonchiumpa/CFE) · CivicGraph = deferred spinout (ACT-Pty-IP until raise) · ACT Farm/BCV = land-in-Nic's-trust + program · EL+JH stay core.
+- **🔴 R&D RED-FLAG (verified vs ATO primary source):** FY26 R&D likely STRANDED — Pty only existed from 24 Apr 2026; pre-incorporation sole-trader spend not claimable (s355-35/s355-205). Contradicts the old "claim FY26 ~$200K via Pty" AND ACT's own Path C logic. **Re-baseline: FY26 ≈ $0-25K; FY27 ≈ $200-260K recurring** (engine = founders on Pty payroll FY27). Research: `thoughts/shared/research/2026-06-01-cutover-tax-verification.md`.
+
+**Built (local commits):** live `/finance/pty-readiness` page (cockpit panel 1) + Plan section on `/finance`; `pty-readiness.json` refreshed + 3 new items (family trust elections, Goods DGR app, ACT Pty↔Butterfly service agreement) = **25 items, 15 critical, 0 blocked**; corrected `act-core-facts.md` (ABN + Butterfly row); Goods `destination_entity` routing baked into `export-sole-trader-to-pty-mapping.mjs` (run HELD pending SL).
+
+**Drafted (Tier-3, NOT sent — Ben to action):** `2026-06-01-sl-rd-eligibility-question.md` (**SEND FIRST — resizes the refund**) · `…-funder-novation-letters.md` · `…-knight-photography-invoice-pack.md` · `…-pty-test-invoice-runbook.md` · `…-actpty-butterfly-service-agreement-outline.md`.
+
+**NEXT (priority):**
+1. **Ben:** send the SL R&D question; then raise Knight Photo invoices + review/send novation letters (after SL template cross-check).
+2. When SL confirms the journal premise → run `export-sole-trader-to-pty-mapping.mjs` + `node scripts/sync-act-context.mjs --apply` (propagate act-core-facts to 9 repos).
+3. **Parked:** Money Cockpit forward-6mo + staffing module (original first slice). Notion proposal doc out of date (says "register Goods Pty" — overridden). `goods.md` + four-lanes "Farm Pty forming" need reconciling to the architecture doc.
+4. **Push?** 3 local commits on `wip/opus-4-8-prompting-2026-05-31` are unpushed.
+
+**Traps this session:** Supabase MCP down (use psql/scripts). Memory files live in the separate `~/.claude` config repo, not this repo's commits.
+
+---
+**PRIOR WORKSTREAM (2026-05-30 — Xero source-of-truth):**
+**Read first:** `thoughts/shared/plans/2026-05-30-xero-source-of-truth-goods-ledger.md`
+**Shipped to main:** PR #127 (`/finance/funders` drift overlay + ACT-GD filter — LIVE) · PR #128 (Phase 2 backfill tooling + SL handoff) · **PR #129 (Phase 3 — invoice sync derives project_code FROM Xero, merged `b57f5df`).**
+**Phase 3 (this session):** **MERGED to main** (PR #129, commit `c10cbaa`).
+- **The mirror now derives `project_code` FROM Xero `Project Tracking`.** Root gap found: the invoice sync *never wrote project_code* (line 614 computed it as a stat counter and discarded it — the bank-txn block at 816 did write it; invoices were maintained only by standalone taggers). Added `detectProjectFromXeroTracking()` (authoritative Project Tracking/Project category ONLY) + hybrid write (Xero-where-present, else preserve) + DB manual-guard to the invoice `record`.
+- **Verified** (`invoices --days=250`, 1248 invs, 0 err): Goods ACCREC ACT-GD = **19 / $650,910.79**. The +$1,200 vs $649,711 = **INV-0327 John Villiers**, live Xero tags it `ACT-GD` (flights/accom/program mgmt) but old heuristics misfiled `ACT-CORE` — Xero asserting authority, correct. **583 invoices** (all types) now source=`xero_tracking`; manual tags preserved. INV-0298 Dusseldorp confirmed `ACT-JH` live (dry-run's "→ACT-MY" was stale-mirror noise).
+- **Window caveat:** `--days=N` filters by invoice **Date** so it excludes VOIDED (good — the dry-run's voided "flips" never happened) but misses retro-modified invoices dated before the window; the cron's next incremental pass relabels those.
+
+**Prior phases:** Phase 1 = no-op (live Xero already has 33 clean `ACT-XX` options; PICC=`ACT-PI`). Phase 2 = 17 unlocked income invoices tagged in live Xero (`apply-xero-tracking-backfill.mjs`, revert log `scripts/output/xero-tracking-backfill-revert-2026-05-30.json`). Phantom receivables cleared earlier (5 VOIDED/DELETED rows, $375,100 amount_due zeroed).
+
+**Session cont. (2026-05-30 PM) — pre-SL finance cleanup + Project Money page. MERGED to main: PR #130 (`d3a1093`) → deploying to command.act.place.** (4 commits:)
+- `a998a28` **voided-receivable guard** — query layer was ALREADY safe (view excludes voided; receivable routes whitelist AUTHORISED/SENT); real hole was data-layer. Sync now forces `amount_due=0` on VOIDED/DELETED; `lifetime-ledger` exclusion made explicit. 0 voided rows currently carry stale due.
+- `0b19080` + `37832ac` **expense tagging → FY26 100% coverage (income 0 / bills 0 / spend 0 untagged).** Income was already 100%; of 141 untagged FY26 expenses, 106 vendor-rule (ACT-HV 71 / ACT-IN 20 / **ACT-GD 10 = Ben's ASP/DRW on-country call, incl. 6 "Flight Bar Witta" mislabels** / 5 misc) + 35 incidentals by location signal (ACT-CORE 21 overhead default / ACT-IN 7 travel / ACT-PI 5 North QLD / ACT-EL 2 photo). All source `manual-bulk-2026-05-30` (guard-protected). Artifact `thoughts/shared/financials/2026-05-30-untagged-expense-tag-proposal.md`.
+- `9442d5d` **`/finance/project-money`** — new live front-door: coverage banner (income 100% / expense 99%) + per-project income/received/expense/net. Expense = SPEND + unpaid-bill `amount_due` (no double-count; calibrated vs `project_monthly_financials`). FY26 totals: in $1.39M, exp $1.61M, net -$222K (overhead ACT-IN -$333K/CORE -$266K vs PI +$322K/HV +$92K/GD +$44K). tsc clean, API verified live on :3002.
+
+**Sense-check session (2026-05-30 PM) — front-end review of `/finance/project-money`. MERGED: PR #131 (`982fcd7`).** Page renders clean, 100/100 coverage confirmed. Swept 2,018 AP bills; grant-as-expense miscoding is ISOLATED to TFN. Also shipped: colored By-project/By-source chips on `/finance/transactions` + Project Money rows → pre-filtered Transactions editor (deep-link race fixed). **3 SL findings → all in the SL handoff doc:**
+- **TFN "Goods grant" $151K** booked as ACT-CE expense (no income record) — confirmed by Ben = Goods grant INCOME. SL must reclassify (reverse AP bills → ACCREC `ACT-GD` grant income). **ACT-CE's −$144K is phantom; Goods understated ~$144K.** Two big ones are AUTHORISED/unpaid fake-payables ($89,361 + $55,197).
+- **The Plasticians $29,800** (Goods HDPE) — **FIXED**: retagged ACT-IN→ACT-GD in LIVE Xero (`scripts/retag-plasticians-xero.mjs`, totals intact, revert `scripts/output/retag-plasticians-revert-2026-05-30.json`) + mirror set to match. Page now shows it in Goods. **(Xero --apply was classifier-blocked; Ben ran it via `!`.)**
+- **MOL Nyrt. $30,691** ("native USD adjustment" Dext artifact, AUTHORISED) — flagged for SL to verify/void (inflating ACT-IN + AP by $30K).
+
+**NEXT (priority order):**
+- **(a) Ben action:** forward `thoughts/shared/financials/2026-05-30-locked-tracking-for-sl.md` to Standard Ledger — now carries the 54 locked invoices ($1.08M) dimension-tag ask **+ the 3 reclassification findings above.**
+- **(b) Push branch?** `wip/sl-sense-check-findings-2026-05-30` (SL findings doc + Plasticians retag tool) → push + PR + merge on Ben's go.
+- **(c) Verify live:** `command.act.place/finance/project-money` once Vercel deploys — coverage 100/100.
+- **(b) Durable view-fix** — `v_funder_next_move` + outstanding queries should exclude `VOIDED/DELETED` (else the voided-`amount_due` phantom recurs on the next void batch). Quick win.
+- **(c) Phase 5** — reconciliation cockpit on `/finance/funders`: per-row Reconcile → dedupe to pipeline-of-record + withdraw phantoms + set value from Xero ledger (Tier-3 GHL writes, dry-run-first). Biggest piece.
+
+**Traps:** repo is **PUBLIC** (financials docs public — Ben opted in). Xero token 30-min TTL → sync self-refreshes via `.xero-tokens.json`. App finance DB = `NEXT_PUBLIC_SUPABASE_URL` = `tednluwflfhxyucgwigh`. **Mirror lags Xero — new Project Tracking tags only land on the next sync.**
+
+---
 **Updated:** 2026-05-29
 **Read first:** `thoughts/shared/handoffs/2026-05-29-xero-mirror-and-ongoing-bookkeeping.md`
 **Branch:** `wip/goods-finance-recon-2026-05-29` — **MERGED to main (PR #125, `f7ca7e843`) + DEPLOYED to command.act.place 2026-05-29 PM** (Vercel prod build success; /finance/mirror + overview live behind login gate, 307). Remote branch deleted; future work = new branch off main. (Local still on this branch w/ cron-noise dirty files — don't force-checkout.)
