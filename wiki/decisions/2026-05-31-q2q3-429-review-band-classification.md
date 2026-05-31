@@ -66,9 +66,9 @@ Net ledger effect of the recommended apply (MOL only): **−$30,539.69** from 42
 ### 4. Capital-vs-expense cluster — grilled 2026-05-31
 
 - **Hatch Electrical $19,947 (10 Nov 2025, was tagged ACT-FM)** → **Oonchiumpa job** (Ben): electrical + general build support, building out on traditional-owner home land. ACT does **not** own that land/building → **not capital works, not an ACT asset** → a **project-delivery / sub-contract expense**. **Recode 429 → 486; retag ACT-FM → ACT-OO.** Real, AUTHORISED, unpaid → confirm Hatch is still owed. The 2 smaller Hatch-in-429 bills ($3,677 10-Dec, $772 12-Jan, both ACT-FM/Dext) — confirm Oonchiumpa vs Farm before recoding.
-- **Mounty Container $11,000 (manual `MOUNTY-CONTAINER-MANUAL`, AUTHORISED, unpaid)** → **made-up duplicate → VOID** (Ben authorised 2026-05-31). No bank spend matches it; "director owner contribution" note is false. The **real** Mounty Yarns container is **Container Options $5,802.50**. **⚠️ Void can't be done via API 2026-05-31** — confirmed dead-end: (1) the void is blocked because contact "Mounty Container Supplier" (`77b9726e…`) is **archived**, and (2) un-archiving it via API also fails — Xero: *"Archived contacts cannot currently be edited via the API"* (UI-only, like reconciliation). **→ Must be done in the Xero UI:** un-archive the contact → void bill `408b05bb` → re-archive. **Bundle with the other 7 archived-contact bills for SL.** Void script `scripts/void-mounty-phantom.mjs` preflight-passes and will work via API only once the contact is active.
+- **Mounty Container $11,000 (manual `MOUNTY-CONTAINER-MANUAL`, AUTHORISED, unpaid)** → **made-up duplicate → VOID** (Ben authorised 2026-05-31). No bank spend matches it; "director owner contribution" note is false. The **real** Mounty Yarns container is **Container Options $5,802.50**. **✅ VOIDED 2026-05-31 (Ben, in the Xero UI).** API path was a dead-end (contact "Mounty Container Supplier" `77b9726e…` archived; **Xero API cannot un-archive contacts** — UI-only). Ben restored the contact + voided bill `408b05bb` in the UI. (Mounty had no active same-name twin, so it restored cleanly — unlike Sand Yard/Edmonds below.)
 
-> **New operational trap:** Xero API **cannot un-archive a contact** (UI-only) — so the "archived contact blocks edits" trap has *no API workaround*. Any void/edit of a bill on an archived contact must be done in the Xero UI.
+> **New operational trap:** Xero API **cannot un-archive a contact** (UI-only) — the "archived contact blocks edits" trap has *no API workaround*. A bill on an archived contact must be voided/edited in the Xero UI (restore or merge → void → re-archive).
 - **Container Options $5,802.50** → the genuine Mounty container (NAB Visa, 5 Dec 2025). Recode 429 → 446, keep **ACT-MY**, match to the $5,802.50 card line.
 - **RW Pacific $4,200 (off-grid generator) + Total Tools $4,547** → business equipment, each <$20K → instant asset write-off (RW Pacific 446/ACT-GD, Total Tools 447/ACT-HV). Confirm not personal.
 
@@ -103,11 +103,25 @@ No rent reclassification needed. **Systemic pattern confirmed:** much of the "re
 - **RW Pacific $4,200 / Total Tools $4,547** → instant-write-off equipment (confirm not personal).
 - Project moves (recon-pack High band): Plasticians ACT-IN → ACT-GD; Allclass ACT-IN → ACT-FM.
 
-**Voids:**
-- ✅ Nicholas Marchesi $1,974.50 duplicate — **VOIDED 2026-05-31** (`scripts/void-429-leftover-dups.mjs`).
-- ✅ Matnic "matnic properties" $591.28 leftover dup — **VOIDED 2026-05-31**.
-- ⏸ Mounty Container $11,000 phantom — **UI-only** (archived contact, no API path) → SL.
-- ⏸ The existing 7 archived-contact bills (Sand Yard ×3 / Edmonds ×4) — UI/SL.
+**Voids — DONE:**
+- ✅ Nicholas Marchesi $1,974.50 dup — VOIDED 2026-05-31 (API, `void-429-leftover-dups.mjs`).
+- ✅ Matnic "matnic properties" $591.28 dup — VOIDED 2026-05-31 (API).
+- ✅ Mounty Container $11,000 phantom — VOIDED 2026-05-31 (Ben, Xero UI).
+
+### 7. Sand Yard / Edmonds — duplicate-contact cleanup (FOR SL, Xero UI only)
+
+**What happened:** the Dext push created **duplicate _archived_ contacts** — "The Sand Yard" and "Edmonds Landscaping Supplies" — each holding **duplicate ACCPAY bills coded to 429**. These shadow the **active** same-named contacts, which hold the **real, correctly-coded bank Spend Money transactions (446)**. Verified 2026-05-31: every 429 bill has a 446 twin.
+
+**Why it's stuck (no API path):** the duplicate bills can't be voided (archived contact blocks edits) **and** the archived contact can't be restored (*"a contact named X already exists"* — collides with the active twin). API cannot un-archive or merge contacts.
+
+**SL fix (Xero UI), per vendor — "The Sand Yard" and "Edmonds Landscaping Supplies":**
+1. *Contacts → Archived* → select the archived duplicate → **Merge into** the active same-named contact (moves the duplicate 429 bills onto the active contact).
+2. **Void** the duplicate 429 bills (they double-count the real 446 bank spends):
+   - **Sand Yard:** $1,968.00 (AUTHORISED), $1,044.44 (AUTHORISED), $373.52 (PAID — remove payment first).
+   - **Edmonds:** $360.00 (AUTHORISED), $264.00, $240.00, $48.00 (all PAID — remove payment first).
+3. **Keep the 446 records** (the real bank spends / the $240 446 bill) and reconcile the bank lines.
+
+All **non-cash** (~$4,298 of double-counted 429; the money already left via the card). **⚠️ Likely systemic** — SL should scan for **other duplicate contacts** created by the Dext push.
 
 **🔓 OPEN — for SL discussion (owner-funding cluster, §6):**
 - A Curious Tractor self-bill $6,226 + Nicholas Marchesi $1,200 + $1,974.50 → Nic's owner/sole-trader loan; reclassify to owner's-loan/equity; formalise as Pty Director's Loan at cutover.
