@@ -1,0 +1,41 @@
+# R&D Novelty Sweep — work NOT covered by the 4 existing registers
+
+**Date:** 2026-05-31 · **Mode:** read-only · **Scope:** `apps/command-center/src`, `scripts/`, `scripts/lib/`, `wiki/` + wiki LLM-compile pipeline, embeddings/OCR, Telegram agent tooling, Civic World Model code.
+
+## Framing
+
+The four FY26 registers in `thoughts/shared/rd-pack-fy26/` all describe **public-facing products** and their data layers:
+- **ACT-CG** (CivicGraph) — cross-source org entity resolution.
+- **ACT-EL** (Empathy Ledger) — OCAP consent capture + multi-tenant story ledger.
+- **ACT-GD** (Goods) — buyer-supplier matching / demand-side procurement.
+- **ACT-JH** (JusticeHub) — federated community-led-services evidence layer.
+
+The gap is the **internal infrastructure bucket (ACT-IN)** — which the CG register itself flags as "~40% of Ben's time / ~$95K R&D-eligible … not yet split into discrete activity registers." That bucket is where the candidates below live. There is **no ACT-IN register today**, so most of these are "new."
+
+## Eligibility gate applied honestly
+
+Under the R&DTI a **core** activity needs an outcome *not knowable in advance*, resolving a *technical* uncertainty, via *hypothesis → experiment → conclusion*. Lookup tables, config, glue, CRUD and known-solution dev are **NOT R&D** even when clever. I have marked several candidates NOT-R&D or supporting-only on that basis, and flagged confidence conservatively.
+
+## Candidate table
+
+| Candidate activity | Project | What's genuinely novel/uncertain (implicit hypothesis) | core / supporting / NOT-R&D | Extends register / new | Confidence |
+|---|---|---|---|---|---|
+| **ACT Alignment Loop — cross-source truth-state synthesis** (`synthesize-project-truth-state.mjs`, `synthesize-entity-migration-truth-state.mjs`, `lib/alignment-loop-grade.mjs`, `lib/synthesis-schema.mjs`) | ACT-IN | H: a project's "real" state can be reconstructed by scoring presence/agreement across 4 heterogeneous sources (wiki × DB × codebase × Xero) and that a machine score tracks the manual judgement Ben made by hand. Thresholds (≥5 total / ≥3 per-repo), the scoring function, and whether cross-source agreement is a meaningful signal were not knowable in advance — it's an automation of a previously-manual epistemic judgement. | **core** | **new (ACT-IN)** | med |
+| **LLM-graded rubric calibration harness** (`grade-pack.mjs`, `grade-alignment-loop-synthesis.mjs`, `grade-voice.mjs`, fixtures + `.calibration.md` in `thoughts/shared/rubrics/`) | ACT-IN | H: a layered Tier-1 deterministic + Tier-2/3 single-LLM-call grader can reproduce human verdicts on good-*/bad-* fixtures reliably enough to be a feedback loop on output quality. Whether the rubric+model achieves verdict-match (calibration) is empirical — measured against fixtures, outcome unknown until run. Genuine systematic experiment with recorded calibration evidence. | **core** | **new (ACT-IN)** | med |
+| **PostgREST 1000-cap ground-truth harness / The One Ledger** (`lib/finance/ledger.ts`, trust-map `thoughts/shared/reviews/command-center-trust-map/`) | ACT-IN | The *discovery* that PostgREST silently truncates SUMs at 1000 rows (read org cash $590K of real $975K) and the compute-by-type-not-sign + bill/payment dedup rules were uncertain and found by failed measurement. BUT: once known, the fix (paginate / SQL aggregate / dedup window) is a known-solution engineering correctness exercise. The reconciliation *methodology* is defensible; the code itself is mostly correctness work. | **supporting** (to a finance-intelligence core) — parts NOT-R&D | **new (ACT-IN)** | low–med |
+| **Spending Intelligence v3 reconciliation engine** (`api/finance/reconciliation`, `weekly-reconciliation.mjs`) — receipt-gap / no-receipt-needed classification, BAS-readiness scoring | ACT-IN | Classifying which spend *needs* a receipt and auto-matching receipts to lines has some uncertainty, but it's largely rules + thresholds (GST $82.50, 14-day dedup) — known-solution business logic. | **NOT-R&D** (mostly); thin supporting at most | new (ACT-IN) | low |
+| **Wiki compounding-knowledge / LLM-compile pipeline** (`wiki-save-synthesis.mjs`, `wiki-index-search.mjs` hybrid embed search, `ingest-*`, "Karpathy second-brain" loop) | ACT-IN / Tractorpedia | H: feeding cited query-answers back as permanent articles makes retrieval monotonically better (a self-improving RAG corpus). The *compounding* claim is a real hypothesis; the retrieval mechanics (OpenAI embeddings + hybrid search) are largely known-solution integration. Novelty is in the loop design, not the components. | **supporting** (possible thin core on the compounding claim) | **new (ACT-IN)** | low–med |
+| **Multi-provider LLM cost-routing client** (`lib/llm-client.mjs` — `selectModel` task→tier routing, provider fallback, `api_usage` cost tracking, Gemini-Flash-Lite ~10× cheaper for bulk OCR) | ACT-IN | Routing task-complexity → cheapest adequate model and measuring cost/quality tradeoffs has a mild empirical edge, but model selection + fallback + cost tracking is established engineering. | **NOT-R&D** (supporting infrastructure at most) | new (ACT-IN) | low |
+| **Gemini structured-extraction OCR for receipts** (`ocr-bed-elements-deep.mjs`, `ocr-dext-processing.mjs`, `@google/genai` typed-schema extraction) | ACT-GD / ACT-IN | Schema-constrained OCR over messy supplier invoices has some extraction uncertainty, but it's an integration of a vendor capability (Gemini structured output) — known-solution. Already cross-referenced as shared automation under ACT-GD-S6 / ACT-EL-S5/S6. | **NOT-R&D** / already-supporting | extends ACT-GD (S6) | low |
+| **LCAA-phase spend classifier** (`tag-lcaa-phases.mjs`) | ACT-IN | A hand-authored vendor→phase override table + project defaults. Pure lookup/rules, no experimental uncertainty. | **NOT-R&D** | — | high (that it's NOT R&D) |
+| **`suggestProject` project-code inference** (`lib/finance/suggest-project.ts`) | ACT-IN | Regex location/vendor heuristics with confidence labels. Deterministic rules; the doc comment itself calls it "heuristic, instant, free." No technical uncertainty. | **NOT-R&D** | — | high (that it's NOT R&D) |
+| **Civic World Model** | — | Searched `apps/command-center/src`, `scripts/`, `wiki/`. Found only *conceptual/narrative* docs (`wiki/concepts/civic-world-model.md`, JusticeHub framing essays) — no distinct implementation code beyond what ACT-JH's federated evidence layer already covers. | **unclear** — appears to be a framing concept, not separately-built code | extends ACT-JH if anything | low |
+
+## Bottom line for the R&D pack
+
+1. **The strongest genuinely-new core candidates are the two "meta" systems:** the **cross-source Alignment Loop truth-state synthesis** and the **LLM-graded rubric calibration harness**. Both have a real hypothesis, an experimental progression, and recorded evidence (dated synthesis artefacts, `.calibration.md` files with fixture verdict-matching). These are the items worth an **ACT-IN register** — they are not in any of the four product registers.
+2. **The finance-intelligence work (Ledger truth-map, reconciliation, PostgREST-cap harness)** is mostly **known-solution correctness engineering** — defensible as *supporting* activity feeding the alignment/finance core, but do **not** inflate the rules-and-thresholds parts (receipt classification, LCAA tagger, suggestProject) into core. Those are explicitly NOT-R&D.
+3. **The wiki compounding pipeline** has one honest hypothesis (self-improving RAG corpus) but rides on known-solution embedding/search components — thin core at best, more likely supporting.
+4. **No new product-level register is needed** — CivicGraph/EL/Goods/JusticeHub already capture the product cores. The gap is purely the **ACT-IN internal-infrastructure bucket** the CG register already earmarked (~$95K R&D-eligible, unallocated).
+
+**Next step (when ready):** if Ben wants to claim ACT-IN, the candidates to write up via `/rd-capture` are the **Alignment Loop synthesis** and the **rubric calibration harness** (core), with the **Ledger truth-map / PostgREST-cap harness** as linked supporting. Eligibility on those two should be confirmed against the AusIndustry four-component test before lodgement — confidence is *med*, not high.

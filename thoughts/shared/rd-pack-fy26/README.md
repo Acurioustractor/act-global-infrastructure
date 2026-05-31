@@ -34,7 +34,7 @@ lead_contact_for_pack: Ben Knight (ben@benjamink.com.au)
 | Lead contact for this pack | Ben Knight |
 | Pack status | **Assembling — WARN (will become PASS as gaps below close)** |
 
-> The Money Framework realistic-range estimate ($180-220K) is higher than this pack's preliminary total ($147,250) because the framework includes R&D-eligible spend across cloud, contractors, and supporting activities not yet fully accounted for in the per-project registers. The two will converge as the registers close out.
+> **Two tiers, one reconciliation.** This pack's four registered registers total **$354,047** of eligible expenditure → **$130,910–$154,010** refund at 43.5%. The Money Framework's fuller estimate of **~$180,000–$250,000** refund (source range: $180-220K rebuttal to $200-250K founder-pay thesis) assumes the additional **~$627,000** of eligible spend that includes **ACT-IN** internal-infrastructure core activities (~42% of the total) not yet split into discrete registers. The gap between the two tiers is exactly the unregistered ACT-IN allocation. _(The earlier "$147,250" preliminary total is superseded by the $354,047 four-register total — see `rd-master-register.csv` / `STANDARD-LEDGER-PACK-INDEX.md`.)_
 
 ## Four core activity registers (one per project)
 
