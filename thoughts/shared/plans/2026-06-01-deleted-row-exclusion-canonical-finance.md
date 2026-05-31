@@ -1,6 +1,6 @@
 # DELETED-row exclusion on canonical finance surfaces
 
-**Created:** 2026-06-01 · **Status:** queued (do in a clean context — this is canonical R&D-claim money code)
+**Created:** 2026-06-01 · **Status:** ✅ DONE — shipped `fd47762` (ledger.ts + rollup `.neq('status','DELETED')`; project_monthly_financials repopulated). Verified live: getOrgLedger rdEligibleSpend $540,764→$508,914, refund $235,232→$221,377; cashSpent $976,580→$944,292; rollup FY26 expenses $1,221,032→$1,188,744. Recommend a clean-context diff review of this money change (per the money-review discipline).
 **Precedent:** workbench fix shipped `a09b7ea` on `wip/opus-4-8-prompting-2026-05-31` (same bug, display surface). Memory: `command-center-finance-truth.md` → DELETED bullet.
 
 ## Problem (verified 2026-06-01 via direct SQL on shared DB `tednluwflfhxyucgwigh`)

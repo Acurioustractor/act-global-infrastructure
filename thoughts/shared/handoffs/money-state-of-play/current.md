@@ -15,9 +15,14 @@ related_financials:
 
 ## Ledger
 <!-- This section is extracted by SessionStart hook for quick resume -->
-**Updated:** 2026-06-01 (PM-3) — Workbench DELETED+transfer fix shipped & PUSHED (`a09b7ea`). Tracer-bullet found the "254 untagged txns" were 100% internal transfers + DELETED rows inflating R&D-eligible spend $31,761. Canonical surfaces (ledger.ts + rollup) still carry the DELETED bug — QUEUED.
-**Read first:** `thoughts/shared/plans/2026-06-01-deleted-row-exclusion-canonical-finance.md` (the queued fix — do in clean context) · `apps/command-center/src/lib/finance/workbench.ts` (fixed alignment tool) · memory `command-center-finance-truth.md` (DELETED bullet).
-**HEAD `a09b7ea`** on `wip/opus-4-8-prompting-2026-05-31`, pushed, 0/0 with origin.
+**Updated:** 2026-06-01 (PM-4) — DELETED+transfer fix shipped across ALL 3 finance surfaces. Workbench (`a09b7ea`, pushed) + ledger.ts & monthly rollup (`fd47762`, LOCAL — push pending). project_monthly_financials repopulated. Corrected the R&D claim: refund $235,232→$221,377. **Live command center on :3002 — `/finance/workbench` is the tagging surface for Ben's project calls.**
+**Read first:** `apps/command-center/src/app/finance/workbench/page.tsx` (live tagging UI) · memory `command-center-finance-truth.md` (DELETED bullet — now all-fixed) · plan `2026-06-01-deleted-row-exclusion-canonical-finance.md` (DONE; recommend clean-context diff review of the money change).
+**HEAD `fd47762`** on `wip/opus-4-8-prompting-2026-05-31`. `a09b7ea`+`8ff6692` pushed; **`fd47762` (canonical R&D fix) is the one commit to push next.**
+
+### Session 2026-06-01 (PM-4) — DELETED fix extended to canonical surfaces (ledger.ts + rollup); command center live for tagging
+- **Shipped `fd47762` (LOCAL, unpushed):** `.neq('status','DELETED')` on `ledger.ts getOrgLedger` spend/receive reads + `scripts/calculate-project-monthly-financials.mjs` txn fetch; **repopulated project_monthly_financials**. Verified live: rdEligibleSpend $540,764→**$508,914**, rdPotentialRefund $235,232→**$221,377**, cashSpent $976,580→**$944,292**, rollup FY26 expenses $1,221,032→**$1,188,744**. tsc clean, workbench tests 4/4 (no regression).
+- **Command center LIVE on :3002** (pre-existing dev server, pid 46512). `/finance/workbench` confirmed 200 + full editing UI (status tabs incl. `needs_project`/`project_review`, project dropdown, single-row PATCH that sets `manual_workbench` → auto-tagger-safe). **This is where Ben does the project calls live + synced.**
+- **Ben's live tagging queue (on /finance/workbench):** status=`needs_project` → 14 invoices + 4 bank income lines; status=`project_review` → 2,599 ACT-IN catch-all; + un-tag 4 transfers wrongly tagged to a project.
 
 ### Session 2026-06-01 (PM-3) — Workbench DELETED + transfer fix (tracer-bullet caught a $31.7K R&D overstatement)
 **The ask was "fix this"** (pasted the PM-2 sign-off). Verified PM-2's facts were ALL accurate (workbench works, tests pass via `node --import tsx --test`, git clean) — so "fix this" = do the alignment work. Chose tracer-bullet → safe subset.
