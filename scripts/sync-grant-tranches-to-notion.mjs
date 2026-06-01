@@ -62,9 +62,26 @@ const FUNDERS = [
   { exactName: 'Centrecorp Foundation',             funder: 'Centrecorp Foundation', fundingType: 'Grant', matchEligible: 'Yes', project: 'ACT-GD', expectedTotal: 123332 }, // 2 PAID (INV-0259+0291); 10 voided/deleted excluded
   { exactName: 'Vincent Fairfax Family Foundation', funder: 'VFFF',                fundingType: 'Grant', matchEligible: 'Yes', project: 'ACT-GD', expectedTotal: 50000 },   // single invoice; = the FRRR joint $50k, not a separate contact
   { exactName: 'Red Dust Role Models Limited',      funder: 'Red Dust',            fundingType: 'Grant', matchEligible: 'Yes', project: 'ACT-GD', expectedTotal: 15950 },
-  // BLOCKED — not addable as paid ACCREC tranches yet:
-  //  · The Funding Network $144,558 — mis-booked as 2 ACCPAY expense bills (pending bookkeeper void+rebook).
-  //  · AMP $21,900 — no ACCREC in this mirror (2024 income, likely different org / bank receipts).
+  // BLOCKED from auto-source — The Funding Network $144,558 (mis-booked as 2 ACCPAY expense
+  // bills, pending bookkeeper void+rebook → will auto-appear once rebooked as ACCREC).
+];
+
+// Manual tranches — funders with NO clean Xero ACCREC source, so they can't be auto-reconciled.
+// Kept here (version-controlled) rather than hand-typed in Notion. Idempotent via externalId.
+const MANUAL_TRANCHES = [
+  {
+    externalId: 'manual:amp-spark-2024',
+    funder: 'AMP',
+    name: 'AMP: Tomorrow Makers SPARK grant (2024)',
+    invoiceNo: '',
+    paidDate: null,
+    amount: 21900,
+    project: 'ACT-GD',
+    fundingType: 'Philanthropic',
+    matchEligible: 'Yes',
+    url: null,
+    purpose: 'AMP Foundation Tomorrow Makers SPARK grant — $21,900, received 2024 as a series of ~$5,000 deposits into the NM Personal account (contact "Nicholas Marchesi"), NOT a named "AMP" contact. No clean Xero ACCREC source in the mirror, so this is a manual entry — not auto-reconciled. See memory amp-tomorrow-makers-booking.',
+  },
 ];
 
 // Per-invoice overrides for older invoices whose line items the Xero mirror never captured.
@@ -87,6 +104,7 @@ const SCHEMA = {
     { name: 'Centrecorp Foundation', color: 'orange' },
     { name: 'VFFF', color: 'purple' },
     { name: 'Red Dust', color: 'red' },
+    { name: 'AMP', color: 'pink' },
   ] } },
   'Invoice #': { rich_text: {} },
   'Paid date': { date: {} },
@@ -248,6 +266,11 @@ async function main() {
     const flag = (f.expectedTotal != null && Math.abs(sum - f.expectedTotal) > 1) ? `  ⚠ expected ${f.expectedTotal}` : '';
     log(`  ${f.funder}: ${t.length} paid tranches = $${sum.toLocaleString()}${flag}`);
     tranches.push(...t);
+  }
+  if (MANUAL_TRANCHES.length) {
+    const msum = MANUAL_TRANCHES.reduce((s, t) => s + t.amount, 0);
+    log(`  Manual (no Xero source): ${MANUAL_TRANCHES.length} = $${msum.toLocaleString()}`);
+    tranches.push(...MANUAL_TRANCHES);
   }
   log(`Total tranches: ${tranches.length} = $${tranches.reduce((s, t) => s + t.amount, 0).toLocaleString()}`);
 
