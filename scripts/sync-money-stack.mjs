@@ -41,6 +41,7 @@ const REPO_ROOT = join(__dirname, '..');
 const STEPS = [
   { name: 'dashboard-hub',   script: 'sync-money-dashboard-hub.mjs',     desc: 'Main hub (full-page replace, writes nav)' },
   { name: 'opportunities',   script: 'sync-opportunities-to-notion-db.mjs', desc: 'Opportunities DB (GHL + Xero + foundations)' },
+  { name: 'grant-tranches',  script: 'sync-grant-tranches-to-notion.mjs', desc: 'Grant Tranches DB (paid grant invoices, per-tranche acquittal)' },
   { name: 'pile-pages',      script: 'sync-pile-pages-to-notion.mjs',    desc: 'Per-pile strategic pages (Voice/Flow/Ground/Grants)' },
   { name: 'cash-forecast',   script: 'sync-cash-forecast-to-notion.mjs', desc: '13-week rolling cash forecast' },
   { name: 'kpis',            script: 'sync-kpis-to-notion.mjs',          desc: 'KPIs + concentration risk' },
