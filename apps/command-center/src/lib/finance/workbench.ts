@@ -291,7 +291,9 @@ function xeroDraftHint(row: BankEvidenceRow, hasReceipt: boolean, needsReceipt: 
 // it reduces the balance: either a payoff (transfer in from a deposit account) or a vendor refund
 // (contra-expense). Deposit accounts keep the normal credit=income convention.
 const CREDIT_CARD_NAME_RE = /visa|mastercard|amex|\bcc\b|credit\s*card/i
-const CARD_PAYOFF_RE = /internet payment|credit card payment|card repayment|linked acc|bpay|transfer|payment received|payment thank/i
+// Anchored card-repayment phrases only. Deliberately NOT bare 'transfer'/'payment received' —
+// those would misclassify a vendor refund whose descriptor happens to contain the word as a payoff.
+const CARD_PAYOFF_RE = /internet payment|credit card payment|card repayment|linked acc|bpay/i
 function isCreditCardAccount(name: string | null | undefined): boolean {
   return !!name && CREDIT_CARD_NAME_RE.test(name)
 }
@@ -540,16 +542,16 @@ async function loadWorkbenchSummary(): Promise<WorkbenchSummary> {
         (SELECT COALESCE(SUM(amount),0) FROM bank_statement_lines WHERE date >= '${FINANCE_WORKBENCH_FY_START}' AND date <= '${FINANCE_WORKBENCH_FY_END}' AND status = 'unreconciled') AS bank_unreconciled_value,
         (SELECT COUNT(*) FROM bank_statement_lines WHERE date >= '${FINANCE_WORKBENCH_FY_START}' AND date <= '${FINANCE_WORKBENCH_FY_END}' AND (project_code IS NULL OR project_code = '')) AS bank_project_gaps,
         -- Exclude internal transfers (never project spend) and DELETED/voided rows from untagged-gap counts.
-        (SELECT COUNT(*) FROM xero_transactions WHERE date >= '${FINANCE_WORKBENCH_FY_START}' AND date <= '${FINANCE_WORKBENCH_FY_END}' AND (project_code IS NULL OR project_code = '') AND status <> 'DELETED' AND type NOT LIKE '%TRANSFER%') AS xero_project_gaps,
-        (SELECT COUNT(*) FROM xero_invoices WHERE date >= '${FINANCE_WORKBENCH_FY_START}' AND date <= '${FINANCE_WORKBENCH_FY_END}' AND (project_code IS NULL OR project_code = '') AND status <> 'DELETED') AS invoice_project_gaps,
+        (SELECT COUNT(*) FROM xero_transactions WHERE date >= '${FINANCE_WORKBENCH_FY_START}' AND date <= '${FINANCE_WORKBENCH_FY_END}' AND (project_code IS NULL OR project_code = '') AND status IS DISTINCT FROM 'DELETED' AND type NOT LIKE '%TRANSFER%') AS xero_project_gaps,
+        (SELECT COUNT(*) FROM xero_invoices WHERE date >= '${FINANCE_WORKBENCH_FY_START}' AND date <= '${FINANCE_WORKBENCH_FY_END}' AND (project_code IS NULL OR project_code = '') AND status IS DISTINCT FROM 'DELETED') AS invoice_project_gaps,
         (
           (SELECT COUNT(*) FROM bank_statement_lines WHERE date >= '${FINANCE_WORKBENCH_FY_START}' AND date <= '${FINANCE_WORKBENCH_FY_END}' AND project_code = 'ACT-IN')
-          + (SELECT COUNT(*) FROM xero_transactions WHERE date >= '${FINANCE_WORKBENCH_FY_START}' AND date <= '${FINANCE_WORKBENCH_FY_END}' AND project_code = 'ACT-IN' AND status <> 'DELETED')
-          + (SELECT COUNT(*) FROM xero_invoices WHERE date >= '${FINANCE_WORKBENCH_FY_START}' AND date <= '${FINANCE_WORKBENCH_FY_END}' AND project_code = 'ACT-IN' AND status <> 'DELETED')
+          + (SELECT COUNT(*) FROM xero_transactions WHERE date >= '${FINANCE_WORKBENCH_FY_START}' AND date <= '${FINANCE_WORKBENCH_FY_END}' AND project_code = 'ACT-IN' AND status IS DISTINCT FROM 'DELETED')
+          + (SELECT COUNT(*) FROM xero_invoices WHERE date >= '${FINANCE_WORKBENCH_FY_START}' AND date <= '${FINANCE_WORKBENCH_FY_END}' AND project_code = 'ACT-IN' AND status IS DISTINCT FROM 'DELETED')
         ) AS act_in_review,
-        (SELECT COUNT(*) FROM xero_transactions WHERE date >= '${FINANCE_WORKBENCH_FY_START}' AND date <= '${FINANCE_WORKBENCH_FY_END}' AND rd_category = 'review' AND status <> 'DELETED') AS rd_review,
+        (SELECT COUNT(*) FROM xero_transactions WHERE date >= '${FINANCE_WORKBENCH_FY_START}' AND date <= '${FINANCE_WORKBENCH_FY_END}' AND rd_category = 'review' AND status IS DISTINCT FROM 'DELETED') AS rd_review,
         -- R&D-eligible spend feeds the 43.5% claim — must exclude DELETED/voided transactions.
-        (SELECT COALESCE(SUM(ABS(total)),0) FROM xero_transactions WHERE date >= '${FINANCE_WORKBENCH_FY_START}' AND date <= '${FINANCE_WORKBENCH_FY_END}' AND rd_eligible = true AND type LIKE 'SPEND%' AND status <> 'DELETED') AS rd_eligible_spend
+        (SELECT COALESCE(SUM(ABS(total)),0) FROM xero_transactions WHERE date >= '${FINANCE_WORKBENCH_FY_START}' AND date <= '${FINANCE_WORKBENCH_FY_END}' AND rd_eligible = true AND type LIKE 'SPEND%' AND status IS DISTINCT FROM 'DELETED') AS rd_eligible_spend
     `
   )
 
@@ -687,7 +689,7 @@ async function loadWorkbenchRawRows(source: SourceFilter): Promise<Pick<FinanceW
         .select('id, xero_transaction_id, type, contact_name, bank_account, project_code, project_code_source, total, status, date, line_items, has_attachments, is_reconciled, rd_eligible, rd_category')
         .gte('date', FINANCE_WORKBENCH_FY_START)
         .lte('date', FINANCE_WORKBENCH_FY_END)
-        .neq('status', 'DELETED')
+        .or('status.is.null,status.neq.DELETED')
         .order('date', { ascending: false })
         .range(from, to)
     )
@@ -700,7 +702,7 @@ async function loadWorkbenchRawRows(source: SourceFilter): Promise<Pick<FinanceW
         .select('id, xero_id, invoice_number, type, status, contact_name, date, total, amount_due, amount_paid, line_items, has_attachments, reference, project_code, project_code_source, income_type')
         .gte('date', FINANCE_WORKBENCH_FY_START)
         .lte('date', FINANCE_WORKBENCH_FY_END)
-        .neq('status', 'DELETED')
+        .or('status.is.null,status.neq.DELETED')
         .order('date', { ascending: false })
         .range(from, to)
     )
