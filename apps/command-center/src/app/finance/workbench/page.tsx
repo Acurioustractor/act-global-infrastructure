@@ -10,6 +10,7 @@ import {
   ExternalLink,
   FileText,
   FlaskConical,
+  Layers,
   Loader2,
   RefreshCcw,
   Receipt,
@@ -356,6 +357,15 @@ export default function FinanceWorkbenchPage() {
   const [uploadError, setUploadError] = useState<string | null>(null)
   const [uploadMessage, setUploadMessage] = useState<string | null>(null)
 
+  // KPI cards are the primary navigation: one click lands on a populated view.
+  // Always reset direction + project so a prior filter (e.g. Direction=Incoming) can't leave it empty.
+  const goToQueue = (nextSource: SourceFilter, nextStatus: StatusFilter) => {
+    setSource(nextSource)
+    setStatus(nextStatus)
+    setDirection('all')
+    setProject('all')
+  }
+
   const query = useQuery({
     queryKey: ['finance', 'workbench', source, status, direction, project, deferredSearch],
     queryFn: () => fetchWorkbench({ source, status, direction, project, q: deferredSearch }),
@@ -513,17 +523,14 @@ export default function FinanceWorkbenchPage() {
         </header>
 
         {summary && (
-          <section className="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-6">
+          <section className="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-7">
             <StatCard
               title="Receipt gaps"
               value={summary.receiptGaps.toLocaleString()}
               detail={`${formatMoney(summary.receiptGapValue)} bank-line spend without final evidence`}
               icon={Receipt}
               active={status === 'receipt_gap'}
-              onClick={() => {
-                setSource('bank_lines')
-                setStatus('receipt_gap')
-              }}
+              onClick={() => goToQueue('bank_lines', 'receipt_gap')}
             />
             <StatCard
               title="Candidates"
@@ -531,10 +538,7 @@ export default function FinanceWorkbenchPage() {
               detail="Likely files to approve or reject"
               icon={CheckCircle2}
               active={status === 'candidate_receipts'}
-              onClick={() => {
-                setSource('bank_lines')
-                setStatus('candidate_receipts')
-              }}
+              onClick={() => goToQueue('bank_lines', 'candidate_receipts')}
             />
             <StatCard
               title="Draft assist"
@@ -542,11 +546,7 @@ export default function FinanceWorkbenchPage() {
               detail={`${formatMoney(summary.xeroDraftCandidateValue)} missing mirrored Xero target`}
               icon={FileText}
               active={status === 'xero_drafts'}
-              onClick={() => {
-                setSource('bank_lines')
-                setDirection('spend')
-                setStatus('xero_drafts')
-              }}
+              onClick={() => goToQueue('bank_lines', 'xero_drafts')}
             />
             <StatCard
               title="Unreconciled"
@@ -554,18 +554,23 @@ export default function FinanceWorkbenchPage() {
               detail={`${formatMoney(summary.unreconciledValue)} in bank mirror queue`}
               icon={AlertTriangle}
               active={status === 'unreconciled'}
-              onClick={() => {
-                setSource('bank_lines')
-                setStatus('unreconciled')
-              }}
+              onClick={() => goToQueue('bank_lines', 'unreconciled')}
             />
             <StatCard
               title="Project gaps"
               value={(summary.bankProjectGaps + summary.xeroProjectGaps + summary.invoiceProjectGaps).toLocaleString()}
-              detail="Rows without a project code across mirrors"
+              detail="Untagged rows across bank + Xero — assign a project"
               icon={Tags}
               active={status === 'needs_project'}
-              onClick={() => setStatus('needs_project')}
+              onClick={() => goToQueue('all', 'needs_project')}
+            />
+            <StatCard
+              title="Review ACT-IN"
+              value={summary.actInReview.toLocaleString()}
+              detail="Tagged to the ACT-IN catch-all — reassign to a real project"
+              icon={Layers}
+              active={status === 'project_review'}
+              onClick={() => goToQueue('all', 'project_review')}
             />
             <StatCard
               title="R&D review"
@@ -573,10 +578,7 @@ export default function FinanceWorkbenchPage() {
               detail={`${formatMoney(summary.rdEligibleSpend)} currently marked eligible`}
               icon={FlaskConical}
               active={status === 'rd_review'}
-              onClick={() => {
-                setSource('xero_transactions')
-                setStatus('rd_review')
-              }}
+              onClick={() => goToQueue('xero_transactions', 'rd_review')}
             />
           </section>
         )}
@@ -832,7 +834,30 @@ export default function FinanceWorkbenchPage() {
 
                 {!query.isLoading && rows.length === 0 && (
                   <tr>
-                    <td colSpan={7} className="px-4 py-10 text-center text-white/45">No rows match these filters.</td>
+                    <td colSpan={7} className="px-4 py-12 text-center">
+                      <p className="text-sm text-white/70">No rows match these filters.</p>
+                      <p className="mx-auto mt-2 max-w-md text-xs text-white/45">
+                        {source === 'bank_lines' && direction === 'income'
+                          ? 'Bank lines are the NAB Visa (a credit card) — it has no income. Real incoming money lives in Xero / the deposit account, not here.'
+                          : direction !== 'all'
+                          ? `You're filtered to ${direction === 'income' ? 'incoming only' : 'outgoing only'} — most queues need both directions.`
+                          : project !== 'all'
+                          ? 'Nothing in this queue for that project. Clear the project filter to see all.'
+                          : 'Nothing in this queue right now. Pick another card above, or widen the filters.'}
+                      </p>
+                      {(direction !== 'all' || project !== 'all') && (
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setDirection('all')
+                            setProject('all')
+                          }}
+                          className="mt-3 inline-flex items-center gap-2 rounded-xl border border-cyan-400/40 bg-cyan-400/10 px-3 py-1.5 text-xs text-cyan-100 transition hover:bg-cyan-400/20"
+                        >
+                          Show In + out, all projects
+                        </button>
+                      )}
+                    </td>
                   </tr>
                 )}
 
