@@ -124,6 +124,21 @@ test('classifyLine: vendor gate — matching amount with wrong vendor does NOT m
   assert.equal(r.matchedBill, undefined)
 })
 
+test('classifyLine: a matching but already-reconciled txn blocks CREATE (no double-count)', () => {
+  // Recurring subscription: a $35 Belong card line whose only match is an ALREADY-reconciled
+  // Xero txn. Must NOT be CREATE (that would duplicate an entry already in Xero).
+  const line: CardLine = { id: 'L6', date: '2025-10-06', vendor: 'BELONG MELBOURNE', amount: 35, status: 'unreconciled', projectCode: null, bankAccount: 'NAB Visa ACT #8815' }
+  const reconciledCtx: ReconcileContext = {
+    bills: [],
+    txns: [{ contactName: 'Belong', date: '2025-10-06', amount: 35, isReconciled: true }],
+    dext: [],
+  }
+  const r = classifyLine(line, reconciledCtx)
+  assert.equal(r.action, 'already_reconciled')
+  assert.notEqual(r.action, 'create')
+  assert.equal(r.matchedTxn?.contactName, 'Belong')
+})
+
 test('summarizeReconcile: hand-computed totals across the 5 lines', () => {
   const results = lines.map((l) => classifyLine(l, ctx))
   const s = summarizeReconcile(results)
@@ -140,8 +155,14 @@ test('summarizeReconcile: hand-computed totals across the 5 lines', () => {
   assert.equal(s.createCount, 3) // L3, L4, L5
   assert.equal(s.createValue, 463.62) // 33.63+9.99+420
 
+  assert.equal(s.alreadyReconciledCount, 0) // none in this fixture
+  assert.equal(s.alreadyReconciledValue, 0)
+
   assert.equal(s.surchargeCount, 1) // only L1 has a non-zero surcharge
   assert.equal(s.surchargeTotal, 4.91)
+
+  // invariant: every line lands in exactly one of the four buckets
+  assert.equal(s.matchCount + s.duplicateCount + s.createCount + s.alreadyReconciledCount, s.totalLines)
 })
 
 // ---------------------------------------------------------------------------

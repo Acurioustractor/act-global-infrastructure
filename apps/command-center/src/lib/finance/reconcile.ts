@@ -27,7 +27,13 @@ export const RECONCILE_DATE_WINDOW_DAYS = 12
 const SURCHARGE_MAX_DOLLARS = 15
 const SURCHARGE_MAX_FRACTION = 0.06
 
-export type ReconcileAction = 'match_bill' | 'approve_draft' | 'match_txn' | 'duplicate' | 'create'
+export type ReconcileAction =
+  | 'match_bill'
+  | 'approve_draft'
+  | 'match_txn'
+  | 'already_reconciled'
+  | 'duplicate'
+  | 'create'
 
 export interface CardLine {
   id: string
@@ -90,6 +96,8 @@ export interface ReconcileSummary {
   duplicateValue: number
   createCount: number
   createValue: number
+  alreadyReconciledCount: number
+  alreadyReconciledValue: number
   surchargeCount: number
   surchargeTotal: number
 }
@@ -320,6 +328,21 @@ export function classifyLine(line: CardLine, ctx: ReconcileContext): ReconcileLi
     }
   }
 
+  // 4b. A matching txn exists but is ALREADY reconciled (or its reconcile state is unknown).
+  // The charge is already entered in Xero — creating would double-count. The bank line either
+  // needs reconciling against the existing entry, or it's a stale/duplicate bank-feed import.
+  // This is the recurring-subscription trap (e.g. Belong $35/mo): without this branch a line whose
+  // only match is a reconciled txn falls through to CREATE and recommends a duplicate.
+  if (txn) {
+    return {
+      ...base,
+      action: 'already_reconciled',
+      matchedTxn: txn,
+      surcharge: surchargeOf(line.amount, txn.amount),
+      note: `A matching txn already exists in Xero (${txn.contactName}, reconciled) — likely already entered. Verify/reconcile the bank line; do NOT create a duplicate.`,
+    }
+  }
+
   // 5. Create from a receipt-pipeline match → carry its coding + receipt image.
   if (dx) {
     return {
@@ -371,6 +394,8 @@ export function summarizeReconcile(results: ReconcileLineResult[]): ReconcileSum
     duplicateValue: 0,
     createCount: 0,
     createValue: 0,
+    alreadyReconciledCount: 0,
+    alreadyReconciledValue: 0,
     surchargeCount: 0,
     surchargeTotal: 0,
   }
@@ -384,6 +409,9 @@ export function summarizeReconcile(results: ReconcileLineResult[]): ReconcileSum
     } else if (r.action === 'create') {
       summary.createCount += 1
       summary.createValue = round2(summary.createValue + r.line.amount)
+    } else if (r.action === 'already_reconciled') {
+      summary.alreadyReconciledCount += 1
+      summary.alreadyReconciledValue = round2(summary.alreadyReconciledValue + r.line.amount)
     } else {
       // match_bill | approve_draft | match_txn
       summary.matchCount += 1
@@ -406,7 +434,8 @@ const ACTION_ORDER: Record<ReconcileAction, number> = {
   match_bill: 1,
   approve_draft: 2,
   match_txn: 3,
-  create: 4,
+  already_reconciled: 4,
+  create: 5,
 }
 
 function matchesAction(result: ReconcileLineResult, action: ReconcileActionFilter): boolean {

@@ -12,7 +12,7 @@ import {
 
 export const dynamic = 'force-dynamic'
 
-const ACTIONS: ReconcileActionFilter[] = ['all', 'duplicate', 'match_bill', 'approve_draft', 'match_txn', 'create']
+const ACTIONS: ReconcileActionFilter[] = ['all', 'duplicate', 'match_bill', 'approve_draft', 'match_txn', 'already_reconciled', 'create']
 
 function parseAction(value: string | null): ReconcileActionFilter {
   return ACTIONS.includes(value as ReconcileActionFilter) ? (value as ReconcileActionFilter) : 'all'

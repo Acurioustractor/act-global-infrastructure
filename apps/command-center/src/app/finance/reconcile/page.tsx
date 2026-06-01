@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { useQuery } from '@tanstack/react-query'
 import {
   ArrowLeft,
+  CheckCheck,
   Copy,
   ExternalLink,
   FileCheck2,
@@ -20,7 +21,7 @@ import { formatMoney } from '@/lib/finance/format'
 import { cn } from '@/lib/utils'
 
 // Mirrors ReconcileAction + ApiLineResult in the engine / route. Read-only Phase 1.
-type ReconcileAction = 'match_bill' | 'approve_draft' | 'match_txn' | 'duplicate' | 'create'
+type ReconcileAction = 'match_bill' | 'approve_draft' | 'match_txn' | 'already_reconciled' | 'duplicate' | 'create'
 type ActionFilter = ReconcileAction | 'all'
 
 interface CardLine {
@@ -65,6 +66,8 @@ interface Summary {
   duplicateValue: number
   createCount: number
   createValue: number
+  alreadyReconciledCount: number
+  alreadyReconciledValue: number
   surchargeCount: number
   surchargeTotal: number
 }
@@ -83,6 +86,7 @@ const ACTION_META: Record<ReconcileAction, { label: string; icon: typeof Link2; 
   match_bill: { label: 'Match bill', icon: Link2, chip: 'bg-cyan-400/15 text-cyan-100 border-cyan-400/30', bar: 'bg-cyan-400/70' },
   approve_draft: { label: 'Approve draft', icon: FileCheck2, chip: 'bg-amber-400/15 text-amber-100 border-amber-400/30', bar: 'bg-amber-400/70' },
   match_txn: { label: 'Match txn', icon: Link2, chip: 'bg-sky-400/15 text-sky-100 border-sky-400/30', bar: 'bg-sky-400/70' },
+  already_reconciled: { label: 'Already in Xero', icon: CheckCheck, chip: 'bg-violet-400/15 text-violet-100 border-violet-400/30', bar: 'bg-violet-400/70' },
   create: { label: 'Create', icon: PlusCircle, chip: 'bg-emerald-400/15 text-emerald-100 border-emerald-400/30', bar: 'bg-emerald-400/70' },
 }
 
@@ -204,7 +208,7 @@ function LineCard({ r }: { r: LineResult }) {
 
         <div className="flex shrink-0 flex-col items-end gap-2">
           <p className="text-2xl font-semibold tracking-tight text-white">{formatMoney(r.line.amount)}</p>
-          {(r.action === 'match_bill' || r.action === 'approve_draft' || r.action === 'duplicate') && (
+          {(r.action === 'match_bill' || r.action === 'approve_draft' || r.action === 'duplicate' || r.action === 'already_reconciled') && (
             <a
               href={XERO_AP_SEARCH}
               target="_blank"
@@ -303,7 +307,7 @@ export default function ReconcileCockpitPage() {
         </header>
 
         {summary && (
-          <section className="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-5">
+          <section className="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-6">
             <StatCard
               title="To reconcile"
               value={summary.totalLines.toLocaleString()}
@@ -327,6 +331,14 @@ export default function ReconcileCockpitPage() {
               icon={Link2}
               active={action === 'match_bill'}
               onClick={() => setAction('match_bill')}
+            />
+            <StatCard
+              title="Already in Xero"
+              value={summary.alreadyReconciledCount.toLocaleString()}
+              detail={`${formatMoney(summary.alreadyReconciledValue)} match a reconciled txn — verify, don't create`}
+              icon={CheckCheck}
+              active={action === 'already_reconciled'}
+              onClick={() => setAction('already_reconciled')}
             />
             <StatCard
               title="Create"
