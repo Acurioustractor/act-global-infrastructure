@@ -140,6 +140,7 @@ packages/notion-workers/workers.json.old
 !.claude/skills/preflight
 !.claude/skills/query
 !.claude/skills/ralph-agent
+!.claude/skills/reconcile-cycle
 !.claude/skills/scan-subscriptions
 !.claude/skills/sync-storytellers
 !.claude/skills/tag-transactions

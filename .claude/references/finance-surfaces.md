@@ -29,7 +29,8 @@ When in doubt: **Notion for reading · command-center for operating · scripts f
 | Tag a Xero transaction | Command-center `/finance/tagger-v2` |
 | Fix a receipt | Command-center `/finance/receipts-triage` |
 | Per-project budget | Command-center `/finance/projects/[code]` |
-| Reconciliation status | Command-center `/finance/reconciliation` |
+| Reconciliation status (whole-quarter, Spending Intelligence) | Command-center `/finance/reconciliation` |
+| Card-line reconciliation (NAB Visa #8815 — match/dedupe/create) | Command-center `/finance/reconcile` (cockpit) + skill `reconcile-cycle` |
 | CEO money cockpit | Command-center `/finance/overview` |
 | Money alignment (in/out) | Command-center `/finance/money-alignment` |
 | Pipeline view | Notion Opportunities DB (filter by Pile) |
