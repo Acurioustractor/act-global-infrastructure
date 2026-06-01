@@ -2,6 +2,19 @@
 
 Intelligent receipt hunting across all data sources.
 
+## Front door: the Finance Workbench (`/finance/workbench`, port 3002)
+
+Receipt hunting now lives in the workbench. Click the **Receipt gaps** KPI card — it queues every bank line / transaction / invoice that still needs a receipt, with AI match suggestions, and saves are single-row and live. Lib: `apps/command-center/src/lib/finance/workbench.ts` (`receipt_gap` / `candidate_receipts` / `no_receipt_needed` queues). The standalone `localhost:3456` HTTP examples below are the **legacy** receipt service — prefer the workbench card and the CLI search (`scripts/lib/unified-receipt-search.mjs`) for day-to-day work.
+
+## Money guards — read before chasing any receipt
+
+1. **Some rows never need a receipt.** Internal transfers (`SPEND-TRANSFER` / `RECEIVE-TRANSFER`), credit-card payoffs ("Internet Payment" on the NAB Visa), bank fees, and below-$75 no-GST items. The workbench's `no_receipt_needed` queue already classifies these — don't chase them as gaps.
+2. **DELETED/voided rows don't count.** Exclude `status='DELETED'` (NULL-safe: `IS DISTINCT FROM 'DELETED'`) from any missing-receipt list — a voided txn isn't real spend.
+3. **Two-account rule.** ACT receipts are chased only for **NAB Visa ACT #8815** + **NJ Marchesi T/as ACT Everyday**. Rows in `NM Personal` / `NJ Marchesi T/as ACT Maximiser` are not ACT spend.
+4. **PostgREST 1000-row cap.** A receipt-gap count over >1000 rows via supabase-js silently truncates — paginate or aggregate in SQL.
+
+→ Full guard rationale: `.claude/skills/tag-transactions/SKILL.md` + memory `command-center-finance-truth.md`.
+
 ## Description
 
 Unified search for receipts across:

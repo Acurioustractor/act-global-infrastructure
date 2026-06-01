@@ -14,6 +14,15 @@ Detects:
 - Price changes (>5% variance from expected)
 - Possibly cancelled subscriptions (2+ missed payments)
 
+## Money guards — read before flagging any subscription
+
+1. **Two-account rule.** Only recurring payments on **NAB Visa ACT #8815** + **NJ Marchesi T/as ACT Everyday** are ACT subscriptions. Recurring debits on `NM Personal` / `NJ Marchesi T/as ACT Maximiser` are Nic's, not ACT's — don't surface them as ACT subs.
+2. **DELETED/voided rows don't count.** Exclude `status='DELETED'` (NULL-safe) when detecting recurring patterns, or a voided run distorts the cadence.
+3. **PostgREST 1000-row cap.** A 365-day pattern scan over supabase-js silently truncates at 1000 rows — paginate or aggregate in SQL.
+4. **Project-tagging a subscription is the workbench, not here.** This skill *discovers* subscriptions. To assign a subscription's spend to a project, use `/finance/workbench` (Project gaps card, port 3002) — it stamps `manual_workbench` so auto-taggers skip it. (The old `backfill-subscription-projects.mjs` was removed.)
+
+→ Guard rationale: memory `command-center-finance-truth.md`. The `localhost:3456` HTTP examples below are the **legacy** standalone service — prefer the CLI (`discover-subscriptions.mjs`) + workbench.
+
 ## Usage
 
 ```bash

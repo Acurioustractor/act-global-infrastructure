@@ -61,6 +61,18 @@ Unique constraints: <columns>
 Existing views: <any matching views>
 ```
 
+## Money tables — extra checks (`xero_invoices` / `xero_transactions` / `bank_statement_lines`)
+
+Before any query that emits a dollar figure:
+
+- **Column traps:** `xero_invoices.type` (NOT `invoice_type`); PK is `xero_id`; `xero_transactions` has no `reference`. BAS-excluded items live in `line_items[]->>tax_type='BASEXCLUDED'`.
+- **Always exclude DELETED:** `status='DELETED'` rows are voided — filter them (NULL-safe `IS DISTINCT FROM 'DELETED'`) from every money read. Voided rows once inflated the R&D claim ~$32K.
+- **Never SUM money through supabase-js:** the PostgREST 1000-row cap silently truncates `.select()` at 1000 rows. Aggregate in SQL (`execute_sql` / `psql`) — SQL `SUM()` is not capped.
+- **Two-account rule:** ACT project totals include only **NAB Visa ACT #8815** + **NJ Marchesi T/as ACT Everyday** (exclude `NM Personal` / `NJ Marchesi T/as ACT Maximiser`).
+- **Verify against the canonical P&L:** reconcile any project/org total against `project_monthly_financials`.
+
+→ Full money guards: `.claude/skills/tag-transactions/SKILL.md` + memory `command-center-finance-truth.md`.
+
 ## Rules
 
 - **NEVER assume column names from memory, grep, or context** — always verify here
