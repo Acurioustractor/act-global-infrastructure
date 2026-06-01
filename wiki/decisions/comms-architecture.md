@@ -86,4 +86,15 @@ Each newsletter needs an **owner**, a **cadence**, and an **opted-in audience** 
 3. **Standardise** `newsletter` → `comms:act-newsletter`.
 4. **Preference centre** so multi-room readers self-manage.
 
+## AI assistance — commerce yes, community never
+
+GHL's Conversation AI is enabled in **suggest mode** (it drafts replies; a human sends). The line that governs it, and any future AI in the comms stack:
+
+- **Commerce → AI may draft.** Bed specs, price routing, lead times, partner FAQs, after-hours acknowledgement. A human accepts or edits the suggestion.
+- **Community → never.** First Nations communities, storytellers, Elders, consent, cultural matters, anyone's story. A human writes fresh, every time. The bot does not speak for community, quote a person, or discuss a story. Sensitive topics escalate to a human.
+
+This is not a preference. A bot between ACT and the people whose story it is breaks the dignity, consent, and cultural-protocol rules the whole operation runs on. Agent config (persona, FAQ, guardrails, escalation): `thoughts/shared/drafts/2026-06-02-conversation-ai-agent-config.md`.
+
+---
+
 This doc is the source of truth the GHL build (`ghl-operating-system.md`, the build sheet) and every site signup form follow.
