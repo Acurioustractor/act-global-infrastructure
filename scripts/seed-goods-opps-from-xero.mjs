@@ -221,7 +221,7 @@ async function main() {
             firstName: 'Accounts',
             lastName: orgName,
             companyName: orgName,
-            tags: ['goods', 'auto-created-from-xero'],
+            tags: ['goods', 'project:act-gd', 'auto-created-from-xero', 'source:xero'],
           }),
         });
         contactId = created.contact?.id || created.id;
