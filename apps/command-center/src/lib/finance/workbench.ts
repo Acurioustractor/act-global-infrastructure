@@ -315,6 +315,14 @@ function isCreditCardAccount(name: string | null | undefined): boolean {
   return accountClass(name) === 'credit_card'
 }
 
+// Xero void statuses — a voided/deleted row stays in the table but is not real money. Invoices
+// use both VOIDED and DELETED; xero_transactions only ever DELETED. Every money/queue read must
+// exclude these. Mirrors the SQL filters in loadWorkbenchSummary + loadWorkbenchRawRows.
+const VOID_STATUSES: readonly string[] = ['DELETED', 'VOIDED']
+function isVoidStatus(status: string | null | undefined): boolean {
+  return !!status && VOID_STATUSES.includes(status)
+}
+
 function bankLineToItem(row: BankEvidenceRow): WorkbenchItem {
   const amount = Math.abs(asNumber(row.amount))
   const vendor = row.best_vendor_name || row.payee || row.particulars || row.reference || 'Bank line'
@@ -431,9 +439,14 @@ function xeroInvoiceToItem(row: XeroInvoiceRow): WorkbenchItem {
   const vendor = row.contact_name || 'Xero invoice'
   const description = firstLineDescription(row.line_items) || row.reference || row.invoice_number || null
   const hasReceipt = Boolean(row.has_attachments)
-  const needsReceipt = direction === 'spend' && !hasReceipt && amount > 0
-  const needsProject = isBlank(row.project_code)
-  const needsProjectReview = row.project_code === 'ACT-IN' || (row.project_code_source || '').includes('vendor')
+  // A voided/deleted invoice stays in Xero's table but is not real money — it must never appear
+  // as a project gap, a review item, or a receipt gap. Invoices carry both VOIDED and DELETED;
+  // for FY26 that's 96 + 23 invoices ($112K voided ACCPAY + $811K voided ACCREC) that would
+  // otherwise inflate the workbench tagging queue with phantoms.
+  const isVoid = isVoidStatus(row.status)
+  const needsReceipt = !isVoid && direction === 'spend' && !hasReceipt && amount > 0
+  const needsProject = !isVoid && isBlank(row.project_code)
+  const needsProjectReview = !isVoid && (row.project_code === 'ACT-IN' || (row.project_code_source || '').includes('vendor'))
 
   return {
     id: row.id,
@@ -560,11 +573,11 @@ async function loadWorkbenchSummary(): Promise<WorkbenchSummary> {
         (SELECT COUNT(*) FROM bank_statement_lines WHERE date >= '${FINANCE_WORKBENCH_FY_START}' AND date <= '${FINANCE_WORKBENCH_FY_END}' AND (project_code IS NULL OR project_code = '')) AS bank_project_gaps,
         -- Exclude internal transfers (never project spend) and DELETED/voided rows from untagged-gap counts.
         (SELECT COUNT(*) FROM xero_transactions WHERE date >= '${FINANCE_WORKBENCH_FY_START}' AND date <= '${FINANCE_WORKBENCH_FY_END}' AND (project_code IS NULL OR project_code = '') AND status IS DISTINCT FROM 'DELETED' AND type NOT LIKE '%TRANSFER%') AS xero_project_gaps,
-        (SELECT COUNT(*) FROM xero_invoices WHERE date >= '${FINANCE_WORKBENCH_FY_START}' AND date <= '${FINANCE_WORKBENCH_FY_END}' AND (project_code IS NULL OR project_code = '') AND status IS DISTINCT FROM 'DELETED') AS invoice_project_gaps,
+        (SELECT COUNT(*) FROM xero_invoices WHERE date >= '${FINANCE_WORKBENCH_FY_START}' AND date <= '${FINANCE_WORKBENCH_FY_END}' AND (project_code IS NULL OR project_code = '') AND status IS DISTINCT FROM 'DELETED' AND status IS DISTINCT FROM 'VOIDED') AS invoice_project_gaps,
         (
           (SELECT COUNT(*) FROM bank_statement_lines WHERE date >= '${FINANCE_WORKBENCH_FY_START}' AND date <= '${FINANCE_WORKBENCH_FY_END}' AND project_code = 'ACT-IN')
           + (SELECT COUNT(*) FROM xero_transactions WHERE date >= '${FINANCE_WORKBENCH_FY_START}' AND date <= '${FINANCE_WORKBENCH_FY_END}' AND project_code = 'ACT-IN' AND status IS DISTINCT FROM 'DELETED')
-          + (SELECT COUNT(*) FROM xero_invoices WHERE date >= '${FINANCE_WORKBENCH_FY_START}' AND date <= '${FINANCE_WORKBENCH_FY_END}' AND project_code = 'ACT-IN' AND status IS DISTINCT FROM 'DELETED')
+          + (SELECT COUNT(*) FROM xero_invoices WHERE date >= '${FINANCE_WORKBENCH_FY_START}' AND date <= '${FINANCE_WORKBENCH_FY_END}' AND project_code = 'ACT-IN' AND status IS DISTINCT FROM 'DELETED' AND status IS DISTINCT FROM 'VOIDED')
         ) AS act_in_review,
         (SELECT COUNT(*) FROM xero_transactions WHERE date >= '${FINANCE_WORKBENCH_FY_START}' AND date <= '${FINANCE_WORKBENCH_FY_END}' AND rd_category = 'review' AND status IS DISTINCT FROM 'DELETED') AS rd_review,
         -- R&D-eligible spend feeds the 43.5% claim — must exclude DELETED/voided transactions.
@@ -719,7 +732,8 @@ async function loadWorkbenchRawRows(source: SourceFilter): Promise<Pick<FinanceW
         .select('id, xero_id, invoice_number, type, status, contact_name, date, total, amount_due, amount_paid, line_items, has_attachments, reference, project_code, project_code_source, income_type')
         .gte('date', FINANCE_WORKBENCH_FY_START)
         .lte('date', FINANCE_WORKBENCH_FY_END)
-        .or('status.is.null,status.neq.DELETED')
+        // Invoices carry both VOIDED and DELETED void statuses (transactions only DELETED) — exclude both.
+        .or('status.is.null,and(status.neq.DELETED,status.neq.VOIDED)')
         .order('date', { ascending: false })
         .range(from, to)
     )

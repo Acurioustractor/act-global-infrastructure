@@ -295,6 +295,43 @@ test('accountClass classifies by explicit enumerated declaration, not a fuzzy na
   assert.equal(accountClass(undefined), 'deposit')
 })
 
+test('buildFinanceWorkbenchResponse excludes VOIDED invoices from the project/review queue (not real money)', () => {
+  const mkInv = (over: Partial<XeroInvoiceRow> & Pick<XeroInvoiceRow, 'id'>): XeroInvoiceRow => ({
+    xero_id: 'x-' + over.id,
+    invoice_number: 'INV-X',
+    type: 'ACCPAY',
+    status: 'AUTHORISED',
+    contact_name: 'Kennards Hire',
+    date: '2025-12-08',
+    total: 1714,
+    amount_due: 1714,
+    amount_paid: 0,
+    line_items: [{ Description: 'Equipment hire' }],
+    has_attachments: false,
+    reference: null,
+    project_code: null,
+    project_code_source: null,
+    income_type: null,
+    ...over,
+  })
+
+  const rows: XeroInvoiceRow[] = [
+    mkInv({ id: 'inv-voided-untagged', status: 'VOIDED', project_code: null }), // voided + untagged → NOT a project gap
+    mkInv({ id: 'inv-voided-actin', status: 'VOIDED', project_code: 'ACT-IN' }), // voided ACT-IN → NOT in review
+    mkInv({ id: 'inv-live-untagged', status: 'AUTHORISED', project_code: null }), // live untagged → still a gap
+  ]
+
+  const response = buildFinanceWorkbenchResponse(
+    { ...baseFilters, source: 'xero_invoices', status: 'all' },
+    { projects: [], summary, invoiceRows: rows }
+  )
+  const byId = (id: string) => response.items.find((i) => i.id === id)
+
+  assert.equal(byId('inv-voided-untagged')?.needsProject, false, 'a VOIDED invoice is not real spend — never a project gap')
+  assert.equal(byId('inv-voided-actin')?.needsProjectReview, false, 'a VOIDED ACT-IN invoice is not a real review item')
+  assert.equal(byId('inv-live-untagged')?.needsProject, true, 'a live untagged invoice still needs a project')
+})
+
 test('buildFinanceWorkbenchResponse attaches highest-confidence AI suggestion', () => {
   const response = buildFinanceWorkbenchResponse(
     { ...baseFilters, status: 'all', source: 'bank_lines' },
