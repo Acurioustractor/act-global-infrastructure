@@ -1,6 +1,19 @@
 # Ingest the ACT Everyday deposit account into bank_statement_lines
 
-**Created:** 2026-06-01 · **Status:** queued (systemic follow-up)
+**Created:** 2026-06-01 · **Status:** approach chosen (2026-06-01) — DERIVE from xero_transactions · NOT yet implemented (needs a fresh-context tracer-bullet — Tier-3 write + double-count risk)
+
+## Update 2026-06-01 — chosen approach + de-risking (do these in a fresh context)
+**Ben chose: derive deposit-account bank lines from `xero_transactions`** (no external statement file). Findings before implementing:
+- **Real volume: 222 ACT Everyday FY26 txns, NOT 106** — my first count hit the PostgREST 1000-row cap (the `.select().limit(5000)` truncated). Composition (status≠DELETED): **65 SPEND ($419K, 23 no-receipt)** · **57 RECEIVE ($283K)** · 80 SPEND-TRANSFER ($779K) · 20 RECEIVE-TRANSFER ($26K).
+- **The value is the 65 SPEND** (23 lack receipts → real receipt-gap coverage the deposit account is missing) **+ the 57 RECEIVE** (makes the bank-line "Incoming" view show real deposit income — the done-criterion). The 100 transfers add no receipt/reconciliation value.
+- **⚠️ DOUBLE-COUNT RISK (must verify first):** these SPEND/RECEIVE rows are ALREADY visible in the workbench via `source=xero_transactions` / `source=all`. Deriving `bank_statement_lines` rows for the same underlying txns will show them TWICE unless the workbench's bank-line-vs-transaction dedup (via `xero_transaction_id` / `matched_xero_transaction_id`, the way the NAB Visa's ~1,618 lines reconcile against its 891 txns) correctly collapses them. **Trace this before any bulk insert.**
+- **Transfer handling:** `bankLineToItem` only special-cases credit-CARD credits — it does NOT treat a deposit-account SPEND-TRANSFER/RECEIVE-TRANSFER as a transfer, so a derived transfer row would mis-classify as spend/income. **Either skip the 100 transfer rows in the derive (recommended — they're handled via the xero_transactions source already) or extend `bankLineToItem` to read the txn type.**
+- **Schema (`bank_statement_lines` cols):** id, date, type, payee, particulars, reference, amount, direction (credit/debit), source, status, bank_account, xero_transaction_id, matched_xero_transaction_id, project_code, project_source, rd_eligible, receipt_match_status, … — map xero_transactions → these; set `xero_transaction_id` (pre-linked) + status `reconciled`; carry `project_code`/`rd_eligible`.
+- **Tracer-bullet FIRST (CLAUDE.md money rule):** derive ONE deposit SPEND row, confirm it shows once (no double-count) in the workbench + lands in the right receipt-gap queue, THEN bulk. The bulk INSERT is a **Tier-3** write into a shared table → explicit go.
+- **Dependency note:** Plan 1's deposit class (credit=income) already works for this account (`accountClass('NJ Marchesi T/as ACT Everyday')` → `deposit`, shipped `c7bc7e0`).
+
+---
+
 
 ## Problem
 

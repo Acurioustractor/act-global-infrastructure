@@ -1,6 +1,14 @@
 # Record account class (credit-card vs deposit) as data, not name-matching
 
-**Created:** 2026-06-01 · **Status:** queued (systemic follow-up to `c1b401b`)
+**Created:** 2026-06-01 · **Status:** Tier-1 SHIPPED (`c7bc7e0`, review CONFIRMED) · Tier-3 DEFERRED (Ben, 2026-06-01)
+
+## Update 2026-06-01 — investigation done, Tier-1 shipped, Tier-3 deferred
+- **Investigation answered:** Xero DOES expose the class via `BankAccountType` (config/xero-chart.json, verified): `NAB Visa ACT #8815` + `Heritage Visa CC` = `CREDITCARD`; `NJ Marchesi T/as ACT Everyday` / `Maximiser` / `NM Personal` = `BANK`. `type`='BANK' and `Class`='ASSET' for ALL accounts (useless). So the preferred branch ("capture BankAccountType") is viable.
+- **Tier-1 SHIPPED (`c7bc7e0`):** replaced the fuzzy `isCreditCardAccount` regex in `workbench.ts` with an explicit enumerated `accountClass()` lookup seeded from that data; unknown → safe `deposit` default. This is the permanent fallback layer. TDD (`accountClass` pinned), tsc clean, clean-context review CONFIRMED.
+- **Tier-3 DEFERRED (Ben's call):** capturing `BankAccountType` into `xero_bank_accounts.bank_account_type` (migration + sync edit + backfill) is behaviorally identical today (the registry covers the only live card, #8815). Its only benefit is auto-classing NEW accounts — relevant at the **30 Jun 2026 Pty cutover** when NAB business accounts land. **Revisit then.** When done, the workbench can swap `accountClass()` to read the column, keeping the registry as fallback.
+
+---
+
 
 ## Problem
 
