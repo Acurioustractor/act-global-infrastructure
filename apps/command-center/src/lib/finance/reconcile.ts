@@ -1,0 +1,638 @@
+import { supabase } from '@/lib/supabase'
+import { fetchAllRows } from './query'
+
+/**
+ * Reconciliation engine — the typed, unit-tested core of the Reconciliation Cockpit
+ * (plan: thoughts/shared/plans/2026-06-01-reconciliation-cockpit.md).
+ *
+ * For each NAB Visa card line it decides exactly what to do in Xero — MATCH an
+ * existing bill (adding any card surcharge as an Adjustment), kill a DUPLICATE
+ * (Dext published a bill AND the bank feed created a spend-line for the same
+ * purchase), or CREATE with coding learned from how that vendor was coded in the
+ * receipt pipeline. READ-ONLY: this prepares/codes/flags — it never writes to Xero.
+ * The Xero API cannot set IsReconciled (UI-only), so the final reconcile click
+ * always stays with Ben/SL.
+ *
+ * Lifted from scripts/reconcile-line-lookup.mjs so the API, the cockpit UI and the
+ * scripts share ONE matching source of truth. The money math (surcharge sums,
+ * duplicate value, totals) is TDD'd in reconcile.test.ts — a silent wrong number
+ * is the expensive finance failure.
+ */
+
+// Match a card line against a Xero row within this many days either side.
+export const RECONCILE_DATE_WINDOW_DAYS = 12
+
+// A card surcharge/fee is small in both absolute and relative terms. Outside this
+// band the amounts are different purchases, not the same one + a fee.
+const SURCHARGE_MAX_DOLLARS = 15
+const SURCHARGE_MAX_FRACTION = 0.06
+
+export type ReconcileAction = 'match_bill' | 'approve_draft' | 'match_txn' | 'duplicate' | 'create'
+
+export interface CardLine {
+  id: string
+  date: string | null
+  vendor: string
+  amount: number // ABS bank charge
+  status: string | null // 'reconciled' | 'unreconciled'
+  projectCode: string | null
+  bankAccount: string | null
+}
+
+export interface XeroBill {
+  contactName: string | null
+  date: string | null
+  amount: number
+  status: string | null // AUTHORISED | PAID | DRAFT | ...
+  hasAttachments: boolean | null
+}
+
+export interface XeroSpendTxn {
+  contactName: string | null
+  date: string | null
+  amount: number
+  isReconciled: boolean | null
+}
+
+export interface DextCoding {
+  vendor: string
+  project: string | null
+  amount: number | null
+  date: string | null
+  receiptUrl: string | null
+}
+
+export interface ReconcileContext {
+  bills: XeroBill[]
+  txns: XeroSpendTxn[]
+  dext: DextCoding[]
+}
+
+export interface ReconcileLineResult {
+  line: CardLine
+  action: ReconcileAction
+  matchedBill?: XeroBill
+  matchedTxn?: XeroSpendTxn
+  surcharge: number // bank amount − matched reference amount (0 if exact / no match)
+  suggestedProject: string | null
+  suggestedAccount: string | null
+  receiptUrl: string | null
+  fromDext: boolean
+  note: string
+}
+
+export interface ReconcileSummary {
+  totalLines: number
+  totalValue: number
+  matchCount: number
+  matchValue: number
+  duplicateCount: number
+  duplicateValue: number
+  createCount: number
+  createValue: number
+  surchargeCount: number
+  surchargeTotal: number
+}
+
+export type ReconcileActionFilter = ReconcileAction | 'all'
+
+export interface ReconcileFilters {
+  action: ReconcileActionFilter
+  q: string
+  minAmount: number
+  limit: number
+}
+
+export interface ReconcileResponse {
+  filters: ReconcileFilters
+  summary: ReconcileSummary
+  totalMatching: number
+  results: ReconcileLineResult[]
+}
+
+// --- numeric helpers -------------------------------------------------------
+
+function round2(n: number): number {
+  return Math.round((n + Number.EPSILON) * 100) / 100
+}
+
+function dayGap(a: string | null, b: string | null): number {
+  if (!a || !b) return Infinity
+  return Math.abs((new Date(a).getTime() - new Date(b).getTime()) / 86_400_000)
+}
+
+/**
+ * 'exact' when within half a cent; 'surcharge' when the bank charge is the
+ * reference + a small card fee (both an absolute and a percentage cap so a $20
+ * gap never passes and a $1 gap on a $6 purchase never passes); else null.
+ */
+export function amountCloseness(bankAmt: number, refAmt: number): 'exact' | 'surcharge' | null {
+  const diff = Math.abs(bankAmt - refAmt)
+  if (diff < 0.005) return 'exact'
+  if (diff <= SURCHARGE_MAX_DOLLARS && diff <= refAmt * SURCHARGE_MAX_FRACTION) return 'surcharge'
+  return null
+}
+
+export function surchargeOf(bankAmt: number, refAmt: number): number {
+  return round2(bankAmt - refAmt)
+}
+
+// --- vendor matching -------------------------------------------------------
+
+const VENDOR_STOPWORDS = new Set([
+  'THE', 'AND', 'PAYMENT', 'PURCHASE', 'CARD', 'AUSTRALIA', 'PTY', 'COM', 'AUS',
+  'BUSINESS', 'HELP', 'MEMBERSHIP', 'LIMITED', 'SYDNEY', 'STORES', 'CENTRE',
+  'GROUP', 'SALES', 'SERVICES', 'SERVICE', 'STORE', 'SHOP', 'ONLINE',
+  'COMMUNITY', 'HIRE', 'CO', 'OF',
+])
+
+export function normalizeVendor(s: string | null | undefined): string {
+  return (s || '')
+    .toUpperCase()
+    .replace(/SQ ?\*?|SQSP ?\*?|UBER ?\*?|SP ?\*?|X{4,}\d*|PTY LTD| LTD| INC|\d{3,}|[^A-Z ]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim()
+}
+
+function vendorTokens(s: string | null | undefined): Set<string> {
+  return new Set(
+    normalizeVendor(s)
+      .split(' ')
+      .filter((w) => w.length >= 3 && !VENDOR_STOPWORDS.has(w))
+  )
+}
+
+/** True when the two names share at least one significant token. */
+export function vendorMatch(a: string | null | undefined, b: string | null | undefined): boolean {
+  const ta = vendorTokens(a)
+  const tb = vendorTokens(b)
+  if (!ta.size || !tb.size) return false
+  for (const t of ta) if (tb.has(t)) return true
+  return false
+}
+
+// --- finders (vendor-gated; exact amount beats surcharge; nearest date) -----
+
+interface Scored<T> {
+  row: T
+  closeness: 'exact' | 'surcharge'
+}
+
+function bestMatch<T extends { date: string | null; amount: number; contactName?: string | null }>(
+  rows: T[],
+  line: CardLine
+): T | undefined {
+  const scored: Scored<T>[] = []
+  for (const row of rows) {
+    const c = amountCloseness(line.amount, row.amount)
+    if (!c) continue
+    if (dayGap(row.date, line.date) > RECONCILE_DATE_WINDOW_DAYS) continue
+    if (!vendorMatch(line.vendor, row.contactName)) continue
+    scored.push({ row, closeness: c })
+  }
+  scored.sort(
+    (a, b) =>
+      (a.closeness === 'exact' ? 0 : 1) - (b.closeness === 'exact' ? 0 : 1) ||
+      dayGap(a.row.date, line.date) - dayGap(b.row.date, line.date)
+  )
+  return scored[0]?.row
+}
+
+function bestDext(dext: DextCoding[], line: CardLine): DextCoding | undefined {
+  const scored: Scored<DextCoding>[] = []
+  for (const row of dext) {
+    if (row.amount == null) continue
+    const c = amountCloseness(line.amount, row.amount)
+    if (!c) continue
+    if (dayGap(row.date, line.date) > RECONCILE_DATE_WINDOW_DAYS) continue
+    if (!vendorMatch(line.vendor, row.vendor)) continue
+    scored.push({ row, closeness: c })
+  }
+  scored.sort(
+    (a, b) =>
+      (a.closeness === 'exact' ? 0 : 1) - (b.closeness === 'exact' ? 0 : 1) ||
+      dayGap(a.row.date, line.date) - dayGap(b.row.date, line.date)
+  )
+  return scored[0]?.row
+}
+
+/**
+ * Learned coding: most-common project seen for this vendor across the receipt
+ * pipeline. (Account is not captured per-receipt in the DB, so accounts fall to
+ * the heuristic guess below — see plan note on the Dext CSV vs receipt_emails.)
+ */
+function learnedProject(dext: DextCoding[], vendor: string): string | null {
+  const counts = new Map<string, number>()
+  for (const row of dext) {
+    if (!row.project) continue
+    if (!vendorMatch(vendor, row.vendor)) continue
+    counts.set(row.project, (counts.get(row.project) || 0) + 1)
+  }
+  let best: string | null = null
+  let bestN = 0
+  for (const [proj, n] of counts) if (n > bestN) ((best = proj), (bestN = n))
+  return best
+}
+
+// Last-resort heuristic for vendors never seen in the receipt pipeline:
+// keyword → account; location → project hint. Mirrors guess() in the script.
+function guessAccount(vendor: string): string {
+  const u = vendor.toUpperCase()
+  if (/UBER|CAB|TAXI/.test(u)) return '452 - Taxis'
+  if (/HOTEL|NOVOTEL|BOOKING|DAYUSE|AIRBNB|QANTAS|VIRGIN|AVIS/.test(u)) return '493 - Travel'
+  if (/XERO|SQUARESPACE|OPENAI|GARMIN|ADOBE|FIGMA/.test(u)) return '485 - Subscriptions'
+  if (/AMZNPRIME|AUDIBLE|PRIME/.test(u)) return '880 - Drawings (personal?)'
+  if (/ECOFLO|HARDWARE|STRATCO|BUNNINGS/.test(u)) return '446 - Materials & Supplies'
+  if (/NEWS PTY/.test(u)) return '485 - Subscriptions'
+  if (/WOOLW|COLES|ALDI|IGA|SUPERMARKET|FOODS|BUTCHER|GUZMAN|CAFE|SUSHI|RICEBOI|BONKERS|BUFFET/.test(u)) {
+    return '421 - Light meals'
+  }
+  return '? - code by hand'
+}
+
+function guessProjectHint(vendor: string): string | null {
+  const u = vendor.toUpperCase()
+  if (/ALICE|AMPIL|LARRAKEYAH|MANINGRIDA|BARLMARRK|AHERRENGE|TENNANT/.test(u)) return 'NT trip → ACT-GD/OO?'
+  if (/MALENY|WITTA|CALOUNDRA|MOOLOOLABA|CONONDALE/.test(u)) return 'ACT-FM (Farm)?'
+  if (/SURRY|SYDNEY|GEORGE|EDGECLIFF|MASCOT/.test(u)) return 'Sydney → ?'
+  return null
+}
+
+// --- classification cascade ------------------------------------------------
+
+export function classifyLine(line: CardLine, ctx: ReconcileContext): ReconcileLineResult {
+  const bill = bestMatch(ctx.bills, line)
+  const txn = bestMatch(ctx.txns, line)
+  const dx = bestDext(ctx.dext, line)
+
+  const base = {
+    line,
+    suggestedProject: line.projectCode,
+    suggestedAccount: null as string | null,
+    receiptUrl: null as string | null,
+    fromDext: false,
+  }
+
+  // 1. Same purchase exists as BOTH a bill and a card txn → duplicate.
+  if (bill && txn) {
+    return {
+      ...base,
+      action: 'duplicate',
+      matchedBill: bill,
+      matchedTxn: txn,
+      surcharge: surchargeOf(line.amount, bill.amount),
+      suggestedProject: line.projectCode,
+      receiptUrl: null,
+      note: `Match the BILL (${bill.status}, ${bill.contactName}); delete the duplicate card txn`,
+    }
+  }
+
+  // 2. Draft bill — approve, then match.
+  if (bill && bill.status === 'DRAFT') {
+    return {
+      ...base,
+      action: 'approve_draft',
+      matchedBill: bill,
+      surcharge: surchargeOf(line.amount, bill.amount),
+      note: `Approve draft bill (${bill.contactName}), then match`,
+    }
+  }
+
+  // 3. Approved/paid bill → match.
+  if (bill) {
+    return {
+      ...base,
+      action: 'match_bill',
+      matchedBill: bill,
+      surcharge: surchargeOf(line.amount, bill.amount),
+      note: `Match to bill — search name "${bill.contactName}" (${bill.status}${bill.hasAttachments ? ', has receipt' : ''})`,
+    }
+  }
+
+  // 4. Unreconciled card txn already in Xero → match.
+  if (txn && txn.isReconciled === false) {
+    return {
+      ...base,
+      action: 'match_txn',
+      matchedTxn: txn,
+      surcharge: surchargeOf(line.amount, txn.amount),
+      note: `Match to existing card txn (${txn.contactName})`,
+    }
+  }
+
+  // 5. Create from a receipt-pipeline match → carry its coding + receipt image.
+  if (dx) {
+    return {
+      ...base,
+      action: 'create',
+      surcharge: dx.amount != null ? surchargeOf(line.amount, dx.amount) : 0,
+      suggestedProject: dx.project || line.projectCode,
+      suggestedAccount: guessAccount(line.vendor),
+      receiptUrl: dx.receiptUrl,
+      fromDext: true,
+      note: `Create — ${dx.project || 'no project'} · receipt attached`,
+    }
+  }
+
+  // 6. Create with a project learned from how this vendor was coded before.
+  const learned = learnedProject(ctx.dext, line.vendor)
+  if (learned) {
+    return {
+      ...base,
+      action: 'create',
+      surcharge: 0,
+      suggestedProject: learned,
+      suggestedAccount: guessAccount(line.vendor),
+      note: 'Create — project learned from prior coding of this vendor',
+    }
+  }
+
+  // 7. Create with the last-resort heuristic guess (human confirms).
+  const hint = guessProjectHint(line.vendor)
+  return {
+    ...base,
+    action: 'create',
+    surcharge: 0,
+    suggestedProject: line.projectCode,
+    suggestedAccount: guessAccount(line.vendor),
+    note: `Create — heuristic${hint ? ` · ${hint}` : ''} (confirm)`,
+  }
+}
+
+// --- aggregation (money math — TDD'd) --------------------------------------
+
+export function summarizeReconcile(results: ReconcileLineResult[]): ReconcileSummary {
+  const summary: ReconcileSummary = {
+    totalLines: results.length,
+    totalValue: 0,
+    matchCount: 0,
+    matchValue: 0,
+    duplicateCount: 0,
+    duplicateValue: 0,
+    createCount: 0,
+    createValue: 0,
+    surchargeCount: 0,
+    surchargeTotal: 0,
+  }
+
+  for (const r of results) {
+    summary.totalValue = round2(summary.totalValue + r.line.amount)
+
+    if (r.action === 'duplicate') {
+      summary.duplicateCount += 1
+      summary.duplicateValue = round2(summary.duplicateValue + r.line.amount)
+    } else if (r.action === 'create') {
+      summary.createCount += 1
+      summary.createValue = round2(summary.createValue + r.line.amount)
+    } else {
+      // match_bill | approve_draft | match_txn
+      summary.matchCount += 1
+      summary.matchValue = round2(summary.matchValue + r.line.amount)
+    }
+
+    if (Math.abs(r.surcharge) >= 0.005) {
+      summary.surchargeCount += 1
+      summary.surchargeTotal = round2(summary.surchargeTotal + r.surcharge)
+    }
+  }
+
+  return summary
+}
+
+// --- response builder (pure; mirrors workbench.ts) -------------------------
+
+const ACTION_ORDER: Record<ReconcileAction, number> = {
+  duplicate: 0,
+  match_bill: 1,
+  approve_draft: 2,
+  match_txn: 3,
+  create: 4,
+}
+
+function matchesAction(result: ReconcileLineResult, action: ReconcileActionFilter): boolean {
+  return action === 'all' || result.action === action
+}
+
+function matchesQuery(result: ReconcileLineResult, q: string): boolean {
+  if (!q) return true
+  const haystack = [
+    result.line.vendor,
+    result.line.projectCode,
+    result.suggestedProject,
+    result.suggestedAccount,
+    result.matchedBill?.contactName,
+    result.matchedTxn?.contactName,
+    result.note,
+  ]
+    .filter(Boolean)
+    .join(' ')
+    .toLowerCase()
+  return haystack.includes(q.toLowerCase())
+}
+
+export function buildReconcileResponse(
+  lines: CardLine[],
+  ctx: ReconcileContext,
+  filters: ReconcileFilters
+): ReconcileResponse {
+  const all = lines.map((line) => classifyLine(line, ctx))
+
+  const filtered = all
+    .filter((r) => matchesAction(r, filters.action))
+    .filter((r) => r.line.amount >= filters.minAmount)
+    .filter((r) => matchesQuery(r, filters.q))
+    .sort(
+      (a, b) =>
+        ACTION_ORDER[a.action] - ACTION_ORDER[b.action] || b.line.amount - a.line.amount
+    )
+
+  return {
+    filters,
+    summary: summarizeReconcile(all),
+    totalMatching: filtered.length,
+    results: filtered.slice(0, filters.limit),
+  }
+}
+
+// --- data loaders (Supabase; 1000-cap-safe pagination) ---------------------
+// bills (1,479) / spend txns (1,711) / receipt_emails (2,434) all exceed the
+// PostgREST ~1000-row cap, so every load pages via fetchAllRows.
+
+export const RECONCILE_FY_START = '2025-07-01'
+export const RECONCILE_FY_END = '2026-06-30'
+// NAB Visa ACT #8815 — matched as a substring to survive Xero's trailing-space drift.
+export const RECONCILE_ACCOUNT = '8815'
+
+export interface ReconcileWindow {
+  start: string
+  end: string
+  account: string
+}
+
+export interface ReconcileProjectOption {
+  code: string
+  name: string | null
+}
+
+export interface ReconcileCockpitResponse extends ReconcileResponse {
+  window: ReconcileWindow
+  projects: ReconcileProjectOption[]
+}
+
+const num = (v: unknown): number => {
+  const n = typeof v === 'number' ? v : Number(v)
+  return Number.isFinite(n) ? n : 0
+}
+
+async function loadCardLines(w: ReconcileWindow): Promise<CardLine[]> {
+  const rows = await fetchAllRows<{
+    id: string
+    date: string | null
+    payee: string | null
+    particulars: string | null
+    reference: string | null
+    amount: number | string | null
+    status: string | null
+    project_code: string | null
+    bank_account: string | null
+  }>((from, to) =>
+    supabase
+      .from('bank_statement_lines')
+      .select('id, date, payee, particulars, reference, amount, status, project_code, bank_account')
+      .ilike('bank_account', `%${w.account}%`)
+      .eq('direction', 'debit')
+      .eq('status', 'unreconciled')
+      .gte('date', w.start)
+      .lte('date', w.end)
+      .order('date', { ascending: false })
+      .range(from, to)
+  )
+
+  return rows.map((r) => ({
+    id: r.id,
+    date: r.date,
+    vendor: (r.payee || r.particulars || r.reference || 'Bank line').trim(),
+    amount: Math.abs(num(r.amount)),
+    status: r.status,
+    projectCode: r.project_code,
+    bankAccount: r.bank_account,
+  }))
+}
+
+async function loadBills(w: ReconcileWindow): Promise<XeroBill[]> {
+  const rows = await fetchAllRows<{
+    contact_name: string | null
+    date: string | null
+    total: number | string | null
+    status: string | null
+    has_attachments: boolean | null
+  }>((from, to) =>
+    supabase
+      .from('xero_invoices')
+      .select('contact_name, date, total, status, has_attachments')
+      .eq('type', 'ACCPAY')
+      .or('status.is.null,and(status.neq.DELETED,status.neq.VOIDED)')
+      .gte('date', w.start)
+      .lte('date', w.end)
+      .range(from, to)
+  )
+
+  return rows.map((r) => ({
+    contactName: r.contact_name,
+    date: r.date,
+    amount: Math.abs(num(r.total)),
+    status: r.status,
+    hasAttachments: r.has_attachments,
+  }))
+}
+
+async function loadSpendTxns(w: ReconcileWindow): Promise<XeroSpendTxn[]> {
+  const rows = await fetchAllRows<{
+    contact_name: string | null
+    date: string | null
+    total: number | string | null
+    is_reconciled: boolean | null
+  }>((from, to) =>
+    supabase
+      .from('xero_transactions')
+      .select('contact_name, date, total, is_reconciled')
+      .like('type', 'SPEND%')
+      .ilike('bank_account', `%${w.account}%`)
+      .or('status.is.null,status.neq.DELETED')
+      .gte('date', w.start)
+      .lte('date', w.end)
+      .range(from, to)
+  )
+
+  return rows.map((r) => ({
+    contactName: r.contact_name,
+    date: r.date,
+    amount: Math.abs(num(r.total)),
+    isReconciled: r.is_reconciled,
+  }))
+}
+
+// Learned coding + receipt images come from the live receipt pipeline
+// (receipt_emails), NOT the point-in-time Dext CSV the script used. attachment_url
+// is a storage path inside the 'receipt-attachments' bucket — the route signs it.
+async function loadDextCoding(w: ReconcileWindow): Promise<DextCoding[]> {
+  const rows = await fetchAllRows<{
+    vendor_name: string | null
+    amount_detected: number | string | null
+    project_code: string | null
+    attachment_url: string | null
+    received_at: string | null
+  }>((from, to) =>
+    supabase
+      .from('receipt_emails')
+      .select('vendor_name, amount_detected, project_code, attachment_url, received_at')
+      .not('vendor_name', 'is', null)
+      .gte('received_at', w.start)
+      .lte('received_at', `${w.end}T23:59:59`)
+      .range(from, to)
+  )
+
+  return rows.map((r) => ({
+    vendor: r.vendor_name || '',
+    amount: r.amount_detected == null ? null : num(r.amount_detected),
+    project: r.project_code,
+    date: r.received_at ? r.received_at.slice(0, 10) : null,
+    receiptUrl: r.attachment_url,
+  }))
+}
+
+async function loadProjects(): Promise<ReconcileProjectOption[]> {
+  const { data, error } = await supabase
+    .from('projects')
+    .select('code, name')
+    .not('code', 'is', null)
+    .or('status.is.null,status.neq.archived')
+    .order('code', { ascending: true })
+    .limit(500)
+  if (error) throw new Error(`projects: ${error.message}`)
+  return ((data || []) as ReconcileProjectOption[]).map((p) => ({ code: p.code, name: p.name }))
+}
+
+export async function loadReconcileContext(w: ReconcileWindow): Promise<{
+  lines: CardLine[]
+  ctx: ReconcileContext
+  projects: ReconcileProjectOption[]
+}> {
+  const [lines, bills, txns, dext, projects] = await Promise.all([
+    loadCardLines(w),
+    loadBills(w),
+    loadSpendTxns(w),
+    loadDextCoding(w),
+    loadProjects(),
+  ])
+  return { lines, ctx: { bills, txns, dext }, projects }
+}
+
+export async function getReconcileCockpit(
+  filters: ReconcileFilters,
+  window: ReconcileWindow = { start: RECONCILE_FY_START, end: RECONCILE_FY_END, account: RECONCILE_ACCOUNT }
+): Promise<ReconcileCockpitResponse> {
+  const { lines, ctx, projects } = await loadReconcileContext(window)
+  const response = buildReconcileResponse(lines, ctx, filters)
+  return { ...response, window, projects }
+}
