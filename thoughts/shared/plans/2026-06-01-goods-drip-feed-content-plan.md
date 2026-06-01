@@ -10,6 +10,18 @@ The pipeline names are confirmed real ("Goods — Demand Register", "Goods — B
 
 # Goods on Country — Drip-Feed Content Plan
 
+## ✅ CONSENT UPDATE (2026-06-01) — Utopia trip CLEARED for public marketing
+
+The Utopia-trip content is now **consent-cleared for public-facing marketing** per [[2026-06-01-utopia-trip-story-approval]] (Oonchiumpa cultural authority — Kristy Bloomfield + Tanya Turner; **Mykel youth-cleared** by family + Oonchiumpa for named public use). This **LIFTS the `BLOCKED` flags below** for every Utopia-trip asset — **Mykel's spine, the Ampilatwatja Elders, the door-to-bed before/after, the Day-1 photo sets move into Month 1.** Usable content went from 58 → **86 assets / ~246 drip-touches cleared.** The supporter funnel (B3) no longer waits for wk5–6 — the emotional spine runs from the start.
+
+Three residual guards (precision, **not** blocks):
+- **Un-named until verified:** the two **Ampilatwatja OAM Elders**, **Frank & Casey Holmes**, **Dianne Stokes**, **Norman Frank** — run their stories/quotes **un-named** until spellings are confirmed. (Mykel, Kristy, Tanya, Cliff Plummer are verified.)
+- **Still gated (33 assets):** non-Utopia community content (e.g. Palm Island) — this approval is Utopia-trip-specific; those need their own consent before use.
+- **Permanently excluded:** the Linda Turner / Maningrida story.
+- **Recipient opt-in still applies:** newsletter sends go only to `newsletter_consent = true` contacts (`v_newsletter_audience`) — storyteller consent ≠ recipient opt-in.
+
+---
+
 *Internal planning doc. Channel: GoHighLevel (GHL). Pipelines referenced are the live GHL objects: **Goods — Demand Register**, **Goods — Buyer Pipeline**, and the **Supporter Journey** workflow. Every consent-pending asset is flagged `BLOCKED-until-consent` and must NOT enter a send until the OCAP trail is closed via `consent-check`. Voice follows the Nick Cave register note: plain words then a turn, real numbers, verbatim-never-recombined quotes, no em dashes, no "delve/crucial/pivotal/tapestry", no "not just X but Y".*
 
 ---
