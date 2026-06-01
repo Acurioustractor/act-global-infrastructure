@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 import {
+  accountClass,
   buildFinanceWorkbenchResponse,
   type BankEvidenceRow,
   type FinanceWorkbenchFilters,
@@ -273,6 +274,25 @@ test('buildFinanceWorkbenchResponse interprets credit-card credits as transfers/
   assert.equal(byId('cc-refund')?.isRefund, true)
   assert.equal(byId('cc-purchase')?.direction, 'spend', 'a credit-card purchase is spend')
   assert.equal(byId('deposit-income')?.direction, 'income', 'a real deposit-account credit is still income')
+})
+
+test('accountClass classifies by explicit enumerated declaration, not a fuzzy name pattern', () => {
+  // Seeded from Xero BankAccountType (config/xero-chart.json, verified 2026-06-01):
+  // NAB Visa #8815 + Heritage Visa CC = CREDITCARD; the NJ Marchesi accounts + NM Personal = BANK.
+  assert.equal(accountClass('NAB Visa ACT #8815'), 'credit_card', 'the live ACT credit card')
+  assert.equal(accountClass('Heritage Visa CC '), 'credit_card', 'archived card, trailing-space name')
+  assert.equal(accountClass('NJ Marchesi T/as ACT Everyday'), 'deposit', 'the deposit account income lands in')
+  assert.equal(accountClass('ACT Everyday'), 'deposit', 'short form used in some bank-line rows')
+  assert.equal(accountClass('NJ Marchesi T/as ACT Maximiser'), 'deposit', 'savings')
+  assert.equal(accountClass('NM Personal '), 'deposit', "Nic's personal — excluded by the two-account rule anyway")
+
+  // The whole point of the registry: an UNKNOWN account defaults to the safe deposit convention
+  // (credit = income), it is NOT pattern-guessed. A future card MUST be enumerated (or carry a
+  // synced BankAccountType) — it is not silently classed from substrings like "card"/"cc".
+  assert.equal(accountClass('Bendigo Everyday Access'), 'deposit', 'unknown account → safe default')
+  assert.equal(accountClass('Some Random Bank Card 1234'), 'deposit', 'NOT auto-classed as a card from "card"')
+  assert.equal(accountClass(null), 'deposit')
+  assert.equal(accountClass(undefined), 'deposit')
 })
 
 test('buildFinanceWorkbenchResponse attaches highest-confidence AI suggestion', () => {

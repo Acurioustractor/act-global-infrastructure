@@ -286,16 +286,33 @@ function xeroDraftHint(row: BankEvidenceRow, hasReceipt: boolean, needsReceipt: 
   return 'No Xero accounting target is mirrored yet. Check Xero Expenses drafts or create the spend-money transaction before reconciling.'
 }
 
-// The NAB Visa is a credit card (liability), but xero_bank_accounts.type is 'BANK' for every
-// account, so the only signal is the name. On a credit-card account a 'credit' is NEVER income —
-// it reduces the balance: either a payoff (transfer in from a deposit account) or a vendor refund
-// (contra-expense). Deposit accounts keep the normal credit=income convention.
-const CREDIT_CARD_NAME_RE = /visa|mastercard|amex|\bcc\b|credit\s*card/i
+// On a credit-card account (a liability) a 'credit' is NEVER income — it reduces the balance,
+// either a payoff (transfer in from a deposit account) or a vendor refund (contra-expense).
+// Deposit accounts keep the normal credit=income convention. Xero records the distinction as
+// BankAccountType (BANK vs CREDITCARD), but xero_bank_accounts.type reads 'BANK' for every account
+// because the sync dropped that field (see thoughts/shared/plans/2026-06-02-account-class-credit-card-detection.md).
+// Until BankAccountType is captured + read here, account class is an EXPLICIT enumerated declaration —
+// seeded from Xero's real BankAccountType (config/xero-chart.json, verified 2026-06-01), NOT a fuzzy
+// name pattern. An unlisted account defaults to 'deposit'; new accounts (the Pty's NAB business
+// accounts at cutover) must be added here. Keyed by stable name substrings to survive Xero's
+// trailing-whitespace drift; cross-refs the two-account rule (ledger.ts isActBankAccount).
+export type AccountClass = 'credit_card' | 'deposit'
+const ACCOUNT_CLASS_BY_NAME: ReadonlyArray<{ match: RegExp; class: AccountClass }> = [
+  { match: /8815|heritage\s*visa/i, class: 'credit_card' }, // NAB Visa ACT #8815, Heritage Visa CC (archived)
+  { match: /act\s*everyday/i, class: 'deposit' },           // NJ Marchesi T/as ACT Everyday — income lands here
+  { match: /act\s*maximiser/i, class: 'deposit' },          // savings
+  { match: /nm\s*personal/i, class: 'deposit' },            // Nic personal (excluded by the two-account rule)
+]
+export function accountClass(name: string | null | undefined): AccountClass {
+  const n = (name || '').trim()
+  for (const entry of ACCOUNT_CLASS_BY_NAME) if (entry.match.test(n)) return entry.class
+  return 'deposit' // unknown account → safe default: the normal credit=income convention
+}
 // Anchored card-repayment phrases only. Deliberately NOT bare 'transfer'/'payment received' —
 // those would misclassify a vendor refund whose descriptor happens to contain the word as a payoff.
 const CARD_PAYOFF_RE = /internet payment|credit card payment|card repayment|linked acc|bpay/i
 function isCreditCardAccount(name: string | null | undefined): boolean {
-  return !!name && CREDIT_CARD_NAME_RE.test(name)
+  return accountClass(name) === 'credit_card'
 }
 
 function bankLineToItem(row: BankEvidenceRow): WorkbenchItem {
