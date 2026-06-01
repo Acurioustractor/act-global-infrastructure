@@ -33,3 +33,23 @@ These are guesses the engine makes for vendors never seen in the receipt pipelin
 - **One-off weird descriptor** → add a row here.
 - **A whole class** (e.g. all Square `SQ*` lines, all `PAYPAL *` lines) → consider a normaliser rule in
   `reconcile.ts` instead, and note it here so the next person knows it's handled in code.
+
+
+## Q2 FY26 aliases (added 2026-06-01 — bank descriptor → Xero bill contact)
+
+| Bank descriptor | Xero contact |
+|---|---|
+| Defy Design | Defy |
+| DINKUM DUNNIES CABOOLTURE | Onsite Rentals Dinkum Dunnies |
+| Budget Rent A Car | Budget |
+| CENTRE TRAILER SALES CICCONE | Centre Trailer Sales |
+| Iris Todd Operations | Todd Tavern |
+| Budget Rent A Car | Budget Car and Truck Rental (NT) |
+| LOTTE TRAVEL RETAIL MELBOURNE AIR | Lotte Duty Free |
+| Duyu Coffee Roasters | DuYu Coffee |
+| Bank St + Co | BANK ST AND CO |
+| Liberty | Liberty Idalia |
+| Good Morning Coffee | Hermit Park - Good Morning Coffee |
+| Google GSUITE_theharvestwSydney | Google Australia |
+| J R Rowden | F V Snowdon And J R Rowden |
+| Apple | Apple Pty Ltd |

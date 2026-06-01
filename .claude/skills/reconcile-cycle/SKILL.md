@@ -67,6 +67,7 @@ the reference), date (±12 days), and a **shared vendor token** (amount alone ne
   `/api/finance/reconcile`. Engine (typed, tested): `apps/command-center/src/lib/finance/reconcile.ts`.
 - **Per-line co-pilot (script):** `node scripts/reconcile-line-lookup.mjs <dext.csv>` — exact CLI
   verdict per line against fresh Xero data.
+- **Weekly digest (cron nudge):** `node scripts/weekly-card-reconcile.mjs` — 5-line "what needs attention" off the live cockpit engine. The 30-min weekly loop; see `workflows/weekly-triage.md`.
 - **Worklists for SL:** `node scripts/reconciliation-worklist.mjs` → `scripts/output/reconciliation-worklist-*.md`.
 - **Full SL sheet:** `node scripts/build-sl-reconcile-sheet.mjs`.
 - **Diagnosis:** `node scripts/diagnose-dext-vs-xero.mjs` · `node scripts/build-reconcile-map.mjs`.
@@ -81,6 +82,7 @@ the reference), date (±12 days), and a **shared vendor token** (amount alone ne
 - `references/matching-engine.md` — the cascade + surcharge band, mapped to `reconcile.ts`.
 - `references/confirmed-duplicates.md` — **learning loop**: duplicates the cockpit flagged + the human verdict.
 - `references/vendor-aliases.md` — **learning loop**: bank descriptor → real vendor (improves matching).
+- `references/coding-patterns.md` — **learning loop**: vendor/keyword → project + account, so CREATE lines auto-code higher each pass.
 - `references/phase2-xero-writeback.md` — Tier-3 runbook for the (not-yet-wired) Xero writes.
 
 ## How this skill learns
