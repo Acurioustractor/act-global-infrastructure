@@ -229,6 +229,52 @@ test('buildFinanceWorkbenchResponse does not flag internal transfers as needing 
   assert.equal(normalSpend?.needsProject, true, 'a real untagged vendor SPEND still needs a project')
 })
 
+test('buildFinanceWorkbenchResponse interprets credit-card credits as transfers/refunds, not income', () => {
+  const mkBank = (over: Partial<BankEvidenceRow> & Pick<BankEvidenceRow, 'id'>): BankEvidenceRow => ({
+    date: '2026-03-27',
+    direction: 'credit',
+    payee: null,
+    particulars: null,
+    reference: null,
+    amount: 100,
+    status: 'unreconciled',
+    bank_account: 'NAB Visa ACT #8815',
+    project_code: null,
+    project_source: null,
+    rd_eligible: false,
+    receipt_match_status: 'unmatched',
+    evidence_status: 'uncovered',
+    candidate_count: 0,
+    best_confidence: null,
+    best_source: null,
+    best_vendor_name: null,
+    has_approved_link: false,
+    xero_transaction_id: null,
+    matched_xero_transaction_id: null,
+    ...over,
+  })
+
+  const rows: BankEvidenceRow[] = [
+    mkBank({ id: 'cc-payoff', payee: 'Internet Payment', amount: 30000 }), // card payoff -> transfer
+    mkBank({ id: 'cc-refund', payee: 'Kadmium Art Supplies 02 9212 2669', amount: 771 }), // vendor refund -> contra-spend
+    mkBank({ id: 'cc-purchase', direction: 'debit', payee: 'Uber', amount: 25 }), // purchase -> spend
+    mkBank({ id: 'deposit-income', bank_account: 'NJ Marchesi T/as ACT Everyday', payee: 'Grant', amount: 5000 }), // real bank credit -> income
+  ]
+
+  const response = buildFinanceWorkbenchResponse(
+    { ...baseFilters, source: 'bank_lines', status: 'all' },
+    { projects: [], summary, bankRows: rows }
+  )
+  const byId = (id: string) => response.items.find((i) => i.id === id)
+
+  assert.equal(byId('cc-payoff')?.direction, 'transfer', 'a credit-card payoff is an internal transfer, not income')
+  assert.equal(byId('cc-payoff')?.needsProject, false, 'a card payoff does not need a project')
+  assert.equal(byId('cc-refund')?.direction, 'spend', 'a credit-card refund is contra-expense, not income')
+  assert.equal(byId('cc-refund')?.isRefund, true)
+  assert.equal(byId('cc-purchase')?.direction, 'spend', 'a credit-card purchase is spend')
+  assert.equal(byId('deposit-income')?.direction, 'income', 'a real deposit-account credit is still income')
+})
+
 test('buildFinanceWorkbenchResponse attaches highest-confidence AI suggestion', () => {
   const response = buildFinanceWorkbenchResponse(
     { ...baseFilters, status: 'all', source: 'bank_lines' },

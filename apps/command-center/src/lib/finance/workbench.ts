@@ -112,7 +112,8 @@ export interface AISuggestion {
 export interface WorkbenchItem {
   id: string
   source: WorkbenchSource
-  direction: 'spend' | 'income'
+  direction: 'spend' | 'income' | 'transfer'
+  isRefund: boolean
   date: string | null
   vendor: string
   description: string | null
@@ -285,15 +286,39 @@ function xeroDraftHint(row: BankEvidenceRow, hasReceipt: boolean, needsReceipt: 
   return 'No Xero accounting target is mirrored yet. Check Xero Expenses drafts or create the spend-money transaction before reconciling.'
 }
 
+// The NAB Visa is a credit card (liability), but xero_bank_accounts.type is 'BANK' for every
+// account, so the only signal is the name. On a credit-card account a 'credit' is NEVER income —
+// it reduces the balance: either a payoff (transfer in from a deposit account) or a vendor refund
+// (contra-expense). Deposit accounts keep the normal credit=income convention.
+const CREDIT_CARD_NAME_RE = /visa|mastercard|amex|\bcc\b|credit\s*card/i
+const CARD_PAYOFF_RE = /internet payment|credit card payment|card repayment|linked acc|bpay|transfer|payment received|payment thank/i
+function isCreditCardAccount(name: string | null | undefined): boolean {
+  return !!name && CREDIT_CARD_NAME_RE.test(name)
+}
+
 function bankLineToItem(row: BankEvidenceRow): WorkbenchItem {
-  const direction = row.direction === 'credit' ? 'income' : 'spend'
   const amount = Math.abs(asNumber(row.amount))
   const vendor = row.best_vendor_name || row.payee || row.particulars || row.reference || 'Bank line'
   const description = [row.particulars, row.reference, row.bank_account].filter(Boolean).join(' - ') || null
+
+  // Default (deposit-account) convention: credit = income, debit = spend.
+  let direction: 'spend' | 'income' | 'transfer' = row.direction === 'credit' ? 'income' : 'spend'
+  let isRefund = false
+  if (isCreditCardAccount(row.bank_account) && row.direction === 'credit') {
+    const text = [row.payee, row.particulars, row.reference].filter(Boolean).join(' ')
+    if (CARD_PAYOFF_RE.test(text)) {
+      direction = 'transfer' // paying off the card — internal movement, excluded from spend & income
+    } else {
+      direction = 'spend' // vendor refund — contra-expense against the original purchase, not income
+      isRefund = true
+    }
+  }
+
   const receiptState = row.evidence_status || row.receipt_match_status || 'unknown'
   const hasReceipt = receiptCovered(row.evidence_status, row.receipt_match_status, row.has_approved_link)
-  const needsReceipt = !hasReceipt && direction === 'spend' && isReceiptGap(row.evidence_status, row.receipt_match_status)
-  const needsProject = isBlank(row.project_code)
+  // A refund has no purchase receipt to chase; a transfer needs none either.
+  const needsReceipt = !hasReceipt && direction === 'spend' && !isRefund && isReceiptGap(row.evidence_status, row.receipt_match_status)
+  const needsProject = isBlank(row.project_code) && direction !== 'transfer'
   const needsProjectReview = row.project_code === 'ACT-IN'
   const needsReconciliation = row.status === 'unreconciled'
   const draftHint = xeroDraftHint(row, hasReceipt, needsReceipt)
@@ -302,6 +327,7 @@ function bankLineToItem(row: BankEvidenceRow): WorkbenchItem {
     id: row.id,
     source: 'bank_lines',
     direction,
+    isRefund,
     date: row.date,
     vendor,
     description,
@@ -350,6 +376,7 @@ function xeroTransactionToItem(row: XeroTransactionRow): WorkbenchItem {
     id: row.id,
     source: 'xero_transactions',
     direction,
+    isRefund: false,
     date: row.date,
     vendor,
     description,
@@ -393,6 +420,7 @@ function xeroInvoiceToItem(row: XeroInvoiceRow): WorkbenchItem {
     id: row.id,
     source: 'xero_invoices',
     direction,
+    isRefund: false,
     date: row.date,
     vendor,
     description,
