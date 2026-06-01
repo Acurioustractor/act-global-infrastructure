@@ -50,6 +50,12 @@ const sourceArg = args.find(a => a.startsWith('--source'));
 const SOURCES = sourceArg
   ? [sourceArg.split(/[ =]/)[1]]
   : ['ghl', 'xero', 'foundation'];
+// --filter <substr> or --filter=<substr>: restrict to opps whose externalId/name contains
+// <substr> (tracer runs). Accepts both the `=` form and a following token.
+const filterIdx = args.findIndex(a => a === '--filter' || a.startsWith('--filter='));
+const FILTER = filterIdx === -1
+  ? null
+  : (args[filterIdx].includes('=') ? args[filterIdx].split('=')[1] : args[filterIdx + 1]) || null;
 
 const notion = new Client({ auth: process.env.NOTION_TOKEN });
 const SUPABASE_URL = process.env.SUPABASE_SHARED_URL || process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -60,6 +66,22 @@ const notionDbIdsPath = join(__dirname, '..', 'config', 'notion-database-ids.jso
 const notionDbIds = JSON.parse(readFileSync(notionDbIdsPath, 'utf-8'));
 
 const GHL_LOCATION_ID = process.env.GHL_LOCATION_ID || process.env.NEXT_PUBLIC_GHL_LOCATION_ID;
+const GHL_API_KEY = process.env.GHL_API_KEY || process.env.GHL_PRIVATE_TOKEN;
+const GHL_BASE = 'https://services.leadconnectorhq.com';
+const GHL_HEADERS = { Authorization: `Bearer ${GHL_API_KEY}`, Version: '2021-07-28', Accept: 'application/json' };
+
+// The 7 money-alignment custom fields on GHL opportunities (location agzsSZWgovjwgpcoASWG).
+// The bulk /opportunities/search the mirror uses returns customFields:[] (unhydrated), so we
+// read them live per-opp via GET /opportunities/{id}, which returns customFields:[{id,fieldValue}].
+const MONEY_FIELD_IDS = {
+  fundingType:   'UCFe9cyjk3sVKwtInfSG',
+  matchEligible: '6tSoVICqtrTGQAzpPHn1',
+  capitalStatus: 'QbfHdeNpz2JiMe5iRESS',
+  amountBasis:   'LM1U3fVHJNB4KwvuK9ZF',
+  xeroContactId: 'e1GTAmBc3HLwxNiRVZjS',
+  xeroInvoiceNo: 'YFy6JM5tGjl4J4B5cHSV',
+  actualPaid:    'R4QAmlXhi6gRRPrfuuz5',
+};
 
 const PARENT_PAGE = notionDbIds.moneyFramework;
 
@@ -74,6 +96,28 @@ const verbose = (m) => { if (VERBOSE) log(m); };
 const xeroInvoiceUrl = (id) => id ? `https://go.xero.com/app/invoicing/view/${id}` : null;
 const ghlOpportunityUrl = (id) => (GHL_LOCATION_ID && id) ? `https://app.gohighlevel.com/v2/location/${GHL_LOCATION_ID}/opportunities/list?opportunity=${id}` : null;
 const isUrl = (s) => typeof s === 'string' && /^https?:\/\//i.test(s);
+
+// Live-read the 7 money-alignment custom fields for one GHL opportunity.
+// Returns null on error (caller leaves Notion money props untouched). Numbers coerced.
+async function fetchGhlMoneyFields(oppId) {
+  try {
+    const r = await fetch(`${GHL_BASE}/opportunities/${oppId}`, { headers: GHL_HEADERS });
+    if (!r.ok) { verbose(`  GHL GET ${oppId} -> ${r.status}`); return null; }
+    const opp = (await r.json())?.opportunity;
+    const cf = {};
+    for (const f of (opp?.customFields || [])) cf[f.id] = f.fieldValue;
+    const num = (v) => (v === null || v === undefined || v === '') ? null : Number(v);
+    return {
+      fundingType:   cf[MONEY_FIELD_IDS.fundingType]   ?? null,
+      matchEligible: cf[MONEY_FIELD_IDS.matchEligible] ?? null,
+      capitalStatus: cf[MONEY_FIELD_IDS.capitalStatus] ?? null,
+      amountBasis:   cf[MONEY_FIELD_IDS.amountBasis]   ?? null,
+      xeroContactId: cf[MONEY_FIELD_IDS.xeroContactId] ?? null,
+      xeroInvoiceNo: cf[MONEY_FIELD_IDS.xeroInvoiceNo] ?? null,
+      actualPaid:    num(cf[MONEY_FIELD_IDS.actualPaid]),
+    };
+  } catch (e) { verbose(`  GHL GET ${oppId} error: ${e.message}`); return null; }
+}
 
 // ============================================
 // Database schema + ensure
@@ -112,6 +156,38 @@ const SCHEMA = {
   Pipeline: { rich_text: {} },
   'External ID': { rich_text: {} },
   'Last Synced': { date: {} },
+  // --- Money-alignment fields (sourced live from GHL opp custom fields, Goods opps) ---
+  'Funding type': { select: { options: [
+    { name: 'Grant', color: 'purple' },
+    { name: 'Philanthropic', color: 'pink' },
+    { name: 'Commercial sale', color: 'green' },
+    { name: 'Community contribution', color: 'blue' },
+    { name: 'Demand signal', color: 'yellow' },
+    { name: 'Other', color: 'gray' },
+  ]}},
+  'Match-eligible (QBE)': { select: { options: [
+    { name: 'Yes', color: 'green' },
+    { name: 'No', color: 'red' },
+    { name: 'TBC', color: 'gray' },
+  ]}},
+  'Capital status': { select: { options: [
+    { name: 'Signal', color: 'gray' },
+    { name: 'Ask made', color: 'yellow' },
+    { name: 'Verbal yes', color: 'orange' },
+    { name: 'Signed LOI', color: 'blue' },
+    { name: 'Contracted', color: 'purple' },
+    { name: 'Invoiced', color: 'pink' },
+    { name: 'Paid', color: 'green' },
+  ]}},
+  'Amount basis': { select: { options: [
+    { name: 'Estimate', color: 'gray' },
+    { name: 'Quote', color: 'yellow' },
+    { name: 'Invoiced', color: 'blue' },
+    { name: 'Xero-actual', color: 'green' },
+  ]}},
+  'Actual paid (Xero) AUD': { number: { format: 'australian_dollar' } },
+  'Xero invoice #': { rich_text: {} },
+  'Xero contact ID': { rich_text: {} },
 };
 
 async function ensureDatabase() {
@@ -261,6 +337,9 @@ async function fetchFoundationGrantRows() {
 // Existing rows in Notion DB
 // ============================================
 
+// Map<externalId, Array<{id, lastEdited}>>. Multiple entries per id = duplicate pages
+// (the DB accumulated 162 of them before upsert existed). upsert() keeps the newest and
+// archives the rest, so the sync self-heals duplicates and stays idempotent thereafter.
 async function fetchExistingRows(dataSourceId) {
   const map = new Map();
   let cursor = undefined;
@@ -272,7 +351,10 @@ async function fetchExistingRows(dataSourceId) {
     });
     for (const page of res.results) {
       const ext = page.properties['External ID']?.rich_text?.[0]?.plain_text;
-      if (ext) map.set(ext, page.id);
+      if (!ext) continue;
+      const arr = map.get(ext) || [];
+      arr.push({ id: page.id, lastEdited: page.last_edited_time });
+      map.set(ext, arr);
     }
     cursor = res.has_more ? res.next_cursor : undefined;
   } while (cursor);
@@ -300,6 +382,18 @@ function buildProps(opp) {
   };
   if (opp.deadline) props.Deadline = { date: { start: opp.deadline } };
   if (opp.url) props['Source URL'] = { url: opp.url };
+  // Money-alignment fields (Goods opps only — set when live-hydrated from GHL).
+  // Only emit props that have a value, so a partial-update never wipes an existing Notion value.
+  const m = opp.money;
+  if (m) {
+    if (m.fundingType)   props['Funding type'] = { select: { name: m.fundingType } };
+    if (m.matchEligible) props['Match-eligible (QBE)'] = { select: { name: m.matchEligible } };
+    if (m.capitalStatus) props['Capital status'] = { select: { name: m.capitalStatus } };
+    if (m.amountBasis)   props['Amount basis'] = { select: { name: m.amountBasis } };
+    if (m.actualPaid != null) props['Actual paid (Xero) AUD'] = { number: m.actualPaid };
+    if (m.xeroInvoiceNo) props['Xero invoice #'] = { rich_text: rt(m.xeroInvoiceNo) };
+    if (m.xeroContactId) props['Xero contact ID'] = { rich_text: rt(m.xeroContactId) };
+  }
   return props;
 }
 
@@ -307,13 +401,24 @@ function buildProps(opp) {
 // Upsert
 // ============================================
 
-async function upsert(dataSourceId, opp, existing) {
+async function upsert(dataSourceId, opp, existing, stats) {
   const props = buildProps(opp);
-  const pageId = existing.get(opp.externalId);
-  if (pageId) {
-    if (DRY_RUN) return 'updated (dry)';
-    await notion.pages.update({ page_id: pageId, properties: props });
-    return 'updated';
+  const copies = existing.get(opp.externalId);
+  if (copies && copies.length) {
+    // Keep the most-recently-edited page; refresh it; archive any duplicate copies.
+    copies.sort((a, b) => String(b.lastEdited || '').localeCompare(String(a.lastEdited || '')));
+    const survivor = copies[0].id;
+    const extras = copies.slice(1);
+    if (extras.length) {
+      stats.deduped += extras.length;
+      for (const ex of extras) {
+        verbose(`  dedupe ${opp.externalId}: archive ${ex.id} (keep ${survivor})`);
+        if (!DRY_RUN) { await notion.pages.update({ page_id: ex.id, archived: true }); await sleep(120); }
+      }
+    }
+    if (DRY_RUN) return extras.length ? 'updated+deduped (dry)' : 'updated (dry)';
+    await notion.pages.update({ page_id: survivor, properties: props });
+    return extras.length ? 'updated+deduped' : 'updated';
   } else {
     if (DRY_RUN) return 'created (dry)';
     await notion.pages.create({
@@ -327,13 +432,13 @@ async function upsert(dataSourceId, opp, existing) {
 async function archiveStale(databaseId, opps, existing) {
   const seenIds = new Set(opps.map(o => o.externalId));
   const stale = [];
-  for (const [extId, pageId] of existing.entries()) {
+  for (const [extId, copies] of existing.entries()) {
     // Only archive rows from sources we just synced
     const source = extId.split(':')[0]; // ghl|xero|foundation
     const sourceMap = { ghl: 'ghl', xero: 'xero', foundation: 'foundation' };
     if (!sourceMap[source]) continue;
     if (!SOURCES.includes(sourceMap[source])) continue; // didn't sync this source, leave alone
-    if (!seenIds.has(extId)) stale.push({ extId, pageId });
+    if (!seenIds.has(extId)) for (const c of copies) stale.push({ extId, pageId: c.id });
   }
   log(`Archiving ${stale.length} stale rows...`);
   for (const { pageId } of stale) {
@@ -381,29 +486,54 @@ async function main() {
     log(`  Foundation grants: ${rows.length}`);
     allOpps.push(...rows);
   }
-  log(`Total opportunities to sync: ${allOpps.length}`);
+  let opps = allOpps;
+  if (FILTER) {
+    opps = allOpps.filter(o => o.externalId.includes(FILTER) || (o.name || '').toLowerCase().includes(FILTER.toLowerCase()));
+    log(`--filter "${FILTER}" -> ${opps.length} opps (of ${allOpps.length})`);
+  }
+  log(`Total opportunities to sync: ${opps.length}`);
+
+  // Live-hydrate the 7 money-alignment fields for Goods opps. The mirror's custom_fields is
+  // empty (bulk /opportunities/search doesn't return them), so read each Goods opp live from
+  // GHL. Scoped to Goods pipelines = matches the backfill; ~239 opps, rate-limited ~1.1s/call.
+  if (SOURCES.includes('ghl') && GHL_API_KEY) {
+    const goods = opps.filter(o => o.source === 'GHL' && (o.pipeline || '').startsWith('Goods'));
+    log(`Hydrating money fields for ${goods.length} Goods opps from live GHL...`);
+    let hydrated = 0;
+    for (const [i, o] of goods.entries()) {
+      o.money = await fetchGhlMoneyFields(o.externalId.replace(/^ghl:/, ''));
+      if (o.money && (o.money.capitalStatus || o.money.fundingType || o.money.actualPaid != null)) hydrated++;
+      if ((i + 1) % 25 === 0) log(`  hydrated ${i + 1}/${goods.length}`);
+      await sleep(1100); // GHL 60 req/min/tenant
+    }
+    log(`  ${hydrated}/${goods.length} Goods opps had money fields set`);
+  } else if (SOURCES.includes('ghl')) {
+    log('  WARN: GHL_API_KEY not set — skipping money-field hydration');
+  }
 
   log('Fetching existing Notion DB rows...');
   const existing = await fetchExistingRows(dataSourceId);
-  log(`  ${existing.size} existing rows`);
+  const dupCount = [...existing.values()].reduce((s, copies) => s + Math.max(0, copies.length - 1), 0);
+  log(`  ${existing.size} unique External IDs, ${dupCount} duplicate pages to clean`);
 
   log('Upserting...');
-  let created = 0, updated = 0, errors = 0;
-  for (const [i, opp] of allOpps.entries()) {
+  const stats = { created: 0, updated: 0, deduped: 0, errors: 0 };
+  for (const [i, opp] of opps.entries()) {
     try {
-      const result = await upsert(dataSourceId, opp, existing);
-      if (result.startsWith('created')) created++;
-      else if (result.startsWith('updated')) updated++;
-      if ((i + 1) % 25 === 0) log(`  ${i + 1}/${allOpps.length} (created ${created}, updated ${updated})`);
+      const result = await upsert(dataSourceId, opp, existing, stats);
+      if (result.startsWith('created')) stats.created++;
+      else if (result.startsWith('updated')) stats.updated++;
+      if ((i + 1) % 25 === 0) log(`  ${i + 1}/${opps.length} (created ${stats.created}, updated ${stats.updated}, deduped ${stats.deduped})`);
       if (!DRY_RUN) await sleep(120); // Notion rate limit ~3 req/s
     } catch (e) {
-      errors++;
+      stats.errors++;
       verbose(`  Error on ${opp.externalId}: ${e.message}`);
     }
   }
-  log(`Sync complete: created ${created}, updated ${updated}, errors ${errors}`);
+  log(`Sync complete: created ${stats.created}, updated ${stats.updated}, deduped ${stats.deduped}, errors ${stats.errors}`);
 
-  await archiveStale(databaseId, allOpps, existing);
+  // Skip stale-archival on filtered/tracer runs (the source list is intentionally partial).
+  if (!FILTER) await archiveStale(databaseId, opps, existing);
 
   log('Done!');
   log(`Notion database: notion.so/${databaseId.replace(/-/g, '')}`);
