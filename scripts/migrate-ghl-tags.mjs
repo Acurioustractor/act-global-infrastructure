@@ -158,7 +158,10 @@ async function main() {
   const perContactAdds = [];    // { ghl_id, add: [] }
   let totalAdds = 0;
 
+  let skippedGone = 0;
   for (const c of contacts) {
+    // skip contacts deleted from GHL (stale mirror rows) — POST add-tags 400s on them
+    if ((c.tags || []).some(t => t.startsWith('gone-from-ghl'))) { skippedGone++; continue; }
     const existing = new Set((c.tags || []).map(x => x.trim()));
     const toAdd = new Set();
     for (const tag of (c.tags || [])) {
@@ -181,7 +184,8 @@ async function main() {
   console.log(`\n--- UNMAPPED (need a rule before they migrate) --- ${unmapped.size} distinct`);
   [...unmapped.entries()].sort((a,b)=>b[1]-a[1]).forEach(([k,n])=>console.log(`  ${String(n).padStart(4)}  ${k}`));
 
-  console.log(`\nContacts that gain ≥1 canonical tag: ${perContactAdds.length} | total tag-adds: ${totalAdds}`);
+  console.log(`\nSkipped (gone-from-ghl, stale): ${skippedGone}`);
+  console.log(`Contacts that gain ≥1 canonical tag: ${perContactAdds.length} | total tag-adds: ${totalAdds}`);
 
   if (DRY) { console.log('\nDRY RUN — nothing written. Re-run with --apply after approval.'); return; }
 
