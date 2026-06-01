@@ -58,9 +58,13 @@ const xeroInvoiceUrl = (id) => id ? `https://go.xero.com/app/invoicing/view/${id
 // expectedTotal lets the run self-check the reconciliation (warns if mismatch).
 // ============================================
 const FUNDERS = [
-  { exactName: 'The Snow Foundation', funder: 'Snow Foundation', fundingType: 'Grant', matchEligible: 'Yes', project: 'ACT-GD', expectedTotal: 402929.79 },
-  // To extend (reconcile first): The Funding Network 144558 · Centrecorp Foundation 123332 ·
-  // Vincent Fairfax/FRRR 50000 (joint — verify contact) · AMP 21900 · Red Dust 15950.
+  { exactName: 'The Snow Foundation',               funder: 'Snow Foundation',     fundingType: 'Grant', matchEligible: 'Yes', project: 'ACT-GD', expectedTotal: 402929.79 },
+  { exactName: 'Centrecorp Foundation',             funder: 'Centrecorp Foundation', fundingType: 'Grant', matchEligible: 'Yes', project: 'ACT-GD', expectedTotal: 123332 }, // 2 PAID (INV-0259+0291); 10 voided/deleted excluded
+  { exactName: 'Vincent Fairfax Family Foundation', funder: 'VFFF',                fundingType: 'Grant', matchEligible: 'Yes', project: 'ACT-GD', expectedTotal: 50000 },   // single invoice; = the FRRR joint $50k, not a separate contact
+  { exactName: 'Red Dust Role Models Limited',      funder: 'Red Dust',            fundingType: 'Grant', matchEligible: 'Yes', project: 'ACT-GD', expectedTotal: 15950 },
+  // BLOCKED — not addable as paid ACCREC tranches yet:
+  //  · The Funding Network $144,558 — mis-booked as 2 ACCPAY expense bills (pending bookkeeper void+rebook).
+  //  · AMP $21,900 — no ACCREC in this mirror (2024 income, likely different org / bank receipts).
 ];
 
 // Per-invoice overrides for older invoices whose line items the Xero mirror never captured.
@@ -78,7 +82,12 @@ const OVERRIDES = {
 // ============================================
 const SCHEMA = {
   Name: { title: {} },
-  Funder: { select: { options: [{ name: 'Snow Foundation', color: 'blue' }] } },
+  Funder: { select: { options: [
+    { name: 'Snow Foundation', color: 'blue' },
+    { name: 'Centrecorp Foundation', color: 'orange' },
+    { name: 'VFFF', color: 'purple' },
+    { name: 'Red Dust', color: 'red' },
+  ] } },
   'Invoice #': { rich_text: {} },
   'Paid date': { date: {} },
   Amount: { number: { format: 'australian_dollar' } },
@@ -165,8 +174,10 @@ async function fetchTranches(funder) {
     .eq('contact_name', funder.exactName)
     .order('date', { ascending: true });
   if (error) throw error;
-  // Paid = amount_due 0 (received). Keep only paid.
-  const paid = (data || []).filter(r => Number(r.amount_due || 0) === 0 && Number(r.total || 0) > 0);
+  // Received cash = status PAID only. NOT amount_due===0 — VOIDED/DELETED invoices also have
+  // amount_due 0 (Centrecorp had 10 voided/deleted bed-workshop + plant invoices = $709k of
+  // phantom money). Canonical "exclude DELETED/VOIDED" rule (cf. ledger.ts, commit fd47762).
+  const paid = (data || []).filter(r => r.status === 'PAID' && Number(r.total || 0) > 0);
   return paid.map(r => {
     const derived = buildPurpose(r.line_items);
     const ov = OVERRIDES[r.invoice_number] || {};
