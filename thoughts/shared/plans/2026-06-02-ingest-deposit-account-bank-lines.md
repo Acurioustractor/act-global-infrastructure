@@ -12,6 +12,29 @@
 - **Tracer-bullet FIRST (CLAUDE.md money rule):** derive ONE deposit SPEND row, confirm it shows once (no double-count) in the workbench + lands in the right receipt-gap queue, THEN bulk. The bulk INSERT is a **Tier-3** write into a shared table → explicit go.
 - **Dependency note:** Plan 1's deposit class (credit=income) already works for this account (`accountClass('NJ Marchesi T/as ACT Everyday')` → `deposit`, shipped `c7bc7e0`).
 
+## Implementation spec (turnkey — verified 2026-06-01 against the live DB `tednluwflfhxyucgwigh`)
+
+**✅ Double-count question RESOLVED (safe to derive):** `v_finance_bank_line_evidence` is purely `bank_statement_lines` (LEFT JOIN to receipt links only — NO join to xero_transactions). Bank lines and transactions are SEPARATE item streams that already coexist for the NAB Visa (only **15 of 1,618** NAB lines even carry `xero_transaction_id`), and `buildFinanceWorkbenchResponse` concatenates sources with no dedup. So deriving deposit lines adds a SECOND list representation in `source=all` (same as the NAB Visa today) but does **NOT** double any SUMMARY metric: gap counts are per-source, the deposit SPEND/RECEIVE are already tagged (not in `xero_project_gaps`), and the derived rows carry `project_code` (not in `bank_project_gaps`). `evidence_status` is receipt-based (from `receipt_match_status` + receipt-link candidates), NOT reconciliation-based — so a derived SPEND with no receipt correctly surfaces as a receipt-gap even when `status='reconciled'`.
+
+**Derive ONLY the 122 real rows; SKIP the 100 transfers.** Source: `xero_transactions WHERE bank_account='NJ Marchesi T/as ACT Everyday' AND status IS DISTINCT FROM 'DELETED' AND type IN ('SPEND','RECEIVE')` (65 SPEND + 57 RECEIVE). Do NOT derive `SPEND-TRANSFER`/`RECEIVE-TRANSFER` — `bankLineToItem` only special-cases credit-CARD credits, so a deposit transfer row would mis-classify as spend/income; they add no receipt value and are already correct via the `xero_transactions` source.
+
+**Field map (xero_transactions → bank_statement_lines):**
+- `bank_account` = `'NJ Marchesi T/as ACT Everyday'` · `date` = txn.date · `amount` = abs(txn.total) · `direction` = SPEND→`'debit'`, RECEIVE→`'credit'`
+- `type` (NOT NULL) = txn.type · `payee` = txn.contact_name · `particulars` = first line-item desc / contact_name · `reference` = txn ref if any
+- `xero_transaction_id` = txn.xero_transaction_id · `status` = `'reconciled'` (keeps them out of the unreconciled queue) · `source` = `'xero_derived'` (distinguish from raw-statement rows)
+- `project_code` = txn.project_code · `project_source` = txn.project_code_source · `rd_eligible` = txn.rd_eligible
+- `receipt_match_status`: RECEIVE → `'no_receipt_needed'`; SPEND with `has_attachments` → `'matched'`; SPEND without → leave NULL (→ evidence_status `'uncovered'` → receipt-gap; these are the 23 deposit SPEND we WANT surfaced)
+
+**Schema-first (verified):** NOT NULL no-default cols = `date, type, amount, direction`. Idempotency: `upsert(rows, { onConflict: 'date,payee,amount,direction,particulars', ignoreDuplicates: true })` (the table's UNIQUE key; same as `ingest-statement-lines-raw.mjs:223`) — re-runs are safe.
+
+**Tracer-bullet FIRST (CLAUDE.md money rule), THEN bulk:**
+1. Insert ONE derived line for a single deposit SPEND with no receipt (one of the 23).
+2. On `/finance/workbench source=all`: confirm it appears ONCE as a bank line in the Receipt-gaps queue, carries its project_code, is NOT flagged needs_project; confirm `bank_receipt_gaps` +1 while `xero_project_gaps`/`invoice_project_gaps` are unchanged (no metric double-count).
+3. Confirm a derived deposit RECEIVE shows `direction='income'` (via accountClass=deposit) and needs no receipt.
+4. THEN bulk the 122. **Tier-3 write → Ben's explicit go before the bulk.** Verify attempted-vs-inserted counts (no silent truncation).
+
+**Script home:** new `scripts/derive-deposit-bank-lines.mjs` (dry-run default, `--apply` to write) OR generalise `ingest-statement-lines-raw.mjs` to be multi-account (the plan's "importer no longer hardcodes a single account name" done-criterion — matters for the cutover's NAB business accounts).
+
 ---
 
 
