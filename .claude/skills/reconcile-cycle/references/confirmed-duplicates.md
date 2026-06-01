@@ -70,3 +70,32 @@ Cockpit flagged 24 duplicate candidates; agent verification CONFIRMED 22, REJECT
 - Townsville City Council $44.90 — different_merchant: Card vendor Townsville City Council differs from bill contact Sunshine Coast Council — different council entities, not the same merchant despite equal $44.90.
 
 **New stopword candidate:** "COUNCIL" — caused the Townsville vs Sunshine Coast false match. Generic entity-type words (council, services, rentals) should not carry a vendor match alone.
+
+
+## Q3 FY26 batch (added 2026-06-01)
+
+Verified 17 candidates: 16 CONFIRMED, 1 rejected.
+
+| Vendor | Amount | Bill | Status |
+|---|---|---|---|
+| MALENY LANDSCAPING MALENY | $1,995.00 | MALENY LANDSCAPING SUPPLIES | CONFIRMED |
+| MALENY LANDSCAPING MALENY | $1,305.00 | MALENY LANDSCAPING SUPPLIES | CONFIRMED |
+| Hatch Electrical | $784.43 | Hatch Electrical | CONFIRMED |
+| MALENY LANDSCAPING MALENY | $652.50 | MALENY LANDSCAPING SUPPLIES | CONFIRMED |
+| EASEL PRO EASEL.COM IL | $312.77 | Easel Software | CONFIRMED |
+| REEF RESORT HIDEAWAY BAY | $300.00 | Montes Reef Resort | CONFIRMED |
+| Defy Design | $203.22 | Defy | CONFIRMED |
+| Qantas | $183.00 | Qantas Group Accommodation | CONFIRMED |
+| Light Years - Noosa Noosa He | $140.13 | Light Years Asian Diner | CONFIRMED |
+| TI TREE RH 9787 TI TREE | $133.02 | Ti Tree Roadhouse | CONFIRMED |
+| MALENY HARDWARE AND RURALMAL | $113.40 | MALENY HARDWARE & RU | CONFIRMED |
+| Notion Labs | $75.39 | Notion Labs | CONFIRMED |
+| BOLT IN CO MAROOCHYDORE | $70.40 | BOLT FN CO | CONFIRMED |
+| Google Workspace_theharveSyd | $67.98 | Google Australia Pty Limited | CONFIRMED |
+| Google Workspace_theharveSyd | $67.98 | Google Australia | CONFIRMED |
+| TRANSPORTMAINRDS BRISBANE | $39.09 | Dept of Transport & Main Roads | CONFIRMED |
+
+**Rejected:**
+- BITWARDEN BITWARDEN.COMCA $17.87 — unsure: Same merchant (Bitwarden) and same date 2026-01-07, but card $17.75 is LESS than bill $17.87 — bank<bill violates the su
+
+**New rule learned:** surcharge gate is directional — bank must be >= bill. A bank line LESS than the bill (e.g. Bitwarden USD $17.75 vs $17.87) is FX/rounding, not a card surcharge → do not auto-delete as duplicate.

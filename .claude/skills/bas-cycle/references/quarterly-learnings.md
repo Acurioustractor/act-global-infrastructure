@@ -90,3 +90,25 @@ This file accumulates patterns, discoveries, and lessons across every BAS quarte
 ```
 
 Keep entries under ~150 words each. If you need more space, create a separate file in `references/` and link to it.
+
+
+## 2026-06-01 — Q2+Q3 FY26 push to 100% (reconcile cockpit session)
+
+### Receipts are NOT the BAS blocker — reconciliation is
+- Three threads (completeness, pool matcher, bill→txn copy) all landed here: coverage already ~94%, gaps all sub-$82.50 or receipt-less (fees/transfers/drawings). Pool matcher: 0 confident auto-matches left; bill→txn: 1 pair left.
+- The real lever to 100% + GST confidence: **bank reconciliation** (Q2 72% / Q3 67%), **clearing duplicates**, **DRAFT payables**, then GST verify.
+- Lesson: don't spend the session chasing receipts when the GST/confidence gap is reconciliation. Check coverage % first; if >90% and gaps sub-threshold, pivot to reconciliation.
+
+### The reconcile cockpit + agent-workflow is the tool for the card-line backlog
+- `/finance/reconcile` classifies every NAB Visa line (match/duplicate/already/create). An agent workflow then verifies dups + codes creates (read-only proposals). Q2: 24→22 confirmed dups; Q3: 17→16. Packs in thoughts/shared/recon-pack/.
+- Agent dup-verification caught false positives a naive matcher would delete: Townsville≠Sunshine Coast Council (different merchant), Good Morning Coffee collision, **Bitwarden bank<bill** (FX, not a surcharge).
+
+### Surcharge gate is DIRECTIONAL: bank >= bill
+- A card surcharge makes bank >= bill. A bank line LESS than the bill (Bitwarden USD $17.75 vs $17.87) is FX/rounding, NOT a duplicate surcharge → do not auto-delete. Added to reconcile-cycle/references/confirmed-duplicates.md.
+
+### Duplicate → 1B GST exposure (cash basis)
+- A duplicate (bill + card txn) can double-count GST-paid (1B) if both are counted. Q2: up to ~$1,651. Clearing dups raises net payable slightly. Verify per-line in Xero (cash basis counts the payment side) — don't auto-adjust.
+
+### Dext CSV: 100% account + receipt image, but maps to dup/match lines, NOT creates
+- The Dext export (Category=real Xero account, Project 2=ACT code ~36%, Image=rbnk.me 100%) corresponds to Dext-PUSHED receipts → now the dup/match lines. The CREATE lines are precisely what Dext did NOT push → they don't match the CSV. Use Dext for receipt-attach + account-confirm on dup/match lines, heuristic+agent for creates.
+- Staged: thoughts/shared/recon-pack/dext/q{2,3}-dext-2026-06-01.csv.
