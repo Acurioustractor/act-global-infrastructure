@@ -49,7 +49,9 @@ const MON={Jan:'01',Feb:'02',Mar:'03',Apr:'04',May:'05',Jun:'06',Jul:'07',Aug:'0
 const toISO=(d)=>{const m=(d||'').match(/(\d{1,2})-(\w{3})-(\d{4})/);return m?`${m[3]}-${MON[m[2]]}-${m[1].padStart(2,'0')}`:null;};
 const gap=(a,b)=>Math.abs((new Date(a)-new Date(b))/86400000);
 const norm=(s)=>(s||'').toUpperCase().replace(/SQ ?\*?|SQSP ?\*?|UBER ?\*?|SP ?\*?|X{4,}\d*|PTY LTD| LTD| INC|\d{3,}|[^A-Z ]/g,' ').replace(/\s+/g,' ').trim();
-const STOP=new Set(['THE','AND','PAYMENT','PURCHASE','CARD','AUSTRALIA','PTY','COM','AUS','BUSINESS','HELP','MEMBERSHIP','LIMITED','SYDNEY','STORES']);
+const STOP=new Set(['THE','AND','PAYMENT','PURCHASE','CARD','AUSTRALIA','PTY','COM','AUS','BUSINESS','HELP','MEMBERSHIP','LIMITED','SYDNEY','STORES','CENTRE','GROUP','SALES','SERVICES','SERVICE','STORE','SHOP','ONLINE','COMMUNITY','HIRE','CO','OF']);
+// bank charge often = receipt amount + card surcharge/fee. Match exact first, then a tight fuzzy band.
+const amtClose=(a,b)=>{const d=Math.abs(a-b);return d<0.005?'exact':(d<=15&&d<=b*0.06)?'fuzzy':false;};
 const toks=(s)=>new Set(norm(s).split(' ').filter(w=>w.length>=3&&!STOP.has(w)));
 const vmatch=(a,b)=>{const ta=toks(a),tb=toks(b);if(!ta.size||!tb.size)return false;for(const t of ta)if(tb.has(t))return true;return false;};
 
@@ -71,19 +73,21 @@ const span=`date BETWEEN '2025-09-25' AND '2025-12-20'`;
 const {data:bills}=await sb.rpc('exec_sql',{query:`SELECT contact_name,date,ABS(total)::numeric(12,2) amt,status,has_attachments FROM xero_invoices WHERE type='ACCPAY' AND status NOT IN ('DELETED','VOIDED') AND ${span}`});
 const {data:txns}=await sb.rpc('exec_sql',{query:`SELECT contact_name,date,ABS(total)::numeric(12,2) amt,is_reconciled FROM xero_transactions WHERE bank_account='NAB Visa ACT #8815' AND type LIKE 'SPEND%' AND status IS DISTINCT FROM 'DELETED' AND ${span}`});
 
-const findIn=(arr,amt,date,vendor)=>arr.filter(r=>Math.abs(r.amt-amt)<0.005&&gap(r.date,date)<=WIN&&vmatch(vendor,r.contact_name)).sort((a,b)=>gap(a.date,date)-gap(b.date,date))[0];
-const findDext=(amt,date,vendor)=>dext.filter(d=>Math.abs(d.total-amt)<0.005&&d.date&&gap(d.date,date)<=WIN&&vmatch(vendor,d.supplier)).sort((a,b)=>gap(a.date,date)-gap(b.date,date))[0];
+// require vendor match for ALL matches (fuzzy amount alone is too loose). exact-amount beats fuzzy.
+const findIn=(arr,amt,date,vendor)=>arr.map(r=>({r,c:amtClose(r.amt,amt)})).filter(x=>x.c&&gap(x.r.date,date)<=WIN&&vmatch(vendor,x.r.contact_name)).sort((a,b)=>(a.c==='exact'?0:1)-(b.c==='exact'?0:1)||gap(a.r.date,date)-gap(b.r.date,date))[0]?.r;
+const findDext=(amt,date,vendor)=>dext.map(d=>({d,c:amtClose(d.total,amt)})).filter(x=>x.c&&x.d.date&&gap(x.d.date,date)<=WIN&&vmatch(vendor,x.d.supplier)).sort((a,b)=>(a.c==='exact'?0:1)-(b.c==='exact'?0:1)||gap(a.d.date,date)-gap(b.d.date,date))[0]?.d;
+const surcharge=(bankAmt,rowAmt)=>{const d=+(bankAmt-rowAmt).toFixed(2);return Math.abs(d)<0.005?'':` (⚠️ +${d>0?'$'+d:'-$'+Math.abs(d)} surcharge → add Adjustment)`;};
 
 console.log(`Lines: ${LINES.length} | bills ${bills.length} | txns ${txns.length} | dext ${dext.length}\n`);
 let nMatch=0,nDup=0,nCreate=0;
 for(const [amt,date,vendor] of LINES){
   const bill=findIn(bills,amt,date,vendor), txn=findIn(txns,amt,date,vendor), dx=findDext(amt,date,vendor), learned=learnedCoding(vendor);
   let action;
-  if(bill&&txn){action=`♻️ DUPLICATE → match the BILL (${bill.status}, ${bill.contact_name}), DELETE the card txn`;nDup++;}
-  else if(bill&&bill.status==='DRAFT'){action=`✍️ APPROVE draft bill (${bill.contact_name}), then MATCH`;nMatch++;}
-  else if(bill){action=`🔗 MATCH to bill (${bill.status}, ${bill.contact_name}${bill.has_attachments?', has receipt':''})`;nMatch++;}
-  else if(txn&&!txn.is_reconciled){action=`🔗 MATCH to existing txn (${txn.contact_name})`;nMatch++;}
-  else if(dx){action=`🆕 CREATE → ${dx.category} · ${dx.project||'no project'} · [receipt] ${dx.image}`;nCreate++;}
+  if(bill&&txn){action=`♻️ DUPLICATE → match the BILL (${bill.status}, ${bill.contact_name})${surcharge(amt,bill.amt)}, DELETE the duplicate card txn`;nDup++;}
+  else if(bill&&bill.status==='DRAFT'){action=`✍️ APPROVE draft bill (${bill.contact_name}), then MATCH${surcharge(amt,bill.amt)}`;nMatch++;}
+  else if(bill){action=`🔗 MATCH to bill — search name "${bill.contact_name}" (${bill.status}${bill.has_attachments?', has receipt':''})${surcharge(amt,bill.amt)}`;nMatch++;}
+  else if(txn&&!txn.is_reconciled){action=`🔗 MATCH to existing txn (${txn.contact_name})${surcharge(amt,txn.amt)}`;nMatch++;}
+  else if(dx){action=`🆕 CREATE → ${dx.category} · ${dx.project||'no project'}${surcharge(amt,dx.total)} · receipt ${dx.image}`;nCreate++;}
   else if(learned){action=`✏️ CREATE → ${learned.cat||'?'}${learned.proj?' · '+learned.proj:''}  (learned from your Dext coding of this vendor)`;nCreate++;}
   else {action=`✏️ CREATE → ${guess(vendor)}  (heuristic — confirm)`;nCreate++;}
   console.log(`$${String(amt).padStart(8)} ${date} ${vendor.slice(0,30).padEnd(30)} ${action}`);
