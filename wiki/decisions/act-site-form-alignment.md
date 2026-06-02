@@ -36,6 +36,23 @@ The framework below (forms-first principle, CRM-derivation, analytics, fix seque
 
 ---
 
+## ⭐ VERIFIED site → repo → GHL wiring map (grounded 2026-06-02 against local repos — supersedes §2/§7 guesses)
+
+The hard fact §2/§7 only guessed at: **every ACT sub-site runs its OWN GoHighLevel integration into the same GHL location (`agzsSZWgovjwgpcoASWG`), each with its own tag conventions. act.place is the ONLY one on the namespaced `/api/forms/submit` → `projectCode` scheme.** JusticeHub, Goods and Harvest are each independent Next.js apps with their own `lib/ghl` client and their own (un-namespaced, non-projectCode) tags writing to the shared location. There is no Webflow-native form path in play for the live ecosystem (Webflow is only legacy *content* JusticeHub scrapes).
+
+| Site | Repo (verified local) | Framework | Live form path | GHL wiring | projectCode? | Status |
+|---|---|---|---|---|---|---|
+| **act.place** | `act-regenerative-studio` | Next.js | `/api/forms/submit` → `pushToGHL` upsert (8 forms) | central, namespaced tags | **yes** (each form declares it) | ✅ the one being fixed |
+| **JusticeHub** (justicehub.com.au) | `JusticeHub` | Next.js | own `/api/ghl/{newsletter,signup,register,webhook}` + `GHLForm.tsx` | own `@/lib/ghl/client`, own tags `NEWSLETTER/JUSTICEHUB/STEWARD/RESEARCHER` | no | ⚠️ separate parallel wiring → same GHL location, tags drift from namespaced scheme |
+| **Goods** | `Goods Asset Register/v2` | Next.js (+ static `frontend/`) | own `/api/newsletter`, `/api/contact` (forms: contact, press, canberra/follow, bed) | own `@/lib/ghl` | no | ⚠️ separate parallel wiring (NOT the docs-only `~/Code/goods` repo) |
+| **Harvest** (ACT-HV) | `The Harvest` | Next.js | own `/api/contact` | own `@/lib/ghl/client` | no | ⚠️ own wiring; ALSO fed by act.place CSAInterestForm (`csa`→ACT-HV). `The Harvest Website` (vite) has no form/GHL wiring = old marketing site |
+| **Empathy Ledger** | `empathy-ledger-v2` | Next.js | `/api/subscribe` + admin `/api/admin/integrations/ghl`, world-tour import | own GHL integration, **admin/OCAP-driven** | no | 🔒 OCAP-gated — storytellers never funnelled; not a public marketing path |
+| **CivicGraph** (civicgraph.app) | *(no local repo found)* | — | unknown | unknown | — | ❓ needs Ben — can't verify locally |
+
+**Implication for the spine.** "Route by `projectCode`, never by formType" + the namespaced `project:/role:/comms:` tag scheme is currently an **act.place-only contract**. The other four apps write to the shared GHL location with divergent tags and no projectCode, so the "one intake workflow routed by projectCode" can only become the true ecosystem spine once each sub-app either (a) emits `projectCode` + namespaced tags from its own `lib/ghl`, or (b) is migrated to post through the shared `/api/forms/submit`. Until then, the intake router governs act.place only; the other apps' contacts arrive pre-tagged by their own conventions. This is step-8 "wire each remaining site" work — deferred, per-app, not part of the act.place fix (steps 1–7).
+
+---
+
 # ACT SITE → FORM → GoHighLevel ALIGNMENT MAP
 
 *Location agzsSZWgovjwgpcoASWG · grounded in GHL state verified 2026-06-02 + the four research digests. Where a digest finding conflicts with ACT's consent/OCAP rules, the rules win.*
@@ -157,7 +174,7 @@ The single most important new field is **`projectCode`**, set in code on every s
 
 | Project | Journey/pipeline | Rungs |
 |---|---|---|
-| **ACT-IN** | **ACT — Ecosystem Journey** (NEW) | 5 rungs — proposed: Newcomer → **Connected** → Participant → Contributor → Advocate (Ben to confirm names, §7). Belonging, not sales. |
+| **ACT-IN** | **ACT — Ecosystem Journey** (NEW) | 5 rungs — **CONFIRMED 2026-06-02: Curious → Connected → Member → Active → Steward** (canonical, identical shape to Harvest; act.place newsletter signups seat at **Connected**). Belonging, not sales. |
 | **ACT-HV** | Harvest Membership Journey (exists) | Curious → Connected → Member → Active → Steward (143 seated) — **left untouched** |
 | **Goods** | Goods Supporter Journey · Goods — Buyer Pipeline · Goods — Demand Register | as configured (commerce lifecycle allowed) |
 | **Empathy Ledger** | Empathy Ledger | belonging + consent state, OCAP-gated |
@@ -237,9 +254,9 @@ Hard rule throughout: **no send to any contact without an explicit consent field
 Unknowns from the digests + GHL state. Not invented — these block specific registry rows.
 
 1. **act.place repo + form source.** Memory says the brand site is likely `act-regenerative-studio`, served via Vercel as "Third Party," NOT this repo's `apps/website`. Confirm the actual repo and where the live newsletter form HTML lives, so steps 4/7 edit the right place.
-2. **ACT — Ecosystem Journey rung names.** I proposed Newcomer → Connected → Participant → Contributor → Advocate (5 rungs, "Connected" matching the existing tier). Confirm or replace. These are belonging rungs, deliberately distinct from the "A Curious Tractor" farming-metaphor pipeline and from Harvest's Curious→Steward.
-3. **JusticeHub form path.** Is justicehub.com.au's contact/newsletter form wired to `/api/forms/submit`, or is it Webflow-native and unconnected? Determines whether it's ⚠️ or ◻️.
-4. **Goods forms (Supporter / Buyer / Demand) and The Shop.** The pipelines exist; do the *forms* feeding them route through `/api/forms/submit`, or are they GHL-native / Shop-platform forms? Platform for "The Shop" is unconfirmed.
+2. ~~**ACT — Ecosystem Journey rung names.**~~ **RESOLVED 2026-06-02: Curious → Connected → Member → Active → Steward** (the canonical 5, identical shape to the Harvest Membership Journey — one belonging shape across every ACT project, only the meaning of Member/Steward changes). act.place newsletter signups seat at **Connected**. Deliberately distinct from the "A Curious Tractor" farming-metaphor pipeline.
+3. ~~**JusticeHub form path.**~~ **RESOLVED 2026-06-02** (verified site map above): `JusticeHub` is its own Next.js app with its own `/api/ghl/{newsletter,signup,register}` routes → own `@/lib/ghl/client`, writing un-namespaced tags to the shared GHL location. NOT `/api/forms/submit`, NOT Webflow-native (Webflow = legacy content only). Open sub-question for Ben: align JusticeHub's tags to the namespaced `project:/role:/comms:` scheme, or leave its parallel wiring as-is? (step-8 work)
+4. **Goods forms / The Shop.** **PARTLY RESOLVED 2026-06-02**: the live Goods site is `Goods Asset Register/v2` (Next.js) — NOT the docs-only `~/Code/goods` repo — with its own `/api/newsletter` + `/api/contact` → own `@/lib/ghl`. Open for Ben: does "The Shop" run on this app or a separate storefront platform, and should Goods emit `projectCode`/namespaced tags? (step-8)
 5. **Empathy Ledger storyteller intake wiring.** How does a storyteller record actually enter GHL today (EL v2 → GHL sync exists as a skill)? Whatever the path, OCAP rules override: no auto-syndication, consent-check gate first. Confirm the current path so we can put the gate in front of it.
 6. **Donation routing — charity vs Pty.** Donations may need DGR routing to The Butterfly Movement Ltd (the endorsed DGR/PBI) rather than ACT Pty. Confirm which entity owns the donor relationship for tax-receipting before wiring the Donation form's projectCode.
 7. **Grants/partner form** — does a public grants/partner enquiry form exist, or is the Grants pipeline fed manually? If manual, drop that registry row.
