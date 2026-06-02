@@ -8,6 +8,8 @@ import {
   ArrowLeftRight,
   Check,
   CheckCheck,
+  ChevronDown,
+  ChevronRight,
   Clock,
   Copy,
   ExternalLink,
@@ -20,6 +22,7 @@ import {
   Search,
   ShieldAlert,
   Undo2,
+  Zap,
 } from 'lucide-react'
 import { formatMoney } from '@/lib/finance/format'
 import { cn } from '@/lib/utils'
@@ -73,6 +76,27 @@ interface LineResult {
   note: string
   danger: boolean
   offsetLineId?: string
+  ruleCovered?: boolean
+}
+
+interface BankRule {
+  matchText: string
+  contactName: string
+  lineCount: number
+  totalValue: number
+  account: string
+  accountConfident: boolean
+  defaultProject: string | null
+  taxHint: string
+  uncertainTax: boolean
+}
+
+interface BankRulePack {
+  rules: BankRule[]
+  ruleCount: number
+  coveredLineCount: number
+  coveredValue: number
+  coveredLineIds: string[]
 }
 
 interface Summary {
@@ -98,6 +122,7 @@ interface ReconcileResponse {
   window: { start: string; end: string; account: string }
   filters: { action: ActionFilter; q: string; minAmount: number; limit: number; sort?: SortMode }
   summary: Summary
+  bankRules: BankRulePack
   totalMatching: number
   results: LineResult[]
   projects: { code: string; name: string | null }[]
@@ -153,6 +178,109 @@ function CopyId({ id, label }: { id: string; label: string }) {
       <span className="text-white/40">{label}</span>
       <span className="font-mono text-white/75">{id.slice(0, 8)}…</span>
     </button>
+  )
+}
+
+// Copy arbitrary text (a rule spec, the whole pack) with a brief "copied" tick.
+function CopyText({ text, label }: { text: string; label: string }) {
+  const [copied, setCopied] = useState(false)
+  return (
+    <button
+      type="button"
+      onClick={() => {
+        navigator.clipboard?.writeText(text)
+        setCopied(true)
+        setTimeout(() => setCopied(false), 1200)
+      }}
+      className="inline-flex items-center gap-1.5 rounded-lg border border-white/10 bg-white/[0.04] px-2.5 py-1 text-xs text-white/65 transition hover:border-cyan-300/40 hover:text-white"
+    >
+      {copied ? <Check className="h-3.5 w-3.5 text-emerald-300" /> : <Copy className="h-3.5 w-3.5" />}
+      {copied ? 'Copied' : label}
+    </button>
+  )
+}
+
+function ruleSpec(r: BankRule): string {
+  return [
+    `Bank rule — when Payee contains "${r.matchText}":`,
+    `  Contact:  ${r.contactName}`,
+    `  Account:  ${r.account}`,
+    `  Tax:      ${r.taxHint}`,
+    `  Tracking: ${r.defaultProject || '(set project)'}`,
+    `  (covers ${r.lineCount} line${r.lineCount === 1 ? '' : 's'}, $${r.totalValue.toFixed(2)})`,
+  ].join('\n')
+}
+
+// "Do this first" — the matching-killer. Each rule, set once in Xero's UI, makes its
+// vendor's lines arrive pre-filled so Ben just clicks OK. No bank-rules API, so it's
+// copy-paste; review tax/project before saving (rules fire silently).
+function BankRulesPanel({ pack }: { pack: BankRulePack }) {
+  const [open, setOpen] = useState(true)
+  if (!pack || pack.ruleCount === 0) return null
+  const copyAll = [
+    `# NAB Visa #8815 — bank rules to set in Xero (Accounting → Bank rules)`,
+    `# Set once → ${pack.coveredLineCount} lines (${formatMoney(pack.coveredValue)}) become one-click OK Creates, no matching.`,
+    `# Review tax + project before saving — rules fire silently.`,
+    '',
+    ...pack.rules.map(ruleSpec),
+  ].join('\n\n')
+
+  return (
+    <section className="mt-8 rounded-3xl border border-cyan-300/25 bg-cyan-300/[0.06] p-5">
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <button type="button" onClick={() => setOpen((v) => !v)} className="flex items-center gap-2 text-left">
+          {open ? <ChevronDown className="h-4 w-4 text-cyan-200" /> : <ChevronRight className="h-4 w-4 text-cyan-200" />}
+          <Zap className="h-5 w-5 text-cyan-200" />
+          <div>
+            <h2 className="text-base font-semibold text-white">
+              Set these {pack.ruleCount} bank rules once → {pack.coveredLineCount} lines become one-click OK
+            </h2>
+            <p className="text-xs text-white/55">
+              {formatMoney(pack.coveredValue)} of recurring spend pre-filled in Xero — no matching, no typing.
+            </p>
+          </div>
+        </button>
+        <CopyText text={copyAll} label="Copy all rules" />
+      </div>
+
+      {open && (
+        <>
+          <p className="mt-3 text-xs leading-5 text-cyan-50/60">
+            Xero has no bank-rules API, so paste each into <span className="text-cyan-100">Accounting → Bank rules</span>{' '}
+            (match on payee contains the text → set contact + account + tax + tracking), then run it over the open lines.
+            Review tax and project before saving — rules fire silently, so a wrong default bakes in on a fast OK.
+          </p>
+          <div className="mt-4 space-y-2">
+            {pack.rules.map((r) => (
+              <div
+                key={r.matchText}
+                className="flex flex-wrap items-center gap-x-4 gap-y-2 rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3"
+              >
+                <span className="rounded-lg bg-cyan-300/10 px-2 py-1 font-mono text-xs text-cyan-100">
+                  payee contains “{r.matchText}”
+                </span>
+                <span className="text-sm text-white/85">{r.contactName}</span>
+                <span className={cn('text-xs', r.accountConfident ? 'text-white/65' : 'text-amber-200')}>
+                  {r.account}
+                  {!r.accountConfident && ' · set once'}
+                </span>
+                {r.defaultProject && (
+                  <span className="rounded-md bg-white/[0.06] px-2 py-0.5 font-mono text-xs text-white/75">{r.defaultProject}</span>
+                )}
+                <span className={cn('text-xs', r.uncertainTax ? 'text-amber-200' : 'text-white/45')}>
+                  {r.uncertainTax ? '⚠ ' : ''}
+                  {r.taxHint}
+                </span>
+                <span className="ml-auto text-xs text-white/45">
+                  {r.lineCount} lines · {formatMoney(r.totalValue)}
+                </span>
+                <CopyText text={ruleSpec(r)} label="Copy" />
+              </div>
+            ))}
+          </div>
+        </>
+      )}
+    </section>
   )
 }
 
@@ -270,11 +398,22 @@ function LineCard({ r }: { r: LineResult }) {
                 <Receipt className="h-3 w-3" /> receipt
               </span>
             )}
+            {r.ruleCovered && (
+              <span className="inline-flex items-center gap-1 rounded-full border border-cyan-300/30 bg-cyan-300/10 px-2.5 py-1 text-xs text-cyan-100">
+                <Zap className="h-3 w-3" /> bank rule → one-click
+              </span>
+            )}
           </div>
 
           <div className="mt-3 rounded-2xl border border-white/10 bg-white/[0.03] px-3 py-2.5">
             <p className="text-[10px] uppercase tracking-[0.2em] text-cyan-200/60">In Xero</p>
-            <p className="mt-1 text-sm font-medium leading-6 text-white/90">{meta.xeroVerb}</p>
+            {r.ruleCovered ? (
+              <p className="mt-1 text-sm font-medium leading-6 text-cyan-100">
+                Set the bank rule (above) → this lands pre-filled, just click OK. No matching.
+              </p>
+            ) : (
+              <p className="mt-1 text-sm font-medium leading-6 text-white/90">{meta.xeroVerb}</p>
+            )}
             <p className="mt-1 text-sm leading-6 text-white/55">{r.note}</p>
           </div>
 
@@ -394,6 +533,8 @@ export default function ReconcileCockpitPage() {
             </div>
           </aside>
         </header>
+
+        {data?.bankRules && <BankRulesPanel pack={data.bankRules} />}
 
         {summary && (
           <section className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-2 xl:grid-cols-4">
