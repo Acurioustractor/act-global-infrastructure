@@ -20,7 +20,8 @@
 | 🆕 Create | 143 | $62,571.75 |
 | **Total** | **218** | **$87,426.15** |
 
-## 1 · Delete these duplicates (16) — recover $6,443.31
+## 1 · ⚠️ Collapse these duplicates (16) — NOT a blind delete (see runbook Step 1, corrected 2026-06-02)
+> **Receipts live on the unreconciled Dext copy** — deleting it bins the receipt. Of these 16, only **12 are GST-bearing (1B impact $517.75)**; the other 4 are GST-free (no BAS impact — defer). Verify per line via `scripts/classify-duplicate-gst.mjs`.
 | Date | Vendor | Bank amt | Bill (status) / surcharge |
 |---|---|---|---|
 | 2026-03-18 | MALENY LANDSCAPING MALENY | $1,995.00 | MALENY LANDSCAPING SUPPLIES (PAID) |

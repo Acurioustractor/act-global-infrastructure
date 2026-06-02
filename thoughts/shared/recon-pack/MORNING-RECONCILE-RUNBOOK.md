@@ -19,11 +19,11 @@
 
 ## The order of operations (highest GST-accuracy first)
 
-### Step 1 — Delete the confirmed duplicates (38 lines, ~$24,605) 🔴 biggest accuracy win
-Same purchase recorded twice (Dext bill + bank-feed card txn). In Xero: match the bank line to the bill, then **delete the duplicate card txn**. Add any surcharge as an Adjustment.
-- Q2: 22 dups → `recon-pack/q2-fy26-reconciliation-pack.md` §1
-- Q3: 16 dups → `recon-pack/q3-fy26-reconciliation-pack.md` §1
-- **GST verify:** if a duplicate card txn was GST-bearing AND counted in 1B, deleting it reduces 1B (raises net payable) — up to ~$1,651 in Q2. Check each in Xero; don't assume.
+### Step 1 — Collapse the duplicates (38 lines) ⚠️ NOT a simple delete — receipts live on the copy you'd delete
+**CORRECTED 2026-06-02 after tracer-bullet (Airbnb $4,621.18).** Each "duplicate" is a tangle, not a stray card line: a paid + reconciled **bill/payment** PLUS a separate **Dext-published spend-money that HOLDS THE RECEIPT** and is *unreconciled*. The receipt + correct coding sit on the copy you'd instinctively delete. **NEVER blind-delete the unreconciled card txn — you bin the receipt + coding.** Collapse by keeping whichever copy holds the receipt and reconciling the bank-feed line to it; the match is UI-only, so this is per-line work in Xero, NOT an API batch.
+- **GST reality (measured via `scripts/classify-duplicate-gst.mjs`, Dext Tax(AUD)):** only **27 of 38** duplicates are GST-bearing; total 1B over-claim is **$740.69** (Q2 **$222.94** · Q3 **$517.75**) — NOT the ~$1,651 first estimated.
+- **The 11 GST-free duplicates have ZERO BAS impact** and are the big-dollar ones (Airbnb $4,621 · Kennards $3,745 · Defy $3,598 + $3,261 · AGL $319 · Lotte $132 …). These carry the HIGHEST receipt risk and ZERO GST upside → **defer to a deliberate hygiene pass / Standard Ledger. Do NOT rush-delete.**
+- Fix only the **27 GST-bearing** lines before lodging (the only ones that move 1B). Q2: `recon-pack/q2-fy26-reconciliation-pack.md` §1 · Q3: `recon-pack/q3-fy26-reconciliation-pack.md` §1.
 
 ### Step 2 — ⚠️ DO NOT delete these (3) — verified false positives
 - **Townsville City Council $44.90** — bill is *Sunshine Coast Council*; different entity.

@@ -24,7 +24,8 @@ The 🔴 Decide tier shrinks every quarter as the learning loop fills in vendor�
 | 🆕 Create (coded) | 186 | $124,792.43 |
 | **Total unreconciled** | **241** | **$169,713.03** |
 
-## 1 · 🟢 Delete these duplicates (22) — recover $18,162.40
+## 1 · ⚠️ Collapse these duplicates (22) — NOT a blind delete (see runbook Step 1, corrected 2026-06-02)
+> **Receipts live on the unreconciled Dext copy** — deleting it bins the receipt. Of these 22, only **15 are GST-bearing (1B impact $222.94)**; the other 7 are GST-free (no BAS impact — defer). The big-dollar lines (Airbnb $4,621, Kennards $3,745, both Defy) are all **GST-free → defer, do not touch now.** Verify per line via `scripts/classify-duplicate-gst.mjs`.
 Match the bank line to the bill, then DELETE the duplicate card txn. Add any surcharge as an Adjustment.
 
 | Date | Vendor | Bank amt | Bill (status) / surcharge |
