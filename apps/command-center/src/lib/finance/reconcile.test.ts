@@ -192,3 +192,78 @@ test('buildReconcileResponse: q matches vendor text', () => {
   assert.equal(res.totalMatching, 1)
   assert.equal(res.results[0].line.id, 'L2')
 })
+
+// ---------------------------------------------------------------------------
+// Co-pilot Phase 1 — the credit side (repayments → Transfer, refunds → offset),
+// the DANGER flag on AUTHORISED-unpaid bills, and the Xero-mirror date order.
+// A $40K repayment misclassified as income/create is the expensive failure, so
+// the new money totals are hand-computed here first.
+// ---------------------------------------------------------------------------
+const emptyCtx: ReconcileContext = { bills: [], txns: [], dext: [] }
+
+const repaymentLine: CardLine = {
+  id: 'C1', date: '2025-12-10', vendor: 'Internet Payment',
+  particulars: 'INTERNET PAYMENT Linked Acc Trns', amount: 40000,
+  status: 'unreconciled', projectCode: null, bankAccount: 'NAB Visa ACT #8815', direction: 'credit',
+}
+const refundLine: CardLine = {
+  id: 'C2', date: '2025-11-28', vendor: 'AIRBNB * HMNFDHSXP9 SURRY HILLS',
+  particulars: 'AIRBNB * HMNFDHSXP9 SURRY HILLS', amount: 2324.8,
+  status: 'unreconciled', projectCode: null, bankAccount: 'NAB Visa ACT #8815', direction: 'credit',
+}
+const airbnbCharge: CardLine = {
+  id: 'D2', date: '2025-11-26', vendor: 'AIRBNB SURRY HILLS', amount: 2324.8,
+  status: 'unreconciled', projectCode: null, bankAccount: 'NAB Visa ACT #8815', direction: 'debit',
+}
+
+test('classifyLine: credit repayment → Transfer from ACT Everyday (never income/create)', () => {
+  const r = classifyLine(repaymentLine, emptyCtx)
+  assert.equal(r.action, 'transfer')
+  assert.match(r.note, /Everyday/i)
+  assert.equal(r.suggestedAccount, null) // a transfer is not coded to an account
+})
+
+test('classifyLine: merchant credit → refund', () => {
+  const r = classifyLine(refundLine, emptyCtx)
+  assert.equal(r.action, 'refund')
+})
+
+test('classifyLine: AUTHORISED (unpaid) bill match is flagged DANGER; PAID is not', () => {
+  const authR = classifyLine(lines[0], ctx) // Centre Trailer bill is AUTHORISED
+  assert.equal(authR.action, 'match_bill')
+  assert.equal(authR.danger, true)
+
+  const paidCtx: ReconcileContext = {
+    bills: [{ contactName: 'Centre Trailer Sales', date: '2025-10-07', amount: 420, status: 'PAID', hasAttachments: true }],
+    txns: [], dext: [],
+  }
+  const paidR = classifyLine(lines[0], paidCtx)
+  assert.equal(paidR.action, 'match_bill')
+  assert.equal(paidR.danger, false)
+})
+
+test('buildReconcileResponse: a refund credit offsets a same-amount, same-vendor debit charge', () => {
+  const res = buildReconcileResponse([airbnbCharge, refundLine], emptyCtx, { ...baseFilters })
+  const refund = res.results.find((r) => r.line.id === 'C2')
+  assert.equal(refund?.action, 'refund')
+  assert.equal(refund?.offsetLineId, 'D2')
+  assert.match(refund?.note || '', /offset/i)
+})
+
+test('summarizeReconcile: transfer and refund land in their own money buckets', () => {
+  const results = [repaymentLine, refundLine].map((l) => classifyLine(l, emptyCtx))
+  const s = summarizeReconcile(results)
+  assert.equal(s.transferCount, 1)
+  assert.equal(s.transferValue, 40000)
+  assert.equal(s.refundCount, 1)
+  assert.equal(s.refundValue, 2324.8)
+  // neither a transfer nor a refund is a "create" — they must not double-count as spend
+  assert.equal(s.createCount, 0)
+})
+
+test('buildReconcileResponse: sort=date mirrors Xero by ordering oldest-first', () => {
+  const res = buildReconcileResponse(lines, ctx, { ...baseFilters, sort: 'date' })
+  const dates = res.results.map((r) => r.line.date)
+  const ascending = [...dates].sort()
+  assert.deepEqual(dates, ascending)
+})

@@ -34,6 +34,8 @@ export type ReconcileAction =
   | 'already_reconciled'
   | 'duplicate'
   | 'create'
+  | 'transfer' // credit repayment of the card from the linked Everyday account
+  | 'refund' // credit refund from a merchant (offsets a debit charge / a credit note)
 
 export interface CardLine {
   id: string
@@ -43,6 +45,8 @@ export interface CardLine {
   status: string | null // 'reconciled' | 'unreconciled'
   projectCode: string | null
   bankAccount: string | null
+  direction?: 'debit' | 'credit' // undefined = debit (back-compat); credits are repayments/refunds
+  particulars?: string | null // raw bank particulars — used to spot "INTERNET PAYMENT" repayments
 }
 
 export interface XeroBill {
@@ -85,6 +89,8 @@ export interface ReconcileLineResult {
   receiptUrl: string | null
   fromDext: boolean
   note: string
+  danger: boolean // true = matching an AUTHORISED unpaid bill: real-payment-or-phantom, needs per-line judgement
+  offsetLineId?: string // a refund credit that cancels this debit charge (and vice-versa)
 }
 
 export interface ReconcileSummary {
@@ -98,6 +104,10 @@ export interface ReconcileSummary {
   createValue: number
   alreadyReconciledCount: number
   alreadyReconciledValue: number
+  transferCount: number
+  transferValue: number
+  refundCount: number
+  refundValue: number
   surchargeCount: number
   surchargeTotal: number
 }
@@ -109,6 +119,7 @@ export interface ReconcileFilters {
   q: string
   minAmount: number
   limit: number
+  sort?: 'action' | 'date' // 'date' mirrors Xero's reconcile screen order (oldest-first); default 'action'
 }
 
 export interface ReconcileResponse {
@@ -268,7 +279,46 @@ function guessProjectHint(vendor: string): string | null {
 
 // --- classification cascade ------------------------------------------------
 
+// A linked-account card repayment ("INTERNET PAYMENT Linked Acc Trns" / "...Up").
+function isRepayment(line: CardLine): boolean {
+  return /INTERNET PAYMENT/i.test(`${line.particulars || ''} ${line.vendor || ''}`)
+}
+
+/**
+ * Credit-side classifier. A credit on a credit-card feed is money coming IN:
+ * either a repayment of the card from the linked Everyday account (→ Transfer,
+ * never an account-coded line) or a merchant refund (→ offset the original
+ * charge / match a credit note). Coding either as income/create double-counts.
+ */
+function classifyCreditLine(line: CardLine): ReconcileLineResult {
+  const base: ReconcileLineResult = {
+    line,
+    action: 'refund',
+    surcharge: 0,
+    suggestedProject: null,
+    suggestedAccount: null,
+    receiptUrl: null,
+    fromDext: false,
+    danger: false,
+    note: '',
+  }
+  if (isRepayment(line)) {
+    return {
+      ...base,
+      action: 'transfer',
+      note: 'Transfer from NJ Marchesi T/as ACT Everyday — no account, no GST, no project',
+    }
+  }
+  return {
+    ...base,
+    action: 'refund',
+    note: 'Merchant refund — match a credit note, or offset the original charge of the same amount',
+  }
+}
+
 export function classifyLine(line: CardLine, ctx: ReconcileContext): ReconcileLineResult {
+  if (line.direction === 'credit') return classifyCreditLine(line)
+
   const bill = bestMatch(ctx.bills, line)
   const txn = bestMatch(ctx.txns, line)
   const dx = bestDext(ctx.dext, line)
@@ -279,6 +329,7 @@ export function classifyLine(line: CardLine, ctx: ReconcileContext): ReconcileLi
     suggestedAccount: null as string | null,
     receiptUrl: null as string | null,
     fromDext: false,
+    danger: false,
   }
 
   // 1. Same purchase exists as BOTH a bill and a card txn → duplicate.
@@ -306,13 +357,15 @@ export function classifyLine(line: CardLine, ctx: ReconcileContext): ReconcileLi
     }
   }
 
-  // 3. Approved/paid bill → match.
+  // 3. Approved/paid bill → match. AUTHORISED (unpaid) = DANGER: matching pays it,
+  // but it might be a phantom to void instead — needs per-line judgement (SL cluster).
   if (bill) {
     return {
       ...base,
       action: 'match_bill',
       matchedBill: bill,
       surcharge: surchargeOf(line.amount, bill.amount),
+      danger: bill.status === 'AUTHORISED',
       note: `Match to bill — search name "${bill.contactName}" (${bill.status}${bill.hasAttachments ? ', has receipt' : ''})`,
     }
   }
@@ -396,6 +449,10 @@ export function summarizeReconcile(results: ReconcileLineResult[]): ReconcileSum
     createValue: 0,
     alreadyReconciledCount: 0,
     alreadyReconciledValue: 0,
+    transferCount: 0,
+    transferValue: 0,
+    refundCount: 0,
+    refundValue: 0,
     surchargeCount: 0,
     surchargeTotal: 0,
   }
@@ -412,6 +469,12 @@ export function summarizeReconcile(results: ReconcileLineResult[]): ReconcileSum
     } else if (r.action === 'already_reconciled') {
       summary.alreadyReconciledCount += 1
       summary.alreadyReconciledValue = round2(summary.alreadyReconciledValue + r.line.amount)
+    } else if (r.action === 'transfer') {
+      summary.transferCount += 1
+      summary.transferValue = round2(summary.transferValue + r.line.amount)
+    } else if (r.action === 'refund') {
+      summary.refundCount += 1
+      summary.refundValue = round2(summary.refundValue + r.line.amount)
     } else {
       // match_bill | approve_draft | match_txn
       summary.matchCount += 1
@@ -434,8 +497,10 @@ const ACTION_ORDER: Record<ReconcileAction, number> = {
   match_bill: 1,
   approve_draft: 2,
   match_txn: 3,
-  already_reconciled: 4,
-  create: 5,
+  transfer: 4,
+  refund: 5,
+  already_reconciled: 6,
+  create: 7,
 }
 
 function matchesAction(result: ReconcileLineResult, action: ReconcileActionFilter): boolean {
@@ -466,14 +531,36 @@ export function buildReconcileResponse(
 ): ReconcileResponse {
   const all = lines.map((line) => classifyLine(line, ctx))
 
+  // Refund-offset pass: a merchant refund that exactly matches a debit charge of
+  // the same vendor cancels it (e.g. an Airbnb charge + its Airbnb refund) — flag
+  // the pair so both reconcile against each other instead of looking like spend.
+  const debits = all.filter((r) => r.line.direction !== 'credit')
+  for (const r of all) {
+    if (r.action !== 'refund') continue
+    const charge = debits.find(
+      (d) =>
+        d.line.id !== r.line.id &&
+        amountCloseness(d.line.amount, r.line.amount) === 'exact' &&
+        vendorMatch(d.line.vendor, r.line.vendor) &&
+        dayGap(d.line.date, r.line.date) <= 60
+    )
+    if (charge) {
+      r.offsetLineId = charge.line.id
+      r.note = `Refund — offsets the $${r.line.amount.toFixed(2)} ${charge.line.vendor} charge (line ${charge.line.id}); reconcile them against each other`
+    }
+  }
+
+  const byActionThenAmount = (a: ReconcileLineResult, b: ReconcileLineResult) =>
+    ACTION_ORDER[a.action] - ACTION_ORDER[b.action] || b.line.amount - a.line.amount
+  // 'date' mirrors Xero's reconcile screen (oldest-first); null dates sort last.
+  const byDate = (a: ReconcileLineResult, b: ReconcileLineResult) =>
+    (a.line.date || '9999').localeCompare(b.line.date || '9999') || b.line.amount - a.line.amount
+
   const filtered = all
     .filter((r) => matchesAction(r, filters.action))
     .filter((r) => r.line.amount >= filters.minAmount)
     .filter((r) => matchesQuery(r, filters.q))
-    .sort(
-      (a, b) =>
-        ACTION_ORDER[a.action] - ACTION_ORDER[b.action] || b.line.amount - a.line.amount
-    )
+    .sort(filters.sort === 'date' ? byDate : byActionThenAmount)
 
   return {
     filters,
@@ -524,12 +611,13 @@ async function loadCardLines(w: ReconcileWindow): Promise<CardLine[]> {
     status: string | null
     project_code: string | null
     bank_account: string | null
+    direction: string | null
   }>((from, to) =>
     supabase
       .from('bank_statement_lines')
-      .select('id, date, payee, particulars, reference, amount, status, project_code, bank_account')
+      .select('id, date, payee, particulars, reference, amount, status, project_code, bank_account, direction')
+      // both directions: debits = card spend, credits = repayments (→Transfer) + refunds.
       .ilike('bank_account', `%${w.account}%`)
-      .eq('direction', 'debit')
       .eq('status', 'unreconciled')
       .gte('date', w.start)
       .lte('date', w.end)
@@ -545,6 +633,8 @@ async function loadCardLines(w: ReconcileWindow): Promise<CardLine[]> {
     status: r.status,
     projectCode: r.project_code,
     bankAccount: r.bank_account,
+    direction: r.direction === 'credit' ? 'credit' : 'debit',
+    particulars: r.particulars,
   }))
 }
 
