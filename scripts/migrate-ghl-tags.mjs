@@ -96,7 +96,8 @@ const EXTRA = {
   'shop-produce':['project:act-hv','interest:markets','role:supplier'],'shop-maker':['project:act-hv','interest:markets','role:supplier'],'shop-food':['project:act-hv','interest:markets','role:supplier'],'shop-consignment':['project:act-hv','interest:markets','role:supplier'],
   'world-tour-partner':['role:partner','source:world-tour'],'act-regenerative-studio':['project:act-core'],
   'grant':['role:funder'],'goods-government-grant':['role:gov'],'research':['role:researcher'],
-  'act-inquiry':['source:inquiry'],'flagship-inquiry':['source:inquiry'],'goods-general-inquiry':['source:inquiry'],'goods-inquiry':['source:inquiry'],
+  // inquiry tags carry their project too (source: is only "how", project: is the scope)
+  'act-inquiry':['project:act-core','source:inquiry'],'flagship-inquiry':['source:inquiry'],'goods-general-inquiry':['project:act-gd','source:inquiry'],'goods-inquiry':['project:act-gd','source:inquiry'],
   'priority-medium':['priority:medium'],'goods-priority-high':['priority:high'],'goods-priority-medium':['priority:medium'],'goods-key-partner':['role:partner','priority:high'],
   'meeting-held':['action:meeting-held'],'quiz-completed':['action:quiz-completed'],'biz-expression-of-interest':['interest:business'],'business-interest':['interest:business'],'business-registration':['interest:business'],
   'justice':['project:act-jh','interest:justice-reform'],'youth justice':['project:act-jh','interest:justice-reform'],'yj':['project:act-jh','interest:justice-reform'],'detention centre':['project:act-jh'],'njp':['project:act-jh'],
