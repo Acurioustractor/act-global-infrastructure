@@ -1,30 +1,35 @@
 {
-  "generatedAt": "2026-06-02T22:20:12.294Z",
+  "generatedAt": "2026-06-02T22:47:36.107Z",
   "coverage": [
     {
       "area": "xero_txns FY26",
       "n": 1911,
-      "tagged": 1708
+      "tagged": 1709,
+      "pct": 89
     },
     {
       "area": "xero_txns all",
       "n": 3231,
-      "tagged": 2239
+      "tagged": 2240,
+      "pct": 69
     },
     {
       "area": "xero_invoices",
       "n": 2227,
-      "tagged": 2155
+      "tagged": 2155,
+      "pct": 97
     },
     {
       "area": "ghl_opportunities",
-      "n": 767,
-      "tagged": 490
+      "n": 769,
+      "tagged": 490,
+      "pct": 64
     },
     {
       "area": "subscriptions",
       "n": 68,
-      "tagged": 33
+      "tagged": 33,
+      "pct": 49
     }
   ],
   "conflicts": [
@@ -604,13 +609,6 @@
           "confidence": 0.8
         },
         {
-          "id": "111f13f7-a2f1-4d3f-a1dd-29566f9b3cb4",
-          "name": "Centrecorp Foundation - 130 Stretch Beds - June 26 board",
-          "code": "ACT-GD",
-          "source": "pipeline",
-          "confidence": 0.8
-        },
-        {
           "id": "dedc5141-f76e-4dec-b73a-38d83af1b993",
           "name": "Nova Peris Foundation",
           "code": "ACT-GD",
@@ -641,6 +639,13 @@
         {
           "id": "933bc9fc-5429-42c6-be6a-195e988f0a27",
           "name": "Rotary Eclub Outback Australia",
+          "code": "ACT-GD",
+          "source": "pipeline",
+          "confidence": 0.8
+        },
+        {
+          "id": "111f13f7-a2f1-4d3f-a1dd-29566f9b3cb4",
+          "name": "Centrecorp Foundation - 130 Stretch Beds - June 26 board",
           "code": "ACT-GD",
           "source": "pipeline",
           "confidence": 0.8
@@ -695,6 +700,13 @@
           "confidence": 0.8
         },
         {
+          "id": "52d94021-b7be-42fa-8cf6-b3afe357a9d1",
+          "name": "QuestionTest - Member question",
+          "code": "ACT-HV",
+          "source": "pipeline",
+          "confidence": 0.8
+        },
+        {
           "id": "9dee4588-0a83-422f-82df-08f45a56cfb2",
           "name": "Roper Gulf Regional Council",
           "code": "ACT-GD",
@@ -739,6 +751,13 @@
         {
           "id": "e78252b2-c900-4e92-a800-57d8ac778490",
           "name": "dayle  — Harvest",
+          "code": "ACT-HV",
+          "source": "pipeline",
+          "confidence": 0.8
+        },
+        {
+          "id": "e26f4cc0-4c35-4b6b-92e3-077d5df9457e",
+          "name": "Benjamin Knight - Member comment",
           "code": "ACT-HV",
           "source": "pipeline",
           "confidence": 0.8

@@ -93,6 +93,13 @@ const cards: Array<{
     accent: 'from-purple-500/10 to-purple-500/5 border-purple-500/30',
   },
   {
+    title: 'Tagging health',
+    href: '/finance/tagging',
+    description: 'Cross-area project-code coverage, opp↔invoice conflicts, and what the resolver can fill.',
+    icon: Tag,
+    accent: 'from-purple-500/10 to-purple-500/5 border-purple-500/30',
+  },
+  {
     title: 'Receipts triage',
     href: '/finance/receipts-triage',
     description: 'Process inbound receipts, fix mismatches, push to Xero.',

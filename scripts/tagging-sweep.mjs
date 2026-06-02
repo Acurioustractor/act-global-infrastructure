@@ -112,7 +112,27 @@ async function main() {
   log(`   Subs      (${(untaggedSubs || []).length} untagged): ${subFill.auto.length} auto-fillable · ${subFill.review.length} review · ${subFill.none.length} no-match`);
 
   // ── Worklist out ──────────────────────────────────────────────────────────
-  const worklist = { generatedAt: new Date().toISOString(), coverage, conflicts, fill: { opps: oppFill, subs: subFill } };
+  const coverageClean = coverage.map((r) => ({
+    area: r.area, n: Number(r.n), tagged: Number(r.tagged),
+    pct: Number(r.n) > 0 ? Math.round((Number(r.tagged) / Number(r.n)) * 100) : 0,
+  }));
+  const summary = {
+    conflicts: conflicts.length,
+    opps: { untagged: (untaggedOpps || []).length, auto: oppFill.auto.length, review: oppFill.review.length, none: oppFill.none.length },
+    subs: { untagged: (untaggedSubs || []).length, auto: subFill.auto.length, review: subFill.review.length, none: subFill.none.length },
+  };
+
+  // Persist the run so the command-center can render it in prod (read-only view) — keeps the .mjs
+  // resolver as the single engine (no TS fork). Non-fatal: the files are still written on failure.
+  try {
+    const { error } = await sb.from('tagging_sweep_runs').insert({ summary, coverage: coverageClean, conflicts, fill: { opps: oppFill, subs: subFill } });
+    if (error) log(`   (warn) could not persist run: ${error.message}`);
+    else log('   persisted run → tagging_sweep_runs');
+  } catch (e) {
+    log(`   (warn) could not persist run: ${e.message}`);
+  }
+
+  const worklist = { generatedAt: new Date().toISOString(), coverage: coverageClean, conflicts, fill: { opps: oppFill, subs: subFill } };
   const base = join(__dirname, '..', 'thoughts', 'shared', 'financials', `tagging-sweep-${today}`);
   writeFileSync(`${base}.json`, JSON.stringify(worklist, null, 2));
   const md = [
