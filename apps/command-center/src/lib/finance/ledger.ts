@@ -336,11 +336,14 @@ export interface WeeklySnapshot {
   cash: number
   cashAsOf: string | null
   cashStale: boolean
-  monthIncome: number // current-month revenue (accrual headline)
+  // Month-to-date is CASH BASIS (live xero_transactions) — the monthly accrual rollup lags and reads
+  // $0 for the current month early on. Caveat: cash-basis income undercounts settlement months
+  // (most invoice settlements land as RECEIVE-TRANSFER). The monthly chart shows the accrual truth.
+  monthIncome: number
   monthSpend: number
   monthNet: number
   weekNet: number // last-7-days cash movement (cash basis, excl. transfers)
-  monthlyBurn: number // trailing-3-month average expense
+  monthlyBurn: number // trailing-3-month average expense (accrual, completed months)
   runwayMonths: number | null // cash / monthlyBurn; null = no burn
   receiptedPct: number | null // not wired in this slice — a later section adds it
   asOf: string // the day this snapshot was computed for
@@ -348,15 +351,17 @@ export interface WeeklySnapshot {
 }
 
 /**
- * Whole-org weekly snapshot. Composes the blessed ledger functions (getCashPosition / getMonthlyPL /
- * getOrgLedger) through the tested pure math above — no new money logic lives in the async layer.
+ * Whole-org weekly snapshot. Composes the blessed ledger functions (getCashPosition / getOrgLedger /
+ * getMonthlyPL) through the tested pure math above — no new money logic lives in the async layer.
+ * Burn = trailing-3-month accrual (completed months); month/week = live cash basis (so the current,
+ * incomplete month shows real activity instead of the lagging rollup's $0).
  */
 export async function getWeeklySnapshot(now: Date = new Date()): Promise<WeeklySnapshot> {
   const asOf = isoDay(now)
   const tw = trailingMonthsWindow(now, 3)
-  const [cash, month, trailing, week] = await Promise.all([
+  const [cash, monthLedger, trailing, week] = await Promise.all([
     getCashPosition(),
-    getMonthlyPL({ fyStart: monthStartISO(now), fyEnd: asOf }),
+    getOrgLedger({ fyStart: monthStartISO(now), fyEnd: asOf }),
     getMonthlyPL({ fyStart: tw.start, fyEnd: tw.end }),
     getOrgLedger({ fyStart: weekStartISO(now, 7), fyEnd: asOf }),
   ])
@@ -365,14 +370,14 @@ export async function getWeeklySnapshot(now: Date = new Date()): Promise<WeeklyS
     cash: cash.cash,
     cashAsOf: cash.asOf,
     cashStale: cash.stale,
-    monthIncome: month.revenue,
-    monthSpend: month.expenses,
-    monthNet: month.net,
+    monthIncome: monthLedger.cashReceived,
+    monthSpend: monthLedger.cashSpent,
+    monthNet: monthLedger.cashNet,
     weekNet: week.cashNet,
     monthlyBurn,
     runwayMonths: computeRunwayMonths(cash.cash, monthlyBurn),
     receiptedPct: null,
     asOf,
-    ok: cash.ok && month.ok && trailing.ok && week.ok,
+    ok: cash.ok && monthLedger.ok && trailing.ok && week.ok,
   }
 }
