@@ -12,10 +12,16 @@ import {
 
 export const dynamic = 'force-dynamic'
 
-const ACTIONS: ReconcileActionFilter[] = ['all', 'duplicate', 'match_bill', 'approve_draft', 'match_txn', 'already_reconciled', 'create']
+const ACTIONS: ReconcileActionFilter[] = ['all', 'duplicate', 'match_bill', 'approve_draft', 'match_txn', 'transfer', 'refund', 'already_reconciled', 'create']
 
 function parseAction(value: string | null): ReconcileActionFilter {
   return ACTIONS.includes(value as ReconcileActionFilter) ? (value as ReconcileActionFilter) : 'all'
+}
+
+// 'date' mirrors Xero's reconcile screen order (oldest-first); 'action' groups by recommendation.
+// Undefined → the engine's default (action order), so the param is fully back-compat.
+function parseSort(value: string | null): 'action' | 'date' | undefined {
+  return value === 'date' || value === 'action' ? value : undefined
 }
 
 function parseLimit(value: string | null): number {
@@ -56,6 +62,7 @@ export async function GET(request: NextRequest) {
     q: (params.get('q') || '').trim(),
     minAmount: parseMinAmount(params.get('minAmount')),
     limit: parseLimit(params.get('limit')),
+    sort: parseSort(params.get('sort')),
   }
   const window = {
     start: params.get('start') || RECONCILE_FY_START,

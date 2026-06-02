@@ -55,6 +55,7 @@ export interface XeroBill {
   amount: number
   status: string | null // AUTHORISED | PAID | DRAFT | ...
   hasAttachments: boolean | null
+  xeroId?: string | null // Xero InvoiceID — copy to find/verify the bill (esp. the DANGER cluster)
 }
 
 export interface XeroSpendTxn {
@@ -62,6 +63,7 @@ export interface XeroSpendTxn {
   date: string | null
   amount: number
   isReconciled: boolean | null
+  xeroTxnId?: string | null // Xero BankTransactionID — copy to find the spend-money txn on the reconcile screen
 }
 
 export interface DextCoding {
@@ -640,6 +642,7 @@ async function loadCardLines(w: ReconcileWindow): Promise<CardLine[]> {
 
 async function loadBills(w: ReconcileWindow): Promise<XeroBill[]> {
   const rows = await fetchAllRows<{
+    xero_id: string | null
     contact_name: string | null
     date: string | null
     total: number | string | null
@@ -648,7 +651,7 @@ async function loadBills(w: ReconcileWindow): Promise<XeroBill[]> {
   }>((from, to) =>
     supabase
       .from('xero_invoices')
-      .select('contact_name, date, total, status, has_attachments')
+      .select('xero_id, contact_name, date, total, status, has_attachments')
       .eq('type', 'ACCPAY')
       .or('status.is.null,and(status.neq.DELETED,status.neq.VOIDED)')
       .gte('date', w.start)
@@ -662,11 +665,13 @@ async function loadBills(w: ReconcileWindow): Promise<XeroBill[]> {
     amount: Math.abs(num(r.total)),
     status: r.status,
     hasAttachments: r.has_attachments,
+    xeroId: r.xero_id,
   }))
 }
 
 async function loadSpendTxns(w: ReconcileWindow): Promise<XeroSpendTxn[]> {
   const rows = await fetchAllRows<{
+    xero_transaction_id: string | null
     contact_name: string | null
     date: string | null
     total: number | string | null
@@ -674,7 +679,7 @@ async function loadSpendTxns(w: ReconcileWindow): Promise<XeroSpendTxn[]> {
   }>((from, to) =>
     supabase
       .from('xero_transactions')
-      .select('contact_name, date, total, is_reconciled')
+      .select('xero_transaction_id, contact_name, date, total, is_reconciled')
       .like('type', 'SPEND%')
       .ilike('bank_account', `%${w.account}%`)
       .or('status.is.null,status.neq.DELETED')
@@ -688,6 +693,7 @@ async function loadSpendTxns(w: ReconcileWindow): Promise<XeroSpendTxn[]> {
     date: r.date,
     amount: Math.abs(num(r.total)),
     isReconciled: r.is_reconciled,
+    xeroTxnId: r.xero_transaction_id,
   }))
 }
 
