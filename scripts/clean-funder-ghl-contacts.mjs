@@ -117,20 +117,23 @@ const FUNDERS = [
 // SEARCH + DEDUPE
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-// Canonical expansion (Phase 2 re-point): emit the namespaced tag ALONGSIDE the legacy
-// flat one (dual-write) so no new funder contact drops out of a still-flat-filtered Smart
-// List before it's re-pointed. The flat tags retire in CONTRACT after Smart-list re-point.
+// Phase 3 flip (2026-06-03): emit CANONICAL ONLY. The flat tags are being retired in
+// CONTRACT, so stop minting them — replace each flat with its canonical, keep unmapped
+// tags (e.g. campaign tags) as-is. Smart lists are already re-pointed to canonical.
 const CANON = {
   'goods': ['project:act-gd'], 'act-gd': ['project:act-gd'], 'project-goods': ['project:act-gd'],
-  'goods-newsletter': ['comms:goods-newsletter'], 'newsletter': ['comms:newsletter'],
+  'goods-newsletter': ['comms:goods-newsletter'], 'newsletter': ['comms:act-newsletter'],
   'justicehub': ['project:act-jh'], 'act-jh': ['project:act-jh'],
   'contained': ['project:act-jh', 'interest:justice-reform'],
   'partner': ['role:partner'], 'funder': ['role:funder'], 'goods-funder': ['role:funder'],
   'goods-supporter': ['role:supporter'],
 };
-function withCanonical(tags) {
-  const s = new Set(tags);
-  for (const t of tags) for (const c of (CANON[t] || [])) s.add(c);
+function toCanonical(tags) {
+  const s = new Set();
+  for (const t of tags) {
+    if (CANON[t]) CANON[t].forEach(c => s.add(c)); // replace flat with canonical
+    else s.add(t);                                 // keep unmapped (campaign tags, etc.)
+  }
   return [...s];
 }
 
@@ -251,7 +254,7 @@ async function main() {
       const remaining = contacts.filter(c => !deletedIds.has(c.id));
       for (const c of remaining) {
         const current = new Set(c.tags || []);
-        const missing = withCanonical(funder.defaultTags).filter(t => !current.has(t));
+        const missing = toCanonical(funder.defaultTags).filter(t => !current.has(t));
         if (missing.length === 0) continue;
 
         const email = (c.email || '').toLowerCase();

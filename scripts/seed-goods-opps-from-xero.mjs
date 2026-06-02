@@ -221,10 +221,9 @@ async function main() {
             firstName: 'Accounts',
             lastName: orgName,
             companyName: orgName,
-            // Canonical (Phase 2): project:act-gd + role:buyer (Goods buyer from a Xero invoice)
-            // + source:xero. 'goods' kept (dual-write, retires in CONTRACT). Dropped the junk
-            // 'auto-created-from-xero' (it's on the delete list, not a durable tag).
-            tags: ['goods', 'project:act-gd', 'role:buyer', 'source:xero'],
+            // Canonical-only (Phase 3 flip 2026-06-03): project:act-gd + role:buyer (Goods buyer
+            // from a Xero invoice) + source:xero. Flat 'goods' dropped (retiring in CONTRACT).
+            tags: ['project:act-gd', 'role:buyer', 'source:xero'],
           }),
         });
         contactId = created.contact?.id || created.id;
