@@ -88,3 +88,21 @@ Current (wrong) shape:
 Vercel → Settings → Tokens → create a **read-only, team-scoped** token (team `benjamin-knights-projects`)
 → set it as **`VERCEL_ANALYTICS_TOKEN`** in the command-center env (local + Vercel). The
 `/analytics` "Site deployments" panel goes live immediately, no code change.
+
+---
+
+## PARKED main area — JusticeHub / THE CONTAINED (`ACT-JH`) — revisit ~early-mid June 2026
+
+Captured 2026-06-02 so the grounding isn't lost; **design deferred a few days** (Harvest + Goods are the priority). Today `ACT-JH` falls into the Universal-Inquiry catch-all above — that's a placeholder; **ACT-JH will get its own first-class journey** ("THE CONTAINED / JusticeHub Journey") when we return.
+
+What it is (don't re-discover this):
+- **THE CONTAINED** = a real, mature JusticeHub campaign. *"One container. Three rooms. Thirty minutes."* A **touring physical shipping container**: Room 1 current reality (critical) → Room 2 Diagrama therapeutic alternative (transitional) → Room 3 local community orgs already doing it (hopeful, changes per tour stop).
+- Platform stack framing: **CONTAINED = the emotional front door** (what youth detention feels like) → **JusticeHub = the evidence/coordination layer** (what works instead) → Empathy Ledger (consent/authority) → ALMA (evidence engine).
+- It runs in its OWN repo + GHL wiring: `~/Code/JusticeHub` (Vercel `justicehub` → justicehub.com.au), `api/ghl/{signup,register,newsletter}` → own `@/lib/ghl/client`, tags `JUSTICEHUB/STEWARD/RESEARCHER`, writing to the SAME GHL location `agzsSZWgovjwgpcoASWG`. NOT act's `/api/forms/submit`.
+- Canonical docs already exist in JusticeHub: `compendium/contained-campaign-bible.md` (LOCKED), `compendium/brand-guide.md`, tour/launch runbooks.
+- Existing digital touchpoints (scaffolded, not yet tied into one flow): `/contained/{experience, reaction, nominations, join, enroll, momentum, adelaide}` — incl. a **nomination mechanic** (nominate a decision-maker to experience youth-detention reality) + a **reaction capture** + a **role-based `/api/ghl/signup` join**.
+
+The flow hypothesis to grill when we return (NOT decided):
+- The rad, distinctive moment = the **physical→digital handoff at emotional peak** — exiting Room 3, scan a QR → ONE contained action → a CONTAINED belonging journey in GHL. The **nomination mechanic** is the likely signature action.
+- Open questions parked: who it's for (visitor vs decision-maker vs host-org), the single contained action, the GHL journey + rungs + consent (OCAP — youth-justice content, never extractive, "system-impacted not offenders"), and whether to align JusticeHub's own un-namespaced tags to the `project:/role:/comms:` scheme.
+- Brand/voice is LOCKED in the JusticeHub repo (Space Grotesk + IBM Plex Mono, off-white `#F5F0E8`, urgent-red CTAs only) — design to that, real-photos-only, centre agency not trauma.
