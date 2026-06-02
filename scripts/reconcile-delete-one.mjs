@@ -49,6 +49,14 @@ if (BILL) {
   if (bill.Status !== 'PAID') abort(`keeper bill not PAID (${bill.Status})`);
   if (!bill.HasAttachments) abort('keeper bill has NO receipt — deleting the spend-money would lose substantiation');
   if (Math.abs(Math.abs(bill.Total) - Math.abs(t.Total)) > Math.max(5, Math.abs(t.Total)*0.02)) abort(`amount mismatch txn $${t.Total} vs bill $${bill.Total} beyond surcharge tolerance`);
+  // BULLETPROOF: the charge must be genuinely accounted for elsewhere — the keeper bill's
+  // payment must itself be reconciled to a real statement line. Then the unreconciled
+  // spend-money is a CONFIRMED duplicate (its charge is already on the books + matched).
+  const pmt = bill.Payments?.[0];
+  if (!pmt) abort('keeper bill PAID but has no payment record — cannot confirm the charge is reconciled');
+  const pay = (await xero.get(`Payments/${pmt.PaymentID}`)).Payments?.[0];
+  if (pay?.IsReconciled !== true) abort(`keeper bill's payment is NOT reconciled (IsReconciled=${pay?.IsReconciled}) — ambiguous, not a confirmed duplicate`);
+  console.log(`  keeper bill payment reconciled ✓ (the charge is genuinely on the books)`);
 }
 
 if (!APPLY) { console.log('\n✅ All gates pass. DRY-RUN — add --apply to delete.'); process.exit(0); }
