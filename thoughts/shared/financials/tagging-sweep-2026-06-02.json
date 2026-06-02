@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-02T22:47:36.107Z",
+  "generatedAt": "2026-06-02T23:30:54.850Z",
   "coverage": [
     {
       "area": "xero_txns FY26",
@@ -34,14 +34,6 @@
   ],
   "conflicts": [
     {
-      "id": "557d98e6-a4d1-4a7b-8446-e4234a60ce6b",
-      "name": "On Country Photo Studio",
-      "oppCode": "ACT-CA",
-      "invoiceCode": "ACT-PI",
-      "proposed": "ACT-PI",
-      "reason": "Xero invoice is the money SoR"
-    },
-    {
       "id": "5600be56-5d9c-43e4-b2ce-bf679d177c5b",
       "name": "BG Fit - Qld gives",
       "oppCode": "ACT-BG",
@@ -50,75 +42,11 @@
       "reason": "Xero invoice is the money SoR"
     },
     {
-      "id": "ece29ad8-713e-4709-a157-428152727999",
-      "name": "Weave Beds - Utopia Homelands",
-      "oppCode": "ACT-CA",
-      "invoiceCode": "ACT-GD",
-      "proposed": "ACT-GD",
-      "reason": "Xero invoice is the money SoR"
-    },
-    {
-      "id": "68de4029-2908-4bd6-928b-ff8db52f0a0a",
-      "name": "Elders Trip Story",
-      "oppCode": "ACT-CA",
-      "invoiceCode": "ACT-PI",
-      "proposed": "ACT-PI",
-      "reason": "Xero invoice is the money SoR"
-    },
-    {
-      "id": "f273707e-30b7-4d8d-bde0-e62f8f626858",
-      "name": "First Greate Bed and workshop",
-      "oppCode": "ACT-CA",
-      "invoiceCode": "ACT-GD",
-      "proposed": "ACT-GD",
-      "reason": "Xero invoice is the money SoR"
-    },
-    {
-      "id": "076bebf6-03e3-4101-81ce-8061f6f83403",
-      "name": "Automated Annual Report",
-      "oppCode": "ACT-CA",
-      "invoiceCode": "ACT-PI",
-      "proposed": "ACT-PI",
-      "reason": "Xero invoice is the money SoR"
-    },
-    {
-      "id": "c8b96b53-2f4e-4bd5-8006-c102fcd93716",
-      "name": "Station revive",
-      "oppCode": "ACT-CA",
-      "invoiceCode": "ACT-PI",
-      "proposed": "ACT-PI",
-      "reason": "Xero invoice is the money SoR"
-    },
-    {
-      "id": "12d404b9-d695-4d73-9626-64b261dbebf5",
-      "name": "Love's Creek Station - Build #1",
-      "oppCode": "ACT-CA",
-      "invoiceCode": "ACT-OO",
-      "proposed": "ACT-OO",
-      "reason": "Xero invoice is the money SoR"
-    },
-    {
       "id": "450d450d-a48b-49b6-96dd-bdccc910266e",
       "name": "Homeland School Company — Goods. Indestructible Washing Machine v1.1",
       "oppCode": "ACT-GD",
       "invoiceCode": "ACT-JH",
       "proposed": "ACT-JH",
-      "reason": "Xero invoice is the money SoR"
-    },
-    {
-      "id": "144ed95b-c70b-4d77-809a-3d75da4bdcde",
-      "name": "Central Australian Pilot",
-      "oppCode": "ACT-CA",
-      "invoiceCode": "ACT-GD",
-      "proposed": "ACT-GD",
-      "reason": "Xero invoice is the money SoR"
-    },
-    {
-      "id": "15393911-e03f-4239-98f2-681afc4bf1f2",
-      "name": "Flood Stories",
-      "oppCode": "ACT-CA",
-      "invoiceCode": "ACT-PI",
-      "proposed": "ACT-PI",
       "reason": "Xero invoice is the money SoR"
     }
   ],

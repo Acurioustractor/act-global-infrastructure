@@ -2,7 +2,7 @@
 
 > Slug: `2026-06-03-unified-tagging-engine`
 > Created: 2026-06-03
-> Status: draft (Phase 1 ready to build)
+> Status: Phase 1 shipped · Phase 2 tracer DONE · cockpit UI shipped · 9/11 conflicts resolved (2 "your call" left)
 > Owner: Ben (build: Claude)
 > Decision: [[2026-06-03-unified-project-code-resolver]] (ADR) · Concept: [[project-code-resolution]]
 
@@ -40,11 +40,17 @@ gives a sharper code — that lazy default is exactly what produced the 11 confl
 pipeline→ACT-CA as review-only; always prefer a linked-invoice code.
 
 ### Phase 2 — tracer (one record, end-to-end, gated)
-- [ ] **T4:** Prove the path on ONE GHL opp: resolve → (if it has a paid `xero_invoice_id`) propagate the invoice's code back → write the single opp `project_code` (gated, logged, revert-able). Verify it shows correctly on the dashboard + sweep reports zero conflict for it.
+- [x] **T4 (2026-06-03):** Proved the path end-to-end on ONE GHL opp via the live endpoint — "On Country Photo Studio" `ACT-CA`→`ACT-PI` (linked invoice INV-0262 = PICC). Apply → DB confirmed; **undo (re-apply prevCode `ACT-CA`) → DB reverted** → re-apply `ACT-PI`; re-run sweep: conflicts 11→10, opp gone from the list. Reversibility proven.
+
+### Phase 2.5 — retag cockpit (UI front-door for the gated writes) — SHIPPED 2026-06-03
+The writes turned out to be **Supabase-mirror-only** (`ghl_opportunities.project_code` / `subscriptions.project_codes`), i.e. our operating DB — reversible, NOT a live GHL CRM write. So the "save across all" surface is a command-center cockpit, not a script run.
+- [x] **`POST /api/finance/tagging-apply`** — accepts `decisions[{kind:opp|sub,id,code}]`, validates each code against the `projects` registry, captures prev-values, batch-updates grouped by code, returns `applied[]` with `{prevCode,newCode}` so the UI can **Undo**. No new table (before-values live in the sweep snapshot + the apply response). tsc clean.
+- [x] **`/finance/tagging` rebuilt → "Retag & reconcile" cockpit** — coverage bars (make-sense) · conflicts per-row (lazy `ACT-CA` default-accept; specific-vs-specific flagged **"your call"** + default-keep; per-row override dropdown) · auto-fills grouped-by-code, collapsible, pre-checked, uncheck outliers · no-match info · sticky **Apply N** bar + post-apply **Undo last apply**. Verified rendering against live data, 0 console errors.
+- [x] **9/11 conflicts resolved** (1 tracer + 8 clean lazy `ACT-CA` invoice-wins, applied via the live endpoint, re-sweep → 2 remaining). **LEFT for Ben (day-shift judgment):** BG Fit `ACT-BG` vs invoice `ACT-JH`; Homeland "Goods" `ACT-GD` vs invoice `ACT-JH` — both sides have a real code; invoice-wins rule may not hold.
+- [ ] **NOT YET APPLIED:** the 204 opp + 29 sub auto-fills (NULL→code, pre-selected in the cockpit). Ben drives these with one Apply click — his go, his clicks.
 
 ### Phase 3 — gated per-area writers (day-shift, Tier 2/3, explicit go each)
-- [ ] **T5:** GHL opps gated writer — auto-apply high-confidence resolutions (the 64%→90%+ fill), low → review queue. Tracer batch of 1 → verify → batch.
-- [ ] **T6:** Subscriptions gated writer (49%→high), same pattern.
+- [x] **T5/T6 superseded by the cockpit** — opp + sub writers are the `/api/finance/tagging-apply` endpoint, driven from the cockpit. (Script-based bulk writer still available if AFK volume ever needs it.)
 - [ ] **T7:** Reconciliation writer — apply approved hard-link conflict fixes from the worklist (e.g. invoice→opp propagation). Xero backfill stays on the existing `apply-xero-tracking-backfill.mjs` harness.
 - [ ] **T8:** Rebuild `opportunities_unified` as a projection so it reflects the corrected bases.
 
@@ -65,7 +71,9 @@ pipeline→ACT-CA as review-only; always prefer a linked-invoice code.
 | GHL opps 64% project_code / 58% pile; subs 49%; Xero FY26 ~100%; $3.7M pre-FY26 untagged | ✅ | coverage SQL across all areas | 2026-06-03 |
 | Xero Project Tracking is the durable money SoR (sync-down + gated backfill up) | ✅ | read `sync-xero-to-supabase.mjs::detectProjectFromTracking` + `backfill-xero-tracking.mjs` | 2026-06-03 |
 | A Xero-only review surface already exists (`tagger-v2` + `tagger-queue`, with confidence/suggestedProject) | ✅ | read the route + page | 2026-06-03 |
-| Resolver precedence produces correct codes on a tracer opp | pending | T4 | — |
+| Resolver precedence produces correct codes on a tracer opp | ✅ | T4: On Country Photo Studio ACT-CA→ACT-PI via live endpoint; invoice INV-0262=PICC; apply+undo+reapply; sweep 11→10 | 2026-06-03 |
+| Apply endpoint writes only our Supabase mirror (reversible), validates codes vs registry | ✅ | route reads `projects` registry, rejects unknown codes; updates `ghl_opportunities`/`subscriptions` only; returns prevCode for undo | 2026-06-03 |
+| 8 clean lazy ACT-CA conflicts resolved, 2 specific-vs-specific left for human | ✅ | batch apply via endpoint, re-sweep → 2 conflicts (BG Fit, Homeland Goods) | 2026-06-03 |
 
 ## Provenance
 

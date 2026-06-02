@@ -12,21 +12,12 @@ _Read-only. Worklist for the gated writers (Phase 3). No external writes perform
 | ghl_opportunities | 490 | 769 | 64% |
 | subscriptions | 33 | 68 | 49% |
 
-## Cross-area conflicts (opp ↔ linked invoice): 11
+## Cross-area conflicts (opp ↔ linked invoice): 2
 
 | Opp code | Invoice code | Proposed | Opportunity |
 |---|---|---|---|
-| ACT-CA | ACT-PI | **ACT-PI** | On Country Photo Studio |
 | ACT-BG | ACT-JH | **ACT-JH** | BG Fit - Qld gives |
-| ACT-CA | ACT-GD | **ACT-GD** | Weave Beds - Utopia Homelands |
-| ACT-CA | ACT-PI | **ACT-PI** | Elders Trip Story |
-| ACT-CA | ACT-GD | **ACT-GD** | First Greate Bed and workshop |
-| ACT-CA | ACT-PI | **ACT-PI** | Automated Annual Report |
-| ACT-CA | ACT-PI | **ACT-PI** | Station revive |
-| ACT-CA | ACT-OO | **ACT-OO** | Love's Creek Station - Build #1 |
 | ACT-GD | ACT-JH | **ACT-JH** | Homeland School Company — Goods. Indestructible Wa |
-| ACT-CA | ACT-GD | **ACT-GD** | Central Australian Pilot |
-| ACT-CA | ACT-PI | **ACT-PI** | Flood Stories |
 
 ## Fill preview (untagged → what the resolver would assign)
 
