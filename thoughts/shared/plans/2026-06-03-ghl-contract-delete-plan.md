@@ -21,8 +21,8 @@ A flat/stale tag is safe to delete only when **both** are true:
 ---
 
 ## WAVE 0 — pure junk · NO gate · runnable NOW
-Provably inert; nothing depends on them. `gone-from-ghl*` (~328 contacts), `test-submission`, `codex-smoke-test`, `webhook-test`, `test`, `test-delete-me`, `context:*`, `route: /`, `auto-triage`, `*-review-2026-*`, `needs-name-review`, `duplicate-review`, `migration-review`, `ai-flagged`, `no email`, `auto-created-from-xero`.
-**Gate:** none (eyeball the dry-run). **Run:** `node scripts/delete-junk-ghl-tags.mjs` → review → `--apply`. **This is the one we can do immediately.**
+**CORRECTED against LIVE GHL (2026-06-03 dry-run): the live tag library (398 defs) has only ONE junk tag — `context: footer newsletter signup`.** The `gone-from-ghl*` / `test-submission` / `codex-smoke-test` "junk" I first listed came from the **stale Supabase mirror** (deleted-contact rows), not live tag definitions — so there is nothing bulk to delete here. Wave 0 is a non-event.
+**Gate:** none. **Run:** `node scripts/delete-junk-ghl-tags.mjs` (dry-run) → `--apply` deletes the 1 tag. Negligible — the real cleanup is Wave 2.
 
 ## WAVE 2 — stale canonical (from the prior bad run) · near-ready
 Replacements verified in place, and **nothing re-emits these** (already fixed in code), so the only gate is a quick UI check.
