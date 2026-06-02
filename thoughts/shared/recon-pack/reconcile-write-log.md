@@ -166,3 +166,4 @@ Every API write to live Xero from the reconcile-prep engine, in order. Each dele
 | 2026-06-02T04:08:36.548Z | VOID_BILL | Bitwarden | $17.11 | bill 575d502c-64ec-4d32-99ab-dbde6a9a1cd5 | keep spend-money faa2b204-b34d-4a0e-9239-ee8a1a26e3cf (ACT-DO — Designing for Obsolescence) | OK |
 | 2026-06-02T04:08:41.570Z | VOID_BILL | X Global LLC | $15 | bill e709435a-98e6-4707-b6be-a247d764080d | keep spend-money ef6cd9a2-567f-41cb-990b-40677c02c684 (A Curious Tractor/ACT-IN — ACT Infrastructure) | OK |
 | 2026-06-02T04:09:26.619Z | VOID_BILL | Sunshine Coast Council | $44.9 | bill 747a1d9c-c979-4c23-8095-f264f5e9e650 | keep spend-money 1ddf1a0c-4bd0-4b61-9867-acbd3ebd657b (A Curious Tractor/ACT-PI — PICC) | OK |
+| 2026-06-02T04:12:16.035Z | VOID_BILL | Dialpad | $56 | bill e0662ad5-6443-43eb-b676-942333fcb2e2 | keep spend-money 8372c937-5914-40e8-81a0-ccaae401e8dc | OK (voided; auto-log missed due to 429 on verify, confirmed VOIDED live) |
