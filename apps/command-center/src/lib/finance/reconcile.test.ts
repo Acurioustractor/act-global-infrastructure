@@ -306,6 +306,20 @@ test('buildBankRulePack: recurring CREATE vendor → one rule, $ summed; one-off
   assert.notEqual(matched?.ruleCovered, true)
 })
 
+test('buildBankRulePack: payment-rail text (INTERNET PAYMENT, GOPAYID) never becomes a rule', () => {
+  // These are bank-generic / payment-rail lines, not vendors. A rule on "INTERNET" would
+  // misfire across unrelated lines — it must produce NO rule (the lines stay manual).
+  const railLines: CardLine[] = [
+    { id: 'R1', date: '2025-10-01', vendor: 'INTERNET PAYMENT', particulars: 'INTERNET PAYMENT', amount: 500, status: 'unreconciled', projectCode: null, bankAccount: 'NAB Visa ACT #8815' },
+    { id: 'R2', date: '2025-10-03', vendor: 'INTERNET PAYMENT', particulars: 'INTERNET PAYMENT', amount: 600, status: 'unreconciled', projectCode: null, bankAccount: 'NAB Visa ACT #8815' },
+    { id: 'R3', date: '2025-10-05', vendor: 'GOPAYID 123', amount: 1.5, status: 'unreconciled', projectCode: null, bankAccount: 'NAB Visa ACT #8815' },
+    { id: 'R4', date: '2025-10-06', vendor: 'GOPAYID 456', amount: 2.5, status: 'unreconciled', projectCode: null, bankAccount: 'NAB Visa ACT #8815' },
+  ]
+  const pack = buildBankRulePack(railLines.map((l) => classifyLine(l, emptyCtx)))
+  assert.equal(pack.ruleCount, 0)
+  assert.equal(pack.coveredLineCount, 0)
+})
+
 test('buildReconcileResponse: exposes the bank-rule pack and flags rule-covered lines', () => {
   const res = buildReconcileResponse(ruleLines, emptyCtx, { ...baseFilters, sort: 'date' })
   assert.ok(res.bankRules.ruleCount >= 1)

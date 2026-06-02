@@ -535,11 +535,22 @@ function mostCommon<T>(items: T[]): T | null {
   return best
 }
 
-// The first significant token of a vendor — the text a Xero bank rule matches "contains" on,
-// and the grouping key so "KENNARDS HIRE SUNSHINE" + "KENNARDS HIRE PTY" share one rule.
+// Payment-rail / bank-generic tokens — never a vendor identity. A rule on "INTERNET" or
+// "GOPAYID" would catch unrelated lines and misfire silently (the Garmin→Shipstation class).
+// We skip them as rule keys; lines whose only token is one of these fall to manual coding.
+const RULE_KEY_DENYLIST = new Set([
+  'INTERNET', 'PAYMENT', 'TRANSFER', 'GOPAYID', 'PAYID', 'BPAY', 'OSKO', 'EFTPOS',
+  'WITHDRAWAL', 'DEPOSIT', 'DIRECT', 'DEBIT', 'CREDIT', 'REVERSAL', 'REFUND', 'FEE',
+  'WWW', 'HTTP',
+])
+
+// The first vendor-like token — the text a Xero bank rule matches "contains" on, and the
+// grouping key so "KENNARDS HIRE SUNSHINE" + "KENNARDS HIRE PTY" share one rule. Skips
+// payment-rail words so "DIRECT DEBIT TELSTRA" keys on TELSTRA, and "INTERNET PAYMENT"
+// (no real vendor) keys on nothing → no rule.
 function vendorRuleKey(vendor: string): string | null {
   for (const t of normalizeVendor(vendor).split(' ')) {
-    if (t.length >= 3 && !VENDOR_STOPWORDS.has(t)) return t
+    if (t.length >= 3 && !VENDOR_STOPWORDS.has(t) && !RULE_KEY_DENYLIST.has(t)) return t
   }
   return null
 }
@@ -602,7 +613,9 @@ export function buildBankRulePack(results: ReconcileLineResult[]): BankRulePack 
     coveredValue = round2(coveredValue + totalValue)
   }
 
-  rules.sort((a, b) => b.totalValue - a.totalValue || b.lineCount - a.lineCount)
+  // Rank by clicks eliminated (lines collapsed), then $ — the goal is "fewest matches left",
+  // so a 10-line rule beats a 2-line rule even if the 2-liner is higher value.
+  rules.sort((a, b) => b.lineCount - a.lineCount || b.totalValue - a.totalValue)
 
   return {
     rules,

@@ -214,12 +214,45 @@ function ruleSpec(r: BankRule): string {
 // "Do this first" — the matching-killer. Each rule, set once in Xero's UI, makes its
 // vendor's lines arrive pre-filled so Ben just clicks OK. No bank-rules API, so it's
 // copy-paste; review tax/project before saving (rules fire silently).
+function RuleRow({ r }: { r: BankRule }) {
+  return (
+    <div className="flex flex-wrap items-center gap-x-4 gap-y-2 rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3">
+      <span className="rounded-lg bg-cyan-300/10 px-2 py-1 font-mono text-xs text-cyan-100">payee contains “{r.matchText}”</span>
+      <span className="text-sm text-white/85">{r.contactName}</span>
+      <span className={cn('text-xs', r.accountConfident ? 'text-white/65' : 'text-amber-200')}>
+        {r.account}
+        {!r.accountConfident && ' · set once'}
+      </span>
+      {r.defaultProject && (
+        <span className="rounded-md bg-white/[0.06] px-2 py-0.5 font-mono text-xs text-white/75">{r.defaultProject}</span>
+      )}
+      <span className={cn('text-xs', r.uncertainTax ? 'text-amber-200' : 'text-white/45')}>
+        {r.uncertainTax ? '⚠ ' : ''}
+        {r.taxHint}
+      </span>
+      <span className="ml-auto text-xs text-white/45">
+        {r.lineCount} lines · {formatMoney(r.totalValue)}
+      </span>
+      <CopyText text={ruleSpec(r)} label="Copy" />
+    </div>
+  )
+}
+
+const RULE_PRIMARY_MIN_LINES = 3 // 3+ lines = a rule clearly beats hand-coding; 2-line tail is break-even
+
 function BankRulesPanel({ pack }: { pack: BankRulePack }) {
   const [open, setOpen] = useState(true)
+  const [showTail, setShowTail] = useState(false)
   if (!pack || pack.ruleCount === 0) return null
+
+  const primary = pack.rules.filter((r) => r.lineCount >= RULE_PRIMARY_MIN_LINES)
+  const tail = pack.rules.filter((r) => r.lineCount < RULE_PRIMARY_MIN_LINES)
+  const primaryLines = primary.reduce((s, r) => s + r.lineCount, 0)
+
   const copyAll = [
     `# NAB Visa #8815 — bank rules to set in Xero (Accounting → Bank rules)`,
     `# Set once → ${pack.coveredLineCount} lines (${formatMoney(pack.coveredValue)}) become one-click OK Creates, no matching.`,
+    `# Top ${primary.length} rules (3+ lines) cover ${primaryLines} of them — set those first.`,
     `# Review tax + project before saving — rules fire silently.`,
     '',
     ...pack.rules.map(ruleSpec),
@@ -233,10 +266,11 @@ function BankRulesPanel({ pack }: { pack: BankRulePack }) {
           <Zap className="h-5 w-5 text-cyan-200" />
           <div>
             <h2 className="text-base font-semibold text-white">
-              Set these {pack.ruleCount} bank rules once → {pack.coveredLineCount} lines become one-click OK
+              Set {primary.length} high-leverage bank rules → {primaryLines} lines become one-click OK
             </h2>
             <p className="text-xs text-white/55">
-              {formatMoney(pack.coveredValue)} of recurring spend pre-filled in Xero — no matching, no typing.
+              The whole pack of {pack.ruleCount} rules covers {pack.coveredLineCount} lines ({formatMoney(pack.coveredValue)}) —
+              but the top {primary.length} (3+ lines each) kill most of the matching. No typing, no hunting.
             </p>
           </div>
         </button>
@@ -251,33 +285,30 @@ function BankRulesPanel({ pack }: { pack: BankRulePack }) {
             Review tax and project before saving — rules fire silently, so a wrong default bakes in on a fast OK.
           </p>
           <div className="mt-4 space-y-2">
-            {pack.rules.map((r) => (
-              <div
-                key={r.matchText}
-                className="flex flex-wrap items-center gap-x-4 gap-y-2 rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3"
-              >
-                <span className="rounded-lg bg-cyan-300/10 px-2 py-1 font-mono text-xs text-cyan-100">
-                  payee contains “{r.matchText}”
-                </span>
-                <span className="text-sm text-white/85">{r.contactName}</span>
-                <span className={cn('text-xs', r.accountConfident ? 'text-white/65' : 'text-amber-200')}>
-                  {r.account}
-                  {!r.accountConfident && ' · set once'}
-                </span>
-                {r.defaultProject && (
-                  <span className="rounded-md bg-white/[0.06] px-2 py-0.5 font-mono text-xs text-white/75">{r.defaultProject}</span>
-                )}
-                <span className={cn('text-xs', r.uncertainTax ? 'text-amber-200' : 'text-white/45')}>
-                  {r.uncertainTax ? '⚠ ' : ''}
-                  {r.taxHint}
-                </span>
-                <span className="ml-auto text-xs text-white/45">
-                  {r.lineCount} lines · {formatMoney(r.totalValue)}
-                </span>
-                <CopyText text={ruleSpec(r)} label="Copy" />
-              </div>
+            {primary.map((r) => (
+              <RuleRow key={r.matchText} r={r} />
             ))}
           </div>
+
+          {tail.length > 0 && (
+            <div className="mt-3">
+              <button
+                type="button"
+                onClick={() => setShowTail((v) => !v)}
+                className="inline-flex items-center gap-1.5 text-xs text-white/45 transition hover:text-white"
+              >
+                {showTail ? <ChevronDown className="h-3.5 w-3.5" /> : <ChevronRight className="h-3.5 w-3.5" />}
+                {showTail ? 'Hide' : 'Show'} {tail.length} low-volume rules (2 lines each — break-even vs hand-coding in the co-pilot)
+              </button>
+              {showTail && (
+                <div className="mt-2 space-y-2">
+                  {tail.map((r) => (
+                    <RuleRow key={r.matchText} r={r} />
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
         </>
       )}
     </section>
