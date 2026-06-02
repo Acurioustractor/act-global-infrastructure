@@ -11,13 +11,31 @@ import {
   BookOpen,
   TrendingUp,
   Compass,
+  Server,
+  CheckCircle2,
+  XCircle,
+  ExternalLink,
 } from 'lucide-react'
 import type { EcosystemAnalytics } from '@/lib/analytics/ecosystem'
+import type { VercelDeployFeed } from '@/lib/analytics/vercel'
 
 async function fetchAnalytics(): Promise<EcosystemAnalytics> {
   const res = await fetch('/api/analytics/ecosystem')
   if (!res.ok) throw new Error('Failed to load ecosystem analytics')
   return res.json()
+}
+
+async function fetchVercel(): Promise<VercelDeployFeed> {
+  const res = await fetch('/api/analytics/vercel')
+  if (!res.ok) throw new Error('Failed to load Vercel feed')
+  return res.json()
+}
+
+function deployTone(state: string): { dot: string; label: string } {
+  if (state === 'READY') return { dot: 'bg-emerald-400', label: 'text-emerald-300' }
+  if (state === 'ERROR') return { dot: 'bg-red-400', label: 'text-red-300' }
+  if (state === 'BUILDING' || state === 'QUEUED') return { dot: 'bg-amber-400', label: 'text-amber-300' }
+  return { dot: 'bg-slate-500', label: 'text-slate-400' }
 }
 
 const fmt = (n: number) => n.toLocaleString('en-AU')
@@ -53,6 +71,10 @@ export default function AnalyticsPage() {
   const { data, isLoading, isError, refetch, isFetching } = useQuery({
     queryKey: ['ecosystem-analytics'],
     queryFn: fetchAnalytics,
+  })
+  const { data: vercel } = useQuery({
+    queryKey: ['ecosystem-vercel'],
+    queryFn: fetchVercel,
   })
 
   return (
@@ -105,6 +127,50 @@ export default function AnalyticsPage() {
             <StatCard icon={MailX} label="Unsubscribed" value={fmt(data.consent.unsubscribed)} tone="text-amber-400" />
             <StatCard icon={TrendingUp} label="Open opportunities" value={fmt(data.totalOpenOpps)} tone="text-sky-400" />
           </section>
+
+          {/* Site deployments (Vercel) */}
+          {vercel && (
+            <section>
+              <h2 className="mb-3 flex items-center gap-2 text-lg font-medium">
+                <Server className="h-5 w-5 text-sky-400" /> Site deployments
+              </h2>
+              {!vercel.configured ? (
+                <div className="rounded-lg border border-amber-500/30 bg-amber-500/10 p-3 text-sm text-amber-200">
+                  {vercel.note || 'Vercel feed not configured.'}
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                  {vercel.sites.map((s) => {
+                    const tone = deployTone(s.state)
+                    return (
+                      <div key={s.project} className="rounded-xl border border-white/10 bg-white/5 p-3">
+                        <div className="flex items-center justify-between">
+                          <a href={s.url} target="_blank" rel="noreferrer" className="flex items-center gap-1.5 font-medium text-slate-200 hover:underline">
+                            {s.label}
+                            <ExternalLink className="h-3 w-3 text-slate-500" />
+                          </a>
+                          <span className={`flex items-center gap-1.5 text-xs ${tone.label}`}>
+                            <span className={`h-2 w-2 rounded-full ${tone.dot}`} />
+                            {s.state === 'READY' ? <CheckCircle2 className="h-3.5 w-3.5" /> : s.state === 'ERROR' ? <XCircle className="h-3.5 w-3.5" /> : null}
+                            {s.state}
+                          </span>
+                        </div>
+                        <div className="mt-1 truncate text-xs text-slate-500" title={s.commitMessage || ''}>
+                          {s.commitRef ? `${s.commitRef} · ` : ''}
+                          {s.createdAt ? new Date(s.createdAt).toLocaleString('en-AU') : '—'}
+                        </div>
+                        {s.state === 'ERROR' && s.inspectorUrl && (
+                          <a href={s.inspectorUrl} target="_blank" rel="noreferrer" className="mt-1 inline-block text-xs text-red-300 hover:underline">
+                            View build error →
+                          </a>
+                        )}
+                      </div>
+                    )
+                  })}
+                </div>
+              )}
+            </section>
+          )}
 
           {/* Belonging funnels */}
           <section>

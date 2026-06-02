@@ -60,21 +60,20 @@ Goal: a command-center `/analytics` surface that reads the existing GHL mirror a
 shows the belonging funnel across projects/sites, plus a Vercel deployment+traffic
 feed. No dependency on act.place's blocked deploy.
 
-- [ ] **Schema-first**: confirm actual columns of `ghl_contacts`, `ghl_opportunities`,
-      `ghl_pipelines` before writing any query (never assume column names).
-- [ ] **Data layer** `lib/analytics/ecosystem.ts`: funnel by pipeline/stage, by
-      `project:` tag, contacts by source/`comms:`, consent-state counts, time-in-stage
-      (from `ghl_opportunities` stage timestamps / `ghl_sync_log`). Paginate past the
-      1000-row cap (memory trap) or aggregate in SQL.
-- [ ] **Hub page** `app/analytics/page.tsx`: per-project belonging funnels (5 rungs),
-      source/UTM breakdown, consent-state panel, site cards. Belonging metrics, NOT
-      sales conversion (redefine "conversion" per §5).
-- [ ] **Vercel feed**: deployments + domains + Web-Vitals per project. Via Vercel MCP
-      (pending Ben OAuth) or CLI/REST token. Surface deploy health + traffic on the hub.
+- [x] **Schema-first**: confirmed columns of `ghl_contacts` / `ghl_opportunities` /
+      `ghl_pipelines` (instance `tednluwflfhxyucgwigh`). 2026-06-02.
+- [x] **Data layer** `lib/analytics/ecosystem.ts`: funnel by pipeline→rung, consent
+      state, source-of-arrival, per-project segmentation — all via `execSql` (non-capped).
+- [x] **Hub page** `app/analytics/page.tsx` + `app/api/analytics/ecosystem/route.ts`
+      + nav. Belonging, not sales; storytellers flagged separate (OCAP). (`200e6a6`)
+- [x] **Vercel feed** `lib/analytics/vercel.ts` + `app/api/analytics/vercel/route.ts`
+      + hub panel: latest production deploy state per ACT site (7 project IDs verified).
+      BUILT + tsc-clean; **goes live when a team-scoped `VERCEL_ANALYTICS_TOKEN` is set**
+      (existing VERCEL_TOKEN/ACCESS_TOKEN are project-scoped → 403 on team reads).
 - [ ] **Verify GHL-side outbound webhook config** (Tier 2 — Ben): confirm Contact
       Created/Updated + **Pipeline Stage Changed** actually POST to `/api/webhooks/ghl`.
       Handler already supports them; batch sync covers gaps. Fill only if missing.
-- [ ] tsc clean → build → commit on branch. Deploy = Tier 3 (Ben's verb).
+- [x] tsc clean → committed on branch `wip/opus-4-8-prompting-2026-05-31`. Deploy = Tier 3 (Ben's verb).
 
 ## Phase 2 — Breadth quick-wins (all 7 sites)
 Vercel Web Analytics + Speed Insights + SEO baseline (metadata/OG/sitemap/robots) per
@@ -99,7 +98,14 @@ UTM+`lead_site` capture on forms + funnel goal tracking. Ships with the held
 - Schema-first: verify columns before every query (the 1000-row cap + column traps).
 
 ## Verification log
-- (to fill as Phase 1 lands)
+- 2026-06-02 — Hub SQL run against live DB (`tednluwflfhxyucgwigh`): Harvest Journey
+  open = Curious 58 / Member 39 / Connected 3; Grants 225; Goods Demand 133; consent =
+  117 sendable of 2,500 contacts; 307 storytellers held (OCAP). Data path proven.
+- 2026-06-02 — act.place deploy state verified via Vercel MCP: latest 2 production
+  deploys = ERROR (commit a697b5c, PR #50); live build = READY 270d3b6 (PR #49, consent
+  stamp). Confirms the intake-webhook code never deployed → consistent with the
+  mis-seat audit's 0 result. The READY 270d3b6 build is a rollback candidate.
+- 2026-06-02 — command-center tsc --noEmit clean across all new files (×2 runs).
 
 ## Changelog
 - 2026-06-02 — Plan created; recon established the mirror already exists; Phase 1 scoped to hub + Vercel feed.
