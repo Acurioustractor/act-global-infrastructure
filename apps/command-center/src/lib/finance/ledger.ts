@@ -1,4 +1,6 @@
 import { supabase } from '@/lib/supabase'
+import { aggregateProjectBudgets } from './budgets'
+import { getFYDates } from './dates'
 
 /**
  * THE ONE LEDGER — single source of truth for ACT money.
@@ -305,6 +307,73 @@ export function computeRunwayMonths(cash: number, monthlyBurn: number): number |
   return Math.round((cash / monthlyBurn) * 10) / 10
 }
 
+// ── Per-project P&L (weekly report §4, slice 2) ────────────────────────────────
+const round1 = (n: number): number => Math.round(n * 10) / 10
+
+/** (actual − budget) / budget %, 1dp. null when budget <= 0 (no budget → variance not meaningful). */
+export function budgetVariancePct(actual: number, budget: number): number | null {
+  if (budget <= 0) return null
+  return round1(((actual - budget) / budget) * 100)
+}
+
+/** actual / budget %, 1dp. null when budget <= 0. */
+export function pctConsumed(actual: number, budget: number): number | null {
+  if (budget <= 0) return null
+  return round1((actual / budget) * 100)
+}
+
+export interface ProjectPLRow {
+  code: string
+  name: string | null
+  income: number
+  spend: number
+  net: number // income − spend; < 0 = ACT-subsidised
+  budget: number // annual expense budget
+  variancePct: number | null // spend vs budget
+  pctConsumed: number | null
+  funded: boolean // income >= spend (self-sustaining), else ACT covers the gap
+}
+
+/**
+ * Join monthly financial rows + aggregated budgets + names into per-project P&L rows.
+ * Pure (unit-tested): sums revenue/expenses per code, classifies funded, computes budget
+ * variance/consumed with divide-by-zero guards. Sorted by spend desc.
+ */
+export function buildProjectPLRows(
+  monthly: { project_code: string | null; revenue: number; expenses: number }[],
+  budgets: { project_code: string; annual_budget: number }[],
+  names: Map<string, string | null>,
+): ProjectPLRow[] {
+  const byCode = new Map<string, { income: number; spend: number }>()
+  for (const r of monthly) {
+    const code = r.project_code
+    if (!code) continue
+    const acc = byCode.get(code) || { income: 0, spend: 0 }
+    acc.income += Number(r.revenue || 0)
+    acc.spend += Number(r.expenses || 0)
+    byCode.set(code, acc)
+  }
+  const budgetByCode = new Map(budgets.map((b) => [b.project_code, b.annual_budget]))
+  const rows: ProjectPLRow[] = [...byCode.entries()].map(([code, v]) => {
+    const income = Math.round(v.income)
+    const spend = Math.round(v.spend)
+    const budget = budgetByCode.get(code) || 0
+    return {
+      code,
+      name: names.get(code) ?? null,
+      income,
+      spend,
+      net: income - spend,
+      budget,
+      variancePct: budgetVariancePct(spend, budget),
+      pctConsumed: pctConsumed(spend, budget),
+      funded: income >= spend,
+    }
+  })
+  rows.sort((a, b) => b.spend - a.spend)
+  return rows
+}
+
 export interface MonthlyPoint {
   month: string
   revenue: number
@@ -330,6 +399,32 @@ export async function getMonthlySeries({ fyStart, fyEnd }: { fyStart: string; fy
     .sort(([a], [b]) => a.localeCompare(b))
     .map(([month, v]) => ({ month, revenue: Math.round(v.revenue), expenses: Math.round(v.expenses), net: Math.round(v.revenue - v.expenses) }))
   return { points, ok: true }
+}
+
+/**
+ * Per-project P&L for the FY: income/spend/net + budget variance + funded classification, all projects.
+ * Reuses the blessed budget pivot (aggregateProjectBudgets) and the FY label convention ('FY26') from
+ * the existing /finance/projects route, so the weekly report agrees with the per-project pages.
+ * Financials paginate (fetchAllRows) — ~75 projects × 12 months can approach the 1000-row cap.
+ */
+export async function getProjectPL({ fyStart, fyEnd, now = new Date() }: { fyStart: string; fyEnd?: string; now?: Date }): Promise<{ rows: ProjectPLRow[]; ok: boolean }> {
+  const fyYear = `FY${getFYDates(now).fyEnd.slice(2, 4)}` // '2026-06-30' → 'FY26'
+  const finPage = (from: number, to: number) => {
+    let q = supabase.from('project_monthly_financials').select('project_code, revenue, expenses').gte('month', fyStart)
+    if (fyEnd) q = q.lte('month', fyEnd)
+    return q.range(from, to)
+  }
+  const [finR, budgetsRes, projectsRes] = await Promise.all([
+    fetchAllRows<{ project_code: string | null; revenue: number | string | null; expenses: number | string | null }>(finPage),
+    supabase.from('project_budgets').select('project_code, budget_type, budget_amount').eq('fy_year', fyYear).limit(500),
+    supabase.from('projects').select('code, name').limit(500),
+  ])
+  const monthly = finR.rows.map((r) => ({ project_code: r.project_code, revenue: Number(r.revenue || 0), expenses: Number(r.expenses || 0) }))
+  const budgets = aggregateProjectBudgets(budgetsRes.data || [], fyYear, now).map((b) => ({ project_code: b.project_code, annual_budget: b.annual_budget }))
+  const names = new Map<string, string | null>(
+    ((projectsRes.data || []) as { code: string; name: string | null }[]).map((p) => [p.code, p.name]),
+  )
+  return { rows: buildProjectPLRows(monthly, budgets, names), ok: finR.ok && !budgetsRes.error && !projectsRes.error }
 }
 
 export interface WeeklySnapshot {

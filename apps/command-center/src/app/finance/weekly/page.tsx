@@ -10,6 +10,7 @@ import {
   Clock,
   Flame,
   Gauge,
+  Layers,
   Loader2,
   TrendingDown,
   TrendingUp,
@@ -49,10 +50,23 @@ interface MonthlyPoint {
   expenses: number
   net: number
 }
+interface ProjectPLRow {
+  code: string
+  name: string | null
+  income: number
+  spend: number
+  net: number
+  budget: number
+  variancePct: number | null
+  pctConsumed: number | null
+  funded: boolean
+}
 interface WeeklyResponse {
   snapshot: WeeklySnapshot
   series: MonthlyPoint[]
   seriesOk: boolean
+  projects: ProjectPLRow[]
+  projectsOk: boolean
   fyStart: string
   fyEnd: string
 }
@@ -103,6 +117,86 @@ function StatCard({
       <p className={cn('mt-2 text-3xl font-semibold tracking-tight', toneCls)}>{value}</p>
       {detail && <p className="mt-2 text-xs leading-5 text-white/50">{detail}</p>}
     </div>
+  )
+}
+
+function ProjectPLSection({ rows, ok }: { rows: ProjectPLRow[]; ok: boolean }) {
+  const subsidised = rows.filter((r) => !r.funded)
+  const selfSustaining = rows.length - subsidised.length
+  const subsidyTotal = rows.reduce((s, r) => s + (r.net < 0 ? -r.net : 0), 0)
+
+  return (
+    <section className="mt-6 rounded-3xl border border-white/10 bg-white/[0.03] p-5">
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <h2 className="inline-flex items-center gap-2 text-sm font-semibold text-white/80">
+          <Layers className="h-4 w-4 text-cyan-200" /> Per-project P&amp;L (this FY)
+        </h2>
+        <p className="text-xs text-white/50">
+          <span className="text-emerald-200">{selfSustaining} self-sustaining</span> ·{' '}
+          <span className="text-amber-200">{subsidised.length} ACT-subsidised</span> ·{' '}
+          {formatMoney(subsidyTotal)} net subsidy
+        </p>
+      </div>
+      {!ok && <p className="mt-2 text-xs text-amber-200/80">⚠ Some project queries did not complete — list may be partial.</p>}
+
+      <div className="mt-4 overflow-x-auto">
+        <table className="w-full min-w-[640px] text-sm">
+          <thead>
+            <tr className="text-left text-[11px] uppercase tracking-[0.18em] text-white/40">
+              <th className="pb-2 pr-3 font-medium">Project</th>
+              <th className="pb-2 px-3 text-right font-medium">Income</th>
+              <th className="pb-2 px-3 text-right font-medium">Spend</th>
+              <th className="pb-2 px-3 text-right font-medium">Net</th>
+              <th className="pb-2 px-3 text-right font-medium">% of budget</th>
+              <th className="pb-2 pl-3 text-right font-medium">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((r) => {
+              const overBudget = r.pctConsumed != null && r.pctConsumed > 100
+              const nearBudget = r.pctConsumed != null && r.pctConsumed > 90 && !overBudget
+              return (
+                <tr key={r.code} className="border-t border-white/[0.06]">
+                  <td className="py-2 pr-3">
+                    <span className="font-mono text-xs text-white/90">{r.code}</span>
+                    {r.name && <span className="ml-2 text-white/50">{r.name}</span>}
+                  </td>
+                  <td className="px-3 py-2 text-right tabular-nums text-white/75">{formatMoney(r.income)}</td>
+                  <td className="px-3 py-2 text-right tabular-nums text-white/75">{formatMoney(r.spend)}</td>
+                  <td className={cn('px-3 py-2 text-right tabular-nums', r.net < 0 ? 'text-red-200' : 'text-emerald-200')}>
+                    {formatMoney(r.net)}
+                  </td>
+                  <td
+                    className={cn(
+                      'px-3 py-2 text-right tabular-nums',
+                      r.pctConsumed == null ? 'text-white/30' : overBudget ? 'text-red-300' : nearBudget ? 'text-amber-200' : 'text-white/60',
+                    )}
+                  >
+                    {r.pctConsumed == null ? '—' : `${r.pctConsumed}%`}
+                    {overBudget && ' ⚠'}
+                  </td>
+                  <td className="py-2 pl-3 text-right">
+                    <span
+                      className={cn(
+                        'inline-flex rounded-full border px-2 py-0.5 text-[11px]',
+                        r.funded ? 'border-emerald-400/30 bg-emerald-400/10 text-emerald-100' : 'border-amber-400/30 bg-amber-400/10 text-amber-100',
+                      )}
+                    >
+                      {r.funded ? 'self-sustaining' : 'ACT-subsidised'}
+                    </span>
+                  </td>
+                </tr>
+              )
+            })}
+          </tbody>
+        </table>
+        {rows.length === 0 && <p className="py-6 text-center text-sm text-white/40">No project data.</p>}
+      </div>
+      <p className="mt-3 text-[11px] text-white/35">
+        Income/spend are accrual (project_monthly_financials). % of budget = spend ÷ annual expense budget; ⚠ = over budget.
+        &ldquo;ACT-subsidised&rdquo; = spend exceeds project income (the org covers the gap).
+      </p>
+    </section>
   )
 }
 
@@ -247,8 +341,10 @@ export default function WeeklyReportPage() {
               </div>
             </section>
 
+            <ProjectPLSection rows={data?.projects || []} ok={data?.projectsOk ?? true} />
+
             <p className="mt-6 text-xs leading-6 text-white/40">
-              Slice 1 of the weekly report (issue #140). Next sections: per-project P&amp;L, people costs, GST/tax + R&amp;D,
+              Slices 1–2 of the weekly report (issue #140). Next sections: people costs, GST/tax + R&amp;D,
               committed/&ldquo;betting on&rdquo;, opportunities &amp; pile mix. Receipted % wires in with the GST/tax section.
               Read-only — the reconcile click and any coding stay in Xero.
             </p>

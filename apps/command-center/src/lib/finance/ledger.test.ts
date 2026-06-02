@@ -1,9 +1,12 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 import {
+  budgetVariancePct,
+  buildProjectPLRows,
   computeRunwayMonths,
   monthStartISO,
   monthlyBurnFromTrailing,
+  pctConsumed,
   trailingMonthsWindow,
   weekStartISO,
 } from './ledger'
@@ -48,4 +51,61 @@ test('computeRunwayMonths: cash / monthly burn (1dp); null when burn <= 0', () =
   assert.equal(computeRunwayMonths(0, 100000), 0)
   assert.equal(computeRunwayMonths(250000, 0), null) // no burn → runway not meaningful, never Infinity
   assert.equal(computeRunwayMonths(250000, -10), null) // net-positive month → null, not negative runway
+})
+
+// ---------------------------------------------------------------------------
+// Per-project P&L (slice 2). Budget variance / % consumed both divide by budget,
+// so a zero/absent budget must yield null (shown as "—"), never NaN/Infinity. The
+// join sums monthly rows per project and classifies funded (income covers spend).
+// ---------------------------------------------------------------------------
+test('budgetVariancePct: (actual − budget)/budget %, null when no budget', () => {
+  assert.equal(budgetVariancePct(120000, 100000), 20) // 20% over
+  assert.equal(budgetVariancePct(80000, 100000), -20) // 20% under
+  assert.equal(budgetVariancePct(50000, 0), null) // no budget → null, not Infinity
+})
+
+test('pctConsumed: actual/budget %, null when no budget', () => {
+  assert.equal(pctConsumed(75000, 100000), 75)
+  assert.equal(pctConsumed(50000, 0), null)
+})
+
+test('buildProjectPLRows: sums monthly rows per project, joins budget, classifies funded; sorted by spend', () => {
+  const monthly = [
+    { project_code: 'ACT-GD', revenue: 30000, expenses: 50000 },
+    { project_code: 'ACT-GD', revenue: 20000, expenses: 30000 }, // ACT-GD: income 50k, spend 80k, net −30k
+    { project_code: 'ACT-HV', revenue: 100000, expenses: 60000 }, // ACT-HV: income 100k, spend 60k, net +40k
+    { project_code: null, revenue: 999, expenses: 999 }, // null code → skipped
+  ]
+  const budgets = [
+    { project_code: 'ACT-GD', annual_budget: 100000 },
+    { project_code: 'ACT-HV', annual_budget: 0 }, // no budget → variance/consumed null
+  ]
+  const names = new Map<string, string | null>([
+    ['ACT-GD', 'Goods'],
+    ['ACT-HV', 'Harvest'],
+  ])
+  const rows = buildProjectPLRows(monthly, budgets, names)
+
+  assert.equal(rows.length, 2)
+  // sorted by spend desc → ACT-GD (80k) first
+  assert.deepEqual(
+    rows.map((r) => r.code),
+    ['ACT-GD', 'ACT-HV'],
+  )
+
+  const gd = rows[0]
+  assert.equal(gd.name, 'Goods')
+  assert.equal(gd.income, 50000)
+  assert.equal(gd.spend, 80000)
+  assert.equal(gd.net, -30000)
+  assert.equal(gd.budget, 100000)
+  assert.equal(gd.variancePct, -20) // 80k vs 100k budget = 20% under
+  assert.equal(gd.pctConsumed, 80)
+  assert.equal(gd.funded, false) // income 50k < spend 80k → ACT-subsidised
+
+  const hv = rows[1]
+  assert.equal(hv.net, 40000)
+  assert.equal(hv.variancePct, null) // no budget
+  assert.equal(hv.pctConsumed, null)
+  assert.equal(hv.funded, true) // income 100k >= spend 60k → self-sustaining
 })
