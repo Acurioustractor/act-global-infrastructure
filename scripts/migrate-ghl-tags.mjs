@@ -76,8 +76,10 @@ const INTEREST = { 'interest-membership':'membership','interest-community':'comm
 // EARNED via action: gives, not back-derived from heat. So heat tags are NOT migrated here.
 // goods-hot/warm/etc. fall through to the goods-prefix rule below -> project:act-gd only.
 
-const COMMS = { 'goods-newsletter':'goods-newsletter','harvest-newsletter':'harvest-newsletter','newsletter':'newsletter',
-  'goods-nurture':'nurture','audience-brand':'newsletter' };
+// bare `newsletter` + `audience-brand` are the legacy ACT-wide newsletter opt-in -> comms:act-newsletter
+// (Ben decision 2026-06-03; matches spec lines 116/152). comms:newsletter is non-canonical, retires in CONTRACT.
+const COMMS = { 'goods-newsletter':'goods-newsletter','harvest-newsletter':'harvest-newsletter','newsletter':'act-newsletter',
+  'goods-nurture':'nurture','audience-brand':'act-newsletter' };
 
 const SOURCE = { 'harvest-website':'website','website-signup':'website','website-form':'website','contact-form':'contact-form',
   'footer signup':'footer','goods-src-footer':'footer','linkedin-nic':'linkedin','linkedin-gmail_discovery':'linkedin',
