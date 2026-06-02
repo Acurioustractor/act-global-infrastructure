@@ -13,6 +13,7 @@ import {
   ShieldAlert,
   Bot,
   Sparkles,
+  CalendarRange,
 } from 'lucide-react'
 import { TodayActionsHero } from '@/components/finance/TodayActionsHero'
 
@@ -62,6 +63,13 @@ const cards: Array<{
     description: 'Founder pay · receipts · 7 anchor rails. Open here first.',
     icon: DollarSign,
     accent: 'from-emerald-500/10 to-emerald-500/5 border-emerald-500/30',
+  },
+  {
+    title: 'Weekly report',
+    href: '/finance/weekly',
+    description: 'Whole-org snapshot: cash · runway · burn · income vs spend. Business strength at a glance.',
+    icon: CalendarRange,
+    accent: 'from-cyan-500/10 to-cyan-500/5 border-cyan-500/30',
   },
   {
     title: 'Money alignment',
