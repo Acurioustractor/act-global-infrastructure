@@ -26,6 +26,10 @@ for (const [i, p] of wave.entries()) {
     const out = execSync(`node scripts/reconcile-delete-one.mjs --id ${p.txnId} --bill ${p.billId} --apply 2>&1`, { encoding: 'utf8' });
     if (out.includes('✅ DONE')) { ok++; console.log(`  ✅ ${tag}`); }
     else { aborted++; console.log(`  🛑 ${tag} — ${(out.match(/ABORT.*/) || ['gate failed'])[0]}`); }
-  } catch (e) { failed++; console.log(`  ❌ ${tag} — ${(e.stdout || e.message || '').toString().split('\n').filter(Boolean).pop()}`); }
+  } catch (e) {
+    const so = (e.stdout || e.message || '').toString();
+    if (so.includes('ABORT (no write)')) { aborted++; console.log(`  🛑 ${tag} — ${(so.match(/ABORT \(no write\):.*/) || ['safe abort'])[0]}`); }
+    else { failed++; console.log(`  ❌ ${tag} — ${so.split('\n').filter(Boolean).pop()}`); }
+  }
 }
 if (APPLY) console.log(`\nWave done: ${ok} deleted · ${aborted} aborted (safe) · ${failed} failed`);
