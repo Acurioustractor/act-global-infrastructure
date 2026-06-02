@@ -53,8 +53,10 @@ Per the build-spec "WORKFLOW BUILD SPEC". Each project's Journey board + the lad
 ## Reconciliation of the live drift (must happen before new workflows)
 
 1. **This session's Harvest Phase B branch** (`wip/harvest-launch-fixes-2026-06-02`, repo: The Harvest Website): re-point to canonical —
-   - ADD `project:act-hv` to every form (the missing router tag — biggest miss).
-   - DROP `role:member` and `role:supplier` (not in vocabulary). Membership = `tier:member`; shop interest = `interest:markets` (per spec retire-map).
+   - ADD `project:act-hv` to every form (the missing router tag — biggest miss). Apply it at the GHL-client chokepoint so it can never be forgotten on a handler again.
+   - DROP `role:member` (membership is a `tier:`, not a `role:`).
+   - **KEEP `role:supplier`** — it IS canonical (spec line 106); flagging it as drift earlier was MY error. A supply-side shop EOI is correctly `role:supplier`.
+   - Shop EOI → `project:act-hv` + `role:supplier` + `interest:markets` (+ keep operational `shop-*` offer tags through the EXPAND phase).
    - Keep the dual-write of flat→namespaced ONLY for the EXPAND phase, then retire per spec.
    - Keep: `tier:member`/`connected`/`curious`, `comms:harvest-newsletter` — these were correct.
 2. **Live seeded `tier:` tags** (82/4/57/0/0 on the Harvest board): treat as a one-time seed; from now rungs move only on real `action:` gives. ⚑ Decide: backfill `action:` evidence for existing Members, or accept the seed and let movement take over.
@@ -82,6 +84,7 @@ Per the build-spec "WORKFLOW BUILD SPEC". Each project's Journey board + the lad
 | 2026-06-02 | `tier:` ladder = the theory of movement; engine = value-exchange; rungs EARNED via `action:`, not seeded | Ben's insight; live board is decorative |
 | 2026-06-02 | One Journey board per project + cross-project `tier:` rollup | ADR ghl-ecosystem-journey-architecture |
 | 2026-06-02 | Adopt the locked 10-namespace tag spec unchanged | Already canonical; do not reopen |
+| 2026-06-02 | **LOCKED to build.** `role:supplier` confirmed canonical (earlier "drift" call was wrong); real drift = `role:member` + missing `project:act-hv`. `project:act-hv` applied at the GHL-client chokepoint | Ben: lock + build logically; correctness before building |
 
 ## Verification Log
 

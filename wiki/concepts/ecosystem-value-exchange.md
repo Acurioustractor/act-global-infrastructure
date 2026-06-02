@@ -1,6 +1,6 @@
 ---
 title: Ecosystem Value-Exchange
-status: Draft (in alignment — grill 2026-06-02)
+status: Accepted — locked 2026-06-02 (build phase; ⚑ matrix cells + community lane still being worked out in flight)
 date: 2026-06-02
 summary: The give/get relationship model that sits on top of the locked GHL tag system. For each role, what a contact GIVES ACT and what they GET back — the layer that drives nurture content and the ask. Not a money metric, not a per-contact score.
 relates_to: project-identity-and-tagging-system.md · decisions/ghl-tag-taxonomy.md · consent-as-infrastructure.md · four-lanes.md · act-business-architecture.md
