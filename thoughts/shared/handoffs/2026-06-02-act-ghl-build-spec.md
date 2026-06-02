@@ -102,7 +102,7 @@ Every tag is `namespace:value`. The separator is a **colon** (`:`), never a hyph
 
 | Namespace | Answers | Allowed values (the closed list) |
 |---|---|---|
-| `project:` | which ACT project | `act-core`, `act-gd` (Goods), `act-hv` (Harvest), `act-jh` (JusticeHub), `act-el` (Empathy Ledger), `act-ce`, `act-oo`, `act-bg` |
+| `project:` | which ACT project | `act-core` (Regen Studio + infra), `act-in` (Innovation Studio), `act-el` (Empathy Ledger), `act-jh` (JusticeHub), `act-gd` (Goods), `act-hv` (Harvest), `act-fm` (Farm / Black Cockatoo Valley), `act-pi` (PICC), `act-oo` (Oonchiumpa), `act-ce` (Custodian First Economy), `act-bg` + `act-my` (Mount Isa cluster), `act-cg` (CivicGraph — ⚑ confirm `act-cg` vs the live `act-cn` ×50) |
 | `role:` | what they **are** to us | `funder`, `supporter`, `buyer`, `supplier`, `partner`, `storyteller`, `community`, `community-controlled`, `council`, `health-service`, `land-council`, `media`, `gov`, `vendor`, `elder`, `advisory` |
 | `tier:` | belonging rung (the ladder) | `curious`, `connected`, `member`, `active`, `steward` |
 | `interest:` | what they **want** | `membership`, `events`, `markets`, `workshops`, `garden`, `food`, `volunteer`, `washer`, `container`, `justice-reform`, `venue` |
@@ -112,6 +112,8 @@ Every tag is `namespace:value`. The separator is a **colon** (`:`), never a hyph
 | `consent:` | OCAP / story consent (hard gate) | `full`, `limited`, `needed`, `none` |
 | `priority:` | manual priority flag | `high`, `medium`, `urgent` |
 | `ops:` | system / lifecycle | `needs-review`, `duplicate` *(everything else in this namespace — `gone`, `test` — is delete-on-sight, not durable)* |
+
+**`project:` aligned 2026-06-02** to the [[../concepts/act-business-architecture]] codes: added `act-in`/`act-fm`/`act-pi`/`act-my`/`act-cg`; folded `act-rs → act-core` and `act-fa → act-fm`. Pre-existing manual strays `act-ca`/`act-gl`/`act-mr`/`act-rp`/`act-ra`/`act-cf` (×1 each) await identification — keep-or-clean per contact. CivicGraph's code (`act-cg` recommended vs live `act-cn` ×50) is unconfirmed.
 
 **Retired namespace — do not use:** `temp:` (hot/warm/cold) is **folded into `tier:`**. Engagement heat and belonging rung were two encodings of the same axis; `tier:` wins because the Belonging Model makes it the theory of change and the metric. `audience:*` is also retired — it folds into `role:` (`audience-funder → role:funder`) except `audience-brand → comms:act-newsletter`.
 
