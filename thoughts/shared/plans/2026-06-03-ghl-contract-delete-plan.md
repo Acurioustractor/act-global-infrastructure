@@ -1,8 +1,9 @@
 ---
 title: GHL Phase 3 — CONTRACT delete plan
-status: In progress — Waves 0 ✅ + 1 ✅ + 2 ✅ DONE (2026-06-03); Wave 3 gated on code-flip + deploy
+status: Waves 0/1/2 ✅ + Harvest Wave-3 ✅ DONE (2026-06-03). Code-flip DEPLOYED + live-verified. HELD: Goods/JH/ACT flats (pending those re-points) + bare `newsletter` (edge fns still mint it).
 date: 2026-06-03
-done: "Wave 0: context: footer newsletter signup (1). Wave 2: role:member, interest:shop, temp:* x6 (8 defs/173 inst). Wave 1: goods-stage-prospect/customer/active, goods-tier-aware/engaged/champion/active, goods-signal, engagement:lead (9 defs) — verified pipeline holds opps by stage (Goods Supporter Journey 44 opps), 0 errors. Tag library 398 -> 380. tier:member 57 + interest:markets 63 intact."
+done: "Wave 0: context: footer newsletter signup (1). Wave 2: role:member, interest:shop, temp:* x6 (8). Wave 1: goods-stage/tier-*, goods-signal, engagement:lead (9) — pipeline holds opps by stage. Wave 3 (Harvest only): harvest-member, harvest-newsletter, harvest-shop-interest (3) — gates met (lists re-pointed, site flipped+DEPLOYED, workflows enrol-by-ID; live test signup verified canonical-only). Tag library 398 -> 377, 0 errors. Code-flip live on Harvest prod (dpl_2Haodr), verified: a member signup tags project:act-hv+tier:member+interest:*+comms:harvest-newsletter, zero flats."
+held: "Goods/act-gd/goods-newsletter/goods-inquiry/audience-*/justicehub/act-jh/contained/comms:newsletter — delete only after their Goods/JH/ACT lists are re-pointed (Ben's UI). Bare `newsletter` — held until the Supabase edge functions (contact-form, community-submit) are flipped to canonical + deployed (Tier 3)."
 relates_to: 2026-06-02-ghl-cleanup-execution-plan.md (§5) · 2026-06-02-act-ecosystem-ghl-architecture.md · reviews/2026-06-02-ghl-tag-cleanup-review.md
 ---
 
