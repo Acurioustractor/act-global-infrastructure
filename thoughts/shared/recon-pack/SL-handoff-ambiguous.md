@@ -77,3 +77,23 @@
 | 13980 | 2025-12-16 | 1300 Washer | I0016086 | 1d | 446·A Curious Tractor/ACT-GD — Goods | 446·A Curious Tractor/ACT-GD — Goods | A |
 | 11180 | 2025-11-17 | Carla Furnishers | 25-00004816 | 1d | 446·A Curious Tractor/ACT-GD — Goods | 446·A Curious Tractor/ACT-GD — Goods | A |
 | 17.99 | 2026-03-25 | Canva | 04831-8542989 | 0d | 485·A Curious Tractor/ACT-IN — ACT Infrastructure | 485·A Curious Tractor/ACT-IN — ACT Infrastructure | A |
+
+---
+
+## D-group VERIFIED (2026-06-02) — re-checked dates/refs/amounts per pair
+
+**4 confirmed phantoms → VOID bill, keep spend-money:**
+- The Sand Yard $1968 (bill `MOUNTY-2c70ebf6`, same date/amt/project)
+- The Sand Yard $1044.44 (bill `MOUNTY-31621d01`, same date/amt/project)
+- Qantas $74 (bill empty ref, same date+exact amount, project 493)
+- Bitwarden $17.11 (bill invoice# `MOZLLRUU-0003` = spend-money ref → same charge; keep spend-money ACT-DO)
+
+**1 phantom but BEN project call:**
+- Edmonds Landscaping $360 (bill `MOUNTY-` phantom; spend-money=PICC vs bill=Mounty Yarns)
+
+**3 NOT duplicates — DO NOT VOID (coincidental-amount false matches):**
+- Uber $42.96 vs bill $43.28, 8 days apart, different Dext refs → two separate rides.
+- F V Snowdon & J R Rowden $39.80 vs bill $38.85 (real invoice# 195821), 14 days apart → bill is likely a REAL separate payable; the card charge is its own line. SL: treat the bill as real.
+- Railway Corporation $7.17 vs bill $5 (`auto-pushed gmail`), amount mismatch → review individually.
+
+**Revised cluster: 51 genuine void-bill pairs (was 54; 3 false matches removed).**
