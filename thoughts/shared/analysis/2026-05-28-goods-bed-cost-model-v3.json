@@ -57,10 +57,10 @@
     { "label": "Indigenous community wage + cultural loading", "hourly": 35, "daily_8hr": 280, "daily_with_super": 314, "beds_per_day": 6, "per_bed": 52.33 }
   ],
   "community_plastic_pay_scenarios": [
-    { "label": "Bottom (kerbside-equivalent)", "per_kg": 0.20, "kg_per_bed": 40, "per_bed": 8.00 },
-    { "label": "Mid (community-coop rate)", "per_kg": 0.50, "kg_per_bed": 40, "per_bed": 20.00 },
-    { "label": "Premium (ocean/remote story-value)", "per_kg": 1.00, "kg_per_bed": 40, "per_bed": 40.00 },
-    { "label": "High (clean sorted, remote community)", "per_kg": 2.00, "kg_per_bed": 40, "per_bed": 80.00 }
+    { "label": "Bottom (kerbside-equivalent)", "per_kg": 0.20, "kg_per_bed": 20, "per_bed": 4.00 },
+    { "label": "Mid (community-coop rate)", "per_kg": 0.50, "kg_per_bed": 20, "per_bed": 10.00 },
+    { "label": "Premium (ocean/remote story-value)", "per_kg": 1.00, "kg_per_bed": 20, "per_bed": 20.00 },
+    { "label": "High (clean sorted, remote community)", "per_kg": 2.00, "kg_per_bed": 20, "per_bed": 40.00 }
   ],
   "build_states": {
     "state_1_defy_everything": {
