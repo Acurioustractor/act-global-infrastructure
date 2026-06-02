@@ -68,6 +68,25 @@ Per the build-spec "WORKFLOW BUILD SPEC". Each project's Journey board + the lad
    - **`interest:shop` on ~32 contacts** → remove (canonical is `interest:markets`, which the fixed EXPAND now adds).
    - Tooling: `scripts/delete-junk-ghl-tags.mjs` (exists) for the CONTRACT removals; run gated, one tag at a time, after workflow re-point. **Tier 3 — Ben's explicit go.**
 
+## Non-regression safety — what must NOT break (Ben, 2026-06-02)
+
+The cleanup is safe **only if the order holds**. One principle: **EXPAND is purely additive (breaks nothing); re-point happens before any delete; each delete is gated behind a verified, tested re-point.** Per-project guarantee:
+
+| Project / people | Served by (live) | Fires on today | Stays working because |
+|---|---|---|---|
+| **Goods** (funders/supporters/partners/buyers/community) | buyer/supporter/funder/partner drips · Goods Inquiry→Acknowledge · Buyer pipeline | `comms:*-drip` (already canonical), `goods`/`act-gd`, `goods-inquiry` | drips fire on `comms:*-drip` which EXPAND keeps untouched; EXPAND *adds* `project:act-gd` alongside the flats; the flats stay until Goods Inquiry is re-pointed |
+| **ACT main site** | Newsletter Signup · Contact→Universal Inquiry | `newsletter`/`comms:newsletter`, `contact-form` | `comms:newsletter` canonical (kept); flats deleted only after re-point |
+| **JusticeHub / Contained people** | Contained launch 2025 · CONTAINED leads list | `contained`, `contained-*`, `justicehub` | Contained workflow keeps firing on `contained-*` until re-pointed; bare `contained` gets a rule before any delete |
+| **Harvest shop** | Shop Interest Receipt · Shop prospect→card · Shop pipeline | `harvest-shop-interest`, `shop-prospect` | EXPAND adds `interest:markets`+`role:buyer/supplier`; flats stay until both workflows re-pointed |
+| **Harvest members** | Member Welcome · Member Question Receipt | `harvest-member` | EXPAND adds `project:act-hv`+`tier:member`; **keep `harvest-member`** until both re-pointed. NB these are DRAFT now — re-point their triggers to canonical *at publish time* |
+
+**The three hard guarantees:**
+1. **EXPAND adds only.** Verified in code: `migrate-ghl-tags.mjs` only calls add-tags, never removes, and skips `gone-from-ghl`. Running it cannot break a workflow, drip, smart list, or pipeline.
+2. **No flat/stale tag is deleted until every workflow + smart list + producing script that fires on it is re-pointed to canonical and tested** — one at a time, UI-verified (the GHL API can't read workflow triggers, so this can't be automated).
+3. **Publishing the 6 draft Harvest workflows: re-point their triggers to canonical FIRST, then publish** — so they never fire on a tag we're about to retire, and no member/shop contact is missed.
+
+Smart lists count too: any list filtering on a flat tag (`interest-events`, etc.) must be repointed to the canonical filter before that flat tag is deleted, or the list (and its sends) silently empties.
+
 ## Task Ledger
 
 - [ ] Agree this plan + the value matrix (Ben fills ⚑ cells + community lane)
