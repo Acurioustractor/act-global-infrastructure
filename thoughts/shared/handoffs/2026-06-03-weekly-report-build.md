@@ -1,5 +1,14 @@
 # Handoff — Weekly business-strength report build (issue #140 §4)
 
+> **STATUS 2026-06-03 (PM):** ✅ **ALL SLICES SHIPPED (1–7).** Slices 5+6 = commit `bb76247`, slice 7 = `7e399e1`,
+> on branch `wip/ecosystem-ghl-architecture-2026-06-02` (NOT `wip/opus-4-8-prompting-…` — that ref in the line below
+> was stale; the actual slice-1–4 work was already on `ecosystem-ghl-architecture`). Committed locally, **NOT pushed**.
+> ledger.test.ts **20/20**, tsc + eslint clean, /api/finance/weekly + /finance/weekly live-verified (0 console errors).
+> **Two framing decisions (Ben, 2026-06-03):** (1) Goods Demand Register broken OUT of the weighted-pipeline headline
+> (worked $2.84M vs demand $5.73M); (2) NO single composite cashGap — secured lives in Notion Grant Tranches, surfaced
+> as components + a pointer. **OPEN (day-shift, Ben's OK):** the slice-7 Notion push (`weekly-money-digest.mjs`) is built
+> + dry-run-verified but NOT run — Tier 2/3 external write. And the branch is not pushed.
+
 **Date:** 2026-06-03 · **Branch:** `wip/opus-4-8-prompting-2026-05-31` (committed locally, NOT pushed) · **Plan:** `thoughts/shared/plans/2026-06-03-project-aligned-finance.md` (§4 is the spec) · **Issue:** #140
 
 ## What this is
