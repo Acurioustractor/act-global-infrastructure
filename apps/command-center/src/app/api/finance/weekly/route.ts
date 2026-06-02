@@ -7,9 +7,16 @@ import {
   getOrgLedger,
   getPipelineFacts,
   getSubscriptionRunRate,
+  getInvoiceAging,
+  getTaggingGaps,
   monthlyBurnFromTrailing,
+  projectedCashFlow,
+  buildAttentionAlerts,
 } from '@/lib/finance/ledger'
 import { getFYDates } from '@/lib/finance/dates'
+
+const PROJECTION_WEEKS = 13
+const PROJECTION_MONTHS = 3 // 13 weeks ≈ 3 months
 
 export const dynamic = 'force-dynamic'
 
@@ -23,7 +30,7 @@ export async function GET() {
   try {
     const now = new Date()
     const { fyStart, fyEnd, monthsElapsed } = getFYDates(now)
-    const [snapshot, series, projects, lineItems, orgLedger, pipeline, subs] = await Promise.all([
+    const [snapshot, series, projects, lineItems, orgLedger, pipeline, subs, aging, taggingGaps] = await Promise.all([
       getWeeklySnapshot(now),
       getMonthlySeries({ fyStart, fyEnd }),
       getProjectPL({ fyStart, fyEnd, now }),
@@ -31,6 +38,8 @@ export async function GET() {
       getOrgLedger({ fyStart, fyEnd }),
       getPipelineFacts(now),
       getSubscriptionRunRate(),
+      getInvoiceAging(now),
+      getTaggingGaps(fyStart),
     ])
 
     // Slice 5 — commitments / "betting on". Each number comes from a tested function; the route only
@@ -51,6 +60,31 @@ export async function GET() {
       ok: orgLedger.ok && lineItems.ok && subs.ok && pipeline.ok,
     }
 
+    // ~13-week projected cash — the glance HEADLINE. HARD DATA ONLY: cash + collectible AR − real burn.
+    // Deliberately excludes open AP (phantom — see the alert) and soft pipeline. arCollectible = the AR
+    // we can realistically expect (already-overdue + due within the window).
+    const arCollectible = aging.ar.overdue + aging.ar.dueInWindow
+    const projection = {
+      weeks: PROJECTION_WEEKS,
+      projectedCash: projectedCashFlow(snapshot.cash, arCollectible, snapshot.monthlyBurn, PROJECTION_MONTHS),
+      cash: snapshot.cash,
+      arCollectible,
+      burnOverHorizon: Math.round(snapshot.monthlyBurn * PROJECTION_MONTHS),
+      ok: aging.ok && snapshot.ok,
+    }
+
+    // Attention panel — only trustworthy, genuinely-triggered alerts, critical-first. Empty = all-clear.
+    const alerts = buildAttentionAlerts({
+      runwayMonths: snapshot.runwayMonths,
+      ar: aging.ar,
+      ap: aging.ap,
+      concentration: pipeline.concentration,
+      projects: projects.rows,
+      untaggedIncome: taggingGaps.untaggedIncome,
+      untaggedIncomeCount: taggingGaps.untaggedIncomeCount,
+      oppDateCoveragePct: pipeline.openWithCloseDatePct,
+    })
+
     // R&D is intentionally NOT restated here — the rd_eligible flag is drawings-inflated; the
     // net basis lives on /finance/rd-dashboard. GST is derived (10% of line_amount by tax_type).
     return NextResponse.json({
@@ -65,6 +99,9 @@ export async function GET() {
       receiptedPct: lineItems.receiptedPct,
       commitments,
       pipeline,
+      projection,
+      aging,
+      alerts,
       fyStart,
       fyEnd,
     })

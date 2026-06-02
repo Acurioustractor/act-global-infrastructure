@@ -2,6 +2,7 @@ import { supabase } from '@/lib/supabase'
 import { aggregateProjectBudgets } from './budgets'
 import { getFYDates } from './dates'
 import { isRadarPipeline } from './pipeline-rollup'
+import { execSql } from './query'
 
 /**
  * THE ONE LEDGER — single source of truth for ACT money.
@@ -623,6 +624,179 @@ export function monthlySubscriptionRunRate(rows: SubscriptionRow[]): number {
   return Math.round(monthly)
 }
 
+// ── 13-week cash projection + invoice aging (dashboard restructure 2026-06-03) ──
+// The glance headline. HARD DATA ONLY: cash + collectible AR − real burn over the horizon.
+// It deliberately does NOT subtract open AP: ACT's AP is dominated by phantom, 100%-overdue,
+// 16-month-old bills (unreconciled, not real debt) — subtracting it would print a false deep-negative
+// headline. The AP problem is surfaced as a data-quality ALERT instead (getAttentionAlerts).
+export function projectedCashFlow(cash: number, arCollectible: number, monthlyBurn: number, months = 3): number {
+  return Math.round(cash + arCollectible - monthlyBurn * months)
+}
+
+export interface InvoiceAgingRow {
+  amount_due: number | string | null
+  due_date: string | null
+  date?: string | null
+}
+export interface InvoiceAging {
+  total: number // all open (amount_due > 0)
+  overdue: number // due_date < now
+  newlyOverdue: number // due_date crossed in the last `recentDays` (the "this week" window signal)
+  dueInWindow: number // now <= due_date < now + windowDays
+  dueLater: number // due_date >= now + windowDays
+  undated: number // open but no due_date
+  count: number // open invoice count
+  oldestDate: string | null // earliest invoice `date` among open rows
+}
+
+/** Bucket open (amount_due>0) invoices by due_date relative to `now`. Pure. Drives AR (income) + the AP alert. */
+export function invoiceAging(rows: InvoiceAgingRow[], now: Date, windowDays = 91, recentDays = 7): InvoiceAging {
+  const today = isoDay(now)
+  const windowEnd = isoDay(new Date(now.getTime() + windowDays * 86400000))
+  const recentStart = isoDay(new Date(now.getTime() - recentDays * 86400000))
+  let total = 0
+  let overdue = 0
+  let newlyOverdue = 0
+  let dueInWindow = 0
+  let dueLater = 0
+  let undated = 0
+  let count = 0
+  let oldestDate: string | null = null
+  for (const r of rows) {
+    const amt = Number(r.amount_due || 0)
+    if (amt <= 0) continue
+    count += 1
+    total += amt
+    const due = r.due_date ? r.due_date.slice(0, 10) : null
+    if (!due) undated += amt
+    else if (due < today) {
+      overdue += amt
+      if (due >= recentStart) newlyOverdue += amt // crossed due within the last `recentDays`
+    } else if (due < windowEnd) dueInWindow += amt
+    else dueLater += amt
+    const d = r.date ? r.date.slice(0, 10) : null
+    if (d && (oldestDate === null || d < oldestDate)) oldestDate = d
+  }
+  return {
+    total: Math.round(total),
+    overdue: Math.round(overdue),
+    newlyOverdue: Math.round(newlyOverdue),
+    dueInWindow: Math.round(dueInWindow),
+    dueLater: Math.round(dueLater),
+    undated: Math.round(undated),
+    count,
+    oldestDate,
+  }
+}
+
+// ── Attention panel (dashboard top tier — 2026-06-03 restructure) ───────────────
+export type AlertSeverity = 'critical' | 'warning' | 'info'
+export interface Alert {
+  key: string
+  severity: AlertSeverity
+  title: string
+  detail: string
+}
+export interface AttentionInput {
+  runwayMonths: number | null
+  ar: InvoiceAging
+  ap: InvoiceAging
+  concentration: Concentration
+  projects: { code: string; name: string | null; pctConsumed: number | null }[]
+  untaggedIncome: number
+  untaggedIncomeCount: number
+  oppDateCoveragePct: number | null // % of open worked opps that have an expected_close
+}
+
+const RUNWAY_CRITICAL_MONTHS = 3
+const RUNWAY_WARN_MONTHS = 6
+const CONCENTRATION_WARN_PCT = 50
+const UNTAGGED_INCOME_FLOOR = 10000
+const OPP_DATE_COVERAGE_FLOOR_PCT = 50
+const PHANTOM_AP_FLOOR = 50000
+const PHANTOM_AP_OVERDUE_RATIO = 0.9
+const fmtMoney0 = (n: number): string => `$${Math.round(n).toLocaleString('en-AU')}`
+
+/**
+ * The attention panel. Returns ONLY genuinely-triggered, trustworthy alerts, critical-first.
+ * Empty array = nothing needs attention (the UI renders an explicit all-clear) — never manufacture
+ * an insight. Note: open AP is surfaced as a phantom-data alert, NOT subtracted from the cash number.
+ */
+export function buildAttentionAlerts(input: AttentionInput): Alert[] {
+  const alerts: Alert[] = []
+
+  // Phantom AP — the biggest trap. A large balance that's almost entirely overdue is unreconciled
+  // (paid via bank feed, never matched), not real debt. Excluded from the cash projection; flagged here.
+  if (input.ap.total >= PHANTOM_AP_FLOOR && input.ap.overdue / input.ap.total >= PHANTOM_AP_OVERDUE_RATIO) {
+    alerts.push({
+      key: 'phantom-ap',
+      severity: 'critical',
+      title: `${fmtMoney0(input.ap.total)} in bills marked unpaid — ${Math.round((input.ap.overdue / input.ap.total) * 100)}% overdue`,
+      detail: `${input.ap.count} open bills, oldest ${input.ap.oldestDate ?? '—'}. Almost certainly unreconciled — NOT real debt. Reconcile before trusting any AP figure; excluded from the cash projection.`,
+    })
+  }
+
+  if (input.runwayMonths != null && input.runwayMonths < RUNWAY_WARN_MONTHS) {
+    const critical = input.runwayMonths < RUNWAY_CRITICAL_MONTHS
+    alerts.push({
+      key: 'runway',
+      severity: critical ? 'critical' : 'warning',
+      title: `Runway ${input.runwayMonths} months`,
+      detail: `Below the ${RUNWAY_WARN_MONTHS}-month line at current burn. ${critical ? 'Fundraise or cut now.' : 'Watch closely.'}`,
+    })
+  }
+
+  if (input.ar.overdue > 0) {
+    alerts.push({
+      key: 'overdue-ar',
+      severity: 'warning',
+      title: `${fmtMoney0(input.ar.overdue)} receivables overdue`,
+      detail: `${input.ar.newlyOverdue > 0 ? `${fmtMoney0(input.ar.newlyOverdue)} newly overdue this week. ` : ''}Chase before it ages further.`,
+    })
+  }
+
+  if (input.concentration.pct != null && input.concentration.pct > CONCENTRATION_WARN_PCT) {
+    alerts.push({
+      key: 'concentration',
+      severity: 'warning',
+      title: `${input.concentration.topName} is ${input.concentration.pct}% of open pipeline`,
+      detail: `Single-funder concentration above ${CONCENTRATION_WARN_PCT}% (${fmtMoney0(input.concentration.value)}). Diversify.`,
+    })
+  }
+
+  const overBudget = input.projects.filter((p) => p.pctConsumed != null && p.pctConsumed > 100)
+  if (overBudget.length > 0) {
+    const worst = [...overBudget].sort((a, b) => (b.pctConsumed ?? 0) - (a.pctConsumed ?? 0))[0]
+    alerts.push({
+      key: 'over-budget',
+      severity: 'warning',
+      title: `${overBudget.length} project${overBudget.length > 1 ? 's' : ''} over budget`,
+      detail: `Worst: ${worst.code}${worst.name ? ` (${worst.name})` : ''} at ${worst.pctConsumed}% of budget. Re-scope or re-fund.`,
+    })
+  }
+
+  if (input.untaggedIncome >= UNTAGGED_INCOME_FLOOR) {
+    alerts.push({
+      key: 'untagged-income',
+      severity: 'warning',
+      title: `${fmtMoney0(input.untaggedIncome)} income untagged`,
+      detail: `${input.untaggedIncomeCount} receipts with no project code — per-project P&L understates these projects. Tag them.`,
+    })
+  }
+
+  if (input.oppDateCoveragePct != null && input.oppDateCoveragePct < OPP_DATE_COVERAGE_FLOOR_PCT) {
+    alerts.push({
+      key: 'opp-date-coverage',
+      severity: 'info',
+      title: `${100 - Math.round(input.oppDateCoveragePct)}% of open opps have no close date`,
+      detail: `Pipeline inflow timing can't be forecast — add expected-close dates in GHL to unlock it.`,
+    })
+  }
+
+  const rank: Record<AlertSeverity, number> = { critical: 0, warning: 1, info: 2 }
+  return alerts.sort((a, b) => rank[a.severity] - rank[b.severity])
+}
+
 // ── Opportunity pipeline math (slices 5/6) ──────────────────────────────────────
 // GHL opps live in `opportunities_unified` (merged GHL CRM + grant radar). The radar buckets
 // (grant_opportunities / grantscope source systems ≈ 15k rows, billions in headline) are excluded
@@ -886,6 +1060,8 @@ export interface PipelineFacts {
   /** GHL won opps with no Xero invoice link — a FLOOR on secured-unbilled, not true secured income
    *  (most ACT secured income — grant tranches, ~$1.9M FY26 invoiced — lives in Xero/Notion, not GHL). */
   securedUnbilledFloor: { count: number; value: number }
+  /** % of OPEN worked opps that carry an expected_close — low coverage = inflow timing can't be forecast. */
+  openWithCloseDatePct: number | null
   ok: boolean
 }
 
@@ -939,6 +1115,11 @@ export async function getPipelineFacts(now: Date = new Date()): Promise<Pipeline
     value: Math.round(securedRows.reduce((a, r) => a + Number(r.monetary_value || 0), 0)),
   }
 
+  // Close-date coverage among OPEN worked opps (drives the data-quality alert + the AR-vs-pipeline split).
+  const openWorked = opps.filter((o) => classifyPipeline(o.pipelineName) === 'worked' && oppStageBucket(o.stage) === 'open')
+  const withDate = openWorked.filter((o) => o.expectedClose != null).length
+  const openWithCloseDatePct = openWorked.length > 0 ? Math.round((withDate / openWorked.length) * 1000) / 10 : null
+
   return {
     summary: summarizePipeline(opps),
     pileMix: pileMix(opps),
@@ -947,6 +1128,7 @@ export async function getPipelineFacts(now: Date = new Date()): Promise<Pipeline
     next90: next90DayInflows(opps, now),
     stalled: stalledOpps(opps, now, 60),
     securedUnbilledFloor,
+    openWithCloseDatePct,
     ok: oppsR.ok && !securedR.error,
   }
 }
@@ -959,4 +1141,42 @@ export async function getSubscriptionRunRate(): Promise<{ monthly: number; ok: b
     .limit(2000)
   if (error || !data) return { monthly: 0, ok: false }
   return { monthly: monthlySubscriptionRunRate(data), ok: true }
+}
+
+/** Open ACCREC (income) + ACCPAY (the phantom-AP alert source) aging, bucketed by due date. */
+export async function getInvoiceAging(now: Date = new Date()): Promise<{ ar: InvoiceAging; ap: InvoiceAging; ok: boolean }> {
+  const page = (type: string) => (from: number, to: number) =>
+    supabase
+      .from('xero_invoices')
+      .select('amount_due, due_date, date')
+      .eq('type', type)
+      .eq('status', 'AUTHORISED')
+      .gt('amount_due', 0)
+      .range(from, to)
+  const [arR, apR] = await Promise.all([fetchAllRows<InvoiceAgingRow>(page('ACCREC')), fetchAllRows<InvoiceAgingRow>(page('ACCPAY'))])
+  return { ar: invoiceAging(arR.rows, now), ap: invoiceAging(apR.rows, now), ok: arR.ok && apR.ok }
+}
+
+/**
+ * Untagged real income (RECEIVE / RECEIVE-OVERPAYMENT with no project_code) this FY — the
+ * "your per-project P&L is lying" signal. Excludes RECEIVE-TRANSFER (inter-account transfers, which
+ * are never project-tagged and would dwarf the figure). Aggregated in SQL (uncapped).
+ */
+export async function getTaggingGaps(fyStart: string): Promise<{ untaggedIncome: number; untaggedIncomeCount: number; ok: boolean }> {
+  try {
+    const rows = await execSql<{ untagged_income: number | string; untagged_count: number | string }>(
+      'weekly-tagging-gap',
+      `SELECT
+         coalesce(sum(total) FILTER (WHERE project_code IS NULL), 0) AS untagged_income,
+         count(*) FILTER (WHERE project_code IS NULL) AS untagged_count
+       FROM xero_transactions
+       WHERE date >= '${fyStart}'
+         AND type IN ('RECEIVE','RECEIVE-OVERPAYMENT')
+         AND (status IS NULL OR status <> 'DELETED')`,
+    )
+    const r = rows[0] || { untagged_income: 0, untagged_count: 0 }
+    return { untaggedIncome: Math.round(Number(r.untagged_income || 0)), untaggedIncomeCount: Number(r.untagged_count || 0), ok: true }
+  } catch {
+    return { untaggedIncome: 0, untaggedIncomeCount: 0, ok: false }
+  }
 }

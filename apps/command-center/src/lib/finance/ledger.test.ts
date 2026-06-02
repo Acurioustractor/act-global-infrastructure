@@ -2,11 +2,14 @@ import assert from 'node:assert/strict'
 import test from 'node:test'
 import {
   budgetVariancePct,
+  buildAttentionAlerts,
   buildProjectPLRows,
   classifyPipeline,
   computeRunwayMonths,
   concentrationPct,
   gstFromRows,
+  invoiceAging,
+  projectedCashFlow,
   monthStartISO,
   monthlyBurnFromTrailing,
   monthlySubscriptionRunRate,
@@ -314,4 +317,84 @@ test('stalledOpps: open worked opps not updated in N days, by value desc', () =>
   ]
   const stalled = stalledOpps(opps, now, 60)
   assert.deepEqual(stalled.map((o) => o.title), ['stale'])
+})
+
+// ---------------------------------------------------------------------------
+// Dashboard restructure (2026-06-03): the synthesised 13-week cash headline +
+// invoice aging. The cash number is HARD DATA ONLY (cash + collectible AR − burn);
+// it must NEVER subtract phantom AP (the $503K of 100%-overdue, 16-month-old bills
+// would print a false −$300K headline). Aging buckets feed both AR (income) and the
+// AP data-quality alert. Both are emitted dollars → pinned to hand-computed totals.
+// ---------------------------------------------------------------------------
+test('projectedCashFlow: cash + collectible AR − burn×months; can go negative (a real signal)', () => {
+  assert.equal(projectedCashFlow(225786, 164250, 64278, 3), 197202) // 225786 + 164250 − 192834
+  assert.equal(projectedCashFlow(100000, 0, 50000, 3), -50000) // negative is a real warning, never clamp
+  assert.equal(projectedCashFlow(100000, 50000, 0, 3), 150000) // no burn
+  assert.equal(projectedCashFlow(100000, 0, 64278, 0), 100000) // zero horizon = just cash
+})
+
+test('invoiceAging: buckets open (amount_due>0) invoices by due_date; excludes $0; oldest by invoice date; newly-overdue this week', () => {
+  const now = new Date('2026-06-03T00:00:00Z') // window end = now+91d = 2026-09-02; newly-overdue = due in [2026-05-27, 2026-06-03)
+  const rows = [
+    { amount_due: 100, due_date: '2026-05-01', date: '2026-04-01' }, // overdue (not newly — before 05-27)
+    { amount_due: 50, due_date: '2026-06-20', date: '2026-06-01' }, // due in window
+    { amount_due: 30, due_date: '2026-12-01', date: '2026-11-01' }, // due later
+    { amount_due: 20, due_date: null, date: '2026-03-01' }, // open but undated
+    { amount_due: 0, due_date: '2026-05-01', date: '2020-01-01' }, // paid → excluded (incl. from oldest)
+    { amount_due: 10, due_date: '2026-01-15', date: '2025-12-01' }, // overdue, oldest open invoice
+    { amount_due: 15, due_date: '2026-05-28', date: '2026-05-15' }, // NEWLY overdue (within last 7d)
+  ]
+  const a = invoiceAging(rows, now, 91)
+  assert.equal(a.total, 225) // 100+50+30+20+10+15
+  assert.equal(a.overdue, 125) // 100+10+15
+  assert.equal(a.newlyOverdue, 15) // only the 2026-05-28 one crossed due in the last 7 days
+  assert.equal(a.dueInWindow, 50)
+  assert.equal(a.dueLater, 30)
+  assert.equal(a.undated, 20)
+  assert.equal(a.count, 6) // amount_due>0 rows
+  assert.equal(a.oldestDate, '2025-12-01') // $0 row's 2020 date must NOT win
+  assert.equal(a.overdue + a.dueInWindow, 175) // collectible — what the 13-week number consumes
+})
+
+// ---------------------------------------------------------------------------
+// Attention panel (the dashboard's top tier). Grilled rule: fire ONLY real,
+// trustworthy items; when nothing fires, return [] and the UI shows all-clear —
+// NEVER manufacture an insight. Critical sorts before warning before info.
+// ---------------------------------------------------------------------------
+const AGING_ZERO = { total: 0, overdue: 0, newlyOverdue: 0, dueInWindow: 0, dueLater: 0, undated: 0, count: 0, oldestDate: null }
+
+test('buildAttentionAlerts: fires only real items, critical-first; detects phantom AP', () => {
+  const alerts = buildAttentionAlerts({
+    runwayMonths: 3.5,
+    ar: { ...AGING_ZERO, total: 164250, overdue: 103750, dueInWindow: 60500, count: 17, oldestDate: '2025-06-01' },
+    ap: { ...AGING_ZERO, total: 503125, overdue: 503125, count: 311, oldestDate: '2025-01-28' },
+    concentration: { topName: 'X', pct: 8.1, value: 1000000 },
+    projects: [{ code: 'ACT-GD', name: 'Goods', pctConsumed: 130 }],
+    untaggedIncome: 90000,
+    untaggedIncomeCount: 12,
+    oppDateCoveragePct: 12,
+  })
+  const keys = alerts.map((a) => a.key)
+  assert.ok(keys.includes('phantom-ap'), 'phantom AP fires')
+  assert.ok(keys.includes('overdue-ar'), 'overdue AR fires')
+  assert.ok(keys.includes('runway'), 'runway < 6 fires')
+  assert.ok(keys.includes('over-budget'), 'over-budget project fires')
+  assert.ok(keys.includes('untagged-income'), 'untagged income fires')
+  assert.ok(keys.includes('opp-date-coverage'), 'low close-date coverage fires')
+  assert.ok(!keys.includes('concentration'), 'concentration 8.1% < 50 does NOT fire')
+  assert.equal(alerts[0].severity, 'critical') // phantom AP is critical and sorts first
+})
+
+test('buildAttentionAlerts: healthy inputs → empty (UI renders the all-clear)', () => {
+  const alerts = buildAttentionAlerts({
+    runwayMonths: 12,
+    ar: { ...AGING_ZERO },
+    ap: { ...AGING_ZERO },
+    concentration: { topName: null, pct: null, value: 0 },
+    projects: [],
+    untaggedIncome: 0,
+    untaggedIncomeCount: 0,
+    oppDateCoveragePct: 100,
+  })
+  assert.deepEqual(alerts, [])
 })
