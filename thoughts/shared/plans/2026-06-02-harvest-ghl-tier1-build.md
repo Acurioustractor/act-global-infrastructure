@@ -28,13 +28,13 @@ Only **#3** needs your yes/no. #5 and #6 are Goods-phase, not Harvest blockers.
 
 ## Build checklist — three lanes, all Tier-1 (no sends)
 
-### Lane A — API-automatable now (I can run this; reversible GHL config writes)
-- [ ] **Create the new Harvest tags** (idempotent — script checks existence first):
+### Lane A — API-automatable ✅ DONE 2026-06-02 (`scripts/harvest-ghl-tier1-lane-a.mjs`, commit 77d9083)
+- [x] **Created the new Harvest tags** (10 new; `interest:garden`/`events` already existed):
   - `action:volunteered` `action:attended` `action:contributed` `action:referred`
   - `interest:garden` `interest:events` `interest:repair`
   - `comms:email-ok` `comms:reduced-frequency` `comms:paused`
   - `consent:newsletter-yes` `consent:withdrawn`
-- [ ] **Create the new custom fields** (in the right folders; creating a field is safe):
+- [x] **Created the 4 new custom fields** (each confirmed in-folder):
   - `first_action_date` (DATE → Engagement & AI) — powers the "listen before we ask" 90-day rule
   - `last_ask_date` (DATE → Engagement & AI) — blocks re-asks inside a window
   - `consent_timestamp` (DATE → Consent & Culture) — consent provenance
@@ -50,8 +50,9 @@ Only **#3** needs your yes/no. #5 and #6 are Goods-phase, not Harvest blockers.
 
 ### Lane C — Code (regen-studio / API path)
 - [x] Newsletter consent stamped in code at signup — **LIVE** (`270d3b6`).
-- [ ] Extend `/api/forms/submit` so the other Harvest forms also write `source:`, `first_action_date`, and `action:` tags where applicable (mirror the newsletter stamp pattern).
-- [ ] **Archive/unpublish the dead native Newsletter Signup form** so no one wires a future workflow to a dead trigger.
+- [x] **Per-form journey tags** (`source:`/`role:`/`action:`) + `consent_source` on signup — commit `70ebaa5` (branch `wip/harvest-form-tagging-2026-06-02`, **not deployed**). `tier:` rung + DATE fields deliberately moved to the intake workflow (decision #7).
+- [ ] **Archive/unpublish the dead native Newsletter Signup form** — UI step for Ben (the API delete was correctly blocked; needs an explicit "delete it" or a 30-sec UI archive). Form id `yU9hzOUVFEDxhMHq5eXb`.
+- [ ] **(follow-up) Wire `/api/forms/submit` to POST the intake-workflow webhook URL** once the intake workflow exists (Lane B) — completes the reliable-trigger loop.
 
 ## Explicitly NOT Tier-1 (needs the launch sequence + your explicit go)
 - Publishing any send-workflow.
