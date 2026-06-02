@@ -31,6 +31,14 @@ export const VENDOR_QUERY_MAP = {
   // ---- SaaS via Stripe (many services use Stripe for billing) ----
   'stripe': 'from:stripe.com (receipt OR invoice)',
 
+  // Supabase — receipts come from invoice+statements@supabase.com / receipts@supabase.io.
+  // NOTE: the Xero contact is misspelled "Superbase" — alias it so the pipeline finds these.
+  'supabase': '(from:supabase.com OR from:supabase.io OR from:stripe.com) (supabase OR superbase) (receipt OR invoice OR payment)',
+  'superbase': '(from:supabase.com OR from:supabase.io OR from:stripe.com) (supabase OR superbase) (receipt OR invoice OR payment)',
+
+  // Descript — no receipt is emailed to act.place (verified 2026-06-02); billing portal only (web.descript.com).
+  'descript': '(from:descript.com OR from:stripe.com) descript (receipt OR invoice OR payment)',
+
   // Anthropic / Claude
   'anthropic': '(from:anthropic.com OR from:stripe.com) (anthropic OR claude) (receipt OR invoice)',
   'claude.ai': '(from:anthropic.com OR from:stripe.com) (anthropic OR claude) (receipt OR invoice)',
