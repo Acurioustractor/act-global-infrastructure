@@ -89,9 +89,9 @@ Smart lists count too: any list filtering on a flat tag (`interest-events`, etc.
 
 ## Task Ledger
 
-- [ ] Agree this plan + the value matrix (Ben fills ⚑ cells + community lane)
-- [ ] Reconcile Harvest Phase B branch to canonical (`project:act-hv`, drop role:member/supplier, shop→interest:markets)
-- [ ] Run the spec's tag migration EXPAND (additive, scripted `migrate-ghl-tags.mjs --dry-run` then live)
+- [x] Agree this plan + lock the vocabulary (Ben, 2026-06-02). Value-matrix ⚑ cells + community lane still open.
+- [x] Reconcile Harvest Phase B branch to canonical (`project:act-hv` chokepoint, drop role:member, shop→interest:markets) — `fe2cbcf`
+- [x] **EXPAND DONE 2026-06-03** — re-pointed the script to read LIVE GHL (mirror was stale: 533 auto_ + deleted rows), tracer-verified, then applied: **53 contacts / ~184 canonical tags added, 0 errors, additive.** Exit gate met (0 remaining).
 - [ ] RE-POINT keeper workflows to canonical tags (UI, one at a time) + update the 5 producing scripts
 - [ ] Publish the 6 draft Harvest workflows + build the 3 calendar-tag workflows
 - [ ] Build per-project Journey boards + stage→`tier:` sync automation
@@ -117,6 +117,8 @@ Smart lists count too: any list filtering on a flat tag (`interest-events`, etc.
 | 2026-06-02 | Live GHL workflows + tag library (read-only API) | All 6 Harvest customer workflows DRAFT; Membership Journey published but 0-enrolled; 397 tags, flat↔namespaced collision |
 | 2026-06-02 | This session's Harvest Phase B vs locked spec | DRIFT: role:member + missing project:act-hv (role:supplier was fine) — reconciled in `fe2cbcf` (Harvest repo) |
 | 2026-06-02 | EXPAND dry-run with fixed mappings (read-only, Supabase mirror) | Forward maps clean (harvest-member→project:act-hv+tier:member; shop→interest:markets). BUT prior run left stale tags live: role:member×57, temp:*×84, interest:shop×~32 → CONTRACT cleanup. 157 contacts gain ≥1 tag / 462 adds; 328 stale gone-from-ghl skipped |
+| 2026-06-03 | EXPAND tracer (--apply --limit 1/10) against the Supabase mirror | FAILED — 10/10 contacts 400 "not found". Mirror is stale: 533 `auto_*` placeholder rows + deleted-contact rows. Caught before bulk write; 0 tags written. |
+| 2026-06-03 | EXPAND re-pointed to read LIVE GHL `/contacts` | 1,154 real contacts, all valid ids. Tracer on `8BkMmfmUWrmSUTo7WLaE` verified additive (canonical added, flats untouched). Full --apply: 53 contacts / ~184 adds / 0 errors. Re-run dry-run: 0 remaining = exit gate met. |
 
 ## Open items (need Ben / community)
 - ⚑ The value-matrix cells marked above (funder steward give, buyer purchase as `action:`, partner govern rung).

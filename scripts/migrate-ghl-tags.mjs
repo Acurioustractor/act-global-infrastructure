@@ -31,6 +31,8 @@ await import(join(__dirname, '../lib/load-env.mjs'));
 
 const APPLY = process.argv.includes('--apply');
 const DRY = !APPLY;
+// --limit N : in --apply mode, only write the first N contacts (tracer-bullet a small batch first)
+const LIMIT = (() => { const i = process.argv.indexOf('--limit'); return i >= 0 ? parseInt(process.argv[i + 1], 10) : null; })();
 
 const supabase = createClient(
   process.env.SUPABASE_SHARED_URL || process.env.SUPABASE_URL,
@@ -142,14 +144,23 @@ function canonicalize(raw) {
 }
 
 async function fetchContacts() {
-  // paginate past the 1000 cap
-  const all = []; let from = 0; const page = 1000;
-  for (;;) {
-    const { data, error } = await supabase.from('ghl_contacts').select('ghl_id, tags').range(from, from + page - 1);
-    if (error) throw error;
-    all.push(...(data || []));
-    if (!data || data.length < page) break;
-    from += page;
+  // Read LIVE GHL contacts directly. The Supabase ghl_contacts mirror is stale —
+  // it carries ~533 auto_* placeholder rows + deleted-contact rows that 400 on write.
+  // Live pagination gives only real contacts with their CURRENT tags.
+  const BASE = 'https://services.leadconnectorhq.com';
+  const locationId = process.env.GHL_LOCATION_ID;
+  if (!locationId) throw new Error('Missing GHL_LOCATION_ID');
+  const all = [];
+  let path = `/contacts/?locationId=${locationId}&limit=100`;
+  for (let page = 0; page < 400 && path; page++) {
+    const r = await fetch(path.startsWith('http') ? path : BASE + path, { headers: GHL_H });
+    if (!r.ok) throw new Error(`GHL /contacts ${r.status}: ${(await r.text()).slice(0, 200)}`);
+    const data = await r.json();
+    const batch = data.contacts || [];
+    for (const c of batch) all.push({ ghl_id: c.id, tags: c.tags || [] });
+    if (!batch.length) break;
+    path = data.meta?.nextPageUrl || null;
+    await sleep(120); // gentle on the rate limit
   }
   return all;
 }
@@ -194,18 +205,29 @@ async function main() {
   console.log(`\nSkipped (gone-from-ghl, stale): ${skippedGone}`);
   console.log(`Contacts that gain ≥1 canonical tag: ${perContactAdds.length} | total tag-adds: ${totalAdds}`);
 
+  const idClass = (id) => /^auto_/.test(id) ? 'auto_(placeholder)' : /test/.test(id) ? 'test' : /^[A-Za-z0-9]{18,}$/.test(id) ? 'ghl-format' : 'other-short';
+  const allByClass = {}, addByClass = {};
+  for (const c of contacts) { const k = idClass(c.ghl_id || ''); allByClass[k] = (allByClass[k] || 0) + 1; }
+  for (const a of perContactAdds) { const k = idClass(a.ghl_id || ''); addByClass[k] = (addByClass[k] || 0) + 1; }
+  console.log('\n--- CONTACT ID HEALTH (ghl_id format) ---');
+  console.log('  all mirror rows by id-class:', JSON.stringify(allByClass));
+  console.log('  rows that WOULD be written by class:', JSON.stringify(addByClass));
+  console.log('  NOTE: ghl-format != exists — deleted contacts keep a valid-looking id; only a live GET confirms.');
+
   if (DRY) { console.log('\nDRY RUN — nothing written. Re-run with --apply after approval.'); return; }
 
-  console.log('\nAPPLYING (additive add-tags)...');
+  const targets = LIMIT ? perContactAdds.slice(0, LIMIT) : perContactAdds;
+  console.log(`\nAPPLYING (additive add-tags)${LIMIT ? ` — LIMIT ${LIMIT} (tracer)` : ''}... ${targets.length} contacts`);
   let done = 0, errs = 0;
-  for (const { ghl_id, add } of perContactAdds) {
+  for (const { ghl_id, add } of targets) {
     try {
+      if (LIMIT) console.log(`  ${ghl_id}  +[${add.join(', ')}]`);
       const r = await fetch(`https://services.leadconnectorhq.com/contacts/${ghl_id}/tags`, {
         method: 'POST', headers: GHL_H, body: JSON.stringify({ tags: add }),
       });
-      if (!r.ok) { errs++; if (errs <= 5) console.log(`  ${ghl_id} -> ${r.status}`); }
+      if (!r.ok) { errs++; if (errs <= 5) console.log(`  ${ghl_id} -> ${r.status} ${(await r.text()).slice(0,120)}`); }
       done++;
-      if (done % 100 === 0) console.log(`  ${done}/${perContactAdds.length} (errs ${errs})`);
+      if (done % 100 === 0) console.log(`  ${done}/${targets.length} (errs ${errs})`);
       await sleep(150); // ~7/s, under 100/10s
     } catch (e) { errs++; }
   }
