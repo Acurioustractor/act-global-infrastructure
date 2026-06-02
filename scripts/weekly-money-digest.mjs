@@ -62,6 +62,24 @@ const para = (parts) => ({ object: 'block', type: 'paragraph', paragraph: { rich
 const bullet = (parts) => ({ object: 'block', type: 'bulleted_list_item', bulleted_list_item: { rich_text: Array.isArray(parts) ? parts : [rt(parts)] } });
 const callout = (parts, emoji, color) => ({ object: 'block', type: 'callout', callout: { rich_text: Array.isArray(parts) ? parts : [rt(parts)], icon: { type: 'emoji', emoji }, color: color || 'default' } });
 
+// The business-strength snapshot is fetched from the command-center API — the ONE ledger
+// (lib/finance/ledger.ts) — never recomputed here, so the digest can't disagree with /finance/weekly.
+// The cron can't import the app's @/-aliased TS, hence HTTP. Failure is non-fatal: the digest still ships.
+const REPORT_BASE_URL = process.env.COMMAND_CENTER_URL || 'http://localhost:3002';
+async function fetchWeeklyReport() {
+  const url = `${REPORT_BASE_URL}/api/finance/weekly`;
+  try {
+    const res = await fetch(url, { signal: AbortSignal.timeout(90000) });
+    if (!res.ok) { log(`weekly report API ${res.status} at ${url} — business-strength snapshot skipped`); return null; }
+    const data = await res.json();
+    log(`weekly report: cash ${fmt(data?.snapshot?.cash)}, worked pipeline ${fmt(data?.commitments?.weightedPipelineWorked)}`);
+    return data;
+  } catch (e) {
+    log(`weekly report API unreachable at ${url} (${e.message}) — business-strength snapshot skipped`);
+    return null;
+  }
+}
+
 async function main() {
   log('=== Weekly money digest ===');
 
@@ -236,6 +254,37 @@ async function main() {
     rt(`Cash in this week: ${fmt(paidWeekTotal)} (${(paidThisWeek || []).length} invoices). `),
     rt(`New pipeline: ${fmt(newOppTotal)} (${(newOpps || []).length} opps).`),
   ], '\u{1F4B5}', 'blue_background'));
+
+  // Business strength — pulled live from the one ledger (/api/finance/weekly), not recomputed.
+  const report = await fetchWeeklyReport();
+  if (report?.snapshot) {
+    const s = report.snapshot;
+    const c = report.commitments || {};
+    const pl = report.pipeline || {};
+    const conc = pl.concentration || {};
+    const lowRunway = s.runwayMonths != null && s.runwayMonths < 6;
+    blocks.push(h3('\u{1F4CA} Business strength (live · one ledger)'));
+    blocks.push(callout([
+      rt(`Cash ${fmt(s.cash)}`, { bold: true }),
+      rt(` · runway ${s.runwayMonths == null ? '—' : s.runwayMonths + ' mo'} · burn ${fmt(s.monthlyBurn)}/mo · month net ${fmt(s.monthNet)}.`),
+    ], '\u{1F4CA}', lowRunway ? 'red_background' : 'gray_background'));
+    blocks.push(bullet([
+      rt('Weighted pipeline (worked deals): ', { color: 'gray' }),
+      rt(fmt(c.weightedPipelineWorked), { bold: true }),
+      rt(`  · + ${fmt(c.weightedPipelineDemand)} Goods demand signal · open bills ${fmt(c.openBills)}`, { color: 'gray' }),
+    ]));
+    if (conc.topName) {
+      const concHot = conc.pct != null && conc.pct > 50;
+      blocks.push(bullet([
+        rt('Top funder concentration: ', { color: 'gray' }),
+        rt(`${conc.topName} ${conc.pct}%`, concHot ? { bold: true, color: 'orange' } : {}),
+        rt(' of open worked pipeline', { color: 'gray' }),
+      ]));
+    }
+    blocks.push(para([rt('Full report → /finance/weekly', { italic: true, color: 'gray' })]));
+  } else {
+    blocks.push(para([rt('(business-strength snapshot unavailable — command-center API unreachable)', { italic: true, color: 'gray' })]));
+  }
 
   // Wins
   blocks.push(h3('\u{2705} Wins this week'));
