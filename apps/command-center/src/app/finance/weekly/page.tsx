@@ -14,6 +14,7 @@ import {
   Loader2,
   TrendingDown,
   TrendingUp,
+  Users,
 } from 'lucide-react'
 import {
   Bar,
@@ -61,12 +62,19 @@ interface ProjectPLRow {
   pctConsumed: number | null
   funded: boolean
 }
+interface PeopleSpend {
+  payroll: number
+  drawings: number
+  byProject: { code: string; amount: number }[]
+}
 interface WeeklyResponse {
   snapshot: WeeklySnapshot
   series: MonthlyPoint[]
   seriesOk: boolean
   projects: ProjectPLRow[]
   projectsOk: boolean
+  people: PeopleSpend
+  peopleOk: boolean
   fyStart: string
   fyEnd: string
 }
@@ -196,6 +204,53 @@ function ProjectPLSection({ rows, ok }: { rows: ProjectPLRow[]; ok: boolean }) {
         Income/spend are accrual (project_monthly_financials). % of budget = spend ÷ annual expense budget; ⚠ = over budget.
         &ldquo;ACT-subsidised&rdquo; = spend exceeds project income (the org covers the gap).
       </p>
+    </section>
+  )
+}
+
+function PeopleCostsSection({ people, fySpend }: { people: PeopleSpend; fySpend: number }) {
+  const pct = fySpend > 0 ? Math.round((people.payroll / fySpend) * 1000) / 10 : null
+  const topProjects = people.byProject.slice(0, 6)
+  const maxProj = topProjects.reduce((m, p) => Math.max(m, p.amount), 0)
+  return (
+    <section className="mt-6 rounded-3xl border border-white/10 bg-white/[0.03] p-5">
+      <h2 className="inline-flex items-center gap-2 text-sm font-semibold text-white/80">
+        <Users className="h-4 w-4 text-cyan-200" /> People costs (this FY)
+      </h2>
+      <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-3">
+        <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4">
+          <p className="text-[11px] uppercase tracking-[0.24em] text-white/40">Payroll + contractors</p>
+          <p className="mt-2 text-3xl font-semibold tracking-tight text-white">{formatMoney(people.payroll)}</p>
+          <p className="mt-2 text-xs text-white/50">Wages + super + sub-contractors (acct 477/478/486)</p>
+        </div>
+        <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4">
+          <p className="text-[11px] uppercase tracking-[0.24em] text-white/40">% of total spend</p>
+          <p className="mt-2 text-3xl font-semibold tracking-tight text-white">{pct == null ? '—' : `${pct}%`}</p>
+          <p className="mt-2 text-xs text-white/50">people cost ÷ FY expenses</p>
+        </div>
+        <div className="rounded-2xl border border-amber-300/20 bg-amber-400/[0.06] p-4">
+          <p className="text-[11px] uppercase tracking-[0.24em] text-amber-200/70">Founder drawings</p>
+          <p className="mt-2 text-3xl font-semibold tracking-tight text-amber-100">{formatMoney(people.drawings)}</p>
+          <p className="mt-2 text-xs text-amber-100/60">owner draw (acct 880/882) — NOT a business people cost; excluded above</p>
+        </div>
+      </div>
+
+      {topProjects.length > 0 && (
+        <div className="mt-4">
+          <p className="text-xs text-white/40">Payroll by project</p>
+          <div className="mt-2 space-y-1.5">
+            {topProjects.map((p) => (
+              <div key={p.code} className="flex items-center gap-3">
+                <span className="w-20 shrink-0 font-mono text-xs text-white/70">{p.code}</span>
+                <div className="h-2 flex-1 overflow-hidden rounded-full bg-white/[0.06]">
+                  <div className="h-full rounded-full bg-cyan-400/60" style={{ width: `${maxProj > 0 ? (p.amount / maxProj) * 100 : 0}%` }} />
+                </div>
+                <span className="w-24 shrink-0 text-right tabular-nums text-xs text-white/60">{formatMoney(p.amount)}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </section>
   )
 }
@@ -343,10 +398,15 @@ export default function WeeklyReportPage() {
 
             <ProjectPLSection rows={data?.projects || []} ok={data?.projectsOk ?? true} />
 
+            <PeopleCostsSection
+              people={data?.people || { payroll: 0, drawings: 0, byProject: [] }}
+              fySpend={(data?.series || []).reduce((acc, p) => acc + p.expenses, 0)}
+            />
+
             <p className="mt-6 text-xs leading-6 text-white/40">
-              Slices 1–2 of the weekly report (issue #140). Next sections: people costs, GST/tax + R&amp;D,
-              committed/&ldquo;betting on&rdquo;, opportunities &amp; pile mix. Receipted % wires in with the GST/tax section.
-              Read-only — the reconcile click and any coding stay in Xero.
+              Slices 1–3 of the weekly report (issue #140). Next sections: GST/tax + R&amp;D (+ receipted %),
+              committed/&ldquo;betting on&rdquo;, opportunities &amp; pile mix. Read-only — the reconcile click and
+              any coding stay in Xero.
             </p>
           </>
         )}

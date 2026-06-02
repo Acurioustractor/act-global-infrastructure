@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { getWeeklySnapshot, getMonthlySeries, getProjectPL } from '@/lib/finance/ledger'
+import { getWeeklySnapshot, getMonthlySeries, getProjectPL, getLineItemFacts } from '@/lib/finance/ledger'
 import { getFYDates } from '@/lib/finance/dates'
 
 export const dynamic = 'force-dynamic'
@@ -13,17 +13,22 @@ export async function GET() {
   try {
     const now = new Date()
     const { fyStart, fyEnd } = getFYDates(now)
-    const [snapshot, series, projects] = await Promise.all([
+    const [snapshot, series, projects, lineItems] = await Promise.all([
       getWeeklySnapshot(now),
       getMonthlySeries({ fyStart, fyEnd }),
       getProjectPL({ fyStart, fyEnd, now }),
+      getLineItemFacts({ fyStart, fyEnd }),
     ])
+    // NOTE: GST + R&D + receipted% land in slice 4 once verified — getLineItemFacts.gst read $0
+    // (tax not where expected in line_items) and getOrgLedger's rd-eligible is drawings-inflated.
     return NextResponse.json({
       snapshot,
       series: series.points,
       seriesOk: series.ok,
       projects: projects.rows,
       projectsOk: projects.ok,
+      people: lineItems.people,
+      peopleOk: lineItems.ok,
       fyStart,
       fyEnd,
     })

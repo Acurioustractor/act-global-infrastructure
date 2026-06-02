@@ -4,9 +4,11 @@ import {
   budgetVariancePct,
   buildProjectPLRows,
   computeRunwayMonths,
+  gstFromRows,
   monthStartISO,
   monthlyBurnFromTrailing,
   pctConsumed,
+  summarizePeopleSpend,
   trailingMonthsWindow,
   weekStartISO,
 } from './ledger'
@@ -108,4 +110,40 @@ test('buildProjectPLRows: sums monthly rows per project, joins budget, classifie
   assert.equal(hv.variancePct, null) // no budget
   assert.equal(hv.pctConsumed, null)
   assert.equal(hv.funded, true) // income 100k >= spend 60k → self-sustaining
+})
+
+// ---------------------------------------------------------------------------
+// Line-item money math (slices 3+4). People costs = ACT accounts 477/478/486
+// (wages/super/subcontractors); founder drawings = 880/882 (owner draw, NOT a
+// business people cost — flagged separately). GST collected/paid split by tx type.
+// line_items arrive as a JSON array OR a JSON string — both must parse.
+// ---------------------------------------------------------------------------
+test('summarizePeopleSpend: sums 477/478/486 as payroll, 880/882 as drawings, by project', () => {
+  const rows = [
+    { type: 'SPEND', project_code: 'ACT-HV', line_items: [{ AccountCode: '477', LineAmount: 5000 }, { AccountCode: '429', LineAmount: 1000 }] },
+    { type: 'ACCPAY', project_code: 'ACT-HV', line_items: [{ AccountCode: '478', LineAmount: 500 }] },
+    { type: 'SPEND', project_code: 'ACT-GD', line_items: [{ AccountCode: '486', LineAmount: 2000 }] },
+    { type: 'SPEND', project_code: null, line_items: [{ AccountCode: '880', LineAmount: 3000 }] }, // drawings, not payroll
+    { type: 'SPEND', project_code: 'ACT-GD', line_items: '[{"AccountCode":"477","LineAmount":1000}]' }, // string form
+  ]
+  const p = summarizePeopleSpend(rows)
+  assert.equal(p.payroll, 8500) // 5000 + 500 + 2000 + 1000 (429 is not a people account)
+  assert.equal(p.drawings, 3000) // 880 — owner draw, excluded from payroll
+  assert.deepEqual(p.byProject, [
+    { code: 'ACT-HV', amount: 5500 },
+    { code: 'ACT-GD', amount: 3000 },
+  ])
+})
+
+test('gstFromRows: TaxAmount split — RECEIVE/ACCREC collected, SPEND/ACCPAY paid', () => {
+  const rows = [
+    { type: 'RECEIVE', line_items: [{ TaxAmount: 100 }] },
+    { type: 'SPEND', line_items: [{ TaxAmount: 50 }, { TaxAmount: 20 }] },
+    { type: 'ACCPAY', line_items: [{ tax_amount: 30 }] }, // snake_case variant
+    { type: 'ACCREC', line_items: [{ TaxAmount: 40 }] },
+  ]
+  const g = gstFromRows(rows)
+  assert.equal(g.collected, 140) // 100 + 40
+  assert.equal(g.paid, 100) // 50 + 20 + 30
+  assert.equal(g.net, 40) // collected − paid (what's owed to the ATO)
 })

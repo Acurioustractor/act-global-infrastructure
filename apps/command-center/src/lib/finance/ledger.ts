@@ -374,6 +374,88 @@ export function buildProjectPLRows(
   return rows
 }
 
+// ── Line-item money math: people costs + GST (slices 3+4) ──────────────────────
+// xero_transactions / xero_invoices keep account codes + tax inside the line_items JSON
+// (no top-level account column), arriving as a JSON array OR a JSON string.
+type RawLineItem = {
+  AccountCode?: string; account_code?: string
+  LineAmount?: number | string; line_amount?: number | string
+  TaxAmount?: number | string; tax_amount?: number | string
+}
+interface LineItemRow { type?: string | null; project_code?: string | null; line_items?: unknown }
+
+function asItems(line_items: unknown): RawLineItem[] {
+  if (Array.isArray(line_items)) return line_items as RawLineItem[]
+  if (typeof line_items === 'string') {
+    try {
+      const p = JSON.parse(line_items)
+      return Array.isArray(p) ? p : []
+    } catch {
+      return []
+    }
+  }
+  return []
+}
+const liAccount = (li: RawLineItem): string => String(li.AccountCode ?? li.account_code ?? '')
+const liAmount = (li: RawLineItem): number => Math.abs(Number(li.LineAmount ?? li.line_amount ?? 0)) || 0
+const liTax = (li: RawLineItem): number => Math.abs(Number(li.TaxAmount ?? li.tax_amount ?? 0)) || 0
+
+// ACT chart (verified config/xero-chart.json) — NOT the generic '8000' ranges in tax/route.ts.
+export const PEOPLE_ACCOUNTS = ['477', '478', '486'] // Wages & Salaries · Superannuation · Sub-contractors
+export const DRAWINGS_ACCOUNTS = ['880', '882'] // Drawings — Nic / Ben (owner draw, NOT a business people cost)
+
+export interface PeopleSpend {
+  payroll: number // 477+478+486 line amounts
+  drawings: number // 880+882 — flagged separately
+  byProject: { code: string; amount: number }[] // payroll grouped by project, desc
+}
+
+/** Sum people-account line amounts (payroll) and drawings separately, attributing payroll to project. Pure. */
+export function summarizePeopleSpend(rows: LineItemRow[]): PeopleSpend {
+  let payroll = 0
+  let drawings = 0
+  const byProject = new Map<string, number>()
+  for (const r of rows) {
+    for (const li of asItems(r.line_items)) {
+      const acct = liAccount(li)
+      const amt = liAmount(li)
+      if (PEOPLE_ACCOUNTS.includes(acct)) {
+        payroll += amt
+        if (r.project_code) byProject.set(r.project_code, (byProject.get(r.project_code) || 0) + amt)
+      } else if (DRAWINGS_ACCOUNTS.includes(acct)) {
+        drawings += amt
+      }
+    }
+  }
+  return {
+    payroll: Math.round(payroll),
+    drawings: Math.round(drawings),
+    byProject: [...byProject.entries()].map(([code, amount]) => ({ code, amount: Math.round(amount) })).sort((a, b) => b.amount - a.amount),
+  }
+}
+
+const GST_COLLECTED_TYPES = new Set(['RECEIVE', 'RECEIVE-OVERPAYMENT', 'ACCREC'])
+const GST_PAID_TYPES = new Set(['SPEND', 'SPEND-OVERPAYMENT', 'ACCPAY'])
+
+export interface GstPosition {
+  collected: number // 1A — GST on sales (income)
+  paid: number // 1B — GST on purchases (expense)
+  net: number // collected − paid: + = owe the ATO, − = refund
+}
+
+/** GST collected vs paid from line-item TaxAmount, split by transaction type. Pure. */
+export function gstFromRows(rows: LineItemRow[]): GstPosition {
+  let collected = 0
+  let paid = 0
+  for (const r of rows) {
+    const t = (r.type || '').toUpperCase()
+    const tax = asItems(r.line_items).reduce((s, li) => s + liTax(li), 0)
+    if (GST_COLLECTED_TYPES.has(t)) collected += tax
+    else if (GST_PAID_TYPES.has(t)) paid += tax
+  }
+  return { collected: Math.round(collected), paid: Math.round(paid), net: Math.round(collected - paid) }
+}
+
 export interface MonthlyPoint {
   month: string
   revenue: number
@@ -425,6 +507,42 @@ export async function getProjectPL({ fyStart, fyEnd, now = new Date() }: { fySta
     ((projectsRes.data || []) as { code: string; name: string | null }[]).map((p) => [p.code, p.name]),
   )
   return { rows: buildProjectPLRows(monthly, budgets, names), ok: finR.ok && !budgetsRes.error && !projectsRes.error }
+}
+
+export interface LineItemFacts {
+  people: PeopleSpend
+  gst: GstPosition
+  receiptedPct: number | null // SPEND txns with an attachment / all SPEND txns (approx — has_attachments drifts)
+  ok: boolean
+}
+
+/**
+ * One pass over the FY's line-item-bearing rows (SPEND/RECEIVE txns + AUTHORISED/PAID bills + ACCREC
+ * invoices) feeding BOTH the people-costs and GST sections — fetched once, not per section. Paginates
+ * (line_items JSON over ~thousands of rows exceeds the 1000 cap).
+ */
+export async function getLineItemFacts({ fyStart, fyEnd }: { fyStart: string; fyEnd?: string }): Promise<LineItemFacts> {
+  const txnPage = (from: number, to: number) => {
+    let q = supabase.from('xero_transactions').select('type, project_code, line_items, has_attachments')
+      .or('status.is.null,status.neq.DELETED').gte('date', fyStart)
+    if (fyEnd) q = q.lte('date', fyEnd)
+    return q.range(from, to)
+  }
+  const invPage = (from: number, to: number) => {
+    let q = supabase.from('xero_invoices').select('type, project_code, line_items, status')
+      .in('status', ['AUTHORISED', 'PAID']).gte('date', fyStart)
+    if (fyEnd) q = q.lte('date', fyEnd)
+    return q.range(from, to)
+  }
+  const [txnR, invR] = await Promise.all([
+    fetchAllRows<{ type: string | null; project_code: string | null; line_items: unknown; has_attachments: boolean | null }>(txnPage),
+    fetchAllRows<{ type: string | null; project_code: string | null; line_items: unknown; status: string | null }>(invPage),
+  ])
+  const all = [...txnR.rows, ...invR.rows]
+  const spendTxns = txnR.rows.filter((r) => (r.type || '').toUpperCase().startsWith('SPEND'))
+  const withReceipt = spendTxns.filter((r) => r.has_attachments === true).length
+  const receiptedPct = spendTxns.length > 0 ? Math.round((withReceipt / spendTxns.length) * 1000) / 10 : null
+  return { people: summarizePeopleSpend(all), gst: gstFromRows(all), receiptedPct, ok: txnR.ok && invR.ok }
 }
 
 export interface WeeklySnapshot {
