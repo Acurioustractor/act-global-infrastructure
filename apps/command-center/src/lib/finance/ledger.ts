@@ -265,3 +265,114 @@ export async function getCashPosition(): Promise<CashPosition> {
     ok: true,
   }
 }
+
+// ── Weekly business-strength snapshot ──────────────────────────────────────────
+// Whole-org snapshot section of the weekly report (plan: 2026-06-03-project-aligned-finance §4,
+// issue #140). The date windows + burn/runway are pure + unit-tested (ledger.test.ts) because a
+// wrong month boundary or a divide-by-zero runway is a silent, decision-relevant number.
+
+const isoDay = (d: Date): string => d.toISOString().slice(0, 10)
+
+/** First day of `now`'s month, as YYYY-MM-DD (UTC). */
+export function monthStartISO(now: Date): string {
+  return `${now.getUTCFullYear()}-${String(now.getUTCMonth() + 1).padStart(2, '0')}-01`
+}
+
+/** The N complete months BEFORE the current month (current month excluded). UTC, year-wrap safe. */
+export function trailingMonthsWindow(now: Date, n: number): { start: string; end: string } {
+  const y = now.getUTCFullYear()
+  const m = now.getUTCMonth()
+  return {
+    start: isoDay(new Date(Date.UTC(y, m - n, 1))), // first day of (current month − n)
+    end: isoDay(new Date(Date.UTC(y, m, 0))), // day 0 of current month = last day of previous month
+  }
+}
+
+/** N days before `now`, as YYYY-MM-DD. */
+export function weekStartISO(now: Date, days: number): string {
+  return isoDay(new Date(now.getTime() - days * 86400000))
+}
+
+/** Average monthly expense over a trailing window. Guards divide-by-zero (no data → 0, never NaN). */
+export function monthlyBurnFromTrailing(trailingExpenses: number, monthsCovered: number): number {
+  if (monthsCovered <= 0) return 0
+  return Math.round(trailingExpenses / monthsCovered)
+}
+
+/** Months of runway = cash / monthly burn (1dp). null when burn <= 0 (no burn → runway not meaningful; never Infinity/negative). */
+export function computeRunwayMonths(cash: number, monthlyBurn: number): number | null {
+  if (monthlyBurn <= 0) return null
+  return Math.round((cash / monthlyBurn) * 10) / 10
+}
+
+export interface MonthlyPoint {
+  month: string
+  revenue: number
+  expenses: number
+  net: number
+}
+
+/** Per-month revenue/expenses/net series (project_monthly_financials, summed across projects) — feeds the trend chart. */
+export async function getMonthlySeries({ fyStart, fyEnd }: { fyStart: string; fyEnd?: string }): Promise<{ points: MonthlyPoint[]; ok: boolean }> {
+  let q = supabase.from('project_monthly_financials').select('month, revenue, expenses').gte('month', fyStart)
+  if (fyEnd) q = q.lte('month', fyEnd)
+  const { data, error } = await q.range(0, 9999)
+  if (error || !data) return { points: [], ok: false }
+  const byMonth = new Map<string, { revenue: number; expenses: number }>()
+  for (const r of data) {
+    const k = String(r.month).slice(0, 7) // YYYY-MM
+    const acc = byMonth.get(k) || { revenue: 0, expenses: 0 }
+    acc.revenue += Number(r.revenue || 0)
+    acc.expenses += Number(r.expenses || 0)
+    byMonth.set(k, acc)
+  }
+  const points = [...byMonth.entries()]
+    .sort(([a], [b]) => a.localeCompare(b))
+    .map(([month, v]) => ({ month, revenue: Math.round(v.revenue), expenses: Math.round(v.expenses), net: Math.round(v.revenue - v.expenses) }))
+  return { points, ok: true }
+}
+
+export interface WeeklySnapshot {
+  cash: number
+  cashAsOf: string | null
+  cashStale: boolean
+  monthIncome: number // current-month revenue (accrual headline)
+  monthSpend: number
+  monthNet: number
+  weekNet: number // last-7-days cash movement (cash basis, excl. transfers)
+  monthlyBurn: number // trailing-3-month average expense
+  runwayMonths: number | null // cash / monthlyBurn; null = no burn
+  receiptedPct: number | null // not wired in this slice — a later section adds it
+  asOf: string // the day this snapshot was computed for
+  ok: boolean
+}
+
+/**
+ * Whole-org weekly snapshot. Composes the blessed ledger functions (getCashPosition / getMonthlyPL /
+ * getOrgLedger) through the tested pure math above — no new money logic lives in the async layer.
+ */
+export async function getWeeklySnapshot(now: Date = new Date()): Promise<WeeklySnapshot> {
+  const asOf = isoDay(now)
+  const tw = trailingMonthsWindow(now, 3)
+  const [cash, month, trailing, week] = await Promise.all([
+    getCashPosition(),
+    getMonthlyPL({ fyStart: monthStartISO(now), fyEnd: asOf }),
+    getMonthlyPL({ fyStart: tw.start, fyEnd: tw.end }),
+    getOrgLedger({ fyStart: weekStartISO(now, 7), fyEnd: asOf }),
+  ])
+  const monthlyBurn = monthlyBurnFromTrailing(trailing.expenses, trailing.monthsCovered)
+  return {
+    cash: cash.cash,
+    cashAsOf: cash.asOf,
+    cashStale: cash.stale,
+    monthIncome: month.revenue,
+    monthSpend: month.expenses,
+    monthNet: month.net,
+    weekNet: week.cashNet,
+    monthlyBurn,
+    runwayMonths: computeRunwayMonths(cash.cash, monthlyBurn),
+    receiptedPct: null,
+    asOf,
+    ok: cash.ok && month.ok && trailing.ok && week.ok,
+  }
+}
