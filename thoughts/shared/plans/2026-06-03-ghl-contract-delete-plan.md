@@ -1,8 +1,8 @@
 ---
 title: GHL Phase 3 — CONTRACT delete plan
-status: In progress — Wave 0 ✅ + Wave 2 ✅ DONE (2026-06-03); Wave 1 + Wave 3 gated
+status: In progress — Waves 0 ✅ + 1 ✅ + 2 ✅ DONE (2026-06-03); Wave 3 gated on code-flip + deploy
 date: 2026-06-03
-done: "Wave 0: deleted context: footer newsletter signup (1). Wave 2: deleted role:member, interest:shop, temp:warm/cooling/hot/cold/steady/new (8 defs / 173 instances), 0 errors; tier:member 57 + interest:markets 63 intact. Tag library 398 -> 389."
+done: "Wave 0: context: footer newsletter signup (1). Wave 2: role:member, interest:shop, temp:* x6 (8 defs/173 inst). Wave 1: goods-stage-prospect/customer/active, goods-tier-aware/engaged/champion/active, goods-signal, engagement:lead (9 defs) — verified pipeline holds opps by stage (Goods Supporter Journey 44 opps), 0 errors. Tag library 398 -> 380. tier:member 57 + interest:markets 63 intact."
 relates_to: 2026-06-02-ghl-cleanup-execution-plan.md (§5) · 2026-06-02-act-ecosystem-ghl-architecture.md · reviews/2026-06-02-ghl-tag-cleanup-review.md
 ---
 
