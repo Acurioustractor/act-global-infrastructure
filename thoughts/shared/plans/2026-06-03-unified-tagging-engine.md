@@ -30,9 +30,14 @@ wrong tags or breaking the per-area source-of-truth model.
 ## Task Ledger
 
 ### Phase 1 — engine + read-only (AFK-safe, no external writes, all local/Tier-1)
-- [ ] **T1 (TDD):** `scripts/lib/project-resolver.mjs` — `resolveProjectCode(signals) → {code, confidence, source}`. Pure, registry-sourced. Consolidates `project-code-resolver` prefix/alias rules + `align-ghl-opportunities` PIPELINE_MAP/keyword scorer + vendor rules + legacy-wrapper normalisation. Unit tests pin precedence + each signal + legacy normalisation + manual-protection.
-- [ ] **T2:** `scripts/tagging-sweep.mjs` — READ-ONLY cross-area diagnostic. Per-area coverage + cross-area conflicts via hard links (`xero_invoice_id`, `ghl_id`). Emits `thoughts/shared/financials/tagging-sweep-<date>.{md,json}` (worklist: conflict · proposed resolution · confidence · link-type). No writes.
-- [ ] **T3:** Point `tagger-queue` API + `tagger-v2` page at the shared resolver (replace its ad-hoc `suggestedProject`); add **GHL opps + subscriptions** modes + a **conflicts** mode (reads the sweep worklist). Read-only surfacing.
+- [x] **T1 (TDD):** `scripts/lib/project-resolver.mjs` — `resolveProjectCode(signals) → {code, confidence, source}`. Pure, registry-sourced. Consolidates `project-code-resolver` prefix/alias rules + `align-ghl-opportunities` PIPELINE_MAP/keyword scorer + vendor rules + legacy-wrapper normalisation. **13/13 tests** (`scripts/tests/project-resolver.test.mjs`) pin precedence + each signal + legacy normalisation + manual-protection + valid-code guard.
+- [x] **T2:** `scripts/tagging-sweep.mjs` — READ-ONLY cross-area diagnostic. Coverage by area + cross-area conflicts via the `xero_invoice_id` hard link + a resolver fill-preview (auto/review/none). Emits `thoughts/shared/financials/tagging-sweep-<date>.{md,json}`. **First run (2026-06-03):** 11 opp↔invoice conflicts; 202/277 untagged opps + 29/35 untagged subs auto-fillable.
+- [ ] **T3:** Surface in command-center. NOTE (discovered): a file-reading route won't work in prod (no FS on Vercel) and re-porting the resolver to TS would fork the logic. Decide the surface mechanism (sweep writes a `tagging_sweep_runs` table the API reads · vs · TS resolver port) — its own increment.
+
+### Phase-3 guard (recorded from the T2 first run)
+The gated writer must NOT auto-apply the **ACT-CA catch-all** from a pipeline hint when a linked invoice
+gives a sharper code — that lazy default is exactly what produced the 11 conflicts. Treat
+pipeline→ACT-CA as review-only; always prefer a linked-invoice code.
 
 ### Phase 2 — tracer (one record, end-to-end, gated)
 - [ ] **T4:** Prove the path on ONE GHL opp: resolve → (if it has a paid `xero_invoice_id`) propagate the invoice's code back → write the single opp `project_code` (gated, logged, revert-able). Verify it shows correctly on the dashboard + sweep reports zero conflict for it.
