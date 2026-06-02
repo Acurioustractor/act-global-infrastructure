@@ -182,11 +182,11 @@ async function main() {
     if (toAdd.size) { perContactAdds.push({ ghl_id: c.ghl_id, add: [...toAdd] }); totalAdds += toAdd.size; }
   }
 
-  console.log(`\n--- MAPPINGS (old → new), top 60 by count ---`);
-  [...mapCount.entries()].sort((a,b)=>b[1]-a[1]).slice(0,60).forEach(([k,n])=>console.log(`  ${String(n).padStart(4)}  ${k}`));
+  console.log(`\n--- MAPPINGS (old → new), ALL by count ---`);
+  [...mapCount.entries()].sort((a,b)=>b[1]-a[1]).forEach(([k,n])=>console.log(`  ${String(n).padStart(4)}  ${k}`));
 
-  console.log(`\n--- JUNK / drop (NOT added; delete in CONTRACT phase) --- ${[...junk.values()].reduce((a,b)=>a+b,0)} tag-instances`);
-  [...junk.entries()].sort((a,b)=>b[1]-a[1]).slice(0,20).forEach(([k,n])=>console.log(`  ${String(n).padStart(4)}  ${k}`));
+  console.log(`\n--- JUNK / drop (NOT added; delete in CONTRACT phase) --- ${[...junk.values()].reduce((a,b)=>a+b,0)} tag-instances ---`);
+  [...junk.entries()].sort((a,b)=>b[1]-a[1]).forEach(([k,n])=>console.log(`  ${String(n).padStart(4)}  ${k}`));
 
   console.log(`\n--- UNMAPPED (need a rule before they migrate) --- ${unmapped.size} distinct`);
   [...unmapped.entries()].sort((a,b)=>b[1]-a[1]).forEach(([k,n])=>console.log(`  ${String(n).padStart(4)}  ${k}`));
