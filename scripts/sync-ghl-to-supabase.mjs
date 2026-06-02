@@ -197,6 +197,20 @@ async function getAllGHLContacts(ghl) {
   return allContacts;
 }
 
+// The GHL "Newsletter Consent" field (Yes/No) — the source of truth for opt-in.
+const NEWSLETTER_CONSENT_FIELD_ID = 'aVnqmajnysMtGYhLD0oA';
+function ghlConsentYes(ghlContact) {
+  const cf = ghlContact.customFields;
+  let val;
+  if (Array.isArray(cf)) {
+    const f = cf.find(x => x.id === NEWSLETTER_CONSENT_FIELD_ID || x.key === 'contact.newsletter_consent');
+    val = f?.value ?? f?.field_value;
+  } else if (cf && typeof cf === 'object') {
+    val = cf[NEWSLETTER_CONSENT_FIELD_ID] ?? cf['contact.newsletter_consent'] ?? cf.newsletter_consent;
+  }
+  return String(val ?? '').trim().toLowerCase() === 'yes';
+}
+
 function transformContactForSupabase(ghlContact, projectTagMap) {
   // Derive canonical ACT-XX codes from tags via projects.ghl_tags + prefix rules
   const projects = projectTagMap
@@ -227,7 +241,11 @@ function transformContactForSupabase(ghlContact, projectTagMap) {
     ghl_created_at: ghlContact.dateAdded,
     ghl_updated_at: ghlContact.dateUpdated,
     last_synced_at: new Date().toISOString(),
-    sync_status: 'synced'
+    sync_status: 'synced',
+    // Consent is STICKY: map GHL "Newsletter Consent = Yes" → true, but never write false
+    // here (omitting the key preserves an existing opt-in + its original timestamp; removal
+    // only happens via newsletter_unsubscribed_at). Source of truth = the GHL field.
+    ...(ghlConsentYes(ghlContact) ? { newsletter_consent: true } : {}),
   };
 }
 
