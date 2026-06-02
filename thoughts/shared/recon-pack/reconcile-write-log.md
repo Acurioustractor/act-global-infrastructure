@@ -122,3 +122,10 @@ Every API write to live Xero from the reconcile-prep engine, in order. Each dele
 | 2026-06-02T03:49:28.902Z | VOID_BILL | Hatch Electrical | $3677.34 | bill e968441b-ddf9-40e3-a441-bc6348b5acb1 | keep spend-money 729e8156-8fab-4edf-bc3e-437b0474cdee (A Curious Tractor/ACT-PI — PICC) | OK |
 | 2026-06-02T03:49:34.271Z | VOID_BILL | Defy Manufacturing | $3199.83 | bill 2cfca6af-4bf9-4bad-a3be-703b8961ec7e | keep spend-money bc4312dd-a6f3-469c-830b-5c2989d9c9f9 (A Curious Tractor/ACT-GD — Goods) | OK |
 | 2026-06-02T03:49:39.745Z | VOID_BILL | Carbatec Brisbane | $2338.7 | bill 310fa568-bf02-4fdf-b6d4-c7e41f0ff4a4 | keep spend-money d59d4064-cf6f-4155-8750-bb78d9565c65 (A Curious Tractor/ACT-GD — Goods) | OK |
+| 2026-06-02T03:58:16.872Z | RECODE_PROJECT | 2025-10-10 | Kennards Hire | $244 | spend-money 40bda973-0c45-4ce7-9d5f-76052131db4a | ACT-GD — Goods → ACT-HV — The Harvest Witta | OK |
+| 2026-06-02T03:58:20.755Z | RECODE_PROJECT | 2025-12-12 | Kennards Hire | $106 | spend-money b0ca31a9-db1a-48b1-976b-919b60bb3f4b | ACT-GD — Goods → ACT-HV — The Harvest Witta | OK |
+| 2026-06-02T03:58:24.641Z | RECODE_PROJECT | 2026-01-15 | Maleny Hardware And Rural Supplies | $65.64 | spend-money 9a83eff4-a381-47bb-98e2-ab9d3fb3780b | ACT-FM — The Farm → ACT-HV — The Harvest Witta | OK |
+| 2026-06-02T03:58:28.513Z | RECODE_PROJECT | 2026-01-16 | Maleny Hardware And Rural Supplies | $40.19 | spend-money 84448326-c3ca-41e4-ad9e-b22412865ae8 | ACT-GD — Goods → ACT-HV — The Harvest Witta | OK |
+| 2026-06-02T03:58:32.536Z | RECODE_PROJECT | 2025-11-28 | Maleny Hardware And Rural Supplies | $21.71 | spend-money 46ce7c8c-d9af-4258-bc58-4dce62c385d9 | ACT-FM — The Farm → ACT-HV — The Harvest Witta | OK |
+| 2026-06-02T03:58:36.395Z | RECODE_PROJECT | 2025-11-17 | Maleny Hardware And Rural Supplies | $19.25 | spend-money 2a3d66db-ad5a-4726-94d9-fe9dae57287d | ACT-FM — The Farm → ACT-HV — The Harvest Witta | OK |
+| 2026-06-02T03:58:52.217Z | RECODE_PROJECT | 2025-11-30 | Sunshine Coast Council | $44.9 | spend-money 1ddf1a0c-4bd0-4b61-9867-acbd3ebd657b | ACT-PI — PICC → ACT-HV — The Harvest Witta | OK |
