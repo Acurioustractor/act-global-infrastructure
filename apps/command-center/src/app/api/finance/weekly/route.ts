@@ -19,8 +19,8 @@ export async function GET() {
       getProjectPL({ fyStart, fyEnd, now }),
       getLineItemFacts({ fyStart, fyEnd }),
     ])
-    // NOTE: GST + R&D + receipted% land in slice 4 once verified — getLineItemFacts.gst read $0
-    // (tax not where expected in line_items) and getOrgLedger's rd-eligible is drawings-inflated.
+    // R&D is intentionally NOT restated here — the rd_eligible flag is drawings-inflated; the
+    // net basis lives on /finance/rd-dashboard. GST is derived (10% of line_amount by tax_type).
     return NextResponse.json({
       snapshot,
       series: series.points,
@@ -29,6 +29,8 @@ export async function GET() {
       projectsOk: projects.ok,
       people: lineItems.people,
       peopleOk: lineItems.ok,
+      gst: lineItems.gst,
+      receiptedPct: lineItems.receiptedPct,
       fyStart,
       fyEnd,
     })

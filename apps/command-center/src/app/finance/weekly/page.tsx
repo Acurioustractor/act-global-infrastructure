@@ -9,9 +9,12 @@ import {
   CalendarRange,
   Clock,
   Flame,
+  FlaskConical,
   Gauge,
+  Landmark,
   Layers,
   Loader2,
+  Percent,
   TrendingDown,
   TrendingUp,
   Users,
@@ -67,6 +70,11 @@ interface PeopleSpend {
   drawings: number
   byProject: { code: string; amount: number }[]
 }
+interface GstPosition {
+  collected: number
+  paid: number
+  net: number
+}
 interface WeeklyResponse {
   snapshot: WeeklySnapshot
   series: MonthlyPoint[]
@@ -75,6 +83,8 @@ interface WeeklyResponse {
   projectsOk: boolean
   people: PeopleSpend
   peopleOk: boolean
+  gst: GstPosition
+  receiptedPct: number | null
   fyStart: string
   fyEnd: string
 }
@@ -255,6 +265,59 @@ function PeopleCostsSection({ people, fySpend }: { people: PeopleSpend; fySpend:
   )
 }
 
+function TaxRdSection({ gst, receiptedPct }: { gst: GstPosition; receiptedPct: number | null }) {
+  const owes = gst.net >= 0
+  return (
+    <section className="mt-6 rounded-3xl border border-white/10 bg-white/[0.03] p-5">
+      <h2 className="inline-flex items-center gap-2 text-sm font-semibold text-white/80">
+        <Landmark className="h-4 w-4 text-cyan-200" /> Tax &amp; GST (this FY)
+      </h2>
+      <div className="mt-4 grid grid-cols-2 gap-3 lg:grid-cols-4">
+        <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4">
+          <p className="text-[11px] uppercase tracking-[0.24em] text-white/40">GST collected (1A)</p>
+          <p className="mt-2 text-2xl font-semibold tracking-tight text-emerald-200">{formatMoney(gst.collected)}</p>
+        </div>
+        <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4">
+          <p className="text-[11px] uppercase tracking-[0.24em] text-white/40">GST paid (1B)</p>
+          <p className="mt-2 text-2xl font-semibold tracking-tight text-white/85">{formatMoney(gst.paid)}</p>
+        </div>
+        <div className={cn('rounded-2xl border p-4', owes ? 'border-amber-300/25 bg-amber-400/[0.06]' : 'border-emerald-400/25 bg-emerald-400/[0.06]')}>
+          <p className="text-[11px] uppercase tracking-[0.24em] text-white/40">BAS position</p>
+          <p className={cn('mt-2 text-2xl font-semibold tracking-tight', owes ? 'text-amber-100' : 'text-emerald-200')}>
+            {formatMoney(Math.abs(gst.net))}
+          </p>
+          <p className="mt-1 text-xs text-white/50">{owes ? 'owed to the ATO' : 'refund position'}</p>
+        </div>
+        <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4">
+          <p className="inline-flex items-center gap-1 text-[11px] uppercase tracking-[0.24em] text-white/40">
+            <Percent className="h-3 w-3" /> Receipt coverage
+          </p>
+          <p className="mt-2 text-2xl font-semibold tracking-tight text-white/85">{receiptedPct == null ? '—' : `${receiptedPct}%`}</p>
+          <p className="mt-1 text-xs text-white/40">approx — has_attachments (drifts low)</p>
+        </div>
+      </div>
+
+      <a
+        href="/finance/rd-dashboard"
+        className="mt-3 flex items-start gap-3 rounded-2xl border border-violet-300/20 bg-violet-400/[0.06] p-4 transition hover:border-violet-300/40"
+      >
+        <FlaskConical className="mt-0.5 h-5 w-5 shrink-0 text-violet-200" />
+        <div>
+          <p className="text-sm font-medium text-violet-50">R&amp;D Tax Incentive — net basis on the R&amp;D dashboard →</p>
+          <p className="mt-1 text-xs leading-5 text-violet-100/60">
+            The weekly view intentionally doesn&apos;t restate the 43.5% offset: the <code className="text-violet-100/80">rd_eligible</code> flag
+            is inflated by founder drawings (≈$55K real basis vs the gross flag). Use the dedicated surface for the claim figure.
+          </p>
+        </div>
+      </a>
+      <p className="mt-3 text-[11px] text-white/35">
+        GST derived as 10% of line_amount by tax_type (OUTPUT=income, INPUT=expense); GST-free / BAS-excluded carry none.
+        Indicative — not a lodged BAS.
+      </p>
+    </section>
+  )
+}
+
 export default function WeeklyReportPage() {
   const query = useQuery({ queryKey: ['finance', 'weekly'], queryFn: fetchWeekly })
   const data = query.data
@@ -403,10 +466,11 @@ export default function WeeklyReportPage() {
               fySpend={(data?.series || []).reduce((acc, p) => acc + p.expenses, 0)}
             />
 
+            <TaxRdSection gst={data?.gst || { collected: 0, paid: 0, net: 0 }} receiptedPct={data?.receiptedPct ?? null} />
+
             <p className="mt-6 text-xs leading-6 text-white/40">
-              Slices 1–3 of the weekly report (issue #140). Next sections: GST/tax + R&amp;D (+ receipted %),
-              committed/&ldquo;betting on&rdquo;, opportunities &amp; pile mix. Read-only — the reconcile click and
-              any coding stay in Xero.
+              Slices 1–4 of the weekly report (issue #140). Next sections: committed/&ldquo;betting on&rdquo;,
+              opportunities &amp; pile mix. Read-only — the reconcile click and any coding stay in Xero.
             </p>
           </>
         )}

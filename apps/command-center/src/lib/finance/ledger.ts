@@ -380,7 +380,7 @@ export function buildProjectPLRows(
 type RawLineItem = {
   AccountCode?: string; account_code?: string
   LineAmount?: number | string; line_amount?: number | string
-  TaxAmount?: number | string; tax_amount?: number | string
+  TaxType?: string; tax_type?: string
 }
 interface LineItemRow { type?: string | null; project_code?: string | null; line_items?: unknown }
 
@@ -398,7 +398,7 @@ function asItems(line_items: unknown): RawLineItem[] {
 }
 const liAccount = (li: RawLineItem): string => String(li.AccountCode ?? li.account_code ?? '')
 const liAmount = (li: RawLineItem): number => Math.abs(Number(li.LineAmount ?? li.line_amount ?? 0)) || 0
-const liTax = (li: RawLineItem): number => Math.abs(Number(li.TaxAmount ?? li.tax_amount ?? 0)) || 0
+const liTaxType = (li: RawLineItem): string => String(li.tax_type ?? li.TaxType ?? '').toUpperCase()
 
 // ACT chart (verified config/xero-chart.json) — NOT the generic '8000' ranges in tax/route.ts.
 export const PEOPLE_ACCOUNTS = ['477', '478', '486'] // Wages & Salaries · Superannuation · Sub-contractors
@@ -434,8 +434,12 @@ export function summarizePeopleSpend(rows: LineItemRow[]): PeopleSpend {
   }
 }
 
-const GST_COLLECTED_TYPES = new Set(['RECEIVE', 'RECEIVE-OVERPAYMENT', 'ACCREC'])
-const GST_PAID_TYPES = new Set(['SPEND', 'SPEND-OVERPAYMENT', 'ACCPAY'])
+// Tax amount is NOT stored per line — only tax_type + a tax-exclusive line_amount. So derive GST as
+// 10% of line_amount, classified by tax_type direction: OUTPUT* = on income (collected), INPUT* = on
+// expenses (paid). EXEMPT*/GSTFREE/BASEXCLUDED/ZERORATED/INPUTTAXED carry no GST → 0.
+const GST_RATE = 0.1
+const GST_OUTPUT_TYPES = new Set(['OUTPUT', 'OUTPUT2'])
+const GST_INPUT_TYPES = new Set(['INPUT', 'INPUT2'])
 
 export interface GstPosition {
   collected: number // 1A — GST on sales (income)
@@ -443,15 +447,16 @@ export interface GstPosition {
   net: number // collected − paid: + = owe the ATO, − = refund
 }
 
-/** GST collected vs paid from line-item TaxAmount, split by transaction type. Pure. */
+/** GST collected vs paid, derived as 10% of line_amount by tax_type direction. Pure. */
 export function gstFromRows(rows: LineItemRow[]): GstPosition {
   let collected = 0
   let paid = 0
   for (const r of rows) {
-    const t = (r.type || '').toUpperCase()
-    const tax = asItems(r.line_items).reduce((s, li) => s + liTax(li), 0)
-    if (GST_COLLECTED_TYPES.has(t)) collected += tax
-    else if (GST_PAID_TYPES.has(t)) paid += tax
+    for (const li of asItems(r.line_items)) {
+      const tt = liTaxType(li)
+      if (GST_OUTPUT_TYPES.has(tt)) collected += liAmount(li) * GST_RATE
+      else if (GST_INPUT_TYPES.has(tt)) paid += liAmount(li) * GST_RATE
+    }
   }
   return { collected: Math.round(collected), paid: Math.round(paid), net: Math.round(collected - paid) }
 }

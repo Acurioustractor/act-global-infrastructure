@@ -135,15 +135,18 @@ test('summarizePeopleSpend: sums 477/478/486 as payroll, 880/882 as drawings, by
   ])
 })
 
-test('gstFromRows: TaxAmount split — RECEIVE/ACCREC collected, SPEND/ACCPAY paid', () => {
+test('gstFromRows: 10% of line_amount by tax_type — OUTPUT collected, INPUT paid, exempt → 0', () => {
+  // Tax amount is NOT stored; it's derived as 10% of the tax-exclusive line_amount, and direction
+  // comes from tax_type (OUTPUT=income, INPUT=expense), NOT the transaction type.
   const rows = [
-    { type: 'RECEIVE', line_items: [{ TaxAmount: 100 }] },
-    { type: 'SPEND', line_items: [{ TaxAmount: 50 }, { TaxAmount: 20 }] },
-    { type: 'ACCPAY', line_items: [{ tax_amount: 30 }] }, // snake_case variant
-    { type: 'ACCREC', line_items: [{ TaxAmount: 40 }] },
+    { type: 'RECEIVE', line_items: [{ tax_type: 'OUTPUT', line_amount: 1000 }] }, // collected 100
+    { type: 'SPEND', line_items: [{ tax_type: 'INPUT', line_amount: 500 }, { tax_type: 'INPUT', line_amount: 200 }] }, // paid 70
+    { type: 'SPEND', line_items: [{ tax_type: 'GSTFREE', line_amount: 300 }] }, // 0
+    { type: 'SPEND', line_items: [{ tax_type: 'BASEXCLUDED', line_amount: 999 }] }, // 0
+    { type: 'SPEND', line_items: '[{"tax_type":"INPUT","line_amount":100}]' }, // string form → paid 10
   ]
   const g = gstFromRows(rows)
-  assert.equal(g.collected, 140) // 100 + 40
-  assert.equal(g.paid, 100) // 50 + 20 + 30
-  assert.equal(g.net, 40) // collected − paid (what's owed to the ATO)
+  assert.equal(g.collected, 100) // 1000 × 10%
+  assert.equal(g.paid, 80) // (500 + 200 + 100) × 10%
+  assert.equal(g.net, 20) // owed to the ATO
 })
