@@ -1,6 +1,7 @@
 import { supabase } from '@/lib/supabase'
 import { aggregateProjectBudgets } from './budgets'
 import { getFYDates } from './dates'
+import { isRadarPipeline } from './pipeline-rollup'
 
 /**
  * THE ONE LEDGER — single source of truth for ACT money.
@@ -598,4 +599,364 @@ export async function getWeeklySnapshot(now: Date = new Date()): Promise<WeeklyS
     asOf,
     ok: cash.ok && monthLedger.ok && trailing.ok && week.ok,
   }
+}
+
+// ── Commitments / "betting on" (slice 5) ───────────────────────────────────────
+// Forward subscription run-rate: normalise every still-running sub to a monthly figure.
+// Subscriptions are mid-Pty-cutover, so `active` + `pending_migration` both count as live;
+// `cancelled` is excluded. annual ÷ 12; monthly/usage taken as-is. amount falls back to expected_amount.
+export interface SubscriptionRow {
+  account_status: string | null
+  billing_cycle: string | null
+  amount: number | string | null
+  expected_amount: number | string | null
+}
+const LIVE_SUB_STATUSES = new Set(['active', 'pending_migration'])
+
+export function monthlySubscriptionRunRate(rows: SubscriptionRow[]): number {
+  let monthly = 0
+  for (const r of rows) {
+    if (!LIVE_SUB_STATUSES.has((r.account_status || '').toLowerCase())) continue
+    const amt = Number(r.amount ?? r.expected_amount ?? 0) || 0
+    monthly += (r.billing_cycle || '').toLowerCase() === 'annual' ? amt / 12 : amt
+  }
+  return Math.round(monthly)
+}
+
+// ── Opportunity pipeline math (slices 5/6) ──────────────────────────────────────
+// GHL opps live in `opportunities_unified` (merged GHL CRM + grant radar). The radar buckets
+// (grant_opportunities / grantscope source systems ≈ 15k rows, billions in headline) are excluded
+// at the query (source allowlist). Within the worked set the GHL "Grants" pipeline is ALSO a radar
+// dump (~$272M, ~10x the real book) → classified 'radar' and dropped. The Goods Demand Register is
+// aspirational buyer EOIs → broken out as a 'demand' signal, NOT counted in the worked headline.
+
+/** Canonical pile mapping — keep in sync with config/pile-mapping.json (the scripts' source of truth). */
+const PILE_BY_CODE: Record<string, string> = {
+  'ACT-EL': 'Voice', 'ACT-OO': 'Voice', 'ACT-BG': 'Voice', 'ACT-CF': 'Voice', 'ACT-PI': 'Voice',
+  'ACT-GD': 'Flow', 'ACT-CS': 'Flow', 'ACT-JH': 'Flow', 'ACT-SM': 'Flow', 'ACT-WJ': 'Flow',
+  'ACT-CA': 'Flow', 'ACT-CP': 'Flow', 'ACT-GP': 'Flow', 'ACT-UA': 'Flow', 'ACT-DO': 'Flow',
+  'ACT-HV': 'Ground', 'ACT-BV': 'Ground', 'ACT-FM': 'Ground',
+  'ACT-CORE': 'Other', 'ACT-IN': 'Other', 'ACT-MD': 'Other',
+}
+
+// Fallback pile inference from the GHL pipeline name, used ONLY when an opp has no mapped project_code.
+// The highest-value worked opps (e.g. Goods Supporter Journey — QBE/REAL at $2M each) are untagged in
+// both opportunities_unified and ghl_opportunities, but their pipeline names are unambiguous. Grounded
+// in scripts/align-ghl-opportunities.mjs PIPELINE_MAP. Substring match (lowercased), first hit wins.
+const PIPELINE_PILE_HINTS: ReadonlyArray<readonly [string, string]> = [
+  ['goods', 'Flow'],
+  ['curious tractor', 'Flow'],
+  ['justicehub', 'Flow'],
+  ['empathy ledger', 'Voice'],
+  ['harvest', 'Ground'],
+]
+
+/**
+ * Pile per the canonical rule, with a pipeline-name fallback:
+ *   grant income → Grants (regardless of code) → mapped project_code → pipeline-name hint
+ *   → 'Other' (has an unmapped code) → 'Uncoded' (no code at all).
+ */
+export function pileForOpp(
+  opportunityType: string | null,
+  projectCodes: string[] | null,
+  pipelineName: string | null = null,
+): string {
+  if ((opportunityType || '').toLowerCase() === 'grant') return 'Grants'
+  const code = projectCodes?.[0]
+  if (code && PILE_BY_CODE[code]) return PILE_BY_CODE[code]
+  const pl = (pipelineName || '').toLowerCase()
+  if (pl) {
+    const hit = PIPELINE_PILE_HINTS.find(([kw]) => pl.includes(kw))
+    if (hit) return hit[1]
+  }
+  return code ? 'Other' : 'Uncoded'
+}
+
+export const DEMAND_REGISTER_PIPELINE = 'Goods — Demand Register'
+export type PipelineClass = 'radar' | 'demand' | 'worked'
+
+/** Classify a GHL pipeline: 'Grants'→radar (dropped), Demand Register→demand (broken out), else worked. */
+export function classifyPipeline(pipelineName: string | null): PipelineClass {
+  if (isRadarPipeline(pipelineName)) return 'radar'
+  if (pipelineName === DEMAND_REGISTER_PIPELINE) return 'demand'
+  return 'worked'
+}
+
+export type StageBucket = 'won' | 'open' | 'lost'
+const WON_STAGES = new Set(['won', 'realized'])
+const LOST_STAGES = new Set(['lost', 'expired'])
+
+/** Normalise the GHL stage vocabulary into won / open / lost. */
+export function oppStageBucket(stage: string | null): StageBucket {
+  const s = (stage || '').toLowerCase()
+  if (WON_STAGES.has(s)) return 'won'
+  if (LOST_STAGES.has(s)) return 'lost'
+  return 'open'
+}
+
+export interface PipelineOpp {
+  title: string | null
+  pipelineName: string | null
+  pile: string | null
+  valueMid: number
+  probability: number // 0..100
+  stage: string | null
+  contactName: string | null
+  expectedClose: string | null // ISO date
+  updatedAt: string | null // ISO timestamp
+}
+
+const isOpenWorked = (o: PipelineOpp): boolean =>
+  classifyPipeline(o.pipelineName) === 'worked' && oppStageBucket(o.stage) === 'open'
+
+export interface PipelineBucketTotals {
+  count: number
+  value: number
+  weighted: number
+}
+const emptyBucket = (): PipelineBucketTotals => ({ count: 0, value: 0, weighted: 0 })
+const addToBucket = (b: PipelineBucketTotals, o: PipelineOpp): void => {
+  b.count += 1
+  b.value += o.valueMid
+  b.weighted += o.valueMid * (o.probability / 100)
+}
+const roundBucket = (b: PipelineBucketTotals): PipelineBucketTotals => ({
+  count: b.count,
+  value: Math.round(b.value),
+  weighted: Math.round(b.weighted),
+})
+
+export interface PipelineSummary {
+  worked: PipelineBucketTotals // OPEN worked opps — the headline weighted pipeline
+  demand: PipelineBucketTotals // OPEN Goods Demand Register — broken out, NOT in the headline
+  wonWorked: PipelineBucketTotals // worked opps already won (GHL CRM only — a floor, not org-wide)
+}
+
+/** Split opps into open-worked (headline) / open-demand (signal) / won-worked. Radar dropped. Pure. */
+export function summarizePipeline(opps: PipelineOpp[]): PipelineSummary {
+  const worked = emptyBucket()
+  const demand = emptyBucket()
+  const wonWorked = emptyBucket()
+  for (const o of opps) {
+    const cls = classifyPipeline(o.pipelineName)
+    if (cls === 'radar') continue
+    const bucket = oppStageBucket(o.stage)
+    if (cls === 'demand') {
+      if (bucket === 'open') addToBucket(demand, o)
+    } else {
+      if (bucket === 'open') addToBucket(worked, o)
+      else if (bucket === 'won') addToBucket(wonWorked, o)
+    }
+  }
+  return { worked: roundBucket(worked), demand: roundBucket(demand), wonWorked: roundBucket(wonWorked) }
+}
+
+// FY27 (Pty Y1) target revenue mix — act-money-framework.md:69 [V], from five-year-cashflow-model.md.
+// Components sum to $2.8M (the doc's "$2.6M" headline predates these; components are authoritative).
+export const FY27_PILE_TARGET: Record<string, number> = {
+  Voice: 200000,
+  Flow: 1450000,
+  Ground: 150000,
+  Grants: 1000000,
+}
+const TARGET_PILE_ORDER = ['Voice', 'Flow', 'Ground', 'Grants'] as const
+
+export interface PileMixRow {
+  pile: string
+  value: number // open worked pipeline value in this pile
+  actualPct: number | null // share of total open worked value
+  targetPct: number | null // share of the FY27 target
+}
+
+/**
+ * Open-worked pipeline value by pile vs the FY27 target mix, in fixed Voice/Flow/Ground/Grants order.
+ * Denominator is ALL open worked value (so Other/Uncoded piles are in the total but not shown as rows —
+ * the four rows can sum to < 100%). Pure.
+ */
+export function pileMix(opps: PipelineOpp[], target: Record<string, number> = FY27_PILE_TARGET): PileMixRow[] {
+  const byPile = new Map<string, number>()
+  let total = 0
+  for (const o of opps) {
+    if (!isOpenWorked(o)) continue
+    const pile = o.pile || 'Uncoded'
+    byPile.set(pile, (byPile.get(pile) || 0) + o.valueMid)
+    total += o.valueMid
+  }
+  const targetTotal = Object.values(target).reduce((a, b) => a + b, 0)
+  return TARGET_PILE_ORDER.map((pile) => {
+    const value = Math.round(byPile.get(pile) || 0)
+    return {
+      pile,
+      value,
+      actualPct: total > 0 ? round1((value / total) * 100) : 0,
+      targetPct: targetTotal > 0 ? round1(((target[pile] || 0) / targetTotal) * 100) : null,
+    }
+  })
+}
+
+export interface Concentration {
+  topName: string | null
+  pct: number | null // largest single funder's share of open worked value
+  value: number
+}
+
+/** Single-funder concentration: the biggest contact's share of open worked pipeline value. Pure. */
+export function concentrationPct(opps: PipelineOpp[]): Concentration {
+  const byFunder = new Map<string, number>()
+  let total = 0
+  for (const o of opps) {
+    if (!isOpenWorked(o)) continue
+    total += o.valueMid
+    if (o.contactName) byFunder.set(o.contactName, (byFunder.get(o.contactName) || 0) + o.valueMid)
+  }
+  let topName: string | null = null
+  let topVal = 0
+  for (const [name, v] of byFunder) {
+    if (v > topVal) {
+      topVal = v
+      topName = name
+    }
+  }
+  return { topName, value: Math.round(topVal), pct: total > 0 ? round1((topVal / total) * 100) : null }
+}
+
+/** Open worked opps whose expected_close falls within the next `days` of `now`. Pure. */
+export function next90DayInflows(opps: PipelineOpp[], now: Date, days = 90): { count: number; value: number } {
+  const start = isoDay(now)
+  const end = isoDay(new Date(now.getTime() + days * 86400000))
+  let count = 0
+  let value = 0
+  for (const o of opps) {
+    if (!isOpenWorked(o) || !o.expectedClose) continue
+    const d = o.expectedClose.slice(0, 10)
+    if (d >= start && d <= end) {
+      count += 1
+      value += o.valueMid
+    }
+  }
+  return { count, value: Math.round(value) }
+}
+
+export interface TopOpp {
+  title: string | null
+  pile: string | null
+  pipelineName: string | null
+  value: number
+  probability: number
+  weighted: number
+  stage: string | null
+  contactName: string | null
+}
+const toTopOpp = (o: PipelineOpp): TopOpp => ({
+  title: o.title,
+  pile: o.pile,
+  pipelineName: o.pipelineName,
+  value: Math.round(o.valueMid),
+  probability: o.probability,
+  weighted: Math.round(o.valueMid * (o.probability / 100)),
+  stage: o.stage,
+  contactName: o.contactName,
+})
+
+/** Top N open worked opps by value desc. Pure. */
+export function topOpenOpps(opps: PipelineOpp[], n: number): TopOpp[] {
+  return opps.filter(isOpenWorked).sort((a, b) => b.valueMid - a.valueMid).slice(0, n).map(toTopOpp)
+}
+
+/** Open worked opps not touched in `days`, by value desc — pipeline that's gone quiet. Pure. */
+export function stalledOpps(opps: PipelineOpp[], now: Date, days = 60): TopOpp[] {
+  const cutoff = now.getTime() - days * 86400000
+  return opps
+    .filter((o) => isOpenWorked(o) && o.updatedAt != null && new Date(o.updatedAt).getTime() < cutoff)
+    .sort((a, b) => b.valueMid - a.valueMid)
+    .map(toTopOpp)
+}
+
+// Only worked CRM / manual sources — NEVER the grant_opportunities / grantscope discovery dumps.
+// Positive allowlist (not a denylist) so a new dump source can't silently leak into the money totals.
+const WORKED_SOURCE_SYSTEMS = ['ghl_opportunities', 'manual', 'fundraising_pipeline', 'ghl', 'xero']
+
+export interface PipelineFacts {
+  summary: PipelineSummary
+  pileMix: PileMixRow[]
+  concentration: Concentration
+  topOpps: TopOpp[]
+  next90: { count: number; value: number }
+  stalled: TopOpp[]
+  /** GHL won opps with no Xero invoice link — a FLOOR on secured-unbilled, not true secured income
+   *  (most ACT secured income — grant tranches, ~$1.9M FY26 invoiced — lives in Xero/Notion, not GHL). */
+  securedUnbilledFloor: { count: number; value: number }
+  ok: boolean
+}
+
+/**
+ * Opportunity-side facts for the weekly report (slices 5+6). Reads the worked CRM book from
+ * opportunities_unified (radar source systems excluded at the query; GHL "Grants" radar pipeline and the
+ * Goods Demand Register classified out / broken out in the pure layer) and composes the tested pure math.
+ */
+export async function getPipelineFacts(now: Date = new Date()): Promise<PipelineFacts> {
+  const oppPage = (from: number, to: number) =>
+    supabase
+      .from('opportunities_unified')
+      .select('title, value_mid, probability, stage, project_codes, contact_name, expected_close, updated_at, opportunity_type, metadata')
+      .in('source_system', WORKED_SOURCE_SYSTEMS)
+      .range(from, to)
+  const oppsR = await fetchAllRows<{
+    title: string | null
+    value_mid: number | string | null
+    probability: number | string | null
+    stage: string | null
+    project_codes: string[] | null
+    contact_name: string | null
+    expected_close: string | null
+    updated_at: string | null
+    opportunity_type: string | null
+    metadata: { pipeline_name?: string } | null
+  }>(oppPage)
+
+  const opps: PipelineOpp[] = oppsR.rows.map((r) => ({
+    title: r.title,
+    pipelineName: r.metadata?.pipeline_name ?? null,
+    pile: pileForOpp(r.opportunity_type, r.project_codes, r.metadata?.pipeline_name ?? null),
+    valueMid: Number(r.value_mid || 0),
+    probability: Number(r.probability || 0),
+    stage: r.stage,
+    contactName: r.contact_name,
+    expectedClose: r.expected_close,
+    updatedAt: r.updated_at,
+  }))
+
+  // Secured-unbilled floor — GHL won opps with no Xero invoice link.
+  const securedR = await supabase
+    .from('ghl_opportunities')
+    .select('monetary_value')
+    .eq('status', 'won')
+    .is('xero_invoice_id', null)
+    .limit(2000)
+  const securedRows = securedR.data || []
+  const securedUnbilledFloor = {
+    count: securedRows.length,
+    value: Math.round(securedRows.reduce((a, r) => a + Number(r.monetary_value || 0), 0)),
+  }
+
+  return {
+    summary: summarizePipeline(opps),
+    pileMix: pileMix(opps),
+    concentration: concentrationPct(opps),
+    topOpps: topOpenOpps(opps, 8),
+    next90: next90DayInflows(opps, now),
+    stalled: stalledOpps(opps, now, 60),
+    securedUnbilledFloor,
+    ok: oppsR.ok && !securedR.error,
+  }
+}
+
+/** Monthly subscription run-rate (live subs only), with an ok flag. Composes the pure normaliser. */
+export async function getSubscriptionRunRate(): Promise<{ monthly: number; ok: boolean }> {
+  const { data, error } = await supabase
+    .from('subscriptions')
+    .select('account_status, billing_cycle, amount, expected_amount')
+    .limit(2000)
+  if (error || !data) return { monthly: 0, ok: false }
+  return { monthly: monthlySubscriptionRunRate(data), ok: true }
 }

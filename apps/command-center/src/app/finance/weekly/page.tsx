@@ -6,8 +6,10 @@ import {
   AlertTriangle,
   ArrowLeft,
   Banknote,
+  Briefcase,
   CalendarRange,
   Clock,
+  Coins,
   Flame,
   FlaskConical,
   Gauge,
@@ -15,9 +17,11 @@ import {
   Layers,
   Loader2,
   Percent,
+  Target,
   TrendingDown,
   TrendingUp,
   Users,
+  Wallet,
 } from 'lucide-react'
 import {
   Bar,
@@ -75,6 +79,49 @@ interface GstPosition {
   paid: number
   net: number
 }
+// Mirrors PipelineFacts / Commitments in lib/finance/ledger.ts + the weekly API route.
+interface BucketTotals {
+  count: number
+  value: number
+  weighted: number
+}
+interface PileMixRow {
+  pile: string
+  value: number
+  actualPct: number | null
+  targetPct: number | null
+}
+interface TopOpp {
+  title: string | null
+  pile: string | null
+  pipelineName: string | null
+  value: number
+  probability: number
+  weighted: number
+  stage: string | null
+  contactName: string | null
+}
+interface PipelineFacts {
+  summary: { worked: BucketTotals; demand: BucketTotals; wonWorked: BucketTotals }
+  pileMix: PileMixRow[]
+  concentration: { topName: string | null; pct: number | null; value: number }
+  topOpps: TopOpp[]
+  next90: { count: number; value: number }
+  stalled: TopOpp[]
+  securedUnbilledFloor: { count: number; value: number }
+  ok: boolean
+}
+interface Commitments {
+  openBills: number
+  payrollMonthlyRunRate: number
+  subsMonthlyRunRate: number
+  monthlyCommittedRunRate: number
+  cash: number
+  weightedPipelineWorked: number
+  weightedPipelineDemand: number
+  securedUnbilledFloor: { count: number; value: number }
+  ok: boolean
+}
 interface WeeklyResponse {
   snapshot: WeeklySnapshot
   series: MonthlyPoint[]
@@ -85,11 +132,14 @@ interface WeeklyResponse {
   peopleOk: boolean
   gst: GstPosition
   receiptedPct: number | null
+  commitments: Commitments
+  pipeline: PipelineFacts
   fyStart: string
   fyEnd: string
 }
 
 const RUNWAY_ALERT_MONTHS = 6 // §4 alert: runway under 6 months = fundraise/cut now
+const CONCENTRATION_ALERT_PCT = 50 // §4 alert: single funder > 50% of the open worked book
 
 async function fetchWeekly(): Promise<WeeklyResponse> {
   const res = await fetch('/api/finance/weekly')
@@ -318,6 +368,188 @@ function TaxRdSection({ gst, receiptedPct }: { gst: GstPosition; receiptedPct: n
   )
 }
 
+function CommitmentsSection({ c }: { c: Commitments }) {
+  // Forward monthly commitment vs cash → a rough "months of cover" against the run-rate. NOT a full
+  // cash gap: per the 2026-06-03 secured-source decision there is no single composite, because the
+  // secured side (grant tranches) lives in Notion/Xero, not Supabase. Components surfaced honestly.
+  const monthsCover = c.monthlyCommittedRunRate > 0 ? Math.round((c.cash / c.monthlyCommittedRunRate) * 10) / 10 : null
+  return (
+    <section className="mt-6 rounded-3xl border border-white/10 bg-white/[0.03] p-5">
+      <h2 className="inline-flex items-center gap-2 text-sm font-semibold text-white/80">
+        <Briefcase className="h-4 w-4 text-cyan-200" /> Committed / betting on
+      </h2>
+      {!c.ok && <p className="mt-2 text-xs text-amber-200/80">⚠ Some commitment queries did not complete — figures may be partial.</p>}
+
+      <div className="mt-4 grid grid-cols-2 gap-3 lg:grid-cols-4">
+        <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4">
+          <p className="text-[11px] uppercase tracking-[0.24em] text-white/40">Open bills (AP)</p>
+          <p className="mt-2 text-2xl font-semibold tracking-tight text-amber-100">{formatMoney(c.openBills)}</p>
+          <p className="mt-1 text-xs text-white/50">authorised, not yet paid</p>
+        </div>
+        <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4">
+          <p className="text-[11px] uppercase tracking-[0.24em] text-white/40">Monthly run-rate</p>
+          <p className="mt-2 text-2xl font-semibold tracking-tight text-white/85">{formatMoney(c.monthlyCommittedRunRate)}</p>
+          <p className="mt-1 text-xs text-white/50">
+            payroll {formatMoney(c.payrollMonthlyRunRate)} + subs {formatMoney(c.subsMonthlyRunRate)}
+          </p>
+        </div>
+        <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4">
+          <p className="text-[11px] uppercase tracking-[0.24em] text-white/40">Weighted pipeline</p>
+          <p className="mt-2 text-2xl font-semibold tracking-tight text-cyan-100">{formatMoney(c.weightedPipelineWorked)}</p>
+          <p className="mt-1 text-xs text-white/50">
+            worked deals (value×prob) · + {formatMoney(c.weightedPipelineDemand)} Goods demand register (signal)
+          </p>
+        </div>
+        <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4">
+          <p className="text-[11px] uppercase tracking-[0.24em] text-white/40">Secured-unbilled (floor)</p>
+          <p className="mt-2 text-2xl font-semibold tracking-tight text-emerald-200">{formatMoney(c.securedUnbilledFloor.value)}</p>
+          <p className="mt-1 text-xs text-white/50">{c.securedUnbilledFloor.count} GHL won opps, not yet invoiced</p>
+        </div>
+      </div>
+
+      <div className="mt-3 flex flex-wrap items-center gap-x-6 gap-y-1 text-xs text-white/55">
+        <span>
+          Cash <span className="tabular-nums text-white/80">{formatMoney(c.cash)}</span>
+        </span>
+        <span>
+          ≈ <span className="tabular-nums text-white/80">{monthsCover == null ? '—' : `${monthsCover} mo`}</span> of committed run-rate
+        </span>
+      </div>
+      <p className="mt-3 text-[11px] leading-5 text-white/35">
+        No single &ldquo;cash gap&rdquo; is shown: GHL captures only {formatMoney(c.securedUnbilledFloor.value)} of secured-unbilled
+        (a floor). ACT&apos;s real secured income — grant tranches (~$1.9M FY26 invoiced) — lives in Xero + the Notion{' '}
+        <span className="text-white/55">Grant Tranches DB</span>, which is the source of truth for secured forward income.
+      </p>
+    </section>
+  )
+}
+
+function PileBar({ row }: { row: PileMixRow }) {
+  const actual = row.actualPct ?? 0
+  const target = row.targetPct ?? 0
+  const over = actual > target + 0.05
+  return (
+    <div className="flex items-center gap-3">
+      <span className="w-16 shrink-0 text-xs text-white/70">{row.pile}</span>
+      <div className="relative h-2.5 flex-1 overflow-hidden rounded-full bg-white/[0.06]">
+        <div
+          className={cn('h-full rounded-full', over ? 'bg-amber-400/70' : 'bg-cyan-400/60')}
+          style={{ width: `${Math.min(100, actual)}%` }}
+        />
+        {/* target marker */}
+        <div className="absolute top-[-2px] h-[14px] w-0.5 bg-white/70" style={{ left: `${Math.min(100, target)}%` }} />
+      </div>
+      <span className="w-28 shrink-0 text-right text-xs text-white/55">
+        <span className="tabular-nums text-white/80">{row.actualPct ?? 0}%</span> / {row.targetPct ?? '—'}% target
+      </span>
+      <span className="hidden w-20 shrink-0 text-right text-xs tabular-nums text-white/45 sm:inline">{formatMoney(row.value)}</span>
+    </div>
+  )
+}
+
+function OpportunitiesSection({ p }: { p: PipelineFacts }) {
+  const conc = p.concentration
+  const concAlert = conc.pct != null && conc.pct > CONCENTRATION_ALERT_PCT
+  return (
+    <section className="mt-6 rounded-3xl border border-white/10 bg-white/[0.03] p-5">
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <h2 className="inline-flex items-center gap-2 text-sm font-semibold text-white/80">
+          <Target className="h-4 w-4 text-cyan-200" /> Opportunities &amp; pile mix
+        </h2>
+        <p className="text-xs text-white/45">
+          {p.summary.worked.count} open worked deals · {formatMoney(p.summary.worked.value)} ({formatMoney(p.summary.worked.weighted)} weighted)
+        </p>
+      </div>
+      {!p.ok && <p className="mt-2 text-xs text-amber-200/80">⚠ Some pipeline queries did not complete — figures may be partial.</p>}
+
+      {concAlert && (
+        <div className="mt-3 flex items-start gap-3 rounded-2xl border border-amber-400/30 bg-amber-400/[0.08] p-3">
+          <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0 text-amber-200" />
+          <p className="text-xs leading-5 text-amber-50">
+            <span className="font-semibold">{conc.topName}</span> is {conc.pct}% of the open worked pipeline ({formatMoney(conc.value)}) —
+            single-funder concentration above {CONCENTRATION_ALERT_PCT}%. Diversify.
+          </p>
+        </div>
+      )}
+
+      <div className="mt-4 grid grid-cols-2 gap-3 lg:grid-cols-3">
+        <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4">
+          <p className="inline-flex items-center gap-1 text-[11px] uppercase tracking-[0.24em] text-white/40">
+            <Coins className="h-3 w-3" /> Top funder concentration
+          </p>
+          <p className={cn('mt-2 text-2xl font-semibold tracking-tight', concAlert ? 'text-amber-100' : 'text-white/85')}>
+            {conc.pct == null ? '—' : `${conc.pct}%`}
+          </p>
+          <p className="mt-1 truncate text-xs text-white/50">{conc.topName ?? 'no named funder'} · {formatMoney(conc.value)}</p>
+        </div>
+        <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4">
+          <p className="inline-flex items-center gap-1 text-[11px] uppercase tracking-[0.24em] text-white/40">
+            <Wallet className="h-3 w-3" /> Next-90-day inflows
+          </p>
+          <p className="mt-2 text-2xl font-semibold tracking-tight text-emerald-200">{formatMoney(p.next90.value)}</p>
+          <p className="mt-1 text-xs text-white/50">{p.next90.count} opps closing by date</p>
+        </div>
+        <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4">
+          <p className="inline-flex items-center gap-1 text-[11px] uppercase tracking-[0.24em] text-white/40">
+            <Clock className="h-3 w-3" /> Stalled (60+ days)
+          </p>
+          <p className={cn('mt-2 text-2xl font-semibold tracking-tight', p.stalled.length > 0 ? 'text-amber-100' : 'text-white/85')}>
+            {p.stalled.length}
+          </p>
+          <p className="mt-1 text-xs text-white/50">
+            {formatMoney(p.stalled.reduce((s, o) => s + o.value, 0))} not touched in 60 days
+          </p>
+        </div>
+      </div>
+
+      <div className="mt-5">
+        <p className="text-xs text-white/40">Pile mix vs FY27 target (open worked pipeline · tick = target share)</p>
+        <div className="mt-3 space-y-2">
+          {p.pileMix.map((row) => (
+            <PileBar key={row.pile} row={row} />
+          ))}
+        </div>
+      </div>
+
+      {p.topOpps.length > 0 && (
+        <div className="mt-5 overflow-x-auto">
+          <p className="text-xs text-white/40">Top open opportunities</p>
+          <table className="mt-2 w-full min-w-[640px] text-sm">
+            <thead>
+              <tr className="text-left text-[11px] uppercase tracking-[0.18em] text-white/40">
+                <th className="pb-2 pr-3 font-medium">Opportunity</th>
+                <th className="pb-2 px-3 font-medium">Pile</th>
+                <th className="pb-2 px-3 text-right font-medium">Value</th>
+                <th className="pb-2 px-3 text-right font-medium">Prob</th>
+                <th className="pb-2 pl-3 text-right font-medium">Weighted</th>
+              </tr>
+            </thead>
+            <tbody>
+              {p.topOpps.map((o, i) => (
+                <tr key={`${o.title}-${i}`} className="border-t border-white/[0.06]">
+                  <td className="py-2 pr-3">
+                    <span className="text-white/85">{(o.title || 'Untitled').slice(0, 52)}</span>
+                    {o.contactName && <span className="ml-2 text-white/40">{o.contactName}</span>}
+                  </td>
+                  <td className="px-3 py-2 text-white/55">{o.pile ?? '—'}</td>
+                  <td className="px-3 py-2 text-right tabular-nums text-white/75">{formatMoney(o.value)}</td>
+                  <td className="px-3 py-2 text-right tabular-nums text-white/55">{o.probability}%</td>
+                  <td className="py-2 pl-3 text-right tabular-nums text-cyan-100">{formatMoney(o.weighted)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+      <p className="mt-3 text-[11px] leading-5 text-white/35">
+        GHL CRM book only. The &ldquo;Grants&rdquo; pipeline (GrantScope radar, ~$272M) is excluded; the Goods Demand Register
+        ({formatMoney(p.summary.demand.value)} of buyer EOIs) is broken out as a demand signal, not counted in the worked headline.
+        Pile mix denominator is all open worked value (so Voice/Flow/Ground/Grants can sum to &lt;100% — the rest is Other/Uncoded).
+      </p>
+    </section>
+  )
+}
+
 export default function WeeklyReportPage() {
   const query = useQuery({ queryKey: ['finance', 'weekly'], queryFn: fetchWeekly })
   const data = query.data
@@ -468,9 +700,13 @@ export default function WeeklyReportPage() {
 
             <TaxRdSection gst={data?.gst || { collected: 0, paid: 0, net: 0 }} receiptedPct={data?.receiptedPct ?? null} />
 
+            {data?.commitments && <CommitmentsSection c={data.commitments} />}
+
+            {data?.pipeline && <OpportunitiesSection p={data.pipeline} />}
+
             <p className="mt-6 text-xs leading-6 text-white/40">
-              Slices 1–4 of the weekly report (issue #140). Next sections: committed/&ldquo;betting on&rdquo;,
-              opportunities &amp; pile mix. Read-only — the reconcile click and any coding stay in Xero.
+              Weekly business-strength report (issue #140 §4) — whole-org snapshot · per-project P&amp;L · people · GST/tax ·
+              committed/&ldquo;betting on&rdquo; · opportunities &amp; pile mix. Read-only — the reconcile click and any coding stay in Xero.
             </p>
           </>
         )}

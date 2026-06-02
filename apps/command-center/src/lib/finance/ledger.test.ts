@@ -3,14 +3,26 @@ import test from 'node:test'
 import {
   budgetVariancePct,
   buildProjectPLRows,
+  classifyPipeline,
   computeRunwayMonths,
+  concentrationPct,
   gstFromRows,
   monthStartISO,
   monthlyBurnFromTrailing,
+  monthlySubscriptionRunRate,
+  next90DayInflows,
+  oppStageBucket,
   pctConsumed,
+  pileForOpp,
+  pileMix,
+  stalledOpps,
   summarizePeopleSpend,
+  summarizePipeline,
+  topOpenOpps,
   trailingMonthsWindow,
   weekStartISO,
+  FY27_PILE_TARGET,
+  type PipelineOpp,
 } from './ledger'
 
 // ---------------------------------------------------------------------------
@@ -149,4 +161,157 @@ test('gstFromRows: 10% of line_amount by tax_type — OUTPUT collected, INPUT pa
   assert.equal(g.collected, 100) // 1000 × 10%
   assert.equal(g.paid, 80) // (500 + 200 + 100) × 10%
   assert.equal(g.net, 20) // owed to the ATO
+})
+
+// ---------------------------------------------------------------------------
+// Commitments / "betting on" (slice 5). Forward subscription run-rate normalises
+// every active/pending sub to a monthly figure (annual ÷ 12); cancelled excluded.
+// ---------------------------------------------------------------------------
+test('monthlySubscriptionRunRate: monthly figure, annual÷12, cancelled excluded', () => {
+  const rows = [
+    { account_status: 'active', billing_cycle: 'monthly', amount: 100, expected_amount: null },
+    { account_status: 'active', billing_cycle: 'annual', amount: 1200, expected_amount: null }, // → 100/mo
+    { account_status: 'pending_migration', billing_cycle: 'monthly', amount: 50, expected_amount: null },
+    { account_status: 'active', billing_cycle: 'usage', amount: 30, expected_amount: null }, // usage treated as monthly est.
+    { account_status: 'cancelled', billing_cycle: 'monthly', amount: 999, expected_amount: null }, // excluded
+    { account_status: 'active', billing_cycle: 'monthly', amount: null, expected_amount: 25 }, // falls back to expected_amount
+  ]
+  assert.equal(monthlySubscriptionRunRate(rows), 305) // 100 + 100 + 50 + 30 + 25
+})
+
+// ---------------------------------------------------------------------------
+// Pipeline classification (slices 5/6). The GHL "Grants" pipeline is a GrantScope
+// radar dump (~$272M, ~10x the real book) — ALWAYS excluded. The Goods Demand
+// Register is aspirational buyer EOIs — broken out as a demand signal, not counted
+// in the worked-pipeline headline. Stage buckets normalise the GHL stage vocab.
+// ---------------------------------------------------------------------------
+test('classifyPipeline: Grants→radar, Goods Demand Register→demand, else→worked', () => {
+  assert.equal(classifyPipeline('Grants'), 'radar')
+  assert.equal(classifyPipeline('Goods — Demand Register'), 'demand')
+  assert.equal(classifyPipeline('A Curious Tractor'), 'worked')
+  assert.equal(classifyPipeline(null), 'worked')
+})
+
+test('oppStageBucket: realized/won→won, lost/expired→lost, else→open', () => {
+  assert.equal(oppStageBucket('realized'), 'won')
+  assert.equal(oppStageBucket('won'), 'won')
+  assert.equal(oppStageBucket('lost'), 'lost')
+  assert.equal(oppStageBucket('expired'), 'lost')
+  assert.equal(oppStageBucket('pursuing'), 'open')
+  assert.equal(oppStageBucket('identified'), 'open')
+  assert.equal(oppStageBucket(null), 'open')
+})
+
+test('pileForOpp: grant→Grants regardless of code, else project_code lookup, else Other/Uncoded', () => {
+  assert.equal(pileForOpp('grant', ['ACT-HV']), 'Grants') // grant rule wins over code
+  assert.equal(pileForOpp('deal', ['ACT-GD']), 'Flow')
+  assert.equal(pileForOpp('deal', ['ACT-EL']), 'Voice')
+  assert.equal(pileForOpp('deal', ['ACT-HV']), 'Ground')
+  assert.equal(pileForOpp('deal', ['WATCH']), 'Other') // has a code, unmapped, no pipeline hint → Other
+  assert.equal(pileForOpp('deal', null), 'Uncoded') // no code → Uncoded
+  assert.equal(pileForOpp('deal', []), 'Uncoded')
+  // pipeline-name fallback when no mapped code (the high-value Goods opps are untagged):
+  assert.equal(pileForOpp('deal', null, 'Goods Supporter Journey'), 'Flow')
+  assert.equal(pileForOpp('deal', ['WATCH'], 'Goods — Buyer Pipeline'), 'Flow') // hint beats unmapped-code Other
+  assert.equal(pileForOpp('deal', null, 'Empathy Ledger'), 'Voice')
+  assert.equal(pileForOpp('grant', null, 'Goods Supporter Journey'), 'Grants') // grant rule still wins
+  assert.equal(pileForOpp('deal', ['ACT-GD'], 'Empathy Ledger'), 'Flow') // mapped code beats pipeline hint
+})
+
+const PIPE = (o: Partial<PipelineOpp>): PipelineOpp => ({
+  title: o.title ?? 'x', pipelineName: o.pipelineName ?? null, pile: o.pile ?? null,
+  valueMid: o.valueMid ?? 0, probability: o.probability ?? 0, stage: o.stage ?? 'pursuing',
+  contactName: o.contactName ?? null, expectedClose: o.expectedClose ?? null, updatedAt: o.updatedAt ?? null,
+})
+
+test('summarizePipeline: open worked (headline) and demand split out; radar dropped; won worked separate', () => {
+  const opps = [
+    PIPE({ pipelineName: 'A Curious Tractor', valueMid: 100000, probability: 35, stage: 'pursuing' }), // worked open, w 35000
+    PIPE({ pipelineName: null, valueMid: 50000, probability: 50, stage: 'submitted' }), // worked open, w 25000
+    PIPE({ pipelineName: 'Goods — Demand Register', valueMid: 200000, probability: 10, stage: 'identified' }), // demand open, w 20000
+    PIPE({ pipelineName: 'Grants', valueMid: 9999999, probability: 35, stage: 'pursuing' }), // RADAR → dropped
+    PIPE({ pipelineName: 'A Curious Tractor', valueMid: 80000, probability: 100, stage: 'realized' }), // worked WON
+    PIPE({ pipelineName: 'A Curious Tractor', valueMid: 12345, probability: 0, stage: 'lost' }), // worked lost → ignored
+  ]
+  const s = summarizePipeline(opps)
+  assert.deepEqual(s.worked, { count: 2, value: 150000, weighted: 60000 })
+  assert.deepEqual(s.demand, { count: 1, value: 200000, weighted: 20000 })
+  assert.deepEqual(s.wonWorked, { count: 1, value: 80000, weighted: 80000 })
+})
+
+// ---------------------------------------------------------------------------
+// Opportunities & pile mix (slice 6). Pile mix compares open-worked pipeline value
+// by pile against the FY27 revenue target (Voice $200K / Flow $1.45M / Ground $150K
+// / Grants $1M). Concentration = the single biggest funder's share of the book.
+// ---------------------------------------------------------------------------
+test('pileMix: open worked value by pile vs FY27 target %, fixed Voice/Flow/Ground/Grants order', () => {
+  const opps = [
+    PIPE({ pile: 'Flow', valueMid: 60000, stage: 'pursuing' }),
+    PIPE({ pile: 'Voice', valueMid: 20000, stage: 'pursuing' }),
+    PIPE({ pile: 'Ground', valueMid: 20000, stage: 'pursuing' }),
+    PIPE({ pipelineName: 'Grants', pile: 'Other', valueMid: 999999, stage: 'pursuing' }), // radar dropped
+    PIPE({ pile: 'Flow', valueMid: 80000, stage: 'lost' }), // not open → ignored
+  ]
+  const rows = pileMix(opps) // total open worked value = 100000
+  assert.deepEqual(rows.map((r) => r.pile), ['Voice', 'Flow', 'Ground', 'Grants'])
+  const flow = rows.find((r) => r.pile === 'Flow')!
+  assert.equal(flow.value, 60000)
+  assert.equal(flow.actualPct, 60) // 60000/100000
+  assert.equal(flow.targetPct, 51.8) // 1450000 / 2800000
+  const grants = rows.find((r) => r.pile === 'Grants')!
+  assert.equal(grants.value, 0)
+  assert.equal(grants.actualPct, 0)
+  assert.equal(grants.targetPct, 35.7) // 1000000 / 2800000
+  // sanity: the four target components sum to $2.8M (headline doc says $2.6M — components are authoritative)
+  assert.equal(Object.values(FY27_PILE_TARGET).reduce((a, b) => a + b, 0), 2800000)
+})
+
+test('concentrationPct: single biggest funder share of open worked value; null contacts excluded from top', () => {
+  const opps = [
+    PIPE({ contactName: 'Snow Foundation', valueMid: 60000, stage: 'pursuing' }),
+    PIPE({ contactName: 'PICC', valueMid: 30000, stage: 'pursuing' }),
+    PIPE({ contactName: null, valueMid: 10000, stage: 'pursuing' }), // in denominator, can't be "top"
+    PIPE({ contactName: 'Snow Foundation', valueMid: 999, stage: 'lost' }), // not open → ignored
+  ]
+  const c = concentrationPct(opps) // denominator 100000
+  assert.equal(c.topName, 'Snow Foundation')
+  assert.equal(c.value, 60000)
+  assert.equal(c.pct, 60)
+})
+
+test('next90DayInflows: open worked opps with expectedClose within the window', () => {
+  const now = new Date('2026-06-03T00:00:00Z') // window 2026-06-03 .. 2026-09-01
+  const opps = [
+    PIPE({ valueMid: 50000, expectedClose: '2026-06-20', stage: 'pursuing' }), // in
+    PIPE({ valueMid: 30000, expectedClose: '2026-08-01', stage: 'submitted' }), // in
+    PIPE({ valueMid: 99999, expectedClose: '2026-12-01', stage: 'pursuing' }), // out (too far)
+    PIPE({ valueMid: 12345, expectedClose: null, stage: 'pursuing' }), // out (no date)
+    PIPE({ valueMid: 7777, expectedClose: '2026-06-20', stage: 'realized' }), // out (won, not open)
+  ]
+  const r = next90DayInflows(opps, now, 90)
+  assert.deepEqual(r, { count: 2, value: 80000 })
+})
+
+test('topOpenOpps: open worked opps sorted by value desc, top N', () => {
+  const opps = [
+    PIPE({ title: 'big', valueMid: 100000, probability: 35, stage: 'pursuing' }),
+    PIPE({ title: 'mid', valueMid: 50000, probability: 50, stage: 'submitted' }),
+    PIPE({ title: 'small', valueMid: 1000, stage: 'pursuing' }),
+    PIPE({ title: 'demand', pipelineName: 'Goods — Demand Register', valueMid: 999999, stage: 'pursuing' }), // not worked
+    PIPE({ title: 'won', valueMid: 999999, stage: 'realized' }), // not open
+  ]
+  const top = topOpenOpps(opps, 2)
+  assert.deepEqual(top.map((o) => o.title), ['big', 'mid'])
+  assert.equal(top[0].weighted, 35000) // 100000 × 35%
+})
+
+test('stalledOpps: open worked opps not updated in N days, by value desc', () => {
+  const now = new Date('2026-06-03T00:00:00Z') // 60-day cutoff = 2026-04-04
+  const opps = [
+    PIPE({ title: 'stale', valueMid: 50000, updatedAt: '2026-01-01T00:00:00Z', stage: 'pursuing' }), // stalled
+    PIPE({ title: 'fresh', valueMid: 100000, updatedAt: '2026-06-01T00:00:00Z', stage: 'pursuing' }), // recent
+    PIPE({ title: 'stale-won', valueMid: 70000, updatedAt: '2026-01-01T00:00:00Z', stage: 'realized' }), // won, ignored
+  ]
+  const stalled = stalledOpps(opps, now, 60)
+  assert.deepEqual(stalled.map((o) => o.title), ['stale'])
 })
