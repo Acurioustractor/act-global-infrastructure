@@ -2,8 +2,11 @@
 /**
  * GHL tag migration — EXPAND phase (additive-first).
  *
- * Maps the 291 ad-hoc tags to the ~9 canonical namespaces from
- * wiki/decisions/ghl-tag-taxonomy.md, and ADDS the canonical tags to each contact.
+ * Maps ad-hoc tags to the canonical namespaces from the LOCKED spec
+ * (thoughts/shared/handoffs/2026-06-02-act-ghl-build-spec.md §"TAG SYSTEM — LOCKED",
+ * which supersedes ghl-tag-taxonomy.md), and ADDS the canonical tags to each contact.
+ * Reconciled 2026-06-02: membership = tier:member (NOT role:member); shop = interest:markets;
+ * temp: is RETIRED (folds into tier:, earned via action:) and is NOT migrated in this pass.
  * It NEVER removes the old tags — so all 26 live workflows keep firing on their existing
  * triggers (the GHL API can't read/edit workflow triggers, so removal is unsafe until each
  * workflow is re-pointed by hand). Removal is a later CONTRACT phase, not this script.
@@ -64,10 +67,12 @@ const ROLE = { 'funder':'funder','audience-funder':'funder','goods-funder':'fund
 const INTEREST = { 'interest-membership':'membership','interest-community':'community','interest-events':'events',
   'interest-markets':'markets','interest-workshops':'workshops','interest-garden':'garden','interest-food':'food',
   'interest-volunteer':'volunteer','interest-sustainability':'sustainability','interest-venue':'venue','interest-eat':'food',
-  'goods-washer-interest':'washer','harvest-shop-interest':'shop','interest:justice-reform':'justice-reform',
+  'goods-washer-interest':'washer','harvest-shop-interest':'markets','interest:justice-reform':'justice-reform',
   'container-request':'container','container request':'container','container - contacted':'container' };
 
-const TEMP = { 'goods-hot':'hot','goods-warm':'warm','goods-steady':'steady','goods-cooling':'cooling','goods-cold':'cold','goods-new':'new' };
+// temp: (engagement heat) is RETIRED in the locked spec — it folds into tier:, which is
+// EARNED via action: gives, not back-derived from heat. So heat tags are NOT migrated here.
+// goods-hot/warm/etc. fall through to the goods-prefix rule below -> project:act-gd only.
 
 const COMMS = { 'goods-newsletter':'goods-newsletter','harvest-newsletter':'harvest-newsletter','newsletter':'newsletter',
   'goods-nurture':'nurture','audience-brand':'newsletter' };
@@ -81,11 +86,12 @@ const SOURCE = { 'harvest-website':'website','website-signup':'website','website
 // regex families
 const EXTRA = {
   // high-count unmapped from the first dry-run
-  'harvest-member':['project:act-hv','role:member'],'member-comments':['project:act-hv','role:member'],
-  'member-question':['project:act-hv','role:member'],'harvest-people-hq':['project:act-hv'],
+  'harvest-member':['project:act-hv','tier:member'],'member-comments':['project:act-hv'],
+  'member-question':['project:act-hv'],'harvest-people-hq':['project:act-hv'],
   'eoi-gathering-march-2026':['source:event:eoi-gathering-2026'],'locals-day-march-2026':['source:event:locals-day-2026'],
   'harvest-gathering-photos':['project:act-hv','source:event:gathering'],'photo-wall':['project:act-hv'],'photo-wall-ready':['project:act-hv'],'witta':['place:witta'],
-  'shop-prospect':['interest:shop'],'shop-produce':['interest:shop'],'shop-follow-up':['interest:shop'],'harvest-shop-interest':['interest:shop'],
+  'shop-prospect':['interest:markets','role:buyer'],'harvest-shop-interest':['project:act-hv','interest:markets'],'shop-follow-up':['project:act-hv','interest:markets'],
+  'shop-produce':['project:act-hv','interest:markets','role:supplier'],'shop-maker':['project:act-hv','interest:markets','role:supplier'],'shop-food':['project:act-hv','interest:markets','role:supplier'],'shop-consignment':['project:act-hv','interest:markets','role:supplier'],
   'world-tour-partner':['role:partner','source:world-tour'],'act-regenerative-studio':['project:act-rs'],
   'grant':['role:funder'],'goods-government-grant':['role:gov'],'research':['role:researcher'],
   'act-inquiry':['source:inquiry'],'flagship-inquiry':['source:inquiry'],'goods-general-inquiry':['source:inquiry'],'goods-inquiry':['source:inquiry'],
@@ -98,7 +104,9 @@ const EXTRA = {
   'media':['role:media'],'legal':['role:advisory'],'speech-pathology':['role:health-service'],'uwa-law':['role:partner'],'education':['interest:workshops'],'minderoo-connection':['role:funder'],'tour-funding':['role:funder'],'ramsey':['role:funder'],'international':['place:international'],
   'steward - advocate':['role:supporter'],'steward - volunteer':['role:supporter','interest:volunteer'],'community-idea':['interest:community'],'idea-general':['source:inbound'],'event-submission':['source:contact-form'],'event registrant':['interest:events'],'quiz-completed ':['action:quiz-completed'],
 };
-const CANON_NS = /^(project|role|interest|temp|place|source|comms|consent|ops|action|priority):/;
+// tier: is canonical (recognise existing rung tags as no-ops). temp: is RETIRED — left out
+// so any existing temp:* surfaces as UNMAPPED (a CONTRACT-phase cleanup signal, not migrated here).
+const CANON_NS = /^(project|role|interest|tier|place|source|comms|consent|ops|action|priority):/;
 
 function canonicalize(raw) {
   const t = raw.trim().toLowerCase();
@@ -116,7 +124,6 @@ function canonicalize(raw) {
   if (PROJECT[t]) return { add: [`project:${PROJECT[t]}`] };
   if (ROLE[t]) return { add: [`role:${ROLE[t]}`] };
   if (INTEREST[t]) return { add: [`interest:${INTEREST[t]}`] };
-  if (TEMP[t]) return { add: [`temp:${TEMP[t]}`] };
   if (COMMS[t]) return { add: [`comms:${COMMS[t]}`] };
   if (SOURCE[t]) return { add: [`source:${SOURCE[t]}`] };
   // regex families

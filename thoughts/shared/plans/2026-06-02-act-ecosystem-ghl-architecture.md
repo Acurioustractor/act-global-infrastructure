@@ -62,6 +62,11 @@ Per the build-spec "WORKFLOW BUILD SPEC". Each project's Journey board + the lad
 2. **Live seeded `tier:` tags** (82/4/57/0/0 on the Harvest board): treat as a one-time seed; from now rungs move only on real `action:` gives. ⚑ Decide: backfill `action:` evidence for existing Members, or accept the seed and let movement take over.
 3. **Draft workflows** (all 6 Harvest customer workflows are unpublished — members get silence now): publish per the Harvest alignment spec — independent of this plan, still urgent.
 4. **Community-line check**: audit Journey boards for `role:community`-type contacts (e.g. "rachel atkinson — PICC" in Connected) and remove them from the ladder.
+5. **A prior EXPAND run already wrote STALE canonical tags live** (confirmed by the 2026-06-02 dry-run against the fixed script). These were created against the superseded 1-Jun mappings and EXPAND cannot remove them — they are **CONTRACT-phase cleanup targets**, gated behind re-pointing any workflow that fires on them:
+   - **`role:member` on 57 contacts** → remove (membership is `tier:member`; the fixed EXPAND now also adds `tier:member` to these same contacts, so after CONTRACT the rung is correct).
+   - **`temp:*` on 84 contacts** (warm 41 / cooling 13 / hot 12 / cold 11 / steady 6 / new 1) → retire (folds into `tier:`, earned via `action:`, not back-derived).
+   - **`interest:shop` on ~32 contacts** → remove (canonical is `interest:markets`, which the fixed EXPAND now adds).
+   - Tooling: `scripts/delete-junk-ghl-tags.mjs` (exists) for the CONTRACT removals; run gated, one tag at a time, after workflow re-point. **Tier 3 — Ben's explicit go.**
 
 ## Task Ledger
 
@@ -91,7 +96,8 @@ Per the build-spec "WORKFLOW BUILD SPEC". Each project's Journey board + the lad
 | Date | Checked | Result |
 |---|---|---|
 | 2026-06-02 | Live GHL workflows + tag library (read-only API) | All 6 Harvest customer workflows DRAFT; Membership Journey published but 0-enrolled; 397 tags, flat↔namespaced collision |
-| 2026-06-02 | This session's Harvest Phase B vs locked spec | DRIFT: invented role:member/supplier, missing project:act-hv — must reconcile |
+| 2026-06-02 | This session's Harvest Phase B vs locked spec | DRIFT: role:member + missing project:act-hv (role:supplier was fine) — reconciled in `fe2cbcf` (Harvest repo) |
+| 2026-06-02 | EXPAND dry-run with fixed mappings (read-only, Supabase mirror) | Forward maps clean (harvest-member→project:act-hv+tier:member; shop→interest:markets). BUT prior run left stale tags live: role:member×57, temp:*×84, interest:shop×~32 → CONTRACT cleanup. 157 contacts gain ≥1 tag / 462 adds; 328 stale gone-from-ghl skipped |
 
 ## Open items (need Ben / community)
 - ⚑ The value-matrix cells marked above (funder steward give, buyer purchase as `action:`, partner govern rung).
