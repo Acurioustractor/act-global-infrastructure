@@ -93,6 +93,7 @@ export interface ReconcileLineResult {
   note: string
   danger: boolean // true = matching an AUTHORISED unpaid bill: real-payment-or-phantom, needs per-line judgement
   offsetLineId?: string // a refund credit that cancels this debit charge (and vice-versa)
+  ruleCovered?: boolean // a generated bank rule will pre-fill this CREATE line → one-click OK in Xero (no matching)
 }
 
 export interface ReconcileSummary {
@@ -114,6 +115,33 @@ export interface ReconcileSummary {
   surchargeTotal: number
 }
 
+/**
+ * A draft Xero bank rule for a recurring no-bill vendor. Setting it once in the
+ * Xero UI (there is NO bank-rules API — verified) makes every future line from that
+ * vendor arrive on the reconcile screen pre-filled → one-click OK, with NO matching.
+ * This is the only auto-suggest lever Xero gives; the pack is the matching-killer for
+ * the recurring CREATE bulk. Rules NEVER target match-to-bill lines (that would double-count).
+ */
+export interface BankRule {
+  matchText: string // the "Payee contains <X>" token Xero matches on
+  contactName: string // the contact to set
+  lineCount: number // recurring lines this rule collapses to one-click
+  totalValue: number // $ this rule would auto-code (money — TDD'd)
+  account: string // learned/guessed account code; UNKNOWN_ACCOUNT placeholder if not inferable
+  accountConfident: boolean // false = Ben sets the account on first use (rule still scopes contact+project+match)
+  defaultProject: string | null // most-common project across the vendor's lines
+  taxHint: string // GST guidance (SaaS/subscriptions vary — overseas often GST-free)
+  uncertainTax: boolean // true = set tax per vendor (don't blanket-apply GST)
+}
+
+export interface BankRulePack {
+  rules: BankRule[]
+  ruleCount: number
+  coveredLineCount: number // CREATE lines that become one-click OK once the rules are set
+  coveredValue: number
+  coveredLineIds: string[]
+}
+
 export type ReconcileActionFilter = ReconcileAction | 'all'
 
 export interface ReconcileFilters {
@@ -127,6 +155,7 @@ export interface ReconcileFilters {
 export interface ReconcileResponse {
   filters: ReconcileFilters
   summary: ReconcileSummary
+  bankRules: BankRulePack
   totalMatching: number
   results: ReconcileLineResult[]
 }
@@ -255,6 +284,9 @@ function learnedProject(dext: DextCoding[], vendor: string): string | null {
   return best
 }
 
+// Account we couldn't infer — the line (and any rule for it) needs a human to set the code.
+const UNKNOWN_ACCOUNT = '? - code by hand'
+
 // Last-resort heuristic for vendors never seen in the receipt pipeline:
 // keyword → account; location → project hint. Mirrors guess() in the script.
 function guessAccount(vendor: string): string {
@@ -268,7 +300,7 @@ function guessAccount(vendor: string): string {
   if (/WOOLW|COLES|ALDI|IGA|SUPERMARKET|FOODS|BUTCHER|GUZMAN|CAFE|SUSHI|RICEBOI|BONKERS|BUFFET/.test(u)) {
     return '421 - Light meals'
   }
-  return '? - code by hand'
+  return UNKNOWN_ACCOUNT
 }
 
 function guessProjectHint(vendor: string): string | null {
@@ -492,6 +524,95 @@ export function summarizeReconcile(results: ReconcileLineResult[]): ReconcileSum
   return summary
 }
 
+// --- bank-rule pack (the matching-killer; money totals TDD'd) --------------
+
+function mostCommon<T>(items: T[]): T | null {
+  const counts = new Map<T, number>()
+  for (const it of items) counts.set(it, (counts.get(it) || 0) + 1)
+  let best: T | null = null
+  let bestN = 0
+  for (const [k, n] of counts) if (n > bestN) ((best = k), (bestN = n))
+  return best
+}
+
+// The first significant token of a vendor — the text a Xero bank rule matches "contains" on,
+// and the grouping key so "KENNARDS HIRE SUNSHINE" + "KENNARDS HIRE PTY" share one rule.
+function vendorRuleKey(vendor: string): string | null {
+  for (const t of normalizeVendor(vendor).split(' ')) {
+    if (t.length >= 3 && !VENDOR_STOPWORDS.has(t)) return t
+  }
+  return null
+}
+
+const RULE_MIN_LINES = 2 // a one-off isn't worth a rule; rules are for RECURRING vendors
+
+/**
+ * Build the draft bank-rule pack from already-classified results. Only CREATE lines are
+ * eligible — a rule pre-fills a Spend Money, so ruling a vendor that has a real bill would
+ * double-count (you must MATCH those, not create). Recurring vendors (≥RULE_MIN_LINES) become
+ * one rule each, carrying the account/project/tax the classifier already inferred; setting the
+ * pack once in Xero collapses every covered line to a one-click OK with no matching.
+ *
+ * Mutates each covered result's `ruleCovered = true` so the UI can badge it.
+ */
+export function buildBankRulePack(results: ReconcileLineResult[]): BankRulePack {
+  const groups = new Map<string, ReconcileLineResult[]>()
+  for (const r of results) {
+    if (r.action !== 'create') continue // SAFETY: never rule a match-to-bill line (double-count guard)
+    const key = vendorRuleKey(r.line.vendor)
+    if (!key) continue
+    const g = groups.get(key)
+    if (g) g.push(r)
+    else groups.set(key, [r])
+  }
+
+  const rules: BankRule[] = []
+  const coveredLineIds: string[] = []
+  let coveredValue = 0
+
+  for (const [key, group] of groups) {
+    if (group.length < RULE_MIN_LINES) continue
+    const account = mostCommon(
+      group.map((r) => r.suggestedAccount).filter((a): a is string => !!a && a !== UNKNOWN_ACCOUNT)
+    )
+    const defaultProject = mostCommon(
+      group.map((r) => r.suggestedProject).filter((p): p is string => !!p)
+    )
+    const contactName = mostCommon(group.map((r) => r.line.vendor)) || key
+    const uncertainTax = !!account && /Subscription/i.test(account)
+    const totalValue = round2(group.reduce((s, r) => s + r.line.amount, 0))
+
+    rules.push({
+      matchText: key,
+      contactName,
+      lineCount: group.length,
+      totalValue,
+      account: account || UNKNOWN_ACCOUNT,
+      accountConfident: !!account,
+      defaultProject,
+      taxHint: uncertainTax
+        ? 'GST varies — overseas SaaS often GST-free; set tax per vendor'
+        : 'GST on Expenses',
+      uncertainTax,
+    })
+    for (const r of group) {
+      r.ruleCovered = true
+      coveredLineIds.push(r.line.id)
+    }
+    coveredValue = round2(coveredValue + totalValue)
+  }
+
+  rules.sort((a, b) => b.totalValue - a.totalValue || b.lineCount - a.lineCount)
+
+  return {
+    rules,
+    ruleCount: rules.length,
+    coveredLineCount: coveredLineIds.length,
+    coveredValue,
+    coveredLineIds,
+  }
+}
+
 // --- response builder (pure; mirrors workbench.ts) -------------------------
 
 const ACTION_ORDER: Record<ReconcileAction, number> = {
@@ -558,6 +679,11 @@ export function buildReconcileResponse(
   const byDate = (a: ReconcileLineResult, b: ReconcileLineResult) =>
     (a.line.date || '9999').localeCompare(b.line.date || '9999') || b.line.amount - a.line.amount
 
+  // Build the rule pack over the FULL set (it's a setup artifact, filter-independent) BEFORE
+  // filtering — it also stamps ruleCovered on the shared result objects, so the flag flows
+  // through to the filtered/paged view.
+  const bankRules = buildBankRulePack(all)
+
   const filtered = all
     .filter((r) => matchesAction(r, filters.action))
     .filter((r) => r.line.amount >= filters.minAmount)
@@ -567,6 +693,7 @@ export function buildReconcileResponse(
   return {
     filters,
     summary: summarizeReconcile(all),
+    bankRules,
     totalMatching: filtered.length,
     results: filtered.slice(0, filters.limit),
   }

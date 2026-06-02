@@ -2,6 +2,7 @@ import assert from 'node:assert/strict'
 import test from 'node:test'
 import {
   amountCloseness,
+  buildBankRulePack,
   buildReconcileResponse,
   classifyLine,
   normalizeVendor,
@@ -266,4 +267,48 @@ test('buildReconcileResponse: sort=date mirrors Xero by ordering oldest-first', 
   const dates = res.results.map((r) => r.line.date)
   const ascending = [...dates].sort()
   assert.deepEqual(dates, ascending)
+})
+
+// ---------------------------------------------------------------------------
+// Bank-rule pack — the matching-killer. A rule turns recurring no-bill vendors
+// into one-click OK Creates in Xero. Money totals are hand-computed; the safety
+// invariant (NEVER rule a match-to-bill line → no double-count) is asserted.
+// ---------------------------------------------------------------------------
+const ruleLines: CardLine[] = [
+  // KENNARDS recurs (2 lines) → one rule; account not in the guess vocab → accountConfident false
+  { id: 'K1', date: '2025-10-01', vendor: 'KENNARDS HIRE SUNSHINE', amount: 100, status: 'unreconciled', projectCode: 'ACT-GD', bankAccount: 'NAB Visa ACT #8815' },
+  { id: 'K2', date: '2025-10-08', vendor: 'KENNARDS HIRE PTY', amount: 200, status: 'unreconciled', projectCode: 'ACT-GD', bankAccount: 'NAB Visa ACT #8815' },
+  // BUNNINGS is a one-off → below the recurring threshold → no rule
+  { id: 'BN', date: '2025-10-02', vendor: 'BUNNINGS WAREHOUSE', amount: 50, status: 'unreconciled', projectCode: null, bankAccount: 'NAB Visa ACT #8815' },
+]
+
+test('buildBankRulePack: recurring CREATE vendor → one rule, $ summed; one-off + match excluded', () => {
+  const results = [
+    ...ruleLines.map((l) => classifyLine(l, emptyCtx)), // all CREATE (no bill/txn/dext)
+    classifyLine(lines[0], ctx), // L1 = Centre Trailer → match_bill, must NEVER be ruled
+  ]
+  const pack = buildBankRulePack(results)
+
+  assert.equal(pack.ruleCount, 1) // KENNARDS only (BUNNINGS one-off, Centre Trailer is a match)
+  const k = pack.rules[0]
+  assert.equal(k.matchText, 'KENNARDS')
+  assert.equal(k.lineCount, 2)
+  assert.equal(k.totalValue, 300) // 100 + 200 — hand-computed
+  assert.equal(k.accountConfident, false) // Kennards isn't in the guess vocab → Ben sets account once
+  assert.equal(k.defaultProject, 'ACT-GD')
+
+  assert.equal(pack.coveredLineCount, 2)
+  assert.equal(pack.coveredValue, 300)
+
+  // SAFETY invariant: a matched (real-bill) line is never collapsed into a create-rule
+  const matched = results.find((r) => r.line.id === 'L1')
+  assert.equal(matched?.action, 'match_bill')
+  assert.notEqual(matched?.ruleCovered, true)
+})
+
+test('buildReconcileResponse: exposes the bank-rule pack and flags rule-covered lines', () => {
+  const res = buildReconcileResponse(ruleLines, emptyCtx, { ...baseFilters, sort: 'date' })
+  assert.ok(res.bankRules.ruleCount >= 1)
+  assert.equal(res.results.find((r) => r.line.id === 'K1')?.ruleCovered, true)
+  assert.notEqual(res.results.find((r) => r.line.id === 'BN')?.ruleCovered, true) // one-off, no rule
 })
