@@ -92,7 +92,7 @@ Smart lists count too: any list filtering on a flat tag (`interest-events`, etc.
 - [x] Agree this plan + lock the vocabulary (Ben, 2026-06-02). Value-matrix ⚑ cells + community lane still open.
 - [x] Reconcile Harvest Phase B branch to canonical (`project:act-hv` chokepoint, drop role:member, shop→interest:markets) — `fe2cbcf`
 - [x] **EXPAND DONE 2026-06-03** — re-pointed the script to read LIVE GHL (mirror was stale: 533 auto_ + deleted rows), tracer-verified, then applied: **53 contacts / ~184 canonical tags added, 0 errors, additive.** Exit gate met (0 remaining).
-- [ ] RE-POINT keeper workflows to canonical tags (UI, one at a time) + update the 5 producing scripts
+- [~] RE-POINT — **producing scripts DONE 2026-06-03** (clean-funder dual-writes canonical via `withCanonical`; seed-goods adds `project:act-gd`+`role:buyer`+`source:xero`, drops junk; project-notifications matches canonical `project:`/`role:` additively; webhook/sync-content needed no change). **Workflow + Smart-List re-point = Ben's UI work**, one at a time, test each (per execution-plan runbooks).
 - [ ] Publish the 6 draft Harvest workflows + build the 3 calendar-tag workflows
 - [ ] Build per-project Journey boards + stage→`tier:` sync automation
 - [ ] Encode the value matrix into ladder-lift workflow copy

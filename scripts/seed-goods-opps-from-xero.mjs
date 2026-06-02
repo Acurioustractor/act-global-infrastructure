@@ -221,7 +221,10 @@ async function main() {
             firstName: 'Accounts',
             lastName: orgName,
             companyName: orgName,
-            tags: ['goods', 'project:act-gd', 'auto-created-from-xero', 'source:xero'],
+            // Canonical (Phase 2): project:act-gd + role:buyer (Goods buyer from a Xero invoice)
+            // + source:xero. 'goods' kept (dual-write, retires in CONTRACT). Dropped the junk
+            // 'auto-created-from-xero' (it's on the delete list, not a durable tag).
+            tags: ['goods', 'project:act-gd', 'role:buyer', 'source:xero'],
           }),
         });
         contactId = created.contact?.id || created.id;

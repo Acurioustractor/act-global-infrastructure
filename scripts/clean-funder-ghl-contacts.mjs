@@ -117,6 +117,23 @@ const FUNDERS = [
 // SEARCH + DEDUPE
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
+// Canonical expansion (Phase 2 re-point): emit the namespaced tag ALONGSIDE the legacy
+// flat one (dual-write) so no new funder contact drops out of a still-flat-filtered Smart
+// List before it's re-pointed. The flat tags retire in CONTRACT after Smart-list re-point.
+const CANON = {
+  'goods': ['project:act-gd'], 'act-gd': ['project:act-gd'], 'project-goods': ['project:act-gd'],
+  'goods-newsletter': ['comms:goods-newsletter'], 'newsletter': ['comms:newsletter'],
+  'justicehub': ['project:act-jh'], 'act-jh': ['project:act-jh'],
+  'contained': ['project:act-jh', 'interest:justice-reform'],
+  'partner': ['role:partner'], 'funder': ['role:funder'], 'goods-funder': ['role:funder'],
+  'goods-supporter': ['role:supporter'],
+};
+function withCanonical(tags) {
+  const s = new Set(tags);
+  for (const t of tags) for (const c of (CANON[t] || [])) s.add(c);
+  return [...s];
+}
+
 async function gatherContactsFor(funder) {
   const byId = new Map();
   for (const q of funder.queries) {
@@ -234,7 +251,7 @@ async function main() {
       const remaining = contacts.filter(c => !deletedIds.has(c.id));
       for (const c of remaining) {
         const current = new Set(c.tags || []);
-        const missing = funder.defaultTags.filter(t => !current.has(t));
+        const missing = withCanonical(funder.defaultTags).filter(t => !current.has(t));
         if (missing.length === 0) continue;
 
         const email = (c.email || '').toLowerCase();
