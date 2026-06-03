@@ -8,7 +8,7 @@ import { cn } from '@/lib/utils'
 
 interface CoverageRow { area: string; n: number; tagged: number; pct: number }
 interface Conflict { id: string; name: string | null; oppCode: string; invoiceCode: string; proposed: string; reason?: string }
-interface FillItem { id: string; name?: string | null; code: string | null; confidence: number; source: string }
+interface FillItem { id: string; name?: string | null; code: string | null; confidence: number; source: string; pipeline?: string | null; category?: string | null }
 interface FillBucket { auto: FillItem[]; review: FillItem[]; none: FillItem[] }
 interface SweepRun {
   run_at: string
@@ -71,12 +71,14 @@ export default function TaggingCockpitPage() {
   const [appliedIds, setAppliedIds] = useState<Set<string>>(new Set())
   const [lastBatch, setLastBatch] = useState<AppliedItem[] | null>(null)
   const [openGroups, setOpenGroups] = useState<Set<string>>(new Set())
-  const [showNoMatch, setShowNoMatch] = useState(false)
+  // No-match manual assignment: id -> { kind, code }. Empty by default (most are inquiries/test, leave them).
+  const [nomatchSel, setNomatchSel] = useState<Record<string, { kind: 'opp' | 'sub'; code: string }>>({})
 
   const conflicts = (run?.conflicts ?? []).filter((c) => !appliedIds.has(c.id))
   const oppAuto = (run?.fill.opps.auto ?? []).filter((i) => i.code && !appliedIds.has(i.id))
   const subAuto = (run?.fill.subs.auto ?? []).filter((i) => i.code && !appliedIds.has(i.id))
-  const noMatch = [...(run?.fill.opps.none ?? []), ...(run?.fill.subs.none ?? [])]
+  const oppNone = (run?.fill.opps.none ?? []).filter((i) => !appliedIds.has(i.id))
+  const subNone = (run?.fill.subs.none ?? []).filter((i) => !appliedIds.has(i.id))
 
   const confState = (c: Conflict) => conflictSel[c.id] ?? { include: c.oppCode === LAZY_DEFAULT, code: c.proposed }
   const isExcluded = (id: string) => excluded.has(id)
@@ -108,9 +110,10 @@ export default function TaggingCockpitPage() {
     }
     for (const i of oppAuto) if (!isExcluded(i.id) && i.code) out.push({ kind: 'opp', id: i.id, code: i.code })
     for (const i of subAuto) if (!isExcluded(i.id) && i.code) out.push({ kind: 'sub', id: i.id, code: i.code })
+    for (const [id, sel] of Object.entries(nomatchSel)) if (sel.code && !appliedIds.has(id)) out.push({ kind: sel.kind, id, code: sel.code })
     return out
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [conflicts, oppAuto, subAuto, conflictSel, excluded])
+  }, [conflicts, oppAuto, subAuto, conflictSel, excluded, nomatchSel, appliedIds])
 
   const applyMut = useMutation({
     mutationFn: applyDecisions,
@@ -186,6 +189,10 @@ export default function TaggingCockpitPage() {
             <section className="mt-6 rounded-3xl border border-white/10 bg-white/[0.03] p-5">
               <h2 className="text-sm font-semibold text-white/80">Coverage by area</h2>
               <div className="mt-4 space-y-2">{run.coverage.map((r) => <CoverageBar key={r.area} row={r} />)}</div>
+              <p className="mt-4 border-t border-white/[0.06] pt-3 text-[11px] text-white/40">
+                Opportunities + subscriptions are fixed here. Xero transactions &amp; invoices (line-item detail, receipts) →{' '}
+                <Link href="/finance/tagger-v2" className="text-cyan-200/80 underline-offset-2 hover:underline">tagger</Link>.
+              </p>
             </section>
 
             {/* Conflicts */}
@@ -289,19 +296,16 @@ export default function TaggingCockpitPage() {
               setExcluded={setExcluded}
             />
 
-            {/* No-match (info) */}
-            <section className="mt-6 rounded-3xl border border-white/10 bg-white/[0.03] p-5">
-              <button onClick={() => setShowNoMatch((v) => !v)} className="flex w-full items-center justify-between text-sm font-semibold text-white/70">
-                <span>No-match — the resolver won&apos;t guess ({noMatch.length})</span>
-                {showNoMatch ? <ChevronDown className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />}
-              </button>
-              <p className="mt-1 text-[11px] text-white/35">Handle these in the per-record tagger; they need a human code, not a guess.</p>
-              {showNoMatch && (
-                <ul className="mt-3 max-h-56 space-y-1 overflow-y-auto text-xs text-white/55">
-                  {noMatch.map((i) => <li key={i.id} className="truncate">· {i.name || i.id}</li>)}
-                </ul>
-              )}
-            </section>
+            {/* No-match — assign a code by hand (grouped by pipeline so a whole pipeline goes in one pick) */}
+            <NoMatchSection
+              oppNone={oppNone}
+              subNone={subNone}
+              projects={projects}
+              sel={nomatchSel}
+              setSel={setNomatchSel}
+              openGroups={openGroups}
+              toggleGroup={toggleGroup}
+            />
           </>
         )}
       </div>
@@ -422,6 +426,116 @@ function FillSection({
             </div>
           )
         })}
+      </div>
+    </section>
+  )
+}
+
+// ── No-match: manual assignment, opps grouped by pipeline (assign a whole pipeline at once) ──
+function NoMatchSection({
+  oppNone, subNone, projects, sel, setSel, openGroups, toggleGroup,
+}: {
+  oppNone: FillItem[]
+  subNone: FillItem[]
+  projects: Project[]
+  sel: Record<string, { kind: 'opp' | 'sub'; code: string }>
+  setSel: React.Dispatch<React.SetStateAction<Record<string, { kind: 'opp' | 'sub'; code: string }>>>
+  openGroups: Set<string>
+  toggleGroup: (key: string) => void
+}) {
+  const total = oppNone.length + subNone.length
+  const assigned = Object.keys(sel).filter((id) => [...oppNone, ...subNone].some((i) => i.id === id)).length
+  if (total === 0) return null
+
+  // group opp no-match by pipeline
+  const pipeGroups = new Map<string, FillItem[]>()
+  for (const i of oppNone) pipeGroups.set(i.pipeline || '(no pipeline)', [...(pipeGroups.get(i.pipeline || '(no pipeline)') || []), i])
+  const groups = [...pipeGroups.entries()].sort((a, b) => b[1].length - a[1].length)
+
+  const setOne = (id: string, kind: 'opp' | 'sub', code: string) =>
+    setSel((prev) => { const n = { ...prev }; if (code) n[id] = { kind, code }; else delete n[id]; return n })
+  const setMany = (items: FillItem[], code: string) =>
+    setSel((prev) => { const n = { ...prev }; for (const i of items) { if (code) n[i.id] = { kind: 'opp', code }; else delete n[i.id] } return n })
+
+  const codeOptions = projects.map((p) => <option key={p.code} value={p.code}>{p.code} — {p.name}</option>)
+
+  return (
+    <section className="mt-6 rounded-3xl border border-white/10 bg-white/[0.03] p-5">
+      <h2 className="text-sm font-semibold text-white/80">No-match — assign a code ({assigned}/{total} assigned)</h2>
+      <p className="mt-0.5 text-[11px] text-white/40">
+        The resolver won&apos;t guess these. Assign a whole pipeline in one pick, or leave the inquiries/test rows untagged.
+      </p>
+
+      <div className="mt-4 space-y-2">
+        {groups.map(([pipe, items]) => {
+          const key = `none:${pipe}`
+          const open = openGroups.has(key)
+          const nAssigned = items.filter((i) => sel[i.id]).length
+          const codes = new Set(items.map((i) => sel[i.id]?.code).filter(Boolean))
+          const groupCode = codes.size === 1 ? [...codes][0] : ''
+          return (
+            <div key={key} className="rounded-2xl border border-white/10 bg-white/[0.02]">
+              <div className="flex flex-wrap items-center gap-3 px-3 py-2">
+                <button onClick={() => toggleGroup(key)} className="flex items-center gap-2 text-left">
+                  {open ? <ChevronDown className="h-4 w-4 text-white/40" /> : <ChevronRight className="h-4 w-4 text-white/40" />}
+                  <span className="text-sm text-white/80">{pipe}</span>
+                  <span className="text-xs text-white/45">({items.length})</span>
+                </button>
+                <span className="ml-auto flex items-center gap-2 text-xs">
+                  <span className="text-white/40">assign all →</span>
+                  <select
+                    value={groupCode}
+                    onChange={(e) => setMany(items, e.target.value)}
+                    className="rounded-lg border border-white/15 bg-[#0b1016] px-2 py-1 font-mono text-xs text-cyan-100 focus:border-cyan-300/50 focus:outline-none"
+                  >
+                    <option value="">— leave —</option>
+                    {codeOptions}
+                  </select>
+                  {nAssigned > 0 && <span className="text-emerald-200/80">{nAssigned} set</span>}
+                </span>
+              </div>
+              {open && (
+                <ul className="space-y-1 border-t border-white/[0.06] px-3 py-2">
+                  {items.map((i) => (
+                    <li key={i.id} className="flex items-center gap-2 text-xs">
+                      <span className="truncate text-white/65">{i.name || i.id}</span>
+                      <select
+                        value={sel[i.id]?.code || ''}
+                        onChange={(e) => setOne(i.id, 'opp', e.target.value)}
+                        className="ml-auto shrink-0 rounded-lg border border-white/15 bg-[#0b1016] px-2 py-0.5 font-mono text-[11px] text-cyan-100 focus:border-cyan-300/50 focus:outline-none"
+                      >
+                        <option value="">— leave —</option>
+                        {codeOptions}
+                      </select>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          )
+        })}
+
+        {subNone.length > 0 && (
+          <div className="rounded-2xl border border-white/10 bg-white/[0.02] px-3 py-2">
+            <p className="mb-2 text-sm text-white/80">Subscriptions ({subNone.length})</p>
+            <ul className="space-y-1">
+              {subNone.map((i) => (
+                <li key={i.id} className="flex items-center gap-2 text-xs">
+                  <span className="truncate text-white/65">{i.name || i.id}</span>
+                  {i.category && <span className="shrink-0 rounded-full bg-white/[0.06] px-2 py-0.5 text-[10px] text-white/40">{i.category}</span>}
+                  <select
+                    value={sel[i.id]?.code || ''}
+                    onChange={(e) => setOne(i.id, 'sub', e.target.value)}
+                    className="ml-auto shrink-0 rounded-lg border border-white/15 bg-[#0b1016] px-2 py-0.5 font-mono text-[11px] text-cyan-100 focus:border-cyan-300/50 focus:outline-none"
+                  >
+                    <option value="">— leave —</option>
+                    {codeOptions}
+                  </select>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
     </section>
   )

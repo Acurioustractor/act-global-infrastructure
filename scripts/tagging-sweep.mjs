@@ -98,14 +98,14 @@ async function main() {
   for (const o of untaggedOpps || []) {
     const linkedCode = o.xero_invoice_id ? invCodeByKey.get(String(o.xero_invoice_id)) : null;
     const r = resolveProjectCode({ linkedCode, pipelineName: o.pipeline_name, text: o.name }, index, { vendorRules });
-    place(oppFill, { id: o.id, name: o.name, ...r });
+    place(oppFill, { id: o.id, name: o.name, pipeline: o.pipeline_name || null, ...r });
   }
 
   const { data: untaggedSubs } = await sb.from('subscriptions').select('id, vendor_name, purpose, category').or('project_codes.is.null,project_codes.eq.{}');
   const subFill = bucket();
   for (const s of untaggedSubs || []) {
     const r = resolveProjectCode({ vendorName: s.vendor_name, text: `${s.vendor_name} ${s.purpose || ''} ${s.category || ''}` }, index, { vendorRules });
-    place(subFill, { id: s.id, name: s.vendor_name, ...r });
+    place(subFill, { id: s.id, name: s.vendor_name, category: s.category || s.purpose || null, ...r });
   }
   log(`\n3. FILL PREVIEW (untagged → resolver)`);
   log(`   GHL opps  (${(untaggedOpps || []).length} untagged): ${oppFill.auto.length} auto-fillable · ${oppFill.review.length} review · ${oppFill.none.length} no-match`);
