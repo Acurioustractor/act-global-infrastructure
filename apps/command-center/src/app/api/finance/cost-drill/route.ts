@@ -43,11 +43,17 @@ export async function GET() {
 
     const folded = foldMonthlyByCanonical(monthly)
 
-    // Names + tier by canonical code.
-    const { data: projects } = await supabase.from('projects').select('code, name, tier').limit(500)
+    // Names + tier by canonical code. `status` filters the reassign-target dropdown to live projects.
+    const { data: projects } = await supabase.from('projects').select('code, name, tier, status').limit(500)
     const meta = new Map<string, { name: string | null; tier: string | null }>(
       (projects || []).map((p) => [String(p.code).toUpperCase(), { name: p.name ?? null, tier: p.tier ?? null }]),
     )
+    // Reassign targets: active projects, never the legacy wrappers (they fold away).
+    const LEGACY = new Set(['ACT-CG', 'ACT-HQ', 'ACT-PC'])
+    const targetProjects = (projects || [])
+      .filter((p) => (p.status ?? 'active') === 'active' && !LEGACY.has(String(p.code).toUpperCase()))
+      .map((p) => ({ code: String(p.code).toUpperCase(), name: p.name ?? p.code }))
+      .sort((a, b) => a.code.localeCompare(b.code))
 
     const rows = folded.map((r) => ({
       ...r,
@@ -60,7 +66,7 @@ export async function GET() {
       { revenue: 0, expenses: 0, net: 0 },
     )
 
-    return NextResponse.json({ rows, totals, fy: 'FY26', fyStart: FY_START, fyEnd: FY_END })
+    return NextResponse.json({ rows, totals, projects: targetProjects, fy: 'FY26', fyStart: FY_START, fyEnd: FY_END })
   } catch (error) {
     console.error('cost-drill P&L error:', error)
     return NextResponse.json({ error: 'Failed to load cost-drill P&L' }, { status: 500 })
