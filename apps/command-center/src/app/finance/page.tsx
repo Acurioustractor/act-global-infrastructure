@@ -120,6 +120,13 @@ const cards: Array<{
     icon: Layers,
     accent: 'from-indigo-500/10 to-indigo-500/5 border-indigo-500/30',
   },
+  {
+    title: 'Cost drill — fix attribution',
+    href: '/finance/cost-drill',
+    description: 'FY26 P&L per project → drill into the Xero lines behind its costs → reassign cost-by-cost (grouped, reversible). Pull JusticeHub / PICC costs out of the overhead pool.',
+    icon: GitBranch,
+    accent: 'from-emerald-500/10 to-emerald-500/5 border-emerald-500/30',
+  },
 ]
 
 // Plan surface — the planning-side pages (previously unlinked from the front door).
