@@ -28,6 +28,10 @@ const args = process.argv.slice(2);
 const APPLY = args.includes('--apply');
 const projArg = (args.find(a => a.startsWith('--project=')) || '').split('=')[1] || 'ACT-GD';
 const limit = Number((args.find(a => a.startsWith('--limit=')) || '').split('=')[1]) || Infinity;
+const invArg = (args.find(a => a.startsWith('--invoice=')) || '').split('=')[1] || null;   // scope to ONE invoice number
+const REVERT_PATH = invArg
+  ? `scripts/output/xero-tracking-backfill-revert-${invArg}.json`
+  : 'scripts/output/xero-tracking-backfill-revert-2026-05-30.json';
 
 function token() { return JSON.parse(readFileSync('.xero-tokens.json', 'utf8')).access_token; }
 async function xero(method, path, body) {
@@ -64,6 +68,7 @@ for (;;) {
 }
 const seen = new Set(); rows = rows.filter(r => !seen.has(r.xero_id) && seen.add(r.xero_id));
 rows = rows.filter(r => (r.date || '').slice(0, 10) > LOCK_DATE);   // unlocked only
+if (invArg) rows = rows.filter(r => r.invoice_number === invArg);   // scope to ONE invoice
 
 console.log(`${APPLY ? 'APPLY' : 'LIVE DRY-RUN'} · project ${projArg} · ${rows.length} unlocked candidate(s) · limit ${limit}\n`);
 
@@ -110,7 +115,7 @@ for (const cand of rows) {
   if (!APPLY) { console.log(`  PLAN ${plan}`); results.push({ inv: inv.InvoiceNumber, result: 'planned' }); processed++; continue; }
 
   // write revert log BEFORE the write
-  writeFileSync('scripts/output/xero-tracking-backfill-revert-2026-05-30.json', JSON.stringify(revertLog, null, 2));
+  writeFileSync(REVERT_PATH, JSON.stringify(revertLog, null, 2));
 
   const body = { Invoices: [{ InvoiceID: inv.InvoiceID, LineAmountTypes: inv.LineAmountTypes, LineItems: newLines }] };
   const p = await xero('POST', 'Invoices', body);
@@ -127,4 +132,4 @@ for (const cand of rows) {
 }
 
 console.log(`\n${APPLY ? 'Applied' : 'Planned'}: ${results.filter(r => r.result === 'applied' || r.result === 'planned').length} · already: ${results.filter(r => r.result === 'already').length} · errors: ${results.filter(r => /error|changed|unconfirmed/.test(r.result)).length}`);
-if (APPLY && revertLog.length) console.log('Revert log: scripts/output/xero-tracking-backfill-revert-2026-05-30.json');
+if (APPLY && revertLog.length) console.log('Revert log:', REVERT_PATH);
