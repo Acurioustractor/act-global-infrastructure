@@ -46,7 +46,11 @@ pipeline→ACT-CA as review-only; always prefer a linked-invoice code.
 The writes turned out to be **Supabase-mirror-only** (`ghl_opportunities.project_code` / `subscriptions.project_codes`), i.e. our operating DB — reversible, NOT a live GHL CRM write. So the "save across all" surface is a command-center cockpit, not a script run.
 - [x] **`POST /api/finance/tagging-apply`** — accepts `decisions[{kind:opp|sub,id,code}]`, validates each code against the `projects` registry, captures prev-values, batch-updates grouped by code, returns `applied[]` with `{prevCode,newCode}` so the UI can **Undo**. No new table (before-values live in the sweep snapshot + the apply response). tsc clean.
 - [x] **`/finance/tagging` rebuilt → "Retag & reconcile" cockpit** — coverage bars (make-sense) · conflicts per-row (lazy `ACT-CA` default-accept; specific-vs-specific flagged **"your call"** + default-keep; per-row override dropdown) · auto-fills grouped-by-code, collapsible, pre-checked, uncheck outliers · no-match info · sticky **Apply N** bar + post-apply **Undo last apply**. Verified rendering against live data, 0 console errors.
-- [x] **9/11 conflicts resolved** (1 tracer + 8 clean lazy `ACT-CA` invoice-wins, applied via the live endpoint, re-sweep → 2 remaining). **LEFT for Ben (day-shift judgment):** BG Fit `ACT-BG` vs invoice `ACT-JH`; Homeland "Goods" `ACT-GD` vs invoice `ACT-JH` — both sides have a real code; invoice-wins rule may not hold.
+- [x] **11/11 conflicts resolved — sweep now 0.**
+  - 9 lazy `ACT-CA` invoice-wins (1 tracer + 8 batch) via the endpoint.
+  - **Homeland "Goods" (INV-0303, $44k):** the *invoice* was mis-tagged — all 5 line items are Goods ("Indestructible Washing Machine", "Stretch Bed", "Goods on Country Program Support", "Delivery of Goods", "Goods in Kind"). Re-tagged invoice `ACT-JH`→`ACT-GD` + `project_code_source='manual'` (prev source was `xero_tracking`). Moves $44k revenue JH→GD. Kept opp `ACT-GD`.
+  - **BG Fit / Green Fox (Ben's call: JusticeHub revenue):** 3 Green Fox milestone invoices (INV-0245/46/47, $27k total, all `ACT-JH`) = the engagement; opp `ACT-BG`→`ACT-JH` so they agree. Invoices unchanged.
+  - **FOLLOW-UP (Tier 3, Xero write):** INV-0303 Xero Project Tracking still says ACT-JH; our mirror is manual-protected at ACT-GD but Xero itself needs a tracking backfill to agree (`backfill-xero-tracking.mjs`). Until then, mirror↔Xero diverge on this one invoice.
 - [x] **Auto-fills APPLIED (2026-06-03, Ben's go):** 204 opps + 29 subs via the live endpoint, 0 failed. Pre-checked the auto bucket for the lazy-default trap first — **0 ACT-CA-via-pipeline** (opps resolved ACT-HV ×110 / ACT-GD ×94 by pipeline; subs ACT-IN ×27 / ACT-DO / ACT-OO by vendor rule). Re-sweep: **opps 64%→90% (694/769), subs 49%→91% (62/68)**; 0 auto-fillable left. Remaining untagged = 75 opp + 6 sub **no-match** only (need human codes, not the resolver's job).
 
 ### Phase 3 — gated per-area writers (day-shift, Tier 2/3, explicit go each)
@@ -63,6 +67,8 @@ The writes turned out to be **Supabase-mirror-only** (`ghl_opportunities.project
 | 2026-06-03 | Shared resolver, confidence + provenance + review queue | One place for mapping; wrong auto-tag corrupts P&L | hard |
 | 2026-06-03 | Sweep read-only → worklist; gated writer tracer-first | AFK-safe detection, day-shift writes | yes |
 | 2026-06-03 | Engine + read-only first, then tracer, then writes | Tracer-bullet rule + AFK boundary | yes |
+| 2026-06-03 | Homeland INV-0303 → ACT-GD (fix the invoice, not the opp) | Line items 100% Goods; invoice was mis-tagged ACT-JH — the "invoice wins" default was wrong here | yes (manual-protected) |
+| 2026-06-03 | BG Fit opp → ACT-JH (it's JusticeHub revenue) | Ben's call: 3 Green Fox milestone invoices ($27k) all deliberately ACT-JH = the engagement | yes |
 
 ## Verification Log
 
