@@ -32,6 +32,17 @@ Folded FY26 per-project P&L, by expenses desc (146 rows; AUD, rounded):
 - The ledger's prior snapshot read exp $1.19M / net $719k; the refresh moved it to **$1.09M / $815k** as June + current tags landed. Difference is expected (new tags + June rows), not a discrepancy.
 - `project_monthly_financials` has no `entity_code` column (all ACT-ST today).
 
+## Two lenses — table vs drill (read before trusting a per-project total)
+- **P&L table** (`/api/finance/cost-drill`) = `project_monthly_financials` rollup = **bank cash basis** (bank `xero_transactions` SPEND + PAID ACCREC). ACT-IN FY26 expenses **$154,567**.
+- **Drill lines** (`/api/finance/projects/[code]/transactions?from&to`) = **committed view** = ACCPAY bills (AUTHORISED + PAID) + bank SPEND. ACT-IN FY26 line sum **$403,116** (1,512 lines) — higher because it includes unpaid AUTHORISED bills + the bill/payment overlap.
+- The two **will not tie exactly**; both are correct at their layer. Reassigning a line moves it in both; the rollup-based table updates only after `node scripts/calculate-project-monthly-financials.mjs` re-runs. The UI caption states this.
+
+## Verification log (2026-06-03)
+- **Fold math:** 6/6 `project-codes.test.ts` (fixtures) + full finance suite **30/30** (no regression).
+- **P&L API live:** folded FY26 totals $1,905,444 / $1,090,086 / $815,358; 0 legacy-code leakage; names attached. ✅ Verified.
+- **Reassign guards:** empty decisions → 400; unknown code → 400 before any write. ✅ Verified.
+- **Tracer-bullet** (`scripts/cost-drill-tracer.mjs`): line `3f94fe84…` (NAB Fee $0.02, ACT-IN, source `xero_tracking`) → reassigned ACT-IN→ACT-JH via the live API (prevCode=ACT-IN, mirror=ACT-JH, source→manual) → undone (mirror restored to ACT-IN) → original source restored → **row byte-intact**. ✅ Reversible path proven end-to-end before any bulk run. Never touched Xero.
+
 ## Gaps
-- Drill lines come from `xero_invoices` (ACCPAY AUTHORISED/PAID) + `xero_transactions` (SPEND) per project; bill-payments deduped (vendor+amount+date±14d). Income/RECEIVE shown but not the reassignment focus.
+- Drill lines: bill-payments are flagged (`payment of bill`) but kept in the list (both bill and its payment carry `project_code` and feed different layers — both must stay reassignable). Group-level "reassign all" moves them together to keep them consistent.
 - Receipt flag = `has_attachments` (drifts on txns per known trap; accurate on invoices).
