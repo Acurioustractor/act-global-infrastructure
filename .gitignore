@@ -137,6 +137,7 @@ packages/notion-workers/workers.json.old
 !.claude/skills/ghl-crm-advisor
 !.claude/skills/implement
 !.claude/skills/obsidian
+!.claude/skills/orbit
 !.claude/skills/preflight
 !.claude/skills/query
 !.claude/skills/ralph-agent
