@@ -104,6 +104,10 @@ const PROJECTS = [
 // named latent-energy people the orbit flagged as "reached in, never caught" (energy-orbit.md)
 const LATENT = /phoebe frederick|terry hutchinson|anurag gummadi/i;
 
+// emit the canonical needs catalog (ALL needs, matched or not) so the scope board can show empty-cell GAPS
+writeFileSync('thoughts/shared/project-needs-catalog.json',
+  JSON.stringify(PROJECTS.map(p => ({ project: p.key, needs: p.needs.map(n => n.type) })), null, 2));
+
 function rolesOf(p) { return [...(p.rel_tags || '').toLowerCase().matchAll(/role:([a-z0-9-]+)/g)].map(m => m[1]); }
 
 // ── match ──────────────────────────────────────────────────────────────────
