@@ -16,6 +16,7 @@ type Row = {
   paymentOfBill: boolean
   xeroLink: string
   projectCode: string | null
+  hasReceipt: boolean
 }
 
 function firstDescr(li: any[] | null | undefined): string {
@@ -69,7 +70,7 @@ export async function GET(
     const [billsRes, spendsRes] = await Promise.all([
       supabase
         .from('xero_invoices')
-        .select('id, xero_id, date, contact_name, total, status, invoice_number, line_items, project_code')
+        .select('id, xero_id, date, contact_name, total, status, invoice_number, line_items, project_code, has_attachments')
         .eq('project_code', projectCode)
         .eq('type', 'ACCPAY')
         .in('status', ['AUTHORISED', 'PAID'])
@@ -77,7 +78,7 @@ export async function GET(
         .range(0, 9999),
       supabase
         .from('xero_transactions')
-        .select('id, xero_transaction_id, date, contact_name, total, status, type, line_items, project_code')
+        .select('id, xero_transaction_id, date, contact_name, total, status, type, line_items, project_code, has_attachments')
         .eq('project_code', projectCode)
         .in('type', ['SPEND', 'SPEND-OVERPAYMENT', 'RECEIVE'])
         .order('date', { ascending: false })
@@ -125,6 +126,7 @@ export async function GET(
         paymentOfBill: false,
         xeroLink: `https://go.xero.com/AccountsPayable/View.aspx?InvoiceID=${xeroId}`,
         projectCode: (b.project_code as string) || null,
+        hasReceipt: b.has_attachments === true,
       })
     }
     for (const s of spends) {
@@ -149,6 +151,7 @@ export async function GET(
         paymentOfBill: matched.has(xeroId),
         xeroLink: `https://go.xero.com/Bank/ViewTransaction.aspx?bankTransactionID=${xeroId}`,
         projectCode: (s.project_code as string) || null,
+        hasReceipt: s.has_attachments === true,
       })
     }
 
