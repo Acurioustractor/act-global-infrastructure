@@ -127,6 +127,13 @@ const cards: Array<{
     icon: GitBranch,
     accent: 'from-emerald-500/10 to-emerald-500/5 border-emerald-500/30',
   },
+  {
+    title: 'Invoice tags',
+    href: '/finance/invoice-tags',
+    description: 'Every income invoice (or bill) and the project it’s tagged to — a flat list. Move any one to another project in-line, reversible.',
+    icon: Tag,
+    accent: 'from-cyan-500/10 to-cyan-500/5 border-cyan-500/30',
+  },
 ]
 
 // Plan surface — the planning-side pages (previously unlinked from the front door).
