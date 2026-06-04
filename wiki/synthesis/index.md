@@ -24,19 +24,27 @@ This folder is the **second-brain compounding loop**. Per the [Karpathy LLM know
 
 ## Synthesis articles
 
-- [[alignment-loop-drift-2026-04-24-to-2026-05-08|Alignment Loop drift — 2026-04-24 → 2026-05-08]] — 2026-05-08 · Centrecorp sent, D&O overdue, ABN still open, $602K outstanding. Second pass of the [[../../thoughts/shared/plans/act-alignment-loop|ACT Alignment Loop]].
+- [[alignment-loop-drift-2026-04-24-to-2026-05-14|Alignment Loop drift — 2026-04-24 to 2026-05-14]] — 2026-05-14 · 20-day drift summary, all three questions. D&O deadline 10 days away.
 
-- [[entity-migration-truth-state-2026-05-08|Entity migration truth-state — 53 days to cutover, Centrecorp sent, D&O overdue]] — 2026-05-08 · Q3 second pass, [[../../thoughts/shared/plans/act-alignment-loop|ACT Alignment Loop]]
+- [[entity-migration-truth-state-2026-05-14|Entity migration truth-state — 47 days to cutover, decision-making accelerated, execution still light]] — 2026-05-14 · Q3 second pass of the [[../../thoughts/shared/plans/act-alignment-loop|ACT Alignment Loop]]
 
-- [[project-truth-state-2026-05-08|Project truth-state — 75 codes × 4 sources, second pass]] — 2026-05-08 · Q2 second pass, [[../../thoughts/shared/plans/act-alignment-loop|ACT Alignment Loop]]
+- [[project-truth-state-2026-05-14|Project truth-state — 75 codes × 4 sources, second pass]] — 2026-05-14 · Q2 second pass of the [[../../thoughts/shared/plans/act-alignment-loop|ACT Alignment Loop]]
 
-- [[funder-alignment-2026-05-08|Funder alignment — ledger at 40 entries, Centrecorp sent, $602K outstanding]] — 2026-05-08 · Q1 second pass, [[../../thoughts/shared/plans/act-alignment-loop|ACT Alignment Loop]]
+- [[funder-alignment-2026-05-14|Funder alignment — second pass, ledger expanded and receivables beginning to clear]] — 2026-05-14 · Q1 second pass of the [[../../thoughts/shared/plans/act-alignment-loop|ACT Alignment Loop]]
 
-- [[entity-migration-truth-state-2026-04-24|Entity migration truth-state — 67 days to cutover, what's done vs open]] — 2026-04-24 · third artefact of the [[../../thoughts/shared/plans/act-alignment-loop|ACT Alignment Loop]]
+- [[alignment-loop-drift-2026-04-24-to-2026-05-08|Alignment Loop drift — 2026-04-24 to 2026-05-08]] — 2026-05-08 · 14-day drift summary. $207K receivables cleared; D&O 16 days from deadline; Section 11 scope added; novation template drafted.
 
-- [[project-truth-state-2026-04-24|Project truth-state — 74 codes × 4 sources, who's real]] — 2026-04-24 · second artefact of the [[../../thoughts/shared/plans/act-alignment-loop|ACT Alignment Loop]]
+- [[entity-migration-truth-state-2026-05-08|Entity migration truth-state — 53 days to cutover, Section 11 scope added, D&O window critical]] — 2026-05-08 · Q3 second pass of the [[../../thoughts/shared/plans/act-alignment-loop|ACT Alignment Loop]]
 
-- [[funder-alignment-2026-04-24|Funder alignment — where wiki plans, DB reality, and in-flight work diverge]] — 2026-04-24 · first artefact of the [[../../thoughts/shared/plans/act-alignment-loop|ACT Alignment Loop]]
+- [[project-truth-state-2026-05-08|Project truth-state — 75 codes × 4 sources, second pass]] — 2026-05-08 · Q2 second pass of the [[../../thoughts/shared/plans/act-alignment-loop|ACT Alignment Loop]]
+
+- [[funder-alignment-2026-05-08|Funder alignment — second pass, receivables clearing, D&O window tightening]] — 2026-05-08 · Q1 second pass of the [[../../thoughts/shared/plans/act-alignment-loop|ACT Alignment Loop]]
+
+- [[entity-migration-truth-state-2026-04-24|Entity migration truth-state — 67 days to cutover, what's done vs open]] — 2026-04-24 · Q3 baseline, [[../../thoughts/shared/plans/act-alignment-loop|ACT Alignment Loop]]
+
+- [[project-truth-state-2026-04-24|Project truth-state — 74 codes × 4 sources, who's real]] — 2026-04-24 · Q2 baseline, [[../../thoughts/shared/plans/act-alignment-loop|ACT Alignment Loop]]
+
+- [[funder-alignment-2026-04-24|Funder alignment — where wiki plans, DB reality, and in-flight work diverge]] — 2026-04-24 · Q1 baseline, [[../../thoughts/shared/plans/act-alignment-loop|ACT Alignment Loop]]
 
 - [[how-does-the-tractorpedia-second-brain-pattern-compound-knowledge-over-time|How does the Tractorpedia second-brain pattern compound knowledge over time?]] — 2026-04-07
 

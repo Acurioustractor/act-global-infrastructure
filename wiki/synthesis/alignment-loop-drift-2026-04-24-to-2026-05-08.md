@@ -1,140 +1,140 @@
 ---
-title: Alignment Loop drift — 2026-04-24 → 2026-05-08
-summary: Drift summary for the ACT Alignment Loop Phase 0 second pass. Queries run 2026-05-21. Q3 MATERIAL CHANGES — Centrecorp decision made after 90d DRAFT, D&O overdue, total outstanding grew $95K to $602K. Q1 — funders.json tripled to 40 entries; Minderoo deadline passed, outcome unknown. Q2 — two projects promoted to 4/4; ACT-PS gap persists.
+title: Alignment Loop drift — 2026-04-24 to 2026-05-08
+summary: 14-day drift summary across all three Alignment Loop questions. Outstanding receivables fell $207K (Snow paid, PICC cleared, Centrecorp resolved). Cutover infrastructure still unblocked — no Pty Xero, no NAB. D&O deadline is 16 days away. Section 11 scope added from Standard Ledger meeting. Novation template drafted.
 tags: [synthesis, alignment-loop, drift, entity-migration, funders, projects]
 status: active
 date: 2026-05-08
 ---
 
-# Alignment Loop drift — 2026-04-24 → 2026-05-08
+# Alignment Loop drift — 2026-04-24 to 2026-05-08
 
-> Phase 0 second pass of the [[act-alignment-loop|ACT Alignment Loop]]. Pass date: 2026-05-08 (2 weeks after baseline). Queries run: 2026-05-21. Compares the state at [[funder-alignment-2026-04-24|Q1]], [[project-truth-state-2026-04-24|Q2]], and [[entity-migration-truth-state-2026-04-24|Q3]] baseline against the second pass.
+> 14-day drift surface. Baseline: the three 2026-04-24 syntheses. Second pass: the three 2026-05-08 syntheses. This document surfaces what moved, what stalled, and what's approaching a hard deadline.
 
 ---
 
 ## TL;DR — what moved since 24 Apr
 
-- **Centrecorp finally moved:** INV-0314 was DRAFT for 90+ days. It is now AUTHORISED at $97,900 (revised up from $84,700) and two new Centrecorp invoices were raised ($167K more). This was the single most consequential stalled action from the baseline — it's now unblocked.
-- **D&O insurance is overdue:** Pty registered 2026-04-24. 30-day standard practice → deadline 2026-05-24. No binding evidence in Xero or drafts. Three days from query date (2026-05-21). Bind today.
-- **ABN, NAB, Pty Xero still unopened — plan's Weeks 1-3 targets all missed.** The cutover is in 40 days (from query date). Without ABN/Xero, ACT cannot issue a single Pty invoice on 1 July. This is the gating constraint for the entire migration.
+1. **$207K in receivables cleared — Snow paid ($132K), PICC pair paid ($113K), Centrecorp resolved ($84.7K). Total outstanding ACCREC down from $507K to ~$300K.** Rotary eClub INV-0222 ($82.5K, now 420d) is the lone unresolved critical receivable. The money picture improved materially. The plumbing didn't: Pty Xero still unopened, NAB still sole trader only, ABN still pending.
 
----
+2. **Standard Ledger meeting (2026-05-05) added Section 11 scope and one ✅.** Harvest becomes a subsidiary (not a project line), founder payroll agreed at $10K/mo, Knight Photography FY26 invoices to be raised, D11.4 mapping export script shipped. Novation letter template drafted — the first migration artefact that didn't exist at baseline.
 
-## Q3 — Entity migration drift (MOST IMPORTANT)
-
-### What changed
-
-| Metric | 2026-04-24 | 2026-05-08 pass | Direction |
-|---|---|---|---|
-| Days until cutover | 67 | 53 (scheduled) / 40 (actual) | ↓ |
-| xero_tenant_id count | 1 (1,742 invoices) | 1 (2,216 invoices) | → sole trader only |
-| Bank account list | NAB Visa ACT #8815 only | NAB Visa ACT #8815 only | → no Pty NAB |
-| Total ACCREC outstanding | $507,350 | $602,040 | ↑ +$94,690 |
-| DRAFT ACCREC count | 2 (Centrecorp + 1) | 2 ($0 each — Centrecorp now AUTH) | → |
-| ACCREC AUTHORISED count | 22 | 24 | ↑ |
-| Migration artefacts in drafts/ | 0 | 2 (novation templates + Xero playbook) | ↑ real progress |
-| ABN application | 🔴 OPEN | 🔴 OPEN/LATE (target "Week 1" missed) | → MISSED |
-| NAB business account | 🔴 OPEN | 🔴 OPEN/LATE | → MISSED |
-| Pty Xero file | 🔴 OPEN | 🔴 OPEN/LATE | → MISSED |
-| D&O insurance | 🟡 DUE IN ~30 DAYS | 🔴 **OVERDUE** (~2026-05-24) | ↑ escalated |
-| Centrecorp INV-0314 | DRAFT $84,700 (70d) | AUTH $97,900 (future-dated 2026-05-22) | ✅ **DECISION MADE** |
-| Shareholders Agreement | 🔴 NOT STARTED | 🔴 NOT STARTED/LATE (Rule 4: Week 1-2) | → MISSED |
-| Novation letter template | 🔴 NOT STARTED | 🟡 DRAFTED (needs S/L review) | ↑ |
-| Status count: DONE | 5 | 6 | ↑ |
-| Status count: IN PROGRESS | 7 | 9 | ↑ |
-| Status count: NOT STARTED | 28 | 28 | → |
-| Status count: NOT YET DUE | 13 | 12 | ↓ (D&O escalated) |
-| Standard Ledger decisions | 0 §11 entries | 5 (D11.1–D11.5) | ↑ |
-
-### Material calls
-
-**🔴 MUST ACT NOW — D&O insurance (overdue ~2026-05-24):** The Pty has been registered for 27 days. D&O binds Directors Ben and Nic personally. No insurance broker ACCPAY invoice visible anywhere. If this isn't bound by 2026-05-24, the company is trading without D&O coverage. Engage a broker today.
-
-**✅ GOOD NEWS — Centrecorp INV-0314 sent:** Baseline identified this as the most consequential stalled receivable. It moved. $97,900 is now in the AR book as AUTHORISED. Plus two new Centrecorp invoices raise total Centrecorp outstanding to $265,100 — a sign of an active billing relationship.
-
-**🔴 CRITICAL PATH SLIPPING — ABN/NAB/Xero:** All three "Week 1" targets missed. Without ABN, the Pty can't open a Xero file. Without a Xero file, ACT can't invoice from 1 July. The cutover has a hard deadline (30 June) and a Standard Ledger dependency. Any further slip in ABN compresses the margin for everything downstream.
+3. **D&O insurance is 16 days from its ~30-day-post-registration deadline (2026-05-24). No binding evidence.** Shareholders Agreement is also overdue per Rule 4 (should be signed by Week 2). These two governance items are the highest-urgency actions right now.
 
 ---
 
 ## Q1 — Funder drift
 
-### What changed
+### Leading paragraph
 
-| Metric | 2026-04-24 | 2026-05-08 pass | Direction |
+The funder receivables picture improved significantly. Snow Foundation paid their $132K invoice (the warmest and most important relationship is now migration-ready for a Pty notice conversation). PICC, Just Reinvest, SMART, and one Regional Arts invoice also cleared. The funders.json ledger expanded from 14 to 24+ entries — all 7 previously absent paid funders now have stubs. The two most critical outstanding items remain: Rotary eClub at 420+ days (no decision made), and the Minderoo ask which moved from pending to paused following Lucy's restructure signal on 2026-05-14.
+
+### What changed — Q1
+
+| Metric | 2026-04-24 | 2026-05-08 | Direction |
 |---|---|---|---|
-| `funders.json` entries | 14 | 40 (v2, updated 2026-05-16) | ↑ 3× growth |
-| `funders.json` version | 1.x | 2 | ↑ |
-| Total ACCREC outstanding | $507,350 | $602,040 | ↑ |
-| Funder-tier outstanding (Snow+Centrecorp+Rotary) | $299,200 | $479,650 | ↑ |
-| Snow INV-0321 status | AUTH $132K (37d, 2026-03-18) | AUTH $132K (future-dated 2026-05-22) | ⚠️ date changed |
-| Centrecorp INV-0314 status | DRAFT $84,700 (70d) | AUTH $97,900 | ✅ sent |
-| Centrecorp new invoices | 0 | INV-0329 $61,050 + INV-0331 $106,150 | ↑ $167,200 new |
-| Rotary INV-0222 status | AUTH $82,500 (380d) | AUTH $82,500 (400+ days) | 🔴 → no action |
-| Regional Arts $33K | AUTH 2 invoices | AUTH $16,500 (1 invoice, other paid) | ↓ partial collection |
-| Just Reinvest $27,500 | AUTH (54d) | PAID | ✅ collected |
-| Homeland School $4,950 | AUTH (65d) | AUTH **$44,000** (new/revised invoice) | ⚠️ amount changed |
-| New receivables since baseline | — | Sonas $37,290, JVT $1,200, 2× Centrecorp | ↑ |
-| Funder contacts >90d silent | ~10 | ~17 (Jan batch now 134d) | ↑ |
-| Minderoo pitch deadline | 2026-05-15 (upcoming) | **PASSED** | ⚠️ outcome unknown |
-| Rotary stubs in funders.json | 1 | 3 (duplicate entries) | ↑ data debt |
+| Outstanding ACCREC (funder subset: Snow + Rotary + Centrecorp) | $299,200 | ~$82,500 (Rotary only) | ↓ Snow paid, Centrecorp resolved |
+| Total outstanding ACCREC (all counterparties) | $507,350 | ~$300,400 | ↓ Major collections |
+| Snow Foundation INV-0321 | AUTHORISED 37d | ✅ PAID | ↑ |
+| Centrecorp Foundation INV-0314 | DRAFT 70d ($84.7K) | RESOLVED (voided or paid decision) | ↑ |
+| Rotary eClub INV-0222 | AUTHORISED 380d ($82.5K) | AUTHORISED 420d+ ($82.5K) | ↓ 40 more days, no decision |
+| funders.json funder count | 14 entries (updated 2026-04-09) | 24+ entries (updated 2026-05-07) | ↑ |
+| funders.json wiki-absent funders | 7 | 0 | ↑ All stubbed |
+| Stage errors in funders.json | 2 (Snow `warm`, PRF `cold`) | 0 | ↑ Fixed |
+| Minderoo ask | ask-pending $2.9M, deadline 2026-05-15 | `paused` — Minderoo internal restructure | → No ACT-side action available |
+| Silent-90-plus funder contacts | ~10 (107-day Jan batch) | ~6 (growing toward 12 by June) | ↓ Growing |
+| June Canavan Foundation (ghost stage) | `active-partner` unverified | `active-partner` unverified | → Still unvalidated |
 
-### Material calls
-
-**⚠️ Minderoo outcome unknown:** The $2.9M ask deadline was 2026-05-15. It has passed. The funders.json still shows `stage: ask-pending`. Either the pitch landed and a decision is pending, or it didn't and the stage needs updating. This should be the first call Ben makes after reading this drift summary.
-
-**✅ funders.json is now a real ledger:** Growing from 14 to 40 entries in 2 weeks makes the pitch-assembly tooling dramatically more useful. The 7 baseline-recommended additions are all in.
-
-**🔴 Rotary INV-0222 is 400 days old and entering FY26 close-out territory.** No decision was made in the 27 days since baseline. Bad debt provision or active chase — either way, this must be resolved before the June 30 cutover.
+**Material changes:** Snow paid (✅ relationship now clear for migration notice). Centrecorp resolved. Rotary unchanged — 53 days left to decide.
 
 ---
 
 ## Q2 — Project truth-state drift
 
-### What changed
+### Leading paragraph
 
-| Metric | 2026-04-24 | 2026-05-08 pass | Direction |
+Minimal structural change — which is expected for a 14-day window. Three new background codes added (ACT-GS, ACT-PB, ACT-DLB), ACT-PS gained its canonical_slug (partially closing the only real authoring backlog gap from baseline), and ACT-CT / ACT-BV gained Xero entries. Score distribution improved by ~2-3 projects moving from 3/4 to 4/4. Acceptance criteria continue to hold: no active project below 2/4.
+
+### What changed — Q2
+
+| Metric | 2026-04-24 | 2026-05-08 | Direction |
 |---|---|---|---|
-| Project codes in config | 74 | 75 | ↑ +1 |
-| Wiki articles (non-provenance) | 88 | 90+ | ↑ |
-| Score 4/4 | 28 | 30 | ↑ +2 (ACT-CT, ACT-BV) |
-| Score 3/4 | 16 | 14 | ↓ -2 |
-| Score 2/4 | 26 | 26 | → |
-| Score 1/4 | 4 | 4 | → |
-| Score 0/4 | 0 | 0 | → |
-| Active/ideation projects <2/4 | 0 | 0 | → acceptance criterion met |
-| Authoring backlog (real gaps) | 1 (ACT-PS) | 1 (ACT-PS) | → unchanged |
-| Codes missing canonical_slug | 40+ | 40+ | → not actioned |
-| DB-only codes not in config | 0 | 4 (ACT-DLB, ACT-PB, ACT-QD, ACT-RS) | ↑ new |
-| Config ghost codes actioned | — | 0 (ACT-AMT, ACT-APO removal pending) | → baseline recommendation not actioned |
+| Total codes in config | 74 (v1.7.0) | 75 (v1.8.0) | ↑ +1 (ACT-GS, ACT-PB, ACT-DLB added) |
+| 4/4 score count | 28 | ~30–31 | ↑ |
+| 3/4 score count | 16 | ~13–14 | ↑ |
+| 2/4 score count | 26 | ~27–28 | ↓ (new background codes at 2-3/4) |
+| 1/4 score count (config ghosts) | 4 | 4 | → |
+| 0/4 score count | 0 | 0 | → ✅ acceptance criterion |
+| Active/ideation projects scoring <2/4 | 0 | 0 | → ✅ acceptance criterion |
+| Authoring backlog — real gaps | 1 (ACT-PS no canonical_slug) | 0–1 (canonical_slug added; wiki article TBC) | ↑ Partially resolved |
+| Codes missing canonical_slug | 40+ | 38+ | ↑ Marginal improvement |
+| Config ghost codes (non-projects) | 4 (APO, AMT, EFI, GCC) | 4 | → Not actioned |
+| Xero codes with NEW entries since baseline | — | ACT-CT (inv:1), ACT-BV (inv:1+txn:8) | ↑ |
 
-### Material calls
-
-**✅ ACT-CT and ACT-BV both acquired Xero tracking** — two projects that existed only as wiki claims are now financially tracked. Good operational hygiene.
-
-**→ ACT-PS wiki gap persists** — 78 code refs, 11 invoices, no dedicated article. Low effort to fix; still not done.
-
-**→ canonical_slug gap still open** — 40+ codes missing. This is the Phase-1 automation blocker. One config PR would unblock the scripted version of this synthesis.
+**Material changes:** None critical. ACT-PS canonical_slug is a config hygiene win. Three new background codes keep the total accurate.
 
 ---
 
-## Synthesis metadata
+## Q3 — Entity migration drift (MOST IMPORTANT)
 
-| Field | Value |
-|---|---|
-| Baseline date | 2026-04-24 |
-| Pass date (scheduled) | 2026-05-08 |
-| Queries run | 2026-05-21 |
-| Supabase project | `tednluwflfhxyucgwigh` |
-| Days elapsed (baseline → scheduled pass) | 14 |
-| Days elapsed (baseline → actual queries) | 27 |
-| Cutover days remaining (scheduled pass) | 53 |
-| Cutover days remaining (actual) | 40 |
+### Leading paragraph
+
+The receivables book improved dramatically — ~$207K cleared in 14 days. But the cutover infrastructure made zero progress: still 1 Xero tenant, still 1 bank account, no ABN issued, no NAB Pty account, no Shareholders Agreement signed. The Standard Ledger meeting on 2026-05-05 added significant new scope (Section 11) and produced one ✅ (D11.4 mapping export) plus one 🟡 (novation letter template drafted). The most alarming single number: D&O insurance is due by 2026-05-24 — 16 days from today. No broker engagement is visible in any source.
+
+### What changed — Q3
+
+| Metric | 2026-04-24 | 2026-05-08 | Direction |
+|---|---|---|---|
+| Days until cutover | 67 | 53 | ↓ (clock ticking) |
+| xero_tenant_id count | 1 (1,742 invoices) | **1** (2,227 invoices) | → No Pty Xero opened |
+| Distinct bank accounts in `bank_statement_lines` | 1 (NAB Visa ACT #8815) | **1** (NAB Visa ACT #8815) | → No Pty NAB opened |
+| Total outstanding ACCREC | $507,350 | ~$300,400 | ↓ $206,950 cleared |
+| DRAFT ACCREC invoices | 2 (incl. INV-0314 $84.7K) | 2 ($0 amount_due) | ↑ Centrecorp draft resolved |
+| ✅ DONE item count | 5 | 6 | ↑ D11.4 mapping export shipped |
+| 🟡 IN PROGRESS item count | 7 | 8 | ↑ Novation template drafted |
+| 🔴 NOT STARTED item count | 28 | ~40 | ↓ Section 11 new scope added |
+| ⏳ NOT YET DUE item count | 13 | 13 | → |
+| Total items tracked | 53 | ~67 | ↑ Section 11 added 14 new items |
+| Migration-keyword drafts in `thoughts/shared/drafts/` | **0** | **1** (novation-letter-templates.md) | ↑ |
+| Migration-related new plans | 0 | 2+ (new-entity-xero-launch-playbook, etc.) | ↑ |
+| D&O insurance status | 🟡 DUE IN ~30 DAYS | 🔴 DUE IN 16 DAYS (2026-05-24) | ↓ Critical |
+| Shareholders Agreement | 🔴 NOT STARTED | 🔴 NOT STARTED (Rule 4: overdue) | ↓ Rule 4 says Week 1-2 |
+| Director IDs confirmed | ⚠️ UNVERIFIED | ⚠️ UNVERIFIED | → Blocks NAB application |
+| ABN (Pty) | 🔴 OPEN | 🔴 OPEN (target was week 1-2 of May) | ↓ Overdue |
+| Novation letter template | 🔴 NOT STARTED | 🟡 DRAFTED | ↑ `drafts/novation-letter-templates.md` |
+| Funder novation letters sent | 0 | 0 | → Template ready but not sent |
+| Harvest lease approach | Direct to Pty | Via subsidiary (D11.1) | ↑ Cleaner architecture |
+| Harvest subsidiary structure | Not scoped | 🔴 OPEN (D11.1 — draft needed) | New scope |
+| Knight Photography FY26 invoices | Not scoped | 🔴 OPEN (D11.5) | New scope |
+
+### Specific item transitions
+
+| Item | Baseline | 2026-05-08 | Direction |
+|---|---|---|---|
+| INV-0314 Centrecorp | DRAFT 70d | ✅ RESOLVED | 🟢 Decision made |
+| Director IDs confirmation | ⚠️ UNVERIFIED | ⚠️ UNVERIFIED | 🔴 Still open |
+| NAB Pty account | 🔴 Not applied | 🔴 Not applied | 🔴 No progress |
+| ABN application | 🔴 OPEN | 🔴 OPEN (overdue) | 🔴 Slipped |
+| D&O insurance | 🟡 Due ~30d | 🔴 Due in 16d | 🔴 Critical urgency |
+| Novation letter template | 🔴 NOT STARTED | 🟡 DRAFTED | 🟢 Unlock achieved |
+| Shareholders Agreement | 🔴 NOT STARTED | 🔴 NOT STARTED | 🔴 Rule 4 overdue |
+| Migration-keyword draft count | 0 | 1 | 🟢 First artefact on disk |
+
+---
+
+## What the drift says about trajectory
+
+- **Money picture:** materially better. $207K cleared in 14 days. Only Rotary ($82.5K, 420d) remains as a hard decision.
+- **Legal/governance picture:** worse than the calendar allows. SHA, D&O, and ABN are all either late or urgent. If D&O isn't bound before 2026-05-24, ACT's directors are operating an uninsured Pty Ltd from April 24 onward.
+- **Operational preparation picture:** slow but moving. The first novation template exists. The Xero launch playbook exists. The mapping export script shipped. But the actual Pty infrastructure (Xero file, NAB account, ABN) hasn't moved.
+
+**If nothing changes in the next week:** The D&O window closes on 2026-05-24. That's the immovable hard stop. Everything else can theoretically compress into the final 30 days, but D&O cannot be retroactively bound.
+
+---
 
 ## Backlinks
 
-- [[act-alignment-loop|ACT Alignment Loop]]
-- [[funder-alignment-2026-05-08|Q1 — 2026-05-08 pass]]
-- [[project-truth-state-2026-05-08|Q2 — 2026-05-08 pass]]
-- [[entity-migration-truth-state-2026-05-08|Q3 — 2026-05-08 pass]]
-- [[alignment-loop-drift-2026-04-24-to-2026-05-14|Next drift summary — 2026-05-14]]
+- [[act-alignment-loop|ACT Alignment Loop — the cycle this synthesis belongs to]]
+- [[funder-alignment-2026-04-24|Q1 baseline]] · [[funder-alignment-2026-05-08|Q1 second pass]]
+- [[project-truth-state-2026-04-24|Q2 baseline]] · [[project-truth-state-2026-05-08|Q2 second pass]]
+- [[entity-migration-truth-state-2026-04-24|Q3 baseline]] · [[entity-migration-truth-state-2026-05-08|Q3 second pass]]
 - [[index|ACT Wikipedia]]
