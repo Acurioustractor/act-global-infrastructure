@@ -38,6 +38,11 @@ for(const p of orbit){
   sup.set(k,{name:p.name,warmth,circle:/circle:gsd-alliance/.test(tags),tier:/tier:/.test(tags),
     uncaptured:/uncaptured/i.test(p.home||'')||p.status==='UNCAPTURED',last:p.last_contact||''});
 }
+// manual energy from the workbench ledger overrides computed warmth — the human's read wins
+if(existsSync('thoughts/shared/field-decisions.jsonl'))
+  for(const l of readFileSync('thoughts/shared/field-decisions.jsonl','utf8').split('\n').filter(Boolean)){
+    try{const d=JSON.parse(l);if(d.energy!=null){const p=sup.get(norm(d.name));if(p)p.warmth=d.energy;}}catch{}
+  }
 const people=[...sup.values()].sort((a,b)=>b.warmth-a.warmth);
 
 // ── Dunbar layers by where energy IS going (warmth rank) ────────────────────
@@ -54,19 +59,24 @@ const owed=owedAll.slice(0,2);
 // gaps: thin needs (no warm candidate) from catalog+matches
 const catalog=JSON.parse(readFileSync('thoughts/shared/project-needs-catalog.json','utf8'));
 const matches=rd('thoughts/shared/project-needs-match.csv');
-const byPN={};for(const m of matches){(byPN[m.project]=byPN[m.project]||{});(byPN[m.project][m.need]=byPN[m.project][m.need]||[]).push({name:m.name,warmth:+m.warmth||0});}
-const thin=[];for(const p of catalog)for(const need of p.needs){const c=(byPN[p.project]?.[need]||[]).sort((a,b)=>b.warmth-a.warmth);if(!c.length||c[0].warmth<20)thin.push({project:p.project.replace(/ \(.*/,''),need,best:c[0]?.name||null});}
+// judge "warm enough" on contact_warmth (real two-way signal) — tier+affinity alone can fake warmth ≥20
+const byPN={};for(const m of matches){(byPN[m.project]=byPN[m.project]||{});(byPN[m.project][m.need]=byPN[m.project][m.need]||[]).push({name:m.name,contact:+(m.contact_warmth??m.warmth)||0});}
+const thin=[];for(const p of catalog)for(const need of p.needs){const c=(byPN[p.project]?.[need]||[]).sort((a,b)=>b.contact-a.contact);if(!c.length||c[0].contact<20)thin.push({project:p.project.replace(/ \(.*/,''),need,best:c[0]?.name||null});}
 const gaps=thin.slice(0,2);
 const latent=take(people.filter(p=>p.warmth>=20&&!p.circle&&(p.uncaptured||!p.tier)).sort((a,b)=>b.warmth-a.warmth),2);
 
 const pageLink=n=>existsSync(`thoughts/shared/people/${slug(n)}.md`)?` <a class=pp href="people/${slug(n)}.md">page</a>`:'';
 const item=(emoji,verb,who,why,extra='')=>`<div class=act><span class=e>${emoji}</span><div><b>${verb}</b> — ${who}${extra}<div class=why>${why}</div></div></div>`;
-const actions=[
-  ...cooling.map(p=>item('🌡','Water',p.name,`was warm (${Math.round(p.warmth)}), ${daysSince(p.last)} days quiet — re-reach before it's gone`,pageLink(p.name))),
-  ...owed.map(p=>item('🤝','Sun',p.name,`${p.owes} of their ${p.tx} transcripts not yet brought to life${p.consent?` · ${p.consent} consent conversation owed`:''} — honour one today`)),
-  ...gaps.map(g=>item('🕳','Source',`${g.project}: ${g.need}`,g.best?`warmest candidate (${g.best}) is still a cold name — warm them up or find someone`:`no one tagged at all`)),
-  ...latent.map(p=>item('⚡','Reach',p.name,`warm (${Math.round(p.warmth)}) but never formalised — the energy is already there${p.uncaptured?' (uncaptured)':''}`,pageLink(p.name))),
-].slice(0,7);
+const coolingItems=cooling.map(p=>item('🌡','Water',p.name,`was warm (${Math.round(p.warmth)}), ${daysSince(p.last)} days quiet — re-reach before it's gone`,pageLink(p.name)));
+const owedItems=owed.map(p=>item('🤝','Sun',p.name,`${p.owes} of their ${p.tx} transcripts not yet brought to life${p.consent?` · ${p.consent} consent conversation owed`:''} — honour one today`));
+const gapItems=gaps.map(g=>item('🕳','Source',`${g.project}: ${g.need}`,g.best?`warmest candidate (${g.best}) is still a cold name — warm them up or find someone`:`no one tagged at all`));
+const latentItems=latent.map(p=>item('⚡','Reach',p.name,`warm (${Math.round(p.warmth)}) but never formalised — the energy is already there${p.uncaptured?' (uncaptured)':''}`,pageLink(p.name)));
+// interleave: every category's first item is guaranteed; the 7-cap then cuts at most one
+// second-round item, and WHICH one rotates by day — no category is structurally starved.
+const cats=[coolingItems,owedItems,gapItems,latentItems];
+const rot=NOW.getDate()%4;
+const round2=cats.slice(rot).concat(cats.slice(0,rot)).map(c=>c[1]);
+const actions=[...cats.map(c=>c[0]),...round2].filter(Boolean).slice(0,7);
 
 const html=`<!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1">
 <title>The Field — morning read</title><style>

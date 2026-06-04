@@ -17,22 +17,24 @@ function parseCSV(t){const R=[];let r=[],f='',q=false;for(let i=0;i<t.length;i++
 const rd=p=>{const R=parseCSV(readFileSync(p,'utf8'));const h=R[0];return R.slice(1).filter(x=>x.length===h.length).map(x=>Object.fromEntries(h.map((k,i)=>[k,x[i]])));};
 const norm=s=>(s||'').toLowerCase().replace(/[^a-z0-9 ]/g,'').replace(/\s+/g,' ').trim();
 const isUuid=s=>/^[0-9a-f]{8}-[0-9a-f]{4}/.test(s)||/^[a-z]{2}\d{6}-0000/.test(s);
-const WARM=20; // warmth ≥ WARM = warm enough to ask; 1..19 lukewarm; 0 cold name
-const TODAY=new Date('2026-06-03'); const daysSince=d=>{const t=Date.parse(d);return isNaN(t)?null:Math.round((TODAY-t)/864e5);};
+const WARM=20; // contact-warmth ≥ WARM = warm enough to ask; 1..19 lukewarm; 0 cold name
+const TODAY=new Date(); const daysSince=d=>{const t=Date.parse(d);return isNaN(t)?null:Math.round((TODAY-t)/864e5);};
 
 // ── needs catalog + matched candidates ─────────────────────────────────────
 const catalog=JSON.parse(readFileSync('thoughts/shared/project-needs-catalog.json','utf8'));
 const matches=rd('thoughts/shared/project-needs-match.csv');
 const byPN={}; // project -> need -> [candidates]
-for(const m of matches){(byPN[m.project]=byPN[m.project]||{});(byPN[m.project][m.need]=byPN[m.project][m.need]||[]).push({name:m.name,warmth:+m.warmth||0,why:m.why,action:m.action,in_ghl:m.in_ghl});}
+// contact = real two-way signal only (matcher's contact_warmth); warmth still carries tier+affinity for ranking.
+// "Covered" is judged on contact — tier+affinity alone could fake warmth ≥20 with zero actual contact.
+for(const m of matches){(byPN[m.project]=byPN[m.project]||{});(byPN[m.project][m.need]=byPN[m.project][m.need]||[]).push({name:m.name,warmth:+m.warmth||0,contact:+(m.contact_warmth??m.warmth)||0,why:m.why,action:m.action,in_ghl:m.in_ghl});}
 const board=catalog.map(p=>({
   project:p.project,
   needs:p.needs.map(need=>{
-    const cands=(byPN[p.project]?.[need]||[]).sort((a,b)=>b.warmth-a.warmth);
-    const warm=cands.filter(c=>c.warmth>=WARM);
+    const cands=(byPN[p.project]?.[need]||[]).sort((a,b)=>b.contact-a.contact||b.warmth-a.warmth);
+    const warm=cands.filter(c=>c.contact>=WARM);
     const status=cands.length===0?'gap':warm.length>0?'covered':'thin';
     const top=cands[0];
-    const move=status==='covered'?`Ask ${warm[0].name} (warmth ${Math.round(warm[0].warmth)})`
+    const move=status==='covered'?`Ask ${warm[0].name} (contact warmth ${Math.round(warm[0].contact)})`
       :status==='thin'?`Warm up ${top.name} — or source someone warmer (all ${cands.length} candidates are cold names)`
       :`Source — no one tagged. Find/activate someone for this.`;
     return {need,status,move,n:cands.length,warm:warm.length,cands:cands.slice(0,6)};
@@ -123,7 +125,7 @@ function render(){
     const card=document.createElement('div');card.className='card '+n.status;
     let cands='';
     if(n.status==='gap')cands='<div class=emptygap>— no one tagged for this need —</div>';
-    else cands='<div class=cands>'+n.cands.map((x,j)=>{const w=x.warmth>=20;return '<div class="cand '+(w?'w':'c')+'">'+(j===0&&w?'<b class=ask>→ ':'<span>')+x.name+(j===0&&w?'</b>':'</span>')+'<span class=w0>'+(x.warmth>0?'warmth '+Math.round(x.warmth):'cold')+(x.in_ghl==='y'?'':' · not in GHL')+'</span></div>';}).join('')+(n.n>6?'<div class=cand style="color:#46566b">+'+(n.n-6)+' more</div>':'')+'</div>';
+    else cands='<div class=cands>'+n.cands.map((x,j)=>{const w=x.contact>=${WARM};return '<div class="cand '+(w?'w':'c')+'">'+(j===0&&w?'<b class=ask>→ ':'<span>')+x.name+(j===0&&w?'</b>':'</span>')+'<span class=w0>'+(x.contact>0?'contact '+Math.round(x.contact):'cold')+(x.warmth>x.contact?' (+tier)':'')+(x.in_ghl==='y'?'':' · not in GHL')+'</span></div>';}).join('')+(n.n>6?'<div class=cand style="color:#46566b">+'+(n.n-6)+' more</div>':'')+'</div>';
     card.innerHTML='<div class=need>'+n.need+'<span class="badge '+n.status+'">'+n.status+'</span></div><div class=move>→ '+n.move+'</div>'+cands;
     needs.appendChild(card);
   }

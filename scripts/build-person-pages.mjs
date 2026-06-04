@@ -20,11 +20,22 @@
  */
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import dotenv from 'dotenv';
+import { createClient } from '@supabase/supabase-js';
 dotenv.config({ path: '.env.local' });
+const sb = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY);
 
 const args = process.argv.slice(2);
-const N = parseInt(args.find(a => a.startsWith('--n'))?.split(/[= ]/)[1] || (args.includes('--n') ? args[args.indexOf('--n') + 1] : '8'));
-const ONE = args.includes('--name') ? args[args.indexOf('--name') + 1] : null;
+// exact-flag parse: supports `--flag value` and `--flag=value`; `--n` no longer swallows `--name`
+const argval = f => {
+  const eq = args.find(a => a.startsWith(f + '=')); if (eq) return eq.slice(f.length + 1);
+  const i = args.indexOf(f); const v = i >= 0 ? args[i + 1] : undefined;
+  return v && !v.startsWith('--') ? v : undefined;
+};
+const nRaw = argval('--n');
+const N = nRaw === undefined ? 8 : parseInt(nRaw, 10);
+if (!Number.isFinite(N) || N < 1) { console.error(`--n needs a positive number, got "${nRaw}" — refusing to silently build 0 pages.`); process.exit(1); }
+const ONE = argval('--name') ?? null;
+if (!ONE && args.some(a => a === '--name' || a.startsWith('--name='))) { console.error('--name needs a value.'); process.exit(1); }
 const SYNTH = args.includes('--synth');
 const RESUME = args.includes('--resume');   // skip pages already synthesised → resumable across nights
 const TAVILY = process.env.TAVILY_API_KEY;
@@ -42,6 +53,19 @@ async function webRead(name, company){
     return {answer:d.answer||'',results:(d.results||[]).map(x=>({title:x.title,url:x.url,snippet:(x.content||'').slice(0,280)}))};
   }catch(e){return {answer:'',results:[],error:e.message};}
 }
+// ── shared history from the comms spine (join key = ghl_contact_id, NOT email) ──
+const ghlIds=new Map();
+{let from=0;for(;;){const{data}=await sb.from('ghl_contacts').select('ghl_id,email').range(from,from+999);if(!data?.length)break;
+  for(const c of data){const e=(c.email||'').toLowerCase();if(e){if(!ghlIds.has(e))ghlIds.set(e,[]);ghlIds.get(e).push(c.ghl_id);}}
+  if(data.length<1000)break;from+=1000;}}
+async function sharedHistory(email){
+  const ids=ghlIds.get((email||'').toLowerCase())||[]; if(!ids.length)return null;
+  const{data,count}=await sb.from('communications_history').select('occurred_at,direction,channel,subject',{count:'exact'}).in('ghl_contact_id',ids).order('occurred_at',{ascending:false}).limit(30);
+  if(!data?.length)return null;
+  const{data:f}=await sb.from('communications_history').select('occurred_at').in('ghl_contact_id',ids).order('occurred_at',{ascending:true}).limit(1);
+  return {count,first:(f?.[0]?.occurred_at||'').slice(0,10),last:(data[0].occurred_at||'').slice(0,10),
+    recent:data.map(r=>({d:(r.occurred_at||'').slice(0,10),dir:r.direction,s:(r.subject||'').replace(/\s+/g,' ').slice(0,90)}))};
+}
 async function qwenSynth(prompt){
   try{
     const r=await fetch('http://localhost:11434/api/generate',{method:'POST',headers:{'content-type':'application/json'},
@@ -50,32 +74,65 @@ async function qwenSynth(prompt){
   }catch(e){return `(qwen synthesis unavailable: ${e.message})`;}
 }
 
-// ── pick the people: supporter lane, with soil, warmest first ───────────────
+// ── pick the people: supporter lane, warmest first (soil optional — a warm person
+//    CivicGraph couldn't resolve still gets a page; their soil rows just show '—') ──
 const soil=rd('thoughts/shared/orbit-soil.csv');
-let people=soil.filter(p=>p.lane!=='community'&&(p.company||p.entities));
-if(ONE) people=soil.filter(p=>p.name.toLowerCase().includes(ONE.toLowerCase()));
+const isInternalP=p=>/^(ben(jamin)? knight|nic(holas)? marchesi( oam)?|a curious tractor)$/i.test((p.name||'').trim());
+// the community line holds PER PERSON, not per row — one community-lane row anywhere marks the
+// person community, even if a duplicate row carries another lane (Kristy Bloomfield had 4
+// community rows + 1 'ghost' row; the ghost row leaked her into the committed pages).
+const communityKeys=new Set(soil.filter(p=>p.lane==='community').map(p=>slug(p.name)));
+const isCommunityP=p=>p.lane==='community'||communityKeys.has(slug(p.name||''));
+let people=soil.filter(p=>!isCommunityP(p)&&!isInternalP(p));
+if(ONE){ people=soil.filter(p=>p.name.toLowerCase().includes(ONE.toLowerCase()));
+  // the community line holds on EVERY path — storytellers/elders are never web-profiled (OCAP)
+  const blocked=people.filter(isCommunityP);
+  if(blocked.length)console.log(`✋ ${[...new Set(blocked.map(p=>p.name))].join(', ')} — community lane, never web-profiled (OCAP). Honour via the owes-ledger.`);
+  people=people.filter(p=>!isCommunityP(p));
+  if(!people.length&&!blocked.length){ // not in soil — fall back to the orbit worklist (page still gets web + history)
+    const o=rd('thoughts/shared/unified-orbit-worklist.csv').find(p=>(p.name||'').toLowerCase().includes(ONE.toLowerCase())&&p.email);
+    if(o&&(o.status==='community'||communityKeys.has(slug(o.name||'')))){console.log(`✋ ${o.name} — community lane, never web-profiled (OCAP). Honour via the owes-ledger.`);}
+    else if(o){const bs=Number(o.beeper_score)||0;const[gi,go]=(o.gmail_in_out||'').split('/').map(Number);
+      people=[{name:o.name,email:(o.email||'').toLowerCase(),lane:'supporter',warmth:String(bs+((gi&&go)?Math.min(gi,go)*2:0)),company:'',position:'',sector:'',gov_influence:'',indigenous:'',entities:'',n_entities:'0',boards:''}];}
+  }
+}
 else { const seen=new Set(); people=people.filter(p=>{const k=slug(p.name);if(seen.has(k))return false;seen.add(k);return true;})
   .sort((a,b)=>(+b.warmth||0)-(+a.warmth||0)).slice(0,N); }
 
 mkdirSync('thoughts/shared/people',{recursive:true});
 console.log(`Building ${people.length} person page(s)${SYNTH?' WITH qwen synthesis (slow)':''}${TAVILY?' + web':' (no TAVILY key → soil only)'}…\n`);
 
+const REFLECTION_STUB=`## Reflection — what *we* understand (by hand)
+> The richest layer. Written by us, generously — to understand, not to pitch.
+- **What they're trying to do in the world:**
+- **What they care about / what energises them:**
+- **Our shared history & how we know them:**
+- **What they might need from us (water / sun / nutrient):**
+- **What we have to offer them:**
+- **Energy: do we mostly give or receive here?**
+`;
+
 for(const p of people){
   const path=`thoughts/shared/people/${slug(p.name)}.md`;
-  if(RESUME&&SYNTH&&existsSync(path)){const cur=readFileSync(path,'utf8');if(!cur.includes('qwen draft pending')&&!cur.includes('synthesis unavailable')){console.log(`  ↩ skip ${p.name} (already synthesised)`);continue;}}
+  if(RESUME&&SYNTH&&existsSync(path)){const cur=readFileSync(path,'utf8');if(!cur.includes('qwen draft pending')&&!cur.includes('synthesis unavailable')&&cur.includes('## Shared history')){console.log(`  ↩ skip ${p.name} (already synthesised + history)`);continue;}}
+  // the by-hand Reflection layer survives EVERY rebuild — never regenerate over human writing
+  let reflection=REFLECTION_STUB;
+  if(existsSync(path)){const m=readFileSync(path,'utf8').match(/## Reflection — what \*we\* understand[\s\S]*$/);if(m)reflection=m[0].trimEnd()+'\n';}
   const web=await webRead(p.name,p.company);
+  const hist=await sharedHistory(p.email);
   let synthesis='_(overnight: qwen draft pending — run with `--synth`)_';
   if(SYNTH){
     const ctx=[`Name: ${p.name}`,p.position&&`Role: ${p.position}`,p.company&&`Org: ${p.company}`,p.sector&&`Sector: ${p.sector}`,
       p.entities&&`Connected orgs: ${p.entities}`,web?.answer&&`Web summary: ${web.answer}`,
-      web?.results?.length&&`Sources:\n${web.results.map(r=>'- '+r.title+': '+r.snippet).join('\n')}`].filter(Boolean).join('\n');
-    synthesis=await qwenSynth(`You are helping ACT (a relational organisation) UNDERSTAND a person so it can support and honour them — NOT pitch, sell, or corner them. From the context below, write 2 short paragraphs: who they are and the work they're doing in the world, and what they seem to care about. Generous, factual, no sales framing, no "opportunity"/"leverage" language. If the context is thin, say so plainly rather than inventing.\n\nCONTEXT:\n${ctx}\n\nUNDERSTANDING:`);
+      web?.results?.length&&`Sources:\n${web.results.map(r=>'- '+r.title+': '+r.snippet).join('\n')}`,
+      hist&&`Our email record: ${hist.count} emails, ${hist.first} → ${hist.last}. Recent subjects:\n${hist.recent.slice(0,15).map(r=>'- '+r.d+' '+(r.dir==='inbound'?'from them':'from us')+': '+r.s).join('\n')}`].filter(Boolean).join('\n');
+    synthesis=await qwenSynth(`You are helping ACT (a relational organisation) UNDERSTAND a person so it can support and honour them — NOT pitch, sell, or corner them. From the context below, write 2 short paragraphs: who they are and the work they're doing in the world, and what they seem to care about.${hist?' Then a third short paragraph: the arc of OUR shared work with them, drawn only from the email subjects provided (what we have actually been doing together, in plain terms).':''} Generous, factual, no sales framing, no "opportunity"/"leverage" language. If the context is thin, say so plainly rather than inventing.\n\nCONTEXT:\n${ctx}\n\nUNDERSTANDING:`);
   }
   const md=`---
 name: ${p.name}
 lane: supporter
 warmth: ${p.warmth}
-updated: 2026-06-03
+updated: ${new Date().toLocaleDateString('en-CA')}
 ---
 
 # ${p.name}
@@ -91,19 +148,16 @@ ${p.position?`*${p.position}${p.company?', '+p.company:''}*`:p.company||''}  ${p
 ## Web & work — public read${web?.error?` (search error: ${web.error})`:''}
 ${web?.answer?web.answer+'\n':''}${(web?.results||[]).map(r=>`- [${r.title}](${r.url}) — ${r.snippet}`).join('\n')||'_(no web key / no results)_'}
 
+## Shared history — from the spine
+${hist?`**${hist.count} emails** · first ${hist.first} · last ${hist.last}
+
+${hist.recent.slice(0,10).map(r=>`- ${r.d} ${r.dir==='inbound'?'←':'→'} ${r.s}`).join('\n')}`:'_(no linked email record)_'}
+
 ## Understanding — drafted
 ${synthesis}
 
-## Reflection — what *we* understand (by hand)
-> The richest layer. Written by us, generously — to understand, not to pitch.
-- **What they're trying to do in the world:**
-- **What they care about / what energises them:**
-- **Our shared history & how we know them:**
-- **What they might need from us (water / sun / nutrient):**
-- **What we have to offer them:**
-- **Energy: do we mostly give or receive here?**
-`;
-  writeFileSync(`thoughts/shared/people/${slug(p.name)}.md`,md);
+${reflection}`;
+  writeFileSync(path,md);
   console.log(`  ✓ ${p.name} (warmth ${p.warmth})${web?.results?.length?` · ${web.results.length} web sources`:''}${SYNTH?' · synthesised':''}`);
 }
 console.log(`\n→ thoughts/shared/people/  (${people.length} pages)`);
