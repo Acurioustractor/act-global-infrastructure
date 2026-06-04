@@ -41,9 +41,10 @@ const con=rd('thoughts/shared/el-contributor-constellation.csv').filter(r=>r.nam
 let people=con;
 if(ONE) people=con.filter(r=>r.name.toLowerCase().includes(ONE.toLowerCase()));
 else if(NAMES.length) people=con.filter(r=>NAMES.includes(slug(r.name)));
-// group/meeting transcripts stored as EL "profiles" are collective gifts, not people — no person page
-const NOT_A_PERSON=/\b(meeting|discussion|session|workshop|group|committee|team)\b/i;
-if(ALL){const g=people.filter(p=>NOT_A_PERSON.test(p.name));if(g.length)console.log(`↩ ${g.length} group/meeting records held out (collective gifts, ledger-only): ${g.map(p=>p.name).join(' · ')}`);people=people.filter(p=>!NOT_A_PERSON.test(p.name));}
+// group/meeting transcripts + placeholder/org profiles stored as EL "profiles" are not people — no person page
+const NOT_A_PERSON=/\b(meeting|discussion|session|workshop|group|committee|team|staff|workers|young people)\b/i;
+const PLACEHOLDER=new Set(['justicehub','removed','zero']); // EL data-quality artifacts (org name / placeholders)
+if(ALL){const g=people.filter(p=>NOT_A_PERSON.test(p.name)||PLACEHOLDER.has(slug(p.name)));if(g.length)console.log(`↩ ${g.length} non-person records held out (collective gifts / placeholders, ledger-only): ${g.map(p=>p.name).join(' · ')}`);people=people.filter(p=>!NOT_A_PERSON.test(p.name)&&!PLACEHOLDER.has(slug(p.name)));}
 // dedupe by slug (a person can carry two storyteller ids) — keep the row with the most transcripts
 {const best=new Map();for(const p of people){const k=slug(p.name);const prev=best.get(k);if(!prev||(+p.transcripts||0)>(+prev.transcripts||0))best.set(k,p);}people=[...best.values()];}
 if(!people.length){console.error('No matching named storytellers in the constellation.');process.exit(1);}
