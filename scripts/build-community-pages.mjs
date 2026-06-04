@@ -41,6 +41,11 @@ const con=rd('thoughts/shared/el-contributor-constellation.csv').filter(r=>r.nam
 let people=con;
 if(ONE) people=con.filter(r=>r.name.toLowerCase().includes(ONE.toLowerCase()));
 else if(NAMES.length) people=con.filter(r=>NAMES.includes(slug(r.name)));
+// group/meeting transcripts stored as EL "profiles" are collective gifts, not people — no person page
+const NOT_A_PERSON=/\b(meeting|discussion|session|workshop|group|committee|team)\b/i;
+if(ALL){const g=people.filter(p=>NOT_A_PERSON.test(p.name));if(g.length)console.log(`↩ ${g.length} group/meeting records held out (collective gifts, ledger-only): ${g.map(p=>p.name).join(' · ')}`);people=people.filter(p=>!NOT_A_PERSON.test(p.name));}
+// dedupe by slug (a person can carry two storyteller ids) — keep the row with the most transcripts
+{const best=new Map();for(const p of people){const k=slug(p.name);const prev=best.get(k);if(!prev||(+p.transcripts||0)>(+prev.transcripts||0))best.set(k,p);}people=[...best.values()];}
 if(!people.length){console.error('No matching named storytellers in the constellation.');process.exit(1);}
 
 // role:/place: tags only — ACT-written markers (elder, storyteller, place), never warmth or comms
@@ -60,8 +65,14 @@ const REFLECTION_STUB=`## Reflection — relationship held by hand
 `;
 
 mkdirSync('thoughts/shared/people',{recursive:true});
+// In --all mode, a storyteller whose existing page is supporter-shaped is a supporter-lane
+// person who ALSO gave transcripts (funders, researchers — e.g. Snow's CEO gave an interview).
+// Being in the constellation ≠ community lane: their page stays supporter-shaped, their owes
+// live in the ledger. Explicit --name/--names overrides this (deliberate intent).
+const keptSupporter=[];
 for(const p of people){
   const path=`thoughts/shared/people/${slug(p.name)}.md`;
+  if(ALL&&existsSync(path)&&/^lane: supporter$/m.test(readFileSync(path,'utf8'))){keptSupporter.push(p.name);continue;}
   let reflection=REFLECTION_STUB;
   if(existsSync(path)){const m=readFileSync(path,'utf8').match(/## Reflection[^\n]*\n[\s\S]*$/);if(m&&/^- \*\*[^\n]*:\*\* *\S/m.test(m[0]))reflection=m[0].trimEnd()+'\n';}
   const tags=tagsByKey.get(slug(p.name))||[];
@@ -95,4 +106,5 @@ ${reflection}`;
   writeFileSync(path,md);
   console.log(`  ✓ ${p.name} — ${tx} given · ${live} live · ${owes} owed${consent?` · ${consent} consent`:''}`);
 }
-console.log(`\n→ ${people.length} community page(s) in thoughts/shared/people/ (owes-shaped, no web)`);
+console.log(`\n→ ${people.length-keptSupporter.length} community page(s) in thoughts/shared/people/ (owes-shaped, no web)`);
+if(keptSupporter.length)console.log(`↩ ${keptSupporter.length} supporter-lane storytellers kept supporter-shaped (owes stay in the ledger): ${keptSupporter.join(', ')}`);
