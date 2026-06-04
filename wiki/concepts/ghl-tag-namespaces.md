@@ -58,6 +58,25 @@ any smart list still keyed on them matches zero contacts.
   reads it from the mirror.
 - **Verify deletes by direct GET, not search** — the GHL search index lags after writes.
 
+## Spec — attendance as contact signal (designed 2026-06-05, blocked on the Humanitix webhook)
+
+The Field's `contact_warmth` today = Beeper + Gmail two-way. The garden crew shows up in
+person and never emails — so the cooling queue cries wolf about people Ben saw on Saturday.
+When the Harvest session wires Humanitix → GHL, this closes:
+
+1. **Harvest side delivers:** Humanitix attendee webhook → GHL contact upsert adds
+   `attended:<event-slug>` where the slug embeds the date — e.g. `attended:workday-2026-07-12`.
+   One tag per event attended. No other writes (no tier, no comms).
+2. **Field side consumes** (`build-unified-orbit.mjs`):
+   - add `attended:` (and `pod:`) to the rel_tags filter;
+   - parse dates out of `attended:` slugs → `last_contact = max(last_contact, latest event date)`;
+   - contact warmth: **+10 per attendance in the last 6 months, capped at +30** — in-person
+     presence outranks an email thread, but a regular can't swamp the scale. Supporter lane
+     only — community individuals may carry `attended:` tags, but the community line means
+     they are never warmth-scored regardless.
+3. **Never a rung.** No tier move, no workflow enrolment from attendance — headcount feeds
+   the human's read, nothing else.
+
 ## Pointers
 
 - The Field canon: `wiki/concepts/the-field.md` · `wiki/concepts/energy-orbit.md`

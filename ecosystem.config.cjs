@@ -902,6 +902,17 @@ const cronScripts = [
     script: 'scripts/agents/agent-funder-cadence.mjs',
     cron_restart: '0 6 * * *', // Daily 06:00 AEST
   },
+
+  // === The Field (2026-06-05) ===
+  // Daily 6:50am AEST — regenerate the three Field surfaces (morning read,
+  // scope board, orbit viz) before the 7am briefing. Read-only re-render over
+  // the worklist CSVs; does not re-pull GHL/EL/Beeper.
+  // Plan: 2026-06-03-act-network-circle-action-stages
+  {
+    name: 'field-surfaces',
+    script: 'scripts/build-field-surfaces.mjs',
+    cron_restart: '50 6 * * *',
+  },
 ];
 
 module.exports = {
