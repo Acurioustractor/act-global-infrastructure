@@ -11,7 +11,7 @@
  *        + unified-orbit-worklist.csv (warmth / last_contact / flags) + el-contributor-constellation.csv (owes).
  * Read-only. Run:  node scripts/build-scope-board.mjs   Out: thoughts/shared/project-scope-board.html
  */
-import { readFileSync, writeFileSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 
 function parseCSV(t){const R=[];let r=[],f='',q=false;for(let i=0;i<t.length;i++){const c=t[i];if(q){if(c==='"'){if(t[i+1]==='"'){f+='"';i++;}else q=false;}else f+=c;}else if(c==='"')q=true;else if(c===',')(r.push(f),f='');else if(c==='\n')(r.push(f),R.push(r),r=[],f='');else if(c!=='\r')f+=c;}if(f||r.length){r.push(f);R.push(r);}return R;}
 const rd=p=>{const R=parseCSV(readFileSync(p,'utf8'));const h=R[0];return R.slice(1).filter(x=>x.length===h.length).map(x=>Object.fromEntries(h.map((k,i)=>[k,x[i]])));};
@@ -61,6 +61,9 @@ const latent=people.filter(p=>p.warmth>=WARM&&!p.circle&&(p.uncaptured||!p.tier)
 const cooling=people.filter(p=>p.warmth>=WARM&&daysSince(p.last)!=null&&daysSince(p.last)>120).sort((a,b)=>daysSince(b.last)-daysSince(a.last)).slice(0,12);
 // OWED — community accountability (named, by owes-gap)
 const owed=rd('thoughts/shared/el-contributor-constellation.csv').map(r=>({name:r.name,tx:+r.transcripts,live:+r.live,owes:+r.owes_gap,consent:+r.consent_required})).filter(r=>!isUuid(r.name)&&r.owes>0).sort((a,b)=>b.owes-a.owes).slice(0,12);
+// person-page links (supporter pages for latent/cooling, owes-shaped community pages for owed)
+const slugify=s=>s.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+for(const p of [...latent,...cooling,...owed])p.page=existsSync(`thoughts/shared/people/${slugify(p.name)}.md`)?slugify(p.name):'';
 
 const DATA=JSON.stringify({board,latent,cooling,owed});
 
@@ -95,6 +98,7 @@ main{padding:16px 24px;display:grid;grid-template-columns:1.6fr .9fr;gap:22px;al
 .qsub{color:var(--mut);font-size:11.5px;margin-bottom:7px}
 .qrow{display:flex;justify-content:space-between;font-size:12.5px;padding:3px 0;border-bottom:1px dashed #1c2533}
 .qrow .m{color:var(--mut);font-size:11px}
+.pp{color:var(--warm);font-size:11px;text-decoration:none;margin-left:5px}
 .summary{font-size:12px;color:var(--mut);padding:10px 24px 0}
 .summary b{color:var(--ink)}
 </style></head><body>
@@ -131,9 +135,10 @@ function render(){
   }
 }
 function fill(id,arr,fn){document.getElementById(id).innerHTML=arr.map(fn).join('')||'<div class=qrow style="color:#46566b">none</div>';}
-fill('q-lat',D.latent,p=>'<div class=qrow><span>'+p.name+(p.uncaptured?' <span class=m>(uncaptured)</span>':'')+'</span><span class=w0 style="color:#5fb3ff">'+Math.round(p.warmth)+'</span></div>');
-fill('q-cool',D.cooling,p=>'<div class=qrow><span>'+p.name+'</span><span class=m>'+p.last+'</span></div>');
-fill('q-owe',D.owed,p=>'<div class=qrow><span>'+p.name+'</span><span class=m>'+p.owes+' owed · '+p.live+'/'+p.tx+' live'+(p.consent?' · '+p.consent+' consent':'')+'</span></div>');
+const pp=p=>p.page?' <a class=pp href="people/'+p.page+'.md">page</a>':'';
+fill('q-lat',D.latent,p=>'<div class=qrow><span>'+p.name+pp(p)+(p.uncaptured?' <span class=m>(uncaptured)</span>':'')+'</span><span class=w0 style="color:#5fb3ff">'+Math.round(p.warmth)+'</span></div>');
+fill('q-cool',D.cooling,p=>'<div class=qrow><span>'+p.name+pp(p)+'</span><span class=m>'+p.last+'</span></div>');
+fill('q-owe',D.owed,p=>'<div class=qrow><span>'+p.name+pp(p)+'</span><span class=m>'+p.owes+' owed · '+p.live+'/'+p.tx+' live'+(p.consent?' · '+p.consent+' consent':'')+'</span></div>');
 render();
 </script></body></html>`;
 

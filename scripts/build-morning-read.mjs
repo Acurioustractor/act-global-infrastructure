@@ -68,7 +68,7 @@ const latent=take(people.filter(p=>p.warmth>=20&&!p.circle&&(p.uncaptured||!p.ti
 const pageLink=n=>existsSync(`thoughts/shared/people/${slug(n)}.md`)?` <a class=pp href="people/${slug(n)}.md">page</a>`:'';
 const item=(emoji,verb,who,why,extra='')=>`<div class=act><span class=e>${emoji}</span><div><b>${verb}</b> — ${who}${extra}<div class=why>${why}</div></div></div>`;
 const coolingItems=cooling.map(p=>item('🌡','Water',p.name,`was warm (${Math.round(p.warmth)}), ${daysSince(p.last)} days quiet — re-reach before it's gone`,pageLink(p.name)));
-const owedItems=owed.map(p=>item('🤝','Sun',p.name,`${p.owes} of their ${p.tx} transcripts not yet brought to life${p.consent?` · ${p.consent} consent conversation owed`:''} — honour one today`));
+const owedItems=owed.map(p=>item('🤝','Sun',p.name,`${p.owes} of their ${p.tx} transcripts not yet brought to life${p.consent?` · ${p.consent} consent conversation owed`:''} — honour one today`,pageLink(p.name)));
 const gapItems=gaps.map(g=>item('🕳','Source',`${g.project}: ${g.need}`,g.best?`warmest candidate (${g.best}) is still a cold name — warm them up or find someone`:`no one tagged at all`));
 const latentItems=latent.map(p=>item('⚡','Reach',p.name,`warm (${Math.round(p.warmth)}) but never formalised — the energy is already there${p.uncaptured?' (uncaptured)':''}`,pageLink(p.name)));
 // interleave: every category's first item is guaranteed; the 7-cap then cuts at most one
