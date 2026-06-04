@@ -74,8 +74,10 @@ const keptSupporter=[];
 for(const p of people){
   const path=`thoughts/shared/people/${slug(p.name)}.md`;
   if(ALL&&existsSync(path)&&/^lane: supporter$/m.test(readFileSync(path,'utf8'))){keptSupporter.push(p.name);continue;}
+  // the human tail — Field notes (live captures) + by-hand Reflection — survives rebuilds.
+  // Keep it when it carries Field notes or any filled reflection bullet; else fresh stub.
   let reflection=REFLECTION_STUB;
-  if(existsSync(path)){const m=readFileSync(path,'utf8').match(/## Reflection[^\n]*\n[\s\S]*$/);if(m&&/^- \*\*[^\n]*:\*\* *\S/m.test(m[0]))reflection=m[0].trimEnd()+'\n';}
+  if(existsSync(path)){const m=readFileSync(path,'utf8').match(/## Field notes[\s\S]*$|## Reflection[^\n]*\n[\s\S]*$/);if(m&&(/## Field notes/.test(m[0])||/^- \*\*[^\n]*:\*\* *\S/m.test(m[0])))reflection=m[0].trimEnd()+'\n';}
   const tags=tagsByKey.get(slug(p.name))||[];
   const tx=+p.transcripts||0, live=+p.live||0, draft=+p.in_draft||0, raw=+p.raw_unactioned||0,
     consent=+p.consent_required||0, withdrawn=+p.withdrawn||0, owes=+p.owes_gap||0, pct=+p.honoured_pct||0;

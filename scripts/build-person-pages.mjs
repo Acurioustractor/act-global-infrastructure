@@ -115,9 +115,9 @@ const REFLECTION_STUB=`## Reflection — what *we* understand (by hand)
 for(const p of people){
   const path=`thoughts/shared/people/${slug(p.name)}.md`;
   if(RESUME&&SYNTH&&existsSync(path)){const cur=readFileSync(path,'utf8');if(!cur.includes('qwen draft pending')&&!cur.includes('synthesis unavailable')&&cur.includes('## Shared history')){console.log(`  ↩ skip ${p.name} (already synthesised + history)`);continue;}}
-  // the by-hand Reflection layer survives EVERY rebuild — never regenerate over human writing
+  // the human tail — Field notes (live captures) + by-hand Reflection — survives EVERY rebuild
   let reflection=REFLECTION_STUB;
-  if(existsSync(path)){const m=readFileSync(path,'utf8').match(/## Reflection — what \*we\* understand[\s\S]*$/);if(m)reflection=m[0].trimEnd()+'\n';}
+  if(existsSync(path)){const m=readFileSync(path,'utf8').match(/## Field notes[\s\S]*$|## Reflection[\s\S]*$/);if(m)reflection=m[0].trimEnd()+'\n';}
   const web=await webRead(p.name,p.company);
   const hist=await sharedHistory(p.email);
   let synthesis='_(overnight: qwen draft pending — run with `--synth`)_';
