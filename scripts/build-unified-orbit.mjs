@@ -113,8 +113,12 @@ for (const c of contacts) {
   const ghost = tags.includes('gone-from-ghl');
   const isCommunity = c.is_storyteller || tags.some(t => COMMUNITY_ROLES.includes(t)) || COMMUNITY_NAME.test(c.full_name || '');
   const isOrg = ORG_NAME.test(c.full_name || '') || ORG_NAME.test(c.company_name || '') || /@goods\.civicgraph\.io$/i.test(c.email || '');
-  // a community INDIVIDUAL is the only thing the community-line protects (excludes orgs + segment-tagged funders)
-  const isCommunityIndividual = !isOrg && (c.is_storyteller || tags.some(t => COMMUNITY_INDIVIDUAL_ROLES.includes(t)) || COMMUNITY_NAME.test(c.full_name || ''));
+  // a community INDIVIDUAL is the only thing the community-line protects (excludes orgs + segment-tagged funders).
+  // ACT's own team is excluded by definition: the line protects community FROM ACT — the org can't
+  // violate it against itself. (Ben/Nic carry is_storyteller=true from their own EL transcripts,
+  // which flagged their Harvest tier:member as a "violation" — noise, fixed 2026-06-05.)
+  const isInternal = /@act\.place$/i.test(c.email || '') || /^(ben(jamin)? knight|nic(holas)? marchesi( oam)?|a curious tractor|act admin|benjamin test)$/i.test((c.full_name || '').trim());
+  const isCommunityIndividual = !isOrg && !isInternal && (c.is_storyteller || tags.some(t => COMMUNITY_INDIVIDUAL_ROLES.includes(t)) || COMMUNITY_NAME.test(c.full_name || ''));
   const relTags = tags.filter(t => /^(tier:|circle:|role:|comms:|project:|lane:)/.test(t));
   const hasTier = tags.some(t => t.startsWith('tier:'));
   const hasDrip = tags.some(t => /drip/.test(t));
