@@ -115,7 +115,7 @@ for (const c of contacts) {
   const isOrg = ORG_NAME.test(c.full_name || '') || ORG_NAME.test(c.company_name || '') || /@goods\.civicgraph\.io$/i.test(c.email || '');
   // a community INDIVIDUAL is the only thing the community-line protects (excludes orgs + segment-tagged funders)
   const isCommunityIndividual = !isOrg && (c.is_storyteller || tags.some(t => COMMUNITY_INDIVIDUAL_ROLES.includes(t)) || COMMUNITY_NAME.test(c.full_name || ''));
-  const relTags = tags.filter(t => /^(tier:|circle:|role:|comms:)/.test(t));
+  const relTags = tags.filter(t => /^(tier:|circle:|role:|comms:|project:|lane:)/.test(t));
   const hasTier = tags.some(t => t.startsWith('tier:'));
   const hasDrip = tags.some(t => /drip/.test(t));
   const g = gmailByEmail.get(ne) || gmailByName.get(nn);
@@ -185,6 +185,26 @@ for (const b of beeper) {
 }
 
 rows.sort((a, b) => b.signalRank - a.signalRank);
+
+// --- 4.5) carry the hand-annotation columns forward ----------------------
+// CIRCLE / LANE_FIX / NOTES are Ben's curation on the PREVIOUS worklist, not generated
+// data — a regen must never wipe them (same rule as person-page Reflections).
+// Keyed by email, falling back to normalised name.
+{
+  const prev = loadCSV('thoughts/shared/unified-orbit-worklist.csv');
+  const ann = new Map();
+  for (const p of prev) {
+    if (!(p.CIRCLE || p.LANE_FIX || p.NOTES)) continue;
+    const k = p.email ? 'e:' + normEmail(p.email) : 'n:' + normName(p.name || '');
+    if (!ann.has(k)) ann.set(k, { CIRCLE: p.CIRCLE, LANE_FIX: p.LANE_FIX, NOTES: p.NOTES });
+  }
+  let carried = 0;
+  for (const r of rows) {
+    const a = ann.get(r.email ? 'e:' + normEmail(r.email) : 'n:' + normName(r.name || '')) || ann.get('n:' + normName(r.name || ''));
+    if (a) { r.CIRCLE = a.CIRCLE; r.LANE_FIX = a.LANE_FIX; r.NOTES = a.NOTES; carried++; }
+  }
+  if (ann.size) console.log(`carried ${carried} hand-annotation row(s) forward (${ann.size} annotated in previous worklist)`);
+}
 
 // --- 5) write the worklist ----------------------------------------------
 const esc = v => `"${String(v ?? '').replace(/"/g, '""')}"`;
