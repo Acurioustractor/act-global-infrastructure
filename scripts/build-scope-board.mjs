@@ -43,9 +43,11 @@ const board=catalog.map(p=>({
 
 // ── people action-queue (from the orbit + constellation) ───────────────────
 const orbit=rd('thoughts/shared/unified-orbit-worklist.csv');
+const isInternal=n=>/^(ben(jamin)? knight|nic(holas)? marchesi( oam)?|a curious tractor)$/i.test((n||'').trim());
 const sup=new Map();
 for(const p of orbit){
   if(p.status==='ghost'||p.status==='community')continue;
+  if(isInternal(p.name||''))continue;
   const tags=p.rel_tags||'';const bs=Number(p.beeper_score)||0;const[gi,go]=(p.gmail_in_out||'').split('/').map(Number);
   const warmth=bs+((gi&&go)?Math.min(gi,go)*2:0);
   const k=norm(p.name);if(!k)continue;

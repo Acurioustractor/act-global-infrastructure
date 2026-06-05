@@ -28,7 +28,7 @@ const today=NOW.toLocaleDateString('en-AU',{weekday:'long',day:'numeric',month:'
 const orbit=rd('thoughts/shared/unified-orbit-worklist.csv');
 const sup=new Map();
 const looksLikeHandle=n=>/@/.test(n)||/^\+?\d[\d \-()]{6,}$/.test(n.trim());      // unresolved Beeper email/phone identities
-const isInternal=n=>/^(ben(jamin)? knight|nic(holas)? marchesi|a curious tractor)$/i.test(n.trim());
+const isInternal=n=>/^(ben(jamin)? knight|nic(holas)? marchesi( oam)?|a curious tractor)$/i.test(n.trim());
 for(const p of orbit){
   if(p.status==='ghost'||p.status==='community')continue;
   if(looksLikeHandle(p.name||'')||isInternal(p.name||''))continue;               // not real layer members
