@@ -159,10 +159,45 @@ async function personContext(name: string, email: string) {
   return { story, subjects, partners, orgGuess, needs: needs.slice(0, 3) }
 }
 
+// known name variants — keep in sync with scripts/lib/field-warmth.mjs ALIAS
+// (durable fix = identity resolution; this handles the known few for ?focus= lookups)
+const ALIAS: Record<string, string> = { 'ben croft': 'benjamin croft' }
+const canon = (s: string) => { const k = norm(s); return ALIAS[k] || k }
+
+/** Focus mode: ONE card for a named person, read or not — the add-a-note flow
+ *  from the tending board ("no read note" rows click into here, notes accumulate). */
+async function focusCard(focus: string) {
+  const [decTxt, wlTxt, coocTxt] = await Promise.all([readIf(DECISIONS), readIf(WORKLIST), readIf(COOC)])
+  const k = canon(focus)
+  let read: Record<string, unknown> = {}
+  for (const d of jsonl(decTxt)) if (canon(d.name) === k) read = { ...read, ...d } // latest fields win (same merge as loadLedger)
+  const w = rows(wlTxt).find(r => canon(r.name) === k)
+  let subjects: string[] = []
+  const page = await readIf(path.join(PEOPLE, `${slug(w?.name || focus)}.md`))
+  const hist = page.match(/## Shared history[^\n]*\n([\s\S]*?)(\n## |$)/)
+  if (hist) subjects = hist[1].split('\n').filter(l => l.startsWith('- 20')).slice(0, 8)
+  const partners = rows(coocTxt)
+    .filter(r => canon(r.a) === k || canon(r.b) === k)
+    .sort((a, b) => +b.emails_together - +a.emails_together).slice(0, 4)
+    .map(r => (canon(r.a) === k ? r.b : r.a))
+  return {
+    name: w?.name || (read.name as string) || focus,
+    email: ((w?.email || (read.email as string) || '') as string).toLowerCase(),
+    org: '', machineW: 0, ringGuess: '', guess: '', confidence: '',
+    beeper: w?.beeper_pattern || '', gmail: w?.gmail_in_out || '',
+    lastContact: w?.last_contact || '', tags: (w?.rel_tags || '').split(' ').filter(Boolean),
+    flags: w?.flags || '', uncaptured: w?.in_ghl === 'n',
+    subjects, partners,
+    ring: (read.ring as string) || null, relation: (read.relation as string) || null,
+  }
+}
+
 export async function GET(req: Request) {
   const params = new URL(req.url).searchParams
   if (params.get('context') != null)
     return NextResponse.json(await personContext(params.get('context') || '', params.get('email') || ''))
+  if (params.get('focus'))
+    return NextResponse.json({ queue: [await focusCard(params.get('focus')!)], total: 1, doneToday: 0, focus: true })
   if (params.get('mode') === 'triage') {
     const people = await triageList()
     return NextResponse.json({ people, total: people.length })

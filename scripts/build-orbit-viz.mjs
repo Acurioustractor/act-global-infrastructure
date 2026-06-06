@@ -54,7 +54,7 @@ for(const s of supporters){
   s.slug=slug(s.name);
   const cad=s.layer?cadenceState(reads,s.name,s.last):null;
   s.cad=cad?{state:cad.state,days:cad.days,expected:cad.expected}:null;
-  s.read=((reads.get(norm(s.name))||{}).relation||'').slice(0,90);
+  s.read=((reads.get(canon(s.name))||{}).relation||'').slice(0,90); // canon, not norm — alias variants (ben croft) lose their quote otherwise
 }
 for(const s of supporters){ if(!s.layer){ if(!hasRead(reads,s.name)&&s.warmth>0)unreadSignal++; else quiet++; } }
 supporters=supporters.filter(s=>s.layer).sort((a,b)=>(b.warmth)-(a.warmth));
@@ -111,7 +111,8 @@ function row(s){
     <span class=nm>${core?'⭐ ':''}${esc(s.name)}</span>
     <span class=ring>ring ${esc(s.layer)}</span>
     <span class=days>${days}</span>
-    <span class=quote>${s.read?'“'+esc(s.read)+'”':'<span class=m>no read note</span>'}</span>
+    <span class=quote>${s.read?'“'+esc(s.read)+'”'
+      :`<span class=addnote data-href="/field/circle?focus=${esc(encodeURIComponent(s.name))}">✎ add read note</span>`}</span>
   </a>`;
 }
 const sections=['overdue','due','unknown','ok'].map(st=>{
@@ -149,13 +150,15 @@ h2{font-size:12px;text-transform:uppercase;letter-spacing:.8px;margin:26px 0 6px
 .days{min-width:96px;font-variant-numeric:tabular-nums;font-size:13.5px}
 .quote{color:#9fd8b8;font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1}
 .row.ok .quote,.row.unknown .quote{color:#7d8b9b}
+.addnote{color:#5fb3ff;border-bottom:1px dashed #2e4a66;cursor:pointer}
+.addnote:hover{color:#9fd0ff;border-bottom-color:#5fb3ff}
 .chip{margin:30px 0 0;background:#121826;border:1px solid var(--line);border-radius:10px;padding:11px 15px;font-size:13.5px;color:var(--mut)}
 .chip a{color:#5fb3ff;font-weight:600;text-decoration:none}
 .split{border-top:1px dashed #3a4658;margin:34px 0 6px;padding-top:18px}
 .split p{color:var(--mut);font-size:12.5px;margin:4px 0 12px}
 </style></head><body>
 <div class=top>
-  <div><h1>The Field — tending board</h1><div class=sub>your reads, ordered by who needs you · click a row for their page</div></div>
+  <div><h1>The Field — tending board</h1><div class=sub>your reads, ordered by who needs you · click a row for their page · ✎ adds a read note</div></div>
   <select id=proj><option value="">every project</option></select>
   <div class=kpis>
     <span style="color:#ff5d5d"><b>${stats.overdue}</b> tend</span>
@@ -180,6 +183,10 @@ const sel=document.getElementById('proj');
 Object.keys(PROJ).forEach(p=>{const o=document.createElement('option');o.value=p;o.textContent=p;sel.appendChild(o);});
 sel.onchange=()=>{const set=sel.value?new Set(PROJ[sel.value]):null;
   document.querySelectorAll('.row[data-k]').forEach(r=>r.classList.toggle('hide',!!set&&!set.has(r.dataset.k)));};
+// "no read note" → circle UI focus mode (notes accumulate as you tend). Nested in the
+// row anchor, so stop the row's page-navigation and open the note flow instead.
+document.querySelectorAll('.addnote').forEach(el=>el.addEventListener('click',e=>{
+  e.preventDefault();e.stopPropagation();window.open(el.dataset.href,'_blank');}));
 </script></body></html>`;
 
 writeFileSync('thoughts/shared/orbit-viz.html', html);

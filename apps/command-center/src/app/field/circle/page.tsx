@@ -21,8 +21,9 @@ interface Card {
   beeper: string; gmail: string; lastContact: string
   tags: string[]; flags: string; uncaptured: boolean
   subjects: string[]; partners: string[]
+  ring?: string | null; relation?: string | null   // focus mode: their current read
 }
-interface Queue { queue: Card[]; total: number; doneToday: number }
+interface Queue { queue: Card[]; total: number; doneToday: number; focus?: boolean }
 
 const RINGS = [
   { v: '5', label: '5 · inner', key: '1', hue: 'bg-rose-600 hover:bg-rose-500' },
@@ -34,9 +35,18 @@ const RINGS = [
 
 export default function CirclePage() {
   const qc = useQueryClient()
+  // ?focus=<name> = single-person mode — the tending board's "no read note" rows land
+  // here so notes accumulate as you tend. Read after mount (no Suspense dance).
+  const [focus, setFocus] = useState<string | null>(null)
+  const [focusReady, setFocusReady] = useState(false)
+  useEffect(() => {
+    setFocus(new URLSearchParams(window.location.search).get('focus'))
+    setFocusReady(true)
+  }, [])
   const { data, isLoading } = useQuery<Queue>({
-    queryKey: ['field-circle'],
-    queryFn: () => fetch('/api/field/circle').then(r => r.json()),
+    queryKey: ['field-circle', focus],
+    queryFn: () => fetch(`/api/field/circle${focus ? `?focus=${encodeURIComponent(focus)}` : ''}`).then(r => r.json()),
+    enabled: focusReady,
   })
   const [idx, setIdx] = useState(0)
   const [relation, setRelation] = useState('')
@@ -46,6 +56,9 @@ export default function CirclePage() {
   const relRef = useRef<HTMLTextAreaElement>(null)
 
   const card = data?.queue?.[idx]
+
+  // focus mode: start from their current ring so a note-only save can't read as a re-ring
+  useEffect(() => { if (data?.focus && card?.ring) setPendingRing(card.ring) }, [data?.focus, card?.name, card?.ring])
 
   const save = useMutation({
     mutationFn: (body: Record<string, unknown>) =>
@@ -82,9 +95,21 @@ export default function CirclePage() {
     return () => window.removeEventListener('keydown', h)
   }, [submit, skip])
 
-  if (isLoading) return <div className="flex h-screen items-center justify-center bg-zinc-950 text-zinc-400"><Loader2 className="mr-2 h-5 w-5 animate-spin" /> loading the field…</div>
+  if (isLoading || !data) return <div className="flex h-screen items-center justify-center bg-zinc-950 text-zinc-400"><Loader2 className="mr-2 h-5 w-5 animate-spin" /> loading the field…</div>
 
   if (!card) {
+    if (data.focus && focus) {
+      const slug = focus.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
+      return (
+        <div className="flex h-screen flex-col items-center justify-center gap-4 bg-zinc-950 text-zinc-100">
+          <Sparkles className="h-10 w-10 text-emerald-400" />
+          <div className="text-2xl font-semibold">Note saved for {focus}.</div>
+          <div className="text-zinc-400">It feeds their page, the board, and the morning read on the next surface build.</div>
+          <a href={`/api/field/people/${slug}.md`} target="_blank" rel="noreferrer"
+            className="mt-2 rounded-lg bg-zinc-800 px-4 py-2 text-sm hover:bg-zinc-700">open their page →</a>
+        </div>
+      )
+    }
     return (
       <div className="flex h-screen flex-col items-center justify-center gap-4 bg-zinc-950 text-zinc-100">
         <Sparkles className="h-10 w-10 text-amber-400" />
@@ -103,10 +128,10 @@ export default function CirclePage() {
       <div className="mx-auto max-w-3xl">
         {/* progress */}
         <div className="mb-6 flex items-center justify-between text-sm text-zinc-400">
-          <div>The Field — circle session</div>
+          <div>The Field — {data?.focus ? 'add a read note' : 'circle session'}</div>
           <div className="flex items-center gap-4">
             {streak >= 3 && <span className="text-amber-400">🔥 {streak} streak</span>}
-            <span>{remaining} left · {(data?.doneToday || 0) + saved} read today</span>
+            {!data?.focus && <span>{remaining} left · {(data?.doneToday || 0) + saved} read today</span>}
           </div>
         </div>
         <div className="mb-8 h-1 w-full overflow-hidden rounded bg-zinc-800">
@@ -142,10 +167,20 @@ export default function CirclePage() {
         )}
         {card.flags && <div className="mb-4 text-sm text-amber-400/90">{card.flags}</div>}
 
-        {/* machine hint — deliberately small */}
-        <div className="mb-6 text-xs text-zinc-500">
-          machine: ring {card.ringGuess} ({card.confidence}) — {card.guess}
-        </div>
+        {/* machine hint — deliberately small (hidden in focus mode: no guess to show) */}
+        {!data?.focus && (
+          <div className="mb-6 text-xs text-zinc-500">
+            machine: ring {card.ringGuess} ({card.confidence}) — {card.guess}
+          </div>
+        )}
+
+        {/* focus mode: their read so far — the note you write ADDS to the ledger */}
+        {data?.focus && card.relation && (
+          <div className="mb-6 rounded-lg border border-emerald-900/60 bg-emerald-950/30 p-3 text-sm text-emerald-200">
+            <span className="mr-2 text-xs font-semibold uppercase tracking-wide text-emerald-500">your read so far</span>
+            “{card.relation}”
+          </div>
+        )}
 
         {/* the read */}
         <div className="mb-4 flex flex-wrap gap-2">
