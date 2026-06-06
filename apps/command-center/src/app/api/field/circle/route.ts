@@ -87,11 +87,21 @@ async function triageList() {
   return people
 }
 
-/** Per-person context for the triage screen: recent email subjects (recognition
- *  anchor, live from the spine) + what the Stage-F needs-matcher thinks they
- *  could help with. Fetched lazily per card — 1,846 people, only the current one. */
+/** Per-person context for the triage screen. The story block is a qwen-written
+ *  SUMMARY of what actually happened (raw "Re: Introduction" ×6 tells Ben nothing) —
+ *  local ollama only (the ethic), cached per person so each card costs one draft. */
+const STORY_CACHE = path.join(REPO, 'thoughts/shared/.triage-story-cache.json')
+const GENERIC_DOMAINS = /gmail|hotmail|outlook|yahoo|icloud|bigpond|live\.com|me\.com/i
+const shortProject = (p: string) => p.replace(/\s*[(—].*$/, '').trim()
+
 async function personContext(name: string, email: string) {
   let subjects: string[] = []
+  let story = ''
+  let orgGuess = ''
+  if (email && !GENERIC_DOMAINS.test(email)) {
+    const dom = email.split('@')[1] || ''
+    orgGuess = dom.replace(/\.(com|org|net|gov|edu)?(\.au)?$/i, '').replace(/[-.]/g, ' ')
+  }
   if (email) {
     try {
       const { createClient } = await import('@supabase/supabase-js')
@@ -99,24 +109,54 @@ async function personContext(name: string, email: string) {
       // spine join key is ghl_contact_id, NOT email (same lesson as build-person-pages.mjs)
       const { data: contacts } = await sb.from('ghl_contacts').select('ghl_id').eq('email', email.toLowerCase()).limit(10)
       const ids = (contacts || []).map(c => c.ghl_id).filter(Boolean)
-      const q = sb.from('communications_history').select('occurred_at,direction,subject')
-        .order('occurred_at', { ascending: false }).limit(6)
+      const q = sb.from('communications_history').select('occurred_at,direction,subject,content_preview,summary')
+        .order('occurred_at', { ascending: false }).limit(8)
       const { data } = ids.length
         ? await q.in('ghl_contact_id', ids)
         : await q.eq('contact_email', email.toLowerCase())
-      subjects = (data || []).filter(r => r.subject)
-        .map(r => `${(r.occurred_at || '').slice(0, 10)} ${r.direction === 'inbound' ? '←' : '→'} ${r.subject.slice(0, 80)}`)
-    } catch { /* spine unavailable → subjects stay empty */ }
+      const comms = (data || []).filter(r => r.subject)
+      subjects = comms.slice(0, 4).map(r => `${(r.occurred_at || '').slice(0, 10)} ${r.direction === 'inbound' ? '←' : '→'} ${r.subject.slice(0, 80)}`)
+
+      if (comms.length) {
+        // cached story?
+        let cache: Record<string, string> = {}
+        try { cache = JSON.parse(await readIf(STORY_CACHE) || '{}') } catch { }
+        const key = norm(name)
+        if (cache[key]) story = cache[key]
+        else {
+          const material = comms.map(r =>
+            `${(r.occurred_at || '').slice(0, 10)} ${r.direction === 'inbound' ? 'from them' : 'from us'}: ${r.subject}${r.summary ? ` — ${String(r.summary).slice(0, 150)}` : r.content_preview ? ` — ${String(r.content_preview).slice(0, 150)}` : ''}`
+          ).join('\n')
+          const resp = await fetch('http://localhost:11434/api/generate', {
+            method: 'POST', headers: { 'content-type': 'application/json' },
+            body: JSON.stringify({
+              model: 'qwen2.5:32b', stream: false, options: { num_predict: 90 },
+              prompt: `Today is ${new Date().toLocaleDateString('en-CA')}. In 1-2 plain sentences, summarise what has ACTUALLY happened between Ben (A Curious Tractor) and ${name}, from these emails. Say what it was about and where it stands NOW relative to today (active? fizzled? gone quiet for months?). Use the person's name exactly as written. No fluff, no "likely", just what the record shows.\n\n${material}\n\nSUMMARY:`,
+            }),
+            signal: AbortSignal.timeout(15000),
+          })
+          story = (((await resp.json()) as any).response || '').trim()
+          if (story) { cache[key] = story; await fs.writeFile(STORY_CACHE, JSON.stringify(cache)) }
+        }
+      }
+    } catch { /* spine or ollama unavailable → subjects-only */ }
   }
+  // who they appear alongside (email co-occurrence)
+  const coocTxt = await readIf(COOC)
+  const partners = rows(coocTxt)
+    .filter(r => norm(r.a) === norm(name) || norm(r.b) === norm(name))
+    .sort((a, b) => +b.emails_together - +a.emails_together).slice(0, 3)
+    .map(r => (norm(r.a) === norm(name) ? r.b : r.a))
+
   const needs: string[] = []
   const matchTxt = await readIf(path.join(REPO, 'thoughts/shared/project-needs-match.csv'))
   if (matchTxt) {
     for (const r of rows(matchTxt)) {
-      if (norm(r.name || r.person || '') === norm(name) && (r.need || r.need_label))
-        needs.push(`${r.project || ''} — ${r.need || r.need_label}`.replace(/^ — /, ''))
+      if (norm(r.name || '') === norm(name) && r.need)
+        needs.push(`${shortProject(r.project || '')}: ${r.need.slice(0, 45)}`)
     }
   }
-  return { subjects, needs: needs.slice(0, 3) }
+  return { story, subjects, partners, orgGuess, needs: needs.slice(0, 3) }
 }
 
 export async function GET(req: Request) {

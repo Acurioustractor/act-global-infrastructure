@@ -158,3 +158,4 @@ thoughts/shared/data/compliance-calendar/[0-9]*.json
 
 # Xero incremental sync state (modifiedSince cursor)
 .xero-sync-state.json
+thoughts/shared/.triage-story-cache.json

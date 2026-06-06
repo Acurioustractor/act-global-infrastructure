@@ -14,7 +14,7 @@
  */
 
 import { useCallback, useEffect, useState } from 'react'
-import { useMutation, useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { Loader2, Sparkles } from 'lucide-react'
 
 interface Person {
@@ -24,7 +24,7 @@ interface Person {
   ring: string | null; vote: string | null; relation: string | null
 }
 interface TriageData { people: Person[]; total: number }
-interface Context { subjects: string[]; needs: string[] }
+interface Context { story: string; subjects: string[]; partners: string[]; orgGuess: string; needs: string[] }
 
 const PROJECT_NAMES: Record<string, string> = {
   'act-hv': 'Harvest', 'act-gd': 'Goods', 'act-jh': 'JusticeHub', 'act-cg': 'CivicGraph',
@@ -54,13 +54,21 @@ export default function TriagePage() {
       fetch('/api/field/circle', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body) }),
   })
 
-  // story-so-far for the current card: live email subjects + needs-match suggestions
+  // story-so-far for the current card: qwen summary + subjects + partners + needs
+  const qc = useQueryClient()
+  const ctxFetch = (p: Person) =>
+    fetch(`/api/field/circle?context=${encodeURIComponent(p.name)}&email=${encodeURIComponent(p.email)}`).then(r => r.json())
   const { data: ctx } = useQuery<Context>({
     queryKey: ['triage-ctx', person?.name],
-    queryFn: () => fetch(`/api/field/circle?context=${encodeURIComponent(person!.name)}&email=${encodeURIComponent(person!.email)}`).then(r => r.json()),
+    queryFn: () => ctxFetch(person!),
     enabled: !!person,
     staleTime: Infinity,
   })
+  // prefetch the next card while Ben reads this one — qwen's draft time hides
+  useEffect(() => {
+    const next = queue[idx + 1]
+    if (next) qc.prefetchQuery({ queryKey: ['triage-ctx', next.name], queryFn: () => ctxFetch(next), staleTime: Infinity })
+  }, [idx, queue, qc]) // eslint-disable-line react-hooks/exhaustive-deps
 
   const vote = useCallback((v: 'up' | 'down' | 'noidea' | 'skip') => {
     if (!person) return
@@ -106,8 +114,13 @@ export default function TriagePage() {
       {/* the person — centred, big */}
       <div className="flex flex-1 flex-col items-center justify-center px-6 text-center">
         <h1 className="text-5xl font-bold tracking-tight">{person.name}</h1>
-        {(person.org || person.position) && (
+        {(person.org || person.position) ? (
           <div className="mt-3 text-xl text-zinc-400">{person.org}{person.position ? ` · ${person.position}` : ''}</div>
+        ) : ctx?.orgGuess ? (
+          <div className="mt-3 text-xl text-zinc-500">{ctx.orgGuess} <span className="text-sm">(from their email domain)</span></div>
+        ) : null}
+        {(ctx?.partners?.length || 0) > 0 && (
+          <div className="mt-2 text-sm text-zinc-500">appears alongside {ctx!.partners.join(' · ')}</div>
         )}
         {/* what they're on + what they could be on */}
         <div className="mt-4 flex flex-wrap items-center justify-center gap-2">
@@ -130,13 +143,22 @@ export default function TriagePage() {
           {person.lastContact && <span>last {person.lastContact}</span>}
         </div>
 
-        {/* the story so far — actual email subjects, the recognition anchor */}
-        {(ctx?.subjects?.length || 0) > 0 && (
+        {/* the story so far — qwen's summary of what ACTUALLY happened */}
+        {person.email && (
           <div className="mt-5 w-full max-w-xl rounded-xl border border-zinc-800 bg-zinc-900/50 px-5 py-4 text-left">
             <div className="mb-2 text-xs font-semibold uppercase tracking-wide text-zinc-500">the story so far</div>
-            <ul className="space-y-1 font-mono text-sm text-zinc-300">
-              {ctx!.subjects.map((s, i) => <li key={i} className="truncate">{s}</li>)}
-            </ul>
+            {!ctx ? (
+              <div className="text-sm text-zinc-500">reading the thread…</div>
+            ) : ctx.story ? (
+              <p className="text-base leading-relaxed text-zinc-200">{ctx.story}</p>
+            ) : (ctx.subjects?.length || 0) > 0 ? null : (
+              <div className="text-sm text-zinc-500">no email record — {person.beeper ? `chat only (${person.beeper})` : 'signal is thin'}</div>
+            )}
+            {(ctx?.subjects?.length || 0) > 0 && (
+              <ul className="mt-3 space-y-0.5 font-mono text-xs text-zinc-500">
+                {ctx!.subjects.map((s, i) => <li key={i} className="truncate">{s}</li>)}
+              </ul>
+            )}
           </div>
         )}
 
