@@ -89,136 +89,98 @@ if(existsSync('thoughts/shared/orbit-cooccurrence.csv')){
     .filter(e=>e.n>=2&&drawnKeys.has(e.a)&&drawnKeys.has(e.b));
 }
 
-const DATA=JSON.stringify({supporters,community:namedCon,unnamedCon,projects:projData,stats,edges});
+
+// ── render: the TENDING BOARD (2026-06-07 — the radial map was unreadable; a board you scan) ──
+const cadRank={overdue:0,due:1,unknown:2,ok:3};
+const board=[...supporters].sort((a,b)=>{
+  const ra=cadRank[(a.cad&&a.cad.state)||'unknown'],rb=cadRank[(b.cad&&b.cad.state)||'unknown'];
+  if(ra!==rb)return ra-rb;
+  const xa=a.cad&&a.cad.days!=null?a.cad.days/a.cad.expected:0,xb=b.cad&&b.cad.days!=null?b.cad.days/b.cad.expected:0;
+  return xb-xa;
+});
+const CADC={overdue:'#ff5d5d',due:'#ffb84a',ok:'#3ddc97',unknown:'#5b6b80'};
+const CADLBL={overdue:'PAST RHYTHM — tend first',due:'COMING DUE',unknown:'NO CONTACT DATE YET',ok:'TENDED — inside rhythm'};
+const esc=v=>String(v??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');
+function row(s){
+  const st=(s.cad&&s.cad.state)||'unknown';
+  const days=s.cad&&s.cad.days!=null?`${s.cad.days}d <span class=m>/ ${s.cad.expected}d</span>`:'<span class=m>no date</span>';
+  const core=s.layer==='5';
+  return `<a class="row ${st}${core?' core':''}" data-k="${esc(norm(s.name))}" href="people/${esc(s.slug)}.md" target=_blank>
+    <span class=dot style="background:${CADC[st]}"></span>
+    <span class=nm>${core?'⭐ ':''}${esc(s.name)}</span>
+    <span class=ring>ring ${esc(s.layer)}</span>
+    <span class=days>${days}</span>
+    <span class=quote>${s.read?'“'+esc(s.read)+'”':'<span class=m>no read note</span>'}</span>
+  </a>`;
+}
+const sections=['overdue','due','unknown','ok'].map(st=>{
+  const rowsHtml=board.filter(s=>((s.cad&&s.cad.state)||'unknown')===st).map(row).join('');
+  const count=board.filter(s=>((s.cad&&s.cad.state)||'unknown')===st).length;
+  return count?`<h2 style="color:${CADC[st]}">${CADLBL[st]} <span class=m>(${count})</span></h2>${rowsHtml}`:'';
+}).join('');
+const owedRows=namedCon.slice(0,20).map(s=>`<a class="row owed" href="people/${esc(s.slug)}.md" target=_blank>
+    <span class=dot style="background:#ffd24a;box-shadow:0 0 0 2.5px ${s.owes>0?'#ff5d5d':'transparent'}"></span>
+    <span class=nm>${esc(s.name)}</span>
+    <span class=ring>${s.tx} given</span>
+    <span class=days style="color:#ff5d5d">${s.owes} owed</span>
+    <span class=quote class=m>${s.live} brought to life${s.consent?` · <span style="color:#ffb84a">${s.consent} consent conversation owed</span>`:''}</span>
+  </a>`).join('');
 
 const html=`<!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1">
-<title>ACT — The Field</title><style>
-:root{--bg:#0b0e14;--ink:#e6edf3;--mut:#8b98a9;--gold:#ffd24a;--over:#ff5d5d;--due:#ffb84a;--ok:#3ddc97;--line:#2a3648}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}
-header{padding:14px 24px;border-bottom:1px solid var(--line);display:flex;align-items:baseline;gap:14px}
-h1{margin:0;font-size:17px}.sub{color:var(--mut);font-size:12px}
-.wrap{display:flex;height:calc(100vh - 56px)}
-#stage{flex:1;min-width:0;position:relative}svg{width:100%;height:100%;display:block}
-aside{width:320px;border-left:1px solid var(--line);padding:14px 16px;overflow:auto}
-.kpi{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 0 6px}
-.kpi div{background:#121826;border:1px solid var(--line);border-radius:8px;padding:7px 10px}
-.kpi b{font-size:17px;display:block}.kpi span{color:var(--mut);font-size:10.5px}
-h3{font-size:11px;text-transform:uppercase;letter-spacing:.6px;color:var(--mut);margin:14px 0 6px}
-select,button.tg{width:100%;background:#121826;color:var(--ink);border:1px solid var(--line);border-radius:7px;padding:6px;font-size:13px;cursor:pointer}
-.lg{display:flex;align-items:center;gap:7px;font-size:12px;margin:3px 0;color:var(--mut)}
-.dot{width:10px;height:10px;border-radius:50%;flex:none}
-#tip{position:fixed;pointer-events:none;background:#0d1320;border:1px solid var(--line);border-radius:8px;padding:8px 11px;font-size:12px;opacity:0;transition:opacity .1s;max-width:260px;z-index:9}
-#tip b{color:#fff}.muted{color:var(--mut)}
-.chip{position:absolute;left:24px;bottom:18px;background:#121826;border:1px solid var(--line);border-radius:10px;padding:9px 13px;font-size:12.5px;color:var(--mut)}
-.chip a{color:#5fb3ff;text-decoration:none;font-weight:600}
-circle.node,text.nlabel{cursor:pointer}
-.dim{opacity:.1}
-line.edge{stroke:#5fb3ff;pointer-events:none}
-text.nlabel{fill:#cdd9e5}
+<title>The Field — tending board</title><style>
+:root{--bg:#0b0e14;--ink:#e6edf3;--mut:#71808f;--line:#222d3d}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}
+.top{position:sticky;top:0;background:rgba(11,14,20,.96);backdrop-filter:blur(4px);border-bottom:1px solid var(--line);padding:13px 26px;display:flex;align-items:center;gap:14px;z-index:5}
+h1{margin:0;font-size:16px}.sub{color:var(--mut);font-size:12.5px}
+.kpis{margin-left:auto;display:flex;gap:14px;font-size:13px}
+.kpis b{font-size:16px}
+select{background:#121826;color:var(--ink);border:1px solid var(--line);border-radius:7px;padding:6px 8px;font-size:13px}
+main{max-width:1060px;margin:0 auto;padding:10px 26px 60px}
+h2{font-size:12px;text-transform:uppercase;letter-spacing:.8px;margin:26px 0 6px}
+.m{color:var(--mut);font-weight:400}
+.row{display:flex;align-items:baseline;gap:12px;padding:7px 12px;border-radius:9px;text-decoration:none;color:var(--ink);border:1px solid transparent}
+.row:hover{background:#121a28;border-color:var(--line)}
+.row.hide{display:none}
+.dot{width:11px;height:11px;border-radius:50%;flex:none;align-self:center}
+.nm{font-weight:600;min-width:215px}
+.row.core .nm{font-size:16px}
+.ring{color:var(--mut);font-size:12px;min-width:58px}
+.days{min-width:96px;font-variant-numeric:tabular-nums;font-size:13.5px}
+.quote{color:#9fd8b8;font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1}
+.row.ok .quote,.row.unknown .quote{color:#7d8b9b}
+.chip{margin:30px 0 0;background:#121826;border:1px solid var(--line);border-radius:10px;padding:11px 15px;font-size:13.5px;color:var(--mut)}
+.chip a{color:#5fb3ff;font-weight:600;text-decoration:none}
+.split{border-top:1px dashed #3a4658;margin:34px 0 6px;padding-top:18px}
+.split p{color:var(--mut);font-size:12.5px;margin:4px 0 12px}
 </style></head><body>
-<header><h1>The Field</h1><div class=sub><b style="color:var(--over)">red = past your rhythm — tend first</b> · amber = coming due · green = tended · click anyone for their page · community on the right is OWED, never targeted</div></header>
-<div class=wrap>
-  <div id=stage><svg id=svg viewBox="0 0 1000 720" preserveAspectRatio=xMidYMid meet></svg>
-    <div class=chip id=chip></div>
+<div class=top>
+  <div><h1>The Field — tending board</h1><div class=sub>your reads, ordered by who needs you · click a row for their page</div></div>
+  <select id=proj><option value="">every project</option></select>
+  <div class=kpis>
+    <span style="color:#ff5d5d"><b>${stats.overdue}</b> tend</span>
+    <span style="color:#ffb84a"><b>${stats.due}</b> due</span>
+    <span><b>${stats.drawn}</b> read</span>
+    <span style="color:#ff5d5d"><b>${stats.owed}</b> owed</span>
   </div>
-  <aside>
-    <h3>Tend</h3>
-    <div class=kpi>
-      <div><b id=k1 style="color:var(--over)"></b><span>past rhythm — tend first</span></div>
-      <div><b id=k2 style="color:var(--due)"></b><span>coming due</span></div>
-      <div><b id=k3></b><span>in your rings (your reads)</span></div>
-      <div><b id=k4 style="color:var(--over)"></b><span>transcripts owed</span></div>
-    </div>
-    <h3>Reach for a project</h3>
-    <select id=proj><option value="">— all —</option></select>
-    <h3>Threads</h3>
-    <button class=tg id=tgEdges>show email threads</button>
-    <h3>Legend</h3>
-    <div class=lg><span class=dot style="background:var(--over)"></span> past your rhythm (tend!)</div>
-    <div class=lg><span class=dot style="background:var(--due)"></span> coming due</div>
-    <div class=lg><span class=dot style="background:var(--ok)"></span> inside rhythm</div>
-    <div class=lg><span class=dot style="background:#5b6b80"></span> no contact date yet</div>
-    <div class=lg><span class=dot style="background:var(--gold);box-shadow:0 0 0 2px #fff"></span> your inner core</div>
-    <div class=lg><span class=dot style="background:var(--gold);box-shadow:0 0 0 3px var(--over)"></span> storyteller — red ring = owed</div>
-    <h3>What it says</h3>
-    <p style="font-size:13px;border-left:2px solid var(--line);padding-left:10px" id=says></p>
-    <p style="font-size:13px;border-left:2px solid var(--line);padding-left:10px">Rings hold ONLY people you've read — the machine never guesses closeness. Everyone else is a number until you read them.</p>
-  </aside>
 </div>
-<div id=tip></div>
+<main>
+${sections}
+<div class=chip><b style="color:#e6edf3">${stats.unreadSignal}</b> people with real signal you haven't read · <a href="/field/triage">open triage →</a> &nbsp;·&nbsp; ${stats.quiet} quiet (newsletter-only) behind them</div>
+<div class=split>
+  <h2 style="color:#ffd24a">OWED — the constellation <span class=m>(${stats.namedStory} storytellers · ${stats.owed} stories not yet brought to life)</span></h2>
+  <p>Never a target list. This is what ACT owes back — sovereignty first, consent before anything moves.</p>
+  ${owedRows}
+  <p class=m style="margin-top:8px">+ ${Math.max(0,namedCon.length-20)} more storytellers in the owes-ledger · ${stats.consent} consent conversations owed in total</p>
+</div>
+</main>
 <script>
-const D=${DATA};
-const svg=document.getElementById('svg'),NS='http://www.w3.org/2000/svg',tip=document.getElementById('tip');
-const cx=330,cy=368;
-const bands={'5':74,'15':140,'50':215,'150':295};
-const CAD={overdue:'#ff5d5d',due:'#ffb84a',ok:'#3ddc97',unknown:'#5b6b80'};
-function el(t,a){const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);return e;}
-function norm(s){return (s||'').toLowerCase().replace(/[^a-z0-9 ]/g,'').replace(/\\s+/g,' ').trim();}
-for(const b of ['150','50','15','5']){svg.appendChild(el('circle',{cx,cy,r:bands[b],fill:'none',stroke:'#1c2535','stroke-width':1}));
-  const t=el('text',{x:cx,y:cy-bands[b]+12,fill:'#3d4c61','text-anchor':'middle','font-size':9});t.textContent=b;svg.appendChild(t);}
-svg.appendChild(el('circle',{cx,cy,r:26,fill:'#161d2b',stroke:'#2b3a52','stroke-width':1.5}));
-const c0=el('text',{x:cx,y:cy+4,fill:'#cfe0f5','text-anchor':'middle','font-size':12,'font-weight':700});c0.textContent='you';svg.appendChild(c0);
-svg.appendChild(el('line',{x1:672,y1:40,x2:672,y2:680,stroke:'#3a4658','stroke-dasharray':'4 6','stroke-width':1}));
-const edgeLayer=el('g',{});svg.appendChild(edgeLayer);
-const byBand={'5':[],'15':[],'50':[],'150':[]};D.supporters.forEach(s=>byBand[s.layer]&&byBand[s.layer].push(s));
-const supNodes=[];
-for(const b of ['5','15','50','150']){const arr=byBand[b],n=arr.length;arr.forEach((s,i)=>{
-  const ang=Math.PI*0.55 + (Math.PI*1.9)*(n<=1?0.5:i/n);
-  const x=cx+Math.cos(ang)*bands[b], y=cy+Math.sin(ang)*bands[b];
-  const cadCol=CAD[(s.cad&&s.cad.state)||'unknown'];
-  const inner=b==='5';
-  const node=el('circle',{cx:x,cy:y,r:inner?7:5,fill:inner?'#ffd24a':cadCol,stroke:inner?'#fff':cadCol,'stroke-width':inner?1.8:0,class:'node'});
-  if(inner&&s.cad&&s.cad.state!=='ok'){node.setAttribute('stroke',CAD[s.cad.state]);node.setAttribute('stroke-width',2.4);}
-  node._d=s;node._key=norm(s.name);
-  const lab=el('text',{x:x+(Math.cos(ang)>=0?9:-9),y:y+4,'text-anchor':Math.cos(ang)>=0?'start':'end','font-size':inner?12:(b==='15'?11:9),'font-weight':inner?700:(b==='15'?600:400),class:'nlabel'});
-  lab.textContent=s.name.length>22?s.name.slice(0,21)+'…':s.name;
-  if(!inner)lab.setAttribute('fill',s.cad&&s.cad.state==='overdue'?'#ff8a8a':'#cdd9e5');
-  lab._d=s;lab._key=node._key;
-  svg.appendChild(node);svg.appendChild(lab);supNodes.push(node,lab);
-});}
-const ccx=842,ccy=350,comNodes=[];
-D.community.forEach((s,i)=>{
-  const named=i<12;
-  const ang=i*2.399963, rr=named?(26+i*16):(26+12*16+Math.sqrt(i-11)*16);
-  const x=ccx+Math.cos(ang)*rr*0.95, y=ccy+Math.sin(ang)*rr*0.88;
-  const rad=named?(5+Math.min(8,s.tx*0.6)):3;
-  const g=el('g',{});
-  if(s.owes>0)g.appendChild(el('circle',{cx:x,cy:y,r:rad+2.2,fill:'none',stroke:'#ff5d5d','stroke-width':1.3,opacity:.85}));
-  const node=el('circle',{cx:x,cy:y,r:rad,fill:'#ffd24a',opacity:named?.95:.55,class:'node'});
-  node._c=s;g.appendChild(node);
-  if(named){const lab=el('text',{x:x+(Math.cos(ang)>=0?rad+4:-rad-4),y:y+4,'text-anchor':Math.cos(ang)>=0?'start':'end','font-size':10,fill:'#e8d9a8',class:'nlabel'});
-    lab.textContent=(s.name.length>20?s.name.slice(0,19)+'…':s.name)+' · '+s.owes;lab._c=s;g.appendChild(lab);comNodes.push(lab);}
-  svg.appendChild(g);comNodes.push(node);
-});
-const clab=el('text',{x:ccx,y:84,fill:'#9aa7b8','text-anchor':'middle','font-size':12,'font-weight':600});clab.textContent='OWED — the constellation';svg.appendChild(clab);
-const clab2=el('text',{x:ccx,y:100,fill:'#6b7a8d','text-anchor':'middle','font-size':10});clab2.textContent='name · stories owed — '+D.stats.namedStory+' storytellers, '+D.stats.owed+' owed total';svg.appendChild(clab2);
-const olab=el('text',{x:330,y:84,fill:'#9aa7b8','text-anchor':'middle','font-size':12,'font-weight':600});olab.textContent='YOUR RINGS — '+D.stats.drawn+' people you’ve read';svg.appendChild(olab);
-chip.innerHTML='<b style="color:#e6edf3">'+D.stats.unreadSignal+'</b> people with real signal you haven’t read · <a href="/field/triage">open triage →</a><br><span>'+D.stats.quiet+' quiet (newsletter-only) behind them</span>';
-const pos={};supNodes.forEach(n=>{if(n.tagName==='circle')pos[n._key]={x:+n.getAttribute('cx'),y:+n.getAttribute('cy')}});
-let edgesOn=false;const edgeLines=[];
-function buildEdges(){(D.edges||[]).forEach(eg=>{const a=pos[eg.a],b=pos[eg.b];if(!a||!b)return;
-  const l=el('line',{x1:a.x,y1:a.y,x2:b.x,y2:b.y,class:'edge','stroke-width':Math.min(2,0.6+eg.n*0.04)});
-  l.style.opacity=Math.min(.35,.08+eg.n*.012);edgeLayer.appendChild(l);edgeLines.push(l);});}
-tgEdges.onclick=()=>{edgesOn=!edgesOn;if(edgesOn&&!edgeLines.length)buildEdges();edgeLines.forEach(l=>l.style.display=edgesOn?'':'none');tgEdges.textContent=edgesOn?'hide email threads':'show email threads';};
-function show(html,e){tip.innerHTML=html;tip.style.opacity=1;tip.style.left=(e.clientX+14)+'px';tip.style.top=(e.clientY+14)+'px';}
-function hide(){tip.style.opacity=0;}
-supNodes.forEach(n=>{
-  n.onmousemove=e=>{const s=n._d;show('<b>'+s.name+'</b>'+(s.read?'<br><span style="color:#3ddc97">“'+s.read+'”</span>':'')+(s.cad?'<br>'+(s.cad.days!=null?s.cad.days+'d since contact · rhythm '+s.cad.expected+'d':'no contact date'):'')+(s.roles?'<br><span class=muted>'+s.roles+'</span>':'')+'<br><span class=muted>click → their page</span>',e);};
-  n.onmouseleave=hide;
-  n.onclick=()=>window.open('people/'+n._d.slug+'.md','_blank');
-});
-comNodes.forEach(n=>{
-  n.onmousemove=e=>{const s=n._c;show('<b>'+s.name+'</b><br>'+s.tx+' transcripts · '+s.live+' live · <span style="color:#ff5d5d">'+s.owes+' owed</span>'+(s.consent?'<br><span class=muted>'+s.consent+' consent conversations owed</span>':'')+'<br><span class=muted>click → their page</span>',e);};
-  n.onmouseleave=hide;
-  n.onclick=()=>window.open('people/'+n._c.slug+'.md','_blank');
-});
-k1.textContent=D.stats.overdue;k2.textContent=D.stats.due;k3.textContent=D.stats.drawn;k4.textContent=D.stats.owed;
-says.innerHTML='<b style="color:#ff5d5d">'+D.stats.overdue+' of your '+D.stats.drawn+'</b> are past the rhythm their ring implies — those are today’s calls. '+D.stats.due+' more coming due. The constellation holds <b>'+D.stats.owed+'</b> stories not yet brought to life.';
-const sel=document.getElementById('proj');Object.keys(D.projects).forEach(p=>{const o=document.createElement('option');o.value=p;o.textContent=p;sel.appendChild(o);});
-sel.onchange=()=>{const set=sel.value?new Set(D.projects[sel.value]):null;supNodes.forEach(n=>n.classList.toggle('dim',!!set&&!set.has(n._key)));};
+const PROJ=${JSON.stringify(projData)};
+const sel=document.getElementById('proj');
+Object.keys(PROJ).forEach(p=>{const o=document.createElement('option');o.value=p;o.textContent=p;sel.appendChild(o);});
+sel.onchange=()=>{const set=sel.value?new Set(PROJ[sel.value]):null;
+  document.querySelectorAll('.row[data-k]').forEach(r=>r.classList.toggle('hide',!!set&&!set.has(r.dataset.k)));};
 </script></body></html>`;
 
 writeFileSync('thoughts/shared/orbit-viz.html', html);
-console.log(`Wrote thoughts/shared/orbit-viz.html`);
-console.log(`  rings: ${stats.drawn} read people (${stats.overdue} past rhythm · ${stats.due} due) · unread-with-signal: ${stats.unreadSignal} (chip → triage) · quiet: ${stats.quiet}`);
-console.log(`  constellation: ${stats.namedStory} storytellers · ${stats.owed} owed (top 12 named)`);
+console.log(`Wrote thoughts/shared/orbit-viz.html (tending board)`);
+console.log(`  board: ${stats.drawn} read (${stats.overdue} tend-first · ${stats.due} due) · ${stats.unreadSignal} unread chip · owed top-20 named of ${stats.namedStory}`);

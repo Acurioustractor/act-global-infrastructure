@@ -1,126 +1,552 @@
 <!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1">
-<title>ACT — The Field</title><style>
-:root{--bg:#0b0e14;--ink:#e6edf3;--mut:#8b98a9;--gold:#ffd24a;--over:#ff5d5d;--due:#ffb84a;--ok:#3ddc97;--line:#2a3648}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}
-header{padding:14px 24px;border-bottom:1px solid var(--line);display:flex;align-items:baseline;gap:14px}
-h1{margin:0;font-size:17px}.sub{color:var(--mut);font-size:12px}
-.wrap{display:flex;height:calc(100vh - 56px)}
-#stage{flex:1;min-width:0;position:relative}svg{width:100%;height:100%;display:block}
-aside{width:320px;border-left:1px solid var(--line);padding:14px 16px;overflow:auto}
-.kpi{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 0 6px}
-.kpi div{background:#121826;border:1px solid var(--line);border-radius:8px;padding:7px 10px}
-.kpi b{font-size:17px;display:block}.kpi span{color:var(--mut);font-size:10.5px}
-h3{font-size:11px;text-transform:uppercase;letter-spacing:.6px;color:var(--mut);margin:14px 0 6px}
-select,button.tg{width:100%;background:#121826;color:var(--ink);border:1px solid var(--line);border-radius:7px;padding:6px;font-size:13px;cursor:pointer}
-.lg{display:flex;align-items:center;gap:7px;font-size:12px;margin:3px 0;color:var(--mut)}
-.dot{width:10px;height:10px;border-radius:50%;flex:none}
-#tip{position:fixed;pointer-events:none;background:#0d1320;border:1px solid var(--line);border-radius:8px;padding:8px 11px;font-size:12px;opacity:0;transition:opacity .1s;max-width:260px;z-index:9}
-#tip b{color:#fff}.muted{color:var(--mut)}
-.chip{position:absolute;left:24px;bottom:18px;background:#121826;border:1px solid var(--line);border-radius:10px;padding:9px 13px;font-size:12.5px;color:var(--mut)}
-.chip a{color:#5fb3ff;text-decoration:none;font-weight:600}
-circle.node,text.nlabel{cursor:pointer}
-.dim{opacity:.1}
-line.edge{stroke:#5fb3ff;pointer-events:none}
-text.nlabel{fill:#cdd9e5}
+<title>The Field — tending board</title><style>
+:root{--bg:#0b0e14;--ink:#e6edf3;--mut:#71808f;--line:#222d3d}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}
+.top{position:sticky;top:0;background:rgba(11,14,20,.96);backdrop-filter:blur(4px);border-bottom:1px solid var(--line);padding:13px 26px;display:flex;align-items:center;gap:14px;z-index:5}
+h1{margin:0;font-size:16px}.sub{color:var(--mut);font-size:12.5px}
+.kpis{margin-left:auto;display:flex;gap:14px;font-size:13px}
+.kpis b{font-size:16px}
+select{background:#121826;color:var(--ink);border:1px solid var(--line);border-radius:7px;padding:6px 8px;font-size:13px}
+main{max-width:1060px;margin:0 auto;padding:10px 26px 60px}
+h2{font-size:12px;text-transform:uppercase;letter-spacing:.8px;margin:26px 0 6px}
+.m{color:var(--mut);font-weight:400}
+.row{display:flex;align-items:baseline;gap:12px;padding:7px 12px;border-radius:9px;text-decoration:none;color:var(--ink);border:1px solid transparent}
+.row:hover{background:#121a28;border-color:var(--line)}
+.row.hide{display:none}
+.dot{width:11px;height:11px;border-radius:50%;flex:none;align-self:center}
+.nm{font-weight:600;min-width:215px}
+.row.core .nm{font-size:16px}
+.ring{color:var(--mut);font-size:12px;min-width:58px}
+.days{min-width:96px;font-variant-numeric:tabular-nums;font-size:13.5px}
+.quote{color:#9fd8b8;font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1}
+.row.ok .quote,.row.unknown .quote{color:#7d8b9b}
+.chip{margin:30px 0 0;background:#121826;border:1px solid var(--line);border-radius:10px;padding:11px 15px;font-size:13.5px;color:var(--mut)}
+.chip a{color:#5fb3ff;font-weight:600;text-decoration:none}
+.split{border-top:1px dashed #3a4658;margin:34px 0 6px;padding-top:18px}
+.split p{color:var(--mut);font-size:12.5px;margin:4px 0 12px}
 </style></head><body>
-<header><h1>The Field</h1><div class=sub><b style="color:var(--over)">red = past your rhythm — tend first</b> · amber = coming due · green = tended · click anyone for their page · community on the right is OWED, never targeted</div></header>
-<div class=wrap>
-  <div id=stage><svg id=svg viewBox="0 0 1000 720" preserveAspectRatio=xMidYMid meet></svg>
-    <div class=chip id=chip></div>
+<div class=top>
+  <div><h1>The Field — tending board</h1><div class=sub>your reads, ordered by who needs you · click a row for their page</div></div>
+  <select id=proj><option value="">every project</option></select>
+  <div class=kpis>
+    <span style="color:#ff5d5d"><b>10</b> tend</span>
+    <span style="color:#ffb84a"><b>16</b> due</span>
+    <span><b>63</b> read</span>
+    <span style="color:#ff5d5d"><b>358</b> owed</span>
   </div>
-  <aside>
-    <h3>Tend</h3>
-    <div class=kpi>
-      <div><b id=k1 style="color:var(--over)"></b><span>past rhythm — tend first</span></div>
-      <div><b id=k2 style="color:var(--due)"></b><span>coming due</span></div>
-      <div><b id=k3></b><span>in your rings (your reads)</span></div>
-      <div><b id=k4 style="color:var(--over)"></b><span>transcripts owed</span></div>
-    </div>
-    <h3>Reach for a project</h3>
-    <select id=proj><option value="">— all —</option></select>
-    <h3>Threads</h3>
-    <button class=tg id=tgEdges>show email threads</button>
-    <h3>Legend</h3>
-    <div class=lg><span class=dot style="background:var(--over)"></span> past your rhythm (tend!)</div>
-    <div class=lg><span class=dot style="background:var(--due)"></span> coming due</div>
-    <div class=lg><span class=dot style="background:var(--ok)"></span> inside rhythm</div>
-    <div class=lg><span class=dot style="background:#5b6b80"></span> no contact date yet</div>
-    <div class=lg><span class=dot style="background:var(--gold);box-shadow:0 0 0 2px #fff"></span> your inner core</div>
-    <div class=lg><span class=dot style="background:var(--gold);box-shadow:0 0 0 3px var(--over)"></span> storyteller — red ring = owed</div>
-    <h3>What it says</h3>
-    <p style="font-size:13px;border-left:2px solid var(--line);padding-left:10px" id=says></p>
-    <p style="font-size:13px;border-left:2px solid var(--line);padding-left:10px">Rings hold ONLY people you've read — the machine never guesses closeness. Everyone else is a number until you read them.</p>
-  </aside>
 </div>
-<div id=tip></div>
+<main>
+<h2 style="color:#ff5d5d">PAST RHYTHM — tend first <span class=m>(10)</span></h2><a class="row overdue" data-k="jan owen" href="people/jan-owen.md" target=_blank>
+    <span class=dot style="background:#ff5d5d"></span>
+    <span class=nm>jan owen</span>
+    <span class=ring>ring 15</span>
+    <span class=days>243d <span class=m>/ 14d</span></span>
+    <span class=quote><span class=m>no read note</span></span>
+  </a><a class="row overdue" data-k="anne hollonds" href="people/anne-hollonds.md" target=_blank>
+    <span class=dot style="background:#ff5d5d"></span>
+    <span class=nm>anne hollonds</span>
+    <span class=ring>ring 15</span>
+    <span class=days>228d <span class=m>/ 14d</span></span>
+    <span class=quote><span class=m>no read note</span></span>
+  </a><a class="row overdue" data-k="david mcguire" href="people/david-mcguire.md" target=_blank>
+    <span class=dot style="background:#ff5d5d"></span>
+    <span class=nm>david mcguire</span>
+    <span class=ring>ring 15</span>
+    <span class=days>185d <span class=m>/ 14d</span></span>
+    <span class=quote><span class=m>no read note</span></span>
+  </a><a class="row overdue" data-k="shaun christiedavid" href="people/shaun-christie-david.md" target=_blank>
+    <span class=dot style="background:#ff5d5d"></span>
+    <span class=nm>shaun christie-david</span>
+    <span class=ring>ring 15</span>
+    <span class=days>125d <span class=m>/ 14d</span></span>
+    <span class=quote><span class=m>no read note</span></span>
+  </a><a class="row overdue core" data-k="sam davies" href="people/sam-davies.md" target=_blank>
+    <span class=dot style="background:#ff5d5d"></span>
+    <span class=nm>⭐ sam davies</span>
+    <span class=ring>ring 5</span>
+    <span class=days>53d <span class=m>/ 14d</span></span>
+    <span class=quote>“core partner — makes our beds; options for deeper partnership, community production”</span>
+  </a><a class="row overdue" data-k="thalia anthony" href="people/thalia-anthony.md" target=_blank>
+    <span class=dot style="background:#ff5d5d"></span>
+    <span class=nm>thalia anthony</span>
+    <span class=ring>ring 50</span>
+    <span class=days>266d <span class=m>/ 90d</span></span>
+    <span class=quote><span class=m>no read note</span></span>
+  </a><a class="row overdue" data-k="fiona maxwell" href="people/fiona-maxwell.md" target=_blank>
+    <span class=dot style="background:#ff5d5d"></span>
+    <span class=nm>fiona maxwell</span>
+    <span class=ring>ring 15</span>
+    <span class=days>39d <span class=m>/ 14d</span></span>
+    <span class=quote><span class=m>no read note</span></span>
+  </a><a class="row overdue" data-k="ruari elkington" href="people/ruari-elkington.md" target=_blank>
+    <span class=dot style="background:#ff5d5d"></span>
+    <span class=nm>ruari elkington</span>
+    <span class=ring>ring 50</span>
+    <span class=days>237d <span class=m>/ 90d</span></span>
+    <span class=quote><span class=m>no read note</span></span>
+  </a><a class="row overdue" data-k="katie norman" href="people/katie-norman.md" target=_blank>
+    <span class=dot style="background:#ff5d5d"></span>
+    <span class=nm>katie norman</span>
+    <span class=ring>ring 50</span>
+    <span class=days>188d <span class=m>/ 90d</span></span>
+    <span class=quote><span class=m>no read note</span></span>
+  </a><a class="row overdue" data-k="georgia falzon" href="people/georgia-falzon.md" target=_blank>
+    <span class=dot style="background:#ff5d5d"></span>
+    <span class=nm>georgia falzon</span>
+    <span class=ring>ring 50</span>
+    <span class=days>173d <span class=m>/ 90d</span></span>
+    <span class=quote><span class=m>no read note</span></span>
+  </a><h2 style="color:#ffb84a">COMING DUE <span class=m>(16)</span></h2><a class="row due" data-k="esther gyorki" href="people/esther-gyorki.md" target=_blank>
+    <span class=dot style="background:#ffb84a"></span>
+    <span class=nm>esther gyorki</span>
+    <span class=ring>ring 50</span>
+    <span class=days>136d <span class=m>/ 90d</span></span>
+    <span class=quote>“has been great supporting the regional arts fellowship for the Harvest — should stay conne”</span>
+  </a><a class="row due" data-k="lydia garrett" href="people/lydia-garrett.md" target=_blank>
+    <span class=dot style="background:#ffb84a"></span>
+    <span class=nm>lydia garrett</span>
+    <span class=ring>ring 150</span>
+    <span class=days>271d <span class=m>/ 180d</span></span>
+    <span class=quote><span class=m>no read note</span></span>
+  </a><a class="row due" data-k="joel bird" href="people/joel-bird.md" target=_blank>
+    <span class=dot style="background:#ffb84a"></span>
+    <span class=nm>joel bird</span>
+    <span class=ring>ring 150</span>
+    <span class=days>257d <span class=m>/ 180d</span></span>
+    <span class=quote><span class=m>no read note</span></span>
+  </a><a class="row due" data-k="hailey wetzel" href="people/hailey-wetzel.md" target=_blank>
+    <span class=dot style="background:#ffb84a"></span>
+    <span class=nm>hailey wetzel</span>
+    <span class=ring>ring 150</span>
+    <span class=days>257d <span class=m>/ 180d</span></span>
+    <span class=quote><span class=m>no read note</span></span>
+  </a><a class="row due" data-k="erin jackson" href="people/erin-jackson.md" target=_blank>
+    <span class=dot style="background:#ffb84a"></span>
+    <span class=nm>Erin Jackson</span>
+    <span class=ring>ring 50</span>
+    <span class=days>128d <span class=m>/ 90d</span></span>
+    <span class=quote>“SMART Recovery COO”</span>
+  </a><a class="row due" data-k="maree meredith" href="people/maree-meredith.md" target=_blank>
+    <span class=dot style="background:#ffb84a"></span>
+    <span class=nm>maree meredith</span>
+    <span class=ring>ring 50</span>
+    <span class=days>122d <span class=m>/ 90d</span></span>
+    <span class=quote>“supports the Palm Island art centre stories — keep engaged”</span>
+  </a><a class="row due" data-k="rachel fyfe" href="people/rachel-fyfe.md" target=_blank>
+    <span class=dot style="background:#ffb84a"></span>
+    <span class=nm>rachel fyfe</span>
+    <span class=ring>ring 150</span>
+    <span class=days>243d <span class=m>/ 180d</span></span>
+    <span class=quote><span class=m>no read note</span></span>
+  </a><a class="row due" data-k="mark powell hehim wrad health on gunditjmara land" href="people/mark-powell-he-him-wrad-health-on-gunditjmara-land.md" target=_blank>
+    <span class=dot style="background:#ffb84a"></span>
+    <span class=nm>mark powell, (he/him) wrad health on gunditjmara land</span>
+    <span class=ring>ring 150</span>
+    <span class=days>237d <span class=m>/ 180d</span></span>
+    <span class=quote><span class=m>no read note</span></span>
+  </a><a class="row due" data-k="chelsea baker" href="people/chelsea-baker.md" target=_blank>
+    <span class=dot style="background:#ffb84a"></span>
+    <span class=nm>chelsea baker</span>
+    <span class=ring>ring 150</span>
+    <span class=days>234d <span class=m>/ 180d</span></span>
+    <span class=quote><span class=m>no read note</span></span>
+  </a><a class="row due" data-k="james mclennan" href="people/james-mclennan.md" target=_blank>
+    <span class=dot style="background:#ffb84a"></span>
+    <span class=nm>james mclennan</span>
+    <span class=ring>ring 50</span>
+    <span class=days>114d <span class=m>/ 90d</span></span>
+    <span class=quote><span class=m>no read note</span></span>
+  </a><a class="row due" data-k="emily mayo" href="people/emily-mayo.md" target=_blank>
+    <span class=dot style="background:#ffb84a"></span>
+    <span class=nm>emily mayo</span>
+    <span class=ring>ring 150</span>
+    <span class=days>227d <span class=m>/ 180d</span></span>
+    <span class=quote><span class=m>no read note</span></span>
+  </a><a class="row due" data-k="seana osbourne" href="people/seana-osbourne.md" target=_blank>
+    <span class=dot style="background:#ffb84a"></span>
+    <span class=nm>seana osbourne</span>
+    <span class=ring>ring 50</span>
+    <span class=days>111d <span class=m>/ 90d</span></span>
+    <span class=quote><span class=m>no read note</span></span>
+  </a><a class="row due" data-k="teri campbell" href="people/teri-campbell.md" target=_blank>
+    <span class=dot style="background:#ffb84a"></span>
+    <span class=nm>teri campbell</span>
+    <span class=ring>ring 150</span>
+    <span class=days>222d <span class=m>/ 180d</span></span>
+    <span class=quote><span class=m>no read note</span></span>
+  </a><a class="row due" data-k="george newhouse" href="people/george-newhouse.md" target=_blank>
+    <span class=dot style="background:#ffb84a"></span>
+    <span class=nm>george newhouse</span>
+    <span class=ring>ring 50</span>
+    <span class=days>108d <span class=m>/ 90d</span></span>
+    <span class=quote>“cool dude — could be a BIG JusticeHub collaborator”</span>
+  </a><a class="row due" data-k="anika baset" href="people/anika-baset.md" target=_blank>
+    <span class=dot style="background:#ffb84a"></span>
+    <span class=nm>anika baset</span>
+    <span class=ring>ring 150</span>
+    <span class=days>202d <span class=m>/ 180d</span></span>
+    <span class=quote><span class=m>no read note</span></span>
+  </a><a class="row due" data-k="diego gonzalez" href="people/diego-gonzalez.md" target=_blank>
+    <span class=dot style="background:#ffb84a"></span>
+    <span class=nm>diego gonzalez</span>
+    <span class=ring>ring 150</span>
+    <span class=days>187d <span class=m>/ 180d</span></span>
+    <span class=quote><span class=m>no read note</span></span>
+  </a><h2 style="color:#5b6b80">NO CONTACT DATE YET <span class=m>(13)</span></h2><a class="row unknown core" data-k="benjamin croft" href="people/benjamin-croft.md" target=_blank>
+    <span class=dot style="background:#5b6b80"></span>
+    <span class=nm>⭐ Benjamin Croft</span>
+    <span class=ring>ring 5</span>
+    <span class=days><span class=m>no date</span></span>
+    <span class=quote>“very good friends, family friends — potential long-term supporter, has money; supports the”</span>
+  </a><a class="row unknown core" data-k="kabir dhanji" href="people/kabir-dhanji.md" target=_blank>
+    <span class=dot style="background:#5b6b80"></span>
+    <span class=nm>⭐ Kabir Dhanji</span>
+    <span class=ring>ring 5</span>
+    <span class=days><span class=m>no date</span></span>
+    <span class=quote>“friend and mentor, photographer in Kenya”</span>
+  </a><a class="row unknown core" data-k="andy fog" href="people/andy-fog.md" target=_blank>
+    <span class=dot style="background:#5b6b80"></span>
+    <span class=nm>⭐ Andy Fog</span>
+    <span class=ring>ring 5</span>
+    <span class=days><span class=m>no date</span></span>
+    <span class=quote>“friend in Sweden — wants to connect more”</span>
+  </a><a class="row unknown core" data-k="nav sawhney" href="people/nav-sawhney.md" target=_blank>
+    <span class=dot style="background:#5b6b80"></span>
+    <span class=nm>⭐ Nav Sawhney</span>
+    <span class=ring>ring 5</span>
+    <span class=days><span class=m>no date</span></span>
+    <span class=quote>“friend and mentor — Goods-adjacent (washers)”</span>
+  </a><a class="row unknown" data-k="scott mcdougall" href="people/scott-mcdougall.md" target=_blank>
+    <span class=dot style="background:#5b6b80"></span>
+    <span class=nm>Scott McDougall</span>
+    <span class=ring>ring 50</span>
+    <span class=days><span class=m>no date</span></span>
+    <span class=quote>“light touch — good person, does hydroponics; might support justice stuff soon”</span>
+  </a><a class="row unknown" data-k="sally grimsleyballard" href="people/sally-grimsley-ballard.md" target=_blank>
+    <span class=dot style="background:#5b6b80"></span>
+    <span class=nm>sally grimsley-ballard</span>
+    <span class=ring>ring 50</span>
+    <span class=days><span class=m>no date</span></span>
+    <span class=quote>“Ben wants to keep engaging with Sally from Snow (named unprompted in circle session)”</span>
+  </a><a class="row unknown" data-k="shyaka farid lwanyaaga" href="people/shyaka-farid-lwanyaaga.md" target=_blank>
+    <span class=dot style="background:#5b6b80"></span>
+    <span class=nm>Shyaka Farid Lwanyaaga</span>
+    <span class=ring>ring 50</span>
+    <span class=days><span class=m>no date</span></span>
+    <span class=quote>“good friend in Uganda — mainly friend, low-maintenance distance friendship”</span>
+  </a><a class="row unknown" data-k="phoebe frederick" href="people/phoebe-frederick.md" target=_blank>
+    <span class=dot style="background:#5b6b80"></span>
+    <span class=nm>Phoebe Frederick</span>
+    <span class=ring>ring 150</span>
+    <span class=days><span class=m>no date</span></span>
+    <span class=quote>“gov worker (Dept of Employment &amp; Workplace Relations) — not very connected”</span>
+  </a><a class="row unknown" data-k="anurag gummadi" href="people/anurag-gummadi.md" target=_blank>
+    <span class=dot style="background:#5b6b80"></span>
+    <span class=nm>Anurag Gummadi</span>
+    <span class=ring>ring 150</span>
+    <span class=days><span class=m>no date</span></span>
+    <span class=quote><span class=m>no read note</span></span>
+  </a><a class="row unknown" data-k="hugo" href="people/hugo.md" target=_blank>
+    <span class=dot style="background:#5b6b80"></span>
+    <span class=nm>Hugo</span>
+    <span class=ring>ring 150</span>
+    <span class=days><span class=m>no date</span></span>
+    <span class=quote>“light touch only — on the washing machine project, not counting much”</span>
+  </a><a class="row unknown" data-k="libby beeching" href="people/libby-beeching.md" target=_blank>
+    <span class=dot style="background:#5b6b80"></span>
+    <span class=nm>Libby Beeching</span>
+    <span class=ring>ring 150</span>
+    <span class=days><span class=m>no date</span></span>
+    <span class=quote>“loose — doesn't need much energy (Ben's words: all loose, low energy by design)”</span>
+  </a><a class="row unknown" data-k="tharini rouwette" href="people/tharini-rouwette.md" target=_blank>
+    <span class=dot style="background:#5b6b80"></span>
+    <span class=nm>Tharini Rouwette</span>
+    <span class=ring>ring 150</span>
+    <span class=days><span class=m>no date</span></span>
+    <span class=quote>“loose — doesn't need much energy”</span>
+  </a><a class="row unknown" data-k="peter norden ao" href="people/peter-norden-ao.md" target=_blank>
+    <span class=dot style="background:#5b6b80"></span>
+    <span class=nm>Peter Norden AO</span>
+    <span class=ring>ring 150</span>
+    <span class=days><span class=m>no date</span></span>
+    <span class=quote>“loose — doesn't need much energy (inbound-lean thread)”</span>
+  </a><h2 style="color:#3ddc97">TENDED — inside rhythm <span class=m>(24)</span></h2><a class="row ok" data-k="melissa delaney" href="people/melissa-delaney.md" target=_blank>
+    <span class=dot style="background:#3ddc97"></span>
+    <span class=nm>Melissa DeLaney</span>
+    <span class=ring>ring 50</span>
+    <span class=days>81d <span class=m>/ 90d</span></span>
+    <span class=quote>“supports our regional arts fellowship — good for arts community”</span>
+  </a><a class="row ok" data-k="william frazer" href="people/william-frazer.md" target=_blank>
+    <span class=dot style="background:#3ddc97"></span>
+    <span class=nm>william frazer</span>
+    <span class=ring>ring 50</span>
+    <span class=days>75d <span class=m>/ 90d</span></span>
+    <span class=quote><span class=m>no read note</span></span>
+  </a><a class="row ok" data-k="lorana bartels" href="people/lorana-bartels.md" target=_blank>
+    <span class=dot style="background:#3ddc97"></span>
+    <span class=nm>Lorana Bartels</span>
+    <span class=ring>ring 50</span>
+    <span class=days>74d <span class=m>/ 90d</span></span>
+    <span class=quote><span class=m>no read note</span></span>
+  </a><a class="row ok" data-k="victoria palmer" href="people/victoria-palmer.md" target=_blank>
+    <span class=dot style="background:#3ddc97"></span>
+    <span class=nm>victoria palmer</span>
+    <span class=ring>ring 50</span>
+    <span class=days>72d <span class=m>/ 90d</span></span>
+    <span class=quote><span class=m>no read note</span></span>
+  </a><a class="row ok" data-k="annie death" href="people/annie-de-ath.md" target=_blank>
+    <span class=dot style="background:#3ddc97"></span>
+    <span class=nm>Annie De'Ath</span>
+    <span class=ring>ring 50</span>
+    <span class=days>69d <span class=m>/ 90d</span></span>
+    <span class=quote>“could support Contained and Farm activities — marketing and events”</span>
+  </a><a class="row ok" data-k="nicole mekler" href="people/nicole-mekler.md" target=_blank>
+    <span class=dot style="background:#3ddc97"></span>
+    <span class=nm>nicole mekler</span>
+    <span class=ring>ring 50</span>
+    <span class=days>69d <span class=m>/ 90d</span></span>
+    <span class=quote><span class=m>no read note</span></span>
+  </a><a class="row ok" data-k="teya dusseldorp" href="people/teya-dusseldorp.md" target=_blank>
+    <span class=dot style="background:#3ddc97"></span>
+    <span class=nm>teya dusseldorp</span>
+    <span class=ring>ring 50</span>
+    <span class=days>67d <span class=m>/ 90d</span></span>
+    <span class=quote>“currently not supporting anything, but a good connection for a number of projects”</span>
+  </a><a class="row ok" data-k="tahlia isaac" href="people/tahlia-isaac.md" target=_blank>
+    <span class=dot style="background:#3ddc97"></span>
+    <span class=nm>tahlia isaac</span>
+    <span class=ring>ring 150</span>
+    <span class=days>129d <span class=m>/ 180d</span></span>
+    <span class=quote>“does prison support for women — not a strong connection but in the networks”</span>
+  </a><a class="row ok" data-k="daniel daylight" href="people/daniel-daylight.md" target=_blank>
+    <span class=dot style="background:#3ddc97"></span>
+    <span class=nm>Daniel Daylight</span>
+    <span class=ring>ring 50</span>
+    <span class=days>60d <span class=m>/ 90d</span></span>
+    <span class=quote>“we are helping with the backyarn development (Ben's words — project name spelling TBC)”</span>
+  </a><a class="row ok" data-k="rohan lulham" href="people/rohan-lulham.md" target=_blank>
+    <span class=dot style="background:#3ddc97"></span>
+    <span class=nm>rohan lulham</span>
+    <span class=ring>ring 50</span>
+    <span class=days>54d <span class=m>/ 90d</span></span>
+    <span class=quote><span class=m>no read note</span></span>
+  </a><a class="row ok" data-k="carollyn kavanagh" href="people/carollyn-kavanagh.md" target=_blank>
+    <span class=dot style="background:#3ddc97"></span>
+    <span class=nm>carollyn kavanagh</span>
+    <span class=ring>ring 50</span>
+    <span class=days>53d <span class=m>/ 90d</span></span>
+    <span class=quote>“supports the regional arts community”</span>
+  </a><a class="row ok" data-k="hannah march" href="people/hannah-march.md" target=_blank>
+    <span class=dot style="background:#3ddc97"></span>
+    <span class=nm>hannah march</span>
+    <span class=ring>ring 50</span>
+    <span class=days>53d <span class=m>/ 90d</span></span>
+    <span class=quote><span class=m>no read note</span></span>
+  </a><a class="row ok" data-k="jay boolkin" href="people/jay-boolkin.md" target=_blank>
+    <span class=dot style="background:#3ddc97"></span>
+    <span class=nm>jay boolkin</span>
+    <span class=ring>ring 50</span>
+    <span class=days>47d <span class=m>/ 90d</span></span>
+    <span class=quote><span class=m>no read note</span></span>
+  </a><a class="row ok" data-k="vera borsboom" href="people/vera-borsboom.md" target=_blank>
+    <span class=dot style="background:#3ddc97"></span>
+    <span class=nm>Vera Borsboom</span>
+    <span class=ring>ring 150</span>
+    <span class=days>88d <span class=m>/ 180d</span></span>
+    <span class=quote><span class=m>no read note</span></span>
+  </a><a class="row ok" data-k="marco the fox" href="people/marco-the-fox.md" target=_blank>
+    <span class=dot style="background:#3ddc97"></span>
+    <span class=nm>Marco The Fox</span>
+    <span class=ring>ring 150</span>
+    <span class=days>87d <span class=m>/ 180d</span></span>
+    <span class=quote><span class=m>no read note</span></span>
+  </a><a class="row ok" data-k="yjgrants" href="people/yj-grants.md" target=_blank>
+    <span class=dot style="background:#3ddc97"></span>
+    <span class=nm>yj_grants </span>
+    <span class=ring>ring 150</span>
+    <span class=days>86d <span class=m>/ 180d</span></span>
+    <span class=quote><span class=m>no read note</span></span>
+  </a><a class="row ok" data-k="lucy stronach" href="people/lucy-stronach.md" target=_blank>
+    <span class=dot style="background:#3ddc97"></span>
+    <span class=nm>lucy stronach</span>
+    <span class=ring>ring 50</span>
+    <span class=days>39d <span class=m>/ 90d</span></span>
+    <span class=quote>“said NO to JusticeHub; can maybe help with Goods”</span>
+  </a><a class="row ok" data-k="ludmila andrade" href="people/ludmila-andrade.md" target=_blank>
+    <span class=dot style="background:#3ddc97"></span>
+    <span class=nm>ludmila andrade</span>
+    <span class=ring>ring 50</span>
+    <span class=days>39d <span class=m>/ 90d</span></span>
+    <span class=quote><span class=m>no read note</span></span>
+  </a><a class="row ok" data-k="sal biggins" href="people/sal-biggins.md" target=_blank>
+    <span class=dot style="background:#3ddc97"></span>
+    <span class=nm>sal biggins</span>
+    <span class=ring>ring 150</span>
+    <span class=days>77d <span class=m>/ 180d</span></span>
+    <span class=quote><span class=m>no read note</span></span>
+  </a><a class="row ok" data-k="jim brabon" href="people/jim-brabon.md" target=_blank>
+    <span class=dot style="background:#3ddc97"></span>
+    <span class=nm>jim brabon</span>
+    <span class=ring>ring 150</span>
+    <span class=days>59d <span class=m>/ 180d</span></span>
+    <span class=quote><span class=m>no read note</span></span>
+  </a><a class="row ok" data-k="cathy butterss" href="people/cathy-butterss.md" target=_blank>
+    <span class=dot style="background:#3ddc97"></span>
+    <span class=nm>cathy butterss</span>
+    <span class=ring>ring 150</span>
+    <span class=days>55d <span class=m>/ 180d</span></span>
+    <span class=quote><span class=m>no read note</span></span>
+  </a><a class="row ok" data-k="pene curtis" href="people/pene-curtis.md" target=_blank>
+    <span class=dot style="background:#3ddc97"></span>
+    <span class=nm>pene curtis</span>
+    <span class=ring>ring 150</span>
+    <span class=days>48d <span class=m>/ 180d</span></span>
+    <span class=quote><span class=m>no read note</span></span>
+  </a><a class="row ok" data-k="amy elson" href="people/amy-elson.md" target=_blank>
+    <span class=dot style="background:#3ddc97"></span>
+    <span class=nm>amy elson</span>
+    <span class=ring>ring 150</span>
+    <span class=days>46d <span class=m>/ 180d</span></span>
+    <span class=quote><span class=m>no read note</span></span>
+  </a><a class="row ok" data-k="margot beach" href="people/margot-beach.md" target=_blank>
+    <span class=dot style="background:#3ddc97"></span>
+    <span class=nm>margot beach</span>
+    <span class=ring>ring 150</span>
+    <span class=days>40d <span class=m>/ 180d</span></span>
+    <span class=quote>“mainly just a Dusseldorp connection”</span>
+  </a>
+<div class=chip><b style="color:#e6edf3">175</b> people with real signal you haven't read · <a href="/field/triage">open triage →</a> &nbsp;·&nbsp; 1608 quiet (newsletter-only) behind them</div>
+<div class=split>
+  <h2 style="color:#ffd24a">OWED — the constellation <span class=m>(197 storytellers · 358 stories not yet brought to life)</span></h2>
+  <p>Never a target list. This is what ACT owes back — sovereignty first, consent before anything moves.</p>
+  <a class="row owed" href="people/kristy-bloomfield.md" target=_blank>
+    <span class=dot style="background:#ffd24a;box-shadow:0 0 0 2.5px #ff5d5d"></span>
+    <span class=nm>Kristy Bloomfield</span>
+    <span class=ring>10 given</span>
+    <span class=days style="color:#ff5d5d">8 owed</span>
+    <span class=quote class=m>2 brought to life · <span style="color:#ffb84a">1 consent conversation owed</span></span>
+  </a><a class="row owed" href="people/allan-palm-island.md" target=_blank>
+    <span class=dot style="background:#ffd24a;box-shadow:0 0 0 2.5px #ff5d5d"></span>
+    <span class=nm>Allan Palm Island</span>
+    <span class=ring>13 given</span>
+    <span class=days style="color:#ff5d5d">7 owed</span>
+    <span class=quote class=m>6 brought to life · <span style="color:#ffb84a">1 consent conversation owed</span></span>
+  </a><a class="row owed" href="people/dianne-stokes.md" target=_blank>
+    <span class=dot style="background:#ffd24a;box-shadow:0 0 0 2.5px #ff5d5d"></span>
+    <span class=nm>Dianne Stokes</span>
+    <span class=ring>7 given</span>
+    <span class=days style="color:#ff5d5d">5 owed</span>
+    <span class=quote class=m>2 brought to life · <span style="color:#ffb84a">1 consent conversation owed</span></span>
+  </a><a class="row owed" href="people/shaun-fisher.md" target=_blank>
+    <span class=dot style="background:#ffd24a;box-shadow:0 0 0 2.5px #ff5d5d"></span>
+    <span class=nm>Shaun Fisher</span>
+    <span class=ring>8 given</span>
+    <span class=days style="color:#ff5d5d">4 owed</span>
+    <span class=quote class=m>4 brought to life · <span style="color:#ffb84a">2 consent conversation owed</span></span>
+  </a><a class="row owed" href="people/brodie-germaine.md" target=_blank>
+    <span class=dot style="background:#ffd24a;box-shadow:0 0 0 2.5px #ff5d5d"></span>
+    <span class=nm>Brodie Germaine</span>
+    <span class=ring>6 given</span>
+    <span class=days style="color:#ff5d5d">4 owed</span>
+    <span class=quote class=m>2 brought to life</span>
+  </a><a class="row owed" href="people/richard-cassidy.md" target=_blank>
+    <span class=dot style="background:#ffd24a;box-shadow:0 0 0 2.5px #ff5d5d"></span>
+    <span class=nm>Richard Cassidy</span>
+    <span class=ring>4 given</span>
+    <span class=days style="color:#ff5d5d">4 owed</span>
+    <span class=quote class=m>0 brought to life · <span style="color:#ffb84a">1 consent conversation owed</span></span>
+  </a><a class="row owed" href="people/rachel-atkinson.md" target=_blank>
+    <span class=dot style="background:#ffd24a;box-shadow:0 0 0 2.5px #ff5d5d"></span>
+    <span class=nm>Rachel Atkinson</span>
+    <span class=ring>9 given</span>
+    <span class=days style="color:#ff5d5d">3 owed</span>
+    <span class=quote class=m>6 brought to life</span>
+  </a><a class="row owed" href="people/frank-daniel-anderson.md" target=_blank>
+    <span class=dot style="background:#ffd24a;box-shadow:0 0 0 2.5px #ff5d5d"></span>
+    <span class=nm>Frank Daniel Anderson</span>
+    <span class=ring>8 given</span>
+    <span class=days style="color:#ff5d5d">3 owed</span>
+    <span class=quote class=m>5 brought to life · <span style="color:#ffb84a">1 consent conversation owed</span></span>
+  </a><a class="row owed" href="people/henry-doyle.md" target=_blank>
+    <span class=dot style="background:#ffd24a;box-shadow:0 0 0 2.5px #ff5d5d"></span>
+    <span class=nm>Henry Doyle</span>
+    <span class=ring>5 given</span>
+    <span class=days style="color:#ff5d5d">3 owed</span>
+    <span class=quote class=m>2 brought to life · <span style="color:#ffb84a">1 consent conversation owed</span></span>
+  </a><a class="row owed" href="people/iris.md" target=_blank>
+    <span class=dot style="background:#ffd24a;box-shadow:0 0 0 2.5px #ff5d5d"></span>
+    <span class=nm>Iris</span>
+    <span class=ring>5 given</span>
+    <span class=days style="color:#ff5d5d">3 owed</span>
+    <span class=quote class=m>2 brought to life · <span style="color:#ffb84a">1 consent conversation owed</span></span>
+  </a><a class="row owed" href="people/dena.md" target=_blank>
+    <span class=dot style="background:#ffd24a;box-shadow:0 0 0 2.5px #ff5d5d"></span>
+    <span class=nm>Dena</span>
+    <span class=ring>4 given</span>
+    <span class=days style="color:#ff5d5d">3 owed</span>
+    <span class=quote class=m>1 brought to life · <span style="color:#ffb84a">2 consent conversation owed</span></span>
+  </a><a class="row owed" href="people/uncle-george.md" target=_blank>
+    <span class=dot style="background:#ffd24a;box-shadow:0 0 0 2.5px #ff5d5d"></span>
+    <span class=nm>Uncle George</span>
+    <span class=ring>4 given</span>
+    <span class=days style="color:#ff5d5d">3 owed</span>
+    <span class=quote class=m>1 brought to life</span>
+  </a><a class="row owed" href="people/david-romero-mcguire-phd.md" target=_blank>
+    <span class=dot style="background:#ffd24a;box-shadow:0 0 0 2.5px #ff5d5d"></span>
+    <span class=nm>David Romero McGuire PhD</span>
+    <span class=ring>3 given</span>
+    <span class=days style="color:#ff5d5d">3 owed</span>
+    <span class=quote class=m>0 brought to life · <span style="color:#ffb84a">1 consent conversation owed</span></span>
+  </a><a class="row owed" href="people/sarah-mayers.md" target=_blank>
+    <span class=dot style="background:#ffd24a;box-shadow:0 0 0 2.5px #ff5d5d"></span>
+    <span class=nm>Sarah Mayers</span>
+    <span class=ring>3 given</span>
+    <span class=days style="color:#ff5d5d">3 owed</span>
+    <span class=quote class=m>0 brought to life</span>
+  </a><a class="row owed" href="people/cliff-plummer.md" target=_blank>
+    <span class=dot style="background:#ffd24a;box-shadow:0 0 0 2.5px #ff5d5d"></span>
+    <span class=nm>Cliff Plummer</span>
+    <span class=ring>3 given</span>
+    <span class=days style="color:#ff5d5d">3 owed</span>
+    <span class=quote class=m>0 brought to life · <span style="color:#ffb84a">1 consent conversation owed</span></span>
+  </a><a class="row owed" href="people/jacqui.md" target=_blank>
+    <span class=dot style="background:#ffd24a;box-shadow:0 0 0 2.5px #ff5d5d"></span>
+    <span class=nm>Jacqui</span>
+    <span class=ring>3 given</span>
+    <span class=days style="color:#ff5d5d">3 owed</span>
+    <span class=quote class=m>0 brought to life · <span style="color:#ffb84a">1 consent conversation owed</span></span>
+  </a><a class="row owed" href="people/jes-s-teruel.md" target=_blank>
+    <span class=dot style="background:#ffd24a;box-shadow:0 0 0 2.5px #ff5d5d"></span>
+    <span class=nm>Jesús Teruel</span>
+    <span class=ring>3 given</span>
+    <span class=days style="color:#ff5d5d">3 owed</span>
+    <span class=quote class=m>0 brought to life · <span style="color:#ffb84a">1 consent conversation owed</span></span>
+  </a><a class="row owed" href="people/men-s-group.md" target=_blank>
+    <span class=dot style="background:#ffd24a;box-shadow:0 0 0 2.5px #ff5d5d"></span>
+    <span class=nm>Men's Group</span>
+    <span class=ring>6 given</span>
+    <span class=days style="color:#ff5d5d">2 owed</span>
+    <span class=quote class=m>4 brought to life · <span style="color:#ffb84a">1 consent conversation owed</span></span>
+  </a><a class="row owed" href="people/irene-nleallajar.md" target=_blank>
+    <span class=dot style="background:#ffd24a;box-shadow:0 0 0 2.5px #ff5d5d"></span>
+    <span class=nm>Irene Nleallajar</span>
+    <span class=ring>4 given</span>
+    <span class=days style="color:#ff5d5d">2 owed</span>
+    <span class=quote class=m>2 brought to life · <span style="color:#ffb84a">1 consent conversation owed</span></span>
+  </a><a class="row owed" href="people/kylie-bloomfield.md" target=_blank>
+    <span class=dot style="background:#ffd24a;box-shadow:0 0 0 2.5px #ff5d5d"></span>
+    <span class=nm>Kylie Bloomfield</span>
+    <span class=ring>3 given</span>
+    <span class=days style="color:#ff5d5d">2 owed</span>
+    <span class=quote class=m>1 brought to life</span>
+  </a>
+  <p class=m style="margin-top:8px">+ 177 more storytellers in the owes-ledger · 127 consent conversations owed in total</p>
+</div>
+</main>
 <script>
-const D={"supporters":[{"name":"sam davies","warmth":80,"circle":false,"uncaptured":false,"pattern":"","gmail":"13/5","last":"2026-04-15","roles":"supporter, partner, supplier","layer":"5","slug":"sam-davies","cad":{"state":"overdue","days":53,"expected":14},"read":"core partner — makes our beds; options for deeper partnership, community production"},{"name":"Benjamin Croft","warmth":75,"circle":false,"uncaptured":true,"pattern":"generative","gmail":"","last":"","roles":"","layer":"5","slug":"benjamin-croft","cad":{"state":"unknown","days":null,"expected":14},"read":"very good friends, family friends — potential long-term supporter, has money; supports the"},{"name":"Kabir Dhanji","warmth":75,"circle":false,"uncaptured":true,"pattern":"generative","gmail":"","last":"","roles":"","layer":"5","slug":"kabir-dhanji","cad":{"state":"unknown","days":null,"expected":14},"read":"friend and mentor, photographer in Kenya"},{"name":"Andy Fog","warmth":75,"circle":false,"uncaptured":true,"pattern":"generative","gmail":"","last":"","roles":"","layer":"5","slug":"andy-fog","cad":{"state":"unknown","days":null,"expected":14},"read":"friend in Sweden — wants to connect more"},{"name":"Nav Sawhney","warmth":75,"circle":false,"uncaptured":true,"pattern":"generative","gmail":"","last":"","roles":"","layer":"5","slug":"nav-sawhney","cad":{"state":"unknown","days":null,"expected":14},"read":"friend and mentor — Goods-adjacent (washers)"},{"name":"george newhouse","warmth":50,"circle":false,"uncaptured":false,"pattern":"generative","gmail":"9/7","last":"2026-02-19","roles":"partner, advisory","layer":"50","slug":"george-newhouse","cad":{"state":"due","days":108,"expected":90},"read":"cool dude — could be a BIG JusticeHub collaborator"},{"name":"teya dusseldorp","warmth":50,"circle":false,"uncaptured":false,"pattern":"","gmail":"21/16","last":"2026-04-01","roles":"funder, partner","layer":"50","slug":"teya-dusseldorp","cad":{"state":"ok","days":67,"expected":90},"read":"currently not supporting anything, but a good connection for a number of projects"},{"name":"esther gyorki","warmth":50,"circle":false,"uncaptured":false,"pattern":"","gmail":"31/4","last":"2026-01-22","roles":"","layer":"50","slug":"esther-gyorki","cad":{"state":"due","days":136,"expected":90},"read":"has been great supporting the regional arts fellowship for the Harvest — should stay conne"},{"name":"Daniel Daylight","warmth":50,"circle":false,"uncaptured":false,"pattern":"","gmail":"9/13","last":"2026-04-08","roles":"","layer":"50","slug":"daniel-daylight","cad":{"state":"ok","days":60,"expected":90},"read":"we are helping with the backyarn development (Ben's words — project name spelling TBC)"},{"name":"Scott McDougall","warmth":45,"circle":false,"uncaptured":true,"pattern":"generative","gmail":"","last":"","roles":"","layer":"50","slug":"scott-mcdougall","cad":{"state":"unknown","days":null,"expected":90},"read":"light touch — good person, does hydroponics; might support justice stuff soon"},{"name":"Annie De'Ath","warmth":45,"circle":false,"uncaptured":false,"pattern":"generative","gmail":"","last":"2026-03-30","roles":"","layer":"50","slug":"annie-de-ath","cad":{"state":"ok","days":69,"expected":90},"read":"could support Contained and Farm activities — marketing and events"},{"name":"lucy stronach","warmth":45,"circle":false,"uncaptured":false,"pattern":"","gmail":"28/18","last":"2026-04-29","roles":"supporter, partner","layer":"50","slug":"lucy-stronach","cad":{"state":"ok","days":39,"expected":90},"read":"said NO to JusticeHub; can maybe help with Goods"},{"name":"Melissa DeLaney","warmth":45,"circle":false,"uncaptured":false,"pattern":"","gmail":"30/6","last":"2026-03-18","roles":"","layer":"50","slug":"melissa-delaney","cad":{"state":"ok","days":81,"expected":90},"read":"supports our regional arts fellowship — good for arts community"},{"name":"sally grimsley-ballard","warmth":45,"circle":false,"uncaptured":false,"pattern":"","gmail":"","last":"","roles":"funder, partner","layer":"50","slug":"sally-grimsley-ballard","cad":{"state":"unknown","days":null,"expected":90},"read":"Ben wants to keep engaging with Sally from Snow (named unprompted in circle session)"},{"name":"maree meredith","warmth":45,"circle":false,"uncaptured":false,"pattern":"","gmail":"4/1","last":"2026-02-05","roles":"supporter","layer":"50","slug":"maree-meredith","cad":{"state":"due","days":122,"expected":90},"read":"supports the Palm Island art centre stories — keep engaged"},{"name":"Shyaka Farid Lwanyaaga","warmth":40,"circle":false,"uncaptured":true,"pattern":"generative","gmail":"","last":"","roles":"","layer":"50","slug":"shyaka-farid-lwanyaaga","cad":{"state":"unknown","days":null,"expected":90},"read":"good friend in Uganda — mainly friend, low-maintenance distance friendship"},{"name":"carollyn kavanagh","warmth":40,"circle":false,"uncaptured":false,"pattern":"","gmail":"22/6","last":"2026-04-15","roles":"partner","layer":"50","slug":"carollyn-kavanagh","cad":{"state":"ok","days":53,"expected":90},"read":"supports the regional arts community"},{"name":"Phoebe Frederick","warmth":38,"circle":false,"uncaptured":true,"pattern":"light","gmail":"","last":"","roles":"","layer":"150","slug":"phoebe-frederick","cad":{"state":"unknown","days":null,"expected":180},"read":"gov worker (Dept of Employment & Workplace Relations) — not very connected"},{"name":"Anurag Gummadi","warmth":36,"circle":false,"uncaptured":true,"pattern":"light","gmail":"","last":"","roles":"","layer":"150","slug":"anurag-gummadi","cad":{"state":"unknown","days":null,"expected":180},"read":""},{"name":"Erin Jackson","warmth":26,"circle":false,"uncaptured":false,"pattern":"","gmail":"19/13","last":"2026-01-30","roles":"","layer":"50","slug":"erin-jackson","cad":{"state":"due","days":128,"expected":90},"read":"SMART Recovery COO"},{"name":"Lorana Bartels","warmth":24,"circle":false,"uncaptured":false,"pattern":"","gmail":"40/12","last":"2026-03-25","roles":"","layer":"50","slug":"lorana-bartels","cad":{"state":"ok","days":74,"expected":90},"read":""},{"name":"tahlia isaac","warmth":20,"circle":false,"uncaptured":false,"pattern":"generative","gmail":"19/5","last":"2026-01-29","roles":"","layer":"150","slug":"tahlia-isaac","cad":{"state":"ok","days":129,"expected":180},"read":"does prison support for women — not a strong connection but in the networks"},{"name":"cathy butterss","warmth":20,"circle":false,"uncaptured":false,"pattern":"","gmail":"14/10","last":"2026-04-13","roles":"","layer":"150","slug":"cathy-butterss","cad":{"state":"ok","days":55,"expected":180},"read":""},{"name":"victoria palmer","warmth":18,"circle":false,"uncaptured":false,"pattern":"","gmail":"39/9","last":"2026-03-27","roles":"supporter","layer":"50","slug":"victoria-palmer","cad":{"state":"ok","days":72,"expected":90},"read":""},{"name":"anika baset","warmth":18,"circle":false,"uncaptured":false,"pattern":"","gmail":"15/9","last":"2025-11-17","roles":"supporter","layer":"150","slug":"anika-baset","cad":{"state":"due","days":202,"expected":180},"read":""},{"name":"joel bird","warmth":18,"circle":false,"uncaptured":false,"pattern":"","gmail":"14/9","last":"2025-09-23","roles":"supporter","layer":"150","slug":"joel-bird","cad":{"state":"due","days":257,"expected":180},"read":""},{"name":"jay boolkin","warmth":18,"circle":false,"uncaptured":false,"pattern":"","gmail":"23/9","last":"2026-04-21","roles":"supporter","layer":"50","slug":"jay-boolkin","cad":{"state":"ok","days":47,"expected":90},"read":""},{"name":"hannah march","warmth":18,"circle":false,"uncaptured":false,"pattern":"","gmail":"10/9","last":"2026-04-15","roles":"partner","layer":"50","slug":"hannah-march","cad":{"state":"ok","days":53,"expected":90},"read":""},{"name":"ludmila andrade","warmth":18,"circle":false,"uncaptured":false,"pattern":"","gmail":"9/10","last":"2026-04-29","roles":"partner","layer":"50","slug":"ludmila-andrade","cad":{"state":"ok","days":39,"expected":90},"read":""},{"name":"katie norman","warmth":16,"circle":false,"uncaptured":false,"pattern":"","gmail":"25/8","last":"2025-12-01","roles":"supporter, funder","layer":"50","slug":"katie-norman","cad":{"state":"overdue","days":188,"expected":90},"read":""},{"name":"sal biggins","warmth":16,"circle":false,"uncaptured":false,"pattern":"","gmail":"39/8","last":"2026-03-22","roles":"","layer":"150","slug":"sal-biggins","cad":{"state":"ok","days":77,"expected":180},"read":""},{"name":"Hugo","warmth":15,"circle":false,"uncaptured":true,"pattern":"generative","gmail":"","last":"","roles":"","layer":"150","slug":"hugo","cad":{"state":"unknown","days":null,"expected":180},"read":"light touch only — on the washing machine project, not counting much"},{"name":"Libby Beeching","warmth":15,"circle":false,"uncaptured":true,"pattern":"generative","gmail":"","last":"","roles":"","layer":"150","slug":"libby-beeching","cad":{"state":"unknown","days":null,"expected":180},"read":"loose — doesn't need much energy (Ben's words: all loose, low energy by design)"},{"name":"Tharini Rouwette","warmth":15,"circle":false,"uncaptured":true,"pattern":"generative","gmail":"","last":"","roles":"","layer":"150","slug":"tharini-rouwette","cad":{"state":"unknown","days":null,"expected":180},"read":"loose — doesn't need much energy"},{"name":"Peter Norden AO","warmth":15,"circle":false,"uncaptured":true,"pattern":"inbound-lean","gmail":"","last":"","roles":"","layer":"150","slug":"peter-norden-ao","cad":{"state":"unknown","days":null,"expected":180},"read":"loose — doesn't need much energy (inbound-lean thread)"},{"name":"margot beach","warmth":15,"circle":false,"uncaptured":false,"pattern":"","gmail":"5/2","last":"2026-04-28","roles":"supporter, partner","layer":"150","slug":"margot-beach","cad":{"state":"ok","days":40,"expected":180},"read":"mainly just a Dusseldorp connection"},{"name":"rachel fyfe","warmth":14,"circle":false,"uncaptured":false,"pattern":"","gmail":"7/7","last":"2025-10-07","roles":"supporter, partner","layer":"150","slug":"rachel-fyfe","cad":{"state":"due","days":243,"expected":180},"read":""},{"name":"emily mayo","warmth":14,"circle":false,"uncaptured":false,"pattern":"","gmail":"12/7","last":"2025-10-23","roles":"","layer":"150","slug":"emily-mayo","cad":{"state":"due","days":227,"expected":180},"read":""},{"name":"diego gonzalez","warmth":14,"circle":false,"uncaptured":false,"pattern":"","gmail":"9/7","last":"2025-12-02","roles":"","layer":"150","slug":"diego-gonzalez","cad":{"state":"due","days":187,"expected":180},"read":""},{"name":"Marco The Fox","warmth":14,"circle":false,"uncaptured":false,"pattern":"","gmail":"7/8","last":"2026-03-12","roles":"","layer":"150","slug":"marco-the-fox","cad":{"state":"ok","days":87,"expected":180},"read":""},{"name":"seana osbourne","warmth":12,"circle":false,"uncaptured":false,"pattern":"","gmail":"10/6","last":"2026-02-16","roles":"supporter, funder","layer":"50","slug":"seana-osbourne","cad":{"state":"due","days":111,"expected":90},"read":""},{"name":"pene curtis","warmth":12,"circle":false,"uncaptured":false,"pattern":"","gmail":"14/6","last":"2026-04-20","roles":"partner, funder","layer":"150","slug":"pene-curtis","cad":{"state":"ok","days":48,"expected":180},"read":""},{"name":"yj_grants ","warmth":12,"circle":false,"uncaptured":false,"pattern":"","gmail":"17/6","last":"2026-03-13","roles":"funder","layer":"150","slug":"yj-grants","cad":{"state":"ok","days":86,"expected":180},"read":""},{"name":"teri campbell","warmth":12,"circle":false,"uncaptured":false,"pattern":"","gmail":"8/6","last":"2025-10-28","roles":"","layer":"150","slug":"teri-campbell","cad":{"state":"due","days":222,"expected":180},"read":""},{"name":"james mclennan","warmth":12,"circle":false,"uncaptured":false,"pattern":"","gmail":"7/6","last":"2026-02-13","roles":"","layer":"50","slug":"james-mclennan","cad":{"state":"due","days":114,"expected":90},"read":""},{"name":"hailey wetzel","warmth":12,"circle":false,"uncaptured":false,"pattern":"","gmail":"7/6","last":"2025-09-23","roles":"","layer":"150","slug":"hailey-wetzel","cad":{"state":"due","days":257,"expected":180},"read":""},{"name":"william frazer","warmth":10,"circle":false,"uncaptured":false,"pattern":"","gmail":"7/5","last":"2026-03-24","roles":"supporter, partner","layer":"50","slug":"william-frazer","cad":{"state":"ok","days":75,"expected":90},"read":""},{"name":"shaun christie-david","warmth":10,"circle":false,"uncaptured":false,"pattern":"","gmail":"12/5","last":"2026-02-02","roles":"supporter","layer":"15","slug":"shaun-christie-david","cad":{"state":"overdue","days":125,"expected":14},"read":""},{"name":"jan owen","warmth":10,"circle":false,"uncaptured":false,"pattern":"","gmail":"6/5","last":"2025-10-07","roles":"supporter","layer":"15","slug":"jan-owen","cad":{"state":"overdue","days":243,"expected":14},"read":""},{"name":"nicole mekler","warmth":10,"circle":false,"uncaptured":false,"pattern":"","gmail":"17/5","last":"2026-03-30","roles":"partner","layer":"50","slug":"nicole-mekler","cad":{"state":"ok","days":69,"expected":90},"read":""},{"name":"chelsea baker","warmth":10,"circle":false,"uncaptured":false,"pattern":"","gmail":"13/5","last":"2025-10-16","roles":"funder, partner","layer":"150","slug":"chelsea-baker","cad":{"state":"due","days":234,"expected":180},"read":""},{"name":"georgia falzon","warmth":10,"circle":false,"uncaptured":false,"pattern":"","gmail":"27/5","last":"2025-12-16","roles":"","layer":"50","slug":"georgia-falzon","cad":{"state":"overdue","days":173,"expected":90},"read":""},{"name":"david mcguire","warmth":10,"circle":false,"uncaptured":false,"pattern":"","gmail":"13/5","last":"2025-12-04","roles":"","layer":"15","slug":"david-mcguire","cad":{"state":"overdue","days":185,"expected":14},"read":""},{"name":"jim brabon","warmth":10,"circle":false,"uncaptured":false,"pattern":"","gmail":"11/5","last":"2026-04-09","roles":"","layer":"150","slug":"jim-brabon","cad":{"state":"ok","days":59,"expected":180},"read":""},{"name":"thalia anthony","warmth":10,"circle":false,"uncaptured":false,"pattern":"","gmail":"8/5","last":"2025-09-14","roles":"","layer":"50","slug":"thalia-anthony","cad":{"state":"overdue","days":266,"expected":90},"read":""},{"name":"ruari elkington","warmth":10,"circle":false,"uncaptured":false,"pattern":"","gmail":"7/5","last":"2025-10-13","roles":"","layer":"50","slug":"ruari-elkington","cad":{"state":"overdue","days":237,"expected":90},"read":""},{"name":"anne hollonds","warmth":10,"circle":false,"uncaptured":false,"pattern":"","gmail":"5/6","last":"2025-10-22","roles":"","layer":"15","slug":"anne-hollonds","cad":{"state":"overdue","days":228,"expected":14},"read":""},{"name":"mark powell, (he/him) wrad health on gunditjmara land","warmth":10,"circle":false,"uncaptured":false,"pattern":"","gmail":"5/5","last":"2025-10-13","roles":"","layer":"150","slug":"mark-powell-he-him-wrad-health-on-gunditjmara-land","cad":{"state":"due","days":237,"expected":180},"read":""},{"name":"Vera Borsboom","warmth":10,"circle":false,"uncaptured":false,"pattern":"","gmail":"5/5","last":"2026-03-11","roles":"","layer":"150","slug":"vera-borsboom","cad":{"state":"ok","days":88,"expected":180},"read":""},{"name":"rohan lulham","warmth":8,"circle":false,"uncaptured":false,"pattern":"","gmail":"22/4","last":"2026-04-14","roles":"partner, researcher","layer":"50","slug":"rohan-lulham","cad":{"state":"ok","days":54,"expected":90},"read":""},{"name":"fiona maxwell","warmth":8,"circle":false,"uncaptured":false,"pattern":"","gmail":"18/4","last":"2026-04-29","roles":"supporter, funder","layer":"15","slug":"fiona-maxwell","cad":{"state":"overdue","days":39,"expected":14},"read":""},{"name":"lydia garrett","warmth":8,"circle":false,"uncaptured":false,"pattern":"","gmail":"13/4","last":"2025-09-09","roles":"supporter","layer":"150","slug":"lydia-garrett","cad":{"state":"due","days":271,"expected":180},"read":""},{"name":"amy elson","warmth":8,"circle":false,"uncaptured":false,"pattern":"","gmail":"12/4","last":"2026-04-22","roles":"supporter, gov","layer":"150","slug":"amy-elson","cad":{"state":"ok","days":46,"expected":180},"read":""}],"community":[{"name":"Kristy Bloomfield","tx":10,"live":2,"owes":8,"consent":1,"slug":"kristy-bloomfield"},{"name":"Allan Palm Island","tx":13,"live":6,"owes":7,"consent":1,"slug":"allan-palm-island"},{"name":"Dianne Stokes","tx":7,"live":2,"owes":5,"consent":1,"slug":"dianne-stokes"},{"name":"Shaun Fisher","tx":8,"live":4,"owes":4,"consent":2,"slug":"shaun-fisher"},{"name":"Brodie Germaine","tx":6,"live":2,"owes":4,"consent":0,"slug":"brodie-germaine"},{"name":"Richard Cassidy","tx":4,"live":0,"owes":4,"consent":1,"slug":"richard-cassidy"},{"name":"Rachel Atkinson","tx":9,"live":6,"owes":3,"consent":0,"slug":"rachel-atkinson"},{"name":"Frank Daniel Anderson","tx":8,"live":5,"owes":3,"consent":1,"slug":"frank-daniel-anderson"},{"name":"Henry Doyle","tx":5,"live":2,"owes":3,"consent":1,"slug":"henry-doyle"},{"name":"Iris","tx":5,"live":2,"owes":3,"consent":1,"slug":"iris"},{"name":"Dena","tx":4,"live":1,"owes":3,"consent":2,"slug":"dena"},{"name":"Uncle George","tx":4,"live":1,"owes":3,"consent":0,"slug":"uncle-george"},{"name":"David Romero McGuire PhD","tx":3,"live":0,"owes":3,"consent":1,"slug":"david-romero-mcguire-phd"},{"name":"Sarah Mayers","tx":3,"live":0,"owes":3,"consent":0,"slug":"sarah-mayers"},{"name":"Cliff Plummer","tx":3,"live":0,"owes":3,"consent":1,"slug":"cliff-plummer"},{"name":"Jacqui","tx":3,"live":0,"owes":3,"consent":1,"slug":"jacqui"},{"name":"Jesús Teruel","tx":3,"live":0,"owes":3,"consent":1,"slug":"jes-s-teruel"},{"name":"Men's Group","tx":6,"live":4,"owes":2,"consent":1,"slug":"men-s-group"},{"name":"Irene Nleallajar","tx":4,"live":2,"owes":2,"consent":1,"slug":"irene-nleallajar"},{"name":"Kylie Bloomfield","tx":3,"live":1,"owes":2,"consent":0,"slug":"kylie-bloomfield"},{"name":"Henry Bloomfield","tx":3,"live":1,"owes":2,"consent":0,"slug":"henry-bloomfield"},{"name":"Goonyun Anderson","tx":3,"live":1,"owes":2,"consent":0,"slug":"goonyun-anderson"},{"name":"Ferdys staff","tx":3,"live":1,"owes":2,"consent":0,"slug":"ferdys-staff"},{"name":"Roy Prior","tx":3,"live":1,"owes":2,"consent":0,"slug":"roy-prior"},{"name":"Braydon Dema","tx":2,"live":0,"owes":2,"consent":0,"slug":"braydon-dema"},{"name":"Amelia Martinez","tx":2,"live":0,"owes":2,"consent":1,"slug":"amelia-martinez"},{"name":"Callum William Mason","tx":2,"live":0,"owes":2,"consent":1,"slug":"callum-william-mason"},{"name":"Annie Morrison","tx":2,"live":0,"owes":2,"consent":1,"slug":"annie-morrison"},{"name":"Chloe","tx":2,"live":0,"owes":2,"consent":1,"slug":"chloe"},{"name":"Chelo","tx":2,"live":0,"owes":2,"consent":1,"slug":"chelo"},{"name":"Ana - Bega","tx":2,"live":0,"owes":2,"consent":1,"slug":"ana-bega"},{"name":"Norman Frank","tx":2,"live":0,"owes":2,"consent":1,"slug":"norman-frank"},{"name":"Chris","tx":2,"live":0,"owes":2,"consent":1,"slug":"chris"},{"name":"Jason","tx":2,"live":0,"owes":2,"consent":1,"slug":"jason"},{"name":"Peggy Palm Island","tx":2,"live":0,"owes":2,"consent":1,"slug":"peggy-palm-island"},{"name":"Ivy","tx":2,"live":0,"owes":2,"consent":1,"slug":"ivy"},{"name":"Group of Young People in Alicante","tx":2,"live":0,"owes":2,"consent":1,"slug":"group-of-young-people-in-alicante"},{"name":"Enrique López","tx":2,"live":0,"owes":2,"consent":1,"slug":"enrique-l-pez"},{"name":"Georgina Byron AM","tx":2,"live":0,"owes":2,"consent":0,"slug":"georgina-byron-am"},{"name":"Ade Rizer","tx":2,"live":0,"owes":2,"consent":1,"slug":"ade-rizer"},{"name":"Tanya Turner","tx":2,"live":0,"owes":2,"consent":0,"slug":"tanya-turner"},{"name":"Kirrily Brianne-Scarf","tx":2,"live":0,"owes":2,"consent":1,"slug":"kirrily-brianne-scarf"},{"name":"Felicity Davis-Smith","tx":2,"live":0,"owes":2,"consent":1,"slug":"felicity-davis-smith"},{"name":"Group on home for violent young people","tx":2,"live":0,"owes":2,"consent":1,"slug":"group-on-home-for-violent-young-people"},{"name":"Javier Aparicio Grau","tx":2,"live":0,"owes":2,"consent":1,"slug":"javier-aparicio-grau"},{"name":"Risilda Hogan","tx":2,"live":0,"owes":2,"consent":1,"slug":"risilda-hogan"},{"name":"Group of young men Murcia","tx":2,"live":0,"owes":2,"consent":1,"slug":"group-of-young-men-murcia"},{"name":"Amelia Tynan","tx":2,"live":0,"owes":2,"consent":1,"slug":"amelia-tynan"},{"name":"Tracy McCartney","tx":2,"live":0,"owes":2,"consent":1,"slug":"tracy-mccartney"},{"name":"Young People Murcia","tx":2,"live":0,"owes":2,"consent":1,"slug":"young-people-murcia"},{"name":"Linda Turner","tx":2,"live":0,"owes":2,"consent":1,"slug":"linda-turner"},{"name":"Bernie Moran","tx":2,"live":0,"owes":2,"consent":1,"slug":"bernie-moran"},{"name":"George Nanganjuan","tx":2,"live":0,"owes":2,"consent":1,"slug":"george-nanganjuan"},{"name":"Migrant Home group","tx":2,"live":0,"owes":2,"consent":1,"slug":"migrant-home-group"},{"name":"Darrell  Pierpoint","tx":2,"live":0,"owes":2,"consent":1,"slug":"darrell-pierpoint"},{"name":"Ray  Kirkman","tx":2,"live":0,"owes":2,"consent":1,"slug":"ray-kirkman"},{"name":"Melissa Jackson","tx":2,"live":0,"owes":2,"consent":1,"slug":"melissa-jackson"},{"name":"Jimmy Frank","tx":2,"live":0,"owes":2,"consent":1,"slug":"jimmy-frank"},{"name":"Elders Group","tx":17,"live":16,"owes":1,"consent":1,"slug":"elders-group"},{"name":"Ruby Sibley","tx":3,"live":2,"owes":1,"consent":1,"slug":"ruby-sibley"},{"name":"Childcare workers","tx":3,"live":2,"owes":1,"consent":1,"slug":"childcare-workers"},{"name":"Luke Watkins","tx":2,"live":1,"owes":1,"consent":1,"slug":"luke-watkins"},{"name":"Abby","tx":2,"live":1,"owes":1,"consent":1,"slug":"abby"},{"name":"Amanda Mundell","tx":2,"live":1,"owes":1,"consent":1,"slug":"amanda-mundell"},{"name":"Min","tx":2,"live":1,"owes":1,"consent":1,"slug":"min"},{"name":"Kylie","tx":2,"live":1,"owes":1,"consent":1,"slug":"kylie"},{"name":"Chris_Phoniex_Service_Provider","tx":2,"live":1,"owes":1,"consent":1,"slug":"chris-phoniex-service-provider"},{"name":"Ashleigh Choice","tx":2,"live":1,"owes":1,"consent":1,"slug":"ashleigh-choice"},{"name":"Colin Banks","tx":2,"live":1,"owes":1,"consent":1,"slug":"colin-banks"},{"name":"AJ Bailey","tx":2,"live":1,"owes":1,"consent":1,"slug":"aj-bailey"},{"name":"Brett Klumpp","tx":2,"live":1,"owes":1,"consent":1,"slug":"brett-klumpp"},{"name":"Brendan Gunning - School Vice Principal","tx":2,"live":1,"owes":1,"consent":1,"slug":"brendan-gunning-school-vice-principal"},{"name":"Samantha Breust","tx":2,"live":1,"owes":1,"consent":1,"slug":"samantha-breust"},{"name":"Allan Mott","tx":2,"live":1,"owes":1,"consent":1,"slug":"allan-mott"},{"name":"Joanne Kingi","tx":2,"live":1,"owes":1,"consent":1,"slug":"joanne-kingi"},{"name":"Tom Robinson","tx":2,"live":1,"owes":1,"consent":1,"slug":"tom-robinson"},{"name":"Rikki Downman","tx":2,"live":1,"owes":1,"consent":1,"slug":"rikki-downman"},{"name":"Michael Young (Bear)","tx":2,"live":1,"owes":1,"consent":1,"slug":"michael-young-bear"},{"name":"Pam Wellham","tx":2,"live":1,"owes":1,"consent":1,"slug":"pam-wellham"},{"name":"Muhammad Patel","tx":2,"live":1,"owes":1,"consent":1,"slug":"muhammad-patel"},{"name":"Greg Graham","tx":2,"live":1,"owes":1,"consent":1,"slug":"greg-graham"},{"name":"Linda  Pietri","tx":2,"live":1,"owes":1,"consent":1,"slug":"linda-pietri"},{"name":"Julie Jauncey","tx":2,"live":1,"owes":1,"consent":1,"slug":"julie-jauncey"},{"name":"Bob and Julie - Hamilton","tx":2,"live":1,"owes":1,"consent":1,"slug":"bob-and-julie-hamilton"},{"name":"Chris Dwyer","tx":2,"live":1,"owes":1,"consent":1,"slug":"chris-dwyer"},{"name":"Bob Purdy","tx":2,"live":1,"owes":1,"consent":1,"slug":"bob-purdy"},{"name":"Nichole Ann Dobson","tx":2,"live":1,"owes":1,"consent":1,"slug":"nichole-ann-dobson"},{"name":"Karl Whitney","tx":2,"live":1,"owes":1,"consent":1,"slug":"karl-whitney"},{"name":"Lisa J","tx":2,"live":1,"owes":1,"consent":1,"slug":"lisa-j"},{"name":"Terina Ahone-Masafi","tx":2,"live":1,"owes":1,"consent":1,"slug":"terina-ahone-masafi"},{"name":"Danee Vanderwall","tx":2,"live":1,"owes":1,"consent":1,"slug":"danee-vanderwall"},{"name":"Matthew Neill","tx":2,"live":1,"owes":1,"consent":1,"slug":"matthew-neill"},{"name":"Jenni Calcraft","tx":2,"live":1,"owes":1,"consent":1,"slug":"jenni-calcraft"},{"name":"Daniel O'neill","tx":2,"live":1,"owes":1,"consent":1,"slug":"daniel-o-neill"},{"name":"Richard Calligan","tx":2,"live":1,"owes":1,"consent":1,"slug":"richard-calligan"},{"name":"Kisha Neville","tx":2,"live":1,"owes":1,"consent":1,"slug":"kisha-neville"},{"name":"Luke Napier","tx":2,"live":1,"owes":1,"consent":1,"slug":"luke-napier"},{"name":"Kay Peterson","tx":2,"live":1,"owes":1,"consent":1,"slug":"kay-peterson"},{"name":"Keeda Zilm","tx":2,"live":1,"owes":1,"consent":1,"slug":"keeda-zilm"},{"name":"Suzanne Evans","tx":2,"live":1,"owes":1,"consent":1,"slug":"suzanne-evans"},{"name":"Elaine Everett","tx":2,"live":1,"owes":1,"consent":1,"slug":"elaine-everett"},{"name":"Rita","tx":2,"live":1,"owes":1,"consent":1,"slug":"rita"},{"name":"Kevin Vos","tx":2,"live":1,"owes":1,"consent":1,"slug":"kevin-vos"},{"name":"Phil Barton","tx":2,"live":1,"owes":1,"consent":1,"slug":"phil-barton"},{"name":"Lesley Lalor","tx":2,"live":1,"owes":1,"consent":1,"slug":"lesley-lalor"},{"name":"Ranbir Chanhan","tx":2,"live":1,"owes":1,"consent":1,"slug":"ranbir-chanhan"},{"name":"Robyn Watts","tx":2,"live":1,"owes":1,"consent":1,"slug":"robyn-watts"},{"name":"Samual Thornberry","tx":2,"live":1,"owes":1,"consent":1,"slug":"samual-thornberry"},{"name":"Graham","tx":2,"live":1,"owes":1,"consent":1,"slug":"graham"},{"name":"Steve Sutton","tx":2,"live":1,"owes":1,"consent":1,"slug":"steve-sutton"},{"name":"Jeri Pasovsky","tx":2,"live":1,"owes":1,"consent":1,"slug":"jeri-pasovsky"},{"name":"Georgie Ibbott","tx":2,"live":1,"owes":1,"consent":1,"slug":"georgie-ibbott"},{"name":"Veronica Vos","tx":2,"live":1,"owes":1,"consent":1,"slug":"veronica-vos"},{"name":"Melissa Legg","tx":2,"live":1,"owes":1,"consent":1,"slug":"melissa-legg"},{"name":"Michael Quinn","tx":2,"live":1,"owes":1,"consent":1,"slug":"michael-quinn"},{"name":"Tom Bowyer ","tx":2,"live":1,"owes":1,"consent":1,"slug":"tom-bowyer"},{"name":"Kelly Benjamin","tx":2,"live":1,"owes":1,"consent":1,"slug":"kelly-benjamin"},{"name":"Paul Kayne","tx":2,"live":1,"owes":1,"consent":1,"slug":"paul-kayne"},{"name":"Tasos","tx":2,"live":1,"owes":1,"consent":1,"slug":"tasos"},{"name":"William Radke","tx":2,"live":1,"owes":1,"consent":1,"slug":"william-radke"},{"name":"Wayne Tait","tx":2,"live":1,"owes":1,"consent":1,"slug":"wayne-tait"},{"name":"Marillie Giannakopoulou","tx":2,"live":1,"owes":1,"consent":1,"slug":"marillie-giannakopoulou"},{"name":"Aunty Bev and Uncle terry Aunty Bev and Uncle terry","tx":2,"live":1,"owes":1,"consent":1,"slug":"aunty-bev-and-uncle-terry-aunty-bev-and-uncle-terry"},{"name":"Vicki Sorenson","tx":2,"live":1,"owes":1,"consent":1,"slug":"vicki-sorenson"},{"name":"Shaun Thomas Rogers","tx":2,"live":1,"owes":1,"consent":1,"slug":"shaun-thomas-rogers"},{"name":"Siobhan Leyne","tx":2,"live":1,"owes":1,"consent":1,"slug":"siobhan-leyne"},{"name":"Brigit Perry","tx":1,"live":0,"owes":1,"consent":0,"slug":"brigit-perry"},{"name":"Marcus Barlow","tx":1,"live":0,"owes":1,"consent":0,"slug":"marcus-barlow"},{"name":"Bec Smyth","tx":1,"live":0,"owes":1,"consent":0,"slug":"bec-smyth"},{"name":"Aunty Maureen","tx":1,"live":0,"owes":1,"consent":0,"slug":"aunty-maureen"},{"name":" Jared Keating. ","tx":1,"live":0,"owes":1,"consent":0,"slug":"jared-keating"},{"name":" Tracy McIntyre","tx":1,"live":0,"owes":1,"consent":0,"slug":"tracy-mcintyre"},{"name":"Aunty Evie","tx":1,"live":0,"owes":1,"consent":0,"slug":"aunty-evie"},{"name":"Clive - CEO Bega","tx":1,"live":0,"owes":1,"consent":0,"slug":"clive-ceo-bega"},{"name":"David Allen","tx":1,"live":0,"owes":1,"consent":0,"slug":"david-allen"},{"name":"Patricia Ann Miller","tx":1,"live":0,"owes":1,"consent":0,"slug":"patricia-ann-miller"},{"name":"James Dinsdale","tx":1,"live":0,"owes":1,"consent":0,"slug":"james-dinsdale"},{"name":"Chelsea Rolfe","tx":1,"live":0,"owes":1,"consent":0,"slug":"chelsea-rolfe"},{"name":"Pam Ramsay","tx":1,"live":0,"owes":1,"consent":0,"slug":"pam-ramsay"},{"name":"Anthony Hegerty","tx":1,"live":0,"owes":1,"consent":0,"slug":"anthony-hegerty"},{"name":"Olga Havnen","tx":1,"live":0,"owes":1,"consent":0,"slug":"olga-havnen"},{"name":"Chris Mourad","tx":1,"live":0,"owes":1,"consent":0,"slug":"chris-mourad"},{"name":"Navjot Soni ","tx":1,"live":0,"owes":1,"consent":0,"slug":"navjot-soni"},{"name":" Tig Hall","tx":1,"live":0,"owes":1,"consent":0,"slug":"tig-hall"},{"name":"Neilson Naje","tx":1,"live":0,"owes":1,"consent":0,"slug":"neilson-naje"},{"name":"Paul Gordan","tx":1,"live":0,"owes":1,"consent":0,"slug":"paul-gordan"},{"name":"Drew Nicholls ","tx":1,"live":0,"owes":1,"consent":0,"slug":"drew-nicholls"},{"name":"Patricia Frank","tx":1,"live":0,"owes":1,"consent":0,"slug":"patricia-frank"},{"name":"G Mana","tx":1,"live":0,"owes":1,"consent":0,"slug":"g-mana"},{"name":"Jonathan Xenakis","tx":1,"live":0,"owes":1,"consent":0,"slug":"jonathan-xenakis"},{"name":"Sharna Wentworth","tx":1,"live":0,"owes":1,"consent":0,"slug":"sharna-wentworth"},{"name":"Freddy Wai","tx":1,"live":0,"owes":1,"consent":0,"slug":"freddy-wai"},{"name":"ZERO","tx":1,"live":0,"owes":1,"consent":0,"slug":"zero"},{"name":"Amanda Brasnja","tx":1,"live":0,"owes":1,"consent":0,"slug":"amanda-brasnja"},{"name":"Dimitra Kountourioti","tx":1,"live":0,"owes":1,"consent":0,"slug":"dimitra-kountourioti"},{"name":"Nicole Snead ","tx":1,"live":0,"owes":1,"consent":0,"slug":"nicole-snead"},{"name":"Brontee Lawson","tx":1,"live":0,"owes":1,"consent":0,"slug":"brontee-lawson"},{"name":"Keiron Lander","tx":1,"live":0,"owes":1,"consent":0,"slug":"keiron-lander"},{"name":"Troy John McConnell","tx":1,"live":0,"owes":1,"consent":0,"slug":"troy-john-mcconnell"},{"name":"Tarren","tx":1,"live":0,"owes":1,"consent":0,"slug":"tarren"},{"name":"Jim Aulbury","tx":1,"live":0,"owes":1,"consent":0,"slug":"jim-aulbury"},{"name":"Aaron Stapleton","tx":1,"live":0,"owes":1,"consent":0,"slug":"aaron-stapleton"},{"name":"James Miller","tx":1,"live":0,"owes":1,"consent":0,"slug":"james-miller"},{"name":"Kate Bjur","tx":1,"live":0,"owes":1,"consent":0,"slug":"kate-bjur"},{"name":"Uncle Dale","tx":1,"live":0,"owes":1,"consent":0,"slug":"uncle-dale"},{"name":"Tegan Burns","tx":1,"live":0,"owes":1,"consent":0,"slug":"tegan-burns"},{"name":" Greg Cooke","tx":1,"live":0,"owes":1,"consent":0,"slug":"greg-cooke"},{"name":" Margot Scales\n","tx":1,"live":0,"owes":1,"consent":0,"slug":"margot-scales"},{"name":"Morage Hendry","tx":1,"live":0,"owes":1,"consent":0,"slug":"morage-hendry"},{"name":"Brian Edwards","tx":1,"live":0,"owes":1,"consent":0,"slug":"brian-edwards"},{"name":"Ethel and  Iris Ferdies","tx":1,"live":0,"owes":1,"consent":0,"slug":"ethel-and-iris-ferdies"},{"name":"Charlie  Brun","tx":1,"live":0,"owes":1,"consent":0,"slug":"charlie-brun"},{"name":"Nici Toll","tx":1,"live":0,"owes":1,"consent":0,"slug":"nici-toll"},{"name":"Edward Campion","tx":1,"live":0,"owes":1,"consent":0,"slug":"edward-campion"},{"name":"Marilyn Laner","tx":1,"live":0,"owes":1,"consent":0,"slug":"marilyn-laner"},{"name":"Paul","tx":1,"live":0,"owes":1,"consent":0,"slug":"paul"},{"name":"Catherine Plant","tx":1,"live":0,"owes":1,"consent":0,"slug":"catherine-plant"},{"name":"Celeste Gibbs","tx":1,"live":0,"owes":1,"consent":0,"slug":"celeste-gibbs"},{"name":"Kellie Knight","tx":1,"live":0,"owes":1,"consent":0,"slug":"kellie-knight"},{"name":"Paul Morris","tx":1,"live":0,"owes":1,"consent":0,"slug":"paul-morris"},{"name":"TOMNET meeting discussion","tx":1,"live":0,"owes":1,"consent":0,"slug":"tomnet-meeting-discussion"},{"name":"Emily Bell","tx":1,"live":0,"owes":1,"consent":0,"slug":"emily-bell"},{"name":" Brian Russell","tx":1,"live":0,"owes":1,"consent":0,"slug":"brian-russell"},{"name":"Jean-Baptiste Metz","tx":1,"live":0,"owes":1,"consent":0,"slug":"jean-baptiste-metz"},{"name":"Removed","tx":2,"live":0,"owes":0,"consent":0,"slug":"removed"},{"name":"Removed","tx":1,"live":0,"owes":0,"consent":0,"slug":"removed"},{"name":"Removed","tx":1,"live":0,"owes":0,"consent":0,"slug":"removed"},{"name":"Removed","tx":1,"live":0,"owes":0,"consent":0,"slug":"removed"},{"name":"Removed","tx":1,"live":0,"owes":0,"consent":0,"slug":"removed"},{"name":"Removed","tx":1,"live":0,"owes":0,"consent":0,"slug":"removed"},{"name":"Removed","tx":1,"live":0,"owes":0,"consent":0,"slug":"removed"},{"name":"Removed","tx":1,"live":0,"owes":0,"consent":0,"slug":"removed"},{"name":"Removed","tx":1,"live":0,"owes":0,"consent":0,"slug":"removed"},{"name":"JusticeHub","tx":1,"live":1,"owes":0,"consent":0,"slug":"justicehub"},{"name":"Removed","tx":1,"live":0,"owes":0,"consent":0,"slug":"removed"},{"name":"Removed","tx":1,"live":0,"owes":0,"consent":0,"slug":"removed"},{"name":"Removed","tx":1,"live":0,"owes":0,"consent":0,"slug":"removed"}],"unnamedCon":90,"projects":{"CivicGraph (deferred spinout)":["lucy stronach","teya dusseldorp","ardi muckan","katie norman","seana osbourne","pene curtis","yjgrants","amelia clifford","chelsea baker","william frazer","fiona maxwell","michelle scott","randle walker","adam robinson","sandra phillips","scarlett steven","jonas kubitscheck","maddi alderuccio","fiona scicluna","gm corporate julalikari","coordinator our community shed","anne gripper","jimrebbechi","el schwanke","general paul ramsay foundation","cat sullivan","justin welfare","alan white","isabella stanley","romina reyftmann","sally grimsleyballard","amp foundation tomorrow makers","michael taylor","ashley machuca","shannon lemanski","kristen lark","sarah williams","matthew cox","john chambers","sally knox","kim harland","accounts rotary eclub outback australia division 9560","accounts homeland school company","accounts malala health service aboriginal corporation","imb bank community foundation","real innovation fund","social enterprise development initiative","carolyn ludovici","australian communities foundation","uniting church australia frontier services","the trustee for yeperenye charitable trust","developing east arnhem limited","fortescue foundation","georgina byron","mjd foundation limited","anita hopkins","cat vecchio","community resources limited","country connect foundation limited","bhp foundation","qbe foundation","northern australian aboriginal charitable trust","alberto furlan","sarah bartak","garma festival beds showcase","rio tinto foundation","nova peris foundation","maddy howlett","nizam abdu","emily nicholson","jioji ravulo","robyn sloggett","amanda neil","the queensland gives team","jacqueline fearnley","amy elson","lewina schrale","belyuen community government council","numbulwar homelands council association inc","hewitt agriculture","east arnhem regional council","barkly regional council","victoria daly regional council","roper gulf regional council","torres strait island regional council","macdonnell regional council","tiwi islands regional council","ntaria school council inc","west daly regional council","alive","northern peninsula area regional council","central desert regional council","george newhouse","rohan lulham","walking on country","adeem","judith meiklejohn","naomi lai"],"Goods on Country":["teya dusseldorp","lucy stronach","katie norman","seana osbourne","pene curtis","ardi muckan","fiona maxwell","randle walker","adam robinson","scarlett steven","jonas kubitscheck","maddi alderuccio","fiona scicluna","gm corporate julalikari","coordinator our community shed","anne gripper","yjgrants","jimrebbechi","el schwanke","general paul ramsay foundation","cat sullivan","justin welfare","amelia clifford","alan white","isabella stanley","chelsea baker","sally grimsleyballard","amp foundation tomorrow makers","michael taylor","ashley machuca","kristen lark","sarah williams","matthew cox","william frazer","carolyn ludovici","michelle scott","sandra phillips","romina reyftmann","shannon lemanski","john chambers","sally knox","kim harland","accounts rotary eclub outback australia division 9560","accounts homeland school company","accounts malala health service aboriginal corporation","imb bank community foundation","real innovation fund","social enterprise development initiative","australian communities foundation","uniting church australia frontier services","the trustee for yeperenye charitable trust","developing east arnhem limited","fortescue foundation","georgina byron","mjd foundation limited","anita hopkins","cat vecchio","community resources limited","country connect foundation limited","bhp foundation","qbe foundation","northern australian aboriginal charitable trust","alberto furlan","sarah bartak","garma festival beds showcase","rio tinto foundation","nova peris foundation","maddy howlett","nizam abdu","emily nicholson","jioji ravulo","robyn sloggett","amanda neil","the queensland gives team","jacqueline fearnley","george newhouse","tina morris","rachel fyfe","sam davies","hannah march","ludmila andrade","jessica wilson","lucy mcgarry","margot beach","andy beecroft","chair our community shed","simon quilty","carollyn kavanagh","april long","dr simon quilty","general kowa collaboration","ben croft","nicole mekler","general first nations futures","maningrida progress association inc","nina fitzgerald","treasurer our community shed","outback stores pty ltd","centre canvas","julia payne","greg marlow","rohan lulham","alice mahar","jess lilley","shannon cant","genus passi","sonia randhawa","millie shearer","katherine hayes","rhian miller","anita pahor","hayley passmore","mindy sotiri","toby gowland","lewina schrale","belyuen community government council","irene portelli","numbulwar homelands council association inc","penny lamaro","loic fery","hewitt agriculture","bondini reserve wa","east arnhem regional council","prince of wales qld","peppan qld","barkly regional council","yardoogarra wa","nillygan wa","victoria daly regional council","roper gulf regional council","badu community qld","torres strait island regional council","macdonnell regional council","tiwi islands regional council","ntaria school council inc","ngalingkadji wa","putaputa sa","welcome station qld","wiluna community wa","puntawari wa","wulununjur wa","oriners qld","west daly regional council","yalata sa","loongabid wa","mingalalka wa","tracey newman","munget wa","alive","youngaleena wa","northern peninsula area regional council","yawuru wa","billard wa","blue mountain qld","central desert regional council","kupungarri wa","yarilena sa","moojeeba qld","bamaga qld","gnylmarung wa","djoodood wa","buttah windee wa","pago wa","ngarantjadu wa","tilun tilun sa","dinah line sa","mindi rardi wa","mulgul station wa","tallowon sa","nygah nygah wa","dowar island qld","goobiny wa","dajarra qld","southwell qld","joes lagoon qld","three mile wa","king george river wa","millargoon wa","pantijan wa","atambaya qld","dauan island qld","fairview station qld","tappers inlet wa","jabir jabir wa","melterr qld","marra worra worra wa","parukupan wa","guda guda wa","jarlmadanka wa","eunnmen qld","wathanhiin qld","chuula qld","ambang qld","walberi qld","nyumwah wa","nyapari sa","jimbalakudunj wa","warralong wa","silver plains qld","ngurtuwarta wa","old rodeo ground qld","cheeditha wa","milingimbi nt","ngukurr nt","gunbalanya nt","jennifer kitching","maningrida nt","lajamanu nt","santa teresa nt","ramingining nt","galiwinku nt","kalkarindji nt","hermannsburg nt","pirlangimpi nt","naomi lai","wurrumiyanga nt","kintore nt","yuendumu nt","ampilatwatja nt","numbulwar nt","wadeye nt","gapuwiyak nt","lingara nt","warruwi nt","umbakumba nt","nganmarriyanga nt","kalka sa","test person","angurugu nt","kaltukatjara nt","barunga nt","beswick nt","yirrkala nt","alpurrurulam nt","langi qld","nauiyu nt","papunya nt","milikapiti nt","craig swann","forum for social innovation sweden","mud jeans","bridging the gap africa","design hub kampala","coompanion sweden","fairphone","fashion for good","yalla trappan","fablab winam","brightlands chemelot campus","truth and reconciliation archive","world voices uganda","maleny food co","jenny rosen","maleny handmade artisan markets","chocolate country","sapling textiles","david linton furniture timber works","fresh chai co","nicky carey art","renee blackwell jewellery design","maleny chocolate co","richard knight woodworks","kenilworth dairies kenilworth country foods","the falls farm","hum honey","pinch and spin pottery fleur colgan","crystal waters sourdough bakery","maleny coffee","red mud coffee roasters","katie white","hive harvest","kim herringe","maleny dairies","mountaintop mushrooms","hinterland bees","sw studio designs susanna weddell","maleny jewellers jim sandra goulton","heather gall fine art","robyn jay","maleny cheese","vanessa ordonez","monita roughsedge","lachie taylor","rebecca ward","leeza stratford","daniel pittman","matt allen","openfields solutions","speed queen winning","brisbane steel","smartwood timber","stratco steel","eprint online","carla furnishers","metal manufacturers","steelmart steel","joseph kirmos","endless parks","magnus murraydouglass","samuel hafer","bionic self storage","carbatec tooling","1300 washer","r m tanner","hinterland aviation","jeremy bigg","telford smith engineering","marty taylor","coastal fasteners","dna steel direct"],"JusticeHub (incl. Contained)":["teya dusseldorp","ardi muckan","katie norman","seana osbourne","pene curtis","yjgrants","amelia clifford","chelsea baker","romina reyftmann","shannon lemanski","william frazer","fiona maxwell","michelle scott","randle walker","adam robinson","sandra phillips","scarlett steven","jonas kubitscheck","maddi alderuccio","fiona scicluna","gm corporate julalikari","coordinator our community shed","anne gripper","jimrebbechi","el schwanke","general paul ramsay foundation","cat sullivan","justin welfare","alan white","isabella stanley","sally grimsleyballard","amp foundation tomorrow makers","michael taylor","ashley machuca","kristen lark","sarah williams","matthew cox","john chambers","sally knox","kim harland","accounts rotary eclub outback australia division 9560","accounts homeland school company","accounts malala health service aboriginal corporation","imb bank community foundation","real innovation fund","social enterprise development initiative","carolyn ludovici","australian communities foundation","uniting church australia frontier services","the trustee for yeperenye charitable trust","developing east arnhem limited","fortescue foundation","georgina byron","mjd foundation limited","anita hopkins","cat vecchio","community resources limited","country connect foundation limited","bhp foundation","qbe foundation","northern australian aboriginal charitable trust","alberto furlan","sarah bartak","garma festival beds showcase","rio tinto foundation","nova peris foundation","maddy howlett","nizam abdu","emily nicholson","jioji ravulo","robyn sloggett","amanda neil","the queensland gives team","jacqueline fearnley","rohan lulham","sonia randhawa","jodie davis","bruce redman","bk","test media user","george newhouse","hannah march","ludmila andrade","tina morris","alice mahar","rachel fyfe","jess lilley","sam davies","carollyn kavanagh","katherine hayes","rhian miller","anita pahor","nicole mekler","toby gowland","lewina schrale","irene portelli","penny lamaro","loic fery","jessica wilson","lucy mcgarry","margot beach","andy beecroft","chair our community shed","shannon cant","genus passi","simon quilty","april long","dr simon quilty","general kowa collaboration","ben croft","millie shearer","hayley passmore","mindy sotiri","walking on country","adeem","general first nations futures","maningrida progress association inc","nina fitzgerald","treasurer our community shed","belyuen community government council","outback stores pty ltd","centre canvas","numbulwar homelands council association inc","judith meiklejohn","julia payne","hewitt agriculture","bondini reserve wa","east arnhem regional council","prince of wales qld","peppan qld","barkly regional council","yardoogarra wa","nillygan wa","victoria daly regional council","roper gulf regional council","badu community qld","torres strait island regional council","macdonnell regional council","tiwi islands regional council","ntaria school council inc","greg marlow","ngalingkadji wa","putaputa sa","welcome station qld","wiluna community wa","puntawari wa","wulununjur wa","oriners qld","west daly regional council","yalata sa","loongabid wa","mingalalka wa","tracey newman","munget wa","alive","youngaleena wa","northern peninsula area regional council","yawuru wa","billard wa","blue mountain qld","central desert regional council","kupungarri wa","yarilena sa","moojeeba qld","bamaga qld","gnylmarung wa","djoodood wa","buttah windee wa","pago wa","ngarantjadu wa","tilun tilun sa","dinah line sa","mindi rardi wa","mulgul station wa","tallowon sa","nygah nygah wa","dowar island qld","goobiny wa","dajarra qld","southwell qld","joes lagoon qld","three mile wa","king george river wa","millargoon wa","pantijan wa","atambaya qld","dauan island qld","fairview station qld","tappers inlet wa","jabir jabir wa","melterr qld","marra worra worra wa","parukupan wa","guda guda wa","jarlmadanka wa","eunnmen qld","wathanhiin qld","chuula qld","ambang qld","walberi qld","nyumwah wa","nyapari sa","jimbalakudunj wa","warralong wa","silver plains qld","ngurtuwarta wa","old rodeo ground qld","cheeditha wa","milingimbi nt","ngukurr nt","gunbalanya nt","jennifer kitching","maningrida nt","lajamanu nt","santa teresa nt","ramingining nt","galiwinku nt","kalkarindji nt","hermannsburg nt","pirlangimpi nt","naomi lai","wurrumiyanga nt","kintore nt","yuendumu nt","ampilatwatja nt","numbulwar nt","wadeye nt","gapuwiyak nt","lingara nt","warruwi nt","umbakumba nt","nganmarriyanga nt","kalka sa","test person","angurugu nt","kaltukatjara nt","barunga nt","beswick nt","yirrkala nt","alpurrurulam nt","langi qld","nauiyu nt","papunya nt","milikapiti nt","craig swann","forum for social innovation sweden","mud jeans","bridging the gap africa","design hub kampala","coompanion sweden","fairphone","fashion for good","yalla trappan","fablab winam","brightlands chemelot campus","truth and reconciliation archive","world voices uganda"],"Studio (Innovation + Regen — the earner)":["randle walker","amy elson","lewina schrale","imb bank community foundation","hewitt agriculture","real innovation fund","social enterprise development initiative","alive","george newhouse","lucy stronach","teya dusseldorp","victoria palmer","anika baset","joel bird","katie norman","monita roughsedge","lachie taylor","rebecca ward","melissa douglas","leeza stratford","jacqui","dayle","hannelle adams","pauline cowham","sue mcgary","sue moxon","serge","michelle moore","shannon yeardley","george soady","simone phillips","sarah stirling","arcadia love","kay ridge","julia parker","julie shelton","natalie","sya wiersma","kate kowald","bernadette","richard graveur","jill fowles","helen baker","misha","cat harding","ketakii jewson brown","tash","fran","kate nottingham","susyn young","bambi hodgkins","stephen alexander","joedi pepper","pepa demasson","rachel fyfe","sam davies","seana osbourne","william frazer","shaun christiedavid","jan owen","amelia clifford","thais pupio","","cassandra edwards","maree","jeff bonnick","catherine","robyn","kim","sarah","cathy","zac","jo","frances","vanessa","shell","marie","jay boolkin","lydia garrett","rhianna king","seide ramadani","jessica wilson","nicole dyson","bek","scarlett steven","lucy mcgarry","margot beach","andy beecroft","chair our community shed","ben stammer","leigh brezler","deborah hartman","our shed secretary","maddi alderuccio","fiona scicluna","gm corporate julalikari","simon quilty","coordinator our community shed","april long","dr simon quilty","general kowa collaboration","simon goodrich","collis taeed","rebecca kennedy","stuart nielsen","kieran satour","alli edwards","sharon wunungmurra","jimrebbechi","el schwanke","general paul ramsay foundation","cat sullivan","daniel pittman","justin welfare","walking on country","alan white","adeem","isabella stanley","nicky relove","shannon keed","general first nations futures","michelle luff","aurizon community","sefa","nici long","annie taylor","mandrillapp organization","alice motion","talia liddle","amp foundation tomorrow makers","michael taylor","ben johnston","tamsin jones","jordy burrows","kathymcconnell","danny almagor","taylor boyley","nina fitzgerald","ebony abbottmccormack","deputy ceo urapuntja","norcoast","max archibald","faith makwanya","reception urapuntja","ceo julalikari","marketing melbourne fringe","kristen lark","environment","mattdavies","treasurer our community shed","sarah williams","annabelle macansh","matthew cox","corey tutt","cory tutt","the harvest witta","fiona maxwell","jodie davis","sonia randhawa","maree meredith","susan clear","willhemina wahlin","camilledobson","ashley machuca","john chambers","sally knox","kim harland","matt allen","judith meiklejohn","marty taylor","narelle anderson","bridgit mcmullen","naomi lai","bruce redman","bk","test media user"],"The Harvest":["maningrida progress association inc","outback stores pty ltd","maleny food co","jenny rosen","maleny handmade artisan markets","chocolate country","sapling textiles","david linton furniture timber works","fresh chai co","nicky carey art","renee blackwell jewellery design","maleny chocolate co","richard knight woodworks","kenilworth dairies kenilworth country foods","the falls farm","hum honey","pinch and spin pottery fleur colgan","crystal waters sourdough bakery","maleny coffee","red mud coffee roasters","katie white","hive harvest","kim herringe","maleny dairies","mountaintop mushrooms","hinterland bees","sw studio designs susanna weddell","maleny jewellers jim sandra goulton","heather gall fine art","robyn jay","maleny cheese","george newhouse","lucy stronach","teya dusseldorp","tina morris","monita roughsedge","lachie taylor","rebecca ward","melissa douglas","leeza stratford","jacqui","dayle","hannelle adams","pauline cowham","sue mcgary","sue moxon","serge","michelle moore","shannon yeardley","george soady","simone phillips","sarah stirling","arcadia love","kay ridge","julia parker","julie shelton","natalie","sya wiersma","kate kowald","bernadette","richard graveur","jill fowles","helen baker","misha","cat harding","ketakii jewson brown","tash","fran","kate nottingham","susyn young","bambi hodgkins","stephen alexander","joedi pepper","pepa demasson","tilly millican","amelia clifford","cassandra edwards","maree","jeff bonnick","catherine","robyn","kim","sarah","cathy","zac","jo","frances","vanessa","shell","marie","victoria palmer","anika baset","joel bird","jay boolkin","hannah march","ludmila andrade","katie norman","","bek","rachel fyfe","sam davies","seana osbourne","pene curtis","carollyn kavanagh","william frazer","shaun christiedavid","jan owen","thais pupio","nicole mekler","chelsea baker","rohan lulham","fiona maxwell","lydia garrett","amy elson","rhianna king","seide ramadani","randle walker","jessica wilson","adam robinson","nicole dyson","alice mahar","scarlett steven","lucy mcgarry","margot beach","andy beecroft","jonas kubitscheck","chair our community shed","ben stammer","leigh brezler","deborah hartman","our shed secretary","jess lilley","shannon cant","genus passi","maddi alderuccio","fiona scicluna","gm corporate julalikari","simon quilty","coordinator our community shed","april long","dr simon quilty","general kowa collaboration","simon goodrich","collis taeed","rebecca kennedy","stuart nielsen","kieran satour","alli edwards","ben croft","sonia randhawa","sharon wunungmurra","millie shearer","katherine hayes","rhian miller","anita pahor","maree meredith","susan clear","willhemina wahlin","camilledobson","hayley passmore","mindy sotiri","jimrebbechi","el schwanke","general paul ramsay foundation","cat sullivan","daniel pittman","justin welfare","walking on country","toby gowland","adeem","nicky relove","romina reyftmann","shannon keed","general first nations futures","michelle luff","aurizon community","sefa","nici long","annie taylor","mandrillapp organization","alice motion","sally grimsleyballard","talia liddle","ben johnston","tamsin jones","jordy burrows","kathymcconnell","ashley machuca","danny almagor","taylor boyley","lewina schrale","nina fitzgerald","ebony abbottmccormack","deputy ceo urapuntja","norcoast","max archibald","shannon lemanski","faith makwanya","reception urapuntja","ceo julalikari","marketing melbourne fringe","environment","mattdavies","treasurer our community shed","annabelle macansh","belyuen community government council","john chambers","sally knox","centre canvas","kim harland","matt allen","irene portelli","numbulwar homelands council association inc","accounts rotary eclub outback australia division 9560","accounts homeland school company","judith meiklejohn","accounts malala health service aboriginal corporation","julia payne","penny lamaro","loic fery","hewitt agriculture","bondini reserve wa","east arnhem regional council","prince of wales qld","peppan qld","barkly regional council","yardoogarra wa","nillygan wa","victoria daly regional council","roper gulf regional council","badu community qld","torres strait island regional council","macdonnell regional council","tiwi islands regional council","ntaria school council inc","greg marlow","ngalingkadji wa","putaputa sa","welcome station qld","wiluna community wa","puntawari wa","wulununjur wa","oriners qld","west daly regional council","yalata sa","loongabid wa","mingalalka wa","tracey newman","munget wa","alive","youngaleena wa","northern peninsula area regional council","yawuru wa","billard wa","blue mountain qld","central desert regional council","kupungarri wa","yarilena sa","moojeeba qld","bamaga qld","gnylmarung wa","djoodood wa","buttah windee wa","pago wa","ngarantjadu wa","tilun tilun sa","dinah line sa","mindi rardi wa","mulgul station wa","tallowon sa","nygah nygah wa","dowar island qld","goobiny wa","dajarra qld","southwell qld","joes lagoon qld","three mile wa","king george river wa","millargoon wa","pantijan wa","atambaya qld","dauan island qld","fairview station qld","tappers inlet wa","jabir jabir wa","melterr qld","marra worra worra wa","parukupan wa","guda guda wa","jarlmadanka wa","eunnmen qld","wathanhiin qld","chuula qld","ambang qld","walberi qld","nyumwah wa","nyapari sa","jimbalakudunj wa","warralong wa","silver plains qld","ngurtuwarta wa","old rodeo ground qld","cheeditha wa","milingimbi nt","ngukurr nt","gunbalanya nt","jennifer kitching","maningrida nt","lajamanu nt","santa teresa nt","marty taylor","ramingining nt","galiwinku nt","kalkarindji nt","hermannsburg nt","narelle anderson","bridgit mcmullen","pirlangimpi nt","naomi lai","wurrumiyanga nt","kintore nt","yuendumu nt","ampilatwatja nt","numbulwar nt","wadeye nt","gapuwiyak nt","lingara nt","warruwi nt","umbakumba nt","nganmarriyanga nt","kalka sa","test person","angurugu nt","kaltukatjara nt","barunga nt","beswick nt","yirrkala nt","alpurrurulam nt","langi qld","nauiyu nt","papunya nt","milikapiti nt","maddy howlett","craig swann","forum for social innovation sweden","mud jeans","bridging the gap africa","design hub kampala","coompanion sweden","fairphone","fashion for good","yalla trappan","fablab winam","brightlands chemelot campus","truth and reconciliation archive","world voices uganda"]},"stats":{"drawn":63,"unreadSignal":175,"quiet":1608,"overdue":10,"due":16,"alliance":0,"storytellers":287,"namedStory":197,"tx":585,"live":191,"owed":358,"consent":127},"edges":[{"a":"melissa delaney","b":"esther gyorki","n":52},{"a":"daniel daylight","b":"nicole mekler","n":39},{"a":"carollyn kavanagh","b":"melissa delaney","n":30},{"a":"margot beach","b":"teya dusseldorp","n":24},{"a":"daniel daylight","b":"teya dusseldorp","n":23},{"a":"nicole mekler","b":"teya dusseldorp","n":23},{"a":"daniel daylight","b":"margot beach","n":22},{"a":"erin jackson","b":"sal biggins","n":21},{"a":"margot beach","b":"nicole mekler","n":21},{"a":"maree meredith","b":"sally grimsleyballard","n":12},{"a":"carollyn kavanagh","b":"esther gyorki","n":6},{"a":"cathy butterss","b":"victoria palmer","n":5},{"a":"chelsea baker","b":"seana osbourne","n":4},{"a":"esther gyorki","b":"melissa delaney","n":3},{"a":"sally grimsleyballard","b":"sam davies","n":3},{"a":"margot beach","b":"rachel fyfe","n":2},{"a":"rachel fyfe","b":"teya dusseldorp","n":2},{"a":"chelsea baker","b":"seana osbourne","n":2}]};
-const svg=document.getElementById('svg'),NS='http://www.w3.org/2000/svg',tip=document.getElementById('tip');
-const cx=330,cy=368;
-const bands={'5':74,'15':140,'50':215,'150':295};
-const CAD={overdue:'#ff5d5d',due:'#ffb84a',ok:'#3ddc97',unknown:'#5b6b80'};
-function el(t,a){const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);return e;}
-function norm(s){return (s||'').toLowerCase().replace(/[^a-z0-9 ]/g,'').replace(/\s+/g,' ').trim();}
-for(const b of ['150','50','15','5']){svg.appendChild(el('circle',{cx,cy,r:bands[b],fill:'none',stroke:'#1c2535','stroke-width':1}));
-  const t=el('text',{x:cx,y:cy-bands[b]+12,fill:'#3d4c61','text-anchor':'middle','font-size':9});t.textContent=b;svg.appendChild(t);}
-svg.appendChild(el('circle',{cx,cy,r:26,fill:'#161d2b',stroke:'#2b3a52','stroke-width':1.5}));
-const c0=el('text',{x:cx,y:cy+4,fill:'#cfe0f5','text-anchor':'middle','font-size':12,'font-weight':700});c0.textContent='you';svg.appendChild(c0);
-svg.appendChild(el('line',{x1:672,y1:40,x2:672,y2:680,stroke:'#3a4658','stroke-dasharray':'4 6','stroke-width':1}));
-const edgeLayer=el('g',{});svg.appendChild(edgeLayer);
-const byBand={'5':[],'15':[],'50':[],'150':[]};D.supporters.forEach(s=>byBand[s.layer]&&byBand[s.layer].push(s));
-const supNodes=[];
-for(const b of ['5','15','50','150']){const arr=byBand[b],n=arr.length;arr.forEach((s,i)=>{
-  const ang=Math.PI*0.55 + (Math.PI*1.9)*(n<=1?0.5:i/n);
-  const x=cx+Math.cos(ang)*bands[b], y=cy+Math.sin(ang)*bands[b];
-  const cadCol=CAD[(s.cad&&s.cad.state)||'unknown'];
-  const inner=b==='5';
-  const node=el('circle',{cx:x,cy:y,r:inner?7:5,fill:inner?'#ffd24a':cadCol,stroke:inner?'#fff':cadCol,'stroke-width':inner?1.8:0,class:'node'});
-  if(inner&&s.cad&&s.cad.state!=='ok'){node.setAttribute('stroke',CAD[s.cad.state]);node.setAttribute('stroke-width',2.4);}
-  node._d=s;node._key=norm(s.name);
-  const lab=el('text',{x:x+(Math.cos(ang)>=0?9:-9),y:y+4,'text-anchor':Math.cos(ang)>=0?'start':'end','font-size':inner?12:(b==='15'?11:9),'font-weight':inner?700:(b==='15'?600:400),class:'nlabel'});
-  lab.textContent=s.name.length>22?s.name.slice(0,21)+'…':s.name;
-  if(!inner)lab.setAttribute('fill',s.cad&&s.cad.state==='overdue'?'#ff8a8a':'#cdd9e5');
-  lab._d=s;lab._key=node._key;
-  svg.appendChild(node);svg.appendChild(lab);supNodes.push(node,lab);
-});}
-const ccx=842,ccy=350,comNodes=[];
-D.community.forEach((s,i)=>{
-  const named=i<12;
-  const ang=i*2.399963, rr=named?(26+i*16):(26+12*16+Math.sqrt(i-11)*16);
-  const x=ccx+Math.cos(ang)*rr*0.95, y=ccy+Math.sin(ang)*rr*0.88;
-  const rad=named?(5+Math.min(8,s.tx*0.6)):3;
-  const g=el('g',{});
-  if(s.owes>0)g.appendChild(el('circle',{cx:x,cy:y,r:rad+2.2,fill:'none',stroke:'#ff5d5d','stroke-width':1.3,opacity:.85}));
-  const node=el('circle',{cx:x,cy:y,r:rad,fill:'#ffd24a',opacity:named?.95:.55,class:'node'});
-  node._c=s;g.appendChild(node);
-  if(named){const lab=el('text',{x:x+(Math.cos(ang)>=0?rad+4:-rad-4),y:y+4,'text-anchor':Math.cos(ang)>=0?'start':'end','font-size':10,fill:'#e8d9a8',class:'nlabel'});
-    lab.textContent=(s.name.length>20?s.name.slice(0,19)+'…':s.name)+' · '+s.owes;lab._c=s;g.appendChild(lab);comNodes.push(lab);}
-  svg.appendChild(g);comNodes.push(node);
-});
-const clab=el('text',{x:ccx,y:84,fill:'#9aa7b8','text-anchor':'middle','font-size':12,'font-weight':600});clab.textContent='OWED — the constellation';svg.appendChild(clab);
-const clab2=el('text',{x:ccx,y:100,fill:'#6b7a8d','text-anchor':'middle','font-size':10});clab2.textContent='name · stories owed — '+D.stats.namedStory+' storytellers, '+D.stats.owed+' owed total';svg.appendChild(clab2);
-const olab=el('text',{x:330,y:84,fill:'#9aa7b8','text-anchor':'middle','font-size':12,'font-weight':600});olab.textContent='YOUR RINGS — '+D.stats.drawn+' people you’ve read';svg.appendChild(olab);
-chip.innerHTML='<b style="color:#e6edf3">'+D.stats.unreadSignal+'</b> people with real signal you haven’t read · <a href="/field/triage">open triage →</a><br><span>'+D.stats.quiet+' quiet (newsletter-only) behind them</span>';
-const pos={};supNodes.forEach(n=>{if(n.tagName==='circle')pos[n._key]={x:+n.getAttribute('cx'),y:+n.getAttribute('cy')}});
-let edgesOn=false;const edgeLines=[];
-function buildEdges(){(D.edges||[]).forEach(eg=>{const a=pos[eg.a],b=pos[eg.b];if(!a||!b)return;
-  const l=el('line',{x1:a.x,y1:a.y,x2:b.x,y2:b.y,class:'edge','stroke-width':Math.min(2,0.6+eg.n*0.04)});
-  l.style.opacity=Math.min(.35,.08+eg.n*.012);edgeLayer.appendChild(l);edgeLines.push(l);});}
-tgEdges.onclick=()=>{edgesOn=!edgesOn;if(edgesOn&&!edgeLines.length)buildEdges();edgeLines.forEach(l=>l.style.display=edgesOn?'':'none');tgEdges.textContent=edgesOn?'hide email threads':'show email threads';};
-function show(html,e){tip.innerHTML=html;tip.style.opacity=1;tip.style.left=(e.clientX+14)+'px';tip.style.top=(e.clientY+14)+'px';}
-function hide(){tip.style.opacity=0;}
-supNodes.forEach(n=>{
-  n.onmousemove=e=>{const s=n._d;show('<b>'+s.name+'</b>'+(s.read?'<br><span style="color:#3ddc97">“'+s.read+'”</span>':'')+(s.cad?'<br>'+(s.cad.days!=null?s.cad.days+'d since contact · rhythm '+s.cad.expected+'d':'no contact date'):'')+(s.roles?'<br><span class=muted>'+s.roles+'</span>':'')+'<br><span class=muted>click → their page</span>',e);};
-  n.onmouseleave=hide;
-  n.onclick=()=>window.open('people/'+n._d.slug+'.md','_blank');
-});
-comNodes.forEach(n=>{
-  n.onmousemove=e=>{const s=n._c;show('<b>'+s.name+'</b><br>'+s.tx+' transcripts · '+s.live+' live · <span style="color:#ff5d5d">'+s.owes+' owed</span>'+(s.consent?'<br><span class=muted>'+s.consent+' consent conversations owed</span>':'')+'<br><span class=muted>click → their page</span>',e);};
-  n.onmouseleave=hide;
-  n.onclick=()=>window.open('people/'+n._c.slug+'.md','_blank');
-});
-k1.textContent=D.stats.overdue;k2.textContent=D.stats.due;k3.textContent=D.stats.drawn;k4.textContent=D.stats.owed;
-says.innerHTML='<b style="color:#ff5d5d">'+D.stats.overdue+' of your '+D.stats.drawn+'</b> are past the rhythm their ring implies — those are today’s calls. '+D.stats.due+' more coming due. The constellation holds <b>'+D.stats.owed+'</b> stories not yet brought to life.';
-const sel=document.getElementById('proj');Object.keys(D.projects).forEach(p=>{const o=document.createElement('option');o.value=p;o.textContent=p;sel.appendChild(o);});
-sel.onchange=()=>{const set=sel.value?new Set(D.projects[sel.value]):null;supNodes.forEach(n=>n.classList.toggle('dim',!!set&&!set.has(n._key)));};
+const PROJ={"CivicGraph (deferred spinout)":["lucy stronach","teya dusseldorp","ardi muckan","katie norman","seana osbourne","pene curtis","yjgrants","amelia clifford","chelsea baker","william frazer","fiona maxwell","michelle scott","randle walker","adam robinson","sandra phillips","scarlett steven","jonas kubitscheck","maddi alderuccio","fiona scicluna","gm corporate julalikari","coordinator our community shed","anne gripper","jimrebbechi","el schwanke","general paul ramsay foundation","cat sullivan","justin welfare","alan white","isabella stanley","romina reyftmann","sally grimsleyballard","amp foundation tomorrow makers","michael taylor","ashley machuca","shannon lemanski","kristen lark","sarah williams","matthew cox","john chambers","sally knox","kim harland","accounts rotary eclub outback australia division 9560","accounts homeland school company","accounts malala health service aboriginal corporation","imb bank community foundation","real innovation fund","social enterprise development initiative","carolyn ludovici","australian communities foundation","uniting church australia frontier services","the trustee for yeperenye charitable trust","developing east arnhem limited","fortescue foundation","georgina byron","mjd foundation limited","anita hopkins","cat vecchio","community resources limited","country connect foundation limited","bhp foundation","qbe foundation","northern australian aboriginal charitable trust","alberto furlan","sarah bartak","garma festival beds showcase","rio tinto foundation","nova peris foundation","maddy howlett","nizam abdu","emily nicholson","jioji ravulo","robyn sloggett","amanda neil","the queensland gives team","jacqueline fearnley","amy elson","lewina schrale","belyuen community government council","numbulwar homelands council association inc","hewitt agriculture","east arnhem regional council","barkly regional council","victoria daly regional council","roper gulf regional council","torres strait island regional council","macdonnell regional council","tiwi islands regional council","ntaria school council inc","west daly regional council","alive","northern peninsula area regional council","central desert regional council","george newhouse","rohan lulham","walking on country","adeem","judith meiklejohn","naomi lai"],"Goods on Country":["teya dusseldorp","lucy stronach","katie norman","seana osbourne","pene curtis","ardi muckan","fiona maxwell","randle walker","adam robinson","scarlett steven","jonas kubitscheck","maddi alderuccio","fiona scicluna","gm corporate julalikari","coordinator our community shed","anne gripper","yjgrants","jimrebbechi","el schwanke","general paul ramsay foundation","cat sullivan","justin welfare","amelia clifford","alan white","isabella stanley","chelsea baker","sally grimsleyballard","amp foundation tomorrow makers","michael taylor","ashley machuca","kristen lark","sarah williams","matthew cox","william frazer","carolyn ludovici","michelle scott","sandra phillips","romina reyftmann","shannon lemanski","john chambers","sally knox","kim harland","accounts rotary eclub outback australia division 9560","accounts homeland school company","accounts malala health service aboriginal corporation","imb bank community foundation","real innovation fund","social enterprise development initiative","australian communities foundation","uniting church australia frontier services","the trustee for yeperenye charitable trust","developing east arnhem limited","fortescue foundation","georgina byron","mjd foundation limited","anita hopkins","cat vecchio","community resources limited","country connect foundation limited","bhp foundation","qbe foundation","northern australian aboriginal charitable trust","alberto furlan","sarah bartak","garma festival beds showcase","rio tinto foundation","nova peris foundation","maddy howlett","nizam abdu","emily nicholson","jioji ravulo","robyn sloggett","amanda neil","the queensland gives team","jacqueline fearnley","george newhouse","tina morris","rachel fyfe","sam davies","hannah march","ludmila andrade","jessica wilson","lucy mcgarry","margot beach","andy beecroft","chair our community shed","simon quilty","carollyn kavanagh","april long","dr simon quilty","general kowa collaboration","ben croft","nicole mekler","general first nations futures","maningrida progress association inc","nina fitzgerald","treasurer our community shed","outback stores pty ltd","centre canvas","julia payne","greg marlow","rohan lulham","alice mahar","jess lilley","shannon cant","genus passi","sonia randhawa","millie shearer","katherine hayes","rhian miller","anita pahor","hayley passmore","mindy sotiri","toby gowland","lewina schrale","belyuen community government council","irene portelli","numbulwar homelands council association inc","penny lamaro","loic fery","hewitt agriculture","bondini reserve wa","east arnhem regional council","prince of wales qld","peppan qld","barkly regional council","yardoogarra wa","nillygan wa","victoria daly regional council","roper gulf regional council","badu community qld","torres strait island regional council","macdonnell regional council","tiwi islands regional council","ntaria school council inc","ngalingkadji wa","putaputa sa","welcome station qld","wiluna community wa","puntawari wa","wulununjur wa","oriners qld","west daly regional council","yalata sa","loongabid wa","mingalalka wa","tracey newman","munget wa","alive","youngaleena wa","northern peninsula area regional council","yawuru wa","billard wa","blue mountain qld","central desert regional council","kupungarri wa","yarilena sa","moojeeba qld","bamaga qld","gnylmarung wa","djoodood wa","buttah windee wa","pago wa","ngarantjadu wa","tilun tilun sa","dinah line sa","mindi rardi wa","mulgul station wa","tallowon sa","nygah nygah wa","dowar island qld","goobiny wa","dajarra qld","southwell qld","joes lagoon qld","three mile wa","king george river wa","millargoon wa","pantijan wa","atambaya qld","dauan island qld","fairview station qld","tappers inlet wa","jabir jabir wa","melterr qld","marra worra worra wa","parukupan wa","guda guda wa","jarlmadanka wa","eunnmen qld","wathanhiin qld","chuula qld","ambang qld","walberi qld","nyumwah wa","nyapari sa","jimbalakudunj wa","warralong wa","silver plains qld","ngurtuwarta wa","old rodeo ground qld","cheeditha wa","milingimbi nt","ngukurr nt","gunbalanya nt","jennifer kitching","maningrida nt","lajamanu nt","santa teresa nt","ramingining nt","galiwinku nt","kalkarindji nt","hermannsburg nt","pirlangimpi nt","naomi lai","wurrumiyanga nt","kintore nt","yuendumu nt","ampilatwatja nt","numbulwar nt","wadeye nt","gapuwiyak nt","lingara nt","warruwi nt","umbakumba nt","nganmarriyanga nt","kalka sa","test person","angurugu nt","kaltukatjara nt","barunga nt","beswick nt","yirrkala nt","alpurrurulam nt","langi qld","nauiyu nt","papunya nt","milikapiti nt","craig swann","forum for social innovation sweden","mud jeans","bridging the gap africa","design hub kampala","coompanion sweden","fairphone","fashion for good","yalla trappan","fablab winam","brightlands chemelot campus","truth and reconciliation archive","world voices uganda","maleny food co","jenny rosen","maleny handmade artisan markets","chocolate country","sapling textiles","david linton furniture timber works","fresh chai co","nicky carey art","renee blackwell jewellery design","maleny chocolate co","richard knight woodworks","kenilworth dairies kenilworth country foods","the falls farm","hum honey","pinch and spin pottery fleur colgan","crystal waters sourdough bakery","maleny coffee","red mud coffee roasters","katie white","hive harvest","kim herringe","maleny dairies","mountaintop mushrooms","hinterland bees","sw studio designs susanna weddell","maleny jewellers jim sandra goulton","heather gall fine art","robyn jay","maleny cheese","vanessa ordonez","monita roughsedge","lachie taylor","rebecca ward","leeza stratford","daniel pittman","matt allen","openfields solutions","speed queen winning","brisbane steel","smartwood timber","stratco steel","eprint online","carla furnishers","metal manufacturers","steelmart steel","joseph kirmos","endless parks","magnus murraydouglass","samuel hafer","bionic self storage","carbatec tooling","1300 washer","r m tanner","hinterland aviation","jeremy bigg","telford smith engineering","marty taylor","coastal fasteners","dna steel direct"],"JusticeHub (incl. Contained)":["teya dusseldorp","ardi muckan","katie norman","seana osbourne","pene curtis","yjgrants","amelia clifford","chelsea baker","romina reyftmann","shannon lemanski","william frazer","fiona maxwell","michelle scott","randle walker","adam robinson","sandra phillips","scarlett steven","jonas kubitscheck","maddi alderuccio","fiona scicluna","gm corporate julalikari","coordinator our community shed","anne gripper","jimrebbechi","el schwanke","general paul ramsay foundation","cat sullivan","justin welfare","alan white","isabella stanley","sally grimsleyballard","amp foundation tomorrow makers","michael taylor","ashley machuca","kristen lark","sarah williams","matthew cox","john chambers","sally knox","kim harland","accounts rotary eclub outback australia division 9560","accounts homeland school company","accounts malala health service aboriginal corporation","imb bank community foundation","real innovation fund","social enterprise development initiative","carolyn ludovici","australian communities foundation","uniting church australia frontier services","the trustee for yeperenye charitable trust","developing east arnhem limited","fortescue foundation","georgina byron","mjd foundation limited","anita hopkins","cat vecchio","community resources limited","country connect foundation limited","bhp foundation","qbe foundation","northern australian aboriginal charitable trust","alberto furlan","sarah bartak","garma festival beds showcase","rio tinto foundation","nova peris foundation","maddy howlett","nizam abdu","emily nicholson","jioji ravulo","robyn sloggett","amanda neil","the queensland gives team","jacqueline fearnley","rohan lulham","sonia randhawa","jodie davis","bruce redman","bk","test media user","george newhouse","hannah march","ludmila andrade","tina morris","alice mahar","rachel fyfe","jess lilley","sam davies","carollyn kavanagh","katherine hayes","rhian miller","anita pahor","nicole mekler","toby gowland","lewina schrale","irene portelli","penny lamaro","loic fery","jessica wilson","lucy mcgarry","margot beach","andy beecroft","chair our community shed","shannon cant","genus passi","simon quilty","april long","dr simon quilty","general kowa collaboration","ben croft","millie shearer","hayley passmore","mindy sotiri","walking on country","adeem","general first nations futures","maningrida progress association inc","nina fitzgerald","treasurer our community shed","belyuen community government council","outback stores pty ltd","centre canvas","numbulwar homelands council association inc","judith meiklejohn","julia payne","hewitt agriculture","bondini reserve wa","east arnhem regional council","prince of wales qld","peppan qld","barkly regional council","yardoogarra wa","nillygan wa","victoria daly regional council","roper gulf regional council","badu community qld","torres strait island regional council","macdonnell regional council","tiwi islands regional council","ntaria school council inc","greg marlow","ngalingkadji wa","putaputa sa","welcome station qld","wiluna community wa","puntawari wa","wulununjur wa","oriners qld","west daly regional council","yalata sa","loongabid wa","mingalalka wa","tracey newman","munget wa","alive","youngaleena wa","northern peninsula area regional council","yawuru wa","billard wa","blue mountain qld","central desert regional council","kupungarri wa","yarilena sa","moojeeba qld","bamaga qld","gnylmarung wa","djoodood wa","buttah windee wa","pago wa","ngarantjadu wa","tilun tilun sa","dinah line sa","mindi rardi wa","mulgul station wa","tallowon sa","nygah nygah wa","dowar island qld","goobiny wa","dajarra qld","southwell qld","joes lagoon qld","three mile wa","king george river wa","millargoon wa","pantijan wa","atambaya qld","dauan island qld","fairview station qld","tappers inlet wa","jabir jabir wa","melterr qld","marra worra worra wa","parukupan wa","guda guda wa","jarlmadanka wa","eunnmen qld","wathanhiin qld","chuula qld","ambang qld","walberi qld","nyumwah wa","nyapari sa","jimbalakudunj wa","warralong wa","silver plains qld","ngurtuwarta wa","old rodeo ground qld","cheeditha wa","milingimbi nt","ngukurr nt","gunbalanya nt","jennifer kitching","maningrida nt","lajamanu nt","santa teresa nt","ramingining nt","galiwinku nt","kalkarindji nt","hermannsburg nt","pirlangimpi nt","naomi lai","wurrumiyanga nt","kintore nt","yuendumu nt","ampilatwatja nt","numbulwar nt","wadeye nt","gapuwiyak nt","lingara nt","warruwi nt","umbakumba nt","nganmarriyanga nt","kalka sa","test person","angurugu nt","kaltukatjara nt","barunga nt","beswick nt","yirrkala nt","alpurrurulam nt","langi qld","nauiyu nt","papunya nt","milikapiti nt","craig swann","forum for social innovation sweden","mud jeans","bridging the gap africa","design hub kampala","coompanion sweden","fairphone","fashion for good","yalla trappan","fablab winam","brightlands chemelot campus","truth and reconciliation archive","world voices uganda"],"Studio (Innovation + Regen — the earner)":["randle walker","amy elson","lewina schrale","imb bank community foundation","hewitt agriculture","real innovation fund","social enterprise development initiative","alive","george newhouse","lucy stronach","teya dusseldorp","victoria palmer","anika baset","joel bird","katie norman","monita roughsedge","lachie taylor","rebecca ward","melissa douglas","leeza stratford","jacqui","dayle","hannelle adams","pauline cowham","sue mcgary","sue moxon","serge","michelle moore","shannon yeardley","george soady","simone phillips","sarah stirling","arcadia love","kay ridge","julia parker","julie shelton","natalie","sya wiersma","kate kowald","bernadette","richard graveur","jill fowles","helen baker","misha","cat harding","ketakii jewson brown","tash","fran","kate nottingham","susyn young","bambi hodgkins","stephen alexander","joedi pepper","pepa demasson","rachel fyfe","sam davies","seana osbourne","william frazer","shaun christiedavid","jan owen","amelia clifford","thais pupio","","cassandra edwards","maree","jeff bonnick","catherine","robyn","kim","sarah","cathy","zac","jo","frances","vanessa","shell","marie","jay boolkin","lydia garrett","rhianna king","seide ramadani","jessica wilson","nicole dyson","bek","scarlett steven","lucy mcgarry","margot beach","andy beecroft","chair our community shed","ben stammer","leigh brezler","deborah hartman","our shed secretary","maddi alderuccio","fiona scicluna","gm corporate julalikari","simon quilty","coordinator our community shed","april long","dr simon quilty","general kowa collaboration","simon goodrich","collis taeed","rebecca kennedy","stuart nielsen","kieran satour","alli edwards","sharon wunungmurra","jimrebbechi","el schwanke","general paul ramsay foundation","cat sullivan","daniel pittman","justin welfare","walking on country","alan white","adeem","isabella stanley","nicky relove","shannon keed","general first nations futures","michelle luff","aurizon community","sefa","nici long","annie taylor","mandrillapp organization","alice motion","talia liddle","amp foundation tomorrow makers","michael taylor","ben johnston","tamsin jones","jordy burrows","kathymcconnell","danny almagor","taylor boyley","nina fitzgerald","ebony abbottmccormack","deputy ceo urapuntja","norcoast","max archibald","faith makwanya","reception urapuntja","ceo julalikari","marketing melbourne fringe","kristen lark","environment","mattdavies","treasurer our community shed","sarah williams","annabelle macansh","matthew cox","corey tutt","cory tutt","the harvest witta","fiona maxwell","jodie davis","sonia randhawa","maree meredith","susan clear","willhemina wahlin","camilledobson","ashley machuca","john chambers","sally knox","kim harland","matt allen","judith meiklejohn","marty taylor","narelle anderson","bridgit mcmullen","naomi lai","bruce redman","bk","test media user"],"The Harvest":["maningrida progress association inc","outback stores pty ltd","maleny food co","jenny rosen","maleny handmade artisan markets","chocolate country","sapling textiles","david linton furniture timber works","fresh chai co","nicky carey art","renee blackwell jewellery design","maleny chocolate co","richard knight woodworks","kenilworth dairies kenilworth country foods","the falls farm","hum honey","pinch and spin pottery fleur colgan","crystal waters sourdough bakery","maleny coffee","red mud coffee roasters","katie white","hive harvest","kim herringe","maleny dairies","mountaintop mushrooms","hinterland bees","sw studio designs susanna weddell","maleny jewellers jim sandra goulton","heather gall fine art","robyn jay","maleny cheese","george newhouse","lucy stronach","teya dusseldorp","tina morris","monita roughsedge","lachie taylor","rebecca ward","melissa douglas","leeza stratford","jacqui","dayle","hannelle adams","pauline cowham","sue mcgary","sue moxon","serge","michelle moore","shannon yeardley","george soady","simone phillips","sarah stirling","arcadia love","kay ridge","julia parker","julie shelton","natalie","sya wiersma","kate kowald","bernadette","richard graveur","jill fowles","helen baker","misha","cat harding","ketakii jewson brown","tash","fran","kate nottingham","susyn young","bambi hodgkins","stephen alexander","joedi pepper","pepa demasson","tilly millican","amelia clifford","cassandra edwards","maree","jeff bonnick","catherine","robyn","kim","sarah","cathy","zac","jo","frances","vanessa","shell","marie","victoria palmer","anika baset","joel bird","jay boolkin","hannah march","ludmila andrade","katie norman","","bek","rachel fyfe","sam davies","seana osbourne","pene curtis","carollyn kavanagh","william frazer","shaun christiedavid","jan owen","thais pupio","nicole mekler","chelsea baker","rohan lulham","fiona maxwell","lydia garrett","amy elson","rhianna king","seide ramadani","randle walker","jessica wilson","adam robinson","nicole dyson","alice mahar","scarlett steven","lucy mcgarry","margot beach","andy beecroft","jonas kubitscheck","chair our community shed","ben stammer","leigh brezler","deborah hartman","our shed secretary","jess lilley","shannon cant","genus passi","maddi alderuccio","fiona scicluna","gm corporate julalikari","simon quilty","coordinator our community shed","april long","dr simon quilty","general kowa collaboration","simon goodrich","collis taeed","rebecca kennedy","stuart nielsen","kieran satour","alli edwards","ben croft","sonia randhawa","sharon wunungmurra","millie shearer","katherine hayes","rhian miller","anita pahor","maree meredith","susan clear","willhemina wahlin","camilledobson","hayley passmore","mindy sotiri","jimrebbechi","el schwanke","general paul ramsay foundation","cat sullivan","daniel pittman","justin welfare","walking on country","toby gowland","adeem","nicky relove","romina reyftmann","shannon keed","general first nations futures","michelle luff","aurizon community","sefa","nici long","annie taylor","mandrillapp organization","alice motion","sally grimsleyballard","talia liddle","ben johnston","tamsin jones","jordy burrows","kathymcconnell","ashley machuca","danny almagor","taylor boyley","lewina schrale","nina fitzgerald","ebony abbottmccormack","deputy ceo urapuntja","norcoast","max archibald","shannon lemanski","faith makwanya","reception urapuntja","ceo julalikari","marketing melbourne fringe","environment","mattdavies","treasurer our community shed","annabelle macansh","belyuen community government council","john chambers","sally knox","centre canvas","kim harland","matt allen","irene portelli","numbulwar homelands council association inc","accounts rotary eclub outback australia division 9560","accounts homeland school company","judith meiklejohn","accounts malala health service aboriginal corporation","julia payne","penny lamaro","loic fery","hewitt agriculture","bondini reserve wa","east arnhem regional council","prince of wales qld","peppan qld","barkly regional council","yardoogarra wa","nillygan wa","victoria daly regional council","roper gulf regional council","badu community qld","torres strait island regional council","macdonnell regional council","tiwi islands regional council","ntaria school council inc","greg marlow","ngalingkadji wa","putaputa sa","welcome station qld","wiluna community wa","puntawari wa","wulununjur wa","oriners qld","west daly regional council","yalata sa","loongabid wa","mingalalka wa","tracey newman","munget wa","alive","youngaleena wa","northern peninsula area regional council","yawuru wa","billard wa","blue mountain qld","central desert regional council","kupungarri wa","yarilena sa","moojeeba qld","bamaga qld","gnylmarung wa","djoodood wa","buttah windee wa","pago wa","ngarantjadu wa","tilun tilun sa","dinah line sa","mindi rardi wa","mulgul station wa","tallowon sa","nygah nygah wa","dowar island qld","goobiny wa","dajarra qld","southwell qld","joes lagoon qld","three mile wa","king george river wa","millargoon wa","pantijan wa","atambaya qld","dauan island qld","fairview station qld","tappers inlet wa","jabir jabir wa","melterr qld","marra worra worra wa","parukupan wa","guda guda wa","jarlmadanka wa","eunnmen qld","wathanhiin qld","chuula qld","ambang qld","walberi qld","nyumwah wa","nyapari sa","jimbalakudunj wa","warralong wa","silver plains qld","ngurtuwarta wa","old rodeo ground qld","cheeditha wa","milingimbi nt","ngukurr nt","gunbalanya nt","jennifer kitching","maningrida nt","lajamanu nt","santa teresa nt","marty taylor","ramingining nt","galiwinku nt","kalkarindji nt","hermannsburg nt","narelle anderson","bridgit mcmullen","pirlangimpi nt","naomi lai","wurrumiyanga nt","kintore nt","yuendumu nt","ampilatwatja nt","numbulwar nt","wadeye nt","gapuwiyak nt","lingara nt","warruwi nt","umbakumba nt","nganmarriyanga nt","kalka sa","test person","angurugu nt","kaltukatjara nt","barunga nt","beswick nt","yirrkala nt","alpurrurulam nt","langi qld","nauiyu nt","papunya nt","milikapiti nt","maddy howlett","craig swann","forum for social innovation sweden","mud jeans","bridging the gap africa","design hub kampala","coompanion sweden","fairphone","fashion for good","yalla trappan","fablab winam","brightlands chemelot campus","truth and reconciliation archive","world voices uganda"]};
+const sel=document.getElementById('proj');
+Object.keys(PROJ).forEach(p=>{const o=document.createElement('option');o.value=p;o.textContent=p;sel.appendChild(o);});
+sel.onchange=()=>{const set=sel.value?new Set(PROJ[sel.value]):null;
+  document.querySelectorAll('.row[data-k]').forEach(r=>r.classList.toggle('hide',!!set&&!set.has(r.dataset.k)));};
 </script></body></html>
