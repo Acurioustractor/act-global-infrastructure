@@ -12,6 +12,7 @@
  * Read-only. Run:  node scripts/build-scope-board.mjs   Out: thoughts/shared/project-scope-board.html
  */
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
+import { loadLedger, ringOf, cadenceState, queuePriority, hasRead } from './lib/field-warmth.mjs';
 
 function parseCSV(t){const R=[];let r=[],f='',q=false;for(let i=0;i<t.length;i++){const c=t[i];if(q){if(c==='"'){if(t[i+1]==='"'){f+='"';i++;}else q=false;}else f+=c;}else if(c==='"')q=true;else if(c===',')(r.push(f),f='');else if(c==='\n')(r.push(f),R.push(r),r=[],f='');else if(c!=='\r')f+=c;}if(f||r.length){r.push(f);R.push(r);}return R;}
 const rd=p=>{const R=parseCSV(readFileSync(p,'utf8'));const h=R[0];return R.slice(1).filter(x=>x.length===h.length).map(x=>Object.fromEntries(h.map((k,i)=>[k,x[i]])));};
@@ -58,10 +59,14 @@ for(const p of orbit){
     roles:(tags.match(/role:[a-z-]+/g)||[]).map(s=>s.slice(5)).join(', ')});
 }
 const people=[...sup.values()];
-// LATENT — warm energy never formalised (uncaptured, or warm with no tier/circle): the gold we keep missing
-const latent=people.filter(p=>p.warmth>=WARM&&!p.circle&&(p.uncaptured||!p.tier)).sort((a,b)=>b.warmth-a.warmth).slice(0,12);
-// COOLING — was warm, now quiet (>120d since contact)
-const cooling=people.filter(p=>p.warmth>=WARM&&daysSince(p.last)!=null&&daysSince(p.last)>120).sort((a,b)=>daysSince(b.last)-daysSince(a.last)).slice(0,12);
+// ── warmth v2 (locked 2026-06-07): ring = Ben's read only · cadence = rhythm per ring ──
+const { reads, votes } = loadLedger();
+for(const p of people){p.ring=ringOf(reads,p.name);p.cad=p.ring?cadenceState(reads,p.name,p.last):null;}
+// LATENT — truly unread with real signal, 👍-voted first: the reading queue
+const latent=people.filter(p=>!hasRead(reads,p.name)&&votes.get(norm(p.name))!=='down'&&p.warmth>=WARM)
+  .sort((a,b)=>queuePriority(votes,b.name,b.warmth)-queuePriority(votes,a.name,a.warmth)).slice(0,12);
+// COOLING — RINGED people past their ring's rhythm (or their own stated cadence)
+const cooling=people.filter(p=>p.cad?.state==='overdue').sort((a,b)=>(b.cad.ratio??0)-(a.cad.ratio??0)).slice(0,12);
 // OWED — community accountability (named, by owes-gap)
 const owed=rd('thoughts/shared/el-contributor-constellation.csv').map(r=>({name:r.name,tx:+r.transcripts,live:+r.live,owes:+r.owes_gap,consent:+r.consent_required})).filter(r=>!isUuid(r.name)&&r.owes>0).sort((a,b)=>b.owes-a.owes).slice(0,12);
 // person-page links (supporter pages for latent/cooling, owes-shaped community pages for owed)
@@ -140,7 +145,7 @@ function render(){
 function fill(id,arr,fn){document.getElementById(id).innerHTML=arr.map(fn).join('')||'<div class=qrow style="color:#46566b">none</div>';}
 const pp=p=>p.page?' <a class=pp href="people/'+p.page+'.md">page</a>':'';
 fill('q-lat',D.latent,p=>'<div class=qrow><span>'+p.name+pp(p)+(p.uncaptured?' <span class=m>(uncaptured)</span>':'')+'</span><span class=w0 style="color:#5fb3ff">'+Math.round(p.warmth)+'</span></div>');
-fill('q-cool',D.cooling,p=>'<div class=qrow><span>'+p.name+pp(p)+'</span><span class=m>'+p.last+'</span></div>');
+fill('q-cool',D.cooling,p=>'<div class=qrow><span>'+p.name+pp(p)+' <span class=m>ring '+p.ring+'</span></span><span class=m>'+p.cad.days+'d / '+p.cad.expected+'d</span></div>');
 fill('q-owe',D.owed,p=>'<div class=qrow><span>'+p.name+pp(p)+'</span><span class=m>'+p.owes+' owed · '+p.live+'/'+p.tx+' live'+(p.consent?' · '+p.consent+' consent':'')+'</span></div>');
 render();
 </script></body></html>`;

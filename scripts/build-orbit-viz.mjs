@@ -11,6 +11,7 @@
  * Out:  thoughts/shared/orbit-viz.html
  */
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
+import { loadLedger, ringOf, layerOf, hasRead } from './lib/field-warmth.mjs';
 
 function parseCSV(t){const R=[];let r=[],f='',q=false;for(let i=0;i<t.length;i++){const c=t[i];if(q){if(c==='"'){if(t[i+1]==='"'){f+='"';i++;}else q=false;}else f+=c;}else if(c==='"')q=true;else if(c===',')(r.push(f),f='');else if(c==='\n')(r.push(f),R.push(r),r=[],f='');else if(c!=='\r')f+=c;}if(f||r.length){r.push(f);R.push(r);}return R;}
 const rd=p=>{const R=parseCSV(readFileSync(p,'utf8'));const h=R[0];return R.slice(1).filter(x=>x.length===h.length).map(x=>Object.fromEntries(h.map((k,i)=>[k,x[i]])));};
@@ -39,17 +40,14 @@ for(const p of orbit){
   const prev=supSeen.get(k);
   if(!prev||prev.warmth<warmth) supSeen.set(k,{name:p.name,warmth,circle,uncaptured,pattern:p.beeper_pattern||'',gmail:p.gmail_in_out||'',roles:(tags.match(/role:[a-z-]+/g)||[]).map(s=>s.slice(5)).join(', ')});
 }
-// manual energy from the workbench ledger overrides computed warmth — the human's read wins
-if(existsSync('thoughts/shared/field-decisions.jsonl'))
-  for(const l of readFileSync('thoughts/shared/field-decisions.jsonl','utf8').split('\n').filter(Boolean)){
-    try{const d=JSON.parse(l);if(d.energy!=null){const p=supSeen.get(norm(d.name));if(p)p.warmth=d.energy;}}catch{}
-  }
+// ── warmth v2 (locked 2026-06-07): rings come from BEN'S READS, never warmth rank ──
+// Calibration: machine warmth had zero correlation with his rings (rejects scored highest).
+// Ringed people sit on THEIR ring; unread people with signal go to the periphery band;
+// circle (GSD-alliance) is always drawn. Energy override still shines the inner core.
+const { reads } = loadLedger();
+for (const [k, d] of reads) { const p = supSeen.get(k); if (p && d.energy != null) p.warmth = d.energy; }
 let supporters=[...supSeen.values()].sort((a,b)=>b.warmth-a.warmth);
-// Dunbar layers by warmth RANK — where energy IS going (5/15/50/150); past 150 → periphery.
-// Finite energy budget: the inner layers are small by design ("more isn't better").
-// circle (GSD-alliance) members are hand-curated — always drawn, even past rank 150
-// (the warmth<=0 keep above is pointless if the rank cut then drops them — e.g. Ben Croft, warmth 2).
-supporters.forEach((s,i)=>{s.layer=i<5?'5':i<15?'15':i<50?'50':i<150?'150':(s.circle?'150':null);});
+supporters.forEach(s=>{const r=layerOf(reads,s.name);s.layer=r||(s.circle?'150':hasRead(reads,s.name)?null:(s.warmth>0?'periphery':null));});
 cold+=supporters.filter(s=>!s.layer).length;
 supporters=supporters.filter(s=>s.layer);
 
@@ -147,8 +145,8 @@ line.edge.hot{stroke:#ffd24a;opacity:.9!important}
 const D=${DATA};
 const svg=document.getElementById('svg'),NS='http://www.w3.org/2000/svg',tip=document.getElementById('tip');
 const cx=330,cy=370; // supporter orbit centre (left)
-const bands={'5':70,'15':135,'50':210,'150':292};                  // Dunbar layers: 5 / 15 / 50 / 150
-const col={'5':'#ffd24a','15':'#5fb3ff','50':'#3a7fbf','150':'#2b5378'};
+const bands={'5':70,'15':135,'50':210,'150':292,'periphery':340};                  // Dunbar layers: 5 / 15 / 50 / 150
+const col={'5':'#ffd24a','15':'#5fb3ff','50':'#3a7fbf','150':'#2b5378','periphery':'#1d3a52'};
 function el(t,a){const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);return e;}
 // rings + centre (labelled with the Dunbar layer size)
 for(const b of ['150','50','15','5']){svg.appendChild(el('circle',{cx,cy,r:bands[b],fill:'none',stroke:'#1c2535','stroke-width':1}));
@@ -161,9 +159,9 @@ svg.appendChild(el('line',{x1:672,y1:40,x2:672,y2:680,stroke:'#3a4658','stroke-d
 const lt=el('text',{x:678,y:56,fill:'#6b7a8d','font-size':10});lt.textContent='the line — never crossed into a funnel';svg.appendChild(lt);
 const edgeLayer=el('g',{});svg.appendChild(edgeLayer);   // warm-path threads sit UNDER the dots
 // supporters on rings (group by band, spread on an arc that avoids the community side)
-const byBand={'5':[],'15':[],'50':[],'150':[]};D.supporters.forEach(s=>byBand[s.layer]&&byBand[s.layer].push(s));
+const byBand={'5':[],'15':[],'50':[],'150':[],'periphery':[]};D.supporters.forEach(s=>byBand[s.layer]&&byBand[s.layer].push(s));
 const supNodes=[];
-for(const b of ['5','15','50','150']){const arr=byBand[b],n=arr.length;arr.forEach((s,i)=>{
+for(const b of ['5','15','50','150','periphery']){const arr=byBand[b],n=arr.length;arr.forEach((s,i)=>{
   const ang=Math.PI*0.62 + (Math.PI*1.76)*(n<=1?0.5:i/(n-1)); // sweep on the left ~3/4
   const r=bands[b]-(b==='5'?18:24)+((i%3)*12);
   const x=cx+Math.cos(ang)*r, y=cy+Math.sin(ang)*r;

@@ -27,10 +27,14 @@ const norm=s=>(s||'').toLowerCase().replace(/[^a-z0-9 ]/g,'').replace(/\s+/g,' '
 const handle=n=>/@/.test(n)||/^\+?\d[\d \-()]{6,}$/.test((n||'').trim());
 const internal=n=>/^(ben(jamin)? knight|nic(holas)? marchesi( oam)?|a curious tractor)$/i.test((n||'').trim());
 
-// dealt = anyone already in the decisions ledger
-const dealt=new Set();
+// dealt = anyone Ben has actually READ (ring/relation/energy). A triage VOTE is not a
+// read — 👍 means "front of the reading queue", so voters must stay IN the queue (v2 lock).
+const dealt=new Set();const votes=new Map();
 if(existsSync('thoughts/shared/field-decisions.jsonl'))
-  for(const l of readFileSync('thoughts/shared/field-decisions.jsonl','utf8').split('\n').filter(Boolean)){try{dealt.add(norm(JSON.parse(l).name));}catch{}}
+  for(const l of readFileSync('thoughts/shared/field-decisions.jsonl','utf8').split('\n').filter(Boolean)){
+    try{const d=JSON.parse(l);const k=norm(d.name);
+      if(d.vote)votes.set(k,d.vote);
+      if(d.ring||d.relation||d.energy!=null)dealt.add(k);}catch{}}
 
 const soil=new Map();for(const s of rd('thoughts/shared/orbit-soil.csv'))if(!soil.has(norm(s.name)))soil.set(norm(s.name),s);
 const cooc=rd('thoughts/shared/orbit-cooccurrence.csv');
@@ -45,7 +49,9 @@ for(const p of rd('thoughts/shared/unified-orbit-worklist.csv')){
   const prev=sup.get(k);if(prev&&prev.w>=w)continue;
   sup.set(k,{name:p.name,email:(p.email||'').toLowerCase(),w,bp:p.beeper_pattern||'',g:p.gmail_in_out||'',last:p.last_contact||'',tags:p.rel_tags||''});
 }
-const queue=[...sup.values()].sort((a,b)=>b.w-a.w).slice(0,N);
+// 👍-voted first (Ben pulled them closer in triage), 👎 sinks, then strongest signal
+const prio=p=>(votes.get(norm(p.name))==='up'?10000:votes.get(norm(p.name))==='down'?-10000:0)+p.w;
+const queue=[...sup.values()].sort((a,b)=>prio(b)-prio(a)).slice(0,N);
 console.log(`Pre-reading ${queue.length} undealt signal-bearing people (local qwen)…\n`);
 
 async function qwen(prompt){

@@ -39,22 +39,29 @@ for(const p of orbit){
   sup.set(k,{name:p.name,warmth,circle:/circle:gsd-alliance/.test(tags),tier:/tier:/.test(tags),
     uncaptured:/uncaptured/i.test(p.home||'')||p.status==='UNCAPTURED',last:p.last_contact||''});
 }
-// manual energy from the workbench ledger overrides computed warmth — the human's read wins
-if(existsSync('thoughts/shared/field-decisions.jsonl'))
-  for(const l of readFileSync('thoughts/shared/field-decisions.jsonl','utf8').split('\n').filter(Boolean)){
-    try{const d=JSON.parse(l);if(d.energy!=null){const p=sup.get(norm(d.name));if(p)p.warmth=d.energy;}}catch{}
-  }
-const people=[...sup.values()].sort((a,b)=>b.warmth-a.warmth);
+// ── WARMTH V2 (locked 2026-06-07): ring = human-only · cadence = rhythm per ring ──
+// Calibration killed warmth-as-closeness (Ben's rejects scored HIGHEST). Layers come
+// from HIS reads; cadence alerts only for people he has ringed; votes order the queue.
+import { loadLedger, ringOf, layerOf, cadenceState, queuePriority, hasRead } from './lib/field-warmth.mjs';
+const { reads, votes } = loadLedger();
+// energy override still names the inner core (his words)
+for (const [k, d] of reads) { const p = sup.get(k); if (p && d.energy != null) p.energy = d.energy; }
+const people=[...sup.values()];
+for (const p of people) { p.ring = ringOf(reads, p.name); p.cad = p.ring ? cadenceState(reads, p.name, p.last) : null; }
 
-// ── Dunbar layers by where energy IS going (warmth rank) ────────────────────
-const warm=people.filter(p=>p.warmth>0);
-const inner5=warm.slice(0,5), l15=warm.slice(5,15), l50=warm.slice(15,50), l150=warm.slice(50,150);
-const coreStale=[...inner5,...l15].filter(p=>{const d=daysSince(p.last);return d!=null&&d>30;});
+// ── Dunbar layers from BEN'S READS (machine never estimates a ring) ──────────
+const ringed = people.filter(p => p.ring);
+const byEnergy = (a, b) => (b.energy ?? 0) - (a.energy ?? 0);
+const inner5 = ringed.filter(p => layerOf(reads, p.name) === '5').sort(byEnergy).slice(0, 5);
+const l15 = ringed.filter(p => p.ring === '15' && !inner5.includes(p)).sort(byEnergy);
+const l50 = ringed.filter(p => p.ring === '50'), l150 = ringed.filter(p => p.ring === '150');
+const coreStale=[...inner5,...l15].filter(p=>p.cad&&(p.cad.state==='due'||p.cad.state==='overdue'));
 
 // ── the ≤7 actions ──────────────────────────────────────────────────────────
 const used=new Set();
 const take=(arr,n)=>arr.filter(p=>!used.has(norm(p.name||p.need||''))).slice(0,n).map(p=>{used.add(norm(p.name||p.need||''));return p;});
-const cooling=take(people.filter(p=>p.warmth>=20&&daysSince(p.last)>120).sort((a,b)=>daysSince(b.last)-daysSince(a.last)),2);
+// tend: RINGED people overdue vs their ring's rhythm (or their own stated cadence)
+const cooling=take(ringed.filter(p=>p.cad?.state==='overdue').sort((a,b)=>(b.cad.ratio??0)-(a.cad.ratio??0)),2);
 const owedAll=rd('thoughts/shared/el-contributor-constellation.csv').map(r=>({name:r.name,owes:+r.owes_gap,live:+r.live,tx:+r.transcripts,consent:+r.consent_required})).filter(r=>!isUuid(r.name)&&r.owes>0).sort((a,b)=>b.owes-a.owes);
 const owed=owedAll.slice(0,2);
 // gaps: thin needs (no warm candidate) from catalog+matches
@@ -64,14 +71,17 @@ const matches=rd('thoughts/shared/project-needs-match.csv');
 const byPN={};for(const m of matches){(byPN[m.project]=byPN[m.project]||{});(byPN[m.project][m.need]=byPN[m.project][m.need]||[]).push({name:m.name,contact:+(m.contact_warmth??m.warmth)||0});}
 const thin=[];for(const p of catalog)for(const need of p.needs){const c=(byPN[p.project]?.[need]||[]).sort((a,b)=>b.contact-a.contact);if(!c.length||c[0].contact<20)thin.push({project:p.project.replace(/ \(.*/,''),need,best:c[0]?.name||null});}
 const gaps=thin.slice(0,2);
-const latent=take(people.filter(p=>p.warmth>=20&&!p.circle&&(p.uncaptured||!p.tier)).sort((a,b)=>b.warmth-a.warmth),2);
+// read next: the queue — 👍-voted unread people first, then strongest unread signal
+// (truly unread only: any ledger read — incl. out/family — means Ben has already looked)
+const latent=take(people.filter(p=>!hasRead(reads,p.name)&&votes.get(norm(p.name))!=='down'&&p.warmth>=8)
+  .sort((a,b)=>queuePriority(votes,b.name,b.warmth)-queuePriority(votes,a.name,a.warmth)),2);
 
 const pageLink=n=>existsSync(`thoughts/shared/people/${slug(n)}.md`)?` <a class=pp href="people/${slug(n)}.md">page</a>`:'';
 const item=(emoji,verb,who,why,extra='')=>`<div class=act><span class=e>${emoji}</span><div><b>${verb}</b> — ${who}${extra}<div class=why>${why}</div></div></div>`;
-const coolingItems=cooling.map(p=>item('🌡','Water',p.name,`was warm (${Math.round(p.warmth)}), ${daysSince(p.last)} days quiet — re-reach before it's gone`,pageLink(p.name)));
+const coolingItems=cooling.map(p=>item('🌡','Water',p.name,`ring ${p.ring} runs ~every ${p.cad.expected}d — it's been ${p.cad.days}d (${p.cad.ratio.toFixed(1)}× over) — re-reach before it's gone`,pageLink(p.name)));
 const owedItems=owed.map(p=>item('🤝','Sun',p.name,`${p.owes} of their ${p.tx} transcripts not yet brought to life${p.consent?` · ${p.consent} consent conversation owed`:''} — honour one today`,pageLink(p.name)));
 const gapItems=gaps.map(g=>item('🕳','Source',`${g.project}: ${g.need}`,g.best?`warmest candidate (${g.best}) is still a cold name — warm them up or find someone`:`no one tagged at all`));
-const latentItems=latent.map(p=>item('⚡','Reach',p.name,`warm (${Math.round(p.warmth)}) but never formalised — the energy is already there${p.uncaptured?' (uncaptured)':''}`,pageLink(p.name)));
+const latentItems=latent.map(p=>item('⚡','Read',p.name,`${votes.get(norm(p.name))==='up'?'you pulled them closer in triage — give them a ring':'real two-way signal, no read yet — 30 seconds in the circle UI'}${p.uncaptured?' (uncaptured)':''}`,pageLink(p.name)));
 // interleave: every category's first item is guaranteed; the 7-cap then cuts at most one
 // second-round item, and WHICH one rotates by day — no category is structurally starved.
 const cats=[coolingItems,owedItems,gapItems,latentItems];
@@ -98,8 +108,8 @@ h1{font-size:21px;margin:0}.date{color:#8b98a9;font-size:13px;margin:2px 0 4px}
 ${(()=>{try{const f=JSON.parse(readFileSync('thoughts/shared/field-freshness.json','utf8'));const d=f.stale_days;return(d==null||d>2)?`<div class=state><span class=warn>⚠ Email spine is ${d??'??'} days stale (last gmail ingest ${(f.gmail_max_created||'never').slice(0,10)}) — warmth/cooling below may be wrong. Run sync-gmail-to-supabase + check trigger errors.</span></div>`:'';}catch{return'';}})()}
 <div class=state>
 <b>Energy check.</b> Your inner 5: ${inner5.map(p=>p.name).join(' · ')||'—'}.
-${coreStale.length?`<span class=warn>${coreStale.length} of your inner 15 are >30 days quiet (${coreStale.slice(0,3).map(p=>p.name).join(', ')}${coreStale.length>3?'…':''}) — the core is going untended.</span>`:`<span class=ok>The core is tended.</span>`}
-<div class=layers>Layers by where energy is going: 5 / ${l15.length} / ${l50.length} / ${l150.length} · finite budget — more isn't better; protect the inner layers, leave the field to refill.</div>
+${coreStale.length?`<span class=warn>${coreStale.length} of your core are past their rhythm (${coreStale.slice(0,3).map(p=>`${p.name} ${p.cad.days}d/${p.cad.expected}d`).join(', ')}${coreStale.length>3?'…':''}) — the core is going untended.</span>`:`<span class=ok>The core is tended — everyone inside their rhythm.</span>`}
+<div class=layers>Your read layers: ${inner5.length} / ${l15.length} / ${l50.length} / ${l150.length} of 5/15/50/150 · rings are yours alone — the machine only keeps time. ${people.filter(p=>!p.ring).length} unread in the field.</div>
 </div>
 ${actions.join('')}
 <div class=foot>Tend, then close the tab. Deeper looks: <a href="project-scope-board.html">scope board</a> · <a href="orbit-viz.html">the orbit</a> · person pages in <code>people/</code>. Regenerate: <code>node scripts/build-morning-read.mjs</code></div>
