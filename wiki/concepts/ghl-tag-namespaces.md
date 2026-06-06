@@ -23,6 +23,7 @@
 | `project:` | `act-hv` … | Project affiliation. | Sync scripts |
 | `interest:` | `membership` … | Expressed interest (website forms/footer). | Website → GHL upsert |
 | `source:` / `place:` | `empathy-ledger` / `palm-island` | Provenance and place. | Sync scripts |
+| `ring:` | `5` `15` `50` `150` `out` | Ben's Dunbar read from The Field circle sessions — closeness, verbatim from `field-decisions.jsonl`. **NOT the belonging rung** (`tier:` is a different ladder); never automated beyond transporting his recorded read. Community lane and orgs never carry it. | `field-align-ghl.mjs` (gated prep→apply, undo-logged), carrying Ben's own reads only |
 | `pod:` | *(planned — Harvest WhatsApp crews)* | Crew membership, the belonging surface. | Humans / crew formalisation, per the simple-system build plan |
 | `attended:` | *(planned — Humanitix webhook, e.g. `attended:workday-2026-07`)* | Headcount. **Never a rung.** | Humanitix → GHL webhook only |
 

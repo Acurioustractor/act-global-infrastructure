@@ -16,7 +16,7 @@ import { Loader2, SkipForward, HelpCircle, Sparkles, MessageSquare, Mail, Users 
 import { cn } from '@/lib/utils'
 
 interface Card {
-  name: string; org: string; machineW: number
+  name: string; email: string; org: string; machineW: number
   ringGuess: string; guess: string; confidence: string
   beeper: string; gmail: string; lastContact: string
   tags: string[]; flags: string; uncaptured: boolean
@@ -59,7 +59,7 @@ export default function CirclePage() {
 
   const submit = useCallback((extra: Record<string, unknown> = {}) => {
     if (!card || save.isPending) return
-    save.mutate({ name: card.name, ring: pendingRing || undefined, relation: relation || undefined, ...extra })
+    save.mutate({ name: card.name, email: card.email || undefined, ring: pendingRing || undefined, relation: relation || undefined, ...extra })
   }, [card, pendingRing, relation, save])
 
   const skip = useCallback(() => { setRelation(''); setPendingRing(null); setIdx(i => i + 1) }, [])

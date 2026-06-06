@@ -73,7 +73,7 @@ export default function TriagePage() {
   const vote = useCallback((v: 'up' | 'down' | 'noidea' | 'skip') => {
     if (!person) return
     if (v !== 'skip') {
-      save.mutate(v === 'noidea' ? { name: person.name, noIdea: true } : { name: person.name, vote: v })
+      save.mutate(v === 'noidea' ? { name: person.name, email: person.email, noIdea: true } : { name: person.name, email: person.email, vote: v })
       setDone(d => d + 1)
       if (v !== 'noidea') { setFlash(v); setTimeout(() => setFlash(null), 250) }
     }

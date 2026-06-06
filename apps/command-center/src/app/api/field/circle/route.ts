@@ -190,7 +190,7 @@ export async function GET(req: Request) {
       .sort((a, b) => +b.emails_together - +a.emails_together).slice(0, 4)
       .map(r => (norm(r.a) === norm(p.name) ? r.b : r.a))
     queue.push({
-      name: p.name, org: p.org || '', machineW: p.machine_w,
+      name: p.name, email: (w?.email || '').toLowerCase(), org: p.org || '', machineW: p.machine_w,
       ringGuess: p.ring_guess, guess: p.guess, confidence: p.confidence,
       beeper: w?.beeper_pattern || '', gmail: w?.gmail_in_out || '',
       lastContact: w?.last_contact || '', tags: (w?.rel_tags || '').split(' ').filter(Boolean),
@@ -219,6 +219,7 @@ export async function POST(req: Request) {
     source: vote ? 'triage-ui' : 'circle-ui',
     name,
   }
+  if (body.email) entry.email = String(body.email).toLowerCase() // lets the GHL aligner resolve without hand-matching
   if (vote) entry.vote = vote
   if (ring) entry.ring = ring
   if (typeof body.energy === 'number') entry.energy = body.energy

@@ -125,7 +125,7 @@ for (const c of contacts) {
   // which flagged their Harvest tier:member as a "violation" — noise, fixed 2026-06-05.)
   const isInternal = /@act\.place$/i.test(c.email || '') || /^(ben(jamin)? knight|nic(holas)? marchesi( oam)?|a curious tractor|act admin|benjamin test)$/i.test((c.full_name || '').trim());
   const isCommunityIndividual = !isOrg && !isInternal && (c.is_storyteller || tags.some(t => COMMUNITY_INDIVIDUAL_ROLES.includes(t)) || COMMUNITY_NAME.test(c.full_name || ''));
-  const relTags = tags.filter(t => /^(tier:|circle:|role:|comms:|project:|lane:)/.test(t));
+  const relTags = tags.filter(t => /^(tier:|circle:|role:|comms:|project:|lane:|ring:)/.test(t));
   const hasTier = tags.some(t => t.startsWith('tier:'));
   const hasDrip = tags.some(t => /drip/.test(t));
   const g = gmailByEmail.get(ne) || gmailByName.get(nn);
