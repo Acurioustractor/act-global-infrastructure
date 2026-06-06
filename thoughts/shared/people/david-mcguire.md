@@ -2,11 +2,16 @@
 name: david mcguire
 lane: supporter
 warmth: 10
+ring: 15
 updated: 2026-06-06
 ---
 
 # david mcguire
   
+
+## Ben's read — ground truth (circle session 2026-06-06)
+> **"—"** · ring **15**
+
 
 ## Soil — institutional ground (CivicGraph)
 - **Org:** —
@@ -16,11 +21,7 @@ updated: 2026-06-06
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-David McGuire is a professor at Edinburgh Napier University and a principal engineer with extensive experience in civil and structural engineering. He specializes in construction management and forensic engineering. His work focuses on infrastructure, utilities, and construction defects.
-- [David McGuire: books, biography, latest update - Amazon.com](https://www.amazon.com/stores/author/B00J1G9140) — David McGuire is Professor of Human Resource Development and Head of the HRM Subject Group at Edinburgh Napier University, Scotland.
-- [[PDF] david mcguire, professional engineer, mba](https://fdotwww.blob.core.windows.net/sitefinity/docs/default-source/construction/constadm/drb/resume/mcguired.pdf?sfvrsn=49915f1d_2) — PROFESSIONAL ENGINEERING REGISTRATIONS ▪ Florida – Civil (65059) ▪ California – Civil (65595) ▪ Arizona – Civil (38246) ▪ Louisiana – Civil (32601) ▪ Nevada – Civil (018202) ▪ Oklahoma – Civil (26139) ▪ Texas – (117965) ▪ Washington – (52325) ▪ Pennsylvania – (082912) ▪ Colorado 
-- [In conversation with David McGuire, VP, UFV International - YouTube](https://www.youtube.com/watch?v=XmUttAc52n4) — FVI students are the best prepared! David Mcguire, Associate Vice President, UFV International, University of the Fraser Valley discusses
-- [Michael David McGuire - IMDb](https://www.imdb.com/name/nm4528542) — Michael David McGuire began working in local radio in the mid-1960's... becoming a reporter, TV news anchor, fashion model and actor by the early 1970's.
+_(no web key / no results)_
 
 ## Shared history — from the spine
 **18 emails** · first 2025-07-14 · last 2025-12-04
@@ -37,11 +38,11 @@ David McGuire is a professor at Edinburgh Napier University and a principal engi
 - 2025-10-27 ← Accepted: Diagrama // Circuit Breaker catch up
 
 ## Understanding — drafted
-David McGuire is a professor at Edinburgh Napier University, where he heads the HRM Subject Group, focusing on human resource development. He also holds extensive experience as a principal engineer with professional engineering registrations across multiple states in the United States. His expertise spans construction management and forensic engineering, particularly in infrastructure, utilities, and addressing construction defects.
+David McGuire appears to be involved in significant advocacy work, particularly around youth justice issues. Based on the email subject "Fw: Parliament backs Youth Justice Inquiry," it seems that he is engaged with legislative bodies and public inquiries related to youth justice. This suggests a strong dedication to improving systems and policies that affect young people. Additionally, his frequent communication regarding "Circut Breaker Qld" indicates an involvement in another initiative or organization in Queensland, possibly focused on systemic change or support services for youth.
 
-David appears to care deeply about education and its practical application in professional fields such as civil and structural engineering. His involvement in various university roles suggests that he values knowledge transfer and the development of well-prepared professionals who can handle complex real-world challenges, especially within the realm of human resources and engineering practices.
+David appears to care deeply about the well-being of young individuals within the justice system and is actively involved in advocating for better policies and practices. His engagement with parliamentary inquiries suggests a commitment to making substantial changes through legislative channels. The focus on Circuit Breaker Qld also implies an interest in practical, ground-level interventions that can directly impact youth.
 
-The shared work with David has primarily revolved around discussing a project or issue labeled "Circuit Breaker Qld," which likely involves some form of technical collaboration or problem-solving related to circuit breakers in Queensland, Australia. The emails indicate multiple exchanges about setting up meetings or discussing updates on this topic, suggesting ongoing and detailed communication focused on achieving specific technical objectives.
+The arc of our shared work with David McGuire has been primarily centered around coordinating meetings and updates related to "Circuit Breaker Qld." We have exchanged several emails discussing invitations, meeting times, and updates concerning this initiative. There is a clear pattern of regular catch-ups, suggesting ongoing collaboration and communication regarding Circuit Breaker activities. The recent subjects indicate that these efforts continue into the present, with both parties actively engaging in updates and discussions about upcoming meetings and events related to this work.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

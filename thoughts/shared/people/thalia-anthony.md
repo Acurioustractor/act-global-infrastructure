@@ -2,11 +2,16 @@
 name: thalia anthony
 lane: supporter
 warmth: 10
+ring: 50
 updated: 2026-06-06
 ---
 
 # thalia anthony
   
+
+## Ben's read — ground truth (circle session 2026-06-06)
+> **"—"** · ring **50**
+
 
 ## Soil — institutional ground (CivicGraph)
 - **Org:** —
@@ -16,11 +21,7 @@ updated: 2026-06-06
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Thalia Anthony is a law professor known for her work on criminal law, particularly focusing on Indigenous peoples and their treatment within the criminal justice system. She advocates for justice reform and highlights systemic issues affecting First Nations communities.
-- [Thalia Anthony - The Conversation](https://theconversation.com/profiles/thalia-anthony-12747) — Thalia Anthony is a Professor of Law at the University of Technology Sydney. expertise is in the areas of criminal law and procedure and
-- [Thalia ANTHONY | Professor - ResearchGate](https://www.researchgate.net/profile/Thalia-Anthony) — This article argues that criminal justice and health institutions under settler colonialism collude to create and sustain “truths” about First Nations lives
-- [NTER Took the Children Away, by Thalia Anthony - Arena Magazine](https://arena.org.au/nter-took-the-children-away-by-thalia-anthony) — Thalia Anthony is Professor of Law at the University of Technology Sydney. More articles by Thalia Anthony. Categorised: Arena Magazine, Arena Magazine Feature.
-- [Thalia Anthony, Indigenous People, Crime and Punishment](https://journals.sagepub.com/doi/10.1177/1362480613518836) — Focusing primarily on sentencing decisions in cases of serious violence and political protest, Anthony unpacks judicial understandings of
+_(no web key / no results)_
 
 ## Shared history — from the spine
 **13 emails** · first 2025-08-19 · last 2025-09-14
@@ -37,11 +38,11 @@ Thalia Anthony is a law professor known for her work on criminal law, particular
 - 2025-08-24 ← RE: [EXTERNAL] Re: Very promising…
 
 ## Understanding — drafted
-Thalia Anthony is a Professor of Law at the University of Technology Sydney, recognized for her work in criminal law and procedure with a particular emphasis on Indigenous peoples. Her research delves into systemic issues within the criminal justice system affecting First Nations communities, advocating for reform to address injustices that these groups face. Thalia’s writings often highlight how institutions under settler colonialism perpetuate negative narratives about Indigenous lives, leading to further marginalization and injustice.
+Thalia Anthony is an individual deeply involved in justice work, though specific details about her professional background or the nature of her contributions are not provided. The context suggests that she engages with significant efforts related to social justice issues and likely collaborates on projects or initiatives aimed at promoting fairness and equity.
 
-Thalia appears to care deeply about justice and equity in the legal system, especially as it pertains to Indigenous peoples. She is committed to bringing attention to systemic issues within criminal justice frameworks that disproportionately affect First Nations communities. Her work aims to challenge existing judicial understandings and promote more equitable outcomes for Indigenous individuals who come into contact with the law.
+It appears Thalia cares strongly about making a positive impact within the realm of justice work. Her frequent communication indicates a commitment to ongoing discussions and updates regarding her endeavors, suggesting a desire for collaboration and support in her pursuits. While specific areas of focus are not detailed, it is evident that she values sustained engagement with like-minded individuals or organizations.
 
-In our interactions, we have been collaborating on discussions related to Thalia’s ongoing justice work, particularly focusing on catch-up sessions and exchanges about promising developments in her research or projects. The email subjects suggest repeated check-ins and updates between us, indicating an ongoing partnership aimed at supporting her advocacy and scholarship in criminal justice reform for Indigenous communities.
+The arc of our shared work with Thalia has been focused primarily on catch-up sessions related to justice work. The email subjects reveal multiple back-and-forth exchanges between August 19 and September 14, centered around updates and discussions about their joint activities in the field of justice. There is a consistent theme of regular check-ins and information sharing, reflecting an ongoing partnership aimed at supporting her initiatives.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

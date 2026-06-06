@@ -2,11 +2,16 @@
 name: rohan lulham
 lane: supporter
 warmth: 8
+ring: 50
 updated: 2026-06-06
 ---
 
 # rohan lulham
   
+
+## Ben's read — ground truth (circle session 2026-06-06)
+> **"—"** · ring **50**
+
 
 ## Soil — institutional ground (CivicGraph)
 - **Org:** —
@@ -16,11 +21,7 @@ updated: 2026-06-06
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Rohan Lulham is a design researcher and educator at the University of Sydney. His work focuses on design's role in societal transformation and crime prevention. He is known for his research in affect control theory.
-- [Untitled](https://icpa.org/widgets/emsSchedule/sessionDetail?id=AA4FF0C2-640B-43E1-A71A63310D7937B6) — Dr Rohan Lulham is a Senior Lecturer in Design at the University of Sydney, and his research focuses on the transformative potential of design in promoting
-- [Rohan Lulham | About | The University of Sydney](https://profiles.sydney.edu.au/rohan.lulham) — Rohan is a design researcher, practitioner and educator at the Design Lab in the School of Architecture, Design and Planning at the University of Sydney.
-- [Symbolic Interaction with Consumer Products: An Affect Control ...](https://compass.onlinelibrary.wiley.com/doi/10.1111/soc4.12381) — Rohan Lulham is a research fellow at the Designing Out Crime Research Centre at the University of Technology Sydney. His research covers the
-- [How “Stuff” Matters in Affect Control Theory - Sage Journals](https://journals.sagepub.com/doi/abs/10.1177/00027642211066045) — Dr. Rohan Lulham is a senior research fellow at the Design Innovation Research Centre, Faculty of Design, Architecture and Building, University
+_(no web key / no results)_
 
 ## Shared history — from the spine
 **26 emails** · first 2025-08-24 · last 2026-04-14
@@ -37,11 +38,11 @@ Rohan Lulham is a design researcher and educator at the University of Sydney. Hi
 - 2025-12-18 → Re: Design and Justice catch up
 
 ## Understanding — drafted
-Rohan Lulham is a Senior Lecturer in Design at the University of Sydney, where he also serves as a design researcher and educator. His work focuses on exploring how design can play a transformative role in society, particularly in areas such as crime prevention. He is recognized for his contributions to affect control theory, which examines how people's actions are guided by their emotional responses to various situations, including interactions with consumer products.
+Rohan Lulham is involved in initiatives focused on design and justice, particularly through organizing symposiums and gatherings that aim to explore how design can promote social change. His work appears to be centered around creating platforms where designers, activists, and other stakeholders can collaborate and discuss the role of design in fostering a more equitable society. Rohan seems deeply committed to ensuring that design practices are not only innovative but also mindful of their broader impact on justice and equality.
 
-Rohan cares deeply about using design as a means of societal change and believes that thoughtful design can contribute significantly to community safety and well-being. His research and educational efforts highlight the potential of design to influence human behavior positively and address social issues effectively. Rohan’s work underscores his commitment to leveraging design principles for broader social impact.
+Rohan cares about leveraging design as a tool for social change and is dedicated to creating spaces where these discussions can happen meaningfully. His involvement with symposiums and gatherings suggests an interest in education, collaboration, and the dissemination of ideas that promote more inclusive and equitable outcomes through design practices.
 
-Our collaboration with Rohan has primarily revolved around planning and organizing catch-up meetings focused on "Design and Justice." These meetings are aimed at discussing topics related to how design can be used as a tool for justice and societal improvement. The emails indicate ongoing scheduling efforts, including adjustments in meeting dates and discussions about upcoming symposiums like the "Design & Justice – Designing for Change Symposium," which highlight our shared interest in fostering dialogue around these themes.
+Our shared work with Rohan has primarily revolved around coordinating meetings and planning sessions for events like the Design & Justice – Designing for Change Symposium. We have exchanged emails discussing various aspects such as catch-up meetings to discuss progress, rescheduling discussions, and exploring next steps in organizing these events aimed at fostering change through design.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

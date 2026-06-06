@@ -2,11 +2,16 @@
 name: jan owen
 lane: supporter
 warmth: 10
+ring: 15
 updated: 2026-06-06
 ---
 
 # jan owen
   
+
+## Ben's read — ground truth (circle session 2026-06-06)
+> **"—"** · ring **15**
+
 
 ## Soil — institutional ground (CivicGraph)
 - **Org:** —
@@ -16,11 +21,7 @@ updated: 2026-06-06
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Jan Owen is a social entrepreneur and co-founder of Be Well Health & Longevity, dedicated to promoting holistic health and wellbeing. She has served as CEO for the Foundation for Young Australians and is recognized for her contributions to social innovation. Her work focuses on empowering individuals and organizations for a long, healthy life.
-- [LEADINGLADIESSERIES: Jan Owen - Agency Iceberg](https://agencyiceberg.com.au/leadingladiesseries-jan-owen) — Jan Owen's current role as the CEO for the Foundation for Young Australians (FYA) is just the latest evolution in her career as a social entrepreneur.
-- [Jan Owen | Artist Profile | National Museum of Women in the Arts](https://nmwa.org/art/artists/jan-owen) — After moving to Bangor, Maine, she worked as printmaker and graphic designer. With the birth of twin daughters in 1978, she began teaching herself calligraphy.
-- [Jan Owen AM Hon DLitt - Future Skills Organisation](https://www.futureskillsorganisation.com.au/jan-owen) — Jan Owen AM serves as Principal at AdaptabilityQ, bringing decades of experience as a social entrepreneur and innovator. As former CEO of the Foundation for
-- [Jan Owen (entrepreneur) - Wikipedia](https://en.wikipedia.org/wiki/Jan_Owen_(entrepreneur)) — Jan Owen AM Hon DLit is social and business entrepreneur, and author of Every Childhood Lasts a Lifetime (1996) and The Future Chasers (2014).
+_(no web key / no results)_
 
 ## Shared history — from the spine
 **11 emails** · first 2025-07-18 · last 2025-10-07
@@ -37,11 +38,11 @@ Jan Owen is a social entrepreneur and co-founder of Be Well Health & Longevity, 
 - 2025-07-31 ← Re: Jan and BK - Justice Campaign
 
 ## Understanding — drafted
-Jan Owen is a social entrepreneur whose work spans various facets of promoting holistic health, wellbeing, and social innovation. As the co-founder of Be Well Health & Longevity and former CEO of the Foundation for Young Australians (FYA), she has been instrumental in advocating for healthier lifestyles and empowering individuals and organizations to lead long, fulfilling lives. Her contributions extend beyond her current roles; Jan is also recognized as an author and a Principal at AdaptabilityQ, where she leverages decades of experience to foster adaptability and resilience.
+Jan Owen is a person deeply involved in social justice initiatives, particularly through a campaign focused on equity and fairness known as the "Justice Campaign." She appears to be an active participant or leader within her community, collaborating with others like BK (presumably another advocate or partner) to advance their cause. Jan also shows interest in broader environmental and health issues, as evidenced by her engagement with ACT’s Healthy People, Healthy Planet event in Melbourne.
 
-Jan's work demonstrates a deep care for social justice, health, and the empowerment of young people. She values initiatives that create positive impacts on individuals' lives and the planet. Her involvement in various campaigns and events highlights her dedication to fostering environments where both personal wellbeing and societal progress can thrive.
+From the email subjects, it seems that Jan cares deeply about social justice and is committed to making a positive impact on both people and the environment. Her involvement in events and campaigns indicates a strong dedication to community work and advocacy for healthier living conditions and sustainability.
 
-The arc of our shared work with Jan Owen has primarily centered around supporting her engagement in various justice campaigns and health-focused initiatives. Emails indicate collaborative efforts towards a "Justice Campaign," discussions about an event called "Healthy People, Healthy Planet" held in Melbourne, and other communications about mutual interests such as "Mparntwe." These interactions reflect our partnership in furthering causes that align with Jan's values of social justice and holistic wellbeing.
+The arc of our shared work with Jan Owen has involved supporting her efforts within the Justice Campaign and facilitating her participation in broader health and environmental initiatives. We have coordinated logistics, such as event invitations and campaign updates, providing resources and support where needed. The most recent activities include preparing a container for an unspecified use and discussing arrangements for Mparntwe-related matters.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

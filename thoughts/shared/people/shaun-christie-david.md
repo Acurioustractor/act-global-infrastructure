@@ -2,11 +2,16 @@
 name: shaun christie-david
 lane: supporter
 warmth: 10
+ring: 15
 updated: 2026-06-06
 ---
 
 # shaun christie-david
   
+
+## Ben's read — ground truth (circle session 2026-06-06)
+> **"—"** · ring **15**
+
 
 ## Soil — institutional ground (CivicGraph)
 - **Org:** —
@@ -16,11 +21,7 @@ updated: 2026-06-06
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Shaun Christie-David is a chef and founder of Plate it Forward Hospitality Group, focusing on social enterprises that employ marginalized individuals, particularly immigrant women, to transform lives through food and hospitality.
-- [Shaun Christie-David (@shaunchristiedavid) - Instagram](https://www.instagram.com/shaunchristiedavid?hl=en) — Second Chance Kitchen isn't just about cooking—it's about building confidence, teaching practical skills, and providing young people in detention with a fresh
-- [The Heart on the Plate: Shaun Christie-David and the Radical ...](https://wearecompadres.com/the-heart-on-the-plate-shaun-christie-david-and-the-radical-power-of-food) — Shaun has created a movement—a hospitality group with heart—that employs approximately 90% marginalised immigrant women, celebrates the cultural
-- [Shaun Christie-David's Recipe for Impact with his Plate It Forward ...](https://www.youtube.com/watch?v=wATn3hpLfaQ) — Meet Shaun Christie-David: A Chef on a Man on Mission to Feed and Transform Communities! What if a meal could change a life?
-- [Shaun Christie-David On Intelligently Growing Social Enterprises To ...](https://www.impactboom.org/blog/2025/02/03/shaun-christie-david-on-intelligently-growing-social-enterprises-to-amplify-long-term-impacts) — Shaun Christie-David is the founder of the Plate it Forward Hospitality Group - a restaurant group providing opportunities to people who are
+_(no web key / no results)_
 
 ## Shared history — from the spine
 **17 emails** · first 2025-08-27 · last 2026-02-02
@@ -37,11 +38,11 @@ Shaun Christie-David is a chef and founder of Plate it Forward Hospitality Group
 - 2025-10-21 ← Accepted: Shaun for lunch @ Fri 24 Oct 2025 11am - 12pm (AEST) (benjamin@act.place)
 
 ## Understanding — drafted
-Shaun Christie-David is a chef and the founder of Plate it Forward Hospitality Group, an organization that prioritizes social impact through food and hospitality. Shaun’s work centers around creating opportunities for marginalized individuals, especially immigrant women, providing them with jobs and skills training in his restaurants. Beyond just offering employment, Shaun’s projects like Second Chance Kitchen aim to rebuild confidence and instill practical life skills among young people facing challenging circumstances.
+Shaun Christie-David is an individual whose specific role and professional background are not detailed within the context provided. From our interactions, it appears that Shaun engages in various projects or initiatives, possibly related to commercial kitchens and community food programs such as Woof & Plates, which suggests a focus on sustainable and communal approaches to food systems. There's also mention of "PICC," potentially an acronym for a project or organization involved with commercial kitchen operations.
 
-Shaun clearly cares deeply about the transformative power of food and hospitality as tools for social change. He believes that through his initiatives, he can not only offer meals but also provide pathways out of marginalization and towards empowerment. His efforts are rooted in a vision where each plate served is a step toward a more equitable society.
+Shaun seems to care about collaborative and innovative solutions in the realm of food production and distribution, possibly with an emphasis on community engagement and sustainability. The frequent mentions of PICC suggest that Shaun is invested in the development and operation of a specific commercial kitchen or related infrastructure. Additionally, discussions around decks and other non-specific project names hint at broader interests or responsibilities outside these immediate topics.
 
-Our shared work with Shaun appears to have focused on practical aspects related to Plate it Forward's operations, such as discussions around commercial kitchens (PICC) and other logistical matters like decks and documents. The emails suggest ongoing collaboration and support for the implementation of his initiatives, from securing facilities to managing administrative tasks.
+Our shared work with Shaun has primarily involved back-and-forth communication about specific projects like Woof & Plates and PICC, including details on commercial kitchens. There have been exchanges regarding documents and forms, indicating administrative coordination for these initiatives. The emails also mention a lunch meeting that was accepted, suggesting personal or professional discussions to further align our collaborative efforts around these community-focused food-related projects.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.
