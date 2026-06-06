@@ -55,11 +55,15 @@ while (pages < MAX_PAGES) {
     if (c.type !== 'single') continue;                       // 1:1 threads only — group pings ≠ personal contact
     const t = Date.parse(c.lastActivity || '');
     if (isNaN(t) || t < horizon) continue;
+    // the other participant's number — lets hand-confirmed identities key by PHONE
+    // (chat titles are address-book names: bare "Sam" is ambiguous, +61422513893 is not)
+    const other = (c.participants?.items || []).find(p => !p.isSelf && p.phoneNumber);
     singles.push({
       title: c.title || '',
       network: c.network || '',
       lastActivity: c.lastActivity,
       unread: c.unreadCount ?? 0,
+      phone: other?.phoneNumber || '',
     });
   }
 

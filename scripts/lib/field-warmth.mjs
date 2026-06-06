@@ -103,22 +103,37 @@ export function queuePriority(votes, name, signal) {
 // single chat's lastActivity (metadata only); this folds it in as max(email, beeper).
 const digits9 = s => (s || '').replace(/\D/g, '').slice(-9);
 
-/** Load the recency snapshot: canon(name)→ms and digits9(phone)→ms (max per key). */
+/** Load the recency snapshot: canon(name)→ms and digits9(phone)→ms (max per key).
+ *  beeper-identities.json (hand-confirmed by Ben, phone-keyed, never guessed) remaps
+ *  ambiguous chat titles — bare "Sam" +61422513893 → sam davies (2026-06-07). */
 export function loadBeeperRecency(path = 'thoughts/shared/beeper-recency.json') {
   const out = { byName: new Map(), byPhone: new Map(), generatedAt: null };
   if (!existsSync(path)) return out;
   let j; try { j = JSON.parse(readFileSync(path, 'utf8')); } catch { return out; }
   out.generatedAt = j.generated_at || null;
+  const ids = new Map();                                  // digits9(phone) → confirmed person
+  try {
+    if (existsSync('thoughts/shared/beeper-identities.json'))
+      for (const i of JSON.parse(readFileSync('thoughts/shared/beeper-identities.json', 'utf8')).identities || []) {
+        const p9 = digits9(i.phone);
+        if (p9.length === 9 && i.person) ids.set(p9, i.person);
+      }
+  } catch { /* identities are optional */ }
   for (const c of j.chats || []) {
     const t = Date.parse(c.lastActivity || '');
     if (isNaN(t)) continue;
     const title = c.title || '';
+    const p9 = digits9(c.phone || (!/[a-z]{3,}/i.test(title) ? title : ''));
+    const confirmed = p9.length === 9 ? ids.get(p9) : null;
+    if (confirmed) {                                      // Ben's word beats the chat title
+      const k = canon(confirmed);
+      if (k && !(out.byName.get(k) >= t)) out.byName.set(k, t);
+    }
     if (/[a-z]{3,}/i.test(title)) {                       // name-titled chat
       const k = canon(title);
       if (k && !(out.byName.get(k) >= t)) out.byName.set(k, t);
     }
-    const p9 = digits9(title);                            // phone-titled chat (iMessage)
-    if (p9.length === 9 && !/[a-z]{3,}/i.test(title) && !(out.byPhone.get(p9) >= t)) out.byPhone.set(p9, t);
+    if (p9.length === 9 && !(out.byPhone.get(p9) >= t)) out.byPhone.set(p9, t);
   }
   return out;
 }
