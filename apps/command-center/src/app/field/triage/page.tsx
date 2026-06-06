@@ -18,12 +18,19 @@ import { useMutation, useQuery } from '@tanstack/react-query'
 import { Loader2, Sparkles } from 'lucide-react'
 
 interface Person {
-  name: string; org: string; position: string
+  name: string; email: string; org: string; position: string
   signal: number; beeper: string; gmail: string
-  lastContact: string; tags: string[]; uncaptured: boolean
+  lastContact: string; projects: string[]; roles: string[]; uncaptured: boolean
   ring: string | null; vote: string | null; relation: string | null
 }
 interface TriageData { people: Person[]; total: number }
+interface Context { subjects: string[]; needs: string[] }
+
+const PROJECT_NAMES: Record<string, string> = {
+  'act-hv': 'Harvest', 'act-gd': 'Goods', 'act-jh': 'JusticeHub', 'act-cg': 'CivicGraph',
+  'act-el': 'Empathy Ledger', 'act-in': 'Studio', 'act-st': 'Studio', 'act-oo': 'Oonchiumpa', 'act-ce': 'Custodian First Economy',
+}
+const projectName = (c: string) => PROJECT_NAMES[c] || c
 
 export default function TriagePage() {
   const { data, isLoading } = useQuery<TriageData>({
@@ -45,6 +52,14 @@ export default function TriagePage() {
   const save = useMutation({
     mutationFn: (body: Record<string, unknown>) =>
       fetch('/api/field/circle', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body) }),
+  })
+
+  // story-so-far for the current card: live email subjects + needs-match suggestions
+  const { data: ctx } = useQuery<Context>({
+    queryKey: ['triage-ctx', person?.name],
+    queryFn: () => fetch(`/api/field/circle?context=${encodeURIComponent(person!.name)}&email=${encodeURIComponent(person!.email)}`).then(r => r.json()),
+    enabled: !!person,
+    staleTime: Infinity,
   })
 
   const vote = useCallback((v: 'up' | 'down' | 'noidea' | 'skip') => {
@@ -94,11 +109,37 @@ export default function TriagePage() {
         {(person.org || person.position) && (
           <div className="mt-3 text-xl text-zinc-400">{person.org}{person.position ? ` · ${person.position}` : ''}</div>
         )}
+        {/* what they're on + what they could be on */}
+        <div className="mt-4 flex flex-wrap items-center justify-center gap-2">
+          {person.projects.map(p => (
+            <span key={p} className="rounded-full bg-emerald-900/50 px-3 py-1 text-sm text-emerald-300">{projectName(p)}</span>
+          ))}
+          {person.roles.map(r => (
+            <span key={r} className="rounded-full bg-zinc-800 px-3 py-1 text-sm text-zinc-400">{r}</span>
+          ))}
+        </div>
+        {(ctx?.needs?.length || 0) > 0 && (
+          <div className="mt-3 max-w-xl text-sm text-amber-400/90">
+            could help: {ctx!.needs.join(' · ')}
+          </div>
+        )}
+
         <div className="mt-4 flex flex-wrap items-center justify-center gap-2 text-sm text-zinc-500">
           {person.beeper && <span>chats: {person.beeper}</span>}
           {person.gmail && <span>emails {person.gmail}</span>}
           {person.lastContact && <span>last {person.lastContact}</span>}
         </div>
+
+        {/* the story so far — actual email subjects, the recognition anchor */}
+        {(ctx?.subjects?.length || 0) > 0 && (
+          <div className="mt-5 w-full max-w-xl rounded-xl border border-zinc-800 bg-zinc-900/50 px-5 py-4 text-left">
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wide text-zinc-500">the story so far</div>
+            <ul className="space-y-1 font-mono text-sm text-zinc-300">
+              {ctx!.subjects.map((s, i) => <li key={i} className="truncate">{s}</li>)}
+            </ul>
+          </div>
+        )}
+
         <button onClick={() => vote('noidea')}
           className="mt-6 rounded-full border border-zinc-700 px-4 py-1.5 text-sm text-zinc-400 hover:bg-zinc-800">
           who? never heard of them

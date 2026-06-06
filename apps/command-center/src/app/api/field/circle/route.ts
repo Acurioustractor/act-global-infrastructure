@@ -71,10 +71,14 @@ async function triageList() {
     const signal = bs + ((gi && go) ? Math.min(gi, go) : 0)
     const d = reads.get(k)
     const s = soil.get(k)
+    const tags = (p.rel_tags || '').split(' ').filter(Boolean)
     people.push({
-      name: p.name, org: s?.company || '', position: s?.position || '',
+      name: p.name, email: (p.email || '').toLowerCase(),
+      org: s?.company || '', position: s?.position || '',
       signal, beeper: p.beeper_pattern || '', gmail: p.gmail_in_out || '',
-      lastContact: p.last_contact || '', tags: (p.rel_tags || '').split(' ').filter(Boolean).slice(0, 3),
+      lastContact: p.last_contact || '',
+      projects: tags.filter(t => t.startsWith('project:')).map(t => t.slice(8)),
+      roles: tags.filter(t => t.startsWith('role:')).map(t => t.slice(5)),
       uncaptured: p.in_ghl === 'n',
       ring: d?.ring || null, vote: d?.vote || null, relation: d?.relation || null,
     })
@@ -83,8 +87,43 @@ async function triageList() {
   return people
 }
 
+/** Per-person context for the triage screen: recent email subjects (recognition
+ *  anchor, live from the spine) + what the Stage-F needs-matcher thinks they
+ *  could help with. Fetched lazily per card — 1,846 people, only the current one. */
+async function personContext(name: string, email: string) {
+  let subjects: string[] = []
+  if (email) {
+    try {
+      const { createClient } = await import('@supabase/supabase-js')
+      const sb = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!)
+      // spine join key is ghl_contact_id, NOT email (same lesson as build-person-pages.mjs)
+      const { data: contacts } = await sb.from('ghl_contacts').select('ghl_id').eq('email', email.toLowerCase()).limit(10)
+      const ids = (contacts || []).map(c => c.ghl_id).filter(Boolean)
+      const q = sb.from('communications_history').select('occurred_at,direction,subject')
+        .order('occurred_at', { ascending: false }).limit(6)
+      const { data } = ids.length
+        ? await q.in('ghl_contact_id', ids)
+        : await q.eq('contact_email', email.toLowerCase())
+      subjects = (data || []).filter(r => r.subject)
+        .map(r => `${(r.occurred_at || '').slice(0, 10)} ${r.direction === 'inbound' ? '←' : '→'} ${r.subject.slice(0, 80)}`)
+    } catch { /* spine unavailable → subjects stay empty */ }
+  }
+  const needs: string[] = []
+  const matchTxt = await readIf(path.join(REPO, 'thoughts/shared/project-needs-match.csv'))
+  if (matchTxt) {
+    for (const r of rows(matchTxt)) {
+      if (norm(r.name || r.person || '') === norm(name) && (r.need || r.need_label))
+        needs.push(`${r.project || ''} — ${r.need || r.need_label}`.replace(/^ — /, ''))
+    }
+  }
+  return { subjects, needs: needs.slice(0, 3) }
+}
+
 export async function GET(req: Request) {
-  if (new URL(req.url).searchParams.get('mode') === 'triage') {
+  const params = new URL(req.url).searchParams
+  if (params.get('context') != null)
+    return NextResponse.json(await personContext(params.get('context') || '', params.get('email') || ''))
+  if (params.get('mode') === 'triage') {
     const people = await triageList()
     return NextResponse.json({ people, total: people.length })
   }
