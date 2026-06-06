@@ -38,6 +38,7 @@ const cooc=rd('thoughts/shared/orbit-cooccurrence.csv');
 const sup=new Map();
 for(const p of rd('thoughts/shared/unified-orbit-worklist.csv')){
   if(p.status==='ghost'||p.status==='community')continue;
+  if(p.vendor==='yes')continue;                                  // vendors never enter the rings — don't waste a read
   if(handle(p.name||'')||internal(p.name||''))continue;
   const bs=Number(p.beeper_score)||0;const[gi,go]=(p.gmail_in_out||'').split('/').map(Number);
   const w=bs+((gi&&go)?Math.min(gi,go)*2:0);const k=norm(p.name);if(!k||dealt.has(k))continue;

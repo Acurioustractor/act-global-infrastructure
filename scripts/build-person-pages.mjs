@@ -89,12 +89,16 @@ async function qwenSynth(prompt){
 //    CivicGraph couldn't resolve still gets a page; their soil rows just show '—') ──
 const soil=rd('thoughts/shared/orbit-soil.csv');
 const isInternalP=p=>/^(ben(jamin)? knight|nic(holas)? marchesi( oam)?|a curious tractor)$/i.test((p.name||'').trim());
+// vendor pollution guard (mirror build-unified-orbit.mjs) — service providers skip the default
+// build (volume ≠ closeness; Thriday support got qwen-synthesised 2026-06-06). --name still works.
+const VENDOR=/standardledger\.co|standard ledger|thriday|cosec/i;
+const isVendorP=p=>VENDOR.test(p.name||'')||VENDOR.test(p.email||'')||VENDOR.test(p.company||'');
 // the community line holds PER PERSON, not per row — one community-lane row anywhere marks the
 // person community, even if a duplicate row carries another lane (Kristy Bloomfield had 4
 // community rows + 1 'ghost' row; the ghost row leaked her into the committed pages).
 const communityKeys=new Set(soil.filter(p=>p.lane==='community').map(p=>slug(p.name)));
 const isCommunityP=p=>p.lane==='community'||communityKeys.has(slug(p.name||''));
-let people=soil.filter(p=>!isCommunityP(p)&&!isInternalP(p));
+let people=soil.filter(p=>!isCommunityP(p)&&!isInternalP(p)&&!isVendorP(p));
 if(ONE){ people=soil.filter(p=>p.name.toLowerCase().includes(ONE.toLowerCase()));
   // the community line holds on EVERY path — storytellers/elders are never web-profiled (OCAP)
   const blocked=people.filter(isCommunityP);

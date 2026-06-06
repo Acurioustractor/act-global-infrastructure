@@ -25,6 +25,7 @@ const looksLikeHandle=n=>/@/.test(n)||/^\+?\d[\d \-()]{6,}$/.test((n||'').trim()
 const isInternal=n=>/^(ben(jamin)? knight|nic(holas)? marchesi( oam)?|a curious tractor)$/i.test((n||'').trim());
 for(const p of orbit){
   if(p.status==='ghost'||p.status==='community')continue;            // ghosts + community handled elsewhere
+  if(p.vendor==='yes')continue;                                   // vendors out of the rings (volume ≠ closeness)
   if(looksLikeHandle(p.name)||isInternal(p.name))continue;           // not real layer members
   const tags=(p.rel_tags||'');
   const bs=Number(p.beeper_score)||0;

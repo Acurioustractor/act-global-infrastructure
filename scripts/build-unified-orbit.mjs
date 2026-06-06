@@ -35,6 +35,10 @@ const digits9 = s => (s || '').replace(/\D/g, '').slice(-9);
 // 2026-06-06: "eloise hall" removed — TABOO co-founder / Goods-handover partner, NOT in EL,
 // role:funder + goods-impact-finance = supporter lane (Ben: "fix all"). Was a false positive here.
 const COMMUNITY_NAME = /bloomfield|oonchiump|tanya turner|brodie|germaine|\bpicc\b|atnarpa|kristy|valerie riley/i;
+// Vendor pollution (circle-session error class, 2026-06-06): service providers whose email
+// volume fakes warmth — Standard Ledger ranked ring-15 by the matcher, Thriday support pages
+// got qwen-synthesised. Flag, don't delete: vendors stay visible but leave the rings.
+const VENDOR = /standardledger\.co|standard ledger|thriday|cosec/i;
 const COMMUNITY_ROLES = ['role:storyteller', 'role:community', 'role:community-controlled', 'role:elder']; // broad — lane/ptag classification only
 // The community-LINE VIOLATION (extraction-funnel protection) is about community INDIVIDUALS only.
 // `role:community` / `role:community-controlled` are SEGMENT / ORG markers (the Goods "community"
@@ -164,6 +168,7 @@ for (const c of contacts) {
     gmail_total: g ? g.total : '', gmail_in_out: g ? `${g.inbound}/${g.outbound}` : '',
     last_contact: (c.last_contact_date || (g ? g.last_contact : '') || '').slice(0, 10),
     rel_tags: relTags.join(' '), dupe, home, ptag, flags: flags.join(' '), signalRank,
+    vendor: (VENDOR.test(c.full_name || '') || VENDOR.test(c.email || '')) ? 'yes' : '',
   });
 }
 
@@ -186,6 +191,7 @@ for (const b of beeper) {
     ptag: community ? 'lane:community (constellation)' : (Number(b.score) >= 80 ? 'circle:gsd-alliance? + tier:steward?' : 'tier: set-by-evidence'),
     flags: ['UNCAPTURED-ALLY', b.read ? b.read : ''].filter(Boolean).join(' '),
     signalRank: Number(b.score) + 120,
+    vendor: VENDOR.test(b.name || '') ? 'yes' : '',
   });
   if (!community) uncaptured++;
 }
@@ -214,7 +220,7 @@ rows.sort((a, b) => b.signalRank - a.signalRank);
 
 // --- 5) write the worklist ----------------------------------------------
 const esc = v => `"${String(v ?? '').replace(/"/g, '""')}"`;
-const cols = ['CIRCLE', 'LANE_FIX', 'NOTES', 'status', 'home', 'ptag', 'name', 'email', 'phone', 'in_ghl', 'sources', 'beeper_score', 'beeper_pattern', 'gmail_total', 'gmail_in_out', 'last_contact', 'rel_tags', 'dupe', 'flags'];
+const cols = ['CIRCLE', 'LANE_FIX', 'NOTES', 'status', 'home', 'ptag', 'name', 'email', 'phone', 'in_ghl', 'sources', 'beeper_score', 'beeper_pattern', 'gmail_total', 'gmail_in_out', 'last_contact', 'rel_tags', 'dupe', 'flags', 'vendor'];
 const lines = [cols.join(',')];
 for (const r of rows) lines.push(cols.map(c => esc(c in r ? r[c] : '')).join(','));
 const out = 'thoughts/shared/unified-orbit-worklist.csv';

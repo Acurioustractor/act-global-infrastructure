@@ -47,6 +47,7 @@ const isInternal=n=>/^(ben(jamin)? knight|nic(holas)? marchesi( oam)?|a curious 
 const sup=new Map();
 for(const p of orbit){
   if(p.status==='ghost'||p.status==='community')continue;
+  if(p.vendor==='yes')continue;                                   // vendors out of the rings (volume ≠ closeness)
   if(isInternal(p.name||''))continue;
   const tags=p.rel_tags||'';const bs=Number(p.beeper_score)||0;const[gi,go]=(p.gmail_in_out||'').split('/').map(Number);
   const warmth=bs+((gi&&go)?Math.min(gi,go)*2:0);

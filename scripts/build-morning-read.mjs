@@ -31,6 +31,7 @@ const looksLikeHandle=n=>/@/.test(n)||/^\+?\d[\d \-()]{6,}$/.test(n.trim());    
 const isInternal=n=>/^(ben(jamin)? knight|nic(holas)? marchesi( oam)?|a curious tractor)$/i.test(n.trim());
 for(const p of orbit){
   if(p.status==='ghost'||p.status==='community')continue;
+  if(p.vendor==='yes')continue;                                                  // vendors out of the rings (volume ≠ closeness)
   if(looksLikeHandle(p.name||'')||isInternal(p.name||''))continue;               // not real layer members
   const tags=p.rel_tags||'';const bs=Number(p.beeper_score)||0;const[gi,go]=(p.gmail_in_out||'').split('/').map(Number);
   const warmth=bs+((gi&&go)?Math.min(gi,go)*2:0); const k=norm(p.name); if(!k)continue;
