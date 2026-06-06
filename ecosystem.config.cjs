@@ -84,6 +84,17 @@ const cronScripts = [
     cron_restart: '55 7 * * 1', // Weekly Monday 7:55am AEST
   },
   {
+    // Weekly Monday 7:45am AEST: spawn the week's PPPP scan page (Run #N)
+    // under the field guide, pre-filled with per-P system feeds (orbit cooling,
+    // 7d spend by project, PM2/spine health, week's commits). Idempotent per
+    // ISO week via cfg.ppppScan.runs. Lands before ecosystem-digest (7:55)
+    // and the cockpit (8am) so the scan page is waiting when Ben + Nic sit.
+    // Logic: wiki/concepts/pppp-operating-logic.md
+    name: 'pppp-scan',
+    script: 'scripts/sync-pppp-scan-to-notion.mjs',
+    cron_restart: '45 7 * * 1', // Weekly Monday 7:45am AEST
+  },
+  {
     // Daily 06:35am AEST: drain the quiet-hours Telegram queue. Anything
     // queued during 21:00-06:30 (held by scripts/lib/telegram.mjs) gets
     // consolidated + sent as ONE morning summary. See
