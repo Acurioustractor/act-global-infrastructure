@@ -33,7 +33,8 @@ const LOG = 'thoughts/shared/orbit-community-line-sweep-log.md';
 const DIFF = 'thoughts/shared/orbit-community-line-sweep-diff.csv';
 
 // ── classification constants (mirror build-unified-orbit.mjs) ──────────────
-const COMMUNITY_NAME = /bloomfield|oonchiump|tanya turner|eloise hall|brodie|germaine|\bpicc\b|atnarpa|kristy|valerie riley|palm island|cassidy|stokes|doyle|anderson/i;
+// 2026-06-06: "eloise hall" removed (TABOO co-founder, supporter lane — see build-unified-orbit.mjs)
+const COMMUNITY_NAME = /bloomfield|oonchiump|tanya turner|brodie|germaine|\bpicc\b|atnarpa|kristy|valerie riley|palm island|cassidy|stokes|doyle|anderson/i;
 const COMMUNITY_ROLES = ['role:storyteller', 'role:community', 'role:community-controlled', 'role:elder'];
 const COMMUNITY_DOMAINS = /@(oonchiumpa|empathy-ledger)\b/i;
 const norm = s => (s || '').toLowerCase().replace(/[^a-z0-9 ]/g, '').replace(/\s+/g, ' ').trim();

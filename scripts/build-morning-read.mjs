@@ -94,6 +94,7 @@ h1{font-size:21px;margin:0}.date{color:#8b98a9;font-size:13px;margin:2px 0 4px}
 .layers{color:#6b7a8d;font-size:12px;margin-top:6px}
 </style></head><body><div class=wrap>
 <h1>The Field — morning read</h1><div class=date>${today}</div>
+${(()=>{try{const f=JSON.parse(readFileSync('thoughts/shared/field-freshness.json','utf8'));const d=f.stale_days;return(d==null||d>2)?`<div class=state><span class=warn>⚠ Email spine is ${d??'??'} days stale (last gmail ingest ${(f.gmail_max_created||'never').slice(0,10)}) — warmth/cooling below may be wrong. Run sync-gmail-to-supabase + check trigger errors.</span></div>`:'';}catch{return'';}})()}
 <div class=state>
 <b>Energy check.</b> Your inner 5: ${inner5.map(p=>p.name).join(' · ')||'—'}.
 ${coreStale.length?`<span class=warn>${coreStale.length} of your inner 15 are >30 days quiet (${coreStale.slice(0,3).map(p=>p.name).join(', ')}${coreStale.length>3?'…':''}) — the core is going untended.</span>`:`<span class=ok>The core is tended.</span>`}

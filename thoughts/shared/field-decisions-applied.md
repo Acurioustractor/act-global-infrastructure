@@ -1,0 +1,4 @@
+
+## Field decisions applied — 2026-06-06T00:44:30.103Z (2 people)
+- alexandra lagelee kean M6SIDwBoUo4NxKaMXF6G: added [], removed [role:community goods-community] · UNDO: invert · before=[act-gd audience-funder comms:funder-drip comms:goods-newsletter comms:supporter-drip funder goods goods-community goods-funder goods-inquiry goods-newsletter goods-supporter project:act-gd role:community role:funder role:supporter source:inquiry]
+- sam QPuFa9vmpyxlJqRAI9PW: added [interest:storytelling], removed [role:storyteller audience-storyteller] · UNDO: invert · before=[audience-storyteller comms:act-newsletter comms:harvest-newsletter comms:newsletter harvest-website interest-community interest-events interest-markets interest-membership interest-sustainability interest-workshops interest:community interest:events interest:markets interest:membership interest:sustainability interest:workshops newsletter project:act-hv role:storyteller source:website tier:member]

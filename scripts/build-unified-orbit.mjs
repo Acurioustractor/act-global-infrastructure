@@ -32,7 +32,9 @@ const HONORIFICS = /\b(mba|bsc|phd|ao|am|oam|dr|prof|professor|she ?her|maipm|cp
 const normName = s => (s || '').toLowerCase().replace(/[^a-z0-9 ]/g, '').replace(HONORIFICS, '').replace(/\s+/g, ' ').trim();
 const normEmail = s => (s || '').toLowerCase().trim();
 const digits9 = s => (s || '').replace(/\D/g, '').slice(-9);
-const COMMUNITY_NAME = /bloomfield|oonchiump|tanya turner|eloise hall|brodie|germaine|\bpicc\b|atnarpa|kristy|valerie riley/i;
+// 2026-06-06: "eloise hall" removed — TABOO co-founder / Goods-handover partner, NOT in EL,
+// role:funder + goods-impact-finance = supporter lane (Ben: "fix all"). Was a false positive here.
+const COMMUNITY_NAME = /bloomfield|oonchiump|tanya turner|brodie|germaine|\bpicc\b|atnarpa|kristy|valerie riley/i;
 const COMMUNITY_ROLES = ['role:storyteller', 'role:community', 'role:community-controlled', 'role:elder']; // broad — lane/ptag classification only
 // The community-LINE VIOLATION (extraction-funnel protection) is about community INDIVIDUALS only.
 // `role:community` / `role:community-controlled` are SEGMENT / ORG markers (the Goods "community"
