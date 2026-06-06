@@ -46,7 +46,48 @@ function jsonl(t: string): any[] {
   return t.split('\n').filter(Boolean).map(l => { try { return JSON.parse(l) } catch { return null } }).filter(Boolean)
 }
 
-export async function GET() {
+const SOIL = path.join(REPO, 'thoughts/shared/orbit-soil.csv')
+const isHandle = (n: string) => /@/.test(n) || /^\+?\d[\d \-()]{6,}$/.test((n || '').trim())
+const isInternal = (n: string) => /^(ben(jamin)? knight|nic(holas)? marchesi( oam)?|a curious tractor)$/i.test((n || '').trim())
+
+/** Triage mode: EVERY supporter-lane human in one fast list — upvote (pull closer),
+ *  downvote (push out), confirm (right where they are). Community lane never appears
+ *  (OCAP — never laddered). Votes are ledger-only; warmth v2 consumes them. */
+async function triageList() {
+  const [decTxt, wlTxt, soilTxt] = await Promise.all([readIf(DECISIONS), readIf(WORKLIST), readIf(SOIL)])
+  const reads = new Map<string, any>()
+  for (const d of jsonl(decTxt)) reads.set(norm(d.name), d) // latest wins
+  const soil = new Map<string, Record<string, string>>()
+  for (const s of rows(soilTxt)) { const k = norm(s.name); if (k && !soil.has(k)) soil.set(k, s) }
+
+  const seen = new Set<string>()
+  const people = []
+  for (const p of rows(wlTxt)) {
+    if (p.status === 'community' || p.status === 'ghost' || p.vendor === 'yes') continue
+    if (isHandle(p.name || '') || isInternal(p.name || '')) continue
+    const k = norm(p.name); if (!k || seen.has(k)) continue; seen.add(k)
+    const bs = Number(p.beeper_score) || 0
+    const [gi, go] = (p.gmail_in_out || '').split('/').map(Number)
+    const signal = bs + ((gi && go) ? Math.min(gi, go) : 0)
+    const d = reads.get(k)
+    const s = soil.get(k)
+    people.push({
+      name: p.name, org: s?.company || '', position: s?.position || '',
+      signal, beeper: p.beeper_pattern || '', gmail: p.gmail_in_out || '',
+      lastContact: p.last_contact || '', tags: (p.rel_tags || '').split(' ').filter(Boolean).slice(0, 3),
+      uncaptured: p.in_ghl === 'n',
+      ring: d?.ring || null, vote: d?.vote || null, relation: d?.relation || null,
+    })
+  }
+  people.sort((a, b) => b.signal - a.signal)
+  return people
+}
+
+export async function GET(req: Request) {
+  if (new URL(req.url).searchParams.get('mode') === 'triage') {
+    const people = await triageList()
+    return NextResponse.json({ people, total: people.length })
+  }
   const [preTxt, decTxt, wlTxt, coocTxt] = await Promise.all([
     readIf(PREREADS), readIf(DECISIONS), readIf(WORKLIST), readIf(COOC),
   ])
@@ -90,11 +131,16 @@ export async function POST(req: Request) {
   if (ring && !['5', '15', '50', '150', 'out'].includes(ring))
     return NextResponse.json({ error: 'ring must be 5|15|50|150|out' }, { status: 400 })
 
+  const vote = body.vote ? String(body.vote) : undefined
+  if (vote && !['up', 'down', 'confirm'].includes(vote))
+    return NextResponse.json({ error: 'vote must be up|down|confirm' }, { status: 400 })
+
   const entry: Record<string, unknown> = {
     ts: new Date().toLocaleDateString('en-CA'),
-    source: 'circle-ui',
+    source: vote ? 'triage-ui' : 'circle-ui',
     name,
   }
+  if (vote) entry.vote = vote
   if (ring) entry.ring = ring
   if (typeof body.energy === 'number') entry.energy = body.energy
   if (body.relation) entry.relation = String(body.relation).slice(0, 500)
