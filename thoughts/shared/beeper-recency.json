@@ -1,21 +1,21 @@
 {
- "generated_at": "2026-06-06T22:45:21.934Z",
+ "generated_at": "2026-06-06T23:19:52.181Z",
  "horizon_days": 365,
  "source": "beeper-desktop-api /v1/chats (single chats, metadata only)",
  "chats": [
+  {
+   "title": "Dali",
+   "network": "Telegram",
+   "lastActivity": "2026-06-06T23:00:06.000Z",
+   "unread": 252,
+   "phone": ""
+  },
   {
    "title": "+61 414 185 964",
    "network": "iMessage",
    "lastActivity": "2026-06-06T22:42:41.359Z",
    "unread": 1,
    "phone": "+61414185964"
-  },
-  {
-   "title": "Dali",
-   "network": "Telegram",
-   "lastActivity": "2026-06-06T22:00:09.000Z",
-   "unread": 249,
-   "phone": ""
   },
   {
    "title": "+61 424 054 113",

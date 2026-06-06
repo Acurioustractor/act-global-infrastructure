@@ -161,7 +161,7 @@ async function personContext(name: string, email: string) {
 
 // known name variants — keep in sync with scripts/lib/field-warmth.mjs ALIAS
 // (durable fix = identity resolution; this handles the known few for ?focus= lookups)
-const ALIAS: Record<string, string> = { 'ben croft': 'benjamin croft' }
+const ALIAS: Record<string, string> = { 'ben croft': 'benjamin croft', 'terry hutchinson': 'dr terry hutchinson' }
 const canon = (s: string) => { const k = norm(s); return ALIAS[k] || k }
 
 /** Focus mode: ONE card for a named person, read or not — the add-a-note flow

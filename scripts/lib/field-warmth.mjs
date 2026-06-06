@@ -20,6 +20,7 @@ export const norm = s => (s || '').toLowerCase().replace(/[^a-z0-9 ]/g, '').repl
 // never reached GHL). Durable fix = identity resolution; this map handles the known few.
 const ALIAS = new Map([
   ['ben croft', 'benjamin croft'],
+  ['terry hutchinson', 'dr terry hutchinson'],  // GHL holds the clean name (created 2026-06-07); ledger reads carry the honorific
 ]);
 export const canon = n => { const k = norm(n); return ALIAS.get(k) || k; };
 
