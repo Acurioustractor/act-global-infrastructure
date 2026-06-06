@@ -40,3 +40,4 @@ Two ring-150 supporters created in live GHL (LinkedIn-only, no email/phone — j
 - **Michael Houston** → `cAcR3ZitRcq3BGBmjMUM` · tags `ring:150 source:beeper` · read: "documentary maker — latent"
 - **Terry Hutchinson** → `72ybX7zZrX2NunOVNyuN` · tags `ring:150 source:beeper` · read: "offered journal help" · GHL name is clean ("Terry Hutchinson"); ledger key stays "Dr Terry Hutchinson" via field-warmth ALIAS
 Undo: deleteContact on the two IDs + drop the alias line.
+- **joy woods** `mDFpvRJHylVCabkQrM2Y` → +`ring:150` (Ben: "yes add it"; aligner couldn't match — no email either side). GHL response tags: act-gd project:act-gd ring:150. Mirror updated by hand. Identity context found in GHL: Safeguarding Consultant, custom field [Supporter, Warm, Safeguarding, Contained Tour], source "LinkedIn Comment Import". Undo: remove-tags ring:150.
