@@ -3,7 +3,9 @@
  * build-field-surfaces.mjs — regenerate The Field's three surfaces in one pass.
  * Cron: daily 6:50am AEST (before the 7am daily briefing) so the morning read
  * is waiting with coffee. All three are read-only over the worklist CSVs —
- * this re-renders dates/cooling/rotation; it does NOT re-pull GHL/EL/Beeper.
+ * this re-renders dates/cooling/rotation; it does NOT re-pull GHL/EL.
+ * Beeper recency IS re-pulled first (2026-06-07 — the cadence clock was email-blind;
+ * local metadata-only, failure-soft if Beeper Desktop isn't running).
  * (After any bulk GHL tag change, re-run the GHL sync first — see
  * wiki/concepts/ghl-tag-namespaces.md "sync-before-regen".)
  */
@@ -29,6 +31,11 @@ try {
   if (staleDays == null || staleDays > 2)
     console.error(`⚠ SPINE CANARY: gmail ingest ${staleDays ?? '??'} days stale — check sync-gmail-to-supabase + trigger errors (see migration 20260606000000)`);
 } catch (e) { console.error(`spine canary failed (surfaces still build): ${e.message}`); }
+
+// beeper recency first — surfaces fold it into last_contact. Failure-soft: if the
+// Beeper app is down, surfaces still build on the last snapshot (clock just staler).
+try { execSync('node scripts/build-beeper-recency.mjs', { stdio: 'inherit', cwd: CWD }); }
+catch { console.error('⚠ beeper recency pull failed (Beeper Desktop running?) — surfaces use the previous snapshot'); }
 
 let failed = 0;
 for (const s of ['build-morning-read.mjs', 'build-scope-board.mjs', 'build-orbit-viz.mjs']) {

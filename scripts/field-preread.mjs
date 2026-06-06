@@ -16,6 +16,7 @@
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import dotenv from 'dotenv';
 import { createClient } from '@supabase/supabase-js';
+import { overlayBeeperRecency } from './lib/field-warmth.mjs';
 dotenv.config({ path: '.env.local' });
 const sb = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY);
 
@@ -40,7 +41,9 @@ const soil=new Map();for(const s of rd('thoughts/shared/orbit-soil.csv'))if(!soi
 const cooc=rd('thoughts/shared/orbit-cooccurrence.csv');
 
 const sup=new Map();
-for(const p of rd('thoughts/shared/unified-orbit-worklist.csv')){
+const orbitRows=rd('thoughts/shared/unified-orbit-worklist.csv');
+overlayBeeperRecency(orbitRows);                                 // warm-channel time counts — clock no longer email-blind
+for(const p of orbitRows){
   if(p.status==='ghost'||p.status==='community')continue;
   if(p.vendor==='yes')continue;                                  // vendors never enter the rings — don't waste a read
   if(handle(p.name||'')||internal(p.name||''))continue;

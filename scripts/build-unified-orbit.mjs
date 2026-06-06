@@ -20,6 +20,7 @@
 import dotenv from 'dotenv';
 import { createClient } from '@supabase/supabase-js';
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
+import { overlayBeeperRecency } from './lib/field-warmth.mjs';
 
 dotenv.config({ path: '.env.local' });
 const url = process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_SHARED_URL;
@@ -195,6 +196,10 @@ for (const b of beeper) {
   });
   if (!community) uncaptured++;
 }
+
+// fold warm-channel time into last_contact (max of GHL/Gmail/Beeper) — the cadence
+// clock was email-blind until 2026-06-07; surfaces also overlay live at render time.
+overlayBeeperRecency(rows);
 
 rows.sort((a, b) => b.signalRank - a.signalRank);
 

@@ -14,7 +14,7 @@
  * Read-only. Run:  node scripts/build-orbit-viz.mjs   ·  Out: thoughts/shared/orbit-viz.html
  */
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
-import { loadLedger, layerOf, hasRead, cadenceState, canon } from './lib/field-warmth.mjs';
+import { loadLedger, layerOf, hasRead, cadenceState, canon, overlayBeeperRecency } from './lib/field-warmth.mjs';
 
 function parseCSV(t){const R=[];let r=[],f='',q=false;for(let i=0;i<t.length;i++){const c=t[i];if(q){if(c==='"'){if(t[i+1]==='"'){f+='"';i++;}else q=false;}else f+=c;}else if(c==='"')q=true;else if(c===',')(r.push(f),f='');else if(c==='\n')(r.push(f),R.push(r),r=[],f='');else if(c!=='\r')f+=c;}if(f||r.length){r.push(f);R.push(r);}return R;}
 const rd=p=>{const R=parseCSV(readFileSync(p,'utf8'));const h=R[0];return R.slice(1).filter(x=>x.length===h.length).map(x=>Object.fromEntries(h.map((k,i)=>[k,x[i]])));};
@@ -24,6 +24,7 @@ const isUuid=s=>/^[0-9a-f]{8}-[0-9a-f]{4}/.test(s)||/^[a-z]{2}\d{6}-0000/.test(s
 
 // ── supporters ──────────────────────────────────────────────────────────────
 const orbit=rd('thoughts/shared/unified-orbit-worklist.csv');
+overlayBeeperRecency(orbit);                                      // warm-channel time counts — clock no longer email-blind
 const supSeen=new Map();
 let quiet=0, unreadSignal=0;
 const looksLikeHandle=n=>/@/.test(n)||/^\+?\d[\d \-()]{6,}$/.test((n||'').trim());

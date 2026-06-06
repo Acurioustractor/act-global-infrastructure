@@ -96,3 +96,49 @@ export function queuePriority(votes, name, signal) {
   const v = votes.get(canon(name));
   return (v === 'up' ? 10000 : v === 'down' ? -10000 : 0) + signal;
 }
+
+// ── beeper recency: the clock stops being email-blind (2026-06-07) ──────────
+// last_contact came from GHL/Gmail only, so WhatsApp-alive people read overdue
+// (sam davies "53d") or dateless (Croft). build-beeper-recency.mjs snapshots every
+// single chat's lastActivity (metadata only); this folds it in as max(email, beeper).
+const digits9 = s => (s || '').replace(/\D/g, '').slice(-9);
+
+/** Load the recency snapshot: canon(name)→ms and digits9(phone)→ms (max per key). */
+export function loadBeeperRecency(path = 'thoughts/shared/beeper-recency.json') {
+  const out = { byName: new Map(), byPhone: new Map(), generatedAt: null };
+  if (!existsSync(path)) return out;
+  let j; try { j = JSON.parse(readFileSync(path, 'utf8')); } catch { return out; }
+  out.generatedAt = j.generated_at || null;
+  for (const c of j.chats || []) {
+    const t = Date.parse(c.lastActivity || '');
+    if (isNaN(t)) continue;
+    const title = c.title || '';
+    if (/[a-z]{3,}/i.test(title)) {                       // name-titled chat
+      const k = canon(title);
+      if (k && !(out.byName.get(k) >= t)) out.byName.set(k, t);
+    }
+    const p9 = digits9(title);                            // phone-titled chat (iMessage)
+    if (p9.length === 9 && !/[a-z]{3,}/i.test(title) && !(out.byPhone.get(p9) >= t)) out.byPhone.set(p9, t);
+  }
+  return out;
+}
+
+/** Mutate worklist rows in place: last_contact = max(csv date, beeper recency).
+ *  Match by canon(name), then phone. Idempotent (max), safe to run at build AND render. */
+export function overlayBeeperRecency(rows, rec = loadBeeperRecency()) {
+  if (!rec.byName.size && !rec.byPhone.size) return rows;
+  let touched = 0;
+  for (const r of rows) {
+    const p9 = digits9(r.phone || '');
+    const t = Math.max(rec.byName.get(canon(r.name)) ?? -1, (p9.length === 9 ? rec.byPhone.get(p9) : null) ?? -1);
+    if (t < 0) continue;
+    const cur = Date.parse(r.last_contact || '');
+    if (isNaN(cur) || t > cur) {
+      r.last_contact = new Date(t).toISOString().slice(0, 10);
+      r.last_contact_src = 'beeper';
+      touched++;
+    }
+  }
+  if (touched) console.log(`beeper recency overlaid on ${touched} row(s) (snapshot ${rec.generatedAt?.slice(0, 10) || '?'})`);
+  return rows;
+}

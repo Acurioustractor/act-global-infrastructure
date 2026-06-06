@@ -26,6 +26,7 @@ const today=NOW.toLocaleDateString('en-AU',{weekday:'long',day:'numeric',month:'
 
 // ── people (supporter lane, deduped, warmth) ────────────────────────────────
 const orbit=rd('thoughts/shared/unified-orbit-worklist.csv');
+overlayBeeperRecency(orbit);                                                      // warm-channel time counts — clock no longer email-blind
 const sup=new Map();
 const looksLikeHandle=n=>/@/.test(n)||/^\+?\d[\d \-()]{6,}$/.test(n.trim());      // unresolved Beeper email/phone identities
 const isInternal=n=>/^(ben(jamin)? knight|nic(holas)? marchesi( oam)?|a curious tractor)$/i.test(n.trim());
@@ -42,7 +43,7 @@ for(const p of orbit){
 // ── WARMTH V2 (locked 2026-06-07): ring = human-only · cadence = rhythm per ring ──
 // Calibration killed warmth-as-closeness (Ben's rejects scored HIGHEST). Layers come
 // from HIS reads; cadence alerts only for people he has ringed; votes order the queue.
-import { loadLedger, ringOf, layerOf, cadenceState, queuePriority, hasRead, canon } from './lib/field-warmth.mjs';
+import { loadLedger, ringOf, layerOf, cadenceState, queuePriority, hasRead, canon, overlayBeeperRecency } from './lib/field-warmth.mjs';
 const { reads, votes } = loadLedger();
 // energy override still names the inner core (his words)
 for (const [k, d] of reads) { const p = sup.get(k); if (p && d.energy != null) p.energy = d.energy; }
