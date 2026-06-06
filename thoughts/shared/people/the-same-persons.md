@@ -2,7 +2,7 @@
 name: The Same Persons
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # The Same Persons
@@ -16,16 +16,19 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-People often work with the same colleagues repeatedly due to shared experiences and mutual understanding. Healthy workplace relations involve mutual support and a sense of belonging. Strong colleague relationships enhance job satisfaction and productivity.
-- [How We End Up Working With The Same People At Every Job](https://www.fastcompany.com/3040544/how-we-end-up-working-with-the-same-people-at-every-job) — Many find themselves working with the same people again and again. These relationships endure even as the situations change.
-- [The Seven Kinds of People you'd meet at Work - LinkedIn](https://www.linkedin.com/pulse/seven-kinds-people-youd-meet-atwork-vineet-v-george) — A Romantic Hero, tends to add a lot of emotion — love, anger, thoughtfulness, and a general sense of responsibility towards multiple things,
-- [Take some time and learn what different people at your job do](https://thecontextofthings.com/2015/04/08/learn-what-different-people-at-your-job-do) — By some studies, only 50 percent of employees know what their own responsibilities are. If people are unclear on what they do, how can we expect them to be
-- [Sharing the Same Reality, Healthy Relations Between Colleagues at Work: A Meta-Synthesis](https://pmc.ncbi.nlm.nih.gov/articles/PMC10580729) — # Sharing the Same Reality, Healthy Relations Between Colleagues at Work: A Meta-Synthesis. A **.gov** website belongs to an official government organization in the United States. Image 5: PMC search open iconSearch. Image 9: Close Search  Image 10: Search. The aim was to identif
+The same persons often share common goals, build strong connections, and value relationships over titles. Their work focuses on teamwork and mutual support. They care deeply about each other's well-being and professional growth.
+- [Have you worked with the same people at different ...](https://www.quora.com/Have-you-worked-with-the-same-people-at-different-companies) — Have you worked with the same people at different companies?
+- [When you have coworkers who truly care about ...](https://www.facebook.com/Motivemastery8/posts/when-you-have-coworkers-who-truly-care-about-you-who-make-you-laugh-and-who-supp/1008528184662026) — It's not about the paycheck or the title, it's about the connections you build, the friendships you form, and the way you feel when you walk
+- [Do You Know the People Behind Your Colleagues? Why ...](https://www.deployyourself.com/deploy-yourself/people-behind-colleagues-why-it-matters) — Do you know the people you work with? Not the employees - the people and their stories. Here are some reasons why it matters.
+- [Colleague Or Coworker (With Definitions And Examples)](https://www.indeed.com/career-advice/career-development/colleagues-coworkers) — A colleague generally means a person you work with that has the same professional end goals as you do, although you may have different roles, skills and rank.
+
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-The Same Persons is a DJ, producer, and artist known for their work under the moniker THE SAME PERSONS. Their professional background emphasizes the importance of building strong, enduring relationships with colleagues, reflecting both their personal philosophy and approach to collaboration within the creative industry. The work they do revolves around fostering an environment where mutual support and understanding are key components in achieving success and maintaining satisfaction within their field.
+The Same Persons is an artist known for their multifaceted role as both a DJ and producer. Operating under the name THE SAME PERSONS, this individual or collective emphasizes teamwork and mutual support in their creative process. Their work revolves around fostering strong connections among team members and prioritizing these relationships over formal titles or roles within the industry.
 
-The Same Persons appears to deeply care about the dynamics of workplace relations and how these interactions can significantly influence job satisfaction and productivity. They place a strong emphasis on emotional connections and a sense of responsibility towards both colleagues and projects, suggesting that they value authenticity and genuine human connection over superficial relationships or transient collaborations. This approach not only guides their professional endeavors but also aligns with their artistic expression, where the essence of "the same persons" suggests a consistent dedication to these principles across different contexts and roles.
+What they seem to care about most is the well-being and professional growth of those they collaborate with. This extends beyond just the workplace, as evidenced by their approach to building friendships and valuing personal connections over monetary gains or career advancements. The Same Persons appears to prioritize understanding the stories behind each person they work with, suggesting a deep appreciation for human relationships and the unique narratives that individuals bring into their collaborative projects.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

@@ -2,7 +2,7 @@
 name: Connor O'Shea
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Connor O'Shea
@@ -16,12 +16,11 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Connor O'Shea works at JLL, focusing on occupancy planning. JLL emphasizes work-life balance and supportive culture. Their role involves strategic planning for office space utilization.
-- [At JLL, Kevin found a culture that prioritizes well-being and ...](https://www.instagram.com/reel/C7g8YlfvY7z?hl=en) — JLL is a work-life balance, the best that I've been a part of. JLL helped me shape a brighter way with the communications and the friendships,
-- [Rob O'Shea - Global Lead - Occupancy Planning at JLL | LinkedIn](https://ca.linkedin.com/in/rob-o-shea-3030012a) — Rob O'Shea
-Global Lead - Occupancy Planning at JLL
-Toronto, Ontario, Canada
-500 connections, 594 followers
+Connor O'Shea is Director of Near City Office Leasing at JLL, focusing on office leasing strategies. He prioritizes office space optimization and tenant satisfaction. His role emphasizes sustainable and innovative leasing practices.
+- [Connor O. - Director - Head of Near City Office Leasing - JLL](https://au.linkedin.com/in/connoroshea95) — Connor O.
+Director - Head of Near City Office Leasing - JLL
+Brisbane, Queensland, Australia
+500 connections, 1302 followers
 
 
 About
@@ -29,20 +28,21 @@ N/A
 
 
 Experience
-Global Lead - Occupancy Planning
-[JLL](https://www.linkedin.com/company/jll?trk=public_profile_experience-group-header)
-Nov 2023 - Present
-None
+Director - Head of Near City Office Leasing
+[JLL](https://www.linkedin.com/company/jll)  
+Dec 2023 - Present
+Brisbane, Queensland, 
+- [Connor O'Shea - LinkedIn - Mesh](https://me.sh/profile/connor-oshea-007a0b7d) — Currently serving as the Vice President at JPMorgan Chase & Co., Connor leverages his extensive experience and deep expertise to drive strategic initiatives and
+- [JLL Perspectives Podcast - Facebook](https://www.facebook.com/jll/videos/jll-perspectives-podcast/4299512443624544) — In our latest JLL Perspectives Podcast, JLL experts Annabel McFarlane, Connor McCauley and Charlotte Stratton from Lendlease explore updated
+- [At JLL, Kevin found a culture that prioritizes well-being and supports ...](https://www.instagram.com/reel/C7g8YlfvY7z?hl=en) — You can, you know, kind of pick up and kind of push pause on work for a minute and go take care of business and be back at the office. JLL is a
 
-
-Gl
-- [At JLL, we're dedicated to helping you thrive in every ...](https://www.facebook.com/jll/posts/at-jll-were-dedicated-to-helping-you-thrive-in-every-aspect-of-your-lifeour-supp/862322849262069) — At JLL, we're dedicated to helping you thrive in every aspect of your life. Our supportive culture and comprehensive benefits prioritize
-- [Kelly O'Shea | Surveyor | United Kingdom](https://www.jll.com/en-us/people/bio-broker/kelly.oshea) — Kelly O'Shea. Surveyor. Expertise: Project and development services · Business and professional services. Uxbridge | United Kingdom. +44 (20) 82832547.
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Connor O'Shea serves as the Director and Head of Near City Office Leasing at JLL, a global real estate company known for its emphasis on work-life balance and supportive culture. His role involves strategic occupancy planning to optimize office space utilization for his clients. Connor’s professional environment at JLL is marked by a strong focus on employee well-being and fostering positive working relationships, which are integral parts of the organization's ethos.
+Connor O'Shea holds the position of Director and Head of Near City Office Leasing at JLL, where he focuses on strategic office leasing initiatives in Brisbane, Queensland, Australia. His work involves optimizing office spaces to enhance tenant satisfaction while promoting sustainable and innovative leasing practices. With a strong emphasis on creating environments that meet both business needs and environmental standards, Connor plays a key role in shaping the future of commercial real estate within his region.
 
-Connor seems to care deeply about creating environments where employees can thrive both personally and professionally. His work in occupancy planning suggests an interest in balancing efficiency with comfort and functionality within office spaces. Given JLL’s supportive culture, it is evident that Connor values a workplace where communication, friendships, and overall well-being are prioritized, which aligns closely with the company’s broader mission of enhancing quality of life through real estate solutions.
+Connor seems to care deeply about sustainability and innovation within the realm of office space management. His professional activities suggest a commitment to fostering tenant satisfaction through thoughtful and eco-conscious leasing strategies. Additionally, he values a workplace culture that supports well-being, as evidenced by JLL's broader organizational emphasis on such principles. This indicates that beyond his professional duties, Connor likely prioritizes environments where individuals can thrive both professionally and personally.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

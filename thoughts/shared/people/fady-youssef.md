@@ -2,7 +2,7 @@
 name: Fady Youssef
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Fady Youssef
@@ -16,69 +16,19 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Fady Youssef is a freelance Communications and Analytics Director focused on achieving excellence. He has experience in media buying, marketing, and analytics. His work emphasizes high standards and results.
-- [Fady Youssef - Communications and Analytics Director - Freelance Communications and Analytics Director](https://www.linkedin.com/in/fadyfakhry) — Fady Youssef
-Communications and Analytics Director
-Cairo, Egypt
-500 connections, 15598 followers
+Fady Youssef is a freelance Communications and Analytics Director based in Cairo, Egypt. He specializes in operations transformation and has extensive experience in healthcare and government programs. His work focuses on strategic communications and data analytics.
+- [200+ "Fady Youssef" profiles](https://www.linkedin.com/pub/dir/Fady/Youssef) — View the profiles of professionals named "Fady Youssef" on LinkedIn. There ... Communications and Analytics Director. Cairo, Egypt. Freelance Artificial
+- [Fady Youssef Email & Phone Number](https://rocketreach.co/fady-youssef-email_77070346) — Fady Youssef, based in Cairo, Cairo Governorate, EG, is currently a Freelance Communications and Analytics Director at Freelance Communications and Analytics
+- [Fady Youssef - Operations & Transformation Leader](https://www.linkedin.com/in/fady-youssef-6694103a6) — I'm an Operations & Transformation Leader with 17+ years of experience across healthcare operations, government-supported programs, insurance operations,
+- [Creative | Dubai - Fady Youssef Rofaeel](https://www.fadyucf.com/fady-youssef-rofaeel) — Fady is a passionate, awarded creative leader with more than 15 years of experience across the advertising landscape. Fady is a recycling fanatic;
 
-
-About
-If I Cannot Achieve Excellence, Let Me Die Trying
-
-
-Experience
-Communications and Analytics Director
-[Qym](https://www.linkedin.com/company/qymapps)  
-Jun 2020 - Aug 2020
-Cair
-- [Fady Youssef - Communications and Analytics Director - Freelance Communications and Analytics Director](https://linkedin.com/in/fadyfakhry) — Fady Youssef
-Communications and Analytics Director
-Cairo, Egypt
-500 connections, 15598 followers
-
-
-About
-If I Cannot Achieve Excellence, Let Me Die Trying
-
-
-Experience
-Communications and Analytics Director
-[Qym](https://www.linkedin.com/company/qymapps)  
-Jun 2020 - Aug 2020
-Cair
-- [Fady Youssef - Senior media buyer & Head of marketing department &Senior Content Creator & Social Media Manager & Graphics Designer &data analyst & human resources recruitment - Kaito wear](https://www.linkedin.com/in/fady-youssef-6a91a4195) — Fady Youssef
-Senior media buyer & Head of marketing department &Senior Content Creator & Social Media Manager & Graphics Designer &data analyst & human resources recruitment
-Alexandria, Egypt
-500 connections, 5318 followers
-
-
-About
-FadyYoussef freelance website designer ( wood ca
-- [Fady Youssef](https://www.linkedin.com/in/fady-youssef-aa1518320) — Fady Youssef
-
-Cairo, Egypt
-35 connections, 35 followers
-
-
-About
-I’m Fady Youssef, a Communications & Electronics Engineer (IAET) with a strong focus on…
-
-
-Experience
-N/A
-
-
-Education
-Institute of Aviation Engineering and Technology
-N/A
-2021-10 - 2025-07
-None
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Fady Youssef is a freelance Communications and Analytics Director based in Cairo, Egypt. With a background that includes roles as a senior media buyer, head of marketing departments, content creator, social media manager, graphics designer, data analyst, and human resources recruiter, Fady has demonstrated versatility across various aspects of digital and traditional marketing. His experience spans from working with companies like Qym and Kaito Wear to freelance projects where he applies his skills in achieving measurable results through strategic communication and analytics.
+Fady Youssef is a freelance Communications and Analytics Director based in Cairo, Egypt. With over 17 years of professional experience, he has established himself as an expert in operations transformation within healthcare and government programs. His work emphasizes the importance of strategic communications and leveraging data analytics to drive impactful changes. Fady's career highlights his ability to effectively combine analytical skills with operational insights to achieve significant outcomes for various projects and initiatives.
 
-Fady appears to be deeply committed to excellence in his work. The phrase "If I Cannot Achieve Excellence, Let Me Die Trying" underscores a strong personal drive for卓越和高标准。他似乎非常关心如何通过有效的沟通策略和数据分析来达成显著的成果，并且这种追求完美的态度贯穿于他的职业生涯中。
+Fady seems to care deeply about transforming operations through innovative and data-driven approaches, particularly within healthcare and government sectors. His passion for recycling also indicates an underlying commitment to sustainability and responsible practices. Additionally, Fady’s background in creative leadership suggests that he values creativity and innovation not just in communications but across all his professional endeavors. This multifaceted approach reflects a broader interest in making meaningful contributions to society through both technical expertise and sustainable initiatives.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

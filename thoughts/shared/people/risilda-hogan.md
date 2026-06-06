@@ -2,7 +2,7 @@
 name: Risilda Hogan
 lane: community
 storyteller_id: 2bc5f39e-6a6f-410b-984d-7380adb9e2a6
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Risilda Hogan

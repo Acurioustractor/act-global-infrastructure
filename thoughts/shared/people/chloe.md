@@ -2,7 +2,7 @@
 name: Chloe
 lane: community
 storyteller_id: 8a78ec27-7d1e-4eee-9026-945b4809c723
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Chloe

@@ -2,7 +2,7 @@
 name: Nicole Snead 
 lane: community
 storyteller_id: e3cd6067-f590-40e5-a391-986ffb7ed951
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Nicole Snead 

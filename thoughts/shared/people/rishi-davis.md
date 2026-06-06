@@ -2,7 +2,7 @@
 name: Rishi Davis
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Rishi Davis
@@ -16,16 +16,19 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Rishi Davis Fittons Consultancy WLL focuses on human resources consulting, specializing in benefits, HR management, and labor compliance for entrepreneurs and small businesses. They emphasize best practices to attract and retain employees.
-- [Hear from Rishi, who had the opportunity to work at Deloitte this ...](https://www.instagram.com/p/DAMHcMsShPF) — Hear from Rishi, who had the opportunity to work at Deloitte this summer as a Business and Technology Solutions Analyst.
-- [John Davis | Human Resources Consulting & Compliance | LinkedIn](https://www.linkedin.com/in/johnwdavis8) — I work with Entrepreneurs and small businesses to help them attract and keep employees through best practices in Benefits, HR Management, Labor Compliance,
-- [Rick Davis, Advisory Director - Stanton Chase](https://www.stantonchase.com/consultant/rick-davis) — Rick has over 25 years of senior level executive search experience within the oil and gas industry and related financial services sectors.
+Rishi Davis Fittons Consultancy WLL specializes in strategic consulting, focusing on troubled companies and their stakeholders, particularly in bankruptcy protection scenarios. They emphasize deep, multilayer knowledge about companies and aim to navigate volatility effectively.
+- [FTI Consulting Names Richard Davis Vice President, Strategic ...](https://ir.fticonsulting.com/news-releases/news-release-details/fti-consulting-names-richard-davis-vice-president-strategic) — As a senior consultant, he provided consulting services to troubled companies and their constituent groups operating both in and out of bankruptcy protection.
 - [Chris Davis | Consultants | Russell Reynolds Associates](https://www.russellreynolds.com/en/people/consultant-directory/chris-davis) — Our executive search consultants help you recruit great CEOs, CxOs, and board members in as little as 14 weeks. We help boards and CEOs face the unprecedented challenges that shape our world—from disruptive technology to shifting demographics to pressure from investors and regula
+- [Joseph M. Davis, P.E. Biographical Summary - Resume](https://www.rf-consultants.com/Bio_1.htm) — Joe received a Bachelor of Science in Electrical Engineering Technology in 1982 from Old Dominion University in Norfolk, Virginia, and since 1980 has worked directly for and then served as a consultant to various television and radio stations in engineering capacities, including 
+- [Davis ETFs' Chris Davis on Trust: The Investor's Ultimate Superpower](https://www.youtube.com/watch?v=iWMrMedeQc4) — ... role, particularly through the inevitable periods of volatility. 2. Davis ETFs pursues deep, multilayer levels of knowledge about companies.
+
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Rishi Davis is a Project Manager and Client Representative at Fittons Consultancy WLL, an organization focused on providing human resources consulting services. With expertise in benefits management, HR compliance, and labor regulations, Rishi supports entrepreneurs and small businesses to foster environments that attract and retain top talent. His professional journey includes valuable experience as a Business and Technology Solutions Analyst at Deloitte during the summer, which likely honed his skills in strategic business solutions.
+Rishi Davis serves as a Project Manager and Client Representative at Fittons Consultancy WLL, an organization that specializes in strategic consulting for troubled companies, often navigating the complexities of bankruptcy protection scenarios. With extensive experience in providing consulting services to these entities and their stakeholders, Rishi works to apply his deep understanding of company operations and financial intricacies to help stabilize and restructure businesses during volatile times.
 
-Rishi appears to care deeply about the well-being of employees and the overall health of organizations he works with. By emphasizing best practices and compliance in human resources, Rishi demonstrates a commitment to ensuring that businesses not only operate within legal boundaries but also create positive work cultures. This focus on HR management suggests an appreciation for the importance of effective employee engagement and satisfaction, which are critical components of business success and sustainability.
+Rishi appears to be deeply committed to leveraging his specialized knowledge to support companies facing significant challenges. His work suggests a strong focus on detail and an ability to navigate complex situations with expertise and sensitivity. He seems particularly concerned with the well-being of both the company and its stakeholders, indicating a care for not just financial outcomes but also the broader impact on all involved parties. This approach underscores his dedication to finding solutions that are sustainable and beneficial in the long term.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

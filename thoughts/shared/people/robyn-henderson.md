@@ -2,7 +2,7 @@
 name: Robyn Henderson
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Robyn Henderson
@@ -16,16 +16,33 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Robyn Henderson is a global networking specialist known for her results-driven approach and extensive speaking engagements. She has authored five books and is recognized for her networking tips. Her work focuses on building relationships and connecting people.
-- [networkingtowin – Networking to win](https://www.networkingtowin.com.au) — Global networking specialist, Robyn Henderson, has built a reputation throughout Australia, New Zealand, Asia and Bahrain for getting results.
-- [What Is Networking? - by Robyn Henderson - HerBusiness](https://herbusiness.com/blog/networking-definition) — Robyn Henderson is widely regarded as a Global Networking Specialist and in this issue has shared some of her ”hot tips” to support you to network with
-- [Robyn Henderson - Speakers - EntertainOz](https://www.entertainoz.com.au/speakers-bureau/speakers/robyn-henderson) — Robyn Henderson has a passion for building relationships and connecting people and with five books under her belt and recognition from the speaking industry
-- [[PDF] Networking Magic 366 Hot Networking tips](https://www.gga.org.au/wp-content/uploads/2015/08/Networking-Magic-366-networking-tips-with-Robyn-Henderson-1.pdf) — Global networking specialist Robyn Henderson has spoken in 11 countries, presents over 150 times each year and has never advertised. All her work comes from
+Robyn Henderson is a global networking specialist, author, and speaker. She focuses on helping businesses connect effectively and solve problems through networking. Her work emphasizes integrity and relationship-building.
+- [Robyn Henderson Keynote Speaker](https://www.ovations.com.au/speakers/robyn-henderson) — Robyn Henderson is regarded as a Global Networking Specialist. She has authored and contributed to over 25 books (including 10 on networking and business
+- [Robyn Henderson - Networking To Win](https://au.linkedin.com/in/robynhenderson) — Robyn Henderson
+Networking To Win
+Coffs Harbour, New South Wales, Australia
+500 connections, 15357 followers
+
+
+About
+I recently identified one of the things I love to do is solve problems - find a way to…
+
+
+Experience
+Networking To Win
+[Networking To Win](N/A)  
+N/A - Present
+N/A
+- [Is it my imagination? | Robyn Henderson - LinkedIn](https://www.linkedin.com/posts/robynhenderson_is-it-my-imagination-am-i-the-dinosaur-or-activity-7287228867382071296-ZATN) — Networking Strategist, Author, Emerging Screen Writer, Ghost Writer, Self-Publishing Project Mgr., Cinephile, Board Member - Disabled Surfers
+- [What Is Networking? - by Robyn Henderson](https://herbusiness.com/blog/networking-definition) — # What Is Networking? Connecting with the right people to help your business and make sure everyone knows about your exceptional product or service are critical to your success in business. Learning to be an effective networker is key in achieving these two goals. Robyn Henderson
+
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Robyn Henderson is a renowned General Manager at Networking To Win, recognized as a global networking specialist with a strong focus on building relationships and connecting people across various continents including Australia, New Zealand, Asia, and Bahrain. Known for her results-driven approach, Robyn has established herself through extensive speaking engagements and the authorship of five books, sharing insights and strategies that enhance networking skills. Her expertise is not only in business relations but also in effectively leveraging connections to achieve broader goals.
+Robyn Henderson serves as a General Manager at Networking To Win, based in Coffs Harbour, New South Wales, Australia. She is recognized globally for her expertise in networking and business problem-solving. As both an author and speaker, she has authored or contributed to over 25 books, with ten specifically focusing on networking and business strategies. Robyn's work centers around helping businesses connect effectively while emphasizing the importance of integrity and strong relationship-building practices.
 
-What appears to be at the core of Robyn’s work is a genuine care for fostering meaningful relationships and empowering others through her knowledge on effective networking. She demonstrates a passion for connecting individuals, aiming to create opportunities that go beyond surface-level interactions. Her dedication to sharing "hot tips" and insights in her books and speaking engagements underscores her commitment to helping people understand the importance of quality connections in both personal and professional spheres. Robyn seems deeply invested in ensuring that her approach to networking is not just about transactions but about building a supportive and interconnected community worldwide.
+Robyn appears to care deeply about solving problems through her expertise in networking. She values creating meaningful connections that can help businesses thrive by providing them with effective solutions and insights. Her passion for integrity and building relationships suggests she prioritizes trust and long-term partnerships over quick gains. Additionally, Robyn's involvement as a board member of Disabled Surfers indicates an interest in supporting marginalized communities through her work and personal commitments.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

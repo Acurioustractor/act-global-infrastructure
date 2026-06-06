@@ -2,7 +2,7 @@
 name: Serdar Ozsoy
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Serdar Ozsoy
@@ -16,35 +16,19 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Serdar Ozsoy is a data scientist and freelance photojournalist. He has experience in software QA engineering and was a finalist in POY82 Daily Life. His work focuses on data analysis and photojournalism.
-- [About – Serdar Ozsoy - Medium](https://medium.com/@serdarozsoy/about) — Read writing from Serdar Ozsoy on Medium. Data Scientist.
-- [serdar ozsoy - Examinion](https://uk.linkedin.com/in/ozsoyserdar) — serdar ozsoy
-Examinion
-Stourbridge, England, United Kingdom
-385 connections, 388 followers
+Serdar Ozsoy is a freelance photojournalist and videographer. He focuses on capturing unique stories through photography. He is known for his work in daily life and has been a finalist in POY82.
+- [Serdar Özsoy](https://www.youtube.com/user/soydarank) — Ben foto muhabiriyim, hayatı size yazarak değil fotoğraf çekerek anlatmaya çalışıyorum. Yapılmamış şeyleri yapmaya gayret ediyorum.
+- [20+ "Serdar Ozsoy" profiles](https://www.linkedin.com/pub/dir/Serdar/Ozsoy) — Serdar Ozsoy. Professional Freelance Photojournalist and Videographer / POY82 Daily Life Finalist. Ankara. http://youtube.com/c/SerdarÖzsoy , +3 more
+- [Serdar Özsoy (@SerdarOzsoy_) / Posts / X](https://x.com/SerdarOzsoy_) — Serdar Özsoy (@SerdarOzsoy_) - Posts - Freelance Photojournalist / POY82 Daily Life Finalist thesnaps.net Destekleriniz İçin: patreon.c.
+- [Serdar Özsoy](https://www.youtube.com/playlist?list=PL7hCy616eJNtdEifvJwHcWeyOimRDpbxP) — Share your videos with friends, family, and the world.
 
-
-About
-Motivated and quality-oriented software QA Engineer with almost 2 years of experience in…
-
-
-Experience
-Examinion
-[Examinion](N/A)  
-N/A - Present
-N/A
-
-
-
-Education
-Kahramanmaraş Sütç
-- [Serdar Ozsoy (@srdrozsoy) • Instagram photos and videos](https://www.instagram.com/srdrozsoy) — 2.8K+ followers · 1.2K+ following · 399 posts · @srdrozsoy: “Freelance Photojournalist / POY82 Daily Life Finalist”
-- [Serdar Özsoy (@SerdarOzsoy_) / Posts / X - Twitter](https://x.com/SerdarOzsoy_) — Serdar Özsoy (@SerdarOzsoy_) - Posts - Freelance Photojournalist / POY82 Daily Life Finalist thesnaps.net Destekleriniz İçin: patreon.c.
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Serdar Ozsoy is a multifaceted professional known for his work as both a data scientist and a freelance photojournalist. His background in software QA engineering underscores his analytical capabilities, which he applies to both his technical roles and his visual storytelling. He has garnered recognition within the field of photojournalism, notably achieving finalist status in POY82 Daily Life, an accolade that highlights his ability to capture poignant moments from everyday life with a keen eye for detail and narrative.
+Serdar Ozsoy is a professional freelance photojournalist and videographer based in Ankara. Known for his ability to capture unique stories through his lens, he has established himself as an accomplished storyteller within the photography community. His work often focuses on daily life, highlighting moments that might otherwise go unnoticed. Serdar's dedication to his craft is evident from his finalist position in POY82 (Pictures of the Year International), which underscores his skill and commitment to impactful storytelling through visual media.
 
-Serdar appears to be deeply passionate about blending technology and creativity to explore the human condition. His work likely centers around using both data analysis and visual media to document stories that resonate on a personal level. The fact that he maintains an active online presence through platforms like Instagram and Twitter suggests that connecting with audiences and sharing his insights are important aspects of his practice. Serdar seems committed to leveraging his skills in storytelling and technology to create impactful content that can inform, inspire, and engage people around the world.
+What appears to be most important to Serdar is the authenticity and uniqueness of the stories he captures. He emphasizes that instead of writing about life, he chooses to document it through his photography, striving for originality in every project. This approach suggests a deep care for capturing genuine human experiences and sharing them with the world. His presence on YouTube and other platforms indicates that he values community engagement and feedback, showing that he cares about not only creating powerful images but also connecting with an audience to share these stories widely.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

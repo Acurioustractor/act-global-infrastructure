@@ -2,7 +2,7 @@
 name: Kent Payne
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Kent Payne
@@ -16,7 +16,7 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Kent Payne is a senior executive at NAPA Auto Parts, focusing on safety initiatives in Australia. He has held managerial roles in Asia Pacific. NAPA Auto Parts emphasizes vehicle maintenance and safety.
+Kent Payne is a senior executive at NAPA Auto Parts, focusing on safety and community initiatives in Australia. He has held managerial roles in Asia Pacific. His work emphasizes road safety and community engagement.
 - [40+ "Kent Payne" profiles - LinkedIn](https://www.linkedin.com/pub/dir/Kent/Payne) — Kent Payne. General Manager NAPA Australia GPC Asia Pacific | President The Harrison Payne Initiative Inc . Australia. NAPA Auto Parts, +5 more.
 - [Kent Payne](https://au.linkedin.com/in/kent-payne-47875218) — Kent Payne
 NAPA Auto Parts
@@ -54,10 +54,13 @@ Account Manager
 May 2023 - Present
 Bunbury, Western Australia, Au
 
-## Understanding — drafted
-Kent Payne is a senior executive at NAPA Auto Parts, serving as the General Manager for both NAPA Australia and GPC Asia Pacific. He plays a pivotal role in promoting safety initiatives within the automotive industry, particularly focusing on vehicle maintenance to ensure road safety across these regions. Kent’s commitment extends beyond his professional duties; he also serves as the President of The Harrison Payne Initiative Inc., an organization dedicated to saving lives both on and off the roads in Australia.
+## Shared history — from the spine
+_(no linked email record)_
 
-From the available information, it is clear that Kent cares deeply about safety and community impact. His involvement with NAPA Auto Parts underscores a dedication to maintaining high standards for vehicle upkeep and reducing risks associated with road accidents. Additionally, his leadership of The Harrison Payne Initiative Inc. indicates a personal passion for creating tangible benefits within communities, likely influenced by past experiences or values that drive him towards making a positive difference in people’s lives through safety education and support initiatives.
+## Understanding — drafted
+Kent Payne is a senior executive at NAPA Auto Parts in the role of General Manager for NAPA Australia and GPC Asia Pacific. He has been actively involved in safety initiatives and community engagement, with a particular focus on road safety both within Australia and throughout the broader Asia-Pacific region. Kent’s leadership extends beyond his professional responsibilities; he also serves as President of The Harrison Payne Initiative Inc., an organization that suggests a personal dedication to causes related to community welfare.
+
+From the available context, it appears that Kent cares deeply about leveraging his position to enhance road safety and foster stronger communities. His involvement with The Harrison Payne Initiative Inc. indicates a commitment beyond just professional duties, suggesting a passion for making meaningful impacts in the lives of others through both safety initiatives and broader community engagement efforts. While specific details about the organization’s activities are not provided, Kent's leadership roles point to his interest in creating positive change and promoting safer environments for everyone.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

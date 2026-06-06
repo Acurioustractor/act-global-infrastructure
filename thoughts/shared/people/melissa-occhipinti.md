@@ -2,7 +2,7 @@
 name: Melissa Occhipinti
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Melissa Occhipinti
@@ -16,7 +16,7 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Melissa Occhipinti leads BLACKROC™ Group, a specialist technology recruitment agency in Australia. They focus on connecting talent with innovative companies. Their work emphasizes technology, business, leadership, and digital strategy.
+Melissa Occhipinti is a director at BLACKROC™ Group, specializing in technology recruitment. They focus on connecting tech talent with companies in Brisbane. BLACKROC™ Group emphasizes IT, technology, and digital roles.
 - [Melissa Occhipinti - BLACKROC™ Group](https://au.linkedin.com/in/melissaocchipinti) — Melissa Occhipinti
 BLACKROC™ Group
 Brisbane, Queensland, Australia
@@ -36,14 +36,17 @@ N/A
 
 
 Educati
-- [Technology Recruitment Specialists Australia](https://blackroc.co/team/melissa-occhipinti) — BLACKROC Recruitment - Australia's specialist technology recruitment agency. Connecting exceptional talent with innovative companies across Brisbane,
-- [Melissa Occhipinti's Post - LinkedIn](https://www.linkedin.com/posts/melissaocchipinti_if-youre-done-for-the-working-week-and-scrolling-activity-7422869811409620992-WLV4) — I'm going with the beach. Its all in the angle. The river is never that blue. you wouldn't put a blackroc on a black rock - but an AI would.
 - [#workmilestone | Melissa Occhipinti | 49 comments - LinkedIn](https://www.linkedin.com/posts/melissaocchipinti_workmilestone-activity-7158957196465045504-o_Y9) — Technology | Business | Leadership | Strategy | AI | Managing IT, driving digital strategy, and financial management to achieve company growth.
+- [Melissa Occhipinti | Director, Contingent Workforce - BLACKROC](https://blackroc.co/team/melissa-occhipinti) — BLACKROC Recruitment - Australia's specialist technology recruitment agency. Connecting exceptional talent with innovative companies across Brisbane,
+- [BLACKROC Recruitment | IT, Technology & Digital Recruiters Brisbane](https://blackroc.co) — Brisbane's specialist IT, Technology & Digital recruiters Tech recruiters[BLACKROC™](https://www.linkedin.com/company/blackroc/). ### [Find Jobs Browse current IT, Tech & Digital roles](https://blackroc.co/jobs)### [Hire Talent Partner with Brisbane's top tech recruiters](https:/
+
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Melissa Occhipinti serves as the Director of BLACKROC™ Group, a technology recruitment agency based in Brisbane, Australia. With over 25 years of experience in the field, Melissa leads her team in matching talented professionals with innovative companies that are looking to thrive in today's rapidly evolving technological landscape. The focus of BLACKROC™ is on identifying and connecting exceptional talent in areas such as technology, business leadership, digital strategy, and more.
+Melissa Occhipinti is a director at BLACKROC™ Group, an organization based in Brisbane that specializes in technology recruitment. With over 25 years of experience under her belt, Melissa plays a pivotal role in connecting skilled IT and digital professionals with companies in the region. Her extensive background spans various facets of business including technology, leadership, strategy, and financial management, allowing her to effectively drive growth and digital transformation within the organizations she supports.
 
-From available information, it appears that Melissa cares deeply about the intersection of technology and human potential, emphasizing the importance of placing the right individuals in roles where they can flourish and contribute meaningfully to organizational growth. Her posts and professional milestones indicate a strong commitment to leveraging her extensive experience in managing IT environments and driving digital strategies to foster company success. Additionally, her reflections on angles and perspectives suggest an appreciation for nuanced thinking and the ability to see beyond surface-level assessments when it comes to talent identification and strategic leadership.
+Melissa seems to care deeply about fostering meaningful connections between tech talent and innovative companies, ensuring that both parties can achieve their full potential. She values expertise in areas such as artificial intelligence, IT management, and overall business leadership. Through her work at BLACKROC™ Group, Melissa focuses on aligning exceptional talent with opportunities where they can thrive, thereby contributing to the broader success of Brisbane’s technology sector.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

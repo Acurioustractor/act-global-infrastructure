@@ -2,7 +2,7 @@
 name: samantha breust
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # samantha breust
@@ -16,16 +16,19 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Samantha Breust is the Chief Operating Officer at RediMed, focusing on integrated health and injury recovery services. She champions clinician engagement and operational efficiency. RediMed's model attracts passionate professionals for work-related health solutions.
+Samantha Breust is the Chief Operating Officer at RediMed, focusing on integrated health and injury recovery services. She leads operational strategies to attract passionate clinicians. RediMed emphasizes holistic care and injury management.
 - [RediMed's integrated model attracts passionate clinicians for work ...](https://www.linkedin.com/posts/samantha-breust-50b85841_general-practices-are-closing-not-because-activity-7445650927488798721-uHzX) — RediMed's integrated model attracts passionate clinicians for work-related health and injury recovery. View profile for Samantha Breust.
+- [REDiMED - Overview, News & Similar companies | ZoomInfo.com](https://www.zoominfo.com/c/redimed/347364392) — Samantha Breust, Chief Operating Officer at REDiMED. Australia flag for contact location. Samantha Breust. Chief Operating Officer. Phone Email. Phone Email.
 - [REDIMED Management Team | Org Chart - RocketReach](https://rocketreach.co/redimed-management_b446c868faead363) — redimed.com.au. REDIMED Employee Samantha Breust's profile photo · Samantha Breust. Chief Operating Officer at REDIMED. Perth, WA, AU. View. 2. gmail.com
-- [Sean Leow - Occupational Physician Registrar at REDiMED](https://www.zoominfo.com/p/Sean-Leow/2485001752) — View Colleagues. Samantha Breust, Chief Operating Officer ... Sean Leow's role in REDiMED is Occupational Physician Registrar What is Sean Leow's email address?
-- [BNE Community: RediMed - LinkedIn](https://www.linkedin.com/posts/redimed_bne-community-redimed-activity-7388401115177885696-8tV5) — For more information on how we can support you and your workers, please reach out to us via customer@redimed.com.au Samantha Breust | Brad
+- [REDiMED Company Profile | Management and Employees List](https://www.datanyze.com/companies/redimed/347364392) — Executive Team ; Samantha Breust. Chief Operating Officer. Samantha Breust on Linkedin ; Ashley Morris. Chief Technology Officer · Ashley Morris on Linkedin.
+
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Samantha Breust serves as the Chief Operating Officer at RediMed, a company that specializes in integrated health and injury recovery services. Her focus is on ensuring that the operations run smoothly while also fostering an environment where clinicians are engaged and passionate about their work. RediMed prides itself on its model which attracts dedicated professionals to address work-related health issues, making it a hub for those committed to occupational health and safety.
+Samantha Breust serves as the Chief Operating Officer at RediMed, an organization dedicated to providing integrated health and injury recovery services. In her role, she is responsible for developing operational strategies that not only support the organization's mission but also attract passionate clinicians who share a commitment to holistic care and effective injury management. Under Samantha’s leadership, RediMed aims to offer comprehensive solutions that address both the physical and emotional needs of patients recovering from injuries.
 
-Samantha appears to care deeply about operational excellence and clinician engagement, recognizing the importance of both in delivering effective services to clients. Her role involves not only overseeing day-to-day operations but also creating conditions that allow clinicians to thrive and provide high-quality care. This reflects a broader commitment to supporting individuals who have experienced work-related injuries or health issues by ensuring they receive comprehensive and empathetic support from skilled professionals.
+Samantha seems to care deeply about creating an environment where healthcare professionals can thrive while providing top-tier care to their patients. This includes not only ensuring operational efficiency but also fostering a culture that values compassion and expertise in injury recovery services. Her focus on attracting clinicians who are passionate about their work suggests her dedication to building a team that is both skilled and empathetic, ultimately enhancing the patient experience at RediMed.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

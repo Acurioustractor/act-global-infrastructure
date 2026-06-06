@@ -2,7 +2,7 @@
 name: Aaron Stapleton
 lane: community
 storyteller_id: 12feccda-eb69-4738-9089-b533dde68a3d
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Aaron Stapleton

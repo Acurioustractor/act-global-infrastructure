@@ -2,7 +2,7 @@
 name: Sandra Aloi
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Sandra Aloi
@@ -16,23 +16,19 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Sandra Aloi founded The Bureau of Business, a creative agency specializing in marketing and public relations. They focus on helping brands communicate their stories effectively. Aloi also leads The Mind of Femme, which highlights women's contributions and interests.
-- [Sandra Aloi - Founder of The Bureau of Business, The Mind of Femme & The Getaway Traveller, Experienced in Public Relations, Corporate Communications, Event Management, Media, Keynote Speaker and Thought Leadership.](https://au.linkedin.com/in/sandraaloi) — Sandra Aloi
-Founder of The Bureau of Business, The Mind of Femme & The Getaway Traveller, Experienced in Public Relations, Corporate Communications, Event Management, Media, Keynote Speaker and Thought Leadership.
-Greater Melbourne Area
-500 connections, 26798 followers
-
-
-About
-Sa
+Sandra Aloi is the founder and director of The Bureau of Business, a PR, marketing, and events agency. She created #befabulous to help others reach their potential after personal loss. The Bureau of Business focuses on making the world a better place.
+- [Helping Others Reach Their Potential – The Bureau of Business](https://bureauofbusiness.com.au/helping-others-reach-their-potential) — The Rise of The Consumer Focused Business. The Age of the Podcast. Sandra Aloi, Director of *The Bureau of Business*, created *#befabulous* after her sister passed away from Cancer five years ago. She learned to pick up the broken pieces of her life and immediately started to mak
 - [Ep65 | Sandra Aloi - The Bureau of Business - YouTube Music](https://music.youtube.com/podcast/7RkmNDQ7grc) — Sandra Aloi is the founder and director of the Bureau of Business, a boutique PR, marketing, events & lifestyle agency. The Bureau of
+- [About #befabulous – The Bureau of Business](https://bureauofbusiness.com.au/about-befabulous) — September 11, 2024 by   Sandra Aloi   in   #befabulous. Sandra Aloi, Director of The Bureau of Business, created *#befabulous* after her sister passed away from Cancer five years ago. She learned to pick up the broken pieces of her life and immediately started to make plans for h
 - [Sandra Aloi is the founder and director of the Bureau of Business, a ...](https://www.facebook.com/synergengroup/posts/sandra-aloi-is-the-founder-and-director-of-the-bureau-of-business-a-boutique-pr-/2371264102913142) — Sandra Aloi is the founder and director of the Bureau of Business, a boutique PR, marketing, events & lifestyle agency. The Bureau of Business breathe new
-- [Helping Others Reach Their Potential - The Bureau of Business](https://bureauofbusiness.com.au/helping-others-reach-their-potential) — Sandra Aloi, Director of The Bureau of Business, created #befabulous after her sister passed away from Cancer five years ago. She learned to
+
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Sandra Aloi is the founder and director of The Bureau of Business, a creative agency that specializes in marketing, public relations, events, and lifestyle services. Through this organization, she aims to help brands effectively communicate their stories and reach their full potential. In addition to her role at The Bureau of Business, Sandra also leads initiatives like The Mind of Femme, which is dedicated to highlighting the contributions and interests of women.
+Sandra Aloi is the founder and director of The Bureau of Business, an agency dedicated to providing services in public relations, marketing, and event management. Her work extends beyond traditional business ventures as she has also initiated #befabulous, a movement aimed at inspiring others to reach their full potential following personal hardships. Sandra’s own journey was deeply influenced by the loss of her sister to cancer five years ago, an experience that profoundly shaped both her professional direction and her commitment to creating positive change.
 
-Sandra appears to care deeply about supporting individuals and organizations in achieving their goals and sharing meaningful narratives with broader audiences. Her work not only focuses on professional success but also extends into fostering a supportive community for women through her initiatives. She seems driven by a desire to make a positive impact and inspire others, as evidenced by her involvement in various projects and roles that empower both individuals and communities.
+Sandra cares deeply about helping individuals find meaning and purpose after facing significant losses or challenges in life. Through #befabulous, she aims to uplift others by sharing her own story of resilience and growth. This passion for empowering people reflects a broader mission at The Bureau of Business to make the world a better place through their work. Her dedication underscores a focus on empathy and community support, highlighting the importance of personal stories in driving meaningful change.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

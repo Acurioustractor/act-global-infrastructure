@@ -2,7 +2,7 @@
 name: shannon keed
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # shannon keed
@@ -16,8 +16,7 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Winnunga Nimmityjah Aboriginal Health And Community Services focuses on advancing the health and wellbeing of Aboriginal and Torres Strait Islander peoples. Shannon Keed served as Practice Manager there from 2022 to 2024. The organization collaborates with other health initiatives to improve Indigenous health policy.
-- [[PDF] Winnunga Nimmityjah Aboriginal Health and Community Service ...](https://www.winnunga.org.au/wp-content/uploads/2025/02/FINAL-WNAHCS-Strategic-Plan-long-version-CEO-and-Board-approved-18.02.2025.pdf) — Our duty is to take a leadership role in shaping and influencing policy that advances the health and wellbeing of Aboriginal and Torres Strait Islander peoples.
+Winnunga Nimmityjah Aboriginal Health and Community Services is an Aboriginal-led primary health care service. They focus on health justice, notably through their Birthing on Country program. They emphasize culturally appropriate care for Aboriginal women.
 - [Shannon Keed - Looking - Winnunga Nimmityjah Aboriginal Health And Community Services](https://au.linkedin.com/in/shannon-keed-b68806120) — Shannon Keed
 Looking
 Queanbeyan, New South Wales, Australia
@@ -40,13 +39,17 @@ Education
 Karabar High School
 Year 10
 N/A - Pr
+- [Winnunga Nimmityjah – Winnunga Nimmityjah](https://www.winnunga.org.au) — Winnunga Nimmityjah Aboriginal Health and Community Services (WNAHCS) is an Aboriginal community controlled primary health care service.
+- [Winnunga Nimmityjah Aboriginal Health and Community Services](https://www.facebook.com/WinnungaNimmityjahAHS/posts/1216944010583099) — Their Birthing on Country program is a powerful example of health justice in action, supporting Aboriginal women through pregnancy and birth
 - [Winnunga Nimmityjah Aboriginal Health and Community Services](https://www.facebook.com/WinnungaNimmityjahAHS/posts/1143463247931176) — This builds on Lowitja Institute's ongoing work in this area, including our January 2026 policy position paper, which highlighted the pervasive
-- [As we step into 2026, Southern celebrates the diversity and richness ...](https://www.facebook.com/SNSWLHD/posts/as-we-step-into-2026-southern-celebrates-the-diversity-and-richness-of-the-commu/875118838448848) — Southern's Aboriginal Health workforce make a vital contribution to health care in our region in both specialised service delivery and in a wide
+
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Shannon Keed serves as a Practice Manager at Winnunga Nimmityjah Aboriginal Health And Community Services, an organization dedicated to advancing the health and wellbeing of Aboriginal and Torres Strait Islander peoples. Shannon held this role from March 2022 until February 2024, during which time she would have been involved in managing healthcare services and policies that are crucial for Indigenous communities. Winnunga Nimmityjah collaborates with other health initiatives to influence and improve Indigenous health policy at a broader level.
+Shannon Keed is a Practice Manager at Winnunga Nimmityjah Aboriginal Health and Community Services, an organization located in Queanbeyan, New South Wales. Since March 2022, Shannon has been working to support and manage the operations of this community-led primary health care service, which focuses on providing culturally appropriate care for Aboriginal women. The organization is particularly recognized for its Birthing on Country program, a significant initiative in promoting health justice through culturally resonant maternity services.
 
-Based on the provided context, Shannon Keed’s work suggests she cares deeply about the health and wellbeing of Aboriginal and Torres Strait Islander peoples. Her role as Practice Manager implies that she is committed to ensuring that her organization provides effective healthcare services while also advocating for improved policies that can positively impact Indigenous communities. While there are limited details on personal motivations or specific projects, Shannon’s professional background indicates a dedication to supporting Indigenous health and community services.
+Shannon appears to be deeply committed to the mission of Winnunga Nimmityjah Aboriginal Health and Community Services, emphasizing the importance of health equity and cultural sensitivity within healthcare practices. Through her role as Practice Manager, she likely values supporting initiatives that empower Aboriginal women and communities, particularly in areas such as maternal care. Given the emphasis on culturally appropriate care at the organization, it is evident that Shannon cares about ensuring that the services provided are respectful and aligned with traditional practices and community needs.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

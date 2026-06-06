@@ -2,7 +2,7 @@
 name: Marilyn Yano
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Marilyn Yano
@@ -16,7 +16,7 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Marilyn Yano is a freelance Virtual Assistant and Special Education Teacher on Upwork, advocating for autism and raising two autistic adults. She has been working on Upwork since 2011. Her role focuses on project management and data entry.
+Marilyn Yano is a freelance Virtual Assistant and Special Education Teacher on Upwork. She advocates for autism and cares deeply about her work in education. She has been active on Upwork since 2011.
 - [Marilyn Yano - General VA | Special Education Teacher | Autism Advocate | Mom of 2 Autistic Adults - Upwork](https://ph.linkedin.com/in/marilynyano) — Marilyn Yano
 General VA | Special Education Teacher | Autism Advocate | Mom of 2 Autistic Adults
 Cagayan De Oro City, Northern Mindanao, Philippines
@@ -32,10 +32,13 @@ Experie
 - [Writing with Claude: Iterative Process for Research Papers | John ...](https://www.linkedin.com/posts/jfrechette_process-prompts-i-have-an-iterative-writing-activity-7432445681119772672-CmV3) — Marilyn Yano. LinkedIn ... The real value comes when you work inside it, not just understand it. ... Do you know what the latest model upgrades are
 - [[PDF] A For the period beginning 01/01/2022 and ending 03/31/2022 B ...](https://forms.irs.gov/app/pod/basicSearch/downloadFile?formId=130793&formType=e8872) — Hopper Self-Employed 31525 Schwartz Rd Contributor's occupation Amount of contribution Westlake, OH 44145 - 3768 Registered Nurse $ 100 Aggregate contributions year-to-date Date of contribution $ 477 03/11/2022 Contributor's name, mailing address and ZIP code Name of contributor'
 
-## Understanding — drafted
-Marilyn Yano is a dedicated freelance Virtual Assistant and Special Education Teacher with over a decade of experience working on Upwork. She specializes in project management and data entry tasks but also wears multiple hats as a hiring manager and virtual assistant. Originally from Cagayan De Oro City, Northern Mindanao, Philippines, Marilyn has established herself as an experienced professional within her field, with a significant online presence boasting over 500 connections on LinkedIn and nearly 3600 followers. Her work is characterized by attention to detail and efficiency, reflecting her commitment to delivering high-quality service.
+## Shared history — from the spine
+_(no linked email record)_
 
-Beyond her professional pursuits, Marilyn is an advocate for autism awareness and support. She is deeply involved in the lives of her two adult children who are autistic, which informs both her personal and professional endeavors. This intersection of professional experience and personal passion makes her work particularly impactful, as she brings a unique perspective to her roles. Marilyn cares deeply about providing resources and visibility to individuals with autism and their families, often using her platform to raise awareness and support those in need. Her dedication to this cause is evident not only through her role as an advocate but also in the way she integrates it into her work on Upwork and beyond.
+## Understanding — drafted
+Marilyn Yano is a dedicated professional based in Cagayan De Oro City, Northern Mindanao, Philippines. She has been actively working as a freelancer on Upwork since 2011, serving various roles including Project Manager, Hiring Manager, Virtual Assistant, and Data Entry Specialist. Additionally, Marilyn also works as a Special Education Teacher. Her diverse skill set allows her to support clients remotely in numerous capacities while balancing her responsibilities in education.
+
+Marilyn is particularly passionate about advocating for autism and supporting individuals on the spectrum. This passion stems from her personal experience as the mother of two autistic adults. Beyond her professional endeavors, she dedicates time to promote understanding and inclusivity around autism, reflecting a strong commitment to both her work and her community.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

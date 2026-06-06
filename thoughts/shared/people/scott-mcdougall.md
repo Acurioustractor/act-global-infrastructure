@@ -2,11 +2,17 @@
 name: Scott McDougall
 lane: supporter
 warmth: 81
-updated: 2026-06-03
+energy: 45
+ring: 50
+updated: 2026-06-06
 ---
 
 # Scott McDougall
 *Queensland Human Rights Commissioner, Queensland Human Rights Commission*  
+
+## Ben's read — ground truth (circle session 2026-06-06)
+> **"light touch — good person, does hydroponics; might support justice stuff soon"** · ring **50** · energy **45**
+
 
 ## Soil — institutional ground (CivicGraph)
 - **Org:** Queensland Human Rights Commission (Queensland Human Rights Commissioner)
@@ -16,16 +22,15 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Scott McDougall, Queensland Human Rights Commissioner, focused on freedom, respect, equality, and dignity for all Queenslanders. He presented a vision for Queensland as a global leader in human rights and advocated for human rights throughout his term. His work emphasized protecting and promoting human rights in Queensland.
-- [Queensland Human Rights Commissioner Scott McDougall ...](https://www.qhrc.qld.gov.au/our-work/media/2025/queensland-human-rights-commissioner-scott-mcdougall-presents-a-human-rights-vision-for-the-games) — He presented a vision on how spectators, athletes and journalists from around the world could view Queensland as a world leader in human rights
-- [Scott McDougall's Final Address at Parliament House - YouTube](https://www.youtube.com/watch?v=zU7AaAAp9mw) — Queensland's outgoing Human Rights Commissioner As his seven-year term concludes, Commissioner McDougall took the opportunity to transport
-- [Queensland Human Rights Commission - YouTube](https://www.youtube.com/user/FairAndInclusiveQld) — We work to protect and strengthen human rights in Queensland ... "A Human Rights Vision for the Games" - Scott McDougall's Final Address at Parliament House.
-- [Queensland's outgoing Human Rights Commissioner reflects](https://www.abc.net.au/listen/programs/radionational-breakfast/qld-human-rights-comissioner-mcdougall/105781342) — Queensland's inaugural Human Rights Commissioner Scott McDougall is stepping down after seven years in the role. Mr McDougall's tenure has
+_(no web key / no results)_
+
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Scott McDougall, serving as the Queensland Human Rights Commissioner, is a significant advocate for human rights within Queensland and beyond. His vision aims to position Queensland not just as an Australian leader but also as a global benchmark in upholding freedom, respect, equality, and dignity for all its residents. Over his seven-year term, he has been deeply committed to protecting and promoting the rights of Queenslanders through various initiatives and presentations that highlight how human rights can be integrated into everyday life and major events like international sports competitions.
+Scott McDougall serves as the Queensland Human Rights Commissioner at the Queensland Human Rights Commission. In this role, he is responsible for promoting and protecting human rights within the state of Queensland, Australia. His work involves ensuring that all individuals are treated with fairness and dignity, advocating for policies that uphold these principles, and educating communities on the importance of human rights.
 
-Scott McDougall cares profoundly about ensuring that every individual in Queensland is treated with equality and dignity. His work underscores a deep commitment to fostering a society where human rights are not only acknowledged but actively protected and strengthened. He advocates for a future where Queensland sets an exemplary standard globally, reflecting his belief in the importance of respect and freedom for all individuals within its borders.
+Scott also has an interest in sustainable agriculture practices, specifically hydroponics, which suggests a commitment to innovative methods that can support environmental sustainability. It appears he may be exploring or considering ways his background in hydroponics could intersect with justice initiatives, indicating a broader concern for societal issues beyond just human rights advocacy. This shows a multifaceted approach to supporting community well-being through both environmental and social justice efforts.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

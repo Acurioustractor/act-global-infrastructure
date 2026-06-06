@@ -2,7 +2,7 @@
 name: keesha morikei booth
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # keesha morikei booth
@@ -16,7 +16,8 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Keesha Morikei Booth is the General Manager of the Grass Skirt Project, focusing on cultural strategy and systems change. They emphasize Pasifika storytelling and leadership. Keesha aims to empower communities through dialogue and movement.
+Keesha Morikei Booth is the General Manager of Grass Skirt Project, focusing on gender equality in PNG using sports. She is a Papua New Guinean-Australian leader advocating for representation and leadership. Her work aims to empower communities through Pasifika storytelling and systems change.
+- [Grass Skirt Project](https://www.facebook.com/grassskirtproject/posts/1405241221649066) — ## Grass Skirt Project's Post. ### **Grass Skirt Project**. May be a graphic of text that says '세 # #E A 2 L D 6 AUS-PNG AUS- -PNG NETWORK Emerging Leaders Dialogue 2 N 6 Keesha Booth Caimns ardrooms 4-0May Gimuy boardrooms The Business Australia Papua New TreBuineskubbPlpeGrir G
 - [Grass Skirt Project (@grassskirtproject) - Facebook](https://www.facebook.com/grassskirtproject) — That's the development model 2026 Emerging Leader Keesha Morikei Booth is building. Keesha is a Papua New Guinean-Australian leader and General Manager of Grass
 - [Keesha Morikei Booth - General Manager | Cultural Strategist & Systems Change Leader | I help organisations & communities design movements through Pasifika storytelling, dialogue & leadership 🌺 Pasifika-led | 600 way 🇵🇬 | 🇦🇺 - Grass Skirt Project](https://au.linkedin.com/in/keeshambooth) — Keesha Morikei Booth
 General Manager | Cultural Strategist & Systems Change Leader | I help organisations & communities design movements through Pasifika storytelling, dialogue & leadership 🌺 Pasifika-led | 600 way 🇵🇬 | 🇦🇺
@@ -26,13 +27,15 @@ Australia
 
 About
 If
-- [Grass Skirt Project - Facebook](https://www.facebook.com/grassskirtproject/posts/1405241221649066) — Together, we celebrate the role of sport in empowering communities and shaping the next generation. ... Keesha Morikei Booth of Grass Skirt
-- [Grass Skirt Project - Instagram](https://www.instagram.com/p/DHsmgY8TTZC) — This week, our very own General Manager, Keesha Booth, had the honour of delivering the Occasional Address at a James Cook University graduation
+- [Instagram](https://www.instagram.com/p/DHsmgY8TTZC) — This week, our very own General Manager, Keesha Booth, had the honour of delivering the Occasional Address at a James Cook University graduation ceremony—a powerful full-circle moment as a biracial woman of Papua New Guinean and Australian heritage. At Grass Skirt Project, we cha
+
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Keesha Morikei Booth serves as the General Manager of the Grass Skirt Project, an organization that focuses on cultural strategy and systems change. As a Papua New Guinean-Australian leader, Keesha works to empower communities by leveraging Pasifika storytelling and leadership. The Grass Skirt Project emphasizes dialogue and movement in its efforts to foster community development. Through her role, Keesha is involved in crafting innovative strategies that aim to create positive societal impacts, particularly through the lens of Pasifika culture.
+Keesha Morikei Booth serves as the General Manager of the Grass Skirt Project, an organization dedicated to promoting gender equality in Papua New Guinea through sports and cultural engagement. As a Papua New Guinean-Australian leader, she is committed to empowering communities by advocating for increased representation and leadership roles for women. Keesha’s work encompasses not only direct action but also strategic planning that leverages Pasifika storytelling to effect systemic change.
 
-Keesha appears to care deeply about cultural empowerment and community engagement, especially within the Pasifika context. She values storytelling as a powerful tool for shaping narratives and influencing change, often focusing on how these stories can be used to build stronger, more cohesive communities. Her work also highlights her commitment to systems change, indicating that she seeks sustainable solutions that go beyond immediate fixes to address deeper structural issues. Keesha’s engagement with organizations like James Cook University shows her dedication to education and leadership development, reinforcing her belief in the transformative power of dialogue and cultural understanding.
+Keesha cares deeply about fostering inclusivity and empowerment within the Pacific Islander community. She values cultural heritage and sees storytelling as a powerful tool to inspire dialogue and enact positive transformation. Her efforts are rooted in the belief that by elevating diverse voices, especially those of women, broader societal changes can be achieved. Through her role at Grass Skirt Project, Keesha strives to build networks and models for development that honor Pasifika values and foster sustainable leadership within communities.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

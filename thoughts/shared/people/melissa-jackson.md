@@ -2,7 +2,7 @@
 name: Melissa Jackson
 lane: community
 storyteller_id: 3063dea8-e878-4aab-819e-7b8ab7e15993
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Melissa Jackson

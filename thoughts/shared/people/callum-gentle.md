@@ -2,7 +2,7 @@
 name: Callum Gentle
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Callum Gentle
@@ -16,7 +16,7 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-The Royal National Agricultural and Industrial Association of Queensland promotes agricultural and industrial development. Callum Gentle is an HR Business Partner there. The association focuses on supporting agriculture's role in community life.
+The Royal National Agricultural & Industrial Association of QLD promotes agriculture and hosts the Royal Queensland Show and Awards. Callum Gentle works there as an HR Business Partner. The association focuses on celebrating and championing agriculture's role in Queensland.
 - [Callum Gentle - HR Business Partner @ Royal National Agricultural & Industrial Association of QLD | Bachelor of Business](https://au.linkedin.com/in/callumgentle) — Callum Gentle
 HR Business Partner @ Royal National Agricultural & Industrial Association of QLD | Bachelor of Business
 Greater Brisbane Area
@@ -29,14 +29,17 @@ With over five years of dedicated HR experience at the Royal National Agricultur
 
 Experience
 H
-- [Royal National Agricultural and Industrial Association of ...](https://www.legislation.qld.gov.au/view/html/published.exp/sl-2022-0104) — Royal National Agricultural and Industrial Association of Queensland Regulation 2022 — Explanatory Note. (accessed 30 April 2026 at 17:00)
-- [The Royal National Agricultural and Industrial Association of ...](https://makeadifference.volunteering.nsw.gov.au/volunteering-organisations/29637/the-royal-national-agricultural-and-industrial-association-of-queensland-rna-) — The RNA has been committed to ensuring the community recognises the vital role agriculture plays in everyday life since 1875. Bowen Hills, Queensland; Other.
-- [Royal National Agricultural and Industrial Association of Queensland](https://en.wikipedia.org/wiki/Royal_National_Agricultural_and_Industrial_Association_of_Queensland) — The Royal National Agricultural and Industrial Association of Queensland (RNA) is an organisation which aims to promote and encourage the development of
+- [About the RNA | Brisbane Showgrounds](http://www.brisbaneshowgrounds.com.au/about/rna) — # About the RNA. Founded in 1875, the Royal National Agricultural and Industrial Association of Queensland (RNA) is an independent, not-for-profit member based organisation that has freehold title to the iconic Brisbane Showgrounds. Its guiding mission is to celebrate and champio
+- [Royal National Agricultural and Industrial Association of Queensland - Wikipedia](https://en.wikipedia.org/wiki/Royal_National_Agricultural_and_Industrial_Association_of_Queensland) — # Royal National Agricultural and Industrial Association of Queensland. *Find sources:* "Royal National Agricultural and Industrial Association of Queensland" – news **·** newspapers **·** books **·** scholar **·** JSTOR *(February 2015)* |. **The Royal National Agricultural and 
+- [The Royal National Agricultural and Industrial Association of ...](https://www.govhouse.qld.gov.au/the-governor-of-queensland/speeches/the-royal-national-agricultural-and-industrial-association-of-queensland-s-2025-cabinet-dinner) — The RNA mission is to bring people together, with agriculture at the heart, and in doing so, the organisation, its Executive, Council, staff,
+
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Callum Gentle serves as an HR Business Partner at the Royal National Agricultural and Industrial Association of Queensland (RNA), where he leverages his Bachelor's degree in Business. With over five years of dedicated experience, Callum is embedded within an organization that has a rich history dating back to 1875. The RNA focuses on promoting agricultural and industrial development while emphasizing agriculture’s role in enhancing community life across Queensland.
+Callum Gentle serves as an HR Business Partner for the Royal National Agricultural & Industrial Association of Queensland (RNA), a not-for-profit organization founded in 1875. The RNA celebrates agriculture's significance through events like the Royal Queensland Show and various awards. Callum, with over five years of dedicated experience in human resources, plays a vital role in supporting the association’s mission and ensuring its staff are well-equipped to champion agricultural advancement.
 
-Callum appears to care deeply about fostering a supportive workplace environment and ensuring that the RNA's workforce reflects the organization’s commitment to community and industry growth. Given his role, it is likely he values building strong relationships within the HR department and beyond, supporting professional development initiatives, and contributing to the overall well-being of employees who are crucial in achieving the RNA’s objectives. His extensive experience suggests a dedication to aligning human resources strategies with the broader goals of promoting agricultural and industrial advancements.
+Callum appears to care deeply about fostering a supportive and inclusive work environment that aligns with RNA's commitment to agriculture and community engagement. His work likely involves not only managing HR operations but also engaging with employees to ensure they feel valued and motivated, which in turn supports the broader goals of promoting agricultural progress and education within Queensland.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

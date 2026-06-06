@@ -2,7 +2,7 @@
 name: ciaran keating
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # ciaran keating
@@ -16,16 +16,37 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Ciaran Keating is a program manager for Worldview Foundation, focusing on employment, training, and mentoring in Eastern NSW. He also helps community service organizations and social enterprises become sustainable. His work is driven by a commitment to social impact and community development.
-- [[XLS] Partnerships - National Indigenous Australians Agency](https://www.niaa.gov.au/sites/default/files/documents/2024-03/isep-partnership-register-Mar-2024.xlsx) — Worldview Foundation, Ciaran Keating - Program Manager, 0490929569, ciaran.keating@worldview.org.au, Eastern NSW, We provide employment, training and mentoring
-- [Ciaran Keating - Helping create life transforming employment ...](https://au.linkedin.com/in/ciarankeating) — I help community service orgs and social enterprises delivering life and employment skills programs become sustainable and successful through fundraising,
-- [Ciaran Keating's Post - LinkedIn](https://www.linkedin.com/posts/ciarankeating_this-guy-is-the-real-deal-proud-to-work-activity-7241677894928756737-6oIP) — Proud to work beside him everyday. He's taught me a lot. Proud also to call him a brother. View organization page for Worldview Foundation.
-- [Remembering Ciaran Keating - Marie Keating Foundation](https://mariekeating.ie/2024/07/remembering-ciaran-keating) — Together with his family, Ciaran established the Foundation following the death of their mother Marie to breast cancer 26 years ago. Ciaran was
+Ciaran Keating is involved with the Worldview Foundation, focusing on community service and social enterprises. The foundation emphasizes Christian worldview principles. Keating's role is to support and develop these initiatives.
+- [Ciaran Keating](https://au.linkedin.com/in/ciarankeating) — Ciaran Keating
+Worldview Foundation
+Canberra, Australian Capital Territory, Australia
+500 connections, 1193 followers
+
+
+About
+I help community service orgs and social enterprises delivering life and employment…
+
+
+Experience
+N/A
+
+
+Education
+Flinders University
+N/A
+2015 - 2015
+None
+- [Ken Ham's Podcast on Creationism and Noah's Ark - Facebook](https://www.facebook.com/groups/31425129128/posts/10164227050084129) — Ciaran Keating, I have heard this before. .. ... it's about the foundation for our Christian worldview that affects every area of life.
+- [Ciaran Keating's Post - LinkedIn](https://au.linkedin.com/posts/ciarankeating_the-daily-joys-of-seeing-guys-turn-things-activity-7018796609975029760-nLJg) — We're really excited to have him part of the team and see how far he can go. View organization page for Worldview Foundation · Worldview
+- [[PDF] 2023-03-24 Police v Kinnara Connors [2022] ACTMC 6 (Sentence)](https://www.courts.act.gov.au/__data/assets/pdf_file/0006/2197194/Connors-Sentence.pdf) — Your work with Aboriginal mentors and peers in the Worldview Foundation program is strengthening that connection. This strengthening may well be
+
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Ciaran Keating is a dedicated program manager at Worldview Foundation where he focuses on fostering employment, training, and mentoring programs in Eastern New South Wales, Australia. His work encompasses aiding community service organizations and social enterprises to become more sustainable and effective through strategic fundraising and development initiatives. This role requires not only an understanding of the local community’s needs but also a commitment to ensuring long-term support systems are in place for those seeking employment opportunities.
+Ciaran Keating serves as a Program Manager at the Worldview Foundation, an organization based in Canberra, Australia, which integrates Christian worldview principles into its community service and social enterprise initiatives. His role involves supporting and developing these programs to better serve their communities. While specific details about his educational background are limited, it is evident that he dedicates himself to fostering environments where individuals can thrive through both life and employment opportunities.
 
-Beyond his professional endeavors, Ciaran's personal life reflects a deep commitment to family and social causes. Alongside his family, he founded the Marie Keating Foundation after the loss of their mother to breast cancer, demonstrating his dedication to making a positive impact on others' lives through community support and awareness initiatives. His work is driven by an earnest desire to see communities thrive and individuals empowered through sustainable employment and mentorship opportunities.
+Ciaran appears to care deeply about the intersection of faith with community service and social entrepreneurship, emphasizing how Christian principles can positively influence various aspects of people's lives. His involvement in discussions around creationism and his work with Aboriginal mentors indicate a commitment to strengthening cultural connections and providing support that resonates on both spiritual and practical levels. This approach suggests he values creating holistic programs that not only address immediate needs but also build long-term resilience within communities.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

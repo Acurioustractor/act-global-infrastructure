@@ -2,7 +2,7 @@
 name: Shanya Suppasiritad
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Shanya Suppasiritad
@@ -16,8 +16,10 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Shanya Suppasiritad is the CEO and co-founder of Revibe, focusing on brand experience, customer lifetime value, and sustainability in fashion. She aims to create a circular economy through rental and resale initiatives. Revibe supports brands in building their own circular marketplaces.
-- [Team — Revibe](https://www.revibecollective.com/about-us) — Revibe was created to guide the apparel industry to a better future. ... Shanya Suppasiritad Co-Founder/CEO. Growing up, fashion was my armour. It was my
+Shanya Suppasiritad founded Revibe, a startup focused on creating circular marketplaces for resale, rental, and repair. She cares about sustainability and disrupting the fashion industry. Her work emphasizes transparency and efficient AI use.
+- [Shanya Suppasiritad, Revibe | Marie Claire Australia](https://www.pressreader.com/australia/marie-claire-australia-9ja2/20260601/282797837991174) — So she launched Revibe, a startup that helps brands build their own circular marketplaces. Resale, rental, repair: many of us are now familiar
+- [How I Did It · Shanya Suppasiritad](https://podcasts.apple.com/us/podcast/how-i-did-it-shanya-suppasiritad/id1834326023?i=1000726793729&l=zh-Hans-CN) — We don't just talk about Revibe - we talk about the work behind the work: the leadership lessons and influence strategies that helped Shanya
+- [Shanya Suppasiritad is breaking the cycle | UMENCO](https://umenco.com/shanya-suppasiritad-is-breaking-the-cycle) — I discovered there was a disconnect between the secondary market and the industry, and brand behaviour in itself.”. “It’s almost like creating a new category and validating its existence,” Suppasiritad says of her initial start. But people are interacting with or without you, and
 - [shanya suppasiritad - Revibe](https://au.linkedin.com/in/shanya-suppasiritad-5568a796) — shanya suppasiritad
 Revibe
 New South Wales, Australia
@@ -40,13 +42,14 @@ Education
 Bangkok University
 N/A
 2000 - 20
-- [Shanya Suppasiritad, Revibe | Marie Claire Australia - PressReader](https://www.pressreader.com/australia/marie-claire-australia-9ja2/20260601/282797837991174) — So she launched Revibe, a startup that helps brands build their own circular marketplaces. Resale, rental, repair: many of us are now familiar
-- [Female Disruptors: Shanya Suppasiritad of Rntr On The Three ...](https://medium.com/authority-magazine/female-disruptors-shanya-suppasiritad-of-rntr-on-the-three-things-you-need-to-shake-up-your-39c7a883238a) — Shanya is a changemaker and creative thinker set out to disrupt the fashion industry with the circular movement. She founded Tumnus then
+
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Shanya Suppasiritad is the founder and CEO of Revibe, an organization dedicated to fostering sustainability within the fashion industry through innovative brand experiences and customer lifetime value strategies. Born in a setting where fashion played a significant role from an early age, Shanya has leveraged her background to guide the apparel sector towards a more responsible future. Through initiatives like rental and resale programs, she aims to create a circular economy that encourages sustainable practices among both brands and consumers.
+Shanya Suppasiritad is the founder and CEO of Revibe, a startup that seeks to transform the fashion industry by creating circular marketplaces for resale, rental, and repair services. Her work centers on fostering sustainability through transparency and efficient use of artificial intelligence technologies. Through her leadership at Revibe, Shanya aims to bridge the gap between brands and consumers in the secondary market, making it easier for people to engage in more environmentally friendly practices within fashion consumption.
 
-Shanya cares deeply about reshaping the traditional linear model of fashion consumption into one that is environmentally friendly and economically viable. Her work focuses on empowering brands to build their own circular marketplaces, which not only reduces waste but also creates new revenue streams for businesses. Beyond her professional pursuits, Shanya demonstrates a strong commitment to disrupting the industry through creative thinking and a passion for change-making.
+Shanya appears to be deeply committed to disrupting traditional industry norms by promoting sustainable and ethical consumption patterns. She cares about transparency in business practices and believes that innovation can play a critical role in reducing environmental impact. Her efforts reflect a strong dedication to both ecological responsibility and consumer empowerment, focusing on creating systems where brands and consumers can work together more effectively towards sustainability goals.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

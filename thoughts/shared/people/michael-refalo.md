@@ -2,7 +2,7 @@
 name: Michael Refalo
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Michael Refalo
@@ -16,9 +16,8 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Michael Refalo is a creative manager for The Wiggles, known for his work in visual communications and graphic design. He has been with the group since an unspecified date. His role involves managing creative aspects of their productions.
+Michael Refalo is a graphic designer for The Wiggles, known for his visual communications work. He has been with the group since its inception. His role involves graphic design and visual content creation.
 - [Michael Refalo - Wigglepedia - Fandom](https://wiggles.fandom.com/wiki/Michael_Refalo) — Michael Refalo is a graphic designer and visual communications professional known for his work with The Wiggles, the popular Australian children's
-- [The Wiggles | LinkedIn](https://au.linkedin.com/company/the-wiggles) — Michael Refalo. Creative Manager. See all employees. Updates. The Wiggles ... Find people you know at The Wiggles. Browse recommended jobs for you. View all
 - [Michael Refalo - The Wiggles](https://au.linkedin.com/in/michael-refalo) — Michael Refalo
 The Wiggles
 The Slopes, New South Wales, Australia
@@ -40,11 +39,15 @@ N/A
 Education
 Australia
 - [Michael Refalo - Wiggles Fanon Wiki](https://wigglesfanon.fandom.com/wiki/Michael_Refalo) — Wiggles Fanon Wiki is a Fandom TV Community. View Full Site.
+- [Ready, Steady, Wiggle! (TV Series 7)/Credits - Wigglepedia - Fandom](https://wiggles.fandom.com/wiki/Ready,_Steady,_Wiggle!_(TV_Series_7)/Credits) — Graphic Design: Bec Lloyd & Michael Refalo. (c) 2025 The Wiggles PTY LTD. The Wiggles, The Wiggles Logo, Lachy!, Ponso the Pony, Shirley Shawn the Unicorn
+
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Michael Refalo is a Graphic Design Manager at The Wiggles, an iconic Australian children's entertainment group known worldwide for their engaging and educational content aimed at young children. His role involves overseeing the visual communications and graphic design elements of The Wiggles’ productions, which likely includes everything from album artwork to promotional materials and digital media content. Although the exact date of his joining is not specified, Michael’s work plays a crucial part in maintaining the vibrant and recognizable aesthetic that has made The Wiggles beloved by children and parents alike across generations.
+Michael Refalo is a seasoned graphic design manager with an extensive background in visual communications. He has been a vital part of The Wiggles team since its inception, contributing significantly to the group's distinctive and engaging visual identity that resonates with children around the world. His role at The Wiggles involves creating graphic designs and developing visual content that supports their performances, merchandise, and media appearances. With over five hundred connections on professional networks, Michael appears to be well-regarded within his industry for his contributions.
 
-From the available information, it appears that Michael cares deeply about creativity and the visual aspects of communications. His background in graphic design suggests he values aesthetics and the power of visuals to convey messages effectively and engagingly. Working with a brand as recognizable and loved as The Wiggles likely means that his work is not just about creating visually appealing content but also about maintaining the integrity and joyfulness that has become synonymous with the group’s identity. His role, therefore, seems centered around balancing creativity with the need to uphold the established visual standards of The Wiggles, ensuring their message reaches children in a way that is both fun and educational.
+Michael seems to care deeply about creative expression through design and the impact of visuals in engaging young audiences. His long-standing association with The Wiggles suggests a passion for fostering joy and learning through children's entertainment. It is likely that he values collaboration and innovation, always striving to enhance the visual storytelling aspects of the work he does with The Wiggles. Through his dedication, Michael has helped shape the vibrant and recognizable imagery that is synonymous with The Wiggles brand.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

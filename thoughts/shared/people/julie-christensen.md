@@ -2,7 +2,7 @@
 name: Julie Christensen
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Julie Christensen
@@ -16,7 +16,7 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Julie Christensen works for the Queensland Department of Education, focusing on improving outcomes for at-risk youth. She has over 15 years of experience in senior roles. Her work emphasizes education and community development.
+Julie Christensen works for the Queensland Department of Education and focuses on improving quality of life for at-risk youth, especially those with intellectual and developmental disabilities. She has held leadership roles in policy and advocacy. She is currently Executive Director of APSE.
 - [Julie Christensen - Queensland Department of Education](https://au.linkedin.com/in/juliecchristensen) — Julie Christensen
 Queensland Department of Education
 Greater Brisbane Area
@@ -30,14 +30,29 @@ I am a driven and capable leader with over 15 years of experience in senior and 
 Experience
 Queensland Department of Education
 [Queensland Department of 
-- [Julie Christensen - Webinars](https://disabilitywebinars.org/speakers/julie-christensen) — For the past 15+ years, her career has centered around improving quality of life outcomes for at-risk youth, including youth with intellectual and development
-- [[PDF] The Department of Education - Queensland Parliament](https://www.parliament.qld.gov.au/Work-of-the-Assembly/Tabled-Papers/docs/5002T3790/5002t3790.pdf) — 2 DEPARTMENT OF EDUCATION ANNUAL REPORT 2001–2002 Financial and delivery performance measures Learning and development measures Stakeholder relationship measures Schools, teaching and learning measures KPM 1: Enrolment Trends Director-General’s report Statistical snapshots School
-- [Browse By Person: Davis, Julie | QUT ePrints](https://eprints.qut.edu.au/view/person/Davis,_Julie.html) — Queensland University of Technology, Brisbane Australia. A university for the real world. Davis, Julie, Elliott, Sue,  & Arlemalm-Hagser, Eva. *Early Childhood Education for Sustainability: A Short History.*. Christensen, Mia, O'Gorman, Lyndal, Walsh, Kerryann,  & Davis, Julie M.
+- [Julie Christensen – Webinars](https://disabilitywebinars.org/speakers/julie-christensen) — ## Director of Policy and Advocacy Association of People Supporting EmploymentFirst (APSE). ### Speaker Bio. Director of Policy and Advocacy. Julie Christensen, LMSW, PhD, is the Director of Policy and Advocacy at the Association of People Supporting Employment First (APSE). Asso
+- [Julie J. Christensen Biography - Accessibility Online](https://www.accessibilityonline.org/speakers/speaker.aspx?id=10750) — Christensen Director of Policy and Advocacy APSE ing Employment First Department of Disability and Human Development
+- [Julie J. Christensen - Executive Director at APSE - Association of People Supporting EmploymentFirst](https://www.linkedin.com/in/juliejchristensen) — Julie J. Christensen
+Executive Director at APSE - Association of People Supporting EmploymentFirst
+Washington DC-Baltimore Area
+500 connections, 1762 followers
+
+
+About
+N/A
+
+
+Experience
+Executive Director
+[APSE - Association of People Supporting EmploymentFirst](https://www.linked
+
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Julie Christensen is a dedicated professional with extensive experience in the Queensland Department of Education, where she holds multiple roles including Manager and Principal Portfolio Officer. Her work spans over 15 years and focuses on enhancing outcomes for at-risk youth within the education system. Julie’s expertise covers not only educational initiatives but also community development efforts that aim to support vulnerable young people. In her current position, she works diligently towards creating environments where these youth can thrive both academically and personally.
+Julie Christensen is a seasoned professional with extensive experience in leadership roles within the Queensland Department of Education and now serves as the Executive Director at APSE (Association of People Supporting EmploymentFirst). Throughout her career, she has been deeply involved in policy development and advocacy efforts aimed at improving the quality of life for youth at risk, particularly those dealing with intellectual and developmental disabilities. Her work is marked by a commitment to enhancing educational opportunities and promoting inclusive practices that support these vulnerable populations.
 
-Julie appears to care deeply about the well-being and future prospects of at-risk youth. Her commitment is evident through her long-standing career in educational roles aimed at improving their quality of life. She values education as a tool for empowerment, recognizing its potential to positively impact young lives. Community development initiatives are also close to her heart, suggesting that she views holistic support—beyond just academic performance—as crucial for the success and well-being of these youth. Julie’s work underscores her belief in the transformative power of inclusive educational practices and community engagement.
+Julie appears to be deeply committed to fostering environments where individuals with disabilities can thrive both educationally and professionally. She cares about ensuring equitable access to resources and services that enable at-risk youth and people with disabilities to lead fulfilling lives. Her dedication extends beyond just policy-making; she is actively engaged in advocacy work, working to change systems and perceptions so that every individual has a fair chance to succeed and contribute meaningfully to society.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

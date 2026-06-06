@@ -2,7 +2,7 @@
 name: Matt Hendry
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Matt Hendry
@@ -16,16 +16,32 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Matt Hendry is the Deputy Chief Executive Officer of the Council of Mayors (SEQ), which advocates for better regional funding and policy for South East Queensland's local governments. Their work focuses on collaborative outcomes for mayors and communities.
-- [Council of Mayors Company Profile | Management and Employees List](https://www.datanyze.com/companies/council-of-mayors/35655758) — Council of Mayors (SEQ) is a local government advocacy organization that unites 11 local governments in South East Queensland. Their mission is to deliver
+Matt Hendry is Deputy Chief Executive Officer at Council of Mayors (SEQ), focusing on regional funding and policy for South East Queensland. The Council advocates for better outcomes for its member mayors and communities. Council of Mayors (SEQ) aims to deliver long-lasting legacy benefits from major events like the Olympics.
 - [Council of Mayors (SEQ) Management Team | Org Chart](https://rocketreach.co/council-of-mayors-seq-management_b5cbb0c3f42e1492) — Council of Mayors (SEQ) Employee Matt Hendry's profile photo. Matt Hendry. Deputy Chief Executive Officer at Council of Mayors (SEQ). Brisbane City, QLD, AU.
-- [Council of Mayors (SEQ) - LinkedIn](https://au.linkedin.com/company/council-of-mayors-seq-) — Our mission is to consistently deliver better regional funding, policy and collaborative outcomes for the Mayors, Councils and communities of South East
-- [Matt Hendry's Post - LinkedIn](https://www.linkedin.com/posts/matt-hendry-1877a831_dont-miss-this-opportunity-for-someone-looking-activity-7345356445678215168-qP9r) — Don't miss this opportunity for someone looking to make a big impact on SEQ's future. View organization page for Council of Mayors (SEQ).
+- [Council of Mayors (SEQ)'s Post - LinkedIn](https://www.linkedin.com/posts/council-of-mayors-seq-_council-of-mayors-seq-pursued-an-olympic-activity-7261646220916318209-hGnl) — Council of Mayors (SEQ) pursued an Olympic and Paralympic Games to deliver long-lasting legacy benefits for South East Queensland. It was
+- [Council of Mayors (SEQ) Email Formats](https://prospeo.io/c/council-of-mayors-seq-email-format) — # Council of Mayors (SEQ) Email Formats. Government Administration• Flag of AUBrisbane, Queensland, Australia • 21-50 Employees. Council of Mayors (SEQ)uses 2 email formats. ## About Council of Mayors (SEQ). The Council of Mayors (South East Queensland) was established as an inde
+- [Matt Hendry - Council of Mayors South East Queensland - Council of Mayors (SEQ)](https://au.linkedin.com/in/matt-hendry-1877a831) — Matt Hendry
+Council of Mayors South East Queensland
+Greater Brisbane Area
+500 connections, 1359 followers
+
+
+About
+Matt is a strategic and collaborative leader with nearly 20 years’ experience delivering…
+
+
+Experience
+Council of Mayors (SEQ)
+[Council of Mayors (SEQ)](N/A)  
+N/A - 
+
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Matt Hendry serves as the Deputy Chief Executive Officer at the Council of Mayors (SEQ), an advocacy group that brings together 11 local governments in South East Queensland, Australia. His role involves supporting the mission to secure better regional funding and policy for these local councils. The Council works towards achieving collaborative outcomes that benefit both mayors and their communities, ensuring that regional voices are heard and valued.
+Matt Hendry serves as the Deputy Chief Executive Officer at the Council of Mayors (SEQ), a regional organization that advocates for better outcomes for mayors and communities in South East Queensland, Australia. In his role, Matt focuses on securing funding and developing policies that benefit the region. The Council is particularly known for its efforts to leverage major events like the Olympics to create long-lasting benefits for the community.
 
-From the available context, it appears Matt cares deeply about the collective advancement of South East Queensland's regions. His work likely reflects a commitment to community development and equitable resource distribution among different areas within SEQ. The emphasis on collaboration suggests he values working closely with various stakeholders, including mayors and local communities, to achieve meaningful outcomes that enhance regional well-being and prosperity.
+Matt appears to care deeply about fostering collaboration among local governments and ensuring that regional initiatives have positive and enduring impacts on communities. His extensive experience in strategic leadership suggests a commitment to effective governance and the well-being of South East Queensland's residents. Through his work, Matt aims to enhance the region’s social and economic fabric by aligning policies with community needs and securing sustainable funding sources.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

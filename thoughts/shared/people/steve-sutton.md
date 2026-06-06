@@ -2,7 +2,7 @@
 name: Steve Sutton
 lane: community
 storyteller_id: 5f269919-cf1c-4e08-99cc-ddab29952aec
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Steve Sutton

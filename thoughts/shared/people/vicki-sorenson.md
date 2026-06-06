@@ -2,7 +2,7 @@
 name: Vicki Sorenson
 lane: community
 storyteller_id: 5c62d61d-42a6-4c24-b624-49947bc97261
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Vicki Sorenson

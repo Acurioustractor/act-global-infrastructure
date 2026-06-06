@@ -2,7 +2,7 @@
 name: Brian Edwards
 lane: community
 storyteller_id: 9e6dbc16-9589-4104-a2ea-4ce77539a95e
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Brian Edwards

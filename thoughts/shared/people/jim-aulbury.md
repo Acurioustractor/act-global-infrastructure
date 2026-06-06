@@ -2,7 +2,7 @@
 name: Jim Aulbury
 lane: community
 storyteller_id: 0c286ebe-7e62-4c6d-ac4e-d41f5f5ce8d8
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Jim Aulbury

@@ -2,7 +2,7 @@
 name: Riley McIntosh
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Riley McIntosh
@@ -16,7 +16,7 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Riley McIntosh works at Queensland Treasury, focusing on transformative support and environmental betterment. They are also involved in research on environmental and deforestation policy. Their role emphasizes community engagement and sustainability.
+Riley McIntosh works at Queensland Treasury, focusing on community engagement and environmental betterment. He is currently a Senior Program Officer. His academic background includes a BA in Spanish Language and Security Studies.
 - [Riley McIntosh - Positive & Bilingual Graduate Eager to Drive Transformative Support, Community Engagement and Environmental Betterment | CLIENT-CENTERED & ANALYTICAL - Queensland Treasury](https://au.linkedin.com/in/riley-mcintosh-9679b9164) — Riley McIntosh
 Positive & Bilingual Graduate Eager to Drive Transformative Support, Community Engagement and Environmental Betterment | CLIENT-CENTERED & ANALYTICAL
 Brisbane, Queensland, Australia
@@ -25,44 +25,17 @@ Brisbane, Queensland, Australia
 
 About
 🌟 I always thought my dream was going to be
-- [Riley Mcintosh - Operator for TMM Projects - Teck Resources Limited](https://ca.linkedin.com/in/riley-mcintosh-340538297) — Riley Mcintosh
-Operator for TMM Projects
-Chestermere, Alberta, Canada
-8 connections, 8 followers
+- [Leadership | Department of Energy](https://www.energy.gov/orem/leadership) — Providing oversight and specialized functions across key areas of the Department. ... Managing programs that support energy production, efficiency
+- [Utility CEOs are cashing million-dollar bonuses while Upstate ...](https://www.facebook.com/RepRileyNY/posts/utility-ceos-are-cashing-million-dollar-bonuses-while-upstate-families-are-choos/122145663134721119) — Rex McIntosh There will never be competing companies when it comes to utilities as the infrastructure is too costly to set up parallel systems.
+- [Characters 10: Doug Detwiller - The Mentor - Pinkbike](https://www.pinkbike.com/news/Characters-10-Doug-Detwiller-the-Mentor-2014.html) — Riley McIntosh is a mountain biker from Maple Bay on Vancouver Island. After a decade of living in Nelson, he returned home to the land of year
 
-
-About
-Throughout the years of working I have learned lots and built skills in many diverse…
-
-
-Experience
-Heavy Equipment Operator
-[Teck Resources Limited](https://ca.linkedin.com/co
-- [Riley McIntosh](https://www.linkedin.com/in/riley-mcintosh-5693902aa) — Riley McIntosh
-Student PIRGs
-Eugene, Oregon, United States
-168 connections, 168 followers
-
-
-About
-N/A
-
-
-Experience
-N/A
-
-
-Education
-University of Oregon
-N/A
-2023 - 2027
-None
-- [Leadership](https://www.energy.gov/orem/leadership) — Providing oversight and specialized functions across key areas of the Department. ... Managing programs that support energy production, efficiency
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Riley McIntosh is an Assistant Policy Officer at Queensland Treasury within the Department of Energy and Climate in Brisbane, Australia. Their work focuses on transformative support and environmental betterment, with a strong emphasis on community engagement and sustainability. Riley is involved in research related to environmental and deforestation policies, bringing analytical skills and client-centered approaches to their role. Prior to this, they have had diverse experiences including working as an operator at TMM Projects for Teck Resources Limited in Alberta, Canada, where they gained significant hands-on experience with heavy equipment operations.
+Riley McIntosh works as an Assistant Policy Officer at the Department of Energy and Climate within Queensland Treasury, where his primary focus lies in community engagement and environmental betterment. His professional journey is marked by a strong commitment to transformative support and analytical rigor, leveraging his bilingual skills (Spanish) to bridge diverse communities and enhance policy impact. Riley’s academic background, which includes a Bachelor of Arts in Spanish Language and Security Studies, underscores his multidisciplinary approach to problem-solving.
 
-Riley seems to care deeply about the environment and sustainable practices, demonstrating a commitment to transformative support that benefits both communities and natural habitats. Their bilingual capabilities and analytical mindset indicate a desire to understand complex issues from multiple perspectives and develop impactful solutions. Community engagement appears to be central to their approach, suggesting a genuine interest in ensuring policies are inclusive and beneficial for all stakeholders involved. Riley’s background suggests they value hands-on experience alongside policy development, indicating a holistic view of environmental issues that combines practical knowledge with strategic planning.
+Riley appears to care deeply about creating sustainable solutions that benefit both the environment and the community he serves. His passion for environmental betterment is evident through his professional endeavors at Queensland Treasury and suggests a dedication to driving positive change. Additionally, Riley values client-centered approaches in his work, indicating that he prioritizes understanding the needs and perspectives of those affected by policy changes, ensuring that his efforts are both impactful and inclusive.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

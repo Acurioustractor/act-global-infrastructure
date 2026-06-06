@@ -2,7 +2,7 @@
 name: Sandeep Varma MAICD
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Sandeep Varma MAICD
@@ -16,19 +16,22 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Sandeep Varma is the founder and CEO of SAARI Collective, a community and media platform for South Asian Australian founders and creatives. He is also the board chair of 100 Story Building, a social enterprise for young creatives. His work focuses on amplifying South Asian voices and building community.
-- [Sandeep Varma MAICD | 127 comments - LinkedIn](https://www.linkedin.com/posts/sandeepkvarma_socialimpact-impact25-socialenterprise-activity-6909975986478436352-47jV) — Founder & CEO at SAARI Collective, the premiere community & media ... Congratulations Sandeep for the excellent work you are doing
+Sandeep Varma is the Founder and CEO of SAARI Collective, a platform for South Asian Australian founders and creatives. He also chairs 100 Story Building, a social enterprise for young creatives. He is recognized for his impact in the community.
+- [Sandeep Varma MAICD | 127 comments - LinkedIn](https://www.linkedin.com/posts/sandeepkvarma_socialimpact-impact25-socialenterprise-activity-6909975986478436352-47jV) — Founder & CEO at SAARI Collective, the premiere community & media platform for South Asian Australian Founders + Creatives. Board Chair at 100
 - [Sandeep Varma MAICD's Post - LinkedIn](https://www.linkedin.com/posts/sandeepkvarma_saari-collective-turned-4-years-old-yesterday-activity-7273139497599426560-93CI) — Founder & CEO at SAARI Collective, the premiere community & media platform for South Asian Australian Founders + Creatives. Board Chair at 100
-- [Sandeep Varma - SAARI Collective](https://www.saaricollective.com.au/our_people/sandeep-varma) — Sandeep is the founder and CEO of SAARI Collective. Always passionate about amplifying South Asian voices, building community, anti-racism, helping young.
+- [On Episode 57, Sunny Bahuguna and Mayank Sohani sit down with ...](https://www.instagram.com/p/CkPV9G3tCB8) — ... Sandeep Varma MAICD, the Founder and CEO of SAARI Collective, a media startup focused on supporting and showcasing emerging South Asian
 - [Sandeep Varma MAICD - Founder & CEO at SAARI Collective, the premiere community & media platform for South Asian Australian Founders + Creatives. Board Chair at 100 Story Building, social enterprise for young creatives. Impact25 Award winner.](https://au.linkedin.com/in/sandeepkvarma) — Sandeep Varma MAICD
 Founder & CEO at SAARI Collective, the premiere community & media platform for South Asian Australian Founders + Creatives. Board Chair at 100 Story Building, social enterprise for young creatives. Impact25 Award winner.
 Melbourne, Victoria, Australia
 500 conn
 
-## Understanding — drafted
-Sandeep Varma is the founder and CEO of SAARI Collective, a platform dedicated to supporting South Asian Australian founders and creatives by providing them with community resources and media exposure. In addition to his role at SAARI Collective, he serves as the board chair for 100 Story Building, which aims to nurture young creative talents in Australia. Through these ventures, Sandeep has demonstrated a commitment to creating spaces where South Asian voices are not only heard but amplified within broader Australian society.
+## Shared history — from the spine
+_(no linked email record)_
 
-Sandeep cares deeply about fostering inclusivity and community among South Asian Australians. His work is underpinned by a dedication to anti-racism and the empowerment of young creatives. By advocating for and leading initiatives that uplift marginalized communities, he seeks to build stronger social ties and ensure that diverse perspectives are recognized and valued. His efforts reflect a broader goal of promoting equity and representation in Australia’s cultural landscape.
+## Understanding — drafted
+Sandeep Varma MAICD is the Founder and CEO of SAARI Collective, an organization that supports South Asian Australian founders and creatives by providing a platform for community engagement and media visibility. In addition to his role at SAARI Collective, Sandeep serves as the Chair of 100 Story Building, which is dedicated to empowering young creatives through various initiatives. His work has earned him recognition within the community, including an Impact25 Award.
+
+Sandeep appears to have a deep commitment to fostering and elevating South Asian Australian voices in the entrepreneurial and creative spaces. Through his leadership at SAARI Collective, he focuses on providing support, resources, and visibility for individuals who might otherwise be underrepresented or overlooked in broader society. His involvement with 100 Story Building underscores his dedication to nurturing young talent and creating opportunities that can help them succeed. Overall, it seems Sandeep cares deeply about community development, representation, and empowerment through creative and entrepreneurial pursuits.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

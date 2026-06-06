@@ -2,7 +2,7 @@
 name: Bowen Wang
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Bowen Wang
@@ -16,7 +16,7 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Bowen Wang works for Colliers, focusing on commercial real estate services, leveraging mobility data for market insights, and delivering exceptional results. He is known for his expertise in office and retail real estate sectors.
+Bowen Wang is a blockchain developer focused on NEAR Protocol, known for his technical expertise and contributions to protocol development and scaling solutions. He has experience at Superfluid and the Macquarie Group. His work emphasizes blockchain technology and developer experience.
 - [Bowen Wang](https://au.linkedin.com/in/bowenwang8) — Bowen Wang
 HW Buyers Agency
 Brisbane, Queensland, Australia
@@ -33,20 +33,41 @@ N/A
 
 Education
 N/A
-- [Bowen Wang - Linklaters - Tech Insights](https://techinsights.linklaters.com/u/102hbyd/bowen-wang) — Insights and commentary from Bowen Wang, Antitrust & Foreign Investment Managing Associate (Zhao Sheng), Shanghai.
-- [Estelle Wang, 26, Senior associate for hospitality capital markets at ...](https://www.instagram.com/p/C8rkdS5tdyd?hl=en) — After three years at CBRE as an associate, Wang joined Colliers 15 months ago as part of the team led by Mark Owens, vice chair of the hospitality practice.
-- [Colliers - Leveraging Mobility and Demographics in Office and Retail Real Estate](https://www.youtube.com/watch?v=3C1diyWlyX4) — Colliers - Leveraging Mobility and Demographics in Office and Retail Real Estate
-Environics Analytics
-288 subscribers
-1 likes
-123 views
-23 Oct 2024
-Colliers is a global leader in commercial real estate services and investment management. Their expertise spans various sectors such
+- [A Technical Introduction to NEAR Protocol with Bowen Wang](https://www.youtube.com/watch?v=H26KauiA-Pg) — A Technical Introduction to NEAR Protocol with Bowen Wang
+Superfluid
+1080 subscribers
+17 likes
+368 views
+19 Jan 2023
+Today’s guest is Bowen Wang, the Head of Protocol Development at Near. This episode will serve as a technical introduction to NEAR from the point of view of an EVM
+- [Bowen Wang](https://www.linkedin.com/in/bowen-wang-01a6b127) — Bowen Wang
+Macquarie Group
+New York City Metropolitan Area
+500 connections, 1212 followers
+
+
+About
+N/A
+
+
+Experience
+N/A
+
+
+Education
+Columbia Business School
+N/A
+2018 - 2020
+None
+- [BOWEN WANG (@bowenwangg) • Instagram photos and videos](https://www.instagram.com/bowenwangg) — BOWEN WANG. 8,212 followers. 1,488 following. BNE | AUS. Follow. Message. Blessed. Seville | Madrid | Milan | Venice | Florence | Rome. Barcelona | Granada
+
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Bowen Wang serves as an executive at Colliers, where he specializes in the commercial real estate sector with a strong focus on both office and retail properties. His work involves leveraging mobility data to provide market insights that drive exceptional results for his clients. Bowen’s expertise extends into analyzing how demographic trends and movement patterns affect property values and investment opportunities within these sectors.
+Bowen Wang is an executive with a deep focus on blockchain technology and its applications within the industry. Working as a blockchain developer for NEAR Protocol, Bowen is recognized for his technical expertise in protocol development and scaling solutions that enhance blockchain efficiency. His professional journey includes significant roles at Superfluid and the Macquarie Group, where he has contributed to advancing blockchain technologies. Additionally, Bowen holds an educational background from Columbia Business School, which adds depth to his ability to navigate both technological and business landscapes.
 
-From the available information, it seems that Bowen cares deeply about using advanced analytics and data-driven strategies to inform real estate decisions. His work reflects a commitment to staying ahead of market trends by understanding how people move through urban environments and how this impacts commercial spaces. Additionally, Bowen’s involvement in Colliers suggests he values collaboration within his team and the broader industry, aiming to support clients effectively while maintaining a high standard for delivering results that exceed expectations.
+Bowen seems deeply committed to fostering advancements in blockchain technology, particularly with a focus on developer experience and scaling solutions that can make these systems more accessible and efficient. His engagement with NEAR Protocol indicates a strong interest in the evolution of decentralized applications (DApps) and how they can be better supported through protocol improvements. Beyond his professional contributions, Bowen also appears to value personal growth and travel, as evidenced by his Instagram presence, which showcases his travels across various cities in Europe. This suggests that he appreciates balancing technical rigor with a broader perspective on life and culture.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

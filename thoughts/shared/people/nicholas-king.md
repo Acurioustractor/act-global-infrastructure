@@ -2,7 +2,7 @@
 name: Nicholas King
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Nicholas King
@@ -16,16 +16,19 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Nicholas King focuses on how incentives shape behavior and outcomes, emphasizing the role of AI in enhancing knowledge work without replacing it. He cares about the dynamics of performance management and incentives in public sectors.
-- [Incentives shape outcomes. People do what they're incentivized to do.](https://www.facebook.com/JamesOKeefeAuthor/posts/incentives-shape-outcomespeople-do-what-theyre-incentivized-to-do/1515602956593769) — Incentives shape outcomes. People do what they're incentivized to do. · Justin Cleary. Same as "there is money in treatment, but not in cures.".
-- [AI frees knowledge workers from process, not replaces them - LinkedIn](https://www.linkedin.com/posts/nick-king_there-are-two-ways-to-look-at-ai-in-knowledge-activity-7429982225288572928-pCXe) — AI generates generic output because it doesn't know your work. The fix isn't better prompting. It's embedding your specific knowledge into every
+Nicholas King focuses on incentives in performance management, particularly in public sectors, and their impact on job performance and employee loyalty. His work emphasizes the role of prosocial incentives and their effects on competition and leadership.
+- [Nick King's Post - LinkedIn](https://www.linkedin.com/posts/nick-king-673b6370_week-one-has-been-spent-getting-familiar-activity-7461187006379868160-PxRk) — The demonstrations from teams sharing who they are, what they do, and the care they bring to their work every day have been thoughtful, thorough
 - [(PDF) Incentives and Their Dynamics in Public Sector Performance ...](https://www.researchgate.net/publication/227643722_Incentives_and_Their_Dynamics_in_Public_Sector_Performance_Management_Systems) — We review the growing body of evidence about how performance measurement and incentive systems function in practice and how individuals and organizations
-- [How is this an incentive to work hard? - Facebook](https://www.facebook.com/trusted.finance.wa/posts/how-is-this-an-incentive-to-work-hard/944265247992161) — Promise of reward when working hard, the worker will put everything into it. My experience was job cuts and a bollocking for not doing as much
+- [Prosocial Incentives Change Willingness to Compete in Work Tasks](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3950538) — This study examines the effects of prosocial incentives, where charities benefit from an individual's efforts, on workers' willingness to compete in a work
+- [The Impact of Incentives on Job Performance, Business Cycle, and ...](https://pmc.ncbi.nlm.nih.gov/articles/PMC8866177) — Therefore, this research focuses on both perspectives side-by-side, exploring incentives and the environment in relation to leadership as these determine general health, employee loyalty, and the job performance of employees within an organization (12, 21, 26). Data were collecte
+
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Nicholas King works as a Business Development Manager at Incentives, where he delves into how incentives influence behavior and outcomes in various sectors, with a particular emphasis on the public sector. His work involves studying performance management systems and incentive structures to understand their impact on employee motivation and organizational success. Nicholas is also deeply interested in the role of artificial intelligence (AI) within knowledge work environments, advocating for AI as a tool that enhances human capabilities rather than replaces them.
+Nicholas King is a Business Development Manager at Incentives, where he specializes in understanding how incentives impact performance management, particularly within public sectors. His work delves into the intricate relationship between incentive systems and their effects on job performance and employee loyalty. Nicholas focuses on prosocial incentives—those that benefit others or society—and examines how such incentives influence competition and leadership dynamics among employees.
 
-Nicholas cares profoundly about ensuring that incentives are designed to foster positive outcomes without leading to negative unintended consequences, such as burnout or demotivation among workers. He values transparency and fairness in performance management systems and believes that understanding the nuances of how people respond to different types of incentives is crucial for creating effective organizational policies. Nicholas also emphasizes the importance of integrating specific knowledge into AI applications to make them more useful and relevant to individual work contexts, reflecting his broader interest in leveraging technology to support rather than undermine human contributions at work.
+Nicholas appears to care deeply about fostering environments where employees feel motivated not just by personal gain, but also by contributing positively to the broader community. His emphasis on prosocial incentives reflects a genuine interest in aligning organizational goals with social values, aiming to create more meaningful and impactful work experiences for individuals within public sector organizations. This approach underscores his commitment to building teams that are driven by both professional success and social responsibility.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

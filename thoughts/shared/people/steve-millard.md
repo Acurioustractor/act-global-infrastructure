@@ -2,7 +2,7 @@
 name: Steve Millard
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Steve Millard
@@ -16,9 +16,8 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Steve Millard is General Manager at Explorer Motorhomes, a small manufacturing company in Queensland. He focuses on RV production and has over 30 years of experience in major event production. The company employs nine people.
+Steve Millard is General Manager at Explorer Motorhomes, focusing on RV manufacturing. He brings expertise from the RV industry. His role involves overseeing operations and product development.
 - [Steve Millard Email & Phone Number | Explorer Motorhomes ...](https://rocketreach.co/steve-millard-email_11475610) — Steve Millard, based in Brisbane City, QLD, AU, is currently a General Manager at Explorer Motorhomes. Steve Millard brings experience from previous roles at
-- [200+ "Stephen (steve) Millard" profiles - LinkedIn](https://www.linkedin.com/pub/dir/Stephen+%28steve%29/Millard) — Steve Millard General Manager at Explorer Motorhomes. Seasoned Producer and owner of Major Special Events company for over 30 years.
 - [Steve Millard - General Manager at Explorer Motorhomes](https://au.linkedin.com/in/steve-millard-6a66a753) — Steve Millard
 General Manager at Explorer Motorhomes
 Greater Brisbane Area
@@ -32,12 +31,16 @@ Steve is a well rounded professional within the manufacturing and RV industry. S
 Experience
 General Manager
 [Explorer Motorhomes](https://au.linkedin.com/compa
-- [Explorer Motorhomes Information - RocketReach](https://rocketreach.co/explorer-motorhomes-profile_b42f924dfea3cda4) — Explorer Motorhomes is a Motor Vehicle Manufacturing company located in Clontarf, Queensland with 9 employees. Find top employees, contact details and
+- [Riviera recognises our team | Riviera Australia - LinkedIn](https://www.linkedin.com/posts/riviera-marine_riviera-recognises-our-team-activity-7072534306249719809-OVmT) — You know the fit finish inside the boat in the engine room, the ... Steve Millard. General Manager at Explorer Motorhomes. 2y. Report this
+- [[PDF] Environmental Statistics with S-PLUS](http://ndl.ethernet.edu.et/bitstream/123456789/36913/1/Steven%20P.%20Millard_2001.pdf) — Most of these laws mandate monitoring or assessment of the physical environment, which means someone has to collect, analyze, and ex- plain environmental data.
+
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Steve Millard serves as the General Manager at Explorer Motorhomes, a small manufacturing firm based in Queensland, Australia. With over three decades of experience in major event production, Steve brings a diverse set of skills to his role. At Explorer Motorhomes, he oversees RV production, managing a team of nine individuals dedicated to crafting quality motorhomes. His background in the events industry has provided him with a strong foundation in project management and coordination, which he applies to ensure the efficient operation of the company.
+Steve Millard serves as the General Manager at Explorer Motorhomes, a company dedicated to RV manufacturing. His extensive background in the recreational vehicle industry positions him well to oversee operations and product development, ensuring that Explorer Motorhomes continues to meet the needs of its customers with high-quality motorhomes. Steve’s role involves leading the team to innovate and refine their products while maintaining efficiency in production.
 
-Steve appears to care deeply about the craftsmanship and quality of the products his team produces at Explorer Motorhomes. Given his extensive experience in major event production, it’s evident that attention to detail and thorough preparation are values he holds dear. He likely places a significant emphasis on ensuring customer satisfaction and maintaining high standards for each motorhome produced. Additionally, Steve seems committed to fostering a supportive work environment where his team can thrive, drawing upon both his professional expertise and interpersonal skills developed over his career.
+Steve appears to care deeply about the success of his company and the satisfaction of its customers. His focus on overseeing operations and product development suggests a commitment to excellence and innovation within the RV manufacturing sector. Additionally, given his experience and leadership position, it’s evident that he values teamwork and collaboration to achieve business goals.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

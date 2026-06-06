@@ -2,7 +2,7 @@
 name: Caroline Geoghegan
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Caroline Geoghegan
@@ -16,16 +16,19 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Caroline Geoghegan is the Head of Events and Community for 10x10 Philanthropy, focusing on stakeholder engagement and community-building. The organization aims to create a new funding ecosystem for not-for-profits. 10x10 emphasizes care, connection, and belonging.
-- [Accessibility - 10x10 Melbourne | Thursday 21 May 2026 - Humanitix](https://events.humanitix.com/10x10-melbourne-thursday-21-may-2026/accessibility) — Contact name. Caroline Geoghegan. Contact number. caroline@10x10philanthropy.com. Host information. ticket banner. Hosted by 10x10 Philanthropy.
+Caroline Geoghegan is the Head of Events and Community for 10x10 Philanthropy, focusing on stakeholder engagement and community building. She supports early-stage social purpose organizations by connecting them to networks and funding. 10x10 Philanthropy aims to create an Australia where social challenges are tackled effectively.
 - [We are thrilled to welcome Caroline G. to the 10x10 team as our new Head of Events and Community 💫 Caroline joins us with a wealth of professional expertise across stakeholder engagement, corporate… | 10x10 Philanthropy | 23 comments](https://www.linkedin.com/posts/10x10-philanthropy_we-are-thrilled-to-welcome-caroline-geoghegan-activity-7166202076312559617-dmdz) — We are thrilled to welcome Caroline G. to the 10x10 team as our new Head of Events and Community 💫 Caroline joins us with a wealth of professional expertise across stakeholder engagement, corporate partnerships, and events, along with strong community-building skills and network
+- [Accessibility - 10x10 Brisbane | Wednesday 10 June 2026 - Humanitix](https://events.humanitix.com/10x10-brisbane-wednesday-10-june-2026/accessibility) — Contact name. Caroline Geoghegan. Contact number. caroline@10x10philanthropy.com. Host information. ticket banner. Hosted by 10x10 Philanthropy.
 - [10x10 Philanthropy (@10x10gives) • Instagram photos and videos](https://www.instagram.com/10x10gives?hl=en) — No one should be targeted for who they are, or feel unsafe gathering in this community. At 10x10, our work is grounded in care, connection and belonging.
-- [10X10 Philanthropy - Overview, News & Similar companies - ZoomInfo](https://www.zoominfo.com/c/10x10-philanthropy/429688073) — 10x10 Philanthropy is dedicated to creating a new funding ecosystem that amplifies the impact of innovative not-for-profits (NFPs) by generating $10 in
+- [About us - 10x10 Philanthropy](https://www.10x10philanthropy.com/about-us) — ## 10x10 exists to create an Australia where those solving our toughest social challenges have the greatest chance of success. We do that by building the networks that back innovative NFPs to multiply their impact. **These are the values that guide us in everything we do and in t
+
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Caroline Geoghegan serves as the Head of Community, Corporate Partnerships & Communications at 10x10 Philanthropy. Her role involves fostering stakeholder engagement and building a robust community around the organization's initiatives. 10x10 Philanthropy is dedicated to innovating not-for-profit funding ecosystems by amplifying the impact of innovative charities. Caroline plays a crucial part in this mission through her expertise in corporate partnerships, events management, and community-building, ensuring that all stakeholders feel supported and connected.
+Caroline Geoghegan serves as the Head of Community, Corporate Partnerships & Communications for 10x10 Philanthropy, an organization dedicated to addressing social challenges effectively within Australia. Her role involves fostering stakeholder engagement and community building, which are essential for connecting early-stage social purpose organizations with the networks and funding they need to thrive. Caroline brings a wealth of expertise in corporate partnerships and events management, alongside her strong skills in network-building and community development. Through these efforts, she aims to enhance the capacity of these organizations to make meaningful impacts on society.
 
-Caroline seems to prioritize care, connection, and belonging within both the organization and its broader community. This focus extends to creating safe spaces where individuals can engage without fear of discrimination or harassment. Her work underscores a commitment to nurturing an inclusive environment where all members feel valued and are encouraged to contribute positively to the community's goals and values. Through her role, she aims to build strong relationships that support not only 10x10 Philanthropy’s objectives but also the wider charitable sector.
+Caroline cares deeply about creating inclusive communities that prioritize care, connection, and belonging. Her work reflects a commitment to ensuring that everyone feels safe and valued within their communities, regardless of who they are or what challenges they face. By focusing on stakeholder engagement and community building, she aims to empower those working towards social change by providing them with the necessary support networks and resources. This approach underscores her dedication to fostering an environment where innovative non-profit organizations can succeed and make a lasting difference in society.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

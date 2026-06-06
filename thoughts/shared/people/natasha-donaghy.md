@@ -2,7 +2,7 @@
 name: Natasha Donaghy
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Natasha Donaghy
@@ -16,7 +16,7 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Natasha Donaghy is an executive recruiter for Osborne Richardson Australia, specializing in food manufacturing. She focuses on strategic talent recruitment and development. Osborne Richardson is known for its specialist recruitment services.
+Natasha Donaghy is an executive recruiter for Osborne Richardson Australia, specializing in HR, WHS, Food Manufacturing, and Public Sector roles. She focuses on strategic talent recruitment and development. Osborne Richardson is a leading specialist recruitment consultancy founded in Brisbane in 2013.
 - [Natasha Donaghy - Executive Recruiter | Food & Beverage Manufacturing - Osborne Richardson Australia](https://au.linkedin.com/in/natasha-donaghy-11869355) — Natasha Donaghy
 Executive Recruiter | Food & Beverage Manufacturing
 Paddington, Queensland, Australia
@@ -30,14 +30,17 @@ I am an energetic and confident Client Manager with a track record of developing
 Experience
 Executive Recruitment Consultant
 
-- [About Us](https://www.osbornerichardson.com.au/about-us) — Natasha Donaghy joins as Head of Food Manufacturing. Technology, Compliance, Finance & Procurement and Engineering divisions. Australia's deepest specialist
-- [Natasha Donaghy](https://www.osbornerichardson.com.au/about-us/meet-the-team/natasha-donaghy) — Her expertise lies in providing strategic guidance and ensuring companies effectively recruit, develop and retain top talent across HR, WHS, Food Manufacturing
-- [Natasha Donaghy's Post](https://www.linkedin.com/posts/natasha-donaghy-11869355_osbornerichardson-foodmanufacturing-manufacturingjobs-activity-7188037083502985217-BX3U) — Executive Recruiter | Food & Beverage Manufacturing. Osborne Richardson's fantastic services that we offer 🤗
+- [About Us - Osborne Richardson](https://www.osbornerichardson.com.au/about-us) — Osborne Richardson is a specialist recruitment consultancy founded in Brisbane in 2013. We recruit across seven disciplines — placing exceptional talent with government, councils and private sector organisations across Australia. We're sector specialists who have lived and worked
+- [Human Resources Consultant Job in Melbourne at Osborne ...](https://www.linkedin.com/posts/natasha-donaghy-11869355_human-resources-consultant-job-in-melbourne-activity-7107889715302825984-XLti) — Newly created role + newly built office for you!! Contact Natasha Donaghy at natasha@osbornerichardson.com.au for further information.
+- [Natasha Jobs in Leppington NSW 2179 - Apr 2026 - SEEK](https://www.seek.com.au/natasha-jobs/in-Leppington-NSW-2179) — Senior Quality Assurance. at Osborne Richardson. This is a Full time job. Sydney NSW. $90,000 - $110,000 + Super. Senior QA Lead role FMCG food manufacturing.
+
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Natasha Donaghy is an experienced executive recruitment consultant working at Osborne Richardson Australia, a company known for its specialized recruitment services within the food manufacturing sector. Her role involves strategic talent acquisition and development across various divisions such as technology, compliance, finance, procurement, and engineering. Natasha brings a wealth of experience to her position, focusing on building strong teams and ensuring that organizations have access to top-tier talent in these critical areas.
+Natasha Donaghy is an experienced Executive Recruitment Consultant with Osborne Richardson Australia, a leading specialist recruitment consultancy based in Brisbane. She has been instrumental in identifying and placing top talent within various sectors including Human Resources (HR), Workplace Health and Safety (WHS), Food Manufacturing, and the Public Sector. Natasha specializes in strategic talent acquisition, focusing on not only filling positions but also developing comprehensive teams that meet the specific needs of her clients.
 
-From the available information, it is evident that Natasha cares deeply about the strategic growth and development of teams within the food manufacturing industry. Her posts reflect a dedication not only to recruitment but also to the broader goals of her clients and the professional community she serves. She seems passionate about ensuring that companies can effectively recruit, develop, and retain top talent, emphasizing the importance of building robust, compliant, and efficient teams in dynamic industries like food manufacturing.
+Natasha appears to be deeply committed to her work, showing a clear passion for helping organizations find the right people to drive their success. She values building strong professional relationships and is dedicated to understanding the unique requirements of each client she works with. Her focus on strategic talent development indicates that Natasha cares about more than just recruitment; she aims to contribute to the long-term growth and well-being of her clients' teams by ensuring they have access to high-quality candidates who can make a significant impact in their roles.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

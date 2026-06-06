@@ -2,7 +2,7 @@
 name: Cameron Prout
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Cameron Prout
@@ -16,16 +16,34 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Cameron Prout is a senior consultant and advisor to nonprofit organizations, focusing on strategy development and fundraising. He works with Cameron Prout & Associates to help nonprofits achieve their goals. His work emphasizes philanthropy and effective organizational management.
-- [Cameron Prout - Experienced CEO | Consultant | Philanthropy Advisor](https://au.linkedin.com/in/cameronprout) — Senior consultant and advisor to nonprofit organisations wanting to develop great strategy and raise the funds to turn their vision into reality.
-- [Christmas Staff Appreciation Luncheon Organization - Facebook](https://www.facebook.com/groups/proutcommunity/posts/539811418995913) — There are 125 staff members that work around the clock to take care of Lynchburg's seniors. I know they would love to hear that their work is
-- [Our Team - I Have The Right To](https://ihavetherightto.org/about-us/our-team) — Susan Prout is the Co-Founder of I Have The Right To and the mother of Chessy Prout, author of I Have The Right To: A High School Survivor's Story of Sexual
-- [Privacy Statement - Prout at Work](https://www.proutatwork.de/en/privacy-statement) — **Name and contact details of controller pursuant to article 4(7) General Data Protection Regulation (GDPR)**. ##### Security and protection of your personal data. “Pseudonymisation” is the processing of personal data in such a manner that the personal data can no longer be attri
+Cameron Prout is a consultant for nonprofit organizations, focusing on development and community engagement. He works at Cameron Prout & Associates and emphasizes the importance of the "Sandwich Generation." His work highlights balancing care for parents and children.
+- [Cameron Prout](https://au.linkedin.com/in/cameronprout) — Cameron Prout
+Cameron Prout & Associates
+Greater Brisbane Area
+500 connections, 1184 followers
+
+
+About
+Independent consultant and advisor to nonprofit organisations wanting to develop great…
+
+
+Experience
+N/A
+
+
+Education
+N/A
+- [Cameron Prout Phone Numbers - Principal Consultant - RocketReach](https://rocketreach.co/cameron-prout-email_846617570) — Cameron Prout, based in Brisbane City, QLD, AU, is currently a Principal Consultant at Cameron Prout & Associates. Cameron Prout brings experience from previous
+- [Taking Care of Parents, Taking Care of Kids - Prout Financial Design](https://proutfinancialdesign.com/radio-shows/taking-care-parents-taking-care-kids) — People in this situation are considered the “Sandwich Generation,” that is, they take care of both their parents while raising their own family.
+- [Background - Brendan Prout](https://www.brendanprout.com/background.html) — He is passionate for community engagement, servant leadership, experiential worship, sharing the truth and showing love in practical ways, helping people grow
+
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Cameron Prout, operating through Cameron Prout & Associates, brings extensive experience as both a consultant and advisor to nonprofit organizations. His primary focus revolves around strategy development and fundraising, helping these nonprofits effectively translate their visions into actionable goals. As an experienced senior consultant with a deep understanding of philanthropy and organizational management, Cameron works closely with nonprofits to ensure they have the necessary strategic frameworks and financial support to achieve their missions.
+Cameron Prout is a Principal Consultant at Cameron Prout & Associates, where he focuses on providing consultancy services to nonprofit organizations. His work centers around development and community engagement, aiming to enhance the operational effectiveness of these organizations. A significant aspect of his practice involves addressing the unique challenges faced by individuals in the "Sandwich Generation"—those who are simultaneously caring for their aging parents while raising children.
 
-Cameron appears to be deeply committed to supporting nonprofit organizations in reaching their full potential. His work is driven by a genuine care for effective governance and sustainable fundraising practices within the nonprofit sector. It’s clear that he values collaboration and believes strongly in empowering nonprofits with the tools they need to succeed, particularly through strategic planning and philanthropic initiatives. While specific personal interests are not detailed in the provided context, his professional endeavors suggest a passion for making a positive impact on society by strengthening the capacity of nonprofits.
+Cameron appears to care deeply about fostering meaningful connections within communities and empowering nonprofit organizations to achieve their goals more effectively. His work suggests a commitment to supporting caregivers who find themselves caught between family responsibilities, highlighting the importance of balancing these duties with professional aspirations. Additionally, his background in community engagement reflects a broader passion for servant leadership and practical ways of sharing support and love, indicative of his dedication to making tangible differences in people's lives.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

@@ -2,7 +2,7 @@
 name: Martin Conneely
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Martin Conneely
@@ -16,9 +16,10 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Martin Conneely Moorup is a strategic executive leader focused on digital transformation and operations management. He has worked for global leaders in manufacturing technology and currently lectures at Atlantic Technological University. His work emphasizes high-performance culture and capability building.
+Martin Conneely Moorup is a strategic executive leader with expertise in manufacturing technology, particularly in semiconductor and medical sectors. He focuses on education and innovation, and is involved in community activities. His work emphasizes high-performance culture and organizational change.
 - [20+ "Martin Conneely" profiles - LinkedIn](https://www.linkedin.com/pub/dir/Martin/Conneely) — Martin Conneely. Senior Executive | Strategic Leader | Building High-Performance Culture & Capability | Transformation |. Greater Sydney Area. Moorup , +9
-- [Martin Conneely - Galway, Ireland - About.me page](https://about.me/MartinJConneely) — I'm a manufacturing technology expert with two decades experience in Ireland, Europe and the US, working for semiconductor and medical global leaders.
+- [Martin Conneely - Galway, Ireland | about.me](https://about.me/MartinJConneely) — ## manufacturing technology and Senior Group Leader in Galway, Ireland. I’m a manufacturing technology expert with two decades experience in Ireland, Europe and the US, working for semiconductor and medical global leaders including Intel, Boston Scientific and Creganna Medical. I
+- [Martin Conneely | Academic - Udemy](https://www.udemy.com/user/martin-conneely-2) — I have over 20 years experience working in high volume manufacturing. I have worked in the semiconductor business for 10 years.
 - [Martin Conneely - Moorup](https://au.linkedin.com/in/martin-conneely-2020) — Martin Conneely
 Moorup
 Greater Sydney Area
@@ -41,25 +42,14 @@ Education
 University of Technology, Sydney
 N/A
 1996 - 
-- [martin conneely - at - Atlantic Technological University](https://ie.linkedin.com/in/martin-conneely-87159540) — martin conneely
-at
-Ireland
-500 connections, 2238 followers
 
-
-About
-A thought leader in operations management, digital transformation and regulation. An…
-
-
-Experience
-Lecturer
-[Atlantic Technological University](https://ie.linkedin.com/school/atlantic-technological-university/)  
-
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Martin Conneely is a seasoned strategic executive leader with extensive experience in the realm of digital transformation and operations management, particularly within manufacturing technology. He has spent over two decades working for global leaders in semiconductor and medical technologies across Ireland, Europe, and the US. Currently, Martin serves as an advisor to the founders at Moorup and lectures at Atlantic Technological University, sharing his expertise and fostering high-performance culture among his students.
+Martin Conneely is a seasoned strategic executive leader with extensive experience in manufacturing technology, particularly within the semiconductor and medical sectors. He has held senior positions at global leaders such as Intel, Boston Scientific, and Creganna Medical, where he honed his expertise over two decades. At Moorup, Martin serves as an advisor to the founders, bringing his deep knowledge of high-performance culture and organizational change to support their initiatives. His involvement extends beyond professional contributions; he is also engaged in community activities and emphasizes education and innovation in his work.
 
-Martin cares deeply about building high-performing teams and enhancing organizational capabilities through strategic leadership and innovation. His work emphasizes the importance of digital transformation in driving operational excellence and adapting to regulatory requirements. He is passionate about leveraging technology to improve processes and is committed to imparting his knowledge to future leaders in the field, ensuring that they are well-prepared for the evolving technological landscape.
+Martin cares deeply about fostering a culture of excellence and continuous improvement within organizations. He believes in the power of transformational leadership to drive cultural shifts that enhance overall performance. Additionally, Martin values education and innovation as key drivers for success and progress in both industry and society. His involvement in community activities underscores his commitment to making a broader impact beyond his professional sphere.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

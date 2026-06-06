@@ -2,7 +2,7 @@
 name: craig swann
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # craig swann
@@ -16,16 +16,19 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Craig Swann is a Creative Director known for pioneering work in AI, music technology, and innovation. He co-founded SouthStart, an innovation festival. His current focus includes AI film awards and world-building explorations.
-- [Craig Swann - Day One® - Content For Startups, Founders, Investors](https://dayone.fm/people/craig-swann) — Meet Craig Swann. Craig Swann is an award-winning Creative Director and Technologist, known for his pioneering work in web audio and music technology.
-- [Craig Swann](https://www.craigswann.com) — # Building at the edge of AI, creativity, and culture. For three decades I've been creating things ahead of their time - from early web experiments and online music platforms to generative art systems, creative tools, and Australia's most loved startup festival. Today I work acro
-- [224 Craig Swann: Future Festivals | Humans of Purpose - Podbean](https://humansofpurpose.podbean.com/e/224-craig-swann-future-festivals) — Our guest on the pod this week is Craig Swann, Creative Director of _SOUTHSTART. _SOUTHSTART is Australia's human-first innovation and impact
-- [Getting Curious, Creative & Chaotic @ Southstart - Craig Swann](https://www.digital-noir.com/craig-swann) — Craig described Southstart as a gathering of curious, creative chaotic individuals stumbling through the world trying to change the future
+Craig Swann is a key figure at SouthStart, focused on community building and creating frictionless experiences. He emphasizes the importance of decentralization and the value of spaces left open for growth. His work involves designing platforms and experiences.
+- [Getting Curious, Creative & Chaotic @ Southstart - Digital Noir](https://www.digital-noir.com/craig-swann) — Listen on Spotify  Listen on Apple Music. Make sure your website is a truly effective marketing tool for you business. In this episode, we speak with Craig Swann from Southstart. He is so passionate about building community and doing it in the most ‘frictionless’ way possible. We
+- [Craig Swann's Post - LinkedIn](https://www.linkedin.com/posts/craig-swann_three-days-more-than-800-people-and-the-activity-7442340557991018501-VPsu) — I've been designing SouthStart for eight years. And the thing I've learned is that the most valuable part of any event is the space you leave
+- [Craig Swann (@CraigSwann) / Posts / X - Twitter](https://x.com/CraigSwann) — Craig Swann (@CraigSwann) - Posts - I Build things. Platforms, Experiences. Worlds. Usually too early. Looplabs · SouthStart • Wyrld | X (formerly Twitter)
+- [#DigitalNoirPresents @ SouthStart - Craig Swann | Digital Noir](https://www.youtube.com/watch?v=FiolimT_9ao) — Halfway through SouthStart 2018, Craig Swann returns to the hot seat, joining Sam on the podcast to continue their conversation from a
+
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Craig Swann is an Event & Creative Director and co-owner of SouthStart, an innovative festival that celebrates human-centric advancements in technology and creativity. Over his career spanning three decades, Craig has been at the forefront of pioneering work across various domains including web audio, music technology, and AI-driven innovations. His recent endeavors include the AI Film Awards and explorations into world-building through creative technologies.
+Craig Swann serves as an Event & Creative Director and Co-Owner at SouthStart, where he plays a pivotal role in community building and crafting seamless experiences for participants. Over his eight-year tenure with the organization, Craig has focused on designing platforms that not only serve their intended purpose but also leave ample room for organic growth and interaction among attendees. His approach to event design highlights the importance of decentralization, ensuring that every element serves to enhance rather than hinder the natural flow of community engagement.
 
-Craig seems to care deeply about fostering a community that embraces curiosity, creativity, and chaos as essential elements for shaping the future. He values gatherings where individuals can freely explore new ideas and collaborate on impactful projects. His passion lies in bringing together like-minded people who are dedicated to pushing boundaries and making meaningful contributions to society through technology and creative expression.
+Craig’s work revolves around the creation of spaces where individuals can connect in a frictionless manner, emphasizing the value in leaving certain aspects open-ended for participants to fill with their own contributions and ideas. This philosophy underscores his deep commitment to fostering environments where creativity and innovation can flourish organically. Through his involvement in various platforms and experiences, Craig aims to cultivate communities that thrive on mutual support and shared growth, reflecting his broader vision of building more inclusive and dynamic spaces in the world.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

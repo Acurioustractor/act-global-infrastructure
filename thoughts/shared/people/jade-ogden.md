@@ -2,7 +2,7 @@
 name: Jade Ogden
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Jade Ogden
@@ -16,7 +16,7 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Jade Ogden is a Senior Partnerships and Events Manager at Victoria University, known for her work in arts and music, and she also runs The Handloom Room, a business focused on weaving and textiles.
+Jade Ogden is a Senior Partnerships and Events Manager at Victoria University. She focuses on arts and music, and cares about using regenerative, locally sourced materials like wool. She launched a major partnership with cohealth.
 - [Jade Ogden - Victoria University](https://au.linkedin.com/in/jadeogden) — Jade Ogden
 Victoria University
 Greater Melbourne Area
@@ -37,14 +37,17 @@ N/A
 
 Education
 RM
-- [Please welcome our second artist Jade Ogden, a local ...](https://www.facebook.com/OpenStoryTellers/posts/please-welcome-our-second-artist-jade-ogden-a-local-handloom-weaver-who-worked-w/956742566487873) — I run The Handloom Room, where I sell my work alongside textiles and craft made by people with learning disabilities. I also run weaving and
-- [Jade Ogden's Post](https://www.linkedin.com/posts/jadeogden_majorpartnerships-vuandcohealth-victoriauniversity-activity-7295634365676470275-E3KU) — ... I, launched a new Victoria University (VU) strategic major partnership with cohealth ... Jade Ogden's Post. View profile for Jade Ogden · Jade Ogden ... the diverse
-- [The Importance of Wool from Two Wool Artists](https://swheritage.org.uk/news/the-importance-of-wool-from-two-wool-artists) — We've spoken with two wool artists from our Spinning a Yarn exhibition, Jade Ogden and Liz Clay to find out why wool is such an important fibre.
+- [The Importance of Wool from Two Wool Artists – South West Heritage Trust](https://swheritage.org.uk/news/the-importance-of-wool-from-two-wool-artists) — To find out more about web accessibility, and the accessibility features of this site, please visit our web accessibility page. This site is part of the South West Heritage Trust. # South West Heritage Trust. We’ve spoken with two wool artists from our Spinning a Yarn exhibition,
+- [#majorpartnerships #vuandcohealth #victoriauniversity ... - LinkedIn](https://www.linkedin.com/posts/jadeogden_majorpartnerships-vuandcohealth-victoriauniversity-activity-7295634365676470275-E3KU) — ... I, launched a new Victoria University (VU) strategic major partnership with cohealth ... Jade Ogden's Post. View profile for Jade Ogden · Jade Ogden ... the diverse
+- [Jade Ogden (@ladyjadieo) • Instagram photos and videos](https://www.instagram.com/ladyjadieo) — Lady by name, Jadie by nature. Living on Djaara country. 1.2K+ following. This profile is private Follow ladyjadieo in the app to see their photos and videos.
+
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Jade Ogden is a Senior Partnerships and Events Manager at Victoria University, where she has been working on fostering major partnerships that contribute to the university's engagement and advancement initiatives. With over 20 years of experience in arts and music, Jade brings a wealth of knowledge and creativity to her role, aiming to enhance collaborations both within and outside the academic community. Beyond her professional role at Victoria University, Jade is also the founder of The Handloom Room, a business dedicated to weaving and textiles that showcases not only her own work but also pieces crafted by individuals with learning disabilities.
+Jade Ogden serves as a Senior Partnerships and Events Manager at Victoria University, where she specializes in fostering significant collaborations that leverage arts and music. Her role involves managing major partnerships that aim to support both community engagement and university advancement. Notably, Jade has spearheaded a strategic partnership between Victoria University and cohealth, which highlights her capability in establishing impactful alliances within the community. Beyond her professional responsibilities, Jade expresses a keen interest in sustainability, particularly in the use of regenerative materials such as wool.
 
-Jade appears to be deeply passionate about arts and cultural engagement, as evidenced by her involvement in various projects and initiatives. She values inclusivity and aims to highlight diverse voices through her work at both Victoria University and The Handloom Room. Her dedication to weaving and textiles suggests a strong appreciation for traditional crafts and their role in contemporary society. Jade is committed to fostering environments where creativity can thrive, whether it's through strategic partnerships that enhance educational opportunities or through the promotion of textile arts that celebrate craftsmanship and human connection.
+Jade appears to care deeply about the intersection of arts, music, and sustainable practices. Her connection with locally sourced materials like wool suggests she values both environmental stewardship and cultural heritage. This focus on sustainability likely extends into her work at Victoria University, where she seeks partnerships that align with these principles and contribute positively to the local community. Additionally, her engagement in arts and music indicates a passion for enriching cultural experiences and fostering creative environments that can inspire and educate others.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

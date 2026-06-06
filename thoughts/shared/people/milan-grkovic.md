@@ -2,7 +2,7 @@
 name: Milan Grkovic
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Milan Grkovic
@@ -16,8 +16,7 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Milan Grkovic is the founder of MUI CENTAR, known for developing the Model of Universal Problem-Solving (MUI). He focuses on universal problem-solving and personal/professional excellence. His work emphasizes comprehensive and effective solutions.
-- [Milan Grković i MUI](https://www.youtube.com/watch?v=yl2m66nAfL4) — Milan Grković formalno nije verificiran za psihologiju, pedagogiju, organizaciju ali je razradio MUI i stvarno pokazao da je iznad onih,
+Milan Grkovic is known for developing MUI, a model for effective meetings, and works at MUI CENTAR, focusing on optimizing meeting practices. His work emphasizes efficiency and effectiveness in meetings.
 - [Milan Grkovic - MUI CENTAR](https://hr.linkedin.com/in/milangrkovic) — Milan Grkovic
 MUI CENTAR
 Croatia
@@ -38,13 +37,17 @@ N/A
 
 Education
 N/A
-- [Milan Grkovic (@milangrkovic) / Posts / X](http://x.com/milangrkovic) — Milan Grkovic (@milangrkovic) - Posts - MUE - MODEL OF UNIVERSAL EXCELLENCE: Successful personal and professional career and managing all fo.
-- [REFERENCE MILAN GRKOVIĆ](http://www.portalalfa.com/reference) — U knjizi je predstavljen Model univerzalne izvrsnosti – MUI. MUI je cjelovit model djelovanja u bilo kojoj problematici na univerzalan način. To je jedini
+- [Milan Grković: MUI sastanci su disruptivna tehnologija upravljanja ...](http://www.poslovni-savjetnik.com/blogovi/milan-grkovic-mui-sastanci-su-disruptivna-tehnologija-upravljanja-sastancima) — MUI sastanci su nova paradigma kako kontinuirano i sustavno činiti sastanke učinkovitijima, kraćima i rjeđima na optimalan način i koji je dostupan svakom
+- [Milan Grković i MUI - YouTube](https://www.youtube.com/watch?v=yl2m66nAfL4) — Milan Grković formalno nije verificiran za psihologiju, pedagogiju, organizaciju ali je razradio MUI i stvarno pokazao da je iznad onih,
+- [Milan Grkovic (@milangrkovic) / Posts / X - Twitter](http://x.com/milangrkovic) — Milan Grkovic (@milangrkovic) - Posts - MUE - MODEL OF UNIVERSAL EXCELLENCE: Successful personal and professional career and managing all fo.
+
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Milan Grkovic is the founder and leading figure of MUI CENTAR, a platform centered around his Model of Universal Problem-Solving (MUI). His work revolves around developing comprehensive solutions to problems, aiming for excellence in both personal and professional contexts. Through MUI CENTAR, Milan aims to provide frameworks that allow individuals and organizations to achieve their best possible outcomes by systematically addressing challenges.
+Milan Grkovic is a Croatian professional known for his work in optimizing meeting practices through the Model of Universal Excellence (MUI), which he developed. He currently serves as the author of this model at MUI CENTAR, an organization dedicated to enhancing the effectiveness and efficiency of meetings. His approach emphasizes making meetings more efficient and shorter while also reducing their frequency to achieve optimal outcomes. Grkovic has garnered significant attention for his work on what he terms a “disruptive technology” in management practices, which seeks to continuously improve how meetings are conducted.
 
-Milan seems to care deeply about creating impactful and universal methods of solving issues across various domains. His emphasis on excellence indicates a strong dedication to helping others reach their full potential through effective problem-solving techniques. Despite not being formally verified in fields such as psychology or pedagogy, Milan's work is recognized for its practical applications and has garnered significant interest from his followers and connections.
+Milan seems deeply invested in transforming organizational dynamics through his model of universal excellence. His efforts reflect a commitment to maximizing productivity and minimizing time wastage within professional settings. He cares about creating sustainable and systematic methods that can be adopted by anyone to enhance meeting outcomes, indicating a broader interest in improving overall workplace efficiency and effectiveness. Despite not having formal verification in fields like psychology or pedagogy, Grkovic has demonstrated significant impact through his innovative model, suggesting he values practical solutions over traditional academic credentials.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

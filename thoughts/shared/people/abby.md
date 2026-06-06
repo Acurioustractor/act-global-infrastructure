@@ -2,7 +2,7 @@
 name: Abby
 lane: community
 storyteller_id: a92dc8e6-a535-4bd9-b880-e0ebd38deb71
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Abby

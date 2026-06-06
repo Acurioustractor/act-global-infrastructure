@@ -2,7 +2,7 @@
 name: Garima Gandhi
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Garima Gandhi
@@ -16,59 +16,15 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Garima Gandhi is a seasoned professional in market research and data analysis for WNS, known for her expertise in management consulting and project management. She has over 15 years of experience in product leadership at Cisco. Her work focuses on delivering B2B and B2C solutions.
-- [Garima Gandhi - Market Research | Secondary Research | Data Analysis | Data Management | Project Management | Management Consulting | Business Analyst - WNS](https://in.linkedin.com/in/garima-gandhi-5666971aa) — Garima Gandhi
-Market Research | Secondary Research | Data Analysis | Data Management | Project Management | Management Consulting | Business Analyst
-Gurugram, Haryana, India
-500 connections, 3484 followers
+_(no web key / no results)_
 
-
-About
-I am a data analyst and statistician specializing in primary and s
-- [Dr.Garima Gandhi - Medical Learning Hub](https://medicallearninghub.com/faculty/dr-garima-gandhi) — Dr. Garima Gandhi, M.B.B.S, M.S Obs.& Gynae. Experience: More than 18 years of experience in Obstetrics and Gynaecology. Experience of having worked in
-- [Garima Gandhi](https://in.linkedin.com/in/garima-gandhi-a885092) — Garima Gandhi
-
-Mumbai, Maharashtra, India
-304 connections, 334 followers
-
-
-About
-N/A
-
-
-Experience
-N/A
-
-
-Education
-N/A
-- [Garima Gandhi - Cisco](https://www.linkedin.com/in/garima-gandhi-b123ab8) — Garima Gandhi
-Cisco
-Alpharetta, Georgia, United States
-408 connections, 412 followers
-
-
-About
-Garima is a Product Leader with over 15 years of experience in delivering B2B and B2C…
-
-
-Experience
-Cisco
-[Cisco](N/A)  
-N/A - Present
-N/A
-
-
-
-Education
-University of Merut
-N/A
-2002 - 200
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Garima Gandhi is a seasoned professional with over fifteen years of experience in market research, data analysis, and project management. Currently working as a Senior Research Associate at WNS, she specializes in both primary and secondary research, data management, and business analytics. Her expertise also includes management consulting and product leadership, particularly from her tenure at Cisco where she focused on delivering solutions for B2B and B2C markets.
+Garima Gandhi serves as a Senior Research Associate at WNS, a global business process management company. In her role, she likely contributes to the research and analysis that underpin various projects and initiatives within the organization. Her work might involve collecting data, analyzing market trends, and providing insights that help inform strategic decisions for clients across different sectors. Given her position, Garima is probably well-versed in business process optimization, customer experience enhancement, and leveraging technology for efficiency.
 
-Garima appears to care deeply about leveraging data-driven insights to inform strategic decisions and improve organizational outcomes. She values accuracy and thoroughness in research and analysis, which are critical components of her work in market research and project management. Additionally, there seems to be a strong emphasis on collaboration and leadership within teams, suggesting that she also cares about fostering an environment where expertise is shared and collective success is prioritized.
+Garima seems to care deeply about delivering high-quality research that has a tangible impact on business outcomes. Her work likely reflects a commitment to precision and thoroughness in every project she undertakes. Additionally, it’s reasonable to infer that Garima values continuous learning and staying updated with industry trends to provide the most relevant insights to her clients and colleagues at WNS. However, without more specific information about her personal interests or additional professional involvements, we must rely on general assumptions based on her role.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

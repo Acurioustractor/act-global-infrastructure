@@ -2,7 +2,7 @@
 name: Shannon Keys
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Shannon Keys
@@ -16,7 +16,7 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Shannon Keys works at Marketplacer, focusing on talent marketplaces. She previously represented Team USA in roller skating. Her role emphasizes changing legacy work practices through technology.
+Shannon Keys works at Marketplacer, focusing on supply chain management. She previously represented Team USA in roller skating. Her expertise in detail and precision informs her professional role.
 - [Shannon Keys - Marketplacer](https://au.linkedin.com/in/shannon-keys-82673494) — Shannon Keys
 Marketplacer
 Brisbane, Queensland, Australia
@@ -37,14 +37,17 @@ N/A
 
 Education
 N/A
-- [From skating for Team USA to helping others, Shannon Keys is on a ...](https://blogs.umsl.edu/news/2019/12/09/shannon-keys) — Shannon Keys capped her competitive roller skating career by representing Team USA in Nanjing, China, at the inaugural World Roller Games.
-- [The Journey to a Skills-based Organisation and the Role of the ...](https://www.myhrfuture.com/blog/the-journey-to-a-skills-based-organisation-and-the-role-of-the-talent-marketplace) — They recognised early on that implementing a talent marketplace is less about technology and more about changing a legacy of work in jobs . They
+- [From skating for Team USA to helping others, Shannon Keys is on a roll](https://blogs.umsl.edu/news/2019/12/09/shannon-keys) — # From skating for Team USA to helping fellow students, Shannon Keys is on a roll. Shannon Keys capped her competitive roller skating career by representing Team USA in Nanjing, China, at the inaugural World Roller Games. Now she uses the lessons she learned skating as a supply c
+- [A Content Strategist's Keys to Engagement with Shannon Fitzgerald](https://pamelaslim.com/a-content-strategists-keys-to-engagement-with-shannon-fitzgerald) — Pam is joined by Shannon Fitzgerald, co-founder of The Hooligans Agency where they navigate the unconventional world of content creation.
 - [NFX Founder Room Ep. 1: Growing a Marketplace into a Market Network](https://www.nfx.com/post/founder-room-jack-shannon-recess) — **‍**We invited Founders to fill out The NFX Marketplace Scorecard and a Company Brief to have the chance to meet with James Currier on NFX Founder Room. And if you can, and you can figure out what the two or three or four or five features are that they need to get going with tha
 
-## Understanding — drafted
-Shannon Keys is a Senior Security Coordinator at Marketplacer, an organization dedicated to revolutionizing talent marketplaces through innovative technology solutions. With a background in competitive sports, Shannon previously represented Team USA in roller skating, showcasing her dedication and skill both on the rink and now in the corporate world. Her role at Marketplacer involves fostering new approaches to traditional work practices by leveraging modern technological advancements, aiming to create more efficient and dynamic talent networks.
+## Shared history — from the spine
+_(no linked email record)_
 
-Shannon appears to care deeply about bridging the gap between legacy work practices and contemporary technology solutions. She is committed to creating a more adaptable and secure environment for professionals within these evolving marketplaces. Her interest in fostering change through technology suggests that she values innovation and the potential it holds for transforming industries, particularly focusing on how talent can be better matched with opportunities. Shannon’s background in competitive sports also hints at her strong work ethic and dedication, likely carrying over into her professional pursuits where she seeks to make a significant impact within the realm of workforce management and development.
+## Understanding — drafted
+Shannon Keys is a Senior Security Coordinator at Marketplacer, an organization based in Brisbane, Queensland, Australia. Her career spans both competitive sports and professional roles. Shannon previously represented Team USA in roller skating at the inaugural World Roller Games in Nanjing, China. This background has likely contributed to her meticulous approach towards supply chain management, where attention to detail and precision are crucial.
+
+Shannon seems to care deeply about leveraging her diverse experiences to support and enhance the operations within Marketplacer. Her history as an athlete suggests a strong commitment to discipline, teamwork, and achieving excellence—qualities that she likely brings into her professional life. Shannon's focus on supply chain management indicates a dedication to ensuring efficiency and security in logistical processes, which are vital for any organization’s success. Beyond her immediate responsibilities, it appears that Shannon values opportunities to use her expertise not just within her role but also to contribute positively to the broader community.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

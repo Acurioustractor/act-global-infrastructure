@@ -2,7 +2,7 @@
 name: Dena
 lane: community
 storyteller_id: 93c72f8b-3310-4459-94e8-b8451284bacc
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Dena

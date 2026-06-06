@@ -2,7 +2,7 @@
 name: Norman Frank
 lane: community
 storyteller_id: c4981226-bf80-4f12-a42c-4e572a6353b1
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Norman Frank

@@ -2,7 +2,7 @@
 name: Tanya Turner
 lane: community
 storyteller_id: dc85700d-f139-46fa-9074-6afee55ea801
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Tanya Turner

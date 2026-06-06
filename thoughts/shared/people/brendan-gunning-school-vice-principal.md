@@ -2,7 +2,7 @@
 name: Brendan Gunning - School Vice Principal
 lane: community
 storyteller_id: 01b2f14e-9e25-4c32-8a02-e9abda83fd96
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Brendan Gunning - School Vice Principal

@@ -3,7 +3,7 @@ name:  Margot Scales
 
 lane: community
 storyteller_id: 0e345a88-9bc6-4720-9dc7-0c146973d098
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 #  Margot Scales

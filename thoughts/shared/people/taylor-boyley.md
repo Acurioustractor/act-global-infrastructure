@@ -2,7 +2,7 @@
 name: taylor boyley
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # taylor boyley
@@ -16,8 +16,8 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Taylor Boyley is the Marketing Manager for REDARC Electronics Pty Ltd, focusing on business development and marketing strategies. He is passionate about motoring and has been with the company since 2020. REDARC specializes in innovative power solutions.
-- [REDARC Electronics Pty Ltd Management Team - RocketReach](https://rocketreach.co/redarc-electronics-pty-ltd-management_b5d061a3f42e40e9) — REDARC Electronics Pty Ltd Employee Taylor Boyley's profile photo · Taylor Boyley. Marketing Manager - ANZ at REDARC Electronics Pty Ltd. Lonsdale, SA, AU. View.
+Taylor Boyley is a Marketing Manager at REDARC Electronics Pty Ltd, focusing on business development and consumer engagement. He has a background in marketing and a passion for motoring. REDARC specializes in innovative electronics for mobile and off-grid energy solutions.
+- [REDARC Electronics Pty Ltd Management Team - RocketReach](https://rocketreach.co/redarc-electronics-pty-ltd-management_b5d061a3f42e40e9) — Taylor Boyley Marketing Manager - ANZ at REDARC Electronics Pty Ltd. Purchasing Manager at REDARC Electronics Pty Ltd. Project Manager at REDARC Electronics
 - [Taylor Boyley - Marketing Manager - ANZ at REDARC Electronics Pty Ltd](https://au.linkedin.com/in/taylor-boyley-1987434a) — Taylor Boyley
 Marketing Manager - ANZ at REDARC Electronics Pty Ltd
 Lonsdale, South Australia, Australia
@@ -31,13 +31,16 @@ Passionate motoring enthusiast and keen marketing and business development profe
 Experience
 Marketing Manager - ANZ
 [REDARC El
-- [Sales and Marketing - REDARC Electronics Pty Ltd - The Org](https://theorg.com/org/redarc-electronics-pty-ltd/teams/sales-and-marketing) — They engage in business development, strategize sales initiatives, and create targeted marketing campaigns to showcase REDARC's innovative power solutions. By
+- [REDARC scales global B2B and B2C ecommerce with Adobe](https://business.adobe.com/au/customer-success-stories/redarc-case-study.html) — says Taylor Boyley, Marketing Manager ANZ at REDARC. websites feature a wealth of helpful information for consumers, REDARC's. REDARC's own
 - [REDARC Electronics - Overview, News & Similar companies](https://www.zoominfo.com/c/redarc-electronics-pty-ltd/346024597) — REDARC is a private, Australian owned, innovative electronics company that employs 300 people and provides mobile, off-grid energy and safety management
 
-## Understanding — drafted
-Taylor Boyley serves as the Marketing Manager for REDARC Electronics Pty Ltd in Australia and New Zealand. In this role, he focuses on business development and marketing strategies to promote REDARC’s innovative power solutions. Taylor has been with the company since 2020 and is particularly passionate about motoring, which likely influences his approach to the automotive-related products that REDARC offers. His work involves engaging with potential customers and stakeholders across ANZ to ensure that REDARC's advanced energy management solutions are well-received and effectively utilized.
+## Shared history — from the spine
+_(no linked email record)_
 
-Taylor seems to care deeply about both marketing excellence and the motoring community. His professional interests in business development and targeted marketing campaigns suggest a strong commitment to advancing REDARC’s brand and product offerings in the market. Additionally, his enthusiasm for motoring indicates that he values mobility and technological advancements in vehicles, aligning with REDARC's mission of providing reliable mobile energy solutions. This passion likely drives him to create impactful and relevant content and strategies that resonate well within the automotive industry and its enthusiasts.
+## Understanding — drafted
+Taylor Boyley is a Marketing Manager at REDARC Electronics Pty Ltd, an Australian-based company specializing in innovative electronic solutions for mobile and off-grid energy. In his role, Taylor focuses on business development and consumer engagement across the ANZ (Australia and New Zealand) region. His career path within REDARC has included various managerial roles, highlighting his versatility and expertise in marketing and project management.
+
+Taylor seems to care deeply about motoring and is passionate about using his skills to enhance consumer experiences with technology. Given his background and current position at a company that focuses on energy solutions for vehicles and outdoor activities, it’s evident he values practical innovations that improve mobility and convenience. His work reflects a dedication to both business growth and the satisfaction of customers who use REDARC's products for their automotive or off-road adventures.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

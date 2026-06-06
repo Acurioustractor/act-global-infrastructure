@@ -2,7 +2,7 @@
 name: chelsea baker
 lane: supporter
 warmth: 10
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # chelsea baker
@@ -16,18 +16,32 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Chelsea Baker is the Interim CEO of Green Fox Training Studio, focusing on social enterprise and creative education. She cares about skill development and community growth. She recently announced new projects and a new website for the studio.
-- [About Us - Green Fox Training Studio](https://greenfoxtrainingstudio.com.au/about-us) — Green Fox Training Studio is a charity that harnesses social enterprise, creative education, and mentoring to build skills, confidence, and growth mindset
-- [Green Fox Design Lab: CArE Works - Humanitix](https://events.humanitix.com/green-fox-design-lab-care-works) — Join Amanda Shepherd and Chelsea Baker from Green Fox Training Studio for a practical Lunch & Learn session exploring CaRE Works - an
-- [There has been a lot happening at Green Fox Training Studio - I'm thrilled to see some significant projects coming to life and almost ready to launch. 
-
-Next week - the new website! Plus an even more… | Chelsea Baker](https://www.linkedin.com/posts/chelsea-baker-628a5b95_there-has-been-a-lot-happening-at-green-fox-activity-7392065419445948416-xzrs) — By clicking Continue to join or sign in, you agree to LinkedIn’s User Agreement, Privacy Policy, and Cookie Policy. View profile for Chelsea Baker. There has been a lot happening at Green Fox Training Studio - I'm thrilled to see some significant projects coming to life and almos
+Chelsea Baker is the Interim CEO of Green Fox Studio, focusing on strategic leadership and community engagement. She also works on CArE Works, a program for young people with life challenges. Her role emphasizes social enterprise and creative education.
 - [Chelsea Baker - Manager, Impact & Engagement at SEFA - ZoomInfo](https://www.zoominfo.com/p/Chelsea-Baker/9597755336) — Chelsea Baker is the Interim Chief Executive Officer at Green Fox Studio, bringing expertise in strategic leadership and community engagement.
+- [Green Fox Design Lab: CArE Works](https://events.humanitix.com/green-fox-design-lab-care-works) — # Green Fox Design Lab: CArE Works. ## Description. Join Amanda Shepherd and Chelsea Baker from Green Fox Training Studio for a practical Lunch & Learn session exploring CaRE Works - an enterprise and entrepreneurship programme designed for young people with complex life experien
+- [About Us – Green Fox Training Studio](https://greenfoxtrainingstudio.com.au/about-us) — Green Fox Training Studio is a charity that harnesses social enterprise, creative education, and mentoring to build skills, confidence, and growth mindset cultures across schools, communities, and justice settings. We design trauma-aware, future-focused programs and foster mentor
+- [Chelsea Baker - The Forum For Youth Investment](https://forumfyi.org/staff/chelsea-baker) — ## Chelsea Baker. * Executive Assistant to the President & CEO. Chelsea Baker is the Executive Assistant to the President & CEO. She comes to the Forum with extensive experience in the public and philanthropic sectors coordinating meetings, schedules, working with boards, and dat
+
+## Shared history — from the spine
+**18 emails** · first 2025-07-13 · last 2025-10-16
+
+- 2025-10-16 ← Re: AGM Run Sheet
+- 2025-09-15 ← Accepted: CAMPFIRE CHECK IN // ACT, BG FIT & GREENFOX
+- 2025-09-15 ← Accepted: CAMPFIRE CHECK IN // ACT, BG FIT & GREENFOX
+- 2025-09-15 ← Accepted: CAMPFIRE CHECK IN // ACT, BG FIT & GREENFOX
+- 2025-09-15 ← Accepted: FINAL - CAMPFIRE CHECK IN // ACT, BG FIT & GREENFOX
+- 2025-09-15 ← Re: Invoice INV-0245 from Nicholas Marchesi for GREEN FOX TRAINING STUDIO LIMITED
+- 2025-09-14 → Re: Invoice INV-0245 from Nicholas Marchesi for GREEN FOX TRAINING STUDIO LIMITED
+- 2025-09-11 ← Re: CAMPFIRE Project Schedule & Progress Tracking
+- 2025-09-11 → CAMPFIRE Project Schedule & Progress Tracking
+- 2025-09-05 ← Accepted: Brodie / Greenfox - Project Update
 
 ## Understanding — drafted
-Chelsea Baker currently serves as the Interim CEO of Green Fox Training Studio, a charity that integrates social enterprise and creative education to foster skill development, confidence, and a growth mindset among its participants. Under her leadership, Green Fox Training Studio is embarking on new projects and has recently launched a refreshed website aimed at enhancing community engagement and accessibility. Chelsea is deeply involved in the studio’s initiatives, such as the CArE Works program, which she discussed during a Lunch & Learn session with Amanda Shepherd.
+Chelsea Baker serves as the Interim CEO of Green Fox Training Studio, an organization dedicated to fostering social enterprise and creative education within schools, communities, and justice settings. Her work emphasizes strategic leadership and community engagement, particularly through programs like CArE Works, which supports young people facing life challenges by offering them opportunities in entrepreneurship and enterprise. Chelsea’s role at the studio involves designing trauma-aware and future-focused initiatives that aim to build skills, confidence, and a growth mindset culture among participants.
 
-Chelsea seems to care deeply about the growth of both individuals and communities through meaningful skill development. Her focus on creative education reflects her belief that fostering creativity can lead to broader social benefits and personal empowerment. She is passionate about seeing projects come to life, indicating her commitment to tangible outcomes that positively impact those involved in Green Fox Training Studio’s programs. Through her role, she aims to create opportunities for mentorship and learning that contribute to the overall development of her community.
+Chelsea cares deeply about social impact and community development, especially focusing on providing support and empowerment for youth who face significant life obstacles. Her work is driven by a commitment to creating inclusive environments where young people can thrive and develop essential skills through hands-on learning experiences. She also values mentorship and the importance of fostering resilience in her community engagements.
+
+The collaboration between ACT and Green Fox Training Studio has been marked by shared efforts around managing events, tracking project progress, and ensuring financial transactions are handled smoothly. Emails exchanged indicate activities such as preparing for an AGM (Annual General Meeting), coordinating CAMPFIRE check-ins, and addressing invoice matters. These interactions reflect a practical partnership focused on supporting the operational needs of Green Fox Training Studio while advancing its mission-driven initiatives.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

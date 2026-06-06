@@ -2,7 +2,7 @@
 name: Nina Lansbury
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Nina Lansbury
@@ -16,28 +16,19 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Associate Professor Nina Lansbury at The University of Queensland focuses on environmental health for remote Indigenous communities, particularly housing, water, sanitation, and women's health. She is also involved in climate change assessments. Her work emphasizes community engagement and sustainable practices.
-- [Associate Professor Nina Lansbury - School of Public Health](https://public-health.uq.edu.au/profile/2420/nina-lansbury) — Associate Professor Nina Lansbury (also published as Nina Hall) is an environmental public health research and teaching academic at The University of Queensland
-- [Associate Professor Nina Lansbury | UQ Experts](https://about.uq.edu.au/experts/4151) — Her current research at UQ examines environmental health aspects that support the health and wellbeing of remote Indigenous community residents (as a non-
-- [‪Nina Lansbury‬ - ‪Google Scholar‬](https://scholar.google.com/citations?user=bknjLQYAAAAJ&hl=en) — University of Queensland - ‪‪Cited by 2646‬‬ - ‪Indigenous health‬ - ‪water management‬ - ‪community engagement‬ - ‪energy technology assessment‬
-- [Nina Lansbury - Associate Professor, School of Public Health at The University of Queensland - Intergovernmental Panel on Climate Change (Assessment Report 7, WG2, Australasia chapter)](https://au.linkedin.com/in/nina-lansbury-b4435638) — Nina Lansbury
-Associate Professor, School of Public Health at The University of Queensland
-Greater Brisbane Area
-500 connections, 831 followers
+Dr. Nina Lansbury at The University of Queensland focuses on environmental health, particularly housing, water, sanitation, and women's health for remote Indigenous communities. She also investigates climate change impacts on human health and is a lead author for the Intergovernmental Panel on Climate Change.
+- [nessaustralia – Network of Environmental Social Scientists](https://nessaustralia.org/author/nessaustralia) — Aboriginal and Torres Strait Islander Peoples have lived in Australia for thousands of generations and through changes in the climate. In response, this research was commissioned by the Australian Government ahead of the IPCC Assessment Report 7 planning discussions in August 202
+- [Nina Lansbury - The Conversation](https://theconversation.com/profiles/nina-lansbury-211334) — Nina Lansbury (formerly published as Nina Hall) researches and teaches on Indigenous health, climate change and health, and water, sanitation and hygiene.
+- [RRH: Rural and Remote Health. Assoc Prof Nina Lansbury](https://www.rrh.org.au/journal/profile/50459) — Her current research at UQ examines environmental health aspects that support the health and wellbeing of remote Indigenous community residents
+- ["Climate Change Impacts on Drinking Water Security in Remote ...](https://ro.ecu.edu.au/aihjournal/vol6/iss1/4) — Nina Lansbury, School of Public Health, University of Queensland, increasing threats to the security of drinking water supplies. sufficient safe, clean,
 
-
-About
-N/A
-
-
-Experience
-Coordinating Lead Author
-[Intergovernmental Panel on Climate Change (Assessment Report 7, WG2, Australasia chap
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Associate Professor Nina Lansbury is a dedicated academic and researcher at The University of Queensland, where she focuses her work on the environmental health of remote Indigenous communities. Her research encompasses critical areas such as housing conditions, water quality, sanitation practices, and women's health within these communities. Additionally, she plays an active role in climate change assessments, particularly concerning Australasia. Nina emphasizes sustainable practices and robust community engagement to ensure that her work is both relevant and beneficial for the populations she serves.
+Dr. Nina Lansbury is an Associate Professor at The University of Queensland where she specializes in environmental health with a focus on the well-being of remote Indigenous communities in Australia. Her work encompasses areas such as housing conditions, access to safe water and sanitation, and women's health within these communities. Additionally, Dr. Lansbury investigates how climate change affects human health, contributing her expertise as a lead author for the Intergovernmental Panel on Climate Change (IPCC). She is actively involved in research aimed at understanding and addressing the specific challenges that Indigenous populations face due to environmental changes.
 
-Nina cares deeply about improving the living conditions and overall wellbeing of Indigenous Australians, especially those residing in remote areas. Her work reflects a commitment to addressing environmental health issues through evidence-based approaches that are informed by and sensitive to the cultural contexts of these communities. She values sustainable solutions and the importance of involving community members directly in research efforts to create meaningful change. Nina’s involvement with the Intergovernmental Panel on Climate Change underscores her dedication to understanding the broader implications of climate change and how it impacts specific regions, including those she studies in Australasia.
+Dr. Nina Lansbury seems deeply committed to advocating for and supporting the health and well-being of remote Indigenous communities, especially concerning issues like climate change and access to essential resources such as clean water and adequate sanitation facilities. Her work reflects a concern for gender equality and women's health within these communities, indicating that she values holistic approaches that address multiple facets of social and environmental justice. Through her role in the IPCC and her research at UQ, Dr. Lansbury is dedicated to advancing knowledge and developing solutions that can mitigate adverse health impacts linked to environmental degradation and climate change for vulnerable populations.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

@@ -2,7 +2,7 @@
 name: Brigit Perry
 lane: community
 storyteller_id: 46e55a6b-ba7e-4850-b0f0-451a149151bf
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Brigit Perry

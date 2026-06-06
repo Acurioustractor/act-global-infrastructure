@@ -2,7 +2,7 @@
 name: Aunty Bev and Uncle terry Aunty Bev and Uncle terry
 lane: community
 storyteller_id: 2a263da7-836f-42f8-ad3f-9bdf09832f0e
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Aunty Bev and Uncle terry Aunty Bev and Uncle terry

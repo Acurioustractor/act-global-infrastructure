@@ -2,7 +2,7 @@
 name: Rikki Downman
 lane: community
 storyteller_id: 19bb660d-d285-420e-8012-8d5ca2a47145
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Rikki Downman

@@ -2,7 +2,7 @@
 name: Frank Daniel Anderson
 lane: community
 storyteller_id: 13a78adf-c261-443f-90ba-cf8a57f3d301
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Frank Daniel Anderson

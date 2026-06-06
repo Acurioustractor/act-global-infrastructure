@@ -2,7 +2,7 @@
 name: Chris Neve
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Chris Neve
@@ -16,19 +16,22 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Chris Neve is a Senior Growth Manager at Roboyo, focusing on leveraging AI for digital transformation and strategic growth. He works on automating business processes and enhancing customer experiences. His role emphasizes data-driven decision-making and AI innovation.
+Chris Neve is a Senior Growth Manager at Roboyo, focusing on AI-driven digital transformation and strategic growth. He partners with decision makers to leverage AI for innovation. His work emphasizes automation and data-driven decision-making.
+- [Chris Neve - Roboyo x Procensol - LinkedIn](https://www.linkedin.com/posts/chris-neve_roboyo-x-procensol-activity-6998230325768155136-G-Aj) — We are thrilled to announce that Procensol has joined the Roboyo Group! Procensol's experience in low-code application development and
 - [#alleyes24 #nextlevelnow | Roboyo - LinkedIn](https://www.linkedin.com/posts/roboyo_alleyes24-nextlevelnow-activity-7223583058451423232--58o) — Chris Neve, graphic. Chris Neve. Senior Strategic Growth Manager | Helping Organisations Turn Intent into Outcomes with Agentic AI
-- [Roboyo - Overview, Competitors, News, and Employees | Clodura.AI](https://www.clodura.ai/directory/company/roboyo) — Chris Neve. Senior Growth Manager. user-icon. Liberty Grimond. Senior ... Roboyo operates in the It services and it consulting industry. What is
 - [Chris Neve - Senior Growth Manager leveraging AI for digital transformation, optimizing business processes, and enabling data-driven decisions. Partnering with decision makers to harness AI for strategic growth and innovation - Roboyo](https://au.linkedin.com/in/chris-neve) — Chris Neve
 Senior Growth Manager leveraging AI for digital transformation, optimizing business processes, and enabling data-driven decisions. Partnering with decision makers to harness AI for strategic growth and innovation
 Brisbane City, Queensland, Australia
 500 connections, 22
 - [Roboyo - Next stop on the Appian the World event: Sydney! Roboyo ...](https://www.facebook.com/photo.php?fbid=1026807642414763&id=100052566114142&set=a.536423831453149) — Visit our booth to chat about all things #automation with the Roboyo Team: Dan Cooke, John Adamek, Chris Neve, Manish Tripathy, and Jordan Hall. Get your
 
-## Understanding — drafted
-Chris Neve serves as a Senior Growth Manager at Roboyo, an organization that specializes in IT services and consulting. In this role, he focuses on utilizing artificial intelligence (AI) to drive digital transformation and strategic growth for businesses. Chris is dedicated to automating business processes and enhancing customer experiences through AI innovation, emphasizing the importance of data-driven decision-making in achieving these goals.
+## Shared history — from the spine
+_(no linked email record)_
 
-Chris appears to be deeply committed to leveraging technology, particularly AI, as a means to foster meaningful change within organizations. His work suggests that he values not only technical expertise but also strategic partnerships with decision-makers to integrate innovative solutions effectively. It’s clear from his professional activities and interactions that Chris cares about turning organizational intent into tangible outcomes through the use of advanced technologies like agentic AI, aiming to make a significant impact on how businesses operate and grow in today's digital landscape.
+## Understanding — drafted
+Chris Neve is a Senior Growth Manager at Roboyo, an organization that focuses on AI-driven digital transformation and strategic growth. In his role, he collaborates with decision-makers to integrate advanced technologies like artificial intelligence into business processes. His work is particularly centered around automation and leveraging data for informed decision-making, which allows organizations to innovate more effectively.
+
+Chris seems to care deeply about the impact of technology on businesses and how it can be used as a tool for growth and innovation. He values partnerships that lead to meaningful outcomes, emphasizing the importance of turning organizational intent into actionable results through the use of agentic AI. His approach highlights a dedication to not only advancing technology but also ensuring that it is implemented in ways that truly benefit the companies he works with, focusing on practical applications and tangible improvements rather than theoretical advancements.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

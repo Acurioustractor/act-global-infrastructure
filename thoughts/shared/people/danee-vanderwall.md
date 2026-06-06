@@ -2,7 +2,7 @@
 name: Danee Vanderwall
 lane: community
 storyteller_id: 214381a3-20a6-4d4e-833d-ce53f2e96856
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Danee Vanderwall

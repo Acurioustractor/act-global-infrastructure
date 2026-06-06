@@ -2,7 +2,7 @@
 name: Kristine Middendorp
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Kristine Middendorp
@@ -16,16 +16,26 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Cash Converters focuses on profit, often prioritizing external hires over promotions, and has faced criticism for neglecting employee wellbeing. The company is known for buying and selling second-hand goods and offering financial services.
-- [Working at Cash Converters: employee reviews about Pay and benefits | Indeed.com](https://uk.indeed.com/cmp/Cash-Converters/reviews?ftopic=paybenefits) — All the time I've worked for cash converters they only care about profit , there are rarely internal promotions or training for it, and when there are vacancies they get people from outside....Show more
-- [Cash Converters - Wikipedia](https://en.wikipedia.org/wiki/Cash_Converters) — # Cash Converters. Please help improve this article by adding citations to reliable sources. *Find sources:* "Cash Converters" – news **·** newspapers **·** books **·** scholar **·** JSTOR *(March 2025)* *(Learn how and when to remove this message)* |. **Cash Converters Internati
-- [Cash Converters Job Reviews - Real UK Workers (2026)](https://www.breakroom.cc/en-gb/employers/cash-converters/job-reviews) — September 9, 2025 - Management — including both our store manager, and higher management. Money comes first, making their own lives easier comes second. They could not care less about the wellbeing of their staff and the type of working environment they perpetuate .
-- [Cash Converters: Life made possible – Rare](https://hellorare.com/work/cash-converters-life-made-possible) — Cash Converters is an iconic Australian challenger brand that divides opinion. To some it evokes negativity based on past practices, behaviours and opinions. However to many happy customers, the brand is their hero. Sometimes a little unconventional but nonetheless a hero · When 
+Kristine Middendorp works as a Financial Crime Analyst at Cash Converters, focusing on anti-money laundering and compliance. She investigates suspicious transactions and collaborates with stakeholders to enhance risk controls. Her role emphasizes integrity and regulatory adherence.
+- [Kristine Middendorp - Financial Crime Analyst | Criminology & Psych Science (Hons) | Published Criminologist | AML/CTF | Risk & Compliance | Analytical | Detail-Oriented - Cash Converters](https://au.linkedin.com/in/kristine-middendorp-98813a46) — Kristine Middendorp
+Financial Crime Analyst | Criminology & Psych Science (Hons) | Published Criminologist | AML/CTF | Risk & Compliance | Analytical | Detail-Oriented
+Brisbane, Queensland, Australia
+179 connections, 181 followers
+
+
+About
+I am a self-motivated and inquisitive com
+- [[PDF] THE BEST OF THE 2018 CICERO SPEECHWRITING AWARDS](https://www.zumwaldandcompany.com/wp-content/uploads/2018_CiceroAwardsWinners_FINAL.pdf) — Fenves, President, The University of Texas at Austin CATEGORY WINNERS 6  AGRICULTURE: “Even If People Can’t Move Freely, Ideas Must,” by Chris Moran for Jack Payne, Senior Vice President for Agriculture and Natural Resources, University of Florida 8  ENERGY: “Managing Oil Suppl
+- [sitemap - Stantec](https://www.stantec.com/en/sitemap) — *   [Reimagining resilience starts with the heart of community](https://www.stantec.com/en/ideas/content/video/2025/reimagining-resilience-starts-with-the-heart-of-community.html). *   [Transforming a Colorado mine into community green space](https://www.stantec.com/en/ideas/cont
+- [Mobile mechanic or electrician for RV in Montrose? - Facebook](https://www.facebook.com/groups/270984801003919/posts/727087655393629) — If I was an electrician or rv mechanic then I would do it myself. It could be as simple as the cord that is connected directly to the camper
+
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Kristine Middendorp works as a Financial Crime Analyst at Cash Converters, where she plays a crucial role in ensuring compliance with financial regulations and preventing illegal activities within the company's operations. Her work involves monitoring transactions for signs of fraudulent or illicit behavior, conducting thorough investigations when necessary, and maintaining robust systems to safeguard against financial crimes. Despite her professional responsibilities, Kristine operates within an environment that has been noted by some employees as prioritizing profit over internal development and employee welfare.
+Kristine Middendorp is a Financial Crime Analyst at Cash Converters, where she plays a crucial role in ensuring compliance with anti-money laundering regulations and other financial crime prevention measures. With her background in criminology and psychological science, Kristine brings a unique perspective to her work, focusing on the analytical assessment of suspicious transactions and collaborating closely with various stakeholders to enhance risk controls and maintain regulatory adherence. Her expertise extends beyond her day-to-day responsibilities; she has also contributed as a published criminologist.
 
-From available information, it appears that Kristine likely values integrity in business practices and may be committed to the ethical aspects of her work. Given her role in preventing financial crime, she seems to care deeply about maintaining a lawful and transparent corporate environment. However, limited context makes it challenging to fully understand her personal motivations or how she navigates the company culture that has been criticized for its focus on profit over employee wellbeing. It is possible that Kristine finds ways to honor both her professional duties and her values within this framework, though specific details about her individual approach are not provided in the available context.
+Kristine seems deeply committed to upholding integrity and ensuring that financial practices align with legal standards and ethical norms. This dedication reflects her broader interest in preventing criminal activities through meticulous analysis and strategic collaboration within the industry. She values attention to detail and analytical rigor, which are essential qualities for effectively identifying and addressing potential threats to financial security and regulatory compliance. Her work underscores a strong commitment to maintaining the trust and safety of both her organization and the wider community it serves.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

@@ -2,7 +2,7 @@
 name: James Dinsdale
 lane: community
 storyteller_id: 8ad0b73f-6c29-4718-b0d2-95cbeab07026
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # James Dinsdale

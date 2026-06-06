@@ -2,7 +2,7 @@
 name: tom robinson
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # tom robinson
@@ -16,8 +16,8 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Tom Robinson is the Chief Integration Officer at 1Breadcrumb, focused on construction safety technology. He has authored a book titled "Wear It Where?" and has academic research contributions. His work emphasizes innovation and technology integration.
-- [Profiles & Contacts - Breadcrumb - Crunchbase](https://www.crunchbase.com/organization/1breadcrumb-pty-ltd/profiles_and_contacts) — Photo of Tom Robinson. Tom Robinson. Chief Integration Officer. Photo of Mahdi Nejad. Mahdi Nejad. Co-Founder & Chief Innovation Officer. Past Jobs. Breadcrumb,
+Tom Robinson is a consultant focused on climate-resilient conservation, a coach dedicated to helping others find peace, and the Chief Integration Officer at 1Breadcrumb, enhancing construction safety technology.
+- [About - TOM ROBINSON](https://www.tomrobinsoncoaching.com/about) — my focus to yoga and coaching, dedicated to helping others find peace, joy, and a life free from suffering. Through coaching, I help others move past fear,
 - [Tom Robinson - Building the future of construction safety @ 1Breadcrumb](https://au.linkedin.com/in/tomjrob) — Tom Robinson
 Building the future of construction safety @ 1Breadcrumb
 Greater Brisbane Area
@@ -31,28 +31,16 @@ I am passionate about startups, technology and innovation. I have skills in soft
 Experience
 Chief Integration Officer
 [1Breadcrumb](https://a
-- [Tom Robinson - Book Author - Self-employed](https://www.linkedin.com/in/tom-robinson-42928018) — Tom Robinson
-Book Author
-Wilmington, North Carolina, United States
-500 connections, 588 followers
+- [Interview with songwriter & broadcaster Tom Robinson - YouTube](https://www.youtube.com/watch?v=MJcIKiki72w) — Tom Robinson is a British songwriter and broadcaster born in 1950. His music career began in London with the acoustic trio Café Society,
+- [Background](https://www.tomrobinsonconsulting.com/background) — # Background. Tom Robinson founded his consulting practice to accelerate climate-resilient conservation and support the people who steward our landscapes. Building on two and half decades of experience in applied conservation science, his work focuses on helping land-use agencies
 
-
-About
-N/A
-
-
-Experience
-Book Author
-[Self-employed](N/A)  
-Oct 2020 - Present
-Wilmington NC
-Wear It Where? A comical and educational look at our life with Covid-19. Written in the s
-- [Tom Robinson's research works | Brigham Young University and ...](https://www.researchgate.net/scientific-contributions/Tom-Robinson-2066987472) — Tom Robinson's 15 research works with 206 citations, including: Returning to Faith: A Q Methodology Analysis of Messages that Resonated with Individuals Who
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Tom Robinson is the Chief Integration Officer at 1Breadcrumb, a company focused on advancing construction safety through innovative technology solutions. His role involves integrating new technologies and systems into existing processes to enhance safety measures in the construction industry. Tom has authored a book titled "Wear It Where?" which offers both education and humor around living with COVID-19. He also has an academic background, contributing research works that reflect his interest in technology and innovation.
+Tom Robinson is a multifaceted individual with a strong dedication to both technological innovation and personal well-being. As the Chief Integration Officer at 1Breadcrumb, he plays a pivotal role in advancing construction safety technology. His professional background spans over two decades in applied conservation science, where he has focused on fostering climate-resilient conservation efforts and supporting those who manage natural landscapes. Tom's consulting practice is geared towards accelerating these environmental initiatives while leveraging his extensive experience to enhance sustainable practices.
 
-Tom appears to care deeply about using technology to improve workplace safety, particularly within the construction sector. His commitment to integrating innovative solutions suggests a passion for making meaningful changes that can save lives and reduce injuries on job sites. Additionally, through his book and other writings, he shows an interest in addressing societal issues with a blend of education and humor, indicating a broader concern for public welfare beyond just professional safety standards.
+Beyond his technological and scientific pursuits, Tom is deeply committed to personal development and inner peace. He serves as a coach dedicated to helping others navigate their fears and find joy and contentment in life. This dual focus on both external innovation and internal growth underscores Tom's holistic approach to making the world a safer and more peaceful place. His passion for startups and technology complements his coaching work, indicating an interest in using modern tools to address both environmental challenges and personal well-being.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

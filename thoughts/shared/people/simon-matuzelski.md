@@ -2,7 +2,7 @@
 name: simon matuzelski
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # simon matuzelski
@@ -16,16 +16,19 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Simon Matuzelski works for the Australian Attorney-General's Department, focusing on legal policy and coordination. His role involves advising the government and overseeing legal matters. He cares about ensuring justice and legal integrity in Australia.
-- [Who we are | Attorney-General's Department](https://www.ag.gov.au/about-us/who-we-are) — Australian Government Attorney-General’s Department home. We are the central policy and coordinating element of the Attorney-General's portfolio. We are structured into 4 groups:. Download a copy of our organisational structure:. Our minister is the Attorney-General, the Hon Mich
-- [Department of Justice |  Office of the Attorney General | United States Department of Justice](https://www.justice.gov/doj/organization-mission-and-functions-manual-office-attorney-general) — An official website of the United States government. A **.gov** website belongs to an official government organization in the United States. # Office of the Attorney General. The Judiciary Act of 1789 created the Office of the Attorney General which evolved over the years into th
-- [Department of Justice - U.S. Government Manual](https://www.usgovernmentmanual.gov/Agency?EntityId=8iPvf%2FKZKuk%3D&ParentEId=+klubNxgV0o%3D&EType=jY3M4CTKVHY%3D) — # Department of Justice. *The Department of Justice enforces the law and defends national interests according to the law; ensures public safety against domestic and foreign threats; provides Federal leadership in preventing and controlling crime; seeks just punishment for those w
-- [What Does the Attorney General Do? - 2026 - MasterClass](https://www.masterclass.com/articles/what-does-the-attorney-general-do) — Supervising government prosecutors · Bringing federal cases · Protecting the rights of the public · Overseeing criminal investigations · Serving as
+The Attorney General leads the Department of Justice, provides legal advice, and represents the government in legal matters. Their role includes overseeing federal prosecutions and ensuring compliance with laws. This position is crucial in both politics and law.
+- [What does an Attorney General do? Career Overview, Roles, Jobs | ACC](https://jobline.acc.com/career/attorney-general) — An Attorney General is the highest-ranking legal officer in a state or federal government. They are responsible for providing legal advice to the government and representing the government in legal proceedings. The role of an Attorney General can vary depending on the jurisdictio
+- [The Associate Attorney General - YouTube](https://www.youtube.com/watch?v=rLAmn1WOs-I) — Associate Attorney General Tom Perrelli talks about his work for The Department of Justice and the unique responsibilities of the Associate
+- [What a US attorney general actually does – a law professor spells it out](https://theconversation.com/what-a-us-attorney-general-actually-does-a-law-professor-spells-it-out-279949) — U.S. Attorney General Pam Bondi answers questions from the media at the U.S. Capitol on March 18, 2026. The attorney general is the lawyer appointed by the president and confirmed by the Senate to lead the Department of Justice, known as the DOJ. Because the attorney general’s ex
+- [What does the U.S. attorney general do? | PBS News](https://www.pbs.org/newshour/politics/what-does-the-u-s-attorney-general-do) — The attorney general is the lawyer appointed by the president and confirmed by the Senate to lead the Department of Justice, known as the DOJ. Because the attorney general's expansive responsibilities place the office at the forefront of both politics and the law, the position is
+
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Simon Matuzelski serves as an Assistant Director at the Australian Attorney-General's Department, where he plays a crucial role in legal policy and coordination. His work involves advising government officials on various legal matters to ensure that justice is upheld and legal integrity is maintained across the country. The Attorney-General’s Department operates as the central coordinating body within its portfolio, supporting initiatives and policies that align with national legal standards.
+Simon Matuzelski holds the role of Assistant Director within the Attorney-General's Department, an entity critical to ensuring legal compliance and representation for governmental matters. The department he serves in plays a pivotal part in providing high-level legal advice, managing federal prosecutions, and upholding legal integrity across the government. As an Assistant Director, Simon likely deals with complex legal issues that require extensive knowledge of both legislative processes and legal procedures. His work could involve overseeing teams, handling significant legal cases, and ensuring that governmental actions adhere to existing laws.
 
-Simon appears to be deeply committed to upholding justice and ensuring legal integrity in Australia. His role requires him to engage closely with government officials and legal frameworks, indicating his dedication to maintaining fair and robust legal systems. He likely values transparency, the rule of law, and public trust within the judicial process, aiming to contribute positively to the overarching goal of justice for all Australians.
+Simon seems to care deeply about the rule of law and the just application of legal principles within the government framework. Given his position in such a pivotal department, it can be inferred that he values integrity, fairness, and thoroughness in legal matters. His role likely requires not only a deep understanding of the law but also an ability to navigate complex political landscapes while maintaining objectivity. Simon probably finds fulfillment in contributing to the lawful governance of the nation and ensuring that legal processes are transparent and equitable for all stakeholders involved.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

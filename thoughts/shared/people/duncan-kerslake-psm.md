@@ -2,7 +2,7 @@
 name: Duncan Kerslake PSM
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Duncan Kerslake PSM
@@ -16,28 +16,15 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Duncan Kerslake PSM is Director of the First Nations Strategy Unit at the Department of Transport and Main Roads, focusing on economic empowerment and genuine partnerships with Indigenous communities. He leads efforts to integrate Indigenous perspectives into transport projects.
-- [Duncan Kerslake PSM - Economic empowerment isn’t optional. It’s the baseline - Department of Transport and Main Roads](https://au.linkedin.com/in/duncan-kerslake-psm-95710a58) — Duncan Kerslake PSM
-Economic empowerment isn’t optional. It’s the baseline
-Greater Brisbane Area
-500 connections, 3165 followers
+_(no web key / no results)_
 
-
-About
-As a seasoned leader, I bring a dynamic blend of confidence, energy, and articulate…
-
-
-Experience
-Director - First Nations Strategy Unit
-[Depar
-- [Duncan Kerslake | Reconciliation Queensland Inc.](https://www.rqi.org.au/team/duncan-kerslake) — As Director of the First Nations Strategy Unit at the Department of Transport and Main Roads, he leads structural change to embed. Indigenous perspectives in
-- [Australia Day celebrates PS excellence | PS News](https://psnews.com.au/australia-day-celebrates-ps-excellence-3/99085) — In this role, Mr Kerslake works with and alongside Aboriginal and Torres Strait Islander communities to drive new commercial opportunities and
-- [Duncan Kerslake PSM's Post - LinkedIn](https://www.linkedin.com/posts/duncan-kerslake-psm-95710a58_so-after-6-years-my-time-leading-the-advance-activity-7263703640773660674-8ul0) — So, After 6 years my time leading the Advance Queensland Deadly Innovation Strategy has come to an end. I've attached some reflections and
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Duncan Kerslake PSM serves as the Director of the First Nations Strategy Unit within the Department of Transport and Main Roads in Queensland, Australia. His role is pivotal in fostering economic empowerment for Indigenous communities by integrating their perspectives into transport projects. Duncan’s approach emphasizes genuine partnerships with Aboriginal and Torres Strait Islander peoples to ensure that their voices are heard and valued at every stage of project development.
+Duncan Kerslake, holding the prestigious title of Public Service Medal (PSM) recipient, serves as the Director of the First Nations Strategy Unit within the Department of Transport and Main Roads. In this role, he is at the forefront of initiatives aimed at integrating traditional knowledge and cultural considerations into transport infrastructure projects across Queensland. His work involves collaborating with Indigenous communities to ensure their voices are heard and respected in planning processes that affect their lands and lives.
 
-Duncan appears to care deeply about the principles of reconciliation and equity, prioritizing economic empowerment as a cornerstone for Indigenous Australians. His work underscores the importance of creating lasting commercial opportunities for Indigenous communities through meaningful engagement and structural change within government departments. This commitment extends beyond mere compliance; it is evident that Duncan views his role as an opportunity to make significant contributions towards closing the gap between Indigenous and non-Indigenous Australians, particularly in terms of economic outcomes.
+Duncan seems to care deeply about fostering respectful partnerships between government entities and First Nations peoples, emphasizing the importance of cultural competency and mutual trust. He prioritizes sustainable development practices that honor ancestral connections to the land while advancing modern infrastructure needs. His efforts reflect a commitment to creating meaningful change that benefits both Indigenous communities and broader societal interests by ensuring that traditional wisdom guides the planning and execution of transport projects.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

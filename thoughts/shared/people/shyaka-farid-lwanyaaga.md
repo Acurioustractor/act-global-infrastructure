@@ -2,11 +2,17 @@
 name: Shyaka Farid Lwanyaaga
 lane: supporter
 warmth: 68
-updated: 2026-06-03
+energy: 40
+ring: 50
+updated: 2026-06-06
 ---
 
 # Shyaka Farid Lwanyaaga
 *Founder and Head of Design, Buntu Wellbeing Experience Network*  
+
+## Ben's read — ground truth (circle session 2026-06-06)
+> **"good friend in Uganda — mainly friend, low-maintenance distance friendship"** · ring **50** · energy **40**
+
 
 ## Soil — institutional ground (CivicGraph)
 - **Org:** Buntu Wellbeing Experience Network (Founder and Head of Design)
@@ -16,35 +22,15 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Shyaka Farid Lwanyaaga Buntu Wellbeing Experience Network focuses on menstrual health and sustainable fashion. He is a global mentor and founder of the network. His work emphasizes social stigma reduction and environmental sustainability.
-- [Shyaka Farid Lwanyaaga - Global Mentor at AIME - Buntu Wellbeing Experience Network](https://ug.linkedin.com/in/shyaka-farid-lwanyaaga-b84273115) — Shyaka Farid Lwanyaaga
-Global Mentor at AIME
-Kampala, Central Region, Uganda
-291 connections, 297 followers
+_(no web key / no results)_
 
-
-About
-Imagining what’s possible.
-
-
-Experience
-Founder and Head of Design
-[Buntu Wellbeing Experience Network](N/A)  
-May 2017 - Present
-Kampala, Uganda
-
-
-
-Education
-Caven
-- [Shebang fashion show brings runway to ghetto | Monitor](https://www.monitor.co.ug/uganda/lifestyle/entertainment/shebang-fashion-show-brings-runway-to-ghetto-4698386) — Shyaka Farid Lwanyaaga, the founder of the Buntu Wellbeing Experience network into reclaiming waste to power fashion as the ultimate climate
-- [how it all started - BWEN](https://www.b-wen.com/stories/blog-post-four-yz787) — Shyaka Farid Lwanyaaga, Our journey began with a focus on menstrual health management, an area often shrouded in stigma and shame. We aimed to create a
-- [From taking visits with community health workers to touring rural ...](https://www.instagram.com/p/DMFrx0VRa7O?img_index=13) — From taking visits with community health workers to touring rural health clinics, from basketball games with med students to handcrafted art,
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Shyaka Farid Lwanyaaga is the founder and Head of Design at Buntu Wellbeing Experience Network (BWEN), an organization based in Kampala, Uganda. His work primarily focuses on menstrual health management and sustainable fashion, aiming to address social stigmas and promote environmental sustainability through innovative design solutions. As a global mentor, Shyaka leverages his expertise to guide others while also advocating for the importance of addressing taboos around menstruation, ensuring that communities have access to necessary resources and education.
+Shyaka Farid Lwanyaaga is a close friend based in Uganda, with whom Ben maintains a low-maintenance distance friendship. In his professional capacity, Shyaka serves as the Founder and Head of Design at Buntu Wellbeing Experience Network, an organization whose activities are not detailed extensively beyond this title. This suggests that Shyaka plays a crucial role in shaping the design and user experience aspects of Buntu’s initiatives, likely focusing on enhancing wellbeing through thoughtful and inclusive design.
 
-Shyaka seems deeply committed to creating impactful change by combining social justice with sustainable practices. He cares about reducing stigma associated with menstrual health and empowering individuals through environmentally conscious fashion initiatives. His efforts extend beyond design into community engagement, involving visits with health workers and interactions with various stakeholders including medical students and local artists. This holistic approach underscores his dedication to fostering well-being and sustainability in the communities he serves.
+From Ben's perspective, it seems that Shyaka cares deeply about fostering connections and promoting wellbeing within his community. His work with Buntu Wellbeing Experience Network points towards a dedication to improving lives through thoughtful design practices. Given the nature of their friendship, it is evident that personal relationships and mutual support are important values for Shyaka, reflecting a broader commitment to community and connection. The public web identity of Shyaka Farid Lwanyaaga remains unverified due to insufficient or inconsistent information available online that aligns with Ben’s account.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

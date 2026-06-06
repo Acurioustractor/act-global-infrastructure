@@ -2,7 +2,7 @@
 name: Emily Bell
 lane: community
 storyteller_id: b994e752-c2bd-4c73-a342-ce7e155c4ea9
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Emily Bell

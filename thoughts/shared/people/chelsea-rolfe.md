@@ -2,7 +2,7 @@
 name: Chelsea Rolfe
 lane: community
 storyteller_id: ea82e328-ae82-4bcc-9de4-c73114e37e6c
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Chelsea Rolfe

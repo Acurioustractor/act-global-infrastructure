@@ -2,7 +2,7 @@
 name: Saia Faingaa
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Saia Faingaa
@@ -16,16 +16,19 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Saia Faingaa and his twin brother Anthony Fainga’a co-founded Moonyah Workforce, a labor hire and traffic management company. They focus on recruitment and labor services, and Saia supports breast cancer research. Moonyah Workforce is Indigenous-owned.
+Moonyah Workforce is an Indigenous-owned labor hire company led by Saia Faingaa, focusing on recruitment, labor hire, and traffic control. They aim to create a safe workplace for people from diverse backgrounds. Saia Faingaa is also involved in charitable efforts, such as raising funds for breast cancer research.
 - [Moonyah Workforce](https://moonyahworkforce.com.au/wp-content/uploads/2023/10/MWF-Capability-Statement-Rev-1-Oct-23.pdf) — RECRUITMENT & LABOUR | TRAFFIC CONTROL | PLANT & EQUIPMENT WHO WE ARE Proudly Australian and Indigenous owned, Moonyah Workforce offers local-business service with big- business reach and experience. With extensive labour hire and recruitment industry knowledge, the former Wallab
-- [Saia and Anthony Fainga'a set up labour hire firm | The Courier Mail](https://www.couriermail.com.au/business/citybeat/rugby-twins-saia-and-anthony-faingaa-have-big-plans-for-labour-hire-firm-moonyah-workforce/news-story/172f1ade463a34484239865e336158cf) — A year ago the Fainga brothers founded Moonyah Workforce, an Indigenous owned labour hire firm specialising in traffic control and waste
+- [Building a 'safe house' for work: inside Moonyah Wo... | National Indigenous Times](https://nit.com.au/05-05-2026/24096/building-a-safe-house-for-work-inside-moonyah-workforce-and-the-faingaa-vision) — # Building a 'safe house' for work: inside Moonyah Workforce and the Faingaa vision. What was clear, however, was that the transition from elite performance into the workforce was not always straightforward. "I sort of thought, where do people like me after 17 years of rugby get 
+- [MOONYAH WORKFORCE - LinkedIn](https://au.linkedin.com/company/moonyah-workforce) — Moonyah WorkForce is an Indigenous workforce supplier. Recruitment | Labour Hire | Traffic Control | Moonyah Workforce is a company dedicated to supplying
 - [Moonyah Workforce - Facebook](https://www.facebook.com/moonyah.workforce.2025) — As part of Saia Faingaa's upcoming Corporate Boxing Match, he has committed to fighting for more than just a win—he is raising funds for breast cancer research.
-- [Big thanks to @glennorris on the great story in today's ... - Instagram](https://www.instagram.com/p/Cfs6lIOhtDD?hl=en) — Saia has joined forces with his twin brother Anthony as co-director of Moonya Workforce. In this episode, he opens up about leveraging your
+
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Saia Faingaa is one of the directors at Moonyah Workforce, an Indigenous-owned company specializing in labor hire and traffic management services. Along with his twin brother Anthony Fainga’a, Saia co-founded Moonyah Workforce to offer recruitment and workforce solutions with a blend of local expertise and large-scale business reach. The company operates under a strong commitment to providing comprehensive services including plant and equipment rental alongside its primary offerings.
+Saia Faingaa serves as the Director at Moonyah Workforce, an Indigenous-owned labor hire company based in Australia. With a background that includes significant contributions to elite sports, particularly rugby, Saia has transitioned into business with a vision to create a supportive and inclusive workplace environment. Moonyah Workforce focuses on recruitment, labor hire services, traffic control, and the provision of plant and equipment, aiming to offer comprehensive support to businesses while promoting diversity and inclusion within their workforce.
 
-Saia appears to be deeply committed not only to his professional endeavors but also to social causes, particularly breast cancer research. He has shown this dedication by organizing and participating in fundraising events like corporate boxing matches, where the proceeds go towards supporting research efforts against breast cancer. This demonstrates a broader care for community health beyond the business sphere, highlighting his passion for making a positive impact on society.
+Saia Faingaa appears to care deeply about fostering an atmosphere where people from diverse backgrounds can thrive in a safe and supportive work environment. Beyond her professional endeavors, she demonstrates a commitment to social causes, notably raising funds for breast cancer research through personal initiatives such as participating in corporate boxing matches. This shows her dedication not only to the success of Moonyah Workforce but also to contributing positively to her community at large.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

@@ -2,7 +2,7 @@
 name: Tarren
 lane: community
 storyteller_id: b6f0f93f-6052-4776-a351-3410ae40467d
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Tarren

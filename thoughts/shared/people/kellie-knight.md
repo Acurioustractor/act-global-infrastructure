@@ -2,7 +2,7 @@
 name: Kellie Knight
 lane: community
 storyteller_id: c5aef0a2-8830-496f-9e3a-be0f4df7406c
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Kellie Knight

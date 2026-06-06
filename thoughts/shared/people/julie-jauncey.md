@@ -2,7 +2,7 @@
 name: Julie Jauncey
 lane: community
 storyteller_id: a575041c-5dcb-41e8-8d58-161357323d74
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Julie Jauncey

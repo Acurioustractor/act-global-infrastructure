@@ -2,7 +2,7 @@
 name: Annie Morrison
 lane: community
 storyteller_id: 69db1d7e-c3f5-4926-b4d4-2d098c040952
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Annie Morrison

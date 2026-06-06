@@ -2,7 +2,7 @@
 name: Mitchel Howard
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Mitchel Howard
@@ -16,7 +16,7 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Mitchel Howard works at Orange Sky Australia, focusing on operations management and community partnerships. He emphasizes safe, human-centered service delivery. His role involves strategic transformation and community engagement.
+Mitchel Howard is an operational leader at Orange Sky Australia, focusing on remote operations and community engagement. He is recognized for his commitment to the company's mission. He was named Orange Sky's Person of the Year in 2026.
 - [5 "Mitchel Howard" profiles | LinkedIn](https://www.linkedin.com/pub/dir/Mitchel/Howard) — Operations & Field Services Leader | Committed to Safe, Human-Centred Service Delivery & Community-Led Partnerships. Greater Brisbane Area. Orange Sky Australia
 - [Mitchel Howard - Operational Leader | Elevating individuals to form high-impact teams, ideate effective solutions, & deliver strategic transformation - Orange Sky Australia](https://au.linkedin.com/in/mitchelhoward) — Mitchel Howard
 Operational Leader | Elevating individuals to form high-impact teams, ideate effective solutions, & deliver strategic transformation
@@ -26,13 +26,29 @@ Greater Brisbane Area
 
 About
 Operations leader with 6+ years' experience delivering safe, reliable, 
-- [A new mobile laundry service has opened in Halls Creek thanks to a ...](https://www.facebook.com/ABCKimberley/posts/a-new-mobile-laundry-service-has-opened-in-halls-creek-thanks-to-a-partnership-b/1370028011810610) — The service employs local jobseekers to engage and help their own community. Mitchel Howard from Orange Sky's remote Indigenous team says it
-- [Michelle Howard - Collaborations](https://www.collaborations.com.au/our-story/michelle-howard) — Michelle is an urban planner, social researcher and internationally accredited facilitator with over 30 years' experience in the public, private and not-for-
+- [Mitch Howard - Leadership and organisational strategies and development - mitchhoward.com.au](https://au.linkedin.com/in/mitch-howard-4592937) — Mitch Howard
+Leadership and organisational strategies and development
+Australia
+500 connections, 569 followers
+
+
+About
+My collective experience and expertise is in the development of sustainable leadership…
+
+
+Experience
+mitchhoward.com.au
+[mitchhoward.com.au](N/A)  
+N/A - Present
+- [Orange Sky Australia's Post - LinkedIn](https://www.linkedin.com/posts/orangeskyau_meet-our-2026-person-of-the-year-we-often-activity-7441693228078145536-6Hge) — We're thrilled to officially recognise him as Orange Sky's Person of the Year - an award that reflects his heart for our mission and his care
+
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Mitchel Howard serves as a Remote Operations Coordinator at Orange Sky Australia, where his work revolves around operations management and fostering community partnerships. His role is pivotal in ensuring that services are delivered safely and with a focus on human-centered approaches. Mitchel’s responsibilities encompass strategic transformation and engaging with the community to create impactful programs. He brings over six years of experience to his position, dedicated to elevating individual contributions within teams and developing effective solutions.
+Mitchel Howard serves as a Remote Operations Coordinator at Orange Sky Australia, a position where he plays a pivotal role in operational leadership and community engagement. His work primarily focuses on ensuring safe and human-centered service delivery, often collaborating with various communities to form strategic partnerships that support the organization's mission. Mitchel’s dedication is evident through his recognition as Orange Sky's Person of the Year in 2026, an accolade highlighting his significant contributions towards supporting those in need.
 
-Mitchel seems deeply invested in creating safe environments and delivering services that genuinely benefit communities, particularly focusing on Indigenous communities and remote areas. His emphasis on human-centered service delivery reflects a commitment to making meaningful connections with those he serves. Mitchel values collaboration and partnership, aiming not only to provide essential services but also to empower individuals within the community through employment and engagement opportunities.
+Mitchel cares deeply about leveraging his experience and expertise to elevate individuals within teams, fostering environments where they can thrive and contribute effectively to the community. His commitment extends beyond operational excellence; he is passionate about developing sustainable leadership practices and ensuring that every initiative is designed with a focus on impactful, long-term benefits for the communities served by Orange Sky Australia. Through his work, Mitchel aims to make a meaningful difference in people's lives and to help build resilient and supportive communities.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

@@ -2,7 +2,7 @@
 name: Natalie Watts
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Natalie Watts
@@ -16,9 +16,9 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Natalie Watts is a National Workforce Lead at KPMG Australia, focusing on organizational change and workforce management. She has experience in roles at Queensland Police Service and Deloitte. Her work emphasizes strategic planning and transformation.
-- [Natalie Watts's email & phone number - National Workforce Lead at ...](https://www.signalhire.com/profiles/natalie-watts%27s-email/65724524) — They have held roles including Organisational Change Manager, National Workforce Manager, and Director at companies such as Queensland Police Service, Deloitte,
-- [Elizabeth Watts - KPMG International](https://kpmg.com/au/en/contacts/w/elizabeth-watts.html) — Elizabeth helps Australian mid-market, family and public purpose organisations to improve their effectiveness, impact and resilience.
+Natalie Watts is a senior leader at KPMG Australia focusing on workforce strategy and transformation. She cares about business development and performance improvement. Her work involves helping organizations become more agile and efficient.
+- [9 "Natalie Watts" profiles - LinkedIn](https://au.linkedin.com/pub/dir/Natalie/Watts/au-0-Australia) — Natalie Watts. Senior leader helping teams turn strategy into operating reality | Workforce Strategy, Transformation & OD across professional services,
+- [Natalie Watts's email & phone number - National Workforce Lead at ...](https://www.signalhire.com/profiles/natalie-watts%27s-email/65724524) — Their professional focus is Business Development, Business Improvement, and Business Performance across 3 core areas.
 - [Liz Watts - Partner | Clients, Growth & Markets Lead, Mid-Market & Private Division | Transformation | Leadership - KPMG Australia](https://au.linkedin.com/in/liz-watts-kpmg) — Liz Watts
 Partner | Clients, Growth & Markets Lead, Mid-Market & Private Division | Transformation | Leadership
 Sydney, New South Wales, Australia
@@ -47,10 +47,13 @@ N/A
 Education
 N/A
 
-## Understanding — drafted
-Natalie Watts is a National Workforce Lead at KPMG Australia, where she plays a pivotal role in shaping and implementing workforce strategies and organizational change initiatives. With extensive experience from her previous roles at the Queensland Police Service and Deloitte, Natalie focuses on strategic planning and transformation, bringing a wealth of knowledge to support her clients through complex changes. Her work is centered around enhancing organizational effectiveness and navigating the challenges associated with evolving workplace dynamics.
+## Shared history — from the spine
+_(no linked email record)_
 
-From the available information, it appears that Natalie cares deeply about fostering resilient and adaptable workforces capable of thriving in an ever-changing environment. She seems dedicated to leveraging her expertise in strategic planning and transformation to empower organizations to achieve their goals while ensuring they remain agile and responsive. Natalie's career path suggests a strong commitment to creating positive impact through effective workforce management and organizational change, likely driven by a passion for improving both individual employee experiences and overall organizational performance. However, with limited detailed information provided about her personal views or specific projects, it is challenging to outline more nuanced aspects of what she cares about beyond these professional competencies.
+## Understanding — drafted
+Natalie Watts serves as the National Workforce Lead at KPMG Australia, a role where she focuses on workforce strategy and transformation. Her expertise lies in helping organizations become more agile and efficient by turning strategic visions into actionable plans that improve operational realities. Natalie's work revolves around enhancing business development and performance improvement across various professional services sectors.
+
+From the available information, it is evident that Natalie cares deeply about creating environments where teams can thrive and transform effectively. She values organizational agility and aims to foster improvements in business operations to drive better outcomes for her clients. Despite the limited details provided on her personal background and educational history, her contributions within KPMG Australia emphasize a commitment to workforce development and operational excellence.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

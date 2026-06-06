@@ -2,7 +2,7 @@
 name: faye bourke
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # faye bourke
@@ -16,19 +16,34 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Faye Bourke leads child protection and domestic violence responses in Queensland, focusing on innovation and cultural integrity. Her work emphasizes protecting children and empowering families. She champions First Nations voices in child safety.
+Faye Bourke leads child protection and domestic violence initiatives at the Department of Families, Seniors, Disability Services and Child Safety, focusing on innovation and First Nations voices. Her work emphasizes protecting children and empowering families.
 - [Faye Bourke - Transforming child protection and domestic violence responses through innovation, leadership, and cultural integrity. Championing solutions that protect children, empower families, and honour First Nations voices. - Department of Families, Seniors, Disability Services and Child Safety](https://au.linkedin.com/in/faye-bourke-6b0b0322a) — Faye Bourke
 Transforming child protection and domestic violence responses through innovation, leadership, and cultural integrity. Championing solutions that protect children, empower families, and honour First Nations voices.
 Brisbane City, Queensland, Australia
 500 connections, 
-- [Disability and impairment : working with children and families](https://usuhs.primo.exlibrisgroup.com/discovery/fulldisplay?docid=alma991000807748006626&context=L&vid=01USUHS_INST%3A01USUHS_INST&lang=en&adaptor=Local+Search+Engine&tab=Everything&query=sub%2Cexact%2C+Children+with+disabilities+%2CAND&mode=advanced&offset=0) — Disability and Impairment introduces professionals working with families to the everyday issues faced by disabled people of all ages in family life.
-- [Ensuring Child Care Access for Children With Disabilities](https://www.researchgate.net/publication/403695838_Families_as_Advocates_Ensuring_Child_Care_Access_for_Children_With_Disabilities) — Welfare state cash support is crucial to guarantee adequate social participation for families of children with disabilities. To properly assess
-- [Family Matters - Resource Directory for Families](https://thefamilymatterswebsite.org) — We are a resource directory for family with children ages 0 to 3 with developmental delays or disabilities.
+- [Sharon Burke - Senior Researcher at Department of Family and Community Services (NSW)](https://au.linkedin.com/in/sharon-burke-090baab2) — Sharon Burke
+Senior Researcher at Department of Family and Community Services (NSW)
+Greater Sydney Area
+119 connections, 118 followers
+
+
+About
+N/A
+
+
+Experience
+Senior Analyst
+[Department of Family and Community Services (NSW)](https://au.linkedin.com/company/nsw-department-of-com
+- [Fathers of children with a disability: health, work, and family life issues - PubMed](https://pubmed.ncbi.nlm.nih.gov/33896319) — An official website of the United States government. The **https://** ensures that you are connecting to the. official website and that any information you provide is encrypted. ## Save citation to file. # Fathers of children with a disability: health, work, and family life issue
+- [Meet Our Staff - Federation for Children with Special Needs](https://fcsn.org/meet-our-staff) — The Federation promotes the active and informed participation of parents of children with disabilities in shaping, implementing, and evaluating public policy
+
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Faye Bourke holds the role of Senior Practitioner within Queensland’s Department of Families, Seniors, Disability Services and Child Safety. She leads efforts in child protection and domestic violence responses, focusing on innovative methods that maintain cultural integrity. Her work is centered around ensuring the safety and well-being of children while supporting families to become more resilient and self-reliant. Faye particularly emphasizes the importance of integrating First Nations perspectives into all aspects of her work, recognizing their unique experiences and wisdom.
+Faye Bourke is a Senior Practitioner at the Department of Families, Seniors, Disability Services and Child Safety in Brisbane City, Queensland, Australia. She plays a pivotal role in leading initiatives focused on child protection and domestic violence. Her work emphasizes innovation and the inclusion of First Nations perspectives, ensuring that these voices are central to the development and implementation of protective measures for children and families.
 
-Faye appears to care deeply about creating a system that not only protects vulnerable children but also empowers their families and respects cultural diversity. She is committed to fostering environments where all voices, especially those from First Nations communities, are heard and valued. Her focus on innovation suggests she seeks practical solutions to complex problems, always aiming for outcomes that benefit the most marginalized groups in society. Additionally, Faye’s work underscores her dedication to accessibility and inclusion, particularly for children with disabilities and their families, ensuring they have adequate support and opportunities for social participation.
+Faye appears to care deeply about protecting vulnerable individuals, particularly children, and empowering their families through comprehensive support systems. She prioritizes cultural integrity in her efforts, advocating for solutions that not only safeguard but also respect the diverse backgrounds and needs within communities, especially those of First Nations peoples. Her commitment to innovation reflects a broader goal to continually improve the effectiveness of child protection and family support services, making them more responsive and equitable.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

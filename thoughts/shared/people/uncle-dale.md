@@ -2,7 +2,7 @@
 name: Uncle Dale
 lane: community
 storyteller_id: 6383cfcc-1146-40c1-8337-d2e15e487022
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Uncle Dale

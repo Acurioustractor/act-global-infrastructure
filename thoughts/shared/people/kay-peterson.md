@@ -2,7 +2,7 @@
 name: Kay Peterson
 lane: community
 storyteller_id: eb9fb8e3-9b40-444d-bbf7-55c881fb3cbc
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Kay Peterson

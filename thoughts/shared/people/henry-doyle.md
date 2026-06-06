@@ -2,7 +2,7 @@
 name: Henry Doyle
 lane: community
 storyteller_id: 3e740df2-9bce-4360-b646-8d1e0b2785f6
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Henry Doyle

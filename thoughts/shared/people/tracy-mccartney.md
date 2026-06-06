@@ -2,7 +2,7 @@
 name: Tracy McCartney
 lane: community
 storyteller_id: 44da702a-4e4f-40bc-a5e0-ae17dfab423e
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Tracy McCartney

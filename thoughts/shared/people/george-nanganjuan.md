@@ -2,7 +2,7 @@
 name: George Nanganjuan
 lane: community
 storyteller_id: 2affba1f-f78c-4033-87f9-484520c111c8
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # George Nanganjuan

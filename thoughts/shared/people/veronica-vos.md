@@ -2,7 +2,7 @@
 name: Veronica Vos
 lane: community
 storyteller_id: 2fec0751-c3cd-44a4-8887-66707f4cc1c8
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Veronica Vos

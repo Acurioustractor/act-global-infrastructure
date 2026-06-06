@@ -2,7 +2,7 @@
 name: Ivy
 lane: community
 storyteller_id: 625768f3-cd38-491b-a32e-e1d4f7d30bbf
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Ivy

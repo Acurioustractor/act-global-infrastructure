@@ -2,7 +2,7 @@
 name: kate mckenzie
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # kate mckenzie
@@ -16,16 +16,19 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Kate McKenzie works at The University of Western Australia as Manager of Major Research Initiatives. She focuses on creating partnerships and managing research projects. Her role emphasizes philanthropy and relationship management.
-- [Kate McKenzie - University of Illinois Springfield](https://www.uis.edu/news/kate-mckenzie) — Her work involves building relationships with supporters to encourage giving through philanthropy and gift planning. Kate earned a Masters
-- [Kate McKenzie - the UWA Profiles and Research Repository](https://research-repository.uwa.edu.au/en/persons/kate-mckenzie) — Kate McKenzie is an MBA qualified relationship manager with more than 20 years of experience in creating partnerships across a broad range of industries.
-- [Kate McKenzie - Manager (Major Research Initiatives) at ... - ZoomInfo](https://www.zoominfo.com/p/Kate-Mckenzie/16943216415) — What company does Kate McKenzie work for? Kate McKenzie works for The University of Western Australia as Manager (Major Research Initiatives). Sign Up for Free
-- [Kate McKenzie's Post - LinkedIn](https://www.linkedin.com/posts/kateleannemckenzie_this-month-marks-10-years-since-i-joined-activity-7440981294374727680-0uKx) — This month marks 10 years since I joined The University of Western Australia firstly in Development and Alumni Relations team and now in
+Kate McKenzie is a leader in research initiatives at the University of Western Australia. She focuses on partnerships and support for research projects. Her work emphasizes collaboration and strategic planning.
+- [Kate McKenzie - the UWA Profiles and Research Repository](https://research-repository.uwa.edu.au/en/persons/kate-mckenzie) — Kate McKenzie is an MBA qualified relationship manager with more than 20 years of experience in creating partnerships across a broad range of industries. As a student of foreign languages (Japanese, Spanish and French), she developed empathy and interest in the world around her. 
+- [Kate McKenzie - The University of Western Australia - The Org](https://theorg.com/org/the-university-of-western-australia/org-chart/kate-mckenzie) — Kate McKenzie is an accomplished professional with extensive experience in research partnership development and philanthropic support, currently serving as
+- [Kate McKenzie - Manager (Major Research Initiatives) at ... - ZoomInfo](https://www.zoominfo.com/p/Kate-Mckenzie/16943216415) — Kate McKenzie works for The University of Western Australia as Manager (Major Research Initiatives) Kate McKenzie works in the industry of Colleges &
+- [Kate McKenzie](https://www.uis.edu/news/kate-mckenzie) — Take the first step and invest in your future. UIS was listed No. 1 in Illinois and No. 7 in the Midwest in 2025 rankings. Kate McKenzie has worked in the Division of Advancement since late 2019, where she did marketing and communication work before becoming the Development Direc
+
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Kate McKenzie serves as the Manager of Major Research Initiatives at The University of Western Australia, leveraging her extensive background to foster partnerships and manage critical research projects. With over two decades of experience, she has developed a nuanced approach to relationship management, spanning various industries. Her role emphasizes building strong connections with supporters to encourage philanthropic contributions, which in turn supports significant research initiatives.
+Kate McKenzie is a seasoned leader in research initiatives at The University of Western Australia (UWA), bringing over two decades of experience to her role as Manager. Her primary focus lies in fostering partnerships that enhance and support various research projects across different fields, emphasizing collaboration and strategic planning. Kate's background includes an MBA qualification and a rich history of developing partnerships across diverse industries. Additionally, her educational pursuit of foreign languages—Japanese, Spanish, and French—has cultivated her global perspective and empathetic approach to understanding the dynamics within her collaborations.
 
-Kate appears to be deeply committed to fostering collaborative environments that enhance academic research. She values the importance of long-term relationships and the impact they can have on both individual projects and broader institutional goals. Her work underscores a dedication to advancing research through strategic partnerships and philanthropy, suggesting she cares about creating meaningful impacts in her field by effectively connecting resources with research needs.
+Kate appears to care deeply about building meaningful relationships that can drive impactful research outcomes. Her work suggests an interest in creating environments where researchers from different disciplines and backgrounds can come together effectively. This dedication to collaboration is likely rooted in her broad experiences and language skills, which have instilled a keen sense of empathy for diverse perspectives and cultures. She values strategic planning not just as a method but as a means to achieve significant advancements through collective effort and mutual support.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

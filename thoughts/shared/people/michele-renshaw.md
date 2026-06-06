@@ -2,7 +2,7 @@
 name: Michele Renshaw
 lane: supporter
 warmth: 2
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Michele Renshaw
@@ -16,16 +16,29 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Michele Renshaw is CEO of 10x10 Philanthropy, focusing on democratizing social change. She aims to turn everyday Australians into philanthropists. Her work emphasizes making impactful change without needing large financial resources.
-- [About us - 10x10 Philanthropy](https://www.10x10philanthropy.com/about-us) — CEO of 10x10 Philanthropy, Michele is an experienced executive having held roles at Afterpay, Canva and Social Soup. · Caroline brings expertise in partnerships,
-- [Michele Renshaw: Turning Everyday Australians into Philanthropists](https://www.greenhouse.tech/stories/michele-renshaw-turning-everyday-australians-into-philanthropists) — 10x10 Philanthropy, a Greenhouse member that's democratising social change and proving that you don't need deep pockets to make a real impact.
-- [10x10 Philanthropy Management Team | Org Chart - RocketReach](https://rocketreach.co/10x10-philanthropy-management_b5a8ef63f6523f93) — Michele Renshaw. Chief Executive Officer at 10x10 Philanthropy. None ; Dominique Mullins. Community Manager at 10x10 Philanthropy. Australia ; Anna Potenza.
+Michele Renshaw is the CEO of 10x10 Philanthropy, which aims to scale innovative not-for-profits and democratize social change. They focus on turning every dollar invested into ten dollars of social impact. Renshaw is dedicated to empowering everyday Australians to contribute to social change.
+- [10x10 Philanthropy Information - RocketReach](https://rocketreach.co/10x10-philanthropy-profile_b5a8ef63f6523f93) — # 10x10 Philanthropy Information. 10x10 builds the networks that back innovative not-for-profits (NFPs) taking on Australia’s toughest social challenges. Together, we accelerate social change, scaling the ideas of innovative NFPs. Through fuelling a thriving movement and building
+- [Catalysing Climate Innovation, Collaboration & Capital Deployment](https://www.greenhouse.tech/stories/michele-renshaw-turning-everyday-australians-into-philanthropists) — **Imagine a vibrant gathering where passionate individuals pitch their solutions to social problems, not to wealthy investors, but to everyday Australians eager to make a difference.**. This is the world of 10x10 Philanthropy, a Greenhouse member that's democratising social chang
+- [Community & Marketing Coordinator | Michele Renshaw - LinkedIn](https://www.linkedin.com/posts/michele-renshaw-b8a1637_community-marketing-coordinator-job-in-activity-7442692838972190720-EsXo) — We're looking for a Community and Marketing Coordinator to join our team at 10x10 Philanthropy. We're doing big things to help make the
 - [Head of Events and Community | Michele Renshaw - LinkedIn](https://www.linkedin.com/posts/michele-renshaw-b8a1637_head-of-events-and-community-activity-7136136789378965506-jGLC) — We're #hiring Excited to announce we have a newly created role at 10x10 Philanthropy. 10x10 Philanthropy supports early stage,
 
-## Understanding — drafted
-Michele Renshaw is the Chief Executive Officer of 10x10 Philanthropy, an organization dedicated to democratizing social change in Australia. With a background that includes roles at prominent companies like Afterpay and Canva, Michele brings substantial experience and expertise to her current position. Her work focuses on transforming everyday Australians into active philanthropists by demonstrating that impactful contributions can be made regardless of the size of one's financial resources.
+## Shared history — from the spine
+**7 emails** · first 2026-02-03 · last 2026-03-13
 
-Michele seems deeply committed to fostering a sense of community involvement in philanthropy and social change initiatives. She cares about creating pathways for individuals who might not traditionally consider themselves capable of making significant impacts due to perceived resource limitations. Her efforts are aimed at empowering people by showing that small contributions can collectively lead to substantial societal improvements, thus broadening the scope of participation in charitable activities beyond those with deep financial pockets.
+- 2026-03-13 ← Re: 10x10 Board workshop
+- 2026-03-13 ← Re: 10x10 Board workshop
+- 2026-03-01 ← Re: CC Retreat Retro and Close out
+- 2026-03-01 → Re: CC Retreat Retro and Close out
+- 2026-03-01 ← Re: CC Retreat Retro and Close out
+- 2026-03-01 ← Re: CC Retreat Retro and Close out
+- 2026-02-03 ← Re: Pre-retreat chat + Please submit your favourite dinner-party recipe
+
+## Understanding — drafted
+Michele Renshaw is the CEO of 10x10 Philanthropy, an organization dedicated to scaling innovative not-for-profits and democratizing social change in Australia. Her work focuses on turning every dollar invested into ten dollars worth of social impact by empowering everyday Australians to contribute to significant social issues. Under her leadership, 10x10 Philanthropy has been fostering a vibrant community where individuals can present their solutions to social problems directly to the public, aiming to mobilize collective action and resources for impactful change.
+
+Michele cares deeply about creating an environment where not only established philanthropists but also everyday citizens feel empowered to engage in meaningful social initiatives. She values collaboration and sees it as a key driver of innovation and impact. Her efforts are geared towards building strong networks that support innovative non-profit organizations tackling some of Australia's most pressing social challenges, aiming for a more inclusive approach to achieving societal progress.
+
+Our shared work with Michele Renshaw and 10x10 Philanthropy has primarily revolved around planning and executing key internal meetings such as board workshops and retreats. We have been involved in the preparation for these events, including discussions about pre-retreat arrangements and reflections on past gatherings to ensure continuous improvement and effective collaboration within her team.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

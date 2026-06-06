@@ -2,7 +2,7 @@
 name: Lesley Lalor
 lane: community
 storyteller_id: 17acc394-a465-4e5f-a294-d935e7c40c9e
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Lesley Lalor

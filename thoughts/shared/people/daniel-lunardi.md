@@ -2,7 +2,7 @@
 name: Daniel Lunardi
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Daniel Lunardi
@@ -16,7 +16,7 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Daniel Lunardi is a careers consultant at RMIT University, podcast host, and educator. He focuses on career development and digital delivery. He passed away suddenly in 2023.
+Daniel Lunardi is a careers consultant at RMIT University, podcast host, and educator. He focuses on career development and higher education. He passed away suddenly in 2023.
 - [Daniel Lunardi - Careers Consultant (Digital) at RMIT. Podcast Host & Co-Founder of Arrive & Thrive. Career Development Educator - RMIT University](https://au.linkedin.com/in/daniel-lunardi) — Daniel Lunardi
 Careers Consultant (Digital) at RMIT. Podcast Host & Co-Founder of Arrive & Thrive. Career Development Educator
 Melbourne, Victoria, Australia
@@ -29,10 +29,13 @@ I'm a qualified educator and career coach with a background in higher education 
 - [Report on the 3rd Workshop on NeuroPhysiological Approaches for ...](https://dl.acm.org/doi/pdf/10.1145/3769733.3769740) — This study has received ethics approval from RMIT University for conducting eye-tracking ex- periments. The approval ensures that participant data is collected
 - [[PDF] Characterization of Nanodiamonds and Their Aggregates in ...](https://research-repository.rmit.edu.au/ndownloader/files/50794815) — The work reported in this thesis is specifically concerned with nanodiamonds synthesised by two methods; detonation synthesis, which produce
 
-## Understanding — drafted
-Daniel Lunardi was a careers consultant at RMIT University, focusing on digital delivery methods to support students' career development. He was also an educator and the host of a podcast that likely addressed topics related to career advancement and personal growth. In addition to his role at RMIT, Daniel co-founded Arrive & Thrive, which suggests he was deeply committed to helping others achieve success in their careers. His work spanned both traditional educational settings and digital platforms, indicating a versatile approach to supporting students and professionals alike.
+## Shared history — from the spine
+_(no linked email record)_
 
-Daniel appeared to care deeply about career development and the well-being of individuals navigating their professional paths. Through his work as an educator and consultant, it is evident that he was passionate about leveraging technology to enhance learning and career support services. His podcast and co-founding of Arrive & Thrive suggest a strong commitment to fostering environments where people can thrive personally and professionally. Daniel's contributions in these areas reflect his dedication to empowering others and creating meaningful impacts through education and digital engagement.
+## Understanding — drafted
+Daniel Lunardi was a dedicated careers consultant at RMIT University, where he specialized in digital delivery of career services and education. Besides his role as a Career Development Educator at the university, Daniel co-founded Arrive & Thrive, a podcast that aimed to support students and professionals navigate their career paths. Through these roles, he was deeply involved in providing guidance and resources for individuals seeking to enhance their professional development. His work extended beyond traditional classroom settings, utilizing digital platforms to reach broader audiences.
+
+Daniel cared deeply about empowering others through education and career guidance. He valued the importance of making career development accessible and engaging, as reflected by his efforts both within RMIT University and through Arrive & Thrive. His sudden passing in 2023 was a significant loss for many who had been touched by his work, including colleagues, students, and friends who celebrated his life and contributions to the field of education and career development.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

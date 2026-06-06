@@ -2,7 +2,7 @@
 name: Rhys Jones
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Rhys Jones
@@ -16,16 +16,22 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-The Queensland Gallery of Modern Art (QGOMA) focuses on contemporary art, while artist Alun Rhys Jones explores themes of identity and popular culture in his work. QGOMA aims to be a performance-oriented exhibition space.
-- [Queensland Gallery of Modern Art / JONES,PARTNERS](https://www.jonespartners.com/qgma) — The scheme is envisioned as a performance-oriented production and exhibition facility-the "artWORKS"-in which both the artist and the curator are viewed as the
-- [About - Alun Rhys Jones](http://www.alunrhysjones.com/about.html) — Alun Rhys Jones is an Australian-based artist, whose practice focuses on themes related to identity, commodity, media, and popular culture.
-- [Alun Rhys Jones | Saatchi Art Australia](https://www.saatchiart.com/en-au/account/profile/90812) — Alun Rhys Jones is an Australian-based artist, whose practice focuses on themes related to identity, commodity, media, and popular culture. Recent work has
-- [Indigenous activist, artist and leader of the Aimeni (White Heron ...](https://www.instagram.com/reel/DN-WHxokY5c?hl=en) — ... Queensland Art Gallery Gallery of Modern Art ... His work is currently held in important public collections including the National Gallery
+The Queensland Art Gallery | Gallery of Modern Art focuses on Queensland artists and modern art. It highlights women artists and sustainable practices. It is Queensland's premier creative arts venue.
+- [Under a Modern Sun – Queensland Art Gallery | Gallery of Modern Art](https://qagoma.qld.gov.au/exhibition/under-a-modern-sun-art-in-queensland-1930s-50s) — Title: Under a Modern Sun – Queensland Art Gallery | Gallery of Modern Art
+# Queensland Art Gallery | Gallery of Modern Art. Queensland Art Gallery | Gallery of Modern Art. Gwendolyn Grant, Australia 1877–1968 / Winter sunshine 1939 / Oil on canvas / 71.8 x 61.5cm / Purchased 193
+- [Under a Modern Sun – Queensland Art Gallery | Gallery of Modern Art](https://www.qagoma.qld.gov.au/exhibition/under-a-modern-sun-art-in-queensland-1930s-50s) — Title: Under a Modern Sun – Queensland Art Gallery | Gallery of Modern Art
+# Queensland Art Gallery | Gallery of Modern Art. Queensland Art Gallery | Gallery of Modern Art. Gwendolyn Grant, Australia 1877–1968 / Winter sunshine 1939 / Oil on canvas / 71.8 x 61.5cm / Purchased 193
+- [Queensland Art Gallery & Gallery Of Modern Art - Brisbane](https://brisbane.infoisinfo-au.com/card/queensland-art-gallery-gallery-of-modern-art/5508) — Infoisinfo  >  Companies South East Queensland - QLD  Region  >  Companies Brisbane  >  Companies South Brisbane - Brisbane   | [+]. Banking and Finances Australia  >  Banking and Finances South East Queensland - QLD  Region  >  Banking and Finances Brisbane  >  Banking and Finan
+- [Art Box for Kids – Queensland Art Gallery | Gallery of Modern Art](https://bit.ly/48WRyvK) — Title: Art Box for Kids – Queensland Art Gallery | Gallery of Modern Art
+# Queensland Art Gallery | Gallery of Modern Art. Queensland Art Gallery | Gallery of Modern Art. Queensland Art Gallery | Gallery of Modern Art. # Art Box for Kids Lincoln Austin. Lincoln Austin demonstrati
+
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Rhys Jones is a Cinema Technical Officer at the Queensland Art Gallery | Gallery of Modern Art (QAGOMA), an institution renowned for its focus on contemporary art. QGOMA envisions itself as a performance-oriented exhibition space, highlighting innovative practices and collaborations between artists and curators to create dynamic and engaging experiences. As part of this environment, Rhys likely plays a critical role in ensuring that the technical aspects of cinema presentations are seamlessly integrated into these performances, contributing to an immersive experience for visitors.
+Rhys Jones works as a Cinema Technical Officer at the Queensland Art Gallery | Gallery of Modern Art (QAGOMA) in Brisbane, Australia. In his role, Rhys likely supports the technical aspects required to run cinema programs that are part of QAGOMA's broader mission to showcase modern art and highlight the work of Queensland artists. The gallery places a strong emphasis on featuring women artists and promoting sustainable practices. Given this context, Rhys is involved in an environment dedicated not only to the visual arts but also to fostering inclusivity and environmental responsibility.
 
-Rhys Jones appears to have a deep interest in themes related to identity, commodity, media, and popular culture, aligning with broader trends within contemporary art. The focus on performance-oriented exhibitions suggests a commitment to pushing artistic boundaries and engaging audiences in interactive and thought-provoking ways. Given his role at QGOMA and the gallery’s mission, it seems Rhys values innovation, collaboration, and accessibility in art, aiming to make complex themes relatable and impactful for diverse audiences.
+From available information, it appears that Rhys cares about supporting artistic expression through technical proficiency and ensuring that cinema programs are executed flawlessly to enhance visitors' experiences. This role suggests a dedication to the gallery’s broader mission of promoting modern art and Queensland artists, indicating his interest in contributing to the cultural landscape of Brisbane. Beyond technical duties, Rhys likely values sustainability initiatives within the arts sector and may be passionate about supporting diverse voices in cinema and visual arts.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

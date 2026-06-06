@@ -2,7 +2,7 @@
 name: Allan Mott
 lane: community
 storyteller_id: 4bf36df4-12a3-4320-a438-a671da7c1c88
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Allan Mott

@@ -2,7 +2,7 @@
 name: Irene Nleallajar
 lane: community
 storyteller_id: 888b6bed-6ff3-44d9-bae5-e0a00cd7b8be
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Irene Nleallajar

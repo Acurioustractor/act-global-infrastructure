@@ -2,7 +2,7 @@
 name: Shaun Thomas Rogers
 lane: community
 storyteller_id: f5905e0e-9a83-461a-bd47-f8a53b009d46
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Shaun Thomas Rogers

@@ -2,7 +2,7 @@
 name: Kate Bjur
 lane: community
 storyteller_id: f04f0049-5f3b-48de-8b17-c44ab43845a2
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Kate Bjur

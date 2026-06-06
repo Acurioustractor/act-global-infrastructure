@@ -2,7 +2,7 @@
 name: Richard Calligan
 lane: community
 storyteller_id: ab3b037f-0603-4312-a858-07169055932f
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Richard Calligan

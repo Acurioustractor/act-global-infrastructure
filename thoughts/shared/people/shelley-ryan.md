@@ -2,7 +2,7 @@
 name: Shelley Ryan
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Shelley Ryan
@@ -16,28 +16,19 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Shelley Ryan is a Senior Vice President and Market Leader at Kidder Mathews, specializing in property management and overseeing large industrial and office properties. She has extensive experience in property operations, financial analysis, and tenant management. Her work focuses on delivering comprehensive property management services.
-- [Testimonials Freedom Property Investors](https://freedompropertyinvestors.com.au/5-star-reviews?page=153) — I was fortunate enough to have Shelley Ryan as my Property Strategist. Very helpful and always ready to assist and guide when needed. Group 24 (1). Imraan E
-- [Shelley Ryan | Asset Services | South Seattle, WA - Kidder Mathews](https://kidder.com/professionals/ryan-shelley) — Shelley Ryan is a Senior Property Manager in the South Seattle Market. Shelley started with Kidder Mathews in 1989 and over the course of her career has
-- [Shelley Ryan - Senior Vice President and Market Leader - Kidder Mathews](https://www.linkedin.com/in/shelley-ryan-81a39010) — Shelley Ryan
-Senior Vice President and Market Leader
-Seattle, Washington, United States
-237 connections, 254 followers
+Shelley Ryan manages industrial and office properties, focusing on financial performance and profitability. Freedom Property Investors is Australia's top property investment advisory, known for excellent client satisfaction. Ryan Emrich and Ryan Casey are involved in real estate investing partnerships and community building.
+- [Shelley Ryan | Asset Services | South Seattle, WA | Kidder Mathews](https://kidder.com/professionals/ryan-shelley) — Shelley Ryan is a Senior Property Manager in the South Seattle Market. Shelley started with Kidder Mathews in 1989 and over the course of her career has overseen 2 million square feet of industrial and office properties. In addition, Shelley manages Kidder Mathews’ AAA Washington
+- [Testimonials Freedom Property Investors](https://freedompropertyinvestors.com.au/5-star-reviews?page=153) — Welcome to Freedom Property Investors, Australia’s #1 Property Investment Advisory, proudly backed by over 2,000 five-star Google reviews and trusted by more than 10,000 satisfied property investors nationwide. Ed and I first attended a seminar 2 years ago in Sydney, whilst not b
+- [Partnerships, Deals & Wholesaling with Ryan Emrich - YouTube](https://www.youtube.com/watch?v=u82dUle7pvY) — ... real estate investors ready to build freedom. Here's what we cover: Why the right partnerships matter (and how Andrew & Ryan became
+- [Ryan Casey | Inside The Lifestyle Investor Community](https://lifestyleinvestor.com/ryan-casey-investor-community-build-wealth-and-freedom) — # The Investor Community That Teaches You How to Build Wealth & Freedom with Ryan Casey – EP 263. ## **The Investor Community That Teaches You How to Build Wealth & Freedom with Ryan Casey**. Pay-to-play is very common in the mastermind space, but there is one community that has 
 
-
-About
-Real Property Administrator (RPA) designation from the Building Owners and Managers…
-
-
-Experience
-Senior Vice President and Market Lead
-[Kidder Mathews](
-- [Shelley Ryan Gray being the great Shelley we all love! - Facebook](https://www.facebook.com/groups/112974545384741/posts/25832788246310018) — Shelley is awesome! We are lucky to have her here in Shreveport. She gives so much to the Shreveport / Bossier Running Community!
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Shelley Ryan is a Senior Vice President and Market Leader at Kidder Mathews, where she has been an integral part of the organization since 1989. In her role as a Property Investment Strategist for Freedom Property Investors, Shelley specializes in property management, overseeing large industrial and office properties. She brings extensive experience to her work, focusing on delivering comprehensive services that include financial analysis and tenant management. Her expertise allows her to ensure that the properties under her care operate smoothly and meet their financial goals.
+Shelley Ryan is a seasoned property investment strategist working at Freedom Property Investors, Australia’s leading property advisory firm known for high client satisfaction and substantial financial performance of managed properties. Her professional journey began with Kidder Mathews in 1989 where she has accumulated extensive experience overseeing over two million square feet of industrial and office properties. Shelley’s expertise lies not only in enhancing the profitability of these assets but also in ensuring their robust financial performance.
 
-Shelley appears to be deeply committed to her professional responsibilities and is well-regarded for her helpfulness and dedication by colleagues and clients alike. Beyond her professional accomplishments, she seems to have a strong sense of community engagement, as evidenced by her involvement in the Shreveport/Bossier Running Community. This suggests that Shelley values not only her career but also making a positive impact within her local community through various forms of volunteerism or leadership roles. Her multifaceted approach to both professional and personal commitments reflects someone who cares about delivering excellence and contributing positively to those around her.
+Shelley appears to care deeply about community building, both within her professional network and through real estate partnerships. This is evident from her involvement with Ryan Emrich and Ryan Casey, who are active in various real estate ventures and focus on fostering strong relationships that drive success. Her dedication extends beyond financial outcomes, emphasizing the importance of trust and collaboration in achieving long-term property investment goals. Shelley’s commitment to these principles reflects a broader vision for building sustainable communities through successful property management and strategic investments.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

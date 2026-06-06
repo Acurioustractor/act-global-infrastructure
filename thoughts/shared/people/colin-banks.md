@@ -2,7 +2,7 @@
 name: Colin Banks
 lane: community
 storyteller_id: 03777210-8fdc-4526-9b89-128a73e6ffe3
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Colin Banks

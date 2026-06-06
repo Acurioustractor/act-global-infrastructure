@@ -2,7 +2,7 @@
 name: Paul Gordan
 lane: community
 storyteller_id: 086c6f19-a3e4-467d-98f6-fd477be41164
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Paul Gordan

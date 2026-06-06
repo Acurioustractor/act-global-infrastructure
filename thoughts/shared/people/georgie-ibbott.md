@@ -2,7 +2,7 @@
 name: Georgie Ibbott
 lane: community
 storyteller_id: 6a0e9830-0789-4ace-85d2-aa82cda27b57
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Georgie Ibbott

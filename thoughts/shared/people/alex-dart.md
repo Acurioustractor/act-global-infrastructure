@@ -2,7 +2,7 @@
 name: Alex Dart
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Alex Dart
@@ -16,8 +16,8 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Alex Dart is a consultant in investor relations and also runs Alex Dart Guitars, focusing on music. He has been a store manager at Men’s Wearhouse since 2012. His musical work includes creating songs for For Closure.
-- [Alex Dart - Kekst CNC](https://www.kekstcnc.com/our-team/alex-dart) — Alex is a Consultant in Kekst CNC's Middle East office, where he advises companies across the Gulf on investor relations, equity capital markets transactions
+Alex Dart is a musician known for his work on For Closure songs and a guitarist. He also manages a store at Men’s Wearhouse in New Jersey. His work and role in music and retail are his main focuses.
+- [Alex Dart (@adarttt) • Instagram photos and videos](https://www.instagram.com/adarttt) — Working on For Closure songs almost TEN years to the day. We cant wait for our shows in a few weeks! #NoSuchNoise #Ska #NewJersey
 - [Alex Dart - YouTube](https://www.youtube.com/@AlexDartGuitars) — Learn more. Alex Dart. Home. Shorts. Library. Alex Dart. @AlexDartGuitars. 88 subscribers•33 videos. Alex Dart Guitars ...more. Alex Dart Guitars ...more
 - [Alex Dart - Store Manager at Men’s Wearhouse - Men's Wearhouse](https://www.linkedin.com/in/alex-dart-b754a874) — Alex Dart
 Store Manager at Men’s Wearhouse
@@ -32,12 +32,15 @@ I am an open minded and people focused manager with a strong commitment to train
 Experience
 Store Manager
 [Men's Wearhouse](https://www.linkedin.com/company/the-men's-wear
-- [Alex Dart (@adarttt) • Instagram photos and videos](https://www.instagram.com/adarttt) — Working on For Closure songs almost TEN years to the day. We cant wait for our shows in a few weeks! #NoSuchNoise #Ska #NewJersey
+- [It's with sadness that I post this to the group. A group that would not ...](https://www.facebook.com/groups/ATDevMVT/posts/26686526347607816) — A group that would not exist if Alex had not fully investigated Dart's work. Much of what I know I owe to his curiosity and generosity.
+
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Alex Dart is a multifaceted individual with roles spanning both business consulting and music. Professionally, he serves as a consultant at Kekst CNC, where he specializes in advising companies on investor relations and equity capital markets transactions within the Middle East region. Additionally, Alex manages a Men’s Wearhouse store in Philadelphia, demonstrating his ability to lead retail teams and ensure customer satisfaction. Outside of consulting and management, Alex runs Alex Dart Guitars, through which he shares his musical creations and interests.
+Alex Dart is a multifaceted individual known for his contributions as both a musician and a retail manager. As a guitarist, he has been involved in the creation of music for For Closure songs, showcasing his dedication to the craft over nearly a decade. His passion for guitar playing extends beyond performing; Alex also runs Alex Dart Guitars, where he likely shares his expertise with others through videos or tutorials on his YouTube channel. On another front, Alex is a dedicated Store Manager at Men’s Wearhouse in New Jersey, demonstrating his ability to manage and train staff effectively while serving the retail community.
 
-Alex appears to be deeply passionate about music and community engagement. His work on the album "For Closure" indicates a long-standing dedication to creating meaningful musical content that resonates with listeners. This passion for music extends into his online presence where he engages with followers through YouTube videos and Instagram posts, showcasing both his guitar skills and his involvement in the ska music scene from New Jersey. It seems Alex values creativity, community, and the opportunity to inspire others through his diverse roles and musical projects.
+From the available information, it's clear that Alex cares deeply about both music and people. In the realm of music, his long-term commitment to For Closure songs highlights his passion for creating and sharing musical content with others. His work on YouTube suggests he enjoys teaching and engaging with a broader audience interested in guitar playing. Professionally, as a Store Manager at Men’s Wearhouse, Alex is committed to training and supporting his team, reflecting a genuine interest in helping people grow and succeed in their roles. Overall, Alex appears to value community engagement and mentoring whether through music or retail management.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

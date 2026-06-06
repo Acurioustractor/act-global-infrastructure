@@ -2,7 +2,7 @@
 name: Fenil Prajapati
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Fenil Prajapati
@@ -16,7 +16,8 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Fenil Prajapati is an environmental engineer from L.D. College of Engineering, involved in sustainability and AI. His college focuses on engineering education and research. The college is known for its contributions to technology and innovation.
+Fenil Prajapati is an assistant professor at L.D. College of Engineering, specializing in Electronics and Communication. He focuses on optimization of CMOS circuits and has published on VLSI technology. He is also involved in environmental engineering and campus ambassador roles.
+- [MECS Press](https://www.mecs-press.org/authors/107769.html) — D. College of Engineering, Ahmedabad, 380001, India. Prajapati** is currently working as an assistant professor in Electronics and Communication (EC) Department at L. D. College of Engineering, Gujarat, India. He has received B.E. in EC Engineering from L. D. College of Engineeri
 - [Fenil Prajapati - Dynamic Environmental Engineer ⬢ Campus Ambassador at IIM Calcutta ⬢ Student Ambassador at Microsoft Learn ⬢ SEBI Certified Investment Professional - L.D. College of Engineering](https://in.linkedin.com/in/fenil-prajapati-n3106) — Fenil Prajapati
 Dynamic Environmental Engineer ⬢ Campus Ambassador at IIM Calcutta ⬢ Student Ambassador at Microsoft Learn ⬢ SEBI Certified Investment Professional
 Mundra, Gujarat, India
@@ -26,13 +27,15 @@ Mundra, Gujarat, India
 About
 I’m a Resilient Environmental Engineer and Instituti
 - [40+ "Fenil Prajapati" profiles - LinkedIn](https://www.linkedin.com/pub/dir/Fenil/Prajapati) — Fenil Prajapati. Interdisciplinary Environmental Engineer ✦ Catalyzing Macroscopic Sustainability & Agile Commercial Acumen ✦ Harnessing Generative AI
-- [Pankaj P. Prajapati - MECS Press](https://www.mecs-press.org/authors/107769.html) — Prajapati is currently working as an assistant professor in Electronics and Communication (EC) Department at L. D. College of Engineering, Gujarat, India. He
-- [L.d. College Of Engineering - Employees, Business, Industry & CEO](https://www.easyleadz.com/company/ld-college-of-engineering) — L.d. College Of Engineering- Phone & Email of Top Employees & Directors. Fenil Prajapati. Undergraduate Student. View. xxxx@xxx.com
+- [[PDF] 2020_PLACEMENT DETAILS.xlsx - L. D. College Of Engineering](https://ldce.ac.in/upload/pdf/placement-cell/PLACEMENT-2020.pdf) — 529 KAKADIYA ARPAN RAVJIBHAI 160280119040 MECHANICAL 2020 SELF EMPLOYED THE DIE FACTORY 530 ANCHAL JAIN 180280702001 ME-COMPUTER 2020 ON CAMPUS ZEUS 531 THANKI JAGDISH MUKESHBHAI 180280702016 ME-COMPUTER 2020 ON CAMPUS SGL 532 PRAJAPATI VAIBHAVI RAJESHBHAI 180280723010 ME-IT 2020
+
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Fenil Prajapati is an undergraduate student at L.D. College of Engineering in Gujarat, India, where he focuses on environmental engineering with a keen interest in sustainability and artificial intelligence. Fenil holds multiple roles beyond his academic pursuits, including serving as a campus ambassador for IIM Calcutta and a student ambassador at Microsoft Learn. He has also earned certification as an SEBI (Securities and Exchange Board of India) investment professional, showcasing his commitment to developing a well-rounded skill set across different sectors. His involvement in these roles indicates Fenil’s dedication to leveraging technology and innovation for societal benefit.
+Fenil Prajapati is an assistant professor at L.D. College of Engineering in Ahmedabad, India, where he specializes in Electronics and Communication. His academic focus includes the optimization of CMOS circuits, a crucial component in modern electronics, as well as VLSI technology, which plays a significant role in the development of integrated circuits used across various technological devices. Fenil's involvement extends beyond his core specialization to environmental engineering, showcasing his interest in sustainable technologies and practices that can contribute positively to environmental conservation.
 
-Fenil appears to care deeply about environmental issues and the application of AI technologies to solve real-world problems. His engagement as an environmental engineer suggests that he is passionate about finding sustainable solutions to ecological challenges. Additionally, his participation as a campus ambassador and student representative at Microsoft Learn points towards his interest in fostering innovation and technological advancement within educational settings. Fenil's pursuit of investment professional certification also demonstrates a broader interest in the financial aspects of sustainability, indicating a holistic approach to environmental stewardship that considers both technical and economic dimensions.
+Fenil appears to care deeply about education, particularly in nurturing students' technical skills and their understanding of advanced electronic systems. His engagement as a campus ambassador for institutions like IIM Calcutta and Microsoft Learn reflects his commitment to fostering an environment where students can learn and grow both technologically and professionally. Additionally, his role in environmental engineering suggests that Fenil values sustainability and innovation in addressing ecological challenges. This multifaceted approach to education and technology underscores his dedication to shaping a future that integrates technological advancement with environmental stewardship.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

@@ -2,7 +2,7 @@
 name: Brontee Lawson
 lane: community
 storyteller_id: 2d85ea83-5fd8-4f80-ae7a-9c1720fd85b9
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Brontee Lawson

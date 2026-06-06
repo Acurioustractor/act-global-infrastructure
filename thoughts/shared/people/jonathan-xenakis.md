@@ -2,7 +2,7 @@
 name: Jonathan Xenakis
 lane: community
 storyteller_id: 7c4b1f9d-1d59-4563-a86e-37b9e614d338
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Jonathan Xenakis

@@ -2,7 +2,7 @@
 name: Annette Hill
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Annette Hill
@@ -16,14 +16,13 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Annette Hill is a multi-program coordinator for Take PART Inclusive Sports Programs at Easter Seals Nova. She focuses on emotional fitness and community growth. She has authored books on related topics.
-- [As Annette says, our Take PART program at Easter Seals Nova ...](https://www.instagram.com/reel/DP9AGmRDZPo) — My name is Annette Hill, the multi-program coordinator for the Take Part Inclusive Sports Programs. I like to shout out to the Metavie
+Annette Hill is a licensed professional counselor focusing on emotional fitness. Annette Lee is associated with Brown University. Both individuals are known for their professional roles in mental health and academia.
 - [Emotional Fitness with Annette Hill, LPC - YouTube](https://www.youtube.com/watch?v=69RKcfpjF0s) — VetXpo is a gathering of civilian patriots and members of the military community for one cause: growth. Self-growth, community growth,
-- [Annette Hill: books, biography, latest update - Amazon.com](https://www.amazon.com/stores/author/B001IZ1DR0) — Follow Annette Hill and explore their bibliography from Amazon's Annette Hill Author Page.
-- [Annette Hill](https://www.linkedin.com/in/annette-hill-32a17a2) — Annette Hill
+- [I am calling out to you!!!!Momma!!!!!I love you and I miss you so much ...](https://www.facebook.com/annette.barbee1/posts/i-am-calling-out-to-youmommai-love-you-and-i-miss-you-so-much-birthday-wishes-ce/27530644439852842) — Annette Hill ... If your mother is still alive please cherish every moment with her, hug her often, and let her know how much she is loved.
+- [Annette Lee - Brown University](https://www.linkedin.com/in/annette-y-lee) — Annette Lee
 
-Decatur, Georgia, United States
-159 connections, 163 followers
+United States
+258 connections, 261 followers
 
 
 About
@@ -31,16 +30,27 @@ N/A
 
 
 Experience
+Brown University
+[Brown University](N/A)  
+N/A - Present
 N/A
+
 
 
 Education
+Brown University
 N/A
+2023 - 2024
+None
+- [Amazon.com: Annette Hill: books, biography, latest update](https://www.amazon.com/stores/author/B001IZ1DR0) — ## Skip to. ## Keyboard shortcuts. Ways to Read and Listen. # Annette Hill. ## Most popular. ## Books. View and manage who you follow on Amazon. Send us comments about our Author Pages. Visit Author Central to update your books, profile picture, and biography. ##### Amazon Music.
+
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Annette Hill is a visual artist and the multi-program coordinator for Take PART Inclusive Sports Programs at Easter Seals Nova. Her work centers on fostering emotional fitness within her community, emphasizing growth through inclusive sports activities that are accessible to everyone. Annette is also an author with books on topics related to emotional well-being and community engagement, further demonstrating her commitment to supporting individuals and communities in achieving greater emotional health.
+Annette Hill is a licensed professional counselor with a focus on emotional fitness, as evident from her YouTube channel "Emotional Fitness with Annette Hill, LPC." She engages with the military community and civilian patriots through events like VetXpo, which emphasize personal and communal growth. Additionally, she has expressed heartfelt sentiments about family love and connection, particularly towards mothers, underscoring her empathetic nature and emotional depth.
 
-Annette seems deeply invested in the concept of community building and personal development. Through her work at Easter Seals Nova and her writing, she aims to create spaces where people can feel supported and encouraged to grow both individually and collectively. Her involvement with platforms like YouTube and VetXpo highlights her dedication to reaching diverse audiences, including members of the military community and civilian supporters, to promote growth and well-being.
+The context provided does not give direct information about Annette Hill's visual art work or a strong link to an organization called Ash Lee. However, it is clear that she cares deeply about mental health and community support, showing an inclination toward nurturing and empowering individuals through emotional well-being. Her YouTube content and the messages she shares highlight her dedication to fostering meaningful connections and promoting resilience in people’s lives.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

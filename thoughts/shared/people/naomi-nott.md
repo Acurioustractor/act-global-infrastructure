@@ -2,7 +2,7 @@
 name: naomi nott
 lane: supporter
 warmth: 2
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # naomi nott
@@ -16,16 +16,24 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Naomi Nott supports Orange Sky Australia, a charity aiding those experiencing homelessness. The organization focuses on community welfare and non-judgmental support. Their work includes laundry services and creating community spaces.
-- [Orange Sky - Naomi Nott - The Sudsy Challenge](https://www.thesudsychallenge.com.au/fundraisers/naominott/25) — I am so proud of what Orange Sky AU and NZ are able to achieve with the support of everyday Aussies who care and give what they can, and I feel so fortunate to
-- [Orange Sky Australia - Facebook](https://www.facebook.com/OrangeSkyAU/posts/there-are-almost-6-million-volunteers-in-australia-alone-who-each-year-dedicate-/641922617981300) — Volunteers are an essential workforce, spanning major sectors, including aged care and disability care; community welfare; sports and the arts
+Naomi Nott supports Orange Sky Australia, a charity helping homeless people through hygiene services. She volunteers and raises funds. Orange Sky focuses on improving hygiene and quality of life for those in need.
+- [The Sudsy Challenge - Orange Sky - Naomi Nott](https://www.thesudsychallenge.com.au/fundraisers/naominott/25) — The Sudsy Challenge - Orange Sky. The Sudsy Challenge - Orange Sky. The Sudsy Challenge - Orange Sky. Support Naomi's Sudsy Challenge today! ### Share Naomi's page. ## Help me raise funds to support people doing it tough. I feel so privileged to connect with Aussies doing it toug
+- [About us - Orange Sky Australia | Homeless Charity | Positively Connecting Communities](https://orangesky.org.au/about-us) — Founded in 2014 in a Brisbane garage by two 20-year-old mates, the Orange Sky story is one of innovation, determination, and above all, a genuine desire to help those doing it tough. Each week, thousands of volunteers gather around a set of washing machines and six orange chairs,
+- [“One of the things I've learned is... - Orange Sky Australia](https://www.facebook.com/OrangeSkyAU/posts/one-of-the-things-ive-learned-is-not-to-be-judgemental-thats-something-many-of-o/1313029227537299) — ## Orange Sky Australia's Post. ### **Orange Sky Australia**. “One of the things I've learned is not to be judgemental.” That’s something many of our volunteers discover on their very first Orange Sky shift, because what we do is about so much more than laundry or showers. In my 
 - [Orange Sky Laundry - Wikipedia](https://en.wikipedia.org/wiki/Orange_Sky_Laundry) — Orange Sky Laundry is a not-for-profit charity organisation based in Brisbane, Australia, that supports people experiencing homelessness or hardship through
-- [“One of the things I've learned is not to be judgemental.” That's ...](https://www.facebook.com/OrangeSkyAU/posts/one-of-the-things-ive-learned-is-not-to-be-judgemental-thats-something-many-of-o/1313029227537299) — Orange Sky Australia have been cruising through our suburbs and townships helping not only wash laundry but create a community meeting place.
+
+## Shared history — from the spine
+**2 emails** · first 2025-12-08 · last 2025-12-08
+
+- 2025-12-08 → Out of ACTion Re: Fw: Supporter Day Photos
+- 2025-12-08 ← Re: Fw: Supporter Day Photos
 
 ## Understanding — drafted
-Naomi Nott serves as the Media and Content Coordinator for Orange Sky Australia, a charity dedicated to improving the lives of people experiencing homelessness by providing essential services like laundry facilities and fostering communal spaces. Her role involves supporting the organization's mission through media engagement and content creation. Naomi is deeply involved in The Sudsy Challenge, an initiative that highlights the achievements of Orange Sky AU and NZ and emphasizes the impact made possible by everyday Australians who contribute to these efforts.
+Naomi Nott serves as a Media and Content Coordinator for Orange Sky Australia, a charity dedicated to providing hygiene services to homeless individuals. Through her role, she not only manages media and content but also actively volunteers and raises funds to support the organization’s mission. Naomi has shown dedication by participating in fundraising efforts like the Sudsy Challenge, where she engages with the community to gather support for those “doing it tough.” Her work emphasizes connecting with people across Australia who are facing hardships, fostering a sense of solidarity and mutual support.
 
-Naomi seems to care profoundly about community welfare and non-judgmental support for those in need. Her work with Orange Sky Australia demonstrates a commitment to creating inclusive environments where individuals experiencing homelessness can access basic needs and feel valued as part of their communities. The organization’s emphasis on volunteers from diverse backgrounds, including aged care, disability care, sports, and the arts, underscores Naomi's dedication to fostering a compassionate and supportive community environment.
+Naomi cares deeply about improving the quality of life for homeless individuals through basic services such as laundry and showers. She believes in the power of small acts of kindness and the importance of community involvement to make a significant impact on those in need. Her journey with Orange Sky has taught her valuable lessons, like not being judgmental and understanding the broader context of homelessness.
+
+The arc of our shared work with Naomi appears to be centered around supporter events, as evidenced by the email subjects related to Supporter Day Photos. On December 8th, there was an exchange regarding photographs from a supporter event, suggesting that we have been collaborating on documenting and sharing these community engagement activities. The interactions highlight mutual efforts in capturing and celebrating the involvement of supporters who contribute to Orange Sky's mission.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

@@ -2,7 +2,7 @@
 name: Suzanne Evans
 lane: community
 storyteller_id: d575ffda-4642-41a3-a14b-ba3ed7eae8c1
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Suzanne Evans

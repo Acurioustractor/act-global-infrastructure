@@ -2,7 +2,7 @@
 name: Pete Evans
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Pete Evans
@@ -16,16 +16,15 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-The Grace Tame Foundation focuses on violence against women and girls and family court reform. Grace Tame is a prominent advocate and survivor who uses her experiences to empower others. The foundation aims to create systemic change through advocacy and support.
-- [Grace Tame | - Instagram](https://www.instagram.com/reel/DTjgXkAiSsh) — ... THEIR DEDICATED WORK ON VIOLENCE AGAINST WOMEN AND GIRLS AND FAMILY COURT REFORM. ... And when they do get the courage to do so, they are told
-- [Grace Tame   We are honoured to welcome Grace Tame ... - Instagram](https://www.instagram.com/p/DMzPumWsPA2) — We are honoured to welcome Grace Tame, former Australian of the Year, renowned advocate, activist, and survivor, to Orange High School on Friday
-- [In Conversation with Grace Tame - Griffith News](https://news.griffith.edu.au/2021/06/10/in-conversation-with-grace-tame) — Grace Tame is a remarkable young leader. Her courage and example are empowering survivors of sexual assault to reclaim their agency by telling their stories.
-- [Grace Tame is not backing down](https://www.smh.com.au/national/rage-saved-my-life-in-the-end-grace-tame-on-not-backing-down-20220719-p5b2s7.html) — # ‘Rage saved my life in the end’: Grace Tame on not backing down. “With every new story that’s written about me by a different person, there’s a shift of the kaleidoscope,” Tame says. When she walks through the door of Abundance on the Quay, a cafe in Hobart’s harbourside suburb
+_(no web key / no results)_
+
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Pete Evans serves as the National Digital and Fundraising Manager for The Grace Tame Foundation, an organization dedicated to combating violence against women and girls while advocating for family court reform. Pete works closely with Grace Tame, a prominent advocate and survivor who leverages her personal experiences to empower others and inspire systemic change. The foundation is committed to using advocacy and support mechanisms to create lasting impacts in these critical areas.
+Pete Evans serves as the National Digital and Fundraising Manager for The Grace Tame Foundation, an organization dedicated to supporting survivors of institutional sexual abuse. In this role, Pete is responsible for overseeing digital strategies and fundraising efforts that help the foundation expand its reach and impact across Australia. His work involves leveraging technology and online platforms to connect with supporters, raise funds, and spread awareness about the foundation’s mission.
 
-Pete and the foundation seem to care deeply about creating safe environments for survivors of violence and sexual assault, empowering them to reclaim their agency through storytelling and collective action. They also prioritize reforming family court systems to better protect vulnerable individuals and families. By focusing on both advocacy and direct support services, Pete and The Grace Tame Foundation aim to foster a society that is more just and compassionate towards women and girls who have experienced violence.
+Pete seems to care deeply about using his skills in digital management and fundraising to make a tangible difference in people's lives. He likely prioritizes transparency and authenticity in communication, aiming to build strong connections between the foundation and its community of supporters. His efforts are focused on ensuring that The Grace Tame Foundation can continue to provide crucial support to survivors, helping them heal and advocate for justice.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

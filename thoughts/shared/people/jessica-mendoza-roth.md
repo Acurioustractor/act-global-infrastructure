@@ -2,7 +2,7 @@
 name: Jessica Mendoza-Roth
 lane: supporter
 warmth: 6
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Jessica Mendoza-Roth
@@ -16,10 +16,10 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Jessica Mendoza-Roth is the Founder and CEO of the Social Impact Hub, focusing on advising, educating, and mobilizing capital for social purpose organizations. She has a background in law from Harvard Law School.
-- [Jessica Mendoza-Roth - SEWF](https://sewfonline.com/speaker/jessica-mendoza-roth) — Jessica Mendoza-Roth is the Founder & CEO of the Social Impact Hub, a purpose driven intermediary that collaborates with a broad range of changemakers.
-- [Jessica Mendoza-Roth grew up in a family where giving time, talent ...](https://www.instagram.com/p/DSHPuwEkgjZ) — That early grounding in community and social justice set the foundation for her work today as Founder and CEO of the Social Impact Hub. Her
-- [Jessica Mendoza-Roth - Social Impact Hub](https://www.socialimpacthub.org/our-team/jessica-roth) — Jessica is the Founder and CEO of the Social Impact Hub, which collaborates with social purpose organisations to advise, educate and mobilise capital for impact
+Jessica Mendoza-Roth is the Founder and CEO of the Social Impact Hub, focusing on advising and mobilizing capital for social enterprises. She also co-founded Wait Mate to empower parents. Her work emphasizes education and impact investing.
+- [Jessica Mendoza-Roth — Social Impact Hub](https://www.socialimpacthub.org/our-team/jessica-roth) — Jessica is the Founder and CEO of the Social Impact Hub, which collaborates with social purpose organisations to advise, educate and mobilise capital for impact. Jessica is also the Co-Founder of Wait Mate, a for-purpose organisation empowering parents to delay giving their child
+- [Jessica Mendoza-Roth's Post - LinkedIn](https://www.linkedin.com/posts/jessica-mendoza-roth-96730313_as-social-impact-hub-has-grown-ive-spent-activity-7387376222852481026-TISI) — Founder & CEO at Social Impact Hub, It was was an amazing employee engagement, leadership development and social impact experience
+- [Jessica Mendoza-Roth - SEWF](https://sewfonline.com/speaker/jessica-mendoza-roth) — # Jessica Mendoza-Roth. Founder & CEO | Social Impact Hub | Australia. Jessica Mendoza-Roth is the Founder & CEO of the Social Impact Hub, a purpose driven intermediary that collaborates with a broad range of changemakers. Through advice, education, mobilising capital and ecosyst
 - [Jessica Mendoza-Roth - Founder & CEO at Social Impact Hub, Co-Founder Wait Mate](https://au.linkedin.com/in/jessica-mendoza-roth-96730313) — Jessica Mendoza-Roth
 Founder & CEO at Social Impact Hub, Co-Founder Wait Mate
 Greater Sydney Area
@@ -41,10 +41,22 @@ N/A
 Education
 Ha
 
-## Understanding — drafted
-Jessica Mendoza-Roth is the Founder and CEO of Social Impact Hub, an organization that collaborates with various changemakers to advise, educate, and mobilize capital for social purpose organizations. With a background in law from Harvard Law School, Jessica brings a strong foundation in legal frameworks and ethical considerations to her role. The Social Impact Hub works with a broad range of social enterprises and nonprofits, helping them navigate the complexities of funding and growth while ensuring their missions remain intact.
+## Shared history — from the spine
+**6 emails** · first 2026-02-11 · last 2026-02-28
 
-Jessica’s work is deeply rooted in her upbringing in a family that valued community service and social justice. This early grounding has shaped her approach to her current endeavors at the Social Impact Hub. She cares profoundly about creating sustainable pathways for organizations focused on social impact, ensuring they have the necessary resources and knowledge to succeed. Her efforts are directed towards fostering an ecosystem where social purpose organizations can thrive, making a meaningful difference in their respective fields.
+- 2026-02-28 → CC Retreat Retro and Close out
+- 2026-02-28 ← CC Retreat Retro and Close out
+- 2026-02-28 ← Invitation: TBC // CC Retreat Retro and Close Out @ Mon 9 Mar 2026 3pm - 4pm (AEDT) (Benja
+- 2026-02-27 → Re: Thanks - Heading Home
+- 2026-02-13 → Re: Contact details for retreat participants
+- 2026-02-11 ← RE: Pre-retreat chat + Please submit your favourite dinner-party recipe
+
+## Understanding — drafted
+Jessica Mendoza-Roth is the Founder and CEO of Social Impact Hub, an organization dedicated to advising and mobilizing capital for social enterprises. She also co-founded Wait Mate, a purpose-driven initiative that empowers parents by encouraging them to delay giving their child certain privileges until they are older. Jessica's work highlights her dedication to fostering positive change through education and impact investing.
+
+Jessica cares deeply about leadership development, employee engagement, and creating meaningful social impact. Her involvement with the Social Impact Hub showcases her commitment to working with changemakers across various sectors to promote sustainable and impactful initiatives. She is passionate about empowering individuals and organizations to make a difference in their communities through purpose-driven actions.
+
+The shared work between ACT and Jessica has primarily centered around organizing and participating in retreats aimed at reflecting on previous activities, closing out events effectively, and planning follow-up sessions. Emails indicate collaboration on logistics for these retreats, including gathering contact details of participants and finalizing schedules for post-retreat reflections and close-outs.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

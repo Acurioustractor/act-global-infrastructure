@@ -2,7 +2,7 @@
 name: sally davison
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # sally davison
@@ -16,7 +16,7 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Sally Davison works for Dementia Australia as a CTE Campaign Project Manager. She focuses on digital transformation and dementia awareness. Dementia Australia emphasizes palliative care for dementia patients.
+Sally Davison works for Dementia Australia, focusing on digital transformation and project management. Dementia Australia advocates for better care and support for people with dementia. They emphasize palliative care and social inclusion.
 - [Sally Davison - Digital Global Transformation | Project Management | Change | Engagement | Customer/stakeholder obsessed - Dementia Australia](https://au.linkedin.com/in/sally-davison-73ba37a7) — Sally Davison
 Digital Global Transformation | Project Management | Change | Engagement | Customer/stakeholder obsessed
 Greater Brisbane Area
@@ -30,13 +30,16 @@ As a Digital Leader, I leverage my education and empathy to lead and deliver dig
 Experience
 
 - [The Alzheimer Society of Ireland - Facebook](https://www.facebook.com/TheAlzheimerSocietyofIreland/posts/looking-for-a-meaningful-studentled-project-for-20262027-join-the-creating-a-dem/1388061876701793) — ... Sally Davison (Digital Project Lead, Dementia Australia) at Sally. Davison@dementia.org.au Please include: • Your name • Organisation or
-- [#concussion #cte #brainhealth #dementiaawareness | Sally Davison](https://www.linkedin.com/posts/sally-davison-73ba37a7_concussion-cte-brainhealth-activity-7318103185833828352-vFf4) — Thrilled to share that I've joined Dementia Australia as CTE Campaign Project Manager. I'm proud to be part of this important initiative,
+- [Dementia Australia launches RAP for reconciliation | Dementia Australia posted on the topic | LinkedIn](https://www.linkedin.com/posts/dementiaaustralia_were-proud-to-launch-dementia-australia-activity-7389496905480933376-LJMQ) — She found that policies and practices that give people living with dementia a voice can significantly improve their access to public spaces and participation in social activities. “It means ensuring people living with dementia can contribute to decision-making, have access to pub
 - [[PDF] Palliative Care - Dementia Australia](https://www.dementia.org.au/sites/default/files/2024-02/DA-Numbered-Publication-43-Palliative-care-and-dementia.pdf) — Palliative Care AND DEMENTIA © Dementia Australia 2018 ISBN 978-1-921570-30-8 Authors: Deborah Parker, RN,BA, MSocSc, PhD Professor of Nursing Dementia (Aged Care), Faculty of Health University of Technology Sydney Joanne Lewis, RN, MPallC, PhD Director of Studies, Faculty of Hea
 
-## Understanding — drafted
-Sally Davison works as the CTE Campaign Project Manager for Dementia Australia, an organization dedicated to improving the lives of those affected by dementia. In her role, Sally focuses on digital transformation and raising awareness about Chronic Traumatic Encephalopathy (CTE), a condition closely linked with brain health and dementia. Her work encompasses not only managing projects but also engaging stakeholders and fostering change through technology. Dementia Australia places significant emphasis on palliative care for dementia patients, ensuring that those in the later stages of the disease receive comprehensive support.
+## Shared history — from the spine
+_(no linked email record)_
 
-Sally appears to be deeply committed to leveraging her expertise and empathy to drive meaningful change in the realm of digital health initiatives focused on dementia. She cares about improving patient outcomes through advanced technological solutions and increasing public understanding of brain health issues like CTE. Her efforts are geared towards better supporting individuals with dementia, their families, and caregivers by ensuring that information is accessible and care approaches are both innovative and compassionate.
+## Understanding — drafted
+Sally Davison is the CTE Campaign Project Manager at Dementia Australia, an organization dedicated to enhancing care and support for individuals with dementia. In her role, Sally focuses on digital transformation and project management, leveraging her skills in change management, stakeholder engagement, and customer-centric approaches. She has a background that includes working as a Digital Leader and previously held the position of Digital Project Lead at The Alzheimer Society of Ireland. Her work underscores a commitment to improving access and support for people living with dementia through innovative and inclusive strategies.
+
+Sally appears to care deeply about ensuring that individuals with dementia have a voice in their communities and are included in social activities and decision-making processes. She believes strongly in the importance of palliative care and policies that promote the social inclusion of those affected by dementia. Through her work, Sally aims to enhance the quality of life for people living with dementia and advocate for better support systems and care practices. Her empathetic approach and dedication highlight her passion for making a meaningful difference in the lives of individuals impacted by dementia.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

@@ -2,7 +2,7 @@
 name: Simon Harris
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Simon Harris
@@ -16,16 +16,19 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Simon Harris is the Tánaiste and Minister for Finance of Ireland. He previously served as Taoiseach from April 2024 to November 2025. His focus includes protecting Ireland's economy and making housing affordable.
+Simon Harris is a founder of Simon Harris Friendraising and an Irish politician who served as Taoiseach and Tánaiste. He is currently Minister for Finance. His work focuses on inspiring and connecting with donors.
+- [Simon Harris](https://www.simonharrisfriendraising.com) — He brought heart, strategy, and a deep understanding of how to inspire people to care—and act. His ability to connect with donors and align their values
+- [Simon Harris Email & Phone Number - RocketReach](https://rocketreach.co/simon-harris-email_847840597) — Simon Harris, is currently a Founder at Simon Harris Friendraising. Simon Harris brings experience from previous roles at Bob Brown Foundation,
 - [Simon Harris - Wikipedia](https://en.wikipedia.org/wiki/Simon_Harris) — **Simon Harris** (born 17 October 1986) is an Irish Fine Gael politician serving as Tánaiste and Minister for Finance "Minister for Finance (Ireland)") since 2025, having previously served as Taoiseach from 2024 to 2025, Minister for Foreign Affairs and Trade and Minister for Def
-- [Simon Harris | European Stability Mechanism](https://www.esm.europa.eu/profile/simon-harris) — Simon Harris T.D. is the Tánaiste (Deputy Prime Minister of Ireland) and Minister for Finance. He previously served as Taoiseach from April
-- [Simon Harris TD — Tánaiste & Minister for Finance](https://simonharrisfg.com) — Today, Simon is focused on protecting Ireland's economy from US tariff impacts, making housing more affordable, and ensuring Wicklow communities have the
 - [Simon Harris | Facts, Biography, & Taoiseach | Britannica](https://www.britannica.com/biography/Simon-Harris) — Fine Gael leader Simon Harris Simon Harris, 2024. Fine Gael leader Simon Harris. # Simon Harris. * What is the role of the prime minister in Ireland? * When did Simon Harris become the prime minister of Ireland? * What were some jobs Simon Harris had before becoming prime ministe
 
-## Understanding — drafted
-Simon Harris is a prominent Irish politician and the current Tánaiste (Deputy Prime Minister) and Minister for Finance. He previously served as Taoiseach (Prime Minister) from April 2024 to November 2025, bringing extensive experience in governance and policy-making to his roles. His political career includes stints as the Minister for Foreign Affairs and Trade and Minister for Defence, showcasing a broad range of expertise across various sectors. As Tánaiste and Finance Minister, Harris is deeply involved in safeguarding Ireland's economic stability, particularly in navigating challenges posed by external factors like US tariffs.
+## Shared history — from the spine
+_(no linked email record)_
 
-Harris seems to care deeply about issues that impact the daily lives of Irish citizens, such as housing affordability and community development. His focus on making housing more accessible reflects a commitment to addressing critical social needs and improving the quality of life for his constituents. Additionally, he prioritizes supporting local communities in Wicklow, indicating a strong connection to grassroots concerns and a dedication to ensuring that economic policies benefit individuals at all levels of society.
+## Understanding — drafted
+Simon Harris, born on October 17, 1986, is a prominent Irish politician and the founder of Simon Harris Friendraising. He has held several key positions in his political career, including serving as Taoiseach (Prime Minister) of Ireland from 2024 to 2025, Tánaiste (Deputy Prime Minister), and currently holds the role of Minister for Finance. Prior to these roles, Harris was involved with organizations like the Bob Brown Foundation where he honed his skills in donor relations.
+
+Harris is deeply committed to connecting with donors and fostering a sense of purpose among them by aligning their values with impactful causes. His work emphasizes not just the financial contributions but also the emotional and strategic aspects that inspire individuals to engage actively in philanthropy. He brings a unique blend of political acumen and personal charisma, which he uses to build meaningful relationships with supporters, making his approach both heartfelt and strategically sound.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

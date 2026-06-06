@@ -2,7 +2,7 @@
 name: Michael Clark
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Michael Clark
@@ -16,16 +16,19 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Michael Clark specializes in NDIS marketing, helping providers with strategy and websites. He cares about business growth and effective marketing techniques. His work focuses on improving NDIS provider visibility and success.
-- [What actually WORKS in NDIS Marketing? - YouTube](https://www.youtube.com/watch?v=2IAAZsEsn3M) — ... NDIS provider can apply to their business ... Contact Michael Clarke here: https://athletickoala.... Michael Clark is an NDIS marketing
-- [Exciting news — a new episode of The Healthy Business Lab ...](https://www.instagram.com/p/DP4rvL7DNOL) — ... MICHAEL CLARK FOUNDER/ATHLETIC KOALA. thehealthybusinesslab's profile ... It's About the Health of Your Business IUS ISITY MARKETING GENIUS CARE
-- [Here is what I wish someone told me 15 years ago. Imagine if I knew ...](https://www.linkedin.com/posts/michael-clark-helps-ndis-providers-athletic-koala_here-is-what-i-wish-someone-told-me-15-years-activity-7428279740870000640-s3-5) — Strategy, Websites & Marketing (The NDIS coach and marketing guy who's also been a provider himself) ... Michael Clark thank you for listening and
-- [The reason everyone knows about Leesa... Is because she won this ...](https://www.linkedin.com/posts/michael-clark-helps-ndis-providers-athletic-koala_the-reason-everyone-knows-about-leesa-activity-7449950872631119872-TPEK) — View profile for Michael Clark ... Strategy, Websites & Marketing (The NDIS coach and marketing guy who's also been a provider himself).
+Michael Clark's Athletic Koala focuses on marketing for NDIS providers. They use grassroots tactics to boost referrals. Clark emphasizes low-cost, effective strategies.
+- [Athletic Koala | LinkedIn](https://au.linkedin.com/company/athletic-koala) — Athletic Koala is a dynamic digital marketing and consultancy firm dedicated to supporting NDIS and disability service providers across Australia.
+- [Double Your NDIS Referrals with Michael Clark (Athletic Koala) Tickets, Thursday 18 June  •  8 AM - 9 AM UTC | Eventbrite](https://www.eventbrite.com.au/e/double-your-ndis-referrals-with-michael-clark-athletic-koala-tickets-1989795576132) — Double Your NDIS Referrals with Michael Clark (Athletic Koala). Discover 10 powerful ways to double your NDIS referrals spending less than $1. ****Topic:**** 10 Ways To Double Your Referrals Spending Less Than $1. ****Session Highlight:**** You do not need a massive corporate mar
+- [What actually WORKS in NDIS Marketing? - YouTube](https://www.youtube.com/watch?v=2IAAZsEsn3M) — Contact Michael Clarke here: https://athletickoala.... Michael Clark is an NDIS marketing ... How NEW NDIS Businesses Get 20 NDIS Clients In Their
+- [What's more important to eliminate? | Michael Clark](https://www.linkedin.com/posts/michael-clark-helps-ndis-providers-athletic-koala_%F0%9D%97%AA%F0%9D%97%B5%F0%9D%97%AE%F0%9D%98%81%F0%9D%98%80-%F0%9D%97%BA%F0%9D%97%BC%F0%9D%97%BF%F0%9D%97%B2-%F0%9D%97%B6%F0%9D%97%BA%F0%9D%97%BD%F0%9D%97%BC%F0%9D%97%BF%F0%9D%98%81%F0%9D%97%AE%F0%9D%97%BB%F0%9D%98%81-%F0%9D%98%81%F0%9D%97%BC-activity-7385783680897572864-SwfB) — Building the gold standard in ADHD coaching ⭐ | Neurodivergent-led, ICF-accredited and strengths-based coach training | Co-Founder @Gold Mind |
+
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Michael Clark is the Founder and Team Leader of Athletic Koala - an organization dedicated to enhancing the visibility and success of NDIS providers through strategic marketing. With his extensive experience as both a marketer and a former provider, Michael specializes in providing actionable insights into what truly works within the NDIS sector. His work involves developing effective marketing strategies and optimizing websites for NDIS providers, aiming to help them grow their businesses and better reach their target audiences.
+Michael Clark is the Founder and Team Leader of Athletic Koala, a specialized digital marketing and consultancy firm that focuses on supporting National Disability Insurance Scheme (NDIS) providers across Australia. Under his leadership, Athletic Koala employs grassroots tactics to help these providers boost their referrals and visibility in the market, emphasizing low-cost yet effective strategies. Clark is well-known for organizing events like "Double Your NDIS Referrals," where he shares practical methods that can significantly increase client referrals without substantial financial investment.
 
-Michael cares deeply about business growth and believes in leveraging effective marketing techniques to achieve it. He is passionate about sharing his knowledge with others to ensure that NDIS providers can thrive and succeed in a competitive environment. His approach underscores the importance of understanding what works in practice, rather than relying solely on theoretical methods. By offering guidance through platforms like YouTube and The Healthy Business Lab podcast, Michael aims to support other professionals in the field, fostering an ecosystem where all participants can benefit from improved marketing practices and business strategies.
+What seems most important to Michael Clark is making a meaningful difference in the lives of those served by NDIS providers. His emphasis on cost-effective and grassroots marketing strategies reflects his dedication to empowering these organizations with tools they can actually implement, thereby helping them grow sustainably. Beyond just the business aspect, Clark's involvement in ADHD coaching and his commitment to building strength-based practices indicate a broader passion for supporting neurodivergent individuals and fostering an inclusive environment where everyone’s unique strengths are recognized and utilized effectively.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

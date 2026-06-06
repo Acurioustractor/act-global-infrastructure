@@ -2,7 +2,7 @@
 name: Jati Pamungkas
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Jati Pamungkas
@@ -16,16 +16,19 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Jati Pamungkas Brunel focuses on job crafting and the psychological aspects of work, emphasizing the importance of direct care workers and their roles in healthcare. Their work highlights the value and impact of well-trained direct care workers.
-- [Job Crafting as the Missing Link: Understanding Its Role in Nurses ...](https://pmc.ncbi.nlm.nih.gov/articles/PMC12745053) — This study examined how nurses' positive psychological capital and positive work environment influence work engagement and investigated the
+Jati Pamungkas Brunel studies work relations, focusing on how people view their jobs as either a job, career, or calling, and has researched inclusion in project teams. His work emphasizes the importance of interpersonal inclusion in performance.
+- [A qualitative study of the nature and role of interpersonal inclusion in ...](https://bura.brunel.ac.uk/handle/2438/24512) — Title: It's the little things: A qualitative study of the nature and role of interpersonal inclusion in fostering individual performance in project teams.
 - [(PDF) Jobs, Careers, and Callings: People's Relations to Their Work](https://www.researchgate.net/publication/248742259_Jobs_Careers_and_Callings_People's_Relations_to_Their_Work) — We present evidence suggesting that most people see their work as either a Job (focus on financial rewards and necessity rather than pleasure or fulfillment)
-- [Jobs, Careers, And Callings: People's Relations To Their Work](https://works.swarthmore.edu/fac-psychology/193) — We present evidence suggesting that most people see their work as either a Job (focus on financial rewards and necessity rather than pleasure or
-- [Direct Care Work is Real Work: Elevating the Role of the Direct Care Worker - PHI](https://www.phinational.org/resource/direct-care-work-is-real-work-elevating-the-role-of-the-direct-care-worker) — # Direct Care Work is Real Work: Elevating the Role of the Direct Care Worker. This report examines the training landscape for direct care workers and takes a closer look at the aspects of direct care work that are often unseen or underestimated, including its physical demands, s
+- ["Jobs, Careers, And Callings: People's Relations To Their Work" by A. Wrzesniewski, C. McCauley et al.](https://works.swarthmore.edu/fac-psychology/193) — Works: Scholarship, Research, & Creative Expression. # Jobs, Careers, And Callings: People's Relations To Their Work. ## Published In. Journal Of Research In Personality. *Journal Of Research In Personality.* Volume 31, Issue 1. We present evidence suggesting that most people see
+- [Overlooked, undervalued: Cornell research seeks to elevate home care workers | Cornell Chronicle](https://news.cornell.edu/stories/2022/06/overlooked-undervalued-cornell-research-seeks-elevate-home-care-workers) — A multidisciplinary team of Cornell researchers is collaborating to elevate the value of home care workers while improving their working conditions and patient outcomes. She had just spent an excruciating 25 minutes walking, grimacing with each step, from her recliner in her Broo
+
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Jati Pamungkas works as a Drill Fitter in HME Maintenance at Brunel, an organization involved in providing maintenance services. Their role likely involves technical expertise and skill in maintaining equipment necessary for healthcare operations. Jati is connected to BRUNEL AUSTRALIA HOLDINGS PTY LTD, suggesting they operate within a larger network that supports the healthcare sector through maintenance and support services. Through their work at Brunel, Jati contributes to ensuring the operational readiness of medical facilities.
+Jati Pamungkas works as a Drill Fitter at Brunel, with a background that extends beyond his technical role into academic research. His professional contributions are centered around understanding work relations and the impact of interpersonal inclusion within project teams. Jati's scholarly pursuits have delved into how individuals perceive their jobs—whether as mere tasks for financial gain (jobs), steps towards advancement (careers), or meaningful life pursuits (callings). He has also explored inclusion dynamics in these settings, highlighting that small acts can significantly foster a sense of belonging and enhance individual performance.
 
-Jati seems deeply invested in understanding and elevating the roles of direct care workers, focusing particularly on the psychological aspects of these jobs and how they impact overall engagement and fulfillment. They are involved in research that highlights the importance of a positive work environment for nurses and other healthcare professionals, emphasizing the critical role of well-trained caregivers who often face physical demands and underappreciation. Their efforts aim to improve recognition and support for direct care workers, advocating for better training and appreciation of their essential contributions to healthcare delivery.
+Jati appears to care deeply about creating inclusive environments where team members feel valued and respected. His research on interpersonal inclusion underscores his belief in the power of fostering positive relationships at work to improve overall team performance. He is also concerned with how people relate to their jobs, advocating for a deeper appreciation of the emotional and psychological dimensions involved in professional life. Through his work, Jati aims to highlight the importance of recognizing each individual's unique contributions and experiences within project teams.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

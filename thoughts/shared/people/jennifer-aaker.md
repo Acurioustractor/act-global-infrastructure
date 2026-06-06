@@ -2,7 +2,7 @@
 name: Jennifer Aaker
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Jennifer Aaker
@@ -16,16 +16,19 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Jennifer Aaker is a professor at Stanford Graduate School of Business, known for her research on purpose, empathy, and well-being. She teaches courses on leadership and human behavior. Her work emphasizes the importance of purpose and empathy in business and life.
+Jennifer Aaker is a professor at Stanford Graduate School of Business, known for her research on purpose, empathy, and well-being. She teaches courses on leadership, purpose, and the power of story. Her work helps leaders and organizations enhance human well-being through purpose and joy.
 - [Jennifer Aaker | Stanford Graduate School of Business](https://www.gsb.stanford.edu/faculty-research/faculty/jennifer-aaker) — **Dr. Jennifer Aaker**, General Atlantic Professor at Stanford GSB, is a pioneering behavioral scientist focused on how meaning, time perception, and connection drive both performance and well-being. Dr. Aaker is the recipient of the Distinguished Scientific Achievement Award, th
-- [Jennifer Aaker: Why It Matters to Have Purpose in Your Life](https://www.gsb.stanford.edu/insights/jennifer-aaker-why-it-matters-have-purpose-your-life) — # Jennifer Aaker: Why It Matters to Have Purpose in Your Life. People work harder if they feel that what they are doing has meaning. Illustration of man climbing onto a hand from rock in the middle of water | iStock/dane_mark. Having a clear sense of purpose gives people a strong
-- [Jennifer Aaker: Capturing the Power of Empathy](https://www.gsb.stanford.edu/insights/jennifer-aaker-capturing-power-empathy) — Stanford Graduate School of Business Marketing Professor Jennifer Aaker shows the value of harnessing empathy to design products, and improve the performance
+- [Jennifer Aaker: Why It Matters to Have Purpose in Your Life | Stanford Graduate School of Business](https://www.gsb.stanford.edu/insights/jennifer-aaker-why-it-matters-have-purpose-your-life) — # Jennifer Aaker: Why It Matters to Have Purpose in Your Life. People work harder if they feel that what they are doing has meaning. Illustration of man climbing onto a hand from rock in the middle of water | iStock/dane_mark. Having a clear sense of purpose gives people a strong
 - [A Recipe for a Meaningful Life with Jennifer Aaker - YouTube](https://www.youtube.com/watch?v=yl9qyNKh7hs) — Jennifer Aaker is the General Atlantic Professor at Stanford Graduate School of Business. A behavioral scientist and author, Professor Aaker
+- [Jennifer Aaker: Capturing the Power of Empathy | Stanford Graduate School of Business](https://www.gsb.stanford.edu/insights/jennifer-aaker-capturing-power-empathy) — # Jennifer Aaker: Capturing the Power of Empathy. Why product designers should put themselves in the shoes of their consumers. Empathy leads to better product design. Here, Twelve-year-old Leon McCarthy (R) rests his prosthetic hand on a MarkerBot Replicator 2 Desktop 3D Printer.
+
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Jennifer Aaker is a distinguished professor at the Stanford Graduate School of Business, where she holds the esteemed title of General Atlantic Professor. Her work focuses on integrating principles from psychology into business contexts, with an emphasis on how meaning, empathy, and well-being can enhance both individual performance and organizational success. Dr. Aaker’s research delves into the intersection of human behavior and leadership, often exploring how a sense of purpose and empathetic connections can drive meaningful outcomes.
+Dr. Jennifer Aaker is a distinguished behavioral scientist and professor at Stanford Graduate School of Business, where she holds the position of General Atlantic Professor. She is renowned for her extensive research in the areas of purpose, empathy, and well-being. Dr. Aaker's work aims to help leaders and organizations enhance human performance by fostering environments that prioritize meaning and joy. Her teachings and courses focus on leadership principles and the power of storytelling as tools to inspire and connect with others effectively.
 
-Dr. Aaker seems to deeply care about fostering environments where individuals feel their work has meaning and where empathy is central to business practices. She believes that by understanding and cultivating these aspects, organizations can not only improve performance but also contribute positively to people's well-being. Her dedication to teaching and researching in this area reflects a commitment to making businesses more human-centric and purpose-driven, ultimately aiming for a greater impact on both individuals and society at large.
+Dr. Aaker cares deeply about the impact of purposeful living and empathetic understanding in both personal and professional contexts. She believes that individuals and organizations thrive when there is a clear sense of direction and meaningful connections with others. Her emphasis on empathy underscores her commitment to understanding and addressing the needs of consumers from their perspective, advocating for product designers to consider the end-user experience more deeply. Through her research and teachings, Dr. Aaker seeks to promote well-being and positive outcomes by integrating principles that emphasize purpose and empathy in all aspects of life.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

@@ -2,7 +2,7 @@
 name: Byron Barnes, CFRE
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Byron Barnes, CFRE
@@ -16,8 +16,8 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Byron Barnes, CFRE, is the chief advancement officer for the University of Notre Dame Australia and has worked with R U OK? He focuses on philanthropy and alumni relations. His career emphasizes community service.
-- [Byron Barnes, CFRE - CASE.org](https://www.case.org/byron-barnes-cfre) — Byron Barnes, CFRE, is the chief advancement officer for the University of Notre Dame Australia, responsible for leading Philanthropic and Alumni Relations
+Byron Barnes, CFRE, is the chief advancement officer for the University of Notre Dame Australia and is involved with R U OK? He has a background in fundraising and community service.
+- [Byron Barnes, CFRE | CASE](https://www.case.org/byron-barnes-cfre) — # CASE. # Byron Barnes, CFRE. ## Bio. Byron Barnes, CFRE, is the chief advancement officer for the University of Notre Dame Australia, responsible for leading Philanthropic and Alumni Relations programmes located in Sydney, Fremantle and Broome. The University of Notre Dame Austr
 - [Byron Barnes, CFRE - R U OK?](https://au.linkedin.com/in/byronbarnescfre) — Byron Barnes, CFRE
 R U OK?
 Sydney, New South Wales, Australia
@@ -39,12 +39,15 @@ N/A
 Education
 University of Hawai
 - [Byron Barnes, CFRE - alec #anyday #grateful - LinkedIn](https://www.linkedin.com/posts/byronbarnescfre_alec-anyday-grateful-activity-7445061267616182272-c0M9) — Thank you Byron Barnes, CFRE for a great partnership and for bringing us closer to the incredible R U OK? Team. Well wishes in the next chapter!
-- [Brett Barnes, CFRE, CFRM](https://www.cfre.org/about/press-room/brett-barnes) — With more than 20 years of experience in fundraising, Brett Barnes, CFRE, CFRM, is the Chief Development Officer for the National Domestic Violence Hotline.
+- [Brett Barnes, CFRE, CFRM - CFRE](https://www.cfre.org/about/press-room/brett-barnes) — This will take you to the homepage. ### Be a CFRE. With more than 20 years of experience in fundraising, Brett Barnes, CFRE, CFRM, is the Chief Development Officer for the National Domestic Violence Hotline. ### We Are the Catalyst for Change. I’m especially moved when a donor is
+
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Byron Barnes, CFRE, serves as a Partnership & Fundraising Director at R U OK?, an organization dedicated to preventing suicide by encouraging open conversations about mental health. Currently, Byron also holds the role of Chief Advancement Officer at the University of Notre Dame Australia, where he leads efforts in philanthropic initiatives and alumni relations. His professional background highlights a strong commitment to community service and advancing organizations through strategic partnerships and fundraising.
+Byron Barnes, CFRE, holds a significant position as the Partnership & Fundraising Director at R U OK?, an organization dedicated to preventing suicide by encouraging meaningful conversations about mental health. Additionally, he serves as the chief advancement officer for the University of Notre Dame Australia, where he oversees philanthropic and alumni relations programs across multiple campuses in Sydney, Fremantle, and Broome. His extensive background includes over two decades of experience in fundraising and community service, reflecting a deep commitment to supporting institutions and organizations that enhance communities.
 
-Byron seems to care deeply about fostering connections within communities and leveraging his expertise to support charitable causes that enhance wellbeing and mental health awareness. His involvement with R U OK? suggests an emphasis on preventing suicide by promoting meaningful conversations, while his work at the University of Notre Dame Australia underscores a dedication to building long-term relationships with alumni and supporters to advance educational initiatives. Byron’s career trajectory indicates a passionate advocate for service-driven roles that prioritize community engagement and philanthropy.
+Byron seems deeply invested in fostering environments where individuals feel supported and valued, particularly through his work with R U OK?. This involvement underscores his care for mental health awareness and prevention efforts. His dedication to philanthropic endeavors at Notre Dame Australia also highlights his passion for educational advancement and alumni engagement. Overall, Byron appears to be a driven individual focused on making positive impacts in both educational and community contexts, emphasizing the importance of service and collaboration.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

@@ -2,7 +2,7 @@
 name: Ruby Sibley
 lane: community
 storyteller_id: 2b139020-fa6a-4012-b1c2-4be54f516913
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Ruby Sibley

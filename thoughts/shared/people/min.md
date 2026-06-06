@@ -2,7 +2,7 @@
 name: Min
 lane: community
 storyteller_id: d68649ff-04e2-4814-ad45-8d43d591463a
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Min

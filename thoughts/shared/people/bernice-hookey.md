@@ -2,7 +2,7 @@
 name: bernice hookey
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # bernice hookey
@@ -16,16 +16,29 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Bernice Hookey is the Indigenous Director of the Australian Institute of Ecological Agriculture, focusing on ecological sustainability and regenerative practices. She is an alumni of the Regenerative Practitioner series with Regenesis Institute. Her role emphasizes ecological agriculture and Indigenous leadership.
-- [Institute - Introducing Bernice Hookey, recently elected Indigenous ...](https://m.facebook.com/EcoAgAustralia/photos/introducing-bernice-hookey-recentlyelected-indigenous-director-of-the-australian/1046772807481203) — Introducing Bernice Hookey, recently elected Indigenous Director of the Australian Institute of Ecological Agriculture.
+Bernice Hookey is the Indigenous Director of the Institute of Ecological Agriculture Australia, focusing on regenerative practices and Indigenous business growth. She supports businesses in adopting responsible, sustainable methods.
+- [Introducing... - Institute of Ecological Agriculture Australia](https://www.facebook.com/EcoAgAustralia/posts/introducing-bernice-hookey-recently-elected-indigenous-director-of-the-australia/1046772834147867) — ## Institute of Ecological Agriculture Australia's post. ### **Institute of Ecological Agriculture Australia**. Introducing Bernice Hookey, recently elected Indigenous Director of the Australian Institute of Ecological Agriculture. Through consulting work, Bernice supports busine
+- [Bernice H. - Cultural Strategist | Speaker | Founder, MZB Empowerment and Founding Member Rylee’s Social Justice Inc. - Institute of Ecological Agriculture Australia](https://au.linkedin.com/in/bernice-hookey) — Bernice H.
+Cultural Strategist | Speaker | Founder, MZB Empowerment and Founding Member Rylee’s Social Justice Inc.
+Yabulu, Queensland, Australia
+500 connections, 2491 followers
+
+
+About
+I am a proud Waanyi and Muruwarri woman and founder of MZB Empowerment and founding…
+
+
+Experie
 - [Institute of Ecological Agriculture Australia's Post - LinkedIn](https://www.linkedin.com/posts/institute-of-ecological-agriculture_introducing-bernice-hookey-recently-elected-activity-7272731880204972033-Hhz0) — Introducing Bernice Hookey, recently elected Indigenous Director of the Australian Institute of Ecological Agriculture.
-- [Institute of Ecological Agriculture Australia - Facebook](https://www.facebook.com/EcoAgAustralia/posts/introducing-bernice-hookey-recently-elected-indigenous-director-of-the-australia/1046772834147867) — Introducing Bernice Hookey, recently elected Indigenous Director of the Australian Institute of Ecological Agriculture.
-- [The Board - Institute of Ecological Agriculture](https://www.ecoag.org.au/board) — Bernice is an alumni of the Australian cohort completing the Regenerative Practitioner series in 2022 with Regenesis Institute for Regenerative Practice.
+- [Institute - Introducing Bernice Hookey, recently elected Indigenous ...](https://m.facebook.com/EcoAgAustralia/photos/introducing-bernice-hookey-recentlyelected-indigenous-director-of-the-australian/1046772807481203) — Introducing Bernice Hookey, recently elected Indigenous Director of the Australian Institute of Ecological Agriculture.
+
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Bernice Hookey serves as the Indigenous Director on the Board of Directors at the Institute of Ecological Agriculture Australia. Her role underscores a commitment to ecological sustainability and regenerative practices within agriculture, reflecting her background and expertise in this area. Bernice has completed the Regenerative Practitioner series with the Regenesis Institute, indicating her dedication to advancing sustainable agricultural methods that align with both environmental stewardship and cultural values.
+Bernice Hookey is a Waanyi and Muruwarri woman serving as an Indigenous Director on the Board of Directors for the Institute of Ecological Agriculture Australia. In her role, she focuses on promoting regenerative agricultural practices and supporting the growth of Indigenous businesses that adopt sustainable methods. Bernice’s work involves consulting with various organizations to help them implement responsible and environmentally friendly business strategies.
 
-Bernice appears to care deeply about integrating Indigenous knowledge and leadership into ecological agriculture. Her work seems driven by a vision of sustainability that respects traditional practices and seeks to harmonize modern agricultural techniques with ancestral wisdom. This approach likely emphasizes not just the health of the land but also the social and cultural well-being of communities involved in farming practices. Bernice’s involvement signals an intent to foster a more inclusive and sustainable future for agriculture, combining ecological responsibility with Indigenous leadership and knowledge.
+Bernice appears to care deeply about fostering a connection between traditional ecological knowledge and modern agricultural practices. She is committed to empowering Indigenous communities through her role as a cultural strategist and founder of MZB Empowerment, as well as her involvement in Rylee’s Social Justice Inc. Her efforts are geared towards not only environmental sustainability but also social justice and the holistic development of Indigenous businesses and communities.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

@@ -2,7 +2,7 @@
 name: Peter Laurent
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Peter Laurent
@@ -16,7 +16,7 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Peter Laurent is a Senior Property Manager and Board Treasurer for CSC Global Alumni, focusing on governance, strategic planning, and alumni engagement. He is also involved in fundraising and membership activities. His work emphasizes maintaining connections among alumni.
+Peter Laurent is a Senior Property Manager and Board Treasurer for CSC Global Alumni, focusing on governance, strategic planning, and leadership series events. He is also involved in various committees and fundraising efforts. His work emphasizes leadership development and alumni engagement.
 - [Peter Laurent - Senior Property Manager - CSC Global Alumni](https://au.linkedin.com/in/petelaurent) — Peter Laurent
 Senior Property Manager
 Brisbane City, Queensland, Australia
@@ -31,13 +31,16 @@ Experience
 Board Treasurer
 [CSC Global Alumni](https://uk.linkedin.com/com
 - [50+ "Peter Laurent" profiles - LinkedIn](https://www.linkedin.com/pub/dir/Peter/Laurent) — Director. Brisbane City, QLD. CSC Global Alumni, +8 more. The University of Queensland, +4 more ; Senior Risk Adviser. Docklands, VIC. Mito Foundation, +5 more.
-- [CSC Global Alumni - New Leadership](https://www.cscglobalalumni.org/csc-global-alumni-new-leadership) — The Vice Chair is Taimoor Baig (CSC 2023) from Pakistan. The Treasurer is Peter Laurent (CSC 2016) from Australia.
-- [CSC Alumni + Hong Kong Summary](https://www.cscglobalalumni.org/csc-alumni-hong-kong-summary) — CSC Alumni + Hong Kong Summary. / Events, News / By Peter Laurent ... We Support Sustaining the connection of the over 6,800 alumni of CSC Programmes
+- [Peter Laurent - CSC Global Alumni](https://www.cscglobalalumni.org/event-organizer/peter-laurent) — # Peter Laurent. There are currently no events. ### CSC Global Leadership Series – Next Generation Of Farming. 23-02-2023 @ 10:30 AM (GMT) - 23-02-2023@ 01:00 PM (GMT). 440 Strand, London WC2R 0QS, United Kingdom. ### CSC Global Leadership Series with the Hon Julia Gillard AC. ##
+- [[PDF] Laurent Bélik - CSC Global](https://www.cscglobal.com/cscglobal/pdfs/Laurent%20Belik%20Biography.pdf) — Laurent Bélik EXECUTIVE BIOGRAPHY +352 691 42 48 46 Laurent.Belik@cscglobal.com Laurent Bélik is managing director of CSC® Capital Markets Europe in Luxembourg and is responsible for general management, including finance and operations. Before joining CSC, Laurent spent six years
+
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Peter Laurent is a seasoned Commercial Property Professional based in Brisbane City, Queensland, Australia. He serves as both a Senior Property Manager and Board Treasurer for CSC Global Alumni, an organization that focuses on maintaining connections among its extensive global network of over 6,800 alumni members from various CSC programmes. In his role at the board level, Peter is actively involved in governance, strategic planning, and fundraising efforts to support the organizational goals.
+Peter Laurent is a Senior Property Manager and serves as the Board Treasurer for CSC Global Alumni, an organization that focuses on fostering leadership development and alumni engagement. In his role, Peter oversees governance, strategic planning, and participates in organizing leadership series events that aim to connect and inspire graduates from The University of Queensland. He is actively involved in various committees within the organization, contributing his expertise towards fundraising efforts and ensuring financial stability.
 
-Peter seems to care deeply about fostering a strong sense of community among alumni, emphasizing the importance of sustaining connections that extend beyond academic or programmatic experiences. His involvement in membership activities and engagement initiatives indicates his dedication to building meaningful relationships within the alumni network. This focus on connection and community suggests that Peter values long-term collaboration and support amongst peers, aiming to create lasting impact through collective efforts and shared experiences.
+Peter appears to care deeply about leveraging his professional background to support the growth and success of alumni networks. His involvement extends beyond financial responsibilities to include a genuine interest in nurturing leadership qualities among members. Peter values community building, strategic planning, and continuous engagement with alumni, reflecting his commitment to making meaningful contributions to both the organization and its members’ professional development.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

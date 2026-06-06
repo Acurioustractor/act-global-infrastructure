@@ -2,7 +2,7 @@
 name: Peter C Yegon
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Peter C Yegon
@@ -16,7 +16,8 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Peter C Yegon leads the Rise and Rebuild Initiative, focusing on empowering youth with digital and vocational skills and connecting them to global job opportunities. The initiative provides support and training for individuals facing homelessness and hardship. It aims to help communities rise out of poverty and build sustainable independence.
+Peter C Yegon leads Rise and Rebuild Initiative, focusing on empowering youth and addressing homelessness, poverty, and incarceration through support and training. The initiative aims to build stronger communities by providing resources and mentorship.
+- [Peter Yegon Email & Phone Number | Rise And Rebuild Initiative](https://contactout.com/peter-c-yegon-89876) — Yegon, as the Founder and Director of Rise and Rebuild Initiative, plays a pivotal role in shaping sustainable community development in Kericho County, Kenya.
 - [Peter C Yegon - Founder & CEO | Rise & Rebuild Initiative | Empowering Youth through Digital & Vocational Skills and Connecting Them to Global Job Opportunities - STEWARDS OF GRACE MINISTRIES](https://ke.linkedin.com/in/peter-c-yegon-67345a209) — Peter C Yegon
 Founder & CEO | Rise & Rebuild Initiative | Empowering Youth through Digital & Vocational Skills and Connecting Them to Global Job Opportunities
 Nairobi County, Kenya
@@ -25,14 +26,16 @@ Nairobi County, Kenya
 
 About
 Rise & Rebuild Initiative (RRI) is transforming lives and c
-- [Rise and Rebuild Initiative - Empowering Lives Through Support](https://www.riseandrebuildinitiative.org) — Empowering individuals and families facing homelessness, incarceration, and hardship with transitional housing and job readiness training.
-- [About Us - Rise And Rebuild](https://riseandrebuild.org/about) — “We partner with local officials and communities to help Filipino families Rise out of chronic poverty, develop independence through self-reliance, and Build
-- [Donate to Rise And Rebuild Initiative - GlobalGiving](https://www.globalgiving.org/donate/105193/rise-and-rebuild-initiative) — Rise And Rebuild Initiative exists to empower vulnerable communities by providing sustainable support, education, and resources that enable individuals and
+- [Rise And Rebuild](https://riseandrebuild.org) — Rise and Rebuild Foundation seeks to help Filipino families escape chronic poverty through Nutrition, Education, Jobs and the adoption of Self-Reliance
+- [Rise and Rebuild Initiative - Empowering Lives Through Support](https://www.riseandrebuildinitiative.org) — We empower individuals and families facing homelessness, incarceration, and hardship by providing transitional housing, job readiness training, and entrepreneurship programs. ## About Us. At Rise and Rebuild Initiative, our mission is to help underserved individuals reintegrate i
+
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Peter C Yegon is the Founder and Director of the Rise and Rebuild Initiative (RRI), based in Nairobi County, Kenya. RRI focuses on empowering youth by equipping them with digital and vocational skills and connecting them to global job opportunities. The initiative also supports individuals facing homelessness and hardship through transitional housing and job readiness training. Peter's work is deeply rooted in transforming lives and aiming for sustainable independence within communities.
+Peter C Yegon serves as the Founder and Director of the Rise and Rebuild Initiative (RRI), an organization dedicated to empowering youth in Kenya by addressing issues such as homelessness, poverty, and incarceration. RRI operates primarily in Kericho County but also has a presence in Nairobi County, focusing on sustainable community development through various support systems including mentorship programs and training initiatives aimed at fostering self-reliance among the underserved populations.
 
-Peter seems to care profoundly about creating pathways out of poverty and empowering marginalized individuals, particularly youth and those experiencing homelessness or incarceration. His dedication lies in fostering self-reliance and providing comprehensive support that ranges from basic needs like housing to skills development that leads to economic opportunities. The initiative’s collaborative approach with local officials and communities reflects Peter's belief in the power of collective efforts to achieve long-term change and resilience.
+Peter appears to care deeply about creating opportunities for youth empowerment by equipping them with digital and vocational skills that can connect them to global job opportunities. His work reflects a commitment to breaking cycles of poverty, homelessness, and incarceration through comprehensive support systems such as transitional housing and entrepreneurship programs. At the heart of Peter's efforts is a desire to foster stronger, more resilient communities where individuals have the resources and training necessary to achieve self-sufficiency and contribute positively to society.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

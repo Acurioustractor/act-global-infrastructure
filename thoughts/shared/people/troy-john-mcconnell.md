@@ -2,7 +2,7 @@
 name: Troy John McConnell
 lane: community
 storyteller_id: 95459ac8-fad1-4938-a882-561fd0b6090a
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Troy John McConnell

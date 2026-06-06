@@ -2,7 +2,7 @@
 name: Ethel and  Iris Ferdies
 lane: community
 storyteller_id: c935626b-cd65-49bc-b794-8d145e4e6e31
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Ethel and  Iris Ferdies

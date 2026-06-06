@@ -2,11 +2,18 @@
 name: lucy stronach
 lane: supporter
 warmth: 36
-updated: 2026-06-03
+energy: 45
+ring: 50
+updated: 2026-06-06
 ---
 
 # lucy stronach
-  
+Minderoo Foundation  
+
+## Ben's read — ground truth (circle session 2026-06-06)
+> **"said NO to JusticeHub; can maybe help with Goods"** · ring **50** · energy **45**
+
+> _Machine note: scope board lists her covering JusticeHub capital — she has already declined it. Coverage needs asked/answered state_
 
 ## Soil — institutional ground (CivicGraph)
 - **Org:** —
@@ -16,11 +23,7 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Lucy Stronach is recognized for her decade-long work in human rights and justice, particularly in youth justice. She currently serves as a Youth Justice Adviser at Minderoo. Her advocacy spans women's rights and disability issues.
-- [Congratulations to Lucy Stronach for receiving the WA Young ...](https://www.instagram.com/p/C8bTsq8t5WB) — She has been recognised for over a decade of work in human rights and justice roles, including her current role as a Youth Justice Adviser at Minderoo
-- [Congratulations Lucy Stronach, Young Achiever of the Year!](https://martinfoundation.org.au/blog/congratulations-lucy-stronach-young-achiever-of-the-year) — At age 28, she already has a decade of experience working and volunteering in human rights and justice roles. Currently, Lucy is a Youth Justice
-- [Calling All Young Changemakers! Last year, Lucy Stronach inspired ...](https://www.facebook.com/masoniccarewa/posts/calling-all-young-changemakers-last-year-lucy-stronach-inspired-us-all-as-the-wi/949048830706351) — With over a decade of leadership and advocacy, Lucy has impacted countless lives through her work in youth justice, women's rights, and disability advocacy. ✨
-- [Congratulations to Lucy Stronach for receiving the WA Young ...](https://www.facebook.com/SirDavidMartinFoundation/posts/congratulations-to-lucy-stronach-for-receiving-the-wa-young-achiever-of-the-year/889916406514020) — She has been recognised for over a decade of work in human rights and justice roles, including her current role as a Youth Justice Adviser at
+_(no web key / no results)_
 
 ## Shared history — from the spine
 **46 emails** · first 2025-09-09 · last 2026-04-29
@@ -37,11 +40,11 @@ Lucy Stronach is recognized for her decade-long work in human rights and justice
 - 2026-01-29 ← Re: Re: Walking
 
 ## Understanding — drafted
-Lucy Stronach is a dedicated advocate for human rights, especially in the realm of youth justice. With over a decade of experience under her belt by the age of 28, she has made significant contributions to women's rights and disability advocacy as well. Currently serving as a Youth Justice Adviser at Minderoo, Lucy continues to impact countless lives through her work and leadership.
+Lucy Stronach is associated with the Minderoo Foundation, an organization known for its work in various sectors including health, education, and technology. From the emails exchanged, it appears that Lucy has shown interest or involvement in initiatives related to "Goods" but has declined opportunities linked to JusticeHub, suggesting a focused engagement in certain areas while steering clear of others.
 
-Lucy cares deeply about creating just systems that protect and empower young people, women, and individuals with disabilities. Her advocacy spans various areas within human rights, demonstrating a commitment to fostering equitable environments where all voices are heard and valued.
+It seems that Lucy cares about specific projects within her scope at Minderoo Foundation, particularly those involving goods. Her interactions with ACT suggest an openness to collaborate on selected ventures, emphasizing practical and targeted support rather than broad or generalized engagements like JusticeHub.
 
-In our interactions with Lucy, we have primarily focused on discussing projects related to JusticeHub and coordinating logistics for events such as the "Contained Aus Tour." Our collaboration has involved confirming details like meetings and tours, reflecting an ongoing effort to support her initiatives in youth justice.
+The shared work between ACT and Lucy has primarily revolved around exploring opportunities for collaboration in the realm of "Goods." This includes discussions about potential involvement in projects such as a container-related venture ("Container vibes") and the Contained Aus Tour. There have also been exchanges focusing on logistical aspects, including scheduling meetings and catch-ups to align both parties' interests and availability.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

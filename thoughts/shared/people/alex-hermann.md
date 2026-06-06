@@ -2,7 +2,7 @@
 name: Alex Hermann
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Alex Hermann
@@ -16,8 +16,8 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Alex Hermann is a co-founder of Content Chameleon, focusing on creating AI-generated videos. He advocates for mental health awareness and supports the Latinx community. His work emphasizes relevant content and effective communication strategies.
-- [LinkedIn is fighting back against AI slop 🎉 | Alex Hermann](https://www.linkedin.com/posts/hermannalex_linkedin-is-fighting-back-against-ai-slop-activity-7462804028511440896-9DWb) — Co-founder @Content Chameleon 3d. Automated automation tools used to create AI attention bait videos.
+Alex Hermann is a content strategist specializing in B2B LinkedIn sales, and also a therapist focused on cultural sensitivity and mental health. He ghostwrites LinkedIn posts to build personal brands and generate leads. He holds a bachelor's in Psychology and is pursuing a Master's in Marriage and Family Therapy.
+- [Your Content is Everywhere | Alex Hermann posted on the topic](https://www.linkedin.com/posts/hermannalex_i-dont-know-what-to-say-or-whats-interesting-activity-7439581532345774080-zPhp) — Your Content is Everywhere. View profile for Alex Hermann. Alex Hermann. Win iGaming clients for B2B providers (platforms, games, traffic)
 - [Alex Hermann - Content Chameleon](https://ua.linkedin.com/in/hermannalex) — Alex Hermann
 Content Chameleon
 Kyiv, Kyiv City, Ukraine
@@ -38,13 +38,16 @@ N/A
 
 Education
 Lond
-- [Alex Hermann](https://www.thefamilydevelopmentcenter.com/our-therapists/alex-hermann-1-1) — I am dedicated to breaking the stigma and cultural shame that can surround mental health by normalizing therapy, supporting the Latinx community, and providing
-- [Your Content is Everywhere | Alex Hermann posted on the ...](https://www.linkedin.com/posts/hermannalex_i-dont-know-what-to-say-or-whats-interesting-activity-7439581532345774080-zPhp) — -You explain one part of your work content is all around you. You just need to know what, when and how to use it. For a pitch to actually work,
+- [Alex Hermann — The Family Development Center](https://www.thefamilydevelopmentcenter.com/our-therapists/alex-hermann-1-1) — Grounded in my lived experience as a biracial woman with Latina roots, my systems-based approach is shaped by empathy, deep curiosity, and cultural sensitivity. As a Clinical Intern, I strive to create an inclusive space where people’s lived experiences are not only heard but com
+- [content-chameleon – B2B продажі в Linkedin](https://www.content-chameleon.com) — # Ghostwriting on LinkedIn. # oN LinkedIn. Graphic elenement 4 chameleon 1. Every post is a chance to highlight your expertise and showcase your product. By growing your personal brand on LinkedIn, you attract a loyal audience that recommends you to others. And yes, most of our c
+
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Alex Hermann serves as the Chief Executive Officer and co-founder of Content Chameleon, an organization that specializes in creating AI-generated videos. His expertise lies in leveraging automation tools to produce content that garners attention while maintaining quality and relevance. Alex’s work with Content Chameleon is centered around developing effective communication strategies through video content, which are designed to engage audiences effectively.
+Alex Hermann is the Chief Executive Officer and co-founder of Content Chameleon, a company focused on B2B LinkedIn sales through content strategy. Alex specializes in creating personalized LinkedIn content that helps build strong personal brands for clients, ultimately aiming to generate leads in industries such as iGaming. His approach combines deep insights into content creation with a strategic understanding of how to leverage LinkedIn effectively to connect and sell to potential clients.
 
-Beyond his professional role at Content Chameleon, Alex Hermann is deeply committed to social causes such as mental health awareness and support for the Latinx community. He believes in breaking down cultural barriers that can prevent individuals from seeking help for their mental well-being. His advocacy work reflects a broader commitment to fostering an inclusive environment where people feel supported and understood, particularly within communities that might face unique challenges or stigmas.
+Alex cares deeply about both his professional work and therapeutic pursuits. He is committed to cultural sensitivity and mental health, holding a bachelor's degree in Psychology and pursuing further education in Marriage and Family Therapy. This dual focus reflects his desire to create inclusive spaces where individuals' unique experiences are valued and heard, whether he’s building professional networks through content or providing therapy that emphasizes empathy and deep understanding of diverse backgrounds.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

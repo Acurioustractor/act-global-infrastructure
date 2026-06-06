@@ -2,7 +2,7 @@
 name: Marilyn Laner
 lane: community
 storyteller_id: 6c4f306a-c376-4a5e-9c38-5db3748fae5e
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Marilyn Laner

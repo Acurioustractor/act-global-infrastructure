@@ -2,7 +2,7 @@
 name: Paul Kayne
 lane: community
 storyteller_id: 544a3bcf-8f8e-472c-a880-c5190c6180eb
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Paul Kayne

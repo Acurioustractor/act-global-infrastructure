@@ -2,7 +2,7 @@
 name: rebecca keeley
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # rebecca keeley
@@ -16,19 +16,19 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Rebecca Keeley is the Founder and CEO of Yarn Speech, which provides accessible speech pathology for children. She focuses on bridging gaps in allied health services. Her work aims to improve communication for those in need.
-- [Rebecca Keeley on minding the gap in allied health](https://www.johnmonash.com/rebecca-keeley-on-minding-the-gap-in-allied-health) — Rebecca is the Founder & CEO of Yarn Speech, a startup making speech pathology principles more accessible to children and their carers. She
-- [Rebecca Keeley - Founder & CEO of Yarn Speech | Speech Pathologist & Oxford MBA | Kenneth Myer Innovation Fellow | AMP IGNITE TomorrowMaker | 2024 Agrifutures ACT/NSW Rural Womens Award Winner | General Sir John Monash Scholar](https://au.linkedin.com/in/rebecca-keeley) — Rebecca Keeley
-Founder & CEO of Yarn Speech | Speech Pathologist & Oxford MBA | Kenneth Myer Innovation Fellow | AMP IGNITE TomorrowMaker | 2024 Agrifutures ACT/NSW Rural Womens Award Winner | General Sir John Monash Scholar
-Canberra, Australian Capital Territory, Australia
-500 c
-- [Innovative app supports families waiting years for speech therapy](https://womensagenda.com.au/business/entrepreneurs/the-new-app-providing-immediate-intervention-amid-massive-waitlists-for-speech-pathology) — Founded by Oxford-educated speech pathologist Rebecca Keeley, Yarn Speech is a first-of-its-kind digital solution transforming how Australian
+Rebecca Keeley is the Founder and CEO of Yarn Speech, focused on making speech pathology services accessible for children and their families. She aims to reduce long waitlists and improve allied health service delivery in Australia. Her work has been recognized with awards and fellowships.
+- [How Rebecca Keeley hopes to re-design allied health service ...](https://open.spotify.com/episode/7b58PYFi5mk6E8uliFquFO?autoplay=true) — Rebecca is the Founder & CEO of Yarn Speech, a startup helping to make basic speech pathology principles more accessible for children and their
 - [Rebecca Keeley's Post - LinkedIn](https://www.linkedin.com/posts/rebecca-keeley_inspirationalwomen-inspirationalwomen-activity-7235080852139843585-386y) — Rebecca developed YARN after recognising a problem in how Australia delivered speech pathology services and in her first job out of university
+- [About Us | Yarn Speech](https://www.yarnspeech.com/about-us) — # About Us. We are a team of clinicians, developers, designers and yappers who are passionate about making allied health more accessible for Australian families. After nearly 10 years working as a 'speechie' in rural Australia,. can have on Australian speech pathologists and fami
+- [Rebecca Keeley on minding the gap in allied health - General Sir John Monash Foundation](https://www.johnmonash.com/rebecca-keeley-on-minding-the-gap-in-allied-health) — # Rebecca Keeley on minding the gap in allied health. In this episode of *The Scholars’ Podcast*, we speak with Rebecca Keeley (2022 Tim Fischer John Monash Scholar) speech pathologist and rural health advocate, about re-designing allied health service delivery in Australia. Rebe
+
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Rebecca Keeley is the Founder and CEO of Yarn Speech, an organization dedicated to making speech pathology more accessible for children. With a background as a speech pathologist and an Oxford MBA, Rebecca has innovated by creating digital solutions that bridge gaps in allied health services. Her work aims to ensure that children who need support with communication can access it without the long wait times typically associated with traditional therapy methods.
+Rebecca Keeley is the Founder and CEO of Yarn Speech, a company dedicated to making speech pathology services more accessible for children and their families across Australia. Her journey into this field began with her experience as a 'speechie' working in rural areas where she observed significant challenges in accessing quality allied health care. Through Yarn Speech, Rebecca aims to address these issues by focusing on reducing long waitlists and improving the overall delivery of speech pathology services.
 
-Rebecca cares deeply about ensuring equitable access to healthcare services for all children, particularly those from rural and underserved communities. She is passionate about leveraging technology to bring speech pathology principles into homes and schools, empowering families and carers to provide much-needed support. Through her various recognitions and awards, including being a Kenneth Myer Innovation Fellow and an AMP IGNITE TomorrowMaker, it's clear that Rebecca prioritizes innovation and community impact in her work.
+Rebecca cares deeply about making basic speech pathology principles accessible and ensuring that children and their families can receive timely support without barriers. Her work highlights a commitment to bridging gaps in allied health service delivery, particularly for those in remote or underserved areas. This passion has not only driven her professional endeavors but also earned her recognition through awards and fellowships, reflecting the significant impact of her efforts on both the field of speech pathology and the families she serves.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

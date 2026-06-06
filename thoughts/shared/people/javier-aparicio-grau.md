@@ -2,7 +2,7 @@
 name: Javier Aparicio Grau
 lane: community
 storyteller_id: ee202ace-d18b-4d9f-bf2a-c700eb3480fa
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Javier Aparicio Grau

@@ -2,7 +2,7 @@
 name: Elaine Everett
 lane: community
 storyteller_id: 9598d1fc-fce6-4380-91db-551604cf60ba
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Elaine Everett

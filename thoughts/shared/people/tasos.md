@@ -2,7 +2,7 @@
 name: Tasos
 lane: community
 storyteller_id: 83373d53-fda1-4306-9ec2-69ea0c590b59
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Tasos

@@ -2,7 +2,7 @@
 name: Hello Gulö
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Hello Gulö
@@ -16,16 +16,19 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Gulö Jadi PNS focuses on direct care work, emphasizing training and advanced roles. The peripheral nervous system (PNS) connects the brain and spinal cord to limbs and organs, enabling movement and sensory information relay.
-- [Elevating the Role of the Direct Care Worker (Section 3) - PHI](https://www.phinational.org/caringforthefuture/directcareworkisrealwork) — This report describes the roles and responsibilities of direct care workers, with an eye towards training, advanced roles, and care integration.
-- [Peripheral Nervous System (PNS) Explained - Nature's Best](https://www.naturesbest.co.uk/our-blog/peripheral-nervous-system-pns) — Your peripheral nervous system relays information from your senses to your brain. It carries signals that enable you to move your muscles.
-- [Peripheral Nervous System: Function, Conditions, and More](https://resources.healthgrades.com/right-care/brain-and-nerves/peripheral-nervous-system) — Your peripheral nervous system (PNS) is a network of nerves connected to your spine and brain. They are responsible for several important functions.
-- [Peripheral Nervous System: What It Is and How It Works](https://www.verywellmind.com/what-is-the-peripheral-nervous-system-2795465) — The peripheral nervous system (PNS) operates outside the brain and spinal cord, connecting these central structures to your body's limbs, organs, and skin. It
+Gulö Jadi PNS is a platform for inspiring talks led by youth. It focuses on education and inspiration. The organization aims to share stories that motivate and uplift.
+- [Jadi PNS | LinkedIn](https://www.linkedin.com/company/jadipns) — Jadi PNS is the world's largest and leading platform that delivers informative, educative, and inspiring virtual talk shows predominantly led by youth.
+- [In 2008, he initiated The Seven (7) Summits of Indonesia ... - Instagram](https://www.instagram.com/reel/C99tZt8P9pV) — jadi jadiPNS PNS 매체 ΤΗ Everyone has α story to inspire. ... HELLO GULÖ Do you ever see that bleeds red the Dragon's Blood Tree 9
+- [Jadi PNS on Instagram: ". Ivan Kabul (@ivanliekabul) is a talented ...](https://www.instagram.com/p/DBqtfCYTzNE) — Ivan Kabul (@ivanliekabul) is a talented actor, model, presenter, and educator who brings passion and creativity into each role he undertakes.
+- [Peripheral Nervous System (PNS): What It Is & Function](https://my.clevelandclinic.org/health/body/23123-peripheral-nervous-system-pns) — # Peripheral Nervous System (PNS). Your peripheral nervous system (PNS) is one of two main parts of your body’s nervous system. Your PNS feeds information into your brain from most of your senses. Your PNS also delivers signals that your brain uses to control vital, unconscious p
+
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Hello Gulö is the founder of Jadi PNS, an organization that focuses on enhancing the roles and responsibilities of direct care workers through comprehensive training and development programs aimed at advancing their capabilities within the healthcare sector. While the name "Jadi PNS" may suggest a focus related to the peripheral nervous system (PNS), there seems to be no explicit link in the provided context between Gulö’s work and the biological functions of the PNS, which connects the brain and spinal cord to limbs and organs, facilitating movement and sensory information relay. Jadi PNS appears to prioritize elevating direct care workers' statuses by equipping them with more advanced roles within their field.
+Hello Gulö is the founder of Jadi PNS, a platform dedicated to sharing inspiring talks led by young individuals. Through this initiative, Gulö aims to create an environment where youth can share their stories and insights on education and personal growth. The organization has grown into what it claims to be the world’s largest and leading platform for virtual talk shows that are both educational and motivational. One of the notable initiatives Gulö launched is "The Seven (7) Summits of Indonesia," which suggests an interest in adventure, exploration, and possibly community building through these endeavors.
 
-Gulö seems to be deeply committed to improving the quality of life for individuals receiving care through empowering those who provide it directly. This dedication is rooted in a belief that well-trained and supported caregivers can significantly enhance patient outcomes and overall satisfaction within healthcare settings. It is evident that Gulö cares about creating systemic change within direct care roles, aiming to integrate these positions more effectively into the broader healthcare system, thereby ensuring better support for those needing care. The emphasis on training and advanced roles suggests a vision where direct care workers are recognized not just as caregivers but also as integral parts of a professional healthcare team.
+Gulö seems to care deeply about providing a stage for youth voices and fostering an atmosphere where stories can inspire and uplift others. The platform Jadi PNS serves as a medium for diverse talents like Ivan Kabul, who is described as an actor, model, presenter, and educator. Gulö’s work reflects a commitment to empowering young people and giving them the opportunity to share their experiences and insights, potentially influencing positive change in their communities and beyond.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

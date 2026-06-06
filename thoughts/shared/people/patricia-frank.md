@@ -2,7 +2,7 @@
 name: Patricia Frank
 lane: community
 storyteller_id: 03de1825-cf60-47fa-91d3-525879b9b9bb
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Patricia Frank

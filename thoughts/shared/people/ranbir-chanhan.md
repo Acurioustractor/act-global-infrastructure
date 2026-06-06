@@ -2,7 +2,7 @@
 name: Ranbir Chanhan
 lane: community
 storyteller_id: 2602c2b2-de87-420c-9e0b-6b1d0d2b90cd
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Ranbir Chanhan

@@ -2,7 +2,7 @@
 name: pekeri ruska
 lane: supporter
 warmth: 2
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # pekeri ruska
@@ -16,8 +16,8 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Pekeri Ruska is a research fellow at the ARC Centre of Excellence for Indigenous Futures, focusing on Indigenous policy and community-led research. The Centre aims to transform Indigenous futures through innovative, evidence-based research. They emphasize self-determination and legislative reform for Indigenous Australians.
-- [Home - ARC Centre of Excellence for Indigenous Futures](https://indigenous-futures.org) — ARC Centre of Excellence for Indigenous Futures ARC Centre of Excellence for Indigenous Futures. # Transformational Indigenous and community led research. Our **AIM** as Indigenous scholars is to transform the lives of Aboriginal and Torres Strait Islander People through an innov
+The ARC Centre of Excellence for Indigenous Futures focuses on Indigenous-led research and development. It aims to advance Indigenous futures through collaboration and innovation. Pekeri Ruska is a research fellow there.
+- [Pekeri Ruska](https://www.griffith.edu.au/advancement/notable-alumni/pekeri-ruska) — + Future student enquiries 1800 677 728. + International future students +61 7 3735 6425. + Current students 1800 154 055 +61 7 5552 8811. + General enquiries 07 3735 7111. Home > Advancement > Notable Alumni > Pekeri Ruska. # Pekeri Ruska. + Tell us how you met. ## Community foc
 - [Pekeri Ruska - x - ARC Centre of Excellence for Indigenous Futures](https://www.linkedin.com/in/pekeri-ruska-10940551) — Pekeri Ruska
 x
 Brisbane City, Queensland, Australia
@@ -38,13 +38,22 @@ Australia
 
 Education
 The U
-- [People - ARC Centre of Excellence for Indigenous Futures](https://indigenous-futures.org/about/people) — ARC Centre of Excellence for Indigenous Futures ARC Centre of Excellence for Indigenous Futures. The team of Chief Investigators and Partner Investigators are leading experts in their fields from across Australia and around the world, bringing a remarkable track record to the Cen
-- [Atlantic Fellows | Pekeri Ruska](https://www.atlanticfellows.org/bio/pekeri-ruska?3e81f90e_page=18&ce98e145_page=2&d6159362_page=17) — Research fellow, ARC Centre of ... and Grow | Ensuring all First Nations peoples of today and tomorrow are strong and proud of their identity, and have access to land, culture and Goenpul knowledge systems .
+- [Atlantic Fellows | Pekeri Ruska](https://www.atlanticfellows.org/bio/pekeri-ruska) — Title: Atlantic Fellows | Pekeri Ruska
+Research fellow, ARC Centre of Excellence for Indigenous Futures, The University of Queensland; co-founder and director, Goompi Projects and Goompi Give and Grow. Lorem ipsum dolor sit amet, consectetur adipiscing elit. ##### The Atlantic Fe
+- [News & Events - ARC Centre of Excellence for Indigenous Futures](https://indigenous-futures.org/news-events) — ### ARC Indigenous Discovery Grant for IFC Researchers. Today MMEIC signed a collaborative partnership agreement with the ARC Centre of Excellence for Indigenous Futures,. Congratulations to Indigenous Futures Centre Elder Scholar, Distinguished Professor Aileen Moreton-Robinson,
+
+## Shared history — from the spine
+**2 emails** · first 2025-12-18 · last 2025-12-18
+
+- 2025-12-18 → Re: Dscript question
+- 2025-12-18 ← Dscript question
 
 ## Understanding — drafted
-Pekeri Ruska is a dedicated Research Fellow at the ARC Centre of Excellence for Indigenous Futures, an organization that focuses on transforming the lives of Aboriginal and Torres Strait Islander peoples through innovative research. Her work centers around Indigenous policy and community-led initiatives, emphasizing self-determination and legislative reform to support Indigenous Australians. Pekeri’s role involves conducting critical research that aims to provide evidence-based solutions to improve the future for Indigenous communities in Australia.
+Pekeri Ruska is a Research Fellow at the ARC Centre of Excellence for Indigenous Futures, an organization dedicated to advancing Indigenous-led research and development. Based in Brisbane City, Queensland, Australia, Pekeri’s work likely focuses on fostering collaboration and innovation that aims to shape better futures for Indigenous communities. While specific details about their current projects are limited, it is evident that their role involves contributing to the overarching mission of promoting Indigenous knowledge and sustainability.
 
-Pekeri appears to care deeply about the well-being and empowerment of Indigenous peoples, particularly focusing on how policies can be shaped to better serve these communities. She values community-led initiatives and seeks to ensure that First Nations people have access to their cultural heritage, land, and traditional knowledge systems like Goenpul. Her work is guided by a strong commitment to self-determination and the belief in the importance of Indigenous voices leading research and policy-making processes.
+Pekeri Ruska seems to care deeply about community-focused initiatives and leveraging research to create meaningful impact in Indigenous communities. This includes an interest in collaboration with other institutions and leaders in the field. Their involvement as a co-founder and director at Goompi Projects and Goompi Give and Grow underscores their commitment to projects that benefit Indigenous futures through education, empowerment, and sustainability.
+
+In our shared work together, we have primarily focused on discussing technical questions related to Dscript, which appears to be a tool or platform used in research activities. Our interactions have been brief but direct, addressing specific queries Pekeri had regarding the use of Dscript within their ongoing projects at the ARC Centre of Excellence for Indigenous Futures.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

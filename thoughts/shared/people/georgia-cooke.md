@@ -1,31 +1,38 @@
 ---
-name: Georgia Cooke
+name: georgia cooke
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
-# Georgia Cooke
-*Engagement & Partnerships Manager, Green Music Australia*  
+# georgia cooke
+  
 
 ## Soil — institutional ground (CivicGraph)
-- **Org:** Green Music Australia (Engagement & Partnerships Manager)
-- **Connected orgs:** Green Music Australia
+- **Org:** —
+- **Connected orgs:** —
 - **Boards / roles:** —
 - **Government influence:** — · **Indigenous affiliation:** —
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Georgia Cooke works for Green Music Australia, focusing on environmental issues and climate change. She is also the Engagement & Partnerships Manager. Her role emphasizes the intersection of music and sustainability.
-- [Georgia Cooke - Green Music Australia](https://www.greenmusic.org.au/georgia_cooke) — Alongside working for Green Music, she is currently Board Chair for renewable energy charity CORENA (Citizens Own Renewable Energy Network Australia).
-- [Georgia Cooke's Post - LinkedIn](https://www.linkedin.com/posts/georgia-cooke-687a6561_its-been-a-big-week-at-green-music-australia-activity-7295675268587732992-g3cA) — It's been a big week at Green Music Australia! We announced Creative Climate, a new peak body for arts and climate in Australia.
-- [About Us - The Environmental Music Prize](https://environmentalmusicprize.com/about-us) — Georgia is a lifelong music fan who is passionate about the environment. Alongside her role as Engagement & Partnerships Manager at Green Music Australia, she
-- [Georgia Cooke Music](https://www.georgiacookemusic.com) — Home · Biography · Compositions · Recordings · Bespoke Songs · The Silver Pencils · Gallery · Contact. Georgia Cooke. © 2013 Georgia Cooke.
+Georgia Cooke is a publicist, project officer, and board chair focused on climate action and community resilience. She works for Ashurst, Remote Control Records, and the ODI. Her key roles emphasize professional services, music, and climate initiatives.
+- [Georgia Cooke - Ashurst](https://www.ashurst.com/en/people/georgia-cooke) — Georgia is a recruitment specialist with over 10 years working in professional services, including the legal sector. Prior to recruitment, Georgia worked as a
+- [Georgia Cooke - LinkedIn - Mesh](https://me.sh/profile/georgia-cooke-820a0b46) — Georgia Cooke is a publicist at Remote Control Records, an Australian-based record label. She has been working in the music industry for several years,
+- [Georgia Cooke, Board Chair of @corena_fund, leads ... - Instagram](https://www.instagram.com/p/DN1nNpO4ouV) — Georgia Cooke, Board Chair of @corena_fund, leads with passion for climate action and community resilience. With experience spanning
+- [Georgia Cooke | ODI: Think change](https://odi.org/en/profile/georgia-cooke) — Georgia works as project officer for IEDG and manages the Supporting Economic Transformation (SET) programme. Georgia joined ODI from 'What Works' centre
+
+## Shared history — from the spine
+**1 emails** · first 2026-03-04 · last 2026-03-04
+
+- 2026-03-04 ← Re: TFN 6 month impact update: Healthy People Healthy Planet
 
 ## Understanding — drafted
-Georgia Cooke is an Engagement & Partnerships Manager at Green Music Australia, where she works to address environmental issues and climate change through the lens of music and sustainability. Her role involves fostering relationships that can lead to more sustainable practices within the music industry. Additionally, she holds a position as Board Chair for CORENA (Citizens Own Renewable Energy Network Australia), furthering her commitment to renewable energy initiatives.
+Georgia Cooke is a multifaceted professional with roles in public relations, project management, and climate action leadership. At Ashurst, she works as a recruitment specialist leveraging over ten years of experience in the legal sector. Simultaneously, Georgia serves as a publicist at Remote Control Records, an Australian record label, combining her passion for music with her expertise in communication. She is also actively involved in community resilience and climate action initiatives through her role as the Board Chair of @corena_fund. Additionally, Georgia contributes to global economic development projects at the Overseas Development Institute (ODI) as a project officer.
 
-Georgia is deeply passionate about both music and environmental sustainability, evident from her involvement in The Environmental Music Prize and her own musical compositions. She cares about creating meaningful connections between art and the environment, aiming to inspire change through collaborative efforts and peak bodies like Creative Climate, which she helped announce at Green Music Australia. Through her work, Georgia strives to make a positive impact on the planet by engaging the music community in sustainable practices and raising awareness about climate issues.
+Georgia seems to care deeply about fostering community resilience and addressing climate change issues. Her work spans from advocating for sustainable practices within corporate environments to promoting cultural initiatives that can inspire broader social changes. She brings her skills in communication and leadership to support these causes, aiming to build more resilient communities capable of adapting to the challenges posed by climate change.
+
+In our shared work with Georgia, we have focused on tracking and updating progress related to a specific initiative called "Healthy People Healthy Planet." This suggests that our collaboration has centered around evaluating the impact of efforts aimed at enhancing both environmental health and human well-being over a six-month period.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

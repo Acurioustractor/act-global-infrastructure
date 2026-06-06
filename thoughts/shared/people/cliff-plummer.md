@@ -2,7 +2,7 @@
 name: Cliff Plummer
 lane: community
 storyteller_id: e0da3338-1a38-4b5a-9a26-73c9873b9242
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Cliff Plummer

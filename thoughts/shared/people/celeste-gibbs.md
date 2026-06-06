@@ -2,7 +2,7 @@
 name: Celeste Gibbs
 lane: community
 storyteller_id: 5887f010-4fb0-4b08-a90f-fb5dadae90e9
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Celeste Gibbs

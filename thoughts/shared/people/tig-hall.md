@@ -2,7 +2,7 @@
 name:  Tig Hall
 lane: community
 storyteller_id: a13e0367-a438-4577-9e41-72fe0aafbf2a
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 #  Tig Hall

@@ -2,7 +2,7 @@
 name: Quentin Flannery
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Quentin Flannery
@@ -16,16 +16,31 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Quentin Flannery is a non-executive director of Omega Oil and Gas Limited, with a focus on investment and corporate leadership in global commodity markets. He is also the Chief Investment Officer of Ilwella Pty Ltd, the family office of the Flannery family. His role emphasizes strategic investments and financial oversight.
-- [Quentin Flannery | Non-Executive Director | Omega Oil & Gas Limited](https://www.marketindex.com.au/asx/directors/quentin-flannery) — Mr Flannery is a resources investor and corporate leader with over 20 years' experience in global commodity markets and a track record of funding and
-- [Leadership - Omega Oil & Gas](https://omegaoilandgas.com.au/about-us/leadership) — Quentin is the Chief Investment Officer of Ilwella Pty Ltd, the investment vehicle of the Flannery family office. He holds a Bachelor of International Business
-- [Audited Financial Statements and Annual Report - Omega Oil and ...](https://www.listcorp.com/asx/oma/omega-oil-and-gas-limited/news/audited-financial-statements-and-annual-report-3089984.html) — Omega Oil & Gas Limited Directors' report 30 June 2024 8 Name: Quentin Flannery Title: Non-Executive Director Experience and expertise: Quentin
-- [Omega Oil & Gas Limited (ASX:OMA) - Changes in Directors' Interest](https://www.intelligentinvestor.com.au/shares/asx-oma/omega-oil-and-gas-limited/change-in-directors-interest) — Change of shareholding announcements for Omega Oil & Gas Limited (OMA) ; 7 Oct 2025, FLANNERY, Quentin, Buy, Indirect Shares, $640,000 ; 10 Sep 2025, HARRISON,
+Quentin Flannery is a Non-Executive Director of Omega Oil and Gas Limited and Chief Investment Officer of Ilwella Pty Ltd, the family investment firm of the Flannery family. He focuses on strategic investments and oversees trading for family companies. His role emphasizes financial growth and corporate governance.
+- [Financial Report 30 June 2022 - Omega Oil and Gas ...](https://www.listcorp.com/asx/oma/omega-oil-and-gas-limited/news/financial-report-30-june-2022-2784055.html) — *Quentin Flannery (Director) is a Director of Ilwella Pty Ltd. The services relate to an office lease and part-time administrative staff
+- [Leadership](https://omegaoilandgas.com.au/about-us/leadership) — Quentin is the Chief Investment Officer of Ilwella Pty Ltd, the investment vehicle of the Flannery family office. He holds a Bachelor of International Business
+- [Quentin  Flannery | Non-Executive Director | Omega Oil & Gas Limited](https://www.marketindex.com.au/asx/directors/quentin-flannery) — # Quentin Flannery | Non-Executive Director | Omega Oil & Gas Limited. Omega Oil & Gas Limited | Non-Executive Director. Mr Flannery is the Chief Investment Officer of Ilwella Pty Ltd, the investment vehicle of the Flannery family office. | Image 3: OMA OMA Omega Oil & Gas Limite
+- [Quentin Flannery - Non-Executive Director Omega Oil and Gas Limited](https://au.linkedin.com/in/quentin-flannery) — Quentin Flannery
+Non-Executive Director Omega Oil and Gas Limited
+Greater Sydney Area
+500 connections, 2556 followers
+
+
+About
+As Director of several family companies overseeing strategy and trading for the…
+
+
+Experience
+Non-Executive Director
+[Omega Oil and Gas Limited](https://a
+
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Quentin Flannery is a non-executive director at Omega Oil and Gas Limited, where he brings over two decades of experience in global commodity markets to the table. His work focuses on strategic investments and financial oversight, leveraging his expertise to guide the company’s direction and ensure its success within competitive market environments. Additionally, Quentin serves as the Chief Investment Officer for Ilwella Pty Ltd, the family office of the Flannery family, further extending his influence in investment management.
+Quentin Flannery is a Non-Executive Director at Omega Oil and Gas Limited, where he contributes to strategic decision-making and corporate governance. Additionally, he serves as the Chief Investment Officer of Ilwella Pty Ltd, a family investment firm that oversees various investments and financial activities for the Flannery family. His professional background includes managing strategic investments and directing trading operations for several family companies, highlighting his expertise in finance and business strategy.
 
-Quentin appears to be deeply invested in the realms of finance and corporate leadership. His extensive experience and focus on strategic investments suggest that he is highly concerned with long-term financial stability and growth opportunities within the commodity sector. His involvement at both Omega Oil and Gas Limited and Ilwella Pty Ltd indicates a commitment to making well-informed, impactful decisions that benefit both corporate entities and his family’s investment portfolio. His actions reflect a passion for driving value through strategic investments and maintaining robust financial oversight.
+Quentin appears to care deeply about financial growth and corporate governance, emphasizing these aspects both at Omega Oil and Gas Limited and within Ilwella Pty Ltd. He likely values the stability and success of the businesses under his purview, ensuring they operate with integrity and strategic foresight. His educational background in international business suggests he has a global perspective on finance and investments, which informs his decision-making processes.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

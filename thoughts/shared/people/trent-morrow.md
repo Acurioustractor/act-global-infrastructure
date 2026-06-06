@@ -2,7 +2,7 @@
 name: Trent Morrow 🚀
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Trent Morrow 🚀
@@ -16,7 +16,8 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Trent Morrow is a senior sales professional with Microbiome Masterminds, focusing on leveraging Zenbiome™ for patient outcomes. He organized the "Microbiome Masterminds" event and shares insights on microbiome products. His work emphasizes business excellence and patient care.
+Trent Morrow leads Microbiome Masterminds, focusing on health, wellness, and organizational growth. He hosts events like the "Microbiome Masterminds" gala. His work emphasizes networking and consultancy.
+- [Trent Morrow (@microbiomemasterminds) - Instagram](https://www.instagram.com/microbiomemasterminds) — Dedicated to successful results with focus on health, wellness, nutrition, supplementation, fitness, marketing, consultancy, friendship, networking.
 - [Trent Morrow 🚀 - Microbiome Masterminds](https://www.linkedin.com/in/trentvmorrow) — Trent Morrow 🚀
 Microbiome Masterminds
 Atlanta, Georgia, United States
@@ -31,14 +32,16 @@ Experience
 Microbiome Masterminds
 [Microbiome Masterminds](N/A)  
 N/A - Pre
-- [Photo by Trent Morrow (@microbiomemasterminds) · August 10, 2020](https://www.instagram.com/p/CDs6Qh4non5) — ✓ Drive business excellence ✓ Support you in being your very best and delivering life-changing results every single day ✨ We would love to see you at the
-- [The latest Microbiome Masterminds gathering delivered another ...](https://www.linkedin.com/posts/trentvmorrow_the-latest-microbiome-masterminds-gathering-activity-7404726897332379649-prsy) — His depth of knowledge illuminated how the Zenbiome™ product range can be leveraged to support patient outcomes across mood, stress resilience, immune function
 - [Trent Morrow 🚀's Post - LinkedIn](https://www.linkedin.com/posts/trentvmorrow_recognition-acknowledgment-appreciation-activity-7264794784031035392-5pN_) — Thrilled to bring together the inaugural “Microbiome Masterminds” End of Year Gala Event with more than 70 practitioners joining in the fun
+- [Trent Morrow, LCSW - L & B Counseling](https://landbcounseling.net/trent-morrow) — L & B Counseling offers comprehensive mental wellness care for children, teens, and adults in a warm, client-centered environment.
+
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Trent Morrow is a senior sales professional and founder of Microbiome Masterminds, an organization focused on leveraging the potential of Zenbiome™ products to enhance patient outcomes. Based out of Atlanta, Georgia, Trent has built a network through his work, connecting with over 500 professionals and engaging nearly 20,000 followers. He is particularly known for organizing events that bring together practitioners in the field to share insights on microbiome-related health solutions.
+Trent Morrow is the founder of Microbiome Masterminds, an organization that emphasizes health, wellness, and organizational growth. Based out of Atlanta, Georgia, he leverages his extensive background as a senior sales professional to accelerate growth within his network. Trent hosts significant events like the "Microbiome Masterminds" gala, which brought together over 70 practitioners in its inaugural year. His presence on social media platforms such as Instagram and LinkedIn indicates a strong focus on community building and sharing knowledge about health topics, including nutrition, supplementation, fitness, and mental wellness.
 
-Trent seems to care deeply about both business excellence and patient well-being. His efforts are geared towards not only driving growth within his organization but also ensuring that those who use Zenbiome™ products can achieve better results related to mood, stress resilience, and immune function. Through events like the "Microbiome Masterminds" gathering, Trent fosters a community of practitioners dedicated to advancing knowledge in this field, with an emphasis on delivering life-changing outcomes for patients.
+Trent appears to care deeply about fostering connections and promoting well-being through networking and consultancy. He values the importance of friendship and collaboration in achieving successful outcomes for individuals and organizations alike. His work suggests that he is passionate about integrating aspects of physical and mental health into his broader mission of supporting growth and development within his community. Additionally, his affiliation with L & B Counseling indicates a dedication to mental wellness care, showing a holistic approach to well-being encompassing both the microbial and psychological dimensions of human health.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

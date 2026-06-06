@@ -2,7 +2,7 @@
 name: Neilson Naje
 lane: community
 storyteller_id: 0a8f38b8-1e75-4374-b61a-126a8636e364
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Neilson Naje

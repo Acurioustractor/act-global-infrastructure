@@ -2,7 +2,7 @@
 name: Adam Zammit
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Adam Zammit
@@ -16,8 +16,9 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Adam Zammit is a General Manager at Crown Resorts, focusing on nightlife, entertainment, bars, and lounges. He aims to redefine premium entertainment and hospitality in Australia. His work emphasizes creating memorable experiences and revitalizing nightlife.
+Adam Zammit is the General Manager of Nightlife, Entertainment, Bars, and Lounges at Crown Resorts. He focuses on revitalizing nightlife and entertainment experiences. Crown Resorts is investing heavily in innovation and transformation.
 - [#crownresorts #crownmelbourne #crownsydney #crownperth #integratedresorts… | Adam Zammit | 47 comments](https://www.linkedin.com/posts/adam-zammit-9745937_crownresorts-crownmelbourne-crownsydney-activity-7341712108109086721-5zU-) — A decade later, I’m back in the Crown family, this time as GM of Nightlife, Entertainment, Bars and Lounges at Crown. Crown is in the thick of an exciting transformation, redefining what premium entertainment and hospitality look like in Australia. Massive credit to Group CEO Dav
+- [20+ "Adam Zammit" profiles - LinkedIn](https://www.linkedin.com/pub/dir/Adam/Zammit) — Adam Zammit. Driven professional, passionate about Digital Signalling & Telecommunications in the Railway industry. Dedicated to achieving customer and
 - [Adam Zammit - Crown Resorts](https://au.linkedin.com/in/adam-zammit-9745937) — Adam Zammit
 Crown Resorts
 South Wharf, Victoria, Australia
@@ -40,13 +41,15 @@ Education
 UNSW
 N/A
 1993 - 1
-- [Adam Zammit Email & Phone Number | Crown Resorts General ...](https://rocketreach.co/adam-zammit-email_5265889) — Adam Zammit, based in South Wharf, VIC, AU, is currently a General Manager, Nightlife, Entertainment, Bars and Lounges at Crown Resorts. Adam Zammit brings
-- [Adam Zammit's Post - LinkedIn](https://www.linkedin.com/posts/adam-zammit-9745937_there-is-some-seriously-hot-smoke-on-the-activity-7458116236699336704-almt) — Adam Zammit's Post. View profile for Adam Zammit. Adam Zammit. General Manager, Nightlife, Entertainment, Bars and Lounges.
+- [In a world being taken over by AI Crown is investing in ALIVE.](https://www.linkedin.com/posts/adam-zammit-9745937_in-a-world-being-taken-over-by-ai-crown-is-activity-7431149933363253248-03DR) — A $200m overhaul of Crown Resorts Melbourne that will build 15 new bars and restaurants as well as Australia's first race car simulator, is
+
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Adam Zammit is a seasoned professional serving as the General Manager of Nightlife, Entertainment, Bars, and Lounges at Crown Resorts, one of Australia's leading hospitality companies. His role involves overseeing premium entertainment experiences across multiple venues in Melbourne, Sydney, and Perth. Adam has over two decades of experience in the hospitality industry and is recognized for his contributions to revitalizing nightlife scenes within integrated resorts.
+Adam Zammit serves as the General Manager for Nightlife, Entertainment, Bars, and Lounges at Crown Resorts. His role involves revitalizing nightlife experiences and entertainment offerings across various Crown properties in Melbourne, Sydney, and Perth. Under his leadership, there has been a significant emphasis on innovation, with Crown Resorts committing substantial resources to transform its venues into cutting-edge entertainment hubs that redefine premium hospitality standards in Australia.
 
-Adam appears to care deeply about creating engaging and memorable experiences that redefine premium entertainment and hospitality in Australia. He emphasizes the importance of innovation and transformation in the sector, aiming to make a significant impact on how people perceive and enjoy nightlife and entertainment. His passion lies in curating unique and vibrant environments that resonate with guests and keep them coming back for more.
+Adam appears to be deeply committed to engaging and exciting guests through dynamic and immersive experiences. He is passionate about leveraging new technologies and creative concepts to enhance the nightlife scene and ensure it remains vibrant and relevant for a modern audience. His dedication to transforming Crown’s offerings indicates his care for not just business growth but also creating memorable and enriching experiences that add value to people's lives, beyond mere entertainment.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

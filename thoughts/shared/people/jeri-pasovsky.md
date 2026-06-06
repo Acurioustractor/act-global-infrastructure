@@ -2,7 +2,7 @@
 name: Jeri Pasovsky
 lane: community
 storyteller_id: 916de35a-7a6a-4c49-9bf6-8c2f9e0c34fa
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Jeri Pasovsky

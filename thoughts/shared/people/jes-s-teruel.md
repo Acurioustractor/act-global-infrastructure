@@ -2,7 +2,7 @@
 name: Jesús Teruel
 lane: community
 storyteller_id: e99b08c7-6ac0-4d01-9623-db0ca03f81c5
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Jesús Teruel

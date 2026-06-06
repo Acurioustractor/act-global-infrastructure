@@ -2,7 +2,7 @@
 name: Sat Kaur
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Sat Kaur
@@ -16,7 +16,7 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Sat Kaur's A Little Architecture Studio focuses on compassionate, regenerative design. It emphasizes community wellbeing and ecological repair. The studio promotes slow architecture and sustainable interventions.
+Sat Kaur's A Little Architecture Studio focuses on slow architecture, community wellbeing, and ecological regeneration. The studio emphasizes compassionate, intuitive design and nurtures emerging architects. It aims to create a better future through regenerative design.
 - [Sat Kaur - ‘Little’ & ‘Slow’ Architect: Mostly happy, reasonably sane, possibly ‘different’ architectural design tutor. It starts and ends with compassion. - A little Architecture Studio](https://uk.linkedin.com/in/kaursat) — Sat Kaur
 ‘Little’ & ‘Slow’ Architect: Mostly happy, reasonably sane, possibly ‘different’ architectural design tutor. It starts and ends with compassion.
 United Kingdom
@@ -25,14 +25,17 @@ United Kingdom
 
 About
 RIBA | ARB | MSc | PGDipArch Architecture of the 'sym(Bio)scene A littl
-- [Sat Kaur - alittlearchitecturestudio - LinkedIn](https://www.linkedin.com/posts/kaursat_alittlearchitecturestudio-activity-7454043008276008961-DGPm) — 'Little' & 'Slow' Architect: Mostly happy, reasonably sane, possibly 'different' Lecturer. Fluent in 'silliness': seriously groundbreaking
-- [Clean Coder Blog](https://blog.cleancoder.com/uncle-bob/2016/01/04/ALittleArchitecture.html) — I want to become a Software Architect. I want to lead a team and make all the important decisions about databases and frameworks and web-servers and all that stuff. > *Oh. Well, then you don’t want to become a Software Architect after all.*. > *That’s fine, but you didn’t list th
-- [For the role of the architect to survive the AI era it is key that we use ...](https://www.instagram.com/reel/DTi-gzjD59s) — The role of the architect is to provide the best solution to the architectural problem of the client. In the era of AI it makes little sense
+- [Sat Kaur - alittlearchitecturestudio](https://www.linkedin.com/posts/kaursat_alittlearchitecturestudio-activity-7454043008276008961-DGPm) — 'Little' & 'Slow' Architect: Mostly happy, reasonably sane, possibly 'different' Lecturer. Fluent in 'silliness': seriously groundbreaking
+- [About | Little Diversified Architectural Consulting Firm](https://www.littleonline.com/about) — ### **Our Firm**Our Firm. Creating a better future for people. We’re a diverse, transdisciplinary design firm delivering results beyond architecture. We care about our clients and each other, and we do our best to spark a spirit of excitement and discovery in everyone around us. 
+- [April and May kept things moving. ...](https://www.instagram.com/reel/DZIRt_cCJMt) — Today, their journeys converge in a practice that balances professional expertise with academic rigor, shaping design that is thoughtful,
+
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Sat Kaur, as the Director of A Little Architecture Studio Ltd, has built a reputation for compassionate and regenerative design practices that prioritize community wellbeing and ecological sustainability. Her approach is centered around "slow architecture," emphasizing thoughtful and sustainable interventions over rapid development. This focus reflects her commitment to creating spaces that heal both people and the planet, distinguishing her work from more conventional architectural approaches. Based in the United Kingdom with an extensive network of 500 connections on LinkedIn, Sat Kaur also serves as a design tutor, sharing her unique perspective and fostering a new generation of architects who are mindful of their environmental impact.
+Sat Kaur serves as the Director at A Little Architecture Studio Ltd., an organization dedicated to slow architecture and community wellbeing. The studio's focus on ecological regeneration and compassionate design underscores Sat’s commitment to creating environments that are not only sustainable but also nurturing for individuals and communities alike. Through her work, Sat nurtures emerging architects, guiding them towards a future where architectural design plays a pivotal role in fostering healthier ecosystems and social connections.
 
-Sat Kaur seems to care deeply about the intersection of architecture with ecological sustainability and human health. Her emphasis on "compassion" in architectural design suggests that she values creating spaces that enhance quality of life for individuals while also considering the long-term health of ecosystems. This holistic approach goes beyond mere aesthetics or functionality, aiming to integrate buildings into their environments sustainably and promote a sense of community among those who use them. Through her work and teachings, Sat Kaur advocates for an architectural practice that is both thoughtful and impactful, contributing positively to society and the natural world.
+Sat Kaur appears to care deeply about the intersection of architecture with ecological sustainability and human wellbeing. Her approach is rooted in compassion and intuitive design principles that prioritize the long-term health and happiness of those who interact with her projects. She values creating spaces that are not just functional but also spiritually and emotionally uplifting, aiming for a holistic impact on both people and nature. This commitment to regenerative design reflects Sat’s broader goal of making architecture a force for positive change in the world.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

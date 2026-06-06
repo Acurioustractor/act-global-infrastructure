@@ -2,7 +2,7 @@
 name: HairChoice .
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # HairChoice .
@@ -16,16 +16,19 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-HairChoice focuses on providing high-quality, patient-centered care and supporting independent healthcare providers to enhance community health. They emphasize provider autonomy and community well-being. Their mission is to deliver effective, cost-efficient care.
-- [Leadership Team - Family Choice Healthcare](https://familychoicehealthcare.com/about/leadership-team) — * Family Choice In The Community. Steve is the driving force of Family Choice. His day-to-day role at the company is to set vision and direction and to oversee the overall operation. Prior to starting the company, Steve worked at several of large pharmaceutical companies in senio
-- [Your Choice Health Care, LLC Careers and Employment | Indeed.com](https://www.indeed.com/cmp/Your-Choice-Health-Care,-LLC) — Find out what works well at Your Choice Health Care, LLC from the people who know best. Get the inside scoop on jobs, salaries, top office locations,
-- [Principle Choice Home Healthcare - Great Place To Work](https://www.greatplacetowork.com/certified-company/7082914) — Our tailored services, which include skilled nursing, wound care, behavioral health, therapies, dietetic support, home health aides, medical social work, and
+HairChoice focuses on patient care and provider autonomy, aiming to deliver high-quality, cost-effective, patient-centered care. They support independent providers to reduce administrative burdens. Their mission is to empower providers for better community health outcomes.
 - [Careers - ACH](https://americanchoicehealthcare.com/careers) — At American Choice Healthcare (ACH), we’re more than a healthcare organization — we’re a movement driven by physicians, fueled by purpose, and built to protect what matters most: patient care and provider autonomy. We empower independent providers to do what they do best while de
+- [Working at Family Choice Health Care: 6 Reviews - Indeed](https://www.indeed.com/cmp/Family-Choice-Health-Care/reviews) — Family Choice Health Care is an exceptional company to work for if you have been assigned a permanent client/patient. However if you do not have a steady
+- [Leadership Team - Family Choice Healthcare](https://familychoicehealthcare.com/about/leadership-team) — * Family Choice In The Community. Steve is the driving force of Family Choice. His day-to-day role at the company is to set vision and direction and to oversee the overall operation. Prior to starting the company, Steve worked at several of large pharmaceutical companies in senio
+- [Working at Principle Choice Home Healthcare | Great Place To Work®](https://www.greatplacetowork.com/certified-company/7082914) — # Principle Choice Home Healthcare. Employees say this is a great place to work. At Principle Choice Home Healthcare, we build trust from the inside out. ## Company Culture at Principle Choice Home Healthcare. The employee experience below at Principle Choice Home Healthcare, com
+
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-HairChoice operates as an educator within the healthcare sector, working under the umbrella of Family Choice Healthcare, a private company dedicated to community health enhancement through high-quality, patient-centered services. Steve, one of its key leaders, drives the vision and direction of the organization with a focus on supporting independent healthcare providers. This support extends to offering tailored services such as skilled nursing, wound care, behavioral health, therapies, dietetic support, home health aides, medical social work, and more. The emphasis at HairChoice is not only on delivering effective and cost-efficient care but also ensuring that the autonomy of healthcare providers remains intact.
+HairChoice operates within the healthcare sector with a focus on patient care and provider autonomy, positioning itself as an organization that supports independent healthcare providers in reducing administrative burdens. This private company emphasizes high-quality, cost-effective care tailored to each patient's needs, ensuring that health outcomes are prioritized over profit margins. Through its mission, HairChoice aims to empower healthcare providers to deliver better community health results by giving them the tools and support they need.
 
-It appears that what they deeply care about is the well-being of their community through comprehensive healthcare services. By supporting independent healthcare providers, they aim to create a robust network capable of addressing diverse health needs efficiently and effectively. The organization values provider autonomy, suggesting a commitment to fostering an environment where healthcare professionals can deliver high-quality care without undue constraints. This approach underscores HairChoice's dedication to enhancing the overall quality of life for their patients by ensuring that healthcare is both accessible and personalized.
+From the provided context, it seems that the individuals associated with HairChoice and similar organizations such as American Choice Healthcare (ACH) and Family Choice Health Care care deeply about maintaining provider autonomy and patient-centric care. They value a supportive work environment where healthcare providers can focus on their core responsibilities without being overburdened by administrative tasks. The leadership team, exemplified by figures like Steve from Family Choice Healthcare, appears to be driven by the vision of enhancing community health outcomes through dedicated and autonomous provider networks. This commitment underscores an overarching care for both patients and professionals in the healthcare field.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

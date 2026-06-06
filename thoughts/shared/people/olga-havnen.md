@@ -2,7 +2,7 @@
 name: Olga Havnen
 lane: community
 storyteller_id: d113d379-46f6-4113-9ad6-be7f76463c20
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Olga Havnen

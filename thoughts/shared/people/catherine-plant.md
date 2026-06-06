@@ -2,7 +2,7 @@
 name: Catherine Plant
 lane: community
 storyteller_id: 4d9b807b-01ef-4585-aad3-51755a58b950
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Catherine Plant

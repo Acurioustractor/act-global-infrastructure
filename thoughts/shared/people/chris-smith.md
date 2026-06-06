@@ -2,7 +2,7 @@
 name: chris smith
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # chris smith
@@ -16,10 +16,9 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Chris Smith is a key strategist at EduGrowth, focusing on EdTech innovation and future skills. He leads strategy at ReadyTech. His work emphasizes corporate transformation and sustainability.
-- [Chris Smith - EduGrowth](https://edugrowth.org.au/staff/chris-smith) — Chris Smith is a leading expert in corporate strategy and innovation, with a focus on the future of work and skills transformation.
-- [EdTech Marketing — Delivering value to your customers | EduGrowth](https://edugrowth.org.au/2021/11/16/edtech-marketing-launchpad-essentials-insights-seminar) — Chris Smith. Head of Strategy and Innovation – ReadyTech. Chris is the head of Strategy and Innovation at ReadyTech, providing student
-- [‏#edtech #edtechcommunity #openecosystem‏ | ‏Marc Washbourne‏](https://ma.linkedin.com/posts/marcwashbourne_edtech-edtechcommunity-openecosystem-activity-7069199375570206720-Z8D4) — We thank EduGrowth: Australia's EdTech Hub for enabling this through the important work they do in connecting our community and leading
+Chris Smith is a key strategist at EduGrowth, focusing on EdTech innovation and workforce transformation. He leads strategy at ReadyTech and advises on digital transformation. His expertise spans emerging technologies and future skills.
+- [About Us - EduGrowth](https://edugrowth.org.au/about-us) — EduGrowth is Australia's education technology and innovation industry hub. Through connection and collaboration, we accelerate Australia's EdTech ecosystem
+- [Chris Smith | EduGrowth](https://edugrowth.org.au/staff/chris-smith) — Special Offer >  Become a Member >. #### Advisory Council Member. ### Chris Smith. Chris Smith is a leading expert in corporate strategy and innovation, with a focus on the future of work and skills transformation. As Head of Strategy and Innovation at ReadyTech, he has led initi
 - [Chris Smith - ReadyTech](https://au.linkedin.com/in/iamthechrissmith) — Chris Smith
 ReadyTech
 Sydney, New South Wales, Australia
@@ -40,11 +39,15 @@ N/A
 
 Education
 The London School of Economics and Political
+- [EdTech Marketing Through Partnerships - YouTube](https://www.youtube.com/watch?v=76CM6sNmkqA) — Collaboration in the EdTech ecosystem is the key to growth. By ... EduGrowth: Australia's EdTech & Innovation Hub edugrowth.org.au.
+
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Chris Smith is an advisor at EduGrowth, Australia’s EdTech Hub, where he plays a significant role as a key strategist focused on educational technology innovation and the future of skills. Additionally, Chris leads strategy at ReadyTech, another organization that emphasizes corporate transformation and sustainability. His expertise lies in corporate strategy and innovation, particularly within the realms of the future of work and skills transformation. Through his involvement with EduGrowth, he contributes to a vibrant EdTech community, fostering connections and promoting value-driven approaches towards education technology.
+Chris Smith operates as a strategic advisor within the field of education technology (EdTech) and workforce transformation, particularly through his role at EduGrowth, Australia’s hub for EdTech innovation. As an advisor to EduGrowth, he focuses on fostering innovation and digital transformation in educational technologies. Additionally, Chris leads strategy at ReadyTech, where his expertise in emerging technologies and the future of work plays a crucial role in shaping the company's direction. His professional background encompasses significant experience with corporate strategy and innovation, making him a key figure in both EdTech and broader workforce development initiatives.
 
-Chris appears to care deeply about shaping the educational landscape through technological advancements and sustainable practices. His interests in emerging technologies, workforce development, and sustainability reflect a commitment to preparing individuals for future challenges and opportunities. At heart, Chris seems driven by a desire to enhance corporate strategies that not only drive innovation but also ensure long-term viability and societal benefit. Through his work at both EduGrowth and ReadyTech, he aims to catalyze meaningful change in the educational technology sector, focusing on creating transformative solutions for learners and professionals alike.
+Chris Smith appears to care deeply about leveraging technology to transform educational practices and prepare the workforce for future challenges. His focus on emerging technologies, workforce readiness, and sustainability suggests that he is driven by a vision of using innovative solutions to address evolving societal needs. Through his work at EduGrowth and ReadyTech, Chris seeks to create impactful change through strategic partnerships and collaborative efforts within the EdTech ecosystem. His commitment to these areas reflects a broader interest in ensuring that both education and employment sectors can adapt effectively to technological advancements and environmental sustainability concerns.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

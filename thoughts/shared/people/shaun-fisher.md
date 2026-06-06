@@ -2,7 +2,7 @@
 name: Shaun Fisher
 lane: community
 storyteller_id: 5bb1c324-659b-4082-8999-52c68139e564
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Shaun Fisher

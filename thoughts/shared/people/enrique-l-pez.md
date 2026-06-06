@@ -2,7 +2,7 @@
 name: Enrique López
 lane: community
 storyteller_id: 9ee735fb-f9f7-48ae-bf1e-d814c9e8bfd2
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Enrique López

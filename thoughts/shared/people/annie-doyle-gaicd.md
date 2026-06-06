@@ -2,7 +2,7 @@
 name: Annie Doyle GAICD
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Annie Doyle GAICD
@@ -16,8 +16,8 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Annie Doyle GAICD is CEO of Civic Disability Services Limited, focusing on empowering individuals with disabilities to achieve their goals and be active community members. She cares about choice, control, and community integration for people with disabilities.
-- [Civic Disability Services on Instagram](https://www.instagram.com/reel/C0dyA2lJ_2u) — A huge thank you also must go to Annie Doyle GAICD, Civic CEO and ... GAIL BONNAR Disability Support Worker Every client has a role in the
+Annie Doyle is CEO of Civic Disability Services Limited, focusing on inclusive workplace practices and supporting individuals with disabilities. She has advocated for better economic participation for disabled individuals and faced scrutiny over a preventable death involving a service user.
+- [How Civic is helping organisations create inclusive workplaces - Civic](https://www.civic.org.au/improving-employment-opportunities-for-individuals-with-disability) — ## Improving employment opportunities for individuals with disability. Last week, Civic CEO, Annie Doyle, was invited by global company, Schindler Group, to share Civic’s expertise and approach to inclusive workplaces, with the aim to learn how to improve employment opportunities
 - [Annie Doyle GAICD - Civic Disability Services Limited](https://au.linkedin.com/in/annie-doyle-gaicd-80b61712) — Annie Doyle GAICD
 Civic Disability Services Limited
 Greater Sydney Area
@@ -41,12 +41,15 @@ Australian Catholic University
 N/A
 2020-08 - 2
 - [Civic - Facebook](https://www.facebook.com/CivicDisabilityServices/photos/a.178998545587732/2294587690695463) — Civic is proud to announce that our CEO Annie Doyle has been successful in securing a place on the National Disability Services NSW State
-- [Civic Disability Services - The Org](https://theorg.com/org/civic-disability-services-limited) — Civic supports individuals with a disability to exercise choice and control, achieve their goals, and be active members of the community.
+- [Civic Disability Services chief apologises to family after 'entirely preventable' death of 11yo autistic boy - ABC News](https://www.abc.net.au/news/2023-02-16/civic-annie-doyle-apology-disability-royal-commission/101984668) — The head of a disability services provider has publicly apologised to the family of an 11-year-old autistic boy who died after he escaped from respite care and was hit by a train. A coronial inquest found the death of Alex Raichman in April 2018 was "entirely preventable if adequ
+
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Annie Doyle GAICD is the Chief Executive Officer at Civic Disability Services Limited, an organization dedicated to enhancing the lives of people with disabilities. Under her leadership, the focus is on empowering individuals to take control of their lives, enabling them to achieve personal goals and actively participate in community life. Her role involves overseeing programs that support this mission, ensuring that services are designed to meet the unique needs of each individual.
+Annie Doyle, GAICD, serves as the Chief Executive Officer at Civic Disability Services Limited, an organization focused on enhancing inclusive workplace practices and supporting individuals with disabilities. She has been a prominent advocate for better economic participation of disabled individuals within society. Annie's expertise in fostering inclusive workplaces was recently recognized when she was invited by Schindler Group to share insights that aim to improve employment opportunities for people with disabilities.
 
-Annie clearly cares deeply about fostering an environment where people with disabilities have genuine choice and autonomy over their daily lives and long-term aspirations. This commitment extends beyond just providing services; it encompasses advocating for greater inclusion in society and promoting a culture where every individual's contributions and potential are recognized and valued. Her work reflects her dedication to building communities that support everyone, ensuring that those with disabilities can live fulfilling lives with dignity and independence.
+Annie appears to deeply care about the well-being and full integration of individuals with disabilities into both social and professional environments. Her work emphasizes creating meaningful employment opportunities, which suggests a strong commitment to enhancing the quality of life and economic independence for those she serves. However, her role has also faced significant challenges, including scrutiny following an unfortunate incident involving a preventable death of a service user, highlighting the complex responsibilities and ethical considerations inherent in her position.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

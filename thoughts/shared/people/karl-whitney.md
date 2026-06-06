@@ -2,7 +2,7 @@
 name: Karl Whitney
 lane: community
 storyteller_id: 8f52078b-432f-44ce-8838-b73a63b0e5f2
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Karl Whitney

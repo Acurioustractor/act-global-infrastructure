@@ -2,7 +2,7 @@
 name: Amanda Brasnja
 lane: community
 storyteller_id: 71ed2cb9-08ee-4f32-8a37-e6cd5de75524
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Amanda Brasnja

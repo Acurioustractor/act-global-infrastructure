@@ -2,7 +2,7 @@
 name: tamsin jones
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # tamsin jones
@@ -16,16 +16,19 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Tamsin Jones leads Small Giants Academy's programs, focusing on business and empathy. She advocates for women's leadership and equity. Her work emphasizes mastery of business and empathy for entrepreneurs.
-- [Tamsin Jones - Wisdom & Action Forum](https://www.wisdomandaction.com.au/speakers/tamsin-jones) — Tamsin is the Head of Programs and Mastery of Business and Empathy at Small Giants Academy . She brings several decades of leadership and systems change
-- [Leadership's Hidden Footprint on People | Small Giants Academy ...](https://www.linkedin.com/posts/small-giants-australia_we-talk-about-the-footprint-we-leave-on-the-activity-7450395401624666113-H6K2) — ... Tamsin Jones, Head of Programs at Small Giants Academy. ... This is no longer “something I do on the side.” This is the work I'm here to do.
-- [Small Giants Academy helps drive women's equity and excellence](https://www.businessacumen.biz/index.php/finance-legal/news-management/7534-small-giants-academy-helps-drive-womens-equity-and-excellence) — Tamsin Jones, an expert in women's leadership, an advocate for equity in boardrooms, a strategic advisor – and she is currently the head of
-- [The Mastery of Business & Empathy equips entrepreneurs with ...](https://www.instagram.com/p/DHpLJZDSl9p) — New research is revealing the scale of the mental health crisis Small Giants ... - Written by Tamsin Jones, Head of Programs at Small Giants
+Tamsin Jones is Head of Programs at Small Giants Academy, focusing on leadership and empathy. She advocates for feminine leadership and gender-lens investing. Her work emphasizes creating change through trust and listening.
+- [Mastery of Business & Empathy: Applications Close 8 May | Small Giants Academy](https://www.smallgiants.com.au/mbe) — The MBE is delivered by a team of experienced facilitators led by Small Giant’s Academy co-founder and Chair Danny Almagor and Head of MBE, Tamsin Jones.
+- [Inside the MBE with Tamsin Jones | Ideas & Stories](https://www.smallgiants.com.au/ideas-and-stories/inside-the-mbe-with-tamsin-jones) — May 13, 2019 - We learn all about the Mastery of Business and Empathy with head of the program , Tamsin Jones.
+- [Interconnected Leader | Small Giants Academy](https://www.smallgiants.com.au/programs/interconnected-leader) — May 13, 2019 - Tamsin, Mele-Ane, and Michael work with leaders to cultivate the creativity, courage and power urgently required to create real, lasting and conscious change in the world around us .
+- [Wisdom and Action Forum](https://www.wisdomandaction.com.au/speakers/tamsin-jones) — Head of Programs at Small Giants Academy. Tamsin is the Head of Programs and  Mastery of Business and Empathy at Small Giants Academy . Tamsin believes the best way to predict the future is to create it, that change moves at the speed of trust, and that the superpower of leadersh
+
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Tamsin Jones is a seasoned leader and change agent within Small Giants Academy, where she heads up the Academy’s programs centered around business mastery and empathy. With several decades of experience under her belt, Tamsin focuses on equipping entrepreneurs with the skills necessary to succeed in their ventures while fostering an empathetic approach that supports both personal well-being and community growth. Her role at Small Giants involves designing and implementing programs that not only enhance business acumen but also cultivate a deep understanding of empathy as a key driver for positive change.
+Tamsin Jones serves as the Head of Academy Programs at Small Giants, an organization focused on developing leadership and fostering empathy in business. In her role, she leads programs such as the Mastery of Business & Empathy (MBE), which aims to cultivate conscious change through trust-building and active listening. Tamsin is particularly passionate about promoting feminine leadership styles and gender-lens investing, suggesting a deep commitment to transforming traditional business practices into more inclusive and empathetic models.
 
-Tamsin is deeply committed to advocating for women's leadership and equity within the entrepreneurial ecosystem. She believes in leveraging her expertise to ensure that women have equal opportunities and visibility, especially in boardrooms where they are often underrepresented. Through her work at Small Giants Academy, Tamsin aims to highlight the importance of mental health awareness among entrepreneurs and to create inclusive environments where everyone can thrive. Her efforts underscore a broader vision for systemic change that values both business success and human connection.
+Tamsin appears to care deeply about creating a future where businesses operate with empathy and a strong sense of community. She believes that change happens when leaders listen and trust each other, emphasizing the power of these principles in driving meaningful progress. Her work at Small Giants underscores her belief in the importance of leadership that is not only creative and courageous but also grounded in the values of compassion and interconnectedness. Tamsin’s advocacy for feminine leadership and gender-lens investing further illustrates her dedication to fostering a business environment where diversity and empathy are central to achieving sustainable change.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

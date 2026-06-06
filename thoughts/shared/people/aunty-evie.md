@@ -2,7 +2,7 @@
 name: Aunty Evie
 lane: community
 storyteller_id: e7e3a3b7-c810-4392-b98a-cbe50f0d8838
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Aunty Evie

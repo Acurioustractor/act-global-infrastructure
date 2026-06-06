@@ -2,7 +2,7 @@
 name: Michael Young (Bear)
 lane: community
 storyteller_id: 489c8318-69c5-4408-933c-7cb1884a6d07
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Michael Young (Bear)

@@ -2,7 +2,7 @@
 name: Kevin Vos
 lane: community
 storyteller_id: 651a946f-3d70-43cb-b5e0-5473b21870c0
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Kevin Vos

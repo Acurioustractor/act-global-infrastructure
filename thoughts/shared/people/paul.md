@@ -2,7 +2,7 @@
 name: Paul
 lane: community
 storyteller_id: b8e96f9e-5451-496e-9867-03cf5cf92d4c
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Paul

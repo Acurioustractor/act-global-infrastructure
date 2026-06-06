@@ -2,7 +2,7 @@
 name: Daniel Manathunga
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Daniel Manathunga
@@ -16,9 +16,8 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Daniel Manathunga works for Redland City Council as a planning officer and urban planner. His role involves managing development applications and ensuring compliance with planning regulations. He also runs DM Urban Planning Solutions, focusing on affordable and transparent urban planning services.
-- [[PDF] Right to Information Release - Redland City Council](https://www.redland.qld.gov.au/files/assets/public/v/1/about-council/documents/disclosure-log-files/2019/201920_34_changes_to_development_permit_ral19_0082__a5838408_.pdf) — I acknowledge the traditional custodians of the lands and seas where I work. ... Thanks in advance for your assistance. Daniel Manathunga. Planning Officer.
-- [MCU26/0047 - Application Details - Development.i](https://developmenti.redland.qld.gov.au/Home/ApplicationDetailsView?appNo=MCU26%2F0047&type=plan_development_apps) — Redland City Council. Redland City Council ... Use: MCU Commerical; Health Care Services;. Assessment Officer: Daniel MANATHUNGA
+Daniel Manathunga is a Planning Officer for Redland City Council and an Urban Planner at DM Urban Planning Solutions, focusing on affordable and transparent planning and development applications.
+- [[PDF] Right to Information Release - Redland City Council](https://www.redland.qld.gov.au/files/assets/public/v/1/about-council/documents/disclosure-log-files/2019/201920_34_changes_to_development_permit_ral19_0082__a5838408_.pdf) — Daniel Manathunga Planning Officer City Planning & Assessment Redland City Council. I acknowledge the traitional custodians of the lands and seas where I work.
 - [Daniel Manathunga - Urban Planner at DM Urban Planning Solutions](https://au.linkedin.com/in/daniel-manathunga-73b560a3) — Daniel Manathunga
 Urban Planner at DM Urban Planning Solutions
 Brisbane, Queensland, Australia
@@ -32,12 +31,16 @@ Profile and Objective Urban Planning and Development experience over 9 years on 
 Experience
 Urban Planner
 [DM Urban Planning Solutions](N/A) 
+- [MCU21/0015.04 - Application Details - Development.i](https://developmenti.redland.qld.gov.au/Home/ApplicationDetailsView?appNo=MCU21%2F0015.04&type=plan_development_apps&do=pdf) — Assessment Officer: Daniel MANATHUNGA Date accuracy, reliability, completeness or suitability
 - [[PDF] R ight to Inform ation R elease - Redland City Council](https://www.redland.qld.gov.au/files/assets/public/v/1/about-council/documents/disclosure-log-files/2019/201920_40_councillor_correspondence_regarding_mcu_for_15_19_valley_rd_wellington_point__a5838443_.pdf) — Attendees: Cr Boglary, Chris Vize 8813, Ellen Dwyer 8702 and Daniel Manathunga 8183. Cr Boglary has requested a meeting to discuss the
 
-## Understanding — drafted
-Daniel Manathunga is an urban planner with over nine years of experience in planning and development. He currently works as a Principal Planner/Senior Planner/Planning Officer for Redland City Council, where he manages development applications and ensures compliance with local planning regulations. Additionally, Daniel runs his own consultancy firm, DM Urban Planning Solutions, which focuses on providing affordable and transparent urban planning services to clients.
+## Shared history — from the spine
+_(no linked email record)_
 
-Daniel appears to care deeply about fostering sustainable communities and ensuring that planning processes are fair and accessible to all stakeholders. His involvement in both public service at Redland City Council and his private consultancy indicates a commitment to balancing regulatory requirements with the needs of developers and community members. This dual role suggests a strong belief in the importance of transparent communication and equitable outcomes in urban development projects.
+## Understanding — drafted
+Daniel Manathunga is a seasoned urban planner with over nine years of experience in planning and development applications, currently serving as a Planning Officer for Redland City Council and running his own consultancy, DM Urban Planning Solutions. His role at Redland City Council involves assessing development applications and ensuring that they align with local planning policies and regulations. At DM Urban Planning Solutions, he focuses on providing transparent and affordable urban planning services to clients in Brisbane and beyond.
+
+Daniel appears to care deeply about fostering transparent and equitable development practices within his community. This commitment is reflected in both his professional roles—whether working for a municipal council or running his own consultancy—and in his interactions with stakeholders and the broader public. He values accuracy, reliability, and completeness in his work, ensuring that each development application he assesses is handled with care and attention to detail. His dedication extends to honoring traditional custodians of the land where he works, highlighting a respect for cultural heritage alongside urban progress.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

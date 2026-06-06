@@ -2,7 +2,7 @@
 name: Kisha Neville
 lane: community
 storyteller_id: af389ad8-6b80-49c8-bc18-ef330687090b
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Kisha Neville

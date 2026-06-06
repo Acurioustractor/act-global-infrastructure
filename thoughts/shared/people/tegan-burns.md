@@ -2,7 +2,7 @@
 name: Tegan Burns
 lane: community
 storyteller_id: 0e8fc200-9ad8-4009-9bec-d4473749af5b
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Tegan Burns

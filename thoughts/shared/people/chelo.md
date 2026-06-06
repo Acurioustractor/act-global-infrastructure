@@ -2,7 +2,7 @@
 name: Chelo
 lane: community
 storyteller_id: a3988106-4165-4529-b0c2-074da2dfa537
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Chelo

@@ -2,7 +2,7 @@
 name: Edward Campion
 lane: community
 storyteller_id: 97882420-5c30-4621-ad70-d5fa4977b0ab
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Edward Campion

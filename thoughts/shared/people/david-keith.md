@@ -2,7 +2,7 @@
 name: David Keith
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # David Keith
@@ -16,7 +16,7 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-BlueCross BlueShield of South Carolina focuses on health care services, community support, and employee volunteerism. They emphasize health improvement and community engagement. David Keith was a Lead IT Asset Management Analyst there.
+David Keith worked for BlueCross BlueShield of South Carolina in IT asset management. The company focuses on community service and health care provision. They emphasize member health and community engagement.
 - [David Keith - Semi retired. Will do project sized assignments. Vendor audit prep, product eval, contract reviews, etc. - BlueCross BlueShield of South Carolina](https://www.linkedin.com/in/davekeith) — David Keith
 Semi retired. Will do project sized assignments. Vendor audit prep, product eval, contract reviews, etc.
 Urbana, Iowa, United States
@@ -28,14 +28,17 @@ Thank you for visiting my profile, I'm always open to new connects so please sen
 
 
 Exp
-- [BlueCross BlueShield of South Carolina - Facebook](https://www.facebook.com/bcbssc/posts/bluecross-blueshield-of-south-carolinas-employees-give-back-and-volunteer-in-the/10158428446042301) — You are helping to improve the health of your community by providing emergency food programs with nutrient-rich fresh produce at the peak of
-- ["No second guessing" made by #KChinthanaSotakoun ... - Instagram](https://www.instagram.com/reel/DUUEFGlFij2) — ... we now accept Blue Beaufort Network with BlueCross BlueShield of South Carolina!! ... Your Primary Care Provider: BENJAMIN CAMERON, DO
-- [Instagram](https://www.instagram.com/p/DY5xsBUF1dD) — May be an image of text that says 'Brilt Beltfu for thiz MICHIGAN-MADE LEADERSHIP KEYNOTE SPEAKER: Tricia A. Keith PRESIDENT & CEO, BLUE CROSS BLUE SHIELD OF MICHIGAN June June18,2026 18, 2026'. She leads one of Michigan's most influential organizations – and on June 18, she's sp
+- [BlueCross... - BlueCross BlueShield of South Carolina](https://www.facebook.com/bcbssc/posts/bluecross-blueshield-of-south-carolinas-employees-give-back-and-volunteer-in-the/10158428446042301) — ## BlueCross BlueShield of South Carolina's Post. ### **BlueCross BlueShield of South Carolina**. BlueCross BlueShield of South Carolina's employees give back and volunteer in the community regularly. '%3E%3Cpath d='M15.9963 8c0 4.4179-3.5811 7.9993-7.9986 7.9993-4.4176 0-7.9987-
+- [Dr. David M. Keith, MD | Union, SC | Family Medicine Doctor](https://health.usnews.com/doctors/david-keith-473026) — They often refer patients to specialists or for further testing, and they treat common conditions such as diabetes, high cholesterol and allergies.
+- [Blue Cross Blue Shield of Michigan Leadership](https://www.bcbsm.com/about-us/our-company/leadership) — [![Image 1: Blue Cross Blue Shield of Michigan and Blue Care Network](https://www.bcbsm.com/amslibs/content/dam/public/shared-assets/images/header-logo/logo.svg)](https://www.bcbsm.com/). *   [Individuals](https://www.bcbsm.com/about-us/our-company/leadership#0/). *   [Find Care]
+
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-David Keith is a Lead IT Asset Management Analyst who has worked at Blue Cross Blue Shield of South Carolina through DPP. In his role, he specializes in project-sized assignments that include tasks such as vendor audit preparation, product evaluations, and contract reviews. David’s professional background demonstrates a strong focus on ensuring efficiency and effectiveness within the IT asset management field, which is critical for an organization like Blue Cross Blue Shield of South Carolina. This healthcare provider emphasizes health improvement initiatives and community engagement across its operations.
+David Keith serves as a Lead IT Asset Management Analyst at Blue Cross Blue Shield of South Carolina through DPP, an organization that prioritizes community health and engagement. In his role, David oversees the management of technological assets, contributing to the efficient operation of the healthcare company. He has a semi-retired status but remains active in taking on project-based assignments such as vendor audit preparation, product evaluations, and contract reviews.
 
-David appears to be someone who values both his work and personal connections, as evidenced by his active social media presence and significant number of LinkedIn connections. His semi-retired status suggests a balance between professional commitments and personal life, with a preference for project-based work over full-time employment. It seems that David cares about maintaining an active network and staying engaged in the IT field while enjoying more flexibility in his later career stages. Additionally, his association with Blue Cross Blue Shield of South Carolina indicates an interest in contributing to health-related initiatives, even if indirectly through technology management roles.
+David appears to care deeply about both his professional duties within IT asset management and his community involvement. His work at Blue Cross Blue Shield indicates an interest in maintaining high standards of healthcare provision through effective technology use. Additionally, David’s open profile and numerous connections suggest a willingness to engage with others professionally and personally, possibly reflecting a broader commitment to networking and collaboration for the betterment of both professional and community endeavors.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

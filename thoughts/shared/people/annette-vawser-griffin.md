@@ -2,7 +2,7 @@
 name: Annette Vawser Griffin
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Annette Vawser Griffin
@@ -16,23 +16,15 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Annette Vawser Griffin is COO of Awards Australia and produces the Inspirational Australians Podcast, celebrating Australians making a difference. She focuses on ordinary people achieving extraordinary things. Awards Australia is a family-owned business.
-- [Annette Vawser Griffin - COO at Awards Australia - Together we make a difference l Young Achiever Awards & Community Awards | Online Nomination & Judging portal | Inspirational Australians Podcast Producer 👏🏅 - Inspirational Australians Podcast by Awards Australia](https://au.linkedin.com/in/annette-vawser-griffin) — Annette Vawser Griffin
-COO at Awards Australia - Together we make a difference l Young Achiever Awards & Community Awards | Online Nomination & Judging portal | Inspirational Australians Podcast Producer 👏🏅
-Greater Melbourne Area
-500 connections, 5791 followers
+_(no web key / no results)_
 
-
-About
-As a Dir
-- [Welcome to the Inspirational.Australians by Awards Australia Podcast](https://awardsaustralia.com/category-podcast/welcome-to-the-inspirational-australians-by-awards-australia-podcast) — Awards Australia is a family owned Australian business with our producer Annette, my Mum and the other podcast Host, Geoff is my Dad. Every week we'll celebrate
-- [Awards Australia - Facebook](https://m.facebook.com/AwardsAustralia/photos/a.1099813280049158/4665810300116087) — Meet our team - Annette Vawser Annette is Awards Australia Chief Operating Officer. Having worked for over 20 years in the Events,
-- [About - Awards Australia](https://awardsaustralia.com/about) — Josh started in 2013. Annette Vawser. Annette is the Director and Chief Operating Officer and started in November 2013. Senior Awards Manager.
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Annette Vawser Griffin serves as the COO of Awards Australia, a family-owned business that specializes in recognizing individual achievements through various awards programs such as Young Achiever Awards and Community Awards. In her role, she also takes on the responsibility of producing the Inspirational Australians Podcast. This podcast aims to highlight ordinary individuals who have achieved extraordinary feats and made significant contributions to their communities across Australia. Her work underscores a dedication to celebrating and amplifying the stories of those who inspire others through their actions and commitment.
+Annette Vawser Griffin works as a podcast producer for the Inspirational Australians Podcast by Awards Australia. This platform aims to highlight and celebrate stories of individuals who have made significant contributions to various fields in Australia, often through their perseverance and dedication despite facing numerous challenges. As a podcast producer, Annette plays a crucial role in bringing these inspiring narratives to life, ensuring that each episode captures the essence of the story and engages listeners effectively.
 
-Annette appears to be deeply invested in the idea of community and individual empowerment, as evidenced by her involvement with Awards Australia and the podcast. She likely cares about fostering an environment where individuals are recognized for their efforts beyond the realm of traditional accolades, focusing on personal growth and community impact. Her long-standing tenure with the company since November 2013 also suggests a strong commitment to her role and the vision of Awards Australia. By producing content that highlights these stories, she seems dedicated to creating a platform where inspiration can be shared widely, encouraging others to find their own ways to make meaningful contributions.
+Annette seems to care deeply about sharing meaningful stories that inspire and empower others. Her work reflects a commitment to highlighting achievements and resilience within the Australian community, suggesting she values the impact that storytelling can have on fostering positivity and motivation. By curating content that showcases the success and struggles of inspirational Australians, Annette likely aims to contribute positively to societal narratives, reinforcing the importance of recognition and support for those who exemplify excellence in their respective fields.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

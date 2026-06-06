@@ -2,7 +2,7 @@
 name: Julianna Loo Bun
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Julianna Loo Bun
@@ -16,16 +16,19 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Julianna Loo Bun works for Vinnies WA, focusing on community support and charitable efforts. Her work emphasizes fulfillment over financial gain. She helps assist over 55,000 West Australians annually.
-- [Julianna Loo Bun - Fulfilment Over Money](https://www.linkedin.com/posts/employment-hero_julianna-loo-bun-fulfilment-over-money-activity-7460494580417867776-x0WF) — Leaving a secure office job after 20 years is terrifying, but staying in a role that makes you miserable is worse. Julianna was staring down
-- [Julianna Loo Bun - Fulfilment Over Money](https://www.facebook.com/EmploymentHero/videos/julianna-loo-bun-fulfilment-over-money/1436317978264081) — Leaving a secure office job after 20 years is terrifying, but staying in a role that makes you miserable is worse. Julianna was staring down
-- [Julianna Loo Bun - Fulfilment Over Money](https://www.youtube.com/shorts/WNTvpUHq9uA) — Leaving a stable job after 20 years is terrifying. Staying miserable in it is worse. Julianna made the leap and found genuine fulfilment
-- [A day in the life at Vinnies WA in December, during our ...](https://www.instagram.com/reel/CmNksThjRbB) — A day in the life at Vinnies WA in December, during our Christmas Appeal. We assist over 55,000 West Australians each year across all of our
+Julianna Loo Bun works for Vinnies WA, focusing on ending poverty and supporting those in need. She emphasizes fulfillment over money in her role. Vinnies WA aims to provide hope and help to those in hardship.
+- [Vinnies work towards ending poverty in Australia - Have a Go News](https://www.haveagonews.com.au/news/vinnies-work-towards-ending-poverty-in-australia) — Vinnies WA supports people through hardship and highlights the need to end poverty in Australia during Anti Poverty Week - 13 - 19 October
+- [Julianna Loo Bun - Fulfilment Over Money - Facebook](https://www.facebook.com/EmploymentHero/videos/julianna-loo-bun-fulfilment-over-money/1436317978264081) — Julianna was staring down this reality until she made the pivot to support work ... your skills into a role that brings you a new feeling
+- [vinnieswa on Instagram: "   160 Years of Hope, Help & Humanity To ...](https://www.instagram.com/reel/DPk7JuWiZqU) — The reason I love working in homeless health, and the reason I wanted to do this job, is that I feel like there's a lot of people that are not
+- [love letters to Australia's Chinese restaurants - The Guardian](https://www.theguardian.com/food/2023/jan/25/love-letters-to-regional-australia-chinese-restaurants-chopsticks-or-fork-book) — Juliana Loo Bun wrote to us about her dad, Arthur, who arrived in Australia from Hong Kong in the 1950s as a sponsored migrant. With his wife
+
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Julianna Loo Bun is a UX Researcher at Vinnies WA, an organization dedicated to community support and charitable efforts that impact more than 55,000 individuals annually in Western Australia. Julianna's journey reflects a deep commitment to her work’s meaning and purpose rather than financial security. After working for two decades in a stable office job, she made the significant decision to leave behind this comfortable position to pursue a role where she could find genuine fulfillment and make a meaningful impact on others' lives.
+Julianna Loo Bun is a UX Researcher at Vinnies WA, an organization dedicated to providing hope and assistance to individuals experiencing hardship and poverty in Western Australia. Her role involves gathering insights from the community to better understand their needs and challenges, which informs Vinnies' services aimed at ending poverty. Julianna has shown a clear commitment to fulfilling work that aligns with her values over financial gain, as evidenced by her transition into a role where she can make a direct impact on people's lives.
 
-Julianna seems deeply committed to understanding and enhancing community support through her research work at Vinnies WA. She values work that brings about positive change in people's lives, as evidenced by her willingness to leave behind the security of her previous job for something more personally fulfilling. Her role involves a focus on community engagement and ensuring that the services provided by Vinnies WA are well-aligned with the needs of those they serve, showing her dedication to making a tangible difference in the community.
+Julianna seems to deeply care about the well-being and dignity of marginalized communities, particularly those affected by homelessness and poverty. Her career shift towards supporting these groups reflects her strong sense of purpose and her belief in the importance of compassion and service. Additionally, Julianna has a personal connection to migration through her father's story, which likely enriches her empathy for individuals navigating challenges related to displacement and hardship. This background contributes to her passion for work that not only fulfills her personally but also supports those who are struggling in society.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

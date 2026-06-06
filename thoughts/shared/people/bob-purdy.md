@@ -2,7 +2,7 @@
 name: Bob Purdy
 lane: community
 storyteller_id: 69bc9a61-10d8-42fc-8477-1718280fc8c8
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Bob Purdy

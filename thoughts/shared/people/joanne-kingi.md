@@ -2,7 +2,7 @@
 name: Joanne Kingi
 lane: community
 storyteller_id: e8a89898-3d9d-4d25-b640-65f6cce1b9fc
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Joanne Kingi

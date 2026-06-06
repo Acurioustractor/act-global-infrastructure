@@ -2,7 +2,7 @@
 name: Wayne Tait
 lane: community
 storyteller_id: 250d8298-5581-4687-89ce-89f25710613b
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Wayne Tait

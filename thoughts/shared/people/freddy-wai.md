@@ -2,7 +2,7 @@
 name: Freddy Wai
 lane: community
 storyteller_id: 5145ae21-ba59-45d1-9690-77d299090407
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Freddy Wai

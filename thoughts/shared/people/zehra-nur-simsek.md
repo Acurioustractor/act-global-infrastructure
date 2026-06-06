@@ -2,7 +2,7 @@
 name: Zehra Nur Simsek
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Zehra Nur Simsek
@@ -16,7 +16,7 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Zehra Nur Simsek is a content writer and AI trainer for Outlier, focusing on prompt engineering. She combines her academic background in economics and history with a passion for nature and long-distance running. Her work emphasizes impactful communication and personal growth.
+Zehra Nur Simsek is a content writer and artificial intelligence trainer. She focuses on prompt engineering and values sustainability and innovation. She graduated from Koç University.
 - [Zehra Nur Simsek - Content Writer | Fresh Graduate Seeking Purpose-Driven Work — At the Crossroads of Nature, Words & Impact | Long-Distance Trail Runner🏃‍♀️ - Outlier](https://www.linkedin.com/in/zehranursimsek) — Zehra Nur Simsek
 Content Writer | Fresh Graduate Seeking Purpose-Driven Work — At the Crossroads of Nature, Words & Impact | Long-Distance Trail Runner🏃‍♀️
 Greater Antalya
@@ -25,14 +25,24 @@ Greater Antalya
 
 About
 🌍Studied Economics alongside my History major, completing extensi
-- [ZEHRA NUR SIMSEK | GirlPlanet.Earth](https://www.girlplanet.earth/our-global-voices/zehra-nur-simsek) — I started climbing the mountains like Heidi, discovering the true essence of freedom in the embrace of nature.
-- [An 'Outlier' is "someone who differs from all other members ...](https://www.instagram.com/p/CHUAzcfDcr6) — I have one-on-one consultations with them where they really work through a lot of the trauma that they might have seen through their careers.
-- [Introduction to outlier. I summarized what outlier is all about ...](https://www.instagram.com/reel/DYNHy7ztx72) — When recruiters spend just 30 seconds scanning resumes, weak positioning, not lack of qualification, causes many applications from Nigerian
+- [Zehra Nur Simsek - Content Writer | Fresh Graduate Seeking Purpose-Driven Work — At the Crossroads of Nature, Words & Impact | Long-Distance Trail Runner🏃‍♀️ - Outlier](https://tr.linkedin.com/in/zehranursimsek/tr) — Zehra Nur Simsek
+Content Writer | Fresh Graduate Seeking Purpose-Driven Work — At the Crossroads of Nature, Words & Impact | Long-Distance Trail Runner🏃‍♀️
+Greater Antalya
+500 connections, 26976 followers
+
+
+About
+🌍Studied Economics alongside my History major, completing extensi
+- [#circulareconomy #sustainability #innovation | 72 comments](https://www.linkedin.com/posts/vojtechvosecky_circulareconomy-sustainability-innovation-activity-7432688805729599489-s1jR) — Zehra Nur Simsek. Content & Project Coordination & Comms | Seeking ... At the core of this work is a simple idea: Waste is not the end
+- [Why the Outlier May Be Your Best New Hire - Training Magazine](https://trainingmag.com/why-the-outlier-may-be-your-best-new-hire) — A person who differs from what you're used to seeing could provide a boost to innovation and productivity.
+
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Zehra Nur Simsek works as a content writer and AI trainer at Outlier, focusing particularly on prompt engineering to enhance communication outcomes. With a background in economics and history, she brings a multifaceted approach to her role, blending analytical skills with an understanding of human narratives. Zehra’s work centers around fostering impactful dialogue and personal development through the use of technology and well-crafted communications.
+Zehra Nur Simsek is an artificial intelligence trainer and content writer at Outlier, a role that blends her expertise in prompt engineering with her passion for crafting meaningful narratives. She brings a diverse educational background from Koç University where she studied Economics alongside History. Zehra’s work involves developing AI training materials and writing content that aligns with values of sustainability and innovation. Beyond her professional life, she is known as an avid long-distance trail runner, indicating her strong connection to nature and physical challenges.
 
-Zehra appears deeply committed to finding purpose-driven opportunities that align with her passions for nature and self-improvement. Her hobbies, such as long-distance running and mountain climbing, reflect a dedication to pushing boundaries and discovering new horizons. This sense of adventure translates into her professional life as she seeks to grow both personally and professionally by combining her academic knowledge with hands-on experience in AI training and content creation. It is clear that Zehra values connections between the natural world, personal growth, and impactful communication.
+Zehra seems to care deeply about purpose-driven work that has a positive impact on the world. This is evident from her focus on sustainability and innovation in both her professional endeavors and personal interests. She values the intersection of nature, words, and impact, which she often reflects in her writing and projects. Her engagement with concepts like the circular economy and waste reduction suggests an ongoing commitment to environmental stewardship. Additionally, Zehra appears to value diversity and unique perspectives, as highlighted by her work at Outlier and the company's recognition of how outliers can boost innovation and productivity.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

@@ -2,7 +2,7 @@
 name: William Radke
 lane: community
 storyteller_id: 4a37898a-2b6a-491c-b8f1-e8c5005cad96
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # William Radke

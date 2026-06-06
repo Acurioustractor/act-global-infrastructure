@@ -2,7 +2,7 @@
 name: Richard Cassidy
 lane: community
 storyteller_id: 80b2c590-ae58-414a-ac57-f65ba99108b1
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Richard Cassidy

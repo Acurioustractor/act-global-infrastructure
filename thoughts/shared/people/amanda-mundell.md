@@ -2,7 +2,7 @@
 name: Amanda Mundell
 lane: community
 storyteller_id: b1332ff8-a9a4-44b5-8c1f-fd5f90514ae8
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Amanda Mundell

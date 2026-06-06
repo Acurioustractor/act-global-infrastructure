@@ -2,7 +2,7 @@
 name: stuart kiernan
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # stuart kiernan
@@ -16,7 +16,7 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Stuart Kiernan is a Major Account Manager at Palo Alto Networks, focusing on identity security. He highlights the importance of securing identities, as seen in his announcement of Palo Alto Networks' acquisition of CyberArk. His role involves managing significant accounts and driving strategic initiatives.
+Stuart Kiernan is a Major Account Manager at Palo Alto Networks, focusing on large client relationships. He brings experience from previous roles. Palo Alto Networks emphasizes cybersecurity and network security solutions.
 - [Keith Kiernan - Systems Engineer at Palo Alto Networks](https://ie.linkedin.com/in/keith-kiernan-13396932) — Keith Kiernan
 Systems Engineer at Palo Alto Networks
 Ireland
@@ -38,28 +38,16 @@ N/A
 Education
 
 - [Stuart Kiernan Email & Phone Number | Palo Alto Networks Major ...](https://rocketreach.co/stuart-kiernan-email_80733878) — Stuart Kiernan, based in Brisbane, QLD, AU, is currently a Major Account Manager at Palo Alto Networks. Stuart Kiernan brings experience from previous roles
-- [This is huge news.. Exciting times indeed | Stuart Kiernan - LinkedIn](https://www.linkedin.com/posts/stuart-kiernan-294a64_this-is-huge-news-exciting-times-indeed-activity-7356454861225299968-BY7n) — Big news! Palo Alto Networks intends to acquire CyberArk In today's world, managing identity isn't enough. You have to secure it.
-- [Stuart Kiernan](https://au.linkedin.com/in/stuart-kiernan-294a64) — Stuart Kiernan
+- [Stephanie Kiernan - Palo Alto Networks - LinkedIn](https://nl.linkedin.com/in/stephanie-kiernan-4880a83bb) — Ervaring: Palo Alto Networks · Locatie: 1187 AA · Bekijk het profiel van Stephanie Kiernan op LinkedIn, een professionele community van 1 miljard leden.
+- [A guide for C-suite leaders | Keith Kiernan - LinkedIn](https://www.linkedin.com/posts/keith-kiernan-13396932_securing-your-ai-powered-network-transformation-activity-7133058013346586625-gEVH) — Discover how #AI-powered network transformation can be secured with this comprehensive guide for C-suite leaders. Palo Alto Networks Anand
 
-Brisbane, Queensland, Australia
-500 connections, 2478 followers
-
-
-About
-N/A
-
-
-Experience
-N/A
-
-
-Education
-N/A
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Stuart Kiernan is a Major Account Manager at Palo Alto Networks, a leading cybersecurity company based in Brisbane, Australia. His role involves managing significant client relationships and driving strategic initiatives focused on identity security. Stuart recently highlighted the importance of securing identities, especially with the announcement of Palo Alto Networks’ acquisition of CyberArk, a move that underscores his focus on enhancing the protection of digital identities against cyber threats.
+Stuart Kiernan is a Major Account Manager at Palo Alto Networks, an organization known for its cybersecurity and network security solutions. Based in Brisbane, Australia, Stuart specializes in managing relationships with large clients, leveraging his extensive experience from previous roles to ensure that these clients receive tailored support and solutions. His position requires strong communication skills and a deep understanding of the technology landscape, particularly in cybersecurity.
 
-Stuart seems to care deeply about cybersecurity, particularly in the realm of identity management and protection. His emphasis on securing identities indicates a commitment to safeguarding personal and organizational data from increasingly sophisticated cyber attacks. This passion for ensuring robust security measures aligns with his professional endeavors at Palo Alto Networks, where he strives to support clients in maintaining secure digital environments through strategic solutions and partnerships like the acquisition of CyberArk.
+Stuart seems to care deeply about providing robust security solutions to his clients. Given Palo Alto Networks' focus on cybersecurity, it's clear that Stuart values creating secure environments for businesses. He likely prioritizes building trust with clients by offering expert advice and reliable support. Additionally, his role suggests a commitment to staying current with technological advancements in the field of network security, ensuring he can address evolving threats effectively.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

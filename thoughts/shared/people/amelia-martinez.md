@@ -2,7 +2,7 @@
 name: Amelia Martinez
 lane: community
 storyteller_id: aff2fff1-cac2-446d-b348-d96c0d38f351
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Amelia Martinez

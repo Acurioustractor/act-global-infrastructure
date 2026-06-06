@@ -2,7 +2,7 @@
 name: Marcus Barlow
 lane: community
 storyteller_id: 13364723-cf96-415d-8047-78b05abc99fb
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Marcus Barlow

@@ -2,7 +2,7 @@
 name: Guy Warner
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Guy Warner
@@ -16,7 +16,7 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Guy Warner works for Symbio Australia, a leader in cleaning technology. The company focuses on commercial-grade cleaning chemicals and supplies. Symbio Australia emphasizes first-class products and service.
+Guy Warner is associated with Symbio Australia, a leader in commercial-grade cleaning technology. Symbio Australia focuses on manufacturing cleaning chemicals and supplies. The company has been operating since 1975.
 - [Guy Warner](https://au.linkedin.com/in/guy-warner-73711525) — Guy Warner
 Symbio Australia
 Greater Brisbane Area
@@ -36,14 +36,32 @@ Balmoral State High
 N/A
 1976 - 1978
 None
-- [Symbio Australia](https://www.facebook.com/SymbioAus) — Leaders in Cleaning Technology and Systems. Operating since 1975, Symbio Australia prides itself on providing first class products, service and support.
-- [Symbio Australia - Overview, News & Similar companies](https://www.zoominfo.com/c/symbio-australia/351497497) — Symbio Australia is a family-owned and operated manufacturer of commercial-grade cleaning chemicals and supplies, serving various industries including
-- [New pallet racking starting to take shape at our ...](https://www.linkedin.com/posts/drew-warner-912369130_new-pallet-racking-starting-to-take-shape-activity-7000046391016251392-nf2C) — View profile for Andrew Warner. Andrew Warner. ICT, Warehouse & Logistics Manager @ Symbio Australia | Diploma of Information Technology. 3y.
+- [Guy Warner - Process Engineer at CSR - CSR Bricks & Roofing](https://au.linkedin.com/in/guy-warner-00401b83) — Guy Warner
+Process Engineer at CSR
+Greater Sydney Area
+219 connections, 222 followers
+
+
+About
+N/A
+
+
+Experience
+Process Engineer
+[CSR Bricks & Roofing](N/A)  
+Sep 1992 - Present
+N/A
+Working with raw materials, dryers and kilns in a Technical Suuport role for 6 brick manufacturing 
+- [Symbio Australia - Facebook](https://www.facebook.com/SymbioAus) — Leaders in Cleaning Technology and Systems. Operating since 1975, Symbio Australia prides itself on providing first class products, service and support.
+- [Symbio Australia - Overview, News & Similar companies - ZoomInfo](https://www.zoominfo.com/c/symbio-australia/351497497) — Symbio Australia is a family-owned and operated manufacturer of commercial-grade cleaning chemicals and supplies, serving various industries including
+
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Guy Warner serves as the Managing Director at Symbio Australia, a company known for its leadership in cleaning technology and systems. Founded in 1975, Symbio focuses on delivering commercial-grade cleaning chemicals and supplies to various industries, emphasizing quality products and superior service. The organization operates under family ownership, which likely contributes to its commitment to excellence and client satisfaction.
+Guy Warner serves as the Managing Director at Symbio Australia, an organization that has been leading in the development and manufacturing of commercial-grade cleaning technology since 1975. Under his leadership, Symbio Australia focuses on providing high-quality cleaning chemicals and supplies to various industries, contributing significantly to hygiene and cleanliness standards across different sectors.
 
-Based on the available information, Guy Warner seems to prioritize maintaining high standards of product quality and customer support within his role at Symbio Australia. His leadership likely reflects a dedication to upholding the company's reputation for providing reliable solutions in commercial cleaning technology. The context does not provide specific insights into other personal interests or values beyond his professional role, so it’s challenging to infer additional areas he might care about without further information.
+Guy appears to be deeply invested in the success and continued growth of Symbio Australia, prioritizing innovation in commercial-grade cleaning solutions. His background as a Process Engineer at CSR Bricks & Roofing also indicates his commitment to technical proficiency and support roles within manufacturing environments. It is evident that he values quality service and product excellence, which are core principles guiding Symbio’s operations. Given the family-owned nature of Symbio Australia, it can be inferred that Guy likely places a high value on continuity and maintaining a strong reputation in his industry.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

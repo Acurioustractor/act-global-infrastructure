@@ -2,7 +2,7 @@
 name: Caroline Treacy
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Caroline Treacy
@@ -16,28 +16,19 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Caroline Treacy founded Grey Space, focusing on aged care, retirement, and community design. She serves as a Project Director and is involved in property development. Her role includes project delivery management and committee membership for the Property Council of Australia.
-- [Grey Space - Digital Archive of Queensland Architecture](https://qldarch.net/firm/timeline?firmId=3995) — Caroline Treacy founded Grey Space. as owner/director offering aged care, retirement and community design/advisory services ... Caroline Treacy founded Grey Space
+Caroline Treacy is the Managing Director of Grey Space+, focusing on property development and retirement living. She is involved in community housing policy and architectural design. Her work emphasizes character development and luxury living.
 - [Caroline Treacy - Digital Archive of Queensland Architecture](https://qldarch.net/architect/interview/4029?time=1426&architectId=3978) — Probably more client relationship roles, Project Director in more recent years. And a lot of the older aged care experience was me working the project through,
-- [Grey Space+ representation in Property Development circles for ...](https://www.instagram.com/p/DDb-Xd-SVQf) — Grey Space+ representation in Property Development circles for another 2 year period through our own MD Caroline Treacy. From local Sunshine Coast matters
-- [Caroline Treacy - Design Innovator & Project Delivery Manager - Property Council of Australia - Social Infrastructure QLD](https://au.linkedin.com/in/caroline-treacy-2756ab2b) — Caroline Treacy
-Design Innovator & Project Delivery Manager
-Brisbane City, Queensland, Australia
-500 connections, 1719 followers
+- [Here is our design for conversion of a house and property ...](https://www.instagram.com/p/C5hHDEKyR1p) — Grey Space+ representation in Property Development circles for another 2 year period through our own MD Caroline Treacy. From local Sunshine
+- [Policy Advisory Groups - Q Shelter](https://qshelter.asn.au/about-us/policy-advisory-groups) — 2025 Community Housing Policy Advisory Group · Caroline Treacy, Grey Space+ · Carol Godwin, Anglicare Central Queensland (Rockhampton) [CHP Tier 2] · Mark Ferrari,
+- [Instagram](https://www.instagram.com/p/DDb-Xd-SVQf) — Never miss a post from greyspaceplus. Sign up for Instagram to stay in the loop. By continuing, you agree to Instagram's Terms of Use and Privacy Policy. Grey Space+ representation in Property Development circles for another 2 year period through our own MD Caroline Treacy. From 
 
-
-About
-Caroline is a Property Development specialist and Design Delivery Manager, both…
-
-
-Experience
-Committee Member
-[Property Council of Australia -
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Caroline Treacy is the Managing Director of Grey Space+, an organization that focuses on aged care, retirement living, and community design. With her extensive background in property development and project management, she has played a pivotal role in shaping spaces that cater to the needs of senior communities and enhancing their quality of life through thoughtful architectural solutions. Her work often involves not just designing physical structures but also ensuring they meet the social and emotional requirements of older adults.
+Caroline Treacy serves as the Managing Director of Grey Space+, a company dedicated to property development with a particular focus on retirement living and community housing policy. Her work spans architectural design, emphasizing luxury and character in residential spaces. Throughout her career, she has been actively involved in various projects, ranging from aged care facilities to community housing initiatives, demonstrating her commitment to creating environments that enhance the quality of life for residents. Caroline’s involvement with Policy Advisory Groups like Q Shelter further underscores her dedication to shaping policies that benefit communities and improve living conditions.
 
-Caroline appears to be deeply committed to her work in aged care and community design, emphasizing the importance of creating environments that promote wellbeing and independence for seniors. She is passionate about innovation in property development, particularly within the realm of social infrastructure, which suggests a strong dedication to using her skills to make a positive impact on society. Her involvement with the Property Council of Australia also underscores her interest in fostering collaboration and setting industry standards that benefit both developers and end-users alike.
+Caroline appears to be deeply invested in ensuring that residential spaces are not only functional but also reflective of luxury and character. Her work indicates a strong care for community welfare, particularly among the elderly and those needing specialized housing solutions. By engaging with policy advisory groups, she shows an interest in addressing broader societal issues related to housing through collaborative efforts. Overall, her endeavors suggest a genuine passion for transforming living spaces into havens that cater to specific needs while maintaining high standards of design and comfort.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

@@ -2,7 +2,7 @@
 name: Roy Prior
 lane: community
 storyteller_id: 0a66bb4b-f437-4a1e-a737-4d8911e05cef
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Roy Prior

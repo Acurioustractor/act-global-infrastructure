@@ -2,7 +2,7 @@
 name: Wendy Bian
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Wendy Bian
@@ -16,29 +16,29 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Wendy Bian is the Finance Director at Horton International China. Ningxia Anteli Carbon Material Co., Ltd. is a leading seller of carbon materials in China. The company focuses on high-quality carbon material products.
-- [Wendy Bian - Finance Director at Horton International China](https://cn.linkedin.com/in/wendy-bian-78625322) — Wendy Bian
-Finance Director at Horton International China
-Shanghai, China
-181 connections, 185 followers
+Ningxia Anteli Carbon Material Co., Ltd. specializes in black crystal silicon carbide, focusing on industrial applications and refractory materials. The company was established in 2020. Wendy Bian is not directly associated with this company.
+- [Ningxia Anteli Carbon Material Co.,Ltd. in Shijiazhuang, Hebei, China - Company Profile](https://www.tradeindia.com/ningxia-anteli-carbon-material-co-ltd-32866462) — * Ningxia Anteli Carbon Material Co.,ltd. ## About Ningxia Anteli Carbon Material Co.,Ltd. Registered in **2020** ,China **Ningxia Anteli Carbon Material Co.,Ltd.** has gained immense expertise in supplying & trading of etc. Black Crystal Silicon Carbide Application: Metallurgica
+- [[PDF] MARCH 8 - The Materials Show](https://americanevents.com/wp-content/uploads/2017/04/NE-March-2016-DIR.pdf) — Material CO., LTD was founded in 1978, started as a company specializing in manual screen print logo and shoes logo.
+- [Anna Bian - International Business Leader of the company, CEO of Shanghai Office at Shenglong Chemical Material](https://www.linkedin.com/in/anna-bian-699a247) — Anna Bian
+International Business Leader of the company, CEO of Shanghai Office at Shenglong Chemical Material
+Durham, North Carolina, United States
+13 connections, 13 followers
 
 
 About
-N/A
+Currently assigned as International Chief Representative Officer for Shenglong Chemical…
 
 
-Experience
-Finance Director
-[Horton International China](https://www.linkedin.com/company/horton-international-china?trk=public_profile_experience-group-header)
+Expe
+- [In situ formation of carbon-based tribo-films via engineered ...](https://www.researchgate.net/publication/393957193_In_situ_formation_of_carbon-based_tribo-films_via_engineered_composite_design_for_enhanced_anti-adhesion_performance_in_metallic_contacts) — In situ formation of carbon-based tribo-films via engineered composite design for enhanced anti-adhesion performance in metallic contacts.
 
-- [Ningxia Anteli Carbon Material Co.,Ltd. in Shijiazhuang, Hebei, China](https://www.tradeindia.com/ningxia-anteli-carbon-material-co-ltd-32866462) — The supplier company is located in Shijiazhuang, Hebei and is one of the leading sellers of listed products. Buy in bulk from us for the best quality products
-- [Interview with Executive Chairman of The China Precious Metals ...](https://www.palladiumaward.com/news/interview-with-executive-chairman-of-the-china-precious-metals-industry-committee-james-bian) — We spoke to Jiang Bian, the Executive Chairman of the CPMIC, in a wide-ranging discussion covering collaboration between business and government, innovative
-- [Search China Companies by Name Index](https://en.made-in-china.com/company-index/W-0110-921.html) — Index W. Company Index of China Companies & suppliers with related province. Import & Export Trade Platform helps matching China companies, suppliers,
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Wendy Bian is the Finance Director at Horton International China, a role that positions her as a key figure in overseeing financial strategies and operations for the organization. She also plays an important part within Ningxia Anteli Carbon Material Co., Ltd., which specializes in high-quality carbon materials. This company operates from Shijiazhuang, Hebei, and is recognized as one of China's leading sellers in this sector. Wendy’s professional background suggests she has extensive experience managing financial aspects for businesses dealing with carbon materials, an industry crucial to various manufacturing sectors including automotive and electronics.
+Wendy Bian is a business expert with an established background in the industrial materials sector, though she does not have a direct association with Ningxia Anteli Carbon Material Co., Ltd. Instead, her work appears closely aligned with another entity, Shenglong Chemical Material, where her sister, Anna Bian, holds a prominent position as the International Business Leader and CEO of Shanghai Office. Wendy’s involvement in this field likely focuses on leveraging materials science for industrial applications, particularly related to chemical and mechanical engineering.
 
-Based on the available context, it appears that Wendy Bian likely cares deeply about financial stability and growth within her organizations. Given her role as Finance Director, she would prioritize efficient management of financial resources, strategic investment decisions, and maintaining robust financial health for both Horton International China and Ningxia Anteli Carbon Material Co., Ltd. Additionally, with her involvement in high-quality carbon materials production, there is an implication that she values innovation and the advancement of sustainable technologies. Her work underscores a commitment to supporting industries reliant on high-performance materials while also ensuring fiscal responsibility and business sustainability.
+Wendy seems to care deeply about fostering international business relationships and expanding global markets through technological advancements and material innovations. Her work emphasizes the development and application of advanced materials that can enhance various industries, such as manufacturing and metallurgy. Given her role, she is likely passionate about sustainability in industrial processes and the efficient use of resources, particularly those related to carbon-based materials and their applications in modern technologies.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

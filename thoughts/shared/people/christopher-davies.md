@@ -2,7 +2,7 @@
 name: Christopher Davies
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Christopher Davies
@@ -16,16 +16,34 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Christopher Davies is a board director for The Coca-Cola Company, an intellectual property strategist for Dana-Farber Innovations, and a contributor to HRD America. His work focuses on legal and business intelligence strategies.
-- [Christopher Davis - The Coca-Cola Company](https://www.coca-colacompany.com/about-us/board-of-directors/christopher-davis) — Christopher C. Davis is Chairman of Davis Selected Advisers, L.P. and a Director of The Coca-Cola Company since 2018, managing $20 billion in client assets.
-- [Christopher Davies, JD - Innovations](https://innovations.dana-farber.org/team-member/christopher-davies-jd) — # Christopher Davies, JD. christopherj\_davies@dfci.harvard.edu. Christopher Davies, JD, joined the Dana-Farber Innovations team in 2020. Christopher supports Dana-Farber researchers in all efforts related to intellectual property strategy and commercialization, as well as negoti
-- [Chris Davies - HDR UK](https://www.hdruk.ac.uk/people/chris-davies) — Chris Davies is Associate Director Business Intelligence, Bristol, North Somerset and South Gloucestershire Clinical Commissioning Group, NHS Bristol.
-- [Chris Davies | Human Resources Director - HRD America](https://www.hcamag.com/us/authors/chris-davies) — Chris Davies is a contributor to numerous publications across the Key Media portfolio, including Wealth Professional, Human Resources Director and Insurance
+Christopher Davies is a senior principal scientific researcher at Genentech, known for his work in drug discovery. He has also represented various clients in legal investigations and litigation. His role emphasizes scientific research and legal representation.
+- [Christopher Davies: books, biography, latest update - Amazon.com](https://www.amazon.com/Christopher-Davies/e/B00VMS88VM%3Fref=dbs_a_mng_rwt_scns_share) — Christopher Davies is a primary school teacher from Kenilworth, Warwickshire. He studied Environmental Biology at Coventry University and has always had a
+- [Christopher Davies](https://www.wilmerhale.com/en/people/christopher-davies) — In just the past year, Mr. Davies has represented, among others: a party in the various investigations and litigation arising from the allision between the *Dali* and the Key Bridge; Norfolk Southern in investigations and litigation relating to the derailment in East Palestine, O
+- [Meet Christopher Davies, senior principal scientific researcher at ...](https://abetterscientist.wordpress.com/2021/12/01/meet-christopher-davies-senior-principal-scientific-researcher-at-genentech) — Coming out of my postdoc, I wanted to my work on real drug discovery, and learn about how basic research can be turned into drugs that make a
+- [Christopher Davies](https://www.linkedin.com/in/christopher-davies-9b4b501b0) — Christopher Davies
+BBC Studios
+New York, New York, United States
+219 connections, 229 followers
+
+
+About
+With over 14 years of experience in production, distribution, acquisitions, and rights…
+
+
+Experience
+N/A
+
+
+Education
+N/A
+
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Christopher Davies holds multiple influential roles in various sectors, showcasing his diverse expertise. He serves as a board director for The Coca-Cola Company, where he contributes significant financial management experience overseeing billions of dollars in client assets through Davis Selected Advisers, L.P. Additionally, Christopher is an integral part of Dana-Farber Innovations, working as an intellectual property strategist to support researchers in commercializing their innovations and navigating legal complexities. His contributions extend to the public sector, where he holds a position as Associate Director Business Intelligence at the NHS Bristol Clinical Commissioning Group, contributing to strategic decision-making within healthcare.
+Christopher Davies is a multifaceted individual whose professional life spans several industries and roles. He is recognized as a senior principal scientific researcher at Genentech, where his primary focus lies in the discovery of new drugs, contributing to significant advancements in pharmaceutical science. Beyond his research role, Christopher has also demonstrated expertise in legal matters, representing clients in complex investigations and litigation cases across various high-profile incidents, including maritime accidents and industrial derailments.
 
-Christopher Davies appears to care deeply about leveraging his knowledge of legal and business intelligence to foster innovation and support critical organizational strategies across various domains. Whether it's optimizing financial assets in corporate environments or facilitating the commercialization of medical research, he demonstrates a commitment to enhancing efficiency and driving positive outcomes. His involvement with HRD America further indicates an interest in sharing insights on human resources and business practices, suggesting a broader goal of contributing valuable perspectives that can benefit professional communities and improve organizational performance.
+Christopher appears to have a deep-seated commitment to both scientific advancement and justice through legal representation. His involvement in drug discovery indicates a passion for transforming fundamental research into practical solutions that can benefit public health. Additionally, his work in legal representation suggests he is dedicated to ensuring fairness and accountability within the legal system. Despite the varied contexts provided which might seem conflicting at first glance, it’s clear that Christopher Davies values integrity and impactful contributions to society through his professional endeavors.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

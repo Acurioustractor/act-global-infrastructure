@@ -2,7 +2,7 @@
 name: James Miller
 lane: community
 storyteller_id: 4351572b-ce9a-4dee-ad88-761ac77e669c
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # James Miller

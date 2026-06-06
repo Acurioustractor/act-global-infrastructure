@@ -2,7 +2,7 @@
 name: Graham
 lane: community
 storyteller_id: a9835c22-a495-4590-ab66-e0e3f44e0f83
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Graham

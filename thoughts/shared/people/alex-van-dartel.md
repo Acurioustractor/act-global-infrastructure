@@ -2,7 +2,7 @@
 name: Alex van Dartel
 lane: supporter
 warmth: 4
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Alex van Dartel
@@ -16,7 +16,7 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Centrefarm Aboriginal Horticulture Limited focuses on sustainable agricultural development for Aboriginal landowners in Australia. Alex van Dartel is its Investment and Business Manager. The organization aims to create regional economies through commercial and sustainable projects.
+Centrefarm Aboriginal Horticulture Limited aims to create regional economies on Aboriginal land through sustainable agriculture. It focuses on agri-business investment and community-driven horticulture. The company seeks economic equity and social opportunity for Aboriginal people.
 - [Alex van Dartel - Investment and Business Manager - Centrefarm Aboriginal Horticulture Limited](https://au.linkedin.com/in/alexvandartel) — Alex van Dartel
 Investment and Business Manager
 Alice Springs, Northern Territory, Australia
@@ -32,14 +32,25 @@ Investment & Business Manager
 [Centrefarm Aboriginal Horticulture Limited](N/A)  
 Nov 2023 - Present
 Alice Springs, Northern Territ
-- [30+ "Dartel Van" profiles - LinkedIn](https://au.linkedin.com/pub/dir/+/Dartel+Van/au-0-Australia) — Alex Van Dartel. Investment and Business Manager. Alice Springs, NT. Centrefarm Aboriginal Horticulture Limited, +6 more. University of
-- [Staff & Associate Profiles - Centrefarm](https://centrefarm.com/staff-associate-profiles) — Alex grew up in regional NSW and has worked in Canberra and Sydney, as well as travelling widely throughout remote Australia. Since joining Centrefarm in 2022,
-- [[PDF] legislative assembly of the northern territory](https://parliament.nt.gov.au/committees/previous/environmental-and-sustainable-development-committee/11th-environment-and-sustainable-development/4-Centrefarm-Transcript.pdf) — I am the Project Developer at. Centrefarm Aboriginal Horticulture Ltd. Mr RIDE: I am Graham Ride, I am the Project Manager Development for.
+- [Aboriginal Horticulture Limited To: Committee Secretary ^ 1 ...](https://www.aph.gov.au/parliamentary_business/committees/house_of_representatives_committees?url=atsia%2Fcommunitystores%2Fsubs%2Fsub0015.pdf) — This role has been revised so that the company's charter is now to: Be a creator of a regional economy on Aboriginal owned land. Centrefarm's Activities Our aim is to have: • Agri-business invest in areas that have commercial potential; as well as • Work with communities to enabl
+- [Centrefarm Aboriginal Horticulture Ltd - ISX](https://www.isx.org.au/projects/centrefarm-aboriginal-horticulture-ltd) — The Vision is to establish viable industry on Aboriginal land that brings Aboriginal people greatest likelihood of economic equity and social opportunity. Lead
+- [Centrefarm – Aboriginal Horticulture](https://centrefarm.com) — About · About · Who Are Centrefarm · Vision, Purpose, Values · Director profiles · Staff & Associate Profiles · Media · Contact.
+
+## Shared history — from the spine
+**5 emails** · first 2026-02-04 · last 2026-03-11
+
+- 2026-03-11 → Re: Centrefarm Aboriginal Horticulture Limited (Centrefarm) intro
+- 2026-02-27 ← Out of office Re: Centrefarm Aboriginal Horticulture Limited (Centrefarm) intro
+- 2026-02-27 → Re: Centrefarm Aboriginal Horticulture Limited (Centrefarm) intro
+- 2026-02-05 → Re: Centrefarm Aboriginal Horticulture Limited (Centrefarm) intro
+- 2026-02-04 ← Centrefarm Aboriginal Horticulture Limited (Centrefarm) intro
 
 ## Understanding — drafted
-Alex van Dartel is an Investment and Business Manager at Centrefarm Aboriginal Horticulture Limited, a position he has held since November 2023. Based in Alice Springs, Northern Territory, Alex brings experience from diverse locations including Canberra and Sydney, alongside extensive travels throughout remote Australia. His work focuses on fostering sustainable agricultural development for Aboriginal landowners within the organization's broader aim of establishing robust regional economies through commercial and environmentally conscious projects.
+Alex van Dartel serves as the Investment & Business Manager at Centrefarm Aboriginal Horticulture Limited, an organization based in Alice Springs, Northern Territory. Centrefarm is dedicated to establishing sustainable agricultural economies on Aboriginal-owned land through agri-business investment and community-driven horticultural initiatives. This approach aims not only to bring economic equity but also to provide social opportunities for the local Aboriginal communities.
 
-Alex appears to care deeply about sustainability and economic empowerment within indigenous communities. Through his role at Centrefarm, he is committed to developing initiatives that not only enhance environmental stewardship but also provide economic opportunities for Aboriginal landowners. His background suggests a strong interest in combining business acumen with social responsibility, aiming to create meaningful change through sustainable agricultural projects.
+Alex's work revolves around fostering a regional economy that leverages the commercial potential of agriculture in areas with Aboriginal ownership, ensuring that the benefits are shared equitably among the communities involved. Centrefarm’s vision is centered on creating viable industries and economic stability while respecting and enhancing the cultural heritage and social well-being of Aboriginal people.
+
+The communications between ACT and Alex van Dartel have primarily focused on introductions and initial discussions about Centrefarm Aboriginal Horticulture Limited. The recent email exchanges indicate an ongoing process of getting to know each other’s goals and initiatives, with no specific actions beyond these introductory contacts.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

@@ -2,7 +2,7 @@
 name: Goonyun Anderson
 lane: community
 storyteller_id: 32495b83-0275-4bf3-8c3b-5a6b54ea2b6a
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Goonyun Anderson

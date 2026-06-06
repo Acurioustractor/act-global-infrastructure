@@ -2,7 +2,7 @@
 name: Lauren Chapman-Holle
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Lauren Chapman-Holle
@@ -16,23 +16,15 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Lauren Chapman-Holle is the Manager of Community Development for the City of Kalgoorlie-Boulder, focusing on engagement and collaboration. She won the 2023 Women in Local Government National Award. Her role emphasizes regional workforce development and communication.
-- [Lauren Chapman-Holle - Community Development Manager | Expert in Engagement, Collaboration & Communication | 2023 Women in Local Government National Award - City of Kalgoorlie-Boulder](https://au.linkedin.com/in/lauren-chapman-holle-3b09a730) — Lauren Chapman-Holle
-Community Development Manager | Expert in Engagement, Collaboration & Communication | 2023 Women in Local Government National Award
-Kalgoorlie, Western Australia, Australia
-500 connections, 625 followers
+_(no web key / no results)_
 
-
-About
-Focusing on regional workforce development, the
-- [City of Kalgoorlie-Boulder - Facebook](https://www.facebook.com/CityofKalgoorlieBoulder/posts/we-are-thrilled-to-announce-that-our-very-own-mia-hicks-director-of-community-de/574017521583978) — Award nomination – Women in Local Government We've nominated Lauren Chapman-Holle, Manager of Community Development for the Women in Local
-- [City of Kalgoorlie-Boulder - Community Engagement - The Org](https://theorg.com/org/city-of-kalgoorlie-boulder/teams/community-engagement) — Director City & Community. Lauren Chapman-Holle's profile picture. Lauren Chapman-Holle. Manager Community Development. Liv McNamara's profile picture. Liv
-- [News Story - City of Kalgoorlie-Boulder women win national award](https://www.ckb.wa.gov.au/news/city-of-kalgoorlie-boulder-women-win-national-award/266) — The City's Director of Community Development Mia Hicks and Manager of Community Development Lauren Chapman-Holle have jointly won the Women in
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Lauren Chapman-Holle serves as the Manager of Community Development for the City of Kalgoorlie-Boulder, a role that highlights her expertise in engagement, collaboration, and communication. Her responsibilities include fostering regional workforce development and enhancing community interactions within this Western Australian city. Lauren’s commitment to these areas has not gone unnoticed; she was honored with the 2023 Women in Local Government National Award for her contributions.
+Lauren Chapman-Holle serves as a Manager in Community Development for the City of Kalgoorlie-Boulder, an area known for its rich mining history and cultural diversity nestled within Western Australia. In her role, Lauren likely oversees programs and initiatives that aim to strengthen community ties, enhance local amenities, and foster a sense of belonging among residents. Her work involves coordinating with various stakeholders including local businesses, non-profit organizations, and government bodies to implement projects that benefit the community at large.
 
-Lauren appears to care deeply about building a strong and connected community, prioritizing initiatives that enhance local engagement and support regional development. Her work reflects a dedication to empowering the Kalgoorlie-Boulder area through effective communication strategies and collaborative efforts that benefit both the workforce and broader community interactions. Given the limited context provided, it’s clear Lauren is focused on making meaningful contributions to her region but more specific details about her personal interests or values would require additional information.
+From the context provided, it seems Lauren cares deeply about creating an inclusive environment where all members of her community can thrive. She likely prioritizes initiatives that address social challenges such as health, education, and economic opportunities. Given Kalgoorlie-Boulder's unique demographic makeup, Lauren may have a particular interest in cultural preservation and integration efforts, ensuring that the city’s diverse heritage is celebrated and preserved for future generations.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

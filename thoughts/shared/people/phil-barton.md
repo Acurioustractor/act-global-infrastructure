@@ -2,7 +2,7 @@
 name: Phil Barton
 lane: community
 storyteller_id: b50efb89-dd52-4659-8f20-b987e6c35d00
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Phil Barton

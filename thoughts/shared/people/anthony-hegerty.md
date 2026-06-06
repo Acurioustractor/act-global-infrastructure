@@ -2,7 +2,7 @@
 name: Anthony Hegerty
 lane: community
 storyteller_id: bcfbf300-a6f2-4198-bcaa-c21ab681d898
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Anthony Hegerty

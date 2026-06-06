@@ -2,7 +2,7 @@
 name: matt allen
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # matt allen
@@ -16,16 +16,27 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Matt Allen is the Co-Founder and CEO of Tractor Ventures, which provides non-dilutive funding for business growth. They focus on alternative funding solutions. Tractor Ventures aims to solve funding equity issues.
+Matt Allen co-founded Tractor Ventures, offering non-dilutive revenue-based financing to startups. He aims to help founders retain equity while growing their businesses. Tractor Ventures provides flexible funding without equity dilution.
+- [Matt Allen is on a mission to help founders hold onto their equity | Startmate](https://startmate.com/writing/revenue-based-financing-tractor-ventures-matt-allen) — # Matt Allen is on a mission to help founders hold onto their equity. Tractor Ventures Co-Founder Matt Allen is on a mission to help founders hold onto as much of their equity as they want to, for as long as they like. Tractor Ventures Co-Founder and Startmate Mentor Matt Allen i
+- [Angel investors Matt and Aprill Allen launch Tractor Ventures](https://www.afr.com/technology/angel-investors-matt-and-aprill-allen-launch-tractor-ventures-20201211-p56mpz) — **New intelligent search** Use sentences or keywords. # Angel investors Matt and Aprill Allen launch Tractor Ventures. Serial entrepreneur turned angel investor Matt Allen has launched a new fintech venture, designed to provide funding to founders who either do not want venture c
 - [Tractor Ventures - Matt Allen, Co Founder & CEO - YouTube](https://www.youtube.com/watch?v=9BkuDUipoIE) — Tractor Ventures provides non-dilutive funding for companies to grow. "We do due diligence on the business on where it stands today and
-- [Matt Allen on Tractor Ventures 'Why' - LinkedIn](https://www.linkedin.com/posts/tractor-ventures_the-problem-were-trying-to-solve-for-is-activity-7198207384979165184-et94) — 'The problem we're trying to solve for is: you've got different jobs for $1 to do, and $1 is not $1, right? Sometimes it's equity risk.
-- [Tractor Talk with Co-Founder & CEO Matt Allen](https://www.tractorventures.com/post/talk-matt-allen) — Tractor Ventures Co-Founder & Co-CEO Matt Allen sits down to discuss the past 3 years (and prior) leading to building the Tractor, Elastic capital.
-- [Tractor Ventures' alternative funding breaks new ground - Medium](https://medium.com/@LaunchVic/solid-and-dependable-tractor-ventures-alternative-funding-breaks-new-ground-4d269437e094) — “There's a lot to love about tractors,” says Matt Allen. “They're robust. They're reliable. They make a real difference.”.
+- [Matt Allen on Sustainable Startup Funding, Angel Investing ...](https://www.youtube.com/watch?v=-VVa9t5JAXc) — In this episode of the DevReady Podcast, host Andrew Romeo speaks with Matt Allen, Head of Capital & New Markets at Tractor Ventures,
+
+## Shared history — from the spine
+**5 emails** · first 2026-04-15 · last 2026-04-27
+
+- 2026-04-27 ← Re: ACT Diagnostic Session - details and document sharing
+- 2026-04-21 ← Re: ACT Diagnostic Session - details and document sharing
+- 2026-04-15 ← ACT Diagnostic Session - details and document sharing
+- 2026-04-15 ← Re: Intro to Diagnostic Team for A Curious Tractor
+- 2026-04-15 ← Re: Intro to Diagnostic Team for A Curious Tractor
 
 ## Understanding — drafted
-Matt Allen serves as both the Co-Founder and CEO of Tractor Ventures, an organization focused on offering non-dilutive funding solutions for business growth. This innovative approach to capital allows companies to secure funds without sacrificing ownership stakes, addressing a critical gap in traditional financing methods. The company’s mission is driven by a desire to democratize access to capital by providing alternative funding options that can be more flexible and equitable than traditional equity-based investments.
+Matt Allen co-founded Tractor Ventures, an organization that focuses on offering non-dilutive revenue-based financing to startups. His work is centered around providing a funding model where founders can grow their businesses without losing equity in the process. Through Tractor Ventures, Matt aims to offer flexible and innovative financial solutions for entrepreneurs who wish to maintain control over their ownership stake.
 
-Matt Allen appears to deeply care about the challenges businesses face when seeking growth capital, particularly the dilution of ownership that often accompanies traditional funding rounds. His passion for creating robust and reliable funding solutions is evident through Tractor Ventures’ mission to solve issues related to funding equity. Matt emphasizes the importance of understanding a company’s current standing during due diligence, highlighting his commitment to making informed decisions that can support sustainable business growth without compromising on equity risk. This approach reflects his broader goal of ensuring businesses have access to fair and flexible capital options to thrive.
+Matt clearly cares about empowering startup founders by giving them more options for financing that doesn’t require them to give up significant portions of their company’s equity. This approach not only supports the growth of these businesses but also aligns with Matt's belief in allowing founders to retain more of what they've built.
+
+In our collaboration, we have primarily focused on conducting diagnostic sessions. These sessions involve detailed discussions and document sharing aimed at understanding Tractor Ventures’ needs and how ACT can support them effectively. The recent emails indicate that our work together has been concentrated on organizing these diagnostic sessions and preparing for the teams to meet and share relevant information.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

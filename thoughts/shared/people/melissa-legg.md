@@ -2,7 +2,7 @@
 name: Melissa Legg
 lane: community
 storyteller_id: 53ef99b6-9453-4051-8ab0-f2df4fc6e038
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Melissa Legg

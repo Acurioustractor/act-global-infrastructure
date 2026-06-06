@@ -2,7 +2,7 @@
 name: Karen Gee
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Karen Gee
@@ -16,16 +16,19 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Karen Gee is an Australian fashion designer and founder of her eponymous label. She also holds senior roles in healthcare strategy and business development. She is known for her bold and inspiring fashion contributions.
-- [Karen Gee - Wikipedia](https://en.wikipedia.org/wiki/Karen_Gee) — Karen Gee (née Martin; born 1973) is an Australian women fashion designer who is the founder of eponymous fashion label, Karen Gee.
-- [Karen Gee - LinkedIn - Mesh](https://me.sh/profile/karen-gee) — Karen Gee is an accomplished professional with a strong background in healthcare management, operations, and financial planning.
-- [Karen Gee - California Quality Collaborative](https://www.calquality.org/karen-gee) — Karen Gee is the Senior VP of Strategy and Business Development at Prospect Health. Prior to joining Prospect, she served as the Senior VP of Health Equity at
-- [Founder Karen Gee Fashion Designer - heels agency](https://heelsagency.com/2025/01/founder-karen-gee) — Karen Gee, a Sydney-based designer and busy mom of five, has redefined the fashion scene with her bold, inspiring journey.
+Karen Gee is a fashion designer known for her eponymous label and a healthcare executive with roles in strategy and business development. She notably dressed Meghan, Duchess of Sussex. Her career spans healthcare management and strategic planning.
+- [Karen Gee < California Quality Collaborative](https://www.calquality.org/karen-gee) — # Karen Gee. Karen Gee is the Senior VP of Strategy and Business Development at Prospect Health. Prior to joining Prospect, she served as the Senior VP of Health Equity at Honest Medical Group and was responsible for the application and management of five ACO REACH entities. Kare
+- [Karen Gee - Wikipedia](https://en.wikipedia.org/wiki/Karen_Gee) — # Karen Gee. | Born | Karen Martin  1973 (age 52–53)  Rockhampton, Queensland, Australia |. **Karen Gee** (née **Martin**; born 1973) is an Australian women fashion designer who is the founder of eponymous fashion label, Karen Gee. Gee was born Karen Martin in 1973 and raised in 
+- [College Coach Karen](http://www.karensgee.com) — Karen S. Gee is a college success coach based in the Bay Area who helps young adults develop skills to navigate college life as freshmen or transfer
+- [Karen Gee - LinkedIn](https://me.sh/profile/karen-gee) — Karen Gee is an accomplished professional with a strong background in healthcare management, operations, and financial planning. Karen has held prominent roles in various organizations, including serving as the Senior Vice President of Health Equity & Performance at Honest Medica
+
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Karen Gee is an Australian fashion designer born in 1973 and founder of the eponymous fashion label, Karen Gee. She brings a blend of creativity and strategic thinking to her work, leading her not only in the fashion industry but also in healthcare management. As both the Creative Director and Founder of her brand, she has made significant contributions through her bold and inspiring designs that have redefined aspects of the fashion scene.
+Karen Gee is a multifaceted individual known for her contributions to both the fashion industry and healthcare sector. As the founder and Creative Director of her eponymous label, Karen Gee has made significant marks in fashion design, gaining notable recognition for dressing influential figures such as Meghan, Duchess of Sussex. Beyond fashion, she holds an extensive background in healthcare management, currently serving as the Senior VP of Strategy and Business Development at Prospect Health. In this role, she plays a crucial part in strategic planning and business development, with prior experience managing five ACO REACH entities at Honest Medical Group.
 
-Beyond the world of fashion, Karen appears deeply committed to healthcare strategy and business development. Her roles as Senior VP of Strategy and Business Development at Prospect Health and her previous position as Senior VP of Health Equity underscore a dedication to impactful work in the healthcare sector. This dual focus suggests that she values both creative expression and practical solutions aimed at improving health outcomes and equity, reflecting a broad commitment to making meaningful contributions across different fields.
+Karen seems to care deeply about both creativity and health equity. Her work in fashion reflects her passion for design and the importance of personal expression through clothing. Simultaneously, her roles in healthcare management indicate a strong commitment to improving access to quality medical services and addressing disparities within the system. Karen’s dedication to these areas suggests that she values making meaningful contributions to both individual lives and broader communities, emphasizing innovation and equitable access across different sectors.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

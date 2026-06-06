@@ -2,7 +2,7 @@
 name: Pam Ramsay
 lane: community
 storyteller_id: f3efc860-d1fc-4ba9-8fbf-081204be893e
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Pam Ramsay

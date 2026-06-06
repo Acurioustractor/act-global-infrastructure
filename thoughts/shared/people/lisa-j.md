@@ -2,7 +2,7 @@
 name: Lisa J
 lane: community
 storyteller_id: 7d26d712-a5a8-4bcf-9bb7-489a9dbca4f1
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Lisa J

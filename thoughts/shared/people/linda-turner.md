@@ -2,7 +2,7 @@
 name: Linda Turner
 lane: community
 storyteller_id: ecdac4dd-1fae-47cd-ac05-53793cf29133
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Linda Turner

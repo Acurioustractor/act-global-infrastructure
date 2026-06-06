@@ -2,7 +2,7 @@
 name: Brett Klumpp
 lane: community
 storyteller_id: 5780f5b2-2e8d-4a79-8625-9ebd22640c48
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Brett Klumpp

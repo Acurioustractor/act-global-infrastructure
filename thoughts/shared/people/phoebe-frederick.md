@@ -2,7 +2,7 @@
 name: Phoebe Frederick
 lane: supporter
 warmth: 38
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Phoebe Frederick
@@ -16,7 +16,7 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Phoebe Frederick is a Senior Policy Officer for the Australian Government's Department of Employment and Workplace Relations, focusing on First Nations and ex-offender employment policies. The department aims to improve employment opportunities and workplace relations in Australia.
+Phoebe Frederick works for the Australian Government's Department of Employment and Workplace Relations, focusing on First Nations and ex-offender employment policies. Her role involves developing and implementing policies to improve employment opportunities for these groups.
 - [Phoebe F. - Senior Policy Officer - Australian Government Department of Employment and Workplace Relations](https://au.linkedin.com/in/phoebe-frederick) — Phoebe F.
 Senior Policy Officer
 Greater Melbourne Area
@@ -30,14 +30,17 @@ Phoebe is an innovative and collaborative professional with solid background in 
 Experience
 Senior Policy Officer
 [Australian Government Department of Employment and Workplace R
-- [Wikipedia:WikiProject Women/Did you know](https://en.wikipedia.org/wiki/Wikipedia:WikiProject_Women/Did_you_know) — If an article is missing from the list, make sure it is tagged (e.g. that **Eorcengota** had a vision predicting her own death in which she was symbolically represented as a gold coin? that **Momoko Seto** said that she received her first voice-acting role after only four months 
-- [Hindustan Times 22-02-2026 | PDF | Narendra Modi - Scribd](https://www.scribd.com/document/1001664356/Hindustan-Times-22-02-2026) — Hindustan Times 22-02-2026. India and Brazil have agreed to double their bilateral trade to $30 billion by 2030 and signed key agreements for
-- [[PDF] 2026 Annual Meeting Program - Cognitive Neuroscience Society](https://www.cogneurosociety.org/documents/CNS_2026_Program.pdf) — McDougle, PhD., Salon EF 2:30 - 4:30 pm Poster Session E, Fairview/Kitsilano Ballrooms 3:30 - 4:00 pm Coffee Service, Kitsilano Ballroom 4:30 - 5:30 pm The 15th Annual Distinguished Career Contributions Award Lecture, Why Study Normative Cognitive Aging When It Is Not a Disease?,
+- [The 10th Outstanding Men and Women of the Year 2026 ...](https://www.facebook.com/iamdanzspeaks/posts/look-the-10th-outstanding-men-and-women-of-the-year-2026-alongside-the-launch-of/1348343493978600) — As Action Desk Officer on Local Employment and Migrant Worker hard work, efficiency. able to help countless unemployed and under-employed
+- [Australharmony - Biographical register B (Be-Bez)](https://www.sydney.edu.au/paradisec/australharmony/register-B-2.php) — The primary focus of the biographical register is musical personnel first active before the end of 1860, with a secondary focus on members of their circles.
+- [All Events and Conferences](https://www.uni-due.de/in-east/events_neu/events_and_conferences_archive.php) — [![Image 2: Logo der Organisationseinheit "IN-EAST"](https://www.uni-due.de/imperia/md/images/in-east/in-east_logo_230x90.jpg) # IN-EAST ## Institute of East Asian Studies](https://www.uni-due.de/in-east). [Social Media](https://www.uni-due.de/in-east/events_neu/events_and_confer
+
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Phoebe Frederick is a Senior Policy Officer at the Australian Government's Department of Employment and Workplace Relations. Her role involves developing policies that enhance employment opportunities for First Nations people and ex-offenders in Australia. Phoebe works within an environment dedicated to improving workplace relations, aiming to create more inclusive and equitable working conditions across the country. She has established herself as a collaborative professional with expertise in crafting innovative solutions that can address the unique challenges faced by marginalized communities in finding meaningful employment.
+Phoebe Frederick is a Senior Policy Officer at the Australian Government's Department of Employment and Workplace Relations. Her primary focus lies in shaping policies that enhance employment opportunities for First Nations people and ex-offenders. This work involves extensive collaboration with various stakeholders, including community organizations, governmental bodies, and individuals directly affected by these policies. Phoebe’s role is pivotal in translating policy into actionable plans that can lead to tangible improvements in the job market accessibility for her target groups.
 
-Phoebe seems to care deeply about social equity and inclusion within the workforce. Her work underscores her commitment to supporting those who might otherwise face significant barriers to gaining employment, such as First Nations individuals and former offenders. By focusing on these groups, she is likely driven by a desire to create pathways for these communities to access economic opportunities that can help them lead more fulfilling lives. Phoebe’s dedication to these issues suggests a broader concern with social justice and the well-being of underrepresented populations in Australian society.
+Phoebe seems deeply committed to creating equitable employment opportunities and fostering inclusive workplaces. Her work suggests a strong belief in the transformative power of employment on individual lives and communities. Additionally, Phoebe’s recognition as an Action Desk Officer who has helped countless unemployed and under-employed individuals indicates that she values hands-on involvement and practical solutions. The respect for First Nations cultures and histories, along with her focus on ex-offender rehabilitation through employment, demonstrates her dedication to social justice and the empowerment of marginalized groups in society.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

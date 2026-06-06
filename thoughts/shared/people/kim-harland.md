@@ -2,7 +2,7 @@
 name: kim harland
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # kim harland
@@ -16,8 +16,8 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Kim Harland leads Philanthropy Australia, focusing on stakeholder engagement and business development. She oversees a national team dedicated to advancing the organization's goals. Her work emphasizes connection and care in philanthropy.
-- [Kim Harland - Philanthropy Australia](https://www.philanthropy.org.au/about-us/our-team/kim-harland) — Kim Harland is a strategic leader with expertise in philanthropy, stakeholder engagement, and business development in the for-purpose sector.
+Kim Harland is Executive Director at Philanthropy Australia, focusing on engagement and partnerships. She leads initiatives to strengthen community connections and support philanthropy in Queensland and the Northern Territory. Her work emphasizes building strong, connected communities and fostering collaboration across the not-for-profit sector.
+- [Kim Harland - Philanthropy Australia](https://www.philanthropy.org.au/about-us/our-team/kim-harland) — Kim Harland Senior Director, Engagement (QLD/NT). Kim Harland is a strategic leader with expertise in philanthropy, stakeholder engagement, and business development in the for-purpose sector. As Director, Engagement (QLD/NT) at Philanthropy Australia, she plays a key role in stre
 - [Kim Harland - Executive Director | Philanthropy Leader | Business Development | Thought Leadership | Building Capacity - Philanthropy Australia](https://au.linkedin.com/in/kimharland) — Kim Harland
 Executive Director | Philanthropy Leader | Business Development | Thought Leadership | Building Capacity
 Brisbane, Queensland, Australia
@@ -29,13 +29,24 @@ I love to build, challenge, and innovate. As a marketing and business leader, I 
 
 
 Exp
-- [Welcome to PA's two new Engagement Leads - Philanthropy Australia](https://www.philanthropy.org.au/news-and-stories/welcome-to-pas-two-new-engagement-leads) — Caroline joins Kim Harland in the PA Queensland team as the ... It's why connection and care remain at the heart of her work. Fleur
-- [Queensland Gives - Facebook](https://www.facebook.com/QueenslandGives/posts/it-was-wonderful-for-our-queensland-gives-by-queensland-community-foundation-ceo/1204206325131561) — ... Kim Harland from Philanthropy Australia today! Sarah is the newly appointed Deputy CEO and we discovered she is actually a Queenslander! So
+- [Queensland - Facebook](https://www.facebook.com/QueenslandGives/photos/it-was-wonderful-for-our-queensland-gives-by-queensland-community-foundation-ceo/1204206168464910) — ... Kim Harland from Philanthropy Australia today! Sarah is the newly appointed Deputy CEO and we discovered she is actually a Queenslander! So
+- [Welcome to PA's two new Engagement Leads - Philanthropy Australia](https://www.philanthropy.org.au/news-and-stories/welcome-to-pas-two-new-engagement-leads) — * Welcome to PA’s two new Engagement Leads. **We are delighted to welcome to new members of the Philanthropy Australia membership and engagement team – Fleur Allen and Caroline Morrissey.**. Caroline joins Kim Harland in the PA Queensland team as the Engagement Lead (QLD/NT). Wit
+
+## Shared history — from the spine
+**5 emails** · first 2026-03-18 · last 2026-05-05
+
+- 2026-05-05 ← Re: Introducing A Curious Tractor and Philanthropy Australia
+- 2026-04-13 ← Automatic reply: Introducing A Curious Tractor and Red Movies
+- 2026-03-24 ← Re: Introducing A Curious Tractor and Philanthropy Australia
+- 2026-03-19 ← Re: Introducing A Curious Tractor and Philanthropy Australia
+- 2026-03-18 ← Re: Introducing A Curious Tractor and Philanthropy Australia
 
 ## Understanding — drafted
-Kim Harland serves as the Acting Executive Director for Membership and Engagement at Philanthropy Australia, an organization dedicated to fostering philanthropic efforts across Australia. In this role, Kim leads a national team focused on stakeholder engagement and business development, ensuring that Philanthropy Australia’s initiatives are well-aligned with the needs and aspirations of its members and partners. Her work underscores a commitment to building connections and fostering care within the philanthropic sector.
+Kim Harland serves as the Acting Executive Director for Membership and Engagement at Philanthropy Australia, where she plays a critical role in fostering strong connections within the philanthropic community. Her focus extends to Queensland and the Northern Territory, emphasizing initiatives that strengthen community ties and promote collaboration across not-for-profit organizations. Kim’s work is characterized by her dedication to building robust partnerships and enhancing stakeholder engagement.
 
-Kim seems deeply invested in innovation and thought leadership within her field. She places significant emphasis on connecting people and organizations to facilitate meaningful giving and engagement. Her passion for building capacity and challenging conventional approaches suggests that she values continuous improvement and creative solutions to social issues. Kim’s dedication to care and connection indicates a strong belief in the power of relationships to drive positive change in philanthropy.
+Kim appears to care deeply about fostering an environment where philanthropy can thrive through strong community connections and innovative collaborations. Her emphasis on building capacity within the sector suggests a commitment to nurturing growth and development among both existing and emerging philanthropic efforts. Through her leadership, she aims to create more connected and resilient communities by leveraging strategic partnerships.
+
+In our shared work with Kim, we have primarily focused on introducing "A Curious Tractor," which seems to be a project or initiative associated with Philanthropy Australia. The emails indicate that there has been ongoing communication regarding this project, possibly exploring its integration with other entities like Red Movies. While the details are limited based on email subjects alone, it appears our collaboration revolves around promoting and supporting "A Curious Tractor" within Kim’s network at Philanthropy Australia.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

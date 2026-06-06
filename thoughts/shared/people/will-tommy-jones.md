@@ -2,7 +2,7 @@
 name: Will Tommy Jones
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Will Tommy Jones
@@ -16,16 +16,19 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Tommy Jones is a Texas-based alternative country band led by Gary Joe Mitchell. They focus on traditional country music. Their work emphasizes storytelling through lyrics.
-- [Will Tommy Jones - elasticStage](https://elasticstage.com/willtommyjones) — Will Tommy Jones is a Texas based alternative country band consisting of singer/songwriter Gary Joe Mitchell and drummer/songwriter Mark Hartman Anderson.
-- [Tommy Jones -- Black Mountain Rag [Country] (1972) : r/listentothis](https://www.reddit.com/r/listentothis/comments/9xozcm/tommy_jones_black_mountain_rag_country_1972) — Born in 1968, Atlanta native Tommy Jones is a musician of many talents. Coming of age in the 1980s, Tommy played keyboards and guitar in
-- [Strong, Silent, Ultraviolent (December 2007) - GQ](https://www.gq.com/story/tommy-lee-jones-no-country-for-old-men-coen-brothers) — Tommy Lee Jones has been acting nearly forty years, audiences are only now starting to recognize the depth of his talent.
+Tommy Lee Jones is an actor known for his roles in films like "No Country for Old Men" and "True Grit." He has a career in alternative country music and is involved in legal disputes over his earnings. He values his personal life and privacy.
+- [Will Tommy Jones - elasticStage](https://elasticstage.com/willtommyjones) — Will Tommy Jones spent much of his career doing road work across Canada, Mexico and the U.S. but due to burnout he left the road alternative country and light
+- [Tommy Lee Jones' Life and Career Beyond Hollywood - Facebook](https://www.facebook.com/groups/477488073933846/posts/1252835363065776) — He does his job with talent and then he thinks that his life is personal and does not think he needs any privileges like some of the others do.
 - [Tommy Lee Jones - Wikipedia](https://en.wikipedia.org/wiki/Tommy_Lee_Jones) — [Jump to content](https://en.wikipedia.org/wiki/Tommy_Lee_Jones#bodyContent). *   [(Top)](https://en.wikipedia.org/wiki/Tommy_Lee_Jones#). *   [1.1 College](https://en.wikipedia.org/wiki/Tommy_Lee_Jones#College). *   [1.1.1 College football](https://en.wikipedia.org/wiki/Tommy_Le
+- [Tommy Lee Jones Wants to Keep 'No Country' Money | Courthouse News Service](https://www.courthousenews.com/tommy-lee-jones-wants-to-keep-no-country-money) — LOS ANGELES (CN) – Tommy Lee Jones is challenging an order that requires him to pay his former talent agency close to $1.5 million for “No Country for Old Men.”     Jones, 66, filed a notice of appeal and request for trial in Superior Court against William Morris Agency and Willi
+
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Will Tommy Jones is a Texas-based alternative country band fronted by Gary Joe Mitchell, with Mark Hartman Anderson on drums. They operate within the realm of traditional country music, emphasizing storytelling through their lyrics and compositions. This musical approach allows them to connect deeply with audiences through relatable narratives and emotional depth. Their work often reflects the rich cultural heritage of Texas and the broader American South, blending classic country themes with a modern twist that resonates with both long-time fans of the genre and newer listeners.
+Will Tommy Jones is an alternative country recording artist who has been active in the music scene, particularly spending much of his career touring across Canada, Mexico, and the U.S. His musical journey was marked by extensive road work, which eventually led to burnout, causing him to step back from constant touring. In addition to his music career, he is known for legal disputes related to earnings from his various projects, including a notable conflict with his former talent agency over payments.
 
-From the context provided, it appears that Will Tommy Jones cares profoundly about preserving and evolving traditional country music while maintaining a strong focus on the power of storytelling. Their dedication to crafting songs that tell meaningful stories suggests a deep respect for the emotional connections between music and its listeners. This commitment to their craft indicates a passion not only for creating music but also for sharing experiences and emotions through their lyrics, aiming to touch hearts and minds across different generations of country music enthusiasts.
+Will Tommy Jones values his personal life and privacy highly, choosing not to share extensively about his private affairs or seek public attention beyond his professional accomplishments. He has maintained a stance that prioritizes personal matters as separate from public life, emphasizing the importance of keeping his personal sphere distinct from his career in music and perhaps other ventures. This approach reflects his desire for a balanced life where he can pursue his artistic passions without constant public scrutiny.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

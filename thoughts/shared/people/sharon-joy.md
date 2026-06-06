@@ -2,7 +2,7 @@
 name: Sharon Joy
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Sharon Joy
@@ -16,16 +16,31 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Sharon Joy Jerry's Universe focuses on creative marketing and insurance services. They emphasize organic growth and customer satisfaction. Their work involves diverse roles from customer service to software engineering.
-- [Director, Creative Marketing (Lifecycle and Organic Growth)](https://www.ziprecruiter.com/c/Jerry.ai/Job/Director,-Creative-Marketing-(Lifecycle-and-Organic-Growth)/-in-San-Francisco,CA?jid=1a40044dfc1088c9) — Join our team and work with passionate, curious and egoless people who love solving real-world problems. Help us build a revolutionary
-- [Director, Creative Marketing – Lifecycle and Organic Growth at Jerry](https://www.remoterocketship.com/us/company/jerry/jobs/director-creative-marketing-lifecycle-and-organic-growth-new-york-remote) — Working closely with Product, Design, Growth, and Customer Insights teams. • Driving customer growth and building brand affinity through organic content.
-- [How Much Does Jerry Pay in 2026? (265 Salaries) | Glassdoor](https://www.glassdoor.com/Salary/Jerry-Salaries-E3856415.htm) — Skip to contentSkip to footer. ## Jerry. # Explore Jerry salaries. Explore how much Jerry employees make through salaries, wages, tips, bonuses, stock, commissions and more. ### Customer Service Representative. ### Content Writer. ### Freelance Writer. ### Software Engineer. ### 
-- [Job Openings - Jerry](https://jerry.ai/job-openings) — * Insurance Customer Service Agent (Remote). * Engineering Engineering Team Lead, Core Product Engine (Backend). * Insurance Inbound Insurance Sales Representative (Remote). * Insurance Inside Sales Representative (Remote). * Insurance Insurance Sales Agent (Remote). * Legal Lega
+Sharon Joy Jerry's Universe focuses on innovative marketing and community growth. They care about organic growth and customer engagement. The company operates globally with offices in the U.S. and Australia.
+- [Sharon Joy - CAO at Transversified Marketing Group, Jerry's World and Itscalar - Jerry's Universe / Jerry's World / Transversified Marketing Group, Inc.](https://www.linkedin.com/in/sharonjclark) — Sharon Joy
+CAO at Transversified Marketing Group, Jerry's World and Itscalar
+Dallas, Texas, United States
+500 connections, 1737 followers
+
+
+About
+Dual Citizenship USA & Australia. (New York/LA/TX/Adelaide) Over 25 years…
+
+
+Experience
+Chief Administrative Officer
+[Jerry's Universe
+- [Director, Creative Marketing (Lifecycle and Organic Growth) at Jerry](https://remotejobs.org/remote-jobs/director-creative-marketing-lifecycle-and-organic-growth-jerry) — Apply for Director, Creative Marketing (Lifecycle and Organic Growth) at Jerry. Salary: USD 135000 - 185000. Full-time remote position in General.
+- [Manager, Organic Community & Channel Strategy at Jerry](https://www.remoterocketship.com/us/company/jerry/jobs/manager-organic-community-channel-strategy-united-states-remote) — Jerry is an innovative platform that simplifies car ownership by providing tools to compare car insurance, loans, and repair estimates. With services such as
+- [Community Growth Manager – Social Media & Engagement in San ...](https://talents.vaia.com/companies/jerry/san-jose/community-growth-manager-social-media-engagement-104723646) — Kick-start your career as a Community Growth Manager – Social Media & Engagement in San Jose at Jerry Easily apply on the largest job board for Gen-Z!
+
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Sharon Joy serves as the Chief Administrative Officer for Jerry's Universe / Jerry's World / Transversified Marketing Group, Inc., an organization that blends creative marketing services with insurance offerings. Under her leadership, the company emphasizes organic growth and customer satisfaction, fostering a diverse workforce that spans roles from customer service to software engineering. Sharon’s role involves overseeing various aspects of the administrative functions across these ventures, ensuring smooth operations and supporting the innovative projects within Jerry's Universe.
+Sharon Joy serves as the Chief Administrative Officer (CAO) for Transversified Marketing Group, which operates under several names including Jerry's Universe and Jerry's World. With a career spanning over 25 years, Sharon has been instrumental in steering these organizations towards achieving innovative marketing strategies and fostering community growth on a global scale. Her role involves overseeing administrative functions that ensure smooth operations across the company’s offices in both the U.S. and Australia. Sharon holds dual citizenship of the USA and Australia, which provides her with unique perspectives and insights into operating effectively across different markets.
 
-Sharon seems deeply invested in building an environment where passionate individuals can thrive by solving real-world problems through creative marketing strategies and personalized insurance services. She cares about fostering a culture that values teamwork and continuous learning, encouraging employees to be both curious and egoless. Her focus on organic growth indicates her commitment to long-term sustainability rather than short-term gains, suggesting she prioritizes the well-being of both customers and team members over aggressive expansion tactics.
+Sharon appears to care deeply about creating meaningful connections within communities and ensuring organic growth for Jerry's Universe and its subsidiaries. Her focus on customer engagement underscores a commitment to building authentic relationships rather than relying solely on conventional marketing tactics. By prioritizing creative marketing approaches that enhance lifecycle management and organic community development, Sharon aims to foster an environment where the company’s values resonate with its audience. This dedication to genuine interaction and sustainable growth reflects her broader goal of making a lasting impact in both the business world and society at large.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

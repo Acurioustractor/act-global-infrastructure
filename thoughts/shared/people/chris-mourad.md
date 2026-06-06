@@ -2,7 +2,7 @@
 name: Chris Mourad
 lane: community
 storyteller_id: 06aaaec5-be9d-4f46-8d82-fa064cdbebb2
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Chris Mourad

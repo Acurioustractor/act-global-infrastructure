@@ -2,7 +2,7 @@
 name: john mendoza
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # john mendoza
@@ -16,16 +16,19 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-John Mendoza is the Director of ConNetica, focusing on strategic governance and evidence-based approaches to improve mental health and well-being. He has held several executive roles, including the inaugural Chair of the Australian Government's mental health body. His work emphasizes collective innovation for meaningful outcomes.
-- [John Mendoza - The Conversation](https://theconversation.com/profiles/john-mendoza-166) — John is a Director of ConNetica after a career that has seen him hold several executive positions including the inaugural Chair of the Australian Government's
-- [Disruptive System Change Tackling the Injustice of Suicide](https://www.mentalhealthnewsradionetwork.com/disruptive-system-change-tackling-the-injustice-of-suicide-interview-with-john-mendoza-episode-20) — Today, John is the Director of ConNetica, an Australia organization established in 2007 with a mission of connecting people from diverse
-- [John Mendoza on the Productivity Commission mental health review](https://www.abc.net.au/listen/programs/am/john-mendoza-on-the-productivity-commission-mental-health-review/10349764) — Currently, the Commonwealth and states spend more than 9 billion dollars a year on mental health. John Mendoza is a director of ConNetica, a
-- [Ep 238 | Chat with John Mendoza, Director of ConNetica](https://thepropertycouch.com.au/ep238-money-and-mental-health-john-mendoza) — So today we've managed to rope in a very special expert who has dedicated his professional life to mental health matters and suicide prevention: John Mendoza,
+John Mendoza is a strategic governance expert focused on mental health and well-being, serving as Director of ConNetica and holding multiple executive roles in mental health advocacy and policy. He has authored numerous reports on mental health and suicide prevention, and played a key role in securing the $5 billion COAG Mental Health Plan in 2006.
+- [John Mendoza – The Conversation](https://theconversation.com/profiles/john-mendoza-166) — * Adjunct Associate Professor, University of Sydney. John is a Director of ConNetica after a career that has seen him hold several executive positions including the inaugural Chair of the Australian Government’s National Advisory Council on Mental Health, CEO of the Mental Health
+- [Ep 238 | Chat with John Mendoza, Director of ConNetica](https://thepropertycouch.com.au/ep238-money-and-mental-health-john-mendoza) — # 238 | Money & Mental Health: Why There’s More To It Than You Think – Chat with John Mendoza, Director of ConNetica. If you’ve got financial stress then, chances are, you probably feel like your whole life is out of whack… and this can seriously interfere with your mood, mindset
+- [John MENDOZA | Co-Director | Executive | Research profile](https://www.researchgate.net/profile/John-Mendoza) — This is a submission to the Productivity Commission (of Australia's) Inquiry into Mental Health prepared by ConNetica for the Western Sydney Primary Health
+- [John Anthony Mendoza | Australian Speakers Bureau](https://australianspeakersbureau.com/john-anthony-mendoza) — John has played pivotal roles in national and international efforts in alcohol and other drug policy and mental health advocacy and reform for over 35 years. In 2005, as Chief Executive of the Mental Health Council of Australia, he was responsible for the seminal report, *Not for
+
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-John Mendoza serves as the Director of ConNetica, an organization founded in 2007 with a mission to connect individuals from diverse backgrounds. His career has been marked by various executive roles, including his pioneering position as the inaugural Chair of the Australian Government's mental health body. John focuses on strategic governance and evidence-based approaches to enhance mental health and well-being, advocating for collective innovation to achieve meaningful outcomes.
+John Mendoza is a prominent figure in the field of mental health governance and advocacy, currently serving as the Director of ConNetica. His career spans over three decades, during which he has held numerous executive roles including the inaugural Chair of the Australian Government’s National Advisory Council on Mental Health and CEO of the Mental Health Council of Australia. John is also an Adjunct Associate Professor at the University of Sydney. He has been instrumental in shaping mental health policies both nationally and internationally, notably through his involvement in securing significant funding for mental health initiatives, such as the $5 billion COAG Mental Health Plan in 2006.
 
-John seems deeply committed to addressing issues related to mental health and suicide prevention, leveraging his extensive experience in government roles and within organizations like ConNetica. His work underscores a dedication to ensuring that efforts to improve mental health are both strategic and based on solid evidence. He values collaboration across different sectors and aims for tangible improvements in the lives of individuals facing mental health challenges.
+John’s work revolves around strategic governance and advocacy for mental health and well-being, emphasizing the critical intersection between financial stress and mental health. He has authored numerous reports on suicide prevention and mental health policy reforms. John’s contributions extend to public speaking engagements where he addresses the complexities of mental health issues and their broader societal impacts. His dedication is evident in his efforts to improve mental health outcomes through evidence-based policies, advocating for greater investment in mental health services, and highlighting the importance of addressing financial stress as a key component of overall well-being.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

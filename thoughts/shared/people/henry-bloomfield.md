@@ -2,7 +2,7 @@
 name: Henry Bloomfield
 lane: community
 storyteller_id: fd30e477-8ce6-4791-bed9-ea25ede7ade9
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Henry Bloomfield

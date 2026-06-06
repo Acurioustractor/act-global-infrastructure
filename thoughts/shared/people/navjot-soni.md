@@ -2,7 +2,7 @@
 name: Navjot Soni 
 lane: community
 storyteller_id: c6710f45-1dda-4966-80ea-83f246158983
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Navjot Soni 

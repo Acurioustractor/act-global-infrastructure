@@ -2,7 +2,7 @@
 name: Tom Bowyer 
 lane: community
 storyteller_id: 2aa01876-130a-4eb9-9877-a6e6cf6803fc
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Tom Bowyer 

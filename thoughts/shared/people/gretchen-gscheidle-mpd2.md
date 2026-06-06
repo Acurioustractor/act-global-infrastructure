@@ -2,7 +2,7 @@
 name: Gretchen Gscheidle, MPD2
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Gretchen Gscheidle, MPD2
@@ -16,7 +16,10 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Gretchen Gscheidle is Managing Director at Massive Change Network, focusing on global climate initiatives. She previously led design projects and is an advocate for whole-brained design and innovation. She cares about impactful design and sustainable change.
+Gretchen Gscheidle is the Managing Director of Massive Change Network, focusing on strategic impact design and global climate initiatives. She previously served as Production Director for the organization. Her work emphasizes life-centered design and global collaboration.
+- [Gretchen Gscheidle's Post - LinkedIn](https://www.linkedin.com/posts/gretchengscheidle_design-career-mc24-activity-6941064495880425473-2ZqF) — On June 20, I start as the Production Director, Design Studio at their Massive Change Network! Sixteen years ago, when Chicago's Museum of
+- [Gretchen Gscheidle's Post - LinkedIn](https://www.linkedin.com/posts/gretchengscheidle_nextgeneration-design-engineering-activity-7005718900231335936-41Q9) — Impact Designer | Life-Centered Design | Helping Organizations Recognize What's Worth Building. Massive Change Network (Bruce Mau) delivering
+- [Jessica Fenner's Post - LinkedIn](https://www.linkedin.com/posts/jffenner_thats-right-a-cherished-part-of-working-activity-7318422492853714944-7k48) — A cherished part of working with Massive Change Network has been collaborating with this inspiring team, helmed by Gretchen Gscheidle, MPD2.
 - [Gretchen Gscheidle - Whole-Brained Design + Innovation Leader, Educator + Coach | Herman Miller, Inc + Bruce Mau | $800M annual revenue + award-winning designs - Original Tombola, LLC](https://www.linkedin.com/in/gretchengscheidle) — Gretchen Gscheidle
 Whole-Brained Design + Innovation Leader, Educator + Coach | Herman Miller, Inc + Bruce Mau | $800M annual revenue + award-winning designs
 Chicago, Illinois, United States
@@ -25,14 +28,14 @@ Chicago, Illinois, United States
 
 About
 I’m a strategic impact designer and the founder o
-- [Board of Directors - Anthropocene.Design NGO](https://www.anthropocenedesign.org/new-page-3) — Gretchen Gscheidle is an eternal optimist, grounded realist and leader in the business of design. Her commercialized projects generate more than $800 million in
-- [Gretchen Gscheidle's Post - LinkedIn](https://www.linkedin.com/posts/gretchengscheidle_design-career-mc24-activity-6941064495880425473-2ZqF) — On June 20, I start as the Production Director, Design Studio at their Massive Change Network! Sixteen years ago, when Chicago's Museum of
-- [Better Design Through Humanity - McCormick School of Engineering](https://www.mccormick.northwestern.edu/magazine/spring-2016/better-design-through-humanity.html) — —Gretchen Gscheidle (MPD2 '10) Director of Insight + Exploration at Herman Miller, Inc. A History of Innovation. It all started in 1997 when the singular first-
+
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Gretchen Gscheidle is a Managing Director at Massive Change Network, where she focuses on global climate initiatives and aims to create impactful and sustainable change through design. With over two decades of experience in the field, Gretchen has previously held leadership roles that include working with Herman Miller, Inc., an organization known for its innovative designs and substantial annual revenue exceeding $800 million. She is also a founding member of Original Tombola, LLC, and sits on the Board of Directors at Anthropocene.Design NGO. Through her career, she has advocated for "whole-brained" design that integrates both creative and analytical thinking to address complex challenges.
+Gretchen Gscheidle is the Managing Director of Massive Change Network, an organization dedicated to fostering global collaboration through strategic impact design. She has held various leadership roles within the network, including her previous position as Production Director. Gretchen's work focuses on "life-centered design," a philosophy that emphasizes designing solutions with a deep consideration for human life and well-being. This approach is central to her efforts in tackling climate initiatives and other global challenges.
 
-Gretchen appears to care deeply about using design as a tool for positive societal impact, particularly in the realm of sustainability and climate change. She values innovation and sees it as crucial for tackling global issues effectively. Her work reflects an optimistic yet pragmatic approach to problem-solving, aiming to balance idealistic visions with practical realities. Gretchen’s engagement with various organizations indicates her commitment to fostering a culture where design thinking is applied not just for commercial success but also for the greater good, emphasizing humanity and sustainable practices in all her projects.
+Gretchen appears to care deeply about leveraging design to create positive social impact and foster sustainable practices worldwide. Her commitment to life-centered design reflects a dedication to ensuring that the designs and strategies she works on are not only innovative but also respectful of human needs and environmental sustainability. Collaborative efforts and teamwork seem to be at the core of Gretchen's professional ethos, as evidenced by her role in leading the Massive Change Network team towards achieving impactful goals through collective effort.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

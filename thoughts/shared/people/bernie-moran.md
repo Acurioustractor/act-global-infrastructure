@@ -2,7 +2,7 @@
 name: Bernie Moran
 lane: community
 storyteller_id: 8484b740-9e58-4d26-ad5a-f51cf2a52f10
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Bernie Moran

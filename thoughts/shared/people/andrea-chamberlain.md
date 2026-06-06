@@ -2,7 +2,7 @@
 name: Andrea Chamberlain
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Andrea Chamberlain
@@ -16,7 +16,7 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Andrea Chamberlain is a creative business owner of "You Can Create," focusing on helping small businesses. She emphasizes community building and social justice. She has experience in project management and creative arts.
+Andrea Chamberlain is a creative business owner of "You Can Create" and focuses on helping small businesses. She emphasizes community building and connection. She also works for the U.S. Department of State.
 - [Photo by Andrea Chamberlain (@livemylife_andrea) · November 9 ...](https://www.instagram.com/p/DQ0Sa--gfNT) — Create is looking for experienced, people-centred freelance Project Managers to join our London pool, working onsite to deliver high-quality creative arts
 - [Andrea Chamberlain - Listen - Observe - Connect Take the risks, have the experiences and share with others. Building community and connection for everyone's future. - SecondLife Cooperative](https://au.linkedin.com/in/andrea-chamberlain) — Andrea Chamberlain
 Listen - Observe - Connect Take the risks, have the experiences and share with others. Building community and connection for everyone's future.
@@ -26,13 +26,35 @@ Upper Barron, Queensland, Australia
 
 About
 Grow your connections. Have you heard the 
-- [[PDF] Andrea Chamberlain – Stewardship moment 2016 One of the things ...](https://www.uccmanhattan.org/uploads/4/1/8/2/41827549/andrea_stewardship_moment.pdf) — Social justice issues are upheld as important life work, integral to our Christian faith. As a mom, it is encouraging that my children are welcome to stay with
-- [In this episode of Ask Arwen Anything, Chamberlain Managing ...](https://www.instagram.com/reel/DX_6TbfBPQs) — ... you can make as a leader, if you've got a ... they continue the critical work of improving and transforming patient lives and care.
+- [[PDF] Andrea Chamberlain – Stewardship moment 2016 One of the things ...](https://www.uccmanhattan.org/uploads/4/1/8/2/41827549/andrea_stewardship_moment.pdf) — Andrea Chamberlain – Stewardship moment 2016 One of the things that first drew me to this church was, quite honestly, the food! When Brent and I had moved to Manhattan from Vancouver, British Columbia, we experienced quite a bit of culture shock. We were living through several ma
+- [Andrea M Chamberlain - Accomplished Professional with a Track Record of Leadership Excellence and Team Empowerment - USGI, DOS](https://www.linkedin.com/in/andrea-m-chamberlain-a6477866) — Andrea M Chamberlain
+Accomplished Professional with a Track Record of Leadership Excellence and Team Empowerment
+United States
+60 connections, 60 followers
+
+
+About
+N/A
+
+
+Experience
+U.S. Department of State
+[U.S. Department of State](N/A)  
+N/A - Present
+N/A
+
+
+
+Education
+Universit
+
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Andrea Chamberlain is a dedicated small business owner who runs "You Can Create," an organization focused on supporting other small businesses. Her background in project management and creative arts has enabled her to foster environments where community building and social justice are at the forefront. Andrea actively seeks experienced, people-centered professionals to join her team in London, emphasizing high-quality service delivery through creative projects. She is deeply involved in her local community and uses her platform to encourage others to take risks, share experiences, and build connections that benefit everyone's future.
+Andrea Chamberlain is a dedicated small business owner and the founder of "You Can Create," an organization that focuses on supporting other small businesses, particularly within the creative arts sector. Her work revolves around building strong community connections and fostering a collaborative environment where businesses can thrive through shared experiences and mutual support. Besides her entrepreneurial pursuits, Andrea also holds a position with the U.S. Department of State, suggesting she brings a blend of practical business skills and strategic government experience to her endeavors.
 
-Andrea cares deeply about creating a sense of belonging and fostering meaningful relationships within the communities she serves. Her work reflects a commitment to social justice, which she views as an integral part of her personal and professional life. As a mother and business owner, Andrea places significant importance on ensuring that her children are exposed to environments where they can grow alongside her in promoting positive change. She is passionate about leadership roles that enable transformative improvements in people's lives and believes in the power of collaboration and shared experiences to drive meaningful progress.
+Andrea appears to deeply care about nurturing meaningful connections and community building, both in her professional life and personal interests. Her emphasis on listening, observing, and connecting indicates that she values empathy and authentic engagement with others. Through her work at You Can Create and her role within the U.S. Department of State, Andrea aims to create opportunities for people to take risks, have enriching experiences, and share their insights with broader communities. This approach underscores her commitment to a future where everyone can benefit from strengthened relationships and collaborative efforts.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

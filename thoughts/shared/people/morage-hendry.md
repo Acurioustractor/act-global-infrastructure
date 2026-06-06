@@ -2,7 +2,7 @@
 name: Morage Hendry
 lane: community
 storyteller_id: 3ff63d10-6f3b-4b62-9f8a-177848796307
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Morage Hendry

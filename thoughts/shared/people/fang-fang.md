@@ -2,7 +2,7 @@
 name: Fang Fang
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Fang Fang
@@ -16,35 +16,30 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Fang Fang Foshan SL Glass Craft Co., Ltd specializes in glass craft, focusing on artistic and functional glassware. They emphasize quality and innovation in their products. Their work reflects a commitment to craftsmanship and design.
-- [Fang Fang | Encyclopedia.com](https://www.encyclopedia.com/arts/encyclopedias-almanacs-transcripts-and-maps/fang-fang) — Fang Fang's early works concentrated mostly on urban factory workers who possessed a strong sense of social consciousness and were coping with the aftermath of
-- [Fang Fang（A contemporary Chinese writer and former chairperson ...](https://baike.baidu.com/en/item/Fang%20Fang/933466) — Fang Fang, born Wang Fang in May 1955 in Nanjing, Jiangsu, with ancestral roots in Pengze, Jiangxi, is a contemporary Chinese writer. She served as the
-- [Fang Fang - Technical Designer at Gensler](https://www.linkedin.com/in/fang-fang-14633239) — Fang Fang
-Technical Designer at Gensler
-Emeryville, California, United States
-354 connections, 356 followers
+Fang Fang Foshan SL Glass Craft Co., Ltd specializes in glass craft products. They focus on traditional and decorative glass items. Their work emphasizes quality and craftsmanship.
+- [Fuzhou Yong Fang Arts & Crafts Co., Ltd. - Made-in-China.com](https://www.made-in-china.com/showroom/maigycai) — We are manufacturer provide household & garden glass/iron/ wood products, including Chinese traditional lantern, candle holder, mirror, wall decor., vase,
+- [Rebecca Fang - Sanitary Ware Senior Export Manager at Foshan Casino Building Materials Co.,Ltd](https://cn.linkedin.com/in/rebecca-fang-641331b9) — Rebecca Fang
+Sanitary Ware Senior Export Manager at Foshan Casino Building Materials Co.,Ltd
+Foshan, Guangdong, China
+500 connections, 1780 followers
 
 
 About
-N/A
+High sense of responsibility,friendly and honest are three aspects to prove my…
 
 
 Experience
-Technical Designer
-[Gensler](https://www.linkedin.com/company/gensler)  
-Jul 2019 - Present
-San Francisco, California
+Foshan Casino Building Materi
+- [Fang Fang - China Unofficial Archives](https://minjian-danganguan.org/en/archive/170) — Fang Fang is a prominent contemporary Chinese writer and public intellectual who has long been involved in literary creation and cultural research. She has
+- [86-755-32907067 Contact Information](https://rorocraft.goldsupplier.com/contacts.html) — The contact information of Shenzhen Tian Yi Fang Crafts Mfg Co., Ltd., including the address, contact person, telephone, WeChat ID and fax number.
 
-
-
-Education
-Academy of Art 
-- [Fang Fang Chen Archives | The Glasshammer](https://theglasshammer.com/tag/fang-fang-chen) — Chen spent a year in Hong Kong running strategy, and was put up for promotion to senior vice president seven months after she took on this role.
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Fang Fang is a multifaceted individual with notable contributions across different fields. In her professional capacity at Foshan SL Glass Craft Co., Ltd, she works as a Sales Specialist, contributing to the company's focus on artistic and functional glassware products that emphasize quality and innovation. This work reflects a dedication to both craftsmanship and modern design. Additionally, Fang Fang is recognized for her contributions in technical design through her role at Gensler, where she has been since July 2019, further showcasing her versatility and expertise in design-related industries.
+Fang Fang is a Sales Specialist at Foshan SL Glass Craft Co., Ltd., where she works to promote traditional and decorative glass items. The company emphasizes quality and craftsmanship in its products, ranging from household and garden decor to intricate glass crafts such as lanterns, mirrors, and wall decorations. While the context does not provide specific details about Fang Fang’s day-to-day activities or her role within the organization beyond being a Sales Specialist, it suggests she is involved in representing the company's high-quality craftsmanship to potential clients and customers.
 
-From the available information, it seems that Fang Fang cares deeply about maintaining high standards of craftsmanship and innovation, particularly in glass craft. Her involvement in sales and technical design suggests an interest in bridging creative processes with practical applications. Additionally, given her background as a writer with works focusing on social consciousness among urban factory workers, it appears she values stories that reflect societal issues and human resilience. This combination of artistic sensibility and social awareness likely influences her approach to both her professional roles and personal interests.
+From the available information, Fang Fang appears to care deeply about maintaining the quality of traditional glass crafts and their significance in both decorative and practical applications. Her work seems to be centered around promoting these artisanal products, likely highlighting their unique designs and the skilled labor behind them. Additionally, her role might involve engaging with clients to understand their needs and ensuring that they are satisfied with the craftsmanship and utility of the glass items produced by Foshan SL Glass Craft Co., Ltd.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

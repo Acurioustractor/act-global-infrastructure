@@ -2,7 +2,7 @@
 name: Luke Napier
 lane: community
 storyteller_id: ec418f44-9143-4f6a-a313-77d43f57b991
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Luke Napier

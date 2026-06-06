@@ -2,7 +2,7 @@
 name: Simon White
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Simon White
@@ -16,7 +16,7 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Simon White is a prominent leader in Queensland, known for his role as President of the Australia Vietnam Business Council and his work in policy advising. He focuses on business growth and strategy, particularly in the Gold Coast region. His contributions emphasize international business relations and economic development.
+Simon White is a prominent business leader in Queensland, involved with the Australia Vietnam Business Council and the Australia Israel Chamber of Commerce. He focuses on international business relations and strategy consulting. His work emphasizes enhancing trade and business connections globally.
 - [Simon White](https://au.linkedin.com/in/simon-white-0267bb2) — Simon White
 
 Gold Coast, Queensland, Australia
@@ -33,14 +33,17 @@ N/A
 
 Education
 N/A
-- [Simon White - BEAM Exchange](https://beamexchange.org/participate/user-directory/4320) — Dr Simon White is an independent policy advisor who helps national, regional and city governments, business organisations and development agencies formulate
-- [Simon White Email & Phone Number - https://avbcq.org.au President](https://rocketreach.co/simon-white-email_20354674) — Simon White, based in Gold Coast, QLD, AU, is currently a President - Australia Vietnam Business Council at Australia Vietnam Business Council - https://avbcq.
-- [Simon White - Whitecorp International](https://www.scoc.org.au/directory/simon-white1) — WhiteCorp International is a multi facetted consultancy that provides business efficiency, strategy and business growth planning for rapid growth businesses.
+- [Simon White Email & Phone Number - https://avbcq.org.au President](https://rocketreach.co/simon-white-email_20354674) — Simon White Summary. Simon White, based in Gold Coast, QLD, AU, is currently a President - Australia Vietnam Business Council at Australia Vietnam Business
+- [Simon White | AusCham Vietnam](https://auschamvn.org/liaison-representatives/simon-white) — Check our social media on facebook (opens in a new window). Check our social media on linkedin (opens in a new window). Check our social media on instagram (opens in a new window). Check our social media on youtube (opens in a new window). ***Simon White*** is a high-profile Aust
+- [Dr Simon White - Medilaw](https://www.medilaw.com.au/consultants/dr-simon-white) — Dr Simon White is an experienced Occupational & Environmental Physician having worked in various industries over the past 25 years.
+
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Simon White serves as the Chief Executive Officer of Queensland Leaders Gold Coast, where he plays a significant role in fostering economic development and international business relations. With his extensive experience and leadership positions, including being the President of the Australia Vietnam Business Council, Simon focuses on advancing business growth strategies particularly within the Gold Coast region. His work involves advising national, regional, and city governments as well as other organizations on effective policy formulation to enhance economic ties and promote sustainable development.
+Simon White serves as a prominent figure within Queensland’s business community, specifically through his role as Chief Executive Officer of Queensland Leaders Gold Coast. His involvement extends to organizations such as the Australia Vietnam Business Council and the Australia Israel Chamber of Commerce, where he plays key roles in fostering international trade relations and providing strategic consulting services. His professional experience spans a wide range, from business leadership to international diplomacy, highlighting his commitment to global economic ties.
 
-Simon appears to care deeply about fostering strong international partnerships and leveraging strategic planning for economic growth. His efforts seem aimed at improving business environments through efficient strategies and robust policies that benefit both local and global stakeholders. Simon’s dedication to these areas suggests a commitment to creating opportunities for businesses and communities to thrive, emphasizing the importance of collaboration across different sectors and geographical boundaries.
+From available information, it appears that Simon White is deeply interested in promoting robust international connections through business initiatives and enhancing global trade networks. His work suggests a strong dedication to the development of relationships between Australia and other countries like Vietnam and Israel. Additionally, his background as an experienced Occupational & Environmental Physician indicates a broad range of expertise and interests, potentially extending into areas concerned with health and safety within various industries. However, more detailed personal or professional context is limited, making it challenging to infer additional specific values or priorities beyond his public roles and accomplishments.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

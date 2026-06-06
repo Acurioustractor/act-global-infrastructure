@@ -2,7 +2,7 @@
 name: narelle anderson
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # narelle anderson
@@ -16,16 +16,19 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Narelle Anderson is a founder and managing director of Envirobank Recycling, passionate about recycling to care for the environment. She is an Indigenous leader and advocate for sustainable practices. Her work focuses on incentivizing recycling and environmental stewardship.
-- [Narelle Anderson - UN Global Compact Network Australia](https://unglobalcompact.org.au/speakers/narelle-anderson) — An accomplished business leader and a recognised indigenous mentor and speaker, Narelle is passionate about the role recycling can play in caring for Country
-- ['Caring for country is part of our charter': Narelle Anderson](https://dynamicbusiness.com/featured/caring-for-country-is-part-of-our-charter-narelle-anderson.html) — Narelle Anderson is the Founder and Managing Director of Envirobank Recycling, an Indigenous-owned company that aims to incentivise bottle and can recycling
-- [Narelle Anderson is the Founder and Managing Director ... - Instagram](https://www.instagram.com/p/CHhN_1yD3TZ) — She has over 20 years of experience in recycling, having previously grown CBD Enviro Services twenty-fold before selling it to a public company.
-- [Narelle Anderson: "we simply dream about cleaning up the country"](https://www.ethnicbusinessawards.com/blog/narelle-anderson) — The founder and managing director of Envirobank Recycling, Narelle Anderson is a trailblazer. An Indigenous woman working in an industry so
+Narelle Anderson is a prominent Indigenous entrepreneur, founder of Envirobank Recycling, and advocates for sustainable recycling and Indigenous entrepreneurship. She is also a board member of the Australian Council of Recyclers and the NSW Indigenous Chamber of Commerce.
+- [Narelle Anderson - UN Global Compact Network Australia](https://unglobalcompact.org.au/speakers/narelle-anderson) — UN Global Compact Network Australia. # Narelle Anderson. Deputy Chair, New South Wales Indigenous Chamber of Commerce. Narelle Anderson, is a proud Jagera woman, and the founder and Managing Director of Envirobank Recycling. An accomplished business leader and a recognised indige
+- [Our Board — Community Resources](https://communityresources.org.au/our-board) — **Indu Balachandran has led work in strategy, program design and delivery, and governance in the social-purpose sector for over 15 years, including leadership roles at the Aboriginal Housing Office (NSW Gov), the National Centre of Indigenous Excellence and Social Ventures Austra
+- [Instagram](https://www.instagram.com/p/CHhN_1yD3TZ) — Narelle Anderson is the Founder and Managing Director of Envirobank Recycling, an Indigenous-owned company that aims to incentivise bottle and can recycling. She is also a board member of the Australian Council of Recyclers (ACOR) and a founding board member of the Green Building
+- [Caring for Country at scale: How Narelle Anderson b... | National Indigenous Times](https://nit.com.au/02-03-2026/22937/caring-for-country-at-scale-how-narelle-anderson-built-envirobank) — # Caring for Country at scale: How Narelle Anderson built Envirobank. When Narelle Anderson talks about recycling, she does not frame it as a lifestyle choice or a moral gesture. "For us, this work is caring for Country," she says. "But it's also about people. That's where the re
+
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Narelle Anderson is the Founder and Managing Director of Envirobank Recycling, a company dedicated to promoting recycling and environmental stewardship as a way to care for the environment. With over 20 years of experience in the recycling sector, she has a strong track record of success, including growing CBD Enviro Services significantly before selling it to a public entity. As an Indigenous leader, Narelle advocates for sustainable practices that resonate with her cultural values and commitment to Country.
+Narelle Anderson is a Jagera woman and a prominent Indigenous entrepreneur who serves as the founder and Managing Director of Envirobank Recycling, an Indigenous-owned company dedicated to incentivizing bottle and can recycling across communities. As an advocate for sustainable practices, Narelle plays an active role in both environmental and Indigenous entrepreneurship sectors through her roles on various boards, including those of the Australian Council of Recyclers (ACOR) and the New South Wales Indigenous Chamber of Commerce.
 
-Narelle cares deeply about environmental sustainability and community well-being. Her work is driven by the belief that recycling can play a significant role in preserving natural resources and reducing waste. She aims to incentivize communities to participate more actively in recycling efforts, reflecting a broader vision of environmental stewardship that aligns with Indigenous values of caring for Country. Narelle’s approach underscores her commitment to both ecological sustainability and cultural responsibility, making her work impactful beyond mere business success.
+Narelle’s work is deeply rooted in her commitment to caring for Country and supporting Indigenous communities. Her initiatives aim not only at promoting recycling as a means of environmental stewardship but also at fostering economic opportunities within these communities. She views her business endeavors as a way to empower Indigenous entrepreneurs while contributing positively to the environment, aligning with broader goals of sustainability and community well-being.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

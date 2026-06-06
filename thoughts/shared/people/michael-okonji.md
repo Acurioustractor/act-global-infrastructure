@@ -2,7 +2,7 @@
 name: Michael Okonji
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Michael Okonji
@@ -16,7 +16,7 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Michael Okonji is the director of Korheji engineering services Nigeria limited, focusing on environmental consulting, civil and hydro engineering, and real estate. He is based in Lagos, Nigeria. His role emphasizes sustainable development and infrastructure projects.
+Michael Okonji is the director of Korheji Engineering Services Nigeria Limited, focusing on environmental consulting, civil and hydro engineering, and real estate consultancy. He has been with the company since its inception. His work emphasizes sustainable and innovative engineering solutions.
 - [Michael Okonji Email & Phone Number - ContactOut](https://contactout.com/michael-okonji-52271) — Chief Executive Officer at E D Korheji engineering services nig ltd in February 2012 to April 2022. See more. See less. Michael Okonji Education.
 - [10+ perfiles de «Michael Okonji - LinkedIn](https://cr.linkedin.com/pub/dir/Michael/Okonji) — Michael Okonji. Environmental consultant | Civil and Hydro Engineer | Real estate consultant|. Lagos. Korheji engineering services Nigeria limited y 1 más.
 - [10+ "Michael Okonji" profiles - LinkedIn](https://www.linkedin.com/pub/dir/Michael/Okonji) — Korheji engineering services Nigeria limited, +1 more. National open university of Nigeria. Michael Okonji. Digital marketer and copywriter
@@ -33,10 +33,13 @@ My name is Michael, the director of Korheji engineering services and Mango real 
 Experience
 Korheji engineer
 
-## Understanding — drafted
-Michael Okonji serves as a Co-Chief Executive Officer at Korheji Engineering Services Nigeria Limited, an organization based in Lagos that focuses on environmental consulting, civil and hydro engineering, and real estate services. His professional background underscores his commitment to sustainable development and infrastructure projects, which he views as critical components of building resilient communities in Nigeria.
+## Shared history — from the spine
+_(no linked email record)_
 
-Michael appears to be deeply invested in the environmental impact of development projects and the long-term sustainability of the solutions they provide. His work emphasizes not only technical proficiency but also a strong sense of responsibility towards ecological preservation and community well-being. This focus on sustainable practices suggests that Michael cares significantly about balancing economic growth with environmental stewardship, aiming to ensure that future generations can benefit from today's development efforts without compromising natural resources.
+## Understanding — drafted
+Michael Okonji serves as a Co-Chief Executive Officer at Korheji Engineering Services Nigeria Limited, a company he has been integral to since its founding. His work spans various fields within the engineering sector, with a focus on environmental consulting, civil and hydro engineering, and real estate consultancy. Through his role, Michael aims to deliver sustainable and innovative solutions that address complex challenges in these domains. He brings extensive experience and a deep commitment to excellence in each of these areas, making him a key figure at Korheji.
+
+Michael Okonji appears to care deeply about the impact of engineering on both environmental sustainability and community development. His work emphasizes innovation and practicality, suggesting a strong belief in using his expertise to create positive change. The dedication he has shown through his long-standing involvement with Korheji Engineering Services indicates that Michael values stability and growth within an organization. Moreover, his diverse portfolio across environmental consultancy, civil engineering, hydrology, and real estate consultancy points towards a broad interest in the holistic development of communities and infrastructures.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

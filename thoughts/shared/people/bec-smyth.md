@@ -2,7 +2,7 @@
 name: Bec Smyth
 lane: community
 storyteller_id: 6e5a5c06-5c3d-4fcf-b14a-17d505559600
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Bec Smyth

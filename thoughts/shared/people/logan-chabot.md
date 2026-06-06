@@ -2,7 +2,7 @@
 name: Logan Chabot
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Logan Chabot
@@ -16,16 +16,19 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Logan Chabot is a Business Development Manager at LJC, focusing on startup advisory and project management. He is also involved in the mission and values development at Chabot College. His work emphasizes community engagement and educational philosophy.
-- [Logan Chabot - LinkedIn - Mesh](https://me.sh/profile/logan-chabot) — Additionally, as a Business Development Manager at LJC, he offers a range of services including startup advisory, website design, development, and project
-- [[PDF] Chabot College](https://www.chabotcollege.edu/accreditation/exhibits/standard%20i%20a/a%203.1%20mission,%20vision,%20values%20subcomm%20mins,%20docs%20&%20comm%20focus%20grps%20feedback/3.1a%20mission%20statement%20development%20comm/visionmissionvaluesinputformsp04.pdf) — These are statements of values and beliefs that express the educational and cultural philosophy of how and why we teach, learn, and work at the college. They
-- [Human Resources Goals](https://www.clpccd.org/hr/goals.php) — The Office of Human Resources (HR) provides leadership and support for personnel-related actions for the Chabot-Las Positas Community College District. Working
-- [LPC: Title IX - Resources - Las Positas College](https://www.laspositascollege.edu/title-ix/resources.php) — California Department of Fair Employment and Housing · Chabot-Las Positas Community College District – Title IX Coordinator · Las Positas College – Title IX
+Logan Chabot is a tech industry professional specializing in IT consulting and business development. He works at LJC, focusing on startup advisory and project management. He is also involved with Mesh, a personal CRM platform.
+- [Logan Chabot - LinkedIn](https://me.sh/profile/logan-chabot) — Logan Chabot is a seasoned professional in the technology industry with over seven years of experience, specializing in IT consulting, business development, and project management across sectors like healthcare, digital, and mobile. Additionally, as a Business Development Manager
+- [Logan (@loganchabot) • Instagram photos and videos](https://www.instagram.com/loganchabot) — 563 followers · 568 following. See photos and videos from friends on Instagram, and discover other accounts you'll love.
+- [Contact Us - Chabot-Las Positas Community College District](https://clpccd.org/hr/contact-us.php) — Key responsibilities include: personnel services; contract management and labor relations; Federal, State, and District compliance; diversity and Equal
+- [April Board Recognitions 🌟 LHS... - Lakeside School District](https://www.facebook.com/LakesideSD/posts/april-board-recognitions-lhs-student-emmysaspa-awards-all-state-coding-competiti/1079474284226509) — ## Lakeside School District's Post. ### **Lakeside School District**. 🌟 LHS Student Emmy's/ASPA Awards. '%3E%3Cpath d='M15.9963 8c0 4.4179-3.5811 7.9993-7.9986 7.9993-4.4176 0-7.9987-3.5814-7.9987-7.9992 0-4.4179 3.5811-7.9992 7.9987-7.9992 4.4175 0 7.9986 3.5813 7.9986 7.9992Z'
+
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Logan Chabot serves as a Business Development Manager at L.J.C., where he plays a pivotal role in advising startups, managing projects, and overseeing aspects of website design and development. Outside his corporate responsibilities, Logan is deeply engaged with Chabot College, contributing to the formulation of its mission and values. This dual engagement highlights both his business acumen and dedication to educational philosophy.
+Logan Chabot is a seasoned professional in the technology industry with over seven years of experience, primarily focused on IT consulting and business development at LJC, where he specializes in startup advisory and project management across various sectors including healthcare, digital services, and mobile technologies. His role extends beyond his primary work as he is also involved with Mesh, a personal CRM platform that likely aids him in managing relationships both professionally and personally. Logan's profile suggests an individual deeply engaged in the tech ecosystem, constantly working to bridge technological advancements with business objectives.
 
-Logan appears to have a strong commitment to community involvement and education. His work at Chabot College, focused on shaping the institution's values and beliefs, underscores his belief in fostering an environment where teaching, learning, and working are imbued with cultural and educational significance. Through his roles, Logan seems to prioritize creating meaningful connections and impact within both business and academic communities.
+Logan seems to care about leveraging technology to drive meaningful growth and development within startups and established businesses alike. His involvement in multiple sectors underscores his broad interest in how technology can be applied across different fields. Additionally, beyond his professional pursuits, Logan's presence on social media platforms like Instagram indicates an appreciation for maintaining a personal online presence, possibly as a way of connecting with peers and sharing insights from his work experiences. The references to the Chabot-Las Positas Community College District and Lakeside School District suggest that Logan may have ties or interests in educational sectors, although these connections are less clear-cut based on the given information.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

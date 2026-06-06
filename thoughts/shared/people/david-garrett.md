@@ -2,7 +2,7 @@
 name: David Garrett
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # David Garrett
@@ -29,13 +29,16 @@ I help businesses simplify how they get paid — and help teams scale how they s
 
 Experien
 - [About Me - David Garrett](https://www.david-garrett.com/en/bio) — The only autobiography of the "greatest violinist of his generation". At the age of ten, David Garrett was already on stage with the greatest international orchestras and later, as a teenager, he played all the important works of classical music until, in his early twenties, he f
-- [David Garrett - Wikipedia](https://en.wikipedia.org/wiki/David_Garrett) — David Christian Bongartz (born 4 September 1980), known by his stage name David Garrett, is a German classical and crossover violinist and recording artist.
-- [David Garrett – blending classical and rock - Champagne Living](https://champagneliving.net/david-garrett-blending-classical-and-rock) — Nirvana on violin? Seriously. Garrett is a classically trained violinist who has kept one foot grounded in the world of the masters, while stepping out with the
+- [David Garrett - Canyon Rim Academy:](https://canyonrimacademy.org/david-garrett) — He manages a staff of employees and ensures that all paperwork and documentation for their business is in order. David is also responsible for establishing and
+- [Background Info on David Garrett's New Album "Music" - YouTube](https://www.youtube.com/watch?v=Wn_Zp6Inlhw) — ... the same time - makes him very likeable - keep it that way! 27:03 · Go to channel The Hot Violin · The Artist Toolbox David Garrett. The Hot
+
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-David Garrett is a manager at SumUp, a company that specializes in providing affordable and easy-to-use payment solutions globally. In his role as a business solutions manager, David focuses on leveraging technology and innovation to simplify payment processes for businesses across Australia. He has experience spanning technologist roles and strategic planning within the fintech space, with an emphasis on transaction solutions.
+David Garrett is a business solutions manager at SumUp, an organization known for providing affordable and easy-to-use payment solutions globally. Based in the Sunshine Coast of Queensland, Australia, he focuses on technology and innovation within payment solutions to help businesses streamline their payment processes. His work revolves around bringing forth transaction solutions that are not only efficient but also technologically advanced, making financial transactions smoother for various enterprises.
 
-David seems to care deeply about innovation in financial technology and the seamless integration of modern payment methods into everyday business operations. His background also includes a unique blend of classical music expertise and entrepreneurial spirit, indicating a multifaceted approach to problem-solving and creativity. He values scaling support systems for businesses while ensuring that they remain user-friendly and efficient.
+David appears to care deeply about leveraging technology to make complex business operations simpler and more accessible. He values the strategic aspect of his role, aiming to support businesses effectively by simplifying payment processes and ensuring scalability in team support systems. His background hints at a broader interest in innovation and strategy, possibly influenced by his experience with classical music and its evolution into modern forms of expression and technology integration.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

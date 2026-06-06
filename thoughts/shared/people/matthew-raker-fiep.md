@@ -2,7 +2,7 @@
 name: Matthew Raker FIEP
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Matthew Raker FIEP
@@ -16,28 +16,49 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Matthew Raker is a People and Culture Generalist at IKEA and has a background in human resources. He also worked as a police officer in Sparks, Nevada. His work focuses on people management and organizational culture.
-- [Matthew Raker's Post](https://www.linkedin.com/posts/matthew-raker_at-the-university-of-florida-iron-sharpens-activity-7457112881592094720-nA2a) — At the University of Florida, iron sharpens iron. Being around students who are curious and driven, and professors who care, raised my bar
-- [Matthew Raker - People and Culture Generalist at IKEA at IKEA](https://www.linkedin.com/in/matthew-raker-9463b2b0) — Matthew Raker
-People and Culture Generalist at IKEA at IKEA
-San Antonio, Texas, United States
-93 connections, 94 followers
+Matthew Raker is an Executive Director at Mountain BizWorks, focusing on systemic change and sustainability. He holds a B.S. in Finance from the University of Florida. His work emphasizes enabling sustainable opportunities.
+- [Matthew Raker's Post - LinkedIn](https://www.linkedin.com/posts/matthew-raker_at-the-university-of-florida-iron-sharpens-activity-7457112881592094720-nA2a) — At the University of Florida, iron sharpens iron. Being around students who are curious and driven, and professors who care, raised my bar
+- [Matthew Raker](https://www.linkedin.com/in/matthew-raker) — Matthew Raker
+University of Florida
+Boston, Massachusetts, United States
+500 connections, 728 followers
 
 
 About
-Experienced Human Resources Generalist with a demonstrated history of working in the…
+I am a recent graduate from the University of Florida where I received a B.S. in Finance…
 
 
 Experience
-People and Culture Generalist at IKEA
-[IKEA](https
-- [Matthew M Raker | Police Officer | Sparks, Nevada | 2021](https://openpayrolls.com/matthew-m-raker-144799862) — Matthew M Raker worked as a Police Officer for the city of Sparks, Nevada and in 2021 had a reported pay of $81052.84.
-- [Matthew Raker - Police Officer - Sparks](https://opengovpay.com/nv/matthew-raker-m/68617735) — Matthew Raker M earned $121,912 in 2012, according to public payroll data from Sparks. His job title was listed as a Police Officer.
+N/A
+
+
+Education
+University of Florida
+N/A
+2022-08 - 2026-05
+None
+- [Matt Raker - Executive Director at Mountain BizWorks](https://www.linkedin.com/in/matthewraker) — Matt Raker
+Executive Director at Mountain BizWorks
+Asheville, North Carolina, United States
+500 connections, 3626 followers
+
+
+About
+Working to solve systemic-change barriers and find opportunities to enable a sustainable…
+
+
+Experience
+Executive Director
+[Mountain BizWorks](https:
+- [Miriam Johnston's email & phone number - Allied Health Manager at ...](https://www.signalhire.com/profiles/miriam-johnston%27s-email/116723924) — Matthew Raker FIEP MBA · AKG. Allied Health Manager. Get contacts. Emma Crozier. Norwest Private Hospital. Allied Health
+
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Matthew Raker FIEP is a versatile professional with extensive experience in both human resources and law enforcement. Currently serving as the Manager of Employment Health Services at AKG, Matthew brings a unique blend of skills acquired through his roles as a police officer in Sparks, Nevada, and his work at IKEA as a People and Culture Generalist. His background encompasses diverse responsibilities that range from community service and public safety to organizational culture development and employee well-being.
+Matthew Raker serves as an Executive Director at Mountain BizWorks, where he focuses on systemic change and sustainability in the realm of business development for small enterprises. His role involves identifying barriers that prevent sustainable growth and finding innovative solutions to overcome them. Matthew holds a B.S. in Finance from the University of Florida, which has equipped him with a strong foundation in financial management and strategic planning. His career is dedicated to fostering environments where businesses can thrive sustainably, emphasizing both economic viability and environmental stewardship.
 
-Matthew appears to deeply care about the well-rounded development and welfare of individuals within organizations and communities. This is evident through his dedication to people management roles, where he focuses on fostering an environment conducive to personal and professional growth. His educational background at the University of Florida, where he valued curiosity and driven individuals, underscores his commitment to nurturing environments that challenge and support individuals to achieve their best. Additionally, his experience as a police officer suggests a strong sense of service and dedication to community well-being, which likely informs his approach to managing health services in employment settings today.
+Matthew appears to care deeply about systemic change and sustainability within business ecosystems. He values opportunities that enable small businesses to flourish while also being mindful of long-term impacts on the environment and community. His educational background at the University of Florida has instilled in him a drive for excellence and a commitment to leveraging his skills for meaningful social impact. Matthew's network and connections suggest an active engagement with professionals who share similar values, fostering collaborations that aim towards creating sustainable opportunities for businesses and communities alike.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

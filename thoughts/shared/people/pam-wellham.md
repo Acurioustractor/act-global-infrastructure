@@ -2,7 +2,7 @@
 name: Pam Wellham
 lane: community
 storyteller_id: 8992e7e8-5a6a-416d-9d99-3c14b6d381e7
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Pam Wellham

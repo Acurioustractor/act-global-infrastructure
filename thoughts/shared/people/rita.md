@@ -2,7 +2,7 @@
 name: Rita
 lane: community
 storyteller_id: 8e57e5a3-332f-4471-8aef-ea9e050fa6de
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Rita

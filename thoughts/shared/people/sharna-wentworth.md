@@ -2,7 +2,7 @@
 name: Sharna Wentworth
 lane: community
 storyteller_id: 93de042f-0b76-447a-81cc-1c49a57ebce7
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Sharna Wentworth

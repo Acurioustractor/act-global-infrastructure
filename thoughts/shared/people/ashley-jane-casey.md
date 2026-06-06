@@ -2,7 +2,7 @@
 name: Ashley Jane Casey
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Ashley Jane Casey
@@ -16,9 +16,7 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Ashley Jane Casey is an Associate Director at FF&3 Pty Ltd, focusing on circular economy solutions for furniture and fixtures. Her work aims to reduce costs, carbon emissions, and maximize social impact. She has over two decades of experience in fit-out and construction.
-- [Our Team | FF3 - FF&3](https://www.ff3.co/our-team) — Ashley Jane Casey. Ashley Casey, MCR. Associate Director. Linkedin logo. With over 24 years of experience in the fit-out and construction
-- [Ashley Jane Casey's Post - LinkedIn](https://www.linkedin.com/posts/ashleyjanecasey_ff3-circulareconomy-sustainability-activity-7387261551445118976-OVge) — We need more Maxines in the world. We first met Maxine in August 2024 when FF&3 Pty Ltd was just five months old. The introduction came from
+Ashley Jane Casey is an Associate Director at FF&3 Pty Ltd, focusing on circular economy solutions for furniture, fixtures, and equipment. She cares about reducing costs, carbon emissions, and maximizing social impact. Her work emphasizes sustainable and circular solutions.
 - [Ashley Jane Casey - Circular economy solutions for FF&E | Associate Director | MCR.w | MBA | WELL-AP 🌲🌏🌈 - FF&3 Pty Ltd](https://au.linkedin.com/in/ashleyjanecasey) — Ashley Jane Casey
 Circular economy solutions for FF&E | Associate Director | MCR.w | MBA | WELL-AP 🌲🌏🌈
 Greater Sydney Area
@@ -31,12 +29,17 @@ With over two decades of experience, my journey in the fit-out and construction 
 
 Experience
 Associate D
-- [FF&3 Pty Ltd - LinkedIn](https://au.linkedin.com/company/ff-3-pty-ltd) — We efficiently catalogue client's assets and develop strategies for reuse, repurpose or recycling to reduce costs, reduce carbon emissions and maximise
+- [Our Team | FF3](https://www.ff3.co/our-team) — Clayton brings over 26 years of experience in workplace projects. Before founding FF&3 he worked in corporate real estate at CBA for 10 years. Prior to this Clayton worked in the furniture industry for 12 years with one of Australia’s largest commercial furniture manufacturers. H
+- [Ashley Jane Casey's Post - LinkedIn](https://www.linkedin.com/posts/ashleyjanecasey_ff3-circulareconomy-sustainability-activity-7387261551445118976-OVge) — She consistently creates spaces that support patients, visitors and staff, from breakout rooms to meeting and training areas,
+- [ASHLEY JANE](https://www.theashleyjane.com) — Ashley Jane is a Miami based fashion and lifestyle photographer.
+
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Ashley Jane Casey is an Associate Director at FF&3 Pty Ltd, a company dedicated to implementing circular economy solutions in the furniture and fixtures (FF&E) sector. With over two decades of experience in fit-out and construction, Ashley brings deep industry knowledge to her role. Her work involves efficiently cataloging clients' assets and developing strategies for their reuse, repurposing, or recycling. This approach aims not only to reduce costs but also to minimize carbon emissions and maximize social impact.
+Ashley Jane Casey serves as an Associate Director at FF&3 Pty Ltd, where she specializes in developing circular economy solutions for furniture, fixtures, and equipment (FF&E). With over two decades of experience in the fit-out and construction industry, Ashley focuses on reducing costs and carbon emissions while maximizing social impact. Her work involves creating sustainable and circular solutions that not only benefit the environment but also enhance the functionality and well-being of spaces used by patients, visitors, and staff.
 
-Ashley appears to care deeply about sustainability and the broader environmental impact of construction and fit-out practices. She is passionate about finding innovative ways to extend the lifecycle of materials and assets within her field. Her LinkedIn post mentioning "Maxines" suggests an appreciation for individuals who embody a strong commitment to sustainability, possibly highlighting role models or colleagues dedicated to circular economy principles. Overall, Ashley seems focused on driving meaningful change through practical, sustainable solutions in her professional capacity.
+Ashley appears to care deeply about sustainability and the environment, as evidenced by her emphasis on circular economy practices in her role at FF&3 Pty Ltd. She is committed to reducing waste and minimizing environmental impact through innovative approaches to furniture and fixture management. Additionally, Ashley values creating spaces that support well-being and functionality for all users, highlighting her dedication to both ecological responsibility and the human experience within built environments.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

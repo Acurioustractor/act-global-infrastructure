@@ -2,7 +2,7 @@
 name: rod mckenzie
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # rod mckenzie
@@ -16,28 +16,31 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Rod McKenzie is an artist known for Strangelite Art, focusing on mythological themes, and also works as a photographer, engraver, and sculptor. He is also a humanitarian and astrologer. His work is featured on platforms like Instagram and YouTube.
-- [My artwork: Mercury Sun is looking at you - Facebook](https://www.facebook.com/groups/187425044711620/posts/8901437876643583) — Rod McKenzie's Strangelite Art ▻ Rod McKenzies ART and Friends. 1y · Public · This is Mercury in Roman mythology and Hermes in Greek mythology
-- [Rod Mckenzie (@rodmck22) • Instagram photos and videos](https://www.instagram.com/rodmck22) — Artist,photographer,Engraver,sculptor, life size Bushranger maker,humanitarian,astrologer,Creative Art Designer. Photo by Rod Mckenzie in Fremantle,
-- [The Australian Art of ROD McKENZIE - YouTube](https://www.youtube.com/watch?v=l7GXQQ2sLHI) — This is a video of some of the works by Fremantle, Western Australia artist ROD McKENZIE.To see more of his work go to ...www.redbubble.com
-- [Rod McKenzie, Jr. - Marketing Director | Executive Coach | Strategic Storyteller - Frame My TV](https://www.linkedin.com/in/rodmckenziejr) — Rod McKenzie, Jr.
-Marketing Director | Executive Coach | Strategic Storyteller
-Oviedo, Florida, United States
-500 connections, 1365 followers
+Rod McKenzie is known for his work in art, journalism, and broadcasting. He has a background in public relations and has held senior roles at the BBC. His artistic endeavors include creating murals and pastels.
+- [Hermes is done! @clintxgodwin and I were so struck by an old ink ...](https://www.facebook.com/groups/1095127091121877/posts/1981882752446302) — Rod McKenzie's Strangelite Art ▻ Rod McKenzies ART and Friends. 1y · Public · This is Mercury in Roman mythology and Hermes in Greek mythology
+- [Rod McKenzie - Journalist, broadcaster, PR - Global](https://uk.linkedin.com/in/rod-mckenzie-39539144) — Rod McKenzie
+Journalist, broadcaster, PR
+United Kingdom
+500 connections, 2578 followers
 
 
 About
-For over 30 years, I have helped businesses find clarity, drive sales, and achieve…
+Highly skilled and experienced former BBC senior executive until recently running Comms,…
 
 
 Experience
-Marketing Director
-[Frame My TV](
+Consultant
+[Global](https://uk.linkedin.com/company/global-media-entertainment-ou
+- [Roderick MacKenzie - Encyclopedia of Alabama](https://encyclopediaofalabama.org/article/roderick-mackenzie) — Born in London, England, artist and muralist John Roderick Dempster MacKenzie (1865-1941) spent part of his youth in an orphanage in Mobile, Mobile County, and went on to train at some of the finest schools in the United States and France. At the request of art dealers in Calcutt
+- [The Accomplishments and Leadership of Rod MacKenzie at Pfizer](https://www.healthevolution.com/bios/speaker/rod-mackenzie) — Rod MacKenzie, PhD, is Chief Development Officer and Executive Vice President for Pfizer. Rod leads the Global Product Development organization, which is
+
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Rod McKenzie is an artist based in Fremantle, Western Australia, known for his work under the banner of Strangelite Art. His artistic portfolio spans multiple mediums, including photography, engraving, sculpture, and life-size figurative works like Bushrangers. Rod's art often draws on mythological themes, as evidenced by his representation of Mercury/Hermes in Roman and Greek mythology. His work is shared across various platforms such as Instagram and YouTube, providing the public with an insight into his creative process and finished pieces.
+Rod McKenzie is a multifaceted individual known for his contributions to art, journalism, and broadcasting. As the owner of Strangelite Art, he combines his artistic talents with his extensive background in public relations and media. His work spans various forms of creative expression, including murals and pastels, while also engaging in cultural commentary through his social media posts that reflect on mythological themes such as Hermes and Mercury. Prior to his current role, McKenzie held senior positions at the BBC, leveraging his skills in communication and broadcasting.
 
-Beyond his artistic pursuits, Rod McKenzie is also involved in humanitarian efforts and has a keen interest in astrology. This multifaceted approach to life reflects his dedication to both creative expression and contributing positively to society. His work suggests that he values mythology as a source of inspiration and storytelling, likely seeing it as a way to connect with deeper truths about human nature and the world around us. Additionally, his engagement in humanitarian causes indicates a genuine concern for social issues and a desire to make a positive impact beyond his artistic endeavors.
+McKenzie appears to care deeply about both artistic creation and storytelling. His work reflects an appreciation for historical and mythical narratives, suggesting a passion for cultural heritage and its visual representation. Additionally, his background in journalism and public relations indicates a strong interest in how stories are communicated to the public and the impact they can have. He values the intersection between art and media as tools for both personal expression and broader societal engagement.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

@@ -2,7 +2,7 @@
 name: Amelia Tynan
 lane: community
 storyteller_id: 3448f78c-ca16-490e-83cb-e3afef880b13
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Amelia Tynan

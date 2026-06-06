@@ -2,7 +2,7 @@
 name: Callum William Mason
 lane: community
 storyteller_id: f89dac4d-425a-4559-b5d7-1241b71b7b7a
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Callum William Mason

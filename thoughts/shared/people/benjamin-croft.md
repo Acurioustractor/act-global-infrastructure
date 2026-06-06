@@ -2,11 +2,17 @@
 name: Benjamin Croft
 lane: supporter
 warmth: 91
-updated: 2026-06-03
+energy: 75
+ring: 15
+updated: 2026-06-06
 ---
 
 # Benjamin Croft
 *CEO - LeadershipRetreats.com - Coming Soon, LeadershipRetreats.com*  
+
+## Ben's read — ground truth (circle session 2026-06-06)
+> **"very good friends, family friends — potential long-term supporter, has money; supports the yearly Bali trip for Nic and Ben"** · ring **15** · energy **75** · mutual
+
 
 ## Soil — institutional ground (CivicGraph)
 - **Org:** LeadershipRetreats.com (CEO - LeadershipRetreats.com - Coming Soon)
@@ -16,23 +22,15 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Benjamin Croft is the CEO of LeadershipRetreats.com, focusing on high-value leadership retreats. He is also known for founding WBECS Group and GoodPeople.com.au, emphasizing social impact and community building.
-- [Benjamin Croft - Founder & Former CEO/Chairman of The WBECS Group (Acquired by Coaching.com), Social Entrepreneur, Angel Investor, INC 5000 and Dr. Marshall Goldsmith Award recipient - Citadela Invicta d.o.o.](https://au.linkedin.com/in/modernmethods) — Benjamin Croft
-Founder & Former CEO/Chairman of The WBECS Group (Acquired by Coaching.com), Social Entrepreneur, Angel Investor, INC 5000 and Dr. Marshall Goldsmith Award recipient
-Fig Tree Pocket, Queensland, Australia
-500 connections, 19926 followers
+_(no web key / no results)_
 
-
-About
-Ben is a multi-awar
-- [Ben Croft On Fostering Community And Building Connection To Support Wellbeing — Impact Boom | Purpose-Driven Intermediary Helping Changemakers Create Positive Social Impact](https://www.impactboom.org/blog/2025/05/29/ben-croft-on-fostering-community-and-building-connection-to-support-wellbeing-m58es-e42pa-6hd8t-wj9he-52asf-6yccw) — Ben Croft is a multi-award-winning entrepreneur, social impact innovator, and angel investor, best known for founding *The World Business & Executive Coach Summit (WBECS)*—a global platform that became the world’s leading event for the executive coaching industry, attracting over
-- [BIOGRAPHY - Benjamin Croft](https://www.benjamincroftmusic.com/about-1) — Benjamin Croft is a British keyboardist, music producer and songwriter. From a very young age, Benjamin developed a strong interest for music.
-- [Benjamin Croft (@benjamincroft) • Instagram photos and videos](https://www.instagram.com/benjamincroft) — 2.8K+ followers · 1.1K+ following · 93 posts · @benjamincroft: “Multidisciplinary Creative Director AJE Director of Visuals - Performance.”
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Benjamin Croft is a multifaceted entrepreneur and social impact innovator, recognized for his significant contributions to the executive coaching industry. As the founder and former CEO/Chairman of The WBECS Group, he successfully built what became the world’s leading event platform for executive coaching professionals, demonstrating his ability to create influential networks and community-focused initiatives. His ventures extend beyond this, including GoodPeople.com.au, which highlights his commitment to fostering positive social impact and community building.
+Benjamin Croft is a key figure within the network of LeadershipRetreats.com, an organization he leads as its CEO. His role and leadership are poised to bring new dimensions to leadership development through retreat experiences that are set to launch soon. Benjamin's involvement extends beyond his immediate organizational commitments, as he is also linked with COMPASS LEADERSHIP, indicating a deep interest in fostering leadership qualities and guiding individuals towards more effective and compassionate ways of leading.
 
-Benjamin appears to care deeply about creating connections that support both personal well-being and professional growth. He leverages his experience in leadership and community-building to foster environments where individuals can thrive. Through his upcoming LeadershipRetreats.com, he seeks to provide high-value retreat experiences that further enhance leadership skills and interpersonal relationships among participants. His work reflects a dedication to nurturing supportive communities and driving meaningful social change through effective leadership development.
+Benjamin appears to value personal connections and the support of community-oriented initiatives highly. His financial backing for the annual Bali trip for Nic and Ben suggests a dedication not only to personal relationships but also to enriching experiences that likely play a significant role in both professional development and maintaining strong family ties. This generosity extends beyond mere transactions, pointing towards his genuine care for fostering meaningful interactions and support within his close-knit community.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

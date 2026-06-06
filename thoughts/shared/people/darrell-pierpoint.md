@@ -2,7 +2,7 @@
 name: Darrell  Pierpoint
 lane: community
 storyteller_id: 9bc67418-9269-4771-8e73-6a34c008c7d4
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Darrell  Pierpoint

@@ -2,7 +2,7 @@
 name: Nici Toll
 lane: community
 storyteller_id: 1f78adcf-896e-4710-9d36-d0328916fbc8
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Nici Toll

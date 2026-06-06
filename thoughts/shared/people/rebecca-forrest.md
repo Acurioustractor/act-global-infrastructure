@@ -2,7 +2,7 @@
 name: Rebecca Forrest
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Rebecca Forrest
@@ -16,7 +16,7 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Rebecca Forrest founded No Woman Left Behind and International Men's Day Conferences to connect and empower people, focusing on shared experiences and inspiration. These initiatives aim to bring together diverse individuals to discuss important issues. Forrest's work emphasizes community and shared journeys.
+Rebecca Forrest founded No Woman Left Behind and International Men's Day Conferences, focusing on social justice, anti-violence, and community empowerment. These initiatives aim to connect and inspire people from diverse backgrounds. Forrest's efforts have raised over $1 million for various causes.
 - [Rebecca Forrest - Founder of No One Left Behind - No Woman Left Behind and International Men's Day Conferences](https://au.linkedin.com/in/rebecca-forrest-a28832135) — Rebecca Forrest
 Founder of No One Left Behind
 Darwin, Northern Territory, Australia
@@ -30,14 +30,17 @@ I believe that we're all more than what we do and certainly more than what we ow
 Experience
 Coordinator
 [No Woman Left Behind and International Me
-- [Rebecca Forrest - Australian of the Year Awards](https://australianoftheyear.org.au/recipients/rebecca-forrest) — In 2018, Rebecca founded No One Left Behind – events that focus on women but also welcome men in sharing journeys, experiences and lessons learnt to inspire
+- [Rebecca Forrest | Australian of the Year](https://australianoftheyear.org.au/recipients/rebecca-forrest) — # Australian of the Year. ## Rebecca Forrest. Rebecca Forrest has an incredible talent for bringing people together in a safe environment where they can open up and share their experiences. For more than 13 years, her events have raised awareness and much-needed funds for various
+- [2025 No Woman Left Behind Luncheon - Humanitix](https://events.humanitix.com/2024-no-woman-left-behind-luncheon) — 2022 NT's Local Hero Australian of the Year, Bec Forrest founded Noone Left Behind to support communities and provide opportunities for people
 - [Thousands of women. One powerful day. | Rebecca Forrest - LinkedIn](https://www.linkedin.com/posts/rebecca-forrest-a28832135_thousands-of-women-one-powerful-day-activity-7452544286178349056-CnZr) — Thousands of women. One powerful day. ✨ Festival of Women 2026 is where women come together to connect, celebrate, and be inspired — from
-- [Noone Left Behind - Humanitix](https://events.humanitix.com/host/6329017dc2301f019c58662b) — Noone Left Behind to support communities and provide opportunities for people to come together in safe places and discuss issues that affect them.
+
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Rebecca Forrest is a dedicated coordinator and founder of both No Woman Left Behind and International Men's Day Conferences. Based out of Darwin, Northern Territory, Australia, Rebecca’s work focuses on fostering connections and empowerment through shared experiences. Her initiatives aim to create spaces where individuals can openly discuss important issues and share lessons learned, ultimately inspiring others within the community.
+Rebecca Forrest is a coordinator and founder behind No Woman Left Behind and the International Men's Day Conferences in Darwin, Northern Territory, Australia. Her work is dedicated to promoting social justice, reducing violence, and empowering communities through inclusive initiatives that connect individuals across diverse backgrounds. Over her career, Rebecca has successfully organized events that not only raise awareness but also generate significant financial support for various causes, amounting to over $1 million raised.
 
-Rebecca cares deeply about building inclusive communities where everyone feels valued and heard. She emphasizes that personal worth extends beyond one's actions or possessions, advocating for a deeper sense of connection among people. Through her work with No Woman Left Behind and International Men's Day Conferences, she seeks to provide safe environments for meaningful dialogue and mutual support, highlighting the importance of shared journeys and collective growth.
+Rebecca cares deeply about fostering a sense of unity and community among people from different walks of life. Her efforts are motivated by the belief in the inherent value of individuals beyond their actions or possessions. Through her events, such as the No Woman Left Behind luncheons and the Festival of Women, she aims to create safe spaces where participants can openly share experiences and inspire one another. This focus on creating impactful connections and providing opportunities for growth reflects Rebecca's commitment to social equity and community empowerment.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

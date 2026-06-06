@@ -2,11 +2,11 @@
 name: Kristy Bloomfield
 lane: community
 storyteller_id: b59a1f4c-94fd-4805-a2c5-cac0922133e0
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Kristy Bloomfield
-*role:partner · role:storyteller · role:funder*
+*role:partner · role:funder · role:storyteller*
 
 > Community lane. Never energy-scored, laddered, dripped, or web-profiled (OCAP).
 > This page is an accountability record: what they gave, and what ACT owes back.

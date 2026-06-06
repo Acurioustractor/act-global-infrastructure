@@ -2,7 +2,7 @@
 name: Allan Palm Island
 lane: community
 storyteller_id: 07dbb433-e386-49ca-a24a-e4a5a5c12417
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Allan Palm Island

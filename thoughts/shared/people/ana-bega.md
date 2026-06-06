@@ -2,7 +2,7 @@
 name: Ana - Bega
 lane: community
 storyteller_id: 9f19df4a-b6bc-42ba-b693-fe0669e4727c
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Ana - Bega

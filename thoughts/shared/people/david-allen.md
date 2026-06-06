@@ -2,7 +2,7 @@
 name: David Allen
 lane: community
 storyteller_id: 6a634064-0f9c-416e-acab-e7435261ee3a
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # David Allen

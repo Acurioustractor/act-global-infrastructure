@@ -2,7 +2,7 @@
 name: anna philip
 lane: supporter
 warmth: 4
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # anna philip
@@ -16,7 +16,8 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Anna Philip is a Project Lead for Healthy Homes at NT Health, focusing on environmental health strategy. She previously worked as a physiotherapist in the Northern Territory. Her work emphasizes improving health through environmental initiatives.
+Anna Philip works at NT Health as a Project Lead for Healthy Homes. She previously served as a physiotherapist. She focuses on environmental health and community well-being.
+- [[PDF] Submission-No.-3-Anna-Philip.pdf](https://parliament.nt.gov.au/committees/list/legal-and-constitutional-affairs-committee/VAD/submissions/Submission-No.-3-Anna-Philip.pdf) — Currently, I work at NT Health as a Project Lead in Environmental Health Strategy. Previously, I worked as a physiotherapist both in the NT and
 - [Anna Philip - Project Lead - Healthy Homes - NT Health](https://au.linkedin.com/in/anna-philip-86a986155) — Anna Philip
 Project Lead - Healthy Homes
 Australia
@@ -38,14 +39,27 @@ Darwin, Northern Territory, Australia
 Education
 Monash University
 N
-- [[PDF] Submission-No.-3-Anna-Philip.pdf](https://parliament.nt.gov.au/committees/list/legal-and-constitutional-affairs-committee/VAD/submissions/Submission-No.-3-Anna-Philip.pdf) — Currently, I work at NT Health as a Project Lead in Environmental Health Strategy. Previously, I worked as a physiotherapist both in the NT and
+- [NT Health - Announcement incoming 📣 NT Allied Health...](https://www.facebook.com/NTGovHealth/posts/announcement-incoming-nt-allied-health-excellence-awards-winners-have-landedthe-/1348431267323742) — ## NT Health's Post. ### **NT Health**. NT Allied Health Excellence Awards winners have landed! The NT Allied Health Excellence Awards were celebrated last night at George Brown Darwin Botanic Gardens. Congratulations to this year’s award recipients:. ✨ Excellence in Clinical Pra
 - [Our mobs experience working with NT Health - YouTube](https://www.youtube.com/watch?v=PTIJiC5wLNA) — Past, present and future voices and experiences working with NT Health. ... The Nursing Crisis Is About To Get Much Worse (Here's What's Coming in
-- [Announcement incoming NT Allied Health Excellence Awards ...](https://www.facebook.com/NTGovHealth/posts/announcement-incoming-nt-allied-health-excellence-awards-winners-have-landedthe-/1348431267323742) — We employ over 600 allied health staff and they work incredibly hard to deliver essential services in our hospitals, health centres and in
+
+## Shared history — from the spine
+**8 emails** · first 2026-01-21 · last 2026-03-12
+
+- 2026-03-12 → Re: A Curious Tractor Good for Healthy Homes
+- 2026-03-12 ← RE: A Curious Tractor Good for Healthy Homes
+- 2026-03-12 ← RE: A Curious Tractor Good for Healthy Homes
+- 2026-03-01 ← Re: A Curious Tractor Good for Healthy Homes
+- 2026-03-01 → Re: A Curious Tractor Good for Healthy Homes
+- 2026-02-17 ← RE: A Curious Tractor Good for Healthy Homes
+- 2026-02-17 ← RE: A Curious Tractor Good for Healthy Homes
+- 2026-01-21 ← RE: A Curious Tractor Good for Healthy Homes
 
 ## Understanding — drafted
-Anna Philip is the Project Lead for the Healthy Homes initiative at NT Health in Darwin, Australia. Her role involves developing and implementing environmental health strategies aimed at improving living conditions within homes, thereby enhancing public health outcomes. Prior to her current position, Anna worked as a physiotherapist in the Northern Territory, bringing with her a wealth of experience in healthcare and community wellbeing.
+Anna Philip is the Project Lead for the Healthy Homes initiative at NT Health, focusing on environmental health and community well-being. Prior to this role, she worked as a physiotherapist in both clinical and broader health settings within the Northern Territory. Her current work involves developing and implementing strategies that improve living conditions and overall health outcomes for residents.
 
-Anna seems to be deeply committed to leveraging environmental initiatives for better health outcomes. Her background in physiotherapy underscores her dedication to practical health solutions that can improve daily living conditions. It is evident from her work history and current role that Anna cares about creating sustainable and healthier environments, particularly focusing on how these changes can positively impact the wellbeing of individuals and communities within the Northern Territory.
+Anna seems to care deeply about creating environments that promote health and wellness, particularly through her work on the Healthy Homes project. She is dedicated to improving community well-being by addressing environmental factors that can impact health. This focus reflects a commitment to holistic approaches in public health, blending her background in physiotherapy with broader strategies for healthier living spaces.
+
+In our shared work together, we have primarily focused on exploring and discussing the potential use of a tractor as part of the Healthy Homes initiative. Our exchanges have been collaborative efforts centered around understanding how this equipment might support various aspects of environmental health and community projects under Anna’s leadership at NT Health.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

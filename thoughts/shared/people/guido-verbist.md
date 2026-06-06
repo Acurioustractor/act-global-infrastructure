@@ -2,7 +2,7 @@
 name: Guido Verbist
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Guido Verbist
@@ -16,16 +16,19 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Guido Verbist is the General Manager of Revolve Recycling, focusing on sustainable bike programs, including gifting bikes to kids in remote communities to promote active lifestyles.
-- [Our GM, Guido Verbist, breaks down what Revolve Recycling stands ...](https://www.facebook.com/RevolveReCYCLING/videos/-our-gm-guido-verbist-breaks-down-what-revolve-recycling-stands-for-sustainabili/406633058835230) — A serviced bike is a safe bike. ... Jan 28, 2026 · 126 views. 00:03. ✨ Keep your bike rolling smoothly — and make a real i... Jan 12
-- [Revolve Recycling - Bikes for Kids in Remote Communities](https://asf.org.au/resources/case-study/revolve-recycling) — According to Guido Verbist, “You need to focus on what is appealing and easy to share. What catches attention and tells your story effectively. Then stick to
-- [ReVolve ReCYCLING - 2023 WeRide Awards - Vimeo](https://vimeo.com/886740692) — ... , accept their Award at the Gala Awards Dinner in Parliament House - 15 November 2023. Guido Verbist and Sienna Young accept the Award.
-- [Revolve Recycling General Manager Guido Verbist says 106 bikes ...](https://omny.fm/shows/360-with-katie-woolf/revolve-recycling-general-manager-guido-verbist-sa) — Three bikes are apparently being gifted to kids in seven remote indigenous communities in the Northern Territory, helping them to get active
+Guido Verbist is the CEO of Revolve ReCYCLING, focusing on recycling and redeploying personal transport vehicles to reduce landfill waste. The company has processed over 11,000 bikes. Verbist advocates for cycling education and repair workshops.
+- [Behind the Scenes Tour: Revolve ReCYCLING](https://events.humanitix.com/behind-the-scenes-tour-revolve-recycling) — Banner image for Behind the Scenes Tour: Revolve ReCYCLING. # Behind the Scenes Tour: Revolve ReCYCLING. The Social Enterprise Council of NSW & ACT (SECNA). Have you ever wondered what happens behind the scenes at a social enterprise? The Social Enterprise Council of NSW an ACT (
+- [Guido Verbist's Post - LinkedIn](https://www.linkedin.com/posts/guido-verbist-b55a0213_revolverecyclingfoundation-circulareconomy-activity-7468092817635176449-Nw19) — Honestly I would love to run a business up here doing cycling education, repair workshops, advocacy for increase cycling awareness to support
+- [3,000 kilometres. 100 bikes. One massive mission ... - Instagram](https://www.instagram.com/p/DUerkEqj2iI) — The Revolve ReCYCLING Foundation is the not-for-profit arm of our shop. Its mission is to get free bikes and their benefits to Australia's
+- [Revolve Recycling General Manager Guido Verbist says 106 bikes have been gifted to kids in remote NT communities, with session being run to teach them how to look after and maintain them - 360 with Katie Woolf - Omny.fm](https://omny.fm/shows/360-with-katie-woolf/revolve-recycling-general-manager-guido-verbist-sa) — 360 with Katie Woolf360 with Katie Woolf. ## Revolve Recycling General Manager Guido Verbist says 106 bikes have been gifted to kids in remote NT communities, with session being run to teach them how to look after and maintain them. #### In 1 playlist(s). #### 360 with Katie Wool
+
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Guido Verbist serves as the General Manager of Revolve ReCYCLING, an organization dedicated to promoting sustainability and active lifestyles through its bike recycling and gifting programs. Under his leadership, Revolve Recycling is particularly focused on providing bicycles to children in remote communities. This initiative not only helps these communities by offering a means for physical activity but also emphasizes the importance of sustainable practices through the refurbishment and redistribution of used bikes.
+Guido Verbist is the General Manager of Revolve ReCYCLING, a company dedicated to reducing landfill waste by recycling and redeploying personal transport vehicles, primarily bicycles. Under his leadership, Revolve has successfully processed over 11,000 bikes, showcasing their commitment to sustainability and environmental stewardship. The organization extends its reach through the Revolve ReCYCLING Foundation, which focuses on providing free bicycles and cycling education to underprivileged communities across Australia.
 
-Guido Verbist appears to care deeply about fostering active lifestyles and environmental sustainability. His work reflects a commitment to ensuring that children, especially those in isolated areas, have access to safe and reliable bicycles. This underscores his belief in the power of cycling as both a practical solution for mobility and an effective way to encourage healthier living habits among young people. Additionally, Verbist's approach highlights the importance of simplicity and effectiveness in communication, emphasizing how stories that resonate can help spread awareness about their initiatives.
+Guido cares deeply about fostering a sustainable transportation culture by promoting cycling as an eco-friendly alternative to motorized vehicles. He advocates for increased awareness and accessibility of cycling in various communities, particularly through educational workshops that teach maintenance and repair skills. His efforts include initiatives like gifting bikes to children in remote areas of the Northern Territory, empowering them with mobility and practical knowledge about bike care, which underscores his commitment to both environmental sustainability and community empowerment.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

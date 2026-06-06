@@ -2,7 +2,7 @@
 name: Michael Quinn
 lane: community
 storyteller_id: 1d4e8061-c292-4737-812a-19a05d632445
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Michael Quinn

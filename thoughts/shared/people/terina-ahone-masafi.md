@@ -2,7 +2,7 @@
 name: Terina Ahone-Masafi
 lane: community
 storyteller_id: 8c3b8c62-6d99-49c9-b8cb-6369e2f7e0d3
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Terina Ahone-Masafi

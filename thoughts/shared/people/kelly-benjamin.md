@@ -2,7 +2,7 @@
 name: Kelly Benjamin
 lane: community
 storyteller_id: d032e6f1-9c9f-43c3-96ae-2e96340d7d1c
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Kelly Benjamin

@@ -43,6 +43,17 @@ const TAVILY = process.env.TAVILY_API_KEY;
 function parseCSV(t){const R=[];let r=[],f='',Q=false;for(let i=0;i<t.length;i++){const c=t[i];if(Q){if(c==='"'){if(t[i+1]==='"'){f+='"';i++;}else Q=false;}else f+=c;}else if(c==='"')Q=true;else if(c===',')(r.push(f),f='');else if(c==='\n')(r.push(f),R.push(r),r=[],f='');else if(c!=='\r')f+=c;}if(f||r.length){r.push(f);R.push(r);}return R;}
 const rd=p=>{const R=parseCSV(readFileSync(p,'utf8'));const h=R[0];return R.slice(1).filter(x=>x.length===h.length).map(x=>Object.fromEntries(h.map((k,i)=>[k,x[i]])));};
 const slug=s=>s.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+const norm=s=>(s||'').toLowerCase().replace(/[^a-z0-9 ]/g,'').replace(/\s+/g,' ').trim();
+
+// ── Ben's circle reads (field-decisions.jsonl) — the HIGHEST-trust layer ────
+// His own words beat soil, web, and qwen. Latest read per person wins. Found 2026-06-06:
+// sam davies' page synthesised FOUR wrong Sam Davieses off anchorless web search while the
+// ledger said "core partner — makes our beds, $121K critical path". Never again unread.
+const ledger=new Map();
+if(existsSync('thoughts/shared/field-decisions.jsonl'))
+  for(const l of readFileSync('thoughts/shared/field-decisions.jsonl','utf8').split('\n').filter(Boolean)){
+    try{const d=JSON.parse(l);if(d.name&&(d.relation||d.ring||d.energy!=null))ledger.set(norm(d.name),d);}catch{}
+  }
 
 async function webRead(name, company){
   if(!TAVILY) return null;
@@ -118,26 +129,38 @@ for(const p of people){
   // the human tail — Field notes (live captures) + by-hand Reflection — survives EVERY rebuild
   let reflection=REFLECTION_STUB;
   if(existsSync(path)){const m=readFileSync(path,'utf8').match(/## Field notes[\s\S]*$|## Reflection[\s\S]*$/);if(m)reflection=m[0].trimEnd()+'\n';}
-  const web=await webRead(p.name,p.company);
+  const read=ledger.get(norm(p.name));                 // Ben's circle read, if he has one
+  const anchorOrg=p.company||read?.org||'';            // org anchor for web disambiguation
+  const web=await webRead(p.name,anchorOrg);
   const hist=await sharedHistory(p.email);
+  // common name + no org anchor → web identity is a guess, say so on the page
+  const webUnanchored=!anchorOrg&&(web?.results?.length||0)>0;
   let synthesis='_(overnight: qwen draft pending — run with `--synth`)_';
   if(SYNTH){
-    const ctx=[`Name: ${p.name}`,p.position&&`Role: ${p.position}`,p.company&&`Org: ${p.company}`,p.sector&&`Sector: ${p.sector}`,
+    const ctx=[read&&`BEN'S OWN READ (ground truth — trust this over EVERYTHING else): "${read.relation||''}"${read.ring?` · ring ${read.ring}`:''}${read.org?` · org: ${read.org}`:''}${read.tend_intent?` · intent: ${read.tend_intent}`:''}`,
+      `Name: ${p.name}`,p.position&&`Role: ${p.position}`,p.company&&`Org: ${p.company}`,p.sector&&`Sector: ${p.sector}`,
       p.entities&&`Connected orgs: ${p.entities}`,web?.answer&&`Web summary: ${web.answer}`,
-      web?.results?.length&&`Sources:\n${web.results.map(r=>'- '+r.title+': '+r.snippet).join('\n')}`,
+      web?.results?.length&&`Sources${webUnanchored?' (UNANCHORED name search — may be a different person entirely)':''}:\n${web.results.map(r=>'- '+r.title+': '+r.snippet).join('\n')}`,
       hist&&`Our email record: ${hist.count} emails, ${hist.first} → ${hist.last}. Recent subjects:\n${hist.recent.slice(0,15).map(r=>'- '+r.d+' '+(r.dir==='inbound'?'from them':'from us')+': '+r.s).join('\n')}`].filter(Boolean).join('\n');
-    synthesis=await qwenSynth(`You are helping ACT (a relational organisation) UNDERSTAND a person so it can support and honour them — NOT pitch, sell, or corner them. From the context below, write 2 short paragraphs: who they are and the work they're doing in the world, and what they seem to care about.${hist?' Then a third short paragraph: the arc of OUR shared work with them, drawn only from the email subjects provided (what we have actually been doing together, in plain terms).':''} Generous, factual, no sales framing, no "opportunity"/"leverage" language. If the context is thin, say so plainly rather than inventing.\n\nCONTEXT:\n${ctx}\n\nUNDERSTANDING:`);
+    synthesis=await qwenSynth(`You are helping ACT (a relational organisation) UNDERSTAND a person so it can support and honour them — NOT pitch, sell, or corner them. From the context below, write 2 short paragraphs: who they are and the work they're doing in the world, and what they seem to care about.${hist?' Then a third short paragraph: the arc of OUR shared work with them, drawn only from the email subjects provided (what we have actually been doing together, in plain terms).':''} Generous, factual, no sales framing, no "opportunity"/"leverage" language. If the context is thin, say so plainly rather than inventing. IDENTITY RULE: if any web source describes a person inconsistent with Ben's own read or with our email record (different org, different country, different line of work), it is a DIFFERENT person who shares the name — ignore those sources completely and say the public-web identity is unverified.\n\nCONTEXT:\n${ctx}\n\nUNDERSTANDING:`);
   }
   const md=`---
 name: ${p.name}
 lane: supporter
-warmth: ${p.warmth}
+warmth: ${p.warmth}${read?.energy!=null?`
+energy: ${read.energy}`:''}${read?.ring?`
+ring: ${read.ring}`:''}
 updated: ${new Date().toLocaleDateString('en-CA')}
 ---
 
 # ${p.name}
-${p.position?`*${p.position}${p.company?', '+p.company:''}*`:p.company||''}  ${p.sector?`· ${p.sector}`:''}
-
+${p.position?`*${p.position}${p.company?', '+p.company:''}*`:p.company||read?.org||''}  ${p.sector?`· ${p.sector}`:''}
+${read?`
+## Ben's read — ground truth (circle session ${read.ts||''})
+> **"${read.relation||'—'}"**${read.ring?` · ring **${read.ring}**`:''}${read.energy!=null?` · energy **${read.energy}**`:''}${read.give_receive?` · ${read.give_receive}`:''}${read.cadence?` · cadence: ${read.cadence}`:''}
+${read.tend_intent?`> Intent: ${read.tend_intent}`:''}${read.algo_note?`
+> _Machine note: ${read.algo_note}_`:''}
+`:''}
 ## Soil — institutional ground (CivicGraph)
 - **Org:** ${p.company||'—'}${p.position?` (${p.position})`:''}
 - **Connected orgs:** ${p.entities||'—'}
@@ -145,7 +168,7 @@ ${p.position?`*${p.position}${p.company?', '+p.company:''}*`:p.company||''}  ${p
 - **Government influence:** ${p.gov_influence||'—'} · **Indigenous affiliation:** ${p.indigenous||'—'}
 - _Warm paths: see \`orbit-interlocks.csv\` for who else in the orbit connects to these orgs._
 
-## Web & work — public read${web?.error?` (search error: ${web.error})`:''}
+## Web & work — public read${web?.error?` (search error: ${web.error})`:''}${webUnanchored?' — ⚠ UNANCHORED (common-name search, no org — may be a different person)':''}
 ${web?.answer?web.answer+'\n':''}${(web?.results||[]).map(r=>`- [${r.title}](${r.url}) — ${r.snippet}`).join('\n')||'_(no web key / no results)_'}
 
 ## Shared history — from the spine

@@ -2,7 +2,7 @@
 name: G Mana
 lane: community
 storyteller_id: 13742d49-901e-4c08-94b2-a864d1a9a8e9
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # G Mana

@@ -2,7 +2,7 @@
 name: Louise Walsh
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Louise Walsh
@@ -16,8 +16,10 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Louise Walsh is the founder and CEO of Walsh Capital, focusing on bespoke capital raising and philanthropy. She has extensive experience in capital raising and is a leading expert in fundraising. Her work emphasizes purpose-driven investment and supporting social impact.
-- [Louise Walsh: On the rule of purpose and embracing the different ...](https://shegives.com.au/story/louise-walsh-on-the-rule-of-purpose-and-embracing-the-different-life-stages-of-giving) — Louise Walsh is the founder & CEO of Walsh Capital. As the former CEO of the Future Generation Investment Companies and Philanthropy Australia, she is
+Louise Walsh is the founder and CEO of Walsh Capital, known for her expertise in philanthropy and fundraising. She previously led the Future Generation companies, growing their assets by $1bn in six years. She focuses on causes she cares about and has a strong network of donors.
+- [Louise Walsh: On the rule of purpose and embracing the different life stages of giving - She Gives](https://shegives.com.au/story/louise-walsh-on-the-rule-of-purpose-and-embracing-the-different-life-stages-of-giving) — # On the rule of purpose and embracing the different life stages of giving. Louise Walsh is the founder & CEO of Walsh Capital. As the former CEO of the Future Generation Investment Companies and Philanthropy Australia, she is widely regarded as one of Australia’s leading philant
+- [Team | Walsh Capital](https://walshcapital.com.au/team) — ### Louise Walsh Founder + CEO. Louise is the founder and CEO of Walsh Capital. Most recently as the CEO of the Future Generation companies, Louise and her team grew these ASX listed funds by $1bn in assets in just six years. This extensive network has been developed and nurtured
+- [Louise Walsh - Impact Investment Summit](https://impactinvestmentsummit.com/speakers/louise-walsh) — ⇐   BACK TO IMPACT INVESTMENT SUMMIT 2022 SPEAKERS. ### **Louise Walsh**. ##### Founder & CEO. Louise is the founder and CEO of Walsh Capital. Louise has extensive capital raising experience across many sectors. Most recently as the CEO of the Future Generation companies, Louise 
 - [Louise Walsh - Walsh Capital](https://au.linkedin.com/in/louise-walsh-walshcapital) — Louise Walsh
 Walsh Capital
 Sydney, New South Wales, Australia
@@ -38,13 +40,14 @@ N/A
 
 Education
 Austral
-- [Louise Walsh - Impact Investment Summit](https://impactinvestmentsummit.com/speakers/louise-walsh) — Louise Walsh. Founder & CEO. Louise is the founder and CEO of Walsh Capital. Louise has extensive capital raising experience across many sectors.
-- [Team | Walsh Capital](https://walshcapital.com.au/team) — Louise is widely regarded as one of Australia's leading philanthropic advisers and is a fundraising expert. thomas murphy. Thomas T Murphy Advisory Group.
+
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Louise Walsh serves as the founder and CEO of Walsh Capital, based in Sydney, Australia. Her extensive experience in capital raising spans multiple sectors, making her a recognized leader in the field of purpose-driven investment and philanthropy. Prior to founding Walsh Capital, Louise held roles such as CEO at Future Generation Investment Companies and Philanthropy Australia. Through her firm, she focuses on bespoke capital raising services tailored to support social impact projects and organizations.
+Louise Walsh is the founder and CEO of Walsh Capital, a firm she established to provide tailored capital-raising solutions. Previously, Louise served as the CEO of the Future Generation Investment Companies, where she successfully expanded assets by $1 billion within six years. Her background in philanthropy is also notable, given her leadership role at Philanthropy Australia. Louise has built and maintained an extensive network of donors and investors, which underscores her ability to connect individuals with significant financial resources to impactful causes.
 
-Louise appears to be deeply committed to leveraging financial resources for positive societal change. Her work underscores a strong emphasis on philanthropy and purpose-driven investment, indicating that she is passionate about using her expertise in fundraising to support causes with significant social benefits. This dedication suggests that Louise values making a meaningful difference through strategic and thoughtful allocation of capital towards impactful initiatives.
+Louise appears to deeply care about using capital for positive social change through both investment and philanthropic efforts. Her work suggests a strong commitment to aligning financial strategies with personal values and broader societal needs. She seems particularly interested in nurturing long-term relationships that can lead to substantial, meaningful contributions to various causes she supports. Louise's involvement in speaking engagements and her leadership roles indicate her dedication not only to practical fundraising but also to educating others about the importance of purpose-driven giving across different stages of life.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

@@ -2,7 +2,7 @@
 name: Abdullahi A. Mohamed
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Abdullahi A. Mohamed
@@ -16,16 +16,34 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Abdullahi A. Mohamed works with Jesuit Refugee Service (JRS) East Africa, focusing on refugee rights and youth empowerment in Dadaab, Kenya. He advocates for social inclusion and supports community development initiatives.
-- [‪Abdullahi Mire Mohamed‬ - ‪Google Scholar‬](https://scholar.google.com/citations?user=Xg2pWYoAAAAJ&hl=en) — the role of workforce diversity in enhancing organizational creativity and innovation among telecommunication sector in Somalia. AM Mohamed. iiardjournals.org.
-- [Abdullahi Mohamed's CV and Career Goals | PDF | Schools - Scribd](https://www.scribd.com/document/482984187/cv-2-pdf) — Abdullahi Mohamed is a Tanzanian national seeking a position where he can utilize his teaching experience and passion for gender equality in education.
-- [Abdullahi Mohamed Abdi - Talloires Network of Engaged Universities](https://talloiresnetwork.tufts.edu/programs/fyby/for-youth-by-youth-inaugural-cohort/abdullahi-mohamed-abdi) — For over four years, Abdullahi has actively advocated for refugee rights in Dadaab refugee camp, Kenya, focusing on youth empowerment and social inclusion. He
-- [mohamed Abdullahi Issack - Founder and Managing Director Daljir ...](https://so.linkedin.com/in/mohamed-abdullahi-issack-46b049163) — With over ten years of professional experience, Mohamed has built deep expertise in designing and managing M&E systems that help organizations track progress,
+The Jesuit Refugee Service (JRS) East Africa focuses on education, livelihoods, advocacy, emergency assistance, and reconciliation for refugees. Abdullahi A. Mohamed works as a healthcare management professional and data analyst for JRS East Africa. JRS aims to accompany displaced people to heal, learn, and determine their own future.
+- [Our Work with Refugees in East Africa - JRS Eastern and Southern Africa](https://ear.jrs.net/en/our-work) — Title: Our Work with Refugees in East Africa - JRS Eastern and Southern Africa
+* About JRS Eastern and Southern Africa. JRS Eastern and Southern  Africa. Our work Jesuit Refugee Service East Africa. # Our Work. ### Helping refugees heal, learn, and determine their own future. At 
+- [Abdullahi A. Mohamed - Healthcare Management Professional | Data Analyst - Jesuit Refugee Service (JRS) East Africa](https://www.linkedin.com/in/abdullahi-a-mohamed) — Abdullahi A. Mohamed
+Healthcare Management Professional | Data Analyst
+Kenya
+500 connections, 2319 followers
+
+
+About
+I am a results-driven healthcare management professional and data analyst. I am…
+
+
+Experience
+Jesuit Refugee Service (JRS) East Africa
+[Jesuit Refugee Service (JRS
+- [Jesuit Refugee Service Eastern and Southern Africa - JRS Eastern and Southern Africa](https://ear.jrs.net/en/jesuit-refugee-service-jrs-east-africa) — Title: Jesuit Refugee Service Eastern and Southern Africa - JRS Eastern and Southern Africa
+* About JRS Eastern and Southern Africa. # Responding to Sudan War. ### Know more about the humanitarian crisis in Sudan and its surrounding countries, and the work of JRS. ## Our Mission.
+- [Jesuit Refugee Service in the Middle East and North Africa | JRS Programs](https://www.jrsusa.org?p=1497) — Title: Jesuit Refugee Service in the Middle East and North Africa | JRS Programs
++ Catholic Social Thought on Migration. + JRS/USA Migrant Accompaniment Network. # JRS Middle East and North Africa. Jesuit Refugee Service (JRS) in the Middle East and North Africa (MENA) accompanie
+
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Abdullahi A. Mohamed is an enumerator working with the Jesuit Refugee Service (JRS) East Africa, where he focuses on enhancing refugee rights and youth empowerment initiatives within Dadaab, Kenya. His role involves advocating for social inclusion and supporting community development programs aimed at improving the lives of refugees in the camp. Abdullahi has a diverse background that includes an academic focus on workforce diversity in Somalia's telecommunications sector and a strong passion for gender equality in education. This multifaceted experience underscores his commitment to fostering inclusive environments and uplifting marginalized communities.
+Abdullahi A. Mohamed works as an enumerator for the Jesuit Refugee Service (JRS) East Africa, where he also serves as a healthcare management professional and data analyst. His role involves collecting vital information that supports JRS's mission to provide education, livelihoods support, emergency assistance, advocacy, and reconciliation services to refugees in the region. Through his work, Abdullahi contributes to ensuring that displaced people have access to essential healthcare services and resources necessary for their well-being.
 
-Abdullahi appears to deeply care about social justice, particularly the empowerment of youth within refugee camps. His work reflects a dedication to ensuring that refugees, especially young people, have access to opportunities that can help them build better futures for themselves and their communities. Additionally, his interests in workforce diversity and gender equality highlight his broader commitment to creating equitable spaces where all individuals, regardless of their background, can thrive and contribute meaningfully to society. Through his efforts with JRS East Africa, Abdullahi continues to advocate for the rights and well-being of refugees, aiming to build more inclusive and supportive communities.
+Abdullahi seems to care deeply about the welfare of refugees and is dedicated to using his skills to make a positive impact on their lives. His commitment to data analysis suggests he values evidence-based approaches in addressing humanitarian challenges, aiming to inform policies and programs that can effectively support displaced communities. By working with JRS, Abdullahi is part of an organization that prioritizes healing, learning, and empowerment for refugees, reflecting his own passion for helping individuals overcome adversity and build a better future.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

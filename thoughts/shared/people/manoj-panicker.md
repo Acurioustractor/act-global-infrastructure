@@ -2,7 +2,7 @@
 name: Manoj Panicker
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Manoj Panicker
@@ -16,10 +16,10 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Manoj Panicker is a seasoned Cloud Architect, Vice President of Sales, and Workforce Management expert with extensive experience in technology and workforce management. He is known for his expertise in Java, Cloud, and Big Data. His roles emphasize leadership and technical proficiency.
-- [Manoj Panicker | Expert Cloud Architect - Udemy](https://www.udemy.com/user/manoj-panicker) — Manoj Panicker is a highly accomplished Cloud Architect with over 25 years of experience in architecting, designing, and developing Java, Cloud, and Big Data
-- [Manoj Panicker - Vice President, Sales at Finesse Itlabs Private](https://www.zoominfo.com/p/Manoj-Panicker/3658830965) — Manoj Kumar Panicker is a Vice President, Sales at Finesse Itlabs Private. Panicker has a significant tenure with Finesse Itlabs Private,
+Manoj Panicker is a senior product management executive with extensive experience at Cornerstone OnDemand and Saba Software. He is currently the Associate Vice President of Product Management at Cornerstone OnDemand. He has a background in workforce management and holds a Bachelor of Science in Chemistry.
 - [Ar. Manoj A Panicker (@mj17_ap) • Instagram photos and videos](https://www.instagram.com/mj17_ap) — Architect Writer | Director | Editor Cinephobic. A sworn enemy of movies since childhood. ISI / CAT ... Short films, documentaries and animations are rolling
+- [Manoj Panicker's Post - LinkedIn](https://www.linkedin.com/posts/manoj-panicker_takeaction-starttoday-bettereveryday-activity-7465079639393337344-_wqo) — Every person has two lives — the one they live, and the one they're capable of living. Take the step. Start living the second one.
+- [Manoj Panicker - Senior Director Of Product Management at Saba Software | The Org](https://theorg.com/org/saba-software/org-chart/manoj-panicker) — # Manoj Panicker. ### Senior Director Of Product Management. Manoj Panicker has extensive experience in product management and leadership roles. Manoj is currently serving as the Associate Vice President of Product Management at Cornerstone OnDemand since September 2020. Prior to
 - [Manoj Panicker - AVP WFM @ HSBC Data Processing | Workforce Management Expertise - HSBC Data Processing Pvt. Ltd](https://in.linkedin.com/in/manoj-panicker-80a19471) — Manoj Panicker
 AVP WFM @ HSBC Data Processing | Workforce Management Expertise
 Bengaluru, Karnataka, India
@@ -34,10 +34,13 @@ Experience
 AVP WFM
 [HSBC Data Processing Pvt. Ltd]
 
-## Understanding — drafted
-Manoj Panicker is a multifaceted individual known for his extensive expertise across various domains within the technology and sales sectors. As a seasoned Cloud Architect, he brings over 25 years of experience in architecting, designing, and developing Java, cloud solutions, and big data applications. In addition to his technical prowess, Manoj holds significant leadership roles as Vice President of Sales at Finesse Itlabs Private and was an AVP for Workforce Management at HSBC Data Processing Pvt. Ltd., where he managed workforce operations with a focus on efficiency and optimization.
+## Shared history — from the spine
+_(no linked email record)_
 
-Beyond the professional realms of technology and sales, Manoj exhibits diverse interests and talents outside his primary career. He has shown involvement in filmmaking as an architect writer, director, and editor of short films, documentaries, and animations, indicating a creative passion that complements his technical skills. This blend of interests suggests that he values both the precision required for technology roles and the creativity needed for artistic endeavors, possibly finding fulfillment through the intersection of these seemingly disparate fields.
+## Understanding — drafted
+Manoj Panicker is a seasoned professional with a robust background in product management and workforce management. He currently holds the position of Associate Vice President of Product Management at Cornerstone OnDemand, where he leverages his extensive experience to drive strategic initiatives. Prior to this role, Manoj has worked at notable companies like Saba Software and HSBC Data Processing Pvt. Ltd., honing his expertise in both product development and workforce management. Outside of his professional life, Manoj is also known for his involvement in the creative arts as an architect writer, director, and editor, with a particular affinity for short films, documentaries, and animations.
+
+Manoj seems to care deeply about leveraging his extensive experience to make meaningful contributions in both his professional and personal endeavors. His LinkedIn quote underscores this dedication: "Every person has two lives — the one they live, and the one they're capable of living." This reflects a profound interest in self-improvement and helping others realize their potential. In his creative pursuits, Manoj channels an equally deep passion for storytelling through architecture and film, indicating a commitment to using diverse mediums to express and explore ideas. His engagement with these varied interests suggests that he values innovation and creativity as much as strategic leadership and management skills.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

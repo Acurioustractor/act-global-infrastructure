@@ -2,7 +2,7 @@
 name: Paul La'Hay
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Paul La'Hay
@@ -16,7 +16,8 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Paul La'Hay is the founder and director of UinU Pty Ltd, focusing on spiritual guidance. He aims to inspire millions through his work. His efforts are not a direct selling scheme.
+Paul La'Hay is the founder and director of Igniting UinU Pty Ltd, focusing on spiritual guidance and community support. He aims to help millions through his work, emphasizing reliance on divine power rather than worldly strength. His efforts are not a direct selling scheme.
+- [4 "Paul La'hay" profiles - LinkedIn](https://www.linkedin.com/pub/dir/Paul/La%27hay) — Paul La'Hay Looking to help Millions of people 🌟 Macquarie Park, NSW Igniting UinU Pty Ltd - Founder/Director , +6 more Various, +5 more
 - [Paul La'Hay - Looking to help Millions of people 🌟 - Igniting UinU Pty Ltd - Founder/Director](https://au.linkedin.com/in/plahay) — Paul La'Hay
 Looking to help Millions of people 🌟
 Macquarie Park, New South Wales, Australia
@@ -29,33 +30,16 @@ Igniting UinU™ Update site as Holy Spirit prompts, last time 16 March 2026 (be
 
 Experience
 The lived life story will give hope to milli
-- ['Makes me believe in humanity': grassroots volunteers deliver hay ...](https://www.theguardian.com/australia-news/2026/jan/17/makes-me-believe-in-humanity-grassroots-volunteers-deliver-hay-water-and-helping-hand-in-victorian-bushfires) — 'Makes me believe in humanity': grassroots volunteers deliver hay, water and helping hand in Victorian bushfires. This article is more than 4
-- [Samantha Best - Director - Habitat Early Learning](https://au.linkedin.com/in/samantha-best-61b916192) — Samantha Best
-Director
-Karalee, Queensland, Australia
-112 connections, 121 followers
+- [Discover A Path To A Better Life | Igniting U In U | Sydney](https://www.ignitinguinu.com) — Igniting UinU name was given by God after doing a 21 day fast & asking to do His will for my life. He is doing many supernatural things.
+- [Gifting | Igniting U In U](https://www.ignitinguinu.com/sponsorship) — The sponsorship page gives you opportunity to partner by gifting any amount that will help with this God inspired - can't explain healing infected skin, heavy
 
-
-About
-N/A
-
-
-Experience
-Early Childhood Educator
-[Habitat Early Learning](https://au.linkedin.com/company/habitat-early-learning)  
-Dec 2019 - Dec 2022
-Australia
-
-
-
-Education
-University of New E
-- [Let history show that Fresno's Gilbert Padilla was a key co-founder ...](https://www.aol.com/let-history-show-fresno-gilbert-181437043.html) — Let history show that Fresno's Gilbert Padilla was a key co-founder of United Farm Workers ... The Bee last month published an article on the Affordable and
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Paul La'Hay is the founder and director of Igniting UinU Pty Ltd, an organization focused on providing spiritual guidance. His work is centered around sharing his life story to inspire millions globally, aiming to bring hope and positivity through a non-commercial approach rooted in spiritual teachings.
+Paul La'Hay is the founder and director of Igniting UinU Pty Ltd, an organization aimed at providing spiritual guidance and support to individuals seeking a deeper connection with divine power. His work revolves around sharing his lived experiences and spiritual insights in order to inspire hope and transformation among those he reaches. Paul’s journey includes a significant event where he undertook a 21-day fast during which the name "Igniting UinU" was divinely revealed to him, setting the stage for his current mission.
 
-From the available context, it appears that Paul cares deeply about using his experiences and spiritual insights to make a meaningful impact on others' lives. He seeks to create an environment where people can find inspiration and hope, likely emphasizing community support and personal growth grounded in spirituality. The nature of his work suggests he values connections with individuals seeking guidance and aims to foster a sense of unity through shared spiritual journeys.
+What seems clear from Paul's work is that he deeply cares about spiritual growth and community support, emphasizing reliance on divine guidance rather than worldly means. He appears to be committed to offering a path toward a better life through supernatural experiences and healing, as suggested by testimonials of miraculous events associated with his ministry. His approach involves creating opportunities for partnership and support from those who wish to contribute to his mission, indicating a collaborative spirit in achieving his goals of helping millions.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

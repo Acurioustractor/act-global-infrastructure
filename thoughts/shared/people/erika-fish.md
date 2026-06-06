@@ -2,7 +2,7 @@
 name: Erika Fish
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Erika Fish
@@ -16,7 +16,7 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Erika Fish is a self-employed advocate for human rights and responsibilities, focusing on emotional intelligence and natural law. She is a photographer, researcher, and writer. She promotes the importance of understanding human emotions for personal and societal well-being.
+Erika Fish is a self-employed advocate for human rights, focusing on emotional intelligence and natural law. She works as a photographer, researcher, and educator. Her main goal is to promote peace and responsible parenting.
 - [Erika Fish - Advocate for A Bill of Human Rights and Responsibilities - Self-employed](https://au.linkedin.com/in/erika-fish-05782125) — Erika Fish
 Advocate for A Bill of Human Rights and Responsibilities
 Brisbane City, Queensland, Australia
@@ -31,14 +31,17 @@ Experience
 Human Rights Advocate
 [Self-employed](N/A)  
 Jan 2
-- [Erika Fish an advocate for peace, happiness and freedom - Erika Fish](https://www.erikafish.com/about-erika-fish) — Erika Fish is a researcher, writer and advocate for a Bill of Human Rights and Responsibilities. She is documenting our Australian society, with a special
-- [Meet Erica, a working mom, a caretaker, and a new homeowner ...](https://www.facebook.com/repjasonsmith/posts/meet-erica-a-working-mom-a-caretaker-and-a-new-homeownerthanks-to-no-tax-on-tips/1515293023299890) — Meet Erica, a working mom, a caretaker, and a new homeowner. Thanks to 'No Tax on Tips', Erica has more money in her pocket to take care of her
-- [Erika | Is working freelance worth giving up the job security of a ...](https://www.instagram.com/reel/DBRDHmTP-XV) — It's like a total different narrative of what it is now. OCR. WORK NARRATIVE IS REALLY IMPORTANT BECAUSE NARRATIVE IS WHAT FUELS YOU THIS IS
+- [Erika Fish an advocate for peace, happiness and freedom - Erika Fish - photographer, researcher and advocate for A Bill of Human Rights and Responsibilities](https://www.erikafish.com/about-erika-fish) — I am a mother and an advocate for change in the way we understand and listen to our Mind so that our families grow strong in their self-belief, their sense of belonging and their ability to learn, problem solve and have loving relationships. With so much anger in the world, to be
+- [Freelance to Full-Time | Work Like a Girl - YouTube](https://www.youtube.com/watch?v=YcLNJWg79nA) — On today's episode Erika helps an executive assistant define her job title and description as she wants to pivot her career.
+- [Erika | Fashion psychology at work - dressing for identity, confidence ...](https://www.instagram.com/p/DLhtznbxefJ) — ✨ Show self-awareness and professionalism ✨ Explain how they've improved ✨ Know how to communicate with intention. That's usually the difference
+
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Erika Fish is an independent human rights advocate based in Brisbane, Queensland, Australia. She works as a photographer, researcher, and writer with a strong focus on promoting natural law and emotional intelligence as key components of personal and societal well-being. Erika advocates for the creation and implementation of a Bill of Human Rights and Responsibilities, aiming to foster a more compassionate and understanding society through her work.
+Erika Fish is a human rights advocate based in Brisbane City, Queensland, Australia. She operates independently as a photographer, researcher, writer, and educator, focusing her work on natural law and emotional intelligence. Erika’s efforts are directed towards fostering peace and promoting responsible parenting within communities. Through her diverse roles, she aims to create positive social change by advocating for a bill of human rights and responsibilities that emphasizes the importance of understanding and respecting individual freedoms and duties.
 
-Erika cares deeply about peace, happiness, and freedom, emphasizing the importance of recognizing and honoring human emotions in both individual lives and broader social contexts. Her efforts extend beyond just research and writing; she is also an educator on these topics, working to empower individuals by teaching them how to navigate their own emotional landscapes effectively. Additionally, as a mother and new homeowner, Erika understands the practical challenges and joys of balancing personal life with professional commitments, infusing her advocacy work with real-world relevance and empathy.
+Erika cares deeply about creating environments where families can thrive emotionally and mentally, with a strong emphasis on nurturing self-belief and healthy relationships among family members. She believes in the power of emotional intelligence to reduce anger and conflict in society by encouraging people to listen more mindfully to their inner selves. Her work as an advocate is not just about rights but also about responsibilities, highlighting that true peace and happiness come from a balance between individual freedoms and societal duties. Through her roles as a photographer and researcher, she captures stories and evidence of human experiences, using them to educate and inspire others towards more compassionate and mindful living.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

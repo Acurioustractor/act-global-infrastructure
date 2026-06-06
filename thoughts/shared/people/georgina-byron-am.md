@@ -2,11 +2,17 @@
 name: Georgina Byron AM
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+energy: 50
+ring: 50
+updated: 2026-06-06
 ---
 
 # Georgina Byron AM
 *CEO and Executive Director, The Snow Foundation*  
+
+## Ben's read — ground truth (circle session 2026-06-06)
+> **"largest secured funder ($403K) — keep engaged; also a storyteller (2 EL transcripts)"** · ring **50** · energy **50**
+> Intent: keep engaged
 
 ## Soil — institutional ground (CivicGraph)
 - **Org:** The Snow Foundation (CEO and Executive Director)
@@ -16,16 +22,15 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Georgina Byron AM is CEO of the Snow Foundation, a national organization supporting communities and systems change in Australia. The Snow Foundation focuses on four pillars: First Nations people, LGBTIQ+ communities, youth, and early-stage social entrepreneurs. Byron has also been appointed as an inaugural Ambassador for Australians.
-- [Georgina Byron AM: On the joy of collaboration and circular change](https://shegives.com.au/story/georgina-byron-am-on-the-joy-of-collaboration-and-circular-change) — Georgina Byron AM is the CEO of Snow Foundation. She also serves as Co-Chair of Deadly Hearts Limited, Deputy Chair of Sydney Community Foundation.
-- [This evening, Georgina Byron, CEO of The Snow Foundation, joined ...](https://www.facebook.com/NTHfoundation/videos/this-evening-georgina-byron-ceo-of-the-snow-foundation-joined-a-powerful-panel-d/1216612996855428) — She spoke passionately about the vital role philanthropy plays in advancing research and funding innovative programs like our tick-borne disease
-- [Season 2, Episode 3 with Georgina Byron AM](https://www.aiiw.org.au/news/empowered-giving-for-a-fairer-future-season-2-episode-3-with-georgina-byron-am) — She outlines the Snow Foundation's four-pillar approach, which supports First Nations people, LGBTIQ+ communities, youth, and early-stage social entrepreneurs—
-- [The Snow Foundation - Facebook](https://www.facebook.com/TheSnowFoundation/posts/we-are-so-excited-to-share-that-snow-foundation-ceo-georgina-byron-am-has-been-a/848648264547796) — We are so excited to share that Snow Foundation CEO, Georgina Byron AM, has been appointed as an inaugural Ambassador for Australians
+_(no web key / no results)_
+
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Georgina Byron AM serves as the CEO and Executive Director of the Snow Foundation, a national organization dedicated to supporting communities and driving systemic change across Australia. Her work primarily revolves around four key areas: First Nations people, LGBTIQ+ communities, youth, and early-stage social entrepreneurs. Under her leadership, the Snow Foundation aims to foster collaboration and circular change, with Byron also holding significant roles as Co-Chair of Deadly Hearts Limited and Deputy Chair of Sydney Community Foundation. Recently, she has been recognized for her contributions by being named an inaugural Ambassador for Australians.
+Georgina Byron AM serves as the CEO and Executive Director of The Snow Foundation, an organization that she leads with a focus on impactful storytelling and substantial funding initiatives. She is notable for being the largest secured funder associated with the foundation to date, having brought in $403K. This significant contribution underscores her pivotal role in securing resources for projects and initiatives under the foundation's umbrella. Her involvement in two executive leadership (EL) transcripts highlights her adeptness at sharing insights and stories that align with the foundation’s mission.
 
-Georgina Byron AM appears to care deeply about social justice and equitable opportunities for marginalized communities in Australia. Her passionate advocacy for philanthropy and its role in advancing research and innovative programs underscores her commitment to making a tangible impact on societal issues. Through the Snow Foundation, she emphasizes the importance of supporting young people and early-stage entrepreneurs as key drivers of change. Byron’s involvement with various community organizations also suggests that she values collective efforts and collaboration in achieving meaningful social progress.
+Georgina seems deeply committed to leveraging both financial contributions and narrative power to drive the Snow Foundation’s goals forward. It is clear from her role and contributions that she cares about not only securing funding but also using storytelling as a tool for engagement and impact. Her efforts reflect an intention to keep the organization engaged with its stakeholders, indicating a strong focus on maintaining relationships and visibility within her network.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

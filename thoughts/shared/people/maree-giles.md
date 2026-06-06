@@ -2,7 +2,7 @@
 name: maree giles
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # maree giles
@@ -16,16 +16,19 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Maree Giles is an Australian novelist and creative writing tutor. She has written three novels and is known for her work in journalism and short stories. She lives in London with her family.
+Maree Giles is an award-winning Australian author, journalist, and creative writing teacher known for her novels and short stories. She has lived in Britain for decades and has taught at various writing centers in Australia and London. Her work often explores themes from her experiences as a survivor of Parramatta Girls' Training School.
+- [Maree Giles | Award-winning author, journalist, and mentor](https://mareegiles.org/about_maree_giles) — Maree Giles is an award-winning Australian short story writer, journalist, creative writing teacher and the author of three books. She has taught creative writing at some of Australia’s top Writing Centres, such as Varuna, the Writer’s House in Katoomba; the Australian Writers’ C
 - [Maree Giles - Royal Literary Fund](https://www.rlf.org.uk/writer/maree-giles) — Discover the people who make up the Royal Literary Fund, learn about our history and how you can get in touch and contribute towards our future. Maree Giles is an Australian novelist and creative writing tutor who has lived in Britain for thirty years. She has more than 35 years 
-- [About Maree Giles](https://mareegiles.org/about_maree_giles) — Maree Giles is an award-winning Australian short story writer, journalist, creative writing teacher and the author of three books. She has two children and four
-- [Interview with Maree Giles - Adelaide Screenwriter](http://adelaidescreenwriter.blogspot.com/2014/07/interview-with-maree-giles.html) — Maree Giles is an award-winning Australian author, editor, poet, journalist, creative writing teacher and mentor, the mother of two grown-up
-- [Maree Giles (@MareeGiles16) - Facebook](https://www.facebook.com/MareeGiles16) — Maree Giles is an award-winning writer. Her novels Girl 43, Invisible Thread, Under The Green Moon & The Past Is A Secret Country are published by Virago
+- [Adelaide Screenwriter: Interview with Maree Giles](http://adelaidescreenwriter.blogspot.com/2014/07/interview-with-maree-giles.html) — Maree Giles is an award-winning Australian author, editor, poet, journalist, creative writing teacher and mentor, the mother of two grown-up children, and a Parramatta Girls' Home survivor, who now lives in Toulouse in sunny south-west France. Maree has taught creative writing at
+- [Maree Giles - Hachette UK](https://www.hachette.co.uk/contributor/maree-giles) — Maree is an award-winning short story writer and journalist, and the author of three novels. Invisible Thread, her first novel, was republished in 2014 by
+
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Maree Giles is a multifaceted Australian author and educator who has made her home in London for over three decades. She has established herself as an accomplished writer through her contributions to journalism, short stories, and novels, with notable works such as "Girl 43" and "Invisible Thread." Her career also includes teaching creative writing, sharing her expertise and passion with aspiring writers at various institutions including the Royal Literary Fund.
+Maree Giles is a distinguished Australian author, journalist, and creative writing teacher who has significantly impacted both literature and education through her work. After living in Britain for over thirty years, she now resides in Toulouse, France. Her literary contributions span novels, short stories, journalism, and poetry, showcasing not only her versatility as an artist but also the depth of her storytelling. Maree’s experience teaching creative writing at prestigious institutions like Varuna, the Writer's House in Katoomba, Australia, underscores her dedication to nurturing new talent and sharing her expertise with aspiring writers.
 
-Maree’s work seems deeply rooted in storytelling and nurturing creativity. She values both the craft of writing and its role in personal expression and societal reflection. As a mother to two grown children, she likely appreciates family life and the balance between her professional commitments and personal relationships. Her involvement in mentoring and teaching suggests that Maree cares about fostering talent and supporting individuals in realizing their creative potential.
+Maree’s work often reflects her personal experiences, including her time as a survivor of Parramatta Girls' Training School. This deeply influences both her writing and teaching, where she brings a poignant perspective on resilience and survival. She cares deeply about storytelling that resonates with human emotion and experience, making her not only an accomplished writer but also a passionate advocate for voices often marginalized or silenced by society. Her commitment to education extends beyond just imparting skills; it is driven by a desire to empower individuals through the power of narrative and self-expression.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

@@ -2,7 +2,7 @@
 name: Brodie Germaine
 lane: community
 storyteller_id: 1b2598cf-80a2-4386-969a-3e9315950b04
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Brodie Germaine

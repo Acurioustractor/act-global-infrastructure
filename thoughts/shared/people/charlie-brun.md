@@ -2,7 +2,7 @@
 name: Charlie  Brun
 lane: community
 storyteller_id: d5e5ee62-9610-4804-9307-9edc7f8bd86d
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Charlie  Brun

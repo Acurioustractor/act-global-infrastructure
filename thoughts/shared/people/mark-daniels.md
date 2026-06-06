@@ -2,7 +2,7 @@
 name: Mark Daniels
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Mark Daniels
@@ -16,7 +16,7 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Mark Daniels is a social change advocate and works at Civik. He has a long history in broadcast weather and also teaches cinema at Weber High School. His focus is on social change and addressing disadvantage.
+Mark Daniels Civik is passionate about social change and addressing disadvantage. He works at Civik and is based in Melbourne, Victoria. His work focuses on advocacy and community engagement.
 - [Mark Daniels - Civik](https://au.linkedin.com/in/mark-daniels-81182412) — Mark Daniels
 Civik
 Melbourne, Victoria, Australia
@@ -40,14 +40,17 @@ RMIT
 N/A
 1996 - 1998
 None
-- [Able Seaman Marine Technician Mark Daniels continues his journey](https://www.facebook.com/HMASStirling/posts/able-seaman-marine-technician-mark-daniels-continues-his-journey/558871931122847) — He is working at Tickford in an Industry Outplacement role for 12 months. This is a big milestone in a sailors career and noting he is working
-- [Mark Daniels - WPSD Local 6](https://www.wpsdlocal6.com/about-us/meet-the-team/mark-daniels/article_55411bf2-c180-11ef-be44-db6c42503e57.html) — Mark Daniels is the newest member of the WPSD Local 6 Weather team. Mark has been in the broadcast weather industry for more than 30 years.
-- [For Mark Daniels, the theatre teacher at Weber High School in ...](https://www.instagram.com/reel/DF-wgHlsXl1) — But Daniels also teaches the school's cinema class where, he says, students hope to sit and watch a movie.
+- [Mark Daniels - Wikipedia](https://en.wikipedia.org/wiki/Mark_Daniels) — Mark Roy Daniels (July 14, 1881– January 14, 1952) was an architect, landscape architect, civil engineer, and city planner active in California.
+- [Spending time with Mark Daniels — Scope Vision](https://scopevision.com.au/blog/spending-time-with-mark-daniels) — MS became my gift that forced me to live 50 business years in 1/5th of the time and **Find My Grit,**when I heard about Mark Daniels’ journey I wondered how he managed to find GRIT with such tenacity. Mark Daniels inspired me from the moment I was introduced to his story. > *“Aft
+- [What God Thinks of You - Mark Daniels - Substack](https://markluth91.substack.com/p/what-god-thinks-of-you-ea4) — And we know he was a tax collector. Tax collectors were not like the civil servants who work for the IRS in our country today. Tax
+
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Mark Daniels is a multifaceted individual contributing significantly across various fields. Currently serving as the Company Secretary for Civik based in Melbourne, Victoria, Australia, Mark leverages his extensive background in broadcast weather, spanning over three decades, which he began at WPSD Local 6. Beyond his professional role, Mark holds a deep-rooted passion for education and social change, teaching cinema classes at Weber High School where he fosters students' appreciation and understanding of film as an art form. His educational pursuits also include studies from RMIT University.
+Mark Daniels is a Company Secretary at Civik, an organization based in Melbourne, Victoria, that is committed to social change and addressing societal disadvantages. His professional focus includes advocacy and community engagement, reflecting his dedication to creating positive impacts within communities. Mark’s background suggests he has been actively involved in these efforts for quite some time, leveraging his role to champion causes that can lead to meaningful reforms.
 
-Mark's core focus revolves around addressing societal disadvantages and advocating for social change. This commitment is evident in his professional endeavors and teaching career, demonstrating a genuine desire to make a positive impact on the community. Mark values education and believes it can be a powerful tool for empowering individuals and driving meaningful change. His work at Civik and his involvement with students at Weber High School reflect his dedication to fostering environments that promote understanding and action towards social equity and improvement.
+Mark appears to care deeply about issues of social justice and inequality. His work at Civik underscores a commitment to fostering change through community involvement and advocacy. Beyond his professional endeavors, Mark’s story has inspired others, particularly regarding the concept of finding "grit" or resilience in the face of challenges. This suggests that personal strength and perseverance are values he holds close, which likely inform both his professional approach and his broader life philosophy.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

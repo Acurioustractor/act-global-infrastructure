@@ -2,7 +2,7 @@
 name: jonty bush
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # jonty bush
@@ -16,16 +16,31 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Jonty Bush is a member of the Queensland Parliament representing Cooper since 2020. She focuses on public health and social services. Her advocacy work includes significant contributions to government navigation.
-- [Ms Jonty Bush - Member Details | Queensland Parliament](https://www.parliament.qld.gov.au/Members/Current-Members/Member-List/Member-Details?id=1187348753) — She was appointed as Chief Executive Officer to the QHVSG in 2007, and awarded the Young Australian of the Year in 2009 recognising her work in advocacy for
-- [Speeches - Search | Queensland Parliament](https://www.parliament.qld.gov.au/Global/Search?current-member-name=Jonty+Bush&index=qps_speeches_index) — Speech By Jonty Bush MEMBER FOR COOPER Record of Proceedings, 31 March 2022 PUBLIC HEALTH AND OTHER LEGISLATION (EXTENSION OF EXPIRING PROVISIONS) AMENDMENT
-- [Jonty Bush - Queensland Labor](https://queenslandlabor.org/jonty-bush) — Jonty Bush has been the Member for Cooper since 2020. Jonty has a 20-year career history in making sure people can navigate government and social services.
-- [Jonty Bush - Member for Cooper (@jontybush) - Instagram](https://www.instagram.com/jontybush?hl=en) — Your state member for Cooper Contact us: cooper@parliament.qld.gov.au. For more about my work and initiatives, visit my website ⤵️.
+Jonty Bush is a Member for Cooper in the Queensland Parliament, focusing on victims' rights and community safety. She led the "One Punch Can Kill" campaign and has a background in criminology and public service. Her work emphasizes strengthening the rights of crime victims and promoting community safety.
+- [Search | Queensland Parliament](https://www.parliament.qld.gov.au/Global/Search?current-member-name=Jonty+Bush&index=qps_speeches_index) — Speech By Jonty Bush MEMBER FOR COOPER Record of Proceedings, 17 March 2022 LEGAL AFFAIRS AND SAFETY COMMITTEE Report, Motion to Take Note Ms BUSH (Cooper—ALP) (3.12 pm): I rise as a member of the Legal Affairs and Safety Committee which has oversight ... Speech By Jonty Bush MEM
+- [Inaugural Speech — Jonty Bush MP](https://www.jontybush.com/speeches/inaugural-speech-pd7gj-z2cpb-c78za-y8lj2-h3g47-5s43s-sbm6s-6r9mk) — I recognise the privilege that comes with the role of being a parliamentarian and stand here today with pride and gratitude to the people of Cooper who have placed their confidence in me. It is also a marvellous container for change; a space for ideas to be brought forward, conte
+- [Jonty Bush – Queensland Labor](https://queenslandlabor.org/jonty-bush) — **Jonty Bush has been the Member for Cooper since 2020.**. Jonty has a 20-year career history in making sure people can navigate government and social services, ensuring they have a voice and can participate in the decisions made for them and about them. Jonty was recognised nati
+- [Jonty Bush - Member for Cooper - Queensland Parliament](https://au.linkedin.com/in/jonty-bush-52431758) — Jonty Bush
+Member for Cooper - Queensland Parliament
+Greater Brisbane Area
+500 connections, 7646 followers
+
+
+About
+Contact: Phone: (07) 3554 9100 Email: cooper@parliament.qld.gov.au It’s a…
+
+
+Experience
+Member for Cooper
+[Queensland Parliament](https://au.linkedin.com/company/que
+
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Jonty Bush is a dedicated member of the Queensland Parliament representing the electorate of Cooper since 2020. With over two decades of experience in public service, she has focused her efforts on improving public health outcomes and access to social services for Queenslanders. Her career highlights include serving as Chief Executive Officer to the QHVSG starting in 2007 and being awarded Young Australian of the Year in 2009 for her advocacy work. In Parliament, Jonty continues this tradition by actively contributing to legislative discussions that aim to extend expiring provisions under public health laws, demonstrating a commitment to maintaining critical support systems.
+Jonty Bush is a Member of the Queensland Parliament representing the electorate of Cooper since 2020. She has a strong background in criminology and public service, which informs her work in the Legal Affairs and Safety Committee where she focuses on victims' rights and community safety issues. Jonty led the "One Punch Can Kill" campaign, highlighting her dedication to addressing violent crimes and advocating for safer communities. Throughout her career, she has dedicated herself to ensuring that individuals can navigate government and social services effectively, ensuring their voices are heard in decisions impacting them.
 
-Jonty Bush appears to care deeply about ensuring that individuals and communities have access to the resources and services they need to thrive. Her background in advocacy for government navigation highlights her dedication to making complex bureaucratic processes more accessible and understandable to the general populace. Through her work, she strives to create a supportive environment where public health initiatives are prioritized and social services are effectively utilized to benefit all members of society. This commitment is further underscored by her ongoing efforts to inform and engage with her constituents through various communication channels, including her website and social media presence.
+Jonty Bush cares deeply about victims' rights and promoting community safety, recognizing the importance of making sure people have a voice and are able to participate in matters affecting their lives. Her work demonstrates a commitment to leveraging her position to create meaningful change for those affected by crime and to enhance public safety measures within her constituency. The pride she takes in her role as a parliamentarian reflects her appreciation for the trust placed in her by the people of Cooper, further underscoring her dedication to making a positive impact through her legislative work and advocacy efforts.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

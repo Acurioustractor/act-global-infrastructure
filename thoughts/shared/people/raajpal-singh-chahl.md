@@ -2,7 +2,7 @@
 name: Raajpal Singh Chahl
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Raajpal Singh Chahl
@@ -16,7 +16,7 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Raajpal Singh Chahl is a chef and director at Prestige Ventures Pty Ltd, focusing on culinary creativity and leadership. He is actively involved in the food industry and business management. His role emphasizes innovation and team collaboration.
+Raajpal Singh Chahl is a chef working at Prestige Ventures Pty Ltd. He specializes in Modern Australian and international cuisines. His work focuses on culinary creativity and team leadership.
 - [Raajpal Singh Chahl - Chef | Bachelor of Commerce (HRM) | Culinary Creativity + Team Leadership | Open to New Opportunities - Jack & Bones Island Bar](https://au.linkedin.com/in/raajpalchahl) — Raajpal Singh Chahl
 Chef | Bachelor of Commerce (HRM) | Culinary Creativity + Team Leadership | Open to New Opportunities
 Werribee, Victoria, Australia
@@ -25,14 +25,17 @@ Werribee, Victoria, Australia
 
 About
 I am a chef specialising in Modern Australian and international cuisines. I love creating
-- [Rajpal SINGH personal appointments - Companies House - GOV.UK](https://find-and-update.company-information.service.gov.uk/officers/ZcPH7rQxxKQXK3qfP9dpJ5IcMxs/appointments) — Company status: Active. Correspondence address: Bedford I Lab, Stannard Way, Priory Business Park, Bedford, England, MK44 3RZ. Role Active: Director.
-- [RAJPAL SINGH | DIN 08460458 Director Profile - IndiaFilings](https://www.indiafilings.com/search/rajpal-singh-din-08460458) — RAJPAL SINGH bearing DIN number 08460458 is currently the director of SHRB INSURANCE PRIVATE LIMITED, INNOWORLD POLY VENTURES PRIVATE LIMITED,
-- [RAJPAL SINGH - Credhive](https://www.credhive.in/ind/director/08892049) — View director profile for RAJPAL SINGH (DIN: 08892049). Unlock actionable Indian director information with CredHive, a leading business intelligence tool
+- [PRESTIGE VENTURES (INDIA) PRIVATE LIMITED | ZaubaCorp](https://www.zaubacorp.com/PRESTIGE-VENTURES-INDIA-PRIVATE-LIMITED-U99999DL1996PTC082811) — PRESTIGE VENTURES (INDIA) is a 29 year old company with registered office in South East, Delhi. 10 Key Management Personnel (KMPs) have been associated with
+- [Rajpal SINGH personal appointments - Find and update company information - GOV.UK](https://find-and-update.company-information.service.gov.uk/officers/ZcPH7rQxxKQXK3qfP9dpJ5IcMxs/appointments) — ## Cookies on Companies House services. We use some essential cookies to make our services work. We'd also like to use analytics cookies so we can understand how you use our services and to make improvements. You've accepted analytics cookies. You've rejected analytics cookies. C
+- [Rajpal Singh Chaudhary - Founding Partner at AGP Sustainable Real Assets | The Org](https://theorg.com/org/agp-sustainable-real-assets/org-chart/rajpal-singh-chaudhary) — ### Founding Partner. Rajpal Singh Chaudhary is a seasoned professional with extensive experience in the real assets and consulting sectors. As the Founding Partner at AGP Sustainable Real Assets since July 2020, Rajpal has demonstrated expertise in sustainable investment strateg
+
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Raajpal Singh Chahl is a trainee chef and director at Prestige Ventures Pty Ltd in Australia. He brings a blend of culinary expertise and business acumen to his role, having completed a Bachelor of Commerce (HRM) alongside his career in the kitchen. Raajpal specializes in modern Australian and international cuisines, showcasing a passion for culinary creativity and innovation. His involvement extends beyond cooking; he actively engages in business management aspects, reflecting a well-rounded approach to the food industry.
+Raajpal Singh Chahl is a trainee chef currently working at Prestige Ventures Pty Ltd, an organization known for its involvement in various ventures. Raajpal specializes in Modern Australian and international cuisines, showcasing his culinary creativity through innovative dishes that blend traditional flavors with contemporary techniques. His role extends beyond the kitchen as he also focuses on team leadership, aiming to foster a collaborative environment where his peers can grow both professionally and creatively.
 
-Raajpal appears to care deeply about both culinary artistry and leadership within his team. He values collaboration and sees it as a key component of his work environment. Openness to new opportunities suggests that he is forward-thinking and adaptable, ready to explore different avenues in his career while continuing to make contributions through his expertise in food and business management. His active engagement on professional networks and multiple director roles indicate a strong interest in making impactful contributions across various ventures.
+Raajpal seems to value innovation and teamwork highly, as evidenced by his specialization in culinary creativity and his emphasis on leadership within his team. He is open to new opportunities, which suggests that he is not only passionate about cooking but also seeks continuous learning and professional growth. His background in a Bachelor of Commerce (HRM) further indicates an interest in human resource management and potentially leading teams in a broader organizational context, beyond just the culinary field.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

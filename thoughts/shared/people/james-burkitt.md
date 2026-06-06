@@ -2,7 +2,7 @@
 name: James Burkitt
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # James Burkitt
@@ -16,7 +16,7 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-James Burkitt leads Corporate Training Solutions Australia, focusing on in-person, facilitator-led training for software tools and professional development. They emphasize continuous learning and offer various delivery options. Their work prioritizes interactive, hands-on training experiences.
+James Burkitt leads Corporate Training Solutions Australia, focusing on in-person and online training for software tools and management development. They emphasize continuous learning and offer tailored training programs. Contact info is available at info@ctstraining.com.au.
 - [James Burkitt - Building Trusted Communities, In-Person Facilitated Training, Developing Collaborative Entrepreneurs - Corporate Training Solutions Australia / CTS Training Australia](https://au.linkedin.com/in/jburkitt) — James Burkitt
 Building Trusted Communities, In-Person Facilitated Training, Developing Collaborative Entrepreneurs
 Brisbane, Queensland, Australia
@@ -30,12 +30,15 @@ About
 E
 - [James Burkitt Email & Phone Number | The Table Club Founder And ...](https://rocketreach.co/james-burkitt-email_5642661) — James Burkitt. Manager and Business Development at Corporate Training Solutions Australia (CTSA). Brisbane, QLD, AU. View. 1. ctstraining.com.au. IBSS Employee
 - [Contact](https://www.ctstraining.com.au/contact) — ***envelope*** info@ctstraining.com.au  ***phone*** 1300 246 287. ## Sidebar. #### Main menu. ### Contact Form. ## We'd love to hear from you. ### Miscellaneous Information. |  | **Karlin Burkitt** **Operations Coordinator** 0412 850 133  This email address is being protected fro
-- [20+ "James Burkitt" profiles - LinkedIn](https://www.linkedin.com/pub/dir/James/Burkitt) — James Burkitt Building Trusted Communities, In-Person Facilitated Training, Developing Collaborative Entrepreneurs Brisbane, QLD
+- [20+ "Jim Burkitt" profiles - LinkedIn](https://www.linkedin.com/pub/dir/Jim/Burkitt) — James Burkitt. CEO | The Table Club - A Global Family Office ... Corporate Training Solutions Australia / CTS Training Australia, +7 more.
+
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-James Burkitt serves as the leader of Corporate Training Solutions Australia (CTS Training Australia), an organization that specializes in delivering interactive and hands-on training experiences for professional development and software tools. His role involves fostering strong business relationships and overseeing the delivery of in-person, facilitator-led training sessions. James emphasizes a continuous learning approach within his work, aiming to create environments where participants can engage actively with the material being taught.
+James Burkitt serves as the leader of Corporate Training Solutions Australia (CTS Training Australia), an organization that specializes in both in-person and online training for software tools and management development. Under his guidance, the company offers tailored programs designed to foster continuous learning among its participants. Based in Brisbane, Queensland, James has built a network of over 500 connections and has garnered nearly 17,000 followers, reflecting his significant influence within the corporate education space.
 
-James seems deeply committed to fostering a culture of ongoing education and personal growth through collaborative and interactive learning experiences. His dedication is evident from his emphasis on building trusted communities and developing collaborative entrepreneurs. The philosophy behind his work reflects an understanding that true expertise evolves continually, as he often cites a belief in lifelong learning. This commitment suggests that James values not only the immediate outcomes of training sessions but also their long-term impact on individual growth and professional development within organizations.
+James cares deeply about creating an environment where learning never stops, as evidenced by his quote that emphasizes the importance of lifelong learning. He is passionate about developing collaborative entrepreneurs and building trusted communities through in-person facilitated training sessions. His work highlights a commitment to empowering individuals and organizations with the skills necessary for success in today's rapidly evolving business landscape.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

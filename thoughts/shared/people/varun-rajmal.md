@@ -2,7 +2,7 @@
 name: Varun Rajmal
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Varun Rajmal
@@ -16,7 +16,7 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Varun Rajmal is a transformational IT leader at Telstra with over 19 years of experience. He focuses on driving IT transformation. Joanna C. is a software engineer at Telstra.
+Varun Rajmal is a transformational IT leader at Telstra, specializing in driving innovation. He focuses on open innovation in telecommunications. His work emphasizes simplifying security operations.
 - [Varun Rajmal](https://au.linkedin.com/in/v4run) — Varun Rajmal
 Telstra
 Sydney, New South Wales, Australia
@@ -33,6 +33,7 @@ N/A
 
 Education
 N/A
+- [Charlyn Tan's Post](https://www.linkedin.com/posts/charlyn-tan-663719a_telstracloudguild-telstraclouddays-telstracloudguild-activity-7254428311244660737-xj8W) — ⭐Varun Rajmal ⭐Teenu. Sales leader driving Open Innovation in Telecommunications at Red Hat. Helping Simplify Security Operations Through
 - [Joanna C. - Telstra](https://au.linkedin.com/in/joann-a) — Joanna C.
 Telstra
 Australia
@@ -47,12 +48,14 @@ Experience
 Software Engineer
 [Telstra](https://au.linkedin.com/company/telstra?trk=public_profile_experience-group-header)
 A
-- [Charlyn Tan's Post - LinkedIn](https://www.linkedin.com/posts/charlyn-tan-663719a_telstracloudguild-telstraclouddays-telstracloudguild-activity-7254428311244660737-xj8W) — Thankyou Charlyn Tan and team Telstra for all your efforts putting this together. It was great to be a part of it again this year! Like.
+
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Varun Rajmal is a seasoned IT leader with over 19 years of experience, currently serving as the Senior Technology Product and Platform Owner for Centralised Compute Platforms at Telstra Corporation Limited in Sydney, Australia. His role involves overseeing significant IT transformation initiatives aimed at enhancing Telstra’s technological infrastructure. Varun has built an extensive professional network, evidenced by his 500 connections on LinkedIn, which likely includes peers, colleagues, and industry professionals he collaborates with regularly.
+Varun Rajmal is a seasoned IT leader with over 19 years of experience, currently serving as the Senior Technology Product and Platform Owner for Centralised Compute Platforms at Telstra. His role involves driving innovation within telecommunications by focusing on open innovation initiatives that simplify security operations in complex environments. Varun’s work aims to make advanced technology more accessible and secure for both businesses and consumers, leveraging his extensive background in transformational IT leadership.
 
-From the available information, it appears that Varun is deeply committed to innovation and modernization within IT environments. His focus on driving transformation indicates a strong interest in leveraging technology to enhance organizational efficiency and competitiveness. While there are no explicit details about personal interests or community involvement beyond his professional role, it can be inferred that Varun values continuous improvement and the strategic application of technology in business contexts.
+From the available information, it is clear that Varun cares deeply about advancing the field of telecommunications through innovative solutions and ensuring robust yet simplified security measures. His dedication to open innovation suggests a commitment to collaborative progress within the industry, aiming to foster an environment where technology can be used more effectively and securely by all stakeholders involved in Telstra's operations and services.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

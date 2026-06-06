@@ -2,7 +2,7 @@
 name: Mark Hutchens
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Mark Hutchens
@@ -16,8 +16,9 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Mark Hutchens is a psychologist focused on helping adults achieve greater life satisfaction and manage anxiety, stress, and trauma. He works in Brisbane, Australia, and has a background in psychology from Monash University.
-- [Mark Hutchens | BSocSci (Psych Hons), MProfPsy, MAddBeh](https://www.unpackpsychology.com.au/team/mark-hutchens) — Mark is a calm, well-rounded, and insightful psychologist. His therapeutic approach emphasises helping clients achieve security, connection, competence, and
+Mark Hutchens is a psychologist specializing in anxiety, stress, and depression. He has experience in both private practice and WorkCover psychology. He emphasizes helping clients achieve security, competence, and purpose.
+- [Mark Hutchens | Psychologist | BSocSci (Psych Hons), MProfPsy, MAddBeh](https://www.unpackpsychology.com.au/team/mark-hutchens) — Psychologist | BSocSci (Psych Hons), MProfPsy, MAddBeh. Mark is a calm, well-rounded, and insightful psychologist. Mark's practice focuses on treating a range of conditions, including anxiety, stress, depression, relationships, trauma, and addictions. Mark's professional experien
+- [Mark Hutchens WorkCover Psychologist](https://www.workinjurypsychologyqueensland.com.au/psychologist/mark-hutchens) — # Mark Hutchens. ### Senior Psychologist. ##### Unpack Psychology. Mark is a calm, well-rounded, and insightful psychologist. His therapeutic approach emphasises helping clients achieve security, connection, competence, and purpose in their lives. His particular focus is on helpi
 - [Mark Hutchens - I help adults thrive and achieve greater life satisfaction. - Mark Hutchens Psychology](https://au.linkedin.com/in/mark-hutchens) — Mark Hutchens
 I help adults thrive and achieve greater life satisfaction.
 Brisbane, Queensland, Australia
@@ -31,13 +32,15 @@ I am a Brisbane-based psychologist providing personal anxiety, stress, and…
 Experience
 Psychologist/Psychotherapist
 [Mark Hutchens Ps
-- [Mark Hutchens WorkCover Psychologist](https://www.workinjurypsychologyqueensland.com.au/psychologist/mark-hutchens) — He works with men and women following a psychological injury, as well as those having to adjust after a physical injury. Mark is a registered psychologist with
 - [Mark Hutchens - Psychologist - Newstead 4006 - HealthShare](https://www.healthshare.com.au/profile/professional/373042-mark-hutchens) — I support clients experiencing anxiety, stress, low self-worth, depression, productivity problems, connection and relationship issues, grief, trauma,
 
-## Understanding — drafted
-Mark Hutchens is a psychologist based in Brisbane, Australia, with a professional background from Monash University. He specializes in assisting adults navigate and manage a range of mental health challenges including anxiety, stress, and trauma. Mark’s therapeutic approach is centered on enabling clients to feel secure, connected, and competent, thereby enhancing their overall life satisfaction. His practice, Mark Hutchens Psychology, reflects his commitment to providing personalized support for individuals facing various psychological issues such as low self-worth, depression, productivity problems, relationship challenges, grief, and trauma.
+## Shared history — from the spine
+_(no linked email record)_
 
-Mark appears to care deeply about fostering environments where adults can thrive both personally and professionally. He values connection and competence, indicating a focus on building meaningful relationships and helping clients develop the skills needed to overcome their difficulties. His work with individuals adjusting after physical or psychological injuries through his role as a WorkCover Psychologist further demonstrates his dedication to supporting those in need of recovery and rehabilitation. Through his empathetic and insightful approach, Mark seeks to empower adults to lead more fulfilling lives by addressing their unique challenges and fostering personal growth.
+## Understanding — drafted
+Mark Hutchens is a psychologist based in Brisbane, Queensland, Australia. He holds advanced degrees in psychology and addiction behavior management, which he leverages to help his clients navigate through various mental health challenges such as anxiety, stress, depression, and addictions. His professional experience spans both private practice and WorkCover psychology, allowing him to provide comprehensive support to individuals facing a range of psychological issues. Through his organization, Mark Hutchens Psychology, he aims to create an environment where clients can feel secure and supported as they work towards achieving personal growth and life satisfaction.
+
+Mark seems to care deeply about empowering his clients to reach their full potential by fostering feelings of security, competence, connection, and purpose in their lives. His approach is characterized by a calm demeanor and insightful understanding that helps clients overcome the challenges they face. Whether addressing workplace-related stress through WorkCover services or dealing with personal issues such as relationships, trauma, and addictions, Mark emphasizes building resilience and helping adults thrive both personally and professionally. Through his practice, he seeks to create meaningful connections with his clients, offering them a path towards greater life satisfaction and well-being.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

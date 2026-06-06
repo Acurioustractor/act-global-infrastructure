@@ -2,7 +2,7 @@
 name: Linda  Pietri
 lane: community
 storyteller_id: 4d39e5dc-d8f8-4a14-868d-c09758cfe358
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Linda  Pietri

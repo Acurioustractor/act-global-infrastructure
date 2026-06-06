@@ -2,7 +2,7 @@
 name: Sara Sieradzki
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Sara Sieradzki
@@ -16,7 +16,7 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Sara Sieradzki is a business coach and peer board facilitator for The Alternative Board Australia, helping business owners achieve their goals. She focuses on providing practical, real-world solutions and peer accountability. The Alternative Board Australia offers advisory boards with experienced members to support business growth.
+Sara Sieradzki is a business coach and peer board facilitator for The Alternative Board Australia, helping business owners achieve their goals. She focuses on practical, real-world solutions and peer accountability. The Alternative Board provides business advisory and coaching services.
 - [6 "Sarah Sieradzki" profiles - LinkedIn](https://www.linkedin.com/pub/dir/Sarah/Sieradzki) — Sara Sieradzki. Enabling business owners to achieve what they set out to do. Greater Brisbane Area. The Alternative Board Australia, +1 more.
 - [Sara Sieradzki - Enabling business owners to achieve what they set out to do - The Alternative Board Australia](https://au.linkedin.com/in/sarathealternativeboard) — Sara Sieradzki
 Enabling business owners to achieve what they set out to do
@@ -31,13 +31,16 @@ Who’s in control – you or your business? Business owners often start their b
 Experience
 Business Coach and Peer Board Facilitator
 [Th
-- [Victoria - The Alternative Board Australia](https://thealternativeboard.com.au/coaches-and-advisory-boards/vic) — The Alternative Board (TAB) is looking to grow peer advisory and coaching boards throughout VIC. TAB provides a niche business advisory board service for over
-- [What is a TAB Business Advisory Board?](https://thealternativeboard.com.au/board-template) — Working alongside Leo Aspite at The Alternative Board Gosford, I support local business owners through a combination of peer advisory boards, one-on-one
+- [What is a TAB Business Advisory Board? - TAB Australia](https://thealternativeboard.com.au/board-template) — # Get to know The Alternative Board Brisbane Bayside, Qld. Are you ready to improve your business and change your life? The Alternative Board brings you a thriving community of forward-thinking CEOs, business owners and leadership teams who share the collective wisdom and inspira
+- [The Alternative Board Sutherland Shire, NSW - Louise Mooney - The Alternative Board](https://thealternativeboard.com.au/coaches-and-advisory-boards/the-alternative-board-sutherland-shire-nsw) — The Alternative Board Sutherland Shire NSW’s Got Your Back. The Alternative Board brings you a thriving community of forward-thinking CEOs, business owners and leadership teams who share the collective wisdom and inspiration to radically improve their companies. Through unique co
+
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Sara Sieradzki works as a business coach and peer board facilitator for The Alternative Board Australia (TAB), which is an organization that offers advisory boards to business owners seeking growth and development. Her role involves facilitating peer advisory boards composed of experienced entrepreneurs who provide practical advice and support to one another. Sara focuses on delivering real-world solutions and fostering an environment where accountability is key, enabling business owners to achieve their goals more effectively.
+Sara Sieradzki is a dedicated business coach and peer board facilitator at The Alternative Board Australia, focusing on empowering business owners in the Greater Brisbane area. With over 500 connections on LinkedIn and nearly 4,000 followers, Sara leverages her extensive network to provide practical advice and real-world solutions to help business owners reach their goals. She specializes in creating a supportive environment where business leaders can engage with peer accountability groups, fostering an atmosphere of mutual support and learning.
 
-Sara appears to care deeply about empowering business owners by helping them take control of their ventures rather than letting the businesses control them. Her work emphasizes the importance of peer support and practical guidance, suggesting that she values a collaborative approach to problem-solving and growth. She seems dedicated to creating an ecosystem where business owners can thrive with the help of like-minded peers and experienced mentors.
+Sara appears to care deeply about the success and well-being of business owners, believing that they should be in control of their businesses rather than the other way around. Her work emphasizes the importance of community and collective wisdom in driving growth and improvement within companies. By facilitating peer board sessions, she helps foster an environment where business leaders can share experiences, learn from one another, and gain valuable insights to enhance their decision-making processes. Through her efforts, Sara aims to create a network of supportive and forward-thinking business owners who can collectively drive positive change in their respective enterprises.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

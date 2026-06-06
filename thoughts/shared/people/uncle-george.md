@@ -2,7 +2,7 @@
 name: Uncle George
 lane: community
 storyteller_id: 0d69f085-dfc5-4a7e-bf03-f9bdb5099d7f
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Uncle George

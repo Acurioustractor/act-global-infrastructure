@@ -2,7 +2,7 @@
 name: Jimmy Frank
 lane: community
 storyteller_id: dda39576-ae9e-49e6-9bf9-70fcb45835ba
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 # Jimmy Frank

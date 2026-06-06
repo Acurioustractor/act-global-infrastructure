@@ -2,7 +2,7 @@
 name: Mary-jane Durbidge
 lane: supporter
 warmth: 0
-updated: 2026-06-03
+updated: 2026-06-06
 ---
 
 # Mary-jane Durbidge
@@ -16,16 +16,37 @@ updated: 2026-06-03
 - _Warm paths: see `orbit-interlocks.csv` for who else in the orbit connects to these orgs._
 
 ## Web & work — public read
-Mary-jane Durbidge advocates for empowerment and resilience, focusing on supporting individuals in prison and after incarceration. She works on disability justice and creative problem-solving. Her role emphasizes lived experience and advocacy.
-- [Mary-jane Durbidge (@mmjayy16) • Instagram photos and videos](https://www.instagram.com/mmjayy16) — ... Empowered Project continuing the work I'm deeply passionate about. In this new chapter, I'll be supporting both men and women in prison and during their
-- [Mary-jane Durbidge - Lived Experience Director - Collab4good](https://au.linkedin.com/in/mary-jane-durbidge-543037319) — I am passionate about advocacy, empowerment, and shifting narratives around resilience and growth. I believe people are not defined by their hardest chapters,
-- [Mary Jane Duty - Empowered Aging](https://empoweredaging.org/team/mary-jane-duty) — Mary Jane joins Empowered Aging as an Ombudsman Support Specialist, bringing a deep commitment to disability justice, creative problem-solving,
-- [Social Enterprise Aware — Collab4good.com.au](https://www.collab4good.com.au/social-enterprise-aware-program) — Mary-Jane Durbidge ... MJ is a lived-experience advocate who empowers people to rebuild their lives after incarceration. Drawing on her own experience of the
+Mary-Jane Durbidge works as a Reintegration Caseworker & Lived Experience Advisor for Empowered Project, focusing on helping people reclaim their narratives and navigate services. She is also a Lived Experience Director at Collab4Good. Her work emphasizes empowerment and personal narrative.
+- [Mary-jane Durbidge | As the Peers4Good program wraps up with the ...](https://www.instagram.com/p/DLlLlLhSGKY) — I'm excited to share that I'm stepping into a new role as a Reintegration Caseworker & Lived Experience Advisor with Empowered Project continuing the work I'm
+- [Our Team — Collab4good.com.au](https://www.collab4good.com.au/our-team) — Mary-Jane (MJ) is a passionate lived-experience advocate for people to reclaim their own narrative and empowering people to navigate the maze of services and
+- [Mary-jane Durbidge](https://au.linkedin.com/in/mary-jane-durbidge-543037319) — Mary-jane Durbidge
+Collab4Good
+Australia
+500 connections, 732 followers
+
+
+About
+I am a Lived Experience Director at Collab4Good, contributing my perspective and insight…
+
+
+Experience
+N/A
+
+
+Education
+City of Tea Tree Gully
+N/A
+2023-09 - 2024-08
+None
+- [Enrol to vote | Mary-jane Durbidge | 12 comments - LinkedIn](https://www.linkedin.com/posts/mary-jane-durbidge-543037319_enrol-to-vote-activity-7422092311347617792-DQrX) — Electoral Commission of South Australia should have you promoting voting for them Mary-jane Durbidge - love this post! Like.
+
+## Shared history — from the spine
+_(no linked email record)_
 
 ## Understanding — drafted
-Mary-jane Durbidge is a dedicated professional working with Empowered Project as a Reintegration Case Manager and Lived Experience advisor. Her role involves supporting individuals both during their time in prison and after they are released, advocating for empowerment and resilience throughout this process. Mary-jane’s work also encompasses disability justice and creative problem-solving to help people navigate the challenges of reintegration into society. She brings a unique perspective as someone with lived experience, which allows her to connect deeply with those she serves.
+Mary-Jane Durbidge serves as a Reintegration Case Manager and Lived Experience Advisor at the Empowered Project, where she focuses on helping individuals reclaim their personal narratives and navigate various services effectively. Additionally, she holds the position of Lived Experience Director at Collab4Good, an organization that collaborates to improve service systems for those with lived experience. Through her work, Mary-Jane aims to empower individuals by providing them with tools and support to take control of their own stories.
 
-Mary-jane appears to care deeply about shifting societal narratives around resilience and growth, believing that individuals should not be defined by their most difficult experiences. Her work emphasizes advocacy for those who have faced incarceration, aiming to empower them to lead fulfilling lives post-release. She is passionate about fostering environments where people can thrive despite the obstacles they may have encountered. Through her role at Empowered Project and other organizations such as Collab4good, she consistently works towards these goals with a focus on empathy, understanding, and support for those navigating challenging life transitions.
+Mary-Jane seems to care deeply about issues related to empowerment and the importance of personal narrative in recovery and reintegration processes. She values the role of lived experiences in shaping effective service delivery and supports those who have faced challenges in reclaiming their autonomy and self-worth. Her efforts are driven by a commitment to ensuring that individuals feel heard, respected, and able to lead fulfilling lives despite past difficulties or systemic barriers.
 
 ## Reflection — what *we* understand (by hand)
 > The richest layer. Written by us, generously — to understand, not to pitch.

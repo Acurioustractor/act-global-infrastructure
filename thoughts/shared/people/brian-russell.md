@@ -2,7 +2,7 @@
 name:  Brian Russell
 lane: community
 storyteller_id: 433f5fbc-2c8d-46c1-916d-d558c179e701
-updated: 2026-06-05
+updated: 2026-06-06
 ---
 
 #  Brian Russell
