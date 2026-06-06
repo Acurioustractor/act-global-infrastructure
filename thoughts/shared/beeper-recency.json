@@ -1,8 +1,15 @@
 {
- "generated_at": "2026-06-06T22:32:44.500Z",
+ "generated_at": "2026-06-06T22:45:21.934Z",
  "horizon_days": 365,
  "source": "beeper-desktop-api /v1/chats (single chats, metadata only)",
  "chats": [
+  {
+   "title": "+61 414 185 964",
+   "network": "iMessage",
+   "lastActivity": "2026-06-06T22:42:41.359Z",
+   "unread": 1,
+   "phone": "+61414185964"
+  },
   {
    "title": "Dali",
    "network": "Telegram",
@@ -58,13 +65,6 @@
    "lastActivity": "2026-06-05T07:14:43.000Z",
    "unread": 0,
    "phone": "+61414185964"
-  },
-  {
-   "title": "+61 407 837 707",
-   "network": "iMessage",
-   "lastActivity": "2026-06-05T05:16:02.344Z",
-   "unread": 0,
-   "phone": "+61407837707"
   },
   {
    "title": "Mark Hill",
