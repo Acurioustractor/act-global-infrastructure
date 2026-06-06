@@ -45,7 +45,9 @@ export function loadLedger(path = 'thoughts/shared/field-decisions.jsonl') {
 
 // org reads in the ledger (organisations Ben ringed in session 1 — rings are for HUMANS;
 // resolve relationship-to-org via its people). They get no ring, no cadence, no queue.
-export const ORG_READS = new Set(['minjerribah moorgumpin elders', 'mmeic justice', 'yj_grants']);
+// NB: keys must be norm()-shaped — 'yj_grants' norm-strips to 'yj grants' (caught 2026-06-07
+// when the org slipped onto the drawn map through the mismatch).
+export const ORG_READS = new Set(['minjerribah moorgumpin elders', 'mmeic justice', 'yj grants']);
 
 /** Ben's ring for a person, or null. NEVER estimated. */
 export const ringOf = (reads, name) => {

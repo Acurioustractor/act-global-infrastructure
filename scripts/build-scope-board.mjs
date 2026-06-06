@@ -12,7 +12,7 @@
  * Read-only. Run:  node scripts/build-scope-board.mjs   Out: thoughts/shared/project-scope-board.html
  */
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
-import { loadLedger, ringOf, cadenceState, queuePriority, hasRead } from './lib/field-warmth.mjs';
+import { loadLedger, ringOf, cadenceState, queuePriority, hasRead, canon } from './lib/field-warmth.mjs';
 
 function parseCSV(t){const R=[];let r=[],f='',q=false;for(let i=0;i<t.length;i++){const c=t[i];if(q){if(c==='"'){if(t[i+1]==='"'){f+='"';i++;}else q=false;}else f+=c;}else if(c==='"')q=true;else if(c===',')(r.push(f),f='');else if(c==='\n')(r.push(f),R.push(r),r=[],f='');else if(c!=='\r')f+=c;}if(f||r.length){r.push(f);R.push(r);}return R;}
 const rd=p=>{const R=parseCSV(readFileSync(p,'utf8'));const h=R[0];return R.slice(1).filter(x=>x.length===h.length).map(x=>Object.fromEntries(h.map((k,i)=>[k,x[i]])));};
@@ -52,7 +52,7 @@ for(const p of orbit){
   if(isInternal(p.name||''))continue;
   const tags=p.rel_tags||'';const bs=Number(p.beeper_score)||0;const[gi,go]=(p.gmail_in_out||'').split('/').map(Number);
   const warmth=bs+((gi&&go)?Math.min(gi,go)*2:0);
-  const k=norm(p.name);if(!k)continue;
+  const k=canon(p.name);if(!k)continue;
   const prev=sup.get(k);if(prev&&prev.warmth>=warmth)continue;
   sup.set(k,{name:p.name,warmth,circle:/circle:gsd-alliance/.test(tags),tier:/tier:/.test(tags),
     uncaptured:/uncaptured/i.test(p.home||'')||p.status==='UNCAPTURED',last:p.last_contact||'',

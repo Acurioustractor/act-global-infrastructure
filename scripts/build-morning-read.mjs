@@ -34,7 +34,7 @@ for(const p of orbit){
   if(p.vendor==='yes')continue;                                                  // vendors out of the rings (volume ≠ closeness)
   if(looksLikeHandle(p.name||'')||isInternal(p.name||''))continue;               // not real layer members
   const tags=p.rel_tags||'';const bs=Number(p.beeper_score)||0;const[gi,go]=(p.gmail_in_out||'').split('/').map(Number);
-  const warmth=bs+((gi&&go)?Math.min(gi,go)*2:0); const k=norm(p.name); if(!k)continue;
+  const warmth=bs+((gi&&go)?Math.min(gi,go)*2:0); const k=canon(p.name); if(!k)continue;
   const prev=sup.get(k); if(prev&&prev.warmth>=warmth)continue;
   sup.set(k,{name:p.name,warmth,circle:/circle:gsd-alliance/.test(tags),tier:/tier:/.test(tags),
     uncaptured:/uncaptured/i.test(p.home||'')||p.status==='UNCAPTURED',last:p.last_contact||''});
@@ -42,7 +42,7 @@ for(const p of orbit){
 // ── WARMTH V2 (locked 2026-06-07): ring = human-only · cadence = rhythm per ring ──
 // Calibration killed warmth-as-closeness (Ben's rejects scored HIGHEST). Layers come
 // from HIS reads; cadence alerts only for people he has ringed; votes order the queue.
-import { loadLedger, ringOf, layerOf, cadenceState, queuePriority, hasRead } from './lib/field-warmth.mjs';
+import { loadLedger, ringOf, layerOf, cadenceState, queuePriority, hasRead, canon } from './lib/field-warmth.mjs';
 const { reads, votes } = loadLedger();
 // energy override still names the inner core (his words)
 for (const [k, d] of reads) { const p = sup.get(k); if (p && d.energy != null) p.energy = d.energy; }
