@@ -1,3 +1,9 @@
+---
+title: "Plan: ACT Alignment Loop — a Karpathy-style cross-source research cycle"
+status: review-needed
+date: 2026-04-24
+last_verified: 2026-05-08
+---
 # Plan: ACT Alignment Loop — a Karpathy-style cross-source research cycle
 
 > Slug: `act-alignment-loop`
@@ -93,25 +99,26 @@ The bet: 1.5 hours of Ben's review time per month buys genuine situational aware
 ## Task Ledger
 
 Phase 0 (this plan):
-- [ ] Q1 funder-alignment synthesis drafted and reviewed
-- [ ] Q2 project-truth-state synthesis drafted and reviewed
-- [ ] Q3 entity-migration-truth-state synthesis drafted and reviewed
-- [ ] Each synthesis committed to `wiki/synthesis/`
-- [ ] Decide whether each question is worth Phase-1 automation (based on "was the answer useful?")
+- [x] Q1 funder-alignment synthesis drafted and reviewed (manual pass 2026-04-24, baseline at `wiki/synthesis/funder-alignment-2026-04-24.md`; superseded by Phase-1 automation 2026-05-07)
+- [x] Q2 project-truth-state synthesis drafted and reviewed (manual pass 2026-04-24, baseline at `wiki/synthesis/project-truth-state-2026-04-24.md`; superseded by Phase-1 automation same day)
+- [x] Q3 entity-migration-truth-state synthesis drafted and reviewed (manual pass 2026-04-24; superseded by Phase-1 automation 2026-05-07)
+- [x] Each synthesis committed to `wiki/synthesis/`
+- [x] Decide whether each question is worth Phase-1 automation — verdict 2026-04-25: yes for all three, automation built same/next session
 
 Phase 1 (after Phase 0 proves out):
-- [ ] `scripts/synthesize-funder-alignment.mjs`
-- [x] `scripts/synthesize-project-truth-state.mjs` (shipped 2026-04-24, multi-repo extension 2026-04-25)
-- [ ] `scripts/synthesize-entity-migration-truth-state.mjs`
-- [ ] Script output schema stabilised so Phase 2 can diff
+- [x] `scripts/synthesize-funder-alignment.mjs` (shipped 2026-05-07, PASS 100/100 against alignment-loop-synthesis rubric v0.1; Phase-2 self-grade wiring inherited via `scripts/lib/alignment-loop-grade.mjs`)
+- [x] `scripts/synthesize-project-truth-state.mjs` (shipped 2026-04-24, multi-repo extension 2026-04-25, Phase-2 self-grade wired 2026-05-07)
+- [x] `scripts/synthesize-entity-migration-truth-state.mjs` (shipped 2026-05-07, PASS 100/100; 52 checklist items × 39 outstanding receivables × 4 sources)
+- [x] Script output schema stabilised so Phase 2 can diff (shipped 2026-05-07). All three synthesize-* scripts now emit a YAML frontmatter `schema_version: 1` plus a flat `summary_metrics` dict via `scripts/lib/synthesis-schema.mjs`. Funder metrics: 13 keys (live-money funder count, outstanding AUD, drift counts, silent-90+ count, source-row scans). Project metrics: 9 keys (score distribution + acceptance-criterion violations). Entity metrics: 11 keys (item-status counts + receivables totals + tenant/bank visibility). Fields are sorted alphabetically for deterministic diff. Items-sidecar (per-row identity for item-level diff) deferred to v2 — week-on-week metric movement covers the headline drift signal first.
 
 Phase 2 (once Phase 1 is stable):
-- [x] Weekly cron via remote agent (`trig_018X1ZRtc9zdgFENiYsx5t8c`, Friday 08:00 Brisbane)
+- [~] Cron via remote agent (`trig_018X1ZRtc9zdgFENiYsx5t8c`, Friday 08:00 Brisbane = `0 22 * * 4` UTC). **Currently a one-shot fired 2026-05-07T22:00:00Z** — needs upgrade to recurring weekly trigger so the dispatcher actually runs every Friday through cutover. Tracked in `act-entity-migration-checklist-2026-06-30.md` line 311 (Ben to action via `schedule` skill or `RemoteTrigger`).
 - [x] Phase 2a — multi-repo Q2 codebase scan across all 9 ACT codebases (shipped 2026-04-25; plan: `act-brain-phase-2a-multi-repo-q2.md`; runtime ~11s; new threshold total≥5 OR any-non-hub≥3; new "Where (top repos)" column in output)
+- [x] Phase 2 self-grade integration — graders check synthesis docs before commit (shipped 2026-05-07). The `alignment-loop-synthesis` rubric (calibrated 6/6, v0.1) and the `funder-cadence` rubric (calibrated 6/6, v0.1) are wired into all three synthesize-* scripts via `scripts/lib/alignment-loop-grade.mjs`. After each synthesis writes its draft, the lib helper grades it; on `pass` the run exits clean, on `warn`/`fail` it writes a triage report to `wiki/output/lint-loop-YYYY-MM-DD.md` and exits non-zero on `fail`. `--no-grade` opts out for environments without `ANTHROPIC_API_KEY`.
+- [x] Rotation so all three questions run but staggered (shipped 2026-05-07). `scripts/run-alignment-loop-cycle.mjs` is the weekly dispatcher. Pre-cutover (today ≤ 2026-06-30): entity-migration runs every Friday (54-day countdown demands weekly drift signal), and funder-alignment / project-truth-state alternate by ISO-week parity (2 syntheses per Friday). Post-cutover: 3-way rotation by ISO-week % 3 (1 synthesis per Friday). `--all` for force-runs, `--question <slug>` for ad-hoc invocation, all other flags pass through to children.
 - [ ] Phase 2b — email content surfacing into Q1 (planned in `act-brain-expansion.md`)
 - [ ] Phase 2c — Notion document body sync into Q2/Q3 (planned in `act-brain-expansion.md`)
-- [ ] Diff-against-last-week logic
-- [ ] Rotation so all three questions run but staggered (not all on the same Monday)
+- [x] Diff-against-last-week logic (shipped 2026-05-07 in `scripts/diff-alignment-loop-cycle.mjs`). For each Phase-1 synthesis_slug, finds the two most recent files in `wiki/synthesis/`, parses `summary_metrics` from both YAML frontmatters, and produces a per-metric movement table at `wiki/cockpit/alignment-loop-diff-YYYY-MM-DD.md`. Handles INSUFFICIENT / NO-SCHEMA / BASELINE / OK input states honestly. Wired into `run-alignment-loop-cycle.mjs` so it auto-runs after each cycle's syntheses. Today produces three BASELINE entries (first cycle with schema v1); next Friday's cron will produce the first real diff. Item-level diff (which specific funder is new, which receivable closed) deferred to schema v2.
 
 ## Decision Log
 
@@ -120,6 +127,7 @@ Phase 2 (once Phase 1 is stable):
 | 2026-04-24 | Output lives in `wiki/synthesis/` rather than `thoughts/shared/reports/` | The wiki compile-lint pipeline already carries synthesis articles forward and backlinks them; thoughts/shared is a draft space. | Yes — can move outputs later. |
 | 2026-04-24 | Three starting questions (funder, project, entity) not more | Each answers a known real-need surfaced this session. Fewer means the pattern is testable against lived value; more means risk of building a framework for its own sake. | Yes. |
 | 2026-04-24 | Phase 0 = manual Claude pass, not scripted | The scoring logic for "useful answer" isn't obvious yet. Running it by hand first tells us what the script should compute before the script is written. | Yes. |
+| 2026-05-07 | Cadence-aware rotation (not pure 3-week mod-N) | Pre-cutover the entity-migration question is materially more time-sensitive than the other two — 54 days to the sole-trader → Pty cutover means a 3-week rotation undercovers it. So entity-migration runs weekly through 30 Jun 2026; funder + project alternate. After cutover the three questions equalise and a flat 3-way rotation kicks in. | Yes. Flip `CUTOVER_DATE` constant in `scripts/run-alignment-loop-cycle.mjs` to revisit. |
 
 ## Verification Log
 
@@ -128,6 +136,7 @@ Phase 2 (once Phase 1 is stable):
 | Karpathy pattern already runs in wiki | Verified | Read `wiki/AGENTS.md`; confirmed `scripts/wiki-lint.mjs` + `wiki-build-viewer.mjs` + CI `.github/workflows/wiki-rebuild.yml` | 2026-04-24 |
 | `income_type = 'grant'` captures all grants | Inferred | 18 invoices matched today; 2 NULL-type entries may also be grants (Rotary, QLD DFSDSCS) — filter should use both | 2026-04-24 |
 | 74 project codes exist in config/project-codes.json | Verified | `python3 -c "... len(pc['projects'])"` returned 74 today | 2026-04-24 |
+| Dispatcher cadence simulates correctly for next 10 weeks across cutover boundary | Verified | Inline node simulation of `questionsForToday` on 2026-05-08 through 2026-07-24 — pre-cutover yields 2 questions/Friday with entity-migration always present, post-cutover yields 1 question/Friday on 3-way rotation | 2026-05-07 |
 
 ## Provenance
 

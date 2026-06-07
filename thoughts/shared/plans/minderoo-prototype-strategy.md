@@ -1,5 +1,6 @@
 ---
 title: Minderoo — prototype strategy (turn the corpus into an undeniable ask)
+status: active
 date: 2026-04-18
 audience: Ben, for decisions before 1 May envelope + for the conversation with Lucy Stronach after
 purpose: Reframe the pitch from "please fund our plan" to "here's what's already running — hold the circle with us for three years". Connect stories, tours, books, JusticeHub platform into one coherent prototype Minderoo can see, touch, and track in real time.

@@ -1,0 +1,106 @@
+{
+  "Type": "ACCPAY",
+  "InvoiceID": "408b05bb-15f8-4895-83ba-f858046db38a",
+  "Reference": "MOUNTY-CONTAINER-MANUAL",
+  "Prepayments": [],
+  "Overpayments": [],
+  "AmountDue": 11000,
+  "AmountPaid": 0,
+  "SentToContact": false,
+  "CurrencyRate": 1,
+  "IsDiscounted": false,
+  "HasAttachments": false,
+  "HasErrors": false,
+  "Attachments": [],
+  "InvoicePaymentServices": [],
+  "Contact": {
+    "ContactID": "77b9726e-bebb-43fe-9da8-cad214ac6fc0",
+    "ContactStatus": "ARCHIVED",
+    "Name": "Mounty Container Supplier",
+    "EmailAddress": "",
+    "BankAccountDetails": "",
+    "Addresses": [
+      {
+        "AddressType": "STREET",
+        "City": "",
+        "Region": "",
+        "PostalCode": "",
+        "Country": ""
+      },
+      {
+        "AddressType": "POBOX",
+        "City": "",
+        "Region": "",
+        "PostalCode": "",
+        "Country": ""
+      }
+    ],
+    "Phones": [
+      {
+        "PhoneType": "DEFAULT",
+        "PhoneNumber": "",
+        "PhoneAreaCode": "",
+        "PhoneCountryCode": ""
+      },
+      {
+        "PhoneType": "DDI",
+        "PhoneNumber": "",
+        "PhoneAreaCode": "",
+        "PhoneCountryCode": ""
+      },
+      {
+        "PhoneType": "FAX",
+        "PhoneNumber": "",
+        "PhoneAreaCode": "",
+        "PhoneCountryCode": ""
+      },
+      {
+        "PhoneType": "MOBILE",
+        "PhoneNumber": "",
+        "PhoneAreaCode": "",
+        "PhoneCountryCode": ""
+      }
+    ],
+    "UpdatedDateUTC": "/Date(1775784095983+0000)/",
+    "ContactGroups": [],
+    "IsSupplier": true,
+    "IsCustomer": false,
+    "SalesTrackingCategories": [],
+    "PurchasesTrackingCategories": [],
+    "ContactPersons": [],
+    "HasValidationErrors": false
+  },
+  "DateString": "2025-11-04T00:00:00",
+  "Date": "/Date(1762214400000+0000)/",
+  "DueDateString": "2025-11-04T00:00:00",
+  "DueDate": "/Date(1762214400000+0000)/",
+  "Status": "AUTHORISED",
+  "LineAmountTypes": "Exclusive",
+  "LineItems": [
+    {
+      "Description": "Mounty Yarns project — Container purchase and fit-out (paid via director owner contribution)",
+      "UnitAmount": 10000,
+      "TaxType": "INPUT",
+      "TaxAmount": 1000,
+      "LineAmount": 10000,
+      "AccountCode": "429",
+      "Tracking": [
+        {
+          "Name": "Project Tracking",
+          "Option": "ACT-MY — Mounty Yarns",
+          "TrackingCategoryID": "1a1ad7c5-249a-4b1f-842d-06ba2a63a0fe",
+          "TrackingOptionID": "f3ced49a-d9db-4ea2-8dc4-63771d521cf4"
+        }
+      ],
+      "Quantity": 1,
+      "LineItemID": "d7c9c18a-9725-4c12-a3c9-a3762278f056",
+      "AccountID": "d41823f3-891a-448d-8f1a-6a5d1fac7041",
+      "ValidationErrors": []
+    }
+  ],
+  "SubTotal": 10000,
+  "TotalTax": 1000,
+  "Total": 11000,
+  "UpdatedDateUTC": "/Date(1775783908503+0000)/",
+  "CurrencyCode": "AUD"
+}

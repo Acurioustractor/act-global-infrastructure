@@ -18,12 +18,9 @@ export async function GET() {
       .eq('status', 'resolved')
       .gte('resolved_at', weekStart.toISOString())
 
-    const { data: stats } = await supabase
-      .from('receipt_gamification_stats')
-      .select('*')
-      .order('updated_at', { ascending: false })
-      .limit(1)
-      .single()
+    // receipt_gamification_stats table removed from DB — returns null until a backend exists
+    type GamificationStats = { current_streak?: number; total_points?: number; achievements?: unknown[] }
+    const stats = null as GamificationStats | null
 
     const total = (pendingCount || 0) + (resolvedThisWeek || 0)
     const score = total > 0 ? Math.round(((resolvedThisWeek || 0) / total) * 100) : 100

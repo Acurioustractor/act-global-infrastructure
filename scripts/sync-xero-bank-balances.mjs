@@ -9,17 +9,36 @@ import { createClient } from '@supabase/supabase-js';
 import path from 'path';
 
 const tokens = JSON.parse(readFileSync(path.join(process.cwd(), '.xero-tokens.json'), 'utf8'));
-const tenantId = process.env.XERO_TENANT_ID;
+let tenantId = process.env.XERO_TENANT_ID;
 const supabase = createClient(
   process.env.SUPABASE_SHARED_URL || process.env.NEXT_PUBLIC_SUPABASE_URL,
   process.env.SUPABASE_SHARED_SERVICE_ROLE_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY
 );
 
-const headers = {
+let headers = {
   'Authorization': `Bearer ${tokens.access_token}`,
   'xero-tenant-id': tenantId,
   'Accept': 'application/json',
 };
+
+// Xero accounting calls can return 403 until the token's tenant context has
+// been resolved through /connections. Prefer the configured tenant if present.
+const connResp = await fetch('https://api.xero.com/connections', {
+  headers: {
+    'Authorization': `Bearer ${tokens.access_token}`,
+    'Accept': 'application/json',
+  },
+});
+const connections = await connResp.json();
+if (!connResp.ok || !Array.isArray(connections) || connections.length === 0) {
+  console.error('Could not resolve Xero tenant connections');
+  console.error(JSON.stringify(connections).slice(0, 500));
+  process.exit(1);
+}
+const connection = connections.find(c => c.tenantId === tenantId) || connections[0];
+tenantId = connection.tenantId;
+headers = { ...headers, 'xero-tenant-id': tenantId };
+console.log(`Tenant: ${connection.tenantName} (${tenantId})`);
 
 // 1. Fetch bank accounts metadata
 const acctResp = await fetch('https://api.xero.com/api.xro/2.0/Accounts?where=Type%3D%3D%22BANK%22', { headers });
@@ -30,13 +49,24 @@ for (const a of acctData.Accounts) {
 }
 
 // 2. Fetch bank summary report for closing balances
-const today = new Date().toISOString().split('T')[0];
-const summaryResp = await fetch(`https://api.xero.com/api.xro/2.0/Reports/BankSummary?toDate=${today}`, { headers });
+function ymd(date) {
+  return date.toISOString().split('T')[0];
+}
+
+const todayDate = new Date();
+const fromDate = new Date(todayDate);
+fromDate.setUTCDate(1);
+if (ymd(fromDate) === ymd(todayDate)) {
+  fromDate.setUTCMonth(fromDate.getUTCMonth() - 1);
+}
+const today = ymd(todayDate);
+const summaryResp = await fetch(`https://api.xero.com/api.xro/2.0/Reports/BankSummary?fromDate=${ymd(fromDate)}&toDate=${today}`, { headers });
 const summaryData = await summaryResp.json();
 
 const report = summaryData.Reports && summaryData.Reports[0];
 if (!report) {
   console.error('No BankSummary report returned');
+  console.error(JSON.stringify(summaryData).slice(0, 500));
   process.exit(1);
 }
 
@@ -47,7 +77,7 @@ for (const section of report.Rows || []) {
     for (const row of section.Rows) {
       if (row.RowType === 'Row' && row.Cells) {
         const name = row.Cells[0] && row.Cells[0].Value;
-        const closingBalance = parseFloat((row.Cells[3] && row.Cells[3].Value) || '0');
+        const closingBalance = parseFloat((row.Cells[4] && row.Cells[4].Value) || '0');
         const attrs = row.Cells[0] && row.Cells[0].Attributes;
         const accountId = attrs && attrs[0] && attrs[0].Value;
         if (accountId) {

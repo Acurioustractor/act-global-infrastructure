@@ -22,7 +22,7 @@
  *   node scripts/generate-ceo-cockpit.mjs --dry-run    # print to stdout
  */
 import './lib/load-env.mjs'
-import { readFileSync, writeFileSync, existsSync, mkdirSync, copyFileSync } from 'node:fs'
+import { readFileSync, writeFileSync, existsSync, mkdirSync, copyFileSync, readdirSync } from 'node:fs'
 import { execSync } from 'node:child_process'
 import { join } from 'node:path'
 import { createClient } from '@supabase/supabase-js'
@@ -92,6 +92,54 @@ function getRecentCommits(n = 8) {
   }
 }
 
+// Extract commits with `Plan: <slug>` trailer in the last N days.
+// Convention: any commit that advances a tracked plan in
+// thoughts/shared/plans/<slug>.md should include `Plan: <slug>` in
+// its body. Lets the cockpit show "what plan moved this week" without
+// guessing.
+function getCommitsByPlan(sinceDays = 7) {
+  const SEP = '---END---COMMIT---'
+  // Cache the set of real plan slugs so we can filter false positives.
+  const PLANS_DIR = join(REPO_ROOT, 'thoughts/shared/plans')
+  let validSlugs = new Set()
+  try {
+    for (const f of readdirSync(PLANS_DIR)) {
+      if (f.endsWith('.md') && !f.startsWith('.')) validSlugs.add(f.replace(/\.md$/, ''))
+    }
+  } catch {} // if dir missing, validation is a no-op (allow any slug)
+  try {
+    const out = execSync(
+      `git log --since="${sinceDays} days ago" --grep="Plan:" --format="%h|%s%n%b%n${SEP}"`,
+      { cwd: REPO_ROOT, encoding: 'utf8' }
+    )
+    const byPlan = {}
+    // Tolerates 4 forms: `Plan: slug`, `Plan: slug.md`,
+    // `Plan: thoughts/shared/plans/slug`, `Plan: thoughts/shared/plans/slug.md`
+    const PLAN_RE = /Plan:\s*(?:thoughts\/shared\/plans\/)?([a-z0-9_-]+)(?:\.md)?/i
+    for (const block of out.split(SEP)) {
+      const text = block.trim()
+      if (!text) continue
+      const firstNewline = text.indexOf('\n')
+      const header = firstNewline > 0 ? text.slice(0, firstNewline) : text
+      const body = firstNewline > 0 ? text.slice(firstNewline + 1) : ''
+      const [hash, ...subjectParts] = header.split('|')
+      const subject = subjectParts.join('|')
+      const match = (body + ' ' + subject).match(PLAN_RE)
+      if (!match) continue
+      const slug = match[1]
+      // If we have a valid-slugs set, drop anything not in it (kills
+      // false positives like capturing "thoughts" from a path that
+      // didn't quite match the prefix-strip).
+      if (validSlugs.size > 0 && !validSlugs.has(slug)) continue
+      if (!byPlan[slug]) byPlan[slug] = []
+      byPlan[slug].push({ hash, subject })
+    }
+    return byPlan
+  } catch (e) {
+    return {}
+  }
+}
+
 function getRecentSyntheses() {
   try {
     const out = execSync(`ls -1 ${join(REPO_ROOT, 'wiki/synthesis')} | grep -E '^[a-z-]+-2026-' | sort -r | head -5`, { encoding: 'utf8', shell: '/bin/bash' })
@@ -134,6 +182,7 @@ async function render() {
   const commits = getRecentCommits(8)
   const syntheses = getRecentSyntheses()
   const openActions = getOpenActionsFromFacts()
+  const plansAdvanced = getCommitsByPlan(7)
 
   // Highlights — the ones with names attached
   const namedReceivables = {
@@ -188,6 +237,18 @@ ${commits.slice(0, 5).join('\n')}
 
 ### Recent Alignment Loop syntheses
 ${syntheses.slice(0, 3).map(s => `- [[${s.replace('.md', '')}]]`).join('\n') || '_No syntheses found_'}
+
+### Plans advanced (last 7 days)
+${Object.keys(plansAdvanced).length === 0
+  ? '_No commits with `Plan: <slug>` trailers in the last 7 days. To track which plan a commit advances, add a `Plan: <slug>` line to the commit body — slug must match a file in `thoughts/shared/plans/`._'
+  : Object.entries(plansAdvanced)
+      .sort(([, a], [, b]) => b.length - a.length)
+      .map(([slug, list]) =>
+        `- **\`${slug}\`** ([plan](../../thoughts/shared/plans/${slug}.md)) — ${list.length} commit${list.length === 1 ? '' : 's'}\n` +
+        list.map(c => `  - \`${c.hash}\` ${c.subject}`).join('\n')
+      )
+      .join('\n')
+}
 
 ## 🗓️ This week ahead
 

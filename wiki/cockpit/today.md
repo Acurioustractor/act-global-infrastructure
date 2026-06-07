@@ -1,27 +1,27 @@
 ---
-title: ACT CEO Cockpit — 2026-04-24
+title: ACT CEO Cockpit — 2026-04-26
 summary: One-page daily landing for Ben as CEO of ACT. Auto-generated. Read top-to-bottom; act on the red items.
 tags: [cockpit, ceo, daily, briefing]
 status: live
-date: 2026-04-24
-generated: 2026-04-24T21:01:40.275Z
+date: 2026-04-26
+generated: 2026-04-26T23:32:19.579Z
 ---
 
-# ACT Cockpit — Saturday 25 April 2026
+# ACT Cockpit — Monday 27 April 2026
 
-> 67 days to Pty cutover · $507,700 outstanding on sole trader · d66e462 latest commit
+> 65 days to Pty cutover · $507,700 outstanding on sole trader · fae6ac5 latest commit
 
 ## 🚨 Decisions blocked on you
 
-- **INV-0314** Centrecorp Foundation $84,700 DRAFT (70 days old) — send / void / reissue from Pty?
-- **INV-0321** Snow Foundation $132,000 AUTHORISED 37 days — call Sally/Alexandra: confirm payment + Pty migration notice
-- **INV-0222** Rotary eClub $82,500 AUTHORISED **379 days** — chase or write off (Rule 3: recovery not novation)
+- **INV-0314** Centrecorp Foundation $84,700 DRAFT (72 days old) — send / void / reissue from Pty?
+- **INV-0321** Snow Foundation $132,000 AUTHORISED 39 days — call Sally/Alexandra: confirm payment + Pty migration notice
+- **INV-0222** Rotary eClub $82,500 AUTHORISED **381 days** — chase or write off (Rule 3: recovery not novation)
 
 ## 📊 The number
 
 | Metric | Today | What it means |
 |--------|------:|---------------|
-| Days to cutover (30 June) | **67** | Time to execute well |
+| Days to cutover (30 June) | **65** | Time to execute well |
 | Outstanding receivables (sole trader) | **$507,700** | 38 invoices across 10 counterparties |
 | AUTHORISED ACCREC invoices | 37 | Real money expected |
 | DRAFT ACCREC invoices | 1 | Awaiting your send/void decision |
@@ -31,9 +31,9 @@ generated: 2026-04-24T21:01:40.275Z
 
 | Counterparty | Invoice | Amount | Status | Age | Project |
 |---|---|---:|---|---:|---|
-| The Snow Foundation | INV-0321 | $132,000 | AUTHORISED | 37d | ACT-GD |
-| Centrecorp Foundation | INV-0314 | $84,700 | DRAFT | 70d | ACT-GD |
-| Rotary Eclub Outback Australia, Division 9560, | INV-0222 | $82,500 | AUTHORISED | 379d | ACT-GD |
+| The Snow Foundation | INV-0321 | $132,000 | AUTHORISED | 39d | ACT-GD |
+| Centrecorp Foundation | INV-0314 | $84,700 | DRAFT | 72d | ACT-GD |
+| Rotary Eclub Outback Australia, Division 9560, | INV-0222 | $82,500 | AUTHORISED | 381d | ACT-GD |
 
 
 ## 📋 Open actions from CEO review (from `act-core-facts.md`)
@@ -55,11 +55,11 @@ generated: 2026-04-24T21:01:40.275Z
 
 ### Recent commits (this repo)
 ```
-d66e462 feat(brain): ACT Core Facts as upstream source + sync script for cross-repo CLAUDE.md
-9f353f1 docs(entity-migration): CEO review applied — 4 cutover rules + resequenced SHA + 6 open actions
-db13ae8 feat(alignment-loop): Phase-1 Q2 script + novation letter template drafts
-fda9164 chore(config): remove 2 non-project ghosts (ACT-APO, ACT-AMT)
-f3fd14f chore(config): add canonical_slug to all 74 project codes (v1.7.0 → v1.8.0)
+fae6ac5 chore(api): retire dormant code + bump all Claude calls to current models
+f616c02 feat(brain): bws-audit.mjs — read-only audit of Bitwarden Secrets Manager
+63f1652 fix(brain): Bitwarden session caches across script runs
+59fe570 fix(brain): scripts self-unlock Bitwarden — no more BW_SESSION friction
+973f737 feat(brain): Bitwarden bootstrap + duplicate finder scripts
 ```
 
 ### Recent Alignment Loop syntheses
@@ -70,7 +70,7 @@ f3fd14f chore(config): add canonical_slug to all 74 project codes (v1.7.0 → v1
 ## 🗓️ This week ahead
 
 - **Weekly Alignment Loop drift PR** opens Friday 08:00 Brisbane (next: 2026-04-30)
-- **Pty cutover** in 67 days (30 June 2026)
+- **Pty cutover** in 65 days (30 June 2026)
 - **D&O insurance binding due** 2026-05-24 (within 30 days of Pty registration)
 - **R&D FY26 records review** scheduled end May (~$47K audit-exposure protection)
 
@@ -91,9 +91,9 @@ Auto-generated daily by `scripts/generate-ceo-cockpit.mjs` from:
 - Live Supabase: `xero_invoices`, `xero_transactions`
 - Repo state: `git log`, `wiki/synthesis/` directory walk
 
-Yesterday's version archived at `wiki/cockpit/archive/2026-04-23.md` if generated.
+Yesterday's version archived at `wiki/cockpit/archive/2026-04-25.md` if generated.
 
 To extend: edit the script's render() function. Don't hand-edit `today.md` — it's overwritten on the next run.
 
 ---
-_Generated 2026-04-24T21:01:40.278Z — 8 commits this repo · 3 alignment-loop syntheses indexed · drift cycle weekly Friday 08:00 Brisbane_
+_Generated 2026-04-26T23:32:19.581Z — 8 commits this repo · 3 alignment-loop syntheses indexed · drift cycle weekly Friday 08:00 Brisbane_

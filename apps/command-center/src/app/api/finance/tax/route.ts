@@ -155,12 +155,8 @@ export async function GET(request: Request): Promise<NextResponse<TaxResponse>> 
 
     const grantRevenue = (grantApps || []).reduce((s: number, g: any) => s + (g.outcome_amount || 0), 0)
 
-    // Donations
-    const { data: donationData } = await supabase
-      .from('donations')
-      .select('amount')
-      .gte('donation_date', start)
-      .lt('donation_date', end)
+    // donations table removed from DB — returns empty until a backend exists
+    const donationData: any[] = []
 
     const donationTotal = (donationData || []).reduce((s: number, d: any) => s + Math.abs(d.amount || 0), 0)
 

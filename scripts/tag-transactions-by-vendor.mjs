@@ -17,6 +17,7 @@ import '../lib/load-env.mjs';
 import { createClient } from '@supabase/supabase-js';
 import { loadProjectsConfig } from './lib/project-loader.mjs';
 import { sendTelegram } from './lib/telegram.mjs';
+import { alertHash, shouldSend, markSent } from './lib/telegram-dedup.mjs';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 
@@ -171,23 +172,10 @@ function matchKeywords(text, keywordMap) {
 }
 
 async function showStats() {
-  const { data: total } = await supabase
-    .from('xero_transactions')
-    .select('id', { count: 'exact', head: true });
-
-  const { data: tagged } = await supabase
-    .from('xero_transactions')
-    .select('id', { count: 'exact', head: true })
-    .not('project_code', 'is', null);
-
   const { data: byProject } = await supabase.rpc('exec_sql', {
     query: `SELECT project_code, COUNT(*) as count FROM xero_transactions WHERE project_code IS NOT NULL GROUP BY project_code ORDER BY count DESC`
   });
 
-  const totalCount = total?.length ?? 0;
-  const taggedCount = tagged?.length ?? 0;
-
-  // Use count from response headers
   const { count: totalC } = await supabase
     .from('xero_transactions')
     .select('*', { count: 'exact', head: true });
@@ -205,18 +193,9 @@ async function showStats() {
   console.log(`Coverage:            ${totalC > 0 ? ((taggedC / totalC) * 100).toFixed(1) : 0}%`);
 
   // By project distribution
-  const { data: distribution } = await supabase
-    .from('xero_transactions')
-    .select('project_code')
-    .not('project_code', 'is', null);
-
-  if (distribution) {
-    const counts = {};
-    for (const row of distribution) {
-      counts[row.project_code] = (counts[row.project_code] || 0) + 1;
-    }
+  if (byProject) {
     console.log('\n📁 Distribution by Project:');
-    for (const [code, count] of Object.entries(counts).sort((a, b) => b[1] - a[1])) {
+    for (const { project_code: code, count } of byProject) {
       console.log(`  ${code.padEnd(12)} ${count}`);
     }
   }
@@ -241,8 +220,10 @@ async function tagTransactions() {
   while (true) {
     const { data, error } = await supabase
       .from('xero_transactions')
-      .select('id, contact_name, line_items, total, date, type, bank_account')
+      .select('id, contact_name, line_items, total, date, type, bank_account, project_code_source')
       .is('project_code', null)
+      // MANUAL-TAG GUARD: skip rows the user deliberately untagged
+      .not('project_code_source', 'like', 'manual%')
       .range(offset, offset + pageSize - 1)
       .order('date', { ascending: false });
 
@@ -382,8 +363,10 @@ async function tagTransactions() {
   while (true) {
     const { data, error } = await supabase
       .from('xero_invoices')
-      .select('id, contact_name, reference, line_items, total, date, type, tracking_option_1, tracking_option_2')
+      .select('id, contact_name, reference, line_items, total, date, type, tracking_option_1, tracking_option_2, project_code_source')
       .is('project_code', null)
+      // MANUAL-TAG GUARD: skip rows the user deliberately untagged
+      .not('project_code_source', 'like', 'manual%')
       .range(offset, offset + pageSize - 1);
 
     if (error) {
@@ -507,7 +490,14 @@ async function tagTransactions() {
         vendorList.length > 10 ? `• ...and ${vendorList.length - 10} more` : '',
         `Total: $${totalValue.toFixed(0)}`,
       ].filter(Boolean).join('\n');
-      await sendTelegram(msg);
+
+      const hash = alertHash(unmatchedFY26.length, vendorList);
+      if (await shouldSend('tagger-unmatched', hash, { ttlHours: 24 })) {
+        const { snoozeButtons } = await import('./lib/telegram-dedup.mjs');
+        const { buildInlineKeyboard } = await import('./lib/telegram.mjs');
+        await sendTelegram(msg, { replyMarkup: buildInlineKeyboard(snoozeButtons('tagger-unmatched')) });
+        markSent('tagger-unmatched', hash);
+      }
     }
   }
 }

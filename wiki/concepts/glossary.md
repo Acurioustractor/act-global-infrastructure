@@ -27,8 +27,17 @@ ACT's methodology for ethical innovation:
 
 See [[lcaa-method|LCAA Method]].
 
-### ALMA (Adaptive Learning for Meaningful Accountability)
-ACT's impact model that reads system-level signals without profiling individuals. Uses six signal families to guide learning and decision-making. ALMA protects against extractive data practices while enabling genuine learning. See [[alma|ALMA]].
+### Australian Living Map of Alternatives (ALMA)
+ACT's catalogue of community-led interventions that work, scored on six dimensions (evidence strength, community authority, harm risk, implementation capability, option value, community value return). The catalogue lives in the `alma_interventions`, `alma_evidence`, and `alma_outcomes` database tables. ALMA is the map, not a process, not an AI agent, not a ranking engine. See [[alma|ALMA]].
+
+### Civic Operating System
+The three-layer architecture for ACT's product work: [[civicgraph|CivicGraph]] (intelligence, sees the field), [[justicehub|JusticeHub]] (practice, supports the work), [[empathy-ledger|Empathy Ledger]] (accountability, holds the trust). The three call each other in code. See [[civic-operating-system|Civic Operating System]].
+
+### Civic Reflex Automation
+ACT's AI thesis: automate the boring (tagging, matching, syncing, reporting, reminders, audits), amplify the art (storytelling, design, engagement), never replace human judgment on relationships, consent, or creative direction. See [[civic-reflex-automation|Civic Reflex Automation]].
+
+### Evidence as a By-Product of the Work
+The principle that impact reporting composes from the existing layers (Empathy Ledger, ALMA, CivicGraph, Governed Proof) rather than running as a separate reporting workstream. Every intake, story, consent, referral, audit, and review writes to the evidence base; the report at the end of the quarter is generated from the ledger, not re-collected from memory. See [[evidence-as-by-product|Evidence as a By-Product of the Work]].
 
 ### Power Take-Off (PTO)
 A tractor mechanism that transfers engine power to implements. ACT's founding metaphor: we provide power that communities direct, not the other way around.
@@ -89,18 +98,18 @@ Standardized `/api/registry` endpoint exposed by each project. Enables ecosystem
 
 ---
 
-## ALMA Signal Families
+## ALMA Scoring Dimensions
 
-See [[alma|ALMA]] for the full framework.
+The six dimensions every intervention in [[alma|ALMA]] is scored on. These dimensions **are** ALMA's methodology, not external supports for some other thing called ALMA. The catalogue plus the dimensions plus the scoring records together are the Map.
 
-| Signal | What It Measures |
+| Scoring Dimension | What It Checks |
 |--------|-----------------|
-| Evidence Strength | How reliable is the learning? |
-| Community Authority | Who holds authority? Is consent in place? |
-| Harm Risk (Inverted) | Potential for harm if shared (higher = safer) |
-| Implementation Capability | Can this be acted on? |
+| Evidence Strength | Is the claim sourced and reliable? |
+| Community Authority | Who holds authority? Has cultural authority been verified? |
+| Harm Risk | What could go wrong if this is acted on or shared? |
+| Implementation Capability | Can this be acted on responsibly now? |
 | Option Value | Does this open or close future possibilities? |
-| Community Value Return | How much value flows back to community? |
+| Community Value Return | Does value flow back to the people or place involved? |
 
 ---
 
@@ -173,7 +182,7 @@ Terms like "harvesting data," "capturing value," "mining insights" that treat pe
 | Acronym | Meaning |
 |---------|---------|
 | ACT | A Curious Tractor |
-| ALMA | Adaptive Learning for Meaningful Accountability |
+| ALMA | Australian Living Map of Alternatives |
 | BCV | Black Cockatoo Valley |
 | CSA | Community Supported Agriculture |
 | GHL | GoHighLevel (CRM platform) |
@@ -191,7 +200,11 @@ Terms like "harvesting data," "capturing value," "mining insights" that treat pe
 ## Backlinks
 
 - [[lcaa-method|LCAA Method]] — core methodology
-- [[alma|ALMA]] — impact and learning model
+- [[civic-operating-system|Civic Operating System]] — the three-layer architecture for ACT's product work
+- [[civic-reflex-automation|Civic Reflex Automation]] — the AI thesis underneath the civic OS
+- [[evidence-as-by-product|Evidence as a By-Product of the Work]] — the impact reporting principle
+- [[alma|ALMA]] — the catalogue of community-led alternatives, evidence-graded with cultural authority
+- [[governed-proof|Governed Proof]] — evidence, review, confidence, publication, and audit trail
 - [[consent-as-infrastructure|Consent as Infrastructure]] — OCAP architecture
 - [[beautiful-obsolescence|Beautiful Obsolescence]] — handover design principle
 - [[voice-guide|ACT Voice Guide]] — language system

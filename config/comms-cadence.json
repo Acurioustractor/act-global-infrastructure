@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "updated": "2026-05-28",
+  "description": "Per-audience newsletter cadence + candidate thresholds (locked plan act-communication-pipeline-2026-05-23-locked, Q5). Drives scripts/comms-calendar.mjs (the scheduling engine) and the Notion Comms Content Calendar view. cadence = how often an edition is due; intervalDays = days between editions (null for event-triggered); minCandidates = the threshold below which the engine recommends skipping; mode = per-recipient (one edition each) | per-audience (one edition for all) | event; drafter = the script the engine recommends running (null when not built).",
+  "audiences": {
+    "funder": {
+      "label": "Funder",
+      "cadence": "quarterly",
+      "intervalDays": 91,
+      "minCandidates": 3,
+      "mode": "per-recipient",
+      "drafter": "scripts/draft-funder-newsletter.mjs",
+      "private": true
+    },
+    "partner": {
+      "label": "Partner",
+      "cadence": "monthly",
+      "intervalDays": 30,
+      "minCandidates": 2,
+      "mode": "per-recipient",
+      "drafter": "scripts/draft-partner-newsletter.mjs",
+      "private": true
+    },
+    "brand": {
+      "label": "Brand",
+      "cadence": "fortnightly",
+      "intervalDays": 14,
+      "minCandidates": 3,
+      "mode": "per-audience",
+      "drafter": "scripts/draft-brand-newsletter.mjs",
+      "private": false
+    },
+    "storyteller": {
+      "label": "Storyteller",
+      "cadence": "event-triggered",
+      "intervalDays": null,
+      "minCandidates": 1,
+      "mode": "event",
+      "drafter": null,
+      "private": true
+    }
+  }
+}

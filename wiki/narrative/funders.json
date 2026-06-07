@@ -2,15 +2,23 @@
   "$schema": "wiki/narrative/funders.schema.json",
   "description": "Active and prospect funders, with the narrative claims that should lead any pitch to them. Used by narrative-draft.mjs --funder <slug> to assemble pitch briefs targeted to the right thesis.",
   "version": 2,
-  "updated": "2026-04-24",
+  "updated": "2026-06-05",
   "funders": {
     "minderoo": {
       "name": "Minderoo Foundation",
-      "stage": "ask-pending",
+      "stage": "paused",
       "ask_amount_aud": 2900000,
       "deadline": "2026-05-15",
       "primary_contact": "Lucy Stronach",
-      "themes": ["communities", "early-intervention", "indigenous-led", "evidence-based", "place-based", "child-family-supports", "youth-justice"],
+      "themes": [
+        "communities",
+        "early-intervention",
+        "indigenous-led",
+        "evidence-based",
+        "place-based",
+        "child-family-supports",
+        "youth-justice"
+      ],
       "tone": "communities-first, evidence-rich, place-based, structurally honest, board-defensible",
       "canonical_pitch_doc": "wiki/projects/justicehub/three-circles.md",
       "comprehensive_walkthrough": "wiki/projects/justicehub/the-full-idea.md",
@@ -26,15 +34,27 @@
       "claims_to_avoid": [
         "contained:claim-evidence-is-settled-question-is-political-will"
       ],
-      "framing_notes": "Minderoo's current public strategy is Communities-first: place-based engagement, local knowledge and lived experience, stronger child and family supports, and vibrant connected communities. Lead with the anchor-community hold, not JusticeHub as a product. JusticeHub is the evidence layer under the community work; The Brave Ones is the human trace layer; the library is the destination, not the opening noun. Use Minderoo's own role language where possible: Partner, Develop, Generate Evidence, Advocate. Primary ask: $2.9M over 3 years (the canonical Three Circles ask). Best staged entry: $780K for Year 1 with a pathway into Years 2-3. Use the older $3.43M Crescendo frame only if Lucy invites ACT upward into the expanded library / artefact expression. Avoid the confrontational frame — they fund builders, not critics. Source docs: three-circles.md (canonical pitch), how-should-act-pitch-minderoo-in-line-with-its-current-strategy-and-what-money-f.md (strategy synthesis), and the-full-idea.md (comprehensive walkthrough)."
+      "framing_notes": "Minderoo's current public strategy is Communities-first: place-based engagement, local knowledge and lived experience, stronger child and family supports, and vibrant connected communities. Lead with the anchor-community hold, not JusticeHub as a product. JusticeHub is the evidence layer under the community work; The Brave Ones is the human trace layer; the library is the destination, not the opening noun. Use Minderoo's own role language where possible: Partner, Develop, Generate Evidence, Advocate. Primary ask: $2.9M over 3 years (the canonical Three Circles ask). Best staged entry: $780K for Year 1 with a pathway into Years 2-3. Use the older $3.43M Crescendo frame only if Lucy invites ACT upward into the expanded library / artefact expression. Avoid the confrontational frame — they fund builders, not critics. Source docs: three-circles.md (canonical pitch), how-should-act-pitch-minderoo-in-line-with-its-current-strategy-and-what-money-f.md (strategy synthesis), and the-full-idea.md (comprehensive walkthrough).",
+      "primary_email": "lstronach@minderoo.org",
+      "last_communicated_at": "2026-05-14",
+      "projects_funded": [
+        "ACT-CN",
+        "ACT-JH"
+      ],
+      "pause_note": "Lucy paused justice conversations 2026-05-14 — Minderoo internal restructure. Re-engage Q3 FY27 or on her signal."
     },
     "qbe-catalysing-impact": {
       "name": "QBE Catalysing Impact",
-      "stage": "term-sheet-pending",
+      "stage": "active-partner",
       "ask_amount_aud": null,
       "deadline": null,
-      "primary_contact": null,
-      "themes": ["enterprise", "unit-economics", "scalable", "social-investment"],
+      "primary_contact": "Jay Boolkin (SIH admin) / Matt Allen (Goods diagnostic)",
+      "themes": [
+        "enterprise",
+        "unit-economics",
+        "scalable",
+        "social-investment"
+      ],
       "tone": "investor-grade, cost-honest, no hand-waving",
       "claims_to_lead_with": [
         "goods-on-country:claim-unit-economics-must-be-real",
@@ -42,15 +62,26 @@
         "goods-on-country:claim-not-charity-its-enterprise"
       ],
       "claims_to_avoid": [],
-      "framing_notes": "Investor language. Lead with the delivered cost number, the decision band, the handover binary. Do NOT pitch this as a charity case. Do NOT show up without the actual cost report — the whole point of the cost report doc is that QBE will not move without it."
+      "framing_notes": "Investor language. Lead with the delivered cost number, the decision band, the handover binary. Do NOT pitch this as a charity case. Do NOT show up without the actual cost report — the whole point of the cost report doc is that QBE will not move without it.",
+      "primary_email": "jay@socialimpacthub.org, matt.allen@socialimpacthub.org",
+      "cc_email": "malcolm.aikman@socialimpacthub.org",
+      "last_communicated_at": "2026-05-19",
+      "projects_funded": [
+        "ACT-GD"
+      ],
+      "administration_note": "Relationship runs through Social Impact Hub admin team, not QBE direct. Catalysing Impact 2026 cohort."
     },
     "dusseldorp-forum": {
       "name": "Dusseldorp Forum",
       "stage": "active-partner",
       "ask_amount_aud": 16500,
       "deadline": null,
-      "primary_contact": "Rachel Fyfe / Jessica Duffy",
-      "themes": ["education", "youth-voice", "community-led"],
+      "primary_contact": "Jessica Duffy / Margot Beach (Teya + Rachel CC)",
+      "themes": [
+        "education",
+        "youth-voice",
+        "community-led"
+      ],
       "tone": "education-led, community-respectful, evidence-grounded",
       "claims_to_lead_with": [
         "contained:claim-young-people-as-experts",
@@ -58,15 +89,26 @@
         "contained:claim-detention-doesnt-work"
       ],
       "claims_to_avoid": [],
-      "framing_notes": "Dusseldorp already funds — this is a deepening relationship, not a new ask. Lead with the education angle (18% of detained kids complete education), then young-people-as-experts. They have the education frame in their DNA."
+      "framing_notes": "Dusseldorp already funds — this is a deepening relationship, not a new ask. Lead with the education angle (18% of detained kids complete education), then young-people-as-experts. They have the education frame in their DNA.",
+      "primary_email": "jessicaduffy@dusseldorp.org.au, margotbeach@dusseldorp.org.au",
+      "cc_email": "teya@dusseldorp.org.au, rachelfyfe@dusseldorp.org.au",
+      "last_communicated_at": "2026-05-19",
+      "projects_funded": [
+        "ACT-CN",
+        "ACT-JH"
+      ]
     },
     "paul-ramsay-foundation": {
       "name": "Paul Ramsay Foundation",
       "stage": "warm",
       "ask_amount_aud": null,
       "deadline": null,
-      "primary_contact": "William Frazer",
-      "themes": ["systems-change", "evidence-based", "institutional-reform"],
+      "primary_contact": "William Frazer (Jonas + Prebhjot + Julia CC)",
+      "themes": [
+        "systems-change",
+        "evidence-based",
+        "institutional-reform"
+      ],
       "tone": "rigorous, system-thinking, evidence-first",
       "claims_to_lead_with": [
         "contained:claim-cost-comparison",
@@ -76,15 +118,26 @@
       "claims_to_avoid": [
         "contained:claim-built-by-hand"
       ],
-      "framing_notes": "Stage upgraded from cold 2026-04-24: Xero shows 2 paid invoices (small, $7,469 total) and William Frazer is tagged partner+justicehub in GHL — relationship is warmer than cold. Last comm 80 days ago (hello@ address, early Feb). PRF thinks deeply about systems change. Lead with the cost evidence, then the verified-intervention engine (ALMA), then the platform stack as the system-change lever. PRF will be skeptical of 'two people built it with hands' — for them, lead with infrastructure, not artisanship."
+      "framing_notes": "Stage upgraded from cold 2026-04-24: Xero shows 2 paid invoices (small, $7,469 total) and William Frazer is tagged partner+justicehub in GHL — relationship is warmer than cold. Last comm 80 days ago (hello@ address, early Feb). PRF thinks deeply about systems change. Lead with the cost evidence, then the verified-intervention engine (ALMA), then the platform stack as the system-change lever. PRF will be skeptical of 'two people built it with hands' — for them, lead with infrastructure, not artisanship.",
+      "primary_email": "wfrazer@paulramsayfoundation.org.au",
+      "cc_email": "jonas@paulramsayfoundation.org.au, pkaur@paulramsayfoundation.org.au, jpayne@paulramsayfoundation.org.au",
+      "last_communicated_at": null,
+      "projects_funded": [
+        "ACT-GD",
+        "ACT-JH"
+      ]
     },
     "tim-fairfax": {
       "name": "Tim Fairfax Family Foundation",
-      "stage": "warm-cold",
+      "stage": "warm",
       "ask_amount_aud": null,
       "deadline": null,
       "primary_contact": "Katie Norman",
-      "themes": ["regional", "community-led", "creative-practice"],
+      "themes": [
+        "regional",
+        "community-led",
+        "creative-practice"
+      ],
       "tone": "warm, place-based, story-rich",
       "claims_to_lead_with": [
         "contained:claim-room-3-community-already-doing-it",
@@ -92,7 +145,13 @@
         "contained:claim-young-people-as-experts"
       ],
       "claims_to_avoid": [],
-      "framing_notes": "Tim Fairfax loves regional and community-led. Lead with Room 3 (Mounty Yarns, PICC, Oonchiumpa) and the touring model. The container-as-method is a creative-practice claim that lands well here."
+      "framing_notes": "Tim Fairfax loves regional and community-led. Lead with Room 3 (Mounty Yarns, PICC, Oonchiumpa) and the touring model. The container-as-method is a creative-practice claim that lands well here.",
+      "primary_email": "knorman@tfff.org.au",
+      "last_communicated_at": "2026-05-20",
+      "projects_funded": [
+        "ACT-EL",
+        "ACT-JH"
+      ]
     },
     "smith-family": {
       "name": "The Smith Family",
@@ -100,7 +159,11 @@
       "ask_amount_aud": null,
       "deadline": null,
       "primary_contact": null,
-      "themes": ["education", "youth-pathways", "evidence"],
+      "themes": [
+        "education",
+        "youth-pathways",
+        "evidence"
+      ],
       "tone": "evidence-led, educational outcomes",
       "claims_to_lead_with": [
         "contained:claim-detention-doesnt-work",
@@ -112,7 +175,11 @@
     "amnesty-australia": {
       "name": "Amnesty International Australia",
       "stage": "cold",
-      "themes": ["human-rights", "first-nations", "institutional-accountability"],
+      "themes": [
+        "human-rights",
+        "first-nations",
+        "institutional-accountability"
+      ],
       "tone": "rights-based, structurally honest, willing to confront",
       "claims_to_lead_with": [
         "contained:claim-indigenous-overrepresentation",
@@ -125,7 +192,10 @@
     "niaa": {
       "name": "National Indigenous Australians Agency",
       "stage": "procurement-prospect",
-      "themes": ["indigenous-procurement", "community-led-enterprise"],
+      "themes": [
+        "indigenous-procurement",
+        "community-led-enterprise"
+      ],
       "tone": "procurement-ready, IPP-compliant, enterprise",
       "claims_to_lead_with": [
         "goods-on-country:claim-not-charity-its-enterprise",
@@ -140,8 +210,13 @@
       "stage": "active-partner",
       "ask_amount_aud": 60000,
       "deadline": null,
-      "primary_contact": null,
-      "themes": ["impact-storytelling", "wind-down-legacy", "africa-australia", "philanthropic-spine"],
+      "primary_contact": "Anne Gripper",
+      "themes": [
+        "impact-storytelling",
+        "wind-down-legacy",
+        "africa-australia",
+        "philanthropic-spine"
+      ],
       "tone": "warm, story-rich, legacy-conscious",
       "claims_to_lead_with": [
         "empathy-ledger:claim-story-is-the-spine",
@@ -150,7 +225,13 @@
         "empathy-ledger:claim-the-loop-is-the-product"
       ],
       "claims_to_avoid": [],
-      "framing_notes": "UNVERIFIED STAGE as of 2026-04-24: wiki claims active-partner + $60K but Xero has no JCF invoice. Validate the relationship status with Nic before drafting from this entry. If confirmed, keep framing below. JCF has 5 years remaining in their mandate ('15 Down — 5 To Go'). They want impact storytelling for fundraising / wind-down. The Tanzania + Rwanda Africa visit (Sep 2025) is the entry point. Pitch as a multi-year retainer ($40-80K/yr) — not a project grant. We deliver the platform, the editorial pipeline, the annual reports, and the consent-respecting story library across all JCF beneficiaries. The world tour visits the African beneficiaries directly — fieldwork at no marginal cost."
+      "framing_notes": "UNVERIFIED STAGE as of 2026-04-24: wiki claims active-partner + $60K but Xero has no JCF invoice. Validate the relationship status with Nic before drafting from this entry. If confirmed, keep framing below. JCF has 5 years remaining in their mandate ('15 Down — 5 To Go'). They want impact storytelling for fundraising / wind-down. The Tanzania + Rwanda Africa visit (Sep 2025) is the entry point. Pitch as a multi-year retainer ($40-80K/yr) — not a project grant. We deliver the platform, the editorial pipeline, the annual reports, and the consent-respecting story library across all JCF beneficiaries. The world tour visits the African beneficiaries directly — fieldwork at no marginal cost.",
+      "primary_email": "anne.gripper@outlook.com",
+      "last_communicated_at": "2026-05-21",
+      "projects_funded": [
+        "ACT-EL",
+        "ACT-GD"
+      ]
     },
     "atlassian-foundation": {
       "name": "Atlassian Foundation",
@@ -158,7 +239,12 @@
       "ask_amount_aud": 200000,
       "deadline": null,
       "primary_contact": null,
-      "themes": ["software-for-good", "platform-thinking", "open-source", "developer-led-impact"],
+      "themes": [
+        "software-for-good",
+        "platform-thinking",
+        "open-source",
+        "developer-led-impact"
+      ],
       "tone": "engineering-credible, platform-native, scale-aware",
       "claims_to_lead_with": [
         "empathy-ledger:claim-the-ecosystem-is-one-database",
@@ -175,7 +261,11 @@
       "ask_amount_aud": null,
       "deadline": null,
       "primary_contact": "Sally Grimsley-Ballard / Alexandra Lagelee Kean",
-      "themes": ["systems-change", "indigenous-led", "rural-regional"],
+      "themes": [
+        "systems-change",
+        "indigenous-led",
+        "rural-regional"
+      ],
       "tone": "values-driven, community-respectful",
       "claims_to_lead_with": [
         "empathy-ledger:claim-the-loop-is-the-product",
@@ -183,7 +273,13 @@
         "goods-on-country:claim-not-charity-its-enterprise"
       ],
       "claims_to_avoid": [],
-      "framing_notes": "Active multi-tranche partner. Xero shows $402,930 received + $132,000 AUTHORISED across 7 tranches over 14 months (INV-0321 $132K currently outstanding 37d). No single canonical ask — relationship funds in rolling tranches on project ACT-GD. Last comm 10 days ago, warm. Next action (only-Ben): call Sally or Alexandra to confirm INV-0321 payment AND flag Pty migration — from 1 July 2026 tranches invoice to A Curious Tractor Pty Ltd ACN 697 347 676. Tour funder sponsorship candidate. Lead with the closed-loop framing and the regional / Indigenous-led work."
+      "framing_notes": "Active multi-tranche partner. Xero shows $402,930 received + $132,000 AUTHORISED across 7 tranches over 14 months (INV-0321 $132K currently outstanding 37d). No single canonical ask — relationship funds in rolling tranches on project ACT-GD. Last comm 10 days ago, warm. Next action (only-Ben): call Sally or Alexandra to confirm INV-0321 payment AND flag Pty migration — from 1 July 2026 tranches invoice to A Curious Tractor Pty Ltd ACN 697 347 676. Tour funder sponsorship candidate. Lead with the closed-loop framing and the regional / Indigenous-led work.",
+      "primary_email": "s.grimsley-ballard@snowfoundation.org.au, a.lageleekean@snowfoundation.org.au",
+      "cc_email": "g.byron@snowfoundation.org.au, a.machuca@snowfoundation.org.au, c.ludovici@snowfoundation.org.au",
+      "last_communicated_at": "2026-05-20",
+      "projects_funded": [
+        "ACT-GD"
+      ]
     },
     "patagonia": {
       "name": "Patagonia Environmental + Social Initiatives",
@@ -191,7 +287,12 @@
       "ask_amount_aud": 150000,
       "deadline": null,
       "primary_contact": null,
-      "themes": ["environmental-justice", "regenerative-systems", "indigenous-rights", "anti-corporate-power"],
+      "themes": [
+        "environmental-justice",
+        "regenerative-systems",
+        "indigenous-rights",
+        "anti-corporate-power"
+      ],
       "tone": "earned-credibility, climate-honest, no-greenwash",
       "claims_to_lead_with": [
         "goods-on-country:claim-not-charity-its-enterprise",
@@ -207,7 +308,11 @@
       "ask_amount_aud": 100000,
       "deadline": null,
       "primary_contact": null,
-      "themes": ["sustainable-materials", "supply-chain-transparency", "B-corp"],
+      "themes": [
+        "sustainable-materials",
+        "supply-chain-transparency",
+        "B-corp"
+      ],
       "tone": "supply-chain-honest, materials-curious",
       "claims_to_lead_with": [
         "goods-on-country:claim-not-charity-its-enterprise",
@@ -222,7 +327,11 @@
       "ask_amount_aud": 100000,
       "deadline": null,
       "primary_contact": null,
-      "themes": ["dignified-essentials", "sanitation", "community-investment"],
+      "themes": [
+        "dignified-essentials",
+        "sanitation",
+        "community-investment"
+      ],
       "tone": "playful, dignified-essentials, anti-charity",
       "claims_to_lead_with": [
         "goods-on-country:claim-not-charity-its-enterprise",
@@ -236,8 +345,12 @@
       "stage": "active-partner",
       "ask_amount_aud": 84700,
       "deadline": null,
-      "primary_contact": null,
-      "themes": ["indigenous-led", "central-australia", "community-enterprise"],
+      "primary_contact": "Randle Walker / Jodie Tilmouth",
+      "themes": [
+        "indigenous-led",
+        "central-australia",
+        "community-enterprise"
+      ],
       "tone": "community-respectful, place-based, evidence-rich",
       "claims_to_lead_with": [
         "goods-on-country:claim-not-charity-its-enterprise",
@@ -245,7 +358,12 @@
         "goods-on-country:claim-handover-is-the-test"
       ],
       "claims_to_avoid": [],
-      "framing_notes": "Active partner via Goods on Country Production Plant. Tranche 1 ($85,712) paid Nov 2025. Tranche 2 (INV-0314 $84,700) currently DRAFT 70 days old pending only-Ben decision — send / void / reissue-from-Pty post-cutover. Named in Goods → Minderoo pitch as live pipeline. See thoughts/shared/drafts/centrecorp-feb-2026-invoice-forensics.md for history. Lead with completed-plant evidence and unit economics, not a fresh pitch — relationship is built."
+      "framing_notes": "Active partner via Goods on Country Production Plant. Tranche 1 ($85,712) paid Nov 2025. Tranche 2 (INV-0314 $84,700) currently DRAFT 70 days old pending only-Ben decision — send / void / reissue-from-Pty post-cutover. Named in Goods → Minderoo pitch as live pipeline. See thoughts/shared/drafts/centrecorp-feb-2026-invoice-forensics.md for history. Lead with completed-plant evidence and unit economics, not a fresh pitch — relationship is built.",
+      "primary_email": "randle@centrecorp.com.au, jodie@centrecorp.com.au",
+      "last_communicated_at": "2026-02-13",
+      "projects_funded": [
+        "ACT-GD"
+      ]
     },
     "rotary-eclub-outback": {
       "name": "Rotary eClub of Outback Australia",
@@ -253,7 +371,10 @@
       "ask_amount_aud": 82500,
       "deadline": null,
       "primary_contact": null,
-      "themes": ["regional", "community-led"],
+      "themes": [
+        "regional",
+        "community-led"
+      ],
       "tone": "community-respectful, grassroots",
       "claims_to_lead_with": [],
       "claims_to_avoid": [],
@@ -289,7 +410,10 @@
       "ask_amount_aud": null,
       "deadline": null,
       "primary_contact": null,
-      "themes": ["government", "queensland"],
+      "themes": [
+        "government",
+        "queensland"
+      ],
       "tone": null,
       "claims_to_lead_with": [],
       "claims_to_avoid": [],
@@ -300,12 +424,20 @@
       "stage": "active-partner",
       "ask_amount_aud": null,
       "deadline": null,
-      "primary_contact": "Isabella / Alan",
-      "themes": ["homelessness", "community-led"],
+      "primary_contact": "Adam Robinson (CEO) / Isabella Stanley / Alan White",
+      "themes": [
+        "homelessness",
+        "community-led"
+      ],
       "tone": "warm, grassroots",
       "claims_to_lead_with": [],
       "claims_to_avoid": [],
-      "framing_notes": "DATA-ONLY STUB added 2026-04-24: Xero shows $9,400 paid, GHL shows recent comm 26 days ago (also 105-day prior thread). Active relationship but narrative not yet captured — needs Nic/Ben context on what ACT delivers for StreetSmart before claims can be populated."
+      "framing_notes": "DATA-ONLY STUB added 2026-04-24: Xero shows $9,400 paid, GHL shows recent comm 26 days ago (also 105-day prior thread). Active relationship but narrative not yet captured — needs Nic/Ben context on what ACT delivers for StreetSmart before claims can be populated.",
+      "primary_email": "adam@streetsmartaustralia.org, isabella@streetsmartaustralia.org, alan@streetsmartaustralia.org",
+      "last_communicated_at": "2026-03-28",
+      "projects_funded": [
+        "ACT-JH"
+      ]
     },
     "westpac-scholars-trust": {
       "name": "Westpac Scholars Trust",
@@ -318,6 +450,429 @@
       "claims_to_lead_with": [],
       "claims_to_avoid": [],
       "framing_notes": "DATA-ONLY STUB added 2026-04-24: Xero shows $3,080 paid historically, no current GHL comm. Small historical amount. Needs Nic-verified narrative review before pitch-assembly."
+    },
+    "rotary-eclub-outback-australia-9560": {
+      "name": "Rotary Eclub Outback Australia, Division 9560",
+      "stage": "active-partner",
+      "ask_amount_aud": null,
+      "deadline": null,
+      "primary_contact": "Pene Curtis / Greg Marlow",
+      "themes": [],
+      "tone": null,
+      "claims_to_lead_with": [],
+      "claims_to_avoid": [],
+      "framing_notes": "DATA-ONLY STUB added 2026-05-07: Xero shows $82,500 AUTH on INV-0222 (392 days outstanding); funder-alignment synthesis flags this as the longest-overdue live invoice on the sole trader. Surfaced by 2026-05-07 funder-alignment synthesis as wiki-absent. Needs Ben/Nic-verified narrative review before any pitch-assembly.",
+      "primary_email": "pene.curtis@bigpond.com, greg@marlowcanete.com.au",
+      "last_communicated_at": "2026-04-13",
+      "projects_funded": [
+        "ACT-GD"
+      ]
+    },
+    "brisbane-powerhouse-foundation": {
+      "name": "Brisbane Powerhouse Foundation",
+      "stage": "lapsed",
+      "ask_amount_aud": null,
+      "deadline": null,
+      "primary_contact": null,
+      "themes": [],
+      "tone": null,
+      "claims_to_lead_with": [],
+      "claims_to_avoid": [],
+      "framing_notes": "DATA-ONLY STUB added 2026-05-07: Xero shows $7,150 paid historically; no current GHL communication. Surfaced by 2026-05-07 funder-alignment synthesis as wiki-absent. Needs Ben/Nic-verified narrative review before any pitch-assembly."
+    },
+    "the-john-villiers-trust": {
+      "name": "The John Villiers Trust",
+      "stage": "lapsed",
+      "ask_amount_aud": null,
+      "deadline": null,
+      "primary_contact": null,
+      "themes": [],
+      "tone": null,
+      "claims_to_lead_with": [],
+      "claims_to_avoid": [],
+      "framing_notes": "DATA-ONLY STUB added 2026-05-07: Xero shows $1,200 paid historically; very small amount; no current GHL activity. Surfaced by 2026-05-07 funder-alignment synthesis as wiki-absent. Needs Ben/Nic-verified narrative review before any pitch-assembly."
+    },
+    "palm-island-community-company-limited-picc": {
+      "name": "Palm Island Community Company Limited (PICC)",
+      "stage": "needs-writeup",
+      "needs_writeup": true,
+      "themes": [],
+      "tone": "TBD — write narrative based on existing Xero relationship history",
+      "claims_to_lead_with": [],
+      "framing_notes": "Auto-stubbed from xero_invoices on 2026-05-16. Replace this stub with a hand-written brief: who this is, what we have done together, what we should ask for next. See xero_summary for the relationship financials.",
+      "xero_summary": {
+        "paid_total_aud": 436700,
+        "outstanding_ar_aud": 96800,
+        "last_invoice_date": "2026-04-08"
+      }
+    },
+    "smart-recovery-australia": {
+      "name": "SMART Recovery Australia",
+      "stage": "needs-writeup",
+      "needs_writeup": true,
+      "themes": [],
+      "tone": "TBD — write narrative based on existing Xero relationship history",
+      "claims_to_lead_with": [],
+      "framing_notes": "Auto-stubbed from xero_invoices on 2026-05-16. Replace this stub with a hand-written brief: who this is, what we have done together, what we should ask for next. See xero_summary for the relationship financials.",
+      "xero_summary": {
+        "paid_total_aud": 156500,
+        "outstanding_ar_aud": 2200,
+        "last_invoice_date": "2026-03-19"
+      }
+    },
+    "sonas-properties-pty-ltd": {
+      "name": "Sonas Properties Pty Ltd",
+      "stage": "needs-writeup",
+      "needs_writeup": true,
+      "themes": [],
+      "tone": "TBD — write narrative based on existing Xero relationship history",
+      "claims_to_lead_with": [],
+      "framing_notes": "Auto-stubbed from xero_invoices on 2026-05-16. Replace this stub with a hand-written brief: who this is, what we have done together, what we should ask for next. See xero_summary for the relationship financials.",
+      "xero_summary": {
+        "paid_total_aud": 81290,
+        "outstanding_ar_aud": 37290,
+        "last_invoice_date": "2026-05-06"
+      }
+    },
+    "ingkerreke-services-aboriginal-corporation": {
+      "name": "Ingkerreke Services Aboriginal Corporation",
+      "stage": "needs-writeup",
+      "needs_writeup": true,
+      "themes": [],
+      "tone": "TBD — write narrative based on existing Xero relationship history",
+      "claims_to_lead_with": [],
+      "framing_notes": "Auto-stubbed from xero_invoices on 2026-05-16. Replace this stub with a hand-written brief: who this is, what we have done together, what we should ask for next. See xero_summary for the relationship financials.",
+      "xero_summary": {
+        "paid_total_aud": 103099.7,
+        "outstanding_ar_aud": 0,
+        "last_invoice_date": "2025-09-27"
+      }
+    },
+    "rotary-eclub-outback-australia-division-9560": {
+      "name": "Rotary Eclub Outback Australia, Division 9560,",
+      "stage": "needs-writeup",
+      "needs_writeup": true,
+      "themes": [],
+      "tone": "TBD — write narrative based on existing Xero relationship history",
+      "claims_to_lead_with": [],
+      "framing_notes": "Auto-stubbed from xero_invoices on 2026-05-16. Replace this stub with a hand-written brief: who this is, what we have done together, what we should ask for next. See xero_summary for the relationship financials.",
+      "xero_summary": {
+        "paid_total_aud": 0,
+        "outstanding_ar_aud": 82500,
+        "last_invoice_date": "2025-04-10"
+      }
+    },
+    "regional-arts-australia": {
+      "name": "Regional Arts Australia",
+      "stage": "needs-writeup",
+      "needs_writeup": true,
+      "themes": [],
+      "tone": "TBD — write narrative based on existing Xero relationship history",
+      "claims_to_lead_with": [],
+      "framing_notes": "Auto-stubbed from xero_invoices on 2026-05-16. Replace this stub with a hand-written brief: who this is, what we have done together, what we should ask for next. See xero_summary for the relationship financials.",
+      "xero_summary": {
+        "paid_total_aud": 16500,
+        "outstanding_ar_aud": 33000,
+        "last_invoice_date": "2025-12-16"
+      }
+    },
+    "homeland-school-company": {
+      "name": "Homeland School Company",
+      "stage": "needs-writeup",
+      "needs_writeup": true,
+      "themes": [],
+      "tone": "TBD — write narrative based on existing Xero relationship history",
+      "claims_to_lead_with": [],
+      "framing_notes": "Auto-stubbed from xero_invoices on 2026-05-16. Replace this stub with a hand-written brief: who this is, what we have done together, what we should ask for next. See xero_summary for the relationship financials.",
+      "xero_summary": {
+        "paid_total_aud": 40000,
+        "outstanding_ar_aud": 0,
+        "last_invoice_date": "2026-05-18"
+      }
+    },
+    "just-reinvest": {
+      "name": "Just Reinvest",
+      "stage": "needs-writeup",
+      "needs_writeup": true,
+      "themes": [],
+      "tone": "TBD — write narrative based on existing Xero relationship history",
+      "claims_to_lead_with": [],
+      "framing_notes": "Auto-stubbed from xero_invoices on 2026-05-16. Replace this stub with a hand-written brief: who this is, what we have done together, what we should ask for next. See xero_summary for the relationship financials.",
+      "xero_summary": {
+        "paid_total_aud": 27500,
+        "outstanding_ar_aud": 0,
+        "last_invoice_date": "2026-03-01"
+      }
+    },
+    "green-fox-training-studio-limited": {
+      "name": "GREEN FOX TRAINING STUDIO LIMITED",
+      "stage": "needs-writeup",
+      "needs_writeup": true,
+      "themes": [],
+      "tone": "TBD — write narrative based on existing Xero relationship history",
+      "claims_to_lead_with": [],
+      "framing_notes": "Auto-stubbed from xero_invoices on 2026-05-16. Replace this stub with a hand-written brief: who this is, what we have done together, what we should ask for next. See xero_summary for the relationship financials.",
+      "xero_summary": {
+        "paid_total_aud": 27000,
+        "outstanding_ar_aud": 0,
+        "last_invoice_date": "2025-07-17"
+      }
+    },
+    "state-of-queensland-acting-through-the-department-of-familie": {
+      "name": "State of Queensland (acting through the Department of Families, Seniors, Disability Services and Child Safety)",
+      "stage": "needs-writeup",
+      "needs_writeup": true,
+      "themes": [],
+      "tone": "TBD — write narrative based on existing Xero relationship history",
+      "claims_to_lead_with": [],
+      "framing_notes": "Auto-stubbed from xero_invoices on 2026-05-16. Replace this stub with a hand-written brief: who this is, what we have done together, what we should ask for next. See xero_summary for the relationship financials.",
+      "xero_summary": {
+        "paid_total_aud": 22000,
+        "outstanding_ar_aud": 0,
+        "last_invoice_date": "2025-05-15"
+      }
+    },
+    "our-community-shed-incorporated": {
+      "name": "Our Community Shed Incorporated",
+      "stage": "needs-writeup",
+      "needs_writeup": true,
+      "themes": [],
+      "tone": "TBD — write narrative based on existing Xero relationship history",
+      "claims_to_lead_with": [],
+      "framing_notes": "Auto-stubbed from xero_invoices on 2026-05-16. Replace this stub with a hand-written brief: who this is, what we have done together, what we should ask for next. See xero_summary for the relationship financials.",
+      "xero_summary": {
+        "paid_total_aud": 20265,
+        "outstanding_ar_aud": 0,
+        "last_invoice_date": "2026-02-23"
+      }
+    },
+    "julalikari-council-aboriginal-corporation": {
+      "name": "Julalikari Council Aboriginal Corporation",
+      "stage": "needs-writeup",
+      "needs_writeup": true,
+      "themes": [],
+      "tone": "TBD — write narrative based on existing Xero relationship history",
+      "claims_to_lead_with": [],
+      "framing_notes": "Auto-stubbed from xero_invoices on 2026-05-16. Replace this stub with a hand-written brief: who this is, what we have done together, what we should ask for next. See xero_summary for the relationship financials.",
+      "xero_summary": {
+        "paid_total_aud": 19800,
+        "outstanding_ar_aud": 0,
+        "last_invoice_date": "2025-10-21"
+      }
+    },
+    "red-dust-role-models-limited": {
+      "name": "Red Dust Role Models Limited",
+      "stage": "needs-writeup",
+      "needs_writeup": true,
+      "themes": [],
+      "tone": "TBD — write narrative based on existing Xero relationship history",
+      "claims_to_lead_with": [],
+      "framing_notes": "Auto-stubbed from xero_invoices on 2026-05-16. Replace this stub with a hand-written brief: who this is, what we have done together, what we should ask for next. See xero_summary for the relationship financials.",
+      "xero_summary": {
+        "paid_total_aud": 15950,
+        "outstanding_ar_aud": 0,
+        "last_invoice_date": "2025-07-30"
+      }
+    },
+    "brodie-germaine-fitness-aboriginal-corporation": {
+      "name": "Brodie Germaine Fitness Aboriginal Corporation",
+      "stage": "needs-writeup",
+      "needs_writeup": true,
+      "themes": [],
+      "tone": "TBD — write narrative based on existing Xero relationship history",
+      "claims_to_lead_with": [],
+      "framing_notes": "Auto-stubbed from xero_invoices on 2026-05-16. Replace this stub with a hand-written brief: who this is, what we have done together, what we should ask for next. See xero_summary for the relationship financials.",
+      "xero_summary": {
+        "paid_total_aud": 0,
+        "outstanding_ar_aud": 15400,
+        "last_invoice_date": "2026-04-15"
+      }
+    },
+    "berry-obsession-pty-ltd": {
+      "name": "Berry Obsession PTY LTD",
+      "stage": "needs-writeup",
+      "needs_writeup": true,
+      "themes": [],
+      "tone": "TBD — write narrative based on existing Xero relationship history",
+      "claims_to_lead_with": [],
+      "framing_notes": "Auto-stubbed from xero_invoices on 2026-05-16. Replace this stub with a hand-written brief: who this is, what we have done together, what we should ask for next. See xero_summary for the relationship financials.",
+      "xero_summary": {
+        "paid_total_aud": 13000,
+        "outstanding_ar_aud": 0,
+        "last_invoice_date": "2026-02-10"
+      }
+    },
+    "aleisha-j-keating": {
+      "name": "Aleisha J Keating",
+      "stage": "needs-writeup",
+      "needs_writeup": true,
+      "themes": [],
+      "tone": "TBD — write narrative based on existing Xero relationship history",
+      "claims_to_lead_with": [],
+      "framing_notes": "Auto-stubbed from xero_invoices on 2026-05-16. Replace this stub with a hand-written brief: who this is, what we have done together, what we should ask for next. See xero_summary for the relationship financials.",
+      "xero_summary": {
+        "paid_total_aud": 0,
+        "outstanding_ar_aud": 12150,
+        "last_invoice_date": "2026-01-02"
+      }
+    },
+    "qic-limited": {
+      "name": "QIC LIMITED",
+      "stage": "needs-writeup",
+      "needs_writeup": true,
+      "themes": [],
+      "tone": "TBD — write narrative based on existing Xero relationship history",
+      "claims_to_lead_with": [],
+      "framing_notes": "Auto-stubbed from xero_invoices on 2026-05-16. Replace this stub with a hand-written brief: who this is, what we have done together, what we should ask for next. See xero_summary for the relationship financials.",
+      "xero_summary": {
+        "paid_total_aud": 12000,
+        "outstanding_ar_aud": 0,
+        "last_invoice_date": "2025-06-30"
+      }
+    },
+    "blue-gum-station": {
+      "name": "Blue Gum Station",
+      "stage": "needs-writeup",
+      "needs_writeup": true,
+      "themes": [],
+      "tone": "TBD — write narrative based on existing Xero relationship history",
+      "claims_to_lead_with": [],
+      "framing_notes": "Auto-stubbed from xero_invoices on 2026-05-16. Replace this stub with a hand-written brief: who this is, what we have done together, what we should ask for next. See xero_summary for the relationship financials.",
+      "xero_summary": {
+        "paid_total_aud": 6000,
+        "outstanding_ar_aud": 0,
+        "last_invoice_date": "2026-03-14"
+      }
+    },
+    "jenn-brazier": {
+      "name": "Jenn Brazier",
+      "stage": "needs-writeup",
+      "needs_writeup": true,
+      "themes": [],
+      "tone": "TBD — write narrative based on existing Xero relationship history",
+      "claims_to_lead_with": [],
+      "framing_notes": "Auto-stubbed from xero_invoices on 2026-05-16. Replace this stub with a hand-written brief: who this is, what we have done together, what we should ask for next. See xero_summary for the relationship financials.",
+      "xero_summary": {
+        "paid_total_aud": 5862.34,
+        "outstanding_ar_aud": 0,
+        "last_invoice_date": "2025-07-17"
+      }
+    },
+    "bigmeats-qld-pty-ltd": {
+      "name": "Bigmeats Qld Pty Ltd",
+      "stage": "needs-writeup",
+      "needs_writeup": true,
+      "themes": [],
+      "tone": "TBD — write narrative based on existing Xero relationship history",
+      "claims_to_lead_with": [],
+      "framing_notes": "Auto-stubbed from xero_invoices on 2026-05-16. Replace this stub with a hand-written brief: who this is, what we have done together, what we should ask for next. See xero_summary for the relationship financials.",
+      "xero_summary": {
+        "paid_total_aud": 5720,
+        "outstanding_ar_aud": 0,
+        "last_invoice_date": "2025-02-09"
+      }
+    },
+    "malala-health-service-aboriginal-corporation": {
+      "name": "Mala’la Health Service Aboriginal Corporation",
+      "stage": "needs-writeup",
+      "needs_writeup": true,
+      "themes": [],
+      "tone": "TBD — write narrative based on existing Xero relationship history",
+      "claims_to_lead_with": [],
+      "framing_notes": "Auto-stubbed from xero_invoices on 2026-05-16. Replace this stub with a hand-written brief: who this is, what we have done together, what we should ask for next. See xero_summary for the relationship financials.",
+      "xero_summary": {
+        "paid_total_aud": 5434,
+        "outstanding_ar_aud": 0,
+        "last_invoice_date": "2025-10-21"
+      }
+    },
+    "ufgc-gmbh": {
+      "name": "UFGC GmbH",
+      "stage": "needs-writeup",
+      "needs_writeup": true,
+      "themes": [
+        "international",
+        "technical"
+      ],
+      "tone": "international, technical",
+      "claims_to_lead_with": [],
+      "framing_notes": "Auto-added from xero_invoices on 2026-05-23. Austrian recipient of ACT-CORE work. Single invoice $3,267 paid 2026-03-17. Investigate relationship + future opportunity. Address: Grillparzerstraße 26, 8010 Graz, Austria.",
+      "projects_funded": [
+        "ACT-CORE"
+      ],
+      "xero_summary": {
+        "paid_total_aud": 3267.48,
+        "outstanding_ar_aud": 0,
+        "last_invoice_date": "2026-03-17"
+      }
+    },
+    "qld-housing-department": {
+      "name": "QLD Department of Housing",
+      "stage": "needs-writeup",
+      "needs_writeup": true,
+      "themes": [
+        "government",
+        "housing",
+        "remote-communities"
+      ],
+      "tone": "government-formal, evidence-grounded",
+      "claims_to_lead_with": [],
+      "framing_notes": "Auto-added from xero_invoices on 2026-05-23. Three small invoices totalling $1,500 across 2025. Farm project relationship (ACT-FM). Investigate scope + further partnership potential.",
+      "projects_funded": [
+        "ACT-FM"
+      ],
+      "xero_summary": {
+        "paid_total_aud": 1500,
+        "outstanding_ar_aud": 0,
+        "last_invoice_date": "2025-09-05"
+      }
+    },
+    "minjerribah-moorgumpin": {
+      "name": "Minjerribah Moorgumpin (Elders-In-Council) Aboriginal Corporation",
+      "stage": "needs-writeup",
+      "needs_writeup": true,
+      "themes": [
+        "first-nations",
+        "elders-led",
+        "community-led"
+      ],
+      "tone": "First Nations-led, community-respectful",
+      "claims_to_lead_with": [],
+      "framing_notes": "Auto-added from xero_invoices on 2026-05-23. ACT-JH partner Elders' organisation on Minjerribah (Stradbroke Island). Two small invoices totalling $1,155 paid 2025. Justice work via JusticeHub.",
+      "projects_funded": [
+        "ACT-JH"
+      ],
+      "xero_summary": {
+        "paid_total_aud": 1155,
+        "outstanding_ar_aud": 0,
+        "last_invoice_date": "2025-07-17"
+      }
+    },
+    "mrff-uom-palmer": {
+      "name": "MRFF GNT2051566 via University of Melbourne (Palmer, ALIVE National Centre)",
+      "stage": "warm",
+      "ask_amount_aud": null,
+      "deadline": "2026-06-26",
+      "primary_contact": "Prof Victoria Palmer (CIA, UoM / ALIVE National Centre)",
+      "themes": [
+        "first-nations",
+        "place-based",
+        "community-led",
+        "evidence-based"
+      ],
+      "tone": "research-partnership, sovereignty-first, evidence-grounded",
+      "claims_to_lead_with": [
+        "ACT is named in the funded grant text: Partner AIs for Tennant Creek + Palm Island; partners A Curious Tractor will develop the interactive map (milestone Mar 2027 to Sept 2028)",
+        "The story system already exists and is proven: consent-gated relay trails, publish/media gates, the scrollytelling journey map on Empathy Ledger",
+        "Community payment floor as contractual headline: a fixed share of every ACT invoice flows to community participants, reported through the platform itself"
+      ],
+      "claims_to_avoid": [
+        "Beds or freight as grant lines (they stay in the Centrecorp/Snow lane; the grant pays for the story system only)",
+        "Any community payment claim not backed by the visible payment schedule",
+        "In-kind goods counted as storyteller payment (one cash rate per ledger unit, identical Goods-side and grant-side)"
+      ],
+      "framing_notes": "Grant AWARDED (Mental Health and Climate Change 2026-2031); Year 1 = Getting to Know You Year (Mar 2026 to Mar 2027), running now. The negotiation opening is the E2 in-kind pledge: Moments in Communities, value to be determined. Five-year ACT envelope target roughly 450k-750k AUD, of which a contractually protected share is community payments. Pitch decisions #3 (editor role) and #4 (storyteller payment rate) must settle with Nick BEFORE requesting the Palmer conversation; deadline targets landing it before relay departure 28 Jun. The relay tour through Tennant Creek IS Year 1 engagement for a grant-named site, captured before any grant dollar is invoiced. Sources: thoughts/shared/proposals/2026-06-05-mrff-five-year-partnership-plan.md + 2026-06-05-mrff-climate-mental-health-el-goods-alignment.md (empathy-ledger-v2 repo).",
+      "projects_funded": []
     }
   },
   "stages": {
@@ -331,10 +886,24 @@
     "procurement-prospect": "Not a grant funder — a buyer under procurement programs."
   },
   "themes_glossary": [
-    "systems-change", "indigenous-led", "evidence-based", "place-based",
-    "enterprise", "unit-economics", "scalable", "social-investment",
-    "education", "youth-voice", "community-led", "institutional-reform",
-    "regional", "creative-practice", "youth-pathways", "human-rights",
-    "first-nations", "institutional-accountability", "indigenous-procurement"
+    "systems-change",
+    "indigenous-led",
+    "evidence-based",
+    "place-based",
+    "enterprise",
+    "unit-economics",
+    "scalable",
+    "social-investment",
+    "education",
+    "youth-voice",
+    "community-led",
+    "institutional-reform",
+    "regional",
+    "creative-practice",
+    "youth-pathways",
+    "human-rights",
+    "first-nations",
+    "institutional-accountability",
+    "indigenous-procurement"
   ]
 }

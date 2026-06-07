@@ -1,0 +1,226 @@
+{
+  "pipelineId": "FjMyJM3YzWQFmKqR9fur",
+  "removedAt": "2026-05-27T05:44:26.755Z",
+  "sets": {
+    "safe": false,
+    "funders": true,
+    "extras": true,
+    "malala": false
+  },
+  "records": [
+    {
+      "why": "OCS Basket Bed",
+      "id": "TFFJR5Tnm62kBHR9pdvb",
+      "name": "Our Community Shed Incorporated — Goods Basket Bed v1.3",
+      "value": 13500,
+      "stageId": "0100d504-3108-415c-82fd-85a66192ef1c",
+      "contactId": "SYhvJjn05QVkvbFJPhGv",
+      "contactName": "Coordinator — Our Community Shed",
+      "email": "coordinator@ourshed.org",
+      "tags": [
+        "goods",
+        "goods-partner",
+        "goods-newsletter",
+        "act-gd",
+        "project:act-gd",
+        "goods-steady"
+      ]
+    },
+    {
+      "why": "OCS Washing Machine",
+      "id": "FPckXyGg46VuHmyj2Rdu",
+      "name": "Our Community Shed Incorporated — Goods Indestructible Washing Machine v1",
+      "value": 6765,
+      "stageId": "0100d504-3108-415c-82fd-85a66192ef1c",
+      "contactId": "SYhvJjn05QVkvbFJPhGv",
+      "contactName": "Coordinator — Our Community Shed",
+      "email": "coordinator@ourshed.org",
+      "tags": [
+        "goods",
+        "goods-partner",
+        "goods-newsletter",
+        "act-gd",
+        "project:act-gd",
+        "goods-steady"
+      ]
+    },
+    {
+      "why": "Rotary Greate Bed",
+      "id": "euhcwgBRlGIBar7U4QUs",
+      "name": "Rotary Eclub Outback Australia, Division 9560, — Goods Greate Bed v1",
+      "value": 82500,
+      "stageId": "835065e8-c952-4cfe-9228-5e8625d100ae",
+      "contactId": "huXguIGvyFHkixustqey",
+      "contactName": "Accounts Rotary Eclub Outback Australia, Division 9560",
+      "email": null,
+      "tags": [
+        "goods",
+        "auto-created-from-xero",
+        "act-gd",
+        "project:act-gd",
+        "goods-cold"
+      ]
+    },
+    {
+      "why": "Mala'la Basket Bed",
+      "id": "JrbJMR3rSyijKrFp21AI",
+      "name": "Mala’la Health Service Aboriginal Corporation — Goods Basket Bed v2.1",
+      "value": 5434,
+      "stageId": "0100d504-3108-415c-82fd-85a66192ef1c",
+      "contactId": "Z6POQ8e2wtBKSWDuPLEx",
+      "contactName": "Accounts Mala’la Health Service Aboriginal Corporation",
+      "email": null,
+      "tags": [
+        "goods",
+        "auto-created-from-xero",
+        "act-gd",
+        "project:act-gd"
+      ]
+    },
+    {
+      "why": "Centrecorp Plant",
+      "id": "Ln5qUxl2w9o2gjp0w2Py",
+      "name": "Centrecorp Foundation — Goods Production Plant part 1",
+      "value": 84700,
+      "stageId": "e23847c3-5f74-4da6-a907-6c3d6d45008c",
+      "contactId": "ehnCEv62bCaGNTd1QuGp",
+      "contactName": "Randle Walker",
+      "email": "randle@centrecorp.com.au",
+      "tags": [
+        "goods",
+        "goods-supporter",
+        "goods-newsletter",
+        "act-gd",
+        "project:act-gd",
+        "project:act-ca",
+        "goods-hot"
+      ]
+    },
+    {
+      "why": "Centrecorp Basket Bed",
+      "id": "DM0gItqBcftcPFO4Qwj3",
+      "name": "Centrecorp Foundation — Goods Basket Bed v1.3",
+      "value": 37620,
+      "stageId": "0100d504-3108-415c-82fd-85a66192ef1c",
+      "contactId": "ehnCEv62bCaGNTd1QuGp",
+      "contactName": "Randle Walker",
+      "email": "randle@centrecorp.com.au",
+      "tags": [
+        "goods",
+        "goods-supporter",
+        "goods-newsletter",
+        "act-gd",
+        "project:act-gd",
+        "project:act-ca",
+        "goods-hot"
+      ]
+    },
+    {
+      "why": "Centrecorp Weave Bed",
+      "id": "lLkkIHMSpnvGPRxQu1vH",
+      "name": "Centrecorp Foundation — Goods Weave Bed v2.3 - Utopia Homelands",
+      "value": 85712,
+      "stageId": "0100d504-3108-415c-82fd-85a66192ef1c",
+      "contactId": "ehnCEv62bCaGNTd1QuGp",
+      "contactName": "Randle Walker",
+      "email": "randle@centrecorp.com.au",
+      "tags": [
+        "goods",
+        "goods-supporter",
+        "goods-newsletter",
+        "act-gd",
+        "project:act-gd",
+        "project:act-ca",
+        "goods-hot"
+      ]
+    },
+    {
+      "why": "Homeland Washing Machine",
+      "id": "sgGa5u8ehHHPFy6wq6PQ",
+      "name": "Homeland School Company — Goods. Indestructible Washing Machine v1.1",
+      "value": 4950,
+      "stageId": "835065e8-c952-4cfe-9228-5e8625d100ae",
+      "contactId": "hv7tFXO8UGDq3dMc98SG",
+      "contactName": "Accounts Homeland School Company",
+      "email": null,
+      "tags": [
+        "goods",
+        "auto-created-from-xero",
+        "act-gd",
+        "project:act-gd",
+        "goods-steady"
+      ]
+    },
+    {
+      "why": "Red Dust Basket Bed",
+      "id": "RPVzkVGszff6indJ3GDJ",
+      "name": "Red Dust Role Models Limited — Goods Basket Bed v1",
+      "value": 15950,
+      "stageId": "0100d504-3108-415c-82fd-85a66192ef1c",
+      "contactId": "3v2RCOhzU5fCgsxEDgff",
+      "contactName": "Fiona Scicluna",
+      "email": "fiona@reddust.org.au",
+      "tags": [
+        "goods",
+        "goods-supporter",
+        "goods-newsletter",
+        "act-gd",
+        "project:act-gd",
+        "goods-cooling"
+      ]
+    },
+    {
+      "why": "Julalikari Washing Machine",
+      "id": "mqWa6wCGCZUDK8bQs2L8",
+      "name": "Julalikari Council Aboriginal Corporation — Goods Indestructible Washing Machine v1",
+      "value": 19800,
+      "stageId": "0100d504-3108-415c-82fd-85a66192ef1c",
+      "contactId": "OSWHIOCG3vHdyAEHot6F",
+      "contactName": "GM Corporate — Julalikari",
+      "email": "gmcorporate@julalikari.com.au",
+      "tags": [
+        "goods",
+        "goods-supporter",
+        "goods-newsletter",
+        "act-gd",
+        "project:act-gd",
+        "goods-steady"
+      ]
+    },
+    {
+      "why": "PICC Stretch Bed (not Goods / ACT-PI)",
+      "id": "KoXLnuCmAxIp8Nrpeb0W",
+      "name": "Palm Island Community Company Limited (PICC) — Goods Stretch Bed v2.3",
+      "value": 36300,
+      "stageId": "835065e8-c952-4cfe-9228-5e8625d100ae",
+      "contactId": "f8sbjgfZo1oD0Je0yArk",
+      "contactName": "Accounts Palm Island Community Company Limited (PICC)",
+      "email": null,
+      "tags": [
+        "goods",
+        "auto-created-from-xero",
+        "act-gd",
+        "project:act-gd"
+      ]
+    },
+    {
+      "why": "Remote job forecast (stray $0)",
+      "id": "sogR69LPK8oNQzS2u7WC",
+      "name": "Remote job forecast opportunities",
+      "value": 0,
+      "stageId": "e5220eb2-be40-4e79-9571-6acae12285c7",
+      "contactId": "0kEs9BJmkmi7ZUc5haEX",
+      "contactName": "Kristy Bloomfield",
+      "email": "kristy.bloomfield@oonchiumpa.com.au",
+      "tags": [
+        "goods-newsletter",
+        "justicehub",
+        "partner",
+        "act-gd",
+        "act-jh",
+        "project:act-hv",
+        "project:act-gd"
+      ]
+    }
+  ]
+}

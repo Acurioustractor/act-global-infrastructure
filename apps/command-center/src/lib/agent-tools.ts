@@ -41,6 +41,12 @@ import {
 } from './tools/projects'
 
 import {
+  executeAddIdea,
+  executeTransitionIdeaStage,
+  executeSnoozeIdea,
+} from './tools/ideas'
+
+import {
   executeSaveDailyReflection,
   executeSearchPastReflections,
   executeSaveWritingDraft,
@@ -227,6 +233,17 @@ export async function executeTool(
       )
     case 'get_revenue_scoreboard':
       return await executeGetRevenueScoreboard()
+    // Pilot lifecycle tools (Pass 2B)
+    case 'add_idea':
+      return await executeAddIdea(
+        input as { text: string; category?: string; energy?: number; value_estimate?: number; owner?: string }
+      )
+    case 'transition_idea_stage':
+      return await executeTransitionIdeaStage(
+        input as { id: string; stage: 'idea' | 'scope' | 'fundraise' | 'start' | 'killed'; kill_reason?: string; force?: boolean }
+      )
+    case 'snooze_idea':
+      return await executeSnoozeIdea(input as { id: string; days: number; by_owner?: string })
     default:
       return JSON.stringify({ error: `Unknown tool: ${name}` })
   }

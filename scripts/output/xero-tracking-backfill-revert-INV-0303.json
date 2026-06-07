@@ -1,0 +1,113 @@
+[
+  {
+    "invoiceId": "ce6b2c32-be8a-4bb7-88fe-a1d8971119e4",
+    "invoiceNumber": "INV-0303",
+    "original": [
+      {
+        "Description": "Goods. Indestructible Washing Machine v1.1",
+        "UnitAmount": 4500,
+        "TaxType": "OUTPUT",
+        "TaxAmount": 900,
+        "LineAmount": 9000,
+        "AccountCode": "260",
+        "Tracking": [
+          {
+            "Name": "Project Tracking",
+            "Option": "ACT-JH — JusticeHub",
+            "TrackingCategoryID": "1a1ad7c5-249a-4b1f-842d-06ba2a63a0fe",
+            "TrackingOptionID": "ee944bac-5d00-4068-a4ec-26504abcddc7"
+          }
+        ],
+        "Quantity": 2,
+        "LineItemID": "226ccdda-ffc5-4f60-84c0-615c8566acba",
+        "AccountID": "24ed737e-e8c6-449e-83cc-597d0d680d06",
+        "ValidationErrors": []
+      },
+      {
+        "Description": "Goods Stretch Bed - Single Bed, Poles, Canvas",
+        "UnitAmount": 750,
+        "TaxType": "OUTPUT",
+        "TaxAmount": 3000,
+        "LineAmount": 30000,
+        "AccountCode": "260",
+        "Tracking": [
+          {
+            "Name": "Project Tracking",
+            "Option": "ACT-JH — JusticeHub",
+            "TrackingCategoryID": "1a1ad7c5-249a-4b1f-842d-06ba2a63a0fe",
+            "TrackingOptionID": "ee944bac-5d00-4068-a4ec-26504abcddc7"
+          }
+        ],
+        "Quantity": 40,
+        "LineItemID": "bc7c4986-5244-4f8f-99c2-baa09224623d",
+        "AccountID": "24ed737e-e8c6-449e-83cc-597d0d680d06",
+        "ValidationErrors": []
+      },
+      {
+        "Description": "Goods on Country Program Support - 1 Trip\nto train, build, test, document and make with\ncommunity. Inc travel, accommodation",
+        "UnitAmount": 8000,
+        "TaxType": "OUTPUT",
+        "TaxAmount": 800,
+        "LineAmount": 8000,
+        "AccountCode": "260",
+        "Tracking": [
+          {
+            "Name": "Project Tracking",
+            "Option": "ACT-JH — JusticeHub",
+            "TrackingCategoryID": "1a1ad7c5-249a-4b1f-842d-06ba2a63a0fe",
+            "TrackingOptionID": "ee944bac-5d00-4068-a4ec-26504abcddc7"
+          }
+        ],
+        "Quantity": 1,
+        "LineItemID": "03418c19-5a5d-4133-abb9-84b6c024b17b",
+        "AccountID": "24ed737e-e8c6-449e-83cc-597d0d680d06",
+        "ValidationErrors": []
+      },
+      {
+        "Description": "Delivery of Goods ex BNE - DRW - MNG",
+        "UnitAmount": 5900,
+        "TaxType": "OUTPUT",
+        "TaxAmount": 590,
+        "LineAmount": 5900,
+        "AccountCode": "260",
+        "Tracking": [
+          {
+            "Name": "Project Tracking",
+            "Option": "ACT-JH — JusticeHub",
+            "TrackingCategoryID": "1a1ad7c5-249a-4b1f-842d-06ba2a63a0fe",
+            "TrackingOptionID": "ee944bac-5d00-4068-a4ec-26504abcddc7"
+          }
+        ],
+        "Quantity": 1,
+        "LineItemID": "7b142d4f-633a-4acd-9558-374e60ae53fc",
+        "AccountID": "24ed737e-e8c6-449e-83cc-597d0d680d06",
+        "ValidationErrors": []
+      },
+      {
+        "Description": "Goods in Kind Partnership",
+        "UnitAmount": -14190,
+        "TaxType": "EXEMPTOUTPUT",
+        "TaxAmount": 0,
+        "LineAmount": -14190,
+        "AccountCode": "260",
+        "Tracking": [
+          {
+            "Name": "Project Tracking",
+            "Option": "ACT-JH — JusticeHub",
+            "TrackingCategoryID": "1a1ad7c5-249a-4b1f-842d-06ba2a63a0fe",
+            "TrackingOptionID": "ee944bac-5d00-4068-a4ec-26504abcddc7"
+          }
+        ],
+        "Quantity": 1,
+        "LineItemID": "e952cabe-790e-4b6d-aced-bae995a9a149",
+        "AccountID": "24ed737e-e8c6-449e-83cc-597d0d680d06",
+        "ValidationErrors": []
+      }
+    ],
+    "before": {
+      "Total": 44000,
+      "SubTotal": 38710,
+      "AmountDue": 44000
+    }
+  }
+]

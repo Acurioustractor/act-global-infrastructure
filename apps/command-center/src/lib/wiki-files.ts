@@ -85,6 +85,14 @@ export interface WikiStatus {
   }
 }
 
+export interface WikiSearchResultRecord {
+  path: string
+  title: string
+  snippet: string
+  section: string
+  score?: number
+}
+
 const CANONICAL_SECTION_ORDER = [
   'concepts',
   'projects',
@@ -114,6 +122,8 @@ const CANONICAL_SECTION_TITLES: Record<string, string> = {
 }
 
 const LEGACY_ALIASES: Record<string, string> = {
+  '.soul': 'concepts/soul',
+  'concepts/.soul': 'concepts/soul',
   act: 'concepts/act-identity',
   'the-farm': 'projects/act-farm',
   'the-studio': 'projects/act-studio',
@@ -358,19 +368,25 @@ export function renderWikiMarkdown(content: string) {
 
 export function searchCanonicalWiki(query: string) {
   const queryLower = query.toLowerCase()
-  const results: Array<{ path: string; title: string; snippet: string; section: string }> = []
+  const results: WikiSearchResultRecord[] = []
 
   for (const record of CANONICAL_RECORDS) {
-    const haystack = `${record.title}\n${record.content}`.toLowerCase()
+    const stem = record.path.split('/').pop() || record.path
+    const searchablePathText = `${record.path}\n${record.relativePath}\n${stem}\n.${stem}`
+    const bodyText = `${record.title}\n${record.content}`
+    const sourceText = `${bodyText}\n${searchablePathText}`
+    const haystack = sourceText.toLowerCase()
     if (!haystack.includes(queryLower)) continue
 
     const matchIndex = haystack.indexOf(queryLower)
-    const sourceText = `${record.title}\n${record.content}`
     const snippetStart = Math.max(0, matchIndex - 60)
     const snippetEnd = Math.min(sourceText.length, matchIndex + query.length + 120)
-    let snippet = sourceText.slice(snippetStart, snippetEnd).replace(/\n/g, ' ').trim()
-    if (snippetStart > 0) snippet = `...${snippet}`
-    if (snippetEnd < sourceText.length) snippet = `${snippet}...`
+    let snippet = `${record.title} — ${record.relativePath}`
+    if (matchIndex < bodyText.length) {
+      snippet = sourceText.slice(snippetStart, snippetEnd).replace(/\n/g, ' ').trim()
+      if (snippetStart > 0) snippet = `...${snippet}`
+      if (snippetEnd < sourceText.length) snippet = `${snippet}...`
+    }
 
     results.push({
       path: record.path,
@@ -383,6 +399,58 @@ export function searchCanonicalWiki(query: string) {
   return results
     .sort((a, b) => a.title.localeCompare(b.title))
     .slice(0, 20)
+}
+
+function normalizeSearchPath(value: string) {
+  return value
+    .trim()
+    .toLowerCase()
+    .replace(/^\/+|\/+$/g, '')
+    .replace(/\.md$/i, '')
+}
+
+function dotlessFinalSegment(value: string) {
+  return value
+    .split('/')
+    .map((part, index, parts) => (index === parts.length - 1 ? part.replace(/^\./, '') : part))
+    .join('/')
+}
+
+function isExactCanonicalMatch(query: string, result: WikiSearchResultRecord) {
+  const normalizedQuery = normalizeSearchPath(query)
+  const dotlessQuery = dotlessFinalSegment(normalizedQuery)
+  const stem = result.path.split('/').pop() || result.path
+  const titleSlug = result.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
+  const candidates = new Set([
+    normalizeSearchPath(result.path),
+    normalizeSearchPath(stem),
+    `.${normalizeSearchPath(stem)}`,
+    normalizeSearchPath(result.title),
+    titleSlug,
+  ])
+
+  return candidates.has(normalizedQuery) || candidates.has(dotlessQuery)
+}
+
+export function mergeWikiSearchResults(
+  query: string,
+  primaryResults: WikiSearchResultRecord[],
+  canonicalResults = searchCanonicalWiki(query),
+  limit = 20,
+) {
+  const results: WikiSearchResultRecord[] = []
+  const seen = new Set<string>()
+  const add = (result: WikiSearchResultRecord) => {
+    if (seen.has(result.path)) return
+    seen.add(result.path)
+    results.push(result)
+  }
+
+  canonicalResults.filter((result) => isExactCanonicalMatch(query, result)).forEach(add)
+  primaryResults.forEach(add)
+  canonicalResults.forEach(add)
+
+  return results.slice(0, limit)
 }
 
 export function getCanonicalWikiStatus(): WikiStatus | null {

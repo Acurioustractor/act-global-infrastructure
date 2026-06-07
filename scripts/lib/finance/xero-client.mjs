@@ -42,6 +42,7 @@ export async function createXeroClient(supabase, opts = {}) {
   const clientSecret = process.env.XERO_CLIENT_SECRET;
   const tenantId = process.env.XERO_TENANT_ID;
   const tokenFile = opts.tokenFile || path.join(process.cwd(), '.xero-tokens.json');
+  const envFile = opts.envFile || path.join(process.cwd(), '.env.local');
 
   if (!clientId || !clientSecret || !tenantId) {
     throw new Error('Missing XERO_CLIENT_ID, XERO_CLIENT_SECRET, or XERO_TENANT_ID');
@@ -124,6 +125,24 @@ export async function createXeroClient(supabase, opts = {}) {
           throw new Error(`Xero token rotation failed to persist — both file and Supabase save failed. Next run will use a revoked refresh token.`);
         }
       }
+    }
+
+    // Keep the legacy .env.local mirror current for older scripts and MCP
+    // wrapper fallbacks. Xero refresh tokens are single-use, so stale mirrors
+    // are the most common cause of 401/invalid_grant loops.
+    try {
+      if (existsSync(envFile)) {
+        let envBody = readFileSync(envFile, 'utf8');
+        const line = `XERO_REFRESH_TOKEN=${newRefreshToken}`;
+        if (/^XERO_REFRESH_TOKEN=/m.test(envBody)) {
+          envBody = envBody.replace(/^XERO_REFRESH_TOKEN=.*/m, line);
+        } else {
+          envBody = `${envBody.trimEnd()}\n${line}\n`;
+        }
+        writeFileSync(envFile, envBody);
+      }
+    } catch (e) {
+      console.warn(`[xero-client] Failed to update ${envFile}: ${e.message}`);
     }
   }
 

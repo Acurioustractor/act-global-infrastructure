@@ -20,6 +20,7 @@
 
 import { createGHLService } from './lib/ghl-api-service.mjs';
 import { createClient } from '@supabase/supabase-js';
+import { buildProjectTagMap, deriveProjectCodes } from './lib/project-code-resolver.mjs';
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // CONFIGURATION
@@ -119,6 +120,10 @@ async function syncContacts(supabase, ghl) {
   console.log('\n👥 Syncing Contacts...\n');
 
   try {
+    // Load canonical project-code lookup ONCE
+    const { directMap: projectTagMap } = await buildProjectTagMap(supabase);
+    console.log(`   Loaded ${projectTagMap.size} project tag mappings`);
+
     // Fetch all contacts from GHL
     const ghlContacts = await getAllGHLContacts(ghl);
     console.log(`   Found ${ghlContacts.length} contacts in GHL`);
@@ -139,7 +144,7 @@ async function syncContacts(supabase, ghl) {
     // Sync each contact
     for (const ghlContact of ghlContacts) {
       try {
-        const contactData = transformContactForSupabase(ghlContact);
+        const contactData = transformContactForSupabase(ghlContact, projectTagMap);
         const existingUpdatedAt = existingMap.get(ghlContact.id);
 
         const { error } = await supabase
@@ -192,10 +197,25 @@ async function getAllGHLContacts(ghl) {
   return allContacts;
 }
 
-function transformContactForSupabase(ghlContact) {
-  // Extract project tags
-  const projectTags = ['empathy-ledger', 'justicehub', 'the-harvest', 'act-farm', 'goods-on-country', 'bcv-residencies', 'act-studio'];
-  const projects = (ghlContact.tags || []).filter(tag => projectTags.includes(tag));
+// The GHL "Newsletter Consent" field (Yes/No) — the source of truth for opt-in.
+const NEWSLETTER_CONSENT_FIELD_ID = 'aVnqmajnysMtGYhLD0oA';
+function ghlConsentYes(ghlContact) {
+  const cf = ghlContact.customFields;
+  let val;
+  if (Array.isArray(cf)) {
+    const f = cf.find(x => x.id === NEWSLETTER_CONSENT_FIELD_ID || x.key === 'contact.newsletter_consent');
+    val = f?.value ?? f?.field_value;
+  } else if (cf && typeof cf === 'object') {
+    val = cf[NEWSLETTER_CONSENT_FIELD_ID] ?? cf['contact.newsletter_consent'] ?? cf.newsletter_consent;
+  }
+  return String(val ?? '').trim().toLowerCase() === 'yes';
+}
+
+function transformContactForSupabase(ghlContact, projectTagMap) {
+  // Derive canonical ACT-XX codes from tags via projects.ghl_tags + prefix rules
+  const projects = projectTagMap
+    ? deriveProjectCodes(ghlContact.tags, projectTagMap)
+    : [];
 
   // Determine engagement status from tags
   const engagementTags = (ghlContact.tags || []).filter(tag => tag.startsWith('engagement:'));
@@ -221,7 +241,11 @@ function transformContactForSupabase(ghlContact) {
     ghl_created_at: ghlContact.dateAdded,
     ghl_updated_at: ghlContact.dateUpdated,
     last_synced_at: new Date().toISOString(),
-    sync_status: 'synced'
+    sync_status: 'synced',
+    // Consent is STICKY: map GHL "Newsletter Consent = Yes" → true, but never write false
+    // here (omitting the key preserves an existing opt-in + its original timestamp; removal
+    // only happens via newsletter_unsubscribed_at). Source of truth = the GHL field.
+    ...(ghlConsentYes(ghlContact) ? { newsletter_consent: true } : {}),
   };
 }
 
@@ -273,8 +297,12 @@ async function syncOpportunities(supabase, ghl) {
           monetary_value: opp.monetaryValue,
           custom_fields: opp.customFields || {},
           assigned_to: opp.assignedTo,
-          ghl_created_at: opp.dateAdded,
-          ghl_updated_at: opp.dateUpdated,
+          // GHL v2 API returns createdAt/updatedAt (camelCase, not dateAdded/dateUpdated).
+          // lastStageChangeAt + lastStatusChangeAt are the real staleness signals.
+          ghl_created_at: opp.createdAt || opp.dateAdded || null,
+          ghl_updated_at: opp.updatedAt || opp.dateUpdated || null,
+          last_stage_change_at: opp.lastStageChangeAt || null,
+          last_status_change_at: opp.lastStatusChangeAt || null,
           last_synced_at: new Date().toISOString()
         };
 

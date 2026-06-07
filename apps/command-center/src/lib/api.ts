@@ -2806,6 +2806,18 @@ export interface MorningBriefingRelationship {
   projects: string[]
 }
 
+export interface MorningBriefingPriority {
+  id: string
+  title: string
+  priority: 'now' | 'next' | string
+  sourceType: string
+  projectCode?: string | null
+  dueDate?: string | null
+  score?: number | null
+  action?: string | null
+  value?: number | null
+}
+
 export interface MorningBriefingResponse {
   success: boolean
   generated: string
@@ -2854,6 +2866,27 @@ export interface MorningBriefingResponse {
     upcomingDeadlines: Array<{ name: string; provider: string; closesAt: string; fitScore: number; daysRemaining: number }>
     activeApplications: number
     pipelineValue: number
+  }
+  priorities?: {
+    items: MorningBriefingPriority[]
+    nowCount: number
+    nextCount: number
+    totalCount: number
+  }
+  pipeline?: {
+    totalOpportunities: number
+    totalValue: number
+    totalWeighted: number
+    byStage: Record<string, { count: number; value: number; weighted: number }>
+    topDeals: Array<{
+      title: string
+      stage: string
+      value: number
+      type?: string | null
+      source?: string | null
+      expectedClose?: string | null
+      projects: string[]
+    }>
   }
   summary: {
     urgentItems: number

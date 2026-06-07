@@ -103,6 +103,22 @@ function saveTokens(accessToken, refreshToken, expiresIn) {
   } catch (e) {
     console.warn('Could not save tokens locally:', e.message);
   }
+
+  try {
+    const envFile = path.join(process.cwd(), '.env.local');
+    if (existsSync(envFile)) {
+      let envBody = readFileSync(envFile, 'utf8');
+      const line = `XERO_REFRESH_TOKEN=${refreshToken}`;
+      if (/^XERO_REFRESH_TOKEN=/m.test(envBody)) {
+        envBody = envBody.replace(/^XERO_REFRESH_TOKEN=.*/m, line);
+      } else {
+        envBody = `${envBody.trimEnd()}\n${line}\n`;
+      }
+      writeFileSync(envFile, envBody);
+    }
+  } catch (e) {
+    console.warn('Could not update .env.local refresh token:', e.message);
+  }
 }
 
 /**
@@ -300,6 +316,16 @@ async function xeroRequest(endpoint, options = {}) {
           return xeroRequest(endpoint, options);
         }
         console.error('Token refresh failed');
+      } else if (response.status === 429) {
+        // Xero rate limit (60 calls/min). Honour Retry-After and back off, up to 6 times.
+        const retries = options._retries || 0;
+        if (retries < 6) {
+          const retryAfter = parseInt(response.headers.get('Retry-After') || '5', 10) || 5;
+          console.log(`   Rate limited (429) — waiting ${retryAfter}s then retrying (${retries + 1}/6)...`);
+          await new Promise(r => setTimeout(r, retryAfter * 1000));
+          return xeroRequest(endpoint, { ...options, _retries: retries + 1 });
+        }
+        console.error('Xero API 429 — retries exhausted');
       } else {
         const errorText = await response.text();
         console.error(`Xero API error: ${response.status} - ${errorText}`);
@@ -468,6 +494,39 @@ function detectProjectFromTracking(trackingCategories) {
 }
 
 /**
+ * Phase 3 (2026-05-30): Xero `Project Tracking` is the topmost source of truth.
+ * Returns the ACT-XX code ONLY when a line item carries a `Project Tracking`
+ * (or legacy `Project`) tag that resolves to a known code. Returns null
+ * otherwise — the caller must then PRESERVE the existing mirror `project_code`
+ * (hybrid rule: Xero-where-present, else keep existing). Deliberately excludes
+ * Business Divisions and text/contact heuristics: those are the drift-prone
+ * guesses Phase 3 moves away from. ~71% of income is in locked periods and
+ * cannot carry a Xero tag, so a hard flip would erase historical classification.
+ */
+function detectProjectFromXeroTracking(trackingCategories) {
+  if (!trackingCategories?.length) return null;
+  for (const tracking of trackingCategories) {
+    const catName = tracking.Name || '';
+    if (catName !== 'Project Tracking' && catName !== 'Project') continue;
+    const trackingValue = (tracking.Option || '').trim();
+    if (!trackingValue) continue;
+    // Direct ACT-XX prefix, e.g. "ACT-GD — Goods"
+    if (trackingValue.startsWith('ACT-')) {
+      const code = trackingValue.split(/\s*[—–-]\s*/)[0].trim();
+      if (PROJECT_CODES.projects?.[code]) return code;
+    }
+    // Resolve via xero_tracking field / aliases
+    const trackingLower = trackingValue.toLowerCase();
+    for (const [code, proj] of Object.entries(PROJECT_CODES.projects || {})) {
+      if ((proj.xero_tracking || '').toLowerCase() === trackingLower) return code;
+      const aliases = (proj.xero_tracking_aliases || []).map(a => a.toLowerCase());
+      if (aliases.includes(trackingLower)) return code;
+    }
+  }
+  return null;
+}
+
+/**
  * Detect project code from reference or description text
  */
 function detectProjectFromText(text) {
@@ -538,20 +597,20 @@ async function syncInvoices(options = {}) {
   console.log('  Syncing Invoices from Xero');
   console.log('=========================================\n');
 
-  const daysBack = options.days || 90;
-  const since = new Date(Date.now() - daysBack * 24 * 60 * 60 * 1000);
-  const sinceStr = since.toISOString().split('T')[0];
-
-  console.log(`   Fetching invoices since: ${sinceStr} (${daysBack} days)`);
-
-  // Build where clause for date filter
-  const whereClause = `Date>=DateTime(${since.getFullYear()},${since.getMonth() + 1},${since.getDate()})`;
+  // Incremental by MODIFICATION date (If-Modified-Since) catches retro edits to old
+  // invoices (recodes/voids/reconciles) that a Date-windowed pull silently misses.
+  // Legacy Date>= window is used only when --days=N is explicitly passed (deep pulls).
+  const { headers: reqHeaders, label: modeLabel, whereClause } = buildFetchScope(options);
+  console.log(`   Fetching invoices (${modeLabel})`);
 
   // Paginate to get full line items with tracking categories
   let allInvoices = [];
   let page = 1;
   while (true) {
-    const data = await xeroRequest(`Invoices?where=${encodeURIComponent(whereClause)}&order=Date DESC&page=${page}`);
+    const q = whereClause
+      ? `Invoices?where=${encodeURIComponent(whereClause)}&order=Date DESC&page=${page}`
+      : `Invoices?order=Date DESC&page=${page}`;
+    const data = await xeroRequest(q, { headers: reqHeaders });
     if (!data?.Invoices?.length) break;
     allInvoices = allInvoices.concat(data.Invoices);
     if (data.Invoices.length < 100) break;
@@ -584,9 +643,28 @@ async function syncInvoices(options = {}) {
 
   for (const invoice of allInvoices) {
     try {
-      // Detect project code
+      // Detect project code (broad heuristic — kept for the match-rate stat only)
       const projectCode = detectProjectCode(invoice);
       if (projectCode) stats.invoices.matched_projects++;
+
+      // Phase 3: derive project_code FROM the authoritative Xero `Project Tracking`
+      // tag (hybrid — Xero-where-present, else preserve the mirror's existing code).
+      const allInvoiceTracking = invoice.LineItems?.flatMap(l => l.Tracking || []) || [];
+      const xeroTrackingCode = detectProjectFromXeroTracking(allInvoiceTracking);
+      // MANUAL-TAG GUARD: never overwrite a user's manual retag from our UI.
+      let preserveManualTag = false;
+      if (supabase && xeroTrackingCode && invoice.InvoiceID) {
+        try {
+          const { data: existingRow } = await supabase
+            .from('xero_invoices')
+            .select('project_code_source')
+            .eq('xero_id', invoice.InvoiceID)
+            .maybeSingle();
+          if (existingRow?.project_code_source && String(existingRow.project_code_source).startsWith('manual')) {
+            preserveManualTag = true;
+          }
+        } catch (_e) { /* best-effort; fall through */ }
+      }
 
       // Match contact to GHL
       const contactId = await matchContactToGHL(
@@ -617,10 +695,19 @@ async function syncInvoices(options = {}) {
         contact_xero_id: invoice.Contact?.ContactID,
         status: invoice.Status,
         type: invoice.Type, // ACCREC or ACCPAY
+        // Phase 3: write project_code ONLY when Xero carries a Project Tracking tag
+        // and the row isn't manually tagged. Otherwise omit it so the upsert
+        // preserves the mirror's existing project_code (taggers/manual/historical).
+        ...(xeroTrackingCode && !preserveManualTag ? { project_code: xeroTrackingCode, project_code_source: 'xero_tracking' } : {}),
         total: parseFloat(invoice.Total) || 0,
         subtotal: parseFloat(invoice.SubTotal) || 0,
         total_tax: parseFloat(invoice.TotalTax) || 0,
-        amount_due: parseFloat(invoice.AmountDue) || 0,
+        // Phantom-receivable guard: a VOIDED/DELETED invoice owes nothing. Force
+        // amount_due to 0 so the mirror can never persist a stale "due" for a
+        // voided row (root cause of the 2026-05-30 $375,100 phantom receivables).
+        amount_due: (invoice.Status === 'VOIDED' || invoice.Status === 'DELETED')
+          ? 0
+          : (parseFloat(invoice.AmountDue) || 0),
         amount_paid: parseFloat(invoice.AmountPaid) || 0,
         currency_code: invoice.CurrencyCode || 'AUD',
         date: parseXeroDate(invoice.Date),
@@ -645,14 +732,15 @@ async function syncInvoices(options = {}) {
           .upsert(record, { onConflict: 'xero_id' });
 
         if (error) {
+          // Log first error for debugging
+          if (stats.invoices.errors === 0) {
+            console.error('\n   First error:', error.code, error.message);
+            console.error('   Detail:', JSON.stringify(error).slice(0, 500));
+          }
           if (error.code === '42P01') {
             console.error('   Table xero_invoices does not exist');
             console.log('   Run migration: supabase db push');
             return { synced: 0, errors: 1, needsMigration: true };
-          }
-          // Log first error for debugging
-          if (stats.invoices.errors === 0) {
-            console.error('\n   First error:', error.code, error.message);
           }
           throw error;
         }
@@ -690,21 +778,19 @@ async function syncTransactions(options = {}) {
   console.log('  Syncing Bank Transactions from Xero');
   console.log('=========================================\n');
 
-  const daysBack = options.days || 90;
-  const since = new Date(Date.now() - daysBack * 24 * 60 * 60 * 1000);
-  const sinceStr = since.toISOString().split('T')[0];
-
-  console.log(`   Fetching transactions since: ${sinceStr} (${daysBack} days)`);
-
-  // Build where clause for date filter
-  const whereClause = `Date>=DateTime(${since.getFullYear()},${since.getMonth() + 1},${since.getDate()})`;
+  // Same incremental-by-modification-date scope as invoices (see buildFetchScope).
+  const { headers: reqHeaders, label: modeLabel, whereClause } = buildFetchScope(options);
+  console.log(`   Fetching transactions (${modeLabel})`);
 
   // Paginate to get full line items with tracking categories
   // The list endpoint omits Tracking[] unless we paginate with page=N
   let allTransactions = [];
   let page = 1;
   while (true) {
-    const data = await xeroRequest(`BankTransactions?where=${encodeURIComponent(whereClause)}&order=Date DESC&page=${page}`);
+    const q = whereClause
+      ? `BankTransactions?where=${encodeURIComponent(whereClause)}&order=Date DESC&page=${page}`
+      : `BankTransactions?order=Date DESC&page=${page}`;
+    const data = await xeroRequest(q, { headers: reqHeaders });
     if (!data?.BankTransactions?.length) break;
     allTransactions = allTransactions.concat(data.BankTransactions);
     if (data.BankTransactions.length < 100) break; // last page
@@ -764,19 +850,31 @@ async function syncTransactions(options = {}) {
       };
 
       // Build record matching schema
-      // Only include project_code if Xero has tracking — never overwrite tagger-set codes with null
-      // ZOMBIE GUARD: when Xero status is DELETED or VOIDED, force has_attachments=true so
-      // downstream consumers (BAS gap sweep, matcher, bill-to-txn sync) treat them as already handled.
-      // Without this, deleted shadows re-introduce themselves on every sync and pollute every report.
+      // Only include project_code if Xero has tracking AND the existing row isn't manually tagged.
+      // Manual tags (source starts with 'manual') are user overrides and must NEVER be overwritten.
       const status = txn.Status || 'ACTIVE';
       const isZombie = status === 'DELETED' || status === 'VOIDED';
+      // MANUAL-TAG GUARD: if user has retagged this row in our UI, leave project_code alone.
+      let preserveManualTag = false;
+      if (supabase && projectCode && txn.BankTransactionID) {
+        try {
+          const { data: existingRow } = await supabase
+            .from('xero_transactions')
+            .select('project_code_source')
+            .eq('xero_transaction_id', txn.BankTransactionID)
+            .maybeSingle();
+          if (existingRow?.project_code_source && String(existingRow.project_code_source).startsWith('manual')) {
+            preserveManualTag = true;
+          }
+        } catch (_e) { /* best-effort; fall through */ }
+      }
       const record = {
         xero_transaction_id: txn.BankTransactionID,
         xero_tenant_id: XERO_TENANT_ID,
         type: txn.Type, // RECEIVE, SPEND, TRANSFER
         contact_name: txn.Contact?.Name,
         bank_account: txn.BankAccount?.Name,
-        ...(projectCode ? { project_code: projectCode, project_code_source: 'xero_tracking' } : {}),
+        ...(projectCode && !preserveManualTag ? { project_code: projectCode, project_code_source: 'xero_tracking' } : {}),
         total: parseFloat(txn.Total) || 0,
         status,
         date: parseXeroDate(txn.Date),
@@ -894,6 +992,19 @@ async function fullSync(options = {}) {
   // Log the sync
   await logSync('full', results);
 
+  // S2 2026-05-21: refresh materialized per-project quarterly view so downstream
+  // dashboards (Notion + command-center) read fresh aggregates.
+  try {
+    const { error: mvError } = await supabase.rpc('refresh_mv_project_quarter_position');
+    if (mvError) {
+      console.warn(`   ⚠ Failed to refresh mv_project_quarter_position: ${mvError.message}`);
+    } else {
+      console.log('   ✓ Refreshed mv_project_quarter_position');
+    }
+  } catch (err) {
+    console.warn(`   ⚠ Failed to refresh mv_project_quarter_position: ${err.message}`);
+  }
+
   // Summary
   const duration = ((Date.now() - stats.startTime) / 1000).toFixed(1);
 
@@ -973,10 +1084,46 @@ Token Refresh:
 // CLI
 // ============================================================================
 
+// ── Incremental sync scope (modification-date based) ─────────────────────────
+const SYNC_STATE_FILE = '.xero-sync-state.json';
+function readSyncState() {
+  try { return existsSync(SYNC_STATE_FILE) ? JSON.parse(readFileSync(SYNC_STATE_FILE, 'utf8')) : null; }
+  catch { return null; }
+}
+function writeSyncState(lastSyncIso) {
+  try { writeFileSync(SYNC_STATE_FILE, JSON.stringify({ lastSync: lastSyncIso, updatedAt: new Date().toISOString() }, null, 2)); }
+  catch (e) { console.warn('   Could not persist sync state:', e.message); }
+}
+/**
+ * Decide the fetch scope. Default = incremental by Xero modification date
+ * (If-Modified-Since) so retro edits to OLD invoices (recodes/voids/reconciles)
+ * are caught. --days=N forces the legacy Date>= window for deep/backfill pulls.
+ */
+function buildFetchScope(options = {}) {
+  if (options.modifiedSince) {
+    const iso = new Date(options.modifiedSince).toISOString().split('.')[0]; // Xero header wants no millis
+    return { headers: { 'If-Modified-Since': iso }, label: `modified since ${iso}`, whereClause: null };
+  }
+  const daysBack = options.days || 90;
+  const since = new Date(Date.now() - daysBack * 24 * 60 * 60 * 1000);
+  return {
+    headers: {},
+    label: `Date >= ${since.toISOString().split('T')[0]} (${daysBack}d window)`,
+    whereClause: `Date>=DateTime(${since.getFullYear()},${since.getMonth() + 1},${since.getDate()})`,
+  };
+}
+
 async function main() {
   const command = process.argv[2] || 'help';
   const daysArg = process.argv.find(a => a.startsWith('--days='));
-  const days = daysArg ? parseInt(daysArg.split('=')[1]) : 90;
+  const days = daysArg ? parseInt(daysArg.split('=')[1]) : null;
+
+  // Default = incremental by modification date (catches retro edits to old records).
+  // --days=N forces the legacy Date-window deep pull (backfills).
+  const runStartIso = new Date().toISOString();
+  const syncState = readSyncState();
+  const incrementalFallback = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
+  const syncOptions = days ? { days } : { modifiedSince: syncState?.lastSync || incrementalFallback };
 
   console.log('=========================================');
   console.log('  Xero -> Supabase Financial Sync');
@@ -1011,17 +1158,20 @@ async function main() {
 
   switch (command) {
     case 'invoices':
-      await syncInvoices({ days });
+      await syncInvoices(syncOptions);
       await logSync('invoices', { invoices: stats.invoices });
+      if (!days) writeSyncState(runStartIso);
       break;
 
     case 'transactions':
-      await syncTransactions({ days });
+      await syncTransactions(syncOptions);
       await logSync('transactions', { transactions: stats.transactions });
+      if (!days) writeSyncState(runStartIso);
       break;
 
     case 'full':
-      await fullSync({ days });
+      await fullSync(syncOptions);
+      if (!days) writeSyncState(runStartIso);
       break;
 
     case 'setup':

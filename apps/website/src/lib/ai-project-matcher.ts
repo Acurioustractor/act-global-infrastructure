@@ -74,7 +74,7 @@ Consider:
 5. Whether featuring this storyteller would strengthen the project narrative`;
 
     const message = await anthropic.messages.create({
-      model: 'claude-sonnet-4-5-20250929',
+      model: 'claude-sonnet-4-6',
       max_tokens: 1024,
       messages: [
         {
@@ -181,7 +181,7 @@ Respond in JSON format:
 }`;
 
     const message = await anthropic.messages.create({
-      model: 'claude-sonnet-4-5-20250929',
+      model: 'claude-sonnet-4-6',
       max_tokens: 2048,
       messages: [
         {
@@ -248,7 +248,7 @@ Respond in JSON:
 }`;
 
     const message = await anthropic.messages.create({
-      model: 'claude-sonnet-4-5-20250929',
+      model: 'claude-sonnet-4-6',
       max_tokens: 1024,
       messages: [
         {

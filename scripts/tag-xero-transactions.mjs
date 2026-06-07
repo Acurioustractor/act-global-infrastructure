@@ -229,10 +229,13 @@ async function main() {
   while (true) {
     const { data, error } = await supabase
       .from('xero_transactions')
-      .select('id, xero_transaction_id, contact_name, total, date, project_code, type, is_reconciled')
+      .select('id, xero_transaction_id, contact_name, total, date, project_code, project_code_source, type, is_reconciled')
       .is('project_code', null)
       .not('contact_name', 'is', null)
       .in('type', ['SPEND', 'RECEIVE', 'SPEND-TRANSFER'])
+      // MANUAL-TAG GUARD: skip rows the user manually untagged (e.g. 'manual-untagged-pre-jan26',
+      // 'manual-duplicate-*'). Without this, auto-tagger keeps re-tagging untagged rows on every run.
+      .not('project_code_source', 'like', 'manual%')
       .order('date', { ascending: false })
       .range(page * PAGE_SIZE, (page + 1) * PAGE_SIZE - 1);
     if (error) { log(`ERROR: ${error.message}`); break; }

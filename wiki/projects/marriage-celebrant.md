@@ -1,3 +1,15 @@
+---
+title: Marriage Celebrant
+status: Active
+canonical_slug: marriage-celebrant
+canonical_code: ACT-CB
+tier: satellite
+website_slug: marriage-celebrant
+website_path: /projects/marriage-celebrant
+public_surface: project
+cluster: marriage-celebrant
+---
+
 # Marriage Celebrant
 
 > Ben Knight's civil marriage celebrant practice, connecting ceremony with community.

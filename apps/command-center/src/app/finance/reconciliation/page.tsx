@@ -399,13 +399,36 @@ export default function ReconciliationPage() {
               <ArrowLeft className="h-5 w-5" />
             </Link>
             <div>
-              <h1 className="text-2xl font-bold text-white flex items-center gap-2">
-                <Shield className="h-6 w-6 text-cyan-400" />
-                Spending Intelligence
+              <p className="flex items-center gap-2 text-[10px] uppercase tracking-[0.22em] text-white/40">
+                <Shield className="h-3 w-3 text-cyan-400" />
+                Spending Intelligence · {QUARTER_LABELS[quarter]}
+              </p>
+              <h1 className="mt-1 flex items-baseline gap-3 text-white">
+                <span
+                  className={cn(
+                    'text-5xl font-bold tabular-nums tracking-tight',
+                    bas
+                      ? bas.coveragePct >= 90
+                        ? 'text-emerald-400'
+                        : bas.coveragePct >= 70
+                          ? 'text-amber-400'
+                          : 'text-rose-400'
+                      : 'text-white/50',
+                  )}
+                >
+                  {bas ? `${bas.coveragePct}%` : '—'}
+                </span>
+                <span className="text-lg font-medium text-white/70">receipts matched</span>
               </h1>
-              <p className="text-sm text-white/50 mt-0.5">
-                {items.length > 0 ? `${items.length} items need attention` : 'All clear'}
-                {' · '}{QUARTER_LABELS[quarter]}
+              <p className="mt-0.5 text-sm text-white/50">
+                {items.length > 0 ? `${items.length} items still need attention` : 'All clear — nothing in the inbox'}
+                {bas && (
+                  <>
+                    {' · '}
+                    {bas.covered} of {bas.total} covered
+                    {bas.unmatched > 0 ? ` · ${bas.unmatched} unmatched` : ''}
+                  </>
+                )}
               </p>
             </div>
           </div>
@@ -740,7 +763,7 @@ export default function ReconciliationPage() {
 
       {/* Quick Links */}
       <div className="grid grid-cols-3 gap-4 mt-6">
-        <Link href="/finance/tagger" className="glass-card p-4 hover:bg-white/5 transition-colors group">
+        <Link href="/finance/tagger-v2" className="glass-card p-4 hover:bg-white/5 transition-colors group">
           <div className="flex items-center gap-3">
             <Tag className="h-5 w-5 text-amber-400" />
             <div>

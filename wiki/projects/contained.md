@@ -1,16 +1,16 @@
 ---
 title: CONTAINED
 status: Active
-date: 2026-04-11
-entity_type: work
-tagging_mode: own-code
 canonical_slug: contained
 canonical_code: ACT-CN
+tier: studio
 website_slug: contained
 website_path: /projects/contained
 public_surface: work
 cluster: justicehub
-parent_project: justicehub
+date: 2026-04-11
+entity_type: work
+tagging_mode: own-code
 empathy_ledger_key: contained
 ---
 
@@ -21,6 +21,25 @@ empathy_ledger_key: contained
 **Status:** Active | **Code:** ACT-CN | **Tier:** Satellite
 
 > 📣 **Narrative claims store:** [`wiki/narrative/contained/`](../narrative/contained/INDEX.md) — every public argument we have made about CONTAINED, what we have already said, and what we have not yet said. Read this before drafting any new post or op-ed. Run `node scripts/narrative-draft.mjs contained` to assemble a draft brief from the under-deployed claims.
+
+## Goal Stack
+
+> The alignment chain from purpose to this week. The top three layers (**Purpose · 10-year · 12-month**) are durable — change them rarely. The lower layers (**Quarter · Month · Dominoes**) are *living* — refreshed each week in the [[flow-flywheel|Flow Flywheel]] ritual. CONTAINED's weekly dominoes are tracked in Notion under code **ACT-CN**.
+
+| Layer | Goal | Proof it moved |
+|---|---|---|
+| **Purpose** | Make the cost and human reality of youth detention impossible to ignore, and route the attention it generates toward community-led alternatives already working. | — |
+| **10-year** | A nationally recognised touring + permanent justice experience that has measurably shifted public and political framing and helped move funding from detention toward community alternatives. | Framing shift; funding redirected; permanent installs |
+| **12-month** (FY26→27) | Complete the FY26 national tour (Adelaide confirmed + Mount Druitt + 1–2 stops) and establish CONTAINED as a self-sustaining licensed exhibition asset that funds the wider JusticeHub campaign. | Stops delivered; tour funding closed; rental income > production cost |
+| **This quarter** (Apr–Jun 2026) | Deliver Adelaide (Reintegration Puzzle Conference, 24–25 Jun) cleanly; convert the strongest demand states (QLD, NSW) into the next confirmed stop. | Adelaide run; next stop held with a date |
+| **This month** (May 2026) | *Lock Adelaide logistics and secure funding for the next confirmed stop.* — refine each cycle | |
+
+**This week's dominoes** (max 3 — set in the ritual, tracked in Notion · ACT-CN):
+1. *Finalise the CONTAINED host/partner brief (one-pager + budget ladder) so no conversation starts from scratch.*
+2. *Send one direct ask to a top QLD demand contact to convert a signal into a held date.*
+3. *Confirm Adelaide run-of-show + documentation (photo/video) plan.*
+
+*Last reviewed: 2026-05-26 — update the lower three layers each [[flow-flywheel|Flow Flywheel]] cycle.*
 
 ## The Build
 
@@ -45,7 +64,7 @@ The numbers that power CONTAINED come directly from [[justicehub|JusticeHub]] da
 | Youth detention | $1.1–1.3 million ($3,320/day) | 15.5% |
 | Community-led alternatives | ~$58,000 ($150/day) | 78% |
 
-This isn't abstracted — it's drawn from 145,242 justice funding records and 570 evidence items in ALMA (Australian Living Map of Alternatives) tracked in [[civicgraph|CivicGraph]]. CONTAINED makes that data walk off the screen and into the room.
+This isn't abstracted — it's drawn from 145,242 justice funding records and 570 evidence items held in ALMA-governed review records tracked in [[civicgraph|CivicGraph]]. CONTAINED makes that data walk off the screen and into the room.
 
 ## The Form
 

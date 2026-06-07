@@ -38,6 +38,15 @@ When you ask "does this bank transaction have a receipt?" the answer can come th
 
 **Anything not in paths 1-6 is a genuine missing receipt and needs chasing.**
 
+## Money guards (BAS scoping) — read before computing any GST/coverage total
+
+1. **Two-account rule.** ACT business money lives only in **NAB Visa ACT #8815** + **NJ Marchesi T/as ACT Everyday**. Exclude `NM Personal` and `NJ Marchesi T/as ACT Maximiser` from BAS coverage and GST totals.
+2. **DELETED/voided rows don't count.** Every GST/coverage sum over `xero_invoices` / `xero_transactions` must exclude `status='DELETED'` (NULL-safe `IS DISTINCT FROM 'DELETED'`) — a voided row is neither a supply nor an acquisition.
+3. **Sum GST in raw SQL, not supabase-js.** A quarter is >1000 rows; supabase-js `.select()` silently truncates at 1000 (PostgREST cap). `execute_sql` / `psql` `SUM()` is not capped — use it for any GST figure.
+4. **Per-row review is the workbench.** `bas-completeness.mjs` classifies the quarter; per-row receipt/project assignment happens on `/finance/workbench` (Receipt gaps card), which stamps `manual_workbench` so the nightly auto-taggers don't overwrite the call.
+
+**Verify:** reconcile any GST-collected / GST-paid figure against the canonical accrual P&L (`project_monthly_financials`) before it goes near a lodgement. A silent wrong number is the expensive BAS failure.
+
 ## Commands (run from repo root)
 
 ### Prepare a quarter

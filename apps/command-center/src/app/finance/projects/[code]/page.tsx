@@ -25,6 +25,7 @@ import {
   CheckCircle2,
   Circle,
   ExternalLink,
+  Gauge,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { AskAboutThis } from '@/components/ask-about-this'
@@ -158,6 +159,15 @@ interface ProjectFinancialsData {
   expenseCategories: Record<string, number>
   revenueCategories: Record<string, number>
   budgetVsActual: BudgetVsActual | null
+  stageBudget?: {
+    zones: Array<{ id: string; label: string; stage: number; garden: boolean; budget: number; actual: number; variance: number; utilisationPct: number | null }>
+    garden: { budget: number; actual: number }
+    stage1: { budget: number; actual: number }
+    stage2: { budget: number; actual: number }
+    totalBudget: number
+    totalActual: number
+    unallocated: number
+  } | null
   rdSummary: RdSummary
   salaryAllocations: SalaryAllocations
   revenueStreams: Array<{
@@ -185,10 +195,139 @@ interface ProjectFinancialsData {
   incomeByType: Record<string, IncomeTypeGroup>
   pipeline: PipelineItem[]
   pipelineWeightedTotal: number
+  pipelineRawCount?: number
+  // 2026-05-23: GHL pipelines (per-pipeline rollup from project_pipelines table)
+  ghlPipelines?: Array<{
+    pipelineName: string
+    openCount: number
+    wonCount: number
+    lostCount: number
+    openValueAud: number
+    wonValueAud: number
+    earliestOpenAt: string | null
+    latestActivityAt: string | null
+    stagesPresent: string[]
+    contactsCount: number
+    computedAt: string
+  }>
+  ghlPipelineTotals?: {
+    openCount: number
+    wonCount: number
+    openValueAud: number
+    wonValueAud: number
+    pipelinesActive: number
+  }
+  // 2026-05-23: supporters funding this project
+  projectSupporters?: Array<{
+    slug: string
+    name: string
+    tier: string
+    stage: string | null
+    totalPaidAud: number
+    outstandingAud: number
+    outstandingAlert: string
+    primaryContact: string | null
+    lastCommunicatedAt: string | null
+    daysSinceLastContact: number | null
+    openOppCount: number
+    openOppValueAud: number
+    wonOppCount: number
+    wonOppValueAud: number
+  }>
+  projectSupportersTotals?: {
+    count: number
+    totalPaidAud: number
+    totalOutstandingAud: number
+    critical: number
+  }
+  // 2026-05-23: funder briefs (QBE-HQ pattern)
+  funderBriefs?: Array<{
+    id: string
+    funderSlug: string
+    briefTitle: string | null
+    status: string
+    asksFromThem: Array<{ ask: string; source: string; due?: string; done?: boolean }>
+    askAmountAud: number | null
+    askOutcome: string | null
+    askStatus: string | null
+    alignmentStatus: 'PASS' | 'WARN' | 'FAIL'
+    alignmentNotes: string | null
+    procurementDeliveredCount: number | null
+    procurementUnit: string | null
+    procurementDemandCount: number | null
+    procurementNotes: string | null
+    strategyTheirPriorities: string[]
+    strategyOurClaims: string[]
+    nextMove: string | null
+    nextMoveOwner: string | null
+    nextMoveDue: string | null
+    notionHqUrl: string | null
+    lastFeedbackDate: string | null
+    lastFeedbackSummary: string | null
+  }>
   expenses: ExpenseItem[]
   expensesByCategory: Record<string, ExpenseCategoryGroup>
   topVendors: Array<{ vendor: string; total: number }>
   totalExpenseInvoices: number
+  auditAlerts?: Array<{ severity: 'high' | 'medium' | 'info'; title: string; detail: string; amount?: number; xeroLink?: string }>
+  notableFindings?: Array<{ severity: 'high' | 'medium' | 'info'; title: string; detail: string; amount?: number; xeroLink?: string }>
+  realExpenseRowCount?: number
+  realExpenseTotal?: number
+  // S4 2026-05-21: burn-rate + runway impact
+  burnMetrics?: {
+    projectBurn3moAvg: number
+    projectBurn12moAvg: number
+    burnAccelerationPct: number | null
+    projectShareOfBurnPct: number | null
+    orgBurn3moAvg: number
+    currentOrgBalance: number
+    projectRunwayMonths: number | null
+  }
+  // S1 2026-05-21: funder allocations
+  funding?: Array<{
+    allocationId: string
+    funder: string
+    grantRef: string | null
+    committed: number
+    drawn: number
+    remaining: number
+    drawnPct: number | null
+    status: 'proposed' | 'committed' | 'drawing' | 'closed' | 'withdrawn'
+    periodStart: string | null
+    periodEnd: string | null
+    pileTag: string | null
+    lastDrawnAt: string | null
+    drawdownCount: number
+    notes: string | null
+  }>
+  fundingSummary?: {
+    totalCommitted: number
+    totalDrawn: number
+    totalRemaining: number
+    activeAllocations: number
+    proposedAllocations: number
+    closedAllocations: number
+  }
+  // Item 4 2026-05-21: linked contacts
+  contacts?: Array<{
+    id: string
+    name: string
+    entityType: string | null
+    email: string | null
+    company: string | null
+    engagementStatus: string | null
+    tags: string[]
+    confidence: number | null
+    role: 'funder' | 'partner' | 'advisor' | 'lead' | 'responsive' | string
+    linkedAt: string
+  }>
+  contactsSummary?: {
+    total: number
+    funders: number
+    partners: number
+    advisors: number
+    leads: number
+  }
 }
 
 const INCOME_TYPE_CONFIG: Record<string, { label: string; icon: any; color: string }> = {
@@ -233,6 +372,9 @@ export default function ProjectFinancialsPage({
   const hasMonthly = (data?.monthly?.length ?? 0) > 0
   const hasInvoices = (data?.invoices?.length ?? 0) > 0
   const hasPipeline = (data?.pipeline?.length ?? 0) > 0
+  const hasGhlPipelines = (data?.ghlPipelines?.length ?? 0) > 0
+  const hasProjectSupporters = (data?.projectSupporters?.length ?? 0) > 0
+  const hasFunderBriefs = (data?.funderBriefs?.length ?? 0) > 0
 
   if (!data || (!hasMonthly && !hasInvoices && !hasPipeline)) {
     return (
@@ -270,16 +412,80 @@ export default function ProjectFinancialsPage({
         <ArrowLeft className="h-4 w-4" /> All Projects
       </Link>
 
-      <header className="mb-8">
-        <h1 className="text-2xl md:text-3xl font-bold text-white flex items-center gap-3">
-          <DollarSign className="h-8 w-8 text-green-400" />
-          {data.projectCode} — P&L
-        </h1>
-        <p className="text-white/50 mt-1">
-          {monthly.length} months of data ({monthly[0]?.month?.substring(0, 7)} to{' '}
-          {monthly[monthly.length - 1]?.month?.substring(0, 7)})
-        </p>
+      <header className="mb-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <div>
+          <h1 className="text-2xl md:text-3xl font-bold text-white flex items-center gap-3">
+            <DollarSign className="h-8 w-8 text-green-400" />
+            {data.projectCode} — P&L
+          </h1>
+          <p className="text-white/50 mt-1">
+            {monthly.length} months of data ({monthly[0]?.month?.substring(0, 7)} to{' '}
+            {monthly[monthly.length - 1]?.month?.substring(0, 7)})
+          </p>
+        </div>
+        {/* QW3 2026-05-21: cross-link to Notion pile page (based on first funding's pile_tag, else Money Framework) */}
+        {(() => {
+          const PILE_LINKS: Record<string, { href: string; label: string }> = {
+            voice: { href: 'https://www.notion.so/357ebcf981cf814f9ad3c02a7c9adbe6', label: 'Voice pile in Notion' },
+            flow: { href: 'https://www.notion.so/357ebcf981cf815e8926f8d4836ac3ff', label: 'Flow pile in Notion' },
+            ground: { href: 'https://www.notion.so/357ebcf981cf81419fc0e527e479932d', label: 'Ground pile in Notion' },
+            grants: { href: 'https://www.notion.so/357ebcf981cf81a28e19fa10b077ff7f', label: 'Grants pile in Notion' },
+          }
+          const firstPile = data.funding?.find((f) => f.pileTag)?.pileTag
+          const link = (firstPile && PILE_LINKS[firstPile]) || {
+            href: 'https://www.notion.so/357ebcf981cf8101bc12dd5eab9ebec5',
+            label: 'Money Framework in Notion',
+          }
+          return (
+            <a
+              href={link.href}
+              target="_blank"
+              rel="noreferrer"
+              className="px-3 py-1.5 rounded-lg text-xs bg-amber-500/10 text-amber-300 hover:text-amber-200 hover:bg-amber-500/20 transition-colors inline-flex items-center gap-1.5 self-start"
+              title={link.label}
+            >
+              {link.label} <ExternalLink className="h-3 w-3" />
+            </a>
+          )
+        })()}
       </header>
+
+      {/* Audit alerts + notable findings */}
+      {((data.auditAlerts?.length ?? 0) > 0 || (data.notableFindings?.length ?? 0) > 0) && (
+        <div className="mb-6 space-y-2">
+          {data.notableFindings?.map((f: any, i: number) => (
+            <div key={`nf-${i}`} className="glass-card border border-emerald-500/30 bg-emerald-500/5 p-3 flex items-start justify-between">
+              <div>
+                <div className="text-sm font-semibold text-emerald-200">{f.title}</div>
+                <div className="text-xs text-white/60 mt-0.5">{f.detail}</div>
+              </div>
+              {f.amount != null && <div className="text-sm font-bold tabular-nums text-emerald-200 whitespace-nowrap">{formatMoney(f.amount)}</div>}
+            </div>
+          ))}
+          {data.auditAlerts?.map((a: any, i: number) => (
+            <div key={`aa-${i}`} className={cn(
+              'glass-card border p-3 flex items-start justify-between',
+              a.severity === 'high' ? 'border-red-500/40 bg-red-500/5' :
+              a.severity === 'medium' ? 'border-amber-500/40 bg-amber-500/5' :
+              'border-white/20 bg-white/5'
+            )}>
+              <div className="flex-1">
+                <div className={cn(
+                  'text-sm font-semibold',
+                  a.severity === 'high' ? 'text-red-200' : a.severity === 'medium' ? 'text-amber-200' : 'text-white/80'
+                )}>{a.title}</div>
+                <div className="text-xs text-white/60 mt-0.5">{a.detail}</div>
+                {a.xeroLink && <a href={a.xeroLink} target="_blank" rel="noreferrer" className="text-xs text-blue-400 hover:underline mt-1 inline-block">open in Xero ↗</a>}
+              </div>
+              {a.amount != null && <div className="text-sm font-bold tabular-nums whitespace-nowrap ml-3">{formatMoney(a.amount)}</div>}
+            </div>
+          ))}
+          <div className="flex gap-3 text-xs text-white/40 pt-1">
+            <Link href={`/finance/projects/${data.projectCode}/transactions`} className="underline hover:text-white">→ full transaction ledger ({data.realExpenseRowCount} rows)</Link>
+            {data.realExpenseTotal != null && <span>Real cost commitment: <span className="text-white font-medium">{formatMoney(data.realExpenseTotal)}</span> (incl. bills, deduped where bank spend pays a bill)</span>}
+          </div>
+        </div>
+      )}
 
       {/* Summary Cards */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
@@ -333,6 +539,239 @@ export default function ProjectFinancialsPage({
           </>
         )}
       </div>
+
+      {/* S4 2026-05-21: Burn rate + runway impact */}
+      {data.burnMetrics && data.burnMetrics.projectBurn3moAvg > 0 && (
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+          <div className="glass-card p-5">
+            <div className="flex items-center justify-between mb-2">
+              <p className="text-xs uppercase tracking-wide text-white/40">3-month burn</p>
+              <TrendingDown className="h-4 w-4 text-amber-400" />
+            </div>
+            <p className="text-2xl font-bold text-white tabular-nums">{formatMoney(data.burnMetrics.projectBurn3moAvg)}</p>
+            <p className="text-xs text-white/40 mt-1">
+              per month, rolling 3mo avg
+              {data.burnMetrics.burnAccelerationPct != null && data.burnMetrics.projectBurn12moAvg > 0 && (
+                <>
+                  {' '}&middot;{' '}
+                  <span className={cn(
+                    'font-medium',
+                    data.burnMetrics.burnAccelerationPct > 20 ? 'text-red-400' :
+                    data.burnMetrics.burnAccelerationPct > 0 ? 'text-amber-400' :
+                    'text-emerald-400'
+                  )}>
+                    {data.burnMetrics.burnAccelerationPct > 0 ? '+' : ''}{data.burnMetrics.burnAccelerationPct}% vs 12mo
+                  </span>
+                </>
+              )}
+            </p>
+          </div>
+          <div className="glass-card p-5">
+            <div className="flex items-center justify-between mb-2">
+              <p className="text-xs uppercase tracking-wide text-white/40">Share of org burn</p>
+              <Gauge className="h-4 w-4 text-cyan-400" />
+            </div>
+            <p className="text-2xl font-bold text-white tabular-nums">
+              {data.burnMetrics.projectShareOfBurnPct != null ? `${data.burnMetrics.projectShareOfBurnPct}%` : '—'}
+            </p>
+            <p className="text-xs text-white/40 mt-1">
+              of org-wide monthly burn ({formatMoney(data.burnMetrics.orgBurn3moAvg)}/mo)
+            </p>
+          </div>
+          <div className="glass-card p-5">
+            <div className="flex items-center justify-between mb-2">
+              <p className="text-xs uppercase tracking-wide text-white/40">Runway impact</p>
+              <Clock className="h-4 w-4 text-purple-400" />
+            </div>
+            <p className="text-2xl font-bold text-white tabular-nums">
+              {data.burnMetrics.projectRunwayMonths != null ? `${data.burnMetrics.projectRunwayMonths}mo` : '—'}
+            </p>
+            <p className="text-xs text-white/40 mt-1">
+              if only this project burned, {formatMoney(data.burnMetrics.currentOrgBalance)} lasts {data.burnMetrics.projectRunwayMonths}mo
+            </p>
+          </div>
+        </div>
+      )}
+
+      {/* Build budget by stage (ACT-HV) — garden area pinned. 2026-05-26 */}
+      {data.stageBudget && (
+        <div className="glass-card p-6 mb-8">
+          <h2 className="text-lg font-semibold text-white flex items-center gap-2 mb-1">
+            <Target className="h-5 w-5 text-emerald-400" />
+            Build budget by stage
+          </h2>
+          <p className="text-sm text-white/40 mb-4">
+            {formatMoney(data.stageBudget.totalActual)} spent of {formatMoney(data.stageBudget.totalBudget)} budgeted
+            {data.stageBudget.unallocated > 0 && <> &middot; {formatMoney(data.stageBudget.unallocated)} unallocated</>}
+            <span className="text-xs text-white/30 ml-2">&middot; budgets are DRAFT — edit in harvest-budget.ts</span>
+          </p>
+
+          {/* Garden area highlight */}
+          {(() => {
+            const g = data.stageBudget!.garden
+            const pct = g.budget > 0 ? Math.round((g.actual / g.budget) * 100) : 0
+            return (
+              <div className="rounded-lg border border-emerald-500/30 bg-emerald-500/5 p-4 mb-5">
+                <div className="flex items-baseline justify-between mb-2">
+                  <span className="text-sm font-semibold text-emerald-200">🌱 Garden area</span>
+                  <span className="text-sm tabular-nums text-white">{formatMoney(g.actual)} <span className="text-white/40">/ {formatMoney(g.budget)}</span></span>
+                </div>
+                <div className="h-2 bg-white/10 rounded-full overflow-hidden">
+                  <div className={cn('h-full', pct > 100 ? 'bg-red-500' : pct > 85 ? 'bg-amber-500' : 'bg-emerald-500')} style={{ width: `${Math.min(pct, 100)}%` }} />
+                </div>
+                <div className="text-xs text-white/40 mt-1 tabular-nums">{pct}% of garden budget{pct > 100 && <span className="text-red-300"> — over</span>}</div>
+              </div>
+            )
+          })()}
+
+          {/* Zones grouped by stage */}
+          {[1, 2].map((stage) => {
+            const zs = data.stageBudget!.zones.filter((z) => z.stage === stage)
+            if (!zs.length) return null
+            const sb = stage === 1 ? data.stageBudget!.stage1 : data.stageBudget!.stage2
+            return (
+              <div key={stage} className="mb-4">
+                <div className="flex items-baseline justify-between mb-2">
+                  <h3 className="text-xs font-medium text-white/50 uppercase tracking-wider">Stage {stage}</h3>
+                  <span className="text-xs text-white/40 tabular-nums">{formatMoney(sb.actual)} / {formatMoney(sb.budget)}</span>
+                </div>
+                <div className="space-y-2">
+                  {[...zs].sort((a, b) => b.actual - a.actual).map((z) => {
+                    const pct = z.budget > 0 ? Math.round((z.actual / z.budget) * 100) : (z.actual > 0 ? 999 : 0)
+                    return (
+                      <div key={z.id}>
+                        <div className="flex justify-between text-xs mb-1">
+                          <span className="text-white/70 flex items-center gap-1.5">
+                            {z.garden && <span className="text-emerald-400">🌱</span>}{z.label}
+                          </span>
+                          <span className="text-white/50 tabular-nums">
+                            {formatMoney(z.actual)} / {formatMoney(z.budget)}
+                            {pct > 100 && <span className="text-red-300 ml-1">({pct}%)</span>}
+                          </span>
+                        </div>
+                        <div className="h-1.5 bg-white/10 rounded-full overflow-hidden">
+                          <div className={cn('h-full rounded-full', z.budget === 0 ? 'bg-white/20' : pct > 100 ? 'bg-red-500' : pct > 85 ? 'bg-amber-500' : 'bg-emerald-500/70')} style={{ width: `${z.budget > 0 ? Math.min(pct, 100) : 0}%` }} />
+                        </div>
+                      </div>
+                    )
+                  })}
+                </div>
+              </div>
+            )
+          })}
+
+          {data.stageBudget.unallocated > 0 && (
+            <div className="text-xs text-white/40 mt-3 pt-3 border-t border-white/10">
+              {formatMoney(data.stageBudget.unallocated)} unallocated — suppliers not yet in the vendor→zone map (harvest-budget.ts)
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* S1 2026-05-21: Funding sources */}
+      {data.funding && data.funding.length > 0 && data.fundingSummary && (
+        <div className="glass-card p-6 mb-8">
+          <h2 className="text-lg font-semibold text-white flex items-center gap-2 mb-1">
+            <Landmark className="h-5 w-5 text-amber-400" />
+            Funding sources
+          </h2>
+          <p className="text-sm text-white/40 mb-4">
+            {formatMoney(data.fundingSummary.totalCommitted)} committed
+            {data.fundingSummary.totalDrawn > 0 && <> &middot; {formatMoney(data.fundingSummary.totalDrawn)} drawn</>}
+            {data.fundingSummary.totalRemaining > 0 && <> &middot; {formatMoney(data.fundingSummary.totalRemaining)} remaining</>}
+            {data.fundingSummary.proposedAllocations > 0 && <> &middot; {data.fundingSummary.proposedAllocations} proposed</>}
+          </p>
+          <div className="space-y-4">
+            {data.funding.map((f) => {
+              const drawnPct = f.drawnPct ?? (f.committed > 0 ? Math.round(100 * f.drawn / f.committed) : 0)
+              const statusColor = f.status === 'drawing' ? 'text-emerald-400' :
+                f.status === 'committed' ? 'text-blue-400' :
+                f.status === 'proposed' ? 'text-amber-400' :
+                f.status === 'closed' ? 'text-white/40' :
+                'text-white/30'
+              return (
+                <div key={f.allocationId} className="border border-white/5 rounded-lg p-4">
+                  <div className="flex items-baseline justify-between gap-2 mb-2">
+                    <div className="min-w-0 flex-1">
+                      <div className="text-sm font-medium text-white truncate">{f.funder}</div>
+                      {f.grantRef && <div className="text-xs text-white/40 truncate mt-0.5">{f.grantRef}</div>}
+                    </div>
+                    <span className={cn('text-[10px] uppercase tracking-wide font-medium', statusColor)}>{f.status}</span>
+                  </div>
+                  <div className="flex items-center gap-3 mb-1">
+                    <div className="flex-1 h-2 bg-white/5 rounded-full overflow-hidden">
+                      <div
+                        className={cn(
+                          'h-full transition-all',
+                          f.status === 'proposed' ? 'bg-amber-500/40' :
+                          drawnPct >= 100 ? 'bg-emerald-500' :
+                          drawnPct >= 80 ? 'bg-amber-500' :
+                          'bg-blue-500'
+                        )}
+                        style={{ width: `${Math.min(drawnPct, 100)}%` }}
+                      />
+                    </div>
+                    <span className="text-xs text-white/50 tabular-nums shrink-0">{drawnPct}%</span>
+                  </div>
+                  <div className="flex items-center justify-between text-xs text-white/40 tabular-nums">
+                    <span>{formatMoney(f.drawn)} drawn{f.drawdownCount > 0 ? ` (${f.drawdownCount})` : ''}</span>
+                    <span>{formatMoney(f.remaining)} remaining of {formatMoney(f.committed)}</span>
+                  </div>
+                  {f.notes && f.notes.includes('⚠') && (
+                    <div className="mt-2 text-xs text-amber-300 italic">{f.notes}</div>
+                  )}
+                </div>
+              )
+            })}
+          </div>
+        </div>
+      )}
+
+      {/* Item 4 2026-05-21: Linked Contacts panel */}
+      {data.contacts && data.contacts.length > 0 && data.contactsSummary && (
+        <div className="glass-card p-6 mb-8">
+          <h2 className="text-lg font-semibold text-white flex items-center gap-2 mb-1">
+            <Users className="h-5 w-5 text-cyan-400" />
+            Key contacts
+          </h2>
+          <p className="text-sm text-white/40 mb-4">
+            {data.contactsSummary.total} linked contacts
+            {data.contactsSummary.funders > 0 && <> &middot; <span className="text-amber-300">{data.contactsSummary.funders} funder{data.contactsSummary.funders === 1 ? '' : 's'}</span></>}
+            {data.contactsSummary.partners > 0 && <> &middot; <span className="text-blue-300">{data.contactsSummary.partners} partner{data.contactsSummary.partners === 1 ? '' : 's'}</span></>}
+            {data.contactsSummary.advisors > 0 && <> &middot; <span className="text-purple-300">{data.contactsSummary.advisors} advisor{data.contactsSummary.advisors === 1 ? '' : 's'}</span></>}
+            {data.contactsSummary.leads > 0 && <> &middot; <span className="text-white/40">{data.contactsSummary.leads} leads</span></>}
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+            {data.contacts.slice(0, 12).map((c) => {
+              const roleColor =
+                c.role === 'funder' ? 'text-amber-300 bg-amber-500/10' :
+                c.role === 'partner' ? 'text-blue-300 bg-blue-500/10' :
+                c.role === 'advisor' ? 'text-purple-300 bg-purple-500/10' :
+                c.role === 'responsive' ? 'text-emerald-300 bg-emerald-500/10' :
+                'text-white/40 bg-white/5'
+              return (
+                <div key={c.id} className="border border-white/5 rounded-lg p-3 flex items-start gap-3">
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-baseline gap-2 flex-wrap">
+                      <span className="text-sm font-medium text-white truncate capitalize">{c.name}</span>
+                      <span className={cn('text-[10px] uppercase tracking-wide font-medium px-1.5 py-0.5 rounded', roleColor)}>{c.role}</span>
+                    </div>
+                    {c.company && <div className="text-xs text-white/50 truncate mt-0.5">{c.company}</div>}
+                    {c.email && (
+                      <a href={`mailto:${c.email}`} className="text-xs text-white/40 hover:text-cyan-300 truncate block mt-0.5">{c.email}</a>
+                    )}
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+          {data.contacts.length > 12 && (
+            <div className="mt-4 text-xs text-white/40 text-center">
+              + {data.contacts.length - 12} more linked contacts (view via /relationships)
+            </div>
+          )}
+        </div>
+      )}
 
       {/* Income Streams by Type */}
       {hasInvoices && data.incomeByType && (
@@ -470,10 +909,21 @@ export default function ProjectFinancialsPage({
             Grant Pipeline
           </h2>
           <p className="text-sm text-white/40 mb-4">
-            {data.pipeline.length} opportunities &middot; {formatMoney(data.pipelineWeightedTotal)} weighted value
+            {data.pipeline.length} unique opportunities &middot; {formatMoney(data.pipelineWeightedTotal)} weighted value
+            {typeof data.pipelineRawCount === 'number' && data.pipelineRawCount > data.pipeline.length && (
+              <span className="text-xs text-amber-400/80 ml-2">({data.pipelineRawCount - data.pipeline.length} duplicates collapsed)</span>
+            )}
+            <span className="text-xs text-white/30 ml-2">· showing top 5 by weighted value</span>
           </p>
           <div className="space-y-2">
-            {data.pipeline.map((g: PipelineItem) => {
+            {[...data.pipeline]
+              .sort((a, b) => {
+                const aw = (a.amountMax || a.amountMin || 0) * ((a.probability ?? 0.1))
+                const bw = (b.amountMax || b.amountMin || 0) * ((b.probability ?? 0.1))
+                return bw - aw
+              })
+              .slice(0, 5)
+              .map((g: PipelineItem) => {
               const amt = g.amountMax || g.amountMin || 0
               return (
                 <div key={g.id} className="flex items-center gap-3 py-2 px-3 rounded-lg hover:bg-white/5 transition-colors">
@@ -509,6 +959,272 @@ export default function ProjectFinancialsPage({
           >
             View full pipeline →
           </Link>
+        </div>
+      )}
+
+      {/* GHL Pipelines (per-pipeline rollup from GoHighLevel) — 2026-05-23 */}
+      {hasGhlPipelines && data.ghlPipelines && data.ghlPipelineTotals && (
+        <div className="glass-card p-6 mb-8">
+          <h2 className="text-lg font-semibold text-white flex items-center gap-2 mb-1">
+            <BarChart3 className="h-5 w-5 text-fuchsia-400" />
+            GHL Pipelines
+          </h2>
+          <p className="text-sm text-white/40 mb-4">
+            {data.ghlPipelineTotals.pipelinesActive} pipeline{data.ghlPipelineTotals.pipelinesActive === 1 ? '' : 's'} active &middot;{' '}
+            <span className="text-amber-400">{data.ghlPipelineTotals.openCount} open ({formatMoney(data.ghlPipelineTotals.openValueAud)})</span>{' · '}
+            <span className="text-green-400">{data.ghlPipelineTotals.wonCount} won ({formatMoney(data.ghlPipelineTotals.wonValueAud)})</span>
+            <span className="text-xs text-white/30 ml-2">· refreshed daily 06:10am</span>
+          </p>
+          <div className="space-y-2">
+            {data.ghlPipelines.map((p) => (
+              <div key={p.pipelineName} className="rounded-lg border border-white/5 hover:border-white/10 p-3 transition-colors">
+                <div className="flex items-baseline justify-between gap-3">
+                  <div className="min-w-0 flex-1">
+                    <div className="text-sm font-medium text-white truncate">{p.pipelineName}</div>
+                    <div className="text-[11px] text-white/40 mt-0.5">
+                      {p.contactsCount} contact{p.contactsCount === 1 ? '' : 's'}
+                      {p.stagesPresent.length > 0 && <> &middot; {p.stagesPresent.join(' / ')}</>}
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-4 shrink-0 tabular-nums text-sm">
+                    {p.openCount > 0 && (
+                      <div className="text-right">
+                        <div className="text-amber-400 font-medium">{p.openCount} open</div>
+                        <div className="text-[10px] text-white/40">{formatMoney(p.openValueAud)}</div>
+                      </div>
+                    )}
+                    {p.wonCount > 0 && (
+                      <div className="text-right">
+                        <div className="text-green-400 font-medium">{p.wonCount} won</div>
+                        <div className="text-[10px] text-white/40">{formatMoney(p.wonValueAud)}</div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Supporters funding this project — 2026-05-23 */}
+      {hasProjectSupporters && data.projectSupporters && data.projectSupportersTotals && (
+        <div className="glass-card p-6 mb-8">
+          <div className="flex items-center justify-between mb-3">
+            <h2 className="text-lg font-semibold text-white flex items-center gap-2">
+              <Users className="h-5 w-5 text-emerald-400" />
+              Supporters funding {data.projectCode}
+            </h2>
+            <Link
+              href={`/supporters?project=${data.projectCode}`}
+              className="text-xs text-emerald-400 hover:text-emerald-300 transition-colors flex items-center gap-1"
+            >
+              View all in Supporters
+              <ChevronRight className="h-3 w-3" />
+            </Link>
+          </div>
+          <p className="text-sm text-white/40 mb-4">
+            {data.projectSupportersTotals.count} supporter{data.projectSupportersTotals.count === 1 ? '' : 's'} &middot;{' '}
+            <span className="text-green-400">{formatMoney(data.projectSupportersTotals.totalPaidAud)} paid</span>
+            {data.projectSupportersTotals.totalOutstandingAud > 0 && (
+              <>{' · '}<span className="text-orange-400">{formatMoney(data.projectSupportersTotals.totalOutstandingAud)} outstanding</span></>
+            )}
+            {data.projectSupportersTotals.critical > 0 && (
+              <>{' · '}<span className="text-red-400">{data.projectSupportersTotals.critical} critical</span></>
+            )}
+          </p>
+          <div className="space-y-2">
+            {data.projectSupporters.slice(0, 8).map((sup) => (
+              <Link
+                key={sup.slug}
+                href={`/supporters?q=${encodeURIComponent(sup.name)}`}
+                className="flex items-center gap-3 py-2 px-3 rounded-lg hover:bg-white/5 transition-colors group"
+              >
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-baseline gap-2">
+                    <span className="text-sm text-white font-medium">{sup.name}</span>
+                    <span className={cn(
+                      'text-[10px] font-medium px-1.5 py-0.5 rounded',
+                      sup.tier === 'PAID' ? 'bg-green-500/15 text-green-400' :
+                      sup.tier === 'OUTSTANDING' ? 'bg-orange-500/15 text-orange-400' :
+                      sup.tier === 'WARM' ? 'bg-yellow-500/15 text-yellow-400' :
+                      sup.tier === 'COLD' ? 'bg-blue-500/15 text-blue-400' :
+                      'bg-white/10 text-white/50'
+                    )}>
+                      {sup.tier}
+                    </span>
+                    {sup.outstandingAlert === 'CRITICAL' && (
+                      <span className="text-[10px] font-medium px-1.5 py-0.5 rounded bg-red-500/20 text-red-400">CRITICAL</span>
+                    )}
+                  </div>
+                  <div className="text-xs text-white/40 mt-0.5">
+                    {sup.primaryContact || '—'}
+                    {sup.daysSinceLastContact !== null && (
+                      <> &middot; last contact {sup.daysSinceLastContact}d ago</>
+                    )}
+                  </div>
+                </div>
+                <div className="text-right shrink-0 tabular-nums">
+                  {sup.totalPaidAud > 0 && (
+                    <div className="text-sm text-green-400">{formatMoney(sup.totalPaidAud)}</div>
+                  )}
+                  {sup.outstandingAud > 0 && (
+                    <div className="text-xs text-orange-400">+{formatMoney(sup.outstandingAud)} due</div>
+                  )}
+                  {sup.openOppCount > 0 && (
+                    <div className="text-[10px] text-fuchsia-400">{sup.openOppCount} open · {formatMoney(sup.openOppValueAud)}</div>
+                  )}
+                </div>
+              </Link>
+            ))}
+            {data.projectSupporters.length > 8 && (
+              <div className="text-xs text-white/30 text-center pt-2">
+                +{data.projectSupporters.length - 8} more
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* Funder Briefs — QBE-HQ pattern (2026-05-23) */}
+      {hasFunderBriefs && data.funderBriefs && (
+        <div className="glass-card p-6 mb-8">
+          <h2 className="text-lg font-semibold text-white flex items-center gap-2 mb-1">
+            <Target className="h-5 w-5 text-purple-400" />
+            Funder Briefs
+          </h2>
+          <p className="text-sm text-white/40 mb-4">
+            What each funder asked of us · what we&apos;re asking of them · alignment · next move
+          </p>
+          <div className="space-y-4">
+            {data.funderBriefs.map((b) => {
+              const openAsks = (b.asksFromThem || []).filter((a) => !a.done).length
+              const overdue = b.nextMoveDue ? new Date(b.nextMoveDue) < new Date() : false
+              return (
+                <div key={b.id} className="rounded-lg border border-white/5 p-4 bg-white/[0.02]">
+                  <div className="flex items-start justify-between gap-3 mb-3">
+                    <div className="min-w-0 flex-1">
+                      <div className="flex items-baseline gap-2 flex-wrap">
+                        <h3 className="text-sm font-semibold text-white">{b.briefTitle || `${b.funderSlug} brief`}</h3>
+                        <span className={cn(
+                          'text-[10px] font-medium px-1.5 py-0.5 rounded',
+                          b.alignmentStatus === 'PASS' ? 'bg-green-500/20 text-green-400' :
+                          b.alignmentStatus === 'WARN' ? 'bg-amber-500/20 text-amber-400' :
+                          'bg-red-500/20 text-red-400'
+                        )}>
+                          {b.alignmentStatus}
+                        </span>
+                        {b.askStatus && (
+                          <span className="text-[10px] px-1.5 py-0.5 rounded bg-blue-500/15 text-blue-400">
+                            {b.askStatus}
+                          </span>
+                        )}
+                        {overdue && (
+                          <span className="text-[10px] px-1.5 py-0.5 rounded bg-red-500/20 text-red-400">OVERDUE</span>
+                        )}
+                      </div>
+                      {b.lastFeedbackSummary && (
+                        <p className="text-xs text-white/50 mt-1">{b.lastFeedbackSummary}</p>
+                      )}
+                    </div>
+                    <div className="text-right shrink-0 text-xs">
+                      {b.askAmountAud && (
+                        <div className="text-green-400 tabular-nums font-medium">{formatMoney(b.askAmountAud)}</div>
+                      )}
+                      {b.nextMoveDue && (
+                        <div className={cn('text-[11px] tabular-nums', overdue ? 'text-red-400' : 'text-white/50')}>
+                          due {b.nextMoveDue}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Asks from them */}
+                  {openAsks > 0 && (
+                    <div className="mb-3">
+                      <div className="text-[10px] uppercase tracking-wider text-white/40 mb-1">
+                        Asks from them ({openAsks} open)
+                      </div>
+                      <ul className="space-y-1">
+                        {(b.asksFromThem || []).filter((a) => !a.done).slice(0, 5).map((a, i) => (
+                          <li key={i} className="text-xs text-white/70 flex items-start gap-2">
+                            <Circle className="h-3 w-3 mt-0.5 shrink-0 text-amber-400" />
+                            <span>{a.ask}</span>
+                          </li>
+                        ))}
+                        {openAsks > 5 && <li className="text-[10px] text-white/30">+{openAsks - 5} more</li>}
+                      </ul>
+                    </div>
+                  )}
+
+                  {/* Procurement */}
+                  {b.procurementDeliveredCount !== null && b.procurementUnit && (
+                    <div className="mb-3">
+                      <div className="text-[10px] uppercase tracking-wider text-white/40 mb-1">Procurement</div>
+                      <div className="text-xs text-white/70">
+                        <span className="text-emerald-400 font-medium">{b.procurementDeliveredCount}</span> {b.procurementUnit} delivered
+                        {b.procurementDemandCount && (
+                          <> · <span className="text-fuchsia-400 font-medium">{b.procurementDemandCount}</span> demand</>
+                        )}
+                        {b.procurementNotes && <div className="text-[11px] text-white/40 mt-0.5">{b.procurementNotes}</div>}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Strategy */}
+                  {(b.strategyTheirPriorities?.length > 0 || b.strategyOurClaims?.length > 0) && (
+                    <div className="mb-3 grid grid-cols-2 gap-3">
+                      {b.strategyTheirPriorities?.length > 0 && (
+                        <div>
+                          <div className="text-[10px] uppercase tracking-wider text-white/40 mb-1">Their priorities</div>
+                          <div className="flex flex-wrap gap-1">
+                            {b.strategyTheirPriorities.map((p, i) => (
+                              <span key={i} className="text-[10px] px-1.5 py-0.5 rounded bg-blue-500/10 text-blue-300">{p}</span>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                      {b.strategyOurClaims?.length > 0 && (
+                        <div>
+                          <div className="text-[10px] uppercase tracking-wider text-white/40 mb-1">Our claims</div>
+                          <div className="flex flex-wrap gap-1">
+                            {b.strategyOurClaims.map((c, i) => (
+                              <span key={i} className="text-[10px] px-1.5 py-0.5 rounded bg-emerald-500/10 text-emerald-300">{c}</span>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  )}
+
+                  {/* Next move + links */}
+                  {b.nextMove && (
+                    <div className="mb-2 pt-2 border-t border-white/5">
+                      <div className="text-[10px] uppercase tracking-wider text-white/40 mb-1">Next move</div>
+                      <div className="text-xs text-white/80">
+                        {b.nextMove}
+                        {b.nextMoveOwner && <span className="text-white/40"> · {b.nextMoveOwner}</span>}
+                      </div>
+                    </div>
+                  )}
+
+                  {(b.notionHqUrl || (b.alignmentNotes && b.alignmentStatus !== 'PASS')) && (
+                    <div className="flex items-center justify-between gap-2 pt-2 border-t border-white/5 text-[11px]">
+                      {b.alignmentNotes && b.alignmentStatus !== 'PASS' && (
+                        <div className="text-amber-300 flex-1">⚠ {b.alignmentNotes}</div>
+                      )}
+                      {b.notionHqUrl && (
+                        <a href={b.notionHqUrl} target="_blank" rel="noopener noreferrer"
+                          className="text-blue-400 hover:text-blue-300 shrink-0 flex items-center gap-1">
+                          Notion HQ <ExternalLink className="h-3 w-3" />
+                        </a>
+                      )}
+                    </div>
+                  )}
+                </div>
+              )
+            })}
+          </div>
         </div>
       )}
 
@@ -765,20 +1481,20 @@ export default function ProjectFinancialsPage({
                 <span className="text-sm text-white/40 font-normal ml-auto">{data.recentTransactions.length}</span>
               </h2>
               <div className="space-y-1">
-                {data.recentTransactions.slice(0, 20).map((tx) => (
-                  <div key={tx.id} className="flex items-center justify-between py-2 px-3 rounded-lg hover:bg-white/5 transition-colors">
-                    <div>
-                      <span className="text-sm text-white">{tx.contact || 'Unknown'}</span>
-                      <span className="text-xs text-white/30 ml-2">{tx.date}</span>
+                {data.recentTransactions.slice(0, 20).map((tx) => {
+                  const isOutflow = tx.type === 'SPEND' || tx.type === 'SPEND-OVERPAYMENT' || tx.type === 'ACCPAY'
+                  return (
+                    <div key={tx.id} className="flex items-center justify-between py-2 px-3 rounded-lg hover:bg-white/5 transition-colors">
+                      <div>
+                        <span className="text-sm text-white">{tx.contact || 'Unknown'}</span>
+                        <span className="text-xs text-white/30 ml-2">{tx.date}</span>
+                      </div>
+                      <span className={cn('text-sm font-medium tabular-nums', isOutflow ? 'text-red-400' : 'text-green-400')}>
+                        {isOutflow ? '−' : '+'}${Math.abs(tx.amount).toLocaleString()}
+                      </span>
                     </div>
-                    <span className={cn(
-                      'text-sm font-medium tabular-nums',
-                      tx.amount >= 0 ? 'text-green-400' : 'text-red-400'
-                    )}>
-                      {tx.amount >= 0 ? '+' : '-'}${Math.abs(tx.amount).toLocaleString()}
-                    </span>
-                  </div>
-                ))}
+                  )
+                })}
               </div>
             </div>
           )}

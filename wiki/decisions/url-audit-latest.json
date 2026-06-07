@@ -1,68 +1,36 @@
 {
-  "generated": "2026-04-07",
+  "generated": "2026-05-31",
   "results": [
     {
-      "slug": "act-farm",
-      "repo": {
-        "name": "act-farm",
-        "url": "https://github.com/Acurioustractor/act-farm",
-        "archived": false,
-        "pushedAt": "2026-01-12T19:40:57Z"
-      },
-      "vercelProject": {
-        "name": "act-farm",
-        "id": "prj_kjaiWk4A6mvC6NCut8pfdhvRTqJx"
-      },
-      "canonicalUrl": "https://act-farm.vercel.app",
-      "live": {
-        "ok": null,
-        "status": null
-      },
-      "knownIssue": null,
-      "sources": {
-        "customDomain": null,
-        "repoHomepage": "https://act-farm.vercel.app",
-        "deployUrl": "https://act-farm-benjamin-knights-projects.vercel.app"
-      }
-    },
-    {
-      "slug": "act-public-voice",
+      "slug": "act-infrastructure",
       "repo": null,
       "vercelProject": null,
-      "canonicalUrl": "https://act.place",
-      "live": {
-        "ok": null,
-        "status": null
-      },
-      "knownIssue": null,
-      "sources": {
-        "customDomain": "https://act.place",
-        "repoHomepage": null,
-        "deployUrl": null
-      }
-    },
-    {
-      "slug": "act-studio",
-      "repo": {
-        "name": "act-regenerative-studio",
-        "url": "https://github.com/Acurioustractor/act-regenerative-studio",
-        "archived": false,
-        "pushedAt": "2026-01-26T05:24:26Z"
-      },
-      "vercelProject": {
-        "name": "act-regenerative-studio",
-        "id": "prj_Hz7eQOE4Zh1Dw9O6OZDn6ExRuWuk"
-      },
       "canonicalUrl": null,
       "live": {
         "ok": null,
         "status": null
       },
-      "knownIssue": "build-failing: only 2 deployments ever attempted, both ERROR (Jan 2026); never had a successful production build",
+      "knownIssue": null,
       "sources": {
         "customDomain": null,
         "repoHomepage": null,
-        "deployUrl": "https://act-regenerative-studio-benjamin-knights-projects.vercel.app"
+        "deployUrl": null
+      }
+    },
+    {
+      "slug": "act-monthly-dinners",
+      "repo": null,
+      "vercelProject": null,
+      "canonicalUrl": null,
+      "live": {
+        "ok": null,
+        "status": null
+      },
+      "knownIssue": null,
+      "sources": {
+        "customDomain": null,
+        "repoHomepage": null,
+        "deployUrl": null
       }
     },
     {
@@ -135,8 +103,8 @@
       },
       "canonicalUrl": "https://campfire-website-amber.vercel.app",
       "live": {
-        "ok": null,
-        "status": null
+        "ok": true,
+        "status": 200
       },
       "knownIssue": null,
       "sources": {
@@ -162,29 +130,13 @@
       }
     },
     {
-      "slug": "cars-and-microcontrollers",
-      "repo": null,
-      "vercelProject": null,
-      "canonicalUrl": null,
-      "live": {
-        "ok": null,
-        "status": null
-      },
-      "knownIssue": null,
-      "sources": {
-        "customDomain": null,
-        "repoHomepage": null,
-        "deployUrl": null
-      }
-    },
-    {
       "slug": "civicgraph",
       "repo": null,
       "vercelProject": null,
       "canonicalUrl": "https://civicgraph.app",
       "live": {
-        "ok": null,
-        "status": null
+        "ok": true,
+        "status": 200
       },
       "knownIssue": null,
       "sources": {
@@ -233,6 +185,22 @@
         "archived": false,
         "pushedAt": "2025-09-25T07:28:20Z"
       },
+      "vercelProject": null,
+      "canonicalUrl": null,
+      "live": {
+        "ok": null,
+        "status": null
+      },
+      "knownIssue": null,
+      "sources": {
+        "customDomain": null,
+        "repoHomepage": null,
+        "deployUrl": null
+      }
+    },
+    {
+      "slug": "custodian-first-economy",
+      "repo": null,
       "vercelProject": null,
       "canonicalUrl": null,
       "live": {
@@ -324,7 +292,7 @@
         "name": "empathy-ledger-v2",
         "url": "https://github.com/Acurioustractor/empathy-ledger-v2",
         "archived": false,
-        "pushedAt": "2026-04-07T06:48:13Z"
+        "pushedAt": "2026-05-30T08:28:52Z"
       },
       "vercelProject": {
         "name": "empathy-ledger-v2",
@@ -332,8 +300,8 @@
       },
       "canonicalUrl": "https://empathy-ledger-v2.vercel.app",
       "live": {
-        "ok": null,
-        "status": null
+        "ok": true,
+        "status": 200
       },
       "knownIssue": null,
       "sources": {
@@ -364,7 +332,7 @@
         "name": "fishers-oysters",
         "url": "https://github.com/Acurioustractor/fishers-oysters",
         "archived": false,
-        "pushedAt": "2026-03-10T05:32:59Z"
+        "pushedAt": "2026-05-24T20:52:55Z"
       },
       "vercelProject": {
         "name": "fishers-oysters",
@@ -372,8 +340,8 @@
       },
       "canonicalUrl": "https://fishers-oysters.vercel.app",
       "live": {
-        "ok": null,
-        "status": null
+        "ok": true,
+        "status": 200
       },
       "knownIssue": null,
       "sources": {
@@ -399,67 +367,48 @@
       }
     },
     {
-      "slug": "gold-phone",
-      "repo": null,
-      "vercelProject": null,
-      "canonicalUrl": null,
-      "live": {
-        "ok": null,
-        "status": null
-      },
-      "knownIssue": null,
-      "sources": {
-        "customDomain": null,
-        "repoHomepage": null,
-        "deployUrl": null
-      }
-    },
-    {
-      "slug": "goods-on-country",
+      "slug": "goods",
       "repo": {
         "name": "goods-asset-tracker",
         "url": "https://github.com/Acurioustractor/goods-asset-tracker",
         "archived": false,
-        "pushedAt": "2026-03-31T08:19:15Z"
+        "pushedAt": "2026-05-30T09:39:35Z"
       },
-      "vercelProject": {
-        "name": "goods-on-country",
-        "id": "prj_XGQL3gT1C6N7BolooQevgMJuIf1G"
-      },
+      "vercelProject": null,
       "canonicalUrl": "https://v2-rho-ochre.vercel.app",
       "live": {
-        "ok": null,
-        "status": null
+        "ok": true,
+        "status": 200
       },
       "knownIssue": null,
       "sources": {
         "customDomain": null,
         "repoHomepage": "https://v2-rho-ochre.vercel.app",
-        "deployUrl": "https://www.goodsoncountry.com"
+        "deployUrl": null
       }
     },
     {
-      "slug": "green-harvest-witta",
+      "slug": "grantscope",
       "repo": {
-        "name": "theharvest",
-        "url": "https://github.com/Acurioustractor/theharvest",
+        "name": "grantscope",
+        "url": "https://github.com/Acurioustractor/grantscope",
         "archived": false,
-        "pushedAt": "2026-03-07T10:38:20Z"
+        "pushedAt": "2026-05-29T23:29:36Z"
       },
       "vercelProject": {
-        "name": "the-harvest",
-        "id": "prj_keWe0zABA9pjApRWXssQjxG1qOfF"
+        "name": "grantscope",
+        "id": "prj_BFQcUhajUO5R1cocWJQhjgIzZn5S"
       },
-      "canonicalUrl": "https://witta-swot-analysis.vercel.app",
+      "canonicalUrl": "https://grantscope.vercel.app",
       "live": {
-        "ok": null,
-        "status": null
+        "ok": true,
+        "status": 200
       },
       "knownIssue": null,
       "sources": {
         "customDomain": null,
-        "repoHomepage": "https://witta-swot-analysis.vercel.app",
-        "deployUrl": "https://www.theharvestwitta.com.au"
+        "repoHomepage": "https://grantscope.vercel.app",
+        "deployUrl": "https://civicgraph.app"
       }
     },
     {
@@ -479,27 +428,19 @@
       }
     },
     {
-      "slug": "justicehub",
-      "repo": {
-        "name": "justicehub-platform",
-        "url": "https://github.com/Acurioustractor/justicehub-platform",
-        "archived": false,
-        "pushedAt": "2026-04-01T04:56:56Z"
-      },
-      "vercelProject": {
-        "name": "justicehub",
-        "id": "prj_h9btWxQZN2jX4DLhLPLxV1G4On4X"
-      },
-      "canonicalUrl": "https://www.justicehub.com.au",
+      "slug": "marriage-celebrant",
+      "repo": null,
+      "vercelProject": null,
+      "canonicalUrl": null,
       "live": {
         "ok": null,
         "status": null
       },
       "knownIssue": null,
       "sources": {
-        "customDomain": "https://www.justicehub.com.au",
-        "repoHomepage": "https://www.justicehub.com.au",
-        "deployUrl": "https://www.justicehub.com.au"
+        "customDomain": null,
+        "repoHomepage": null,
+        "deployUrl": null
       }
     },
     {
@@ -513,8 +454,8 @@
       "vercelProject": null,
       "canonicalUrl": "https://mounty-yarns.vercel.app",
       "live": {
-        "ok": null,
-        "status": null
+        "ok": true,
+        "status": 200
       },
       "knownIssue": null,
       "sources": {
@@ -529,139 +470,19 @@
         "name": "Oonchiumpa",
         "url": "https://github.com/Acurioustractor/Oonchiumpa",
         "archived": false,
-        "pushedAt": "2026-02-11T04:37:11Z"
+        "pushedAt": "2026-05-26T09:16:33Z"
       },
-      "vercelProject": {
-        "name": "oonchiumpa-app",
-        "id": "prj_gsbY5PFitGmvFGpRUxSu7O6hfZPY"
-      },
+      "vercelProject": null,
       "canonicalUrl": "https://oonchiumpa.vercel.app",
       "live": {
-        "ok": null,
-        "status": null
+        "ok": true,
+        "status": 200
       },
       "knownIssue": null,
       "sources": {
         "customDomain": null,
         "repoHomepage": "https://oonchiumpa.vercel.app",
-        "deployUrl": "https://oonchiumpa-app.vercel.app"
-      }
-    },
-    {
-      "slug": "picc",
-      "repo": {
-        "name": "palm-island-repository",
-        "url": "https://github.com/Acurioustractor/palm-island-repository",
-        "archived": false,
-        "pushedAt": "2026-04-07T00:59:43Z"
-      },
-      "vercelProject": {
-        "name": "palm-island-repository",
-        "id": "prj_kSo6989AUcGml7Yihca1ca4PYiqE"
-      },
-      "canonicalUrl": "https://palm-island-repository.vercel.app",
-      "live": {
-        "ok": null,
-        "status": null
-      },
-      "knownIssue": null,
-      "sources": {
-        "customDomain": null,
-        "repoHomepage": "https://palm-island-repository.vercel.app",
-        "deployUrl": "https://picc.studio"
-      }
-    },
-    {
-      "slug": "picc-annual-report",
-      "repo": {
-        "name": "palm-island-repository",
-        "url": "https://github.com/Acurioustractor/palm-island-repository",
-        "archived": false,
-        "pushedAt": "2026-04-07T00:59:43Z"
-      },
-      "vercelProject": {
-        "name": "palm-island-repository",
-        "id": "prj_kSo6989AUcGml7Yihca1ca4PYiqE"
-      },
-      "canonicalUrl": "https://palm-island-repository.vercel.app",
-      "live": {
-        "ok": null,
-        "status": null
-      },
-      "knownIssue": null,
-      "sources": {
-        "customDomain": null,
-        "repoHomepage": "https://palm-island-repository.vercel.app",
-        "deployUrl": "https://picc.studio"
-      }
-    },
-    {
-      "slug": "picc-centre-precinct",
-      "repo": {
-        "name": "picc-station-site-plan",
-        "url": "https://github.com/Acurioustractor/picc-station-site-plan",
-        "archived": false,
-        "pushedAt": "2025-12-15T00:09:46Z"
-      },
-      "vercelProject": null,
-      "canonicalUrl": "https://picc-station-map.vercel.app",
-      "live": {
-        "ok": null,
-        "status": null
-      },
-      "knownIssue": null,
-      "sources": {
-        "customDomain": null,
-        "repoHomepage": "https://picc-station-map.vercel.app",
         "deployUrl": null
-      }
-    },
-    {
-      "slug": "picc-elders-hull-river",
-      "repo": {
-        "name": "palm-island-repository",
-        "url": "https://github.com/Acurioustractor/palm-island-repository",
-        "archived": false,
-        "pushedAt": "2026-04-07T00:59:43Z"
-      },
-      "vercelProject": {
-        "name": "palm-island-repository",
-        "id": "prj_kSo6989AUcGml7Yihca1ca4PYiqE"
-      },
-      "canonicalUrl": "https://palm-island-repository.vercel.app",
-      "live": {
-        "ok": null,
-        "status": null
-      },
-      "knownIssue": null,
-      "sources": {
-        "customDomain": null,
-        "repoHomepage": "https://palm-island-repository.vercel.app",
-        "deployUrl": "https://picc.studio"
-      }
-    },
-    {
-      "slug": "picc-photo-kiosk",
-      "repo": {
-        "name": "palm-island-repository",
-        "url": "https://github.com/Acurioustractor/palm-island-repository",
-        "archived": false,
-        "pushedAt": "2026-04-07T00:59:43Z"
-      },
-      "vercelProject": {
-        "name": "palm-island-repository",
-        "id": "prj_kSo6989AUcGml7Yihca1ca4PYiqE"
-      },
-      "canonicalUrl": "https://palm-island-repository.vercel.app",
-      "live": {
-        "ok": null,
-        "status": null
-      },
-      "knownIssue": null,
-      "sources": {
-        "customDomain": null,
-        "repoHomepage": "https://palm-island-repository.vercel.app",
-        "deployUrl": "https://picc.studio"
       }
     },
     {
@@ -697,164 +518,7 @@
       }
     },
     {
-      "slug": "redtape",
-      "repo": null,
-      "vercelProject": null,
-      "canonicalUrl": null,
-      "live": {
-        "ok": null,
-        "status": null
-      },
-      "knownIssue": null,
-      "sources": {
-        "customDomain": null,
-        "repoHomepage": null,
-        "deployUrl": null
-      }
-    },
-    {
-      "slug": "regional-arts-fellowship",
-      "repo": null,
-      "vercelProject": null,
-      "canonicalUrl": null,
-      "live": {
-        "ok": null,
-        "status": null
-      },
-      "knownIssue": null,
-      "sources": {
-        "customDomain": null,
-        "repoHomepage": null,
-        "deployUrl": null
-      }
-    },
-    {
       "slug": "resoleution",
-      "repo": null,
-      "vercelProject": null,
-      "canonicalUrl": null,
-      "live": {
-        "ok": null,
-        "status": null
-      },
-      "knownIssue": null,
-      "sources": {
-        "customDomain": null,
-        "repoHomepage": null,
-        "deployUrl": null
-      }
-    },
-    {
-      "slug": "smart-connect",
-      "repo": {
-        "name": "SMART-Connect",
-        "url": "https://github.com/Acurioustractor/SMART-Connect",
-        "archived": false,
-        "pushedAt": "2025-11-14T06:48:30Z"
-      },
-      "vercelProject": null,
-      "canonicalUrl": null,
-      "live": {
-        "ok": null,
-        "status": null
-      },
-      "knownIssue": null,
-      "sources": {
-        "customDomain": null,
-        "repoHomepage": null,
-        "deployUrl": null
-      }
-    },
-    {
-      "slug": "smart-hcp-gp-uplift",
-      "repo": null,
-      "vercelProject": null,
-      "canonicalUrl": null,
-      "live": {
-        "ok": null,
-        "status": null
-      },
-      "knownIssue": null,
-      "sources": {
-        "customDomain": null,
-        "repoHomepage": null,
-        "deployUrl": null
-      }
-    },
-    {
-      "slug": "smart-recovery-gp-kits",
-      "repo": null,
-      "vercelProject": null,
-      "canonicalUrl": null,
-      "live": {
-        "ok": null,
-        "status": null
-      },
-      "knownIssue": null,
-      "sources": {
-        "customDomain": null,
-        "repoHomepage": null,
-        "deployUrl": null
-      }
-    },
-    {
-      "slug": "the-caravan",
-      "repo": null,
-      "vercelProject": null,
-      "canonicalUrl": null,
-      "live": {
-        "ok": null,
-        "status": null
-      },
-      "knownIssue": null,
-      "sources": {
-        "customDomain": null,
-        "repoHomepage": null,
-        "deployUrl": null
-      }
-    },
-    {
-      "slug": "the-confessional",
-      "repo": null,
-      "vercelProject": null,
-      "canonicalUrl": null,
-      "live": {
-        "ok": null,
-        "status": null
-      },
-      "knownIssue": null,
-      "sources": {
-        "customDomain": null,
-        "repoHomepage": null,
-        "deployUrl": null
-      }
-    },
-    {
-      "slug": "the-harvest",
-      "repo": {
-        "name": "theharvest",
-        "url": "https://github.com/Acurioustractor/theharvest",
-        "archived": false,
-        "pushedAt": "2026-03-07T10:38:20Z"
-      },
-      "vercelProject": {
-        "name": "the-harvest",
-        "id": "prj_keWe0zABA9pjApRWXssQjxG1qOfF"
-      },
-      "canonicalUrl": "https://witta-swot-analysis.vercel.app",
-      "live": {
-        "ok": null,
-        "status": null
-      },
-      "knownIssue": null,
-      "sources": {
-        "customDomain": null,
-        "repoHomepage": "https://witta-swot-analysis.vercel.app",
-        "deployUrl": "https://www.theharvestwitta.com.au"
-      }
-    },
-    {
-      "slug": "the-vagina",
       "repo": null,
       "vercelProject": null,
       "canonicalUrl": null,
@@ -883,46 +547,6 @@
         "customDomain": null,
         "repoHomepage": null,
         "deployUrl": null
-      }
-    },
-    {
-      "slug": "treacher",
-      "repo": null,
-      "vercelProject": null,
-      "canonicalUrl": null,
-      "live": {
-        "ok": null,
-        "status": null
-      },
-      "knownIssue": null,
-      "sources": {
-        "customDomain": null,
-        "repoHomepage": null,
-        "deployUrl": null
-      }
-    },
-    {
-      "slug": "uncle-allan-palm-island-art",
-      "repo": {
-        "name": "palm-island-repository",
-        "url": "https://github.com/Acurioustractor/palm-island-repository",
-        "archived": false,
-        "pushedAt": "2026-04-07T00:59:43Z"
-      },
-      "vercelProject": {
-        "name": "palm-island-repository",
-        "id": "prj_kSo6989AUcGml7Yihca1ca4PYiqE"
-      },
-      "canonicalUrl": "https://palm-island-repository.vercel.app",
-      "live": {
-        "ok": null,
-        "status": null
-      },
-      "knownIssue": null,
-      "sources": {
-        "customDomain": null,
-        "repoHomepage": "https://palm-island-repository.vercel.app",
-        "deployUrl": "https://picc.studio"
       }
     }
   ]

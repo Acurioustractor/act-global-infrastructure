@@ -13,11 +13,24 @@ import { cn } from '@/lib/utils'
 import {
   getEcosystemOverview,
   getActionFeed,
-  getBookkeepingProgress,
   getProjectsSummary,
 } from '@/lib/api'
 
 const REFRESH_INTERVAL = 30 * 1000
+
+function formatCompactCurrency(value: number): string {
+  const abs = Math.abs(value)
+
+  if (abs >= 1000000) {
+    return `$${(value / 1000000).toFixed(1)}M`
+  }
+
+  if (abs >= 1000) {
+    return `$${Math.round(value / 1000)}K`
+  }
+
+  return `$${value.toLocaleString()}`
+}
 
 export function QuickStats() {
   const { data: ecosystem } = useQuery({
@@ -29,12 +42,6 @@ export function QuickStats() {
   const { data: actionData } = useQuery({
     queryKey: ['action-feed'],
     queryFn: () => getActionFeed({ limit: 50 }),
-    refetchInterval: REFRESH_INTERVAL,
-  })
-
-  const { data: financeData } = useQuery({
-    queryKey: ['bookkeeping', 'progress'],
-    queryFn: getBookkeepingProgress,
     refetchInterval: REFRESH_INTERVAL,
   })
 
@@ -51,7 +58,6 @@ export function QuickStats() {
   const totalOppValue = ecosystem?.totals?.opportunityValue || 0
   const emailActions = actionData?.counts?.email_reply || 0
   const taskActions = (actionData?.counts?.task || 0) + (actionData?.counts?.overdue_contact || 0)
-  const netPosition = financeData?.summary?.netPosition || 0
 
   // Ecosystem health: weighted average of project health scores
   const healthProjects = (summaryData?.projects || []).filter((p: any) => p.health_score != null)
@@ -69,16 +75,16 @@ export function QuickStats() {
       href: '/projects',
     },
     {
-      label: 'Pipeline',
-      value: `$${totalOppValue > 1000 ? `${(totalOppValue / 1000).toFixed(0)}k` : totalOppValue.toLocaleString()}`,
-      sub: `${totalOpps} open`,
+      label: 'Open Pipeline',
+      value: formatCompactCurrency(totalOppValue),
+      sub: `${totalOpps.toLocaleString()} opportunities`,
       icon: TrendingUp,
       color: 'text-green-400',
       bg: 'bg-green-500/20',
       href: '/pipeline',
     },
     {
-      label: 'Emails to Reply',
+      label: 'Reply Queue',
       value: emailActions,
       icon: Mail,
       color: emailActions > 0 ? 'text-amber-400' : 'text-green-400',
@@ -86,7 +92,7 @@ export function QuickStats() {
       href: '/reports',
     },
     {
-      label: 'Overdue Tasks',
+      label: 'Open Actions',
       value: taskActions,
       icon: ListChecks,
       color: taskActions > 0 ? 'text-red-400' : 'text-green-400',

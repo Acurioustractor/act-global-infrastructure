@@ -1,29 +1,38 @@
-# ACT Ecosystem - Claude Rules
+# ACT Ecosystem — Claude Rules
 
-## Debugging Discipline (read first)
+> Global rules live in `~/.claude/rules/` (verification, workflow, memory-system, context-efficiency, opus-4-8-prompting). This file is project-specific only — no duplicates.
 
-- **Do NOT claim a fix works without verifying it.** Run the actual code path, query the DB, check the UI, capture the output. If you cannot verify, say "unverified" and tell the user how to test.
-- **2-strike rule.** If the same surface bug recurs twice, STOP patching. Write a root-cause analysis covering data model, env/config, caching layers, and RLS. Propose ONE architectural fix and wait for approval.
-- **Suspect environment before suspecting code.** On persistent bugs, check env vars, direnv, caches (.next), MCP read-vs-write, and connection targets BEFORE rewriting code. The 43-minute direnv spiral happened because Claude rewrote code instead of checking which Supabase instance was actually connected.
-- **Prefer one architectural fix over multiple incremental patches.** Patches that compound become rebuilds.
+## ALMA Language Rule
+
+Always spell out ALMA on first use:
+
+Australian Living Map of Alternatives (ALMA)
+
+Do not describe ALMA as:
+- the soul
+- an AI agent
+- a ranking engine
+- a measurement dashboard
+- a replacement for human or community authority
+
+Describe ALMA as:
+ACT's catalogue of community-led alternatives, evidence-graded with cultural authority.
 
 ## Database & Environment
 
-- **ALWAYS verify which Supabase instance is connected** before debugging connection issues. Check direnv, .env files, and shell env vars for conflicts. Run `mcp__supabase__get_project_url` and confirm it matches the expected project ref.
-- **Use the WRITE Supabase MCP for mutations**, not the read-only one. Confirm at session start when doing data work.
-- **Check for trailing newlines in env vars** when seeing 400 errors from Supabase — they cause silent auth failures.
-- **Supabase queries default to a 1,000-row limit.** Use `.range()` or pagination for any bulk operation. Watch for silent truncation.
-- **Clear `.next` cache** when stale data symptoms appear in dev — the framework caches more aggressively than the data layer changes.
+- **Verify which Supabase instance is connected** before debugging. Run `mcp__supabase__get_project_url` and confirm it matches the expected project ref.
+- **Use the WRITE Supabase MCP for mutations**, not the read-only one.
+- **Trailing newlines in env vars** cause silent 400 auth failures from Supabase.
+- **Default 1,000-row limit** on Supabase queries — use `.range()` for bulk.
+- **Clear `.next` cache** when stale dev data symptoms appear.
 
 ## Data Model
 
-- **Services vs Projects vs Organizations have distinct meanings** — confirm the user's intended entity before writing data. The wrong choice creates junk data that cascades into rebuilds.
-- **Always scope queries by `org_id`** when working in multi-tenant code. Never leak cross-org data by default. Cross-org leak in the Civic World Model session required a full rebuild plan.
-- On data-heavy tasks, **confirm the schema first** (one query to `information_schema.columns`) before writing inserts or migrations.
+- **Services vs Projects vs Organizations** are distinct — confirm intent before writing data.
+- **Always scope by `org_id`** in multi-tenant code. Cross-org leak in Civic World Model required full rebuild.
+- **Confirm schema first** on data-heavy tasks (`/db-check` or `information_schema.columns`).
 
-## Mono-Repo Structure
-
-This is a pnpm workspace mono-repo containing the entire ACT ecosystem.
+## Mono-Repo Structure (pnpm workspace)
 
 ```
 apps/
@@ -35,38 +44,20 @@ scripts/              # 110+ operational scripts
 scripts/lib/          # 26 shared script modules
 config/               # Shared configuration JSON
 supabase/             # Database migrations
-archive/
-  act-dashboard/      # LEGACY HTML dashboards (DO NOT USE)
-  intelligence-platform/  # Reference only (absorbed into command-center)
+archive/              # READ-ONLY reference code, NEVER add features here
 ```
 
-## Where to Build New Features
+## Where to Build
 
-| Feature Type | Location |
-|-------------|----------|
-| Dashboard UI | `apps/command-center/` (Next.js React) |
-| Public website | `apps/website/` (Next.js) |
+| Feature | Location |
+|---------|----------|
+| Dashboard UI | `apps/command-center/` |
+| Public site | `apps/website/` |
 | API endpoints | `apps/command-center/src/app/api/` |
 | Standalone scripts | `scripts/` |
 | Shared libraries | `scripts/lib/` |
 
-## NEVER Touch
-
-- `archive/act-dashboard/` - Legacy HTML dashboards, archived
-- `archive/intelligence-platform/` - Reference code only, being absorbed into command-center
-
-## API Development
-
-When building new API endpoints:
-1. Add to `apps/command-center/src/app/api/` (Next.js API routes)
-2. Use `@/lib/supabase` for server-side Supabase client in API routes
-
-## Strict Rules
-
-- **NEVER add features to `archive/`** - these are read-only reference code
-- **ALL new UI work** goes in `apps/command-center/` or `apps/website/`
-- **ALL new API routes** go in `apps/command-center/src/app/api/`
-- The React app calls its own API routes (no external API server dependency)
+**NEVER touch** `archive/act-dashboard/` or `archive/intelligence-platform/`.
 
 ## Workspace Commands
 
@@ -80,28 +71,30 @@ pnpm --filter @act/website dev          # Start website
 
 ## Development Workflow
 
-- **Build early, build often.** After editing TypeScript files, run `npx tsc --noEmit` in the relevant app directory before moving to the next file. Don't batch all changes then discover type errors at the end.
-- **Read before edit.** Always read a file before modifying it. Check existing types, imports, and property names — don't guess.
-- **Migrations need manual steps.** Database migrations in `supabase/migrations/` do NOT auto-run. After generating SQL, provide clear instructions for applying it. Verify the migration succeeded before writing dependent code.
+- **Build early.** After editing TypeScript, run `npx tsc --noEmit` in the relevant app dir before moving to next file.
+- **Read before edit.** Always read a file before modifying — check existing types, imports, property names.
+- **Migrations don't auto-run.** After generating SQL in `supabase/migrations/`, provide explicit apply instructions and verify before writing dependent code.
+- **Phase-at-a-time execution** for multi-phase plans — feed one phase at a time, run `npx tsc --noEmit` between phases, commit at each phase boundary.
 
-## Integration Rules (CRITICAL)
+## Integration Rules
 
-Before implementing ANY external service integration, **STOP and audit first**:
+Before implementing ANY external service integration:
+1. Check what's already configured (existing SDKs, env vars, API clients)
+2. Check API limitations (rate limits, feature gaps, auth requirements)
+3. Check existing patterns in this codebase
+4. Then propose, with fallback if primary approach has risk
 
-1. **Check what's already configured** — search for existing SDKs, env vars, and API clients
-2. **Check API limitations** — rate limits, feature gaps, auth requirements
-3. **Check existing patterns** — how similar integrations are done in this codebase
-4. **Only then propose an approach** — with a fallback if the primary approach has risks
+**Notion edit rule**: Notion is mostly an outbound dashboard layer (17 `sync-*-to-notion.mjs` scripts overwrite content on each run). Before editing a Notion page or telling someone they can edit it, consult `wiki/decisions/notion-page-policy.md` to see whether the page is read-only, bidirectional, capture, or free-form. Capture pages (Money Sync, meetings, goals, inbound) are safe to edit. Outbound-only pages lose their edits on the next sync.
 
-### Already Configured Services
+### Already Configured
 
 | Service | Package | Key Files |
 |---------|---------|-----------|
-| Supabase | `@supabase/supabase-js` | `src/lib/supabase.ts`, all API routes |
+| Supabase | `@supabase/supabase-js` | `src/lib/supabase.ts` |
 | Anthropic | `@anthropic-ai/sdk` | `src/lib/telegram/bot.ts`, `src/lib/agent-tools.ts` |
 | OpenAI | `openai` | `src/lib/embeddings.ts`, `src/lib/telegram/voice.ts` |
 | Telegram | `grammy` | `src/lib/telegram/bot.ts`, `/api/telegram/webhook/` |
-| Google | `googleapis` | Service account + domain delegation for Gmail/Calendar |
+| Google | `googleapis` | Service account + domain delegation (Gmail/Calendar) |
 | Xero | `xero-node` | `scripts/sync-xero-to-supabase.mjs`, `/api/webhooks/xero/` |
 | Notion | `@notionhq/client` | `scripts/sync-notion-to-supabase.mjs` |
 | GHL | Custom API | `scripts/lib/ghl-api-service.mjs`, `/api/webhooks/ghl/` |
@@ -110,170 +103,182 @@ Before implementing ANY external service integration, **STOP and audit first**:
 
 ### Auth Patterns
 
-- **Google**: Service account with domain-wide delegation (JWT signing, no googleapis for TTS)
+- **Google**: Service account + domain-wide delegation (JWT signing, no googleapis for TTS)
 - **Xero**: OAuth2 with refresh token rotation
 - **Telegram**: Webhook with `x-telegram-bot-api-secret-token` header
 - **GHL/Xero webhooks**: Signature validation in route handlers
-- **Supabase**: Service role key for backend, anon key for frontend
+- **Supabase**: Service role key (backend), anon key (frontend)
 
-### Google Workspace Accounts
+**Google Workspace mailboxes:** `benjamin@`, `nicholas@`, `hi@`, `accounts@` `act.place`.
 
-4 mailboxes: `benjamin@act.place`, `nicholas@act.place`, `hi@act.place`, `accounts@act.place`
+## Schema-First Rule
 
-## Database (Schema-First Rule)
-
-Before writing ANY code that touches the database:
-1. **Run `/db-check` first** — or manually query `information_schema.columns` for every table you'll touch
-2. **Never assume column names** from context, grep results, or memory — verify them. Known traps: `type` not `invoice_type`, `public_avatar_url` not `avatar_url`
-3. **Check for existing views** (`v_` prefix) before writing complex joins — there may already be a view for what you need
-4. **Check NOT NULL columns without defaults** — these cause silent insert failures
-5. **Check unique constraints before upserts** — wrong `onConflict` columns cause data loss or duplicates
+Before any DB-touching code:
+1. Run `/db-check` or query `information_schema.columns`
+2. Never assume column names — known traps: `type` not `invoice_type`, `public_avatar_url` not `avatar_url`
+3. Check `v_` views before writing complex joins
+4. Check NOT NULL columns without defaults (silent insert failures)
+5. Check unique constraints before upserts (wrong `onConflict` = data loss)
 
 ### Supabase Query Patterns
 
-- Use `LEFT JOIN` instead of `NOT IN` for large datasets
-- Batch inserts via SQL `COPY` instead of per-row inserts when > 100 rows
-- **Always paginate past the 1,000-row default limit** — use `.range()` for bulk operations
-- Handle RPC timeouts gracefully — fall back to direct `psql` if needed
-
-## Debugging Principles
-
-- **Root cause first.** When something doesn't render or returns unexpected results, investigate the actual root cause before applying surface-level fixes. Don't blame missing data — verify the query, column names, and data pipeline first.
-- **Never apply workarounds** for schema mismatches — fix the actual column name or type.
-- **Trace the full path:** query → API → component → render. Don't guess where it breaks.
+- `LEFT JOIN` instead of `NOT IN` for large datasets
+- SQL `COPY` over per-row inserts when >100 rows
+- Always paginate past 1,000-row default — `.range()` for bulk
+- RPC timeouts → fall back to `psql`
+- Use `psql` for DDL (migrations, MV refresh, indexes) — `exec_sql` RPC doesn't support DDL
+- Sequential `execSync`, not `Promise.all`, for shell-spawned DB commands
 
 ## Error Handling
 
-- **401/auth errors:** Implement exponential backoff with max 3 retries. Never create infinite retry loops on auth failures.
-- **Silent failures are bugs.** All insert/upsert operations must compare attempted vs actual count. Log discrepancies.
+- **401/auth errors:** exponential backoff, max 3 retries. Never infinite-retry on auth.
+- **Silent failures are bugs.** All inserts/upserts must compare attempted vs actual count and log discrepancies.
 
 ## Testing & Deployment
 
-- **Never tell the user to test** until the fix is deployed/running in the target environment
-- After making changes, verify: TypeScript compiles clean → build passes → deployment completed → env vars set → THEN report ready to test
-- For Vercel deployments, check `vercel ls` or the deployment URL before declaring success
+- **Don't tell user to test until fix is deployed.** TypeScript clean → build passes → deployed → env vars set → THEN report ready.
+- For Vercel: check `vercel ls` or deployment URL before declaring success.
 
-## Agent Delegation (Scale Decision Matrix)
+## Review discipline (review in the smart zone, not the dumb zone)
 
-Match effort to complexity — don't over-delegate simple work:
-
-| Task Type | Approach | Example |
-|-----------|----------|---------|
-| Single fact / quick lookup | Do it directly, no sub-agents (< 5 tool calls) | "What's the Xero balance?" |
-| Focused single-source task | 1 agent or do it yourself | "Summarise this file" |
-| Multi-source comparison | 2-3 parallel agents | "Compare grant pipeline vs Xero actuals" |
-| Complex multi-domain analysis | 3-5 parallel agents with file-based handoffs | "Full financial cockpit review" |
-
-### File-Based Handoffs
-
-For multi-step operations, **write intermediate results to files** instead of returning everything inline:
-- Agent writes output to `thoughts/shared/handoffs/<slug>/<step>.md`
-- Returns a 1-2 line summary to parent context, not the full content
-- Parent reads the file only when it needs to synthesise
-- This prevents context bloat and survives compaction
-
-### Model Routing (Token Efficiency)
-
-When using the Task tool with sub-agents:
-- Use `model: "haiku"` for exploration, file finding, pattern matching (10-20x cheaper)
-- Use `model: "sonnet"` for implementation, refactoring, and code generation
-- Reserve Opus for architectural decisions and complex multi-file plans
-- Don't duplicate sub-agent work in the main context — trust agent output
-- For codebase exploration: use `subagent_type: "scout"` (Sonnet), NOT `"Explore"` (Haiku — inaccurate)
-- On Opus needing high accuracy: use Grep/Glob/Read directly instead of agents
-
-## Phase-at-a-Time Execution
-
-For multi-phase plans, feed one phase at a time rather than the full plan upfront:
-- Each phase should have specific files + acceptance criteria
-- Run `npx tsc --noEmit` between phases
-- **Commit working code at each phase boundary** — don't wait until all phases are done
-- Report phase status before proceeding to next
-
-## Supabase MCP (CRITICAL)
-
-- **ALWAYS verify which Supabase project MCP is connected to** before running any queries. Run `mcp__supabase__get_project_url` and confirm the URL matches the expected project.
-- **If MCP cannot see tables**, fall back to `psql` directly — do NOT spend time debugging MCP configuration.
-- **Use psql for DDL** (migrations, materialized view refreshes, index creation) — the `exec_sql` RPC does not support DDL.
-- **Use `execSync` sequentially** (not `Promise.all`) for shell-spawned database commands.
-- **Cross-reference project URL with documentation** before any database operation — never connect to or run migrations against the wrong project.
-
-## Implementation Rules
-
-- **Do NOT enter planning mode** unless the user explicitly asks for a plan. Default to implementing immediately.
-- **If a plan is needed**, keep it to <20 lines and get user approval before writing more. Never autonomously write multi-page plans.
-- **Never write plan files** without being asked. Start building.
-- **When user says "open" or "show"**, they want a browser opened or actual result displayed — not more code explanation.
-
-## Database Operations
-
-- **Always verify column names and primary keys** against the actual schema before writing migrations or insert statements — do not assume schema from memory.
-- **After applying any migration**, re-query the schema to confirm it took effect.
-- **If a migration fails**, read the error, fix the SQL, and retry (up to 3 times) before asking the user.
+- **Never self-review money/external-write code in the implementing session.** The session that wrote it reviews from the dumb zone (degraded by accumulated context). Clear (or hand to a fresh subagent / `/code-review`) and review against the diff in a clean context.
+- **Push standards TO the reviewer.** The implementer *pulls* context as needed; the reviewer gets the standards pushed in — verification.md confidence levels, the Schema-First rule, and the two-account rule (ACT spend lives only in NAB Visa #8815 + NJ Marchesi T/as ACT Everyday). For finance PRs, the review must confirm money math reconciles (attempted vs actual count) — feedback-loop quality is the ceiling on output quality.
 
 ## Data Display
 
-- **Query ALL matching records** for maps/tables — never limit to a single pagination page unless the user explicitly asks for pagination. Watch for Supabase's default 1,000 row limit.
-- **Ensure visualization relationships are meaningful** — don't create links based on shallow shared attributes like "same sector." Think through whether the data relationship produces useful insight.
-
-## Verification Honesty
-
-- **Never say "verified", "confirmed", or "checked"** unless you actually performed the verification
-- **Distinguish fact from inference.** If a number came from a query, say so. If it's calculated or estimated, say that.
-- **Flag uncertainty.** Use: "verified (queried Xero API)" vs "inferred (based on last 3 months)" vs "unverified (no data source)"
-- **Every dollar figure needs a source.** Don't generate financial numbers without citing the table/API they came from
-- This matters because ACT uses generated reports for R&D tax claims, grant applications, and board reporting — unsupported claims have real consequences
+- **Query ALL matching records** for maps/tables — never limit to one page unless user asks. Default 1,000 limit applies.
+- **Visualization relationships must be meaningful** — don't link on shallow shared attributes.
 
 ## Provenance for Generated Reports
 
-When generating financial summaries, grant analyses, project health reports, or any data-driven artifact:
+Financial summaries, grant analyses, project health reports, R&D evidence:
+1. Create the report at appropriate location
+2. Create `<report-path>.provenance.md` sidecar documenting sources, what's verified vs inferred, gaps, reproducibility
+3. Use template at `thoughts/shared/templates/provenance-template.md`
 
-1. **Create the report** at the appropriate location
-2. **Create a provenance sidecar** at `<report-path>.provenance.md` documenting:
-   - Which data sources were queried (tables, APIs, date ranges)
-   - What was cross-verified vs inferred vs unverified
-   - Known gaps or assumptions
-   - How to reproduce the report
-3. **Use the template** at `thoughts/shared/templates/provenance-template.md`
-
-This is especially critical for:
-- R&D tax incentive evidence (43.5% refund depends on documentation quality)
-- Grant applications (funders verify claims)
-- Board/stakeholder reporting (trust requires transparency)
+Critical for: R&D tax evidence (43.5% refund), grant apps (funders verify), board reporting.
 
 ## Plan Artifacts
 
-When creating plans (at user's request), use the structured template at `thoughts/shared/templates/plan-template.md`:
-- **Task ledger** — trackable checklist that survives context compaction
-- **Decision log** — why choices were made (invaluable when resuming after weeks)
-- **Verification log** — what's confirmed vs assumed
-- **Structured changelog** — objective/changed/verified/failed/blockers/next per round
+When creating plans (only when asked), use template at `thoughts/shared/templates/plan-template.md`. Include task ledger, decision log, verification log, structured changelog. Plans go in `thoughts/shared/plans/<slug>.md`.
 
-Plans go in `thoughts/shared/plans/<slug>.md` with consistent slug-based naming.
+**Doc lifecycle — scaffolding vs evidence (guard against doc-rot).** Two distinct artifacts, two fates:
+- **Scaffolding** (implementation plans, issue/PRD-as-checklist) is *disposable*. Once shipped, `git mv` the plan into a dated `_archive/` dir so live agents don't re-discover a stale plan and code against requirements that have since changed. Don't keep shipped plans sitting in `thoughts/shared/plans/` as if current.
+- **Evidence** (decisions, `.provenance.md` sidecars, ADRs, the R&D narrative, the wiki) is *durable* — keep forever. R&D's 43.5% refund and funder verification require contemporaneous records; this is generated from decisions, not the working plan, and survives the scaffolding it came from.
+- **Money work:** one record proves the full path before any bulk run — tag/reconcile/display a single transaction end-to-end (the tracer bullet) before processing the batch.
 
-## Bias Towards Action
+## Finance — the 4-Surface Model (2026-05-08)
 
-- **Default to implementation, not planning.** Unless the user explicitly asks for a plan, start building.
-- **If unsure, ask one question** — don't enter a multi-question discovery phase.
-- **Show working code quickly** — a rough working version beats a perfect plan.
+Every finance use case maps to exactly one of four surfaces — no use case is served by two. **Notion for reading · command-center for operating · scripts for automating · Telegram for pushing.**
 
-## Skill routing
+Full detail — front-door URLs, the use-case→surface routing table (22 cases), runbook/architecture pointers, and the retired/archived inventory — is in `.claude/references/finance-surfaces.md`. **Read it before routing a specific finance use case to a surface** (pull, not always-on).
 
-When the user's request matches an available skill, ALWAYS invoke it using the Skill
-tool as your FIRST action. Do NOT answer directly, do NOT use other tools first.
-The skill has specialized workflows that produce better results than ad-hoc answers.
+## Skill Routing (active skills only)
 
-Key routing rules:
-- Product ideas, "is this worth building", brainstorming → invoke office-hours
-- Bugs, errors, "why is this broken", 500 errors → invoke investigate
-- Ship, deploy, push, create PR → invoke ship
-- QA, test the site, find bugs → invoke qa
-- Code review, check my diff → invoke review
-- Update docs after shipping → invoke document-release
-- Weekly retro → invoke retro
-- Design system, brand → invoke design-consultation
-- Visual audit, design polish → invoke design-review
-- Architecture review → invoke plan-eng-review
-- Save progress, checkpoint, resume → invoke checkpoint
-- Code quality, health check → invoke health
-- **ANY ACT-facing writing** (pitches, grants, web copy, campaign posts, journal spreads, board reports, donor letters, press, captions, artefact prose) → invoke act-brand-alignment and load `references/writing-voice.md`. Apply Curtis method (name the room, name the body, load the abstract noun, stop the line) and reject AI tells on sight (delve, crucial, pivotal, tapestry, underscore, em dashes, "not just X but Y", rule-of-three adjectives, "challenges and future prospects", superficial -ing tails).
+When the user's request matches an active skill, invoke it as the FIRST action.
+
+- **Non-trivial feature / design (3+ files or a domain decision)** → `grill-with-docs` is the front door — it aligns the plan against ACT's documented domain (ALMA, LCAA, entity structure, finance model) and catches naming drift (the Oonchiumpa→"Ntumba", ALMA-spelling, Custodian-Economy traps) before any code. Reserve plain `grill-me` for greenfield work with no domain docs to grill against. Alignment is human-in-loop and can't be looped — don't over-polish the resulting PRD; the shared understanding is the asset. **Write targets:** resolved terms → `wiki/concepts/`, ADRs → `wiki/decisions/` (per `docs/agents/domain.md`) — never let the skill create `CONTEXT.md` or `docs/adr/`.
+- **ANY ACT-facing writing** (pitches, grants, web copy, journal spreads, board reports, donor letters, captions, artefact prose) → `act-brand-alignment` and load `references/writing-voice.md`. Curtis method: name the room, name the body, load the abstract noun, stop the line. Reject AI tells (delve, crucial, pivotal, tapestry, em dashes, "not just X but Y").
+- **Before publishing ANY storyteller/community content externally** (a story, quote, name, photo, or video → public wiki, newsletter, Empathy Ledger syndication, social, funder/board deck, website) → `consent-check` FIRST. Blocking OCAP gate: incomplete or unverified consent trail = do not publish; never fabricate names/dates to fill a gap.
+- **Database query/schema check** → `db-check` or `preflight`
+- **Bug fix loop** → `fix` (orchestrates debug → implement → test → commit)
+- **Receipt hunt / BAS / finance ops** → `bas-cycle`, `find-receipt`, `tag-transactions`, `scan-subscriptions` (these tag/fetch — they don't compute).
+- **Card-line reconciliation** (NAB Visa #8815 — match/dedupe/create, surcharges, duplicates, "what's unmatched", Dext→Xero) → `reconcile-cycle` (drives the `/finance/reconcile` cockpit; read-only — the reconcile click stays in Xero). Full finance skill-suite map: `wiki/concepts/finance-skill-suite.md`.
+- **Writing or changing money *math*** (ledger aggregations, reconciliation, R&D offset, runway, pile-mix — anything that emits a dollar figure) → **TDD-first** via `tdd`: write the failing test asserting the expected total *before* the implementation. A silent wrong number is the expensive finance failure and a manual glance won't catch it — the PostgREST 1000-cap truncation read org cash_spent at $590K of a real $975K; a test pinned to a known total catches that whole class of bug. Feedback-loop quality is the ceiling on output quality.
+- **After completing engineering that resolved genuine technical uncertainty** (novel architecture, experimental integration, an outcome not knowable in advance) → offer `rd-capture` to record the contemporaneous R&D evidence for the 43.5% R&D Tax Incentive. Eligibility gate first — routine CRUD / config / known-solution fixes are NOT R&D; never inflate them.
+- **Wiki / knowledge base** → `wiki`
+- **Deploy** → `deploy`
+- **Verify a fix** → `verify-fix` before claiming done
+- **Scheduled background work** → `/schedule` (built-in)
+
+For tasks that don't match any active skill, just do the work directly.
+
+## Agent skills
+
+### Issue tracker
+
+Issues and PRDs for this repo live in GitHub Issues for `Acurioustractor/act-global-infrastructure`. See `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+The mattpocock triage roles use their default label strings, with existing `wontfix` reused. See `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+This repo uses ACT's multi-source domain layout: `STEERING.md`, `wiki/concepts/`, `wiki/decisions/`, and `docs/architecture/`. See `docs/agents/domain.md`.
+
+## Skills Pruned 2026-05-01
+
+The gstack bundle and ~25 standalone meta-skills were archived to `~/.claude/skills/_archive/2026-05-01-pruning/`. Restore on demand — see `RESTORE.md` in that dir. If a skill you reach for is missing, surface it: "the X skill is archived, want me to restore it?"
+
+## Action Tiers (load every session, especially in auto-mode)
+
+Full classification: `~/.claude/rules/workflow.md` § "Action tiers".
+
+Quick reference:
+- **Tier 1 (local-only)** — Read/Edit/local scripts/local commits/branch creation. Auto-mode: just do.
+- **Tier 2 (shared-state, reversible)** — `git push`, archive moves, Notion edits to outbound pages, PM2 changes, GHL field updates. Always post "about to do X — proceed?" first, even in auto-mode.
+- **Tier 3 (shared-state, hard-to-reverse)** — Open/close/merge PR, push to main, force-push, send email/Slack/Telegram, Xero writes, Supabase migrations. **Require the explicit verb in the user's message** ("merge", "send", "void"). No verb → no action.
+- **Tier 4 (forbidden in auto-mode)** — Drop tables, send money, force-push to main, delete user data. Refuse + ask, ≥2 confirmations.
+
+At session start in this repo, run `git log --since="2 hours ago" --all --oneline` and flag if another session was active. Prevents cross-session races (encountered 2026-05-08 with PR #52).
+
+"Archive X" = `git mv` to a dated `_archive/` dir + `RESTORE.md`. Never `git rm` when "archive" was the request.
+
+## Multi-session discipline (2026-05-17 — load every session)
+
+Parallel Claude Code sessions WILL stomp each other unless these rules hold. The 2026-05-17 ecosystem-digest session hit 3 cross-session collisions in one sitting: stashed untracked files, branch swaps mid-edit, commits landing on wrong branches. This section codifies what stops it happening again.
+
+### Session start (mandatory)
+
+1. `git fetch --prune origin` — sync remote refs, drop deleted remotes.
+2. `git rev-parse --abbrev-ref HEAD` — note the branch you're starting on.
+3. `git log --since="2 hours ago" --all --oneline` — flag unknown commits to the user.
+4. `git status -s` — flag any in-progress work from a prior session.
+
+If steps 3 or 4 surface anything unexpected, **STOP** and surface to the user before any Edit/Write. Cross-session work is the leading cause of lost edits here.
+
+### Active guardrails (installed)
+
+- **Branch-stamp hook** in `.claude/settings.json` (`SessionStart` + `PreToolUse` Edit|Write): warns when HEAD has moved since session start. Stamp file `.claude/.session-branch-stamp` is gitignored. Snippet to install: `.claude/settings.json.proposed-2026-05-17`.
+- **Commit-msg hook** in `.githooks/commit-msg`: nudges (does not block) `Plan: <slug>` adoption. Activate per-clone with `git config core.hooksPath .githooks`.
+- **Weekly ecosystem digest** runs Mon 7:55am AEST (PM2 entry `ecosystem-digest`). Surfaces what shipped across all ACT repos grouped by `Plan:` trailer + by file-area heatmap. Notion page id: `ecosystemDigest` in `config/notion-database-ids.json`.
+
+### Worktree lifecycle
+
+- Each Claude Code session running concurrently MUST be in its own worktree under `.claude/worktrees/<adjective-name-XXXXXX>/`. NEVER two sessions in the main worktree (`/Users/benknight/Code/act-global-infrastructure`).
+- After a worktree's work is merged (or session ends): commit/stash any leftover state, push the branch if useful, then `git worktree remove <path>`.
+- Stale worktrees with leftover untracked work get recovered (move drafts to main repo's `thoughts/shared/drafts/`, commit plan/wiki edits to their own branch, push) before removal.
+
+### Stash hygiene
+
+- `git stash push -m "<descriptive label>"` every time. No anonymous stashes.
+- Prune stashes older than 2 weeks during periodic sweeps (`git stash drop stash@{N}`).
+
+_(See "Archive X" rule above — applies inside agent worktrees too.)_
+
+## Trust profile — solo-author mode (2026-05-17)
+
+ACT is a solo-author repo. **Ben is the only human contributor.** Other PR authors (`claude/*`, `eod-sweep/*`, `codex/*`, `feat/*-YYYY-MM-DD`) are agent worktrees acting on Ben's behalf. Treat their work the same as his own.
+
+### Default actions — no per-action verb needed
+
+- **Merge own PRs** — when `gh pr view <N> --json mergeable,statusCheckRollup` shows mergeable AND no failing required checks AND title doesn't contain `WIP` / `DRAFT` / `DO NOT MERGE`, run `gh pr merge <N> --merge --delete-branch` without asking. Vercel preview failures on PRs that don't touch `apps/` are NOT blocking.
+- **Commit recovered work** — when cleaning stale worktrees / stashes, default to committing preserved files to the current cleanup branch with a `recovered(<area>):` commit message. Never delete unreviewed user work.
+- **Rename agent-named branches** — for `claude/<adjective-noun-XXXXXX>` branches with preserved work, rename to `wip/<topic>-<YYYY-MM-DD>` before pushing. `<topic>` = directory of the first changed file (e.g. `wip/rd-plans-2026-05-17`).
+- **Edit `.claude/settings.json`** — allowed once the `settings.local.json` permission rule is in place (see `.claude/settings.local.json.proposed-2026-05-17` for the rules to paste).
+- **Reload PM2 + `pm2 save`** — when a script or config change requires it, just do it.
+
+### Still requires explicit verb in user's message
+
+- `git push --force` to any branch
+- `git rm` (not `git mv`) of tracked files
+- Anything in `~/.claude/rules/workflow.md` Tier 4 (drop tables, send money, force-push to main, delete user data)
+- Send external messages — email / Slack / Telegram / Notion comments addressed to people other than Ben
+- Production database migrations (apply_migration)
+- Anything that moves money in Xero (invoice writes, payments, voids)
+- GHL contact merge / delete / bulk-update
+
+### Permission baseline (paired with this trust profile)
+
+The trust profile assumes `.claude/settings.local.json` has the allow rules from `.claude/settings.local.json.proposed-2026-05-17`. Without those, the auto-mode classifier still blocks `.claude/settings.json` edits regardless of what this section says.

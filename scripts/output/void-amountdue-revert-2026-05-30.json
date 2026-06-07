@@ -1,0 +1,42 @@
+[
+  {
+    "xero_id": "18516af0-574b-4d12-9120-223782855c33",
+    "contact_name": "Palm Island Community Company Limited (PICC)",
+    "status": "VOIDED",
+    "amount_paid": 0,
+    "amount_due": 77000,
+    "total": 77000
+  },
+  {
+    "xero_id": "8b0b06be-40b7-4f56-95c4-d9110f41f624",
+    "contact_name": "Centrecorp Foundation",
+    "status": "VOIDED",
+    "amount_paid": 0,
+    "amount_due": 97900,
+    "total": 97900
+  },
+  {
+    "xero_id": "981bc90d-faf3-4a19-937b-4f359fb1777b",
+    "contact_name": "Centrecorp Foundation",
+    "status": "DELETED",
+    "amount_paid": 0,
+    "amount_due": 33000,
+    "total": 33000
+  },
+  {
+    "xero_id": "d5df30b3-b95e-4232-bcf1-9dbc270b1be2",
+    "contact_name": "Centrecorp Foundation",
+    "status": "VOIDED",
+    "amount_paid": 0,
+    "amount_due": 61050,
+    "total": 61050
+  },
+  {
+    "xero_id": "d82455cb-8bcd-4d5a-bd2d-1f52873fb468",
+    "contact_name": "Centrecorp Foundation",
+    "status": "VOIDED",
+    "amount_paid": 0,
+    "amount_due": 106150,
+    "total": 106150
+  }
+]

@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "updated": "2026-05-28",
+  "description": "Per-partner config for scripts/draft-partner-newsletter.mjs. Partner editions are per-recipient (monthly, private). Bespoke entries in `partners` (keyed by slug) override everything; partners NOT listed here fall back to `_default` + a live ghl_contacts lookup for the recipient's real name/email/org. Mirrors the shape of funders.json. Add a bespoke entry only when a partner is worth a hand-tuned voice; the long tail runs on _default. See Notion: Comms & CRM Operating System > Newsletter + social audience system.",
+  "_schema": {
+    "name": "Partner / organisation display name (string)",
+    "stage": "relationship stage e.g. active | warm | dormant (string)",
+    "primary_contact": "person we write to (string)",
+    "primary_email": "send address — used by prepare-newsletter-for-send.mjs (string)",
+    "ghl_id": "optional GHL contact id to scope candidates / resolve email (string)",
+    "tone": "voice instruction shaping every paragraph (string)",
+    "framing_notes": "what this partner cares about; shapes content selection (string)",
+    "claims_to_lead_with": "array of claim slugs (project:claim-slug) to feature",
+    "claims_to_avoid": "array of claim slugs to keep out",
+    "project_codes": "optional array — when set, candidates are filtered to these projects so a delivery partner only sees their own work"
+  },
+  "_default": {
+    "stage": "active",
+    "tone": "warm, plain, peer-to-peer. We write to a partner as a fellow worker, not a sponsor or an audience. Name the concrete thing we built together, name who did it, say what's next. No pitch tone, no thanking-the-funder register.",
+    "framing_notes": "Lead with the shared work — what moved since last month on the projects this partner touches. Be specific about place, people and dates. Close with the one thing we need from them or are bringing them next.",
+    "claims_to_lead_with": [],
+    "claims_to_avoid": []
+  },
+  "partners": {}
+}

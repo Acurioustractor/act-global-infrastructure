@@ -9,6 +9,9 @@
   "scripts": {
     "test": "node --test scripts/tests/*.test.mjs",
     "test:finance": "node scripts/finance-engine.mjs --self-test",
+    "schema:check": "node scripts/check-schema-contract.mjs",
+    "schema:baseline": "node scripts/check-schema-contract.mjs --baseline",
+    "schema:snapshot": "node scripts/check-schema-contract.mjs --snapshot",
     "ask": "node scripts/ask-act.mjs",
     "sync:ghl": "node scripts/sync-ghl-to-notion.mjs",
     "sync:ghl:supabase": "node scripts/sync-ghl-to-supabase.mjs",
@@ -79,6 +82,7 @@
     "living:scan": "node scripts/living-ecosystem-alignment-scan.mjs",
     "living:validate": "node scripts/validate-living-ecosystem-config.mjs",
     "repo:connections": "node scripts/verify-repo-connections.mjs",
+    "repo:hygiene": "node scripts/repo-hygiene.mjs",
     "wiki:bootstrap:sources": "node scripts/wiki-bootstrap-source-summaries.mjs",
     "wiki:bootstrap:sources:dry-run": "node scripts/wiki-bootstrap-source-summaries.mjs --dry-run",
     "wiki:bootstrap:sources:articles": "node scripts/wiki-bootstrap-source-summaries.mjs --auto-supabase-articles",
@@ -161,8 +165,10 @@
     "exifr": "^7.1.3",
     "express": "^5.2.1",
     "googleapis": "^170.0.0",
+    "marked": "^18.0.3",
     "openai": "^6.15.0",
     "pdf-parse": "^2.4.5",
+    "pg": "^8.20.0",
     "xero-node": "^13.3.1"
   }
 }

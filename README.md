@@ -2,6 +2,18 @@
 
 **Central automation and tooling for the ACT ecosystem**
 
+**Start here for steering files:** [`STEERING.md`](STEERING.md)
+**LLM entrypoint:** [`llms.txt`](llms.txt)
+
+---
+
+## Core ACT Terms
+
+- **Soul** - the origin layer of ACT.
+- **LCAA** - Listen, Curiosity, Action, Art; ACT's practice loop.
+- **ALMA** - Australian Living Map of Alternatives; ACT's evidence-graded catalogue of community-led alternatives.
+- **Governed Proof** - the evidence, review, and publication layer.
+
 ---
 
 ## 🎯 What This Is

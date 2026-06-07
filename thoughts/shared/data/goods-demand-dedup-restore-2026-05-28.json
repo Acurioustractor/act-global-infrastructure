@@ -1,0 +1,154 @@
+{
+  "generatedAt": "2026-05-27T21:06:47.871Z",
+  "applied": true,
+  "restore": [
+    {
+      "community": "PAPUNYA",
+      "action": {
+        "community": "PAPUNYA",
+        "keepId": "EgkXFugnS2xxR9wYaWVh",
+        "setValue": 192550,
+        "deleteId": "pItYrdA1TvqqZogYiYjU",
+        "why": "store row (Buyer Matched) + $-demand Signal row → keep store, carry $, delete demand"
+      },
+      "deletedOpp": {
+        "id": "pItYrdA1TvqqZogYiYjU",
+        "name": "PAPUNYA — Goods Demand $193K",
+        "monetaryValue": 192550,
+        "pipelineId": "UQsrmuqzxMSdCTklxEcG",
+        "pipelineStageId": "0c5ed787-2015-4af0-b2ad-a916e40879db",
+        "status": "open",
+        "lastStatusChangeAt": "2026-03-13T22:29:29.321Z",
+        "lastStageChangeAt": "2026-04-23T20:10:18.173Z",
+        "createdAt": "2026-03-13T22:29:29.321Z",
+        "updatedAt": "2026-04-23T20:10:18.184Z",
+        "contactId": "sTvgHaWnDeaKnCayvyf8",
+        "isAttribute": false,
+        "internalSource": {
+          "type": "CREATED",
+          "id": "695cb35c2eda1cb50c2dd51f",
+          "apiVersion": "2021-07-28",
+          "channel": "OAUTH",
+          "source": "INTEGRATION"
+        },
+        "locationId": "agzsSZWgovjwgpcoASWG",
+        "lastActionDate": "2026-04-23T20:10:18.173Z",
+        "followers": [],
+        "contact": {
+          "id": "sTvgHaWnDeaKnCayvyf8",
+          "name": "PAPUNYA NT",
+          "companyName": "PAPUNYA, NT",
+          "email": "papunya@goods.civicgraph.io",
+          "tags": [
+            "goods-warm",
+            "act-gd",
+            "project:act-gd",
+            "audience-partner"
+          ],
+          "followers": []
+        }
+      }
+    },
+    {
+      "community": "BARUNGA",
+      "action": {
+        "community": "BARUNGA",
+        "keepId": "YKQwyI2TwAi8f1b0iWcW",
+        "setValue": 172700,
+        "deleteId": "sVyQaulOXIzAwrm0VpGv",
+        "why": "store row (Buyer Matched) + $-demand Signal row → keep store, carry $, delete demand"
+      },
+      "deletedOpp": {
+        "id": "sVyQaulOXIzAwrm0VpGv",
+        "name": "BARUNGA — Goods Demand $173K",
+        "monetaryValue": 172700,
+        "pipelineId": "UQsrmuqzxMSdCTklxEcG",
+        "pipelineStageId": "0c5ed787-2015-4af0-b2ad-a916e40879db",
+        "status": "open",
+        "lastStatusChangeAt": "2026-03-13T22:29:37.644Z",
+        "lastStageChangeAt": "2026-04-23T20:10:25.637Z",
+        "createdAt": "2026-03-13T22:29:37.644Z",
+        "updatedAt": "2026-04-23T20:10:25.653Z",
+        "contactId": "uPpIqeOMahVTSBk5N3j3",
+        "isAttribute": false,
+        "internalSource": {
+          "type": "CREATED",
+          "id": "695cb35c2eda1cb50c2dd51f",
+          "apiVersion": "2021-07-28",
+          "channel": "OAUTH",
+          "source": "INTEGRATION"
+        },
+        "locationId": "agzsSZWgovjwgpcoASWG",
+        "lastActionDate": "2026-04-23T20:10:25.637Z",
+        "followers": [],
+        "contact": {
+          "id": "uPpIqeOMahVTSBk5N3j3",
+          "name": "BARUNGA NT",
+          "companyName": "BARUNGA, NT",
+          "email": "barunga@goods.civicgraph.io",
+          "tags": [
+            "goods-warm",
+            "act-gd",
+            "project:act-gd",
+            "audience-partner"
+          ],
+          "followers": []
+        }
+      }
+    },
+    {
+      "community": "MOUNT LIEBIG",
+      "action": {
+        "community": "MOUNT LIEBIG",
+        "keepId": "8q4kQlIXJXAz3XjYjZDW",
+        "setValue": null,
+        "deleteId": "xD3M6SAfpIPmis7jav1h",
+        "why": "same store twice → keep Amundurrngu (canonical corp), delete generic dup"
+      },
+      "deletedOpp": {
+        "id": "xD3M6SAfpIPmis7jav1h",
+        "name": "Mt Liebig Community Store Aboriginal Corporation — MOUNT LIEBIG",
+        "monetaryValue": 0,
+        "pipelineId": "UQsrmuqzxMSdCTklxEcG",
+        "pipelineStageId": "02502aa3-9a0d-4ddd-b1f0-c1e836838426",
+        "status": "open",
+        "source": "Goods top-25 activation",
+        "lastStatusChangeAt": "2026-05-27T06:07:12.495Z",
+        "lastStageChangeAt": "2026-05-27T06:07:12.495Z",
+        "createdAt": "2026-05-27T06:07:12.495Z",
+        "updatedAt": "2026-05-27T06:07:12.495Z",
+        "contactId": "HAN2VLPXisHJErXrXkhy",
+        "isAttribute": false,
+        "internalSource": {
+          "type": "CREATED",
+          "id": "695cb35c2eda1cb50c2dd51f",
+          "source": "INTEGRATION",
+          "apiVersion": "2021-07-28",
+          "channel": "OAUTH"
+        },
+        "locationId": "agzsSZWgovjwgpcoASWG",
+        "lastActionDate": "2026-05-27T06:07:12.495Z",
+        "followers": [],
+        "contact": {
+          "id": "HAN2VLPXisHJErXrXkhy",
+          "name": "Mt Liebig Community Store Aboriginal Corporation",
+          "companyName": "Mt Liebig Community Store Aboriginal Corporation",
+          "email": "mt-liebig-community-store-aboriginal-corporation-mount-liebig@goods.civicgraph.io",
+          "tags": [
+            "civicgraph",
+            "goods",
+            "act-gd",
+            "project:act-gd",
+            "goods-community-mount-liebig",
+            "goods-state-nt",
+            "goods-role-store",
+            "goods-communitycontrolled",
+            "goods-stage-prospect",
+            "audience-partner"
+          ],
+          "followers": []
+        }
+      }
+    }
+  ]
+}

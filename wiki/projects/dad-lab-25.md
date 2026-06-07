@@ -1,3 +1,15 @@
+---
+title: Dad.Lab.25
+status: Active
+canonical_slug: dad-lab-25
+canonical_code: ACT-DL
+tier: satellite
+website_slug: dad-lab-25
+website_path: /projects/dad-lab-25
+public_surface: project
+cluster: dad-lab-25
+---
+
 # Dad.Lab.25
 
 > A community-led men's health initiative supporting fathers through peer connection, culturally appropriate wellbeing programs, and honest inquiry into what it means to be a dad today.

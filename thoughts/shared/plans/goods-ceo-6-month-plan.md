@@ -1,3 +1,9 @@
+---
+title: "Plan: Goods on Country — CEO 6-Month Operating Plan (Apr–Oct 2026)"
+status: review-needed
+date: 2026-04-23
+last_verified: 2026-05-08
+---
 # Plan: Goods on Country — CEO 6-Month Operating Plan (Apr–Oct 2026)
 
 > Slug: `goods-ceo-6-month-plan`

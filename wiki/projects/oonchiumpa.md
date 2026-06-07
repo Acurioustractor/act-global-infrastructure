@@ -1,3 +1,15 @@
+---
+title: Oonchiumpa
+status: Active
+canonical_slug: oonchiumpa
+canonical_code: ACT-OO
+tier: satellite
+website_slug: oonchiumpa
+website_path: /projects/oonchiumpa
+public_surface: project
+cluster: oonchiumpa
+---
+
 # Oonchiumpa
 
 > Aboriginal-led youth program in Mparntwe (Alice Springs) — grounding young people in culture, Country, and identity across seven language groups of Central Australia.

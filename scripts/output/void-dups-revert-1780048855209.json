@@ -1,0 +1,3145 @@
+[
+  {
+    "invoiceID": "c108669b-f8ed-4b9b-a410-c2a0d71bff2f",
+    "vendor": "HighLevel",
+    "before": {
+      "Type": "ACCPAY",
+      "InvoiceID": "c108669b-f8ed-4b9b-a410-c2a0d71bff2f",
+      "InvoiceNumber": "AGAPY3VP-0007",
+      "Reference": "",
+      "Prepayments": [],
+      "Overpayments": [],
+      "AmountDue": 137.27,
+      "AmountPaid": 0,
+      "Url": "https://app.dext.com/receipts/1987477997",
+      "SentToContact": false,
+      "CurrencyRate": 1,
+      "IsDiscounted": false,
+      "HasAttachments": true,
+      "HasErrors": false,
+      "Attachments": [
+        {
+          "AttachmentID": "80489e32-2d6e-4a34-9318-4cb15d8f58be",
+          "FileName": "19874779970.pdf",
+          "Url": "https://api.xero.com/api.xro/2.0/Invoices/c108669b-f8ed-4b9b-a410-c2a0d71bff2f/Attachments/19874779970.pdf",
+          "MimeType": "application/pdf",
+          "ContentLength": 31540
+        }
+      ],
+      "InvoicePaymentServices": [],
+      "Contact": {
+        "ContactID": "b61561f1-4ac0-4f2d-8168-3fc638b8d25b",
+        "ContactStatus": "ACTIVE",
+        "Name": "HighLevel",
+        "EmailAddress": "",
+        "BankAccountDetails": "",
+        "Addresses": [
+          {
+            "AddressType": "STREET",
+            "City": "",
+            "Region": "",
+            "PostalCode": "",
+            "Country": ""
+          },
+          {
+            "AddressType": "POBOX",
+            "City": "",
+            "Region": "",
+            "PostalCode": "",
+            "Country": ""
+          }
+        ],
+        "Phones": [
+          {
+            "PhoneType": "DEFAULT",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          },
+          {
+            "PhoneType": "DDI",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          },
+          {
+            "PhoneType": "FAX",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          },
+          {
+            "PhoneType": "MOBILE",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          }
+        ],
+        "UpdatedDateUTC": "/Date(1764043588067+0000)/",
+        "ContactGroups": [],
+        "IsSupplier": true,
+        "IsCustomer": false,
+        "SalesTrackingCategories": [],
+        "PurchasesTrackingCategories": [],
+        "ContactPersons": [],
+        "HasValidationErrors": false
+      },
+      "DateString": "2026-02-23T00:00:00",
+      "Date": "/Date(1771804800000+0000)/",
+      "DueDateString": "2026-02-23T00:00:00",
+      "DueDate": "/Date(1771804800000+0000)/",
+      "Status": "AUTHORISED",
+      "LineAmountTypes": "Exclusive",
+      "LineItems": [
+        {
+          "Description": ".",
+          "UnitAmount": 137.27,
+          "TaxType": "EXEMPTEXPENSES",
+          "TaxAmount": 0,
+          "LineAmount": 137.27,
+          "AccountCode": "485",
+          "Tracking": [
+            {
+              "Name": "Business Divisions",
+              "Option": "A Curious Tractor",
+              "TrackingCategoryID": "91448ff3-eb13-437a-9d97-4d2e52c86ca4",
+              "TrackingOptionID": "1973a257-0d96-42c3-bca0-99623cb52923"
+            }
+          ],
+          "Quantity": 1,
+          "LineItemID": "9c16e87d-8829-48ad-9c3e-12842270417c",
+          "AccountID": "e2c5870f-6375-43d9-99d1-1c30b8edc30f",
+          "ValidationErrors": []
+        }
+      ],
+      "SubTotal": 137.27,
+      "TotalTax": 0,
+      "Total": 137.27,
+      "UpdatedDateUTC": "/Date(1773202165737+0000)/",
+      "CurrencyCode": "AUD"
+    }
+  },
+  {
+    "invoiceID": "c41d3789-e0d4-4dee-b9be-ed0f3ae45192",
+    "vendor": "Booking.com",
+    "before": {
+      "Type": "ACCPAY",
+      "InvoiceID": "c41d3789-e0d4-4dee-b9be-ed0f3ae45192",
+      "InvoiceNumber": "5538807858",
+      "Reference": "",
+      "Prepayments": [],
+      "Overpayments": [],
+      "AmountDue": 89,
+      "AmountPaid": 0,
+      "Url": "https://app.dext.com/receipts/1987481756",
+      "SentToContact": false,
+      "CurrencyRate": 1,
+      "IsDiscounted": false,
+      "HasAttachments": true,
+      "HasErrors": false,
+      "Attachments": [
+        {
+          "AttachmentID": "3eeb9cb4-09a8-4d20-914c-7baf60de93ca",
+          "FileName": "19874817560.pdf",
+          "Url": "https://api.xero.com/api.xro/2.0/Invoices/c41d3789-e0d4-4dee-b9be-ed0f3ae45192/Attachments/19874817560.pdf",
+          "MimeType": "application/pdf",
+          "ContentLength": 135892
+        }
+      ],
+      "InvoicePaymentServices": [],
+      "Contact": {
+        "ContactID": "8db6870e-f1d1-45a6-8375-c2777280daa8",
+        "ContactStatus": "ACTIVE",
+        "Name": "Booking.com",
+        "TaxNumber": "14130562097",
+        "Addresses": [
+          {
+            "AddressType": "POBOX"
+          },
+          {
+            "AddressType": "STREET"
+          }
+        ],
+        "Phones": [
+          {
+            "PhoneType": "DEFAULT"
+          },
+          {
+            "PhoneType": "DDI"
+          },
+          {
+            "PhoneType": "FAX"
+          },
+          {
+            "PhoneType": "MOBILE"
+          }
+        ],
+        "UpdatedDateUTC": "/Date(1752464958790+0000)/",
+        "ContactGroups": [],
+        "IsSupplier": true,
+        "IsCustomer": false,
+        "SalesTrackingCategories": [],
+        "PurchasesTrackingCategories": [],
+        "ContactPersons": [],
+        "HasValidationErrors": false
+      },
+      "DateString": "2025-12-22T00:00:00",
+      "Date": "/Date(1766361600000+0000)/",
+      "DueDateString": "2025-12-22T00:00:00",
+      "DueDate": "/Date(1766361600000+0000)/",
+      "Status": "AUTHORISED",
+      "LineAmountTypes": "Exclusive",
+      "LineItems": [
+        {
+          "Description": ".",
+          "UnitAmount": 80.91,
+          "TaxType": "INPUT",
+          "TaxAmount": 8.09,
+          "LineAmount": 80.91,
+          "AccountCode": "493",
+          "Tracking": [],
+          "Quantity": 1,
+          "LineItemID": "effb1fb1-15f5-4e1b-84d2-2bcd04ad66c0",
+          "AccountID": "3cc18292-e8aa-4a7e-ad5a-8be538e4f20d",
+          "ValidationErrors": []
+        }
+      ],
+      "SubTotal": 80.91,
+      "TotalTax": 8.09,
+      "Total": 89,
+      "UpdatedDateUTC": "/Date(1773202653627+0000)/",
+      "CurrencyCode": "AUD"
+    }
+  },
+  {
+    "invoiceID": "f47c47b4-8df4-4b04-8dea-5476f913ab67",
+    "vendor": "Telford Smith",
+    "before": {
+      "Type": "ACCPAY",
+      "InvoiceID": "f47c47b4-8df4-4b04-8dea-5476f913ab67",
+      "Reference": "auto-pushed dext_import f6e8498e",
+      "Prepayments": [],
+      "Overpayments": [],
+      "AmountDue": 19800,
+      "AmountPaid": 0,
+      "SentToContact": false,
+      "CurrencyRate": 1,
+      "IsDiscounted": false,
+      "HasAttachments": true,
+      "HasErrors": false,
+      "Attachments": [
+        {
+          "AttachmentID": "755a0c07-c88b-417f-813d-c06083090996",
+          "FileName": "Telford-Smith-Engineering-receipt.jpg",
+          "Url": "https://api.xero.com/api.xro/2.0/Invoices/f47c47b4-8df4-4b04-8dea-5476f913ab67/Attachments/Telford-Smith-Engineering-receipt.jpg",
+          "MimeType": "image/jpg",
+          "ContentLength": 149208
+        }
+      ],
+      "InvoicePaymentServices": [],
+      "Contact": {
+        "ContactID": "936270b1-2653-4fb5-91eb-55be0b48742c",
+        "ContactStatus": "ACTIVE",
+        "Name": "Telford Smith Engineering",
+        "EmailAddress": "",
+        "BankAccountDetails": "",
+        "TaxNumber": "86091281471",
+        "Addresses": [
+          {
+            "AddressType": "STREET",
+            "City": "",
+            "Region": "",
+            "PostalCode": "",
+            "Country": ""
+          },
+          {
+            "AddressType": "POBOX",
+            "City": "",
+            "Region": "",
+            "PostalCode": "",
+            "Country": ""
+          }
+        ],
+        "Phones": [
+          {
+            "PhoneType": "DEFAULT",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          },
+          {
+            "PhoneType": "DDI",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          },
+          {
+            "PhoneType": "FAX",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          },
+          {
+            "PhoneType": "MOBILE",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          }
+        ],
+        "UpdatedDateUTC": "/Date(1778906542153+0000)/",
+        "ContactGroups": [],
+        "IsSupplier": true,
+        "IsCustomer": false,
+        "SalesTrackingCategories": [],
+        "PurchasesTrackingCategories": [],
+        "ContactPersons": [],
+        "HasValidationErrors": false
+      },
+      "DateString": "2025-12-22T00:00:00",
+      "Date": "/Date(1766361600000+0000)/",
+      "DueDateString": "2025-12-22T00:00:00",
+      "DueDate": "/Date(1766361600000+0000)/",
+      "Status": "AUTHORISED",
+      "LineAmountTypes": "Inclusive",
+      "LineItems": [
+        {
+          "Description": "Telford Smith Engineering — Contractor — ACT-IN",
+          "UnitAmount": 19800,
+          "TaxType": "INPUT",
+          "TaxAmount": 1800,
+          "LineAmount": 19800,
+          "AccountCode": "400",
+          "Tracking": [
+            {
+              "Name": "Business Divisions",
+              "Option": "A Curious Tractor",
+              "TrackingCategoryID": "91448ff3-eb13-437a-9d97-4d2e52c86ca4",
+              "TrackingOptionID": "1973a257-0d96-42c3-bca0-99623cb52923"
+            },
+            {
+              "Name": "Project Tracking",
+              "Option": "ACT-IN — ACT Infrastructure",
+              "TrackingCategoryID": "1a1ad7c5-249a-4b1f-842d-06ba2a63a0fe",
+              "TrackingOptionID": "8250fb3a-4fc4-40c5-822d-7cd7a9caffaa"
+            }
+          ],
+          "Quantity": 1,
+          "LineItemID": "edf1c0ee-b1ca-4308-ba10-882ce531bbfb",
+          "AccountID": "ecdc19e9-8fc8-4f67-81d0-273a49043a33",
+          "ValidationErrors": []
+        }
+      ],
+      "SubTotal": 18000,
+      "TotalTax": 1800,
+      "Total": 19800,
+      "UpdatedDateUTC": "/Date(1776852131503+0000)/",
+      "CurrencyCode": "AUD"
+    }
+  },
+  {
+    "invoiceID": "993dd389-f8ca-4ba0-9109-12eb5da17d0e",
+    "vendor": "Centre Canvas",
+    "before": {
+      "Type": "ACCPAY",
+      "InvoiceID": "993dd389-f8ca-4ba0-9109-12eb5da17d0e",
+      "Reference": "auto-pushed dext_import 25e68144",
+      "Prepayments": [],
+      "Overpayments": [],
+      "AmountDue": 10285,
+      "AmountPaid": 0,
+      "SentToContact": false,
+      "CurrencyRate": 1,
+      "IsDiscounted": false,
+      "HasAttachments": true,
+      "HasErrors": false,
+      "Attachments": [
+        {
+          "AttachmentID": "729db0f4-4fb9-470b-a9b2-ada4413db505",
+          "FileName": "receipt.pdf",
+          "Url": "https://api.xero.com/api.xro/2.0/Invoices/993dd389-f8ca-4ba0-9109-12eb5da17d0e/Attachments/receipt.pdf",
+          "MimeType": "application/pdf",
+          "ContentLength": 1378361
+        }
+      ],
+      "InvoicePaymentServices": [],
+      "Contact": {
+        "ContactID": "09d2e189-0fa1-450a-ba54-b0ce40f791ef",
+        "ContactStatus": "ACTIVE",
+        "Name": "Centre Canvas And Upholstery",
+        "EmailAddress": "",
+        "BankAccountDetails": "",
+        "TaxNumber": "76009602635",
+        "Addresses": [
+          {
+            "AddressType": "STREET",
+            "City": "",
+            "Region": "",
+            "PostalCode": "",
+            "Country": ""
+          },
+          {
+            "AddressType": "POBOX",
+            "City": "",
+            "Region": "",
+            "PostalCode": "",
+            "Country": ""
+          }
+        ],
+        "Phones": [
+          {
+            "PhoneType": "DEFAULT",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          },
+          {
+            "PhoneType": "DDI",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          },
+          {
+            "PhoneType": "FAX",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          },
+          {
+            "PhoneType": "MOBILE",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          }
+        ],
+        "UpdatedDateUTC": "/Date(1778910802743+0000)/",
+        "ContactGroups": [],
+        "IsSupplier": true,
+        "IsCustomer": false,
+        "SalesTrackingCategories": [],
+        "PurchasesTrackingCategories": [],
+        "ContactPersons": [],
+        "HasValidationErrors": false
+      },
+      "DateString": "2026-03-31T00:00:00",
+      "Date": "/Date(1774915200000+0000)/",
+      "DueDateString": "2026-03-31T00:00:00",
+      "DueDate": "/Date(1774915200000+0000)/",
+      "Status": "AUTHORISED",
+      "LineAmountTypes": "Inclusive",
+      "LineItems": [
+        {
+          "Description": "Canva — Software & Subscriptions — ACT-IN",
+          "UnitAmount": 10285,
+          "TaxType": "INPUT",
+          "TaxAmount": 935,
+          "LineAmount": 10285,
+          "AccountCode": "485",
+          "Tracking": [
+            {
+              "Name": "Business Divisions",
+              "Option": "A Curious Tractor",
+              "TrackingCategoryID": "91448ff3-eb13-437a-9d97-4d2e52c86ca4",
+              "TrackingOptionID": "1973a257-0d96-42c3-bca0-99623cb52923"
+            },
+            {
+              "Name": "Project Tracking",
+              "Option": "ACT-IN — ACT Infrastructure",
+              "TrackingCategoryID": "1a1ad7c5-249a-4b1f-842d-06ba2a63a0fe",
+              "TrackingOptionID": "8250fb3a-4fc4-40c5-822d-7cd7a9caffaa"
+            }
+          ],
+          "Quantity": 1,
+          "LineItemID": "e33b8974-81f5-447d-98eb-63bb95d864bd",
+          "AccountID": "e2c5870f-6375-43d9-99d1-1c30b8edc30f",
+          "ValidationErrors": []
+        }
+      ],
+      "SubTotal": 9350,
+      "TotalTax": 935,
+      "Total": 10285,
+      "UpdatedDateUTC": "/Date(1776846971783+0000)/",
+      "CurrencyCode": "AUD"
+    }
+  },
+  {
+    "invoiceID": "a2a542fe-c6dc-4c47-ab9d-9b7f13fae33f",
+    "vendor": "Matnic Trust",
+    "before": {
+      "Type": "ACCPAY",
+      "InvoiceID": "a2a542fe-c6dc-4c47-ab9d-9b7f13fae33f",
+      "Reference": "auto-pushed dext_import 4b11be35",
+      "Prepayments": [],
+      "Overpayments": [],
+      "AmountDue": 6441.74,
+      "AmountPaid": 0,
+      "SentToContact": false,
+      "CurrencyRate": 1,
+      "IsDiscounted": false,
+      "HasAttachments": true,
+      "HasErrors": false,
+      "Attachments": [
+        {
+          "AttachmentID": "8353bb3a-9059-4660-962e-305fbaf6a9db",
+          "FileName": "The-Matnic-Trust-receipt.pdf",
+          "Url": "https://api.xero.com/api.xro/2.0/Invoices/a2a542fe-c6dc-4c47-ab9d-9b7f13fae33f/Attachments/The-Matnic-Trust-receipt.pdf",
+          "MimeType": "application/pdf",
+          "ContentLength": 32230
+        }
+      ],
+      "InvoicePaymentServices": [],
+      "Contact": {
+        "ContactID": "d5b8d503-eb01-4e43-bc31-8c3ca9e639b6",
+        "ContactStatus": "ACTIVE",
+        "Name": "The Matnic Trust",
+        "EmailAddress": "",
+        "BankAccountDetails": "",
+        "TaxNumber": "30229124325",
+        "Addresses": [
+          {
+            "AddressType": "STREET",
+            "City": "",
+            "Region": "",
+            "PostalCode": "",
+            "Country": ""
+          },
+          {
+            "AddressType": "POBOX",
+            "City": "",
+            "Region": "",
+            "PostalCode": "",
+            "Country": ""
+          }
+        ],
+        "Phones": [
+          {
+            "PhoneType": "DEFAULT",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          },
+          {
+            "PhoneType": "DDI",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          },
+          {
+            "PhoneType": "FAX",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          },
+          {
+            "PhoneType": "MOBILE",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          }
+        ],
+        "UpdatedDateUTC": "/Date(1664330234443+0000)/",
+        "ContactGroups": [],
+        "IsSupplier": true,
+        "IsCustomer": false,
+        "SalesTrackingCategories": [],
+        "PurchasesTrackingCategories": [],
+        "ContactPersons": [],
+        "HasValidationErrors": false
+      },
+      "DateString": "2025-12-14T00:00:00",
+      "Date": "/Date(1765670400000+0000)/",
+      "DueDateString": "2025-12-14T00:00:00",
+      "DueDate": "/Date(1765670400000+0000)/",
+      "Status": "AUTHORISED",
+      "LineAmountTypes": "Inclusive",
+      "LineItems": [
+        {
+          "Description": "The Matnic Trust — Other — ACT-IN",
+          "UnitAmount": 6441.74,
+          "TaxType": "INPUT",
+          "TaxAmount": 585.61,
+          "LineAmount": 6441.74,
+          "AccountCode": "429",
+          "Tracking": [
+            {
+              "Name": "Business Divisions",
+              "Option": "A Curious Tractor",
+              "TrackingCategoryID": "91448ff3-eb13-437a-9d97-4d2e52c86ca4",
+              "TrackingOptionID": "1973a257-0d96-42c3-bca0-99623cb52923"
+            },
+            {
+              "Name": "Project Tracking",
+              "Option": "ACT-IN — ACT Infrastructure",
+              "TrackingCategoryID": "1a1ad7c5-249a-4b1f-842d-06ba2a63a0fe",
+              "TrackingOptionID": "8250fb3a-4fc4-40c5-822d-7cd7a9caffaa"
+            }
+          ],
+          "Quantity": 1,
+          "LineItemID": "8e3a836a-f6d6-4d87-8047-03df516aa2e8",
+          "AccountID": "d41823f3-891a-448d-8f1a-6a5d1fac7041",
+          "ValidationErrors": []
+        }
+      ],
+      "SubTotal": 5856.13,
+      "TotalTax": 585.61,
+      "Total": 6441.74,
+      "UpdatedDateUTC": "/Date(1776852162677+0000)/",
+      "CurrencyCode": "AUD"
+    }
+  },
+  {
+    "invoiceID": "aac157a9-5517-4053-b074-6084ca63b3fe",
+    "vendor": "Oonchiumpa",
+    "before": {
+      "Type": "ACCPAY",
+      "InvoiceID": "aac157a9-5517-4053-b074-6084ca63b3fe",
+      "Reference": "auto-pushed dext_import 57a592c4",
+      "Prepayments": [],
+      "Overpayments": [],
+      "AmountDue": 5940,
+      "AmountPaid": 0,
+      "SentToContact": false,
+      "CurrencyRate": 1,
+      "IsDiscounted": false,
+      "HasAttachments": true,
+      "HasErrors": false,
+      "Attachments": [
+        {
+          "AttachmentID": "c995f0ae-a061-489b-93ab-cc995fa18246",
+          "FileName": "Oonchiumpa-Consultancy-And-Services-receipt.pdf",
+          "Url": "https://api.xero.com/api.xro/2.0/Invoices/aac157a9-5517-4053-b074-6084ca63b3fe/Attachments/Oonchiumpa-Consultancy-And-Services-receipt.pdf",
+          "MimeType": "application/pdf",
+          "ContentLength": 50957
+        }
+      ],
+      "InvoicePaymentServices": [],
+      "Contact": {
+        "ContactID": "e755a294-86f5-46a3-95dc-b7a32864906f",
+        "ContactStatus": "ACTIVE",
+        "Name": "Oonchiumpa Consultancy and Services",
+        "EmailAddress": "",
+        "BankAccountDetails": "",
+        "TaxNumber": "53658668627",
+        "Addresses": [
+          {
+            "AddressType": "STREET",
+            "City": "",
+            "Region": "",
+            "PostalCode": "",
+            "Country": ""
+          },
+          {
+            "AddressType": "POBOX",
+            "City": "",
+            "Region": "",
+            "PostalCode": "",
+            "Country": ""
+          }
+        ],
+        "Phones": [
+          {
+            "PhoneType": "DEFAULT",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          },
+          {
+            "PhoneType": "DDI",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          },
+          {
+            "PhoneType": "FAX",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          },
+          {
+            "PhoneType": "MOBILE",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          }
+        ],
+        "UpdatedDateUTC": "/Date(1776832045873+0000)/",
+        "ContactGroups": [],
+        "IsSupplier": true,
+        "IsCustomer": false,
+        "SalesTrackingCategories": [],
+        "PurchasesTrackingCategories": [],
+        "ContactPersons": [],
+        "HasValidationErrors": false
+      },
+      "DateString": "2025-12-15T00:00:00",
+      "Date": "/Date(1765756800000+0000)/",
+      "DueDateString": "2025-12-15T00:00:00",
+      "DueDate": "/Date(1765756800000+0000)/",
+      "Status": "AUTHORISED",
+      "LineAmountTypes": "Inclusive",
+      "LineItems": [
+        {
+          "Description": "Oonchiumpa Consultancy and Services — Professional Services — ACT-GD",
+          "UnitAmount": 5940,
+          "TaxType": "INPUT",
+          "TaxAmount": 540,
+          "LineAmount": 5940,
+          "AccountCode": "400",
+          "Tracking": [
+            {
+              "Name": "Business Divisions",
+              "Option": "A Curious Tractor",
+              "TrackingCategoryID": "91448ff3-eb13-437a-9d97-4d2e52c86ca4",
+              "TrackingOptionID": "1973a257-0d96-42c3-bca0-99623cb52923"
+            },
+            {
+              "Name": "Project Tracking",
+              "Option": "ACT-GD — Goods",
+              "TrackingCategoryID": "1a1ad7c5-249a-4b1f-842d-06ba2a63a0fe",
+              "TrackingOptionID": "63aee6ea-0005-48b8-8019-5fe9666ead29"
+            }
+          ],
+          "Quantity": 1,
+          "LineItemID": "eb7e3cb2-f03c-4e7f-9a8c-82a4e350fb4b",
+          "AccountID": "ecdc19e9-8fc8-4f67-81d0-273a49043a33",
+          "ValidationErrors": []
+        }
+      ],
+      "SubTotal": 5400,
+      "TotalTax": 540,
+      "Total": 5940,
+      "UpdatedDateUTC": "/Date(1776852158733+0000)/",
+      "CurrencyCode": "AUD"
+    }
+  },
+  {
+    "invoiceID": "bb3da03e-6534-477f-bffb-3b46431fe405",
+    "vendor": "Sophie Hickey",
+    "before": {
+      "Type": "ACCPAY",
+      "InvoiceID": "bb3da03e-6534-477f-bffb-3b46431fe405",
+      "Reference": "auto-pushed dext_import dde99bc9",
+      "Prepayments": [],
+      "Overpayments": [],
+      "AmountDue": 4950,
+      "AmountPaid": 0,
+      "SentToContact": false,
+      "CurrencyRate": 1,
+      "IsDiscounted": false,
+      "HasAttachments": true,
+      "HasErrors": false,
+      "Attachments": [
+        {
+          "AttachmentID": "39caed4b-db03-4cef-9999-0f8828c75d53",
+          "FileName": "receipt.pdf",
+          "Url": "https://api.xero.com/api.xro/2.0/Invoices/bb3da03e-6534-477f-bffb-3b46431fe405/Attachments/receipt.pdf",
+          "MimeType": "application/pdf",
+          "ContentLength": 54146
+        }
+      ],
+      "InvoicePaymentServices": [],
+      "Contact": {
+        "ContactID": "98f2dc55-9280-41bf-a84d-61967e22b4af",
+        "ContactStatus": "ACTIVE",
+        "Name": "Sophie Deirdre Hickey",
+        "EmailAddress": "",
+        "BankAccountDetails": "",
+        "TaxNumber": "74327359006",
+        "Addresses": [
+          {
+            "AddressType": "STREET",
+            "City": "",
+            "Region": "",
+            "PostalCode": "",
+            "Country": ""
+          },
+          {
+            "AddressType": "POBOX",
+            "City": "",
+            "Region": "",
+            "PostalCode": "",
+            "Country": ""
+          }
+        ],
+        "Phones": [
+          {
+            "PhoneType": "DEFAULT",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          },
+          {
+            "PhoneType": "DDI",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          },
+          {
+            "PhoneType": "FAX",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          },
+          {
+            "PhoneType": "MOBILE",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          }
+        ],
+        "UpdatedDateUTC": "/Date(1773132139120+0000)/",
+        "ContactGroups": [],
+        "IsSupplier": true,
+        "IsCustomer": false,
+        "SalesTrackingCategories": [],
+        "PurchasesTrackingCategories": [],
+        "ContactPersons": [],
+        "HasValidationErrors": false
+      },
+      "DateString": "2026-03-20T00:00:00",
+      "Date": "/Date(1773964800000+0000)/",
+      "DueDateString": "2026-03-20T00:00:00",
+      "DueDate": "/Date(1773964800000+0000)/",
+      "Status": "AUTHORISED",
+      "LineAmountTypes": "Inclusive",
+      "LineItems": [
+        {
+          "Description": "Sophie Deirdre Hickey — Operations — ACT-HV",
+          "UnitAmount": 4950,
+          "TaxType": "INPUT",
+          "TaxAmount": 450,
+          "LineAmount": 4950,
+          "AccountCode": "486",
+          "Tracking": [
+            {
+              "Name": "Business Divisions",
+              "Option": "A Curious Tractor",
+              "TrackingCategoryID": "91448ff3-eb13-437a-9d97-4d2e52c86ca4",
+              "TrackingOptionID": "1973a257-0d96-42c3-bca0-99623cb52923"
+            },
+            {
+              "Name": "Project Tracking",
+              "Option": "ACT-HV — The Harvest Witta",
+              "TrackingCategoryID": "1a1ad7c5-249a-4b1f-842d-06ba2a63a0fe",
+              "TrackingOptionID": "25a2184b-12ce-4c8d-8aa3-8e31c5df2f72"
+            }
+          ],
+          "Quantity": 1,
+          "LineItemID": "371523fa-ae69-492d-afdd-c1714b908468",
+          "AccountID": "21a875a2-fcd9-4d14-a950-dbc461d9fdc3",
+          "ValidationErrors": []
+        }
+      ],
+      "SubTotal": 4500,
+      "TotalTax": 450,
+      "Total": 4950,
+      "UpdatedDateUTC": "/Date(1780019470167+0000)/",
+      "CurrencyCode": "AUD"
+    }
+  },
+  {
+    "invoiceID": "07b3769d-b355-426c-b02d-7ae3f954ebd9",
+    "vendor": "Airbnb",
+    "before": {
+      "Type": "ACCPAY",
+      "InvoiceID": "07b3769d-b355-426c-b02d-7ae3f954ebd9",
+      "Reference": "auto-pushed dext_import 036cec4e",
+      "Prepayments": [],
+      "Overpayments": [],
+      "AmountDue": 4621.18,
+      "AmountPaid": 0,
+      "SentToContact": false,
+      "CurrencyRate": 1,
+      "IsDiscounted": false,
+      "HasAttachments": true,
+      "HasErrors": false,
+      "Attachments": [
+        {
+          "AttachmentID": "9c3373c4-12c7-487d-863f-bf3d2bc74eec",
+          "FileName": "Airbnb-receipt.pdf",
+          "Url": "https://api.xero.com/api.xro/2.0/Invoices/07b3769d-b355-426c-b02d-7ae3f954ebd9/Attachments/Airbnb-receipt.pdf",
+          "MimeType": "application/pdf",
+          "ContentLength": 1555885
+        }
+      ],
+      "InvoicePaymentServices": [],
+      "Contact": {
+        "ContactID": "3504129a-aadc-4540-922c-e34bb125bed5",
+        "ContactStatus": "ACTIVE",
+        "Name": "Airbnb",
+        "EmailAddress": "",
+        "BankAccountDetails": "",
+        "TaxNumber": "66681023389",
+        "Addresses": [
+          {
+            "AddressType": "STREET",
+            "City": "",
+            "Region": "",
+            "PostalCode": "",
+            "Country": ""
+          },
+          {
+            "AddressType": "POBOX",
+            "City": "",
+            "Region": "",
+            "PostalCode": "",
+            "Country": ""
+          }
+        ],
+        "Phones": [
+          {
+            "PhoneType": "DEFAULT",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          },
+          {
+            "PhoneType": "DDI",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          },
+          {
+            "PhoneType": "FAX",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          },
+          {
+            "PhoneType": "MOBILE",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          }
+        ],
+        "UpdatedDateUTC": "/Date(1778903814310+0000)/",
+        "ContactGroups": [],
+        "IsSupplier": true,
+        "IsCustomer": false,
+        "SalesTrackingCategories": [],
+        "PurchasesTrackingCategories": [],
+        "ContactPersons": [],
+        "HasValidationErrors": false
+      },
+      "DateString": "2025-11-26T00:00:00",
+      "Date": "/Date(1764115200000+0000)/",
+      "DueDateString": "2025-11-26T00:00:00",
+      "DueDate": "/Date(1764115200000+0000)/",
+      "Status": "AUTHORISED",
+      "LineAmountTypes": "Inclusive",
+      "LineItems": [
+        {
+          "Description": "Airbnb — travel — ACT-CORE",
+          "UnitAmount": 4621.18,
+          "TaxType": "INPUT",
+          "TaxAmount": 420.11,
+          "LineAmount": 4621.18,
+          "AccountCode": "493",
+          "Tracking": [
+            {
+              "Name": "Business Divisions",
+              "Option": "A Curious Tractor",
+              "TrackingCategoryID": "91448ff3-eb13-437a-9d97-4d2e52c86ca4",
+              "TrackingOptionID": "1973a257-0d96-42c3-bca0-99623cb52923"
+            }
+          ],
+          "Quantity": 1,
+          "LineItemID": "a77a0805-dfc5-4481-80e7-54821e779908",
+          "AccountID": "3cc18292-e8aa-4a7e-ad5a-8be538e4f20d",
+          "ValidationErrors": []
+        }
+      ],
+      "SubTotal": 4201.07,
+      "TotalTax": 420.11,
+      "Total": 4621.18,
+      "UpdatedDateUTC": "/Date(1780018290403+0000)/",
+      "CurrencyCode": "AUD"
+    }
+  },
+  {
+    "invoiceID": "99e9f3dd-7f76-4aaf-b546-847fcc20924f",
+    "vendor": "Joseph Kirmos (no #)",
+    "before": {
+      "Type": "ACCPAY",
+      "InvoiceID": "99e9f3dd-7f76-4aaf-b546-847fcc20924f",
+      "Reference": "auto-pushed dext_import e615ab56",
+      "Prepayments": [],
+      "Overpayments": [],
+      "AmountDue": 4500,
+      "AmountPaid": 0,
+      "SentToContact": false,
+      "CurrencyRate": 1,
+      "IsDiscounted": false,
+      "HasAttachments": true,
+      "HasErrors": false,
+      "Attachments": [
+        {
+          "AttachmentID": "d56dd780-2161-420e-97d0-17399473a0ed",
+          "FileName": "receipt.pdf",
+          "Url": "https://api.xero.com/api.xro/2.0/Invoices/99e9f3dd-7f76-4aaf-b546-847fcc20924f/Attachments/receipt.pdf",
+          "MimeType": "application/pdf",
+          "ContentLength": 2314
+        }
+      ],
+      "InvoicePaymentServices": [],
+      "Contact": {
+        "ContactID": "17590bbd-a5c1-4af2-a8a0-8de8c272ba13",
+        "ContactStatus": "ACTIVE",
+        "Name": "Joseph Kirmos",
+        "EmailAddress": "",
+        "BankAccountDetails": "",
+        "TaxNumber": "26170311735",
+        "Addresses": [
+          {
+            "AddressType": "STREET",
+            "City": "",
+            "Region": "",
+            "PostalCode": "",
+            "Country": ""
+          },
+          {
+            "AddressType": "POBOX",
+            "City": "",
+            "Region": "",
+            "PostalCode": "",
+            "Country": ""
+          }
+        ],
+        "Phones": [
+          {
+            "PhoneType": "DEFAULT",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          },
+          {
+            "PhoneType": "DDI",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          },
+          {
+            "PhoneType": "FAX",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          },
+          {
+            "PhoneType": "MOBILE",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          }
+        ],
+        "UpdatedDateUTC": "/Date(1771292611380+0000)/",
+        "ContactGroups": [],
+        "IsSupplier": true,
+        "IsCustomer": false,
+        "SalesTrackingCategories": [],
+        "PurchasesTrackingCategories": [],
+        "ContactPersons": [],
+        "HasValidationErrors": false
+      },
+      "DateString": "2026-03-29T00:00:00",
+      "Date": "/Date(1774742400000+0000)/",
+      "DueDateString": "2026-03-29T00:00:00",
+      "DueDate": "/Date(1774742400000+0000)/",
+      "Status": "AUTHORISED",
+      "LineAmountTypes": "Inclusive",
+      "LineItems": [
+        {
+          "Description": "Joseph Kirmos — Other — ACT-GD",
+          "UnitAmount": 4500,
+          "TaxType": "INPUT",
+          "TaxAmount": 409.09,
+          "LineAmount": 4500,
+          "AccountCode": "486",
+          "Tracking": [
+            {
+              "Name": "Business Divisions",
+              "Option": "A Curious Tractor",
+              "TrackingCategoryID": "91448ff3-eb13-437a-9d97-4d2e52c86ca4",
+              "TrackingOptionID": "1973a257-0d96-42c3-bca0-99623cb52923"
+            },
+            {
+              "Name": "Project Tracking",
+              "Option": "ACT-GD — Goods",
+              "TrackingCategoryID": "1a1ad7c5-249a-4b1f-842d-06ba2a63a0fe",
+              "TrackingOptionID": "63aee6ea-0005-48b8-8019-5fe9666ead29"
+            }
+          ],
+          "Quantity": 1,
+          "LineItemID": "17c1ef0b-a965-4136-8384-2d0b32f7e709",
+          "AccountID": "21a875a2-fcd9-4d14-a950-dbc461d9fdc3",
+          "ValidationErrors": []
+        }
+      ],
+      "SubTotal": 4090.91,
+      "TotalTax": 409.09,
+      "Total": 4500,
+      "UpdatedDateUTC": "/Date(1780019448350+0000)/",
+      "CurrencyCode": "AUD"
+    }
+  },
+  {
+    "invoiceID": "0338c916-297b-479c-a83a-381848c49fc9",
+    "vendor": "Matnic Trust",
+    "before": {
+      "Type": "ACCPAY",
+      "InvoiceID": "0338c916-297b-479c-a83a-381848c49fc9",
+      "Reference": "auto-pushed dext_import dcd30967",
+      "Prepayments": [],
+      "Overpayments": [],
+      "AmountDue": 2826.92,
+      "AmountPaid": 0,
+      "SentToContact": false,
+      "CurrencyRate": 1,
+      "IsDiscounted": false,
+      "HasAttachments": true,
+      "HasErrors": false,
+      "Attachments": [
+        {
+          "AttachmentID": "aee4fbd3-7c28-4406-9fe0-d44ef360f555",
+          "FileName": "The-Matnic-Trust-receipt.pdf",
+          "Url": "https://api.xero.com/api.xro/2.0/Invoices/0338c916-297b-479c-a83a-381848c49fc9/Attachments/The-Matnic-Trust-receipt.pdf",
+          "MimeType": "application/pdf",
+          "ContentLength": 33610
+        }
+      ],
+      "InvoicePaymentServices": [],
+      "Contact": {
+        "ContactID": "d5b8d503-eb01-4e43-bc31-8c3ca9e639b6",
+        "ContactStatus": "ACTIVE",
+        "Name": "The Matnic Trust",
+        "EmailAddress": "",
+        "BankAccountDetails": "",
+        "TaxNumber": "30229124325",
+        "Addresses": [
+          {
+            "AddressType": "STREET",
+            "City": "",
+            "Region": "",
+            "PostalCode": "",
+            "Country": ""
+          },
+          {
+            "AddressType": "POBOX",
+            "City": "",
+            "Region": "",
+            "PostalCode": "",
+            "Country": ""
+          }
+        ],
+        "Phones": [
+          {
+            "PhoneType": "DEFAULT",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          },
+          {
+            "PhoneType": "DDI",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          },
+          {
+            "PhoneType": "FAX",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          },
+          {
+            "PhoneType": "MOBILE",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          }
+        ],
+        "UpdatedDateUTC": "/Date(1664330234443+0000)/",
+        "ContactGroups": [],
+        "IsSupplier": true,
+        "IsCustomer": false,
+        "SalesTrackingCategories": [],
+        "PurchasesTrackingCategories": [],
+        "ContactPersons": [],
+        "HasValidationErrors": false
+      },
+      "DateString": "2026-01-09T00:00:00",
+      "Date": "/Date(1767916800000+0000)/",
+      "DueDateString": "2026-01-09T00:00:00",
+      "DueDate": "/Date(1767916800000+0000)/",
+      "Status": "AUTHORISED",
+      "LineAmountTypes": "Inclusive",
+      "LineItems": [
+        {
+          "Description": "The Matnic Trust — Other — ACT-IN",
+          "UnitAmount": 2826.92,
+          "TaxType": "INPUT",
+          "TaxAmount": 256.99,
+          "LineAmount": 2826.92,
+          "AccountCode": "429",
+          "Tracking": [
+            {
+              "Name": "Business Divisions",
+              "Option": "A Curious Tractor",
+              "TrackingCategoryID": "91448ff3-eb13-437a-9d97-4d2e52c86ca4",
+              "TrackingOptionID": "1973a257-0d96-42c3-bca0-99623cb52923"
+            },
+            {
+              "Name": "Project Tracking",
+              "Option": "ACT-IN — ACT Infrastructure",
+              "TrackingCategoryID": "1a1ad7c5-249a-4b1f-842d-06ba2a63a0fe",
+              "TrackingOptionID": "8250fb3a-4fc4-40c5-822d-7cd7a9caffaa"
+            }
+          ],
+          "Quantity": 1,
+          "LineItemID": "3195e412-21d1-427c-b40f-b9b776fe0aa2",
+          "AccountID": "d41823f3-891a-448d-8f1a-6a5d1fac7041",
+          "ValidationErrors": []
+        }
+      ],
+      "SubTotal": 2569.93,
+      "TotalTax": 256.99,
+      "Total": 2826.92,
+      "UpdatedDateUTC": "/Date(1776852081670+0000)/",
+      "CurrencyCode": "AUD"
+    }
+  },
+  {
+    "invoiceID": "18534bcf-f6ae-4a3c-aafe-7f55ccfb917d",
+    "vendor": "TNT Plastering",
+    "before": {
+      "Type": "ACCPAY",
+      "InvoiceID": "18534bcf-f6ae-4a3c-aafe-7f55ccfb917d",
+      "Reference": "auto-pushed dext_import 594f931c",
+      "Prepayments": [],
+      "Overpayments": [],
+      "AmountDue": 2000,
+      "AmountPaid": 0,
+      "SentToContact": false,
+      "CurrencyRate": 1,
+      "IsDiscounted": false,
+      "HasAttachments": true,
+      "HasErrors": false,
+      "Attachments": [
+        {
+          "AttachmentID": "816f4194-1cbf-496d-bf7a-c04fbe468385",
+          "FileName": "TNT-Plastering---Maintenance-receipt.pdf",
+          "Url": "https://api.xero.com/api.xro/2.0/Invoices/18534bcf-f6ae-4a3c-aafe-7f55ccfb917d/Attachments/TNT-Plastering---Maintenance-receipt.pdf",
+          "MimeType": "application/pdf",
+          "ContentLength": 31761
+        }
+      ],
+      "InvoicePaymentServices": [],
+      "Contact": {
+        "ContactID": "c036eedf-e1a9-41b8-8b65-94d4cf71bbb1",
+        "ContactStatus": "ACTIVE",
+        "Name": "TNT Plastering & Maintenance",
+        "EmailAddress": "",
+        "BankAccountDetails": "",
+        "Addresses": [
+          {
+            "AddressType": "STREET",
+            "City": "",
+            "Region": "",
+            "PostalCode": "",
+            "Country": ""
+          },
+          {
+            "AddressType": "POBOX",
+            "City": "",
+            "Region": "",
+            "PostalCode": "",
+            "Country": ""
+          }
+        ],
+        "Phones": [
+          {
+            "PhoneType": "DEFAULT",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          },
+          {
+            "PhoneType": "DDI",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          },
+          {
+            "PhoneType": "FAX",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          },
+          {
+            "PhoneType": "MOBILE",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          }
+        ],
+        "UpdatedDateUTC": "/Date(1776832155953+0000)/",
+        "ContactGroups": [],
+        "IsSupplier": true,
+        "IsCustomer": false,
+        "SalesTrackingCategories": [],
+        "PurchasesTrackingCategories": [],
+        "ContactPersons": [],
+        "HasValidationErrors": false
+      },
+      "DateString": "2025-11-29T00:00:00",
+      "Date": "/Date(1764374400000+0000)/",
+      "DueDateString": "2025-11-29T00:00:00",
+      "DueDate": "/Date(1764374400000+0000)/",
+      "Status": "AUTHORISED",
+      "LineAmountTypes": "Inclusive",
+      "LineItems": [
+        {
+          "Description": "TNT Plastering & Maintenance — Contractor — ACT-HV",
+          "UnitAmount": 2000,
+          "TaxType": "INPUT",
+          "TaxAmount": 181.82,
+          "LineAmount": 2000,
+          "AccountCode": "400",
+          "Tracking": [
+            {
+              "Name": "Business Divisions",
+              "Option": "A Curious Tractor",
+              "TrackingCategoryID": "91448ff3-eb13-437a-9d97-4d2e52c86ca4",
+              "TrackingOptionID": "1973a257-0d96-42c3-bca0-99623cb52923"
+            },
+            {
+              "Name": "Project Tracking",
+              "Option": "ACT-HV — The Harvest Witta",
+              "TrackingCategoryID": "1a1ad7c5-249a-4b1f-842d-06ba2a63a0fe",
+              "TrackingOptionID": "25a2184b-12ce-4c8d-8aa3-8e31c5df2f72"
+            }
+          ],
+          "Quantity": 1,
+          "LineItemID": "3f521ae9-0bfa-4d36-9003-cc0b58f0a174",
+          "AccountID": "ecdc19e9-8fc8-4f67-81d0-273a49043a33",
+          "ValidationErrors": []
+        }
+      ],
+      "SubTotal": 1818.18,
+      "TotalTax": 181.82,
+      "Total": 2000,
+      "UpdatedDateUTC": "/Date(1776852234563+0000)/",
+      "CurrencyCode": "AUD"
+    }
+  },
+  {
+    "invoiceID": "6db66932-ff38-476f-8c4e-e28b182f9017",
+    "vendor": "Bunnings",
+    "before": {
+      "Type": "ACCPAY",
+      "InvoiceID": "6db66932-ff38-476f-8c4e-e28b182f9017",
+      "Reference": "auto-pushed dext_import c62aa76b",
+      "Prepayments": [],
+      "Overpayments": [],
+      "AmountDue": 1597,
+      "AmountPaid": 0,
+      "SentToContact": false,
+      "CurrencyRate": 1,
+      "IsDiscounted": false,
+      "HasAttachments": true,
+      "HasErrors": false,
+      "Attachments": [
+        {
+          "AttachmentID": "d8ff26de-c8ad-477d-9b44-09aa55a64990",
+          "FileName": "Bunnings-Warehouse-receipt.jpg",
+          "Url": "https://api.xero.com/api.xro/2.0/Invoices/6db66932-ff38-476f-8c4e-e28b182f9017/Attachments/Bunnings-Warehouse-receipt.jpg",
+          "MimeType": "image/jpg",
+          "ContentLength": 153536
+        }
+      ],
+      "InvoicePaymentServices": [],
+      "Contact": {
+        "ContactID": "9339392b-a9cc-4d11-baf0-3bc3e0f90471",
+        "ContactStatus": "ACTIVE",
+        "Name": "Bunnings Warehouse",
+        "EmailAddress": "",
+        "BankAccountDetails": "",
+        "TaxNumber": "26008672179",
+        "Addresses": [
+          {
+            "AddressType": "STREET",
+            "City": "",
+            "Region": "",
+            "PostalCode": "",
+            "Country": ""
+          },
+          {
+            "AddressType": "POBOX",
+            "City": "",
+            "Region": "",
+            "PostalCode": "",
+            "Country": ""
+          }
+        ],
+        "Phones": [
+          {
+            "PhoneType": "DEFAULT",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          },
+          {
+            "PhoneType": "DDI",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          },
+          {
+            "PhoneType": "FAX",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          },
+          {
+            "PhoneType": "MOBILE",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          }
+        ],
+        "UpdatedDateUTC": "/Date(1776832605140+0000)/",
+        "ContactGroups": [],
+        "IsSupplier": true,
+        "IsCustomer": false,
+        "SalesTrackingCategories": [],
+        "PurchasesTrackingCategories": [],
+        "ContactPersons": [],
+        "HasValidationErrors": false
+      },
+      "DateString": "2025-12-26T00:00:00",
+      "Date": "/Date(1766707200000+0000)/",
+      "DueDateString": "2025-12-26T00:00:00",
+      "DueDate": "/Date(1766707200000+0000)/",
+      "Status": "AUTHORISED",
+      "LineAmountTypes": "Inclusive",
+      "LineItems": [
+        {
+          "Description": "Bunnings — Materials & Supplies — ACT-IN",
+          "UnitAmount": 1597,
+          "TaxType": "INPUT",
+          "TaxAmount": 145.18,
+          "LineAmount": 1597,
+          "AccountCode": "446",
+          "Tracking": [
+            {
+              "Name": "Business Divisions",
+              "Option": "A Curious Tractor",
+              "TrackingCategoryID": "91448ff3-eb13-437a-9d97-4d2e52c86ca4",
+              "TrackingOptionID": "1973a257-0d96-42c3-bca0-99623cb52923"
+            },
+            {
+              "Name": "Project Tracking",
+              "Option": "ACT-IN — ACT Infrastructure",
+              "TrackingCategoryID": "1a1ad7c5-249a-4b1f-842d-06ba2a63a0fe",
+              "TrackingOptionID": "8250fb3a-4fc4-40c5-822d-7cd7a9caffaa"
+            }
+          ],
+          "Quantity": 1,
+          "LineItemID": "58b21516-7d46-446e-89a2-e4a56e57b7a9",
+          "AccountID": "d80fdbbc-0ce8-4d59-8cf4-b6ee6fde749f",
+          "ValidationErrors": []
+        }
+      ],
+      "SubTotal": 1451.82,
+      "TotalTax": 145.18,
+      "Total": 1597,
+      "UpdatedDateUTC": "/Date(1780018118190+0000)/",
+      "CurrencyCode": "AUD"
+    }
+  },
+  {
+    "invoiceID": "0b998d79-907f-49bf-a7de-72092aa36451",
+    "vendor": "Hayden Alexander",
+    "before": {
+      "Type": "ACCPAY",
+      "InvoiceID": "0b998d79-907f-49bf-a7de-72092aa36451",
+      "Reference": "auto-pushed dext_import 25d42c3c",
+      "Prepayments": [],
+      "Overpayments": [],
+      "AmountDue": 1505.62,
+      "AmountPaid": 0,
+      "SentToContact": false,
+      "CurrencyRate": 1,
+      "IsDiscounted": false,
+      "HasAttachments": true,
+      "HasErrors": false,
+      "Attachments": [
+        {
+          "AttachmentID": "2d3c0ae1-34a8-4880-961c-2304dc27d91f",
+          "FileName": "Hayden-Alexander-receipt.jpg",
+          "Url": "https://api.xero.com/api.xro/2.0/Invoices/0b998d79-907f-49bf-a7de-72092aa36451/Attachments/Hayden-Alexander-receipt.jpg",
+          "MimeType": "image/jpg",
+          "ContentLength": 106280
+        }
+      ],
+      "InvoicePaymentServices": [],
+      "Contact": {
+        "ContactID": "f04107e9-057d-43c0-9c30-2a0e4ed1a28c",
+        "ContactStatus": "ACTIVE",
+        "Name": "Hayden Alexander",
+        "EmailAddress": "",
+        "BankAccountDetails": "",
+        "TaxNumber": "51824036102",
+        "Addresses": [
+          {
+            "AddressType": "STREET",
+            "City": "",
+            "Region": "",
+            "PostalCode": "",
+            "Country": ""
+          },
+          {
+            "AddressType": "POBOX",
+            "City": "",
+            "Region": "",
+            "PostalCode": "",
+            "Country": ""
+          }
+        ],
+        "Phones": [
+          {
+            "PhoneType": "DEFAULT",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          },
+          {
+            "PhoneType": "DDI",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          },
+          {
+            "PhoneType": "FAX",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          },
+          {
+            "PhoneType": "MOBILE",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          }
+        ],
+        "UpdatedDateUTC": "/Date(1778907957617+0000)/",
+        "ContactGroups": [],
+        "IsSupplier": true,
+        "IsCustomer": false,
+        "SalesTrackingCategories": [],
+        "PurchasesTrackingCategories": [],
+        "ContactPersons": [],
+        "HasValidationErrors": false
+      },
+      "DateString": "2026-01-19T00:00:00",
+      "Date": "/Date(1768780800000+0000)/",
+      "DueDateString": "2026-01-19T00:00:00",
+      "DueDate": "/Date(1768780800000+0000)/",
+      "Status": "AUTHORISED",
+      "LineAmountTypes": "Inclusive",
+      "LineItems": [
+        {
+          "Description": "Hayden Alexander — Other — ACT-IN",
+          "UnitAmount": 1505.62,
+          "TaxType": "INPUT",
+          "TaxAmount": 136.87,
+          "LineAmount": 1505.62,
+          "AccountCode": "486",
+          "Tracking": [
+            {
+              "Name": "Business Divisions",
+              "Option": "A Curious Tractor",
+              "TrackingCategoryID": "91448ff3-eb13-437a-9d97-4d2e52c86ca4",
+              "TrackingOptionID": "1973a257-0d96-42c3-bca0-99623cb52923"
+            },
+            {
+              "Name": "Project Tracking",
+              "Option": "ACT-IN — ACT Infrastructure",
+              "TrackingCategoryID": "1a1ad7c5-249a-4b1f-842d-06ba2a63a0fe",
+              "TrackingOptionID": "8250fb3a-4fc4-40c5-822d-7cd7a9caffaa"
+            }
+          ],
+          "Quantity": 1,
+          "LineItemID": "376608b0-3c48-4ab6-b27b-e7dd1745d147",
+          "AccountID": "21a875a2-fcd9-4d14-a950-dbc461d9fdc3",
+          "ValidationErrors": []
+        }
+      ],
+      "SubTotal": 1368.75,
+      "TotalTax": 136.87,
+      "Total": 1505.62,
+      "UpdatedDateUTC": "/Date(1780019509970+0000)/",
+      "CurrencyCode": "AUD"
+    }
+  },
+  {
+    "invoiceID": "0f55cedb-b565-46b3-8fe2-b8686d8492c4",
+    "vendor": "Sophie Hickey",
+    "before": {
+      "Type": "ACCPAY",
+      "InvoiceID": "0f55cedb-b565-46b3-8fe2-b8686d8492c4",
+      "Reference": "auto-pushed dext_import d660f13c",
+      "Prepayments": [],
+      "Overpayments": [],
+      "AmountDue": 1140,
+      "AmountPaid": 0,
+      "SentToContact": false,
+      "CurrencyRate": 1,
+      "IsDiscounted": false,
+      "HasAttachments": true,
+      "HasErrors": false,
+      "Attachments": [
+        {
+          "AttachmentID": "181bef7c-5687-4dc9-8773-3a4e7aece878",
+          "FileName": "receipt.pdf",
+          "Url": "https://api.xero.com/api.xro/2.0/Invoices/0f55cedb-b565-46b3-8fe2-b8686d8492c4/Attachments/receipt.pdf",
+          "MimeType": "application/pdf",
+          "ContentLength": 54409
+        }
+      ],
+      "InvoicePaymentServices": [],
+      "Contact": {
+        "ContactID": "98f2dc55-9280-41bf-a84d-61967e22b4af",
+        "ContactStatus": "ACTIVE",
+        "Name": "Sophie Deirdre Hickey",
+        "EmailAddress": "",
+        "BankAccountDetails": "",
+        "TaxNumber": "74327359006",
+        "Addresses": [
+          {
+            "AddressType": "STREET",
+            "City": "",
+            "Region": "",
+            "PostalCode": "",
+            "Country": ""
+          },
+          {
+            "AddressType": "POBOX",
+            "City": "",
+            "Region": "",
+            "PostalCode": "",
+            "Country": ""
+          }
+        ],
+        "Phones": [
+          {
+            "PhoneType": "DEFAULT",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          },
+          {
+            "PhoneType": "DDI",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          },
+          {
+            "PhoneType": "FAX",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          },
+          {
+            "PhoneType": "MOBILE",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          }
+        ],
+        "UpdatedDateUTC": "/Date(1773132139120+0000)/",
+        "ContactGroups": [],
+        "IsSupplier": true,
+        "IsCustomer": false,
+        "SalesTrackingCategories": [],
+        "PurchasesTrackingCategories": [],
+        "ContactPersons": [],
+        "HasValidationErrors": false
+      },
+      "DateString": "2026-03-17T00:00:00",
+      "Date": "/Date(1773705600000+0000)/",
+      "DueDateString": "2026-03-17T00:00:00",
+      "DueDate": "/Date(1773705600000+0000)/",
+      "Status": "AUTHORISED",
+      "LineAmountTypes": "Inclusive",
+      "LineItems": [
+        {
+          "Description": "Sophie Deirdre Hickey — Operations — ACT-HV",
+          "UnitAmount": 1140,
+          "TaxType": "INPUT",
+          "TaxAmount": 103.64,
+          "LineAmount": 1140,
+          "AccountCode": "486",
+          "Tracking": [
+            {
+              "Name": "Business Divisions",
+              "Option": "A Curious Tractor",
+              "TrackingCategoryID": "91448ff3-eb13-437a-9d97-4d2e52c86ca4",
+              "TrackingOptionID": "1973a257-0d96-42c3-bca0-99623cb52923"
+            },
+            {
+              "Name": "Project Tracking",
+              "Option": "ACT-HV — The Harvest Witta",
+              "TrackingCategoryID": "1a1ad7c5-249a-4b1f-842d-06ba2a63a0fe",
+              "TrackingOptionID": "25a2184b-12ce-4c8d-8aa3-8e31c5df2f72"
+            }
+          ],
+          "Quantity": 1,
+          "LineItemID": "c88b9ac5-7531-4c1f-8b69-ae63790c1ce1",
+          "AccountID": "21a875a2-fcd9-4d14-a950-dbc461d9fdc3",
+          "ValidationErrors": []
+        }
+      ],
+      "SubTotal": 1036.36,
+      "TotalTax": 103.64,
+      "Total": 1140,
+      "UpdatedDateUTC": "/Date(1780019484303+0000)/",
+      "CurrencyCode": "AUD"
+    }
+  },
+  {
+    "invoiceID": "6bdfea19-e181-4b84-a719-3cbfb6e16676",
+    "vendor": "Clearview Towing",
+    "before": {
+      "Type": "ACCPAY",
+      "InvoiceID": "6bdfea19-e181-4b84-a719-3cbfb6e16676",
+      "Reference": "auto-pushed dext_import 4de75e86",
+      "Prepayments": [],
+      "Overpayments": [],
+      "AmountDue": 768.83,
+      "AmountPaid": 0,
+      "SentToContact": false,
+      "CurrencyRate": 1,
+      "IsDiscounted": false,
+      "HasAttachments": true,
+      "HasErrors": false,
+      "Attachments": [
+        {
+          "AttachmentID": "0403841b-567a-4e9b-802a-73c3cd88c1de",
+          "FileName": "Clearview-Towing-Mirrors-receipt.pdf",
+          "Url": "https://api.xero.com/api.xro/2.0/Invoices/6bdfea19-e181-4b84-a719-3cbfb6e16676/Attachments/Clearview-Towing-Mirrors-receipt.pdf",
+          "MimeType": "application/pdf",
+          "ContentLength": 60716
+        }
+      ],
+      "InvoicePaymentServices": [],
+      "Contact": {
+        "ContactID": "6a1ffde4-ef33-4ca4-8b66-f92696d0e7e8",
+        "ContactStatus": "ACTIVE",
+        "Name": "Clearview Towing Mirrors",
+        "EmailAddress": "",
+        "BankAccountDetails": "",
+        "TaxNumber": "59140145393",
+        "Addresses": [
+          {
+            "AddressType": "STREET",
+            "City": "",
+            "Region": "",
+            "PostalCode": "",
+            "Country": ""
+          },
+          {
+            "AddressType": "POBOX",
+            "City": "",
+            "Region": "",
+            "PostalCode": "",
+            "Country": ""
+          }
+        ],
+        "Phones": [
+          {
+            "PhoneType": "DEFAULT",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          },
+          {
+            "PhoneType": "DDI",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          },
+          {
+            "PhoneType": "FAX",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          },
+          {
+            "PhoneType": "MOBILE",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          }
+        ],
+        "UpdatedDateUTC": "/Date(1778906835050+0000)/",
+        "ContactGroups": [],
+        "IsSupplier": true,
+        "IsCustomer": false,
+        "SalesTrackingCategories": [],
+        "PurchasesTrackingCategories": [],
+        "ContactPersons": [],
+        "HasValidationErrors": false
+      },
+      "DateString": "2026-01-05T00:00:00",
+      "Date": "/Date(1767571200000+0000)/",
+      "DueDateString": "2026-01-05T00:00:00",
+      "DueDate": "/Date(1767571200000+0000)/",
+      "Status": "AUTHORISED",
+      "LineAmountTypes": "Inclusive",
+      "LineItems": [
+        {
+          "Description": "Clearview Towing Mirrors — Other — ACT-IN",
+          "UnitAmount": 768.83,
+          "TaxType": "INPUT",
+          "TaxAmount": 69.89,
+          "LineAmount": 768.83,
+          "AccountCode": "446",
+          "Tracking": [
+            {
+              "Name": "Business Divisions",
+              "Option": "A Curious Tractor",
+              "TrackingCategoryID": "91448ff3-eb13-437a-9d97-4d2e52c86ca4",
+              "TrackingOptionID": "1973a257-0d96-42c3-bca0-99623cb52923"
+            },
+            {
+              "Name": "Project Tracking",
+              "Option": "ACT-IN — ACT Infrastructure",
+              "TrackingCategoryID": "1a1ad7c5-249a-4b1f-842d-06ba2a63a0fe",
+              "TrackingOptionID": "8250fb3a-4fc4-40c5-822d-7cd7a9caffaa"
+            }
+          ],
+          "Quantity": 1,
+          "LineItemID": "ec3c04c9-4fa8-4c50-b435-edb134ea304b",
+          "AccountID": "d80fdbbc-0ce8-4d59-8cf4-b6ee6fde749f",
+          "ValidationErrors": []
+        }
+      ],
+      "SubTotal": 698.94,
+      "TotalTax": 69.89,
+      "Total": 768.83,
+      "UpdatedDateUTC": "/Date(1780019524473+0000)/",
+      "CurrencyCode": "AUD"
+    }
+  },
+  {
+    "invoiceID": "a0df1ad7-d4e6-4fb6-994d-2e395c77aeaf",
+    "vendor": "Izzy Mobile",
+    "before": {
+      "Type": "ACCPAY",
+      "InvoiceID": "a0df1ad7-d4e6-4fb6-994d-2e395c77aeaf",
+      "Reference": "auto-pushed dext_import 3f287090",
+      "Prepayments": [],
+      "Overpayments": [],
+      "AmountDue": 671.9,
+      "AmountPaid": 0,
+      "SentToContact": false,
+      "CurrencyRate": 1,
+      "IsDiscounted": false,
+      "HasAttachments": true,
+      "HasErrors": false,
+      "Attachments": [
+        {
+          "AttachmentID": "4811adcc-562f-45d3-914d-9249e447ad4a",
+          "FileName": "Izzy-Mobile-receipt.pdf",
+          "Url": "https://api.xero.com/api.xro/2.0/Invoices/a0df1ad7-d4e6-4fb6-994d-2e395c77aeaf/Attachments/Izzy-Mobile-receipt.pdf",
+          "MimeType": "application/pdf",
+          "ContentLength": 323519
+        }
+      ],
+      "InvoicePaymentServices": [],
+      "Contact": {
+        "ContactID": "d4011435-4c42-4402-973e-ae10723d5469",
+        "ContactStatus": "ACTIVE",
+        "Name": "Izzy Mobile",
+        "EmailAddress": "",
+        "BankAccountDetails": "",
+        "TaxNumber": "71484940583",
+        "Addresses": [
+          {
+            "AddressType": "STREET",
+            "City": "",
+            "Region": "",
+            "PostalCode": "",
+            "Country": ""
+          },
+          {
+            "AddressType": "POBOX",
+            "City": "",
+            "Region": "",
+            "PostalCode": "",
+            "Country": ""
+          }
+        ],
+        "Phones": [
+          {
+            "PhoneType": "DEFAULT",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          },
+          {
+            "PhoneType": "DDI",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          },
+          {
+            "PhoneType": "FAX",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          },
+          {
+            "PhoneType": "MOBILE",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          }
+        ],
+        "UpdatedDateUTC": "/Date(1778906278547+0000)/",
+        "ContactGroups": [],
+        "IsSupplier": true,
+        "IsCustomer": false,
+        "SalesTrackingCategories": [],
+        "PurchasesTrackingCategories": [],
+        "ContactPersons": [],
+        "HasValidationErrors": false
+      },
+      "DateString": "2025-12-18T00:00:00",
+      "Date": "/Date(1766016000000+0000)/",
+      "DueDateString": "2025-12-18T00:00:00",
+      "DueDate": "/Date(1766016000000+0000)/",
+      "Status": "AUTHORISED",
+      "LineAmountTypes": "Inclusive",
+      "LineItems": [
+        {
+          "Description": "Izzy Mobile — Materials & Supplies — ACT-DO",
+          "UnitAmount": 671.9,
+          "TaxType": "INPUT",
+          "TaxAmount": 61.08,
+          "LineAmount": 671.9,
+          "AccountCode": "446",
+          "Tracking": [
+            {
+              "Name": "Business Divisions",
+              "Option": "A Curious Tractor",
+              "TrackingCategoryID": "91448ff3-eb13-437a-9d97-4d2e52c86ca4",
+              "TrackingOptionID": "1973a257-0d96-42c3-bca0-99623cb52923"
+            }
+          ],
+          "Quantity": 1,
+          "LineItemID": "f6ecabfe-133e-4a85-ae57-db79b26014fb",
+          "AccountID": "d80fdbbc-0ce8-4d59-8cf4-b6ee6fde749f",
+          "ValidationErrors": []
+        }
+      ],
+      "SubTotal": 610.82,
+      "TotalTax": 61.08,
+      "Total": 671.9,
+      "UpdatedDateUTC": "/Date(1780018120280+0000)/",
+      "CurrencyCode": "AUD"
+    }
+  },
+  {
+    "invoiceID": "74698641-4592-4afa-9c34-9662754e34a3",
+    "vendor": "Salin Appliance",
+    "before": {
+      "Type": "ACCPAY",
+      "InvoiceID": "74698641-4592-4afa-9c34-9662754e34a3",
+      "Reference": "auto-pushed dext_import 6142406e",
+      "Prepayments": [],
+      "Overpayments": [],
+      "AmountDue": 228.9,
+      "AmountPaid": 0,
+      "SentToContact": false,
+      "CurrencyRate": 1,
+      "IsDiscounted": false,
+      "HasAttachments": true,
+      "HasErrors": false,
+      "Attachments": [
+        {
+          "AttachmentID": "23ff88ed-cfd5-44e4-a9c5-453f797bf2ea",
+          "FileName": "Salin-Appliance-Spares-receipt.pdf",
+          "Url": "https://api.xero.com/api.xro/2.0/Invoices/74698641-4592-4afa-9c34-9662754e34a3/Attachments/Salin-Appliance-Spares-receipt.pdf",
+          "MimeType": "application/pdf",
+          "ContentLength": 50914
+        }
+      ],
+      "InvoicePaymentServices": [],
+      "Contact": {
+        "ContactID": "9ddde6a4-2002-41f6-8837-62da87a4936d",
+        "ContactStatus": "ACTIVE",
+        "Name": "Salin Appliance Spares",
+        "EmailAddress": "",
+        "BankAccountDetails": "",
+        "TaxNumber": "24079608763",
+        "Addresses": [
+          {
+            "AddressType": "STREET",
+            "City": "",
+            "Region": "",
+            "PostalCode": "",
+            "Country": ""
+          },
+          {
+            "AddressType": "POBOX",
+            "City": "",
+            "Region": "",
+            "PostalCode": "",
+            "Country": ""
+          }
+        ],
+        "Phones": [
+          {
+            "PhoneType": "DEFAULT",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          },
+          {
+            "PhoneType": "DDI",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          },
+          {
+            "PhoneType": "FAX",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          },
+          {
+            "PhoneType": "MOBILE",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          }
+        ],
+        "UpdatedDateUTC": "/Date(1778908907560+0000)/",
+        "ContactGroups": [],
+        "IsSupplier": true,
+        "IsCustomer": false,
+        "SalesTrackingCategories": [],
+        "PurchasesTrackingCategories": [],
+        "ContactPersons": [],
+        "HasValidationErrors": false
+      },
+      "DateString": "2026-03-10T00:00:00",
+      "Date": "/Date(1773100800000+0000)/",
+      "DueDateString": "2026-03-10T00:00:00",
+      "DueDate": "/Date(1773100800000+0000)/",
+      "Status": "AUTHORISED",
+      "LineAmountTypes": "Inclusive",
+      "LineItems": [
+        {
+          "Description": "Salin Appliance Spares — Materials & Equipment — ACT-HV",
+          "UnitAmount": 228.9,
+          "TaxType": "INPUT",
+          "TaxAmount": 20.81,
+          "LineAmount": 228.9,
+          "AccountCode": "446",
+          "Tracking": [
+            {
+              "Name": "Business Divisions",
+              "Option": "A Curious Tractor",
+              "TrackingCategoryID": "91448ff3-eb13-437a-9d97-4d2e52c86ca4",
+              "TrackingOptionID": "1973a257-0d96-42c3-bca0-99623cb52923"
+            },
+            {
+              "Name": "Project Tracking",
+              "Option": "ACT-HV — The Harvest Witta",
+              "TrackingCategoryID": "1a1ad7c5-249a-4b1f-842d-06ba2a63a0fe",
+              "TrackingOptionID": "25a2184b-12ce-4c8d-8aa3-8e31c5df2f72"
+            }
+          ],
+          "Quantity": 1,
+          "LineItemID": "b0efe3fd-deb0-481c-b125-c332f64a1896",
+          "AccountID": "d80fdbbc-0ce8-4d59-8cf4-b6ee6fde749f",
+          "ValidationErrors": []
+        }
+      ],
+      "SubTotal": 208.09,
+      "TotalTax": 20.81,
+      "Total": 228.9,
+      "UpdatedDateUTC": "/Date(1780018105383+0000)/",
+      "CurrencyCode": "AUD"
+    }
+  },
+  {
+    "invoiceID": "bf39c61b-aff3-4390-a8ae-93ffaab79100",
+    "vendor": "WizBang",
+    "before": {
+      "Type": "ACCPAY",
+      "InvoiceID": "bf39c61b-aff3-4390-a8ae-93ffaab79100",
+      "Reference": "auto-pushed dext_import 21aae823",
+      "Prepayments": [],
+      "Overpayments": [],
+      "AmountDue": 82.17,
+      "AmountPaid": 0,
+      "SentToContact": false,
+      "CurrencyRate": 1,
+      "IsDiscounted": false,
+      "HasAttachments": true,
+      "HasErrors": false,
+      "Attachments": [
+        {
+          "AttachmentID": "417d2fb3-c5b7-402d-a838-13a2d674bcf9",
+          "FileName": "WizBang-Technologies-receipt.jpg",
+          "Url": "https://api.xero.com/api.xro/2.0/Invoices/bf39c61b-aff3-4390-a8ae-93ffaab79100/Attachments/WizBang-Technologies-receipt.jpg",
+          "MimeType": "image/jpg",
+          "ContentLength": 84273
+        }
+      ],
+      "InvoicePaymentServices": [],
+      "Contact": {
+        "ContactID": "9f48fa81-58bd-43a8-9bc7-fa74bcc4455c",
+        "ContactStatus": "ACTIVE",
+        "Name": "WizBang Technologies",
+        "EmailAddress": "",
+        "BankAccountDetails": "",
+        "Addresses": [
+          {
+            "AddressType": "STREET",
+            "City": "",
+            "Region": "",
+            "PostalCode": "",
+            "Country": ""
+          },
+          {
+            "AddressType": "POBOX",
+            "City": "",
+            "Region": "",
+            "PostalCode": "",
+            "Country": ""
+          }
+        ],
+        "Phones": [
+          {
+            "PhoneType": "DEFAULT",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          },
+          {
+            "PhoneType": "DDI",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          },
+          {
+            "PhoneType": "FAX",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          },
+          {
+            "PhoneType": "MOBILE",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          }
+        ],
+        "UpdatedDateUTC": "/Date(1763192763943+0000)/",
+        "ContactGroups": [],
+        "IsSupplier": true,
+        "IsCustomer": false,
+        "SalesTrackingCategories": [],
+        "PurchasesTrackingCategories": [],
+        "ContactPersons": [],
+        "HasValidationErrors": false
+      },
+      "DateString": "2025-12-13T00:00:00",
+      "Date": "/Date(1765584000000+0000)/",
+      "DueDateString": "2025-12-13T00:00:00",
+      "DueDate": "/Date(1765584000000+0000)/",
+      "Status": "AUTHORISED",
+      "LineAmountTypes": "Inclusive",
+      "LineItems": [
+        {
+          "Description": "WizBang Technologies — Other — ACT-IN",
+          "UnitAmount": 82.17,
+          "TaxType": "INPUT",
+          "TaxAmount": 7.47,
+          "LineAmount": 82.17,
+          "AccountCode": "429",
+          "Tracking": [
+            {
+              "Name": "Business Divisions",
+              "Option": "A Curious Tractor",
+              "TrackingCategoryID": "91448ff3-eb13-437a-9d97-4d2e52c86ca4",
+              "TrackingOptionID": "1973a257-0d96-42c3-bca0-99623cb52923"
+            },
+            {
+              "Name": "Project Tracking",
+              "Option": "ACT-IN — ACT Infrastructure",
+              "TrackingCategoryID": "1a1ad7c5-249a-4b1f-842d-06ba2a63a0fe",
+              "TrackingOptionID": "8250fb3a-4fc4-40c5-822d-7cd7a9caffaa"
+            }
+          ],
+          "Quantity": 1,
+          "LineItemID": "adae5fa8-0749-48ae-8512-b444f2e21947",
+          "AccountID": "d41823f3-891a-448d-8f1a-6a5d1fac7041",
+          "ValidationErrors": []
+        }
+      ],
+      "SubTotal": 74.7,
+      "TotalTax": 7.47,
+      "Total": 82.17,
+      "UpdatedDateUTC": "/Date(1776852170233+0000)/",
+      "CurrencyCode": "AUD"
+    }
+  },
+  {
+    "invoiceID": "f17812a9-4e07-4492-b587-7e9ad11bdd99",
+    "vendor": "Bunnings (diff acct)",
+    "before": {
+      "Type": "ACCPAY",
+      "InvoiceID": "f17812a9-4e07-4492-b587-7e9ad11bdd99",
+      "InvoiceNumber": "W266674593",
+      "Reference": "",
+      "Prepayments": [],
+      "Overpayments": [],
+      "AmountDue": 1199.8,
+      "AmountPaid": 0,
+      "Url": "https://app.dext.com/receipts/1739495923",
+      "SentToContact": false,
+      "CurrencyRate": 1,
+      "IsDiscounted": false,
+      "HasAttachments": true,
+      "HasErrors": false,
+      "Attachments": [
+        {
+          "AttachmentID": "2b9010df-1004-44b7-9d74-40eb1b20a554",
+          "FileName": "17394959230.jpeg",
+          "Url": "https://api.xero.com/api.xro/2.0/Invoices/f17812a9-4e07-4492-b587-7e9ad11bdd99/Attachments/17394959230.jpeg",
+          "MimeType": "image/jpeg",
+          "ContentLength": 271204
+        }
+      ],
+      "InvoicePaymentServices": [],
+      "Contact": {
+        "ContactID": "9339392b-a9cc-4d11-baf0-3bc3e0f90471",
+        "ContactStatus": "ACTIVE",
+        "Name": "Bunnings Warehouse",
+        "EmailAddress": "",
+        "BankAccountDetails": "",
+        "TaxNumber": "26008672179",
+        "Addresses": [
+          {
+            "AddressType": "STREET",
+            "City": "",
+            "Region": "",
+            "PostalCode": "",
+            "Country": ""
+          },
+          {
+            "AddressType": "POBOX",
+            "City": "",
+            "Region": "",
+            "PostalCode": "",
+            "Country": ""
+          }
+        ],
+        "Phones": [
+          {
+            "PhoneType": "DEFAULT",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          },
+          {
+            "PhoneType": "DDI",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          },
+          {
+            "PhoneType": "FAX",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          },
+          {
+            "PhoneType": "MOBILE",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          }
+        ],
+        "UpdatedDateUTC": "/Date(1776832605140+0000)/",
+        "ContactGroups": [],
+        "IsSupplier": true,
+        "IsCustomer": false,
+        "SalesTrackingCategories": [],
+        "PurchasesTrackingCategories": [],
+        "ContactPersons": [],
+        "HasValidationErrors": false
+      },
+      "DateString": "2025-07-08T00:00:00",
+      "Date": "/Date(1751932800000+0000)/",
+      "DueDateString": "2025-07-08T00:00:00",
+      "DueDate": "/Date(1751932800000+0000)/",
+      "Status": "AUTHORISED",
+      "LineAmountTypes": "Inclusive",
+      "LineItems": [
+        {
+          "Description": ".",
+          "UnitAmount": 1199.8,
+          "TaxType": "INPUT",
+          "TaxAmount": 109.07,
+          "LineAmount": 1199.8,
+          "AccountCode": "446",
+          "Tracking": [],
+          "Quantity": 1,
+          "LineItemID": "11b3810f-0cd2-4e2c-adf8-3670daf476ea",
+          "AccountID": "d80fdbbc-0ce8-4d59-8cf4-b6ee6fde749f",
+          "ValidationErrors": []
+        }
+      ],
+      "SubTotal": 1090.73,
+      "TotalTax": 109.07,
+      "Total": 1199.8,
+      "UpdatedDateUTC": "/Date(1762942777340+0000)/",
+      "CurrencyCode": "AUD"
+    }
+  },
+  {
+    "invoiceID": "503b4d00-d757-4fec-a858-f66fb8c07d0e",
+    "vendor": "Palm Island Motel",
+    "before": {
+      "Type": "ACCPAY",
+      "InvoiceID": "503b4d00-d757-4fec-a858-f66fb8c07d0e",
+      "InvoiceNumber": "6D1D49DE4A/RC",
+      "Reference": "",
+      "Prepayments": [],
+      "Overpayments": [],
+      "AmountDue": 514,
+      "AmountPaid": 0,
+      "Url": "https://app.dext.com/receipts/1791143847",
+      "SentToContact": false,
+      "CurrencyRate": 1,
+      "IsDiscounted": false,
+      "HasAttachments": true,
+      "HasErrors": false,
+      "Attachments": [
+        {
+          "AttachmentID": "c75d3e3e-d039-49b9-83c5-d1026b978afd",
+          "FileName": "17911438470.pdf",
+          "Url": "https://api.xero.com/api.xro/2.0/Invoices/503b4d00-d757-4fec-a858-f66fb8c07d0e/Attachments/17911438470.pdf",
+          "MimeType": "application/pdf",
+          "ContentLength": 150695
+        }
+      ],
+      "InvoicePaymentServices": [],
+      "Contact": {
+        "ContactID": "48e23a3a-f8c5-42f5-bb80-7c94d4875154",
+        "ContactStatus": "ACTIVE",
+        "Name": "Palm Island Motel",
+        "EmailAddress": "",
+        "BankAccountDetails": "",
+        "Addresses": [
+          {
+            "AddressType": "STREET",
+            "City": "",
+            "Region": "",
+            "PostalCode": "",
+            "Country": ""
+          },
+          {
+            "AddressType": "POBOX",
+            "City": "",
+            "Region": "",
+            "PostalCode": "",
+            "Country": ""
+          }
+        ],
+        "Phones": [
+          {
+            "PhoneType": "DEFAULT",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          },
+          {
+            "PhoneType": "DDI",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          },
+          {
+            "PhoneType": "FAX",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          },
+          {
+            "PhoneType": "MOBILE",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          }
+        ],
+        "UpdatedDateUTC": "/Date(1738213885563+0000)/",
+        "ContactGroups": [],
+        "IsSupplier": true,
+        "IsCustomer": false,
+        "SalesTrackingCategories": [],
+        "PurchasesTrackingCategories": [],
+        "ContactPersons": [],
+        "HasValidationErrors": false
+      },
+      "DateString": "2025-09-02T00:00:00",
+      "Date": "/Date(1756771200000+0000)/",
+      "DueDateString": "2025-09-02T00:00:00",
+      "DueDate": "/Date(1756771200000+0000)/",
+      "Status": "AUTHORISED",
+      "LineAmountTypes": "Exclusive",
+      "LineItems": [
+        {
+          "Description": ".",
+          "UnitAmount": 467.2,
+          "TaxType": "INPUT",
+          "TaxAmount": 46.72,
+          "LineAmount": 467.2,
+          "AccountCode": "493",
+          "Tracking": [],
+          "Quantity": 1,
+          "LineItemID": "65167e62-eb9a-46b8-ae14-80ffb08c35f1",
+          "AccountID": "3cc18292-e8aa-4a7e-ad5a-8be538e4f20d",
+          "ValidationErrors": []
+        },
+        {
+          "Description": ".",
+          "UnitAmount": 0.08,
+          "TaxType": "EXEMPTEXPENSES",
+          "TaxAmount": 0,
+          "LineAmount": 0.08,
+          "AccountCode": "493",
+          "Tracking": [],
+          "Quantity": 1,
+          "LineItemID": "2970578c-88ac-45e4-b8d4-a91a831d09f1",
+          "AccountID": "3cc18292-e8aa-4a7e-ad5a-8be538e4f20d",
+          "ValidationErrors": []
+        }
+      ],
+      "SubTotal": 467.28,
+      "TotalTax": 46.72,
+      "Total": 514,
+      "UpdatedDateUTC": "/Date(1762944701847+0000)/",
+      "CurrencyCode": "AUD"
+    }
+  },
+  {
+    "invoiceID": "adc8c86f-9baf-4a53-a597-3c11df96a66b",
+    "vendor": "Maleny Hardware",
+    "before": {
+      "Type": "ACCPAY",
+      "InvoiceID": "adc8c86f-9baf-4a53-a597-3c11df96a66b",
+      "InvoiceNumber": "RB18256538250",
+      "Reference": "",
+      "Prepayments": [],
+      "Overpayments": [],
+      "AmountDue": 497.48,
+      "AmountPaid": 0,
+      "Url": "https://app.dext.com/receipts/1825653825",
+      "SentToContact": false,
+      "CurrencyRate": 1,
+      "IsDiscounted": false,
+      "HasAttachments": true,
+      "HasErrors": false,
+      "Attachments": [
+        {
+          "AttachmentID": "9a864e23-4eaa-4da5-a13a-639435aaf0da",
+          "FileName": "18256538250.pdf",
+          "Url": "https://api.xero.com/api.xro/2.0/Invoices/adc8c86f-9baf-4a53-a597-3c11df96a66b/Attachments/18256538250.pdf",
+          "MimeType": "application/pdf",
+          "ContentLength": 124183
+        }
+      ],
+      "InvoicePaymentServices": [],
+      "Contact": {
+        "ContactID": "443e92ca-26aa-476b-8710-61271e44154e",
+        "ContactStatus": "ACTIVE",
+        "Name": "Maleny Hardware And Rural Supplies",
+        "EmailAddress": "",
+        "BankAccountDetails": "",
+        "TaxNumber": "25635220076",
+        "Addresses": [
+          {
+            "AddressType": "STREET",
+            "City": "",
+            "Region": "",
+            "PostalCode": "",
+            "Country": ""
+          },
+          {
+            "AddressType": "POBOX",
+            "City": "",
+            "Region": "",
+            "PostalCode": "",
+            "Country": ""
+          }
+        ],
+        "Phones": [
+          {
+            "PhoneType": "DEFAULT",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          },
+          {
+            "PhoneType": "DDI",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          },
+          {
+            "PhoneType": "FAX",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          },
+          {
+            "PhoneType": "MOBILE",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          }
+        ],
+        "UpdatedDateUTC": "/Date(1667787157207+0000)/",
+        "ContactGroups": [],
+        "IsSupplier": true,
+        "IsCustomer": false,
+        "SalesTrackingCategories": [],
+        "PurchasesTrackingCategories": [],
+        "ContactPersons": [],
+        "HasValidationErrors": false
+      },
+      "DateString": "2025-09-30T00:00:00",
+      "Date": "/Date(1759190400000+0000)/",
+      "DueDateString": "2025-09-30T00:00:00",
+      "DueDate": "/Date(1759190400000+0000)/",
+      "Status": "AUTHORISED",
+      "LineAmountTypes": "Inclusive",
+      "LineItems": [
+        {
+          "Description": ".",
+          "UnitAmount": 497.48,
+          "TaxType": "INPUT",
+          "TaxAmount": 45.23,
+          "LineAmount": 497.48,
+          "AccountCode": "446",
+          "Tracking": [
+            {
+              "Name": "Business Divisions",
+              "Option": "Farm Activities",
+              "TrackingCategoryID": "91448ff3-eb13-437a-9d97-4d2e52c86ca4",
+              "TrackingOptionID": "99c62f14-036a-4e7e-907f-1c150c744091"
+            }
+          ],
+          "Quantity": 1,
+          "LineItemID": "863a8d51-3112-443d-ae74-605fc5156328",
+          "AccountID": "d80fdbbc-0ce8-4d59-8cf4-b6ee6fde749f",
+          "ValidationErrors": []
+        }
+      ],
+      "SubTotal": 452.25,
+      "TotalTax": 45.23,
+      "Total": 497.48,
+      "UpdatedDateUTC": "/Date(1762997255940+0000)/",
+      "CurrencyCode": "AUD"
+    }
+  },
+  {
+    "invoiceID": "db9b2797-54a8-4511-8ef5-3f69c3a88622",
+    "vendor": "Maleny Hardware",
+    "before": {
+      "Type": "ACCPAY",
+      "InvoiceID": "db9b2797-54a8-4511-8ef5-3f69c3a88622",
+      "InvoiceNumber": "RB17644337340",
+      "Reference": "",
+      "Prepayments": [],
+      "Overpayments": [],
+      "AmountDue": 423.75,
+      "AmountPaid": 0,
+      "Url": "https://app.dext.com/receipts/1764433734",
+      "SentToContact": false,
+      "CurrencyRate": 1,
+      "IsDiscounted": false,
+      "HasAttachments": true,
+      "HasErrors": false,
+      "Attachments": [
+        {
+          "AttachmentID": "476fa188-1e5c-4f54-82ed-577c548d8a11",
+          "FileName": "17644337340.pdf",
+          "Url": "https://api.xero.com/api.xro/2.0/Invoices/db9b2797-54a8-4511-8ef5-3f69c3a88622/Attachments/17644337340.pdf",
+          "MimeType": "application/pdf",
+          "ContentLength": 128491
+        }
+      ],
+      "InvoicePaymentServices": [],
+      "Contact": {
+        "ContactID": "443e92ca-26aa-476b-8710-61271e44154e",
+        "ContactStatus": "ACTIVE",
+        "Name": "Maleny Hardware And Rural Supplies",
+        "EmailAddress": "",
+        "BankAccountDetails": "",
+        "TaxNumber": "25635220076",
+        "Addresses": [
+          {
+            "AddressType": "STREET",
+            "City": "",
+            "Region": "",
+            "PostalCode": "",
+            "Country": ""
+          },
+          {
+            "AddressType": "POBOX",
+            "City": "",
+            "Region": "",
+            "PostalCode": "",
+            "Country": ""
+          }
+        ],
+        "Phones": [
+          {
+            "PhoneType": "DEFAULT",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          },
+          {
+            "PhoneType": "DDI",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          },
+          {
+            "PhoneType": "FAX",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          },
+          {
+            "PhoneType": "MOBILE",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          }
+        ],
+        "UpdatedDateUTC": "/Date(1667787157207+0000)/",
+        "ContactGroups": [],
+        "IsSupplier": true,
+        "IsCustomer": false,
+        "SalesTrackingCategories": [],
+        "PurchasesTrackingCategories": [],
+        "ContactPersons": [],
+        "HasValidationErrors": false
+      },
+      "DateString": "2025-07-31T00:00:00",
+      "Date": "/Date(1753920000000+0000)/",
+      "DueDateString": "2025-07-31T00:00:00",
+      "DueDate": "/Date(1753920000000+0000)/",
+      "Status": "AUTHORISED",
+      "LineAmountTypes": "Inclusive",
+      "LineItems": [
+        {
+          "Description": ".",
+          "UnitAmount": 423.75,
+          "TaxType": "INPUT",
+          "TaxAmount": 38.52,
+          "LineAmount": 423.75,
+          "AccountCode": "446",
+          "Tracking": [
+            {
+              "Name": "Business Divisions",
+              "Option": "Farm Activities",
+              "TrackingCategoryID": "91448ff3-eb13-437a-9d97-4d2e52c86ca4",
+              "TrackingOptionID": "99c62f14-036a-4e7e-907f-1c150c744091"
+            }
+          ],
+          "Quantity": 1,
+          "LineItemID": "9b237fb6-937e-4df7-977e-bdb8e816c7f7",
+          "AccountID": "d80fdbbc-0ce8-4d59-8cf4-b6ee6fde749f",
+          "ValidationErrors": []
+        }
+      ],
+      "SubTotal": 385.23,
+      "TotalTax": 38.52,
+      "Total": 423.75,
+      "UpdatedDateUTC": "/Date(1762943448580+0000)/",
+      "CurrencyCode": "AUD"
+    }
+  },
+  {
+    "invoiceID": "4912fa8d-2030-4153-a80c-db48ce4b30b1",
+    "vendor": "Repco",
+    "before": {
+      "Type": "ACCPAY",
+      "InvoiceID": "4912fa8d-2030-4153-a80c-db48ce4b30b1",
+      "InvoiceNumber": "4120364586",
+      "Reference": "",
+      "Prepayments": [],
+      "Overpayments": [],
+      "AmountDue": 384,
+      "AmountPaid": 0,
+      "Url": "https://app.dext.com/receipts/1804317248",
+      "SentToContact": false,
+      "CurrencyRate": 1,
+      "IsDiscounted": false,
+      "HasAttachments": true,
+      "HasErrors": false,
+      "Attachments": [
+        {
+          "AttachmentID": "83a033b4-cbf4-4a87-a3ef-3068c20ba798",
+          "FileName": "18043172480.pdf",
+          "Url": "https://api.xero.com/api.xro/2.0/Invoices/4912fa8d-2030-4153-a80c-db48ce4b30b1/Attachments/18043172480.pdf",
+          "MimeType": "application/pdf",
+          "ContentLength": 83356
+        }
+      ],
+      "InvoicePaymentServices": [],
+      "Contact": {
+        "ContactID": "95fad977-d31f-44a5-9256-1e1e25a38d3b",
+        "ContactStatus": "ACTIVE",
+        "Name": "Repco",
+        "EmailAddress": "",
+        "BankAccountDetails": "",
+        "TaxNumber": "97097993283",
+        "Addresses": [
+          {
+            "AddressType": "STREET",
+            "City": "",
+            "Region": "",
+            "PostalCode": "",
+            "Country": ""
+          },
+          {
+            "AddressType": "POBOX",
+            "City": "",
+            "Region": "",
+            "PostalCode": "",
+            "Country": ""
+          }
+        ],
+        "Phones": [
+          {
+            "PhoneType": "DEFAULT",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          },
+          {
+            "PhoneType": "DDI",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          },
+          {
+            "PhoneType": "FAX",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          },
+          {
+            "PhoneType": "MOBILE",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          }
+        ],
+        "UpdatedDateUTC": "/Date(1694757269267+0000)/",
+        "ContactGroups": [],
+        "IsSupplier": true,
+        "IsCustomer": false,
+        "SalesTrackingCategories": [],
+        "PurchasesTrackingCategories": [],
+        "ContactPersons": [],
+        "HasValidationErrors": false
+      },
+      "DateString": "2025-09-13T00:00:00",
+      "Date": "/Date(1757721600000+0000)/",
+      "DueDateString": "2025-09-13T00:00:00",
+      "DueDate": "/Date(1757721600000+0000)/",
+      "Status": "AUTHORISED",
+      "LineAmountTypes": "Exclusive",
+      "LineItems": [
+        {
+          "Description": ".",
+          "UnitAmount": 349.09,
+          "TaxType": "INPUT",
+          "TaxAmount": 34.91,
+          "LineAmount": 349.09,
+          "AccountCode": "451",
+          "Tracking": [],
+          "Quantity": 1,
+          "LineItemID": "6e56dba6-ef92-454e-b754-971c5de0df9e",
+          "AccountID": "4d6ab049-e42c-4069-8a43-fee32ffa1629",
+          "ValidationErrors": []
+        }
+      ],
+      "SubTotal": 349.09,
+      "TotalTax": 34.91,
+      "Total": 384,
+      "UpdatedDateUTC": "/Date(1762996902260+0000)/",
+      "CurrencyCode": "AUD"
+    }
+  },
+  {
+    "invoiceID": "0d240fbf-89c4-43a0-8aff-00704b615815",
+    "vendor": "Maleny Hardware",
+    "before": {
+      "Type": "ACCPAY",
+      "InvoiceID": "0d240fbf-89c4-43a0-8aff-00704b615815",
+      "InvoiceNumber": "RB18555475390",
+      "Reference": "",
+      "Prepayments": [],
+      "Overpayments": [],
+      "AmountDue": 285.2,
+      "AmountPaid": 0,
+      "Url": "https://app.dext.com/receipts/1855547539",
+      "SentToContact": false,
+      "CurrencyRate": 1,
+      "IsDiscounted": false,
+      "HasAttachments": true,
+      "HasErrors": false,
+      "Attachments": [
+        {
+          "AttachmentID": "399321d4-076c-4688-8013-aaac488d061a",
+          "FileName": "18555475390.pdf",
+          "Url": "https://api.xero.com/api.xro/2.0/Invoices/0d240fbf-89c4-43a0-8aff-00704b615815/Attachments/18555475390.pdf",
+          "MimeType": "application/pdf",
+          "ContentLength": 124824
+        }
+      ],
+      "InvoicePaymentServices": [],
+      "Contact": {
+        "ContactID": "443e92ca-26aa-476b-8710-61271e44154e",
+        "ContactStatus": "ACTIVE",
+        "Name": "Maleny Hardware And Rural Supplies",
+        "EmailAddress": "",
+        "BankAccountDetails": "",
+        "TaxNumber": "25635220076",
+        "Addresses": [
+          {
+            "AddressType": "STREET",
+            "City": "",
+            "Region": "",
+            "PostalCode": "",
+            "Country": ""
+          },
+          {
+            "AddressType": "POBOX",
+            "City": "",
+            "Region": "",
+            "PostalCode": "",
+            "Country": ""
+          }
+        ],
+        "Phones": [
+          {
+            "PhoneType": "DEFAULT",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          },
+          {
+            "PhoneType": "DDI",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          },
+          {
+            "PhoneType": "FAX",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          },
+          {
+            "PhoneType": "MOBILE",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          }
+        ],
+        "UpdatedDateUTC": "/Date(1667787157207+0000)/",
+        "ContactGroups": [],
+        "IsSupplier": true,
+        "IsCustomer": false,
+        "SalesTrackingCategories": [],
+        "PurchasesTrackingCategories": [],
+        "ContactPersons": [],
+        "HasValidationErrors": false
+      },
+      "DateString": "2025-10-31T00:00:00",
+      "Date": "/Date(1761868800000+0000)/",
+      "DueDateString": "2025-10-31T00:00:00",
+      "DueDate": "/Date(1761868800000+0000)/",
+      "Status": "AUTHORISED",
+      "LineAmountTypes": "Inclusive",
+      "LineItems": [
+        {
+          "Description": ".",
+          "UnitAmount": 285.2,
+          "TaxType": "INPUT",
+          "TaxAmount": 25.93,
+          "LineAmount": 285.2,
+          "AccountCode": "446",
+          "Tracking": [
+            {
+              "Name": "Business Divisions",
+              "Option": "Farm Activities",
+              "TrackingCategoryID": "91448ff3-eb13-437a-9d97-4d2e52c86ca4",
+              "TrackingOptionID": "99c62f14-036a-4e7e-907f-1c150c744091"
+            }
+          ],
+          "Quantity": 1,
+          "LineItemID": "bc025115-7167-454b-beb5-f8df8c4e6e66",
+          "AccountID": "d80fdbbc-0ce8-4d59-8cf4-b6ee6fde749f",
+          "ValidationErrors": []
+        }
+      ],
+      "SubTotal": 259.27,
+      "TotalTax": 25.93,
+      "Total": 285.2,
+      "UpdatedDateUTC": "/Date(1762997721733+0000)/",
+      "CurrencyCode": "AUD"
+    }
+  },
+  {
+    "invoiceID": "27c08325-0ec5-4d53-87f0-71095969fa63",
+    "vendor": "Virgin Australia",
+    "before": {
+      "Type": "ACCPAY",
+      "InvoiceID": "27c08325-0ec5-4d53-87f0-71095969fa63",
+      "InvoiceNumber": "7952110113630",
+      "Reference": "",
+      "Prepayments": [],
+      "Overpayments": [],
+      "AmountDue": 202,
+      "AmountPaid": 0,
+      "Url": "https://app.dext.com/receipts/1709756538",
+      "SentToContact": false,
+      "CurrencyRate": 1,
+      "IsDiscounted": false,
+      "HasAttachments": true,
+      "HasErrors": false,
+      "Attachments": [
+        {
+          "AttachmentID": "7e562fc2-70b1-4943-8cc3-9c8dcf7bc969",
+          "FileName": "17097565380.pdf",
+          "Url": "https://api.xero.com/api.xro/2.0/Invoices/27c08325-0ec5-4d53-87f0-71095969fa63/Attachments/17097565380.pdf",
+          "MimeType": "application/pdf",
+          "ContentLength": 53191
+        }
+      ],
+      "InvoicePaymentServices": [],
+      "Contact": {
+        "ContactID": "07ecb56a-39c5-410f-b596-52587f4bc190",
+        "ContactStatus": "ACTIVE",
+        "Name": "Virgin Australia",
+        "EmailAddress": "",
+        "BankAccountDetails": "",
+        "TaxNumber": "36090670965",
+        "Addresses": [
+          {
+            "AddressType": "STREET",
+            "City": "",
+            "Region": "",
+            "PostalCode": "",
+            "Country": ""
+          },
+          {
+            "AddressType": "POBOX",
+            "City": "",
+            "Region": "",
+            "PostalCode": "",
+            "Country": ""
+          }
+        ],
+        "Phones": [
+          {
+            "PhoneType": "DEFAULT",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          },
+          {
+            "PhoneType": "DDI",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          },
+          {
+            "PhoneType": "FAX",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          },
+          {
+            "PhoneType": "MOBILE",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          }
+        ],
+        "UpdatedDateUTC": "/Date(1698906139737+0000)/",
+        "ContactGroups": [],
+        "IsSupplier": true,
+        "IsCustomer": false,
+        "SalesTrackingCategories": [],
+        "PurchasesTrackingCategories": [],
+        "ContactPersons": [],
+        "HasValidationErrors": false
+      },
+      "DateString": "2025-05-12T00:00:00",
+      "Date": "/Date(1747008000000+0000)/",
+      "DueDateString": "2025-05-19T00:00:00",
+      "DueDate": "/Date(1747612800000+0000)/",
+      "Status": "AUTHORISED",
+      "LineAmountTypes": "Exclusive",
+      "LineItems": [
+        {
+          "Description": ".",
+          "UnitAmount": 167,
+          "TaxType": "INPUT",
+          "TaxAmount": 35,
+          "LineAmount": 167,
+          "AccountCode": "493",
+          "Tracking": [],
+          "Quantity": 1,
+          "LineItemID": "4d1bfb56-e438-4b25-b4a5-e2cecc82c8a3",
+          "AccountID": "3cc18292-e8aa-4a7e-ad5a-8be538e4f20d",
+          "ValidationErrors": []
+        }
+      ],
+      "SubTotal": 167,
+      "TotalTax": 35,
+      "Total": 202,
+      "UpdatedDateUTC": "/Date(1752537151570+0000)/",
+      "CurrencyCode": "AUD"
+    }
+  },
+  {
+    "invoiceID": "0df8f163-b479-433f-92bc-c242110e1c51",
+    "vendor": "Apple",
+    "before": {
+      "Type": "ACCPAY",
+      "InvoiceID": "0df8f163-b479-433f-92bc-c242110e1c51",
+      "InvoiceNumber": "786034717731",
+      "Reference": "",
+      "Prepayments": [],
+      "Overpayments": [],
+      "AmountDue": 99.99,
+      "AmountPaid": 0,
+      "Url": "https://app.dext.com/receipts/1841124220",
+      "SentToContact": false,
+      "CurrencyRate": 1,
+      "IsDiscounted": false,
+      "HasAttachments": true,
+      "HasErrors": false,
+      "Attachments": [
+        {
+          "AttachmentID": "660fa50f-5f6a-4f6b-a5e3-8d4702b151ed",
+          "FileName": "18411242200.pdf",
+          "Url": "https://api.xero.com/api.xro/2.0/Invoices/0df8f163-b479-433f-92bc-c242110e1c51/Attachments/18411242200.pdf",
+          "MimeType": "application/pdf",
+          "ContentLength": 180987
+        }
+      ],
+      "InvoicePaymentServices": [],
+      "Contact": {
+        "ContactID": "13b8ee4c-5dad-4857-be20-fd2fb836ca49",
+        "ContactStatus": "ACTIVE",
+        "Name": "Apple Pty Ltd",
+        "EmailAddress": "",
+        "BankAccountDetails": "",
+        "TaxNumber": "46002510054",
+        "Addresses": [
+          {
+            "AddressType": "STREET",
+            "City": "",
+            "Region": "",
+            "PostalCode": "",
+            "Country": ""
+          },
+          {
+            "AddressType": "POBOX",
+            "City": "",
+            "Region": "",
+            "PostalCode": "",
+            "Country": ""
+          }
+        ],
+        "Phones": [
+          {
+            "PhoneType": "DEFAULT",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          },
+          {
+            "PhoneType": "DDI",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          },
+          {
+            "PhoneType": "FAX",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          },
+          {
+            "PhoneType": "MOBILE",
+            "PhoneNumber": "",
+            "PhoneAreaCode": "",
+            "PhoneCountryCode": ""
+          }
+        ],
+        "UpdatedDateUTC": "/Date(1692249109753+0000)/",
+        "ContactGroups": [],
+        "IsSupplier": true,
+        "IsCustomer": false,
+        "SalesTrackingCategories": [],
+        "PurchasesTrackingCategories": [],
+        "ContactPersons": [],
+        "HasValidationErrors": false
+      },
+      "DateString": "2025-10-11T00:00:00",
+      "Date": "/Date(1760140800000+0000)/",
+      "DueDateString": "2025-10-11T00:00:00",
+      "DueDate": "/Date(1760140800000+0000)/",
+      "Status": "AUTHORISED",
+      "LineAmountTypes": "Inclusive",
+      "LineItems": [
+        {
+          "Description": ".",
+          "UnitAmount": 99.99,
+          "TaxType": "INPUT",
+          "TaxAmount": 9.09,
+          "LineAmount": 99.99,
+          "AccountCode": "485",
+          "Tracking": [],
+          "Quantity": 1,
+          "LineItemID": "cbda371d-0088-448c-bd59-f2aa92824972",
+          "AccountID": "e2c5870f-6375-43d9-99d1-1c30b8edc30f",
+          "ValidationErrors": []
+        }
+      ],
+      "SubTotal": 90.9,
+      "TotalTax": 9.09,
+      "Total": 99.99,
+      "UpdatedDateUTC": "/Date(1762997480180+0000)/",
+      "CurrencyCode": "AUD"
+    }
+  }
+]

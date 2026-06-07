@@ -111,7 +111,7 @@ Write ONLY the section content (no heading, no markdown formatting).`;
 
     try {
       const text = await trackedClaudeCompletion(prompt, SCRIPT_NAME, {
-        model: 'claude-sonnet-4-5-20250929',
+        model: 'claude-sonnet-4-6',
         maxTokens: template.words * 3, // Allow some headroom
         operation: `draft-${sectionKey}`,
         temperature: 0.7,

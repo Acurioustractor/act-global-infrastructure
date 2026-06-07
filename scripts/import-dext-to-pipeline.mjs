@@ -336,13 +336,17 @@ async function scrapeReceiptFiles() {
           ? `${receipt.vendor_name.replace(/[^a-zA-Z0-9]/g, '-')}-receipt.${result.ext}`
           : `receipt.${result.ext}`;
 
-        await supabase.rpc('update_receipt_attachment', {
-          receipt_id: receipt.id,
-          new_attachment_url: storagePath,
-          new_filename: filename,
-          new_content_type: result.contentType,
-          new_size_bytes: result.buffer.length,
-        });
+        const { error: updateError } = await supabase
+          .from('receipt_emails')
+          .update({
+            attachment_url: storagePath,
+            attachment_filename: filename,
+            attachment_content_type: result.contentType,
+            attachment_size_bytes: result.buffer.length,
+            updated_at: new Date().toISOString(),
+          })
+          .eq('id', receipt.id);
+        if (updateError) throw new Error(`Receipt update failed: ${updateError.message}`);
 
         totalBytes += result.buffer.length;
         downloaded++;
@@ -381,23 +385,51 @@ if (DRY_RUN) {
   process.exit(0);
 }
 
-// Batch insert via RPC (bypasses PostgREST table cache issues)
+async function existingMessageIds(ids) {
+  const existing = new Set();
+  for (let i = 0; i < ids.length; i += 100) {
+    const batch = ids.slice(i, i + 100);
+    const { data, error } = await supabase
+      .from('receipt_emails')
+      .select('gmail_message_id')
+      .in('gmail_message_id', batch);
+    if (error) throw new Error(`existing receipt lookup failed: ${error.message}`);
+    for (const row of data || []) existing.add(row.gmail_message_id);
+  }
+  return existing;
+}
+
+// Batch insert directly. The old insert_receipt_emails RPC is intentionally
+// avoided here because its search_path can drift and fail with
+// "relation receipt_emails does not exist".
 const BATCH_SIZE = 50;
 let inserted = 0;
+let skipped = 0;
 let errors = 0;
 
 for (let i = 0; i < transformed.length; i += BATCH_SIZE) {
   const batch = transformed.slice(i, i + BATCH_SIZE);
+  const ids = batch.map((row) => row.gmail_message_id);
 
-  const { data, error } = await supabase.rpc('insert_receipt_emails', {
-    rows: batch,
-  });
+  try {
+    const existing = await existingMessageIds(ids);
+    const toInsert = batch.filter((row) => !existing.has(row.gmail_message_id));
 
-  if (error) {
+    if (toInsert.length === 0) {
+      skipped += batch.length;
+    } else {
+      const { data, error } = await supabase
+        .from('receipt_emails')
+        .insert(toInsert)
+        .select('id');
+
+      if (error) throw error;
+      inserted += data?.length || 0;
+      skipped += batch.length - toInsert.length;
+    }
+  } catch (error) {
     log(`ERROR batch ${Math.floor(i / BATCH_SIZE) + 1}: ${error.message}`);
     errors += batch.length;
-  } else {
-    inserted += data || 0;
   }
 
   // Progress
@@ -405,8 +437,6 @@ for (let i = 0; i < transformed.length; i += BATCH_SIZE) {
     log(`  Progress: ${Math.min(i + BATCH_SIZE, transformed.length)}/${transformed.length}`);
   }
 }
-
-const skipped = transformed.length - inserted - errors;
 
 log(`\n=== Import Summary ===`);
 log(`  Inserted: ${inserted}`);
@@ -416,18 +446,15 @@ log(`  Total: ${transformed.length}`);
 
 // Show pipeline status after import
 try {
-  const { data: statusData } = await supabase.rpc('insert_receipt_emails', { rows: [] });
-  // Status query via PostgREST may fail if cache is stale — that's OK
-  const { data: countData, error: countErr } = await supabase
-    .from('receipt_emails')
-    .select('status');
+  const { data: countData, error: countErr } = await supabase.rpc('exec_sql', {
+    query: `SELECT status, count(*)::int AS count
+            FROM receipt_emails
+            GROUP BY status
+            ORDER BY count DESC`,
+  });
   if (countData && !countErr) {
-    const counts = {};
-    for (const r of countData) counts[r.status] = (counts[r.status] || 0) + 1;
     console.log('\n  Pipeline status after import:');
-    for (const [s, c] of Object.entries(counts).sort((a, b) => b[1] - a[1])) {
-      console.log(`    ${s}: ${c}`);
-    }
+    for (const row of countData) console.log(`    ${row.status}: ${row.count}`);
   }
 } catch {
   // Non-critical — data is already imported

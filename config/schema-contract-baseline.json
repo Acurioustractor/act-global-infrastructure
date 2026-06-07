@@ -1,0 +1,6 @@
+{
+  "_doc": "Known schema-contract violations accepted as of the date below. The test fails on any violation NOT in this list. Burn this down (archive dead-table routes, fix drifted columns) until empty, then delete the file for full strictness. Regenerate: node scripts/check-schema-contract.mjs --baseline",
+  "generatedAt": "2026-05-27T03:32:30.045Z",
+  "count": 0,
+  "accepted": []
+}

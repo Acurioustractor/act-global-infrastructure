@@ -1,6 +1,13 @@
 ---
 title: Caring for Those Who Care
-code: ACT-CA
+status: Active
+canonical_slug: caring-for-those-who-care
+canonical_code: ACT-CA
+tier: studio
+website_slug: caring-for-those-who-care
+website_path: /projects/caring-for-those-who-care
+public_surface: project
+cluster: caring-for-those-who-care
 ---
 
 # Caring for Those Who Care

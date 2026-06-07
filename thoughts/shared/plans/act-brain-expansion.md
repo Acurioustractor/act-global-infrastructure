@@ -1,3 +1,9 @@
+---
+title: "Plan: ACT Brain — cross-repo sync + multi-source review architecture"
+status: review-needed
+date: 2026-04-25
+last_verified: 2026-05-08
+---
 # Plan: ACT Brain — cross-repo sync + multi-source review architecture
 
 > Slug: `act-brain-expansion`

@@ -1,3 +1,9 @@
+---
+title: ACT Fear-Setting — for Ben + Nic
+status: review-needed
+date: 2026-04-20
+last_verified: 2026-05-08
+---
 # ACT Fear-Setting — for Ben + Nic
 
 **Date:** 2026-04-20

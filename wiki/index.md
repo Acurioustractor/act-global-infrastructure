@@ -26,19 +26,23 @@ This wiki follows the [[llm-knowledge-base|Karpathy LLM Knowledge Base pattern]]
 - [[act-identity|ACT Identity]] — what A Curious Tractor is: dual-entity structure, LCAA, Beautiful Obsolescence
 - [[act-ecosystem|ACT Ecosystem]] — how the projects fit together: narrative, evidence, place, proof case, art
 - [[third-reality|The Third Reality]] — ACT's proprietary methodology for social impact measurement
-- [[civic-world-model|Civic World Model]] — CivicGraph as living civic intelligence
+- [[civic-operating-system|Civic Operating System]] — three layers, one architecture: CivicGraph (intelligence) + JusticeHub (practice) + Empathy Ledger (accountability)
+- [[civic-reflex-automation|Civic Reflex Automation]] — the AI thesis: automate the boring, amplify the art, never replace human judgment
+- [[evidence-as-by-product|Evidence as a By-Product of the Work]] — how impact reporting composes from the layers; no separate reporting workstream
+- [[civic-world-model|Civic World Model]] — the intelligence sensorium of the civic OS: how CivicGraph illuminates the field
 - [[indigenous-data-sovereignty|Indigenous Data Sovereignty]] — Mukurtu, CARE principles, TK Labels
 - [[ocap-principles|OCAP Principles]] — Ownership, Control, Access, Possession — the four architectural requirements
 - [[llm-knowledge-base|LLM Knowledge Base]] — the architecture pattern powering this wiki
 - [[lcaa-method|LCAA Method]] — Listen, Curiosity, Action, Art
+- [[alma|ALMA]] — Australian Living Map of Alternatives; the catalogue of community-led interventions, evidence-graded with cultural authority
+- [[governed-proof|Governed Proof]] — evidence, review, confidence, publication, and audit trail after action
 - [[ai-community-engagement|AI and Community Engagement]] — when AI eats the paperwork, people get their time back
 - [[youth-justice-reform|Youth Justice Reform]] — evidence, policy, alternatives
 - [[consent-as-infrastructure|Consent as Infrastructure]] — OCAP principles as database architecture
 - [[governance-consent|Governance & Consent]] — operational shareability matrix, Elder review, OCAP in practice
 - [[funding-transparency|Funding Transparency]] — the $107B gap, civic intelligence, legibility
 - [[beautiful-obsolescence|Beautiful Obsolescence]] — the tractor PTO metaphor, designing for handover
-- [[ai-ethics|AI Ethics]] — non-negotiables, ALMA as gatekeeper, agent roles
-- [[alma|ALMA]] — six-signal evidence framework, Story → Signal → Shift → Scope
+- [[ai-ethics|AI Ethics]] — non-negotiables for AI under consent, authority, provenance, and review
 - [[ways-of-working|Ways of Working]] — daily practice, meeting rhythms, infrastructure philosophy
 - [[living-website-operating-system|Living Website Operating System]] — the workflow linking Tractorpedia, Empathy Ledger, and the public shell
 - [[project-identity-and-tagging-system|Project Identity & Tagging System]] — which wiki pages get their own code, which roll up, and how retagging works
@@ -48,7 +52,7 @@ This wiki follows the [[llm-knowledge-base|Karpathy LLM Knowledge Base pattern]]
 - [[voice-guide|Voice Guide]] — four voice characteristics, farm metaphor bank
 - [[place-land-practice|Place & Land Practice]] — BCV, Harvest, Farm as the Place cluster
 - [[visual-system|Visual System]] — diagram vocabulary, palette, photography guidelines
-- [[glossary|Glossary]] — core terms, ALMA signals, governance vocabulary
+- [[glossary|Glossary]] — core terms, ALMA review fields, governance vocabulary
 - [[transcript-analysis-method|Transcript Analysis Method]] — EL's four-layer voice-preserving pipeline
 
 ## People
@@ -97,7 +101,7 @@ People pages are **curated, not exhaustive**. The wider voice population lives i
 - [[projects/justicehub/judges-on-country|Judges on Country]] — 55 judges in Mparntwe, story-led decision deck, Traditional Owner-led experience
 - [[projects/smart-recovery/smart-recovery|SMART Recovery]] — addiction peer support, GP integration
 - [[projects/act-monthly-dinners|ACT Monthly Dinners]] — regular community gatherings over shared meals
-- [[projects/custodian-economy|Custodian Economy]] — economic models grounded in custodianship
+- [[projects/custodian-first-economy|Custodian First Economy]]: partner program supporting young people on youth justice orders (stub, pending detail)
 - [[projects/marriage-celebrant|Marriage Celebrant]] — Ben's civil marriage celebrant practice
 
 ### Cluster Overviews
@@ -193,6 +197,7 @@ The fourth letter of [[lcaa-method|LCAA]] — physical, sensory work that makes 
 ## Finance
 
 - [[finance/five-year-cashflow-model|Five-Year Cashflow Model]] — revenue projections, R&D tax, founder deposit path
+- [[finance/knight-family-act-pay-and-entity-setup|Knight Family + ACT Pay and Entity Setup]] — Ben/Carla/children payroll, Knight Family Trust role, Knight Photography routing, PSI guardrails, Witta/Harvest/Farm wealth path
 - [[finance/rdti-claim-strategy|R&D Tax Incentive Claim Strategy]] — FY26 founder invoicing, CPA booking, $200K+ refundable offset
 
 ## Operations

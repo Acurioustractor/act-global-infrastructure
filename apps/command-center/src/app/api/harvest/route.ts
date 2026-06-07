@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { supabase } from '@/lib/supabase'
+import { isRadarPipeline } from '@/lib/finance/pipeline-rollup'
 
 const PROJECT_CODE = 'ACT-HV'
 const HARVEST_TAGS = ['harvest', 'the-harvest', 'witta']
@@ -20,7 +21,8 @@ export async function GET() {
       // Xero transactions
       supabase
         .from('xero_transactions')
-        .select('id, date, description, contact_name, total, type')
+        // description lives in line_items[].description, not a top-level column
+        .select('id, date, line_items, contact_name, total, type')
         .eq('project_code', PROJECT_CODE)
         .order('date', { ascending: false })
         .limit(200),
@@ -31,7 +33,7 @@ export async function GET() {
         .select('id, invoice_number, contact_name, total, amount_due, type, status, date')
         .eq('project_code', PROJECT_CODE),
 
-      // GHL opportunities
+      // GHL opportunities (pipeline_name already selected — used to drop grant-radar from the value roll-up)
       supabase
         .from('ghl_opportunities')
         .select('id, name, pipeline_name, stage_name, monetary_value, status, created_at')
@@ -97,8 +99,10 @@ export async function GET() {
       .filter((i: any) => i.type === 'ACCREC' && i.amount_due > 0)
       .reduce((s: number, i: any) => s + (i.amount_due || 0), 0)
 
+    // Exclude grant-radar (GHL "Grants" pipeline) from the aggregate pipeline value —
+    // the opportunities[] list below still shows every opp.
     const pipelineValue = oppData
-      .filter((o: any) => o.status !== 'lost')
+      .filter((o: any) => o.status !== 'lost' && !isRadarPipeline(o.pipeline_name))
       .reduce((s: number, o: any) => s + (Number(o.monetary_value) || 0), 0)
 
     const grantFunding = grantData
@@ -174,7 +178,7 @@ export async function GET() {
       transactions: txData.slice(0, 50).map((tx: any) => ({
         id: tx.id,
         date: tx.date,
-        description: tx.description || '',
+        description: tx.line_items?.[0]?.description || '',
         contactName: tx.contact_name || '',
         amount: tx.total || 0,
         type: tx.type,

@@ -1,0 +1,66 @@
+[
+  {
+    "deleteTxnId": "7e6b8545-6039-4ebf-9f1c-ca2b55e99f64",
+    "keepTxnId": "594d7ccb-8a33-45f1-8655-c53a213fdc8b",
+    "reference": "PTJQ79UH-0009",
+    "amount": 13.32,
+    "vendor": "Firecrawl",
+    "date": "2026-03-12"
+  },
+  {
+    "deleteTxnId": "4c04fc14-1cf5-47d7-b7ec-d2212bd8b5d3",
+    "keepTxnId": "2a151bc1-f779-4573-8e25-51e1d4a983f7",
+    "reference": "PTJQ79UH-0010",
+    "amount": 13.45,
+    "vendor": "Firecrawl",
+    "date": "2026-04-12"
+  },
+  {
+    "deleteTxnId": "39bedd85-667e-4707-86c3-825bbb586bc7",
+    "keepTxnId": "2399633e-aa66-4a7c-b59f-97add40219ae",
+    "reference": "WSHNYD-00023",
+    "amount": 13.98,
+    "vendor": "Supabase",
+    "date": "2026-04-29"
+  },
+  {
+    "deleteTxnId": "350a694e-59b6-4624-a08a-8e474db2da23",
+    "keepTxnId": "08d86e6c-62b6-45a8-b735-a742b5efed00",
+    "reference": "6FDD0732-0003",
+    "amount": 20,
+    "vendor": "Vercel",
+    "date": "2026-01-17"
+  },
+  {
+    "deleteTxnId": "e7e59ee1-936d-4104-86c9-2b368cc522d6",
+    "keepTxnId": "41bc76c0-0b24-4a07-b17d-237bf91f5e76",
+    "reference": "6FDD0732-0007",
+    "amount": 21.29,
+    "vendor": "Vercel",
+    "date": "2026-03-21"
+  },
+  {
+    "deleteTxnId": "63a7f649-bb9e-4159-a98e-6829ca6a1f7c",
+    "keepTxnId": "182e1b75-4729-465f-8014-3ba59fd7ef42",
+    "reference": "AGAPY3VP-0006",
+    "amount": 35.85,
+    "vendor": "HighLevel",
+    "date": "2026-02-05"
+  },
+  {
+    "deleteTxnId": "d0ed8e72-195d-4e66-a9d6-5fdd237fe2a3",
+    "keepTxnId": "6865285f-7203-4fe2-966d-3bd394d21628",
+    "reference": "WSHNYD-00020",
+    "amount": 87.25,
+    "vendor": "Supabase",
+    "date": "2026-03-21"
+  },
+  {
+    "deleteTxnId": "a3aca097-ad62-4d0d-8022-a0dadd10d149",
+    "keepTxnId": "76803539-e469-40b7-a544-00ddca0b25bf",
+    "reference": "AGAPY3VP-0009",
+    "amount": 139.05,
+    "vendor": "HighLevel",
+    "date": "2026-03-23"
+  }
+]

@@ -1,15 +1,16 @@
 ---
 title: Goods on Country
 status: Active
-date: 2026-04-11
-entity_type: project
-tagging_mode: own-code
 canonical_slug: goods
 canonical_code: ACT-GD
+tier: ecosystem
 website_slug: goods
 website_path: /goods
 public_surface: project
 cluster: goods
+date: 2026-04-11
+entity_type: project
+tagging_mode: own-code
 empathy_ledger_key: goods
 ---
 
@@ -18,6 +19,25 @@ empathy_ledger_key: goods
 > Manufacturing durable household goods from 100% recycled plastic for remote and marginalised Australian communities — where conventional products fail within weeks.
 
 **Status:** Active | **Code:** ACT-GD | **Tier:** Ecosystem
+
+## Goal Stack
+
+> The alignment chain from purpose to this week. The top three layers (**Purpose · 10-year · 12-month**) are durable. The lower layers (**Quarter · Month · Dominoes**) are *living* — refreshed each week in the [[flow-flywheel|Flow Flywheel]] ritual. Goods' weekly dominoes are tracked in Notion under code **ACT-GD**.
+
+| Layer | Goal | Proof it moved |
+|---|---|---|
+| **Purpose** | Put durable, community-owned household goods into remote communities, and build manufacturing communities own and run — so ACT's role progressively diminishes. | — |
+| **10-year** | A network of community-owned, containerised on-country facilities (Jinibara → Alice Springs → Top End / Torres Strait), community-controlled across product, data, and relationships. | Facilities operating; community ownership; local FTE |
+| **12-month** (FY26→27) | Stand up the first containerised facility on Jinibara Country (~1,500 beds, ~6 FTE) and secure the capital stack that funds it — REAL Innovation Fund ($1.2M/4yr) + QBE Catalysing Impact (~$210K). | Facility commissioned; capital closed; FY27 revenue toward $585K |
+| **This quarter** | Drive the QBE Catalysing Impact decision (most time-sensitive — unlocks Snow's impact-investment track); advance REAL + Snow; convert top NT buyer demand. | QBE outcome; Snow advanced; a buyer order closed |
+| **This month** (May 2026) | *Advance the single most time-sensitive capital item and one buyer conversion.* — refine each cycle | |
+
+**This week's dominoes** (max 3 — set in the ritual, tracked in Notion · ACT-GD):
+1. *Finalise the first-facility pilot brief (product, community, equipment, partners, costs, training, output) — fundable and partner-ready.*
+2. *Move the QBE Catalysing Impact application to its next concrete step.*
+3. *Send one buyer ask into a top NT demand community (Maningrida / Wadeye / Galiwinku).*
+
+*Last reviewed: 2026-05-26 — update the lower three layers each [[flow-flywheel|Flow Flywheel]] cycle.*
 
 ## What It Is
 
@@ -224,9 +244,9 @@ REAL Innovation Fund ($1.2M over 4 years via Oonchiumpa consortium) is the prima
 
 ## R&D Tax Incentive
 
-Goods on Country is classified as **Supporting R&D** under ACT's FY26 Division 355 claim (ITAA 1997). It supports the core R&D activities (ALMA AI orchestration, IoT fleet telemetry) by providing:
+Goods on Country is classified as **Supporting R&D** under ACT's FY26 Division 355 claim (ITAA 1997). It supports the core R&D activities (ALMA review orchestration, IoT fleet telemetry) by providing:
 
-1. **IoT telemetry system** — Particle.io devices on 10 washing machines generate real-time data for the ALMA infrastructure experiments
+1. **IoT telemetry system** — Particle.io devices on 10 washing machines generate real-time data for the ALMA-governed infrastructure experiments
 2. **Remote deployment logistics** — iterating on community infrastructure constraints as an experimental testbed
 3. **Community handover protocols** — transitioning from ACT-managed to community-managed fleet operations
 
@@ -336,5 +356,5 @@ Severity levels: Low → Medium → High → Critical.
 - [[youth-justice-reform|Youth Justice Reform]] — housing, beds, and durable household infrastructure as upstream justice intervention, not separate from reform
 - [[2026-04-act-farm-repositioning|Act-Farm Repositioning]] — Goods referenced in the regenerative capital pivot
 - [[rdti-claim-strategy|R&D Tax Incentive Claim Strategy]] — Goods manufacturing as eligible R&D activity
-- [[custodian-economy|Custodian Economy]] — the economic model Goods on Country enacts through community-owned manufacturing and stewardship
+- [[custodian-first-economy|Custodian First Economy]]: partner program ACT works with around young people on youth justice orders
 - [[fishers-oysters|Fishers Oysters]] — fellow regenerative enterprise applying custodian economics and circular practice to aquaculture on Country

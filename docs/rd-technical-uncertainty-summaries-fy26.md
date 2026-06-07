@@ -118,7 +118,7 @@ Development of a novel multi-agent orchestration system coordinating 92 autonomo
 
 ### Description of R&D activity
 
-Development of the Australian Living Map of Alternatives (ALMA) — an evidence database of 1,155 justice and social sector interventions with a novel 6-dimensional evidence taxonomy that deliberately includes community-led research alongside RCTs, cross-referenced with live funding data to surface defunded evidence gaps.
+Development of ALMA-governed JusticeHub evidence records — an evidence database of 1,155 justice and social sector interventions with a novel 6-dimensional review taxonomy that deliberately includes community-led research alongside RCTs, cross-referenced with live funding data to surface defunded evidence gaps.
 
 ### Technical uncertainty
 

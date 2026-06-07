@@ -1,0 +1,78 @@
+#!/usr/bin/env bash
+# commit-msg hook — nudge (don't block) when `Plan: <slug>` trailer is
+# missing. Adoption gap discovered 2026-05-17: 168/169 commits in the
+# preceding 7 days had no Plan trailer, so the weekly ecosystem digest
+# (scripts/weekly-ecosystem-digest.mjs) had near-zero signal.
+#
+# This hook stays warn-only (exit 0) on purpose. Forcing a trailer on
+# every commit would tax merge/chore/auto commits where it adds no value.
+#
+# Skip rules:
+#   - Merge commits (subject starts with "Merge ")
+#   - Revert commits ("Revert ")
+#   - Squash/fixup ("fixup!" / "squash!")
+#   - Auto/cron commits (subject starts with "chore(auto)" or "[skip ci]")
+#   - Branches matching pattern (claude/* — agent worktrees, eod-sweep/* — auto)
+#
+# To activate:   git config core.hooksPath .githooks
+# To opt out:    git commit --no-verify
+#
+# Pairs with scripts/weekly-ecosystem-digest.mjs (Notion page
+# 362ebcf9-81cf-8177-8c4e-c33d6c61d765, runs Mon 7:55am AEST).
+
+MSG_FILE="$1"
+[ -z "$MSG_FILE" ] && exit 0
+[ ! -f "$MSG_FILE" ] && exit 0
+
+# Subject line (first non-comment line)
+SUBJECT=$(grep -v '^#' "$MSG_FILE" | sed -n '1p')
+
+# Skip merge/revert/fixup/squash
+case "$SUBJECT" in
+  Merge\ *|Revert\ *|fixup!*|squash!*) exit 0 ;;
+esac
+
+# Skip auto/cron commits
+case "$SUBJECT" in
+  *"[skip ci]"*|"chore(auto)"*|"chore: auto-"*|"chore(cron)"*) exit 0 ;;
+esac
+
+# Skip branches that are agent/auto worktrees
+BRANCH=$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo unknown)
+case "$BRANCH" in
+  claude/*|eod-sweep/*|HEAD|unknown) exit 0 ;;
+esac
+
+# Already has a Plan trailer? Nothing to do.
+if grep -qE '^[[:space:]]*Plan:[[:space:]]*[a-z0-9_/.-]+' "$MSG_FILE"; then
+  exit 0
+fi
+
+# Nudge — recent plan slugs are listed so the author has a menu
+PLANS_DIR="thoughts/shared/plans"
+RECENT_PLANS=""
+if [ -d "$PLANS_DIR" ]; then
+  RECENT_PLANS=$(ls -1t "$PLANS_DIR"/*.md 2>/dev/null | head -8 | sed 's|.*/||;s|\.md$||' | sed 's/^/    /')
+fi
+
+cat >&2 <<EOF
+
+  ⓘ  No \`Plan: <slug>\` trailer found in this commit message.
+
+      The weekly ecosystem digest (Mon 7:55am AEST → Notion) groups
+      commits by which plan they advance. Adding a trailer takes the
+      digest from "168 unscoped commits" to "this plan moved 5 times".
+
+      To attach this commit to a plan, add a body line like:
+
+          Plan: <slug>
+
+      where <slug> matches a file in thoughts/shared/plans/. Recent:
+$RECENT_PLANS
+
+      Not advancing any tracked plan? Ignore this — commit goes through.
+      Hook is warn-only. Opt out permanently: git commit --no-verify.
+
+EOF
+
+exit 0

@@ -96,7 +96,7 @@ export async function GET(
       // Xero transactions for this project
       supabase
         .from('xero_transactions')
-        .select('id, date, description, contact_name, total, type')
+        .select('id, date, line_items, contact_name, total, type')
         .eq('project_code', projectCode)
         .order('date', { ascending: false })
         .limit(100),
@@ -142,11 +142,8 @@ export async function GET(
         .select('name, amount, status, project_codes')
         .contains('project_codes', [projectCode]),
 
-      // Donations
-      supabase
-        .from('donations')
-        .select('amount, project')
-        .eq('project', projectCode),
+      // donations table removed from DB — returns empty until a backend exists
+      Promise.resolve({ data: [] as any[] }),
 
       // Project health (BUNYA)
       supabase
@@ -250,7 +247,7 @@ export async function GET(
       recentTransactions: txData.slice(0, 20).map((tx: any) => ({
         id: tx.id,
         date: tx.date,
-        description: tx.description || '',
+        description: tx.line_items?.[0]?.description || '',
         amount: tx.total || 0,
         contactName: tx.contact_name || '',
       })),

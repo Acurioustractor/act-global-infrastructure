@@ -1,0 +1,223 @@
+Date       | Src  | $          | Vendor                          | Description / Note
+-----------+------+------------+---------------------------------+-----------------------------------------------------------
+2025-02-03 | spnd |     570.00 | Chris Witta                     | 
+2025-02-10 | spnd |     411.00 | Chris Witta                     | 
+2025-02-10 | spnd |      94.50 | Nest In Witta                   | 
+2025-02-10 | spnd |     103.50 | Nest In Witta                   | 
+2025-03-15 | spnd |       9.00 | Nest In Witta                   | 
+2025-03-17 | spnd |     380.00 | Chris Witta                     | Slashing - No tax invoice provided > $82.50
+2025-03-20 | bill |      46.20 | Maleny Hardware And Rural Suppl | Lawn seed blend queensland
+2025-03-24 | spnd |      80.00 | Chris Witta                     | No tax invoice provided > $82.50
+2025-03-25 | bill |    2420.00 | Dave Kan Photography            | Event photography – PRF Fellows Gathering, 20-21 March 2025 at Minjerribah (North Stradbroke Island).
+2025-03-31 | bill |     423.84 | Lone Dingo                      | Jacket, Socks & Water Bottle
+2025-03-31 | bill |      46.20 | Maleny Hardware And Rural Suppl | Lawn seed blend
+2025-04-01 | bill |     438.50 | Tess Fashions                   | Clothing alterations
+2025-04-02 | spnd |    1132.00 | Kennards Hire                   | KENNARDS HIRE HO WA SEVEN HILLS
+2025-04-04 | bill |    1282.40 | Kennards Hire                   | Hire of Trailer & Ute | Hire of Trailer & Ute
+2025-04-08 | spnd |     280.00 | Chris Witta                     | 
+2025-04-22 | spnd |     400.00 | Chris Witta                     | 
+2025-04-22 | spnd |    8888.00 | Claire Marchesi                 | [? purpose unconfirmed] 
+2025-04-24 | spnd |      12.09 | Soil To Supper                  | cc transaction fee
+2025-05-02 | bill |    2585.52 | Maleny Hardware And Rural Suppl | AP 500 S BATTERY #EA01-400-6500 - Serial Number: 926145247 Serial Number: 926145299 | AL 301-4 BATTERY CHARGER
+2025-05-03 | bill |      42.68 | Maleny Hardware And Rural Suppl | Spreader Fertilizer Hand Scotts
+2025-05-05 | spnd |     440.00 | Chris Witta                     | 
+2025-05-06 | spnd |     103.00 | Lone Dingo                      | Personal as per NM 25.06.25 FD41389
+2025-05-17 | bill |       9.05 | Maleny Hardware And Rural Suppl | Gudgeon Long Bolt
+2025-05-19 | spnd |     150.00 | Claire Marchesi                 | 
+2025-05-23 | bill |     112.50 | Maleny Hardware And Rural Suppl | Insect screen x 20m; PVC spline
+2025-05-29 | spnd |     146.23 | Maleny Hardware And Rural Suppl | 
+2025-05-30 | spnd |     116.00 | Kennards Hire                   | Personal as per NM 29.06.25
+2025-06-02 | spnd |     616.50 | Chris Witta                     | 
+2025-06-07 | bill |      26.60 | Maleny Hardware And Rural Suppl | Curtain Rod 16mm x 3m White
+2025-06-09 | spnd |     540.00 | Chris Witta                     | 
+2025-06-19 | bill |      73.70 | Maleny Hardware And Rural Suppl | BEDDING WOODSHAVINGS HYSORB BALE GUMBOOT FARMLITE PVC SIZE 7
+2025-06-25 | bill |     778.00 | Kennards Hire                   | 5 washing mashines to go with ute.
+2025-06-30 | bill |     100.30 | Maleny Hardware And Rural Suppl | CURTAIN ROD 16MM X 3MT WHITE BEDDING WOODSHAVINGS HYS GUMBOOT FARMLITE PVC SIZE 7
+2025-07-01 | spnd |      52.86 | Flight Bar Witta                | [⚠ NT/SA travel — wrong project] SMP*Memories Bistro dcTennant Cr
+2025-07-02 | spnd |      42.69 | Flight Bar Witta                | [⚠ NT/SA travel — wrong project] SMP*Memories Bistro dcTennant Cr
+2025-07-02 | spnd |     102.67 | Flight Bar Witta                | [⚠ NT/SA travel — wrong project] SMP*Memories Bistro dcTennant Cr
+2025-07-04 | spnd |     134.62 | Flight Bar Witta                | [⚠ NT/SA travel — wrong project] Hanuman Restaurant Ali Alice Springs
+2025-07-04 | spnd |      64.48 | Flight Bar Witta                | [⚠ NT/SA travel — wrong project] SMP*Devils Marbles Ho Davenport
+2025-07-04 | spnd |      83.40 | Kennards Hire                   | 
+2025-07-26 | bill |      32.00 | Maleny Hardware And Rural Suppl | .
+2025-07-29 | bill |      69.00 | Maleny Hardware And Rural Suppl | .
+2025-07-29 | bill |     124.10 | Maleny Hardware And Rural Suppl | .
+2025-07-30 | bill |      57.75 | Maleny Hardware And Rural Suppl | .
+2025-07-31 | bill |     423.75 | Maleny Hardware And Rural Suppl | .
+2025-08-01 | bill |     423.75 | Maleny Hardware And Rural Suppl | .
+2025-08-04 | spnd |     360.00 | Chris Witta                     | CHRIS WITTA B8161124077 Drain and tow than
+2025-08-05 | spnd |      29.87 | Flight Bar Witta                | [⚠ NT/SA travel — wrong project] SPARS SUPERMARKET DUNWICHDUNWICH
+2025-08-08 | bill |     125.75 | Maleny Hardware And Rural Suppl | .
+2025-08-09 | bill |      38.95 | Maleny Hardware And Rural Suppl | .
+2025-08-11 | spnd |      57.90 | Flight Bar Witta                | [⚠ NT/SA travel — wrong project] SweetBrew & Co STUART PARK
+2025-08-18 | spnd |     340.00 | Chris Witta                     | CHRIS WITTA Y5372717898 Pipe thanks
+2025-08-19 | spnd |      49.95 | Flight Bar Witta                | [⚠ NT/SA travel — wrong project] KFC ALICE SPRINGS ALICE SPRINGS
+2025-08-19 | spnd |     105.66 | Flight Bar Witta                | [⚠ NT/SA travel — wrong project] Hanuman Restaurant Ali Alice Springs
+2025-08-20 | spnd |     502.92 | Flight Bar Witta                | [⚠ NT/SA travel — wrong project] TENNANT FOOD BARN TENNANT CREEK
+2025-08-20 | spnd |      10.50 | Flight Bar Witta                | [⚠ NT/SA travel — wrong project] SQ *BAY LEAF CAFE Tennant Creek
+2025-08-20 | spnd |     500.00 | Flight Bar Witta                | [⚠ NT/SA travel — wrong project] TENNANT FOOD BARN TENNANT CREEK
+2025-08-20 | spnd |      38.80 | Flight Bar Witta                | [⚠ NT/SA travel — wrong project] MRS PERRY S FISH AND TENNANT CREEK
+2025-08-20 | spnd |      13.80 | Flight Bar Witta                | [⚠ NT/SA travel — wrong project] SQ *BAY LEAF CAFE Tennant Creek
+2025-08-20 | spnd |     265.00 | Kennards Hire                   | 
+2025-08-21 | spnd |     258.19 | Flight Bar Witta                | [⚠ NT/SA travel — wrong project] SMP*Memories Bistro dcTennant Cr
+2025-08-21 | spnd |      32.29 | Flight Bar Witta                | [⚠ NT/SA travel — wrong project] J R ROWDEN AND F V SNO ALICE SPRINGS
+2025-08-21 | spnd |       9.50 | Flight Bar Witta                | [⚠ NT/SA travel — wrong project] TI TREE RH 9787 TI TREE
+2025-08-22 | spnd |     140.51 | Flight Bar Witta                | [⚠ NT/SA travel — wrong project] SMP*Devils Marbles Ho Davenport
+2025-08-22 | bill |     244.00 | Kennards Hire                   | .
+2025-08-25 | spnd |     140.00 | Chris Witta                     | CHRIS WITTA E8431390712 Drain thanks
+2025-08-27 | spnd |      27.99 | Amazon                          | no invoice
+2025-09-02 | spnd |      82.27 | Flight Bar Witta                | [⚠ NT/SA travel — wrong project] PASADENA FOODLAND PASADENA
+2025-09-04 | spnd |       4.87 | Flight Bar Witta                | [⚠ NT/SA travel — wrong project] Oli & Levi Melbourne
+2025-09-08 | spnd |      63.70 | Flight Bar Witta                | [⚠ NT/SA travel — wrong project] SP BINGELI SAN PO KONG
+2025-09-10 | spnd |      83.50 | Amazon                          | Order confirmation in Dext - Tax Invoice needed. Camera lens filter - Purpose?
+2025-09-15 | spnd |     611.00 | Chris Witta                     | CHRIS WITTA F6031144901 Drain thanks
+2025-09-17 | spnd |      74.16 | Flight Bar Witta                | [⚠ NT/SA travel — wrong project] J R ROWDEN AND F V SNO ALICE SPRINGS
+2025-09-19 | spnd |     666.00 | Chris Witta                     | CHRIS WITTA L1005104539 Thanks
+2025-09-19 | spnd |      28.76 | Flight Bar Witta                | [⚠ NT/SA travel — wrong project] J R ROWDEN AND F V SNO ALICE SPRINGS
+2025-09-21 | bill |      19.38 | Nest In Witta                   | .
+2025-09-22 | bill |      95.90 | Maleny Hardware And Rural Suppl | .
+2025-09-29 | spnd |     822.00 | Chris Witta                     | CHRIS WITTA T8031422010 Weekend thanks
+2025-09-30 | bill |      51.90 | Maleny Hardware And Rural Suppl | .
+2025-09-30 | bill |     497.48 | Maleny Hardware And Rural Suppl | .
+2025-10-04 | bill |     497.48 | Maleny Hardware And Rural Suppl | .
+2025-10-05 | bill |     420.00 | Centre Trailer Sales            | Centre Trailer Sales — Other — ACT-HV
+2025-10-09 | bill |     244.00 | Kennards Hire                   | Kennards Hire — Materials & Supplies — ACT-HV
+2025-10-11 | bill |     300.00 | Red Kangaroo Books              | .
+2025-10-15 | bill |      17.20 | Maleny Hardware And Rural Suppl | .
+2025-10-18 | bill |      20.65 | Maleny Hardware And Rural Suppl | .
+2025-10-20 | spnd |     591.00 | Chris Witta                     | CHRIS WITTA H5822346345 Track clear thanks
+2025-10-22 | bill |      40.50 | Maleny Hardware And Rural Suppl | .
+2025-10-22 | bill |      45.75 | Maleny Hardware And Rural Suppl | .
+2025-10-27 | bill |    1100.00 | Trybe Collective                | .
+2025-10-31 | bill |     285.20 | Maleny Hardware And Rural Suppl | .
+2025-11-03 | spnd |      51.54 | Google                          | Google GSUITE_theharvestwSydney
+2025-11-03 | bill |    1308.00 | Kennards Hire                   | .
+2025-11-04 | bill |     285.20 | Maleny Hardware And Rural Suppl | .
+2025-11-08 | bill |    1494.92 | Bunnings Warehouse              | Bunnings — Materials & Supplies — ACT-IN
+2025-11-08 | bill |    1468.28 | Bunnings Warehouse              | Bunnings — Materials & Supplies — ACT-IN
+2025-11-09 | bill |    1236.50 | Kennards Hire                   | Kennards Hire — Materials & Supplies — ACT-HV
+2025-11-11 | bill |     424.00 | Kennards Hire                   | Kennards Hire — Materials & Supplies — ACT-HV
+2025-11-11 | bill |   26845.65 | RNM CARPENTRY                   | RNM CARPENTRY — Contractor — ACT-HV
+2025-11-16 | bill |      19.25 | Maleny Hardware And Rural Suppl | Maleny Hardware — Materials & Supplies — ACT-HV
+2025-11-26 | bill |    6865.65 | RNM CARPENTRY                   | RNM CARPENTRY — Contractor — ACT-HV
+2025-11-27 | bill |    3745.00 | Kennards Hire                   | Kennards Hire — Materials & Supplies — ACT-HV
+2025-11-27 | bill |      21.71 | Maleny Hardware And Rural Suppl | Maleny Hardware — Materials & Supplies — ACT-HV
+2025-11-29 | bill |     485.61 | Maleny Hardware And Rural Suppl | Maleny Hardware — Materials & Supplies — ACT-HV
+2025-11-29 | bill |    2000.00 | TNT Plastering & Maintenance    | TNT Plastering & Maintenance — Contractor — ACT-HV
+2025-12-02 | bill |    1200.00 | TNT Plastering & Maintenance    | TNT Plastering & Maintenance — Contractor — ACT-HV
+2025-12-03 | spnd |      61.42 | Liberty Idalia                  | Diesel 33.47L
+2025-12-07 | bill |    6616.00 | Kennards Hire                   | Kennards Hire — Materials & Supplies — ACT-HV
+2025-12-08 | bill |    1714.00 | Kennards Hire                   | Kennards Hire — Materials & Supplies — ACT-HV
+2025-12-11 | bill |     106.00 | Kennards Hire                   | Kennards Hire — Materials & Supplies — ACT-HV
+2025-12-13 | bill |     596.96 | Bunnings Warehouse              | Bunnings — Materials & Supplies — ACT-IN
+2025-12-16 | bill |     100.00 | Bunnings Warehouse              | Bunnings — Materials & Supplies — ACT-IN
+2025-12-22 | spnd |      67.70 | BANK ST AND CO                  | Dann - Meals
+2025-12-26 | bill |    1597.00 | Bunnings Warehouse              | Bunnings — Materials & Supplies — ACT-IN
+2025-12-27 | bill |     725.73 | Woodford Folk Festival          | Woodford Folk Festival — Other — ACT-HV
+2025-12-30 | bill |      21.90 | Maleny Hardware And Rural Suppl | Maleny Hardware — Materials & Supplies — ACT-HV
+2026-01-04 | bill |    4546.55 | Total Tools East Brisbane       | Total Tools — Materials & Equipment — ACT-HV
+2026-01-05 | bill |     185.70 | Brisbane Steel Supplies         | Brisbane Steel — Materials & Equipment — ACT-HV
+2026-01-05 | bill |    2338.70 | Carbatec Brisbane               | Carbatec Brisbane — Hardware & Equipment — ACT-HV
+2026-01-05 | bill |    4575.65 | Carbatec Brisbane               | Carbatec Brisbane — Hardware & Equipment — ACT-HV
+2026-01-05 | bill |      86.36 | Clark Rubber Capalaba           | Clark Rubber — Materials & Equipment — ACT-HV
+2026-01-05 | bill |     182.27 | The Bolt King                   | Bolt King — Materials & Equipment — ACT-HV
+2026-01-06 | bill |     507.51 | Maleny Hardware And Rural Suppl | Maleny Hardware — Materials & Supplies — ACT-HV
+2026-01-06 | bill |    2665.03 | Smartwood                       | Smartwood — Materials & Equipment — ACT-HV
+2026-01-06 | bill |    2710.34 | Smartwood                       | Smartwood — Materials & Equipment — ACT-HV
+2026-01-08 | bill |      27.75 | Maleny Hardware And Rural Suppl | Maleny Hardware — Materials & Supplies — ACT-HV
+2026-01-11 | bill |     616.97 | Bunnings Warehouse              | Bunnings — Materials & Supplies — ACT-IN
+2026-01-11 | bill |    1811.70 | Carbatec Brisbane               | Carbatec Brisbane — Hardware & Equipment — ACT-HV
+2026-01-11 | bill |    1319.00 | Carbatec QLD Warehouse          | Carbatec QLD Warehouse — Hardware & Equipment — ACT-HV
+2026-01-11 | bill |     883.07 | Hydraulink Brisbane North       | Hydraulink — Materials & Equipment — ACT-HV
+2026-01-14 | bill |      65.64 | Maleny Hardware And Rural Suppl | Maleny Hardware — Materials & Supplies — ACT-HV
+2026-01-15 | bill |      40.19 | Maleny Hardware And Rural Suppl | Maleny Hardware — Materials & Supplies — ACT-HV
+2026-01-21 | spnd |      35.70 | Nest In Witta                   | .
+2026-01-28 | spnd |      44.88 | Nest In Witta                   | .
+2026-01-31 | bill |     641.09 | Maleny Hardware                 | Maleny Hardware — Materials & Supplies — ACT-HV
+2026-02-05 | spnd |      88.95 | Flight Bar Witta                | [⚠ NT/SA travel — wrong project] SMP*Devils Marbles Ho Davenport
+2026-02-12 | bill |   15500.00 | Thais Pupio Design              | .
+2026-02-15 | bill |    1420.00 | Thais Pupio Design              | .
+2026-02-17 | bill |    1120.00 | Mapleton Public House           | .
+2026-02-21 | bill |      38.85 | Maleny Hardware And Rural Suppl | .
+2026-02-21 | bill |    1660.00 | Sophie Deirdre Hickey           | .
+2026-02-22 | bill |     120.00 | Art Museum                      | Glenn Murcutt Unbuilt Wor
+2026-02-23 | spnd |    3155.00 | Longara                         | [milk crates] 2nd hand assorted milk crate colours as per discussions with Nicholas | 2nd hand assorted milk c
+2026-02-23 | bill |      16.95 | Maleny Hardware And Rural Suppl | .
+2026-02-27 | bill |     280.00 | Mapleton Public House           | .
+2026-02-27 | bill |    1467.22 | Savage Landscape Supplies       | . | .
+2026-03-02 | bill |    2413.17 | Diggermate Franchising          | Mini Excavator Tilt Hitch | Mini Excavator Tilt Hitch
+2026-03-02 | bill |    1395.00 | MALENY LANDSCAPING SUPPLIES     | .
+2026-03-02 | bill |     300.00 | Savage Transport Trust          | Tilt Tray Hire pick excavator
+2026-03-02 | bill |    2042.50 | Sophie Deirdre Hickey           | .
+2026-03-04 | bill |      14.30 | CJ's Pastries                   | .
+2026-03-04 | bill |      17.85 | Nest In Witta                   | .
+2026-03-04 | bill |     885.92 | Savage Landscape Supplies       | . | .
+2026-03-04 | bill |     442.96 | Savage Landscape Supplies       | . | .
+2026-03-05 | bill |      44.94 | BCF                             | .
+2026-03-05 | spnd |    1120.00 | Fisher's Oysters                | .
+2026-03-05 | bill |     895.00 | MALENY LANDSCAPING SUPPLIES     | .
+2026-03-05 | bill |     268.10 | Sukhothai Authentic Thai Restau | .
+2026-03-05 | bill |       9.99 | Supercheap Auto                 | .
+2026-03-06 | bill |     237.70 | Bussell Rural Co Pty Ltd T/AS M | Maleny Hardware — Materials & Supplies — ACT-HV
+2026-03-06 | bill |      23.35 | Frank Food & Wine               | . | .
+2026-03-06 | bill |     212.50 | MALENY LANDSCAPING SUPPLIES     | .
+2026-03-06 | bill |     212.50 | MALENY LANDSCAPING SUPPLIES     | .
+2026-03-10 | bill |     228.90 | Salin Appliance Spares          | Salin Appliance Spares — Materials & Equipment — ACT-HV
+2026-03-11 | bill |     228.90 | Salin Appliance Spares          | Salin Appliance Spares — Materials & Equipment — ACT-HV
+2026-03-13 | spnd |       5.10 | Nest In Witta                   | .
+2026-03-15 | spnd |      42.50 | Woolworths                      | Cleaning products
+2026-03-16 | spnd |     161.07 | IGA                             | . | .
+2026-03-16 | bill |    1995.00 | MALENY LANDSCAPING SUPPLIES     | Maleny Landscaping — Materials & Supplies — ACT-HV
+2026-03-17 | spnd |     536.63 | Liberty Maleny                  | Fuel - Diesel
+2026-03-17 | bill |    1305.00 | MALENY LANDSCAPING SUPPLIES     | Maleny Landscaping — Materials & Supplies — ACT-HV
+2026-03-17 | bill |    1305.00 | MALENY LANDSCAPING SUPPLIES     | Maleny Landscaping — Materials & Supplies — ACT-HV
+2026-03-17 | bill |    1140.00 | Sophie Deirdre Hickey           | Sophie Deirdre Hickey — Operations — ACT-HV
+2026-03-17 | bill |    1140.00 | Sophie Deirdre Hickey           | .
+2026-03-18 | bill |     652.50 | MALENY LANDSCAPING SUPPLIES     | Maleny Landscaping — Materials & Supplies — ACT-HV
+2026-03-20 | bill |    4950.00 | Sophie Deirdre Hickey           | Sophie Deirdre Hickey — Operations — ACT-HV
+2026-03-20 | bill |    4950.00 | Sophie Deirdre Hickey           | Gardening - The Harvest
+2026-03-26 | bill |     113.40 | Auscot Rural Co Pty Ltd T/As Ma | Maleny Hardware — Materials & Supplies — ACT-HV
+2026-03-26 | bill |     113.40 | MALENY HARDWARE & RU            | Maleny Hardware — Materials & Supplies — ACT-HV
+2026-03-26 | spnd |     113.40 | Maleny Hardware And Rural Suppl | Maleny Hardware & Rubber
+2026-03-26 | spnd |     113.40 | Maleny Hardware And Rural Suppl | Tub Black Plastic
+2026-03-27 | bill |     111.20 | Bunnings Warehouse              | Bunnings — Materials & Supplies — ACT-IN
+2026-04-07 | bill |    1453.10 | Steelmart                       | Steelmart - Materials
+2026-04-08 | bill |     653.40 | MALENY LANDSCAPING SUPPLIES     | Hardwood Chip /m3
+2026-04-11 | spnd |       8.35 | Avis                            | Toll Administration Fee | Toll Administration Fee
+2026-04-12 | spnd |      13.45 | Firecrawl                       | Credits: Hobby Apr 12–May 12, 2026
+2026-04-13 | spnd |     278.30 | Maleny Hardware And Rural Suppl | Backrub Oil 20L Prolube Exitraz EC 2L
+2026-04-15 | bill |     111.20 | Bunnings Warehouse              | Container set
+2026-04-16 | bill |     127.60 | The Bolt King                   | Bolt in Co
+2026-04-21 | spnd |     322.94 | Bunnings Warehouse              | .
+2026-04-22 | bill |     890.10 | MALENY LANDSCAPING SUPPLIES     | Hardwood Chip /m3
+2026-04-22 | spnd |      20.09 | Nest In Witta                   | .
+2026-04-23 | spnd |     206.86 | IGA                             | . | .
+2026-04-23 | bill |     890.10 | MALENY LANDSCAPING SUPPLIES     | Landscaping Supplies
+2026-04-23 | spnd |      20.09 | Nest In Witta                   | 
+2026-04-23 | spnd |    1971.10 | Savage Landscape Supplies       | . | .
+2026-04-24 | bill |    2223.94 | Bunnings Warehouse              | Storage containers
+2026-04-24 | spnd |    8525.00 | Kennedy's                       | [⚠ DUPLICATE — VOID] Decking 10 tonne
+2026-04-24 | spnd |    8594.91 | Kennedy's                       | [★ St Mary's 10t decking] Decking 10 tonne
+2026-04-27 | spnd |     266.95 | Maleny Hardware And Rural Suppl | Kitchen supplies
+2026-04-27 | spnd |      24.48 | Nest In Witta                   | 
+2026-04-27 | bill |     317.00 | Sophie Deirdre Hickey           | Gardening - The Harvest Witta
+2026-04-28 | spnd |    3095.00 | Longara                         | [milk crates] 2nd hand assorted milk crate colours as per discussions with Nicholas | 2nd hand assorted milk c
+2026-05-01 | bill |     310.32 | Bunnings Warehouse              | Rapid 860 x 370mm Hessian Sandbags - 10 Pack
+2026-05-02 | bill |     427.88 | Bunnings Warehouse              | Materials and supplies
+2026-05-03 | spnd |    3150.96 | Longara                         | [milk crates] .
+2026-05-05 | spnd |      27.78 | Bunnings Warehouse              | .
+2026-05-05 | spnd |     812.01 | Savage Landscape Supplies       | .
+2026-05-05 | bill |      65.00 | Sophie Deirdre Hickey           | Gardening - 5/5/26
+2026-05-05 | spnd |     269.66 | Woolworths                      | . | .
+2026-05-07 | spnd |    4031.50 | Kennedy's                       | [★ St Mary's 2.5t + recycled timber] Reclaimed and sustainable architectural timbers including recycled pine a
+2026-05-08 | spnd |       6.12 | Nest In Witta                   | 
+2026-05-09 | spnd |     272.26 | Liberty Maleny                  | Fuel - Diesel
+2026-05-11 | spnd |      26.52 | Nest In Witta                   | 
+2026-05-11 | spnd |      10.40 | Nest In Witta                   | 
+2026-05-12 | spnd |      59.82 | Bunnings Warehouse              | Lead extension
+2026-05-14 | spnd |     132.96 | 7-Eleven                        | Fuel
+2026-05-14 | spnd |     100.04 | Brisbane City Council           | Waste Disposal
+2026-05-14 | spnd |     864.19 | Bunnings Warehouse              | Bunnings Warehouse
+2026-05-15 | spnd |     111.10 | Maleny Hotel                    | [? meal — review tag] .
+-----------+------+------------+---------------------------------+-----------------------------------------------------------
+Sum of 219 rows: $212,065.41

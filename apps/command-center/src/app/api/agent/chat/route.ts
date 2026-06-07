@@ -1,9 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server'
 import Anthropic from '@anthropic-ai/sdk'
+import { LLMClient } from '@/lib/llm-adapter'
 import { AGENT_SYSTEM_PROMPT } from '@/lib/agent-system-prompt'
 import { AGENT_TOOLS, executeTool, logAgentUsage, calculateCost } from '@/lib/agent-tools'
 
-const MODEL = 'claude-3-5-haiku-20241022'
+const MODEL = 'claude-haiku-4-5'
 const MAX_TOKENS = 2048
 const MAX_TOOL_ROUNDS = 5
 
@@ -34,7 +35,7 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    const client = new Anthropic({ apiKey })
+    const client = new LLMClient({ apiKey })
 
     // Build messages array from history + current message
     const messages: Anthropic.MessageParam[] = []

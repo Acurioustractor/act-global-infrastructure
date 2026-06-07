@@ -1,0 +1,183 @@
+{
+  "generated_at": "2026-05-20T21:00:18.121Z",
+  "date": "2026-05-20",
+  "invoice_coverage": {
+    "ACCREC": {
+      "tagged": 124,
+      "untagged": 1,
+      "taggedAmount": 2805266,
+      "untaggedAmount": 0,
+      "rowCoveragePct": 99.2,
+      "amountCoveragePct": 100
+    },
+    "ACCPAY": {
+      "tagged": 2004,
+      "untagged": 87,
+      "taggedAmount": 1789547,
+      "untaggedAmount": 11281,
+      "rowCoveragePct": 95.8,
+      "amountCoveragePct": 99.4
+    }
+  },
+  "transaction_coverage": {
+    "NJ Marchesi T/as ACT Everyday": {
+      "tagged": 58,
+      "untagged": 0,
+      "taggedAmount": 331850,
+      "untaggedAmount": 0,
+      "rowCoveragePct": 100,
+      "isActAccount": true,
+      "isExcluded": false
+    },
+    "NAB Visa ACT #8815": {
+      "tagged": 746,
+      "untagged": 1,
+      "taggedAmount": 467597,
+      "untaggedAmount": 101,
+      "rowCoveragePct": 99.9,
+      "isActAccount": true,
+      "isExcluded": false
+    },
+    "NM Personal ": {
+      "tagged": 0,
+      "untagged": 1,
+      "taggedAmount": 0,
+      "untaggedAmount": 18,
+      "rowCoveragePct": 0,
+      "isActAccount": false,
+      "isExcluded": true
+    }
+  },
+  "excluded_account_stray_rows": [],
+  "top_untagged_vendors": [
+    {
+      "vendor": "Bunnings Warehouse",
+      "rows": 5,
+      "totalAmount": 5796,
+      "suggestedProject": null
+    },
+    {
+      "vendor": "Department of Housing and Public Works",
+      "rows": 1,
+      "totalAmount": 1500,
+      "suggestedProject": null
+    },
+    {
+      "vendor": "Tess Fashions",
+      "rows": 1,
+      "totalAmount": 439,
+      "suggestedProject": null
+    },
+    {
+      "vendor": "Lone Dingo",
+      "rows": 1,
+      "totalAmount": 424,
+      "suggestedProject": null
+    },
+    {
+      "vendor": "Food Connect Foundation",
+      "rows": 1,
+      "totalAmount": 240,
+      "suggestedProject": null
+    },
+    {
+      "vendor": "Super Publishing Co",
+      "rows": 1,
+      "totalAmount": 220,
+      "suggestedProject": null
+    },
+    {
+      "vendor": "Hermit Park - Good Morning Coffee",
+      "rows": 2,
+      "totalAmount": 186,
+      "suggestedProject": null
+    },
+    {
+      "vendor": "Unknown Supplier",
+      "rows": 2,
+      "totalAmount": 173,
+      "suggestedProject": null
+    },
+    {
+      "vendor": "AI Builder Club",
+      "rows": 4,
+      "totalAmount": 148,
+      "suggestedProject": null
+    },
+    {
+      "vendor": "Klimataria Athens",
+      "rows": 1,
+      "totalAmount": 83,
+      "suggestedProject": null
+    },
+    {
+      "vendor": "SeaLink Queensland",
+      "rows": 1,
+      "totalAmount": 78,
+      "suggestedProject": null
+    },
+    {
+      "vendor": "Soul Origin",
+      "rows": 1,
+      "totalAmount": 78,
+      "suggestedProject": null
+    },
+    {
+      "vendor": "La Cocina Granada",
+      "rows": 1,
+      "totalAmount": 76,
+      "suggestedProject": null
+    },
+    {
+      "vendor": "Soldier On",
+      "rows": 1,
+      "totalAmount": 74,
+      "suggestedProject": null
+    },
+    {
+      "vendor": "Gondola Gondola",
+      "rows": 1,
+      "totalAmount": 71,
+      "suggestedProject": null
+    },
+    {
+      "vendor": "Ledgerly",
+      "rows": 1,
+      "totalAmount": 69,
+      "suggestedProject": null
+    },
+    {
+      "vendor": "Bunnings Trade",
+      "rows": 1,
+      "totalAmount": 66,
+      "suggestedProject": null
+    },
+    {
+      "vendor": "3 Legged Thing",
+      "rows": 1,
+      "totalAmount": 58,
+      "suggestedProject": null
+    },
+    {
+      "vendor": "Im-Am Thai",
+      "rows": 1,
+      "totalAmount": 57,
+      "suggestedProject": null
+    },
+    {
+      "vendor": "WHSmith",
+      "rows": 1,
+      "totalAmount": 56,
+      "suggestedProject": null
+    }
+  ],
+  "summary": {
+    "accrec_coverage_pct": 99.2,
+    "accpay_coverage_pct": 95.8,
+    "nab_visa_coverage_pct": 99.9,
+    "act_everyday_coverage_pct": 100,
+    "stray_row_count": 0,
+    "stray_amount": 0,
+    "auto_taggable_untagged": 0
+  }
+}

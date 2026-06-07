@@ -1,17 +1,9 @@
 import { NextResponse } from 'next/server'
-import { supabase } from '@/lib/supabase'
 
 export async function GET() {
   try {
-    const { data, error } = await supabase
-      .from('v_cashflow_explained')
-      .select('*')
-      .order('month', { ascending: true })
-      .limit(12)
-
-    if (error) {
-      return NextResponse.json({ error: error.message }, { status: 500 })
-    }
+    // v_cashflow_explained view removed from DB — returns empty until a backend exists
+    const data: any[] = []
 
     return NextResponse.json({
       months: (data || []).map((m: any) => ({

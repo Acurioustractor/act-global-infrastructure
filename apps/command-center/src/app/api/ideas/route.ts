@@ -11,7 +11,7 @@ export async function GET(request: NextRequest) {
 
     let query = supabase
       .from('idea_board')
-      .select('*')
+      .select('*, idea_snoozes(id)')
       .order('updated_at', { ascending: false })
 
     if (category) query = query.eq('category', category)
@@ -21,7 +21,14 @@ export async function GET(request: NextRequest) {
 
     const { data, error } = await query
     if (error) return NextResponse.json({ error: error.message }, { status: 500 })
-    return NextResponse.json(data)
+
+    // Flatten the embedded snooze rows into a count for client convenience.
+    const enriched = (data ?? []).map((row: Record<string, unknown>) => {
+      const snoozes = (row.idea_snoozes ?? []) as Array<unknown>
+      const { idea_snoozes: _, ...rest } = row as { idea_snoozes?: unknown }
+      return { ...rest, snooze_count: snoozes.length }
+    })
+    return NextResponse.json(enriched)
   } catch {
     return NextResponse.json([], { status: 500 })
   }

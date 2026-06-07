@@ -1,3 +1,9 @@
+---
+title: Spending Intelligence v4 — Full Automation Plan
+status: review-needed
+date: 2026-04-24
+last_verified: 2026-05-08
+---
 # Spending Intelligence v4 — Full Automation Plan
 
 **Date:** 2026-04-22

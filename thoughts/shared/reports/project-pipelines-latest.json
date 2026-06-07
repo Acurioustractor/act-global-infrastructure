@@ -1,0 +1,1136 @@
+{
+  "generated_at": "2026-06-06T20:10:00.637Z",
+  "projects": [
+    {
+      "project_code": "WATCH",
+      "pipelines": [
+        {
+          "project_code": "WATCH",
+          "pipeline_name": "Grants",
+          "open_count": 124,
+          "won_count": 0,
+          "lost_count": 17,
+          "open_value_aud": 146204943,
+          "won_value_aud": 0,
+          "earliest_open_at": "2026-02-23T20:04:20.744+00:00",
+          "latest_activity_at": "2026-05-16T21:12:16.132+00:00",
+          "stages_present": [
+            "Grant Opportunity Identified",
+            "Grant Declined"
+          ],
+          "contacts_count": 1,
+          "computed_at": "2026-06-06T20:10:00.419Z"
+        }
+      ],
+      "total_open": 124,
+      "total_won": 0,
+      "open_value": 146204943,
+      "won_value": 0
+    },
+    {
+      "project_code": "ACT-GD",
+      "pipelines": [
+        {
+          "project_code": "ACT-GD",
+          "pipeline_name": "Goods — Buyer Pipeline",
+          "open_count": 26,
+          "won_count": 11,
+          "lost_count": 0,
+          "open_value_aud": 2176021,
+          "won_value_aud": 426925.99,
+          "earliest_open_at": "2026-01-20T22:00:51.944+00:00",
+          "latest_activity_at": "2026-05-31T22:58:44.934+00:00",
+          "stages_present": [
+            "Outreach Queued",
+            "Paid",
+            "Proposed",
+            "Invoiced",
+            "Qualified",
+            "In Conversation"
+          ],
+          "contacts_count": 29,
+          "computed_at": "2026-06-06T20:10:00.419Z"
+        },
+        {
+          "project_code": "ACT-GD",
+          "pipeline_name": "Goods Supporter Journey",
+          "open_count": 39,
+          "won_count": 0,
+          "lost_count": 0,
+          "open_value_aud": 5213996,
+          "won_value_aud": 0,
+          "earliest_open_at": "2026-05-27T05:26:02.304+00:00",
+          "latest_activity_at": "2026-06-01T01:42:45.356+00:00",
+          "stages_present": [
+            "Stewarding / Reporting",
+            "Identified",
+            "Cultivating",
+            "Ask made",
+            "Qualified",
+            "Delivering",
+            "Renewing"
+          ],
+          "contacts_count": 38,
+          "computed_at": "2026-06-06T20:10:00.419Z"
+        },
+        {
+          "project_code": "ACT-GD",
+          "pipeline_name": "Goods — Demand Register",
+          "open_count": 155,
+          "won_count": 0,
+          "lost_count": 0,
+          "open_value_aud": 16371700,
+          "won_value_aud": 0,
+          "earliest_open_at": "2026-03-13T22:29:03.384+00:00",
+          "latest_activity_at": "2026-05-31T22:58:16.106+00:00",
+          "stages_present": [
+            "Signal",
+            "Buyer Matched"
+          ],
+          "contacts_count": 155,
+          "computed_at": "2026-06-06T20:10:00.419Z"
+        },
+        {
+          "project_code": "ACT-GD",
+          "pipeline_name": "Grants",
+          "open_count": 3,
+          "won_count": 0,
+          "lost_count": 0,
+          "open_value_aud": 450000,
+          "won_value_aud": 0,
+          "earliest_open_at": "2026-03-21T08:47:40.868+00:00",
+          "latest_activity_at": "2026-03-22T08:47:49+00:00",
+          "stages_present": [
+            "Grant Submitted",
+            "Grant Opportunity Identified"
+          ],
+          "contacts_count": 1,
+          "computed_at": "2026-06-06T20:10:00.419Z"
+        },
+        {
+          "project_code": "ACT-GD",
+          "pipeline_name": "A Curious Tractor",
+          "open_count": 0,
+          "won_count": 5,
+          "lost_count": 0,
+          "open_value_aud": 0,
+          "won_value_aud": 337232,
+          "earliest_open_at": null,
+          "latest_activity_at": "2026-05-05T22:48:15.071+00:00",
+          "stages_present": [
+            "Composting",
+            "Graduation",
+            "Growth"
+          ],
+          "contacts_count": 3,
+          "computed_at": "2026-06-06T20:10:00.419Z"
+        }
+      ],
+      "total_open": 223,
+      "total_won": 16,
+      "open_value": 24211717,
+      "won_value": 764157.99
+    },
+    {
+      "project_code": "ACT-HV",
+      "pipelines": [
+        {
+          "project_code": "ACT-HV",
+          "pipeline_name": "Grants",
+          "open_count": 49,
+          "won_count": 0,
+          "lost_count": 13,
+          "open_value_aud": 12015450,
+          "won_value_aud": 0,
+          "earliest_open_at": "2026-02-01T20:57:22.627+00:00",
+          "latest_activity_at": "2026-05-31T20:00:04.524+00:00",
+          "stages_present": [
+            "Grant Opportunity Identified",
+            "Application In Progress"
+          ],
+          "contacts_count": 4,
+          "computed_at": "2026-06-06T20:10:00.419Z"
+        },
+        {
+          "project_code": "ACT-HV",
+          "pipeline_name": "The Shop pipeline",
+          "open_count": 30,
+          "won_count": 0,
+          "lost_count": 0,
+          "open_value_aud": 0,
+          "won_value_aud": 0,
+          "earliest_open_at": "2026-05-15T03:39:39.629+00:00",
+          "latest_activity_at": "2026-05-31T20:17:12.165+00:00",
+          "stages_present": [
+            "New interest",
+            "In conversation"
+          ],
+          "contacts_count": 30,
+          "computed_at": "2026-06-06T20:10:00.419Z"
+        },
+        {
+          "project_code": "ACT-HV",
+          "pipeline_name": "Harvest Inbox",
+          "open_count": 11,
+          "won_count": 0,
+          "lost_count": 0,
+          "open_value_aud": 0,
+          "won_value_aud": 0,
+          "earliest_open_at": "2026-05-15T05:22:20.079+00:00",
+          "latest_activity_at": "2026-06-02T21:43:03.674+00:00",
+          "stages_present": [
+            "Resolved",
+            "New"
+          ],
+          "contacts_count": 11,
+          "computed_at": "2026-06-06T20:10:00.419Z"
+        },
+        {
+          "project_code": "ACT-HV",
+          "pipeline_name": "Harvest Membership Journey",
+          "open_count": 100,
+          "won_count": 0,
+          "lost_count": 0,
+          "open_value_aud": 0,
+          "won_value_aud": 0,
+          "earliest_open_at": "2026-06-02T01:44:41.105+00:00",
+          "latest_activity_at": "2026-06-02T11:55:29.641+00:00",
+          "stages_present": [
+            "Curious",
+            "Member",
+            "Active",
+            "Connected"
+          ],
+          "contacts_count": 100,
+          "computed_at": "2026-06-06T20:10:00.419Z"
+        },
+        {
+          "project_code": "ACT-HV",
+          "pipeline_name": "Goods Supporter Journey",
+          "open_count": 1,
+          "won_count": 0,
+          "lost_count": 0,
+          "open_value_aud": 0,
+          "won_value_aud": 0,
+          "earliest_open_at": "2026-05-27T08:08:49.442+00:00",
+          "latest_activity_at": "2026-05-31T22:52:40.916+00:00",
+          "stages_present": [
+            "Ask made"
+          ],
+          "contacts_count": 1,
+          "computed_at": "2026-06-06T20:10:00.419Z"
+        }
+      ],
+      "total_open": 191,
+      "total_won": 0,
+      "open_value": 12015450,
+      "won_value": 0
+    },
+    {
+      "project_code": "ACT-CORE",
+      "pipelines": [
+        {
+          "project_code": "ACT-CORE",
+          "pipeline_name": "Universal Inquiry",
+          "open_count": 6,
+          "won_count": 0,
+          "lost_count": 0,
+          "open_value_aud": 0,
+          "won_value_aud": 0,
+          "earliest_open_at": "2026-05-14T05:22:09.02+00:00",
+          "latest_activity_at": "2026-05-24T02:08:26.054+00:00",
+          "stages_present": [
+            "New Inquiry"
+          ],
+          "contacts_count": 6,
+          "computed_at": "2026-06-06T20:10:00.419Z"
+        },
+        {
+          "project_code": "ACT-CORE",
+          "pipeline_name": "Goods Supporter Journey",
+          "open_count": 1,
+          "won_count": 0,
+          "lost_count": 0,
+          "open_value_aud": 0,
+          "won_value_aud": 0,
+          "earliest_open_at": "2026-05-29T02:35:18.208+00:00",
+          "latest_activity_at": "2026-05-31T23:10:16.465+00:00",
+          "stages_present": [
+            "Cultivating"
+          ],
+          "contacts_count": 1,
+          "computed_at": "2026-06-06T20:10:00.419Z"
+        },
+        {
+          "project_code": "ACT-CORE",
+          "pipeline_name": "Grants",
+          "open_count": 14,
+          "won_count": 0,
+          "lost_count": 3,
+          "open_value_aud": 11376702,
+          "won_value_aud": 0,
+          "earliest_open_at": "2026-03-22T08:47:47.862+00:00",
+          "latest_activity_at": "2026-05-13T14:19:51.506+00:00",
+          "stages_present": [
+            "Grant Opportunity Identified",
+            "Grant Declined"
+          ],
+          "contacts_count": 1,
+          "computed_at": "2026-06-06T20:10:00.419Z"
+        },
+        {
+          "project_code": "ACT-CORE",
+          "pipeline_name": "The Shop pipeline",
+          "open_count": 1,
+          "won_count": 0,
+          "lost_count": 0,
+          "open_value_aud": 0,
+          "won_value_aud": 0,
+          "earliest_open_at": "2026-05-29T23:19:38.377+00:00",
+          "latest_activity_at": "2026-05-29T23:19:38.377+00:00",
+          "stages_present": [
+            "New interest"
+          ],
+          "contacts_count": 1,
+          "computed_at": "2026-06-06T20:10:00.419Z"
+        }
+      ],
+      "total_open": 22,
+      "total_won": 0,
+      "open_value": 11376702,
+      "won_value": 0
+    },
+    {
+      "project_code": "untagged",
+      "pipelines": [
+        {
+          "project_code": "untagged",
+          "pipeline_name": "Universal Inquiry",
+          "open_count": 20,
+          "won_count": 0,
+          "lost_count": 0,
+          "open_value_aud": 0,
+          "won_value_aud": 0,
+          "earliest_open_at": "2026-05-13T20:45:51.64+00:00",
+          "latest_activity_at": "2026-06-01T06:00:29.338+00:00",
+          "stages_present": [
+            "New Inquiry",
+            "Needs Assessment"
+          ],
+          "contacts_count": 20,
+          "computed_at": "2026-06-06T20:10:00.419Z"
+        },
+        {
+          "project_code": "untagged",
+          "pipeline_name": "Harvest Inbox",
+          "open_count": 2,
+          "won_count": 0,
+          "lost_count": 0,
+          "open_value_aud": 0,
+          "won_value_aud": 0,
+          "earliest_open_at": "2026-06-03T22:17:31.778+00:00",
+          "latest_activity_at": "2026-06-06T02:46:51.082+00:00",
+          "stages_present": [
+            "New"
+          ],
+          "contacts_count": 2,
+          "computed_at": "2026-06-06T20:10:00.419Z"
+        },
+        {
+          "project_code": "untagged",
+          "pipeline_name": "Grants",
+          "open_count": 25,
+          "won_count": 0,
+          "lost_count": 2,
+          "open_value_aud": 4694171,
+          "won_value_aud": 0,
+          "earliest_open_at": "2026-05-05T22:28:02.241+00:00",
+          "latest_activity_at": "2026-05-31T20:00:02.401+00:00",
+          "stages_present": [
+            "Grant Opportunity Identified"
+          ],
+          "contacts_count": 3,
+          "computed_at": "2026-06-06T20:10:00.419Z"
+        }
+      ],
+      "total_open": 47,
+      "total_won": 0,
+      "open_value": 4694171,
+      "won_value": 0
+    },
+    {
+      "project_code": "ACT-MR",
+      "pipelines": [
+        {
+          "project_code": "ACT-MR",
+          "pipeline_name": "Mukurtu Node Activation",
+          "open_count": 4,
+          "won_count": 0,
+          "lost_count": 0,
+          "open_value_aud": 0,
+          "won_value_aud": 0,
+          "earliest_open_at": null,
+          "latest_activity_at": null,
+          "stages_present": [
+            "Scoping"
+          ],
+          "contacts_count": 0,
+          "computed_at": "2026-06-06T20:10:00.419Z"
+        },
+        {
+          "project_code": "ACT-MR",
+          "pipeline_name": "Grants",
+          "open_count": 1,
+          "won_count": 0,
+          "lost_count": 0,
+          "open_value_aud": 1638692,
+          "won_value_aud": 0,
+          "earliest_open_at": "2026-05-13T14:19:29.606+00:00",
+          "latest_activity_at": "2026-05-13T14:19:29.606+00:00",
+          "stages_present": [
+            "Grant Opportunity Identified"
+          ],
+          "contacts_count": 1,
+          "computed_at": "2026-06-06T20:10:00.419Z"
+        }
+      ],
+      "total_open": 5,
+      "total_won": 0,
+      "open_value": 1638692,
+      "won_value": 0
+    },
+    {
+      "project_code": "ACT-JH",
+      "pipelines": [
+        {
+          "project_code": "ACT-JH",
+          "pipeline_name": "Grants",
+          "open_count": 6,
+          "won_count": 0,
+          "lost_count": 0,
+          "open_value_aud": 1080000,
+          "won_value_aud": 0,
+          "earliest_open_at": "2025-12-01T19:47:18.065+00:00",
+          "latest_activity_at": "2026-03-22T08:47:56.965+00:00",
+          "stages_present": [
+            "Grant Submitted",
+            "Grant Opportunity Identified"
+          ],
+          "contacts_count": 2,
+          "computed_at": "2026-06-06T20:10:00.419Z"
+        },
+        {
+          "project_code": "ACT-JH",
+          "pipeline_name": "Mukurtu Node Activation",
+          "open_count": 1,
+          "won_count": 0,
+          "lost_count": 0,
+          "open_value_aud": 0,
+          "won_value_aud": 0,
+          "earliest_open_at": null,
+          "latest_activity_at": null,
+          "stages_present": [
+            "Scoping"
+          ],
+          "contacts_count": 0,
+          "computed_at": "2026-06-06T20:10:00.419Z"
+        },
+        {
+          "project_code": "ACT-JH",
+          "pipeline_name": "A Curious Tractor",
+          "open_count": 0,
+          "won_count": 1,
+          "lost_count": 0,
+          "open_value_aud": 0,
+          "won_value_aud": 28000,
+          "earliest_open_at": null,
+          "latest_activity_at": "2026-05-05T22:48:13.625+00:00",
+          "stages_present": [
+            "Composting"
+          ],
+          "contacts_count": 1,
+          "computed_at": "2026-06-06T20:10:00.419Z"
+        }
+      ],
+      "total_open": 7,
+      "total_won": 1,
+      "open_value": 1080000,
+      "won_value": 28000
+    },
+    {
+      "project_code": "ACT-CA",
+      "pipelines": [
+        {
+          "project_code": "ACT-CA",
+          "pipeline_name": "A Curious Tractor",
+          "open_count": 6,
+          "won_count": 1,
+          "lost_count": 1,
+          "open_value_aud": 5434,
+          "won_value_aud": 146973.26,
+          "earliest_open_at": null,
+          "latest_activity_at": "2026-05-05T22:48:15.87+00:00",
+          "stages_present": [
+            "Graduation",
+            "Growth",
+            "Harvest",
+            "Germination"
+          ],
+          "contacts_count": 7,
+          "computed_at": "2026-06-06T20:10:00.419Z"
+        },
+        {
+          "project_code": "ACT-CA",
+          "pipeline_name": "Grants",
+          "open_count": 1,
+          "won_count": 0,
+          "lost_count": 0,
+          "open_value_aud": 666717,
+          "won_value_aud": 0,
+          "earliest_open_at": "2026-05-13T14:19:11.889+00:00",
+          "latest_activity_at": "2026-05-13T14:19:11.889+00:00",
+          "stages_present": [
+            "Grant Opportunity Identified"
+          ],
+          "contacts_count": 1,
+          "computed_at": "2026-06-06T20:10:00.419Z"
+        }
+      ],
+      "total_open": 7,
+      "total_won": 1,
+      "open_value": 672151,
+      "won_value": 146973.26
+    },
+    {
+      "project_code": "ACT-OO",
+      "pipelines": [
+        {
+          "project_code": "ACT-OO",
+          "pipeline_name": "Grants",
+          "open_count": 1,
+          "won_count": 0,
+          "lost_count": 0,
+          "open_value_aud": 100000,
+          "won_value_aud": 0,
+          "earliest_open_at": "2026-03-21T08:47:40.045+00:00",
+          "latest_activity_at": "2026-03-21T08:47:40.045+00:00",
+          "stages_present": [
+            "Grant Opportunity Identified"
+          ],
+          "contacts_count": 1,
+          "computed_at": "2026-06-06T20:10:00.419Z"
+        },
+        {
+          "project_code": "ACT-OO",
+          "pipeline_name": "A Curious Tractor",
+          "open_count": 0,
+          "won_count": 1,
+          "lost_count": 0,
+          "open_value_aud": 0,
+          "won_value_aud": 100000,
+          "earliest_open_at": null,
+          "latest_activity_at": "2026-05-05T22:48:12.771+00:00",
+          "stages_present": [
+            "Graduation"
+          ],
+          "contacts_count": 1,
+          "computed_at": "2026-06-06T20:10:00.419Z"
+        }
+      ],
+      "total_open": 1,
+      "total_won": 1,
+      "open_value": 100000,
+      "won_value": 100000
+    },
+    {
+      "project_code": "ACT-PI",
+      "pipelines": [
+        {
+          "project_code": "ACT-PI",
+          "pipeline_name": "Grants",
+          "open_count": 1,
+          "won_count": 0,
+          "lost_count": 0,
+          "open_value_aud": 100000,
+          "won_value_aud": 0,
+          "earliest_open_at": null,
+          "latest_activity_at": null,
+          "stages_present": [
+            "Application In Progress"
+          ],
+          "contacts_count": 0,
+          "computed_at": "2026-06-06T20:10:00.419Z"
+        },
+        {
+          "project_code": "ACT-PI",
+          "pipeline_name": "A Curious Tractor",
+          "open_count": 0,
+          "won_count": 5,
+          "lost_count": 0,
+          "open_value_aud": 0,
+          "won_value_aud": 415200,
+          "earliest_open_at": null,
+          "latest_activity_at": "2026-05-05T22:43:29.234+00:00",
+          "stages_present": [
+            "Graduation"
+          ],
+          "contacts_count": 1,
+          "computed_at": "2026-06-06T20:10:00.419Z"
+        }
+      ],
+      "total_open": 1,
+      "total_won": 5,
+      "open_value": 100000,
+      "won_value": 415200
+    },
+    {
+      "project_code": "ACT-RA",
+      "pipelines": [
+        {
+          "project_code": "ACT-RA",
+          "pipeline_name": "Grants",
+          "open_count": 3,
+          "won_count": 0,
+          "lost_count": 0,
+          "open_value_aud": 50000,
+          "won_value_aud": 0,
+          "earliest_open_at": "2026-02-23T20:04:41.748+00:00",
+          "latest_activity_at": "2026-02-27T07:05:44.887+00:00",
+          "stages_present": [
+            "Grant Opportunity Identified"
+          ],
+          "contacts_count": 1,
+          "computed_at": "2026-06-06T20:10:00.419Z"
+        }
+      ],
+      "total_open": 3,
+      "total_won": 0,
+      "open_value": 50000,
+      "won_value": 0
+    },
+    {
+      "project_code": "ACT-UA",
+      "pipelines": [
+        {
+          "project_code": "ACT-UA",
+          "pipeline_name": "Grants",
+          "open_count": 1,
+          "won_count": 0,
+          "lost_count": 0,
+          "open_value_aud": 50000,
+          "won_value_aud": 0,
+          "earliest_open_at": null,
+          "latest_activity_at": null,
+          "stages_present": [
+            "Grant Submitted"
+          ],
+          "contacts_count": 0,
+          "computed_at": "2026-06-06T20:10:00.419Z"
+        }
+      ],
+      "total_open": 1,
+      "total_won": 0,
+      "open_value": 50000,
+      "won_value": 0
+    },
+    {
+      "project_code": "ACT-FP",
+      "pipelines": [
+        {
+          "project_code": "ACT-FP",
+          "pipeline_name": "Goods Supporter Journey",
+          "open_count": 2,
+          "won_count": 0,
+          "lost_count": 0,
+          "open_value_aud": 50000,
+          "won_value_aud": 0,
+          "earliest_open_at": "2026-05-27T05:26:08.831+00:00",
+          "latest_activity_at": "2026-05-31T23:56:50.282+00:00",
+          "stages_present": [
+            "Ask made",
+            "Stewarding / Reporting"
+          ],
+          "contacts_count": 2,
+          "computed_at": "2026-06-06T20:10:00.419Z"
+        }
+      ],
+      "total_open": 2,
+      "total_won": 0,
+      "open_value": 50000,
+      "won_value": 0
+    },
+    {
+      "project_code": "ACT-10",
+      "pipelines": [
+        {
+          "project_code": "ACT-10",
+          "pipeline_name": "A Curious Tractor",
+          "open_count": 1,
+          "won_count": 1,
+          "lost_count": 0,
+          "open_value_aud": 27060,
+          "won_value_aud": 4950,
+          "earliest_open_at": null,
+          "latest_activity_at": null,
+          "stages_present": [
+            "Graduation"
+          ],
+          "contacts_count": 0,
+          "computed_at": "2026-06-06T20:10:00.419Z"
+        }
+      ],
+      "total_open": 1,
+      "total_won": 1,
+      "open_value": 27060,
+      "won_value": 4950
+    },
+    {
+      "project_code": "ACT-SH",
+      "pipelines": [
+        {
+          "project_code": "ACT-SH",
+          "pipeline_name": "Universal Inquiry",
+          "open_count": 1,
+          "won_count": 0,
+          "lost_count": 0,
+          "open_value_aud": 0,
+          "won_value_aud": 0,
+          "earliest_open_at": "2026-05-14T05:11:53.363+00:00",
+          "latest_activity_at": "2026-05-14T05:11:53.363+00:00",
+          "stages_present": [
+            "New Inquiry"
+          ],
+          "contacts_count": 0,
+          "computed_at": "2026-06-06T20:10:00.419Z"
+        },
+        {
+          "project_code": "ACT-SH",
+          "pipeline_name": "Goods Supporter Journey",
+          "open_count": 1,
+          "won_count": 0,
+          "lost_count": 0,
+          "open_value_aud": 20265,
+          "won_value_aud": 0,
+          "earliest_open_at": "2026-05-27T05:26:06.305+00:00",
+          "latest_activity_at": "2026-05-31T23:56:55.111+00:00",
+          "stages_present": [
+            "Renewing"
+          ],
+          "contacts_count": 1,
+          "computed_at": "2026-06-06T20:10:00.419Z"
+        }
+      ],
+      "total_open": 2,
+      "total_won": 0,
+      "open_value": 20265,
+      "won_value": 0
+    },
+    {
+      "project_code": "ACT-CN",
+      "pipelines": [
+        {
+          "project_code": "ACT-CN",
+          "pipeline_name": "Festivals",
+          "open_count": 1,
+          "won_count": 0,
+          "lost_count": 0,
+          "open_value_aud": 0,
+          "won_value_aud": 0,
+          "earliest_open_at": null,
+          "latest_activity_at": null,
+          "stages_present": [
+            "New Lead"
+          ],
+          "contacts_count": 0,
+          "computed_at": "2026-06-06T20:10:00.419Z"
+        },
+        {
+          "project_code": "ACT-CN",
+          "pipeline_name": "Grants",
+          "open_count": 1,
+          "won_count": 0,
+          "lost_count": 0,
+          "open_value_aud": 16500,
+          "won_value_aud": 0,
+          "earliest_open_at": "2026-02-23T20:04:48.185+00:00",
+          "latest_activity_at": "2026-02-23T20:04:48.185+00:00",
+          "stages_present": [
+            "Grant Opportunity Identified"
+          ],
+          "contacts_count": 1,
+          "computed_at": "2026-06-06T20:10:00.419Z"
+        },
+        {
+          "project_code": "ACT-CN",
+          "pipeline_name": "A Curious Tractor",
+          "open_count": 0,
+          "won_count": 1,
+          "lost_count": 0,
+          "open_value_aud": 0,
+          "won_value_aud": 15000,
+          "earliest_open_at": null,
+          "latest_activity_at": "2025-12-11T01:26:37.69+00:00",
+          "stages_present": [
+            "Composting"
+          ],
+          "contacts_count": 1,
+          "computed_at": "2026-06-06T20:10:00.419Z"
+        }
+      ],
+      "total_open": 2,
+      "total_won": 1,
+      "open_value": 16500,
+      "won_value": 15000
+    },
+    {
+      "project_code": "ACT-RP",
+      "pipelines": [
+        {
+          "project_code": "ACT-RP",
+          "pipeline_name": "Grants",
+          "open_count": 1,
+          "won_count": 0,
+          "lost_count": 0,
+          "open_value_aud": 15000,
+          "won_value_aud": 0,
+          "earliest_open_at": "2026-05-13T14:19:33.07+00:00",
+          "latest_activity_at": "2026-05-13T14:19:33.07+00:00",
+          "stages_present": [
+            "Grant Opportunity Identified"
+          ],
+          "contacts_count": 1,
+          "computed_at": "2026-06-06T20:10:00.419Z"
+        }
+      ],
+      "total_open": 1,
+      "total_won": 0,
+      "open_value": 15000,
+      "won_value": 0
+    },
+    {
+      "project_code": "ACT-CE",
+      "pipelines": [
+        {
+          "project_code": "ACT-CE",
+          "pipeline_name": "ACT Events",
+          "open_count": 3,
+          "won_count": 0,
+          "lost_count": 20,
+          "open_value_aud": 0,
+          "won_value_aud": 0,
+          "earliest_open_at": null,
+          "latest_activity_at": "2026-05-05T22:31:57.896+00:00",
+          "stages_present": [
+            "Invited"
+          ],
+          "contacts_count": 23,
+          "computed_at": "2026-06-06T20:10:00.418Z"
+        },
+        {
+          "project_code": "ACT-CE",
+          "pipeline_name": "Festivals",
+          "open_count": 8,
+          "won_count": 0,
+          "lost_count": 4,
+          "open_value_aud": 0,
+          "won_value_aud": 0,
+          "earliest_open_at": null,
+          "latest_activity_at": "2026-05-05T22:38:35.105+00:00",
+          "stages_present": [
+            "New Lead",
+            "Closed",
+            "Contacted"
+          ],
+          "contacts_count": 4,
+          "computed_at": "2026-06-06T20:10:00.419Z"
+        }
+      ],
+      "total_open": 11,
+      "total_won": 0,
+      "open_value": 0,
+      "won_value": 0
+    },
+    {
+      "project_code": "ACT-DL",
+      "pipelines": [
+        {
+          "project_code": "ACT-DL",
+          "pipeline_name": "Grants",
+          "open_count": 1,
+          "won_count": 0,
+          "lost_count": 0,
+          "open_value_aud": 0,
+          "won_value_aud": 0,
+          "earliest_open_at": null,
+          "latest_activity_at": null,
+          "stages_present": [
+            "Grant Opportunity Identified"
+          ],
+          "contacts_count": 0,
+          "computed_at": "2026-06-06T20:10:00.419Z"
+        }
+      ],
+      "total_open": 1,
+      "total_won": 0,
+      "open_value": 0,
+      "won_value": 0
+    },
+    {
+      "project_code": "ACT-EL",
+      "pipelines": [
+        {
+          "project_code": "ACT-EL",
+          "pipeline_name": "Empathy Ledger",
+          "open_count": 22,
+          "won_count": 0,
+          "lost_count": 0,
+          "open_value_aud": 0,
+          "won_value_aud": 0,
+          "earliest_open_at": "2026-05-27T03:07:30.34+00:00",
+          "latest_activity_at": "2026-05-27T03:07:30.34+00:00",
+          "stages_present": [
+            "Identified"
+          ],
+          "contacts_count": 1,
+          "computed_at": "2026-06-06T20:10:00.419Z"
+        }
+      ],
+      "total_open": 22,
+      "total_won": 0,
+      "open_value": 0,
+      "won_value": 0
+    },
+    {
+      "project_code": "ACT-FM",
+      "pipelines": [
+        {
+          "project_code": "ACT-FM",
+          "pipeline_name": "Goods — Buyer Pipeline",
+          "open_count": 1,
+          "won_count": 0,
+          "lost_count": 0,
+          "open_value_aud": 0,
+          "won_value_aud": 0,
+          "earliest_open_at": "2026-04-26T23:52:37.01+00:00",
+          "latest_activity_at": "2026-04-26T23:52:37.01+00:00",
+          "stages_present": [
+            "Outreach Queued"
+          ],
+          "contacts_count": 1,
+          "computed_at": "2026-06-06T20:10:00.419Z"
+        },
+        {
+          "project_code": "ACT-FM",
+          "pipeline_name": "Goods — Demand Register",
+          "open_count": 1,
+          "won_count": 0,
+          "lost_count": 0,
+          "open_value_aud": 0,
+          "won_value_aud": 0,
+          "earliest_open_at": "2026-04-26T23:52:36.381+00:00",
+          "latest_activity_at": "2026-04-26T23:52:36.381+00:00",
+          "stages_present": [
+            "Signal"
+          ],
+          "contacts_count": 1,
+          "computed_at": "2026-06-06T20:10:00.419Z"
+        },
+        {
+          "project_code": "ACT-FM",
+          "pipeline_name": "The Shop pipeline",
+          "open_count": 1,
+          "won_count": 0,
+          "lost_count": 0,
+          "open_value_aud": 0,
+          "won_value_aud": 0,
+          "earliest_open_at": "2026-05-29T23:19:33.357+00:00",
+          "latest_activity_at": "2026-05-29T23:19:33.357+00:00",
+          "stages_present": [
+            "New interest"
+          ],
+          "contacts_count": 1,
+          "computed_at": "2026-06-06T20:10:00.419Z"
+        }
+      ],
+      "total_open": 3,
+      "total_won": 0,
+      "open_value": 0,
+      "won_value": 0
+    },
+    {
+      "project_code": "ACT-SX",
+      "pipelines": [
+        {
+          "project_code": "ACT-SX",
+          "pipeline_name": "Festivals",
+          "open_count": 1,
+          "won_count": 0,
+          "lost_count": 0,
+          "open_value_aud": 0,
+          "won_value_aud": 0,
+          "earliest_open_at": null,
+          "latest_activity_at": null,
+          "stages_present": [
+            "New Lead"
+          ],
+          "contacts_count": 0,
+          "computed_at": "2026-06-06T20:10:00.419Z"
+        }
+      ],
+      "total_open": 1,
+      "total_won": 0,
+      "open_value": 0,
+      "won_value": 0
+    },
+    {
+      "project_code": "ACT-BB",
+      "pipelines": [
+        {
+          "project_code": "ACT-BB",
+          "pipeline_name": "Goods — Demand Register",
+          "open_count": 1,
+          "won_count": 0,
+          "lost_count": 0,
+          "open_value_aud": 0,
+          "won_value_aud": 0,
+          "earliest_open_at": "2026-05-27T09:00:31.957+00:00",
+          "latest_activity_at": "2026-05-31T22:53:09.739+00:00",
+          "stages_present": [
+            "Signal"
+          ],
+          "contacts_count": 1,
+          "computed_at": "2026-06-06T20:10:00.419Z"
+        }
+      ],
+      "total_open": 1,
+      "total_won": 0,
+      "open_value": 0,
+      "won_value": 0
+    },
+    {
+      "project_code": "ACT-CF",
+      "pipelines": [
+        {
+          "project_code": "ACT-CF",
+          "pipeline_name": "A Curious Tractor",
+          "open_count": 0,
+          "won_count": 1,
+          "lost_count": 0,
+          "open_value_aud": 0,
+          "won_value_aud": 7150,
+          "earliest_open_at": null,
+          "latest_activity_at": "2026-02-27T07:33:53.024+00:00",
+          "stages_present": [
+            "Graduation"
+          ],
+          "contacts_count": 1,
+          "computed_at": "2026-06-06T20:10:00.419Z"
+        }
+      ],
+      "total_open": 0,
+      "total_won": 1,
+      "open_value": 0,
+      "won_value": 7150
+    },
+    {
+      "project_code": "ACT-MY",
+      "pipelines": [
+        {
+          "project_code": "ACT-MY",
+          "pipeline_name": "A Curious Tractor",
+          "open_count": 0,
+          "won_count": 1,
+          "lost_count": 0,
+          "open_value_aud": 0,
+          "won_value_aud": 25000,
+          "earliest_open_at": null,
+          "latest_activity_at": null,
+          "stages_present": [
+            "Composting"
+          ],
+          "contacts_count": 0,
+          "computed_at": "2026-06-06T20:10:00.419Z"
+        }
+      ],
+      "total_open": 0,
+      "total_won": 1,
+      "open_value": 0,
+      "won_value": 25000
+    },
+    {
+      "project_code": "ACT-FA",
+      "pipelines": [
+        {
+          "project_code": "ACT-FA",
+          "pipeline_name": "Grants",
+          "open_count": 0,
+          "won_count": 0,
+          "lost_count": 1,
+          "open_value_aud": 0,
+          "won_value_aud": 0,
+          "earliest_open_at": null,
+          "latest_activity_at": "2026-05-05T22:21:00.003+00:00",
+          "stages_present": [
+            "Grant Opportunity Identified"
+          ],
+          "contacts_count": 1,
+          "computed_at": "2026-06-06T20:10:00.419Z"
+        }
+      ],
+      "total_open": 0,
+      "total_won": 0,
+      "open_value": 0,
+      "won_value": 0
+    },
+    {
+      "project_code": "ACT-GL",
+      "pipelines": [
+        {
+          "project_code": "ACT-GL",
+          "pipeline_name": "Harvest Inbox",
+          "open_count": 1,
+          "won_count": 0,
+          "lost_count": 0,
+          "open_value_aud": 0,
+          "won_value_aud": 0,
+          "earliest_open_at": "2026-05-17T19:59:47.024+00:00",
+          "latest_activity_at": "2026-05-27T06:15:56.829+00:00",
+          "stages_present": [
+            "Resolved"
+          ],
+          "contacts_count": 1,
+          "computed_at": "2026-06-06T20:10:00.419Z"
+        }
+      ],
+      "total_open": 1,
+      "total_won": 0,
+      "open_value": 0,
+      "won_value": 0
+    },
+    {
+      "project_code": "ACT-MN",
+      "pipelines": [
+        {
+          "project_code": "ACT-MN",
+          "pipeline_name": "Goods — Demand Register",
+          "open_count": 1,
+          "won_count": 0,
+          "lost_count": 0,
+          "open_value_aud": 0,
+          "won_value_aud": 0,
+          "earliest_open_at": "2026-05-27T06:07:17.77+00:00",
+          "latest_activity_at": "2026-05-31T22:54:33.179+00:00",
+          "stages_present": [
+            "Buyer Matched"
+          ],
+          "contacts_count": 1,
+          "computed_at": "2026-06-06T20:10:00.419Z"
+        }
+      ],
+      "total_open": 1,
+      "total_won": 0,
+      "open_value": 0,
+      "won_value": 0
+    }
+  ]
+}

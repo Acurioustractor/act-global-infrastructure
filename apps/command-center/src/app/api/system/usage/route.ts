@@ -11,8 +11,9 @@ export async function GET(request: Request) {
   since.setDate(since.getDate() - days)
 
   // Fetch raw usage rows
+  // LLM token/cost telemetry lives in llm_usage (api_usage was repurposed to per-key API-request logging)
   const { data: rows, error } = await supabase
-    .from('api_usage')
+    .from('llm_usage')
     .select('model, input_tokens, output_tokens, estimated_cost, input_cost, output_cost, latency_ms, created_at, script_name')
     .gte('created_at', since.toISOString())
     .order('created_at', { ascending: false })

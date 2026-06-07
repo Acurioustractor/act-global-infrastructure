@@ -1,0 +1,1404 @@
+[
+  {
+    "id": "53a7169e-0498-416c-9e43-d98667fc1c63",
+    "xero_id": "b0d7936b-a7dc-4535-b3c4-ec4641a8eb56",
+    "invoice_number": null,
+    "contact_name": "RW Pacific Traders",
+    "date": "2026-01-05",
+    "total": 4200,
+    "has_attachments": true,
+    "expected_element": "canvas?",
+    "attachment": "RW-Pacific-Traders-receipt.pdf",
+    "line_items": [
+      {
+        "description": "Generator DG15000SE3 1105F",
+        "quantity": 1,
+        "unit_price": 3818.1818
+      }
+    ],
+    "product_summary": "This invoice is for a generator.",
+    "bed_relevant": "no",
+    "bed_element": "other",
+    "bed_count": 0,
+    "notes": "The generator is likely for operational use, not directly for bed production.",
+    "rate_per_unit_summary": "The unit price for the generator was $3818.1818."
+  },
+  {
+    "id": "afd804ec-62ee-4836-a7e9-911a5ff4568e",
+    "xero_id": "fdfe3ea2-55e2-4efb-99f6-62ecee5a6998",
+    "invoice_number": "INV-0368",
+    "contact_name": "RW Pacific Traders",
+    "date": "2026-01-14",
+    "total": 2034,
+    "has_attachments": true,
+    "expected_element": "canvas?",
+    "attachment": "19321346630.pdf",
+    "line_items": [
+      {
+        "description": "Payment for invoice(s) INV-0368",
+        "line_total": 2034
+      }
+    ],
+    "product_summary": "This invoice is for payment of a specific invoice (INV-0368) from RW Pacific Traders Pty Ltd.",
+    "bed_relevant": "no",
+    "bed_element": "other",
+    "bed_count": 0,
+    "notes": "The invoice is a payment confirmation and does not contain detailed line item information about the products or services purchased.",
+    "rate_per_unit_summary": "No per-unit rate information is available on this invoice."
+  },
+  {
+    "id": "925a2c64-dbfa-444a-88ec-e5a45cd68d63",
+    "xero_id": "3d9b0db1-1f91-457c-bd16-438ed458b956",
+    "invoice_number": "SI-00023952/1",
+    "contact_name": "Steelmart",
+    "date": "2026-04-07",
+    "total": 1453.1,
+    "has_attachments": true,
+    "expected_element": "steel",
+    "attachment": "20196557030.pdf",
+    "line_items": [
+      {
+        "description": "20NB MED Gal Pipe x 6.5 mtr (26.9 OD x 2.6WT) 80 @ 1950mm",
+        "quantity": 27,
+        "unit_price": 33
+      },
+      {
+        "description": "20NB Plastic Pipe Cap Round",
+        "quantity": 160,
+        "unit_price": 0.5
+      },
+      {
+        "description": "Cutting Charge",
+        "quantity": 80,
+        "unit_price": 2.5
+      },
+      {
+        "description": "Delivery Zone 8 (Kenilworth, Maleny, The Range)",
+        "quantity": 1,
+        "unit_price": 150
+      }
+    ],
+    "product_summary": "This invoice is for steel pipes, plastic caps, cutting charges, and delivery services.",
+    "bed_relevant": "no",
+    "bed_element": "steel",
+    "bed_count": 0,
+    "notes": "The delivery address is for a tractor, not for beds.",
+    "rate_per_unit_summary": "The steel pipe is priced at $33.00 per length (6.5 mtr) and the plastic caps are $0.50 each."
+  },
+  {
+    "id": "b5d6427b-b131-4594-827e-b7f1c16d4d64",
+    "xero_id": "ce191d6a-0cc8-46ae-8c95-6d8dcdef81e1",
+    "invoice_number": null,
+    "contact_name": "Brisbane Steel Supplies",
+    "date": "2026-01-05",
+    "total": 185.7,
+    "has_attachments": true,
+    "expected_element": "steel",
+    "attachment": "Brisbane-Steel-Supplies-receipt.jpg",
+    "line_items": [
+      {
+        "description": "6M 20 x 20 x 3 Angle",
+        "quantity": 6,
+        "unit_price": 3.47
+      },
+      {
+        "description": "6.5M 20NB Med Galv Pipe",
+        "quantity": 26,
+        "unit_price": 5.69
+      }
+    ],
+    "product_summary": "This invoice is for steel angles and pipes used in the construction of flat-pack steel-frame beds.",
+    "bed_relevant": "yes",
+    "bed_element": "steel",
+    "bed_count": 0,
+    "notes": "This invoice includes steel components for bed frames. The total weight of the items purchased is 48.000 kg.",
+    "rate_per_unit_summary": "The steel angle is priced at $3.47 per meter, and the steel pipe is priced at $5.69 per meter."
+  },
+  {
+    "id": "d0162f07-0bc0-4629-a130-23b9c6f39598",
+    "xero_id": "f8bce755-9f76-44e3-a351-c26bbf46f344",
+    "invoice_number": "INV-0930",
+    "contact_name": "Zinus Australia",
+    "date": "2025-03-10",
+    "total": 1377.2,
+    "has_attachments": true,
+    "expected_element": "mattress?",
+    "attachment": "16245607920.pdf",
+    "line_items": [
+      {
+        "description": "Bamboo Topper - Double",
+        "quantity": 30,
+        "unit_price": 36.4
+      },
+      {
+        "description": "Freight",
+        "line_total": 160
+      }
+    ],
+    "product_summary": "This invoice is for bamboo toppers and freight costs.",
+    "bed_relevant": "yes",
+    "bed_element": "other",
+    "bed_count": 0,
+    "notes": "The item description indicates 'Bamboo Topper - Double'. While not explicitly steel or plastic, it's a component directly related to the bed. Freight is also a direct cost.",
+    "rate_per_unit_summary": "The unit price for the Bamboo Topper - Double is $36.40 (ex. GST)."
+  },
+  {
+    "id": "9aa64496-e266-44ba-8d39-64fee8af2365",
+    "xero_id": "a1fc3f02-f9a7-4ee2-8236-113faee35f1a",
+    "invoice_number": "INV-0931",
+    "contact_name": "Zinus Australia",
+    "date": "2025-03-10",
+    "total": 1636.8,
+    "has_attachments": true,
+    "expected_element": "mattress?",
+    "attachment": "16245607930.pdf",
+    "line_items": [
+      {
+        "description": "Bamboo Topper - Double",
+        "quantity": 20,
+        "unit_price": 36.4
+      },
+      {
+        "description": "Swirl Topper - Double",
+        "quantity": 20,
+        "unit_price": 30
+      }
+    ],
+    "product_summary": "This invoice is for bamboo and swirl toppers for double beds.",
+    "bed_relevant": "yes",
+    "bed_element": "plastic",
+    "bed_count": 40,
+    "notes": "This invoice includes a line item for freight.",
+    "rate_per_unit_summary": "The trade price for the Bamboo Topper is $36.40 ex. GST and for the Swirl Topper is $30.00 ex. GST."
+  },
+  {
+    "id": "3e4537c6-c7ba-4d78-a799-9c566b459cb5",
+    "xero_id": "cfbc96c7-0c0b-43e2-9bd8-96338ce0a5c7",
+    "invoice_number": "INV-0962",
+    "contact_name": "Zinus Australia",
+    "date": "2025-05-16",
+    "total": 10461,
+    "has_attachments": true,
+    "expected_element": "mattress?",
+    "attachment": "16900755720.pdf",
+    "line_items": [
+      {
+        "description": "6IN MATTRESS PAD FL",
+        "quantity": 200,
+        "unit_price": 43.001604938271605
+      },
+      {
+        "description": "1.5IN SG TGT FL(DB)",
+        "quantity": 5,
+        "unit_price": 38
+      },
+      {
+        "description": "Delivery",
+        "line_total": 720
+      }
+    ],
+    "product_summary": "This invoice is for mattress pads and related delivery services.",
+    "bed_relevant": "no",
+    "bed_element": "other",
+    "bed_count": 0,
+    "notes": "The project name is ACT Goods on Country.",
+    "rate_per_unit_summary": "The unit price for 6IN MATTRESS PAD FL is 43.00 AUD and for 1.5IN SG TGT FL(DB) is 38.00 AUD."
+  },
+  {
+    "id": "20cd2612-3fff-4d9c-ae39-0078c156ad04",
+    "xero_id": "77a100a8-d080-488f-bb60-760ef5f5217b",
+    "invoice_number": "INV-0981",
+    "contact_name": "Zinus Australia",
+    "date": "2025-06-26",
+    "total": 740.66,
+    "has_attachments": true,
+    "expected_element": "mattress?",
+    "attachment": "17279930460.pdf",
+    "line_items": [
+      {
+        "description": "1.5IN SG TGT QN",
+        "quantity": 5,
+        "unit_price": 40
+      },
+      {
+        "description": "6IN MATTRESS PAD FL",
+        "quantity": 10,
+        "unit_price": 43
+      },
+      {
+        "description": "Delivery",
+        "line_total": 43.33
+      }
+    ],
+    "product_summary": "This invoice is for mattress pads and related delivery charges.",
+    "bed_relevant": "yes",
+    "bed_element": "plastic",
+    "bed_count": 0,
+    "notes": "The description \"SG TGT QN\" might refer to a specific type of mattress pad, potentially related to the 'steel frame bed' project.",
+    "rate_per_unit_summary": "The unit price for 1.5IN SG TGT QN is $40.00 and for 6IN MATTRESS PAD FL is $43.00."
+  },
+  {
+    "id": "022916be-046b-463e-ac53-efbf5287d441",
+    "xero_id": "bbd60bca-329b-407a-9684-b150e9bed5b4",
+    "invoice_number": "INV-0982",
+    "contact_name": "Zinus Australia",
+    "date": "2025-06-26",
+    "total": 2858.71,
+    "has_attachments": true,
+    "expected_element": "mattress?",
+    "attachment": "17279930470.pdf",
+    "line_items": [
+      {
+        "description": "1.5IN SG TGT QN",
+        "quantity": 20,
+        "unit_price": 40
+      },
+      {
+        "description": "6IN MATTRESS PAD FL",
+        "quantity": 40,
+        "unit_price": 43
+      },
+      {
+        "description": "Delivery",
+        "line_total": 78.83
+      }
+    ],
+    "product_summary": "This invoice is for mattress pads and related delivery costs for the ACT Goods on Country project.",
+    "bed_relevant": "yes",
+    "bed_element": "other",
+    "bed_count": 0,
+    "notes": "The line items appear to be mattress pads, which are a component of the beds.",
+    "rate_per_unit_summary": "The unit price for '1.5IN SG TGT QN' is $40.00 and for '6IN MATTRESS PAD FL' is $43.00."
+  },
+  {
+    "id": "ba314ae8-8cc4-44b1-8ad3-d8c66db20f67",
+    "xero_id": "0f8b9e5b-62f2-4acf-9463-e5bb45b905d7",
+    "invoice_number": "INV-0980",
+    "contact_name": "Zinus Australia",
+    "date": "2025-06-26",
+    "total": 745.45,
+    "has_attachments": true,
+    "expected_element": "mattress?",
+    "attachment": "17279930450.pdf",
+    "line_items": [
+      {
+        "description": "1.5IN SG TGT QN",
+        "quantity": 5,
+        "unit_price": 40
+      },
+      {
+        "description": "6IN MATTRESS PAD FL",
+        "quantity": 10,
+        "unit_price": 43
+      },
+      {
+        "description": "Delivery",
+        "line_total": 47.68
+      }
+    ],
+    "product_summary": "This invoice is for mattress pads and related delivery charges.",
+    "bed_relevant": "yes",
+    "bed_element": "assembly",
+    "bed_count": 0,
+    "notes": "The 'Delivery' line item is likely freight for the mattress pads.",
+    "rate_per_unit_summary": "The unit price for 1.5IN SG TGT QN is 40.00 and for 6IN MATTRESS PAD FL is 43.00."
+  },
+  {
+    "id": "3698ac3d-b05f-4194-92bd-933095085750",
+    "xero_id": "81967398-08d9-458d-824f-484d09d03fe3",
+    "invoice_number": "INV-1007",
+    "contact_name": "Zinus Australia",
+    "date": "2025-09-16",
+    "total": 10870.59,
+    "has_attachments": true,
+    "expected_element": "mattress?",
+    "attachment": "18120262980.pdf",
+    "line_items": [
+      {
+        "description": "AU-SWFT-150D",
+        "quantity": 60,
+        "unit_price": 38
+      },
+      {
+        "description": "AU-TTPRJ1ZC-16D",
+        "quantity": 120,
+        "unit_price": 43
+      },
+      {
+        "description": "Delivery",
+        "line_total": 2442.35
+      }
+    ],
+    "product_summary": "This invoice is for the supply of \"AU-SWFT-150D\" and \"AU-TTPRJ1ZC-16D\" items, along with a delivery charge.",
+    "bed_relevant": "yes",
+    "bed_element": "steel",
+    "bed_count": 0,
+    "notes": "The delivery charge is a significant portion of the total cost.",
+    "rate_per_unit_summary": "The unit prices are AUD 38.00 for AU-SWFT-150D and AUD 43.00 for AU-TTPRJ1ZC-16D."
+  },
+  {
+    "id": "fa99014d-aa2e-4ce6-abb3-262ecb26da1c",
+    "xero_id": "378157ff-3ebc-4fcf-9c79-094a498fc83f",
+    "invoice_number": null,
+    "contact_name": "Joseph Kirmos",
+    "date": "2025-12-03",
+    "total": 2737.5,
+    "has_attachments": true,
+    "expected_element": "facility labour",
+    "attachment": "Joseph-Kirmos-receipt.pdf",
+    "line_items": [
+      {
+        "description": "Sun 30th - 3 hrs @ $75/hr",
+        "line_total": 225,
+        "quantity": 3,
+        "unit_price": 75
+      },
+      {
+        "description": "Mon 1 Dec - 6.75 hrs @ $75/hr",
+        "line_total": 506.25,
+        "quantity": 6.75,
+        "unit_price": 75
+      },
+      {
+        "description": "Tue 2 Dec - 9.25 hrs @ $75/hr",
+        "line_total": 693.75,
+        "quantity": 9.25,
+        "unit_price": 75
+      },
+      {
+        "description": "Wed 3 Dec - 8.25 hrs @ $75/hr",
+        "line_total": 618.75,
+        "quantity": 8.25,
+        "unit_price": 75
+      },
+      {
+        "description": "Thu 4 Dec - 9.25 hrs @ $75/hr",
+        "line_total": 693.75,
+        "quantity": 9.25,
+        "unit_price": 75
+      }
+    ],
+    "product_summary": "Labour for site cleaning, pressure washing, tree pruning, landscaping, bulldozing support, and rubbish removal/sorting at a property restoration site.",
+    "bed_relevant": "no",
+    "bed_element": "other",
+    "bed_count": 0,
+    "notes": "The scope of works involved general site maintenance and restoration, not direct production of beds.",
+    "rate_per_unit_summary": "The labour rate is $75 per hour."
+  },
+  {
+    "id": "0269c3db-5d17-488b-9aa5-6ac8bd779de0",
+    "xero_id": "af1435ea-0b97-4887-bfb2-10f4acebf3a6",
+    "invoice_number": "INV-004",
+    "contact_name": "Joseph Kirmos",
+    "date": "2026-02-16",
+    "total": 4500,
+    "has_attachments": true,
+    "expected_element": "facility labour",
+    "attachment": "19637152000.pdf",
+    "line_items": [
+      {
+        "description": "Provision of Labour",
+        "quantity": 100,
+        "unit_price": 45
+      }
+    ],
+    "product_summary": "This invoice is for the provision of labour for a camp/property restoration site.",
+    "bed_relevant": "no",
+    "bed_element": "other",
+    "bed_count": 0,
+    "notes": "The work location is a camp/property restoration site, not directly related to bed production.",
+    "rate_per_unit_summary": "The rate for labour is $45.00 per hour."
+  },
+  {
+    "id": "783b31a5-597d-4359-a2d8-e0f85d7ff914",
+    "xero_id": "a0a09974-6b27-41f0-a766-4a19e04e112c",
+    "invoice_number": "INV-005",
+    "contact_name": "Joseph Kirmos",
+    "date": "2026-03-11",
+    "total": 4500,
+    "has_attachments": true,
+    "expected_element": "facility labour",
+    "attachment": "19887769890.pdf",
+    "line_items": [
+      {
+        "description": "Provision of Labour",
+        "quantity": 100,
+        "unit_price": 45
+      }
+    ],
+    "product_summary": "This invoice is for the provision of labour for bed making, landscaping, and general building work at a property restoration site.",
+    "bed_relevant": "indirect",
+    "bed_element": "assembly",
+    "bed_count": 0,
+    "notes": "The scope of work includes 'Bed Making', but the line item is for general labour, not specific to bed components. It's classified as indirect assembly as it supports the overall project which includes bed making.",
+    "rate_per_unit_summary": "Labour is charged at $45.00 per hour."
+  },
+  {
+    "id": "1885a695-0895-4704-b522-44b253cceee7",
+    "xero_id": "da144cf7-20bc-4e13-ba6b-4434988077f3",
+    "invoice_number": "AB INV 25-62",
+    "contact_name": "Adriana Beach",
+    "date": "2025-08-01",
+    "total": 2000,
+    "has_attachments": true,
+    "expected_element": "labour?",
+    "attachment": "18954469430.pdf",
+    "line_items": [
+      {
+        "description": "Full Day Rate",
+        "quantity": 4,
+        "unit_price": 400
+      },
+      {
+        "description": "Half Day Rate",
+        "quantity": 2,
+        "unit_price": 200
+      }
+    ],
+    "product_summary": "This invoice is for a fundraiser installation service.",
+    "bed_relevant": "no",
+    "bed_element": "other",
+    "bed_count": 0,
+    "notes": "The invoice states 'Fundraiser Install' as the payment for, and the line items are for 'Full Day Rate' and 'Half Day Rate', indicating a service rather than materials for bed production.",
+    "rate_per_unit_summary": "The rate for a full day is $400.00 and for a half day is $200.00."
+  },
+  {
+    "id": "e70734b6-ba42-4be8-8e4d-8197d5559397",
+    "xero_id": "77ef1b0a-92ed-4829-8a00-ff53b49198b9",
+    "invoice_number": null,
+    "contact_name": "Adriana Beach",
+    "date": "2025-12-08",
+    "total": 2000,
+    "has_attachments": true,
+    "expected_element": "labour?",
+    "attachment": "Adriana-Beach-receipt.pdf",
+    "line_items": [
+      {
+        "description": "Full Day Rate",
+        "quantity": 4,
+        "unit_price": 400
+      },
+      {
+        "description": "Half Day Rate",
+        "quantity": 2,
+        "unit_price": 200
+      }
+    ],
+    "product_summary": "This invoice is for installation services related to a fundraiser.",
+    "bed_relevant": "no",
+    "bed_element": "other",
+    "bed_count": 0,
+    "notes": "The service provided is a fundraiser install, which is not directly related to bed production.",
+    "rate_per_unit_summary": "The rates charged are per day for full and half day services."
+  },
+  {
+    "id": "3f1911aa-6518-43bf-83b7-724ca06d3a40",
+    "xero_id": "84b41e9f-1a19-4b92-b847-884813725f29",
+    "invoice_number": "12472",
+    "contact_name": "Peak Up Transport",
+    "date": "2025-07-10",
+    "total": 2201.39,
+    "has_attachments": true,
+    "expected_element": "freight road",
+    "attachment": "17435414410.pdf",
+    "line_items": [
+      {
+        "description": "Interstate:Interstate road freight job #45233 from STAFFORD to LUCINDA - Northline No Selected Service service on 14/7/2025 - Ref Goods Washers",
+        "line_total": 2001.26,
+        "quantity": 1,
+        "unit_price": 2001.26
+      }
+    ],
+    "product_summary": "This invoice is for interstate road freight services.",
+    "bed_relevant": "yes",
+    "bed_element": "freight",
+    "bed_count": 0,
+    "rate_per_unit_summary": "The service is described as interstate road freight, with a specific job number and origin/destination, but no explicit per-unit rate is stated in monetary terms. The line item total is $2,001.26 for the freight service."
+  },
+  {
+    "id": "b662b735-ef56-41ae-a48a-47f60a0b37cf",
+    "xero_id": "0c4dad3e-f2ea-4338-a131-3355ae3afad1",
+    "invoice_number": "12475",
+    "contact_name": "Peak Up Transport",
+    "date": "2025-07-16",
+    "total": 6861.5,
+    "has_attachments": true,
+    "expected_element": "freight road",
+    "attachment": "17493654510.pdf",
+    "line_items": [
+      {
+        "description": "Interstate:Interstate road freight job #45245 from STAFFORD to DARWIN - TNT Regular delivery service on 17/7/2025 - Ref",
+        "line_total": 6237.73,
+        "quantity": 1,
+        "unit_price": 6237.73
+      }
+    ],
+    "product_summary": "This invoice is for interstate road freight services from Stafford to Darwin.",
+    "bed_relevant": "yes",
+    "bed_element": "freight",
+    "bed_count": 0,
+    "notes": "GST is listed separately from the line item total.",
+    "rate_per_unit_summary": "The total cost for the freight service from Stafford to Darwin was $6,237.73."
+  },
+  {
+    "id": "2b88c4eb-ed0c-44de-8c46-b8917dbc1d40",
+    "xero_id": "c71af0f1-4566-4628-a35a-5eef0ec7d677",
+    "invoice_number": "12519",
+    "contact_name": "Peak Up Transport",
+    "date": "2025-07-25",
+    "total": 4863.82,
+    "has_attachments": true,
+    "expected_element": "freight road",
+    "attachment": "17591348440.pdf",
+    "line_items": [
+      {
+        "description": "Interstate:Interstate road freight job #45245 from STAFFORD to DARWIN - TNT Regular delivery service on 17/7/2025 - Ref - Desc: Corrected dimensions and weight extra charge",
+        "quantity": 1,
+        "unit_price": 4421.65
+      }
+    ],
+    "product_summary": "This invoice is for interstate road freight services for a delivery job from Stafford to Darwin, including corrected dimensions and weight extra charges.",
+    "bed_relevant": "yes",
+    "bed_element": "freight",
+    "bed_count": 0,
+    "notes": "The freight is for delivery of materials to remote Indigenous communities, which is directly related to the bed production and delivery.",
+    "rate_per_unit_summary": "The total amount charged is for the entire freight service, with no explicit per-unit rate mentioned for kilograms or distance."
+  },
+  {
+    "id": "9a0710ed-6b5d-476c-8c78-b496f285ca74",
+    "xero_id": "1203c7a5-808b-4c39-ab1a-a6cfcceb69f2",
+    "invoice_number": "1533-8218",
+    "contact_name": "Peak Up Transport",
+    "date": "2025-07-28",
+    "total": 4985.42,
+    "has_attachments": true,
+    "expected_element": "freight road",
+    "attachment": "17599993200.pdf",
+    "line_items": [
+      {
+        "description": "Invoice #10795",
+        "line_total": 4985.42,
+        "quantity": 1,
+        "unit_price": 4985.42
+      }
+    ],
+    "product_summary": "This invoice is for freight charges related to the ACT Goods on Country project.",
+    "bed_relevant": "yes",
+    "bed_element": "freight",
+    "bed_count": 0,
+    "notes": "The amount paid is A$4,985.42, which covers Invoice #10795 for $4863.82.",
+    "rate_per_unit_summary": "The total amount paid was A$4,985.42 for freight."
+  },
+  {
+    "id": "2f68993c-0925-41bd-abbc-c802f64ae466",
+    "xero_id": "057dd059-dd56-432c-a764-26c1f8605d78",
+    "invoice_number": "5732 2163 022",
+    "contact_name": "SEA SWIFT",
+    "date": "2025-09-29",
+    "total": 2554.39,
+    "has_attachments": true,
+    "expected_element": "freight barge",
+    "attachment": "18186592510.pdf",
+    "line_items": [
+      {
+        "description": "SEA SWIFT PTY LTD",
+        "line_total": 2554.39,
+        "quantity": 1,
+        "unit_price": 2554.39
+      }
+    ],
+    "product_summary": "This invoice is for a payment made to SEA SWIFT PTY LTD.",
+    "bed_relevant": "no",
+    "bed_element": "other",
+    "bed_count": 0,
+    "notes": "This appears to be a payment receipt from a financial institution rather than a supplier invoice with itemized charges related to bed production. The amount paid is AUD 2,554.39.",
+    "rate_per_unit_summary": "The total payment amount was AUD 2,554.39."
+  },
+  {
+    "id": "7ed74722-92ca-4237-9d65-c8cdbae37fed",
+    "xero_id": "e602a312-1509-4b71-9fa1-0edc9f5c27da",
+    "invoice_number": "17301325130",
+    "contact_name": "Sendle",
+    "date": "2025-06-30",
+    "total": 21.05,
+    "has_attachments": true,
+    "expected_element": "freight courier",
+    "attachment": "17301325130.pdf",
+    "line_items": [
+      {
+        "description": "Adjustment charges",
+        "line_total": 21.05
+      }
+    ],
+    "product_summary": "This invoice is for adjustment charges related to shipping services provided by Sendle.",
+    "bed_relevant": "no",
+    "bed_element": "freight",
+    "bed_count": 0,
+    "notes": "The invoice indicates adjustment charges, with full details available in a CSV download.",
+    "rate_per_unit_summary": "The invoice states a total of $21.05 for adjustment charges, but no specific per-unit rate is provided."
+  },
+  {
+    "id": "f25fa3a1-f783-4411-b5cb-f8f0eb00f969",
+    "xero_id": "d4482778-868a-49c7-9313-c196e5d86519",
+    "invoice_number": "RB17394444790",
+    "contact_name": "Sendle",
+    "date": "2025-07-08",
+    "total": 405.91,
+    "has_attachments": true,
+    "expected_element": "freight courier",
+    "attachment": "17394444790.pdf",
+    "line_items": [
+      {
+        "description": "Freight for 08 Jul 2025 - 08 Jul 2025",
+        "line_total": 405.91,
+        "quantity": 1,
+        "unit_price": 405.91
+      }
+    ],
+    "product_summary": "This invoice is for freight charges from Sendle.",
+    "bed_relevant": "yes",
+    "bed_element": "freight",
+    "bed_count": 0,
+    "notes": "The invoice mentions a billing threshold of $100.00 and that this payment includes the total from the most recent order.",
+    "rate_per_unit_summary": "The total charge of $405.91 covers freight for the period 08 Jul 2025 - 08 Jul 2025."
+  },
+  {
+    "id": "e70d8c64-8e6e-40fc-a52e-d473eb4d63af",
+    "xero_id": "204d5c05-eac6-4d38-9ec6-95fa48b59978",
+    "invoice_number": "RB17394444700",
+    "contact_name": "Sendle",
+    "date": "2025-07-08",
+    "total": 324.73,
+    "has_attachments": true,
+    "expected_element": "freight courier",
+    "attachment": "17394444700.pdf",
+    "line_items": [
+      {
+        "description": "Freight",
+        "line_total": 324.73,
+        "quantity": 1,
+        "unit_price": 324.73
+      }
+    ],
+    "product_summary": "This invoice is for freight services provided by Sendle.",
+    "bed_relevant": "yes",
+    "bed_element": "freight",
+    "bed_count": 0,
+    "notes": "The total amount paid is $324.73, which triggered a billing threshold.",
+    "rate_per_unit_summary": "The invoice does not specify a per-unit rate for the freight."
+  },
+  {
+    "id": "66ad5c96-729c-4b6b-bdd4-415c7b734d47",
+    "xero_id": "aba752ba-f094-43a3-baf6-e8ffb7d572ea",
+    "invoice_number": "RB17423292610",
+    "contact_name": "Sendle",
+    "date": "2025-07-10",
+    "total": 825.41,
+    "has_attachments": true,
+    "expected_element": "freight courier",
+    "attachment": "17423292610.pdf",
+    "line_items": [
+      {
+        "description": "Shipping for the period 10 Jul 2025 - 10 Jul 2025",
+        "line_total": 825.41
+      }
+    ],
+    "product_summary": "Shipping services provided by Sendle.",
+    "bed_relevant": "yes",
+    "bed_element": "freight",
+    "bed_count": 0,
+    "notes": "The invoice states a total amount paid of $400.00 (which is the billing threshold) and also a total of $825.41. The latter is the actual invoice total.",
+    "rate_per_unit_summary": "The invoice does not state a clear per-unit rate for shipping."
+  },
+  {
+    "id": "e0b7ab80-8b38-42c8-aea3-97edf67a9cb6",
+    "xero_id": "701f87fc-177d-4917-a51d-356ee4ca23d3",
+    "invoice_number": "RB17453773480",
+    "contact_name": "Sendle",
+    "date": "2025-07-14",
+    "total": 20.92,
+    "has_attachments": true,
+    "expected_element": "freight courier",
+    "attachment": "17453773480.pdf",
+    "line_items": [
+      {
+        "description": "Sendle invoice for 10 Jul 2025 - 13 Jul 2025",
+        "line_total": 20.92,
+        "quantity": 1,
+        "unit_price": 20.92
+      }
+    ],
+    "product_summary": "This invoice is for a payment successfully processed for Sendle services.",
+    "bed_relevant": "no",
+    "bed_element": "freight",
+    "bed_count": 0,
+    "notes": "The invoice is for the Sendle service, which is a shipping provider. It is not a direct cost of bed production but rather a service used for shipping. Therefore, classifying as 'no' for bed_relevant.",
+    "rate_per_unit_summary": "N/A"
+  },
+  {
+    "id": "3ecadeb6-f077-4a0c-a5a7-c7e5f2a898ee",
+    "xero_id": "44e22dd2-7479-42e5-a5e0-062cda962d86",
+    "invoice_number": "RB17555653010",
+    "contact_name": "Sendle",
+    "date": "2025-07-21",
+    "total": 320.73,
+    "has_attachments": true,
+    "expected_element": "freight courier",
+    "attachment": "17555653010.pdf",
+    "line_items": [
+      {
+        "description": "Sendle invoice for 14 Jul 2025 - 20 Jul 2025",
+        "line_total": 320.73
+      }
+    ],
+    "product_summary": "This invoice is for a payment made to Sendle for freight services during the period of July 14-20, 2025.",
+    "bed_relevant": "yes",
+    "bed_element": "freight",
+    "bed_count": 0,
+    "notes": "The invoice mentions adjustment charges, but the full details are not available in the provided text.",
+    "rate_per_unit_summary": "No specific per-unit rate is mentioned in the invoice details."
+  },
+  {
+    "id": "315c5674-1c1c-4fcd-b145-6eb4a1622ae4",
+    "xero_id": "fe6b829b-5f17-499b-adb0-c22effce5fab",
+    "invoice_number": "RB17728009260",
+    "contact_name": "Sendle",
+    "date": "2025-08-11",
+    "total": 42.45,
+    "has_attachments": true,
+    "expected_element": "freight courier",
+    "attachment": "17728009260.pdf",
+    "line_items": [
+      {
+        "description": "Sendle invoice for 04 Aug 2025 - 10 Aug 2025",
+        "line_total": 42.45,
+        "quantity": 1,
+        "unit_price": 42.45
+      }
+    ],
+    "product_summary": "This invoice is for Sendle shipping services for the period of August 4th to August 10th, 2025.",
+    "bed_relevant": "yes",
+    "bed_element": "freight",
+    "bed_count": 0,
+    "notes": "The invoice total is $42.45. The specific breakdown of charges is available in the Sendle account.",
+    "rate_per_unit_summary": "This is a shipping invoice without a stated per-unit rate for the beds themselves."
+  },
+  {
+    "id": "3c39a589-f006-449a-8b88-c606fbdb5940",
+    "xero_id": "b08daaae-c17b-4274-93a6-f58489c3f50a",
+    "invoice_number": "00004486",
+    "contact_name": "AJ Couriers And Haulage",
+    "date": "2025-05-09",
+    "total": 1545.57,
+    "has_attachments": true,
+    "expected_element": "freight courier",
+    "attachment": "2025-06-11_15-34-38.png",
+    "line_items": [
+      {
+        "description": "10x pallet from Alice Springs Bunnings to Tennant Creek 243741",
+        "line_total": 1380,
+        "quantity": 10,
+        "unit_price": 138
+      }
+    ],
+    "product_summary": "This invoice is for freight services delivering pallets to a remote location.",
+    "bed_relevant": "yes",
+    "bed_element": "freight",
+    "bed_count": 0,
+    "notes": "The freight cost is for 10 pallets from Alice Springs to Tennant Creek.",
+    "rate_per_unit_summary": "The cost appears to be $138 per pallet excluding tax."
+  },
+  {
+    "id": "0b0e6611-e7aa-4527-bc24-cd0e91c345fc",
+    "xero_id": "310fa568-bf02-4fdf-b6d4-c7e41f0ff4a4",
+    "invoice_number": null,
+    "contact_name": "Carbatec Brisbane",
+    "date": "2026-01-05",
+    "total": 2338.7,
+    "has_attachments": true,
+    "expected_element": "tooling (capital)",
+    "attachment": "Carbatec-Brisbane-receipt.pdf",
+    "line_items": [
+      {
+        "description": "CARBATEC POWERED PHEN BENCH ROUTER TABLE W/LIFT SWITCH MICRO ADJUST & FENCE",
+        "quantity": 1,
+        "unit_price": 2338.7
+      }
+    ],
+    "product_summary": "This invoice is for a Carbatec powered Phen Bench router table with a lift switch and micro-adjust fence.",
+    "bed_relevant": "no",
+    "bed_element": "tooling",
+    "bed_count": 0,
+    "notes": "The router table is woodworking equipment and not directly related to the production of beds.",
+    "rate_per_unit_summary": "The item is priced at $2,338.70 each."
+  },
+  {
+    "id": "c2c960c8-36a6-42c7-a28c-433804c23b7c",
+    "xero_id": "4f8826dd-f0e4-49d8-a4ac-4c876f540156",
+    "invoice_number": null,
+    "contact_name": "Carbatec Brisbane",
+    "date": "2026-01-05",
+    "total": 4575.65,
+    "has_attachments": true,
+    "expected_element": "tooling (capital)",
+    "attachment": "Carbatec-Brisbane-receipt.pdf",
+    "line_items": [
+      {
+        "description": "CARBATEC POWERED PHEN BENCH ROUTER TABLE W/LIFT SWITCH",
+        "quantity": 1,
+        "unit_price": 2338.7
+      },
+      {
+        "description": "CARBATEC ROUTER TABLE FENCE SUIT SMALL TOPS",
+        "quantity": 1,
+        "unit_price": 659
+      },
+      {
+        "description": "CARBATEC ROUTER TABLE FENCE MICRO ADJUSTERS",
+        "quantity": 1,
+        "unit_price": 484
+      },
+      {
+        "description": "CARBATEC ROUTER TABLE FENCE FLIP STOP",
+        "quantity": 1,
+        "unit_price": 279
+      },
+      {
+        "description": "CARBATEC ROUTER LIFT SUIT FIXED BASE POWER UNIT",
+        "quantity": 1,
+        "unit_price": 39.95
+      },
+      {
+        "description": "CARBATEC ROUTER POWER UNIT 2400W INPUT/1800W OUTPUT",
+        "quantity": 1,
+        "unit_price": 199
+      },
+      {
+        "description": "CARBATEC ROUTER TABLE STAND BENCH MODEL 680X400",
+        "quantity": 1,
+        "unit_price": 149.9
+      },
+      {
+        "description": "CARBATEC NVR SWITCH ASSY M/HOUNT BRACKET & LEAD",
+        "quantity": 1,
+        "unit_price": 99
+      },
+      {
+        "description": "CARBATEC ROUTER TABLE TOP PHENOLIC 685x405",
+        "quantity": 1,
+        "unit_price": 13.95
+      },
+      {
+        "description": "RADIAL ARM DRILL PRESS (OLD CODE RDP-116)",
+        "quantity": 1,
+        "unit_price": 13.95
+      },
+      {
+        "description": "DUST COLLECTOR 2HP",
+        "quantity": 1,
+        "unit_price": 7.5
+      },
+      {
+        "description": "CARTRIDGE FILTER FOR DC-1200P AND FM-300",
+        "quantity": 1,
+        "unit_price": 7.5
+      },
+      {
+        "description": "PLASTIC COLLECTION BAGS XL SUIT ST0MM DIAMETER",
+        "quantity": 1,
+        "unit_price": 7.5
+      },
+      {
+        "description": "DRILL PRESS TABLE 1 C # 9KG 69+44+7 Си",
+        "quantity": 1,
+        "unit_price": 199
+      },
+      {
+        "description": "DUST EXTRACTION KIT HOSE CLEAR PVC 3M BOXED 1 C @2.1KG 92*13*13 CM",
+        "quantity": 2,
+        "unit_price": 49.5
+      },
+      {
+        "description": "2-1/2IN RUBBER COLLER WITH CLAMPS",
+        "quantity": 1,
+        "unit_price": 13.95
+      },
+      {
+        "description": "2-1/2IN RUBBER COLLER WITH CLAMPS",
+        "quantity": 1,
+        "unit_price": 13.95
+      },
+      {
+        "description": "TAPERED REDUCER 4IN TO 2.5IN",
+        "quantity": 1,
+        "unit_price": 7.5
+      },
+      {
+        "description": "TAPERED REDUCER 4IN TO 2.5IN",
+        "quantity": 1,
+        "unit_price": 7.5
+      },
+      {
+        "description": "TAPERED REDUCER 4IN TO 2.5IN",
+        "quantity": 1,
+        "unit_price": 7.5
+      },
+      {
+        "description": "CMT DOUBLE-BEARING SPIRAL FLUSH TRIM BIT",
+        "quantity": 1,
+        "unit_price": 199
+      },
+      {
+        "description": "CMT ROUNDOVER BIT",
+        "quantity": 1,
+        "unit_price": 43.9
+      },
+      {
+        "description": "DUST CONNECTOR 100MM",
+        "quantity": 1,
+        "unit_price": 8.45
+      },
+      {
+        "description": "DUST CONNECTOR 100MM",
+        "quantity": 1,
+        "unit_price": 8.45
+      },
+      {
+        "description": "DUST CONNECTOR 100MM",
+        "quantity": 1,
+        "unit_price": 8.45
+      },
+      {
+        "description": "DUST CONNECTOR 100MM",
+        "quantity": 1,
+        "unit_price": 8.45
+      }
+    ],
+    "product_summary": "This invoice is for woodworking equipment including router tables, dust extractors, and various accessories.",
+    "bed_relevant": "no",
+    "bed_element": "other",
+    "bed_count": 0,
+    "notes": "This invoice appears to be for general woodworking tools rather than specific components for the ACT Goods on Country project's flat-pack beds.",
+    "rate_per_unit_summary": "The invoice indicates a price of $49.50 per meter for the clear PVC hose, as 2 meters were purchased for $99.00."
+  },
+  {
+    "id": "fb3ebf91-e074-457a-a99c-0cc1e5b24166",
+    "xero_id": "6bf82502-d122-45ab-8f1c-843415d36441",
+    "invoice_number": null,
+    "contact_name": "Carbatec QLD Warehouse",
+    "date": "2026-01-11",
+    "total": 1319,
+    "has_attachments": true,
+    "expected_element": "tooling (capital)",
+    "attachment": "Carbatec-QLD-Warehouse-receipt.pdf",
+    "line_items": [
+      {
+        "description": "RIKON 14IN BANDSAW WITH OPEN STAND",
+        "quantity": 1,
+        "unit_price": 1319
+      }
+    ],
+    "product_summary": "This invoice is for a RIKON 14IN BANDSAW WITH OPEN STAND.",
+    "bed_relevant": "indirect",
+    "bed_element": "tooling",
+    "bed_count": 0,
+    "notes": "This is a bandsaw, which can be used for cutting steel, plastic, or wood. It is considered tooling for the production process.",
+    "rate_per_unit_summary": "The bandsaw was purchased at a unit price of $1,319.00 each."
+  },
+  {
+    "id": "02b336e8-c7dc-4bcc-91f4-a73049c0c613",
+    "xero_id": "8e0c1987-71ee-494e-bbfb-a3f716485af1",
+    "invoice_number": null,
+    "contact_name": "Carbatec Brisbane",
+    "date": "2026-01-11",
+    "total": 1811.7,
+    "has_attachments": true,
+    "expected_element": "tooling (capital)",
+    "attachment": "Carbatec-Brisbane-receipt.jpg",
+    "line_items": [
+      {
+        "description": "DUST Y JUNCTION 4 INCH PLAST",
+        "quantity": 1,
+        "unit_price": 14.9
+      },
+      {
+        "description": "CMT FORSTNER BIT TCT 28MM",
+        "quantity": 1,
+        "unit_price": 81
+      },
+      {
+        "description": "CMT PATTERN BIT SHORT",
+        "quantity": 1,
+        "unit_price": 59.9
+      },
+      {
+        "description": "CMT PATTERN BIT SHORT",
+        "quantity": 1,
+        "unit_price": 41
+      },
+      {
+        "description": "CMT STRAIGHT BIT LONG",
+        "quantity": 1,
+        "unit_price": 8.9
+      },
+      {
+        "description": "FORSTNER STYLE BIT 10MM METRIC",
+        "quantity": 1,
+        "unit_price": 82
+      },
+      {
+        "description": "CMT PATTERN BIT LONG",
+        "quantity": 1,
+        "unit_price": 55
+      },
+      {
+        "description": "CMT FLUSH TRIM BIT",
+        "quantity": 1,
+        "unit_price": 65
+      },
+      {
+        "description": "CMT FLUSH TRIM BIT",
+        "quantity": 1,
+        "unit_price": 44
+      },
+      {
+        "description": "ROCKLER 4IN DUST RIGHT QUICK FIT HANDLE",
+        "quantity": 1,
+        "unit_price": 41
+      },
+      {
+        "description": "BANDSAW BLADE 2490X10MMX6TPI",
+        "quantity": 1,
+        "unit_price": 1319
+      }
+    ],
+    "product_summary": "This invoice is for various drill bits and a bandsaw blade.",
+    "bed_relevant": "no",
+    "bed_element": "other",
+    "bed_count": 0,
+    "notes": "This invoice appears to be for tools rather than materials for the beds.",
+    "rate_per_unit_summary": "N/A"
+  },
+  {
+    "id": "ba162afc-dfa8-4789-b9bd-957d62605192",
+    "xero_id": "d253ac6f-ead0-43ec-9547-898017c05268",
+    "invoice_number": "INV20251",
+    "contact_name": "R M Tanner",
+    "date": "2025-05-13",
+    "total": 19950,
+    "has_attachments": true,
+    "expected_element": "capital asset",
+    "attachment": "16847308420.pdf",
+    "line_items": [
+      {
+        "description": "Triple Axle Tiny House Trailer VIN attachment",
+        "line_total": 19950,
+        "quantity": 1,
+        "unit_price": 19950
+      }
+    ],
+    "product_summary": "This invoice is for the purchase of a triple axle tiny house trailer with VIN attachment.",
+    "bed_relevant": "no",
+    "bed_element": "other",
+    "bed_count": 0,
+    "notes": "The trailer may be used for transporting materials or finished beds, but is not a direct component of the bed itself.",
+    "rate_per_unit_summary": "The rate for the trailer with VIN attachment is $19,950.00 per unit."
+  },
+  {
+    "id": "b048ca29-bf91-4c81-8dc9-0113d3a1d1bc",
+    "xero_id": "9c1028d1-ca51-4eb0-828b-7a66dfa251eb",
+    "invoice_number": "5",
+    "contact_name": "Endless Parks",
+    "date": "2025-05-20",
+    "total": 7700,
+    "has_attachments": true,
+    "expected_element": "design / R&D",
+    "attachment": "17286857900.pdf",
+    "line_items": [
+      {
+        "description": "Design & Research",
+        "quantity": 1,
+        "unit_price": 2500
+      },
+      {
+        "description": "Intro Batch 250 units",
+        "quantity": 250,
+        "unit_price": 18
+      }
+    ],
+    "product_summary": "This invoice is for design and research services, and an introductory batch of units.",
+    "bed_relevant": "indirect",
+    "bed_element": "R&D",
+    "bed_count": 0,
+    "notes": "The invoice includes design and research costs, and a batch of 250 units, which are likely components or early prototypes for the project.",
+    "rate_per_unit_summary": "The introductory batch units are priced at $18.00 per unit."
+  },
+  {
+    "id": "12bffa9e-ef33-4ece-967b-2992ee5e3823",
+    "xero_id": "48a2c5ef-6844-4ba1-955c-de87f26e0de5",
+    "invoice_number": "INV-5102",
+    "contact_name": "Bionic Group",
+    "date": "2026-01-21",
+    "total": 4705,
+    "has_attachments": true,
+    "expected_element": "capital?",
+    "attachment": "19353788300.pdf",
+    "line_items": [
+      {
+        "description": "INV-5102",
+        "line_total": 4705,
+        "quantity": 1,
+        "unit_price": 4705
+      }
+    ],
+    "product_summary": "This invoice is for a payment made via card for an invoice from Bionic Group.",
+    "bed_relevant": "no",
+    "bed_element": "other",
+    "bed_count": 0,
+    "notes": "This is a payment receipt, not a detailed invoice with line items for specific goods or services.",
+    "rate_per_unit_summary": "N/A"
+  },
+  {
+    "id": "75cbd2d7-a9a1-4166-abc1-a28b25a343aa",
+    "xero_id": "eb2ce52f-44d6-4011-8a03-b6ed953df8c7",
+    "invoice_number": "INV-0008",
+    "contact_name": "Openfields Solutions",
+    "date": "2025-08-21",
+    "total": 5800,
+    "has_attachments": true,
+    "expected_element": "manufacture?",
+    "attachment": "17814690070.pdf",
+    "line_items": [
+      {
+        "description": "Current Sensor",
+        "quantity": 10,
+        "unit_price": 400
+      },
+      {
+        "description": "Subscription Discounted - Annual",
+        "quantity": 10,
+        "unit_price": 60
+      },
+      {
+        "description": "Labour - Daily",
+        "quantity": 2.5,
+        "unit_price": 480
+      }
+    ],
+    "product_summary": "This invoice is for the purchase of sensors, subscription services, and daily labour.",
+    "bed_relevant": "no",
+    "bed_element": "other",
+    "bed_count": 0,
+    "notes": "This invoice is for sensors and subscription services, not directly for bed production.",
+    "rate_per_unit_summary": "The unit price for Current Sensor is $400.00, for Subscription Discounted - Annual is $60.00, and for Labour - Daily is $480.00."
+  },
+  {
+    "id": "4367f585-e435-4db0-8e10-7f83291b5e79",
+    "xero_id": "14862ae8-a0e7-4a35-9d7d-d4399ae70dd5",
+    "invoice_number": "TMUT199428",
+    "contact_name": "Trademutt",
+    "date": "2025-10-27",
+    "total": 3270.26,
+    "has_attachments": true,
+    "expected_element": "PPE / branded",
+    "attachment": "18487293990.pdf",
+    "line_items": [
+      {
+        "description": "WOMEN'S FLOCK AROUND & FIND OUT ORANGE DAY/NIGHT HI VIS WORK SHIRT 10- SKU: 22244-10",
+        "quantity": 2,
+        "unit_price": 79
+      },
+      {
+        "description": "WOMEN'S FLOCK AROUND & FIND OUT ORANGE DAY/NIGHT HI VIS WORK SHIRT 12- SKU: 22244-12",
+        "quantity": 2,
+        "unit_price": 79
+      },
+      {
+        "description": "WOMEN'S FLOCK AROUND & FIND OUT ORANGE DAY/NIGHT HI VIS WORK SHIRT 14- SKU: 22244-14",
+        "quantity": 3,
+        "unit_price": 79
+      },
+      {
+        "description": "WOMEN'S FLOCK AROUND & FIND OUT ORANGE DAY/NIGHT HI VIS WORK SHIRT 16 SKU: 22244-16",
+        "quantity": 1,
+        "unit_price": 79
+      },
+      {
+        "description": "WOMEN'S FLOCK AROUND & FIND OUT ORANGE DAY/NIGHT HI VIS WORK SHIRT 18- SKU: 22244-18",
+        "quantity": 7,
+        "unit_price": 79
+      },
+      {
+        "description": "WOMEN'S FLOCK AROUND & FIND OUT ORANGE DAY/NIGHT HI VIS WORK SHIRT 22 - SKU: 22244-22",
+        "quantity": 1,
+        "unit_price": 79
+      },
+      {
+        "description": "WOMEN'S FLOCK AROUND & FIND OUT ORANGE DAY/NIGHT HI VIS WORK SHIRT 20- SKU: 22244-20",
+        "quantity": 1,
+        "unit_price": 79
+      },
+      {
+        "description": "KIDS LIGHT WEIGHT FLOCK AROUND & FIND OUT WORK SHIRT 14 - SKU: 22246-14",
+        "quantity": 1,
+        "unit_price": 59
+      },
+      {
+        "description": "KIDS LIGHT WEIGHT FLOCK AROUND & FIND OUT WORK SHIRT 8-SKU: 22246-8",
+        "quantity": 1,
+        "unit_price": 59
+      },
+      {
+        "description": "KIDS LIGHT WEIGHT FLOCK AROUND & FIND OUT WORK SHIRT 2-SKU: 22246-2",
+        "quantity": 1,
+        "unit_price": 59
+      },
+      {
+        "description": "KIDS LIGHT WEIGHT FLOCK AROUND & FIND OUT WORK SHIRT 4-SKU: 22246-4",
+        "quantity": 1,
+        "unit_price": 59
+      },
+      {
+        "description": "KIDS LIGHT WEIGHT FLOCK AROUND & FIND OUT WORK SHIRT 12 - SKU: 22246-12",
+        "quantity": 5,
+        "unit_price": 59
+      },
+      {
+        "description": "MEN'S FLOCK AROUND & FIND OUT ORANGE DAY/NIGHT HI VIS WORK SHIRT S-SKU: 22241-S",
+        "quantity": 2,
+        "unit_price": 79
+      },
+      {
+        "description": "MEN'S FLOCK AROUND & FIND OUT ORANGE DAY/NIGHT HI VIS WORK SHIRT M-SKU: 22241-M",
+        "quantity": 3,
+        "unit_price": 79
+      },
+      {
+        "description": "MEN'S FLOCK AROUND & FIND OUT ORANGE DAY/NIGHT HI VIS WORK SHIRT L-SKU: 22241-L",
+        "quantity": 6,
+        "unit_price": 79
+      },
+      {
+        "description": "MEN'S FLOCK AROUND & FIND OUT ORANGE DAY/NIGHT HI VIS WORK SHIRT XL - SKU: 22241-XL",
+        "quantity": 1,
+        "unit_price": 79
+      },
+      {
+        "description": "MEN'S FLOCK AROUND & FIND OUT ORANGE DAY/NIGHT HI VIS WORK SHIRT 2XL - SKU: 22241-2XL",
+        "quantity": 4,
+        "unit_price": 79
+      },
+      {
+        "description": "MEN'S FLOCK AROUND &res FIND OUT ORANGE DAY/NIGHT HI VIS WORK SHIRT 3XL - SKU: 22241-3XL",
+        "quantity": 5,
+        "unit_price": 79
+      },
+      {
+        "description": "MEN'S FLOCK AROUND & FIND OUT ORANGE DAY/NIGHT HI VIS WORK SHIRT 4XL - SKU: 22241-4XL",
+        "quantity": 1,
+        "unit_price": 79
+      },
+      {
+        "description": "EXPRESS",
+        "quantity": 1,
+        "unit_price": 19.46
+      }
+    ],
+    "product_summary": "This invoice is for various work shirts and related express shipping costs.",
+    "bed_relevant": "no",
+    "bed_element": "other",
+    "bed_count": 0,
+    "notes": "This invoice is for branded workwear, not for the ACT Goods on Country project's beds.",
+    "rate_per_unit_summary": "The unit price for most women's and men's work shirts is $79.00, and for kids' work shirts is $59.00."
+  },
+  {
+    "id": "e3fe61d4-1374-4236-9de4-a9368825ab83",
+    "xero_id": "ecf2f32e-ce55-4b59-8033-7850dd84d532",
+    "invoice_number": "6230",
+    "contact_name": "NQ Clothing",
+    "date": "2025-09-19",
+    "total": 2000,
+    "has_attachments": true,
+    "expected_element": "branded merch",
+    "attachment": "18107237150.pdf",
+    "line_items": [
+      {
+        "description": "Sponsor Sponsorship INV6095",
+        "quantity": 1,
+        "unit_price": 2000
+      }
+    ],
+    "product_summary": "This invoice is for sponsorship, not for goods related to bed production.",
+    "bed_relevant": "no",
+    "bed_element": "branding",
+    "bed_count": 0,
+    "notes": "The invoice is for sponsorship and does not contain line items related to bed production.",
+    "rate_per_unit_summary": "The rate is 2,000.00 for the sponsorship."
+  },
+  {
+    "id": "bb71c599-7efd-4d10-8814-fbe88e07c15a",
+    "xero_id": "0be890c7-aeee-4428-90fa-1553f386ffae",
+    "invoice_number": null,
+    "contact_name": "ePrint",
+    "date": "2026-03-12",
+    "total": 811.2,
+    "has_attachments": true,
+    "expected_element": "printing",
+    "attachment": "receipt.pdf",
+    "line_items": [
+      {
+        "description": "Brochures: 1800 Quantity",
+        "quantity": 1800,
+        "unit_price": 0.37
+      },
+      {
+        "description": "Flyer: 900 Quantity",
+        "quantity": 900,
+        "unit_price": 0.16
+      }
+    ],
+    "product_summary": "This invoice is for the printing of brochures and flyers.",
+    "bed_relevant": "no",
+    "bed_element": "branding",
+    "bed_count": 0,
+    "notes": "The pricing for Item 1 (Brochures) implies a unit price of $0.37 ($664.50 / 1800). The pricing for Item 2 (Flyer) implies a unit price of $0.16 ($146.70 / 900).",
+    "rate_per_unit_summary": "The unit price for brochures is approximately $0.37 per brochure, and the unit price for flyers is approximately $0.16 per flyer."
+  },
+  {
+    "id": "5c9c61cd-1a6a-40bd-9a06-59410a4b2123",
+    "xero_id": "2884dfaa-b8da-4f95-a908-51af987ee110",
+    "invoice_number": null,
+    "contact_name": "ePrint",
+    "date": "2026-03-20",
+    "total": 931.41,
+    "has_attachments": true,
+    "expected_element": "printing",
+    "attachment": "receipt.pdf",
+    "line_items": [
+      {
+        "description": "Brochures SETUP",
+        "line_total": 664.5,
+        "quantity": 1,
+        "unit_price": 664.5
+      },
+      {
+        "description": "Flyer SETUP",
+        "line_total": 146.7,
+        "quantity": 1,
+        "unit_price": 146.7
+      },
+      {
+        "description": "Shippit (Estimated Freight Times Only - Excludes Production Times) : Eparcel (2 business days)",
+        "line_total": 35.54,
+        "quantity": 1,
+        "unit_price": 35.54
+      }
+    ],
+    "product_summary": "This invoice is for printing services including brochures and flyers, and associated shipping costs.",
+    "bed_relevant": "no",
+    "bed_element": "other",
+    "bed_count": 0,
+    "notes": "The customer is ordering printing for marketing materials related to a project (ACT Goods on Country) that involves making beds, but the printing itself is not a direct component of the beds.",
+    "rate_per_unit_summary": "Approx $0.37 per brochure, Approx $0.16 per flyer"
+  }
+]

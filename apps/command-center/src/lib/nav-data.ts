@@ -3,6 +3,7 @@ import {
   Calendar,
   Users,
   Layers,
+  Tags,
   FolderKanban,
   Scale,
   Heart,
@@ -21,13 +22,17 @@ import {
   BarChart,
   KanbanSquare,
   TrendingUp,
-  Tag,
   ClipboardCheck,
   Compass,
   Sparkles,
   Target,
   Receipt,
-  ClipboardList,
+  Bot,
+  Activity,
+  Search,
+  Building2,
+  AlertOctagon,
+  CalendarClock,
 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 
@@ -40,6 +45,8 @@ export interface SidebarNavItem {
   color?: string
   bg?: string
   children?: SidebarNavItem[]
+  /** Render as a non-clickable section header inside a children list. */
+  divider?: boolean
 }
 
 export interface SidebarNavGroup {
@@ -57,6 +64,7 @@ export const navStructure: SidebarNavGroup[] = [
     label: '',
     items: [
       { href: '/company', label: 'Company', icon: Sparkles, color: 'text-indigo-400', bg: 'bg-indigo-500/20' },
+      { href: '/eofy', label: 'EOFY Cutover', icon: CalendarClock, color: 'text-red-400', bg: 'bg-red-500/20' },
       { href: '/today', label: 'Today', icon: Sun },
       { href: '/strategy', label: 'Strategy', icon: Compass, color: 'text-amber-400', bg: 'bg-amber-500/20' },
       { href: '/calendar', label: 'Calendar', icon: Calendar },
@@ -67,7 +75,9 @@ export const navStructure: SidebarNavGroup[] = [
     id: 'relationships',
     label: 'Relationships',
     items: [
+      { href: '/supporters', label: 'Supporters', icon: Users, color: 'text-emerald-400', bg: 'bg-emerald-500/20' },
       { href: '/pipeline', label: 'Pipeline', icon: Handshake, color: 'text-indigo-400', bg: 'bg-indigo-500/20' },
+      { href: '/analytics', label: 'Ecosystem Analytics', icon: BarChart3, color: 'text-violet-400', bg: 'bg-violet-500/20' },
       { href: '/people', label: 'People', icon: Users },
     ],
     defaultExpanded: true,
@@ -101,20 +111,48 @@ export const navStructure: SidebarNavGroup[] = [
         label: 'Finance',
         icon: DollarSign,
         children: [
-          { href: '/finance/review', label: 'The Review', icon: ClipboardList, color: 'text-amber-400', bg: 'bg-amber-500/20' },
-          { href: '/finance/overview', label: 'Overview', icon: Layers, color: 'text-emerald-400', bg: 'bg-emerald-500/20' },
-          { href: '/finance/project-plan', label: 'Project Plans', icon: Target, color: 'text-indigo-400', bg: 'bg-indigo-500/20' },
+          // 2026-05-08 cleanup — retired: tagger, tagger-bulk, pipeline-viz, pipeline-kanban, project-plan, self-reliance, vendor-rules-suggest.
+          // 2026-05-16 cleanup — retired: revenue-planning, review (see thoughts/shared/handoffs/2026-05-16-money-audit/).
+          // 2026-05-29 P4 consolidation (finance-cockpit-consolidation plan) — collapsed to
+          // State · Operate · Drill · Reports. The operate work-tools (command, money-alignment,
+          // workbench, tagger-v2, receipts-triage, reconciliation, ai-suggestions, dext-push-audit,
+          // actions) are NOT in the sidebar anymore — they're reached via the Operate surface's
+          // tab-bar (/finance/xero-page-copilot). They stay LIVE (no _archived move — the tab-bar
+          // links them; the 2026-05-21/05-27 reviews showed naive archiving 404s live pages).
+          // command + money-alignment are redirect stubs → /finance/overview (P2).
+
+          // ALIGN — the Xero mirror: tag-alignment + per-project in/out + flags (mirror plan 2026-05-29)
+          { href: '/finance/mirror', label: 'Align · Mirror', icon: Tags, color: 'text-cyan-400', bg: 'bg-cyan-500/20' },
+
+          // STATE — where are we right now (trust meters + money state)
+          { href: '#state', label: 'State', icon: BarChart3, divider: true },
+          { href: '/finance/overview', label: 'State · Cockpit', icon: Layers, color: 'text-emerald-400', bg: 'bg-emerald-500/20' },
+          { href: '/finance/project-money', label: 'State · Project Money', icon: DollarSign, color: 'text-emerald-400', bg: 'bg-emerald-500/20' },
+          { href: '/finance/close', label: 'State · Close pack', icon: ClipboardCheck, color: 'text-cyan-400', bg: 'bg-cyan-500/20' },
+
+          // OPERATE — get to 100% (full toolset lives in the Operate tab-bar)
+          { href: '#operate', label: 'Operate', icon: ClipboardCheck, divider: true },
+          { href: '/finance/xero-page-copilot', label: 'Operate · Reconcile', icon: Bot, color: 'text-cyan-400', bg: 'bg-cyan-500/20' },
+
+          // DRILL — per-project P&L + cleanup/exceptions + browse
+          { href: '#drill', label: 'Drill', icon: Search, divider: true },
           { href: '/finance/projects', label: 'Projects P&L', icon: BarChart3, color: 'text-green-400', bg: 'bg-green-500/20' },
-          { href: '/finance/pipeline-kanban', label: 'Pipeline Kanban', icon: KanbanSquare, color: 'text-indigo-400', bg: 'bg-indigo-500/20' },
+          { href: '/finance/audit', label: 'Spend Audit', icon: AlertOctagon, color: 'text-red-400', bg: 'bg-red-500/20' },
+          { href: '/finance/transactions', label: 'All Transactions', icon: Search, color: 'text-blue-400', bg: 'bg-blue-500/20' },
+          { href: '/finance/vendors', label: 'Vendors', icon: Building2, color: 'text-purple-400', bg: 'bg-purple-500/20' },
+          { href: '/finance/funders', label: 'Funders', icon: Users, color: 'text-cyan-400', bg: 'bg-cyan-500/20' },
+
+          // REPORTS — role/period outputs
+          { href: '#reports', label: 'Reports', icon: Landmark, divider: true },
           { href: '/finance/board', label: 'Board Report', icon: Landmark, color: 'text-blue-400', bg: 'bg-blue-500/20' },
-          { href: '/finance/tagger-v2', label: 'Rapid Tagger', icon: Tag, color: 'text-amber-400', bg: 'bg-amber-500/20' },
-          { href: '/finance/tagger-bulk', label: 'Bulk Tagger', icon: Layers, color: 'text-purple-400', bg: 'bg-purple-500/20' },
-          { href: '/finance/reconciliation', label: 'Receipt Intelligence', icon: ClipboardCheck, color: 'text-cyan-400', bg: 'bg-cyan-500/20' },
-          { href: '/finance/accountant', label: 'Accountant', icon: Calculator, color: 'text-orange-400', bg: 'bg-orange-500/20' },
-          { href: '/finance/invoices', label: 'Invoice Command', icon: Receipt, color: 'text-emerald-400', bg: 'bg-emerald-500/20' },
-          { href: '/finance/pipeline', label: 'Pipeline Confidence', icon: Target, color: 'text-indigo-400', bg: 'bg-indigo-500/20' },
+          { href: '/finance/accountant', label: 'Accountant Pack', icon: Calculator, color: 'text-orange-400', bg: 'bg-orange-500/20' },
           { href: '/finance/revenue', label: 'Revenue Sequencing', icon: TrendingUp, color: 'text-purple-400', bg: 'bg-purple-500/20' },
-          { href: '/finance/revenue-planning', label: 'Revenue Planning', icon: TrendingUp, color: 'text-purple-400', bg: 'bg-purple-500/20' },
+          { href: '/finance/pipeline', label: 'Pipeline', icon: Target, color: 'text-indigo-400', bg: 'bg-indigo-500/20' },
+          { href: '/finance/invoices', label: 'Invoice Command', icon: Receipt, color: 'text-emerald-400', bg: 'bg-emerald-500/20' },
+
+          { href: '#hub', label: 'Hub', icon: DollarSign, divider: true },
+          { href: '/finance', label: 'All finance (hub)', icon: DollarSign, color: 'text-foreground', bg: 'bg-white/10' },
+          { href: '/admin/sync-health', label: 'Sync Health', icon: Activity, color: 'text-neutral-400', bg: 'bg-neutral-500/20' },
         ],
       },
     ],
@@ -151,7 +189,8 @@ const roleGroupAccess: Record<Role, string[]> = {
   team: ['dashboard', 'relationships', 'projects', 'knowledge'],
 }
 
-// Board members only see overview + board report within finance
+// Board members see the executive State cockpit + board report + finance hub.
+// (/finance/command folded into /finance/overview — 2026-05-29 P4 consolidation.)
 const boardFinanceHrefs = new Set(['/finance', '/finance/overview', '/finance/board'])
 
 export function filterNavForRole(role: Role): SidebarNavGroup[] {

@@ -1,3 +1,15 @@
+---
+title: CivicGraph
+status: Active
+canonical_slug: civicgraph
+canonical_code: ACT-CS
+tier: satellite
+website_slug: civicgraph
+website_path: /projects/civicgraph
+public_surface: project
+cluster: civicgraph
+---
+
 # CivicGraph
 
 > 587,390 entities connected by 1,535,772 relationships across 254 tables and 29.5M records. Making government spending, influence, and outcomes visible.
@@ -53,7 +65,7 @@ It is the **systemic data layer** of [[third-reality|The Third Reality]] and the
 - Federal Contracts: 85% (791K records)
 - Foundations: 100% (10.8K records)
 - Political Donations: 59% (313K records)
-- ALMA Interventions: 56% (1.4K records)
+- ALMA-governed intervention records: 56% (1.4K records)
 
 ### Cross-System Influence
 

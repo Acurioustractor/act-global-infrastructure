@@ -1,3 +1,15 @@
+---
+title: Community Capital
+status: Active
+canonical_slug: community-capital
+canonical_code: ACT-CP
+tier: satellite
+website_slug: community-capital
+website_path: /projects/community-capital
+public_surface: project
+cluster: community-capital
+---
+
 # Community Capital
 
 > The gap between community organisations doing extraordinary work and the capital that could sustain them is not a knowledge gap. It's a relationship gap.
@@ -103,7 +115,7 @@ LCAA arc for Community Capital:
 
 - [[civicgraph|CivicGraph]] — data layer mapping funding flows that Community Capital navigates
 - [[funding-transparency|Funding Transparency]] — the concept Community Capital enacts in practice
-- [[custodian-economy|Custodian Economy]] — the stewardship economic model that Community Capital's convening helps fund and legitimise
+- [[custodian-first-economy|Custodian First Economy]]: partner program ACT works with around young people on youth justice orders
 - [[act-farm|ACT Farm]] — where Community Capital's program now has a physical home
 - [[black-cockatoo-valley|Black Cockatoo Valley]] — the land the year of accommodation runs on
 - [[the-caravan|The Caravan]] — built for Phase 1, resident at BCV

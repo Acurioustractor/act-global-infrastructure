@@ -12,6 +12,7 @@ import {
   Sun,
   Moon,
   ChevronRight,
+  ArrowUpRight,
   FolderKanban,
   BookOpen,
   User,
@@ -23,27 +24,25 @@ import {
   Send,
   Edit3,
   Check,
+  Target,
+  Mail,
+  TrendingUp,
 } from 'lucide-react'
 import {
   getCalendarEvents,
+  getMorningBriefing,
+  getPendingCommunications,
   saveCalendarNote,
   search,
   searchKnowledge,
   type KnowledgeSearchHit,
+  type MorningBriefingPriority,
 } from '@/lib/api'
 import { cn, getGreeting } from '@/lib/utils'
-import { QuickStats } from '@/components/today/quick-stats'
 import { CommunicationsNeeded } from '@/components/today/communications-needed'
-import { GrantsPipeline } from '@/components/today/grants-pipeline'
 import { UpcomingDeadlines } from '@/components/today/upcoming-deadlines'
 import { FinanceSummary } from '@/components/today/finance-summary'
 import { BusinessTasks } from '@/components/today/business-tasks'
-import { MorningBriefing } from '@/components/today/morning-briefing'
-import { ProjectPulseGrid } from '@/components/today/project-pulse'
-import { PriorityInbox } from '@/components/today/priority-inbox'
-import { WeeklyDigestCard } from '@/components/today/weekly-digest'
-import { EcosystemPulse } from '@/components/today/ecosystem-pulse'
-import { PartnerTouchpoints } from '@/components/today/partner-touchpoints'
 import { DailyPriorities } from '@/components/today/daily-priorities'
 import { PipelineSnapshot } from '@/components/today/pipeline-snapshot'
 
@@ -187,111 +186,255 @@ export default function TodayPage() {
         </div>
       </header>
 
-      {/* Quick Stats Bar */}
-      <div className="mb-6 md:mb-8 animate-fade-in">
-        <QuickStats />
+      <div className="space-y-4 md:space-y-6 animate-fade-in">
+        <TodayOperatingFocus eventsCount={events.length} />
+
+        <div className="grid grid-cols-1 xl:grid-cols-12 gap-4 md:gap-6">
+          <main className="xl:col-span-7 space-y-4 md:space-y-6">
+            <DailyPriorities />
+            <CommunicationsNeeded />
+          </main>
+
+          <aside className="xl:col-span-5 space-y-4 md:space-y-6">
+            <ScheduleCard events={events} />
+            <FinanceSummary />
+            <BusinessTasks />
+            <PipelineSnapshot />
+            <UpcomingDeadlines />
+            <QuickLinkGrid />
+          </aside>
+        </div>
       </div>
+    </div>
+  )
+}
 
-      {/* Main 3-Column Layout */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 md:gap-6">
-        {/* LEFT COLUMN: Briefing + Schedule + People */}
-        <div className="order-1 lg:col-span-4 space-y-4 md:space-y-6">
-          <MorningBriefing />
+type TodayCalendarEvent = {
+  id: string
+  title: string
+  start_time: string
+  link?: string
+  is_all_day?: boolean
+  event_type?: string | null
+  attendees?: Array<{ email: string; name?: string }>
+}
 
-          {/* Today's Calendar */}
-          <div className="glass-card p-5 md:p-6">
-            <div className="flex items-center justify-between mb-4">
-              <Link href="/calendar" className="text-lg font-semibold text-white flex items-center gap-2 hover:text-indigo-300 transition-colors">
-                <Calendar className="h-5 w-5 text-indigo-400" />
-                Today's Schedule
-                <ChevronRight className="h-4 w-4 text-white/30" />
-              </Link>
-              <span className="text-sm text-white/50">{events.length} events</span>
-            </div>
-            {events.length === 0 ? (
-              <div className="text-center py-6 text-white/40">
-                <Calendar className="h-10 w-10 mx-auto mb-2 opacity-50" />
-                <p>No events today</p>
-              </div>
-            ) : (
-              <div className="space-y-2">
-                {events.slice(0, 5).map((event) => (
-                  <CalendarEventCard key={event.id} event={event} />
-                ))}
-              </div>
+const PRIORITY_SOURCE_LABELS: Record<string, string> = {
+  invoice_chase: 'Invoice',
+  grant_deadline: 'Grant',
+  deal_risk: 'Deal',
+  email_followup: 'Email',
+  overdue_action: 'Overdue action',
+  pipeline_progression: 'Pipeline',
+  calendar_deadline: 'Deadline',
+  insight: 'Insight',
+}
+
+function formatCompactCurrency(value: number): string {
+  const abs = Math.abs(value)
+
+  if (abs >= 1000000) {
+    return `$${(value / 1000000).toFixed(1)}M`
+  }
+
+  if (abs >= 1000) {
+    return `$${Math.round(value / 1000)}K`
+  }
+
+  return `$${value.toLocaleString()}`
+}
+
+function cleanPriorityTitle(priority?: MorningBriefingPriority | null): string {
+  return priority?.title?.replace(/^Domino:\s*/i, '') || 'No urgent priority selected'
+}
+
+function TodayOperatingFocus({ eventsCount }: { eventsCount: number }) {
+  const { data: briefing, isLoading } = useQuery({
+    queryKey: ['briefing', 'morning'],
+    queryFn: getMorningBriefing,
+    refetchInterval: 5 * 60 * 1000,
+  })
+
+  const { data: communications } = useQuery({
+    queryKey: ['communications', 'pending'],
+    queryFn: getPendingCommunications,
+    refetchInterval: REFRESH_INTERVAL,
+  })
+
+  const priorities = briefing?.priorities?.items || []
+  const primary = priorities[0]
+  const nowCount = briefing?.priorities?.nowCount || priorities.filter((item) => item.priority === 'now').length
+  const pendingReplies = communications?.total || briefing?.communications?.needToRespondCount || 0
+  const pipelineValue = briefing?.summary?.pipelineValue || 0
+
+  return (
+    <section className="rounded-2xl border border-white/10 bg-white/[0.045] p-5 shadow-2xl shadow-black/20 md:p-6 lg:p-7">
+      <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+        <div className="min-w-0 flex-1">
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="inline-flex items-center gap-2 rounded-full border border-amber-500/25 bg-amber-500/10 px-3 py-1 text-xs font-medium uppercase tracking-wide text-amber-300">
+              <Target className="h-3.5 w-3.5" />
+              Start here
+            </span>
+            {nowCount > 0 && (
+              <span className="rounded-full border border-red-500/20 bg-red-500/10 px-3 py-1 text-xs text-red-300">
+                {nowCount} now
+              </span>
             )}
           </div>
 
-          <CommunicationsNeeded />
-          <PartnerTouchpoints />
-        </div>
-
-        {/* CENTER COLUMN: Priorities + Ecosystem Pulse + Project Pulse + Priority Inbox */}
-        <div className="order-2 lg:col-span-4 space-y-4 md:space-y-6">
-          <DailyPriorities />
-          <EcosystemPulse />
-          <ProjectPulseGrid />
-          <PriorityInbox />
-
-          {/* Wiki & Dream Journal Quick Access */}
-          <div className="grid grid-cols-2 gap-3">
-            <Link href="/wiki" className="glass-card p-4 block hover:border-indigo-500/30 transition-all group">
-              <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-500/20 to-purple-500/20 flex items-center justify-center">
-                  <BookOpen className="h-4 w-4 text-indigo-400" />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <h2 className="font-semibold text-sm text-white group-hover:text-indigo-300 transition-colors">ACT Wiki</h2>
-                  <p className="text-[11px] text-white/50 truncate">Mission & stories</p>
-                </div>
-              </div>
-            </Link>
-            <Link href="/dreams" className="glass-card p-4 block hover:border-purple-500/30 transition-all group">
-              <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-purple-500/20 to-pink-500/20 flex items-center justify-center">
-                  <Edit3 className="h-4 w-4 text-purple-400" />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <h2 className="font-semibold text-sm text-white group-hover:text-purple-300 transition-colors">Dream Journal</h2>
-                  <p className="text-[11px] text-white/50 truncate">Love & future wiki</p>
-                </div>
-              </div>
-            </Link>
-          </div>
-        </div>
-
-        {/* RIGHT COLUMN: Finance + Pipeline Snapshot + Grants + Deadlines + Business */}
-        <div className="order-3 lg:col-span-4 space-y-4 md:space-y-6">
-          <FinanceSummary />
-          <PipelineSnapshot />
-          <GrantsPipeline />
-          <UpcomingDeadlines />
-          <WeeklyDigestCard />
-          <BusinessTasks />
-
-          {/* Quick Links */}
-          <div className="glass-card p-5">
-            <h2 className="font-semibold text-white mb-4">Quick Links</h2>
-            <div className="space-y-2">
-              <Link href="/pipeline" className="flex items-center gap-3 py-2 px-2 rounded-lg hover:bg-white/5 transition-colors">
-                <FolderKanban className="h-4 w-4 text-indigo-400" />
-                <span className="text-sm text-white">Pipeline Board</span>
-              </Link>
-              <Link href="/finance/reconciliation" className="flex items-center gap-3 py-2 px-2 rounded-lg hover:bg-white/5 transition-colors">
-                <ListChecks className="h-4 w-4 text-emerald-400" />
-                <span className="text-sm text-white">Reconciliation</span>
-              </Link>
-              <Link href="/knowledge" className="flex items-center gap-3 py-2 px-2 rounded-lg hover:bg-white/5 transition-colors">
-                <Brain className="h-4 w-4 text-violet-400" />
-                <span className="text-sm text-white">Knowledge Base</span>
-              </Link>
-              <Link href="/business" className="flex items-center gap-3 py-2 px-2 rounded-lg hover:bg-white/5 transition-colors">
-                <BookOpen className="h-4 w-4 text-cyan-400" />
-                <span className="text-sm text-white">Business Overview</span>
-              </Link>
+          {isLoading ? (
+            <div className="mt-5 space-y-3">
+              <div className="h-8 w-4/5 rounded-lg bg-white/10 animate-pulse" />
+              <div className="h-4 w-3/5 rounded bg-white/10 animate-pulse" />
             </div>
-          </div>
+          ) : primary ? (
+            <>
+              <h2 className="mt-4 max-w-4xl text-2xl font-semibold leading-tight text-white md:text-3xl">
+                {cleanPriorityTitle(primary)}
+              </h2>
+              <div className="mt-3 flex flex-wrap items-center gap-2">
+                {primary.projectCode && (
+                  <span className="rounded-full bg-indigo-500/15 px-2.5 py-1 text-xs font-medium text-indigo-300">
+                    {primary.projectCode}
+                  </span>
+                )}
+                <span className="rounded-full bg-white/10 px-2.5 py-1 text-xs text-white/55">
+                  {PRIORITY_SOURCE_LABELS[primary.sourceType] || primary.sourceType || 'Priority'}
+                </span>
+                {primary.value != null && (
+                  <span className="rounded-full bg-emerald-500/15 px-2.5 py-1 text-xs text-emerald-300">
+                    {formatCompactCurrency(Number(primary.value))}
+                  </span>
+                )}
+              </div>
+              <p className="mt-3 max-w-2xl text-sm leading-6 text-white/55">
+                Highest ranked active priority from the morning briefing.
+              </p>
+            </>
+          ) : (
+            <>
+              <h2 className="mt-4 text-2xl font-semibold text-white md:text-3xl">
+                No urgent priority selected
+              </h2>
+              <p className="mt-3 max-w-2xl text-sm leading-6 text-white/55">
+                Calendar, reply queue, finance, and open actions are still checked below.
+              </p>
+            </>
+          )}
         </div>
+
+        <div className="flex flex-wrap gap-2 lg:justify-end">
+          <Link
+            href="/knowledge/actions"
+            className="inline-flex items-center gap-2 rounded-lg bg-amber-400 px-3 py-2 text-sm font-medium text-slate-950 transition-colors hover:bg-amber-300"
+          >
+            Open actions
+            <ArrowUpRight className="h-4 w-4" />
+          </Link>
+          {primary?.projectCode && (
+            <Link
+              href={`/projects/${primary.projectCode}`}
+              className="inline-flex items-center gap-2 rounded-lg border border-white/10 px-3 py-2 text-sm text-white/70 transition-colors hover:border-indigo-500/30 hover:text-indigo-300"
+            >
+              Project
+              <ChevronRight className="h-4 w-4" />
+            </Link>
+          )}
+        </div>
+      </div>
+
+      <div className="mt-5 grid grid-cols-1 gap-2 md:grid-cols-3">
+        <FocusSignal
+          icon={Calendar}
+          label="Schedule"
+          value={`${eventsCount} event${eventsCount === 1 ? '' : 's'}`}
+          tone="text-blue-300"
+        />
+        <FocusSignal
+          icon={Mail}
+          label="Replies waiting"
+          value={pendingReplies.toLocaleString()}
+          tone={pendingReplies > 0 ? 'text-amber-300' : 'text-emerald-300'}
+        />
+        <FocusSignal
+          icon={TrendingUp}
+          label="Open pipeline"
+          value={formatCompactCurrency(pipelineValue)}
+          tone="text-emerald-300"
+        />
+      </div>
+    </section>
+  )
+}
+
+function FocusSignal({
+  icon: Icon,
+  label,
+  value,
+  tone,
+}: {
+  icon: typeof Target
+  label: string
+  value: string
+  tone: string
+}) {
+  return (
+    <div className="rounded-lg border border-white/10 bg-black/15 px-3 py-3">
+      <div className="flex items-center justify-between gap-3">
+        <span className="text-xs text-white/45">{label}</span>
+        <Icon className={cn('h-4 w-4', tone)} />
+      </div>
+      <p className="mt-1 text-lg font-semibold text-white">{value}</p>
+    </div>
+  )
+}
+
+function ScheduleCard({ events }: { events: TodayCalendarEvent[] }) {
+  return (
+    <div className="glass-card p-5 md:p-6">
+      <div className="flex items-center justify-between mb-4">
+        <Link href="/calendar" className="text-lg font-semibold text-white flex items-center gap-2 hover:text-indigo-300 transition-colors">
+          <Calendar className="h-5 w-5 text-indigo-400" />
+          Schedule
+          <ChevronRight className="h-4 w-4 text-white/30" />
+        </Link>
+        <span className="text-sm text-white/50">{events.length} events</span>
+      </div>
+      {events.length === 0 ? (
+        <div className="rounded-lg border border-white/10 bg-white/[0.03] px-4 py-5 text-center text-white/40">
+          <Calendar className="h-8 w-8 mx-auto mb-2 opacity-50" />
+          <p className="text-sm">No meetings today</p>
+        </div>
+      ) : (
+        <div className="space-y-2">
+          {events.slice(0, 5).map((event) => (
+            <CalendarEventCard key={event.id} event={event} />
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}
+
+function QuickLinkGrid() {
+  const links = [
+    { href: '/pipeline', label: 'Pipeline Board', icon: FolderKanban, color: 'text-indigo-400' },
+    { href: '/finance/reconciliation', label: 'Reconciliation', icon: ListChecks, color: 'text-emerald-400' },
+    { href: '/knowledge', label: 'Knowledge Base', icon: Brain, color: 'text-violet-400' },
+    { href: '/business', label: 'Business Overview', icon: BookOpen, color: 'text-cyan-400' },
+  ]
+
+  return (
+    <div className="glass-card p-5">
+      <h2 className="font-semibold text-white mb-4">Reference</h2>
+      <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+        {links.map(({ href, label, icon: Icon, color }) => (
+          <Link key={href} href={href} className="flex items-center gap-3 rounded-lg border border-white/10 px-3 py-2.5 transition-colors hover:border-indigo-500/30 hover:bg-white/5">
+            <Icon className={cn('h-4 w-4', color)} />
+            <span className="text-sm text-white">{label}</span>
+          </Link>
+        ))}
       </div>
     </div>
   )
@@ -299,7 +442,7 @@ export default function TodayPage() {
 
 // ─── Calendar Event Card with Note Input ─────────────────────────
 
-function CalendarEventCard({ event }: { event: { id: string; title: string; start_time: string; link?: string; is_all_day?: boolean; event_type?: string | null; attendees?: Array<{ email: string; name?: string }> } }) {
+function CalendarEventCard({ event }: { event: TodayCalendarEvent }) {
   const [showNoteInput, setShowNoteInput] = React.useState(false)
   const [noteText, setNoteText] = React.useState('')
   const [saving, setSaving] = React.useState(false)

@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
+import { DASH_COOKIE, dashTokenFor } from '@/lib/dash-auth'
 
 // Routes that have their own authentication (webhooks, external callbacks)
 const PUBLIC_API_PREFIXES = [
@@ -10,7 +11,7 @@ const PUBLIC_API_PREFIXES = [
 
 // Host aliases that front specific app paths
 const WIKI_HOST = 'wiki.act.place'
-const WIKI_PASSTHROUGH_PREFIXES = ['/wiki', '/knowledge', '/api', '/_next', '/icons', '/fonts']
+const WIKI_PASSTHROUGH_PREFIXES = ['/wiki', '/knowledge', '/api', '/_next', '/icons', '/fonts', '/.well-known']
 const WIKI_PASSTHROUGH_FILES = new Set(['/tractorpedia-manifest.json', '/manifest.json', '/favicon.ico', '/robots.txt', '/sitemap.xml'])
 
 function isPublicRoute(pathname: string): boolean {
@@ -39,16 +40,32 @@ function rewriteForWikiHost(request: NextRequest): NextResponse | null {
   return NextResponse.rewrite(rewritten)
 }
 
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   // Host-alias rewrite runs before auth so wiki.act.place landing works without a key
   const hostRewrite = rewriteForWikiHost(request)
   if (hostRewrite) return hostRewrite
 
   const { pathname } = request.nextUrl
 
-  // Only gate /api routes — pages are public (no user auth system yet)
-  if (!pathname.startsWith('/api')) {
+  // The login page + its API are always reachable.
+  if (pathname === '/login' || pathname === '/api/login') {
     return NextResponse.next()
+  }
+
+  // Shared-password gate on dashboard PAGES (not /api). When DASHBOARD_PASSWORD
+  // is unset the gate is off (local dev). Webhooks/health stay open via /api logic below.
+  const dashPassword = process.env.DASHBOARD_PASSWORD
+  if (!pathname.startsWith('/api')) {
+    if (!dashPassword) return NextResponse.next()
+    const cookie = request.cookies.get(DASH_COOKIE)?.value
+    if (cookie && cookie === (await dashTokenFor(dashPassword))) {
+      return NextResponse.next()
+    }
+    const url = request.nextUrl.clone()
+    url.pathname = '/login'
+    url.search = ''
+    url.searchParams.set('next', pathname)
+    return NextResponse.redirect(url)
   }
 
   // Webhook and health routes use their own auth
@@ -90,5 +107,10 @@ export function middleware(request: NextRequest) {
 export const config = {
   // Run on everything except static assets — needed so the wiki.act.place host
   // rewrite catches root requests. The /api auth gate still only fires on /api.
-  matcher: ['/((?!_next/static|_next/image|icons/|fonts/|favicon.ico|.*\\.[a-zA-Z0-9]+$).*)', '/api/:path*'],
+  matcher: [
+    '/((?!_next/static|_next/image|icons/|fonts/|favicon.ico|.*\\.[a-zA-Z0-9]+$).*)',
+    '/:dotSlug(\\.[^/]+)',
+    '/concepts/.soul',
+    '/api/:path*',
+  ],
 }

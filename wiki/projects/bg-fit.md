@@ -1,3 +1,15 @@
+---
+title: BG Fit
+status: Active
+canonical_slug: bg-fit
+canonical_code: ACT-BG
+tier: satellite
+website_slug: bg-fit
+website_path: /projects/bg-fit
+public_surface: project
+cluster: bg-fit
+---
+
 # BG Fit
 
 > A culturally grounded fitness, healing, and mentorship program addressing the overrepresentation of Indigenous youth in the justice system — using movement and country to disrupt the punitive cycle.

@@ -1,0 +1,50 @@
+---
+session: general
+date: 2026-05-31
+status: complete
+outcome: SUCCEEDED
+---
+
+goal: Transfer Knight Finances household/entity/payroll strategy into ACT repo context for future Codex work.
+now: Start by reading wiki/finance/knight-family-act-pay-and-entity-setup.md, then act-money-framework, four-lanes, and act-core-facts.
+test: node scripts/wiki-lint.mjs
+
+done_this_session:
+  - task: Created durable ACT finance wiki bridge for Ben household and ACT pay/entity setup.
+    files: [wiki/finance/knight-family-act-pay-and-entity-setup.md, wiki/finance/knight-family-act-pay-and-entity-setup.md.provenance.md]
+  - task: Indexed the new finance context for agents and wiki readers.
+    files: [wiki/finance/README.md, wiki/index.md]
+  - task: Captured source/provenance and resume prompt for future Codex sessions.
+    files: [thoughts/shared/handoffs/general/2026-05-31_15-45_knight-family-act-pay-context.yaml]
+
+blockers: []
+
+questions:
+  - Confirm whether Knight Photography is legally a sole trader, partnership, or another entity before coding routing/payroll rules.
+  - Confirm Knight Family Trust deed beneficiary class, streaming powers, and treatment for Carla/daughters before distributions.
+  - Confirm Standard Ledger advice on PSI/PCG 2025/5, Div 7A, family wages, discretionary trust minimum tax, Witta ownership, and DGR boundaries.
+
+decisions:
+  - canonical_location: Put durable context in wiki/finance because this is money/entity strategy, not app implementation.
+  - handoff_location: Put resume artifact in thoughts/shared/handoffs/general for future Codex chat continuity.
+  - pay_stack: Treat ACT salary/director wages as Ben's primary pay path; dividends to Knight Family Trust are secondary for true after-tax ACT profit; Division 7A loans are exception-only.
+  - trust_role: Knight Family Trust remains useful as ACT shareholder and long-term capital vehicle, not as a PSI income-splitting shortcut.
+  - family_payroll: Carla and daughters can be paid only for real roles at market rates with timesheets, payslips, entity fit, and lawful child-employment settings.
+
+findings:
+  - drift: Existing ACT docs mention Cameron/Pollyanna in old family-payment examples; current Ben household context from Knight Finances uses Carla and daughters aged 13/14. Future edits should reconcile this carefully.
+  - source_conflict: User called Knight Photography a partnership; ACT docs identify Knight Photography as Ben's sole-trader lane. This is unresolved.
+  - tax_context: ATO PCG 2025/5 materially increases scrutiny of PSI alienation through family/company/trust structures even where PSB tests are met.
+  - wealth_path: Best stack is ACT equity plus defensible salary/super, then true dividends to trust, then separate Witta operating entities; do not use trust/company as universal holder for family home/trading/charity.
+
+worked: [Using a wiki/finance synthesis plus provenance sidecar, keeping verified/inferred/unknown labels, linking official sources instead of embedding long tax explanations.]
+failed: [No failed implementation path.]
+
+next:
+  - Build a live entity/payroll compliance register in Command Center or Knight Finances using this wiki page as the initial rule set.
+  - Reconcile older Cameron/Pollyanna text in fy26-27-money-philosophy-and-plan.md if Ben confirms Carla/daughters are the correct household references.
+  - Ask Standard Ledger to review the new wiki page and mark each recommendation confirmed/rejected/needs-more-evidence.
+
+files:
+  created: [wiki/finance/knight-family-act-pay-and-entity-setup.md, wiki/finance/knight-family-act-pay-and-entity-setup.md.provenance.md, thoughts/shared/handoffs/general/2026-05-31_15-45_knight-family-act-pay-context.yaml]
+  modified: [wiki/finance/README.md, wiki/index.md]

@@ -28,6 +28,10 @@ import {
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { formatMoney, formatMoneyCompact } from '@/lib/finance/format'
+import { FounderPayCard } from '@/components/finance/FounderPayCard'
+import { ReceiptAutomationCard } from '@/components/finance/ReceiptAutomationCard'
+import { SupportersGlanceCard } from '@/components/finance/SupportersGlanceCard'
+import { TrustMeters } from '@/components/finance/TrustMeters'
 
 // ── Types ────────────────────────────────────────────────────────────
 
@@ -488,7 +492,7 @@ export default function FinanceOverview() {
           <Link href="/finance/projects" className="px-3 py-1.5 rounded-lg text-xs bg-white/5 text-white/50 hover:text-white hover:bg-white/10 transition-colors">
             Projects P&L
           </Link>
-          <Link href="/finance/pipeline-kanban" className="px-3 py-1.5 rounded-lg text-xs bg-indigo-500/20 text-indigo-400 hover:text-indigo-300 hover:bg-indigo-500/30 transition-colors">
+          <Link href="/finance/pipeline" className="px-3 py-1.5 rounded-lg text-xs bg-indigo-500/20 text-indigo-400 hover:text-indigo-300 hover:bg-indigo-500/30 transition-colors">
             Pipeline Board
           </Link>
           <Link href="/finance/board" className="px-3 py-1.5 rounded-lg text-xs bg-white/5 text-white/50 hover:text-white hover:bg-white/10 transition-colors">
@@ -497,13 +501,42 @@ export default function FinanceOverview() {
           <Link href="/finance/revenue-planning" className="px-3 py-1.5 rounded-lg text-xs bg-white/5 text-white/50 hover:text-white hover:bg-white/10 transition-colors">
             Revenue Planning
           </Link>
+          {/* QW3 2026-05-21: cross-link to Notion read surface (ACT Money Framework hub) */}
+          <a
+            href="https://www.notion.so/357ebcf981cf8101bc12dd5eab9ebec5"
+            target="_blank"
+            rel="noreferrer"
+            className="px-3 py-1.5 rounded-lg text-xs bg-amber-500/10 text-amber-300 hover:text-amber-200 hover:bg-amber-500/20 transition-colors inline-flex items-center gap-1.5"
+            title="ACT Money Framework — daily read surface in Notion"
+          >
+            Notion Hub <ArrowUpRight className="h-3 w-3" />
+          </a>
         </div>
       </header>
+
+      {/* Section anchors — six things the CEO wants in one click */}
+      <nav aria-label="Cockpit anchors" className="flex flex-wrap gap-2 -mt-2">
+        <a href="#right-now" className="text-xs px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 text-white/60 hover:text-white transition-colors border border-white/10">Right Now</a>
+        <a href="#trust" className="text-xs px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 text-white/60 hover:text-white transition-colors border border-white/10">Trust</a>
+        <a href="#founder-pay" className="text-xs px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 text-white/60 hover:text-white transition-colors border border-white/10">Founder Pay</a>
+        <a href="#receipts" className="text-xs px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 text-white/60 hover:text-white transition-colors border border-white/10">Receipts</a>
+        <a href="#whats-coming" className="text-xs px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 text-white/60 hover:text-white transition-colors border border-white/10">Pipeline</a>
+        <Link href="/finance/board" className="text-xs px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 text-white/60 hover:text-white transition-colors border border-white/10">Burn / Runway</Link>
+        <Link href="/finance/rd-evidence" className="text-xs px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 text-white/60 hover:text-white transition-colors border border-white/10">R&amp;D Estimate</Link>
+        <Link href="/finance/projects" className="text-xs px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 text-white/60 hover:text-white transition-colors border border-white/10">Projects History</Link>
+        <Link href="/supporters" className="text-xs px-3 py-1.5 rounded-full bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-300 hover:text-emerald-200 transition-colors border border-emerald-500/30">Supporters</Link>
+      </nav>
+
+      {/* Supporters quick card — needs-reply + critical-outstanding glance */}
+      <SupportersGlanceCard />
+
+      {/* ═══ TRUST & COVERAGE (P2 — folds in command + money-alignment) ═══ */}
+      <TrustMeters />
 
       {/* ═══════════════════════════════════════════ */}
       {/* SECTION 1: RIGHT NOW                        */}
       {/* ═══════════════════════════════════════════ */}
-      <section>
+      <section id="right-now">
         <h2 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
           <DollarSign className="h-5 w-5 text-emerald-400" />
           Right Now
@@ -671,9 +704,19 @@ export default function FinanceOverview() {
       </section>
 
       {/* ═══════════════════════════════════════════ */}
+      {/* SECTION 1.5: FOUNDER PAY + RECEIPT AUTOMATION */}
+      {/* ═══════════════════════════════════════════ */}
+      <section id="founder-pay" className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <FounderPayCard />
+        <div id="receipts">
+          <ReceiptAutomationCard />
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════ */}
       {/* SECTION 2: WHAT'S COMING — Pipeline         */}
       {/* ═══════════════════════════════════════════ */}
-      <section>
+      <section id="whats-coming">
         <h2 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
           <Telescope className="h-5 w-5 text-indigo-400" />
           What&apos;s Coming
@@ -725,7 +768,7 @@ export default function FinanceOverview() {
         <div className="glass-card overflow-hidden">
           <div className="px-4 py-3 border-b border-white/10 flex items-center justify-between">
             <span className="text-sm font-medium text-white/60">Top Opportunities (by weighted value)</span>
-            <Link href="/finance/pipeline-kanban" className="text-xs text-white/30 hover:text-white/60 flex items-center gap-1 transition-colors">
+            <Link href="/finance/pipeline" className="text-xs text-white/30 hover:text-white/60 flex items-center gap-1 transition-colors">
               Pipeline board <ChevronRight className="h-3 w-3" />
             </Link>
           </div>

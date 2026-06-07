@@ -1,0 +1,8 @@
+bucket,name,email,reason,remove,add,all_tier_drip_role
+"A","kristy bloomfield","kristy.bloomfield@oonchiumpa.com.au","genuine community individual (EL contributor)","comms:partner-drip","lane:community","role:storyteller comms:partner-drip"
+"A","tanya turner","tanya.turner@oonchiumpa.com.au","genuine community individual (EL contributor)","comms:partner-drip","lane:community","role:storyteller comms:partner-drip"
+"B","a curious tractor","hi@act.place","ACT team @act.place — community role is a mis-tag","","","tier:curious"
+"B","benjamin knight","benjamin@act.place","ACT team @act.place — community role is a mis-tag","","","tier:member"
+"B","nicholas marchesi","nicholas@act.place","ACT team @act.place — community role is a mis-tag","","","tier:member"
+"C","eloise hall","eloisebernadette@gmail.com","name/domain looks community but NOT an EL contributor — confirm","","","comms:funder-drip tier:member"
+"C","sam ","samsamuels137@gmail.com","flagged community but no EL/role evidence — likely false-positive (funder/partner staff)","","","role:storyteller tier:member"

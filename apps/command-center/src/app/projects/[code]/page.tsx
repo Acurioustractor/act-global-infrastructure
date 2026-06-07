@@ -37,6 +37,7 @@ import {
   MessageSquare,
 } from 'lucide-react'
 import { cn, formatRelativeDate } from '@/lib/utils'
+import { isRadarPipeline } from '@/lib/finance/pipeline-rollup'
 import { AlmaImpact } from '@/components/alma-impact'
 import {
   getNotionProjectsRaw,
@@ -270,7 +271,11 @@ export default function ProjectPage({ params, searchParams }: PageParams) {
     opp.name?.toLowerCase().includes(projectName.toLowerCase().split(' ')[0])
   ) || []
 
-  const totalOpportunityValue = opportunities.reduce((sum, opp) => sum + (opp.monetary_value || 0), 0)
+  // Exclude grant-radar (GHL "Grants" pipeline) from the headline pipeline value —
+  // the opportunities list below still shows every deal.
+  const totalOpportunityValue = opportunities
+    .filter(opp => !isRadarPipeline(opp.pipeline_name))
+    .reduce((sum, opp) => sum + (opp.monetary_value || 0), 0)
 
   return (
     <div className="min-h-screen p-4 md:p-8">
@@ -406,7 +411,7 @@ export default function ProjectPage({ params, searchParams }: PageParams) {
           { id: 'overview' as const, label: 'Overview', icon: Activity },
           { id: 'financials' as const, label: 'Financials', icon: DollarSign },
           { id: 'pipeline' as const, label: 'Pipeline', icon: GitBranch },
-          { id: 'alma' as const, label: 'ALMA Impact', icon: Heart },
+          { id: 'alma' as const, label: 'ALMA Review', icon: Heart },
         ].map(tab => (
           <button
             key={tab.id}
@@ -999,7 +1004,7 @@ export default function ProjectPage({ params, searchParams }: PageParams) {
         </div>
       )}
 
-      {/* ALMA Impact Tab */}
+      {/* ALMA Review Tab */}
       {activeTab === 'alma' && (
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
           <div className="lg:col-span-8">
@@ -1009,8 +1014,8 @@ export default function ProjectPage({ params, searchParams }: PageParams) {
             <div className="glass-card p-6">
               <h3 className="font-semibold text-white mb-3">About ALMA</h3>
               <p className="text-sm text-white/50 leading-relaxed">
-                The ALMA framework measures project impact through four dimensions
-                that reflect ACT's commitment to community-led development.
+                Australian Living Map of Alternatives (ALMA) reviews project readiness
+                through four dimensions that reflect ACT's commitment to community-led development.
               </p>
               <div className="mt-4 space-y-3 text-sm">
                 <div className="flex items-start gap-2">

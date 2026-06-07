@@ -1,4 +1,5 @@
 import Anthropic from '@anthropic-ai/sdk'
+import { LLMClient } from '@/lib/llm-adapter'
 import { AGENT_SYSTEM_PROMPT } from '@/lib/agent-system-prompt'
 import { executeTool, logAgentUsage } from '@/lib/agent-tools'
 import { getToolsForMode, detectMode, type ToolMode } from '@/lib/tool-definitions'
@@ -8,8 +9,8 @@ import { loadConversation, saveConversation } from './telegram/conversation-stat
 // CONFIG
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-export const HAIKU_MODEL = 'claude-3-5-haiku-20241022'
-export const SONNET_MODEL = 'claude-sonnet-4-5-20250929'
+export const HAIKU_MODEL = 'claude-haiku-4-5'
+export const SONNET_MODEL = 'claude-sonnet-4-6'
 const MAX_TOKENS = 4096
 const MAX_TOOL_ROUNDS = 10
 const ESCALATION_ROUND = 4
@@ -62,7 +63,7 @@ export async function processAgentMessage(
   const apiKey = process.env.ANTHROPIC_API_KEY
   if (!apiKey) throw new Error('ANTHROPIC_API_KEY not configured')
 
-  const client = new Anthropic({ apiKey })
+  const client = new LLMClient({ apiKey })
 
   // Load persistent conversation history from Supabase
   const history = await loadConversation(chatId)

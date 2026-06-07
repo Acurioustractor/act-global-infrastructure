@@ -10,7 +10,7 @@
 | [Guides](./guides/) | How-to guides for operational tasks |
 | [Integrations](./integrations/) | External system connections (GHL, Notion, etc.) |
 | [Reference](./reference/) | Executive overviews and strategic plans |
-| [ALMA](./alma/) | JusticeHub intelligence layer documentation |
+| [ALMA](./alma/) | Australian Living Map of Alternatives documentation |
 | [Archive](./archive/) | Historical documents and completed phases |
 
 ---
@@ -73,9 +73,9 @@ Strategic and executive documents.
 
 ---
 
-## ALMA (JusticeHub Intelligence)
+## ALMA
 
-Documentation for the ALMA intelligence layer.
+Documentation for Australian Living Map of Alternatives (ALMA), ACT's governed process for moving from listening to meaningful action with consent, authority, provenance, and review.
 
 | Document | Description |
 |----------|-------------|
@@ -84,6 +84,15 @@ Documentation for the ALMA intelligence layer.
 | [6_WEEK_BUILD_BACKLOG.md](./alma/6_WEEK_BUILD_BACKLOG.md) | Implementation roadmap |
 | [JUSTICEHUB_COMPREHENSIVE_INTEGRATION_PLAN.md](./alma/JUSTICEHUB_COMPREHENSIVE_INTEGRATION_PLAN.md) | Full integration plan |
 | [JUSTICEHUB_SUPABASE_INTEGRATION.md](./alma/JUSTICEHUB_SUPABASE_INTEGRATION.md) | Supabase schema design |
+
+---
+
+## Core ACT Terms
+
+- **Soul** - the origin layer of ACT.
+- **LCAA** - Listen, Curiosity, Action, Art; ACT's practice loop.
+- **ALMA** - Australian Living Map of Alternatives; ACT's evidence-graded catalogue of community-led alternatives.
+- **Governed Proof** - the evidence, review, and publication layer.
 
 ---
 

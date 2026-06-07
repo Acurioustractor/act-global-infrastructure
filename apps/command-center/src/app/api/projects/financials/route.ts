@@ -3,11 +3,13 @@ import { supabase } from '@/lib/supabase'
 
 export async function GET() {
   try {
-    // Fetch project financials, R&D expenses, and tagging coverage in parallel
-    const [financialsResult, rdResult, coverageResult] = await Promise.all([
+    // Fetch project financials, R&D expenses, and tagging coverage in parallel.
+    // Coverage uses count-only queries (head: true) — never transfer >1000 rows just to count them.
+    const [financialsResult, rdResult, totalCountResult, taggedCountResult] = await Promise.all([
       supabase.from('v_project_financials').select('*'),
-      supabase.from('xero_transactions').select('vendor_name, total, date').eq('project_code', 'ACT-RD'),
-      supabase.from('xero_transactions').select('id, project_code', { count: 'exact', head: false }),
+      supabase.from('xero_transactions').select('vendor_name:contact_name, total, date').eq('project_code', 'ACT-RD'),
+      supabase.from('xero_transactions').select('id', { count: 'exact', head: true }),
+      supabase.from('xero_transactions').select('id', { count: 'exact', head: true }).not('project_code', 'is', null),
     ])
 
     if (financialsResult.error) throw financialsResult.error
@@ -29,10 +31,9 @@ export async function GET() {
     }
     const rdTotal = rdExpenses.reduce((s, r) => s + Math.abs(Number(r.total || 0)), 0)
 
-    // Tagging coverage
-    const allTx = coverageResult.data || []
-    const totalTx = allTx.length
-    const taggedTx = allTx.filter(t => t.project_code != null).length
+    // Tagging coverage (count-only — head:true queries return no rows)
+    const totalTx = totalCountResult.count || 0
+    const taggedTx = taggedCountResult.count || 0
 
     return NextResponse.json({
       projects: projects.map(p => ({

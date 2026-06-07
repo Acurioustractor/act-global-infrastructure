@@ -1,6 +1,21 @@
 import { NextResponse } from 'next/server'
 import { supabase } from '@/lib/supabase'
+import { getMonthlyPL } from '@/lib/finance/ledger'
 
+type PmfRow = {
+  month: string
+  revenue: number | string | null
+  expenses: number | string | null
+  revenue_breakdown: Record<string, number> | null
+  expense_breakdown: Record<string, number> | null
+}
+
+/**
+ * Org P&L sourced from project_monthly_financials (the canonical org ledger), so this surface
+ * agrees with /company, /strategy and the per-project pages. The old logic summed raw RECEIVE /
+ * SPEND bank rows, which undercounts income (most invoice settlements land as RECEIVE-TRANSFER,
+ * not RECEIVE) and produced a wrong net. FY26 net here ≈ +$518,059 (rev $1,732,851 − exp $1,214,792).
+ */
 export async function GET() {
   try {
     const now = new Date()
@@ -8,41 +23,34 @@ export async function GET() {
     if (now.getMonth() < 6) fyStart.setFullYear(fyStart.getFullYear() - 1)
     const fyStartStr = fyStart.toISOString().split('T')[0]
 
-    // Get RECEIVE transactions (income)
-    const { data: income } = await supabase
-      .from('xero_transactions')
-      .select('total, bank_account, contact_name, date')
-      .eq('type', 'RECEIVE')
-      .gte('date', fyStartStr)
+    // Headline totals from the canonical monthly P&L rollup.
+    const pl = await getMonthlyPL({ fyStart: fyStartStr })
 
-    // Get SPEND transactions (expenses)
-    const { data: expenses } = await supabase
-      .from('xero_transactions')
-      .select('total, bank_account, contact_name, date')
-      .eq('type', 'SPEND')
-      .gte('date', fyStartStr)
+    // By-contact breakdowns from pmf's *_breakdown JSON (keyed by contact/category → amount).
+    const { data: pmfRows } = await supabase
+      .from('project_monthly_financials')
+      .select('month, revenue, expenses, revenue_breakdown, expense_breakdown')
+      .gte('month', fyStartStr)
+      .range(0, 9999)
 
-    // Group income by contact/source
     const incomeByAccount: Record<string, number> = {}
-    for (const tx of income || []) {
-      const acct = tx.contact_name || 'Other Income'
-      incomeByAccount[acct] = (incomeByAccount[acct] || 0) + (Number(tx.total) || 0)
-    }
-
     const expenseByAccount: Record<string, number> = {}
-    for (const tx of expenses || []) {
-      const acct = tx.contact_name || 'Other Expenses'
-      expenseByAccount[acct] = (expenseByAccount[acct] || 0) + Math.abs(Number(tx.total) || 0)
+    for (const row of (pmfRows as PmfRow[] | null) || []) {
+      for (const [name, amt] of Object.entries(row.revenue_breakdown || {})) {
+        const key = name || 'Other Income'
+        incomeByAccount[key] = (incomeByAccount[key] || 0) + (Number(amt) || 0)
+      }
+      for (const [name, amt] of Object.entries(row.expense_breakdown || {})) {
+        const key = name || 'Other Expenses'
+        expenseByAccount[key] = (expenseByAccount[key] || 0) + (Number(amt) || 0)
+      }
     }
-
-    const totalIncome = Object.values(incomeByAccount).reduce((s, v) => s + v, 0)
-    const totalExpenses = Object.values(expenseByAccount).reduce((s, v) => s + v, 0)
 
     return NextResponse.json({
       period: { start: fyStart.toISOString(), end: now.toISOString(), label: `FY${fyStart.getFullYear()}/${fyStart.getFullYear() + 1}` },
-      income: { total: Math.round(totalIncome * 100) / 100, byAccount: incomeByAccount },
-      expenses: { total: Math.round(totalExpenses * 100) / 100, byAccount: expenseByAccount },
-      netProfit: Math.round((totalIncome - totalExpenses) * 100) / 100,
+      income: { total: pl.revenue, byAccount: incomeByAccount },
+      expenses: { total: pl.expenses, byAccount: expenseByAccount },
+      netProfit: pl.net,
     })
   } catch (e) {
     console.error('P&L error:', e)

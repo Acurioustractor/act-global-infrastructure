@@ -172,7 +172,7 @@ Guidelines:
 - If the page doesn't contain grant information, return {"error": "not_a_grant_page"}`;
 
   const response = await trackedClaudeCompletion(prompt, SCRIPT_NAME, {
-    model: 'claude-haiku-4-5-20251001',
+    model: 'claude-haiku-4-5',
     maxTokens: 2000,
     operation: 'extract-requirements',
   });
@@ -219,7 +219,7 @@ Only include projects scoring 30+. Score based on thematic alignment, eligibilit
   let alignedProjects = [];
   try {
     const alignResponse = await trackedClaudeCompletion(alignmentPrompt, SCRIPT_NAME, {
-      model: 'claude-haiku-4-5-20251001',
+      model: 'claude-haiku-4-5',
       maxTokens: 800,
       operation: 'project-alignment',
     });

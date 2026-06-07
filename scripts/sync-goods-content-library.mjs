@@ -59,7 +59,7 @@ async function analyzeContent(item) {
         { role: 'user', content: `${ANALYSIS_PROMPT}\n\nContent:\n${text}` },
       ],
       'sync-goods-content-library',
-      { model: 'claude-3-5-haiku-20241022', temperature: 0.2, maxTokens: 400 }
+      { model: 'claude-haiku-4-5', temperature: 0.2, maxTokens: 400 }
     );
 
     const cleaned = raw.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim();

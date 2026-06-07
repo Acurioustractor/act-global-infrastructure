@@ -1,0 +1,41 @@
+[
+  {
+    "project": "JusticeHub (incl. Contained)",
+    "needs": [
+      "capital — grants (its lifeblood, grant-funded)",
+      "justice-sector partners & champions (Contained pods)",
+      "evidence / research collaborators"
+    ]
+  },
+  {
+    "project": "Goods on Country",
+    "needs": [
+      "revenue — anchor buyers (councils / ACCHOs)",
+      "supply chain",
+      "capital — grants / philanthropy (Minderoo, QBE)",
+      "delivery / community-production partners"
+    ]
+  },
+  {
+    "project": "The Harvest",
+    "needs": [
+      "the physical centre — local community, volunteers, day-attendees",
+      "produce buyers / eco-tourism revenue"
+    ]
+  },
+  {
+    "project": "CivicGraph (deferred spinout)",
+    "needs": [
+      "technical talent & data partners",
+      "SaaS pilots / early customers",
+      "raise capital (investors at spinout)"
+    ]
+  },
+  {
+    "project": "Studio (Innovation + Regen — the earner)",
+    "needs": [
+      "consulting clients (funds the platforms)",
+      "creative / build collaborators & brand reach"
+    ]
+  }
+]

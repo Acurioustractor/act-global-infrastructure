@@ -15,14 +15,9 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
 
     if (!site) return NextResponse.json({ deployments: [] })
 
-    const { data } = await supabase
-      .from('deployments')
-      .select('*')
-      .eq('site_id', site.id)
-      .order('created_at', { ascending: false })
-      .limit(limit)
-
-    return NextResponse.json({ deployments: data || [] })
+    // deployments table removed from DB — returns empty until a backend exists
+    void limit
+    return NextResponse.json({ deployments: [] })
   } catch (e) {
     console.error('Deployments error:', e)
     return NextResponse.json({ deployments: [] })

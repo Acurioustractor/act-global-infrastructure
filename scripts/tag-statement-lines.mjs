@@ -53,7 +53,7 @@ const TRIP_RULES = [
 
 // Vendor-specific overrides that are always the same project regardless of location
 const VENDOR_PROJECT_OVERRIDES = {
-  'Defy Design': 'ACT-IN',  // Website work — always internal
+  'Defy Design': 'ACT-GD',  // Goods project (per Ben 2026-04-29)
   'TradeMutt': 'ACT-HV',    // Hi-vis — Harvest
   'Hatch Electrical': 'ACT-PI', // Always PICC
   'RNM Carpentry': 'ACT-PI',   // Always PICC
@@ -116,6 +116,8 @@ async function main() {
 
     if (UNTAGGED_ONLY) {
       query = query.is('project_code', null);
+      // (bank_statement_lines has no project_code_source column — user untags happen on
+      // xero_transactions/xero_invoices, not here, so no extra guard needed.)
     }
 
     const { data: batch } = await query;

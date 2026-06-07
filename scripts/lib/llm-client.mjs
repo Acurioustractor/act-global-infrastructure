@@ -45,13 +45,39 @@ const PRICING = {
     'text-embedding-ada-002': { input: 0.10, output: 0 }
   },
   anthropic: {
+    'claude-opus-4-7': { input: 5.00, output: 25.00 },
     'claude-opus-4-6': { input: 5.00, output: 25.00 },
     'claude-opus-4-5-20251101': { input: 5.00, output: 25.00 },
+    'claude-sonnet-4-6': { input: 3.00, output: 15.00 },
     'claude-sonnet-4-5-20250929': { input: 3.00, output: 15.00 },
     'claude-sonnet-4-20250514': { input: 3.00, output: 15.00 },
+    'claude-haiku-4-5': { input: 1.00, output: 5.00 },
     'claude-haiku-4-5-20251001': { input: 1.00, output: 5.00 },
     'claude-3-5-haiku-20241022': { input: 0.80, output: 4.00 },
     'claude-3-haiku-20240307': { input: 0.25, output: 1.25 }
+  },
+  minimax: {
+    // Verified 2026-05-22 against minimax.io pricing. Cache reads ~$0.06/M
+    // for repeated prefixes (5x cheaper than fresh input) — see PRICING.minimax_cache_read.
+    // M3 verified 2026-06-06 (platform.minimax.io): $0.60/$2.40 standard; 1M ctx, 512K max out.
+    // CAVEAT: rate DOUBLES past 512K input tokens — long-context runs cost 2× these numbers.
+    // RULE: M3 = code review / prompt-eng / grader work ONLY. NEVER relationship/person data
+    // (Shanghai servers) — The Field stays on local qwen/M3-weights. See energy-orbit memory.
+    'MiniMax-M3': { input: 0.60, output: 2.40 },
+    'MiniMax-M2.7': { input: 0.30, output: 1.20 },
+    'MiniMax-M2.7-highspeed': { input: 0.15, output: 0.60 },
+    // Older variants kept for fallback safety (router won't pick them by
+    // default, but explicit GRADE_*_MODEL overrides can target them).
+    'MiniMax-M2.5': { input: 0.30, output: 1.20 },
+    'MiniMax-M2.5-highspeed': { input: 0.15, output: 0.60 },
+    'MiniMax-M2.1': { input: 0.30, output: 1.20 },
+    'MiniMax-M2.1-highspeed': { input: 0.15, output: 0.60 },
+    'MiniMax-M2': { input: 0.30, output: 1.20 }
+  },
+  gemini: {
+    'gemini-2.5-pro': { input: 1.25, output: 5.00 },
+    'gemini-2.5-flash': { input: 0.30, output: 2.50 },
+    'gemini-2.5-flash-lite': { input: 0.075, output: 0.30 }
   }
 };
 
@@ -87,11 +113,36 @@ export function selectModel(task, provider = 'anthropic') {
   const tier = TASK_TO_TIER[task] || 'cheap';
 
   const MODELS = {
-    anthropic: { cheap: 'claude-haiku-4-5-20251001', mid: 'claude-sonnet-4-5-20250929', expensive: 'claude-opus-4-6' },
+    anthropic: { cheap: 'claude-haiku-4-5', mid: 'claude-sonnet-4-6', expensive: 'claude-opus-4-7' },
     openai: { cheap: 'gpt-4o-mini', mid: 'gpt-4o', expensive: 'gpt-4o' },
+    // cheap tier uses MiniMax-M2.7 (regular) — highspeed requires the separate
+    // Plus-Highspeed subscription ($40/mo) which we don't have. See note in
+    // apps/command-center/src/lib/llm-adapter.ts for context.
+    // expensive → M3 (2026-06-06): 1M ctx for architecture/deep review. Pinned
+    // GRADE_*_MODEL overrides are unaffected. NEVER route person data here.
+    minimax: { cheap: 'MiniMax-M2.7', mid: 'MiniMax-M2.7', expensive: 'MiniMax-M3' },
+    gemini: { cheap: 'gemini-2.5-flash-lite', mid: 'gemini-2.5-flash', expensive: 'gemini-2.5-pro' },
   };
 
   return MODELS[provider]?.[tier] || MODELS.anthropic[tier];
+}
+
+/**
+ * Resolve which provider an agent should call, based on env. Priority:
+ *   1. AGENT_PROVIDER env var (explicit override: 'minimax' | 'gemini' | 'anthropic' | 'openai')
+ *   2. MINIMAX_API_KEY set → minimax
+ *   3. ANTHROPIC_API_KEY set → anthropic
+ *   4. GEMINI_API_KEY set → gemini
+ *   5. OPENAI_API_KEY set → openai
+ */
+export function resolveAgentProvider() {
+  const explicit = process.env.AGENT_PROVIDER?.toLowerCase();
+  if (explicit && ['minimax', 'gemini', 'anthropic', 'openai'].includes(explicit)) return explicit;
+  if (process.env.MINIMAX_API_KEY) return 'minimax';
+  if (process.env.ANTHROPIC_API_KEY) return 'anthropic';
+  if (process.env.GEMINI_API_KEY) return 'gemini';
+  if (process.env.OPENAI_API_KEY) return 'openai';
+  throw new Error('No LLM provider configured (set AGENT_PROVIDER or one of MINIMAX_API_KEY/ANTHROPIC_API_KEY/GEMINI_API_KEY/OPENAI_API_KEY)');
 }
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -337,7 +388,7 @@ export async function trackedCompletion(messages, scriptName, options = {}) {
  */
 export async function claudeComplete(prompt, options = {}) {
   const result = await anthropic.messages.create({
-    model: options.model || 'claude-3-5-haiku-20241022',
+    model: options.model || 'claude-haiku-4-5',
     max_tokens: options.maxTokens || 1000,
     messages: [{ role: 'user', content: prompt }]
   });
@@ -348,7 +399,7 @@ export async function claudeComplete(prompt, options = {}) {
  * Anthropic completion with tracking
  */
 export async function trackedClaudeCompletion(prompt, scriptName, options = {}) {
-  const model = options.model || 'claude-3-5-haiku-20241022';
+  const model = options.model || 'claude-haiku-4-5';
   const start = Date.now();
 
   const messages = Array.isArray(prompt)
@@ -382,6 +433,252 @@ export async function trackedClaudeCompletion(prompt, scriptName, options = {}) 
   });
 
   return result.content[0].text;
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// MINIMAX COMPLETIONS (international OpenAI-compatible endpoint)
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+const MINIMAX_BASE_URL = process.env.MINIMAX_BASE_URL || 'https://api.minimax.io/v1';
+
+export async function trackedMiniMaxCompletion(prompt, scriptName, options = {}) {
+  if (!process.env.MINIMAX_API_KEY) throw new Error('MINIMAX_API_KEY not set');
+  const model = options.model || 'MiniMax-M2.7';
+  const messages = options.system ? [{ role: 'system', content: options.system }] : [];
+  if (typeof prompt === 'string') messages.push({ role: 'user', content: prompt });
+  else messages.push(...prompt);
+
+  // OpenAI-compatible path on api.minimax.io; fallback to native if user override
+  const path = MINIMAX_BASE_URL.includes('minimaxi.chat')
+    ? '/text/chatcompletion_v2'
+    : '/chat/completions';
+
+  const start = Date.now();
+  const result = await withRetry(async () => {
+    const res = await fetch(`${MINIMAX_BASE_URL}${path}`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${process.env.MINIMAX_API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        model,
+        messages,
+        max_tokens: options.maxTokens || 1000,
+        // reasoning_split=true keeps <think> blocks out of the `content` field —
+        // they land in `reasoning_content` / `reasoning_details` instead.
+        // Without this, M2.7 emits "<think>...</think>OK" in content; with it,
+        // content is just "OK". Pass options.keepThinking=true to opt out.
+        reasoning_split: !options.keepThinking,
+        // Pass temperature through when set — needed for grader determinism.
+        // MiniMax default is ~0.7 (sampling); graders should pass 0 for
+        // reproducible calibration runs.
+        ...(options.temperature != null ? { temperature: options.temperature } : {}),
+      }),
+    });
+    if (!res.ok) throw new Error(`MiniMax ${res.status}: ${(await res.text()).slice(0, 200)}`);
+    return res.json();
+  });
+
+  // Reasoning tokens are billed as completion tokens but tracked separately
+  // by MiniMax so we can attribute cost. Both go in output_tokens for cost
+  // calc — we're charged for both at the output rate.
+  const reasoningTokens = result.usage?.completion_tokens_details?.reasoning_tokens || 0;
+  await logUsage({
+    provider: 'minimax', model, endpoint: 'chat',
+    input_tokens: result.usage?.prompt_tokens || 0,
+    output_tokens: result.usage?.completion_tokens || 0,
+    script_name: scriptName, agent_id: options.agentId || scriptName,
+    operation: options.operation || 'complete', latency_ms: Date.now() - start,
+    cache_hit: false, response_status: 200,
+    metadata: reasoningTokens ? { reasoning_tokens: reasoningTokens } : undefined,
+  });
+
+  const content = result.choices?.[0]?.message?.content || '';
+  // Safety net: if reasoning_split didn't honor (older models?), strip <think>.
+  if (options.keepThinking) return content;
+  return content.replace(/<think>[\s\S]*?<\/think>\s*/g, '').trim();
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// JSON EXTRACTOR — robust against MiniMax <think> + code fence leakage
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+// Why: MiniMax-M2.7 sometimes leaks reasoning into `content` despite
+// reasoning_split:true (observed in Phase 3b calibration 2026-05-22 —
+// 5/8 grader misses were json_parse_failed). This extractor:
+//   1. Strips <think>...</think> blocks (defense in depth)
+//   2. Strips markdown code fences
+//   3. Greedily extracts from first { to last } (or [ to ])
+//   4. Returns null if no valid JSON found
+//
+// Returns parsed object or null. Caller decides fallback behavior.
+export function extractJson(raw) {
+  if (!raw || typeof raw !== 'string') return null;
+  let text = raw;
+
+  // Strip <think>...</think> blocks (MiniMax leakage)
+  text = text.replace(/<think>[\s\S]*?<\/think>/gi, '').trim();
+
+  // Strip leading/trailing markdown fences (```json...``` or ```...```)
+  text = text.replace(/^```(?:json)?\s*/i, '').replace(/\s*```\s*$/i, '').trim();
+
+  // Direct parse — works when response is clean JSON
+  try { return JSON.parse(text); } catch { /* fall through */ }
+
+  // Greedy brace/bracket extraction — handles trailing/leading prose
+  const candidates = [];
+  const firstObj = text.indexOf('{');
+  const lastObj = text.lastIndexOf('}');
+  if (firstObj >= 0 && lastObj > firstObj) candidates.push(text.slice(firstObj, lastObj + 1));
+  const firstArr = text.indexOf('[');
+  const lastArr = text.lastIndexOf(']');
+  if (firstArr >= 0 && lastArr > firstArr) candidates.push(text.slice(firstArr, lastArr + 1));
+
+  for (const c of candidates) {
+    try { return JSON.parse(c); } catch { /* try next */ }
+  }
+  return null;
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// GEMINI COMPLETIONS (via @google/genai)
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+let _genai = null;
+async function getGenai() {
+  if (!_genai) {
+    if (!process.env.GEMINI_API_KEY) throw new Error('GEMINI_API_KEY not set');
+    const { GoogleGenAI } = await import('@google/genai');
+    _genai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+  }
+  return _genai;
+}
+
+export async function trackedGeminiCompletion(prompt, scriptName, options = {}) {
+  const ai = await getGenai();
+  const model = options.model || 'gemini-2.5-flash-lite';
+  const userText = typeof prompt === 'string' ? prompt : prompt.map(m => `${m.role}: ${m.content}`).join('\n\n');
+
+  const start = Date.now();
+  const result = await withRetry(async () => {
+    return ai.models.generateContent({
+      model,
+      contents: userText,
+      config: {
+        systemInstruction: options.system,
+        maxOutputTokens: options.maxTokens || 1000,
+      },
+    });
+  });
+
+  await logUsage({
+    provider: 'gemini', model, endpoint: 'chat',
+    input_tokens: result.usageMetadata?.promptTokenCount || 0,
+    output_tokens: result.usageMetadata?.candidatesTokenCount || 0,
+    script_name: scriptName, agent_id: options.agentId || scriptName,
+    operation: options.operation || 'complete', latency_ms: Date.now() - start,
+    cache_hit: false, response_status: 200,
+  });
+
+  return result.text || '';
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// SMART ROUTER — pick provider via env, used by all agents
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+export async function trackedAgentCompletion(prompt, scriptName, options = {}) {
+  const provider = options.forceProvider || resolveAgentProvider();
+  return callProvider(provider, prompt, scriptName, options);
+}
+
+async function callProvider(provider, prompt, scriptName, options) {
+  const model = options.model && providerMatchesModel(provider, options.model)
+    ? options.model
+    : selectModel(options.task || 'generate', provider);
+  const opts = { ...options, model };
+  delete opts.forceProvider;
+
+  if (provider === 'minimax') return trackedMiniMaxCompletion(prompt, scriptName, opts);
+  if (provider === 'gemini') return trackedGeminiCompletion(prompt, scriptName, opts);
+  if (provider === 'anthropic') return trackedClaudeCompletion(prompt, scriptName, opts);
+  if (provider === 'openai') {
+    const messages = options.system ? [{ role: 'system', content: options.system }] : [];
+    if (typeof prompt === 'string') messages.push({ role: 'user', content: prompt });
+    else messages.push(...prompt);
+    return trackedCompletion(messages, scriptName, opts);
+  }
+  throw new Error(`Unknown provider: ${provider}`);
+}
+
+/**
+ * Like trackedAgentCompletion, but falls back to the next available provider if
+ * the primary throws on rate-limit, credit-balance, or 5xx errors. Auth errors
+ * (401/403) and bad-request (400 without credit/quota hints) do NOT trigger
+ * fallback — those are config problems, not provider problems.
+ *
+ * Fallback order: configured providers minus the primary, in MiniMax →
+ * Anthropic → Gemini → OpenAI preference (cheapest viable first).
+ */
+export async function trackedAgentCompletionWithFallback(prompt, scriptName, options = {}) {
+  const primary = options.forceProvider || resolveAgentProvider();
+  const candidates = ['minimax', 'anthropic', 'gemini', 'openai']
+    .filter(p => p !== primary)
+    .filter(p => process.env[providerEnvKey(p)]);
+
+  try {
+    return await callProvider(primary, prompt, scriptName, options);
+  } catch (err) {
+    if (!shouldFallback(err)) throw err;
+
+    for (const fallback of candidates) {
+      console.warn(`[llm-fallback] ${primary} failed (${(err.message || '').slice(0, 100)}); trying ${fallback}`);
+      try {
+        return await callProvider(fallback, prompt, scriptName, options);
+      } catch (fallbackErr) {
+        if (!shouldFallback(fallbackErr)) throw fallbackErr;
+        continue;
+      }
+    }
+    throw err;
+  }
+}
+
+function providerEnvKey(provider) {
+  return ({
+    minimax: 'MINIMAX_API_KEY',
+    anthropic: 'ANTHROPIC_API_KEY',
+    gemini: 'GEMINI_API_KEY',
+    openai: 'OPENAI_API_KEY',
+  })[provider];
+}
+
+function shouldFallback(err) {
+  if (err.status === 401 || err.status === 403) return false;
+  if (err.status === 400 && !/credit|balance|quota|rate.?limit/i.test(err.message || '')) return false;
+  return true;
+}
+
+function providerMatchesModel(provider, model) {
+  if (provider === 'minimax') return /^MiniMax|^abab/i.test(model);
+  if (provider === 'gemini') return /^gemini/i.test(model);
+  if (provider === 'anthropic') return /^claude/i.test(model);
+  if (provider === 'openai') return /^gpt|^o\d/i.test(model);
+  return false;
+}
+
+/**
+ * Infer provider from a model name string. Returns null if the model name
+ * doesn't unambiguously map to a provider. Useful for honoring legacy env
+ * vars like GRADE_VOICE_MODEL=claude-sonnet-4-6 (forces Anthropic).
+ */
+export function providerFromModelName(model) {
+  if (!model) return null;
+  for (const provider of ['minimax', 'anthropic', 'gemini', 'openai']) {
+    if (providerMatchesModel(provider, model)) return provider;
+  }
+  return null;
 }
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -559,6 +856,13 @@ export default {
   trackedCompletion,
   claudeComplete,
   trackedClaudeCompletion,
+  trackedAgentCompletion,
+  trackedAgentCompletionWithFallback,
+  trackedMiniMaxCompletion,
+  trackedGeminiCompletion,
+  resolveAgentProvider,
+  providerFromModelName,
+  selectModel,
   getCostSummary,
   getDailyCosts,
   getScriptCosts,

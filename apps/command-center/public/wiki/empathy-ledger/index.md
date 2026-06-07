@@ -1,21 +1,22 @@
 ---
 title: Empathy Ledger
 status: Active
-date: 2026-04-11
-entity_type: project
-tagging_mode: own-code
 canonical_slug: empathy-ledger
 canonical_code: ACT-EL
+tier: ecosystem
 website_slug: empathy-ledger
 website_path: /empathy-ledger
 public_surface: project
 cluster: empathy-ledger
+date: 2026-04-11
+entity_type: project
+tagging_mode: own-code
 empathy_ledger_key: empathy-ledger
 ---
 
 > Generated legacy mirror for command-center.
 > Source of truth: `wiki/projects/empathy-ledger.md`.
-> Regenerated: `2026-04-21T03:19:53.973Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
+> Regenerated: `2026-06-07T01:07:42.547Z` via `node scripts/wiki-sync-command-center-snapshot.mjs`.
 
 # Empathy Ledger
 
@@ -317,7 +318,7 @@ The public act.place page does not mention: blockchain ownership, TK Labels, Muk
 - [[civicgraph|CivicGraph]] — the systemic data layer EL completes
 - [[justicehub|JusticeHub]] — evidence layer EL humanizes
 - [[ai-ethics|AI Ethics & Agent Strategy]] — consent and guardrail model for any AI touching stories
-- [[alma|ALMA Framework]] — the shared signal model reading consented stories at system level
+- [[alma|ALMA]] — governed listening-to-action process for consented stories
 - [[beautiful-obsolescence|Beautiful Obsolescence]] — platform design discipline for exportability, handover, and community control
 - [[governance-consent|Governance & Consent (Operational)]] — the operational shareability and review model applied around stories and syndication
 - [[place-land-practice|Place & Land Practice]] — stories are grounded in Country, place, and community-held context

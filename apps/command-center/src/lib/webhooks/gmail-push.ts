@@ -10,12 +10,6 @@ import { google, type gmail_v1 } from 'googleapis';
 import { supabase } from '@/lib/supabase';
 
 // Reusable types
-interface GmailSyncState {
-  email_address: string;
-  history_id: string;
-  last_sync_at: string;
-}
-
 interface ContactMatch {
   ghl_contact_id: string;
   full_name: string;
@@ -137,12 +131,9 @@ export async function processGmailHistory(
 ): Promise<{ messagesProcessed: number; errors: number; processedSourceIds: string[] }> {
   const stats = { messagesProcessed: 0, errors: 0, processedSourceIds: [] as string[] };
 
-  // Get last known historyId from our sync state
-  const { data: syncState } = await supabase
-    .from('gmail_sync_state')
-    .select('history_id')
-    .eq('email_address', emailAddress)
-    .maybeSingle();
+  // gmail_sync_state table removed from DB — returns null until a backend exists,
+  // so we fall back to the historyId from the push notification.
+  const syncState = null as { history_id: string } | null;
 
   const startHistoryId = syncState?.history_id || notifiedHistoryId;
 
@@ -306,20 +297,10 @@ export async function processGmailHistory(
 
 /**
  * Update the gmail_sync_state table with latest historyId.
+ *
+ * gmail_sync_state table removed from DB — no-op until a backend exists.
+ * Incremental sync still works within a single push via the notified historyId.
  */
-async function upsertSyncState(emailAddress: string, historyId: string): Promise<void> {
-  const { error } = await supabase
-    .from('gmail_sync_state')
-    .upsert(
-      {
-        email_address: emailAddress,
-        history_id: historyId,
-        last_sync_at: new Date().toISOString(),
-      },
-      { onConflict: 'email_address' }
-    );
-
-  if (error) {
-    console.error('[GmailPush] Failed to update sync state:', error.message);
-  }
+async function upsertSyncState(_emailAddress: string, _historyId: string): Promise<void> {
+  // intentionally empty — no persistence layer available
 }

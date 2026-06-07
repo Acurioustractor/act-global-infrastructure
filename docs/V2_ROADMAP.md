@@ -197,10 +197,10 @@ agents/
 
 ---
 
-## ALMA Measurement Everywhere
+## ALMA Review Everywhere
 
 **Current:** ALMA exists in Empathy Ledger v2
-**V2 Goal:** ALMA scores on everything
+**V2 Goal:** Australian Living Map of Alternatives (ALMA) review fields on every relevant record
 
 | Entity | ALMA Metric |
 |--------|-------------|
@@ -260,7 +260,7 @@ agents/
 - [ ] Email AI extraction
 - [ ] Social media monitoring
 - [ ] Project management sync
-- [ ] ALMA scoring everywhere
+- [ ] ALMA review fields everywhere
 
 ---
 

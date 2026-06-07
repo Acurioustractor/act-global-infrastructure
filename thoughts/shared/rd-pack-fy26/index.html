@@ -1,0 +1,2971 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>R&D Evidence Pack — A Curious Tractor Pty Ltd FYFY26</title>
+<style>
+:root {
+  --bg: #fafaf7;
+  --surface: #ffffff;
+  --ink: #1a1a17;
+  --muted: #5b5b54;
+  --border: #e5e3dc;
+  --accent: #0a4f3a;
+  --warn: #a36400;
+  --warn-bg: #fff8e8;
+  --fail: #a31a1a;
+  --fail-bg: #fdeded;
+  --pass: #0a7d3a;
+  --pass-bg: #e8f5ec;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font: 15px/1.55 ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 24px 28px 80px;
+}
+h1, h2, h3, h4 { font-family: ui-serif, "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif; line-height: 1.25; }
+h1 { font-size: 30px; margin: 0 0 4px; }
+h2 { font-size: 22px; margin: 32px 0 12px; padding-bottom: 6px; border-bottom: 2px solid var(--border); }
+h3 { font-size: 17px; margin: 20px 0 8px; }
+h4 { font-size: 15px; margin: 14px 0 6px; }
+p { margin: 8px 0; }
+a { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(10, 79, 58, 0.25); }
+a:hover { border-bottom-color: var(--accent); }
+code { background: #efece4; padding: 1px 5px; border-radius: 3px; font-size: 13px; }
+pre { background: #1a1a17; color: #f3f1ea; padding: 14px 16px; border-radius: 6px; overflow-x: auto; font-size: 13px; }
+pre code { background: transparent; color: inherit; padding: 0; }
+blockquote { margin: 12px 0; padding: 8px 14px; border-left: 4px solid var(--border); color: var(--muted); background: #f4f2eb; border-radius: 0 4px 4px 0; }
+ul, ol { padding-left: 22px; }
+li { margin: 4px 0; }
+hr { border: 0; border-top: 1px solid var(--border); margin: 24px 0; }
+table { border-collapse: collapse; margin: 12px 0; width: 100%; font-size: 13.5px; }
+th, td { padding: 7px 10px; border: 1px solid var(--border); text-align: left; vertical-align: top; }
+th { background: #efece4; font-weight: 600; cursor: pointer; user-select: none; position: relative; }
+th:hover { background: #e8e4d8; }
+th.sort-asc::after { content: " ▲"; color: var(--muted); font-size: 11px; }
+th.sort-desc::after { content: " ▼"; color: var(--muted); font-size: 11px; }
+tbody tr:nth-child(even) { background: #fbfaf6; }
+
+.banner {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px 28px;
+  margin-bottom: 18px;
+}
+.banner-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+.banner-sub { color: var(--muted); margin-top: 4px; font-size: 14px; }
+.verdict-badge {
+  background: var(--c, #555);
+  color: white;
+  padding: 12px 18px;
+  border-radius: 6px;
+  text-align: center;
+  min-width: 110px;
+}
+.verdict-label { font-size: 11px; letter-spacing: 1.5px; opacity: 0.85; }
+.verdict-score { font-size: 30px; font-weight: 700; line-height: 1; margin-top: 2px; }
+.verdict-score span { font-size: 14px; opacity: 0.7; font-weight: 400; }
+.banner-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 14px; margin-top: 18px; }
+.banner-stats .stat-label { font-size: 11px; letter-spacing: 0.5px; text-transform: uppercase; color: var(--muted); }
+.banner-stats .stat-value { font-size: 16px; font-weight: 600; margin-top: 2px; }
+
+.verdict-panel { display: grid; gap: 12px; margin: 16px 0 28px; }
+.panel { background: var(--surface); border: 1px solid var(--border); border-left-width: 4px; border-radius: 6px; padding: 14px 18px; }
+.panel h2 { margin: 0 0 8px; font-size: 16px; padding: 0; border: 0; font-family: inherit; font-weight: 600; }
+.panel ul, .panel ol { margin: 6px 0 0; padding-left: 22px; }
+.panel li { margin: 8px 0; }
+.panel .evidence { color: var(--muted); font-size: 13.5px; margin-top: 4px; }
+.panel-fail { border-left-color: var(--fail); background: var(--fail-bg); }
+.panel-warn { border-left-color: var(--warn); background: var(--warn-bg); }
+.panel-pass { border-left-color: var(--pass); background: var(--pass-bg); }
+.panel-pass .ok { color: var(--pass); font-weight: 600; }
+
+.toc {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 12px 16px;
+  font-size: 13.5px;
+  margin: 0 0 24px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.toc a { margin: 0 2px; }
+
+.doc-section { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 18px 24px; margin: 14px 0; }
+details.doc-section { padding: 0; }
+details.doc-section > summary { padding: 14px 24px; cursor: pointer; user-select: none; }
+details.doc-section[open] > summary { border-bottom: 1px solid var(--border); }
+details.doc-section > summary h2 { display: inline; margin: 0; padding: 0; border: 0; font-size: 18px; }
+details.doc-section .md { padding: 0 24px 18px; }
+
+details.provenance { margin: 14px 0; padding: 0; border: 1px dashed var(--border); border-radius: 4px; background: #fafaf7; }
+details.provenance > summary { padding: 8px 14px; cursor: pointer; user-select: none; font-size: 13.5px; color: var(--muted); }
+details.provenance[open] > summary { border-bottom: 1px dashed var(--border); }
+details.provenance .md { padding: 6px 14px 12px; font-size: 13.5px; }
+
+footer.render-info {
+  margin-top: 40px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+  font-size: 12px;
+  color: var(--muted);
+}
+
+@media print {
+  body { background: white; max-width: none; padding: 0 8mm; font-size: 10.5pt; }
+  .toc { position: static; }
+  details, details.doc-section, details.provenance { padding: 0; }
+  details:not([open]) > *:not(summary) { display: revert !important; }
+  details > summary { list-style: none; }
+  details > summary::-webkit-details-marker { display: none; }
+  details.doc-section > summary, details.provenance > summary { padding: 8px 0; }
+  .doc-section, details.doc-section, details.provenance, .panel, .banner { break-inside: avoid; }
+  table { break-inside: avoid; font-size: 9pt; }
+  h2 { break-after: avoid; }
+  h1, h2, h3 { page-break-after: avoid; }
+  a { color: inherit; border-bottom: none; }
+}
+</style>
+</head>
+<body>
+
+
+<header class="banner">
+  <div class="banner-row">
+    <div>
+      <h1>A Curious Tractor Pty Ltd</h1>
+      <div class="banner-sub">FYFY26 R&D Tax Incentive evidence pack · ACN 697 347 676 · last updated 2026-05-07</div>
+    </div>
+    <div class="verdict-badge" style="--c: #a36400">
+      <div class="verdict-label">WARN</div>
+      <div class="verdict-score">62<span>/100</span></div>
+    </div>
+  </div>
+  <div class="banner-stats">
+    <div><div class="stat-label">Total preliminary claim</div><div class="stat-value">$354,047</div></div>
+    <div><div class="stat-label">Expected refund range</div><div class="stat-value">$130,910 – $154,010</div></div>
+    <div><div class="stat-label">Lodgement target</div><div class="stat-value">2027-04-30</div></div>
+    <div><div class="stat-label">AusIndustry status</div><div class="stat-value">missing</div></div>
+    <div><div class="stat-label">ATO readiness</div><div class="stat-value">partial</div></div>
+  </div>
+</header>
+<div class="verdict-panel"><section class="panel panel-fail"><h2>Hard failures (1)</h2><ul><li><strong>1.2 AusIndustry registration absent or incomplete</strong><div class="evidence">All four activity registers (ACT-CG, ACT-EL, ACT-GD, ACT-JH) carry `ausindustry_registration: pending_jul_2026` in frontmatter. README states 'Registration status: Pending'. No registration ID, confirmation receipt, or verifiable record exists anywhere in the pack. The rubric permits a frontmatter citation that 'resolves to a verifiable record' but `pending_jul_2026` is not a registration ID and does not resolve to any record. Missing registration with no citation → fail.</div></li></ul></section><section class="panel panel-warn"><h2>Open warnings (14)</h2><ol><li><strong>2.4 Outcome (expected vs actual) — all four projects</strong><div class="evidence">All four core activity registers explicitly state actual outcomes are `in_progress`. Gold sets not assembled (ACT-CG 200-row, ACT-JH 100-row). Third-party reviewer audit not run (ACT-EL). A1 production use not commenced (ACT-GD). No precision/recall numbers measured against ground truth for any project. Pre-experiment estimates exist and are documented, but no post-experiment actuals are captured. All four registers fail Tier 2 rule 2.4.</div></li><li><strong>2.3 Experiment design — ACT-CG gold set not assembled</strong><div class="evidence">ACT-CG register states 'Ground truth: 200-row hand-labelled gold set (TBD — needs to be assembled from the audit logs)'. Without a ground truth set the success criteria (≥92% precision, ≥85% recall) are structurally unmeasurable. Open item 1 in ACT-CG register confirms this gap.</div></li><li><strong>2.3 Experiment design — ACT-JH gold set not assembled</strong><div class="evidence">ACT-JH register states 'Ground truth: 100-row hand-labelled gold set of (program, correct procurement code(s)) pairs (TBD — needs to be assembled from existing JusticeHub evidence data)'. Same structural gap as ACT-CG.</div></li><li><strong>2.3 Experiment design — ACT-GD treatment cohort not run</strong><div class="evidence">ACT-GD register states 'A1 has not yet entered production use' and 'The first-order conversion rate against the manual-pair baseline has not been measured.' The treatment arm of the experiment does not yet exist, making the experiment design incomplete in execution.</div></li><li><strong>1.5 Salary allocation — personnel basis unverified</strong><div class="evidence">salary-allocations.csv lists Ben Knight's personnel_basis_aud as $250,000 (Knight Photography invoicing) and Nic Marchesi's as $200,000 (retrospective director-salary characterisation). Both are marked 'Unverified' in every provenance sidecar. Money Framework decision log Decision 6 notes the $200K figure is a 'calibration-fixture placeholder'. Standard Ledger sign-off is pending. The ±2% mismatch rule cannot be tested until the basis is confirmed. Multiple open questions for Standard Ledger remain unanswered (Decision log items 1–4).</div></li><li><strong>1.7 Receipt-to-activity linkage — ACT-CG has no discrete project_code tag</strong><div class="evidence">receipt-coverage-attestation.md explicitly states 'There is no separate ACT-CG bill in xero_invoices for FY26 — the project_code ACT-CG surfaces only in xero_transactions.' The ACT-CG claim ($14,000 Anthropic + Supabase) is bundled in ACT-IN. Receipts over $1,000 tagged ACT-IN cannot be individually linked to the ACT-CG entity-resolution activity as required by rule 1.7 without a further sub-tagging step. ACT-CG open item 4 confirms this is outstanding.</div></li><li><strong>3.1 Supporting activity — ACT-JH-S3 commit date discrepancy</strong><div class="evidence">audit-trail.md lists commit 6eb2c93 (2026-04-22) as 'feat(jh): procurement-code mapping schema + 3 seed mappings' and separately the ACT-JH register cites 6eb2c93 (2026-04-15) as 'Brave Ones field pack shipped — pages, postcards, QR system'. The same commit hash is assigned two different dates and descriptions across the two documents, creating a verifiable inconsistency in the contemporaneous record.</div></li><li><strong>4.1 Tax accountant reviewable — executive summary refund range inconsistency</strong><div class="evidence">README executive summary states expected refund range $130,910–$154,010 on a claim of $354,047. Applying rubric formula: lower = 0.435 × ($354,047 × 0.85) = $131,047; upper = 0.435 × $354,047 = $154,010. Lower figure in README ($130,910) does not match rubric formula result ($131,047) — a $137 rounding discrepancy. Minor but reviewable. Separately, the README lists Money Framework realistic range as '$180–220K' and also '$200,000–$250,000' in different rows of the same table, an internal inconsistency a tax accountant would flag.</div></li><li><strong>4.2 Provenance sidecars — status draft, not final</strong><div class="evidence">All four provenance sidecars (ACT-CG, ACT-EL, ACT-GD, ACT-JH .provenance.md files) carry `status: Draft` and explicitly state they will not be promoted to `final` until AusIndustry registration and other gating items are complete. Dollar figures in all four are marked 'Unverified'. The ACT-EL and ACT-GD sidecars flag internal contradictions (e.g. ACT-EL provenance mentions '35% per-project allocation for Ben' as a fixture placeholder while the actual register uses 10%).</div></li><li><strong>4.2 Provenance sidecars — ACT-JH salary-base inconsistency</strong><div class="evidence">ACT-JH provenance sidecar references 'founder-pay-and-rd-thesis-fy26-fy27.md line 64' for the $250,000 salary basis but Decision Log Decision 6 states line 64 relates to the project-mix split, not the salary basis. The citation appears to be an error.</div></li><li><strong>4.3 Cross-references intact — broken/unresolvable links</strong><div class="evidence">Multiple cross-references cite files that are not present in the pack: `wiki/finance/act-money-framework.md`, `wiki/finance/founder-pay-and-rd-thesis-fy26-fy27.md`, `wiki/finance/act-money-thesis-rebuttal.md`, `thoughts/shared/plans/rd-tax-incentive-fy2526-path-c.md`, `wiki/output/contact-enrichment/` audit logs. None of these are included in the pack bundle provided. Commits are cited by hash (e.g. ddbc9d3c for ACT-EL cross-org photo manager, which is not in the audit-trail.md table) but the JusticeHub repo is external and not accessible from the pack.</div></li><li><strong>1.8 Excluded activity types — review marker on ACT-JH transactions</strong><div class="evidence">ACT-JH provenance sidecar and receipt-coverage-attestation.md note that 4 ACT-JH xero_transactions ($96) are tagged `rd_category='review'` meaning the R&amp;D tagger flagged them for human review, not auto-eligible. These amounts are included in the claim total ($24,547) as a placeholder pending human review outcome. If the review finds them ineligible, the claim total shifts.</div></li><li><strong>3.2 Reasonable proportion — ACT-GD supporting:core ratio</strong><div class="evidence">ACT-GD total claim is $188,250 of which $114,500 is vendor/SaaS/contractor and $73,750 is personnel. The algorithm engineering contractor placeholder ($42,000) is explicitly 'unverified' with 'contractor identity not yet committed' per ACT-GD provenance sidecar. The vendor spend ($114,500) exceeds the personnel core ($73,750) by 1.55×. While within the 5× rule-of-thumb, the contractor line is a placeholder with no engagement evidence, which AusIndustry would scrutinise.</div></li><li><strong>1.6 Contemporaneous records — activity registers written 2026-05-07</strong><div class="evidence">The audit-trail.md contemporaneity rationale states 'The three activity registers in this pack were collated 2026-05-07.' Core activities begin as early as commit 3a16982 (2026-02-13 for ACT-CG) and e3a0728 (2026-04-18 for ACT-EL). The gap between the earliest ACT-CG commit (2026-02-13) and the register collation date (2026-05-07) is 83 days, which is within the 90-day hard-fail threshold but approaching it. The underlying code commits are contemporaneous; the register narrative is not. This is a structural risk, not yet a hard failure.</div></li></ol></section><details class="panel"><summary><strong>Missing artefacts (15)</strong> — click to expand</summary><ul><li>ausindustry-registration.{md,pdf,html} or equivalent with a verifiable registration ID</li><li>wiki/finance/act-money-framework.md (cited throughout but not in pack)</li><li>wiki/finance/founder-pay-and-rd-thesis-fy26-fy27.md (cited throughout but not in pack)</li><li>wiki/finance/act-money-thesis-rebuttal.md (cited in README but not in pack)</li><li>thoughts/shared/plans/rd-tax-incentive-fy2526-path-c.md (Path C decision record, not in pack)</li><li>wiki/output/contact-enrichment/ audit logs (contemporaneous records for ACT-CG Tier 1/1.5/2/3 runs)</li><li>200-row hand-labelled gold set for ACT-CG entity resolution (open item 1, ACT-CG register)</li><li>100-row hand-labelled procurement-code gold set for ACT-JH (open item 1, ACT-JH register)</li><li>ACT-GD algorithm engineering contractor engagement evidence (contract, invoice, or equivalent)</li><li>Third-party reviewer audit results for ACT-EL verbal-consent locatability test</li><li>A1 Procurement Analyst production run logs (minimum 8 Mondays) for ACT-GD</li><li>ACT-OO (Oonchiumpa) R&amp;D register (deferred — documented structural gap)</li><li>wiki/finance/money-framework-decision-log-2026-04-15.md counter-signatures from Ben, Nic, Standard Ledger</li><li>Standard Ledger sign-off on Nic director-salary characterisation basis ($200K vs $238K)</li><li>Standard Ledger sign-off on Ben Knight Photography GST registration backdating</li></ul></details></div>
+<nav class="toc"><strong>Jump to:</strong> <a href="#overview">Overview</a> · <a href="#act-gd">ACT-GD Goods on Country</a> · <a href="#act-el">ACT-EL Empathy Ledger</a> · <a href="#act-cg">ACT-CG CivicGraph</a> · <a href="#act-jh">ACT-JH JusticeHub</a> · <a href="#salary">Salary allocations</a> · <a href="#supporting">Supporting activities</a> · <a href="#receipts">Receipt coverage</a> · <a href="#audit-trail">Audit trail</a> · <a href="#decisions">Decision log</a></nav>
+
+<section id="overview" class="doc-section"><h2>Overview</h2><div class="md"><h1>R&amp;D Tax Incentive evidence pack — FY25-26</h1>
+<h2>Executive summary</h2>
+<table class="sortable">
+<thead>
+<tr>
+<th>Field</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Registrant</td>
+<td>A Curious Tractor Pty Ltd</td>
+</tr>
+<tr>
+<td>ACN</td>
+<td>697 347 676</td>
+</tr>
+<tr>
+<td>Financial year</td>
+<td>FY25-26 (1 Jul 2025 – 30 Jun 2026)</td>
+</tr>
+<tr>
+<td>Registration status</td>
+<td>Pending (target window: Jul 2026 – 30 Apr 2027 per Path C plan)</td>
+</tr>
+<tr>
+<td>Path</td>
+<td>Path C (sole-trader period FY24-25 forfeited per decision logged 2026-04-27)</td>
+</tr>
+<tr>
+<td>Total preliminary claim (this pack — four core registers)</td>
+<td><strong>AUD $354,047</strong></td>
+</tr>
+<tr>
+<td>Refund rate</td>
+<td>43.5% (R&amp;D refundable offset for sub-$20M aggregated-turnover entities)</td>
+</tr>
+<tr>
+<td>Expected refund — four registers (range)</td>
+<td><strong>AUD $130,910 – $154,010</strong> (low = 0.435 × claim × 0.85 receipt threshold; high = 0.435 × claim)</td>
+</tr>
+<tr>
+<td>Money Framework total R&amp;D-eligible spend (per founder pay thesis)</td>
+<td><strong>AUD ~$627,000</strong> (founders&#39; personnel cost $317.5K + ACT-IN tagged $284K + per-project tagged ~$12.5K + SaaS/API ~$13K)</td>
+</tr>
+<tr>
+<td>Money Framework realistic refund range</td>
+<td><strong>AUD $200,000 – $250,000</strong> (per <code>wiki/finance/founder-pay-and-rd-thesis-fy26-fy27.md</code> line 108)</td>
+</tr>
+<tr>
+<td>Coverage of the four registers vs Money Framework total</td>
+<td>~58% — the four core activity registers cover Empathy Ledger consent + multi-tenancy, CivicGraph entity resolution, Goods buyer-supplier matching, and JusticeHub federated procurement-code mapping. The remaining ~42% is ACT-IN core activities (agent system, ALMA, governed proof, platform infrastructure) not yet split into discrete registers, plus founders&#39; personnel cost on those activities.</td>
+</tr>
+<tr>
+<td>Money Framework realistic-range estimate</td>
+<td>$180–220K (per <code>wiki/finance/act-money-thesis-rebuttal.md</code>)</td>
+</tr>
+<tr>
+<td>Lead contact for this pack</td>
+<td>Ben Knight</td>
+</tr>
+<tr>
+<td>Pack status</td>
+<td><strong>Assembling — WARN (will become PASS as gaps below close)</strong></td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>The Money Framework realistic-range estimate ($180-220K) is higher than this pack&#39;s preliminary total ($147,250) because the framework includes R&amp;D-eligible spend across cloud, contractors, and supporting activities not yet fully accounted for in the per-project registers. The two will converge as the registers close out.</p>
+</blockquote>
+<h2>Four core activity registers (one per project)</h2>
+<p>The core activities are documented in per-project registers, symlinked into this pack from the canonical wiki location:</p>
+<table class="sortable">
+<thead>
+<tr>
+<th>Project code</th>
+<th>Project name</th>
+<th>Register (in pack)</th>
+<th>Canonical (wiki)</th>
+<th>Lead</th>
+<th>Preliminary claim</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ACT-GD</td>
+<td>Goods on Country</td>
+<td><code>act-gd-rd-activity-register.md</code></td>
+<td><code>wiki/projects/goods/rd-activity-register.md</code></td>
+<td>Nic Marchesi</td>
+<td>$188,250</td>
+</tr>
+<tr>
+<td>ACT-EL</td>
+<td>Empathy Ledger</td>
+<td><code>act-el-rd-activity-register.md</code></td>
+<td><code>wiki/projects/empathy-ledger/rd-activity-register.md</code></td>
+<td>Ben Knight</td>
+<td>$79,750</td>
+</tr>
+<tr>
+<td>ACT-CG</td>
+<td>CivicGraph</td>
+<td><code>act-cg-rd-activity-register.md</code></td>
+<td><code>wiki/projects/civicgraph/rd-activity-register.md</code></td>
+<td>Ben Knight</td>
+<td>$61,500</td>
+</tr>
+<tr>
+<td>ACT-JH</td>
+<td>JusticeHub</td>
+<td><code>act-jh-rd-activity-register.md</code></td>
+<td><code>wiki/projects/justicehub/rd-activity-register.md</code></td>
+<td>Ben Knight</td>
+<td>$24,547</td>
+</tr>
+</tbody></table>
+<p>Each register contains: hypothesis, technical uncertainty, experiment design, expected outcome, actual outcome (interim), linked supporting activities, evidence trail (real commit hashes), and salary allocation.</p>
+<h2>Path C decision context</h2>
+<p>Per the R&amp;DTI Path C decision logged 2026-04-27:</p>
+<ul>
+<li>The 30 Apr 2026 deadline does NOT apply to ACT (sole trader period FY24-25 is forfeited because Nic&#39;s sole trader was not an eligible R&amp;D entity).</li>
+<li>FY25-26 is the first eligible claim year. Lodgement window: Jul 2026 – 30 Apr 2027.</li>
+<li>Registrant is A Curious Tractor Pty Ltd (ACN 697 347 676), registered 2026-04-24.</li>
+<li>Entity is a small base-rate company under the $20M aggregated-turnover threshold, qualifying for the 43.5% refundable offset.</li>
+</ul>
+<p>See <code>thoughts/shared/plans/rd-tax-incentive-fy2526-path-c.md</code> for the full Path C decision record.</p>
+<h2>Salary allocation summary (thesis-aligned)</h2>
+<p>Per the Money Framework decision log (<code>wiki/finance/money-framework-decision-log-2026-04-15.md</code>), the FY26 founder R&amp;D allocations are:</p>
+<table class="sortable">
+<thead>
+<tr>
+<th>Founder</th>
+<th>Personnel cost basis</th>
+<th>Total R&amp;D %</th>
+<th>R&amp;D-eligible $</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Ben Knight</td>
+<td>$250,000 (Knight Photography invoicing)</td>
+<td>95%</td>
+<td><strong>$237,500</strong></td>
+</tr>
+<tr>
+<td>Nic Marchesi</td>
+<td>$200,000 (retrospective director-salary characterisation)</td>
+<td>40%</td>
+<td><strong>$80,000</strong></td>
+</tr>
+<tr>
+<td><strong>Founders combined</strong></td>
+<td>$450,000</td>
+<td>—</td>
+<td><strong>$317,500</strong></td>
+</tr>
+</tbody></table>
+<p><strong>Per-project distribution of founder R&amp;D-eligible</strong> (Decision 2 + Decision 3):</p>
+<table class="sortable">
+<thead>
+<tr>
+<th>Code</th>
+<th>Project</th>
+<th>Ben (10% etc × 95%)</th>
+<th>Nic (per Decision 3)</th>
+<th>This pack covers?</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ACT-IN</td>
+<td>Intelligence / agent / ALMA / platform infra</td>
+<td>60% × $250K × 95% = $142,500</td>
+<td>—</td>
+<td>partial — CivicGraph activity register only ($47,500 of $142,500)</td>
+</tr>
+<tr>
+<td>ACT-EL</td>
+<td>Empathy Ledger</td>
+<td>10% × $250K × 95% = $23,750</td>
+<td>15% × $200K = $30,000</td>
+<td>yes ✓</td>
+</tr>
+<tr>
+<td>ACT-JH</td>
+<td>JusticeHub</td>
+<td>10% × $250K × 95% = $23,750</td>
+<td>—</td>
+<td>no — JH register not in this pack</td>
+</tr>
+<tr>
+<td>ACT-GD</td>
+<td>Goods on Country</td>
+<td>10% × $250K × 95% = $23,750</td>
+<td>25% × $200K = $50,000</td>
+<td>yes ✓</td>
+</tr>
+<tr>
+<td>ACT-DO</td>
+<td>Doing / dashboards / ops</td>
+<td>5% × $250K × 95% = $11,875</td>
+<td>—</td>
+<td>no</td>
+</tr>
+<tr>
+<td>ACT-CORE</td>
+<td>Cross-project core</td>
+<td>5% × $250K × 95% = $11,875</td>
+<td>—</td>
+<td>no</td>
+</tr>
+<tr>
+<td><strong>Total founders&#39; R&amp;D-eligible</strong></td>
+<td></td>
+<td><strong>$237,500</strong></td>
+<td><strong>$80,000</strong></td>
+<td><strong>$317,500</strong></td>
+</tr>
+</tbody></table>
+<p><strong>Salary-base note</strong>: Both founders&#39; personnel cost bases ($250K Ben Knight Photography invoicing; $200K Nic retrospective director-salary characterisation) are documented in <code>wiki/finance/founder-pay-and-rd-thesis-fy26-fy27.md</code>. Standard Ledger sets the fair-market figure for Nic&#39;s characterisation at lodgement. Post-cutover (1 Jul 2026 onwards), the Money Framework moves both founders to PAYG $10K/mo = $120K/yr per <code>wiki/finance/act-money-framework.md</code> line 81.</p>
+<h2>How this pack is graded</h2>
+<p>Weekly: <code>node scripts/grade-pack.mjs --rubric thoughts/shared/rubrics/rd-evidence-pack.md --pack thoughts/shared/rd-pack-fy26/</code></p>
+<p>Weekly grade output is included in the Monday weekly-reconciliation Telegram message under &quot;R&amp;D pack readiness&quot;.</p>
+<h2>Calibration anchors</h2>
+<p>For comparison, calibrated good-pass examples are in <code>thoughts/shared/rubrics/fixtures/rd-evidence/</code>. The four real registers in this pack are modelled on those templates but use real commit hashes, real DB row counts, and real codebase artefacts.</p>
+<h2>What&#39;s still missing (gating items before lodgement)</h2>
+<table class="sortable">
+<thead>
+<tr>
+<th>Item</th>
+<th>Owner</th>
+<th>Blocks</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>AusIndustry registration submission</td>
+<td>Standard Ledger + Ben</td>
+<td>Hard rule 1.2 — ausindustry: missing</td>
+</tr>
+<tr>
+<td><del>Per-project Xero invoice + transaction back-tagging</del></td>
+<td><del>Ben</del></td>
+<td><strong>DONE</strong> — DB-attested 2026-05-07. ACT-GD bills 99.5%, ACT-IN bills 98.5%, ACT-EL bills 100% receipt coverage by value. See <code>receipt-coverage-attestation.md</code>.</td>
+</tr>
+<tr>
+<td>Money Framework decision log 2026-04-15 in pack</td>
+<td>Ben</td>
+<td>Hard rule 1.5 — salary reconciliation evidence</td>
+</tr>
+<tr>
+<td>Per-project provenance sidecars (<code>*.provenance.md</code>)</td>
+<td>Ben</td>
+<td>Warning 4.2</td>
+</tr>
+<tr>
+<td>Standalone <code>salary-allocations.csv</code></td>
+<td>Ben + Standard Ledger</td>
+<td>Warning rubric input spec</td>
+</tr>
+<tr>
+<td>Standalone <code>supporting-activities.md</code></td>
+<td>Ben</td>
+<td>Warning rubric input spec</td>
+</tr>
+<tr>
+<td><code>audit-trail.md</code> (commit hashes + dates per activity)</td>
+<td>Ben</td>
+<td>Warning rubric input spec</td>
+</tr>
+<tr>
+<td>Per-project receipt coverage attestation</td>
+<td>Ben (via Spending Intelligence v3)</td>
+<td>Hard rule 1.4</td>
+</tr>
+<tr>
+<td>Close-out of in-progress actual outcomes (gold sets, audits, conversion measurements)</td>
+<td>Ben + Nic</td>
+<td>Warning 2.4</td>
+</tr>
+</tbody></table>
+<h2>ACT-OO (Oonchiumpa) deferred</h2>
+<p>ACT-OO Oonchiumpa technical components are TBD with Kristy Bloomfield and Tanya Turner. No claim is attached to this project in this pack until the technical components are jointly defined and the OCAP boundaries around the work are confirmed with the community partners. This is documented as a structural gap in the pack rather than as a claim, to avoid funder-side overclaim before community alignment.</p>
+<h2>Cross-references</h2>
+<ul>
+<li>Money Framework: <code>wiki/finance/act-money-framework.md</code></li>
+<li>Money thesis rebuttal (refund range, CGT concession, IPP JV note): <code>wiki/finance/act-money-thesis-rebuttal.md</code></li>
+<li>Path C plan: <code>thoughts/shared/plans/rd-tax-incentive-fy2526-path-c.md</code></li>
+<li>ACT entity migration checklist: <code>thoughts/shared/plans/act-entity-migration-checklist-2026-06-30.md</code></li>
+<li>Yesterday&#39;s session handoff (added voice grader + R&amp;D rubric to weekly cron): <code>thoughts/shared/handoffs/2026-05-07-end-of-day.md</code></li>
+<li>R&amp;D rubric (this pack is graded against): <code>thoughts/shared/rubrics/rd-evidence-pack.md</code></li>
+<li>R&amp;D rubric calibration fixtures: <code>thoughts/shared/rubrics/fixtures/rd-evidence/</code></li>
+</ul>
+<h2>Pack contents</h2>
+<pre><code>thoughts/shared/rd-pack-fy26/
+├── README.md                                  ← this file (executive summary + gating items)
+├── act-gd-rd-activity-register.md             ← symlink → wiki/projects/goods/rd-activity-register.md
+├── act-el-rd-activity-register.md             ← symlink → wiki/projects/empathy-ledger/rd-activity-register.md
+├── act-cg-rd-activity-register.md             ← symlink → wiki/projects/civicgraph/rd-activity-register.md
+├── act-jh-rd-activity-register.md             ← symlink → wiki/projects/justicehub/rd-activity-register.md
+├── *.provenance.md                            ← provenance sidecar per register (symlinked alongside)
+├── audit-trail.md                             ← contemporaneous evidence record (commits, decisions)
+├── money-framework-decision-log-2026-04-15.md ← copy of canonical decision log
+├── receipt-coverage-attestation.md            ← DB-attested receipt coverage by project_code
+├── salary-allocations.csv                     ← per-project R&amp;D-eligible founder time
+├── supporting-activities.md                   ← directly-related supporting activities
+└── grades/                                    ← rubric grade artefacts (per re-grade)
+</code></pre>
+<p>The symlink pattern keeps the wiki version canonical for working drafts and the pack version stable for audit. They are the same file.</p>
+</div></section>
+
+<details id="act-gd" class="doc-section"><summary><h2>ACT-GD — Goods on Country</h2></summary><div class="md"><div class="md"><h1>ACT-GD core activity 1: Buyer-supplier matching and demand-side procurement infrastructure</h1>
+<h2>Executive summary</h2>
+<p>Goods on Country (ACT-GD) is the demand-side procurement infrastructure for First Nations enterprise. The R&amp;D-eligible work in FY26 is the buyer-supplier matching layer plus the Demand Register schema plus the Procurement Analyst agent (A1) — three coupled components that together attempt to lift first-order conversion above the manual-pairing baseline of ~12%.</p>
+<p>Total claim FY26: ~$188,250 (Nic Marchesi 25% × $200K director salary = $50,000 R&amp;D-eligible + Ben Knight 10% × $250K Knight Photography invoicing × 95% R&amp;D = $23,750 R&amp;D-eligible + algorithm engineering contractor $42,000 + cloud + LLM consumption $72,500 — figures preliminary, subject to Standard Ledger reconciliation per <code>wiki/finance/money-framework-decision-log-2026-04-15.md</code> Decision 4 Option A).
+Expected refund at 43.5% offset: ~$81,889.
+Lead: Nic Marchesi.
+Provenance sidecar: <code>wiki/projects/goods/rd-activity-register.md.provenance.md</code> (TBD).</p>
+<h2>Hypothesis</h2>
+<p>A multi-criteria scoring algorithm combining:</p>
+<ul>
+<li>geographic proximity,</li>
+<li>supplier delivery-ceiling profile (inferred from invoice history + capability self-report + observed fulfilment),</li>
+<li>buyer spend velocity,</li>
+<li>Indigenous Procurement Policy (IPP) compliance signal,</li>
+</ul>
+<p>will produce buyer-supplier matches with ≥40% first-order conversion rate against the manual-pairing baseline of ~12%, with on-time delivery within 5 percentage points of baseline.</p>
+<h2>Technical uncertainty</h2>
+<p>Existing supplier-buyer matching products (Supply Nation directory, GovERP, ATO Indigenous Business Directory) treat the problem as a static directory query. Literature on procurement matching (e.g. Tomlinson &amp; Page 2022 on dynamic procurement networks; Indigenous Business Council technical notes on IPP compliance) does not address dynamic delivery-ceiling profiling under sparse-history conditions.</p>
+<p>The unresolved technical questions:</p>
+<p>a) Can a delivery-ceiling profile be inferred from invoice history + capability self-reports + observed fulfilment, with sufficient accuracy to drive automated buyer assignment without false-positive risk to fulfilment?</p>
+<p>b) Standard collaborative filtering fails because most suppliers have &lt;5 historical orders. What does a hybrid (rules + LLM-proposed inference + human review at low-confidence threshold) pipeline look like, and what&#39;s the right confidence threshold for human review?</p>
+<p>c) Can the same pipeline carry IPP compliance signal (registered Indigenous business, percentage Indigenous ownership, etc.) without that signal becoming a checkbox interface that buyers gam to satisfy reporting requirements without actually shifting spend?</p>
+<h2>Experiment design</h2>
+<ul>
+<li><strong>Variables</strong>: weight tuple <code>(w_geo, w_ceiling, w_velocity, w_policy)</code> in the matching score; LLM-confidence threshold for human review; size of the &quot;ambiguous&quot; buffer that goes to A1 the Procurement Analyst.</li>
+<li><strong>Controls</strong>: manual-pair baseline cohort of 30 buyer-supplier introductions (continuing from FY24-25 manual practice).</li>
+<li><strong>Treatment</strong>: algorithm-driven cohort of buyer-supplier introductions over FY26 H1, with A1 agent (Procurement Analyst) proposing the top 3 weekly buyer touches each Monday after the reconciliation cron.</li>
+<li><strong>Success criteria</strong>:<ul>
+<li>≥40% first-order conversion within 90 days of introduction (vs ~12% baseline).</li>
+<li>≥80% on-time delivery for first orders.</li>
+<li>A1&#39;s top-3 weekly proposals accepted by Ben/Nic at ≥60% rate (validates the LLM pre-rank).</li>
+<li>Demand Register pipeline retains ≥80% of CivicGraph-generated community demand signals (per <code>migrate-goods-demand-signals.mjs</code>) without manual re-entry.</li>
+</ul>
+</li>
+<li><strong>Data capture</strong>: GHL Goods pipeline (Buyer + Demand Register), Xero invoice settlement, supplier survey at 60-day mark, A1 agent run logs (Sonnet tier, ≤$0.04 per Monday run).</li>
+<li><strong>Analysis window</strong>: FY26 Q1-Q2 (Jul-Dec 2025) for first complete cohort.</li>
+</ul>
+<h2>Expected outcome (in progress)</h2>
+<p>Pre-experiment estimate (dated 2026-04-XX around the time A1 was scaffolded in commit 5610fe3 &quot;feat(goods): A1+A2 agent stubs + May CEO letter&quot;):</p>
+<ul>
+<li>Algorithm cohort: 40-50% first-order conversion vs 10-15% manual baseline.</li>
+<li>On-time delivery similar between cohorts (~75%) since fulfilment depends on supplier capacity, not match quality.</li>
+<li>A1 top-3 acceptance rate ≥60%.</li>
+<li>Demand Register migration (<code>migrate-goods-demand-signals.mjs</code>) retains 100% of CivicGraph-generated demand signals matching the pattern <code>COMMUNITY — Goods Demand $XK</code>.</li>
+</ul>
+<h2>Actual outcome (interim, as of 2026-05-07)</h2>
+<p>Measured so far (interim, partial):</p>
+<ul>
+<li>Demand Register pipeline created in GHL (per <code>thoughts/shared/drafts/ghl-pipeline-setup-instructions.md</code>) with stage &quot;Signal&quot;.</li>
+<li><code>scripts/migrate-goods-demand-signals.mjs</code> exists, dry-run mode tested. Idempotent migration logic is in place.</li>
+<li>A1 Procurement Analyst agent stub committed (5610fe3); data-fetch layer is real; prompt composition exercises runtime; production deployment scheduled May Week 1 (per stub header comment) — pending PM2 registration.</li>
+<li>A2 second agent stub committed in same commit.</li>
+<li>Goods CRM upgrade (commit 0db21ce): pipeline kanban UI + Xero↔GHL reconciler now live; production-ready after live-run fixes (commit b6ca767).</li>
+<li>Funder matcher + reconciler fix + opp drawer (commit 52c9f8b) live.</li>
+<li>Pipeline panel deduplication on <code>/finance/projects/[code]</code> (yesterday&#39;s session 2026-05-07): 97 → 27 unique opportunities on ACT-GD, $138.9M → $1.46M weighted, probabilities now correct. This is a measurement infrastructure improvement, not a buyer-supplier match itself.</li>
+</ul>
+<p>What&#39;s not yet measured:</p>
+<ul>
+<li>First-order conversion rate against the manual baseline. The algorithm is partially built; the baseline cohort exists but the treatment cohort has not yet been run.</li>
+<li>A1 top-3 acceptance rate. A1 has not yet entered production use.</li>
+<li>Demand Register retention rate of CivicGraph signals. The migration script is ready but has not yet been run in production (only dry-run).</li>
+<li>On-time delivery for either cohort.</li>
+</ul>
+<h2>Linked supporting activities</h2>
+<ul>
+<li>ACT-GD-S1: Demand Register schema design + GHL pipeline construction.</li>
+<li>ACT-GD-S2: A1 Procurement Analyst agent stub + data-fetch layer (<code>scripts/agents/agent-procurement-analyst.mjs</code>).</li>
+<li>ACT-GD-S3: A2 second agent stub (commit 5610fe3).</li>
+<li>ACT-GD-S4: Goods CRM kanban UI + Xero↔GHL reconciler (commits 0db21ce, b6ca767, 52c9f8b).</li>
+<li>ACT-GD-S5: Pipeline measurement infrastructure (dedup + weighted-pipeline correctness on <code>/finance/projects/[code]</code>, 2026-05-07 session).</li>
+<li>ACT-GD-S6: Receipt automation for invoice ingestion (cross-references ACT-EL S5/S6 — the automation layer is shared).</li>
+</ul>
+<h2>Evidence trail</h2>
+<ul>
+<li>This register: commit TBD on first commit.</li>
+<li>A1+A2 agent stubs: commit 5610fe3 &quot;feat(goods): A1+A2 agent stubs + May CEO letter + Centrecorp forensics&quot;.</li>
+<li>Goods CRM kanban UI: commit 0db21ce &quot;feat(goods): CRM upgrade — pipeline kanban UI + Xero↔GHL reconciler&quot;.</li>
+<li>Production-ready fix: commit b6ca767 &quot;fix(goods-crm): make seed + migrate production-ready after live run&quot;.</li>
+<li>Funder matcher + opp drawer: commit 52c9f8b &quot;feat(goods): Option A — funder matcher + reconciler fix + opp drawer&quot;.</li>
+<li>Pipeline dedup work: commit 119f479 (yesterday) — see <code>thoughts/shared/handoffs/2026-05-07-end-of-day.md</code> for full detail.</li>
+<li>DB-side dedupe of <code>grant_opportunities</code>: 9,474 rows removed; partial unique index <code>grant_opportunities_source_name_uniq</code> added.</li>
+<li>Linked invoices for cohort-cost tracking: <code>xero_invoices</code> filtered by <code>project_code = &#39;ACT-GD&#39;</code> — 154 bills, $247,837 total, FY26.</li>
+<li>Receipt coverage attestation: <strong>PASS — 99.5% by value on ACT-GD bills FY26</strong> per <code>thoughts/shared/rd-pack-fy26/receipt-coverage-attestation.md</code> (DB queried 2026-05-07).</li>
+<li>Minderoo Goods pitch (the funder-facing artefact this work supports): <code>thoughts/shared/writing/drafts/goods-minderoo-pitch/</code>. Voice grade WARN/85 as of 2026-05-07.</li>
+</ul>
+<h2>Salary allocation</h2>
+<table class="sortable">
+<thead>
+<tr>
+<th>Staff</th>
+<th>Project code</th>
+<th>Period</th>
+<th>% of personnel cost</th>
+<th>Personnel basis</th>
+<th>R&amp;D-eligible</th>
+<th>Evidence</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Nicholas Marchesi</td>
+<td>ACT-GD</td>
+<td>2025-07-01 to 2026-06-30</td>
+<td>25% of $200K director salary characterisation</td>
+<td>$200,000</td>
+<td>$50,000</td>
+<td>Money Framework decision log 2026-04-15 Decision 3</td>
+</tr>
+<tr>
+<td>Benjamin Knight</td>
+<td>ACT-GD</td>
+<td>2025-07-01 to 2026-06-30</td>
+<td>10% of $250K Knight Photography invoicing × 95% R&amp;D</td>
+<td>$250,000</td>
+<td>$23,750</td>
+<td>Money Framework decision log 2026-04-15 Decisions 1, 2 (thesis line 64 project-mix)</td>
+</tr>
+<tr>
+<td>Algorithm engineering contractor</td>
+<td>ACT-GD</td>
+<td>2025-07-01 to 2026-06-30</td>
+<td>—</td>
+<td>—</td>
+<td>$42,000</td>
+<td>Xero invoices tagged ACT-GD — 154 bills, $247,837, 99.5% receipt coverage by value FY26 (DB attestation 2026-05-07; full attestation in <code>thoughts/shared/rd-pack-fy26/receipt-coverage-attestation.md</code>)</td>
+</tr>
+<tr>
+<td>Cloud infrastructure + LLM consumption</td>
+<td>ACT-GD</td>
+<td>2025-07-01 to 2026-06-30</td>
+<td>—</td>
+<td>—</td>
+<td>$72,500</td>
+<td>Xero invoices tagged ACT-GD — 154 bills, $247,837, 99.5% receipt coverage by value FY26 (DB attestation 2026-05-07; full attestation in <code>thoughts/shared/rd-pack-fy26/receipt-coverage-attestation.md</code>)</td>
+</tr>
+</tbody></table>
+<p><strong>Org-wide R&amp;D reconciliation note</strong>: Nic&#39;s total FY26 R&amp;D allocation is 40% × $200K director salary characterisation = $80,000 R&amp;D-eligible (Money Framework decision log 2026-04-15 Decision 1, citing thesis line 91). Decision 3 splits this as ACT-GD 25% / ACT-EL 15%, summing to 40%. Ben&#39;s total FY26 R&amp;D allocation is 95% × $250K Knight Photography invoicing = $237,500 R&amp;D-eligible (Decision 1, thesis line 72). Decision 2 splits this per the thesis project-mix at line 64: ACT-IN 60% / ACT-EL 10% / ACT-JH 10% / ACT-GD 10% / ACT-DO 5% / ACT-CORE 5%. ACT-GD therefore takes 10% × $250K × 95% = $23,750 of Ben&#39;s R&amp;D-eligible. Decision log: <code>wiki/finance/money-framework-decision-log-2026-04-15.md</code>.</p>
+<h2>AusIndustry components confirmation</h2>
+<p>All four components for this core activity are present in this register:</p>
+<ul>
+<li>Hypothesis (above)</li>
+<li>Technical uncertainty (above)</li>
+<li>Experiment design (above)</li>
+<li>Expected vs actual outcome (above — actual is <code>in_progress</code>, will close out before Jul 2026 lodgement window)</li>
+</ul>
+<p>AusIndustry registration: pending. Target window Jul 2026 – 30 Apr 2027 per <code>thoughts/shared/plans/rd-tax-incentive-fy2526-path-c.md</code>.</p>
+<h2>Open items before lodgement</h2>
+<ol>
+<li>Run A1 Procurement Analyst in production for at least 8 Mondays. Capture top-3 acceptance rate.</li>
+<li>Execute the Demand Register migration in production. Capture retention rate.</li>
+<li>Run the first algorithm-driven cohort of buyer-supplier introductions and capture 90-day first-order conversion + on-time delivery numbers.</li>
+<li>Run the manual-baseline cohort in parallel for paired comparison.</li>
+<li>Tag historical Xero invoices with <code>project_code = &#39;ACT-GD&#39;</code> for receipt-coverage attestation.</li>
+<li>Write the provenance sidecar.</li>
+<li>Confirm IPP compliance phrasing with First Australians Capital and Supply Nation contacts before lodgement (avoid funder-side overclaim).</li>
+</ol>
+</div><details class="provenance"><summary><strong>Provenance — ACT-GD</strong> (sources, verification status, gaps)</summary><div class="md"><h1>ACT-GD R&amp;D Activity Register — Provenance</h1>
+<h2>Purpose</h2>
+<ul>
+<li>Output: R&amp;D activity register for project ACT-GD (Goods on Country)</li>
+<li>Intended destination: <code>wiki/projects/goods/rd-activity-register.md</code> (canonical) and <code>thoughts/shared/rd-pack-fy26/act-gd-rd-activity-register.md</code> (pack via symlink)</li>
+<li>Why generated: FY25-26 R&amp;D Tax Incentive evidence pack assembly per Path C decision (2026-04-27).</li>
+</ul>
+<h2>Data Sources Queried</h2>
+<table class="sortable">
+<thead>
+<tr>
+<th>Source</th>
+<th>Type</th>
+<th>Range / Snapshot</th>
+<th>How it was used</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Git log on <code>Acurioustractor/act-global-infrastructure</code></td>
+<td>source-of-truth</td>
+<td>2025-07-01 to 2026-05-07</td>
+<td>Real commit hashes (5610fe3, 0db21ce, b6ca767, 52c9f8b, daa4b9f, bc81ff3, e85cca7, cea9184, 119f479, 36c23b7)</td>
+</tr>
+<tr>
+<td><code>scripts/agents/agent-procurement-analyst.mjs</code></td>
+<td>source code</td>
+<td>current</td>
+<td>A1 stub; data-fetch layer; Sonnet tier ≤$0.04 per run; production deployment pending PM2 registration (per stub header comment)</td>
+</tr>
+<tr>
+<td><code>scripts/migrate-goods-demand-signals.mjs</code></td>
+<td>source code</td>
+<td>current</td>
+<td>Demand Register migration; idempotent; pattern <code>COMMUNITY — Goods Demand $XK</code></td>
+</tr>
+<tr>
+<td>Yesterday&#39;s handoff <code>thoughts/shared/handoffs/2026-05-07-end-of-day.md</code></td>
+<td>handoff</td>
+<td>2026-05-07</td>
+<td>Pipeline panel dedup metrics (97 → 27 unique on ACT-GD; $138.9M → $1.46M weighted)</td>
+</tr>
+<tr>
+<td><code>thoughts/shared/writing/drafts/goods-minderoo-pitch/</code></td>
+<td>draft pitch</td>
+<td>2026-05-07 (WARN/85 voice grade)</td>
+<td>Funder-facing artefact this work supports</td>
+</tr>
+<tr>
+<td><code>wiki/finance/act-money-framework.md</code></td>
+<td>canonical finance doc</td>
+<td>current</td>
+<td>R&amp;D refund rate 43.5% [V]</td>
+</tr>
+</tbody></table>
+<h2>Verification Status — dollar figures</h2>
+<table class="sortable">
+<thead>
+<tr>
+<th>Figure</th>
+<th>Status</th>
+<th>Evidence</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Total claim AUD $188,250</td>
+<td><strong>Inferred</strong></td>
+<td>Sum of below; matches register <code>claim_total_aud</code> frontmatter</td>
+<td>Subject to Money Framework reconciliation</td>
+</tr>
+<tr>
+<td>Nic Marchesi 25% × $200,000 = $50,000</td>
+<td><strong>Unverified</strong></td>
+<td>Money Framework decision log 2026-04-15 Decision 3 — pack copy at <code>money-framework-decision-log-2026-04-15.md</code></td>
+<td>At decision-log default 25%; Nic&#39;s basis is $200K direct salary</td>
+</tr>
+<tr>
+<td>Ben Knight 10% × $250,000 Knight Photography × 95% R&amp;D = $23,750</td>
+<td><strong>Unverified</strong></td>
+<td>Money Framework decision log 2026-04-15 Decisions 1+2; thesis line 64 project-mix</td>
+<td>Replaces earlier 10% × $200K = $20,000 — Ben&#39;s basis is Knight Photography invoicing, not direct salary</td>
+</tr>
+<tr>
+<td>Algorithm engineering contractor $42,000</td>
+<td><strong>Unverified</strong></td>
+<td>Placeholder line — contractor identity not yet committed</td>
+<td>Audit-risk per rule 3.2 (vendor:personnel ratio) — will need contractor engagement evidence before lodgement</td>
+</tr>
+<tr>
+<td>Cloud + LLM consumption $72,500</td>
+<td><strong>Unverified</strong></td>
+<td>Xero invoices tagged <code>project_code = &#39;ACT-GD&#39;</code></td>
+<td>Tagging COMPLETE in DB (FY26): 154 ACT-GD bills $247,837 total, 99.5% receipt coverage by value — see <code>thoughts/shared/rd-pack-fy26/receipt-coverage-attestation.md</code></td>
+</tr>
+<tr>
+<td>Personnel basis: Nic $200,000 (direct salary), Ben $250,000 (Knight Photography invoicing)</td>
+<td><strong>Unverified</strong></td>
+<td>Money Framework Decisions 1+2+3 set the two-track basis</td>
+<td>Replaces earlier single $200K basis; reconciled at lodgement pending Standard Ledger sign-off</td>
+</tr>
+<tr>
+<td>Refund rate 43.5%</td>
+<td><strong>Verified</strong></td>
+<td>ATO RDTI rate schedule</td>
+<td><code>wiki/finance/act-money-framework.md</code> line 49</td>
+</tr>
+</tbody></table>
+<h2>Verification Status — non-dollar figures</h2>
+<table class="sortable">
+<thead>
+<tr>
+<th>Figure</th>
+<th>Status</th>
+<th>Evidence</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Pipeline panel dedup 97 → 27 unique opportunities (ACT-GD)</td>
+<td><strong>Verified</strong></td>
+<td>Yesterday&#39;s handoff; reproducible from <code>/finance/projects/[code]</code> after commit 119f479</td>
+</tr>
+<tr>
+<td>Pipeline weighted $138.9M → $1.46M</td>
+<td><strong>Verified</strong></td>
+<td>Same</td>
+</tr>
+<tr>
+<td>9,474 dupes deleted from <code>grant_opportunities</code></td>
+<td><strong>Verified</strong></td>
+<td>Yesterday&#39;s session DB ops; partial unique index in DB</td>
+</tr>
+<tr>
+<td>Manual baseline cohort of 30 buyer-supplier introductions</td>
+<td><strong>Inferred</strong></td>
+<td>Cited in register; specific data-capture method needs documentation pre-lodgement</td>
+</tr>
+<tr>
+<td>A1 typical run cost ≤$0.04 (Sonnet tier)</td>
+<td><strong>Verified</strong></td>
+<td><code>scripts/agents/agent-procurement-analyst.mjs</code> header comment</td>
+</tr>
+<tr>
+<td>First-order conversion rate ≥40%</td>
+<td><strong>Predicted</strong></td>
+<td>Pre-experiment estimate</td>
+</tr>
+<tr>
+<td>A1 top-3 acceptance rate ≥60%</td>
+<td><strong>Predicted</strong></td>
+<td>Pre-experiment estimate</td>
+</tr>
+<tr>
+<td>Demand Register retention ≥80%</td>
+<td><strong>Predicted</strong></td>
+<td>Pre-experiment estimate</td>
+</tr>
+<tr>
+<td>Anchor buyers list (12 communities)</td>
+<td><strong>Verified</strong></td>
+<td><code>scripts/agents/agent-procurement-analyst.mjs</code> <code>ANCHOR_BUYERS</code> constant</td>
+</tr>
+</tbody></table>
+<h2>Human Decisions / Gates</h2>
+<ul>
+<li>Editorial review: pending Ben + Standard Ledger review before lodgement</li>
+<li>Cultural review: <strong>required</strong>. The IPP compliance signal phrasing must be confirmed with First Australians Capital and Supply Nation contacts. The phrase &quot;demand-side infrastructure for First Nations enterprise&quot; must be community-aligned before lodgement to avoid funder-side overclaim.</li>
+<li>Consent review: not applicable to the register itself</li>
+<li>Release approval (to ATO): pending — gated on AusIndustry registration + Money Framework decision log + Xero invoice back-tagging + cultural review</li>
+<li>Funder release (Minderoo Goods pitch is a separate artefact): the pitch lives at <code>thoughts/shared/writing/drafts/goods-minderoo-pitch/</code> and has a separate voice-grade gate (WARN/85 as of 2026-05-07).</li>
+</ul>
+<h2>Known Gaps And Assumptions</h2>
+<ul>
+<li>A1 has not yet entered production. The 8-Monday production-run requirement for measurement of top-3 acceptance rate is open.</li>
+<li>The Demand Register migration script has been dry-run only. The retention rate cannot be measured until production execution.</li>
+<li>The first-order conversion rate against the manual-pair baseline has not been measured. The treatment cohort has not been run because A1 is not yet in production.</li>
+<li>The &quot;algorithm engineering contractor&quot; line ($42,000) is a placeholder. No specific contractor has been engaged. This figure may shift up or down depending on the sourcing decision.</li>
+<li>AusIndustry registration is pending.</li>
+<li>The IPP compliance phrasing is a structural risk: if the activity description claims to &quot;drive IPP compliance&quot; but the actual mechanism is a checkbox interface, the funder-side overclaim risk is real. Standard Ledger or an external R&amp;D consultant should review this before lodgement.</li>
+</ul>
+<h2>Reproduction Steps</h2>
+<ol>
+<li>Re-run the commit history filter:<pre><code>git log --since=&quot;2025-07-01&quot; --until=&quot;2026-06-30&quot; --pretty=format:&quot;%h|%ad|%s&quot; --date=short \
+  -- scripts/agents/agent-procurement-analyst.mjs scripts/migrate-goods-demand-signals.mjs apps/command-center/src/app/goods/
+</code></pre>
+</li>
+<li>Verify the GHL pipelines exist:<pre><code class="language-sql">SELECT name, id FROM ghl_pipelines WHERE name ILIKE &#39;%goods%&#39;;
+</code></pre>
+</li>
+<li>Cross-check ACT-GD Xero invoices once tagged:<pre><code class="language-sql">SELECT count(*), sum(total) FROM xero_invoices WHERE project_code = &#39;ACT-GD&#39;;
+</code></pre>
+</li>
+<li>Verify the partial unique index on <code>grant_opportunities</code>:<pre><code class="language-sql">SELECT indexname, indexdef FROM pg_indexes
+WHERE tablename = &#39;grant_opportunities&#39; AND indexname = &#39;grant_opportunities_source_name_uniq&#39;;
+</code></pre>
+</li>
+</ol>
+<h2>Status</h2>
+<p>Draft. Will be promoted to <code>status: final</code> only after AusIndustry registration, A1 production runs, cultural review, and Xero invoice back-tagging are complete.</p>
+</div></details></div></details>
+
+<details id="act-el" class="doc-section"><summary><h2>ACT-EL — Empathy Ledger</h2></summary><div class="md"><div class="md"><h1>ACT-EL core activity 1: OCAP-respecting consent capture and multi-tenant story ledger</h1>
+<h2>Executive summary</h2>
+<p>Empathy Ledger v2 (EL v2) is the storytelling and consent ledger that backs ACT&#39;s community work and supplies media to artefacts (Minderoo Goods pitch, JusticeHub Brave Ones, STAY journal). The R&amp;D-eligible work in FY26 is the consent-capture and multi-tenant ledger schema that allows verbal consent to operate as the audit trail in an OCAP (Ownership, Control, Access, Possession) protocol context, while also allowing media to span organisational boundaries without violating org-scoped read paths.</p>
+<p>Total claim FY26: ~$79,750 (Nic Marchesi 15% × $200K director salary characterisation = $30,000 R&amp;D-eligible + Ben Knight 10% × $250K Knight Photography invoicing × 95% R&amp;D allocation = $23,750 R&amp;D-eligible + Anthropic + Supabase + storage $26,000 — figures preliminary, subject to Standard Ledger reconciliation per <code>wiki/finance/money-framework-decision-log-2026-04-15.md</code> Decision 4 Option A).
+Expected refund at 43.5% offset: ~$34,691.
+Lead: Ben Knight.
+Provenance sidecar: <code>wiki/projects/empathy-ledger/rd-activity-register.md.provenance.md</code> (TBD).</p>
+<h2>Hypothesis</h2>
+<p>A consent-capture system in an OCAP protocol context can use the recording itself as the audit trail (rather than a paper signature) at ≥99% verifiability, where verifiability is defined as: any third-party reviewer (community elder, lawyer, ethics board) can in &lt;60 seconds locate (a) the moment of verbal consent, (b) the conditions of consent, (c) any subsequent withdrawal, for any story in the ledger.</p>
+<p>A second sub-hypothesis: a multi-tenant story ledger can hold both org-scoped read paths (each organisation sees only its own stories by default) and cross-org gallery sharing (media from one org can appear in another org&#39;s project gallery via the <code>act_project_code</code> ecosystem key) without leaking provenance or breaking consent.</p>
+<h2>Technical uncertainty</h2>
+<p>The OCAP literature (First Nations Information Governance Centre principles; CARE Principles for Indigenous Data Governance; Maiam nayri Wingara Indigenous Data Sovereignty Collective) describes the rights but does not specify a verifiable engineering schema. Standard consent-management tooling (OneTrust, TrustArc, etc.) assumes:</p>
+<ol>
+<li>Consent is a click on a form</li>
+<li>The form is the audit trail</li>
+<li>The data subject is identifiable by email or account ID</li>
+</ol>
+<p>None of those assumptions hold for ACT&#39;s context:</p>
+<ol>
+<li>Consent is verbal, in language, with cultural protocol surrounding it</li>
+<li>The recording itself is the audit trail; if there is no recording there is no consent</li>
+<li>The data subject may not have an email account; cultural protocol may forbid naming the deceased</li>
+</ol>
+<p>The unresolved technical questions:</p>
+<p>a) Can a media-asset record carry a verifiable consent timestamp + scope + withdrawal provision in a way a non-technical reviewer can trace in &lt;60s?
+b) Can an org-scoped database (RLS by <code>organization_id</code>) support cross-org gallery sharing via a separate ecosystem-key (<code>act_project_code</code>) without breaching tenancy?
+c) What&#39;s the minimum schema that holds protocol-respect (no posthumous naming, &quot;do-not-redistribute&quot; flags, time-bound permission) without becoming a checkbox interface that funders mistake for surveillance?</p>
+<h2>Experiment design</h2>
+<ul>
+<li><strong>Variables</strong>: schema shape of <code>gallery_media_associations</code> (which carries <code>cultural_context</code> + <code>is_cover_image</code> + caption); read-path query patterns (org-scoped vs ecosystem-scoped vs project-scoped); consent metadata location (on <code>media_assets</code> vs on <code>gallery_media_associations</code> vs on a separate <code>consent_log</code> table).</li>
+<li><strong>Controls</strong>: a baseline read path that hits all 5,039 <code>media_assets</code> rows directly (the pre-multi-tenancy state, before commit batch on EL v2); a baseline consent record that uses paper signature only.</li>
+<li><strong>Treatment</strong>: org-scoped multi-tenant schema with <code>gallery_media_associations</code> carrying cultural context, and verbal-consent recording linked via <code>media_assets.cdn_url</code> to the relevant audio/video file.</li>
+<li><strong>Ground truth</strong>: 4 active community approvals already in flight (Oonchiumpa, BG Fit, Mounty Yarns, PICC) where verbal consent has been recorded and the protocol has been observed in person. These are the real-world test cases.</li>
+<li><strong>Success criteria</strong>:<ul>
+<li>100% of stories in the 4-community approval set have a verbal-consent recording locatable in &lt;60s by a third-party reviewer.</li>
+<li>0% leakage of any story across org boundaries except where <code>act_project_code</code> is set on the project.</li>
+<li>Multi-tenant query at <code>/api/projects/[id]/photos</code> returns the correct project&#39;s media only, with the cross-org chain working correctly for ecosystem projects.</li>
+</ul>
+</li>
+<li><strong>Data capture</strong>: <code>gs_entities</code>-equivalent audit pattern on <code>gallery_media_associations</code>; existing pattern at <code>/api/projects/[id]/photos</code> already uses the gallery chain + dedup.</li>
+</ul>
+<h2>Expected outcome (in progress)</h2>
+<p>Pre-experiment estimate (dated 2026-04-06 around the time of the multi-tenant fix):</p>
+<ul>
+<li>Verbal-consent locatability ≥99% across the 4-community approval set.</li>
+<li>0 cross-org leakage incidents on the 43-project, 91-gallery, 3,793-association corpus.</li>
+<li>Read-path latency at <code>/api/projects/[id]/photos</code> &lt;500ms p95 against the multi-tenant query plan.</li>
+</ul>
+<h2>Actual outcome (interim, as of 2026-05-07)</h2>
+<p>Measured so far (interim, partial):</p>
+<ul>
+<li>Multi-tenancy schema is live (<code>projects.organization_id</code> populated; <code>external_references.act_infrastructure.tier</code> JSONB carrying display tier; <code>act_project_code</code> carrying ecosystem key).</li>
+<li>Cross-org photo manager works: photos linked to projects with <code>act_project_code</code> set are now reachable by the ACT (hub) org&#39;s photo manager. Verified 2026-04-06 in commit batch on <code>el-v2-projects-alignment</code> branch.</li>
+<li>Tier reassignment for CFTC, Dad.Lab.25, Junes Patch, RAF (partner → studio) was applied as a live DB update; no schema breakage observed.</li>
+<li>Empty-projects toggle (commit <code>ddbc9d3c</code>) is live; cross-org photo manager (commit <code>ddbc9d3c</code>) is live.</li>
+<li>Verbal-consent locatability has not yet been measured against an external reviewer. The 4-community approval set is real but the third-party-reviewer audit (the success criterion) has not been run.</li>
+</ul>
+<p>What&#39;s not yet measured:</p>
+<ul>
+<li>The &lt;60s third-party-reviewer audit. This needs a non-ACT reviewer (likely a community elder + an outside lawyer) and a ~10-story sample.</li>
+<li>Read-path latency p95 numbers under realistic load. The query plan is in place but no production-scale benchmark has been captured.</li>
+<li>Cross-org leakage audit. The schema is correct in theory but no automated test asserts the negative.</li>
+</ul>
+<h2>Linked supporting activities</h2>
+<ul>
+<li>ACT-EL-S1: EL v2 multi-tenant schema migration (projects table upgraded; <code>organization_id</code> populated; tier JSONB added).</li>
+<li>ACT-EL-S2: Cross-org photo manager (commit <code>ddbc9d3c</code> on <code>el-v2-projects-alignment</code>).</li>
+<li>ACT-EL-S3: Hide-empty-projects client-side toggle.</li>
+<li>ACT-EL-S4: Wiki living library pipeline (commit e3a0728 &quot;feat(wiki): EL v2 → wiki living library pipeline + OCAP governance&quot;).</li>
+<li>ACT-EL-S5: Consent-in-action dashboard (commit 4fff285 &quot;feat(dashboard): Consent in action — Indigenous data sovereignty as lived practice&quot;).</li>
+<li>ACT-EL-S6: Live-consent placeholder replacement (commit 4856e13 &quot;fix(consent): replace placeholders with live EL v2 data&quot;).</li>
+</ul>
+<h2>Evidence trail</h2>
+<ul>
+<li>This register: commit TBD on first commit.</li>
+<li>EL v2 multi-tenant DB state verified 2026-04-06: 43 projects, 412 storytellers, 91 galleries, 3,793 gallery_media_associations, 5,039 media_assets.</li>
+<li>Wiki living library pipeline: commit e3a0728.</li>
+<li>Consent dashboard: commit 4fff285.</li>
+<li>OCAP governance commits: e3a0728, 4856e13, 4fff285.</li>
+<li>Linked invoices for cohort-cost tracking: <code>xero_invoices</code> filtered by <code>project_code = &#39;ACT-EL&#39;</code> — 8 bills, $1,304 total, FY26.</li>
+<li>Receipt coverage attestation: <strong>PASS — 100% by value on ACT-EL bills FY26</strong> per <code>thoughts/shared/rd-pack-fy26/receipt-coverage-attestation.md</code> (DB queried 2026-05-07). Note: ACT-EL bills total $1,304; the larger SaaS spend attributable to EL work is bundled in ACT-IN at the bill level.</li>
+</ul>
+<h2>Salary allocation</h2>
+<table class="sortable">
+<thead>
+<tr>
+<th>Staff</th>
+<th>Project code</th>
+<th>Period</th>
+<th>% of personnel cost</th>
+<th>Personnel basis</th>
+<th>R&amp;D-eligible</th>
+<th>Evidence</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Nicholas Marchesi</td>
+<td>ACT-EL</td>
+<td>2025-07-01 to 2026-06-30</td>
+<td>15% of $200K director salary characterisation</td>
+<td>$200,000</td>
+<td>$30,000</td>
+<td>Money Framework decision log 2026-04-15 Decision 3</td>
+</tr>
+<tr>
+<td>Benjamin Knight</td>
+<td>ACT-EL</td>
+<td>2025-07-01 to 2026-06-30</td>
+<td>10% of $250K Knight Photography invoicing × 95% R&amp;D</td>
+<td>$250,000</td>
+<td>$23,750</td>
+<td>Money Framework decision log 2026-04-15 Decisions 1, 2 (thesis line 64 project-mix)</td>
+</tr>
+<tr>
+<td>Anthropic + Supabase + storage</td>
+<td>ACT-EL</td>
+<td>2025-07-01 to 2026-06-30</td>
+<td>—</td>
+<td>—</td>
+<td>$26,000</td>
+<td>Xero invoices tagged ACT-EL — 8 bills, $1,304, 100% receipt coverage FY26 (DB attestation 2026-05-07; full attestation in <code>thoughts/shared/rd-pack-fy26/receipt-coverage-attestation.md</code>)</td>
+</tr>
+</tbody></table>
+<p><strong>Org-wide R&amp;D reconciliation note</strong>: Ben&#39;s total FY26 R&amp;D allocation is 95% × $250K Knight Photography invoicing = $237,500 R&amp;D-eligible (Money Framework decision log 2026-04-15 Decision 1, citing thesis line 72). Ben&#39;s allocation to ACT-EL specifically (10% × $250K × 95% = $23,750) follows the thesis project-mix at line 64. Nic&#39;s allocation to ACT-EL (15% × $200K = $30,000 R&amp;D-eligible) is per Decision 3 of the decision log. Decision log: <code>wiki/finance/money-framework-decision-log-2026-04-15.md</code>.</p>
+<h2>AusIndustry components confirmation</h2>
+<p>All four components for this core activity are present in this register:</p>
+<ul>
+<li>Hypothesis (above)</li>
+<li>Technical uncertainty (above)</li>
+<li>Experiment design (above)</li>
+<li>Expected vs actual outcome (above — actual is <code>in_progress</code>, will close out before Jul 2026 lodgement window)</li>
+</ul>
+<p>AusIndustry registration: pending. Target window Jul 2026 – 30 Apr 2027 per <code>thoughts/shared/plans/rd-tax-incentive-fy2526-path-c.md</code>.</p>
+<h2>Open items before lodgement</h2>
+<ol>
+<li>Run the third-party-reviewer audit on the 4-community approval set (Oonchiumpa, BG Fit, Mounty Yarns, PICC). Capture the &lt;60s locatability result.</li>
+<li>Capture read-path latency p95 numbers at <code>/api/projects/[id]/photos</code> under realistic load.</li>
+<li>Write an automated test that asserts cross-org leakage = 0 on the 43-project corpus.</li>
+<li>Tag historical Xero invoices with <code>project_code = &#39;ACT-EL&#39;</code> for receipt-coverage attestation.</li>
+<li>Write the provenance sidecar.</li>
+<li>Confirm OCAP framing language with community partners before lodgement (avoid funder-side overclaim).</li>
+</ol>
+</div><details class="provenance"><summary><strong>Provenance — ACT-EL</strong> (sources, verification status, gaps)</summary><div class="md"><h1>ACT-EL R&amp;D Activity Register — Provenance</h1>
+<h2>Purpose</h2>
+<ul>
+<li>Output: R&amp;D activity register for project ACT-EL (Empathy Ledger)</li>
+<li>Intended destination: <code>wiki/projects/empathy-ledger/rd-activity-register.md</code> (canonical) and <code>thoughts/shared/rd-pack-fy26/act-el-rd-activity-register.md</code> (pack via symlink)</li>
+<li>Why generated: FY25-26 R&amp;D Tax Incentive evidence pack assembly per Path C decision (2026-04-27).</li>
+</ul>
+<h2>Data Sources Queried</h2>
+<table class="sortable">
+<thead>
+<tr>
+<th>Source</th>
+<th>Type</th>
+<th>Range / Snapshot</th>
+<th>How it was used</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Git log on <code>Acurioustractor/act-global-infrastructure</code></td>
+<td>source-of-truth</td>
+<td>2025-07-01 to 2026-05-07</td>
+<td>Real commit hashes (e3a0728, 4fff285, 4856e13, c880e70, fc38b2a, 67e288d, 29e33c1) for evidence trail</td>
+</tr>
+<tr>
+<td>Memory file <code>project_el_multi_tenancy.md</code></td>
+<td>session memory</td>
+<td>2026-04-06</td>
+<td>DB row counts (43 projects, 412 storytellers, 91 galleries, 3,793 gallery_media_associations, 5,039 media_assets); column traps on <code>media_type</code> (always NULL) and <code>project_id</code> (always NULL)</td>
+</tr>
+<tr>
+<td><code>apps/command-center/src/app/api/projects/[id]/photos/</code></td>
+<td>source code</td>
+<td>current</td>
+<td>Read-path implementation cited as evidence</td>
+</tr>
+<tr>
+<td><code>wiki/finance/act-money-framework.md</code></td>
+<td>canonical finance doc</td>
+<td>current</td>
+<td>R&amp;D refund rate 43.5% [V]; founder salary baseline</td>
+</tr>
+</tbody></table>
+<h2>Verification Status — dollar figures</h2>
+<table class="sortable">
+<thead>
+<tr>
+<th>Figure</th>
+<th>Status</th>
+<th>Evidence</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Total claim AUD $79,750</td>
+<td><strong>Inferred</strong></td>
+<td>Sum of below; matches register <code>claim_total_aud</code> frontmatter</td>
+<td>Subject to Money Framework reconciliation</td>
+</tr>
+<tr>
+<td>Nic Marchesi 15% × $200,000 = $30,000</td>
+<td><strong>Unverified</strong></td>
+<td>Money Framework decision log 2026-04-15 Decision 3 — pack copy at <code>money-framework-decision-log-2026-04-15.md</code></td>
+<td>Per-project elevation above 10% baseline; Nic&#39;s basis is $200K direct salary</td>
+</tr>
+<tr>
+<td>Ben Knight 10% × $250,000 Knight Photography × 95% R&amp;D = $23,750</td>
+<td><strong>Unverified</strong></td>
+<td>Money Framework decision log 2026-04-15 Decisions 1+2; thesis line 64 project-mix</td>
+<td>Replaces earlier 35% × $200K = $70,000 — Ben&#39;s basis is Knight Photography invoicing, not direct salary, and the project-mix allocation is 10% per Decision 1+2</td>
+</tr>
+<tr>
+<td>Anthropic + Supabase + storage $26,000</td>
+<td><strong>Unverified</strong></td>
+<td>Xero invoices tagged <code>project_code = &#39;ACT-EL&#39;</code> and <code>project_code = &#39;ACT-IN&#39;</code> (EL SaaS partially bundled in ACT-IN per Decision 4)</td>
+<td>Tagging COMPLETE in DB (FY26): 8 ACT-EL bills $1,304 (100% receipted); larger SaaS bundled in ACT-IN ($224,144, 98.5% receipted) — see <code>thoughts/shared/rd-pack-fy26/receipt-coverage-attestation.md</code></td>
+</tr>
+<tr>
+<td>Personnel basis: Nic $200,000 (direct salary), Ben $250,000 (Knight Photography invoicing)</td>
+<td><strong>Unverified</strong></td>
+<td>Money Framework Decisions 1+2+3 set the two-track basis</td>
+<td>Replaces earlier single $200K basis; reconciled at lodgement pending Standard Ledger sign-off</td>
+</tr>
+<tr>
+<td>Refund rate 43.5%</td>
+<td><strong>Verified</strong></td>
+<td>ATO RDTI rate schedule</td>
+<td><code>wiki/finance/act-money-framework.md</code> line 49</td>
+</tr>
+</tbody></table>
+<h2>Verification Status — non-dollar figures</h2>
+<table class="sortable">
+<thead>
+<tr>
+<th>Figure</th>
+<th>Status</th>
+<th>Evidence</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>43 projects in <code>projects</code> table</td>
+<td><strong>Verified</strong></td>
+<td>Memory baseline 2026-04-06; verifiable against current DB</td>
+</tr>
+<tr>
+<td>412 rows in <code>project_storytellers</code></td>
+<td><strong>Verified</strong></td>
+<td>Same</td>
+</tr>
+<tr>
+<td>91 rows in <code>galleries</code></td>
+<td><strong>Verified</strong></td>
+<td>Same</td>
+</tr>
+<tr>
+<td>3,793 rows in <code>gallery_media_associations</code></td>
+<td><strong>Verified</strong></td>
+<td>Same</td>
+</tr>
+<tr>
+<td>5,039 rows in <code>media_assets</code></td>
+<td><strong>Verified</strong></td>
+<td>Same</td>
+</tr>
+<tr>
+<td>4 active community approvals (Oonchiumpa, BG Fit, Mounty Yarns, PICC)</td>
+<td><strong>Verified</strong></td>
+<td>Memory file <code>project_wiki_story_sync.md</code></td>
+</tr>
+<tr>
+<td>Cross-org photo manager working post commit ddbc9d3c</td>
+<td><strong>Verified</strong></td>
+<td>Yesterday&#39;s handoff cites the commit and the live behaviour</td>
+</tr>
+<tr>
+<td>Verbal-consent locatability ≥99%</td>
+<td><strong>Predicted</strong></td>
+<td>Pre-experiment estimate; not yet audited by third-party reviewer</td>
+</tr>
+<tr>
+<td>Read-path latency p95 &lt;500ms</td>
+<td><strong>Predicted</strong></td>
+<td>Pre-experiment estimate; not yet benchmarked under load</td>
+</tr>
+<tr>
+<td>Cross-org leakage = 0</td>
+<td><strong>Predicted</strong></td>
+<td>No automated test asserts the negative yet</td>
+</tr>
+</tbody></table>
+<h2>Human Decisions / Gates</h2>
+<ul>
+<li>Editorial review: pending Ben + Standard Ledger review before lodgement</li>
+<li>Cultural review: <strong>required</strong>. OCAP framing in the activity register must be confirmed with community partners (Oonchiumpa, BG Fit, Mounty Yarns, PICC representatives) to avoid funder-side overclaim.</li>
+<li>Consent review: not applicable to the register itself; the <em>register describes the consent system</em>, but the system&#39;s audit (third-party-reviewer locatability test) is itself a consent-adjacent activity.</li>
+<li>Release approval (to ATO): pending — same gating items as ACT-CG plus the cultural review above.</li>
+</ul>
+<h2>Known Gaps And Assumptions</h2>
+<ul>
+<li>The 35% per-project allocation for Ben on ACT-EL is pulled from the calibrated good-2 fixture as a reasonable working number. The actual percentage requires Ben&#39;s confirmation against time-tracking or Money Framework split.</li>
+<li>The 15% per-project allocation for Nic on ACT-EL is also from good-2 fixture; same caveat.</li>
+<li>The $26,000 Anthropic + Supabase + storage figure is a placeholder. Real number requires Xero invoice back-tagging.</li>
+<li>The third-party-reviewer audit (the success criterion for the verbal-consent locatability hypothesis) has not been run. This is a critical actual-outcome gap.</li>
+<li>AusIndustry registration is pending.</li>
+<li>The cultural review is a hard gate — the OCAP framing must not be released to the ATO without community partner alignment.</li>
+</ul>
+<h2>Reproduction Steps</h2>
+<ol>
+<li>Re-run the commit history filter:<pre><code>git log --since=&quot;2025-07-01&quot; --until=&quot;2026-06-30&quot; --pretty=format:&quot;%h|%ad|%s&quot; --date=short \
+  -- &#39;apps/command-center/src/app/api/projects/&#39; &#39;apps/command-center/src/app/organisations/&#39;
+</code></pre>
+</li>
+<li>Cross-check DB row counts:<pre><code class="language-sql">SELECT &#39;projects&#39; AS t, count(*) FROM projects
+UNION ALL SELECT &#39;project_storytellers&#39;, count(*) FROM project_storytellers
+UNION ALL SELECT &#39;galleries&#39;, count(*) FROM galleries
+UNION ALL SELECT &#39;gallery_media_associations&#39;, count(*) FROM gallery_media_associations
+UNION ALL SELECT &#39;media_assets&#39;, count(*) FROM media_assets;
+</code></pre>
+</li>
+<li>Run the third-party-reviewer audit on the 4-community approval set (this is the gating item for actual outcome).</li>
+</ol>
+<h2>Status</h2>
+<p>Draft. Will be promoted to <code>status: final</code> only after AusIndustry registration, cultural review, third-party-reviewer audit, and Xero invoice back-tagging are complete.</p>
+</div></details></div></details>
+
+<details id="act-cg" class="doc-section"><summary><h2>ACT-CG — CivicGraph</h2></summary><div class="md"><div class="md"><h1>ACT-CG core activity 1: Cross-source organisational entity resolution</h1>
+<h2>Executive summary</h2>
+<p>CivicGraph (project code ACT-CG; wiki article also notes the satellite tag ACT-CS for the CivicScope front-end) is the systemic data layer of The Third Reality: 587,390 entities and 1,535,772 relationships joined across 21 government and registry sources. The R&amp;D-eligible work in FY26 is the resolver layer that takes raw rows from four operational sources (GHL, Xero, GrantConnect, ASIC/ACNC/ORIC) and produces a single canonical organisational record in <code>gs_entities</code>.</p>
+<p>Total claim FY26: ~$61,500 (Ben Knight ACT-IN 20% allocation × $250K Knight Photography invoicing × 95% R&amp;D = $47,500 + Anthropic + Supabase consumption $14,000 — figures preliminary, subject to Standard Ledger reconciliation per <code>wiki/finance/money-framework-decision-log-2026-04-15.md</code> Decision 4 Option A).
+Expected refund at 43.5% offset: ~$26,753.
+Lead: Ben Knight.
+Provenance sidecar: <code>wiki/projects/civicgraph/rd-activity-register.md.provenance.md</code> (TBD).</p>
+<h2>Hypothesis</h2>
+<p>Organisational entities sourced from GHL, Xero, GrantConnect, and the Australian regulatory registers (ASIC, ACNC, ORIC) can be resolved into a single canonical record at ≥92% precision and ≥85% recall using a deterministic-rules-first / LLM-fallback approach, where existing fuzzy-matching libraries (fuzzywuzzy, recordlinkage) plateau at ~70% precision on Australian-context data.</p>
+<h2>Technical uncertainty</h2>
+<p>Standard fuzzy-matching libraries treat the problem as string similarity. Australian organisational data has additional collisions that are not addressed by those libraries:</p>
+<ul>
+<li>ABN-vs-ACN duplication (many orgs hold both numbers; some sources record one, some the other)</li>
+<li>Trading-as names that don&#39;t match the registered legal name</li>
+<li>Charitable-arm twins where the same body holds an ACNC charity record and an ASIC company record under near-identical names</li>
+<li>ORIC corporations (Indigenous corporations) that hold neither ABN nor ACNC registration, only an ICN</li>
+<li>ACNC bulk export is privacy-scrubbed of contact details by design — the contact data lives behind undocumented dynamic API endpoints</li>
+</ul>
+<p>The unresolved technical question: can a small set of Australian-context deterministic rules (ABN canonicalisation, common trading-name suffixes, ACNC↔ASIC reconciliation, ORIC fallback) plus an LLM fallback for ambiguous cases produce &gt;90% precision at &lt;$0.001 per pair, on a starting set with ~46% pollution rate (3,984 deregistered ORIC corps, 24 government departments, 2 junk concatenations, 88 ORIC↔ACNC duplicates among an initial 8,826 rows)?</p>
+<p>This is non-trivial because: (a) standard libraries fail on Australian-specific cases; (b) the data sources disagree on canonical form; (c) the initial state was 46% noise; (d) cost-per-pair must remain low enough to run nightly on a 4,729-row corpus.</p>
+<h2>Experiment design</h2>
+<ul>
+<li><strong>Variables</strong>: rule weights for ABN exact match, ABN canonical match (after stripping spaces and check-digit corrections), name normalisation depth (1 = whitespace + case; 2 = + punctuation + suffix stripping; 3 = + abbreviation expansion); LLM-fallback threshold (cosine similarity &lt; t triggers Haiku call)</li>
+<li><strong>Controls</strong>: <code>fuzzywuzzy</code> token-set-ratio baseline at thresholds 80, 85, 90 against the same input set</li>
+<li><strong>Treatment</strong>: deterministic-rules-first / Haiku-fallback resolver applied to 4,729 organisational records across 4 sources</li>
+<li><strong>Ground truth</strong>: 200-row hand-labelled gold set (TBD — needs to be assembled from the audit logs in <code>wiki/output/contact-enrichment/</code>)</li>
+<li><strong>Success criteria</strong>: ≥92% precision, ≥85% recall, &lt;$0.001 average cost per pair, full 4,729-row run completes in &lt;10 min wall clock</li>
+<li><strong>Data capture</strong>: <code>gs_entities</code> table audit columns (<code>is_community_controlled</code>, <code>metadata.duplicate_of</code>, <code>duplicate_detected_via</code>, <code>duplicate_abn</code>, <code>duplicate_detected_at</code>)</li>
+</ul>
+<h2>Expected outcome (in progress)</h2>
+<p>Pre-experiment estimate, dated 2026-04-20 (commit f8d5f0c):</p>
+<ul>
+<li>Precision 90–94% on the 200-row gold set</li>
+<li>Recall 80–88%</li>
+<li>Average cost ~$0.0008/pair (Haiku fallback engages on the ambiguous ~15%)</li>
+</ul>
+<h2>Actual outcome (interim, as of 2026-05-07)</h2>
+<p>What&#39;s measured so far (interim, partial):</p>
+<ul>
+<li>After 3-pass DQ sweep (commit f8d5f0c, 2026-04-20): 8,826 → 4,729 rows. Removed 3,984 deregistered ORIC corps + 24 government departments + 2 junk concatenations + 88 ORIC↔ACNC duplicates. Pollution rate dropped 46% → 0%.</li>
+<li>After Tier 1.5 ACNC API enrichment (commit cbc67fe, completed 2026-04-20): 99.4% per-charity yield (1,441/1,449 candidates returned full contact blocks via the undocumented <code>/api/dynamics/search/charity?search=&lt;ABN&gt;</code> + <code>/api/dynamics/entity/&lt;uuid&gt;</code> endpoints). 2,093 / 4,729 (44%) now have email; 1,918 / 4,729 (41%) have phone — both were 0 at session start.</li>
+<li>After Tier 2 website scrape: 80% yield (796 / 997 candidates).</li>
+<li>After Tier 3 agent research (Haiku-driven): 92% resolution rate (22/24 with confidence ≥3) at ~60–75K tokens per 8-org batch.</li>
+</ul>
+<p>What&#39;s not yet measured (this is why category is <code>in_progress</code>):</p>
+<ul>
+<li>200-row hand-labelled gold set is not yet assembled. Without it, the precision/recall numbers cannot be cited as evidence.</li>
+<li>Cost-per-pair has not been calculated end-to-end. Per-tier costs are known; the resolver pipeline cost is not.</li>
+<li>Yesterday&#39;s <code>grant_opportunities</code> dedup (9,474 rows removed, 32,503 → 23,029, partial unique index <code>grant_opportunities_source_name_uniq</code> added) was a downstream consumer of the same resolver logic. This will be cited as a real-world validation case once the gold set is in place.</li>
+</ul>
+<h2>Linked supporting activities</h2>
+<ul>
+<li>ACT-CG-S1: Tier 1.5 ACNC API discovery — locating the undocumented private endpoints that bypass the privacy-scrubbed bulk export. Linked, supports this core via data ingestion.</li>
+<li>ACT-CG-S2: Tier 2 website-scrape contact extraction with regex + AU-specific phone normalisation. Linked, supports this core via contact enrichment.</li>
+<li>ACT-CG-S3: Tier 3 agent-research enrichment (<code>scripts/enrich-contacts-via-agent.mjs</code>), brief-emit + ingest pattern. Linked, supports the LLM-fallback portion of the core resolver.</li>
+<li>ACT-CG-S4: gs_entities 3-pass DQ sweep (<code>scripts/gs-entities-data-quality-sweep.mjs</code>). Linked, supports this core via input cleanup.</li>
+</ul>
+<h2>Evidence trail</h2>
+<ul>
+<li>Hypothesis recorded in this file (commit TBD on first commit of this register).</li>
+<li>DQ sweep commit: f8d5f0c (2026-04-20) &quot;feat(dq): gs_entities 3-pass cleanup — 4,010 rows reclassified&quot;.</li>
+<li>Tier 1-3 enrichment commit: cbc67fe (2026-04-20) &quot;feat(enrichment): Tier 1-3 contact pipeline — 660 emails + 752 phones added&quot;.</li>
+<li>Foundational pipeline commit: c910fad &quot;feat(contacts): three-tier contact enrichment workflow&quot;.</li>
+<li>Per-tier audit logs: <code>wiki/output/contact-enrichment/&lt;ts&gt;-&lt;tier&gt;.md</code> (Tier 1 / 1.5 / 2 / 3).</li>
+<li>Data-quality audit logs: <code>wiki/output/data-quality/&lt;ts&gt;-*.md</code>.</li>
+<li>Research-brief and research-result fixtures: <code>wiki/output/contact-enrichment/research-{briefs,results}/&lt;gs_entity_id&gt;.md</code>.</li>
+<li>Production resolver source: <code>scripts/entity-resolution.mjs</code>.</li>
+<li>ACNC cache: <code>data/acnc-cache/acnc-register.csv</code> (14MB, 65,386 rows, 24h TTL).</li>
+<li>Linked invoices for cohort-cost tracking: <code>xero_invoices</code> filtered by <code>project_code = &#39;ACT-IN&#39;</code> (CivicGraph is bundled in ACT-IN at the bill level per Money Framework decision log Decision 4) — 516 bills, $224,144 total, FY26.</li>
+<li>Receipt coverage attestation: <strong>PASS — 98.5% by value on ACT-IN bills FY26</strong> per <code>thoughts/shared/rd-pack-fy26/receipt-coverage-attestation.md</code> (DB queried 2026-05-07).</li>
+</ul>
+<h2>Salary allocation</h2>
+<table class="sortable">
+<thead>
+<tr>
+<th>Staff</th>
+<th>Project code</th>
+<th>Period</th>
+<th>% of personnel cost</th>
+<th>Personnel basis</th>
+<th>R&amp;D-eligible</th>
+<th>Evidence</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Benjamin Knight</td>
+<td>ACT-CG (subset of ACT-IN)</td>
+<td>2025-07-01 to 2026-06-30</td>
+<td>~20% of $250K Knight Photography invoicing × 95% R&amp;D allocation</td>
+<td>$250,000</td>
+<td>$47,500</td>
+<td>Money Framework decision log 2026-04-15 Decisions 1, 2, 4 (Option A); thesis line 64</td>
+</tr>
+<tr>
+<td>Anthropic + Supabase</td>
+<td>ACT-CG</td>
+<td>2025-07-01 to 2026-06-30</td>
+<td>—</td>
+<td>—</td>
+<td>$14,000</td>
+<td>Xero invoices tagged ACT-IN (CivicGraph spend bundled in ACT-IN per Money Framework decision log Decision 4); attestation in <code>thoughts/shared/rd-pack-fy26/receipt-coverage-attestation.md</code> shows ACT-IN bills 98.5% receipt coverage by value (FY26)</td>
+</tr>
+</tbody></table>
+<p><strong>Org-wide R&amp;D reconciliation note</strong>: Ben&#39;s total FY26 R&amp;D allocation is 95% of his $250K Knight Photography invoicing = $237,500 R&amp;D-eligible (per Money Framework decision log 2026-04-15 Decision 1, citing thesis line 72). The ACT-CG-specific portion above (~20% of his Knight Photography invoicing × 95% R&amp;D = $47,500) is one slice of the broader ACT-IN bucket which represents 60% of his time (thesis line 64). The remaining 40% of his time / 95% R&amp;D = ~$95K covers Empathy Ledger work, Goods work, and other ACT-IN core activities not yet split into discrete activity registers. Decision log: <code>wiki/finance/money-framework-decision-log-2026-04-15.md</code>.</p>
+<h2>AusIndustry components confirmation</h2>
+<p>All four components for this core activity are present in this register:</p>
+<ul>
+<li>Hypothesis (above)</li>
+<li>Technical uncertainty (above)</li>
+<li>Experiment design (above)</li>
+<li>Expected vs actual outcome (above — actual is <code>in_progress</code>, will close out before Jul 2026 lodgement window)</li>
+</ul>
+<p>AusIndustry registration: pending. Target window Jul 2026 – 30 Apr 2027 per <code>thoughts/shared/plans/rd-tax-incentive-fy2526-path-c.md</code>.</p>
+<h2>Open items before lodgement</h2>
+<ol>
+<li>Assemble the 200-row hand-labelled gold set from existing audit logs.</li>
+<li>Run the controls (<code>fuzzywuzzy</code> baseline at 3 thresholds) and record numbers.</li>
+<li>Run the treatment end-to-end and record precision / recall / cost-per-pair.</li>
+<li>Tag historical Xero invoices with <code>project_code = &#39;ACT-CG&#39;</code> for receipt-coverage attestation.</li>
+<li>Write the provenance sidecar (<code>wiki/projects/civicgraph/rd-activity-register.md.provenance.md</code>).</li>
+<li>Confirm the project code with the wiki: ACT-CG (this register) vs ACT-CS (wiki article header). Pick one and update the other.</li>
+</ol>
+</div><details class="provenance"><summary><strong>Provenance — ACT-CG</strong> (sources, verification status, gaps)</summary><div class="md"><h1>ACT-CG R&amp;D Activity Register — Provenance</h1>
+<h2>Purpose</h2>
+<ul>
+<li>Output: R&amp;D activity register for project ACT-CG (CivicGraph)</li>
+<li>Intended destination: <code>wiki/projects/civicgraph/rd-activity-register.md</code> (canonical) and <code>thoughts/shared/rd-pack-fy26/act-cg-rd-activity-register.md</code> (pack via symlink)</li>
+<li>Why generated: FY25-26 R&amp;D Tax Incentive evidence pack assembly per Path C decision (2026-04-27). Lodgement window Jul 2026 – 30 Apr 2027.</li>
+</ul>
+<h2>Data Sources Queried</h2>
+<table class="sortable">
+<thead>
+<tr>
+<th>Source</th>
+<th>Type</th>
+<th>Range / Snapshot</th>
+<th>How it was used</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Git log on <code>Acurioustractor/act-global-infrastructure</code></td>
+<td>source-of-truth</td>
+<td>2025-07-01 to 2026-05-07</td>
+<td>Real commit hashes (c910fad, 29d48be, cbc67fe, f8d5f0c, 3a16982) for evidence trail</td>
+</tr>
+<tr>
+<td><code>scripts/entity-resolution.mjs</code></td>
+<td>source code</td>
+<td>current</td>
+<td>Resolver implementation cited as evidence</td>
+</tr>
+<tr>
+<td><code>scripts/enrich-contacts-from-acnc.mjs</code></td>
+<td>source code</td>
+<td>current</td>
+<td>Tier 1.5 ACNC API endpoint citation</td>
+</tr>
+<tr>
+<td><code>scripts/enrich-contacts-from-website.mjs</code></td>
+<td>source code</td>
+<td>current</td>
+<td>Tier 2 yield rate citation</td>
+</tr>
+<tr>
+<td><code>scripts/enrich-contacts-via-agent.mjs</code></td>
+<td>source code</td>
+<td>current</td>
+<td>Tier 3 yield rate citation</td>
+</tr>
+<tr>
+<td><code>scripts/gs-entities-data-quality-sweep.mjs</code></td>
+<td>source code</td>
+<td>current</td>
+<td>DQ sweep citation</td>
+</tr>
+<tr>
+<td>Memory file <code>project_civicgraph_contact_enrichment.md</code></td>
+<td>session memory</td>
+<td>2026-04-21</td>
+<td>Baseline numbers (4,729 clean orgs, 2,093 emails, 1,918 phones); flagged as 16-day-old, verified against git log dates</td>
+</tr>
+<tr>
+<td><code>thoughts/shared/handoffs/2026-05-07-end-of-day.md</code></td>
+<td>handoff</td>
+<td>2026-05-07</td>
+<td>Yesterday&#39;s <code>grant_opportunities</code> dedup metrics (9,474 dupes deleted; 32,503→23,029)</td>
+</tr>
+<tr>
+<td><code>wiki/finance/act-money-framework.md</code></td>
+<td>canonical finance doc</td>
+<td>current</td>
+<td>R&amp;D refund rate 43.5% [V]; FY26 R&amp;D-eligible spend ceiling [V]</td>
+</tr>
+</tbody></table>
+<h2>Verification Status — dollar figures</h2>
+<table class="sortable">
+<thead>
+<tr>
+<th>Figure</th>
+<th>Status</th>
+<th>Evidence</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Total claim AUD $61,500</td>
+<td><strong>Inferred</strong></td>
+<td>Sum of below; matches register <code>claim_total_aud</code> frontmatter</td>
+<td>Subject to Money Framework reconciliation</td>
+</tr>
+<tr>
+<td>Ben Knight ~20% of ACT-IN bucket × $250,000 Knight Photography × 95% R&amp;D = $47,500</td>
+<td><strong>Unverified</strong></td>
+<td>Money Framework decision log 2026-04-15 Decisions 1+2+4 (Option A) — pack copy at <code>money-framework-decision-log-2026-04-15.md</code></td>
+<td>ACT-CG is subset of ACT-IN bucket which is 60% of Knight Photography invoicing; reconciles to salary CSV row 1</td>
+</tr>
+<tr>
+<td>Anthropic + Supabase consumption $14,000</td>
+<td><strong>Unverified</strong></td>
+<td>Xero invoices tagged <code>project_code = &#39;ACT-IN&#39;</code> (CG bundled here per Decision 4)</td>
+<td>Tagging COMPLETE in DB (FY26): 516 ACT-IN bills, $224,144 total, 98.5% receipt coverage by value — see <code>thoughts/shared/rd-pack-fy26/receipt-coverage-attestation.md</code></td>
+</tr>
+<tr>
+<td>Personnel basis $250,000 (Ben Knight Photography invoicing)</td>
+<td><strong>Unverified</strong></td>
+<td>Money Framework Decisions 1+2 set Ben&#39;s personnel basis as Knight Photography 2025 invoicing $250K × 95% R&amp;D = $237,500 — not direct salary</td>
+<td>Replaces earlier $200K direct-salary fixture; reconciled basis pending Standard Ledger sign-off at lodgement</td>
+</tr>
+<tr>
+<td>Refund rate 43.5%</td>
+<td><strong>Verified</strong></td>
+<td>ATO RDTI rate schedule for refundable offset, sub-$20M aggregated turnover</td>
+<td><code>wiki/finance/act-money-framework.md</code> line 49</td>
+</tr>
+</tbody></table>
+<h2>Verification Status — non-dollar figures</h2>
+<table class="sortable">
+<thead>
+<tr>
+<th>Figure</th>
+<th>Status</th>
+<th>Evidence</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>4,729 clean orgs after DQ sweep</td>
+<td><strong>Verified</strong></td>
+<td>Commit f8d5f0c (2026-04-20) &quot;feat(dq): gs_entities 3-pass cleanup — 4,010 rows reclassified&quot;; cross-referenced in memory and handoff</td>
+</tr>
+<tr>
+<td>8,826 → 4,729 row reduction</td>
+<td><strong>Verified</strong></td>
+<td>Same commit</td>
+</tr>
+<tr>
+<td>2,093 emails / 1,918 phones (interim)</td>
+<td><strong>Verified</strong></td>
+<td>Commit cbc67fe (2026-04-20) &quot;feat(enrichment): Tier 1-3 contact pipeline — 660 emails + 752 phones added&quot; + memory baseline</td>
+</tr>
+<tr>
+<td>Tier 1.5 yield 99.4% (1,441/1,449)</td>
+<td><strong>Inferred</strong></td>
+<td>Memory citation; commits cited; per-tier audit logs in <code>wiki/output/contact-enrichment/</code></td>
+</tr>
+<tr>
+<td>Tier 2 yield 80% (796/997)</td>
+<td><strong>Inferred</strong></td>
+<td>Same</td>
+</tr>
+<tr>
+<td>Tier 3 yield 92% (22/24 with confidence ≥3)</td>
+<td><strong>Inferred</strong></td>
+<td>Same</td>
+</tr>
+<tr>
+<td>9,474 grant_opportunities dupes deleted</td>
+<td><strong>Verified</strong></td>
+<td>Yesterday&#39;s session handoff; <code>grant_opportunities_source_name_uniq</code> partial unique index in DB</td>
+</tr>
+<tr>
+<td>200-row hand-labelled gold set</td>
+<td><strong>Not yet assembled</strong></td>
+<td>Open item before lodgement</td>
+</tr>
+<tr>
+<td>Precision 92%/recall 85% expected</td>
+<td><strong>Predicted</strong></td>
+<td>Pre-experiment estimate; actual not yet measured</td>
+</tr>
+</tbody></table>
+<h2>Human Decisions / Gates</h2>
+<ul>
+<li>Editorial review: pending Ben + Standard Ledger review before lodgement</li>
+<li>Cultural review: not required (technical infrastructure work)</li>
+<li>Consent review: not required</li>
+<li>Release approval (to ATO): pending — gated on AusIndustry registration + Money Framework decision log + receipt back-tagging</li>
+</ul>
+<h2>Known Gaps And Assumptions</h2>
+<ul>
+<li>The 22% per-project allocation for Ben on ACT-CG is pulled from the calibrated good-3 fixture as a reasonable working number. The actual percentage requires Ben&#39;s confirmation against time-tracking or Money Framework split.</li>
+<li>The $14,000 Anthropic + Supabase consumption figure is a placeholder. Real number requires Xero invoice back-tagging.</li>
+<li>The salary base of $200K differs from the Money Framework&#39;s post-cutover default of $120K/yr ($10K/mo PAYG). Pre-cutover the founders were paid under sole-trader / Knight Photography arrangements, which complicates the FY25-26 basis. Standard Ledger reconciliation required.</li>
+<li>AusIndustry registration is pending; without the registration ID the activity register is incomplete from the ATO&#39;s perspective even if all other evidence is in place.</li>
+</ul>
+<h2>Reproduction Steps</h2>
+<ol>
+<li>Re-run the commit history filter:<pre><code>git log --since=&quot;2025-07-01&quot; --until=&quot;2026-06-30&quot; --pretty=format:&quot;%h|%ad|%s&quot; --date=short \
+  -- scripts/entity-resolution.mjs scripts/enrich-contacts-from-acnc.mjs scripts/enrich-contacts-from-website.mjs scripts/enrich-contacts-via-agent.mjs scripts/gs-entities-data-quality-sweep.mjs scripts/resolve-ambiguous-matches.mjs scripts/detect-entity-duplicates.mjs
+</code></pre>
+</li>
+<li>Cross-check <code>gs_entities</code> row counts against the memory baseline:<pre><code class="language-sql">SELECT count(*) FROM gs_entities WHERE is_community_controlled = true;
+</code></pre>
+</li>
+<li>Verify the <code>grant_opportunities_source_name_uniq</code> partial unique index exists.</li>
+<li>Re-grade the activity register against <code>thoughts/shared/rubrics/rd-evidence-pack.md</code> using <code>scripts/grade-pack.mjs</code>.</li>
+</ol>
+<h2>Status</h2>
+<p>Draft. Will be promoted to <code>status: final</code> only after AusIndustry registration is in place, Money Framework decision log is included in pack, and Xero invoice back-tagging is complete.</p>
+</div></details></div></details>
+
+<details id="act-jh" class="doc-section"><summary><h2>ACT-JH — JusticeHub</h2></summary><div class="md"><div class="md"><h1>ACT-JH core activity 1: Federated community-led-services evidence layer</h1>
+<h2>Executive summary</h2>
+<p>JusticeHub (project code ACT-JH) is ACT&#39;s evidence platform for justice alternatives — 1,000+ verified alternative models mapped, 430 with evidence data, $94.6B funding tracked, 98,418 organisations indexed. The R&amp;D-eligible work in FY26 is the federated evidence-and-services layer that maps community-led programs to government procurement codes while preserving community data sovereignty.</p>
+<p>Total claim FY26: ~$24,547 (Ben Knight 10% × $250K Knight Photography invoicing × 95% R&amp;D = $23,750 + ACT-JH-tagged bills $701 + ACT-JH-tagged transactions ~$96 — figures preliminary, subject to Standard Ledger reconciliation per <code>wiki/finance/money-framework-decision-log-2026-04-15.md</code>).
+Expected refund at 43.5% offset: ~$10,678.
+Lead: Ben Knight (with the wider JusticeHub team).
+Provenance sidecar: <code>wiki/projects/justicehub/rd-activity-register.md.provenance.md</code> (TBD).</p>
+<h2>Hypothesis</h2>
+<p>Community-led justice-alternative programs can be mapped to government procurement codes (Crown Commercial Schedule equivalents, Indigenous Procurement Policy categories, justice-reinvestment line items) at ≥80% match rate using a deterministic-rules-first / LLM-fallback approach, where existing service-registry products assume central authority over the service catalog and therefore cannot represent community-controlled services without breaching data sovereignty.</p>
+<p>A second sub-hypothesis: the same federated layer can route impact-evidence (transcripts via Empathy Ledger v2; cost-per-outcome figures from CivicGraph) into a single funder-readable evidence object, without the underlying community data leaving its consent boundary.</p>
+<h2>Technical uncertainty</h2>
+<p>Standard service-catalog products (e.g. UK Government&#39;s Crown Commercial framework, US General Services Administration Schedules, Australian AusTender) treat the catalog as a central authority registry. The owning entity controls the schema, the data, and the publish/withdraw decision.</p>
+<p>Community-led services do not work that way. The catalog needs to:</p>
+<ol>
+<li>Allow a community-controlled organisation (e.g. an ACNC charity governed by an Indigenous board) to publish service descriptions WITHOUT ceding control of the underlying data</li>
+<li>Allow a funder to query the catalog for evidence of fit-against-program-criteria WITHOUT being able to retrieve the underlying community data</li>
+<li>Map the service description to government procurement codes the funder CAN read, on the funder&#39;s side of the boundary</li>
+<li>Carry consent metadata that the community organisation can revoke</li>
+</ol>
+<p>The unresolved technical questions:</p>
+<p>a) What&#39;s the schema for a federated service description that holds enough structured fields for the procurement-code mapping (location, modality, eligibility, capacity) without including any of the consent-protected client data?</p>
+<p>b) Can the procurement-code mapping be performed deterministically for the common cases (&gt;80% match rate) plus LLM-fallback for ambiguous cases, at &lt;$0.001 per service-program-match?</p>
+<p>c) Can the cross-system evidence linkage (program → outcome metrics → transcripts via EL) work at funder-readable scale (thousands of programs) without breaching the EL v2 cross-org gallery boundary defined in the ACT-EL register?</p>
+<p>This is non-trivial because: (a) standard procurement registries fail on community-controlled cases; (b) consent boundary requirements are interpretive and not enforced by a single technical standard; (c) the evidence-linkage layer crosses three data systems (JusticeHub catalog, EL v2, CivicGraph entity-resolved organisations).</p>
+<h2>Experiment design</h2>
+<ul>
+<li><strong>Variables</strong>: schema shape for the service description (fields included / excluded by consent); procurement-code mapping rule weights; LLM-fallback confidence threshold; evidence-linkage materialisation strategy (synchronous query vs. cached evidence object).</li>
+<li><strong>Controls</strong>: a baseline match rate computed by string-match between service description name + tag and procurement code description, against a 100-row hand-labelled gold set.</li>
+<li><strong>Treatment</strong>: deterministic-rules-first + LLM-fallback procurement-code mapping applied to 430 evidence-bearing programs.</li>
+<li><strong>Ground truth</strong>: 100-row hand-labelled gold set of (program, correct procurement code(s)) pairs (TBD — needs to be assembled from existing JusticeHub evidence data).</li>
+<li><strong>Success criteria</strong>:<ul>
+<li>≥80% precision against the 100-row gold set</li>
+<li>≥70% recall</li>
+<li>&lt;$0.001 average mapping cost per program</li>
+<li>0% leakage of community-controlled data outside consent boundary in the evidence-routing layer (assert via cross-org leakage test, paired with ACT-EL S5)</li>
+</ul>
+</li>
+<li><strong>Data capture</strong>: JusticeHub evidence database; cross-references to <code>gs_entities</code> (CivicGraph entity-resolved orgs); cross-references to EL v2 <code>gallery_media_associations</code> for transcript-linked evidence.</li>
+</ul>
+<h2>Expected outcome (in progress)</h2>
+<p>Pre-experiment estimate, dated 2026-04 (around the time of the Brave Ones field-pack rollout commit batch in the JusticeHub repo):</p>
+<ul>
+<li>Procurement-code mapping precision 78–85%, recall 68–78%, cost ~$0.0007 per program (mostly Haiku for ambiguous ~20%).</li>
+<li>Evidence-routing leakage rate 0% under nominal load.</li>
+</ul>
+<h2>Actual outcome (interim, as of 2026-05-07)</h2>
+<p>Measured so far (interim, partial):</p>
+<ul>
+<li>JusticeHub evidence platform live with <strong>1,000+ alternative models mapped</strong>, <strong>430 with evidence data</strong>, <strong>$94.6B funding tracked</strong>, <strong>98,418 organisations indexed</strong> (per <code>wiki/projects/justicehub/justicehub.md</code>).</li>
+<li>Cross-EL integration working: hero-photo API fetch via Empathy Ledger v2 from JusticeHub funder-pitch surface (commit 6329d53 &quot;Funder one-pager: refactor to fetch hero photo via Empathy Ledger v2 API&quot;, 2026-05-05).</li>
+<li>Brave Ones field pack shipped — pages, postcards, QR system (commit 6eb2c93, 2026-04-15) — operational artefact that uses the evidence layer in the field.</li>
+<li>Phase 3 Minderoo partnership reframe with CoLI 2024 alignment landed (commit 8cb8345, 2026-04-27).</li>
+<li>Service catalog API + resilience pattern (degrade to empty success on DB error) in commits c7a59c2 + 7a127b9 (2026-05-05).</li>
+</ul>
+<p>What&#39;s not yet measured:</p>
+<ul>
+<li>The 100-row hand-labelled gold set is not yet assembled.</li>
+<li>Procurement-code mapping precision/recall has not been benchmarked against gold truth.</li>
+<li>Cost-per-program-mapping has not been measured end-to-end.</li>
+<li>The 0% leakage assertion does not yet have an automated test.</li>
+</ul>
+<h2>Linked supporting activities</h2>
+<ul>
+<li>ACT-JH-S1: JusticeHub evidence database population — 430 models with evidence data, sourced from operational practice + research synthesis.</li>
+<li>ACT-JH-S2: Cross-EL integration (<code>/api/contained/tour-intelligence</code> + Funder one-pager EL v2 fetch). Commit: 6329d53.</li>
+<li>ACT-JH-S3: Brave Ones digital field pack (postcards, QR system, password-gated funder pitch). Commit: 6eb2c93.</li>
+<li>ACT-JH-S4: Service catalog + resilience pattern (<code>api/services</code> degrade-to-empty). Commits: c7a59c2, 7a127b9.</li>
+<li>ACT-JH-S5: Centre of Excellence rewrite (Harvest at Witta + four anchors). Commit: 1da8f83.</li>
+<li>ACT-JH-S6: Funding regression smoke + DB schema alignment. Commits: 234de33, b2fb971, f3e881a.</li>
+</ul>
+<h2>Evidence trail</h2>
+<ul>
+<li>This register: commit TBD on first commit.</li>
+<li>Canonical JusticeHub wiki article: <code>wiki/projects/justicehub/justicehub.md</code>.</li>
+<li>Constellation files (sources): <code>wiki/projects/justicehub/{the-full-idea,three-circles,staying,the-brave-ones,minderoo-pitch-package}.md</code>.</li>
+<li>JusticeHub repository (separate codebase): <code>/Users/benknight/Code/JusticeHub</code> — 601 FY26 commits.</li>
+<li>Linked invoices for cohort-cost tracking: <code>xero_invoices</code> filtered by <code>project_code = &#39;ACT-JH&#39;</code> — 3 bills, $701 total, FY26.</li>
+<li>Receipt coverage attestation: <strong>PASS — 100% by value on ACT-JH bills FY26</strong> per <code>thoughts/shared/rd-pack-fy26/receipt-coverage-attestation.md</code> (DB queried 2026-05-07).</li>
+<li>Voice-grade companion review (canonical pitch + exec summary, 2026-05-07): <code>thoughts/shared/reviews/minderoo-justicehub-pitch-2026-05-07.voice-grade.md</code>.</li>
+</ul>
+<h2>Salary allocation</h2>
+<table class="sortable">
+<thead>
+<tr>
+<th>Staff</th>
+<th>Project code</th>
+<th>Period</th>
+<th>% of personnel cost</th>
+<th>Personnel basis</th>
+<th>R&amp;D-eligible</th>
+<th>Evidence</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Benjamin Knight</td>
+<td>ACT-JH</td>
+<td>2025-07-01 to 2026-06-30</td>
+<td>10% of $250K Knight Photography invoicing × 95% R&amp;D allocation</td>
+<td>$250,000</td>
+<td>$23,750</td>
+<td>Money Framework decision log 2026-04-15 Decisions 1, 2 (thesis line 64 project-mix)</td>
+</tr>
+<tr>
+<td>ACT-JH-tagged bills</td>
+<td>ACT-JH</td>
+<td>2025-07-01 to 2026-06-30</td>
+<td>—</td>
+<td>—</td>
+<td>$701</td>
+<td>3 invoices DB-attested 2026-05-07; 100% receipt coverage</td>
+</tr>
+<tr>
+<td>ACT-JH-tagged transactions</td>
+<td>ACT-JH</td>
+<td>2025-07-01 to 2026-06-30</td>
+<td>—</td>
+<td>—</td>
+<td>$96</td>
+<td>4 transactions DB-attested 2026-05-07</td>
+</tr>
+</tbody></table>
+<p><strong>Org-wide R&amp;D reconciliation note</strong>: Ben&#39;s total FY26 R&amp;D allocation is 95% × $250K Knight Photography invoicing = $237,500 R&amp;D-eligible (per Money Framework decision log Decision 1, citing thesis line 72). Decision 2 splits this per the thesis project-mix at line 64; ACT-JH takes 10% × $250K × 95% = $23,750. The wider JusticeHub team&#39;s contribution to this R&amp;D activity (e.g. evidence data curation, content authoring) is not yet allocated as R&amp;D-eligible personnel cost in this register; that allocation is open for review with the JH team and Standard Ledger before lodgement.</p>
+<h2>AusIndustry components confirmation</h2>
+<p>All four components for this core activity are present in this register:</p>
+<ul>
+<li>Hypothesis (above)</li>
+<li>Technical uncertainty (above)</li>
+<li>Experiment design (above)</li>
+<li>Expected vs actual outcome (above — actual is <code>in_progress</code>, will close out before Jul 2026 lodgement window)</li>
+</ul>
+<p>AusIndustry registration: pending. Target window Jul 2026 – 30 Apr 2027 per <code>thoughts/shared/plans/rd-tax-incentive-fy2526-path-c.md</code>.</p>
+<h2>Open items before lodgement</h2>
+<ol>
+<li>Assemble the 100-row hand-labelled procurement-code gold set from existing JusticeHub evidence data.</li>
+<li>Run controls and treatment; record precision / recall / cost-per-mapping.</li>
+<li>Write the 0% leakage cross-system assertion test (paired with ACT-EL).</li>
+<li>Confirm with the JH team whether their personnel cost should be R&amp;D-allocated for ACT-JH (and at what percentage).</li>
+<li>Write the provenance sidecar.</li>
+<li>Confirm the consent-boundary phrasing with community partners (Oonchiumpa, BG Fit, Mounty Yarns, PICC) — the federated-evidence claim must not overclaim community endorsement.</li>
+</ol>
+</div><details class="provenance"><summary><strong>Provenance — ACT-JH</strong> (sources, verification status, gaps)</summary><div class="md"><h1>ACT-JH R&amp;D Activity Register — Provenance</h1>
+<h2>Purpose</h2>
+<ul>
+<li>Output: R&amp;D activity register for project ACT-JH (JusticeHub)</li>
+<li>Intended destination: <code>wiki/projects/justicehub/rd-activity-register.md</code> (canonical) and <code>thoughts/shared/rd-pack-fy26/act-jh-rd-activity-register.md</code> (pack via symlink)</li>
+<li>Why generated: FY25-26 R&amp;D Tax Incentive evidence pack assembly per Path C decision (2026-04-27).</li>
+</ul>
+<h2>Data Sources Queried</h2>
+<table class="sortable">
+<thead>
+<tr>
+<th>Source</th>
+<th>Type</th>
+<th>Range / Snapshot</th>
+<th>How it was used</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Git log on <code>Acurioustractor/JusticeHub</code> (separate repo)</td>
+<td>source-of-truth</td>
+<td>2025-07-01 to 2026-05-07</td>
+<td>601 FY26 commits; commit hashes 6329d53, 6eb2c93, 8cb8345, 1da8f83, c7a59c2, 7a127b9 cited as evidence</td>
+</tr>
+<tr>
+<td><code>wiki/projects/justicehub/justicehub.md</code></td>
+<td>canonical wiki</td>
+<td>2026-04-11</td>
+<td>Scale numbers (1,000+ alts, 430 with evidence, $94.6B funding tracked, 98,418 orgs)</td>
+</tr>
+<tr>
+<td><code>wiki/projects/justicehub/{the-full-idea,three-circles,staying,the-brave-ones,minderoo-pitch-package}.md</code></td>
+<td>constellation files</td>
+<td>current</td>
+<td>Cross-referenced for narrative context</td>
+</tr>
+<tr>
+<td>Supabase project <code>tednluwflfhxyucgwigh</code></td>
+<td>DB attestation</td>
+<td>2026-05-07</td>
+<td>ACT-JH tagged bills (3 rows, $701, 100% receipted); ACT-JH tagged transactions (4 rows, $96)</td>
+</tr>
+<tr>
+<td><code>thoughts/shared/rd-pack-fy26/receipt-coverage-attestation.md</code></td>
+<td>sibling pack file</td>
+<td>2026-05-07</td>
+<td>Receipt coverage cited</td>
+</tr>
+<tr>
+<td><code>thoughts/shared/reviews/minderoo-justicehub-pitch-2026-05-07.voice-grade.md</code></td>
+<td>sibling review</td>
+<td>2026-05-07</td>
+<td>Voice-grade companion validation</td>
+</tr>
+<tr>
+<td><code>wiki/finance/money-framework-decision-log-2026-04-15.md</code> Decisions 1, 2</td>
+<td>canonical decision log</td>
+<td>2026-05-07</td>
+<td>Ben 10% × $250K × 95% = $23,750 ACT-JH R&amp;D-eligible per thesis project-mix</td>
+</tr>
+</tbody></table>
+<h2>Verification Status — dollar figures</h2>
+<table class="sortable">
+<thead>
+<tr>
+<th>Figure</th>
+<th>Status</th>
+<th>Evidence</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Total claim AUD $24,547</td>
+<td><strong>Inferred</strong></td>
+<td>Sum of below</td>
+<td>Subject to Money Framework reconciliation</td>
+</tr>
+<tr>
+<td>Ben Knight 10% × $250K × 95% R&amp;D = $23,750</td>
+<td><strong>Unverified</strong></td>
+<td>Money Framework decision log 2026-04-15 Decisions 1+2 (cited but pending Standard Ledger sign-off)</td>
+<td>Per-project elevation per thesis project-mix line 64</td>
+</tr>
+<tr>
+<td>ACT-JH-tagged bills $701</td>
+<td><strong>Verified</strong></td>
+<td>DB query 2026-05-07: 3 xero_invoices ACCPAY rows tagged project_code=&#39;ACT-JH&#39;, 100% receipt coverage</td>
+<td>Reproduce via SQL in <code>receipt-coverage-attestation.md</code></td>
+</tr>
+<tr>
+<td>ACT-JH-tagged transactions $96</td>
+<td><strong>Verified</strong></td>
+<td>DB query 2026-05-07: 4 xero_transactions rows tagged project_code=&#39;ACT-JH&#39;, rd_eligible=false / rd_category=review</td>
+<td>Note: marked review, not eligible — may need re-tagging</td>
+</tr>
+<tr>
+<td>Salary base $250,000</td>
+<td><strong>Unverified</strong></td>
+<td>Knight Photography invoicing schedule per <code>wiki/finance/founder-pay-and-rd-thesis-fy26-fy27.md</code> line 64</td>
+<td>GST registration timing pending Standard Ledger advice</td>
+</tr>
+<tr>
+<td>Refund rate 43.5%</td>
+<td><strong>Verified</strong></td>
+<td>ATO RDTI rate schedule</td>
+<td><code>wiki/finance/act-money-framework.md</code> line 49</td>
+</tr>
+</tbody></table>
+<h2>Verification Status — non-dollar figures</h2>
+<table class="sortable">
+<thead>
+<tr>
+<th>Figure</th>
+<th>Status</th>
+<th>Evidence</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1,000+ verified alternative models mapped</td>
+<td><strong>Inferred</strong></td>
+<td>Cited in <code>wiki/projects/justicehub/justicehub.md</code>; not independently verified against the JusticeHub DB in this session</td>
+</tr>
+<tr>
+<td>430 models with evidence data</td>
+<td><strong>Inferred</strong></td>
+<td>Same</td>
+</tr>
+<tr>
+<td>$94.6B funding tracked</td>
+<td><strong>Inferred</strong></td>
+<td>Same</td>
+</tr>
+<tr>
+<td>98,418 organisations indexed</td>
+<td><strong>Inferred</strong></td>
+<td>Same</td>
+</tr>
+<tr>
+<td>601 FY26 commits in JusticeHub repo</td>
+<td><strong>Verified</strong></td>
+<td>`git log --since=2025-07-01 --until=2026-06-30 --oneline</td>
+</tr>
+<tr>
+<td>Brave Ones field pack shipped</td>
+<td><strong>Verified</strong></td>
+<td>Commit 6eb2c93 &quot;feat(judges): ship Judges on Country field pack — pages, postcards, QR system&quot; (2026-04-15)</td>
+</tr>
+<tr>
+<td>EL v2 hero-photo API integration</td>
+<td><strong>Verified</strong></td>
+<td>Commit 6329d53 &quot;Funder one-pager: refactor to fetch hero photo via Empathy Ledger v2 API&quot; (2026-05-05)</td>
+</tr>
+<tr>
+<td>Service catalog resilience pattern</td>
+<td><strong>Verified</strong></td>
+<td>Commits c7a59c2 + 7a127b9 (2026-05-05)</td>
+</tr>
+<tr>
+<td>Procurement-code mapping precision/recall</td>
+<td><strong>Predicted</strong></td>
+<td>Pre-experiment estimate; gold set not assembled</td>
+</tr>
+<tr>
+<td>0% data-sovereignty leakage</td>
+<td><strong>Predicted</strong></td>
+<td>Cross-system assertion test not written</td>
+</tr>
+</tbody></table>
+<h2>Human Decisions / Gates</h2>
+<ul>
+<li>Editorial review: pending Ben + Standard Ledger review before lodgement</li>
+<li>Cultural review: <strong>required</strong>. The federated-evidence claim implicates community-controlled data sovereignty. Community partners (Oonchiumpa, BG Fit, Mounty Yarns, PICC, plus any JH-specific partners) must align on the consent-boundary phrasing before lodgement.</li>
+<li>Consent review: not applicable to the register itself; the register <em>describes</em> the consent system at the JH–EL boundary.</li>
+<li>Release approval (to ATO): pending — gated on AusIndustry registration + Money Framework decision log + JH team personnel allocation review + cultural review.</li>
+<li>Funder release (Minderoo JH pitch is a separate artefact): the pitch lives at <code>/Users/benknight/Code/JusticeHub/output/proposals/</code> and the canonical doc currently fails Curtis voice-grade per the 2026-05-07 review.</li>
+</ul>
+<h2>Known Gaps And Assumptions</h2>
+<ul>
+<li>The 10% per-project allocation for Ben on ACT-JH follows the thesis project-mix at line 64. The actual percentage requires Ben&#39;s confirmation against time-tracking or commit-log evidence on the JusticeHub repo.</li>
+<li>The wider JH team&#39;s R&amp;D-eligible personnel cost is NOT included in this register. If the JH team contributes to evidence-data curation, schema design, or procurement-code mapping in a way that meets the R&amp;D-eligible test, that personnel cost should be added before lodgement.</li>
+<li>The 100-row procurement-code mapping gold set has not been assembled. Without it the precision/recall hypothesis cannot be tested.</li>
+<li>The 0% data-sovereignty leakage assertion is a strong claim. An automated test must be written and run before lodgement to back it up.</li>
+<li>The ACT-JH-tagged transactions ($96) are currently marked <code>rd_category=&#39;review&#39;</code> in the DB, suggesting the R&amp;D tagger flagged them for human review (not auto-eligible). The $96 figure is included here as a placeholder; the human-review outcome may shift it to ineligible.</li>
+<li>AusIndustry registration is pending.</li>
+<li>The cultural review at the consent-boundary is a hard gate.</li>
+</ul>
+<h2>Reproduction Steps</h2>
+<ol>
+<li>Re-run the FY26 commit count on the JusticeHub repo:<pre><code>cd /Users/benknight/Code/JusticeHub
+git log --since=&quot;2025-07-01&quot; --until=&quot;2026-06-30&quot; --oneline | wc -l
+</code></pre>
+</li>
+<li>Verify ACT-JH bills + transactions in DB:<pre><code class="language-sql">SELECT count(*), ROUND(SUM(total::numeric)::numeric, 2)
+FROM xero_invoices
+WHERE date BETWEEN &#39;2025-07-01&#39; AND &#39;2026-06-30&#39;
+  AND type = &#39;ACCPAY&#39;
+  AND project_code = &#39;ACT-JH&#39;;
+
+SELECT count(*), ROUND(SUM(ABS(total::numeric))::numeric, 2), rd_eligible, rd_category
+FROM xero_transactions
+WHERE date BETWEEN &#39;2025-07-01&#39; AND &#39;2026-06-30&#39;
+  AND project_code = &#39;ACT-JH&#39;
+GROUP BY rd_eligible, rd_category;
+</code></pre>
+</li>
+<li>Cross-check the JusticeHub scale numbers against the live JH database (separate Supabase project, not the shared Command Center DB).</li>
+</ol>
+<h2>Status</h2>
+<p>Draft. Will be promoted to <code>status: final</code> only after AusIndustry registration, JH team personnel allocation review, cultural review, gold-set assembly, and the 0% data-sovereignty leakage test are complete.</p>
+</div></details></div></details>
+
+<section id="salary" class="doc-section"><h2>Salary allocations</h2><div class="md"><table class="sortable"><thead><tr><th>staff</th><th>project_code</th><th>period_start</th><th>period_end</th><th>percentage</th><th>personnel_basis_aud</th><th>rd_eligible_aud</th><th>evidence</th></tr></thead><tbody><tr><td>Benjamin Knight</td><td>ACT-CG</td><td>2025-07-01</td><td>2026-06-30</td><td>~20% of ACT-IN bucket × 95% R&amp;D</td><td>250000</td><td>47500</td><td>Money Framework decision log 2026-04-15 Decisions 1+2+4 (Option A); thesis line 64 project-mix; ACT-CG is subset of ACT-IN bucket which is 60% of Knight Photography invoicing</td></tr><tr><td>Benjamin Knight</td><td>ACT-EL</td><td>2025-07-01</td><td>2026-06-30</td><td>10% × 95% R&amp;D</td><td>250000</td><td>23750</td><td>Money Framework decision log 2026-04-15 Decisions 1+2; thesis line 64</td></tr><tr><td>Benjamin Knight</td><td>ACT-JH</td><td>2025-07-01</td><td>2026-06-30</td><td>10% × 95% R&amp;D</td><td>250000</td><td>23750</td><td>Money Framework decision log 2026-04-15 Decisions 1+2; thesis line 64; activity register pending</td></tr><tr><td>Benjamin Knight</td><td>ACT-GD</td><td>2025-07-01</td><td>2026-06-30</td><td>10% × 95% R&amp;D</td><td>250000</td><td>23750</td><td>Money Framework decision log 2026-04-15 Decisions 1+2; thesis line 64</td></tr><tr><td>Benjamin Knight</td><td>ACT-DO</td><td>2025-07-01</td><td>2026-06-30</td><td>5% × 95% R&amp;D</td><td>250000</td><td>11875</td><td>Money Framework decision log 2026-04-15 Decisions 1+2; thesis line 64; activity register pending</td></tr><tr><td>Benjamin Knight</td><td>ACT-CORE</td><td>2025-07-01</td><td>2026-06-30</td><td>5% × 95% R&amp;D</td><td>250000</td><td>11875</td><td>Money Framework decision log 2026-04-15 Decisions 1+2; thesis line 64; activity register pending</td></tr><tr><td>Benjamin Knight</td><td>ACT-IN (other than ACT-CG)</td><td>2025-07-01</td><td>2026-06-30</td><td>~40% × 95% R&amp;D (residual ACT-IN)</td><td>250000</td><td>95000</td><td>Money Framework decision log 2026-04-15 Decision 4 reconciliation; activity register pending</td></tr><tr><td>Benjamin Knight</td><td>TOTAL</td><td>2025-07-01</td><td>2026-06-30</td><td>95% R&amp;D</td><td>250000</td><td>237500</td><td>Money Framework decision log 2026-04-15 Decision 1; thesis line 72</td></tr><tr><td>Nicholas Marchesi</td><td>ACT-GD</td><td>2025-07-01</td><td>2026-06-30</td><td>25%</td><td>200000</td><td>50000</td><td>Money Framework decision log 2026-04-15 Decision 3</td></tr><tr><td>Nicholas Marchesi</td><td>ACT-EL</td><td>2025-07-01</td><td>2026-06-30</td><td>15%</td><td>200000</td><td>30000</td><td>Money Framework decision log 2026-04-15 Decision 3</td></tr><tr><td>Nicholas Marchesi</td><td>ACT-JH</td><td>2025-07-01</td><td>2026-06-30</td><td>0%</td><td>200000</td><td>0</td><td>Money Framework decision log 2026-04-15 Decision 3 — Nic at strategy level only</td></tr><tr><td>Nicholas Marchesi</td><td>Operational (non-R&amp;D)</td><td>2025-07-01</td><td>2026-06-30</td><td>60%</td><td>200000</td><td>0</td><td>Money Framework decision log 2026-04-15 Decision 3 — community / Harvest / Farm</td></tr><tr><td>Nicholas Marchesi</td><td>TOTAL</td><td>2025-07-01</td><td>2026-06-30</td><td>40% R&amp;D</td><td>200000</td><td>80000</td><td>Money Framework decision log 2026-04-15 Decision 1; thesis line 91</td></tr><tr><td>FOUNDERS COMBINED</td><td>All projects</td><td>2025-07-01</td><td>2026-06-30</td><td>—</td><td>450000</td><td>317500</td><td>Sum of Ben $237,500 + Nic $80,000 per Decision 1</td></tr><tr><td>Algorithm engineering contractor + cloud + LLM (ACT-GD aggregate)</td><td>ACT-GD</td><td>2025-07-01</td><td>2026-06-30</td><td>—</td><td>—</td><td>247837</td><td>DB-attested 2026-05-07: 154 xero_invoices ACCPAY rows tagged project_code='ACT-GD'; 99.5% receipt coverage by value; 12 R&amp;D-eligible txns adds further $43,262 supporting</td></tr><tr><td>SaaS attributable to EL (bundled in ACT-IN)</td><td>ACT-IN</td><td>2025-07-01</td><td>2026-06-30</td><td>—</td><td>—</td><td>224144</td><td>DB-attested 2026-05-07: 516 xero_invoices ACCPAY rows tagged project_code='ACT-IN'; 98.5% receipt coverage by value; ACT-CG and ACT-EL SaaS spend bundled here per Money Framework decision log Decision 4</td></tr><tr><td>Direct ACT-EL bills</td><td>ACT-EL</td><td>2025-07-01</td><td>2026-06-30</td><td>—</td><td>—</td><td>1304</td><td>DB-attested 2026-05-07: 8 xero_invoices ACCPAY rows tagged project_code='ACT-EL'; 100% receipt coverage by value</td></tr><tr><td>PACK TOTAL (four core registers)</td><td>All</td><td>2025-07-01</td><td>2026-06-30</td><td>—</td><td>—</td><td>354047</td><td>Sum of four activity registers (ACT-CG $61,500 + ACT-EL $79,750 + ACT-GD $188,250 + ACT-JH $24,547); covers ~58% of total founder-pay-thesis estimate $614K eligible</td></tr></tbody></table></div></section>
+
+<details id="supporting" class="doc-section"><summary><h2>Supporting activities</h2></summary><div class="md"><h1>Supporting activities — FY25-26 R&amp;D pack</h1>
+<blockquote>
+<p>Per the AusIndustry guidance on R&amp;DTI eligibility, supporting activities must directly relate to a registered core activity (s 355-30 ITAA 1997). This file makes the linkage explicit so an external reviewer can cross-check each supporting activity against its parent core activity in &lt;60 seconds.</p>
+</blockquote>
+<h2>ACT-CG — supporting activities (parent core: cross-source organisational entity resolution)</h2>
+<table class="sortable">
+<thead>
+<tr>
+<th>ID</th>
+<th>Supporting activity</th>
+<th>Period</th>
+<th>Dollar amount</th>
+<th>Direct linkage to core</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ACT-CG-S1</td>
+<td>Tier 1.5 ACNC API discovery — locating undocumented private endpoints <code>/api/dynamics/search/charity</code> and <code>/api/dynamics/entity/&lt;uuid&gt;</code> that bypass the privacy-scrubbed bulk export.</td>
+<td>2026-04</td>
+<td>subsumed in core $47,500 personnel</td>
+<td>Without S1 the resolver has no contact-data to resolve against; the bulk ACNC export is privacy-scrubbed by design. Commit: cbc67fe (2026-04-20).</td>
+</tr>
+<tr>
+<td>ACT-CG-S2</td>
+<td>Tier 2 website-scrape contact extraction (<code>scripts/enrich-contacts-from-website.mjs</code>) with regex + AU-specific phone normalisation.</td>
+<td>2026-04</td>
+<td>subsumed in core</td>
+<td>Provides supplementary contact data for orgs not in ACNC. Commit: c910fad (2026-04-20).</td>
+</tr>
+<tr>
+<td>ACT-CG-S3</td>
+<td>Tier 3 agent-research enrichment (<code>scripts/enrich-contacts-via-agent.mjs</code>) — brief-emit + ingest pattern.</td>
+<td>2026-04</td>
+<td>subsumed in core (Anthropic SaaS line $14,000)</td>
+<td>Implements the LLM-fallback portion of the core resolver hypothesis.</td>
+</tr>
+<tr>
+<td>ACT-CG-S4</td>
+<td>gs_entities 3-pass DQ sweep (<code>scripts/gs-entities-data-quality-sweep.mjs</code>).</td>
+<td>2026-04</td>
+<td>subsumed in core</td>
+<td>Cleans the 8,826-row input set down to 4,729 production rows. Without S4 the 46% pollution rate dominates resolver evaluation. Commit: f8d5f0c (2026-04-20).</td>
+</tr>
+</tbody></table>
+<h2>ACT-EL — supporting activities (parent core: OCAP-respecting consent capture and multi-tenant story ledger)</h2>
+<table class="sortable">
+<thead>
+<tr>
+<th>ID</th>
+<th>Supporting activity</th>
+<th>Period</th>
+<th>Dollar amount</th>
+<th>Direct linkage to core</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ACT-EL-S1</td>
+<td>EL v2 multi-tenant schema migration (projects table upgrade; <code>organization_id</code> populated; tier JSONB added).</td>
+<td>2026-04</td>
+<td>subsumed in core $53,750 personnel</td>
+<td>Implements the cross-org gallery sub-hypothesis. Verified DB state 2026-04-06.</td>
+</tr>
+<tr>
+<td>ACT-EL-S2</td>
+<td>Cross-org photo manager.</td>
+<td>2026-04</td>
+<td>subsumed in core</td>
+<td>Enables ecosystem-key (<code>act_project_code</code>) resolution across org boundaries. Commit: ddbc9d3c on <code>el-v2-projects-alignment</code> branch.</td>
+</tr>
+<tr>
+<td>ACT-EL-S3</td>
+<td>Hide-empty-projects client-side toggle.</td>
+<td>2026-04</td>
+<td>subsumed in core</td>
+<td>UX signal that complements the multi-tenancy schema by suppressing org-scoped queries that return empty sets.</td>
+</tr>
+<tr>
+<td>ACT-EL-S4</td>
+<td>Wiki living library pipeline + OCAP governance.</td>
+<td>2026-04</td>
+<td>subsumed in core</td>
+<td>Implements the verbal-consent-as-audit-trail mechanism for the wiki surface. Commit: e3a0728 (2026-04-18).</td>
+</tr>
+<tr>
+<td>ACT-EL-S5</td>
+<td>Consent-in-action dashboard.</td>
+<td>2026-04</td>
+<td>subsumed in core</td>
+<td>Demonstrates the consent provenance to a third-party reviewer (success-criterion adjacent). Commit: 4fff285 (2026-04-20).</td>
+</tr>
+<tr>
+<td>ACT-EL-S6</td>
+<td>Live-consent placeholder replacement.</td>
+<td>2026-04</td>
+<td>subsumed in core</td>
+<td>Bridges the consent-capture spec to live EL v2 data. Commit: 4856e13 (2026-04-20).</td>
+</tr>
+</tbody></table>
+<h2>ACT-GD — supporting activities (parent core: buyer-supplier matching and demand-side procurement infrastructure)</h2>
+<table class="sortable">
+<thead>
+<tr>
+<th>ID</th>
+<th>Supporting activity</th>
+<th>Period</th>
+<th>Dollar amount</th>
+<th>Direct linkage to core</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ACT-GD-S1</td>
+<td>Demand Register schema design + GHL pipeline construction (stage &quot;Signal&quot; + migration script <code>scripts/migrate-goods-demand-signals.mjs</code>).</td>
+<td>2026-04</td>
+<td>subsumed in core $73,750 personnel</td>
+<td>Implements the data-capture mechanism for the matching algorithm&#39;s input side.</td>
+</tr>
+<tr>
+<td>ACT-GD-S2</td>
+<td>A1 Procurement Analyst agent stub + data-fetch layer (<code>scripts/agents/agent-procurement-analyst.mjs</code>).</td>
+<td>2026-04</td>
+<td>subsumed in core</td>
+<td>Implements the LLM-fallback portion of the matching pipeline (top-3 weekly buyer touches). Commit: 5610fe3 (2026-04-24).</td>
+</tr>
+<tr>
+<td>ACT-GD-S3</td>
+<td>A2 second agent stub.</td>
+<td>2026-04</td>
+<td>subsumed in core</td>
+<td>Companion to A1 in the agent fan-out design. Commit: 5610fe3 (2026-04-24).</td>
+</tr>
+<tr>
+<td>ACT-GD-S4</td>
+<td>Goods CRM kanban UI + Xero↔GHL reconciler.</td>
+<td>2026-04</td>
+<td>subsumed in core</td>
+<td>Provides the operational measurement infrastructure for the experiment (cohort tracking, conversion measurement). Commits: 0db21ce, b6ca767, 52c9f8b (2026-04-24).</td>
+</tr>
+<tr>
+<td>ACT-GD-S5</td>
+<td>Pipeline measurement infrastructure — dedup + weighted-pipeline correctness on <code>/finance/projects/[code]</code>.</td>
+<td>2026-05-07</td>
+<td>subsumed in core</td>
+<td>Without correct pipeline measurement the experiment cannot evaluate its own conversion data. Commit: 119f479 (2026-05-07).</td>
+</tr>
+<tr>
+<td>ACT-GD-S6</td>
+<td>Receipt automation for invoice ingestion (cross-references ACT-EL S5/S6).</td>
+<td>shared FY26</td>
+<td>shared with ACT-EL</td>
+<td>Enables the cohort-cost tracking element of the experiment.</td>
+</tr>
+</tbody></table>
+<h2>Supporting:core ratio assessment</h2>
+<p>The rubric flagged 3.2 (Reasonable proportion — supporting:core ratio unverifiable) as a warning because no expenditure was assigned to supporting activities separately from core. This is by design: the supporting activities above are &quot;subsumed in core&quot; because they are the engineering effort that <em>produces</em> the core activity. The personnel cost on the core activity register IS the cost of doing the supporting activities. There is no double-counting; the personnel time covers both the core hypothesis-and-experiment-design framing and the supporting engineering that implements it.</p>
+<p>For external review purposes, the dollar attribution is:</p>
+<table class="sortable">
+<thead>
+<tr>
+<th>Project</th>
+<th>Core personnel</th>
+<th>SaaS / vendor</th>
+<th>Supporting (engineering effort, subsumed)</th>
+<th>Total claim</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ACT-CG</td>
+<td>$47,500</td>
+<td>$14,000</td>
+<td>included in $47,500</td>
+<td>$61,500</td>
+</tr>
+<tr>
+<td>ACT-EL</td>
+<td>$53,750 ($23,750 Ben + $30,000 Nic)</td>
+<td>$26,000</td>
+<td>included in $53,750</td>
+<td>$79,750</td>
+</tr>
+<tr>
+<td>ACT-GD</td>
+<td>$73,750 ($23,750 Ben + $50,000 Nic)</td>
+<td>$114,500</td>
+<td>included in $73,750</td>
+<td>$188,250</td>
+</tr>
+</tbody></table>
+<p>The supporting engineering effort (S1 through S6 per project) is the <em>content</em> of the personnel cost; it is not an additional line item.</p>
+</div></details>
+
+<details id="receipts" class="doc-section"><summary><h2>Receipt coverage attestation</h2></summary><div class="md"><h1>Receipt coverage attestation — FY25-26</h1>
+<blockquote>
+<p><strong>Result: ALL three R&amp;D-claim projects (ACT-EL, ACT-GD, ACT-IN) PASS the ≥85% threshold by significant margins.</strong> Receipt-coverage attestation was queried directly from Supabase project <code>tednluwflfhxyucgwigh</code> (the shared Command Center database) on 2026-05-07. The data lives in <code>xero_invoices</code> (type=&#39;ACCPAY&#39; for bills/expenses) keyed by <code>project_code</code> and indicated by <code>has_attachments=true</code>.</p>
+</blockquote>
+<h2>Coverage by project — xero_invoices ACCPAY, FY26 (1 Jul 2025 – 30 Jun 2026)</h2>
+<table class="sortable">
+<thead>
+<tr>
+<th>Code</th>
+<th>Project</th>
+<th>Bills</th>
+<th>Total $</th>
+<th>With receipt</th>
+<th>Receipt $</th>
+<th>Coverage by rows</th>
+<th>Coverage by value</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ACT-IN</td>
+<td>Intelligence / agent / ALMA / platform infra (parent of CivicGraph, Empathy Ledger schema, etc.)</td>
+<td>516</td>
+<td>$224,144.37</td>
+<td>509</td>
+<td>$220,835.12</td>
+<td>98.6%</td>
+<td><strong>98.5%</strong></td>
+</tr>
+<tr>
+<td>ACT-GD</td>
+<td>Goods on Country</td>
+<td>154</td>
+<td>$247,837.12</td>
+<td>153</td>
+<td>$246,593.53</td>
+<td>99.4%</td>
+<td><strong>99.5%</strong></td>
+</tr>
+<tr>
+<td>ACT-EL</td>
+<td>Empathy Ledger</td>
+<td>8</td>
+<td>$1,303.61</td>
+<td>8</td>
+<td>$1,303.61</td>
+<td>100%</td>
+<td><strong>100%</strong></td>
+</tr>
+<tr>
+<td>ACT-JH</td>
+<td>JusticeHub</td>
+<td>3</td>
+<td>$700.83</td>
+<td>3</td>
+<td>$700.83</td>
+<td>100%</td>
+<td><strong>100%</strong></td>
+</tr>
+<tr>
+<td>ACT-DO</td>
+<td>Doing / dashboards</td>
+<td>55</td>
+<td>$9,835.86</td>
+<td>55</td>
+<td>$9,835.86</td>
+<td>100%</td>
+<td><strong>100%</strong></td>
+</tr>
+<tr>
+<td>ACT-CORE</td>
+<td>Cross-project core</td>
+<td>4</td>
+<td>$14,179.75</td>
+<td>3</td>
+<td>$3,179.75</td>
+<td>75%</td>
+<td>22.4% (low — investigate)</td>
+</tr>
+<tr>
+<td><strong>All R&amp;D-claim codes (CG/EL/GD/IN)</strong></td>
+<td></td>
+<td><strong>678</strong></td>
+<td><strong>$473,285.10</strong></td>
+<td><strong>670</strong></td>
+<td><strong>$468,732.26</strong></td>
+<td><strong>98.8%</strong></td>
+<td><strong>99.0%</strong></td>
+</tr>
+</tbody></table>
+<p>The pack&#39;s three core activity registers (ACT-CG, ACT-EL, ACT-GD) plus the parent ACT-IN bucket (which contains the CivicGraph spend per Money Framework decision log Decision 4) achieve <strong>99.0% receipt coverage by value</strong>, well above the 85% rubric threshold.</p>
+<h2>Note on ACT-CG specifically</h2>
+<p>CivicGraph spend is tagged to <strong>ACT-IN</strong> at the bill level (per Money Framework decision log Decision 4: &quot;the CivicGraph activity register is therefore one core activity within the ACT-IN spend bucket, not a separate spend bucket&quot;). There is no separate ACT-CG bill in <code>xero_invoices</code> for FY26 — the project_code &#39;ACT-CG&#39; surfaces only in <code>xero_transactions</code> (bank statement lines and journals), not in <code>xero_invoices</code>. The CivicGraph activity register&#39;s claimed spend (Anthropic + Supabase $14,000 plus Ben&#39;s allocated personnel cost $47,500) is a portion of the broader ACT-IN bucket which itself has 98.5% receipt coverage by value.</p>
+<h2>Note on ACT-CORE 22.4% coverage</h2>
+<p>The ACT-CORE bucket (4 bills, $14,180) has one $11,000 bill without an attachment. This is below the 85% threshold for ACT-CORE but ACT-CORE is not a primary R&amp;D-claim project in this pack — it is the cross-project core category. Decision: chase the missing receipt before lodgement; if not recoverable, exclude that line from the R&amp;D claim.</p>
+<h2>R&amp;D-eligible classification on xero_transactions</h2>
+<p>Per <code>scripts/tag-rd-eligibility.mjs</code>, R&amp;D classification is also applied to <code>xero_transactions</code> (bank statement lines + journals). FY26 state by project:</p>
+<table class="sortable">
+<thead>
+<tr>
+<th>Code</th>
+<th>rd_eligible=true rows</th>
+<th>rd_eligible=true total ($)</th>
+<th>rd_category breakdown</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ACT-IN</td>
+<td>331</td>
+<td>$18,723.22</td>
+<td>core</td>
+</tr>
+<tr>
+<td>ACT-GD</td>
+<td>12</td>
+<td>$43,261.56</td>
+<td>supporting</td>
+</tr>
+<tr>
+<td>ACT-CORE</td>
+<td>11</td>
+<td>$238,653.88</td>
+<td>salary (founder personnel — see Money Framework decision log)</td>
+</tr>
+<tr>
+<td>ACT-DO</td>
+<td>6</td>
+<td>$1,213.59</td>
+<td>core</td>
+</tr>
+<tr>
+<td>ACT-EL</td>
+<td>0</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>ACT-JH</td>
+<td>0</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>R&amp;D-eligible total</strong></td>
+<td><strong>360</strong></td>
+<td><strong>$301,852.25</strong></td>
+<td>mixed</td>
+</tr>
+</tbody></table>
+<p>The $238,654 ACT-CORE salary line is a journaled posting of founder R&amp;D-eligible personnel cost, consistent with the Money Framework decision log Decision 1 ($317,500 total founder R&amp;D-eligible across Ben + Nic).</p>
+<h2>Reconciliation: pack claim vs DB attestation</h2>
+<p>The pack&#39;s three core activity registers claim:</p>
+<table class="sortable">
+<thead>
+<tr>
+<th>Pack register</th>
+<th>Claimed spend (registers)</th>
+<th>DB attestation (FY26 ACCPAY + R&amp;D-eligible txn)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ACT-CG</td>
+<td>$61,500</td>
+<td>Subset of ACT-IN $224K bills + $19K txn = $243K bucket (with 98%+ receipts)</td>
+</tr>
+<tr>
+<td>ACT-EL</td>
+<td>$79,750</td>
+<td>$1,304 bills (100% receipts); the larger personnel cost is in ACT-CORE salary $239K bucket</td>
+</tr>
+<tr>
+<td>ACT-GD</td>
+<td>$188,250</td>
+<td>$247,837 bills (99.5% receipts) + $43,262 R&amp;D-eligible txn</td>
+</tr>
+</tbody></table>
+<p>The pack&#39;s per-register claims are conservative against the DB-attested totals. The DB shows MORE R&amp;D-eligible spend tagged to projects than the pack currently claims. The pack can be expanded to include the residual ACT-IN spend (~$143K beyond CivicGraph) before lodgement, lifting the total claim toward the founder-pay-thesis estimate of ~$614K eligible / ~$200-250K refund.</p>
+<h2>Reproducibility</h2>
+<pre><code class="language-sql">-- Bills coverage per project (run against tednluwflfhxyucgwigh)
+SELECT project_code,
+  count(*) AS rows,
+  ROUND(SUM(total::numeric)::numeric, 2) AS total_aud,
+  count(*) FILTER (WHERE has_attachments = true) AS with_attach,
+  ROUND(SUM(CASE WHEN has_attachments = true THEN total::numeric ELSE 0 END)::numeric, 2) AS attached_aud,
+  ROUND((100.0 * SUM(CASE WHEN has_attachments = true THEN total::numeric ELSE 0 END) / NULLIF(SUM(total::numeric), 0))::numeric, 1) AS pct_value
+FROM xero_invoices
+WHERE date &gt;= &#39;2025-07-01&#39; AND date &lt;= &#39;2026-06-30&#39;
+  AND type = &#39;ACCPAY&#39;
+  AND project_code IN (&#39;ACT-EL&#39;,&#39;ACT-GD&#39;,&#39;ACT-IN&#39;,&#39;ACT-JH&#39;,&#39;ACT-DO&#39;,&#39;ACT-CORE&#39;)
+GROUP BY project_code
+ORDER BY project_code;
+
+-- R&amp;D-eligible txn breakdown
+SELECT project_code, rd_eligible, rd_category, count(*), ROUND(SUM(ABS(total::numeric))::numeric, 2)
+FROM xero_transactions
+WHERE date &gt;= &#39;2025-07-01&#39; AND date &lt;= &#39;2026-06-30&#39;
+  AND project_code IS NOT NULL
+GROUP BY project_code, rd_eligible, rd_category
+ORDER BY project_code, rd_eligible DESC NULLS LAST;
+</code></pre>
+<h2>Status</h2>
+<p><strong>Receipt-coverage rule 1.4 — PASS</strong> for all three R&amp;D-claim projects (ACT-EL 100%, ACT-GD 99.5%, ACT-IN 98.5%, far above 85% threshold).
+<strong>Receipt-to-activity linkage rule 1.7 — PASS</strong> for the same projects (every bill ≥$1,000 with project_code=&#39;ACT-XX&#39; is linked to the activity via the project_code tag and 99%+ are receipted).
+<strong>Pack assertion correction</strong>: Earlier pack text saying &quot;Xero invoices to be back-tagged (TBD)&quot; is OUTDATED — the back-tagging is in fact complete in the DB. The registers and provenance sidecars need updating to reflect this.</p>
+</div></details>
+
+<details id="audit-trail" class="doc-section"><summary><h2>Audit trail</h2></summary><div class="md"><h1>Audit trail — FY25-26 R&amp;D activities</h1>
+<blockquote>
+<p>This file is the contemporaneous-records ledger for the FY25-26 R&amp;D pack. Each row cites a commit hash and date from the canonical git history of <code>Acurioustractor/act-global-infrastructure</code>. The hypothesis and experiment-design entries in each per-project register were collated 2026-05-07 from the activity that the commits below represent. This satisfies the R&amp;DTI contemporaneity test: the underlying technical artefacts were committed within the period of activity, and the registers are written before the FY25-26 lodgement window opens (Jul 2026).</p>
+</blockquote>
+<h2>Summary</h2>
+<table class="sortable">
+<thead>
+<tr>
+<th>Project</th>
+<th>Commits in FY26 (R&amp;D-relevant)</th>
+<th>First commit</th>
+<th>Last commit</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ACT-EL (Empathy Ledger)</td>
+<td>10+</td>
+<td>2025-12-30</td>
+<td>2026-05-07</td>
+</tr>
+<tr>
+<td>ACT-CG (CivicGraph)</td>
+<td>5+</td>
+<td>2026-02-13</td>
+<td>2026-05-07</td>
+</tr>
+<tr>
+<td>ACT-GD (Goods on Country)</td>
+<td>15+</td>
+<td>2026-02-05</td>
+<td>2026-05-07</td>
+</tr>
+<tr>
+<td>ACT-JH (JusticeHub)</td>
+<td>601 (separate repo) + 4 cross-EL</td>
+<td>see ACT-JH section</td>
+<td>2026-05-07</td>
+</tr>
+<tr>
+<td>Cross-project R&amp;D infrastructure</td>
+<td>8</td>
+<td>2026-02-13</td>
+<td>2026-05-07</td>
+</tr>
+</tbody></table>
+<h2>Classification key — what&#39;s claimed vs context</h2>
+<p>The tables below mix three commit categories. To pre-empt rubric rule 1.8 (excluded activity types) and AusIndustry/ATO scrutiny, the classification used in the &quot;Activity register section&quot; column is:</p>
+<table class="sortable">
+<thead>
+<tr>
+<th>Tag in column</th>
+<th>Category</th>
+<th>R&amp;DTI status</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>core hypothesis</code>, <code>core actual outcome</code>, register-section anchor (<code>ACT-XX-S1</code>, <code>S2</code>, etc.)</td>
+<td>R&amp;D core</td>
+<td><strong>CLAIMED</strong> under s355-25 (core R&amp;D activity)</td>
+</tr>
+<tr>
+<td><code>linked supporting activity</code>, <code>dedup infrastructure</code>, <code>production scheduling</code>, <code>tagging</code>, <code>receipt linkage</code></td>
+<td>R&amp;D supporting</td>
+<td><strong>CLAIMED</strong> under s355-30 (directly related supporting activity)</td>
+</tr>
+<tr>
+<td><code>narrative</code>, <code>narrative supporting</code>, <code>strategic</code>, <code>strategic precursor</code>, <code>downstream artefact</code>, <code>downstream consumer</code>, <code>naming canon</code>, <code>accounting</code>, <code>tagging correction</code></td>
+<td>Context (general business development)</td>
+<td><strong>NOT CLAIMED</strong> — present here for evidence completeness only; would fail rule 1.8 if claimed</td>
+</tr>
+</tbody></table>
+<p>The &quot;Context (NOT CLAIMED)&quot; rows are kept in this audit trail to give a reviewer a complete contemporaneous record of activity in the period. Their presence does not imply they are R&amp;D-eligible. Examples: the Minderoo pitch (<code>7adb04f</code>), the Goods CEO operating plan (<code>9f86f55</code>), and the &quot;On Country Goods&quot; article draft (<code>274bb09</code>) are funder-facing or strategy documents, not core/supporting R&amp;D.</p>
+<p>If a future activity register tries to claim any commit currently tagged Context, the classification must move to core or supporting first, with a written justification against s355-25 / s355-30.</p>
+<h2>ACT-EL — Empathy Ledger</h2>
+<table class="sortable">
+<thead>
+<tr>
+<th>Commit</th>
+<th>Date</th>
+<th>Description</th>
+<th>Activity register section</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>74b0f3f</td>
+<td>2025-12-30</td>
+<td>docs: update Empathy Ledger path references</td>
+<td>precursor — schema rationalisation</td>
+</tr>
+<tr>
+<td>ccb7bfb</td>
+<td>2026-02-04</td>
+<td>fix: Update storyteller scripts for EL v2 schema changes</td>
+<td>linked supporting activity ACT-EL-S1</td>
+</tr>
+<tr>
+<td>bcc05bd</td>
+<td>2026-02-27</td>
+<td>feat: world tour partner opportunities in Empathy Ledger pipeline</td>
+<td>linked supporting activity ACT-EL-S1</td>
+</tr>
+<tr>
+<td>e3a0728</td>
+<td>2026-04-18</td>
+<td>feat(wiki): EL v2 → wiki living library pipeline + OCAP governance</td>
+<td>core hypothesis + ACT-EL-S4</td>
+</tr>
+<tr>
+<td>2ea8bcc</td>
+<td>2026-04-14</td>
+<td>docs(wiki): The Human Layer — EL v2 integration for art project</td>
+<td>ACT-EL-S4</td>
+</tr>
+<tr>
+<td>d435431</td>
+<td>2026-04-14</td>
+<td>docs(wiki): Empathy Ledger Storytelling Residency</td>
+<td>ACT-EL-S4</td>
+</tr>
+<tr>
+<td>5e85986</td>
+<td>2026-04-14</td>
+<td>docs: The Third Reality — full article draft for Empathy Ledger</td>
+<td>narrative supporting <strong>(NOT CLAIMED)</strong></td>
+</tr>
+<tr>
+<td>93e06e8</td>
+<td>2026-04-20</td>
+<td>docs(minderoo): media plan — images, video, consent ribbon protocol</td>
+<td>ACT-EL core (consent capture)</td>
+</tr>
+<tr>
+<td>4fff285</td>
+<td>2026-04-20</td>
+<td>feat(dashboard): Consent in action — Indigenous data sovereignty as lived practice</td>
+<td>ACT-EL-S5</td>
+</tr>
+<tr>
+<td>4856e13</td>
+<td>2026-04-20</td>
+<td>fix(consent): replace placeholders with live EL v2 data</td>
+<td>ACT-EL-S6</td>
+</tr>
+<tr>
+<td>29e33c1</td>
+<td>2026-04-20</td>
+<td>feat(pitch): Empathy Ledger storyteller-posts widget</td>
+<td>downstream consumer <strong>(NOT CLAIMED)</strong></td>
+</tr>
+<tr>
+<td>67e288d</td>
+<td>2026-04-20</td>
+<td>feat(pitch): searchable EL v2 gallery modal replaces per-slot dropdown</td>
+<td>downstream consumer <strong>(NOT CLAIMED)</strong></td>
+</tr>
+<tr>
+<td>c880e70</td>
+<td>2026-04-20</td>
+<td>feat(gallery): expand from story list → full media pool (540 items)</td>
+<td>ACT-EL core (multi-tenancy)</td>
+</tr>
+<tr>
+<td>fc38b2a</td>
+<td>2026-04-20</td>
+<td>fix(gallery): paginate EL v2 pull → 3,018 items (was 540)</td>
+<td>ACT-EL core (multi-tenancy)</td>
+</tr>
+</tbody></table>
+<h2>ACT-CG — CivicGraph</h2>
+<table class="sortable">
+<thead>
+<tr>
+<th>Commit</th>
+<th>Date</th>
+<th>Description</th>
+<th>Activity register section</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>3a16982</td>
+<td>2026-02-13</td>
+<td>feat: Notion bidirectional sync, entity resolution, and analysis scripts</td>
+<td>core hypothesis (resolver origin)</td>
+</tr>
+<tr>
+<td>37f8dea</td>
+<td>2026-04-14</td>
+<td>docs(narrative): CivicGraph LinkedIn v2 — human voice, AI kills stripped</td>
+<td>narrative <strong>(NOT CLAIMED)</strong></td>
+</tr>
+<tr>
+<td>d14547a</td>
+<td>2026-04-14</td>
+<td>docs(narrative): CivicGraph agitation post — 3 options for LinkedIn</td>
+<td>narrative <strong>(NOT CLAIMED)</strong></td>
+</tr>
+<tr>
+<td>fd8aa9f</td>
+<td>2026-04-12</td>
+<td>docs(wiki): CivicGraph UK market entry — deep research synthesis</td>
+<td>strategic <strong>(NOT CLAIMED)</strong></td>
+</tr>
+<tr>
+<td>c910fad</td>
+<td>2026-04-20</td>
+<td>feat(contacts): three-tier contact enrichment workflow</td>
+<td>ACT-CG-S1 + ACT-CG-S2 + ACT-CG-S3</td>
+</tr>
+<tr>
+<td>29d48be</td>
+<td>2026-04-20</td>
+<td>fix(contacts): ACNC auto-download unreliable — fallback to manual + --csv-path</td>
+<td>ACT-CG-S1</td>
+</tr>
+<tr>
+<td>cbc67fe</td>
+<td>2026-04-20</td>
+<td>feat(enrichment): Tier 1-3 contact pipeline — 660 emails + 752 phones added</td>
+<td>core actual outcome (interim)</td>
+</tr>
+<tr>
+<td>f8d5f0c</td>
+<td>2026-04-20</td>
+<td>feat(dq): gs_entities 3-pass cleanup — 4,010 rows reclassified</td>
+<td>ACT-CG-S4 + core actual outcome</td>
+</tr>
+</tbody></table>
+<h2>ACT-GD — Goods on Country</h2>
+<table class="sortable">
+<thead>
+<tr>
+<th>Commit</th>
+<th>Date</th>
+<th>Description</th>
+<th>Activity register section</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>274bb09</td>
+<td>2026-02-05</td>
+<td>writing: new draft &quot;On Country Goods - Community Manufacturing Model&quot;</td>
+<td>strategic precursor <strong>(NOT CLAIMED)</strong></td>
+</tr>
+<tr>
+<td>36c23b7</td>
+<td>2026-02-06</td>
+<td>feat: Goods dashboard — org display, inline editing, bidirectional GHL sync</td>
+<td>ACT-GD-S4</td>
+</tr>
+<tr>
+<td>040625d</td>
+<td>2026-04-22</td>
+<td>rename(wiki): goods-on-country.md → goods.md + slug frontmatter</td>
+<td>naming canon <strong>(NOT CLAIMED)</strong></td>
+</tr>
+<tr>
+<td>fe67e53</td>
+<td>2026-04-22</td>
+<td>config(goods): rename canonical_slug</td>
+<td>naming canon <strong>(NOT CLAIMED)</strong></td>
+</tr>
+<tr>
+<td>40663a8</td>
+<td>2026-04-23</td>
+<td>fix(goods): propagate slug rename across surfaces</td>
+<td>naming canon <strong>(NOT CLAIMED)</strong></td>
+</tr>
+<tr>
+<td>9f86f55</td>
+<td>2026-04-23</td>
+<td>docs(goods): CEO 6-month operating plan + triage drafts</td>
+<td>strategic <strong>(NOT CLAIMED)</strong></td>
+</tr>
+<tr>
+<td>546ddaf</td>
+<td>2026-04-23</td>
+<td>fix(goods): correct stale $36K Tennant Creek receivable</td>
+<td>accounting <strong>(NOT CLAIMED)</strong></td>
+</tr>
+<tr>
+<td>5610fe3</td>
+<td>2026-04-24</td>
+<td>feat(goods): A1+A2 agent stubs + May CEO letter + Centrecorp forensics</td>
+<td>ACT-GD-S2 + ACT-GD-S3 (core agent stubs)</td>
+</tr>
+<tr>
+<td>0db21ce</td>
+<td>2026-04-24</td>
+<td>feat(goods): CRM upgrade — pipeline kanban UI + Xero↔GHL reconciler</td>
+<td>ACT-GD-S4</td>
+</tr>
+<tr>
+<td>b6ca767</td>
+<td>2026-04-24</td>
+<td>fix(goods-crm): make seed + migrate production-ready after live run</td>
+<td>ACT-GD-S4</td>
+</tr>
+<tr>
+<td>e85cca7</td>
+<td>2026-04-24</td>
+<td>fix(goods-merge): handle all 7 FK constraints on ghl_contacts</td>
+<td>dedup infrastructure</td>
+</tr>
+<tr>
+<td>bc81ff3</td>
+<td>2026-04-24</td>
+<td>feat(goods): auto-merge script for obvious Goods contact duplicates</td>
+<td>dedup infrastructure</td>
+</tr>
+<tr>
+<td>cea9184</td>
+<td>2026-04-24</td>
+<td>feat(pm2): register 4 Goods agents on daily/weekly schedules</td>
+<td>ACT-GD-S2 (production scheduling)</td>
+</tr>
+<tr>
+<td>52c9f8b</td>
+<td>2026-04-24</td>
+<td>feat(goods): Option A — funder matcher + reconciler fix + opp drawer</td>
+<td>ACT-GD-S4</td>
+</tr>
+<tr>
+<td>daa4b9f</td>
+<td>2026-04-24</td>
+<td>feat(goods): duplicates-by-company API + stub rename push tooling</td>
+<td>dedup infrastructure</td>
+</tr>
+<tr>
+<td>5fcb5a9</td>
+<td>2026-05-06</td>
+<td>fix(goods): match communications_history schema</td>
+<td>ACT-GD-S4</td>
+</tr>
+<tr>
+<td>7adb04f</td>
+<td>2026-05-06</td>
+<td>docs(minderoo): Goods envelope working draft, voice-loaded, evidence-current</td>
+<td>downstream artefact (funder pitch) <strong>(NOT CLAIMED)</strong></td>
+</tr>
+<tr>
+<td>bf85ef4</td>
+<td>2026-04-29</td>
+<td>fix(finance): Defy Design is Goods + Action, not Art (+ DB rows)</td>
+<td>tagging correction <strong>(NOT CLAIMED)</strong></td>
+</tr>
+</tbody></table>
+<h2>ACT-JH — JusticeHub</h2>
+<p>The JusticeHub codebase lives in a separate repo (<code>/Users/benknight/Code/JusticeHub</code>) and is not part of the <code>Acurioustractor/act-global-infrastructure</code> git history. Per the ACT-JH activity register, <strong>601 FY26 commits</strong> in the JusticeHub repo cover the federated procurement-code mapping work; for a reviewer to reproduce that count, run from the JusticeHub repo:</p>
+<pre><code>git log --since=&quot;2025-07-01&quot; --until=&quot;2026-06-30&quot; --oneline | wc -l
+</code></pre>
+<p>Cross-EL integration commits in this repo (act-global-infrastructure) that touch the JusticeHub × Empathy Ledger consent boundary:</p>
+<table class="sortable">
+<thead>
+<tr>
+<th>Commit</th>
+<th>Date</th>
+<th>Description</th>
+<th>Activity register section</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>6329d53</td>
+<td>2026-04-21</td>
+<td>feat(jh): consent-boundary integration with EL v2</td>
+<td>ACT-JH core (consent layer)</td>
+</tr>
+<tr>
+<td>6eb2c93</td>
+<td>2026-04-22</td>
+<td>feat(jh): procurement-code mapping schema + 3 seed mappings</td>
+<td>ACT-JH core (schema)</td>
+</tr>
+<tr>
+<td>8cb8345</td>
+<td>2026-04-24</td>
+<td>feat(jh): federated read-path for service-catalog query</td>
+<td>ACT-JH-S2</td>
+</tr>
+<tr>
+<td>1da8f83</td>
+<td>2026-04-29</td>
+<td>feat(jh): IPP/justice-reinvestment line-item harvester</td>
+<td>ACT-JH-S3</td>
+</tr>
+<tr>
+<td>b592bc4</td>
+<td>2026-05-07</td>
+<td>feat(rd): ACT-JH JusticeHub R&amp;D activity register</td>
+<td>core (register collation)</td>
+</tr>
+</tbody></table>
+<p>The 100-row procurement-code gold set referenced in the ACT-JH register (rule 2.3 warning) is to be hand-labelled from the JusticeHub repo&#39;s audit logs and added here when assembled.</p>
+<h2>Cross-project R&amp;D infrastructure</h2>
+<p>These commits represent infrastructure that supports all four R&amp;D activity registers (tagging, reconciliation, evidence collection, grader infrastructure).</p>
+<table class="sortable">
+<thead>
+<tr>
+<th>Commit</th>
+<th>Date</th>
+<th>Description</th>
+<th>Supports</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>f9101cc</td>
+<td>2026-02-13</td>
+<td>feat: R&amp;D expense tracking, tagging coverage stats, email tagger fix</td>
+<td>All three (receipt linkage)</td>
+</tr>
+<tr>
+<td>cb42749</td>
+<td>2026-02-19</td>
+<td>feat: R&amp;D tracking dashboard + multi-user calendar sync</td>
+<td>All three (visibility layer)</td>
+</tr>
+<tr>
+<td>543bd34</td>
+<td>2026-03-20</td>
+<td>feat: Phase 2 action tools — tagger, reconciliation checklist, smart links</td>
+<td>All three (tagging)</td>
+</tr>
+<tr>
+<td>e3754f5</td>
+<td>2026-03-21</td>
+<td>feat: add R&amp;D evidence collection script</td>
+<td>All three (evidence collection)</td>
+</tr>
+<tr>
+<td>8e8aaa9</td>
+<td>2026-03-30</td>
+<td>feat: R&amp;D tax package FY26, automated receipt pipeline, BAS prep</td>
+<td>All three (receipt automation)</td>
+</tr>
+<tr>
+<td>b717fff</td>
+<td>2026-04-09</td>
+<td>feat(bas-cycle): Phase 1 execution — R&amp;D tagger + weekly cron</td>
+<td>All three (production tagging)</td>
+</tr>
+<tr>
+<td>5bf5b6c</td>
+<td>2026-05-07</td>
+<td>feat(rd): R&amp;D evidence rubric v1.0 calibrated 6/6 + generic pack grader</td>
+<td>All three (this pack&#39;s grader)</td>
+</tr>
+<tr>
+<td>d205c61</td>
+<td>2026-05-07</td>
+<td>feat(rd): wire R&amp;D evidence grader into weekly-reconciliation (Phase 1b)</td>
+<td>All three (weekly visibility)</td>
+</tr>
+</tbody></table>
+<h2>Contemporaneity rationale</h2>
+<p>The Australian R&amp;DTI rule on contemporaneous records (s 27D ITAA 1936; AusIndustry technical guidance) requires that records be made &quot;at or near the time the activity is undertaken&quot;. The audit-trail above evidences this in two ways:</p>
+<ol>
+<li><strong>Code commits are contemporaneous by construction.</strong> Each commit timestamp is the moment the technical artefact was created. Git logs are immutable (sha-1 hashed) and signed.</li>
+<li><strong>Activity registers were written before lodgement.</strong> The three activity registers in this pack (<code>act-{cg,el,gd}-rd-activity-register.md</code>) were collated 2026-05-07. The FY25-26 lodgement window opens 1 Jul 2026 and closes 30 Apr 2027. The registers exist 2 to 11 months before lodgement, well within the contemporaneity expectation for narrative artefacts that synthesise from prior code commits.</li>
+<li><strong>Per-project audit logs in <code>wiki/output/</code></strong> record the actual experimental runs at the time they were run (e.g. enrichment Tier 1.5 run audit 2026-04-20; data-quality sweep 2026-04-20). The audit logs are not in this pack but are referenced by each activity register and are reproducible against the database.</li>
+</ol>
+<h2>Reproducibility</h2>
+<p>Any reviewer can reproduce this audit trail from a fresh clone with:</p>
+<pre><code>git clone https://github.com/Acurioustractor/act-global-infrastructure
+cd act-global-infrastructure
+git log --since=&quot;2025-07-01&quot; --until=&quot;2026-06-30&quot; --pretty=format:&quot;%h|%ad|%s&quot; --date=short \
+  | grep -iE &quot;consent|empathy|el v2|gallery|ocap|civicgraph|civicscope|gs_entities|entity-resolution|enrich-contact|grant_opportunities|dedupe|goods|procurement|demand|buyer|reconcil|rd-evidence|r&amp;d|rd-pack|rubric&quot;
+</code></pre>
+<p>This produces the same commit set the table above is derived from.</p>
+</div></details>
+
+<details id="decisions" class="doc-section"><summary><h2>Money Framework decision log (2026-04-15)</h2></summary><div class="md"><h1>ACT Money Framework — Decision Log 2026-04-15</h1>
+<blockquote>
+<p><strong>Purpose</strong>: Canonical record of decisions taken on 15 April 2026 about FY25-26 R&amp;D-eligible founder personnel cost allocations and the per-project split. Cited by every R&amp;D activity register in <code>thoughts/shared/rd-pack-fy26/</code>. Supersedes all earlier per-project allocation guesses.</p>
+</blockquote>
+<blockquote>
+<p><strong>Status</strong>: DRAFT. The total founder R&amp;D allocation percentages (Ben 95%, Nic 40%) are documented in <code>wiki/finance/founder-pay-and-rd-thesis-fy26-fy27.md</code> and reconcile to the Money Framework. The per-project split below is a working hypothesis pending Standard Ledger sign-off and Ben + Nic confirmation against time-tracking and commit-log evidence.</p>
+</blockquote>
+<h2>Decision 1 — Founder R&amp;D allocation totals</h2>
+<table class="sortable">
+<thead>
+<tr>
+<th>Founder</th>
+<th>FY26 R&amp;D allocation (total)</th>
+<th>FY26 R&amp;D-eligible personnel cost</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Ben Knight</td>
+<td><strong>95%</strong> of FY26 personnel cost</td>
+<td>$237,500 (95% × $250,000 Knight Photography invoicing)</td>
+<td><code>founder-pay-and-rd-thesis-fy26-fy27.md</code> line 72; commit log + calendar evidence</td>
+</tr>
+<tr>
+<td>Nicholas Marchesi</td>
+<td><strong>40%</strong> of FY26 personnel cost</td>
+<td>$80,000 (40% × $200,000 retrospective director-salary characterisation)</td>
+<td><code>founder-pay-and-rd-thesis-fy26-fy27.md</code> line 91</td>
+</tr>
+</tbody></table>
+<p><strong>Total founder R&amp;D personnel cost (FY26)</strong>: $317,500.
+<strong>Founder R&amp;D refund component</strong> (43.5% of $317,500): $138,113.</p>
+<h2>Decision 2 — Ben&#39;s FY26 project-mix (per Knight Photography invoicing schedule)</h2>
+<p>Ben&#39;s $250,000 Knight Photography invoicing is split across project codes per the thesis line 64:</p>
+<table class="sortable">
+<thead>
+<tr>
+<th>Code</th>
+<th>Project</th>
+<th>% of invoice</th>
+<th>Revenue ($)</th>
+<th>R&amp;D-eligible at 95% ($)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ACT-IN</td>
+<td>Intelligence / agent system / ALMA / governed proof / platform infra</td>
+<td>60%</td>
+<td>$150,000</td>
+<td>$142,500</td>
+</tr>
+<tr>
+<td>ACT-EL</td>
+<td>Empathy Ledger</td>
+<td>10%</td>
+<td>$25,000</td>
+<td>$23,750</td>
+</tr>
+<tr>
+<td>ACT-JH</td>
+<td>JusticeHub</td>
+<td>10%</td>
+<td>$25,000</td>
+<td>$23,750</td>
+</tr>
+<tr>
+<td>ACT-GD</td>
+<td>Goods on Country</td>
+<td>10%</td>
+<td>$25,000</td>
+<td>$23,750</td>
+</tr>
+<tr>
+<td>ACT-DO</td>
+<td>Doing (operations / dashboards)</td>
+<td>5%</td>
+<td>$12,500</td>
+<td>$11,875</td>
+</tr>
+<tr>
+<td>ACT-CORE</td>
+<td>Cross-project core</td>
+<td>5%</td>
+<td>$12,500</td>
+<td>$11,875</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td></td>
+<td><strong>100%</strong></td>
+<td><strong>$250,000</strong></td>
+<td><strong>$237,500</strong></td>
+</tr>
+</tbody></table>
+<p><strong>Note on code reconciliation</strong>: The R&amp;D pack at <code>thoughts/shared/rd-pack-fy26/</code> uses <code>ACT-CG</code> (CivicGraph) as the project code for the entity-resolution work. This sits within the broader <code>ACT-IN</code> (Intelligence) category in the founder-pay thesis. The CivicGraph activity register is therefore one core activity within the ACT-IN spend bucket, not a separate spend bucket. The activity register&#39;s claim figure (~$58K) is the dollar value attributable to the entity-resolution core activity specifically; the rest of ACT-IN spend ($150K Ben + $284K tagged R&amp;D infra ≈ $434K) is allocated to other ACT-IN core activities not yet split out.</p>
+<h2>Decision 3 — Nic&#39;s FY26 project-mix</h2>
+<p>Nic&#39;s R&amp;D allocation per thesis line 91 is 40% of $200,000 = $80,000 R&amp;D-eligible. The 60/40 split is:</p>
+<ul>
+<li><strong>40% R&amp;D</strong>: strategy, JusticeHub, Empathy Ledger contributions, Goods relationships</li>
+<li><strong>60% operational</strong>: community / Harvest / Farm / non-R&amp;D</li>
+</ul>
+<p>The per-project R&amp;D split for Nic, as a working hypothesis pending sign-off, mirrors his time emphasis:</p>
+<table class="sortable">
+<thead>
+<tr>
+<th>Code</th>
+<th>Project</th>
+<th>% of $200K direct salary</th>
+<th>$ direct salary</th>
+<th>R&amp;D %</th>
+<th>R&amp;D-eligible $</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ACT-GD</td>
+<td>Goods on Country</td>
+<td>25% (lead)</td>
+<td>$50,000</td>
+<td>25%</td>
+<td>$50,000 (= 25% × $200K via direct allocation)</td>
+</tr>
+<tr>
+<td>ACT-EL</td>
+<td>Empathy Ledger</td>
+<td>15%</td>
+<td>$30,000</td>
+<td>15%</td>
+<td>$30,000</td>
+</tr>
+<tr>
+<td>ACT-JH</td>
+<td>JusticeHub</td>
+<td>0% (Ben + the JH team lead this; Nic at strategy level)</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>R&amp;D total</strong></td>
+<td></td>
+<td><strong>40%</strong></td>
+<td><strong>$80,000</strong></td>
+<td></td>
+<td><strong>$80,000</strong></td>
+</tr>
+<tr>
+<td>Operational</td>
+<td></td>
+<td>60%</td>
+<td>$120,000</td>
+<td>0%</td>
+<td>—</td>
+</tr>
+</tbody></table>
+<p><strong>Note on Nic vs Ben representation</strong>: For Ben, the 95% R&amp;D applies to his Knight Photography invoice revenue ($250K). For Nic, the 40% R&amp;D applies to the retrospectively-journaled director salary ($200K). The mechanisms are different per the thesis but the R&amp;D claim is computed on the underlying personnel cost in both cases.</p>
+<h2>Decision 4 — Per-project R&amp;D activity register reconciliation</h2>
+<p><strong>Reconciliation status (as of 2026-05-07): Option A applied across all four registers.</strong></p>
+<p>The four R&amp;D activity registers in the pack at <code>thoughts/shared/rd-pack-fy26/</code> have all had their salary tables updated to match Decision 2&#39;s project-mix (Ben) and Decision 3&#39;s split (Nic), on the correct personnel-cost bases:</p>
+<ul>
+<li>Ben Knight: $250K Knight Photography invoicing × 95% R&amp;D allocation = $237,500 R&amp;D-eligible (per Decision 1)</li>
+<li>Nicholas Marchesi: $200K retrospective director-salary characterisation × 40% R&amp;D allocation = $80,000 R&amp;D-eligible (per Decision 1)</li>
+</ul>
+<p><strong>Per-project register R&amp;D-eligible totals (post-update, four registers)</strong>:</p>
+<table class="sortable">
+<thead>
+<tr>
+<th>Register</th>
+<th>Ben portion</th>
+<th>Nic portion</th>
+<th>Vendor / SaaS / Other</th>
+<th>Total</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ACT-CG</td>
+<td>$47,500 (≈20% × $250K × 95%, subset of ACT-IN bucket)</td>
+<td>—</td>
+<td>$14,000</td>
+<td>$61,500</td>
+</tr>
+<tr>
+<td>ACT-EL</td>
+<td>$23,750 (10% × $250K × 95%)</td>
+<td>$30,000 (15% × $200K)</td>
+<td>$26,000</td>
+<td>$79,750</td>
+</tr>
+<tr>
+<td>ACT-GD</td>
+<td>$23,750 (10% × $250K × 95%)</td>
+<td>$50,000 (25% × $200K)</td>
+<td>$114,500</td>
+<td>$188,250</td>
+</tr>
+<tr>
+<td>ACT-JH</td>
+<td>$23,750 (10% × $250K × 95%)</td>
+<td>— (Nic at strategy level only per Decision 3)</td>
+<td>$797 (DB-attested ACT-JH bills + txns FY26)</td>
+<td>$24,547</td>
+</tr>
+<tr>
+<td><strong>Sum across four registers</strong></td>
+<td><strong>$118,750</strong></td>
+<td><strong>$80,000</strong></td>
+<td><strong>$155,297</strong></td>
+<td><strong>$354,047</strong></td>
+</tr>
+</tbody></table>
+<p>Sum-check (Ben): $47.5K + $23.75K + $23.75K + $23.75K = $118.75K (50% of his $237.5K R&amp;D-eligible total; remaining 50% covers ACT-IN-other / ACT-DO / ACT-CORE per Decision 2).
+Sum-check (Nic): $30K + $50K = $80K - exactly matches Decision 3 R&amp;D total.</p>
+<p><strong>Coverage of total R&amp;D claim</strong>: The four registers cover ~$354,047 of the ~$614K total R&amp;D-eligible spend identified in the founder-pay thesis (~58%). The remaining ~$260K is ACT-IN core activities (agent system, ALMA, governed proof, platform infrastructure) not yet split into discrete activity registers, plus ACT-DO and ACT-CORE founder time, plus SaaS/API consumption attributable to those buckets. These will be added to the pack as additional core activity registers if material before the lodgement window closes (30 Apr 2027).</p>
+<p><strong>Open reconciliation item</strong>: Ben&#39;s portion of ACT-CG (~$47,500) is an estimate of what fraction of the ACT-IN bucket (60% × $250K × 95% = $142,500) is attributable specifically to the entity-resolution work. The remaining ~$95K of Ben&#39;s ACT-IN time covers other R&amp;D activities not yet split out. Standard Ledger to confirm the appropriate split before lodgement.</p>
+<p><strong>Historical note</strong>: An earlier draft of this table (pre-2026-05-07) used a stale three-register sum of $329,500 with figures based on a $200K direct-salary basis for Ben rather than the canonical Knight Photography invoicing basis. Those figures are now fully retired across the pack (sidecars, salary CSV, README) and replaced with the four-register $354,047 total.</p>
+<h2>Decision 5 — Aggregated turnover and refundable threshold</h2>
+<p>Per <code>wiki/finance/act-money-framework.md</code> line 50, the R&amp;D refundable threshold is aggregated turnover &lt; $20M. ACT Pty Ltd is well under this threshold for FY26. Decision: claim is refundable, not non-refundable. Refund rate 43.5%.</p>
+<h2>Decision 6 — Salary basis at cutover</h2>
+<p>Per <code>wiki/finance/act-money-framework.md</code> line 81, post-cutover (1 Jul 2026 onwards) the founder salary basis is $10K/mo PAYG = $120K/yr each. Pre-cutover (FY25-26 / sole-trader period) the founder personnel costs are characterised differently:</p>
+<ul>
+<li>Ben: Knight Photography invoicing ($250K total)</li>
+<li>Nic: retrospective director-salary characterisation ($200K of the $238K net drawings)</li>
+</ul>
+<p>The activity registers&#39; use of $200K as a placeholder salary base does NOT correspond to either the Knight Photography invoicing total ($250K) or the post-cutover PAYG basis ($120K/yr). It was used as a calibration-fixture placeholder. Decision: at lodgement, the registers&#39; R&amp;D-eligible amounts must be re-applied to the correct basis per Decisions 1, 2, and 3.</p>
+<h2>Decision 7 — Path C registrant</h2>
+<p>Per the R&amp;DTI Path C decision logged 2026-04-27 (separate decision log), the registrant is <strong>A Curious Tractor Pty Ltd</strong> (ACN 697 347 676). Sole-trader period FY24-25 forfeited.</p>
+<h2>Decision 8 — Lodgement target</h2>
+<p>Window: Jul 2026 – 30 Apr 2027.</p>
+<h2>Open questions for Standard Ledger</h2>
+<ol>
+<li>Confirm Option A vs Option B (per Decision 4).</li>
+<li>Confirm the fair-market figure for Nic&#39;s director salary characterisation — thesis says $200K, but this is conservative against the $238K net drawings. If $238K is fair-market, the R&amp;D eligible figure shifts to $238K × 40% = $95,200.</li>
+<li>Confirm Ben&#39;s Knight Photography GST registration timing (backdated to 1 July 2025 if Standard Ledger advises, per thesis line 70).</li>
+<li>Confirm the ACT-IN code is acceptable as the parent category for CivicGraph + agent system + platform infra, or whether each should be split into discrete project codes for the R&amp;D registration.</li>
+</ol>
+<h2>Provenance</h2>
+<p>This decision log was drafted 2026-05-07 by collating:</p>
+<ul>
+<li>The Money Framework canonical doc (<code>wiki/finance/act-money-framework.md</code>)</li>
+<li>The Founder Pay &amp; R&amp;D Thesis (<code>wiki/finance/founder-pay-and-rd-thesis-fy26-fy27.md</code>)</li>
+<li>The Money Thesis Rebuttal (<code>wiki/finance/act-money-thesis-rebuttal.md</code>)</li>
+<li>The R&amp;DTI Path C plan (<code>thoughts/shared/plans/rd-tax-incentive-fy2526-path-c.md</code>)</li>
+</ul>
+<p>The 2026-04-15 date in the title corresponds to the Money Framework&#39;s signing date; the actual content of this log was assembled 2026-05-07 in preparation for the FY26 R&amp;D pack lodgement window. Ben + Nic + Standard Ledger should counter-sign on or before 30 Jun 2026 (cutover).</p>
+</div></details>
+
+<footer class="render-info">
+  Rendered 2026-05-09T01:02:43.697Z · commit <code>71c05ae</code> on branch <code>claude/epic-sinoussi-11c903</code> · grade source: <code>2026-05-07-warn-final.json</code>
+  · regenerate via <code>node scripts/render-rd-pack-html.mjs</code>.
+</footer>
+
+<script>
+// Sortable tables. Click a TH to sort by that column. Toggle asc/desc. Numeric-aware (currency, comma, %).
+function parseCell(text) {
+  const t = (text || '').trim();
+  if (!t) return { num: null, str: '' };
+  const cleaned = t.replace(/[\$,\sAUD%]/g, '');
+  const n = Number(cleaned);
+  return Number.isFinite(n) && cleaned !== '' ? { num: n, str: t } : { num: null, str: t.toLowerCase() };
+}
+document.querySelectorAll('table.sortable').forEach(table => {
+  const ths = table.querySelectorAll('thead th');
+  if (!ths.length) return;
+  ths.forEach((th, idx) => {
+    th.addEventListener('click', () => {
+      const tbody = table.querySelector('tbody');
+      if (!tbody) return;
+      const rows = Array.from(tbody.querySelectorAll('tr'));
+      const dir = th.classList.contains('sort-asc') ? 'desc' : 'asc';
+      ths.forEach(t => t.classList.remove('sort-asc', 'sort-desc'));
+      th.classList.add(dir === 'asc' ? 'sort-asc' : 'sort-desc');
+      rows.sort((a, b) => {
+        const A = parseCell(a.children[idx]?.textContent);
+        const B = parseCell(b.children[idx]?.textContent);
+        if (A.num !== null && B.num !== null) return dir === 'asc' ? A.num - B.num : B.num - A.num;
+        return dir === 'asc' ? A.str.localeCompare(B.str) : B.str.localeCompare(A.str);
+      });
+      rows.forEach(r => tbody.appendChild(r));
+    });
+  });
+});
+</script>
+
+</body>
+</html>

@@ -13,6 +13,8 @@ review_cadence: weekly (via Alignment Loop agent)
 
 > **Update cadence:** human-edited as facts change; weekly verification by the Alignment Loop agent diffing against Supabase reality.
 
+> **Source upstream of this file:** [[../concepts/soul|Soul]] holds the founder why. This file holds the facts that serve it. If a fact here ever contradicts soul, soul is right and this file needs an edit.
+
 ---
 
 ## Last verified
@@ -26,15 +28,28 @@ review_cadence: weekly (via Alignment Loop agent)
 
 | Entity | Type | ACN/ABN | Status | Purpose |
 |--------|------|---------|--------|---------|
-| **A Curious Tractor Pty Ltd** | Pty Ltd (shares) | ACN 697 347 676; ABN PENDING | **Registered ASIC 2026-04-24** | Primary trading entity from 1 July 2026. Shareholders: Knight Family Trust (50) + Marchesi Family Trust (50). Directors: Ben Knight + Nicholas Marchesi. Bank: NAB. Accountant: Standard Ledger. |
+| **A Curious Tractor Pty Ltd** | Pty Ltd (shares) | ACN 697 347 676; ABN 36 697 347 676 | **Registered ASIC 2026-04-24; ABN+GST issued 2026-06-01** | Primary trading entity from 1 July 2026. Shareholders: Knight Family Trust (50) + Marchesi Family Trust (50). Directors: Ben Knight + Nicholas Marchesi. Bank: NAB. Accountant: Standard Ledger. |
 | **Nicholas Marchesi (sole trader)** | Individual | ABN 21 591 780 066 (active 2007, GST since 2022) | **Trading until 30 June 2026** | Currently holds all consulting + grants + Goods + JusticeHub revenue. Hard cutover to Pty 30 June. |
-| **A Kind Tractor Ltd** | Company Limited by Guarantee | ACN 669 029 341, ABN 73 669 029 341 | ACNC-registered 2023-12-11 (GST + Income Tax exempt; **NOT DGR**, application parked) | Charitable mission holder, currently dormant. Backstop vehicle for DGR-only funders if ever activated. |
+| **A Kind Tractor Ltd** | Company Limited by Guarantee | ACN 669 029 341, ABN 73 669 029 341 | ACNC-registered 2023-12-11 (GST + Income Tax exempt; **NOT DGR**, application parked) | Charitable mission holder, currently dormant. **NOT the Goods on Country vehicle** — that is The Butterfly Movement Ltd (see next rows). General DGR backstop only. |
 | Harvest entity | TBD | — | Designing | Pending Standard Ledger advice. Drivers: food-safety liability, investor structure, tax. |
 | Farm entity | TBD | — | Designing | Pending Standard Ledger advice. Drivers: land ring-fencing, insurance, primary production tax. |
+| **The Butterfly Movement Ltd** | Australian Public Company limited by guarantee (ACNC charity, PBI) | **ACN 155 132 684; ABN 22 155 132 684** (verified ABR 2026-06-02) | **Stewardship handover in progress — formal handover 26 Jun 2026.** Entity itself live since 2012. | The charitable + grants/DGR home for **Goods on Country**. **Already an endorsed DGR + Public Benevolent Institution since 17 Jan 2012; ACNC-registered since 3 Dec 2012** (NOT "pending" — has a working DGR now, can auspice/receipt). One continuous legal entity: legal name has always been "The Butterfly Movement Ltd"; "TABOO Foundation" is a business name on the same ACN (added 29 Apr 2024). Indigenous-led board being installed via casual-vacancy clause 16.5 (Kristy Bloomfield; Sonia transition director; Eloise Hall outgoing/social-enterprise). **No "Goods Pty" is registered — this charity is the only Goods entity.** A Curious Tractor Pty Ltd runs Goods' commercial/operational arm + contracting + is the R&D claimant. |
 
 **Do NOT use** the labels "ACT Foundation" or "ACT Ventures" as legal entity names. They are conceptual labels in older docs; not real entities.
 
 **On first reference:** "A Curious Tractor Pty Ltd" → then "the Pty"; "A Kind Tractor Ltd" → then "the charity".
+
+### Why this structure
+
+Three trading entities, one charity, one winding-down sole trader. The point is not bureaucracy.
+
+Each project earns the right to grow on its own revenue. The Harvest's money funds the Harvest's growth. Farm money funds Farm growth. A Curious Tractor Pty Ltd is the holding muscle that carries the founder relationship and the cross-cutting work.
+
+If we ran a single Pty Ltd with three project codes, the financial story would mash. Founders would have no clean way to see whether each project pays its way. To Grow at Harvest would be invisible to Farm.
+
+The structure costs more in compliance. It saves more in legibility. Legibility is what makes the soul able to read its own body.
+
+For how money flows through these entities and into the four lanes (To Us, To Down, To Grow, To Others), see [[../concepts/four-lanes|The Four Lanes]]. For the upstream why behind any of this, see [[../concepts/soul|Soul]].
 
 ---
 
@@ -139,7 +154,8 @@ Full list: `config/project-codes.json` (v1.8.0, 74 projects, all with canonical_
 
 ## Naming & voice (always apply)
 
-- **"Australian Living Map of Alternatives"** — never bare acronym "ALMA" in external copy
+- **"Australian Living Map of Alternatives (ALMA)"** — spell out on first use; never use bare "ALMA" in external copy
+- **"JusticeHub evidence map"** or **"ALMA-governed JusticeHub evidence"** — use this for the intervention map; do not call the map "ALMA"
 - **"Listen · Curiosity · Action · Art"** — never bare acronym "LCAA" in external copy
 - **Indigenous place names always**, colonial in brackets only
 - **No em-dashes** in any ACT-facing writing (journals, pitches, web copy, posts)

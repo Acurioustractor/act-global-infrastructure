@@ -50,9 +50,109 @@ export async function handleReactorCallback(
       return handleXeroCallback(action, entityId)
     case 'gmail':
       return handleGmailCallback(action, entityId)
+    case 'idea':
+      return handleIdeaCallback(action, entityId, parts[3])
+    case 'mute':
+      // mute:24h:<source-key>  /  mute:7d:<source-key>  /  mute:forever:<source-key>
+      // entityId here is the source-key after `mute:24h:`. We pass the
+      // original parts to handleMuteCallback to keep parsing simple.
+      return handleMuteCallback(action, parts.slice(2).join(':'), chatId)
     default:
       return { toast: `Unknown: ${domain}` }
   }
+}
+
+async function handleMuteCallback(
+  action: string,
+  source: string,
+  chatId: number,
+): Promise<CallbackResult> {
+  if (!source) return { toast: 'Missing source key' }
+
+  // Map snooze duration → hours
+  const hoursByAction: Record<string, number | null> = {
+    '24h': 24,
+    '7d': 24 * 7,
+    'forever': null,
+  }
+  if (!(action in hoursByAction)) {
+    return { toast: `Unknown mute action: ${action}` }
+  }
+  const hours = hoursByAction[action]
+  const muted_until = hours === null ? null : new Date(Date.now() + hours * 3600 * 1000).toISOString()
+
+  const { error } = await supabase
+    .from('telegram_mutes')
+    .upsert(
+      {
+        source,
+        muted_until,
+        muted_at: new Date().toISOString(),
+        muted_by: String(chatId),
+        reason: action === 'forever' ? 'muted forever' : `snoozed ${action}`,
+      },
+      { onConflict: 'source' },
+    )
+
+  if (error) {
+    return { toast: `Mute failed: ${error.message.slice(0, 180)}` }
+  }
+
+  const label = action === 'forever' ? '🔇 muted' : `😴 snoozed ${action}`
+  return {
+    toast: label,
+    editMessage: `${label} — ${source}`,
+  }
+}
+
+async function handleIdeaCallback(
+  action: string,
+  entityId: string,
+  extra?: string,
+): Promise<CallbackResult> {
+  const { executeTransitionIdeaStage, executeSnoozeIdea } = await import('@/lib/tools/ideas')
+
+  if (action === 'to_fundraise') {
+    const result = JSON.parse(await executeTransitionIdeaStage({ id: entityId, stage: 'fundraise' }))
+    if (result.error) return { toast: result.error.slice(0, 200) }
+    return {
+      toast: '→ fundraise',
+      editMessage: `→ fundraise · "${result.text}"`,
+    }
+  }
+
+  if (action === 'to_start') {
+    const result = JSON.parse(await executeTransitionIdeaStage({ id: entityId, stage: 'start' }))
+    if (result.error) return { toast: result.error.slice(0, 200) }
+    return {
+      toast: '→ start',
+      editMessage: `→ start · "${result.text}"${result.needs_project_code ? ' (run suggest-code helper next)' : ''}`,
+    }
+  }
+
+  if (action === 'kill') {
+    const result = JSON.parse(await executeTransitionIdeaStage({ id: entityId, stage: 'killed' }))
+    if (result.error) return { toast: result.error.slice(0, 200) }
+    return {
+      toast: '❌ killed',
+      editMessage: `❌ killed · "${result.text}"`,
+    }
+  }
+
+  if (action === 'snooze') {
+    const days = extra ? Number.parseInt(extra, 10) : 14
+    const result = JSON.parse(await executeSnoozeIdea({ id: entityId, days }))
+    if (result.error === 'snooze_limit_reached') {
+      return { toast: result.message.slice(0, 200) }
+    }
+    if (result.error) return { toast: result.error.slice(0, 200) }
+    return {
+      toast: `💤 ${days}d`,
+      editMessage: `💤 snoozed until ${result.snoozed_until} (${result.remaining} snoozes left)`,
+    }
+  }
+
+  return { toast: `Unknown idea action: ${action}` }
 }
 
 async function handleGrantCallback(action: string, entityId: string): Promise<CallbackResult> {
@@ -93,11 +193,22 @@ async function handleGHLCallback(action: string, entityId: string): Promise<Call
   if (action === 'opp') {
     const { data: opp } = await supabase
       .from('ghl_opportunities')
-      .select('name, pipeline_name, stage_name, monetary_value, contact_name')
+      .select('name, pipeline_name, stage_name, monetary_value, ghl_contact_id')
       .eq('ghl_id', entityId)
       .maybeSingle()
 
     if (!opp) return { toast: 'Opportunity not found' }
+
+    // ghl_opportunities has no contact_name — resolve it from ghl_contacts via ghl_contact_id.
+    let contactName = 'Unknown'
+    if (opp.ghl_contact_id) {
+      const { data: c } = await supabase
+        .from('ghl_contacts')
+        .select('full_name')
+        .eq('ghl_id', opp.ghl_contact_id)
+        .maybeSingle()
+      if (c?.full_name) contactName = c.full_name
+    }
 
     const value = opp.monetary_value
       ? `\nValue: $${Number(opp.monetary_value).toLocaleString('en-AU')}`
@@ -105,7 +216,7 @@ async function handleGHLCallback(action: string, entityId: string): Promise<Call
 
     return {
       toast: 'Loaded opportunity',
-      reply: `${opp.name}\nPipeline: ${opp.pipeline_name}\nStage: ${opp.stage_name}\nContact: ${opp.contact_name || 'Unknown'}${value}`,
+      reply: `${opp.name}\nPipeline: ${opp.pipeline_name}\nStage: ${opp.stage_name}\nContact: ${contactName}${value}`,
     }
   }
 

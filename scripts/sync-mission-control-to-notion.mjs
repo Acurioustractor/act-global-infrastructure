@@ -557,6 +557,10 @@ async function findSectionRange(pageId) {
       const ourHeadings = ['Alerts', 'Focus', 'Project Health', 'Finance', 'Recent Activity', 'Quick Links'];
       if (!ourHeadings.some(h => text.includes(h))) break;
     }
+    // SAFETY (2026-05-07): deleting a child_page block archives the
+    // sub-page; same for child_database. This is the bug pattern that
+    // took out 17 money-stack pages on 2026-05-06. Skip both.
+    if (block.type === 'child_page' || block.type === 'child_database') continue;
     blockIdsToDelete.push(block.id);
   }
 

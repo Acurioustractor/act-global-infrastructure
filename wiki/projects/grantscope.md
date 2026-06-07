@@ -1,12 +1,13 @@
 ---
 title: GrantScope (CivicGraph)
-code: ACT-CS
-subtitle: Decision infrastructure for Australian government and social sector
 status: Active — Circle One technical reference for [[three-circles|The Three Circles]]
+canonical_slug: grantscope
+canonical_code: ACT-CG
+tier: background
+website_slug: grantscope
+website_path: /projects/grantscope
+public_surface: project
 cluster: data-infrastructure
-tier: foundational
-canonical_review: thoughts/shared/handoffs/staying/grantscope-review.md
-upstream_repo: /Users/benknight/Code/grantscope
 ---
 
 # GrantScope (CivicGraph)

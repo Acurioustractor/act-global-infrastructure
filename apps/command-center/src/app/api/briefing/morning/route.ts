@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import { supabase, elSupabase } from '@/lib/supabase'
 import { fetchDailyBriefing } from '@act/intel'
 import type { SupabaseQueryClient } from '@act/intel'
+import { excludeRadar } from '@/lib/finance/pipeline-rollup'
 
 export const dynamic = 'force-dynamic'
 
@@ -81,12 +82,12 @@ async function fetchNeedToRespond() {
   const threeDaysAgo = daysAgo(3)
   const { data } = await supabase
     .from('communications_history')
-    .select('id, contact_name, contact_email, subject, channel, received_at, ai_summary')
+    .select('id, contact_name, contact_email, subject, channel, received_at:occurred_at, ai_summary:summary')
     .eq('direction', 'inbound')
     .eq('requires_response', true)
-    .is('responded_at', null)
-    .gte('received_at', threeDaysAgo)
-    .order('received_at', { ascending: false })
+    .is('response_received_at', null)
+    .gte('occurred_at', threeDaysAgo)
+    .order('occurred_at', { ascending: false })
     .limit(10)
 
   return (data || []).map(row => ({
@@ -108,13 +109,13 @@ async function fetchCommunicationStats() {
   const { count: todayCount } = await supabase
     .from('communications_history')
     .select('id', { count: 'exact', head: true })
-    .gte('received_at', today.toISOString())
+    .gte('occurred_at', today.toISOString())
 
   const { count: yesterdayCount } = await supabase
     .from('communications_history')
     .select('id', { count: 'exact', head: true })
-    .gte('received_at', yesterday.toISOString())
-    .lt('received_at', today.toISOString())
+    .gte('occurred_at', yesterday.toISOString())
+    .lt('occurred_at', today.toISOString())
 
   return {
     today: todayCount || 0,
@@ -349,7 +350,9 @@ async function fetchFinancialSummary() {
     .from('ghl_opportunities')
     .select('status, monetary_value, pipeline_name, stage_name')
 
-  const rows = data || []
+  // Exclude grant-radar (GHL "Grants" pipeline) from the financial summary headline —
+  // it's a discovery dump that would ~10x the pipeline value in the morning briefing.
+  const rows = excludeRadar(data || [])
   let openValue = 0, wonValue = 0, lostValue = 0
   const byStage: Record<string, { value: number; count: number }> = {}
 

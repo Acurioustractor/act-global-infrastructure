@@ -28,7 +28,7 @@ export async function GET(request: NextRequest) {
         .limit(10),
       supabase
         .from('foundations')
-        .select('id, name, website, annual_giving_total')
+        .select('id, name, website, annual_giving_total:total_giving_annual')
         .ilike('name', pattern)
         .limit(10),
       supabase

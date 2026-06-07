@@ -1,3 +1,9 @@
+---
+title: ACT Knowledge System — Idea File
+status: review-needed
+date: 2026-04-08
+last_verified: 2026-05-08
+---
 # ACT Knowledge System — Idea File
 
 > Inspired by [Karpathy's LLM Knowledge Base pattern](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f). This is ACT's version — adapted for an organisational ecosystem, not a personal research wiki.

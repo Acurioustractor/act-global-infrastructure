@@ -1,4 +1,5 @@
 import Anthropic from '@anthropic-ai/sdk'
+import { LLMClient } from '../llm-adapter'
 import { Client as NotionClient } from '@notionhq/client'
 import { readFileSync } from 'fs'
 import { join } from 'path'
@@ -343,9 +344,9 @@ export async function executeGetMeetingPrep(input: {
         // Get last communication
         const { data: lastComm } = await supabase
           .from('communications_history')
-          .select('subject, communication_date, direction')
-          .eq('contact_id', contact.id)
-          .order('communication_date', { ascending: false })
+          .select('subject, occurred_at, direction')
+          .eq('ghl_contact_id', contact.ghl_id)
+          .order('occurred_at', { ascending: false })
           .limit(1)
           .maybeSingle()
 
@@ -353,7 +354,7 @@ export async function executeGetMeetingPrep(input: {
         const { data: deals } = await supabase
           .from('ghl_opportunities')
           .select('monetary_value')
-          .eq('contact_id', contact.ghl_id)
+          .eq('ghl_contact_id', contact.ghl_id)
           .eq('status', 'open')
 
         const pipelineValue = (deals || []).reduce((sum, d) => sum + (d.monetary_value || 0), 0)
@@ -1066,13 +1067,13 @@ export async function executeDraftGrantResponse(
       .join('\n')
 
     // 5. Call Claude to draft
-    const anthropic = new Anthropic()
+    const anthropic = new LLMClient()
     const sectionsList = input.sections?.length
       ? `Focus on these sections: ${input.sections.join(', ')}`
       : 'Draft a complete EOI covering: project description, alignment with grant objectives, community benefit, methodology, and budget justification'
 
     const response = await anthropic.messages.create({
-      model: 'claude-3-5-haiku-20241022',
+      model: 'claude-haiku-4-5',
       max_tokens: 2048,
       messages: [
         {

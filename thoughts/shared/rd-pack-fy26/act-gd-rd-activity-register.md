@@ -1,0 +1,1 @@
+../../../wiki/projects/goods/rd-activity-register.md

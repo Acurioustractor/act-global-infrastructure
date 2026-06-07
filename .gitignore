@@ -33,6 +33,7 @@ node_modules/
 .trae/
 .windsurf/
 .DS_Store
+/Untitled.md
 
 # Build artifacts
 .next/
@@ -40,6 +41,7 @@ node_modules/
 packages/*/bundle/
 packages/*/dist/
 generated-images/
+*.tsbuildinfo
 
 # TLDR cache
 .tldr/
@@ -55,23 +57,32 @@ apps/command-center/.tldrignore
 .claude/.session-branch-stamp
 .claude/tsc-cache/
 .claude/artifact-index/
+.claude/scheduled_tasks.lock
+.claude/worktrees/
 
 # Logs
 deployment/logs/*.log
 *.log
 
-# Root playground/experiment files (not project code)
-act-*.html
-act-*.js
+# Root playground/experiment files (not project code).
+# Anchored to repo root so nested act-*.html dashboard artifacts
+# (e.g. thoughts/shared/cockpit/act-now.html) stay tracked.
+/act-*.html
+/act-*.js
 workers.json
 
 # Legacy / one-off
 act-personal-ai/.venv311/
+**/.venv*/
 clawdbot-docker/clawdbot-farmhand.tar.gz
+archive/**/*.tar.gz
 config/ACT_MASTER_SECRETS.md
 
 # Backups (large)
 backups/
+
+# Local export outputs (regenerable from scripts)
+out/
 
 # Binary documents (track in cloud storage, not git)
 *.docx
@@ -86,6 +97,20 @@ archive/intelligence-platform/
 # Duplicate nested app dirs (build artifact)
 apps/command-center/apps/
 .superdesign
+
+# MCP/browser caches (regenerable)
+.playwright-mcp/
+
+# Local downloads (Dext receipts, temp files)
+/Dext/
+/tmp/
+
+# Root-level screenshots (one-off captures, not project assets)
+/*.png
+
+# Local notion-workers config backups (not project state)
+packages/notion-workers/workers.json.bak-*
+packages/notion-workers/workers.json.old
 
 # External skill/tool configs (managed outside repo)
 /skills/
@@ -113,10 +138,34 @@ apps/command-center/apps/
 !.claude/skills/ghl-crm-advisor
 !.claude/skills/implement
 !.claude/skills/obsidian
+!.claude/skills/orbit
 !.claude/skills/preflight
 !.claude/skills/query
 !.claude/skills/ralph-agent
+!.claude/skills/reconcile-cycle
 !.claude/skills/scan-subscriptions
 !.claude/skills/sync-storytellers
 !.claude/skills/tag-transactions
 !.claude/skills/wiki
+
+# GHL alignment run logs (large, run-output; keep only .md audits)
+thoughts/shared/audits/*.log
+
+# Branch-stamp file written by .claude/settings.json SessionStart hook
+.claude/.session-branch-stamp
+
+# Compliance-calendar: track only latest.json; dated daily history stays local
+thoughts/shared/data/compliance-calendar/[0-9]*.json
+
+# Xero incremental sync state (modifiedSince cursor)
+.xero-sync-state.json
+thoughts/shared/.triage-story-cache.json
+
+# PPPP weekly-scan run state (which ISO weeks already have a Notion run page) — cron-written, must never dirty git
+.pppp-scan-state.json
+
+# One-off bank/contact CSV exports dropped at repo root (personal financial data — never commit)
+/nicholas-marchesi*.csv
+
+# Codex CLI local cache
+.codex/cache/

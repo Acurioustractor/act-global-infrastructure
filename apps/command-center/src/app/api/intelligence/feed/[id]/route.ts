@@ -40,18 +40,8 @@ export async function PATCH(
       return NextResponse.json({ error: 'Insight not found' }, { status: 404 })
     }
 
-    const contactId = (insight.data as Record<string, unknown>)?.contact_id as string | undefined
-    const projectCodes = (insight.data as Record<string, unknown>)?.project_codes as string[] | undefined
-
-    // Insert vote
-    const voteType = action === 'upvote' ? 'up' : action === 'downvote' ? 'down' : 'important'
-    await supabase.from('insight_votes').insert({
-      insight_id: id,
-      vote_type: voteType,
-      insight_type: insight.insight_type,
-      project_codes: projectCodes || null,
-      contact_id: contactId || null,
-    })
+    // insight_votes table removed from DB — vote is no longer persisted, but the
+    // insight priority bump below still applies so the user action takes effect.
 
     // Update insight priority
     const newPriority = action === 'important'

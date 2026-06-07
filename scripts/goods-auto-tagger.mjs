@@ -59,21 +59,21 @@ async function main() {
   // Find contacts linked to GOODS communications who lack the goods tag
   const { data: comms, error: commsError } = await supabase
     .from('communications_history')
-    .select('contact_id, ghl_contact_id')
+    .select('ghl_contact_id')
     .contains('project_codes', ['GOODS'])
-    .gte('event_date', since.toISOString())
-    .not('contact_id', 'is', null);
+    .gte('occurred_at', since.toISOString())
+    .not('ghl_contact_id', 'is', null);
 
   if (commsError) {
     console.error('  Failed to query communications:', commsError.message);
     process.exit(1);
   }
 
-  // Unique contact IDs
-  const contactIds = [...new Set((comms || []).map(c => c.contact_id).filter(Boolean))];
-  console.log(`  Found ${contactIds.length} contacts with GOODS communications`);
+  // Unique GHL contact IDs
+  const ghlContactIds = [...new Set((comms || []).map(c => c.ghl_contact_id).filter(Boolean))];
+  console.log(`  Found ${ghlContactIds.length} contacts with GOODS communications`);
 
-  if (contactIds.length === 0) {
+  if (ghlContactIds.length === 0) {
     console.log('  No contacts to process.');
     return;
   }
@@ -82,7 +82,7 @@ async function main() {
   const { data: contacts, error: contactsError } = await supabase
     .from('ghl_contacts')
     .select('id, ghl_id, full_name, first_name, last_name, email, tags, projects')
-    .in('id', contactIds);
+    .in('ghl_id', ghlContactIds);
 
   if (contactsError) {
     console.error('  Failed to fetch contacts:', contactsError.message);

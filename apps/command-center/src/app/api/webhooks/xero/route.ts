@@ -153,7 +153,7 @@ async function sendFinancialAlert(eventType: string, resourceId: string) {
     const { data: tx } = await supabase
       .from('xero_transactions')
       .select('contact_name, total, type, project_code')
-      .eq('xero_id', resourceId)
+      .eq('xero_transaction_id', resourceId)
       .single();
 
     if (tx && Math.abs(tx.total) >= 5000) {

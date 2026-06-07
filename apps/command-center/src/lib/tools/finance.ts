@@ -136,12 +136,12 @@ export async function executeFindReceipt(input: {
     // Search Gmail
     if (input.vendor) {
       let gmailQuery = supabase
-        .from('communications')
-        .select('subject, from_address, date, snippet, project_code')
-        .or(`subject.ilike.%${input.vendor}%,from_address.ilike.%${input.vendor}%,snippet.ilike.%${input.vendor}%`)
-        .order('date', { ascending: false })
+        .from('communications_history')
+        .select('subject, from_address:contact_email, date:occurred_at, snippet:content_preview, project_code')
+        .or(`subject.ilike.%${input.vendor}%,contact_email.ilike.%${input.vendor}%,content_preview.ilike.%${input.vendor}%`)
+        .order('occurred_at', { ascending: false })
         .limit(5)
-      if (dateRange) gmailQuery = gmailQuery.gte('date', dateRange.from).lte('date', dateRange.to)
+      if (dateRange) gmailQuery = gmailQuery.gte('occurred_at', dateRange.from).lte('occurred_at', dateRange.to)
       const { data: emails } = await gmailQuery
       if (emails?.length) {
         results.push(`**Gmail (${emails.length}):**`)
@@ -228,7 +228,7 @@ export async function executeFindReceipt(input: {
     {
       let rmQuery = supabase
         .from('receipt_matches')
-        .select('vendor_name, amount, transaction_date, status, project_code')
+        .select('vendor_name, amount, transaction_date, status')
         .order('transaction_date', { ascending: false })
         .limit(5)
       if (input.vendor) rmQuery = rmQuery.ilike('vendor_name', `%${input.vendor}%`)
@@ -240,7 +240,7 @@ export async function executeFindReceipt(input: {
       if (rms?.length) {
         results.push(`**Receipt Pipeline (${rms.length}):**`)
         for (const r of rms) {
-          results.push(`  $${r.amount?.toFixed(2)} ${r.vendor_name} [${r.status}] ${r.project_code || ''}`)
+          results.push(`  $${r.amount?.toFixed(2)} ${r.vendor_name} [${r.status}]`)
         }
         totalMatches += rms.length
       }
@@ -444,17 +444,15 @@ export async function executeGetQuarterlyReview(input: { quarter?: string; detai
         .lte('transaction_date', qDates.end),
       supabase
         .from('subscriptions')
-        .select('vendor, name, amount_aud, billing_cycle, category, status, renewal_date, value_rating')
-        .eq('status', 'active')
-        .order('amount_aud', { ascending: false }),
+        .select('vendor:vendor_name, amount_aud:amount, billing_cycle, category, status:account_status, renewal_date:next_billing_date')
+        .eq('account_status', 'active')
+        .order('amount', { ascending: false }),
       supabase
         .from('v_subscription_alerts')
         .select('*')
         .limit(20),
-      supabase
-        .from('v_upcoming_renewals')
-        .select('*')
-        .limit(20),
+      // v_upcoming_renewals view removed from DB — returns empty until a backend exists
+      Promise.resolve({ data: [] as any[] }),
       supabase
         .from('xero_transactions')
         .select('date, type, total, contact_name')
@@ -579,7 +577,7 @@ export async function executeGetQuarterlyReview(input: { quarter?: string; detai
     }
 
     const topSubCosts = subs.slice(0, 10).map((s) => ({
-      vendor: s.vendor || s.name,
+      vendor: s.vendor,
       monthly_amount: parseFloat(String(s.amount_aud)) || 0,
       category: s.category,
       billing_cycle: s.billing_cycle,
@@ -922,7 +920,7 @@ export async function executeGetWeeklyFinanceSummary(input: {
     const [transactions, snapshots, overdueInvoices, upcomingBills] = await Promise.all([
       supabase
         .from('xero_transactions')
-        .select('amount, type, contact_name')
+        .select('amount:total, type, contact_name')
         .gte('date', sevenDaysAgo.split('T')[0])
         .lte('date', today),
       supabase

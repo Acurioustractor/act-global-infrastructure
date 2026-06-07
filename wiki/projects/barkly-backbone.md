@@ -1,3 +1,15 @@
+---
+title: Barkly Backbone
+status: Ideation
+canonical_slug: barkly-backbone
+canonical_code: ACT-BB
+tier: satellite
+website_slug: barkly-backbone
+website_path: /projects/barkly-backbone
+public_surface: project
+cluster: barkly-backbone
+---
+
 # Barkly Backbone
 
 > A backbone organisation doesn't do the work — it makes the work possible. In the Barkly, that distinction is the difference between communities thriving and communities burning out.

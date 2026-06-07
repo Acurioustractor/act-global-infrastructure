@@ -1,0 +1,269 @@
+import { NextResponse } from 'next/server'
+import { promises as fs } from 'fs'
+import path from 'path'
+
+/**
+ * The Field — circle-session API.
+ *
+ * GET  → the undealt pre-read queue, each person enriched with RECOGNITION anchors
+ *        (real email subjects from their person page, co-occurrence partners, signals)
+ *        — the 2026-06-06 lesson: qwen's one-line guess alone is useless; the thread
+ *        is what makes Ben go "oh, THAT person".
+ * POST → append Ben's read to thoughts/shared/field-decisions.jsonl (the same ledger
+ *        the workbench + person pages + morning read consume). Local file write only —
+ *        GHL writes stay in the gated applier (apply-field-decisions.mjs).
+ */
+
+const REPO = path.resolve(process.cwd(), '..', '..')
+const PREREADS = path.join(REPO, 'thoughts/shared/field-prereads.jsonl')
+const DECISIONS = path.join(REPO, 'thoughts/shared/field-decisions.jsonl')
+const WORKLIST = path.join(REPO, 'thoughts/shared/unified-orbit-worklist.csv')
+const COOC = path.join(REPO, 'thoughts/shared/orbit-cooccurrence.csv')
+const PEOPLE = path.join(REPO, 'thoughts/shared/people')
+
+const norm = (s: string) => (s || '').toLowerCase().replace(/[^a-z0-9 ]/g, '').replace(/\s+/g, ' ').trim()
+const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
+
+function parseCSV(t: string): string[][] {
+  const R: string[][] = []; let r: string[] = [], f = '', Q = false
+  for (let i = 0; i < t.length; i++) {
+    const c = t[i]
+    if (Q) { if (c === '"') { if (t[i + 1] === '"') { f += '"'; i++ } else Q = false } else f += c }
+    else if (c === '"') Q = true
+    else if (c === ',') { r.push(f); f = '' }
+    else if (c === '\n') { r.push(f); R.push(r); r = []; f = '' }
+    else if (c !== '\r') f += c
+  }
+  if (f || r.length) { r.push(f); R.push(r) }
+  return R
+}
+function rows(t: string): Record<string, string>[] {
+  const R = parseCSV(t); const h = R[0]
+  return R.slice(1).filter(x => x.length === h.length).map(x => Object.fromEntries(h.map((k, i) => [k, x[i]])))
+}
+async function readIf(p: string): Promise<string> { try { return await fs.readFile(p, 'utf8') } catch { return '' } }
+function jsonl(t: string): any[] {
+  return t.split('\n').filter(Boolean).map(l => { try { return JSON.parse(l) } catch { return null } }).filter(Boolean)
+}
+
+const SOIL = path.join(REPO, 'thoughts/shared/orbit-soil.csv')
+const isHandle = (n: string) => /@/.test(n) || /^\+?\d[\d \-()]{6,}$/.test((n || '').trim())
+const isInternal = (n: string) => /^(ben(jamin)? knight|nic(holas)? marchesi( oam)?|a curious tractor)$/i.test((n || '').trim())
+
+/** Triage mode: EVERY supporter-lane human in one fast list — upvote (pull closer),
+ *  downvote (push out), confirm (right where they are). Community lane never appears
+ *  (OCAP — never laddered). Votes are ledger-only; warmth v2 consumes them. */
+async function triageList() {
+  const [decTxt, wlTxt, soilTxt] = await Promise.all([readIf(DECISIONS), readIf(WORKLIST), readIf(SOIL)])
+  const reads = new Map<string, any>()
+  for (const d of jsonl(decTxt)) reads.set(norm(d.name), d) // latest wins
+  const soil = new Map<string, Record<string, string>>()
+  for (const s of rows(soilTxt)) { const k = norm(s.name); if (k && !soil.has(k)) soil.set(k, s) }
+
+  const seen = new Set<string>()
+  const people = []
+  for (const p of rows(wlTxt)) {
+    if (p.status === 'community' || p.status === 'ghost' || p.vendor === 'yes') continue
+    if (isHandle(p.name || '') || isInternal(p.name || '')) continue
+    const k = norm(p.name); if (!k || seen.has(k)) continue; seen.add(k)
+    const bs = Number(p.beeper_score) || 0
+    const [gi, go] = (p.gmail_in_out || '').split('/').map(Number)
+    const signal = bs + ((gi && go) ? Math.min(gi, go) : 0)
+    const d = reads.get(k)
+    const s = soil.get(k)
+    const tags = (p.rel_tags || '').split(' ').filter(Boolean)
+    people.push({
+      name: p.name, email: (p.email || '').toLowerCase(),
+      org: s?.company || '', position: s?.position || '',
+      signal, beeper: p.beeper_pattern || '', gmail: p.gmail_in_out || '',
+      lastContact: p.last_contact || '',
+      projects: tags.filter(t => t.startsWith('project:')).map(t => t.slice(8)),
+      roles: tags.filter(t => t.startsWith('role:')).map(t => t.slice(5)),
+      uncaptured: p.in_ghl === 'n',
+      ring: d?.ring || null, vote: d?.vote || null, relation: d?.relation || null,
+    })
+  }
+  people.sort((a, b) => b.signal - a.signal)
+  return people
+}
+
+/** Per-person context for the triage screen. The story block is a qwen-written
+ *  SUMMARY of what actually happened (raw "Re: Introduction" ×6 tells Ben nothing) —
+ *  local ollama only (the ethic), cached per person so each card costs one draft. */
+const STORY_CACHE = path.join(REPO, 'thoughts/shared/.triage-story-cache.json')
+const GENERIC_DOMAINS = /gmail|hotmail|outlook|yahoo|icloud|bigpond|live\.com|me\.com/i
+const shortProject = (p: string) => p.replace(/\s*[(—].*$/, '').trim()
+
+async function personContext(name: string, email: string) {
+  let subjects: string[] = []
+  let story = ''
+  let orgGuess = ''
+  if (email && !GENERIC_DOMAINS.test(email)) {
+    const dom = email.split('@')[1] || ''
+    orgGuess = dom.replace(/\.(com|org|net|gov|edu)?(\.au)?$/i, '').replace(/[-.]/g, ' ')
+  }
+  if (email) {
+    try {
+      const { createClient } = await import('@supabase/supabase-js')
+      const sb = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!)
+      // spine join key is ghl_contact_id, NOT email (same lesson as build-person-pages.mjs)
+      const { data: contacts } = await sb.from('ghl_contacts').select('ghl_id').eq('email', email.toLowerCase()).limit(10)
+      const ids = (contacts || []).map(c => c.ghl_id).filter(Boolean)
+      const q = sb.from('communications_history').select('occurred_at,direction,subject,content_preview,summary')
+        .order('occurred_at', { ascending: false }).limit(8)
+      const { data } = ids.length
+        ? await q.in('ghl_contact_id', ids)
+        : await q.eq('contact_email', email.toLowerCase())
+      const comms = (data || []).filter(r => r.subject)
+      subjects = comms.slice(0, 4).map(r => `${(r.occurred_at || '').slice(0, 10)} ${r.direction === 'inbound' ? '←' : '→'} ${r.subject.slice(0, 80)}`)
+
+      if (comms.length) {
+        // cached story?
+        let cache: Record<string, string> = {}
+        try { cache = JSON.parse(await readIf(STORY_CACHE) || '{}') } catch { }
+        const key = norm(name)
+        if (cache[key]) story = cache[key]
+        else {
+          const material = comms.map(r =>
+            `${(r.occurred_at || '').slice(0, 10)} ${r.direction === 'inbound' ? 'from them' : 'from us'}: ${r.subject}${r.summary ? ` — ${String(r.summary).slice(0, 150)}` : r.content_preview ? ` — ${String(r.content_preview).slice(0, 150)}` : ''}`
+          ).join('\n')
+          const resp = await fetch('http://localhost:11434/api/generate', {
+            method: 'POST', headers: { 'content-type': 'application/json' },
+            body: JSON.stringify({
+              model: 'qwen2.5:32b', stream: false, options: { num_predict: 90 },
+              prompt: `Today is ${new Date().toLocaleDateString('en-CA')}. In 1-2 plain sentences, summarise what has ACTUALLY happened between Ben (A Curious Tractor) and ${name}, from these emails. Say what it was about and where it stands NOW relative to today (active? fizzled? gone quiet for months?). Use the person's name exactly as written. No fluff, no "likely", just what the record shows.\n\n${material}\n\nSUMMARY:`,
+            }),
+            signal: AbortSignal.timeout(15000),
+          })
+          story = (((await resp.json()) as any).response || '').trim()
+          if (story) { cache[key] = story; await fs.writeFile(STORY_CACHE, JSON.stringify(cache)) }
+        }
+      }
+    } catch { /* spine or ollama unavailable → subjects-only */ }
+  }
+  // who they appear alongside (email co-occurrence)
+  const coocTxt = await readIf(COOC)
+  const partners = rows(coocTxt)
+    .filter(r => norm(r.a) === norm(name) || norm(r.b) === norm(name))
+    .sort((a, b) => +b.emails_together - +a.emails_together).slice(0, 3)
+    .map(r => (norm(r.a) === norm(name) ? r.b : r.a))
+
+  const needs: string[] = []
+  const matchTxt = await readIf(path.join(REPO, 'thoughts/shared/project-needs-match.csv'))
+  if (matchTxt) {
+    for (const r of rows(matchTxt)) {
+      if (norm(r.name || '') === norm(name) && r.need)
+        needs.push(`${shortProject(r.project || '')}: ${r.need.slice(0, 45)}`)
+    }
+  }
+  return { story, subjects, partners, orgGuess, needs: needs.slice(0, 3) }
+}
+
+// known name variants — keep in sync with scripts/lib/field-warmth.mjs ALIAS
+// (durable fix = identity resolution; this handles the known few for ?focus= lookups)
+const ALIAS: Record<string, string> = { 'ben croft': 'benjamin croft', 'terry hutchinson': 'dr terry hutchinson' }
+const canon = (s: string) => { const k = norm(s); return ALIAS[k] || k }
+
+/** Focus mode: ONE card for a named person, read or not — the add-a-note flow
+ *  from the tending board ("no read note" rows click into here, notes accumulate). */
+async function focusCard(focus: string) {
+  const [decTxt, wlTxt, coocTxt] = await Promise.all([readIf(DECISIONS), readIf(WORKLIST), readIf(COOC)])
+  const k = canon(focus)
+  let read: Record<string, unknown> = {}
+  for (const d of jsonl(decTxt)) if (canon(d.name) === k) read = { ...read, ...d } // latest fields win (same merge as loadLedger)
+  const w = rows(wlTxt).find(r => canon(r.name) === k)
+  let subjects: string[] = []
+  const page = await readIf(path.join(PEOPLE, `${slug(w?.name || focus)}.md`))
+  const hist = page.match(/## Shared history[^\n]*\n([\s\S]*?)(\n## |$)/)
+  if (hist) subjects = hist[1].split('\n').filter(l => l.startsWith('- 20')).slice(0, 8)
+  const partners = rows(coocTxt)
+    .filter(r => canon(r.a) === k || canon(r.b) === k)
+    .sort((a, b) => +b.emails_together - +a.emails_together).slice(0, 4)
+    .map(r => (canon(r.a) === k ? r.b : r.a))
+  return {
+    name: w?.name || (read.name as string) || focus,
+    email: ((w?.email || (read.email as string) || '') as string).toLowerCase(),
+    org: '', machineW: 0, ringGuess: '', guess: '', confidence: '',
+    beeper: w?.beeper_pattern || '', gmail: w?.gmail_in_out || '',
+    lastContact: w?.last_contact || '', tags: (w?.rel_tags || '').split(' ').filter(Boolean),
+    flags: w?.flags || '', uncaptured: w?.in_ghl === 'n',
+    subjects, partners,
+    ring: (read.ring as string) || null, relation: (read.relation as string) || null,
+  }
+}
+
+export async function GET(req: Request) {
+  const params = new URL(req.url).searchParams
+  if (params.get('context') != null)
+    return NextResponse.json(await personContext(params.get('context') || '', params.get('email') || ''))
+  if (params.get('focus'))
+    return NextResponse.json({ queue: [await focusCard(params.get('focus')!)], total: 1, doneToday: 0, focus: true })
+  if (params.get('mode') === 'triage') {
+    const people = await triageList()
+    return NextResponse.json({ people, total: people.length })
+  }
+  const [preTxt, decTxt, wlTxt, coocTxt] = await Promise.all([
+    readIf(PREREADS), readIf(DECISIONS), readIf(WORKLIST), readIf(COOC),
+  ])
+  const dealt = new Set(jsonl(decTxt).map(d => norm(d.name)))
+  const decisionsToday = jsonl(decTxt).filter(d => d.ts === new Date().toLocaleDateString('en-CA')).length
+  const wl = new Map<string, Record<string, string>>()
+  for (const r of rows(wlTxt)) { const k = norm(r.name); if (k && !wl.has(k)) wl.set(k, r) }
+  const cooc = rows(coocTxt)
+
+  const queue = []
+  for (const p of jsonl(preTxt)) {
+    if (dealt.has(norm(p.name))) continue
+    const w = wl.get(norm(p.name))
+    // recognition anchor: the actual email subjects off their person page
+    let subjects: string[] = []
+    const page = await readIf(path.join(PEOPLE, `${slug(p.name)}.md`))
+    const hist = page.match(/## Shared history[^\n]*\n([\s\S]*?)(\n## |$)/)
+    if (hist) subjects = hist[1].split('\n').filter(l => l.startsWith('- 20')).slice(0, 8)
+    const partners = cooc
+      .filter(r => norm(r.a) === norm(p.name) || norm(r.b) === norm(p.name))
+      .sort((a, b) => +b.emails_together - +a.emails_together).slice(0, 4)
+      .map(r => (norm(r.a) === norm(p.name) ? r.b : r.a))
+    queue.push({
+      name: p.name, email: (w?.email || '').toLowerCase(), org: p.org || '', machineW: p.machine_w,
+      ringGuess: p.ring_guess, guess: p.guess, confidence: p.confidence,
+      beeper: w?.beeper_pattern || '', gmail: w?.gmail_in_out || '',
+      lastContact: w?.last_contact || '', tags: (w?.rel_tags || '').split(' ').filter(Boolean),
+      flags: w?.flags || '', uncaptured: w?.in_ghl === 'n',
+      subjects, partners,
+    })
+  }
+  queue.sort((a, b) => b.machineW - a.machineW)
+  return NextResponse.json({ queue, total: queue.length, doneToday: decisionsToday })
+}
+
+export async function POST(req: Request) {
+  const body = await req.json()
+  const name = (body.name || '').trim()
+  if (!name) return NextResponse.json({ error: 'name required' }, { status: 400 })
+  const ring = body.ring != null ? String(body.ring) : undefined
+  if (ring && !['5', '15', '50', '150', 'out'].includes(ring))
+    return NextResponse.json({ error: 'ring must be 5|15|50|150|out' }, { status: 400 })
+
+  const vote = body.vote ? String(body.vote) : undefined
+  if (vote && !['up', 'down', 'confirm'].includes(vote))
+    return NextResponse.json({ error: 'vote must be up|down|confirm' }, { status: 400 })
+
+  const entry: Record<string, unknown> = {
+    ts: new Date().toLocaleDateString('en-CA'),
+    source: vote ? 'triage-ui' : 'circle-ui',
+    name,
+  }
+  if (body.email) entry.email = String(body.email).toLowerCase() // lets the GHL aligner resolve without hand-matching
+  if (vote) entry.vote = vote
+  if (ring) entry.ring = ring
+  if (typeof body.energy === 'number') entry.energy = body.energy
+  if (body.relation) entry.relation = String(body.relation).slice(0, 500)
+  if (body.noIdea) {
+    entry.ring = 'out'; entry.energy = 5
+    entry.relation = entry.relation || "Ben doesn't know this person"
+    entry.algo_note = 'identity-confusion class — unrecognized in circle UI'
+  }
+  await fs.appendFile(DECISIONS, JSON.stringify(entry) + '\n')
+  return NextResponse.json({ ok: true, entry })
+}

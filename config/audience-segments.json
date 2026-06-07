@@ -1,0 +1,55 @@
+{
+  "version": 1,
+  "updated": "2026-05-28",
+  "description": "Canonical audience taxonomy for the ACT communication pipeline. Each contact in GHL gets zero or more `audience-*` tags computed from their pipelines, flags and tags. These tags ARE the recipient lists the newsletter/social system sends to. See Notion: Comms & CRM Operating System > Newsletter + social audience system. Closes the open item from plan act-communication-pipeline-2026-05-23-locked ('which GHL tags map to each audience').",
+  "tagPrefix": "audience-",
+  "rules": {
+    "respectUnsubscribe": true,
+    "_comment_respectUnsubscribe": "If newsletter_unsubscribed_at is set, the contact is excluded from ALL audiences (no mass send of any kind)."
+  },
+  "audiences": {
+    "funder": {
+      "tag": "audience-funder",
+      "label": "Funder",
+      "description": "Grant + philanthropic funders. Quarterly, per-recipient editions. Private.",
+      "pipelines": ["Goods Supporter Journey", "Grants"],
+      "tagPatterns": ["funder", "philanthropy", "philanthropic", "grant-funder"],
+      "wonOpportunityWithValue": true,
+      "_comment": "wonOpportunityWithValue: any won opportunity with monetary_value > 0 marks the contact as a funder."
+    },
+    "partner": {
+      "tag": "audience-partner",
+      "label": "Partner",
+      "description": "Delivery partners, commercial buyers, demand orgs, event collaborators. Monthly, per-recipient. Private.",
+      "pipelines": [
+        "Goods — Buyer Pipeline",
+        "Goods — Demand Register",
+        "ACT Events",
+        "Festivals",
+        "Mukurtu Node Activation",
+        "A Curious Tractor"
+      ],
+      "tagPatterns": ["partner", "buyer", "goods-stage-active", "goods-stage-customer", "collaborator"],
+      "wonOpportunityWithValue": false
+    },
+    "storyteller": {
+      "tag": "audience-storyteller",
+      "label": "Storyteller",
+      "description": "Empathy Ledger storytellers. Event-triggered, OCAP-strict. Private. Never receives mass brand sends unless also consented.",
+      "pipelines": ["Empathy Ledger"],
+      "flags": ["is_storyteller"],
+      "tagPatterns": ["storyteller"],
+      "wonOpportunityWithValue": false
+    },
+    "brand": {
+      "tag": "audience-brand",
+      "label": "Brand",
+      "description": "Public newsletter audience. Fortnightly, per-audience, publicly archived. CONSENT REQUIRED.",
+      "requiresNewsletterConsent": true,
+      "pipelines": [],
+      "tagPatterns": [],
+      "wonOpportunityWithValue": false,
+      "_comment": "Brand is the only mass-public audience, so it gates strictly on newsletter_consent=true. Pipeline/tag membership never auto-adds a contact to brand."
+    }
+  }
+}

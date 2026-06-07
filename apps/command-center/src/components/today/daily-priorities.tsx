@@ -16,6 +16,7 @@ import { cn } from '@/lib/utils'
 import Link from 'next/link'
 
 const REFRESH_INTERVAL = 60 * 1000
+const PRIORITY_PREVIEW_LIMIT = 6
 
 const SOURCE_CONFIG: Record<string, { icon: typeof Target; color: string; bg: string; label: string }> = {
   invoice_chase: { icon: Receipt, color: 'text-red-400', bg: 'bg-red-500/20', label: 'Invoice' },
@@ -41,6 +42,10 @@ async function dismissPriority(id: string) {
     body: JSON.stringify({ id }),
   })
   return res.json()
+}
+
+function cleanTitle(title: string): string {
+  return title.replace(/^Domino:\s*/i, '')
 }
 
 export function DailyPriorities() {
@@ -81,7 +86,7 @@ export function DailyPriorities() {
       <div className="glass-card p-5">
         <div className="flex items-center gap-2 mb-3">
           <Target className="h-5 w-5 text-emerald-400" />
-          <h2 className="font-semibold text-white">Daily Priorities</h2>
+          <h2 className="font-semibold text-white">Priority Queue</h2>
         </div>
         <div className="text-center py-6 text-white/40">
           <Check className="h-8 w-8 mx-auto mb-2 text-emerald-400/50" />
@@ -91,12 +96,16 @@ export function DailyPriorities() {
     )
   }
 
+  const visibleNowItems = nowItems.slice(0, PRIORITY_PREVIEW_LIMIT)
+  const visibleNextItems = nextItems.slice(0, Math.max(0, PRIORITY_PREVIEW_LIMIT - visibleNowItems.length))
+  const hiddenCount = Math.max(0, items.length - visibleNowItems.length - visibleNextItems.length)
+
   return (
     <div className="glass-card p-5 glow-amber">
       <div className="flex items-center justify-between mb-4">
         <h2 className="font-semibold text-white flex items-center gap-2">
           <Target className="h-5 w-5 text-amber-400" />
-          Daily Priorities
+          Priority Queue
         </h2>
         <div className="flex items-center gap-2">
           {data?.nowCount > 0 && (
@@ -113,19 +122,19 @@ export function DailyPriorities() {
       </div>
 
       <div className="space-y-2">
-        {nowItems.map((item: any, i: number) => (
+        {visibleNowItems.map((item: any, i: number) => (
           <PriorityItem key={item.id} item={item} rank={i + 1} onDismiss={() => dismiss.mutate(item.id)} />
         ))}
-        {nextItems.length > 0 && nowItems.length > 0 && (
+        {visibleNextItems.length > 0 && visibleNowItems.length > 0 && (
           <div className="border-t border-white/5 my-2" />
         )}
-        {nextItems.map((item: any, i: number) => (
-          <PriorityItem key={item.id} item={item} rank={nowItems.length + i + 1} onDismiss={() => dismiss.mutate(item.id)} />
+        {visibleNextItems.map((item: any, i: number) => (
+          <PriorityItem key={item.id} item={item} rank={visibleNowItems.length + i + 1} onDismiss={() => dismiss.mutate(item.id)} />
         ))}
       </div>
 
-      <Link href="/opportunities" className="block mt-3 text-center text-xs text-amber-400 hover:text-amber-300">
-        View full pipeline <ChevronRight className="inline h-3 w-3" />
+      <Link href="/knowledge/actions" className="block mt-3 text-center text-xs text-amber-400 hover:text-amber-300">
+        {hiddenCount > 0 ? `View ${hiddenCount} more priorities` : 'View action queue'} <ChevronRight className="inline h-3 w-3" />
       </Link>
     </div>
   )
@@ -145,7 +154,7 @@ function PriorityItem({ item, rank, onDismiss }: { item: any; rank: number; onDi
           </div>
         </div>
         <div className="flex-1 min-w-0">
-          <p className="text-sm text-white leading-snug">{item.title}</p>
+          <p className="text-sm text-white leading-snug">{cleanTitle(item.title)}</p>
           <div className="flex items-center gap-2 mt-1">
             <span className={cn(
               'text-[10px] px-1.5 py-0.5 rounded-full',

@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { supabase } from '@/lib/supabase'
+import { fetchAllRows } from '@/lib/finance/query'
 
 export async function GET() {
   try {
@@ -7,10 +8,12 @@ export async function GET() {
     const sixMonthsAgo = new Date()
     sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6)
 
-    const { data: txns } = await supabase
-      .from('xero_transactions')
-      .select('total, type, date')
-      .gte('date', sixMonthsAgo.toISOString().split('T')[0])
+    const txns = await fetchAllRows<{ total: number; type: string; date: string }>((from, to) =>
+      supabase
+        .from('xero_transactions')
+        .select('total, type, date')
+        .gte('date', sixMonthsAgo.toISOString().split('T')[0])
+        .range(from, to))
 
     let totalInflow = 0, totalOutflow = 0
     for (const tx of txns || []) {

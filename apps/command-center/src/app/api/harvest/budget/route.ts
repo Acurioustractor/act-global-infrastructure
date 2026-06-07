@@ -29,7 +29,8 @@ export async function GET() {
     // Fetch all Harvest transactions from Xero
     const { data: transactions } = await supabase
       .from('xero_transactions')
-      .select('id, date, description, contact_name, total, type, account_code, account_name')
+      // description + account_code live in line_items[], not top-level columns
+      .select('id, date, line_items, contact_name, total, type')
       .eq('project_code', PROJECT_CODE)
       .order('date', { ascending: false })
 
@@ -53,15 +54,16 @@ export async function GET() {
       }
     }
 
-    // Group spend by account code
+    // Group spend by GL account code — attribute each line_item's amount to its own account_code
     const spendByAccount: Record<string, { name: string; total: number }> = {}
     for (const tx of txData) {
       const t = tx as any
-      if (t.type === 'SPEND' && t.account_code) {
-        if (!spendByAccount[t.account_code]) {
-          spendByAccount[t.account_code] = { name: t.account_name || t.account_code, total: 0 }
-        }
-        spendByAccount[t.account_code].total += Math.abs(t.total || 0)
+      if (t.type !== 'SPEND') continue
+      for (const li of (t.line_items || [])) {
+        const code = li?.account_code
+        if (!code) continue
+        if (!spendByAccount[code]) spendByAccount[code] = { name: String(code), total: 0 }
+        spendByAccount[code].total += Math.abs(li.line_amount ?? li.unit_amount ?? 0)
       }
     }
 
@@ -174,11 +176,11 @@ export async function GET() {
       recentTransactions: txData.slice(0, 20).map((tx: any) => ({
         id: tx.id,
         date: tx.date,
-        description: tx.description,
+        description: tx.line_items?.[0]?.description || '',
         contact: tx.contact_name,
         amount: tx.total,
         type: tx.type,
-        account: tx.account_name,
+        account: tx.line_items?.[0]?.account_code || '',
       })),
     })
   } catch (error) {

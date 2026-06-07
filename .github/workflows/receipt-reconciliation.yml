@@ -49,6 +49,14 @@ jobs:
           node scripts/sync-xero-to-supabase.mjs full --days=90 || true
           echo "✅ Xero sync complete"
 
+      - name: Reconcile xero_transactions.has_attachments drift
+        env:
+          SUPABASE_SHARED_URL: ${{ secrets.SUPABASE_SHARED_URL }}
+          SUPABASE_SHARED_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SHARED_SERVICE_ROLE_KEY }}
+        run: |
+          echo "🔁 Reconciling xero_transactions.has_attachments against receipt_emails..."
+          node scripts/reconcile-receipt-attachments.mjs
+
       - name: Scan for missing receipts
         env:
           SUPABASE_SHARED_URL: ${{ secrets.SUPABASE_SHARED_URL }}

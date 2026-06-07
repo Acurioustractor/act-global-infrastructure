@@ -1,3 +1,9 @@
+---
+title: BAS Perfection → New Entity → Annual Plan
+status: review-needed
+date: 2026-04-24
+last_verified: 2026-05-08
+---
 # BAS Perfection → New Entity → Annual Plan
 ## 3-Phase Roadmap, 2026-04-23
 

@@ -1,0 +1,67 @@
+{
+  "today": "2026-05-31",
+  "coverage": {
+    "transactions": {
+      "total": 2339,
+      "tagged": 2085,
+      "pct": 89.14065840102609
+    },
+    "invoices": {
+      "total": 97,
+      "tagged": 97,
+      "pct": 100
+    },
+    "opportunities": {
+      "total": 571,
+      "tagged": 403,
+      "pct": 70.57793345008757
+    },
+    "oppPiles": {
+      "total": 571,
+      "tagged": 397,
+      "pct": 69.52714535901926
+    }
+  },
+  "drift": [
+    {
+      "kind": "opp",
+      "amount": 2000000,
+      "label": "QBE Foundation · Goods Supporter Journey"
+    },
+    {
+      "kind": "opp",
+      "amount": 2000000,
+      "label": "REAL Innovation Fund (DEWR) · Goods Supporter Journey"
+    },
+    {
+      "kind": "opp",
+      "amount": 1700000,
+      "label": "WHSAC (Groote Archipelago) · Goods — Buyer Pipeline"
+    },
+    {
+      "kind": "opp",
+      "amount": 1300000,
+      "label": "Pilbara Aboriginal Health Alliance Limited — Towards organsiational development and community driven initiates to improve the health and wellbeing outcomes of Aboriginal people across the Pilbara. · Grants"
+    },
+    {
+      "kind": "opp",
+      "amount": 707180,
+      "label": "Puntukurnu Aboriginal Medical Service Aboriginal Corporation — Towards the renovation of shared and external spaces to establish the PAMS Short Stay Renal Hostel accommodation and the Wellness Centre, · Grants"
+    }
+  ],
+  "incoming": {
+    "receivables": 164250,
+    "grantsInFlight": 230000,
+    "pipelineWeighted": 2921056.6999999997,
+    "projected90d": 3315306.6999999997
+  },
+  "cash": -246123.51,
+  "lifetime": {
+    "distinctCustomers": 39,
+    "paying": 30,
+    "paid": 1684324.31,
+    "ar": 164250,
+    "draft": 0,
+    "visibleBook": 1848574.31
+  }
+}

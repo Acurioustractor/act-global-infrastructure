@@ -245,12 +245,20 @@ export class GHLService {
    * @returns {Promise<Array>} Matching contacts
    */
   async searchContacts(query) {
-    const queryParams = new URLSearchParams({
-      locationId: this.locationId,
-      query: query
+    // GHL v2 API: POST /contacts/search with JSON body. The older GET-style
+    // /contacts/search/?query=X 400s with "Contact with id search not found"
+    // because GHL interprets `search` as a contact ID in the path.
+    // Docs: https://highlevel.stoplight.io/docs/integrations/dba1e4d8d2eb6-search-contacts
+    const data = await this.request('/contacts/search', {
+      method: 'POST',
+      body: JSON.stringify({
+        locationId: this.locationId,
+        pageLimit: 100,
+        // GHL's "query" param is a free-text match across name + email + phone.
+        // The filters array supports more precise constraints if needed.
+        query,
+      }),
     });
-
-    const data = await this.request(`/contacts/search/?${queryParams}`);
     return data.contacts || [];
   }
 
@@ -428,6 +436,36 @@ export class GHLService {
     });
   }
 
+  /**
+   * Merge a secondary contact into a primary contact.
+   * Primary keeps all fields; secondary is deleted from GHL.
+   *
+   * @param {string} primaryContactId - The contact to keep
+   * @param {string} secondaryContactId - The contact to merge in (will be deleted)
+   * @returns {Promise<Object>} merged contact
+   */
+  async mergeContacts(primaryContactId, secondaryContactId) {
+    return await this.request(`/contacts/merge`, {
+      method: 'POST',
+      body: JSON.stringify({
+        locationId: this.locationId,
+        primaryContactId,
+        secondaryContactId
+      })
+    });
+  }
+
+  /**
+   * Delete a contact from GHL.
+   *
+   * @param {string} contactId - GHL contact ID
+   */
+  async deleteContact(contactId) {
+    return await this.request(`/contacts/${contactId}`, {
+      method: 'DELETE'
+    });
+  }
+
   // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   // CUSTOM FIELDS
   // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -438,8 +476,24 @@ export class GHLService {
    * @returns {Promise<Array>} Custom field definitions
    */
   async getCustomFields() {
-    const data = await this.request(`/custom-fields?locationId=${this.locationId}`);
+    // v2 path: /locations/{id}/customFields (the older /custom-fields?locationId= 404s)
+    const data = await this.request(`/locations/${this.locationId}/customFields`);
     return data.customFields || [];
+  }
+
+  /**
+   * Create a custom field (v2: POST /locations/{id}/customFields/).
+   * @param {Object} f - { name, dataType, model='contact', placeholder?, parentId? }
+   *   dataType: TEXT | LARGE_TEXT | NUMERICAL | MONETORY | PHONE | DATE | SINGLE_OPTIONS | MULTIPLE_OPTIONS
+   * @returns {Promise<Object>} created custom field
+   */
+  async createCustomField({ name, dataType, model = 'contact', placeholder, parentId }) {
+    const body = { name, dataType, model, ...(placeholder && { placeholder }), ...(parentId && { parentId }) };
+    const data = await this.request(`/locations/${this.locationId}/customFields/`, {
+      method: 'POST',
+      body: JSON.stringify(body),
+    });
+    return data.customField || data;
   }
 
   // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -575,12 +629,13 @@ export class GHLService {
  * @returns {GHLService}
  */
 export function createGHLService() {
-  const apiKey = process.env.GHL_API_KEY;
+  // Prefer Private Integration Token (PIT) — broader API access including delete/merge
+  const apiKey = process.env.GHL_PRIVATE_TOKEN || process.env.GHL_API_KEY;
   const locationId = process.env.GHL_LOCATION_ID;
 
   if (!apiKey || !locationId) {
     throw new Error(
-      'Missing GHL credentials. Set GHL_API_KEY and GHL_LOCATION_ID environment variables.'
+      'Missing GHL credentials. Set GHL_PRIVATE_TOKEN (or GHL_API_KEY) and GHL_LOCATION_ID environment variables.'
     );
   }
 

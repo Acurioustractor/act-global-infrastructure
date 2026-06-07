@@ -17,23 +17,33 @@
  * Usage:
  *   node scripts/ocr-dext-processing.mjs                # Dry run, all candidates
  *   node scripts/ocr-dext-processing.mjs --apply         # Write updates
+ *   node scripts/ocr-dext-processing.mjs --local --apply # Local-only OCR, no external AI
  *   node scripts/ocr-dext-processing.mjs --apply --limit 5  # Small test batch
  *   node scripts/ocr-dext-processing.mjs --concurrency 3    # Parallel workers (default 3)
  */
 import './lib/load-env.mjs';
 import { createClient } from '@supabase/supabase-js';
 import { GoogleGenAI, Type } from '@google/genai';
+import { execFile as execFileCb } from 'child_process';
+import { mkdtemp, rm, writeFile } from 'fs/promises';
+import { tmpdir } from 'os';
+import { extname, join } from 'path';
+import { promisify } from 'util';
+
+const execFile = promisify(execFileCb);
+const CLI_ARGS = process.argv.slice(2);
+const USE_LOCAL_OCR = CLI_ARGS.includes('--local');
 
 const SUPABASE_URL = process.env.SUPABASE_SHARED_URL || 'https://tednluwflfhxyucgwigh.supabase.co';
 const SUPABASE_KEY = process.env.SUPABASE_SHARED_SERVICE_ROLE_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY;
 const sb = createClient(SUPABASE_URL, SUPABASE_KEY);
 
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
-if (!GEMINI_API_KEY) {
+if (!USE_LOCAL_OCR && !GEMINI_API_KEY) {
   console.error('GEMINI_API_KEY not set');
   process.exit(1);
 }
-const ai = new GoogleGenAI({ apiKey: GEMINI_API_KEY });
+const ai = USE_LOCAL_OCR ? null : new GoogleGenAI({ apiKey: GEMINI_API_KEY });
 
 // Gemini 2.5 Flash Lite — vision-capable, ~10× cheaper than Claude Haiku 4.5.
 // Falls back to gemini-flash-latest if Lite is overloaded.
@@ -121,7 +131,9 @@ function mediaTypeFor(contentType, filename) {
   return 'image/jpeg'; // safe default
 }
 
-async function extractFieldsFromReceipt(buffer, mediaType) {
+async function extractFieldsFromReceipt(buffer, mediaType, row = null) {
+  if (USE_LOCAL_OCR) return extractFieldsFromReceiptLocal(buffer, mediaType, row);
+
   // Gemini accepts images and PDFs via inlineData parts — native multimodal
   const inlineData = { mimeType: mediaType, data: buffer.toString('base64') };
 
@@ -165,6 +177,157 @@ async function extractFieldsFromReceipt(buffer, mediaType) {
   return { extracted, usage: response.usageMetadata };
 }
 
+function fileExtFor(mediaType) {
+  if (mediaType === 'application/pdf') return '.pdf';
+  if (mediaType === 'image/png') return '.png';
+  if (mediaType === 'image/heic') return '.heic';
+  if (mediaType === 'image/webp') return '.webp';
+  if (mediaType === 'image/tiff') return '.tiff';
+  return '.jpg';
+}
+
+async function extractTextLocal(buffer, mediaType) {
+  const dir = await mkdtemp(join(tmpdir(), 'act-receipt-ocr-'));
+  try {
+    const inputPath = join(dir, `receipt${fileExtFor(mediaType)}`);
+    await writeFile(inputPath, buffer);
+
+    if (mediaType === 'application/pdf') {
+      const { stdout } = await execFile('pdftotext', ['-layout', inputPath, '-'], { timeout: 30000, maxBuffer: 5 * 1024 * 1024 });
+      if (stdout.trim().length > 40) return stdout;
+
+      const pngPath = join(dir, 'page-0.png');
+      const pngPrefix = join(dir, 'page-0');
+      try {
+        await execFile('pdftoppm', ['-f', '1', '-singlefile', '-r', '200', '-png', '-gray', inputPath, pngPrefix], { timeout: 60000 });
+      } catch {
+        await execFile('magick', ['-density', '200', `${inputPath}[0]`, '-colorspace', 'Gray', pngPath], { timeout: 60000 });
+      }
+      const ocr = await execFile('tesseract', [pngPath, 'stdout', '--psm', '6'], { timeout: 60000, maxBuffer: 5 * 1024 * 1024 });
+      return ocr.stdout;
+    }
+
+    let ocrPath = inputPath;
+    if (!['image/jpeg', 'image/png', 'image/tiff'].includes(mediaType)) {
+      ocrPath = join(dir, `converted${extname(inputPath) === '.png' ? '.jpg' : '.png'}`);
+      await execFile('magick', [inputPath, '-auto-orient', '-colorspace', 'Gray', ocrPath], { timeout: 60000 });
+    }
+
+    const { stdout } = await execFile('tesseract', [ocrPath, 'stdout', '--psm', '6'], { timeout: 60000, maxBuffer: 5 * 1024 * 1024 });
+    return stdout;
+  } finally {
+    await rm(dir, { recursive: true, force: true });
+  }
+}
+
+function normalizeOcrLines(text) {
+  return text
+    .split(/\r?\n/)
+    .map(line => line.replace(/\s+/g, ' ').trim())
+    .filter(Boolean);
+}
+
+function parseVendorFromText(text) {
+  const skip = /(tax invoice|receipt|duplicate|eftpos|merchant|customer copy|abn|tax inv|invoice no|date|time|total|visa|mastercard|approved|purchase|terminal|cashier|subtotal|gst|forwarded message|begin forwarded|external sender|email not displaying|good morning|hi there|booking reference|policy number|order confirmation|loyalty offer|console)/i;
+  for (const line of normalizeOcrLines(text).slice(0, 18)) {
+    const cleaned = line
+      .replace(/\bABN\b.*$/i, '')
+      .replace(/[^A-Za-z0-9&'()./ -]/g, '')
+      .trim();
+    if (cleaned.length >= 3 && /[A-Za-z]/.test(cleaned) && !skip.test(cleaned)) {
+      return cleaned.slice(0, 80);
+    }
+  }
+  return null;
+}
+
+function inferVendorFromFilename(filename) {
+  if (!filename || /^receipt\./i.test(filename) || /unknown-supplier/i.test(filename)) return null;
+  const stem = filename
+    .replace(/\.[^.]+$/, '')
+    .replace(/[-_]+receipt$/i, '')
+    .replace(/[-_]+invoice$/i, '')
+    .replace(/[-_]+/g, ' ')
+    .trim();
+  if (!stem || /^download\s+\d+/i.test(stem)) return null;
+  return stem.slice(0, 80);
+}
+
+function parseDateFromText(text) {
+  const monthMap = {
+    jan: '01', january: '01', feb: '02', february: '02', mar: '03', march: '03',
+    apr: '04', april: '04', may: '05', jun: '06', june: '06', jul: '07', july: '07',
+    aug: '08', august: '08', sep: '09', sept: '09', september: '09', oct: '10', october: '10',
+    nov: '11', november: '11', dec: '12', december: '12',
+  };
+
+  const iso = text.match(/\b(20\d{2})[-/](\d{1,2})[-/](\d{1,2})\b/);
+  if (iso) return `${iso[1]}-${iso[2].padStart(2, '0')}-${iso[3].padStart(2, '0')}`;
+
+  const au = text.match(/\b(\d{1,2})[/-](\d{1,2})[/-](20\d{2}|\d{2})\b/);
+  if (au) {
+    const year = au[3].length === 2 ? `20${au[3]}` : au[3];
+    return `${year}-${au[2].padStart(2, '0')}-${au[1].padStart(2, '0')}`;
+  }
+
+  const named = text.match(/\b(\d{1,2})\s+([A-Za-z]{3,9})\s+(20\d{2}|\d{2})\b/);
+  if (named) {
+    const month = monthMap[named[2].toLowerCase()];
+    if (month) {
+      const year = named[3].length === 2 ? `20${named[3]}` : named[3];
+      return `${year}-${month}-${named[1].padStart(2, '0')}`;
+    }
+  }
+
+  return null;
+}
+
+function parseAmountFromText(text) {
+  const lines = normalizeOcrLines(text);
+  const money = /(?:AUD|A\$|\$)?\s*([0-9]{1,3}(?:,[0-9]{3})*\.[0-9]{2}|[0-9]+\.[0-9]{2})/g;
+  const candidates = [];
+
+  for (const line of lines) {
+    const lower = line.toLowerCase();
+    let match;
+    while ((match = money.exec(line)) !== null) {
+      const amount = Number(match[1].replace(/,/g, ''));
+      if (!Number.isFinite(amount) || amount <= 0 || amount > 100000) continue;
+      let weight = 1;
+      if (/(grand\s+total|amount\s+paid|total\s+paid|payment\s+total|balance\s+due)/i.test(lower)) weight = 5;
+      else if (/\btotal\b/i.test(lower)) weight = 4;
+      else if (/\bamount\b|\bpaid\b/i.test(lower)) weight = 3;
+      else if (/\bgst\b|\btax\b|\bsubtotal\b|\bchange\b/i.test(lower)) weight = 0.5;
+      candidates.push({ amount, weight });
+    }
+  }
+
+  if (candidates.length === 0) return null;
+  candidates.sort((a, b) => (b.weight - a.weight) || (b.amount - a.amount));
+  return candidates[0].amount;
+}
+
+async function extractFieldsFromReceiptLocal(buffer, mediaType, row = null) {
+  const text = await extractTextLocal(buffer, mediaType);
+  const vendorName = parseVendorFromText(text) || inferVendorFromFilename(row?.attachment_filename);
+  const date = parseDateFromText(text);
+  const amount = parseAmountFromText(text);
+  const knownFields = [vendorName, date, amount].filter(Boolean).length;
+  const confidence = knownFields === 3 ? 'high' : amount && vendorName ? 'medium' : 'low';
+
+  return {
+    extracted: {
+      vendor_name: vendorName || 'UNKNOWN',
+      transaction_date: date || 'UNKNOWN',
+      total_amount: amount || 0,
+      currency: 'AUD',
+      confidence,
+      notes: confidence === 'low' ? 'local OCR extracted limited fields' : 'local OCR',
+    },
+    usage: null,
+  };
+}
+
 function normalizeDate(s) {
   if (!s || s === 'UNKNOWN') return null;
   const iso = s.match(/^(\d{4})-(\d{2})-(\d{2})/);
@@ -180,7 +343,7 @@ async function processRow(row, apply) {
     if (!buffer) return { row, status: 'skip', reason: 'no attachment' };
 
     const mediaType = mediaTypeFor(row.attachment_content_type, row.attachment_filename);
-    const { extracted, usage } = await extractFieldsFromReceipt(buffer, mediaType);
+      const { extracted, usage } = await extractFieldsFromReceipt(buffer, mediaType, row);
 
     const vendorName = extracted.vendor_name && extracted.vendor_name !== 'UNKNOWN' ? extracted.vendor_name : null;
     const date = normalizeDate(extracted.transaction_date);
@@ -196,7 +359,11 @@ async function processRow(row, apply) {
       usage,
     };
 
-    if (apply && (vendorName || date || amount)) {
+    const shouldWrite = USE_LOCAL_OCR
+      ? Boolean(vendorName && amount != null)
+      : Boolean(vendorName || date || amount);
+
+    if (apply && shouldWrite) {
       const update = {
         updated_at: new Date().toISOString(),
       };
@@ -204,7 +371,7 @@ async function processRow(row, apply) {
       if (amount != null) update.amount_detected = amount;
       if (currency) update.currency = currency;
       if (date) update.received_at = new Date(date + 'T12:00:00Z').toISOString();
-      update.match_method = `ocr_haiku_${confidence}`;
+      update.match_method = `${USE_LOCAL_OCR ? 'ocr_local' : 'ocr_haiku'}_${confidence}`;
       // Keep status as 'review' so the matcher can pick it up on next run
       if (row.status === 'review' || row.status === 'captured' || row.status === 'failed') {
         update.status = 'review';
@@ -221,14 +388,14 @@ async function processRow(row, apply) {
 }
 
 async function main() {
-  const args = process.argv.slice(2);
+  const args = CLI_ARGS;
   const apply = args.includes('--apply');
   const limitIdx = args.indexOf('--limit');
   const limit = limitIdx !== -1 ? parseInt(args[limitIdx + 1], 10) : null;
   const concIdx = args.indexOf('--concurrency');
   const concurrency = concIdx !== -1 ? parseInt(args[concIdx + 1], 10) : 3;
 
-  console.log(`OCR Dext Processing — ${apply ? 'APPLY' : 'DRY RUN'} | model: ${MODEL} | concurrency: ${concurrency}${limit ? ` | limit: ${limit}` : ''}\n`);
+  console.log(`OCR Dext Processing — ${apply ? 'APPLY' : 'DRY RUN'} | mode: ${USE_LOCAL_OCR ? 'local' : MODEL} | concurrency: ${concurrency}${limit ? ` | limit: ${limit}` : ''}\n`);
 
   // Fetch target rows: receipts missing vendor/amount
   const sourcesIdx = args.indexOf('--sources');

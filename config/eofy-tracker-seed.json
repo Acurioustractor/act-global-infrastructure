@@ -1,0 +1,67 @@
+{
+  "_meta": {
+    "title": "EOFY Setup Tracker — initial seed",
+    "cutover": "2026-06-30",
+    "ptyTrades": "2026-07-01",
+    "generated": "2026-05-27",
+    "scope": "critical-path-to-30-June, OPEN items only (already-done foundations excluded)",
+    "statusSource": "wiki/synthesis/entity-migration-truth-state-2026-05-14.md + live Xero org check 2026-05-27 (sole-trader tenant only) + thoughts/shared/plans/act-entity-migration-checklist-2026-06-30.md",
+    "note": "This is the one-time seed. After it lands in Notion, the Notion DB is the source of truth — edit statuses there, not here. Statuses dated 2026-05-14 may have advanced; confirm the P0s.",
+    "statusOptions": ["To do", "Doing", "Blocked", "Done"],
+    "priorityOptions": ["P0", "P1", "P2"],
+    "categoryOptions": ["Entity — Pty", "Entity — Trusts/Gov", "Insurance", "Banking & Cards", "Xero", "Payroll & Super", "R&D", "BAS & GST", "Contracts & Grants", "IP", "Subscriptions", "LastPass", "Cutover"]
+  },
+  "items": [
+    { "task": "ABN application (Pty) issued via ABR", "category": "Entity — Pty", "status": "Doing", "owner": "Standard Ledger", "priority": "P0", "due": "2026-05-30", "source": "checklist §3", "note": "Lodged with ABR (per Ben 2026-05-27); awaiting issue. Pty Xero/NAB/invoicing unblock once the ABN actually issues." },
+    { "task": "GST registration (Pty)", "category": "Entity — Pty", "status": "Doing", "owner": "Standard Ledger", "priority": "P0", "due": "2026-05-30", "source": "checklist §3", "note": "Lodged with the ABN application (per Ben 2026-05-27); awaiting confirmation." },
+    { "task": "Draft + sign Shareholders Agreement (Knight FT / Marchesi FT)", "category": "Entity — Trusts/Gov", "status": "To do", "owner": "Standard Ledger", "priority": "P0", "due": "2026-05-08", "source": "checklist Rule 4", "note": "OVERDUE — Rule 4 said Week 1-2. Two equal shareholders, no SHA = latent deadlock risk while Minderoo in DD." },
+    { "task": "Confirm Director IDs (Ben + Nic)", "category": "Entity — Pty", "status": "To do", "owner": "Ben", "priority": "P1", "due": "2026-06-06", "source": "synthesis open-Q3", "note": "Unverified since baseline. Confirm both directors hold a Director ID." },
+    { "task": "Confirm trust deeds executed + TFN/ABN/bank (Knight FT + Marchesi FT)", "category": "Entity — Trusts/Gov", "status": "To do", "owner": "Ben", "priority": "P2", "due": "2026-06-13", "source": "checklist §10", "note": "Shareholders set ✅ — confirm deeds executed and each trust has TFN/ABN + bank if distributing." },
+    { "task": "Open Pty minute book + share register", "category": "Entity — Trusts/Gov", "status": "To do", "owner": "Ben", "priority": "P2", "due": "2026-06-20", "source": "checklist §10", "note": "First entries: registration, director appointments, share subscription by trusts, banking resolution." },
+
+    { "task": "Select insurance broker", "category": "Insurance", "status": "To do", "owner": "Ben", "priority": "P0", "due": "2026-05-15", "source": "checklist §8", "note": "OVERDUE (was Week 1). Blocks all policies below." },
+    { "task": "Bind Directors & Officers (D&O) insurance", "category": "Insurance", "status": "To do", "owner": "Ben", "priority": "P0", "due": "2026-05-24", "source": "checklist §8", "note": "OVERDUE — 30 days post-registration was ~24 May. Pty operates director-unprotected until bound. Most time-critical item." },
+    { "task": "Bind Public Liability $20M (Harvest lease)", "category": "Insurance", "status": "To do", "owner": "Broker", "priority": "P1", "due": "2026-06-20", "source": "checklist §8", "note": "Required before the Harvest lease is signed." },
+    { "task": "Bind Professional Indemnity", "category": "Insurance", "status": "To do", "owner": "Broker", "priority": "P1", "due": "2026-06-30", "source": "checklist §8", "note": "For first post-cutover consulting contract (Innovation Studio)." },
+
+    { "task": "Open NAB business account (Pty)", "category": "Banking & Cards", "status": "To do", "owner": "Ben", "priority": "P0", "due": "2026-05-15", "source": "checklist §4", "note": "OVERDUE — 2-week onboarding. Blocks Stripe, subscription migration, and the bank details needed for novation letters." },
+    { "task": "Issue Pty expense / credit cards (founder + staff)", "category": "Banking & Cards", "status": "To do", "owner": "Ben", "priority": "P1", "due": "2026-06-20", "source": "checklist §4", "note": "Cards under the Pty business account. Also set up PayID/Osko on the account." },
+    { "task": "Open Stripe account for Pty", "category": "Banking & Cards", "status": "To do", "owner": "Ben", "priority": "P1", "due": "2026-06-13", "source": "checklist §4", "note": "Stripe prefers a new account under the new ABN." },
+    { "task": "Audit + migrate auto-debits to Pty account", "category": "Banking & Cards", "status": "To do", "owner": "Ben", "priority": "P1", "due": "2026-06-27", "source": "checklist §4", "note": "Every recurring direct debit on the sole-trader account → Pty account after 1 July." },
+
+    { "task": "Open Pty Xero file (chart of accounts + tracking categories)", "category": "Xero", "status": "Blocked", "owner": "Ben", "priority": "P0", "due": "2026-06-06", "source": "checklist §3/§9", "note": "BLOCKED on ABN. Live check 2026-05-27: only the sole-trader tenant exists in Xero. Playbook ready: thoughts/shared/plans/new-entity-xero-launch-playbook.md." },
+    { "task": "Set up Pty payroll (Ben + Nic, $10K/mo base + super)", "category": "Payroll & Super", "status": "Blocked", "owner": "Ben", "priority": "P1", "due": "2026-06-20", "source": "checklist D11.2", "note": "BLOCKED on Pty Xero. Monthly or fortnightly (SL to recommend)." },
+    { "task": "Open director's loan accounts (one per founder)", "category": "Payroll & Super", "status": "Blocked", "owner": "Ben", "priority": "P1", "due": "2026-06-13", "source": "checklist D11.2", "note": "BLOCKED on Pty Xero. Document drawing rules so ATO doesn't deem a Division 7A loan." },
+    { "task": "Register PAYG withholding + Single Touch Payroll (Pty)", "category": "Payroll & Super", "status": "To do", "owner": "Standard Ledger", "priority": "P1", "due": "2026-06-20", "source": "checklist §7", "note": "Required from first pay." },
+    { "task": "Set up super clearing house (11.5% FY26 → 12% FY27)", "category": "Payroll & Super", "status": "To do", "owner": "Ben", "priority": "P1", "due": "2026-06-20", "source": "checklist §7" },
+    { "task": "Decide FY26 founder pay catch-up", "category": "Payroll & Super", "status": "To do", "owner": "Ben", "priority": "P1", "due": "2026-06-06", "source": "checklist D11.2", "note": "Neither founder has drawn salary this FY. Pay enough this FY to optimise R&D. Decide: Pty post-cutover only, or backdate via sole-trader invoice." },
+
+    { "task": "Finalise FY26 R&D evidence pack (~$354K, 4 registers)", "category": "R&D", "status": "Doing", "owner": "Ben", "priority": "P1", "due": "2026-06-30", "source": "rd-pack-fy26", "note": "Registers exist; grade WARN/62. Close the open warnings (contemporaneous records, classification)." },
+    { "task": "R&D records review with dedicated R&D consultant", "category": "R&D", "status": "To do", "owner": "Ben", "priority": "P1", "due": "2026-06-06", "source": "checklist seq 6", "note": "Plan scheduled end May. Select consultant. Verify contemporaneous records support the claim." },
+    { "task": "Knight Photography Phase 1 invoice ($100K) + Xero entry", "category": "R&D", "status": "To do", "owner": "Ben", "priority": "P1", "due": "2026-06-02", "source": "checklist D11.5", "note": "R&D attribution depends on it. Matches the 6 Oct 2025 $100K transfers. Director's-loan journal via SL." },
+
+    { "task": "Lodge final sole-trader Q4 FY26 BAS", "category": "BAS & GST", "status": "To do", "owner": "Standard Ledger", "priority": "P1", "due": "2026-07-28", "source": "checklist §3", "note": "Q4 runs Apr–Jun, due 28 July. Last sole-trader BAS; then cancel ABN/GST." },
+    { "task": "Clear untagged Xero review queue (~246 rows)", "category": "BAS & GST", "status": "Doing", "owner": "Ben", "priority": "P1", "due": "2026-06-06", "source": "checklist D11.4", "note": "Blocks mapping accuracy. Coverage ~97.5%; finish the residual before SL reviews the mapping." },
+    { "task": "Standard Ledger reviews sole-trader → Pty mapping", "category": "BAS & GST", "status": "To do", "owner": "Standard Ledger", "priority": "P1", "due": "2026-06-13", "source": "checklist D11.4", "note": "Mapping export ✅ generated (2,879 lines). SL confirms reallocation principle, then books cross-entity journals." },
+
+    { "task": "Enumerate active sole-trader grants (funders-to-notify list)", "category": "Contracts & Grants", "status": "Doing", "owner": "Ben", "priority": "P1", "due": "2026-05-30", "source": "checklist §2 gap", "note": "Blocks novation letters. Partial via Q1 funder synthesis. Snow / PRF / Lord Mayor's / Dusseldorp / Equity Trustees + grant register." },
+    { "task": "Send novation letters to funders", "category": "Contracts & Grants", "status": "Blocked", "owner": "Ben", "priority": "P1", "due": "2026-05-31", "source": "checklist §2", "note": "Template DRAFTED (novation-letter-templates.md). BLOCKED on SL review + ABN + NAB bank details." },
+    { "task": "Draft Harvest subsidiary structure + confirm lease counterparty", "category": "Contracts & Grants", "status": "To do", "owner": "Standard Ledger", "priority": "P1", "due": "2026-06-13", "source": "checklist D11.1", "note": "Separate Pty subsidiary, landlord as minority shareholder. Sonas already invoiced $37,290. Lease in subsidiary name." },
+    { "task": "Novate customer relationships (Innovation Studio / JusticeHub / Goods buyers)", "category": "Contracts & Grants", "status": "To do", "owner": "Ben", "priority": "P2", "due": "2026-06-27", "source": "checklist §1/§5", "note": "Audit assignment clauses for the 19 Goods buyers — some need prior written consent, not just notice." },
+    { "task": "New Farm lease (Nic ↔ Pty, arm's-length market rate)", "category": "Contracts & Grants", "status": "To do", "owner": "Standard Ledger", "priority": "P2", "due": "2026-06-27", "source": "checklist §1", "note": "Draft new lease, Nic lessor / Pty lessee. SL confirms rate." },
+    { "task": "Decide Centrecorp INV-0314 DRAFT ($84,700)", "category": "Contracts & Grants", "status": "To do", "owner": "Ben", "priority": "P1", "due": "2026-05-30", "source": "synthesis amber-7", "note": "90+ days as DRAFT. Affects Minderoo pitch credibility. Ben-only decision: issue or drop." },
+
+    { "task": "IP clause audit on grant + partnership agreements", "category": "IP", "status": "To do", "owner": "Standard Ledger", "priority": "P1", "due": "2026-06-13", "source": "checklist §6 gap", "note": "Blocks the IP deed. Verify Nic holds clean title to assign (Commonwealth grants may contain IP clauses)." },
+    { "task": "IP assignment deed (Nic → Pty: codebases, brands, LCAA)", "category": "IP", "status": "Blocked", "owner": "Standard Ledger", "priority": "P1", "due": "2026-06-20", "source": "checklist §6", "note": "BLOCKED on the clause audit. Covers repos, Empathy Ledger / JusticeHub / ALMA, methodologies, design assets." },
+    { "task": "Transfer GitHub org ownership to Pty identity", "category": "IP", "status": "To do", "owner": "Ben", "priority": "P2", "due": "2026-06-27", "source": "checklist §6" },
+
+    { "task": "Audit + migrate key SaaS billing to Pty card", "category": "Subscriptions", "status": "To do", "owner": "Ben", "priority": "P2", "due": "2026-06-27", "source": "checklist §5", "note": "Xero/GHL/Supabase/Vercel/Anthropic/OpenAI/Google Workspace/Notion/Cloudflare/domains (38 vendor patterns in subscription_patterns)." },
+    { "task": "Stripe subscription migration plan (30+ day customer notice)", "category": "Subscriptions", "status": "To do", "owner": "Ben", "priority": "P1", "due": "2026-06-13", "source": "checklist §5 gap", "note": "Stripe doesn't move between ABNs; customers re-authenticate. Notify 30+ days before cutover." },
+    { "task": "Provision Dext per-project email addresses (top 12 codes)", "category": "Subscriptions", "status": "To do", "owner": "Ben", "priority": "P2", "due": "2026-06-13", "source": "checklist D11.3", "note": "Embed project tagging at point of forwarding. Add map to config/dext-project-emails.json." },
+
+    { "task": "Load new-entity credentials into LastPass", "category": "LastPass", "status": "To do", "owner": "Ben", "priority": "P2", "due": "2026-06-30", "source": "LastPass Intake Register", "note": "ASIC/ABR/Xero/NAB/Stripe/insurer portals as each is created. Manual — Claude can't write to LastPass." },
+
+    { "task": "Dry-run $1 test invoice from Pty Xero (end-to-end)", "category": "Cutover", "status": "Blocked", "owner": "Ben", "priority": "P1", "due": "2026-06-24", "source": "checklist open-action", "note": "BLOCKED on Pty Xero. Verify tenant + bank + Stripe + project_code tagging + BAS treatment before going live." },
+    { "task": "Update email/website/invoice footers to Pty (ABN + ACN)", "category": "Cutover", "status": "To do", "owner": "Ben", "priority": "P2", "due": "2026-07-01", "source": "checklist §9", "note": "On real cutover (Rule 2 — when Pty is genuinely invoice-ready, not an aspirational date)." }
+  ]
+}

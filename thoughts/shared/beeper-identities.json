@@ -1,0 +1,14 @@
+{
+  "_comment": "Hand-confirmed Beeper chat identities — Ben's word only, NEVER machine-guessed. Keyed by phone (chat titles are address-book names and ambiguous: two bare-'sam' threads exist). Consumed by scripts/lib/field-warmth.mjs loadBeeperRecency(). person = canon worklist name.",
+  "identities": [
+    {
+      "phone": "+61422513893",
+      "title": "Sam",
+      "network": "WhatsApp",
+      "person": "sam davies",
+      "confirmed_by": "Ben",
+      "confirmed_at": "2026-06-07",
+      "note": "Sam Davies — Defy, core partner ($121K critical path). Chat titled bare 'Sam'; no GHL phone on file, so machine match was impossible."
+    }
+  ]
+}

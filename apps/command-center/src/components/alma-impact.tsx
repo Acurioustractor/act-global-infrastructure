@@ -3,9 +3,9 @@
 import { cn } from '@/lib/utils'
 
 /**
- * ALMA Impact Scoring Framework
+ * ALMA governed review fields
  *
- * Measures project impact across 4 dimensions:
+ * Reviews project readiness across 4 dimensions:
  * - Autonomy: Community self-determination and ownership
  * - Legibility: Transparency and clarity of impact
  * - Mutuality: Reciprocal benefit and shared value
@@ -89,7 +89,7 @@ export function AlmaImpact({ scores, projectName }: AlmaImpactProps) {
             <span className="w-6 h-6 rounded-md bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center text-xs font-bold text-white">
               A
             </span>
-            ALMA Impact Score
+            ALMA Review Fields
           </h2>
           <p className="text-sm text-white/40 mt-1">
             Autonomy, Legibility, Mutuality, Accountability
@@ -150,10 +150,10 @@ export function AlmaImpact({ scores, projectName }: AlmaImpactProps) {
       {!hasData && (
         <div className="mt-5 py-3 px-4 rounded-lg bg-white/5 border border-white/10 text-center">
           <p className="text-sm text-white/40">
-            ALMA scores not yet assessed for this project.
+            ALMA review fields have not yet been assessed for this project.
           </p>
           <p className="text-xs text-white/25 mt-1">
-            Scores are calculated from community impact data in Supabase.
+            Fields are drawn from community impact data in Supabase.
           </p>
         </div>
       )}

@@ -1,0 +1,67 @@
+{
+  "today": "2026-05-26",
+  "coverage": {
+    "transactions": {
+      "total": 2325,
+      "tagged": 2021,
+      "pct": 86.9247311827957
+    },
+    "invoices": {
+      "total": 97,
+      "tagged": 97,
+      "pct": 100
+    },
+    "opportunities": {
+      "total": 414,
+      "tagged": 389,
+      "pct": 93.96135265700482
+    },
+    "oppPiles": {
+      "total": 414,
+      "tagged": 397,
+      "pct": 95.89371980676329
+    }
+  },
+  "drift": [
+    {
+      "kind": "opp",
+      "amount": 500000,
+      "label": "2026 Research Acceleration Awards — Women And Infants Research Fou · Grants"
+    },
+    {
+      "kind": "opp",
+      "amount": 200000,
+      "label": "Sidney Myer Creative Fellowships — The Myer Foundation · Grants"
+    },
+    {
+      "kind": "opp",
+      "amount": 50000,
+      "label": "Youth Development Pathway — The Trustee for Creating Chanc · Grants"
+    },
+    {
+      "kind": "opp",
+      "amount": 50000,
+      "label": "Australian Economic Equity Initiative — The Judith Neilson Head Trust · Grants"
+    },
+    {
+      "kind": "opp",
+      "amount": 50000,
+      "label": "The Haven Project — THE PROPERTY INDUSTRY FOUNDATI · Grants"
+    }
+  ],
+  "incoming": {
+    "receivables": 164250,
+    "grantsInFlight": 230000,
+    "pipelineWeighted": 2190240.6,
+    "projected90d": 2584490.6
+  },
+  "cash": -245844.18000000002,
+  "lifetime": {
+    "distinctCustomers": 39,
+    "paying": 30,
+    "paid": 1684324.31,
+    "ar": 164250,
+    "draft": 0,
+    "visibleBook": 1848574.31
+  }
+}

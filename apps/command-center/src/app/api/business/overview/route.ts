@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server'
 import { supabase } from '@/lib/supabase'
+import { fetchAllRows } from '@/lib/finance/query'
+import { getMonthlyPL, getCashPosition } from '@/lib/finance/ledger'
 
 /**
  * GET /api/business/overview
@@ -26,18 +28,13 @@ export async function GET() {
   thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30)
   const thirtyDaysAgoStr = thirtyDaysAgo.toISOString().split('T')[0]
 
-  // FY totals
-  const { data: fyTxns } = await supabase
-    .from('xero_transactions')
-    .select('total, type')
-    .gte('date', fyStartStr)
-
-  let fyIncome = 0, fyExpenses = 0
-  for (const tx of fyTxns || []) {
-    const amt = Math.abs(Number(tx.total) || 0)
-    if (tx.type === 'RECEIVE') fyIncome += amt
-    else if (tx.type === 'SPEND') fyExpenses += amt
-  }
+  // FY income/expense/net from the canonical org ledger (project_monthly_financials), so this
+  // surface agrees with /company, /strategy and the per-project pages. Raw RECEIVE/SPEND bank sums
+  // were wrong — RECEIVE undercounts income (most invoice settlements land as RECEIVE-TRANSFER).
+  // FY26 net ≈ +$518,059 (rev $1,732,851 − exp $1,214,792).
+  const fyPL = await getMonthlyPL({ fyStart: fyStartStr })
+  const fyIncome = fyPL.revenue
+  const fyExpenses = fyPL.expenses
 
   // This month
   const { data: monthTxns } = await supabase
@@ -65,19 +62,16 @@ export async function GET() {
     else if (tx.type === 'SPEND') recentOut += amt
   }
 
-  // Bank balance (latest from Xero or estimate)
-  const { data: latestBalance } = await supabase
-    .from('xero_transactions')
-    .select('bank_account, running_balance')
-    .order('date', { ascending: false })
-    .limit(1)
-    .single()
+  // Bank balance: the live ACT cash position = the two ACT operating accounts (ACT Everyday + NAB
+  // Visa #8815, two-account rule), summed from xero_bank_accounts (synced daily by xero-bank-balances).
+  // Reuse the canonical ledger helper so this matches /company.
+  const cashPosition = await getCashPosition()
 
   // Subscriptions total
   const { data: subs } = await supabase
     .from('subscriptions')
     .select('amount')
-    .eq('status', 'active')
+    .eq('account_status', 'active')
 
   const monthlySubscriptions = (subs || []).reduce((sum, s) => sum + (Number(s.amount) || 0), 0)
 
@@ -92,11 +86,13 @@ export async function GET() {
   // === LIVE R&D SPEND DATA ===
   const RD_ELIGIBLE_PROJECTS = ['ACT-EL', 'ACT-IN', 'ACT-JH', 'ACT-GD', 'ACT-PS', 'ACT-CF']
 
-  const { data: rdTxns } = await supabase
-    .from('xero_transactions')
-    .select('project_code, total')
-    .in('project_code', RD_ELIGIBLE_PROJECTS)
-    .gte('date', fyStartStr)
+  const rdTxns = await fetchAllRows<{ project_code: string; total: number }>((from, to) =>
+    supabase
+      .from('xero_transactions')
+      .select('project_code, total')
+      .in('project_code', RD_ELIGIBLE_PROJECTS)
+      .gte('date', fyStartStr)
+      .range(from, to))
 
   let rdSpendTotal = 0
   const rdByProject: Record<string, number> = {}
@@ -308,12 +304,14 @@ export async function GET() {
       netFlow: Math.round(recentIn - recentOut),
     },
     currentPosition: {
-      bankBalance: latestBalance?.running_balance ? Math.round(Number(latestBalance.running_balance)) : null,
+      bankBalance: cashPosition.ok ? cashPosition.cash : null,
+      bankBalanceAsOf: cashPosition.asOf,
+      bankBalanceStale: cashPosition.stale,
       receivables: Math.round(receivables),
       monthlySubscriptions: Math.round(monthlySubscriptions),
       burnRate: Math.round(monthExpenses),
-      runway: monthExpenses > 0 && latestBalance?.running_balance
-        ? Math.round(Number(latestBalance.running_balance) / monthExpenses)
+      runway: monthExpenses > 0 && cashPosition.ok
+        ? Math.round(cashPosition.cash / monthExpenses)
         : null,
     },
   }

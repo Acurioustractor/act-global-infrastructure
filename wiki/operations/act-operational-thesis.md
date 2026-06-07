@@ -401,6 +401,8 @@ Never:    replace human judgment on relationships, consent, or creative directio
 
 The AI doesn't decide which stories to tell. It doesn't decide which communities to work with. It doesn't decide what art to make. It makes sure the receipts are matched, the wiki is current, the R&D claim is documented, and the grant opportunities are visible — so that the humans can do the work that only humans should do.
 
+This section is the internal application of ACT's broader [[../concepts/civic-reflex-automation|Civic Reflex Automation]] thesis. ACT applies the thesis to its own operations first; what is documented above is the proof case for what gets pitched externally. See also [[../concepts/evidence-as-by-product|Evidence as a By-Product of the Work]] for how this thesis applies to impact reporting (reporting composes from the layers; it is not a separate workstream).
+
 ---
 
 ## 6. The Karpathy System: How the Wiki Grows Itself

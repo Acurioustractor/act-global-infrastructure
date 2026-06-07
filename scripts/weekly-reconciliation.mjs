@@ -17,6 +17,8 @@
  *   node scripts/weekly-reconciliation.mjs --quarter Q2   # Specific quarter
  */
 import './lib/load-env.mjs';
+import fs from 'node:fs';
+import path from 'node:path';
 import { createClient } from '@supabase/supabase-js';
 import { execSync } from 'child_process';
 
@@ -97,6 +99,72 @@ function runScript(name, args = '') {
   }
 }
 
+const NO_RD_GRADE = process.argv.includes('--no-rd-grade');
+const NO_VOICE_SCAN = process.argv.includes('--no-voice-scan');
+
+// Tier 1-only voice scan over drafts modified in the past 7 days.
+// Deterministic regex/wordlist — no LLM cost. Catches em-dashes, AI-tell vocab,
+// negative parallelisms, etc. Tier 2-3 (Curtis structural + plainness) is run
+// only on demand via grade-voice.mjs --file <path> directly.
+function voiceScanRecentDrafts() {
+  if (NO_VOICE_SCAN) return { skipped: 'flag --no-voice-scan' };
+  const dir = '/Users/benknight/Code/act-global-infrastructure/thoughts/shared/drafts';
+  if (!fs.existsSync(dir)) return { skipped: 'drafts dir not found' };
+  const cutoff = Date.now() - 7 * 24 * 60 * 60 * 1000;
+  const files = fs.readdirSync(dir)
+    .filter(f => f.endsWith('.md'))
+    .map(f => {
+      try {
+        const p = path.join(dir, f);
+        return { name: f, path: p, mtime: fs.statSync(p).mtime.getTime() };
+      } catch { return null; }
+    })
+    .filter(f => f && f.mtime > cutoff)
+    .sort((a, b) => b.mtime - a.mtime);
+
+  if (files.length === 0) return { checked: 0, failed: [] };
+
+  const failed = [];
+  let checked = 0;
+  for (const f of files.slice(0, 15)) {
+    try {
+      execSync(
+        `node scripts/grade-voice.mjs --file "${f.path}" --project hub --genre pitch --tier1-only`,
+        { cwd: '/Users/benknight/Code/act-global-infrastructure', stdio: ['ignore', 'pipe', 'pipe'], timeout: 15_000 },
+      );
+      checked++;
+    } catch {
+      failed.push(f.name);
+      checked++;
+    }
+  }
+  return { checked, failed };
+}
+
+// Grade the R&D evidence pack against rubric v1.0.
+// Returns { verdict, score, hardFailures } or { skipped: reason }.
+function gradeRdPack() {
+  if (NO_RD_GRADE) return { skipped: 'flag --no-rd-grade' };
+  const packDir = '/Users/benknight/Code/act-global-infrastructure/thoughts/shared/rd-pack-fy26';
+  const rubric = '/Users/benknight/Code/act-global-infrastructure/thoughts/shared/rubrics/rd-evidence-pack.md';
+  if (!fs.existsSync(packDir)) return { skipped: 'pack dir not found' };
+  if (!process.env.ANTHROPIC_API_KEY) return { skipped: 'no ANTHROPIC_API_KEY' };
+  try {
+    const out = execSync(
+      `node scripts/grade-pack.mjs --rubric ${rubric} --pack ${packDir}`,
+      { cwd: '/Users/benknight/Code/act-global-infrastructure', stdio: ['ignore', 'pipe', 'pipe'], timeout: 90_000 },
+    ).toString();
+    const parsed = JSON.parse(out.replace(/^```json\s*|\s*```$/g, '').trim());
+    return {
+      verdict: parsed.verdict || 'unknown',
+      score: parsed.score ?? null,
+      hardFailures: (parsed.hard_failures || []).slice(0, 3).map(f => f.rule || JSON.stringify(f).slice(0, 60)),
+    };
+  } catch (e) {
+    return { skipped: `grader error: ${e.message?.split('\n')[0]}` };
+  }
+}
+
 async function main() {
   const startTime = Date.now();
   console.log(`\n🔄 Weekly Reconciliation — ${quarter} FY26 (${fromDate} to ${toDate})\n`);
@@ -105,6 +173,10 @@ async function main() {
   console.log('📋 Step 1: Update tags and matches...');
   runScript('tag-statement-lines.mjs', '--apply');
   runScript('reconciliation-report.mjs', '--match --apply');
+  runScript('tag-lanes.mjs', '--apply');
+  runScript('tag-lcaa-phases.mjs', '--apply');
+  runScript('four-lanes-snapshot.mjs', '');
+  runScript('sync-four-lanes-card-to-notion.mjs', ''); // fail-soft: skips quietly if NOTION_PAGE_FOUR_LANES_CARD / cfg.fourLanesCard not set
 
   // Step 2: Load all statement lines for the quarter (paginate past 1000-row cap)
   console.log('\n📊 Step 2: Computing stats...');
@@ -344,9 +416,123 @@ async function main() {
     msg += `\n🧠 *${learnings} patterns* (${locInserted} locations + ${subInserted} subs auto-added)`;
   }
 
-  msg += `\n_Run reconciliation-report.mjs for full details_`;
+  // ── Step 4: Four lanes + soul check ────────────────────────────
+  // Reads the lane / lcaa_phase tags written above by tag-lcaa-phases.mjs.
+  // Methodology: wiki/concepts/four-lanes.md and wiki/concepts/lcaa-method.md.
+  console.log('\n💰 Step 4: Four lanes + soul check...');
+  const laneRows = lines; // already loaded for this quarter, has lane + lcaa_phase
+  const laneTotals = { to_us: 0, to_down: 0, to_grow: 0, to_others: 0 };
+  const phaseTotals = { listen: 0, curiosity: 0, action: 0, art: 0 };
+  for (const r of laneRows) {
+    if (laneTotals[r.lane] !== undefined) laneTotals[r.lane] += parseFloat(r.amount);
+    if (phaseTotals[r.lcaa_phase] !== undefined) phaseTotals[r.lcaa_phase] += parseFloat(r.amount);
+  }
+
+  const LANE_LABELS = { to_us: 'To Us', to_down: 'To Down', to_grow: 'To Grow', to_others: 'To Others' };
+  const SOUL_CHECK = {
+    to_us: "When did Ben and Nic last get paid by the entity that earns the money? If the answer is 'not this quarter', that is the work.",
+    to_down: "What old liability is unblocked by clearing this quarter? Receivables, ATO, legacy debts. Pick one.",
+    to_grow: "Which project most needs the next dollar? Equipment, sites, engineering hours, travel.",
+    to_others: "Which community partner hasn't had a fellowship or anchor payment yet? Make the list.",
+  };
+  const orderedLanes = ['to_us', 'to_down', 'to_grow', 'to_others'];
+  let mostBehind = orderedLanes[0];
+  for (const l of orderedLanes) if (laneTotals[l] < laneTotals[mostBehind]) mostBehind = l;
+
+  const phaseSum = Object.values(phaseTotals).reduce((a, b) => a + b, 0);
+  const fmtPct = (n) => phaseSum > 0 ? Math.round((n / phaseSum) * 100) + '%' : '0%';
+
+  console.log(`   Lane: To Us $${Math.round(laneTotals.to_us)} · To Down $${Math.round(laneTotals.to_down)} · To Grow $${Math.round(laneTotals.to_grow)} · To Others $${Math.round(laneTotals.to_others)}`);
+  console.log(`   LCAA: L ${fmtPct(phaseTotals.listen)} · C ${fmtPct(phaseTotals.curiosity)} · A ${fmtPct(phaseTotals.action)} · Art ${fmtPct(phaseTotals.art)}`);
+  console.log(`   Lane most behind: ${LANE_LABELS[mostBehind]} ($${Math.round(laneTotals[mostBehind])})`);
+
+  msg += `\n\n💰 *Four lanes (${quarter} FY26):*\n`;
+  msg += `To Us $${Math.round(laneTotals.to_us)} · To Down $${Math.round(laneTotals.to_down)} · To Grow $${Math.round(laneTotals.to_grow)} · To Others $${Math.round(laneTotals.to_others)}\n`;
+  if (phaseSum > 0) {
+    msg += `LCAA: L ${fmtPct(phaseTotals.listen)} · C ${fmtPct(phaseTotals.curiosity)} · A ${fmtPct(phaseTotals.action)} · Art ${fmtPct(phaseTotals.art)}\n`;
+  }
+  msg += `\n🌱 *Soul check:* lane most behind = *${LANE_LABELS[mostBehind]}* ($${Math.round(laneTotals[mostBehind])}).\n${SOUL_CHECK[mostBehind]}`;
+
+  // ── Voice scan over recent drafts ────────────────────────────────
+  console.log('\n🎙  Step 5a: Voice scan over drafts modified in past 7 days...');
+  const voiceScan = voiceScanRecentDrafts();
+  if (voiceScan.skipped) {
+    console.log(`   ⏭  Voice scan skipped: ${voiceScan.skipped}`);
+    msg += `\n\n🎙 *Voice scan:* skipped (${voiceScan.skipped})`;
+  } else if (voiceScan.checked === 0) {
+    console.log('   📭 No drafts modified in past 7 days');
+    msg += `\n\n🎙 *Voice scan:* no drafts modified this week`;
+  } else if (voiceScan.failed.length === 0) {
+    console.log(`   ✅ ${voiceScan.checked} drafts checked, all clean (Tier 1)`);
+    msg += `\n\n🎙 *Voice scan:* ✅ ${voiceScan.checked} drafts clean (Tier 1)`;
+  } else {
+    console.log(`   🔴 ${voiceScan.failed.length}/${voiceScan.checked} drafts failed Tier 1`);
+    msg += `\n\n🎙 *Voice scan:* 🔴 ${voiceScan.failed.length}/${voiceScan.checked} failed`;
+    for (const name of voiceScan.failed.slice(0, 5)) msg += `\n  • ${name}`;
+    if (voiceScan.failed.length > 5) msg += `\n  • _and ${voiceScan.failed.length - 5} more_`;
+    msg += `\n  _Run \`node scripts/grade-voice.mjs --file <path>\` for full Tier 2-3 review_`;
+  }
+
+  // ── R&D pack grade ───────────────────────────────────────────────
+  console.log('\n🔬 Step 5b: R&D pack grade...');
+  const rdGrade = gradeRdPack();
+  if (rdGrade.skipped) {
+    console.log(`   ⏭  R&D grade skipped: ${rdGrade.skipped}`);
+    msg += `\n\n🔬 *R&D pack:* skipped (${rdGrade.skipped})`;
+  } else {
+    const verdictEmoji = rdGrade.verdict === 'pass' ? '✅' : rdGrade.verdict === 'warn' ? '🟡' : '🔴';
+    console.log(`   ${verdictEmoji} R&D pack: ${rdGrade.verdict.toUpperCase()} · score ${rdGrade.score ?? '—'}/100`);
+    msg += `\n\n🔬 *R&D pack:* ${verdictEmoji} ${rdGrade.verdict.toUpperCase()} · ${rdGrade.score ?? '—'}/100`;
+    if (rdGrade.hardFailures.length) {
+      msg += `\n   _Top gaps_: ${rdGrade.hardFailures.join(' · ')}`;
+    }
+  }
+
+  // ── Money-stack alignment check ──────────────────────────────────
+  console.log('\n🧭 Step 5c: Money-stack alignment check...');
+  let alignSummary = null;
+  try {
+    const alignOut = execSync(`node scripts/check-money-stack-alignment.mjs --json`, { encoding: 'utf-8', stdio: ['ignore', 'pipe', 'pipe'] });
+    const results = JSON.parse(alignOut);
+    const buckets = results.reduce((acc, r) => ((acc[r.status] = (acc[r.status] || 0) + 1), acc), {});
+    alignSummary = buckets;
+    const drift = (buckets.DRIFT || 0) + (buckets['NOT-WIRED'] || 0) + (buckets.STALE || 0);
+    if (drift === 0) {
+      console.log(`   ✅ no drift detected (DEFERRED ${buckets.DEFERRED || 0} pending Notion token)`);
+      msg += `\n\n🧭 *Alignment:* ✅ no drift`;
+    } else {
+      console.log(`   🟡 ${drift} drift item(s): DRIFT=${buckets.DRIFT || 0} NOT-WIRED=${buckets['NOT-WIRED'] || 0} STALE=${buckets.STALE || 0}`);
+      msg += `\n\n🧭 *Alignment:* 🟡 ${drift} item(s)`;
+      const items = results.filter((r) => ['DRIFT', 'NOT-WIRED', 'STALE'].includes(r.status)).slice(0, 5);
+      for (const r of items) msg += `\n  • ${r.id}: ${r.summary || r.reason || ''}`;
+      msg += `\n  _Run \`node scripts/money-status.mjs\` for full report_`;
+    }
+  } catch (err) {
+    console.log(`   ⏭  alignment-check skipped: ${err.message}`);
+    msg += `\n\n🧭 *Alignment:* skipped (${err.message.slice(0, 60)})`;
+  }
+
+  msg += `\n\n_Run reconciliation-report.mjs for full details_`;
+
+  // Persist the digest to wiki/cockpit/ before sending so sync-weekly-digest-
+  // to-notion.mjs (and any future readers) can pick it up. Markdown is the
+  // Telegram message body unchanged — Telegram's *bold* and `code` tokens
+  // happen to render usefully in Notion's markdown→blocks converter.
+  try {
+    const digestDate = new Date().toISOString().slice(0, 10);
+    const digestPath = path.join('wiki', 'cockpit', `weekly-digest-${digestDate}.md`);
+    const digestMd = `---\ntitle: Weekly Reconciliation Digest\ndate: ${digestDate}\nstatus: live\n---\n\n# Weekly digest — ${digestDate}\n\n${msg}\n`;
+    fs.writeFileSync(digestPath, digestMd);
+    console.log(`\n📝 wrote digest to ${digestPath}`);
+  } catch (err) {
+    console.log(`\n⚠  failed to persist digest to wiki/cockpit/: ${err.message}`);
+  }
 
   await sendTelegram(msg);
+
+  // Mirror to Notion weeklyDigest page (fail-soft: skips quietly if
+  // NOTION_TOKEN dead or cfg.weeklyDigest unset).
+  runScript('sync-weekly-digest-to-notion.mjs', '');
 
   console.log(`\n✅ Done in ${duration}s`);
 }

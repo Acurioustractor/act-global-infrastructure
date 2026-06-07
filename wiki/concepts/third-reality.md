@@ -47,7 +47,7 @@ The Third Reality is produced by three existing platform layers:
 | Layer | Platform | Function |
 |-------|----------|----------|
 | Systemic Data | CivicGraph | 566K entities, $94B+ tracked, deterministic pattern matching |
-| Evidence Base | JusticeHub/ALMA | 1,004 programs, 570 evidence items, outcome scoring |
+| Evidence Base | JusticeHub + ALMA-governed review | 1,004 programs, 570 evidence items, reviewed outcome records |
 | Narrative Sovereignty | Empathy Ledger | Cryptographic story ownership, TK Labels, consent protocols |
 
 One of the clearest non-justice examples in the ACT ecosystem is [[goods-on-country|Goods on Country]]: community narrative, deployment data, and procurement intelligence combine to show not just that goods were delivered, but what they changed and why that matters.
