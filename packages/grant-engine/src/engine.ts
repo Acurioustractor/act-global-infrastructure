@@ -25,6 +25,7 @@ import { GrantRepository } from './storage/repository.ts';
 import { createWebSearchPlugin } from './sources/web-search.ts';
 import { createLLMKnowledgePlugin } from './sources/llm-knowledge.ts';
 import { createGrantConnectPlugin } from './sources/grantconnect.ts';
+import { createGeminiSearchPlugin } from './sources/gemini-search.ts';
 
 export class GrantEngine {
   private registry: SourceRegistry;
@@ -39,6 +40,7 @@ export class GrantEngine {
     // Register built-in plugins
     this.registry.register(createGrantConnectPlugin());
     this.registry.register(createWebSearchPlugin());
+    this.registry.register(createGeminiSearchPlugin());
     this.registry.register(createLLMKnowledgePlugin());
   }
 
@@ -60,7 +62,9 @@ export class GrantEngine {
    */
   async discover(query: DiscoveryQuery = {}): Promise<DiscoveryRunResult> {
     const startedAt = new Date().toISOString();
-    const sourcesUsed = this.config.sources || ['grantconnect', 'web-search', 'llm-knowledge'];
+    // gemini-search replaced web-search in defaults 2026-06-07 (Anthropic key dry;
+    // GEMINI key funded). web-search stays registered for explicit --sources use.
+    const sourcesUsed = this.config.sources || ['grantconnect', 'gemini-search', 'llm-knowledge'];
 
     // Start run record
     let runId: string;

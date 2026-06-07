@@ -37,6 +37,7 @@ export type {
 export { createWebSearchPlugin } from './sources/web-search.ts';
 export { createLLMKnowledgePlugin } from './sources/llm-knowledge.ts';
 export { createGrantConnectPlugin } from './sources/grantconnect.ts';
+export { createGeminiSearchPlugin } from './sources/gemini-search.ts';
 export { SourceRegistry } from './sources/registry.ts';
 
 // Utilities
