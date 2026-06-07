@@ -5,7 +5,8 @@
  * The Monday ritual (Ben + Nic, 45 min) starts from evidence, not blank lines:
  * each P gets its system feed gathered automatically the morning of the scan.
  *   People  → unified-orbit-worklist.csv + field-decisions.jsonl (inner-ring cooling)
- *   Project → xero_transactions last 7d grouped by project_code (committed spend)
+ *   Project → 7d spend by project_code + GHL opportunity stage-moves (paginated,
+ *             batch-stamp filtered) + gone-quiet projects (90d spend, 21d+ silence)
  *   Place   → NO FEED, ON PURPOSE (Country is not a data source)
  *   Process → pm2 process health + the gmail-spine freshness canary
  *   Product → git log last 7d (what actually shipped)
@@ -31,6 +32,7 @@ import { readFileSync, writeFileSync, existsSync } from 'fs';
 import { execSync } from 'child_process';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
+import { createGHLService } from './lib/ghl-api-service.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 await import(join(__dirname, 'lib/load-env.mjs'));
@@ -115,6 +117,23 @@ async function feedPeople() {
   return out;
 }
 
+// All opportunities, location-wide, paginated past the per-search 100-cap (three
+// pipelines are >100 — Demand Register, Grants, Harvest Membership all truncate).
+async function allOpportunities(ghl) {
+  const opps = []; let cursor = null;
+  for (let page = 0; page < 12; page++) { // 12 pages = 1,200 opps; safety stop, not a target
+    const qp = new URLSearchParams({
+      location_id: ghl.locationId, limit: 100,
+      ...(cursor && { startAfterId: cursor.id, startAfter: String(cursor.ts) }),
+    });
+    const data = await ghl.request(`/opportunities/search?${qp}`);
+    opps.push(...(data.opportunities || []));
+    if (!data.meta?.nextPageUrl || (data.opportunities || []).length < 100) break;
+    cursor = { id: data.meta.startAfterId, ts: data.meta.startAfter };
+  }
+  return opps;
+}
+
 async function feedProject() {
   const out = [];
   try {
@@ -134,8 +153,62 @@ async function feedProject() {
       out.push(bullet([rt(`Committed spend last 7d by project: `, { bold: true }), rt(top.map(([c, v]) => `${c} ${fmt(v)}`).join(' · '))]));
       if (byCode.untagged) out.push(bullet(`⚠ ${fmt(byCode.untagged)} of that is untagged — /tag-transactions before it compounds`));
     } else out.push(bullet('No spend transactions landed in the last 7 days.'));
-  } catch (e) { out.push(bullet(`⚠ Project feed failed: ${e.message}`)); }
-  out.push(bullet('Opportunities: check the ACT Opportunities DB (stage moves are bidirectional from Notion)'));
+  } catch (e) { out.push(bullet(`⚠ Project spend feed failed: ${e.message}`)); }
+
+  // momentum 1 — opportunity stage moves last 7d (live GHL, the listen→prototype→handover signal).
+  // Bulk syncs stamp lastStageChangeAt on dozens of opps in the same minute; ≥5 sharing a
+  // minute = script noise, excluded from the genuine list but counted honestly.
+  try {
+    const ghl = createGHLService();
+    const [pipes, opps] = await Promise.all([ghl.getPipelines(), allOpportunities(ghl)]);
+    const stageName = new Map(), pipeName = new Map();
+    for (const p of pipes) { pipeName.set(p.id, p.name); for (const s of p.stages || []) stageName.set(s.id, s.name); }
+    const wk = Date.now() - 7 * 864e5;
+    const moved = opps.filter((o) => new Date(o.lastStageChangeAt || 0).getTime() > wk);
+    const byMinute = {};
+    for (const o of moved) { const k = String(o.lastStageChangeAt).slice(0, 16); byMinute[k] = (byMinute[k] || 0) + 1; }
+    const genuine = moved.filter((o) => byMinute[String(o.lastStageChangeAt).slice(0, 16)] < 5)
+      .sort((a, b) => new Date(b.lastStageChangeAt) - new Date(a.lastStageChangeAt));
+    const noise = moved.length - genuine.length;
+    if (genuine.length) {
+      out.push(bullet([rt(`Opportunity stage moves last 7d: ${genuine.length}`, { bold: true }), rt(noise ? ` (+${noise} batch-sync stamps excluded)` : '')]));
+      for (const o of genuine.slice(0, 6)) {
+        const val = o.monetaryValue ? ` · ${fmt(o.monetaryValue)}` : '';
+        out.push(bullet(`${o.name} → ${stageName.get(o.pipelineStageId) || o.status} (${pipeName.get(o.pipelineId) || 'unknown pipeline'})${val}`));
+      }
+    } else {
+      out.push(bullet(`No genuine opportunity stage moves this week${noise ? ` (${noise} batch-sync stamps excluded)` : ''} — seeds sat still.`));
+    }
+  } catch (e) { out.push(bullet(`⚠ Opportunity-moves feed failed: ${e.message} — check the ACT Opportunities DB by hand`)); }
+
+  // momentum 2 — gone-quiet projects: committed spend inside 90d but nothing for 21d+.
+  // Spend silence isn't project death, but it's the cheapest honest "is this still moving?"
+  // probe the ledger offers — paginated past the PostgREST 1000-cap.
+  try {
+    const since90 = new Date(Date.now() - 90 * 864e5).toISOString().slice(0, 10);
+    const rows = []; let from = 0;
+    while (true) {
+      const { data, error } = await sb.from('xero_transactions')
+        .select('project_code,date').eq('type', 'SPEND').gte('date', since90)
+        .not('project_code', 'is', null)
+        .order('date', { ascending: false }).range(from, from + 999);
+      if (error) throw new Error(error.message);
+      rows.push(...(data || []));
+      if (!data || data.length < 1000) break;
+      from += 1000;
+    }
+    const lastSpend = {};
+    for (const r of rows) if (!lastSpend[r.project_code]) lastSpend[r.project_code] = r.date; // rows arrive date-desc
+    const quiet = Object.entries(lastSpend)
+      .map(([code, d]) => ({ code, days: ageDays(d) }))
+      .filter((q) => q.days > 21)
+      .sort((a, b) => b.days - a.days);
+    if (quiet.length) {
+      out.push(bullet([rt('Gone quiet (spend in 90d, none for 21d+): ', { bold: true }), rt(quiet.map((q) => `${q.code} (${q.days}d)`).join(' · ')), rt(' — still carrying, or ready to put down?', { italic: true })]));
+    } else {
+      out.push(bullet('No project with 90d spend has gone quiet past 21 days.'));
+    }
+  } catch (e) { out.push(bullet(`⚠ Gone-quiet feed failed: ${e.message}`)); }
   return out;
 }
 
